@@ -3,7 +3,7 @@
 1. To get started, first install all necessary packages with `npm install`, then run an initial build to make sure the setup works `npm run build`.
 2. Now you can setup the site to your liking!
    - [Style customization](https://cosmicthemes.com/docs/styles/)
-   - [Content editing](https://cosmicthemes.com/docs/content/)
+   - [Content editing](https://cosmicthemes.com/docs/data/)
    - [Animations](https://cosmicthemes.com/docs/animations/)
    - [Keystatic CMS](https://cosmicthemes.com/docs/keystatic/) - if you don't want Keystatic you can run `npm run remove-keystatic`
    - [Forms](https://cosmicthemes.com/docs/contact-form/)
@@ -40,7 +40,7 @@ The source files have the following setup. Note that not all files are included 
 │   ├── config/
 │   │   ├── siteData.json.ts
 │   │   └── navData.json.ts
-│   ├── content/
+│   ├── data/
 │   │   ├── authors/
 │   │   ├── blog/
 │   │   ├── otherPages/

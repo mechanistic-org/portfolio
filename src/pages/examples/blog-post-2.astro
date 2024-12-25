@@ -1,14 +1,14 @@
 ---
-import { getEntryBySlug } from "astro:content";
+import { getEntry, render } from "astro:content";
 
 // layout
 import BlogLayout from "@layouts/BlogLayoutLeft.astro";
 
-const post = await getEntryBySlug("blog", "tsconfig-paths-setup");
+const post = await getEntry("blog", "tsconfig-paths-setup");
 
-const { Content, headings } = await post.render();
+const { Content, headings } = await render(post);
 ---
 
 <BlogLayout post={post}>
-  <Content />
+	<Content />
 </BlogLayout>

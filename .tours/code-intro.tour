@@ -22,17 +22,17 @@
       "line": 21
     },
     {
-      "file": "src/content/config.ts",
+      "file": "src/content.config.ts",
       "description": "In the \"content\" folder you will find blog posts, author info, and other pages. These all work with markdown or mdx files. You can see examples of what to put. Using the schema defined in this \"config.ts\" file, when you try to \"npm run dev\" this site, it will validate the item against this schema and give you a detailed error if you forgot something required.",
       "line": 4
     },
     {
-      "file": "src/content/blog/best-vscode-extensions-front-end-developers/index.mdx",
+      "file": "src/data/blog/best-vscode-extensions-front-end-developers/index.mdx",
       "description": "This is an example blog post with all required frontmatter (the stuff at the top of the file). Note that the \"authors\" array elements need to match the slug of an author in the authors content collection.",
       "line": 6
     },
     {
-      "file": "src/content/authors/web-reaper/index.md",
+      "file": "src/data/authors/web-reaper/index.md",
       "description": "Here is an example author content collection entry.",
       "line": 2
     },

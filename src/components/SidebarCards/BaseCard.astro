@@ -7,10 +7,10 @@
 import { Icon } from "astro-icon/components";
 
 interface Props {
-  title: string;
-  icon: string;
-  class?: string;
-  rest?: any; // catch-all for any additional parameters, such as "aria-label"
+	title: string;
+	icon: string;
+	class?: string;
+	rest?: any; // catch-all for any additional parameters, such as "aria-label"
 }
 
 const showIcon = false;
@@ -18,13 +18,10 @@ const showIcon = false;
 const { title, icon, class: className, ...rest } = Astro.props as Props;
 ---
 
-<div
-  class=`flex flex-col gap-4 border border-base-600 p-4 ${className}`
-  {...rest}
->
-  <div class="flex flex-wrap items-center gap-4">
-    {showIcon && <Icon name={icon} aria-hidden="true" class="size-6" />}
-    <h3 class="h3">{title}</h3>
-  </div>
-  <slot />
+<div class=`flex flex-col gap-4 border border-base-600 p-4 ${className}` {...rest}>
+	<div class="flex flex-wrap items-center gap-4">
+		{showIcon && <Icon name={icon} aria-hidden="true" class="size-6" />}
+		<h3 class="h3">{title}</h3>
+	</div>
+	<slot />
 </div>

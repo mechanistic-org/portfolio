@@ -11,9 +11,10 @@ heroImage: ../tsconfig-paths-setup/heroImage.png
 tags:
   - productivity
 ---
+
 TSConfig path aliases are a powerful tool that can help you to improve the readability, maintainability, and error-proofing of your TypeScript code. This allows for easier to read clean code, and enables us to move files around without having to update import paths in every file.
 
-*This is a huge time saver.*
+_This is a huge time saver._
 
 ## What Are Path Aliases?
 
@@ -43,12 +44,12 @@ This will tell TypeScript to replace the alias with the actual path when compili
 
 ```json title="tsconfig.json"
 {
-  "compilerOptions": {
-    "baseUrl": ".", // root of your "paths" below. Required if "paths" is defined
-    "paths": {
-      "@components/*": ["src/components/*"] // enables us to use @components/MyComponent
-    }
-  }
+	"compilerOptions": {
+		"baseUrl": ".", // root of your "paths" below. Required if "paths" is defined
+		"paths": {
+			"@components/*": ["src/components/*"] // enables us to use @components/MyComponent
+		}
+	}
 }
 ```
 
@@ -67,9 +68,9 @@ import Footer from "@components/Footer";
 ```
 
 <Admonition variant="info">
-  Frameworks like Astro and Next.js ship with built-in typescript support,
-  although you may have to create the file `tsconfig.json`. Consult your
-  framework's documentation for more information.
+	Frameworks like Astro and Next.js ship with built-in typescript support,
+	although you may have to create the file `tsconfig.json`. Consult your
+	framework's documentation for more information.
 </Admonition>
 
 ## Why Should I Do This?
@@ -132,9 +133,9 @@ import Footer from "@components/Footer";
 ```
 
 <Admonition variant="info">
-  With this method, *every* file that needs to import these components will
-  import them the same way. This makes it easier to move files around without
-  having to update import paths.
+	With this method, *every* file that needs to import these components will
+	import them the same way. This makes it easier to move files around without
+	having to update import paths.
 </Admonition>
 
 <Newsletter />
@@ -145,20 +146,20 @@ This can be extended to any number of path aliases. Some other potential ones yo
 
 ```json
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@config/*": ["src/data/*"],
-      "@js/*": ["src/js/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"]
-    }
-  }
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"@config/*": ["src/data/*"],
+			"@js/*": ["src/js/*"],
+			"@layouts/*": ["src/layouts/*"],
+			"@components/*": ["src/components/*"],
+			"@assets/*": ["src/assets/*"]
+		}
+	}
 }
 ```
 
 <Admonition variant="tip">
-  When updating `tsconfig.json`, you may need to restart your editor for the
-  changes to take effect.
+	When updating `tsconfig.json`, you may need to restart your editor for the
+	changes to take effect.
 </Admonition>
