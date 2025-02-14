@@ -27,27 +27,40 @@ const navConfig: navItem[] = [
 		text: "Overview",
 		href: "/overview/",
 	},
-	// {
-	//   // get the tags used in blog posts, to put into a navbar dropdown
-	//   text: "Tags",
-	//   dropdown: processedtags.map(([tag, count]) => {
-	//     return {
-	//       text: humanize(tag),
-	//       href: `/tags/${tag}/`,
-	//     };
-	//   }),
-	// },
 	{
 		text: "Blog",
 		href: "/blog/",
 	},
+	// {
+	// 	// get the tags used in blog posts, to put into a navbar dropdown
+	// 	text: "Tags",
+	// 	dropdown: processedtags.map(([tag, count]) => {
+	// 		return {
+	// 			text: humanize(tag),
+	// 			href: `/tags/${tag}/`,
+	// 		};
+	// 	}),
+	// },
 	{
-		text: "Projects",
-		href: "/projects/",
-	},
-	{
-		text: "Uses",
-		href: "/uses/",
+		text: "Pages",
+		dropdown: [
+			{
+				text: "Blog",
+				href: "/blog/",
+			},
+			{
+				text: "Projects",
+				href: "/projects/",
+			},
+			{
+				text: "Uses",
+				href: "/uses/",
+			},
+			{
+				text: "Elements",
+				href: "/elements/",
+			},
+		],
 	},
 ];
 
