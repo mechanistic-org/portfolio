@@ -27,10 +27,10 @@ import navData from "@config/navData.json";
 	</button>
 	<div
 		id="mobile-nav__content"
-		class="whitepace-nowrap fixed -right-72 top-0 z-20 hidden h-screen w-72 items-center overflow-x-hidden bg-base-900 text-lg font-normal transition-all duration-300"
+		class="whitepace-nowrap bg-base-900 fixed top-0 -right-72 z-20 hidden h-screen w-72 items-center overflow-x-hidden text-lg font-normal transition-all duration-300"
 	>
 		<div class="w-full px-2">
-			<div class="mx-1 my-2 flex w-full justify-end pl-6 pr-4">
+			<div class="mx-1 my-2 flex w-full justify-end pr-4 pl-6">
 				<button id="mobile-nav__close" class="primary-focus p-2" aria-label="close navigation menu">
 					<!-- "X" icon to close menu -->
 					<Icon name="tdesign:close" class="h-8 w-8" />
@@ -38,7 +38,7 @@ import navData from "@config/navData.json";
 			</div>
 
 			<!-- nav items -->
-			<hr class="mx-5 border-b-2 border-base-600" />
+			<hr class="border-base-600 mx-5 border-b-2" />
 			<nav>
 				<ul class="mx-1 mt-2 text-xl">
 					{
@@ -64,7 +64,7 @@ import navData from "@config/navData.json";
 	<!-- backdrop button to also close menu -->
 	<button
 		id="mobile-nav__backdrop"
-		class="mobile-nav__backdrop--fade-out fixed left-0 top-0 z-10 h-screen bg-black"
+		class="mobile-nav__backdrop--fade-out fixed top-0 left-0 z-10 h-screen bg-black"
 		aria-label="close navigation menu"></button>
 </div>
 
@@ -135,8 +135,10 @@ import navData from "@config/navData.json";
 	document.addEventListener("astro:after-swap", initMobileNav);
 </script>
 
-<style lang="scss">
-	// backdrop button to close mobile nav
+<style>
+	@import "tailwindcss/theme" theme(reference);
+	@import "@/styles/tailwind-theme.css" theme(reference);
+
 	.mobile-nav__backdrop--fade-in {
 		animation: MobileNavFadeInAnimation ease-in-out 0.3s forwards;
 		@apply block w-screen;
@@ -148,14 +150,13 @@ import navData from "@config/navData.json";
 
 	@keyframes MobileNavFadeInAnimation {
 		0% {
-			@apply opacity-0;
+			opacity: 0;
 		}
 		100% {
-			@apply opacity-40;
+			opacity: 0.4;
 		}
 	}
 
-	// mobile nav content drawer
 	.mobile-nav--slide-in {
 		animation: mobileNavSlideInAnimation ease-in-out 0.3s forwards;
 	}
@@ -166,19 +167,19 @@ import navData from "@config/navData.json";
 
 	@keyframes mobileNavSlideInAnimation {
 		0% {
-			@apply -right-72;
+			right: calc(var(--spacing) * -72);
 		}
 		100% {
-			@apply right-0;
+			right: 0;
 		}
 	}
 
 	@keyframes mobileNavSlideOutAnimation {
 		0% {
-			@apply right-0;
+			right: 0;
 		}
 		100% {
-			@apply -right-72;
+			right: calc(var(--spacing) * -72);
 		}
 	}
 </style>

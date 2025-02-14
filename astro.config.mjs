@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
+
+import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import expressiveCode from "astro-expressive-code";
 import mdx from "@astrojs/mdx";
@@ -78,29 +79,26 @@ export default defineConfig({
 		mdx(),
 		react(),
 		keystatic(),
-		tailwind(),
 		sitemap(),
 		compress({
 			HTML: true,
 			JavaScript: true,
-			CSS: false,
+			CSS: true,
 			Image: false, // astro:assets handles this. Enabling this can dramatically increase build times
 			SVG: false, // astro-icon handles this
 		}),
 	],
 
 	vite: {
+		plugins: [tailwindcss()],
 		// stop inlining short scripts to fix issues with ClientRouter: https://github.com/withastro/astro/issues/12804
 		build: {
 			assetsInlineLimit: 0,
 		},
-		// get rid of Dart Sass deprecation warning
-		css: {
-			preprocessorOptions: {
-				scss: {
-					api: "modern-compiler",
-				},
-			},
+	},
+	experimental: {
+		svg: {
+			mode: "sprite",
 		},
 	},
 });

@@ -8,7 +8,7 @@ import Footer from "@components/Footer/Footer.astro";
 import CookieConsent from "@components/CookieConsent/CookieConsent.astro";
 
 // style import
-import "@/styles/global.scss";
+import "@/styles/global.css";
 
 // data
 import siteData from "@config/siteData.json";
@@ -37,7 +37,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" transition:animate="fade">
+<html lang="en" transition:animate="fade" class="dark">
 	<head>
 		<BaseHead
 			type={type}
