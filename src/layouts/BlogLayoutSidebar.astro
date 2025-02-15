@@ -34,7 +34,7 @@ const authorsData = await getAllAuthorsData(authors);
 	authorsData={authorsData}
 	postFrontmatter={post.data}
 >
-	<article class="container pt-36 md:pt-44">
+	<article class="site-container pt-36 md:pt-44">
 		<!-- Blog post info -->
 		<div class="flex w-full flex-col items-center">
 			<div class="mx-auto flex w-full max-w-[800px]">
@@ -102,7 +102,7 @@ const authorsData = await getAllAuthorsData(authors);
 							</div>
 						)
 					}
-					<section id="blog-post-content" class="prose mx-auto lg:ml-0">
+					<section id="blog-post-content" class="markdown-content mx-auto lg:ml-0">
 						<slot />
 					</section>
 

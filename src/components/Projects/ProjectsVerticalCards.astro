@@ -11,7 +11,7 @@ import ProjectCard from "@components/ProjectCard/ProjectCardVertical.astro";
 import projectData from "@config/projectData.json";
 ---
 
-<section id="projects" class="container">
+<section id="projects" class="site-container">
 	<div class="mx-auto max-w-lg md:max-w-full">
 		<div class="mt-20 grid gap-x-4 gap-y-8 md:mt-28 md:grid-cols-2">
 			{projectData.map((project, idx) => <ProjectCard {...project} />)}

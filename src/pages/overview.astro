@@ -7,11 +7,11 @@ import Button from "@components/Button/Button.astro";
 ---
 
 <BaseLayout title="Recent Blog Posts" description="Recent Blog Posts Description">
-	<section class="container pt-36 md:pt-44">
+	<section class="site-container pt-36 md:pt-44">
 		<div class="mx-auto max-w-4xl">
 			<h1 class="h1">Overview</h1>
 			<p class="description mt-2">The various pages of Quantum</p>
-			<div class="mx-auto mt-10 grid gap-4 xs:grid-cols-2 md:grid-cols-3">
+			<div class="xs:grid-cols-2 mx-auto mt-10 grid gap-4 md:grid-cols-3">
 				<!-- Landing pages -->
 				<div class="flex flex-col">
 					<h3 class="overview-heading">Landing Pages</h3>
@@ -84,13 +84,13 @@ import Button from "@components/Button/Button.astro";
 		<!-- CookieConsent component should be used in BaseLayout.astro if desired -->
 		<div id="test-banner" class="fixed inset-x-6 bottom-6 z-50 hidden justify-center">
 			<div
-				class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border border-base-600 bg-base-800 p-4"
+				class="border-base-600 bg-base-800 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border p-4"
 			>
 				<div class="text-center">
 					<p class="text-sm lg:text-base">
 						We use cookies to improve your experience on this site. To learn more, see our <a
 							href="/privacy-policy/"
-							class="underline decoration-primary-600 transition hover:text-primary-600"
+							class="decoration-primary-600 hover:text-primary-600 underline transition"
 							>Privacy Policy</a
 						>.
 					</p>
@@ -104,13 +104,15 @@ import Button from "@components/Button/Button.astro";
 	</section>
 </BaseLayout>
 
-<style lang="scss">
+<style>
+	@import "tailwindcss/theme" theme(reference);
+	@import "@/styles/tailwind-theme.css" theme(reference);
+
 	.overview-heading {
-		@apply mb-4 mt-6 text-xl font-medium;
+		@apply mt-6 mb-4 text-xl font-medium;
 	}
 	.overview-link {
-		// @apply text-primary-600 hover:text-primary-700 hover:underline;
-		@apply my-[.15rem] leading-snug transition hover:text-primary-600;
+		@apply hover:text-primary-600 my-[.15rem] leading-snug transition;
 	}
 </style>
 

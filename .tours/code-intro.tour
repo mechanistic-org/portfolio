@@ -3,6 +3,11 @@
   "title": "code intro",
   "steps": [
     {
+      "file": "package.json",
+      "description": "When first getting started, first make sure the site builds as-is. Run `npm install` then `npm run build` (or `pnpm install` and `pnpm build`).",
+      "line": 11
+    },
+    {
       "title": "Site config",
       "description": "In the explorer panel, under \"src/config\" you will find data files for site information, and the navbar."
     },
@@ -17,9 +22,9 @@
       "line": 25
     },
     {
-      "file": "tailwind.config.cjs",
+      "file": "src/styles/tailwind-theme.css",
       "description": "Here you can edit the colors your website is using. You can use any of Tailwind's default colors, or create your own.",
-      "line": 21
+      "line": 6
     },
     {
       "file": "src/content.config.ts",
@@ -32,7 +37,7 @@
       "line": 6
     },
     {
-      "file": "src/data/authors/web-reaper/index.md",
+      "file": "src/data/authors/web-reaper/index.mdx",
       "description": "Here is an example author content collection entry.",
       "line": 2
     },
@@ -49,7 +54,7 @@
     {
       "file": "astro.config.mjs",
       "description": "Also update your site domain here in the Astro config file.",
-      "line": 36
+      "line": 43
     }
   ]
 }

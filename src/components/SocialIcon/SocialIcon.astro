@@ -11,7 +11,10 @@ interface Props {
 const { social, href, text = "", class: className } = Astro.props as Props;
 ---
 
-<style lang="scss">
+<style>
+	@import "tailwindcss/theme" theme(reference);
+	@import "@/styles/tailwind-theme.css" theme(reference);
+
 	.social-icon > .icon {
 		@apply size-6;
 	}

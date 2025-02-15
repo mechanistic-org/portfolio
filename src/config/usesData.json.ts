@@ -8,8 +8,7 @@ const usesData: usesItem[] = [
 	{
 		sectionTitle: "Coding Setup",
 		items: [
-			"Visual Studio Code",
-			"Github Copilot - AI coding assistant",
+			"Windsurf IDE - AI enabled IDE",
 			"Git - version control",
 			"Dracula - the one true theme for VSCode",
 			"Fira Code - a freee monospaced font with helpful ligatures",
@@ -22,7 +21,7 @@ const usesData: usesItem[] = [
 			"TypeScript - enhances javascript",
 			"Astro - high speed framework",
 			"Tailwind CSS - better CSS",
-			"TinaCMS - git based content management system",
+			"Keystatic CMS - git based content management system",
 		],
 	},
 	{
@@ -32,7 +31,7 @@ const usesData: usesItem[] = [
 			"BitWarden - free password manager",
 			"Obsidian - note taking app",
 			"Brave Browser - daily browser with nice privacy tools",
-			"Zoho Main - mail client for professional use",
+			"Zoho Mail - mail client for professional use",
 			"Gmail - personal mail client",
 			"Discord - communication and technical discussion",
 		],
