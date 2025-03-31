@@ -28,7 +28,7 @@ export interface SocialLinkProps {
 }
 
 export interface SiteDataProps {
-	name: String;
+	name: string;
 	title: string;
 	description: string;
 	useViewTransitions?: boolean;

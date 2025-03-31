@@ -62,11 +62,11 @@ import navData from "@config/navData.json";
 		const navbar = document.getElementById("nav__container") as HTMLInputElement;
 
 		if (navbar !== null) {
-			var prevScrollpos = window.scrollY;
-			var scrollUpDistance = 0;
-			var scrollDownDistance = 0;
-			(window.onscroll = () => {
-				var currentScrollPos = window.scrollY;
+			let prevScrollpos = window.scrollY;
+			let scrollUpDistance = 0;
+			let scrollDownDistance = 0;
+			const scrollHandler = () => {
+				const currentScrollPos = window.scrollY;
 
 				if (prevScrollpos > currentScrollPos) {
 					scrollDownDistance = 0;
@@ -84,8 +84,10 @@ import navData from "@config/navData.json";
 					}
 				}
 				prevScrollpos = currentScrollPos;
-			}),
-				{ passive: true };
+			};
+
+			// Add passive event listener for better performance
+			window.addEventListener("scroll", scrollHandler, { passive: true });
 		}
 	};
 
