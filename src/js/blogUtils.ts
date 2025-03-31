@@ -126,8 +126,8 @@ export function countItems(items: string[]): object {
  * note: this is used for tag and category cloud ordering
  */
 export function sortByValue(jsObj: object): any[] {
-	var array: any[] = [];
-	for (var i in jsObj) {
+	const array: any[] = [];
+	for (const i in jsObj) {
 		array.push([i, jsObj[i]]);
 	}
 

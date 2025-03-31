@@ -20,7 +20,7 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 	if (type === "blog") {
 		const { postFrontmatter, image, authors, canonicalUrl } = props as BlogProps;
 
-		let authorsJsonLdArray = authors.map((author) => {
+		const authorsJsonLdArray = authors.map((author) => {
 			return {
 				"@type": "Person",
 				name: author.data.name,
