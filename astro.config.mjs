@@ -88,11 +88,7 @@ export default defineConfig({
 			SVG: false, // astro-icon handles this
 		}),
 	],
-
 	vite: {
 		plugins: [tailwindcss()],
-	},
-	experimental: {
-		svg: true,
 	},
 });
