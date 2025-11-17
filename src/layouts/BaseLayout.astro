@@ -59,7 +59,7 @@ const {
 	>
 		<!-- put cookie consent first so it is seen first by screen readers -->
 		<!-- <CookieConsent /> -->
-		<div class="flex min-h-[100lvh] flex-col justify-between">
+		<div class="flex min-h-lvh flex-col justify-between">
 			<div>
 				<Nav />
 				<main>
@@ -72,14 +72,20 @@ const {
 		<!-- Scroll animations -->
 		<script>
 			import siteData from "@config/siteData.json";
-			import AOS from "@js/aos/aos";
+			import MOS from "motion-on-scroll";
 
 			if (siteData.useAnimations === true) {
 				// runs on initial page load
-				AOS.init({ once: true, duration: 0.75, distance: 15 });
+				MOS.init({
+					once: true,
+					duration: 0.75,
+					distance: 15,
+					timeUnits: "s",
+					easing: "ease-out-cubic",
+				});
 
 				// runs on view transitions navigation
-				document.addEventListener("astro:after-swap", AOS.refreshHard);
+				document.addEventListener("astro:after-swap", MOS.refreshHard);
 			}
 		</script>
 	</body>

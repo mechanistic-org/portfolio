@@ -13,7 +13,7 @@
 @import "./tailwind-theme.css";
 
 /* other imports into specific layers */
-@import "./aos.css" layer(utilities);
+@import "./mos.css" layer(utilities);
 @import "./markdown-content.css" layer(components);
 @import "./buttons.css" layer(components);
 
