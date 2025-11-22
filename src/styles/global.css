@@ -3,12 +3,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* tailwind plugins */
-@plugin "@tailwindcss/forms";
-
-/* dark mode */
-@variant dark (&:where(.dark, .dark *));
-
 /* theme definition import */
 @import "./tailwind-theme.css";
 
@@ -16,6 +10,12 @@
 @import "./mos.css" layer(utilities);
 @import "./markdown-content.css" layer(components);
 @import "./buttons.css" layer(components);
+
+/* tailwind plugins */
+@plugin "@tailwindcss/forms";
+
+/* dark mode */
+@variant dark (&:where(.dark, .dark *));
 
 /* https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer */
 @layer base {
