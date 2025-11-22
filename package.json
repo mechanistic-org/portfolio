@@ -15,7 +15,6 @@
 	"dependencies": {
 		"@astrojs/cloudflare": "^12.6.11",
 		"@astrojs/mdx": "4.3.10",
-		"@astrojs/netlify": "6.6.0",
 		"@astrojs/react": "4.4.2",
 		"@astrojs/rss": "4.0.13",
 		"@astrojs/sitemap": "3.6.0",
