@@ -1,0 +1,66 @@
+{
+  // --- 1. VISUAL CLUTTER CONTROL (CRITICAL FOR 90+ PROJECTS) ---
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "package.json": ".env, .gitignore, .prettierrc*, .eslintrc*, astro.config.*, tailwind.config.*, tsconfig.json, README.md, package-lock.json, wranger.toml",
+    "*.astro": "${capture}.css, ${capture}.js", 
+    "*.mdx": "${capture}.json"
+  },
+  "files.exclude": {
+  //  "**/.git": true,
+   // "**/.DS_Store": true,
+ //   "**/node_modules": true,
+  //  "**/dist": true,           // Hides the build output folder
+ //   "**/.wrangler": true,      // Hides Cloudflare temp files
+   // "**/.astro": true          // Hides Astro temp files
+  },
+  "search.exclude": {
+   // "**/node_modules": true,
+   // "**/dist": true,
+  //  "**/.astro": true
+  },
+
+  // --- 2. FORMATTING & CODE HYGIENE ---
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "prettier.requireConfig": true,
+  "prettier.documentSelectors": ["**/*.astro"],
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.suggest.insertMode": "replace"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "other": false,
+      "comments": false,
+      "strings": false
+    }
+  },
+  
+  // --- 3. TAILWIND INTELLIGENCE ---
+  "tailwindCSS.includeLanguages": {
+    "astro": "html",
+    "markdown": "html",
+    "mdx": "html"
+  },
+  "tailwindCSS.files.exclude": ["**/node_modules", "**/.git", "**/dist"],
+  
+  // --- 4. FRONT MATTER CMS (YOUR DATABASE DASHBOARD) ---
+  "frontMatter.framework.id": "astro",
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "Projects",
+      "path": "[[workspace]]/src/content/projects",
+      "previewPath": "projects",
+      "contentTypes": ["default"]
+    }
+  ],
+  "frontMatter.preview.host": "http://localhost:4321",
+  
+  // --- 5. LINEAR GIT WORKFLOW ---
+  "git.autofetch": true,
+  "git.confirmSync": false,  // Removes the "Are you sure?" popup when syncing
+  "git.enableSmartCommit": true // Commits all changes if none are staged
+}
