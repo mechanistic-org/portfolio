@@ -9,7 +9,7 @@ import AutoImport from "astro-auto-import";
 import icon from "astro-icon"; // https://www.astroicon.dev/guides/upgrade/v1/
 import react from "@astrojs/react";
 import keystatic from "@keystatic/astro";
-import netlify from "@astrojs/netlify";
+import cloudflare from "@astrojs/cloudflare";
 
 /** @type {import('astro-expressive-code').AstroExpressiveCodeOptions} */
 const expressiveCodeOptions = {
@@ -37,8 +37,8 @@ const expressiveCodeOptions = {
 
 // https://astro.build/config
 export default defineConfig({
-	adapter: netlify({
-		imageCDN: false,
+	adapter: cloudflare({
+		imageService: "compile",
 	}),
 	site: "https://quantum.cosmicthemes.com",
 	redirects: {
@@ -89,6 +89,6 @@ export default defineConfig({
 		}),
 	],
 	vite: {
-		plugins: [tailwindcss()],
+		external: ["stream", "util", "os", "fs", "svgo"],
 	},
 });
