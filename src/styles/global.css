@@ -91,7 +91,7 @@
 		@apply border-border;
 	}
 	*:focus-visible {
-		@apply outline-outline !transition-none!;
+		@apply outline-outline transition-none!;
 	}
 	html {
 		@apply bg-background text-foreground leading-[1.6rem] scheme-light dark:scheme-dark;
