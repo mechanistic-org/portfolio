@@ -1,0 +1,20 @@
+Category,Parameter,Typical,Min,Max,Unit,Notes,Test Condition
+Device ID,Model Name,Erik Norris,-,-,-,Gen 1.0,
+Device ID,Architecture,ENTJ,-,-,-,MBTI,The Commander
+Device ID,Manufacturing Date,Monkey,-,-,-,Chinese Zodiac,"Witty, Intelligent"
+Device ID,Phase Angle,Aries / Taurus,-,-,-,Cusp,The Cusp of Power
+Electrical Char.,Creativity,61,55,70,T-Score,Top 86th %,SAPA Project
+Electrical Char.,Orderliness,63,60,75,T-Score,High attention to detail,SAPA Project
+Electrical Char.,Honesty,63,-,-,T-Score,No legacy is so rich,SAPA Project
+Electrical Char.,Intellect,58,-,-,T-Score,Quick grasper of concepts,SAPA Project
+Electrical Char.,Industry,59,-,-,T-Score,High diligence,SAPA Project
+Electrical Char.,Impedance (Introversion),58,40,80,%,"Measured as ""Somewhat Introverted""",SAPA (vs ENTJ)
+Operating Cond.,Focus Time,9:00,7:00,11:00,Hours,Deep work preferred,User Manual
+Operating Cond.,Communication Interface,Async,-,-,-,Slack/Teams preferred over calls,User Manual
+Operating Cond.,Ambiguity Tolerance,Low,-,-,-,Needs clear definitions,SAPA (Order: 63)
+Operating Cond.,Feedback Loop,Direct,-,-,Type,Do not sugarcoat,User Manual
+Abs. Max Ratings,Meeting Duration,2,-,4,Hours,Performance degrades >2h,Thermal Limit
+Abs. Max Ratings,Bureaucracy Voltage,5,-,10,V,Low tolerance for red tape,SAPA (Conformity: 52)
+Abs. Max Ratings,Micromanagement,0,-,1,%,Instant shutdown triggered,Theory
+Thermal Char.,Emotional Stability,52,-,-,T-Score,Recovers quickly from stress,SAPA Project
+Thermal Char.,Irritability,63,-,-,T-Score,Passionate reactivity,SAPA Project
