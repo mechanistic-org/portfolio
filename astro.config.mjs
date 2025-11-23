@@ -11,6 +11,12 @@ import react from "@astrojs/react";
 import keystatic from "@keystatic/astro";
 import cloudflare from "@astrojs/cloudflare";
 
+
+
+
+
+
+
 /** @type {import('astro-expressive-code').AstroExpressiveCodeOptions} */
 const expressiveCodeOptions = {
 	// You can set configuration options here
@@ -34,6 +40,8 @@ const expressiveCodeOptions = {
 		},
 	},
 };
+
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -89,6 +97,7 @@ export default defineConfig({
 		}),
 	],
 	vite: {
+		plugins: [tailwindcss()],
 		external: ["stream", "util", "os", "fs", "svgo"],
 	},
 });
