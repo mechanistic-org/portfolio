@@ -91,7 +91,7 @@
 		@apply border-border;
 	}
 	*:focus-visible {
-		@apply outline-outline !transition-none;
+		@apply outline-outline !transition-none!;
 	}
 	html {
 		@apply bg-background text-foreground leading-[1.6rem] scheme-light dark:scheme-dark;
@@ -138,7 +138,7 @@
 	}
 
 	.navlink__underline-ltr {
-		@apply from-primary-600 to-primary-600 bg-gradient-to-r bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover/navlink:bg-[length:100%_2px];
+		@apply from-primary-600 to-primary-600 bg-linear-to-r bg-size-[0%_2px] bg-bottom-left bg-no-repeat transition-[background-size] duration-300 group-hover/navlink:bg-size-[100%_2px];
 	}
 }
 
@@ -146,7 +146,7 @@
 	/* hover underline effect left-to-right
      use "group" class on a parent element, and "underline-ltr" on the element */
 	.underline-ltr {
-		@apply from-primary-600 to-primary-600 bg-gradient-to-r bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-[background-size] duration-300 group-hover:bg-[length:100%_2px];
+		@apply from-primary-600 to-primary-600 bg-linear-to-r bg-size-[0%_2px] bg-bottom-left bg-no-repeat transition-[background-size] duration-300 group-hover:bg-size-[100%_2px];
 	}
 
 	/* focus utility class (for when user is tabbing through items on page) */
