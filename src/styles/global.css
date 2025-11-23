@@ -1,7 +1,10 @@
+
+@import url("./fonts.css");
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@import url("./fonts.css");
+
 
 /* theme definition import */
 @import "./tailwind-theme.css";
