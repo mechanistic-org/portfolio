@@ -180,7 +180,7 @@
 }
 
 .markdown-content hr:not(:where(.not-content *)) {
-	@apply border-b-border my-8 border-0 border-b-1;
+	@apply border-b-border my-8 border-0 border-b;
 }
 
 /* <details> and <summary> styles */
