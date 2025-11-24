@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import ProjectCard from "../../components/projects/ProjectCard.astro";
-import FilterButton from "../../components/button/FilterButton.astro";
+import ProjectCard from "../../components/Projects/ProjectCard.astro";
+import FilterButton from "../../components/Button/FilterButton.astro";
 
 // 1. Get valid projects only
 const allProjects = await getCollection("projects", ({ data }) => {
