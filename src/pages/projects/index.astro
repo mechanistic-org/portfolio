@@ -2,11 +2,11 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectCard from "../../components/Projects/ProjectCard.astro";
-import FilterButton from "../../components/Button/FilterButton.astro";
+import FilterButton from "../../components/Button/FilterButton.astro"; // Capitalized path
 
-// 1. Get valid projects only
+// 1. Get all projects
 const allProjects = await getCollection("projects", ({ data }) => {
-  return data.draft !== true && data.title; // Ensure it has a title
+  return data.draft !== true;
 });
 
 // 2. Sort by Date
@@ -36,38 +36,39 @@ const allTechnologies = [
       </p>
     </div>
 
-    <div class="mt-12 flex flex-wrap justify-center gap-2">
+   <div class="mt-12 flex flex-wrap justify-center gap-2">
+      {/* 1. Fixed "All" Button: Self-closing tag with 'text' prop */}
       <FilterButton 
         class="filter-btn active" 
         data-filter="all" 
         aria-pressed="true"
-      >
-        All
-      </FilterButton>
+        text="All"
+      />
       
+      {/* 2. Fixed Map Loop: Passing 'tech' into 'text' prop */}
       {allTechnologies.map((tech) => (
         <FilterButton 
           class="filter-btn" 
           data-filter={tech} 
           aria-pressed="false"
-        >
-          {tech}
-        </FilterButton>
+          text={tech}
+        />
       ))}
     </div>
 
+    {/* CHANGE 1: Removed 'hidden' class from the HTML. Cards are visible by default. */}
     <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3" id="projects-grid">
       {projects.map((project) => {
         const tags = Array.isArray(project.data.tags) ? JSON.stringify(project.data.tags) : "[]";
         return (
-          <div class="project-card hidden" data-tags={tags}>
+          <div class="project-card" data-tags={tags}>
             <ProjectCard project={project} />
           </div>
         );
       })}
     </div>
 
-    <div class="mt-12 text-center" id="pagination-controls">
+    <div class="mt-12 text-center hidden" id="pagination-controls">
         <button id="load-more-btn" class="px-6 py-3 bg-neutral-800 hover:bg-neutral-700 text-white rounded-lg font-medium transition-colors">
             Load More Projects
         </button>
@@ -76,62 +77,79 @@ const allTechnologies = [
   </div>
 
   <script>
-    // --- CLIENT SIDE PAGINATION & FILTERING LOGIC ---
-    document.addEventListener('DOMContentLoaded', () => {
+    // CHANGE 2: Use 'astro:page-load' instead of 'DOMContentLoaded' to support View Transitions
+    document.addEventListener('astro:page-load', () => {
         const cards = Array.from(document.querySelectorAll('.project-card')) as HTMLElement[];
         const buttons = document.querySelectorAll('.filter-btn');
+        const controls = document.getElementById('pagination-controls');
         const loadMoreBtn = document.getElementById('load-more-btn');
         const countLabel = document.getElementById('showing-count');
         
-        let visibleCount = 12; // Start with 12
+        // Only run if we actually have projects
+        if (cards.length === 0) return;
+
+        // Show the controls now that JS is running
+        if (controls) controls.classList.remove('hidden');
+        
+        let visibleCount = 12; 
         let currentFilter = 'all';
         let activeCards: HTMLElement[] = [];
 
         function updateDisplay() {
-            // 1. Identify which cards match the filter
+            // Identify which cards match the filter
             activeCards = cards.filter(card => {
-                const tags = JSON.parse(card.getAttribute('data-tags') || '[]');
-                return currentFilter === 'all' || tags.includes(currentFilter);
+                try {
+                    const tags = JSON.parse(card.getAttribute('data-tags') || '[]');
+                    return currentFilter === 'all' || tags.includes(currentFilter);
+                } catch (e) {
+                    return true; // Fallback: show if data is weird
+                }
             });
 
-            // 2. Hide everything first
-            cards.forEach(card => card.classList.add('hidden'));
-
-            // 3. Show only the slice we are allowed to see
-            const toShow = activeCards.slice(0, visibleCount);
-            toShow.forEach(card => {
-                card.classList.remove('hidden');
-                // Simple fade-in effect
-                card.style.animation = 'fadeIn 0.5s ease-in-out';
+            // Manage Visibility
+            cards.forEach(card => {
+                // First, hide everything that doesn't match the filter
+                if (!activeCards.includes(card)) {
+                    card.style.display = 'none';
+                    return;
+                }
+                
+                // For matching cards, check pagination index
+                const index = activeCards.indexOf(card);
+                if (index < visibleCount) {
+                    card.style.display = 'block';
+                    // Optional fade in
+                    card.animate([
+                        { opacity: 0, transform: 'translateY(10px)' },
+                        { opacity: 1, transform: 'translateY(0)' }
+                    ], { duration: 300, fill: 'forwards' });
+                } else {
+                    card.style.display = 'none';
+                }
             });
 
-            // 4. Update Buttons & Labels
+            // Update Controls
             if (countLabel) {
-                countLabel.textContent = `Showing ${toShow.length} of ${activeCards.length} projects`;
+                countLabel.textContent = `Showing ${Math.min(visibleCount, activeCards.length)} of ${activeCards.length} projects`;
             }
 
             if (loadMoreBtn) {
-                if (visibleCount >= activeCards.length) {
-                    loadMoreBtn.style.display = 'none'; // No more to load
-                } else {
-                    loadMoreBtn.style.display = 'inline-block';
-                }
+                loadMoreBtn.style.display = visibleCount >= activeCards.length ? 'none' : 'inline-block';
             }
         }
 
-        // Initialize
+        // Initial Run
         updateDisplay();
 
-        // Event: Load More
+        // Event Listeners
         loadMoreBtn?.addEventListener('click', () => {
             visibleCount += 12;
             updateDisplay();
         });
 
-        // Event: Filters
         buttons.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Reset UI
+                // Toggle UI
                 buttons.forEach(b => {
                     b.classList.remove('active');
                     b.setAttribute('aria-pressed', 'false');
@@ -139,9 +157,9 @@ const allTechnologies = [
                 btn.classList.add('active');
                 btn.setAttribute('aria-pressed', 'true');
 
-                // Reset Logic
+                // Update Logic
                 currentFilter = btn.getAttribute('data-filter') || 'all';
-                visibleCount = 12; // Reset pagination on new filter
+                visibleCount = 12; // Reset pagination
                 updateDisplay();
             });
         });
@@ -153,11 +171,6 @@ const allTechnologies = [
     
     .filter-btn.active {
       @apply bg-primary text-black ring-2 ring-primary;
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </BaseLayout>
