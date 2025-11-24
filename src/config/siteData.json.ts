@@ -38,7 +38,7 @@ export interface SiteDataProps {
 		// used for blog post purposes
 		name: string;
 		email: string;
-		twitter: string; // used for twitter cards when sharing a blog post on twitter
+	//	twitter: string; // used for twitter cards when sharing a blog post on twitter
 	};
 	defaultImage: {
 		src: string;
@@ -48,39 +48,36 @@ export interface SiteDataProps {
 
 // Update this file with your site specific information
 const siteData: SiteDataProps = {
-	name: "Quantum",
+	name: "Erik Norris' Portfolio",
 	// Your website's title and description (meta fields)
-	title: "Quantum - the tech portfolio theme crafted with Astro and Tailwind CSS",
+	title: "Erik Norris | Mechanical Design Engineer - I love doing good work on hard things.",
 	description:
-		"The perfect portfolio website theme for developers, designed using Astro and Tailwind CSS. Perfect for freelancers, developers, startups, and personal use.",
+		"Technical specifications and field notes for Erik Norris, Senior Mechanical Engineer. An archive of hardware projects spanning consumer electronics, medical devices, and automation.",
 	useViewTransitions: true,
 	useAnimations: true,
 
 	socialLinks: [
+
 		{
-			platform: "twitter",
-			link: "https://twitter.com/BowTiedWebReapr",
-		},
-		{
-			platform: "instagram",
-			link: "https://www.instagram.com/bowtiedwebreaper/",
+			platform: "linkedin",
+			link: "https://www.instagram.com/eriknorris/",
 		},
 		{
 			platform: "github",
-			link: "https://github.com/Boston343",
+			link: "https://github.com/eriknorris",
 		},
 		{
 			// you should always at least have an email
 			platform: "email",
-			link: "mailto:creator@cosmicthemes.com",
+			link: "mailto:erik@mechanistic.com.com",
 		},
 	],
 
 	// Your information for blog post purposes
 	author: {
-		name: "Web Reaper",
-		email: "creator@cosmicthemes.com",
-		twitter: "BowTiedWebReapr",
+		name: "Erik Norris",
+		email: "erik@mechanistic.com",
+		// twitter: "BowTiedWebReapr",
 	},
 
 	// default image for meta tags if the page doesn't have an image already
