@@ -60,7 +60,7 @@ const siteData: SiteDataProps = {
 
 		{
 			platform: "linkedin",
-			link: "https://www.instagram.com/eriknorris/",
+			link: "https://www.linkedin.com/eriknorris/",
 		},
 		{
 			platform: "github",
