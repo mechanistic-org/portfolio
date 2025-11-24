@@ -2,26 +2,32 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectCard from "../../components/Projects/ProjectCard.astro";
-import FilterButton from "../../components/Button/FilterButton.astro"; // Capitalized path
+import FilterButton from "../../components/Button/FilterButton.astro"; // Capitalized Button
 
-// 1. Get all projects
+// 1. Get all valid projects
 const allProjects = await getCollection("projects", ({ data }) => {
   return data.draft !== true;
 });
 
-// 2. Sort by Date
+// 2. DEFAULT SORT: Chronological (Newest First)
+// We parse the date string "10/1/2007" into a real Date object for sorting
 const projects = allProjects.sort((a, b) => {
   const dateA = new Date(a.data.date || 0);
   const dateB = new Date(b.data.date || 0);
-  return dateB.getTime() - dateA.getTime();
+  return dateB.getTime() - dateA.getTime(); // Descending (Newest first)
 });
 
-// 3. Extract Technologies
+// 3. Extract Technologies (The Fix)
+// We flatten all tags from all projects into one big list, then dedupe them.
 const allTechnologies = [
   ...new Set(projects.flatMap((project) => {
-    return Array.isArray(project.data.tags) ? project.data.tags : [];
+    // Ensure tags is an array of strings, filter out empty/null values
+    return Array.isArray(project.data.tags) ? project.data.tags.filter(Boolean) : [];
   }))
 ].sort();
+
+console.log("Total Projects:", projects.length);
+console.log("Found Tags:", allTechnologies); // Check your build console to see if tags appear!
 ---
 
 <BaseLayout
@@ -34,18 +40,24 @@ const allTechnologies = [
       <p class="text-muted-foreground text-lg md:text-xl">
         Archive of {projects.length} Engineering Projects
       </p>
+
+      {/* NEW: Sort Controls (Simple Links for now) */}
+      <div class="mt-4 flex justify-center gap-4 text-sm text-neutral-500">
+        <span>Sort by:</span>
+        <a href="/projects" class="text-primary font-bold">Date (Newest)</a>
+        {/* Note: True dynamic sorting requires complex client-side JS. 
+            For V1, let's stick to Date default, as that's the industry standard. */}
+      </div>
     </div>
 
-   <div class="mt-12 flex flex-wrap justify-center gap-2">
-      {/* 1. Fixed "All" Button: Self-closing tag with 'text' prop */}
+    <div class="mt-12 flex flex-wrap justify-center gap-2">
       <FilterButton 
         class="filter-btn active" 
         data-filter="all" 
-        aria-pressed="true"
+        aria-pressed="true" 
         text="All"
       />
       
-      {/* 2. Fixed Map Loop: Passing 'tech' into 'text' prop */}
       {allTechnologies.map((tech) => (
         <FilterButton 
           class="filter-btn" 
@@ -56,18 +68,26 @@ const allTechnologies = [
       ))}
     </div>
 
-    {/* CHANGE 1: Removed 'hidden' class from the HTML. Cards are visible by default. */}
     <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3" id="projects-grid">
       {projects.map((project) => {
+        // Ensure tags are valid for the data attribute
         const tags = Array.isArray(project.data.tags) ? JSON.stringify(project.data.tags) : "[]";
+        // Add employer and category for future sorting
+        const employer = project.data.employer || "unknown";
+        
         return (
-          <div class="project-card" data-tags={tags}>
+          <div 
+            class="project-card" 
+            data-tags={tags} 
+            data-employer={employer}
+            data-date={project.data.date}
+          >
             <ProjectCard project={project} />
           </div>
         );
       })}
     </div>
-
+    
     <div class="mt-12 text-center hidden" id="pagination-controls">
         <button id="load-more-btn" class="px-6 py-3 bg-neutral-800 hover:bg-neutral-700 text-white rounded-lg font-medium transition-colors">
             Load More Projects
@@ -77,7 +97,7 @@ const allTechnologies = [
   </div>
 
   <script>
-    // CHANGE 2: Use 'astro:page-load' instead of 'DOMContentLoaded' to support View Transitions
+    // Re-use the robust pagination script from previous step
     document.addEventListener('astro:page-load', () => {
         const cards = Array.from(document.querySelectorAll('.project-card')) as HTMLElement[];
         const buttons = document.querySelectorAll('.filter-btn');
@@ -85,10 +105,7 @@ const allTechnologies = [
         const loadMoreBtn = document.getElementById('load-more-btn');
         const countLabel = document.getElementById('showing-count');
         
-        // Only run if we actually have projects
         if (cards.length === 0) return;
-
-        // Show the controls now that JS is running
         if (controls) controls.classList.remove('hidden');
         
         let visibleCount = 12; 
@@ -96,60 +113,45 @@ const allTechnologies = [
         let activeCards: HTMLElement[] = [];
 
         function updateDisplay() {
-            // Identify which cards match the filter
+            // 1. Filter Logic
             activeCards = cards.filter(card => {
-                try {
-                    const tags = JSON.parse(card.getAttribute('data-tags') || '[]');
-                    return currentFilter === 'all' || tags.includes(currentFilter);
-                } catch (e) {
-                    return true; // Fallback: show if data is weird
-                }
+                const tags = JSON.parse(card.getAttribute('data-tags') || '[]');
+                // Normalize tags for comparison (optional but safer)
+                return currentFilter === 'all' || tags.includes(currentFilter);
             });
 
-            // Manage Visibility
-            cards.forEach(card => {
-                // First, hide everything that doesn't match the filter
-                if (!activeCards.includes(card)) {
-                    card.style.display = 'none';
-                    return;
-                }
-                
-                // For matching cards, check pagination index
-                const index = activeCards.indexOf(card);
-                if (index < visibleCount) {
-                    card.style.display = 'block';
-                    // Optional fade in
-                    card.animate([
-                        { opacity: 0, transform: 'translateY(10px)' },
-                        { opacity: 1, transform: 'translateY(0)' }
-                    ], { duration: 300, fill: 'forwards' });
-                } else {
-                    card.style.display = 'none';
-                }
+            // 2. Hide All
+            cards.forEach(card => card.style.display = 'none');
+
+            // 3. Show Slice
+            const toShow = activeCards.slice(0, visibleCount);
+            toShow.forEach(card => {
+                card.style.display = 'block';
+                // Add fade-in if you want
             });
 
-            // Update Controls
+            // 4. Update UI
             if (countLabel) {
-                countLabel.textContent = `Showing ${Math.min(visibleCount, activeCards.length)} of ${activeCards.length} projects`;
+                countLabel.textContent = `Showing ${toShow.length} of ${activeCards.length} projects`;
             }
-
             if (loadMoreBtn) {
                 loadMoreBtn.style.display = visibleCount >= activeCards.length ? 'none' : 'inline-block';
             }
         }
 
-        // Initial Run
+        // Run Immediately
         updateDisplay();
 
-        // Event Listeners
+        // Load More
         loadMoreBtn?.addEventListener('click', () => {
             visibleCount += 12;
             updateDisplay();
         });
 
+        // Filter Clicks
         buttons.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Toggle UI
+                // Reset active states
                 buttons.forEach(b => {
                     b.classList.remove('active');
                     b.setAttribute('aria-pressed', 'false');
@@ -157,7 +159,7 @@ const allTechnologies = [
                 btn.classList.add('active');
                 btn.setAttribute('aria-pressed', 'true');
 
-                // Update Logic
+                // Apply Filter
                 currentFilter = btn.getAttribute('data-filter') || 'all';
                 visibleCount = 12; // Reset pagination
                 updateDisplay();
@@ -168,7 +170,6 @@ const allTechnologies = [
 
   <style>
     @reference "../../styles/global.css";
-    
     .filter-btn.active {
       @apply bg-primary text-black ring-2 ring-primary;
     }
