@@ -1,0 +1,104 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro"; // Adjust if you use a different layout
+import ProjectCard from "../../components/projects/ProjectCard.astro";
+import FilterButton from "../../components/button/FilterButton.astro";
+
+// 1. Get all projects (No language filtering!)
+const allProjects = await getCollection("projects", ({ data }) => {
+  return data.draft !== true;
+});
+
+// 2. Sort by Date (Newest First)
+const projects = allProjects.sort((a, b) => {
+  const dateA = new Date(a.data.date || 0);
+  const dateB = new Date(b.data.date || 0);
+  return dateB.getTime() - dateA.getTime();
+});
+
+// 3. Extract Technologies for the Filter Buttons
+const allTechnologies = [
+  ...new Set(projects.flatMap((project) => project.data.tags || []))
+].sort();
+---
+
+<BaseLayout
+  title="Projects"
+  description="Explore my projects and learn about my development journey."
+>
+  <div class="site-container py-24 md:pb-36">
+    <div class="mx-auto max-w-4xl text-center">
+      <h1 class="h1 mb-4">Projects</h1>
+      <p class="text-muted-foreground text-lg md:text-xl">
+        Explore my projects and learn about my development journey.
+      </p>
+    </div>
+
+    <div class="mt-12 flex flex-wrap justify-center gap-2">
+      <FilterButton 
+        class="filter-btn active" 
+        data-filter="all" 
+        aria-pressed="true"
+      >
+        All
+      </FilterButton>
+      
+      {allTechnologies.map((tech) => (
+        <FilterButton 
+          class="filter-btn" 
+          data-filter={tech} 
+          aria-pressed="false"
+        >
+          {tech}
+        </FilterButton>
+      ))}
+    </div>
+
+    <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3" id="projects-grid">
+      {projects.map((project) => (
+        <div class="project-card" data-tags={JSON.stringify(project.data.tags)}>
+          <ProjectCard project={project} />
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project-card');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // 1. Toggle Active State
+        buttons.forEach(b => {
+            b.classList.remove('active');
+            b.setAttribute('aria-pressed', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-pressed', 'true');
+
+        // 2. Filter Grid
+        const filter = btn.getAttribute('data-filter');
+
+        cards.forEach(card => {
+          const tags = JSON.parse(card.getAttribute('data-tags') || '[]');
+          const htmlCard = card as HTMLElement;
+
+          if (filter === 'all' || tags.includes(filter)) {
+            htmlCard.style.display = 'block';
+            // Optional: Add fade-in animation class here
+          } else {
+            htmlCard.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+  <style>
+    /* Simple Active State for Buttons */
+    .filter-btn.active {
+      @appl bg-primary text-black ring-2 ring-primary;
+    }
+  </style>
+</BaseLayout>

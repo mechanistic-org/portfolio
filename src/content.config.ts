@@ -50,8 +50,44 @@ const otherPagesCollection = defineCollection({
 		}),
 });
 
+// PROJECTS
+const projectsCollection = defineCollection({
+    // Pointing to where your script wrote the files:
+    loader: glob({ pattern: "**/*.mdx", base: "./src/content/projects" }), 
+    schema: z.object({
+        title: z.string(),
+        slug: z.string().optional(),
+        
+        // Dates
+        date: z.coerce.date().optional(),
+        endDate: z.coerce.date().optional(),
+
+        // Professional Context
+        employer: z.string().optional(),
+        client: z.union([z.string(), z.array(z.string())]).optional(),
+        role: z.string().optional(),
+
+        // Taxonomy
+        tags: z.array(z.string()).optional(),
+        industry: z.string().optional(),
+        category: z.string().optional(),
+        codename: z.string().optional(),
+
+        // Visuals: We use z.string() to allow external URLs (placeholders/R2)
+        // The theme uses image() which requires local files. We bypass that here.
+        heroImage: z.string().optional(),
+
+        // Status
+        draft: z.boolean().default(false),
+        featured: z.boolean().default(false),
+        description: z.string().optional(),
+    }),
+});
+
+// EXPORT ALL
 export const collections = {
-	blog: blogCollection,
-	authors: authorsCollection,
-	otherPages: otherPagesCollection,
+    blog: blogCollection,
+    authors: authorsCollection,
+    otherPages: otherPagesCollection,
+    projects: projectsCollection, // <--- This is the key fix
 };
