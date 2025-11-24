@@ -1,50 +1,62 @@
 ---
 import { Image } from "astro:assets";
-import type { CollectionEntry } from "astro:content";
 
-import { getLocaleFromUrl } from "@/js/localeUtils";
-import { slugify } from "@/js/textUtils";
-import { useTranslations } from "@/js/translationUtils";
-import { getLocalizedRoute } from "@/js/translationUtils";
+const { project } = Astro.props;
+const { data, slug } = project;
 
-const currLocale = getLocaleFromUrl(Astro.url);
+// Safety 1: Ensure tags is an array
+const tags = Array.isArray(data.tags) ? data.tags : [];
 
-interface Props {
-  project: CollectionEntry<"projects">;
-}
-
-const { project, ...rest } = Astro.props;
-const { title, image, technologies } = project.data;
+// Safety 2: Ensure we have a valid link. If slug is missing, disable the link.
+const href = slug ? `/projects/${slug}/` : "#";
 ---
 
 <a
-  href={getLocalizedRoute(currLocale, `/projects/${slugify(project.id)}`)}
-  class="group relative overflow-hidden rounded-md border md:rounded-lg"
-  {...rest}
+  href={href}
+  class="group flex flex-col gap-4 rounded-lg border border-neutral-800 bg-neutral-900 p-4 transition-colors hover:bg-neutral-800"
+  onclick={!slug ? "return false;" : ""}
 >
-  <div class="aspect-video">
-    <Image
-      src={image}
-      alt={`${title} - Project Preview`}
-      width={450}
-      densities={[1.5, 2]}
-      loading="lazy"
-      class="h-full w-full object-cover"
-    />
+  <div class="aspect-video w-full overflow-hidden rounded-md bg-neutral-800 relative">
+    {
+      /* IMAGE LOGIC: Handles URLs (script) and Local Files (pure) */
+    }
+    {typeof data.heroImage === "string" ? (
+      <img
+        src={data.heroImage}
+        alt={data.title}
+        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+      />
+    ) : data.heroImage ? (
+      <Image
+        src={data.heroImage}
+        alt={data.title}
+        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+      />
+    ) : (
+      <div class="flex h-full w-full items-center justify-center text-neutral-500 bg-neutral-800">
+        <span class="text-xs">No Image</span>
+      </div>
+    )}
+    
+    {/* DRAFT/ERROR BADGE */}
+    {!slug && (
+      <div class="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded">
+        Data Error
+      </div>
+    )}
   </div>
-  <div
-    class="bg-primary/90 dark absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100"
-  >
-    <div
-      class="translate-y-4 transform p-4 text-center transition-transform group-hover:translate-y-0"
-    >
-      <h3 class="text-foreground mb-2 text-xl font-semibold">{title}</h3>
-      <p class="text-foreground/80 text-sm">{technologies.join(" / ")}</p>
-      <span
-        class="text-foreground border-foreground/30 hover:border-foreground mt-4 inline-block border-b transition-colors"
-      >
-        View Project →
-      </span>
-    </div>
+
+  <div class="flex flex-col gap-2">
+    <h3 class="text-lg font-medium text-white group-hover:text-primary">
+      {data.title || "Untitled Project"}
+    </h3>
+    
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 text-xs text-neutral-400">
+        {tags.slice(0, 3).join(" • ")}
+        {tags.length > 3 && `+${tags.length - 3}`}
+      </div>
+    )}
   </div>
 </a>

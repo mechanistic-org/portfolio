@@ -64,11 +64,11 @@ const projectsCollection = defineCollection({
 
         // Professional Context
         employer: z.string().optional(),
-        client: z.union([z.string(), z.array(z.string())]).optional(),
+        client: z.union([z.string(), z.array(z.string())]).default([]),
         role: z.string().optional(),
 
         // Taxonomy
-        tags: z.array(z.string()).optional(),
+        tags: z.array(z.string()).default([]),
         industry: z.string().optional(),
         category: z.string().optional(),
         codename: z.string().optional(),

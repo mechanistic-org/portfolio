@@ -1,24 +1,26 @@
 ---
 import { getCollection } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro"; // Adjust if you use a different layout
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectCard from "../../components/projects/ProjectCard.astro";
 import FilterButton from "../../components/button/FilterButton.astro";
 
-// 1. Get all projects (No language filtering!)
+// 1. Get valid projects only
 const allProjects = await getCollection("projects", ({ data }) => {
-  return data.draft !== true;
+  return data.draft !== true && data.title; // Ensure it has a title
 });
 
-// 2. Sort by Date (Newest First)
+// 2. Sort by Date
 const projects = allProjects.sort((a, b) => {
   const dateA = new Date(a.data.date || 0);
   const dateB = new Date(b.data.date || 0);
   return dateB.getTime() - dateA.getTime();
 });
 
-// 3. Extract Technologies for the Filter Buttons
+// 3. Extract Technologies
 const allTechnologies = [
-  ...new Set(projects.flatMap((project) => project.data.tags || []))
+  ...new Set(projects.flatMap((project) => {
+    return Array.isArray(project.data.tags) ? project.data.tags : [];
+  }))
 ].sort();
 ---
 
@@ -30,7 +32,7 @@ const allTechnologies = [
     <div class="mx-auto max-w-4xl text-center">
       <h1 class="h1 mb-4">Projects</h1>
       <p class="text-muted-foreground text-lg md:text-xl">
-        Explore my projects and learn about my development journey.
+        Archive of {projects.length} Engineering Projects
       </p>
     </div>
 
@@ -55,50 +57,107 @@ const allTechnologies = [
     </div>
 
     <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3" id="projects-grid">
-      {projects.map((project) => (
-        <div class="project-card" data-tags={JSON.stringify(project.data.tags)}>
-          <ProjectCard project={project} />
-        </div>
-      ))}
+      {projects.map((project) => {
+        const tags = Array.isArray(project.data.tags) ? JSON.stringify(project.data.tags) : "[]";
+        return (
+          <div class="project-card hidden" data-tags={tags}>
+            <ProjectCard project={project} />
+          </div>
+        );
+      })}
+    </div>
+
+    <div class="mt-12 text-center" id="pagination-controls">
+        <button id="load-more-btn" class="px-6 py-3 bg-neutral-800 hover:bg-neutral-700 text-white rounded-lg font-medium transition-colors">
+            Load More Projects
+        </button>
+        <p id="showing-count" class="mt-4 text-sm text-neutral-500"></p>
     </div>
   </div>
 
   <script>
-    const buttons = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.project-card');
+    // --- CLIENT SIDE PAGINATION & FILTERING LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const cards = Array.from(document.querySelectorAll('.project-card')) as HTMLElement[];
+        const buttons = document.querySelectorAll('.filter-btn');
+        const loadMoreBtn = document.getElementById('load-more-btn');
+        const countLabel = document.getElementById('showing-count');
+        
+        let visibleCount = 12; // Start with 12
+        let currentFilter = 'all';
+        let activeCards: HTMLElement[] = [];
 
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        // 1. Toggle Active State
-        buttons.forEach(b => {
-            b.classList.remove('active');
-            b.setAttribute('aria-pressed', 'false');
+        function updateDisplay() {
+            // 1. Identify which cards match the filter
+            activeCards = cards.filter(card => {
+                const tags = JSON.parse(card.getAttribute('data-tags') || '[]');
+                return currentFilter === 'all' || tags.includes(currentFilter);
+            });
+
+            // 2. Hide everything first
+            cards.forEach(card => card.classList.add('hidden'));
+
+            // 3. Show only the slice we are allowed to see
+            const toShow = activeCards.slice(0, visibleCount);
+            toShow.forEach(card => {
+                card.classList.remove('hidden');
+                // Simple fade-in effect
+                card.style.animation = 'fadeIn 0.5s ease-in-out';
+            });
+
+            // 4. Update Buttons & Labels
+            if (countLabel) {
+                countLabel.textContent = `Showing ${toShow.length} of ${activeCards.length} projects`;
+            }
+
+            if (loadMoreBtn) {
+                if (visibleCount >= activeCards.length) {
+                    loadMoreBtn.style.display = 'none'; // No more to load
+                } else {
+                    loadMoreBtn.style.display = 'inline-block';
+                }
+            }
+        }
+
+        // Initialize
+        updateDisplay();
+
+        // Event: Load More
+        loadMoreBtn?.addEventListener('click', () => {
+            visibleCount += 12;
+            updateDisplay();
         });
-        btn.classList.add('active');
-        btn.setAttribute('aria-pressed', 'true');
 
-        // 2. Filter Grid
-        const filter = btn.getAttribute('data-filter');
+        // Event: Filters
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Reset UI
+                buttons.forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-pressed', 'false');
+                });
+                btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
 
-        cards.forEach(card => {
-          const tags = JSON.parse(card.getAttribute('data-tags') || '[]');
-          const htmlCard = card as HTMLElement;
-
-          if (filter === 'all' || tags.includes(filter)) {
-            htmlCard.style.display = 'block';
-            // Optional: Add fade-in animation class here
-          } else {
-            htmlCard.style.display = 'none';
-          }
+                // Reset Logic
+                currentFilter = btn.getAttribute('data-filter') || 'all';
+                visibleCount = 12; // Reset pagination on new filter
+                updateDisplay();
+            });
         });
-      });
     });
   </script>
 
   <style>
-    /* Simple Active State for Buttons */
+    @reference "../../styles/global.css";
+    
     .filter-btn.active {
-      @appl bg-primary text-black ring-2 ring-primary;
+      @apply bg-primary text-black ring-2 ring-primary;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </BaseLayout>
