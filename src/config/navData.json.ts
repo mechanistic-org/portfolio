@@ -1,17 +1,7 @@
-// utils
-import { getAllPosts, countItems, sortByValue } from "@js/blogUtils";
-import { humanize } from "@js/textUtils";
-
-// get the tags used in blog posts, to put into navbar
-const posts = await getAllPosts();
-const alltags = posts.map((post) => post.data.tags).flat();
-const countedtags = countItems(alltags);
-const processedtags = sortByValue(countedtags);
-
 export interface navLinkItem {
 	text: string;
 	href: string;
-	newTab?: boolean; // adds target="_blank" rel="noopener noreferrer" to link
+	newTab?: boolean;
 }
 
 export interface navDropdownItem {
@@ -21,43 +11,32 @@ export interface navDropdownItem {
 
 export type navItem = navLinkItem | navDropdownItem;
 
-// note: 1 level of dropdown is supported
 const navConfig: navItem[] = [
 	{
-		text: "Overview",
-		href: "/overview/",
+		text: "Home",
+		href: "/",
 	},
 	{
-		text: "Blog",
+		text: "Projects",
+		href: "/projects/",
+	},
+	{
+		text: "App Notes", // Renamed from Blog for engineering vibe
 		href: "/blog/",
 	},
-	// {
-	// 	// get the tags used in blog posts, to put into a navbar dropdown
-	// 	text: "Tags",
-	// 	dropdown: processedtags.map(([tag, count]) => {
-	// 		return {
-	// 			text: humanize(tag),
-	// 			href: `/tags/${tag}/`,
-	// 		};
-	// 	}),
-	// },
 	{
-		text: "Pages",
+		text: "Specs", // Renamed from About/Pages for datasheet vibe
 		dropdown: [
 			{
-				text: "Blog",
-				href: "/blog/",
+				text: "About Me",
+				href: "/about/", // Note: You'll need to create this page or alias it
 			},
 			{
-				text: "Projects",
-				href: "/projects/",
-			},
-			{
-				text: "Uses",
+				text: "Uses / Gear",
 				href: "/uses/",
 			},
 			{
-				text: "Elements",
+				text: "UI Elements",
 				href: "/elements/",
 			},
 		],

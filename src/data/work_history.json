@@ -1,0 +1,98 @@
+[
+  {
+    "company": "Mechanistic",
+    "title": "Senior Mechanical Engineer",
+    "start": "8/1/2022",
+    "end": "11/25/2025",
+    "duration_days": "1212",
+    "is_consulting": true
+  },
+  {
+    "company": "Hyphen",
+    "title": "Staff Mechanical Engineer",
+    "start": "5/1/2021",
+    "end": "8/1/2022",
+    "duration_days": "457",
+    "is_consulting": false
+  },
+  {
+    "company": "Mechanistic",
+    "title": "Senior Mechanical Engineer",
+    "start": "5/1/2018",
+    "end": "5/1/2021",
+    "duration_days": "1096",
+    "is_consulting": true
+  },
+  {
+    "company": "Noon",
+    "title": "Senior Mechanical Engineer",
+    "start": "3/1/2017",
+    "end": "5/1/2018",
+    "duration_days": "426",
+    "is_consulting": false
+  },
+  {
+    "company": "Avegant",
+    "title": "Senior Mechanical Engineer",
+    "start": "6/1/2015",
+    "end": "3/1/2017",
+    "duration_days": "639",
+    "is_consulting": false
+  },
+  {
+    "company": "Kaleidescape",
+    "title": "Senior Mechanical Design Engineer",
+    "start": "5/1/2008",
+    "end": "6/1/2015",
+    "duration_days": "2587",
+    "is_consulting": false
+  },
+  {
+    "company": "Digidesign",
+    "title": "Senior Mechanical Designer",
+    "start": "6/1/2003",
+    "end": "5/1/2008",
+    "duration_days": "1796",
+    "is_consulting": false
+  },
+  {
+    "company": "Mechanistic",
+    "title": "Senior Mechanical Designer",
+    "start": "12/1/1999",
+    "end": "6/1/2003",
+    "duration_days": "1278",
+    "is_consulting": true
+  },
+  {
+    "company": "frogdesign",
+    "title": "Mechanical Designer",
+    "start": "6/1/1997",
+    "end": "12/1/1999",
+    "duration_days": "913",
+    "is_consulting": false
+  },
+  {
+    "company": "Mechanistic",
+    "title": "Mechanical Designer",
+    "start": "9/1/1993",
+    "end": "6/1/1997",
+    "duration_days": "1369",
+    "is_consulting": true
+  },
+  {
+    "company": "Silicon Graphics",
+    "title": "Technician IV",
+    "start": "7/1/1989",
+    "end": "9/1/1993",
+    "duration_days": "1523",
+    "is_consulting": false
+  },
+  {
+    "company": "EP Technologies",
+    "title": "Production Supervisor",
+    "start": "6/1/1985",
+    "end": "7/1/1989",
+    "duration_days": "1491",
+    "is_consulting": false
+  }
+]

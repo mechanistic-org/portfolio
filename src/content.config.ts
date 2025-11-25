@@ -1,58 +1,48 @@
 import { defineCollection, reference, z } from "astro:content";
 import { glob } from "astro/loaders";
 
-// Type-check frontmatter using a schema
+// 1. BLOG (Existing)
 const blogCollection = defineCollection({
-	loader: glob({ pattern: "**/[^_]*{md,mdx}", base: "./src/data/blog" }),
-	schema: ({ image }) =>
-		z.object({
-			title: z.string(),
-			description: z.string(),
-			// reference the authors collection https://docs.astro.build/en/guides/content-collections/#defining-collection-references
-			authors: z.array(reference("authors")),
-			// Transform string to Date object
-			pubDate: z
-				.string()
-				.or(z.date())
-				.transform((val) => new Date(val)),
-			updatedDate: z
-				.string()
-				.optional()
-				.transform((str) => (str ? new Date(str) : undefined)),
-			heroImage: image(),
-			tags: z.array(z.string()),
-			// blog posts will be excluded from build if draft is "true"
-			draft: z.boolean().optional(),
-		}),
+    loader: glob({ pattern: "**/[^_]*{md,mdx}", base: "./src/data/blog" }),
+    schema: ({ image }) =>
+        z.object({
+            title: z.string(),
+            description: z.string(),
+            authors: z.array(reference("authors")),
+            pubDate: z.string().or(z.date()).transform((val) => new Date(val)),
+            updatedDate: z.string().optional().transform((str) => (str ? new Date(str) : undefined)),
+            heroImage: image(),
+            tags: z.array(z.string()),
+            draft: z.boolean().optional(),
+        }),
 });
 
-// authors
+// 2. AUTHORS (Existing)
 const authorsCollection = defineCollection({
-	loader: glob({ pattern: "**/[^_]*{md,mdx}", base: "./src/data/authors" }),
-	schema: ({ image }) =>
-		z.object({
-			name: z.string(),
-			avatar: image(),
-			about: z.string(),
-			email: z.string(),
-			authorLink: z.string(), // author page link. Could be a personal website, github, twitter, whatever you want
-		}),
+    loader: glob({ pattern: "**/[^_]*{md,mdx}", base: "./src/data/authors" }),
+    schema: ({ image }) =>
+        z.object({
+            name: z.string(),
+            avatar: image(),
+            about: z.string(),
+            email: z.string(),
+            authorLink: z.string(),
+        }),
 });
 
-// other pages
+// 3. OTHER PAGES (Existing)
 const otherPagesCollection = defineCollection({
-	loader: glob({ pattern: "**/[^_]*{md,mdx}", base: "./src/data/otherPages" }),
-	schema: () =>
-		z.object({
-			title: z.string(),
-			description: z.string(),
-			draft: z.boolean().optional(),
-		}),
+    loader: glob({ pattern: "**/[^_]*{md,mdx}", base: "./src/data/otherPages" }),
+    schema: () =>
+        z.object({
+            title: z.string(),
+            description: z.string(),
+            draft: z.boolean().optional(),
+        }),
 });
 
-// PROJECTS
+// 4. PROJECTS (Updated for Faceted Architecture)
 const projectsCollection = defineCollection({
-    // Pointing to where your script wrote the files:
     loader: glob({ pattern: "**/*.mdx", base: "./src/content/projects" }), 
     schema: z.object({
         title: z.string(),
@@ -61,33 +51,28 @@ const projectsCollection = defineCollection({
         // Dates
         date: z.coerce.date().optional(),
         endDate: z.coerce.date().optional(),
-
-        // Professional Context
+        
+        // Facets (Matching ingest_data.py)
         employer: z.string().optional(),
-        client: z.union([z.string(), z.array(z.string())]).default([]),
-        role: z.string().optional(),
-
-        // Taxonomy
+        industry: z.string().default("Other"),
+        category: z.string().optional(), // Added this missing field
+        production: z.string().optional(),
+        
+        // Arrays (Tools, Clients, Tags)
+        tools: z.array(z.string()).default([]),
+        client: z.array(z.string()).default([]), 
         tags: z.array(z.string()).default([]),
-        industry: z.string().optional(),
-        category: z.string().optional(),
-        codename: z.string().optional(),
-
-        // Visuals: We use z.string() to allow external URLs (placeholders/R2)
-        // The theme uses image() which requires local files. We bypass that here.
+        
+        // Visuals & Meta
         heroImage: z.string().optional(),
-
-        // Status
         draft: z.boolean().default(false),
-        featured: z.boolean().default(false),
         description: z.string().optional(),
     }),
 });
 
-// EXPORT ALL
 export const collections = {
     blog: blogCollection,
     authors: authorsCollection,
     otherPages: otherPagesCollection,
-    projects: projectsCollection, // <--- This is the key fix
+    projects: projectsCollection,
 };

@@ -1,64 +1,87 @@
 ---
 /**
  * * Homepage
- * Displays recent posts and sidebar cards. You can customize the layout and sidebar cards to your liking.
- * There are 4 sidebar cards: NewsletterCard, TagsCard, WorkExperienceCard, and SocialsCard.
+ * Engineering Portfolio: 3D Hero + Featured Projects + Datasheet Access
  */
 
-// layout
-import BaseLayout from "@layouts/BaseLayout.astro";
-
-// components
-import HeroSideImage from "@components/Hero/HeroSideImage.astro";
-import HeroTinyImage from "@components/Hero/HeroTinyImage.astro";
-import PostCardBasic from "@components/PostCard/PostCardBasic.astro";
-import PostCardImage from "@components/PostCard/PostCardImage.astro";
+import { getCollection } from "astro:content";
+import Layout from "@layouts/BaseLayout.astro";
+import Hero from "@components/hero/HeroSideImage.astro";
+import ProjectCard from "@components/projects/ProjectCard.astro";
 import Button from "@components/Button/Button.astro";
-import NewsletterCard from "@components/SidebarCards/NewsletterCard.astro";
-import TagsCard from "@components/SidebarCards/TagsCard.astro";
-import WorkExperienceCard from "@components/SidebarCards/WorkExperienceCard.astro";
 
-// utils
-import { formatPosts, getAllPosts } from "@js/blogUtils";
+// 1. Get Projects instead of Blog Posts
+const allProjects = await getCollection("projects", ({ data }) => {
+  return data.draft !== true;
+});
 
-// data
-import siteData from "@config/siteData.json";
-
-const posts = await getAllPosts();
-
-// get recent 3 posts to put on homepage
-const formattedPosts = formatPosts(posts, { limit: 4 });
+// Sort by Date and take top 3 recent projects
+const recentProjects = allProjects
+  .sort((a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime())
+  .slice(0, 3);
 ---
 
-<BaseLayout title={siteData.title} description={siteData.description}>
-	<HeroSideImage />
-	<!-- <HeroTinyImage /> -->
+<Layout title="Home" description="Mechanical Design Engineer Portfolio">
+  
+  <Hero />
 
-	<div class="site-container mt-24 grid grid-cols-1 gap-8 md:grid-cols-5 lg:mt-36 lg:gap-12">
-		<div class="mx-auto max-w-lg md:col-span-3 md:ml-0 md:max-w-full">
-			<!-- Recent Posts -->
-			<h2 class="h2">Recent Posts</h2>
-			<ul class="mt-4 grid grid-cols-1 justify-center gap-8">
-				{
-					formattedPosts.map((post, idx) => (
-						<li>
-							<PostCardBasic post={post} showDescription={false} />
-						</li>
-					))
-				}
-			</ul>
-			<div class="mt-8 flex">
-				<Button variant="outline" arrow="right" href="/blog/">All Blog Posts</Button>
-			</div>
-		</div>
-		<div
-			class="mx-auto mt-6 flex w-full max-w-lg flex-col gap-8 md:col-span-2 md:mt-0 md:max-w-full"
-		>
-			<!-- Enable whichever sidebar cards you desire, or change the order of them -->
-			<!-- <SocialsCard /> -->
-			<NewsletterCard />
-			<!-- <TagsCard /> -->
-			<WorkExperienceCard />
-		</div>
-	</div>
-</BaseLayout>
+  <section class="site-container py-12 md:py-24">
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="h2">Recent Field Notes</h2>
+      <Button href="/projects" variant="outline" arrow="right">
+        View Archive
+      </Button>
+    </div>
+    
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {recentProjects.map((project) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+  </section>
+
+  <section class="site-container py-12 md:py-24 border-t border-neutral-800">
+    <div class="grid md:grid-cols-2 gap-8">
+      
+      <div class="bg-neutral-900/50 border border-neutral-800 rounded-xl p-8 flex flex-col justify-between">
+        <div>
+          <h3 class="text-xl font-bold text-white mb-2">Technical Specifications</h3>
+          <p class="text-neutral-400 mb-6">
+            Download the complete Interface Control Document (ICD) for Erik Norris. 
+            Includes full work history, patent list, and skill matrix.
+          </p>
+        </div>
+        <div>
+          <Button href="https://assets.eriknorris.com/resume/Erik_Norris_CV.pdf" target="_blank" variant="primary">
+            Download Datasheet (PDF)
+          </Button>
+          <p class="text-xs text-neutral-600 mt-3 font-mono">DOC ID: EN-SPEC-V1.0</p>
+        </div>
+      </div>
+
+      <div class="bg-blue-900/20 border border-blue-500/30 rounded-xl p-8 flex flex-col justify-between relative overflow-hidden group">
+        <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-blue-500/20 blur-3xl rounded-full group-hover:bg-blue-500/30 transition-all"></div>
+        
+        <div>
+          <h3 class="text-xl font-bold text-white mb-2">Secure Uplink</h3>
+          <p class="text-neutral-300 mb-6">
+            Connect via encrypted channel (LinkedIn) for consulting inquiries, 
+            collaboration opportunities, or schematic reviews.
+          </p>
+        </div>
+        
+        <div class="flex items-center gap-4">
+          <a 
+            href="https://www.linkedin.com/in/eriknorris/" 
+            target="_blank"
+            class="flex items-center gap-2 bg-[#0077b5] hover:bg-[#006396] text-white px-5 py-2.5 rounded-lg font-medium transition-all hover:scale-105"
+          >
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            Connect on LinkedIn
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>

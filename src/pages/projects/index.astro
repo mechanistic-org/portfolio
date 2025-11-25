@@ -1,168 +1,141 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import ProjectCard from "../../components/Projects/ProjectCard.astro";
-import FilterButton from "../../components/Button/FilterButton.astro"; // Capitalized Button
+import ProjectCard from "../../components/projects/ProjectCard.astro";
+import FilterButton from "../../components/Button/FilterButton.astro";
 
-// 1. Get all valid projects
-const allProjects = await getCollection("projects", ({ data }) => {
-  return data.draft !== true;
-});
+const allProjects = await getCollection("projects", ({ data }) => !data.draft);
+const projects = allProjects.sort((a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime());
 
-// 2. DEFAULT SORT: Chronological (Newest First)
-// We parse the date string "10/1/2007" into a real Date object for sorting
-const projects = allProjects.sort((a, b) => {
-  const dateA = new Date(a.data.date || 0);
-  const dateB = new Date(b.data.date || 0);
-  return dateB.getTime() - dateA.getTime(); // Descending (Newest first)
-});
-
-// 3. Extract Technologies (The Fix)
-// We flatten all tags from all projects into one big list, then dedupe them.
-const allTechnologies = [
-  ...new Set(projects.flatMap((project) => {
-    // Ensure tags is an array of strings, filter out empty/null values
-    return Array.isArray(project.data.tags) ? project.data.tags.filter(Boolean) : [];
-  }))
-].sort();
-
-console.log("Total Projects:", projects.length);
-console.log("Found Tags:", allTechnologies); // Check your build console to see if tags appear!
+// Extract Facets for the UI
+const industries = [...new Set(projects.map(p => p.data.industry).filter(Boolean))].sort();
+const tools = [...new Set(projects.flatMap(p => p.data.tools).filter(Boolean))].sort();
+const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Concept"]; // Ordered logic
 ---
 
-<BaseLayout
-  title="Projects"
-  description="Explore my projects and learn about my development journey."
->
+<BaseLayout title="Projects" description="Engineering Archive">
   <div class="site-container py-24 md:pb-36">
-    <div class="mx-auto max-w-4xl text-center">
+    
+    <div class="mx-auto max-w-4xl text-center mb-12">
       <h1 class="h1 mb-4">Projects</h1>
-      <p class="text-muted-foreground text-lg md:text-xl">
+      <p class="text-muted-foreground text-lg">
         Archive of {projects.length} Engineering Projects
       </p>
-
-      {/* NEW: Sort Controls (Simple Links for now) */}
-      <div class="mt-4 flex justify-center gap-4 text-sm text-neutral-500">
-        <span>Sort by:</span>
-        <a href="/projects" class="text-primary font-bold">Date (Newest)</a>
-        {/* Note: True dynamic sorting requires complex client-side JS. 
-            For V1, let's stick to Date default, as that's the industry standard. */}
-      </div>
     </div>
 
-    <div class="mt-12 flex flex-wrap justify-center gap-2">
-      <FilterButton 
-        class="filter-btn active" 
-        data-filter="all" 
-        aria-pressed="true" 
-        text="All"
-      />
-      
-      {allTechnologies.map((tech) => (
-        <FilterButton 
-          class="filter-btn" 
-          data-filter={tech} 
-          aria-pressed="false"
-          text={tech}
-        />
-      ))}
-    </div>
-
-    <div class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3" id="projects-grid">
-      {projects.map((project) => {
-        // Ensure tags are valid for the data attribute
-        const tags = Array.isArray(project.data.tags) ? JSON.stringify(project.data.tags) : "[]";
-        // Add employer and category for future sorting
-        const employer = project.data.employer || "unknown";
+    <div class="sticky top-4 z-40 bg-neutral-950/90 backdrop-blur-md border border-neutral-800 rounded-xl p-4 mb-12 shadow-2xl">
         
-        return (
-          <div 
+        <div class="flex flex-col gap-2 mb-4">
+            <span class="text-xs font-mono text-neutral-500 uppercase tracking-widest">Sector</span>
+            <div class="flex flex-wrap gap-2">
+                <FilterButton class="filter-btn active" data-group="industry" data-filter="all" text="All" />
+                {industries.map(i => <FilterButton class="filter-btn" data-group="industry" data-filter={i} text={i} />)}
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4 pt-4 border-t border-neutral-800">
+            
+            <div class="flex flex-col gap-2">
+                <span class="text-xs font-mono text-neutral-500 uppercase tracking-widest">Toolchain</span>
+                <div class="flex flex-wrap gap-2">
+                    <FilterButton class="filter-btn active" data-group="tool" data-filter="all" text="Any" />
+                    {tools.map(t => <FilterButton class="filter-btn" data-group="tool" data-filter={t} text={t} />)}
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-2">
+                <span class="text-xs font-mono text-neutral-500 uppercase tracking-widest">Production Status</span>
+                <div class="flex flex-wrap gap-2">
+                    <FilterButton class="filter-btn active" data-group="status" data-filter="all" text="Any Stage" />
+                    {statuses.map(s => <FilterButton class="filter-btn" data-group="status" data-filter={s} text={s} />)}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3" id="projects-grid">
+      {projects.map((project) => (
+        <div 
             class="project-card" 
-            data-tags={tags} 
-            data-employer={employer}
-            data-date={project.data.date}
-          >
+            data-industry={project.data.industry}
+            data-tool={JSON.stringify(project.data.tools)}
+            data-status={project.data.production}
+        >
             <ProjectCard project={project} />
-          </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
     
     <div class="mt-12 text-center hidden" id="pagination-controls">
-        <button id="load-more-btn" class="px-6 py-3 bg-neutral-800 hover:bg-neutral-700 text-white rounded-lg font-medium transition-colors">
-            Load More Projects
-        </button>
+        <button id="load-more-btn" class="px-6 py-3 bg-neutral-800 hover:bg-neutral-700 text-white rounded-lg font-medium transition-colors">Load More</button>
         <p id="showing-count" class="mt-4 text-sm text-neutral-500"></p>
     </div>
   </div>
 
   <script>
-    // Re-use the robust pagination script from previous step
     document.addEventListener('astro:page-load', () => {
         const cards = Array.from(document.querySelectorAll('.project-card')) as HTMLElement[];
         const buttons = document.querySelectorAll('.filter-btn');
-        const controls = document.getElementById('pagination-controls');
         const loadMoreBtn = document.getElementById('load-more-btn');
         const countLabel = document.getElementById('showing-count');
+        const controls = document.getElementById('pagination-controls');
         
         if (cards.length === 0) return;
         if (controls) controls.classList.remove('hidden');
-        
-        let visibleCount = 12; 
-        let currentFilter = 'all';
-        let activeCards: HTMLElement[] = [];
 
-        function updateDisplay() {
-            // 1. Filter Logic
-            activeCards = cards.filter(card => {
-                const tags = JSON.parse(card.getAttribute('data-tags') || '[]');
-                // Normalize tags for comparison (optional but safer)
-                return currentFilter === 'all' || tags.includes(currentFilter);
+        // State
+        let filters = { industry: 'all', tool: 'all', status: 'all' };
+        let visibleCount = 12;
+
+        function update() {
+            // Filter
+            const active = cards.filter(card => {
+                const d = card.dataset;
+                const cardTools = JSON.parse(d.tool || '[]');
+                
+                const matchInd = filters.industry === 'all' || d.industry === filters.industry;
+                const matchStatus = filters.status === 'all' || d.status === filters.status;
+                const matchTool = filters.tool === 'all' || cardTools.includes(filters.tool);
+                
+                return matchInd && matchStatus && matchTool;
             });
 
-            // 2. Hide All
-            cards.forEach(card => card.style.display = 'none');
-
-            // 3. Show Slice
-            const toShow = activeCards.slice(0, visibleCount);
-            toShow.forEach(card => {
-                card.style.display = 'block';
-                // Add fade-in if you want
+            // Render
+            cards.forEach(c => c.style.display = 'none');
+            active.slice(0, visibleCount).forEach(c => {
+                c.style.display = 'block';
+                c.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 300 });
             });
 
-            // 4. Update UI
-            if (countLabel) {
-                countLabel.textContent = `Showing ${toShow.length} of ${activeCards.length} projects`;
-            }
-            if (loadMoreBtn) {
-                loadMoreBtn.style.display = visibleCount >= activeCards.length ? 'none' : 'inline-block';
-            }
+            // UI Updates
+            if (countLabel) countLabel.innerText = `Showing ${Math.min(visibleCount, active.length)} of ${active.length}`;
+            if (loadMoreBtn) loadMoreBtn.style.display = visibleCount >= active.length ? 'none' : 'inline-block';
         }
 
-        // Run Immediately
-        updateDisplay();
+        // Init
+        update();
 
-        // Load More
-        loadMoreBtn?.addEventListener('click', () => {
-            visibleCount += 12;
-            updateDisplay();
-        });
+        // Events
+        loadMoreBtn?.addEventListener('click', () => { visibleCount += 12; update(); });
 
-        // Filter Clicks
         buttons.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Reset active states
-                buttons.forEach(b => {
+                const group = btn.getAttribute('data-group');
+                const val = btn.getAttribute('data-filter');
+                if (!group || !val) return;
+
+                // UI Toggle
+                document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach(b => {
                     b.classList.remove('active');
                     b.setAttribute('aria-pressed', 'false');
                 });
                 btn.classList.add('active');
                 btn.setAttribute('aria-pressed', 'true');
 
-                // Apply Filter
-                currentFilter = btn.getAttribute('data-filter') || 'all';
-                visibleCount = 12; // Reset pagination
-                updateDisplay();
+                // Logic Update
+                filters[group] = val;
+                visibleCount = 12;
+                update();
             });
         });
     });
