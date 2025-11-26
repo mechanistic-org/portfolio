@@ -153,4 +153,137 @@ def process_projects():
     phases = {r['Name']: r for r in read_csv_smart(find_file("Phase.csv"))}
     
     f_expert = find_file("Expertise.csv")
-    skills_
+    skills_map = parse_expertise(f_expert) # Use the specialized parser below
+
+    dummy_files = ["tech-1.jpg", "tech-2.jpg", "blueprint.jpg", "abstract.jpg"]
+    all_clients = set()
+    count = 0
+
+    for i, row in enumerate(main):
+        name = row.get("Slug Name")
+        if not name: continue
+        
+        slug = name.lower().strip().replace(' ', '-').replace('/', '-')
+        title = row.get("Descriptive Name") or name
+        employer = row.get("Employer", "")
+        if "Mechanistic" in employer: employer = "Mechanistic (Consulting)"
+        clients = [c.strip() for c in row.get("Client", "").split('/') if c.strip()]
+        for c in clients: all_clients.add(c)
+
+        t_row = tax.get(name, {})
+        industry = t_row.get("Industry", "Other")
+        category = t_row.get("Category", "")
+        tools = [t.strip() for t in row.get("Tools", "").split(',') if t.strip()]
+
+        p_row = phases.get(name, {})
+        prod_status = "Concept"
+        if float(p_row.get("Production", p_row.get("Phase 5", 0)) or 0) > 0: prod_status = "Mass Production"
+        elif float(p_row.get("Validation", p_row.get("Phase 4", 0)) or 0) > 0: prod_status = "Manufacturing Prep"
+        elif float(p_row.get("Development", p_row.get("Phase 3", 0)) or 0) > 0: prod_status = "Prototyping"
+
+        s_row = stats.get(name, {})
+        part_counts = {
+            "plastic": int(float(s_row.get("Plastic", 0) or 0)),
+            "metal": int(float(s_row.get("Sheetmetal", 0) or 0)),
+            "pcb": int(float(s_row.get("PCB", 0) or 0))
+        }
+
+        hero_img = f"/assets/placeholders/{dummy_files[i % 4]}"
+        comment = ""
+        local_path = os.path.join("R2_STAGING", slug)
+        if os.path.exists(local_path):
+            for ext in [".jpg", ".png", ".webp"]:
+                if os.path.exists(os.path.join(local_path, f"hero{ext}")):
+                    hero_img = f"{R2_DOMAIN}/{slug}/hero{ext}"
+                    break
+        else:
+             comment = f"# R2: {R2_DOMAIN}/{slug}/hero.jpg"
+
+        # Use the intelligently extracted skills list
+        bom_skills = skills_map.get(name, [])
+
+        mdx = f"""---
+title: {json.dumps(title)}
+slug: "{slug}"
+date: "{row.get('Project Start Date raw', '')}"
+employer: "{employer}"
+client: {json.dumps(clients)}
+industry: "{industry}"
+category: "{category}"
+tools: {json.dumps(tools)}
+production: "{prod_status}"
+tags: {json.dumps(bom_skills[:8])}
+stats: {json.dumps(part_counts)}
+heroImage: "{hero_img}" {comment}
+draft: false
+description: "{title} - {industry} project."
+---
+import {{ YouTube }} from '@astro-community/astro-embed-youtube';
+
+## Overview
+**{title}** ({row.get('Title', 'Engineer')}). 
+
+> *Auto-generated placeholder content.*
+
+### Hardware Metrics
+* **Plastic Parts:** {part_counts['plastic']}
+* **Metal Parts:** {part_counts['metal']}
+* **PCBs:** {part_counts['pcb']}
+
+### Bill of Materials (Skills)
+{', '.join(bom_skills)}
+
+### Project Artifacts
+<div class="my-8">
+  <YouTube id="dQw4w9WgXcQ" />
+</div>
+<ModelViewer src="{R2_DOMAIN}/{slug}/model.glb" alt="3D Asset" />
+"""
+        with open(os.path.join(OUTPUT_CONTENT_DIR, f"{slug}.mdx"), "w", encoding="utf-8") as f:
+            f.write(mdx)
+        count += 1
+
+    print(f"✅ Generated {count} MDX files.")
+    
+    sorted_clients = sorted(list(all_clients))
+    with open(os.path.join(OUTPUT_DATA_DIR, "clients.json"), "w") as f:
+        json.dump(sorted_clients, f, indent=2)
+
+def parse_expertise(filepath):
+    """Extracts Skills and Weights from Expertise.csv."""
+    if not filepath: return {}
+    with open(filepath, 'r', encoding='utf-8-sig') as f:
+        lines = list(csv.reader(f))
+
+    header_idx = next((i for i, r in enumerate(lines) if "Name" in r and "Project Start" in r), -1)
+    if header_idx == -1: return {}
+
+    header, weights = lines[header_idx], lines[header_idx-1]
+    skill_weights = {h.strip(): float(w.replace('%','').strip() or 1) for h, w in zip(header, weights) if "%" in w}
+
+    skills_map = {}
+    for row in lines[header_idx+1:]:
+        if len(row) < len(header): continue
+        name = row[header.index("Name")].strip()
+        if not name: continue
+        
+        proj_skills = []
+        for i, val in enumerate(row):
+            skill = header[i].strip()
+            if skill in skill_weights:
+                try:
+                    intensity = float(val.replace('%','').strip())
+                    if intensity > 0:
+                        proj_skills.append((skill, intensity * skill_weights[skill]))
+                except: pass
+        
+        proj_skills.sort(key=lambda x: x[1], reverse=True)
+        skills_map[name] = [s[0] for s in proj_skills]
+    return skills_map
+
+if __name__ == "__main__":
+    process_colors()
+    process_specs()
+    process_tenure()
+    process_projects()
+    print("\n🚀 INGESTION COMPLETE.")
