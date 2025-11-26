@@ -8,7 +8,7 @@ import { type CollectionEntry } from "astro:content";
 import BaseHead from "@layouts/BaseHead.astro";
 import Nav from "@components/Nav/Nav.astro";
 import Footer from "@components/Footer/Footer.astro";
-// import CookieConsent from "@components/CookieConsent/CookieConsent.astro"; // Keeping commented as per your source
+// import CookieConsent from "@components/CookieConsent/CookieConsent.astro";
 
 // data
 import siteData from "@config/siteData.json";
@@ -55,12 +55,10 @@ const {
 			},
 		]}
 	>
-
-
         <div class="w-full bg-yellow-500/10 border-b border-yellow-500/20 text-yellow-500 text-[10px] uppercase tracking-widest font-mono py-1 px-4 flex justify-center md:justify-between items-center z-50 relative">
-            <span>⚠  System Status: V1.0 Beta / Ingestion Active</span>
-            <span class="hidden md:inline opacity-75">Reference Design Only</span>
-        </div>
+    		<span>⚠  System Status: V1.0 Beta / Ingestion Active</span>
+    		<span class="hidden md:inline opacity-75">Reference Design Only</span>
+		</div>
 
 		<div class="flex min-h-lvh flex-col justify-between">
 			<div>
@@ -77,7 +75,6 @@ const {
             import MOS from "motion-on-scroll";
 
 			if (siteData.useAnimations === true) {
-				// runs on initial page load
 				MOS.init({
 					once: true,
 					duration: 0.75,
@@ -85,7 +82,6 @@ const {
 					timeUnits: "s",
 					easing: "ease-out-cubic",
 				});
-                // runs on view transitions navigation
 				document.addEventListener("astro:after-swap", MOS.refreshHard);
 			}
 		</script>

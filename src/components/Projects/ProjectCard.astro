@@ -2,24 +2,18 @@
 import { Image } from "astro:assets";
 
 const { project } = Astro.props;
-const { data, slug } = project;
+const { data, id } = project;
 
-// Safety 1: Ensure tags is an array
+// Safety checks
 const tags = Array.isArray(data.tags) ? data.tags : [];
-
-// Safety 2: Ensure we have a valid link. If slug is missing, disable the link.
-const href = slug ? `/projects/${slug}/` : "#";
+const href = `/projects/${id}/`;
 ---
 
 <a
   href={href}
-  class="group flex flex-col gap-4 rounded-lg border border-neutral-800 bg-neutral-900 p-4 transition-colors hover:bg-neutral-800"
-  onclick={!slug ? "return false;" : ""}
+  class="group flex flex-col gap-4 rounded-lg border border-neutral-800 bg-neutral-900 p-4 transition-all hover:bg-neutral-800 hover:border-neutral-700 hover:shadow-xl h-full"
 >
   <div class="aspect-video w-full overflow-hidden rounded-md bg-neutral-800 relative">
-    {
-      /* IMAGE LOGIC: Handles URLs (script) and Local Files (pure) */
-    }
     {typeof data.heroImage === "string" ? (
       <img
         src={data.heroImage}
@@ -27,35 +21,29 @@ const href = slug ? `/projects/${slug}/` : "#";
         class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         loading="lazy"
       />
-    ) : data.heroImage ? (
-      <Image
-        src={data.heroImage}
-        alt={data.title}
-        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-      />
     ) : (
       <div class="flex h-full w-full items-center justify-center text-neutral-500 bg-neutral-800">
         <span class="text-xs">No Image</span>
       </div>
     )}
-    
-    {/* DRAFT/ERROR BADGE */}
-    {!slug && (
-      <div class="absolute top-2 right-2 bg-red-600 text-white text-xs px-2 py-1 rounded">
-        Data Error
-      </div>
-    )}
   </div>
 
-  <div class="flex flex-col gap-2">
-    <h3 class="text-lg font-medium text-white group-hover:text-primary">
-      {data.title || "Untitled Project"}
-    </h3>
+  <div class="flex flex-col gap-2 justify-between flex-grow">
+    <div>
+        <h3 class="text-lg font-bold text-white group-hover:text-primary transition-colors">
+        {data.title || "Untitled Project"}
+        </h3>
+        <p class="text-xs text-neutral-500 font-mono mt-1">
+            {data.employer} • {new Date(data.date).getFullYear()}
+        </p>
+    </div>
     
     {tags.length > 0 && (
-      <div class="flex flex-wrap gap-2 text-xs text-neutral-400">
-        {tags.slice(0, 3).join(" • ")}
-        {tags.length > 3 && `+${tags.length - 3}`}
+      <div class="flex flex-wrap gap-2 text-xs text-neutral-400 mt-2">
+        {tags.slice(0, 3).map(tag => (
+            <span class="bg-neutral-800 px-2 py-1 rounded">{tag}</span>
+        ))}
+        {tags.length > 3 && <span class="px-1 py-1">+{tags.length - 3}</span>}
       </div>
     )}
   </div>

@@ -1,176 +1,156 @@
 import os
 import csv
 import json
+import glob
 import urllib.request
 
 # --- CONFIGURATION ---
 SOURCE_DIR = "data_source"
 OUTPUT_CONTENT_DIR = "src/content/projects"
 OUTPUT_DATA_DIR = "src/data"
-ASSETS_DIR = "src/assets/placeholders"
+ASSETS_DIR = "public/assets/placeholders"
 R2_DOMAIN = "https://assets.eriknorris.com"
-HERO_EXT = ".jpg" 
 
-os.makedirs(OUTPUT_CONTENT_DIR, exist_ok=True)
-os.makedirs(OUTPUT_DATA_DIR, exist_ok=True)
+for d in [OUTPUT_CONTENT_DIR, OUTPUT_DATA_DIR, ASSETS_DIR]:
+    os.makedirs(d, exist_ok=True)
 
-def read_csv(filepath, header_trigger="Name"):
-    if not os.path.exists(filepath): return []
+# --- UTILS ---
+def find_file(suffix):
+    """Smartly finds files regardless of prefix."""
+    exact = os.path.join(SOURCE_DIR, suffix)
+    if os.path.exists(exact): return exact
+    pattern = os.path.join(SOURCE_DIR, f"*{suffix}")
+    matches = glob.glob(pattern)
+    return matches[0] if matches else None
+
+def read_csv_smart(filepath):
+    """Standard reader for clean CSVs."""
+    if not filepath: return []
     with open(filepath, 'r', encoding='utf-8-sig') as f:
-        lines = f.readlines()
-    start_idx = 0
-    for i, line in enumerate(lines):
-        if header_trigger in line:
-            headers = next(csv.reader([line]))
-            start_idx = i + 1
-            break
-    else: return []
-    
-    data = []
-    reader = csv.reader(lines[start_idx:])
-    for row in reader:
-        if not row or not row[0].strip(): continue
-        item = {}
-        for h_i, h_val in enumerate(headers):
-            if h_i < len(row): item[h_val.strip()] = row[h_i].strip()
-        data.append(item)
-    return data
+        lines = [l.strip() for l in f.readlines() if l.strip()]
+    if not lines: return []
+    if lines[0].startswith(','): lines[0] = lines[0][1:]
+    return list(csv.DictReader(lines))
 
-# --- 1. PROCESS COLORS (For Visualization) ---
+def extract_expertise_metadata(filepath):
+    """Hunts for 'Phase' and '%' rows anywhere in the file."""
+    if not filepath: return {}
+    with open(filepath, 'r', encoding='utf-8-sig') as f:
+        lines = list(csv.reader(f))
+        
+    header_row = []
+    header_idx = -1
+    for i, row in enumerate(lines):
+        if "Name" in row and "Project Start" in row:
+            header_row = [c.strip() for c in row]
+            header_idx = i
+            break
+            
+    if not header_row: return {}
+
+    phase_row = []
+    weight_row = []
+    for row in lines:
+        if "Phase ->" in row: phase_row = row
+        if "%" in row and "Phase" not in row: weight_row = row 
+
+    skill_defs = {}
+    ignored = ["Name", "Project Start", "Project End", "days", "midpoint", "✔️", "▲", "midpoint Y"]
+    
+    for idx, col_name in enumerate(header_row):
+        if col_name and col_name not in ignored:
+            p_val = phase_row[idx] if phase_row and idx < len(phase_row) else "0"
+            w_val = weight_row[idx] if weight_row and idx < len(weight_row) else "1"
+            skill_defs[col_name] = {
+                "Phase": p_val.strip() or "0",
+                "Weight": w_val.replace('%','').strip() or "1"
+            }
+    return skill_defs
+
+def ensure_dummy_assets():
+    if not os.path.exists(ASSETS_DIR):
+        os.makedirs(ASSETS_DIR)
+    dummies = [
+        ("tech-1.jpg", "https://picsum.photos/id/1/800/600"),
+        ("tech-2.jpg", "https://picsum.photos/id/20/800/600"),
+        ("blueprint.jpg", "https://picsum.photos/id/201/800/600"),
+        ("abstract.jpg", "https://picsum.photos/id/180/800/600")
+    ]
+    for filename, url in dummies:
+        filepath = os.path.join(ASSETS_DIR, filename)
+        if not os.path.exists(filepath):
+            try:
+                opener = urllib.request.build_opener()
+                opener.addheaders = [('User-agent', 'Mozilla/5.0')]
+                urllib.request.install_opener(opener)
+                urllib.request.urlretrieve(url, filepath)
+            except: pass
+
+# --- PROCESSORS ---
+
 def process_colors():
-    print("🎨 Processing Color Palette...")
-    # Reads color_etc.csv to create a map for the UI/Viz later
-    color_data = read_csv(os.path.join(SOURCE_DIR, "color_etc.csv"), "Requirements Analysis")
-    
+    print("🎨 Processing Colors...")
+    path = find_file("Colors.csv") or find_file("color_etc.csv")
+    if not path: return 
+    data = read_csv_smart(path)
     color_map = {}
-    for row in color_data:
-        # Map "Requirements Analysis" -> "rgb(229,80,57)"
-        # The CSV structure is a bit loose, assuming Col 0 is Name and Col 2 is RGB
+    for row in data:
         keys = list(row.keys())
-        if len(keys) >= 3:
+        if len(keys) > 0:
             name = row[keys[0]]
-            color = row[keys[2]] # Assuming 3rd column is the RGB value
-            if name and color:
-                color_map[name] = color
-    
+            for v in row.values():
+                if "rgb" in v:
+                    color_map[name] = v
+                    break
     with open(os.path.join(OUTPUT_DATA_DIR, "colors.json"), "w") as f:
         json.dump(color_map, f, indent=2)
 
-# --- 2. PROCESS PROJECTS ---
+def process_specs():
+    print("⚙️  Processing Specs...")
+    path = find_file("Specs.csv")
+    if not path: return
+    data = read_csv_smart(path)
+    clean_specs = []
+    for row in data:
+        clean_specs.append({
+            "category": row.get("Category"),
+            "parameter": row.get("Parameter"),
+            "typical": row.get("Typical"),
+            "min": row.get("Min") if row.get("Min") != "-" else None,
+            "max": row.get("Max") if row.get("Max") != "-" else None,
+            "unit": row.get("Unit") if row.get("Unit") != "-" else "",
+            "notes": row.get("Notes"),
+        })
+    with open(os.path.join(OUTPUT_DATA_DIR, "specs.json"), "w") as f:
+        json.dump(clean_specs, f, indent=2)
+
+def process_tenure():
+    print("⏳ Processing Tenure...")
+    path = find_file("Tenure.csv")
+    if not path: return
+    data = read_csv_smart(path)
+    history = []
+    for row in data:
+        company = row.get("Employer") or row.get("job")
+        if not company: continue
+        history.append({
+            "company": company,
+            "title": row.get("Title", ""),
+            "start": row.get("Start Date") or row.get("start"),
+            "end": row.get("End Date") or row.get("end"),
+            "is_consulting": "Mechanistic" in company or "Contract" in row.get("Type", "")
+        })
+    with open(os.path.join(OUTPUT_DATA_DIR, "work_history.json"), "w") as f:
+        json.dump(history, f, indent=2)
+
 def process_projects():
     print("🏗️  Processing Projects...")
+    ensure_dummy_assets()
     
-    main_data = read_csv(os.path.join(SOURCE_DIR, "Main.csv"), "Slug Name")
-    taxonomy_data = read_csv(os.path.join(SOURCE_DIR, "Taxonomy.csv"), "Project Name")
-    skills_data = read_csv(os.path.join(SOURCE_DIR, "Expertise.csv"), "Name")
-    phase_data = read_csv(os.path.join(SOURCE_DIR, "Phase.csv"), "Name")
-    # We skip assets.csv as we are using Physical Convention now
-
-    # Lookup Maps
-    taxonomy_map = {r['Project Name']: r for r in taxonomy_data if 'Project Name' in r}
-    skills_map = {r['Name']: r for r in skills_data if 'Name' in r}
-    phase_map = {r['Name']: r for r in phase_data if 'Name' in r}
-
-    dummy_files = ["tech-1.jpg", "tech-2.jpg", "blueprint.jpg", "abstract.jpg"]
-    count = 0
-
-    for i, row in enumerate(main_data):
-        name = row.get("Slug Name")
-        if not name: continue
-
-        title = row.get("Descriptive Name") or name
-        slug = name.lower().strip().replace(' ', '-').replace('/', '-')
-        
-        # -- FACETS --
-        # 1. Engagement (Employer)
-        employer = row.get("Employer", "Independent")
-        if "Mechanistic" in employer: employer = "Mechanistic (Consulting)"
-        
-        # 2. Sector (Industry)
-        tax_row = taxonomy_map.get(name, {})
-        industry = tax_row.get("Industry", "Other")
-        category = tax_row.get("Category", "")
-
-        # 3. Toolchain (Tools)
-        tools = []
-        if row.get("Tools"): 
-            tools = [t.strip() for t in row.get("Tools").split(',') if t.strip()]
-
-        # 4. Status (Production Level)
-        # Logic: If Phase 5 or 4 exists > 0, it shipped.
-        phase_row = phase_map.get(name, {})
-        prod_status = "Concept"
-        try:
-            p5 = float(phase_row.get("Phase 5", 0) or 0)
-            p4 = float(phase_row.get("Phase 4", 0) or 0)
-            if p5 > 0: prod_status = "Mass Production"
-            elif p4 > 0: prod_status = "Manufacturing Prep"
-            elif float(phase_row.get("Phase 3", 0) or 0) > 0: prod_status = "Prototyping"
-        except: pass
-
-        # -- SKILLS (BOM) --
-        skill_row = skills_map.get(name, {})
-        bom_skills = []
-        if skill_row:
-            for k, v in skill_row.items():
-                if k not in ["Name", "Project Start", "Project End", "days", "Phase ->", "%", "midpoint Y"]:
-                    try:
-                        if float(v.replace('%','')) > 0: bom_skills.append(k)
-                    except: pass
-
-        # -- ASSET LOGIC --
-        # Physical R2 Convention: Check if R2_STAGING/{slug}/hero.jpg exists
-        hero_image_path = f"../../assets/placeholders/{dummy_files[i % 4]}"
-        hero_comment = ""
-        
-        local_stage_dir = os.path.join("R2_STAGING", slug)
-        # Simple check for standard extensions
-        if os.path.exists(local_stage_dir):
-            for ext in [".jpg", ".png", ".webp"]:
-                if os.path.exists(os.path.join(local_stage_dir, f"hero{ext}")):
-                    hero_image_path = f"{R2_DOMAIN}/{slug}/hero{ext}"
-                    break
-        else:
-            hero_comment = f"# R2 PATH: {R2_DOMAIN}/{slug}/hero.jpg"
-
-        # -- WRITE MDX --
-        # We write DISTINCT fields for filtering, but keep 'tags' for generic search if needed
-        mdx_body = f"""---
-title: {json.dumps(title)}
-slug: "{slug}"
-date: "{row.get('Project Start Date raw', '')}"
-employer: "{employer}"
-industry: "{industry}"
-category: "{category}"
-tools: {json.dumps(tools)}
-production: "{prod_status}"
-tags: {json.dumps(bom_skills)}
-heroImage: "{hero_image_path}" {hero_comment}
-draft: false
-description: "{title} - {industry} project ({prod_status})."
----
-import {{ YouTube }} from '@astro-community/astro-embed-youtube';
-
-## Overview
-**{title}** ({row.get('Title', 'Engineer')}). 
-
-> *Auto-generated placeholder content.*
-
-### Bill of Materials (Skills)
-{', '.join(bom_skills)}
-
-### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-<ModelViewer src="{R2_DOMAIN}/{slug}/model.glb" alt="3D Asset" />
-"""
-        with open(os.path.join(OUTPUT_CONTENT_DIR, f"{slug}.mdx"), "w", encoding="utf-8") as f:
-            f.write(mdx_body)
-        count += 1
-
-    print(f"✅ Refreshed {count} MDX files with structured facets.")
-
-if __name__ == "__main__":
-    process_colors()
-    process_projects()
+    main = read_csv_smart(find_file("Main.csv"))
+    tax = {r.get('Project Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"))}
+    stats = {r['Name']: r for r in read_csv_smart(find_file("Part count.csv") or find_file("Stats.csv"))}
+    phases = {r['Name']: r for r in read_csv_smart(find_file("Phase.csv"))}
+    
+    f_expert = find_file("Expertise.csv")
+    skills_

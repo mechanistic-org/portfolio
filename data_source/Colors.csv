@@ -1,0 +1,30 @@
+Colors,Requirements Analysis,"rgb(229,80,57)",,,Mechanistic,"rgba(0,27,230,0.9)"
+Feasibility Assessment,Feasibility Assessment,"rgb(89,71,0)",,,Hyphen,"rgba(80,229,180,0.9)"
+Concept Validation,Concept Validation,"rgb(64,128,115)",,,,
+Prototyping,Prototyping,"rgb(45,62,89)",,,Noon,"rgba(246,190,21,0.96)"
+High-Level Design,Architecture,"rgb(89,0,83)",,,Avegant,"rgba(111,114,123,0.48)"
+Detailed Design and Engineering,Integration,"rgb(255,102,0)",,,Kaleidescape,"rgba(116,154,190,0.75)"
+Material Selection,"Color, Materials, Finishes","rgb(123,128,64)",,,Digidesign,"rgba(114,36,223,0.87)"
+ID Capture (Industrial Design) Collaboration,ID Capture,"rgb(0,238,255)",,,,
+CAD Modeling,CAD Modeling,"rgb(0,20,235)",,,frogdesign,"rgba(64,186,0,0.73)"
+Structural Analysis and Simulation,Analysis and Simulation,"rgb(255,128,246)",,,Silicon Graphics,"rgba(0,132,132,0.52)"
+Tolerance Analysis,Tolerance Analysis,"rgb(76,31,0)",,,Silicon Graphics,"rgba(69,42,140,0.55)"
+Design for Manufacturing (DFM),Design for Manufacturing,"rgb(229,255,128)",,,EP Technologies,"rgba(0,60,114,0.45)"
+Design for Assembly (DFA),Design for Assembly,"rgb(51,92,102)",,,,
+Risk Assessment and Mitigation,Risk Assessment,"rgb(19,0,140)",,,,
+Prototype Testing and Iteration,Testing and Iteration,"rgb(229,0,122)",,,,
+"Validation Testing (EVT, DVT, PVT)",Validation Testing,"rgb(166,91,41)",,,,
+Thermal Analysis,Thermal Analysis,"rgb(76,191,0)",,,,
+Vibration and Acoustic Testing,Shock & Vibe,"rgb(89,149,179)",,,,
+"Mechanical Testing (e.g., tensile, impact)",Mechanical Testing,"rgb(68,0,255)",,,,
+Failure Mode and Effects Analysis (FMEA),Failure Mode and Effects Analysis,"rgb(89,0,36)",,,,
+Supply Chain Collaboration,Supply Chain Collaboration,"rgb(255,179,128)",,,,
+Tooling Design,Tooling Design,"rgb(26,102,36)",,,,
+Manufacturing Support,Manufacturing Support,"rgb(64,166,255)",,,,
+Quality Control and Inspection,Quality Control and Inspection,"rgb(107,77,153)",,,,
+Cost Analysis and Value Engineering,Cost Analysis and Value Engineering,"rgb(191,96,134)",,,,
+"Documentation (Technical Drawings, Specifications)",Documentation,"rgb(178,143,0)",,,,
+"Regulatory Compliance (CE, FCC, etc.)",Regulatory Compliance,"rgb(51,204,153)",,,,
+Intellectual Property Considerations,"IP, Knowledge Creation","rgb(0,102,255)",,,,
+Sustainability and Environmental Impact,Environmental,"rgb(179,0,191)",,,,
+Post-Launch Support and Continuous Improvement,"Sustaining Engineering, Kaizen","rgb(153,38,54)",,,,

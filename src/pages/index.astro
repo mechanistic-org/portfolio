@@ -6,8 +6,10 @@
 
 import { getCollection } from "astro:content";
 import Layout from "@layouts/BaseLayout.astro";
-import Hero from "@components/hero/HeroSideImage.astro";
+// 👇 FIXED: Capitalized 'Hero' to match your folder structure
+import Hero from "@components/Hero/HeroSideImage.astro";
 import ProjectCard from "@components/projects/ProjectCard.astro";
+// 👇 FIXED: Capitalized 'Button' to match your folder structure
 import Button from "@components/Button/Button.astro";
 
 // 1. Get Projects instead of Blog Posts
@@ -28,7 +30,7 @@ const recentProjects = allProjects
   <section class="site-container py-12 md:py-24">
     <div class="flex items-center justify-between mb-8">
       <h2 class="h2">Recent Field Notes</h2>
-      <Button href="/projects" variant="outline" arrow="right">
+      <Button href="/projects/" variant="outline" arrow="right">
         View Archive
       </Button>
     </div>

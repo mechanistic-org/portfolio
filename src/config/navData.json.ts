@@ -21,15 +21,15 @@ const navConfig: navItem[] = [
 		href: "/projects/",
 	},
 	{
-		text: "App Notes", // Renamed from Blog for engineering vibe
+		text: "App Notes", 
 		href: "/blog/",
 	},
 	{
-		text: "Specs", // Renamed from About/Pages for datasheet vibe
+		text: "Specs", 
 		dropdown: [
 			{
 				text: "About Me",
-				href: "/about/", // Note: You'll need to create this page or alias it
+				href: "/about/", 
 			},
 			{
 				text: "Uses / Gear",

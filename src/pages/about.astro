@@ -1,0 +1,47 @@
+---
+import Layout from "@layouts/BaseLayout.astro";
+import DatasheetTable from "@components/about/DatasheetTable.astro";
+import siteData from "@config/siteData.json";
+
+// Import Tenure Data directly
+import workHistory from "@/data/work_history.json";
+---
+
+<Layout title="About / Specs" description="Technical Specifications for Erik Norris">
+  <section class="site-container py-12 md:py-24">
+    
+    <div class="mx-auto max-w-4xl">
+      <h1 class="h1 mb-6">Technical Specifications</h1>
+      <p class="text-xl text-neutral-400 mb-12">
+        Operating parameters, performance characteristics, and version history.
+      </p>
+
+      <div class="mb-24">
+        <DatasheetTable />
+      </div>
+
+      <div>
+        <h2 class="h2 mb-8">Revision History (Tenure)</h2>
+        <div class="border-l-2 border-neutral-800 pl-8 space-y-12 relative">
+            {workHistory.map((job) => (
+                <div class="relative">
+                    <div class={`absolute -left-[39px] top-2 h-5 w-5 rounded-full border-4 border-neutral-950 ${job.is_consulting ? 'bg-blue-500' : 'bg-primary'}`}></div>
+                    
+                    <div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-2">
+                        <h3 class="text-xl font-bold text-white">{job.company}</h3>
+                        <span class="font-mono text-sm text-neutral-500">{job.start} — {job.end}</span>
+                    </div>
+                    <div class="text-primary font-medium mb-2">{job.title}</div>
+                    <p class="text-neutral-400 text-sm max-w-2xl">
+                        {/* You can map Description here if you add it to ingest_data.py logic later, 
+                            for now we just show the calculated duration if available */}
+                        Duration: {job.days ? Math.round(job.days / 365 * 10) / 10 + " years" : "Active"}
+                    </p>
+                </div>
+            ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>
