@@ -21,15 +21,11 @@ const navConfig: navItem[] = [
 		href: "/projects/",
 	},
 	{
-		text: "App Notes", 
-		href: "/blog/",
-	},
-	{
-		text: "Specs", 
+		text: "Specs",
 		dropdown: [
 			{
 				text: "About Me",
-				href: "/about/", 
+				href: "/about/",
 			},
 			{
 				text: "Uses / Gear",

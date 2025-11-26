@@ -16,43 +16,80 @@ for d in [OUTPUT_CONTENT_DIR, OUTPUT_DATA_DIR, ASSETS_DIR]:
 
 # --- UTILS ---
 def find_file(suffix):
-    """Smartly finds files regardless of prefix."""
+    """Smartly finds files regardless of 'resviz...' prefix."""
     exact = os.path.join(SOURCE_DIR, suffix)
     if os.path.exists(exact): return exact
     pattern = os.path.join(SOURCE_DIR, f"*{suffix}")
     matches = glob.glob(pattern)
-    return matches[0] if matches else None
+    if matches:
+        return max(matches, key=os.path.getmtime)
+    return None
 
-def read_csv_smart(filepath):
-    """Standard reader for clean CSVs."""
-    if not filepath: return []
+def read_csv_smart(filepath, header_trigger="Name"):
+    """
+    Robust Reader: Hunts for the 'header_trigger' string.
+    """
+    if not filepath or not os.path.exists(filepath): 
+        print(f"⚠️  File not found: {filepath}")
+        return []
+    
+    filename = os.path.basename(filepath)
+    
     with open(filepath, 'r', encoding='utf-8-sig') as f:
         lines = [l.strip() for l in f.readlines() if l.strip()]
+    
     if not lines: return []
-    if lines[0].startswith(','): lines[0] = lines[0][1:]
-    return list(csv.DictReader(lines))
+    
+    # Hunt for the header row
+    start_idx = -1
+    for i, line in enumerate(lines):
+        if header_trigger in line:
+            # Extra check to avoid false positives in metadata
+            if "Expertise" in filename and "Project Start" not in line:
+                continue
+            start_idx = i
+            break
+    
+    if start_idx == -1:
+        # Fallback: If trigger fails, try Row 0 (for perfectly clean files)
+        if "Name" in lines[0]:
+             start_idx = 0
+        else:
+             print(f"      ❌ Error: Could not find header '{header_trigger}' in {filename}")
+             return []
+
+    # Clean leading chars
+    if lines[start_idx].startswith(','): lines[start_idx] = lines[start_idx][1:]
+    
+    reader = csv.DictReader(lines[start_idx:])
+    data = []
+    for row in reader:
+        clean_row = {k.strip(): v.strip() for k, v in row.items() if k}
+        if clean_row:
+            data.append(clean_row)
+            
+    print(f"   📖 {filename}: Found header at line {start_idx+1}. Loaded {len(data)} rows.")
+    return data
 
 def extract_expertise_metadata(filepath):
-    """Hunts for 'Phase' and '%' rows anywhere in the file."""
+    """Hunts for 'Phase' and '%' rows."""
     if not filepath: return {}
     with open(filepath, 'r', encoding='utf-8-sig') as f:
         lines = list(csv.reader(f))
         
     header_row = []
-    header_idx = -1
-    for i, row in enumerate(lines):
+    for row in lines:
         if "Name" in row and "Project Start" in row:
             header_row = [c.strip() for c in row]
-            header_idx = i
             break
-            
     if not header_row: return {}
 
     phase_row = []
     weight_row = []
     for row in lines:
-        if "Phase ->" in row: phase_row = row
-        if "%" in row and "Phase" not in row: weight_row = row 
+        row_str = ",".join(row)
+        if "Phase ->" in row_str or "Phase" in row_str: phase_row = row
+        if "%" in row_str and "Phase" not in row_str: weight_row = row 
 
     skill_defs = {}
     ignored = ["Name", "Project Start", "Project End", "days", "midpoint", "✔️", "▲", "midpoint Y"]
@@ -92,14 +129,16 @@ def process_colors():
     print("🎨 Processing Colors...")
     path = find_file("Colors.csv") or find_file("color_etc.csv")
     if not path: return 
-    data = read_csv_smart(path)
+    # Updated Trigger: "Name"
+    data = read_csv_smart(path, "Name")
+    
     color_map = {}
     for row in data:
         keys = list(row.keys())
         if len(keys) > 0:
             name = row[keys[0]]
             for v in row.values():
-                if "rgb" in v:
+                if "rgb" in v or "#" in v:
                     color_map[name] = v
                     break
     with open(os.path.join(OUTPUT_DATA_DIR, "colors.json"), "w") as f:
@@ -109,7 +148,7 @@ def process_specs():
     print("⚙️  Processing Specs...")
     path = find_file("Specs.csv")
     if not path: return
-    data = read_csv_smart(path)
+    data = read_csv_smart(path, "Category")
     clean_specs = []
     for row in data:
         clean_specs.append({
@@ -128,16 +167,26 @@ def process_tenure():
     print("⏳ Processing Tenure...")
     path = find_file("Tenure.csv")
     if not path: return
-    data = read_csv_smart(path)
+    data = read_csv_smart(path, "Employer")
+    
     history = []
+    color_map = {}
+    if os.path.exists(os.path.join(OUTPUT_DATA_DIR, "colors.json")):
+        with open(os.path.join(OUTPUT_DATA_DIR, "colors.json"), "r") as f:
+            color_map = json.load(f)
+
     for row in data:
-        company = row.get("Employer") or row.get("job")
+        company = row.get("Employer")
         if not company: continue
+        
+        color = color_map.get(company, "#10b981")
         history.append({
             "company": company,
             "title": row.get("Title", ""),
             "start": row.get("Start Date") or row.get("start"),
             "end": row.get("End Date") or row.get("end"),
+            "color": color,
+            "description": row.get("Description", ""),
             "is_consulting": "Mechanistic" in company or "Contract" in row.get("Type", "")
         })
     with open(os.path.join(OUTPUT_DATA_DIR, "work_history.json"), "w") as f:
@@ -147,40 +196,57 @@ def process_projects():
     print("🏗️  Processing Projects...")
     ensure_dummy_assets()
     
-    main = read_csv_smart(find_file("Main.csv"))
-    tax = {r.get('Project Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"))}
-    stats = {r['Name']: r for r in read_csv_smart(find_file("Part count.csv") or find_file("Stats.csv"))}
-    phases = {r['Name']: r for r in read_csv_smart(find_file("Phase.csv"))}
+    # 1. Load Files (UPDATED TRIGGERS: "Name")
+    main = read_csv_smart(find_file("Main.csv"), "Name")
+    
+    # Lookup tables updated to look for "Name"
+    tax = {r.get('Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Name")}
+    phases = {r.get('Name'): r for r in read_csv_smart(find_file("Phase.csv"), "Name")}
+    
+    f_stats = find_file("Stats.csv") or find_file("Part count.csv")
+    # Stats often has metadata, so we look for the "Plastic" column to confirm header
+    stats_data = read_csv_smart(f_stats, "Plastic") 
+    stats = {r.get('Name'): r for r in stats_data if r.get('Name')}
     
     f_expert = find_file("Expertise.csv")
-    skills_map = parse_expertise(f_expert) # Use the specialized parser below
+    expert_data = read_csv_smart(f_expert, "Project Start") 
+    project_skills = {r.get('Name'): r for r in expert_data}
+    skill_defs = extract_expertise_metadata(f_expert) 
 
     dummy_files = ["tech-1.jpg", "tech-2.jpg", "blueprint.jpg", "abstract.jpg"]
     all_clients = set()
     count = 0
 
+    print(f"   ... Generating MDX files ...")
+
     for i, row in enumerate(main):
-        name = row.get("Slug Name")
+        # Trigger on "Name"
+        name = row.get("Name")
         if not name: continue
         
         slug = name.lower().strip().replace(' ', '-').replace('/', '-')
         title = row.get("Descriptive Name") or name
+        
         employer = row.get("Employer", "")
         if "Mechanistic" in employer: employer = "Mechanistic (Consulting)"
+        
         clients = [c.strip() for c in row.get("Client", "").split('/') if c.strip()]
         for c in clients: all_clients.add(c)
 
+        # Facets
         t_row = tax.get(name, {})
         industry = t_row.get("Industry", "Other")
         category = t_row.get("Category", "")
         tools = [t.strip() for t in row.get("Tools", "").split(',') if t.strip()]
 
+        # Status
         p_row = phases.get(name, {})
         prod_status = "Concept"
         if float(p_row.get("Production", p_row.get("Phase 5", 0)) or 0) > 0: prod_status = "Mass Production"
         elif float(p_row.get("Validation", p_row.get("Phase 4", 0)) or 0) > 0: prod_status = "Manufacturing Prep"
         elif float(p_row.get("Development", p_row.get("Phase 3", 0)) or 0) > 0: prod_status = "Prototyping"
 
+        # Stats
         s_row = stats.get(name, {})
         part_counts = {
             "plastic": int(float(s_row.get("Plastic", 0) or 0)),
@@ -188,6 +254,23 @@ def process_projects():
             "pcb": int(float(s_row.get("PCB", 0) or 0))
         }
 
+        # Skills
+        skill_row = project_skills.get(name, {})
+        weighted_skills = []
+        for skill_name, val_str in skill_row.items():
+            if skill_name in skill_defs:
+                try:
+                    val = float(val_str.replace('%','').replace(',','').strip())
+                    if val > 0:
+                        weight = float(skill_defs[skill_name].get("Weight", 1))
+                        weighted_skills.append((skill_name, val * weight))
+                except: pass
+        
+        weighted_skills.sort(key=lambda x: x[1], reverse=True)
+        bom_skills = [s[0] for s in weighted_skills]
+        skill_data = [{"name": s[0], "value": round(s[1], 1)} for s in weighted_skills[:6]]
+
+        # Assets
         hero_img = f"/assets/placeholders/{dummy_files[i % 4]}"
         comment = ""
         local_path = os.path.join("R2_STAGING", slug)
@@ -199,9 +282,6 @@ def process_projects():
         else:
              comment = f"# R2: {R2_DOMAIN}/{slug}/hero.jpg"
 
-        # Use the intelligently extracted skills list
-        bom_skills = skills_map.get(name, [])
-
         mdx = f"""---
 title: {json.dumps(title)}
 slug: "{slug}"
@@ -212,7 +292,8 @@ industry: "{industry}"
 category: "{category}"
 tools: {json.dumps(tools)}
 production: "{prod_status}"
-tags: {json.dumps(bom_skills[:8])}
+tags: {json.dumps(bom_skills)}
+skillData: {json.dumps(skill_data)}
 stats: {json.dumps(part_counts)}
 heroImage: "{hero_img}" {comment}
 draft: false
@@ -245,41 +326,8 @@ import {{ YouTube }} from '@astro-community/astro-embed-youtube';
 
     print(f"✅ Generated {count} MDX files.")
     
-    sorted_clients = sorted(list(all_clients))
     with open(os.path.join(OUTPUT_DATA_DIR, "clients.json"), "w") as f:
-        json.dump(sorted_clients, f, indent=2)
-
-def parse_expertise(filepath):
-    """Extracts Skills and Weights from Expertise.csv."""
-    if not filepath: return {}
-    with open(filepath, 'r', encoding='utf-8-sig') as f:
-        lines = list(csv.reader(f))
-
-    header_idx = next((i for i, r in enumerate(lines) if "Name" in r and "Project Start" in r), -1)
-    if header_idx == -1: return {}
-
-    header, weights = lines[header_idx], lines[header_idx-1]
-    skill_weights = {h.strip(): float(w.replace('%','').strip() or 1) for h, w in zip(header, weights) if "%" in w}
-
-    skills_map = {}
-    for row in lines[header_idx+1:]:
-        if len(row) < len(header): continue
-        name = row[header.index("Name")].strip()
-        if not name: continue
-        
-        proj_skills = []
-        for i, val in enumerate(row):
-            skill = header[i].strip()
-            if skill in skill_weights:
-                try:
-                    intensity = float(val.replace('%','').strip())
-                    if intensity > 0:
-                        proj_skills.append((skill, intensity * skill_weights[skill]))
-                except: pass
-        
-        proj_skills.sort(key=lambda x: x[1], reverse=True)
-        skills_map[name] = [s[0] for s in proj_skills]
-    return skills_map
+        json.dump(sorted(list(all_clients)), f, indent=2)
 
 if __name__ == "__main__":
     process_colors()

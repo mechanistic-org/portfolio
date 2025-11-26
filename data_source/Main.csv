@@ -1,90 +1,90 @@
-#,Slug Name,Descriptive Name,Employer,Client,Title,Codename,Tools,Project Start Date raw,Y start,M start,D start,Project End Date raw,Y end,M end ,D end,Days,Biz Days,midpoint,midpoint Y,1.25
-89,dreamjob,,#awesomejob,,,,,11/23/2025,2025,11,23,12/31/2040,2040,12,31,5517,3941,6/12/2033,2033,6896.25
-88,Freelance,,Mechanistic,,Senior Mechanical Design Engineer,,,9/1/2022,2022,9,1,11/23/2025,2025,11,23,1179,842,4/12/2024,2024,1473.75
-87,Makeline,,Hyphen,,Staff Mechanical Engineer,,Onshape,5/1/2021,2021,5,1,8/24/2022,2022,8,24,480,343,12/27/2021,2021,600
-86,Dispensers,,Hyphen,,Staff Mechanical Engineer,Gen 2,Onshape,12/1/2021,2021,12,1,8/24/2022,2022,8,24,266,191,4/13/2022,2022,332.5
-85,Backsplash,,Hyphen,,Staff Mechanical Engineer,Gen 1,Onshape,7/1/2021,2021,7,1,12/31/2021,2021,12,31,183,132,9/30/2021,2021,228.75
-84,Portion Cup,,Hyphen,,Staff Mechanical Engineer,Gen 1,Onshape,5/1/2021,2021,5,1,8/15/2021,2021,8,15,106,75,6/23/2021,2021,132.5
-83,Pet Scale,,Mechanistic,Synapse/Purina/Tailio,Senior Mechanical Engineer,Garfield,SolidWorks,2/1/2019,2019,2,1,3/15/2019,2019,3,15,42,31,2/22/2019,2019,52.5
-82,electronic battery lock,,Mechanistic,Synapse/Lyft/Motivate,Senior Mechanical Engineer,halfdome,SolidWorks,1/1/2019,2019,1,1,4/15/2019,2019,4,15,104,75,2/22/2019,2019,130
-81,IOT module,,Mechanistic,Synapse/Lyft/Motivate,Senior Mechanical Engineer,Sonoma,SolidWorks,11/1/2018,2018,11,1,2/1/2019,2019,2,1,92,67,12/17/2018,2018,115
-80,bay wheels,,Mechanistic,Synapse/Lyft/Motivate,Senior Mechanical Engineer,watson,SolidWorks,11/1/2018,2018,11,1,5/1/2019,2019,5,1,181,130,1/30/2019,2019,226.25
-79,Switches,On/Off Switches,Noon,,Senior Mechanical Engineer,Sativa?,"Creo, Solidworks",7/1/2017,2017,7,1,3/1/2018,2018,3,1,243,174,10/30/2017,2017,303.75
-78,Extension Switches,,Noon,,Senior Mechanical Engineer,Elvis?,"Creo, Solidworks",3/1/2017,2017,3,1,2/1/2018,2018,2,1,337,242,8/16/2017,2017,421.25
-77,Room Director,,Noon,,Senior Mechanical Engineer,Sativa?,"Creo, Solidworks",8/1/2017,2017,8,1,1/1/2018,2018,1,1,153,110,10/16/2017,2017,191.25
-76,Wall Plates,,Noon,,Senior Mechanical Engineer,Waldo,"Creo, Solidworks",3/1/2017,2017,3,1,2/1/2018,2018,2,1,337,242,8/16/2017,2017,421.25
-75,Base,,Noon,,Senior Mechanical Engineer,Bazooka,"Creo, Solidworks",3/17/2017,2017,3,17,5/1/2018,2018,5,1,410,293,10/8/2017,2017,512.5
-74,Glyph 2,,Avegant,,Senior Mechanical Engineer,,Solidworks,10/17/2015,2015,10,17,3/1/2017,2017,3,1,501,358,6/23/2016,2016,626.25
-73,Glyph,,Avegant,,Senior Mechanical Engineer,Vulcan,Solidworks,6/1/2015,2015,6,1,3/1/2017,2017,3,1,639,458,4/15/2016,2016,798.75
-72,BFD,,Mechanistic,,Senior Mechanical Engineer,,Onshape,12/1/2016,2016,12,1,3/14/2024,2024,3,14,2660,1901,7/23/2020,2020,3325
-71,Strato,,Kaleidescape,,Senior Mechanical Engineer,sundance,Creo,6/1/2014,2014,6,1,2/1/2015,2015,2,1,245,175,10/1/2014,2014,306.25
-70,Cinema One,,Kaleidescape,,Senior Mechanical Design Engineer,macduff,Creo,8/1/2012,2012,8,1,9/1/2013,2013,9,1,396,283,2/15/2013,2013,495
-69,M700,KVAULT-M700 Disc Vault,Kaleidescape,,Senior Mechanical Design Engineer,vesta,ProEngineer,8/1/2010,2010,8,1,7/1/2011,2011,7,1,334,240,1/15/2011,2011,417.5
-68,DV700,KVAULT-DV700 Disc Vault,Kaleidescape,,Senior Mechanical Design Engineer,vault,ProEngineer,8/2/2010,2010,8,2,7/2/2011,2011,7,2,334,240,1/16/2011,2011,417.5
-67,Disc Cartridges,,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,6/1/2010,2010,6,1,12/1/2010,2010,12,1,183,132,8/31/2010,2010,228.75
-66,K-Remote,,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,4/20/2009,2009,4,20,8/1/2009,2009,8,1,103,75,6/10/2009,2009,128.75
-65,Weemote,,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,6/1/2010,2010,6,1,8/1/2010,2010,8,1,61,44,7/1/2010,2010,76.25
-64,M500,KPLAYER-M500 Player,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,4/1/2010,2010,4,1,7/1/2010,2010,7,1,91,66,5/16/2010,2010,113.75
-63,M300,KPLAYER-M300 Movie Player,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,3/1/2010,2010,3,1,5/1/2010,2010,5,1,61,45,3/31/2010,2010,76.25
-62,KSERVER-1500,KSERVER-1550 1U+ Server,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,3/2/2010,2010,3,2,5/2/2010,2010,5,2,61,44,4/1/2010,2010,76.25
-61,KVAULT-10,KVAULT-10 Modular Disc Vault,Kaleidescape,,Senior Mechanical Design Engineer,Juno,ProEngineer,9/1/2010,2010,9,1,6/1/2011,2011,6,1,273,196,1/15/2011,2011,341.25
-60,Jewel,,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,6/1/2009,2009,6,1,4/1/2010,2010,4,1,304,219,10/31/2009,2009,380
-59,KSYSTEM-120,KSYSTEM-120 Mini System,Kaleidescape,,Senior Mechanical Design Engineer,orpheus,ProEngineer,1/1/2009,2009,1,1,6/1/2009,2009,6,1,151,108,3/17/2009,2009,188.75
-58,KSERVER-5000,KSERVER-5000 3U Server,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,6/1/2008,2008,6,1,3/1/2009,2009,3,1,273,195,10/15/2008,2008,341.25
-57,Speed Reader,,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,5/1/2008,2008,5,1,2/1/2009,2009,2,1,276,197,9/16/2008,2008,345
-56,KSERVER-1500,KSERVER-1500 1U Server,Kaleidescape,,Senior Mechanical Design Engineer,k2 (sherpa?),ProEngineer,5/1/2008,2008,5,1,8/1/2008,2008,8,1,92,67,6/16/2008,2008,115
-55,KPLAYER-300,KPLAYER-300 Mini Player,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,3/1/2008,2008,3,1,1/1/2009,2009,1,1,306,219,8/1/2008,2008,382.5
-54,KPLAYER-6000,KPLAYER-6000 1080p Player,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,3/2/2008,2008,3,2,1/2/2009,2009,1,2,306,220,8/2/2008,2008,382.5
-53,KPLAYER-5000,KPLAYER-5000 Movie Player 2,Kaleidescape,,Senior Mechanical Design Engineer,apollo?,ProEngineer,3/1/2008,2008,3,1,12/1/2008,2008,12,1,275,196,7/16/2008,2008,343.75
-52,KPLAYER-2500,KPLAYER-2500 1U Player,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,3/2/2008,2008,3,2,12/2/2008,2008,12,2,275,197,7/17/2008,2008,343.75
-51,KSERVER-2500,KSERVER-2500 5U Server,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,3/3/2008,2008,3,3,12/3/2008,2008,12,3,275,198,7/18/2008,2008,343.75
-50,Mbox 2 Micro,,Digidesign,,Senior Mechanical Designer,,ProEngineer,10/1/2007,2007,10,1,4/1/2008,2008,4,1,183,132,12/31/2007,2007,228.75
-49,003 Rack,,Digidesign,,Senior Mechanical Designer,,ProEngineer,5/1/2007,2007,5,1,10/1/2007,2007,10,1,153,110,7/16/2007,2007,191.25
-48,Mbox 2 Mini,,Digidesign,,Senior Mechanical Designer,,ProEngineer,2/1/2007,2007,2,1,5/1/2007,2007,5,1,89,64,3/17/2007,2007,111.25
-47,Mbox 2 Pro,,Digidesign,,Senior Mechanical Designer,,ProEngineer,6/1/2006,2006,6,1,11/1/2006,2006,11,1,153,110,8/16/2006,2006,191.25
-46,003,,Digidesign,,Senior Mechanical Designer,,ProEngineer,6/1/2006,2006,6,1,2/1/2007,2007,2,1,245,176,10/1/2006,2006,306.25
-45,Control 24,,Digidesign,,Senior Mechanical Designer,Curtis,ProEngineer,8/1/2006,2006,8,1,7/1/2007,2007,7,1,334,239,1/15/2007,2007,417.5
-44,Mbox 2,,Digidesign,,Senior Mechanical Designer,,ProEngineer,9/1/2005,2005,9,1,11/1/2005,2005,11,1,61,44,10/1/2005,2005,76.25
-43,Profile,,Digidesign,,Senior Mechanical Designer,Capaldi / Lux?,ProEngineer,2/1/2005,2005,2,1,7/1/2005,2005,7,1,150,109,4/17/2005,2005,187.5
-42,D-Show,,Digidesign,,Senior Mechanical Designer,,ProEngineer,2/1/2005,2005,2,1,7/1/2005,2005,7,1,150,109,4/17/2005,2005,187.5
-41,D-Control,,Digidesign,,Senior Mechanical Designer,PC II / Buckley,ProEngineer,8/1/2004,2004,8,1,3/1/2005,2005,3,1,212,152,11/15/2004,2004,265
-40,D-Command,,Digidesign,,Senior Mechanical Designer,,ProEngineer,4/1/2004,2004,4,1,9/1/2004,2004,9,1,153,110,6/16/2004,2004,191.25
-39,Pro Control Jr.,,Digidesign,,Senior Mechanical Designer,Danko,ProEngineer,6/1/2003,2003,6,1,4/1/2004,2004,4,1,305,219,10/31/2003,2003,381.25
-38,002 Rack,,Digidesign,,Senior Mechanical Designer,,ProEngineer,5/1/2003,2003,5,1,10/1/2003,2003,10,1,153,110,7/16/2003,2003,191.25
-37,Mbox,,Digidesign,,Senior Mechanical Designer,,ProEngineer,3/1/2003,2003,3,1,10/1/2003,2003,10,1,214,153,6/16/2003,2003,267.5
-36,Xbox,,Mechanistic,"Microsoft, UltimateTV",Senior Mechanical Designer,,ProEngineer,9/1/2002,2002,9,1,12/1/2002,2002,12,1,91,65,10/16/2002,2002,113.75
-35,Receiver 5,,Mechanistic,"Microsoft, UltimateTV",Senior Mechanical Designer,Bart,ProEngineer,6/1/2002,2002,6,1,8/1/2002,2002,8,1,61,44,7/1/2002,2002,76.25
-34,Receiver 4,,Mechanistic,"Microsoft, UltimateTV",Senior Mechanical Designer,Zeus,ProEngineer,1/1/2002,2002,1,1,5/1/2002,2002,5,1,120,87,3/2/2002,2002,150
-33,Receiver 3,,Mechanistic,"Microsoft, UltimateTV",Senior Mechanical Designer,minimerc,ProEngineer,10/1/2001,2001,10,1,12/1/2001,2001,12,1,61,45,10/31/2001,2001,76.25
-32,Receiver 2,,Mechanistic,"Microsoft, UltimateTV",Senior Mechanical Designer,Elmer,ProEngineer,9/1/2001,2001,9,1,11/1/2001,2001,11,1,61,44,10/1/2001,2001,76.25
-31,Mercury LC,,Mechanistic,"Microsoft, UltimateTV",Senior Mechanical Designer,,ProEngineer,7/1/2001,2001,7,1,1/1/2002,2002,1,1,184,132,10/1/2001,2001,230
-30,usb box,,Mechanistic,UltimateTV,Senior Mechanical Designer,,ProEngineer,6/1/2001,2001,6,1,8/1/2001,2001,8,1,61,44,7/1/2001,2001,76.25
-29,Remotes,,Mechanistic,UltimateTV,Senior Mechanical Designer,Cambria,ProEngineer,5/1/2001,2001,5,1,8/1/2001,2001,8,1,92,67,6/16/2001,2001,115
-28,Receiver 1,,Mechanistic,UltimateTV,Senior Mechanical Designer,Galaxy,ProEngineer,4/1/2001,2001,4,1,11/1/2001,2001,11,1,214,154,7/17/2001,2001,267.5
-27,Node,,Mechanistic,UltimateTV,Senior Mechanical Designer,minime,ProEngineer,12/1/2000,2000,12,1,1/1/2001,2001,1,1,31,22,12/16/2000,2000,38.75
-26,Media Nodes,,Mechanistic,UltimateTV,Senior Mechanical Designer,Pluto  ,ProEngineer,11/1/2000,2000,11,1,4/1/2001,2001,4,1,151,108,1/15/2001,2001,188.75
-25,MP6000 MP3 Player,,Mechanistic,Motorola,Senior Mechanical Designer,,ProEngineer,7/1/2000,2000,7,1,11/1/2000,2000,11,1,123,88,8/31/2000,2000,153.75
-24,Keyboard,,Mechanistic,WebTV,Senior Mechanical Designer,Cortez,ProEngineer,5/1/2000,2000,5,1,7/1/2000,2000,7,1,61,45,5/31/2000,2000,76.25
-23,LapTV,,Mechanistic,WebTV,Senior Mechanical Designer,Cortez,ProEngineer,4/1/2000,2000,4,1,6/1/2000,2000,6,1,61,44,5/1/2000,2000,76.25
-22,Remote,,Mechanistic,WebTV,Senior Mechanical Designer,,ProEngineer,4/1/2000,2000,4,1,5/1/2000,2000,5,1,30,21,4/16/2000,2000,37.5
-21,Netscreen-500,,Mechanistic,D2M,Senior Mechanical Designer,,ProEngineer,2/1/2000,2000,2,1,4/1/2000,2000,4,1,60,44,3/2/2000,2000,75
-20,320 540,,Mechanistic,Function,Senior Mechanical Designer,,ProEngineer,8/1/1998,1998,8,1,9/1/1998,1998,9,1,31,22,8/16/1998,1998,38.75
-19,HP Jornada,,Mechanistic,Fitch,Senior Mechanical Designer,kiwi,ProEngineer,6/1/1998,1998,6,1,7/1/1998,1998,7,1,30,23,6/16/1998,1998,37.5
-18,DVDO Player,,frogdesign,,Mechanical Designer,,ProEngineer,3/1/1998,1998,3,1,5/1/1998,1998,5,1,61,45,3/31/1998,1998,76.25
-17,Vadem Clio,,frogdesign,,Mechanical Designer,,ProEngineer,10/1/1997,1997,10,1,11/1/1997,1997,11,1,31,23,10/16/1997,1997,38.75
-16,KaVo Dental Unit 2,,frogdesign,,Mechanical Designer,X-Unit,ProEngineer,7/1/1997,1997,7,1,12/1/1997,1997,12,1,153,110,9/15/1997,1997,191.25
-15,Acer Phone,,frogdesign,,Mechanical Designer,,ProEngineer,7/1/1997,1997,7,1,8/1/1997,1997,8,1,31,24,7/16/1997,1997,38.75
-14,KaVo Dental Unit 1,,Mechanistic,frogdesign,Mechanical Designer,Edeca,ProEngineer,7/1/1997,1997,7,1,10/1/1997,1997,10,1,92,67,8/16/1997,1997,115
-13,Acer subwoofer,,Mechanistic,frogdesign,Mechanical Designer,Sunny,ProEngineer,6/1/1997,1997,6,1,8/1/1997,1997,8,1,61,45,7/1/1997,1997,76.25
-12,Newscorp set-top box,,Mechanistic,frogdesign,Mechanical Designer,concave satbox,ProEngineer,2/1/1997,1997,2,1,10/1/1997,1997,10,1,242,173,6/2/1997,1997,302.5
-11,Packard Bell Convertible,,Mechanistic,frogdesign,Mechanical Designer,,ProEngineer,2/1/1996,1996,2,1,3/1/1996,1996,3,1,29,22,2/15/1996,1996,36.25
-10,Acer Aspire,,Mechanistic,frogdesign,Mechanical Designer,,ProEngineer,2/1/1996,1996,2,1,5/1/1996,1996,5,1,90,65,3/17/1996,1996,112.5
-9,Fissler BBQ,,Mechanistic,frogdesign,Mechanical Designer,,ProEngineer,5/1/1995,1995,5,1,1/1/1996,1996,1,1,245,176,8/31/1995,1995,306.25
-8,Sunbeam window toaster,,Mechanistic,frogdesign,Mechanical Designer,,ProEngineer,1/1/1995,1995,1,1,3/1/1995,1995,3,1,59,43,1/30/1995,1995,73.75
-7,Frantic Frames,,Mechanistic,,Mechanical Designer,,ProEngineer,4/1/1992,1992,4,1,3/1/1993,1993,3,1,334,239,9/15/1992,1992,417.5
-6,Indy,,Silicon Graphics,,Technician IV,,ProEngineer,3/1/1992,1992,3,1,1/1/1993,1993,1,1,306,220,8/1/1992,1992,382.5
-5,Indigo II,,Silicon Graphics,,Technician IV,,ProEngineer,4/1/1991,1991,4,1,10/1/1992,1992,10,1,549,394,12/31/1991,1991,686.25
-4,Indigo,,Silicon Graphics,,Technician IV,,ProEngineer,11/1/1989,1989,11,1,6/1/1991,1991,6,1,577,413,8/16/1990,1990,721.25
-3,Iris File,,Silicon Graphics,,Technician IV,,ProEngineer,2/1/1990,1990,2,1,10/1/1990,1990,10,1,242,173,6/2/1990,1990,302.5
-2,Personal IRIS,"Personal IRIS 4D 20, 25, 30, 35",Silicon Graphics,,Technician IV,,ProEngineer,7/1/1989,1989,7,1,11/1/1991,1991,11,1,853,610,8/31/1990,1990,1066.25
-1,EPT-1000,EPT-1000 Cardiac Ablation System,EP Technologies,,Production Supervisor,,AutoCad,1/1/1987,1987,1,1,6/1/1989,1989,6,1,882,631,3/17/1988,1988,1102.5
+Name,Description,Employer,Client,Title,Codename,Tools,Project Start Date raw,Y start,M start,D start,Project End Date raw,Y end,M end ,D end,Days,Biz Days,midpoint,midpoint Y,1.25
+dreamjob,,awesomejob,,,,,11/23/2025,2025,11,23,12/31/2040,2040,12,31,5517,3941,6/12/2033,2033,6896.25
+Freelance,,Mechanistic,,Senior Mechanical Design Engineer,,,9/1/2022,2022,9,1,11/23/2025,2025,11,23,1179,842,4/12/2024,2024,1473.75
+Makeline,,Hyphen,,Staff Mechanical Engineer,,Onshape,5/1/2021,2021,5,1,8/24/2022,2022,8,24,480,343,12/27/2021,2021,600
+Dispensers,,Hyphen,,Staff Mechanical Engineer,Gen 2,Onshape,12/1/2021,2021,12,1,8/24/2022,2022,8,24,266,191,4/13/2022,2022,332.5
+Backsplash,,Hyphen,,Staff Mechanical Engineer,Gen 1,Onshape,7/1/2021,2021,7,1,12/31/2021,2021,12,31,183,132,9/30/2021,2021,228.75
+Portion Cup,,Hyphen,,Staff Mechanical Engineer,Gen 1,Onshape,5/1/2021,2021,5,1,8/15/2021,2021,8,15,106,75,6/23/2021,2021,132.5
+Pet Scale,,Mechanistic,Synapse/Purina/Tailio,Senior Mechanical Engineer,Garfield,SolidWorks,2/1/2019,2019,2,1,3/15/2019,2019,3,15,42,31,2/22/2019,2019,52.5
+electronic battery lock,,Mechanistic,Synapse/Lyft/Motivate,Senior Mechanical Engineer,halfdome,SolidWorks,1/1/2019,2019,1,1,4/15/2019,2019,4,15,104,75,2/22/2019,2019,130
+IOT module,,Mechanistic,Synapse/Lyft/Motivate,Senior Mechanical Engineer,Sonoma,SolidWorks,11/1/2018,2018,11,1,2/1/2019,2019,2,1,92,67,12/17/2018,2018,115
+bay wheels,,Mechanistic,Synapse/Lyft/Motivate,Senior Mechanical Engineer,watson,SolidWorks,11/1/2018,2018,11,1,5/1/2019,2019,5,1,181,130,1/30/2019,2019,226.25
+Switches,On/Off Switches,Noon,,Senior Mechanical Engineer,Sativa?,"Creo, Solidworks",7/1/2017,2017,7,1,3/1/2018,2018,3,1,243,174,10/30/2017,2017,303.75
+Extension Switches,,Noon,,Senior Mechanical Engineer,Elvis?,"Creo, Solidworks",3/1/2017,2017,3,1,2/1/2018,2018,2,1,337,242,8/16/2017,2017,421.25
+Room Director,,Noon,,Senior Mechanical Engineer,Sativa?,"Creo, Solidworks",8/1/2017,2017,8,1,1/1/2018,2018,1,1,153,110,10/16/2017,2017,191.25
+Wall Plates,,Noon,,Senior Mechanical Engineer,Waldo,"Creo, Solidworks",3/1/2017,2017,3,1,2/1/2018,2018,2,1,337,242,8/16/2017,2017,421.25
+Base,,Noon,,Senior Mechanical Engineer,Bazooka,"Creo, Solidworks",3/17/2017,2017,3,17,5/1/2018,2018,5,1,410,293,10/8/2017,2017,512.5
+Glyph 2,,Avegant,,Senior Mechanical Engineer,,Solidworks,10/17/2015,2015,10,17,3/1/2017,2017,3,1,501,358,6/23/2016,2016,626.25
+Glyph,,Avegant,,Senior Mechanical Engineer,Vulcan,Solidworks,6/1/2015,2015,6,1,3/1/2017,2017,3,1,639,458,4/15/2016,2016,798.75
+BFD,,Mechanistic,,Senior Mechanical Engineer,,Onshape,12/1/2016,2016,12,1,3/14/2024,2024,3,14,2660,1901,7/23/2020,2020,3325
+Strato,,Kaleidescape,,Senior Mechanical Engineer,sundance,Creo,6/1/2014,2014,6,1,2/1/2015,2015,2,1,245,175,10/1/2014,2014,306.25
+Cinema One,,Kaleidescape,,Senior Mechanical Design Engineer,macduff,Creo,8/1/2012,2012,8,1,9/1/2013,2013,9,1,396,283,2/15/2013,2013,495
+M700,KVAULT-M700 Disc Vault,Kaleidescape,,Senior Mechanical Design Engineer,vesta,ProEngineer,8/1/2010,2010,8,1,7/1/2011,2011,7,1,334,240,1/15/2011,2011,417.5
+DV700,KVAULT-DV700 Disc Vault,Kaleidescape,,Senior Mechanical Design Engineer,vault,ProEngineer,8/2/2010,2010,8,2,7/2/2011,2011,7,2,334,240,1/16/2011,2011,417.5
+Disc Cartridges,,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,6/1/2010,2010,6,1,12/1/2010,2010,12,1,183,132,8/31/2010,2010,228.75
+K-Remote,,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,4/20/2009,2009,4,20,8/1/2009,2009,8,1,103,75,6/10/2009,2009,128.75
+Weemote,,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,6/1/2010,2010,6,1,8/1/2010,2010,8,1,61,44,7/1/2010,2010,76.25
+M500,KPLAYER-M500 Player,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,4/1/2010,2010,4,1,7/1/2010,2010,7,1,91,66,5/16/2010,2010,113.75
+M300,KPLAYER-M300 Movie Player,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,3/1/2010,2010,3,1,5/1/2010,2010,5,1,61,45,3/31/2010,2010,76.25
+KSERVER-1500,KSERVER-1550 1U+ Server,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,3/2/2010,2010,3,2,5/2/2010,2010,5,2,61,44,4/1/2010,2010,76.25
+KVAULT-10,KVAULT-10 Modular Disc Vault,Kaleidescape,,Senior Mechanical Design Engineer,Juno,ProEngineer,9/1/2010,2010,9,1,6/1/2011,2011,6,1,273,196,1/15/2011,2011,341.25
+Jewel,,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,6/1/2009,2009,6,1,4/1/2010,2010,4,1,304,219,10/31/2009,2009,380
+KSYSTEM-120,KSYSTEM-120 Mini System,Kaleidescape,,Senior Mechanical Design Engineer,orpheus,ProEngineer,1/1/2009,2009,1,1,6/1/2009,2009,6,1,151,108,3/17/2009,2009,188.75
+KSERVER-5000,KSERVER-5000 3U Server,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,6/1/2008,2008,6,1,3/1/2009,2009,3,1,273,195,10/15/2008,2008,341.25
+Speed Reader,,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,5/1/2008,2008,5,1,2/1/2009,2009,2,1,276,197,9/16/2008,2008,345
+KSERVER-1500,KSERVER-1500 1U Server,Kaleidescape,,Senior Mechanical Design Engineer,k2 (sherpa?),ProEngineer,5/1/2008,2008,5,1,8/1/2008,2008,8,1,92,67,6/16/2008,2008,115
+KPLAYER-300,KPLAYER-300 Mini Player,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,3/1/2008,2008,3,1,1/1/2009,2009,1,1,306,219,8/1/2008,2008,382.5
+KPLAYER-6000,KPLAYER-6000 1080p Player,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,3/2/2008,2008,3,2,1/2/2009,2009,1,2,306,220,8/2/2008,2008,382.5
+KPLAYER-5000,KPLAYER-5000 Movie Player 2,Kaleidescape,,Senior Mechanical Design Engineer,apollo?,ProEngineer,3/1/2008,2008,3,1,12/1/2008,2008,12,1,275,196,7/16/2008,2008,343.75
+KPLAYER-2500,KPLAYER-2500 1U Player,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,3/2/2008,2008,3,2,12/2/2008,2008,12,2,275,197,7/17/2008,2008,343.75
+KSERVER-2500,KSERVER-2500 5U Server,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,3/3/2008,2008,3,3,12/3/2008,2008,12,3,275,198,7/18/2008,2008,343.75
+Mbox 2 Micro,,Digidesign,,Senior Mechanical Designer,,ProEngineer,10/1/2007,2007,10,1,4/1/2008,2008,4,1,183,132,12/31/2007,2007,228.75
+003 Rack,,Digidesign,,Senior Mechanical Designer,,ProEngineer,5/1/2007,2007,5,1,10/1/2007,2007,10,1,153,110,7/16/2007,2007,191.25
+Mbox 2 Mini,,Digidesign,,Senior Mechanical Designer,,ProEngineer,2/1/2007,2007,2,1,5/1/2007,2007,5,1,89,64,3/17/2007,2007,111.25
+Mbox 2 Pro,,Digidesign,,Senior Mechanical Designer,,ProEngineer,6/1/2006,2006,6,1,11/1/2006,2006,11,1,153,110,8/16/2006,2006,191.25
+003,,Digidesign,,Senior Mechanical Designer,,ProEngineer,6/1/2006,2006,6,1,2/1/2007,2007,2,1,245,176,10/1/2006,2006,306.25
+Control 24,,Digidesign,,Senior Mechanical Designer,Curtis,ProEngineer,8/1/2006,2006,8,1,7/1/2007,2007,7,1,334,239,1/15/2007,2007,417.5
+Mbox 2,,Digidesign,,Senior Mechanical Designer,,ProEngineer,9/1/2005,2005,9,1,11/1/2005,2005,11,1,61,44,10/1/2005,2005,76.25
+Profile,,Digidesign,,Senior Mechanical Designer,Capaldi / Lux?,ProEngineer,2/1/2005,2005,2,1,7/1/2005,2005,7,1,150,109,4/17/2005,2005,187.5
+D-Show,,Digidesign,,Senior Mechanical Designer,,ProEngineer,2/1/2005,2005,2,1,7/1/2005,2005,7,1,150,109,4/17/2005,2005,187.5
+D-Control,,Digidesign,,Senior Mechanical Designer,PC II / Buckley,ProEngineer,8/1/2004,2004,8,1,3/1/2005,2005,3,1,212,152,11/15/2004,2004,265
+D-Command,,Digidesign,,Senior Mechanical Designer,,ProEngineer,4/1/2004,2004,4,1,9/1/2004,2004,9,1,153,110,6/16/2004,2004,191.25
+Pro Control Jr.,,Digidesign,,Senior Mechanical Designer,Danko,ProEngineer,6/1/2003,2003,6,1,4/1/2004,2004,4,1,305,219,10/31/2003,2003,381.25
+002 Rack,,Digidesign,,Senior Mechanical Designer,,ProEngineer,5/1/2003,2003,5,1,10/1/2003,2003,10,1,153,110,7/16/2003,2003,191.25
+Mbox,,Digidesign,,Senior Mechanical Designer,,ProEngineer,3/1/2003,2003,3,1,10/1/2003,2003,10,1,214,153,6/16/2003,2003,267.5
+Xbox,,Mechanistic,"Microsoft, UltimateTV",Senior Mechanical Designer,,ProEngineer,9/1/2002,2002,9,1,12/1/2002,2002,12,1,91,65,10/16/2002,2002,113.75
+Receiver 5,,Mechanistic,"Microsoft, UltimateTV",Senior Mechanical Designer,Bart,ProEngineer,6/1/2002,2002,6,1,8/1/2002,2002,8,1,61,44,7/1/2002,2002,76.25
+Receiver 4,,Mechanistic,"Microsoft, UltimateTV",Senior Mechanical Designer,Zeus,ProEngineer,1/1/2002,2002,1,1,5/1/2002,2002,5,1,120,87,3/2/2002,2002,150
+Receiver 3,,Mechanistic,"Microsoft, UltimateTV",Senior Mechanical Designer,minimerc,ProEngineer,10/1/2001,2001,10,1,12/1/2001,2001,12,1,61,45,10/31/2001,2001,76.25
+Receiver 2,,Mechanistic,"Microsoft, UltimateTV",Senior Mechanical Designer,Elmer,ProEngineer,9/1/2001,2001,9,1,11/1/2001,2001,11,1,61,44,10/1/2001,2001,76.25
+Mercury LC,,Mechanistic,"Microsoft, UltimateTV",Senior Mechanical Designer,,ProEngineer,7/1/2001,2001,7,1,1/1/2002,2002,1,1,184,132,10/1/2001,2001,230
+usb box,,Mechanistic,UltimateTV,Senior Mechanical Designer,,ProEngineer,6/1/2001,2001,6,1,8/1/2001,2001,8,1,61,44,7/1/2001,2001,76.25
+Remotes,,Mechanistic,UltimateTV,Senior Mechanical Designer,Cambria,ProEngineer,5/1/2001,2001,5,1,8/1/2001,2001,8,1,92,67,6/16/2001,2001,115
+Receiver 1,,Mechanistic,UltimateTV,Senior Mechanical Designer,Galaxy,ProEngineer,4/1/2001,2001,4,1,11/1/2001,2001,11,1,214,154,7/17/2001,2001,267.5
+Node,,Mechanistic,UltimateTV,Senior Mechanical Designer,minime,ProEngineer,12/1/2000,2000,12,1,1/1/2001,2001,1,1,31,22,12/16/2000,2000,38.75
+Media Nodes,,Mechanistic,UltimateTV,Senior Mechanical Designer,Pluto  ,ProEngineer,11/1/2000,2000,11,1,4/1/2001,2001,4,1,151,108,1/15/2001,2001,188.75
+MP6000 MP3 Player,,Mechanistic,Motorola,Senior Mechanical Designer,,ProEngineer,7/1/2000,2000,7,1,11/1/2000,2000,11,1,123,88,8/31/2000,2000,153.75
+Keyboard,,Mechanistic,WebTV,Senior Mechanical Designer,Cortez,ProEngineer,5/1/2000,2000,5,1,7/1/2000,2000,7,1,61,45,5/31/2000,2000,76.25
+LapTV,,Mechanistic,WebTV,Senior Mechanical Designer,Cortez,ProEngineer,4/1/2000,2000,4,1,6/1/2000,2000,6,1,61,44,5/1/2000,2000,76.25
+Remote,,Mechanistic,WebTV,Senior Mechanical Designer,,ProEngineer,4/1/2000,2000,4,1,5/1/2000,2000,5,1,30,21,4/16/2000,2000,37.5
+Netscreen-500,,Mechanistic,D2M,Senior Mechanical Designer,,ProEngineer,2/1/2000,2000,2,1,4/1/2000,2000,4,1,60,44,3/2/2000,2000,75
+320 540,,Mechanistic,Function,Senior Mechanical Designer,,ProEngineer,8/1/1998,1998,8,1,9/1/1998,1998,9,1,31,22,8/16/1998,1998,38.75
+HP Jornada,,Mechanistic,Fitch,Senior Mechanical Designer,kiwi,ProEngineer,6/1/1998,1998,6,1,7/1/1998,1998,7,1,30,23,6/16/1998,1998,37.5
+DVDO Player,,frogdesign,,Mechanical Designer,,ProEngineer,3/1/1998,1998,3,1,5/1/1998,1998,5,1,61,45,3/31/1998,1998,76.25
+Vadem Clio,,frogdesign,,Mechanical Designer,,ProEngineer,10/1/1997,1997,10,1,11/1/1997,1997,11,1,31,23,10/16/1997,1997,38.75
+KaVo Dental Unit 2,,frogdesign,,Mechanical Designer,X-Unit,ProEngineer,7/1/1997,1997,7,1,12/1/1997,1997,12,1,153,110,9/15/1997,1997,191.25
+Acer Phone,,frogdesign,,Mechanical Designer,,ProEngineer,7/1/1997,1997,7,1,8/1/1997,1997,8,1,31,24,7/16/1997,1997,38.75
+KaVo Dental Unit 1,,Mechanistic,frogdesign,Mechanical Designer,Edeca,ProEngineer,7/1/1997,1997,7,1,10/1/1997,1997,10,1,92,67,8/16/1997,1997,115
+Acer subwoofer,,Mechanistic,frogdesign,Mechanical Designer,Sunny,ProEngineer,6/1/1997,1997,6,1,8/1/1997,1997,8,1,61,45,7/1/1997,1997,76.25
+Newscorp set-top box,,Mechanistic,frogdesign,Mechanical Designer,concave satbox,ProEngineer,2/1/1997,1997,2,1,10/1/1997,1997,10,1,242,173,6/2/1997,1997,302.5
+Packard Bell Convertible,,Mechanistic,frogdesign,Mechanical Designer,,ProEngineer,2/1/1996,1996,2,1,3/1/1996,1996,3,1,29,22,2/15/1996,1996,36.25
+Acer Aspire,,Mechanistic,frogdesign,Mechanical Designer,,ProEngineer,2/1/1996,1996,2,1,5/1/1996,1996,5,1,90,65,3/17/1996,1996,112.5
+Fissler BBQ,,Mechanistic,frogdesign,Mechanical Designer,,ProEngineer,5/1/1995,1995,5,1,1/1/1996,1996,1,1,245,176,8/31/1995,1995,306.25
+Sunbeam window toaster,,Mechanistic,frogdesign,Mechanical Designer,,ProEngineer,1/1/1995,1995,1,1,3/1/1995,1995,3,1,59,43,1/30/1995,1995,73.75
+Frantic Frames,,Mechanistic,,Mechanical Designer,,ProEngineer,4/1/1992,1992,4,1,3/1/1993,1993,3,1,334,239,9/15/1992,1992,417.5
+Indy,,Silicon Graphics,,Technician IV,,ProEngineer,3/1/1992,1992,3,1,1/1/1993,1993,1,1,306,220,8/1/1992,1992,382.5
+Indigo II,,Silicon Graphics,,Technician IV,,ProEngineer,4/1/1991,1991,4,1,10/1/1992,1992,10,1,549,394,12/31/1991,1991,686.25
+Indigo,,Silicon Graphics,,Technician IV,,ProEngineer,11/1/1989,1989,11,1,6/1/1991,1991,6,1,577,413,8/16/1990,1990,721.25
+Iris File,,Silicon Graphics,,Technician IV,,ProEngineer,2/1/1990,1990,2,1,10/1/1990,1990,10,1,242,173,6/2/1990,1990,302.5
+Personal IRIS,,Silicon Graphics,,Technician IV,,ProEngineer,7/1/1989,1989,7,1,11/1/1991,1991,11,1,853,610,8/31/1990,1990,1066.25
+EPT-1000,EPT-1000 Cardiac Ablation System,EP Technologies,,Production Supervisor,,AutoCad,1/1/1987,1987,1,1,6/1/1989,1989,6,1,882,631,3/17/1988,1988,1102.5

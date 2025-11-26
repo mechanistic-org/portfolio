@@ -1,9 +1,10 @@
 ---
-import { getCollection, render } from 'astro:content'; // 1. Import 'render'
+import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/BaseLayout.astro';
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '../../components/mdx/ModelViewer.astro';
 import Button from '../../components/Button/Button.astro';
+import SkillRadar from '../../components/Projects/SkillRadar.tsx';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -14,19 +15,38 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-
-// 2. FIX: Use the function instead of the method
 const { Content } = await render(project); 
-
 const data = project.data;
 
-// Format Date
-const dateStr = new Date(data.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+// --- CORRECT DATE LOGIC ---
+// Data is ALREADY a Date object because of content.config.ts
+const startDate = data.date;
+const endDate = data.endDate;
 
-// Helper: Ensure arrays
+// Format for display
+const dateDisplay = startDate 
+  ? startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short' }) 
+  : "Unknown";
+
+// Calculate Duration
+let durationStr = "Active";
+if (startDate) {
+    const end = endDate || new Date();
+    const diffTime = Math.abs(end.getTime() - startDate.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    
+    if (diffDays > 365) {
+        durationStr = (diffDays / 365).toFixed(1) + " Years";
+    } else {
+        const months = Math.max(1, Math.round(diffDays / 30));
+        durationStr = months + (months === 1 ? " Month" : " Months");
+    }
+}
+
+// Helpers
 const tools = Array.isArray(data.tools) ? data.tools : [];
-const tags = Array.isArray(data.tags) ? data.tags : [];
 const clients = Array.isArray(data.client) ? data.client : [data.client].filter(Boolean);
+const skillData = Array.isArray(data.skillData) ? data.skillData : [];
 ---
 
 <Layout title={data.title} description={data.description || `Case study for ${data.title}`}>
@@ -47,7 +67,7 @@ const clients = Array.isArray(data.client) ? data.client : [data.client].filter(
 
   <div class="site-container py-12 md:py-24 grid md:grid-cols-12 gap-12">
       
-    <aside class="md:col-span-4 lg:col-span-3 space-y-8">
+    <aside class="md:col-span-4 lg:col-span-3 space-y-8 order-2 md:order-1">
         
         <div class="p-6 rounded-xl border border-neutral-800 bg-neutral-900/50">
             <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4 border-b border-neutral-800 pb-2">Project Data</h3>
@@ -57,8 +77,12 @@ const clients = Array.isArray(data.client) ? data.client : [data.client].filter(
                     <dd class="text-white font-medium">{data.employer}</dd>
                 </div>
                 <div>
-                    <dt class="text-neutral-500 mb-1">Date</dt>
-                    <dd class="text-white font-medium">{dateStr}</dd>
+                    <dt class="text-neutral-500 mb-1">Started</dt>
+                    <dd class="text-white font-medium">{dateDisplay}</dd>
+                </div>
+                <div>
+                    <dt class="text-neutral-500 mb-1">Duration</dt>
+                    <dd class="text-white font-medium">{durationStr}</dd>
                 </div>
                 {clients.length > 0 && (
                 <div>
@@ -74,7 +98,7 @@ const clients = Array.isArray(data.client) ? data.client : [data.client].filter(
                 </div>
             </dl>
         </div>
-
+        
         {tools.length > 0 && (
         <div>
             <h3 class="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-3">Toolchain</h3>
@@ -89,47 +113,32 @@ const clients = Array.isArray(data.client) ? data.client : [data.client].filter(
         <Button variant="outline" href="/projects/" arrow="left" class="w-full justify-center">Back to Archive</Button>
     </aside>
 
-    <article class="md:col-span-8 lg:col-span-9 space-y-12">
+    <article class="md:col-span-8 lg:col-span-9 space-y-12 order-1 md:order-2">
         
         <div class="rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900">
-            <img 
-                src={data.heroImage} 
-                alt={data.title} 
-                class="w-full h-auto object-cover max-h-[500px]"
-            />
+            <img src={data.heroImage} alt={data.title} class="w-full h-auto object-cover max-h-[500px]"/>
         </div>
+
+        {data.stats && (data.stats.plastic > 0 || data.stats.metal > 0 || data.stats.pcb > 0) && (
+           <div class="grid grid-cols-3 gap-4 p-6 border border-neutral-800 rounded-xl bg-neutral-900/30">
+               <div class="text-center"><div class="text-2xl font-bold text-white">{data.stats.plastic}</div><div class="text-xs text-neutral-500 uppercase">Plastic</div></div>
+               <div class="text-center border-l border-neutral-800"><div class="text-2xl font-bold text-white">{data.stats.metal}</div><div class="text-xs text-neutral-500 uppercase">Metal</div></div>
+               <div class="text-center border-l border-neutral-800"><div class="text-2xl font-bold text-white">{data.stats.pcb}</div><div class="text-xs text-neutral-500 uppercase">PCBs</div></div>
+           </div>
+        )}
+
+        {skillData.length > 0 && (
+            <div class="my-12">
+                <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><span class="text-primary">///</span> Skill Fingerprint</h3>
+                <div class="h-[400px] w-full rounded-xl border border-neutral-800 bg-neutral-900/30 p-6">
+                    <SkillRadar data={skillData} client:visible />
+                </div>
+            </div>
+        )}
 
         <div class="prose prose-invert max-w-none prose-lg prose-headings:font-bold prose-headings:text-white prose-p:text-neutral-300 prose-img:rounded-xl">
             <Content components={{ YouTube, ModelViewer }} />
         </div>
-
-        {tags.length > 0 && (
-        <div class="mt-16">
-            <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
-                <span class="text-primary">///</span> Bill of Materials (Skills)
-            </h3>
-            <div class="overflow-hidden rounded-xl border border-neutral-800">
-                <table class="w-full text-sm text-left">
-                    <thead class="bg-neutral-900 text-neutral-400 font-mono uppercase text-xs">
-                        <tr>
-                            <th class="px-6 py-3 border-b border-neutral-800 w-16">#</th>
-                            <th class="px-6 py-3 border-b border-neutral-800">Skill / Competency</th>
-                            <th class="px-6 py-3 border-b border-neutral-800 text-right">Spec</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-neutral-800 bg-neutral-900/50">
-                        {tags.map((tag, i) => (
-                            <tr class="hover:bg-neutral-800/50 transition-colors">
-                                <td class="px-6 py-3 font-mono text-neutral-600">{String(i + 1).padStart(2, '0')}</td>
-                                <td class="px-6 py-3 font-medium text-white">{tag}</td>
-                                <td class="px-6 py-3 text-right text-neutral-500 font-mono">REQ-00{i + 1}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        )}
 
     </article>
 

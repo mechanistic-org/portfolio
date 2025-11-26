@@ -41,29 +41,37 @@ const otherPagesCollection = defineCollection({
         }),
 });
 
-// 4. PROJECTS (Updated for Faceted Architecture)
+// 4. PROJECTS (Updated with skillData)
 const projectsCollection = defineCollection({
     loader: glob({ pattern: "**/*.mdx", base: "./src/content/projects" }), 
     schema: z.object({
         title: z.string(),
         slug: z.string().optional(),
-        
-        // Dates
         date: z.coerce.date().optional(),
-        endDate: z.coerce.date().optional(),
         
-        // Facets (Matching ingest_data.py)
+        // Facets
         employer: z.string().optional(),
         industry: z.string().default("Other"),
-        category: z.string().optional(), // Added this missing field
+        category: z.string().optional(),
+        tools: z.array(z.string()).default([]),
         production: z.string().optional(),
         
-        // Arrays (Tools, Clients, Tags)
-        tools: z.array(z.string()).default([]),
         client: z.array(z.string()).default([]), 
         tags: z.array(z.string()).default([]),
+
+        // 👇 THIS IS THE MISSING PIECE 👇
+        skillData: z.array(z.object({
+            name: z.string(),
+            value: z.number()
+        })).default([]),
         
-        // Visuals & Meta
+        // Hardware Stats
+        stats: z.object({
+            plastic: z.number().default(0),
+            metal: z.number().default(0),
+            pcb: z.number().default(0)
+        }).optional(),
+
         heroImage: z.string().optional(),
         draft: z.boolean().default(false),
         description: z.string().optional(),
