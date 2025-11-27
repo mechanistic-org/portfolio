@@ -4,7 +4,7 @@ import Layout from '../../layouts/BaseLayout.astro';
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '../../components/mdx/ModelViewer.astro';
 import Button from '../../components/Button/Button.astro';
-import SkillRadar from '../../components/Projects/SkillRadar.tsx';
+import SkillRadar from '../../components/projects/SkillRadar.tsx';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -18,8 +18,9 @@ const { project } = Astro.props;
 const { Content } = await render(project); 
 const data = project.data;
 
-// --- CORRECT DATE LOGIC ---
-// Data is ALREADY a Date object because of content.config.ts
+// --- DATE LOGIC (CORRECTED) ---
+// Data is ALREADY a Date object because of content.config.ts. 
+// No parsing function needed.
 const startDate = data.date;
 const endDate = data.endDate;
 
@@ -116,14 +117,27 @@ const skillData = Array.isArray(data.skillData) ? data.skillData : [];
     <article class="md:col-span-8 lg:col-span-9 space-y-12 order-1 md:order-2">
         
         <div class="rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900">
-            <img src={data.heroImage} alt={data.title} class="w-full h-auto object-cover max-h-[500px]"/>
+            <img 
+                src={data.heroImage} 
+                alt={data.title} 
+                class="w-full h-auto object-cover max-h-[500px]"
+            />
         </div>
 
         {data.stats && (data.stats.plastic > 0 || data.stats.metal > 0 || data.stats.pcb > 0) && (
            <div class="grid grid-cols-3 gap-4 p-6 border border-neutral-800 rounded-xl bg-neutral-900/30">
-               <div class="text-center"><div class="text-2xl font-bold text-white">{data.stats.plastic}</div><div class="text-xs text-neutral-500 uppercase">Plastic</div></div>
-               <div class="text-center border-l border-neutral-800"><div class="text-2xl font-bold text-white">{data.stats.metal}</div><div class="text-xs text-neutral-500 uppercase">Metal</div></div>
-               <div class="text-center border-l border-neutral-800"><div class="text-2xl font-bold text-white">{data.stats.pcb}</div><div class="text-xs text-neutral-500 uppercase">PCBs</div></div>
+               <div class="text-center">
+                   <div class="text-2xl font-bold text-white">{data.stats.plastic}</div>
+                   <div class="text-xs text-neutral-500 uppercase">Plastic Parts</div>
+               </div>
+               <div class="text-center border-l border-neutral-800">
+                   <div class="text-2xl font-bold text-white">{data.stats.metal}</div>
+                   <div class="text-xs text-neutral-500 uppercase">Metal Parts</div>
+               </div>
+               <div class="text-center border-l border-neutral-800">
+                   <div class="text-2xl font-bold text-white">{data.stats.pcb}</div>
+                   <div class="text-xs text-neutral-500 uppercase">PCBs</div>
+               </div>
            </div>
         )}
 
