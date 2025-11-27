@@ -2,7 +2,7 @@ import os
 import csv
 import json
 import glob
-import configparser # For parsing .url files
+import urllib.request
 
 # --- CONFIGURATION ---
 SOURCE_DIR = "data_source"
@@ -24,9 +24,13 @@ def find_file(suffix):
     return matches[0] if matches else None
 
 def read_csv_smart(filepath, header_trigger="Name"):
-    if not filepath or not os.path.exists(filepath): return []
+    if not filepath or not os.path.exists(filepath): 
+        print(f"⚠️  File not found: {filepath}")
+        return []
+    
     with open(filepath, 'r', encoding='utf-8-sig') as f:
         lines = [l.strip() for l in f.readlines() if l.strip()]
+    
     if not lines: return []
     
     start_idx = -1
@@ -68,15 +72,6 @@ def extract_expertise_metadata(filepath):
             skill_defs[col] = {"Phase": p.strip() or "0", "Weight": w.replace('%','').strip() or "1"}
     return skill_defs
 
-def parse_internet_shortcut(filepath):
-    """Parses a Windows .url file to extract the target URL."""
-    try:
-        config = configparser.ConfigParser()
-        config.read(filepath)
-        return config.get('InternetShortcut', 'URL')
-    except:
-        return None
-
 def ensure_dummy_assets():
     if not os.path.exists(ASSETS_DIR):
         os.makedirs(ASSETS_DIR)
@@ -85,8 +80,6 @@ def ensure_dummy_assets():
         path = os.path.join(ASSETS_DIR, filename)
         if not os.path.exists(path):
             try:
-                # Simplified downloader
-                import urllib.request
                 opener = urllib.request.build_opener()
                 opener.addheaders = [('User-agent', 'Mozilla/5.0')]
                 urllib.request.install_opener(opener)
@@ -223,46 +216,32 @@ def process_projects():
         bom = [s[0] for s in weighted]
         skill_data = [{"name": s[0], "value": round(s[1], 1)} for s in weighted[:6]]
 
-        # --- ASSET LOGIC (Hybrid) ---
+        # Assets
         hero_img = f"/assets/placeholders/{dummy_files[i % 4]}"
         model_url = f"{R2_DOMAIN}/_site/NeilArmstrong.glb"
         comment = ""
         gallery_images = []
-        doc_files = []
-        ext_links = []
 
         local_stage = os.path.join("R2_STAGING", slug)
         if os.path.exists(local_stage):
-             # 1. Hero
              for ext in [".png", ".jpg", ".webp"]:
                 if os.path.exists(os.path.join(local_stage, f"hero{ext}")):
                     hero_img = f"{R2_DOMAIN}/{slug}/hero{ext}"
                     break
-             # 2. Model
              if os.path.exists(os.path.join(local_stage, "model.glb")):
                  model_url = f"{R2_DOMAIN}/{slug}/model.glb"
-             # 3. Gallery
              for f in os.listdir(local_stage):
                  lower = f.lower()
                  if lower.endswith(('.png', '.jpg', '.jpeg', '.webp')) and "hero" not in lower:
                      gallery_images.append(f"{R2_DOMAIN}/{slug}/{f}")
-                 # 4. PDFs
-                 if lower.endswith('.pdf'):
-                     doc_files.append({"name": f, "url": f"{R2_DOMAIN}/{slug}/{f}"})
-                 # 5. Links (.url files)
-                 if lower.endswith('.url'):
-                     url = parse_internet_shortcut(os.path.join(local_stage, f))
-                     if url:
-                         ext_links.append({"name": f.replace('.url',''), "url": url})
-
         else:
              comment = f"# R2: {R2_DOMAIN}/{slug}/hero.jpg"
 
-        # Content Logic
+        # Manual Override
         manual_path = os.path.join(MANUAL_CONTENT_DIR, f"{slug}.md")
         if os.path.exists(manual_path):
             with open(manual_path, 'r', encoding='utf-8') as f:
-                content_body = f.read() # Direct read, no auto-imports prepended
+                content_body = f.read()
         else:
             content_body = f"""
 import {{ YouTube }} from '@astro-community/astro-embed-youtube';
@@ -279,10 +258,12 @@ import {{ YouTube }} from '@astro-community/astro-embed-youtube';
 <ModelViewer src="{model_url}" alt="3D Asset" />
 """
 
+        # FIXED: ADDED endDate FIELD BELOW
         mdx = f"""---
 title: {json.dumps(title)}
 slug: "{slug}"
 date: "{row.get('Project Start Date raw', '')}"
+endDate: "{row.get('Project End Date raw', '')}"
 employer: "{employer}"
 client: {json.dumps(clients)}
 industry: "{industry}"
@@ -293,8 +274,6 @@ tags: {json.dumps(bom)}
 skillData: {json.dumps(skill_data)}
 stats: {json.dumps(parts)}
 gallery: {json.dumps(gallery_images)}
-documents: {json.dumps(doc_files)}
-links: {json.dumps(ext_links)}
 heroImage: "{hero_img}" {comment}
 draft: false
 description: "{title} - {industry} project."
@@ -307,18 +286,14 @@ description: "{title} - {industry} project."
 
     print(f"✅ Generated {count} MDX files.")
     
-    # --- BUILD CLIENT LIST WITH LOGOS ---
     client_data = []
     for client in sorted(list(all_clients)):
-        # Check if logo exists in local staging (R2_STAGING/_site/logos/{client}.svg)
         logo_name = client.lower().replace(' ', '')
         logo_path = None
-        # Check for svg or png
         if os.path.exists(os.path.join("R2_STAGING", "_site", "logos", f"{logo_name}.svg")):
             logo_path = f"{R2_DOMAIN}/_site/logos/{logo_name}.svg"
         elif os.path.exists(os.path.join("R2_STAGING", "_site", "logos", f"{logo_name}.png")):
             logo_path = f"{R2_DOMAIN}/_site/logos/{logo_name}.png"
-            
         client_data.append({"name": client, "logo": logo_path})
 
     with open(os.path.join(OUTPUT_DATA_DIR, "clients.json"), "w") as f:

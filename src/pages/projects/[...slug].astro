@@ -18,25 +18,43 @@ const { project } = Astro.props;
 const { Content } = await render(project); 
 const data = project.data;
 
-// Date Logic
+// --- DATE LOGIC ---
 const startDate = data.date;
 const endDate = data.endDate;
-const dateDisplay = startDate ? startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short' }) : "Unknown";
+const dateDisplay = startDate 
+  ? startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short' }) 
+  : "Unknown";
+
 let durationStr = "Active";
 if (startDate) {
     const end = endDate || new Date();
-    const diffDays = Math.ceil(Math.abs(end.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)); 
-    if (diffDays > 365) durationStr = (diffDays / 365).toFixed(1) + " Years";
-    else durationStr = Math.max(1, Math.round(diffDays / 30)) + " Months";
+    const diffTime = Math.abs(end.getTime() - startDate.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    
+    if (diffDays > 365) {
+        durationStr = (diffDays / 365).toFixed(1) + " Years";
+    } else {
+        const months = Math.max(1, Math.round(diffDays / 30));
+        durationStr = months + (months === 1 ? " Month" : " Months");
+    }
 }
 
-const tools = Array.isArray(data.tools) ? data.tools : [];
-const clients = Array.isArray(data.client) ? data.client : [data.client].filter(Boolean);
-const skillData = Array.isArray(data.skillData) ? data.skillData : [];
-const gallery = Array.isArray(data.gallery) ? data.gallery : [];
+// --- HELPERS (SIMPLIFIED) ---
+// The schema guarantees these are arrays, so we don't need complex checks.
+const tools = data.tools || [];
+const tags = data.tags || [];
+const clients = data.client || []; // Fixed the TypeScript error here
+const skillData = data.skillData || [];
+const gallery = data.gallery || [];
+const documents = data.documents || [];
+const links = data.links || [];
+
+// Fix: Ensure description is a string (never undefined) for BaseLayout
+const metaDesc = data.description || `Engineering case study: ${data.title}`;
 ---
 
-<Layout title={data.title} description={data.description}>
+<Layout title={data.title} description={metaDesc}>
+  
   <section class="relative pt-32 pb-12 border-b border-neutral-800 bg-neutral-900/30">
     <div class="site-container">
         <div class="max-w-4xl">
@@ -52,6 +70,7 @@ const gallery = Array.isArray(data.gallery) ? data.gallery : [];
   </section>
 
   <div class="site-container py-12 md:py-24 grid md:grid-cols-12 gap-12">
+      
     <aside class="md:col-span-4 lg:col-span-3 space-y-8 order-2 md:order-1">
         <div class="p-6 rounded-xl border border-neutral-800 bg-neutral-900/50">
             <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4 border-b border-neutral-800 pb-2">Project Data</h3>
@@ -67,19 +86,22 @@ const gallery = Array.isArray(data.gallery) ? data.gallery : [];
                 </div>
             </dl>
         </div>
+        
         {tools.length > 0 && (
-        <div><h3 class="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-3">Toolchain</h3>
+        <div>
+            <h3 class="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-3">Toolchain</h3>
             <div class="flex flex-wrap gap-2">
                 {tools.map(t => <span class="px-2 py-1 bg-neutral-800 border border-neutral-700 rounded text-xs text-neutral-300">{t}</span>)}
             </div>
-        </div>)}
+        </div>
+        )}
 
-        {/* DOCUMENTS & LINKS */}
-        {(data.documents.length > 0 || data.links.length > 0) && (
+        {/* DOWNLOADS & LINKS */}
+        {(documents.length > 0 || links.length > 0) && (
             <div class="pt-4 border-t border-neutral-800">
                 <h3 class="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-3">Resources</h3>
                 <ul class="space-y-2 text-sm">
-                    {data.documents.map(doc => (
+                    {documents.map(doc => (
                         <li>
                             <a href={doc.url} target="_blank" class="flex items-center gap-2 text-primary hover:underline">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
@@ -87,7 +109,7 @@ const gallery = Array.isArray(data.gallery) ? data.gallery : [];
                             </a>
                         </li>
                     ))}
-                    {data.links.map(link => (
+                    {links.map(link => (
                         <li>
                             <a href={link.url} target="_blank" class="flex items-center gap-2 text-primary hover:underline">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
@@ -99,39 +121,28 @@ const gallery = Array.isArray(data.gallery) ? data.gallery : [];
             </div>
         )}
 
-
         <Button variant="outline" href="/projects/" arrow="left" class="w-full justify-center">Back to Archive</Button>
     </aside>
 
     <article class="md:col-span-8 lg:col-span-9 space-y-12 order-1 md:order-2">
+        
         <div class="rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900 shadow-2xl">
             <img src={data.heroImage} alt={data.title} class="w-full h-auto object-cover max-h-[600px]"/>
         </div>
 
         {data.stats && (data.stats.plastic > 0 || data.stats.metal > 0 || data.stats.pcb > 0) && (
-           <div class="grid grid-cols-3 gap-px bg-neutral-800 border border-neutral-800 rounded-xl overflow-hidden">
-               <div class="bg-neutral-900 p-6 text-center group hover:bg-neutral-800 transition-colors">
-                   <div class="text-3xl font-bold text-white mb-1 group-hover:text-primary transition-colors">{data.stats.plastic}</div>
-                   <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">Plastic</div>
-               </div>
-               <div class="bg-neutral-900 p-6 text-center group hover:bg-neutral-800 transition-colors">
-                   <div class="text-3xl font-bold text-white mb-1 group-hover:text-primary transition-colors">{data.stats.metal}</div>
-                   <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">Metal</div>
-               </div>
-               <div class="bg-neutral-900 p-6 text-center group hover:bg-neutral-800 transition-colors">
-                   <div class="text-3xl font-bold text-white mb-1 group-hover:text-primary transition-colors">{data.stats.pcb}</div>
-                   <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">PCBs</div>
-               </div>
+           <div class="grid grid-cols-3 gap-4 p-6 border border-neutral-800 rounded-xl bg-neutral-900/30">
+               <div class="text-center"><div class="text-2xl font-bold text-white">{data.stats.plastic}</div><div class="text-xs text-neutral-500 uppercase">Plastic</div></div>
+               <div class="text-center border-l border-neutral-800"><div class="text-2xl font-bold text-white">{data.stats.metal}</div><div class="text-xs text-neutral-500 uppercase">Metal</div></div>
+               <div class="text-center border-l border-neutral-800"><div class="text-2xl font-bold text-white">{data.stats.pcb}</div><div class="text-xs text-neutral-500 uppercase">PCBs</div></div>
            </div>
         )}
 
         {skillData.length > 0 && (
             <div class="my-12">
-                <h3 class="text-sm font-bold text-neutral-500 uppercase tracking-widest mb-6 flex items-center gap-3">
-                    <span class="w-2 h-2 rounded-full bg-primary"></span> Skill Fingerprint
-                </h3>
+                <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><span class="text-primary">///</span> Skill Fingerprint</h3>
                 <div class="h-[400px] w-full rounded-xl border border-neutral-800 bg-neutral-900/30 p-6">
-                    <SkillRadar data={skillData} client:visible />
+                    <SkillRadar data={skillData} client:only="react" />
                 </div>
             </div>
         )}
@@ -144,14 +155,16 @@ const gallery = Array.isArray(data.gallery) ? data.gallery : [];
             <div class="mt-16 border-t border-neutral-800 pt-12">
                 <h3 class="text-2xl font-bold text-white mb-8">Project Gallery</h3>
                 <div class="columns-1 md:columns-2 gap-8 space-y-8">
-                    {gallery.map(img => (
+                    {gallery.map((img, i) => (
                         <div class="break-inside-avoid rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900 hover:border-neutral-600 transition-colors">
-                            <img src={img} alt="Gallery Image" class="w-full h-auto" loading="lazy"/>
+                            <img src={img} alt={`Detail view ${i + 1}`} class="w-full h-auto" loading="lazy"/>
                         </div>
                     ))}
                 </div>
             </div>
         )}
+
     </article>
+
   </div>
 </Layout>

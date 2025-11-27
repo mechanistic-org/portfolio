@@ -13,10 +13,6 @@ export type navItem = navLinkItem | navDropdownItem;
 
 const navConfig: navItem[] = [
 	{
-		text: "Home",
-		href: "/",
-	},
-	{
 		text: "Projects",
 		href: "/projects/",
 	},
@@ -24,8 +20,12 @@ const navConfig: navItem[] = [
 		text: "Specs",
 		dropdown: [
 			{
-				text: "About Me",
+				text: "BIO",
 				href: "/about/",
+			},
+			{
+				text: "This Site",
+				href: "/colophon/",
 			},
 			{
 				text: "Uses / Gear",

@@ -5,16 +5,12 @@ interface Props {
   poster?: string;
 }
 
-// Default to your rusty badge if no specific poster is provided
 const DEFAULT_POSTER = "https://assets.eriknorris.com/_site/EN_Badge_wire_rusty_1200.png";
 const { src, alt = "3D Model", poster = DEFAULT_POSTER } = Astro.props;
-
-// Generate a unique ID for this instance so multiple viewers don't clash
 const uid = "mv-" + Math.random().toString(36).substr(2, 9);
 ---
 
 <div class="w-full h-[500px] bg-neutral-900/50 border border-neutral-800 rounded-xl overflow-hidden relative my-12">
-  
   <script>
     if (!customElements.get('model-viewer')) {
       const script = document.createElement('script');
@@ -31,45 +27,34 @@ const uid = "mv-" + Math.random().toString(36).substr(2, 9);
     alt={alt}
     auto-rotate 
     camera-controls 
-    
-    /* --- HERO QUALITY SETTINGS --- */
     shadow-intensity="1.5"
     shadow-softness="1"
     exposure="1.2"
     camera-orbit="45deg 55deg 105%"
     field-of-view="30deg"
     interaction-prompt="auto"
-    
     class="w-full h-full"
     style="--poster-color: transparent; background-color: transparent;"
   >
     <div slot="progress-bar" class="absolute top-0 left-0 h-1 w-full bg-transparent">
         <div class="h-full bg-primary transition-all duration-300" style="width: 0%" data-progress-bar></div>
     </div>
-
     <div slot="ar-button" class="absolute bottom-4 right-4 bg-neutral-900/80 backdrop-blur text-white px-3 py-1.5 rounded-lg text-xs font-mono border border-white/10 opacity-80 hover:opacity-100 transition-opacity cursor-pointer flex items-center gap-2">
        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
        Interactive 3D
     </div>
-
-    <div slot="poster" class="absolute inset-0 flex items-center justify-center">
-       </div>
+    <div slot="poster" class="absolute inset-0 flex items-center justify-center"></div>
   </model-viewer>
-
 </div>
 
 <script define:vars={{ uid }}>
-  // Scoped progress listener for this specific instance
   const viewer = document.querySelector(`#${uid}`);
   const progressBar = viewer?.querySelector('[data-progress-bar]');
-
   if (viewer && progressBar) {
     viewer.addEventListener('progress', (e) => {
       const p = e.detail.totalProgress * 100;
       progressBar.style.width = `${p}%`;
-      if (p === 100) {
-          setTimeout(() => { progressBar.style.opacity = '0'; }, 500);
-      }
+      if (p === 100) setTimeout(() => { progressBar.style.opacity = '0'; }, 500);
     });
   }
 </script>
