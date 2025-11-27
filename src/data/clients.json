@@ -1,15 +1,86 @@
 [
-  "D2M",
-  "Fitch",
-  "Function",
-  "Lyft",
-  "Microsoft, UltimateTV",
-  "Motivate",
-  "Motorola",
-  "Purina",
-  "Synapse",
-  "Tailio",
-  "UltimateTV",
-  "WebTV",
-  "frogdesign"
+  {
+    "name": "Avegant",
+    "logo": "https://assets.eriknorris.com/_site/logos/avegant.svg"
+  },
+  {
+    "name": "D2M",
+    "logo": null
+  },
+  {
+    "name": "Digidesign",
+    "logo": null
+  },
+  {
+    "name": "EP Technologies",
+    "logo": null
+  },
+  {
+    "name": "Fitch",
+    "logo": "https://assets.eriknorris.com/_site/logos/fitch.svg"
+  },
+  {
+    "name": "Function",
+    "logo": null
+  },
+  {
+    "name": "Hyphen",
+    "logo": "https://assets.eriknorris.com/_site/logos/hyphen.svg"
+  },
+  {
+    "name": "Kaleidescape",
+    "logo": null
+  },
+  {
+    "name": "Lyft",
+    "logo": null
+  },
+  {
+    "name": "Microsoft",
+    "logo": "https://assets.eriknorris.com/_site/logos/microsoft.svg"
+  },
+  {
+    "name": "Motivate",
+    "logo": null
+  },
+  {
+    "name": "Motorola",
+    "logo": "https://assets.eriknorris.com/_site/logos/motorola.svg"
+  },
+  {
+    "name": "Noon",
+    "logo": "https://assets.eriknorris.com/_site/logos/noon.png"
+  },
+  {
+    "name": "Purina",
+    "logo": null
+  },
+  {
+    "name": "Silicon Graphics",
+    "logo": "https://assets.eriknorris.com/_site/logos/silicongraphics.svg"
+  },
+  {
+    "name": "Synapse",
+    "logo": null
+  },
+  {
+    "name": "Tailio",
+    "logo": null
+  },
+  {
+    "name": "UltimateTV",
+    "logo": "https://assets.eriknorris.com/_site/logos/ultimatetv.svg"
+  },
+  {
+    "name": "WebTV",
+    "logo": "https://assets.eriknorris.com/_site/logos/webtv.svg"
+  },
+  {
+    "name": "awesomejob",
+    "logo": null
+  },
+  {
+    "name": "frogdesign",
+    "logo": "https://assets.eriknorris.com/_site/logos/frogdesign.svg"
+  }
 ]

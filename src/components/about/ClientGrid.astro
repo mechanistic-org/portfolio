@@ -1,13 +1,6 @@
 ---
 import clientList from "@/data/clients.json";
-
-// Filter and Sort
-const clients = [...new Set(clientList)].filter(Boolean).sort((a, b) => 
-  a.localeCompare(b, undefined, { sensitivity: 'base' })
-);
-
-// We need two sets to create the seamless "Infinite Loop" effect
-const marqueeList = [...clients, ...clients]; 
+const marqueeList = [...clientList, ...clientList]; // Infinite loop
 ---
 
 <div class="w-full py-12 border-t border-neutral-800 bg-neutral-950/50 overflow-hidden">
@@ -18,30 +11,30 @@ const marqueeList = [...clients, ...clients];
   </div>
 
   <div class="relative w-full overflow-hidden group">
-      
-      <div class="flex gap-16 w-max animate-marquee group-hover:[animation-play-state:paused]">
-          {marqueeList.map((client, index) => (
-              <div class="flex items-center flex-shrink-0">
-                  <span class="text-xl font-bold text-neutral-600 hover:text-white transition-colors cursor-default select-none whitespace-nowrap">
-                      {client}
-                  </span>
+      <div class="flex gap-16 w-max animate-marquee group-hover:[animation-play-state:paused] items-center">
+          {marqueeList.map((client) => (
+              <div class="flex-shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0">
+                  {client.logo ? (
+                      <img src={client.logo} alt={client.name} class="h-12 w-auto object-contain" loading="lazy" />
+                  ) : (
+                      <span class="text-xl font-bold text-neutral-600 hover:text-white transition-colors cursor-default select-none whitespace-nowrap">
+                          {client.name}
+                      </span>
+                  )}
               </div>
           ))}
       </div>
-
       <div class="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10"></div>
       <div class="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10"></div>
   </div>
 </div>
 
 <style>
-  /* Define the animation in standard CSS */
   @keyframes marquee {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); } /* Move half the width (the length of one original list) */
+    100% { transform: translateX(-50%); }
   }
-
   .animate-marquee {
-    animation: marquee 60s linear infinite; /* Adjust '60s' to control speed */
+    animation: marquee 60s linear infinite;
   }
 </style>

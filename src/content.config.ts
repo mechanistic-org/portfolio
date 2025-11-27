@@ -49,7 +49,7 @@ const projectsCollection = defineCollection({
         slug: z.string().optional(),
         date: z.coerce.date().optional(),
         gallery: z.array(z.string()).default([]),
-        
+
         // Facets
         employer: z.string().optional(),
         industry: z.string().default("Other"),
@@ -64,6 +64,18 @@ const projectsCollection = defineCollection({
         skillData: z.array(z.object({
             name: z.string(),
             value: z.number()
+        })).default([]),
+
+        gallery: z.array(z.string()).default([]),
+
+        documents: z.array(z.object({
+            name: z.string(),
+            url: z.string()
+        })).default([]),
+        
+        links: z.array(z.object({
+            name: z.string(),
+            url: z.string()
         })).default([]),
         
         // Hardware Stats

@@ -1,90 +1,90 @@
 Name,Employer,Plastic,Sheetmetal,PCB,PCBA
-dreamjob,awesomejob,,,,
-Freelance,Mechanistic,,,,
-Makeline,Hyphen,,,,
-Dispensers,Hyphen,,,,
-Backsplash,Hyphen,,,,
-Portion Cup,Hyphen,,,,
-Pet Scale,Mechanistic,,,,
-electronic battery lock,Mechanistic,,,,
-IOT module,Mechanistic,,,,
-bay wheels,Mechanistic,,,,
-Switches,Noon,,,,
-Extension Switches,Noon,,,,
-Room Director,Noon,,,,
-Wall Plates,Noon,,,,
-Base,Noon,,,,
-Glyph 2,Avegant,,,,
-Glyph,Avegant,,,,
-BFD,Mechanistic,,,,
-Strato,Kaleidescape,,,,
-Cinema One,Kaleidescape,,,,
-M700,Kaleidescape,,,,
-DV700,Kaleidescape,,,,
-Disc Cartridges,Kaleidescape,,,,
-K-Remote,Kaleidescape,,,,
-Weemote,Kaleidescape,,,,
-M500,Kaleidescape,,,,
-M300,Kaleidescape,,,,
-KSERVER-1500,Kaleidescape,,,,
-KVAULT-10,Kaleidescape,,,,
-Jewel,Kaleidescape,,,,
-KSYSTEM-120,Kaleidescape,,,,
-KSERVER-5000,Kaleidescape,,,,
-Speed Reader,Kaleidescape,,,,
-KSERVER-1500,Kaleidescape,,,,
-KPLAYER-300,Kaleidescape,,,,
-KPLAYER-6000,Kaleidescape,,,,
-KPLAYER-5000,Kaleidescape,,,,
-KPLAYER-2500,Kaleidescape,,,,
-KSERVER-2500,Kaleidescape,,,,
-Mbox 2 Micro,Digidesign,,,,
-003 Rack,Digidesign,,,,
-Mbox 2 Mini,Digidesign,,,,
-Mbox 2 Pro,Digidesign,,,,
-003,Digidesign,,,,
-Control 24,Digidesign,,,,
-Mbox 2,Digidesign,,,,
-Profile,Digidesign,,,,
-D-Show,Digidesign,,,,
-D-Control,Digidesign,,,,
-D-Command,Digidesign,,,,
-Pro Control Jr.,Digidesign,,,,
-002 Rack,Digidesign,,,,
-Mbox,Digidesign,,,,
-Xbox,Mechanistic,,,,
-Receiver 5,Mechanistic,,,,
-Receiver 4,Mechanistic,,,,
-Receiver 3,Mechanistic,,,,
-Receiver 2,Mechanistic,,,,
-Mercury LC,Mechanistic,,,,
-usb box,Mechanistic,,,,
-Remotes,Mechanistic,,,,
-Receiver 1,Mechanistic,,,,
-Node,Mechanistic,,,,
-Media Nodes,Mechanistic,,,,
-MP6000 MP3 Player,Mechanistic,,,,
-Keyboard,Mechanistic,,,,
-LapTV,Mechanistic,,,,
-Remote,Mechanistic,,,,
-Netscreen-500,Mechanistic,,,,
-320 540,Mechanistic,,,,
-HP Jornada,Mechanistic,,,,
-DVDO Player,frogdesign,,,,
-Vadem Clio,frogdesign,,,,
-KaVo Dental Unit 2,frogdesign,,,,
-Acer Phone,frogdesign,,,,
-KaVo Dental Unit 1,Mechanistic,,,,
-Acer subwoofer,Mechanistic,,,,
-Newscorp set-top box,Mechanistic,,,,
-Packard Bell Convertible,Mechanistic,,,,
-Acer Aspire,Mechanistic,,,,
-Fissler BBQ,Mechanistic,,,,
-Sunbeam window toaster,Mechanistic,,,,
-Frantic Frames,Mechanistic,,,,
-Indy,Silicon Graphics,,,,
-Indigo II,Silicon Graphics,,,,
-Indigo,Silicon Graphics,,,,
-Iris File,Silicon Graphics,,,,
-Personal IRIS,Silicon Graphics,,,,
-EPT-1000,EP Technologies,,,,
+dreamjob,awesomejob,7,94,10,18
+Freelance,Mechanistic,64,99,32,70
+Makeline,Hyphen,12,68,86,4
+Dispensers,Hyphen,33,48,36,32
+Backsplash,Hyphen,92,64,50,97
+Portion Cup,Hyphen,67,75,5,52
+Pet Scale,Mechanistic,50,89,95,27
+electronic battery lock,Mechanistic,86,100,58,65
+IOT module,Mechanistic,67,60,89,36
+bay wheels,Mechanistic,84,47,92,74
+Switches,Noon,29,23,54,81
+Extension Switches,Noon,78,36,8,88
+Room Director,Noon,86,21,77,42
+Wall Plates,Noon,97,30,54,34
+Base,Noon,98,67,61,74
+Glyph 2,Avegant,3,24,53,50
+Glyph,Avegant,67,96,15,62
+BFD,Mechanistic,21,13,26,40
+Strato,Kaleidescape,82,76,68,49
+Cinema One,Kaleidescape,62,95,4,36
+M700,Kaleidescape,79,66,50,19
+DV700,Kaleidescape,2,25,63,68
+Disc Cartridges,Kaleidescape,97,30,90,62
+K-Remote,Kaleidescape,47,2,26,38
+Weemote,Kaleidescape,73,59,85,50
+M500,Kaleidescape,40,31,43,66
+M300,Kaleidescape,78,49,36,36
+KSERVER-1500,Kaleidescape,72,19,7,52
+KVAULT-10,Kaleidescape,46,82,29,50
+Jewel,Kaleidescape,99,30,61,93
+KSYSTEM-120,Kaleidescape,46,89,31,33
+KSERVER-5000,Kaleidescape,82,27,16,6
+Speed Reader,Kaleidescape,49,2,60,82
+KSERVER-1500,Kaleidescape,29,9,54,98
+KPLAYER-300,Kaleidescape,47,8,18,3
+KPLAYER-6000,Kaleidescape,14,93,60,48
+KPLAYER-5000,Kaleidescape,4,62,22,64
+KPLAYER-2500,Kaleidescape,95,82,73,18
+KSERVER-2500,Kaleidescape,15,89,70,54
+Mbox 2 Micro,Digidesign,16,23,62,22
+003 Rack,Digidesign,49,6,23,54
+Mbox 2 Mini,Digidesign,51,97,69,16
+Mbox 2 Pro,Digidesign,99,74,93,87
+003,Digidesign,82,34,83,28
+Control 24,Digidesign,50,6,52,71
+Mbox 2,Digidesign,100,31,80,63
+Profile,Digidesign,36,58,6,46
+D-Show,Digidesign,93,63,15,17
+D-Control,Digidesign,24,94,97,55
+D-Command,Digidesign,5,18,61,92
+Pro Control Jr.,Digidesign,51,1,87,19
+002 Rack,Digidesign,2,12,5,74
+Mbox,Digidesign,22,11,92,36
+Xbox,Mechanistic,35,98,6,70
+Receiver 5,Mechanistic,93,59,47,83
+Receiver 4,Mechanistic,72,92,26,5
+Receiver 3,Mechanistic,20,50,96,93
+Receiver 2,Mechanistic,68,37,66,57
+Mercury LC,Mechanistic,42,7,32,4
+usb box,Mechanistic,74,48,35,37
+Remotes,Mechanistic,8,94,57,40
+Receiver 1,Mechanistic,96,66,39,25
+Node,Mechanistic,44,40,12,58
+Media Nodes,Mechanistic,7,64,30,20
+MP6000 MP3 Player,Mechanistic,38,20,2,13
+Keyboard,Mechanistic,87,7,85,63
+LapTV,Mechanistic,71,47,66,76
+Remote,Mechanistic,27,27,12,13
+Netscreen-500,Mechanistic,67,16,46,56
+320 540,Mechanistic,72,31,63,100
+HP Jornada,Mechanistic,24,11,53,44
+DVDO Player,frogdesign,83,28,1,45
+Vadem Clio,frogdesign,1,37,91,96
+KaVo Dental Unit 2,frogdesign,24,15,28,27
+Acer Phone,frogdesign,44,100,86,80
+KaVo Dental Unit 1,Mechanistic,73,53,92,94
+Acer subwoofer,Mechanistic,16,7,84,74
+Newscorp set-top box,Mechanistic,32,69,25,15
+Packard Bell Convertible,Mechanistic,29,81,35,3
+Acer Aspire,Mechanistic,68,39,29,84
+Fissler BBQ,Mechanistic,19,6,44,57
+Sunbeam window toaster,Mechanistic,87,11,99,96
+Frantic Frames,Mechanistic,8,84,17,32
+Indy,Silicon Graphics,20,51,80,52
+Indigo II,Silicon Graphics,96,84,98,75
+Indigo,Silicon Graphics,8,97,99,65
+Iris File,Silicon Graphics,57,45,35,29
+Personal IRIS,Silicon Graphics,96,61,49,86
+EPT-1000,EP Technologies,64,62,16,59

@@ -2,16 +2,17 @@ import os
 import csv
 import json
 import glob
-import urllib.request
+import configparser # For parsing .url files
 
 # --- CONFIGURATION ---
 SOURCE_DIR = "data_source"
+MANUAL_CONTENT_DIR = "data_source/manual_content"
 OUTPUT_CONTENT_DIR = "src/content/projects"
 OUTPUT_DATA_DIR = "src/data"
 ASSETS_DIR = "public/assets/placeholders"
 R2_DOMAIN = "https://assets.eriknorris.com"
 
-for d in [OUTPUT_CONTENT_DIR, OUTPUT_DATA_DIR, ASSETS_DIR]:
+for d in [OUTPUT_CONTENT_DIR, OUTPUT_DATA_DIR, ASSETS_DIR, MANUAL_CONTENT_DIR]:
     os.makedirs(d, exist_ok=True)
 
 # --- UTILS ---
@@ -34,8 +35,15 @@ def read_csv_smart(filepath, header_trigger="Name"):
             start_idx = i
             break
     if start_idx == -1: start_idx = 0
+
     if lines[start_idx].startswith(','): lines[start_idx] = lines[start_idx][1:]
-    return list(csv.DictReader(lines[start_idx:]))
+    
+    reader = csv.DictReader(lines[start_idx:])
+    data = []
+    for row in reader:
+        clean_row = {k.strip(): v.strip() for k, v in row.items() if k}
+        if clean_row: data.append(clean_row)
+    return data
 
 def extract_expertise_metadata(filepath):
     if not filepath: return {}
@@ -60,6 +68,15 @@ def extract_expertise_metadata(filepath):
             skill_defs[col] = {"Phase": p.strip() or "0", "Weight": w.replace('%','').strip() or "1"}
     return skill_defs
 
+def parse_internet_shortcut(filepath):
+    """Parses a Windows .url file to extract the target URL."""
+    try:
+        config = configparser.ConfigParser()
+        config.read(filepath)
+        return config.get('InternetShortcut', 'URL')
+    except:
+        return None
+
 def ensure_dummy_assets():
     if not os.path.exists(ASSETS_DIR):
         os.makedirs(ASSETS_DIR)
@@ -68,6 +85,8 @@ def ensure_dummy_assets():
         path = os.path.join(ASSETS_DIR, filename)
         if not os.path.exists(path):
             try:
+                # Simplified downloader
+                import urllib.request
                 opener = urllib.request.build_opener()
                 opener.addheaders = [('User-agent', 'Mozilla/5.0')]
                 urllib.request.install_opener(opener)
@@ -79,7 +98,9 @@ def process_colors():
     print("🎨 Processing Colors...")
     path = find_file("Colors.csv") or find_file("color_etc.csv")
     if not path: return 
-    data = read_csv_smart(path, "Name")
+    data = read_csv_smart(path, "Requirements Analysis")
+    if not data: data = read_csv_smart(path, "Name")
+
     color_map = {}
     for row in data:
         keys = list(row.keys())
@@ -114,11 +135,14 @@ def process_tenure():
     path = find_file("Tenure.csv")
     if not path: return
     data = read_csv_smart(path, "Employer")
+    if not data: data = read_csv_smart(path, "job")
+    
     history = []
     color_map = {}
     if os.path.exists(os.path.join(OUTPUT_DATA_DIR, "colors.json")):
         with open(os.path.join(OUTPUT_DATA_DIR, "colors.json"), "r") as f:
             color_map = json.load(f)
+
     for row in data:
         company = row.get("Employer") or row.get("job")
         if not company: continue
@@ -141,10 +165,13 @@ def process_projects():
     
     main = read_csv_smart(find_file("Main.csv"), "Slug Name")
     if not main: main = read_csv_smart(find_file("Main.csv"), "Name")
-    tax = {r.get('Project Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Project Name")}
+    
+    tax = {r.get('Project Name') or r.get('Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Project Name")}
     if not tax: tax = {r.get('Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Name")}
+    
     phases = {r['Name']: r for r in read_csv_smart(find_file("Phase.csv"))}
     stats = {r['Name']: r for r in read_csv_smart(find_file("Stats.csv") or find_file("Part count.csv"))}
+    
     f_expert = find_file("Expertise.csv")
     expert_data = read_csv_smart(f_expert, "Project Start") 
     project_skills = {r.get('Name'): r for r in expert_data}
@@ -160,8 +187,12 @@ def process_projects():
         
         slug = name.lower().strip().replace(' ', '-').replace('/', '-')
         title = row.get("Descriptive Name") or name
+        
         employer = row.get("Employer", "")
+        if employer and "Mechanistic" not in employer and "#awesomejob" not in employer:
+             all_clients.add(employer)
         if "Mechanistic" in employer: employer = "Mechanistic (Consulting)"
+        
         clients = [c.strip() for c in row.get("Client", "").split('/') if c.strip()]
         for c in clients: all_clients.add(c)
 
@@ -192,38 +223,47 @@ def process_projects():
         bom = [s[0] for s in weighted]
         skill_data = [{"name": s[0], "value": round(s[1], 1)} for s in weighted[:6]]
 
-        # --- GALLERY LOGIC (NEW) ---
+        # --- ASSET LOGIC (Hybrid) ---
         hero_img = f"/assets/placeholders/{dummy_files[i % 4]}"
         model_url = f"{R2_DOMAIN}/_site/NeilArmstrong.glb"
         comment = ""
         gallery_images = []
+        doc_files = []
+        ext_links = []
 
         local_stage = os.path.join("R2_STAGING", slug)
         if os.path.exists(local_stage):
-             # Find Hero (Priority: PNG > JPG)
+             # 1. Hero
              for ext in [".png", ".jpg", ".webp"]:
                 if os.path.exists(os.path.join(local_stage, f"hero{ext}")):
                     hero_img = f"{R2_DOMAIN}/{slug}/hero{ext}"
                     break
-             
-             # Find Gallery Images (All other images)
-             for f in os.listdir(local_stage):
-                 if f.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')) and "hero" not in f.lower():
-                     gallery_images.append(f"{R2_DOMAIN}/{slug}/{f}")
-                     
-             # Check Model
+             # 2. Model
              if os.path.exists(os.path.join(local_stage, "model.glb")):
                  model_url = f"{R2_DOMAIN}/{slug}/model.glb"
+             # 3. Gallery
+             for f in os.listdir(local_stage):
+                 lower = f.lower()
+                 if lower.endswith(('.png', '.jpg', '.jpeg', '.webp')) and "hero" not in lower:
+                     gallery_images.append(f"{R2_DOMAIN}/{slug}/{f}")
+                 # 4. PDFs
+                 if lower.endswith('.pdf'):
+                     doc_files.append({"name": f, "url": f"{R2_DOMAIN}/{slug}/{f}"})
+                 # 5. Links (.url files)
+                 if lower.endswith('.url'):
+                     url = parse_internet_shortcut(os.path.join(local_stage, f))
+                     if url:
+                         ext_links.append({"name": f.replace('.url',''), "url": url})
+
         else:
              comment = f"# R2: {R2_DOMAIN}/{slug}/hero.jpg"
 
-        # --- CONTENT LOGIC (Hybrid) ---
-        manual_path = os.path.join("data_source/manual_content", f"{slug}.md")
+        # Content Logic
+        manual_path = os.path.join(MANUAL_CONTENT_DIR, f"{slug}.md")
         if os.path.exists(manual_path):
             with open(manual_path, 'r', encoding='utf-8') as f:
-                content_body = f.read()
+                content_body = f.read() # Direct read, no auto-imports prepended
         else:
-            # Clean Default Body (No BOM table text)
             content_body = f"""
 import {{ YouTube }} from '@astro-community/astro-embed-youtube';
 
@@ -253,6 +293,8 @@ tags: {json.dumps(bom)}
 skillData: {json.dumps(skill_data)}
 stats: {json.dumps(parts)}
 gallery: {json.dumps(gallery_images)}
+documents: {json.dumps(doc_files)}
+links: {json.dumps(ext_links)}
 heroImage: "{hero_img}" {comment}
 draft: false
 description: "{title} - {industry} project."
@@ -264,8 +306,23 @@ description: "{title} - {industry} project."
         count += 1
 
     print(f"✅ Generated {count} MDX files.")
+    
+    # --- BUILD CLIENT LIST WITH LOGOS ---
+    client_data = []
+    for client in sorted(list(all_clients)):
+        # Check if logo exists in local staging (R2_STAGING/_site/logos/{client}.svg)
+        logo_name = client.lower().replace(' ', '')
+        logo_path = None
+        # Check for svg or png
+        if os.path.exists(os.path.join("R2_STAGING", "_site", "logos", f"{logo_name}.svg")):
+            logo_path = f"{R2_DOMAIN}/_site/logos/{logo_name}.svg"
+        elif os.path.exists(os.path.join("R2_STAGING", "_site", "logos", f"{logo_name}.png")):
+            logo_path = f"{R2_DOMAIN}/_site/logos/{logo_name}.png"
+            
+        client_data.append({"name": client, "logo": logo_path})
+
     with open(os.path.join(OUTPUT_DATA_DIR, "clients.json"), "w") as f:
-        json.dump(sorted(list(all_clients)), f, indent=2)
+        json.dump(client_data, f, indent=2)
 
 if __name__ == "__main__":
     process_colors()
