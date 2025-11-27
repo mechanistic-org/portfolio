@@ -1,7 +1,7 @@
 [
   {
     "name": "Avegant",
-    "logo": "https://assets.eriknorris.com/_site/logos/avegant.svg"
+    "logo": "/assets/r2/_site/logos/avegant.svg"
   },
   {
     "name": "D2M",
@@ -17,7 +17,7 @@
   },
   {
     "name": "Fitch",
-    "logo": "https://assets.eriknorris.com/_site/logos/fitch.svg"
+    "logo": "/assets/r2/_site/logos/fitch.svg"
   },
   {
     "name": "Function",
@@ -25,7 +25,7 @@
   },
   {
     "name": "Hyphen",
-    "logo": "https://assets.eriknorris.com/_site/logos/hyphen.svg"
+    "logo": "/assets/r2/_site/logos/hyphen.svg"
   },
   {
     "name": "Kaleidescape",
@@ -37,7 +37,7 @@
   },
   {
     "name": "Microsoft",
-    "logo": "https://assets.eriknorris.com/_site/logos/microsoft.svg"
+    "logo": "/assets/r2/_site/logos/microsoft.svg"
   },
   {
     "name": "Motivate",
@@ -45,11 +45,11 @@
   },
   {
     "name": "Motorola",
-    "logo": "https://assets.eriknorris.com/_site/logos/motorola.svg"
+    "logo": "/assets/r2/_site/logos/motorola.svg"
   },
   {
     "name": "Noon",
-    "logo": "https://assets.eriknorris.com/_site/logos/noon.png"
+    "logo": "/assets/r2/_site/logos/noon.png"
   },
   {
     "name": "Purina",
@@ -57,7 +57,7 @@
   },
   {
     "name": "Silicon Graphics",
-    "logo": "https://assets.eriknorris.com/_site/logos/silicongraphics.svg"
+    "logo": "/assets/r2/_site/logos/silicongraphics.svg"
   },
   {
     "name": "Synapse",
@@ -69,11 +69,11 @@
   },
   {
     "name": "UltimateTV",
-    "logo": "https://assets.eriknorris.com/_site/logos/ultimatetv.svg"
+    "logo": "/assets/r2/_site/logos/ultimatetv.svg"
   },
   {
     "name": "WebTV",
-    "logo": "https://assets.eriknorris.com/_site/logos/webtv.svg"
+    "logo": "/assets/r2/_site/logos/webtv.svg"
   },
   {
     "name": "awesomejob",
@@ -81,6 +81,6 @@
   },
   {
     "name": "frogdesign",
-    "logo": "https://assets.eriknorris.com/_site/logos/frogdesign.svg"
+    "logo": "/assets/r2/_site/logos/frogdesign.svg"
   }
 ]

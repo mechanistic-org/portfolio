@@ -1,60 +1,64 @@
 ---
 interface Props {
-  src: string;
-  alt?: string;
-  poster?: string;
+	src: string;
+	alt?: string;
+	poster?: string;
 }
 
-const DEFAULT_POSTER = "https://assets.eriknorris.com/_site/EN_Badge_wire_rusty_1200.png";
+const DEFAULT_POSTER = "/assets/r2/_site/EN_Badge_wire_rusty_1200.png";
 const { src, alt = "3D Model", poster = DEFAULT_POSTER } = Astro.props;
 const uid = "mv-" + Math.random().toString(36).substr(2, 9);
 ---
 
-<div class="w-full h-[500px] bg-neutral-900/50 border border-neutral-800 rounded-xl overflow-hidden relative my-12">
-  <script>
-    if (!customElements.get('model-viewer')) {
-      const script = document.createElement('script');
-      script.type = 'module';
-      script.src = 'https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js';
-      document.head.appendChild(script);
-    }
-  </script>
-
-  <model-viewer 
-    id={uid}
-    src={src} 
-    poster={poster}
-    alt={alt}
-    auto-rotate 
-    camera-controls 
-    shadow-intensity="1.5"
-    shadow-softness="1"
-    exposure="1.2"
-    camera-orbit="45deg 55deg 105%"
-    field-of-view="30deg"
-    interaction-prompt="auto"
-    class="w-full h-full"
-    style="--poster-color: transparent; background-color: transparent;"
-  >
-    <div slot="progress-bar" class="absolute top-0 left-0 h-1 w-full bg-transparent">
-        <div class="h-full bg-primary transition-all duration-300" style="width: 0%" data-progress-bar></div>
-    </div>
-    <div slot="ar-button" class="absolute bottom-4 right-4 bg-neutral-900/80 backdrop-blur text-white px-3 py-1.5 rounded-lg text-xs font-mono border border-white/10 opacity-80 hover:opacity-100 transition-opacity cursor-pointer flex items-center gap-2">
-       <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-       Interactive 3D
-    </div>
-    <div slot="poster" class="absolute inset-0 flex items-center justify-center"></div>
-  </model-viewer>
+<div
+	class="relative my-12 h-[500px] w-full overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/50"
+>
+	<model-viewer
+		id={uid}
+		src={src}
+		poster={poster}
+		alt={alt}
+		auto-rotate
+		camera-controls
+		shadow-intensity="1.5"
+		shadow-softness="1"
+		exposure="1.2"
+		camera-orbit="45deg 55deg 105%"
+		field-of-view="30deg"
+		interaction-prompt="auto"
+		class="h-full w-full"
+		style="--poster-color: transparent; background-color: transparent;"
+	>
+		<div slot="progress-bar" class="absolute top-0 left-0 h-1 w-full bg-transparent">
+			<div
+				class="bg-primary h-full transition-all duration-300"
+				style="width: 0%"
+				data-progress-bar
+			>
+			</div>
+		</div>
+		<div
+			slot="ar-button"
+			class="absolute right-4 bottom-4 flex cursor-pointer items-center gap-2 rounded-lg border border-white/10 bg-neutral-900/80 px-3 py-1.5 font-mono text-xs text-white opacity-80 backdrop-blur transition-opacity hover:opacity-100"
+		>
+			<span class="h-2 w-2 animate-pulse rounded-full bg-green-500"></span>
+			Interactive 3D
+		</div>
+		<div slot="poster" class="absolute inset-0 flex items-center justify-center"></div>
+	</model-viewer>
 </div>
 
 <script define:vars={{ uid }}>
-  const viewer = document.querySelector(`#${uid}`);
-  const progressBar = viewer?.querySelector('[data-progress-bar]');
-  if (viewer && progressBar) {
-    viewer.addEventListener('progress', (e) => {
-      const p = e.detail.totalProgress * 100;
-      progressBar.style.width = `${p}%`;
-      if (p === 100) setTimeout(() => { progressBar.style.opacity = '0'; }, 500);
-    });
-  }
+	const viewer = document.querySelector(`#${uid}`);
+	const progressBar = viewer?.querySelector("[data-progress-bar]");
+	if (viewer && progressBar) {
+		viewer.addEventListener("progress", (e) => {
+			const p = e.detail.totalProgress * 100;
+			progressBar.style.width = `${p}%`;
+			if (p === 100)
+				setTimeout(() => {
+					progressBar.style.opacity = "0";
+				}, 500);
+		});
+	}
 </script>

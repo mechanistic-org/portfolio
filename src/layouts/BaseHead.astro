@@ -62,5 +62,10 @@ import JetBrainsMono from "@fontsource-variable/jetbrains-mono/files/jetbrains-m
 	noindex={noindex}
 />
 
+<!-- model-viewer for 3D content -->
+<script
+	type="module"
+	src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+
 <!-- no fallback as I saw issues with firefox fallback -->
 {siteData.useViewTransitions && <ClientRouter fallback="none" />}

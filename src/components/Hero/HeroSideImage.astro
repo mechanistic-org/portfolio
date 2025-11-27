@@ -2,63 +2,66 @@
 import SocialCloud from "@components/SocialCloud/SocialCloud.astro";
 import siteData from "@config/siteData.json";
 
-const ASSET_DOMAIN = "https://assets.eriknorris.com";
+const ASSET_DOMAIN = "/assets/r2";
 // 1. YOUR 3D LOGO
 const MODEL_URL = `${ASSET_DOMAIN}/_site/logo.glb`;
 
 // 2. YOUR PNG POSTER (Transparency Support)
-const POSTER_URL = `${ASSET_DOMAIN}/_site/EN_Badge_wire_rusty_1200.png`; 
+const POSTER_URL = `${ASSET_DOMAIN}/_site/EN_Badge_wire_rusty_1200.png`;
 ---
 
 <section id="hero" class="relative flex w-full pb-6">
-    <div class="site-container grid items-center gap-10 pt-36 md:grid-cols-3 md:gap-20 md:pt-44">
-        
-        <div class="mx-auto max-w-lg md:col-span-2 md:ml-0 md:max-w-full flex flex-col gap-6">
-            <h1 class="h1">Hi, I'm {siteData.author.name}</h1>
-            <p class="description text-pretty text-lg text-neutral-400">
-                Mechanical Design Engineer
-            </p>
-            <div class="flex gap-4">
-                <SocialCloud />
-            </div>
-        </div>
+	<div class="site-container grid items-center gap-10 pt-36 md:grid-cols-3 md:gap-20 md:pt-44">
+		<div class="mx-auto flex max-w-lg flex-col gap-6 md:col-span-2 md:ml-0 md:max-w-full">
+			<h1 class="h1">Hi, I'm {siteData.author.name}</h1>
+			<p class="description text-lg text-pretty text-neutral-400">Mechanical Design Engineer</p>
+			<div class="flex gap-4">
+				<SocialCloud />
+			</div>
+		</div>
 
-        <div class="md:col-span-1 w-full min-w-[300px] h-[400px] md:h-[500px] flex items-center justify-center relative">
-            
-            <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
-            
-            <model-viewer 
-                src={MODEL_URL}
-                poster={POSTER_URL} 
-                alt="Erik Norris 3D Logo"
-                auto-rotate 
-                camera-controls 
-                shadow-intensity="1"
-                exposure="1.2"
-                camera-orbit="0deg 90deg 105%"
-                field-of-view="30deg"
-                class="w-full h-full"
-                style="--poster-color: transparent; background-color: transparent;"
-            >
-                <div slot="progress-bar" class="absolute top-0 left-0 h-1 w-full bg-transparent">
-                    <div class="h-full bg-primary transition-all duration-300" style="width: 0%" id="progress"></div>
-                </div>
-            </model-viewer>
-
-        </div>
-    </div>
+		<div
+			class="relative flex h-[400px] w-full min-w-[300px] items-center justify-center md:col-span-1 md:h-[500px]"
+		>
+			<model-viewer
+				src={MODEL_URL}
+				poster={POSTER_URL}
+				alt="Erik Norris 3D Logo"
+				auto-rotate
+				camera-controls
+				shadow-intensity="1"
+				exposure="1.2"
+				camera-orbit="0deg 90deg 105%"
+				field-of-view="30deg"
+				class="h-full w-full"
+				style="--poster-color: transparent; background-color: transparent;"
+			>
+				<div slot="progress-bar" class="absolute top-0 left-0 h-1 w-full bg-transparent">
+					<div
+						class="bg-primary h-full transition-all duration-300"
+						style="width: 0%"
+						id="progress"
+					>
+					</div>
+				</div>
+			</model-viewer>
+		</div>
+	</div>
 </section>
 
 <script>
-    const viewer = document.querySelector('model-viewer');
-    const progress = document.querySelector('#progress') as HTMLElement;
-    
-    if (viewer && progress) {
-        viewer.addEventListener('progress', (e) => {
-            const event = e as CustomEvent;
-            const p = event.detail.totalProgress * 100;
-            progress.style.width = `${p}%`;
-            if (p === 100) setTimeout(() => { progress.style.opacity = '0'; }, 500);
-        });
-    }
+	const viewer = document.querySelector("model-viewer");
+	const progress = document.querySelector("#progress") as HTMLElement;
+
+	if (viewer && progress) {
+		viewer.addEventListener("progress", (e) => {
+			const event = e as CustomEvent;
+			const p = event.detail.totalProgress * 100;
+			progress.style.width = `${p}%`;
+			if (p === 100)
+				setTimeout(() => {
+					progress.style.opacity = "0";
+				}, 500);
+		});
+	}
 </script>

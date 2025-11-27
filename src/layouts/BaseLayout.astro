@@ -55,11 +55,6 @@ const {
 			},
 		]}
 	>
-        <div class="w-full bg-yellow-500/10 border-b border-yellow-500/20 text-yellow-500 text-[10px] uppercase tracking-widest font-mono py-1 px-4 flex justify-center md:justify-between items-center z-50 relative">
-    		<span>⚠  System Status: V1.0 Beta / Ingestion Active</span>
-    		<span class="hidden md:inline opacity-75">Reference Design Only</span>
-		</div>
-
 		<div class="flex min-h-lvh flex-col justify-between">
 			<div>
 				<Nav />
@@ -72,7 +67,7 @@ const {
 
 		<script>
 			import siteData from "@config/siteData.json";
-            import MOS from "motion-on-scroll";
+			import MOS from "motion-on-scroll";
 
 			if (siteData.useAnimations === true) {
 				MOS.init({

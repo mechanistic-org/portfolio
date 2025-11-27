@@ -3,6 +3,7 @@ import csv
 import json
 import glob
 import urllib.request
+import shutil
 
 # --- CONFIGURATION ---
 SOURCE_DIR = "data_source"
@@ -10,9 +11,12 @@ MANUAL_CONTENT_DIR = "data_source/manual_content"
 OUTPUT_CONTENT_DIR = "src/content/projects"
 OUTPUT_DATA_DIR = "src/data"
 ASSETS_DIR = "public/assets/placeholders"
-R2_DOMAIN = "https://assets.eriknorris.com"
+LOCAL_R2_DIR = "public/assets/r2"
+# R2_DOMAIN = "https://assets.eriknorris.com" 
+# SWITCHING TO LOCAL ASSETS FOR STABILITY
+R2_DOMAIN = "/assets/r2"
 
-for d in [OUTPUT_CONTENT_DIR, OUTPUT_DATA_DIR, ASSETS_DIR, MANUAL_CONTENT_DIR]:
+for d in [OUTPUT_CONTENT_DIR, OUTPUT_DATA_DIR, ASSETS_DIR, MANUAL_CONTENT_DIR, LOCAL_R2_DIR]:
     os.makedirs(d, exist_ok=True)
 
 # --- UTILS ---
@@ -86,6 +90,13 @@ def ensure_dummy_assets():
                 urllib.request.urlretrieve(url, path)
             except: pass
 
+def sync_r2_assets(slug, source_path):
+    """Copy assets from R2_STAGING to public/assets/r2/{slug}"""
+    dest_dir = os.path.join(LOCAL_R2_DIR, slug)
+    if os.path.exists(dest_dir):
+        shutil.rmtree(dest_dir)
+    shutil.copytree(source_path, dest_dir)
+
 # --- PROCESSORS ---
 def process_colors():
     print("🎨 Processing Colors...")
@@ -156,6 +167,11 @@ def process_projects():
     print("🏗️  Processing Projects...")
     ensure_dummy_assets()
     
+    # SYNC _SITE ASSETS FIRST
+    site_assets = os.path.join("R2_STAGING", "_site")
+    if os.path.exists(site_assets):
+        sync_r2_assets("_site", site_assets)
+
     main = read_csv_smart(find_file("Main.csv"), "Slug Name")
     if not main: main = read_csv_smart(find_file("Main.csv"), "Name")
     
@@ -224,12 +240,19 @@ def process_projects():
 
         local_stage = os.path.join("R2_STAGING", slug)
         if os.path.exists(local_stage):
+             # SYNC ASSETS
+             sync_r2_assets(slug, local_stage)
+             
              for ext in [".png", ".jpg", ".webp"]:
                 if os.path.exists(os.path.join(local_stage, f"hero{ext}")):
                     hero_img = f"{R2_DOMAIN}/{slug}/hero{ext}"
                     break
              if os.path.exists(os.path.join(local_stage, "model.glb")):
+                 print(f"✅ Found model for {slug}")
                  model_url = f"{R2_DOMAIN}/{slug}/model.glb"
+             else:
+                 if slug == "xbox": print(f"❌ No model.glb found for {slug} in {local_stage}")
+
              for f in os.listdir(local_stage):
                  lower = f.lower()
                  if lower.endswith(('.png', '.jpg', '.jpeg', '.webp')) and "hero" not in lower:
@@ -237,11 +260,25 @@ def process_projects():
         else:
              comment = f"# R2: {R2_DOMAIN}/{slug}/hero.jpg"
 
+        # Resource Scanning
+        documents = []
+        links = []
+        if os.path.exists(local_stage):
+            for f in os.listdir(local_stage):
+                if f.lower().endswith(".pdf"):
+                    documents.append({"name": f, "url": f"{R2_DOMAIN}/{slug}/{f}"})
+                elif f.lower().endswith(".url"):
+                    links.append({"name": f.replace(".url", ""), "url": f"{R2_DOMAIN}/{slug}/{f}"})
+
         # Manual Override
         manual_path = os.path.join(MANUAL_CONTENT_DIR, f"{slug}.md")
         if os.path.exists(manual_path):
             with open(manual_path, 'r', encoding='utf-8') as f:
                 content_body = f.read()
+            
+            # Template Replacement
+            content_body = content_body.replace("{{MODEL_URL}}", model_url)
+            content_body = content_body.replace("{{HERO_IMAGE}}", hero_img)
         else:
             content_body = f"""
 import {{ YouTube }} from '@astro-community/astro-embed-youtube';
@@ -258,7 +295,6 @@ import {{ YouTube }} from '@astro-community/astro-embed-youtube';
 <ModelViewer src="{model_url}" alt="3D Asset" />
 """
 
-        # FIXED: ADDED endDate FIELD BELOW
         mdx = f"""---
 title: {json.dumps(title)}
 slug: "{slug}"
@@ -274,6 +310,8 @@ tags: {json.dumps(bom)}
 skillData: {json.dumps(skill_data)}
 stats: {json.dumps(parts)}
 gallery: {json.dumps(gallery_images)}
+documents: {json.dumps(documents)}
+links: {json.dumps(links)}
 heroImage: "{hero_img}" {comment}
 draft: false
 description: "{title} - {industry} project."
@@ -290,9 +328,10 @@ description: "{title} - {industry} project."
     for client in sorted(list(all_clients)):
         logo_name = client.lower().replace(' ', '')
         logo_path = None
-        if os.path.exists(os.path.join("R2_STAGING", "_site", "logos", f"{logo_name}.svg")):
+        # CHECK LOCAL R2
+        if os.path.exists(os.path.join(LOCAL_R2_DIR, "_site", "logos", f"{logo_name}.svg")):
             logo_path = f"{R2_DOMAIN}/_site/logos/{logo_name}.svg"
-        elif os.path.exists(os.path.join("R2_STAGING", "_site", "logos", f"{logo_name}.png")):
+        elif os.path.exists(os.path.join(LOCAL_R2_DIR, "_site", "logos", f"{logo_name}.png")):
             logo_path = f"{R2_DOMAIN}/_site/logos/{logo_name}.png"
         client_data.append({"name": client, "logo": logo_path})
 
