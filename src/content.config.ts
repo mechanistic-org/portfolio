@@ -48,6 +48,7 @@ const projectsCollection = defineCollection({
         title: z.string(),
         slug: z.string().optional(),
         date: z.coerce.date().optional(),
+        gallery: z.array(z.string()).default([]),
         
         // Facets
         employer: z.string().optional(),

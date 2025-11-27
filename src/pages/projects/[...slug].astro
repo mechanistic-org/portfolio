@@ -4,7 +4,7 @@ import Layout from '../../layouts/BaseLayout.astro';
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '../../components/mdx/ModelViewer.astro';
 import Button from '../../components/Button/Button.astro';
-import SkillRadar from '../../components/projects/SkillRadar.tsx';
+import SkillRadar from '../../components/Projects/SkillRadar.tsx';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -18,39 +18,28 @@ const { project } = Astro.props;
 const { Content } = await render(project); 
 const data = project.data;
 
-// --- DATE LOGIC (CORRECTED) ---
-// Data is ALREADY a Date object because of content.config.ts. 
-// No parsing function needed.
+// --- DATE LOGIC ---
 const startDate = data.date;
 const endDate = data.endDate;
-
-// Format for display
 const dateDisplay = startDate 
   ? startDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short' }) 
   : "Unknown";
 
-// Calculate Duration
 let durationStr = "Active";
 if (startDate) {
     const end = endDate || new Date();
-    const diffTime = Math.abs(end.getTime() - startDate.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-    
-    if (diffDays > 365) {
-        durationStr = (diffDays / 365).toFixed(1) + " Years";
-    } else {
-        const months = Math.max(1, Math.round(diffDays / 30));
-        durationStr = months + (months === 1 ? " Month" : " Months");
-    }
+    const diffDays = Math.ceil(Math.abs(end.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)); 
+    if (diffDays > 365) durationStr = (diffDays / 365).toFixed(1) + " Years";
+    else durationStr = Math.max(1, Math.round(diffDays / 30)) + " Months";
 }
 
-// Helpers
 const tools = Array.isArray(data.tools) ? data.tools : [];
 const clients = Array.isArray(data.client) ? data.client : [data.client].filter(Boolean);
 const skillData = Array.isArray(data.skillData) ? data.skillData : [];
+const gallery = Array.isArray(data.gallery) ? data.gallery : [];
 ---
 
-<Layout title={data.title} description={data.description || `Case study for ${data.title}`}>
+<Layout title={data.title} description={data.description}>
   
   <section class="relative pt-32 pb-12 border-b border-neutral-800 bg-neutral-900/30">
     <div class="site-container">
@@ -69,33 +58,17 @@ const skillData = Array.isArray(data.skillData) ? data.skillData : [];
   <div class="site-container py-12 md:py-24 grid md:grid-cols-12 gap-12">
       
     <aside class="md:col-span-4 lg:col-span-3 space-y-8 order-2 md:order-1">
-        
         <div class="p-6 rounded-xl border border-neutral-800 bg-neutral-900/50">
             <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4 border-b border-neutral-800 pb-2">Project Data</h3>
             <dl class="space-y-4 text-sm">
-                <div>
-                    <dt class="text-neutral-500 mb-1">Role</dt>
-                    <dd class="text-white font-medium">{data.employer}</dd>
-                </div>
-                <div>
-                    <dt class="text-neutral-500 mb-1">Started</dt>
-                    <dd class="text-white font-medium">{dateDisplay}</dd>
-                </div>
-                <div>
-                    <dt class="text-neutral-500 mb-1">Duration</dt>
-                    <dd class="text-white font-medium">{durationStr}</dd>
-                </div>
+                <div><dt class="text-neutral-500 mb-1">Role</dt><dd class="text-white font-medium">{data.employer}</dd></div>
+                <div><dt class="text-neutral-500 mb-1">Started</dt><dd class="text-white font-medium">{dateDisplay}</dd></div>
+                <div><dt class="text-neutral-500 mb-1">Duration</dt><dd class="text-white font-medium">{durationStr}</dd></div>
                 {clients.length > 0 && (
-                <div>
-                    <dt class="text-neutral-500 mb-1">Client / Partner</dt>
-                    <dd class="text-white font-medium">{clients.join(", ")}</dd>
-                </div>
+                <div><dt class="text-neutral-500 mb-1">Client / Partner</dt><dd class="text-white font-medium">{clients.join(", ")}</dd></div>
                 )}
-                <div>
-                    <dt class="text-neutral-500 mb-1">Status</dt>
-                    <dd class="inline-flex items-center gap-2 px-2 py-1 rounded bg-primary/10 text-primary text-xs font-bold border border-primary/20">
-                        {data.production || "Concept"}
-                    </dd>
+                <div><dt class="text-neutral-500 mb-1">Status</dt>
+                <dd class="inline-flex items-center gap-2 px-2 py-1 rounded bg-primary/10 text-primary text-xs font-bold border border-primary/20">{data.production || "Concept"}</dd>
                 </div>
             </dl>
         </div>
@@ -104,46 +77,41 @@ const skillData = Array.isArray(data.skillData) ? data.skillData : [];
         <div>
             <h3 class="text-xs font-bold text-neutral-500 uppercase tracking-wider mb-3">Toolchain</h3>
             <div class="flex flex-wrap gap-2">
-                {tools.map(t => (
-                    <span class="px-2 py-1 bg-neutral-800 border border-neutral-700 rounded text-xs text-neutral-300">{t}</span>
-                ))}
+                {tools.map(t => <span class="px-2 py-1 bg-neutral-800 border border-neutral-700 rounded text-xs text-neutral-300">{t}</span>)}
             </div>
         </div>
         )}
-
         <Button variant="outline" href="/projects/" arrow="left" class="w-full justify-center">Back to Archive</Button>
     </aside>
 
     <article class="md:col-span-8 lg:col-span-9 space-y-12 order-1 md:order-2">
         
-        <div class="rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900">
-            <img 
-                src={data.heroImage} 
-                alt={data.title} 
-                class="w-full h-auto object-cover max-h-[500px]"
-            />
+        <div class="rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900 shadow-2xl">
+            <img src={data.heroImage} alt={data.title} class="w-full h-auto object-cover max-h-[600px]"/>
         </div>
 
         {data.stats && (data.stats.plastic > 0 || data.stats.metal > 0 || data.stats.pcb > 0) && (
-           <div class="grid grid-cols-3 gap-4 p-6 border border-neutral-800 rounded-xl bg-neutral-900/30">
-               <div class="text-center">
-                   <div class="text-2xl font-bold text-white">{data.stats.plastic}</div>
-                   <div class="text-xs text-neutral-500 uppercase">Plastic Parts</div>
+           <div class="grid grid-cols-3 gap-px bg-neutral-800 border border-neutral-800 rounded-xl overflow-hidden">
+               <div class="bg-neutral-900 p-6 text-center group hover:bg-neutral-800 transition-colors">
+                   <div class="text-3xl font-bold text-white mb-1 group-hover:text-primary transition-colors">{data.stats.plastic}</div>
+                   <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">Plastic Parts</div>
                </div>
-               <div class="text-center border-l border-neutral-800">
-                   <div class="text-2xl font-bold text-white">{data.stats.metal}</div>
-                   <div class="text-xs text-neutral-500 uppercase">Metal Parts</div>
+               <div class="bg-neutral-900 p-6 text-center group hover:bg-neutral-800 transition-colors">
+                   <div class="text-3xl font-bold text-white mb-1 group-hover:text-primary transition-colors">{data.stats.metal}</div>
+                   <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">Metal Parts</div>
                </div>
-               <div class="text-center border-l border-neutral-800">
-                   <div class="text-2xl font-bold text-white">{data.stats.pcb}</div>
-                   <div class="text-xs text-neutral-500 uppercase">PCBs</div>
+               <div class="bg-neutral-900 p-6 text-center group hover:bg-neutral-800 transition-colors">
+                   <div class="text-3xl font-bold text-white mb-1 group-hover:text-primary transition-colors">{data.stats.pcb}</div>
+                   <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest">PCBs</div>
                </div>
            </div>
         )}
 
         {skillData.length > 0 && (
             <div class="my-12">
-                <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><span class="text-primary">///</span> Skill Fingerprint</h3>
+                <h3 class="text-sm font-bold text-neutral-500 uppercase tracking-widest mb-6 flex items-center gap-3">
+                    <span class="w-2 h-2 rounded-full bg-primary"></span> Skill Fingerprint
+                </h3>
                 <div class="h-[400px] w-full rounded-xl border border-neutral-800 bg-neutral-900/30 p-6">
                     <SkillRadar data={skillData} client:visible />
                 </div>
@@ -153,6 +121,19 @@ const skillData = Array.isArray(data.skillData) ? data.skillData : [];
         <div class="prose prose-invert max-w-none prose-lg prose-headings:font-bold prose-headings:text-white prose-p:text-neutral-300 prose-img:rounded-xl">
             <Content components={{ YouTube, ModelViewer }} />
         </div>
+
+        {gallery.length > 0 && (
+            <div class="mt-16 border-t border-neutral-800 pt-12">
+                <h3 class="text-2xl font-bold text-white mb-8">Project Gallery</h3>
+                <div class="columns-1 md:columns-2 gap-8 space-y-8">
+                    {gallery.map(img => (
+                        <div class="break-inside-avoid rounded-xl overflow-hidden border border-neutral-800 bg-neutral-900 hover:border-neutral-600 transition-colors">
+                            <img src={img} alt="Gallery Image" class="w-full h-auto" loading="lazy"/>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        )}
 
     </article>
 

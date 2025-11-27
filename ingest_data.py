@@ -6,19 +6,16 @@ import urllib.request
 
 # --- CONFIGURATION ---
 SOURCE_DIR = "data_source"
-MANUAL_CONTENT_DIR = "data_source/manual_content" # <--- NEW: Safe zone for writing
 OUTPUT_CONTENT_DIR = "src/content/projects"
 OUTPUT_DATA_DIR = "src/data"
 ASSETS_DIR = "public/assets/placeholders"
 R2_DOMAIN = "https://assets.eriknorris.com"
 
-# Ensure directories exist
-for d in [OUTPUT_CONTENT_DIR, OUTPUT_DATA_DIR, ASSETS_DIR, MANUAL_CONTENT_DIR]:
+for d in [OUTPUT_CONTENT_DIR, OUTPUT_DATA_DIR, ASSETS_DIR]:
     os.makedirs(d, exist_ok=True)
 
 # --- UTILS ---
 def find_file(suffix):
-    """Smartly finds files regardless of 'resviz...' prefix."""
     exact = os.path.join(SOURCE_DIR, suffix)
     if os.path.exists(exact): return exact
     pattern = os.path.join(SOURCE_DIR, f"*{suffix}")
@@ -26,14 +23,9 @@ def find_file(suffix):
     return matches[0] if matches else None
 
 def read_csv_smart(filepath, header_trigger="Name"):
-    """Robust Reader: Hunts for the 'header_trigger' string."""
-    if not filepath or not os.path.exists(filepath): 
-        print(f"⚠️  File not found: {filepath}")
-        return []
-    
+    if not filepath or not os.path.exists(filepath): return []
     with open(filepath, 'r', encoding='utf-8-sig') as f:
         lines = [l.strip() for l in f.readlines() if l.strip()]
-    
     if not lines: return []
     
     start_idx = -1
@@ -41,20 +33,9 @@ def read_csv_smart(filepath, header_trigger="Name"):
         if header_trigger in line:
             start_idx = i
             break
-    
-    if start_idx == -1:
-        # If trigger not found, assume Row 1 (Clean file mode)
-        start_idx = 0
-
+    if start_idx == -1: start_idx = 0
     if lines[start_idx].startswith(','): lines[start_idx] = lines[start_idx][1:]
-    
-    reader = csv.DictReader(lines[start_idx:])
-    data = []
-    for row in reader:
-        clean_row = {k.strip(): v.strip() for k, v in row.items() if k}
-        if clean_row:
-            data.append(clean_row)
-    return data
+    return list(csv.DictReader(lines[start_idx:]))
 
 def extract_expertise_metadata(filepath):
     if not filepath: return {}
@@ -66,41 +47,31 @@ def extract_expertise_metadata(filepath):
             header_row = [c.strip() for c in row]
             break
     if not header_row: return {}
-
     phase_row, weight_row = [], []
     for row in lines:
         if "Phase ->" in "".join(row): phase_row = row
         if "%" in "".join(row) and "Phase" not in "".join(row): weight_row = row 
-
     skill_defs = {}
     ignored = ["Name", "Project Start", "Project End", "days", "midpoint", "✔️", "▲", "midpoint Y"]
-    for idx, col_name in enumerate(header_row):
-        if col_name and col_name not in ignored:
-            p_val = phase_row[idx] if phase_row and idx < len(phase_row) else "0"
-            w_val = weight_row[idx] if weight_row and idx < len(weight_row) else "1"
-            skill_defs[col_name] = {
-                "Phase": p_val.strip() or "0",
-                "Weight": w_val.replace('%','').strip() or "1"
-            }
+    for idx, col in enumerate(header_row):
+        if col and col not in ignored:
+            p = phase_row[idx] if phase_row and idx < len(phase_row) else "0"
+            w = weight_row[idx] if weight_row and idx < len(weight_row) else "1"
+            skill_defs[col] = {"Phase": p.strip() or "0", "Weight": w.replace('%','').strip() or "1"}
     return skill_defs
 
 def ensure_dummy_assets():
     if not os.path.exists(ASSETS_DIR):
         os.makedirs(ASSETS_DIR)
-    dummies = [
-        ("tech-1.jpg", "https://picsum.photos/id/1/800/600"),
-        ("tech-2.jpg", "https://picsum.photos/id/20/800/600"),
-        ("blueprint.jpg", "https://picsum.photos/id/201/800/600"),
-        ("abstract.jpg", "https://picsum.photos/id/180/800/600")
-    ]
+    dummies = [("tech-1.jpg", "https://picsum.photos/id/1/800/600")]
     for filename, url in dummies:
-        filepath = os.path.join(ASSETS_DIR, filename)
-        if not os.path.exists(filepath):
+        path = os.path.join(ASSETS_DIR, filename)
+        if not os.path.exists(path):
             try:
                 opener = urllib.request.build_opener()
                 opener.addheaders = [('User-agent', 'Mozilla/5.0')]
                 urllib.request.install_opener(opener)
-                urllib.request.urlretrieve(url, filepath)
+                urllib.request.urlretrieve(url, path)
             except: pass
 
 # --- PROCESSORS ---
@@ -108,10 +79,7 @@ def process_colors():
     print("🎨 Processing Colors...")
     path = find_file("Colors.csv") or find_file("color_etc.csv")
     if not path: return 
-    data = read_csv_smart(path, "Requirements Analysis")
-    # Fallback trigger
-    if not data: data = read_csv_smart(path, "Name")
-
+    data = read_csv_smart(path, "Name")
     color_map = {}
     for row in data:
         keys = list(row.keys())
@@ -146,14 +114,11 @@ def process_tenure():
     path = find_file("Tenure.csv")
     if not path: return
     data = read_csv_smart(path, "Employer")
-    if not data: data = read_csv_smart(path, "job")
-    
     history = []
     color_map = {}
     if os.path.exists(os.path.join(OUTPUT_DATA_DIR, "colors.json")):
         with open(os.path.join(OUTPUT_DATA_DIR, "colors.json"), "r") as f:
             color_map = json.load(f)
-
     for row in data:
         company = row.get("Employer") or row.get("job")
         if not company: continue
@@ -174,32 +139,20 @@ def process_projects():
     print("🏗️  Processing Projects...")
     ensure_dummy_assets()
     
-    # 1. Load Files
-    # Smartly tries "Slug Name" first, then "Name"
     main = read_csv_smart(find_file("Main.csv"), "Slug Name")
     if not main: main = read_csv_smart(find_file("Main.csv"), "Name")
-    
-    tax = {r.get('Project Name') or r.get('Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Project Name")}
+    tax = {r.get('Project Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Project Name")}
     if not tax: tax = {r.get('Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Name")}
-
-    phases = {r['Name']: r for r in read_csv_smart(find_file("Phase.csv"), "Project Start")}
-    
-    f_stats = find_file("Stats.csv") or find_file("Part count.csv")
-    stats_data = read_csv_smart(f_stats, "Plastic")
-    stats = {r.get('Name'): r for r in stats_data if r.get('Name')}
-    
+    phases = {r['Name']: r for r in read_csv_smart(find_file("Phase.csv"))}
+    stats = {r['Name']: r for r in read_csv_smart(find_file("Stats.csv") or find_file("Part count.csv"))}
     f_expert = find_file("Expertise.csv")
     expert_data = read_csv_smart(f_expert, "Project Start") 
     project_skills = {r.get('Name'): r for r in expert_data}
     skill_defs = extract_expertise_metadata(f_expert) 
 
     dummy_files = ["tech-1.jpg", "tech-2.jpg", "blueprint.jpg", "abstract.jpg"]
-    
-    # Initialize Globals (Fixed the crash!)
     all_clients = set()
     count = 0
-
-    print(f"   ... Generating MDX files ...")
 
     for i, row in enumerate(main):
         name = row.get("Slug Name") or row.get("Name")
@@ -207,11 +160,7 @@ def process_projects():
         
         slug = name.lower().strip().replace(' ', '-').replace('/', '-')
         title = row.get("Descriptive Name") or name
-        
         employer = row.get("Employer", "")
-        if employer and "Mechanistic" not in employer and "#awesomejob" not in employer:
-            all_clients.add(employer)
-            
         if "Mechanistic" in employer: employer = "Mechanistic (Consulting)"
         clients = [c.strip() for c in row.get("Client", "").split('/') if c.strip()]
         for c in clients: all_clients.add(c)
@@ -243,34 +192,38 @@ def process_projects():
         bom = [s[0] for s in weighted]
         skill_data = [{"name": s[0], "value": round(s[1], 1)} for s in weighted[:6]]
 
-        # --- ASSET LOGIC (Hybrid) ---
-        # 1. Default: Placeholder
+        # --- GALLERY LOGIC (NEW) ---
         hero_img = f"/assets/placeholders/{dummy_files[i % 4]}"
-        model_url = f"{R2_DOMAIN}/_site/NeilArmstrong.glb" # Default Neil
+        model_url = f"{R2_DOMAIN}/_site/NeilArmstrong.glb"
         comment = ""
-        
-        # 2. Check Local Staging
+        gallery_images = []
+
         local_stage = os.path.join("R2_STAGING", slug)
         if os.path.exists(local_stage):
-             # Image: Prioritize PNG
+             # Find Hero (Priority: PNG > JPG)
              for ext in [".png", ".jpg", ".webp"]:
                 if os.path.exists(os.path.join(local_stage, f"hero{ext}")):
                     hero_img = f"{R2_DOMAIN}/{slug}/hero{ext}"
                     break
-             # Model: Specific Project GLB
+             
+             # Find Gallery Images (All other images)
+             for f in os.listdir(local_stage):
+                 if f.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')) and "hero" not in f.lower():
+                     gallery_images.append(f"{R2_DOMAIN}/{slug}/{f}")
+                     
+             # Check Model
              if os.path.exists(os.path.join(local_stage, "model.glb")):
                  model_url = f"{R2_DOMAIN}/{slug}/model.glb"
         else:
-             comment = f"# R2: {R2_DOMAIN}/{slug}/hero.png"
+             comment = f"# R2: {R2_DOMAIN}/{slug}/hero.jpg"
 
         # --- CONTENT LOGIC (Hybrid) ---
-        # Check for Manual Override file
-        manual_path = os.path.join(MANUAL_CONTENT_DIR, f"{slug}.md")
+        manual_path = os.path.join("data_source/manual_content", f"{slug}.md")
         if os.path.exists(manual_path):
             with open(manual_path, 'r', encoding='utf-8') as f:
                 content_body = f.read()
         else:
-            # Default Generated Body (Cleaned up)
+            # Clean Default Body (No BOM table text)
             content_body = f"""
 import {{ YouTube }} from '@astro-community/astro-embed-youtube';
 
@@ -299,6 +252,7 @@ production: "{prod}"
 tags: {json.dumps(bom)}
 skillData: {json.dumps(skill_data)}
 stats: {json.dumps(parts)}
+gallery: {json.dumps(gallery_images)}
 heroImage: "{hero_img}" {comment}
 draft: false
 description: "{title} - {industry} project."
