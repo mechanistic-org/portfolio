@@ -40,35 +40,34 @@ const otherPagesCollection = defineCollection({
 
 // 4. PROJECTS
 const projectsCollection = defineCollection({
-    loader: glob({ pattern: "**/*.mdx", base: "./src/content/projects" }), 
+    loader: glob({ pattern: "**/*.mdx", base: "./src/content/projects" }),
     schema: z.object({
         title: z.string(),
         slug: z.string().optional(),
         date: z.coerce.date().optional(),
-        // 👇 FIX: Added endDate explicitly
         endDate: z.coerce.date().optional(),
-        
+
         employer: z.string().optional(),
         industry: z.string().default("Other"),
         category: z.string().optional(),
         tools: z.array(z.string()).default([]),
         production: z.string().optional(),
-        
-        client: z.array(z.string()).default([]), 
+
+        client: z.array(z.string()).default([]),
         tags: z.array(z.string()).default([]),
 
         skillData: z.array(z.object({
             name: z.string(),
             value: z.number()
         })).default([]),
-        
+
         gallery: z.array(z.string()).default([]),
-        
+
         documents: z.array(z.object({
             name: z.string(),
             url: z.string()
         })).default([]),
-        
+
         links: z.array(z.object({
             name: z.string(),
             url: z.string()
@@ -83,6 +82,12 @@ const projectsCollection = defineCollection({
         heroImage: z.string().optional(),
         draft: z.boolean().default(false),
         description: z.string().optional(),
+
+        // New fields
+        duration: z.string().optional(),
+        statusLabel: z.string().optional(),
+        additionalSkills: z.array(z.string()).default([]),
+        skillGraph: z.string().optional(),
     }),
 });
 

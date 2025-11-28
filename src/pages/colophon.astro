@@ -70,6 +70,18 @@ const marqueeTools = [...tools, ...tools, ...tools];
 					>
 				</li>
 			</ul>
+
+			<div class="mt-16 overflow-hidden border-y border-neutral-800 bg-neutral-900/50 py-6">
+				<div class="animate-marquee flex gap-12 whitespace-nowrap">
+					{
+						marqueeTools.map((tool) => (
+							<span class="text-xl font-bold tracking-widest text-neutral-500 uppercase">
+								{tool}
+							</span>
+						))
+					}
+				</div>
+			</div>
 		</div>
 
 		<div class="relative rounded-xl border border-neutral-800 bg-neutral-900/50 p-8">

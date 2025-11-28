@@ -4,6 +4,10 @@ import json
 import glob
 import urllib.request
 import shutil
+import math
+from datetime import datetime
+import matplotlib.pyplot as plt
+import numpy as np
 
 # --- CONFIGURATION ---
 SOURCE_DIR = "data_source"
@@ -27,7 +31,13 @@ def find_file(suffix):
     matches = glob.glob(pattern)
     return matches[0] if matches else None
 
-def read_csv_smart(filepath, header_trigger="Name"):
+def validate_headers(headers, required_set, filename):
+    """Fail hard if critical headers are missing."""
+    missing = required_set - set(headers)
+    if missing:
+        raise ValueError(f"❌ CRITICAL: {filename} is missing required headers: {missing}")
+
+def read_csv_smart(filepath, header_trigger="Name", required_headers=None):
     if not filepath or not os.path.exists(filepath): 
         print(f"⚠️  File not found: {filepath}")
         return []
@@ -46,35 +56,17 @@ def read_csv_smart(filepath, header_trigger="Name"):
 
     if lines[start_idx].startswith(','): lines[start_idx] = lines[start_idx][1:]
     
+    # Validation
+    headers = [h.strip() for h in lines[start_idx].split(',')]
+    if required_headers:
+        validate_headers(set(headers), required_headers, os.path.basename(filepath))
+
     reader = csv.DictReader(lines[start_idx:])
     data = []
     for row in reader:
         clean_row = {k.strip(): v.strip() for k, v in row.items() if k}
         if clean_row: data.append(clean_row)
     return data
-
-def extract_expertise_metadata(filepath):
-    if not filepath: return {}
-    with open(filepath, 'r', encoding='utf-8-sig') as f:
-        lines = list(csv.reader(f))
-    header_row = []
-    for row in lines:
-        if "Name" in row and "Project Start" in row:
-            header_row = [c.strip() for c in row]
-            break
-    if not header_row: return {}
-    phase_row, weight_row = [], []
-    for row in lines:
-        if "Phase ->" in "".join(row): phase_row = row
-        if "%" in "".join(row) and "Phase" not in "".join(row): weight_row = row 
-    skill_defs = {}
-    ignored = ["Name", "Project Start", "Project End", "days", "midpoint", "✔️", "▲", "midpoint Y"]
-    for idx, col in enumerate(header_row):
-        if col and col not in ignored:
-            p = phase_row[idx] if phase_row and idx < len(phase_row) else "0"
-            w = weight_row[idx] if weight_row and idx < len(weight_row) else "1"
-            skill_defs[col] = {"Phase": p.strip() or "0", "Weight": w.replace('%','').strip() or "1"}
-    return skill_defs
 
 def ensure_dummy_assets():
     if not os.path.exists(ASSETS_DIR):
@@ -96,6 +88,52 @@ def sync_r2_assets(slug, source_path):
     if os.path.exists(dest_dir):
         shutil.rmtree(dest_dir)
     shutil.copytree(source_path, dest_dir)
+
+def generate_radar_chart(skill_data, slug):
+    """Generate SVG radar chart using matplotlib"""
+    if not skill_data or len(skill_data) < 3: return None
+    
+    # Setup data
+    categories = [d['name'] for d in skill_data]
+    values = [d['value'] for d in skill_data]
+    N = len(categories)
+    
+    # Close the loop
+    values += values[:1]
+    angles = [n / float(N) * 2 * math.pi for n in range(N)]
+    angles += angles[:1]
+    
+    # Plot
+    fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
+    
+    # Style
+    ax.set_facecolor('none')
+    fig.patch.set_alpha(0.0)
+    
+    # Draw one axe per variable + add labels
+    plt.xticks(angles[:-1], categories, color='#a3a3a3', size=10)
+    
+    # Draw ylabels
+    ax.set_rlabel_position(0)
+    plt.yticks([25, 50, 75], ["", "", ""], color="grey", size=7)
+    plt.ylim(0, max(values) * 1.1)
+    
+    # Plot data
+    ax.plot(angles, values, linewidth=2, linestyle='solid', color='#20C20E')
+    ax.fill(angles, values, '#20C20E', alpha=0.4)
+    
+    # Grid color
+    ax.grid(color='#404040')
+    ax.spines['polar'].set_visible(False)
+    
+    # Save
+    output_dir = os.path.join(LOCAL_R2_DIR, slug)
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, "skill-graph.svg")
+    plt.savefig(output_path, transparent=True, bbox_inches='tight')
+    plt.close()
+    
+    return f"{R2_DOMAIN}/{slug}/skill-graph.svg"
 
 # --- PROCESSORS ---
 def process_colors():
@@ -172,8 +210,12 @@ def process_projects():
     if os.path.exists(site_assets):
         sync_r2_assets("_site", site_assets)
 
-    main = read_csv_smart(find_file("Main.csv"), "Slug Name")
-    if not main: main = read_csv_smart(find_file("Main.csv"), "Name")
+    # --- READ DATA ---
+    try:
+        main = read_csv_smart(find_file("Main.csv"), "Slug Name", required_headers={"Slug Name", "Descriptive Name", "Employer"})
+    except ValueError:
+        main = []
+    if not main: main = read_csv_smart(find_file("Main.csv"), "Name", required_headers={"Name", "Employer"})
     
     tax = {r.get('Project Name') or r.get('Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Project Name")}
     if not tax: tax = {r.get('Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Name")}
@@ -181,10 +223,12 @@ def process_projects():
     phases = {r['Name']: r for r in read_csv_smart(find_file("Phase.csv"))}
     stats = {r['Name']: r for r in read_csv_smart(find_file("Stats.csv") or find_file("Part count.csv"))}
     
-    f_expert = find_file("Expertise.csv")
-    expert_data = read_csv_smart(f_expert, "Project Start") 
-    project_skills = {r.get('Name'): r for r in expert_data}
-    skill_defs = extract_expertise_metadata(f_expert) 
+    # New Flat Skill Files
+    expertise_rows = read_csv_smart(find_file("Expertise.csv"), "Project Start")
+    expertise_map = {r.get('Name'): r for r in expertise_rows}
+    
+    skills_rows = read_csv_smart(find_file("Skills.csv"), "Project Start")
+    skills_map = {r.get('Name'): r for r in skills_rows}
 
     dummy_files = ["tech-1.jpg", "tech-2.jpg", "blueprint.jpg", "abstract.jpg"]
     all_clients = set()
@@ -205,9 +249,12 @@ def process_projects():
         clients = [c.strip() for c in row.get("Client", "").split('/') if c.strip()]
         for c in clients: all_clients.add(c)
 
+        # Taxonomy / Category
         t_row = tax.get(name, {})
         industry = t_row.get("Industry", "Other")
-        category = t_row.get("Category", "")
+        # Prefer Main.csv Category, fallback to Taxonomy
+        category = row.get("Category") or t_row.get("Category", "")
+        
         tools = [t.strip() for t in row.get("Tools", "").split(',') if t.strip()]
 
         p_row = phases.get(name, {})
@@ -219,18 +266,53 @@ def process_projects():
         s_row = stats.get(name, {})
         parts = {"plastic": int(float(s_row.get("Plastic",0) or 0)), "metal": int(float(s_row.get("Sheetmetal",0) or 0)), "pcb": int(float(s_row.get("PCB",0) or 0))}
         
-        skill_row = project_skills.get(name, {})
+        # --- SKILLS (Expertise.csv) ---
+        skill_row = expertise_map.get(name, {})
         weighted = []
-        for s, v_str in skill_row.items():
+        ignored_keys = {"Name", "Project Start", "Project End", "days", "midpoint", "✔️", "▲", "midpoint Y"}
+        for k, v in skill_row.items():
+            if k in ignored_keys or not v: continue
             try:
-                val = float(v_str.replace('%','').strip())
+                val = float(v.replace('%','').strip())
                 if val > 0:
-                    w = float(skill_defs.get(s, {}).get("Weight", 1))
-                    weighted.append((s, val * w))
+                    weighted.append((k, val))
             except: pass
+        
         weighted.sort(key=lambda x: x[1], reverse=True)
-        bom = [s[0] for s in weighted]
+        bom = [s[0] for s in weighted] # Top skills as tags
         skill_data = [{"name": s[0], "value": round(s[1], 1)} for s in weighted[:6]]
+
+        # --- ADDITIONAL SKILLS (Skills.csv) ---
+        add_skill_row = skills_map.get(name, {})
+        add_weighted = []
+        for k, v in add_skill_row.items():
+            if k in ignored_keys or not v: continue
+            try:
+                val = float(v.replace('%','').strip())
+                if val > 0:
+                    add_weighted.append((k, val))
+            except: pass
+        add_weighted.sort(key=lambda x: x[1], reverse=True)
+        additional_skills = [s[0] for s in add_weighted[:10]] # Top 10 additional skills
+
+        # --- LOGIC: Duration & Status ---
+        start_date_raw = row.get('Project Start Date', '') or row.get('Project Start Date raw', '')
+        end_date_raw = row.get('Project End Date', '') or row.get('Project End Date raw', '')
+        duration_str = "Active"
+        if start_date_raw:
+            try:
+                # Try multiple formats if needed, currently assuming m/d/Y
+                start = datetime.strptime(start_date_raw, "%m/%d/%Y")
+                end = datetime.strptime(end_date_raw, "%m/%d/%Y") if end_date_raw else datetime.now()
+                diff_days = (end - start).days
+                if diff_days > 365:
+                    duration_str = f"{diff_days / 365:.1f} Years"
+                else:
+                    months = max(1, round(diff_days / 30))
+                    duration_str = f"{months} Month{'s' if months != 1 else ''}"
+            except: pass
+        
+        status_label = prod
 
         # Assets
         hero_img = f"/assets/placeholders/{dummy_files[i % 4]}"
@@ -250,8 +332,6 @@ def process_projects():
              if os.path.exists(os.path.join(local_stage, "model.glb")):
                  print(f"✅ Found model for {slug}")
                  model_url = f"{R2_DOMAIN}/{slug}/model.glb"
-             else:
-                 if slug == "xbox": print(f"❌ No model.glb found for {slug} in {local_stage}")
 
              for f in os.listdir(local_stage):
                  lower = f.lower()
@@ -269,6 +349,9 @@ def process_projects():
                     documents.append({"name": f, "url": f"{R2_DOMAIN}/{slug}/{f}"})
                 elif f.lower().endswith(".url"):
                     links.append({"name": f.replace(".url", ""), "url": f"{R2_DOMAIN}/{slug}/{f}"})
+
+        # --- CHART GENERATION (Must be after sync) ---
+        skill_graph_url = generate_radar_chart(skill_data, slug)
 
         # Manual Override
         manual_path = os.path.join(MANUAL_CONTENT_DIR, f"{slug}.md")
@@ -298,8 +381,8 @@ import {{ YouTube }} from '@astro-community/astro-embed-youtube';
         mdx = f"""---
 title: {json.dumps(title)}
 slug: "{slug}"
-date: "{row.get('Project Start Date raw', '')}"
-endDate: "{row.get('Project End Date raw', '')}"
+date: "{start_date_raw}"
+endDate: "{end_date_raw}"
 employer: "{employer}"
 client: {json.dumps(clients)}
 industry: "{industry}"
@@ -308,6 +391,7 @@ tools: {json.dumps(tools)}
 production: "{prod}"
 tags: {json.dumps(bom)}
 skillData: {json.dumps(skill_data)}
+additionalSkills: {json.dumps(additional_skills)}
 stats: {json.dumps(parts)}
 gallery: {json.dumps(gallery_images)}
 documents: {json.dumps(documents)}
@@ -315,6 +399,9 @@ links: {json.dumps(links)}
 heroImage: "{hero_img}" {comment}
 draft: false
 description: "{title} - {industry} project."
+duration: "{duration_str}"
+statusLabel: "{status_label}"
+skillGraph: {json.dumps(skill_graph_url)}
 ---
 {content_body}
 """
