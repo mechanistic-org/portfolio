@@ -3,6 +3,7 @@
 import "@/styles/global.css";
 
 import { type CollectionEntry } from "astro:content";
+import { ClientRouter } from "astro:transitions";
 
 // component imports
 import BaseHead from "@layouts/BaseHead.astro";
@@ -46,6 +47,7 @@ const {
 			postFrontmatter={postFrontmatter ? postFrontmatter : undefined}
 			noindex={noindex}
 		/>
+		<ClientRouter />
 	</head>
 	<body
 		class:list={[

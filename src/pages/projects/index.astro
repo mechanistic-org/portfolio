@@ -5,146 +5,319 @@ import ProjectCard from "../../components/Projects/ProjectCard.astro";
 import FilterButton from "../../components/Button/FilterButton.astro";
 
 const allProjects = await getCollection("projects", ({ data }) => !data.draft);
-const projects = allProjects.sort((a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime());
+const projects = allProjects.sort(
+	(a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime(),
+);
 
 // Extract Facets for the UI
-const industries = [...new Set(projects.map(p => p.data.industry).filter(Boolean))].sort();
-const tools = [...new Set(projects.flatMap(p => p.data.tools).filter(Boolean))].sort();
+const industries = [...new Set(projects.map((p) => p.data.industry).filter(Boolean))].sort();
+const tools = [...new Set(projects.flatMap((p) => p.data.tools).filter(Boolean))].sort();
 const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Concept"]; // Ordered logic
 ---
 
 <BaseLayout title="Projects" description="Engineering Archive">
-  <div class="site-container py-24 md:pb-36">
-    
-    <div class="mx-auto max-w-4xl text-center mb-12">
-      <h1 class="h1 mb-4">Projects</h1>
-      <p class="text-muted-foreground text-lg">
-        Archive of {projects.length} Engineering Projects
-      </p>
-    </div>
+	<div class="site-container py-24 md:pb-36">
+		<div class="mx-auto mb-12 max-w-4xl text-center">
+			<h1 class="h1 mb-4">Projects</h1>
+			<p class="text-muted-foreground text-lg">
+				Archive of {projects.length} Engineering Projects
+			</p>
+		</div>
 
-    <div class="sticky top-4 z-40 bg-neutral-950/90 backdrop-blur-md border border-neutral-800 rounded-xl p-4 mb-12 shadow-2xl">
-        
-        <div class="flex flex-col gap-2 mb-4">
-            <span class="text-xs font-mono text-neutral-500 uppercase tracking-widest">Sector</span>
-            <div class="flex flex-wrap gap-2">
-                <FilterButton class="filter-btn active" data-group="industry" data-filter="all" text="All" />
-                {industries.map(i => <FilterButton class="filter-btn" data-group="industry" data-filter={i} text={i} />)}
-            </div>
-        </div>
+		<div
+			class="sticky top-4 z-40 mb-12 rounded-xl border border-neutral-800 bg-neutral-950/90 p-4 shadow-2xl backdrop-blur-md"
+		>
+			<div class="mb-4 flex flex-col gap-4 md:flex-row">
+				<div class="relative flex-grow">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-neutral-500"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg
+					>
+					<input
+						type="text"
+						id="project-search"
+						placeholder="Search projects by title, tech, or description..."
+						class="focus:border-primary focus:ring-primary w-full rounded-lg border border-neutral-800 bg-neutral-900 py-2 pr-4 pl-10 text-sm text-white placeholder-neutral-500 transition-colors focus:ring-1 focus:outline-none"
+					/>
+				</div>
+			</div>
 
-        <div class="grid md:grid-cols-2 gap-4 pt-4 border-t border-neutral-800">
-            
-            <div class="flex flex-col gap-2">
-                <span class="text-xs font-mono text-neutral-500 uppercase tracking-widest">Toolchain</span>
-                <div class="flex flex-wrap gap-2">
-                    <FilterButton class="filter-btn active" data-group="tool" data-filter="all" text="Any" />
-                    {tools.map(t => <FilterButton class="filter-btn" data-group="tool" data-filter={t} text={t} />)}
-                </div>
-            </div>
+			<div id="active-filters" class="mb-4 flex flex-wrap gap-2 empty:hidden"></div>
 
-            <div class="flex flex-col gap-2">
-                <span class="text-xs font-mono text-neutral-500 uppercase tracking-widest">Production Status</span>
-                <div class="flex flex-wrap gap-2">
-                    <FilterButton class="filter-btn active" data-group="status" data-filter="all" text="Any Stage" />
-                    {statuses.map(s => <FilterButton class="filter-btn" data-group="status" data-filter={s} text={s} />)}
-                </div>
-            </div>
-        </div>
-    </div>
+			<details class="group">
+				<summary
+					class="flex cursor-pointer list-none items-center justify-between rounded-lg border border-neutral-800 bg-neutral-900 px-4 py-2 font-medium text-white transition-colors hover:bg-neutral-800"
+				>
+					<span>Advanced Filters</span>
+					<span class="transition-transform group-open:rotate-180">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="20"
+							height="20"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg
+						>
+					</span>
+				</summary>
 
-    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3" id="projects-grid">
-      {projects.map((project) => (
-        <div 
-            class="project-card" 
-            data-industry={project.data.industry}
-            data-tool={JSON.stringify(project.data.tools)}
-            data-status={project.data.production}
-        >
-            <ProjectCard project={project} />
-        </div>
-      ))}
-    </div>
-    
-    <div class="mt-12 text-center hidden" id="pagination-controls">
-        <button id="load-more-btn" class="px-6 py-3 bg-neutral-800 hover:bg-neutral-700 text-white rounded-lg font-medium transition-colors">Load More</button>
-        <p id="showing-count" class="mt-4 text-sm text-neutral-500"></p>
-    </div>
-  </div>
+				<div class="mt-4 flex flex-col gap-2">
+					<span class="font-mono text-xs tracking-widest text-neutral-500 uppercase">Sector</span>
+					<div class="flex flex-wrap gap-2">
+						<FilterButton
+							class="filter-btn active"
+							data-group="industry"
+							data-filter="all"
+							text="All"
+						/>
+						{
+							industries.map((i) => (
+								<FilterButton class="filter-btn" data-group="industry" data-filter={i} text={i} />
+							))
+						}
+					</div>
+				</div>
 
-  <script>
-    document.addEventListener('astro:page-load', () => {
-        const cards = Array.from(document.querySelectorAll('.project-card')) as HTMLElement[];
-        const buttons = document.querySelectorAll('.filter-btn');
-        const loadMoreBtn = document.getElementById('load-more-btn');
-        const countLabel = document.getElementById('showing-count');
-        const controls = document.getElementById('pagination-controls');
-        
-        if (cards.length === 0) return;
-        if (controls) controls.classList.remove('hidden');
+				<div class="mt-4 grid gap-4 border-t border-neutral-800 pt-4 md:grid-cols-2">
+					<div class="flex flex-col gap-2">
+						<span class="font-mono text-xs tracking-widest text-neutral-500 uppercase"
+							>Toolchain</span
+						>
+						<div class="flex flex-wrap gap-2">
+							<FilterButton
+								class="filter-btn active"
+								data-group="tool"
+								data-filter="all"
+								text="Any"
+							/>
+							{
+								tools.map((t) => (
+									<FilterButton class="filter-btn" data-group="tool" data-filter={t} text={t} />
+								))
+							}
+						</div>
+					</div>
 
-        // State
-        let filters = { industry: 'all', tool: 'all', status: 'all' };
-        let visibleCount = 12;
+					<div class="flex flex-col gap-2">
+						<span class="font-mono text-xs tracking-widest text-neutral-500 uppercase"
+							>Production Status</span
+						>
+						<div class="flex flex-wrap gap-2">
+							<FilterButton
+								class="filter-btn active"
+								data-group="status"
+								data-filter="all"
+								text="Any Stage"
+							/>
+							{
+								statuses.map((s) => (
+									<FilterButton class="filter-btn" data-group="status" data-filter={s} text={s} />
+								))
+							}
+						</div>
+					</div>
+				</div>
+			</details>
+		</div>
 
-        function update() {
-            // Filter
-            const active = cards.filter(card => {
-                const d = card.dataset;
-                const cardTools = JSON.parse(d.tool || '[]');
-                
-                const matchInd = filters.industry === 'all' || d.industry === filters.industry;
-                const matchStatus = filters.status === 'all' || d.status === filters.status;
-                const matchTool = filters.tool === 'all' || cardTools.includes(filters.tool);
-                
-                return matchInd && matchStatus && matchTool;
-            });
+		<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3" id="projects-grid">
+			{
+				projects.map((project) => (
+					<div
+						class="project-card"
+						data-industry={project.data.industry}
+						data-tool={JSON.stringify(project.data.tools)}
+						data-status={project.data.production}
+					>
+						<ProjectCard project={project} />
+					</div>
+				))
+			}
+		</div>
 
-            // Render
-            cards.forEach(c => c.style.display = 'none');
-            active.slice(0, visibleCount).forEach(c => {
-                c.style.display = 'block';
-                c.animate([{ opacity: 0, transform: 'translateY(10px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 300 });
-            });
+		<div class="mt-12 hidden text-center" id="pagination-controls">
+			<button
+				id="load-more-btn"
+				class="rounded-lg bg-neutral-800 px-6 py-3 font-medium text-white transition-colors hover:bg-neutral-700"
+				>Load More</button
+			>
+			<button
+				id="view-all-btn"
+				class="ml-4 rounded-lg border border-neutral-700 px-6 py-3 font-medium text-white transition-colors hover:bg-neutral-800"
+				>View All</button
+			>
+			<p id="showing-count" class="mt-4 text-sm text-neutral-500"></p>
+		</div>
+	</div>
 
-            // UI Updates
-            if (countLabel) countLabel.innerText = `Showing ${Math.min(visibleCount, active.length)} of ${active.length}`;
-            if (loadMoreBtn) loadMoreBtn.style.display = visibleCount >= active.length ? 'none' : 'inline-block';
-        }
+	<script>
+		document.addEventListener("astro:page-load", () => {
+			const cards = Array.from(document.querySelectorAll(".project-card")) as HTMLElement[];
+			const buttons = document.querySelectorAll(".filter-btn");
+			const searchInput = document.getElementById("project-search") as HTMLInputElement;
+			const activeFiltersContainer = document.getElementById("active-filters");
+			const loadMoreBtn = document.getElementById("load-more-btn");
+			const viewAllBtn = document.getElementById("view-all-btn");
+			const countLabel = document.getElementById("showing-count");
+			const controls = document.getElementById("pagination-controls");
 
-        // Init
-        update();
+			if (cards.length === 0) return;
+			if (controls) controls.classList.remove("hidden");
 
-        // Events
-        loadMoreBtn?.addEventListener('click', () => { visibleCount += 12; update(); });
+			// State
+			let filters = { industry: "all", tool: "all", status: "all", search: "" };
+			let visibleCount = 12;
 
-        buttons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const group = btn.getAttribute('data-group');
-                const val = btn.getAttribute('data-filter');
-                if (!group || !val) return;
+			// Auto-close details on mobile after selection if screen is small
+			const details = document.querySelector("details");
+			const isMobile = window.matchMedia("(max-width: 768px)").matches;
+			if (isMobile && details) details.open = false;
 
-                // UI Toggle
-                document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach(b => {
-                    b.classList.remove('active');
-                    b.setAttribute('aria-pressed', 'false');
-                });
-                btn.classList.add('active');
-                btn.setAttribute('aria-pressed', 'true');
+			function renderActiveFilters() {
+				if (!activeFiltersContainer) return;
+				activeFiltersContainer.innerHTML = "";
 
-                // Logic Update
-                filters[group] = val;
-                visibleCount = 12;
-                update();
-            });
-        });
-    });
-  </script>
+				const activeKeys = Object.entries(filters).filter(
+					([key, val]) => key !== "search" && val !== "all",
+				);
 
-  <style>
-    @reference "../../styles/global.css";
-    .filter-btn.active {
-      @apply bg-primary text-black ring-2 ring-primary;
-    }
-  </style>
+				if (activeKeys.length === 0) return;
+
+				activeKeys.forEach(([key, val]) => {
+					const chip = document.createElement("button");
+					chip.className =
+						"flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary border border-primary/20 hover:bg-primary/20 transition-colors";
+					chip.innerHTML = `
+                        <span>${val}</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    `;
+					chip.onclick = () => {
+						// Reset this filter
+						const btn = document.querySelector(
+							`.filter-btn[data-group="${key}"][data-filter="all"]`,
+						) as HTMLElement;
+						if (btn) btn.click();
+					};
+					activeFiltersContainer.appendChild(chip);
+				});
+
+				// Add "Clear All" if more than 1
+				if (activeKeys.length > 1) {
+					const clearBtn = document.createElement("button");
+					clearBtn.className =
+						"text-xs text-neutral-500 hover:text-white underline decoration-dotted underline-offset-4";
+					clearBtn.innerText = "Clear All";
+					clearBtn.onclick = () => {
+						document
+							.querySelectorAll('.filter-btn[data-filter="all"]')
+							.forEach((b: any) => b.click());
+					};
+					activeFiltersContainer.appendChild(clearBtn);
+				}
+			}
+
+			function update() {
+				// Filter
+				const active = cards.filter((card) => {
+					const d = card.dataset;
+					const cardTools = JSON.parse(d.tool || "[]");
+					const cardTitle = card.querySelector("h3")?.innerText.toLowerCase() || "";
+					const cardDesc = card.querySelector("p")?.innerText.toLowerCase() || ""; // Assuming p is description
+
+					const matchInd = filters.industry === "all" || d.industry === filters.industry;
+					const matchStatus = filters.status === "all" || d.status === filters.status;
+					const matchTool = filters.tool === "all" || cardTools.includes(filters.tool);
+
+					const searchLower = filters.search.toLowerCase();
+					const matchSearch =
+						!searchLower ||
+						cardTitle.includes(searchLower) ||
+						cardDesc.includes(searchLower) ||
+						cardTools.some((t: string) => t.toLowerCase().includes(searchLower));
+
+					return matchInd && matchStatus && matchTool && matchSearch;
+				});
+
+				// Render
+				cards.forEach((c) => (c.style.display = "none"));
+				active.slice(0, visibleCount).forEach((c) => {
+					c.style.display = "block";
+					c.animate(
+						[
+							{ opacity: 0, transform: "translateY(10px)" },
+							{ opacity: 1, transform: "translateY(0)" },
+						],
+						{ duration: 300 },
+					);
+				});
+
+				// UI Updates
+				if (countLabel)
+					countLabel.innerText = `Showing ${Math.min(visibleCount, active.length)} of ${active.length}`;
+				if (loadMoreBtn)
+					loadMoreBtn.style.display = visibleCount >= active.length ? "none" : "inline-block";
+				if (viewAllBtn)
+					viewAllBtn.style.display = visibleCount >= active.length ? "none" : "inline-block";
+
+				renderActiveFilters();
+			}
+
+			// Init
+			update();
+
+			// Events
+			loadMoreBtn?.addEventListener("click", () => {
+				visibleCount += 12;
+				update();
+			});
+			viewAllBtn?.addEventListener("click", () => {
+				visibleCount = 9999;
+				update();
+			});
+
+			searchInput?.addEventListener("input", (e) => {
+				filters.search = (e.target as HTMLInputElement).value;
+				visibleCount = 12; // Reset pagination on search
+				update();
+			});
+
+			buttons.forEach((btn) => {
+				btn.addEventListener("click", () => {
+					const group = btn.getAttribute("data-group");
+					const val = btn.getAttribute("data-filter");
+					if (!group || !val) return;
+
+					// UI Toggle
+					document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach((b) => {
+						b.classList.remove("active");
+						b.setAttribute("aria-pressed", "false");
+					});
+					btn.classList.add("active");
+					btn.setAttribute("aria-pressed", "true");
+
+					// Logic Update
+					filters[group as keyof typeof filters] = val;
+					visibleCount = 12;
+					update();
+				});
+			});
+		});
+	</script>
+
+	<style>
+		@reference "../../styles/global.css";
+		.filter-btn.active {
+			@apply bg-primary ring-primary text-black ring-2;
+		}
+	</style>
 </BaseLayout>

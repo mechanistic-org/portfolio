@@ -88,6 +88,7 @@ const projectsCollection = defineCollection({
         statusLabel: z.string().optional(),
         additionalSkills: z.array(z.string()).default([]),
         skillGraph: z.string().optional(),
+        partGraph: z.string().optional(),
     }),
 });
 

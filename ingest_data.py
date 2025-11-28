@@ -11,19 +11,12 @@ import numpy as np
 
 # --- CONFIGURATION ---
 SOURCE_DIR = "data_source"
-MANUAL_CONTENT_DIR = "data_source/manual_content"
 OUTPUT_CONTENT_DIR = "src/content/projects"
 OUTPUT_DATA_DIR = "src/data"
 ASSETS_DIR = "public/assets/placeholders"
-LOCAL_R2_DIR = "public/assets/r2"
-# R2_DOMAIN = "https://assets.eriknorris.com" 
-# SWITCHING TO LOCAL ASSETS FOR STABILITY
 R2_DOMAIN = "/assets/r2"
+LOCAL_R2_DIR = "public/assets/r2"
 
-for d in [OUTPUT_CONTENT_DIR, OUTPUT_DATA_DIR, ASSETS_DIR, MANUAL_CONTENT_DIR, LOCAL_R2_DIR]:
-    os.makedirs(d, exist_ok=True)
-
-# --- UTILS ---
 def find_file(suffix):
     exact = os.path.join(SOURCE_DIR, suffix)
     if os.path.exists(exact): return exact
@@ -76,28 +69,33 @@ def ensure_dummy_assets():
         path = os.path.join(ASSETS_DIR, filename)
         if not os.path.exists(path):
             try:
-                opener = urllib.request.build_opener()
-                opener.addheaders = [('User-agent', 'Mozilla/5.0')]
-                urllib.request.install_opener(opener)
                 urllib.request.urlretrieve(url, path)
             except: pass
 
-def sync_r2_assets(slug, source_path):
-    """Copy assets from R2_STAGING to public/assets/r2/{slug}"""
-    dest_dir = os.path.join(LOCAL_R2_DIR, slug)
-    if os.path.exists(dest_dir):
-        shutil.rmtree(dest_dir)
-    shutil.copytree(source_path, dest_dir)
+def sync_r2_assets(slug, source_dir):
+    """Copy local R2 staging assets to public/assets/r2"""
+    target_dir = os.path.join(LOCAL_R2_DIR, slug)
+    if not os.path.exists(target_dir):
+        os.makedirs(target_dir)
+    
+    # Copy all files
+    for item in os.listdir(source_dir):
+        s = os.path.join(source_dir, item)
+        d = os.path.join(target_dir, item)
+        if os.path.isfile(s):
+            shutil.copy2(s, d)
 
 def generate_radar_chart(skill_data, slug):
-    """Generate SVG radar chart using matplotlib"""
-    if not skill_data or len(skill_data) < 3: return None
+    """Generate SVG radar chart for skills"""
+    if not skill_data: return None
     
     # Setup data
     categories = [d['name'] for d in skill_data]
     values = [d['value'] for d in skill_data]
     N = len(categories)
     
+    if N < 3: return None
+
     # Close the loop
     values += values[:1]
     angles = [n / float(N) * 2 * math.pi for n in range(N)]
@@ -134,6 +132,56 @@ def generate_radar_chart(skill_data, slug):
     plt.close()
     
     return f"{R2_DOMAIN}/{slug}/skill-graph.svg"
+
+def generate_donut_chart(stats, slug):
+    """Generate SVG donut chart for part count breakdown"""
+    if not stats: return None
+    
+    labels = []
+    sizes = []
+    colors = []
+    
+    # Map keys to colors
+    color_map = {
+        "plastic": "#3b82f6", # Blue
+        "metal": "#ef4444", # Red
+        "pcb": "#10b981", # Green
+        "pcba": "#f59e0b" # Yellow
+    }
+    
+    for k, v in stats.items():
+        try:
+            val = int(v)
+            if val > 0:
+                labels.append(k.title())
+                sizes.append(val)
+                colors.append(color_map.get(k, "#888888"))
+        except: pass
+            
+    if not sizes: return None
+
+    fig, ax = plt.subplots(figsize=(6, 6))
+    
+    # Donut
+    wedges, texts, autotexts = ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90, colors=colors, pctdistance=0.85, textprops=dict(color="white"))
+    
+    # Draw circle
+    centre_circle = plt.Circle((0,0),0.70,fc='none')
+    fig = plt.gcf()
+    fig.gca().add_artist(centre_circle)
+    
+    # Equal aspect ratio ensures that pie is drawn as a circle
+    ax.axis('equal')  
+    plt.tight_layout()
+    
+    # Save
+    output_dir = os.path.join(LOCAL_R2_DIR, slug)
+    os.makedirs(output_dir, exist_ok=True)
+    output_path = os.path.join(output_dir, "part-graph.svg")
+    plt.savefig(output_path, transparent=True, bbox_inches='tight')
+    plt.close()
+    
+    return f"{R2_DOMAIN}/{slug}/part-graph.svg"
 
 # --- PROCESSORS ---
 def process_colors():
@@ -202,20 +250,8 @@ def process_tenure():
         json.dump(history, f, indent=2)
 
 def process_projects():
-    print("🏗️  Processing Projects...")
-    ensure_dummy_assets()
-    
-    # SYNC _SITE ASSETS FIRST
-    site_assets = os.path.join("R2_STAGING", "_site")
-    if os.path.exists(site_assets):
-        sync_r2_assets("_site", site_assets)
-
-    # --- READ DATA ---
-    try:
-        main = read_csv_smart(find_file("Main.csv"), "Slug Name", required_headers={"Slug Name", "Descriptive Name", "Employer"})
-    except ValueError:
-        main = []
-    if not main: main = read_csv_smart(find_file("Main.csv"), "Name", required_headers={"Name", "Employer"})
+    print("🚀 Processing Projects...")
+    main = read_csv_smart(find_file("Main.csv"), "Name", required_headers={"Name", "Employer"})
     
     tax = {r.get('Project Name') or r.get('Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Project Name")}
     if not tax: tax = {r.get('Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Name")}
@@ -345,25 +381,15 @@ def process_projects():
         links = []
         if os.path.exists(local_stage):
             for f in os.listdir(local_stage):
-                if f.lower().endswith(".pdf"):
+                if f.endswith(".pdf"):
                     documents.append({"name": f, "url": f"{R2_DOMAIN}/{slug}/{f}"})
-                elif f.lower().endswith(".url"):
-                    links.append({"name": f.replace(".url", ""), "url": f"{R2_DOMAIN}/{slug}/{f}"})
-
-        # --- CHART GENERATION (Must be after sync) ---
+        
+        # Generate Charts
         skill_graph_url = generate_radar_chart(skill_data, slug)
+        part_graph_url = generate_donut_chart(parts, slug)
 
-        # Manual Override
-        manual_path = os.path.join(MANUAL_CONTENT_DIR, f"{slug}.md")
-        if os.path.exists(manual_path):
-            with open(manual_path, 'r', encoding='utf-8') as f:
-                content_body = f.read()
-            
-            # Template Replacement
-            content_body = content_body.replace("{{MODEL_URL}}", model_url)
-            content_body = content_body.replace("{{HERO_IMAGE}}", hero_img)
-        else:
-            content_body = f"""
+        # Template Replacement
+        content_body = f"""
 import {{ YouTube }} from '@astro-community/astro-embed-youtube';
 
 ## Overview
@@ -396,16 +422,19 @@ stats: {json.dumps(parts)}
 gallery: {json.dumps(gallery_images)}
 documents: {json.dumps(documents)}
 links: {json.dumps(links)}
-heroImage: "{hero_img}" {comment}
+heroImage: "{hero_img}" 
 draft: false
 description: "{title} - {industry} project."
 duration: "{duration_str}"
 statusLabel: "{status_label}"
-skillGraph: {json.dumps(skill_graph_url)}
+skillGraph: "{skill_graph_url}"
+partGraph: "{part_graph_url}"
 ---
 {content_body}
 """
-        with open(os.path.join(OUTPUT_CONTENT_DIR, f"{slug}.mdx"), "w", encoding="utf-8") as f:
+        
+        out_path = os.path.join(OUTPUT_CONTENT_DIR, f"{slug}.mdx")
+        with open(out_path, "w", encoding='utf-8') as f:
             f.write(mdx)
         count += 1
 
@@ -426,6 +455,7 @@ skillGraph: {json.dumps(skill_graph_url)}
         json.dump(client_data, f, indent=2)
 
 if __name__ == "__main__":
+    ensure_dummy_assets()
     process_colors()
     process_specs()
     process_tenure()
