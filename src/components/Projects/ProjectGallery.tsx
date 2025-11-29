@@ -80,7 +80,7 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
                 }}
                 styles={{
                     container: { backgroundColor: "rgba(0, 0, 0, .95)" },
-                    root: { "--yarl__color_button": "#fff" } as React.CSSProperties,
+                    root: { "--yarl__color_button": "#fff" } as any,
                     button: { filter: "none" }
                 }}
             />
