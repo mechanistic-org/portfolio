@@ -1,29 +1,29 @@
 export interface SocialLinkProps {
 	platform:
-		| "github"
-		| "twitter"
-		| "mastodon"
-		| "linkedin"
-		| "instagram"
-		| "threads"
-		| "facebook"
-		| "youtube"
-		| "twitch"
-		| "tiktok"
-		| "snapchat"
-		| "reddit"
-		| "pinterest"
-		| "medium"
-		| "dev"
-		| "dribbble"
-		| "behance"
-		| "codepen"
-		| "producthunt"
-		| "discord"
-		| "slack"
-		| "whatsapp"
-		| "telegram"
-		| "email"; // you should always at least have an email
+	| "github"
+	| "twitter"
+	| "mastodon"
+	| "linkedin"
+	| "instagram"
+	| "threads"
+	| "facebook"
+	| "youtube"
+	| "twitch"
+	| "tiktok"
+	| "snapchat"
+	| "reddit"
+	| "pinterest"
+	| "medium"
+	| "dev"
+	| "dribbble"
+	| "behance"
+	| "codepen"
+	| "producthunt"
+	| "discord"
+	| "slack"
+	| "whatsapp"
+	| "telegram"
+	| "email"; // you should always at least have an email
 	link: string;
 }
 
@@ -38,7 +38,7 @@ export interface SiteDataProps {
 		// used for blog post purposes
 		name: string;
 		email: string;
-	//	twitter: string; // used for twitter cards when sharing a blog post on twitter
+		//	twitter: string; // used for twitter cards when sharing a blog post on twitter
 	};
 	defaultImage: {
 		src: string;

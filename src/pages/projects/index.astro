@@ -16,7 +16,7 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 ---
 
 <BaseLayout title="Projects" description="Engineering Archive">
-	<div class="site-container py-24 md:pb-36">
+	<div class="site-container pt-32 pb-24 md:pb-36">
 		<div class="mx-auto mb-12 max-w-4xl text-center">
 			<h1 class="h1 mb-4">Projects</h1>
 			<p class="text-muted-foreground text-lg">
@@ -27,7 +27,7 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 		<div
 			class="sticky top-4 z-40 mb-12 rounded-xl border border-neutral-800 bg-neutral-950/90 p-4 shadow-2xl backdrop-blur-md"
 		>
-			<div class="mb-4 flex flex-col gap-4 md:flex-row">
+			<div class="mb-4 flex flex-col gap-4 md:flex-row md:items-start">
 				<div class="relative flex-grow">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -47,277 +47,358 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 						class="focus:border-primary focus:ring-primary w-full rounded-lg border border-neutral-800 bg-neutral-900 py-2 pr-4 pl-10 text-sm text-white placeholder-neutral-500 transition-colors focus:ring-1 focus:outline-none"
 					/>
 				</div>
+
+				<details class="group relative shrink-0">
+					<summary
+						class="flex cursor-pointer list-none items-center justify-between gap-2 rounded-lg border border-neutral-800 bg-neutral-900 px-4 py-2 font-medium text-white transition-colors hover:bg-neutral-800"
+					>
+						<span>Advanced Filters</span>
+						<span class="transition-transform group-open:rotate-180">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="20"
+								height="20"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg
+							>
+						</span>
+					</summary>
+
+					<div
+						class="absolute right-0 z-10 mt-2 w-full min-w-[300px] rounded-lg border border-neutral-800 bg-neutral-900 p-4 shadow-xl md:w-[500px]"
+					>
+						<div class="flex flex-col gap-4">
+							<div class="flex flex-col gap-2">
+								<span class="font-mono text-xs tracking-widest text-neutral-500 uppercase"
+									>Sector</span
+								>
+								<div class="flex flex-wrap gap-2">
+									<FilterButton
+										class="filter-btn active"
+										data-group="industry"
+										data-filter="all"
+										text="All"
+									/>
+									{
+										industries.map((i) => (
+											<FilterButton
+												class="filter-btn"
+												data-group="industry"
+												data-filter={i}
+												text={i}
+											/>
+										))
+									}
+								</div>
+							</div>
+
+							<div class="grid gap-4 md:grid-cols-2">
+								<div class="flex flex-col gap-2">
+									<span class="font-mono text-xs tracking-widest text-neutral-500 uppercase"
+										>Toolchain</span
+									>
+									<div class="flex flex-wrap gap-2">
+										<FilterButton
+											class="filter-btn active"
+											data-group="tool"
+											data-filter="all"
+											text="Any"
+										/>
+										{
+											tools.map((t) => (
+												<FilterButton
+													class="filter-btn"
+													data-group="tool"
+													data-filter={t}
+													text={t}
+												/>
+											))
+										}
+									</div>
+								</div>
+
+								<div class="flex flex-col gap-2">
+									<span class="font-mono text-xs tracking-widest text-neutral-500 uppercase"
+										>Production Status</span
+									>
+									<div class="flex flex-wrap gap-2">
+										<FilterButton
+											class="filter-btn active"
+											data-group="status"
+											data-filter="all"
+											text="Any Stage"
+										/>
+										{
+											statuses.map((s) => (
+												<FilterButton
+													class="filter-btn"
+													data-group="status"
+													data-filter={s}
+													text={s}
+												/>
+											))
+										}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</details>
 			</div>
 
 			<div id="active-filters" class="mb-4 flex flex-wrap gap-2 empty:hidden"></div>
-
-			<details class="group">
-				<summary
-					class="flex cursor-pointer list-none items-center justify-between rounded-lg border border-neutral-800 bg-neutral-900 px-4 py-2 font-medium text-white transition-colors hover:bg-neutral-800"
-				>
-					<span>Advanced Filters</span>
-					<span class="transition-transform group-open:rotate-180">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="20"
-							height="20"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg
-						>
-					</span>
-				</summary>
-
-				<div class="mt-4 flex flex-col gap-2">
-					<span class="font-mono text-xs tracking-widest text-neutral-500 uppercase">Sector</span>
-					<div class="flex flex-wrap gap-2">
-						<FilterButton
-							class="filter-btn active"
-							data-group="industry"
-							data-filter="all"
-							text="All"
-						/>
-						{
-							industries.map((i) => (
-								<FilterButton class="filter-btn" data-group="industry" data-filter={i} text={i} />
-							))
-						}
-					</div>
-				</div>
-
-				<div class="mt-4 grid gap-4 border-t border-neutral-800 pt-4 md:grid-cols-2">
-					<div class="flex flex-col gap-2">
-						<span class="font-mono text-xs tracking-widest text-neutral-500 uppercase"
-							>Toolchain</span
-						>
-						<div class="flex flex-wrap gap-2">
-							<FilterButton
-								class="filter-btn active"
-								data-group="tool"
-								data-filter="all"
-								text="Any"
-							/>
-							{
-								tools.map((t) => (
-									<FilterButton class="filter-btn" data-group="tool" data-filter={t} text={t} />
-								))
-							}
-						</div>
-					</div>
-
-					<div class="flex flex-col gap-2">
-						<span class="font-mono text-xs tracking-widest text-neutral-500 uppercase"
-							>Production Status</span
-						>
-						<div class="flex flex-wrap gap-2">
-							<FilterButton
-								class="filter-btn active"
-								data-group="status"
-								data-filter="all"
-								text="Any Stage"
-							/>
-							{
-								statuses.map((s) => (
-									<FilterButton class="filter-btn" data-group="status" data-filter={s} text={s} />
-								))
-							}
-						</div>
-					</div>
-				</div>
-			</details>
-		</div>
-
-		<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3" id="projects-grid">
-			{
-				projects.map((project) => (
-					<div
-						class="project-card"
-						data-industry={project.data.industry}
-						data-tool={JSON.stringify(project.data.tools)}
-						data-status={project.data.production}
-					>
-						<ProjectCard project={project} />
-					</div>
-				))
-			}
-		</div>
-
-		<div class="mt-12 hidden text-center" id="pagination-controls">
-			<button
-				id="load-more-btn"
-				class="rounded-lg bg-neutral-800 px-6 py-3 font-medium text-white transition-colors hover:bg-neutral-700"
-				>Load More</button
-			>
-			<button
-				id="view-all-btn"
-				class="ml-4 rounded-lg border border-neutral-700 px-6 py-3 font-medium text-white transition-colors hover:bg-neutral-800"
-				>View All</button
-			>
-			<p id="showing-count" class="mt-4 text-sm text-neutral-500"></p>
 		</div>
 	</div>
 
-	<script>
-		document.addEventListener("astro:page-load", () => {
-			const cards = Array.from(document.querySelectorAll(".project-card")) as HTMLElement[];
-			const buttons = document.querySelectorAll(".filter-btn");
-			const searchInput = document.getElementById("project-search") as HTMLInputElement;
-			const activeFiltersContainer = document.getElementById("active-filters");
-			const loadMoreBtn = document.getElementById("load-more-btn");
-			const viewAllBtn = document.getElementById("view-all-btn");
-			const countLabel = document.getElementById("showing-count");
-			const controls = document.getElementById("pagination-controls");
+	<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3" id="projects-grid">
+		{
+			projects.map((project) => (
+				<div
+					class="project-card"
+					data-industry={project.data.industry}
+					data-tool={JSON.stringify(project.data.tools)}
+					data-status={project.data.production}
+				>
+					<ProjectCard project={project} />
+				</div>
+			))
+		}
+	</div>
 
-			if (cards.length === 0) return;
-			if (controls) controls.classList.remove("hidden");
+	<div
+		class="mt-12 flex hidden items-center justify-center gap-4 text-center"
+		id="pagination-controls"
+	>
+		<button
+			id="prev-btn"
+			class="flex items-center gap-2 rounded-lg border border-neutral-800 bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-50"
+		>
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="16"
+				height="16"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg
+			>
+			Prev
+		</button>
 
-			// State
-			let filters = { industry: "all", tool: "all", status: "all", search: "" };
-			let visibleCount = 12;
+		<span id="page-indicator" class="font-mono text-sm text-neutral-500">Page 1</span>
 
-			// Auto-close details on mobile after selection if screen is small
-			const details = document.querySelector("details");
-			const isMobile = window.matchMedia("(max-width: 768px)").matches;
-			if (isMobile && details) details.open = false;
+		<button
+			id="next-btn"
+			class="flex items-center gap-2 rounded-lg border border-neutral-800 bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-50"
+		>
+			Next
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="16"
+				height="16"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg
+			>
+		</button>
+	</div>
+</BaseLayout>
 
-			function renderActiveFilters() {
-				if (!activeFiltersContainer) return;
-				activeFiltersContainer.innerHTML = "";
+<script>
+	document.addEventListener("astro:page-load", () => {
+		const cards = Array.from(document.querySelectorAll(".project-card")) as HTMLElement[];
+		const buttons = document.querySelectorAll(".filter-btn");
+		const searchInput = document.getElementById("project-search") as HTMLInputElement;
+		const activeFiltersContainer = document.getElementById("active-filters");
 
-				const activeKeys = Object.entries(filters).filter(
-					([key, val]) => key !== "search" && val !== "all",
-				);
+		const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement;
+		const nextBtn = document.getElementById("next-btn") as HTMLButtonElement;
+		const pageIndicator = document.getElementById("page-indicator");
+		const controls = document.getElementById("pagination-controls");
 
-				if (activeKeys.length === 0) return;
+		if (cards.length === 0) return;
+		if (controls) controls.classList.remove("hidden");
 
-				activeKeys.forEach(([key, val]) => {
-					const chip = document.createElement("button");
-					chip.className =
-						"flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary border border-primary/20 hover:bg-primary/20 transition-colors";
-					chip.innerHTML = `
+		// State
+		let filters = { industry: "all", tool: "all", status: "all", search: "" };
+		let currentPage = 1;
+		const itemsPerPage = 12;
+
+		// Auto-close details on mobile after selection if screen is small
+		const details = document.querySelector("details");
+		const isMobile = window.matchMedia("(max-width: 768px)").matches;
+		if (isMobile && details) details.open = false;
+
+		function renderActiveFilters() {
+			if (!activeFiltersContainer) return;
+			activeFiltersContainer.innerHTML = "";
+
+			const activeKeys = Object.entries(filters).filter(
+				([key, val]) => key !== "search" && val !== "all",
+			);
+
+			if (activeKeys.length === 0) return;
+
+			activeKeys.forEach(([key, val]) => {
+				const chip = document.createElement("button");
+				chip.className =
+					"flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary border border-primary/20 hover:bg-primary/20 transition-colors";
+				chip.innerHTML = `
                         <span>${val}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
                     `;
-					chip.onclick = () => {
-						// Reset this filter
-						const btn = document.querySelector(
-							`.filter-btn[data-group="${key}"][data-filter="all"]`,
-						) as HTMLElement;
-						if (btn) btn.click();
-					};
-					activeFiltersContainer.appendChild(chip);
-				});
+				chip.onclick = () => {
+					// Reset this filter
+					const btn = document.querySelector(
+						`.filter-btn[data-group="${key}"][data-filter="all"]`,
+					) as HTMLElement;
+					if (btn) btn.click();
+				};
+				activeFiltersContainer.appendChild(chip);
+			});
 
-				// Add "Clear All" if more than 1
-				if (activeKeys.length > 1) {
-					const clearBtn = document.createElement("button");
-					clearBtn.className =
-						"text-xs text-neutral-500 hover:text-white underline decoration-dotted underline-offset-4";
-					clearBtn.innerText = "Clear All";
-					clearBtn.onclick = () => {
-						document
-							.querySelectorAll('.filter-btn[data-filter="all"]')
-							.forEach((b: any) => b.click());
-					};
-					activeFiltersContainer.appendChild(clearBtn);
-				}
+			// Add "Clear All" if more than 1
+			if (activeKeys.length > 1) {
+				const clearBtn = document.createElement("button");
+				clearBtn.className =
+					"text-xs text-neutral-500 hover:text-white underline decoration-dotted underline-offset-4";
+				clearBtn.innerText = "Clear All";
+				clearBtn.onclick = () => {
+					document
+						.querySelectorAll('.filter-btn[data-filter="all"]')
+						.forEach((b: any) => b.click());
+				};
+				activeFiltersContainer.appendChild(clearBtn);
+			}
+		}
+
+		function update() {
+			// Filter
+			const active = cards.filter((card) => {
+				const d = card.dataset;
+				const cardTools = JSON.parse(d.tool || "[]");
+				const cardTitle = card.querySelector("h3")?.innerText.toLowerCase() || "";
+				const cardDesc = card.querySelector("p")?.innerText.toLowerCase() || "";
+
+				const matchInd = filters.industry === "all" || d.industry === filters.industry;
+				const matchStatus = filters.status === "all" || d.status === filters.status;
+				const matchTool = filters.tool === "all" || cardTools.includes(filters.tool);
+
+				const searchLower = filters.search.toLowerCase();
+				const matchSearch =
+					!searchLower ||
+					cardTitle.includes(searchLower) ||
+					cardDesc.includes(searchLower) ||
+					cardTools.some((t: string) => t.toLowerCase().includes(searchLower));
+
+				return matchInd && matchStatus && matchTool && matchSearch;
+			});
+
+			// Pagination Logic
+			const totalPages = Math.ceil(active.length / itemsPerPage);
+			if (currentPage > totalPages) currentPage = 1;
+			if (currentPage < 1) currentPage = 1;
+
+			const start = (currentPage - 1) * itemsPerPage;
+			const end = start + itemsPerPage;
+			const visibleItems = active.slice(start, end);
+
+			// Render
+			cards.forEach((c) => (c.style.display = "none"));
+			visibleItems.forEach((c) => {
+				c.style.display = "block";
+				c.animate(
+					[
+						{ opacity: 0, transform: "translateY(10px)" },
+						{ opacity: 1, transform: "translateY(0)" },
+					],
+					{ duration: 300 },
+				);
+			});
+
+			// UI Updates
+			if (pageIndicator) pageIndicator.innerText = `Page ${currentPage} of ${totalPages || 1}`;
+
+			if (prevBtn) {
+				prevBtn.disabled = currentPage <= 1;
+				prevBtn.style.display = totalPages > 1 ? "flex" : "none";
+			}
+			if (nextBtn) {
+				nextBtn.disabled = currentPage >= totalPages;
+				nextBtn.style.display = totalPages > 1 ? "flex" : "none";
+			}
+			if (pageIndicator) {
+				pageIndicator.style.display = totalPages > 1 ? "inline" : "none";
 			}
 
-			function update() {
-				// Filter
-				const active = cards.filter((card) => {
-					const d = card.dataset;
-					const cardTools = JSON.parse(d.tool || "[]");
-					const cardTitle = card.querySelector("h3")?.innerText.toLowerCase() || "";
-					const cardDesc = card.querySelector("p")?.innerText.toLowerCase() || ""; // Assuming p is description
+			renderActiveFilters();
+		}
 
-					const matchInd = filters.industry === "all" || d.industry === filters.industry;
-					const matchStatus = filters.status === "all" || d.status === filters.status;
-					const matchTool = filters.tool === "all" || cardTools.includes(filters.tool);
+		// Init
+		update();
 
-					const searchLower = filters.search.toLowerCase();
-					const matchSearch =
-						!searchLower ||
-						cardTitle.includes(searchLower) ||
-						cardDesc.includes(searchLower) ||
-						cardTools.some((t: string) => t.toLowerCase().includes(searchLower));
-
-					return matchInd && matchStatus && matchTool && matchSearch;
-				});
-
-				// Render
-				cards.forEach((c) => (c.style.display = "none"));
-				active.slice(0, visibleCount).forEach((c) => {
-					c.style.display = "block";
-					c.animate(
-						[
-							{ opacity: 0, transform: "translateY(10px)" },
-							{ opacity: 1, transform: "translateY(0)" },
-						],
-						{ duration: 300 },
-					);
-				});
-
-				// UI Updates
-				if (countLabel)
-					countLabel.innerText = `Showing ${Math.min(visibleCount, active.length)} of ${active.length}`;
-				if (loadMoreBtn)
-					loadMoreBtn.style.display = visibleCount >= active.length ? "none" : "inline-block";
-				if (viewAllBtn)
-					viewAllBtn.style.display = visibleCount >= active.length ? "none" : "inline-block";
-
-				renderActiveFilters();
+		// Events
+		prevBtn?.addEventListener("click", () => {
+			if (currentPage > 1) {
+				currentPage--;
+				update();
+				window.scrollTo({ top: 0, behavior: "smooth" });
 			}
+		});
 
-			// Init
+		nextBtn?.addEventListener("click", () => {
+			// Recalculate total pages to be safe
+			const activeCount = cards.filter((c) => c.style.display !== "none").length; // Wait, this logic is flawed because hidden cards are hidden.
+			// We need to know total active count from filter.
+			// Let's just increment and let update() handle bounds or re-run filter logic inside click?
+			// Better to re-run filter logic or store active count.
+			// For simplicity, just increment and update() will clamp.
+			currentPage++;
 			update();
+			window.scrollTo({ top: 0, behavior: "smooth" });
+		});
 
-			// Events
-			loadMoreBtn?.addEventListener("click", () => {
-				visibleCount += 12;
-				update();
-			});
-			viewAllBtn?.addEventListener("click", () => {
-				visibleCount = 9999;
-				update();
-			});
+		searchInput?.addEventListener("input", (e) => {
+			filters.search = (e.target as HTMLInputElement).value;
+			currentPage = 1;
+			update();
+		});
 
-			searchInput?.addEventListener("input", (e) => {
-				filters.search = (e.target as HTMLInputElement).value;
-				visibleCount = 12; // Reset pagination on search
-				update();
-			});
+		buttons.forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const group = btn.getAttribute("data-group");
+				const val = btn.getAttribute("data-filter");
+				if (!group || !val) return;
 
-			buttons.forEach((btn) => {
-				btn.addEventListener("click", () => {
-					const group = btn.getAttribute("data-group");
-					const val = btn.getAttribute("data-filter");
-					if (!group || !val) return;
-
-					// UI Toggle
-					document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach((b) => {
-						b.classList.remove("active");
-						b.setAttribute("aria-pressed", "false");
-					});
-					btn.classList.add("active");
-					btn.setAttribute("aria-pressed", "true");
-
-					// Logic Update
-					filters[group as keyof typeof filters] = val;
-					visibleCount = 12;
-					update();
+				// UI Toggle
+				document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach((b) => {
+					b.classList.remove("active");
+					b.setAttribute("aria-pressed", "false");
 				});
+				btn.classList.add("active");
+				btn.setAttribute("aria-pressed", "true");
+
+				// Logic Update
+				filters[group as keyof typeof filters] = val;
+				currentPage = 1;
+				update();
 			});
 		});
-	</script>
+	});
+</script>
 
-	<style>
-		@reference "../../styles/global.css";
-		.filter-btn.active {
-			@apply bg-primary ring-primary text-black ring-2;
-		}
-	</style>
-</BaseLayout>
+<style>
+	@reference "../../styles/global.css";
+	.filter-btn.active {
+		@apply bg-primary ring-primary text-black ring-2;
+	}
+</style>

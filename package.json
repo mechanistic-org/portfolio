@@ -10,7 +10,8 @@
 		"astro": "astro",
 		"remove-keystatic": "node ./scripts/remove-keystatic.js",
 		"format": "prettier -w \"**/*\" --ignore-unknown --cache",
-		"lint": "eslint ."
+		"lint": "eslint .",
+		"sync:assets": "python scripts/sync_r2.py"
 	},
 	"dependencies": {
 		"@astro-community/astro-embed-youtube": "^0.5.9",
@@ -34,6 +35,8 @@
 		"astro-icon": "1.1.5",
 		"astro-seo": "0.8.4",
 		"clsx": "^2.1.1",
+		"embla-carousel-auto-scroll": "^8.6.0",
+		"embla-carousel-react": "^8.6.0",
 		"motion-on-scroll": "^1.0.0",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",

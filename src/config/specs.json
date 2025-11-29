@@ -1,0 +1,173 @@
+[
+  {
+    "category": "Device ID",
+    "parameter": "Model Name",
+    "typical": "Erik Norris",
+    "min": "-",
+    "max": "-",
+    "unit": "-",
+    "notes": "Gen 1.0"
+  },
+  {
+    "category": "Device ID",
+    "parameter": "Architecture",
+    "typical": "ENTJ",
+    "min": "-",
+    "max": "-",
+    "unit": "-",
+    "notes": "MBTI"
+  },
+  {
+    "category": "Device ID",
+    "parameter": "Manufacturing Date",
+    "typical": "Monkey",
+    "min": "-",
+    "max": "-",
+    "unit": "-",
+    "notes": "Chinese Zodiac"
+  },
+  {
+    "category": "Device ID",
+    "parameter": "Phase Angle",
+    "typical": "Aries / Taurus",
+    "min": "-",
+    "max": "-",
+    "unit": "-",
+    "notes": "Cusp"
+  },
+  {
+    "category": "Electrical Char.",
+    "parameter": "Creativity",
+    "typical": "61",
+    "min": "55",
+    "max": "70",
+    "unit": "T-Score",
+    "notes": "Top 86th %"
+  },
+  {
+    "category": "Electrical Char.",
+    "parameter": "Orderliness",
+    "typical": "63",
+    "min": "60",
+    "max": "75",
+    "unit": "T-Score",
+    "notes": "High attention to detail"
+  },
+  {
+    "category": "Electrical Char.",
+    "parameter": "Honesty",
+    "typical": "63",
+    "min": "-",
+    "max": "-",
+    "unit": "T-Score",
+    "notes": "No legacy is so rich"
+  },
+  {
+    "category": "Electrical Char.",
+    "parameter": "Intellect",
+    "typical": "58",
+    "min": "-",
+    "max": "-",
+    "unit": "T-Score",
+    "notes": "Quick grasper of concepts"
+  },
+  {
+    "category": "Electrical Char.",
+    "parameter": "Industry",
+    "typical": "59",
+    "min": "-",
+    "max": "-",
+    "unit": "T-Score",
+    "notes": "High diligence"
+  },
+  {
+    "category": "Electrical Char.",
+    "parameter": "Impedance (Introversion)",
+    "typical": "58",
+    "min": "40",
+    "max": "80",
+    "unit": "%",
+    "notes": "Measured as \"Somewhat Introverted\""
+  },
+  {
+    "category": "Operating Cond.",
+    "parameter": "Focus Time",
+    "typical": "9:00",
+    "min": "7:00",
+    "max": "11:00",
+    "unit": "Hours",
+    "notes": "Deep work preferred"
+  },
+  {
+    "category": "Operating Cond.",
+    "parameter": "Communication Interface",
+    "typical": "Async",
+    "min": "-",
+    "max": "-",
+    "unit": "-",
+    "notes": "Slack/Teams preferred over calls"
+  },
+  {
+    "category": "Operating Cond.",
+    "parameter": "Ambiguity Tolerance",
+    "typical": "Low",
+    "min": "-",
+    "max": "-",
+    "unit": "-",
+    "notes": "Needs clear definitions"
+  },
+  {
+    "category": "Operating Cond.",
+    "parameter": "Feedback Loop",
+    "typical": "Direct",
+    "min": "-",
+    "max": "-",
+    "unit": "Type",
+    "notes": "Do not sugarcoat"
+  },
+  {
+    "category": "Abs. Max Ratings",
+    "parameter": "Meeting Duration",
+    "typical": "2",
+    "min": "-",
+    "max": "4",
+    "unit": "Hours",
+    "notes": "Performance degrades >2h"
+  },
+  {
+    "category": "Abs. Max Ratings",
+    "parameter": "Bureaucracy Voltage",
+    "typical": "5",
+    "min": "-",
+    "max": "10",
+    "unit": "V",
+    "notes": "Low tolerance for red tape"
+  },
+  {
+    "category": "Abs. Max Ratings",
+    "parameter": "Micromanagement",
+    "typical": "0",
+    "min": "-",
+    "max": "1",
+    "unit": "%",
+    "notes": "Instant shutdown triggered"
+  },
+  {
+    "category": "Thermal Char.",
+    "parameter": "Emotional Stability",
+    "typical": "52",
+    "min": "-",
+    "max": "-",
+    "unit": "T-Score",
+    "notes": "Recovers quickly from stress"
+  },
+  {
+    "category": "Thermal Char.",
+    "parameter": "Irritability",
+    "typical": "63",
+    "min": "-",
+    "max": "-",
+    "unit": "T-Score",
+    "notes": "Passionate reactivity"
+  }
+]

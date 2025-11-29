@@ -5,21 +5,23 @@ import glob
 import urllib.request
 import shutil
 import math
+import random
 from datetime import datetime
 import matplotlib.pyplot as plt
 import numpy as np
 
 # --- CONFIGURATION ---
 SOURCE_DIR = "data_source"
+OUTPUT_DATA_DIR = "src/config"
 OUTPUT_CONTENT_DIR = "src/content/projects"
-OUTPUT_DATA_DIR = "src/data"
-ASSETS_DIR = "public/assets/placeholders"
-R2_DOMAIN = "/assets/r2"
+ASSETS_DIR = "public/assets"
 LOCAL_R2_DIR = "public/assets/r2"
+STAGING_DIR = "R2_STAGING"
+R2_DOMAIN = "/assets/r2" # Local Dev
+# R2_DOMAIN = "https://assets.eriknorris.com" # Production / Remote Dev
 
 def find_file(suffix):
-    exact = os.path.join(SOURCE_DIR, suffix)
-    if os.path.exists(exact): return exact
+    """Find a file in SOURCE_DIR ending with suffix."""
     pattern = os.path.join(SOURCE_DIR, f"*{suffix}")
     matches = glob.glob(pattern)
     return matches[0] if matches else None
@@ -345,50 +347,64 @@ def process_projects():
                     duration_str = f"{diff_days / 365:.1f} Years"
                 else:
                     months = max(1, round(diff_days / 30))
-                    duration_str = f"{months} Month{'s' if months != 1 else ''}"
             except: pass
         
-        status_label = prod
+        status_label = "Completed"
+        if not end_date_raw: status_label = "Ongoing"
 
-        # Assets
-        hero_img = f"/assets/placeholders/{dummy_files[i % 4]}"
-        model_url = f"{R2_DOMAIN}/_site/NeilArmstrong.glb"
-        comment = ""
+        # --- IMAGES ---
+        # Look for images in STAGING_DIR/slug
+        # If found, copy to LOCAL_R2_DIR and use R2_DOMAIN/slug/image
+        # If not, use dummy
+        
+        hero_img = f"/assets/placeholders/{random.choice(dummy_files)}"
         gallery_images = []
-
-        local_stage = os.path.join("R2_STAGING", slug)
-        if os.path.exists(local_stage):
-             # SYNC ASSETS
-             sync_r2_assets(slug, local_stage)
-             
-             for ext in [".png", ".jpg", ".webp"]:
-                if os.path.exists(os.path.join(local_stage, f"hero{ext}")):
-                    hero_img = f"{R2_DOMAIN}/{slug}/hero{ext}"
-                    break
-             if os.path.exists(os.path.join(local_stage, "model.glb")):
-                 print(f"✅ Found model for {slug}")
-                 model_url = f"{R2_DOMAIN}/{slug}/model.glb"
-
-             for f in os.listdir(local_stage):
-                 lower = f.lower()
-                 if lower.endswith(('.png', '.jpg', '.jpeg', '.webp')) and "hero" not in lower:
-                     gallery_images.append(f"{R2_DOMAIN}/{slug}/{f}")
-        else:
-             comment = f"# R2: {R2_DOMAIN}/{slug}/hero.jpg"
-
-        # Resource Scanning
+        
+        staging_project_dir = os.path.join(STAGING_DIR, slug)
+        
+        if os.path.exists(staging_project_dir):
+            # Sync assets to public/assets/r2
+            sync_r2_assets(slug, staging_project_dir)
+            
+            for f in os.listdir(staging_project_dir):
+                if f.lower().startswith("hero."):
+                    hero_img = f"{R2_DOMAIN}/{slug}/{f}"
+                elif f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp', '.gif')) and "hero" not in f.lower():
+                    gallery_images.append(f"{R2_DOMAIN}/{slug}/{f}")
+        
+        # Sort gallery
+        gallery_images.sort()
+        
+        # Documents
         documents = []
-        links = []
-        if os.path.exists(local_stage):
-            for f in os.listdir(local_stage):
+        if os.path.exists(staging_project_dir):
+             for f in os.listdir(staging_project_dir):
                 if f.endswith(".pdf"):
                     documents.append({"name": f, "url": f"{R2_DOMAIN}/{slug}/{f}"})
         
+        # Links
+        links = []
+        if row.get("Link"):
+            links.append({"name": "Website", "url": row.get("Link")})
+
+        # 3D Model
+        model_url = ""
+        # Check for .glb
+        if os.path.exists(staging_project_dir):
+            for f in os.listdir(staging_project_dir):
+                if f.endswith(".glb"):
+                    model_url = f"{R2_DOMAIN}/{slug}/{f}"
+                    break
+
         # Generate Charts
         skill_graph_url = generate_radar_chart(skill_data, slug)
         part_graph_url = generate_donut_chart(parts, slug)
 
         # Template Replacement
+        model_viewer_tag = ""
+        if model_url:
+            model_viewer_tag = f'<ModelViewer src="{model_url}" alt="3D Asset" />'
+
         content_body = f"""
 import {{ YouTube }} from '@astro-community/astro-embed-youtube';
 
@@ -401,7 +417,7 @@ import {{ YouTube }} from '@astro-community/astro-embed-youtube';
 <div class="my-8">
   <YouTube id="dQw4w9WgXcQ" />
 </div>
-<ModelViewer src="{model_url}" alt="3D Asset" />
+{model_viewer_tag}
 """
 
         mdx = f"""---
@@ -444,18 +460,51 @@ partGraph: "{part_graph_url}"
     for client in sorted(list(all_clients)):
         logo_name = client.lower().replace(' ', '')
         logo_path = None
-        # CHECK LOCAL R2
-        if os.path.exists(os.path.join(LOCAL_R2_DIR, "_site", "logos", f"{logo_name}.svg")):
+        # CHECK STAGING FOR LOGOS
+        staging_logo_dir = os.path.join(STAGING_DIR, "_site", "logos")
+        if os.path.exists(os.path.join(staging_logo_dir, f"{logo_name}.svg")):
             logo_path = f"{R2_DOMAIN}/_site/logos/{logo_name}.svg"
-        elif os.path.exists(os.path.join(LOCAL_R2_DIR, "_site", "logos", f"{logo_name}.png")):
+            # Sync logo
+            target_logo_dir = os.path.join(LOCAL_R2_DIR, "_site", "logos")
+            os.makedirs(target_logo_dir, exist_ok=True)
+            shutil.copy2(os.path.join(staging_logo_dir, f"{logo_name}.svg"), os.path.join(target_logo_dir, f"{logo_name}.svg"))
+        elif os.path.exists(os.path.join(staging_logo_dir, f"{logo_name}.png")):
             logo_path = f"{R2_DOMAIN}/_site/logos/{logo_name}.png"
+            # Sync logo
+            target_logo_dir = os.path.join(LOCAL_R2_DIR, "_site", "logos")
+            os.makedirs(target_logo_dir, exist_ok=True)
+            shutil.copy2(os.path.join(staging_logo_dir, f"{logo_name}.png"), os.path.join(target_logo_dir, f"{logo_name}.png"))
+            
         client_data.append({"name": client, "logo": logo_path})
 
     with open(os.path.join(OUTPUT_DATA_DIR, "clients.json"), "w") as f:
         json.dump(client_data, f, indent=2)
 
+def sync_site_assets():
+    """Sync _site directory from STAGING to LOCAL_R2_DIR"""
+    print("🔄 Syncing _site assets...")
+    source = os.path.join(STAGING_DIR, "_site")
+    target = os.path.join(LOCAL_R2_DIR, "_site")
+    
+    if os.path.exists(source):
+        if not os.path.exists(target):
+            os.makedirs(target)
+            
+        # Sync files in root of _site
+        for item in os.listdir(source):
+            s = os.path.join(source, item)
+            d = os.path.join(target, item)
+            if os.path.isfile(s):
+                shutil.copy2(s, d)
+            elif os.path.isdir(s):
+                # Recursive copy for subdirectories like logos
+                if os.path.exists(d):
+                    shutil.rmtree(d)
+                shutil.copytree(s, d)
+
 if __name__ == "__main__":
     ensure_dummy_assets()
+    sync_site_assets()
     process_colors()
     process_specs()
     process_tenure()

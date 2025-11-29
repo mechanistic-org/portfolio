@@ -1,6 +1,7 @@
 ---
 import Layout from "@layouts/BaseLayout.astro";
 import Button from "@components/Button/Button.astro";
+import Marquee from "@components/Marquee/Marquee";
 
 const tools = [
 	"VS Code",
@@ -21,7 +22,7 @@ const tools = [
 ];
 
 // Duplicate for marquee loop
-const marqueeTools = [...tools, ...tools, ...tools];
+const marqueeTools = [...tools, ...tools, ...tools, ...tools, ...tools, ...tools]; // Infinite loop (6x)
 ---
 
 <Layout title="Colophon" description="How this site was built: Architecture and Stack.">
@@ -71,32 +72,30 @@ const marqueeTools = [...tools, ...tools, ...tools];
 				</li>
 			</ul>
 
-			<div class="mt-16 overflow-hidden border-y border-neutral-800 bg-neutral-900/50 py-6">
-				<div class="flex w-full overflow-hidden">
-					<div class="animate-marquee flex min-w-full gap-12 px-12 whitespace-nowrap">
-						{
-							marqueeTools.map((tool) => {
-								const slug = tool
-									.toLowerCase()
-									.replace(" ", "")
-									.replace(".", "")
-									.replace("+", "plus");
-								return (
-									<div class="flex items-center gap-4 opacity-50 grayscale transition-all hover:opacity-100 hover:grayscale-0">
-										<img
-											src={`https://cdn.simpleicons.org/${slug}/white`}
-											alt={tool}
-											class="h-8 w-8"
-										/>
-										<span class="text-xl font-bold tracking-widest text-neutral-500 uppercase">
-											{tool}
-										</span>
-									</div>
-								);
-							})
-						}
-					</div>
-				</div>
+			<div class="mt-16 border-y border-neutral-800 bg-neutral-900/50 py-6">
+				<Marquee client:load speed={1}>
+					{
+						marqueeTools.map((tool) => {
+							const slug = tool
+								.toLowerCase()
+								.replace(" ", "")
+								.replace(".", "")
+								.replace("+", "plus");
+							return (
+								<div class="flex min-w-0 flex-[0_0_auto] items-center gap-4 pl-12 opacity-50 grayscale transition-all hover:opacity-100 hover:grayscale-0">
+									<img
+										src={`https://cdn.simpleicons.org/${slug}/white`}
+										alt={tool}
+										class="h-8 w-8"
+									/>
+									<span class="text-xl font-bold tracking-widest text-neutral-500 uppercase">
+										{tool}
+									</span>
+								</div>
+							);
+						})
+					}
+				</Marquee>
 			</div>
 		</div>
 
@@ -192,17 +191,3 @@ const marqueeTools = [...tools, ...tools, ...tools];
 		</div>
 	</section>
 </Layout>
-
-<style>
-	@keyframes marquee {
-		0% {
-			transform: translateX(0);
-		}
-		100% {
-			transform: translateX(-50%);
-		}
-	}
-	.animate-marquee {
-		animation: marquee 40s linear infinite;
-	}
-</style>

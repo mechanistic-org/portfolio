@@ -19,5 +19,10 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+
 # Local Netlify folder
 .netlify
+
+# Local R2 Staging (Do not commit)
+R2_STAGING/
+public/assets/r2/
