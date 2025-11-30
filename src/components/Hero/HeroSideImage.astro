@@ -14,7 +14,11 @@ import ScrambleText from "@components/Effects/ScrambleText";
 	<div class="site-container grid items-center gap-10 pt-20 md:grid-cols-3 md:gap-20 md:pt-24">
 		<div class="mx-auto flex max-w-lg flex-col gap-6 md:col-span-2 md:ml-0 md:max-w-full">
 			<h1 class="h1">
-				Hi, I'm <ScrambleText client:load text={siteData.author.name} className="text-primary" />
+				Hi, I'm&nbsp;<ScrambleText
+					client:load
+					text={siteData.author.name}
+					className="text-primary"
+				/>
 			</h1>
 			<p class="description text-lg text-pretty text-neutral-400">Mechanical Design Engineer</p>
 		</div>

@@ -35,7 +35,7 @@ else:
 
 # Determine R2 Domain
 # Default to local proxy for dev, override for prod
-R2_DOMAIN = os.environ.get("PUBLIC_R2_DOMAIN", "/assets/r2")
+R2_DOMAIN = os.environ.get("PUBLIC_R2_DOMAIN", "https://assets.eriknorris.com")
 print(f"🌐 Using R2 Domain: {R2_DOMAIN}")
 
 def find_file(suffix):
@@ -94,6 +94,11 @@ def ensure_dummy_assets():
 
 def sync_r2_assets(slug, source_dir):
     """Copy local R2 staging assets to public/assets/r2"""
+    # If using a remote R2 domain, DO NOT copy files locally
+    if R2_DOMAIN.startswith("http"):
+        # print(f"☁️  Skipping local copy for {slug} (using remote R2)")
+        return
+
     target_dir = os.path.join(LOCAL_R2_DIR, slug)
     if not os.path.exists(target_dir):
         os.makedirs(target_dir)
@@ -144,8 +149,8 @@ def generate_radar_chart(skill_data, slug):
     ax.grid(color='#404040')
     ax.spines['polar'].set_visible(False)
     
-    # Save
-    output_dir = os.path.join(LOCAL_R2_DIR, slug)
+    # Save to STAGING
+    output_dir = os.path.join(STAGING_DIR, slug)
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, "skill-graph.svg")
     plt.savefig(output_path, transparent=True, bbox_inches='tight')
@@ -194,8 +199,8 @@ def generate_donut_chart(stats, slug):
     ax.axis('equal')  
     plt.tight_layout()
     
-    # Save
-    output_dir = os.path.join(LOCAL_R2_DIR, slug)
+    # Save to STAGING
+    output_dir = os.path.join(STAGING_DIR, slug)
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, "part-graph.svg")
     plt.savefig(output_path, transparent=True, bbox_inches='tight')
@@ -583,15 +588,17 @@ partGraph: "{part_graph_url}"
         if os.path.exists(os.path.join(staging_logo_dir, f"{logo_name}.svg")):
             logo_path = f"{R2_DOMAIN}/_site/logos/{logo_name}.svg"
             # Sync logo
-            target_logo_dir = os.path.join(LOCAL_R2_DIR, "_site", "logos")
-            os.makedirs(target_logo_dir, exist_ok=True)
-            shutil.copy2(os.path.join(staging_logo_dir, f"{logo_name}.svg"), os.path.join(target_logo_dir, f"{logo_name}.svg"))
+            if not R2_DOMAIN.startswith("http"):
+                target_logo_dir = os.path.join(LOCAL_R2_DIR, "_site", "logos")
+                os.makedirs(target_logo_dir, exist_ok=True)
+                shutil.copy2(os.path.join(staging_logo_dir, f"{logo_name}.svg"), os.path.join(target_logo_dir, f"{logo_name}.svg"))
         elif os.path.exists(os.path.join(staging_logo_dir, f"{logo_name}.png")):
             logo_path = f"{R2_DOMAIN}/_site/logos/{logo_name}.png"
             # Sync logo
-            target_logo_dir = os.path.join(LOCAL_R2_DIR, "_site", "logos")
-            os.makedirs(target_logo_dir, exist_ok=True)
-            shutil.copy2(os.path.join(staging_logo_dir, f"{logo_name}.png"), os.path.join(target_logo_dir, f"{logo_name}.png"))
+            if not R2_DOMAIN.startswith("http"):
+                target_logo_dir = os.path.join(LOCAL_R2_DIR, "_site", "logos")
+                os.makedirs(target_logo_dir, exist_ok=True)
+                shutil.copy2(os.path.join(staging_logo_dir, f"{logo_name}.png"), os.path.join(target_logo_dir, f"{logo_name}.png"))
             
         client_data.append({
             "name": client, 
@@ -604,6 +611,10 @@ partGraph: "{part_graph_url}"
 
 def sync_site_assets():
     """Sync _site directory from STAGING to LOCAL_R2_DIR"""
+    if R2_DOMAIN.startswith("http"):
+        # print("☁️  Skipping _site asset sync (using remote R2)")
+        return
+
     print("🔄 Syncing _site assets...")
     source = os.path.join(STAGING_DIR, "_site")
     target = os.path.join(LOCAL_R2_DIR, "_site")
