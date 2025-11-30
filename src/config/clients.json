@@ -1,7 +1,7 @@
 [
   {
     "name": "Avegant",
-    "logo": "/assets/r2/_site/logos/avegant.svg",
+    "logo": null,
     "icon": null
   },
   {
@@ -21,7 +21,7 @@
   },
   {
     "name": "Fitch",
-    "logo": "/assets/r2/_site/logos/fitch.svg",
+    "logo": null,
     "icon": null
   },
   {
@@ -31,7 +31,7 @@
   },
   {
     "name": "Hyphen",
-    "logo": "/assets/r2/_site/logos/hyphen.svg",
+    "logo": null,
     "icon": null
   },
   {
@@ -46,7 +46,7 @@
   },
   {
     "name": "Microsoft",
-    "logo": "/assets/r2/_site/logos/microsoft.svg",
+    "logo": null,
     "icon": "microsoft"
   },
   {
@@ -56,12 +56,12 @@
   },
   {
     "name": "Motorola",
-    "logo": "/assets/r2/_site/logos/motorola.svg",
+    "logo": null,
     "icon": null
   },
   {
     "name": "Noon",
-    "logo": "/assets/r2/_site/logos/noon.png",
+    "logo": null,
     "icon": null
   },
   {
@@ -71,7 +71,7 @@
   },
   {
     "name": "Silicon Graphics",
-    "logo": "/assets/r2/_site/logos/silicongraphics.svg",
+    "logo": null,
     "icon": null
   },
   {
@@ -86,12 +86,12 @@
   },
   {
     "name": "UltimateTV",
-    "logo": "/assets/r2/_site/logos/ultimatetv.svg",
+    "logo": null,
     "icon": null
   },
   {
     "name": "WebTV",
-    "logo": "/assets/r2/_site/logos/webtv.svg",
+    "logo": null,
     "icon": null
   },
   {
@@ -101,7 +101,7 @@
   },
   {
     "name": "frogdesign",
-    "logo": "/assets/r2/_site/logos/frogdesign.svg",
+    "logo": null,
     "icon": null
   }
 ]

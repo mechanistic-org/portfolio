@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2025-11-29T11:12:20.097659</dc:date>
+    <dc:date>2025-11-29T18:52:11.352205</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -70,7 +70,7 @@ C 81.817286 244.628804 95.576253 277.695662 120.063935 302.072596
 C 144.551617 326.44953 177.768702 340.146271 212.399514 340.146271 
 L 212.399514 340.146271 
 z
-" clip-path="url(#pbfdde376dd)" style="fill: none"/>
+" clip-path="url(#pe40fddd197)" style="fill: none"/>
    </g>
    <g id="matplotlib.axis_1"/>
    <g id="matplotlib.axis_2"/>
@@ -536,7 +536,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="pbfdde376dd">
+  <clipPath id="pe40fddd197">
    <rect x="7.2" y="7.2" width="410.4" height="405.90816"/>
   </clipPath>
  </defs>

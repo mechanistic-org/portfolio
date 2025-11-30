@@ -24,15 +24,16 @@ const marqueeItems: MarqueeItem[] = duplicatedClients.map((client, index) => ({
 }));
 ---
 
-<div class="border-border bg-background relative w-full border-y py-6">
-	<div
+<div class="relative w-full py-3">
+	<!-- Gradients removed for transparency -->
+	<!-- <div
 		class="from-background pointer-events-none absolute top-0 left-0 z-10 h-full w-32 bg-gradient-to-r to-transparent"
 	>
 	</div>
 	<div
 		class="from-background pointer-events-none absolute top-0 right-0 z-10 h-full w-32 bg-gradient-to-l to-transparent"
 	>
-	</div>
+	</div> -->
 
 	<Marquee client:load speed={1} items={marqueeItems} grayscale={false} />
 </div>

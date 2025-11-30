@@ -14,7 +14,7 @@ const { text, href, newTab = false } = navItem;
 <li>
 	<a
 		class:list={[
-			`primary-focus nav__link--base group/navlink relative block w-full px-4 py-2 font-semibold ${className}`,
+			`group/navlink text-foreground hover:text-primary-600 relative block w-full px-4 py-2 font-semibold transition-colors ${className}`,
 		]}
 		href={href}
 		target={newTab ? "_blank" : ""}
