@@ -20,7 +20,6 @@ const { navItem } = Astro.props as Props;
 		aria-label={`${navItem.text} dropdown menu`}
 	>
 		{navItem.text}
-		<Icon name="tdesign:chevron-down" aria-hidden="true" class="h-5 w-5" />
 	</button>
 	<div class="dropdown-content invisible absolute z-10 opacity-0 transition-all">
 		<ul

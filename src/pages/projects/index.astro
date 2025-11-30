@@ -60,49 +60,6 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 			<ProjectDirectory projects={projects} />
 		</div>
 	</div>
-
-	<div
-		class="mt-12 flex hidden items-center justify-center gap-4 text-center"
-		id="pagination-controls"
-	>
-		<button
-			id="prev-btn"
-			class="flex items-center gap-2 rounded-lg border border-neutral-800 bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-50"
-		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="16"
-				height="16"
-				viewBox="0 0 24 24"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2"
-				stroke-linecap="round"
-				stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg
-			>
-			Prev
-		</button>
-
-		<span id="page-indicator" class="font-mono text-sm text-neutral-500">Page 1</span>
-
-		<button
-			id="next-btn"
-			class="flex items-center gap-2 rounded-lg border border-neutral-800 bg-neutral-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-50"
-		>
-			Next
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="16"
-				height="16"
-				viewBox="0 0 24 24"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="2"
-				stroke-linecap="round"
-				stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg
-			>
-		</button>
-	</div>
 </BaseLayout>
 
 <script>
@@ -111,19 +68,13 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 		const rows = Array.from(document.querySelectorAll(".project-row")) as HTMLElement[];
 		const buttons = document.querySelectorAll(".filter-btn");
 		const searchInput = document.getElementById("project-search") as HTMLInputElement;
-
-		const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement;
-		const nextBtn = document.getElementById("next-btn") as HTMLButtonElement;
-		const pageIndicator = document.getElementById("page-indicator");
-		const controls = document.getElementById("pagination-controls");
+		const sortHeaders = document.querySelectorAll(".sort-header");
 
 		if (rows.length === 0) return;
-		if (controls) controls.classList.remove("hidden");
 
 		// State
 		let filters = { industry: "all", tool: "all", status: "all", client: "all", search: "" };
-		let currentPage = 1;
-		const itemsPerPage = 15; // Increased for list view
+		let sortState = { column: "date", direction: "desc" }; // default sort
 
 		// URL Params Logic - Run BEFORE initial update
 		const urlParams = new URLSearchParams(window.location.search);
@@ -194,9 +145,28 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 			display.appendChild(resetBtn);
 		}
 
+		function getCellValue(row: HTMLElement, column: string): string | number {
+			const d = row.dataset;
+			switch (column) {
+				case "project":
+					return d.title?.toLowerCase() || "";
+				case "client":
+					// Client is an array string, just take the first one for sorting or join them
+					return (JSON.parse(d.client || "[]")[0] || "").toLowerCase();
+				case "sector":
+					return d.industry?.toLowerCase() || "";
+				case "year":
+					return parseInt(d.date || "0");
+				case "status":
+					return d.status?.toLowerCase() || "";
+				default:
+					return "";
+			}
+		}
+
 		function update() {
 			// Filter
-			const active = rows.filter((row) => {
+			let active = rows.filter((row) => {
 				const d = row.dataset;
 				const rowTools = JSON.parse(d.tool || "[]");
 				const rowClients = JSON.parse(d.client || "[]"); // Assuming client is array
@@ -219,67 +189,57 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 				return matchInd && matchStatus && matchTool && matchClient && matchSearch;
 			});
 
-			// Pagination Logic
-			const totalPages = Math.ceil(active.length / itemsPerPage);
-			if (currentPage > totalPages) currentPage = 1;
-			if (currentPage < 1) currentPage = 1;
+			// Sort
+			active.sort((a, b) => {
+				const valA = getCellValue(a, sortState.column);
+				const valB = getCellValue(b, sortState.column);
 
-			const start = (currentPage - 1) * itemsPerPage;
-			const end = start + itemsPerPage;
-			const visibleItems = active.slice(start, end);
-
-			// Render
-			rows.forEach((r) => (r.style.display = "none"));
-			visibleItems.forEach((r) => {
-				r.style.display = "table-row"; // Must be table-row for tables
-				r.animate(
-					[
-						{ opacity: 0, transform: "translateX(-10px)" },
-						{ opacity: 1, transform: "translateX(0)" },
-					],
-					{ duration: 200 },
-				);
+				if (valA < valB) return sortState.direction === "asc" ? -1 : 1;
+				if (valA > valB) return sortState.direction === "asc" ? 1 : -1;
+				return 0;
 			});
 
-			// UI Updates
-			if (pageIndicator) pageIndicator.innerText = `Page ${currentPage} of ${totalPages || 1}`;
+			// Render
+			// First hide all rows
+			rows.forEach((r) => (r.style.display = "none"));
 
-			if (prevBtn) {
-				prevBtn.disabled = currentPage <= 1;
-				prevBtn.style.display = totalPages > 1 ? "flex" : "none";
-			}
-			if (nextBtn) {
-				nextBtn.disabled = currentPage >= totalPages;
-				nextBtn.style.display = totalPages > 1 ? "flex" : "none";
-			}
-			if (pageIndicator) {
-				pageIndicator.style.display = totalPages > 1 ? "inline" : "none";
+			// Then append active rows in order to the tbody to ensure visual order matches sort order
+			const tbody = document.getElementById("projects-table-body");
+			if (tbody) {
+				active.forEach((r) => {
+					r.style.display = "table-row";
+					tbody.appendChild(r); // Re-appending moves it to the end, effectively reordering
+				});
 			}
 
 			renderActiveFilters();
+			updateSortIcons();
+		}
+
+		function updateSortIcons() {
+			sortHeaders.forEach((header) => {
+				const col = header.getAttribute("data-col");
+				const icon = header.querySelector(".sort-icon");
+				if (!icon) return;
+
+				if (col === sortState.column) {
+					icon.innerHTML = sortState.direction === "asc" ? "▲" : "▼";
+					header.classList.add("text-primary");
+					header.classList.remove("text-neutral-500");
+				} else {
+					icon.innerHTML = "↕"; // or some neutral icon
+					header.classList.remove("text-primary");
+					header.classList.add("text-neutral-500");
+				}
+			});
 		}
 
 		// Init
 		update();
 
 		// Events
-		prevBtn?.addEventListener("click", () => {
-			if (currentPage > 1) {
-				currentPage--;
-				update();
-				window.scrollTo({ top: 0, behavior: "smooth" });
-			}
-		});
-
-		nextBtn?.addEventListener("click", () => {
-			currentPage++;
-			update();
-			window.scrollTo({ top: 0, behavior: "smooth" });
-		});
-
 		searchInput?.addEventListener("input", (e) => {
 			filters.search = (e.target as HTMLInputElement).value;
-			currentPage = 1;
 			update();
 		});
 
@@ -297,7 +257,23 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 
 				// Logic Update
 				filters[group as keyof typeof filters] = val;
-				currentPage = 1;
+				update();
+			});
+		});
+
+		sortHeaders.forEach((header) => {
+			header.addEventListener("click", () => {
+				const col = header.getAttribute("data-col");
+				if (!col) return;
+
+				if (sortState.column === col) {
+					// Toggle direction
+					sortState.direction = sortState.direction === "asc" ? "desc" : "asc";
+				} else {
+					// New column, default to asc (or desc for year?)
+					sortState.column = col;
+					sortState.direction = col === "year" ? "desc" : "asc";
+				}
 				update();
 			});
 		});

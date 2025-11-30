@@ -17,10 +17,6 @@ const navConfig: navItem[] = [
 		href: "/projects/",
 	},
 	{
-		text: "Log",
-		href: "/blog/",
-	},
-	{
 		text: "About",
 		dropdown: [
 			{

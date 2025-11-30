@@ -12,7 +12,7 @@ const { projects } = Astro.props;
 	<!-- Hover Preview Window -->
 	<div
 		id="project-preview"
-		class="pointer-events-none fixed bottom-8 left-8 z-50 hidden h-48 w-64 overflow-hidden rounded-lg border border-neutral-700 bg-neutral-900 opacity-0 shadow-2xl transition-opacity duration-300 md:block"
+		class="pointer-events-none fixed top-0 left-0 z-50 hidden h-48 w-64 overflow-hidden rounded-lg border border-neutral-700 bg-neutral-900 opacity-0 shadow-2xl transition-opacity duration-300 md:block"
 	>
 		<img
 			id="preview-image"
@@ -35,11 +35,46 @@ const { projects } = Astro.props;
 			<thead>
 				<tr class="border-b border-neutral-800 text-neutral-500">
 					<th class="px-4 py-3 font-medium tracking-wider uppercase">ID</th>
-					<th class="px-4 py-3 font-medium tracking-wider uppercase">Project</th>
-					<th class="px-4 py-3 font-medium tracking-wider uppercase">Client</th>
-					<th class="px-4 py-3 font-medium tracking-wider uppercase">Sector</th>
-					<th class="px-4 py-3 font-medium tracking-wider uppercase">Year</th>
-					<th class="px-4 py-3 font-medium tracking-wider uppercase">Status</th>
+					<th
+						class="sort-header cursor-pointer px-4 py-3 font-medium tracking-wider uppercase transition-colors select-none hover:text-white"
+						data-col="project"
+					>
+						<div class="flex items-center gap-2">
+							Project <span class="sort-icon text-xs">↕</span>
+						</div>
+					</th>
+					<th
+						class="sort-header cursor-pointer px-4 py-3 font-medium tracking-wider uppercase transition-colors select-none hover:text-white"
+						data-col="client"
+					>
+						<div class="flex items-center gap-2">
+							Client <span class="sort-icon text-xs">↕</span>
+						</div>
+					</th>
+					<th
+						class="sort-header cursor-pointer px-4 py-3 font-medium tracking-wider uppercase transition-colors select-none hover:text-white"
+						data-col="sector"
+					>
+						<div class="flex items-center gap-2">
+							Sector <span class="sort-icon text-xs">↕</span>
+						</div>
+					</th>
+					<th
+						class="sort-header cursor-pointer px-4 py-3 font-medium tracking-wider uppercase transition-colors select-none hover:text-white"
+						data-col="year"
+					>
+						<div class="flex items-center gap-2">
+							Year <span class="sort-icon text-xs">↕</span>
+						</div>
+					</th>
+					<th
+						class="sort-header cursor-pointer px-4 py-3 font-medium tracking-wider uppercase transition-colors select-none hover:text-white"
+						data-col="status"
+					>
+						<div class="flex items-center gap-2">
+							Status <span class="sort-icon text-xs">↕</span>
+						</div>
+					</th>
 					<th class="px-4 py-3 text-right font-medium tracking-wider uppercase">Link</th>
 				</tr>
 			</thead>
@@ -51,6 +86,7 @@ const { projects } = Astro.props;
 							data-industry={project.data.industry}
 							data-tool={JSON.stringify(project.data.tools)}
 							data-status={project.data.production}
+							data-date={new Date(project.data.date).getTime()}
 							data-client={JSON.stringify([
 								...(project.data.client || []),
 								...(project.data.employer ? [project.data.employer] : []),
@@ -117,6 +153,17 @@ const { projects } = Astro.props;
 					preview.classList.remove("opacity-0");
 					preview.classList.add("opacity-100");
 				}
+			});
+
+			row.addEventListener("mousemove", (e) => {
+				const event = e as MouseEvent;
+				// Position relative to viewport
+				const x = event.clientX;
+				const y = event.clientY;
+
+				// Offset to avoid cursor
+				preview.style.left = `${x + 20}px`;
+				preview.style.top = `${y + 20}px`;
 			});
 
 			row.addEventListener("mouseleave", () => {

@@ -5,7 +5,6 @@ import NavDropdown from "@components/Nav/NavDropdown.astro";
 import MobileNav from "@components/Nav/MobileNav/MobileNav.astro";
 import SiteLogo from "@components/SiteLogo/SiteLogo.astro";
 import Button from "@components/Button/Button.astro";
-import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
 import SocialCloud from "@components/SocialCloud/SocialCloud.astro";
 
 // data
@@ -27,7 +26,7 @@ import navData from "@config/navData.json";
 				</div>
 
 				<!-- Center: Desktop Nav -->
-				<div class="flex flex-1 justify-center">
+				<div class="flex flex-1 items-center justify-center gap-4">
 					<nav class="hidden md:block">
 						<ul class="flex h-fit items-center px-4">
 							{
@@ -44,13 +43,6 @@ import navData from "@config/navData.json";
 							}
 						</ul>
 					</nav>
-				</div>
-
-				<!-- Right: Socials & Toggle -->
-				<div class="flex flex-1 items-center justify-end gap-4">
-					<div class="hidden md:block">
-						<SocialCloud />
-					</div>
 
 					<button
 						id="search-trigger"
@@ -71,14 +63,16 @@ import navData from "@config/navData.json";
 							><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg
 						>
 					</button>
+				</div>
 
-					<div class="my-auto hidden h-full items-center md:flex">
-						<ThemeToggle />
+				<!-- Right: Socials & Toggle -->
+				<div class="flex flex-1 items-center justify-end gap-4">
+					<div class="hidden md:block">
+						<SocialCloud />
 					</div>
 
 					<!-- mobile nav menu, only load on small screens where it is visible -->
 					<div class="flex items-center gap-4 md:hidden">
-						<ThemeToggle />
 						<MobileNav />
 					</div>
 				</div>

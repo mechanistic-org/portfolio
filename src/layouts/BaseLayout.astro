@@ -10,7 +10,6 @@ import BaseHead from "@layouts/BaseHead.astro";
 import Nav from "@components/Nav/Nav.astro";
 import Footer from "@components/Footer/Footer.astro";
 import CommandMenu from "@components/Search/CommandMenu";
-import ScrollMechanism from "@components/Mechanism/ScrollMechanism.astro";
 // import CookieConsent from "@components/CookieConsent/CookieConsent.astro";
 
 // data
@@ -38,7 +37,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" transition:animate="fade">
+<html lang="en" class="dark" transition:animate="fade">
 	<head>
 		<BaseHead
 			type={type}
@@ -50,25 +49,6 @@ const {
 			noindex={noindex}
 		/>
 		<ClientRouter />
-		<script is:inline>
-			const theme = (() => {
-				if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-					return localStorage.getItem("theme");
-				}
-				if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-					return "dark";
-				}
-				return "light";
-			})();
-
-			if (theme === "dark") {
-				document.documentElement.classList.add("dark");
-			} else {
-				document.documentElement.classList.remove("dark");
-			}
-
-			window.localStorage.setItem("theme", theme);
-		</script>
 	</head>
 	<body
 		class:list={[
@@ -88,7 +68,6 @@ const {
 			<Footer />
 		</div>
 		<CommandMenu client:only="react" />
-		<ScrollMechanism />
 
 		<script>
 			import siteData from "@config/siteData.json";
