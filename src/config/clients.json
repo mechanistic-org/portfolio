@@ -1,86 +1,107 @@
 [
   {
     "name": "Avegant",
-    "logo": "/assets/r2/_site/logos/avegant.svg"
+    "logo": "/assets/r2/_site/logos/avegant.svg",
+    "icon": null
   },
   {
     "name": "D2M",
-    "logo": null
+    "logo": null,
+    "icon": null
   },
   {
     "name": "Digidesign",
-    "logo": null
+    "logo": null,
+    "icon": null
   },
   {
     "name": "EP Technologies",
-    "logo": null
+    "logo": null,
+    "icon": null
   },
   {
     "name": "Fitch",
-    "logo": "/assets/r2/_site/logos/fitch.svg"
+    "logo": "/assets/r2/_site/logos/fitch.svg",
+    "icon": null
   },
   {
     "name": "Function",
-    "logo": null
+    "logo": null,
+    "icon": null
   },
   {
     "name": "Hyphen",
-    "logo": "/assets/r2/_site/logos/hyphen.svg"
+    "logo": "/assets/r2/_site/logos/hyphen.svg",
+    "icon": null
   },
   {
     "name": "Kaleidescape",
-    "logo": null
+    "logo": null,
+    "icon": null
   },
   {
     "name": "Lyft",
-    "logo": null
+    "logo": null,
+    "icon": "lyft"
   },
   {
     "name": "Microsoft",
-    "logo": "/assets/r2/_site/logos/microsoft.svg"
+    "logo": "/assets/r2/_site/logos/microsoft.svg",
+    "icon": "microsoft"
   },
   {
     "name": "Motivate",
-    "logo": null
+    "logo": null,
+    "icon": null
   },
   {
     "name": "Motorola",
-    "logo": "/assets/r2/_site/logos/motorola.svg"
+    "logo": "/assets/r2/_site/logos/motorola.svg",
+    "icon": null
   },
   {
     "name": "Noon",
-    "logo": "/assets/r2/_site/logos/noon.png"
+    "logo": "/assets/r2/_site/logos/noon.png",
+    "icon": null
   },
   {
     "name": "Purina",
-    "logo": null
+    "logo": null,
+    "icon": null
   },
   {
     "name": "Silicon Graphics",
-    "logo": "/assets/r2/_site/logos/silicongraphics.svg"
+    "logo": "/assets/r2/_site/logos/silicongraphics.svg",
+    "icon": null
   },
   {
     "name": "Synapse",
-    "logo": null
+    "logo": null,
+    "icon": null
   },
   {
     "name": "Tailio",
-    "logo": null
+    "logo": null,
+    "icon": null
   },
   {
     "name": "UltimateTV",
-    "logo": "/assets/r2/_site/logos/ultimatetv.svg"
+    "logo": "/assets/r2/_site/logos/ultimatetv.svg",
+    "icon": null
   },
   {
     "name": "WebTV",
-    "logo": "/assets/r2/_site/logos/webtv.svg"
+    "logo": "/assets/r2/_site/logos/webtv.svg",
+    "icon": null
   },
   {
     "name": "awesomejob",
-    "logo": null
+    "logo": null,
+    "icon": null
   },
   {
     "name": "frogdesign",
-    "logo": "/assets/r2/_site/logos/frogdesign.svg"
+    "logo": "/assets/r2/_site/logos/frogdesign.svg",
+    "icon": null
   }
 ]

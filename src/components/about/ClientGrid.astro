@@ -1,35 +1,38 @@
 ---
-import clientList from "@config/clients.json";
 import Marquee from "@components/Marquee/Marquee";
-const marqueeList = [
+import type { MarqueeItem } from "@components/Marquee/Marquee";
+import clientList from "@/config/clients.json";
+
+// Duplicate for marquee loop (still good to have enough data, though Embla might handle it better now)
+// Actually, with data props, we can just pass the list and let Marquee handle duplication if needed?
+// No, Marquee.tsx doesn't duplicate. We should duplicate here to ensure enough content for the loop.
+const duplicatedClients = [
 	...clientList,
 	...clientList,
 	...clientList,
 	...clientList,
 	...clientList,
 	...clientList,
-]; // Infinite loop (6x)
+];
+
+const marqueeItems: MarqueeItem[] = duplicatedClients.map((client, index) => ({
+	id: `${client.name}-${index}`,
+	text: client.name,
+	image: client.icon ? `https://cdn.simpleicons.org/${client.icon}` : client.logo,
+	link: `/projects?client=${encodeURIComponent(client.name)}`,
+	variant: "logo-only",
+}));
 ---
 
-<div class="w-full border-y border-neutral-800 bg-neutral-900/50 py-6">
-	<Marquee client:load speed={1}>
-		{
-			marqueeList.map((client) => (
-				<div class="flex min-w-0 flex-[0_0_auto] items-center gap-4 pl-12 opacity-50 grayscale transition-all hover:opacity-100 hover:grayscale-0">
-					{client.logo ? (
-						<img
-							src={client.logo}
-							alt={client.name}
-							class="h-8 w-auto object-contain"
-							loading="lazy"
-						/>
-					) : (
-						<span class="text-xl font-bold tracking-widest text-neutral-500 uppercase select-none">
-							{client.name}
-						</span>
-					)}
-				</div>
-			))
-		}
-	</Marquee>
+<div class="border-border bg-background relative w-full border-y py-6">
+	<div
+		class="from-background pointer-events-none absolute top-0 left-0 z-10 h-full w-32 bg-gradient-to-r to-transparent"
+	>
+	</div>
+	<div
+		class="from-background pointer-events-none absolute top-0 right-0 z-10 h-full w-32 bg-gradient-to-l to-transparent"
+	>
+	</div>
+
+	<Marquee client:load speed={1} items={marqueeItems} grayscale={false} />
 </div>

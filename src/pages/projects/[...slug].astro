@@ -1,50 +1,63 @@
 ---
-import { getCollection, render } from "astro:content";
-import Layout from "../../layouts/BaseLayout.astro";
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import Layout from "@layouts/BaseLayout.astro";
+import Button from "@components/Button/Button.astro";
+import ProjectGallery from "@components/Projects/ProjectGallery";
 import { YouTube } from "@astro-community/astro-embed-youtube";
-import ModelViewer from "../../components/mdx/ModelViewer.astro";
-import Button from "../../components/Button/Button.astro";
-import ProjectGallery from "../../components/Projects/ProjectGallery";
+import ModelViewer from "@components/mdx/ModelViewer.astro";
 
+// 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
 	const projects = await getCollection("projects");
-	// Sort by date descending
-	const sorted = projects.sort(
-		(a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime(),
-	);
-
-	return sorted.map((project, i) => ({
-		params: { slug: project.id },
-		props: {
-			project,
-			prevProject: i < sorted.length - 1 ? sorted[i + 1] : null,
-			nextProject: i > 0 ? sorted[i - 1] : null,
-		},
+	// console.log("Generated paths:", projects.map(p => p.id));
+	return projects.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
 	}));
 }
 
-const { project, prevProject, nextProject } = Astro.props;
-const { Content } = await render(project);
-const data = project.data;
+// 2. For your template, you can get the entry directly from the prop
+interface Props {
+	entry: CollectionEntry<"projects">;
+}
 
-// --- DATE LOGIC ---
-const startDate = data.date;
-const dateDisplay = startDate
-	? startDate.toLocaleDateString("en-US", { year: "numeric", month: "short" })
-	: "Unknown";
+const { entry } = Astro.props;
+// console.log("Entry keys:", Object.keys(entry));
+const { Content } = await render(entry);
+const data = entry.data;
 
-// --- HELPERS (SIMPLIFIED) ---
-const tools = data.tools || [];
-const tags = data.tags || [];
+// Format dates
+const startDate = new Date(data.date);
+const endDate = data.endDate ? new Date(data.endDate) : null;
+const dateDisplay = endDate
+	? `${startDate.getFullYear()} - ${endDate.getFullYear()}`
+	: `${startDate.getFullYear()} - Present`;
+
+// Get all projects for navigation
+const allProjects = await getCollection("projects");
+// Sort by date descending (newest first)
+const sortedProjects = allProjects.sort(
+	(a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+);
+
+const currentIndex = sortedProjects.findIndex((p) => p.id === entry.id);
+const nextProject = currentIndex > 0 ? sortedProjects[currentIndex - 1] : null; // Newer project
+const prevProject =
+	currentIndex < sortedProjects.length - 1 ? sortedProjects[currentIndex + 1] : null; // Older project
+
+// Parse lists
 const clients = data.client || [];
-const gallery = data.gallery || [];
+const tools = data.tools || [];
 const documents = data.documents || [];
 const links = data.links || [];
-
-const metaDesc = data.description || `Engineering case study: ${data.title}`;
+const gallery = data.gallery || [];
 ---
 
-<Layout title={data.title} description={metaDesc}>
+<Layout
+	title={data.title}
+	description={data.description}
+	image={{ src: data.heroImage, alt: data.title }}
+>
 	<section class="relative border-b border-neutral-800 bg-neutral-900/50 py-12 md:py-24">
 		<div class="site-container">
 			<div class="mb-6 flex items-center justify-between">
@@ -54,54 +67,6 @@ const metaDesc = data.description || `Engineering case study: ${data.title}`;
 					<span>{data.industry || "Engineering"}</span>
 					<span>/</span>
 					<span>{data.category || "Project"}</span>
-				</div>
-				<div class="flex gap-4">
-					{
-						prevProject && (
-							<a
-								href={`/projects/${prevProject.id}`}
-								class="text-neutral-500 transition-colors hover:text-white"
-								aria-label="Previous Project"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								>
-									<path d="m15 18-6-6 6-6" />
-								</svg>
-							</a>
-						)
-					}
-					{
-						nextProject && (
-							<a
-								href={`/projects/${nextProject.id}`}
-								class="text-neutral-500 transition-colors hover:text-white"
-								aria-label="Next Project"
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="24"
-									height="24"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									stroke-width="2"
-									stroke-linecap="round"
-									stroke-linejoin="round"
-								>
-									<path d="m9 18 6-6-6-6" />
-								</svg>
-							</a>
-						)
-					}
 				</div>
 			</div>
 			<div class="max-w-4xl">
@@ -244,6 +209,138 @@ const metaDesc = data.description || `Engineering case study: ${data.title}`;
 			<Button variant="outline" href="/projects" arrow="left" class="w-full justify-center"
 				>Back to Archive</Button
 			>
+
+			{/* SIDEBAR NAVIGATION */}
+			<div class="mt-8 flex flex-col gap-4 border-t border-neutral-800 pt-8">
+				<h3 class="text-xs font-bold tracking-wider text-neutral-500 uppercase">
+					Project Navigation
+				</h3>
+				<div class="flex flex-col gap-2">
+					{
+						prevProject ? (
+							<a
+								href={`/projects/${prevProject.id}`}
+								class="group hover:border-primary/50 flex items-center justify-between rounded-lg border border-neutral-800 bg-neutral-900/50 p-3 transition-colors hover:bg-neutral-900"
+							>
+								<div class="flex items-center gap-2">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="16"
+										height="16"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="text-neutral-500 transition-colors group-hover:text-white"
+									>
+										<path d="m15 18-6-6 6-6" />
+									</svg>
+									<span class="text-sm font-medium text-neutral-300 group-hover:text-white">
+										Previous
+									</span>
+								</div>
+							</a>
+						) : (
+							<div class="rounded-lg border border-neutral-800/50 bg-neutral-900/20 p-3 opacity-50">
+								<div class="flex items-center gap-2">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="16"
+										height="16"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="text-neutral-700"
+									>
+										<path d="m15 18-6-6 6-6" />
+									</svg>
+									<span class="text-sm font-medium text-neutral-600">Previous</span>
+								</div>
+							</div>
+						)
+					}
+
+					{
+						nextProject ? (
+							<a
+								href={`/projects/${nextProject.id}`}
+								class="group hover:border-primary/50 flex items-center justify-between rounded-lg border border-neutral-800 bg-neutral-900/50 p-3 transition-colors hover:bg-neutral-900"
+							>
+								<div class="flex items-center gap-2">
+									<span class="text-sm font-medium text-neutral-300 group-hover:text-white">
+										Next
+									</span>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="16"
+										height="16"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="text-neutral-500 transition-colors group-hover:text-white"
+									>
+										<path d="m9 18 6-6-6-6" />
+									</svg>
+								</div>
+							</a>
+						) : (
+							<div class="rounded-lg border border-neutral-800/50 bg-neutral-900/20 p-3 opacity-50">
+								<div class="flex items-center justify-end gap-2">
+									<span class="text-sm font-medium text-neutral-600">Next</span>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="16"
+										height="16"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="text-neutral-700"
+									>
+										<path d="m9 18 6-6-6-6" />
+									</svg>
+								</div>
+							</div>
+						)
+					}
+
+					<a
+						href="/projects"
+						class="group hover:border-primary/50 mt-2 flex items-center justify-center gap-2 rounded-lg border border-neutral-800 bg-neutral-900/50 p-3 transition-colors hover:bg-neutral-900"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							class="text-neutral-500 transition-colors group-hover:text-white"
+						>
+							<rect width="7" height="7" x="3" y="3" rx="1"></rect>
+							<rect width="7" height="7" x="14" y="3" rx="1"></rect>
+							<rect width="7" height="7" x="14" y="14" rx="1"></rect>
+							<rect width="7" height="7" x="3" y="14" rx="1"></rect>
+						</svg>
+						<span class="text-sm font-medium text-neutral-300 group-hover:text-white">
+							View All Projects
+						</span>
+					</a>
+				</div>
+			</div>
 		</aside>
 
 		<article class="order-1 space-y-12 md:order-2 md:col-span-8 lg:col-span-9">
@@ -325,37 +422,6 @@ const metaDesc = data.description || `Engineering case study: ${data.title}`;
 					</div>
 				)
 			}
-
-			<div class="mt-16 grid gap-4 border-t border-neutral-800 pt-12 sm:grid-cols-2">
-				{
-					nextProject && (
-						<a
-							href={`/projects/${nextProject.id}`}
-							class="group hover:border-primary/50 flex flex-col gap-2 rounded-xl border border-neutral-800 bg-neutral-900/50 p-6 transition-colors hover:bg-neutral-900"
-						>
-							<span class="group-hover:text-primary font-mono text-xs tracking-widest text-neutral-500 uppercase">
-								Next Project
-							</span>
-							<span class="text-lg font-bold text-white">{nextProject.data.title}</span>
-						</a>
-					)
-				}
-				{!nextProject && <div />}
-
-				{
-					prevProject && (
-						<a
-							href={`/projects/${prevProject.id}`}
-							class="group hover:border-primary/50 flex flex-col gap-2 rounded-xl border border-neutral-800 bg-neutral-900/50 p-6 text-right transition-colors hover:bg-neutral-900"
-						>
-							<span class="group-hover:text-primary font-mono text-xs tracking-widest text-neutral-500 uppercase">
-								Previous Project
-							</span>
-							<span class="text-lg font-bold text-white">{prevProject.data.title}</span>
-						</a>
-					)
-				}
-			</div>
 		</article>
 	</div>
 </Layout>

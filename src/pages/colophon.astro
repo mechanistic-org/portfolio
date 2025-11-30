@@ -26,7 +26,7 @@ const marqueeTools = [...tools, ...tools, ...tools, ...tools, ...tools, ...tools
 ---
 
 <Layout title="Colophon" description="How this site was built: Architecture and Stack.">
-	<section class="relative border-b border-neutral-800 bg-neutral-900/30 pt-32 pb-24">
+	<section class="border-border bg-muted/30 relative border-b pt-32 pb-24">
 		<div class="site-container text-center">
 			<div
 				class="border-primary/30 bg-primary/10 text-primary mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-xs tracking-widest uppercase"
@@ -71,123 +71,156 @@ const marqueeTools = [...tools, ...tools, ...tools, ...tools, ...tools, ...tools
 					>
 				</li>
 			</ul>
-
-			<div class="mt-16 border-y border-neutral-800 bg-neutral-900/50 py-6">
-				<Marquee client:load speed={1}>
-					{
-						marqueeTools.map((tool) => {
-							const slug = tool
-								.toLowerCase()
-								.replace(" ", "")
-								.replace(".", "")
-								.replace("+", "plus");
-							return (
-								<div class="flex min-w-0 flex-[0_0_auto] items-center gap-4 pl-12 opacity-50 grayscale transition-all hover:opacity-100 hover:grayscale-0">
-									<img
-										src={`https://cdn.simpleicons.org/${slug}/white`}
-										alt={tool}
-										class="h-8 w-8"
-									/>
-									<span class="text-xl font-bold tracking-widest text-neutral-500 uppercase">
-										{tool}
-									</span>
-								</div>
-							);
-						})
-					}
-				</Marquee>
-			</div>
 		</div>
 
-		<div class="relative mt-24 rounded-xl border border-neutral-800 bg-neutral-900/50 p-8">
-			<div class="absolute top-0 left-0 h-full w-full bg-[url('/assets/grid.svg')] opacity-10">
-			</div>
+		<div class="border-border bg-muted/50 mt-16 border-y py-6">
+			<Marquee
+				client:load
+				speed={1}
+				grayscale={true}
+				items={marqueeTools.map((tool) => {
+					const slugMap: Record<string, string> = {
+						"Google Gemini": "googlegemini",
+						"Google Antigravity": "google",
+						"Astro v5": "astro",
+						"Tailwind CSS v4": "tailwindcss",
+						"Cloudflare Pages": "cloudflare",
+						"Cloudflare R2": "cloudflare",
+						"VS Code": "visualstudiocode",
+						React: "react",
+						Recharts: "react",
+						Namecheap: "namecheap",
+						NPM: "npm",
+						"Node.js": "nodedotjs",
+						TypeScript: "typescript",
+						GitHub: "github",
+						Python: "python",
+					};
 
-			<div class="relative z-10 flex flex-col gap-4">
-				<div
-					class="rounded border border-green-500/30 bg-green-900/20 p-4 text-center font-mono text-green-400"
-				>
-					Google Sheets (Source)
+					const linkMap: Record<string, string> = {
+						"VS Code": "https://code.visualstudio.com/",
+						GitHub: "https://github.com/",
+						"Cloudflare Pages": "https://pages.cloudflare.com/",
+						"Cloudflare R2": "https://www.cloudflare.com/developer-platform/r2/",
+						Python: "https://www.python.org/",
+						"Astro v5": "https://astro.build/",
+						React: "https://react.dev/",
+						"Tailwind CSS v4": "https://tailwindcss.com/",
+						Recharts: "https://recharts.org/",
+						"Google Gemini": "https://deepmind.google/technologies/gemini/",
+						"Google Antigravity": "https://antigravity.google/",
+						Namecheap: "https://www.namecheap.com/",
+						NPM: "https://www.npmjs.com/",
+						"Node.js": "https://nodejs.org/",
+						TypeScript: "https://www.typescriptlang.org/",
+					};
+
+					const slug =
+						slugMap[tool] ||
+						tool.toLowerCase().replace(/ /g, "").replace(/\./g, "").replace(/\+/g, "plus");
+
+					return {
+						id: tool,
+						text: tool,
+						image: `https://cdn.simpleicons.org/${slug}`,
+						link: linkMap[tool],
+						variant: "icon-text",
+					};
+				})}
+			/>
+		</div>
+
+		<div class="site-container text-center">
+			<div class="border-border bg-muted/50 relative mt-24 rounded-xl border p-8">
+				<div class="absolute top-0 left-0 h-full w-full bg-[url('/assets/grid.svg')] opacity-10">
 				</div>
-				<div class="mx-auto h-8 w-px bg-neutral-700"></div>
-				<div
-					class="rounded border border-blue-500/30 bg-blue-900/20 p-4 text-center font-mono text-blue-400"
-				>
-					Python Ingestion Engine
-				</div>
-				<div class="mx-auto h-8 w-px bg-neutral-700"></div>
-				<div class="grid grid-cols-2 gap-4">
+
+				<div class="relative z-10 flex flex-col gap-4">
 					<div
-						class="rounded border border-neutral-700 bg-neutral-800 p-4 text-center font-mono text-sm text-neutral-300"
+						class="rounded border border-green-500/30 bg-green-900/20 p-4 text-center font-mono text-green-400"
 					>
-						JSON Data
+						Google Sheets (Source)
 					</div>
+					<div class="mx-auto h-8 w-px bg-neutral-700"></div>
 					<div
-						class="rounded border border-neutral-700 bg-neutral-800 p-4 text-center font-mono text-sm text-neutral-300"
+						class="rounded border border-blue-500/30 bg-blue-900/20 p-4 text-center font-mono text-blue-400"
 					>
-						MDX Content
+						Python Ingestion Engine
+					</div>
+					<div class="mx-auto h-8 w-px bg-neutral-700"></div>
+					<div class="grid grid-cols-2 gap-4">
+						<div
+							class="rounded border border-neutral-700 bg-neutral-800 p-4 text-center font-mono text-sm text-neutral-300"
+						>
+							JSON Data
+						</div>
+						<div
+							class="rounded border border-neutral-700 bg-neutral-800 p-4 text-center font-mono text-sm text-neutral-300"
+						>
+							MDX Content
+						</div>
+					</div>
+					<div class="mx-auto h-8 w-px bg-neutral-700"></div>
+					<div
+						class="rounded border border-purple-500/30 bg-purple-900/20 p-4 text-center font-mono text-purple-400"
+					>
+						Astro v5 Build
 					</div>
 				</div>
-				<div class="mx-auto h-8 w-px bg-neutral-700"></div>
-				<div
-					class="rounded border border-purple-500/30 bg-purple-900/20 p-4 text-center font-mono text-purple-400"
+			</div>
+		</div>
+
+		<section class="border-border bg-muted/20 border-t py-24">
+			<div class="site-container">
+				<h2 class="h2 mb-16 text-center">The Stack</h2>
+				<div class="grid grid-cols-2 gap-4 md:grid-cols-4">
+					<div class="border-border bg-card rounded-lg border p-6">
+						<div class="text-primary mb-2 font-mono text-xs">Core Framework</div>
+						<div class="text-xl font-bold text-white">Astro v5</div>
+					</div>
+					<div class="border-border bg-card rounded-lg border p-6">
+						<div class="text-primary mb-2 font-mono text-xs">Styling</div>
+						<div class="text-xl font-bold text-white">Tailwind v4</div>
+					</div>
+					<div class="border-border bg-card rounded-lg border p-6">
+						<div class="text-primary mb-2 font-mono text-xs">Visualization</div>
+						<div class="text-xl font-bold text-white">React + Recharts</div>
+					</div>
+					<div class="border-border bg-card rounded-lg border p-6">
+						<div class="text-primary mb-2 font-mono text-xs">3D Engine</div>
+						<div class="text-xl font-bold text-white">Google Model-Viewer</div>
+					</div>
+					<div class="border-border bg-card rounded-lg border p-6">
+						<div class="text-primary mb-2 font-mono text-xs">Automation</div>
+						<div class="text-xl font-bold text-white">Python</div>
+					</div>
+					<div class="border-border bg-card rounded-lg border p-6">
+						<div class="text-primary mb-2 font-mono text-xs">Hosting</div>
+						<div class="text-xl font-bold text-white">Cloudflare Pages</div>
+					</div>
+					<div class="border-border bg-card rounded-lg border p-6">
+						<div class="text-primary mb-2 font-mono text-xs">Storage</div>
+						<div class="text-xl font-bold text-white">Cloudflare R2</div>
+					</div>
+					<div class="border-border bg-card rounded-lg border p-6">
+						<div class="text-primary mb-2 font-mono text-xs">AI Partner</div>
+						<div class="text-xl font-bold text-white">Gemini 1.5 Pro</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="site-container py-24 text-center">
+			<h2 class="h2 mb-6">See the Source</h2>
+			<p class="mb-8 text-neutral-400">
+				While this is a private portfolio, the architecture is designed to be open.
+			</p>
+			<div class="flex justify-center gap-4">
+				<Button href="/" variant="primary">Return Home</Button>
+				<Button href="https://github.com/eriknorris" variant="outline" target="_blank"
+					>View GitHub</Button
 				>
-					Astro v5 Build
-				</div>
 			</div>
-		</div>
-	</section>
-
-	<section class="border-t border-neutral-800 bg-neutral-900/20 py-24">
-		<div class="site-container">
-			<h2 class="h2 mb-16 text-center">The Stack</h2>
-			<div class="grid grid-cols-2 gap-4 md:grid-cols-4">
-				<div class="rounded-lg border border-neutral-800 bg-neutral-950 p-6">
-					<div class="text-primary mb-2 font-mono text-xs">Core Framework</div>
-					<div class="text-xl font-bold text-white">Astro v5</div>
-				</div>
-				<div class="rounded-lg border border-neutral-800 bg-neutral-950 p-6">
-					<div class="text-primary mb-2 font-mono text-xs">Styling</div>
-					<div class="text-xl font-bold text-white">Tailwind v4</div>
-				</div>
-				<div class="rounded-lg border border-neutral-800 bg-neutral-950 p-6">
-					<div class="text-primary mb-2 font-mono text-xs">Visualization</div>
-					<div class="text-xl font-bold text-white">React + Recharts</div>
-				</div>
-				<div class="rounded-lg border border-neutral-800 bg-neutral-950 p-6">
-					<div class="text-primary mb-2 font-mono text-xs">3D Engine</div>
-					<div class="text-xl font-bold text-white">Google Model-Viewer</div>
-				</div>
-				<div class="rounded-lg border border-neutral-800 bg-neutral-950 p-6">
-					<div class="text-primary mb-2 font-mono text-xs">Automation</div>
-					<div class="text-xl font-bold text-white">Python</div>
-				</div>
-				<div class="rounded-lg border border-neutral-800 bg-neutral-950 p-6">
-					<div class="text-primary mb-2 font-mono text-xs">Hosting</div>
-					<div class="text-xl font-bold text-white">Cloudflare Pages</div>
-				</div>
-				<div class="rounded-lg border border-neutral-800 bg-neutral-950 p-6">
-					<div class="text-primary mb-2 font-mono text-xs">Storage</div>
-					<div class="text-xl font-bold text-white">Cloudflare R2</div>
-				</div>
-				<div class="rounded-lg border border-neutral-800 bg-neutral-950 p-6">
-					<div class="text-primary mb-2 font-mono text-xs">AI Partner</div>
-					<div class="text-xl font-bold text-white">Gemini 1.5 Pro</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="site-container py-24 text-center">
-		<h2 class="h2 mb-6">See the Source</h2>
-		<p class="mb-8 text-neutral-400">
-			While this is a private portfolio, the architecture is designed to be open.
-		</p>
-		<div class="flex justify-center gap-4">
-			<Button href="/" variant="primary">Return Home</Button>
-			<Button href="https://github.com/eriknorris" variant="outline" target="_blank"
-				>View GitHub</Button
-			>
-		</div>
+		</section>
 	</section>
 </Layout>

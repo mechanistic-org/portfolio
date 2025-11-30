@@ -5,6 +5,8 @@ import NavDropdown from "@components/Nav/NavDropdown.astro";
 import MobileNav from "@components/Nav/MobileNav/MobileNav.astro";
 import SiteLogo from "@components/SiteLogo/SiteLogo.astro";
 import Button from "@components/Button/Button.astro";
+import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
+import SocialCloud from "@components/SocialCloud/SocialCloud.astro";
 
 // data
 import navData from "@config/navData.json";
@@ -13,34 +15,19 @@ import navData from "@config/navData.json";
 
 <div
 	id="nav__container"
-	class="bg-base-900 fixed top-0 left-0 z-30 flex w-full flex-col py-1 duration-500"
+	class="bg-background fixed top-0 left-0 z-30 flex w-full flex-col py-1 duration-500"
 	transition:name={`nav`}
 >
-	<div
-		class="flex w-full items-center justify-between border-b border-yellow-500/20 bg-yellow-500/10 px-4 py-1 font-mono text-[10px] tracking-widest text-yellow-500 uppercase"
-	>
-		<div class="flex items-center gap-2">
-			<span class="h-2 w-2 animate-pulse rounded-full bg-green-500"></span>
-			<span>System Online</span>
-		</div>
-		<div class="hidden font-bold text-yellow-500 md:block">UNDER CONSTRUCTION</div>
-		<div class="flex items-center gap-4">
-			<span class="hidden opacity-75 md:inline">Ingestion: Active</span>
-			<span class="rounded border border-yellow-500/20 bg-yellow-500/10 px-2 py-0.5"
-				>v1.0.4-beta</span
-			>
-		</div>
-	</div>
 	<div class="mx-auto flex w-full">
 		<div class="site-container flex h-16 w-full items-center">
 			<header class="flex w-full items-center gap-2">
-				<!-- home button / image -->
-				<div class="flex flex-auto justify-start">
+				<!-- Left: Logo -->
+				<div class="flex flex-1 justify-start">
 					<SiteLogo />
 				</div>
 
-				<!-- desktop nav menu -->
-				<div class="flex flex-auto justify-end">
+				<!-- Center: Desktop Nav -->
+				<div class="flex flex-1 justify-center">
 					<nav class="hidden md:block">
 						<ul class="flex h-fit items-center px-4">
 							{
@@ -57,12 +44,40 @@ import navData from "@config/navData.json";
 							}
 						</ul>
 					</nav>
-					<Button variant="primary" class="my-auto hidden md:block" href="/contact/">
-						Contact
-					</Button>
+				</div>
+
+				<!-- Right: Socials & Toggle -->
+				<div class="flex flex-1 items-center justify-end gap-4">
+					<div class="hidden md:block">
+						<SocialCloud />
+					</div>
+
+					<button
+						id="search-trigger"
+						class="text-muted-foreground hover:text-primary hidden items-center justify-center transition-colors md:flex"
+						aria-label="Search"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="20"
+							height="20"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg
+						>
+					</button>
+
+					<div class="my-auto hidden md:block">
+						<ThemeToggle />
+					</div>
 
 					<!-- mobile nav menu, only load on small screens where it is visible -->
-					<div class="md:hidden">
+					<div class="flex items-center gap-4 md:hidden">
+						<ThemeToggle />
 						<MobileNav />
 					</div>
 				</div>
@@ -109,4 +124,20 @@ import navData from "@config/navData.json";
 	initNavbar();
 
 	document.addEventListener("astro:after-swap", initNavbar);
+
+	// Search Trigger Logic
+	const initSearchTrigger = () => {
+		const searchTrigger = document.getElementById("search-trigger");
+		if (searchTrigger) {
+			searchTrigger.addEventListener("click", () => {
+				window.dispatchEvent(new CustomEvent("open-command-menu"));
+			});
+		}
+	};
+
+	// Run on initial load
+	initSearchTrigger();
+
+	// Run on view transitions
+	document.addEventListener("astro:after-swap", initSearchTrigger);
 </script>

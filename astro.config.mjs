@@ -6,7 +6,7 @@ import expressiveCode from "astro-expressive-code";
 import mdx from "@astrojs/mdx";
 import compress from "@playform/compress";
 import AutoImport from "astro-auto-import";
-import icon from "astro-icon"; 
+import icon from "astro-icon";
 import react from "@astrojs/react";
 import keystatic from "@keystatic/astro";
 import cloudflare from "@astrojs/cloudflare";
@@ -78,6 +78,7 @@ export default defineConfig({
                 "work-history",
                 "share",
             ],
+            tabler: ["menu-2"],
         }),
         expressiveCode(expressiveCodeOptions),
         mdx(),

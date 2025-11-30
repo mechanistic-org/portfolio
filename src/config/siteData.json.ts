@@ -23,7 +23,8 @@ export interface SocialLinkProps {
 	| "slack"
 	| "whatsapp"
 	| "telegram"
-	| "email"; // you should always at least have an email
+	| "email" // you should always at least have an email
+	| "resume";
 	link: string;
 }
 
@@ -57,7 +58,10 @@ const siteData: SiteDataProps = {
 	useAnimations: true,
 
 	socialLinks: [
-
+		{
+			platform: "resume",
+			link: "https://resume.eriknorris.com",
+		},
 		{
 			platform: "linkedin",
 			link: "https://www.linkedin.com/eriknorris/",

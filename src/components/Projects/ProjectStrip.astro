@@ -1,0 +1,43 @@
+---
+import ProjectCard from "./ProjectCard.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+	projects: CollectionEntry<"projects">[];
+}
+
+const { projects } = Astro.props;
+---
+
+<div class="embla relative w-full overflow-hidden" id="project-strip">
+	<div class="embla__container flex touch-pan-y gap-6">
+		{
+			projects.map((project) => (
+				<div class="embla__slide min-w-0 flex-[0_0_85%] sm:flex-[0_0_45%] md:flex-[0_0_30%]">
+					<ProjectCard project={project} />
+				</div>
+			))
+		}
+	</div>
+</div>
+
+<script>
+	import EmblaCarousel from "embla-carousel";
+
+	const emblaNode = document.getElementById("project-strip");
+	const options = {
+		dragFree: true,
+		containScroll: "trimSnaps" as const,
+		align: "start" as const,
+	};
+
+	if (emblaNode) {
+		const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+		if (!mediaQuery.matches) {
+			EmblaCarousel(emblaNode, options);
+		} else {
+			emblaNode.classList.add("overflow-x-auto");
+		}
+	}
+</script>

@@ -16,9 +16,27 @@ OUTPUT_DATA_DIR = "src/config"
 OUTPUT_CONTENT_DIR = "src/content/projects"
 ASSETS_DIR = "public/assets"
 LOCAL_R2_DIR = "public/assets/r2"
-STAGING_DIR = "R2_STAGING"
-R2_DOMAIN = "/assets/r2" # Local Dev
-# R2_DOMAIN = "https://assets.eriknorris.com" # Production / Remote Dev
+
+# Determine Staging Dir
+# Priority: 1. Env Var, 2. Sibling Directory, 3. Local Directory
+STAGING_DIR_ENV = os.environ.get("R2_STAGING_PATH")
+STAGING_DIR_SIBLING = os.path.abspath(os.path.join(os.getcwd(), "..", "quantum-assets", "R2_STAGING"))
+STAGING_DIR_LOCAL = os.path.abspath("R2_STAGING")
+
+if STAGING_DIR_ENV and os.path.exists(STAGING_DIR_ENV):
+    STAGING_DIR = STAGING_DIR_ENV
+    print(f"📂 Using Staging Dir (Env): {STAGING_DIR}")
+elif os.path.exists(STAGING_DIR_SIBLING):
+    STAGING_DIR = STAGING_DIR_SIBLING
+    print(f"📂 Using Staging Dir (Sibling): {STAGING_DIR}")
+else:
+    STAGING_DIR = STAGING_DIR_LOCAL
+    print(f"📂 Using Staging Dir (Local): {STAGING_DIR}")
+
+# Determine R2 Domain
+# Default to local proxy for dev, override for prod
+R2_DOMAIN = os.environ.get("PUBLIC_R2_DOMAIN", "/assets/r2")
+print(f"🌐 Using R2 Domain: {R2_DOMAIN}")
 
 def find_file(suffix):
     """Find a file in SOURCE_DIR ending with suffix."""
@@ -456,11 +474,111 @@ partGraph: "{part_graph_url}"
 
     print(f"✅ Generated {count} MDX files.")
     
+    # --- CLIENT ICONS (Simple Icons Slugs) ---
+    # Add missing icons here. Format: "Client Name": "simpleicons-slug"
+    CLIENT_ICON_MAP = {
+        "Google": "google",
+        "Microsoft": "microsoft",
+        "Apple": "apple",
+        "Amazon": "amazon",
+        "Meta": "meta",
+        "Tesla": "tesla",
+        "SpaceX": "spacex",
+        "NVIDIA": "nvidia",
+        "Intel": "intel",
+        "AMD": "amd",
+        "Samsung": "samsung",
+        "Sony": "sony",
+        "Nintendo": "nintendo",
+        "Adobe": "adobe",
+        "Autodesk": "autodesk",
+        "Blender": "blender",
+        "Unity": "unity",
+        "Unreal Engine": "unrealengine",
+        "Figma": "figma",
+        "Slack": "slack",
+        "Discord": "discord",
+        "Spotify": "spotify",
+        "Netflix": "netflix",
+        "Uber": "uber",
+        "Lyft": "lyft",
+        "Airbnb": "airbnb",
+        "Stripe": "stripe",
+        "PayPal": "paypal",
+        "Square": "square",
+        "Shopify": "shopify",
+        "Salesforce": "salesforce",
+        "Oracle": "oracle",
+        "IBM": "ibm",
+        "HP": "hp",
+        "Dell": "dell",
+        "Lenovo": "lenovo",
+        "Asus": "asus",
+        "Acer": "acer",
+        "Razer": "razer",
+        "Logitech": "logitech",
+        "Corsair": "corsair",
+        "Raspberry Pi": "raspberrypi",
+        "Arduino": "arduino",
+        "Espressif": "espressif",
+        "Nordic Semiconductor": "nordicsemiconductor",
+        "Texas Instruments": "texasinstruments",
+        "Analog Devices": "analogdevices",
+        "STMicroelectronics": "stmicroelectronics",
+        "NXP": "nxp",
+        "Infineon": "infineon",
+        "Renesas": "renesas",
+        "Microchip": "microchip",
+        "Qualcomm": "qualcomm",
+        "Broadcom": "broadcom",
+        "MediaTek": "mediatek",
+        "Arm": "arm",
+        "RISC-V": "riscv",
+        "NASA": "nasa",
+        "ESA": "esa",
+        "CERN": "cern",
+        "MIT": "mit",
+        "Stanford": "stanford",
+        "Berkeley": "berkeley",
+        "Caltech": "caltech",
+        "CMU": "cmu",
+        "Georgia Tech": "georgiatech",
+        "ETH Zurich": "ethzurich",
+        "EPFL": "epfl",
+        "TUM": "tum",
+        "Cambridge": "cambridge",
+        "Oxford": "oxford",
+        "Imperial College": "imperial",
+        "UCL": "ucl",
+        "Tsinghua": "tsinghua",
+        "Peking": "peking",
+        "NUS": "nus",
+        "NTU": "ntu",
+        "KAIST": "kaist",
+        "Seoul National": "snu",
+        "Tokyo": "u-tokyo",
+        "Kyoto": "kyoto",
+        "Osaka": "osaka",
+        "Tohoku": "tohoku",
+        "Hokkaido": "hokkaido",
+        "Kyushu": "kyushu",
+        "Nagoya": "nagoya",
+        "Tokyo Tech": "titech",
+        "Keio": "keio",
+        "Waseda": "waseda",
+        "Mechanistic": "mechanistic", # Custom?
+    }
+
     client_data = []
     for client in sorted(list(all_clients)):
         logo_name = client.lower().replace(' ', '')
         logo_path = None
-        # CHECK STAGING FOR LOGOS
+        icon_slug = CLIENT_ICON_MAP.get(client) # Check map first
+
+        # CHECK STAGING FOR LOGOS (Fallback or Override?)
+        # Let's prioritize local logo if it exists, otherwise use Simple Icons if mapped.
+        # Actually, user wants to source icons via ingest.
+        
         staging_logo_dir = os.path.join(STAGING_DIR, "_site", "logos")
         if os.path.exists(os.path.join(staging_logo_dir, f"{logo_name}.svg")):
             logo_path = f"{R2_DOMAIN}/_site/logos/{logo_name}.svg"
@@ -475,7 +593,11 @@ partGraph: "{part_graph_url}"
             os.makedirs(target_logo_dir, exist_ok=True)
             shutil.copy2(os.path.join(staging_logo_dir, f"{logo_name}.png"), os.path.join(target_logo_dir, f"{logo_name}.png"))
             
-        client_data.append({"name": client, "logo": logo_path})
+        client_data.append({
+            "name": client, 
+            "logo": logo_path,
+            "icon": icon_slug
+        })
 
     with open(os.path.join(OUTPUT_DATA_DIR, "clients.json"), "w") as f:
         json.dump(client_data, f, indent=2)

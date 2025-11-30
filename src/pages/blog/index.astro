@@ -1,0 +1,68 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { formatDate } from "@/js/textUtils";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<BaseLayout title="Field Notes" description="Thoughts, process, and engineering logs.">
+	<section class="site-container pt-32 pb-24 md:pb-36">
+		<div class="mx-auto mb-16 max-w-4xl text-center">
+			<h1 class="h1 mb-4">Field Notes</h1>
+			<p class="text-muted-foreground text-lg">
+				Engineering logs, process documentation, and thoughts.
+			</p>
+		</div>
+
+		<div class="mx-auto max-w-3xl space-y-12">
+			{
+				posts.map((post) => (
+					<article class="group border-border relative flex flex-col gap-4 border-b pb-12 last:border-0">
+						<div class="text-muted-foreground flex items-center gap-4 font-mono text-xs">
+							<time datetime={post.data.pubDate.toISOString()}>
+								{formatDate(post.data.pubDate)}
+							</time>
+							{post.data.tags && (
+								<div class="flex gap-2">
+									<span>/</span>
+									{post.data.tags.map((tag) => (
+										<span>#{tag}</span>
+									))}
+								</div>
+							)}
+						</div>
+
+						<h2 class="text-foreground group-hover:text-primary text-2xl font-bold transition-colors">
+							<a href={`/blog/${post.id}/`} class="before:absolute before:inset-0">
+								{post.data.title}
+							</a>
+						</h2>
+
+						<p class="text-muted-foreground line-clamp-3">{post.data.description}</p>
+
+						<div class="text-primary mt-2 flex items-center gap-2 text-sm font-medium opacity-0 transition-opacity group-hover:opacity-100">
+							Read Entry
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="16"
+								height="16"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+							>
+								<path d="M5 12h14" />
+								<path d="m12 5 7 7-7 7" />
+							</svg>
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</section>
+</BaseLayout>
