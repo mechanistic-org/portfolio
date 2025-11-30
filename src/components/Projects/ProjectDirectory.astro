@@ -12,21 +12,35 @@ const { projects } = Astro.props;
 	<!-- Hover Preview Window -->
 	<div
 		id="project-preview"
-		class="pointer-events-none fixed top-0 left-0 z-50 hidden h-48 w-64 overflow-hidden rounded-lg border border-neutral-700 bg-neutral-900 opacity-0 shadow-2xl transition-opacity duration-300 md:block"
+		class="pointer-events-none fixed top-0 left-0 z-50 hidden h-64 w-80 overflow-hidden rounded-lg border border-neutral-700 bg-neutral-900 opacity-0 shadow-2xl transition-opacity duration-300 md:block"
 	>
 		<img
 			id="preview-image"
 			src=""
 			alt="Project Preview"
-			class="h-full w-full object-cover opacity-80"
+			class="h-full w-full object-cover opacity-60"
 		/>
-		<div class="absolute inset-0 flex items-end bg-gradient-to-t from-black/80 to-transparent p-4">
-			<span
-				id="preview-title"
-				class="font-mono text-xs font-bold tracking-widest text-white uppercase"
-			>
-				Preview
-			</span>
+		<div class="absolute inset-0 flex flex-col justify-between p-4">
+			<div class="flex items-start justify-between">
+				<span
+					id="preview-title"
+					class="font-mono text-sm font-bold tracking-widest text-white uppercase drop-shadow-md"
+				>
+					Preview
+				</span>
+				<span
+					id="preview-team-size"
+					class="rounded-full bg-black/50 px-2 py-1 font-mono text-xs text-white backdrop-blur-sm"
+				>
+				</span>
+			</div>
+
+			<div class="flex items-end justify-between">
+				<div id="preview-icons" class="flex gap-2">
+					<!-- Icons injected here -->
+				</div>
+				<img id="preview-graph" class="h-16 w-16 opacity-90" src="" />
+			</div>
 		</div>
 	</div>
 
@@ -85,6 +99,9 @@ const { projects } = Astro.props;
 							class="project-row group hover:bg-primary/5 cursor-pointer border-b border-neutral-800/50 transition-colors"
 							data-industry={project.data.industry}
 							data-tool={JSON.stringify(project.data.tools)}
+							data-tool-icons={JSON.stringify(project.data.toolIcons)}
+							data-team-size={project.data.teamSize}
+							data-part-graph={project.data.partGraph}
 							data-status={project.data.production}
 							data-date={new Date(project.data.date).getTime()}
 							data-client={JSON.stringify([
@@ -141,15 +158,54 @@ const { projects } = Astro.props;
 	const preview = document.getElementById("project-preview");
 	const previewImg = document.getElementById("preview-image") as HTMLImageElement;
 	const previewTitle = document.getElementById("preview-title");
+	const previewTeamSize = document.getElementById("preview-team-size");
+	const previewIcons = document.getElementById("preview-icons");
+	const previewGraph = document.getElementById("preview-graph") as HTMLImageElement;
 
 	if (preview && previewImg && previewTitle) {
 		rows.forEach((row) => {
 			row.addEventListener("mouseenter", () => {
 				const img = row.getAttribute("data-image");
 				const title = row.getAttribute("data-title");
+				const teamSize = row.getAttribute("data-team-size");
+				const toolIcons = JSON.parse(row.getAttribute("data-tool-icons") || "[]");
+				const partGraph = row.getAttribute("data-part-graph");
+
 				if (img) {
 					previewImg.src = img;
 					if (title) previewTitle.innerText = title;
+
+					// Team Size
+					if (previewTeamSize) {
+						if (teamSize && teamSize !== "Unknown") {
+							previewTeamSize.innerText = `👥 ${teamSize}`;
+							previewTeamSize.style.display = "block";
+						} else {
+							previewTeamSize.style.display = "none";
+						}
+					}
+
+					// Icons
+					if (previewIcons) {
+						previewIcons.innerHTML = toolIcons
+							.slice(0, 5) // Limit to 5
+							.map(
+								(icon: string) =>
+									`<img src="https://cdn.simpleicons.org/${icon}/white" class="w-5 h-5 opacity-80" onerror="this.style.display='none'" />`,
+							)
+							.join("");
+					}
+
+					// Graph
+					if (previewGraph) {
+						if (partGraph) {
+							previewGraph.src = partGraph;
+							previewGraph.style.display = "block";
+						} else {
+							previewGraph.style.display = "none";
+						}
+					}
+
 					preview.classList.remove("opacity-0");
 					preview.classList.add("opacity-100");
 				}

@@ -141,6 +141,9 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 				document.querySelectorAll('.filter-btn[data-filter="all"]').forEach((b: any) => b.click());
 				// Clear URL params
 				window.history.replaceState({}, "", window.location.pathname);
+				// Reset Sort
+				sortState = { column: "date", direction: "desc" };
+				update();
 			};
 			display.appendChild(resetBtn);
 		}
