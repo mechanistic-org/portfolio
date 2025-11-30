@@ -38,7 +38,7 @@ const ProjectStrip: React.FC<ProjectStripProps> = ({ projects }) => {
         ]
     );
 
-    const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+    const [selectedIndex, setSelectedIndex] = useState<number>(-1);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     // Accessibility: Pause/Disable drag on reduced motion
@@ -62,8 +62,8 @@ const ProjectStrip: React.FC<ProjectStripProps> = ({ projects }) => {
         return () => mediaQuery.removeEventListener('change', handleMotionChange);
     }, [emblaApi]);
 
-    const openModal = (project: Project) => {
-        setSelectedProject(project);
+    const openModal = (index: number) => {
+        setSelectedIndex(index);
         setIsModalOpen(true);
     };
 
@@ -71,17 +71,27 @@ const ProjectStrip: React.FC<ProjectStripProps> = ({ projects }) => {
         setIsModalOpen(false);
     };
 
+    const handleNext = () => {
+        setSelectedIndex((prev) => (prev + 1) % projects.length);
+    };
+
+    const handlePrev = () => {
+        setSelectedIndex((prev) => (prev - 1 + projects.length) % projects.length);
+    };
+
+    const selectedProject = selectedIndex >= 0 ? projects[selectedIndex] : null;
+
     return (
         <>
             <div className="embla relative w-full overflow-hidden" ref={emblaRef}>
                 <div className="flex touch-pan-y gap-6">
-                    {projects.map((project) => (
+                    {projects.map((project, index) => (
                         <div
                             key={project.id}
                             className="flex-[0_0_85%] min-w-0 sm:flex-[0_0_45%] md:flex-[0_0_30%]"
                         >
                             <div
-                                onClick={() => openModal(project)}
+                                onClick={() => openModal(index)}
                                 className="group flex h-full cursor-pointer flex-col gap-4 rounded-lg border border-border bg-card p-4 transition-all hover:border-primary/50 hover:shadow-xl"
                             >
                                 <div className="aspect-video w-full overflow-hidden rounded-md bg-muted relative">
@@ -134,8 +144,11 @@ const ProjectStrip: React.FC<ProjectStripProps> = ({ projects }) => {
                 <ProjectModal
                     isOpen={isModalOpen}
                     onClose={closeModal}
+                    onNext={handleNext}
+                    onPrev={handlePrev}
                     project={{
                         ...selectedProject.data,
+                        id: selectedProject.id, // Pass ID for slug
                         date: selectedProject.data.date?.toISOString()
                     }}
                 />

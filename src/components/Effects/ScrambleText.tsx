@@ -18,14 +18,11 @@ const ScrambleText: React.FC<ScrambleTextProps> = ({
     const [displayText, setDisplayText] = useState("");
     const [isComplete, setIsComplete] = useState(false);
 
-    useEffect(() => {
-        let interval: NodeJS.Timeout;
+    // Glitch Effect
+    const triggerGlitch = () => {
+        setIsComplete(false);
         let counter = 0;
-
-        // Initial padding to match length
-        setDisplayText(Array(text.length).fill("0").map(() => CHARS[Math.floor(Math.random() * CHARS.length)]).join(""));
-
-        const animate = () => {
+        const interval = setInterval(() => {
             if (counter >= text.length) {
                 clearInterval(interval);
                 setIsComplete(true);
@@ -42,16 +39,27 @@ const ScrambleText: React.FC<ScrambleTextProps> = ({
                 }).join("");
             });
 
-            counter += 1 / 3; // Slow down the reveal
-        };
+            counter += 1 / 2; // Faster reveal for glitch
+        }, scrambleSpeed);
+    };
 
-        interval = setInterval(animate, scrambleSpeed);
+    useEffect(() => {
+        triggerGlitch();
 
-        return () => clearInterval(interval);
+        // Randomly glitch every 10-20 seconds
+        const randomInterval = Math.random() * 10000 + 10000;
+        const glitchTimer = setInterval(() => {
+            if (Math.random() > 0.7) triggerGlitch(); // 30% chance to glitch
+        }, randomInterval);
+
+        return () => clearInterval(glitchTimer);
     }, [text, scrambleSpeed]);
 
     return (
-        <span className={`${className} ${isComplete ? '' : 'font-mono'}`}>
+        <span
+            className={`${className} ${isComplete ? '' : 'font-mono'} cursor-default`}
+            onMouseEnter={triggerGlitch}
+        >
             {displayText}
         </span>
     );

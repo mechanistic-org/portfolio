@@ -1,0 +1,72 @@
+---
+
+---
+
+<div
+	id="scroll-mechanism"
+	class="fixed right-4 bottom-12 z-40 hidden opacity-50 transition-opacity duration-500 hover:opacity-100 md:block"
+>
+	<div class="relative h-64 w-16">
+		<!-- The Rack (Vertical Track) -->
+		<div
+			id="mechanism-rack"
+			class="absolute top-0 left-1/2 h-[200%] w-4 -translate-x-1/2 border-r border-l border-neutral-700 bg-[url('/rack-teeth.svg')] bg-repeat-y"
+			style="background-size: 100% 20px;"
+		>
+			<!-- CSS Generated Teeth for simplicity if SVG fails, but we'll use a gradient for now -->
+			<div
+				class="h-full w-full bg-[linear-gradient(to_bottom,transparent_50%,rgba(255,255,255,0.1)_50%)]"
+				style="background-size: 100% 10px;"
+			>
+			</div>
+		</div>
+
+		<!-- The Pinion (Gear) -->
+		<div
+			id="mechanism-gear"
+			class="text-primary absolute top-1/2 left-1/2 -mt-[24px] -ml-[24px] h-12 w-12"
+		>
+			<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2">
+				<!-- Gear Teeth -->
+				<path
+					d="M50 5 L55 15 L65 15 L70 5 L80 8 L78 18 L88 22 L95 15 L100 22 L90 30 L95 38 L105 35 L105 45 L95 45 L95 55 L105 55 L105 65 L95 62 L90 70 L100 78 L95 85 L88 78 L78 82 L80 92 L70 95 L65 85 L55 85 L50 95 L40 92 L42 82 L32 78 L25 85 L20 78 L30 70 L25 62 L15 65 L15 55 L5 55 L5 45 L15 45 L15 35 L25 38 L30 30 L20 22 L25 15 L32 22 L42 18 L40 8 Z"
+				></path>
+				<!-- Inner Circle -->
+				<circle cx="50" cy="50" r="20"></circle>
+				<!-- Spokes -->
+				<path d="M50 30 L50 70 M30 50 L70 50"></path>
+			</svg>
+		</div>
+	</div>
+</div>
+
+<script>
+	const gear = document.getElementById("mechanism-gear");
+	const rack = document.getElementById("mechanism-rack");
+
+	if (gear && rack) {
+		let currentScroll = 0;
+		let targetScroll = 0;
+
+		// Animation Loop for smooth physics
+		const animate = () => {
+			targetScroll = window.scrollY;
+			// Lerp for smoothness
+			currentScroll += (targetScroll - currentScroll) * 0.1;
+
+			// Rotate Gear (1 rotation per 500px)
+			const rotation = currentScroll * 0.72; // 360 / 500
+			gear.style.transform = `rotate(${rotation}deg)`;
+
+			// Move Rack (Opposite direction)
+			// We translate the rack vertically to simulate it moving through the gear
+			// Modulo to loop the pattern if needed, but for now just linear
+			const rackPos = -(currentScroll % 100); // Loop every 100px
+			rack.style.transform = `translate(-50%, ${rackPos}px)`;
+
+			requestAnimationFrame(animate);
+		};
+
+		requestAnimationFrame(animate);
+	}
+</script>

@@ -3,58 +3,39 @@
 	@apply inline-flex items-center justify-center gap-2 px-6 py-2 text-sm font-medium transition-all duration-300;
 	font-family: var(--font-mono);
 	letter-spacing: -0.02em;
-	border-radius: 2px;
-	/* Sharp corners */
-	@apply focus:ring-offset-base-900 focus:outline-none;
-	@apply disabled:pointer-events-none;
-}
 
-.button--primary {
-	@apply bg-foreground text-background border border-foreground hover:bg-background hover:text-foreground;
-	box-shadow: 4px 4px 0px 0px var(--primary);
-}
+	/* Bracket effect for secondary/outline buttons */
+	.button--outline {
+		@apply bg-transparent border border-border text-muted-foreground hover:text-primary hover:border-primary;
+		position: relative;
+	}
 
-.button--primary:hover {
-	box-shadow: 2px 2px 0px 0px var(--primary);
-	transform: translate(2px, 2px);
-}
+	.button--outline::before {
+		content: '[';
+		margin-right: 0px;
+		opacity: 0;
+		transition: all 0.3s ease;
+		color: var(--primary);
+	}
 
-.button--secondary {
-	@apply bg-background text-foreground border border-border hover:border-primary hover:text-primary;
-}
+	.button--outline::after {
+		content: ']';
+		margin-left: 0px;
+		opacity: 0;
+		transition: all 0.3s ease;
+		color: var(--primary);
+	}
 
-/* Bracket effect for secondary/outline buttons */
-.button--outline {
-	@apply bg-transparent border border-border text-muted-foreground hover:text-primary hover:border-primary;
-	position: relative;
-}
+	.button--outline:hover::before {
+		opacity: 1;
+		margin-right: 4px;
+	}
 
-.button--outline::before {
-	content: '[';
-	margin-right: 0px;
-	opacity: 0;
-	transition: all 0.3s ease;
-	color: var(--primary);
-}
+	.button--outline:hover::after {
+		opacity: 1;
+		margin-left: 4px;
+	}
 
-.button--outline::after {
-	content: ']';
-	margin-left: 0px;
-	opacity: 0;
-	transition: all 0.3s ease;
-	color: var(--primary);
-}
-
-.button--outline:hover::before {
-	opacity: 1;
-	margin-right: 4px;
-}
-
-.button--outline:hover::after {
-	opacity: 1;
-	margin-left: 4px;
-}
-
-.button--ghost {
-	@apply text-muted-foreground hover:bg-muted hover:text-foreground;
-}
+	.button--ghost {
+		@apply text-muted-foreground hover:bg-muted hover:text-foreground;
+	}

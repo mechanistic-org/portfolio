@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import ProjectCard from "../../components/Projects/ProjectCard.astro";
-import FilterButton from "../../components/Button/FilterButton.astro";
+import ProjectDirectory from "../../components/Projects/ProjectDirectory.astro";
+import FilterPanel from "../../components/Projects/FilterPanel.astro";
 
 const allProjects = await getCollection("projects", ({ data }) => !data.draft);
 const projects = allProjects.sort(
@@ -12,6 +12,13 @@ const projects = allProjects.sort(
 // Extract Facets for the UI
 const industries = [...new Set(projects.map((p) => p.data.industry).filter(Boolean))].sort();
 const tools = [...new Set(projects.flatMap((p) => p.data.tools).filter(Boolean))].sort();
+// Merge Employer and Client into one list
+const allClients = projects.flatMap((p) => {
+	const c = p.data.client || [];
+	const e = p.data.employer ? [p.data.employer] : [];
+	return [...c, ...e];
+});
+const clients = [...new Set(allClients.filter(Boolean))].sort();
 const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Concept"]; // Ordered logic
 ---
 
@@ -45,86 +52,13 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 				/>
 			</div>
 
-			<div class="border-border bg-card w-full rounded-lg border p-4 shadow-sm">
-				<div class="flex flex-col gap-6">
-					<div class="flex flex-col gap-2">
-						<span class="text-muted-foreground font-mono text-xs tracking-widest uppercase"
-							>Sector</span
-						>
-						<div class="flex flex-wrap gap-2">
-							<FilterButton
-								class="filter-btn active"
-								data-group="industry"
-								data-filter="all"
-								text="All"
-							/>
-							{
-								industries.map((i) => (
-									<FilterButton class="filter-btn" data-group="industry" data-filter={i} text={i} />
-								))
-							}
-						</div>
-					</div>
-
-					<div class="grid gap-6 md:grid-cols-2">
-						<div class="flex flex-col gap-2">
-							<span class="text-muted-foreground font-mono text-xs tracking-widest uppercase"
-								>Toolchain</span
-							>
-							<div class="flex flex-wrap gap-2">
-								<FilterButton
-									class="filter-btn active"
-									data-group="tool"
-									data-filter="all"
-									text="Any"
-								/>
-								{
-									tools.map((t) => (
-										<FilterButton class="filter-btn" data-group="tool" data-filter={t} text={t} />
-									))
-								}
-							</div>
-						</div>
-
-						<div class="flex flex-col gap-2">
-							<span class="text-muted-foreground font-mono text-xs tracking-widest uppercase"
-								>Production Status</span
-							>
-							<div class="flex flex-wrap gap-2">
-								<FilterButton
-									class="filter-btn active"
-									data-group="status"
-									data-filter="all"
-									text="Any Stage"
-								/>
-								{
-									statuses.map((s) => (
-										<FilterButton class="filter-btn" data-group="status" data-filter={s} text={s} />
-									))
-								}
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+			<FilterPanel sectors={industries} tools={tools} clients={clients} />
 		</div>
 
-		<div id="active-filters" class="mb-8 flex flex-wrap gap-2 empty:hidden"></div>
-	</div>
-
-	<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3" id="projects-grid">
-		{
-			projects.map((project) => (
-				<div
-					class="project-card"
-					data-industry={project.data.industry}
-					data-tool={JSON.stringify(project.data.tools)}
-					data-status={project.data.production}
-				>
-					<ProjectCard project={project} />
-				</div>
-			))
-		}
+		<!-- Project Directory Table -->
+		<div id="projects-container">
+			<ProjectDirectory projects={projects} />
+		</div>
 	</div>
 
 	<div
@@ -173,87 +107,116 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 
 <script>
 	document.addEventListener("astro:page-load", () => {
-		const cards = Array.from(document.querySelectorAll(".project-card")) as HTMLElement[];
+		// Target rows instead of cards
+		const rows = Array.from(document.querySelectorAll(".project-row")) as HTMLElement[];
 		const buttons = document.querySelectorAll(".filter-btn");
 		const searchInput = document.getElementById("project-search") as HTMLInputElement;
-		const activeFiltersContainer = document.getElementById("active-filters");
 
 		const prevBtn = document.getElementById("prev-btn") as HTMLButtonElement;
 		const nextBtn = document.getElementById("next-btn") as HTMLButtonElement;
 		const pageIndicator = document.getElementById("page-indicator");
 		const controls = document.getElementById("pagination-controls");
 
-		if (cards.length === 0) return;
+		if (rows.length === 0) return;
 		if (controls) controls.classList.remove("hidden");
 
 		// State
-		let filters = { industry: "all", tool: "all", status: "all", search: "" };
+		let filters = { industry: "all", tool: "all", status: "all", client: "all", search: "" };
 		let currentPage = 1;
-		const itemsPerPage = 12;
+		const itemsPerPage = 15; // Increased for list view
+
+		// URL Params Logic - Run BEFORE initial update
+		const urlParams = new URLSearchParams(window.location.search);
+		const clientParam = urlParams.get("client");
+		if (clientParam) {
+			// Decode URI component to handle spaces (e.g. "Consumer Appliances")
+			const decodedClient = decodeURIComponent(clientParam);
+			filters.client = decodedClient;
+
+			// Set active state on the button immediately
+			const btn = document.querySelector(
+				`.filter-btn[data-group="client"][data-filter="${decodedClient}"]`,
+			);
+			if (btn) {
+				btn.setAttribute("data-active", "true");
+				// Deactivate "All"
+				document
+					.querySelector(`.filter-btn[data-group="client"][data-filter="all"]`)
+					?.setAttribute("data-active", "false");
+			}
+		}
 
 		function renderActiveFilters() {
-			if (!activeFiltersContainer) return;
-			activeFiltersContainer.innerHTML = "";
+			const display = document.getElementById("active-filters-display");
+			if (!display) return;
 
 			const activeKeys = Object.entries(filters).filter(
 				([key, val]) => key !== "search" && val !== "all",
 			);
 
-			if (activeKeys.length === 0) return;
+			if (activeKeys.length === 0) {
+				display.innerHTML = '<span class="font-mono text-xs text-neutral-400">NONE</span>';
+				return;
+			}
 
+			display.innerHTML = "";
 			activeKeys.forEach(([key, val]) => {
-				const chip = document.createElement("button");
-				chip.className =
-					"flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary border border-primary/20 hover:bg-primary/20 transition-colors";
-				chip.innerHTML = `
-                        <span>${val}</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-                    `;
-				chip.onclick = () => {
-					// Reset this filter
+				const span = document.createElement("span");
+				span.className = "font-mono text-xs text-primary";
+				span.innerText = `[ ${val} ]`;
+
+				// Add clear button for this filter
+				const clear = document.createElement("button");
+				clear.className = "ml-1 hover:text-white";
+				clear.innerHTML = "&times;";
+				clear.onclick = (e) => {
+					e.stopPropagation();
 					const btn = document.querySelector(
 						`.filter-btn[data-group="${key}"][data-filter="all"]`,
 					) as HTMLElement;
 					if (btn) btn.click();
 				};
-				activeFiltersContainer.appendChild(chip);
+				span.appendChild(clear);
+
+				display.appendChild(span);
 			});
 
-			// Add "Clear All" if more than 1
-			if (activeKeys.length > 1) {
-				const clearBtn = document.createElement("button");
-				clearBtn.className =
-					"text-xs text-neutral-500 hover:text-white underline decoration-dotted underline-offset-4";
-				clearBtn.innerText = "Clear All";
-				clearBtn.onclick = () => {
-					document
-						.querySelectorAll('.filter-btn[data-filter="all"]')
-						.forEach((b: any) => b.click());
-				};
-				activeFiltersContainer.appendChild(clearBtn);
-			}
+			// Add "View All" / Reset button
+			const resetBtn = document.createElement("button");
+			resetBtn.className =
+				"ml-4 font-mono text-xs text-neutral-500 hover:text-white underline decoration-dotted underline-offset-4";
+			resetBtn.innerText = "RESET VIEW";
+			resetBtn.onclick = () => {
+				document.querySelectorAll('.filter-btn[data-filter="all"]').forEach((b: any) => b.click());
+				// Clear URL params
+				window.history.replaceState({}, "", window.location.pathname);
+			};
+			display.appendChild(resetBtn);
 		}
 
 		function update() {
 			// Filter
-			const active = cards.filter((card) => {
-				const d = card.dataset;
-				const cardTools = JSON.parse(d.tool || "[]");
-				const cardTitle = card.querySelector("h3")?.innerText.toLowerCase() || "";
-				const cardDesc = card.querySelector("p")?.innerText.toLowerCase() || "";
+			const active = rows.filter((row) => {
+				const d = row.dataset;
+				const rowTools = JSON.parse(d.tool || "[]");
+				const rowClients = JSON.parse(d.client || "[]"); // Assuming client is array
+
+				// Find title in the second cell (index 1)
+				const titleCell = row.children[1] as HTMLElement;
+				const rowTitle = titleCell?.innerText.toLowerCase() || "";
 
 				const matchInd = filters.industry === "all" || d.industry === filters.industry;
 				const matchStatus = filters.status === "all" || d.status === filters.status;
-				const matchTool = filters.tool === "all" || cardTools.includes(filters.tool);
+				const matchTool = filters.tool === "all" || rowTools.includes(filters.tool);
+				const matchClient = filters.client === "all" || rowClients.includes(filters.client);
 
 				const searchLower = filters.search.toLowerCase();
 				const matchSearch =
 					!searchLower ||
-					cardTitle.includes(searchLower) ||
-					cardDesc.includes(searchLower) ||
-					cardTools.some((t: string) => t.toLowerCase().includes(searchLower));
+					rowTitle.includes(searchLower) ||
+					rowTools.some((t: string) => t.toLowerCase().includes(searchLower));
 
-				return matchInd && matchStatus && matchTool && matchSearch;
+				return matchInd && matchStatus && matchTool && matchClient && matchSearch;
 			});
 
 			// Pagination Logic
@@ -266,15 +229,15 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 			const visibleItems = active.slice(start, end);
 
 			// Render
-			cards.forEach((c) => (c.style.display = "none"));
-			visibleItems.forEach((c) => {
-				c.style.display = "block";
-				c.animate(
+			rows.forEach((r) => (r.style.display = "none"));
+			visibleItems.forEach((r) => {
+				r.style.display = "table-row"; // Must be table-row for tables
+				r.animate(
 					[
-						{ opacity: 0, transform: "translateY(10px)" },
-						{ opacity: 1, transform: "translateY(0)" },
+						{ opacity: 0, transform: "translateX(-10px)" },
+						{ opacity: 1, transform: "translateX(0)" },
 					],
-					{ duration: 300 },
+					{ duration: 200 },
 				);
 			});
 
@@ -309,12 +272,6 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 		});
 
 		nextBtn?.addEventListener("click", () => {
-			// Recalculate total pages to be safe
-			const activeCount = cards.filter((c) => c.style.display !== "none").length; // Wait, this logic is flawed because hidden cards are hidden.
-			// We need to know total active count from filter.
-			// Let's just increment and let update() handle bounds or re-run filter logic inside click?
-			// Better to re-run filter logic or store active count.
-			// For simplicity, just increment and update() will clamp.
 			currentPage++;
 			update();
 			window.scrollTo({ top: 0, behavior: "smooth" });
@@ -334,11 +291,9 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 
 				// UI Toggle
 				document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach((b) => {
-					b.classList.remove("active");
-					b.setAttribute("aria-pressed", "false");
+					b.setAttribute("data-active", "false");
 				});
-				btn.classList.add("active");
-				btn.setAttribute("aria-pressed", "true");
+				btn.setAttribute("data-active", "true");
 
 				// Logic Update
 				filters[group as keyof typeof filters] = val;

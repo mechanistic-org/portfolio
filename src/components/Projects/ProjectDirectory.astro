@@ -1,0 +1,128 @@
+---
+import { type CollectionEntry } from "astro:content";
+
+interface Props {
+	projects: CollectionEntry<"projects">[];
+}
+
+const { projects } = Astro.props;
+---
+
+<div class="relative w-full">
+	<!-- Hover Preview Window -->
+	<div
+		id="project-preview"
+		class="pointer-events-none fixed bottom-8 left-8 z-50 hidden h-48 w-64 overflow-hidden rounded-lg border border-neutral-700 bg-neutral-900 opacity-0 shadow-2xl transition-opacity duration-300 md:block"
+	>
+		<img
+			id="preview-image"
+			src=""
+			alt="Project Preview"
+			class="h-full w-full object-cover opacity-80"
+		/>
+		<div class="absolute inset-0 flex items-end bg-gradient-to-t from-black/80 to-transparent p-4">
+			<span
+				id="preview-title"
+				class="font-mono text-xs font-bold tracking-widest text-white uppercase"
+			>
+				Preview
+			</span>
+		</div>
+	</div>
+
+	<div class="w-full overflow-x-auto">
+		<table class="w-full min-w-[800px] border-collapse text-left font-mono text-sm">
+			<thead>
+				<tr class="border-b border-neutral-800 text-neutral-500">
+					<th class="px-4 py-3 font-medium tracking-wider uppercase">ID</th>
+					<th class="px-4 py-3 font-medium tracking-wider uppercase">Project</th>
+					<th class="px-4 py-3 font-medium tracking-wider uppercase">Client</th>
+					<th class="px-4 py-3 font-medium tracking-wider uppercase">Sector</th>
+					<th class="px-4 py-3 font-medium tracking-wider uppercase">Year</th>
+					<th class="px-4 py-3 font-medium tracking-wider uppercase">Status</th>
+					<th class="px-4 py-3 text-right font-medium tracking-wider uppercase">Link</th>
+				</tr>
+			</thead>
+			<tbody id="projects-table-body">
+				{
+					projects.map((project, index) => (
+						<tr
+							class="project-row group hover:bg-primary/5 cursor-pointer border-b border-neutral-800/50 transition-colors"
+							data-industry={project.data.industry}
+							data-tool={JSON.stringify(project.data.tools)}
+							data-status={project.data.production}
+							data-client={JSON.stringify([
+								...(project.data.client || []),
+								...(project.data.employer ? [project.data.employer] : []),
+							])}
+							data-image={project.data.heroImage}
+							data-title={project.data.title}
+							onclick={`window.location.href='/projects/${project.data.slug}/'`}
+						>
+							<td class="px-4 py-3 text-neutral-500">{(index + 1).toString().padStart(3, "0")}</td>
+							<td class="text-foreground group-hover:text-primary px-4 py-3 font-bold transition-colors">
+								{project.data.title}
+							</td>
+							<td class="px-4 py-3 text-neutral-400">
+								{[
+									...(project.data.client || []),
+									...(project.data.employer ? [project.data.employer] : []),
+								]
+									.filter(Boolean)
+									.join(", ")}
+							</td>
+							<td class="px-4 py-3 text-neutral-400">{project.data.industry}</td>
+							<td class="px-4 py-3 text-neutral-500">
+								{new Date(project.data.date).getFullYear()}
+							</td>
+							<td class="px-4 py-3">
+								<span
+									class:list={[
+										"inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium",
+										project.data.production === "Mass Production"
+											? "border-green-500/20 bg-green-500/10 text-green-500"
+											: project.data.production === "Prototyping"
+												? "border-amber-500/20 bg-amber-500/10 text-amber-500"
+												: "border-neutral-700 bg-neutral-800 text-neutral-400",
+									]}
+								>
+									{project.data.production}
+								</span>
+							</td>
+							<td class="px-4 py-3 text-right">
+								<span class="hover:text-primary text-neutral-500 transition-colors">→</span>
+							</td>
+						</tr>
+					))
+				}
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script>
+	const rows = document.querySelectorAll(".project-row");
+	const preview = document.getElementById("project-preview");
+	const previewImg = document.getElementById("preview-image") as HTMLImageElement;
+	const previewTitle = document.getElementById("preview-title");
+
+	if (preview && previewImg && previewTitle) {
+		rows.forEach((row) => {
+			row.addEventListener("mouseenter", () => {
+				const img = row.getAttribute("data-image");
+				const title = row.getAttribute("data-title");
+				if (img) {
+					previewImg.src = img;
+					if (title) previewTitle.innerText = title;
+					preview.classList.remove("opacity-0");
+					preview.classList.add("opacity-100");
+				}
+			});
+
+			row.addEventListener("mouseleave", () => {
+				preview.classList.remove("opacity-100");
+				preview.classList.add("opacity-0");
+			});
+		});
+	}
+</script>

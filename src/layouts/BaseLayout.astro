@@ -10,6 +10,7 @@ import BaseHead from "@layouts/BaseHead.astro";
 import Nav from "@components/Nav/Nav.astro";
 import Footer from "@components/Footer/Footer.astro";
 import CommandMenu from "@components/Search/CommandMenu";
+import ScrollMechanism from "@components/Mechanism/ScrollMechanism.astro";
 // import CookieConsent from "@components/CookieConsent/CookieConsent.astro";
 
 // data
@@ -87,6 +88,7 @@ const {
 			<Footer />
 		</div>
 		<CommandMenu client:only="react" />
+		<ScrollMechanism />
 
 		<script>
 			import siteData from "@config/siteData.json";
