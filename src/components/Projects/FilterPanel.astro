@@ -8,169 +8,184 @@ interface Props {
 const { sectors, tools, clients } = Astro.props;
 ---
 
-<div id="filter-panel" class="border-b border-neutral-800 bg-neutral-900/50 backdrop-blur-sm">
-	<!-- Panel Header / Collapsed State -->
-	<div class="site-container flex items-center justify-between py-3">
-		<div class="flex items-center gap-4">
-			<span class="font-mono text-xs font-bold tracking-widest text-neutral-500 uppercase">
-				Active Filters:
-			</span>
-			<div id="active-filters-display" class="flex gap-2">
-				<span class="font-mono text-xs text-neutral-400">NONE</span>
-			</div>
-		</div>
-		<button
-			id="panel-toggle"
-			class="group text-primary hover:text-primary-400 flex items-center gap-2 font-mono text-xs font-bold tracking-widest uppercase transition-colors"
-		>
-			<span class="group-hover:underline">Configure</span>
-			<span id="toggle-icon">[ + ]</span>
-		</button>
-	</div>
+<div
+	id="filter-toolbar"
+	class="sticky top-[72px] z-40 border-b border-neutral-800 bg-neutral-900/80 backdrop-blur-md"
+>
+	<div class="site-container flex items-center gap-6 py-2">
+		<!-- Label -->
+		<span class="shrink-0 font-mono text-xs font-bold tracking-widest text-neutral-500 uppercase">
+			View:
+		</span>
 
-	<!-- Panel Body / Expanded State -->
-	<div
-		id="panel-body"
-		class="hidden overflow-hidden border-t border-neutral-800 bg-neutral-950 transition-all duration-300"
-	>
-		<div class="site-container py-6">
-			<div class="grid grid-cols-1 gap-8 md:grid-cols-4">
-				<!-- Sector Column -->
-				<div>
-					<h3 class="mb-4 font-mono text-xs font-bold text-neutral-500 uppercase">Sector</h3>
-					<div class="flex flex-col gap-2">
+		<!-- Dropdown Group: Sector -->
+		<div class="group dropdown-container relative">
+			<button
+				class="dropdown-trigger flex items-center gap-2 rounded px-3 py-1.5 font-mono text-xs text-neutral-300 transition-colors hover:bg-neutral-800 hover:text-white"
+			>
+				Sector <span class="text-[10px] opacity-50">▼</span>
+			</button>
+			<div
+				class="dropdown-menu absolute top-full left-0 z-50 mt-1 hidden max-h-[60vh] w-64 overflow-y-auto rounded-lg border border-neutral-800 bg-neutral-900 p-2 shadow-xl"
+			>
+				<button
+					class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 w-full rounded px-3 py-2 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+					data-filter="all"
+					data-group="industry"
+				>
+					[ All Sectors ]
+				</button>
+				{
+					sectors.map((sector) => (
 						<button
-							class="filter-btn hover:text-primary data-[active=true]:text-primary text-left font-mono text-sm text-neutral-400 data-[active=true]:font-bold"
-							data-filter="all"
+							class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 w-full rounded px-3 py-2 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+							data-filter={sector}
 							data-group="industry"
 						>
-							[ All Sectors ]
+							{sector}
 						</button>
-						{
-							sectors.map((sector) => (
-								<button
-									class="filter-btn hover:text-primary data-[active=true]:text-primary text-left font-mono text-sm text-neutral-400 data-[active=true]:font-bold"
-									data-filter={sector}
-									data-group="industry"
-								>
-									{sector}
-								</button>
-							))
-						}
-					</div>
-				</div>
+					))
+				}
+			</div>
+		</div>
 
-				<!-- Client Column -->
-				<div>
-					<h3 class="mb-4 font-mono text-xs font-bold text-neutral-500 uppercase">Client</h3>
-					<div class="flex flex-col gap-2">
+		<!-- Dropdown Group: Client -->
+		<div class="group dropdown-container relative">
+			<button
+				class="dropdown-trigger flex items-center gap-2 rounded px-3 py-1.5 font-mono text-xs text-neutral-300 transition-colors hover:bg-neutral-800 hover:text-white"
+			>
+				Client <span class="text-[10px] opacity-50">▼</span>
+			</button>
+			<div
+				class="dropdown-menu absolute top-full left-0 z-50 mt-1 hidden max-h-[60vh] w-64 overflow-y-auto rounded-lg border border-neutral-800 bg-neutral-900 p-2 shadow-xl"
+			>
+				<button
+					class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 w-full rounded px-3 py-2 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+					data-filter="all"
+					data-group="client"
+				>
+					[ All Clients ]
+				</button>
+				{
+					clients.map((client) => (
 						<button
-							class="filter-btn hover:text-primary data-[active=true]:text-primary text-left font-mono text-sm text-neutral-400 data-[active=true]:font-bold"
-							data-filter="all"
+							class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 w-full rounded px-3 py-2 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+							data-filter={client}
 							data-group="client"
 						>
-							[ All Clients ]
+							{client}
 						</button>
-						{
-							clients.map((client) => (
-								<button
-									class="filter-btn hover:text-primary data-[active=true]:text-primary text-left font-mono text-sm text-neutral-400 data-[active=true]:font-bold"
-									data-filter={client}
-									data-group="client"
-								>
-									{client}
-								</button>
-							))
-						}
-					</div>
-				</div>
+					))
+				}
+			</div>
+		</div>
 
-				<!-- Toolchain Column -->
-				<div>
-					<h3 class="mb-4 font-mono text-xs font-bold text-neutral-500 uppercase">Toolchain</h3>
-					<div class="flex flex-col gap-2">
+		<!-- Dropdown Group: Toolchain -->
+		<div class="group dropdown-container relative">
+			<button
+				class="dropdown-trigger flex items-center gap-2 rounded px-3 py-1.5 font-mono text-xs text-neutral-300 transition-colors hover:bg-neutral-800 hover:text-white"
+			>
+				Toolchain <span class="text-[10px] opacity-50">▼</span>
+			</button>
+			<div
+				class="dropdown-menu absolute top-full left-0 z-50 mt-1 hidden max-h-[60vh] w-64 overflow-y-auto rounded-lg border border-neutral-800 bg-neutral-900 p-2 shadow-xl"
+			>
+				<button
+					class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 w-full rounded px-3 py-2 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+					data-filter="all"
+					data-group="tool"
+				>
+					[ All Tools ]
+				</button>
+				{
+					tools.map((tool) => (
 						<button
-							class="filter-btn hover:text-primary data-[active=true]:text-primary text-left font-mono text-sm text-neutral-400 data-[active=true]:font-bold"
-							data-filter="all"
+							class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 w-full rounded px-3 py-2 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+							data-filter={tool}
 							data-group="tool"
 						>
-							[ All Tools ]
+							{tool}
 						</button>
-						{
-							tools.map((tool) => (
-								<button
-									class="filter-btn hover:text-primary data-[active=true]:text-primary text-left font-mono text-sm text-neutral-400 data-[active=true]:font-bold"
-									data-filter={tool}
-									data-group="tool"
-								>
-									{tool}
-								</button>
-							))
-						}
-					</div>
-				</div>
-
-				<!-- Status Column -->
-				<div>
-					<h3 class="mb-4 font-mono text-xs font-bold text-neutral-500 uppercase">Status</h3>
-					<div class="flex flex-col gap-2">
-						<button
-							class="filter-btn hover:text-primary data-[active=true]:text-primary text-left font-mono text-sm text-neutral-400 data-[active=true]:font-bold"
-							data-filter="all"
-							data-group="status"
-						>
-							[ All Status ]
-						</button>
-						<button
-							class="filter-btn hover:text-primary data-[active=true]:text-primary text-left font-mono text-sm text-neutral-400 data-[active=true]:font-bold"
-							data-filter="Production"
-							data-group="status"
-						>
-							Production
-						</button>
-						<button
-							class="filter-btn hover:text-primary data-[active=true]:text-primary text-left font-mono text-sm text-neutral-400 data-[active=true]:font-bold"
-							data-filter="Prototype"
-							data-group="status"
-						>
-							Prototype
-						</button>
-						<button
-							class="filter-btn hover:text-primary data-[active=true]:text-primary text-left font-mono text-sm text-neutral-400 data-[active=true]:font-bold"
-							data-filter="Concept"
-							data-group="status"
-						>
-							Concept
-						</button>
-					</div>
-				</div>
+					))
+				}
 			</div>
+		</div>
+
+		<!-- Dropdown Group: Status -->
+		<div class="group dropdown-container relative">
+			<button
+				class="dropdown-trigger flex items-center gap-2 rounded px-3 py-1.5 font-mono text-xs text-neutral-300 transition-colors hover:bg-neutral-800 hover:text-white"
+			>
+				Status <span class="text-[10px] opacity-50">▼</span>
+			</button>
+			<div
+				class="dropdown-menu absolute top-full left-0 z-50 mt-1 hidden w-48 rounded-lg border border-neutral-800 bg-neutral-900 p-2 shadow-xl"
+			>
+				<button
+					class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 w-full rounded px-3 py-2 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+					data-filter="all"
+					data-group="status"
+				>
+					[ All Status ]
+				</button>
+				{
+					["Production", "Prototype", "Concept"].map((status) => (
+						<button
+							class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 w-full rounded px-3 py-2 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+							data-filter={status}
+							data-group="status"
+						>
+							{status}
+						</button>
+					))
+				}
+			</div>
+		</div>
+
+		<!-- Separator -->
+		<div class="mx-2 h-4 w-px bg-neutral-800"></div>
+
+		<!-- Active Filters Display -->
+		<div id="active-filters-display" class="no-scrollbar flex items-center gap-2 overflow-x-auto">
+			<span class="font-mono text-xs text-neutral-600">All Projects</span>
 		</div>
 	</div>
 </div>
 
 <script>
-	// Toggle Logic
-	const toggleBtn = document.getElementById("panel-toggle");
-	const panelBody = document.getElementById("panel-body");
-	const toggleIcon = document.getElementById("toggle-icon");
+	// Dropdown Logic
+	const triggers = document.querySelectorAll(".dropdown-trigger");
 
-	if (toggleBtn && panelBody && toggleIcon) {
-		toggleBtn.addEventListener("click", () => {
-			const isHidden = panelBody.classList.contains("hidden");
-			if (isHidden) {
-				panelBody.classList.remove("hidden");
-				toggleIcon.textContent = "[ - ]";
-			} else {
-				panelBody.classList.add("hidden");
-				toggleIcon.textContent = "[ + ]";
-			}
+	// Close all menus
+	function closeAll() {
+		document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+			menu.classList.add("hidden");
 		});
 	}
 
-	// Filter Logic (Delegated to parent or handled here?)
-	// We'll emit events so the parent (ProjectDirectory) can handle the actual filtering
-	// Or we can just manipulate the DOM directly if we want to keep it simple.
-	// Let's stick to the existing pattern: The script in index.astro handles the filtering.
-	// We just need to ensure the buttons have the right classes/attributes.
+	triggers.forEach((trigger) => {
+		trigger.addEventListener("click", (e) => {
+			e.stopPropagation();
+			const menu = trigger.nextElementSibling;
+			const isOpen = !menu?.classList.contains("hidden");
+
+			closeAll();
+
+			if (!isOpen && menu) {
+				menu.classList.remove("hidden");
+			}
+		});
+	});
+
+	// Close on click outside
+	document.addEventListener("click", () => {
+		closeAll();
+	});
+
+	// Prevent closing when clicking inside menu
+	document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+		menu.addEventListener("click", (e) => {
+			e.stopPropagation();
+		});
+	});
 </script>

@@ -6,6 +6,7 @@ interface SearchItem {
     title: string;
     type: 'Project' | 'Field Note' | 'Page';
     href: string;
+    description?: string;
 }
 
 // In a real app, this would be passed as props or fetched from a search index
@@ -15,15 +16,32 @@ const STATIC_ITEMS: SearchItem[] = [
     { id: 'blog', title: 'Field Notes', type: 'Page', href: '/blog/' },
     { id: 'about', title: 'About', type: 'Page', href: '/about/' },
     { id: 'colophon', title: 'Colophon', type: 'Page', href: '/colophon/' },
-    // We can add more items here or pass them in
 ];
 
 const CommandMenu: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [query, setQuery] = useState('');
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const [items, setItems] = useState<SearchItem[]>(STATIC_ITEMS);
     const inputRef = useRef<HTMLInputElement>(null);
     const listRef = useRef<HTMLUListElement>(null);
+
+    // Fetch Search Index
+    useEffect(() => {
+        const fetchIndex = async () => {
+            try {
+                const res = await fetch('/search-index.json');
+                if (res.ok) {
+                    const projects = await res.json();
+                    setItems([...STATIC_ITEMS, ...projects]);
+                }
+            } catch (e) {
+                console.error("Failed to load search index", e);
+            }
+        };
+        // Fetch immediately or on first open. Fetching immediately ensures it's ready.
+        fetchIndex();
+    }, []);
 
     // Toggle with Ctrl+K / Cmd+K
     useEffect(() => {
@@ -59,9 +77,14 @@ const CommandMenu: React.FC = () => {
     }, [isOpen]);
 
     // Filter items
-    const filteredItems = STATIC_ITEMS.filter(item =>
-        item.title.toLowerCase().includes(query.toLowerCase())
-    );
+    const filteredItems = items.filter(item => {
+        const q = query.toLowerCase();
+        return (
+            item.title.toLowerCase().includes(q) ||
+            item.description?.toLowerCase().includes(q) ||
+            item.type.toLowerCase().includes(q)
+        );
+    }).slice(0, 50); // Limit results for performance
 
     // Handle navigation
     const handleSelect = (item: SearchItem) => {

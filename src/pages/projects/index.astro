@@ -19,39 +19,11 @@ const allClients = projects.flatMap((p) => {
 	return [...c, ...e];
 });
 const clients = [...new Set(allClients.filter(Boolean))].sort();
-const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Concept"]; // Ordered logic
 ---
 
 <BaseLayout title="Projects" description="Engineering Archive">
 	<div class="site-container pt-32 pb-24 md:pb-36">
-		<div class="mx-auto mb-12 max-w-4xl text-center">
-			<h1 class="h1 mb-4">Projects</h1>
-			<p class="text-muted-foreground text-lg">
-				Archive of {projects.length} Engineering Projects
-			</p>
-		</div>
-
 		<div class="mb-8 flex flex-col gap-6">
-			<div class="relative w-full">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-neutral-500"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg
-				>
-				<input
-					type="text"
-					id="project-search"
-					placeholder="Search projects..."
-					class="focus:border-primary focus:ring-primary h-10 w-full rounded-lg border border-neutral-800 bg-neutral-900 py-2 pr-4 pl-10 text-sm text-white placeholder-neutral-500 transition-colors focus:ring-1 focus:outline-none"
-				/>
-			</div>
-
 			<FilterPanel sectors={industries} tools={tools} clients={clients} />
 		</div>
 
@@ -67,13 +39,12 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 		// Target rows instead of cards
 		const rows = Array.from(document.querySelectorAll(".project-row")) as HTMLElement[];
 		const buttons = document.querySelectorAll(".filter-btn");
-		const searchInput = document.getElementById("project-search") as HTMLInputElement;
 		const sortHeaders = document.querySelectorAll(".sort-header");
 
 		if (rows.length === 0) return;
 
 		// State
-		let filters = { industry: "all", tool: "all", status: "all", client: "all", search: "" };
+		let filters = { industry: "all", tool: "all", status: "all", client: "all" };
 		let sortState = { column: "date", direction: "desc" }; // default sort
 
 		// URL Params Logic - Run BEFORE initial update
@@ -101,12 +72,10 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 			const display = document.getElementById("active-filters-display");
 			if (!display) return;
 
-			const activeKeys = Object.entries(filters).filter(
-				([key, val]) => key !== "search" && val !== "all",
-			);
+			const activeKeys = Object.entries(filters).filter(([key, val]) => val !== "all");
 
 			if (activeKeys.length === 0) {
-				display.innerHTML = '<span class="font-mono text-xs text-neutral-400">NONE</span>';
+				display.innerHTML = '<span class="font-mono text-xs text-neutral-600">All Projects</span>';
 				return;
 			}
 
@@ -183,13 +152,7 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 				const matchTool = filters.tool === "all" || rowTools.includes(filters.tool);
 				const matchClient = filters.client === "all" || rowClients.includes(filters.client);
 
-				const searchLower = filters.search.toLowerCase();
-				const matchSearch =
-					!searchLower ||
-					rowTitle.includes(searchLower) ||
-					rowTools.some((t: string) => t.toLowerCase().includes(searchLower));
-
-				return matchInd && matchStatus && matchTool && matchClient && matchSearch;
+				return matchInd && matchStatus && matchTool && matchClient;
 			});
 
 			// Sort
@@ -241,13 +204,9 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 		update();
 
 		// Events
-		searchInput?.addEventListener("input", (e) => {
-			filters.search = (e.target as HTMLInputElement).value;
-			update();
-		});
 
 		buttons.forEach((btn) => {
-			btn.addEventListener("click", () => {
+			const applyFilter = () => {
 				const group = btn.getAttribute("data-group");
 				const val = btn.getAttribute("data-filter");
 				if (!group || !val) return;
@@ -261,7 +220,10 @@ const statuses = ["Mass Production", "Manufacturing Prep", "Prototyping", "Conce
 				// Logic Update
 				filters[group as keyof typeof filters] = val;
 				update();
-			});
+			};
+
+			btn.addEventListener("click", applyFilter);
+			btn.addEventListener("mouseenter", applyFilter);
 		});
 
 		sortHeaders.forEach((header) => {
