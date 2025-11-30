@@ -877,6 +877,148 @@ def sync_site_assets():
             elif os.path.isdir(s):
                 # Recursive copy for subdirectories like logos
                 if os.path.exists(d):
+        # Sort gallery
+        gallery_images.sort()
+        
+        # Documents
+        documents = []
+        if os.path.exists(staging_project_dir):
+             for f in os.listdir(staging_project_dir):
+                if f.endswith(".pdf"):
+                    documents.append({"name": f, "url": f"{R2_DOMAIN}/{slug}/{f}"})
+        
+        # Links
+        links = []
+        if row.get("Link"):
+            links.append({"name": "Website", "url": row.get("Link")})
+
+        # 3D Model
+        model_url = ""
+        # Check for .glb
+        if os.path.exists(staging_project_dir):
+            for f in os.listdir(staging_project_dir):
+                if f.endswith(".glb"):
+                    model_url = f"{R2_DOMAIN}/{slug}/{f}"
+                    break
+
+        # Generate Charts
+        skill_graph_url = generate_radar_chart(skill_data, slug)
+        part_graph_url = generate_donut_chart(parts, slug)
+
+        # Template Replacement
+        model_viewer_tag = ""
+        if model_url:
+            model_viewer_tag = f'<ModelViewer src="{model_url}" alt="3D Asset" />'
+
+        content_body = f"""
+import {{ YouTube }} from '@astro-community/astro-embed-youtube';
+
+## Overview
+**{title}** ({row.get('Title', 'Engineer')}). 
+
+> *Auto-generated placeholder content.*
+
+### Project Artifacts
+<div class="my-8">
+  <YouTube id="dQw4w9WgXcQ" />
+</div>
+{model_viewer_tag}
+"""
+
+        mdx = f"""---
+title: {json.dumps(title)}
+slug: "{slug}"
+date: "{start_date_raw}"
+endDate: "{end_date_raw}"
+employer: "{employer}"
+client: {json.dumps(clients)}
+industry: "{industry}"
+category: "{category}"
+tools: {json.dumps(tools)}
+toolIcons: {json.dumps(tool_icons)}
+production: "{prod}"
+tags: {json.dumps(bom)}
+skillData: {json.dumps(skill_data)}
+additionalSkills: {json.dumps(additional_skills)}
+stats: {json.dumps(parts)}
+teamSize: "{team_size}"
+gallery: {json.dumps(gallery_images)}
+documents: {json.dumps(documents)}
+links: {json.dumps(links)}
+heroImage: "{hero_img}" 
+draft: false
+description: "{title} - {industry} project."
+duration: "{duration_str}"
+statusLabel: "{status_label}"
+skillGraph: "{skill_graph_url}"
+partGraph: "{part_graph_url}"
+---
+{content_body}
+"""
+        
+        out_path = os.path.join(OUTPUT_CONTENT_DIR, f"{slug}.mdx")
+        with open(out_path, "w", encoding='utf-8') as f:
+            f.write(mdx)
+        count += 1
+
+    print(f"✅ Generated {count} MDX files.")
+
+    client_data = []
+    for client in sorted(list(all_clients)):
+        logo_name = client.lower().replace(' ', '')
+        logo_path = None
+        icon_slug = CLIENT_ICON_MAP.get(client) # Check map first
+
+        # CHECK STAGING FOR LOGOS (Fallback or Override?)
+        
+        staging_logo_dir = os.path.join(STAGING_DIR, "_site", "logos")
+        if os.path.exists(os.path.join(staging_logo_dir, f"{logo_name}.svg")):
+            logo_path = f"{R2_DOMAIN}/_site/logos/{logo_name}.svg"
+            # Sync logo
+            if not R2_DOMAIN.startswith("http"):
+                target_logo_dir = os.path.join(LOCAL_R2_DIR, "_site", "logos")
+                os.makedirs(target_logo_dir, exist_ok=True)
+                shutil.copy2(os.path.join(staging_logo_dir, f"{logo_name}.svg"), os.path.join(target_logo_dir, f"{logo_name}.svg"))
+        elif os.path.exists(os.path.join(staging_logo_dir, f"{logo_name}.png")):
+            logo_path = f"{R2_DOMAIN}/_site/logos/{logo_name}.png"
+            # Sync logo
+            if not R2_DOMAIN.startswith("http"):
+                target_logo_dir = os.path.join(LOCAL_R2_DIR, "_site", "logos")
+                os.makedirs(target_logo_dir, exist_ok=True)
+                shutil.copy2(os.path.join(staging_logo_dir, f"{logo_name}.png"), os.path.join(target_logo_dir, f"{logo_name}.png"))
+            
+        client_data.append({
+            "name": client, 
+            "logo": logo_path,
+            "icon": icon_slug
+        })
+
+    with open(os.path.join(OUTPUT_DATA_DIR, "clients.json"), "w") as f:
+        json.dump(client_data, f, indent=2)
+
+def sync_site_assets():
+    """Sync _site directory from STAGING to LOCAL_R2_DIR"""
+    if R2_DOMAIN.startswith("http"):
+        # print("☁️  Skipping _site asset sync (using remote R2)")
+        return
+
+    print("🔄 Syncing _site assets...")
+    source = os.path.join(STAGING_DIR, "_site")
+    target = os.path.join(LOCAL_R2_DIR, "_site")
+    
+    if os.path.exists(source):
+        if not os.path.exists(target):
+            os.makedirs(target)
+            
+        # Sync files in root of _site
+        for item in os.listdir(source):
+            s = os.path.join(source, item)
+            d = os.path.join(target, item)
+            if os.path.isfile(s):
+                shutil.copy2(s, d)
+            elif os.path.isdir(s):
+                # Recursive copy for subdirectories like logos
+                if os.path.exists(d):
                     shutil.rmtree(d)
                 shutil.copytree(s, d)
 
@@ -887,4 +1029,15 @@ if __name__ == "__main__":
     process_specs()
     process_tenure()
     process_projects()
+    
+    # Auto-run R2 Sync
+    try:
+        from sync_r2 import sync_assets
+        print("\n🔄 Auto-running R2 Sync...")
+        sync_assets()
+    except ImportError:
+        print("\n⚠️  Could not import sync_r2.py. Skipping auto-sync.")
+    except Exception as e:
+        print(f"\n❌ Auto-sync failed: {e}")
+
     print("\n🚀 INGESTION COMPLETE.")
