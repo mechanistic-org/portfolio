@@ -3,9 +3,7 @@ import Marquee from "@components/Marquee/Marquee";
 import type { MarqueeItem } from "@components/Marquee/Marquee";
 import clientList from "@/config/clients.json";
 
-// Duplicate for marquee loop (still good to have enough data, though Embla might handle it better now)
-// Actually, with data props, we can just pass the list and let Marquee handle duplication if needed?
-// No, Marquee.tsx doesn't duplicate. We should duplicate here to ensure enough content for the loop.
+// Duplicate for marquee loop to ensure enough content
 const duplicatedClients = [
 	...clientList,
 	...clientList,
@@ -16,18 +14,19 @@ const duplicatedClients = [
 ];
 
 const marqueeItems: MarqueeItem[] = duplicatedClients.map((client, index) => {
-	// 1. Try Simple Icons (SVG)
-	if (client.icon) {
+	// 1. Try Manual Upload (Local)
+	// Checks if "logo" field is set in clients.json (e.g. "/images/clients/foo.png")
+	if (client.logo) {
 		return {
 			id: `${client.name}-${index}`,
 			text: client.name,
-			image: `https://cdn.simpleicons.org/${client.icon}`,
+			image: client.logo,
 			link: `/projects?client=${encodeURIComponent(client.name)}`,
 			variant: "logo-only",
 		};
 	}
 
-	// 2. Try Clearbit API (if domain exists)
+	// 2. Try Clearbit API (if domain exists) - Prioritize Color
 	if (client.domain) {
 		return {
 			id: `${client.name}-${index}`,
@@ -38,11 +37,22 @@ const marqueeItems: MarqueeItem[] = duplicatedClients.map((client, index) => {
 		};
 	}
 
-	// 3. Fallback to Text
+	// 3. Try Simple Icons (SVG) - Monochrome Fallback
+	if (client.icon) {
+		return {
+			id: `${client.name}-${index}`,
+			text: client.name,
+			image: `https://cdn.simpleicons.org/${client.icon}`,
+			link: `/projects?client=${encodeURIComponent(client.name)}`,
+			variant: "logo-only",
+		};
+	}
+
+	// 4. Fallback to Text
 	return {
 		id: `${client.name}-${index}`,
 		text: client.name,
-		image: undefined,
+		image: null,
 		link: `/projects?client=${encodeURIComponent(client.name)}`,
 		variant: "text-only",
 	};
