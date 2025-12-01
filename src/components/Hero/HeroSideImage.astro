@@ -8,7 +8,6 @@ const MODEL_URL = `${ASSET_DOMAIN}/_site/logo.glb`;
 // 2. YOUR PNG POSTER (Transparency Support)
 const POSTER_URL = `${ASSET_DOMAIN}/_site/EN_Badge_wire_rusty_1200.png`;
 import ScrambleText from "@components/Effects/ScrambleText";
-import BootSequence from "@components/Effects/BootSequence";
 ---
 
 <section id="hero" class="relative flex w-full pb-3">
@@ -45,7 +44,6 @@ import BootSequence from "@components/Effects/BootSequence";
 		<div
 			class="mx-auto flex max-w-lg flex-col gap-6 md:col-span-5 md:col-start-7 md:ml-0 md:max-w-full"
 		>
-			<BootSequence client:only="react" />
 			<h1 class="h1">
 				Hi, I'm&nbsp;<ScrambleText
 					client:load

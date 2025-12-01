@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 const BootSequence: React.FC = () => {
     const [lines, setLines] = useState<string[]>([]);
-    const [phase, setPhase] = useState<'check' | 'rain' | 'boot' | 'exit' | 'complete'>('check');
+    const [phase, setPhase] = useState<'check' | 'rain' | 'boot' | 'exit' | 'complete'>('complete');
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const phaseRef = useRef(phase);
 
@@ -10,18 +10,14 @@ const BootSequence: React.FC = () => {
         phaseRef.current = phase;
     }, [phase]);
 
-    // Session Check
+    // Event Listener
     useEffect(() => {
-        // Check if we've already booted this session
-        const hasBooted = sessionStorage.getItem('quantum_booted');
-        if (hasBooted) {
-            setPhase('complete');
-        } else {
+        const handleBoot = () => {
             setPhase('rain');
-            sessionStorage.setItem('quantum_booted', 'true');
-            // Remove the FOUC curtain now that we are ready to render
-            document.documentElement.classList.remove('booting');
-        }
+        };
+
+        window.addEventListener('quantum:boot', handleBoot);
+        return () => window.removeEventListener('quantum:boot', handleBoot);
     }, []);
 
     // Matrix Rain Effect

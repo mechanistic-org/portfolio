@@ -277,6 +277,7 @@ def process_tenure():
 def process_projects():
     print("🚀 Processing Projects...")
     main = read_csv_smart(find_file("Main.csv"), "Name", required_headers={"Name", "Employer"})
+    print(f"DEBUG: Read {len(main)} rows from Main.csv")
     
     tax = {r.get('Project Name') or r.get('Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Project Name")}
     if not tax: tax = {r.get('Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Name")}
@@ -613,6 +614,7 @@ def process_projects():
         # --- LOGIC: Duration & Status ---
         start_date_raw = row.get('Project Start Date', '') or row.get('Project Start Date raw', '')
         end_date_raw = row.get('Project End Date', '') or row.get('Project End Date raw', '')
+        
         duration_str = "Active"
         if start_date_raw:
             try:
@@ -663,10 +665,17 @@ def process_projects():
         links = []
         if row.get("Link"):
             links.append({"name": "Website", "url": row.get("Link")})
+        
+        # Add Client/Employer links from map
+        if employer and CLIENT_DOMAIN_MAP.get(employer):
+            links.append({"name": f"{employer} Website", "url": f"https://{CLIENT_DOMAIN_MAP.get(employer)}"})
+        
+        for c in clients:
+            if CLIENT_DOMAIN_MAP.get(c):
+                 links.append({"name": f"{c} Website", "url": f"https://{CLIENT_DOMAIN_MAP.get(c)}"})
 
         # 3D Model
         model_url = ""
-        # Check for .glb
         if os.path.exists(staging_project_dir):
             for f in os.listdir(staging_project_dir):
                 if f.endswith(".glb"):
@@ -682,8 +691,27 @@ def process_projects():
         if model_url:
             model_viewer_tag = f'<ModelViewer src="{model_url}" alt="3D Asset" />'
 
-        content_body = f"""
+        # Check for manual content override
+        manual_content_path = os.path.join(SOURCE_DIR, "manual_content", f"{slug}.md")
+        if os.path.exists(manual_content_path):
+            print(f"📄 Found manual content for {slug}")
+            with open(manual_content_path, "r", encoding="utf-8") as mf:
+                content_body = mf.read()
+                
+                # Replace placeholders
+                if model_url:
+                    content_body = content_body.replace("{{MODEL_URL}}", model_url)
+                else:
+                    # Remove the placeholder if no model exists
+                    content_body = content_body.replace("{{MODEL_URL}}", "")
+
+                # Ensure imports are present if not in manual content
+                if "import { YouTube }" not in content_body:
+                     content_body = f"import {{ YouTube }} from '@astro-community/astro-embed-youtube';\nimport ModelViewer from '@components/mdx/ModelViewer.astro';\n\n{content_body}"
+        else:
+            content_body = f"""
 import {{ YouTube }} from '@astro-community/astro-embed-youtube';
+import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## Overview
 **{title}** ({row.get('Title', 'Engineer')}). 

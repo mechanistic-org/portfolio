@@ -1,6 +1,7 @@
 ---
 // components
 import siteData from "@config/siteData.json";
+import RestartButton from "./RestartButton";
 
 const today = new Date();
 ---
@@ -29,34 +30,9 @@ const today = new Date();
 
 		<!-- Right: Version & Copyright -->
 		<div class="flex items-center gap-4">
-			<button
-				id="debug-toggle"
-				class="hover:text-primary cursor-pointer transition-colors"
-				aria-label="Toggle Debug Mode"
-			>
-				DEBUG [ OFF ]
-			</button>
+			<RestartButton client:visible />
 			<span class="hidden md:inline">VER: 5.0.0</span>
 			<span>&copy; {today.getFullYear()} {siteData.name.toUpperCase()}</span>
 		</div>
 	</div>
 </footer>
-
-<script>
-	const toggle = document.getElementById("debug-toggle");
-	const html = document.documentElement;
-
-	// Init
-	const isDebug = localStorage.getItem("debug-mode") === "true";
-	if (isDebug) {
-		html.classList.add("debug-mode");
-		if (toggle) toggle.innerText = "DEBUG [ ON ]";
-	}
-
-	// Toggle
-	toggle?.addEventListener("click", () => {
-		const isActive = html.classList.toggle("debug-mode");
-		if (toggle) toggle.innerText = isActive ? "DEBUG [ ON ]" : "DEBUG [ OFF ]";
-		localStorage.setItem("debug-mode", isActive.toString());
-	});
-</script>

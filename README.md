@@ -1,113 +1,52 @@
-fork
+# Quantum
+**Erik Norris High-Performance Engineering Portfolio**
 
-___________________________________________________________________________Original README ↓
-# Welcome to Quantum!
+A technical portfolio site built to function as a datasheet. It combines high-performance web technologies with a data-driven content pipeline to showcase mechanical engineering work.
 
-1. To get started, first install all necessary packages with `npm install`, then run an initial build to make sure the setup works `npm run build`.
-2. Now you can setup the site to your liking!
-   - [Style customization](https://cosmicthemes.com/docs/styles/)
-   - [Content editing](https://cosmicthemes.com/docs/data/)
-   - [Animations](https://cosmicthemes.com/docs/animations/)
-   - [Keystatic CMS](https://cosmicthemes.com/docs/keystatic/) - if you don't want Keystatic you can run `npm run remove-keystatic`
-   - [Forms](https://cosmicthemes.com/docs/contact-form/)
+## 🚀 Quick Start
 
-Should you need any assistance, send me a message at support@cosmicthemes.com
+1.  **Install Dependencies:**
+    ```bash
+    npm install
+    ```
 
-## Code Intro
+2.  **Run Development Server:**
+    ```bash
+    npm run dev
+    ```
 
-I have created a few code tours to introduce you to the codebase. You will need the extension [Code Tour](https://marketplace.visualstudio.com/items?itemName=vsls-contrib.codetour) to view them in VSCode.
+3.  **Ingest Data (Regenerate Content):**
+    ```bash
+    python ingest_data.py
+    ```
 
-The source files have the following setup. Note that not all files are included - it is already long, no one wants it to be longer.
+## 📚 Documentation
 
-```
-.
-├── .tours/
-│   └── code-intro.tour
-├── .vscode/
-│   └── extensions.json
-├── public/
-│   ├── favicons/
-│   │   └── favicon.ico
-│   ├── images/
-│   └── robots.txt
+*   **[Manifesto](docs/MANIFESTO.md):** Core directives, philosophy, and the "Physical Asset Law".
+*   **[Architecture](docs/ARCHITECTURE.md):** Data schema, ingestion pipeline, and component breakdown.
+*   **[Roadmap](docs/ROADMAP.md):** Current status, active work, and backlog.
+*   **[User Manual](docs/MAINTENANCE.md):** Instructions for content updates and maintenance.
+
+## 🛠️ Tech Stack
+
+*   **Framework:** [Astro v5](https://astro.build)
+*   **Styling:** [Tailwind CSS v4](https://tailwindcss.com)
+*   **Interactivity:** React (Recharts), Vanilla JS
+*   **Data Processing:** Python (Pandas)
+*   **Asset Hosting:** Cloudflare R2
+
+## 📂 Project Structure
+
+```text
+/
+├── data_source/       # Raw CSVs and Manual Markdown Content
+├── docs/              # Project Documentation
+├── public/            # Static Assets
 ├── src/
-│   ├── assets/
-│   │   └── images/
-│   │       └── hero.jpg
-│   ├── components/
-│   │   ├── Hero/
-│   │   │   ├── HeroSideImage.astro
-│   │   │   └── HeroTinyImage.astro
-│   │   └── Footer/
-│   │       └── Footer.astro
-│   ├── config/
-│   │   ├── siteData.json.ts
-│   │   └── navData.json.ts
-│   ├── data/
-│   │   ├── authors/
-│   │   ├── blog/
-│   │   ├── otherPages/
-│   │   └── config.ts
-│   ├── js/
-│   │   └── blogUtils.ts
-│   ├── layouts/
-│   │   └── BaseLayout.astro
-│   ├── pages/
-│   │   ├── index.astro
-│   │   ├── blog/
-│   │   │   ├── [...slug].astro
-│   │   │   └── index.astro
-│   │   ├── tags/
-│   │   │   ├── [tag].astro
-│   │   │   └── index.astro
-│   │   ├── [page].astro
-│   │   ├── 404.astro
-│   │   ├── contact.astro
-│   │   ├── index.astro
-│   │   └── rss.xml.ts
-│   └── styles/
-│       └── global.scss
-├── .gitignore
-├── .prettierrc.mjs
-├── astro.config.mjs
-├── netlify.toml
-├── package.json
-├── package-lock.json
-├── README.md
-├── tailwind.config.cjs
-└── tsconfig.json
+│   ├── components/    # Astro & React Components
+│   ├── content/       # Generated MDX Files (DO NOT EDIT MANUALLY)
+│   ├── pages/         # Astro Routes
+│   └── styles/        # Global Styles
+├── ingest_data.py     # Data Ingestion Script
+└── README.md          # You are here
 ```
-
-For robots like Google to see the correct sitemap, you will want to edit the `public/robots.txt` file to use your website domain.
-
-## Other Resources
-
-- See my blog post on [recommended Astro web development setup](https://cosmicthemes.com/blog/astro-web-development-setup/).
-- You can learn more information from the [theme docs](https://cosmicthemes.com/docs/) page on the [Cosmic Themes Website](https://cosmicthemes.com/).
-- For support, see the [support page](https://cosmicthemes.com/support/).
-- [License details](https://cosmicthemes.com/license/)
-
-## General Astro Info
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory. I also frequently use `src/assets` for images when using Astro asssets for image optimization.
-
-### 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:3000`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-### 👀 Want to learn more?
-
-Feel free to check out the [Astro documentation](https://docs.astro.build).

@@ -27,14 +27,16 @@ const { Content } = await render(entry);
 const data = entry.data;
 
 // Format dates
-const startDate = new Date(data.date);
+const dateVal = data.date || new Date();
+const startDate = new Date(dateVal);
 const dateDisplay = startDate.toLocaleDateString("en-US", { month: "short", year: "numeric" });
 
 // Get all projects for navigation
 const allProjects = await getCollection("projects");
 // Sort by date descending (newest first)
 const sortedProjects = allProjects.sort(
-	(a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+	(a, b) =>
+		new Date(b.data.date || new Date()).getTime() - new Date(a.data.date || new Date()).getTime(),
 );
 
 const currentIndex = sortedProjects.findIndex((p) => p.id === entry.id);
@@ -50,14 +52,28 @@ const links = data.links || [];
 const gallery = data.gallery || [];
 ---
 
-<Layout
-	title={data.title}
-	description={data.description}
-	image={{ src: data.heroImage, alt: data.title }}
->
+<Layout title={data.title} description={data.description ?? ""} image={data.heroImage ?? ""}>
 	<section class="relative bg-transparent py-12 md:py-24">
 		<div class="site-container">
 			<div class="mb-6 flex items-center justify-between">
+				<a
+					href="/projects"
+					class="group flex items-center gap-2 text-sm font-medium text-neutral-500 transition-colors hover:text-white"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						class="h-4 w-4 transition-transform group-hover:-translate-x-1"
+					>
+						<path d="m15 18-6-6 6-6"></path>
+					</svg>
+					Back to Projects
+				</a>
 				<div
 					class="text-primary flex items-center gap-3 font-mono text-sm tracking-widest uppercase"
 				>
@@ -114,27 +130,7 @@ const gallery = data.gallery || [];
 						)
 					}
 
-					<a
-						href="/projects"
-						class="group flex h-8 w-8 items-center justify-center rounded-md text-neutral-500 transition-colors hover:bg-neutral-900 hover:text-white"
-						title="View All Projects"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							class="h-4 w-4"
-						>
-							<rect width="7" height="7" x="3" y="3" rx="1"></rect>
-							<rect width="7" height="7" x="14" y="3" rx="1"></rect>
-							<rect width="7" height="7" x="14" y="14" rx="1"></rect>
-							<rect width="7" height="7" x="3" y="14" rx="1"></rect>
-						</svg>
-					</a>
+					<span class="font-mono text-xs text-neutral-600">NAVIGATE</span>
 
 					{
 						nextProject ? (
@@ -227,7 +223,7 @@ const gallery = data.gallery || [];
 						</h3>
 						<div class="flex flex-wrap gap-2">
 							{data.additionalSkills.map((s) => (
-								<span class="border-primary/20 bg-primary/5 text-primary-400 rounded border px-2 py-1 text-xs">
+								<span class="border-primary/20 bg-primary/5 text-primary-400 hover:bg-primary/10 hover:text-primary-300 cursor-default rounded border px-2 py-1 text-xs transition-colors">
 									{s}
 								</span>
 							))}
@@ -249,17 +245,21 @@ const gallery = data.gallery || [];
 									<a
 										href={doc.url}
 										target="_blank"
-										class="text-primary flex items-center gap-2 hover:underline"
+										class="group flex items-center gap-2 text-neutral-400 transition-colors hover:text-white"
 									>
-										<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-											<path
-												stroke-linecap="round"
-												stroke-linejoin="round"
-												stroke-width="2"
-												d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-											/>
-										</svg>
-										{doc.name}
+										<span class="group-hover:bg-primary/20 rounded bg-neutral-800 p-1 text-neutral-500 transition-colors group-hover:text-white">
+											<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="2"
+													d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+												/>
+											</svg>
+										</span>
+										<span class="group-hover:decoration-primary/50 underline decoration-neutral-700 underline-offset-4">
+											{doc.name}
+										</span>
 									</a>
 								</li>
 							))}
@@ -268,17 +268,21 @@ const gallery = data.gallery || [];
 									<a
 										href={link.url}
 										target="_blank"
-										class="text-primary flex items-center gap-2 hover:underline"
+										class="group flex items-center gap-2 text-neutral-400 transition-colors hover:text-white"
 									>
-										<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-											<path
-												stroke-linecap="round"
-												stroke-linejoin="round"
-												stroke-width="2"
-												d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-											/>
-										</svg>
-										{link.name}
+										<span class="group-hover:bg-primary/20 rounded bg-neutral-800 p-1 text-neutral-500 transition-colors group-hover:text-white">
+											<svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+												<path
+													stroke-linecap="round"
+													stroke-linejoin="round"
+													stroke-width="2"
+													d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+												/>
+											</svg>
+										</span>
+										<span class="group-hover:decoration-primary/50 underline decoration-neutral-700 underline-offset-4">
+											{link.name}
+										</span>
 									</a>
 								</li>
 							))}
@@ -329,7 +333,7 @@ const gallery = data.gallery || [];
 			</div>
 
 			<div
-				class="prose prose-invert prose-lg prose-headings:font-bold prose-headings:text-white prose-p:text-neutral-300 prose-img:rounded-xl max-w-none"
+				class="prose prose-invert prose-lg prose-headings:font-bold prose-headings:text-white prose-p:text-neutral-300 prose-img:rounded-xl custom-prose max-w-none"
 			>
 				<Content components={{ YouTube, ModelViewer }} />
 			</div>
@@ -345,3 +349,51 @@ const gallery = data.gallery || [];
 		</article>
 	</div>
 </Layout>
+
+<style is:global>
+	/* Custom Prose Overrides */
+	.custom-prose blockquote {
+		font-style: normal;
+		font-weight: 500;
+		color: var(--color-neutral-200);
+		border-left-width: 4px;
+		border-left-color: var(--color-primary-500);
+		background-color: color-mix(in srgb, var(--primary) 10%, transparent);
+		padding: 1.5rem;
+		border-radius: 0.5rem;
+		quotes: none;
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+	}
+
+	.custom-prose blockquote p:first-of-type::before {
+		content: none;
+	}
+
+	.custom-prose blockquote p:last-of-type::after {
+		content: none;
+	}
+
+	.custom-prose h2 {
+		color: white;
+		border-bottom: 1px solid var(--border);
+		padding-bottom: 0.5rem;
+		margin-top: 3rem;
+	}
+
+	.custom-prose strong {
+		color: white;
+		font-weight: 700;
+	}
+
+	.custom-prose a {
+		color: var(--primary);
+		text-decoration: none;
+		border-bottom: 1px solid transparent;
+		transition: border-color 0.2s;
+	}
+
+	.custom-prose a:hover {
+		border-bottom-color: var(--primary);
+	}
+</style>

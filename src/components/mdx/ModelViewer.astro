@@ -8,6 +8,8 @@ interface Props {
 const DEFAULT_POSTER = "https://assets.eriknorris.com/_site/EN_Badge_wire_rusty_1200.png";
 const { src, alt = "3D Model", poster = DEFAULT_POSTER } = Astro.props;
 const uid = "mv-" + Math.random().toString(36).substr(2, 9);
+
+if (!src) return null;
 ---
 
 <div

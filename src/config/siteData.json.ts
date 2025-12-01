@@ -39,11 +39,15 @@ export interface SiteDataProps {
 		// used for blog post purposes
 		name: string;
 		email: string;
-		//	twitter: string; // used for twitter cards when sharing a blog post on twitter
+		twitter?: string; // used for twitter cards when sharing a blog post on twitter
 	};
 	defaultImage: {
 		src: string;
 		alt: string;
+	};
+	status?: {
+		type: "production" | "under-construction" | "maintenance";
+		text?: string;
 	};
 }
 
@@ -85,6 +89,10 @@ const siteData: SiteDataProps = {
 	defaultImage: {
 		src: "/images/cosmic-themes-logo.jpg",
 		alt: "Stellar logo",
+	},
+	status: {
+		type: "under-construction", // "production" | "under-construction" | "maintenance"
+		text: "UNDER CONSTRUCTION",
 	},
 };
 

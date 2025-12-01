@@ -12,7 +12,7 @@ export interface Props {
 	type?: "blog" | "general" | undefined;
 	title: string;
 	description: string;
-	image?: ImageMetadata;
+	image?: ImageMetadata | string;
 	postFrontmatter?: CollectionEntry<"blog">["data"];
 	authors?: CollectionEntry<"authors">[];
 	noindex?: boolean;

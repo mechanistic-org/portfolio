@@ -6,6 +6,7 @@ import MobileNav from "@components/Nav/MobileNav/MobileNav.astro";
 import SiteLogo from "@components/SiteLogo/SiteLogo.astro";
 import Button from "@components/Button/Button.astro";
 import SocialCloud from "@components/SocialCloud/SocialCloud.astro";
+import ConstructionBadge from "@components/Badge/ConstructionBadge.astro";
 import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
 
 // data
@@ -24,11 +25,7 @@ import navData from "@config/navData.json";
 				<!-- Left: Logo -->
 				<div class="flex flex-1 items-center justify-start gap-3">
 					<SiteLogo />
-					<span
-						class="hidden font-mono text-[10px] font-bold tracking-wider text-amber-500/80 sm:inline-block"
-					>
-						[ v5.0 WIP ]
-					</span>
+					<ConstructionBadge />
 				</div>
 
 				<!-- Center: Desktop Nav -->

@@ -83,7 +83,6 @@ export default defineConfig({
         expressiveCode(expressiveCodeOptions),
         mdx(),
         react(),
-        keystatic(),
         sitemap(),
         compress({
             HTML: true,
@@ -92,8 +91,12 @@ export default defineConfig({
             Image: false,
             SVG: false,
         }),
+        keystatic(),
     ],
     vite: {
         plugins: [tailwindcss()],
+        optimizeDeps: {
+            exclude: ["axobject-query"],
+        },
     },
 });

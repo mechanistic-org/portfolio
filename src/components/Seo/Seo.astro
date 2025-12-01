@@ -15,12 +15,12 @@ interface BaseProps {
 
 interface GenProps extends BaseProps {
 	type: "general";
-	image?: ImageMetadata;
+	image?: ImageMetadata | string;
 }
 
 interface BlogProps extends BaseProps {
 	type: "blog";
-	image: ImageMetadata;
+	image: ImageMetadata | string;
 	authors: CollectionEntry<"authors">[];
 	postFrontmatter: CollectionEntry<"blog">["data"];
 }
@@ -93,8 +93,8 @@ const imageUrl =
 		},
 	}}
 	twitter={{
-		site: "@" + siteData.author.twitter,
-		creator: "@" + siteData.author.twitter,
+		site: siteData.author.twitter ? "@" + siteData.author.twitter : "",
+		creator: siteData.author.twitter ? "@" + siteData.author.twitter : "",
 		card: "summary_large_image",
 		title: title,
 		description: description,

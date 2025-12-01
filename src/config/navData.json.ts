@@ -27,6 +27,10 @@ const navConfig: navItem[] = [
 				text: "This Site",
 				href: "/colophon/",
 			},
+			{
+				text: "IFU",
+				href: "/about/ifu/",
+			},
 		],
 	},
 	{
@@ -44,12 +48,6 @@ const navConfig: navItem[] = [
 			},
 		],
 	},
-
-
-
-
-
-
 ];
 
 export default navConfig;
