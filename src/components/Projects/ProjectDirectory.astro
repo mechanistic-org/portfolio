@@ -35,7 +35,13 @@ const { projects } = Astro.props;
 				</span>
 			</div>
 
-			<div class="flex items-end justify-between">
+			<!-- Centered Description -->
+			<div class="absolute inset-0 flex items-center justify-center px-6 text-center">
+				<p id="preview-description" class="font-mono text-sm font-medium text-white drop-shadow-lg">
+				</p>
+			</div>
+
+			<div class="relative z-10 flex items-end justify-between">
 				<div id="preview-icons" class="flex gap-2">
 					<!-- Icons injected here -->
 				</div>
@@ -48,7 +54,7 @@ const { projects } = Astro.props;
 		<table class="w-full min-w-[800px] border-collapse text-left font-mono text-sm">
 			<thead>
 				<tr class="border-b border-neutral-800 text-neutral-500">
-					<th class="px-4 py-3 font-medium tracking-wider uppercase">ID</th>
+					<th class="px-4 py-3 font-medium tracking-wider uppercase">Role</th>
 					<th
 						class="sort-header cursor-pointer px-4 py-3 font-medium tracking-wider uppercase transition-colors select-none hover:text-white"
 						data-col="project"
@@ -96,7 +102,7 @@ const { projects } = Astro.props;
 				{
 					projects.map((project, index) => (
 						<tr
-							class="project-row group hover:bg-primary/5 cursor-pointer border-b border-neutral-800/50 transition-colors"
+							class="project-row group hover:bg-primary/5 cursor-pointer border-b border-l-2 border-neutral-800/50 border-transparent transition-colors"
 							data-industry={project.data.industry}
 							data-tool={JSON.stringify(project.data.tools)}
 							data-tool-icons={JSON.stringify(project.data.toolIcons)}
@@ -110,9 +116,12 @@ const { projects } = Astro.props;
 							])}
 							data-image={project.data.heroImage}
 							data-title={project.data.title}
+							data-description={project.data.description}
 							onclick={`window.location.href='/projects/${project.data.slug}/'`}
 						>
-							<td class="px-4 py-3 text-neutral-500">{(index + 1).toString().padStart(3, "0")}</td>
+							<td class="px-4 py-3 font-mono text-xs text-neutral-500">
+								{project.data.role || "Engineer"}
+							</td>
 							<td class="text-foreground group-hover:text-primary px-4 py-3 font-bold transition-colors">
 								{project.data.title}
 							</td>
@@ -158,6 +167,7 @@ const { projects } = Astro.props;
 	const preview = document.getElementById("project-preview");
 	const previewImg = document.getElementById("preview-image") as HTMLImageElement;
 	const previewTitle = document.getElementById("preview-title");
+	const previewDescription = document.getElementById("preview-description");
 	const previewTeamSize = document.getElementById("preview-team-size");
 	const previewIcons = document.getElementById("preview-icons");
 	const previewGraph = document.getElementById("preview-graph") as HTMLImageElement;
@@ -165,8 +175,10 @@ const { projects } = Astro.props;
 	if (preview && previewImg && previewTitle) {
 		rows.forEach((row) => {
 			row.addEventListener("mouseenter", () => {
+				row.classList.add("spotlight-active");
 				const img = row.getAttribute("data-image");
 				const title = row.getAttribute("data-title");
+				const description = row.getAttribute("data-description");
 				const teamSize = row.getAttribute("data-team-size");
 				const toolIcons = JSON.parse(row.getAttribute("data-tool-icons") || "[]");
 				const partGraph = row.getAttribute("data-part-graph");
@@ -174,6 +186,7 @@ const { projects } = Astro.props;
 				if (img) {
 					previewImg.src = img;
 					if (title) previewTitle.innerText = title;
+					if (description && previewDescription) previewDescription.innerText = description;
 
 					// Team Size
 					if (previewTeamSize) {
@@ -213,19 +226,80 @@ const { projects } = Astro.props;
 
 			row.addEventListener("mousemove", (e) => {
 				const event = e as MouseEvent;
-				// Position relative to viewport
-				const x = event.clientX;
-				const y = event.clientY;
+				const rect = (row as HTMLElement).getBoundingClientRect();
+				const x = event.clientX - rect.left;
+				const y = event.clientY - rect.top;
+
+				// Update CSS variables for the spotlight
+				(row as HTMLElement).style.setProperty("--x", `${x}px`);
+				(row as HTMLElement).style.setProperty("--y", `${y}px`);
+
+				// Position preview relative to viewport
+				const clientX = event.clientX;
+				const clientY = event.clientY;
 
 				// Offset to avoid cursor
-				preview.style.left = `${x + 20}px`;
-				preview.style.top = `${y + 20}px`;
+				preview.style.left = `${clientX + 20}px`;
+				preview.style.top = `${clientY + 20}px`;
 			});
 
 			row.addEventListener("mouseleave", () => {
+				row.classList.remove("spotlight-active");
 				preview.classList.remove("opacity-100");
 				preview.classList.add("opacity-0");
+				// Reset spotlight
+				(row as HTMLElement).style.removeProperty("--x");
+				(row as HTMLElement).style.removeProperty("--y");
 			});
 		});
+
+		// Safety cleanup: Remove spotlight from all rows when mouse leaves the table body
+		const tableBody = document.getElementById("projects-table-body");
+		if (tableBody) {
+			tableBody.addEventListener("mouseleave", () => {
+				rows.forEach((row) => {
+					row.classList.remove("spotlight-active");
+					(row as HTMLElement).style.removeProperty("--x");
+					(row as HTMLElement).style.removeProperty("--y");
+				});
+			});
+		}
 	}
 </script>
+
+<style>
+	@property --spotlight-opacity {
+		syntax: "<number>";
+		inherits: false;
+		initial-value: 0;
+	}
+
+	.project-row {
+		position: relative;
+		/* Fallback for no JS */
+		--x: 50%;
+		--y: 50%;
+		--spotlight-opacity: 0;
+
+		background-image: radial-gradient(
+			600px circle at var(--x) var(--y),
+			rgba(16, 185, 129, var(--spotlight-opacity)),
+			transparent 40%
+		);
+		transition: --spotlight-opacity 0.3s;
+	}
+
+	/* Restore the green highlight borders and background */
+	.project-row.spotlight-active {
+		border-left-color: rgb(var(--color-primary));
+		border-bottom-color: rgb(var(--color-primary));
+		background-color: rgba(var(--color-primary), 0.1);
+		--spotlight-opacity: 0.15;
+	}
+
+	/* Ensure content stays on top */
+	.project-row td {
+		position: relative;
+		z-index: 1;
+	}
+</style>

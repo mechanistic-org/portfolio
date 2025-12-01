@@ -7,6 +7,7 @@ const projects = defineCollection({
         slug: z.string(),
         date: z.string(),
         endDate: z.string().optional(),
+        role: z.string().optional(),
         employer: z.string(),
         client: z.array(z.string()),
         industry: z.string(),

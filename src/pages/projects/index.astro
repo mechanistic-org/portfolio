@@ -136,6 +136,80 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 			}
 		}
 
+		// Keyboard Nav State
+		let selectedIndex = -1;
+
+		function updateActiveRow() {
+			// Remove active class from all
+			rows.forEach((r) => {
+				r.classList.remove("bg-primary/10", "border-l-2", "border-primary", "animate-pulse-slow");
+				r.classList.add("border-transparent"); // Reset border
+			});
+
+			if (selectedIndex >= 0 && selectedIndex < rows.length) {
+				const row = rows[selectedIndex];
+				// Only apply if row is visible
+				if (row.style.display !== "none") {
+					row.classList.add("bg-primary/10", "border-l-2", "border-primary", "animate-pulse-slow");
+					row.classList.remove("border-transparent");
+
+					// Scroll into view if needed (smooth)
+					row.scrollIntoView({ behavior: "smooth", block: "nearest" });
+				}
+			}
+		}
+
+		// Keyboard Listeners
+		document.addEventListener("keydown", (e) => {
+			// Only if not focused on an input
+			if (document.activeElement?.tagName === "INPUT") return;
+
+			const visibleRows = rows.filter((r) => r.style.display !== "none");
+			if (visibleRows.length === 0) return;
+
+			// Find current index in visible rows
+			let currentVisibleIndex = visibleRows.findIndex((r) => r === rows[selectedIndex]);
+
+			if (e.key === "j" || e.key === "ArrowDown") {
+				e.preventDefault();
+				if (currentVisibleIndex < visibleRows.length - 1) {
+					currentVisibleIndex++;
+				} else {
+					currentVisibleIndex = 0; // Loop to top
+				}
+				// Find the global index of the new visible row
+				selectedIndex = rows.indexOf(visibleRows[currentVisibleIndex]);
+				updateActiveRow();
+			} else if (e.key === "k" || e.key === "ArrowUp") {
+				e.preventDefault();
+				if (currentVisibleIndex > 0) {
+					currentVisibleIndex--;
+				} else {
+					currentVisibleIndex = visibleRows.length - 1; // Loop to bottom
+				}
+				selectedIndex = rows.indexOf(visibleRows[currentVisibleIndex]);
+				updateActiveRow();
+			} else if (e.key === "Enter") {
+				if (selectedIndex >= 0) {
+					const row = rows[selectedIndex];
+					const link = row.getAttribute("onclick");
+					// Extract URL from "window.location.href='/projects/slug/'"
+					const match = link?.match(/'([^']+)'/);
+					if (match) {
+						window.location.href = match[1];
+					}
+				}
+			}
+		});
+
+		// Sync Hover with Selection - REMOVED to prevent sticky highlight
+		// rows.forEach((row, index) => {
+		// 	row.addEventListener("mouseenter", () => {
+		// 		selectedIndex = index;
+		// 		updateActiveRow();
+		// 	});
+		// });
+
 		function update() {
 			// Filter
 			let active = rows.filter((row) => {
@@ -177,6 +251,10 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 					tbody.appendChild(r); // Re-appending moves it to the end, effectively reordering
 				});
 			}
+
+			// Reset selection on filter change
+			selectedIndex = -1;
+			updateActiveRow();
 
 			renderActiveFilters();
 			updateSortIcons();
@@ -249,5 +327,18 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 	@reference "../../styles/global.css";
 	.filter-btn.active {
 		@apply bg-primary ring-primary text-black ring-2;
+	}
+	@keyframes pulse-slow {
+		0%,
+		100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.8;
+			background-color: rgba(var(--color-primary), 0.15);
+		}
+	}
+	.animate-pulse-slow {
+		animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 	}
 </style>

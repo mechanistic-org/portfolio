@@ -12,7 +12,7 @@ const { sectors, tools, clients } = Astro.props;
 	id="filter-toolbar"
 	class="sticky top-[72px] z-40 border-b border-neutral-800 bg-neutral-900/80 backdrop-blur-md"
 >
-	<div class="site-container flex items-center gap-6 py-2">
+	<div class="site-container mask-linear-fade flex items-center gap-6 py-2">
 		<!-- Label -->
 		<span class="shrink-0 font-mono text-xs font-bold tracking-widest text-neutral-500 uppercase">
 			View:
@@ -189,3 +189,10 @@ const { sectors, tools, clients } = Astro.props;
 		});
 	});
 </script>
+
+<style>
+	.mask-linear-fade {
+		mask-image: linear-gradient(to right, black 90%, transparent 100%);
+		-webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
+	}
+</style>

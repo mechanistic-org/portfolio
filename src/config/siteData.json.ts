@@ -58,10 +58,7 @@ const siteData: SiteDataProps = {
 	useAnimations: true,
 
 	socialLinks: [
-		{
-			platform: "resume",
-			link: "https://resume.eriknorris.com",
-		},
+
 		{
 			platform: "linkedin",
 			link: "https://www.linkedin.com/eriknorris/",

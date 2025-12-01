@@ -8,23 +8,14 @@ const MODEL_URL = `${ASSET_DOMAIN}/_site/logo.glb`;
 // 2. YOUR PNG POSTER (Transparency Support)
 const POSTER_URL = `${ASSET_DOMAIN}/_site/EN_Badge_wire_rusty_1200.png`;
 import ScrambleText from "@components/Effects/ScrambleText";
+import BootSequence from "@components/Effects/BootSequence";
 ---
 
 <section id="hero" class="relative flex w-full pb-3">
-	<div class="site-container grid items-center gap-10 pt-20 md:grid-cols-3 md:gap-20 md:pt-24">
-		<div class="mx-auto flex max-w-lg flex-col gap-6 md:col-span-2 md:ml-0 md:max-w-full">
-			<h1 class="h1">
-				Hi, I'm&nbsp;<ScrambleText
-					client:load
-					text={siteData.author.name}
-					className="text-primary"
-				/>
-			</h1>
-			<p class="description text-lg text-pretty text-neutral-400">Mechanical Design Engineer</p>
-		</div>
-
+	<div class="site-container grid items-center gap-10 pt-20 md:grid-cols-12 md:gap-8 md:pt-24">
+		<!-- Model (Left) - Spans 5 cols, starts at 2 for breathing room -->
 		<div
-			class="relative flex h-[400px] w-full min-w-[300px] items-center justify-center md:col-span-1 md:h-[500px]"
+			class="relative flex h-[400px] w-full min-w-[300px] items-center justify-center md:col-span-5 md:col-start-2 md:h-[500px]"
 		>
 			<model-viewer
 				src={MODEL_URL}
@@ -48,6 +39,21 @@ import ScrambleText from "@components/Effects/ScrambleText";
 					</div>
 				</div>
 			</model-viewer>
+		</div>
+
+		<!-- Text (Right) - Spans 5 cols, starts at 7 -->
+		<div
+			class="mx-auto flex max-w-lg flex-col gap-6 md:col-span-5 md:col-start-7 md:ml-0 md:max-w-full"
+		>
+			<BootSequence client:only="react" />
+			<h1 class="h1">
+				Hi, I'm&nbsp;<ScrambleText
+					client:load
+					text={siteData.author.name}
+					className="text-primary"
+				/>
+			</h1>
+			<p class="description text-lg text-pretty text-neutral-400">Mechanical Design Engineer</p>
 		</div>
 	</div>
 </section>

@@ -29,6 +29,27 @@ const navConfig: navItem[] = [
 			},
 		],
 	},
+	{
+		text: "Resume",
+		dropdown: [
+			{
+				text: "PDF",
+				href: "https://resume.eriknorris.com/",
+				newTab: true,
+
+			},
+			{
+				text: "3D Resume",
+				href: "null",
+			},
+		],
+	},
+
+
+
+
+
+
 ];
 
 export default navConfig;

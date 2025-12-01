@@ -49,6 +49,26 @@ const {
 			noindex={noindex}
 		/>
 		<ClientRouter />
+		<style>
+			/* Matrix Curtain - Hidden by default */
+			#matrix-curtain {
+				display: none;
+			}
+			/* Shown only when the booting class is present */
+			html.booting #matrix-curtain {
+				display: block;
+			}
+		</style>
+		<script is:inline>
+			// Check session immediately to prevent FOUC
+			if (!sessionStorage.getItem("quantum_booted")) {
+				document.documentElement.classList.add("booting");
+				// Safety valve: Remove curtain after 4s if React fails to load
+				setTimeout(() => {
+					document.documentElement.classList.remove("booting");
+				}, 4000);
+			}
+		</script>
 	</head>
 	<body
 		class:list={[
@@ -58,6 +78,9 @@ const {
 			},
 		]}
 	>
+		<!-- The Curtain -->
+		<div id="matrix-curtain" class="fixed inset-0 z-[9999] bg-black"></div>
+
 		<div class="flex min-h-lvh flex-col justify-between">
 			<div>
 				<Nav />
