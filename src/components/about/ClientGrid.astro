@@ -15,13 +15,38 @@ const duplicatedClients = [
 	...clientList,
 ];
 
-const marqueeItems: MarqueeItem[] = duplicatedClients.map((client, index) => ({
-	id: `${client.name}-${index}`,
-	text: client.name,
-	image: client.icon ? `https://cdn.simpleicons.org/${client.icon}` : client.logo,
-	link: `/projects?client=${encodeURIComponent(client.name)}`,
-	variant: "logo-only",
-}));
+const marqueeItems: MarqueeItem[] = duplicatedClients.map((client, index) => {
+	// 1. Try Simple Icons (SVG)
+	if (client.icon) {
+		return {
+			id: `${client.name}-${index}`,
+			text: client.name,
+			image: `https://cdn.simpleicons.org/${client.icon}`,
+			link: `/projects?client=${encodeURIComponent(client.name)}`,
+			variant: "logo-only",
+		};
+	}
+
+	// 2. Try Clearbit API (if domain exists)
+	if (client.domain) {
+		return {
+			id: `${client.name}-${index}`,
+			text: client.name,
+			image: `https://logo.clearbit.com/${client.domain}`,
+			link: `/projects?client=${encodeURIComponent(client.name)}`,
+			variant: "logo-only",
+		};
+	}
+
+	// 3. Fallback to Text
+	return {
+		id: `${client.name}-${index}`,
+		text: client.name,
+		image: undefined,
+		link: `/projects?client=${encodeURIComponent(client.name)}`,
+		variant: "text-only",
+	};
+});
 ---
 
 <div class="relative w-full py-3">

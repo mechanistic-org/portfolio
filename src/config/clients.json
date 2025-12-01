@@ -1,107 +1,128 @@
 [
   {
     "name": "Avegant",
+    "domain": "avegant.com",
     "logo": null,
     "icon": null
   },
   {
     "name": "D2M",
+    "domain": "d2m-inc.com",
     "logo": null,
     "icon": null
   },
   {
     "name": "Digidesign",
+    "domain": "avid.com",
     "logo": null,
-    "icon": null
+    "icon": "avid"
   },
   {
     "name": "EP Technologies",
+    "domain": null,
     "logo": null,
     "icon": null
   },
   {
     "name": "Fitch",
+    "domain": "fitch.com",
     "logo": null,
     "icon": null
   },
   {
     "name": "Function",
+    "domain": "function.engineering",
     "logo": null,
     "icon": null
   },
   {
     "name": "Hyphen",
+    "domain": "hyphen.com",
     "logo": null,
     "icon": null
   },
   {
     "name": "Kaleidescape",
+    "domain": "kaleidescape.com",
     "logo": null,
     "icon": null
   },
   {
     "name": "Lyft",
+    "domain": "lyft.com",
     "logo": null,
     "icon": "lyft"
   },
   {
     "name": "Microsoft",
+    "domain": "microsoft.com",
     "logo": null,
     "icon": "microsoft"
   },
   {
     "name": "Motivate",
+    "domain": "motivateco.com",
     "logo": null,
     "icon": null
   },
   {
     "name": "Motorola",
+    "domain": "motorola.com",
     "logo": null,
-    "icon": null
+    "icon": "motorola"
   },
   {
     "name": "Noon",
+    "domain": "noonhome.com",
     "logo": null,
     "icon": null
   },
   {
     "name": "Purina",
+    "domain": "purina.com",
     "logo": null,
-    "icon": null
+    "icon": "purina"
   },
   {
     "name": "Silicon Graphics",
+    "domain": "sgi.com",
     "logo": null,
     "icon": null
   },
   {
     "name": "Synapse",
+    "domain": "synapse.com",
     "logo": null,
     "icon": null
   },
   {
     "name": "Tailio",
+    "domain": "tailio.com",
     "logo": null,
     "icon": null
   },
   {
     "name": "UltimateTV",
+    "domain": "microsoft.com",
     "logo": null,
     "icon": null
   },
   {
     "name": "WebTV",
+    "domain": "microsoft.com",
     "logo": null,
     "icon": null
   },
   {
     "name": "awesomejob",
+    "domain": null,
     "logo": null,
     "icon": null
   },
   {
     "name": "frogdesign",
+    "domain": "frog.co",
     "logo": null,
-    "icon": null
+    "icon": "frog"
   }
 ]

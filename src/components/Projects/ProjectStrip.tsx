@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import AutoScroll from 'embla-carousel-auto-scroll';
 import ProjectModal from './ProjectModal';
@@ -10,6 +10,8 @@ interface Project {
         description?: string;
         heroImage?: string;
         employer?: string;
+        client?: string[];
+        role?: string;
         date?: Date;
         tags?: string[];
         skillData?: { name: string; value: number }[];
@@ -81,6 +83,22 @@ const ProjectStrip: React.FC<ProjectStripProps> = ({ projects }) => {
 
     const selectedProject = selectedIndex >= 0 ? projects[selectedIndex] : null;
 
+    // Swarm Effect Logic
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const card = e.currentTarget;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--x', `${x}px`);
+        card.style.setProperty('--y', `${y}px`);
+        card.style.setProperty('--opacity', '1');
+    };
+
+    const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+        const card = e.currentTarget;
+        card.style.setProperty('--opacity', '0');
+    };
+
     return (
         <>
             <div className="embla relative w-full overflow-hidden" ref={emblaRef}>
@@ -92,47 +110,66 @@ const ProjectStrip: React.FC<ProjectStripProps> = ({ projects }) => {
                         >
                             <div
                                 onClick={() => openModal(index)}
-                                className="group flex h-full cursor-pointer flex-col gap-4 rounded-lg border border-border bg-card p-4 transition-all hover:border-primary/50 hover:shadow-xl"
+                                onMouseMove={handleMouseMove}
+                                onMouseLeave={handleMouseLeave}
+                                className="group relative flex aspect-video cursor-pointer flex-col overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900 transition-all hover:border-primary/50 hover:shadow-2xl"
+                                style={{
+                                    '--x': '50%',
+                                    '--y': '50%',
+                                    '--opacity': '0'
+                                } as React.CSSProperties}
                             >
-                                <div className="aspect-video w-full overflow-hidden rounded-md bg-muted relative">
+                                {/* Swarm Spotlight Background */}
+                                <div
+                                    className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-300"
+                                    style={{
+                                        background: `radial-gradient(600px circle at var(--x) var(--y), rgba(16, 185, 129, 0.35), transparent 40%)`,
+                                        opacity: 'var(--opacity)'
+                                    }}
+                                />
+
+                                {/* Image Layer */}
+                                <div className="absolute inset-0 z-10">
                                     {project.data.heroImage ? (
                                         <img
                                             src={project.data.heroImage}
                                             alt={project.data.title}
-                                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
                                             loading="lazy"
                                         />
                                     ) : (
-                                        <div className="flex h-full w-full items-center justify-center text-muted-foreground bg-muted">
-                                            <span className="text-xs">No Image</span>
+                                        <div className="flex h-full w-full items-center justify-center bg-neutral-900 text-neutral-700">
+                                            <span className="text-xs font-mono">NO_SIGNAL</span>
                                         </div>
                                     )}
-
-                                    <div className="absolute bottom-2 right-2 opacity-0 transition-opacity group-hover:opacity-100">
-                                        <span className="rounded bg-black/70 px-2 py-1 text-xs text-white backdrop-blur-sm">
-                                            Quick View
-                                        </span>
-                                    </div>
                                 </div>
 
-                                <div className="flex flex-grow flex-col justify-between gap-2">
-                                    <div>
-                                        <h3 className="text-lg font-bold text-foreground group-hover:text-primary transition-colors">
-                                            {project.data.title || "Untitled Project"}
-                                        </h3>
-                                        <p className="text-xs text-muted-foreground font-mono mt-1">
-                                            {project.data.employer} • {new Date(project.data.date || Date.now()).getFullYear()}
-                                        </p>
+                                {/* Data Overlay (Technical HUD) */}
+                                <div className="absolute inset-0 z-20 flex flex-col justify-between p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                                    {/* Top: ID/Role */}
+                                    <div className="flex items-start justify-between">
+                                        <span className="font-mono text-xs text-primary bg-primary/10 px-2 py-1 rounded border border-primary/20 backdrop-blur-sm">
+                                            {project.data.role || "ENGINEER"}
+                                        </span>
+                                        <span className="font-mono text-xs text-neutral-400">
+                                            {new Date(project.data.date || Date.now()).getFullYear()}
+                                        </span>
                                     </div>
 
-                                    {project.data.tags && project.data.tags.length > 0 && (
-                                        <div className="flex flex-wrap gap-2 text-xs text-muted-foreground mt-2">
-                                            {project.data.tags.slice(0, 3).map(tag => (
-                                                <span key={tag} className="bg-muted px-2 py-1 rounded">{tag}</span>
+                                    {/* Bottom: Title & Tech */}
+                                    <div className="flex flex-col gap-2">
+                                        <h3 className="font-mono text-xl font-bold text-white tracking-tight">
+                                            {project.data.title.toUpperCase()}
+                                        </h3>
+                                        <div className="h-px w-full bg-gradient-to-r from-primary/50 to-transparent" />
+                                        <div className="flex flex-wrap gap-2">
+                                            {project.data.tags?.slice(0, 3).map(tag => (
+                                                <span key={tag} className="text-[10px] font-mono text-neutral-300 bg-black/50 px-1.5 py-0.5 rounded border border-neutral-800">
+                                                    {tag}
+                                                </span>
                                             ))}
-                                            {project.data.tags.length > 3 && <span className="px-1 py-1">+{project.data.tags.length - 3}</span>}
                                         </div>
-                                    )}
+                                    </div>
                                 </div>
                             </div>
                         </div>

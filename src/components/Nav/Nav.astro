@@ -6,6 +6,7 @@ import MobileNav from "@components/Nav/MobileNav/MobileNav.astro";
 import SiteLogo from "@components/SiteLogo/SiteLogo.astro";
 import Button from "@components/Button/Button.astro";
 import SocialCloud from "@components/SocialCloud/SocialCloud.astro";
+import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
 
 // data
 import navData from "@config/navData.json";
@@ -70,6 +71,8 @@ import navData from "@config/navData.json";
 					<div class="hidden md:block">
 						<SocialCloud />
 					</div>
+
+					<ThemeToggle />
 
 					<!-- mobile nav menu, only load on small screens where it is visible -->
 					<div class="flex items-center gap-4 md:hidden">
