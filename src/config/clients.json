@@ -2,106 +2,127 @@
   {
     "name": "Avegant",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "avegant.com"
   },
   {
     "name": "D2M",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "d2m-inc.com"
   },
   {
     "name": "Digidesign",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "avid.com"
   },
   {
     "name": "EP Technologies",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": null
   },
   {
     "name": "Fitch",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "fitch.com"
   },
   {
     "name": "Function",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "functioneng.com"
   },
   {
     "name": "Hyphen",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "hyphen.com"
   },
   {
     "name": "Kaleidescape",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "kaleidescape.com"
   },
   {
     "name": "Lyft",
     "logo": null,
-    "icon": "lyft"
+    "icon": "lyft",
+    "domain": "lyft.com"
   },
   {
     "name": "Microsoft",
     "logo": null,
-    "icon": "microsoft"
+    "icon": "microsoft",
+    "domain": "microsoft.com"
   },
   {
     "name": "Motivate",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "motivateco.com"
   },
   {
     "name": "Motorola",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "motorola.com"
   },
   {
     "name": "Noon",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "noonhome.com"
   },
   {
     "name": "Purina",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "purina.com"
   },
   {
     "name": "Silicon Graphics",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "sgi.com"
   },
   {
     "name": "Synapse",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "synapse.com"
   },
   {
     "name": "Tailio",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "tailio.com"
   },
   {
     "name": "UltimateTV",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "microsoft.com"
   },
   {
     "name": "WebTV",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "microsoft.com"
   },
   {
     "name": "awesomejob",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": null
   },
   {
     "name": "frogdesign",
     "logo": null,
-    "icon": null
+    "icon": null,
+    "domain": "frog.co"
   }
 ]
