@@ -104,11 +104,11 @@ const { projects, sectors, categories, tools, clients } = Astro.props;
 							class="project-row group hover:bg-primary/5 cursor-pointer border-b border-l-2 border-neutral-800/50 border-transparent transition-colors"
 							data-industry={project.data.industry}
 							data-tool={JSON.stringify(project.data.tools)}
-							data-tool-icons={JSON.stringify(project.data.toolIcons)}
-							data-team-size={project.data.teamSize}
+							data-tool-icons={JSON.stringify((project.data as any).toolIcons || [])}
+							data-team-size={(project.data as any).teamSize}
 							data-part-graph={project.data.partGraph}
 							data-status={project.data.production}
-							data-date={new Date(project.data.date).getTime()}
+							data-date={new Date(project.data.date as any).getTime()}
 							data-client={JSON.stringify([
 								...(project.data.client || []),
 								...(project.data.employer ? [project.data.employer] : []),
@@ -143,7 +143,7 @@ const { projects, sectors, categories, tools, clients } = Astro.props;
 							</td>
 							<td class="px-4 py-3 text-neutral-400">{project.data.industry}</td>
 							<td class="px-4 py-3 text-neutral-500">
-								{new Date(project.data.date).getFullYear()}
+								{new Date(project.data.date as any).getFullYear()}
 							</td>
 							<td class="px-4 py-3">
 								<span
