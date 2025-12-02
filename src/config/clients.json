@@ -48,22 +48,10 @@
     "domain": "kaleidescape.com"
   },
   {
-    "name": "Lyft",
-    "logo": null,
-    "icon": "lyft",
-    "domain": "lyft.com"
-  },
-  {
     "name": "Microsoft",
     "logo": null,
     "icon": "microsoft",
     "domain": "microsoft.com"
-  },
-  {
-    "name": "Motivate",
-    "logo": null,
-    "icon": null,
-    "domain": "motivateco.com"
   },
   {
     "name": "Motorola",
@@ -78,12 +66,6 @@
     "domain": "noonhome.com"
   },
   {
-    "name": "Purina",
-    "logo": null,
-    "icon": null,
-    "domain": "purina.com"
-  },
-  {
     "name": "Silicon Graphics",
     "logo": null,
     "icon": null,
@@ -94,12 +76,6 @@
     "logo": null,
     "icon": null,
     "domain": "synapse.com"
-  },
-  {
-    "name": "Tailio",
-    "logo": null,
-    "icon": null,
-    "domain": "tailio.com"
   },
   {
     "name": "UltimateTV",

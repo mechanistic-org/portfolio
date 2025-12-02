@@ -1,25 +1,18 @@
-## High-Performance Media Server
+import { YouTube } from '@astro-community/astro-embed-youtube';
+import ModelViewer from '@components/mdx/ModelViewer.astro';
 
-The **KServer-5000** is designed to store and serve 40TB of uncompressed 4K cinema content. It combines enterprise-grade reliability with high-end consumer aesthetics.
+## The Challenge
+> **Context:** The high-end custom integration market demanded a media server capable of storing and serving 40TB of uncompressed 4K cinema content, with an aesthetic suitable for luxury home theater racks.
 
-### Precision Machining
+Standard enterprise servers offered the performance but lacked the refinement and silence required for residential installation. We needed a device that could sit in a visible rack and look like a piece of high-end audio equipment while delivering enterprise-grade reliability. The challenge was to bridge the gap between **datacenter utility** and **luxury design**.
 
-Unlike standard servers, the K5000 faceplate is machined from a solid block of **6061-T6 Aluminum**.
+## Engineering Approach
+I focused on precision machining and advanced vibration isolation to ensure the device felt as premium as it looked.
 
-1.  **Bead Blasted:** 120-grit glass bead blast for a satin finish.
-2.  **Anodized:** Type II architectural anodizing.
-3.  **Laser Etched:** Branding is permanently etched into the metal surface.
-
-> **Tactile Feedback:** Significant engineering effort went into the drive tray latch mechanism to ensure a premium, solid feel during operation.
-
----
-
-### The Drive Array
-
-We designed a custom backplane to handle 14 hot-swappable drives with minimal vibration transfer.
-
-*   **Soft-Mount Grommets:** Every drive sits on custom silicone dampers to isolate vibration.
-*   **Airflow Management:** A custom duct directs air over the hottest drives first, ensuring a delta-T of less than 5°C across the array.
+*   **Chassis Design:** Machined the faceplate from a solid block of **6061-T6 Aluminum**, finishing it with a 120-grit glass bead blast, Type II architectural anodizing, and laser-etched branding.
+*   **Vibration Isolation:** Engineered a custom backplane and drive tray system where every drive sits on custom silicone dampers (soft-mount grommets) to isolate vibration from the chassis.
+*   **Tactile Engineering:** Tuned the drive tray latch mechanism to provide a solid, premium "click," ensuring the user feels the quality during interaction.
+*   **Airflow:** Designed a custom ducting system to direct air over the hottest drives first, ensuring uniform cooling (delta-T < 5°C) across the array with minimal noise.
 
 <div class="grid md:grid-cols-2 gap-8 my-12 items-center">
   <div class="rounded-xl overflow-hidden border border-neutral-800 shadow-2xl">
@@ -31,15 +24,19 @@ We designed a custom backplane to handle 14 hot-swappable drives with minimal vi
   <div>
     <h4 class="text-lg font-bold text-white mb-2">Specs</h4>
     <ul class="space-y-2 text-sm text-neutral-300">
-      <li>• <strong>Material:</strong> 6061-T6 Al + SECC Steel</li>
-      <li>• <strong>Capacity:</strong> 88TB Raw</li>
-      <li>• <strong>Weight:</strong> 45 lbs (Unloaded)</li>
+      <li><strong>Material:</strong> 6061-T6 Al + SECC Steel</li>
+      <li><strong>Capacity:</strong> 88TB Raw</li>
+      <li><strong>Weight:</strong> 45 lbs (Unloaded)</li>
     </ul>
   </div>
 </div>
 
-### Why It Matters
+## Impact
+The KServer-5000 became the benchmark for luxury media servers, proving that high-performance IT equipment can be beautiful.
 
-In the high-end custom integration market, build quality is paramount. The K5000 delivers server-grade performance with a level of finish suitable for a luxury home theater rack.
+*   **Performance:** Delivers sustained 4K throughput with zero dropped frames.
+*   **Acoustics:** Operates silently enough for in-room installation.
+*   **Perception:** Praised by integrators for its build quality, often compared to high-end Swiss audio gear.
 
+### Project Artifacts
 <ModelViewer src="{{MODEL_URL}}" alt="KServer Chassis" />

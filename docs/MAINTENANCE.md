@@ -6,17 +6,23 @@ Internal documentation for maintaining and updating the portfolio site.
 
 ### Priority Order (Ingestion Script)
 1.  **Hardcoded Map:** Checks `CLIENT_ICON_MAP` in `ingest_data.py` for a specific icon slug.
-2.  **Staging Logo:** Checks `R2_STAGING/_site/logos/` for `{clientname}.svg` or `.png`.
-3.  **Text:** Fallback if no logo is found.
+2.  **Clearbit API:** Uses the domain from `CLIENT_DOMAIN_MAP` to fetch the logo from Clearbit (`logo.clearbit.com/{domain}`).
+3.  **Staging Logo:** Checks `R2_STAGING/_site/logos/` for `{clientname}.svg` or `.png`.
+4.  **Text:** Fallback if no logo is found.
 
 ### Workflow for Missing Logos
 **Method A (Automated - Recommended):**
+1.  Check `ingest_data.py` and add the client's domain to `CLIENT_DOMAIN_MAP`.
+2.  Run `python ingest_data.py`.
+3.  The script will attempt to fetch the logo from Clearbit.
+
+**Method B (Manual - Staging):**
 1.  Find a PNG/SVG of the logo.
 2.  Rename it to match the client name (e.g., `clientname.svg`).
 3.  Drop it into `R2_STAGING/_site/logos/`.
 4.  Run `python ingest_data.py`.
 
-**Method B (Manual - Temporary):**
+**Method C (Manual - Override):**
 > [!WARNING]
 > `src/config/clients.json` is overwritten by the ingestion script. Manual changes here will be lost on the next ingestion run unless you skip that step.
 
@@ -27,6 +33,8 @@ Internal documentation for maintaining and updating the portfolio site.
 The marquee on the Colophon page displays the tech stack.
 
 *   **Location:** `src/pages/colophon.astro`
+*   **Component:** Uses the shared `Marquee.tsx` component.
+*   **Layout:** Must be placed **outside** the `site-container` div to achieve full-width display.
 *   **Logic:** The `marqueeTools` array defines the items.
 *   **Icons:** Uses [Simple Icons](https://simpleicons.org/). The `slugMap` object maps tool names to Simple Icons slugs (e.g., "Google Gemini" -> "googlegemini").
 *   **To Update:** Edit `src/pages/colophon.astro` directly. Add new tools to the `tools` array and update `slugMap`/`linkMap` if necessary.
@@ -40,12 +48,31 @@ The core engine of the site is `ingest_data.py`.
 *   **Outputs:**
     *   `src/config/*.json` (Site data, clients, colors, specs).
     *   `src/content/projects/*.mdx` (Project pages).
+    *   `src/content/projects/*.mdx` (Project pages).
+    *   **Manual Content:** Injects `data_source/manual_content/{slug}.md` into the MDX body if found.
     *   `public/assets/r2/` (Synced assets).
 
-### Running the Script
+### Cloud Asset Sync
+To manage large assets (images, 3D models, PDFs), we use Cloudflare R2.
+*   **Source:** `../quantum-assets/R2_STAGING/{slug}/` (Sibling Directory - Recommended) or `R2_STAGING/{slug}/` (Local)
+*   **Destination:** `https://assets.eriknorris.com/{slug}/` (Remote)
+*   **Command:** `python ingest_data.py` (Auto-runs sync)
+
+**Prerequisites:**
+1.  Ensure you are logged in: `npx wrangler login`
+2.  Ensure `scripts/sync_r2.py` has the correct `BUCKET_NAME`.
+
+### Running the Ingestion
 ```bash
 python ingest_data.py
 ```
+
+### Scaffolding New Content
+To automatically generate placeholder markdown files for projects that don't have them:
+```bash
+python ingest_data.py --scaffold
+```
+This creates `{slug}.md` files in `data_source/manual_content/` with a standard "Challenge/Approach/Impact" template.
 
 ## 4. Project Detail Pages
 Project pages are generated from MDX files in `src/content/projects/`.
@@ -56,12 +83,140 @@ Project pages are generated from MDX files in `src/content/projects/`.
 
 ### Adding Images & Videos
 *   **Hero Image:** Name a file `hero.jpg` (or png/webp) in `R2_STAGING/{project-slug}/`.
-*   **Gallery:** Any other images in that folder are added to the gallery.
+*   **Gallery:** Any other image file in that folder (that isn't `hero.png` or a chart) is automatically ingested into the Project Gallery.
 *   **3D Models:** Add a `.glb` file in the folder. It will be auto-detected.
 *   **Videos:** Currently, the script inserts a placeholder YouTube ID. You must manually edit the generated `.mdx` file or update the script to map video IDs from a CSV column.
+
+### Troubleshooting Charts
+If a chart isn't showing up:
+1.  **Check Data:** Ensure `Stats.csv` has non-zero values for Plastic/Metal/PCB for that project.
+2.  **Check Generation:** Run `python ingest_data.py` and watch for errors.
+3.  **Check Output:** Verify `public/assets/r2/{slug}/part-graph.svg` exists.
 
 ## 5. Maintenance & Enhancements
 To keep this site healthy:
 *   **Regularly:** Run ingestion script after updating Google Sheets.
 *   **Check:** `src/config/clients.json` for missing logos (null values).
 *   **Backup:** Ensure `data_source/` CSVs are committed or backed up.
+
+## 6. Debug Mode
+The site includes a built-in "Wireframe Mode" for visual debugging.
+
+*   **Activation:** Scroll to the footer and click the **"DEBUG [ OFF ]"** button.
+*   **Features:**
+    *   **Cyan Outlines:** Shows element boundaries.
+    *   **Magenta Outlines:** Shows layout containers (`.site-container`).
+    *   **Grayscale/Yellow Images:** Checks image contrast and focus.
+*   **Persistence:** The state is saved in `localStorage`, so it survives page reloads.
+
+## 7. Managing Site Status
+The site features a global status badge (e.g., "UNDER CONSTRUCTION") configured in `src/config/siteData.json.ts`.
+
+### Configuration
+Edit the `status` object in `siteData`:
+
+```typescript
+status: {
+    type: "under-construction", // Options: "production" | "under-construction" | "maintenance"
+    text: "UNDER CONSTRUCTION", // Optional override text
+},
+```
+
+### Modes
+*   **`production`**: Badge is hidden. Use this for live launches.
+*   **`under-construction`**:
+    *   **Local:** Shows `[ LOCAL DEV ]`.
+    *   **Deployed:** Shows `[ UNDER CONSTRUCTION: <SHA> ]`.
+*   **`maintenance`**: Shows `[ MAINTENANCE ]`.
+
+## 8. Project Directory Maintenance
+*   **Deep Linking:** You can link to a pre-filtered view using URL parameters: `https://eriknorris.com/projects?client=Google`.
+
+## 8. Troubleshooting
+
+### Build Issues
+*   **Error:** `Cannot apply unknown utility class 'text-3xl'` (or similar) inside an Astro component's `<style>` block.
+    *   **Cause:** Tailwind v4 styles are isolated. Astro's scoped `<style>` blocks do not inherit the global Tailwind context automatically.
+    *   **Fix:** Add the `@reference` directive to the top of the style block to link it to the global CSS configuration.
+        ```css
+        <style>
+          @reference "../../styles/global.css";
+          /* ... your styles ... */
+        </style>
+        ```
+
+*   **Error:** `Could not resolve "virtual:keystatic-config"`
+    *   **Cause:** The Keystatic integration is initializing before other required plugins.
+    *   **Fix:** Move `keystatic()` to the very end of the `integrations` array in `astro.config.mjs`.
+
+### Runtime Issues
+*   **Error:** `Uncaught SyntaxError: ... does not provide an export named 'AXObjectRoles'`
+    *   **Cause:** Vite is incorrectly optimizing the `axobject-query` dependency (used by `eslint-plugin-jsx-a11y`).
+    *   **Fix:** Ensure `axobject-query` is in the `optimizeDeps.exclude` list in `astro.config.mjs`.
+
+### TypeScript Errors in Content Collections
+*   **Symptom:** `Property '...' does not exist on type '...'` or `No overload matches this call` for `Date` constructors.
+*   **Cause:** Astro's generated content collection types might be out of sync, or strict TypeScript checks are flagging optional/complex types.
+*   **Fix:**
+    1.  Run `npx astro sync` to regenerate types.
+    2.  If errors persist for `Date` fields, cast them: `new Date(project.data.date as any)`.
+    3.  For missing optional properties (e.g., `toolIcons`), use type assertion: `(project.data as any).toolIcons`.
+
+### Blank Project Pages
+*   **Symptom:** Clicking a project leads to a blank page or raw HTML attributes.
+*   **Cause:** The `Layout` component in Astro templates might be self-closing (`<Layout ... />`) instead of wrapping content (`<Layout ...>...</Layout>`).
+*   **Fix:** Ensure the `Layout` component properly wraps the page content.
+
+### MDX Compilation Errors
+*   **Error:** `Unexpected character 0 (U+0030) before name` or similar parsing errors.
+*   **Cause 1 (Numeric Slugs):** A project slug starts with a number (e.g., `002-rack`). MDX compiles content into JavaScript, and identifiers cannot start with digits.
+*   **Fix 1:** Rename the project in `Main.csv` (or use the `Slug Name` column) to start with a letter (e.g., `rack-002`).
+*   **Cause 2 (Invalid Tags):** Markdown content contains text like `<0.5%`. MDX interprets `<` followed by a number/letter as an opening HTML tag.
+*   **Fix 2:** Escape the less-than sign: `&lt;0.5%`.
+
+### Visible Grid Not Showing
+*   **Symptom:** The background is solid color; no grid lines are visible.
+*   **Cause:** The `<body>` element likely has a background color class (e.g., `bg-white` or `bg-neutral-950`) that is painting over the `<html>` element's grid pattern.
+*   **Fix:** Ensure `BaseLayout.astro` does NOT apply background color classes to the `<body>` tag. It should be transparent.
+
+## 9. Writing Manual Content
+When creating deep-dive content in `data_source/manual_content/{slug}.md`, follow the **Narrative STAR** framework.
+
+### Template
+```markdown
+import { YouTube } from '@astro-community/astro-embed-youtube';
+import ModelViewer from '@components/mdx/ModelViewer.astro';
+
+## The Challenge
+> **Context:** [Brief 1-sentence context setting the scene]
+
+[Narrative description of the problem, constraints, and the "Task". Focus on the "Why".]
+
+## Engineering Approach
+[The "Action" section. Describe the specific steps, design decisions, and analysis.]
+
+*   **[Key Action/Feature]:** [Detail]
+*   **[Key Action/Feature]:** [Detail]
+
+## Impact
+[The "Result" section. Quantifiable outcomes, awards, and legacy.]
+
+### Project Artifacts
+{{MODEL_URL}}
+```
+
+## 10. Context Tools & AI Workflows
+We use specific prompts to maintain context across AI sessions.
+
+*   **Onboarding:** Copy `docs/ONBOARDING_PROMPT.md` to start a session.
+*   **Mining:** Copy `docs/CONVERSATION_MINER_PROMPT.md` to end a session and extract value.
+*   **Branding:** Use `docs/BRANDING_PROMPT.md` when working on visual design, CSS, or "Voice & Tone" updates.
+
+## 11. Living Style Guide
+The page at `/about/elements` is the source of truth for our visual system.
+
+*   **Source:** `src/data/otherPages/elements/index.mdx`
+*   **Workflow:** When creating a new UI component, **MUST** add an example to this file to verify it renders correctly in a prose context.
+*   **Troubleshooting:**
+    *   **Issue:** Components not rendering in MDX.
+    *   **Fix:** Ensure the component is imported at the top of the MDX file (e.g., `import Chip from '@components/dls/Chip.astro';`).

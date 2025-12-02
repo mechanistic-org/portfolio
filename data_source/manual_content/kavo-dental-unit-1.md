@@ -1,26 +1,17 @@
-## Precision Medical Engineering
+import { YouTube } from '@astro-community/astro-embed-youtube';
+import ModelViewer from '@components/mdx/ModelViewer.astro';
 
-The **KaVo Dental Unit** represents the pinnacle of medical ergonomics and engineering. This project focused on integrating complex systems into a user-friendly, hygienic interface.
+## The Challenge
+> **Context:** Modern dental clinics require equipment that integrates complex utilities (water, air, power, fiber optics) into an ergonomic, hygienic interface that puts patients at ease.
 
-We faced the challenge of fitting water lines, air lines, high-voltage power, and fiber optics into an articulating arm that moves effortlessly.
+The primary goal was to design a **"Zero-Gravity" articulating arm** that could support a heavy instrument tray while moving effortlessly. We had to achieve this precise mechanical balance without compromising the strict hygiene standards of a medical environment, which meant eliminating crevices and using materials resistant to harsh disinfection protocols.
 
-### The Articulating Arm
+## Engineering Approach
+We engineered a precision mechanical balancing system wrapped in advanced materials to create a seamless user experience.
 
-The "Zero-Gravity" feel is achieved through precise mechanical balancing.
-
-*   **Gas Springs:** Custom-tuned gas struts counterbalance the weight of the instrument tray.
-*   **Friction Brakes:** A pneumatic brake system locks the arm in place instantly when the foot pedal is released.
-
-> **Engineering Challenge:** "The mechanism required fine-tuning the friction coefficient to allow for fingertip control while preventing drift. This involved extensive prototyping and testing."
-
----
-
-### Hygiene & Materials
-
-In a medical environment, sterilization is critical.
-
-1.  **UV-Stable Plastics:** We used a special ASA polymer that resists yellowing under harsh UV disinfection lights.
-2.  **Seamless Integration:** The design minimizes gaps and crevices to prevent bacterial accumulation.
+*   **Zero-Gravity Mechanism:** Implemented custom-tuned gas springs to counterbalance the tray weight, coupled with a pneumatic brake system that locks the arm instantly when the foot pedal is released.
+*   **Friction Tuning:** Conducted extensive prototyping to dial in the friction coefficient of the joints, ensuring the arm stays exactly where placed without "drifting" or requiring excessive force to move.
+*   **Material Science:** Selected a specialized ASA polymer for the housing that resists yellowing under UV light and formulated a seamless injection molding process to eliminate crevices where bacteria could hide.
 
 <div class="my-12 border border-neutral-800 rounded-xl overflow-hidden shadow-2xl">
    <div class="bg-neutral-900 h-64 flex items-center justify-center text-neutral-500">
@@ -28,8 +19,12 @@ In a medical environment, sterilization is critical.
     </div>
 </div>
 
-### The Outcome
+## Impact
+The unit set a new standard for medical ergonomics and hygiene, significantly reducing dentist fatigue during long procedures.
 
-The unit won the **Red Dot Design Award** and is installed in clinics worldwide, setting a standard for ergonomic dental equipment.
+*   **Recognition:** Won the prestigious **Red Dot Design Award**.
+*   **Adoption:** Installed in premium dental clinics worldwide.
+*   **User Experience:** Praised for its effortless positioning and intuitive control.
 
+### Project Artifacts
 <ModelViewer src="{{MODEL_URL}}" alt="Dental Unit" />

@@ -3,27 +3,95 @@
 ## 🏗️ System Overview
 *   **Framework:** Astro v5 (Static Site Generation)
 *   **Styling:** Tailwind v4
+    *   **Theme:** Brutalist Typography (Inter headers + JetBrains Mono body).
+    *   **Visuals:** Technical Grid (radial gradient) + Transparent Navigation.
+    *   **Prose Overrides:** We override default `prose` classes in `src/pages/projects/[...slug].astro` to enforce the brand identity:
+        *   **Font Stack:** Forces `font-mono` (JetBrains Mono) for body text and `font-sans` (Inter) for headers.
+        *   **Custom CSS:** Specific overrides for `blockquote`, `a`, and `h2` elements to match the Brutalist design tokens (hard edges, specific colors).
+    *   **Markdown Content:** We use a dedicated `markdown-content` utility class (defined in `src/styles/markdown-content.css`) to enforce DLS typography within MDX files.
+        *   **Headers:** Explicitly forced to `var(--font-header)` (Inter) to prevent falling back to the mono body font.
+        *   **Usage:** Must be applied to the wrapper div of any MDX content render (e.g., `<div class="markdown-content"><Content /></div>`).
 *   **Interactivity:** React (for Charts), Vanilla JS (for 3D & UI)
 *   **Data Source:** CSV Files + Markdown (Hybrid)
 *   **Asset Host:** Cloudflare R2 (via custom domain `assets.eriknorris.com`)
+*   **Visualization:** Build-time Python/Matplotlib (SVG)
+*   **Meta-Architecture:** The site includes a "Context Lifecycle" system (`ONBOARDING` + `MINER` prompts) that allows the AI to maintain state and self-optimize across sessions.
+
+## 🎨 Visualization Engine
+We shifted from client-side React/Recharts to a **Zero-Runtime** approach.
+*   **Why:** Performance (LCP), stability (no hydration errors), and a "technical datasheet" aesthetic.
+*   **How:** `ingest_data.py` uses `matplotlib` to generate SVGs (`skill-graph.svg`, `part-graph.svg`) during the build.
+*   **Result:** Charts are just `<img>` tags. No JavaScript required to render.
+
+## ⚡ Global Effects
+### Boot Sequence
+The site features a "Matrix-style" boot sequence that is **Event-Driven**.
+*   **Component:** `BootSequence.tsx` (React).
+*   **Trigger:** Listens for the custom window event `quantum:boot`.
+*   **Architecture:** Originally a forced initial-load effect, it was refactored to be **opt-in** to prevent FOUC (Flash of Unstyled Content) and improve UX. It is now triggered manually via the "RESTART" button in the footer.
+
+### Visible Grid
+*   **Concept:** A technical background grid that reinforces the "Datasheet" aesthetic.
+*   **Implementation:** CSS `background-image` using `linear-gradient` on the `html` element.
+*   **Layering:** The `body` element must have a transparent background for the grid to show through.
+*   **Theme:** Adapts via CSS variables (`--grid-color`) for Light/Dark modes.
+
+### Build Stats ("The Pulse")
+*   **Concept:** Exposing the "Ingestion Pipeline" performance in the UI.
+*   **Flow:** `ingest_data.py` measures execution time -> writes to `src/config/build.json` -> `Footer.astro` imports and displays it (e.g., `BLD: 0.45s`).
+
+## ⚙️ Build System
+### Configuration Gotchas
+*   **Keystatic Integration:** In `astro.config.mjs`, `keystatic()` **MUST** be the last item in the `integrations` array. If placed earlier, it causes `virtual:keystatic-config` resolution errors during the build.
+*   **Vite Optimization:** The `axobject-query` package (used by accessibility linters) must be excluded from Vite's optimization to prevent runtime `SyntaxError` issues in the browser (`optimizeDeps.exclude: ["axobject-query"]`).
+
+## 🌍 Environment Awareness
+The site adapts its UI based on the build environment and configuration.
+
+### Construction Badge
+*   **Component:** `ConstructionBadge.astro`
+*   **Configuration:** `src/config/siteData.json.ts` (`status.type`)
+*   **Logic:**
+    *   **Local Development:** Displays `[ LOCAL DEV ]` (Amber).
+    *   **Production (Under Construction):** Displays `[ UNDER CONSTRUCTION: <SHA> ]` (Red).
+    *   **Production (Live):** Badge is hidden.
+    *   **Maintenance:** Displays `[ MAINTENANCE ]` (Red).
+*   **Commit SHA:** Pulled from `CF_PAGES_COMMIT_SHA` (Cloudflare) or `GITHUB_SHA` (GitHub Actions).
 
 ## 🔄 Data Ingestion Pipeline
 The `ingest_data.py` script is the heart of the build process. It transforms raw CSV data into structured content for Astro.
 
 ### Workflow
-1.  **Read CSVs:** Parses `Main.csv`, `Expertise.csv`, `Stats.csv`, `Colors.csv`, and `Tenure.csv`.
+1.  **Read CSVs:** Parses `Main.csv` and auxiliary files.
+    *   **Slug Generation:** Prioritizes the `Slug Name` column if present. Fallbacks to `Name`. This allows the display title ("002 Rack") to differ from the filename (`rack-002`) to ensure valid MDX identifiers.
+    *   **Validation:** The script warns if a generated slug starts with a digit.
+2.  **Generate Charts:** Creates `skill-graph.svg` (Radar) and `part-graph.svg` (Donut) using Matplotlib.
 2.  **Smart Header Hunting:** In `Expertise.csv`, the script dynamically locates the "Project Start" header row to handle the complex matrix structure (Skills vs Projects) and extracts metadata like "Phase" and "Weight".
-3.  **Asset Discovery:** Scans `R2_STAGING/{slug}/` for local assets and maps them to their production URLs.
+3.  **Asset Discovery:** Scans for assets in the following priority:
+    1.  `R2_STAGING_PATH` (Env Var)
+    2.  `../quantum-assets/R2_STAGING` (Sibling Directory - Recommended for Dev)
+    3.  `R2_STAGING` (Local Directory - Fallback)
 4.  **Content Generation:**
     *   Generates `src/content/projects/*.mdx` files.
     *   Injects manual content from `data_source/manual_content/{slug}.md` if present.
+    *   **Empty String Fallback:** Defaults missing image/model URLs to empty strings (`""`) instead of `"None"` to prevent 404 errors.
     *   Generates `src/data/clients.json` for the Trust Wall.
+        *   **Note:** Uses `CLIENT_DOMAIN_MAP` to populate the `domain` field, enabling Clearbit API logo fetching.
+    *   **Scaffolding:** The `--scaffold` flag triggers a generation mode that creates missing markdown templates in `data_source/manual_content/`, ensuring 100% content coverage.
 
 ### R2 Asset Sync
 Assets are managed physically, not logically.
 1.  **Stage:** Place files in `R2_STAGING/{slug}/` (e.g., `hero.png`, `model.glb`).
-2.  **Sync:** Run the R2 sync script (or manual upload) to push to Cloudflare R2.
-3.  **Ingest:** Run `ingest_data.py`. It detects the assets (assuming they mirror the staging structure) and generates the correct URLs in the MDX frontmatter.
+2.  **Ingest:** Run `python ingest_data.py`.
+    *   **Auto-Sync:** The script automatically calls `sync_r2.py` to upload new assets to the Cloudflare R2 bucket.
+    *   **Link:** It generates production URLs (`https://assets.eriknorris.com/...`) in the MDX frontmatter.
+
+## 🛡️ Type Safety
+*   **Strict Typing:** Core components (`[...slug].astro`, `Seo.astro`, `BaseLayout.astro`) enforce strict TypeScript props, particularly for `ImageMetadata`.
+*   **Verification:** `npm run build` is the gold standard for verifying type correctness. The build will fail if types are mismatched.
+*   **Gotchas:**
+    *   **Content Collections:** Generated types for collections might not always sync perfectly with complex frontmatter (e.g., optional arrays like `toolIcons`). Use `as any` casting sparingly if types are stubborn but data is known to be correct.
+    *   **Dates:** Astro treats frontmatter dates as `Date` objects. Explicit casting (e.g., `project.data.date as any`) may be required when passing to the `Date` constructor to satisfy strict TS checks.
 
 ## 📊 Data Schema
 
@@ -35,10 +103,12 @@ Assets are managed physically, not logically.
 ### 2. `Main.csv` (The Identity)
 *   **Key:** `Name` (Generates the Slug).
 *   **Fields:** Title, Date, Employer, Client, Description.
+*   **Logic Shift:** "Duration" and "Status" are now calculated in Python and baked into the frontmatter (`duration`, `statusLabel`), removing logic from the Astro template.
 
 ### 3. `Stats.csv` (Hardware Metrics)
 *   **Key:** `Name`.
 *   **Metrics:** `Plastic`, `Sheetmetal`, `PCB` (Integer counts for the Hardware Dashboard).
+*   **Visualization:** Used to generate the "Part Breakdown" donut chart.
 
 ### 4. `Colors.csv` (The Palette)
 *   **Logic:** Maps Entity Name (Employer or Skill) -> Hex/RGB.
@@ -48,16 +118,33 @@ Assets are managed physically, not logically.
 *   **Logic:** Defines the timeline segments on the `/about` page.
 *   **Calculations:** Duration is computed during ingestion.
 
+### 6. Project Directory Logic
+*   **Client/Employer Merge:** The "Client" filter column combines both `employer` and `client` fields from the frontmatter to create a comprehensive entity list.
+*   **Deep Linking:** The Trust Wall uses URL parameters (e.g., `/projects?client=Google`) to pre-filter the directory.
+*   **Interaction Model:** The "Link" column has been removed. The entire project row is clickable via `onclick` attributes for better usability.
+
+### 7. Filter Menu Logic
+*   **Hierarchical Filtering:** Selecting a "Collection" (Industry) dynamically filters the available "Category" options to show only relevant choices.
+*   **Preview State:** Hovering over a filter option triggers a "Preview" mode, updating the project list instantly.
+*   **Revert on Mouseleave:** If the user hovers but doesn't click, the list reverts to the previously committed state when the mouse leaves the menu container.
+
 ## 🧩 Key Components
 
 ### Pages
 *   **`[...slug].astro`:** Master project template. Renders the layout, charts, and 3D viewer.
+    *   **Note:** `getStaticPaths` uses `entry.id` (filename) instead of `entry.slug` (frontmatter) to ensure routing stability with Astro Content Collections.
+*   **`src/pages/about/elements.astro`:** Renders `src/data/otherPages/elements/index.mdx` as a "Living Style Guide" to verify DLS implementation (Typography, Colors, Components).
 *   **`docs/MAINTENANCE.md` (User Manual):** Documentation for site maintenance, including the Trust Wall logic and Ingestion Script usage.
 *   **`colophon.astro`:** "How it was Built" page with architecture breakdown and tech stack marquee.
 
 ### UI Elements
 *   **`SkillRadar.tsx`:** Client-side React component using Recharts for the "Skill Fingerprint".
-*   **`ClientGrid.astro`:** Infinite marquee "Trust Wall" on the homepage.
-*   **`ProjectDirectory.astro`:** Interactive project list with filtering, sorting, and hover previews (Spotlight effect).
+*   **`ProjectGallery.tsx`:** React component using `yet-another-react-lightbox` and `react-masonry-css` for displaying project images.
+*   **`Marquee.tsx`:** Shared React component used for both the Homepage Client Grid and Colophon Tech Stack. Supports `grayscale` and `speed` props.
+*   **`ClientGrid.astro`:** Wrapper for the Marquee component on the homepage.
+*   **`ProjectDirectory.astro`:** Interactive project list with filtering, sorting, hover previews (Spotlight effect), and deep linking.
+*   **`ProjectStrip.tsx`:** Horizontal scrollable project strip. **Layout Note:** Must be placed outside `site-container` in `index.astro` to achieve full-width display, similar to the Trust Wall.
+*   **`ProjectModal.tsx`:** "Technical Datasheet" modal with split-view layout and navigation (Next/Prev).
+*   **`FilterPanel.astro`:** Persistent sidebar filter for the Project Directory.
 *   **`ConstructionBadge.astro`:** Status indicator (Local/Construction/Production) showing the current commit SHA.
 *   **`<model-viewer>`:** Google's 3D viewer component. Defaults to "Neil Armstrong" if no custom GLB is found.

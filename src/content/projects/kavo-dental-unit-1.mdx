@@ -5,7 +5,7 @@ date: "7/1/1997"
 endDate: "10/1/1997"
 employer: "Mechanistic (Consulting)"
 client: ["frogdesign"]
-industry: "Medical Devices"
+industry: "Other"
 category: "Medical Equipment"
 tools: ["ProEngineer"]
 toolIcons: ["ptc"]
@@ -13,14 +13,14 @@ production: "Mass Production"
 tags: ["CAD Modeling", "Prototyping", "Architecture", "Detailed Design", "Prototype Iteration", "Mechanical Testing", "Documentation", "DFM", "Validation", "Tooling Design", "Continuous Improvement", "Requirements Analysis", "Concept Validation", "ID Capture", "DFx", "Supply Chain", "Manufacturing Support", "QC", "Value Engineering", "Regulatory", "Feasibility Assessment", "Material Selection", "Simulation & Analysis", "Tolerance Analysis", "Strategy", "Thermal Analysis", "Vibration and Acoustic Testing", "FMEA", "IP", "Sustainability"]
 skillData: [{"name": "CAD Modeling", "value": 27.6}, {"name": "Prototyping", "value": 4.6}, {"name": "Architecture", "value": 4.6}, {"name": "Detailed Design", "value": 4.6}, {"name": "Prototype Iteration", "value": 4.6}, {"name": "Mechanical Testing", "value": 4.6}]
 additionalSkills: ["Communication Skills", "Problem Solving", "Design Planning", "Technical Communication", "Prototyping", "Design Research", "Decision Making", "Product Testing", "Project Coordination", "Product Conceptualization"]
-stats: {"plastic": 84, "metal": 27, "pcb": 87}
+stats: {"plastic": 76, "metal": 78, "pcb": 38}
 teamSize: "Unknown"
 gallery: []
 documents: []
 links: [{"name": "frogdesign Website", "url": "https://frog.co"}]
 heroImage: "https://assets.eriknorris.com/kavo-dental-unit-1/hero.png" 
 draft: false
-description: "KaVo Dental Unit 1 - Medical Devices project."
+description: "KaVo Dental Unit 1 - Other project."
 duration: "Active"
 statusLabel: "Completed"
 skillGraph: "https://assets.eriknorris.com/kavo-dental-unit-1/skill-graph.svg"
@@ -29,29 +29,17 @@ partGraph: "https://assets.eriknorris.com/kavo-dental-unit-1/part-graph.svg"
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
-## Precision Medical Engineering
+## The Challenge
+> **Context:** Modern dental clinics require equipment that integrates complex utilities (water, air, power, fiber optics) into an ergonomic, hygienic interface that puts patients at ease.
 
-The **KaVo Dental Unit** represents the pinnacle of medical ergonomics and engineering. This project focused on integrating complex systems into a user-friendly, hygienic interface.
+The primary goal was to design a **"Zero-Gravity" articulating arm** that could support a heavy instrument tray while moving effortlessly. We had to achieve this precise mechanical balance without compromising the strict hygiene standards of a medical environment, which meant eliminating crevices and using materials resistant to harsh disinfection protocols.
 
-We faced the challenge of fitting water lines, air lines, high-voltage power, and fiber optics into an articulating arm that moves effortlessly.
+## Engineering Approach
+We engineered a precision mechanical balancing system wrapped in advanced materials to create a seamless user experience.
 
-### The Articulating Arm
-
-The "Zero-Gravity" feel is achieved through precise mechanical balancing.
-
-*   **Gas Springs:** Custom-tuned gas struts counterbalance the weight of the instrument tray.
-*   **Friction Brakes:** A pneumatic brake system locks the arm in place instantly when the foot pedal is released.
-
-> **Engineering Challenge:** "The mechanism required fine-tuning the friction coefficient to allow for fingertip control while preventing drift. This involved extensive prototyping and testing."
-
----
-
-### Hygiene & Materials
-
-In a medical environment, sterilization is critical.
-
-1.  **UV-Stable Plastics:** We used a special ASA polymer that resists yellowing under harsh UV disinfection lights.
-2.  **Seamless Integration:** The design minimizes gaps and crevices to prevent bacterial accumulation.
+*   **Zero-Gravity Mechanism:** Implemented custom-tuned gas springs to counterbalance the tray weight, coupled with a pneumatic brake system that locks the arm instantly when the foot pedal is released.
+*   **Friction Tuning:** Conducted extensive prototyping to dial in the friction coefficient of the joints, ensuring the arm stays exactly where placed without "drifting" or requiring excessive force to move.
+*   **Material Science:** Selected a specialized ASA polymer for the housing that resists yellowing under UV light and formulated a seamless injection molding process to eliminate crevices where bacteria could hide.
 
 <div class="my-12 border border-neutral-800 rounded-xl overflow-hidden shadow-2xl">
    <div class="bg-neutral-900 h-64 flex items-center justify-center text-neutral-500">
@@ -59,9 +47,13 @@ In a medical environment, sterilization is critical.
     </div>
 </div>
 
-### The Outcome
+## Impact
+The unit set a new standard for medical ergonomics and hygiene, significantly reducing dentist fatigue during long procedures.
 
-The unit won the **Red Dot Design Award** and is installed in clinics worldwide, setting a standard for ergonomic dental equipment.
+*   **Recognition:** Won the prestigious **Red Dot Design Award**.
+*   **Adoption:** Installed in premium dental clinics worldwide.
+*   **User Experience:** Praised for its effortless positioning and intuitive control.
 
+### Project Artifacts
 <ModelViewer src="" alt="Dental Unit" />
 

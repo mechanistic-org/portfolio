@@ -8,7 +8,9 @@ import math
 import random
 from datetime import datetime
 import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import numpy as np
+import time
 
 # --- CONFIGURATION ---
 SOURCE_DIR = "data_source"
@@ -276,21 +278,21 @@ def process_tenure():
 
 def process_projects():
     print("🚀 Processing Projects...")
-    main = read_csv_smart(find_file("Main.csv"), "Name", required_headers={"Name", "Employer"})
+    main = read_csv_smart(find_file("Main.csv"), "Slug Name", required_headers={"Slug Name", "Employer"})
     print(f"DEBUG: Read {len(main)} rows from Main.csv")
     
     tax = {r.get('Project Name') or r.get('Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Project Name")}
     if not tax: tax = {r.get('Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Name")}
     
-    phases = {r['Name']: r for r in read_csv_smart(find_file("Phase.csv"))}
-    stats = {r['Name']: r for r in read_csv_smart(find_file("Stats.csv") or find_file("Part count.csv"))}
+    phases = {r.get('Slug Name') or r.get('Name'): r for r in read_csv_smart(find_file("Phase.csv"))}
+    stats = {r.get('Slug Name') or r.get('Name'): r for r in read_csv_smart(find_file("Stats.csv") or find_file("Part count.csv"))}
     
     # New Flat Skill Files
     expertise_rows = read_csv_smart(find_file("Expertise.csv"), "Project Start")
-    expertise_map = {r.get('Name'): r for r in expertise_rows}
+    expertise_map = {r.get('Slug Name') or r.get('Name'): r for r in expertise_rows}
     
     skills_rows = read_csv_smart(find_file("Skills.csv"), "Project Start")
-    skills_map = {r.get('Name'): r for r in skills_rows}
+    skills_map = {r.get('Slug Name') or r.get('Name'): r for r in skills_rows}
 
     dummy_files = ["tech-1.jpg", "tech-2.jpg", "blueprint.jpg", "abstract.jpg"]
     all_clients = set()
@@ -541,6 +543,9 @@ def process_projects():
         if not name: continue
         
         slug = name.lower().strip().replace(' ', '-').replace('/', '-')
+        if slug and slug[0].isdigit():
+            print(f"⚠️  WARNING: Slug '{slug}' starts with a number. This will cause MDX errors. Please rename '{name}' in Main.csv.")
+        
         title = row.get("Descriptive Name") or name
         
         employer = row.get("Employer", "")
@@ -798,6 +803,65 @@ partGraph: "{part_graph_url}"
     with open(os.path.join(OUTPUT_DATA_DIR, "clients.json"), "w") as f:
         json.dump(client_data, f, indent=2)
 
+def scaffold_content():
+    """
+    Scaffold missing manual content files for all projects in Main.csv.
+    """
+    print("🏗️  Scaffolding Content...")
+    main = read_csv_smart(find_file("Main.csv"), "Name", required_headers={"Name"})
+    
+    count = 0
+    for row in main:
+        name = row.get("Slug Name") or row.get("Name")
+        if not name: continue
+        
+        slug = name.lower().strip().replace(' ', '-').replace('/', '-').strip('.')
+        title = row.get("Descriptive Name") or name
+        
+        # Check if file exists
+        filepath = os.path.join(SOURCE_DIR, "manual_content", f"{slug}.md")
+        if not os.path.exists(filepath):
+            print(f"    + Creating {slug}.md")
+            
+            template = f"""import {{ YouTube }} from '@astro-community/astro-embed-youtube';
+import ModelViewer from '@components/mdx/ModelViewer.astro';
+
+## The Challenge
+Describe the core problem or opportunity. What were the technical constraints? What was the business goal?
+
+## Engineering Approach
+How did you solve it?
+*   **Key Decision 1:** ...
+*   **Key Decision 2:** ...
+
+## Impact
+What was the result? (Metrics, patents, launch success, etc.)
+
+### Project Artifacts
+<div class="my-8">
+  <YouTube id="dQw4w9WgXcQ" />
+</div>
+{{{{MODEL_URL}}}}
+"""
+            with open(filepath, "w", encoding="utf-8") as f:
+                f.write(template)
+            count += 1
+            
+    print(f"✅ Scaffolding Complete. Created {count} new files.")
+
+if __name__ == "__main__":
+    import sys
+    if "--scaffold" in sys.argv:
+        scaffold_content()
+    else:
+        # Normal Ingestion
+        process_colors()
+        process_specs()
+        process_tenure()
+        process_projects()
+        ensure_dummy_assets()
+
+
 def sync_site_assets():
     """Sync _site directory from STAGING to LOCAL_R2_DIR"""
     if R2_DOMAIN.startswith("http"):
@@ -825,6 +889,7 @@ def sync_site_assets():
                 shutil.copytree(s, d)
 
 if __name__ == "__main__":
+    start_time = time.time()
     ensure_dummy_assets()
     sync_site_assets()
     process_colors()
@@ -843,3 +908,10 @@ if __name__ == "__main__":
         print(f"\n❌ Auto-sync failed: {e}")
 
     print("\n🚀 INGESTION COMPLETE.")
+
+    end_time = time.time()
+    duration = end_time - start_time
+    print(f"⏱️  Build Time: {duration:.2f}s")
+    
+    with open(os.path.join(OUTPUT_DATA_DIR, "build.json"), "w") as f:
+        json.dump({"duration": f"{duration:.2f}s", "timestamp": datetime.now().isoformat()}, f, indent=2)

@@ -1,90 +1,90 @@
-Name,Employer,Plastic,Sheetmetal,PCB,PCBA
-dreamjob,awesomejob,4,73,98,13
-Freelance,Mechanistic,15,16,32,46
-Makeline,Hyphen,21,83,28,11
-Dispensers,Hyphen,57,42,68,73
-Backsplash,Hyphen,50,67,71,52
-Portion Cup,Hyphen,90,10,8,4
-Pet Scale,Mechanistic,94,30,84,86
-electronic battery lock,Mechanistic,15,31,18,80
-IOT module,Mechanistic,67,89,78,45
-bay wheels,Mechanistic,36,97,100,93
-Switches,Noon,4,6,88,65
-Extension Switches,Noon,94,7,49,4
-Room Director,Noon,36,93,1,65
-Wall Plates,Noon,39,24,60,73
-Base,Noon,6,79,97,52
-Glyph 2,Avegant,61,53,9,70
-Glyph,Avegant,42,8,72,68
-BFD,Mechanistic,30,96,2,21
-Strato,Kaleidescape,98,34,4,23
-Cinema One,Kaleidescape,42,28,88,82
-M700,Kaleidescape,98,99,95,89
-DV700,Kaleidescape,10,25,44,100
-Disc Cartridges,Kaleidescape,34,73,26,57
-K-Remote,Kaleidescape,71,1,99,95
-Weemote,Kaleidescape,35,41,61,71
-M500,Kaleidescape,72,50,77,83
-M300,Kaleidescape,58,87,94,88
-KSERVER-1500,Kaleidescape,40,52,92,16
-KVAULT-10,Kaleidescape,76,61,59,88
-Jewel,Kaleidescape,59,77,100,32
-KSYSTEM-120,Kaleidescape,67,63,69,29
-KSERVER-5000,Kaleidescape,50,71,86,91
-Speed Reader,Kaleidescape,6,83,49,22
-KSERVER-1500,Kaleidescape,62,33,3,63
-KPLAYER-300,Kaleidescape,30,2,71,22
-KPLAYER-6000,Kaleidescape,59,49,12,20
-KPLAYER-5000,Kaleidescape,66,20,28,30
-KPLAYER-2500,Kaleidescape,69,63,82,76
-KSERVER-2500,Kaleidescape,29,14,88,58
-Mbox 2 Micro,Digidesign,68,79,39,76
-003 Rack,Digidesign,55,88,59,25
-Mbox 2 Mini,Digidesign,75,39,73,30
-Mbox 2 Pro,Digidesign,64,65,52,39
-003,Digidesign,31,24,8,56
-Control 24,Digidesign,86,11,28,96
-Mbox 2,Digidesign,28,16,64,2
-Profile,Digidesign,62,39,89,9
-D-Show,Digidesign,79,82,27,89
-D-Control,Digidesign,43,3,8,72
-D-Command,Digidesign,18,49,98,76
-Pro Control Jr.,Digidesign,64,6,33,63
-002 Rack,Digidesign,11,80,39,23
-Mbox,Digidesign,30,79,58,49
-Xbox,Mechanistic,10,56,90,93
-Receiver 5,Mechanistic,5,84,92,68
-Receiver 4,Mechanistic,41,34,84,64
-Receiver 3,Mechanistic,43,74,43,77
-Receiver 2,Mechanistic,12,7,32,56
-Mercury LC,Mechanistic,12,89,58,30
-usb box,Mechanistic,27,12,65,98
-Remotes,Mechanistic,92,17,86,50
-Receiver 1,Mechanistic,97,47,76,60
-Node,Mechanistic,27,10,25,96
-Media Nodes,Mechanistic,68,59,33,45
-MP6000 MP3 Player,Mechanistic,19,77,55,81
-Keyboard,Mechanistic,2,45,40,71
-LapTV,Mechanistic,28,38,57,30
-Remote,Mechanistic,93,16,3,94
-Netscreen-500,Mechanistic,81,82,86,38
-320 540,Mechanistic,37,14,8,85
-HP Jornada,Mechanistic,81,15,29,27
-DVDO Player,frogdesign,27,50,15,34
-Vadem Clio,frogdesign,63,36,93,55
-KaVo Dental Unit 2,frogdesign,63,95,63,57
-Acer Phone,frogdesign,41,90,49,40
-KaVo Dental Unit 1,Mechanistic,84,27,87,84
-Acer subwoofer,Mechanistic,65,66,51,1
-Newscorp set-top box,Mechanistic,25,10,97,62
-Packard Bell Convertible,Mechanistic,76,5,78,44
-Acer Aspire,Mechanistic,75,11,75,16
-Fissler BBQ,Mechanistic,41,33,56,67
-Sunbeam window toaster,Mechanistic,24,97,59,85
-Frantic Frames,Mechanistic,96,56,7,85
-Indy,Silicon Graphics,3,34,18,21
-Indigo II,Silicon Graphics,18,35,73,13
-Indigo,Silicon Graphics,70,9,75,45
-Iris File,Silicon Graphics,97,13,33,97
-Personal IRIS,Silicon Graphics,86,5,25,22
-EPT-1000,EP Technologies,26,7,28,58
+Slug Name,Employer,Plastic,Sheetmetal,PCB,PCBA
+dreamjob,awesomejob,84,35,53,24
+Freelance,Mechanistic,80,40,79,64
+Makeline,Hyphen,12,76,70,60
+Dispensers,Hyphen,61,50,10,72
+Backsplash,Hyphen,6,11,17,62
+Portion Cup,Hyphen,24,32,22,50
+Pet Scale,Mechanistic,70,39,68,61
+electronic battery lock,Mechanistic,33,66,31,94
+IOT module,Mechanistic,91,72,67,60
+bay wheels,Mechanistic,99,69,14,50
+Switches,Noon,5,13,43,86
+Extension Switches,Noon,6,12,65,39
+Room Director,Noon,94,34,28,32
+Wall Plates,Noon,39,70,68,98
+Base,Noon,10,24,39,94
+Glyph 2,Avegant,12,66,71,26
+Glyph,Avegant,27,62,77,48
+BFD,Mechanistic,96,45,12,92
+Strato,Kaleidescape,60,86,29,1
+Cinema One,Kaleidescape,98,38,65,89
+M700,Kaleidescape,96,8,48,46
+DV700,Kaleidescape,27,37,15,53
+Disc Cartridges,Kaleidescape,55,48,50,27
+K-Remote,Kaleidescape,28,34,57,50
+Weemote,Kaleidescape,19,67,24,69
+M500,Kaleidescape,23,6,57,47
+M300,Kaleidescape,48,11,85,62
+KSERVER-1500,Kaleidescape,28,19,88,71
+KVAULT-10,Kaleidescape,73,20,7,77
+Jewel,Kaleidescape,1,57,81,86
+KSYSTEM-120,Kaleidescape,53,100,14,23
+KSERVER-5000,Kaleidescape,36,68,92,20
+Speed Reader,Kaleidescape,8,79,90,3
+KSERVER-1500,Kaleidescape,53,27,8,56
+KPLAYER-300,Kaleidescape,14,69,48,93
+KPLAYER-6000,Kaleidescape,22,25,32,25
+KPLAYER-5000,Kaleidescape,97,26,26,55
+KPLAYER-2500,Kaleidescape,51,87,37,80
+KSERVER-2500,Kaleidescape,68,2,43,49
+Mbox 2 Micro,Digidesign,40,61,98,60
+003 Rack,Digidesign,80,36,30,24
+Mbox 2 Mini,Digidesign,82,71,14,14
+Mbox 2 Pro,Digidesign,19,20,86,43
+003,Digidesign,4,24,98,81
+Control 24,Digidesign,56,7,90,19
+Mbox 2,Digidesign,21,86,10,6
+Profile,Digidesign,67,88,80,78
+D-Show,Digidesign,99,29,61,22
+D-Control,Digidesign,59,91,72,51
+D-Command,Digidesign,77,3,72,64
+Pro Control Jr.,Digidesign,76,21,72,74
+002 Rack,Digidesign,17,38,45,3
+Mbox,Digidesign,21,39,61,61
+Xbox,Mechanistic,93,26,79,20
+Receiver 5,Mechanistic,17,83,48,32
+Receiver 4,Mechanistic,57,84,52,60
+Receiver 3,Mechanistic,99,49,40,26
+Receiver 2,Mechanistic,58,76,93,50
+Mercury LC,Mechanistic,13,11,22,10
+usb box,Mechanistic,18,1,44,66
+Remotes,Mechanistic,81,49,47,4
+Receiver 1,Mechanistic,42,21,2,80
+Node,Mechanistic,47,58,43,48
+Media Nodes,Mechanistic,14,2,43,2
+MP6000 MP3 Player,Mechanistic,46,80,12,4
+Keyboard,Mechanistic,85,85,19,75
+LapTV,Mechanistic,91,61,73,37
+Remote,Mechanistic,53,23,71,21
+Netscreen-500,Mechanistic,75,8,88,69
+320 540,Mechanistic,79,33,77,85
+HP Jornada,Mechanistic,91,69,6,43
+DVDO Player,frogdesign,64,38,14,5
+Vadem Clio,frogdesign,48,33,9,91
+KaVo Dental Unit 2,frogdesign,83,56,22,29
+Acer Phone,frogdesign,57,8,6,38
+KaVo Dental Unit 1,Mechanistic,76,78,38,69
+Acer subwoofer,Mechanistic,61,94,43,17
+Newscorp set-top box,Mechanistic,96,73,29,77
+Packard Bell Convertible,Mechanistic,45,11,20,1
+Acer Aspire,Mechanistic,57,79,92,11
+Fissler BBQ,Mechanistic,28,34,74,69
+Sunbeam window toaster,Mechanistic,20,16,67,98
+Frantic Frames,Mechanistic,15,24,27,21
+Indy,Silicon Graphics,50,74,39,57
+Indigo II,Silicon Graphics,99,21,76,70
+Indigo,Silicon Graphics,70,19,68,59
+Iris File,Silicon Graphics,84,53,40,19
+Personal IRIS,Silicon Graphics,78,43,94,49
+EPT-1000,EP Technologies,52,51,99,70

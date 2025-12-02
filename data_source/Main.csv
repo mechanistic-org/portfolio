@@ -1,14 +1,14 @@
-Name,Description,Employer,Client,Title,Codename,Tools,Category,Project Start Date,Project End Date,Days,Business Days
+ Slug Name,Description,Employer,Client,Title,Codename,Tools,Category,Project Start Date,Project End Date,Days,Business Days
 dreamjob,,awesomejob,,dream title,,,Career Goal,11/23/2025,12/31/2040,5517,3941
 Freelance,,Mechanistic,,Senior Mechanical Design Engineer,,,Various,9/1/2022,11/23/2025,1179,842
 Makeline,,Hyphen,,Staff Mechanical Engineer,,Onshape,Foodservice Automation,5/1/2021,8/24/2022,480,343
 Dispensers,,Hyphen,,Staff Mechanical Engineer,Gen 2,Onshape,Foodservice Automation,12/1/2021,8/24/2022,266,191
 Backsplash,,Hyphen,,Staff Mechanical Engineer,Gen 1,Onshape,Electromechanical Assy,7/1/2021,12/31/2021,183,132
 Portion Cup,,Hyphen,,Staff Mechanical Engineer,Gen 1,Onshape,Electromechanical Assy,5/1/2021,8/15/2021,106,75
-Pet Scale,,Mechanistic,Synapse/Purina/Tailio,Senior Mechanical Engineer,Garfield,SolidWorks,Consumer Appliance,2/1/2019,3/15/2019,42,31
-electronic battery lock,,Mechanistic,Synapse/Lyft/Motivate,Senior Mechanical Engineer,halfdome,SolidWorks,Electromechanical Mechanism,1/1/2019,4/15/2019,104,75
-IOT module,,Mechanistic,Synapse/Lyft/Motivate,Senior Mechanical Engineer,Sonoma,SolidWorks,Embedded Device,11/1/2018,2/1/2019,92,67
-bay wheels,,Mechanistic,Synapse/Lyft/Motivate,Senior Mechanical Engineer,watson,SolidWorks,Micromobility,11/1/2018,5/1/2019,181,130
+Pet Scale,,Mechanistic,Synapse,Senior Mechanical Engineer,Garfield,SolidWorks,Consumer Appliance,2/1/2019,3/15/2019,42,31
+battery lock,,Mechanistic,Synapse,Senior Mechanical Engineer,halfdome,SolidWorks,Electromechanical Mechanism,1/1/2019,4/15/2019,104,75
+IOT module,,Mechanistic,Synapse,Senior Mechanical Engineer,Sonoma,SolidWorks,Embedded Device,11/1/2018,2/1/2019,92,67
+bay wheels,,Mechanistic,Synapse,Senior Mechanical Engineer,watson,SolidWorks,Micromobility,11/1/2018,5/1/2019,181,130
 Switches,,Noon,,Senior Mechanical Engineer,Sativa?,"Creo, SolidWorks",User Interface,7/1/2017,3/1/2018,243,174
 Extension Switches,,Noon,,Senior Mechanical Engineer,Elvis?,"Creo, SolidWorks",User Interface,3/1/2017,2/1/2018,337,242
 Room Director,,Noon,,Senior Mechanical Engineer,Sativa?,"Creo, SolidWorks",Smart Home Device,8/1/2017,1/1/2018,153,110
@@ -39,18 +39,18 @@ KPLAYER-5000,KPLAYER-5000 Movie Player 2,Kaleidescape,,Senior Mechanical Design 
 KPLAYER-2500,KPLAYER-2500 1U Player,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,Media Player,3/2/2008,12/2/2008,275,197
 KSERVER-2500,KSERVER-2500 5U Server,Kaleidescape,,Senior Mechanical Design Engineer,,ProEngineer,Server / Rackmount,3/3/2008,12/3/2008,275,198
 Mbox 2 Micro,,Digidesign,,Senior Mechanical Designer,,ProEngineer,USB Audio Interface,10/1/2007,4/1/2008,183,132
-003 Rack,,Digidesign,,Senior Mechanical Designer,,ProEngineer,Rack Appliance,5/1/2007,10/1/2007,153,110
+Rack 003,,Digidesign,,Senior Mechanical Designer,,ProEngineer,Rack Appliance,5/1/2007,10/1/2007,153,110
 Mbox 2 Mini,,Digidesign,,Senior Mechanical Designer,,ProEngineer,USB Audio Interface,2/1/2007,5/1/2007,89,64
 Mbox 2 Pro,,Digidesign,,Senior Mechanical Designer,,ProEngineer,USB Audio Interface,6/1/2006,11/1/2006,153,110
-003,,Digidesign,,Senior Mechanical Designer,,ProEngineer,Control Surface,6/1/2006,2/1/2007,245,176
+Digi 003,,Digidesign,,Senior Mechanical Designer,,ProEngineer,Control Surface,6/1/2006,2/1/2007,245,176
 Control 24,,Digidesign,,Senior Mechanical Designer,Curtis,ProEngineer,Control Surface,8/1/2006,7/1/2007,334,239
 Mbox 2,,Digidesign,,Senior Mechanical Designer,,ProEngineer,USB Audio Interface,9/1/2005,11/1/2005,61,44
 Profile,,Digidesign,,Senior Mechanical Designer,Capaldi / Lux?,ProEngineer,Live Sound Console,2/1/2005,7/1/2005,150,109
 D-Show,,Digidesign,,Senior Mechanical Designer,,ProEngineer,Live Sound Console,2/1/2005,7/1/2005,150,109
 D-Control,,Digidesign,,Senior Mechanical Designer,PC II / Buckley,ProEngineer,Control Surface,8/1/2004,3/1/2005,212,152
 D-Command,,Digidesign,,Senior Mechanical Designer,,ProEngineer,Control Surface,4/1/2004,9/1/2004,153,110
-Pro Control Jr.,,Digidesign,,Senior Mechanical Designer,Danko,ProEngineer,Control Surface,6/1/2003,4/1/2004,305,219
-002 Rack,,Digidesign,,Senior Mechanical Designer,,ProEngineer,Rack Appliance,5/1/2003,10/1/2003,153,110
+Pro Control Jr,,Digidesign,,Senior Mechanical Designer,Danko,ProEngineer,Control Surface,6/1/2003,4/1/2004,305,219
+Rack 002,,Digidesign,,Senior Mechanical Designer,,ProEngineer,Rack Appliance,5/1/2003,10/1/2003,153,110
 Mbox,,Digidesign,,Senior Mechanical Designer,,ProEngineer,USB Audio Interface,3/1/2003,10/1/2003,214,153
 Xbox,,Mechanistic,Microsoft/UltimateTV,Senior Mechanical Designer,,ProEngineer,Gaming Console,9/1/2002,12/1/2002,91,65
 Receiver 5,,Mechanistic,Microsoft/UltimateTV,Senior Mechanical Designer,Bart,ProEngineer,Set-Top Box,6/1/2002,8/1/2002,61,44
@@ -68,7 +68,7 @@ Keyboard,,Mechanistic,WebTV,Senior Mechanical Designer,Cortez,ProEngineer,Periph
 LapTV,,Mechanistic,WebTV,Senior Mechanical Designer,Cortez,ProEngineer,Portable Media,4/1/2000,6/1/2000,61,44
 Remote,,Mechanistic,WebTV,Senior Mechanical Designer,,ProEngineer,Remote Control,4/1/2000,5/1/2000,30,21
 Netscreen-500,,Mechanistic,D2M,Senior Mechanical Designer,,ProEngineer,Security Appliance,2/1/2000,4/1/2000,60,44
-320 540,,Mechanistic,Function,Senior Mechanical Designer,,ProEngineer,Handheld / Mobile,8/1/1998,9/1/1998,31,22
+SGI 320 540,,Mechanistic,Function,Senior Mechanical Designer,,ProEngineer,Handheld / Mobile,8/1/1998,9/1/1998,31,22
 HP Jornada,,Mechanistic,Fitch,Senior Mechanical Designer,kiwi,ProEngineer,Handheld / PDA,6/1/1998,7/1/1998,30,23
 DVDO Player,,frogdesign,,Mechanical Designer,,ProEngineer,Media Player,3/1/1998,5/1/1998,61,45
 Vadem Clio,,frogdesign,,Mechanical Designer,,ProEngineer,Handheld / PDA,10/1/1997,11/1/1997,31,23
@@ -76,11 +76,11 @@ KaVo Dental Unit 2,,frogdesign,,Mechanical Designer,X-Unit,ProEngineer,Medical E
 Acer Phone,,frogdesign,,Mechanical Designer,,ProEngineer,Mobile Phone,7/1/1997,8/1/1997,31,24
 KaVo Dental Unit 1,,Mechanistic,frogdesign,Mechanical Designer,Edeca,ProEngineer,Medical Equipment,7/1/1997,10/1/1997,92,67
 Acer subwoofer,,Mechanistic,frogdesign,Mechanical Designer,Sunny,ProEngineer,Audio,6/1/1997,8/1/1997,61,45
-Newscorp set-top box,,Mechanistic,frogdesign,Mechanical Designer,concave satbox,ProEngineer,Set-Top Box,2/1/1997,10/1/1997,242,173
-Packard Bell Convertible,,Mechanistic,frogdesign,Mechanical Designer,,ProEngineer,Personal Computer,2/1/1996,3/1/1996,29,22
+Newscorp STB,,Mechanistic,frogdesign,Mechanical Designer,concave satbox,ProEngineer,Set-Top Box,2/1/1997,10/1/1997,242,173
+PB Convertible,,Mechanistic,frogdesign,Mechanical Designer,,ProEngineer,Personal Computer,2/1/1996,3/1/1996,29,22
 Acer Aspire,,Mechanistic,frogdesign,Mechanical Designer,,ProEngineer,Personal Computer,2/1/1996,5/1/1996,90,65
 Fissler BBQ,,Mechanistic,frogdesign,Mechanical Designer,,ProEngineer,Consumer Appliance,5/1/1995,1/1/1996,245,176
-Sunbeam window toaster,,Mechanistic,frogdesign,Mechanical Designer,,ProEngineer,Consumer Appliance,1/1/1995,3/1/1995,59,43
+Sunbeam toaster,,Mechanistic,frogdesign,Mechanical Designer,,ProEngineer,Consumer Appliance,1/1/1995,3/1/1995,59,43
 Frantic Frames,,Mechanistic,,Mechanical Designer,,ProEngineer,Electromechanical Mechanism,4/1/1992,3/1/1993,334,239
 Indy,,Silicon Graphics,,Technician IV,,ProEngineer,Workstation,3/1/1992,1/1/1993,306,220
 Indigo II,,Silicon Graphics,,Technician IV,,ProEngineer,Workstation,4/1/1991,10/1/1992,549,394

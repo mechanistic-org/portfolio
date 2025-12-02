@@ -31,6 +31,10 @@ const navConfig: navItem[] = [
 				text: "IFU",
 				href: "/about/ifu/",
 			},
+			{
+				text: "Elements",
+				href: "/about/elements/",
+			},
 		],
 	},
 	{

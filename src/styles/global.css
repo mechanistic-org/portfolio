@@ -54,7 +54,12 @@
 		font-family: var(--font-mono);
 
 		/* Light Mode Grid Color (Process Blue C approx) */
-		--grid-color: rgba(0, 133, 202, 0.5);
+		--grid-color: rgba(0, 133, 202, 0.1);
+
+		background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+			linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+		background-size: 50px 50px;
+		background-attachment: fixed;
 
 		/* Brutalist Header Font */
 		--font-header: "Inter", "Helvetica Neue", "Arial", sans-serif;
@@ -94,7 +99,12 @@
 		color: var(--foreground);
 
 		/* Dark Mode Grid Color (Unified "LED-like" Process Blue) */
-		--grid-color: rgba(0, 133, 202, 0.5);
+		--grid-color: rgba(0, 133, 202, 0.15);
+
+		background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+			linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+		background-size: 50px 50px;
+		background-attachment: fixed;
 
 		@apply scheme-dark;
 	}
