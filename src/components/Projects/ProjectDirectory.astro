@@ -1,11 +1,16 @@
 ---
 import { type CollectionEntry } from "astro:content";
+import FilterMenu from "./FilterMenu.astro";
 
 interface Props {
 	projects: CollectionEntry<"projects">[];
+	sectors: string[];
+	categories: string[];
+	tools: string[];
+	clients: string[];
 }
 
-const { projects } = Astro.props;
+const { projects, sectors, categories, tools, clients } = Astro.props;
 ---
 
 <div class="relative w-full">
@@ -40,21 +45,16 @@ const { projects } = Astro.props;
 				<p id="preview-description" class="font-mono text-sm font-medium text-white drop-shadow-lg">
 				</p>
 			</div>
-
-			<div class="relative z-10 flex items-end justify-between">
-				<div id="preview-icons" class="flex gap-2">
-					<!-- Icons injected here -->
-				</div>
-				<img id="preview-graph" class="h-16 w-16 opacity-90" src="" />
-			</div>
 		</div>
 	</div>
 
-	<div class="w-full overflow-x-auto">
+	<div class="scrollbar-hide w-full overflow-x-auto lg:overflow-visible">
 		<table class="w-full min-w-[800px] border-collapse text-left font-mono text-sm">
 			<thead>
 				<tr class="border-b border-neutral-800 text-neutral-500">
-					<th class="px-4 py-3 font-medium tracking-wider uppercase">Role</th>
+					<th class="px-4 py-3 font-medium tracking-wider uppercase">
+						<FilterMenu sectors={sectors} categories={categories} tools={tools} clients={clients} />
+					</th>
 					<th
 						class="sort-header cursor-pointer px-4 py-3 font-medium tracking-wider uppercase transition-colors select-none hover:text-white"
 						data-col="project"
@@ -76,7 +76,7 @@ const { projects } = Astro.props;
 						data-col="sector"
 					>
 						<div class="flex items-center gap-2">
-							Sector <span class="sort-icon text-xs">↕</span>
+							Collection <span class="sort-icon text-xs">↕</span>
 						</div>
 					</th>
 					<th
@@ -95,7 +95,6 @@ const { projects } = Astro.props;
 							Status <span class="sort-icon text-xs">↕</span>
 						</div>
 					</th>
-					<th class="px-4 py-3 text-right font-medium tracking-wider uppercase">Link</th>
 				</tr>
 			</thead>
 			<tbody id="projects-table-body">
@@ -119,8 +118,17 @@ const { projects } = Astro.props;
 							data-description={project.data.description}
 							onclick={`window.location.href='/projects/${project.data.slug}/'`}
 						>
-							<td class="px-4 py-3 font-mono text-xs text-neutral-500">
-								{project.data.role || "Engineer"}
+							<td class="px-4 py-3">
+								<div class="h-8 w-12 overflow-hidden rounded bg-neutral-800">
+									{project.data.heroImage && (
+										<img
+											src={project.data.heroImage}
+											alt={project.data.title}
+											class="h-full w-full object-cover opacity-80 transition-opacity group-hover:opacity-100"
+											loading="lazy"
+										/>
+									)}
+								</div>
 							</td>
 							<td class="text-foreground group-hover:text-primary px-4 py-3 font-bold transition-colors">
 								{project.data.title}
@@ -151,155 +159,152 @@ const { projects } = Astro.props;
 									{project.data.production}
 								</span>
 							</td>
-							<td class="px-4 py-3 text-right">
-								<span class="hover:text-primary text-neutral-500 transition-colors">→</span>
-							</td>
 						</tr>
 					))
 				}
 			</tbody>
+
+			<script>
+				const rows = document.querySelectorAll(".project-row");
+				const preview = document.getElementById("project-preview");
+				const previewImg = document.getElementById("preview-image") as HTMLImageElement;
+				const previewTitle = document.getElementById("preview-title");
+				const previewDescription = document.getElementById("preview-description");
+				const previewTeamSize = document.getElementById("preview-team-size");
+				const previewIcons = document.getElementById("preview-icons");
+				const previewGraph = document.getElementById("preview-graph") as HTMLImageElement;
+
+				if (preview && previewImg && previewTitle) {
+					rows.forEach((row) => {
+						row.addEventListener("mouseenter", () => {
+							row.classList.add("spotlight-active");
+							const img = row.getAttribute("data-image");
+							const title = row.getAttribute("data-title");
+							const description = row.getAttribute("data-description");
+							const teamSize = row.getAttribute("data-team-size");
+							const toolIcons = JSON.parse(row.getAttribute("data-tool-icons") || "[]");
+							const partGraph = row.getAttribute("data-part-graph");
+
+							if (img) {
+								previewImg.src = img;
+								if (title) previewTitle.innerText = title;
+								if (description && previewDescription) previewDescription.innerText = description;
+
+								// Team Size
+								if (previewTeamSize) {
+									if (teamSize && teamSize !== "Unknown") {
+										previewTeamSize.innerText = `👥 ${teamSize}`;
+										previewTeamSize.style.display = "block";
+									} else {
+										previewTeamSize.style.display = "none";
+									}
+								}
+
+								// Icons
+								if (previewIcons) {
+									previewIcons.innerHTML = toolIcons
+										.slice(0, 5) // Limit to 5
+										.map(
+											(icon: string) =>
+												`<img src="https://cdn.simpleicons.org/${icon}/white" class="w-5 h-5 opacity-80" onerror="this.style.display='none'" />`,
+										)
+										.join("");
+								}
+
+								// Graph
+								if (previewGraph) {
+									if (partGraph) {
+										previewGraph.src = partGraph;
+										previewGraph.style.display = "block";
+									} else {
+										previewGraph.style.display = "none";
+									}
+								}
+
+								preview.classList.remove("opacity-0");
+								preview.classList.add("opacity-100");
+							}
+						});
+
+						row.addEventListener("mousemove", (e) => {
+							const event = e as MouseEvent;
+							const rect = (row as HTMLElement).getBoundingClientRect();
+							const x = event.clientX - rect.left;
+							const y = event.clientY - rect.top;
+
+							// Update CSS variables for the spotlight
+							(row as HTMLElement).style.setProperty("--x", `${x}px`);
+							(row as HTMLElement).style.setProperty("--y", `${y}px`);
+
+							// Position preview relative to viewport
+							const clientX = event.clientX;
+							const clientY = event.clientY;
+
+							// Offset to avoid cursor
+							preview.style.left = `${clientX + 20}px`;
+							preview.style.top = `${clientY + 20}px`;
+						});
+
+						row.addEventListener("mouseleave", () => {
+							row.classList.remove("spotlight-active");
+							preview.classList.remove("opacity-100");
+							preview.classList.add("opacity-0");
+							// Reset spotlight
+							(row as HTMLElement).style.removeProperty("--x");
+							(row as HTMLElement).style.removeProperty("--y");
+						});
+					});
+
+					// Safety cleanup: Remove spotlight from all rows when mouse leaves the table body
+					const tableBody = document.getElementById("projects-table-body");
+					if (tableBody) {
+						tableBody.addEventListener("mouseleave", () => {
+							rows.forEach((row) => {
+								row.classList.remove("spotlight-active");
+								(row as HTMLElement).style.removeProperty("--x");
+								(row as HTMLElement).style.removeProperty("--y");
+							});
+						});
+					}
+				}
+			</script>
+
+			<style>
+				@property --spotlight-opacity {
+					syntax: "<number>";
+					inherits: false;
+					initial-value: 0;
+				}
+
+				.project-row {
+					position: relative;
+					/* Fallback for no JS */
+					--x: 50%;
+					--y: 50%;
+					--spotlight-opacity: 0;
+
+					background-image: radial-gradient(
+						600px circle at var(--x) var(--y),
+						rgba(16, 185, 129, var(--spotlight-opacity)),
+						transparent 40%
+					);
+					transition: --spotlight-opacity 0.3s;
+				}
+
+				/* Restore the green highlight borders and background */
+				.project-row.spotlight-active {
+					border-left-color: rgb(var(--color-primary));
+					border-bottom-color: rgb(var(--color-primary));
+					background-color: rgba(var(--color-primary), 0.1);
+					--spotlight-opacity: 0.15;
+				}
+
+				/* Ensure content stays on top */
+				.project-row td {
+					position: relative;
+					z-index: 1;
+				}
+			</style>
 		</table>
 	</div>
 </div>
-
-<script>
-	const rows = document.querySelectorAll(".project-row");
-	const preview = document.getElementById("project-preview");
-	const previewImg = document.getElementById("preview-image") as HTMLImageElement;
-	const previewTitle = document.getElementById("preview-title");
-	const previewDescription = document.getElementById("preview-description");
-	const previewTeamSize = document.getElementById("preview-team-size");
-	const previewIcons = document.getElementById("preview-icons");
-	const previewGraph = document.getElementById("preview-graph") as HTMLImageElement;
-
-	if (preview && previewImg && previewTitle) {
-		rows.forEach((row) => {
-			row.addEventListener("mouseenter", () => {
-				row.classList.add("spotlight-active");
-				const img = row.getAttribute("data-image");
-				const title = row.getAttribute("data-title");
-				const description = row.getAttribute("data-description");
-				const teamSize = row.getAttribute("data-team-size");
-				const toolIcons = JSON.parse(row.getAttribute("data-tool-icons") || "[]");
-				const partGraph = row.getAttribute("data-part-graph");
-
-				if (img) {
-					previewImg.src = img;
-					if (title) previewTitle.innerText = title;
-					if (description && previewDescription) previewDescription.innerText = description;
-
-					// Team Size
-					if (previewTeamSize) {
-						if (teamSize && teamSize !== "Unknown") {
-							previewTeamSize.innerText = `👥 ${teamSize}`;
-							previewTeamSize.style.display = "block";
-						} else {
-							previewTeamSize.style.display = "none";
-						}
-					}
-
-					// Icons
-					if (previewIcons) {
-						previewIcons.innerHTML = toolIcons
-							.slice(0, 5) // Limit to 5
-							.map(
-								(icon: string) =>
-									`<img src="https://cdn.simpleicons.org/${icon}/white" class="w-5 h-5 opacity-80" onerror="this.style.display='none'" />`,
-							)
-							.join("");
-					}
-
-					// Graph
-					if (previewGraph) {
-						if (partGraph) {
-							previewGraph.src = partGraph;
-							previewGraph.style.display = "block";
-						} else {
-							previewGraph.style.display = "none";
-						}
-					}
-
-					preview.classList.remove("opacity-0");
-					preview.classList.add("opacity-100");
-				}
-			});
-
-			row.addEventListener("mousemove", (e) => {
-				const event = e as MouseEvent;
-				const rect = (row as HTMLElement).getBoundingClientRect();
-				const x = event.clientX - rect.left;
-				const y = event.clientY - rect.top;
-
-				// Update CSS variables for the spotlight
-				(row as HTMLElement).style.setProperty("--x", `${x}px`);
-				(row as HTMLElement).style.setProperty("--y", `${y}px`);
-
-				// Position preview relative to viewport
-				const clientX = event.clientX;
-				const clientY = event.clientY;
-
-				// Offset to avoid cursor
-				preview.style.left = `${clientX + 20}px`;
-				preview.style.top = `${clientY + 20}px`;
-			});
-
-			row.addEventListener("mouseleave", () => {
-				row.classList.remove("spotlight-active");
-				preview.classList.remove("opacity-100");
-				preview.classList.add("opacity-0");
-				// Reset spotlight
-				(row as HTMLElement).style.removeProperty("--x");
-				(row as HTMLElement).style.removeProperty("--y");
-			});
-		});
-
-		// Safety cleanup: Remove spotlight from all rows when mouse leaves the table body
-		const tableBody = document.getElementById("projects-table-body");
-		if (tableBody) {
-			tableBody.addEventListener("mouseleave", () => {
-				rows.forEach((row) => {
-					row.classList.remove("spotlight-active");
-					(row as HTMLElement).style.removeProperty("--x");
-					(row as HTMLElement).style.removeProperty("--y");
-				});
-			});
-		}
-	}
-</script>
-
-<style>
-	@property --spotlight-opacity {
-		syntax: "<number>";
-		inherits: false;
-		initial-value: 0;
-	}
-
-	.project-row {
-		position: relative;
-		/* Fallback for no JS */
-		--x: 50%;
-		--y: 50%;
-		--spotlight-opacity: 0;
-
-		background-image: radial-gradient(
-			600px circle at var(--x) var(--y),
-			rgba(16, 185, 129, var(--spotlight-opacity)),
-			transparent 40%
-		);
-		transition: --spotlight-opacity 0.3s;
-	}
-
-	/* Restore the green highlight borders and background */
-	.project-row.spotlight-active {
-		border-left-color: rgb(var(--color-primary));
-		border-bottom-color: rgb(var(--color-primary));
-		background-color: rgba(var(--color-primary), 0.1);
-		--spotlight-opacity: 0.15;
-	}
-
-	/* Ensure content stays on top */
-	.project-row td {
-		position: relative;
-		z-index: 1;
-	}
-</style>

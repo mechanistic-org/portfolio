@@ -2,7 +2,6 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectDirectory from "../../components/Projects/ProjectDirectory.astro";
-import FilterPanel from "../../components/Projects/FilterPanel.astro";
 
 const allProjects = await getCollection("projects", ({ data }) => !data.draft);
 const projects = allProjects.sort(
@@ -11,6 +10,9 @@ const projects = allProjects.sort(
 
 // Extract Facets for the UI
 const industries = [...new Set(projects.map((p) => p.data.industry).filter(Boolean))].sort();
+const categories = [
+	...new Set(projects.map((p) => p.data.category).filter(Boolean)),
+].sort() as string[];
 const tools = [...new Set(projects.flatMap((p) => p.data.tools).filter(Boolean))].sort();
 // Merge Employer and Client into one list
 const allClients = projects.flatMap((p) => {
@@ -23,13 +25,15 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 
 <BaseLayout title="Projects" description="Engineering Archive">
 	<div class="site-container pt-32 pb-24 md:pb-36">
-		<div class="mb-8 flex flex-col gap-6">
-			<FilterPanel sectors={industries} tools={tools} clients={clients} />
-		</div>
-
 		<!-- Project Directory Table -->
 		<div id="projects-container">
-			<ProjectDirectory projects={projects} />
+			<ProjectDirectory
+				projects={projects}
+				sectors={industries}
+				categories={categories}
+				tools={tools}
+				clients={clients}
+			/>
 		</div>
 	</div>
 </BaseLayout>
@@ -44,77 +48,55 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 		if (rows.length === 0) return;
 
 		// State
-		let filters = { industry: "all", tool: "all", status: "all", client: "all" };
+		let filters = { industry: "all", category: "all", tool: "all", status: "all", client: "all" };
 		let sortState = { column: "date", direction: "desc" }; // default sort
 
 		// URL Params Logic - Run BEFORE initial update
 		const urlParams = new URLSearchParams(window.location.search);
-		const clientParam = urlParams.get("client");
-		if (clientParam) {
-			// Decode URI component to handle spaces (e.g. "Consumer Appliances")
-			const decodedClient = decodeURIComponent(clientParam);
-			filters.client = decodedClient;
 
-			// Set active state on the button immediately
-			const btn = document.querySelector(
-				`.filter-btn[data-group="client"][data-filter="${decodedClient}"]`,
-			);
-			if (btn) {
-				btn.setAttribute("data-active", "true");
-				// Deactivate "All"
-				document
-					.querySelector(`.filter-btn[data-group="client"][data-filter="all"]`)
-					?.setAttribute("data-active", "false");
+		// Helper to apply param
+		const applyParam = (paramName: string, groupName: string) => {
+			const val = urlParams.get(paramName);
+			if (val) {
+				const decoded = decodeURIComponent(val);
+				// @ts-ignore
+				filters[groupName] = decoded;
+				const btn = document.querySelector(
+					`.filter-btn[data-group="${groupName}"][data-filter="${decoded}"]`,
+				);
+				if (btn) {
+					btn.setAttribute("data-active", "true");
+					document
+						.querySelector(`.filter-btn[data-group="${groupName}"][data-filter="all"]`)
+						?.setAttribute("data-active", "false");
+				}
 			}
-		}
+		};
+
+		applyParam("client", "client");
+		applyParam("collection", "industry");
+		applyParam("category", "category");
+		applyParam("tool", "tool");
+		applyParam("status", "status");
 
 		function renderActiveFilters() {
-			const display = document.getElementById("active-filters-display");
-			if (!display) return;
+			// Count active filters (excluding "all")
+			let count = 0;
+			if (filters.industry !== "all") count++;
+			if (filters.category !== "all") count++;
+			if (filters.status !== "all") count++;
+			if (filters.tool !== "all") count++;
+			if (filters.client !== "all") count++;
 
-			const activeKeys = Object.entries(filters).filter(([key, val]) => val !== "all");
-
-			if (activeKeys.length === 0) {
-				display.innerHTML = '<span class="font-mono text-xs text-neutral-600">All Projects</span>';
-				return;
+			const countBadge = document.getElementById("active-filter-count");
+			if (countBadge) {
+				if (count > 0) {
+					countBadge.innerText = count.toString();
+					countBadge.classList.remove("hidden");
+				} else {
+					countBadge.classList.add("hidden");
+				}
 			}
-
-			display.innerHTML = "";
-			activeKeys.forEach(([key, val]) => {
-				const span = document.createElement("span");
-				span.className = "font-mono text-xs text-primary";
-				span.innerText = `[ ${val} ]`;
-
-				// Add clear button for this filter
-				const clear = document.createElement("button");
-				clear.className = "ml-1 hover:text-white";
-				clear.innerHTML = "&times;";
-				clear.onclick = (e) => {
-					e.stopPropagation();
-					const btn = document.querySelector(
-						`.filter-btn[data-group="${key}"][data-filter="all"]`,
-					) as HTMLElement;
-					if (btn) btn.click();
-				};
-				span.appendChild(clear);
-
-				display.appendChild(span);
-			});
-
-			// Add "View All" / Reset button
-			const resetBtn = document.createElement("button");
-			resetBtn.className =
-				"ml-4 font-mono text-xs text-neutral-500 hover:text-white underline decoration-dotted underline-offset-4";
-			resetBtn.innerText = "RESET VIEW";
-			resetBtn.onclick = () => {
-				document.querySelectorAll('.filter-btn[data-filter="all"]').forEach((b: any) => b.click());
-				// Clear URL params
-				window.history.replaceState({}, "", window.location.pathname);
-				// Reset Sort
-				sortState = { column: "date", direction: "desc" };
-				update();
-			};
-			display.appendChild(resetBtn);
 		}
 
 		function getCellValue(row: HTMLElement, column: string): string | number {
@@ -127,6 +109,8 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 					return (JSON.parse(d.client || "[]")[0] || "").toLowerCase();
 				case "sector":
 					return d.industry?.toLowerCase() || "";
+				case "category":
+					return d.category?.toLowerCase() || "";
 				case "year":
 					return parseInt(d.date || "0");
 				case "status":
@@ -210,7 +194,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 		// 	});
 		// });
 
-		function update() {
+		function update(filtersToUse = filters, updateChips = true) {
 			// Filter
 			let active = rows.filter((row) => {
 				const d = row.dataset;
@@ -221,12 +205,14 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				const titleCell = row.children[1] as HTMLElement;
 				const rowTitle = titleCell?.innerText.toLowerCase() || "";
 
-				const matchInd = filters.industry === "all" || d.industry === filters.industry;
-				const matchStatus = filters.status === "all" || d.status === filters.status;
-				const matchTool = filters.tool === "all" || rowTools.includes(filters.tool);
-				const matchClient = filters.client === "all" || rowClients.includes(filters.client);
+				const matchInd = filtersToUse.industry === "all" || d.industry === filtersToUse.industry;
+				const matchCat = filtersToUse.category === "all" || d.category === filtersToUse.category;
+				const matchStatus = filtersToUse.status === "all" || d.status === filtersToUse.status;
+				const matchTool = filtersToUse.tool === "all" || rowTools.includes(filtersToUse.tool);
+				const matchClient =
+					filtersToUse.client === "all" || rowClients.includes(filtersToUse.client);
 
-				return matchInd && matchStatus && matchTool && matchClient;
+				return matchInd && matchCat && matchStatus && matchTool && matchClient;
 			});
 
 			// Sort
@@ -256,8 +242,57 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 			selectedIndex = -1;
 			updateActiveRow();
 
-			renderActiveFilters();
+			if (updateChips) {
+				renderActiveFilters();
+			}
 			updateSortIcons();
+
+			// Hierarchical Filtering: Filter Categories based on selected Collection (Industry)
+			const selectedIndustry = filtersToUse.industry;
+			const categoryButtons = document.querySelectorAll('.filter-btn[data-group="category"]');
+
+			if (selectedIndustry === "all") {
+				// Show all categories
+				categoryButtons.forEach((btn) => {
+					(btn as HTMLElement).style.display = "block";
+				});
+			} else {
+				// Get valid categories for this industry
+				const validCategories = new Set<string>();
+				rows.forEach((row) => {
+					if (row.dataset.industry === selectedIndustry) {
+						if (row.dataset.category) validCategories.add(row.dataset.category);
+					}
+				});
+
+				// Update button visibility
+				categoryButtons.forEach((btn) => {
+					const btnVal = btn.getAttribute("data-filter");
+					if (btnVal === "all" || (btnVal && validCategories.has(btnVal))) {
+						(btn as HTMLElement).style.display = "block";
+					} else {
+						(btn as HTMLElement).style.display = "none";
+					}
+				});
+
+				// Reset Category if current selection is invalid
+				if (filtersToUse.category !== "all" && !validCategories.has(filtersToUse.category)) {
+					// Only reset if we are committing changes (updateChips is true)
+					// If previewing, we might not want to force reset yet, or maybe we do?
+					// Let's reset it in the filters object but maybe not trigger another update loop immediately to avoid recursion
+					if (updateChips) {
+						filters.category = "all";
+						// Update UI for category reset
+						document.querySelectorAll('.filter-btn[data-group="category"]').forEach((b) => {
+							b.setAttribute("data-active", "false");
+						});
+						document
+							.querySelector('.filter-btn[data-group="category"][data-filter="all"]')
+							?.setAttribute("data-active", "true");
+						renderActiveFilters(); // Re-render chips
+					}
+				}
+			}
 		}
 
 		function updateSortIcons() {
@@ -268,20 +303,15 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 
 				if (col === sortState.column) {
 					icon.innerHTML = sortState.direction === "asc" ? "▲" : "▼";
-					header.classList.add("text-primary");
+					header.classList.add("text-primary", "bg-primary/10", "rounded");
 					header.classList.remove("text-neutral-500");
 				} else {
 					icon.innerHTML = "↕"; // or some neutral icon
-					header.classList.remove("text-primary");
+					header.classList.remove("text-primary", "bg-primary/10", "rounded");
 					header.classList.add("text-neutral-500");
 				}
 			});
 		}
-
-		// Init
-		update();
-
-		// Events
 
 		buttons.forEach((btn) => {
 			const applyFilter = () => {
@@ -296,12 +326,59 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				btn.setAttribute("data-active", "true");
 
 				// Logic Update
-				filters[group as keyof typeof filters] = val;
-				update();
+				// @ts-ignore
+				filters[group] = val;
+				update(filters, true);
+			};
+
+			const previewFilter = () => {
+				const group = btn.getAttribute("data-group");
+				const val = btn.getAttribute("data-filter");
+				if (!group || !val) return;
+
+				// Create temp filters
+				const tempFilters = { ...filters };
+				// @ts-ignore
+				tempFilters[group] = val;
+
+				update(tempFilters, false); // Don't update chips
 			};
 
 			btn.addEventListener("click", applyFilter);
-			btn.addEventListener("mouseenter", applyFilter);
+			btn.addEventListener("mouseenter", previewFilter);
+		});
+
+		// Reset View Button
+		const resetBtn = document.getElementById("reset-filters-btn");
+		if (resetBtn) {
+			resetBtn.addEventListener("click", () => {
+				// Reset State
+				filters = { industry: "all", category: "all", tool: "all", status: "all", client: "all" };
+				sortState = { column: "date", direction: "desc" };
+
+				// Reset UI Buttons
+				document.querySelectorAll(".filter-btn").forEach((b) => {
+					b.setAttribute("data-active", "false");
+				});
+				// Set "all" buttons to active
+				document.querySelectorAll('.filter-btn[data-filter="all"]').forEach((b) => {
+					b.setAttribute("data-active", "true");
+				});
+
+				// Reset Sort Icons
+				updateSortIcons();
+
+				// Update List
+				update(filters, true);
+			});
+		}
+
+		// Revert on MouseLeave Dropdown
+		// Use the new container class from FilterMenu.astro
+		document.querySelectorAll(".filter-menu-container").forEach((menu) => {
+			menu.addEventListener("mouseleave", () => {
+				update(filters, false); // Revert to committed filters
+			});
 		});
 
 		sortHeaders.forEach((header) => {

@@ -683,8 +683,8 @@ def process_projects():
                     break
 
         # Generate Charts
-        skill_graph_url = generate_radar_chart(skill_data, slug)
-        part_graph_url = generate_donut_chart(parts, slug)
+        skill_graph_url = generate_radar_chart(skill_data, slug) or ""
+        part_graph_url = generate_donut_chart(parts, slug) or ""
 
         # Template Replacement
         model_viewer_tag = ""
