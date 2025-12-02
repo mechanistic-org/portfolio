@@ -58,4 +58,6 @@ Assets are managed physically, not logically.
 ### UI Elements
 *   **`SkillRadar.tsx`:** Client-side React component using Recharts for the "Skill Fingerprint".
 *   **`ClientGrid.astro`:** Infinite marquee "Trust Wall" on the homepage.
+*   **`ProjectDirectory.astro`:** Interactive project list with filtering, sorting, and hover previews (Spotlight effect).
+*   **`ConstructionBadge.astro`:** Status indicator (Local/Construction/Production) showing the current commit SHA.
 *   **`<model-viewer>`:** Google's 3D viewer component. Defaults to "Neil Armstrong" if no custom GLB is found.

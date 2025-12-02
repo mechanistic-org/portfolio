@@ -4,9 +4,11 @@
 *   **Pipeline:** `ingest_data.py` with Smart Header Hunting.
 *   **Visuals:**
     *   **Homepage:** 3D Hero, Trust Wall (CSS Marquee), Featured Projects.
+    *   **Project Directory:** Interactive table with filtering, sorting, and hover previews.
     *   **Project Page:** Center-stage Radar Chart, Hardware Dashboard, Gallery Grid, Spec Sheet Modal.
     *   **About:** Technical Datasheet + Git-Style Career Log + User Manual (IFU).
     *   **Colophon:** Architecture breakdown and Tech Stack marquee.
+    *   **Global:** Construction Badge (Status & Commit SHA).
 *   **Infrastructure:** Cloudflare R2 Asset Hosting with Staging/Production workflow.
 
 ## 🚧 Active Work (The "Hero" Phase)
@@ -28,4 +30,8 @@
 *   **Site User Manual:** Added `/about/ifu` page documenting site maintenance.
 *   **Spec Sheet Modal:** Enhanced project quick view with detailed specs and keyboard navigation.
 *   **Debug Mode:** Added footer toggle for visual debugging and grayscale mode.
+
 *   **Type Safety:** Resolved TypeScript errors in Project Pages.
+*   **Project Directory:** Implemented interactive list with spotlight hover effects.
+*   **Construction Badge:** Added environment-aware status indicator.
+*   **Documentation:** Restructured into `docs/` and migrated User Manual.
