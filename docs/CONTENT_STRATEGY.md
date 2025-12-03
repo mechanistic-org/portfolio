@@ -52,3 +52,11 @@ Check the local development server (`npm run dev`) to see your changes live.
 
 ### Special Characters
 *   **Less-Than Signs:** MDX treats `<` as the start of a component. If you write `<0.5%` or `<3`, it may crash the build. Always escape it as `&lt;` (e.g., `&lt;0.5%`).
+
+## Manual Content Overrides
+
+### 3. Special Components
+*   **3D Models:**
+    *   **Standard:** Use `{{MODEL_URL}}` placeholder.
+    *   **Custom Layout:** You **MUST** wrap the placeholder in the component: `<ModelViewer src="{{MODEL_URL}}" alt="Project Asset" />`.
+    *   **Fallback:** Omit the `src` attribute to display the "Neil Armstrong" placeholder: `<ModelViewer alt="Placeholder" />`.

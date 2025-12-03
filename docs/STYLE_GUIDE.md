@@ -13,6 +13,7 @@ The design system is not just about "styling"; it is a functional specification.
 2.  **Physical Asset Law:** Assets are files, not database entries.
 3.  **The Datasheet Aesthetic:** The UI should feel like a technical specification document. High information density, clear hierarchy, zero fluff.
 4.  **Honest Construction:** We show the seams. The "Construction Badge" and "Debug Mode" are features, not bugs.
+5.  **The Physical Output:** The system must degrade gracefully to paper. `Cmd+P` should yield a professional datasheet, not a broken website screenshot.
 
 > **Live Visualization:** A living example of this style guide is available at [`/about/elements`](/about/elements).
 
@@ -42,8 +43,12 @@ We enforce the "Datasheet" aesthetic even in narrative content (Markdown).
 *   **Body Text:** `JetBrains Mono` (`font-mono`). All narrative text is treated as data.
 *   **Headers (H2):**
     *   **Style:** "Active System" aesthetic.
-    *   **Visual:** `text-3xl` (Mobile) / `text-4xl` (Desktop), Primary Green (`var(--primary)`).
-    *   **Effect:** Includes a pulsing LED indicator (`::after` pseudo-element) to signify operational status.
+    *   **Visual:** `text-2xl` (Mobile) / `text-3xl` (Desktop), Primary Green (`var(--primary)`).
+    *   **Effect:** Bottom border (`neutral-800`), Pulse Dot animation.
+*   **Headers (H3):**
+    *   **Visual:** `text-2xl` (Mobile) / `text-3xl` (Desktop), Primary Green.
+    *   **Effect:** Bottom border (`neutral-800`), **NO** Pulse Dot.
+    *   **Usage:** "Project Artifacts" or major sub-sections.
 *   **Headers (General):** `Inter` (`font-sans`). Bold, tracking-tight. Provides visual hierarchy.
 *   **Blockquotes (The Note):**
     *   **Style:** Brutalist. No border-radius.
@@ -54,6 +59,8 @@ We enforce the "Datasheet" aesthetic even in narrative content (Markdown).
 *   **The Grid:** All layouts align to a 4px baseline grid.
 *   **Containers:** `.site-container` (max-w-5xl).
 *   **The Seam:** 1px borders (`border-neutral-800`) define all component boundaries. No soft shadows; only hard lines.
+*   **Global Top Padding:** `pt-32` (8rem) is the standard for all main page containers (Home, Project List, Project Detail) to ensure visual consistency across page transitions.
+*   **The Robust Header:** For headers with centered elements (like navigation), use a 3-column CSS Grid (`grid-cols-[1fr_auto_1fr]`) with `items-end`. This ensures the center element remains perfectly centered while allowing left/right content (Titles/Breadcrumbs) to wrap naturally without overlap.
 
 ---
 

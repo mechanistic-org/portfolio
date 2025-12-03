@@ -2,6 +2,19 @@
 import Layout from "@layouts/BaseLayout.astro";
 import Button from "@components/Button/Button.astro";
 import Marquee from "@components/Marquee/Marquee";
+import { getCollection } from "astro:content";
+
+const features = (await getCollection("colophon")).sort((a, b) => a.data.order - b.data.order);
+
+const renderedFeatures = await Promise.all(
+	features.map(async (feature) => {
+		const { Content } = await feature.render();
+		return {
+			...feature.data,
+			Content,
+		};
+	}),
+);
 
 const tools = [
 	"VS Code",
@@ -124,7 +137,7 @@ const marqueeTools = [...tools, ...tools, ...tools, ...tools, ...tools, ...tools
 						text: tool,
 						image: `https://cdn.simpleicons.org/${slug}`,
 						link: linkMap[tool],
-						variant: "icon-text",
+						variant: "logo-only",
 					};
 				})}
 			/>
@@ -205,6 +218,103 @@ const marqueeTools = [...tools, ...tools, ...tools, ...tools, ...tools, ...tools
 					<div class="border-border bg-card rounded-lg border p-6">
 						<div class="text-primary mb-2 font-mono text-xs">AI Partner</div>
 						<div class="text-xl font-bold text-white">Gemini 1.5 Pro</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="border-border bg-muted/30 border-t py-24">
+			<div class="site-container">
+				<h2 class="h2 mb-16 text-center">Meta-Features</h2>
+				<div class="grid gap-8 md:grid-cols-3">
+					<!-- Feature 1: The Pulse -->
+					<div class="border-border bg-card relative overflow-hidden rounded-xl border p-8">
+						<div
+							class="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10 text-green-500"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								class="lucide lucide-activity"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg
+							>
+						</div>
+						<h3 class="text-xl font-bold text-white">The Pulse</h3>
+						<p class="mt-2 font-mono text-sm text-green-400">Self-Aware Build Stats</p>
+						<p class="mt-4 text-neutral-400">
+							The site knows how fast it was built. The ingestion pipeline tracks its own runtime
+							performance and stamps the footer with the exact build duration (e.g., "Built in
+							0.42s").
+						</p>
+					</div>
+
+					<!-- Feature 2: AR-Ready 3D -->
+					<div class="border-border bg-card relative overflow-hidden rounded-xl border p-8">
+						<div
+							class="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10 text-blue-500"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								class="lucide lucide-box"
+								><path
+									d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+								></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line
+									x1="12"
+									y1="22.08"
+									x2="12"
+									y2="12"></line></svg
+							>
+						</div>
+						<h3 class="text-xl font-bold text-white">AR-Ready Viewer</h3>
+						<p class="mt-2 font-mono text-sm text-blue-400">&lt;model-viewer&gt; Integration</p>
+						<p class="mt-4 text-neutral-400">
+							Zero-runtime 3D visualization. Assets are optimized for web delivery and support "View
+							in Room" Augmented Reality on mobile devices, adapting lighting to the environment.
+						</p>
+					</div>
+
+					<!-- Feature 3: The Physical Spec -->
+					<div class="border-border bg-card relative overflow-hidden rounded-xl border p-8">
+						<div
+							class="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-purple-500/10 text-purple-500"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								class="lucide lucide-printer"
+								><polyline points="6 9 6 2 18 2 18 9"></polyline><path
+									d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+								></path><rect width="12" height="8" x="6" y="14"></rect></svg
+							>
+						</div>
+						<h3 class="text-xl font-bold text-white">The Physical Spec</h3>
+						<p class="mt-2 font-mono text-sm text-purple-400">Print Mode Optimization</p>
+						<p class="mt-4 text-neutral-400">
+							The Datasheet is physical. Custom <code>@media print</code> styles strip the UI navigation
+							and footer, reformatting the Project Detail page into a high-contrast, PDF-ready specification
+							document.
+						</p>
 					</div>
 				</div>
 			</div>

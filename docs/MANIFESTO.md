@@ -20,6 +20,7 @@ The `data_source/*.csv` files are the **ONLY** source of project data.
 *   **Auto-Generated:** By default, project pages show a generic placeholder.
 *   **Manual Override:** If a file exists at `data_source/manual_content/{slug}.md`, the script injects **THAT** text into the MDX body.
 *   **Workflow:** To write a Case Study, create the markdown file in `manual_content/`, then run the script.
+*   **The Creative Matrix:** To avoid generic AI content, we employ a "Creative Matrix" for content generation. This maps specific Employers/Clients to specific Engineering Domains (e.g., Kaleidescape -> Thermal Management, Acoustics). This ensures that even auto-generated content respects the historical context of the work.
 
 ### 4. Physical Asset Law
 We do not map assets in JSON. We place them physically in the file system.

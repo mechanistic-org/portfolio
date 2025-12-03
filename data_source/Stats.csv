@@ -39,10 +39,10 @@ KPLAYER-5000,Kaleidescape,97,26,26,55
 KPLAYER-2500,Kaleidescape,51,87,37,80
 KSERVER-2500,Kaleidescape,68,2,43,49
 Mbox 2 Micro,Digidesign,40,61,98,60
-003 Rack,Digidesign,80,36,30,24
+Rack 003,Digidesign,80,36,30,24
 Mbox 2 Mini,Digidesign,82,71,14,14
 Mbox 2 Pro,Digidesign,19,20,86,43
-003,Digidesign,4,24,98,81
+Digi 003,Digidesign,4,24,98,81
 Control 24,Digidesign,56,7,90,19
 Mbox 2,Digidesign,21,86,10,6
 Profile,Digidesign,67,88,80,78
@@ -50,7 +50,7 @@ D-Show,Digidesign,99,29,61,22
 D-Control,Digidesign,59,91,72,51
 D-Command,Digidesign,77,3,72,64
 Pro Control Jr.,Digidesign,76,21,72,74
-002 Rack,Digidesign,17,38,45,3
+Rack 002,Digidesign,17,38,45,3
 Mbox,Digidesign,21,39,61,61
 Xbox,Mechanistic,93,26,79,20
 Receiver 5,Mechanistic,17,83,48,32

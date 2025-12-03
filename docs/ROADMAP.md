@@ -25,19 +25,19 @@
     *   [x] Create Design Language System (`docs/STYLE_GUIDE.md`).
     *   [x] Implement "Visible Grid" (CSS).
     *   [x] Implement "Build Stats" (Python + Footer).
-*   **Hero Content:** Writing deep-dive markdown content in `data_source/manual_content/` for key projects (e.g. Xbox).
+*   **Hero Content:**
+    *   [x] **Batch Generation:** Created `scripts/generate_content.py` to populate case studies using "Creative Matrix" and "Smart Templating".
+    *   [x] **Manual Polish:** Writing deep-dive markdown content in `data_source/manual_content/` for key projects (e.g. Xbox).
 *   **Asset Population:** Populating `R2_STAGING/` with more `model.glb` files and `hero.png` files.
 *   **Colophon Expansion:** Transforming the Colophon into a "Meta-Portfolio" with a dedicated content collection for site features.
 
 ## 🔮 Backlog & Refinement
 
 ### High Priority
-*   **Colophon Icons:** Replace text labels in the Tech Stack Marquee with SVGs (similar to the Trust Wall).
-*   **SEO:** Add OpenGraph tags for social sharing.
-*   **Data Refinement:** Address "Core Competencies" duplication (Skills.csv data is currently proportional to duration, leading to identical profiles).
+*   [x] **Data Refinement:** Fix `Skills.csv` duplication using `refine_skills.py`.
 
 ### Future / Nice-to-Have
-*   **Print CSS:** Optimize pages for PDF export.
+### Future / Nice-to-Have
 *   **Light/Dark Mode:** Re-enable and refine the light mode theme.
 *   **Scroll Gear Mechanism:** Re-implement the rack and pinion scroll gear with better physics/visuals.
 
@@ -64,7 +64,20 @@
     *   **Tech:** MDX + Astro Components (`Admonition`, `Chip`, `Wire`).
     *   **Description:** A live, render-accurate implementation of the Design Language System at `/about/elements`. It serves as both documentation and a visual regression test suite for the "Hyper-Functional Brutalist" aesthetic.
 
+*   **The Meta-Portfolio (Self-Documentation):**
+    *   **Hook:** The site documents its own features as if they were engineering projects.
+    *   **Tech:** Astro Content Collections (`src/content/colophon`), MDX.
+    *   **Description:** A dedicated content pipeline for documenting site features, allowing for rich text, code blocks, and future expansion without touching the page template.
+
 ## 📜 Change Log (Recent)
+*   **Meta-Portfolio Migration:** Refactored Colophon features ("The Pulse", "AR-Ready Viewer", "The Physical Spec") from hardcoded HTML into a dedicated `colophon` Content Collection for easier maintenance and documentation.
+*   **Colophon Polish:** Switched Tech Stack Marquee to icon-only mode (`variant="logo-only"`).
+*   **SEO Upgrade:** Implemented `og:type="article"` for Project pages to improve social sharing.
+*   **Print Optimization:** Added `print.css` to hide navigation/footer for PDF exports, enforcing the "Datasheet" aesthetic.
+*   **Layout Standardization:** Enforced `pt-32` top padding across Home, Project List, and Project Detail pages for consistent vertical rhythm.
+*   **Project Detail Refactor:** Moved navigation controls (Prev/Next) from the sidebar to the header.
+*   **Robust Header Grid:** Implemented a 3-column CSS Grid (`1fr auto 1fr`) on the Project Detail page to prevent multi-line titles from overlapping centered navigation controls.
+*   **Negative Space Reduction:** Tightened vertical spacing on the Homepage (Hero 3D viewer) and Project Detail page (Title to Image gap).
 *   **Design Polish:** Updated Project Detail headers (H2) to match the "Active System" aesthetic (Primary Green + Pulsing LED indicator).
 *   **Build Fix:** Resolved Tailwind v4 scoping issues in Astro components by implementing the `@reference` directive in isolated style blocks.
 *   **Brand System:** Established `docs/STYLE_GUIDE.md` defining the "Hyper-Functional Brutalist" aesthetic.
@@ -110,3 +123,14 @@
     *   Added "Effects" section demonstrating `ScrambleText`.
     *   Enforced DLS typography (Inter headers) in MDX content via `markdown-content.css`.
     *   Restored missing list examples and fixed rendering issues.
+
+## Meta-Portfolio (Colophon Features)
+*   **AR-Ready 3D Viewer:**
+    *   **Hook:** "Bringing hardware to your living room."
+    *   **Tech:** `<model-viewer>`, Google ARCore.
+    *   **Description:** A smart component that adapts lighting environments (Moon vs. Studio) based on the asset and supports "View in Room" AR on mobile devices.
+
+*   **The Physical Spec (Print Mode):**
+    *   **Hook:** "The Datasheet is physical."
+    *   **Tech:** CSS (`@media print`).
+    *   **Description:** Optimized print styles that strip the UI (Nav, Footer, Buttons) and output a clean, high-contrast specification document suitable for PDF export.

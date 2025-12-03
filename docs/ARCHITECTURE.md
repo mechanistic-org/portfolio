@@ -86,8 +86,22 @@ Assets are managed physically, not logically.
     *   **Auto-Sync:** The script automatically calls `sync_r2.py` to upload new assets to the Cloudflare R2 bucket.
     *   **Link:** It generates production URLs (`https://assets.eriknorris.com/...`) in the MDX frontmatter.
 
+### Auxiliary Generators
+To support the main ingestion pipeline, two auxiliary scripts maintain data quality and content volume:
+
+1.  **`scripts/refine_skills.py`**: Solves the "Skill Duplication" problem.
+    *   **Logic:** Assigns an "Archetype" (e.g., Software, Hardware, Design) to each project based on its Category.
+    *   **Output:** Generates a unique `Skills.csv` with varied skill profiles, preventing identical radar charts across projects.
+    *   **Scaling:** Uses logarithmic scaling based on project duration to determine skill mastery levels.
+
+2.  **`scripts/generate_content.py`**: Solves the "Empty Portfolio" problem.
+    *   **Creative Matrix:** Applies specific engineering narratives to known employers (e.g., "Silent Operation" for Kaleidescape, "HPC" for SGI).
+    *   **Smart Templating:** Generates "Narrative STAR" (Situation, Task, Action, Result) case studies for generic projects using metadata.
+    *   **Safety:** Skips existing manual content files larger than 1KB to preserve human-authored work.
+
 ## 🛡️ Type Safety
 *   **Strict Typing:** Core components (`[...slug].astro`, `Seo.astro`, `BaseLayout.astro`) enforce strict TypeScript props, particularly for `ImageMetadata`.
+*   **SEO Types:** `Seo.astro`, `BaseHead.astro`, and `BaseLayout.astro` now support `type="project"` in addition to `"general"` and `"blog"`. This maps to `og:type="article"`.
 *   **Verification:** `npm run build` is the gold standard for verifying type correctness. The build will fail if types are mismatched.
 *   **Gotchas:**
     *   **Content Collections:** Generated types for collections might not always sync perfectly with complex frontmatter (e.g., optional arrays like `toolIcons`). Use `as any` casting sparingly if types are stubborn but data is known to be correct.
@@ -132,10 +146,15 @@ Assets are managed physically, not logically.
 
 ### Pages
 *   **`[...slug].astro`:** Master project template. Renders the layout, charts, and 3D viewer.
+    *   **Header Layout:** Uses a **3-Column CSS Grid** (`1fr auto 1fr`) to manage the Title (Left), Navigation (Center), and Breadcrumbs (Right).
+        *   **Why:** Absolute positioning caused overlaps with long, multi-line titles. The Grid approach ensures the navigation remains centered in the *available space* or its own track, while `items-end` keeps text baselines aligned.
     *   **Note:** `getStaticPaths` uses `entry.id` (filename) instead of `entry.slug` (frontmatter) to ensure routing stability with Astro Content Collections.
 *   **`src/pages/about/elements.astro`:** Renders `src/data/otherPages/elements/index.mdx` as a "Living Style Guide" to verify DLS implementation (Typography, Colors, Components).
 *   **`docs/MAINTENANCE.md` (User Manual):** Documentation for site maintenance, including the Trust Wall logic and Ingestion Script usage.
-*   **`colophon.astro`:** "How it was Built" page with architecture breakdown and tech stack marquee.
+*   **`colophon.astro` (Meta-Portfolio):**
+    *   **Architecture:** Refactored from hardcoded HTML to a dynamic system powered by the `colophon` Content Collection.
+    *   **Data Source:** `src/content/colophon/*.mdx`.
+    *   **Rendering Strategy:** Uses a pre-rendering pattern (`await feature.render()`) in the frontmatter to avoid async mapping issues within the JSX template.
 
 ### UI Elements
 *   **`SkillRadar.tsx`:** Client-side React component using Recharts for the "Skill Fingerprint".
@@ -147,4 +166,8 @@ Assets are managed physically, not logically.
 *   **`ProjectModal.tsx`:** "Technical Datasheet" modal with split-view layout and navigation (Next/Prev).
 *   **`FilterPanel.astro`:** Persistent sidebar filter for the Project Directory.
 *   **`ConstructionBadge.astro`:** Status indicator (Local/Construction/Production) showing the current commit SHA.
-*   **`<model-viewer>`:** Google's 3D viewer component. Defaults to "Neil Armstrong" if no custom GLB is found.
+*   **`ModelViewer.astro`:**
+    *   **Fallback:** Defaults to high-fidelity "Neil Armstrong" (`NeilArmstrong.glb`) with `moon_1k.hdr` environment if no `src` is provided.
+    *   **Environment Logic:** Uses `neutral` lighting for project assets to ensure clean presentation, but switches to `moon_1k.hdr` for the Neil fallback.
+    *   **AR Ready:** Includes `ar` and `touch-action="pan-y"` attributes for mobile augmented reality support.
+    *   **Props:** Accepts `environmentImage` to override default lighting.

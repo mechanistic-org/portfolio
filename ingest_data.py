@@ -808,7 +808,7 @@ def scaffold_content():
     Scaffold missing manual content files for all projects in Main.csv.
     """
     print("🏗️  Scaffolding Content...")
-    main = read_csv_smart(find_file("Main.csv"), "Name", required_headers={"Name"})
+    main = read_csv_smart(find_file("Main.csv"), "Name", required_headers={"Slug Name"})
     
     count = 0
     for row in main:

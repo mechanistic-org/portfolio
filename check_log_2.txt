@@ -1,0 +1,642 @@
+npm warn Unknown project config "auto-install-peers". This will stop working in the next major version of npm.
+npm warn Unknown project config "node-linker". This will stop working in the next major version of npm.
+npm warn Unknown project config "lockfile". This will stop working in the next major version of npm.
+[2m18:17:48[22m [34m[@astrojs/cloudflare][39m Enabling sessions with Cloudflare KV with the "SESSION" KV binding.
+[2m18:17:48[22m [34m[@astrojs/cloudflare][39m If you see the error "Invalid binding `SESSION`" in your build output, you need to add the binding to your wrangler config file.
+[2m18:17:48[22m [34m[content][39m Syncing content
+[2m18:17:48[22m [34m[content][39m Synced content
+[2m18:17:48[22m [34m[types][39m Generated [2m291ms[22m
+[2m18:17:48[22m [34m[check][39m Getting diagnostics for Astro files in D:\GitHub\quantum...
+[96msrc/components/Contact/Contact.astro[0m:[93m6[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m't' is declared but its value is never read.
+
+[7m6[0m const t = useTranslations(currLocale);
+[7m [0m [93m      ~[0m
+[96msrc/components/Contact/Contact.astro[0m:[93m4[0m:[93m29[0m - [93mwarning[0m[90m ts(6133): [0m'getTranslatedData' is declared but its value is never read.
+
+[7m4[0m import { getLocalizedRoute, getTranslatedData, useTranslations } from "@/js/translationUtils";
+[7m [0m [93m                            ~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/Contact/ContactCentered.astro[0m:[93m6[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m't' is declared but its value is never read.
+
+[7m6[0m const t = useTranslations(currLocale);
+[7m [0m [93m      ~[0m
+[96msrc/components/Contact/ContactCentered.astro[0m:[93m4[0m:[93m29[0m - [93mwarning[0m[90m ts(6133): [0m'getTranslatedData' is declared but its value is never read.
+
+[7m4[0m import { getLocalizedRoute, getTranslatedData, useTranslations } from "@/js/translationUtils";
+[7m [0m [93m                            ~~~~~~~~~~~~~~~~~[0m
+[96msrc/components/Contact/ContactCentered.astro[0m:[93m4[0m:[93m10[0m - [93mwarning[0m[90m ts(6133): [0m'getLocalizedRoute' is declared but its value is never read.
+
+[7m4[0m import { getLocalizedRoute, getTranslatedData, useTranslations } from "@/js/translationUtils";
+[7m [0m [93m         ~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/CookieConsent/CookieConsent.astro[0m:[93m40[0m:[93m20[0m - [91merror[0m[90m ts(2531): [0mObject is possibly 'null'.
+
+[7m40[0m    const consent = document.cookie.match(/cookie-consent=([^;]+)/)[1];
+[7m  [0m [91m                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/Effects/ScrambleText.tsx[0m:[93m34[0m:[93m44[0m - [93mwarning[0m[90m ts(6133): [0m'char' is declared but its value is never read.
+
+[7m34[0m                 return text.split("").map((char, index) => {
+[7m  [0m [93m                                           ~~~~[0m
+[96msrc/components/Effects/ScrambleText.tsx[0m:[93m33[0m:[93m28[0m - [93mwarning[0m[90m ts(6133): [0m'prev' is declared but its value is never read.
+
+[7m33[0m             setDisplayText(prev => {
+[7m  [0m [93m                           ~~~~[0m
+[96msrc/components/Effects/ScrambleText.tsx[0m:[93m16[0m:[93m5[0m - [93mwarning[0m[90m ts(6133): [0m'revealSpeed' is declared but its value is never read.
+
+[7m16[0m     revealSpeed = 50
+[7m  [0m [93m    ~~~~~~~~~~~[0m
+
+[96msrc/components/Forms/ContactFormTwoCol.astro[0m:[93m2[0m:[93m20[0m - [91merror[0m[90m ts(1149): [0mFile name 'D:/GitHub/quantum/src/components/button/Button.astro' differs from already included file name 'D:/GitHub/quantum/src/components/Button/Button.astro' only in casing.
+  The file is in the program because:
+    Root file specified for compilation
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/ContactForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/ContactFormTwoCol.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/CookieConsent/CookieConsent.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/NewsletterForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/PasswordResetForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/SignInForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/SignUpForm.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Hero/HeroTinyImage.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Nav/MobileNav/MobileNav.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Nav/Nav.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/ProjectCard/ProjectCardSideImage.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/ProjectCard/ProjectCardVertical.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Projects/ProjectCardSideImage.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/SidebarCards/WorkExperienceCard.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/BlogLayoutCenter.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/BlogLayoutLeft.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/BlogLayoutSidebar.astro'
+    Imported via "@/components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/ProjectLayout.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/404.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/colophon.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/index.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/overview.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/examples/landing2.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/examples/landing3.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/projects/[...slug].astro'
+
+[7m2[0m import Button from "@/components/button/Button.astro";
+[7m [0m [91m                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/components/Forms/ContactFormTwoCol.astro[0m:[93m21[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m't' is declared but its value is never read.
+
+[7m21[0m const t = useTranslations(currLocale);
+[7m  [0m [93m      ~[0m
+[96msrc/components/Forms/ContactFormTwoCol.astro[0m:[93m18[0m:[93m29[0m - [93mwarning[0m[90m ts(6133): [0m'getTranslatedData' is declared but its value is never read.
+
+[7m18[0m import { getLocalizedRoute, getTranslatedData, useTranslations } from "@/js/translationUtils";
+[7m  [0m [93m                            ~~~~~~~~~~~~~~~~~[0m
+[96msrc/components/Forms/ContactFormTwoCol.astro[0m:[93m18[0m:[93m10[0m - [93mwarning[0m[90m ts(6133): [0m'getLocalizedRoute' is declared but its value is never read.
+
+[7m18[0m import { getLocalizedRoute, getTranslatedData, useTranslations } from "@/js/translationUtils";
+[7m  [0m [93m         ~~~~~~~~~~~~~~~~~[0m
+[96msrc/components/Forms/ContactFormTwoCol.astro[0m:[93m12[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'SelectSeparator' is declared but its value is never read.
+
+[7m12[0m   SelectSeparator,
+[7m  [0m [93m  ~~~~~~~~~~~~~~~[0m
+[96msrc/components/Forms/ContactFormTwoCol.astro[0m:[93m11[0m:[93m3[0m - [93mwarning[0m[90m ts(6133): [0m'SelectLabel' is declared but its value is never read.
+
+[7m11[0m   SelectLabel,
+[7m  [0m [93m  ~~~~~~~~~~~[0m
+
+[96msrc/components/Forms/PasswordResetForm.astro[0m:[93m4[0m:[93m20[0m - [91merror[0m[90m ts(1149): [0mFile name 'D:/GitHub/quantum/src/components/button/Button.astro' differs from already included file name 'D:/GitHub/quantum/src/components/Button/Button.astro' only in casing.
+  The file is in the program because:
+    Root file specified for compilation
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/ContactForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/ContactFormTwoCol.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/CookieConsent/CookieConsent.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/NewsletterForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/PasswordResetForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/SignInForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/SignUpForm.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Hero/HeroTinyImage.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Nav/MobileNav/MobileNav.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Nav/Nav.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/ProjectCard/ProjectCardSideImage.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/ProjectCard/ProjectCardVertical.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Projects/ProjectCardSideImage.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/SidebarCards/WorkExperienceCard.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/BlogLayoutCenter.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/BlogLayoutLeft.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/BlogLayoutSidebar.astro'
+    Imported via "@/components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/ProjectLayout.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/404.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/colophon.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/index.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/overview.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/examples/landing2.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/examples/landing3.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/projects/[...slug].astro'
+
+[7m4[0m import Button from "@/components/button/Button.astro";
+[7m [0m [91m                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/components/Forms/PasswordResetForm.astro[0m:[93m2[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'Icon' is declared but its value is never read.
+
+[7m2[0m import { Icon } from "astro-icon/components";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/Forms/SignInForm.astro[0m:[93m4[0m:[93m20[0m - [91merror[0m[90m ts(1149): [0mFile name 'D:/GitHub/quantum/src/components/button/Button.astro' differs from already included file name 'D:/GitHub/quantum/src/components/Button/Button.astro' only in casing.
+  The file is in the program because:
+    Root file specified for compilation
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/ContactForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/ContactFormTwoCol.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/CookieConsent/CookieConsent.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/NewsletterForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/PasswordResetForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/SignInForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/SignUpForm.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Hero/HeroTinyImage.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Nav/MobileNav/MobileNav.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Nav/Nav.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/ProjectCard/ProjectCardSideImage.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/ProjectCard/ProjectCardVertical.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Projects/ProjectCardSideImage.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/SidebarCards/WorkExperienceCard.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/BlogLayoutCenter.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/BlogLayoutLeft.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/BlogLayoutSidebar.astro'
+    Imported via "@/components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/ProjectLayout.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/404.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/colophon.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/index.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/overview.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/examples/landing2.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/examples/landing3.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/projects/[...slug].astro'
+
+[7m4[0m import Button from "@/components/button/Button.astro";
+[7m [0m [91m                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/Forms/SignUpForm.astro[0m:[93m4[0m:[93m20[0m - [91merror[0m[90m ts(1149): [0mFile name 'D:/GitHub/quantum/src/components/button/Button.astro' differs from already included file name 'D:/GitHub/quantum/src/components/Button/Button.astro' only in casing.
+  The file is in the program because:
+    Root file specified for compilation
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/ContactForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/ContactFormTwoCol.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/CookieConsent/CookieConsent.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/NewsletterForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/PasswordResetForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/SignInForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/SignUpForm.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Hero/HeroTinyImage.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Nav/MobileNav/MobileNav.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Nav/Nav.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/ProjectCard/ProjectCardSideImage.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/ProjectCard/ProjectCardVertical.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Projects/ProjectCardSideImage.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/SidebarCards/WorkExperienceCard.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/BlogLayoutCenter.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/BlogLayoutLeft.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/BlogLayoutSidebar.astro'
+    Imported via "@/components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/ProjectLayout.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/404.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/colophon.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/index.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/overview.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/examples/landing2.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/examples/landing3.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/projects/[...slug].astro'
+
+[7m4[0m import Button from "@/components/button/Button.astro";
+[7m [0m [91m                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/Hero/HeroTinyImage.astro[0m:[93m9[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'Button' is declared but its value is never read.
+
+[7m9[0m import Button from "@components/Button/Button.astro";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/components/Hero/HeroTinyImage.astro[0m:[93m5[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'Icon' is declared but its value is never read.
+
+[7m5[0m import { Icon } from "astro-icon/components";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/KeystaticComponents/KeystaticAdmonition.tsx[0m:[93m13[0m:[93m6[0m - [93mwarning[0m[90m ts(7043): [0mVariable 'color' implicitly has an 'any' type, but a better type may be inferred from usage.
+
+[7m13[0m  let color;
+[7m  [0m [93m     ~~~~~[0m
+
+[96msrc/components/Marquee/Marquee.tsx[0m:[93m112[0m:[93m79[0m - [91merror[0m[90m ts(2367): [0mThis comparison appears to be unintentional because the types '"logo-only" | undefined' and '"icon-text"' have no overlap.
+
+[7m112[0m                             {(item.variant === 'icon-text' || (!item.image && item.variant !== 'icon-text')) && (
+[7m   [0m [91m                                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/Nav/Nav.astro[0m:[93m7[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'Button' is declared but its value is never read.
+
+[7m7[0m import Button from "@components/Button/Button.astro";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/Nav/NavDropdown.astro[0m:[93m2[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'Icon' is declared but its value is never read.
+
+[7m2[0m import { Icon } from "astro-icon/components";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/PostCard/PostCardBasic.astro[0m:[93m22[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'authorsData' is declared but its value is never read.
+
+[7m22[0m const authorsData = await getAllAuthorsData(authors);
+[7m  [0m [93m      ~~~~~~~~~~~[0m
+[96msrc/components/PostCard/PostCardBasic.astro[0m:[93m20[0m:[93m53[0m - [93mwarning[0m[90m ts(6133): [0m'heroImage' is declared but its value is never read.
+
+[7m20[0m const { title, description, tags, authors, pubDate, heroImage } = post.data;
+[7m  [0m [93m                                                    ~~~~~~~~~[0m
+[96msrc/components/PostCard/PostCardBasic.astro[0m:[93m9[0m:[93m22[0m - [93mwarning[0m[90m ts(6133): [0m'humanize' is declared but its value is never read.
+
+[7m9[0m import { formatDate, humanize } from "@js/textUtils";
+[7m [0m [93m                     ~~~~~~~~[0m
+[96msrc/components/PostCard/PostCardBasic.astro[0m:[93m3[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'Image' is declared but its value is never read.
+
+[7m3[0m import { Image } from "astro:assets";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/PostCard/PostCardImage.astro[0m:[93m22[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'authorsData' is declared but its value is never read.
+
+[7m22[0m const authorsData = await getAllAuthorsData(authors);
+[7m  [0m [93m      ~~~~~~~~~~~[0m
+[96msrc/components/PostCard/PostCardImage.astro[0m:[93m9[0m:[93m22[0m - [93mwarning[0m[90m ts(6133): [0m'humanize' is declared but its value is never read.
+
+[7m9[0m import { formatDate, humanize } from "@js/textUtils";
+[7m [0m [93m                     ~~~~~~~~[0m
+
+[96msrc/components/Projects/FilterPanel.astro[0m:[93m9[0m:[93m9[0m - [93mwarning[0m[90m ts(6133): [0m'sectors' is declared but its value is never read.
+
+[7m9[0m const { sectors, categories, tools, clients } = Astro.props;
+[7m [0m [93m        ~~~~~~~[0m
+
+[96msrc/components/Projects/KeyFeatures.astro[0m:[93m6[0m:[93m52[0m - [91merror[0m[90m ts(2339): [0mProperty 'keyFeatures' does not exist on type '{ title: string; draft: boolean; tags: string[]; industry: string; tools: string[]; client: string[]; skillData: { name: string; value: number; }[]; gallery: string[]; documents: { name: string; url: string; }[]; links: { ...; }[]; ... 13 more ...; partGraph?: string | undefined; }'.
+
+[7m6[0m   keyFeatures: CollectionEntry<"projects">["data"]["keyFeatures"];
+[7m [0m [91m                                                   ~~~~~~~~~~~~~[0m
+[96msrc/components/Projects/KeyFeatures.astro[0m:[93m14[0m:[93m22[0m - [93mwarning[0m[90m ts(7044): [0mParameter 'feature' implicitly has an 'any' type, but a better type may be inferred from usage.
+
+[7m14[0m     keyFeatures.map((feature) => (
+[7m  [0m [93m                     ~~~~~~~[0m
+
+[96msrc/components/Projects/ProjectCard.astro[0m:[93m46[0m:[93m29[0m - [93mwarning[0m[90m ts(7044): [0mParameter 'tag' implicitly has an 'any' type, but a better type may be inferred from usage.
+
+[7m46[0m      {tags.slice(0, 3).map((tag) => (
+[7m  [0m [93m                            ~~~[0m
+[96msrc/components/Projects/ProjectCard.astro[0m:[93m2[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'Image' is declared but its value is never read.
+
+[7m2[0m import { Image } from "astro:assets";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/Projects/ProjectCardSideImage.astro[0m:[93m19[0m:[93m36[0m - [91merror[0m[90m ts(2339): [0mProperty 'technologies' does not exist on type '{ title: string; draft: boolean; tags: string[]; industry: string; tools: string[]; client: string[]; skillData: { name: string; value: number; }[]; gallery: string[]; documents: { name: string; url: string; }[]; links: { ...; }[]; ... 13 more ...; partGraph?: string | undefined; }'.
+
+[7m19[0m const { title, description, image, technologies, ...rest } = project.data;
+[7m  [0m [91m                                   ~~~~~~~~~~~~[0m
+[96msrc/components/Projects/ProjectCardSideImage.astro[0m:[93m19[0m:[93m29[0m - [91merror[0m[90m ts(2339): [0mProperty 'image' does not exist on type '{ title: string; draft: boolean; tags: string[]; industry: string; tools: string[]; client: string[]; skillData: { name: string; value: number; }[]; gallery: string[]; documents: { name: string; url: string; }[]; links: { ...; }[]; ... 13 more ...; partGraph?: string | undefined; }'.
+
+[7m19[0m const { title, description, image, technologies, ...rest } = project.data;
+[7m  [0m [91m                            ~~~~~[0m
+[96msrc/components/Projects/ProjectCardSideImage.astro[0m:[93m5[0m:[93m20[0m - [91merror[0m[90m ts(1149): [0mFile name 'D:/GitHub/quantum/src/components/button/Button.astro' differs from already included file name 'D:/GitHub/quantum/src/components/Button/Button.astro' only in casing.
+  The file is in the program because:
+    Root file specified for compilation
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/ContactForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/ContactFormTwoCol.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/CookieConsent/CookieConsent.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/NewsletterForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/PasswordResetForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/SignInForm.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Forms/SignUpForm.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Hero/HeroTinyImage.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Nav/MobileNav/MobileNav.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/Nav/Nav.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/ProjectCard/ProjectCardSideImage.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/ProjectCard/ProjectCardVertical.astro'
+    Imported via "@/components/button/Button.astro" from file 'D:/GitHub/quantum/src/components/Projects/ProjectCardSideImage.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/components/SidebarCards/WorkExperienceCard.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/BlogLayoutCenter.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/BlogLayoutLeft.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/BlogLayoutSidebar.astro'
+    Imported via "@/components/Button/Button.astro" from file 'D:/GitHub/quantum/src/layouts/ProjectLayout.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/404.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/colophon.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/index.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/overview.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/examples/landing2.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/examples/landing3.astro'
+    Imported via "@components/Button/Button.astro" from file 'D:/GitHub/quantum/src/pages/projects/[...slug].astro'
+
+[7m5[0m import Button from "@/components/button/Button.astro";
+[7m [0m [91m                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/components/Projects/ProjectCardSideImage.astro[0m:[93m61[0m:[93m29[0m - [93mwarning[0m[90m ts(7044): [0mParameter 'tech' implicitly has an 'any' type, but a better type may be inferred from usage.
+
+[7m61[0m           technologies.map((tech) => (
+[7m  [0m [93m                            ~~~~[0m
+
+[96msrc/components/Projects/ProjectDirectory.astro[0m:[93m102[0m:[93m29[0m - [93mwarning[0m[90m ts(6133): [0m'index' is declared but its value is never read.
+
+[7m102[0m      projects.map((project, index) => (
+[7m   [0m [93m                            ~~~~~[0m
+
+[96msrc/components/Projects/ProjectGallery.tsx[0m:[93m1[0m:[93m8[0m - [93mwarning[0m[90m ts(6133): [0m'React' is declared but its value is never read.
+
+[7m1[0m import React, { useState } from "react";
+[7m [0m [93m       ~~~~~[0m
+
+[96msrc/components/Projects/ProjectStrip.tsx[0m:[93m1[0m:[93m38[0m - [93mwarning[0m[90m ts(6133): [0m'useRef' is declared but its value is never read.
+
+[7m1[0m import React, { useState, useEffect, useRef } from 'react';
+[7m [0m [93m                                     ~~~~~~[0m
+
+[96msrc/components/Projects/ProjectsVerticalCards.astro[0m:[93m17[0m:[93m31[0m - [93mwarning[0m[90m ts(6133): [0m'idx' is declared but its value is never read.
+
+[7m17[0m    {projectData.map((project, idx) => <ProjectCard {...project} />)}
+[7m  [0m [93m                              ~~~[0m
+
+[96msrc/components/Projects/SkillRadar.tsx[0m:[93m1[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'React' is declared but its value is never read.
+
+[7m1[0m import React from 'react';
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/Projects/TechStack.astro[0m:[93m5[0m:[93m53[0m - [91merror[0m[90m ts(2339): [0mProperty 'technologies' does not exist on type '{ title: string; draft: boolean; tags: string[]; industry: string; tools: string[]; client: string[]; skillData: { name: string; value: number; }[]; gallery: string[]; documents: { name: string; url: string; }[]; links: { ...; }[]; ... 13 more ...; partGraph?: string | undefined; }'.
+
+[7m5[0m   technologies: CollectionEntry<"projects">["data"]["technologies"];
+[7m [0m [91m                                                    ~~~~~~~~~~~~~~[0m
+[96msrc/components/Projects/TechStack.astro[0m:[93m13[0m:[93m23[0m - [93mwarning[0m[90m ts(7044): [0mParameter 'tech' implicitly has an 'any' type, but a better type may be inferred from usage.
+
+[7m13[0m     technologies.map((tech) => (
+[7m  [0m [93m                      ~~~~[0m
+
+[96msrc/components/Seo/Seo.astro[0m:[93m31[0m:[93m5[0m - [93mwarning[0m[90m ts(7043): [0mVariable 'jsonLD' implicitly has an 'any' type, but a better type may be inferred from usage.
+
+[7m31[0m let jsonLD;
+[7m  [0m [93m    ~~~~~~[0m
+[96msrc/components/Seo/Seo.astro[0m:[93m30[0m:[93m5[0m - [93mwarning[0m[90m ts(7043): [0mVariable 'optimizedImage' implicitly has an 'any' type, but a better type may be inferred from usage.
+
+[7m30[0m let optimizedImage;
+[7m  [0m [93m    ~~~~~~~~~~~~~~[0m
+
+[96msrc/components/SiteLogo/SiteLogo.astro[0m:[93m5[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'siteData' is declared but its value is never read.
+
+[7m5[0m import siteData from "@config/siteData.json";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/components/SiteLogo/SiteLogo.astro[0m:[93m2[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'Image' is declared but its value is never read.
+
+[7m2[0m import { Image } from "astro:assets";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/about/ClientGrid.astro[0m:[93m16[0m:[93m7[0m - [91merror[0m[90m ts(2322): [0mType '({ id: string; text: string; image: string; link: string; variant: "logo-only"; } | { id: string; text: string; image: null; link: string; variant: "text-only"; })[]' is not assignable to type 'MarqueeItem[]'.
+  Type '{ id: string; text: string; image: string; link: string; variant: "logo-only"; } | { id: string; text: string; image: null; link: string; variant: "text-only"; }' is not assignable to type 'MarqueeItem'.
+    Type '{ id: string; text: string; image: null; link: string; variant: "text-only"; }' is not assignable to type 'MarqueeItem'.
+      Types of property 'variant' are incompatible.
+        Type '"text-only"' is not assignable to type '"logo-only" | "icon-text" | undefined'.
+
+[7m16[0m const marqueeItems: MarqueeItem[] = duplicatedClients.map((client, index) => {
+[7m  [0m [91m      ~~~~~~~~~~~~[0m
+
+[96msrc/components/mdx/ModelViewer.astro[0m:[93m22[0m:[93m48[0m - [93mwarning[0m[90m ts(6385): [0m'(from: number, length?: number | undefined): string' is deprecated.
+
+[7m22[0m const uid = "mv-" + Math.random().toString(36).substr(2, 9);
+[7m  [0m [93m                                               ~~~~~~[0m
+[96msrc/components/mdx/ModelViewer.astro[0m:[93m66[0m:[93m9[0m - [93mwarning[0m[90m astro(4000): [0mThis script will be treated as if it has the `is:inline` directive because it contains an attribute. Therefore, features that require processing (e.g. using TypeScript or npm packages in the script) are unavailable.
+
+See docs for more details: https://docs.astro.build/en/guides/client-side-scripts/#script-processing.
+
+Add the `is:inline` directive explicitly to silence this hint.
+
+[7m66[0m <script define:vars={{ uid }}>
+[7m  [0m [93m        ~~~~~~~~~~~[0m
+
+[96msrc/components/starwind/alert-dialog/AlertDialogCancel.astro[0m:[93m3[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'tv' is declared but its value is never read.
+
+[7m3[0m import { tv } from "tailwind-variants";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/components/starwind/dropzone/Dropzone.astro[0m:[93m57[0m:[93m13[0m - [93mwarning[0m[90m ts(6133): [0m'hasFiles' is declared but its value is never read.
+
+[7m57[0m     private hasFiles: boolean = false;
+[7m  [0m [93m            ~~~~~~~~[0m
+
+[96msrc/components/starwind/switch/Switch.astro[0m:[93m52[0m:[93m5[0m - [93mwarning[0m[90m ts(7043): [0mVariable 'ariaLabel' implicitly has an 'any' type, but a better type may be inferred from usage.
+
+[7m52[0m let ariaLabel;
+[7m  [0m [93m    ~~~~~~~~~[0m
+
+[96msrc/components/starwind/tabs/Tabs.astro[0m:[93m46[0m:[93m13[0m - [93mwarning[0m[90m ts(6133): [0m'parentHandler' is declared but its value is never read.
+
+[7m46[0m     private parentHandler: TabsHandler | null = null;
+[7m  [0m [93m            ~~~~~~~~~~~~~[0m
+
+[96msrc/js/jsonLD.ts[0m:[93m31[0m:[93m7[0m - [93mwarning[0m[90m ts(7043): [0mVariable 'authorsJsonLd' implicitly has an 'any' type, but a better type may be inferred from usage.
+
+[7m31[0m   let authorsJsonLd;
+[7m  [0m [93m      ~~~~~~~~~~~~~[0m
+
+[96msrc/js/translationUtils.ts[0m:[93m282[0m:[93m24[0m - [91merror[0m[90m ts(2538): [0mType '{}' cannot be used as an index type.
+
+[7m282[0m       entriesByMapping[mappingKey][locale] = `${base}/${slug}`;
+[7m   [0m [91m                       ~~~~~~~~~~[0m
+[96msrc/js/translationUtils.ts[0m:[93m280[0m:[93m26[0m - [91merror[0m[90m ts(2538): [0mType '{}' cannot be used as an index type.
+
+[7m280[0m         entriesByMapping[mappingKey] = {};
+[7m   [0m [91m                         ~~~~~~~~~~[0m
+[96msrc/js/translationUtils.ts[0m:[93m279[0m:[93m29[0m - [91merror[0m[90m ts(2538): [0mType '{}' cannot be used as an index type.
+
+[7m279[0m       if (!entriesByMapping[mappingKey]) {
+[7m   [0m [91m                            ~~~~~~~~~~[0m
+
+[96msrc/layouts/BaseHead.astro[0m:[93m88[0m:[93m2[0m - [93mwarning[0m[90m astro(4000): [0mThis script will be treated as if it has the `is:inline` directive because it contains an attribute. Therefore, features that require processing (e.g. using TypeScript or npm packages in the script) are unavailable.
+
+See docs for more details: https://docs.astro.build/en/guides/client-side-scripts/#script-processing.
+
+Add the `is:inline` directive explicitly to silence this hint.
+
+[7m88[0m  type="module"
+[7m  [0m [93m ~~~~[0m
+
+[96msrc/layouts/BlogLayoutCenter.astro[0m:[93m13[0m:[93m32[0m - [93mwarning[0m[90m ts(6133): [0m'slugify' is declared but its value is never read.
+
+[7m13[0m import { formatDate, humanize, slugify } from "@js/textUtils";
+[7m  [0m [93m                               ~~~~~~~[0m
+[96msrc/layouts/BlogLayoutCenter.astro[0m:[93m13[0m:[93m22[0m - [93mwarning[0m[90m ts(6133): [0m'humanize' is declared but its value is never read.
+
+[7m13[0m import { formatDate, humanize, slugify } from "@js/textUtils";
+[7m  [0m [93m                     ~~~~~~~~[0m
+
+[96msrc/layouts/BlogLayoutLeft.astro[0m:[93m13[0m:[93m32[0m - [93mwarning[0m[90m ts(6133): [0m'slugify' is declared but its value is never read.
+
+[7m13[0m import { formatDate, humanize, slugify } from "@js/textUtils";
+[7m  [0m [93m                               ~~~~~~~[0m
+[96msrc/layouts/BlogLayoutLeft.astro[0m:[93m13[0m:[93m22[0m - [93mwarning[0m[90m ts(6133): [0m'humanize' is declared but its value is never read.
+
+[7m13[0m import { formatDate, humanize, slugify } from "@js/textUtils";
+[7m  [0m [93m                     ~~~~~~~~[0m
+
+[96msrc/layouts/ProjectLayout.astro[0m:[93m74[0m:[93m55[0m - [91merror[0m[90m ts(2554): [0mExpected 1 arguments, but got 2.
+
+[7m74[0m             Completed on: {formatDate(completionDate, currLocale)}
+[7m  [0m [91m                                                      ~~~~~~~~~~[0m
+[96msrc/layouts/ProjectLayout.astro[0m:[93m27[0m:[93m42[0m - [91merror[0m[90m ts(2322): [0mType 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+
+[7m27[0m <BaseLayout type="general" title={title} description={description} image={image}>
+[7m  [0m [91m                                         ~~~~~~~~~~~[0m
+[96msrc/layouts/ProjectLayout.astro[0m:[93m20[0m:[93m86[0m - [91merror[0m[90m ts(2339): [0mProperty 'keyFeatures' does not exist on type '{ title: string; draft: boolean; tags: string[]; industry: string; tools: string[]; client: string[]; skillData: { name: string; value: number; }[]; gallery: string[]; documents: { name: string; url: string; }[]; links: { ...; }[]; ... 13 more ...; partGraph?: string | undefined; }'.
+
+[7m20[0m const { title, description, image, technologies, demoUrl, githubUrl, completionDate, keyFeatures } =
+[7m  [0m [91m                                                                                     ~~~~~~~~~~~[0m
+[96msrc/layouts/ProjectLayout.astro[0m:[93m20[0m:[93m70[0m - [91merror[0m[90m ts(2339): [0mProperty 'completionDate' does not exist on type '{ title: string; draft: boolean; tags: string[]; industry: string; tools: string[]; client: string[]; skillData: { name: string; value: number; }[]; gallery: string[]; documents: { name: string; url: string; }[]; links: { ...; }[]; ... 13 more ...; partGraph?: string | undefined; }'.
+
+[7m20[0m const { title, description, image, technologies, demoUrl, githubUrl, completionDate, keyFeatures } =
+[7m  [0m [91m                                                                     ~~~~~~~~~~~~~~[0m
+[96msrc/layouts/ProjectLayout.astro[0m:[93m20[0m:[93m59[0m - [91merror[0m[90m ts(2339): [0mProperty 'githubUrl' does not exist on type '{ title: string; draft: boolean; tags: string[]; industry: string; tools: string[]; client: string[]; skillData: { name: string; value: number; }[]; gallery: string[]; documents: { name: string; url: string; }[]; links: { ...; }[]; ... 13 more ...; partGraph?: string | undefined; }'.
+
+[7m20[0m const { title, description, image, technologies, demoUrl, githubUrl, completionDate, keyFeatures } =
+[7m  [0m [91m                                                          ~~~~~~~~~[0m
+[96msrc/layouts/ProjectLayout.astro[0m:[93m20[0m:[93m50[0m - [91merror[0m[90m ts(2339): [0mProperty 'demoUrl' does not exist on type '{ title: string; draft: boolean; tags: string[]; industry: string; tools: string[]; client: string[]; skillData: { name: string; value: number; }[]; gallery: string[]; documents: { name: string; url: string; }[]; links: { ...; }[]; ... 13 more ...; partGraph?: string | undefined; }'.
+
+[7m20[0m const { title, description, image, technologies, demoUrl, githubUrl, completionDate, keyFeatures } =
+[7m  [0m [91m                                                 ~~~~~~~[0m
+[96msrc/layouts/ProjectLayout.astro[0m:[93m20[0m:[93m36[0m - [91merror[0m[90m ts(2339): [0mProperty 'technologies' does not exist on type '{ title: string; draft: boolean; tags: string[]; industry: string; tools: string[]; client: string[]; skillData: { name: string; value: number; }[]; gallery: string[]; documents: { name: string; url: string; }[]; links: { ...; }[]; ... 13 more ...; partGraph?: string | undefined; }'.
+
+[7m20[0m const { title, description, image, technologies, demoUrl, githubUrl, completionDate, keyFeatures } =
+[7m  [0m [91m                                   ~~~~~~~~~~~~[0m
+[96msrc/layouts/ProjectLayout.astro[0m:[93m20[0m:[93m29[0m - [91merror[0m[90m ts(2339): [0mProperty 'image' does not exist on type '{ title: string; draft: boolean; tags: string[]; industry: string; tools: string[]; client: string[]; skillData: { name: string; value: number; }[]; gallery: string[]; documents: { name: string; url: string; }[]; links: { ...; }[]; ... 13 more ...; partGraph?: string | undefined; }'.
+
+[7m20[0m const { title, description, image, technologies, demoUrl, githubUrl, completionDate, keyFeatures } =
+[7m  [0m [91m                            ~~~~~[0m
+[96msrc/layouts/ProjectLayout.astro[0m:[93m24[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m't' is declared but its value is never read.
+
+[7m24[0m const t = useTranslations(currLocale);
+[7m  [0m [93m      ~[0m
+[96msrc/layouts/ProjectLayout.astro[0m:[93m11[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'getLocalizedRoute' is declared but its value is never read.
+
+[7m11[0m import { getLocalizedRoute } from "@/js/translationUtils";
+[7m  [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/layouts/ProjectLayout.astro[0m:[93m3[0m:[93m32[0m - [93mwarning[0m[90m ts(6133): [0m'getEntries' is declared but its value is never read.
+
+[7m3[0m import { type CollectionEntry, getEntries } from "astro:content";
+[7m [0m [93m                               ~~~~~~~~~~[0m
+
+[96msrc/pages/index.astro[0m:[93m7[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'Button' is declared but its value is never read.
+
+[7m7[0m import Button from "@components/Button/Button.astro";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/index.astro[0m:[93m5[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'ProjectCard' is declared but its value is never read.
+
+[7m5[0m import ProjectCard from "@components/Projects/ProjectCard.astro";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/rss.xml.ts[0m:[93m11[0m:[93m27[0m - [93mwarning[0m[90m ts(7044): [0mParameter 'context' implicitly has an 'any' type, but a better type may be inferred from usage.
+
+[7m11[0m export async function GET(context) {
+[7m  [0m [93m                          ~~~~~~~[0m
+
+[96msrc/pages/search-index.json.ts[0m:[93m10[0m:[93m36[0m - [91merror[0m[90m ts(2339): [0mProperty 'slug' does not exist on type '{ id: string; body?: string | undefined; collection: "projects"; data: { title: string; draft: boolean; tags: string[]; industry: string; tools: string[]; client: string[]; skillData: { name: string; value: number; }[]; ... 16 more ...; partGraph?: string | undefined; }; rendered?: RenderedContent | undefined; fileP...'.
+
+[7m10[0m         href: `/projects/${project.slug}/`,
+[7m  [0m [91m                                   ~~~~[0m
+[96msrc/pages/search-index.json.ts[0m:[93m7[0m:[93m21[0m - [91merror[0m[90m ts(2339): [0mProperty 'slug' does not exist on type '{ id: string; body?: string | undefined; collection: "projects"; data: { title: string; draft: boolean; tags: string[]; industry: string; tools: string[]; client: string[]; skillData: { name: string; value: number; }[]; ... 16 more ...; partGraph?: string | undefined; }; rendered?: RenderedContent | undefined; fileP...'.
+
+[7m7[0m         id: project.slug,
+[7m [0m [91m                    ~~~~[0m
+
+[96msrc/pages/uses.astro[0m:[93m6[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'ContactForm' is declared but its value is never read.
+
+[7m6[0m import ContactForm from "@components/Forms/ContactForm.astro";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/examples/blog-index-2.astro[0m:[93m42[0m:[93m23[0m - [93mwarning[0m[90m ts(6133): [0m'idx' is declared but its value is never read.
+
+[7m42[0m      posts.map((post, idx) => (
+[7m  [0m [93m                      ~~~[0m
+[96msrc/pages/examples/blog-index-2.astro[0m:[93m6[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'PostCardImage' is declared but its value is never read.
+
+[7m6[0m import PostCardImage from "@components/PostCard/PostCardImage.astro";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/examples/blog-post-2.astro[0m:[93m12[0m:[93m13[0m - [91merror[0m[90m ts(2719): [0mType '{ id: string; body?: string | undefined; collection: "blog"; data: { title: string; pubDate: Date; description: string; authors: import("astro:content").ReferenceDataEntry<"authors", string>[]; heroImage: { ...; }; tags: string[]; draft?: boolean | undefined; updatedDate?: Date | undefined; }; rendered?: import("ast...' is not assignable to type '{ id: string; body?: string | undefined; collection: "blog"; data: { title: string; pubDate: Date; description: string; authors: import("astro:content").ReferenceDataEntry<"authors", string>[]; heroImage: { ...; }; tags: string[]; draft?: boolean | undefined; updatedDate?: Date | undefined; }; rendered?: import("ast...'. Two different types with this name exist, but they are unrelated.
+  Type 'undefined' is not assignable to type '{ id: string; body?: string | undefined; collection: "blog"; data: { title: string; pubDate: Date; description: string; authors: ReferenceDataEntry<"authors", string>[]; heroImage: { ...; }; tags: string[]; draft?: boolean | undefined; updatedDate?: Date | undefined; }; rendered?: RenderedContent | undefined; filePa...'.
+
+[7m12[0m <BlogLayout post={post}>
+[7m  [0m [91m            ~~~~[0m
+[96msrc/pages/examples/blog-post-2.astro[0m:[93m9[0m:[93m44[0m - [91merror[0m[90m ts(2345): [0mArgument of type '{ id: string; body?: string | undefined; collection: "blog"; data: { title: string; pubDate: Date; description: string; authors: ReferenceDataEntry<"authors", string>[]; heroImage: { ...; }; tags: string[]; draft?: boolean | undefined; updatedDate?: Date | undefined; }; rendered?: RenderedContent | undefined; filePa...' is not assignable to parameter of type '{ id: string; body?: string | undefined; collection: "authors"; data: { name: string; avatar: { src: string; width: number; height: number; format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif"; }; about: string; email: string; authorLink: string; }; rendered?: RenderedContent | undefined; filePa...'.
+  Type 'undefined' is not assignable to type '{ id: string; body?: string | undefined; collection: "authors"; data: { name: string; avatar: { src: string; width: number; height: number; format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif"; }; about: string; email: string; authorLink: string; }; rendered?: RenderedContent | undefined; filePa...'.
+
+[7m9[0m const { Content, headings } = await render(post);
+[7m [0m [91m                                           ~~~~[0m
+[96msrc/pages/examples/blog-post-2.astro[0m:[93m9[0m:[93m18[0m - [93mwarning[0m[90m ts(6133): [0m'headings' is declared but its value is never read.
+
+[7m9[0m const { Content, headings } = await render(post);
+[7m [0m [93m                 ~~~~~~~~[0m
+
+[96msrc/pages/examples/blog-post-3.astro[0m:[93m12[0m:[93m13[0m - [91merror[0m[90m ts(2719): [0mType '{ id: string; body?: string | undefined; collection: "blog"; data: { title: string; pubDate: Date; description: string; authors: import("astro:content").ReferenceDataEntry<"authors", string>[]; heroImage: { ...; }; tags: string[]; draft?: boolean | undefined; updatedDate?: Date | undefined; }; rendered?: import("ast...' is not assignable to type '{ id: string; body?: string | undefined; collection: "blog"; data: { title: string; pubDate: Date; description: string; authors: import("astro:content").ReferenceDataEntry<"authors", string>[]; heroImage: { ...; }; tags: string[]; draft?: boolean | undefined; updatedDate?: Date | undefined; }; rendered?: import("ast...'. Two different types with this name exist, but they are unrelated.
+  Type 'undefined' is not assignable to type '{ id: string; body?: string | undefined; collection: "blog"; data: { title: string; pubDate: Date; description: string; authors: ReferenceDataEntry<"authors", string>[]; heroImage: { ...; }; tags: string[]; draft?: boolean | undefined; updatedDate?: Date | undefined; }; rendered?: RenderedContent | undefined; filePa...'.
+
+[7m12[0m <BlogLayout post={post}>
+[7m  [0m [91m            ~~~~[0m
+[96msrc/pages/examples/blog-post-3.astro[0m:[93m9[0m:[93m44[0m - [91merror[0m[90m ts(2345): [0mArgument of type '{ id: string; body?: string | undefined; collection: "blog"; data: { title: string; pubDate: Date; description: string; authors: ReferenceDataEntry<"authors", string>[]; heroImage: { ...; }; tags: string[]; draft?: boolean | undefined; updatedDate?: Date | undefined; }; rendered?: RenderedContent | undefined; filePa...' is not assignable to parameter of type '{ id: string; body?: string | undefined; collection: "authors"; data: { name: string; avatar: { src: string; width: number; height: number; format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif"; }; about: string; email: string; authorLink: string; }; rendered?: RenderedContent | undefined; filePa...'.
+  Type 'undefined' is not assignable to type '{ id: string; body?: string | undefined; collection: "authors"; data: { name: string; avatar: { src: string; width: number; height: number; format: "png" | "jpg" | "jpeg" | "tiff" | "webp" | "gif" | "svg" | "avif"; }; about: string; email: string; authorLink: string; }; rendered?: RenderedContent | undefined; filePa...'.
+
+[7m9[0m const { Content, headings } = await render(post);
+[7m [0m [91m                                           ~~~~[0m
+[96msrc/pages/examples/blog-post-3.astro[0m:[93m9[0m:[93m18[0m - [93mwarning[0m[90m ts(6133): [0m'headings' is declared but its value is never read.
+
+[7m9[0m const { Content, headings } = await render(post);
+[7m [0m [93m                 ~~~~~~~~[0m
+
+[96msrc/pages/examples/landing2.astro[0m:[93m37[0m:[93m32[0m - [93mwarning[0m[90m ts(6133): [0m'idx' is declared but its value is never read.
+
+[7m37[0m      formattedPosts.map((post, idx) => (
+[7m  [0m [93m                               ~~~[0m
+[96msrc/pages/examples/landing2.astro[0m:[93m8[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'PostCardBasic' is declared but its value is never read.
+
+[7m8[0m import PostCardBasic from "@components/PostCard/PostCardBasic.astro";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/examples/landing2.astro[0m:[93m6[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'HeroSideImage' is declared but its value is never read.
+
+[7m6[0m import HeroSideImage from "@components/Hero/HeroSideImage.astro";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/examples/landing3.astro[0m:[93m38[0m:[93m32[0m - [93mwarning[0m[90m ts(6133): [0m'idx' is declared but its value is never read.
+
+[7m38[0m      formattedPosts.map((post, idx) => (
+[7m  [0m [93m                               ~~~[0m
+[96msrc/pages/examples/landing3.astro[0m:[93m12[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'TagsCard' is declared but its value is never read.
+
+[7m12[0m import TagsCard from "@components/SidebarCards/TagsCard.astro";
+[7m  [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/examples/landing3.astro[0m:[93m11[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'NewsletterCard' is declared but its value is never read.
+
+[7m11[0m import NewsletterCard from "@components/SidebarCards/NewsletterCard.astro";
+[7m  [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/examples/landing3.astro[0m:[93m8[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'PostCardBasic' is declared but its value is never read.
+
+[7m8[0m import PostCardBasic from "@components/PostCard/PostCardBasic.astro";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[96msrc/pages/examples/landing3.astro[0m:[93m7[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'HeroTinyImage' is declared but its value is never read.
+
+[7m7[0m import HeroTinyImage from "@components/Hero/HeroTinyImage.astro";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/examples/projects-2.astro[0m:[93m6[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'ProjectsSideImage' is declared but its value is never read.
+
+[7m6[0m import ProjectsSideImage from "@components/Projects/ProjectsSideImage.astro";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/projects/[...slug].astro[0m:[93m49[0m:[93m7[0m - [93mwarning[0m[90m ts(6133): [0m'tools' is declared but its value is never read.
+
+[7m49[0m const tools = data.tools || [];
+[7m  [0m [93m      ~~~~~[0m
+[96msrc/pages/projects/[...slug].astro[0m:[93m4[0m:[93m1[0m - [93mwarning[0m[90m ts(6133): [0m'Button' is declared but its value is never read.
+
+[7m4[0m import Button from "@components/Button/Button.astro";
+[7m [0m [93m~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[96msrc/pages/projects/index.astro[0m:[93m206[0m:[93m11[0m - [93mwarning[0m[90m ts(6133): [0m'rowTitle' is declared but its value is never read.
+
+[7m206[0m     const rowTitle = titleCell?.innerText.toLowerCase() || "";
+[7m   [0m [93m          ~~~~~~~~[0m
+
+[96msrc/pages/tags/[tag].astro[0m:[93m27[0m:[93m6[0m - [93mwarning[0m[90m ts(6196): [0m'Props' is declared but never used.
+
+[7m27[0m type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+[7m  [0m [93m     ~~~~~[0m
+[96msrc/pages/tags/[tag].astro[0m:[93m22[0m:[93m34[0m - [93mwarning[0m[90m ts(6133): [0m'count' is declared but its value is never read.
+
+[7m22[0m  return processedtags.map(([tag, count]) => ({
+[7m  [0m [93m                                 ~~~~~[0m
+
+Result (287 files): 
+- 29 errors
+- 0 warnings
+- 77 hints
+

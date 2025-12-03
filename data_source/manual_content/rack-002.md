@@ -39,4 +39,4 @@ The 002 Rack launched on time and became the industry standard for mobile record
   <YouTube id="dQw4w9WgXcQ" />
 </div>
 
-<ModelViewer src="https://assets.eriknorris.com/rack-002/model.glb" alt="002 Rack Assembly" />
+<ModelViewer alt="002 Rack Assembly" />

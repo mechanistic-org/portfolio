@@ -1,15 +1,25 @@
 ---
 interface Props {
-	src: string;
+	src?: string;
 	alt?: string;
 	poster?: string;
+	environmentImage?: string;
 }
 
 const DEFAULT_POSTER = "https://assets.eriknorris.com/_site/EN_Badge_wire_rusty_1200.png";
-const { src, alt = "3D Model", poster = DEFAULT_POSTER } = Astro.props;
-const uid = "mv-" + Math.random().toString(36).substr(2, 9);
+const NEIL_ARMSTRONG_GLB = "https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb";
+const MOON_ENV = "https://modelviewer.dev/shared-assets/environments/moon_1k.hdr";
 
-if (!src) return null;
+const {
+	src = NEIL_ARMSTRONG_GLB,
+	alt = "Neil Armstrong",
+	poster = DEFAULT_POSTER,
+	environmentImage,
+} = Astro.props;
+
+const isFallback = src === NEIL_ARMSTRONG_GLB;
+const finalEnv = environmentImage || (isFallback ? MOON_ENV : "neutral");
+const uid = "mv-" + Math.random().toString(36).substr(2, 9);
 ---
 
 <div
@@ -22,10 +32,13 @@ if (!src) return null;
 		alt={alt}
 		auto-rotate
 		camera-controls
-		shadow-intensity="1.5"
+		ar
+		touch-action="pan-y"
+		shadow-intensity="1"
 		shadow-softness="1"
-		exposure="1.2"
-		camera-orbit="45deg 55deg 105%"
+		exposure="1"
+		environment-image={finalEnv}
+		camera-orbit="0deg 75deg 105%"
 		field-of-view="30deg"
 		interaction-prompt="auto"
 		class="h-full w-full"

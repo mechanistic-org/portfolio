@@ -74,6 +74,22 @@ python ingest_data.py --scaffold
 ```
 This creates `{slug}.md` files in `data_source/manual_content/` with a standard "Challenge/Approach/Impact" template.
 
+### Data & Content Refinement
+When adding new projects or resetting data, run these scripts before ingestion:
+
+1.  **Regenerate Skills:**
+    ```bash
+    python scripts/refine_skills.py
+    ```
+    *   *Use when:* You add new projects and want them to have unique skill profiles immediately.
+
+2.  **Batch Generate Content:**
+    ```bash
+    python scripts/generate_content.py
+    ```
+    *   *Use when:* You have imported a batch of projects and need placeholder "Hero Content" to avoid empty pages.
+    *   *Note:* This script respects existing manual content (files > 1KB).
+
 ## 4. Project Detail Pages
 Project pages are generated from MDX files in `src/content/projects/`.
 
@@ -135,6 +151,28 @@ status: {
 ## 8. Troubleshooting
 
 ### Build Issues
+*   **Async Rendering in Astro Templates**
+    *   **Symptom:** Build fails with generic errors when using `await` inside a `.map()` in JSX.
+    *   **Cause:** Astro's JSX renderer struggles with async operations inside array maps.
+    *   **Fix:** Pre-render the content in the component script (frontmatter) using `Promise.all()`, then map over the rendered result in the template.
+        ```typescript
+        // Correct Pattern
+        const renderedItems = await Promise.all(items.map(async (item) => {
+            const { Content } = await item.render();
+            return { ...item.data, Content };
+        }));
+        // ... use renderedItems in JSX
+        ```
+
+*   **Build Fails on "Missing Collection"**
+    *   **Symptom:** `npm run build` fails with errors like `Collection 'blog' does not exist` or `ReferenceDataEntry not found`.
+    *   **Cause:** Unused templates (e.g., `src/pages/blog/...`) are trying to query content collections that haven't been defined or populated.
+    *   **Fix:** Delete the unused template directories (`src/pages/blog`, `src/pages/tags`) and their associated components (`PostCard`, `SidebarCards`). The portfolio is designed to be lean; remove what you don't use.
+
+*   **Symptom:** `npm run build` or `npx astro check` fails with ~32 errors (e.g., `examples/blog-post-3.astro`).
+    *   **Context:** These are pre-existing type errors in example/unused files.
+    *   **Action:** They do not affect the core `project` or `colophon` pages. If deployment fails, ensure `astro build` is configured to not fail on TS errors, or ignore `examples/` in `tsconfig.json`.
+
 *   **Error:** `Cannot apply unknown utility class 'text-3xl'` (or similar) inside an Astro component's `<style>` block.
     *   **Cause:** Tailwind v4 styles are isolated. Astro's scoped `<style>` blocks do not inherit the global Tailwind context automatically.
     *   **Fix:** Add the `@reference` directive to the top of the style block to link it to the global CSS configuration.
@@ -178,6 +216,22 @@ status: {
 *   **Symptom:** The background is solid color; no grid lines are visible.
 *   **Cause:** The `<body>` element likely has a background color class (e.g., `bg-white` or `bg-neutral-950`) that is painting over the `<html>` element's grid pattern.
 *   **Fix:** Ensure `BaseLayout.astro` does NOT apply background color classes to the `<body>` tag. It should be transparent.
+
+### Double Bullets in Lists
+*   **Symptom:** Lists on project pages show two bullets (e.g., `• • Item`).
+*   **Cause:** Hardcoded bullet characters (`•`) in the manual Markdown files colliding with CSS `list-style-type`.
+*   **Fix:** Remove all hardcoded bullets from `data_source/manual_content/*.md`. Let CSS handle the styling.
+
+### Missing Part Breakdown Graph
+*   **Symptom:** "Part Breakdown" graph is missing on a specific project page.
+*   **Cause:** Name mismatch between `Main.csv` (Slug Name) and `Stats.csv` (Slug Name).
+*   **Fix:** Ensure the "Slug Name" column in `Stats.csv` *exactly* matches `Main.csv`.
+    *   *Example:* "002 Rack" (Wrong) vs "Rack 002" (Correct).
+
+### Blank 3D Model Viewer
+*   **Symptom:** Viewer loads but shows a blank/empty scene (not the fallback).
+*   **Cause:** `src` URL points to a non-existent file, often due to a mismatch between the generated slug and the `R2_STAGING` folder name.
+*   **Fix:** Ensure the folder in `quantum-assets/R2_STAGING/` matches the project slug exactly (e.g., `rack-002`, not `002-rack`).
 
 ## 9. Writing Manual Content
 When creating deep-dive content in `data_source/manual_content/{slug}.md`, follow the **Narrative STAR** framework.

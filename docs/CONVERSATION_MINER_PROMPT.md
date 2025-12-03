@@ -27,6 +27,7 @@
 >
 > **COLOPHON SCOUT (META-PORTFOLIO):**
 > *   **Did we build a "Meta-Feature"?** (e.g., a cool script, a complex UI component, a novel workflow).
+> *   **Did we refactor a hardcoded feature into a data-driven one?** (e.g., moving HTML cards to a Content Collection).
 > *   If yes, add a section to your output plan:
 >     ### `docs/ROADMAP.md`
 >     **Add to "Colophon / Meta-Portfolio" section:**

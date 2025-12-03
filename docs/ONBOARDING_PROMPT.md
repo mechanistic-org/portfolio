@@ -23,6 +23,7 @@
 > *   Understand the "Ingestion Pipeline" (`ingest_data.py`).
 > *   Understand the "Physical Asset" workflow (R2 Staging).
 > *   **Visual Check:** Always verify UI changes against the Living Style Guide (`/about/elements`) to ensure DLS compliance.
+> *   **Critical Scripts:** Be aware of `scripts/refine_skills.py` and `scripts/generate_content.py`. These are the tools for mass-manipulating the portfolio data and content. Do not modify `Skills.csv` manually if you plan to run these scripts, as your changes will be overwritten.
 >
 > **LIFECYCLE AWARENESS:**
 > *   **Start:** You are reading this Onboarding Prompt.
