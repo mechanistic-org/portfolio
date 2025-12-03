@@ -187,6 +187,10 @@ status: {
     *   **Cause:** The Keystatic integration is initializing before other required plugins.
     *   **Fix:** Move `keystatic()` to the very end of the `integrations` array in `astro.config.mjs`.
 
+*   **Error:** `Identifier "Admonition" has already been declared` (in MDX files)
+    *   **Cause:** The component is being imported manually (e.g., `import Admonition...`) but is *also* configured for global auto-import in `astro.config.mjs`.
+    *   **Fix:** Remove the manual import statement from the MDX file. The system automatically provides this component.
+
 ### Runtime Issues
 *   **Error:** `Uncaught SyntaxError: ... does not provide an export named 'AXObjectRoles'`
     *   **Cause:** Vite is incorrectly optimizing the `axobject-query` dependency (used by `eslint-plugin-jsx-a11y`).
@@ -211,6 +215,20 @@ status: {
 *   **Fix 1:** Rename the project in `Main.csv` (or use the `Slug Name` column) to start with a letter (e.g., `rack-002`).
 *   **Cause 2 (Invalid Tags):** Markdown content contains text like `<0.5%`. MDX interprets `<` followed by a number/letter as an opening HTML tag.
 *   **Fix 2:** Escape the less-than sign: `&lt;0.5%`.
+
+### Empty Content Collection
+*   **Symptom:** A specific content collection (e.g., `colophon`) returns an empty array `[]` via `getCollection`, even though files exist.
+*   **Cause:** Potential conflict between Astro's Content Layer and integrations like Keystatic, or caching issues.
+*   **Fix:** Use `import.meta.glob` to manually load the files as a fallback.
+    ```typescript
+    // Workaround:
+    const globFeatures = import.meta.glob("../content/colophon/*.mdx", { eager: true });
+    const features = Object.values(globFeatures).map((file: any) => ({
+        id: file.file,
+        ...file.frontmatter,
+        Content: file.Content || file.default
+    }));
+    ```
 
 ### Visible Grid Not Showing
 *   **Symptom:** The background is solid color; no grid lines are visible.

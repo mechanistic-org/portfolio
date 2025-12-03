@@ -69,7 +69,15 @@
     *   **Tech:** Astro Content Collections (`src/content/colophon`), MDX.
     *   **Description:** A dedicated content pipeline for documenting site features, allowing for rich text, code blocks, and future expansion without touching the page template.
 
+*   **Living Style Guide:**
+    *   **Hook:** The map is the territory.
+    *   **Tech:** MDX, Astro Components (`Admonition`, `Chip`, `Wire`).
+    *   **Description:** A live, render-accurate implementation of the Design Language System at `/about/elements`. It serves as both documentation and a visual regression test suite for the "Hyper-Functional Brutalist" aesthetic.
+
 ## 📜 Change Log (Recent)
+*   **Colophon Repair:** Fixed a critical issue where the "Meta-Features" section was blank by implementing a `import.meta.glob` workaround to bypass a failing `getCollection` call.
+*   **Meta-Portfolio Expansion:** Added "Living Style Guide" to the Colophon and expanded existing entries (`ar-viewer`, `physical-spec`, `the-pulse`) with detailed "Narrative STAR" case studies.
+*   **Build Fix:** Resolved "Duplicate Identifier" crash in Living Style Guide (`index.mdx`) caused by conflict between manual imports and `astro-auto-import`.
 *   **Meta-Portfolio Migration:** Refactored Colophon features ("The Pulse", "AR-Ready Viewer", "The Physical Spec") from hardcoded HTML into a dedicated `colophon` Content Collection for easier maintenance and documentation.
 *   **Colophon Polish:** Switched Tech Stack Marquee to icon-only mode (`variant="logo-only"`).
 *   **SEO Upgrade:** Implemented `og:type="article"` for Project pages to improve social sharing.

@@ -37,6 +37,7 @@ const colophon = defineCollection({
     type: "content",
     schema: z.object({
         title: z.string(),
+        slug: z.string().optional(),
         subtitle: z.string(),
         icon: z.string(), // Lucide icon name
         color: z.string(), // Tailwind color class base (e.g., "green", "blue")

@@ -24,6 +24,7 @@
 > *   Understand the "Physical Asset" workflow (R2 Staging).
 > *   **Visual Check:** Always verify UI changes against the Living Style Guide (`/about/elements`) to ensure DLS compliance.
 > *   **Critical Scripts:** Be aware of `scripts/refine_skills.py` and `scripts/generate_content.py`. These are the tools for mass-manipulating the portfolio data and content. Do not modify `Skills.csv` manually if you plan to run these scripts, as your changes will be overwritten.
+*   **Meta-Portfolio:** The `/colophon` page is a "Meta-Portfolio" that documents the site's own engineering features. When building a complex new feature, consider if it deserves a "Meta-Feature" entry in `src/content/colophon/`.
 >
 > **LIFECYCLE AWARENESS:**
 > *   **Start:** You are reading this Onboarding Prompt.

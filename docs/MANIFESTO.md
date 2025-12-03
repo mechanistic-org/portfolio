@@ -52,3 +52,6 @@ We do not just list specs; we tell the engineering story.
 We show the seams.
 *   **Principle:** The "Construction Badge", "Debug Mode", and "Build Stats" are features, not bugs.
 *   **Why:** We are engineers. We value the machine as much as the output.
+
+### 9. The Meta-Portfolio
+The site must document itself. Every major feature (AR Viewer, Build Timer, Print Mode) is an engineering project worthy of a case study. We do not hide the machinery; we celebrate it in the `/colophon`.

@@ -45,6 +45,17 @@ The site features a "Matrix-style" boot sequence that is **Event-Driven**.
 *   **Keystatic Integration:** In `astro.config.mjs`, `keystatic()` **MUST** be the last item in the `integrations` array. If placed earlier, it causes `virtual:keystatic-config` resolution errors during the build.
 *   **Vite Optimization:** The `axobject-query` package (used by accessibility linters) must be excluded from Vite's optimization to prevent runtime `SyntaxError` issues in the browser (`optimizeDeps.exclude: ["axobject-query"]`).
 
+### Hybrid Content Loading
+We use a hybrid approach for loading content to balance features and stability:
+*   **`projects` Collection:** Uses standard `getCollection()` for full type safety and schema validation.
+*   **`colophon` Collection:** Uses `import.meta.glob()` as a robust workaround for a known issue where `getCollection` returns empty arrays for this specific collection.
+    *   **Trade-off:** Slightly less type safety (requires manual mapping), but guarantees content availability.
+
+### Auto-Imports
+*   **Tool:** `astro-auto-import`
+*   **Purpose:** Reduces boilerplate by automatically importing core DLS components (e.g., `Admonition`, `Newsletter`) into all MDX files.
+*   **Gotcha:** Do **NOT** manually import these components in your markdown files. Doing so causes a "Duplicate Identifier" build error.
+
 ## 🌍 Environment Awareness
 The site adapts its UI based on the build environment and configuration.
 

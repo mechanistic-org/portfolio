@@ -2,19 +2,22 @@
 import Layout from "@layouts/BaseLayout.astro";
 import Button from "@components/Button/Button.astro";
 import Marquee from "@components/Marquee/Marquee";
-import { getCollection } from "astro:content";
+// import { getCollection, type CollectionEntry } from "astro:content";
 
-const features = (await getCollection("colophon")).sort((a, b) => a.data.order - b.data.order);
-
-const renderedFeatures = await Promise.all(
-	features.map(async (feature) => {
-		const { Content } = await feature.render();
+// Workaround for empty collection issue: manually load files via glob
+const globFeatures = import.meta.glob("../content/colophon/*.mdx", { eager: true });
+const features = Object.values(globFeatures)
+	.map((file: any) => {
+		const data = file.frontmatter || {};
 		return {
-			...feature.data,
-			Content,
+			id: file.file,
+			...data,
+			Content: file.Content || file.default,
 		};
-	}),
-);
+	})
+	.sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
+
+const renderedFeatures = features;
 
 const tools = [
 	"VS Code",
@@ -227,95 +230,57 @@ const marqueeTools = [...tools, ...tools, ...tools, ...tools, ...tools, ...tools
 			<div class="site-container">
 				<h2 class="h2 mb-16 text-center">Meta-Features</h2>
 				<div class="grid gap-8 md:grid-cols-3">
-					<!-- Feature 1: The Pulse -->
-					<div class="border-border bg-card relative overflow-hidden rounded-xl border p-8">
-						<div
-							class="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10 text-green-500"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								class="lucide lucide-activity"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg
-							>
-						</div>
-						<h3 class="text-xl font-bold text-white">The Pulse</h3>
-						<p class="mt-2 font-mono text-sm text-green-400">Self-Aware Build Stats</p>
-						<p class="mt-4 text-neutral-400">
-							The site knows how fast it was built. The ingestion pipeline tracks its own runtime
-							performance and stamps the footer with the exact build duration (e.g., "Built in
-							0.42s").
-						</p>
-					</div>
+					{
+						renderedFeatures.map((feature) => {
+							const { Content } = feature;
+							const iconMap = {
+								activity: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>',
+								box: '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line>',
+								printer:
+									'<polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect width="12" height="8" x="6" y="14"></rect>',
+								palette:
+									'<circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.093 0-.679.63-1.216 1.318-1.216 2.079 0 3.75-1.603 3.75-3.75 0-3.037-2.561-5.5-5.662-5.5-3.1 0-5.662 2.463-5.662 5.5 0 3.037 2.561 5.5 5.662 5.5 2.079 0 3.75-1.603 3.75-3.75 0-.679-.63-1.216-1.318-1.216-.438 0-.835.18-1.125.437-.289.29-.652.438-1.093.438C11.254 18.312 10.5 17.558 10.5 16.632c0-.926.746-1.688 1.688-1.688 3.1 0 5.662 2.463 5.662 5.5 0 3.037-2.561 5.5-5.662 5.5C6.5 26.444 2 21.944 2 16.444S6.5 6.444 12 6.444c5.5 0 10 4.5 10 10 0 1.414-.306 2.754-.856 3.96"></path>',
+							};
 
-					<!-- Feature 2: AR-Ready 3D -->
-					<div class="border-border bg-card relative overflow-hidden rounded-xl border p-8">
-						<div
-							class="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-blue-500/10 text-blue-500"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								class="lucide lucide-box"
-								><path
-									d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
-								></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line
-									x1="12"
-									y1="22.08"
-									x2="12"
-									y2="12"></line></svg
-							>
-						</div>
-						<h3 class="text-xl font-bold text-white">AR-Ready Viewer</h3>
-						<p class="mt-2 font-mono text-sm text-blue-400">&lt;model-viewer&gt; Integration</p>
-						<p class="mt-4 text-neutral-400">
-							Zero-runtime 3D visualization. Assets are optimized for web delivery and support "View
-							in Room" Augmented Reality on mobile devices, adapting lighting to the environment.
-						</p>
-					</div>
+							const colorMap = {
+								green: "text-green-500 bg-green-500/10 border-green-500/20",
+								blue: "text-blue-500 bg-blue-500/10 border-blue-500/20",
+								purple: "text-purple-500 bg-purple-500/10 border-purple-500/20",
+								orange: "text-orange-500 bg-orange-500/10 border-orange-500/20",
+							};
 
-					<!-- Feature 3: The Physical Spec -->
-					<div class="border-border bg-card relative overflow-hidden rounded-xl border p-8">
-						<div
-							class="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-purple-500/10 text-purple-500"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								class="lucide lucide-printer"
-								><polyline points="6 9 6 2 18 2 18 9"></polyline><path
-									d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
-								></path><rect width="12" height="8" x="6" y="14"></rect></svg
-							>
-						</div>
-						<h3 class="text-xl font-bold text-white">The Physical Spec</h3>
-						<p class="mt-2 font-mono text-sm text-purple-400">Print Mode Optimization</p>
-						<p class="mt-4 text-neutral-400">
-							The Datasheet is physical. Custom <code>@media print</code> styles strip the UI navigation
-							and footer, reformatting the Project Detail page into a high-contrast, PDF-ready specification
-							document.
-						</p>
-					</div>
+							const colorClass = colorMap[feature.color] || colorMap.green;
+							const textColorClass = colorClass.split(" ")[0].replace("text-", "text-"); // Extract text color
+							const borderColorClass = colorClass.split(" ")[2];
+
+							return (
+								<div class="border-border bg-card relative overflow-hidden rounded-xl border p-8">
+									<div
+										class={`mb-6 flex h-12 w-12 items-center justify-center rounded-full ${colorClass}`}
+									>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="24"
+											height="24"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="2"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											class="lucide"
+											set:html={iconMap[feature.icon] || iconMap.activity}
+										/>
+									</div>
+									<h3 class="text-xl font-bold text-white">{feature.title}</h3>
+									<p class={`mt-2 font-mono text-sm ${textColorClass}`}>{feature.subtitle}</p>
+									<div class="prose prose-invert prose-sm mt-4 max-w-none text-neutral-400">
+										<Content />
+									</div>
+								</div>
+							);
+						})
+					}
 				</div>
 			</div>
 		</section>

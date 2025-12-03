@@ -1,0 +1,23 @@
+---
+title: "Living Style Guide"
+subtitle: "Self-Documenting DLS"
+icon: "palette"
+color: "orange"
+order: 4
+---
+
+## The Challenge
+> **Context:** Design drift is the enemy of long-term maintenance.
+
+In many projects, the "Style Guide" is a static PDF that gets ignored as soon as it's written. Developers add "one-off" CSS classes, and soon the site looks inconsistent. We needed a system that forced compliance.
+
+## Engineering Approach
+We built the documentation *into* the codebase.
+
+*   **The "Elements" Page:** Located at [`/about/elements`](/about/elements), this page is not a mockup. It imports the *actual* components (`<Button>`, `<Chip>`, `<Admonition>`) used in production.
+*   **MDX Integration:** We use MDX to mix documentation (Markdown) with live code (React/Astro components).
+*   **Visual Regression:** If a developer breaks a component style, it breaks on the Style Guide page immediately.
+
+## Impact
+*   **Consistency:** Every button, font, and color on the site is traceable to the tokens defined in this guide.
+*   **Velocity:** New features are built faster because we can copy-paste pre-validated patterns from the "Kit".

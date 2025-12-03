@@ -6,4 +6,18 @@ color: "green"
 order: 1
 ---
 
-The site knows how fast it was built. The ingestion pipeline tracks its own runtime performance and stamps the footer with the exact build duration (e.g., "Built in 0.42s").
+## The Challenge
+> **Context:** Static sites often feel "dead" or "frozen in time."
+
+We wanted to expose the "Machine" behind the portfolio. As engineers, we care about efficiency. If the build pipeline is fast, we should brag about it. If it's slow, we should know about it.
+
+## Engineering Approach
+We instrumented the ingestion pipeline to be self-aware.
+
+*   **Python Timer:** The `ingest_data.py` script starts a high-resolution timer (`time.perf_counter()`) at the very beginning of execution.
+*   **JSON Injection:** Just before the script finishes, it calculates the delta and writes it to `src/config/build.json`.
+*   **Footer Integration:** The Astro Footer component imports this JSON file at build time. Because Astro is a Static Site Generator (SSG), this value is "baked in" to the HTML.
+
+## Impact
+*   **Transparency:** It proves the "Zero-Runtime" philosophy works. The site builds in under 0.5 seconds because we aren't using heavy frameworks.
+*   **Aesthetic:** It adds a "heartbeat" to the footer, reinforcing the idea that this is a living, engineered system, not just a template.

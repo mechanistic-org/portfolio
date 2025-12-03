@@ -91,7 +91,7 @@ export default defineConfig({
             Image: false,
             SVG: false,
         }),
-        keystatic(),
+        // keystatic(),
     ],
     vite: {
         plugins: [tailwindcss()],

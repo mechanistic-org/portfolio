@@ -6,4 +6,18 @@ color: "purple"
 order: 3
 ---
 
-The Datasheet is physical. Custom `@media print` styles strip the UI navigation and footer, reformatting the Project Detail page into a high-contrast, PDF-ready specification document.
+## The Challenge
+> **Context:** Portfolios are often designed for screens, but engineering decisions happen in meetings where paper still rules.
+
+When a hiring manager hits `Cmd+P` on a typical portfolio site, the result is a disaster: broken navigation bars, cut-off images, and wasted ink. We needed the site to degrade gracefully into a professional document.
+
+## Engineering Approach
+We treated "Print" as a distinct platform, just like "Mobile" or "Desktop".
+
+*   **CSS Media Queries:** We use `@media print` to brutally strip away the "Web UI". The Navigation Bar, Footer, 3D Viewer, and Interactive Buttons are all set to `display: none`.
+*   **High-Contrast Typography:** We force all text to black (`#000`) and remove the dark mode background, ensuring crisp output on standard office printers.
+*   **Layout Re-Flow:** The CSS Grid layout shifts from a responsive web view to a linear, document-flow layout suitable for A4/Letter paper.
+
+## Impact
+*   **Utility:** The site functions as a dynamic generator for the user's physical resume/portfolio packet.
+*   **Brand:** It reinforces the "Datasheet" aesthetic—it doesn't just *look* like a spec sheet, it *prints* like one.
