@@ -809,6 +809,10 @@ def process_projects():
                 content_body = content_body.replace("{{MODEL_URL}}", model_url)
             else:
                 content_body = content_body.replace("{{MODEL_URL}}", "")
+            
+            # Replace local asset paths with R2_DOMAIN
+            if R2_DOMAIN.startswith("http"):
+                content_body = content_body.replace("/assets/r2/", f"{R2_DOMAIN}/")
         else:
             content_body = f"""
 import {{ YouTube }} from '@astro-community/astro-embed-youtube';
