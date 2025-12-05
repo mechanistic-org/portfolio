@@ -59,7 +59,7 @@
 
 		background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
 			linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-		background-size: 50px 50px;
+		background-size: 40px 40px;
 		background-attachment: fixed;
 
 		/* Brutalist Header Font */
@@ -104,7 +104,7 @@
 
 		background-image: linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
 			linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
-		background-size: 50px 50px;
+		background-size: 40px 40px;
 		background-attachment: fixed;
 
 		@apply scheme-dark;
@@ -155,14 +155,14 @@
 	/* Glassmorphism Navbar */
 	.nav-glass {
 		/* Fallback / Explicit RGBA for transparency */
-		background-color: rgba(255, 255, 255, 0.1) !important;
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
+		background-color: rgba(255, 255, 255, 0.05) !important;
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
 		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 	}
 
 	html.dark .nav-glass {
-		background-color: rgba(10, 10, 10, 0.1) !important;
+		background-color: rgba(10, 10, 10, 0.5) !important;
 		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 	}
 }

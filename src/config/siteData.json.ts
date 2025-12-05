@@ -55,9 +55,9 @@ export interface SiteDataProps {
 const siteData: SiteDataProps = {
 	name: "Erik Norris' Portfolio",
 	// Your website's title and description (meta fields)
-	title: "Erik Norris | Mechanical Design Engineer - I love doing good work on hard things.",
+	title: "Erik Norris | High-Performance Mechanical Design",
 	description:
-		"Technical specifications and field notes for Erik Norris, Senior Mechanical Engineer. An archive of hardware projects spanning consumer electronics, medical devices, and automation.",
+		"Technical portfolio of Erik Norris, Senior Mechanical Engineer. Specializing in high-performance consumer electronics, medical devices, and precision automation.",
 	useViewTransitions: true,
 	useAnimations: true,
 

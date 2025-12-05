@@ -13,12 +13,15 @@ const recentProjects = allProjects.sort(
 );
 ---
 
-<Layout title="Home" description="Mechanical Design Engineer Portfolio">
+<Layout
+	title="Erik Norris | High-Performance Mechanical Design"
+	description="Mechanical Design Engineer Portfolio"
+>
 	<Hero />
 
 	<ClientGrid />
 
 	<section class="w-full py-8 md:py-16">
-		<ProjectStrip client:load projects={recentProjects} />
+		<ProjectStrip client:visible projects={recentProjects} />
 	</section>
 </Layout>
