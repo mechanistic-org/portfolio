@@ -799,16 +799,14 @@ def process_projects():
         part_graph_url = generate_donut_chart(parts, slug) or ""
 
         # Template Replacement
-        model_viewer_tag = ""
-        if model_url:
-            model_viewer_tag = f'<ModelViewer src="{model_url}" alt="3D Asset" />'
-        
-        # Replace placeholders in manual content
         if content_body:
             if model_url:
-                content_body = content_body.replace("{{MODEL_URL}}", model_url)
+                tag = f'<ModelViewer src="{model_url}" alt="3D Asset" />'
+                content_body = content_body.replace("{{MODEL_URL}}", tag)
             else:
-                content_body = content_body.replace("{{MODEL_URL}}", "")
+                # Use fallback (Neil Armstrong) by rendering component without src
+                tag = '<ModelViewer />'
+                content_body = content_body.replace("{{MODEL_URL}}", tag)
             
             # Replace local asset paths with R2_DOMAIN
             if R2_DOMAIN.startswith("http"):

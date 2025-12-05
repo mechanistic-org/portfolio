@@ -24,11 +24,11 @@ The physical manifestation of the design.
 *   **Isometric:** The "God's Eye" view. Perfect 30-degree projection for structural clarity.
     ![Isometric View](/assets/r2/dreamjob/dreamjob-iso-01.jpg)
 *   **Orthographic:** The "Blueprint". Flat, dimensionally accurate projections.
-    ![Orthographic View](/assets/r2/dreamjob/dreamjob-ortho-01.jpg)
+    ![Orthographic View](/assets/r2/dreamjob/dreamjob-ortho-01.png)
 *   **Detail:** The "Macro". Focusing on texture, material, and finish.
     ![Detail View](/assets/r2/dreamjob/dreamjob-detail-01.jpg)
 *   **Context:** The "Lifestyle". Showing the object in its intended environment.
-    ![Context View](/assets/r2/dreamjob/dreamjob-context-01.jpg)
+    ![Context View](/assets/r2/dreamjob/dreamjob-context-01.png)
 
 <Wire />
 
@@ -36,13 +36,13 @@ The physical manifestation of the design.
 The process of creation and validation.
 
 *   **Prototype:** The "Alpha". Raw materials, 3D prints, and rough machining.
-    ![Prototype View](/assets/r2/dreamjob/dreamjob-prototype-01.jpg)
+    ![Prototype View](/assets/r2/dreamjob/dreamjob-prototype-01.png)
 *   **Assembly:** The "Build". Showing how the components fit together.
-    ![Assembly View](/assets/r2/dreamjob/dreamjob-assembly-01.jpg)
+    ![Assembly View](/assets/r2/dreamjob/dreamjob-assembly-01.png)
 *   **Teardown:** The "Autopsy". Analyzing the internal components.
-    ![Teardown View](/assets/r2/dreamjob/dreamjob-teardown-01.jpg)
+    ![Teardown View](/assets/r2/dreamjob/dreamjob-teardown-01.png)
 *   **Test:** The "Validation". Stress testing, thermal analysis, and failure modes.
-    ![Test View](/assets/r2/dreamjob/dreamjob-test-01.jpg)
+    ![Test View](/assets/r2/dreamjob/dreamjob-test-01.png)
 
 <Wire />
 
@@ -52,13 +52,13 @@ The theoretical and internal understanding.
 *   **Schematic:** The "Logic". Wiring diagrams and flowcharts.
     ![Schematic View](/assets/r2/dreamjob/dreamjob-schematic-01.jpg)
 *   **Exploded:** The "BOM". Visualizing the Bill of Materials in 3D space.
-    ![Exploded View](/assets/r2/dreamjob/dreamjob-exploded-01.jpg)
+    ![Exploded View](/assets/r2/dreamjob/dreamjob-exploded-01.png)
 *   **Cutaway:** The "X-Ray". Revealing the internal mechanism.
     ![Cutaway View](/assets/r2/dreamjob/dreamjob-cutaway-01.jpg)
 *   **Diagram:** The "Flow". Explaining the principle of operation.
-    ![Diagram View](/assets/r2/dreamjob/dreamjob-diagram-01.jpg)
+    ![Diagram View](/assets/r2/dreamjob/dreamjob-diagram-01.png)
 *   **Render:** The "Vision". High-fidelity CGI before physical production.
-    ![Render View](/assets/r2/dreamjob/dreamjob-render-01.jpg)
+    ![Render View](/assets/r2/dreamjob/dreamjob-render-01.png)
 
 <Wire />
 
@@ -66,11 +66,11 @@ The theoretical and internal understanding.
 The interface and software layer.
 
 *   **UI:** The "Interface". Screens, dashboards, and controls.
-    ![UI View](/assets/r2/dreamjob/dreamjob-ui-01.jpg)
+    ![UI View](/assets/r2/dreamjob/dreamjob-ui-01.png)
 *   **Wireframe:** The "Skeleton". Low-fidelity layout and UX flow.
-    ![Wireframe View](/assets/r2/dreamjob/dreamjob-wireframe-01.jpg)
+    ![Wireframe View](/assets/r2/dreamjob/dreamjob-wireframe-01.png)
 *   **Architecture:** The "System". Network topology and software stack.
-    ![Architecture View](/assets/r2/dreamjob/dreamjob-arch-01.jpg)
+    ![Architecture View](/assets/r2/dreamjob/dreamjob-arch-01.png)
 
 ## Impact: The Component Library
 Beyond static images, the system supports interactive and semantic components.
