@@ -9,6 +9,8 @@ slug: "onboarding_prompt"
 
 > *   **Critical Scripts:** Be aware of `scripts/refine_skills.py`, `scripts/generate_content.py`, and `scripts/process_images.py`. These are the tools for mass-manipulating the portfolio data, content, and assets. Do not modify `Skills.csv` manually if you plan to run these scripts, as your changes will be overwritten.
 *   **Tip:** When moving assets, always stop the dev server if you plan to delete directories, as Vite/Astro can cache file paths aggressively.
+*   **Pre-Flight Checks:**
+    *   **Case Sensitivity:** If you are on Windows, run `git config core.ignorecase false` immediately to prevent deployment issues on Cloudflare.
 *   **Meta-Portfolio:** The `/colophon` page is a "Meta-Portfolio" that documents the site's own engineering features. When building a complex new feature, consider if it deserves a "Meta-Feature" entry in `src/content/colophon/`.
 >
 > **LIFECYCLE AWARENESS:**

@@ -1,5 +1,6 @@
 ﻿---
-title: "Project Manifesto"
+title: "Project Manifesto
+"
 slug: "manifesto"
 ---
 # Project Manifesto
@@ -62,5 +63,10 @@ The site must document itself. Every major feature (AR Viewer, Build Timer, Prin
 ### 6. The Law of Hybrid Assets
 **"Human Eye, Machine Hand."**
 We do not rely on build-time plugins to guess how an image should look. Art direction (color, crop, tone) is a human task performed in professional tools (Lightroom). Optimization (compression, formatting, resizing) is a machine task performed by scripts. The two never overlap.
+
+### 10. The Law of Robustness
+**"Works on my machine" is not a valid defense.**
+*   **Principle:** We build for the hostile environment (CI/CD), not the comfortable one (Localhost).
+*   **Practice:** We use strict relative paths, enforce case sensitivity in Git, and prefer "Nuclear Renames" over subtle fixes when resolution errors occur.
 
 

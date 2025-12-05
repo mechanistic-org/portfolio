@@ -1,5 +1,6 @@
 ﻿---
-title: "Roadmap & Status"
+title: "Roadmap & Status
+"
 slug: "roadmap"
 ---
 # Roadmap & Status
@@ -158,6 +159,11 @@ slug: "roadmap"
     - [x] Gallery deduplication logic.
 - [x] **Smart Bento Gallery:** Replaced Masonry with a CSS Grid that adapts to image aspect ratios (Tall/Wide spans).
 - [x] **Animation Pipeline Repair:** Fixed distortion by implementing Letterboxing (`ImageOps.pad`) and EXIF Orientation support in `process_images.py`.
+*   [x] **Resume Expansion:** Implemented 7 distinct resume variants (Standard, KPI, Timeline, Interactive, 3D, One-Pager, Infographic).
+*   [x] **Data Pipeline Upgrade:** Created `export_data.py` to transform `Skills.csv` into `src/data/skills.json` for frontend visualization.
+*   [x] **KPI Dashboard:** Implemented "Career Velocity" and "Skill Matrix" charts using Recharts.
+*   [x] **Scroll Mechanism:** Added physics-based Rack and Pinion scroll effect.
+*   [x] **Build Hardening:** Enforced `core.ignorecase false` and refactored component paths to resolve Cloudflare build failures.
 
 ## Colophon / Meta-Portfolio
 ### The Quantum Darkroom
@@ -174,5 +180,10 @@ slug: "roadmap"
     *   **Hook:** A gallery that reads your mind (and your markdown).
     *   **Tech:** Python, Regex, Astro.
     *   **Description:** The ingestion engine parses the narrative content to understand context. If an asset is used to tell the story inline, it gracefully steps aside from the grid gallery, ensuring a non-repetitive reading experience.
+
+*   **The Resume Matrix:**
+    *   **Hook:** "One career, seven perspectives."
+    *   **Tech:** React (Recharts), Astro, CSS Grid.
+    *   **Description:** A demonstration of how the same underlying data (`Skills.csv`) can be transformed into radically different user experiences, from a high-density datasheet to a playable terminal game.
 
 

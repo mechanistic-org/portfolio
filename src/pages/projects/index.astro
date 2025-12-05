@@ -25,6 +25,28 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 
 <BaseLayout title="Projects" description="Engineering Archive">
 	<div class="site-container pt-32 pb-24 md:pb-36">
+		<!-- Quick Filters -->
+		<div class="mb-8 flex flex-wrap gap-2">
+			<button
+				class="filter-btn active data-[active=true]:border-primary/50 data-[active=true]:bg-primary/10 data-[active=true]:text-primary rounded-full border border-neutral-800 bg-neutral-900 px-4 py-2 text-sm font-medium text-neutral-400 transition-all hover:border-neutral-700 hover:text-white"
+				data-group="industry"
+				data-filter="all"
+			>
+				All Work
+			</button>
+			{
+				industries.map((ind) => (
+					<button
+						class="filter-btn data-[active=true]:border-primary/50 data-[active=true]:bg-primary/10 data-[active=true]:text-primary rounded-full border border-neutral-800 bg-neutral-900 px-4 py-2 text-sm font-medium text-neutral-400 transition-all hover:border-neutral-700 hover:text-white"
+						data-group="industry"
+						data-filter={ind}
+					>
+						{ind}
+					</button>
+				))
+			}
+		</div>
+
 		<!-- Project Directory Table -->
 		<div id="projects-container">
 			<ProjectDirectory

@@ -6,6 +6,7 @@ import ProjectCard from "@components/Projects/ProjectCard.astro";
 import ProjectStrip from "@components/Projects/ProjectStrip.tsx";
 import Button from "@components/Button/Button.astro";
 import ClientGrid from "../components/Home/Clients.astro";
+import TestimonialWall from "@components/Testimonials/TestimonialWall";
 
 const allProjects = await getCollection("projects", ({ data }) => !data.draft);
 const recentProjects = allProjects.sort(
@@ -20,5 +21,9 @@ const recentProjects = allProjects.sort(
 
 	<section class="w-full py-8 md:py-16">
 		<ProjectStrip client:load projects={recentProjects} />
+	</section>
+
+	<section class="w-full pb-16">
+		<TestimonialWall client:visible />
 	</section>
 </Layout>

@@ -35,6 +35,7 @@ const projects = defineCollection({
         statusLabel: z.string(),
         skillGraph: z.string().optional(),
         partGraph: z.string().optional(),
+        impact: z.string().optional(),
     }),
 });
 

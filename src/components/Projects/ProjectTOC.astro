@@ -1,0 +1,42 @@
+---
+import type { MarkdownHeading } from "astro";
+
+interface Props {
+	headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+
+// Filter out h1 (title) and anything deeper than h3
+const filteredHeadings = headings.filter((h) => h.depth > 1 && h.depth <= 3);
+---
+
+{
+	filteredHeadings.length > 0 && (
+		<nav class="toc mt-8 hidden md:block">
+			<h3 class="mb-4 border-b border-neutral-800 pb-2 text-sm font-bold tracking-wider text-white uppercase">
+				On This Page
+			</h3>
+			<ul class="space-y-2 text-sm">
+				{filteredHeadings.map((heading) => (
+					<li class={`toc-item depth-${heading.depth}`}>
+						<a
+							href={`#${heading.slug}`}
+							class="hover:text-primary block text-neutral-400 transition-colors"
+						>
+							{heading.text}
+						</a>
+					</li>
+				))}
+			</ul>
+		</nav>
+	)
+}
+
+<style>
+	.toc-item.depth-3 {
+		margin-left: 1rem;
+		font-size: 0.9em;
+		opacity: 0.8;
+	}
+</style>

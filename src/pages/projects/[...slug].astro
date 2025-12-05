@@ -5,6 +5,7 @@ import Button from "@components/Button/Button.astro";
 import ProjectGallery from "@components/Projects/ProjectGallery";
 import { YouTube } from "@astro-community/astro-embed-youtube";
 import ModelViewer from "@components/MDX/ModelViewer.astro";
+import ProjectTOC from "@components/Projects/ProjectTOC.astro";
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
@@ -23,7 +24,7 @@ interface Props {
 
 const { entry } = Astro.props;
 // console.log("Entry keys:", Object.keys(entry));
-const { Content } = await render(entry);
+const { Content, headings } = await render(entry);
 const data = entry.data;
 
 // Format dates
@@ -188,7 +189,9 @@ const gallery = data.gallery || [];
 	</section>
 
 	<div class="site-container grid gap-12 py-8 md:grid-cols-12 md:py-12">
-		<aside class="order-2 space-y-8 md:order-1 md:col-span-4 lg:col-span-3">
+		<aside
+			class="order-2 space-y-8 md:sticky md:top-24 md:order-1 md:col-span-4 md:h-fit lg:col-span-3"
+		>
 			<div class="rounded-xl border border-neutral-800 bg-neutral-900/50 p-6">
 				<h3
 					class="mb-4 border-b border-neutral-800 pb-2 text-sm font-bold tracking-wider text-white uppercase"
@@ -307,6 +310,8 @@ const gallery = data.gallery || [];
 					</div>
 				)
 			}
+
+			<ProjectTOC headings={headings} />
 		</aside>
 
 		<article class="order-1 space-y-12 md:order-2 md:col-span-8 lg:col-span-9">
@@ -317,6 +322,15 @@ const gallery = data.gallery || [];
 					class="h-auto max-h-[600px] w-full object-cover"
 				/>
 			</div>
+
+			{
+				data.impact && (
+					<div class="border-primary my-8 rounded-xl border-l-4 bg-neutral-900/50 p-6 shadow-lg">
+						<h2 class="mb-2 text-xl font-bold text-white">Impact & Results</h2>
+						<p class="text-lg text-neutral-300">{data.impact}</p>
+					</div>
+				)
+			}
 
 			<div class="my-12 grid gap-8 md:grid-cols-2">
 				{

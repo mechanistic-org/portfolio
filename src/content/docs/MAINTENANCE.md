@@ -196,6 +196,13 @@ status: {
     *   **Cause:** The component is being imported manually (e.g., `import Admonition...`) but is *also* configured for global auto-import in `astro.config.mjs`.
     *   **Fix:** Remove the manual import statement from the MDX file. The system automatically provides this component.
 
+*   **Error:** `Could not resolve "../components/About/ClientGrid.astro"` (on Cloudflare)
+    *   **Cause:** Git case-sensitivity mismatch (e.g., `About` vs `about`) between Windows (Dev) and Linux (CI).
+    *   **Fix:** The "Nuclear Option":
+        1.  Create a new directory with a distinct name (e.g., `src/components/Home`).
+        2.  Move the component there.
+        3.  Update imports to use relative paths (`../components/Home/Clients.astro`) to bypass alias caching.
+
 ### Runtime Issues
 *   **Error:** `Uncaught SyntaxError: ... does not provide an export named 'AXObjectRoles'`
     *   **Cause:** Vite is incorrectly optimizing the `axobject-query` dependency (used by `eslint-plugin-jsx-a11y`).

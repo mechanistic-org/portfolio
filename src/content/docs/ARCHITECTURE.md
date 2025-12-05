@@ -1,5 +1,6 @@
 ﻿---
-title: "Architecture & Data Schema"
+title: "Architecture & Data Schema
+"
 slug: "architecture"
 ---
 # Architecture & Data Schema
@@ -177,6 +178,16 @@ To support the main ingestion pipeline, two auxiliary scripts maintain data qual
     *   **Architecture:** Refactored from hardcoded HTML to a dynamic system powered by the `colophon` Content Collection.
     *   **Data Source:** `src/content/colophon/*.mdx`.
     *   **Rendering Strategy:** Uses a pre-rendering pattern (`await feature.render()`) in the frontmatter to avoid async mapping issues within the JSX template.
+*   **Resume System:**
+    *   **Architecture:** A multi-variant resume system powered by `src/data/skills.json` (generated from `Skills.csv`).
+    *   **Variants:**
+        *   **Standard:** `resume/` (Clean, printable).
+        *   **KPI Dashboard:** `resume/kpi` (React/Recharts visualization of Career Velocity).
+        *   **Timeline:** `resume/timeline` (Vertical scroll history).
+        *   **Interactive:** `resume/interactive` (Terminal-style game).
+        *   **3D:** `resume/3d` (CAD-style interface).
+        *   **One-Pager:** `resume/one-pager` (High-density datasheet).
+        *   **Infographic:** `resume/infographic` (Visual summary).
 
 ### UI Elements
 *   **`SkillRadar.tsx`:** Client-side React component using Recharts for the "Skill Fingerprint".
@@ -188,6 +199,10 @@ To support the main ingestion pipeline, two auxiliary scripts maintain data qual
         *   **Standard:** Spans 1x1.
     *   **Styling:** Enforces `object-fit: cover` to prevent distortion (squishing) of images that don't perfectly match the cell ratio.
 *   **`Marquee.tsx`:** Shared React component used for both the Homepage Client Grid and Colophon Tech Stack. Supports `grayscale` and `speed` props.
+*   **`ScrollMechanism.astro`:**
+    *   **Concept:** A physics-based Rack and Pinion gear system that rotates in sync with window scroll.
+    *   **Tech:** Vanilla JS + CSS Transforms + SVG/CSS Gradients.
+    *   **Logic:** Calculates scroll delta to drive rotation (Gear) and vertical translation (Rack) for a realistic mechanical effect.
 
 ### 8. Gallery Data Structure
 *   **Old:** Array of strings (URLs).
