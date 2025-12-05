@@ -38,7 +38,7 @@ slug: "roadmap"
 *   **Dreamjob Visual Taxonomy:**
     *   [x] **Kitchen Sink Expansion:** Refactored `dreamjob.mdx` to demonstrate every available view type (`iso`, `ortho`, `exploded`, etc.) and DLS component (`Chip`, `Admonition`, `ScrambleText`).
     *   [x] **Prompt Archival:** Updated `src/content/docs/prompts/DREAMJOB_ASSETS.md` with prompts for all 18 view types.
-    *   [ ] **Asset Generation:** Paused due to API quota limits (429).
+    *   [x] **Asset Generation:** Completed the "Kitchen Sink" stress test by generating all 12 missing static assets (Orthographic, Exploded, Wireframe, etc.) using the "Nano Banana" prompt set.
 
 ## ðŸ”® Backlog & Refinement
 
@@ -49,6 +49,7 @@ slug: "roadmap"
 ### Future / Nice-to-Have
 *   **Light/Dark Mode:** Re-enable and refine the light mode theme.
 *   **Scroll Gear Mechanism:** Re-implement the rack and pinion scroll gear with better physics/visuals.
+*   **Site Audit:** Investigate "Gap Tightening" (reducing `gap-12` to `gap-8`) in a dedicated branch. Requires robust testing of all project pages to prevent layout collapse.
 
 ### Branding & Identity
 *   **System Name Candidates:**
@@ -84,6 +85,9 @@ slug: "roadmap"
     *   **Description:** A live, render-accurate implementation of the Design Language System at `/about/elements`. It serves as both documentation and a visual regression test suite for the "Hyper-Functional Brutalist" aesthetic.
 
 ## ðŸ“œ Change Log (Recent)
+*   **[Fix] Chart Layout:** Resolved regression where Skill/Part graphs were stacking vertically on desktop. Restored side-by-side grid layout (`grid-cols-1 md:grid-cols-2`) in `[...slug].astro`.
+*   **[Fix] Asset Staging:** Corrected `R2_STAGING` path resolution. Enforced `../quantum-assets/R2_STAGING` as the single Source of Truth to prevent "Ghost Asset" confusion.
+*   **[Fix] Extension Mismatch:** Updated `dreamjob.mdx` to reference generated `.png` assets, resolving 404 errors caused by legacy `.jpg` references.
 *   **[Audit]** Established "The Council of Voices" Site Audit Protocol (`docs/prompts/SITE_AUDIT_PROMPT.md`).
 *   **[Audit]** Archived initial site benchmark: `docs/audits/2025-12-04_SITE_AUDIT.md`.
 *   **[UX]** Removed "Quick Filter" chips from the Project Directory to enforce interaction with the comprehensive Filter Menu (EN Logo).
@@ -148,6 +152,12 @@ slug: "roadmap"
     *   Added "Effects" section demonstrating `ScrambleText`.
     *   Enforced DLS typography (Inter headers) in MDX content via `markdown-content.css`.
     *   Restored missing list examples and fixed rendering issues.
+*   **Council of Voices Refinement & Layout Stabilization:**
+    *   **Content Rigor (The Recruiter):** Updated `backsplash.md` with specific engineering metrics (IP69K, 316 Stainless, 300% throughput) to satisfy technical personas.
+    *   **Visual Flair (The Arbiter):** Implemented `ScrambleText` effect on project headers for dynamic "glitch" aesthetic.
+    *   **Layout Stability:**
+        *   **Revert:** Rolled back experimental `gap-8` grid spacing to `gap-12` (original) to resolve layout collapse on `portion-cup` and `base`.
+        *   **Fix:** Resolved critical layout collapse in `[...slug].astro` caused by misplaced `<Content />` component and malformed JSX.
 
 ## Meta-Portfolio (Colophon Features)
 *   **AR-Ready 3D Viewer:**

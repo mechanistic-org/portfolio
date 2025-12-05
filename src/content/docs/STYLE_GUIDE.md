@@ -1,5 +1,6 @@
 ﻿---
-title: "QUANTUM: Design Language System (DLS)"
+title: "QUANTUM: Design Language System (DLS)
+"
 slug: "style_guide"
 ---
 # QUANTUM: Design Language System (DLS)
@@ -79,6 +80,12 @@ We enforce the "Datasheet" aesthetic even in narrative content (Markdown).
 *   **Global Top Padding:** `pt-32` (8rem) is the standard for all main page containers (Home, Project List, Project Detail) to ensure visual consistency across page transitions.
 *   **The Robust Header:** For headers with centered elements (like navigation), use a 3-column CSS Grid (`grid-cols-[1fr_auto_1fr]`) with `items-end`. This ensures the center element remains perfectly centered while allowing left/right content (Titles/Breadcrumbs) to wrap naturally without overlap.
 
+> [!WARNING]
+> **Grid Gap Stability**
+> The current project detail layout relies on `gap-12` for proper spacing between the sidebar and content.
+> *   **Do not reduce to `gap-8`** without a full regression test of all project pages.
+> *   Previous attempts caused content overlapping on text-heavy pages (`portion-cup`).
+
 ---
 
 ## 3. Component Library ("The Kit")
@@ -110,6 +117,11 @@ These components are available for use in MDX content:
 *   **Usage:** Project Directory rows.
 *   **Effect:** Radial gradient tracking mouse position.
 *   **Implementation:** CSS Variables `--x`, `--y` updated via JS.
+
+### Data Visualization
+#### Chart Layouts
+*   **Rule:** When displaying multiple charts (e.g., Skill Fingerprint + Part Breakdown), they **MUST** be wrapped in a responsive grid container to prevent vertical stacking on desktop.
+*   **Class:** `grid grid-cols-1 gap-6 md:grid-cols-2`
 
 ---
 

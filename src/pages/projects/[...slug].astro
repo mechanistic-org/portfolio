@@ -6,6 +6,7 @@ import ProjectGallery from "@components/Projects/ProjectGallery";
 import { YouTube } from "@astro-community/astro-embed-youtube";
 import ModelViewer from "@components/MDX/ModelViewer.astro";
 import ProjectTOC from "@components/Projects/ProjectTOC.astro";
+import ScrambleText from "@components/Effects/ScrambleText";
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
@@ -323,16 +324,7 @@ const gallery = data.gallery || [];
 				/>
 			</div>
 
-			{
-				data.impact && (
-					<div class="border-primary my-8 rounded-xl border-l-4 bg-neutral-900/50 p-6 shadow-lg">
-						<h2 class="mb-2 text-xl font-bold text-white">Impact & Results</h2>
-						<p class="text-lg text-neutral-300">{data.impact}</p>
-					</div>
-				)
-			}
-
-			<div class="my-12 grid gap-8 md:grid-cols-2">
+			<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
 				{
 					data.skillGraph && (
 						<div class="flex flex-col items-center justify-center rounded-xl border border-neutral-800 bg-neutral-900/30 p-6">
@@ -362,7 +354,6 @@ const gallery = data.gallery || [];
 					)
 				}
 			</div>
-
 			<div
 				class="prose prose-invert prose-lg prose-headings:font-sans prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-white prose-p:text-neutral-300 prose-a:text-primary prose-img:rounded-xl custom-prose max-w-none font-mono"
 			>

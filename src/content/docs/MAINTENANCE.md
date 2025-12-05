@@ -155,6 +155,16 @@ status: {
 
 ## 8. Troubleshooting
 
+### Asset Staging Mismatch (Ghost Assets)
+*   **Symptom:** You place assets in `R2_STAGING` but they don't appear after ingestion.
+*   **Cause:** You might be using the local repo folder (`quantum/R2_STAGING`) instead of the external asset repo (`quantum-assets/R2_STAGING`).
+*   **Fix:** Always stage assets in `../quantum-assets/R2_STAGING`. The ingestion script looks there first.
+
+### Image Extension Mismatch (404s)
+*   **Symptom:** New AI-generated assets return 404 errors despite existing on disk.
+*   **Cause:** AI tools often output `.png` by default, while legacy prompts/MDX might reference `.jpg`.
+*   **Fix:** Check the actual file extension in `R2_STAGING` and update the `.mdx` file to match (e.g., change `hero.jpg` to `hero.png`).
+
 ### Build Issues
 *   **Async Rendering in Astro Templates**
     *   **Symptom:** Build fails with generic errors when using `await` inside a `.map()` in JSX.
@@ -220,6 +230,13 @@ status: {
 *   **Symptom:** Clicking a project leads to a blank page or raw HTML attributes.
 *   **Cause:** The `Layout` component in Astro templates might be self-closing (`<Layout ... />`) instead of wrapping content (`<Layout ...>...</Layout>`).
 *   **Fix:** Ensure the `Layout` component properly wraps the page content.
+
+### Project Page Layout Collapse
+*   **Symptom:** The main content column is squeezed to the left, overlapping the sidebar or losing its grid span.
+*   **Possible Causes:**
+    1.  **Misplaced Content:** The `<Content />` component (rendering the MDX) is outside the `<article>` tag. It *must* be inside `<article>` to inherit the `col-span-8` grid class.
+    2.  **Malformed JSX:** An unclosed tag (e.g., `<img ... >` without `/>`) inside a conditional block can corrupt the DOM tree, causing the browser to "swallow" subsequent containers.
+*   **Fix:** Check `src/pages/projects/[...slug].astro` for unclosed tags and ensure `<Content />` is nested correctly.
 
 ### MDX Compilation Errors
 *   **Error:** `Unexpected character 0 (U+0030) before name` or similar parsing errors.

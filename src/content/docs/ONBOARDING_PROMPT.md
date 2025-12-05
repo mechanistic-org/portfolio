@@ -22,10 +22,12 @@ slug: "onboarding_prompt"
 *   **Tip:** When moving assets, always stop the dev server if you plan to delete directories, as Vite/Astro can cache file paths aggressively.
 *   **Pre-Flight Checks:**
     *   **Case Sensitivity:** If you are on Windows, run `git config core.ignorecase false` immediately to prevent deployment issues on Cloudflare.
+    *   **Asset Staging:** Verify you are working in `../quantum-assets/R2_STAGING`, NOT the local `R2_STAGING` folder.
     *   **Site Audit Protocol:**
         *   **Command:** "Run a Site Audit."
         *   **Description:** invokes the **Council of Voices** (Roast, Recruiter, Arbiter, Quantum Observer) as defined in `SITE_AUDIT_PROMPT.md`. Use this for multi-dimensional critique before major releases.
 *   **Meta-Portfolio:** The `/colophon` page is a "Meta-Portfolio" that documents the site's own engineering features. When building a complex new feature, consider if it deserves a "Meta-Feature" entry in `src/content/colophon/`.
+*   **Self-Correction:** If a layout change fails and is reverted, document *why* it failed in `STYLE_GUIDE.md` to prevent future loops.
 >
 > **LIFECYCLE AWARENESS:**
 > *   **Start:** You are reading this Onboarding Prompt.

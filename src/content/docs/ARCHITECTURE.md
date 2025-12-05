@@ -183,6 +183,10 @@ To support the main ingestion pipeline, two auxiliary scripts maintain data qual
 *   **`[...slug].astro`:** Master project template. Renders the layout, charts, and 3D viewer.
     *   **Header Layout:** Uses a **3-Column CSS Grid** (`1fr auto 1fr`) to manage the Title (Left), Navigation (Center), and Breadcrumbs (Right).
         *   **Why:** Absolute positioning caused overlaps with long, multi-line titles. The Grid approach ensures the navigation remains centered in the *available space* or its own track, while `items-end` keeps text baselines aligned.
+    *   **Structure:** Uses a 12-column grid.
+        *   **Sidebar:** `col-span-4` (sticky).
+        *   **Article:** `col-span-8` (contains all MDX content).
+    *   **Critical Rule:** All rendered markdown content (`<Content />`) must reside *within* the `<article>` container to maintain the grid layout.
     *   **Note:** `getStaticPaths` uses `entry.id` (filename) instead of `entry.slug` (frontmatter) to ensure routing stability with Astro Content Collections.
 *   **`src/pages/about/elements.astro`:** Renders `src/data/otherPages/elements/index.mdx` as a "Living Style Guide" to verify DLS implementation (Typography, Colors, Components).
 *   **`docs/MAINTENANCE.md` (User Manual):** Documentation for site maintenance, including the Trust Wall logic and Ingestion Script usage.
