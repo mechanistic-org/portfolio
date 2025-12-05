@@ -375,3 +375,30 @@ All documentation is now consolidated in `src/content/docs/` to serve as the Sin
     ---
     ```
 *   **Legacy:** The root `docs/` folder has been deprecated and removed.
+
+## 13. Hardening Against Case Sensitivity
+Since we develop on Windows (case-insensitive) but deploy to Cloudflare (Linux/case-sensitive), file naming issues are a common source of build failures.
+
+### The "Infection" Vector
+Importing code from other themes often introduces inconsistent casing (e.g., `components/About` vs `components/about`).
+
+### Prevention Protocol
+1.  **Git Configuration:**
+    Run this command to force Git to respect case changes:
+    ```bash
+    git config core.ignorecase false
+    ```
+    *Note: This may suddenly show "untracked" files if your repo already has casing mismatches. Handle with care.*
+
+2.  **The "Nuclear" Rename:**
+    If a directory is "infected" (Git thinks it's lowercase, Windows thinks it's Uppercase), standard renaming often fails.
+    *   **Fix:** Rename the folder to a temporary name, commit, then rename to the correct name.
+    *   *Example:* `About` -> `About_Temp` -> [Commit] -> `About` -> [Commit].
+
+3.  **Strict Imports:**
+    *   Always use relative paths (`../components/Home/Clients.astro`) when debugging resolution errors.
+    *   Avoid relying on aliases (`@components`) if you suspect a casing mismatch, as the alias resolver might mask the issue locally.
+
+4.  **Linter Enforcement:**
+    *   We enforce `PascalCase` for component filenames (`MyComponent.astro`) and `kebab-case` for directories/pages (`my-page/index.astro`).
+

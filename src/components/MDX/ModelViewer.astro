@@ -1,0 +1,79 @@
+---
+interface Props {
+	src?: string;
+	alt?: string;
+	poster?: string;
+	environmentImage?: string;
+}
+
+const DEFAULT_POSTER = "/assets/branding/EN_Badge_wire_white_1200.svg";
+const NEIL_ARMSTRONG_GLB = "https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb";
+const MOON_ENV = "https://modelviewer.dev/shared-assets/environments/moon_1k.hdr";
+
+const {
+	src = NEIL_ARMSTRONG_GLB,
+	alt = "Neil Armstrong",
+	poster = DEFAULT_POSTER,
+	environmentImage,
+} = Astro.props;
+
+const isFallback = src === NEIL_ARMSTRONG_GLB;
+const finalEnv = environmentImage || (isFallback ? MOON_ENV : "neutral");
+const uid = "mv-" + Math.random().toString(36).substr(2, 9);
+---
+
+<div
+	class="relative my-12 h-[500px] w-full overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/50"
+>
+	<model-viewer
+		id={uid}
+		src={src}
+		poster={poster}
+		alt={alt}
+		auto-rotate
+		camera-controls
+		ar
+		touch-action="pan-y"
+		shadow-intensity="1"
+		shadow-softness="1"
+		exposure="1"
+		environment-image={finalEnv}
+		camera-orbit="0deg 75deg 105%"
+		field-of-view="30deg"
+		interaction-prompt="auto"
+		class="h-full w-full"
+		style="--poster-color: transparent; background-color: transparent;"
+	>
+		<div slot="progress-bar" class="absolute top-0 left-0 h-1 w-full bg-transparent">
+			<div
+				class="bg-primary h-full transition-all duration-300"
+				style="width: 0%"
+				data-progress-bar
+			>
+			</div>
+		</div>
+		<div
+			slot="ar-button"
+			class="absolute right-4 bottom-4 flex cursor-pointer items-center gap-2 rounded-lg border border-white/10 bg-neutral-900/80 px-3 py-1.5 font-mono text-xs text-white opacity-80 backdrop-blur transition-opacity hover:opacity-100"
+		>
+			<span class="h-2 w-2 animate-pulse rounded-full bg-green-500"></span>
+			Interactive 3D
+		</div>
+		<div slot="poster" class="absolute inset-0 flex items-center justify-center"></div>
+	</model-viewer>
+</div>
+
+<script define:vars={{ uid }}>
+	const viewer = document.querySelector(`#${uid}`);
+	const progressBar = viewer?.querySelector("[data-progress-bar]");
+	if (viewer && progressBar) {
+		viewer.addEventListener("progress", (e) => {
+			const p = e.detail.totalProgress * 100;
+			progressBar.style.width = `${p}%`;
+			if (p === 100)
+				setTimeout(() => {
+					progressBar.style.opacity = "0";
+				}, 500);
+		});
+	}
+</script>
