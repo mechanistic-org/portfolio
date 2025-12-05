@@ -1,0 +1,157 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import workHistory from "../../config/work_history.json";
+import specs from "../../config/specs.json";
+
+// Filter specs for "Properties"
+const properties = specs
+	.filter((s) => s.category === "Device ID" || s.category === "Electrical Char.")
+	.slice(0, 10);
+---
+
+<BaseLayout
+	title="CAD Terminal: Erik Norris"
+	description="Interactive 3D model of my professional experience."
+>
+	<div
+		class="flex h-screen w-full flex-col overflow-hidden bg-[#e0e0e0] pt-20 font-sans text-xs text-black"
+	>
+		<!-- Menu Bar -->
+		<div class="flex gap-4 border-b border-[#a0a0a0] bg-[#f0f0f0] px-2 py-1 select-none">
+			<span class="cursor-pointer px-1 hover:bg-[#cce8ff]">File</span>
+			<span class="cursor-pointer px-1 hover:bg-[#cce8ff]">Edit</span>
+			<span class="cursor-pointer px-1 hover:bg-[#cce8ff]">View</span>
+			<span class="cursor-pointer px-1 hover:bg-[#cce8ff]">Insert</span>
+			<span class="cursor-pointer px-1 hover:bg-[#cce8ff]">Tools</span>
+			<span class="cursor-pointer px-1 hover:bg-[#cce8ff]">Window</span>
+			<span class="cursor-pointer px-1 hover:bg-[#cce8ff]">Help</span>
+		</div>
+
+		<!-- Toolbar (Mock) -->
+		<div class="flex items-center gap-2 border-b border-[#a0a0a0] bg-[#f0f0f0] p-1 select-none">
+			<div
+				class="flex h-6 w-6 items-center justify-center rounded border border-gray-400 bg-gray-300"
+			>
+				💾
+			</div>
+			<div
+				class="flex h-6 w-6 items-center justify-center rounded border border-gray-400 bg-gray-300"
+			>
+				🖨️
+			</div>
+			<div class="mx-1 h-6 w-px bg-gray-400"></div>
+			<div
+				class="flex h-6 w-6 items-center justify-center rounded border border-gray-400 bg-gray-300"
+			>
+				↩️
+			</div>
+			<div
+				class="flex h-6 w-6 items-center justify-center rounded border border-gray-400 bg-gray-300"
+			>
+				↪️
+			</div>
+			<div class="mx-1 h-6 w-px bg-gray-400"></div>
+			<div
+				class="flex h-6 w-6 items-center justify-center rounded border border-gray-400 bg-gray-300"
+			>
+				🔍
+			</div>
+			<div
+				class="flex h-6 w-6 items-center justify-center rounded border border-gray-400 bg-gray-300"
+			>
+				📏
+			</div>
+		</div>
+
+		<!-- Main Workspace -->
+		<div class="flex flex-grow overflow-hidden">
+			<!-- Feature Manager Design Tree (Left Sidebar) -->
+			<div class="flex w-64 flex-col border-r border-[#a0a0a0] bg-white">
+				<div class="border-b border-[#a0a0a0] bg-[#e0e0e0] px-2 py-1 font-bold">
+					FeatureManager Design Tree
+				</div>
+				<div class="space-y-1 overflow-y-auto p-2">
+					<div class="flex items-center gap-1 font-bold">
+						<span>📂</span>
+						<span>Erik Norris (Default)</span>
+					</div>
+					<div class="flex flex-col gap-1 pl-4">
+						<div class="flex items-center gap-1"><span>⏱️</span> <span>History</span></div>
+						<div class="flex items-center gap-1"><span>📐</span> <span>Sensors</span></div>
+						<div class="flex items-center gap-1"><span>📝</span> <span>Annotations</span></div>
+
+						<!-- Jobs as Features -->
+						{
+							workHistory.map((job) => (
+								<div
+									class="flex cursor-pointer items-center gap-1 pl-2 hover:bg-[#cce8ff]"
+									title={job.description}
+								>
+									<span>📦</span>
+									<span class="truncate">{job.company}</span>
+								</div>
+							))
+						}
+					</div>
+				</div>
+				<!-- Tabs at bottom of tree -->
+				<div class="mt-auto flex border-t border-[#a0a0a0]">
+					<div class="flex-1 border-r border-[#a0a0a0] bg-white py-1 text-center font-bold">
+						Tree
+					</div>
+					<div class="flex-1 border-r border-[#a0a0a0] bg-[#f0f0f0] py-1 text-center">Prop</div>
+					<div class="flex-1 bg-[#f0f0f0] py-1 text-center">Config</div>
+				</div>
+			</div>
+
+			<!-- 3D Viewport (Center) -->
+			<div class="relative flex-grow bg-[#a0a0a0] p-1">
+				<div class="relative h-full w-full border border-[#808080] bg-white shadow-inner">
+					<!-- Viewport Toolbar -->
+					<div
+						class="absolute top-2 left-1/2 z-10 flex -translate-x-1/2 transform gap-2 rounded border border-gray-400 bg-[#f0f0f0]/80 px-2 py-1 backdrop-blur"
+					>
+						<span>👁️</span>
+						<span>🧊</span>
+						<span>🔦</span>
+						<span>📷</span>
+					</div>
+
+					<iframe
+						src="https://cad.onshape.com/documents/99383b717b824743f064d44c/w/1afb9ed42adffe42a3f08ca0/e/b9774ede41207d860402a41a?renderMode=0&uiState=6932196784430d5e4ccce0e6"
+						width="100%"
+						height="100%"
+						frameborder="0"
+						allowfullscreen
+					>
+					</iframe>
+				</div>
+			</div>
+
+			<!-- Task Pane (Right Sidebar - Collapsed/Small) -->
+			<div
+				class="flex w-12 flex-col items-center gap-4 border-l border-[#a0a0a0] bg-[#f0f0f0] py-2"
+			>
+				<div class="cursor-pointer rounded p-1 hover:bg-[#cce8ff]" title="Resources">🏠</div>
+				<div class="cursor-pointer rounded p-1 hover:bg-[#cce8ff]" title="Design Library">📚</div>
+				<div class="cursor-pointer rounded p-1 hover:bg-[#cce8ff]" title="File Explorer">📁</div>
+				<div class="cursor-pointer rounded p-1 hover:bg-[#cce8ff]" title="View Palette">🎨</div>
+				<div class="cursor-pointer rounded p-1 hover:bg-[#cce8ff]" title="Appearances">🌈</div>
+				<div class="cursor-pointer rounded p-1 hover:bg-[#cce8ff]" title="Custom Properties">
+					⚙️
+				</div>
+			</div>
+		</div>
+
+		<!-- Status Bar -->
+		<div
+			class="flex justify-between border-t border-[#a0a0a0] bg-[#f0f0f0] px-2 py-1 text-[#606060]"
+		>
+			<div>Editing Part</div>
+			<div class="flex gap-4">
+				<span>MMGS</span>
+				<span>Quick Snaps</span>
+			</div>
+		</div>
+	</div>
+</BaseLayout>

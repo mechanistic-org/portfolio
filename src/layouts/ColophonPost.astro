@@ -1,0 +1,96 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "./BaseLayout.astro";
+import Button from "@/components/Button/Button.astro";
+
+// utils
+import { formatDate } from "@/js/textUtils";
+
+interface Props {
+	frontmatter: {
+		title: string;
+		description?: string;
+		pubDate?: string | Date;
+		updatedDate?: string | Date;
+		heroImage?: string;
+		tags?: string[];
+	};
+}
+
+const { frontmatter } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, tags } = frontmatter;
+
+// Default date if missing
+const date = pubDate ? new Date(pubDate) : new Date();
+---
+
+<BaseLayout title={title} description={description || ""} type="project">
+	<article class="site-container pt-32 pb-24">
+		{/* Header Section */}
+		<div class="mx-auto mb-16 max-w-4xl text-center">
+			<div
+				class="border-primary/30 bg-primary/10 text-primary mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-xs tracking-widest uppercase"
+			>
+				Meta-Portfolio
+			</div>
+
+			<h1 class="mb-6 text-4xl font-bold tracking-tight text-white md:text-6xl">
+				{title}
+			</h1>
+
+			<p class="mx-auto max-w-2xl font-mono text-lg text-neutral-400 md:text-xl">
+				{description}
+			</p>
+
+			{/* Meta Data */}
+			<div
+				class="mx-auto mt-8 flex w-fit items-center justify-center gap-6 border-t border-b border-neutral-800 px-8 py-4 font-mono text-sm text-neutral-500"
+			>
+				<div class="flex items-center gap-2">
+					<span class="text-primary">DATE:</span>
+					<time datetime={date.toISOString()}
+						>{
+							date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
+						}</time
+					>
+				</div>
+				{
+					tags && (
+						<div class="flex items-center gap-2">
+							<span class="text-primary">TAGS:</span>
+							<span>{tags.join(", ")}</span>
+						</div>
+					)
+				}
+			</div>
+		</div>
+
+		{/* Hero Image */}
+		{
+			heroImage && (
+				<div class="mx-auto mb-16 max-w-5xl overflow-hidden border border-neutral-800 bg-neutral-900">
+					<Image
+						src={heroImage}
+						alt={title}
+						width={1200}
+						height={600}
+						class="h-auto w-full object-cover grayscale transition duration-700 hover:grayscale-0"
+					/>
+				</div>
+			)
+		}
+
+		{/* Content */}
+		<div class="mx-auto max-w-3xl">
+			<div class="markdown-content">
+				<slot />
+			</div>
+
+			{/* Footer Navigation */}
+			<div class="mt-16 flex items-center justify-between border-t border-neutral-800 pt-8">
+				<Button href="/colophon" variant="outline" arrow="left"> Back to Index </Button>
+				<Button href="/" variant="primary"> Return Home </Button>
+			</div>
+		</div>
+	</article>
+</BaseLayout>

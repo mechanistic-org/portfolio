@@ -35,17 +35,19 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 if (type === "blog") {
 	const { authors, postFrontmatter } = Astro.props as BlogProps;
 
-	optimizedImage = await getImage({
-		src: image,
-		format: "webp",
-		quality: "high",
-		width: 1200,
-	});
+	if (image) {
+		optimizedImage = await getImage({
+			src: image,
+			format: "webp",
+			quality: "high",
+			width: 1200,
+		});
+	}
 
 	jsonLD = jsonLDGenerator({
 		type: "blog",
 		postFrontmatter: postFrontmatter,
-		image: optimizedImage,
+		image: optimizedImage || siteData.defaultImage,
 		authors: authors,
 		canonicalUrl: canonicalUrl,
 	});

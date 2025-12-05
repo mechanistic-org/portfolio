@@ -1,3 +1,7 @@
+﻿---
+title: "Conversation Miner Prompt"
+slug: "conversation_miner_prompt"
+---
 # Conversation Miner Prompt
 
 **Copy and paste the text below into any conversation you want to "mine" before deleting.**
@@ -11,13 +15,13 @@
 > **Your Goal:** Review our entire interaction and generate a **Documentation Update Plan** that I can apply immediately.
 >
 > **TARGET FILES:**
-> *   `docs/ARCHITECTURE.md`: Design decisions, data schema, component logic, and "Why" we did it.
-> *   `docs/MAINTENANCE.md`: "How-to" guides, workflows, and **Troubleshooting** steps.
-> *   `docs/ROADMAP.md`: Completed features, known bugs, and the **Change Log**.
-> *   `docs/MANIFESTO.md`: Core principles or "Laws" we established.
+> *   `src/content/docs/ARCHITECTURE.md`: Design decisions, data schema, component logic, and "Why" we did it.
+> *   `src/content/docs/MAINTENANCE.md`: "How-to" guides, workflows, and **Troubleshooting** steps.
+> *   `src/content/docs/ROADMAP.md`: Completed features, known bugs, and the **Change Log**.
+> *   `src/content/docs/MANIFESTO.md`: Core principles or "Laws" we established.
 > *   `README.md`: High-level setup or quick-start changes.
-> *   `docs/BRANDING_PROMPT.md`: Design Language System (DLS) and Style Guide definitions.
-> *   `docs/STYLE_GUIDE.md`: Updates to the Design Language System or Token Map.
+> *   `src/content/docs/BRANDING_PROMPT.md`: Design Language System (DLS) and Style Guide definitions.
+> *   `src/content/docs/STYLE_GUIDE.md`: Updates to the Design Language System or Token Map.
 >
 > **EXTRACT THE GOLD:**
 > 1.  **Decisions:** Why did we choose X over Y?

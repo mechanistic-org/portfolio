@@ -23,7 +23,7 @@ const { navItem } = Astro.props as Props;
 	</button>
 	<div class="dropdown-content invisible absolute z-10 opacity-0 transition-all">
 		<ul
-			class="border-primary-600 bg-base-900 mt-4 w-[10rem] max-w-[20rem] min-w-[9rem] border border-solid p-1.5 drop-shadow-md"
+			class="border-t-primary-500 mt-4 w-[10rem] max-w-[20rem] min-w-[9rem] border border-t border-neutral-800 bg-neutral-950/95 p-1.5 drop-shadow-md backdrop-blur-sm"
 		>
 			{navItem.dropdown.map((dropdownItem) => <NavLink navItem={dropdownItem} />)}
 		</ul>

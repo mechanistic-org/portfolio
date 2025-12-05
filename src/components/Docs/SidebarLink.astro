@@ -1,0 +1,43 @@
+---
+import type { ComponentProps } from "astro/types";
+import Chip from "@/components/DLS/Chip.astro";
+
+/**
+ * Compares two paths ensuring they both have trailing slashes for consistency
+ */
+const comparePathsWithTrailingSlash = (path1: string, path2: string): boolean => {
+	const ensureTrailingSlash = (path: string): string => (path.endsWith("/") ? path : `${path}/`);
+	return ensureTrailingSlash(path1) === ensureTrailingSlash(path2);
+};
+
+interface Props {
+	link: string;
+	text: string;
+	badge?: ComponentProps<typeof Chip>;
+}
+
+const { link, text, badge } = Astro.props;
+
+// Simplified: No locale logic needed for English-only
+const actualLink = link;
+const currentPath = comparePathsWithTrailingSlash(Astro.url.pathname, actualLink);
+---
+
+<li class="-ml-px flex flex-col gap-1">
+	<a
+		href={actualLink}
+		class:list={[
+			"docs-nav__link--sidebar docs-primary-focus hover:text-primary py-1 pl-4 text-base transition-colors md:text-sm",
+			{
+				"docs-nav__link--sidebar-current text-primary border-primary -ml-[2px] border-l-2 font-medium":
+					currentPath,
+				"text-neutral-400": !currentPath,
+			},
+		]}
+	>
+		<div class="flex items-center gap-2">
+			<span>{text}</span>
+			{badge && <Chip text={badge.text} variant={badge.variant} />}
+		</div>
+	</a>
+</li>

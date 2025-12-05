@@ -1,0 +1,140 @@
+﻿---
+title: "QUANTUM: Design Language System (DLS)"
+slug: "style_guide"
+---
+# QUANTUM: Design Language System (DLS)
+
+**Status:** Draft v1.0
+**Aesthetic:** Hyper-Functional Brutalism / Technical Datasheet
+
+---
+
+## 1. Core Philosophy
+The design system is not just about "styling"; it is a functional specification. Every pixel must earn its place.
+
+### The Laws
+1.  **Zero-Runtime Visualization:** If it's static data, it's an SVG. No client-side charting libraries.
+2.  **Physical Asset Law:** Assets are files, not database entries.
+3.  **The Datasheet Aesthetic:** The UI should feel like a technical specification document. High information density, clear hierarchy, zero fluff.
+4.  **Honest Construction:** We show the seams. The "Construction Badge" and "Debug Mode" are features, not bugs.
+5.  **The Physical Output:** The system must degrade gracefully to paper. `Cmd+P` should yield a professional datasheet, not a broken website screenshot.
+
+> **Live Visualization:** A living example of this style guide is available at [`/about/elements`](/about/elements).
+
+---
+
+## 2. The Token Map
+
+### Colors (OKLCH)
+We use a scientifically calibrated OKLCH scale for consistent perceptual brightness.
+
+*   **Primary (The Signal):** `oklch(74.72% 0.2439 141.89)` (Neon Green). Used for active states, cursors, and "System Online" indicators.
+*   **Neutral (The Chassis):** A 10-step scale from `neutral-50` (White) to `neutral-950` (Void Black).
+*   **Semantic Layer:**
+    *   `--background`: `neutral-950` (Dark Mode Default)
+    *   `--foreground`: `neutral-200`
+    *   `--border`: `neutral-800`
+    *   `--grid-color`: `rgba(0, 133, 202, 0.5)` (Process Blue)
+
+### Typography
+*   **Headers (The Label):** `Inter` (Sans-serif). Bold, tracking-tight. Used for section headers and titles.
+*   **Body/UI (The Data):** `JetBrains Mono`. The default font. Used for all body text, code, metrics, and UI elements.
+    *   *Rule:* If it's a number or a metric, it **MUST** be Mono.
+
+### Icons & Logos
+### Theme-Aware Logos
+To implement a logo that switches with the theme:
+1.  Include both `img` tags in the HTML.
+2.  Apply `.logo-light` to the black version and `.logo-dark` to the white version.
+3.  Use the standard CSS utility:
+    ```css
+    .logo-light { display: block; }
+    .logo-dark { display: none; }
+    :global(.dark) .logo-light { display: none; }
+    :global(.dark) .logo-dark { display: block; }
+    ```
+
+### Prose / Long-form Content
+We enforce the "Datasheet" aesthetic even in narrative content (Markdown).
+
+*   **Body Text:** `JetBrains Mono` (`font-mono`). All narrative text is treated as data.
+*   **Headers (H2):**
+    *   **Style:** "Active System" aesthetic.
+    *   **Visual:** `text-2xl` (Mobile) / `text-3xl` (Desktop), Primary Green (`var(--primary)`).
+    *   **Effect:** Bottom border (`neutral-800`), Pulse Dot animation.
+*   **Headers (H3):**
+    *   **Visual:** `text-2xl` (Mobile) / `text-3xl` (Desktop), Primary Green.
+    *   **Effect:** Bottom border (`neutral-800`), **NO** Pulse Dot.
+    *   **Usage:** "Project Artifacts" or major sub-sections.
+*   **Headers (General):** `Inter` (`font-sans`). Bold, tracking-tight. Provides visual hierarchy.
+*   **Blockquotes (The Note):**
+    *   **Style:** Brutalist. No border-radius.
+    *   **Visual:** Left border 2px (`border-primary-500`), subtle background (`bg-primary/5`).
+    *   **Usage:** Technical context, warnings, or "The Challenge" summaries.
+
+### Spacing & Layout
+*   **The Grid:** All layouts align to a 4px baseline grid.
+*   **Containers:** `.site-container` (max-w-5xl).
+*   **The Seam:** 1px borders (`border-neutral-800`) define all component boundaries. No soft shadows; only hard lines.
+*   **Global Top Padding:** `pt-32` (8rem) is the standard for all main page containers (Home, Project List, Project Detail) to ensure visual consistency across page transitions.
+*   **The Robust Header:** For headers with centered elements (like navigation), use a 3-column CSS Grid (`grid-cols-[1fr_auto_1fr]`) with `items-end`. This ensures the center element remains perfectly centered while allowing left/right content (Titles/Breadcrumbs) to wrap naturally without overlap.
+
+---
+
+## 3. Component Library ("The Kit")
+
+### The Kit (Implementation)
+These components are available for use in MDX content:
+*   **Admonition:** `<Admonition variant="info|tip|caution|danger">...</Admonition>`
+*   **Chip:** `<Chip variant="production|prototype|concept" text="..." />`
+*   **Wire:** `<Wire />` (The standard divider)
+
+### The Brick (Containers)
+*   **Usage:** Cards, Modals, Sections.
+*   **Style:** `bg-neutral-950`, `border border-neutral-800`.
+*   **Interaction:** Hover states use `bg-neutral-900` or `border-primary/50`.
+
+### The Chip (Status)
+*   **Usage:** Production Status, Tech Stack Tags.
+*   **Style:** `rounded-full`, `px-2 py-0.5`, `text-xs font-mono`.
+*   **Variants:**
+    *   *Mass Production:* `bg-green-500/10 text-green-500 border-green-500/20`
+    *   *Prototyping:* `bg-amber-500/10 text-amber-500 border-amber-500/20`
+    *   *Concept:* `bg-neutral-800 text-neutral-400 border-neutral-700`
+
+### The Wire (Dividers)
+*   **Usage:** Separating content sections.
+*   **Style:** `border-b border-neutral-800`.
+
+### The Spotlight (Interaction)
+*   **Usage:** Project Directory rows.
+*   **Effect:** Radial gradient tracking mouse position.
+*   **Implementation:** CSS Variables `--x`, `--y` updated via JS.
+
+---
+
+## 4. Voice & Tone
+**"The Engineer"**
+*   **Active Voice:** "Built X," not "X was built."
+*   **Precision:** "Reduced latency by 40ms," not "Made it faster."
+*   **No Fluff:** Avoid marketing speak. State the facts.
+
+---
+
+---
+
+## 6. Effects
+
+### Scramble Text (The Glitch)
+*   **Usage:** High-impact headers and interactive elements.
+*   **Component:** `<ScrambleText text="ERIK NORRIS" />`
+*   **Behavior:** Glitches on hover and randomly on idle.
+
+---
+
+## 5. Future Enhancements (Roadmap)
+*   **Visible Grid:** Implement a global background grid pattern using CSS `background-image` with `--grid-color`.
+*   **Build Stats:** Expose `ingest_data.py` runtime metrics in the footer (e.g., "Built in 0.4s").
+*   **Raw Mode:** A toggle to view the raw JSON/Markdown source of any page.
+
+

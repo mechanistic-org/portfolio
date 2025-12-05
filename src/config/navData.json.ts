@@ -42,13 +42,32 @@ const navConfig: navItem[] = [
 		dropdown: [
 			{
 				text: "PDF",
-				href: "https://resume.eriknorris.com/",
+				href: "/resume/pdf/",
 				newTab: true,
-
 			},
 			{
 				text: "3D Resume",
-				href: "null",
+				href: "/resume/3d/",
+			},
+			{
+				text: "1-Pager",
+				href: "/resume/one-pager/",
+			},
+			{
+				text: "Infographic",
+				href: "/resume/infographic/",
+			},
+			{
+				text: "Timeline",
+				href: "/resume/timeline/",
+			},
+			{
+				text: "Interactive",
+				href: "/resume/interactive/",
+			},
+			{
+				text: "KPI Dashboard",
+				href: "/resume/kpi/",
 			},
 		],
 	},

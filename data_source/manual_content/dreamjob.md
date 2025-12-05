@@ -1,24 +1,112 @@
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
+import Chip from '@components/dls/Chip.astro';
+import Wire from '@components/dls/Wire.astro';
+import ScrambleText from '@components/Effects/ScrambleText.tsx';
 
-## The Challenge
-> **Context:** This project focused on delivering a robust mechanical solution for the Engineering sector.
+## The Meta-Challenge
+> **Context:** The "Dream Job" is not a destination; it is a continuous loop of optimization.
 
-The main challenge was to integrate complex functionality into a compact form factor while adhering to strict Career Goal constraints.
+The objective was to engineer a **Visual Taxonomy** that serves as the "Rosetta Stone" for the Quantum Design Language System. This project acts as a stress test for the ingestion pipeline, the rendering engine, and the "Hyper-Functional Brutalist" aesthetic.
 
-## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
+<Admonition variant="info">
+  **System Note:** This page demonstrates every available view type and component in the Quantum arsenal.
+</Admonition>
 
-*   **Utilized Strategy:** Utilized CAD to model and simulate the assembly before cutting metal.
-*   **Focused Strategy:** Focused on Design for Manufacturing (DFM) principles to reduce part count and assembly time.
-*   **Conducted Strategy:** Conducted rigorous material selection to ensure durability and cost-effectiveness.
-*   **Iterated Strategy:** Iterated on the design based on feedback from initial prototype testing.
+## Engineering Approach: The Taxonomy
+We categorized the visual assets into four distinct domains to cover the full spectrum of engineering deliverables.
 
-## Impact
-The project was successfully delivered, meeting all technical specifications and providing a solid foundation for future development.
+### 1. Product Domain
+The physical manifestation of the design.
 
-### Project Artifacts
+*   **Hero:** The "Beauty Shot". High impact, cinematic lighting.
+    ![Hero View](/assets/r2/dreamjob/dreamjob-hero-01.jpg)
+*   **Isometric:** The "God's Eye" view. Perfect 30-degree projection for structural clarity.
+    ![Isometric View](/assets/r2/dreamjob/dreamjob-iso-01.jpg)
+*   **Orthographic:** The "Blueprint". Flat, dimensionally accurate projections.
+    ![Orthographic View](/assets/r2/dreamjob/dreamjob-ortho-01.jpg)
+*   **Detail:** The "Macro". Focusing on texture, material, and finish.
+    ![Detail View](/assets/r2/dreamjob/dreamjob-detail-01.jpg)
+*   **Context:** The "Lifestyle". Showing the object in its intended environment.
+    ![Context View](/assets/r2/dreamjob/dreamjob-context-01.jpg)
+
+<Wire />
+
+### 2. Engineering Domain
+The process of creation and validation.
+
+*   **Prototype:** The "Alpha". Raw materials, 3D prints, and rough machining.
+    ![Prototype View](/assets/r2/dreamjob/dreamjob-prototype-01.jpg)
+*   **Assembly:** The "Build". Showing how the components fit together.
+    ![Assembly View](/assets/r2/dreamjob/dreamjob-assembly-01.jpg)
+*   **Teardown:** The "Autopsy". Analyzing the internal components.
+    ![Teardown View](/assets/r2/dreamjob/dreamjob-teardown-01.jpg)
+*   **Test:** The "Validation". Stress testing, thermal analysis, and failure modes.
+    ![Test View](/assets/r2/dreamjob/dreamjob-test-01.jpg)
+
+<Wire />
+
+### 3. Abstract Domain
+The theoretical and internal understanding.
+
+*   **Schematic:** The "Logic". Wiring diagrams and flowcharts.
+    ![Schematic View](/assets/r2/dreamjob/dreamjob-schematic-01.jpg)
+*   **Exploded:** The "BOM". Visualizing the Bill of Materials in 3D space.
+    ![Exploded View](/assets/r2/dreamjob/dreamjob-exploded-01.jpg)
+*   **Cutaway:** The "X-Ray". Revealing the internal mechanism.
+    ![Cutaway View](/assets/r2/dreamjob/dreamjob-cutaway-01.jpg)
+*   **Diagram:** The "Flow". Explaining the principle of operation.
+    ![Diagram View](/assets/r2/dreamjob/dreamjob-diagram-01.jpg)
+*   **Render:** The "Vision". High-fidelity CGI before physical production.
+    ![Render View](/assets/r2/dreamjob/dreamjob-render-01.jpg)
+
+<Wire />
+
+### 4. Digital Domain
+The interface and software layer.
+
+*   **UI:** The "Interface". Screens, dashboards, and controls.
+    ![UI View](/assets/r2/dreamjob/dreamjob-ui-01.jpg)
+*   **Wireframe:** The "Skeleton". Low-fidelity layout and UX flow.
+    ![Wireframe View](/assets/r2/dreamjob/dreamjob-wireframe-01.jpg)
+*   **Architecture:** The "System". Network topology and software stack.
+    ![Architecture View](/assets/r2/dreamjob/dreamjob-arch-01.jpg)
+
+## Impact: The Component Library
+Beyond static images, the system supports interactive and semantic components.
+
+### Status Indicators
+We use semantic chips to denote the lifecycle state of a project or component.
+
+<div class="flex gap-4 my-4">
+  <Chip variant="production" text="MASS PRODUCTION" />
+  <Chip variant="prototype" text="PROTOTYPE v0.9" />
+  <Chip variant="concept" text="CONCEPT STUDY" />
+</div>
+
+### Interactive 3D
+The "Physical Asset Law" mandates that we treat 3D models as first-class citizens.
+
+{{MODEL_URL}}
+
+### Motion & Video
+For dynamic demonstrations, we embed optimized video content.
+
 <div class="my-8">
   <YouTube id="dQw4w9WgXcQ" />
 </div>
-{{MODEL_URL}}
+
+### Glitch Effects
+To reinforce the "Cyber-Physical" brand identity, we employ controlled digital artifacts.
+
+<div class="text-4xl font-bold my-8">
+  <ScrambleText text="SYSTEM_OPTIMIZED" />
+</div>
+
+<Admonition variant="tip">
+  **Optimization:** All assets shown here are processed by the `process_images.py` pipeline, ensuring optimal format (AVIF/WebP) and resolution.
+</Admonition>
+
+<Admonition variant="danger">
+  **Warning:** Do not manually edit the `src/content/projects/*.mdx` files. Always update the CSV or this markdown file.
+</Admonition>

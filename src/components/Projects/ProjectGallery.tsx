@@ -4,49 +4,55 @@ import "yet-another-react-lightbox/styles.css";
 import Zoom from "yet-another-react-lightbox/plugins/zoom";
 import Thumbnails from "yet-another-react-lightbox/plugins/thumbnails";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
-import Masonry from "react-masonry-css";
+
+interface GalleryImage {
+    src: string;
+    width: number;
+    height: number;
+    aspectRatio: number;
+}
 
 interface ProjectGalleryProps {
-    images: string[];
+    images: GalleryImage[];
 }
 
 export default function ProjectGallery({ images }: ProjectGalleryProps) {
     const [index, setIndex] = useState(-1);
 
-    const breakpointColumnsObj = {
-        default: 3,
-        1100: 3,
-        700: 2,
-        500: 1
-    };
-
     if (!images || images.length === 0) return null;
 
     // Format slides for Lightbox
-    const slides = images.map((src) => ({ src }));
+    const slides = images.map((img) => ({ src: img.src }));
 
     return (
         <>
-            <Masonry
-                breakpointCols={breakpointColumnsObj}
-                className="my-masonry-grid flex w-auto -ml-4"
-                columnClassName="my-masonry-grid_column pl-4 bg-clip-padding"
-            >
-                {images.map((img, i) => (
-                    <div
-                        key={i}
-                        className="mb-4 overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 transition-all hover:border-neutral-600 hover:shadow-lg cursor-pointer group"
-                        onClick={() => setIndex(i)}
-                    >
-                        <img
-                            src={img}
-                            alt={`Gallery image ${i + 1}`}
-                            className="h-auto w-full transition-transform duration-500 group-hover:scale-105"
-                            loading="lazy"
-                        />
-                    </div>
-                ))}
-            </Masonry>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[200px]">
+                {images.map((img, i) => {
+                    // Bento Logic
+                    const isTall = img.aspectRatio < 0.8;
+                    const isWide = img.aspectRatio > 1.6;
+
+                    let spanClass = "col-span-1 row-span-1";
+                    if (isTall) spanClass = "row-span-2";
+                    if (isWide) spanClass = "col-span-2";
+
+                    return (
+                        <div
+                            key={i}
+                            className={`relative overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 transition-all hover:border-neutral-600 hover:shadow-lg cursor-pointer group ${spanClass}`}
+                            onClick={() => setIndex(i)}
+                        >
+                            <img
+                                src={img.src}
+                                alt={`Gallery image ${i + 1}`}
+                                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 block"
+                                style={{ objectFit: "cover" }}
+                                loading="lazy"
+                            />
+                        </div>
+                    );
+                })}
+            </div>
 
             <Lightbox
                 open={index >= 0}

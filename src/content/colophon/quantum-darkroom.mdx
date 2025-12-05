@@ -1,0 +1,70 @@
+---
+title: "The Quantum Darkroom"
+slug: "quantum-darkroom"
+description: "A hybrid image processing pipeline combining Lightroom art direction with Python automation."
+heroImage: "/assets/tech-1.jpg"
+---
+import { YouTube } from '@astro-community/astro-embed-youtube';
+import Admonition from '@components/Admonition/Admonition.astro';
+import Chip from '@components/DLS/Chip.astro';
+
+## The Philosophy
+**"Human Eye, Machine Hand."**
+
+We do not rely on build-time plugins to guess how an image should look. Art direction (color, crop, tone) is a human task performed in professional tools (Lightroom). Optimization (compression, formatting, resizing) is a machine task performed by scripts. The two never overlap.
+
+## The Pipeline
+
+### 1. Ingest (The Darkroom)
+Raw camera files (CR2, NEF) are ingested into a local workspace. We use Adobe Lightroom Classic for culling and development.
+
+### 2. Master Export
+We export high-resolution TIFFs (4000px, sRGB) to a "Master" directory. This is the Source of Truth.
+*   **Naming Convention:** `{slug}-{view}-{sequence}.tif`
+*   **Example:** `xbox-detail-01.tif`
+
+### 3. The Machine (Python)
+Our custom processing engine (`scripts/process_images.py`) takes over:
+*   **Resizing:** Lanczos resampling to `xl` (1920px), `lg` (1280px), `md` (800px), and `sm` (500px).
+*   **Format Conversion:** Generates next-gen **AVIF** (Primary) and **WebP** (Fallback).
+*   **Animation Stitching:** Detects image sequences and compiles them into high-quality Animated WebP, replacing legacy GIFs.
+
+## Case Study: Project "Base"
+
+We used the `base` project as a testbed for this pipeline.
+
+### The Challenge
+The original project relied on heavy unoptimized GIFs and PNGs, resulting in slow load times and poor LCP (Largest Contentful Paint).
+
+### The Transformation
+We purged the legacy assets and ran the Quantum Pipeline.
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 my-8">
+  <div class="p-6 border border-neutral-800 bg-neutral-900/50">
+    <h3 class="text-xl font-sans font-bold mb-4 text-red-400">Before (Legacy)</h3>
+    <ul class="list-disc pl-4 space-y-2 font-mono text-sm text-neutral-400">
+      <li>Format: <strong>GIF / PNG</strong></li>
+      <li>Total Payload: <strong>~15 MB</strong></li>
+      <li>Responsive: <strong>No</strong> (Single file served to all devices)</li>
+      <li>Animation: <strong>Dithered GIF</strong> (256 colors)</li>
+    </ul>
+  </div>
+
+  <div class="p-6 border border-primary/30 bg-primary/5">
+    <h3 class="text-xl font-sans font-bold mb-4 text-primary">After (Quantum)</h3>
+    <ul class="list-disc pl-4 space-y-2 font-mono text-sm text-neutral-300">
+      <li>Format: <strong>AVIF / WebP</strong></li>
+      <li>Total Payload: <strong>1.2 MB</strong> (92% Reduction)</li>
+      <li>Responsive: <strong>Yes</strong> (XL, LG, MD, SM breakpoints)</li>
+      <li>Animation: <strong>Animated WebP</strong> (Full RGB color, 2000ms duration)</li>
+    </ul>
+  </div>
+</div>
+
+<Admonition variant="tip">
+  **Result:** The "Base" project now loads instantly on mobile networks while maintaining "Retina" quality on desktop displays.
+</Admonition>
+
+## Future Roadmap
+*   **HDR Support:** Leveraging AVIF's HDR capabilities for "True Black" OLED displays.
+*   **3D Pipeline:** Automating `.glb` compression and texture optimization.

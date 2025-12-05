@@ -1,0 +1,49 @@
+---
+// Simplified DocsPagination for English-only
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	prev: {
+		slug: string;
+		title: string;
+	} | null;
+	next: {
+		slug: string;
+		title: string;
+	} | null;
+}
+
+const { prev, next } = Astro.props;
+---
+
+<nav class="mt-12 flex items-center justify-between border-t border-neutral-800 pt-8">
+	{
+		prev && (
+			<a href={`/docs/${prev.slug}`} class="group flex flex-col gap-1 text-left">
+				<span class="font-mono text-xs text-neutral-500 uppercase">Previous</span>
+				<span class="text-foreground hover:text-primary text-md flex items-center gap-2 font-medium transition-colors">
+					<Icon
+						name="tabler:chevron-left"
+						class="size-4 transition-transform group-hover:-translate-x-1"
+					/>
+					{prev.title}
+				</span>
+			</a>
+		)
+	}
+	{!prev && <div />}
+	{
+		next && (
+			<a href={`/docs/${next.slug}`} class="group flex flex-col gap-1 text-right">
+				<span class="font-mono text-xs text-neutral-500 uppercase">Next</span>
+				<span class="text-foreground hover:text-primary text-md flex items-center gap-2 font-medium transition-colors">
+					{next.title}
+					<Icon
+						name="tabler:chevron-right"
+						class="size-4 transition-transform group-hover:translate-x-1"
+					/>
+				</span>
+			</a>
+		)
+	}
+</nav>

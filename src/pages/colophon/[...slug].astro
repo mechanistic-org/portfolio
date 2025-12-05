@@ -1,0 +1,28 @@
+---
+import ColophonPost from "@/layouts/ColophonPost.astro";
+
+export async function getStaticPaths() {
+	const globFeatures = import.meta.glob("../../content/colophon/*.mdx", { eager: true });
+
+	return Object.values(globFeatures).map((file: any) => {
+		const data = file.frontmatter || {};
+		const filename = file.file.split("/").pop().replace(".mdx", "");
+		const slug = data.slug || filename;
+		const description = data.description || data.subtitle || "";
+
+		return {
+			params: { slug },
+			props: {
+				frontmatter: { ...data, description },
+				Content: file.Content || file.default,
+			},
+		};
+	});
+}
+
+const { frontmatter, Content } = Astro.props;
+---
+
+<ColophonPost frontmatter={frontmatter}>
+	<Content />
+</ColophonPost>

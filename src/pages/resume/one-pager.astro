@@ -1,0 +1,173 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import workHistory from "../../config/work_history.json";
+import specs from "../../config/specs.json";
+
+// Group specs by category
+const specsByCategory = specs.reduce(
+	(acc, item) => {
+		if (!acc[item.category]) {
+			acc[item.category] = [];
+		}
+		acc[item.category].push(item);
+		return acc;
+	},
+	{} as Record<string, typeof specs>,
+);
+
+const categories = Object.keys(specsByCategory);
+---
+
+<BaseLayout
+	title="Datasheet: Erik Norris"
+	description="Technical specifications and revision history."
+>
+	<div
+		class="bg-surface-950 flex min-h-screen w-full justify-center pt-32 pb-16 print:bg-white print:pt-0 print:pb-0"
+	>
+		<div
+			class="container max-w-[210mm] bg-white p-8 font-mono text-sm text-black shadow-2xl print:max-w-full print:p-0 print:shadow-none"
+		>
+			<!-- Header -->
+			<header class="mb-8 flex items-end justify-between border-b-4 border-black pb-4">
+				<div>
+					<h1 class="text-4xl font-bold tracking-tighter uppercase">Erik Norris</h1>
+					<p class="text-lg font-bold uppercase">Mechanical Design Engineer</p>
+				</div>
+				<div class="text-right">
+					<div class="text-2xl font-bold">DATASHEET</div>
+					<div class="text-sm">REV: 2025.12</div>
+				</div>
+			</header>
+
+			<div class="grid grid-cols-12 gap-8">
+				<!-- Left Column: Specs -->
+				<div class="col-span-12 space-y-8 md:col-span-5">
+					<!-- Contact / Package Info -->
+					<section>
+						<h2 class="mb-2 bg-black px-2 py-1 font-bold text-white uppercase">
+							1. Package Information
+						</h2>
+						<table class="w-full border-collapse border border-black text-xs">
+							<tbody>
+								<tr class="border-b border-black">
+									<td class="w-1/3 border-r border-black p-1 font-bold">Location</td>
+									<td class="p-1">San Francisco, CA</td>
+								</tr>
+								<tr class="border-b border-black">
+									<td class="border-r border-black p-1 font-bold">Email</td>
+									<td class="p-1">erik@example.com</td>
+								</tr>
+								<tr class="border-b border-black">
+									<td class="border-r border-black p-1 font-bold">Web</td>
+									<td class="p-1">resume.eriknorris.com</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+
+					<!-- Dynamic Specs Tables -->
+					{
+						categories.map((category, index) => (
+							<section>
+								<h2 class="mb-2 bg-black px-2 py-1 font-bold text-white uppercase">
+									{index + 2}. {category}
+								</h2>
+								<table class="w-full border-collapse border border-black text-xs">
+									<thead>
+										<tr class="border-b border-black bg-gray-200">
+											<th class="border-r border-black p-1 text-left">Param</th>
+											<th class="border-r border-black p-1 text-left">Typ</th>
+											<th class="p-1 text-left">Notes</th>
+										</tr>
+									</thead>
+									<tbody>
+										{specsByCategory[category].map((item) => (
+											<tr class="border-b border-black last:border-b-0">
+												<td class="border-r border-black p-1 font-semibold">{item.parameter}</td>
+												<td class="border-r border-black p-1">
+													{item.typical} {item.unit !== "-" ? item.unit : ""}
+												</td>
+												<td class="p-1 text-gray-600 italic">{item.notes}</td>
+											</tr>
+										))}
+									</tbody>
+								</table>
+							</section>
+						))
+					}
+				</div>
+
+				<!-- Right Column: Revision History (Experience) -->
+				<div class="col-span-12 md:col-span-7">
+					<section>
+						<h2 class="mb-2 bg-black px-2 py-1 font-bold text-white uppercase">
+							8. Revision History
+						</h2>
+						<div class="border border-black">
+							<table class="w-full text-xs">
+								<thead>
+									<tr class="border-b border-black bg-gray-200">
+										<th class="w-24 border-r border-black p-2 text-left">Date</th>
+										<th class="w-32 border-r border-black p-2 text-left">Company</th>
+										<th class="p-2 text-left">Description of Change / Role</th>
+									</tr>
+								</thead>
+								<tbody>
+									{
+										workHistory.map((job) => (
+											<tr class="border-b border-black last:border-b-0 hover:bg-gray-50">
+												<td class="border-r border-black p-2 align-top font-mono">
+													{job.start}
+													<br />-<br />
+													{job.end}
+												</td>
+												<td class="border-r border-black p-2 align-top">
+													<div class="font-bold">{job.company}</div>
+													<div class="text-gray-600 italic">{job.title}</div>
+												</td>
+												<td class="p-2 align-top">
+													{job.description}
+													{job.is_consulting && (
+														<span class="mt-1 block inline-block rounded border border-gray-300 px-1 text-[10px] tracking-wider text-gray-500 uppercase">
+															Consulting
+														</span>
+													)}
+												</td>
+											</tr>
+										))
+									}
+								</tbody>
+							</table>
+						</div>
+					</section>
+
+					<section class="mt-8">
+						<h2 class="mb-2 bg-black px-2 py-1 font-bold text-white uppercase">
+							9. Application Notes
+						</h2>
+						<div class="border border-black p-4 text-justify text-xs leading-relaxed">
+							<p class="mb-2">
+								<strong>General Description:</strong> The Erik Norris (EN-2025) is a high-performance
+								Mechanical Design Engineer optimized for complex electromechanical systems. It features
+								an integrated CAD core (SolidWorks/Onshape) and high-speed prototyping interface.
+							</p>
+							<p>
+								<strong>Typical Applications:</strong> Consumer Electronics, Robotics, Medical Devices,
+								and Wearable Technology. Device is capable of operating in high-ambiguity environments
+								and requires minimal external supervision (Micromanagement &lt; 1%).
+							</p>
+						</div>
+					</section>
+				</div>
+			</div>
+
+			<!-- Footer -->
+			<footer class="mt-12 flex justify-between border-t-2 border-black pt-2 text-xs uppercase">
+				<div>Erik Norris // Product Design</div>
+				<div>Confidential - Internal Use Only</div>
+				<div>Page 1 of 1</div>
+			</footer>
+		</div>
+	</div>
+</BaseLayout>

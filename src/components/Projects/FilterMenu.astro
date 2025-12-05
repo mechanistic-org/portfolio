@@ -14,7 +14,11 @@ const { sectors, categories, tools, clients } = Astro.props;
 	<button
 		class="text-primary flex items-center gap-2 font-mono text-sm font-bold tracking-widest uppercase transition-colors hover:text-white"
 	>
-		VIEW <span
+		<!-- Light Mode Logo (Black) -->
+		<img src="/assets/branding/EN_logo_black_1200.svg" alt="View" class="logo-light h-5 w-auto" />
+		<!-- Dark Mode Logo (White) -->
+		<img src="/assets/branding/EN_logo_white_1200.svg" alt="View" class="logo-dark h-5 w-auto" />
+		<span
 			id="active-filter-count"
 			class="bg-primary hidden rounded-full px-1.5 py-0.5 text-[10px] text-black">0</span
 		>
@@ -27,12 +31,12 @@ const { sectors, categories, tools, clients } = Astro.props;
 	>
 		<!-- Main Dropdown Content -->
 		<div
-			class="w-48 origin-top-left rounded-lg border border-neutral-800 bg-neutral-900/80 py-2 shadow-2xl backdrop-blur-xl"
+			class="border-t-primary-500 w-48 origin-top-left border border-t border-neutral-800 bg-neutral-950/95 py-2 shadow-md backdrop-blur-sm"
 		>
 			<!-- Collection Sub-Menu -->
 			<div class="group/item relative px-2 py-1">
 				<button
-					class="flex w-full items-center justify-between rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+					class="hover:bg-primary-500/10 hover:text-primary-500 flex w-full items-center justify-between rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors"
 				>
 					<span>Collection</span>
 					<span class="text-[10px]">▶</span>
@@ -43,12 +47,12 @@ const { sectors, categories, tools, clients } = Astro.props;
 				>
 					<!-- Flyout Content -->
 					<div
-						class="max-h-[60vh] w-56 overflow-y-auto rounded-lg border border-neutral-800 bg-neutral-900/80 p-1 shadow-xl backdrop-blur-xl"
+						class="border-t-primary-500 max-h-[60vh] w-56 overflow-y-auto border border-t border-neutral-800 bg-neutral-950/95 p-1 shadow-md backdrop-blur-sm"
 					>
 						{
 							sectors.map((sector) => (
 								<button
-									class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 block w-full rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+									class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 hover:bg-primary-500/10 hover:text-primary-500 block w-full rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors"
 									data-filter={sector}
 									data-group="industry"
 								>
@@ -63,7 +67,7 @@ const { sectors, categories, tools, clients } = Astro.props;
 			<!-- Category Sub-Menu -->
 			<div class="group/item relative px-2 py-1">
 				<button
-					class="flex w-full items-center justify-between rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+					class="hover:bg-primary-500/10 hover:text-primary-500 flex w-full items-center justify-between rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors"
 				>
 					<span>Category</span>
 					<span class="text-[10px]">▶</span>
@@ -72,12 +76,12 @@ const { sectors, categories, tools, clients } = Astro.props;
 					class="invisible absolute top-0 left-full -translate-x-2 pl-2 opacity-0 transition-all duration-200 ease-out group-hover/item:visible group-hover/item:translate-x-0 group-hover/item:opacity-100"
 				>
 					<div
-						class="max-h-[60vh] w-56 overflow-y-auto rounded-lg border border-neutral-800 bg-neutral-900/80 p-1 shadow-xl backdrop-blur-xl"
+						class="border-t-primary-500 max-h-[60vh] w-56 overflow-y-auto border border-t border-neutral-800 bg-neutral-950/95 p-1 shadow-md backdrop-blur-sm"
 					>
 						{
 							categories.map((cat) => (
 								<button
-									class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 block w-full rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+									class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 hover:bg-primary-500/10 hover:text-primary-500 block w-full rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors"
 									data-filter={cat}
 									data-group="category"
 								>
@@ -92,7 +96,7 @@ const { sectors, categories, tools, clients } = Astro.props;
 			<!-- Client Sub-Menu -->
 			<div class="group/item relative px-2 py-1">
 				<button
-					class="flex w-full items-center justify-between rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+					class="hover:bg-primary-500/10 hover:text-primary-500 flex w-full items-center justify-between rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors"
 				>
 					<span>Client</span>
 					<span class="text-[10px]">▶</span>
@@ -101,12 +105,12 @@ const { sectors, categories, tools, clients } = Astro.props;
 					class="invisible absolute top-0 left-full -translate-x-2 pl-2 opacity-0 transition-all duration-200 ease-out group-hover/item:visible group-hover/item:translate-x-0 group-hover/item:opacity-100"
 				>
 					<div
-						class="max-h-[60vh] w-56 overflow-y-auto rounded-lg border border-neutral-800 bg-neutral-900/80 p-1 shadow-xl backdrop-blur-xl"
+						class="border-t-primary-500 max-h-[60vh] w-56 overflow-y-auto border border-t border-neutral-800 bg-neutral-950/95 p-1 shadow-md backdrop-blur-sm"
 					>
 						{
 							clients.map((client) => (
 								<button
-									class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 block w-full rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+									class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 hover:bg-primary-500/10 hover:text-primary-500 block w-full rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors"
 									data-filter={client}
 									data-group="client"
 								>
@@ -121,7 +125,7 @@ const { sectors, categories, tools, clients } = Astro.props;
 			<!-- Toolchain Sub-Menu -->
 			<div class="group/item relative px-2 py-1">
 				<button
-					class="flex w-full items-center justify-between rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+					class="hover:bg-primary-500/10 hover:text-primary-500 flex w-full items-center justify-between rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors"
 				>
 					<span>Toolchain</span>
 					<span class="text-[10px]">▶</span>
@@ -130,12 +134,12 @@ const { sectors, categories, tools, clients } = Astro.props;
 					class="invisible absolute top-0 left-full -translate-x-2 pl-2 opacity-0 transition-all duration-200 ease-out group-hover/item:visible group-hover/item:translate-x-0 group-hover/item:opacity-100"
 				>
 					<div
-						class="max-h-[60vh] w-56 overflow-y-auto rounded-lg border border-neutral-800 bg-neutral-900/80 p-1 shadow-xl backdrop-blur-xl"
+						class="border-t-primary-500 max-h-[60vh] w-56 overflow-y-auto border border-t border-neutral-800 bg-neutral-950/95 p-1 shadow-md backdrop-blur-sm"
 					>
 						{
 							tools.map((tool) => (
 								<button
-									class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 block w-full rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+									class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 hover:bg-primary-500/10 hover:text-primary-500 block w-full rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors"
 									data-filter={tool}
 									data-group="tool"
 								>
@@ -150,7 +154,7 @@ const { sectors, categories, tools, clients } = Astro.props;
 			<!-- Status Sub-Menu -->
 			<div class="group/item relative px-2 py-1">
 				<button
-					class="flex w-full items-center justify-between rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+					class="hover:bg-primary-500/10 hover:text-primary-500 flex w-full items-center justify-between rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors"
 				>
 					<span>Status</span>
 					<span class="text-[10px]">▶</span>
@@ -159,12 +163,12 @@ const { sectors, categories, tools, clients } = Astro.props;
 					class="invisible absolute top-0 left-full -translate-x-2 pl-2 opacity-0 transition-all duration-200 ease-out group-hover/item:visible group-hover/item:translate-x-0 group-hover/item:opacity-100"
 				>
 					<div
-						class="w-40 rounded-lg border border-neutral-800 bg-neutral-900/80 p-1 shadow-xl backdrop-blur-xl"
+						class="border-t-primary-500 w-40 border border-t border-neutral-800 bg-neutral-950/95 p-1 shadow-md backdrop-blur-sm"
 					>
 						{
 							["Production", "Prototype", "Concept"].map((status) => (
 								<button
-									class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 block w-full rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors hover:bg-neutral-800 hover:text-white"
+									class="filter-btn data-[active=true]:text-primary data-[active=true]:bg-primary/10 hover:bg-primary-500/10 hover:text-primary-500 block w-full rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-400 transition-colors"
 									data-filter={status}
 									data-group="status"
 								>
@@ -183,7 +187,7 @@ const { sectors, categories, tools, clients } = Astro.props;
 			<div class="px-2 py-1">
 				<button
 					id="reset-filters-btn"
-					class="group/reset flex w-full items-center justify-between rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-500 transition-colors hover:bg-neutral-800 hover:text-white"
+					class="group/reset hover:bg-primary-500/10 hover:text-primary-500 flex w-full items-center justify-between rounded px-2 py-1.5 text-left font-mono text-xs text-neutral-500 transition-colors"
 				>
 					<span>Reset View</span>
 					<svg
@@ -203,3 +207,21 @@ const { sectors, categories, tools, clients } = Astro.props;
 		</div>
 	</div>
 </div>
+
+<style>
+	/* Default: Light Mode */
+	.logo-light {
+		display: block;
+	}
+	.logo-dark {
+		display: none;
+	}
+
+	/* Dark Mode */
+	:global(.dark) .logo-light {
+		display: none;
+	}
+	:global(.dark) .logo-dark {
+		display: block;
+	}
+</style>

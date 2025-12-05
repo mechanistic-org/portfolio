@@ -82,9 +82,9 @@ const Marquee: React.FC<MarqueeProps> = ({
     return (
         <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
             <div className="flex flex-row touch-pan-y" style={{ display: 'flex', flexDirection: 'row', whiteSpace: 'nowrap' }}>
-                {items.map((item) => (
+                {items.map((item, index) => (
                     <div
-                        key={item.id}
+                        key={`${item.id}-${index}`}
                         className="flex-none w-auto pl-12"
                         style={{ flex: '0 0 auto', display: 'inline-flex' }}
                     >

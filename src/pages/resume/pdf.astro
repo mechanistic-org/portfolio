@@ -1,0 +1,88 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Retrieving Blueprint..." description="Accessing secure document storage.">
+	<div
+		class="container mx-auto flex h-screen flex-col items-center justify-center px-4 text-center"
+	>
+		<div class="w-full max-w-md space-y-8">
+			<div class="relative">
+				<!-- Plotter Animation Container -->
+				<div class="bg-surface-800 h-2 w-full overflow-hidden rounded">
+					<div class="bg-accent-500 animate-progress h-full"></div>
+				</div>
+				<div class="text-accent-400 mt-2 flex justify-between font-mono text-xs">
+					<span>INIT_PLOTTER_DRIVER</span>
+					<span id="status-text">BUFFERING...</span>
+				</div>
+			</div>
+
+			<h1 class="animate-pulse text-2xl font-bold text-white">RETRIEVING BLUEPRINT</h1>
+
+			<div
+				class="text-surface-400 border-surface-700 space-y-1 rounded border bg-black/30 p-4 text-left font-mono text-sm"
+			>
+				<p>> CONNECTING TO ARCHIVE...</p>
+				<p class="animate-fade-in opacity-0 delay-100">> ACCESS GRANTED</p>
+				<p class="animate-fade-in opacity-0 delay-200">> RASTERING VECTOR DATA...</p>
+				<p class="animate-fade-in opacity-0 delay-300">> SPOOLING TO PRINTER...</p>
+				<p class="animate-fade-in text-accent-400 opacity-0 delay-500">
+					> COMPLETE. OPENING DOCUMENT.
+				</p>
+			</div>
+		</div>
+	</div>
+</BaseLayout>
+
+<script>
+	// Redirect after animation
+	setTimeout(() => {
+		window.location.href = "https://resume.eriknorris.com/";
+	}, 2500);
+
+	// Dynamic Status Text
+	const status = document.getElementById("status-text");
+	if (status) {
+		setTimeout(() => (status.innerText = "RASTERING..."), 800);
+		setTimeout(() => (status.innerText = "PRINTING..."), 1600);
+		setTimeout(() => (status.innerText = "DONE"), 2400);
+	}
+</script>
+
+<style>
+	@keyframes progress {
+		0% {
+			width: 0%;
+		}
+		100% {
+			width: 100%;
+		}
+	}
+	.animate-progress {
+		animation: progress 2.5s ease-in-out forwards;
+	}
+
+	.animate-fade-in {
+		animation: fadeIn 0.1s forwards;
+	}
+
+	@keyframes fadeIn {
+		to {
+			opacity: 1;
+		}
+	}
+
+	.delay-100 {
+		animation-delay: 0.5s;
+	}
+	.delay-200 {
+		animation-delay: 1s;
+	}
+	.delay-300 {
+		animation-delay: 1.5s;
+	}
+	.delay-500 {
+		animation-delay: 2s;
+	}
+</style>

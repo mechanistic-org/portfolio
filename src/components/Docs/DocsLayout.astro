@@ -1,0 +1,103 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import SidebarNav from "./SidebarNav.astro";
+import TableOfContents from "./TableOfContents.astro";
+import DocsPagination from "./DocsPagination.astro";
+import TocLink from "./TocLink.astro";
+
+interface Props {
+	doc: CollectionEntry<"docs">;
+	headings?: import("astro").MarkdownHeading[];
+}
+
+const { doc, headings = [] } = Astro.props;
+const { title, description = "" } = doc.data;
+
+// Filter headings
+const minHeadingLevel = 2;
+const maxHeadingLevel = 3;
+const filteredHeadings = headings.filter(
+	(heading) => heading.depth <= maxHeadingLevel && heading.depth >= minHeadingLevel,
+);
+
+// Get adjacent pages (Simplified for now, can be enhanced later if needed)
+// For now, we'll let DocsPagination handle logic or pass null if we don't want to implement full next/prev logic yet.
+// Actually, let's implement a simple next/prev logic in getStaticPaths or similar,
+// but for now let's just pass null to get it rendering, or implement a basic fetch here.
+// To keep it simple and performant, we might want to pass prev/next from the page generation.
+// Let's assume they are passed as props or we fetch them here.
+// Fetching all docs here might be expensive on every page build if many docs.
+// Let's pass them from the [...slug].astro page.
+
+const { prev, next } = Astro.props as any; // Expecting these from the page
+---
+
+<BaseLayout title={title} description={description}>
+	<div class="mx-auto flex w-full max-w-screen-2xl">
+		{/* Desktop Sidebar */}
+		<aside
+			class="fixed top-16 hidden h-[calc(100vh-64px)] w-[280px] shrink-0 overflow-y-auto border-r border-neutral-800 py-8 pr-4 md:block"
+		>
+			<SidebarNav />
+		</aside>
+
+		{/* Main Content Wrapper */}
+		<div class="min-w-0 flex-1 md:pl-[280px]">
+			<div
+				class="mx-auto flex max-w-7xl flex-col px-4 py-10 sm:px-6 lg:flex-row lg:gap-10 lg:px-8 xl:gap-20"
+			>
+				{/* Main Content */}
+				<main class="min-w-0 flex-1">
+					{/* Mobile Table of Contents (Simplified) */}
+					<div class="mb-8 rounded-lg border border-neutral-800 bg-neutral-900/50 p-4 lg:hidden">
+						<details class="group">
+							<summary
+								class="flex cursor-pointer list-none items-center justify-between font-medium"
+							>
+								<span>On this page</span>
+								<span class="transition-transform group-open:rotate-180">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="24"
+										height="24"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										stroke-width="2"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										class="size-4"><path d="m6 9 6 6 6-6"></path></svg
+									>
+								</span>
+							</summary>
+							<ul class="mt-4 space-y-2 border-l border-neutral-800 pt-2">
+								{
+									filteredHeadings.map((heading) => (
+										<TocLink heading={heading} minHeadingLevel={minHeadingLevel} />
+									))
+								}
+							</ul>
+						</details>
+					</div>
+
+					<div
+						class="prose prose-invert prose-neutral prose-headings:font-sans prose-headings:font-bold prose-h1:text-4xl prose-h1:mb-8 prose-p:text-neutral-300 prose-a:text-primary hover:prose-a:text-primary/80 prose-code:text-primary prose-code:bg-primary/10 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none max-w-none"
+					>
+						<h1 class="mb-8 font-sans text-4xl font-bold">{title}</h1>
+						<slot />
+					</div>
+
+					<DocsPagination prev={prev} next={next} />
+				</main>
+
+				{/* Desktop Table of Contents */}
+				<aside class="hidden w-64 shrink-0 lg:block">
+					<div class="sticky top-24">
+						<TableOfContents headings={filteredHeadings} minHeadingLevel={minHeadingLevel} />
+					</div>
+				</aside>
+			</div>
+		</div>
+	</div>
+</BaseLayout>

@@ -1,0 +1,84 @@
+---
+import TocLink from "./TocLink.astro";
+
+interface Props {
+	headings: import("astro").MarkdownHeading[];
+	minHeadingLevel?: number;
+}
+
+const { headings, minHeadingLevel = 2 } = Astro.props as Props;
+---
+
+<div class="space-y-4">
+	<p class="font-sans text-sm font-bold tracking-wide text-neutral-500 uppercase">On this page</p>
+	<ul class="space-y-2 border-l border-neutral-800">
+		{
+			headings.map((heading) => (
+				<TocLink
+					heading={heading}
+					class="toc-link text-sm text-neutral-400"
+					minHeadingLevel={minHeadingLevel}
+				/>
+			))
+		}
+	</ul>
+</div>
+
+<script>
+	// Wrapper for content
+	let wrappingElement: Element | null;
+	let observeHeaderTags: IntersectionObserver;
+	let allHeaderTags: NodeListOf<Element>;
+
+	function setCurrent(e: IntersectionObserverEntry[]) {
+		const allSectionLinks = document.querySelectorAll(".toc-link");
+		e.map((i) => {
+			if (i.isIntersecting === true) {
+				allSectionLinks.forEach((link) =>
+					link.classList.remove(
+						"text-primary",
+						"font-medium",
+						"border-l-2",
+						"border-primary",
+						"-ml-[1px]",
+					),
+				);
+
+				const targetLink = document.querySelector(`a[href="#${i.target.id}"].toc-link`);
+
+				if (targetLink)
+					targetLink.classList.add(
+						"text-primary",
+						"font-medium",
+						"border-l-2",
+						"border-primary",
+						"-ml-[1px]",
+					);
+			}
+		});
+	}
+
+	function initTOC() {
+		wrappingElement = document.querySelector(".docs-markdown-content");
+		if (wrappingElement !== null) {
+			allHeaderTags = wrappingElement.querySelectorAll(":scope > h2, :scope > h3, :scope > h4");
+		}
+
+		const options: IntersectionObserverInit = {
+			root: null,
+			rootMargin: "-20% 0px -40% 0px",
+			threshold: [1],
+		};
+
+		observeHeaderTags = new IntersectionObserver(setCurrent, options);
+		if (wrappingElement === null) {
+			return;
+		}
+		allHeaderTags.forEach((tag) => {
+			observeHeaderTags.observe(tag);
+		});
+	}
+
+	initTOC();
+	document.addEventListener("astro:after-swap", initTOC);
+</script>

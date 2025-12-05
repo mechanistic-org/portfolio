@@ -61,7 +61,12 @@ const projectsCollection = defineCollection({
             value: z.number()
         })).default([]),
 
-        gallery: z.array(z.string()).default([]),
+        gallery: z.array(z.object({
+            src: z.string(),
+            width: z.number(),
+            height: z.number(),
+            aspectRatio: z.number()
+        })).default([]),
 
         documents: z.array(z.object({
             name: z.string(),

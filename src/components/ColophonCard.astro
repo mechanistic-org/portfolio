@@ -1,0 +1,103 @@
+---
+import { Image } from "astro:assets";
+
+import type { HTMLAttributes } from "astro/types";
+
+// utils
+import { formatDate } from "@/js/textUtils";
+
+interface Props extends HTMLAttributes<"article"> {
+	post: {
+		slug: string;
+		title: string;
+		description?: string;
+		pubDate?: string | Date;
+		heroImage?: string;
+		icon?: string; // Optional icon override
+	};
+	class?: string;
+}
+
+const { post, class: className, ...rest } = Astro.props as Props;
+const { title, description, pubDate, heroImage, slug, icon } = post;
+
+// Default to current date if missing (for now)
+const date = pubDate ? new Date(pubDate) : new Date();
+---
+
+<article class:list={["group @container w-full", className]} {...rest}>
+	<a href={`/colophon/${slug}/`} class="block h-full">
+		<div
+			class="group-hover:border-primary/50 h-full border border-neutral-800 bg-neutral-950 transition-colors duration-300"
+		>
+			{/* Image / Icon Area */}
+			<div
+				class="relative aspect-[16/9] w-full overflow-hidden border-b border-neutral-800 bg-neutral-900/50"
+			>
+				{
+					heroImage ? (
+						<Image
+							class="h-full w-full object-cover grayscale transition duration-700 group-hover:scale-105 group-hover:grayscale-0"
+							src={heroImage}
+							alt={title}
+							width={800}
+							height={450}
+						/>
+					) : (
+						<div class="flex h-full items-center justify-center">
+							<div class="group-hover:text-primary text-neutral-700 transition-colors duration-300">
+								{/* Fallback Icon */}
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="64"
+									height="64"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="1"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+									<polyline points="14 2 14 8 20 8" />
+									<path d="M12 18v-6" />
+									<path d="M8 15l4 3 4-3" />
+								</svg>
+							</div>
+						</div>
+					)
+				}
+
+				{/* Overlay Grid */}
+				<div class="pointer-events-none absolute inset-0 bg-[url('/assets/grid.svg')] opacity-20">
+				</div>
+			</div>
+
+			{/* Content Area */}
+			<div class="p-6">
+				<div class="mb-4 flex items-center justify-between">
+					<div class="text-primary/70 font-mono text-xs tracking-wider uppercase">
+						System Feature
+					</div>
+					{
+						pubDate && (
+							<time datetime={date.toISOString()} class="font-mono text-xs text-neutral-500">
+								{date.toLocaleDateString("en-US", { month: "short", year: "numeric" })}
+							</time>
+						)
+					}
+				</div>
+
+				<h3
+					class="group-hover:text-primary mb-2 font-sans text-xl font-bold text-neutral-100 transition-colors"
+				>
+					{title}
+				</h3>
+
+				<p class="line-clamp-3 font-mono text-sm text-neutral-400">
+					{description}
+				</p>
+			</div>
+		</div>
+	</a>
+</article>

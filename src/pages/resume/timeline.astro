@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import workHistory from '../../config/work_history.json';
+---
+
+<BaseLayout title="Timeline Resume" description="Chronological journey through my career.">
+	<div class="container mx-auto px-4 pt-32 pb-8 h-screen flex flex-col">
+		<h1 class="text-accent-500 mb-4 text-4xl font-bold">Product Lifecycle</h1>
+        <p class="mb-8 text-lg text-surface-300">Horizontal scroll to view the production history.</p>
+
+		<div
+			class="flex-grow w-full overflow-x-auto snap-x snap-mandatory flex gap-8 pb-8 items-center"
+            style="scrollbar-width: thin;"
+		>
+            <!-- Start Node -->
+            <div class="snap-center shrink-0 w-64 h-64 flex items-center justify-center">
+                <div class="text-center">
+                    <div class="text-6xl mb-4">🚀</div>
+                    <h3 class="text-2xl font-bold text-white">Launch</h3>
+                    <p class="text-surface-400">Career Initialization</p>
+                </div>
+            </div>
+
+            <!-- Timeline Items -->
+			{
+				workHistory.slice().reverse().map((job, index) => (
+					<div class="snap-center shrink-0 w-[400px] bg-surface-800 border border-surface-600 rounded-xl p-8 shadow-xl relative group hover:border-accent-500 transition-all hover:-translate-y-2">
+                        <!-- Connector Line (Visual only) -->
+                        <div class="absolute top-1/2 -left-8 w-8 h-1 bg-surface-600 group-hover:bg-accent-500 transition-colors"></div>
+                        
+						<span class="text-surface-900 bg-accent-400 mb-4 inline-block rounded-full px-3 py-1 text-xs font-bold tracking-wider">
+							{job.start} - {job.end}
+						</span>
+						<h3 class="text-2xl font-bold text-white mb-2">{job.company}</h3>
+						<p class="text-accent-300 mb-6 font-mono text-sm border-b border-surface-700 pb-4">{job.title}</p>
+						<p class="text-surface-300 leading-relaxed text-sm">
+                            {job.description}
+                        </p>
+                        
+                        <div class="mt-6 flex gap-2">
+                            {job.is_consulting && <span class="text-xs border border-accent-500/50 text-accent-400 px-2 py-1 rounded">Consulting</span>}
+                        </div>
+					</div>
+				))
+			}
+
+             <!-- End Node -->
+             <div class="snap-center shrink-0 w-64 h-64 flex items-center justify-center">
+                <div class="text-center">
+                    <div class="text-6xl mb-4">🔮</div>
+                    <h3 class="text-2xl font-bold text-white">Future</h3>
+                    <p class="text-surface-400">Next Generation</p>
+                </div>
+            </div>
+		</div>
+	</div>
+</BaseLayout>
+
+<style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #1f2937; 
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #10b981; 
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #059669; 
+    }
+</style>

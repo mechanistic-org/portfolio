@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 import numpy as np
 import time
+from PIL import Image
 
 # --- CONFIGURATION ---
 SOURCE_DIR = "data_source"
@@ -37,7 +38,7 @@ else:
 
 # Determine R2 Domain
 # Default to local proxy for dev, override for prod
-R2_DOMAIN = os.environ.get("PUBLIC_R2_DOMAIN", "https://assets.eriknorris.com")
+R2_DOMAIN = os.environ.get("PUBLIC_R2_DOMAIN", "/assets/r2")
 print(f"🌐 Using R2 Domain: {R2_DOMAIN}")
 
 def find_file(suffix):
@@ -636,6 +637,21 @@ def process_projects():
         status_label = "Completed"
         if not end_date_raw: status_label = "Ongoing"
 
+        # --- MANUAL CONTENT (Read First) ---
+        # We read this first so we can exclude used images from the gallery
+        content_body = ""
+        used_assets = set()
+        
+        manual_content_path = os.path.join(SOURCE_DIR, "manual_content", f"{slug}.md")
+        if os.path.exists(manual_content_path):
+            print(f"📄 Found manual content for {slug}")
+            with open(manual_content_path, "r", encoding="utf-8") as mf:
+                content_body = mf.read()
+                
+                # Ensure imports are present
+                if "import { YouTube }" not in content_body:
+                     content_body = f"import {{ YouTube }} from '@astro-community/astro-embed-youtube';\nimport ModelViewer from '@components/mdx/ModelViewer.astro';\n\n{content_body}"
+
         # --- IMAGES ---
         # Look for images in STAGING_DIR/slug
         # If found, copy to LOCAL_R2_DIR and use R2_DOMAIN/slug/image
@@ -646,18 +662,117 @@ def process_projects():
         
         staging_project_dir = os.path.join(STAGING_DIR, slug)
         
+        model_url = ""
+        
         if os.path.exists(staging_project_dir):
             # Sync assets to public/assets/r2
             sync_r2_assets(slug, staging_project_dir)
             
-            for f in os.listdir(staging_project_dir):
-                if f.lower().startswith("hero."):
-                    hero_img = f"{R2_DOMAIN}/{slug}/{f}"
-                elif f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp', '.gif')) and "hero" not in f.lower():
-                    gallery_images.append(f"{R2_DOMAIN}/{slug}/{f}")
-        
+            all_files = os.listdir(staging_project_dir)
+            
+            # --- HERO SELECTION ---
+            # Priority: {slug}-hero-*-xl.avif > .webp > hero.*
+            hero_candidates = []
+            for f in all_files:
+                lower_f = f.lower()
+                # Safer Hero Check: Must contain "-hero-" or start with "hero-"
+                if "-hero-" in lower_f or lower_f.startswith("hero-"):
+                    # Score candidates
+                    score = 0
+                    if "xl" in lower_f: score += 10
+                    elif "lg" in lower_f: score += 5
+                    
+                    if ".avif" in lower_f: score += 3
+                    elif ".webp" in lower_f: score += 2
+                    elif ".jpg" in lower_f or ".png" in lower_f: score += 1
+                    
+                    hero_candidates.append((score, f))
+            
+            if hero_candidates:
+                hero_candidates.sort(key=lambda x: x[0], reverse=True)
+                best_hero = hero_candidates[0][1]
+                hero_img = f"{R2_DOMAIN}/{slug}/{best_hero}"
+
+            # --- 3D MODEL ---
+            for f in all_files:
+                if f.endswith(".glb"):
+                    model_url = f"{R2_DOMAIN}/{slug}/{f}"
+                    break
+
+            # --- GALLERY SELECTION ---
+            # Strategy: Group by "Base Name" -> Pick Best Candidate
+            # Base Name = {slug}-{view}-{sequence} (e.g. xbox-detail-01)
+            
+            gallery_groups = {}
+            
+            for f in all_files:
+                lower_f = f.lower()
+                if f.endswith(('.svg', '.glb', '.pdf', '.ds_store')): continue
+                
+                # Exclude Hero
+                if "-hero-" in lower_f or lower_f.startswith("hero-"): continue
+                
+                # Exclude if used in Manual Content
+                # Simple check: does the filename appear in the text?
+                if f in content_body:
+                    # print(f"    [EXCLUDE] {f} is used in writeup.")
+                    continue
+                
+                # Must match valid view types to be a gallery item
+                if not any(vt in lower_f for vt in ['detail', 'context', 'iso', 'ortho', 'prototype', 'assembly', 'teardown', 'test', 'diagram', 'schematic', 'exploded', 'cutaway', 'render', 'ui', 'wireframe', 'arch']):
+                    continue
+
+                # Determine Base Name
+                # Regex-ish approach: split by '-' and drop the last part if it looks like a breakpoint (xl, lg, md, sm)
+                # AND drop the extension
+                name_parts = f.rsplit('.', 1)[0].split('-')
+                
+                # Check if last part is a breakpoint
+                if name_parts[-1] in ['xl', 'lg', 'md', 'sm']:
+                    base_name = "-".join(name_parts[:-1])
+                else:
+                    base_name = "-".join(name_parts)
+                
+                if base_name not in gallery_groups:
+                    gallery_groups[base_name] = []
+                
+                # Score the file
+                score = 0
+                if "xl" in lower_f: score += 10
+                elif "lg" in lower_f: score += 5
+                elif "md" in lower_f: score += 2
+                
+                if ".avif" in lower_f: score += 3
+                elif ".webp" in lower_f: score += 2 # WebP is preferred over JPG/PNG
+                elif ".jpg" in lower_f or ".png" in lower_f: score += 1
+                
+                gallery_groups[base_name].append((score, f))
+
+            # Select winners
+            for base_name, candidates in gallery_groups.items():
+                if not candidates: continue
+                # Sort by score descending
+                candidates.sort(key=lambda x: x[0], reverse=True)
+                best_file = candidates[0][1]
+                
+                # Extract Dimensions
+                img_path = os.path.join(staging_project_dir, best_file)
+                width, height = 800, 600 # Default
+                try:
+                    with Image.open(img_path) as img:
+                        width, height = img.size
+                except Exception as e:
+                    print(f"    ⚠️ Could not read dimensions for {best_file}: {e}")
+
+                gallery_images.append({
+                    "src": f"{R2_DOMAIN}/{slug}/{best_file}",
+                    "width": width,
+                    "height": height,
+                    "aspectRatio": width / height if height > 0 else 1.33
+                })
+
         # Sort gallery
-        gallery_images.sort()
+        gallery_images.sort(key=lambda x: x['src'])
         
         # Documents
         documents = []
@@ -679,14 +794,6 @@ def process_projects():
             if CLIENT_DOMAIN_MAP.get(c):
                  links.append({"name": f"{c} Website", "url": f"https://{CLIENT_DOMAIN_MAP.get(c)}"})
 
-        # 3D Model
-        model_url = ""
-        if os.path.exists(staging_project_dir):
-            for f in os.listdir(staging_project_dir):
-                if f.endswith(".glb"):
-                    model_url = f"{R2_DOMAIN}/{slug}/{f}"
-                    break
-
         # Generate Charts
         skill_graph_url = generate_radar_chart(skill_data, slug) or ""
         part_graph_url = generate_donut_chart(parts, slug) or ""
@@ -695,24 +802,13 @@ def process_projects():
         model_viewer_tag = ""
         if model_url:
             model_viewer_tag = f'<ModelViewer src="{model_url}" alt="3D Asset" />'
-
-        # Check for manual content override
-        manual_content_path = os.path.join(SOURCE_DIR, "manual_content", f"{slug}.md")
-        if os.path.exists(manual_content_path):
-            print(f"📄 Found manual content for {slug}")
-            with open(manual_content_path, "r", encoding="utf-8") as mf:
-                content_body = mf.read()
-                
-                # Replace placeholders
-                if model_url:
-                    content_body = content_body.replace("{{MODEL_URL}}", model_url)
-                else:
-                    # Remove the placeholder if no model exists
-                    content_body = content_body.replace("{{MODEL_URL}}", "")
-
-                # Ensure imports are present if not in manual content
-                if "import { YouTube }" not in content_body:
-                     content_body = f"import {{ YouTube }} from '@astro-community/astro-embed-youtube';\nimport ModelViewer from '@components/mdx/ModelViewer.astro';\n\n{content_body}"
+        
+        # Replace placeholders in manual content
+        if content_body:
+            if model_url:
+                content_body = content_body.replace("{{MODEL_URL}}", model_url)
+            else:
+                content_body = content_body.replace("{{MODEL_URL}}", "")
         else:
             content_body = f"""
 import {{ YouTube }} from '@astro-community/astro-embed-youtube';

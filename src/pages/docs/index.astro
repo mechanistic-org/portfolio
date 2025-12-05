@@ -1,0 +1,20 @@
+---
+import { getCollection } from "astro:content";
+
+// Redirect to the first doc (likely ONBOARDING_PROMPT or README if present, or just the first one)
+const docs = await getCollection("docs");
+
+// Sort to find a good default
+const sortedDocs = docs.sort((a, b) => {
+	const slugA = a.slug.toLowerCase();
+	const slugB = b.slug.toLowerCase();
+	if (slugA.includes("onboarding")) return -1;
+	if (slugB.includes("onboarding")) return 1;
+	return slugA.localeCompare(slugB);
+});
+
+const firstDoc = sortedDocs[0];
+const destination = firstDoc ? `/docs/${firstDoc.slug}` : "/";
+
+return Astro.redirect(destination);
+---

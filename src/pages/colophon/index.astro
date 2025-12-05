@@ -1,0 +1,112 @@
+---
+import Layout from "@layouts/BaseLayout.astro";
+import ColophonCard from "@components/ColophonCard.astro";
+import Marquee from "@components/Marquee/Marquee";
+import TestimonialWall from "@components/Testimonials/TestimonialWall";
+
+// Workaround for empty collection issue: manually load files via glob
+const globFeatures = import.meta.glob("../../content/colophon/*.mdx", { eager: true });
+const features = Object.values(globFeatures)
+	.map((file: any) => {
+		const data = file.frontmatter || {};
+		// Extract slug from filename if not in frontmatter
+		const filename = file.file.split("/").pop().replace(".mdx", "");
+		return {
+			id: file.file,
+			slug: data.slug || filename,
+			description: data.description || data.subtitle || "",
+			...data,
+			Content: file.Content || file.default,
+		};
+	})
+	.sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
+
+// Add System Documentation manually
+features.unshift({
+	id: "docs",
+	slug: "../docs", // Relative path to break out of /colophon route
+	title: "System Documentation",
+	description: "Internal operating procedures, architecture diagrams, and style guides.",
+	icon: "book",
+	color: "blue",
+	heroImage: "/assets/tech-1.jpg", // Placeholder or reuse
+});
+
+const tools = [
+	"VS Code",
+	"GitHub",
+	"Cloudflare Pages",
+	"Cloudflare R2",
+	"Python",
+	"Astro v5",
+	"React",
+	"Tailwind CSS v4",
+	"Recharts",
+	"Gemini 1.5 Pro",
+];
+const marqueeTools = [...tools, ...tools, ...tools];
+---
+
+<Layout
+	title="Colophon"
+	description="The Meta-Portfolio: Documenting the engineering behind the site."
+>
+	<section class="pt-32 pb-24">
+		<div class="site-container mb-24 text-center">
+			<div
+				class="border-primary/30 bg-primary/10 text-primary mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-xs tracking-widest uppercase"
+			>
+				System Architecture
+			</div>
+			<h1 class="mb-8 text-5xl font-bold tracking-tight text-white md:text-7xl">
+				The Meta-Portfolio
+			</h1>
+			<p class="mx-auto mb-12 max-w-2xl text-lg text-neutral-400">
+				This site documents itself. Every major feature—from the AR Viewer to the Ingestion
+				Pipeline—is treated as an engineering project worthy of a case study.
+			</p>
+
+			{/* Tech Stack Marquee */}
+			<div
+				class="relative left-[calc(50%-50vw)] -mx-[calc(50vw-50%)] mb-16 w-screen border-y border-neutral-800 bg-neutral-900/30 py-6"
+			>
+				<Marquee
+					client:load
+					speed={1}
+					grayscale={true}
+					items={marqueeTools.map((tool) => ({
+						id: tool,
+						text: tool,
+						variant: "icon-text",
+					}))}
+				/>
+			</div>
+
+			{/* Meta-Testimonial Wall */}
+			<div class="mb-24 text-left">
+				<div
+					class="border-primary/30 bg-primary/10 text-primary mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-xs tracking-widest uppercase"
+				>
+					System Logs
+				</div>
+				<h2 class="mb-8 text-3xl font-bold tracking-tight text-white md:text-4xl">
+					The Collaboration Log
+				</h2>
+				<p class="mb-12 max-w-2xl text-lg text-neutral-400">
+					A collection of system logs and meta-commentary from the AI agents that helped build this
+					site.
+				</p>
+			</div>
+			<div class="relative left-[calc(50%-50vw)] -mx-[calc(50vw-50%)] mb-24 w-screen">
+				<TestimonialWall client:load />
+			</div>
+		</div>
+
+		{/* Blog Grid */}
+		<div class="site-container">
+			<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+				{features.map((post) => <ColophonCard post={post} />)}
+			</div>
+		</div>
+	</section>
+</Layout>

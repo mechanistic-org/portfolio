@@ -20,7 +20,12 @@ const projects = defineCollection({
         skillData: z.array(z.object({ name: z.string(), value: z.number() })),
         additionalSkills: z.array(z.string()).optional(),
         stats: z.object({ plastic: z.number(), metal: z.number(), pcb: z.number() }).optional(),
-        gallery: z.array(z.string()),
+        gallery: z.array(z.object({
+            src: z.string(),
+            width: z.number(),
+            height: z.number(),
+            aspectRatio: z.number()
+        })),
         documents: z.array(z.object({ name: z.string(), url: z.string() })),
         links: z.array(z.object({ name: z.string(), url: z.string() })),
         heroImage: z.string(),
@@ -45,4 +50,21 @@ const colophon = defineCollection({
     }),
 });
 
-export const collections = { projects, colophon };
+const docs = defineCollection({
+    type: "content",
+    schema: z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        draft: z.boolean().optional(),
+        sidebar: z.object({
+            label: z.string().optional(),
+            order: z.number().optional(),
+            badge: z.object({
+                text: z.string(),
+                variant: z.enum(["default", "production", "prototype", "concept"]).optional(),
+            }).optional(),
+        }).optional(),
+    }),
+});
+
+export const collections = { projects, colophon, docs };
