@@ -5,7 +5,7 @@ import Hero from "@components/Hero/HeroSideImage.astro";
 import ProjectCard from "@components/Projects/ProjectCard.astro";
 import ProjectStrip from "@components/Projects/ProjectStrip.tsx";
 import Button from "@components/Button/Button.astro";
-import ClientGrid from "@components/About/ClientGrid.astro";
+import ClientGrid from "../components/About/ClientGrid.astro";
 
 const allProjects = await getCollection("projects", ({ data }) => !data.draft);
 const recentProjects = allProjects.sort(
