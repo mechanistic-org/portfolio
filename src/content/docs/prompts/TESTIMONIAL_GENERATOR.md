@@ -35,6 +35,7 @@ Draw inspiration from these specific project events and philosophies:
 *   **The Grid:** Implementing the global CSS grid and the "Datasheet" aesthetic.
 *   **Task Boundaries:** The meta-conversation about how the AI organizes its own brain.
 *   **Context Lifecycle:** The "Onboarding" and "Mining" prompts.
+*   **The Council of Voices:** The formalization of the Site Audit into a multi-persona critique system.
 *   **Lightroom Workflow:** The "Human Eye, Machine Hand" philosophy.
 
 ## 3. Output Format

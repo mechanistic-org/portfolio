@@ -289,6 +289,20 @@ import ModelViewer from '@components/mdx/ModelViewer.astro';
 {{MODEL_URL}}
 ```
 
+### Adding a Project Impact Summary
+1.  Open the project's MDX file (e.g., `src/content/projects/dreamjob.mdx`).
+2.  Add the `impact` field to the frontmatter.
+3.  **Format:** Keep it to 1-2 sentences. Focus on quantitative results (e.g., "Reduced latency by 40%") or high-level strategic wins.
+4.  **Example:**
+    ```yaml
+    impact: "Established a comprehensive Visual Taxonomy... reducing documentation time by 40%."
+    ```
+
+### Generating Meta-Testimonials
+1.  Refer to `src/content/docs/prompts/TESTIMONIAL_GENERATOR.md` for the persona definitions.
+2.  Add new entries to `src/data/testimonials.json`.
+3.  **Note:** The `TestimonialWall` component in `/colophon` will automatically ingest and display new entries.
+
 ## 10. Context Tools & AI Workflows
 We use specific prompts to maintain context across AI sessions.
 
@@ -369,7 +383,17 @@ See `docs/IMAGE_WORKFLOW.md` for the full SOP.
 
 
 
+
+### AI Generation Quota (429)
+*   **Symptom:** `generate_image` tool fails with "Resource Exhausted" or "Quota Exhausted".
+*   **Cause:** The AI model has hit its rolling usage limit (typically resets every ~4 hours).
+*   **Fix:**
+    1.  **Pause:** Stop generation immediately.
+    2.  **Save Prompts:** Ensure pending prompts are saved to `src/content/docs/prompts/`.
+    3.  **Resume Later:** Pick up the task in a new session once the quota resets.
+
 ## 12. Documentation System
+
 All documentation is now consolidated in `src/content/docs/` to serve as the Single Source of Truth (SSOT).
 
 *   **Location:** `src/content/docs/`

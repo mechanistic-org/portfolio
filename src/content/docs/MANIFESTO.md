@@ -53,6 +53,7 @@ We do not just list specs; we tell the engineering story.
 *   **Framework:** Use the **Narrative STAR** method (The Challenge -> Engineering Approach -> Impact) for manual content.
 *   **Style:** Avoid literal "Situation/Task/Action/Result" labels. Use engaging, project-specific headings that guide the reader through the problem-solving journey.
 *   **Goal:** Bridge the gap between a technical datasheet and a compelling case study.
+*   **Practice:** We explicitly define an `impact` field in the frontmatter to ensure the "Result" is the first thing a recruiter sees, enforcing the "BLUF" (Bottom Line Up Front) principle for engineering case studies.
 ### 8. Honest Construction
 We show the seams.
 *   **Principle:** The "Construction Badge", "Debug Mode", and "Build Stats" are features, not bugs.

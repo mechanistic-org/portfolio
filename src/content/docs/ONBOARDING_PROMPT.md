@@ -7,10 +7,24 @@ slug: "onboarding_prompt"
 
 **Copy and paste the text below into the START of any new conversation.**
 
-> *   **Critical Scripts:** Be aware of `scripts/refine_skills.py`, `scripts/generate_content.py`, and `scripts/process_images.py`. These are the tools for mass-manipulating the portfolio data, content, and assets. Do not modify `Skills.csv` manually if you plan to run these scripts, as your changes will be overwritten.
+> **CORE DOCUMENTATION:**
+> 1.  `README.md`: Project overview and entry point.
+> 2.  `src/content/docs/MANIFESTO.md`: Core directives and "Laws" (e.g., Physical Asset Law).
+> 3.  `src/content/docs/ARCHITECTURE.md`: System design, data schema, and key components.
+> 4.  `src/content/docs/ROADMAP.md`: Current status, active tasks, and known issues.
+> 5.  `src/content/docs/MAINTENANCE.md`: Operational workflows and troubleshooting.
+> 6.  `src/content/docs/CONTENT_STRATEGY.md`: Hybrid Content System and Scaffolding workflow.
+> 7.  `src/content/docs/BRANDING_PROMPT.md`: Protocol for Design Language and Branding tasks.
+> 8.  `src/content/docs/STYLE_GUIDE.md`: The Design Language System (DLS), Token Map, and Component Library.
+> 9.  `src/content/docs/IMAGE_WORKFLOW.md`: Standard Operating Procedure for the Hybrid Image Pipeline.
+> 10. `src/content/docs/prompts/SITE_AUDIT_PROMPT.md`: Protocol for "The Council of Voices" (Site Audit).
+> 11. `src/content/docs/prompts/`: Archive of AI generation prompts.
 *   **Tip:** When moving assets, always stop the dev server if you plan to delete directories, as Vite/Astro can cache file paths aggressively.
 *   **Pre-Flight Checks:**
     *   **Case Sensitivity:** If you are on Windows, run `git config core.ignorecase false` immediately to prevent deployment issues on Cloudflare.
+    *   **Site Audit Protocol:**
+        *   **Command:** "Run a Site Audit."
+        *   **Description:** invokes the **Council of Voices** (Roast, Recruiter, Arbiter, Quantum Observer) as defined in `SITE_AUDIT_PROMPT.md`. Use this for multi-dimensional critique before major releases.
 *   **Meta-Portfolio:** The `/colophon` page is a "Meta-Portfolio" that documents the site's own engineering features. When building a complex new feature, consider if it deserves a "Meta-Feature" entry in `src/content/colophon/`.
 >
 > **LIFECYCLE AWARENESS:**

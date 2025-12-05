@@ -21,6 +21,7 @@ slug: "architecture"
 *   **Asset Host:** Cloudflare R2 (via custom domain `assets.eriknorris.com`)
 *   **Visualization:** Build-time Python/Matplotlib (SVG)
 *   **Meta-Architecture:** The site includes a "Context Lifecycle" system (`ONBOARDING` + `MINER` prompts) that allows the AI to maintain state and self-optimize across sessions.
+*   **Quality Assurance:** The "Council of Voices" Protocol (`SITE_AUDIT_PROMPT`) provides a 4-pass semantic audit mechanism (Roast/Recruiter/Arbiter/Observer) to verify design coherence and "soul" before release.
 
 ## ðŸŽ¨ Visualization Engine
 We shifted from client-side React/Recharts to a **Zero-Runtime** approach.
@@ -142,6 +143,16 @@ To support the main ingestion pipeline, two auxiliary scripts maintain data qual
 *   **Fields:** Title, Date, Employer, Client, Description.
 *   **Logic Shift:** "Duration" and "Status" are now calculated in Python and baked into the frontmatter (`duration`, `statusLabel`), removing logic from the Astro template.
 
+### Project Schema Extensions
+*   **Impact Field:** We added an optional `impact` string to the `projects` collection schema.
+    *   **Purpose:** To surface the "Business Value" or "Engineering Result" immediately below the hero image, preventing it from being buried in the details.
+    *   **Implementation:** Rendered in `ProjectLayout.astro` as a highlighted block if present.
+
+### UX Components
+*   **Sticky TOC (`ProjectTOC.astro`):**
+    *   **Logic:** Parses `headings` returned by `render()`, filters for depth 2-3, and renders a sticky sidebar navigation.
+    *   **Usage:** Automatically included in `projects/[...slug].astro`.
+
 ### 3. `Stats.csv` (Hardware Metrics)
 *   **Key:** `Name`.
 *   **Metrics:** `Plastic`, `Sheetmetal`, `PCB` (Integer counts for the Hardware Dashboard).
@@ -160,7 +171,8 @@ To support the main ingestion pipeline, two auxiliary scripts maintain data qual
 *   **Deep Linking:** The Trust Wall uses URL parameters (e.g., `/projects?client=Google`) to pre-filter the directory.
 *   **Interaction Model:** The "Link" column has been removed. The entire project row is clickable via `onclick` attributes for better usability.
 
-### 7. Filter Menu Logic
+### 7. Filter Menu Logic (The View Tool)
+*   **Role:** The primary interface for navigating the project archive. We removed inline "Quick Filters" to enforce usage of this tool, which supports full drill-down capabilities.
 *   **Hierarchical Filtering:** Selecting a "Collection" (Industry) dynamically filters the available "Category" options to show only relevant choices.
 *   **Preview State:** Hovering over a filter option triggers a "Preview" mode, updating the project list instantly.
 *   **Revert on Mouseleave:** If the user hovers but doesn't click, the list reverts to the previously committed state when the mouse leaves the menu container.

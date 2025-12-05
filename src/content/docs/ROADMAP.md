@@ -35,6 +35,10 @@ slug: "roadmap"
     *   [x] **Manual Polish:** Writing deep-dive markdown content in `data_source/manual_content/` for key projects (e.g. Xbox).
 *   **Asset Population:** Populating `R2_STAGING/` with more `model.glb` files and `hero.png` files.
 *   **Colophon Expansion:** Transforming the Colophon into a "Meta-Portfolio" with a dedicated content collection for site features.
+*   **Dreamjob Visual Taxonomy:**
+    *   [x] **Kitchen Sink Expansion:** Refactored `dreamjob.mdx` to demonstrate every available view type (`iso`, `ortho`, `exploded`, etc.) and DLS component (`Chip`, `Admonition`, `ScrambleText`).
+    *   [x] **Prompt Archival:** Updated `src/content/docs/prompts/DREAMJOB_ASSETS.md` with prompts for all 18 view types.
+    *   [ ] **Asset Generation:** Paused due to API quota limits (429).
 
 ## ðŸ”® Backlog & Refinement
 
@@ -80,6 +84,9 @@ slug: "roadmap"
     *   **Description:** A live, render-accurate implementation of the Design Language System at `/about/elements`. It serves as both documentation and a visual regression test suite for the "Hyper-Functional Brutalist" aesthetic.
 
 ## ðŸ“œ Change Log (Recent)
+*   **[Audit]** Established "The Council of Voices" Site Audit Protocol (`docs/prompts/SITE_AUDIT_PROMPT.md`).
+*   **[Audit]** Archived initial site benchmark: `docs/audits/2025-12-04_SITE_AUDIT.md`.
+*   **[UX]** Removed "Quick Filter" chips from the Project Directory to enforce interaction with the comprehensive Filter Menu (EN Logo).
 *   **[Branding]** Consolidated all branding assets to `public/assets/branding/`.
 *   **[UI]** Implemented theme-aware logo switching in Project Filter Menu.
 *   **[Refactor]** Updated `SiteLogo` and `ModelViewer` to use consolidated assets.
@@ -164,6 +171,11 @@ slug: "roadmap"
 *   [x] **KPI Dashboard:** Implemented "Career Velocity" and "Skill Matrix" charts using Recharts.
 *   [x] **Scroll Mechanism:** Added physics-based Rack and Pinion scroll effect.
 *   [x] **Build Hardening:** Enforced `core.ignorecase false` and refactored component paths to resolve Cloudflare build failures.
+*   [x] **[UX] Sticky Table of Contents:** Implemented for long-form case studies.
+*   [x] **[UX] Project List Filters:** Added quick-filter chips for main industries.
+*   [x] **[Content] Impact Summary:** Added schema support for high-level project results.
+*   [x] **[Visual] Hero Voltage:** Added "SYSTEM ONLINE" glitch effect to Home hero.
+*   [x] **[Meta] Testimonial Wall:** Integrated AI persona testimonials into the Colophon.
 
 ## Colophon / Meta-Portfolio
 ### The Quantum Darkroom
@@ -185,5 +197,15 @@ slug: "roadmap"
     *   **Hook:** "One career, seven perspectives."
     *   **Tech:** React (Recharts), Astro, CSS Grid.
     *   **Description:** A demonstration of how the same underlying data (`Skills.csv`) can be transformed into radically different user experiences, from a high-density datasheet to a playable terminal game.
+
+*   **The Meta-Testimonial Wall:**
+    *   **Hook:** "The site talks back."
+    *   **Tech:** React, Embla Carousel, JSON.
+    *   **Description:** A carousel of testimonials not from clients, but from the AI's internal modules (The Kernel, The Linter, The Architect) reflecting on the codebase and the collaboration.
+
+*   **The Visual Taxonomy (Dreamjob):**
+    *   **Hook:** "A Rosetta Stone for the Quantum aesthetic."
+    *   **Tech:** AI Generation (Gemini), Manual Content Injection.
+    *   **Description:** The `dreamjob` project serves as the "Kitchen Sink" stress test. It maps every theoretical asset type (Product, Engineering, Abstract, Digital) to a concrete visual example, ensuring the pipeline can handle the full spectrum of engineering deliverables.
 
 
