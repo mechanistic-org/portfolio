@@ -13,7 +13,7 @@ export type navItem = navLinkItem | navDropdownItem;
 
 const navConfig: navItem[] = [
 	{
-		text: "Work",
+		text: "Projects",
 		href: "/projects/",
 	},
 	{
