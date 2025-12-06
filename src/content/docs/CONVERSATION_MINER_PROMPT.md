@@ -65,3 +65,5 @@ slug: "conversation_miner_prompt"
 > *   **Symptom:** Page renders white.
 > *   **Fix:** Ensure `<Layout>` wraps the content.
 > ```
+*   **Persona Audits:** Did we define a new user persona (e.g., "The Data God", "The Recruiter", "The User")?
+*   **Aesthetic Shifts:** Did we coin a new design term (e.g., "747 Cockpit", "Hyper-Functional Brutalism")?

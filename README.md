@@ -1,3 +1,4 @@
+
 # Quantum
 **Erik Norris High-Performance Engineering Portfolio**
 
@@ -23,6 +24,11 @@ A technical portfolio site built to function as a datasheet. It combines high-pe
 3.  **Ingest Data (Regenerate Content):**
     ```bash
     python ingest_data.py
+    ```
+
+> **Performance Tip:** The site uses a "Living Grid" background. If performance is an issue on older devices, you can tweak `starCount` or `gridWidth` in `src/components/Interaction/FiberGrid.astro`.
+> **Pro Tip:** Use the **Component Laboratory** at `http://localhost:4321/component-lab` to test component rendering or visit `/about/elements` for the snippet reference guide.
+
 If you plan to process images locally:
 1.  **Workspace:** Run `python scripts/setup_workspace.py` to create the `~/Quantum_Workspace` structure.
 2.  **Libraries:** `pip install Pillow pillow-heif`

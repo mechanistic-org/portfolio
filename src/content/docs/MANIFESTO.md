@@ -10,19 +10,6 @@ slug: "manifesto"
 **State:** V1.0 Production (Stable)
 
 ## ðŸ›‘ Core Directives (Non-Negotiable)
-
-### 1. Single Source of Truth
-The `data_source/*.csv` files are the **ONLY** source of project data.
-*   We **NEVER** edit `src/content/projects/*.mdx` frontmatter manually.
-*   All data updates must happen in the CSVs or the `manual_content` markdown files.
-
-### 2. The Ingestion Engine
-`python ingest_data.py` is the Master Controller.
-*   It reads CSVs, finds assets, calculates stats, and regenerates all MDX files.
-*   **Rule:** If data changes, run the script. If layout changes, edit the Astro template.
-
-### 3. Hybrid Content System
-*   **Auto-Generated:** By default, project pages show a generic placeholder.
 *   **Manual Override:** If a file exists at `data_source/manual_content/{slug}.md`, the script injects **THAT** text into the MDX body.
 *   **Workflow:** To write a Case Study, create the markdown file in `manual_content/`, then run the script.
 *   **The Creative Matrix:** To avoid generic AI content, we employ a "Creative Matrix" for content generation. This maps specific Employers/Clients to specific Engineering Domains (e.g., Kaleidescape -> Thermal Management, Acoustics). This ensures that even auto-generated content respects the historical context of the work.
@@ -69,5 +56,11 @@ We do not rely on build-time plugins to guess how an image should look. Art dire
 **"Works on my machine" is not a valid defense.**
 *   **Principle:** We build for the hostile environment (CI/CD), not the comfortable one (Localhost).
 *   **Practice:** We use strict relative paths, enforce case sensitivity in Git, and prefer "Nuclear Renames" over subtle fixes when resolution errors occur.
+
+### 11. The Law of Data Density (The Cockpit)
+**"Empty space is wasted space."**
+*   **Context:** For the Dashboard (`/resume/dashboard`), we embrace the "747 Cockpit" aesthetic.
+*   **Principle:** The specialized user (Recruiter/Engineer) wants to see *everything* at once. Do not hide complex data behind clicks.
+*   **Practice:** Use Streamgraphs, Tickers, and dense Grids to visualize the "Magnitude" of the career. If the data exists, put it on the glass.
 
 

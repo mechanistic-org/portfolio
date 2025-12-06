@@ -12,12 +12,35 @@ order: 1
 We wanted to expose the "Machine" behind the portfolio. As engineers, we care about efficiency. If the build pipeline is fast, we should brag about it. If it's slow, we should know about it.
 
 ## Engineering Approach
-We instrumented the ingestion pipeline to be self-aware.
+We instrumented the ingestion pipeline to be self-aware. The build script (`ingest_data.py`) captures its own execution time and injects it into the frontend.
 
-*   **Python Timer:** The `ingest_data.py` script starts a high-resolution timer (`time.perf_counter()`) at the very beginning of execution.
-*   **JSON Injection:** Just before the script finishes, it calculates the delta and writes it to `src/config/build.json`.
-*   **Footer Integration:** The Astro Footer component imports this JSON file at build time. Because Astro is a Static Site Generator (SSG), this value is "baked in" to the HTML.
+```python
+# ingest_data.py
+if __name__ == "__main__":
+    start_time = time.time()
+    
+    # ... heavy lifting (image processing, CSV parsing) ...
+    process_colors()
+    process_projects()
+
+    end_time = time.time()
+    duration = end_time - start_time
+    
+    # Write to JSON for the frontend to consume
+    with open(os.path.join(OUTPUT_DATA_DIR, "build.json"), "w") as f:
+        json.dump({
+            "duration": f"{duration:.2f}s", 
+            "timestamp": datetime.now().isoformat()
+        }, f, indent=2)
+```
+
+### The "Zero-Runtime" Architecture
+This value isn't calculated in the browser. It's calculated **during the build**.
+1.  **Python** runs the timer.
+2.  **JSON** stores the result.
+3.  **Astro** imports the JSON at build time.
+4.  **HTML** receives the static string "0.42s".
 
 ## Impact
-*   **Transparency:** It proves the "Zero-Runtime" philosophy works. The site builds in under 0.5 seconds because we aren't using heavy frameworks.
-*   **Aesthetic:** It adds a "heartbeat" to the footer, reinforcing the idea that this is a living, engineered system, not just a template.
+*   **Transparency:** It proves the "Zero-Runtime" philosophy. We don't hide our performance.
+*   **Aesthetic:** It adds a "heartbeat" to the footer (`SYSTEM ONLINE: 0.42s`), reinforcing the idea that this is a living, engineered system.

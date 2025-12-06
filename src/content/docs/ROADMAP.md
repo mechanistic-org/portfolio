@@ -1,17 +1,4 @@
 ﻿---
-title: "Roadmap & Status
-"
-slug: "roadmap"
----
-# Roadmap & Status
-
-## âœ… Systems Operational
-*   **Pipeline:** `ingest_data.py` with Smart Header Hunting.
-*   **Visuals:**
-    *   **Homepage:** 3D Hero, Trust Wall (CSS Marquee), Featured Projects.
-    *   **Project Directory:** Interactive table with filtering, sorting, and hover previews.
-    *   **Project Page:** Center-stage Radar Chart, Hardware Dashboard, Gallery Grid, Spec Sheet Modal.
-    *   **About:** Technical Datasheet + Git-Style Career Log + User Manual (IFU).
     *   **Colophon:** Architecture breakdown and Tech Stack marquee.
     *   **Global:** Construction Badge (Status & Commit SHA).
 *   **Infrastructure:** Cloudflare R2 Asset Hosting with Staging/Production workflow.
@@ -20,52 +7,6 @@ slug: "roadmap"
 *   **Data Visualization:**
     *   **Skill Fingerprint:** Static SVG Radar Chart.
     *   **Part Breakdown:** Static SVG Donut Chart.
-*   **UX:**
-    *   **Mobile:** Collapsible filters and "View All" button.
-    *   **Navigation:** Previous/Next Project links.
-    *   **Colophon:** SimpleIcons integration for the tech stack marquee.
-
-## ðŸš§ Active Work (The "Hero" Phase)
-*   **Brand Implementation:**
-    *   [x] Create Design Language System (`docs/STYLE_GUIDE.md`).
-    *   [x] Implement "Visible Grid" (CSS).
-    *   [x] Implement "Build Stats" (Python + Footer).
-*   **Hero Content:**
-    *   [x] **Batch Generation:** Created `scripts/generate_content.py` to populate case studies using "Creative Matrix" and "Smart Templating".
-    *   [x] **Manual Polish:** Writing deep-dive markdown content in `data_source/manual_content/` for key projects (e.g. Xbox).
-*   **Asset Population:** Populating `R2_STAGING/` with more `model.glb` files and `hero.png` files.
-*   **Colophon Expansion:** Transforming the Colophon into a "Meta-Portfolio" with a dedicated content collection for site features.
-*   **Dreamjob Visual Taxonomy:**
-    *   [x] **Kitchen Sink Expansion:** Refactored `dreamjob.mdx` to demonstrate every available view type (`iso`, `ortho`, `exploded`, etc.) and DLS component (`Chip`, `Admonition`, `ScrambleText`).
-    *   [x] **Prompt Archival:** Updated `src/content/docs/prompts/DREAMJOB_ASSETS.md` with prompts for all 18 view types.
-    *   [x] **Asset Generation:** Completed the "Kitchen Sink" stress test by generating all 12 missing static assets (Orthographic, Exploded, Wireframe, etc.) using the "Nano Banana" prompt set.
-
-## ðŸ”® Backlog & Refinement
-
-### High Priority
-*   [x] **Data Refinement:** Fix `Skills.csv` duplication using `refine_skills.py`.
-
-### Future / Nice-to-Have
-### Future / Nice-to-Have
-*   **Light/Dark Mode:** Re-enable and refine the light mode theme.
-*   **Scroll Gear Mechanism:** Re-implement the rack and pinion scroll gear with better physics/visuals.
-*   **Site Audit:** Investigate "Gap Tightening" (reducing `gap-12` to `gap-8`) in a dedicated branch. Requires robust testing of all project pages to prevent layout collapse.
-
-### Branding & Identity
-*   **System Name Candidates:**
-    *   **VECTOR** (Velocity/Direction)
-    *   **LATTICE** (Structure/Interconnectivity)
-    *   **KERNEL** (Core Engineering)
-
-
-### Colophon / Meta-Portfolio
-*   **The Pulse (Build Stats):**
-    *   **Hook:** The site knows how fast it was built.
-    *   **Tech:** Python (Timer) -> JSON -> Astro (Static Import).
-    *   **Description:** A self-referential feature where the ingestion pipeline measures its own performance and stamps the footer with the build duration.
-
-*   **Living Style Guide:**
-    *   **Hook:** The system documents itself.
     *   **Tech:** MDX, Astro, Tailwind v4.
     *   **Description:** A live render of the Design Language System available at `/about/elements`.
 
@@ -84,7 +25,27 @@ slug: "roadmap"
     *   **Tech:** MDX, Astro Components (`Admonition`, `Chip`, `Wire`).
     *   **Description:** A live, render-accurate implementation of the Design Language System at `/about/elements`. It serves as both documentation and a visual regression test suite for the "Hyper-Functional Brutalist" aesthetic.
 
+*   **Quantum Templating System (The Engine):**
+    *   **Hook:** "Zero-friction authoring for complex brutalist layouts."
+    *   **Tech:** VS Code Snippets + Astro MDX Components.
+    *   **Description:** A "Plug-and-Play" authoring system that allows complex UI patterns (Zigzag Grids, 3D Viewers, Process Strips) to be inserted via shortcodes (`qq-*`). This transforms the IDE into a layout engine, ensuring every project page adheres to the strict "Visual Taxonomy" without manual coding.
+
 ## ðŸ“œ Change Log (Recent)
+*   **[Feature] The Data God Dashboard:** Transformed `/resume/dashboard` into a "747 Cockpit" or "Nerve Center" (`variant="mega"`).
+    *   **Tech:** `UnifiedDashboard.tsx`, Recharts Streamgraph, Tailwind Animation.
+    *   **Metrics:** Added "System Phase Distribution" (Real Data), "Tenure Timeline" (Gantt), and "Spec Ticker".
+*   **[Feature] The Multiverse:** Integrated a D3 Forces simulation into the dashboard footer to visualize career node interconnectedness (`MultiverseGraph`).
+    *   **Data Source:** `src/data/timeline/multiverse.json`.
+*   **[Fix] Artifact cleanup:** Removed stray markdown fences (` ``` `) from `FiberGrid.astro` which caused global rendering artifacts ("errant characters").
+*   **[Refactor] Dashboard Architecture:** Retired legacy "Dream Job" placeholder text in favor of zero-latency "Metric Rectifiers" (Total Parts, Active Streams).
+*   **[Feature] Video Pipeline:** Established `WORKFLOW_VIDEO.md` SOP and implemented `<YouTube />` "Zero-UI" components.
+*   **[Feature] The Pulse:** Implemented build-time tracking (`ingest_data.py` -> `build.json`) displayed in the global footer.
+*   **[Feature] Raw Mode:** Added `/raw/[slug]` endpoint and UI button to view raw markdown source, enforcing the "Datasheet" aesthetic.
+*   **[Audit] Gap Tightening:** Verified and standardized `gap-8` (reduced from `gap-12`) for higher information density in Project Layouts.
+*   **[Style] Grid System:** Refined global grid size from 50px to 40px (Tailwind scale) and tuned glassmorphism for better legibility.
+*   **[Fix] Asset Pipeline:** Hardened `ingest_data.py` to auto-correct local asset paths (`/assets/r2/`) to remote R2 URLs in manual content, enforcing the "Physical Asset Law".
+*   **[Fix] ModelViewer:** Restored "Neil Armstrong" resilience fallback for components missing a custom GLB.
+*   **[SEO] Metadata:** Optimized Homepage title ("High-Performance Mechanical Design") and meta description.
 *   **[Fix] Chart Layout:** Resolved regression where Skill/Part graphs were stacking vertically on desktop. Restored side-by-side grid layout (`grid-cols-1 md:grid-cols-2`) in `[...slug].astro`.
 *   **[Fix] Asset Staging:** Corrected `R2_STAGING` path resolution. Enforced `../quantum-assets/R2_STAGING` as the single Source of Truth to prevent "Ghost Asset" confusion.
 *   **[Fix] Extension Mismatch:** Updated `dreamjob.mdx` to reference generated `.png` assets, resolving 404 errors caused by legacy `.jpg` references.
@@ -186,6 +147,10 @@ slug: "roadmap"
 *   [x] **[Content] Impact Summary:** Added schema support for high-level project results.
 *   [x] **[Visual] Hero Voltage:** Added "SYSTEM ONLINE" glitch effect to Home hero.
 *   [x] **[Meta] Testimonial Wall:** Integrated AI persona testimonials into the Colophon.
+*   **[Feature] Skill Streamgraph:** Upgraded standard Radar Charts to multi-layered Streamgraphs, visualizing "Project Identity" (Green) vs. "Global Career Average" (Ghosted Grey) for immediate skill context.
+*   **[Refactor] Data Resilience:** Renamed critical frontmatter fields to `snake_case` (`phase_stats`) to resolve persistent aggressive caching and YAML parsing conflicts in Astro's Content Layer.
+*   **[Refactor] Chart Stability:** Replaced volatile `ResponsiveContainer` logic with fixed-dimension layouts in `PhaseDonut` and `SkillRadar` to eliminate `width(-1)` layout thrashing errors.
+*   **[Bug] Phase Donut:** *Known Issue* - The Phase Breakdown chart rendering is currently unstable despite verifying data presence. Scheduled for deep-dive debugging (Ref: "The Snake Case Strategy").
 
 ## Colophon / Meta-Portfolio
 ### The Quantum Darkroom
@@ -217,5 +182,20 @@ slug: "roadmap"
     *   **Hook:** "A Rosetta Stone for the Quantum aesthetic."
     *   **Tech:** AI Generation (Gemini), Manual Content Injection.
     *   **Description:** The `dreamjob` project serves as the "Kitchen Sink" stress test. It maps every theoretical asset type (Product, Engineering, Abstract, Digital) to a concrete visual example, ensuring the pipeline can handle the full spectrum of engineering deliverables.
+
+*   **The Pulse (Build Timer):**
+    *   **Hook:** "The machine knows its own speed."
+    *   **Tech:** Python, JSON, Astro.
+    *   **Description:** The ingestion engine clocks its own performance during the build (e.g., "0.42s") and stamps it into `src/config/build.json`, which is statically imported and displayed in the footer as a live system metric.
+
+*   **The Skill Streamgraph:**
+    *   **Hook:** "Context is King."
+    *   **Tech:** Python (Pandas), React (Recharts).
+    *   **Description:** The ingestion engine doesn't just read data; it analyzes it. By calculating the global average of every skill across the entire portfolio, it generates a "Benchmark" layer for every project's radar chart. This allows viewers to instantly see if a project was a learning experience (below avg) or a mastery demonstration (above avg) relative to the engineer's baseline.
+
+*   **Raw Mode (The Source):**
+    *   **Hook:** "Trust, but verify."
+    *   **Tech:** Astro API Endpoints (`.ts`), Plain Text.
+    *   **Description:** A dedicated `/raw/[slug]` route that bypasses the layout engine to serve the unadulterated Markdown source of any project, reinforcing the "Physical Asset Law" and open engineering culture.
 
 

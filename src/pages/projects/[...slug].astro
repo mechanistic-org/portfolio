@@ -3,15 +3,17 @@ import { type CollectionEntry, getCollection, render } from "astro:content";
 import Layout from "@layouts/BaseLayout.astro";
 import Button from "@components/Button/Button.astro";
 import ProjectGallery from "@components/Projects/ProjectGallery";
+import UnifiedDashboard from "@components/Dashboard/UnifiedDashboard";
 import { YouTube } from "@astro-community/astro-embed-youtube";
 import ModelViewer from "@components/MDX/ModelViewer.astro";
 import ProjectTOC from "@components/Projects/ProjectTOC.astro";
 import ScrambleText from "@components/Effects/ScrambleText";
+import Chip from "@components/DLS/Chip.astro";
+import Wire from "@components/DLS/Wire.astro";
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
 	const projects = await getCollection("projects");
-	// console.log("Generated paths:", projects.map(p => p.id));
 	return projects.map((entry) => ({
 		params: { slug: entry.id },
 		props: { entry },
@@ -24,9 +26,11 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-// console.log("Entry keys:", Object.keys(entry));
 const { Content, headings } = await render(entry);
 const data = entry.data;
+console.log("SLUG:", entry.id);
+console.log("DATA KEYS:", JSON.stringify(Object.keys(data)));
+console.log("PHASE STATS DUMP:", JSON.stringify(data.phase_stats));
 
 // Format dates
 const dateVal = data.date || new Date();
@@ -64,7 +68,9 @@ const gallery = data.gallery || [];
 		<div class="site-container">
 			<div class="grid gap-4 md:grid-cols-[1fr_auto_1fr] md:items-end">
 				<!-- Col 1: Title -->
-				<h1 class="text-4xl font-bold text-white md:text-6xl">{data.title}</h1>
+				<h1 class="text-4xl font-bold text-neutral-900 md:text-6xl dark:text-white">
+					{data.title}
+				</h1>
 
 				<!-- Col 2: Navigation (Centered) -->
 				<div class="hidden items-center justify-center gap-2 md:flex md:pb-1">
@@ -72,7 +78,7 @@ const gallery = data.gallery || [];
 						prevProject ? (
 							<a
 								href={`/projects/${prevProject.id}`}
-								class="group flex h-10 w-10 items-center justify-center rounded-full border border-neutral-800 bg-neutral-900 text-neutral-400 transition-all hover:border-neutral-700 hover:bg-neutral-800 hover:text-white"
+								class="group flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-500 transition-all hover:border-neutral-300 hover:bg-neutral-50 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-400 dark:hover:border-neutral-700 dark:hover:bg-neutral-800 dark:hover:text-white"
 								title={`Previous: ${prevProject.data.title}`}
 							>
 								<svg
@@ -132,7 +138,7 @@ const gallery = data.gallery || [];
 						nextProject ? (
 							<a
 								href={`/projects/${nextProject.id}`}
-								class="group flex h-10 w-10 items-center justify-center rounded-full border border-neutral-800 bg-neutral-900 text-neutral-400 transition-all hover:border-neutral-700 hover:bg-neutral-800 hover:text-white"
+								class="group flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 bg-white text-neutral-500 transition-all hover:border-neutral-300 hover:bg-neutral-50 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-900 dark:text-neutral-400 dark:hover:border-neutral-700 dark:hover:bg-neutral-800 dark:hover:text-white"
 								title={`Next: ${nextProject.data.title}`}
 							>
 								<svg
@@ -149,7 +155,7 @@ const gallery = data.gallery || [];
 								</svg>
 							</a>
 						) : (
-							<div class="flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-full border border-neutral-800 bg-neutral-950 text-neutral-800">
+							<div class="flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-full border border-neutral-200 bg-neutral-100 text-neutral-400 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-800">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									viewBox="0 0 24 24"
@@ -165,6 +171,15 @@ const gallery = data.gallery || [];
 							</div>
 						)
 					}
+					<!-- RAW MODE -->
+					<a
+						href={`/raw/${entry.id}`}
+						target="_blank"
+						class="group hover:border-primary hover:text-primary hover:bg-primary/10 ml-2 flex h-10 items-center justify-center rounded-full border border-neutral-800 bg-neutral-950 px-3 font-mono text-[10px] tracking-widest text-neutral-500 transition-all"
+						title="View Raw Source"
+					>
+						RAW
+					</a>
 				</div>
 
 				<!-- Col 3: Breadcrumbs (Right) -->
@@ -189,19 +204,23 @@ const gallery = data.gallery || [];
 		</div>
 	</section>
 
-	<div class="site-container grid gap-12 py-8 md:grid-cols-12 md:py-12">
+	<div class="site-container grid gap-8 py-8 md:grid-cols-12 md:py-12">
 		<aside
 			class="order-2 space-y-8 md:sticky md:top-24 md:order-1 md:col-span-4 md:h-fit lg:col-span-3"
 		>
-			<div class="rounded-xl border border-neutral-800 bg-neutral-900/50 p-6">
+			<div
+				class="rounded-xl border border-neutral-200 bg-white/50 p-6 dark:border-neutral-800 dark:bg-neutral-900/50"
+			>
 				<h3
-					class="mb-4 border-b border-neutral-800 pb-2 text-sm font-bold tracking-wider text-white uppercase"
+					class="mb-4 border-b border-neutral-200 pb-2 text-sm font-bold tracking-wider text-neutral-900 uppercase dark:border-neutral-800 dark:text-white"
 				>
 					Project Data
 				</h3>
 				<dl class="space-y-4 text-sm">
 					<div>
-						<dt class="mb-1 text-neutral-500">Role</dt><dd class="font-medium text-white">
+						<dt class="mb-1 text-neutral-500">Role</dt><dd
+							class="font-medium text-neutral-900 dark:text-white"
+						>
 							{data.employer}
 						</dd>
 					</div>
@@ -220,7 +239,7 @@ const gallery = data.gallery || [];
 							<div>
 								<>
 									<dt class="mb-1 text-neutral-500">Client / Partner</dt>
-									<dd class="font-medium text-white">{clients.join(", ")}</dd>
+									<dd class="font-medium text-neutral-900 dark:text-white">{clients.join(", ")}</dd>
 								</>
 							</div>
 						)
@@ -238,7 +257,7 @@ const gallery = data.gallery || [];
 
 			{
 				data.additionalSkills && data.additionalSkills.length > 0 && (
-					<div class="border-t border-neutral-800 pt-4">
+					<div class="border-t border-neutral-200 pt-4 dark:border-neutral-800">
 						<h3 class="mb-3 text-xs font-bold tracking-wider text-neutral-500 uppercase">
 							Core Competencies
 						</h3>
@@ -316,7 +335,9 @@ const gallery = data.gallery || [];
 		</aside>
 
 		<article class="order-1 space-y-12 md:order-2 md:col-span-8 lg:col-span-9">
-			<div class="overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900 shadow-2xl">
+			<div
+				class="overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-2xl dark:border-neutral-800 dark:bg-neutral-900"
+			>
 				<img
 					src={data.heroImage}
 					alt={data.title}
@@ -324,46 +345,31 @@ const gallery = data.gallery || [];
 				/>
 			</div>
 
-			<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
-				{
-					data.skillGraph && (
-						<div class="flex flex-col items-center justify-center rounded-xl border border-neutral-800 bg-neutral-900/30 p-6">
-							<div class="text-primary mb-4 font-mono text-xs tracking-widest uppercase">
-								Skill Fingerprint
-							</div>
-							<img
-								src={data.skillGraph}
-								alt="Skill Radar Chart"
-								class="h-64 w-64 opacity-90 invert dark:invert-0"
-							/>
-						</div>
-					)
-				}
-				{
-					data.partGraph && (
-						<div class="flex flex-col items-center justify-center rounded-xl border border-neutral-800 bg-neutral-900/30 p-6">
-							<div class="text-primary mb-4 font-mono text-xs tracking-widest uppercase">
-								Part Breakdown
-							</div>
-							<img
-								src={data.partGraph}
-								alt="Part Breakdown Chart"
-								class="h-64 w-64 opacity-90 invert dark:invert-0"
-							/>
-						</div>
-					)
-				}
-			</div>
+			{/* Unified Dashboard (Mini View) */}
+			{
+				(data.skillData || data.phase_stats) && (
+					<div class="mb-12">
+						<UnifiedDashboard
+							client:visible
+							variant="mini"
+							data={data as any}
+							projectId={entry.id}
+						/>
+					</div>
+				)
+			}
 			<div
-				class="prose prose-invert prose-lg prose-headings:font-sans prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-white prose-p:text-neutral-300 prose-a:text-primary prose-img:rounded-xl custom-prose max-w-none font-mono"
+				class="prose prose-neutral dark:prose-invert prose-lg prose-headings:font-sans prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-neutral-900 dark:prose-headings:text-white prose-p:text-neutral-700 dark:prose-p:text-neutral-300 prose-a:text-primary prose-img:rounded-xl custom-prose max-w-none font-mono"
 			>
 				<Content components={{ YouTube, ModelViewer }} />
 			</div>
 
 			{
 				gallery.length > 0 && (
-					<div class="mt-16 border-t border-neutral-800 pt-12">
-						<h3 class="mb-8 text-2xl font-bold text-white">Project Gallery</h3>
+					<div class="mt-16 border-t border-neutral-200 pt-12 dark:border-neutral-800">
+						<h3 class="mb-8 text-2xl font-bold text-neutral-900 dark:text-white">
+							Project Gallery
+						</h3>
 						<ProjectGallery client:visible images={gallery} />
 					</div>
 				)

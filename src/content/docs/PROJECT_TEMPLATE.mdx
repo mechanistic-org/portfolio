@@ -1,0 +1,89 @@
+---
+title: "Project Template"
+description: "Reference for the new 'Machine Interface' layout components."
+---
+
+import ZigzagGrid from '@components/MDX/ZigzagGrid.astro';
+import ProcessStrip from '@components/MDX/ProcessStrip.astro';
+import ModelViewer from '@components/mdx/ModelViewer.astro';
+
+## Visual Taxonomy (New Components)
+
+Use these components to break up the dense text and add visual rhythm to the case studies.
+
+### 1. Zigzag Grid (Product Domain)
+Best for showcasing 4 distinct view angles or features. Alternates Text/Image.
+
+```astro
+<ZigzagGrid
+  items={[
+    {
+      title: "View 1",
+      description: "Description of the first angle.",
+      image: "https://placehold.co/800x600/101010/FFFFFF/png"
+    },
+    {
+      title: "View 2",
+      description: "Description of the second angle.",
+      image: "https://placehold.co/800x600/101010/FFFFFF/png"
+    },
+    {
+      title: "View 3",
+      description: "Description of the third angle.",
+      image: "https://placehold.co/800x600/101010/FFFFFF/png"
+    },
+    {
+      title: "View 4",
+      description: "Description of the fourth angle.",
+      image: "https://placehold.co/800x600/101010/FFFFFF/png"
+    }
+  ]}
+/>
+```
+
+### 2. Process Strip (Engineering Domain)
+Best for linear sequences, timelines, or assembly steps. Horizontal scroll.
+
+```astro
+<ProcessStrip
+  steps={[
+    {
+      step: "01",
+      title: "Ideation",
+      image: "https://placehold.co/600x400/101010/FFFFFF/png"
+    },
+    {
+      step: "02",
+      title: "Prototyping",
+      image: "https://placehold.co/600x400/202020/FFFFFF/png"
+    },
+    {
+      step: "03",
+      title: "Refinement",
+      image: "https://placehold.co/600x400/303030/FFFFFF/png"
+    },
+    {
+      step: "04",
+      title: "Validation",
+      image: "https://placehold.co/600x400/404040/FFFFFF/png"
+    },
+    {
+      step: "05",
+      title: "Tooling",
+      image: "https://placehold.co/600x400/505050/FFFFFF/png"
+    },
+    {
+      step: "06",
+      title: "Production",
+      image: "https://placehold.co/600x400/606060/FFFFFF/png"
+    }
+  ]}
+/>
+```
+
+### 3. Model Viewer (Interactive)
+The standard viewer for GLB/GLTF assets.
+
+```astro
+<ModelViewer src="/assets/r2/project-name/model.glb" alt="Interactive 3D View" />
+```

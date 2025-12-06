@@ -2,13 +2,20 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectDirectory from "../../components/Projects/ProjectDirectory.astro";
+import MultiverseGraph from "../../components/DataViz/MultiverseGraph";
+import TimelineStream from "../../components/DataViz/TimelineStream";
+import RadialTaxonomy from "../../components/DataViz/RadialTaxonomy";
+
+// Data
+import multiverseData from "../../data/timeline/multiverse.json";
+import hierarchyData from "../../data/timeline/hierarchy.json";
 
 const allProjects = await getCollection("projects", ({ data }) => !data.draft);
 const projects = allProjects.sort(
 	(a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime(),
 );
 
-// Extract Facets for the UI
+// Extract Facets for the UI (Keep existing logic for Directory view)
 const industries = [...new Set(projects.map((p) => p.data.industry).filter(Boolean))].sort();
 const categories = [
 	...new Set(projects.map((p) => p.data.category).filter(Boolean)),
@@ -24,9 +31,39 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 ---
 
 <BaseLayout title="Projects" description="Engineering Archive">
-	<div class="site-container pt-32 pb-24 md:pb-36">
-		<!-- Project Directory Table -->
-		<div id="projects-container">
+	<div class="site-container min-h-screen pt-32 pb-24 md:pb-36">
+		<!-- VIEW SWITCHER (The Control Console) -->
+		<div class="mb-8 flex items-center justify-center border-b border-white/10 pb-4">
+			<div class="flex items-center gap-1 rounded-lg border border-white/10 bg-neutral-900 p-1">
+				<button
+					class="view-toggle text-primary bg-primary/10 flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider uppercase transition-colors hover:text-white"
+					data-view="list"
+				>
+					<span class="i-tdesign-menu-2 text-sm"></span> List
+				</button>
+				<button
+					class="view-toggle flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-colors hover:bg-white/5 hover:text-white"
+					data-view="multiverse"
+				>
+					<span class="i-tdesign-lightbulb-circle text-sm"></span> Multiverse
+				</button>
+				<button
+					class="view-toggle flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-colors hover:bg-white/5 hover:text-white"
+					data-view="timeline"
+				>
+					<span class="i-tdesign-work-history text-sm"></span> Timeline
+				</button>
+				<button
+					class="view-toggle flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-colors hover:bg-white/5 hover:text-white"
+					data-view="radial"
+				>
+					<span class="i-tdesign-share text-sm"></span> Radial
+				</button>
+			</div>
+		</div>
+
+		<!-- VIEW: LIST -->
+		<div id="view-list" class="view-container">
 			<ProjectDirectory
 				projects={projects}
 				sectors={industries}
@@ -35,11 +72,105 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				clients={clients}
 			/>
 		</div>
+
+		<!-- VIEW: MULTIVERSE -->
+		<div
+			id="view-multiverse"
+			class="view-container animate-in fade-in zoom-in-95 hidden duration-500"
+		>
+			<div
+				class="relative overflow-hidden rounded-xl border border-white/5 bg-black/20"
+				style="height: 75vh"
+			>
+				<MultiverseGraph client:only="react" data={multiverseData} />
+				<div
+					class="pointer-events-none absolute bottom-4 left-4 font-mono text-[10px] text-green-500/50"
+				>
+					MODE: FORCE_PACKING<br />
+					NODES: {multiverseData.nodes.length}
+				</div>
+			</div>
+		</div>
+
+		<!-- VIEW: TIMELINE -->
+		<div
+			id="view-timeline"
+			class="view-container animate-in slide-in-from-right-4 hidden duration-500"
+		>
+			<div
+				class="relative overflow-hidden rounded-xl border border-white/5 bg-black/20"
+				style="height: 75vh"
+			>
+				<TimelineStream client:only="react" data={multiverseData} />
+				<div
+					class="pointer-events-none absolute bottom-4 left-4 font-mono text-[10px] text-green-500/50"
+				>
+					MODE: TEMPORAL_STREAM<br />
+					X-AXIS: TIME
+				</div>
+			</div>
+		</div>
+
+		<!-- VIEW: RADIAL -->
+		<div id="view-radial" class="view-container animate-in spin-in-3 hidden duration-700">
+			<div
+				class="relative flex items-center justify-center overflow-hidden rounded-xl border border-white/5 bg-black/20"
+				style="height: 75vh"
+			>
+				<RadialTaxonomy client:only="react" data={hierarchyData} />
+				<div
+					class="pointer-events-none absolute bottom-4 left-4 font-mono text-[10px] text-green-500/50"
+				>
+					MODE: RADIAL_DENDROGRAM<br />
+					ROOT: QUANTUM
+				</div>
+			</div>
+		</div>
 	</div>
 </BaseLayout>
 
 <script>
 	document.addEventListener("astro:page-load", () => {
+		// VIEW SWITCHER LOGIC
+		const toggles = document.querySelectorAll(".view-toggle");
+		const containers = document.querySelectorAll(".view-container");
+
+		// Load preference
+		const savedView = localStorage.getItem("project_view_mode") || "list";
+		switchView(savedView);
+
+		toggles.forEach((btn) => {
+			btn.addEventListener("click", () => {
+				const view = btn.getAttribute("data-view");
+				if (view) switchView(view);
+			});
+		});
+
+		function switchView(mode: string) {
+			// Update UI
+			toggles.forEach((btn) => {
+				const isMatch = btn.getAttribute("data-view") === mode;
+				if (isMatch) {
+					btn.classList.add("text-primary", "bg-primary/10");
+					btn.classList.remove("text-neutral-500", "hover:bg-white/5");
+				} else {
+					btn.classList.remove("text-primary", "bg-primary/10");
+					btn.classList.add("text-neutral-500", "hover:bg-white/5");
+				}
+			});
+
+			// Update Containers
+			containers.forEach((c) => {
+				if (c.id === `view-${mode}`) {
+					c.classList.remove("hidden");
+				} else {
+					c.classList.add("hidden");
+				}
+			});
+
+			localStorage.setItem("project_view_mode", mode);
+		}
+
 		// Target rows instead of cards
 		const rows = Array.from(document.querySelectorAll(".project-row")) as HTMLElement[];
 		const buttons = document.querySelectorAll(".filter-btn");

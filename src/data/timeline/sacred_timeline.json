@@ -1,0 +1,625 @@
+[
+  {
+    "id": "dreamjob",
+    "start": "2025-11-23T00:00:00",
+    "end": "2040-12-31T00:00:00",
+    "group": "Career Goal",
+    "content": "dreamjob"
+  },
+  {
+    "id": "Freelance",
+    "start": "2022-09-01T00:00:00",
+    "end": "2025-11-23T00:00:00",
+    "group": "Various",
+    "content": "Freelance"
+  },
+  {
+    "id": "Makeline",
+    "start": "2021-05-01T00:00:00",
+    "end": "2022-08-24T00:00:00",
+    "group": "Foodservice Automation",
+    "content": "Makeline"
+  },
+  {
+    "id": "Dispensers",
+    "start": "2021-12-01T00:00:00",
+    "end": "2022-08-24T00:00:00",
+    "group": "Foodservice Automation",
+    "content": "Dispensers"
+  },
+  {
+    "id": "Backsplash",
+    "start": "2021-07-01T00:00:00",
+    "end": "2021-12-31T00:00:00",
+    "group": "Electromechanical Assy",
+    "content": "Backsplash"
+  },
+  {
+    "id": "Portion Cup",
+    "start": "2021-05-01T00:00:00",
+    "end": "2021-08-15T00:00:00",
+    "group": "Electromechanical Assy",
+    "content": "Portion Cup"
+  },
+  {
+    "id": "Pet Scale",
+    "start": "2019-02-01T00:00:00",
+    "end": "2019-03-15T00:00:00",
+    "group": "Consumer Appliance",
+    "content": "Pet Scale"
+  },
+  {
+    "id": "battery lock",
+    "start": "2019-01-01T00:00:00",
+    "end": "2019-04-15T00:00:00",
+    "group": "Electromechanical Mechanism",
+    "content": "battery lock"
+  },
+  {
+    "id": "IOT module",
+    "start": "2018-11-01T00:00:00",
+    "end": "2019-02-01T00:00:00",
+    "group": "Embedded Device",
+    "content": "IOT module"
+  },
+  {
+    "id": "bay wheels",
+    "start": "2018-11-01T00:00:00",
+    "end": "2019-05-01T00:00:00",
+    "group": "Micromobility",
+    "content": "bay wheels"
+  },
+  {
+    "id": "Switches",
+    "start": "2017-07-01T00:00:00",
+    "end": "2018-03-01T00:00:00",
+    "group": "User Interface",
+    "content": "Switches"
+  },
+  {
+    "id": "Extension Switches",
+    "start": "2017-03-01T00:00:00",
+    "end": "2018-02-01T00:00:00",
+    "group": "User Interface",
+    "content": "Extension Switches"
+  },
+  {
+    "id": "Room Director",
+    "start": "2017-08-01T00:00:00",
+    "end": "2018-01-01T00:00:00",
+    "group": "Smart Home Device",
+    "content": "Room Director"
+  },
+  {
+    "id": "Wall Plates",
+    "start": "2017-03-01T00:00:00",
+    "end": "2018-02-01T00:00:00",
+    "group": "User Interface",
+    "content": "Wall Plates"
+  },
+  {
+    "id": "Base",
+    "start": "2017-03-17T00:00:00",
+    "end": "2018-05-01T00:00:00",
+    "group": "Smart Home Device",
+    "content": "Base"
+  },
+  {
+    "id": "Glyph 2",
+    "start": "2015-10-17T00:00:00",
+    "end": "2017-03-01T00:00:00",
+    "group": "Wearable / AR",
+    "content": "Glyph 2"
+  },
+  {
+    "id": "Glyph",
+    "start": "2015-06-01T00:00:00",
+    "end": "2017-03-01T00:00:00",
+    "group": "Wearable / AR",
+    "content": "Glyph"
+  },
+  {
+    "id": "BFD",
+    "start": "2016-12-01T00:00:00",
+    "end": "2024-03-14T00:00:00",
+    "group": "Sports and Fitness",
+    "content": "BFD"
+  },
+  {
+    "id": "Strato",
+    "start": "2014-06-01T00:00:00",
+    "end": "2015-02-01T00:00:00",
+    "group": "Media Server",
+    "content": "Strato"
+  },
+  {
+    "id": "Cinema One",
+    "start": "2012-08-01T00:00:00",
+    "end": "2013-09-01T00:00:00",
+    "group": "Media Server",
+    "content": "Cinema One"
+  },
+  {
+    "id": "M700",
+    "start": "2010-08-01T00:00:00",
+    "end": "2011-07-01T00:00:00",
+    "group": "Robotics / Disc Vault",
+    "content": "M700"
+  },
+  {
+    "id": "DV700",
+    "start": "2010-08-02T00:00:00",
+    "end": "2011-07-02T00:00:00",
+    "group": "Robotics / Disc Vault",
+    "content": "DV700"
+  },
+  {
+    "id": "Disc Cartridges",
+    "start": "2010-06-01T00:00:00",
+    "end": "2010-12-01T00:00:00",
+    "group": "Media Storage",
+    "content": "Disc Cartridges"
+  },
+  {
+    "id": "K-Remote",
+    "start": "2009-04-20T00:00:00",
+    "end": "2009-08-01T00:00:00",
+    "group": "Remote Control",
+    "content": "K-Remote"
+  },
+  {
+    "id": "Weemote",
+    "start": "2010-06-01T00:00:00",
+    "end": "2010-08-01T00:00:00",
+    "group": "Remote Control",
+    "content": "Weemote"
+  },
+  {
+    "id": "M500",
+    "start": "2010-04-01T00:00:00",
+    "end": "2010-07-01T00:00:00",
+    "group": "Media Player",
+    "content": "M500"
+  },
+  {
+    "id": "M300",
+    "start": "2010-03-01T00:00:00",
+    "end": "2010-05-01T00:00:00",
+    "group": "Media Player",
+    "content": "M300"
+  },
+  {
+    "id": "KSERVER-1500",
+    "start": "2010-03-02T00:00:00",
+    "end": "2010-05-02T00:00:00",
+    "group": "Server / Rackmount",
+    "content": "KSERVER-1500"
+  },
+  {
+    "id": "KVAULT-10",
+    "start": "2010-09-01T00:00:00",
+    "end": "2011-06-01T00:00:00",
+    "group": "Robotics / Disc Vault",
+    "content": "KVAULT-10"
+  },
+  {
+    "id": "Jewel",
+    "start": "2009-06-01T00:00:00",
+    "end": "2010-04-01T00:00:00",
+    "group": "Media Player",
+    "content": "Jewel"
+  },
+  {
+    "id": "KSYSTEM-120",
+    "start": "2009-01-01T00:00:00",
+    "end": "2009-06-01T00:00:00",
+    "group": "Media Server",
+    "content": "KSYSTEM-120"
+  },
+  {
+    "id": "KSERVER-5000",
+    "start": "2008-06-01T00:00:00",
+    "end": "2009-03-01T00:00:00",
+    "group": "Server / Rackmount",
+    "content": "KSERVER-5000"
+  },
+  {
+    "id": "Speed Reader",
+    "start": "2008-05-01T00:00:00",
+    "end": "2009-02-01T00:00:00",
+    "group": "Data Ingestion",
+    "content": "Speed Reader"
+  },
+  {
+    "id": "KSERVER-1500",
+    "start": "2008-05-01T00:00:00",
+    "end": "2008-08-01T00:00:00",
+    "group": "Server / Rackmount",
+    "content": "KSERVER-1500"
+  },
+  {
+    "id": "KPLAYER-300",
+    "start": "2008-03-01T00:00:00",
+    "end": "2009-01-01T00:00:00",
+    "group": "Media Player",
+    "content": "KPLAYER-300"
+  },
+  {
+    "id": "KPLAYER-6000",
+    "start": "2008-03-02T00:00:00",
+    "end": "2009-01-02T00:00:00",
+    "group": "Media Player",
+    "content": "KPLAYER-6000"
+  },
+  {
+    "id": "KPLAYER-5000",
+    "start": "2008-03-01T00:00:00",
+    "end": "2008-12-01T00:00:00",
+    "group": "Media Player",
+    "content": "KPLAYER-5000"
+  },
+  {
+    "id": "KPLAYER-2500",
+    "start": "2008-03-02T00:00:00",
+    "end": "2008-12-02T00:00:00",
+    "group": "Media Player",
+    "content": "KPLAYER-2500"
+  },
+  {
+    "id": "KSERVER-2500",
+    "start": "2008-03-03T00:00:00",
+    "end": "2008-12-03T00:00:00",
+    "group": "Server / Rackmount",
+    "content": "KSERVER-2500"
+  },
+  {
+    "id": "Mbox 2 Micro",
+    "start": "2007-10-01T00:00:00",
+    "end": "2008-04-01T00:00:00",
+    "group": "USB Audio Interface",
+    "content": "Mbox 2 Micro"
+  },
+  {
+    "id": "Rack 003",
+    "start": "2007-05-01T00:00:00",
+    "end": "2007-10-01T00:00:00",
+    "group": "Rack Appliance",
+    "content": "Rack 003"
+  },
+  {
+    "id": "Mbox 2 Mini",
+    "start": "2007-02-01T00:00:00",
+    "end": "2007-05-01T00:00:00",
+    "group": "USB Audio Interface",
+    "content": "Mbox 2 Mini"
+  },
+  {
+    "id": "Mbox 2 Pro",
+    "start": "2006-06-01T00:00:00",
+    "end": "2006-11-01T00:00:00",
+    "group": "USB Audio Interface",
+    "content": "Mbox 2 Pro"
+  },
+  {
+    "id": "Digi 003",
+    "start": "2006-06-01T00:00:00",
+    "end": "2007-02-01T00:00:00",
+    "group": "Control Surface",
+    "content": "Digi 003"
+  },
+  {
+    "id": "Control 24",
+    "start": "2006-08-01T00:00:00",
+    "end": "2007-07-01T00:00:00",
+    "group": "Control Surface",
+    "content": "Control 24"
+  },
+  {
+    "id": "Mbox 2",
+    "start": "2005-09-01T00:00:00",
+    "end": "2005-11-01T00:00:00",
+    "group": "USB Audio Interface",
+    "content": "Mbox 2"
+  },
+  {
+    "id": "Profile",
+    "start": "2005-02-01T00:00:00",
+    "end": "2005-07-01T00:00:00",
+    "group": "Live Sound Console",
+    "content": "Profile"
+  },
+  {
+    "id": "D-Show",
+    "start": "2005-02-01T00:00:00",
+    "end": "2005-07-01T00:00:00",
+    "group": "Live Sound Console",
+    "content": "D-Show"
+  },
+  {
+    "id": "D-Control",
+    "start": "2004-08-01T00:00:00",
+    "end": "2005-03-01T00:00:00",
+    "group": "Control Surface",
+    "content": "D-Control"
+  },
+  {
+    "id": "D-Command",
+    "start": "2004-04-01T00:00:00",
+    "end": "2004-09-01T00:00:00",
+    "group": "Control Surface",
+    "content": "D-Command"
+  },
+  {
+    "id": "Pro Control Jr",
+    "start": "2003-06-01T00:00:00",
+    "end": "2004-04-01T00:00:00",
+    "group": "Control Surface",
+    "content": "Pro Control Jr"
+  },
+  {
+    "id": "Rack 002",
+    "start": "2003-05-01T00:00:00",
+    "end": "2003-10-01T00:00:00",
+    "group": "Rack Appliance",
+    "content": "Rack 002"
+  },
+  {
+    "id": "Mbox",
+    "start": "2003-03-01T00:00:00",
+    "end": "2003-10-01T00:00:00",
+    "group": "USB Audio Interface",
+    "content": "Mbox"
+  },
+  {
+    "id": "Xbox",
+    "start": "2002-09-01T00:00:00",
+    "end": "2002-12-01T00:00:00",
+    "group": "Gaming Console",
+    "content": "Xbox"
+  },
+  {
+    "id": "Receiver 5",
+    "start": "2002-06-01T00:00:00",
+    "end": "2002-08-01T00:00:00",
+    "group": "Set-Top Box",
+    "content": "Receiver 5"
+  },
+  {
+    "id": "Receiver 4",
+    "start": "2002-01-01T00:00:00",
+    "end": "2002-05-01T00:00:00",
+    "group": "Set-Top Box",
+    "content": "Receiver 4"
+  },
+  {
+    "id": "Receiver 3",
+    "start": "2001-10-01T00:00:00",
+    "end": "2001-12-01T00:00:00",
+    "group": "Set-Top Box",
+    "content": "Receiver 3"
+  },
+  {
+    "id": "Receiver 2",
+    "start": "2001-09-01T00:00:00",
+    "end": "2001-11-01T00:00:00",
+    "group": "Set-Top Box",
+    "content": "Receiver 2"
+  },
+  {
+    "id": "Mercury LC",
+    "start": "2001-07-01T00:00:00",
+    "end": "2002-01-01T00:00:00",
+    "group": "Set-Top Box",
+    "content": "Mercury LC"
+  },
+  {
+    "id": "usb box",
+    "start": "2001-06-01T00:00:00",
+    "end": "2001-08-01T00:00:00",
+    "group": "Audio Interface",
+    "content": "usb box"
+  },
+  {
+    "id": "Remotes",
+    "start": "2001-05-01T00:00:00",
+    "end": "2001-08-01T00:00:00",
+    "group": "Remote Control",
+    "content": "Remotes"
+  },
+  {
+    "id": "Receiver 1",
+    "start": "2001-04-01T00:00:00",
+    "end": "2001-11-01T00:00:00",
+    "group": "Set-Top Box",
+    "content": "Receiver 1"
+  },
+  {
+    "id": "Node",
+    "start": "2000-12-01T00:00:00",
+    "end": "2001-01-01T00:00:00",
+    "group": "IoT Node",
+    "content": "Node"
+  },
+  {
+    "id": "Media Nodes",
+    "start": "2000-11-01T00:00:00",
+    "end": "2001-04-01T00:00:00",
+    "group": "IoT Node",
+    "content": "Media Nodes"
+  },
+  {
+    "id": "MP6000 MP3 Player",
+    "start": "2000-07-01T00:00:00",
+    "end": "2000-11-01T00:00:00",
+    "group": "MP3 Player",
+    "content": "MP6000 MP3 Player"
+  },
+  {
+    "id": "Keyboard",
+    "start": "2000-05-01T00:00:00",
+    "end": "2000-07-01T00:00:00",
+    "group": "Peripheral",
+    "content": "Keyboard"
+  },
+  {
+    "id": "LapTV",
+    "start": "2000-04-01T00:00:00",
+    "end": "2000-06-01T00:00:00",
+    "group": "Portable Media",
+    "content": "LapTV"
+  },
+  {
+    "id": "Remote",
+    "start": "2000-04-01T00:00:00",
+    "end": "2000-05-01T00:00:00",
+    "group": "Remote Control",
+    "content": "Remote"
+  },
+  {
+    "id": "Netscreen-500",
+    "start": "2000-02-01T00:00:00",
+    "end": "2000-04-01T00:00:00",
+    "group": "Security Appliance",
+    "content": "Netscreen-500"
+  },
+  {
+    "id": "SGI 320 540",
+    "start": "1998-08-01T00:00:00",
+    "end": "1998-09-01T00:00:00",
+    "group": "Handheld / Mobile",
+    "content": "SGI 320 540"
+  },
+  {
+    "id": "HP Jornada",
+    "start": "1998-06-01T00:00:00",
+    "end": "1998-07-01T00:00:00",
+    "group": "Handheld / PDA",
+    "content": "HP Jornada"
+  },
+  {
+    "id": "DVDO Player",
+    "start": "1998-03-01T00:00:00",
+    "end": "1998-05-01T00:00:00",
+    "group": "Media Player",
+    "content": "DVDO Player"
+  },
+  {
+    "id": "Vadem Clio",
+    "start": "1997-10-01T00:00:00",
+    "end": "1997-11-01T00:00:00",
+    "group": "Handheld / PDA",
+    "content": "Vadem Clio"
+  },
+  {
+    "id": "KaVo Dental Unit 2",
+    "start": "1997-07-01T00:00:00",
+    "end": "1997-12-01T00:00:00",
+    "group": "Medical Equipment",
+    "content": "KaVo Dental Unit 2"
+  },
+  {
+    "id": "Acer Phone",
+    "start": "1997-07-01T00:00:00",
+    "end": "1997-08-01T00:00:00",
+    "group": "Mobile Phone",
+    "content": "Acer Phone"
+  },
+  {
+    "id": "KaVo Dental Unit 1",
+    "start": "1997-07-01T00:00:00",
+    "end": "1997-10-01T00:00:00",
+    "group": "Medical Equipment",
+    "content": "KaVo Dental Unit 1"
+  },
+  {
+    "id": "Acer subwoofer",
+    "start": "1997-06-01T00:00:00",
+    "end": "1997-08-01T00:00:00",
+    "group": "Audio",
+    "content": "Acer subwoofer"
+  },
+  {
+    "id": "Newscorp STB",
+    "start": "1997-02-01T00:00:00",
+    "end": "1997-10-01T00:00:00",
+    "group": "Set-Top Box",
+    "content": "Newscorp STB"
+  },
+  {
+    "id": "PB Convertible",
+    "start": "1996-02-01T00:00:00",
+    "end": "1996-03-01T00:00:00",
+    "group": "Personal Computer",
+    "content": "PB Convertible"
+  },
+  {
+    "id": "Acer Aspire",
+    "start": "1996-02-01T00:00:00",
+    "end": "1996-05-01T00:00:00",
+    "group": "Personal Computer",
+    "content": "Acer Aspire"
+  },
+  {
+    "id": "Fissler BBQ",
+    "start": "1995-05-01T00:00:00",
+    "end": "1996-01-01T00:00:00",
+    "group": "Consumer Appliance",
+    "content": "Fissler BBQ"
+  },
+  {
+    "id": "Sunbeam toaster",
+    "start": "1995-01-01T00:00:00",
+    "end": "1995-03-01T00:00:00",
+    "group": "Consumer Appliance",
+    "content": "Sunbeam toaster"
+  },
+  {
+    "id": "Frantic Frames",
+    "start": "1992-04-01T00:00:00",
+    "end": "1993-03-01T00:00:00",
+    "group": "Electromechanical Mechanism",
+    "content": "Frantic Frames"
+  },
+  {
+    "id": "Indy",
+    "start": "1992-03-01T00:00:00",
+    "end": "1993-01-01T00:00:00",
+    "group": "Workstation",
+    "content": "Indy"
+  },
+  {
+    "id": "Indigo II",
+    "start": "1991-04-01T00:00:00",
+    "end": "1992-10-01T00:00:00",
+    "group": "Workstation",
+    "content": "Indigo II"
+  },
+  {
+    "id": "Indigo",
+    "start": "1989-11-01T00:00:00",
+    "end": "1991-06-01T00:00:00",
+    "group": "Workstation",
+    "content": "Indigo"
+  },
+  {
+    "id": "Iris File",
+    "start": "1990-02-01T00:00:00",
+    "end": "1990-10-01T00:00:00",
+    "group": "Server / Storage",
+    "content": "Iris File"
+  },
+  {
+    "id": "Personal IRIS",
+    "start": "1989-07-01T00:00:00",
+    "end": "1991-11-01T00:00:00",
+    "group": "Workstation",
+    "content": "Personal IRIS"
+  },
+  {
+    "id": "EPT-1000",
+    "start": "1987-01-01T00:00:00",
+    "end": "1989-06-01T00:00:00",
+    "group": "Medical Equipment",
+    "content": "EPT-1000"
+  }
+]

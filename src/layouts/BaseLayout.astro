@@ -12,6 +12,7 @@ import Footer from "@components/Footer/Footer.astro";
 import CommandMenu from "@components/Search/CommandMenu";
 import BootSequence from "@components/Effects/BootSequence";
 // import CookieConsent from "@components/CookieConsent/CookieConsent.astro";
+import FiberGrid from "@components/Interaction/FiberGrid.astro";
 
 // data
 import siteData from "@config/siteData.json";
@@ -81,7 +82,8 @@ const {
 			},
 		]}
 	>
-		<div class="flex min-h-lvh flex-col justify-between">
+		<FiberGrid />
+		<div class="relative z-10 flex min-h-lvh flex-col justify-between">
 			<div>
 				<Nav />
 				<main>

@@ -12,11 +12,20 @@ order: 4
 In many projects, the "Style Guide" is a static PDF that gets ignored as soon as it's written. Developers add "one-off" CSS classes, and soon the site looks inconsistent. We needed a system that forced compliance.
 
 ## Engineering Approach
-We built the documentation *into* the codebase.
+We built the documentation *into* the codebase. The [Elements Page](/about/elements) is not a static mockup—it is a live rendering of the production component library.
 
-*   **The "Elements" Page:** Located at [`/about/elements`](/about/elements), this page is not a mockup. It imports the *actual* components (`<Button>`, `<Chip>`, `<Admonition>`) used in production.
+*   **Live Import:** The style guide imports the *actual* components (`<Button>`, `<Chip>`, `<Admonition>`) used in production.
 *   **MDX Integration:** We use MDX to mix documentation (Markdown) with live code (React/Astro components).
 *   **Visual Regression:** If a developer breaks a component style, it breaks on the Style Guide page immediately.
+
+```astro
+<!-- The Style Guide IS the code -->
+<div class="grid grid-cols-3 gap-4">
+  <Button variant="primary">Launch</Button>
+  <Button variant="outline">Abort</Button>
+  <Button variant="ghost">Retry</Button>
+</div>
+```
 
 ## Impact
 *   **Consistency:** Every button, font, and color on the site is traceable to the tokens defined in this guide.

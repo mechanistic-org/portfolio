@@ -534,11 +534,36 @@ def process_projects():
         "Notion": "notion",
         "Trello": "trello",
         "Asana": "asana",
-        "Excel": "microsoft",
-        "PowerPoint": "microsoft",
-        "Word": "microsoft",
     }
+        
 
+
+    # --- GLOBAL SKILL AVERAGES (Pre-calc) ---
+    global_skills = {}
+    skill_counts = {}
+    
+    # First pass: Collect all skill values
+    all_skills_pass = read_csv_smart(find_file("Skills.csv"), "Project Start")
+    ignored_keys = {"Name", "Project Start", "Project End", "days", "midpoint", "✔️", "▲", "midpoint Y", "Slug Name"}
+    
+    for row in all_skills_pass:
+        for k, v in row.items():
+            if k in ignored_keys or not v: continue
+            try:
+                val = float(str(v).replace('%','').strip())
+                if val > 0:
+                    if k not in global_skills:
+                        global_skills[k] = 0.0
+                        skill_counts[k] = 0
+                    global_skills[k] += val
+                    skill_counts[k] += 1
+            except: pass
+            
+    # Compute Averages
+    for k in global_skills:
+        if skill_counts[k] > 0:
+            global_skills[k] = round(global_skills[k] / skill_counts[k], 1)
+        
     for i, row in enumerate(main):
         name = row.get("Slug Name") or row.get("Name")
         if not name: continue
@@ -568,11 +593,7 @@ def process_projects():
         # Map Tools to Icons
         tool_icons = []
         for t in tools:
-            # Try exact match or partial
-            slug_icon = TOOL_ICON_MAP.get(t)
-            if not slug_icon:
-                # Try simple lookup
-                slug_icon = TOOL_ICON_MAP.get(t.split(' ')[0])
+            slug_icon = TOOL_ICON_MAP.get(t) or TOOL_ICON_MAP.get(t.split(' ')[0])
             if slug_icon:
                 tool_icons.append(slug_icon)
         
@@ -585,24 +606,52 @@ def process_projects():
         elif float(p_row.get("Validation", p_row.get("Phase 4", 0)) or 0) > 0: prod = "Manufacturing Prep"
         elif float(p_row.get("Development", p_row.get("Phase 3", 0)) or 0) > 0: prod = "Prototyping"
 
-        s_row = stats.get(name, {})
-        parts = {"plastic": int(float(s_row.get("Plastic",0) or 0)), "metal": int(float(s_row.get("Sheetmetal",0) or 0)), "pcb": int(float(s_row.get("PCB",0) or 0))}
+        # --- PHASE BREAKDOWN (Expertise.csv) ---
+        exp_row = expertise_map.get(name, {})
         
-        # --- SKILLS (Expertise.csv) ---
-        skill_row = expertise_map.get(name, {})
+        # Define Phase Buckets
+        phase_map = {
+            "Strategy": ["Strategy", "Feasibility Assessment", "IP", "Business Acumen", "Requirements Analysis", "Market Research", "Project Management", "Risk Assessment"],
+            "Design": ["Concept Validation", "ID Capture", "CAD Modeling", "Prototyping", "Ideation", "Architecture", "User-Centered Design", "Industrial Design"],
+            "Engineering": ["Detailed Design", "Simulation & Analysis", "Tolerance Analysis", "Thermal Analysis", "Mechanical Testing", "FMEA", "Electronics", "Firmware", "Vibration and Acoustic Testing"],
+            "Production": ["DFM", "Tooling Design", "Manufacturing Support", "QC", "Supply Chain", "Value Engineering", "Reliability Testing"]
+        }
+        
+        phase_stats = {"Strategy": 0, "Design": 0, "Engineering": 0, "Production": 0}
+        
+        for p_cat, p_keys in phase_map.items():
+            sum_val = 0
+            for k in p_keys:
+                val_str = exp_row.get(k, "0")
+                try:
+                    sum_val += float(str(val_str).replace('%','').strip())
+                except: pass
+            phase_stats[p_cat] = round(sum_val, 1)
+
+        parts = phase_stats 
+
+        # --- SKILLS (Skills.csv) ---
+        skill_row = skills_map.get(name, {})
         weighted = []
         ignored_keys = {"Name", "Project Start", "Project End", "days", "midpoint", "✔️", "▲", "midpoint Y"}
         for k, v in skill_row.items():
             if k in ignored_keys or not v: continue
             try:
-                val = float(v.replace('%','').strip())
+                val = float(str(v).replace('%','').strip())
                 if val > 0:
                     weighted.append((k, val))
             except: pass
         
         weighted.sort(key=lambda x: x[1], reverse=True)
-        bom = [s[0] for s in weighted] # Top skills as tags
-        skill_data = [{"name": s[0], "value": round(s[1], 1)} for s in weighted[:6]]
+        # Top 6 for Radar Chart
+        skill_data = []
+        for s in weighted[:6]:
+            d = {"name": s[0], "value": round(s[1], 1)}
+            d["benchmark"] = global_skills.get(s[0], 50.0)
+            skill_data.append(d)
+
+        # Top skills as tags (first 3)
+        bom = [s[0] for s in weighted[:3]]
 
         # --- ADDITIONAL SKILLS (Skills.csv) ---
         add_skill_row = skills_map.get(name, {})
@@ -797,6 +846,8 @@ def process_projects():
         # Generate Charts
         skill_graph_url = generate_radar_chart(skill_data, slug) or ""
         part_graph_url = generate_donut_chart(parts, slug) or ""
+    
+
 
         # Template Replacement
         if content_body:
@@ -843,7 +894,7 @@ production: "{prod}"
 tags: {json.dumps(bom)}
 skillData: {json.dumps(skill_data)}
 additionalSkills: {json.dumps(additional_skills)}
-stats: {json.dumps(parts)}
+phase_stats: {json.dumps(parts)}
 teamSize: "{team_size}"
 gallery: {json.dumps(gallery_images)}
 documents: {json.dumps(documents)}
@@ -998,18 +1049,26 @@ if __name__ == "__main__":
     # Auto-run R2 Sync
     try:
         from sync_r2 import sync_assets
+        
+        end_time = time.time()
+        duration = round(end_time - start_time, 2)
+        print(f"⏱️  Build completed in {duration}s")
+        
+        with open(os.path.join(OUTPUT_DATA_DIR, "build.json"), "w") as f:
+            json.dump({"date": datetime.now().isoformat(), "duration": f"{duration}s"}, f, indent=2)
+
         print("\n🔄 Auto-running R2 Sync...")
         sync_assets()
+        
     except ImportError:
         print("\n⚠️  Could not import sync_r2.py. Skipping auto-sync.")
+        # Still write build stats even if sync fails
+        end_time = time.time()
+        duration = round(end_time - start_time, 2)
+        with open(os.path.join(OUTPUT_DATA_DIR, "build.json"), "w") as f:
+            json.dump({"date": datetime.now().isoformat(), "duration": f"{duration}s"}, f, indent=2)
+            
     except Exception as e:
         print(f"\n❌ Auto-sync failed: {e}")
 
     print("\n🚀 INGESTION COMPLETE.")
-
-    end_time = time.time()
-    duration = end_time - start_time
-    print(f"⏱️  Build Time: {duration:.2f}s")
-    
-    with open(os.path.join(OUTPUT_DATA_DIR, "build.json"), "w") as f:
-        json.dump({"duration": f"{duration:.2f}s", "timestamp": datetime.now().isoformat()}, f, indent=2)

@@ -1,0 +1,739 @@
+{
+  "name": "Quantum",
+  "children": [
+    {
+      "name": "Other",
+      "children": [
+        {
+          "name": "Career Goal",
+          "children": [
+            {
+              "name": "dreamjob",
+              "value": 224.1558951327243,
+              "group": "awesomejob",
+              "id": "dreamjob"
+            }
+          ]
+        },
+        {
+          "name": "Various",
+          "children": [
+            {
+              "name": "Freelance",
+              "value": 208.7242190053737,
+              "group": "Mechanistic",
+              "id": "Freelance"
+            }
+          ]
+        },
+        {
+          "name": "Foodservice Automation",
+          "children": [
+            {
+              "name": "Makeline",
+              "value": 199.73786103901938,
+              "group": "Hyphen",
+              "id": "Makeline"
+            },
+            {
+              "name": "Dispensers",
+              "value": 193.834963087817,
+              "group": "Hyphen",
+              "id": "Dispensers"
+            }
+          ]
+        },
+        {
+          "name": "Electromechanical Assy",
+          "children": [
+            {
+              "name": "Backsplash",
+              "value": 190.0948615284142,
+              "group": "Hyphen",
+              "id": "Backsplash"
+            },
+            {
+              "name": "Portion Cup",
+              "value": 184.63439094112067,
+              "group": "Hyphen",
+              "id": "Portion Cup"
+            }
+          ]
+        },
+        {
+          "name": "Consumer Appliance",
+          "children": [
+            {
+              "name": "Pet Scale",
+              "value": 175.37669618283368,
+              "group": "Mechanistic",
+              "id": "Pet Scale"
+            },
+            {
+              "name": "Fissler BBQ",
+              "value": 193.01258210544728,
+              "group": "Mechanistic",
+              "id": "Fissler BBQ"
+            },
+            {
+              "name": "Sunbeam toaster",
+              "value": 178.7753744390572,
+              "group": "Mechanistic",
+              "id": "Sunbeam toaster"
+            }
+          ]
+        },
+        {
+          "name": "Electromechanical Mechanism",
+          "children": [
+            {
+              "name": "battery lock",
+              "value": 184.4439089914137,
+              "group": "Mechanistic",
+              "id": "battery lock"
+            },
+            {
+              "name": "Frantic Frames",
+              "value": 196.111409929767,
+              "group": "Mechanistic",
+              "id": "Frantic Frames"
+            }
+          ]
+        },
+        {
+          "name": "Embedded Device",
+          "children": [
+            {
+              "name": "IOT module",
+              "value": 183.2178857704904,
+              "group": "Mechanistic",
+              "id": "IOT module"
+            }
+          ]
+        },
+        {
+          "name": "Micromobility",
+          "children": [
+            {
+              "name": "bay wheels",
+              "value": 189.98497031265828,
+              "group": "Mechanistic",
+              "id": "bay wheels"
+            }
+          ]
+        },
+        {
+          "name": "User Interface",
+          "children": [
+            {
+              "name": "Switches",
+              "value": 192.93061443340548,
+              "group": "Noon",
+              "id": "Switches"
+            },
+            {
+              "name": "Extension Switches",
+              "value": 196.20082930352362,
+              "group": "Noon",
+              "id": "Extension Switches"
+            },
+            {
+              "name": "Wall Plates",
+              "value": 196.20082930352362,
+              "group": "Noon",
+              "id": "Wall Plates"
+            }
+          ]
+        },
+        {
+          "name": "Smart Home Device",
+          "children": [
+            {
+              "name": "Room Director",
+              "value": 188.30437921392434,
+              "group": "Noon",
+              "id": "Room Director"
+            },
+            {
+              "name": "Base",
+              "value": 198.16157159698355,
+              "group": "Noon",
+              "id": "Base"
+            }
+          ]
+        },
+        {
+          "name": "Wearable / AR",
+          "children": [
+            {
+              "name": "Glyph 2",
+              "value": 200.16606101084864,
+              "group": "Avegant",
+              "id": "Glyph 2"
+            },
+            {
+              "name": "Glyph",
+              "value": 202.59904454377534,
+              "group": "Avegant",
+              "id": "Glyph"
+            }
+          ]
+        },
+        {
+          "name": "Sports and Fitness",
+          "children": [
+            {
+              "name": "BFD",
+              "value": 216.86081401775743,
+              "group": "Mechanistic",
+              "id": "BFD"
+            }
+          ]
+        },
+        {
+          "name": "Media Server",
+          "children": [
+            {
+              "name": "Strato",
+              "value": 193.01258210544728,
+              "group": "Kaleidescape",
+              "id": "Strato"
+            },
+            {
+              "name": "Cinema One",
+              "value": 197.8141421125448,
+              "group": "Kaleidescape",
+              "id": "Cinema One"
+            },
+            {
+              "name": "KSYSTEM-120",
+              "value": 188.17279836814924,
+              "group": "Kaleidescape",
+              "id": "KSYSTEM-120"
+            }
+          ]
+        },
+        {
+          "name": "Robotics / Disc Vault",
+          "children": [
+            {
+              "name": "M700",
+              "value": 196.111409929767,
+              "group": "Kaleidescape",
+              "id": "M700"
+            },
+            {
+              "name": "DV700",
+              "value": 196.111409929767,
+              "group": "Kaleidescape",
+              "id": "DV700"
+            },
+            {
+              "name": "KVAULT-10",
+              "value": 194.0947179518496,
+              "group": "Kaleidescape",
+              "id": "KVAULT-10"
+            }
+          ]
+        },
+        {
+          "name": "Media Storage",
+          "children": [
+            {
+              "name": "Disc Cartridges",
+              "value": 190.0948615284142,
+              "group": "Kaleidescape",
+              "id": "Disc Cartridges"
+            }
+          ]
+        },
+        {
+          "name": "Remote Control",
+          "children": [
+            {
+              "name": "K-Remote",
+              "value": 184.34728988229637,
+              "group": "Kaleidescape",
+              "id": "K-Remote"
+            },
+            {
+              "name": "Weemote",
+              "value": 179.1087386417331,
+              "group": "Kaleidescape",
+              "id": "Weemote"
+            },
+            {
+              "name": "Remotes",
+              "value": 183.2178857704904,
+              "group": "Mechanistic",
+              "id": "Remotes"
+            },
+            {
+              "name": "Remote",
+              "value": 172.01197381662155,
+              "group": "Mechanistic",
+              "id": "Remote"
+            }
+          ]
+        },
+        {
+          "name": "Media Player",
+          "children": [
+            {
+              "name": "M500",
+              "value": 183.10859506516852,
+              "group": "Kaleidescape",
+              "id": "M500"
+            },
+            {
+              "name": "M300",
+              "value": 179.1087386417331,
+              "group": "Kaleidescape",
+              "id": "M300"
+            },
+            {
+              "name": "Jewel",
+              "value": 195.1702770140622,
+              "group": "Kaleidescape",
+              "id": "Jewel"
+            },
+            {
+              "name": "KPLAYER-300",
+              "value": 195.2358510195238,
+              "group": "Kaleidescape",
+              "id": "KPLAYER-300"
+            },
+            {
+              "name": "KPLAYER-6000",
+              "value": 195.2358510195238,
+              "group": "Kaleidescape",
+              "id": "KPLAYER-6000"
+            },
+            {
+              "name": "KPLAYER-5000",
+              "value": 194.16771097666572,
+              "group": "Kaleidescape",
+              "id": "KPLAYER-5000"
+            },
+            {
+              "name": "KPLAYER-2500",
+              "value": 194.16771097666572,
+              "group": "Kaleidescape",
+              "id": "KPLAYER-2500"
+            },
+            {
+              "name": "DVDO Player",
+              "value": 179.1087386417331,
+              "group": "frogdesign",
+              "id": "DVDO Player"
+            }
+          ]
+        },
+        {
+          "name": "Server / Rackmount",
+          "children": [
+            {
+              "name": "KSERVER-1500",
+              "value": 179.1087386417331,
+              "group": "Kaleidescape",
+              "id": "KSERVER-1500"
+            },
+            {
+              "name": "KSERVER-5000",
+              "value": 194.0947179518496,
+              "group": "Kaleidescape",
+              "id": "KSERVER-5000"
+            },
+            {
+              "name": "KSERVER-1500",
+              "value": 183.2178857704904,
+              "group": "Kaleidescape",
+              "id": "KSERVER-1500"
+            },
+            {
+              "name": "KSERVER-2500",
+              "value": 194.16771097666572,
+              "group": "Kaleidescape",
+              "id": "KSERVER-2500"
+            }
+          ]
+        },
+        {
+          "name": "Data Ingestion",
+          "children": [
+            {
+              "name": "Speed Reader",
+              "value": 194.2040086571715,
+              "group": "Kaleidescape",
+              "id": "Speed Reader"
+            }
+          ]
+        },
+        {
+          "name": "USB Audio Interface",
+          "children": [
+            {
+              "name": "Mbox 2 Micro",
+              "value": 190.0948615284142,
+              "group": "Digidesign",
+              "id": "Mbox 2 Micro"
+            },
+            {
+              "name": "Mbox 2 Mini",
+              "value": 182.8863636973214,
+              "group": "Digidesign",
+              "id": "Mbox 2 Mini"
+            },
+            {
+              "name": "Mbox 2 Pro",
+              "value": 188.30437921392434,
+              "group": "Digidesign",
+              "id": "Mbox 2 Pro"
+            },
+            {
+              "name": "Mbox 2",
+              "value": 179.1087386417331,
+              "group": "Digidesign",
+              "id": "Mbox 2"
+            },
+            {
+              "name": "Mbox",
+              "value": 191.65976015021852,
+              "group": "Digidesign",
+              "id": "Mbox"
+            }
+          ]
+        },
+        {
+          "name": "Rack Appliance",
+          "children": [
+            {
+              "name": "Rack 003",
+              "value": 188.30437921392434,
+              "group": "Digidesign",
+              "id": "Rack 003"
+            },
+            {
+              "name": "Rack 002",
+              "value": 188.30437921392434,
+              "group": "Digidesign",
+              "id": "Rack 002"
+            }
+          ]
+        },
+        {
+          "name": "Control Surface",
+          "children": [
+            {
+              "name": "Digi 003",
+              "value": 193.01258210544728,
+              "group": "Digidesign",
+              "id": "Digi 003"
+            },
+            {
+              "name": "Control 24",
+              "value": 196.111409929767,
+              "group": "Digidesign",
+              "id": "Control 24"
+            },
+            {
+              "name": "D-Control",
+              "value": 191.56586274672011,
+              "group": "Digidesign",
+              "id": "D-Control"
+            },
+            {
+              "name": "D-Command",
+              "value": 188.30437921392434,
+              "group": "Digidesign",
+              "id": "D-Command"
+            },
+            {
+              "name": "Pro Control Jr",
+              "value": 195.20311776607412,
+              "group": "Digidesign",
+              "id": "Pro Control Jr"
+            }
+          ]
+        },
+        {
+          "name": "Live Sound Console",
+          "children": [
+            {
+              "name": "Profile",
+              "value": 188.10635294096255,
+              "group": "Digidesign",
+              "id": "Profile"
+            },
+            {
+              "name": "D-Show",
+              "value": 188.10635294096255,
+              "group": "Digidesign",
+              "id": "D-Show"
+            }
+          ]
+        },
+        {
+          "name": "Gaming Console",
+          "children": [
+            {
+              "name": "Xbox",
+              "value": 183.10859506516852,
+              "group": "Mechanistic",
+              "id": "Xbox"
+            }
+          ]
+        },
+        {
+          "name": "Set-Top Box",
+          "children": [
+            {
+              "name": "Receiver 5",
+              "value": 179.1087386417331,
+              "group": "Mechanistic",
+              "id": "Receiver 5"
+            },
+            {
+              "name": "Receiver 4",
+              "value": 185.87491742782046,
+              "group": "Mechanistic",
+              "id": "Receiver 4"
+            },
+            {
+              "name": "Receiver 3",
+              "value": 179.1087386417331,
+              "group": "Mechanistic",
+              "id": "Receiver 3"
+            },
+            {
+              "name": "Receiver 2",
+              "value": 179.1087386417331,
+              "group": "Mechanistic",
+              "id": "Receiver 2"
+            },
+            {
+              "name": "Mercury LC",
+              "value": 190.14935757608987,
+              "group": "Mechanistic",
+              "id": "Mercury LC"
+            },
+            {
+              "name": "Receiver 1",
+              "value": 191.65976015021852,
+              "group": "Mechanistic",
+              "id": "Receiver 1"
+            },
+            {
+              "name": "Newscorp STB",
+              "value": 192.88937726156686,
+              "group": "Mechanistic",
+              "id": "Newscorp STB"
+            }
+          ]
+        },
+        {
+          "name": "Audio Interface",
+          "children": [
+            {
+              "name": "usb box",
+              "value": 179.1087386417331,
+              "group": "Mechanistic",
+              "id": "usb box"
+            }
+          ]
+        },
+        {
+          "name": "IoT Node",
+          "children": [
+            {
+              "name": "Node",
+              "value": 172.33987204485146,
+              "group": "Mechanistic",
+              "id": "Node"
+            },
+            {
+              "name": "Media Nodes",
+              "value": 188.17279836814924,
+              "group": "Mechanistic",
+              "id": "Media Nodes"
+            }
+          ]
+        },
+        {
+          "name": "MP3 Player",
+          "children": [
+            {
+              "name": "MP6000 MP3 Player",
+              "value": 186.12184355372418,
+              "group": "Mechanistic",
+              "id": "MP6000 MP3 Player"
+            }
+          ]
+        },
+        {
+          "name": "Peripheral",
+          "children": [
+            {
+              "name": "Keyboard",
+              "value": 179.1087386417331,
+              "group": "Mechanistic",
+              "id": "Keyboard"
+            }
+          ]
+        },
+        {
+          "name": "Portable Media",
+          "children": [
+            {
+              "name": "LapTV",
+              "value": 179.1087386417331,
+              "group": "Mechanistic",
+              "id": "LapTV"
+            }
+          ]
+        },
+        {
+          "name": "Security Appliance",
+          "children": [
+            {
+              "name": "Netscreen-500",
+              "value": 178.94344562222102,
+              "group": "Mechanistic",
+              "id": "Netscreen-500"
+            }
+          ]
+        },
+        {
+          "name": "Handheld / Mobile",
+          "children": [
+            {
+              "name": "SGI 320 540",
+              "value": 172.33987204485146,
+              "group": "Mechanistic",
+              "id": "SGI 320 540"
+            }
+          ]
+        },
+        {
+          "name": "Handheld / PDA",
+          "children": [
+            {
+              "name": "HP Jornada",
+              "value": 172.01197381662155,
+              "group": "Mechanistic",
+              "id": "HP Jornada"
+            },
+            {
+              "name": "Vadem Clio",
+              "value": 172.33987204485146,
+              "group": "frogdesign",
+              "id": "Vadem Clio"
+            }
+          ]
+        },
+        {
+          "name": "Medical Equipment",
+          "children": [
+            {
+              "name": "KaVo Dental Unit 2",
+              "value": 188.30437921392434,
+              "group": "frogdesign",
+              "id": "KaVo Dental Unit 2"
+            },
+            {
+              "name": "KaVo Dental Unit 1",
+              "value": 183.2178857704904,
+              "group": "Mechanistic",
+              "id": "KaVo Dental Unit 1"
+            },
+            {
+              "name": "EPT-1000",
+              "value": 205.8219205600679,
+              "group": "EP Technologies",
+              "id": "EPT-1000"
+            }
+          ]
+        },
+        {
+          "name": "Mobile Phone",
+          "children": [
+            {
+              "name": "Acer Phone",
+              "value": 172.33987204485146,
+              "group": "frogdesign",
+              "id": "Acer Phone"
+            }
+          ]
+        },
+        {
+          "name": "Audio",
+          "children": [
+            {
+              "name": "Acer subwoofer",
+              "value": 179.1087386417331,
+              "group": "Mechanistic",
+              "id": "Acer subwoofer"
+            }
+          ]
+        },
+        {
+          "name": "Personal Computer",
+          "children": [
+            {
+              "name": "PB Convertible",
+              "value": 171.67295829986475,
+              "group": "Mechanistic",
+              "id": "PB Convertible"
+            },
+            {
+              "name": "Acer Aspire",
+              "value": 182.99809670330265,
+              "group": "Mechanistic",
+              "id": "Acer Aspire"
+            }
+          ]
+        },
+        {
+          "name": "Workstation",
+          "children": [
+            {
+              "name": "Indy",
+              "value": 195.2358510195238,
+              "group": "Silicon Graphics",
+              "id": "Indy"
+            },
+            {
+              "name": "Indigo II",
+              "value": 201.08098441509532,
+              "group": "Silicon Graphics",
+              "id": "Indigo II"
+            },
+            {
+              "name": "Indigo",
+              "value": 201.578422665081,
+              "group": "Silicon Graphics",
+              "id": "Indigo"
+            },
+            {
+              "name": "Personal IRIS",
+              "value": 205.4875954749168,
+              "group": "Silicon Graphics",
+              "id": "Personal IRIS"
+            }
+          ]
+        },
+        {
+          "name": "Server / Storage",
+          "children": [
+            {
+              "name": "Iris File",
+              "value": 192.88937726156686,
+              "group": "Silicon Graphics",
+              "id": "Iris File"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

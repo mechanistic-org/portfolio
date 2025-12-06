@@ -98,6 +98,16 @@ When adding new projects or resetting data, run these scripts before ingestion:
 ## 4. Project Detail Pages
 Project pages are generated from MDX files in `src/content/projects/`.
 
+### Authoring Project Pages (The Snippet Workflow)
+We use custom VS Code snippets to rapidly scaffold "Visual Taxonomy" components.
+1.  **Prerequisite:** Ensure `.vscode/quantum.code-snippets` is present in your workspace.
+2.  **Workflow:** In any `.md` or `.mdx` file, type `qq-` to see available snippets.
+    *   `qq-zigzag`: Insert Product Grid.
+    *   `qq-process`: Insert Process Timeline.
+    *   `qq-model`: Insert 3D Viewer.
+    *   `qq-admonition`, `qq-chip`, `qq-wire`: Insert UI primitives.
+3.  **Reference:** Visit `http://localhost:4321/about/elements` to see live examples and trigger names.
+
 ### Adding Resources (PDFs, Links)
 *   **PDFs:** Place `.pdf` files in `R2_STAGING/{project-slug}/`. The script automatically adds them to the "Resources" section.
 *   **Links:** Add a "Link" column in `Main.csv` with the URL.
@@ -280,6 +290,11 @@ status: {
 *   **Cause:** `src` URL points to a non-existent file, often due to a mismatch between the generated slug and the `R2_STAGING` folder name.
 *   **Fix:** Ensure the folder in `quantum-assets/R2_STAGING/` matches the project slug exactly (e.g., `rack-002`, not `002-rack`).
 
+### Stale TypeScript Errors ("File Not Found")
+*   **Symptom:** `tsconfig.json` reports an error for a file that was recently deleted (e.g., "File '.../template-test.astro' not found").
+*   **Context:** The Astro language server sometimes holds onto stale file references after deletion.
+*   **Fix:** Open `tsconfig.json`, make a trivial change (add a space or comment), save, and then revert the change. This forces the language server to refresh its file list.
+
 ## 9. Writing Manual Content
 When creating deep-dive content in `data_source/manual_content/{slug}.md`, follow the **Narrative STAR** framework.
 
@@ -401,6 +416,57 @@ See `docs/IMAGE_WORKFLOW.md` for the full SOP.
 
 
 
+### Asset Path Mismatch (Broken Images on Production)
+*   **Symptom:** Images load on `localhost` but are broken 404s on the deployed site.
+*   **Cause:** The "Physical Asset Law" Violation.
+    *   **Local:** `ingest_data.py` (default) generates paths like `/assets/r2/project/file.jpg`.
+    *   **Prod:** Assets live on R2 (`https://assets.eriknorris.com/project/file.jpg`). The relative path `/assets/r2/` does not exist on the production server (only on your local machine via git).
+*   **Fix:**
+    1.  Ensure `PUBLIC_R2_DOMAIN` is set to your R2 bucket URL in CI/CD environment variables.
+    2.  For local testing of production paths, run:
+        ```powershell
+        $env:PUBLIC_R2_DOMAIN="https://assets.eriknorris.com"; python ingest_data.py
+        ```
+    *   *Note:* The ingestion script now automatically hunts for and replaces local path strings (e.g., `/assets/r2/`) with the remote domain in manual content.
+
+### Broken Images on Localhost (CORS)
+*   **Symptom:** Images are valid (200 OK) but fail to render in Javascript components (ModelViewer) or Canvas.
+*   **Cause:** Cloudflare R2 Bucket missing CORS headers for `localhost`.
+*   **Fix:** Update R2 Bucket CORS Policy to allow `GET` from `http://localhost:4321`.
+    ```json
+    [
+      {
+        "AllowedOrigins": [ "http://localhost:4321", "https://eriknorris.com" ],
+        "AllowedMethods": [ "GET", "HEAD" ],
+        "AllowedHeaders": [ "*" ]
+      }
+    ]
+    ```
+
+    ```
+
+### "Missing" Frontmatter Data (The Snake Case Law)
+*   **Symptom:** Data exists in the `.mdx` file (verified) but appears as `undefined` in the Astro component props.
+*   **Cause:** Astro's Content Layer sometimes has caching conflicts or parsing ambiguities with `camelCase` object keys in YAML, especially when changing schema types (e.g., from `z.any()` to `z.object`).
+*   **Fix:** **Rename the field to `snake_case`**.
+    1.  Update `ingest_data.py` to output `my_field_name`.
+    2.  Update `src/content.config.ts` to expect `my_field_name`.
+    3.  Update the component to read `data.my_field_name`.
+    *Why?* Snake_case seems to bypass specific internal caching layers or reserved keyword conflicts that plague camelCase in this specific stack.
+
+### Recharts "width(-1)" Error
+*   **Symptom:** Console spam: `The width(-1) and height(-1) of chart should be greater than 0`.
+*   **Cause:** `ResponsiveContainer` fails to measure its parent container, often because the parent has `display: flex` but no explicit width/height, causing a race condition during layout.
+*   **Fix:** Use **Fixed Dimensions** for the chart wrapper instead.
+    ```tsx
+    // Bad
+    <ResponsiveContainer width="100%" height="100%"> ...
+    
+    // Good
+    <div style={{ width: '100%', height: '300px' }}>
+       <PieChart width={300} height={300}> ...
+    ```
+
 ### AI Generation Quota (429)
 *   **Symptom:** `generate_image` tool fails with "Resource Exhausted" or "Quota Exhausted".
 *   **Cause:** The AI model has hit its rolling usage limit (typically resets every ~4 hours).
@@ -408,6 +474,17 @@ See `docs/IMAGE_WORKFLOW.md` for the full SOP.
     1.  **Pause:** Stop generation immediately.
     2.  **Save Prompts:** Ensure pending prompts are saved to `src/content/docs/prompts/`.
     3.  **Resume Later:** Pick up the task in a new session once the quota resets.
+
+### Interactive Elements Missing After Navigation
+*   **Symptom:** Canvas backgrounds or interactive scripts fail to load when navigating between pages (e.g., from Home to Projects).
+*   **Cause:** Astro's `ClientRouter` (View Transitions) does not re-execute `<script>` tags on subsequent navigations.
+*   **Fix:** Wrap initialization logic in the `astro:page-load` event listener.
+    ```javascript
+    document.addEventListener("astro:page-load", () => {
+        cleanup(); // Prevent memory leaks
+        init();    // Re-bind canvas context and listeners
+    });
+    ```
 
 ## 12. Documentation System
 

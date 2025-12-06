@@ -80,11 +80,11 @@ We enforce the "Datasheet" aesthetic even in narrative content (Markdown).
 *   **Global Top Padding:** `pt-32` (8rem) is the standard for all main page containers (Home, Project List, Project Detail) to ensure visual consistency across page transitions.
 *   **The Robust Header:** For headers with centered elements (like navigation), use a 3-column CSS Grid (`grid-cols-[1fr_auto_1fr]`) with `items-end`. This ensures the center element remains perfectly centered while allowing left/right content (Titles/Breadcrumbs) to wrap naturally without overlap.
 
-> [!WARNING]
-> **Grid Gap Stability**
-> The current project detail layout relies on `gap-12` for proper spacing between the sidebar and content.
-> *   **Do not reduce to `gap-8`** without a full regression test of all project pages.
-> *   Previous attempts caused content overlapping on text-heavy pages (`portion-cup`).
+> [!NOTE]
+> **Grid Gap Configuration**
+> The project detail layout now uses `gap-8` (previously `gap-12`) for tighter information density.
+> *   **Status:** Verified active in `[...slug].astro`.
+> *   **Note:** Keep an eye on text-heavy pages (`portion-cup`) for potential overlapping, but `gap-8` is the approved "Datasheet" standard.
 
 ---
 
@@ -95,6 +95,8 @@ These components are available for use in MDX content:
 *   **Admonition:** `<Admonition variant="info|tip|caution|danger">...</Admonition>`
 *   **Chip:** `<Chip variant="production|prototype|concept" text="..." />`
 *   **Wire:** `<Wire />` (The standard divider)
+*   **Zigzag Grid:** Alternating text/image layout for feature breakdowns.
+*   **Process Strip:** Horizontal scrolling container for linear timelines.
 
 ### The Brick (Containers)
 *   **Usage:** Cards, Modals, Sections.
@@ -144,8 +146,28 @@ These components are available for use in MDX content:
 
 ---
 
-## 5. Future Enhancements (Roadmap)
-*   **Visible Grid:** Implement a global background grid pattern using CSS `background-image` with `--grid-color`.
+## 5. Visual Effects & Physics
+### The Visible Grid
+*   **Aesthetic:** The coordinate system of the machine.
+*   **Params:**
+    *   **Size:** `40px` (Matches Tailwind `spacing-10` / `2.5rem`).
+    *   **Color:** `rgba(0, 133, 202, 0.1)` (Light) / `rgba(0, 133, 202, 0.15)` (Dark).
+    *   **Behavior:** Fixed attachment. Lines do not scroll; content flows over the grid.
+
+### Glassmorphism ("Nav Glass")
+*   **Usage:** Fixed Navigation Bar.
+*   **Params:**
+    *   **Blur:** `16px`.
+    *   **Opacity:** High transparency (0.05 - 0.1) for a "Lens" effect.
+    *   **Border:** 1px `neutral-800` (preserves "The Seam").
+
+### The Spec Ticker
+*   **Usage:** High-density technical metadata (Mega Dashboard).
+*   **Implementation:** Tailwind `animate-[scroll]` with a custom Keyframe in `global.css`.
+*   **Aesthetic:** infinite horizontal scroll, Monospaced, Uppercase.
+*   **Color:** `neutral-500` (Ghosted) to avoid stealing focus from the primary charts.
+
+## 6. Future Enhancements (Roadmap)
 *   **Build Stats:** Expose `ingest_data.py` runtime metrics in the footer (e.g., "Built in 0.4s").
 *   **Raw Mode:** A toggle to view the raw JSON/Markdown source of any page.
 

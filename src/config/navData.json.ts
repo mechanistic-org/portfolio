@@ -46,7 +46,11 @@ const navConfig: navItem[] = [
 				newTab: true,
 			},
 			{
-				text: "3D Resume",
+				text: "Dashboard",
+				href: "/resume/dashboard/",
+			},
+			{
+				text: "3D",
 				href: "/resume/3d/",
 			},
 			{
@@ -66,7 +70,7 @@ const navConfig: navItem[] = [
 				href: "/resume/interactive/",
 			},
 			{
-				text: "KPI Dashboard",
+				text: "KPI",
 				href: "/resume/kpi/",
 			},
 		],

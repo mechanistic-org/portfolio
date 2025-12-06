@@ -17,23 +17,6 @@ slug: "architecture"
         *   **Headers:** Explicitly forced to `var(--font-header)` (Inter) to prevent falling back to the mono body font.
         *   **Usage:** Must be applied to the wrapper div of any MDX content render (e.g., `<div class="markdown-content"><Content /></div>`).
 *   **Interactivity:** React (for Charts), Vanilla JS (for 3D & UI)
-*   **Data Source:** CSV Files + Markdown (Hybrid)
-*   **Asset Host:** Cloudflare R2 (via custom domain `assets.eriknorris.com`)
-*   **Visualization:** Build-time Python/Matplotlib (SVG)
-*   **Meta-Architecture:** The site includes a "Context Lifecycle" system (`ONBOARDING` + `MINER` prompts) that allows the AI to maintain state and self-optimize across sessions.
-*   **Quality Assurance:** The "Council of Voices" Protocol (`SITE_AUDIT_PROMPT`) provides a 4-pass semantic audit mechanism (Roast/Recruiter/Arbiter/Observer) to verify design coherence and "soul" before release.
-
-## ðŸŽ¨ Visualization Engine
-We shifted from client-side React/Recharts to a **Zero-Runtime** approach.
-*   **Why:** Performance (LCP), stability (no hydration errors), and a "technical datasheet" aesthetic.
-*   **How:** `ingest_data.py` uses `matplotlib` to generate SVGs (`skill-graph.svg`, `part-graph.svg`) during the build.
-*   **Result:** Charts are just `<img>` tags. No JavaScript required to render.
-
-## âš¡ Global Effects
-### Boot Sequence
-The site features a "Matrix-style" boot sequence that is **Event-Driven**.
-*   **Component:** `BootSequence.tsx` (React).
-*   **Trigger:** Listens for the custom window event `quantum:boot`.
 *   **Architecture:** Originally a forced initial-load effect, it was refactored to be **opt-in** to prevent FOUC (Flash of Unstyled Content) and improve UX. It is now triggered manually via the "RESTART" button in the footer.
 
 ### Visible Grid
@@ -88,9 +71,14 @@ The `ingest_data.py` script is the heart of the build process. It transforms raw
     1.  `R2_STAGING_PATH` (Env Var)
     2.  `../quantum-assets/R2_STAGING` (Sibling Directory - Recommended for Dev)
     3.  `R2_STAGING` (Local Directory - Fallback)
-4.  **Content Generation:**
+4.  **Skill Aggregation (The Benchmark):**
+    *   Before generating individual project data, the script scours `Skills.csv` to calculate the **Global Average** for every tracked skill.
+    *   This "Benchmark" value is injected into every project's `skillData` array, enabling the "Streamgraph" visualization (Project vs. Global) in the frontend.
+5.  **Content Generation:**
     *   Generates `src/content/projects/*.mdx` files.
     *   Injects manual content from `data_source/manual_content/{slug}.md` if present.
+    *   **Content Sanitization:** Automatically replaces local asset paths (`/assets/r2/`) with the remote `R2_DOMAIN` (`https://assets.eriknorris.com/`) to ensure production compatibility.
+    *   **Smart Component Injection:** Replaces `{{MODEL_URL}}` placeholders with `<ModelViewer />` tags (including fallback logic if no model exists).
     *   **Empty String Fallback:** Defaults missing image/model URLs to empty strings (`""`) instead of `"None"` to prevent 404 errors.
     *   Generates `src/data/clients.json` for the Trust Wall.
         *   **Note:** Uses `CLIENT_DOMAIN_MAP` to populate the `domain` field, enabling Clearbit API logo fetching.
@@ -137,69 +125,6 @@ To support the main ingestion pipeline, two auxiliary scripts maintain data qual
 *   **Structure:** Matrix of Skills (Columns) vs Projects (Rows).
 *   **Logic:** Contains "Phase" and "Weight" metadata rows. The script "hunts" for the data start point.
 *   **Rule:** **Do not delete rows.** The script relies on the specific structure.
-
-### 2. `Main.csv` (The Identity)
-*   **Key:** `Name` (Generates the Slug).
-*   **Fields:** Title, Date, Employer, Client, Description.
-*   **Logic Shift:** "Duration" and "Status" are now calculated in Python and baked into the frontmatter (`duration`, `statusLabel`), removing logic from the Astro template.
-
-### Project Schema Extensions
-*   **Impact Field:** We added an optional `impact` string to the `projects` collection schema.
-    *   **Purpose:** To surface the "Business Value" or "Engineering Result" immediately below the hero image, preventing it from being buried in the details.
-    *   **Implementation:** Rendered in `ProjectLayout.astro` as a highlighted block if present.
-
-### UX Components
-*   **Sticky TOC (`ProjectTOC.astro`):**
-    *   **Logic:** Parses `headings` returned by `render()`, filters for depth 2-3, and renders a sticky sidebar navigation.
-    *   **Usage:** Automatically included in `projects/[...slug].astro`.
-
-### 3. `Stats.csv` (Hardware Metrics)
-*   **Key:** `Name`.
-*   **Metrics:** `Plastic`, `Sheetmetal`, `PCB` (Integer counts for the Hardware Dashboard).
-*   **Visualization:** Used to generate the "Part Breakdown" donut chart.
-
-### 4. `Colors.csv` (The Palette)
-*   **Logic:** Maps Entity Name (Employer or Skill) -> Hex/RGB.
-*   **Usage:** Color-codes the Career Timeline and Radar Charts.
-
-### 5. `Tenure.csv` (Career History)
-*   **Logic:** Defines the timeline segments on the `/about` page.
-*   **Calculations:** Duration is computed during ingestion.
-
-### 6. Project Directory Logic
-*   **Client/Employer Merge:** The "Client" filter column combines both `employer` and `client` fields from the frontmatter to create a comprehensive entity list.
-*   **Deep Linking:** The Trust Wall uses URL parameters (e.g., `/projects?client=Google`) to pre-filter the directory.
-*   **Interaction Model:** The "Link" column has been removed. The entire project row is clickable via `onclick` attributes for better usability.
-
-### 7. Filter Menu Logic (The View Tool)
-*   **Role:** The primary interface for navigating the project archive. We removed inline "Quick Filters" to enforce usage of this tool, which supports full drill-down capabilities.
-*   **Hierarchical Filtering:** Selecting a "Collection" (Industry) dynamically filters the available "Category" options to show only relevant choices.
-*   **Preview State:** Hovering over a filter option triggers a "Preview" mode, updating the project list instantly.
-*   **Revert on Mouseleave:** If the user hovers but doesn't click, the list reverts to the previously committed state when the mouse leaves the menu container.
-
-## ðŸ§© Key Components
-
-### Pages
-*   **`[...slug].astro`:** Master project template. Renders the layout, charts, and 3D viewer.
-    *   **Header Layout:** Uses a **3-Column CSS Grid** (`1fr auto 1fr`) to manage the Title (Left), Navigation (Center), and Breadcrumbs (Right).
-        *   **Why:** Absolute positioning caused overlaps with long, multi-line titles. The Grid approach ensures the navigation remains centered in the *available space* or its own track, while `items-end` keeps text baselines aligned.
-    *   **Structure:** Uses a 12-column grid.
-        *   **Sidebar:** `col-span-4` (sticky).
-        *   **Article:** `col-span-8` (contains all MDX content).
-    *   **Critical Rule:** All rendered markdown content (`<Content />`) must reside *within* the `<article>` container to maintain the grid layout.
-    *   **Note:** `getStaticPaths` uses `entry.id` (filename) instead of `entry.slug` (frontmatter) to ensure routing stability with Astro Content Collections.
-*   **`src/pages/about/elements.astro`:** Renders `src/data/otherPages/elements/index.mdx` as a "Living Style Guide" to verify DLS implementation (Typography, Colors, Components).
-*   **`docs/MAINTENANCE.md` (User Manual):** Documentation for site maintenance, including the Trust Wall logic and Ingestion Script usage.
-*   **`colophon.astro` (Meta-Portfolio):**
-    *   **Architecture:** Refactored from hardcoded HTML to a dynamic system powered by the `colophon` Content Collection.
-    *   **Data Source:** `src/content/colophon/*.mdx`.
-    *   **Rendering Strategy:** Uses a pre-rendering pattern (`await feature.render()`) in the frontmatter to avoid async mapping issues within the JSX template.
-*   **Resume System:**
-    *   **Architecture:** A multi-variant resume system powered by `src/data/skills.json` (generated from `Skills.csv`).
-    *   **Variants:**
-        *   **Standard:** `resume/` (Clean, printable).
-        *   **KPI Dashboard:** `resume/kpi` (React/Recharts visualization of Career Velocity).
-        *   **Timeline:** `resume/timeline` (Vertical scroll history).
         *   **Interactive:** `resume/interactive` (Terminal-style game).
         *   **3D:** `resume/3d` (CAD-style interface).
         *   **One-Pager:** `resume/one-pager` (High-density datasheet).
@@ -220,6 +145,20 @@ To support the main ingestion pipeline, two auxiliary scripts maintain data qual
     *   **Tech:** Vanilla JS + CSS Transforms + SVG/CSS Gradients.
     *   **Logic:** Calculates scroll delta to drive rotation (Gear) and vertical translation (Rack) for a realistic mechanical effect.
 
+*   **`UnifiedDashboard.tsx`:** 
+    *   **Architecture:** A polymorphic React component that adapts to three contexts: 
+        *   `mini`: Small/icon-like (Project List).
+        *   `medium`: Interactive preview (Project Detail).
+        *   `mega`: Full-screen "Cockpit" (Resume/Dashboard Page).
+    *   **Data Flow:** Accepts a `DashboardData` interface. For the "Mega" view, it aggregates Global Stats (Total Parts, Years) and injects the `MultiverseGraph`.
+    *   **Visuals:** Uses "Metric Rectifiers" (CSS Grid-based counters) and "Spec Tickers" (CSS Animations) to maximize data density.
+
+*   **`MultiverseGraph.tsx`:**
+    *   **Tech:** D3.js (Force Layout) + React (Ref Management).
+    *   **Logic:** Simulates a physics-based gravity well of all career nodes.
+    *   **Input:** `src/data/timeline/multiverse.json`.
+    *   **Optimization:** Runs outside the React render cycle (via `useEffect` and d3 selection) to maintain 60fps physics performace.
+
 ### 8. Gallery Data Structure
 *   **Old:** Array of strings (URLs).
 *   **New:** Array of Objects:
@@ -232,18 +171,10 @@ To support the main ingestion pipeline, two auxiliary scripts maintain data qual
     }
     ```
 *   **Why:** Enables the "Smart Bento" layout to make layout decisions at build time (or render time) without layout shift.
-*   **`ClientGrid.astro`:** Wrapper for the Marquee component on the homepage.
-*   **`ProjectDirectory.astro`:** Interactive project list with filtering, sorting, hover previews (Spotlight effect), and deep linking.
-*   **`ProjectStrip.tsx`:** Horizontal scrollable project strip. **Layout Note:** Must be placed outside `site-container` in `index.astro` to achieve full-width display, similar to the Trust Wall.
-*   **`ProjectModal.tsx`:** "Technical Datasheet" modal with split-view layout and navigation (Next/Prev).
-*   **`FilterPanel.astro`:** Persistent sidebar filter for the Project Directory.
-*   **`ConstructionBadge.astro`:** Status indicator (Local/Construction/Production) showing the current commit SHA.
-*   **`ModelViewer.astro`:**
-    *   **Fallback:** Defaults to high-fidelity "Neil Armstrong" (`NeilArmstrong.glb`) with `moon_1k.hdr` environment if no `src` is provided.
-    *   **Environment Logic:** Uses `neutral` lighting for project assets to ensure clean presentation, but switches to `moon_1k.hdr` for the Neil fallback.
-    *   **AR Ready:** Includes `ar` and `touch-action="pan-y"` attributes for mobile augmented reality support.
-    *   **Props:** Accepts `environmentImage` to override default lighting.
-### 4. The Quantum Image Pipeline
+
+### 9. The Visual Taxonomy (Machine Interface)
+To standardize the "Technical Datasheet" aesthetic, we established a "Visual Taxonomy" of core layout components.
+*   **Decision:** These components are designed to be "Plug-and-Play" via VS Code snippets, enforcing consistent structure across all project pages.
 A hybrid workflow combining human art direction with machine precision.
 *   **Philosophy:** "The Darkroom" (Lightroom) -> "The Machine" (Python) -> "The Cloud" (R2).
 *   **Source of Truth:** High-Res TIFFs (4000px) stored in local `~/Quantum_Workspace/R2_MASTER`.

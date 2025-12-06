@@ -1,0 +1,79 @@
+{
+    "Quantum Zigzag Grid": {
+        "prefix": "qq-zigzag",
+        "body": [
+            "<ZigzagGrid",
+            "  items={[",
+            "    {",
+            "      title: \"${1:View Title}\",",
+            "      text: \"${2:Description of the view.}\",",
+            "      image: \"${3:https://placehold.co/800x600/101010/FFFFFF/png}\"",
+            "    },",
+            "    {",
+            "      title: \"${4:View Title}\",",
+            "      text: \"${5:Description of the view.}\",",
+            "      image: \"${6:https://placehold.co/800x600/101010/FFFFFF/png}\"",
+            "    }",
+            "  ]}",
+            "/>"
+        ],
+        "description": "Insert a Quantum Zigzag Grid (Alternating Text/Image)"
+    },
+    "Quantum Process Strip": {
+        "prefix": "qq-process",
+        "body": [
+            "<ProcessStrip",
+            "  steps={[",
+            "    {",
+            "      label: \"${1:Step Name}\",",
+            "      image: \"${2:https://placehold.co/600x400/101010/FFFFFF/png}\",",
+            "      description: \"${3:Optional description}\"",
+            "    },",
+            "    {",
+            "      label: \"${4:Step Name}\",",
+            "      image: \"${5:https://placehold.co/600x400/101010/FFFFFF/png}\",",
+            "      description: \"${6:Optional description}\"",
+            "    }",
+            "  ]}",
+            "/>"
+        ],
+        "description": "Insert a Quantum Process Strip (Horizontal Scroll)"
+    },
+    "Quantum Model Viewer": {
+        "prefix": "qq-model",
+        "body": [
+            "<ModelViewer src=\"${1:{{MODEL_URL}}}\" alt=\"${2:Interactive 3D View}\" />"
+        ],
+        "description": "Insert a Quantum 3D Model Viewer"
+    },
+    "Quantum Admonition": {
+        "prefix": "qq-admonition",
+        "body": [
+            "<Admonition variant=\"${1|info,tip,caution,danger|}\">",
+            "  ${2:Content goes here.}",
+            "</Admonition>"
+        ],
+        "description": "Insert a Quantum Admonition Block"
+    },
+    "Quantum Chip": {
+        "prefix": "qq-chip",
+        "body": [
+            "<Chip variant=\"${1|production,prototype,concept|}\" text=\"${2:STATUS}\" />"
+        ],
+        "description": "Insert a Quantum and Status Chip"
+    },
+    "Quantum Scramble Text": {
+        "prefix": "qq-scramble",
+        "body": [
+            "<ScrambleText text=\"${1:GLITCH_TEXT}\" />"
+        ],
+        "description": "Insert a Quantum Glitch Text Effect"
+    },
+    "Quantum Wire": {
+        "prefix": "qq-wire",
+        "body": [
+            "<Wire />"
+        ],
+        "description": "Insert a Quantum Divider Wire"
+    }
+}
