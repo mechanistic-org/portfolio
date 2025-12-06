@@ -17,7 +17,19 @@ const allDocs = Object.values(globDocs).map((file: any) => {
 // Group docs by section (top-level folder)
 const docsBySection = allDocs.reduce(
 	(acc, doc) => {
-		const [section] = doc.slug.split("/");
+		// Use frontmatter group override if available
+		if (doc.data.sidebar?.group) {
+			const group = doc.data.sidebar.group;
+			if (!acc[group]) acc[group] = [];
+			acc[group].push(doc);
+			return acc;
+		}
+
+		const slugParts = doc.slug.split("/");
+		// If it's a root file (no slashes), group under "documentation"
+		// If it's in a folder, group by that folder name
+		const section = slugParts.length > 1 ? slugParts[0] : "documentation";
+
 		if (!acc[section]) {
 			acc[section] = [];
 		}
@@ -28,8 +40,17 @@ const docsBySection = allDocs.reduce(
 );
 
 // Sort sections (custom order or alphabetical)
-// You can customize this array to control section order
-const sectionOrder = ["getting-started", "guides", "reference", "other"];
+// Put "documentation" first, then others
+const sectionOrder = [
+	"System Manual",
+	"Workflows",
+	"Reference",
+	"Prompts",
+	"getting-started",
+	"guides",
+	"reference",
+	"other",
+];
 const sections = Object.keys(docsBySection).sort((a, b) => {
 	const indexA = sectionOrder.indexOf(a);
 	const indexB = sectionOrder.indexOf(b);
@@ -52,6 +73,9 @@ sections.forEach((section) => {
 
 // Helper to format section title
 const formatSectionTitle = (slug: string) => {
+	// Special case for 'documentation' to ensure it looks nice
+	if (slug === "documentation") return "Documentation";
+
 	return slug
 		.split("-")
 		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))

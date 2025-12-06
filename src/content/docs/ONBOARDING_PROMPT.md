@@ -1,7 +1,9 @@
 ﻿---
-title: "Onboarding Prompt
-"
+title: "Onboarding Prompt"
 slug: "onboarding_prompt"
+sidebar:
+  group: "System Manual"
+  order: 0
 ---
 *   **Self-Correction:** If a layout change fails and is reverted, document *why* it failed in `STYLE_GUIDE.md` to prevent future loops.
 >
@@ -15,3 +17,7 @@ slug: "onboarding_prompt"
 
 
 > *   **Avoid Nexus Events:** Do not edit generated content in `src/content/projects/`. Always trace data back to `data_source/Main.csv` or `data_source/manual_content/`.
+>
+> **NEW WORKFLOWS:**
+> *   [`CONTENT_INGESTION_WORKFLOW.md`](/src/content/docs/CONTENT_INGESTION_WORKFLOW.md): The Universal Pipeline for Brain Dumps -> Case Studies.
+> *   [`UNIVERSAL_INGEST_PROMPT.md`](/src/content/docs/prompts/UNIVERSAL_INGEST_PROMPT.md): The Master Prompt for LLM synthesis.

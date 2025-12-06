@@ -11,7 +11,7 @@
 
 /* text coloring for most items */
 .markdown-content:not(pre *, .admonition *, details *, blockquote *, span, a, h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
-	@apply text-foreground/80;
+	@apply text-foreground/80 text-sm;
 }
 
 /* paragraph spacing except for paragraphs inside list items */
@@ -25,7 +25,7 @@
 }
 
 .markdown-content :is(h1, h2, h3, h4, h5, h6):not(:where(.not-content *)) {
-	@apply text-foreground/95 mt-2 mb-4 text-base leading-normal;
+	@apply text-foreground/95 mt-2 mb-4 leading-normal;
 	font-family: var(--font-header);
 }
 

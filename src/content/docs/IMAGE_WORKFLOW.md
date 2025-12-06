@@ -1,6 +1,10 @@
 ﻿---
-title: "Quantum Image Workflow (SOP)"
+title: "Quantum Image Workflow (SOP)
+"
 slug: "image_workflow"
+sidebar:
+  group: "Workflows"
+  order: 2
 ---
 # Quantum Image Workflow (SOP)
 

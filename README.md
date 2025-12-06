@@ -32,3 +32,9 @@ A technical portfolio site built to function as a datasheet. It combines high-pe
 If you plan to process images locally:
 1.  **Workspace:** Run `python scripts/setup_workspace.py` to create the `~/Quantum_Workspace` structure.
 2.  **Libraries:** `pip install Pillow pillow-heif`
+
+## 🔧 Setup (Ingestion Engine)
+To use the automated content generator:
+1.  Obtain a Google Gemini API Key.
+2.  `pip install google-generativeai`
+3.  Set environment variable: `GEMINI_API_KEY`.

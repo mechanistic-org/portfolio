@@ -1,6 +1,9 @@
 ﻿---
 title: "Roadmap"
 slug: "roadmap"
+sidebar:
+  group: "System Manual"
+  order: 3
 ---
     *   **Colophon:** Architecture breakdown and Tech Stack marquee.
     *   **Global:** Construction Badge (Status & Commit SHA).
@@ -34,6 +37,11 @@ slug: "roadmap"
     *   **Description:** A "Plug-and-Play" authoring system that allows complex UI patterns (Zigzag Grids, 3D Viewers, Process Strips) to be inserted via shortcodes (`qq-*`). This transforms the IDE into a layout engine, ensuring every project page adheres to the strict "Visual Taxonomy" without manual coding.
 
 ## ðŸ“œ Change Log (Recent)
+*   **[Architecture] D3 Migration:** Completely removed `recharts` dependency. Refactored all dashboard visualizations (`SkillRadar`, `PhaseDonut`) to lightweight, native D3.js implementations.
+*   **[Feature] Impact Resonance:** Implemented a new physics-based "System Velocity" gauge to replace the static placeholder in the Mini-Dashboard.
+*   **[Fix] Docs System:** Restored documentation builds by implementing a robust `import.meta.glob` loader for the sidebar, bypassing Content Collection instability.
+*   **[Fix] OpenGraph:** Resolved build failures caused by missing frontmatter in operational documents (`implementation_plan.md`).
+*   **[Refactor] Schema Hardening:** Loosened Zod validation for `phase_stats` to prevent "Ghost Data" issues where valid ingestion data was stripped by strict typing.
 *   **[Feature] The Data God Dashboard:** Transformed `/resume/dashboard` into a "747 Cockpit" or "Nerve Center" (`variant="mega"`).
     *   **Tech:** `UnifiedDashboard.tsx`, Recharts Streamgraph, Tailwind Animation.
     *   **Metrics:** Added "System Phase Distribution" (Real Data), "Tenure Timeline" (Gantt), and "Spec Ticker".
@@ -154,12 +162,18 @@ slug: "roadmap"
 *   **[Refactor] Data Resilience:** Renamed critical frontmatter fields to `snake_case` (`phase_stats`) to resolve persistent aggressive caching and YAML parsing conflicts in Astro's Content Layer.
 *   **[Refactor] Chart Stability:** Replaced volatile `ResponsiveContainer` logic with fixed-dimension layouts in `PhaseDonut` and `SkillRadar` to eliminate `width(-1)` layout thrashing errors.
 *   **[Bug] Phase Donut:** *Known Issue* - The Phase Breakdown chart rendering is currently unstable despite verifying data presence. Scheduled for deep-dive debugging (Ref: "The Snake Case Strategy").
+- [x] **Universal Ingestion Pipeline:** Automated conversion of Audio/Text -> Markdown using Gemini 2.5 Pro.
 
 ## Colophon / Meta-Portfolio
 ### The Quantum Darkroom
 *   **Hook:** "Developing the future, one pixel at a time."
 *   **Tech:** Python, Pillow, Lanczos Resampling, Cloudflare R2.
 *   **Description:** A deep dive into the "Human Eye, Machine Hand" philosophy, featuring a live "Before & After" comparison of the `base` project. It documents how we shrank 15MB of GIFs down to 1.2MB of High-Res WebP using a custom automation engine.
+
+*   **Impact Resonance (The Third Gauge):**
+    *   **Hook:** "Visualizing the system's heartbeat."
+    *   **Tech:** D3.js (`d3-timer`, `d3-ease`), SVG.
+    *   **Description:** A custom visualization component that uses a stable core and orbiting particles to represent "System Velocity." It isn't just a number; it's a living SVG animation that pulses effectively at 60fps without React render-cycle overhead.
 
 *   **Smart Bento Gallery:**
     *   **Hook:** "A grid that knows its content."
@@ -201,6 +215,11 @@ slug: "roadmap"
     *   **Tech:** Astro API Endpoints (`.ts`), Plain Text.
     *   **Description:** A dedicated `/raw/[slug]` route that bypasses the layout engine to serve the unadulterated Markdown source of any project, reinforcing the "Physical Asset Law" and open engineering culture.
 
+*   **The "Mineralizer" Engine:**
+    *   **Hook:** Turning unstructured "Brain Dumps" into rigid Datasheets automatically.
+    *   **Tech:** Python, Google Gen AI SDK (Gemini 2.5 Pro), Multimodal Ingestion.
+    *   **Description:** A "Zero-Friction" pipeline that listens to raw voice memos or reads loose notes, applies a strict brutalist style guide ("The Engineer" persona), and outputs production-ready portfolio case studies. It features a "Gap Analysis" system that fails loudly (via Alerts) if critical metrics are missing.
+
 
 #### [2025-12-05] The "Fortissimo" Update
 *   **Navigation:** Renamed generic "Work" link to "Projects" (`navData.json.ts`).
@@ -208,3 +227,11 @@ slug: "roadmap"
 *   **Narrative:** Rebranded "Dreamjob" to "The North Star Protocol".
 *   **Data:** Added `Impact` field to `Main.csv` schema.
 *   **Colophon:** Integrated "Audit Personas" (The Hater, The Recruiter, The Data God) into the Testimonial Wall.
+#### [2025-12-06] The "Unification" Update
+*   **Documentation:** Restructured `docs/` into 4 distinct groups (System, Workflows, Reference, Prompts) for better discoverability.
+*   **Feature:** Implemented the **Universal Inbox** (`data_source/inbox/`) with a "Smart Filename" Schema (`slug.context.ext`) for zero-friction content ingestion.
+*   **Architecture:** Merged `CONTENT_INGESTION_WORKFLOW.md` into `CONTENT_STRATEGY.md`, establishing a single source of truth for all content pipelines.
+*   **Refactor:** Updated `ingest_inbox.py` to parse context tags (`technical`, `rant`, `social`) and guide the LLM's output persona.
+*   **UX:** Polished Sidebar Navigation (`SidebarNav.astro`) to strictly enforce the new logical grouping system.
+*   **Protocol:** Inducted **"The V.C."** (Thiel/Khosla persona) into the Council of Voices (`SITE_AUDIT_PROMPT.md`) to weaponize FOMO and challenge architectural scope.
+

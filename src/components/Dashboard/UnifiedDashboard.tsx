@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
-// import SkillRadar from '../Projects/SkillRadar'; // Removed for D3 Migration
-// import PhaseDonut from '../Projects/PhaseDonut'; // Removed for D3 Migration
+import SkillRadarD3 from '../DataViz/SkillRadarD3';
+import PhaseDonutD3 from '../DataViz/PhaseDonutD3';
+import ImpactResonance from '../DataViz/ImpactResonance';
 // import { Area, AreaChart, Tooltip, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'; // Removed
 import MultiverseGraph from '../DataViz/MultiverseGraph';
 
@@ -58,8 +58,12 @@ export default function UnifiedDashboard({
                         <div className="mb-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
                             Skill Fingerprint
                         </div>
-                        <div className="w-full h-[180px] flex items-center justify-center border border-dashed border-neutral-800 rounded-full opacity-50">
-                            <span className="text-[10px] font-mono text-neutral-600">D3_MIGRATION</span>
+                        <div className="w-full h-[180px] pointer-events-none">
+                            {data.skillData ? (
+                                <SkillRadarD3 data={data.skillData} />
+                            ) : (
+                                <div className="h-full w-full flex items-center justify-center dashed-border opacity-50 text-[10px]">NO_DATA</div>
+                            )}
                         </div>
                     </div>
 
@@ -68,18 +72,22 @@ export default function UnifiedDashboard({
                         <div className="mb-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
                             Phase Breakdown
                         </div>
-                        <div className="w-full h-[180px] flex items-center justify-center border border-dashed border-neutral-800 rounded-full opacity-50">
-                            <span className="text-[10px] font-mono text-neutral-600">D3_MIGRATION</span>
+                        <div className="w-full h-[180px] pointer-events-none">
+                            {data.phase_stats ? (
+                                <PhaseDonutD3 data={data.phase_stats} />
+                            ) : (
+                                <div className="h-full w-full flex items-center justify-center dashed-border opacity-50 text-[10px]">NO_DATA</div>
+                            )}
                         </div>
                     </div>
 
-                    {/* Gauge 3: Velocity / Impact (Placeholder) */}
-                    <div className="flex flex-col items-center justify-center opacity-50 grayscale">
+                    {/* Gauge 3: System Velocity (Impact Resonance) */}
+                    <div className="flex flex-col items-center justify-center">
                         <div className="mb-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
                             System Velocity
                         </div>
-                        <div className="w-full h-[180px] rounded-full border-2 border-dashed border-neutral-800 flex items-center justify-center">
-                            <span className="font-mono text-xs text-neutral-600">NO DATA</span>
+                        <div className="w-full h-[180px] pointer-events-none">
+                            <ImpactResonance value={75} label="HIGH_VELOCITY" />
                         </div>
                     </div>
                 </div>

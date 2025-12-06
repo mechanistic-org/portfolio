@@ -1,6 +1,9 @@
 ﻿---
-title: "Untitled"
+title: "Internal Scripts"
 slug: "internal_scripts"
+sidebar:
+  group: "Reference"
+  order: 3
 ---
 *   **Usage:** `python ingest_data.py`
 
@@ -19,6 +22,12 @@ slug: "internal_scripts"
 *   **Usage:** `python scripts/setup_workspace.py`
 *   **When to run:** When onboarding a new machine or after adding new projects to the CSV.
 
+### 3. Automated Ingestion (The Funnel)
+For projects lacking documentation, we use the **Ingestion Pipeline**:
+1.  **Capture:** Record a voice memo or dump rough notes into `data_source/inbox/{slug}.{mp3,txt}`.
+2.  **Refine:** Run the ingestion script to synthesizing a structured draft.
+3.  **review:** The system acts as a "Journalist," structuring the narrative and flagging missing metrics with `> [!WARNING]` alerts.
+
 ### `scripts/refine_skills.py` (The Skill Balancer)
 *   **Purpose:** Generates unique skill profiles for projects to prevent "Radar Chart Duplication".
 *   **Usage:** `python scripts/refine_skills.py`
@@ -32,5 +41,13 @@ slug: "internal_scripts"
 ### `scripts/sync_r2.py` (The Uploader)
 *   **Purpose:** Handles the actual upload of assets to Cloudflare R2. Called automatically by `ingest_data.py`.
 *   **Usage:** `python scripts/sync_r2.py`
+
+### `scripts/ingest_inbox.py` (The Mineralizer)
+*   **Purpose:** Monitors `data_source/inbox/` for unstructured text or audio and uses LLM synthesis to generate structured Case Studies.
+*   **Usage:**
+    1.  Set Key: `$env:GEMINI_API_KEY='...'`
+    2.  Run: `python scripts/ingest_inbox.py`
+*   **Troubleshooting:**
+    *   **Error 404/429 (Quota):** If the script fails with "Model not found" or "Quota exceeded", ensure `scripts/ingest_inbox.py` is targeting a supported model (currently `gemini-2.5-pro`). The 3.0 Preview tier currently has strict quotas.
 
 

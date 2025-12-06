@@ -1,6 +1,9 @@
 ﻿---
 title: "System Architecture"
 slug: "architecture"
+sidebar:
+  group: "System Manual"
+  order: 1
 ---
 
 *   **Prose Overrides:** We override default `prose` classes in `src/pages/projects/[...slug].astro` to enforce the brand identity:
@@ -22,10 +25,22 @@ slug: "architecture"
 *   **Concept:** Exposing the "Ingestion Pipeline" performance in the UI.
 *   **Flow:** `ingest_data.py` measures execution time -> writes to `src/config/build.json` -> `Footer.astro` imports and displays it (e.g., `BLD: 0.45s`).
 
+### 4. Generative Ingestion Layer ("The Refinery")
+*   **Concept:** We treat raw content (audio notes, loose text) as "Ore" that must be mineralized into "Datasheets".
+*   **Engine:** `scripts/ingest_inbox.py`
+*   **Model Strategy:** We utilize **Gemini 2.5 Pro** via the Google Gen AI SDK.
+*   **Decision Record:**
+    *   **Why Gemini?** Chosen for **Native Audio Support**. This allowed us to eliminate a dedicated transcription dependency (like Whisper/FFmpeg), drastically simplifying the local toolchain. We drop `.mp3` files directly into the context window.
+    *   **Why Local Script?** A "Drop & Forget" filesystem watcher in `data_source/inbox` provided lower friction than a web UI for the specific "Brain Dump" use case.
+
 ## âš™ï¸ Build System
 ### Configuration Gotchas
 *   **Keystatic Integration:** In `astro.config.mjs`, `keystatic()` **MUST** be the last item in the `integrations` array. If placed earlier, it causes `virtual:keystatic-config` resolution errors during the build.
 *   **Vite Optimization:** The `axobject-query` package (used by accessibility linters) must be excluded from Vite's optimization to prevent runtime `SyntaxError` issues in the browser (`optimizeDeps.exclude: ["axobject-query"]`).
+
+### Documentation Content Loader
+*   **Problem:** Astro's `getCollection("docs")` was returning empty arrays due to complex/conflicting frontmatter schemas or cache invalidation issues during specific build states.
+*   **Solution (The Glob Strategy):** We bypassed the Content Layer API for the documentation sidebar in favor of `import.meta.glob('../content/docs/*.md')`. This ensures a raw, file-system-level read that is 100% reliable for generating navigation structures, regardless of schema validation state.
 
 2.  **Smart Header Hunting:** In `Expertise.csv`, the script dynamically locates the "Project Start" header row to handle the complex matrix structure (Skills vs Projects) and extracts metadata like "Phase" and "Weight".
 3.  **Asset Discovery:** Scans for assets in the following priority:
@@ -92,7 +107,12 @@ To support the main ingestion pipeline, two auxiliary scripts maintain data qual
         *   **Infographic:** `resume/infographic` (Visual summary).
 
 ### UI Elements
-*   **`SkillRadar.tsx`:** Client-side React component using Recharts for the "Skill Fingerprint".
+*   **Visualization Engine (D3.js Refactor):**
+    *   **Decision:** We removed `recharts` (400kb+) in favor of pure D3.js modules (`d3-shape`, `d3-scale`) to achieve "Hyper-Functional Brutalism" without generic library overhead.
+    *   **Components:**
+        *   **`SkillRadarD3.tsx`:** Custom SVG implementation of the radar chart with precise grid control.
+        *   **`PhaseDonutD3.tsx`:** Interactive donut chart leveraging D3 arc generators.
+        *   **`ImpactResonance.tsx`:** Physics-based "System Velocity" gauge using D3 timer loops for organic pulsing effects.
 *   **`ProjectGallery.tsx`:**
     *   **Layout:** "Smart Bento" CSS Grid.
     *   **Logic:** The ingestion script calculates aspect ratios for every image. The frontend uses this data to assign row/column spans:

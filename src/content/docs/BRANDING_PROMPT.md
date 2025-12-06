@@ -1,7 +1,8 @@
 ﻿---
-title: "System Instruction: Brand Alignment & Style Guide Protocol
-"
+title: "System Instruction: Brand Alignment & Style Guide Protocol"
 slug: "branding_prompt"
+sidebar:
+  group: "Prompts"
 ---
 # System Instruction: Brand Alignment & Style Guide Protocol
 
@@ -55,3 +56,11 @@ Review the above, then generate the `docs/STYLE_GUIDE.md` and propose 3 candidat
 *   **Implementation:** CSS-only base64 SVG pattern.
 *   **Usage:** Applied strictly to `BaseLayout` via `.noise-overlay` utility.
 *   **Opacity:** 0.03 (Very subtle). Adds "analog weight" to the digital interface.
+
+## Scientific Visualization (D3)
+*   **Philosophy:** "Data as Artifact."
+*   **Rules:**
+    1.  **No Libraries:** Do not use `recharts`, `chart.js`, or `nivo`. Build from primitives using D3.js.
+    2.  **Color:** Use the brand palette (`#22c55e` for Primary, `#404040` for Grid).
+    3.  **Typography:** Labels must use `font-mono` and be uppercase.
+    4.  **Behavior:** Charts should feel "alive" (pulsing, slight drift) rather than static, reinforcing the "System Operational" narrative.

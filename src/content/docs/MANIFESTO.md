@@ -1,7 +1,9 @@
 ﻿---
-title: "Project Manifesto
-"
+title: "Project Manifesto"
 slug: "manifesto"
+sidebar:
+  group: "System Manual"
+  order: 4
 ---
 # Project Manifesto
 

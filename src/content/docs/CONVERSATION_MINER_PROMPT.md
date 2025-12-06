@@ -1,6 +1,8 @@
 ﻿---
 title: "Conversation Miner Prompt"
 slug: "conversation_miner_prompt"
+sidebar:
+  group: "Prompts"
 ---
 # Conversation Miner Prompt
 
@@ -54,7 +56,11 @@ slug: "conversation_miner_prompt"
 > *   Ignore code already committed to the repo.
 >
 > **OUTPUT FORMAT:**
-> Group by file. For each item, provide a **Copy-Paste Ready Markdown Block** or a clear instruction.
+> **IMPORTANT:** You must explicitly categorize your updates to avoid ambiguity.
+> *   **[IMPLEMENTED]**: Changes you *already made* during this session (e.g., "Updated ROADMAP.md").
+> *   **[PROPOSED]**: Changes the user *needs to make* or approve for next time.
+
+Group by file. For each item, provide a **Copy-Paste Ready Markdown Block** or a clear instruction.
 >
 > Example:
 >

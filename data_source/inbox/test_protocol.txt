@@ -1,0 +1,7 @@
+- Project: Test Protocol Alpha
+- We needed to verify the new ingestion pipeline for the portfolio.
+- I wrote a python script that connects to Gemini 1.5 Pro.
+- It takes text and audio.
+- The result was that we can now drop files in a folder and get markdown out.
+- It saved us about 10 hours of manual writing per week.
+- Tech used: Python, Google Gen AI SDK, VS Code.

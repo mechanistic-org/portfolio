@@ -1,6 +1,9 @@
 ---
-title: "Interaction Strategy: The Living Machine"
+title: "Interaction Strategy"
 slug: "interaction_strategy"
+sidebar:
+  group: "Reference"
+  order: 2
 ---
 # Interaction Strategy: The Living Machine
 

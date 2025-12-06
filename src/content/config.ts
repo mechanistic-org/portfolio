@@ -19,7 +19,7 @@ const projects = defineCollection({
         teamSize: z.string().optional(),
         skillData: z.any(),
         additionalSkills: z.array(z.string()).optional(),
-        phase_stats: z.record(z.number()), // WAS: phaseStats (Force Rebuild)
+        phase_stats: z.any(), // WAS: z.record(z.number()) - Loosened for debugging
         gallery: z.array(z.object({
             src: z.string(),
             width: z.number(),
@@ -59,6 +59,7 @@ const docs = defineCollection({
         draft: z.boolean().optional(),
         sidebar: z.object({
             label: z.string().optional(),
+            group: z.string().optional(),
             order: z.number().optional(),
             badge: z.object({
                 text: z.string(),

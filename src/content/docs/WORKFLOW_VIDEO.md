@@ -1,6 +1,9 @@
 ---
 title: "Video Asset Pipeline (SOP)"
 slug: "workflow_video"
+sidebar:
+  group: "Workflows"
+  order: 4
 ---
 # Video Asset Pipeline (SOP)
 

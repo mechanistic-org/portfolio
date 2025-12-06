@@ -1,7 +1,9 @@
 ﻿---
-title: "Site Maintenance Manual (IFU)
-"
+title: "Site Maintenance Manual"
 slug: "maintenance"
+sidebar:
+  group: "System Manual"
+  order: 2
 ---
 # Site Maintenance Manual (IFU)
 
@@ -164,6 +166,27 @@ status: {
 *   **Deep Linking:** You can link to a pre-filtered view using URL parameters: `https://eriknorris.com/projects?client=Google`.
 
 ## 8. Troubleshooting
+
+### "NO_DATA" in Dashboards (Schema Validation Trap)
+*   **Symptom:** `SkillRadar` or `ImpactResonance` shows placeholders even though data exists in the MDX frontmatter.
+*   **Cause:** Astro's Zod schema (`src/content/config.ts`) is too strict. If the Python script outputs a float (e.g., `85.0`) but Zod expects an interactive object, or vice-versa, Astro silently strips the entire field.
+*   **Fix:** **Loosen the Schema.** Change the field definition to `z.any()` in `config.ts` during debugging to confirm data flow, then tighten it only if strict layout safety is required.
+    ```typescript
+    // src/content/config.ts
+    phase_stats: z.any(), // WAS: z.record(z.number())
+    ```
+
+### Broken Docs Build (Missing Frontmatter)
+*   **Symptom:** Build fails with `[content] Error: ... required "title"`.
+*   **Cause:** A raw markdown file (like `implementation_plan.md`) was added to `src/content/docs/` without the required YAML frontmatter block.
+*   **Fix:** Ensure *every* `.md` file in the docs folder starts with:
+    ```yaml
+    ---
+    title: "Doc Title"
+    slug: "doc-slug"
+    description: "Brief summary"
+    ---
+    ```
 
 ### Asset Staging Mismatch (Ghost Assets)
 *   **Symptom:** You place assets in `R2_STAGING` but they don't appear after ingestion.

@@ -1,6 +1,9 @@
 ---
 title: "Branding Migration Guide"
 description: "Guide for migrating branding assets to the new system."
+sidebar:
+  group: "Workflows"
+  order: 5
 ---
 # Branding Migration Guide
 

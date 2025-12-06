@@ -1,7 +1,9 @@
 ﻿---
-title: "QUANTUM: Design Language System (DLS)
-"
+title: "Design Language System (DLS)"
 slug: "style_guide"
+sidebar:
+  group: "Reference"
+  order: 1
 ---
 # QUANTUM: Design Language System (DLS)
 

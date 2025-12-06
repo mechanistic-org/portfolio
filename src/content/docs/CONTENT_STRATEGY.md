@@ -1,22 +1,79 @@
 ﻿---
-title: "Content Strategy & Workflow
-"
+title: "Content Strategy & Workflow"
 slug: "content_strategy"
+sidebar:
+  group: "Workflows"
+  order: 1
 ---
 # Content Strategy & Workflow
 
-## The Hybrid Content System
-Quantum uses a **Hybrid Architecture** to manage project data. This approach combines the structured efficiency of CSVs with the expressive power of Markdown.
+## 1. The Philosophy: Zero-Friction Ingestion
+The goal is to convert raw "Brain Dumps" and "Legacy Bullets" into "Datasheet-Grade" portfolio case studies with minimal effort.
 
-### 1. Structured Data (CSV)
-*   **Source:** `data_source/Main.csv`, `Expertise.csv`, etc.
-*   **Purpose:** Metadata, metrics, tags, dates, and relationships.
-*   **Why:** Easy to bulk edit, sort, and analyze. Perfect for the "Datasheet" aspect of the site.
+### The Architecture ("The Funnel")
+The system operates on a "Drop & Forget" principle. You place raw files into an `inbox`, and the system "mineralizes" them into structured Content.
 
-### 2. Narrative Content (Markdown)
+```mermaid
+graph LR
+    A[Voice Memo / Idea] -->|Save MP3| B(Inbox Folder)
+    C[Legacy Resume] -->|Save TXT| B
+    B -->|Watchdog Script| D{Ingestion Engine}
+    D -->|Transcribe| E[Whisper API]
+    D -->|Universal Prompt| F[LLM Synthesis]
+    E --> F
+    F -->|Output| G[data_source/manual_content]
+    G --> H[Astro Build]
+```
+
+---
+
+## 2. The Hybrid Content System
+Quantum uses a **Hybrid Architecture** to manage project data.
+
+### Structured Data (CSV)
+*   **Source:** `data_source/Main.csv`, `Expertise.csv`
+*   **Purpose:** Metadata, metrics, tags, dates.
+*   **Why:** Easy to bulk edit, sort, and analyze.
+
+### Narrative Content (Markdown)
 *   **Source:** `data_source/manual_content/{slug}.md`
-*   **Purpose:** Detailed case studies, storytelling, code blocks, and rich media.
-*   **Why:** Writing long-form content in CSV cells is painful and error-prone. Markdown offers a superior authoring experience.
+*   **Purpose:** Detailed case studies, storytelling, code blocks.
+*   **Why:** Markdown offers a superior authoring experience for long-form content.
+
+---
+
+## 3. Tooling Stack & Extraction Strategy
+
+### Phase 1: Capture (The Universal Inbox)
+*   **Location:** `data_source/inbox/`
+*   **Philosophy:** "Universal Inbox" Pattern. External scripts or humans dump files here; the engine consumes them.
+*   **Rule:** Use the **Smart Filename Schema**: `{slug}.{context}.{ext}`
+    *   **Simple:** `xbox.mp3` (Implies generic context)
+    *   **Contextual:** `xbox.technical.mp3` (Instructs LLM to focus on metrics)
+    *   **Social:** `nexus.linkedin.txt` (Instructs LLM to draft a post)
+    *   **Data:** `profile.github_stats.json` (Raw data ingestion)
+
+| Tag | Target Persona | Function |
+| :--- | :--- | :--- |
+| `technical` | **The Engineer** | Hard metrics, specs, tolerances. Strips all fluff. |
+| `walkthrough` | **The Architect** | Narrative "STAR" format. Focuses on design decisions and "Why". |
+| `rant` | **The Translate Filter** | Extracts valid feedback from frustration. |
+| `social` | **The Marketer** | Drafts posts for LinkedIn (Professional) and Twitter (Punchy). |
+| `raw` | **The Scribe** | Zero processing. Verbatim transcript/format only. |
+
+*   **Audio:** Record on phone, drop MP3/WAV.
+*   **Text:** Dump raw bullets or notes into TXT.
+
+### Phase 2: Synthesis (The Engine)
+We use **Gemini 2.5 Pro** via `scripts/ingest_inbox.py`.
+*   **Native Audio:** "Hears" tone and nuance directly from audio files.
+*   **Extraction:**
+    *   **Text Expansion:** Infers standard engineering context from brief resume bullets.
+    *   **Audio Structuring:** Filters "ums" and structures rambling into STAR format.
+    *   **Proxy Metrics:** Converts qualitative wins ("It didn't crash") into quantitative proxies ("Reliability: 100%").
+
+### Phase 3: Gap Analysis
+The system **fails loudly** if data is missing. It injects `> [!WARNING]` alerts into the generated Markdown, prompting you to fill specific gaps.
 
 ---
 

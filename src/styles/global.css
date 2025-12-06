@@ -52,13 +52,13 @@
 		--radius: 0.5rem;
 
 		/* default font */
-		font-family: var(--font-mono);
+		font-family: var(--font-mono), "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
 		/* Light Mode Grid Color (Process Blue C approx) */
 		--grid-color: rgba(0, 133, 202, 0.1);
 
 		/* Brutalist Header Font */
-		--font-header: "Inter", "Helvetica Neue", "Arial", sans-serif;
+		--font-header: "Inter", "Helvetica Neue", "Arial", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
 	}
 
 	html.dark {

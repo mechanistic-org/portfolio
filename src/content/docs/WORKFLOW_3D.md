@@ -1,6 +1,9 @@
 ---
 title: "3D Asset Pipeline (SOP)"
 slug: "workflow_3d"
+sidebar:
+  group: "Workflows"
+  order: 3
 ---
 # 3D Asset Pipeline (SOP)
 
