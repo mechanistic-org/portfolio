@@ -1,3 +1,9 @@
+---
+title: "Implementation Plan"
+slug: "implementation_plan"
+description: "Strategic plan for Quantum Systems Refinement and narrative restructuring."
+---
+
 # Implementation Plan: Quantum Systems Refinement (Post-Audit)
 
 **Objective:** Address the "Council of Voices" feedback while reinforcing the "15-20 Year Architecture" narrative.
