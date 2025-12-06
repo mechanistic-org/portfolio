@@ -1,8 +1,5 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import KPIDashboard from "../../components/Resume/KPIDashboard";
-import workHistory from "../../config/work_history.json";
-import specs from "../../config/specs.json";
 ---
 
 <BaseLayout title="KPI Resume" description="Data-driven view of professional performance.">
@@ -45,6 +42,10 @@ import specs from "../../config/specs.json";
 		</div>
 
 		<!-- React Dashboard Component -->
-		<KPIDashboard client:only="react" workHistory={workHistory} specs={specs} />
+		<div
+			class="rounded border border-dashed border-neutral-700 p-8 text-center font-mono text-neutral-500"
+		>
+			[ SYSTEM UPGRADE IN PROGRESS: MIGRATING TO D3 VISUALIZATION CORE ]
+		</div>
 	</div>
 </BaseLayout>

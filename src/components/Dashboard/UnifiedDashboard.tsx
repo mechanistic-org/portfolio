@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
-import SkillRadar from '../Projects/SkillRadar';
-import PhaseDonut from '../Projects/PhaseDonut';
-import { Area, AreaChart, Tooltip, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts';
+// import SkillRadar from '../Projects/SkillRadar'; // Removed for D3 Migration
+// import PhaseDonut from '../Projects/PhaseDonut'; // Removed for D3 Migration
+// import { Area, AreaChart, Tooltip, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'; // Removed
 import MultiverseGraph from '../DataViz/MultiverseGraph';
 
 
@@ -54,28 +54,24 @@ export default function UnifiedDashboard({
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-4 transition-colors">
 
                     {/* Gauge 1: Skill Fingerprint */}
-                    {data.skillData && (
-                        <div className="flex flex-col items-center justify-center">
-                            <div className="mb-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
-                                Skill Fingerprint
-                            </div>
-                            <div className="w-full h-[180px] pointer-events-none">
-                                <SkillRadar data={data.skillData} />
-                            </div>
+                    <div className="flex flex-col items-center justify-center">
+                        <div className="mb-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+                            Skill Fingerprint
                         </div>
-                    )}
+                        <div className="w-full h-[180px] flex items-center justify-center border border-dashed border-neutral-800 rounded-full opacity-50">
+                            <span className="text-[10px] font-mono text-neutral-600">D3_MIGRATION</span>
+                        </div>
+                    </div>
 
                     {/* Gauge 2: Phase Breakdown */}
-                    {data.phase_stats && (
-                        <div className="flex flex-col items-center justify-center">
-                            <div className="mb-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
-                                Phase Breakdown
-                            </div>
-                            <div className="w-full h-[180px] pointer-events-none">
-                                <PhaseDonut data={data.phase_stats} />
-                            </div>
+                    <div className="flex flex-col items-center justify-center">
+                        <div className="mb-2 font-mono text-[10px] uppercase tracking-widest text-neutral-500">
+                            Phase Breakdown
                         </div>
-                    )}
+                        <div className="w-full h-[180px] flex items-center justify-center border border-dashed border-neutral-800 rounded-full opacity-50">
+                            <span className="text-[10px] font-mono text-neutral-600">D3_MIGRATION</span>
+                        </div>
+                    </div>
 
                     {/* Gauge 3: Velocity / Impact (Placeholder) */}
                     <div className="flex flex-col items-center justify-center opacity-50 grayscale">
@@ -148,48 +144,10 @@ export default function UnifiedDashboard({
                         </div>
 
                         {/* Viz Area (Real Streamgraph) */}
-                        <div className="flex-1 rounded border border-dashed border-neutral-800 bg-neutral-900/30 p-1 relative min-h-[300px]">
-                            {/* Grid Lines */}
-                            <div className="absolute inset-0 z-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none"></div>
-
-                            <ResponsiveContainer width="100%" height="100%">
-                                <AreaChart
-                                    data={history.map((h, i) => ({
-                                        name: h.company,
-                                        start: new Date(h.start).getFullYear(),
-                                        end: h.end === 'Present' ? new Date().getFullYear() : new Date(h.end).getFullYear(),
-                                        // Mock 'Magnitude' based on duration or role
-                                        magnitude: 20 + Math.random() * 80
-                                    })).sort((a, b) => a.start - b.start)}
-                                    margin={{ top: 10, right: 0, left: -20, bottom: 0 }}
-                                >
-                                    <defs>
-                                        <linearGradient id="colorSignal" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#20C20E" stopOpacity={0.8} />
-                                            <stop offset="95%" stopColor="#20C20E" stopOpacity={0} />
-                                        </linearGradient>
-                                    </defs>
-                                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#333" />
-                                    <XAxis dataKey="start" tick={{ fill: '#666', fontSize: 10 }} tickLine={false} axisLine={false} />
-                                    <YAxis tick={false} axisLine={false} />
-                                    <Tooltip
-                                        contentStyle={{ backgroundColor: '#000', border: '1px solid #333' }}
-                                        itemStyle={{ color: '#20C20E', fontFamily: 'monospace' }}
-                                        labelStyle={{ color: '#888', marginBottom: '4px' }}
-                                    />
-                                    <Area
-                                        type="monotone"
-                                        dataKey="magnitude"
-                                        stroke="#20C20E"
-                                        strokeWidth={2}
-                                        fillOpacity={1}
-                                        fill="url(#colorSignal)"
-                                        animationDuration={2000}
-                                    />
-                                </AreaChart>
-                            </ResponsiveContainer>
-                            <div className="absolute bottom-2 right-2 font-mono text-[10px] text-neutral-600 z-10">
-                                SIGNAL_DENSITY: MONITORING
+                        <div className="flex-1 rounded border border-dashed border-neutral-800 bg-neutral-900/30 p-1 relative min-h-[300px] flex items-center justify-center">
+                            <div className="text-center">
+                                <div className="text-neutral-500 font-mono text-sm mb-2">STREAMGRAPH OFFLINE</div>
+                                <div className="text-neutral-700 text-xs">[ MIGRATING TO D3 PHYSICS ENGINE ]</div>
                             </div>
                         </div>
                     </div>
