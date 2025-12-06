@@ -19,7 +19,7 @@ const projects = defineCollection({
         teamSize: z.string().optional(),
         skillData: z.any(),
         additionalSkills: z.array(z.string()).optional(),
-        phase_stats: z.record(z.number()), // WAS: phaseStats
+        phase_stats: z.record(z.number()), // WAS: phaseStats (Force Rebuild)
         gallery: z.array(z.object({
             src: z.string(),
             width: z.number(),

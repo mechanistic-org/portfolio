@@ -456,16 +456,25 @@ See `docs/IMAGE_WORKFLOW.md` for the full SOP.
 
 ### Recharts "width(-1)" Error
 *   **Symptom:** Console spam: `The width(-1) and height(-1) of chart should be greater than 0`.
-*   **Cause:** `ResponsiveContainer` fails to measure its parent container, often because the parent has `display: flex` but no explicit width/height, causing a race condition during layout.
-*   **Fix:** Use **Fixed Dimensions** for the chart wrapper instead.
+*   **Cause:** `ResponsiveContainer` fails to measure its parent container in a Flexbox/Grid layout if the parent lacks an explicit constraint, causing it to collapse to 0px width temporarily.
+*   **Fix:** Add `min-width: 0` (Tailwind `min-w-0`) to the parent container of the `ResponsiveContainer`.
     ```tsx
-    // Bad
-    <ResponsiveContainer width="100%" height="100%"> ...
-    
-    // Good
-    <div style={{ width: '100%', height: '300px' }}>
-       <PieChart width={300} height={300}> ...
+    // Correct Pattern for Grid/Flex Items
+    <div style={{ width: '100%', height: '100%', minWidth: 0 }}>
+         <ResponsiveContainer width="100%" height="100%">
+             ...
+         </ResponsiveContainer>
+    </div>
     ```
+
+### Stale Content Collection Schema
+*   **Symptom:** Valid frontmatter data (e.g., `phase_stats`) is correctly defined in MDX and Schema, but appears as `undefined` in the component props.
+*   **Cause:** Astro's Content Layer cache can become stale, especially when renaming fields or changing Zod types in `config.ts`.
+*   **Fix:** Force a Schema Rebuild.
+    1. Open `src/content/config.ts`.
+    2. Make a trivial change (e.g., add a comment `// force rebuild`).
+    3. Save the file.
+    4. The dev server will pick up the new schema definition.
 
 ### AI Generation Quota (429)
 *   **Symptom:** `generate_image` tool fails with "Resource Exhausted" or "Quota Exhausted".
@@ -527,3 +536,16 @@ Importing code from other themes often introduces inconsistent casing (e.g., `co
 4.  **Linter Enforcement:**
     *   We enforce `PascalCase` for component filenames (`MyComponent.astro`) and `kebab-case` for directories/pages (`my-page/index.astro`).
 
+### Ingestion Script Crash (`AttributeError: 'NoneType' has no attribute 'strip'`)
+*   **Context:** Occurs during `python ingest_data.py`.
+*   **Cause:** A column exists in the CSV header (e.g., `Impact`) but is empty for some rows, and the parser attempts to `.strip()` a `None` value.
+*   **Fix:** Use safe retrieval in the dictionary comprehension:
+    ```python
+    # ingest_data.py
+    clean_row = {k.strip(): (v.strip() if v else "") for k, v in row.items() if k}
+    ```
+
+### Changes Disappear After Build
+*   **Context:** You edited a file, ran `npm run dev`, and your changes vanished.
+*   **Cause:** You likely edited a build artifact (e.g., `src/content/projects/dreamjob.mdx`) instead of the source (`data_source/manual_content/dreamjob.md`).
+*   **Fix:** Apply edits to the `data_source/` files.

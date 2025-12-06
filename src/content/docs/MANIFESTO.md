@@ -64,3 +64,6 @@ We do not rely on build-time plugins to guess how an image should look. Art dire
 *   **Practice:** Use Streamgraphs, Tickers, and dense Grids to visualize the "Magnitude" of the career. If the data exists, put it on the glass.
 
 
+### 12. The Data God's Law
+**"The Projection is not the Reality."**
+The website (`src`) is merely a transient rendering of the underlying data (`data_source`). We honor the CSV as the single source of truth. We do not paint over the mirror; we change the object being reflected.

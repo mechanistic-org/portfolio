@@ -24,7 +24,7 @@ const features = Object.values(globFeatures)
 // Add System Documentation manually
 features.unshift({
 	id: "docs",
-	slug: "../docs", // Relative path to break out of /colophon route
+	slug: "/docs/", // Absolute path to the docs section
 	title: "System Documentation",
 	description: "Internal operating procedures, architecture diagrams, and style guides.",
 	icon: "book",
@@ -53,11 +53,12 @@ const marqueeTools = [...tools, ...tools, ...tools];
 >
 	<section class="pt-32 pb-24">
 		<div class="site-container mb-24 text-center">
-			<div
-				class="border-primary/30 bg-primary/10 text-primary mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-xs tracking-widest uppercase"
+			<button
+				onclick="window.dispatchEvent(new CustomEvent('open-command-menu'))"
+				class="border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 mb-6 inline-flex cursor-pointer items-center gap-2 rounded-full border px-3 py-1 font-mono text-xs tracking-widest uppercase transition-colors"
 			>
 				System Architecture
-			</div>
+			</button>
 			<h1 class="mb-8 text-5xl font-bold tracking-tight text-white md:text-7xl">
 				The Meta-Portfolio
 			</h1>

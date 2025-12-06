@@ -1,5 +1,6 @@
 ﻿---
-title: "System Instruction: Brand Alignment & Style Guide Protocol"
+title: "System Instruction: Brand Alignment & Style Guide Protocol
+"
 slug: "branding_prompt"
 ---
 # System Instruction: Brand Alignment & Style Guide Protocol
@@ -50,3 +51,7 @@ Review the above, then generate the `docs/STYLE_GUIDE.md` and propose 3 candidat
 *   **Naming Convention:** Use `_black` and `_white` suffixes (e.g., `EN_logo_black_1200.svg`).
 
 
+### Noise Overlay
+*   **Implementation:** CSS-only base64 SVG pattern.
+*   **Usage:** Applied strictly to `BaseLayout` via `.noise-overlay` utility.
+*   **Opacity:** 0.03 (Very subtle). Adds "analog weight" to the digital interface.

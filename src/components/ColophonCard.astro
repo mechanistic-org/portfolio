@@ -26,7 +26,10 @@ const date = pubDate ? new Date(pubDate) : new Date();
 ---
 
 <article class:list={["group @container w-full", className]} {...rest}>
-	<a href={`/colophon/${slug}/`} class="block h-full">
+	<a
+		href={slug.startsWith("/") || slug.startsWith("http") ? slug : `/colophon/${slug}/`}
+		class="block h-full"
+	>
 		<div
 			class="group-hover:border-primary/50 h-full border border-neutral-800 bg-neutral-950 transition-colors duration-300"
 		>

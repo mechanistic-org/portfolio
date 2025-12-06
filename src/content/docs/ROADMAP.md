@@ -1,4 +1,7 @@
 ﻿---
+title: "Roadmap"
+slug: "roadmap"
+---
     *   **Colophon:** Architecture breakdown and Tech Stack marquee.
     *   **Global:** Construction Badge (Status & Commit SHA).
 *   **Infrastructure:** Cloudflare R2 Asset Hosting with Staging/Production workflow.
@@ -199,3 +202,9 @@
     *   **Description:** A dedicated `/raw/[slug]` route that bypasses the layout engine to serve the unadulterated Markdown source of any project, reinforcing the "Physical Asset Law" and open engineering culture.
 
 
+#### [2025-12-05] The "Fortissimo" Update
+*   **Navigation:** Renamed generic "Work" link to "Projects" (`navData.json.ts`).
+*   **Visuals:** Implemented global "Noise Overlay" (CSS base64 SVG) for "Hyper-Functional Brutalism" texture.
+*   **Narrative:** Rebranded "Dreamjob" to "The North Star Protocol".
+*   **Data:** Added `Impact` field to `Main.csv` schema.
+*   **Colophon:** Integrated "Audit Personas" (The Hater, The Recruiter, The Data God) into the Testimonial Wall.

@@ -73,7 +73,7 @@ export default function PhaseDonut({ data }: { data: PhaseData }) {
     };
 
     return (
-        <div style={{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div style={{ width: '100%', height: '100%', minWidth: 0, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                     <Pie

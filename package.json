@@ -21,6 +21,7 @@
 		"@astrojs/rss": "4.0.13",
 		"@astrojs/sitemap": "3.6.0",
 		"@fontsource-variable/jetbrains-mono": "5.2.8",
+		"@iconify-json/tabler": "^1.2.23",
 		"@iconify-json/tdesign": "1.2.10",
 		"@keystatic/astro": "5.0.6",
 		"@keystatic/core": "0.5.48",

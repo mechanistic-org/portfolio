@@ -1,19 +1,69 @@
 ---
-import { getCollection, render } from "astro:content";
+// import { getCollection, render } from "astro:content"; // Removed
 import DocsLayout from "@/components/Docs/DocsLayout.astro";
 
 export async function getStaticPaths() {
-	const docs = await getCollection("docs");
-	return docs.map((doc) => ({
-		params: { slug: doc.slug },
-		props: { doc },
-	}));
+	const globDocs = import.meta.glob("../../content/docs/**/*.{md,mdx}", { eager: true });
+
+	const docs = Object.values(globDocs).map((file: any) => {
+		const data = file.frontmatter || {};
+		const filenameParts = file.file.split("/");
+		const filename = filenameParts[filenameParts.length - 1].replace(/\.(mdx|md)$/, "");
+
+		const slug = data.slug || filename;
+
+		return {
+			params: { slug },
+			props: { file, slug },
+		};
+	});
+
+	// Sort docs to determine order for prev/next
+	// Reuse sort logic from index/sidebar
+	const sortedDocs = docs.sort((a, b) => {
+		const orderA = a.props.file.frontmatter?.sidebar?.order ?? 999;
+		const orderB = b.props.file.frontmatter?.sidebar?.order ?? 999;
+		if (orderA !== orderB) return orderA - orderB;
+		return a.params.slug.localeCompare(b.params.slug);
+	});
+
+	return sortedDocs.map((doc, index) => {
+		const prevDoc = sortedDocs[index - 1];
+		const nextDoc = sortedDocs[index + 1];
+
+		return {
+			...doc,
+			props: {
+				...doc.props,
+				prev: prevDoc
+					? {
+							slug: prevDoc.params.slug,
+							title: prevDoc.props.file.frontmatter?.title || prevDoc.params.slug,
+						}
+					: null,
+				next: nextDoc
+					? {
+							slug: nextDoc.params.slug,
+							title: nextDoc.props.file.frontmatter?.title || nextDoc.params.slug,
+						}
+					: null,
+			},
+		};
+	});
 }
 
-const { doc } = Astro.props;
-const { Content, headings } = await render(doc);
+const { file, slug, prev, next } = Astro.props;
+const Content = file.Content || file.default;
+const headings = file.getHeadings ? await file.getHeadings() : [];
+
+// Mock collection entry for the layout
+const doc = {
+	slug: slug,
+	data: file.frontmatter || {},
+	collection: "docs",
+};
 ---
 
-<DocsLayout doc={doc} headings={headings}>
+<DocsLayout doc={doc} headings={headings} prev={prev} next={next}>
 	<Content />
 </DocsLayout>

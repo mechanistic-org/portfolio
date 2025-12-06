@@ -31,7 +31,7 @@ export default function SkillRadar({ data }: { data: SkillPoint[] | string }) {
 
   return (
     // Responsive container
-    <div className="w-full h-full min-h-[180px]">
+    <div className="w-full h-full min-h-[180px] min-w-0">
       <ResponsiveContainer width="100%" height="100%">
         <RadarChart cx="50%" cy="50%" outerRadius="70%" data={safeData}>
           <PolarGrid stroke="#404040" />

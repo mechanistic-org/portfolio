@@ -1,20 +1,53 @@
 ---
-import { getCollection } from "astro:content";
+// Workaround for empty collection issue: manually load files via glob
+const globDocs = import.meta.glob("../../content/docs/**/*.{md,mdx}", { eager: true });
+const docs = Object.values(globDocs)
+	.map((file: any) => {
+		const data = file.frontmatter || {};
+		// Extract slug from filename if not in frontmatter
+		// Handle nested directories if needed, but for now flat fallback
+		const filenameParts = file.file.split("/");
+		const filename = filenameParts[filenameParts.length - 1].replace(/\.(mdx|md)$/, "");
+		// If file is in a subdirectory (e.g. prompts/foo.md), preserve path?
+		// Current docs use direct slugs in frontmatter usually.
+		return {
+			slug: data.slug || filename,
+			data: data,
+		};
+	})
+	.sort((a, b) => {
+		// Priority sort for specific slugs
+		const priority = ["architecture", "introduction", "readme", "onboarding_prompt"];
+		const slugA = a.slug.toLowerCase();
+		const slugB = b.slug.toLowerCase();
 
-// Redirect to the first doc (likely ONBOARDING_PROMPT or README if present, or just the first one)
-const docs = await getCollection("docs");
+		const idxA = priority.indexOf(slugA);
+		const idxB = priority.indexOf(slugB);
 
-// Sort to find a good default
-const sortedDocs = docs.sort((a, b) => {
-	const slugA = a.slug.toLowerCase();
-	const slugB = b.slug.toLowerCase();
-	if (slugA.includes("onboarding")) return -1;
-	if (slugB.includes("onboarding")) return 1;
-	return slugA.localeCompare(slugB);
-});
+		if (idxA !== -1 && idxB !== -1) return idxA - idxB;
+		if (idxA !== -1) return -1;
+		if (idxB !== -1) return 1;
 
-const firstDoc = sortedDocs[0];
-const destination = firstDoc ? `/docs/${firstDoc.slug}` : "/";
+		// Then by order
+		const orderA = a.data.sidebar?.order ?? 999;
+		const orderB = b.data.sidebar?.order ?? 999;
 
+		if (orderA !== orderB) return orderA - orderB;
+
+		return slugA.localeCompare(slugB);
+	});
+
+// Debug log
+console.log("Glob Docs found:", docs.length);
+
+const firstDoc = docs[0];
+
+if (!firstDoc) {
+	return new Response("Docs collection is empty (glob failed). Check server logs.", {
+		status: 404,
+	});
+}
+
+const destination = `/docs/${firstDoc.slug}`;
 return Astro.redirect(destination);
 ---

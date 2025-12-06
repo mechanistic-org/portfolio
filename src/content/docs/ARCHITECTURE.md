@@ -1,21 +1,14 @@
 ﻿---
-title: "Architecture & Data Schema
-"
+title: "System Architecture"
 slug: "architecture"
 ---
-# Architecture & Data Schema
 
-## ðŸ—ï¸ System Overview
-*   **Framework:** Astro v5 (Static Site Generation)
-*   **Styling:** Tailwind v4
-    *   **Theme:** Brutalist Typography (Inter headers + JetBrains Mono body).
-    *   **Visuals:** Technical Grid (radial gradient) + Transparent Navigation.
-    *   **Prose Overrides:** We override default `prose` classes in `src/pages/projects/[...slug].astro` to enforce the brand identity:
-        *   **Font Stack:** Forces `font-mono` (JetBrains Mono) for body text and `font-sans` (Inter) for headers.
-        *   **Custom CSS:** Specific overrides for `blockquote`, `a`, and `h2` elements to match the Brutalist design tokens (hard edges, specific colors).
-    *   **Markdown Content:** We use a dedicated `markdown-content` utility class (defined in `src/styles/markdown-content.css`) to enforce DLS typography within MDX files.
-        *   **Headers:** Explicitly forced to `var(--font-header)` (Inter) to prevent falling back to the mono body font.
-        *   **Usage:** Must be applied to the wrapper div of any MDX content render (e.g., `<div class="markdown-content"><Content /></div>`).
+*   **Prose Overrides:** We override default `prose` classes in `src/pages/projects/[...slug].astro` to enforce the brand identity:
+    *   **Font Stack:** Forces `font-mono` (JetBrains Mono) for body text and `font-sans` (Inter) for headers.
+    *   **Custom CSS:** Specific overrides for `blockquote`, `a`, and `h2` elements to match the Brutalist design tokens (hard edges, specific colors).
+*   **Markdown Content:** We use a dedicated `markdown-content` utility class (defined in `src/styles/markdown-content.css`) to enforce DLS typography within MDX files.
+    *   **Headers:** Explicitly forced to `var(--font-header)` (Inter) to prevent falling back to the mono body font.
+    *   **Usage:** Must be applied to the wrapper div of any MDX content render (e.g., `<div class="markdown-content"><Content /></div>`).
 *   **Interactivity:** React (for Charts), Vanilla JS (for 3D & UI)
 *   **Architecture:** Originally a forced initial-load effect, it was refactored to be **opt-in** to prevent FOUC (Flash of Unstyled Content) and improve UX. It is now triggered manually via the "RESTART" button in the footer.
 
@@ -34,38 +27,6 @@ slug: "architecture"
 *   **Keystatic Integration:** In `astro.config.mjs`, `keystatic()` **MUST** be the last item in the `integrations` array. If placed earlier, it causes `virtual:keystatic-config` resolution errors during the build.
 *   **Vite Optimization:** The `axobject-query` package (used by accessibility linters) must be excluded from Vite's optimization to prevent runtime `SyntaxError` issues in the browser (`optimizeDeps.exclude: ["axobject-query"]`).
 
-### Hybrid Content Loading
-We use a hybrid approach for loading content to balance features and stability:
-*   **`projects` Collection:** Uses standard `getCollection()` for full type safety and schema validation.
-*   **`colophon` Collection:** Uses `import.meta.glob()` as a robust workaround for a known issue where `getCollection` returns empty arrays for this specific collection.
-    *   **Trade-off:** Slightly less type safety (requires manual mapping), but guarantees content availability.
-
-### Auto-Imports
-*   **Tool:** `astro-auto-import`
-*   **Purpose:** Reduces boilerplate by automatically importing core DLS components (e.g., `Admonition`, `Newsletter`) into all MDX files.
-*   **Gotcha:** Do **NOT** manually import these components in your markdown files. Doing so causes a "Duplicate Identifier" build error.
-
-## ðŸŒ Environment Awareness
-The site adapts its UI based on the build environment and configuration.
-
-### Construction Badge
-*   **Component:** `ConstructionBadge.astro`
-*   **Configuration:** `src/config/siteData.json.ts` (`status.type`)
-*   **Logic:**
-    *   **Local Development:** Displays `[ LOCAL DEV ]` (Amber).
-    *   **Production (Under Construction):** Displays `[ UNDER CONSTRUCTION: <SHA> ]` (Red).
-    *   **Production (Live):** Badge is hidden.
-    *   **Maintenance:** Displays `[ MAINTENANCE ]` (Red).
-*   **Commit SHA:** Pulled from `CF_PAGES_COMMIT_SHA` (Cloudflare) or `GITHUB_SHA` (GitHub Actions).
-
-## ðŸ”„ Data Ingestion Pipeline
-The `ingest_data.py` script is the heart of the build process. It transforms raw CSV data into structured content for Astro.
-
-### Workflow
-1.  **Read CSVs:** Parses `Main.csv` and auxiliary files.
-    *   **Slug Generation:** Prioritizes the `Slug Name` column if present. Fallbacks to `Name`. This allows the display title ("002 Rack") to differ from the filename (`rack-002`) to ensure valid MDX identifiers.
-    *   **Validation:** The script warns if a generated slug starts with a digit.
-2.  **Generate Charts:** Creates `skill-graph.svg` (Radar) and `part-graph.svg` (Donut) using Matplotlib.
 2.  **Smart Header Hunting:** In `Expertise.csv`, the script dynamically locates the "Project Start" header row to handle the complex matrix structure (Skills vs Projects) and extracts metadata like "Phase" and "Weight".
 3.  **Asset Discovery:** Scans for assets in the following priority:
     1.  `R2_STAGING_PATH` (Env Var)

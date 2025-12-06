@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom';
 interface SearchItem {
     id: string;
     title: string;
-    type: 'Project' | 'Field Note' | 'Page';
+    type: 'Project' | 'Field Note' | 'Page' | 'System';
     href: string;
     description?: string;
 }
@@ -16,6 +16,7 @@ const STATIC_ITEMS: SearchItem[] = [
     { id: 'blog', title: 'Field Notes', type: 'Page', href: '/blog/' },
     { id: 'about', title: 'About', type: 'Page', href: '/about/' },
     { id: 'colophon', title: 'Colophon', type: 'Page', href: '/colophon/' },
+    { id: 'docs', title: 'System Documentation', type: 'System', href: '/docs/' },
 ];
 
 const CommandMenu: React.FC = () => {

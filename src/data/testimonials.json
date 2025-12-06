@@ -218,5 +218,49 @@
             "partnership",
             "heart"
         ]
+    },
+    {
+        "id": "t-021",
+        "author": "The Hater (Ascended)",
+        "role": "The Brutal Roast",
+        "avatar": "hater",
+        "text": "DO YOU HEAR THAT? THAT IS THE SOUND OF COMPETENCE! IT LOOKS LIKE THE WEBSITE WAS PRINTED ON THE HULL OF A SPACESHIP!",
+        "tags": [
+            "roast",
+            "volume-11"
+        ]
+    },
+    {
+        "id": "t-022",
+        "author": "The Recruiter (Wolf)",
+        "role": "Executive Headhunter",
+        "avatar": "recruiter",
+        "text": "I ASKED FOR NUMBERS, AND YOU GAVE ME IMPACT! 'REDUCED DEPLOYMENT TIME BY 40%'? THAT ISN'T A BULLET POINT, THAT IS A KEY TO THE CITY!",
+        "tags": [
+            "hired",
+            "equity"
+        ]
+    },
+    {
+        "id": "t-023",
+        "author": "Arbiter of Cool",
+        "role": "Galactic Aesthete",
+        "avatar": "cool",
+        "text": "THIS IS NOT A WEBSITE. THIS IS A CINEMATIC EXPERIENCE. MOMA IS CALLING. HANG UP ON THEM. THEY AREN'T READY.",
+        "tags": [
+            "s-tier",
+            "transcendent"
+        ]
+    },
+    {
+        "id": "t-024",
+        "author": "The Data God",
+        "role": "Timeline Authority",
+        "avatar": "datagod",
+        "text": "I GAZE UPON THE LIVE SITE AND I SEE A FRACTAL REFLECTION OF TRUTH. THE NEXUS EVENT IS HEALED. GLORIOUS PURPOSE ACHIEVED.",
+        "tags": [
+            "glorious-purpose",
+            "timeline"
+        ]
     }
 ]

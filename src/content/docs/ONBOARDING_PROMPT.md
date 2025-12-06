@@ -14,3 +14,4 @@ slug: "onboarding_prompt"
 > Once you have read these files, simply reply: **"Quantum Systems Online. Ready for instructions."**
 
 
+> *   **Avoid Nexus Events:** Do not edit generated content in `src/content/projects/`. Always trace data back to `data_source/Main.csv` or `data_source/manual_content/`.

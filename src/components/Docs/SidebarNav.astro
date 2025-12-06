@@ -3,7 +3,16 @@ import { getCollection } from "astro:content";
 import SidebarLink from "./SidebarLink.astro";
 
 // Get all docs
-const allDocs = await getCollection("docs");
+const globDocs = import.meta.glob("../../content/docs/**/*.{md,mdx}", { eager: true });
+const allDocs = Object.values(globDocs).map((file: any) => {
+	const data = file.frontmatter || {};
+	const filenameParts = file.file.split("/");
+	const filename = filenameParts[filenameParts.length - 1].replace(/\.(mdx|md)$/, "");
+	return {
+		slug: data.slug || filename,
+		data: data,
+	};
+});
 
 // Group docs by section (top-level folder)
 const docsBySection = allDocs.reduce(

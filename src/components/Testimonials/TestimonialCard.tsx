@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconCode, IconCpu, IconBuildingArch, IconBug, IconPalette, IconHistory, IconRobot, IconQuote } from '@tabler/icons-react';
+import { IconCode, IconCpu, IconBuildingArch, IconBug, IconPalette, IconHistory, IconRobot, IconQuote, IconFlame, IconBriefcase, IconSunglasses, IconDatabase } from '@tabler/icons-react';
 
 const iconMap: Record<string, any> = {
     linter: IconCode,
@@ -9,6 +9,10 @@ const iconMap: Record<string, any> = {
     designer: IconPalette,
     historian: IconHistory,
     agent: IconRobot,
+    hater: IconFlame,
+    recruiter: IconBriefcase,
+    cool: IconSunglasses,
+    datagod: IconDatabase,
 };
 
 interface TestimonialCardProps {

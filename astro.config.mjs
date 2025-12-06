@@ -78,7 +78,7 @@ export default defineConfig({
                 "work-history",
                 "share",
             ],
-            tabler: ["menu-2"],
+            tabler: ["menu-2", "chevron-left", "chevron-right"],
         }),
         expressiveCode(expressiveCodeOptions),
         mdx(),
