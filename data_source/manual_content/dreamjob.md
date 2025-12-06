@@ -4,10 +4,12 @@ import Chip from '@components/dls/Chip.astro';
 import Wire from '@components/dls/Wire.astro';
 import ScrambleText from '@components/Effects/ScrambleText.tsx';
 
-## The Meta-Challenge
-> **Context:** The "Dream Job" is not a destination; it is a continuous loop of optimization.
+## The North Star Protocol
+> **Context:** This is not a placeholder. This is the **Target Coordinate**.
 
-The objective was to engineer a **Visual Taxonomy** that serves as the "Rosetta Stone" for the Quantum Design Language System. This project acts as a stress test for the ingestion pipeline, the rendering engine, and the "Hyper-Functional Brutalist" aesthetic.
+The "Dream Job" is a constructed reality representing the next 15-20 years of professional evolution. It is the convergence of **Mechanical Engineering**, **Software Architecture**, and **Design Systems**.
+
+The objective is to find a role that demands the full spectrum of these capabilities—where "Full Stack" means everything from the kernel to the injection mold.
 
 <Admonition variant="info">
   **System Note:** This page demonstrates every available view type and component in the Quantum arsenal.

@@ -80,7 +80,7 @@ def read_csv_smart(filepath, header_trigger="Name", required_headers=None):
     reader = csv.DictReader(lines[start_idx:])
     data = []
     for row in reader:
-        clean_row = {k.strip(): v.strip() for k, v in row.items() if k}
+        clean_row = {k.strip(): (v.strip() if v else "") for k, v in row.items() if k}
         if clean_row: data.append(clean_row)
     return data
 
@@ -906,6 +906,7 @@ duration: "{duration_str}"
 statusLabel: "{status_label}"
 skillGraph: "{skill_graph_url}"
 partGraph: "{part_graph_url}"
+impact: "{row.get('Impact', '')}"
 ---
 {content_body}
 """
