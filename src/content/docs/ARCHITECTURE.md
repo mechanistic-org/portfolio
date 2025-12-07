@@ -13,6 +13,21 @@ sidebar:
     *   **Headers:** Explicitly forced to `var(--font-header)` (Inter) to prevent falling back to the mono body font.
     *   **Usage:** Must be applied to the wrapper div of any MDX content render (e.g., `<div class="markdown-content"><Content /></div>`).
 *   **Interactivity:** React (for Charts), Vanilla JS (for 3D & UI)
+
+### Scroll Coordination System
+To create a "cinematic" feel without heavy libraries (like GSAP), we implemented a lightweight, headless `ScrollCoordinator` component.
+
+*   **Component:** `src/components/Effects/ScrollCoordinator.astro`
+*   **Strategy:** "Tag and Animate" via Data Attributes.
+*   **Logic:**
+    *   Listens to `window.scrollY`.
+    *   Queries elements with `[data-scroll-effect]`.
+    *   Applies hardware-accelerated transforms (`translateY`) and opacity changes.
+*   **Effects:**
+    *   `flee`: Moves elements UP faster than scroll (1.5x speed) and fades them out. Used for Headers/Intros to clear the stage.
+    *   `fade-out`: Fades elements out and moves them DOWN slightly (0.1x) for a parquet/parallax depth effect.
+    *   `focus`: Fades elements IN (opacity 0.2 -> 1.0). Used for background visualizations (D3 Graphs) to bring them to attention when foreground content clears.
+
 *   **Architecture:** Originally a forced initial-load effect, it was refactored to be **opt-in** to prevent FOUC (Flash of Unstyled Content) and improve UX. It is now triggered manually via the "RESTART" button in the footer.
 
 ### Visible Grid
@@ -98,6 +113,7 @@ Assets are managed physically, not logically.
     *   **Components:**
         *   **`SkillRadarD3.tsx`:** Custom SVG implementation of the radar chart with precise grid control.
         *   **`PhaseDonutD3.tsx`:** Interactive donut chart leveraging D3 arc generators.
+            *   *Refactor Note:* Accepts `Array<{ phase: string, value: number }>` instead of `Record` to align with the "Snake Case Strategy" and improve reliability.
         *   **`ImpactResonance.tsx`:** Physics-based "System Velocity" gauge using D3 timer loops for organic pulsing effects.
 *   **`ProjectGallery.tsx`:**
     *   **Layout:** "Smart Bento" CSS Grid.

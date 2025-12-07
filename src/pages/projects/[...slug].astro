@@ -31,7 +31,7 @@ const { Content, headings } = await render(entry);
 const data = entry.data as any;
 console.log("SLUG:", entry.id);
 console.log("DATA KEYS:", JSON.stringify(Object.keys(data)));
-console.log("PHASE STATS DUMP:", JSON.stringify(data.phase_stats));
+console.log("PHASE STATS DUMP:", JSON.stringify(data.phases));
 
 // Format dates
 const dateVal = data.date || new Date();

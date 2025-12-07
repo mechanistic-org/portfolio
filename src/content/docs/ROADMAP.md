@@ -170,8 +170,15 @@ sidebar:
 *   **[Feature] D3 Skills Graph:** Added interactive force-directed graph for skill visualization.
 *   **[Feature] Homepage Parallax:** Added scroll-driven vertical parallax and "Scroll to Init" indicator to Hero.
 *   **[Refactor] Radial View:** Replaced static `hierarchy.json` with dynamic generation; fixed "Other" category grouping; added interaction (click-to-filter).
+*   **[Feature] Sitewide Scroll Physics:** Standardized "Flee", "Fade", and "Focus" effects across Home, About, and Projects.
+*   **[Feature] D3 Interaction:** Added "Jiggle" physics and size-pop on hover for Skills Graph.
 
 ## Colophon / Meta-Portfolio
+### Narrative Scroll Engine (ScrollCoordinator)
+*   **Hook:** "Turns static layouts into cinematic, depth-aware stages."
+*   **Tech:** Astro, Vanilla JS, CSS Transforms.
+*   **Description:** A headless behavior engine that orchestrates the "entrance and exit" of UI actors based on scroll position, allowing "Technical Topography" (data layers) to emerge as "Marketing Fluff" (headers) recedes.
+
 ### Dynamic Radial Taxonomy
 *   **Hook:** Visualizing the career ecosystem without manual data curation.
 *   **Tech:** D3.js (Cluster Layout), React, Astro Content Collections.

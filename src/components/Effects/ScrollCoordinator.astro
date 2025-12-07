@@ -1,0 +1,99 @@
+---
+layout: null;
+---
+
+<script>
+	// Scroll Coordinator: The Central Nervous System for Scroll Effects
+	// Looks for elements with 'data-scroll-effect' attributes and animates them.
+
+	function initScrollCoordinator() {
+		const fleeElements = document.querySelectorAll('[data-scroll-effect="flee"]');
+		const fadeElements = document.querySelectorAll('[data-scroll-effect="fade-out"]');
+		const focusElements = document.querySelectorAll('[data-scroll-effect="focus"]');
+		const labels = document.querySelectorAll('[data-scroll-effect="label"]');
+
+		if (fleeElements.length === 0 && fadeElements.length === 0 && focusElements.length === 0)
+			return;
+
+		function onScroll() {
+			const scrollY = window.scrollY;
+
+			// 1. Flee: Elements that run away (Intro Headers)
+			fleeElements.forEach((el) => {
+				const element = el as HTMLElement;
+				// Caps at 400px so it doesn't fly off to space forever if page is long
+				const maxOffset = 400;
+				const wallOffset = Math.min(scrollY * 1.5, maxOffset);
+
+				element.style.transform = `translateY(-${wallOffset}px)`;
+				element.style.opacity = Math.max(1 - scrollY / 300, 0).toString();
+
+				// Optimization: Hide if fully invisible
+				if (scrollY > 300) {
+					element.style.pointerEvents = "none";
+				} else {
+					element.style.pointerEvents = "auto";
+				}
+			});
+
+			// 2. Fade Out: Elements that gently recede (Parquet Lists)
+			fadeElements.forEach((el) => {
+				const element = el as HTMLElement;
+				const fadeStart = 200;
+				const fadeEnd = 800;
+				let opacity = 1;
+
+				if (scrollY > fadeStart) {
+					opacity = Math.max(0, 1 - (scrollY - fadeStart) / (fadeEnd - fadeStart));
+				}
+
+				element.style.opacity = opacity.toString();
+				// Gentle parallax slide down
+				element.style.transform = `translateY(${scrollY * 0.1}px)`;
+
+				if (opacity < 0.1) {
+					element.classList.add("pointer-events-none");
+				} else {
+					element.classList.remove("pointer-events-none");
+				}
+			});
+
+			// 3. Focus: Elements that emerge (D3 Graphs)
+			focusElements.forEach((el) => {
+				const element = el as HTMLElement;
+				const focusStart = 300;
+				const focusEnd = 900;
+				let focusOpacity = 0.2; // Base opacity
+
+				if (scrollY > focusStart) {
+					const progress = Math.min(
+						1,
+						Math.max(0, (scrollY - focusStart) / (focusEnd - focusStart)),
+					);
+					focusOpacity = 0.2 + progress * 0.8;
+				}
+
+				element.style.opacity = focusOpacity.toString();
+			});
+
+			// 4. Label Toggle
+			labels.forEach((el) => {
+				const element = el as HTMLElement;
+				if (scrollY > 800) {
+					element.classList.remove("opacity-0");
+				} else {
+					element.classList.add("opacity-0");
+				}
+			});
+		}
+
+		// Ticking optimization could be added here, but for now simple listener is robust enough
+		window.addEventListener("scroll", onScroll);
+		// Initial call
+		onScroll();
+	}
+
+	// Initialize on load and on View Transitions
+	initScrollCoordinator();
+	document.addEventListener("astro:after-swap", initScrollCoordinator);
+</script>

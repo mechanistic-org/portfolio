@@ -69,23 +69,23 @@ const SkillsGraph: React.FC<Props> = ({ skillsData, projects }) => {
             const group = matchedProject ? matchedProject.data.industry : 'General';
 
             const avg = stats.total / stats.count;
-            // Scale value for visuals
+            // Scale value for visuals - BIGGER NODES
             return {
                 id: skill,
                 value: avg,
                 group: group,
-                r: Math.sqrt(avg) * 4 + 4, // Radius formula
+                r: Math.sqrt(avg) * 6 + 6, // Increased base size from 4->6 and linear offset 4->6
                 x: 0,
                 y: 0
             };
-        }).filter(n => n.value > 2); // Filter lowest skills if needed
+        }).filter(n => n.value > 2); // Filter lowest skills
     }, [skillsData, projects]);
 
     useEffect(() => {
         if (!svgRef.current || !containerRef.current || nodes.length === 0) return;
 
         const width = containerRef.current.clientWidth;
-        const height = 500; // Fixed height for now or responsive prop
+        const height = containerRef.current.clientHeight;
 
         const svg = d3.select(svgRef.current)
             .attr("viewBox", [0, 0, width, height]);
@@ -95,15 +95,15 @@ const SkillsGraph: React.FC<Props> = ({ skillsData, projects }) => {
         // Color Scale
         const color = d3.scaleOrdinal(d3.schemeTableau10);
 
-        // Simulation
+        // Simulation setup
         const simulation = d3.forceSimulation(nodes)
-            .force("charge", d3.forceManyBody().strength(5))
-            .force("collide", d3.forceCollide().radius((d: any) => d.r + 2).iterations(2))
-            .force("center", d3.forceCenter(width / 2, height / 2).strength(0.05))
-            .force("x", d3.forceX(width / 2).strength(0.1))
-            .force("y", d3.forceY(height / 2).strength(0.1));
+            .force("charge", d3.forceManyBody().strength(15)) // Positive charge for slight repulsion/volume
+            .force("collide", d3.forceCollide().radius((d: any) => d.r + 4).iterations(3)) // More padding
+            .force("center", d3.forceCenter(width / 2, height / 2).strength(0.08))
+            .force("x", d3.forceX(width / 2).strength(0.05))
+            .force("y", d3.forceY(height / 2).strength(0.05));
 
-        // Drag functions
+        // Drag functionality
         const drag = (simulation: any) => {
             function dragstarted(event: any, d: any) {
                 if (!event.active) simulation.alphaTarget(0.3).restart();
@@ -134,25 +134,62 @@ const SkillsGraph: React.FC<Props> = ({ skillsData, projects }) => {
             .join("circle")
             .attr("r", d => d.r)
             .attr("fill", d => color(d.group) as string)
-            .attr("fill-opacity", 0.7)
+            .attr("fill-opacity", 0.6) // Lower base opacity
             .attr("stroke", "#fff")
             .attr("stroke-width", 1)
-            .attr("stroke-opacity", 0.3)
-            .style("cursor", "grab")
+            .attr("stroke-opacity", 0.2)
+            .style("cursor", "crosshair")
             .call(drag(simulation) as any)
-            .on("mouseover", (event, d) => {
+            .on("mouseover", function (event, d) {
+                // Physics: JIGGLE - Heat up the node
+                // Re-heat simulation slightly to make everything adjust
+                simulation.alphaTarget(0.1).restart();
+
+                // Specific node jiggle logic could be in tick, but force modification is cleaner
+                // Push neighbor nodes away
+                d.fx = d.x;
+                d.fy = d.y; // Temporarily lock it to cursor or interaction point if needed? No, just let it vibrate.
+
                 setTooltip({
                     x: event.pageX,
                     y: event.pageY,
                     content: `${d.id} (${d.group})`,
                     visible: true
                 });
-                d3.select(event.currentTarget).attr("stroke", "#fff").attr("stroke-width", 2).attr("fill-opacity", 1);
+
+                d3.select(this)
+                    .transition().duration(200)
+                    .attr("r", (d: any) => d.r + 5) // POP
+                    .attr("fill-opacity", 1)
+                    .attr("stroke-width", 3)
+                    .attr("stroke-opacity", 1);
             })
-            .on("mouseout", (event) => {
+            .on("mousemove", (event) => {
+                setTooltip(prev => ({
+                    ...prev,
+                    x: event.pageX,
+                    y: event.pageY
+                }));
+            })
+            .on("mouseout", function (event, d) {
+                d.fx = null;
+                d.fy = null;
+                simulation.alphaTarget(0);
+
                 setTooltip(prev => ({ ...prev, visible: false }));
-                d3.select(event.currentTarget).attr("stroke", "#fff").attr("stroke-width", 1).attr("fill-opacity", 0.7);
+
+                d3.select(this)
+                    .transition().duration(500)
+                    .attr("r", (d: any) => d.r) // Return to size
+                    .attr("fill-opacity", 0.6)
+                    .attr("stroke-width", 1)
+                    .attr("stroke-opacity", 0.2);
             });
+
+        // Add "Pulse" via CSS or repeated transition?
+        // Let's do a subtle continuous breathing in the tick loop? Too expensive.
+        // Use CSS animation on the circle elements for a "living" feel.
+        node.classed("animate-pulse-slow", true); // We'll need to define this custom class if it doesn't exist, or standard animate-pulse
 
         simulation.on("tick", () => {
             node
@@ -166,13 +203,19 @@ const SkillsGraph: React.FC<Props> = ({ skillsData, projects }) => {
     }, [nodes]);
 
     return (
-        <div ref={containerRef} className="relative w-full overflow-hidden rounded-xl border border-white/10 bg-neutral-900/50 backdrop-blur-sm" style={{ height: '500px' }}>
-            <svg ref={svgRef} className="h-full w-full"></svg>
+        <div
+            ref={containerRef}
+            id="skills-graph-container"
+            className="w-full h-full rounded-xl transition-opacity duration-700"
+        // style={{ opacity: 0.2 }} // Handled by ScrollCoordinator parent wrapper
+        >
+            <svg ref={svgRef} className="h-full w-full overflow-visible"></svg>
 
             {/* Legend / Overlay */}
-            <div className="pointer-events-none absolute top-4 left-4 text-xs font-mono text-neutral-500">
+            {/* <div className="pointer-events-none absolute top-4 left-4 text-xs font-mono text-neutral-500">
                 Data-Driven Skills Topology
-            </div>
+            </div> */}
+            {/* Note: Moved legend out to parent for cleaner layering */}
 
             {/* Tooltip */}
             {tooltip.visible && (

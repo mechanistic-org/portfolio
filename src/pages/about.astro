@@ -27,17 +27,20 @@ function getHash(str: string) {
 	}
 	return Math.abs(hash).toString(16).substring(0, 7);
 }
+import ScrollCoordinator from "@components/Effects/ScrollCoordinator.astro";
 ---
 
 <Layout title="About / Specs" description="Technical Specifications for Erik Norris">
 	<section class="site-container py-12 md:py-24">
 		<div class="mx-auto max-w-5xl">
-			<h1 class="h1 mb-6">Technical Specifications</h1>
-			<p class="mb-12 text-xl text-neutral-400">
-				Operating parameters, performance characteristics, and version history.
-			</p>
+			<div data-scroll-effect="flee">
+				<h1 class="h1 mb-6">Technical Specifications</h1>
+				<p class="mb-12 text-xl text-neutral-400">
+					Operating parameters, performance characteristics, and version history.
+				</p>
+			</div>
 
-			<div class="mb-24">
+			<div class="mb-24" data-scroll-effect="fade-out">
 				<DatasheetTable />
 			</div>
 
@@ -99,4 +102,5 @@ function getHash(str: string) {
 			</div>
 		</div>
 	</section>
+	<ScrollCoordinator />
 </Layout>

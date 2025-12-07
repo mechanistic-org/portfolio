@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import * as d3 from 'd3';
 
 interface PhaseDonutProps {
-    data: Record<string, number>; // { "Strategy": 20, "Design": 30 }
+    data: { phase: string; value: number }[]; // Array format
     width?: number;
     height?: number;
 }
@@ -19,10 +19,10 @@ export default function PhaseDonutD3({ data, width = 180, height = 180 }: PhaseD
         Production: '#ef4444'  // Red
     };
 
-    // Convert object to array for D3 pie
+    // Data is already an array now
     const chartData = useMemo(() => {
         if (!data) return [];
-        return Object.entries(data).map(([name, value]) => ({ name, value }));
+        return data.map(d => ({ name: d.phase, value: d.value }));
     }, [data]);
 
     const pie = useMemo(() => {

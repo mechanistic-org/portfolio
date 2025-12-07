@@ -132,6 +132,20 @@ To keep this site healthy:
 *   **Check:** `src/config/clients.json` for missing logos (null values).
 *   **Backup:** Ensure `data_source/` CSVs are committed or backed up.
 
+### Adding Scroll Effects to New Pages
+To apply the standard "Flee/Focus" scroll narrative to a new page:
+
+1.  **Import the Coordinator:**
+    ```astro
+    import ScrollCoordinator from "@components/Effects/ScrollCoordinator.astro";
+    ```
+2.  **Tag Elements:**
+    *   **Header/Intro:** `<div data-scroll-effect="flee">...</div>`
+    *   **Content List:** `<div data-scroll-effect="fade-out">...</div>`
+    *   **Background Viz:** `<div data-scroll-effect="focus" style="opacity: 0.2">...</div>`
+3.  **Mount Component:**
+    Add `<ScrollCoordinator />` at the bottom of your `<Layout>`.
+
 ## 6. Debug Mode
 The site includes a built-in "Wireframe Mode" for visual debugging.
 
@@ -230,6 +244,26 @@ status: {
           /* ... your styles ... */
         </style>
         ```
+
+*   **Error:** `Cannot apply unknown utility class 'bg-noise'`
+    *   **Cause:** Using `@apply` with a self-defined utility class in the same CSS scope/file causes recursion or resolution order issues in Tailwind's JIT.
+    *   **Fix:** Replace the `@apply` rule with the direct CSS property (e.g., `background-image: ...`) from the definition.
+
+*   **Ghost Data (The "Nuclear" Formatting Fix)**
+    *   **Symptom:** Data keys (like `phaseStats`) exist in the MDX frontmatter but appear as `undefined` in the Astro component, even after schema updates.
+    *   **Cause:** Complex YAML nesting (objects inside lists) or invisible character/indentation issues causing the frontmatter parser to silently fail or truncate.
+    *   **Fix:** **Use Inline JSON for complex arrays.**
+        *   Instead of fragile YAML lists:
+            ```yaml
+            phases:
+              - phase: Strategy
+                value: 10
+            ```
+        *   Use robust inline JSON:
+            ```yaml
+            phases: [{"phase": "Strategy", "value": 10}, ...]
+            ```
+        *   This bypasses whitespace ambiguity entirely.
 
 *   **Error:** `Could not resolve "virtual:keystatic-config"`
     *   **Cause:** The Keystatic integration is initializing before other required plugins.

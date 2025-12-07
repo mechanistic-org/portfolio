@@ -3,7 +3,7 @@ import ProjectModal from './ProjectModal';
 
 interface Project {
     id: string;
-    slug: string;
+    slug?: string;
     data: {
         title: string;
         description?: string;

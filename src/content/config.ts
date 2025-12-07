@@ -17,9 +17,13 @@ const projects = defineCollection({
         production: z.string(),
         tags: z.array(z.string()),
         teamSize: z.string().optional(),
-        skillData: z.any(),
+        skillData: z.array(z.object({
+            name: z.string(),
+            value: z.number(),
+            benchmark: z.number().optional()
+        })).optional(),
         additionalSkills: z.array(z.string()).optional(),
-        phase_stats: z.any(), // WAS: z.record(z.number()) - Loosened for debugging
+        phases: z.any(),
         gallery: z.array(z.object({
             src: z.string(),
             width: z.number(),

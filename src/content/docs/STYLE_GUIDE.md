@@ -152,6 +152,12 @@ These components are available for use in MDX content:
 *   **Component:** `<ScrambleText text="ERIK NORRIS" />`
 *   **Behavior:** Glitches on hover and randomly on idle.
 
+### Scroll Dynamics
+We use specific motion verbs to define the relationship between content layers:
+*   **"Hightail" (Flee):** Foreground elements (Headers) should hastily retreat (1.5x scroll speed) to reveal the data underneath.
+*   **"Parquet" (Fade-Parallax):** Content strips slide continuously slightly slower than scroll (0.9x relative) to feel "heavy" and detached from the background.
+*   **"Emerge" (Focus):** Background data layers wait for the foreground to clear before transitioning to full opacity.
+
 ---
 
 ## 5. Visual Effects & Physics

@@ -8,6 +8,7 @@ import SkillsGraph from "../../components/DataViz/SkillsGraph";
 import MultiverseGraph from "../../components/DataViz/MultiverseGraph";
 import TimelineStream from "../../components/DataViz/TimelineStream";
 import RadialTaxonomy from "../../components/DataViz/RadialTaxonomy";
+import ScrollCoordinator from "@components/Effects/ScrollCoordinator.astro";
 
 // Data
 import skillsData from "../../data/skills.json";
@@ -76,8 +77,10 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 <BaseLayout title="Projects" description="Engineering Archive">
 	<div class="site-container min-h-screen pt-32 pb-24 md:pb-36">
 		<!-- VIEW SWITCHER (The Control Console) -->
+		<!-- VIEW SWITCHER (The Control Console) -->
 		<div
 			class="mb-8 flex flex-col items-center justify-between gap-4 border-b border-white/10 pb-4 md:flex-row"
+			data-scroll-effect="flee"
 		>
 			<!-- Filter Menu (Left) -->
 			<div>
@@ -635,9 +638,6 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				window.addEventListener("radial-filter", (e: any) => {
 					const { group, value } = e.detail;
 
-					// Switch to Grid View
-					switchView("grid");
-
 					// Apply Filter
 					// @ts-ignore
 					if (filters[group] !== undefined) {
@@ -680,5 +680,6 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 			}
 		</style>
-	</div></BaseLayout
->
+	</div>
+	<ScrollCoordinator />
+</BaseLayout>

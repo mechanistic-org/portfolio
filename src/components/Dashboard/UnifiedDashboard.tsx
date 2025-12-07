@@ -11,7 +11,7 @@ export type DashboardVariant = 'mini' | 'medium' | 'mega';
 
 export interface DashboardData {
     skillData?: any;
-    phase_stats?: any;
+    phases?: { phase: string; value: number }[];
     title?: string;
     // Data God Extensions
     history?: any[];
@@ -73,8 +73,8 @@ export default function UnifiedDashboard({
                             Phase Breakdown
                         </div>
                         <div className="w-full h-[180px] pointer-events-none">
-                            {data.phase_stats ? (
-                                <PhaseDonutD3 data={data.phase_stats} />
+                            {data.phases ? (
+                                <PhaseDonutD3 data={data.phases} />
                             ) : (
                                 <div className="h-full w-full flex items-center justify-center dashed-border opacity-50 text-[10px]">NO_DATA</div>
                             )}
@@ -171,21 +171,21 @@ export default function UnifiedDashboard({
                         <h3 className="mb-4 text-xs font-bold text-neutral-500 font-mono uppercase tracking-widest border-b border-neutral-800 pb-2">
                             System Phase Distribution
                         </h3>
-                        {data.phase_stats && Object.entries(data.phase_stats).map(([phase, value]: [string, any]) => (
-                            <div key={phase} className="mb-3 last:mb-0">
+                        {data.phases && data.phases.map((item: any) => (
+                            <div key={item.phase} className="mb-3 last:mb-0">
                                 <div className="flex justify-between text-[10px] font-mono text-neutral-400 mb-1">
-                                    <span className="uppercase">{phase}</span>
-                                    <span>{value}%</span>
+                                    <span className="uppercase">{item.phase}</span>
+                                    <span>{item.value}%</span>
                                 </div>
                                 <div className="h-1.5 w-full bg-neutral-900 rounded-full overflow-hidden">
                                     <div
                                         className="h-full bg-primary/80"
-                                        style={{ width: `${value}%` }}
+                                        style={{ width: `${item.value}%` }}
                                     ></div>
                                 </div>
                             </div>
                         ))}
-                        {!data.phase_stats && <div className="text-xs font-mono text-neutral-600">NO PHASE DATA</div>}
+                        {!data.phases && <div className="text-xs font-mono text-neutral-600">NO PHASE DATA</div>}
                     </div>
 
                     {/* KPI 2: Core Capabilities (Real Data) */}
