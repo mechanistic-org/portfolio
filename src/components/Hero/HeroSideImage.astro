@@ -14,7 +14,8 @@ import ScrambleText from "@components/Effects/ScrambleText";
 	<div class="site-container grid items-center gap-10 pt-32 md:grid-cols-12 md:gap-8 md:pt-32">
 		<!-- Model (Left) - Spans 5 cols, starts at 2 for breathing room -->
 		<div
-			class="relative flex h-[300px] w-full min-w-[300px] items-center justify-center md:col-span-5 md:col-start-2 md:h-[400px]"
+			class="parallax-layer relative flex h-[300px] w-full min-w-[300px] items-center justify-center md:col-span-5 md:col-start-2 md:h-[400px]"
+			data-speed="2"
 		>
 			<model-viewer
 				src={MODEL_URL}
@@ -42,7 +43,8 @@ import ScrambleText from "@components/Effects/ScrambleText";
 
 		<!-- Text (Right) - Spans 5 cols, starts at 7 -->
 		<div
-			class="mx-auto flex max-w-lg flex-col gap-6 md:col-span-5 md:col-start-7 md:ml-0 md:max-w-full"
+			class="parallax-layer mx-auto flex max-w-lg flex-col gap-6 md:col-span-5 md:col-start-7 md:ml-0 md:max-w-full"
+			data-speed="1"
 		>
 			<h1 class="h1">
 				Hi, I'm&nbsp;<ScrambleText
@@ -64,6 +66,15 @@ import ScrambleText from "@components/Effects/ScrambleText";
 			</div>
 		</div>
 	</div>
+
+	<!-- Scroll Indicator -->
+	<div
+		id="scroll-indicator"
+		class="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-xs text-neutral-500 transition-opacity duration-300"
+	>
+		<span class="animate-bounce">↓</span>
+		<span class="tracking-widest uppercase">Scroll to Init</span>
+	</div>
 </section>
 
 <script>
@@ -81,4 +92,68 @@ import ScrambleText from "@components/Effects/ScrambleText";
 				}, 500);
 		});
 	}
+
+	// Parallax Effect
+	const hero = document.getElementById("hero");
+	const layers = document.querySelectorAll(".parallax-layer") as NodeListOf<HTMLElement>;
+	const scrollIndicator = document.getElementById("scroll-indicator");
+
+	if (hero && layers.length > 0) {
+		// Mouse Parallax
+		hero.addEventListener("mousemove", (e) => {
+			const x = (e.clientX / window.innerWidth - 0.5) * 20; // Base range
+			const y = (e.clientY / window.innerHeight - 0.5) * 20;
+
+			layers.forEach((layer) => {
+				const speed = parseFloat(layer.getAttribute("data-speed") || "1");
+				const xOffset = x * speed;
+				const yOffset = y * speed;
+
+				// Use CSS variable for mouse offset to combine with scroll
+				layer.style.setProperty("--mouse-x", `${xOffset}px`);
+				layer.style.setProperty("--mouse-y", `${yOffset}px`);
+			});
+		});
+
+		// Reset on leave
+		hero.addEventListener("mouseleave", () => {
+			layers.forEach((layer) => {
+				layer.style.setProperty("--mouse-x", "0px");
+				layer.style.setProperty("--mouse-y", "0px");
+			});
+		});
+
+		// Scroll Parallax
+		window.addEventListener("scroll", () => {
+			const scrollY = window.scrollY;
+			const heroHeight = hero.offsetHeight;
+
+			// Fade out scroll indicator
+			if (scrollIndicator) {
+				const opacity = Math.max(0, 1 - scrollY / 200);
+				scrollIndicator.style.opacity = opacity.toString();
+			}
+
+			// Parallax layers if visible
+			if (scrollY < heroHeight) {
+				layers.forEach((layer) => {
+					const speed = parseFloat(layer.getAttribute("data-speed") || "1");
+					// 3D Model (speed 2) moves slower/negative to feel further away or heavy?
+					// Usually foreground moves faster.
+					// Let's make text (right side, speed 1) move normally, and model (speed 2) move faster downwards
+					const yOffset = scrollY * speed * 0.1;
+					layer.style.setProperty("--scroll-y", `${yOffset}px`);
+				});
+			}
+		});
+	}
 </script>
+
+<style>
+	.parallax-layer {
+		/* Combine mouse and scroll offsets */
+		transform: translate3d(var(--mouse-x, 0), calc(var(--mouse-y, 0) + var(--scroll-y, 0)), 0);
+		transition: transform 0.1s linear; /* Smooth mouse, immediate scroll handled by browser? No, linear is better */
+		will-change: transform;
+	}
+</style>

@@ -391,18 +391,6 @@ See `docs/IMAGE_WORKFLOW.md` for the full SOP.
 *   **Symptom:** Images fail to load with 500 errors, or the site crashes with `ENOENT`.
 *   **Cause:** Often caused by deleting asset directories (like `assets/logos`) while the dev server is running, or lingering references in cached build artifacts.
 *   **Fix:**
-    1.  Stop the dev server (`Ctrl+C`).
-    2.  Verify the asset exists in `public/assets/branding/`.
-    3.  Update all references in code (grep for the old path).
-    4.  Restart `npm run dev`.
-
-### Ghost Assets (Images Not Updating)
-*   **Symptom:** You run `process_images.py`, verify the files in `R2_STAGING`, but the local dev server (`localhost:4321`) still shows old or broken images.
-*   **Cause:** `ingest_data.py` might be defaulting to the **Remote R2 Domain** (`https://assets.eriknorris.com`) instead of the local disk.
-*   **Fix:**
-    1.  Check `ingest_data.py`: Ensure `R2_DOMAIN` defaults to `/assets/r2` when `PUBLIC_R2_DOMAIN` is not set.
-    2.  Check `.env`: Ensure you aren't accidentally overriding it.
-    3.  **Verification:** Inspect the image URL in the browser. It should start with `/assets/r2/...`, not `https://...`.
 
 ### Squished Animations
 *   **Symptom:** Animation frames look stretched or compressed.

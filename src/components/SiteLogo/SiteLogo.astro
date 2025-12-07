@@ -6,16 +6,30 @@ import siteData from "@config/siteData.json";
 ---
 
 <a class="primary-focus group/navlink relative block h-10 w-40" href="/" aria-label="Home">
-	<img
-		src="/assets/branding/EN_wordmark_H_black_1200.svg"
-		alt="Erik Norris"
-		class="logo-light absolute inset-0 h-full w-full object-contain"
-	/>
-	<img
-		src="/assets/branding/EN_wordmark_H_white_1200.svg"
-		alt="Erik Norris"
-		class="logo-dark absolute inset-0 h-full w-full object-contain"
-	/>
+	<model-viewer
+		src="/assets/r2/_site/logo.glb"
+		alt="Erik Norris 3D Logo"
+		class="h-full w-full"
+		camera-controls
+		disable-zoom
+		shadow-intensity="0"
+		environment-image="neutral"
+		interaction-prompt="none"
+		style="--poster-color: transparent; background-color: transparent;"
+	>
+		<div slot="poster" class="absolute inset-0 h-full w-full">
+			<img
+				src="/assets/branding/EN_wordmark_H_black_1200.svg"
+				alt="Erik Norris"
+				class="logo-light h-full w-full object-contain"
+			/>
+			<img
+				src="/assets/branding/EN_wordmark_H_white_1200.svg"
+				alt="Erik Norris"
+				class="logo-dark h-full w-full object-contain"
+			/>
+		</div>
+	</model-viewer>
 </a>
 
 <style>

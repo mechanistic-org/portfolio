@@ -67,20 +67,6 @@ Assets are managed physically, not logically.
     *   **Auto-Sync:** The script automatically calls `sync_r2.py` to upload new assets to the Cloudflare R2 bucket.
     *   **Link:** It generates production URLs (`https://assets.eriknorris.com/...`) in the MDX frontmatter.
 
-### Auxiliary Generators
-To support the main ingestion pipeline, two auxiliary scripts maintain data quality and content volume:
-
-1.  **`scripts/refine_skills.py`**: Solves the "Skill Duplication" problem.
-    *   **Logic:** Assigns an "Archetype" (e.g., Software, Hardware, Design) to each project based on its Category.
-    *   **Output:** Generates a unique `Skills.csv` with varied skill profiles, preventing identical radar charts across projects.
-    *   **Scaling:** Uses logarithmic scaling based on project duration to determine skill mastery levels.
-
-2.  **`scripts/generate_content.py`**: Solves the "Empty Portfolio" problem.
-    *   **Creative Matrix:** Applies specific engineering narratives to known employers (e.g., "Silent Operation" for Kaleidescape, "HPC" for SGI).
-    *   **Smart Templating:** Generates "Narrative STAR" (Situation, Task, Action, Result) case studies for generic projects using metadata.
-    *   **Safety:** Skips existing manual content files larger than 1KB to preserve human-authored work.
-
-
 ## ðŸ—‚ï¸ Asset Management
 ### Branding Assets
 *   **Location:** `public/assets/branding/`

@@ -85,24 +85,66 @@ const RadialTaxonomy: React.FC<RadialTaxonomyProps> = ({ data }) => {
             .attr("transform", (d: any) => `rotate(${d.x - 90})translate(${d.y},0)`);
 
         node.append("circle")
-            .attr("r", (d) => d.children ? 3 : 5)
-            .attr("fill", (d) => d.depth === 0 ? "#fff" : d.children ? "#666" : "#20C20E");
+            .attr("r", (d) => d.depth === 0 ? 0 : d.children ? 4 : 6) // Hide root, size others
+            .attr("fill", (d) => d.depth === 0 ? "none" : d.children ? "#444" : "#20C20E")
+            .attr("cursor", "pointer") // All interactive
+            .on("mouseover", function (event, d: any) {
+                d3.select(this).attr("fill", "#fff").attr("r", d.children ? 6 : 8);
+                // Simple tooltip logic could go here or use title
+            })
+            .on("mouseout", function (event, d: any) {
+                d3.select(this).attr("fill", d.depth === 0 ? "none" : d.children ? "#444" : "#20C20E")
+                    .attr("r", d.depth === 0 ? 0 : d.children ? 4 : 6);
+            })
+            .on("click", (event, d: any) => {
+                if (d.data.id) {
+                    // Leaf Node: Navigate
+                    window.location.href = `/projects/${d.data.id}`;
+                } else if (d.depth > 0) {
+                    // Category/Group: Filter
+                    const filterName = d.data.name;
+                    // Determine group type based on depth? 
+                    // Depth 1 = Employer, Depth 2 = Industry
+                    let group = "all";
+                    if (d.depth === 1) group = "client"; // Using client/employer filter
+                    if (d.depth === 2) group = "industry";
+
+                    const customEvent = new CustomEvent('radial-filter', {
+                        detail: { group, value: filterName }
+                    });
+                    window.dispatchEvent(customEvent);
+                }
+            })
+            .append("title") // Native tooltip
+            .text(d => d.data.name);
 
         // LABELS
         node.append("text")
             .attr("dy", "0.31em")
-            .attr("x", (d: any) => d.x < 180 === !d.children ? 8 : -8)
+            .attr("x", (d: any) => d.x < 180 === !d.children ? 10 : -10)
             .attr("text-anchor", (d: any) => d.x < 180 === !d.children ? "start" : "end")
             .attr("transform", (d: any) => d.x >= 180 ? "rotate(180)" : null)
-            .text((d) => d.data.name)
+            .text((d) => d.depth === 0 ? "" : d.data.name) // Hide root label
             .style("font-size", "10px")
-            .style("fill", "#aaa")
-            .style("cursor", (d) => d.data.id ? "pointer" : "default")
-            .on("mouseover", function () { d3.select(this).style("fill", "#fff"); })
-            .on("mouseout", function () { d3.select(this).style("fill", "#aaa"); })
-            .on("click", (e, d) => {
-                if (d.data.id) window.location.href = `/projects/${d.data.id}`;
-            });
+            .style("fill", "#888")
+            .style("pointer-events", "none") // Let clicks pass to circle
+            .style("opacity", (d) => d.depth === 1 ? 1 : 0.7); // Highlight top level
+
+        // Add Root Label (Fixed relative to center or just use an HTML overlay?)
+        // SVG text is easier to keep synced with D3 if we want it part of the export, 
+        // but HTML overlay is easier for positioning.
+        // Let's add it to the SVG but outside the centered group if possible, or just offset.
+        // Actually, let's put it in the bottom left of the container.
+        // Since we are centered at w/2, h/2:
+        const labelX = -width / 2 + 20;
+        const labelY = height / 2 - 20;
+
+        g.append("text")
+            .attr("x", labelX)
+            .attr("y", labelY)
+            .text(data.name || "Quantum")
+            .attr("class", "font-mono text-xs text-green-500/50 tracking-widest uppercase")
+            .style("fill", "currentColor"); // Use class color
 
     }, [data, dimensions]);
 

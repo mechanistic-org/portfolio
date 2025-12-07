@@ -37,6 +37,9 @@ sidebar:
     *   **Description:** A "Plug-and-Play" authoring system that allows complex UI patterns (Zigzag Grids, 3D Viewers, Process Strips) to be inserted via shortcodes (`qq-*`). This transforms the IDE into a layout engine, ensuring every project page adheres to the strict "Visual Taxonomy" without manual coding.
 
 ## ðŸ“œ Change Log (Recent)
+*   **[Feature] 3D Pipeline 2.0:** Integrated Adobe Substance 3D with "Harvesting Protocol" (Anti-Lock-In) and "Unlimited Asset" strategy.
+*   **[Design] Material Tokens:** Defined "Matte Forged Carbon" and "Titanium Ceramic" recipes in `STYLE_GUIDE.md`.
+*   **[Refactor] Identity Polish:** Scrubbed "Quantum" vanity branding from public documentation to align with "Erik Norris" identity.
 *   **[Architecture] D3 Migration:** Completely removed `recharts` dependency. Refactored all dashboard visualizations (`SkillRadar`, `PhaseDonut`) to lightweight, native D3.js implementations.
 *   **[Feature] Impact Resonance:** Implemented a new physics-based "System Velocity" gauge to replace the static placeholder in the Mini-Dashboard.
 *   **[Fix] Docs System:** Restored documentation builds by implementing a robust `import.meta.glob` loader for the sidebar, bypassing Content Collection instability.
@@ -164,7 +167,20 @@ sidebar:
 *   **[Bug] Phase Donut:** *Known Issue* - The Phase Breakdown chart rendering is currently unstable despite verifying data presence. Scheduled for deep-dive debugging (Ref: "The Snake Case Strategy").
 - [x] **Universal Ingestion Pipeline:** Automated conversion of Audio/Text -> Markdown using Gemini 2.5 Pro.
 
+*   **[Feature] D3 Skills Graph:** Added interactive force-directed graph for skill visualization.
+*   **[Feature] Homepage Parallax:** Added scroll-driven vertical parallax and "Scroll to Init" indicator to Hero.
+*   **[Refactor] Radial View:** Replaced static `hierarchy.json` with dynamic generation; fixed "Other" category grouping; added interaction (click-to-filter).
+
 ## Colophon / Meta-Portfolio
+### Dynamic Radial Taxonomy
+*   **Hook:** Visualizing the career ecosystem without manual data curation.
+*   **Tech:** D3.js (Cluster Layout), React, Astro Content Collections.
+*   **Description:** Dynamically constructs a hierarchical taxonomy tree from flat project frontmatter, handling messy real-world data (e.g., falling back to Category when Industry is undefined) to generate a "Galaxy" view of professional history.
+
+### Parallax Hero
+*   **Hook:** Depth without weight.
+*   **Tech:** Vanilla JS, CSS Variables (`--scroll-y`).
+*   **Description:** A performant scroll-driven parallax implementation that translates 3D model and text layers at different rates using CSS custom properties, avoiding heavy animation libraries for this specific touch.
 ### The Quantum Darkroom
 *   **Hook:** "Developing the future, one pixel at a time."
 *   **Tech:** Python, Pillow, Lanczos Resampling, Cloudflare R2.
@@ -234,4 +250,11 @@ sidebar:
 *   **Refactor:** Updated `ingest_inbox.py` to parse context tags (`technical`, `rant`, `social`) and guide the LLM's output persona.
 *   **UX:** Polished Sidebar Navigation (`SidebarNav.astro`) to strictly enforce the new logical grouping system.
 *   **Protocol:** Inducted **"The V.C."** (Thiel/Khosla persona) into the Council of Voices (`SITE_AUDIT_PROMPT.md`) to weaponize FOMO and challenge architectural scope.
+*   **Infrastructure:** Established **The Plasticity Pipeline** (`Plasticity` -> `Blender` -> `Substance`) as the standard workflow for high-fidelity 3D assets (`docs/SETUP_PLASTICITY_PIPELINE.md`).
 
+
+## ðŸ§Š The Backlog (Icebox)
+*   **[Refactor] Operation Identity Shift:**
+    *   **Goal:** Rename repo (`quantum` -> `eriknorris`) and local folders.
+    *   **Status:** Aborted (Dec 6, 2025). Too risky for current phase.
+    *   **Plan:** Requires "Nuclear Option" script + manual folder renaming. Saved for post-V1.0 stability.

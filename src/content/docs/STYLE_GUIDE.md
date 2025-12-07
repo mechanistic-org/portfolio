@@ -5,7 +5,7 @@ sidebar:
   group: "Reference"
   order: 1
 ---
-# QUANTUM: Design Language System (DLS)
+# ERIK NORRIS: Design Language System (DLS)
 
 **Status:** Draft v1.0
 **Aesthetic:** Hyper-Functional Brutalism / Technical Datasheet
@@ -172,5 +172,21 @@ These components are available for use in MDX content:
 ## 6. Future Enhancements (Roadmap)
 *   **Build Stats:** Expose `ingest_data.py` runtime metrics in the footer (e.g., "Built in 0.4s").
 *   **Raw Mode:** A toggle to view the raw JSON/Markdown source of any page.
+
+## 7. Material Tokens (3D)
+Defines the physical surface properties of the brand.
+
+### The "Stealth" Variant (Black)
+*   **Name:** Matte Forged Carbon
+*   **Base:** Chopped/Forged Carbon Fiber.
+*   **Finish:** Raw/Matte (Roughness 0.5+). No clear coat.
+*   **Vibe:** "Prototype Racer", "High-Performance Structural".
+
+### The "Clinic" Variant (White)
+*   **Name:** Titanium Ceramic
+*   **Base:** Sintered Porcelain.
+*   **Color:** Titanium White (`#F1F1F4`).
+*   **Finish:** Powder Coat Normal (Micro-texture), SSS Enabled.
+*   **Vibe:** "Medical Grade", "Spacecraft Shielding".
 
 

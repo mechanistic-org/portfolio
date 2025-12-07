@@ -2,18 +2,58 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectDirectory from "../../components/Projects/ProjectDirectory.astro";
+import ProjectGrid from "../../components/Projects/ProjectGrid.astro";
+import FilterMenu from "../../components/Projects/FilterMenu.astro";
+import SkillsGraph from "../../components/DataViz/SkillsGraph";
 import MultiverseGraph from "../../components/DataViz/MultiverseGraph";
 import TimelineStream from "../../components/DataViz/TimelineStream";
 import RadialTaxonomy from "../../components/DataViz/RadialTaxonomy";
 
 // Data
+import skillsData from "../../data/skills.json";
 import multiverseData from "../../data/timeline/multiverse.json";
-import hierarchyData from "../../data/timeline/hierarchy.json";
-
 const allProjects = await getCollection("projects", ({ data }) => !data.draft);
 const projects = allProjects.sort(
 	(a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime(),
 );
+
+// Dynamic Hierarchy Generation
+const hierarchyData = {
+	name: "Quantum",
+	children: [] as any[],
+};
+
+// Helper to find or create a node
+const findOrCreate = (parent: any[], name: string) => {
+	let node = parent.find((n) => n.name === name);
+	if (!node) {
+		node = { name, children: [] };
+		parent.push(node);
+	}
+	return node;
+};
+
+projects.forEach((p) => {
+	// Level 1: Employer (or Client)
+	const employer = p.data.employer || p.data.client[0] || "Independent";
+	const employerNode = findOrCreate(hierarchyData.children, employer);
+
+	// Level 2: Industry (Segment)
+	// Prefer category if industry is "Other" or missing to avoid "Other" grouping
+	let segment = p.data.industry;
+	if (!segment || segment === "Other") {
+		segment = p.data.category || "Uncategorized";
+	}
+	const industryNode = findOrCreate(employerNode.children, segment);
+
+	// Level 3: Project
+	industryNode.children.push({
+		name: p.data.title,
+		id: p.id,
+		value: 10, // Uniform sizing or mapped to impact?
+		group: employer, // Color by employer
+	});
+});
 
 // Extract Facets for the UI (Keep existing logic for Directory view)
 const industries = [...new Set(projects.map((p) => p.data.industry).filter(Boolean))].sort();
@@ -33,13 +73,32 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 <BaseLayout title="Projects" description="Engineering Archive">
 	<div class="site-container min-h-screen pt-32 pb-24 md:pb-36">
 		<!-- VIEW SWITCHER (The Control Console) -->
-		<div class="mb-8 flex items-center justify-center border-b border-white/10 pb-4">
+		<div
+			class="mb-8 flex flex-col items-center justify-between gap-4 border-b border-white/10 pb-4 md:flex-row"
+		>
+			<!-- Filter Menu (Left) -->
+			<div>
+				<FilterMenu sectors={industries} categories={categories} tools={tools} clients={clients} />
+			</div>
+
 			<div class="flex items-center gap-1 rounded-lg border border-white/10 bg-neutral-900 p-1">
 				<button
 					class="view-toggle text-primary bg-primary/10 flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider uppercase transition-colors hover:text-white"
 					data-view="list"
 				>
 					<span class="i-tdesign-menu-2 text-sm"></span> List
+				</button>
+				<button
+					class="view-toggle flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-colors hover:bg-white/5 hover:text-white"
+					data-view="grid"
+				>
+					<span class="i-tdesign-app text-sm"></span> Grid
+				</button>
+				<button
+					class="view-toggle flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-colors hover:bg-white/5 hover:text-white"
+					data-view="skills"
+				>
+					<span class="i-tdesign-chart-bubble text-sm"></span> Skills
 				</button>
 				<button
 					class="view-toggle flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-colors hover:bg-white/5 hover:text-white"
@@ -71,6 +130,16 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				tools={tools}
 				clients={clients}
 			/>
+		</div>
+
+		<!-- VIEW: GRID -->
+		<div id="view-grid" class="view-container hidden">
+			<ProjectGrid projects={projects} />
+		</div>
+
+		<!-- VIEW: SKILLS -->
+		<div id="view-skills" class="view-container hidden">
+			<SkillsGraph client:only="react" skillsData={skillsData} projects={projects} />
 		</div>
 
 		<!-- VIEW: MULTIVERSE -->
@@ -172,7 +241,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 		}
 
 		// Target rows instead of cards
-		const rows = Array.from(document.querySelectorAll(".project-row")) as HTMLElement[];
+		const rows = Array.from(document.querySelectorAll(".project-item")) as HTMLElement[];
 		const buttons = document.querySelectorAll(".filter-btn");
 		const sortHeaders = document.querySelectorAll(".sort-header");
 
@@ -362,10 +431,18 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 
 			// Then append active rows in order to the tbody to ensure visual order matches sort order
 			const tbody = document.getElementById("projects-table-body");
-			if (tbody) {
+			const gridContainer = document.querySelector("#view-grid .grid"); // Assuming ProjectGrid uses a grid container
+
+			if (tbody || gridContainer) {
 				active.forEach((r) => {
-					r.style.display = "table-row";
-					tbody.appendChild(r); // Re-appending moves it to the end, effectively reordering
+					r.style.display = ""; // Reset display to default (table-row or block)
+
+					// Re-append to maintain sort order in the DOM
+					if (r.tagName === "TR" && tbody) {
+						tbody.appendChild(r);
+					} else if (r.tagName === "DIV" && gridContainer) {
+						gridContainer.appendChild(r);
+					}
 				});
 			}
 
@@ -527,6 +604,34 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				}
 				update();
 			});
+		});
+
+		// Listen for Radial Filter Events
+		window.addEventListener("radial-filter", (e: any) => {
+			const { group, value } = e.detail;
+
+			// Switch to Grid View
+			switchView("grid");
+
+			// Apply Filter
+			// @ts-ignore
+			if (filters[group] !== undefined) {
+				// Update internal state
+				// @ts-ignore
+				filters[group] = value;
+
+				// Update UI Buttons
+				document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach((b) => {
+					b.setAttribute("data-active", "false");
+				});
+				const targetBtn = document.querySelector(
+					`.filter-btn[data-group="${group}"][data-filter="${value}"]`,
+				);
+				if (targetBtn) targetBtn.setAttribute("data-active", "true");
+
+				// Render
+				update(filters, true);
+			}
 		});
 	});
 </script>

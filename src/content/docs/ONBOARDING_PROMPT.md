@@ -13,10 +13,12 @@ sidebar:
 > *   **Golden Rule:** If you encounter a persistent data binding bug, assume it's a Caching/Naming conflict first. Try the "Snake Case Strategy" before rewriting the component.
 >
 > **CONFIRMATION:**
-> Once you have read these files, simply reply: **"Quantum Systems Online. Ready for instructions."**
+> Once you have read these files, simply reply: **"Erik Norris Portfolio Online. Ready for instructions."**
 
 
 > *   **Avoid Nexus Events:** Do not edit generated content in `src/content/projects/`. Always trace data back to `data_source/Main.csv` or `data_source/manual_content/`.
+> *   **Read:** `src/content/docs/SUBSTANCE_MAXIMIZATION_PLAN.md` (Strategy for 3D textures & assets)
+> *   **Read:** `src/content/docs/SETUP_PLASTICITY_PIPELINE.md` (The 3D Bridge Standard)
 >
 > **NEW WORKFLOWS:**
 > *   [`CONTENT_INGESTION_WORKFLOW.md`](/src/content/docs/CONTENT_INGESTION_WORKFLOW.md): The Universal Pipeline for Brain Dumps -> Case Studies.

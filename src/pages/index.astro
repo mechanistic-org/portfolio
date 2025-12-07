@@ -6,6 +6,8 @@ import ProjectCard from "@components/Projects/ProjectCard.astro";
 import ProjectStrip from "@components/Projects/ProjectStrip.tsx";
 import Button from "@components/Button/Button.astro";
 import ClientGrid from "../components/Home/Clients.astro";
+import SkillsGraph from "../components/DataViz/SkillsGraph";
+import skillsData from "../data/skills.json";
 
 const allProjects = await getCollection("projects", ({ data }) => !data.draft);
 const recentProjects = allProjects.sort(
@@ -23,5 +25,14 @@ const recentProjects = allProjects.sort(
 
 	<section class="w-full py-8 md:py-16">
 		<ProjectStrip client:visible projects={recentProjects} />
+	</section>
+
+	<section class="site-container w-full border-t border-white/5 py-8 md:py-16">
+		<div class="mb-8 flex items-end justify-between">
+			<h2 class="font-mono text-xl font-bold tracking-tighter text-white uppercase">
+				<span class="text-primary mr-2">///</span>Technical Topography
+			</h2>
+		</div>
+		<SkillsGraph client:visible skillsData={skillsData as any} projects={allProjects as any} />
 	</section>
 </Layout>

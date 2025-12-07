@@ -52,9 +52,7 @@ const { projects, sectors, categories, tools, clients } = Astro.props;
 		<table class="w-full min-w-[800px] border-collapse text-left font-mono text-sm">
 			<thead>
 				<tr class="border-b border-neutral-800 text-neutral-500">
-					<th class="px-4 py-3 font-medium tracking-wider uppercase">
-						<FilterMenu sectors={sectors} categories={categories} tools={tools} clients={clients} />
-					</th>
+					<th class="px-4 py-3 font-medium tracking-wider uppercase"> System </th>
 					<th
 						class="sort-header cursor-pointer px-4 py-3 font-medium tracking-wider uppercase transition-colors select-none hover:text-white"
 						data-col="project"
@@ -101,7 +99,7 @@ const { projects, sectors, categories, tools, clients } = Astro.props;
 				{
 					projects.map((project, index) => (
 						<tr
-							class="project-row group hover:bg-primary/5 cursor-pointer border-b border-l-2 border-neutral-800/50 border-transparent transition-colors"
+							class="project-row project-item group hover:bg-primary/5 cursor-pointer border-b border-l-2 border-neutral-800/50 border-transparent transition-colors"
 							data-industry={project.data.industry}
 							data-tool={JSON.stringify(project.data.tools)}
 							data-tool-icons={JSON.stringify((project.data as any).toolIcons || [])}
