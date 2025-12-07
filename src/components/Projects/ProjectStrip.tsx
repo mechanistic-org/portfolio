@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
-import AutoScroll from 'embla-carousel-auto-scroll';
+import React, { useState } from 'react';
 import ProjectModal from './ProjectModal';
 
 interface Project {
     id: string;
+    slug: string;
     data: {
         title: string;
         description?: string;
@@ -23,49 +22,16 @@ interface ProjectStripProps {
 }
 
 const ProjectStrip: React.FC<ProjectStripProps> = ({ projects }) => {
-    const [emblaRef, emblaApi] = useEmblaCarousel(
-        {
-            dragFree: true,
-            containScroll: "trimSnaps",
-            align: "start",
-            loop: true
-        },
-        [
-            AutoScroll({
-                playOnInit: true,
-                speed: 1,
-                stopOnInteraction: false,
-                stopOnMouseEnter: true
-            })
-        ]
-    );
+    // Default to the first project for the "Works-Like" preview
+    // const [selectedIndex, setSelectedIndex] = useState<number>(0);
+    const [hoverIndex, setHoverIndex] = useState<number>(0);
 
-    const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+    // Modal State
+    const [modalIndex, setModalIndex] = useState<number>(-1);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // Accessibility: Pause/Disable drag on reduced motion
-    useEffect(() => {
-        if (!emblaApi) return;
-
-        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-        const handleMotionChange = () => {
-            const autoScroll = emblaApi.plugins().autoScroll;
-            if (!autoScroll) return;
-
-            if (mediaQuery.matches) {
-                autoScroll.stop();
-            } else {
-                if (!autoScroll.isPlaying()) autoScroll.play();
-            }
-        };
-
-        handleMotionChange();
-        mediaQuery.addEventListener('change', handleMotionChange);
-        return () => mediaQuery.removeEventListener('change', handleMotionChange);
-    }, [emblaApi]);
-
     const openModal = (index: number) => {
-        setSelectedIndex(index);
+        setModalIndex(index);
         setIsModalOpen(true);
     };
 
@@ -74,123 +40,121 @@ const ProjectStrip: React.FC<ProjectStripProps> = ({ projects }) => {
     };
 
     const handleNext = () => {
-        setSelectedIndex((prev) => (prev + 1) % projects.length);
+        setModalIndex((prev) => (prev + 1) % projects.length);
     };
 
     const handlePrev = () => {
-        setSelectedIndex((prev) => (prev - 1 + projects.length) % projects.length);
+        setModalIndex((prev) => (prev - 1 + projects.length) % projects.length);
     };
 
-    const selectedProject = selectedIndex >= 0 ? projects[selectedIndex] : null;
-
-    // Swarm Effect Logic
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        const card = e.currentTarget;
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--x', `${x}px`);
-        card.style.setProperty('--y', `${y}px`);
-        card.style.setProperty('--opacity', '1');
-    };
-
-    const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-        const card = e.currentTarget;
-        card.style.setProperty('--opacity', '0');
-    };
+    const activeProject = projects[hoverIndex];
+    const modalProject = modalIndex >= 0 ? projects[modalIndex] : null;
 
     return (
-        <>
-            <div className="embla relative w-full overflow-hidden" ref={emblaRef}>
-                <div className="flex touch-pan-y gap-6">
-                    {projects.map((project, index) => (
-                        <div
-                            key={project.id}
-                            className="flex-[0_0_85%] min-w-0 sm:flex-[0_0_45%] md:flex-[0_0_30%]"
-                        >
-                            <div
-                                onClick={() => openModal(index)}
-                                onMouseMove={handleMouseMove}
-                                onMouseLeave={handleMouseLeave}
-                                className="group relative flex aspect-video cursor-pointer flex-col overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900 transition-all hover:border-primary/50 hover:shadow-2xl"
-                                style={{
-                                    '--x': '50%',
-                                    '--y': '50%',
-                                    '--opacity': '0'
-                                } as React.CSSProperties}
-                            >
-                                {/* Swarm Spotlight Background */}
-                                <div
-                                    className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-300"
-                                    style={{
-                                        background: `radial-gradient(600px circle at var(--x) var(--y), rgba(16, 185, 129, 0.35), transparent 40%)`,
-                                        opacity: 'var(--opacity)'
-                                    }}
-                                />
+        <div className="w-full flex flex-col md:flex-row gap-8 min-h-[500px]">
 
-                                {/* Image Layer */}
-                                <div className="absolute inset-0 z-10">
-                                    {project.data.heroImage ? (
-                                        <img
-                                            src={project.data.heroImage}
-                                            alt={project.data.title}
-                                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:opacity-40"
-                                            loading="lazy"
-                                        />
-                                    ) : (
-                                        <div className="flex h-full w-full items-center justify-center bg-neutral-900 text-neutral-700">
-                                            <span className="text-xs font-mono">NO_SIGNAL</span>
-                                        </div>
-                                    )}
-                                </div>
-
-                                {/* Data Overlay (Technical HUD) */}
-                                <div className="absolute inset-0 z-20 flex flex-col justify-between p-6 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                    {/* Top: ID/Role */}
-                                    <div className="flex items-start justify-between">
-                                        <span className="font-mono text-xs text-primary bg-primary/10 px-2 py-1 rounded border border-primary/20 backdrop-blur-sm">
-                                            {project.data.role || "ENGINEER"}
-                                        </span>
-                                        <span className="font-mono text-xs text-neutral-400">
-                                            {new Date(project.data.date || Date.now()).getFullYear()}
-                                        </span>
-                                    </div>
-
-                                    {/* Bottom: Title & Tech */}
-                                    <div className="flex flex-col gap-2">
-                                        <h3 className="font-mono text-xl font-bold text-white tracking-tight">
-                                            {project.data.title.toUpperCase()}
-                                        </h3>
-                                        <div className="h-px w-full bg-gradient-to-r from-primary/50 to-transparent" />
-                                        <div className="flex flex-wrap gap-2">
-                                            {project.data.tags?.slice(0, 3).map(tag => (
-                                                <span key={tag} className="text-[10px] font-mono text-neutral-300 bg-black/50 px-1.5 py-0.5 rounded border border-neutral-800">
-                                                    {tag}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+            {/* Left Column: The Index (Term Sheet) */}
+            <div className="flex-1 flex flex-col gap-px bg-white/5 border border-white/10">
+                {/* Header Row */}
+                <div className="grid grid-cols-12 gap-4 p-3 bg-white/5 text-[10px] font-mono uppercase text-white/40 tracking-wider">
+                    <div className="col-span-1">ID</div>
+                    <div className="col-span-11 md:col-span-5">Project</div>
+                    <div className="hidden md:block col-span-3">Role</div>
+                    <div className="hidden md:block col-span-3 text-right">Deploy</div>
                 </div>
+
+                {/* Data Rows */}
+                {projects.slice(0, 8).map((project, index) => (
+                    <div
+                        key={project.id}
+                        onMouseEnter={() => setHoverIndex(index)}
+                        onClick={() => openModal(index)}
+                        className={`group cursor-pointer grid grid-cols-12 gap-4 p-3 border-l-2 transition-all duration-100 ${hoverIndex === index
+                                ? 'bg-white/10 border-emerald-500 text-white'
+                                : 'bg-transparent border-transparent text-white/60 hover:text-white'
+                            }`}
+                    >
+                        <div className="col-span-1 font-mono text-xs opacity-50">
+                            {(index + 1).toString().padStart(2, '0')}
+                        </div>
+                        <div className="col-span-11 md:col-span-5 font-mono font-bold text-sm tracking-tight truncate">
+                            {project.data.title.toUpperCase()}
+                        </div>
+                        <div className="hidden md:block col-span-3 font-mono text-xs opacity-70 truncate">
+                            {project.data.role || "ENGINEER"}
+                        </div>
+                        <div className="hidden md:block col-span-3 font-mono text-xs text-right opacity-50">
+                            {new Date(project.data.date || Date.now()).getFullYear()}
+                        </div>
+                    </div>
+                ))}
+
+                <a href="/projects" className="p-3 mt-auto text-center font-mono text-xs text-emerald-500 hover:text-emerald-400 border-t border-white/10 transition-colors">
+                    /// VIEW ALL {projects.length} RECORDS
+                </a>
             </div>
 
-            {selectedProject && (
+            {/* Right Column: The "Works-Like" Preview (Mechanism) */}
+            <div className="hidden md:block w-[400px] xl:w-[500px] flex-shrink-0 relative border border-white/10 bg-black">
+                {activeProject ? (
+                    <div className="relative h-full w-full flex flex-col">
+                        {/* CRT Screen Effect Container */}
+                        <div className="relative flex-grow overflow-hidden">
+                            {activeProject.data.heroImage ? (
+                                <img
+                                    src={activeProject.data.heroImage}
+                                    alt={activeProject.data.title}
+                                    className="absolute inset-0 h-full w-full object-cover opacity-80"
+                                />
+                            ) : (
+                                <div className="absolute inset-0 flex items-center justify-center bg-neutral-900 border border-white/5">
+                                    <span className="font-mono text-xs text-white/20">NO VISUAL SIGNAL</span>
+                                </div>
+                            )}
+
+                            {/* Scanline Overlay */}
+                            <div className="absolute inset-0 bg-[url('https://grain-overlay.netlify.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50 pointer-events-none"></div>
+                        </div>
+
+                        {/* Metadata Footer */}
+                        <div className="p-6 border-t border-white/10 bg-black/90 backdrop-blur">
+                            <h3 className="text-2xl font-bold font-sans text-white tracking-tighter mb-2">
+                                {activeProject.data.title}
+                            </h3>
+                            <p className="font-mono text-sm text-white/50 line-clamp-2 mb-4">
+                                {activeProject.data.description || "Classified engineering data."}
+                            </p>
+                            <div className="flex flex-wrap gap-2">
+                                {activeProject.data.tags?.slice(0, 3).map(tag => (
+                                    <span key={tag} className="px-2 py-1 text-[10px] uppercase font-mono border border-emerald-500/30 text-emerald-500">
+                                        {tag}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="h-full flex items-center justify-center">
+                        <span className="font-mono animate-pulse text-emerald-500">AWAITING INPUT...</span>
+                    </div>
+                )}
+            </div>
+
+            {modalProject && (
                 <ProjectModal
                     isOpen={isModalOpen}
                     onClose={closeModal}
                     onNext={handleNext}
                     onPrev={handlePrev}
                     project={{
-                        ...selectedProject.data,
-                        id: selectedProject.id, // Pass ID for slug
-                        date: selectedProject.data.date?.toISOString()
+                        ...modalProject.data,
+                        id: modalProject.id,
+                        date: modalProject.data.date?.toISOString()
                     }}
                 />
             )}
-        </>
+        </div>
     );
 };
 

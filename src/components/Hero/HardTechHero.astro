@@ -1,0 +1,77 @@
+---
+import ImpactResonance from "../DataViz/ImpactResonance";
+
+interface KPI {
+	label: string;
+	value: string;
+	trend?: "up" | "down" | "neutral";
+}
+
+const kpis: KPI[] = [
+	{ label: "DFM READINESS", value: "100%", trend: "up" },
+	{ label: "TOLERANCE CLASS", value: "ISO-2768m", trend: "neutral" },
+	{ label: "CAD KERNEL", value: "PARASOLID", trend: "neutral" },
+	{ label: "RENDER ENGINE", value: "CYCLES", trend: "neutral" },
+];
+---
+
+<section class="relative w-full border-b border-white/10 bg-black/50 backdrop-blur-md">
+	<div class="site-container flex flex-col gap-8 py-12 md:flex-row md:items-center md:py-16">
+		{/* Left: The Heartbeat / Identity Anchor */}
+		<div class="flex-shrink-0">
+			<div class="h-32 w-32 md:h-40 md:w-40">
+				<ImpactResonance client:load width={160} height={160} label="SYSTEM STATUS" value={98} />
+			</div>
+		</div>
+
+		{/* Center: The Operator Identity */}
+		<div class="flex flex-grow flex-col gap-4">
+			<div>
+				<div class="mb-2 flex items-center gap-3">
+					<div class="h-2 w-2 animate-pulse rounded-full bg-emerald-500"></div>
+					<span class="font-mono text-xs tracking-widest text-emerald-500">[SYSTEM ONLINE]</span>
+				</div>
+				<h1 class="font-sans text-4xl font-bold tracking-tighter text-white md:text-6xl">
+					ERIK NORRIS
+				</h1>
+				<h2 class="mt-1 font-mono text-lg text-white/60">/// PRODUCTIZATION ENGINE</h2>
+			</div>
+
+			{/* The KPI Ticker (Risk Reduction Modules) */}
+			<div class="grid grid-cols-2 gap-4 border-t border-white/5 pt-4 md:grid-cols-4">
+				{
+					kpis.map((kpi) => (
+						<div class="flex flex-col">
+							<span class="font-mono text-[10px] tracking-wider text-white/40 uppercase">
+								{kpi.label}
+							</span>
+							<span class="font-mono text-sm font-bold text-white/90">{kpi.value}</span>
+						</div>
+					))
+				}
+			</div>
+		</div>
+
+		{/* Right: Action Module (Optional - can remain empty or allow for a primary CTA) */}
+		<div class="mx-8 hidden h-32 w-px bg-white/10 md:block"></div>
+		<div class="hidden flex-col justify-center gap-2 md:flex">
+			<a
+				href="#projects"
+				class="group flex min-w-[200px] items-center justify-between gap-4 border border-white/20 bg-white/5 px-4 py-3 transition-all hover:border-emerald-500/50 hover:bg-white/10"
+			>
+				<span class="font-mono text-xs tracking-wider text-white uppercase">Initiate Audit</span>
+				<span class="text-emerald-500 transition-transform group-hover:translate-x-1">→</span>
+			</a>
+			<div class="flex items-center justify-between px-2">
+				<span class="font-mono text-[10px] text-white/30">V.2025.12.06</span>
+				<span class="font-mono text-[10px] text-white/30">SFO :: CA</span>
+			</div>
+		</div>
+	</div>
+
+	{/* Decorative Grid Overlay */}
+	<div
+		class="pointer-events-none absolute inset-0 bg-[url('https://grain-overlay.netlify.app/noise.svg')] opacity-20 mix-blend-overlay"
+	>
+	</div>
+</section>

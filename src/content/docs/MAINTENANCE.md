@@ -264,6 +264,17 @@ status: {
 *   **Cause:** The `Layout` component in Astro templates might be self-closing (`<Layout ... />`) instead of wrapping content (`<Layout ...>...</Layout>`).
 *   **Fix:** Ensure the `Layout` component properly wraps the page content.
 
+### Blank View Container (The "Homeless Component" Trap)
+*   **Symptom:** A specific view (e.g., "Radial") is blank, but `console.logs` inside the component fire correctly, and no errors appear.
+*   **Cause:** The component logic is fine, but its HTML container (e.g., `<div id="view-radial">`) is missing from the parent page markup. The UI switcher toggles the "hidden" class on a non-existent element.
+*   **Fix:** Ensure the HTML container exists in the `.astro` template.
+    ```astro
+    <!-- Missing Container -->
+    <div id="view-radial" class="view-container hidden">
+        <MyComponent />
+    </div>
+    ```
+
 ### Project Page Layout Collapse
 *   **Symptom:** The main content column is squeezed to the left, overlapping the sidebar or losing its grid span.
 *   **Possible Causes:**

@@ -253,7 +253,19 @@ sidebar:
 *   **Infrastructure:** Established **The Plasticity Pipeline** (`Plasticity` -> `Blender` -> `Substance`) as the standard workflow for high-fidelity 3D assets (`docs/SETUP_PLASTICITY_PIPELINE.md`).
 
 
-## ðŸ§Š The Backlog (Icebox)
+#### [In Progress] Operation Productize (The HardTech Productizer)
+*   **[Audit]** Inducted **"The HardTech Productizer"** (Vinod/Stanford/MechE persona) into `SITE_AUDIT_PROMPT.md`.
+*   **[Strategy]** Defined **"The Productization Engine"** model (`docs/PRODUCTIZATION_MODEL.md`).
+*   **[Refactor] Phase 1 (The Inputs):** Pivot Homepage to "System Status" (`HardTechHero`, `ImpactResonance`).
+*   **[Refactor] Phase 2 (The Factory):** Convert Project Index to "high-frequency" Datasheet View.
+*   **[Plan] Phase 3 (The Output):** Refactor Project Detail pages to "Spec Sheet" aesthetic (Dense headers, technical schematics).
+
+*   **[Fix] Radial View:** Resolved "Blank Screen" critical failure by identifying and restoring missing DOM container (`div#view-radial`) in `index.astro`.
+*   **[Refactor] Taxonomy Cleanup:** Eliminated "Other" `industry` category by remapping 20+ projects to "Pro Audio", "Robotics", and "Computing" via `fix_industries.py`.
+*   **[Refactor] Radial Branding:** Removed "Quantum" labels from Radial Taxonomy, replacing them with "Erik Norris".
+*   **[Safety] D3 Hardening:** Patched `RadialTaxonomy.tsx` to handle 0x0 container dimensions gracefully (preventing negative radius crashes).
+
+## 🧊 The Backlog (Icebox)
 *   **[Refactor] Operation Identity Shift:**
     *   **Goal:** Rename repo (`quantum` -> `eriknorris`) and local folders.
     *   **Status:** Aborted (Dec 6, 2025). Too risky for current phase.

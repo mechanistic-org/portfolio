@@ -19,7 +19,7 @@ const projects = allProjects.sort(
 
 // Dynamic Hierarchy Generation
 const hierarchyData = {
-	name: "Quantum",
+	name: "Erik Norris",
 	children: [] as any[],
 };
 
@@ -181,477 +181,501 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 		</div>
 
 		<!-- VIEW: RADIAL -->
-		<div id="view-radial" class="view-container animate-in spin-in-3 hidden duration-700">
+		<div id="view-radial" class="view-container animate-in zoom-in-95 hidden duration-500">
 			<div
-				class="relative flex items-center justify-center overflow-hidden rounded-xl border border-white/5 bg-black/20"
+				class="relative overflow-hidden rounded-xl border border-white/5 bg-black/20"
 				style="height: 75vh"
 			>
 				<RadialTaxonomy client:only="react" data={hierarchyData} />
 				<div
 					class="pointer-events-none absolute bottom-4 left-4 font-mono text-[10px] text-green-500/50"
 				>
-					MODE: RADIAL_DENDROGRAM<br />
-					ROOT: QUANTUM
+					MODE: ORBITAL_TAXONOMY<br />
+					ROOT: ERIK NORRIS
 				</div>
 			</div>
 		</div>
-	</div>
-</BaseLayout>
 
-<script>
-	document.addEventListener("astro:page-load", () => {
-		// VIEW SWITCHER LOGIC
-		const toggles = document.querySelectorAll(".view-toggle");
-		const containers = document.querySelectorAll(".view-container");
+		<script>
+			document.addEventListener("astro:page-load", () => {
+				// VIEW SWITCHER LOGIC
+				const toggles = document.querySelectorAll(".view-toggle");
+				const containers = document.querySelectorAll(".view-container");
 
-		// Load preference
-		const savedView = localStorage.getItem("project_view_mode") || "list";
-		switchView(savedView);
+				// Load preference
+				const savedView = localStorage.getItem("project_view_mode") || "list";
+				switchView(savedView);
 
-		toggles.forEach((btn) => {
-			btn.addEventListener("click", () => {
-				const view = btn.getAttribute("data-view");
-				if (view) switchView(view);
-			});
-		});
+				toggles.forEach((btn) => {
+					btn.addEventListener("click", () => {
+						const view = btn.getAttribute("data-view");
+						if (view) switchView(view);
+					});
+				});
 
-		function switchView(mode: string) {
-			// Update UI
-			toggles.forEach((btn) => {
-				const isMatch = btn.getAttribute("data-view") === mode;
-				if (isMatch) {
-					btn.classList.add("text-primary", "bg-primary/10");
-					btn.classList.remove("text-neutral-500", "hover:bg-white/5");
-				} else {
-					btn.classList.remove("text-primary", "bg-primary/10");
-					btn.classList.add("text-neutral-500", "hover:bg-white/5");
+				function switchView(mode: string) {
+					// Update UI
+					toggles.forEach((btn) => {
+						const isMatch = btn.getAttribute("data-view") === mode;
+						if (isMatch) {
+							btn.classList.add("text-primary", "bg-primary/10");
+							btn.classList.remove("text-neutral-500", "hover:bg-white/5");
+						} else {
+							btn.classList.remove("text-primary", "bg-primary/10");
+							btn.classList.add("text-neutral-500", "hover:bg-white/5");
+						}
+					});
+
+					// Update Containers
+					containers.forEach((c) => {
+						if (c.id === `view-${mode}`) {
+							c.classList.remove("hidden");
+						} else {
+							c.classList.add("hidden");
+						}
+					});
+
+					localStorage.setItem("project_view_mode", mode);
 				}
-			});
 
-			// Update Containers
-			containers.forEach((c) => {
-				if (c.id === `view-${mode}`) {
-					c.classList.remove("hidden");
-				} else {
-					c.classList.add("hidden");
-				}
-			});
+				// Target rows instead of cards
+				const rows = Array.from(document.querySelectorAll(".project-item")) as HTMLElement[];
+				const buttons = document.querySelectorAll(".filter-btn");
+				const sortHeaders = document.querySelectorAll(".sort-header");
 
-			localStorage.setItem("project_view_mode", mode);
-		}
+				if (rows.length === 0) return;
 
-		// Target rows instead of cards
-		const rows = Array.from(document.querySelectorAll(".project-item")) as HTMLElement[];
-		const buttons = document.querySelectorAll(".filter-btn");
-		const sortHeaders = document.querySelectorAll(".sort-header");
+				// State
+				let filters = {
+					industry: "all",
+					category: "all",
+					tool: "all",
+					status: "all",
+					client: "all",
+				};
+				let sortState = { column: "date", direction: "desc" }; // default sort
 
-		if (rows.length === 0) return;
+				// URL Params Logic - Run BEFORE initial update
+				const urlParams = new URLSearchParams(window.location.search);
 
-		// State
-		let filters = { industry: "all", category: "all", tool: "all", status: "all", client: "all" };
-		let sortState = { column: "date", direction: "desc" }; // default sort
+				// Helper to apply param
+				const applyParam = (paramName: string, groupName: string) => {
+					const val = urlParams.get(paramName);
+					if (val) {
+						const decoded = decodeURIComponent(val);
+						// @ts-ignore
+						filters[groupName] = decoded;
+						const btn = document.querySelector(
+							`.filter-btn[data-group="${groupName}"][data-filter="${decoded}"]`,
+						);
+						if (btn) {
+							btn.setAttribute("data-active", "true");
+							document
+								.querySelector(`.filter-btn[data-group="${groupName}"][data-filter="all"]`)
+								?.setAttribute("data-active", "false");
+						}
+					}
+				};
 
-		// URL Params Logic - Run BEFORE initial update
-		const urlParams = new URLSearchParams(window.location.search);
+				applyParam("client", "client");
+				applyParam("collection", "industry");
+				applyParam("category", "category");
+				applyParam("tool", "tool");
+				applyParam("status", "status");
 
-		// Helper to apply param
-		const applyParam = (paramName: string, groupName: string) => {
-			const val = urlParams.get(paramName);
-			if (val) {
-				const decoded = decodeURIComponent(val);
-				// @ts-ignore
-				filters[groupName] = decoded;
-				const btn = document.querySelector(
-					`.filter-btn[data-group="${groupName}"][data-filter="${decoded}"]`,
-				);
-				if (btn) {
-					btn.setAttribute("data-active", "true");
-					document
-						.querySelector(`.filter-btn[data-group="${groupName}"][data-filter="all"]`)
-						?.setAttribute("data-active", "false");
-				}
-			}
-		};
+				function renderActiveFilters() {
+					// Count active filters (excluding "all")
+					let count = 0;
+					if (filters.industry !== "all") count++;
+					if (filters.category !== "all") count++;
+					if (filters.status !== "all") count++;
+					if (filters.tool !== "all") count++;
+					if (filters.client !== "all") count++;
 
-		applyParam("client", "client");
-		applyParam("collection", "industry");
-		applyParam("category", "category");
-		applyParam("tool", "tool");
-		applyParam("status", "status");
-
-		function renderActiveFilters() {
-			// Count active filters (excluding "all")
-			let count = 0;
-			if (filters.industry !== "all") count++;
-			if (filters.category !== "all") count++;
-			if (filters.status !== "all") count++;
-			if (filters.tool !== "all") count++;
-			if (filters.client !== "all") count++;
-
-			const countBadge = document.getElementById("active-filter-count");
-			if (countBadge) {
-				if (count > 0) {
-					countBadge.innerText = count.toString();
-					countBadge.classList.remove("hidden");
-				} else {
-					countBadge.classList.add("hidden");
-				}
-			}
-		}
-
-		function getCellValue(row: HTMLElement, column: string): string | number {
-			const d = row.dataset;
-			switch (column) {
-				case "project":
-					return d.title?.toLowerCase() || "";
-				case "client":
-					// Client is an array string, just take the first one for sorting or join them
-					return (JSON.parse(d.client || "[]")[0] || "").toLowerCase();
-				case "sector":
-					return d.industry?.toLowerCase() || "";
-				case "category":
-					return d.category?.toLowerCase() || "";
-				case "year":
-					return parseInt(d.date || "0");
-				case "status":
-					return d.status?.toLowerCase() || "";
-				default:
-					return "";
-			}
-		}
-
-		// Keyboard Nav State
-		let selectedIndex = -1;
-
-		function updateActiveRow() {
-			// Remove active class from all
-			rows.forEach((r) => {
-				r.classList.remove("bg-primary/10", "border-l-2", "border-primary", "animate-pulse-slow");
-				r.classList.add("border-transparent"); // Reset border
-			});
-
-			if (selectedIndex >= 0 && selectedIndex < rows.length) {
-				const row = rows[selectedIndex];
-				// Only apply if row is visible
-				if (row.style.display !== "none") {
-					row.classList.add("bg-primary/10", "border-l-2", "border-primary", "animate-pulse-slow");
-					row.classList.remove("border-transparent");
-
-					// Scroll into view if needed (smooth)
-					row.scrollIntoView({ behavior: "smooth", block: "nearest" });
-				}
-			}
-		}
-
-		// Keyboard Listeners
-		document.addEventListener("keydown", (e) => {
-			// Only if not focused on an input
-			if (document.activeElement?.tagName === "INPUT") return;
-
-			const visibleRows = rows.filter((r) => r.style.display !== "none");
-			if (visibleRows.length === 0) return;
-
-			// Find current index in visible rows
-			let currentVisibleIndex = visibleRows.findIndex((r) => r === rows[selectedIndex]);
-
-			if (e.key === "j" || e.key === "ArrowDown") {
-				e.preventDefault();
-				if (currentVisibleIndex < visibleRows.length - 1) {
-					currentVisibleIndex++;
-				} else {
-					currentVisibleIndex = 0; // Loop to top
-				}
-				// Find the global index of the new visible row
-				selectedIndex = rows.indexOf(visibleRows[currentVisibleIndex]);
-				updateActiveRow();
-			} else if (e.key === "k" || e.key === "ArrowUp") {
-				e.preventDefault();
-				if (currentVisibleIndex > 0) {
-					currentVisibleIndex--;
-				} else {
-					currentVisibleIndex = visibleRows.length - 1; // Loop to bottom
-				}
-				selectedIndex = rows.indexOf(visibleRows[currentVisibleIndex]);
-				updateActiveRow();
-			} else if (e.key === "Enter") {
-				if (selectedIndex >= 0) {
-					const row = rows[selectedIndex];
-					const link = row.getAttribute("onclick");
-					// Extract URL from "window.location.href='/projects/slug/'"
-					const match = link?.match(/'([^']+)'/);
-					if (match) {
-						window.location.href = match[1];
+					const countBadge = document.getElementById("active-filter-count");
+					if (countBadge) {
+						if (count > 0) {
+							countBadge.innerText = count.toString();
+							countBadge.classList.remove("hidden");
+						} else {
+							countBadge.classList.add("hidden");
+						}
 					}
 				}
-			}
-		});
 
-		// Sync Hover with Selection - REMOVED to prevent sticky highlight
-		// rows.forEach((row, index) => {
-		// 	row.addEventListener("mouseenter", () => {
-		// 		selectedIndex = index;
-		// 		updateActiveRow();
-		// 	});
-		// });
-
-		function update(filtersToUse = filters, updateChips = true) {
-			// Filter
-			let active = rows.filter((row) => {
-				const d = row.dataset;
-				const rowTools = JSON.parse(d.tool || "[]");
-				const rowClients = JSON.parse(d.client || "[]"); // Assuming client is array
-
-				// Find title in the second cell (index 1)
-				const titleCell = row.children[1] as HTMLElement;
-				const rowTitle = titleCell?.innerText.toLowerCase() || "";
-
-				const matchInd = filtersToUse.industry === "all" || d.industry === filtersToUse.industry;
-				const matchCat = filtersToUse.category === "all" || d.category === filtersToUse.category;
-				const matchStatus = filtersToUse.status === "all" || d.status === filtersToUse.status;
-				const matchTool = filtersToUse.tool === "all" || rowTools.includes(filtersToUse.tool);
-				const matchClient =
-					filtersToUse.client === "all" || rowClients.includes(filtersToUse.client);
-
-				return matchInd && matchCat && matchStatus && matchTool && matchClient;
-			});
-
-			// Sort
-			active.sort((a, b) => {
-				const valA = getCellValue(a, sortState.column);
-				const valB = getCellValue(b, sortState.column);
-
-				if (valA < valB) return sortState.direction === "asc" ? -1 : 1;
-				if (valA > valB) return sortState.direction === "asc" ? 1 : -1;
-				return 0;
-			});
-
-			// Render
-			// First hide all rows
-			rows.forEach((r) => (r.style.display = "none"));
-
-			// Then append active rows in order to the tbody to ensure visual order matches sort order
-			const tbody = document.getElementById("projects-table-body");
-			const gridContainer = document.querySelector("#view-grid .grid"); // Assuming ProjectGrid uses a grid container
-
-			if (tbody || gridContainer) {
-				active.forEach((r) => {
-					r.style.display = ""; // Reset display to default (table-row or block)
-
-					// Re-append to maintain sort order in the DOM
-					if (r.tagName === "TR" && tbody) {
-						tbody.appendChild(r);
-					} else if (r.tagName === "DIV" && gridContainer) {
-						gridContainer.appendChild(r);
+				function getCellValue(row: HTMLElement, column: string): string | number {
+					const d = row.dataset;
+					switch (column) {
+						case "project":
+							return d.title?.toLowerCase() || "";
+						case "client":
+							// Client is an array string, just take the first one for sorting or join them
+							return (JSON.parse(d.client || "[]")[0] || "").toLowerCase();
+						case "sector":
+							return d.industry?.toLowerCase() || "";
+						case "category":
+							return d.category?.toLowerCase() || "";
+						case "year":
+							return parseInt(d.date || "0");
+						case "status":
+							return d.status?.toLowerCase() || "";
+						default:
+							return "";
 					}
-				});
-			}
+				}
 
-			// Reset selection on filter change
-			selectedIndex = -1;
-			updateActiveRow();
+				// Keyboard Nav State
+				let selectedIndex = -1;
 
-			if (updateChips) {
-				renderActiveFilters();
-			}
-			updateSortIcons();
+				function updateActiveRow() {
+					// Remove active class from all
+					rows.forEach((r) => {
+						r.classList.remove(
+							"bg-primary/10",
+							"border-l-2",
+							"border-primary",
+							"animate-pulse-slow",
+						);
+						r.classList.add("border-transparent"); // Reset border
+					});
 
-			// Hierarchical Filtering: Filter Categories based on selected Collection (Industry)
-			const selectedIndustry = filtersToUse.industry;
-			const categoryButtons = document.querySelectorAll('.filter-btn[data-group="category"]');
+					if (selectedIndex >= 0 && selectedIndex < rows.length) {
+						const row = rows[selectedIndex];
+						// Only apply if row is visible
+						if (row.style.display !== "none") {
+							row.classList.add(
+								"bg-primary/10",
+								"border-l-2",
+								"border-primary",
+								"animate-pulse-slow",
+							);
+							row.classList.remove("border-transparent");
 
-			if (selectedIndustry === "all") {
-				// Show all categories
-				categoryButtons.forEach((btn) => {
-					(btn as HTMLElement).style.display = "block";
-				});
-			} else {
-				// Get valid categories for this industry
-				const validCategories = new Set<string>();
-				rows.forEach((row) => {
-					if (row.dataset.industry === selectedIndustry) {
-						if (row.dataset.category) validCategories.add(row.dataset.category);
+							// Scroll into view if needed (smooth)
+							row.scrollIntoView({ behavior: "smooth", block: "nearest" });
+						}
+					}
+				}
+
+				// Keyboard Listeners
+				document.addEventListener("keydown", (e) => {
+					// Only if not focused on an input
+					if (document.activeElement?.tagName === "INPUT") return;
+
+					const visibleRows = rows.filter((r) => r.style.display !== "none");
+					if (visibleRows.length === 0) return;
+
+					// Find current index in visible rows
+					let currentVisibleIndex = visibleRows.findIndex((r) => r === rows[selectedIndex]);
+
+					if (e.key === "j" || e.key === "ArrowDown") {
+						e.preventDefault();
+						if (currentVisibleIndex < visibleRows.length - 1) {
+							currentVisibleIndex++;
+						} else {
+							currentVisibleIndex = 0; // Loop to top
+						}
+						// Find the global index of the new visible row
+						selectedIndex = rows.indexOf(visibleRows[currentVisibleIndex]);
+						updateActiveRow();
+					} else if (e.key === "k" || e.key === "ArrowUp") {
+						e.preventDefault();
+						if (currentVisibleIndex > 0) {
+							currentVisibleIndex--;
+						} else {
+							currentVisibleIndex = visibleRows.length - 1; // Loop to bottom
+						}
+						selectedIndex = rows.indexOf(visibleRows[currentVisibleIndex]);
+						updateActiveRow();
+					} else if (e.key === "Enter") {
+						if (selectedIndex >= 0) {
+							const row = rows[selectedIndex];
+							const link = row.getAttribute("onclick");
+							// Extract URL from "window.location.href='/projects/slug/'"
+							const match = link?.match(/'([^']+)'/);
+							if (match) {
+								window.location.href = match[1];
+							}
+						}
 					}
 				});
 
-				// Update button visibility
-				categoryButtons.forEach((btn) => {
-					const btnVal = btn.getAttribute("data-filter");
-					if (btnVal === "all" || (btnVal && validCategories.has(btnVal))) {
-						(btn as HTMLElement).style.display = "block";
-					} else {
-						(btn as HTMLElement).style.display = "none";
-					}
-				});
+				// Sync Hover with Selection - REMOVED to prevent sticky highlight
+				// rows.forEach((row, index) => {
+				// 	row.addEventListener("mouseenter", () => {
+				// 		selectedIndex = index;
+				// 		updateActiveRow();
+				// 	});
+				// });
 
-				// Reset Category if current selection is invalid
-				if (filtersToUse.category !== "all" && !validCategories.has(filtersToUse.category)) {
-					// Only reset if we are committing changes (updateChips is true)
-					// If previewing, we might not want to force reset yet, or maybe we do?
-					// Let's reset it in the filters object but maybe not trigger another update loop immediately to avoid recursion
+				function update(filtersToUse = filters, updateChips = true) {
+					// Filter
+					let active = rows.filter((row) => {
+						const d = row.dataset;
+						const rowTools = JSON.parse(d.tool || "[]");
+						const rowClients = JSON.parse(d.client || "[]"); // Assuming client is array
+
+						// Find title in the second cell (index 1)
+						const titleCell = row.children[1] as HTMLElement;
+						const rowTitle = titleCell?.innerText.toLowerCase() || "";
+
+						const matchInd =
+							filtersToUse.industry === "all" || d.industry === filtersToUse.industry;
+						const matchCat =
+							filtersToUse.category === "all" || d.category === filtersToUse.category;
+						const matchStatus = filtersToUse.status === "all" || d.status === filtersToUse.status;
+						const matchTool = filtersToUse.tool === "all" || rowTools.includes(filtersToUse.tool);
+						const matchClient =
+							filtersToUse.client === "all" || rowClients.includes(filtersToUse.client);
+
+						return matchInd && matchCat && matchStatus && matchTool && matchClient;
+					});
+
+					// Sort
+					active.sort((a, b) => {
+						const valA = getCellValue(a, sortState.column);
+						const valB = getCellValue(b, sortState.column);
+
+						if (valA < valB) return sortState.direction === "asc" ? -1 : 1;
+						if (valA > valB) return sortState.direction === "asc" ? 1 : -1;
+						return 0;
+					});
+
+					// Render
+					// First hide all rows
+					rows.forEach((r) => (r.style.display = "none"));
+
+					// Then append active rows in order to the tbody to ensure visual order matches sort order
+					const tbody = document.getElementById("projects-table-body");
+					const gridContainer = document.querySelector("#view-grid .grid"); // Assuming ProjectGrid uses a grid container
+
+					if (tbody || gridContainer) {
+						active.forEach((r) => {
+							r.style.display = ""; // Reset display to default (table-row or block)
+
+							// Re-append to maintain sort order in the DOM
+							if (r.tagName === "TR" && tbody) {
+								tbody.appendChild(r);
+							} else if (r.tagName === "DIV" && gridContainer) {
+								gridContainer.appendChild(r);
+							}
+						});
+					}
+
+					// Reset selection on filter change
+					selectedIndex = -1;
+					updateActiveRow();
+
 					if (updateChips) {
-						filters.category = "all";
-						// Update UI for category reset
-						document.querySelectorAll('.filter-btn[data-group="category"]').forEach((b) => {
+						renderActiveFilters();
+					}
+					updateSortIcons();
+
+					// Hierarchical Filtering: Filter Categories based on selected Collection (Industry)
+					const selectedIndustry = filtersToUse.industry;
+					const categoryButtons = document.querySelectorAll('.filter-btn[data-group="category"]');
+
+					if (selectedIndustry === "all") {
+						// Show all categories
+						categoryButtons.forEach((btn) => {
+							(btn as HTMLElement).style.display = "block";
+						});
+					} else {
+						// Get valid categories for this industry
+						const validCategories = new Set<string>();
+						rows.forEach((row) => {
+							if (row.dataset.industry === selectedIndustry) {
+								if (row.dataset.category) validCategories.add(row.dataset.category);
+							}
+						});
+
+						// Update button visibility
+						categoryButtons.forEach((btn) => {
+							const btnVal = btn.getAttribute("data-filter");
+							if (btnVal === "all" || (btnVal && validCategories.has(btnVal))) {
+								(btn as HTMLElement).style.display = "block";
+							} else {
+								(btn as HTMLElement).style.display = "none";
+							}
+						});
+
+						// Reset Category if current selection is invalid
+						if (filtersToUse.category !== "all" && !validCategories.has(filtersToUse.category)) {
+							// Only reset if we are committing changes (updateChips is true)
+							// If previewing, we might not want to force reset yet, or maybe we do?
+							// Let's reset it in the filters object but maybe not trigger another update loop immediately to avoid recursion
+							if (updateChips) {
+								filters.category = "all";
+								// Update UI for category reset
+								document.querySelectorAll('.filter-btn[data-group="category"]').forEach((b) => {
+									b.setAttribute("data-active", "false");
+								});
+								document
+									.querySelector('.filter-btn[data-group="category"][data-filter="all"]')
+									?.setAttribute("data-active", "true");
+								renderActiveFilters(); // Re-render chips
+							}
+						}
+					}
+				}
+
+				function updateSortIcons() {
+					sortHeaders.forEach((header) => {
+						const col = header.getAttribute("data-col");
+						const icon = header.querySelector(".sort-icon");
+						if (!icon) return;
+
+						if (col === sortState.column) {
+							icon.innerHTML = sortState.direction === "asc" ? "▲" : "▼";
+							header.classList.add("text-primary", "bg-primary/10", "rounded");
+							header.classList.remove("text-neutral-500");
+						} else {
+							icon.innerHTML = "↕"; // or some neutral icon
+							header.classList.remove("text-primary", "bg-primary/10", "rounded");
+							header.classList.add("text-neutral-500");
+						}
+					});
+				}
+
+				buttons.forEach((btn) => {
+					const applyFilter = () => {
+						const group = btn.getAttribute("data-group");
+						const val = btn.getAttribute("data-filter");
+						if (!group || !val) return;
+
+						// UI Toggle
+						document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach((b) => {
 							b.setAttribute("data-active", "false");
 						});
-						document
-							.querySelector('.filter-btn[data-group="category"][data-filter="all"]')
-							?.setAttribute("data-active", "true");
-						renderActiveFilters(); // Re-render chips
+						btn.setAttribute("data-active", "true");
+
+						// Logic Update
+						// @ts-ignore
+						filters[group] = val;
+						update(filters, true);
+					};
+
+					const previewFilter = () => {
+						const group = btn.getAttribute("data-group");
+						const val = btn.getAttribute("data-filter");
+						if (!group || !val) return;
+
+						// Create temp filters
+						const tempFilters = { ...filters };
+						// @ts-ignore
+						tempFilters[group] = val;
+
+						update(tempFilters, false); // Don't update chips
+					};
+
+					btn.addEventListener("click", applyFilter);
+					btn.addEventListener("mouseenter", previewFilter);
+				});
+
+				// Reset View Button
+				const resetBtn = document.getElementById("reset-filters-btn");
+				if (resetBtn) {
+					resetBtn.addEventListener("click", () => {
+						// Reset State
+						filters = {
+							industry: "all",
+							category: "all",
+							tool: "all",
+							status: "all",
+							client: "all",
+						};
+						sortState = { column: "date", direction: "desc" };
+
+						// Reset UI Buttons
+						document.querySelectorAll(".filter-btn").forEach((b) => {
+							b.setAttribute("data-active", "false");
+						});
+						// Set "all" buttons to active
+						document.querySelectorAll('.filter-btn[data-filter="all"]').forEach((b) => {
+							b.setAttribute("data-active", "true");
+						});
+
+						// Reset Sort Icons
+						updateSortIcons();
+
+						// Update List
+						update(filters, true);
+					});
+				}
+
+				// Revert on MouseLeave Dropdown
+				// Use the new container class from FilterMenu.astro
+				document.querySelectorAll(".filter-menu-container").forEach((menu) => {
+					menu.addEventListener("mouseleave", () => {
+						update(filters, false); // Revert to committed filters
+					});
+				});
+
+				sortHeaders.forEach((header) => {
+					header.addEventListener("click", () => {
+						const col = header.getAttribute("data-col");
+						if (!col) return;
+
+						if (sortState.column === col) {
+							// Toggle direction
+							sortState.direction = sortState.direction === "asc" ? "desc" : "asc";
+						} else {
+							// New column, default to asc (or desc for year?)
+							sortState.column = col;
+							sortState.direction = col === "year" ? "desc" : "asc";
+						}
+						update();
+					});
+				});
+
+				// Listen for Radial Filter Events
+				window.addEventListener("radial-filter", (e: any) => {
+					const { group, value } = e.detail;
+
+					// Switch to Grid View
+					switchView("grid");
+
+					// Apply Filter
+					// @ts-ignore
+					if (filters[group] !== undefined) {
+						// Update internal state
+						// @ts-ignore
+						filters[group] = value;
+
+						// Update UI Buttons
+						document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach((b) => {
+							b.setAttribute("data-active", "false");
+						});
+						const targetBtn = document.querySelector(
+							`.filter-btn[data-group="${group}"][data-filter="${value}"]`,
+						);
+						if (targetBtn) targetBtn.setAttribute("data-active", "true");
+
+						// Render
+						update(filters, true);
 					}
+				});
+			});
+		</script>
+
+		<style>
+			@reference "../../styles/global.css";
+			.filter-btn.active {
+				@apply bg-primary ring-primary text-black ring-2;
+			}
+			@keyframes pulse-slow {
+				0%,
+				100% {
+					opacity: 1;
+				}
+				50% {
+					opacity: 0.8;
+					background-color: rgba(var(--color-primary), 0.15);
 				}
 			}
-		}
-
-		function updateSortIcons() {
-			sortHeaders.forEach((header) => {
-				const col = header.getAttribute("data-col");
-				const icon = header.querySelector(".sort-icon");
-				if (!icon) return;
-
-				if (col === sortState.column) {
-					icon.innerHTML = sortState.direction === "asc" ? "▲" : "▼";
-					header.classList.add("text-primary", "bg-primary/10", "rounded");
-					header.classList.remove("text-neutral-500");
-				} else {
-					icon.innerHTML = "↕"; // or some neutral icon
-					header.classList.remove("text-primary", "bg-primary/10", "rounded");
-					header.classList.add("text-neutral-500");
-				}
-			});
-		}
-
-		buttons.forEach((btn) => {
-			const applyFilter = () => {
-				const group = btn.getAttribute("data-group");
-				const val = btn.getAttribute("data-filter");
-				if (!group || !val) return;
-
-				// UI Toggle
-				document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach((b) => {
-					b.setAttribute("data-active", "false");
-				});
-				btn.setAttribute("data-active", "true");
-
-				// Logic Update
-				// @ts-ignore
-				filters[group] = val;
-				update(filters, true);
-			};
-
-			const previewFilter = () => {
-				const group = btn.getAttribute("data-group");
-				const val = btn.getAttribute("data-filter");
-				if (!group || !val) return;
-
-				// Create temp filters
-				const tempFilters = { ...filters };
-				// @ts-ignore
-				tempFilters[group] = val;
-
-				update(tempFilters, false); // Don't update chips
-			};
-
-			btn.addEventListener("click", applyFilter);
-			btn.addEventListener("mouseenter", previewFilter);
-		});
-
-		// Reset View Button
-		const resetBtn = document.getElementById("reset-filters-btn");
-		if (resetBtn) {
-			resetBtn.addEventListener("click", () => {
-				// Reset State
-				filters = { industry: "all", category: "all", tool: "all", status: "all", client: "all" };
-				sortState = { column: "date", direction: "desc" };
-
-				// Reset UI Buttons
-				document.querySelectorAll(".filter-btn").forEach((b) => {
-					b.setAttribute("data-active", "false");
-				});
-				// Set "all" buttons to active
-				document.querySelectorAll('.filter-btn[data-filter="all"]').forEach((b) => {
-					b.setAttribute("data-active", "true");
-				});
-
-				// Reset Sort Icons
-				updateSortIcons();
-
-				// Update List
-				update(filters, true);
-			});
-		}
-
-		// Revert on MouseLeave Dropdown
-		// Use the new container class from FilterMenu.astro
-		document.querySelectorAll(".filter-menu-container").forEach((menu) => {
-			menu.addEventListener("mouseleave", () => {
-				update(filters, false); // Revert to committed filters
-			});
-		});
-
-		sortHeaders.forEach((header) => {
-			header.addEventListener("click", () => {
-				const col = header.getAttribute("data-col");
-				if (!col) return;
-
-				if (sortState.column === col) {
-					// Toggle direction
-					sortState.direction = sortState.direction === "asc" ? "desc" : "asc";
-				} else {
-					// New column, default to asc (or desc for year?)
-					sortState.column = col;
-					sortState.direction = col === "year" ? "desc" : "asc";
-				}
-				update();
-			});
-		});
-
-		// Listen for Radial Filter Events
-		window.addEventListener("radial-filter", (e: any) => {
-			const { group, value } = e.detail;
-
-			// Switch to Grid View
-			switchView("grid");
-
-			// Apply Filter
-			// @ts-ignore
-			if (filters[group] !== undefined) {
-				// Update internal state
-				// @ts-ignore
-				filters[group] = value;
-
-				// Update UI Buttons
-				document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach((b) => {
-					b.setAttribute("data-active", "false");
-				});
-				const targetBtn = document.querySelector(
-					`.filter-btn[data-group="${group}"][data-filter="${value}"]`,
-				);
-				if (targetBtn) targetBtn.setAttribute("data-active", "true");
-
-				// Render
-				update(filters, true);
+			.animate-pulse-slow {
+				animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 			}
-		});
-	});
-</script>
-
-<style>
-	@reference "../../styles/global.css";
-	.filter-btn.active {
-		@apply bg-primary ring-primary text-black ring-2;
-	}
-	@keyframes pulse-slow {
-		0%,
-		100% {
-			opacity: 1;
-		}
-		50% {
-			opacity: 0.8;
-			background-color: rgba(var(--color-primary), 0.15);
-		}
-	}
-	.animate-pulse-slow {
-		animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-	}
-</style>
+		</style>
+	</div></BaseLayout
+>
