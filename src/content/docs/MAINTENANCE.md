@@ -398,6 +398,11 @@ See `docs/IMAGE_WORKFLOW.md` for the full SOP.
 *   **Cause:** Python 3.14 compatibility issue with `pillow-avif-plugin`.
 *   **Fix:** Use `pillow-heif` instead. Run `pip install pillow-heif`.
 
+### Missing Texture / "Clean" Look
+*   **Symptom:** The site looks too clean; the "film grain" is missing.
+*   **Cause:** The `.noise-overlay` might be hidden or the Data URI is corrupt.
+*   **Fix:** Check `global.css`. We use a baked-in Base64 SVG for the noise texture (`.bg-noise`). Do NOT use external URLs.
+
 ### Missing Assets / 500 Errors
 *   **Symptom:** Images fail to load with 500 errors, or the site crashes with `ENOENT`.
 *   **Cause:** Often caused by deleting asset directories (like `assets/logos`) while the dev server is running, or lingering references in cached build artifacts.

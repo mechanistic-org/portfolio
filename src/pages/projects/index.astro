@@ -12,7 +12,10 @@ import RadialTaxonomy from "../../components/DataViz/RadialTaxonomy";
 // Data
 import skillsData from "../../data/skills.json";
 import multiverseData from "../../data/timeline/multiverse.json";
-const allProjects = await getCollection("projects", ({ data }) => !data.draft);
+const allProjects = await getCollection(
+	"projects",
+	({ data }) => !data.draft && data.statusLabel !== "NO_DATA" && data.impact !== "NO_DATA",
+);
 const projects = allProjects.sort(
 	(a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime(),
 );

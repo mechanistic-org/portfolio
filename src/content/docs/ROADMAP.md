@@ -31,7 +31,7 @@ sidebar:
     *   **Tech:** MDX, Astro Components (`Admonition`, `Chip`, `Wire`).
     *   **Description:** A live, render-accurate implementation of the Design Language System at `/about/elements`. It serves as both documentation and a visual regression test suite for the "Hyper-Functional Brutalist" aesthetic.
 
-*   **Quantum Templating System (The Engine):**
+*   **Templating System (The Engine):**
     *   **Hook:** "Zero-friction authoring for complex brutalist layouts."
     *   **Tech:** VS Code Snippets + Astro MDX Components.
     *   **Description:** A "Plug-and-Play" authoring system that allows complex UI patterns (Zigzag Grids, 3D Viewers, Process Strips) to be inserted via shortcodes (`qq-*`). This transforms the IDE into a layout engine, ensuring every project page adheres to the strict "Visual Taxonomy" without manual coding.
@@ -145,7 +145,7 @@ sidebar:
     *   **Tech:** CSS (`@media print`).
     *   **Description:** Optimized print styles that strip the UI (Nav, Footer, Buttons) and output a clean, high-contrast specification document suitable for PDF export.
 ### Completed
-- [x] **Quantum Image Pipeline:** Full hybrid workflow (Lightroom -> Python -> R2).
+- [x] **Hybrid Image Pipeline:** Full workflow (Lightroom -> Python -> R2).
     - [x] Animated WebP support with variable timing.
     - [x] Smart Letterboxing for mixed-aspect sequences.
     - [x] Gallery deduplication logic.
@@ -181,7 +181,7 @@ sidebar:
 *   **Hook:** Depth without weight.
 *   **Tech:** Vanilla JS, CSS Variables (`--scroll-y`).
 *   **Description:** A performant scroll-driven parallax implementation that translates 3D model and text layers at different rates using CSS custom properties, avoiding heavy animation libraries for this specific touch.
-### The Quantum Darkroom
+### The Darkroom
 *   **Hook:** "Developing the future, one pixel at a time."
 *   **Tech:** Python, Pillow, Lanczos Resampling, Cloudflare R2.
 *   **Description:** A deep dive into the "Human Eye, Machine Hand" philosophy, featuring a live "Before & After" comparison of the `base` project. It documents how we shrank 15MB of GIFs down to 1.2MB of High-Res WebP using a custom automation engine.
@@ -212,7 +212,7 @@ sidebar:
     *   **Description:** A carousel of testimonials not from clients, but from the AI's internal modules (The Kernel, The Linter, The Architect) reflecting on the codebase and the collaboration.
 
 *   **The Visual Taxonomy (Dreamjob):**
-    *   **Hook:** "A Rosetta Stone for the Quantum aesthetic."
+    *   **Hook:** "A Rosetta Stone for the System aesthetic."
     *   **Tech:** AI Generation (Gemini), Manual Content Injection.
     *   **Description:** The `dreamjob` project serves as the "Kitchen Sink" stress test. It maps every theoretical asset type (Product, Engineering, Abstract, Digital) to a concrete visual example, ensuring the pipeline can handle the full spectrum of engineering deliverables.
 
@@ -251,6 +251,12 @@ sidebar:
 *   **UX:** Polished Sidebar Navigation (`SidebarNav.astro`) to strictly enforce the new logical grouping system.
 *   **Protocol:** Inducted **"The V.C."** (Thiel/Khosla persona) into the Council of Voices (`SITE_AUDIT_PROMPT.md`) to weaponize FOMO and challenge architectural scope.
 *   **Infrastructure:** Established **The Plasticity Pipeline** (`Plasticity` -> `Blender` -> `Substance`) as the standard workflow for high-fidelity 3D assets (`docs/SETUP_PLASTICITY_PIPELINE.md`).
+
+#### [2025-12-06] The "Polish Arc"
+*   **[Polish] Branding Scrub:** Removed "Fortississimo" and "Quantum" vanity branding from `dreamjob.mdx` and system roadmaps to enforce "Erik Norris" identity.
+*   **[Feature] Pipeline Integration:** Integrated `SETUP_PLASTICITY_PIPELINE.md` into the global "System Manual" sidebar group.
+*   **[UI] Back Button Standardization:** Implemented `BackButton.astro` component to enforce consistent "Outline + Arrow" navigation across 404 and Colophon pages.
+*   **[Fix] Tinnitus Restoration:** Fixed broken external `noise.svg` dependency by baking a base64 Data URI directly into `global.css` (`.bg-noise`), restoring the signature "Hyper-Functional" grain overlay.
 
 
 #### [In Progress] Operation Productize (The HardTech Productizer)

@@ -1,0 +1,15 @@
+---
+import Button from "@components/Button/Button.astro";
+
+interface Props {
+	href: string;
+	label?: string;
+	class?: string;
+}
+
+const { href, label = "Back", class: className } = Astro.props;
+---
+
+<Button href={href} variant="outline" arrow="left" class={className}>
+	{label}
+</Button>

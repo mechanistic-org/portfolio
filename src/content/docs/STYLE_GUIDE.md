@@ -117,6 +117,12 @@ These components are available for use in MDX content:
 *   **Usage:** Separating content sections.
 *   **Style:** `border-b border-neutral-800`.
 
+### The Back Button
+*   **Usage:** Footer navigation for non-project pages (Colophon, 404).
+*   **Component:** `BackButton.astro`
+*   **Style:** `variant="outline"`, `arrow="left"`.
+*   **Philosophy:** Consistent exit paths are critical for deep-dive content.
+
 ### The Spotlight (Interaction)
 *   **Usage:** Project Directory rows.
 *   **Effect:** Radial gradient tracking mouse position.
@@ -149,6 +155,12 @@ These components are available for use in MDX content:
 ---
 
 ## 5. Visual Effects & Physics
+
+### The Noise Overlay ("Tinnitus")
+*   **Implementation:** `.noise-overlay` / `.bg-noise`.
+*   **Tech:** Base64 SVG Data URI (Baked in `global.css`).
+*   **Why:** External dependencies (`netlify.app`) are fragile. We bake the noise to ensure the "grit" never fails to load.
+*   **Opacity:** `0.03` (Subliminal).
 ### The Visible Grid
 *   **Aesthetic:** The coordinate system of the machine.
 *   **Params:**

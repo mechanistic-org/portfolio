@@ -70,8 +70,8 @@ const ProjectStrip: React.FC<ProjectStripProps> = ({ projects }) => {
                         onMouseEnter={() => setHoverIndex(index)}
                         onClick={() => openModal(index)}
                         className={`group cursor-pointer grid grid-cols-12 gap-4 p-3 border-l-2 transition-all duration-100 ${hoverIndex === index
-                                ? 'bg-white/10 border-emerald-500 text-white'
-                                : 'bg-transparent border-transparent text-white/60 hover:text-white'
+                            ? 'bg-white/10 border-emerald-500 text-white'
+                            : 'bg-transparent border-transparent text-white/60 hover:text-white'
                             }`}
                     >
                         <div className="col-span-1 font-mono text-xs opacity-50">
@@ -113,7 +113,7 @@ const ProjectStrip: React.FC<ProjectStripProps> = ({ projects }) => {
                             )}
 
                             {/* Scanline Overlay */}
-                            <div className="absolute inset-0 bg-[url('https://grain-overlay.netlify.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
+                            <div className="absolute inset-0 bg-noise opacity-20 mix-blend-overlay pointer-events-none"></div>
                             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50 pointer-events-none"></div>
                         </div>
 

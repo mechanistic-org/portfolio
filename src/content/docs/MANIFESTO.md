@@ -138,4 +138,7 @@ The website (`src`) is merely a transient rendering of the underlying data (`dat
 ### 13. The Law of Vendor Independence (Anti-Lock-In)
 *   **Principle:** SaaS subscriptions are temporary; Assets are permanent.
 *   **The Test:** "If you can't open it in MS Paint, you don't own it."
-*   **Practice:** Always "Harvest" proprietary formats (Adobe .sbsar, Onshape .part) into vendor-agnostic standards (.png, .obj, .step) immediately upon creation.
+### 14. The Law of Self-Reliance
+*   **Rule:** Bake critical assets.
+*   **Context:** We lost our noise overlay because it relied on an external Netlify URL.
+*   **Decree:** If it defines the *feel* of the site (fonts, noise, icons), it must live in the repo. No external CDNs for aesthetics.

@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import BaseLayout from "./BaseLayout.astro";
 import Button from "@/components/Button/Button.astro";
+import BackButton from "@/components/UI/BackButton.astro";
 
 // utils
 import { formatDate } from "@/js/textUtils";
@@ -88,7 +89,7 @@ const date = pubDate ? new Date(pubDate) : new Date();
 
 			{/* Footer Navigation */}
 			<div class="mt-16 flex items-center justify-between border-t border-neutral-800 pt-8">
-				<Button href="/colophon" variant="outline" arrow="left"> Back to Index </Button>
+				<BackButton href="/colophon" label="Back to Index" />
 				<Button href="/" variant="primary"> Return Home </Button>
 			</div>
 		</div>
