@@ -610,3 +610,11 @@ Importing code from other themes often introduces inconsistent casing (e.g., `co
 *   **Context:** You edited a file, ran `npm run dev`, and your changes vanished.
 *   **Cause:** You likely edited a build artifact (e.g., `src/content/projects/dreamjob.mdx`) instead of the source (`data_source/manual_content/dreamjob.md`).
 *   **Fix:** Apply edits to the `data_source/` files.
+
+### Toggling Site Status
+*   **Goal:** Switch from "Under Construction" back to "System Online".
+*   **File:** `src/components/Hero/HardTechHero.astro`
+*   **Action:**
+    1.  Import `ImpactResonance` from `../DataViz/ImpactResonance`.
+    2.  Replace `<ConstructionGauge ... />` with `<ImpactResonance label="SYSTEM STATUS" value={98} />`.
+    3.  Update the text label below it to `[SYSTEM ONLINE]` (Emerald-500).

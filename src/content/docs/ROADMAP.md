@@ -264,6 +264,10 @@ sidebar:
 *   **[Feature] Pipeline Integration:** Integrated `SETUP_PLASTICITY_PIPELINE.md` into the global "System Manual" sidebar group.
 *   **[UI] Back Button Standardization:** Implemented `BackButton.astro` component to enforce consistent "Outline + Arrow" navigation across 404 and Colophon pages.
 *   **[Fix] Tinnitus Restoration:** Fixed broken external `noise.svg` dependency by baking a base64 Data URI directly into `global.css` (`.bg-noise`), restoring the signature "Hyper-Functional" grain overlay.
+*   **[UI] Hero Status Standard:**
+    *   **Change:** Replaced "System Online" (Green) with "Under Construction" (Amber).
+    *   **Component:** Created `<ConstructionGauge />` to preserve `<ImpactResonance />` for future use.
+    *   **Aesthetic:** Reduced animation speed (3000ms pulse) for a "calmer" holding pattern.
 
 
 #### [In Progress] Operation Productize (The HardTech Productizer)

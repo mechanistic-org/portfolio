@@ -115,6 +115,7 @@ Assets are managed physically, not logically.
         *   **`PhaseDonutD3.tsx`:** Interactive donut chart leveraging D3 arc generators.
             *   *Refactor Note:* Accepts `Array<{ phase: string, value: number }>` instead of `Record` to align with the "Snake Case Strategy" and improve reliability.
         *   **`ImpactResonance.tsx`:** Physics-based "System Velocity" gauge using D3 timer loops for organic pulsing effects.
+        *   **`ConstructionGauge.tsx`:** The "Amber" low-energy holding pattern (calmer pulse). separated from `ImpactResonance` to ensure the core metric component remains "High Velocity" without conditional pollution.
 *   **`ProjectGallery.tsx`:**
     *   **Layout:** "Smart Bento" CSS Grid.
     *   **Logic:** The ingestion script calculates aspect ratios for every image. The frontend uses this data to assign row/column spans:

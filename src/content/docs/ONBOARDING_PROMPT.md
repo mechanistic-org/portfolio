@@ -21,5 +21,5 @@ sidebar:
 > *   **Read:** `src/content/docs/SETUP_PLASTICITY_PIPELINE.md` (The 3D Bridge Standard)
 >
 > **NEW WORKFLOWS:**
-> *   [`CONTENT_INGESTION_WORKFLOW.md`](/src/content/docs/CONTENT_INGESTION_WORKFLOW.md): The Universal Pipeline for Brain Dumps -> Case Studies.
+> *   [`CONTENT_STRATEGY.md`](/src/content/docs/CONTENT_STRATEGY.md): The internal playbook for the Hybrid Content System.
 > *   [`UNIVERSAL_INGEST_PROMPT.md`](/src/content/docs/prompts/UNIVERSAL_INGEST_PROMPT.md): The Master Prompt for LLM synthesis.

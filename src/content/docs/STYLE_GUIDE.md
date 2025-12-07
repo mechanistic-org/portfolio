@@ -133,6 +133,12 @@ These components are available for use in MDX content:
 *   **Rule:** When displaying multiple charts (e.g., Skill Fingerprint + Part Breakdown), they **MUST** be wrapped in a responsive grid container to prevent vertical stacking on desktop.
 *   **Class:** `grid grid-cols-1 gap-6 md:grid-cols-2`
 
+### Construction Gauge (Status)
+*   **Usage:** Temporary placeholder for sections or sites in active development.
+*   **Color:** `Amber-500` (`#f59e0b`).
+*   **Behavior:** Slower, calmer pulse (3s duration) compared to the active "System Online" frenzy.
+*   **Component:** `<ConstructionGauge />`
+
 ---
 
 ## 4. Voice & Tone
