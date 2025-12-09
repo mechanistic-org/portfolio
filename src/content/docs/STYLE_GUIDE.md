@@ -45,6 +45,9 @@ We use a scientifically calibrated OKLCH scale for consistent perceptual brightn
     *   *Rule:* If it's a number or a metric, it **MUST** be Mono.
 
 ### Icons & Logos
+> [!IMPORTANT]
+> **Branding Guide:** For comprehensive logo usage, naming conventions, and 3D assets, refer to the **Branding Guide** (`BRANDING.md`).
+
 ### Theme-Aware Logos
 To implement a logo that switches with the theme:
 1.  Include both `img` tags in the HTML.

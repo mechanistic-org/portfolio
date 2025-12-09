@@ -3,7 +3,7 @@ import siteData from "@config/siteData.json";
 
 const ASSET_DOMAIN = "https://assets.eriknorris.com";
 // 1. YOUR 3D LOGO
-const MODEL_URL = `${ASSET_DOMAIN}/_site/logo.glb`;
+const MODEL_URL = `${ASSET_DOMAIN}/_site/EN_Logo_MatteCarbon.glb`;
 
 // 2. YOUR PNG POSTER (Transparency Support)
 const POSTER_URL = `${ASSET_DOMAIN}/_site/EN_Badge_wire_rusty_1200.png`;
@@ -13,69 +13,39 @@ import ScrambleText from "@components/Effects/ScrambleText";
 <section id="hero" class="relative flex w-full pb-3">
 	<div class="site-container grid items-center gap-10 pt-32 md:grid-cols-12 md:gap-8 md:pt-32">
 		<!-- Model (Left) - Spans 5 cols, starts at 2 for breathing room -->
-		<div
-			class="parallax-layer relative flex h-[300px] w-full min-w-[300px] items-center justify-center md:col-span-5 md:col-start-2 md:h-[400px]"
-			data-speed="2"
-		>
-			<model-viewer
-				src={MODEL_URL}
-				poster={POSTER_URL}
-				alt="Erik Norris 3D Logo"
-				auto-rotate
-				camera-controls
-				shadow-intensity="1"
-				exposure="1.2"
-				camera-orbit="0deg 90deg 105%"
-				field-of-view="30deg"
-				class="h-full w-full"
-				style="--poster-color: transparent; background-color: transparent;"
-			>
-				<div slot="progress-bar" class="absolute top-0 left-0 h-1 w-full bg-transparent">
-					<div
-						class="bg-primary h-full transition-all duration-300"
-						style="width: 0%"
-						id="progress"
-					>
-					</div>
-				</div>
-			</model-viewer>
-		</div>
-
-		<!-- Text (Right) - Spans 5 cols, starts at 7 -->
-		<div
-			class="parallax-layer mx-auto flex max-w-lg flex-col gap-6 md:col-span-5 md:col-start-7 md:ml-0 md:max-w-full"
-			data-speed="1"
-		>
-			<h1 class="h1">
-				Hi, I'm&nbsp;<ScrambleText
-					client:load
-					text={siteData.author.name}
-					className="text-primary"
-				/>
-			</h1>
-			<p class="description text-lg text-pretty text-neutral-400">Mechanical Design Engineer</p>
-
-			<div class="mt-2 flex items-center gap-2 font-mono text-xs text-green-500">
-				<span class="relative flex h-2 w-2">
-					<span
-						class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"
-					></span>
-					<span class="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
-				</span>
-				<ScrambleText client:visible text="SYSTEM ONLINE" className="tracking-widest" />
-			</div>
-		</div>
-	</div>
-
-	<!-- Scroll Indicator -->
-	<div
-		id="scroll-indicator"
-		class="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-xs text-neutral-500 transition-opacity duration-300"
-	>
-		<span class="animate-bounce">↓</span>
-		<span class="tracking-widest uppercase">Scroll to Init</span>
+		style="width: 0%" id="progress" >
 	</div>
 </section>
+
+<!-- Text (Right) - Spans 5 cols, starts at 7 -->
+<div
+	class="parallax-layer mx-auto flex max-w-lg flex-col gap-6 md:col-span-5 md:col-start-7 md:ml-0 md:max-w-full"
+	data-speed="1"
+>
+	<h1 class="h1">
+		Hi, I'm&nbsp;<ScrambleText client:load text={siteData.author.name} className="text-primary" />
+	</h1>
+	<p class="description text-lg text-pretty text-neutral-400">Mechanical Design Engineer</p>
+
+	<div class="mt-2 flex items-center gap-2 font-mono text-xs text-green-500">
+		<span class="relative flex h-2 w-2">
+			<span
+				class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"
+			></span>
+			<span class="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+		</span>
+		<ScrambleText client:visible text="SYSTEM ONLINE" className="tracking-widest" />
+	</div>
+</div>
+
+<!-- Scroll Indicator -->
+<div
+	id="scroll-indicator"
+	class="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 font-mono text-xs text-neutral-500 transition-opacity duration-300"
+>
+	<span class="animate-bounce">↓</span>
+	<span class="tracking-widest uppercase">Scroll to Init</span>
+</div>
 
 <script>
 	const viewer = document.querySelector("model-viewer");

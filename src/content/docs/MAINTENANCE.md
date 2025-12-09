@@ -556,7 +556,26 @@ See `docs/IMAGE_WORKFLOW.md` for the full SOP.
     });
     ```
 
-## 12. Documentation System
+## 12. Onshape Export Automation ("The Weaponizer")
+We use a custom Python script to guarantee **Meter-scale** exports from Onshape, preventing scaling issues in Plasticity/Blender.
+
+### Usage
+```bash
+python scripts/onshape_export.py "ONSHAPE_DOCUMENT_URL" --output filename.x_t
+```
+
+### Theory of Operation (Clone & Burn)
+To modify units without affecting the public/source document (which might be Read-Only), the script:
+1.  **Clones** the document to a private, temporary workspace.
+2.  **Sets Units** of the clone to `METER`.
+3.  **Exports** the Parasolid (`.x_t`).
+4.  **Deletes** the temporary clone.
+
+### Prerequisites
+*   `ONSHAPE_ACCESS_KEY` and `ONSHAPE_SECRET_KEY` must be set in environment variables.
+*   The API keys must have **Write** permissions (to create the temp doc).
+
+## 13. Documentation System
 
 All documentation is now consolidated in `src/content/docs/` to serve as the Single Source of Truth (SSOT).
 
@@ -611,6 +630,15 @@ Importing code from other themes often introduces inconsistent casing (e.g., `co
 *   **Cause:** You likely edited a build artifact (e.g., `src/content/projects/dreamjob.mdx`) instead of the source (`data_source/manual_content/dreamjob.md`).
 *   **Fix:** Apply edits to the `data_source/` files.
 
+### Substance Painter: Texture Looks "Flat" or "Camo-like"
+*   **Symptom:** Forged Carbon material looks like soft blobs or a 2D print wrap ("Urban Camo").
+*   **Root Cause 1:** Soft Noise. Using standard "Cells" or "Clouds" noise creates organic, melted shapes.
+    *   **Fix:** Switch to **"Crystal 1"** or **"Cells 4"** with Contrast `0.95`. You need sharp, angular islands.
+*   **Root Cause 2:** Missing Anisotropy. If chips are only defined by Height, they look like plastic.
+    *   **Fix:** Enable **Anisotropy Level** (`0.9+`) and drive **Anisotropy Angle** with a random grayscale noise (`Cells 4`). This creates the "Holographic" rotation effect.
+*   **Root Cause 3:** Scale Mismatch. Large chips look like paving stones.
+    *   **Fix:** Crank Noise Scale to `75-100` for "Confetti" sizing.
+
 ### Toggling Site Status
 *   **Goal:** Switch from "Under Construction" back to "System Online".
 *   **File:** `src/components/Hero/HardTechHero.astro`
@@ -618,3 +646,29 @@ Importing code from other themes often introduces inconsistent casing (e.g., `co
     1.  Import `ImpactResonance` from `../DataViz/ImpactResonance`.
     2.  Replace `<ConstructionGauge ... />` with `<ImpactResonance label="SYSTEM STATUS" value={98} />`.
     3.  Update the text label below it to `[SYSTEM ONLINE]` (Emerald-500).
+
+### Blender: Cyan Lines vs. Red Lines
+*   **Symptom:** User sees bright light-blue (Cyan) lines and thinks they are holes/open edges.
+*   **Reality:** Cyan lines are **"Sharp Edges"** marked by CAD software (Plasticity). They are safe.
+*   **Action:** You can often use these as a guide for Seams. Select them (`Select Sharp Edges`), then `Mark Seam` (Red) to cut them.
+
+### 3D Asset - "The Smooth Blob" Issue
+*   **Symptom:** Asset looks low-poly, smooth, and missing all surface detail (chips/scratches) in the web viewer.
+*   **Cause:** The glTF file does not contain **Tangents**, so the Normal Map is ignored.
+*   **Fix:** Re-export from Blender. In Export Settings > Geometry > Check **Tangents**.
+
+### 3D Asset - "Shiny Plastic" / "Dark Edges"
+*   **Symptom:** Asset looks like wet plastic, or has strange black outlines.
+*   **Cause:**
+    1.  **Color Space:** Metallic/Roughness/Normal textures are set to `sRGB` (Gamma Corrected) instead of `Non-Color`.
+    2.  **Wiring:** Red Channel (Occlusion) is connected to Metallic.
+*   **Fix:**
+    1.  Set Image Nodes to `Non-Color`.
+    2.  Connect **Blue** Channel of ORM to Metallic.
+
+### 3D Asset - "Z-Index Fighting"
+*   **Symptom:** Background effects (Noise, Stars) appear *in front* of the model.
+*   **Fix:**
+    1.  Ensure `.noise-overlay` is `z-index: 5` (or low).
+    2.  Ensure `BaseLayout` wrapper does not have `z-10` (which creates a stacking trap).
+    3.  Ensure `model-viewer` container is `z-[60]` (High).

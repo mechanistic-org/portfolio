@@ -1,0 +1,31 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const MODEL_URL = `/assets/r2/_site/EN_Logo_MatteCarbon.glb?v=${Date.now()}`;
+---
+
+<BaseLayout title="Logo Test Lab" description="Debug environment for 3D assets">
+	<div class="site-container pt-32 pb-20">
+		<h1 class="h1 mb-8 text-neutral-100">3D Asset Lab</h1>
+
+		<!-- Main Viewer (Full Width, Large) -->
+		<div
+			class="relative z-[60] h-[80vh] w-full overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900"
+		>
+			<model-viewer
+				src={MODEL_URL}
+				alt="Erik Norris Matte Carbon Logo"
+				camera-controls
+				auto-rotate
+				touch-action="pan-y"
+				shadow-intensity="1"
+				exposure="3.5"
+				shadow-softness="0"
+				camera-orbit="0deg 90deg 105%"
+				class="h-full w-full"
+				style="background: radial-gradient(circle at center, #333 0%, #000 100%);"
+			>
+			</model-viewer>
+		</div>
+	</div>
+</BaseLayout>

@@ -19,6 +19,9 @@ sidebar:
 > *   **Avoid Nexus Events:** Do not edit generated content in `src/content/projects/`. Always trace data back to `data_source/Main.csv` or `data_source/manual_content/`.
 > *   **Read:** `src/content/docs/SUBSTANCE_MAXIMIZATION_PLAN.md` (Strategy for 3D textures & assets)
 > *   **Read:** `src/content/docs/SETUP_PLASTICITY_PIPELINE.md` (The 3D Bridge Standard)
+> *   **Read:** `src/content/docs/VECTOR_PIPELINE.md` (The Blueprint Strategy)
+> *   **Read:** `src/content/docs/BRANDING.md` (The Source of Truth)
+> *   **Read:** `src/content/docs/WORKFLOW_3D.md` (The "Core Tunnel" Pipeline & Export Rules)
 >
 > **NEW WORKFLOWS:**
 > *   [`CONTENT_STRATEGY.md`](/src/content/docs/CONTENT_STRATEGY.md): The internal playbook for the Hybrid Content System.

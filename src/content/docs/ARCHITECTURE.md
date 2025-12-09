@@ -88,6 +88,11 @@ Assets are managed physically, not logically.
 *   **Consolidation:** All branding assets (logos, wordmarks, badges) are consolidated here. Legacy paths like `public/images/branding/` or `public/assets/logos/` are deprecated and removed.
 *   **Theme Switching:** Components like `FilterMenu` and `SiteLogo` use a dual-image approach (loading both black and white variants) controlled by CSS classes (`.logo-light`, `.logo-dark`) and the `:global(.dark)` selector to ensure instant theme switching without flash-of-wrong-content.
 
+### 3D Lighting Strategy ("The Carbon Rule")
+*   **Challenge:** "Matte Forged Carbon" is physically black and highly absorbent. Standard "Neutral" HDRIs render it as a flat silhouette.
+*   **Decision:** We use `model-viewer`'s **Legacy Lighting** (No `environment-image` specified) combined with High Exposure (`3.5`).
+*   **Rationale:** The default lighting provides higher contrast and directional shadows needed to "fire" the anisotropic flakes. "Neutral" lighting is forbidden for Carbon assets.
+
 ## ðŸ›¡ï¸ Type Safety
 *   **Strict Typing:** Core components (`[...slug].astro`, `Seo.astro`, `BaseLayout.astro`) enforce strict TypeScript props, particularly for `ImageMetadata`.
 *   **SEO Types:** `Seo.astro`, `BaseHead.astro`, and `BaseLayout.astro` now support `type="project"` in addition to `"general"` and `"blog"`. This maps to `og:type="article"`.

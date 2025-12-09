@@ -142,3 +142,10 @@ The website (`src`) is merely a transient rendering of the underlying data (`dat
 *   **Rule:** Bake critical assets.
 *   **Context:** We lost our noise overlay because it relied on an external Netlify URL.
 *   **Decree:** If it defines the *feel* of the site (fonts, noise, icons), it must live in the repo. No external CDNs for aesthetics.
+
+### 15. The Law of the Stack
+**Never use Presets.**
+Presets are black boxes that lock you into rigid aesthetics ("Melted Plastic").
+*   **Rule:** Build every material from `00_BASE` up.
+*   **Why:** It forces you to understand the physics (Resin -> Fiber -> Flash -> Wear -> Dust).
+*   **Result:** A fully non-destructive, "Datasheet Grade" asset that you own completely.

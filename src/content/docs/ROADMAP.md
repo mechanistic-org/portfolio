@@ -37,6 +37,11 @@ sidebar:
     *   **Description:** A "Plug-and-Play" authoring system that allows complex UI patterns (Zigzag Grids, 3D Viewers, Process Strips) to be inserted via shortcodes (`qq-*`). This transforms the IDE into a layout engine, ensuring every project page adheres to the strict "Visual Taxonomy" without manual coding.
 
 ## ðŸ“œ Change Log (Recent)
+*   **[Pipeline]** Established "Pro UV Workflow" for Plasticity -> Blender -> Substance.
+    *   Validated "Ngons" export strategy.
+    *   Documented "Select Sharp Edges" automation in Blender.
+    *   Standardized Substance Import (OpenGL, No Auto-Unwrap).
+*   **[Materials]** Refined "Matte Forged Carbon" recipe with **Tri-planar Projection** to solve UV stretching artifacts.
 *   **[Feature] 3D Pipeline 2.0:** Integrated Adobe Substance 3D with "Harvesting Protocol" (Anti-Lock-In) and "Unlimited Asset" strategy.
 *   **[Design] Material Tokens:** Defined "Matte Forged Carbon" and "Titanium Ceramic" recipes in `STYLE_GUIDE.md`.
 *   **[Refactor] Identity Polish:** Scrubbed "Quantum" vanity branding from public documentation to align with "Erik Norris" identity.
@@ -236,20 +241,17 @@ sidebar:
 *   **Raw Mode (The Source):**
     *   **Hook:** "Trust, but verify."
     *   **Tech:** Astro API Endpoints (`.ts`), Plain Text.
-    *   **Description:** A dedicated `/raw/[slug]` route that bypasses the layout engine to serve the unadulterated Markdown source of any project, reinforcing the "Physical Asset Law" and open engineering culture.
-
-*   **The "Mineralizer" Engine:**
-    *   **Hook:** Turning unstructured "Brain Dumps" into rigid Datasheets automatically.
-    *   **Tech:** Python, Google Gen AI SDK (Gemini 2.5 Pro), Multimodal Ingestion.
-    *   **Description:** A "Zero-Friction" pipeline that listens to raw voice memos or reads loose notes, applies a strict brutalist style guide ("The Engineer" persona), and outputs production-ready portfolio case studies. It features a "Gap Analysis" system that fails loudly (via Alerts) if critical metrics are missing.
-
-
-#### [2025-12-05] The "Fortissimo" Update
-*   **Navigation:** Renamed generic "Work" link to "Projects" (`navData.json.ts`).
-*   **Visuals:** Implemented global "Noise Overlay" (CSS base64 SVG) for "Hyper-Functional Brutalism" texture.
-*   **Narrative:** Rebranded "Dreamjob" to "The North Star Protocol".
 *   **Data:** Added `Impact` field to `Main.csv` schema.
 *   **Colophon:** Integrated "Audit Personas" (The Hater, The Recruiter, The Data God) into the Testimonial Wall.
+*   **EN_Matte_Carbon_Manual (Smart Material):**
+    *   **Hook:** "Forged Carbon that actually follows the laws of physics."
+    *   **Tech:** Adobe Substance Painter (Anisotropy Channel + Tri-planar Crystal Noise).
+    *   **Description:** A procedural material stack that simulates chopped tow resin with holographic light response, moving beyond limited "Texture Wrap" presets.
+
+### 3D Asset Lab (`/about/test-logo`)
+*   **Hook:** A focused "Clean Room" for debugging web-based 3D assets.
+*   **Purpose:** Isolates the model from site CSS/Layout to debug Lighting, Textures, and Orientation.
+*   **Status:** Active Tool. (Use `?v=` timestamp to bust cache).
 #### [2025-12-06] The "Unification" Update
 *   **Documentation:** Restructured `docs/` into 4 distinct groups (System, Workflows, Reference, Prompts) for better discoverability.
 *   **Feature:** Implemented the **Universal Inbox** (`data_source/inbox/`) with a "Smart Filename" Schema (`slug.context.ext`) for zero-friction content ingestion.
@@ -258,6 +260,12 @@ sidebar:
 *   **UX:** Polished Sidebar Navigation (`SidebarNav.astro`) to strictly enforce the new logical grouping system.
 *   **Protocol:** Inducted **"The V.C."** (Thiel/Khosla persona) into the Council of Voices (`SITE_AUDIT_PROMPT.md`) to weaponize FOMO and challenge architectural scope.
 *   **Infrastructure:** Established **The Plasticity Pipeline** (`Plasticity` -> `Blender` -> `Substance`) as the standard workflow for high-fidelity 3D assets (`docs/SETUP_PLASTICITY_PIPELINE.md`).
+
+#### [2025-12-07] The "Identity Core" Update
+*   **[Strategy] Branding Codex:** Drafted and ratified `BRANDING.md` defining the "Hyper-Functional Brutalism" identity, Snake Case naming, and Voice/Tone ("Transparency & Truth").
+*   **[Pipeline] Vector Truth:** Established `VECTOR_PIPELINE.md` differentiating between "Geometric Truth" (Blender Line Art -> SVG) and "Material Truth" (Substance -> PNG/GLB).
+*   **[Strategy] The Collector:** Refined `SUBSTANCE_MAXIMIZATION_PLAN.md` with a strict local library protocol (`00_Sources`, `02_Smart_Specials`) and "The Harvest" anti-lock-in strategy.
+*   **[Design] The Triad:** Defined the core material palette: "Matte Forged Carbon", "Titanium Ceramic", and "Weathered Steel".
 
 #### [2025-12-06] The "Polish Arc"
 *   **[Polish] Branding Scrub:** Removed "Fortississimo" and "Quantum" vanity branding from `dreamjob.mdx` and system roadmaps to enforce "Erik Norris" identity.
