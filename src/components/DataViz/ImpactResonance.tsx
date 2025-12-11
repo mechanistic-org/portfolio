@@ -34,9 +34,9 @@ export default function ImpactResonance({ value = 50, label = "SYSTEM VELOCITY",
             .attr("cy", cy)
             .attr("r", coreRadius)
             .attr("fill", "none")
-            .attr("stroke", "#22c55e")
+            .attr("stroke", "#2E5CFF")
             .attr("stroke-width", 2)
-            .attr("class", "drop-shadow-[0_0_8px_rgba(34,197,94,0.5)]");
+            .attr("class", "drop-shadow-[0_0_8px_rgba(46,92,255,0.5)]");
 
         // 2. Pulse Rings (Animated)
         const ring = g.append("circle")
@@ -44,7 +44,7 @@ export default function ImpactResonance({ value = 50, label = "SYSTEM VELOCITY",
             .attr("cy", cy)
             .attr("r", coreRadius)
             .attr("fill", "none")
-            .attr("stroke", "#22c55e")
+            .attr("stroke", "#2E5CFF")
             .attr("stroke-width", 1)
             .attr("opacity", 0.5);
 
@@ -73,7 +73,7 @@ export default function ImpactResonance({ value = 50, label = "SYSTEM VELOCITY",
             .enter()
             .append("circle")
             .attr("r", 2)
-            .attr("fill", "#4ade80");
+            .attr("fill", "#2E5CFF");
 
         // Animation Loop
         const timer = d3.timer((elapsed) => {

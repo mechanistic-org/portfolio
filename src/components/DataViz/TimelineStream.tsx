@@ -117,7 +117,7 @@ const TimelineStream: React.FC<TimelineStreamProps> = ({ data }) => {
             {selectedNode && (
                 <div className="absolute top-4 left-4 pointer-events-none bg-black/80 backdrop-blur p-4 rounded-lg border border-white/10 shadow-xl">
                     <div className="text-white font-bold">{selectedNode.name}</div>
-                    <div className="text-xs text-green-400 font-mono">{selectedNode.start_date.split('T')[0]}</div>
+                    <div className="text-xs text-[#2E5CFF] font-mono">{selectedNode.start_date.split('T')[0]}</div>
                 </div>
             )}
         </div>

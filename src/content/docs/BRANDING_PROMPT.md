@@ -63,6 +63,6 @@ Review the above, then generate the `docs/STYLE_GUIDE.md` and propose 3 candidat
 *   **Philosophy:** "Data as Artifact."
 *   **Rules:**
     1.  **No Libraries:** Do not use `recharts`, `chart.js`, or `nivo`. Build from primitives using D3.js.
-    2.  **Color:** Use the brand palette (`#22c55e` for Primary, `#404040` for Grid).
+    2.  **Color:** Use the brand palette (`#2E5CFF` for Primary, `#404040` for Grid).
     3.  **Typography:** Labels must use `font-mono` and be uppercase.
     4.  **Behavior:** Charts should feel "alive" (pulsing, slight drift) rather than static, reinforcing the "System Operational" narrative.

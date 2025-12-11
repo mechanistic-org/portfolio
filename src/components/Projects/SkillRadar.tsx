@@ -55,9 +55,9 @@ export default function SkillRadar({ data }: { data: SkillPoint[] | string }) {
           <Radar
             name="Project Identity"
             dataKey="value"
-            stroke="#20C20E"
+            stroke="#2E5CFF"
             strokeWidth={3}
-            fill="#20C20E"
+            fill="#2E5CFF"
             fillOpacity={0.4}
           />
 

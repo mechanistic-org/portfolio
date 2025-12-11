@@ -21,7 +21,7 @@ sidebar:
 > *   **Read:** `src/content/docs/SUBSTANCE_MAXIMIZATION_PLAN.md` (Strategy for 3D textures & assets)
 > *   **Read:** `src/content/docs/SETUP_PLASTICITY_PIPELINE.md` (The 3D Bridge Standard)
 > *   **Read:** `src/content/docs/VECTOR_PIPELINE.md` (The Blueprint Strategy)
-> *   **Read:** `src/content/docs/BRANDING.md` (The Source of Truth)
+> *   **Read:** `src/content/docs/BRANDING_PROMPT.md` (The Source of Truth)
 > *   **Read:** `src/content/docs/WORKFLOW_3D.md` (The "Core Tunnel" Pipeline & Export Rules)
 >
 > **NEW WORKFLOWS:**

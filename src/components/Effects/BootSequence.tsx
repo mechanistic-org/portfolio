@@ -157,7 +157,7 @@ const BootSequence: React.FC = () => {
                 {lines.map((line, i) => (
                     <div
                         key={i}
-                        className="text-lg md:text-2xl text-green-500 font-bold animate-pulse-fast drop-shadow-[0_0_5px_rgba(34,197,94,0.8)]"
+                        className="text-lg md:text-2xl text-[#2E5CFF] font-bold animate-pulse-fast drop-shadow-[0_0_5px_rgba(46,92,255,0.8)]"
                     >
                         {line}
                     </div>

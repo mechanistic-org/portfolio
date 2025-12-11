@@ -19,11 +19,11 @@ const expressiveCodeOptions = {
         borderColor: "#525252",
         codeBackground: "#171717",
         scrollbarThumbColor: "#525252",
-        focusBorder: "#20C20E",
+        focusBorder: "#2E5CFF",
         codeFontFamily:
             "JetBrains Mono, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
         frames: {
-            editorActiveTabIndicatorBottomColor: "#20C20E",
+            editorActiveTabIndicatorBottomColor: "#2E5CFF",
             editorActiveTabBackground: "#262626",
             editorBackground: "#262626",
             editorTabBarBackground: "#171717",
@@ -37,12 +37,11 @@ export default defineConfig({
     adapter: cloudflare({
         imageService: "compile",
     }),
-    site: "https://quantum.cosmicthemes.com",
+    site: "https://www.eriknorris.com",
     redirects: {
         "/admin": "/keystatic",
     },
 
-    // 👇 THIS IS THE MISSING BLOCK THAT FIXES YOUR BUILD
     i18n: {
         defaultLocale: "en",
         locales: ["en"], // Kept only English to simplify your build
@@ -50,7 +49,6 @@ export default defineConfig({
             prefixDefaultLocale: false,
         },
     },
-    // 👆 END MISSING BLOCK
 
     integrations: [
         AutoImport({

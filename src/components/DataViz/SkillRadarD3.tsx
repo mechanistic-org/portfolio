@@ -96,11 +96,11 @@ export default function SkillRadarD3({ data, width = 180, height = 180 }: SkillR
                 {/* Radar Shape */}
                 <path
                     d={pathRef}
-                    fill="rgba(34, 197, 94, 0.2)" // brand-primary green with opacity
-                    stroke="#22c55e"
+                    fill="rgba(46, 92, 255, 0.2)" // brand-primary blue with opacity
+                    stroke="#2E5CFF"
                     strokeWidth="2"
                     strokeLinejoin="round"
-                    className="drop-shadow-[0_0_8px_rgba(34,197,94,0.3)]"
+                    className="drop-shadow-[0_0_8px_rgba(46,92,255,0.3)]"
                 />
             </g>
         </svg>

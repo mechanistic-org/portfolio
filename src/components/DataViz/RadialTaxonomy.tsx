@@ -84,7 +84,7 @@ const RadialTaxonomy: React.FC<RadialTaxonomyProps> = ({ data }) => {
 
         node.append("circle")
             .attr("r", (d) => d.depth === 0 ? 0 : d.children ? 4 : 6)
-            .attr("fill", (d) => d.depth === 0 ? "none" : d.children ? "#444" : "#20C20E")
+            .attr("fill", (d) => d.depth === 0 ? "none" : d.children ? "#444" : "#2E5CFF")
             .attr("cursor", "pointer")
             .on("mouseover", function (event, d: any) {
                 if (d.depth !== 0) {
@@ -92,7 +92,7 @@ const RadialTaxonomy: React.FC<RadialTaxonomyProps> = ({ data }) => {
                 }
             })
             .on("mouseout", function (event, d: any) {
-                d3.select(this).attr("fill", d.depth === 0 ? "none" : d.children ? "#444" : "#20C20E")
+                d3.select(this).attr("fill", d.depth === 0 ? "none" : d.children ? "#444" : "#2E5CFF")
                     .attr("r", d.depth === 0 ? 0 : d.children ? 4 : 6);
             })
             .on("click", (event, d: any) => {

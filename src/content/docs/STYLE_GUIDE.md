@@ -31,7 +31,7 @@ The design system is not just about "styling"; it is a functional specification.
 ### Colors (OKLCH)
 We use a scientifically calibrated OKLCH scale for consistent perceptual brightness.
 
-*   **Primary (The Signal):** `oklch(74.72% 0.2439 141.89)` (Neon Green). Used for active states, cursors, and "System Online" indicators.
+*   **Primary (The Signal):** `#2E5CFF` (YInMn Blue). Used for active states, cursors, and "System Online" indicators.
 *   **Neutral (The Chassis):** A 10-step scale from `neutral-50` (White) to `neutral-950` (Void Black).
 *   **Semantic Layer:**
     *   `--background`: `neutral-950` (Dark Mode Default)
