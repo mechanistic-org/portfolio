@@ -142,6 +142,12 @@ These components are available for use in MDX content:
 *   **Behavior:** Slower, calmer pulse (3s duration) compared to the active "System Online" frenzy.
 *   **Component:** `<ConstructionGauge />`
 
+### Technical Header (Spec Card)
+*   **Component:** `ProjectSpecCard.astro`
+*   **Purpose:** Standardized "Head Unit" for project pages.
+*   **Behavior:** Encapsulates metadata (Role, Client, Status) in a high-density card.
+*   **Interaction:** "Mini Gauge" pulses to indicate project status (Blue=Done, Amber=WIP).
+
 ---
 
 ## 4. Voice & Tone

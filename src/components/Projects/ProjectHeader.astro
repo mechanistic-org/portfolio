@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry } from "astro:content";
+import ProjectSpecCard from "./ProjectSpecCard.astro";
 
 interface Props {
 	entry: CollectionEntry<"projects">;
@@ -9,9 +10,6 @@ interface Props {
 
 const { entry, nextProject, prevProject } = Astro.props;
 const data = entry.data as any; // Cast to any to resolve schema type lag
-
-const tools = data.tools || [];
-const impact = data.impact;
 ---
 
 <header class="relative border-b border-white/10 bg-neutral-900/50 pt-32 pb-8">
@@ -24,8 +22,6 @@ const impact = data.impact;
 				<span class="text-primary">/// {entry.id}</span>
 				<span>::</span>
 				<span>{data.category}</span>
-				<span>::</span>
-				<span>{new Date(data.date).getFullYear()}</span>
 			</div>
 
 			{/* Navigation Controls */}
@@ -49,8 +45,10 @@ const impact = data.impact;
 				<a
 					href="/projects"
 					class="flex h-8 w-8 items-center justify-center rounded border border-white/10 bg-white/5 text-neutral-400 transition-colors hover:border-emerald-500/50 hover:text-white"
-					title="Index">▦</a
+					title="Index"
 				>
+					▦
+				</a>
 
 				{
 					nextProject ? (
@@ -91,75 +89,12 @@ const impact = data.impact;
 			</p>
 		</div>
 
-		{/* Spec Sheet Grid */}
-		<div class="grid grid-cols-1 gap-8 border-t border-white/10 pt-8 md:grid-cols-3">
-			{/* Col 1: BOM (Tools) */}
-			<div>
-				<h3 class="mb-4 font-mono text-[10px] tracking-widest text-neutral-500 uppercase">
-					Bill of Materials
-				</h3>
-				<ul class="space-y-1 font-mono text-xs text-neutral-300">
-					{
-						tools.slice(0, 6).map((tool: string) => (
-							<li class="flex items-center gap-2">
-								<span class="h-1 w-1 rounded-full bg-[#2E5CFF]/50" />
-								{tool}
-							</li>
-						))
-					}
-					{
-						tools.length > 6 && (
-							<li class="pl-3 text-neutral-600">...and {tools.length - 6} more</li>
-						)
-					}
-				</ul>
-			</div>
-
-			{/* Col 2: Performance Metrics */}
-			<div>
-				<h3 class="mb-4 font-mono text-[10px] tracking-widest text-neutral-500 uppercase">
-					Performance Impact
-				</h3>
-				{
-					impact ? (
-						<div class="rounded border border-[#2E5CFF]/20 bg-[#2E5CFF]/5 p-3">
-							<p class="font-mono text-xs leading-relaxed text-[#2E5CFF]">"{impact}"</p>
-						</div>
-					) : (
-						<div class="font-mono text-xs text-neutral-600 italic">
-							No specific telemetry available.
-						</div>
-					)
-				}
-			</div>
-
-			{/* Col 3: System Context */}
-			<div>
-				<h3 class="mb-4 font-mono text-[10px] tracking-widest text-neutral-500 uppercase">
-					System Context
-				</h3>
-				<dl class="grid grid-cols-2 gap-4 font-mono text-xs">
-					<div>
-						<dt class="block text-[10px] text-neutral-600">ROLE</dt>
-						<dd class="text-white">{data.role || "Engineer"}</dd>
-					</div>
-					<div>
-						<dt class="block text-[10px] text-neutral-600">CLIENT</dt>
-						<dd class="text-white">{data.employer}</dd>
-					</div>
-					<div>
-						<dt class="block text-[10px] text-neutral-600">REVISION</dt>
-						<dd class="text-white">v1.0.4</dd>
-					</div>
-					<div>
-						<dt class="block text-[10px] text-neutral-600">STATUS</dt>
-						<dd class="text-[#2E5CFF]">{data.statusLabel}</dd>
-					</div>
-				</dl>
-			</div>
+		{/* THE TECHNICAL HEADER CARD */}
+		<div class="mt-8">
+			<ProjectSpecCard entry={entry} />
 		</div>
 	</div>
-
-	{/* Grid Overlay */}
-	<div class="bg-noise pointer-events-none absolute inset-0 opacity-10 mix-blend-overlay"></div>
 </header>
+
+{/* Grid Overlay */}
+<div class="bg-noise pointer-events-none absolute inset-0 opacity-10 mix-blend-overlay"></div>

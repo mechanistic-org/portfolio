@@ -38,6 +38,10 @@ sidebar:
     *   **Description:** A "Plug-and-Play" authoring system that allows complex UI patterns (Zigzag Grids, 3D Viewers, Process Strips) to be inserted via shortcodes (`qq-*`). This transforms the IDE into a layout engine, ensuring every project page adheres to the strict "Visual Taxonomy" without manual coding.
 
 ## 📜 Change Log (Recent)
+*   **[Fix] Impact Resonance:** Corrected "Stable Core" stroke color in `ImpactResonance.tsx` to fully align with YInMn Blue identity (Green Purge Complete).
+*   **[Strategy] The Council:** Executed deep site audit (`site_audit_report_deep.md`) using 5-persona protocol; validated "Productization" strategy.
+*   **[Feature] Technical Header:** Implemented `ProjectSpecCard.astro`, a modular metadata card with "Mini Gauge" status indicator, replacing the legacy BOM list.
+*   **[Refactor] Terminal Silence:** Cleared verbose debug logging (`PHASE STATS DUMP`) from project templates for a cleaner dev experience.
 *   **[Pivot] YInMn Blue:** Officially migrated brand identity from "Neon Green" (`#10b981`) to "**YInMn Blue**" (`#2E5CFF`). Discovered by Mas Subramanian, representing stability and discovery.
 *   **[Feature] Design System:** Launched `/about/elements` as a live token inspection engine (The "Figma Inspector").
 *   **[Architecture] Hybrid Data Strategy:** Refactored `Colors.csv` to map legacy skill categories to the new strict Technical Palette (Blue/Cyan/Slate).
@@ -263,6 +267,11 @@ sidebar:
 *   **Tech:** `model-viewer` v3.4.0 API, Vanilla JS, Astro.
 *   **Description:** A runtime debugger that programmatically "kills" specific PBR texture channels (Normals, ORM, AO) and forces material overrides (Matte/Gloss/Metal) to isolate rendering artifacts without recompiling the asset.
 
+*   **The Technical Header (Spec Card):**
+    *   **Hook:** "Turning the Portfolio into a Product Catalog."
+    *   **Tech:** Astro Props, Tailwind, CSS Animation.
+    *   **Description:** A modular "Head Unit" component that standardizes disparate project metadata (CSV source) into a unified "Spec Sheet" visual, replete with a live "System Status" pulse.
+
 #### [2025-12-09] The "Anisotropy" Update
 *   **[3D] Express Lane:** Established direct GLB export pipeline from Substance Painter to Web, bypassing Blender-induced geometry corruption ("White Blob").
 *   **[3D] Anisotropy:** Validated `KHR_materials_anisotropy` workflow for "Holographic" Carbon Fiber using the `pbr-metal-roughness-anisotropy-angle` shader.
@@ -310,6 +319,7 @@ sidebar:
 *   **[Refactor] Phase 1 (The Inputs):** Pivot Homepage to "System Status" (`HardTechHero`, `ImpactResonance`).
 *   **[Refactor] Phase 2 (The Factory):** Convert Project Index to "high-frequency" Datasheet View.
 *   **[Plan] Phase 3 (The Output):** Refactor Project Detail pages to "Spec Sheet" aesthetic (Dense headers, technical schematics).
+    *   **[Phase 1] Technical Header:** Verified prototype on `dreamjob`. Next: Roll out to all project templates.
 
 *   **[Fix] Radial View:** Resolved "Blank Screen" critical failure by identifying and restoring missing DOM container (`div#view-radial`) in `index.astro`.
 *   **[Refactor] Taxonomy Cleanup:** Eliminated "Other" `industry` category by remapping 20+ projects to "Pro Audio", "Robotics", and "Computing" via `fix_industries.py`.

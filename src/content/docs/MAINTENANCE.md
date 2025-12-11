@@ -181,6 +181,11 @@ status: {
 
 ## 8. Troubleshooting
 
+### "PHASE STATS DUMP" in Terminal
+*   **Symptom:** Verbose logs showing `undefined` for `phase_stats` or `phases`.
+*   **Cause:** Legacy `console.log` debugging left in `[...slug].astro`.
+*   **Fix:** These are harmless noise. Remove the console statements in `src/pages/projects/[...slug].astro` lines 30-35.
+
 ### "NO_DATA" in Dashboards (Schema Validation Trap)
 *   **Symptom:** `SkillRadar` or `ImpactResonance` shows placeholders even though data exists in the MDX frontmatter.
 *   **Cause:** Astro's Zod schema (`src/content/config.ts`) is too strict. If the Python script outputs a float (e.g., `85.0`) but Zod expects an interactive object, or vice-versa, Astro silently strips the entire field.

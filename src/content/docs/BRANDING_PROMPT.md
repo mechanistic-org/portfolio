@@ -44,6 +44,7 @@ Create `docs/STYLE_GUIDE.md` containing:
 1.  **The Token Map:** Definitive guide to Colors, Typography, and Spacing.
 2.  **Component Library:** "The Brick", "The Chip", "The Wire" (naming our UI primitives).
 3.  **Voice & Tone:** How "The Engineer" speaks (Active Voice, Data-Driven, No Fluff).
+    *   **Operation Productize:** Move away from "Blog Post" narratives specifically in the header. Use the "Spec Sheet" aesthetic (Tabular data, high contrast) to establish immediate technical credibility before telling the story.
 4.  **The "Construction" Badge:** Formalizing the "Work in Progress" aesthetic as a feature, not a bug.
 
 **Action:**
