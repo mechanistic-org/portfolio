@@ -13,6 +13,11 @@ The goal is to convert raw "Brain Dumps" and "Legacy Bullets" into "Datasheet-Gr
 ### The Architecture ("The Funnel")
 The system operates on a "Drop & Forget" principle. You place raw files into an `inbox`, and the system "mineralizes" them into structured Content.
 
+### The Zero-Bloat Principle (R2 Enforcement)
+*   **GitHub = Code:** The repository stores source code, markdown, and configuration.
+*   **R2 = Assets:** All binary assets (images, videos, GLBs) must be hosted on Cloudflare R2.
+*   **Mined Assets:** The `data_source/mined_assets/` directory is for **ephemeral** generation only. It is `.gitignore`'d to prevent repo bloat. Long-term assets must be moved to `R2_STAGING`.
+
 ```mermaid
 graph LR
     A[Voice Memo / Idea] -->|Save MP3| B(Inbox Folder)
