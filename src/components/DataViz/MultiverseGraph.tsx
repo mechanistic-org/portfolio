@@ -138,7 +138,7 @@ const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
             {selectedNode && (
                 <div className="absolute top-4 right-4 bg-black/80 backdrop-blur border border-white/10 p-4 rounded-lg shadow-xl w-64 pointer-events-none transition-opacity duration-200">
                     <h3 className="text-lg font-bold text-white mb-1 font-sans">{selectedNode.name}</h3>
-                    <p className="text-sm text-green-400 font-mono mb-2">{selectedNode.group}</p>
+                    <p className="text-sm text-primary-400 font-mono mb-2">{selectedNode.group}</p>
                     <div className="flex flex-wrap gap-1 mb-2">
                         {selectedNode.img && (
                             <img src={selectedNode.img} className="w-full h-32 object-cover rounded mb-2 bg-gray-900" alt={selectedNode.name} />

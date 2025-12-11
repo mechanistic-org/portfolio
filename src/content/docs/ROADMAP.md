@@ -7,6 +7,7 @@ sidebar:
 ---
     *   **Colophon:** Architecture breakdown and Tech Stack marquee.
     *   **Global:** Construction Badge (Status & Commit SHA).
+*   **Context Lifecycle:** Established **"Conversation Miner"** Protocol (`src/content/docs/CONVERSATION_MINER_PROMPT.md`) to capture architectural gold from LLM sessions.
 *   **Infrastructure:** Cloudflare R2 Asset Hosting with Staging/Production workflow.
 *   **Project Gallery:** Lightbox + Masonry layout for project images.
 *   **Marquee System:** Physics-based, auto-resuming, shared component for Trust Wall and Colophon.
@@ -36,7 +37,11 @@ sidebar:
     *   **Tech:** VS Code Snippets + Astro MDX Components.
     *   **Description:** A "Plug-and-Play" authoring system that allows complex UI patterns (Zigzag Grids, 3D Viewers, Process Strips) to be inserted via shortcodes (`qq-*`). This transforms the IDE into a layout engine, ensuring every project page adheres to the strict "Visual Taxonomy" without manual coding.
 
-## ðŸ“œ Change Log (Recent)
+## 📜 Change Log (Recent)
+*   **[Pivot] YInMn Blue:** Officially migrated brand identity from "Neon Green" (`#10b981`) to "**YInMn Blue**" (`#2E5CFF`). Discovered by Mas Subramanian, representing stability and discovery.
+*   **[Feature] Design System:** Launched `/about/elements` as a live token inspection engine (The "Figma Inspector").
+*   **[Architecture] Hybrid Data Strategy:** Refactored `Colors.csv` to map legacy skill categories to the new strict Technical Palette (Blue/Cyan/Slate).
+*   **[3D] Nav Logo 2.0:** Integrated `model-viewer` with "Bobblehead" physics and Neutral/Commerce lighting environment.
 *   **[Pipeline]** Established "Pro UV Workflow" for Plasticity -> Blender -> Substance.
     *   Validated "Ngons" export strategy.
     *   Documented "Select Sharp Edges" automation in Blender.
@@ -248,11 +253,22 @@ sidebar:
     *   **Tech:** Adobe Substance Painter (Anisotropy Channel + Tri-planar Crystal Noise).
     *   **Description:** A procedural material stack that simulates chopped tow resin with holographic light response, moving beyond limited "Texture Wrap" presets.
 
-### 3D Asset Lab (`/about/test-logo`)
-*   **Hook:** A focused "Clean Room" for debugging web-based 3D assets.
-*   **Purpose:** Isolates the model from site CSS/Layout to debug Lighting, Textures, and Orientation.
-*   **Status:** Active Tool. (Use `?v=` timestamp to bust cache).
-#### [2025-12-06] The "Unification" Update
+*   **The Archivist (Universal History):**
+    *   **Hook:** "Recovering 40 years of history from digital dust."
+    *   **Tech:** Python, Gemini 1.5 Flash (Chunked), D3.js (CSV Parsing).
+    *   **Description:** A custom ETL pipeline that digests legacy `.doc`/`.pdf` hoards, handles API rate limits via smart chunking, and synthesizes a "Universal Timeline" (`RESUME_CORPUS_timeline.md`) from 200MB of unorganized files, establishing a "Source of Truth" for the `history.astro` page.
+
+### 3D Asset Lab (`test-logo.astro`)
+*   **Hook:** "An MRI machine for GLB files."
+*   **Tech:** `model-viewer` v3.4.0 API, Vanilla JS, Astro.
+*   **Description:** A runtime debugger that programmatically "kills" specific PBR texture channels (Normals, ORM, AO) and forces material overrides (Matte/Gloss/Metal) to isolate rendering artifacts without recompiling the asset.
+
+#### [2025-12-09] The "Anisotropy" Update
+*   **[3D] Express Lane:** Established direct GLB export pipeline from Substance Painter to Web, bypassing Blender-induced geometry corruption ("White Blob").
+*   **[3D] Anisotropy:** Validated `KHR_materials_anisotropy` workflow for "Holographic" Carbon Fiber using the `pbr-metal-roughness-anisotropy-angle` shader.
+*   **[Dev] Asset Forensics:** Built `test-logo.astro`, a hardware-accelerated diagnostic lab for inspecting PBR channels in the browser.
+*   **[FIX] 3D Pipeline:** Validated "Option B" (Quantum_ORM) as the primary workflow for Carbon materials. Direct export ("Option A") is deprecated for complex shaders due to Alpha channel bugs.
+
 *   **Documentation:** Restructured `docs/` into 4 distinct groups (System, Workflows, Reference, Prompts) for better discoverability.
 *   **Feature:** Implemented the **Universal Inbox** (`data_source/inbox/`) with a "Smart Filename" Schema (`slug.context.ext`) for zero-friction content ingestion.
 *   **Architecture:** Merged `CONTENT_INGESTION_WORKFLOW.md` into `CONTENT_STRATEGY.md`, establishing a single source of truth for all content pipelines.
@@ -278,6 +294,16 @@ sidebar:
     *   **Aesthetic:** Reduced animation speed (3000ms pulse) for a "calmer" holding pattern.
 
 
+
+#### [In Progress] Identity Scrub (The Load-Bearing Ghost)
+*   **[Refactor] Exorcise the "Load-Bearing Ghost":**
+    *   **Context:** The "Quantum" name has become a "Load-Bearing Ghost"—a legacy artifact that implies this is a template, not an identity.
+    *   **Action:** Execute full "Identity Scrub".
+        *   Rename Repo: `quantum` -> `eriknorris-platform`.
+        *   Rename Presets: `Quantum_ORM` -> `EN_ORM`.
+        *   Rename Classes: `quantum-*` -> `no-prefix` or `en-*`.
+    *   **Why:** Assert full psychological and technical dominion over the codebase.
+
 #### [In Progress] Operation Productize (The HardTech Productizer)
 *   **[Audit]** Inducted **"The HardTech Productizer"** (Vinod/Stanford/MechE persona) into `SITE_AUDIT_PROMPT.md`.
 *   **[Strategy]** Defined **"The Productization Engine"** model (`docs/PRODUCTIZATION_MODEL.md`).
@@ -295,3 +321,7 @@ sidebar:
     *   **Goal:** Rename repo (`quantum` -> `eriknorris`) and local folders.
     *   **Status:** Aborted (Dec 6, 2025). Too risky for current phase.
     *   **Plan:** Requires "Nuclear Option" script + manual folder renaming. Saved for post-V1.0 stability.
+*   **[Strategy] Visual Log Integration:**
+    *   **Goal:** Integrate 128 mined screenshots into "Deep Dive" docs.
+    *   **Status:** Paused (Dec 2025).
+    *   **Document:** `docs/backlog/VISUAL_LOG_STRATEGY.md`.

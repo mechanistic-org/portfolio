@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import fs from "node:fs";
+import { csvParse } from "d3";
+
+// Read 'Truth' Data
+const fileContent = fs.readFileSync("data_source/Main.csv", "utf-8");
+const data = csvParse(fileContent);
+
+// Sort (Newest First)
+data.sort((a, b) => {
+	const d1 = new Date(a["Project Start Date"]);
+	const d2 = new Date(b["Project Start Date"]);
+	return d2 - d1;
+});
+
+// Helper for date display
+const formatDate = (dStr) => {
+	if (!dStr) return "";
+	const d = new Date(dStr);
+	return d.toLocaleDateString("en-US", { year: "numeric", month: "short" });
+};
+---
+
+<BaseLayout title="Universal History">
+	<div class="mx-auto max-w-4xl px-6 py-12">
+		<header class="mb-12">
+			<h1 class="text-4xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
+				Universal History
+			</h1>
+			<p class="mt-2 text-slate-500">
+				The definitive timeline of projects, derived from the Source of Truth.
+			</p>
+		</header>
+
+		<div class="relative ml-3 space-y-12 border-l-2 border-slate-200 md:ml-6 dark:border-slate-800">
+			{
+				data.map((item) => (
+					<div class="relative pl-8 md:pl-12">
+						{/* Dot */}
+						<div class="absolute top-1 -left-[9px] h-5 w-5 rounded-full border-4 border-indigo-500 bg-white dark:bg-slate-950" />
+
+						{/* Date */}
+						<div class="mb-1 text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+							{formatDate(item["Project Start Date"])} &mdash;{" "}
+							{item["Project End Date"] ? formatDate(item["Project End Date"]) : "Present"}
+						</div>
+
+						{/* Content */}
+						<div class="rounded-lg border border-slate-100 bg-slate-50 p-6 transition-colors hover:border-indigo-200 dark:border-slate-800 dark:bg-slate-900/50 dark:hover:border-indigo-900">
+							<h3 class="text-xl font-bold text-slate-900 dark:text-slate-100">{item.Title}</h3>
+
+							<div class="mb-2 text-lg font-medium text-slate-700 dark:text-slate-300">
+								{item.Employer}
+								{item.Client && <span class="font-normal text-slate-400"> via {item.Client}</span>}
+							</div>
+
+							{/* Codename Badge */}
+							{item.Codename && (
+								<span class="mb-3 inline-block rounded-md bg-slate-200 px-2 py-0.5 font-mono text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+									Codename: {item.Codename}
+								</span>
+							)}
+
+							<p class="leading-relaxed text-slate-600 dark:text-slate-400">
+								{item.Impact || item.Description || (
+									<span class="italic opacity-50">Impact data pending...</span>
+								)}
+							</p>
+
+							{/* Tools */}
+							{item.Tools && (
+								<div class="mt-4 flex flex-wrap gap-2">
+									{item.Tools.split(",").map((t) => (
+										<span class="rounded border border-slate-200 bg-white px-2 py-1 text-xs text-slate-500 dark:border-slate-800 dark:bg-slate-950">
+											{t.trim()}
+										</span>
+									))}
+								</div>
+							)}
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</BaseLayout>

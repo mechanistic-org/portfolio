@@ -148,7 +148,7 @@ const { projects, sectors, categories, tools, clients } = Astro.props;
 									class:list={[
 										"inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium",
 										project.data.production === "Mass Production"
-											? "border-green-500/20 bg-green-500/10 text-green-500"
+											? "border-primary-500/20 bg-primary-500/10 text-primary-500"
 											: project.data.production === "Prototyping"
 												? "border-amber-500/20 bg-amber-500/10 text-amber-500"
 												: "border-neutral-700 bg-neutral-800 text-neutral-400",
@@ -283,7 +283,7 @@ const { projects, sectors, categories, tools, clients } = Astro.props;
 
 					background-image: radial-gradient(
 						600px circle at var(--x) var(--y),
-						rgba(16, 185, 129, var(--spotlight-opacity)),
+						rgba(46, 92, 255, var(--spotlight-opacity)),
 						transparent 40%
 					);
 					transition: --spotlight-opacity 0.3s;

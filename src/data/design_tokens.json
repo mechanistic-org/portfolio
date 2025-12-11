@@ -1,0 +1,39 @@
+{
+    "meta": {
+        "system": "Erik Norris Design System",
+        "version": "1.1.0",
+        "vibe": "Discovery / YInMn Blue / Engineering"
+    },
+    "palette": {
+        "primary": {
+            "base": "#2E5CFF",
+            "name": "YInMn Blue",
+            "description": "Discovered by Mas Subramanian (2009). Stable, Non-Toxic, Perfect."
+        },
+        "secondary": {
+            "base": "#00C2FF",
+            "name": "Electric Cyan",
+            "description": "Process indicators, active data streams."
+        },
+        "neutral": {
+            "white": "#FFFFFF",
+            "titanium": "#E5E7EB",
+            "aluminum": "#9CA3AF",
+            "steel": "#4B5563",
+            "carbon": "#1F2937",
+            "black": "#030303"
+        },
+        "semantic": {
+            "success": "#2E5CFF",
+            "warning": "#F59E0B",
+            "error": "#EF4444",
+            "info": "#00C2FF"
+        }
+    },
+    "mappings": {
+        "engineering": "#2E5CFF",
+        "design": "#00C2FF",
+        "strategy": "#9CA3AF",
+        "management": "#4B5563"
+    }
+}

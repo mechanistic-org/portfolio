@@ -70,7 +70,7 @@ const ProjectStrip: React.FC<ProjectStripProps> = ({ projects }) => {
                         onMouseEnter={() => setHoverIndex(index)}
                         onClick={() => openModal(index)}
                         className={`group cursor-pointer grid grid-cols-12 gap-4 p-3 border-l-2 transition-all duration-100 ${hoverIndex === index
-                            ? 'bg-white/10 border-emerald-500 text-white'
+                            ? 'bg-white/10 border-primary-500 text-white'
                             : 'bg-transparent border-transparent text-white/60 hover:text-white'
                             }`}
                     >
@@ -89,7 +89,7 @@ const ProjectStrip: React.FC<ProjectStripProps> = ({ projects }) => {
                     </div>
                 ))}
 
-                <a href="/projects" className="p-3 mt-auto text-center font-mono text-xs text-emerald-500 hover:text-emerald-400 border-t border-white/10 transition-colors">
+                <a href="/projects" className="p-3 mt-auto text-center font-mono text-xs text-primary-500 hover:text-primary-400 border-t border-white/10 transition-colors">
                     /// VIEW ALL {projects.length} RECORDS
                 </a>
             </div>
@@ -127,7 +127,7 @@ const ProjectStrip: React.FC<ProjectStripProps> = ({ projects }) => {
                             </p>
                             <div className="flex flex-wrap gap-2">
                                 {activeProject.data.tags?.slice(0, 3).map(tag => (
-                                    <span key={tag} className="px-2 py-1 text-[10px] uppercase font-mono border border-emerald-500/30 text-emerald-500">
+                                    <span key={tag} className="px-2 py-1 text-[10px] uppercase font-mono border border-primary-500/30 text-primary-500">
                                         {tag}
                                     </span>
                                 ))}
@@ -136,7 +136,7 @@ const ProjectStrip: React.FC<ProjectStripProps> = ({ projects }) => {
                     </div>
                 ) : (
                     <div className="h-full flex items-center justify-center">
-                        <span className="font-mono animate-pulse text-emerald-500">AWAITING INPUT...</span>
+                        <span className="font-mono animate-pulse text-primary-500">AWAITING INPUT...</span>
                     </div>
                 )}
             </div>

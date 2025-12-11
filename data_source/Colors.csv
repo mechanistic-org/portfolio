@@ -1,40 +1,40 @@
 Name,Color,Type
-Mechanistic,#001BE6E6,Employer
-Hyphen,#50E5B4E6,Employer
-Noon,#F6BE15F5,Employer
-Avegant,#6F727B7A,Employer
-Kaleidescape,#749ABEB3,Employer
-Digidesign,#7224DFDE,Employer
-frogdesign,#40BA00BA,Employer
-Silicon Graphics,#0084FFAD,Employer
-EP Technologies,#003C7273,Employer
-Requirements Analysis,#E55039,Skill
-Feasibility Assessment,#594700,Skill
-Concept Validation,#408073,Skill
-Prototyping,#2D3E59,Skill
-High-Level Design,#590053,Skill
-Detailed Design and Engineering,#FF6600,Skill
-Material Selection,#7B8040,Skill
-ID Capture (Industrial Design) Collaboration,#00EEFF,Skill
-CAD Modeling,#0014EB,Skill
-Structural Analysis and Simulation,#FF80F6,Skill
-Tolerance Analysis,#323232,Skill
-Design for Manufacturing (DFM),#E5FF80,Skill
-Design for Assembly (DFA),#335C66,Skill
-Risk Assessment and Mitigation,#13008C,Skill
-Prototype Testing and Iteration,#E5007A,Skill
-Validation Testing (EVT DVT PVT),#A65B29,Skill
-Thermal Analysis,#4CBF00,Skill
-Vibration and Acoustic Testing,#5995B3,Skill
-Mechanical Testing (e.g. tensile impact),#4400FF,Skill
-Failure Mode and Effects Analysis (FMEA),#590024,Skill
-Supply Chain Collaboration,#FFB380,Skill
-Tooling Design,#1A6624,Skill
-Manufacturing Support,#40A6FF,Skill
-Quality Control and Inspection,#6B4D99,Skill
-Cost Analysis and Value Engineering,#BF6086,Skill
-Documentation (Technical Drawings Specifications),#646464,Skill
-Regulatory Compliance (CE FCC etc.),#C83232,Skill
-Intellectual Property Considerations,#3232C8,Skill
-Sustainability and Environmental Impact,#009600,Skill
-Post-Launch Support and Continuous Improvement,#646400,Skill
+Mechanistic,#2E5CFF,Employer
+Hyphen,#00C2FF,Employer
+Noon,#4B5563,Employer
+Avegant,#9CA3AF,Employer
+Kaleidescape,#2E5CFF,Employer
+Digidesign,#00C2FF,Employer
+frogdesign,#2E5CFF,Employer
+Silicon Graphics,#00C2FF,Employer
+EP Technologies,#4B5563,Employer
+Requirements Analysis,#9CA3AF,Skill
+Feasibility Assessment,#4B5563,Skill
+Concept Validation,#2E5CFF,Skill
+Prototyping,#00C2FF,Skill
+High-Level Design,#2E5CFF,Skill
+Detailed Design and Engineering,#00C2FF,Skill
+Material Selection,#9CA3AF,Skill
+ID Capture (Industrial Design) Collaboration,#2E5CFF,Skill
+CAD Modeling,#00C2FF,Skill
+Structural Analysis and Simulation,#4B5563,Skill
+Tolerance Analysis,#9CA3AF,Skill
+Design for Manufacturing (DFM),#2E5CFF,Skill
+Design for Assembly (DFA),#00C2FF,Skill
+Risk Assessment and Mitigation,#4B5563,Skill
+Prototype Testing and Iteration,#2E5CFF,Skill
+Validation Testing (EVT DVT PVT),#00C2FF,Skill
+Thermal Analysis,#9CA3AF,Skill
+Vibration and Acoustic Testing,#4B5563,Skill
+Mechanical Testing (e.g. tensile impact),#2E5CFF,Skill
+Failure Mode and Effects Analysis (FMEA),#00C2FF,Skill
+Supply Chain Collaboration,#9CA3AF,Skill
+Tooling Design,#2E5CFF,Skill
+Manufacturing Support,#00C2FF,Skill
+Quality Control and Inspection,#4B5563,Skill
+Cost Analysis and Value Engineering,#9CA3AF,Skill
+Documentation (Technical Drawings Specifications),#4B5563,Skill
+Regulatory Compliance (CE FCC etc.),#9CA3AF,Skill
+Intellectual Property Considerations,#4B5563,Skill
+Sustainability and Environmental Impact,#2E5CFF,Skill
+Post-Launch Support and Continuous Improvement,#00C2FF,Skill

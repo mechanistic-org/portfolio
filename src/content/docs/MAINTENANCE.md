@@ -670,5 +670,16 @@ Importing code from other themes often introduces inconsistent casing (e.g., `co
 *   **Symptom:** Background effects (Noise, Stars) appear *in front* of the model.
 *   **Fix:**
     1.  Ensure `.noise-overlay` is `z-index: 5` (or low).
-    2.  Ensure `BaseLayout` wrapper does not have `z-10` (which creates a stacking trap).
     3.  Ensure `model-viewer` container is `z-[60]` (High).
+
+## 14. Resume Ingestion Workflow ("The Archivist")
+We use a dedicated pipeline to recover history from legacy files.
+
+1.  **Staging:** Place legacy files (`.doc`, `.docx`, `.pdf`) in `d:\GitHub\quantum-workspace\resume_ingest_resistance-is-futile`.
+2.  **Mining:** Run `python scripts/mine_resumes.py` to extract text and deduplicate.
+    *   **Output:** `data_source/inbox/RESUME_CORPUS.resume.md`.
+3.  **Synthesis:** Run `python scripts/ingest_inbox_raw.py` to generate the timeline.
+    *   **Trap:** Gemini 2.0 Flash hits `429` Rate Limits on large corpora.
+    *   **Fix:** The script uses `gemini-flash-latest` (1.5 Flash) and Batch Size 5 to respect quotas.
+    *   **Output:** `data_source/manual_content/RESUME_CORPUS_timeline.md`.
+4.  **Display:** The `src/pages/history.astro` page renders the "Source of Truth" (`Data/Main.csv`) and can be manually enriched with the synthesized timeline.

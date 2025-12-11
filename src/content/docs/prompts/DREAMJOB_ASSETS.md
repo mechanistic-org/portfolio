@@ -8,23 +8,23 @@ These prompts were used to generate the "Visual Taxonomy" assets for the `dreamj
 
 ## 1. Static Hero (`hero`)
 *   **Filename:** `dreamjob-hero-01.jpg`
-*   **Prompt:** A hyper-realistic close-up of a futuristic mechanical engineering assembly, representing the pinnacle of high-performance design. The object is a complex fusion of machined titanium, carbon fiber, and exposed circuitry. Lighting is cinematic and moody, with deep shadows and bright neon green accent lights (hex #00FF00) highlighting the internal mechanism. The aesthetic is 'Hyper-Functional Brutalism'—raw, industrial, and precise. Shallow depth of field. 8k resolution, unreal engine 5 render style. Subtle digital glitch effect on the edges. Cinematic Black background (#000000).
+*   **Prompt:** A hyper-realistic close-up of a futuristic mechanical engineering assembly, representing the pinnacle of high-performance design. The object is a complex fusion of machined titanium, carbon fiber, and exposed circuitry. Lighting is cinematic and moody, with deep shadows and bright **electric blue accent lights (hex #2E5CFF)** highlighting the internal mechanism. The aesthetic is **'Quantum Laboratory'**—clean, precise, and scientific. Shallow depth of field. 8k resolution, sterile environment, white room reflection. Cinematic.
 
 ## 2. Isometric View (`iso`)
 *   **Filename:** `dreamjob-iso-01.jpg`
-*   **Prompt:** Isometric view of a futuristic quantum engine core. Isolated on a pure black background (#000000). The object is dense, metallic, and highly detailed with gold and neon green accents. Technical illustration style but photorealistic rendering. High contrast.
+*   **Prompt:** Isometric view of a futuristic quantum engine core. Isolated on a pure black background (#000000). The object is dense, metallic, and highly detailed with gold and **electric blue** accents. Technical illustration style but photorealistic rendering. High contrast.
 
 ## 3. Schematic View (`schematic`)
 *   **Filename:** `dreamjob-schematic-01.jpg`
-*   **Prompt:** Technical blueprint of a complex mechanical assembly. White lines on a pure black background. High complexity, wireframe aesthetic. Text labels and dimension lines visible (abstract/illegible). Vector art style.
+*   **Prompt:** Technical blueprint of a complex mechanical assembly. **Cyan/Blue** lines on a pure black background. High complexity, wireframe aesthetic. Text labels and dimension lines visible (abstract/illegible). Vector art style.
 
 ## 4. Detail View (`detail`)
 *   **Filename:** `dreamjob-detail-01.jpg`
-*   **Prompt:** Extreme macro photography of woven carbon fiber texture intersecting with brushed titanium. Shallow depth of field. The lighting highlights the weave pattern. Neon green light reflection. 8k resolution.
+*   **Prompt:** Extreme macro photography of woven carbon fiber texture intersecting with brushed titanium. Shallow depth of field. The lighting highlights the weave pattern. **Quantum blue** light reflection. 8k resolution.
 
 ## 5. Cutaway View (`cutaway`)
 *   **Filename:** `dreamjob-cutaway-01.jpg`
-*   **Prompt:** Cross-section cutaway render of a high-tech turbine. Showing internal gears, chambers, and wiring. Photorealistic with a glowing internal core. Black background.
+*   **Prompt:** Cross-section cutaway render of a high-tech turbine. Showing internal gears, chambers, and wiring. Photorealistic with a glowing **Cherenkov blue** internal core. Black background.
 
 ## 6. Animation: Engine Run (`hero-anim`)
 *   **Folder:** `dreamjob-hero-anim/`
@@ -41,7 +41,7 @@ These prompts were used to generate the "Visual Taxonomy" assets for the `dreamj
 
 ## 9. Context View (`context`)
 *   **Filename:** `dreamjob-context-01.jpg`
-*   **Prompt:** The futuristic quantum engine integrated into a high-tech server room bulkhead. Dark, moody, industrial environment. Cables and pipes connecting to it. Cinematic lighting, neon green status LEDs.
+*   **Prompt:** The futuristic quantum engine integrated into a high-tech server room bulkhead. Dark, moody, industrial environment. Cables and pipes connecting to it. Cinematic lighting, **blue status LEDs**.
 
 ## 10. Prototype View (`prototype`)
 *   **Filename:** `dreamjob-prototype-01.jpg`
@@ -57,11 +57,11 @@ These prompts were used to generate the "Visual Taxonomy" assets for the `dreamj
 
 ## 13. Test View (`test`)
 *   **Filename:** `dreamjob-test-01.jpg`
-*   **Prompt:** The quantum engine glowing red hot in a testing chamber. Heat distortion, exhaust gases, monitoring cables attached. Intense lighting, danger aesthetic.
+*   **Prompt:** The quantum engine glowing **cold blue** in a cryo-testing chamber. Frost, liquid nitrogen fog, monitoring cables attached. Intense lighting, **superconductor** aesthetic.
 
 ## 14. Diagram View (`diagram`)
 *   **Filename:** `dreamjob-diagram-01.jpg`
-*   **Prompt:** Abstract flow chart of the engine's energy cycle. Glowing neon lines, data nodes, floating UI elements. Cyberpunk style. Black background.
+*   **Prompt:** Abstract flow chart of the engine's energy cycle. Glowing **blue** lines, data nodes, floating UI elements. Interface style. Black background.
 
 ## 15. Render View (`render`)
 *   **Filename:** `dreamjob-render-01.jpg`
@@ -69,12 +69,12 @@ These prompts were used to generate the "Visual Taxonomy" assets for the `dreamj
 
 ## 16. UI View (`ui`)
 *   **Filename:** `dreamjob-ui-01.jpg`
-*   **Prompt:** Futuristic control interface screen for the engine. Data visualization, graphs, gauges. Neon green and black. High density information. Screen only, no bezel.
+*   **Prompt:** Futuristic control interface screen for the engine. Data visualization, graphs, gauges. **Electric blue** and black. High density information. Screen only, no bezel.
 
 ## 17. Wireframe View (`wireframe`)
 *   **Filename:** `dreamjob-wireframe-01.jpg`
-*   **Prompt:** Low-poly wireframe mesh of the engine. Neon green grid lines on black background. 3D modeling software viewport aesthetic.
+*   **Prompt:** Low-poly wireframe mesh of the engine. **Blue** grid lines on black background. 3D modeling software viewport aesthetic.
 
 ## 18. Architecture View (`arch`)
 *   **Filename:** `dreamjob-arch-01.jpg`
-*   **Prompt:** Network topology diagram. Server nodes, data streams, encryption locks. Abstract 3D representation of software architecture. Neon green and black.
+*   **Prompt:** Network topology diagram. Server nodes, data streams, encryption locks. Abstract 3D representation of software architecture. **Blue** and black.

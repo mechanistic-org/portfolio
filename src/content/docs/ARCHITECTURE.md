@@ -112,6 +112,11 @@ Assets are managed physically, not logically.
         *   **One-Pager:** `resume/one-pager` (High-density datasheet).
         *   **Infographic:** `resume/infographic` (Visual summary).
 
+### 2. Universal History
+*   **Skeleton (Truth):** `data_source/Main.csv` contains the definitive Dates, Titles, and Employers (parsed via D3).
+*   **Flesh (Narrative):** `data_source/manual_content/RESUME_CORPUS_timeline.md` contains rich, LLM-synthesized descriptions and "Lost Knowledge" extracted from legacy files.
+*   **Presentation:** `src/pages/history.astro` merges these data streams.
+
 ### UI Elements
 *   **Visualization Engine (D3.js Refactor):**
     *   **Decision:** We removed `recharts` (400kb+) in favor of pure D3.js modules (`d3-shape`, `d3-scale`) to achieve "Hyper-Functional Brutalism" without generic library overhead.
@@ -174,3 +179,12 @@ A hybrid workflow combining human art direction with machine precision.
 *   **Pass-Through:** Non-image assets (`.pdf`, `.glb`, `.mp4`) are copied directly to staging.
 
 
+
+### 3D Rendering Stack ("The Asset Lab")
+*   **Component:** `<model-viewer>` (Google)
+*   **Version Constraint:** Must be `v3.4.0+` to support `KHR_materials_anisotropy` (Holographic/Carbon effects).
+*   **Format Standard:** `glTF Binary` (.glb).
+*   **Export Workflows:**
+    *   **Workflow A ("Express Lane"):** Direct export from Substance Painter (`glTF PBR Metal Roughness`). Best for reliable geometry and standard materials.
+    *   **Workflow B ("Round Trip"):** Substance -> Blender -> GLB. Best for complex geometry requiring Draco compression, but prone to data loss (e.g., missing Tangents/Color Space issues).
+*   **Debug Tool:** `/about/test-logo` provides a hardware inspection layer for these assets.

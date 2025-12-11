@@ -11,8 +11,10 @@ Elevate the "Quantum" project from a portfolio site to a cohesive **Personal Eng
 
 **Context:**
 *   **Current State:** Hybrid Content System (CSV + MDX), Tailwind v4 (OKLCH colors), "Starwind" base tokens.
-*   **Aesthetic:** Technical, Brutalist, Zero-Runtime, "Physical Asset Law".
+*   **Aesthetic:** Quantum Laboratory, Technical, "Discovery over Science Fiction".
 *   **Core Fonts:** Inter (Headers), JetBrains Mono (Body/Code).
+*   **Primary Color:** **YInMn Blue** (`#2E5CFF`). Discovered by Mas Subramanian (2009). Represents Stability, Discovery, and Non-Toxicity.
+*   **Secondary Color:** **Electric Cyan** (`#00C2FF`). High-frequency data streams.
 
 ## Phase 1: The Brand Inventory (Audit)
 1.  **Analyze `src/styles/tailwind-theme.css`:**

@@ -149,3 +149,9 @@ Presets are black boxes that lock you into rigid aesthetics ("Melted Plastic").
 *   **Rule:** Build every material from `00_BASE` up.
 *   **Why:** It forces you to understand the physics (Resin -> Fiber -> Flash -> Wear -> Dust).
 *   **Result:** A fully non-destructive, "Datasheet Grade" asset that you own completely.
+
+### 16. The Law of Naming (The Load-Bearing Ghost)
+**"Do not name your tools after the box they came in. Name them after what they build."**
+*   **Principle:** We acknowledge the giants we stand on (The Starter, Astro, Tailwind), but we claim dominion over the machine we built.
+*   **Practice:** We ruthlessly rename inherited variables (`quantum` -> `eriknorris`) to eliminate "Brand Debt."
+*   **Attribution:** We "Humble Brag" about our origins in the Colophon, but the Codebase itself speaks with one voice: **Ours.**

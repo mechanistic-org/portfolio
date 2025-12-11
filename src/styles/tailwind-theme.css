@@ -4,18 +4,18 @@
  * These are in a separate file so it can be imported into <style> tags in .astro components
  */
 @theme {
-	/* primary colors. Can generate with https://uicolors.app/create, then convert to oklch with https://oklch.com/ */
-	--color-primary-50: oklch(98.33% 0.024 141.52);
-	--color-primary-100: oklch(96.53% 0.0574 141.26);
-	--color-primary-200: oklch(93.05% 0.1089 141.68);
-	--color-primary-300: oklch(88.23% 0.1852 141.61);
-	--color-primary-400: oklch(82.01% 0.2405 141.6);
-	--color-primary-500: oklch(74.72% 0.2439 141.89);
-	--color-primary-600: oklch(70.81% 0.2343 142);
-	--color-primary-700: oklch(54.37% 0.1758 141.88);
-	--color-primary-800: oklch(45.91% 0.1423 141.87);
-	--color-primary-900: oklch(40.09% 0.121 142.08);
-	--color-primary-950: oklch(27.3% 0.0883 142.03);
+	/* Quantum Blue (Cherenkov) #2E5CFF */
+	--color-primary-50: oklch(97.0% 0.01 255.0);
+	--color-primary-100: oklch(94.0% 0.03 255.0);
+	--color-primary-200: oklch(88.0% 0.06 255.0);
+	--color-primary-300: oklch(80.0% 0.12 255.0);
+	--color-primary-400: oklch(70.0% 0.18 255.0);
+	--color-primary-500: oklch(62.0% 0.22 255.0); /* Approx #2E5CFF */
+	--color-primary-600: oklch(55.0% 0.22 255.0);
+	--color-primary-700: oklch(45.0% 0.20 255.0);
+	--color-primary-800: oklch(35.0% 0.16 255.0);
+	--color-primary-900: oklch(25.0% 0.12 255.0);
+	--color-primary-950: oklch(15.0% 0.08 255.0);
 
 	/* neutral colors */
 	--color-neutral-50: oklch(98.51% 0 0);

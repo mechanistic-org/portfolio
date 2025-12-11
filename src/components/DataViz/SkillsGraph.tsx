@@ -93,7 +93,16 @@ const SkillsGraph: React.FC<Props> = ({ skillsData, projects }) => {
         svg.selectAll("*").remove(); // Clear previous
 
         // Color Scale
-        const color = d3.scaleOrdinal(d3.schemeTableau10);
+        const color = d3.scaleOrdinal([
+            "#2E5CFF", // Erik Norris Blue
+            "#ffffff", // White
+            "#999999", // Light Grey
+            "#555555", // Dark Grey
+            "#1a3a99", // Deep Blue
+            "#4b75ff", // Lighter Blue
+            "#333333", // Graphite
+            "#cccccc"  // Silver
+        ]);
 
         // Simulation setup
         const simulation = d3.forceSimulation(nodes)

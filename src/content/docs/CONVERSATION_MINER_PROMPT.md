@@ -59,8 +59,8 @@ sidebar:
 > **IMPORTANT:** You must explicitly categorize your updates to avoid ambiguity.
 > *   **[IMPLEMENTED]**: Changes you *already made* during this session (e.g., "Updated ROADMAP.md").
 > *   **[PROPOSED]**: Changes the user *needs to make* or approve for next time.
-
-Group by file. For each item, provide a **Copy-Paste Ready Markdown Block** or a clear instruction.
+>
+> Group by file. For each item, provide a **Copy-Paste Ready Markdown Block** or a clear instruction.
 >
 > Example:
 >
@@ -71,5 +71,5 @@ Group by file. For each item, provide a **Copy-Paste Ready Markdown Block** or a
 > *   **Symptom:** Page renders white.
 > *   **Fix:** Ensure `<Layout>` wraps the content.
 > ```
-*   **Persona Audits:** Did we define a new user persona (e.g., "The Data God", "The Recruiter", "The User")?
-*   **Aesthetic Shifts:** Did we coin a new design term (e.g., "747 Cockpit", "Hyper-Functional Brutalism")?
+> *   **Persona Audits:** Did we define a new user persona (e.g., "The Data God", "The Recruiter", "The User")?
+> *   **Aesthetic Shifts:** Did we coin a new design term (e.g., "747 Cockpit", "Hyper-Functional Brutalism")?

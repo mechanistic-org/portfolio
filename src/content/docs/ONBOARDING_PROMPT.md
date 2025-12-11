@@ -11,6 +11,7 @@ sidebar:
 > *   **Start:** You are reading this Onboarding Prompt.
 > *   **End:** When the user is ready to end the session, they will run the **Conversation Miner**. Your goal is to produce work that is easy to "mine" (clear decisions, documented changes).
 > *   **Golden Rule:** If you encounter a persistent data binding bug, assume it's a Caching/Naming conflict first. Try the "Snake Case Strategy" or the **"JSON-in-Frontmatter Pattern"** before rewriting the component.
+> *   **3D Debugging:** If a texture fails (Shiny Black or Whiteout), use the **"Grey Clay Test"** immediately. Export a clean grey mesh with NO textures (`debug_clay.glb`) to isolate Geometry vs. Texture corruption.
 >
 > **CONFIRMATION:**
 > Once you have read these files, simply reply: **"Erik Norris Portfolio Online. Ready for instructions."**

@@ -23,6 +23,7 @@ sidebar:
 ## Phase 1: The Source (Geometry)
 
 ### A. The Generator (Onshape)
+<img src="/images/3d-workflow/workflow-step-01.png" class="!float-right !ml-6 !mb-4 !w-2/5 rounded-lg shadow-lg" alt="Onshape Geometry Source" />
 *   **Role:** Geometric Truth.
 *   **Units:** Work in any unit, but **Export as Meters** if possible (or scale later).
 *   **Format:** Export as **PARASOLID (.x_t)**.
@@ -44,6 +45,7 @@ sidebar:
 ## Phase 2: The Map (Blender)
 
 *   **Role:** UV Unwrapper.
+<img src="/images/3d-workflow/workflow-step-02.png" class="!float-left !mr-6 !mb-4 !w-2/5 rounded-lg shadow-lg" alt="Blender UV Mapping" />
 *   **Action:**
     1.  Import `.fbx` from Plasticity.
     2.  **Select Sharp Edges:** Angle ~30 degrees.
@@ -57,6 +59,7 @@ sidebar:
 ## Phase 3: The Artist (Substance Painter)
 
 *   **Role:** The "Paint Booth".
+<img src="/images/3d-workflow/workflow-step-03.png" class="!float-right !ml-6 !mb-4 !w-2/5 rounded-lg shadow-lg" alt="Substance Painter Layer Stack" />
 *   **Setup:**
     *   **Resolution:** 4096 (Working), 2048 (Export).
     *   **Baking:** Always bake Mesh Maps (AO, Curvature) first.
@@ -70,30 +73,80 @@ sidebar:
 
 ## Phase 3.5: The Export (Round-Trip)
 
-> **Context:** You cannot export a clean, compressed GLB directly from Painter's "Export Textures" window efficiently. We use the "Round-Trip" method to ensure the best compression and geometry handling.
+### Option A: The "Express Lane" (Direct from Painter)
+<img src="/images/3d-workflow/workflow-step-04.png" class="!float-left !mr-6 !mb-4 !w-2/5 rounded-lg shadow-lg" alt="Substance Painter Export Settings" />
+> **Recommended for:** Quick tests, simple assets, and debugging "White Blobs".
+> **Pros:** No Blender wiring, guaranteed valid GLB.
+> **Cons:** Heavier files (no Draco compression), limited geometry control.
 
-### Step 1: Export Maps (Painter)
-1.  **File -> Export Textures (`Ctrl + Shift + E`)**.
-2.  **Output Template:** `Spark AR Studio` (or any PBR MetalRough preset).
-    *   *Why?* We just need the raw PNGs (BaseColor, ARM/ORM, Normal).
-    *   *Note:* Ensure you have a standard "Generic PBR" preset or creating one that exports:
-        *   `BaseColor` (sRGB)
-        *   `Roughness` (Linear)
-        *   `Metallic` (Linear)
-        *   `Normal` (OpenGL)
-        *   `Emissive` (sRGB) - if applicable
-3.  **File Type:** `PNG` (8-bit is fine, 16-bit for Normals if you have banding).
-4.  **Export** to a folder (e.g., `exports/matte_carbon_maps/`).
+1.  **Selection:** In Painter, ensure your mesh is ready.
+2.  **File -> Export Textures**.
+3.  **Settings:**
+    *   **Output Template:** `glTF PBR Metal Roughness`.
+    *   **File Type:** `glTF Binary` (**NOT** png).
+        *   *Note:* The dropdown that usually says "png" or "jpg" has a `glTF Binary` option at the bottom.
+    *   **Size:** 4096.
+4.  **Export:** This produces a ready-to-use `.glb` file.
+5.  **Rename & Deploy:** Rename to `EN_Logo_MatteCarbon.glb` and overwrite your site file.
 
-### Step 2: Re-Assembly (Blender)
+---
+
+### Option B: The "Round-Trip" (Blender Optimized)
+> **STOP.** Do not use a default preset. They often mess up alpha channels or color spaces.
+> Create this preset **ONCE**, and use it forever.
+
+1.  **Painter -> Export Textures (`Ctrl + Shift + E`)**.
+2.  **Output Templates (Tab) -> Click `+` (New Preset).**
+3.  **Name it:** `Quantum_ORM`.
+4.  **Create 3 Output Maps:**
+    *   **Map 1: RGB (sRGB)** -> Name: `$mesh_$textureSet_BaseColor`
+        *   *Drag:* `Input Maps -> Base Color` to RGB.
+        *   *Bit Depth:* **8 bits**.
+    *   **Map 2: R+G+B (Linear)** -> Name: `$mesh_$textureSet_ORM`
+        *   *Drag:* `Input Maps -> Ambient Occlusion` to **R**. (Select **Gray Channel**)
+        *   *Drag:* `Input Maps -> Roughness` to **G**. (Select **Gray Channel**)
+        *   *Drag:* `Input Maps -> Metallic` to **B**. (Select **Gray Channel**)
+        *   *Bit Depth:* **8 bits**.
+    *   **Map 3: RGB (RGB)** -> Name: `$mesh_$textureSet_Normal`
+        *   *Drag:* `Converted Maps -> Normal OpenGL` to RGB. (Select **RGB Channels**)
+        *   *Bit Depth:* **16 bits** (Crucial for smooth gradients).
+    *   **Map 4: Gray (Linear)** -> Name: `$mesh_$textureSet_AnisoAngle`
+        *   *Drag:* `Input Maps -> Anisotropy Angle` to **Gray**.
+        *   *Bit Depth:* **8 bits**.
+5.  **Settings (Tab):**
+    *   **Output Template:** Select `Quantum_ORM`.
+    *   **File Type:** `PNG`.
+        *   **Bit Depth:** **16 bits**.
+            *   *Note:* This makes files larger, but guarantees no banding. We can optimize to 8-bit later.
+    *   **Size:** 2048 or 4096.
+6.  **Export.**
+
+
 1.  Open your **Unwrapped/UV'd** Blender file.
 2.  Go to **Shading** tab.
-3.  **Principled BSDF Setup:**
-    *   **Base Color:** Connect `_BaseColor.png`
-    *   **Metallic:** Connect `_Metallic.png` (Color Space: Non-Color)
-    *   **Roughness:** Connect `_Roughness.png` (Color Space: Non-Color)
+3.  **Principled BSDF Setup (The Node Graph):**
+    *   **Base Color:** Connect `_BaseColor.png` (Color Space: **sRGB**).
+    *   **The ORM Map (CRITICAL WIRING CHECK):**
+        *   **Zoom In:** Look at the gray "noodle" connections, not just where you think they go.
+        *   **Green Dot (Middle)** -> Must plug into **Roughness** (#3).
+        *   **Blue Dot (Bottom)** -> Must plug into **Metallic** (#2).
+        *   *Common Bug:* If Green goes to Metallic, the material is inverted. Swap them.
     *   **Normal:** Connect `_Normal.png` -> **Normal Map Node** -> BSDF Normal.
-4.  **Verify:** Does it look like Painter? Good.
+        *   **CRITICAL SETTING:** Change the Image Texture node's *Color Space* from `sRGB` to **Non-Color**.
+        *   *Why?* If left finding `sRGB`, Blender gamma-corrects the vector data. This bends your surface normals randomly, making a mirror look like "Matte Dust" because it scatters light everywhere.
+        *   *Symptom:* "Force Gloss" command makes the model shiny-grey, but leaving textures on makes it flat-black. This confirms the geometry is smooth but the normal map is destroying the reflection.
+    *   **Anisotropy (The Flash):**
+        *   Set **Anisotropic** slider to **1.0**.
+        *   **Rotation Map:** Connect `_AnisoAngle.png` -> **Anisotropic Rotation** socket.
+        *   **CRITICAL:** Set Image Texture to **Non-Color**.
+
+### Step 2.5: The Geometry Fix (Triangulation)
+> **Context:** glTF requires triangles. If you export Quads with "Tangents" enabled, it will fail unless triangulated.
+1.  **Select Object.**
+2.  **Modifiers Tab (Blue Wrench):**
+3.  **Add Modifier** -> **Generate** -> **Triangulate**.
+    *   *Settings:* Default is fine.
+    *   *Note:* You do not need to "Apply" it here. The exporter will do it.
 
 ### Step 3: The Final Export (GLB)
 1.  **Select Object.**
@@ -101,16 +154,40 @@ sidebar:
 3.  **Settings (The Web Standard):**
     *   **Include:** Selected Objects.
     *   **Transform:** +Y Up.
-    *   **Geometry:**
-        *   **UVs:** Yes.
-        *   **Normals:** Yes.
-        *   **Tangents:** Yes (Critical for Normal Maps).
+    *   **Data -> Mesh (THE CHECKLIST):**
+        *   [ ] **UVs:** Yes.
+        *   [ ] **Normals:** Yes.
+        *   [ ] **Tangents:** **YES** (Crucial! If missing, Normal map fails).
+            *   *Note:* If this box is greyed out, you forgot the Triangulate modifier.
+        *   [ ] **Vertex Colors:** **None** (Save space).
+        *   [ ] **Apply Modifiers:** **YES** (Bakes the Triangulate modifier).
     *   **Mesh:**
-        *   **Compression:** **Draco** (Recommended).
-            *   *Compression Level:* 6 (Balanced).
-4.  **Save:** `EN_Logo_Matte.glb`.
-
+        *   **Compression:** **None** (Unchecked for Debugging).
+            *   *Note:* Draco can sometimes strip Tangents. We will re-enable it once the visuals work.
 ---
+
+## Phase 4: The Final Polish (Anisotropy & Detail)
+
+If your model looks solid but "flat" (missing the holographic flash), it is likely the **Shader** is set wrong in Painter.
+
+<img src="/images/3d-workflow/workflow-step-05.png" class="!float-right !ml-6 !mb-4 !w-2/5 rounded-lg shadow-lg" alt="Web Viewer Final Result" />
+
+1.  **Change Shader (CRITICAL):**
+    *   Open **Shader Settings** (Sphere icon on the right).
+    *   Click the top button (Instance Name).
+    *   Search/Select: `pbr-metal-roughness-anisotropy-angle`.
+    *   **Optimize Parameters:**
+        *   **Specular Quality:** Set to `Very High (256 spp)`. *Crucial for seeing fine flake noise.*
+        *   **AO Intensity:** `1.0` (Maximize cavity depth).
+        *   **Horizon Fading:** `0.5` (Reduces edge darkening).
+    *   *Why:* The default shader ignores anisotropy. This one enables the "Flash".
+2.  **Verify Layers:**
+    *   Ensure your Anisotropy Layer (e.g., `03.FLASH_ANISO`) has the `a lvl` channel **Active** and set to **1.0**.
+    *   Ensure top layers (Dust/Wear) have `a lvl` **Disabled** so they don't overwrite it with 0.
+3.  **Export (Recall Option A):**
+    *   Template: `glTF PBR Metal Roughness`.
+    *   File Type: `glTF Binary`.
+4.  **Test:** The debug page should now say `Anisotropy Factor: 1` and you should see the flakes dancing.
 
 ## Phase 4: Output & Deployment
 
@@ -173,3 +250,20 @@ D:\Assets\ErikNorris_Lib\
 ├── 02_Smart_Materials\ (.spsm) -- [YOUR RECIPES]
 └── 03_The_Harvest\ (.png) -- [VENDOR AGNOSTIC BACKUP]
 ```
+
+## Appendix C: Troubleshooting (The Fix)
+
+### 3. The "Shiny Black Void" (Web Viewer)
+*   **Symptom:** Model looks perfect in Painter but renders as a shiny black blob in `model-viewer`.
+*   **Cause 1 (Ghost Channel):** A `Coat` or `Clearcoat` channel exists in Painter (even if disabled).
+    *   *Fix:* Delete the channel in Texture Set Settings.
+*   **Cause 2 (The Alpha Trap):** The Base Color map has an Alpha channel (A=0) that the viewer interprets as "Transparent".
+    *   *Fix:* Use the **Quantum_ORM** preset. Ensure Base Color is exported as **RGB** (No Alpha).
+
+### 4. The "Whiteout" (Shader Crash)
+*   **Symptom:** Model renders as a pure white silhouette (unlit).
+*   **Cause:** Anisotropy is enabled in the shader, but **Tangent** data is missing from the glTF mesh.
+*   **Fix:**
+    1.  **Blender:** Add a `Triangulate` modifier.
+    2.  **Export:** Check `Data -> Mesh -> Tangents`.
+    3.  **Export:** Uncheck `Compression` (Draco can strip tangents).

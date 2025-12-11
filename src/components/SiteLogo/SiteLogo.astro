@@ -5,47 +5,63 @@ import { Image } from "astro:assets";
 import siteData from "@config/siteData.json";
 ---
 
-<a class="primary-focus group/navlink relative block h-10 w-40" href="/" aria-label="Home">
+<a
+	class="primary-focus group/navlink relative block h-full w-40"
+	href="/"
+	aria-label="Home"
+	id="site-logo-container"
+>
 	<model-viewer
-		src="/assets/r2/_site/EN_Logo_MatteCarbon.glb"
+		id="nav-logo-3d"
+		src="/assets/r2/_site/en_logo.glb"
 		alt="Erik Norris 3D Logo"
 		class="h-full w-full"
-		camera-controls
 		disable-zoom
-		shadow-intensity="0"
-		exposure="3.5"
+		camera-controls
+		shadow-intensity="1"
+		environment-image="neutral"
+		tone-mapping="commerce"
+		exposure="1.2"
 		interaction-prompt="none"
-		style="--poster-color: transparent; background-color: transparent;"
+		camera-orbit="0deg 90deg 55%"
+		min-camera-orbit="-30deg 60deg 55%"
+		max-camera-orbit="30deg 110deg 55%"
+		interpolation-decay="200"
+		style="--poster-color: transparent; background-color: transparent; --progress-bar-color: #2E5CFF; --progress-bar-height: 2px;"
 	>
-		<div slot="poster" class="absolute inset-0 h-full w-full">
-			<img
-				src="/assets/branding/EN_wordmark_H_black_1200.svg"
-				alt="Erik Norris"
-				class="logo-light h-full w-full object-contain"
-			/>
-			<img
-				src="/assets/branding/EN_wordmark_H_white_1200.svg"
-				alt="Erik Norris"
-				class="logo-dark h-full w-full object-contain"
-			/>
-		</div>
+		<!-- No Poster: Immediate load preferred for Logo -->
 	</model-viewer>
 </a>
 
-<style>
-	/* Default: Light Mode */
-	.logo-light {
-		display: block;
-	}
-	.logo-dark {
-		display: none;
-	}
+<script>
+	const modelViewer = document.querySelector("#nav-logo-3d") as any;
+	const container = document.querySelector("#site-logo-container");
 
-	/* Dark Mode */
-	:global(.dark) .logo-light {
-		display: none;
+	if (modelViewer && container) {
+		// "Happy Wiggle" Animation on Enter
+		container.addEventListener("mouseenter", () => {
+			// Only wiggle if we aren't currently being interacted with (optional check, but simple wiggle is fine)
+			// We strictly target the orbit we want, letting interpolation-decay smooth it out.
+
+			const currentOrbit = modelViewer.getCameraOrbit();
+			const radius = currentOrbit.radius || "55%"; // Fallback if parsed weirdly, but usually returns obj
+
+			// Frame 1: Tilt Left
+			modelViewer.cameraOrbit = `-15deg 90deg ${radius}m`;
+
+			setTimeout(() => {
+				// Frame 2: Tilt Right
+				modelViewer.cameraOrbit = `15deg 90deg ${radius}m`;
+			}, 200);
+
+			setTimeout(() => {
+				// Frame 3: Back to Center
+				modelViewer.cameraOrbit = `0deg 90deg ${radius}m`;
+			}, 400);
+		});
 	}
-	:global(.dark) .logo-dark {
-		display: block;
-	}
+</script>
+
+<style>
+	/* Logo specific overrides if needed */
 </style>
