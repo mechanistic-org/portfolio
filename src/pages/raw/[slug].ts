@@ -1,5 +1,7 @@
 import { getCollection } from "astro:content";
 
+export const prerender = true;
+
 export async function getStaticPaths() {
     const projects = await getCollection("projects");
     return projects.map((entry) => ({
