@@ -1,3 +1,14 @@
+/**
+ * ⚠️ CRITICAL ARCHITECTURE COMPONENT ⚠️
+ * 
+ * This file is part of the "Zero-Bloat" Manual Worker Strategy.
+ * READ [docs/ARCHITECTURE.md] BEFORE MODIFYING.
+ * 
+ * 1. This file is HAND-WRITTEN. Astro does NOT generate it.
+ * 2. It exists to bypass Cloudflare's module limits by separating the Worker from the Site Build.
+ * 3. It handles ONLY the R2 Proxy.
+ * 4. Do NOT import large libraries here. Keep it lightweight (< 10KB).
+ */
 export default {
     async fetch(request, env) {
         const url = new URL(request.url);

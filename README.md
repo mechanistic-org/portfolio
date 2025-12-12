@@ -1,5 +1,8 @@
 
 # Quantum
+> ⚠️ **CRITICAL:** Before modifying build settings or assets, read [**docs/ARCHITECTURE.md**](docs/ARCHITECTURE.md).
+> This project uses a specific "Zero-Bloat" strategy to survive Cloudflare limits.
+
 **Erik Norris High-Performance Engineering Portfolio**
 
 A technical portfolio site built to function as a datasheet. It combines high-performance web technologies with a data-driven content pipeline to showcase mechanical engineering work.

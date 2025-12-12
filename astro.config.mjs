@@ -33,6 +33,10 @@ const expressiveCodeOptions = {
 
 // https://astro.build/config
 export default defineConfig({
+    // ⚠️ CRITICAL: Must be "static" (Pure Static Output)
+    // Do NOT add `adapter: cloudflare()`. It will re-enable the broken "Hybrid" build
+    // and bloat the Worker with site code, causing deployment failures.
+    // See [docs/ARCHITECTURE.md].
     output: "static",
     site: "https://www.eriknorris.com",
     redirects: {
