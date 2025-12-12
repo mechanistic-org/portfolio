@@ -4,7 +4,7 @@ import sys
 
 # --- CONFIGURATION ---
 # ⚠️ UPDATE THIS WITH YOUR ACTUAL BUCKET NAME
-BUCKET_NAME = "eriknorris-assets" 
+BUCKET_NAME = "projects" 
 STAGING_DIR = "R2_STAGING"
 
 def check_wrangler():
