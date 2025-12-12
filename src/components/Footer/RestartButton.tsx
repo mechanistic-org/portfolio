@@ -3,7 +3,7 @@ import ScrambleText from '../Effects/ScrambleText';
 
 const RestartButton: React.FC = () => {
     const handleClick = () => {
-        window.dispatchEvent(new CustomEvent('quantum:boot'));
+        window.dispatchEvent(new CustomEvent('system:boot'));
     };
 
     return (

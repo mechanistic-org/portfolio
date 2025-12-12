@@ -7,11 +7,11 @@ sidebar:
 # System Instruction: Brand Alignment & Style Guide Protocol
 
 **Objective:**
-Elevate the "Quantum" project from a portfolio site to a cohesive **Personal Engineering Brand System**. We need to move beyond "styling" and establish a rigorous **Design Language System (DLS)** that reflects high-performance engineering, brutalist aesthetics, and "datasheet" clarity.
+Elevate the "Erik Norris" project from a portfolio site to a cohesive **Personal Engineering Brand System**. We need to move beyond "styling" and establish a rigorous **Design Language System (DLS)** that reflects high-performance engineering, brutalist aesthetics, and "datasheet" clarity.
 
 **Context:**
 *   **Current State:** Hybrid Content System (CSV + MDX), Tailwind v4 (OKLCH colors), "Starwind" base tokens.
-*   **Aesthetic:** Quantum Laboratory, Technical, "Discovery over Science Fiction".
+*   **Aesthetic:** Engineering Lab, Technical, "Discovery over Science Fiction".
 *   **Core Fonts:** Inter (Headers), JetBrains Mono (Body/Code).
 *   **Primary Color:** **YInMn Blue** (`#2E5CFF`). Discovered by Mas Subramanian (2009). Represents Stability, Discovery, and Non-Toxicity.
 *   **Secondary Color:** **Electric Cyan** (`#00C2FF`). High-frequency data streams.
@@ -33,7 +33,7 @@ Research indicates a trend towards **"Hyper-Functional Brutalism"** and **"Proof
 *   **Raw Data:** How can we visualize the "Ingestion Pipeline" itself as part of the brand (e.g., showing build stats in the footer)?
 
 ## Phase 3: Naming & Identity
-"Quantum" is generic. We need a name that implies **Structure, Velocity, and Precision**.
+"The current naming" is generic. We need a name that implies **Structure, Velocity, and Precision**.
 *   **Brainstorming Vector:**
     *   *Kinetic:* Vector, Tensor, Flux, Momentum.
     *   *Structural:* Lattice, Frame, Truss, Matrix.

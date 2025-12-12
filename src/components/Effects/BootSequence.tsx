@@ -16,8 +16,8 @@ const BootSequence: React.FC = () => {
             setPhase('rain');
         };
 
-        window.addEventListener('quantum:boot', handleBoot);
-        return () => window.removeEventListener('quantum:boot', handleBoot);
+        window.addEventListener('system:boot', handleBoot);
+        return () => window.removeEventListener('system:boot', handleBoot);
     }, []);
 
     // Matrix Rain Effect
@@ -96,7 +96,7 @@ const BootSequence: React.FC = () => {
         if (phase !== 'boot') return;
 
         const sequence = [
-            "> INITIALIZING QUANTUM CORE...",
+            "> INITIALIZING SYSTEM CORE...",
             "> ESTABLISHING NEURAL LINK...",
             "> DECRYPTING SECURE ARCHIVES...",
             "> OPTIMIZING REALITY ENGINE...",
