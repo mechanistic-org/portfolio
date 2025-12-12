@@ -1,0 +1,7 @@
+name = "quantum"
+compatibility_date = "2024-09-23"
+
+# Bind the R2 Bucket for local dev/preview if needed
+[[r2_buckets]]
+binding = "ASSETS_BUCKET"
+bucket_name = "eriknorris-assets"

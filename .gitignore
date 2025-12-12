@@ -22,6 +22,7 @@ pnpm-debug.log*
 
 # Local Netlify folder
 .netlify
+.wrangler/
 
 # Local R2 Staging (Do not commit)
 R2_STAGING/
