@@ -11,19 +11,28 @@ export async function onRequest(context) {
     const { request, env } = context;
     const url = new URL(request.url);
 
-    // DEBUG: Deep Probe Health Check
+    // DEBUG: Deep Probe Health Check (LIST Operation)
     if (url.pathname === '/debug/health') {
-        const testKey = 'dreamjob/dreamjob-hero-01-v2.jpg';
+        const prefix = 'dreamjob/';
         let r2Status = 'UNKNOWN';
         let errorDetails = '';
+        let listedKeys = [];
 
         try {
             if (!env.PROJECTS) {
                 return new Response('CRITICAL: env.PROJECTS is UNDEFINED. Check wrangler.toml binding.', { status: 500 });
             }
 
-            const obj = await env.PROJECTS.get(testKey);
-            r2Status = obj ? `FOUND (Size: ${obj.size} bytes)` : `MISSING (Key used: '${testKey}')`;
+            // List the bucket contents to see what the worker sees
+            const listResult = await env.PROJECTS.list({ prefix: prefix, limit: 10 });
+            listedKeys = listResult.objects.map(o => o.key);
+
+            if (listedKeys.length > 0) {
+                r2Status = `FOUND ${listedKeys.length} items. First: '${listedKeys[0]}'`;
+            } else {
+                r2Status = 'EMPTY LIST (Bucket appears empty to Worker)';
+            }
+
         } catch (e) {
             r2Status = 'ERROR';
             errorDetails = e.message;
@@ -32,8 +41,10 @@ export async function onRequest(context) {
         const report = `
 STATUS: RUNNING (Functions Mode)
 BINDING: env.PROJECTS is ${!!env.PROJECTS ? 'DEFINED' : 'MISSING'}
-TEST KEY: ${testKey}
+LIST PREFIX: '${prefix}'
 RESULT: ${r2Status}
+KEYS FOUND:
+${listedKeys.join('\n')}
 ERROR: ${errorDetails}
         `.trim();
 
