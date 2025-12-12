@@ -1,88 +1,172 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import fs from "node:fs";
+import path from "node:path";
+import { parseTimelineMarkdown } from "../../utils/timelineParser";
+
+// Read and Parse Resume Corpus
+const corpusPath = path.resolve("./data_source/manual_content/RESUME_CORPUS_timeline.md");
+let items = [];
+
+try {
+	const markdownContent = fs.readFileSync(corpusPath, "utf-8");
+	items = parseTimelineMarkdown(markdownContent);
+} catch (error) {
+	console.error("Failed to read Resume Corpus:", error);
+}
+
+const pageTitle = "Erik Norris | Resume";
 ---
 
-<BaseLayout title="Retrieving Blueprint..." description="Accessing secure document storage.">
-	<div
-		class="container mx-auto flex h-screen flex-col items-center justify-center px-4 text-center"
-	>
-		<div class="w-full max-w-md space-y-8">
-			<div class="relative">
-				<!-- Plotter Animation Container -->
-				<div class="bg-surface-800 h-2 w-full overflow-hidden rounded">
-					<div class="bg-accent-500 animate-progress h-full"></div>
-				</div>
-				<div class="text-accent-400 mt-2 flex justify-between font-mono text-xs">
-					<span>INIT_PLOTTER_DRIVER</span>
-					<span id="status-text">BUFFERING...</span>
-				</div>
-			</div>
+<BaseLayout title={pageTitle} description="Professional Resume of Erik Norris">
+	<!-- Print Styles -->
+	<style is:inline>
+		@media print {
+			@page {
+				margin: 0.5in;
+			}
+			body {
+				background: white;
+				color: black;
+			}
+			nav,
+			footer,
+			.no-print {
+				display: none !important;
+			}
+			.print-container {
+				width: 100% !important;
+				max-width: none !important;
+				margin: 0 !important;
+				padding: 0 !important;
+				box-shadow: none !important;
+				background: white !important;
+			}
+			.page-break {
+				page-break-before: always;
+			}
+			a {
+				text-decoration: none;
+				color: black;
+			}
+		}
+	</style>
 
-			<h1 class="animate-pulse text-2xl font-bold text-white">RETRIEVING BLUEPRINT</h1>
-
-			<div
-				class="text-surface-400 border-surface-700 space-y-1 rounded border bg-black/30 p-4 text-left font-mono text-sm"
+	<div class="flex min-h-screen flex-col items-center bg-neutral-900 py-12">
+		<!-- Controls -->
+		<div class="no-print mb-8 flex gap-4">
+			<button
+				onclick="window.print()"
+				class="bg-primary-600 hover:bg-primary-500 flex items-center gap-2 rounded-full px-6 py-2 font-bold text-white shadow-lg transition-transform hover:scale-105"
 			>
-				<p>> CONNECTING TO ARCHIVE...</p>
-				<p class="animate-fade-in opacity-0 delay-100">> ACCESS GRANTED</p>
-				<p class="animate-fade-in opacity-0 delay-200">> RASTERING VECTOR DATA...</p>
-				<p class="animate-fade-in opacity-0 delay-300">> SPOOLING TO PRINTER...</p>
-				<p class="animate-fade-in text-accent-400 opacity-0 delay-500">
-					> COMPLETE. OPENING DOCUMENT.
-				</p>
-			</div>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width="20"
+					height="20"
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					stroke-width="2"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					><path d="M6 9V2h12v7"></path><path
+						d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+					></path><path d="M6 14h12v8H6z"></path></svg
+				>
+				Download / Print PDF
+			</button>
+			<a
+				href="/history"
+				class="rounded-full bg-neutral-800 px-6 py-2 font-bold text-neutral-300 transition-colors hover:bg-neutral-700"
+			>
+				View Interactive Timeline
+			</a>
+		</div>
+
+		<!-- Resume Paper -->
+		<div
+			class="print-container min-h-[11in] w-[8.5in] rounded-sm bg-white p-[0.75in] text-neutral-900 shadow-2xl"
+		>
+			<!-- Header -->
+			<header class="border-primary-500 mb-6 border-b-2 pb-6">
+				<div class="flex items-end justify-between">
+					<div>
+						<h1 class="text-4xl font-bold tracking-tight text-neutral-900 uppercase">
+							Erik Norris
+						</h1>
+						<p class="text-primary-600 mt-1 text-xl font-medium">
+							Product Architect & Senior Mechanical Engineer
+						</p>
+					</div>
+					<div class="text-right font-mono text-sm text-neutral-600">
+						<p>San Francisco Bay Area</p>
+						<p>resume.eriknorris.com</p>
+						<p>linkedin.com/in/eriknorris</p>
+					</div>
+				</div>
+			</header>
+
+			<!-- Professional Experience -->
+			<section>
+				<h2
+					class="mb-4 border-b border-neutral-200 pb-1 text-lg font-bold tracking-widest text-neutral-400 uppercase"
+				>
+					Professional Experience
+				</h2>
+
+				<div class="flex flex-col gap-6">
+					{
+						items.map((item) => (
+							<article class="break-inside-avoid">
+								<div class="mb-1 flex items-baseline justify-between">
+									<h3 class="text-lg font-bold text-neutral-900">{item.cardTitle}</h3>
+									<span class="font-mono text-sm whitespace-nowrap text-neutral-500">
+										{item.title}
+									</span>
+								</div>
+
+								<div class="text-primary-700 mb-2 text-sm font-medium">{item.cardSubtitle}</div>
+
+								{item.responsibilities.length > 0 && (
+									<ul class="mb-2 ml-4 list-outside list-disc space-y-1 text-sm text-neutral-700">
+										{item.responsibilities.map((r) => (
+											<li>{r}</li>
+										))}
+									</ul>
+								)}
+
+								{item.keyProjects.length > 0 && (
+									<div class="mt-2 border-l-2 border-neutral-100 pl-4">
+										<p class="mb-1 text-xs font-bold text-neutral-400 uppercase">Key Projects</p>
+										<ul class="space-y-1 text-sm text-neutral-600">
+											{item.keyProjects.map((p) => (
+												<li>{p}</li>
+											))}
+										</ul>
+									</div>
+								)}
+							</article>
+						))
+					}
+				</div>
+			</section>
+
+			<!-- Skills (Aggregated from Tech Stack) -->
+			<section class="mt-8 break-inside-avoid">
+				<h2
+					class="mb-4 border-b border-neutral-200 pb-1 text-lg font-bold tracking-widest text-neutral-400 uppercase"
+				>
+					Skills & Tools
+				</h2>
+				<div class="tex-sm leading-relaxed text-neutral-700">
+					{/* Unique set of skills */}
+					{
+						Array.from(new Set(items.flatMap((i) => i.techStack || [])))
+							.sort()
+							.join(" • ")
+					}
+				</div>
+			</section>
 		</div>
 	</div>
 </BaseLayout>
-
-<script>
-	// Redirect after animation
-	setTimeout(() => {
-		window.location.href = "https://resume.eriknorris.com/";
-	}, 2500);
-
-	// Dynamic Status Text
-	const status = document.getElementById("status-text");
-	if (status) {
-		setTimeout(() => (status.innerText = "RASTERING..."), 800);
-		setTimeout(() => (status.innerText = "PRINTING..."), 1600);
-		setTimeout(() => (status.innerText = "DONE"), 2400);
-	}
-</script>
-
-<style>
-	@keyframes progress {
-		0% {
-			width: 0%;
-		}
-		100% {
-			width: 100%;
-		}
-	}
-	.animate-progress {
-		animation: progress 2.5s ease-in-out forwards;
-	}
-
-	.animate-fade-in {
-		animation: fadeIn 0.1s forwards;
-	}
-
-	@keyframes fadeIn {
-		to {
-			opacity: 1;
-		}
-	}
-
-	.delay-100 {
-		animation-delay: 0.5s;
-	}
-	.delay-200 {
-		animation-delay: 1s;
-	}
-	.delay-300 {
-		animation-delay: 1.5s;
-	}
-	.delay-500 {
-		animation-delay: 2s;
-	}
-</style>

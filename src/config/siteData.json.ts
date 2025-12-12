@@ -62,10 +62,13 @@ const siteData: SiteDataProps = {
 	useAnimations: true,
 
 	socialLinks: [
-
+		{
+			platform: "resume",
+			link: "https://resume.eriknorris.com",
+		},
 		{
 			platform: "linkedin",
-			link: "https://www.linkedin.com/eriknorris/",
+			link: "https://www.linkedin.com/in/eriknorris/",
 		},
 		{
 			platform: "github",
@@ -74,7 +77,7 @@ const siteData: SiteDataProps = {
 		{
 			// you should always at least have an email
 			platform: "email",
-			link: "mailto:erik@mechanistic.com.com",
+			link: "mailto:erik@mechanistic.com",
 		},
 	],
 

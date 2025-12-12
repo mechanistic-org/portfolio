@@ -4,6 +4,7 @@ import { type CollectionEntry, getEntries } from "astro:content";
 
 import Button from "@/components/Button/Button.astro";
 import KeyFeatures from "@/components/Projects/KeyFeatures.astro";
+import ProjectSpecCard from "@/components/Projects/ProjectSpecCard.astro";
 import TechStack from "@/components/Projects/TechStack.astro";
 import { getLocaleFromUrl } from "@/js/localeUtils";
 import { formatDate } from "@/js/textUtils";
@@ -13,97 +14,102 @@ import { getLocalizedRoute } from "@/js/translationUtils";
 import BaseLayout from "./BaseLayout.astro";
 
 interface Props {
-  project: CollectionEntry<"projects">;
+	project: CollectionEntry<"projects">;
 }
 
 const { project } = Astro.props as Props;
 const { title, description, image, technologies, demoUrl, githubUrl, completionDate, keyFeatures } =
-  project.data;
+	project.data;
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(currLocale);
 ---
 
 <BaseLayout type="general" title={title} description={description} image={image}>
-  <article class="site-container mt-24">
-    <!-- Project Header -->
-    <div class="mx-auto max-w-3xl pt-8 pb-8 text-center md:pb-12">
-      <h1 class="h1 mb-4">{title}</h1>
-      <p class="text-muted-foreground text-lg md:text-xl">{description}</p>
-    </div>
+	<article class="site-container mt-24">
+		<!-- Project Header -->
+		<div class="mx-auto max-w-3xl pt-8 pb-8 text-center md:pb-12">
+			<h1 class="h1 mb-4">{title}</h1>
+			<p class="text-muted-foreground text-lg md:text-xl">{description}</p>
+		</div>
 
-    <!-- Project Featured Image -->
-    {
-      image && (
-        <div class="mx-auto flex w-full max-w-[1000px] justify-center pb-12">
-          <div class="w-full overflow-hidden rounded-xl border md:rounded-2xl">
-            <Image
-              src={image}
-              alt={title}
-              width={1000}
-              densities={[1.5, 2]}
-              quality="high"
-              format="webp"
-              loading="eager"
-              class="max-h-[70vh] w-full rounded-xl object-cover md:rounded-2xl"
-            />
-          </div>
-        </div>
-      )
-    }
+		<!-- Technical Spec Card -->
+		<div class="mx-auto mb-12 max-w-3xl">
+			<ProjectSpecCard entry={project} />
+		</div>
 
-    <!-- Content Section -->
-    <div class="py-12">
-      <div class="mx-auto max-w-3xl">
-        <div class="mb-12">
-          <h2 class="h2 mb-4">Technologies Used</h2>
-          <TechStack {technologies} />
-        </div>
+		<!-- Project Featured Image -->
+		{
+			image && (
+				<div class="mx-auto flex w-full max-w-[1000px] justify-center pb-12">
+					<div class="w-full overflow-hidden rounded-xl border md:rounded-2xl">
+						<Image
+							src={image}
+							alt={title}
+							width={1000}
+							densities={[1.5, 2]}
+							quality="high"
+							format="webp"
+							loading="eager"
+							class="max-h-[70vh] w-full rounded-xl object-cover md:rounded-2xl"
+						/>
+					</div>
+				</div>
+			)
+		}
 
-        <div class="mb-12">
-          <h2 class="h2 mb-4">Key Features</h2>
-          <KeyFeatures {keyFeatures} />
-        </div>
+		<!-- Content Section -->
+		<div class="py-12">
+			<div class="mx-auto max-w-3xl">
+				<div class="mb-12">
+					<h2 class="h2 mb-4">Technologies Used</h2>
+					<TechStack {technologies} />
+				</div>
 
-        <div class="markdown-content">
-          <slot />
-        </div>
+				<div class="mb-12">
+					<h2 class="h2 mb-4">Key Features</h2>
+					<KeyFeatures {keyFeatures} />
+				</div>
 
-        <div class="mt-10 flex flex-col gap-6">
-          <div class="opacity-70">
-            Completed on: {formatDate(completionDate, currLocale)}
-          </div>
+				<div class="markdown-content">
+					<slot />
+				</div>
 
-          <div class="flex flex-wrap gap-4">
-            {
-              demoUrl && (
-                <Button
-                  href={demoUrl}
-                  target="_blank"
-                  variant="primary"
-                  arrow="right"
-                  class="px-6 py-3"
-                >
-                  Live Demo
-                </Button>
-              )
-            }
-            {
-              githubUrl && (
-                <Button
-                  href={githubUrl}
-                  target="_blank"
-                  variant="outline"
-                  arrow="right"
-                  class="px-6 py-3"
-                >
-                  View Source
-                </Button>
-              )
-            }
-          </div>
-        </div>
-      </div>
-    </div>
-  </article>
+				<div class="mt-10 flex flex-col gap-6">
+					<div class="opacity-70">
+						Completed on: {formatDate(completionDate, currLocale)}
+					</div>
+
+					<div class="flex flex-wrap gap-4">
+						{
+							demoUrl && (
+								<Button
+									href={demoUrl}
+									target="_blank"
+									variant="primary"
+									arrow="right"
+									class="px-6 py-3"
+								>
+									Live Demo
+								</Button>
+							)
+						}
+						{
+							githubUrl && (
+								<Button
+									href={githubUrl}
+									target="_blank"
+									variant="outline"
+									arrow="right"
+									class="px-6 py-3"
+								>
+									View Source
+								</Button>
+							)
+						}
+					</div>
+				</div>
+			</div>
+		</div>
+	</article>
 </BaseLayout>

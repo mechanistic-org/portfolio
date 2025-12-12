@@ -156,6 +156,10 @@ The site includes a built-in "Wireframe Mode" for visual debugging.
     *   **Grayscale/Yellow Images:** Checks image contrast and focus.
 *   **Persistence:** The state is saved in `localStorage`, so it survives page reloads.
 
+### Visual Sitemap (`/map`)
+*   **Purpose:** Inspect the raw site topology and link hierarchy.
+*   **Usage:** Visit `/map` to see a tree visualization of `navData` and the `projects` collection. Useful for auditing structure before major refactors.
+
 ## 7. Managing Site Status
 The site features a global status badge (e.g., "UNDER CONSTRUCTION") configured in `src/config/siteData.json.ts`.
 
@@ -199,13 +203,20 @@ status: {
 *   **Symptom:** Build fails with `[content] Error: ... required "title"`.
 *   **Cause:** A raw markdown file (like `implementation_plan.md`) was added to `src/content/docs/` without the required YAML frontmatter block.
 *   **Fix:** Ensure *every* `.md` file in the docs folder starts with:
-    ```yaml
-    ---
+    ```
     title: "Doc Title"
     slug: "doc-slug"
     description: "Brief summary"
     ---
     ```
+
+### Build Crash (localeCompare / Title Sort)
+*   **Symptom:** `npm run build` fails with `Cannot read properties of undefined (reading 'localeCompare')`.
+*   **Cause:** A legacy markdown file in `src/content/docs` is missing the `title` frontmatter field. The sidebar sort logic crashes when trying to compare undefined titles.
+*   **Fix:**
+    1.  The build system has been patched to explicitly filter out these files in `[...slug].astro`.
+    2.  If it persists, run `scripts/debug_docs.py` (if available) or manually `grep` for files without frontmatter.
+    3.  **Rule:** All docs MUST have a `title`.
 
 ### Asset Staging Mismatch (Ghost Assets)
 *   **Symptom:** You place assets in `R2_STAGING` but they don't appear after ingestion.
@@ -445,7 +456,17 @@ See `docs/IMAGE_WORKFLOW.md` for the full SOP.
 ### Missing Assets / 500 Errors
 *   **Symptom:** Images fail to load with 500 errors, or the site crashes with `ENOENT`.
 *   **Cause:** Often caused by deleting asset directories (like `assets/logos`) while the dev server is running, or lingering references in cached build artifacts.
-*   **Fix:**
+*   **Fix:** Ensure `process_images.py` is handling letterboxing correctly.
+
+### React Three Fiber (R3F) Assets
+*   **Symptom:** 3D Model (`.glb`) fails to load or returns 404.
+*   **Cause:** R3F looks for assets relative to the compiled root.
+*   **Fix:** Ensure models are placed in `public/assets/models/` and referenced as `/assets/models/filename.glb`.
+
+### Loose Props in Project Cards
+*   **Context:** `ProjectSpecCard` is used in both Collections (CMS) and "Meta-Portfolio" pages (hardcoded).
+*   **Trap:** Passing loose props without an `entry` object caused type errors in earlier versions.
+*   **Fix:** The component now handles hybrid props. You can pass raw strings (`title`, `role`, etc.) directly if no `entry` is provided.
 
 ### Squished Animations
 *   **Symptom:** Animation frames look stretched or compressed.

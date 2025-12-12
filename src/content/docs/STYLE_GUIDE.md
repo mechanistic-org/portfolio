@@ -46,7 +46,7 @@ We use a scientifically calibrated OKLCH scale for consistent perceptual brightn
 
 ### Icons & Logos
 > [!IMPORTANT]
-> **Branding Guide:** For comprehensive logo usage, naming conventions, and 3D assets, refer to the **Branding Guide** (`BRANDING.md`).
+> **Branding Guide:** For comprehensive logo usage, naming conventions (`EN_logo_*`), and 3D assets, refer to the **Branding Guide** (`BRANDING.md`).
 
 ### Theme-Aware Logos
 To implement a logo that switches with the theme:
@@ -181,7 +181,7 @@ We use specific motion verbs to define the relationship between content layers:
 *   **Implementation:** `.noise-overlay` / `.bg-noise`.
 *   **Tech:** Base64 SVG Data URI (Baked in `global.css`).
 *   **Why:** External dependencies (`netlify.app`) are fragile. We bake the noise to ensure the "grit" never fails to load.
-*   **Opacity:** `0.03` (Subliminal).
+*   **Opacity:** `0.05` (Visible Texture).
 ### The Visible Grid
 *   **Aesthetic:** The coordinate system of the machine.
 *   **Params:**

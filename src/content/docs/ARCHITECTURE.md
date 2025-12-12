@@ -14,6 +14,13 @@ sidebar:
     *   **Usage:** Must be applied to the wrapper div of any MDX content render (e.g., `<div class="markdown-content"><Content /></div>`).
 *   **Interactivity:** React (for Charts), Vanilla JS (for 3D & UI)
 
+### Deck Layout (`DeckLayout.astro`)
+*   **Purpose:** Cinematic, full-screen presentation mode for Pitch Decks and "Scrollytelling" narratives.
+*   **Architecture:**
+    *   Removes global navigation and footer to eliminate distractions.
+    *   Enforces `scroll-snap` behaviors for slide-based progression.
+    *   Uses absolute positioning for overlay elements (e.g., "Scroll Hint").
+
 ### Scroll Coordination System
 To create a "cinematic" feel without heavy libraries (like GSAP), we implemented a lightweight, headless `ScrollCoordinator` component.
 
@@ -181,7 +188,10 @@ A hybrid workflow combining human art direction with machine precision.
 
 
 ### 3D Rendering Stack ("The Asset Lab")
-*   **Component:** `<model-viewer>` (Google)
+*   **Engine:** `three.js` via `@react-three/fiber` (R3F).
+*   **Helpers:** `@react-three/drei` for environment maps, float effects, and GLTF loading.
+*   **Usage:** High-fidelity brand assets (e.g., `WiggleLogo3D`) and interactive visualizations.
+*   **Component:** `<model-viewer>` (Google) - Legacy support for product viewer.
 *   **Version Constraint:** Must be `v3.4.0+` to support `KHR_materials_anisotropy` (Holographic/Carbon effects).
 *   **Format Standard:** `glTF Binary` (.glb).
 *   **Export Workflows:**

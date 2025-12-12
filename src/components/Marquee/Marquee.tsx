@@ -83,41 +83,52 @@ const Marquee: React.FC<MarqueeProps> = ({
         <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
             <div className="flex flex-row touch-pan-y" style={{ display: 'flex', flexDirection: 'row', whiteSpace: 'nowrap' }}>
                 {items.map((item, index) => (
-                    <div
-                        key={`${item.id}-${index}`}
-                        className="flex-none w-auto pl-12"
-                        style={{ flex: '0 0 auto', display: 'inline-flex' }}
-                    >
-                        <a
-                            href={item.link}
-                            target={item.link?.startsWith('http') ? '_blank' : undefined}
-                            rel={item.link?.startsWith('http') ? 'noopener noreferrer' : undefined}
-                            draggable={false}
-                            className={`flex items-center gap-4 transition-all ${grayscale ? 'opacity-50 grayscale hover:opacity-100 hover:grayscale-0' : ''} ${!item.link ? 'pointer-events-none' : ''}`}
-                        >
-                            {item.image && (
-                                <img
-                                    src={item.image}
-                                    alt={item.text}
-                                    draggable={false}
-                                    className="h-8 w-auto object-contain max-w-[150px]"
-                                    loading="lazy"
-                                    onError={(e) => {
-                                        e.currentTarget.style.display = 'none';
-                                        // If image fails, we rely on the text span.
-                                    }}
-                                />
-                            )}
-                            {/* Show text if variant is icon-text OR if it's logo-only (default) but no image exists */}
-                            {(item.variant === 'icon-text' || (!item.image && item.variant !== 'icon-text')) && (
-                                <span className="text-xl font-bold tracking-widest text-base-500 dark:text-base-400 uppercase whitespace-nowrap">
-                                    {item.text}
-                                </span>
-                            )}
-                        </a>
-                    </div>
+                    <MarqueeCard key={`${item.id}-${index}`} item={item} grayscale={grayscale} />
                 ))}
             </div>
+        </div>
+    );
+};
+
+const MarqueeCard = ({ item, grayscale }: { item: MarqueeItem; grayscale: boolean }) => {
+    const [imgError, setImgError] = React.useState(false);
+    const [isLoaded, setIsLoaded] = React.useState(false);
+
+    // If no image, or if image failed, show text.
+    // If 'icon-text' variant, always show text.
+    const showText = item.variant === 'icon-text' || !item.image || imgError;
+
+    return (
+        <div
+            className="flex-none w-auto pl-12"
+            style={{ flex: '0 0 auto', display: 'inline-flex' }}
+        >
+            <a
+                href={item.link}
+                target={item.link?.startsWith('http') ? '_blank' : undefined}
+                rel={item.link?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                draggable={false}
+                className={`flex items-center gap-4 transition-all opacity-80 hover:opacity-100 ${grayscale ? 'grayscale hover:grayscale-0' : ''} ${!item.link ? 'pointer-events-none' : ''}`}
+            >
+                {item.image && !imgError && (
+                    <img
+                        src={item.image}
+                        alt={item.text}
+                        draggable={false}
+                        // Added rounded-md for aesthetic fix
+                        className={`h-8 w-auto object-contain max-w-[150px] rounded-md transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
+                        loading="lazy"
+                        onLoad={() => setIsLoaded(true)}
+                        onError={() => setImgError(true)}
+                    />
+                )}
+
+                {showText && (
+                    <span className="font-mono text-sm font-bold tracking-widest text-neutral-400 hover:text-white uppercase whitespace-nowrap">
+                        {item.text}
+                    </span>
+                )}
+            </a>
         </div>
     );
 };

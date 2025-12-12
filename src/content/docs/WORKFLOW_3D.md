@@ -97,7 +97,7 @@ sidebar:
 
 1.  **Painter -> Export Textures (`Ctrl + Shift + E`)**.
 2.  **Output Templates (Tab) -> Click `+` (New Preset).**
-3.  **Name it:** `Quantum_ORM`.
+3.  **Name it:** `EN_ORM`.
 4.  **Create 3 Output Maps:**
     *   **Map 1: RGB (sRGB)** -> Name: `$mesh_$textureSet_BaseColor`
         *   *Drag:* `Input Maps -> Base Color` to RGB.
@@ -114,7 +114,7 @@ sidebar:
         *   *Drag:* `Input Maps -> Anisotropy Angle` to **Gray**.
         *   *Bit Depth:* **8 bits**.
 5.  **Settings (Tab):**
-    *   **Output Template:** Select `Quantum_ORM`.
+    *   **Output Template:** Select `EN_ORM`.
     *   **File Type:** `PNG`.
         *   **Bit Depth:** **16 bits**.
             *   *Note:* This makes files larger, but guarantees no banding. We can optimize to 8-bit later.
@@ -258,7 +258,7 @@ D:\Assets\ErikNorris_Lib\
 *   **Cause 1 (Ghost Channel):** A `Coat` or `Clearcoat` channel exists in Painter (even if disabled).
     *   *Fix:* Delete the channel in Texture Set Settings.
 *   **Cause 2 (The Alpha Trap):** The Base Color map has an Alpha channel (A=0) that the viewer interprets as "Transparent".
-    *   *Fix:* Use the **Quantum_ORM** preset. Ensure Base Color is exported as **RGB** (No Alpha).
+    *   *Fix:* Use the **EN_ORM** preset. Ensure Base Color is exported as **RGB** (No Alpha).
 
 ### 4. The "Whiteout" (Shader Crash)
 *   **Symptom:** Model renders as a pure white silhouette (unlit).

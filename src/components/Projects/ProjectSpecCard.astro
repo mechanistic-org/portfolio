@@ -2,22 +2,53 @@
 import { type CollectionEntry } from "astro:content";
 
 interface Props {
-	entry: CollectionEntry<"projects">;
+	entry?: CollectionEntry<"projects">;
+	// Loose props fallback
+	title?: string;
+	description?: string;
+	role?: string;
+	client?: string;
+	year?: string | number;
+	tech?: string[];
+	impact?: string;
+	statusLabel?: string;
 	class?: string;
 }
 
-const { entry, class: className = "" } = Astro.props;
-const data = entry.data as any;
+const {
+	entry,
+	title,
+	role,
+	client,
+	year,
+	impact,
+	statusLabel,
+	class: className = "",
+} = Astro.props;
+
+// Normalization Logic: Use entry if available, else use loose props
+const data = entry
+	? entry.data
+	: {
+			title: title,
+			role: role,
+			employer: client, // mapping 'client' prop to 'employer' schema
+			date: year ? new Date(year.toString()) : new Date(),
+			impact: impact,
+			statusLabel: statusLabel || "Prototype",
+			teamSize: "Various",
+			duration: "Ongoing",
+		};
 
 // 1. Core Identification
-const id = entry.id.toUpperCase();
+const id = entry ? entry.id.toUpperCase() : "KITCHEN-SINK";
 const date = new Date(data.date).getFullYear();
 
 // 2. Dynamic Spec Map (The "Loop" capacity)
 // This can be expanded endlessly from the CSV in the future.
 const specs = [
 	{ label: "ROLE", value: data.role || "Engineer" },
-	{ label: "CLIENT", value: data.employer },
+	{ label: "CLIENT", value: data.employer || "Various" },
 	{ label: "DURATION", value: data.duration },
 	{ label: "TEAM", value: data.teamSize || "Solo" },
 ];
@@ -26,7 +57,7 @@ const specs = [
 const statusColor =
 	data.statusLabel === "Completed"
 		? "text-[#2E5CFF]" // Blue
-		: data.statusLabel === "In Progress"
+		: data.statusLabel === "In Progress" || data.statusLabel === "Prototype"
 			? "text-amber-500"
 			: "text-neutral-500";
 ---

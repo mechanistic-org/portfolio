@@ -1,0 +1,107 @@
+---
+import { parseTimelineMarkdown } from "../../utils/timelineParser";
+
+interface Props {
+	markdownContent: string;
+}
+
+const { markdownContent } = Astro.props;
+const items = parseTimelineMarkdown(markdownContent);
+
+// Group items by Year for a cleaner timeline
+const groupedItems = items.reduce(
+	(acc, item) => {
+		const year = item.title.split("-")[0].trim();
+		if (!acc[year]) acc[year] = [];
+		acc[year].push(item);
+		return acc;
+	},
+	{} as Record<string, typeof items>,
+);
+
+const sortedYears = Object.keys(groupedItems).sort((a, b) => Number(b) - Number(a));
+---
+
+<div class="relative mx-auto max-w-5xl px-4 font-sans sm:px-6 lg:px-8">
+	<!-- Central Line -->
+	<div class="absolute top-0 bottom-0 left-4 w-0.5 bg-neutral-800 md:left-1/2 md:-ml-0.5"></div>
+
+	{
+		sortedYears.map((year, yearIndex) => (
+			<div class="relative py-8">
+				{/* Year Marker */}
+				<div class="sticky top-24 z-10 mb-8 md:text-center">
+					<span class="border-primary-900 text-primary-400 relative left-0 inline-block transform rounded-full border bg-neutral-900 px-4 py-1 font-mono text-sm font-bold shadow-xl md:right-auto md:left-auto md:translate-x-0">
+						{year}
+					</span>
+				</div>
+
+				<div class="space-y-12">
+					{groupedItems[year].map((item, index) => {
+						const isLeft = index % 2 === 0;
+						return (
+							<div
+								class={`relative md:flex ${isLeft ? "md:flex-row-reverse" : ""} group items-center`}
+							>
+								{/* Dot */}
+								<div class="bg-primary-600 absolute left-4 z-10 mt-1.5 h-4 w-4 -translate-x-1.5 transform rounded-full border-4 border-neutral-900 transition-transform group-hover:scale-125 md:left-1/2 md:mt-0 md:-translate-x-2" />
+
+								{/* Content Card */}
+								<div class={`ml-12 md:ml-0 md:w-1/2 ${isLeft ? "md:pl-12" : "md:pr-12"}`}>
+									<div class="hover:border-primary-500/50 relative overflow-hidden rounded-xl border border-white/10 bg-neutral-900/80 p-6 shadow-2xl backdrop-blur-sm transition-colors">
+										{/* Glow Effect */}
+										<div class="bg-primary-500/10 pointer-events-none absolute top-0 right-0 -mt-12 -mr-12 h-24 w-24 rounded-full blur-2xl" />
+
+										<div class="mb-2 flex items-start justify-between">
+											<h3 class="text-xl leading-tight font-bold text-white">
+												{item.cardTitle.split("@")[0].trim()}
+											</h3>
+											{item.cardTitle.includes("@") && (
+												<span class="text-primary-400 bg-primary-900/30 ml-2 rounded px-2 py-0.5 font-mono text-xs whitespace-nowrap">
+													{item.cardTitle.split("@")[1].trim()}
+												</span>
+											)}
+										</div>
+
+										<div class="mb-4 font-mono text-xs text-neutral-500">{item.title}</div>
+
+										{/* Visual Context Badge */}
+										{item.cardSubtitle && (
+											<div class="border-primary-900/50 mb-4 border-l-2 pl-2 text-xs text-neutral-400 italic">
+												{item.cardSubtitle.split("•")[1] || item.cardSubtitle}
+											</div>
+										)}
+
+										{/* Responsibilities Preview */}
+										{item.responsibilities.length > 0 && (
+											<ul class="space-y-1 text-sm text-neutral-300">
+												{item.responsibilities.slice(0, 3).map((r) => (
+													<li class="flex items-start">
+														<span class="text-primary-700 mt-1 mr-2">▹</span>
+														<span class="line-clamp-2">{r}</span>
+													</li>
+												))}
+											</ul>
+										)}
+
+										{/* Tech Tags */}
+										<div class="mt-4 flex flex-wrap gap-2">
+											{item.techStack.slice(0, 4).map((tech) => (
+												<span class="rounded border border-white/5 bg-neutral-800 px-1.5 py-0.5 text-xs text-neutral-500">
+													{tech}
+												</span>
+											))}
+										</div>
+									</div>
+								</div>
+
+								{/* Empty space for the other side */}
+								<div class="hidden md:block md:w-1/2" />
+							</div>
+						);
+					})}
+				</div>
+			</div>
+		))
+	}
+</div>

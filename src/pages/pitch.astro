@@ -1,0 +1,175 @@
+---
+import DeckLayout from "@layouts/DeckLayout.astro";
+import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
+import HydeOuroboros from "@components/Visualizations/HydeOuroboros";
+import SolarMetrics from "@components/CaseStudy/SolarMetrics";
+
+const slides = [
+	{ title: "Hook", id: "slide-1" },
+	{ title: "Problem", id: "slide-2" },
+	{ title: "Solution", id: "slide-3" },
+	{ title: "Proof", id: "slide-4" },
+	{ title: "Ask", id: "slide-5" },
+];
+---
+
+<DeckLayout title="Erik Norris | Pitch">
+	{/* SLIDE 1: THE HOOK (WIGGLE) */}
+	<section
+		class="relative flex h-screen w-full snap-center flex-col items-center justify-center overflow-hidden"
+	>
+		<div class="relative z-10 flex w-full flex-col items-center">
+			<div class="flex h-[400px] w-full items-center justify-center">
+				<WiggleLogo3D client:only="react" />
+			</div>
+			<div class="pointer-events-none -mt-12 space-y-4 text-center">
+				<h1
+					class="text-6xl font-black tracking-tighter text-white mix-blend-difference md:text-8xl"
+				>
+					ERIK NORRIS
+				</h1>
+				<p class="font-mono text-xl tracking-[0.2em] text-[#2E5CFF] uppercase md:text-2xl">
+					The Hybrid Bridge
+				</p>
+			</div>
+		</div>
+
+		{/* Scrolldown hint */}
+		<div class="absolute bottom-12 animate-bounce opacity-50">
+			<svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+			</svg>
+		</div>
+	</section>
+
+	{/* SLIDE 2: THE PROBLEM (SILOS) */}
+	<section
+		class="relative flex h-screen w-full snap-center items-center justify-center border-t border-white/5 bg-neutral-950"
+	>
+		<div class="max-w-4xl px-6 text-center">
+			<h2 class="mb-8 text-4xl leading-tight font-bold md:text-6xl">
+				"Hardware is Hard.<br />
+				<span class="text-neutral-500">Software is Soft.</span>"
+			</h2>
+			<p class="mx-auto max-w-2xl text-xl leading-relaxed text-neutral-400">
+				Innovation dies at the interface. Mechanical teams speak CAD. Digital teams speak React. The
+				gap between atoms and bits is where product velocity stalls.
+			</p>
+		</div>
+
+		{/* Decor: Disconnected Lines */}
+		<div class="pointer-events-none absolute inset-0 opacity-20">
+			<svg class="h-full w-full">
+				<line
+					x1="10%"
+					y1="20%"
+					x2="30%"
+					y2="40%"
+					stroke="#333"
+					stroke-width="2"
+					stroke-dasharray="5,5"></line>
+				<line
+					x1="90%"
+					y1="80%"
+					x2="70%"
+					y2="60%"
+					stroke="#333"
+					stroke-width="2"
+					stroke-dasharray="5,5"></line>
+			</svg>
+		</div>
+	</section>
+
+	{/* SLIDE 3: THE SOLUTION (OUROBOROS) */}
+	<section
+		class="flex min-h-screen w-full snap-center flex-col items-center justify-center bg-black py-24"
+	>
+		<div class="mb-12 text-center">
+			<h2 class="mb-4 font-mono text-sm tracking-[0.3em] text-[#2E5CFF] uppercase">The Solution</h2>
+			<h3 class="text-5xl font-bold text-white">Full Stack Physical</h3>
+		</div>
+
+		<div class="w-full max-w-5xl px-4">
+			<HydeOuroboros client:visible width={800} height={600} />
+		</div>
+
+		<p class="mt-8 max-w-xl text-center text-neutral-400">
+			A unified intelligence. Mastering the physics of the "Main Loop" and the logic of the
+			"Transition".
+		</p>
+	</section>
+
+	{/* SLIDE 4: THE PROOF (KITCHEN SINK FRAGMENTS) */}
+	<section
+		class="relative flex min-h-screen w-full snap-center items-center justify-center overflow-hidden bg-[#050505]"
+	>
+		<div class="pointer-events-none absolute inset-0 grid grid-cols-2 opacity-10">
+			{/* Tech Grid Background */}
+		</div>
+
+		<div class="grid w-full max-w-6xl items-center gap-12 px-6 md:grid-cols-2">
+			<div>
+				<h2 class="mb-6 text-4xl font-bold">Evidence of Scale</h2>
+				<ul class="space-y-6">
+					<li class="border-l-2 border-[#2E5CFF] pl-4">
+						<div class="text-2xl font-bold text-white">1M+ Units</div>
+						<div class="text-sm text-neutral-500">Consumer Hardware Shipped</div>
+					</li>
+					<li class="border-l-2 border-green-500 pl-4">
+						<div class="text-2xl font-bold text-white">99.9% Uptime</div>
+						<div class="text-sm text-neutral-500">IoT Infrastructure</div>
+					</li>
+					<li class="border-l-2 border-purple-500 pl-4">
+						<div class="text-2xl font-bold text-white">3 Continents</div>
+						<div class="text-sm text-neutral-500">Global Supply Chain</div>
+					</li>
+				</ul>
+			</div>
+
+			<div
+				class="rotate-3 transform rounded-xl border border-white/10 bg-neutral-900 p-8 shadow-2xl transition-transform duration-500 hover:rotate-0"
+			>
+				{/* Reusing Solar Metrics as a generic "Live Data" proof */}
+				<div class="mb-4 font-mono text-xs text-green-400">LIVE SYSTEM TELEMETRY</div>
+				<SolarMetrics client:visible />
+			</div>
+		</div>
+	</section>
+
+	{/* SLIDE 5: THE ASK (CONTACT) */}
+	<section
+		class="relative flex h-screen w-full snap-center flex-col items-center justify-center bg-black"
+	>
+		<div class="z-10 w-full space-y-8 text-center">
+			<div class="flex h-64 w-full items-center justify-center">
+				<WiggleLogo3D client:only="react" />
+			</div>
+			<h2 class="text-6xl font-bold tracking-tighter">Ready to Deploy?</h2>
+			<a
+				href="mailto:erik@example.com"
+				class="inline-block rounded-none bg-[#2E5CFF] px-8 py-4 font-bold tracking-widest text-white uppercase transition-colors hover:bg-white hover:text-black"
+			>
+				Initialise Sequence_
+			</a>
+		</div>
+
+		{/* Footer */}
+		<div class="absolute bottom-8 font-mono text-xs text-neutral-600">
+			ERIK NORRIS SYSTEM v1.0 // 2025
+		</div>
+	</section>
+</DeckLayout>
+
+<style>
+	/* CSS Snap for "Slide" feel */
+	html {
+		scroll-snap-type: y mandatory;
+	}
+	section {
+		scroll-snap-align: start;
+	}
+</style>

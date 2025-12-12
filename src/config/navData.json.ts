@@ -21,7 +21,7 @@ const navConfig: navItem[] = [
 		dropdown: [
 			{
 				text: "BIO",
-				href: "/about/",
+				href: "/about/bio/",
 			},
 			{
 				text: "This Site",
@@ -63,7 +63,7 @@ const navConfig: navItem[] = [
 			},
 			{
 				text: "Timeline",
-				href: "/resume/timeline/",
+				href: "/history/",
 			},
 			{
 				text: "Interactive",

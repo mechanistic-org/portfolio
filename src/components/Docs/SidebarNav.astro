@@ -67,7 +67,10 @@ sections.forEach((section) => {
 		const orderA = a.data.sidebar?.order ?? 999;
 		const orderB = b.data.sidebar?.order ?? 999;
 		if (orderA !== orderB) return orderA - orderB;
-		return a.data.title.localeCompare(b.data.title);
+
+		const titleA = a.data.title || a.slug || "Untitled";
+		const titleB = b.data.title || b.slug || "Untitled";
+		return titleA.localeCompare(titleB);
 	});
 });
 

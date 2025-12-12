@@ -11,6 +11,10 @@ export async function getStaticPaths() {
 		const filename = filenameParts[filenameParts.length - 1].replace(/\.(mdx|md)$/, "");
 
 		const slug = data.slug || filename;
+		if (!slug) {
+			console.error(`[DEBUG] Missing slug for file: ${file.file}`);
+		}
+		// console.log(`[DEBUG] ${filename} -> ${slug}`);
 
 		return {
 			params: { slug },
@@ -20,11 +24,15 @@ export async function getStaticPaths() {
 
 	// Sort docs to determine order for prev/next
 	// Reuse sort logic from index/sidebar
-	const sortedDocs = docs.sort((a, b) => {
+	// Filter out docs without titles (e.g. raw markdown dumps) to prevent build crashes
+	const validDocs = docs.filter(
+		(d: any) => d && d.params && d.params.slug && d.props.file.frontmatter?.title,
+	);
+	const sortedDocs = validDocs.sort((a: any, b: any) => {
 		const orderA = a.props.file.frontmatter?.sidebar?.order ?? 999;
 		const orderB = b.props.file.frontmatter?.sidebar?.order ?? 999;
 		if (orderA !== orderB) return orderA - orderB;
-		return a.params.slug.localeCompare(b.params.slug);
+		return String(a.params.slug).localeCompare(String(b.params.slug));
 	});
 
 	return sortedDocs.map((doc, index) => {

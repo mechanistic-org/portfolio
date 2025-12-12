@@ -1,0 +1,60 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PeriodicTable from "../../components/Visualizations/PeriodicTable";
+import HydePeriodicTable from "../../components/Visualizations/HydePeriodicTable";
+import HydeOuroboros from "../../components/Visualizations/HydeOuroboros";
+import HydeAuthentic from "../../components/Visualizations/HydeAuthentic";
+import { periodicTraits, periodicTools } from "../../config/periodicTableData";
+
+const pageTitle = "The Elements of Erik";
+const pageDescription =
+	"A breakdown of the traits, skills, and tools that make up my professional DNA.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+	<div class="site-container space-y-24 py-12">
+		<!-- Hero -->
+		<div class="mb-12 text-center">
+			<h1 class="font-heading mb-4 text-4xl font-bold text-white">The "Authentic" Map (V3)</h1>
+			<p class="mx-auto max-w-2xl text-neutral-400">
+				Strict adherence to James Franklin Hyde's original 1975 geometry. A continuous ribbon of
+				connected domains.
+			</p>
+		</div>
+
+		<div class="mx-auto mb-20 w-full max-w-5xl">
+			<HydeAuthentic client:only="react" />
+		</div>
+
+		<div class="mb-12 text-center opacity-70 transition-opacity hover:opacity-100">
+			<h2 class="font-heading mb-4 text-2xl font-bold text-white">V2: The Galactic Lobes</h2>
+			<div class="mx-auto w-full max-w-4xl">
+				<HydeOuroboros client:only="react" />
+			</div>
+		</div>
+
+		<div class="mb-12 text-center">
+			<h2 class="font-heading mb-4 text-3xl font-bold text-white">Periodic Table of Traits</h2>
+			<p class="text-xl font-light text-neutral-400">
+				Just as matter is composed of fundamental elements, my professional identity is built from a
+				unique composition of personality traits, hard skills, and technical tools.
+			</p>
+		</div>
+
+		<!-- Table 1: Traits -->
+		<section>
+			<PeriodicTable client:visible elements={periodicTraits} title="Periodic Table of Traits" />
+			<p class="mt-4 text-center text-neutral-500 italic">
+				"My Atomic Structure" — Derived from Big 5, Enneagram, and StrengthsFinder analysis.
+			</p>
+		</section>
+
+		<!-- Table 2: Tools -->
+		<section>
+			<PeriodicTable client:visible elements={periodicTools} title="Periodic Table of Tools" />
+			<p class="mt-4 text-center text-neutral-500 italic">
+				"The Reagents" — The software and hardware catalysts I use to generate reactions.
+			</p>
+		</section>
+	</div>
+</BaseLayout>

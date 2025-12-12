@@ -56,7 +56,7 @@
   {
     "name": "Motorola",
     "logo": null,
-    "icon": null,
+    "icon": "motorola",
     "domain": "motorola.com"
   },
   {
@@ -68,7 +68,7 @@
   {
     "name": "Silicon Graphics",
     "logo": null,
-    "icon": null,
+    "icon": "sgi",
     "domain": "sgi.com"
   },
   {
@@ -80,14 +80,14 @@
   {
     "name": "UltimateTV",
     "logo": null,
-    "icon": null,
-    "domain": "microsoft.com"
+    "icon": "microsoft",
+    "domain": null
   },
   {
     "name": "WebTV",
     "logo": null,
-    "icon": null,
-    "domain": "microsoft.com"
+    "icon": "microsoft",
+    "domain": null
   },
   {
     "name": "awesomejob",

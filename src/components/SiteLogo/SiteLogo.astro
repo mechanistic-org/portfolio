@@ -1,67 +1,31 @@
 ---
 import { Image } from "astro:assets";
-
-// data
-import siteData from "@config/siteData.json";
 ---
 
 <a
-	class="primary-focus group/navlink relative block h-full w-40"
+	class="primary-focus group/navlink relative block flex h-full w-40 items-center justify-center"
 	href="/"
 	aria-label="Home"
 	id="site-logo-container"
 >
-	<model-viewer
-		id="nav-logo-3d"
-		src="/assets/r2/_site/en_logo.glb"
-		alt="Erik Norris 3D Logo"
-		class="h-full w-full"
-		disable-zoom
-		camera-controls
-		shadow-intensity="1"
-		environment-image="neutral"
-		tone-mapping="commerce"
-		exposure="1.2"
-		interaction-prompt="none"
-		camera-orbit="0deg 90deg 55%"
-		min-camera-orbit="-30deg 60deg 55%"
-		max-camera-orbit="30deg 110deg 55%"
-		interpolation-decay="200"
-		style="--poster-color: transparent; background-color: transparent; --progress-bar-color: #2E5CFF; --progress-bar-height: 2px;"
-	>
-		<!-- No Poster: Immediate load preferred for Logo -->
-	</model-viewer>
+	<!-- Dark Mode Logo (Default for 'Quantum' aesthetic) -->
+	<img
+		src="/assets/branding/EN_logo_white_1200.svg"
+		alt="Erik Norris Logo"
+		class="hidden h-[70%] w-auto object-contain transition-transform duration-300 group-hover/navlink:scale-105 dark:block"
+	/>
+
+	<!-- Light Mode Logo -->
+	<img
+		src="/assets/branding/EN_logo_black_1200.svg"
+		alt="Erik Norris Logo"
+		class="block h-[70%] w-auto object-contain transition-transform duration-300 group-hover/navlink:scale-105 dark:hidden"
+	/>
 </a>
 
-<script>
-	const modelViewer = document.querySelector("#nav-logo-3d") as any;
-	const container = document.querySelector("#site-logo-container");
-
-	if (modelViewer && container) {
-		// "Happy Wiggle" Animation on Enter
-		container.addEventListener("mouseenter", () => {
-			// Only wiggle if we aren't currently being interacted with (optional check, but simple wiggle is fine)
-			// We strictly target the orbit we want, letting interpolation-decay smooth it out.
-
-			const currentOrbit = modelViewer.getCameraOrbit();
-			const radius = currentOrbit.radius || "55%"; // Fallback if parsed weirdly, but usually returns obj
-
-			// Frame 1: Tilt Left
-			modelViewer.cameraOrbit = `-15deg 90deg ${radius}m`;
-
-			setTimeout(() => {
-				// Frame 2: Tilt Right
-				modelViewer.cameraOrbit = `15deg 90deg ${radius}m`;
-			}, 200);
-
-			setTimeout(() => {
-				// Frame 3: Back to Center
-				modelViewer.cameraOrbit = `0deg 90deg ${radius}m`;
-			}, 400);
-		});
-	}
-</script>
-
 <style>
-	/* Logo specific overrides if needed */
+	/* 
+	 * Ensure the logo color matches the text/theme.
+	 * The 'dark' class is typically controlled by the Tailwind 'darkMode' config or a parent class.
+	 */
 </style>

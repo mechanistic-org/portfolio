@@ -60,6 +60,16 @@ Review the above, then generate the `docs/STYLE_GUIDE.md` and propose 3 candidat
 *   **Usage:** Applied strictly to `BaseLayout` via `.noise-overlay` utility.
 *   **Opacity:** 0.03 (Very subtle). Adds "analog weight" to the digital interface.
 
+## Design Language System (DLS)
+
+### The "Wiggle"
+*   **Definition:** "Always Alive." No element should be truly static. Even "still" objects should have a subtle breathe, float, or grain texture.
+*   **Implementation:** Use `WiggleLogo3D` or Framer Motion variants to add organic micro-movements to key brand assets.
+
+### Anisotropy
+*   **Concept:** Directional dependence. The surfacing of our materials (Forged Carbon) changes based on the angle of light/view, representing depth and complexity.
+*   **Key:** "The user must move to see the value." (e.g., Rotation interactions).
+
 ## Scientific Visualization (D3)
 *   **Philosophy:** "Data as Artifact."
 *   **Rules:**

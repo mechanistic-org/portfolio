@@ -38,6 +38,11 @@ sidebar:
     *   **Description:** A "Plug-and-Play" authoring system that allows complex UI patterns (Zigzag Grids, 3D Viewers, Process Strips) to be inserted via shortcodes (`qq-*`). This transforms the IDE into a layout engine, ensuring every project page adheres to the strict "Visual Taxonomy" without manual coding.
 
 ## 📜 Change Log (Recent)
+*   **[Feature] Visual Sitemap:** Implemented `/map` ("System Topology"), a tree-based visualization of the site's routing architecture derived dynamically from `navData` and content collections.
+*   **[Backlog] Structure Optimization:** Archived "Specs & CV" refactoring plan to `docs/backlog/SITE_STRUCTURE_OPTIMIZATION.md`.
+*   **[Feature] Pitch Deck:** Implemented `/pitch` with 5-slide narrative (Hook, Problem, Solution, Proof, Ask).
+*   **[Branding] 3D Logo:** Integrated `WiggleLogo3D` (Forged Carbon texture with anisotropic animation) via R3F.
+*   **[Infrastructure] 3D Stack:** Added React Three Fiber ecosystem (`three`, `@react-three/fiber`, `@react-three/drei`).
 *   **[Fix] Impact Resonance:** Corrected "Stable Core" stroke color in `ImpactResonance.tsx` to fully align with YInMn Blue identity (Green Purge Complete).
 *   **[Strategy] The Council:** Executed deep site audit (`site_audit_report_deep.md`) using 5-persona protocol; validated "Productization" strategy.
 *   **[Feature] Technical Header:** Implemented `ProjectSpecCard.astro`, a modular metadata card with "Mini Gauge" status indicator, replacing the legacy BOM list.
@@ -135,7 +140,7 @@ sidebar:
 *   **Brutalist Styling:** Updated blockquote styling in markdown content (removed rounded corners, refined borders) for a more technical look.
 *   **Living Style Guide:** Reinstated `/about/elements` as a live visualization of the Design Language System (Typography, Colors, Components).
 *   **Image Workflow Upgrade:** Expanded `docs/IMAGE_WORKFLOW.md` with "Lightroom Power User" strategies (Smart Collections, Keyword Automation, Exposure Matching).
-*   **Colophon Feature:** Implemented "The Quantum Darkroom" (`src/content/colophon/quantum-darkroom.mdx`) to document the hybrid image pipeline.
+*   **Colophon Feature:** Implemented "The Darkroom" (`src/content/colophon/darkroom.mdx`) to document the hybrid image pipeline.
 *   **Living Style Guide Upgrade:** Transformed `/about/elements` into a fully functional DLS showcase.
     *   Implemented live "Kit" components: `Admonition`, `Chip`, `Wire`.
     *   Added "Effects" section demonstrating `ScrambleText`.
@@ -262,6 +267,11 @@ sidebar:
     *   **Tech:** Python, Gemini 1.5 Flash (Chunked), D3.js (CSV Parsing).
     *   **Description:** A custom ETL pipeline that digests legacy `.doc`/`.pdf` hoards, handles API rate limits via smart chunking, and synthesizes a "Universal Timeline" (`RESUME_CORPUS_timeline.md`) from 200MB of unorganized files, establishing a "Source of Truth" for the `history.astro` page.
 
+### WiggleLogo3D
+*   **Hook:** A brand that breathes.
+*   **Tech:** React Three Fiber, GLTF, Framer Motion (wrapper).
+*   **Description:** An interactive 3D implementation of the "Erik Norris" logo using "Forged Carbon" shading and anisotropic lighting to simulate a living, breathing object.
+
 ### 3D Asset Lab (`test-logo.astro`)
 *   **Hook:** "An MRI machine for GLB files."
 *   **Tech:** `model-viewer` v3.4.0 API, Vanilla JS, Astro.
@@ -304,14 +314,14 @@ sidebar:
 
 
 
-#### [In Progress] Identity Scrub (The Load-Bearing Ghost)
-*   **[Refactor] Exorcise the "Load-Bearing Ghost":**
-    *   **Context:** The "Quantum" name has become a "Load-Bearing Ghost"—a legacy artifact that implies this is a template, not an identity.
-    *   **Action:** Execute full "Identity Scrub".
-        *   Rename Repo: `quantum` -> `eriknorris-platform`.
-        *   Rename Presets: `Quantum_ORM` -> `EN_ORM`.
-        *   Rename Classes: `quantum-*` -> `no-prefix` or `en-*`.
-    *   **Why:** Assert full psychological and technical dominion over the codebase.
+#### [2025-12-11] The "Identity Scrub" & Stability Arc
+*   **[Identity] The Exorcism:** Executed full "Identity Scrub".
+    *   Renamed Presets: `Quantum_ORM` -> `EN_ORM`.
+    *   Renamed Docs: `quantum-darkroom.mdx` -> `darkroom.mdx`.
+    *   **Audit Result:** Confirmed zero remaining `quantum-` CSS classes.
+*   **[Fix] Build Resilience:** Patched `SidebarNav.astro` and `[...slug].astro` to filter out legacy markdown files (missing frontmatter) that were causing `localeCompare` crashes.
+*   **[Feature] Social Presence:** Added dedicated "CV" icon (YinMn Blue) to the global navigation.
+*   **[Polish] Noise:** Increased noise overlay opacity to `0.05` for enhanced brutalist texture.
 
 #### [In Progress] Operation Productize (The HardTech Productizer)
 *   **[Audit]** Inducted **"The HardTech Productizer"** (Vinod/Stanford/MechE persona) into `SITE_AUDIT_PROMPT.md`.
