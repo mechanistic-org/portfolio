@@ -95,7 +95,11 @@ export default defineConfig({
     vite: {
         plugins: [tailwindcss()],
         build: {
-            // Standard build options
+            rollupOptions: {
+                output: {
+                    experimentalMinChunkSize: 1000000,
+                },
+            },
         },
         optimizeDeps: {
             exclude: ["axobject-query"],
