@@ -97,16 +97,21 @@ export default defineConfig({
             rollupOptions: {
                 output: {
                     // Aggressively merge chunks to ensure we stay under the Cloudflare Worker module limit (sub-100 files)
-                    experimentalMinChunkSize: 1000000,
+                    // Reduced from 1MB to 250KB to avoid "MessageChannel" runtime errors caused by over-merging
+                    experimentalMinChunkSize: 250000,
                     manualChunks(id) {
                         if (id.includes("node_modules")) {
+                            // Isolate React to ensure correct environment resolution and prevent browser build leakage
+                            if (id.includes("react") ||
+                                id.includes("react-dom") ||
+                                id.includes("scheduler")) {
+                                return "react-vendor";
+                            }
+
                             // Exclude Astro/Cloudflare packages to avoid protocol errors
-                            // Exclude React packages to ensure correct server/edge exports are resolved
                             if (id.includes("astro") ||
                                 id.includes("cloudflare") ||
-                                id.includes("wrangler") ||
-                                id.includes("react") ||
-                                id.includes("scheduler")) {
+                                id.includes("wrangler")) {
                                 return;
                             }
                             return "vendor";
