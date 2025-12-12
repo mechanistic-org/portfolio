@@ -2,6 +2,8 @@
 // import { getCollection, render } from "astro:content"; // Removed
 import DocsLayout from "@/components/Docs/DocsLayout.astro";
 
+export const prerender = true;
+
 export async function getStaticPaths() {
 	const globDocs = import.meta.glob("../../content/docs/**/*.{md,mdx}", { eager: true });
 
