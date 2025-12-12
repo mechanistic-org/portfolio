@@ -37,6 +37,7 @@ export default defineConfig({
     adapter: cloudflare({
         imageService: "compile",
     }),
+    output: "static",
     site: "https://www.eriknorris.com",
     redirects: {
         "/admin": "/keystatic",
