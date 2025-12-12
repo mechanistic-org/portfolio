@@ -26,5 +26,5 @@ pnpm-debug.log*
 
 # Local R2 Staging (Do not commit)
 R2_STAGING/
-# public/assets/r2/  <-- ENABLED FOR GIT DEPLOYMENT
+public/assets/r2/
 data_source/mined_assets/
