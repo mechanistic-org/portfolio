@@ -100,9 +100,13 @@ export default defineConfig({
                     experimentalMinChunkSize: 1000000,
                     manualChunks(id) {
                         if (id.includes("node_modules")) {
-                            // Exclude Astro and Cloudflare specific packages from the vendor chunk
-                            // to avoid "Received protocol 'cloudflare:'" errors during SSG/Node build
-                            if (id.includes("astro") || id.includes("cloudflare") || id.includes("wrangler")) {
+                            // Exclude Astro/Cloudflare packages to avoid protocol errors
+                            // Exclude React packages to ensure correct server/edge exports are resolved
+                            if (id.includes("astro") ||
+                                id.includes("cloudflare") ||
+                                id.includes("wrangler") ||
+                                id.includes("react") ||
+                                id.includes("scheduler")) {
                                 return;
                             }
                             return "vendor";
