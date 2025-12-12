@@ -96,6 +96,8 @@ export default defineConfig({
         build: {
             rollupOptions: {
                 output: {
+                    // Automatically merge small chunks to reduce file count (target 50kb min)
+                    experimentalMinChunkSize: 50000,
                     manualChunks(id) {
                         if (id.includes("node_modules")) {
                             // Exclude Astro and Cloudflare specific packages from the vendor chunk
@@ -104,10 +106,6 @@ export default defineConfig({
                                 return;
                             }
                             return "vendor";
-                        }
-                        // Bundle internal application code to further reduce chunk count
-                        if (id.includes("src/content/") || id.includes("src/components/") || id.includes("src/layouts/") || id.includes("src/styles/")) {
-                            return "app-content";
                         }
                     },
                 },
