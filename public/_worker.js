@@ -32,8 +32,8 @@ export default {
                 const headers = new Headers();
                 object.writeHttpMetadata(headers);
                 headers.set('etag', object.httpEtag);
-                // Add cache control for better performance
-                headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+                // CRITICAL: Force revalidation to fix stale asset issues
+                headers.set('Cache-Control', 'no-cache');
 
                 return new Response(object.body, {
                     headers,
