@@ -13,9 +13,10 @@ export default {
     async fetch(request, env) {
         const url = new URL(request.url);
 
-        // R2 Proxy Logic for /assets/r2/*
-        if (url.pathname.startsWith('/assets/r2/')) {
-            const key = url.pathname.replace('/assets/r2/', '');
+        // R2 Proxy Logic for /r2/*
+        // We use /r2/ to avoid collision with Astro's /assets/ directory
+        if (url.pathname.startsWith('/r2/')) {
+            const key = url.pathname.replace('/r2/', '');
 
             // Safety: Allow only GET/HEAD
             if (request.method !== 'GET' && request.method !== 'HEAD') {
@@ -26,7 +27,7 @@ export default {
                 const object = await env.PROJECTS.get(key);
 
                 if (!object) {
-                    return new Response(`Asset not found: ${key}`, { status: 404 });
+                    return new Response(`R2 Object Not Found: ${key}`, { status: 404 });
                 }
 
                 const headers = new Headers();
