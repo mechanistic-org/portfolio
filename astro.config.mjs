@@ -96,8 +96,8 @@ export default defineConfig({
         build: {
             rollupOptions: {
                 output: {
-                    // Automatically merge small chunks to reduce file count (target 50kb min)
-                    experimentalMinChunkSize: 50000,
+                    // Aggressively merge chunks to ensure we stay under the Cloudflare Worker module limit (sub-100 files)
+                    experimentalMinChunkSize: 1000000,
                     manualChunks(id) {
                         if (id.includes("node_modules")) {
                             // Exclude Astro and Cloudflare specific packages from the vendor chunk
