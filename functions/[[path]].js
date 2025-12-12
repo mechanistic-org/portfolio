@@ -11,9 +11,33 @@ export async function onRequest(context) {
     const { request, env } = context;
     const url = new URL(request.url);
 
-    // DEBUG: Health Check to verify Worker is running
+    // DEBUG: Deep Probe Health Check
     if (url.pathname === '/debug/health') {
-        return new Response('Worker is RUNNING (Functions Mode)', { status: 200 });
+        const testKey = 'dreamjob/dreamjob-hero-01-v2.jpg';
+        let r2Status = 'UNKNOWN';
+        let errorDetails = '';
+
+        try {
+            if (!env.PROJECTS) {
+                return new Response('CRITICAL: env.PROJECTS is UNDEFINED. Check wrangler.toml binding.', { status: 500 });
+            }
+
+            const obj = await env.PROJECTS.get(testKey);
+            r2Status = obj ? `FOUND (Size: ${obj.size} bytes)` : `MISSING (Key used: '${testKey}')`;
+        } catch (e) {
+            r2Status = 'ERROR';
+            errorDetails = e.message;
+        }
+
+        const report = `
+STATUS: RUNNING (Functions Mode)
+BINDING: env.PROJECTS is ${!!env.PROJECTS ? 'DEFINED' : 'MISSING'}
+TEST KEY: ${testKey}
+RESULT: ${r2Status}
+ERROR: ${errorDetails}
+        `.trim();
+
+        return new Response(report, { status: 200 });
     }
 
     // R2 Proxy Logic for /r2/*
@@ -29,7 +53,10 @@ export async function onRequest(context) {
             const object = await env.PROJECTS.get(key);
 
             if (!object) {
-                return new Response(`R2 Object Not Found: ${key}`, { status: 404 });
+                return new Response(`R2 Object Not Found: ${key}`, {
+                    status: 404,
+                    headers: { 'X-Debug-Key': key }
+                });
             }
 
             const headers = new Headers();
@@ -37,6 +64,7 @@ export async function onRequest(context) {
             headers.set('etag', object.httpEtag);
             // CRITICAL: Force revalidation to fix stale asset issues
             headers.set('Cache-Control', 'no-cache');
+            headers.set('X-Debug-Key', key);
 
             return new Response(object.body, {
                 headers,
