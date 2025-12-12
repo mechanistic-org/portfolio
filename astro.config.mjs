@@ -105,6 +105,10 @@ export default defineConfig({
                             }
                             return "vendor";
                         }
+                        // Bundle internal application code to further reduce chunk count
+                        if (id.includes("src/content/") || id.includes("src/components/") || id.includes("src/layouts/") || id.includes("src/styles/")) {
+                            return "app-content";
+                        }
                     },
                 },
             }
