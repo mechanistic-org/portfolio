@@ -9,7 +9,6 @@ import AutoImport from "astro-auto-import";
 import icon from "astro-icon";
 import react from "@astrojs/react";
 import keystatic from "@keystatic/astro";
-import cloudflare from "@astrojs/cloudflare";
 
 /** @type {import('astro-expressive-code').AstroExpressiveCodeOptions} */
 const expressiveCodeOptions = {
@@ -34,9 +33,6 @@ const expressiveCodeOptions = {
 
 // https://astro.build/config
 export default defineConfig({
-    adapter: cloudflare({
-        imageService: "compile",
-    }),
     output: "static",
     site: "https://www.eriknorris.com",
     redirects: {
@@ -94,13 +90,6 @@ export default defineConfig({
     ],
     vite: {
         plugins: [tailwindcss()],
-        build: {
-            rollupOptions: {
-                output: {
-                    experimentalMinChunkSize: 1000000,
-                },
-            },
-        },
         optimizeDeps: {
             exclude: ["axobject-query"],
         },
