@@ -97,11 +97,16 @@ export default defineConfig({
             rollupOptions: {
                 output: {
                     manualChunks(id) {
-                        if (id.includes('node_modules')) {
-                            return 'vendor';
+                        if (id.includes("node_modules")) {
+                            // Exclude Astro and Cloudflare specific packages from the vendor chunk
+                            // to avoid "Received protocol 'cloudflare:'" errors during SSG/Node build
+                            if (id.includes("astro") || id.includes("cloudflare") || id.includes("wrangler")) {
+                                return;
+                            }
+                            return "vendor";
                         }
-                    }
-                }
+                    },
+                },
             }
         },
         optimizeDeps: {

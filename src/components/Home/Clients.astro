@@ -26,23 +26,23 @@ const marqueeItems: MarqueeItem[] = duplicatedClients.map((client, index) => {
 		};
 	}
 
-	// 2. Try Clearbit API (if domain exists) - Prioritize Color
-	if (client.domain) {
-		return {
-			id: `${client.name}-${index}`,
-			text: client.name,
-			image: `https://logo.clearbit.com/${client.domain}`,
-			link: `/projects?client=${encodeURIComponent(client.name)}`,
-			variant: "logo-only",
-		};
-	}
-
-	// 3. Try Simple Icons (SVG) - Monochrome Fallback
+	// 2. Try Simple Icons (SVG) - Monochrome Fallback
 	if (client.icon) {
 		return {
 			id: `${client.name}-${index}`,
 			text: client.name,
 			image: `https://cdn.simpleicons.org/${client.icon}`,
+			link: `/projects?client=${encodeURIComponent(client.name)}`,
+			variant: "logo-only",
+		};
+	}
+
+	// 3. Try Clearbit API (if domain exists) - Prioritize Color
+	if (client.domain) {
+		return {
+			id: `${client.name}-${index}`,
+			text: client.name,
+			image: `https://logo.clearbit.com/${client.domain}`,
 			link: `/projects?client=${encodeURIComponent(client.name)}`,
 			variant: "logo-only",
 		};
@@ -54,7 +54,6 @@ const marqueeItems: MarqueeItem[] = duplicatedClients.map((client, index) => {
 		text: client.name,
 		image: null,
 		link: `/projects?client=${encodeURIComponent(client.name)}`,
-		variant: "text-only",
 	};
 });
 ---
