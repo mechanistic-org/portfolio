@@ -7,7 +7,7 @@ export const GET: APIRoute = async ({ params, locals }) => {
 
     // Access the R2 binding from the Cloudflare runtime
     // @ts-ignore - Types for locals.runtime are dynamically generated
-    const bucket = locals.runtime?.env?.ASSETS_BUCKET;
+    const bucket = locals.runtime?.env?.PROJECTS;
 
     if (!bucket) {
         // If running locally without wrangler, or binding fails
