@@ -95,31 +95,7 @@ export default defineConfig({
     vite: {
         plugins: [tailwindcss()],
         build: {
-            rollupOptions: {
-                output: {
-                    // Aggressively merge chunks to ensure we stay under the Cloudflare Worker module limit (sub-100 files)
-                    // Increased back to 1MB now that nodejs_compat handles runtime globals and raw/[slug] is prerendered
-                    experimentalMinChunkSize: 1000000,
-                    manualChunks(id) {
-                        if (id.includes("node_modules")) {
-                            // Isolate React to ensure correct environment resolution and prevent browser build leakage
-                            if (id.includes("react") ||
-                                id.includes("react-dom") ||
-                                id.includes("scheduler")) {
-                                return "react-vendor";
-                            }
-
-                            // Exclude Astro/Cloudflare packages to avoid protocol errors
-                            if (id.includes("astro") ||
-                                id.includes("cloudflare") ||
-                                id.includes("wrangler")) {
-                                return;
-                            }
-                            return "vendor";
-                        }
-                    },
-                },
-            }
+            // Standard build options
         },
         optimizeDeps: {
             exclude: ["axobject-query"],
