@@ -13,6 +13,11 @@ export default {
     async fetch(request, env) {
         const url = new URL(request.url);
 
+        // DEBUG: Health Check to verify Worker is running
+        if (url.pathname === '/debug/health') {
+            return new Response('Worker is RUNNING', { status: 200 });
+        }
+
         // R2 Proxy Logic for /r2/*
         // We use /r2/ to avoid collision with Astro's /assets/ directory
         if (url.pathname.startsWith('/r2/')) {
