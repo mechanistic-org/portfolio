@@ -111,7 +111,11 @@ def sync_r2_assets(slug, source_dir):
         s = os.path.join(source_dir, item)
         d = os.path.join(target_dir, item)
         if os.path.isfile(s):
-            shutil.copy2(s, d)
+            try:
+                shutil.copy2(s, d)
+            except Exception as e:
+                pass
+                # print(f"⚠️  Skipping locked file: {item}")
 
 def generate_radar_chart(skill_data, slug):
     """Generate SVG radar chart for skills"""
@@ -953,63 +957,6 @@ impact: "{row.get('Impact', '')}"
     with open(os.path.join(OUTPUT_DATA_DIR, "clients.json"), "w") as f:
         json.dump(client_data, f, indent=2)
 
-def scaffold_content():
-    """
-    Scaffold missing manual content files for all projects in Main.csv.
-    """
-    print("🏗️  Scaffolding Content...")
-    main = read_csv_smart(find_file("Main.csv"), "Name", required_headers={"Slug Name"})
-    
-    count = 0
-    for row in main:
-        name = row.get("Slug Name") or row.get("Name")
-        if not name: continue
-        
-        slug = name.lower().strip().replace(' ', '-').replace('/', '-').strip('.')
-        title = row.get("Descriptive Name") or name
-        
-        # Check if file exists
-        filepath = os.path.join(SOURCE_DIR, "manual_content", f"{slug}.md")
-        if not os.path.exists(filepath):
-            print(f"    + Creating {slug}.md")
-            
-            template = f"""import {{ YouTube }} from '@astro-community/astro-embed-youtube';
-import ModelViewer from '@components/mdx/ModelViewer.astro';
-
-## The Challenge
-Describe the core problem or opportunity. What were the technical constraints? What was the business goal?
-
-## Engineering Approach
-How did you solve it?
-*   **Key Decision 1:** ...
-*   **Key Decision 2:** ...
-
-## Impact
-What was the result? (Metrics, patents, launch success, etc.)
-
-### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-{{{{MODEL_URL}}}}
-"""
-            with open(filepath, "w", encoding="utf-8") as f:
-                f.write(template)
-            count += 1
-            
-    print(f"✅ Scaffolding Complete. Created {count} new files.")
-
-if __name__ == "__main__":
-    import sys
-    if "--scaffold" in sys.argv:
-        scaffold_content()
-    else:
-        # Normal Ingestion
-        process_colors()
-        process_specs()
-        process_tenure()
-        process_projects()
-        ensure_dummy_assets()
 
 
 def sync_site_assets():

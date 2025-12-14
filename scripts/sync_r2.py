@@ -27,7 +27,8 @@ def sync_file(local_path, remote_key):
         cmd = [
             cmd_base, "wrangler", "r2", "object", "put",
             f"{BUCKET_NAME}/{remote_key}",
-            "--file", local_path
+            "--file", local_path,
+            "--remote"
         ]
         # Suppress output unless error
         subprocess.run(cmd, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)

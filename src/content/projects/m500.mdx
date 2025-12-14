@@ -5,7 +5,7 @@ date: "4/1/2010"
 endDate: "7/1/2010"
 employer: "Kaleidescape"
 client: []
-industry: "Consumer Electronics"
+industry: "Other"
 category: "Media Player"
 tools: ["ProEngineer"]
 toolIcons: ["ptc"]
@@ -18,37 +18,30 @@ teamSize: "Unknown"
 gallery: []
 documents: []
 links: [{"name": "Kaleidescape Website", "url": "https://kaleidescape.com"}]
-heroImage: "/assets/placeholders/tech-1.jpg" 
+heroImage: "/assets/r2/m500/hero-player.png" 
 draft: false
-description: "M500."
+description: "M500 - Other project."
 duration: "Active"
 statusLabel: "Completed"
 skillGraph: "/assets/r2/m500/skill-graph.svg"
 partGraph: "/assets/r2/m500/part-graph.svg"
 impact: ""
 ---
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** Kaleidescape required a high-fidelity media server capable of storing and streaming uncompressed Blu-ray quality content in a home theater environment.
+> **Context:** The companion to the Server. The M500 was a pure playback engine.
 
-The primary challenge was achieving near-silent operation (0dB ambient noise floor) while managing significant thermal loads from multiple hard drives and processing units in a constrained rackmount form factor.
-
-## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
-
-*   **Designed Strategy:** Designed a custom passive cooling architecture using oversized heat sinks and optimized airflow channels.
-*   **Implemented Strategy:** Implemented vibration isolation mounts for hard drives to prevent acoustic coupling to the chassis.
-*   **Collaborated Strategy:** Collaborated with industrial design to ensure the front bezel met the premium 'Cinematic' aesthetic requirements.
-*   **Conducted Strategy:** Conducted extensive thermal simulation (CFD) to validate airflow paths under worst-case rack conditions.
-
-## Impact
-The product defined the high-end home cinema market, delivering a silent, reliable server that became the standard for luxury integrators worldwide.
+It shared the "M-Class" architecture with the M300 and M700.
+*   **BD-Live:** This was the first generation to support interactive Blu-ray menus over the network.
+*   **Rack Density:** It was designed to stack 10-high in a rack without overheating.
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-<ModelViewer />
+:::note[Specs]
+*   **Output:** 1080p
+*   **Network:** Gigabit Ethernet
+*   **Drive:** Front Loader
+:::
 

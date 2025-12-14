@@ -38,6 +38,14 @@ sidebar:
     *   **Description:** A "Plug-and-Play" authoring system that allows complex UI patterns (Zigzag Grids, 3D Viewers, Process Strips) to be inserted via shortcodes (`qq-*`). This transforms the IDE into a layout engine, ensuring every project page adheres to the strict "Visual Taxonomy" without manual coding.
 
 ## 📜 Change Log (Recent)
+*   **[Strategy] Genesis Analysis:** Conducted a deep architectural audit ("The Crisis of Faith") validating the "Infrastructure First" approach and establishing the "Builder vs. Operator" phase transition.
+*   **[Artifact] Genesis Story:** Mined the "Sonnie's Edge" / "Bucking Foundation" narrative into `src/content/docs/backlog/GENESIS_STORY.md`.
+*   **[Maintenance] Process Cleanup:** Identified and terminated zombie `curl` processes from legacy asset verification tasks to restore system stability.
+*   **[Refactor] Identity Scrub II:** Renamed internal package to `erik-norris-portfolio` and migrated system events from `quantum:boot` to `system:boot`.
+*   **[Fix] Workspace Stability:** Created `ErikNorris.code-workspace` to resolve "Ghost Workspace" issues.
+*   **[Architecture] Zero-Bloat Pivot:** Abandoned `astro-adapter-cloudflare` in favor of `output: static` + Manual Pages Functions to resolve "Too Many Modules" build failure.
+*   **[Fix] Asset Regression:** Regenerated "Dreamjob" visual assets (converted Green -> Blue) and forced a `--remote` sync to correct the R2 Source of Truth.
+*   **[Infrastructure] R2 Proxy:** Migrated asset delivery from a manual `_worker.js` to the native `functions/[[path]].js` standard.
 *   **[Feature] Visual Sitemap:** Implemented `/map` ("System Topology"), a tree-based visualization of the site's routing architecture derived dynamically from `navData` and content collections.
 *   **[Backlog] Structure Optimization:** Archived "Specs & CV" refactoring plan to `docs/backlog/SITE_STRUCTURE_OPTIMIZATION.md`.
 *   **[Feature] Pitch Deck:** Implemented `/pitch` with 5-slide narrative (Hook, Problem, Solution, Proof, Ask).

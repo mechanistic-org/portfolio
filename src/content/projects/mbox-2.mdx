@@ -5,7 +5,7 @@ date: "9/1/2005"
 endDate: "11/1/2005"
 employer: "Digidesign"
 client: []
-industry: "Pro Audio"
+industry: "Other"
 category: "USB Audio Interface"
 tools: ["ProEngineer"]
 toolIcons: ["ptc"]
@@ -18,37 +18,39 @@ teamSize: "Unknown"
 gallery: []
 documents: []
 links: [{"name": "Digidesign Website", "url": "https://avid.com"}]
-heroImage: "/assets/placeholders/tech-2.jpg" 
+heroImage: "/assets/r2/mbox-2/hero-mbox.jpg" 
 draft: false
-description: "Mbox 2."
+description: "Mbox 2 - Other project."
 duration: "Active"
 statusLabel: "Completed"
 skillGraph: "/assets/r2/mbox-2/skill-graph.svg"
 partGraph: "/assets/r2/mbox-2/part-graph.svg"
 impact: ""
 ---
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** Digidesign (Avid) set the standard for professional digital audio workstations (Pro Tools).
+> **Context:** Before the Mbox, "Pro Tools" meant a $10,000 TDM system in a studio. We wanted to put that power in a backpack for $495.
 
-The goal was to create a tactile control surface that provided professional mixers with precise, low-latency control over digital parameters.
+The Mbox was the hardware key to the Pro Tools kingdom.
+*   **USB Power:** Dealing with the noisy, limited power budget of USB 1.1 (500mA) while driving 48V phantom power micro-pres was an analog engineering marvel.
+*   **Robustness:** These things lived in tour bus bunks and dorm rooms. They had to be practically indestructible.
 
 ## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
-
-*   **Integrated Strategy:** Integrated high-resolution motorized faders with custom touch-sensitive capacitive caps.
-*   **Designed Strategy:** Designed a rigid, ergonomic chassis that minimized resonance and provided a solid 'console' feel.
-*   **Engineered Strategy:** Engineered the internal layout to separate analog audio paths from digital control signals to minimize noise floor.
-*   **Implemented Strategy:** Implemented a modular assembly strategy to allow for scalable product variants.
+I worked on the mechanical design of the Mbox 2, Mini, and Micro.
+*   **The Handle:** The Mbox 2's signature handle wasn't just aesthetic; it acted as a roll-cage, protecting the knobs if the unit was dropped face-down.
+*   **EMI:** Housing sensitive pre-amps next to high-speed digital logic in a plastic box required a custom stamped sheet metal "coffin" internally to isolate the noise floor.
 
 ## Impact
-The unit became a staple in professional recording studios, bridging the gap between analog workflow and digital flexibility.
+It launched the "Bedroom Producer" revolution.
+*   **Legacy:** The design language I established defined the brand for a decade.
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-<ModelViewer />
+:::note[Specs]
+*   **Bus:** USB 1.1 / 2.0
+*   **Audio:** 24-bit / 48kHz
+*   **Preamps:** Focusrite (Gen 1)
+:::
 

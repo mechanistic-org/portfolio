@@ -1,0 +1,157 @@
+---
+import FossilGrid from "./FossilGrid.astro";
+
+// Assets
+const LOGIC_MAP = "/assets/vectors/EN_logic_map.svg";
+const HERO_IMG = "/assets/en-hero-HQ.png";
+---
+
+<section class="relative min-h-[300vh]">
+	<!-- Sticky Container -->
+	<div
+		class="sticky top-0 flex h-screen w-full items-center justify-center overflow-hidden bg-neutral-950"
+	>
+		<!-- Layer 1: The Fossils (Absolute) -->
+		<div
+			id="layer-fossils"
+			class="absolute inset-0 flex items-center justify-center p-8 opacity-100 transition-opacity duration-1000"
+		>
+			<div class="w-full max-w-6xl">
+				<FossilGrid />
+			</div>
+		</div>
+
+		<!-- Layer 2: The Logic (Absolute) -->
+		<div
+			id="layer-logic"
+			class="pointer-events-none absolute inset-0 flex items-center justify-center bg-neutral-950/90 opacity-0 transition-opacity duration-1000"
+		>
+			<div class="relative w-full max-w-4xl p-12">
+				<!-- Inverted and dropped shadow to make the black SVG pop on dark bg -->
+				<img
+					src={LOGIC_MAP}
+					alt="Logic Map"
+					class="h-auto max-h-[80vh] w-full opacity-100 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] invert filter"
+				/>
+
+				<div class="text-primary absolute right-12 bottom-12 animate-pulse font-mono text-xs">
+					G2 CONTINUITY // SOLVED
+				</div>
+			</div>
+		</div>
+
+		<!-- Layer 3: The Carbon (Absolute) -->
+		<div
+			id="layer-carbon"
+			class="pointer-events-none absolute inset-0 z-20 opacity-0 transition-opacity duration-1000"
+		>
+			<!-- Full Width Viewer -->
+			<model-viewer
+				id="scrolly-viewer"
+				src="/assets/models/EN_Logo_ForgedCarbon.glb"
+				poster={HERO_IMG}
+				alt="Forged Carbon"
+				camera-controls
+				auto-rotate
+				rotation-per-second="30deg"
+				camera-orbit="45deg 55deg 105%"
+				shadow-intensity="1"
+				exposure="1"
+				shadow-softness="0"
+				tone-mapping="neutral"
+				environment-image="neutral"
+				class="h-full w-full"
+				style="background: radial-gradient(circle at center, #111 0%, #000 100%);"
+			>
+			</model-viewer>
+		</div>
+	</div>
+
+	<!-- Scroll Triggers -->
+	<div class="pointer-events-none absolute inset-0 flex flex-col">
+		<div class="h-screen" data-step="fossils"></div>
+		<div class="h-screen" data-step="logic"></div>
+		<div class="h-screen" data-step="carbon"></div>
+	</div>
+</section>
+
+<script>
+	const fossils = document.getElementById("layer-fossils");
+	const logic = document.getElementById("layer-logic");
+	const carbon = document.getElementById("layer-carbon");
+
+	// Type definitions for custom element properties
+	type ModelViewer = HTMLElement & {
+		exposure: number;
+		shadowIntensity: number;
+		environmentImage: string | null;
+		toneMapping: string;
+		model: any;
+		src: string;
+	};
+
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					const step = entry.target.getAttribute("data-step");
+					if (step === "fossils") {
+						if (fossils) fossils.style.opacity = "1";
+						if (logic) logic.style.opacity = "0";
+						if (carbon) {
+							carbon.style.opacity = "0";
+							carbon.style.pointerEvents = "none";
+						}
+					} else if (step === "logic") {
+						if (fossils) fossils.style.opacity = "0";
+						if (logic) logic.style.opacity = "1";
+						if (carbon) {
+							carbon.style.opacity = "0";
+							carbon.style.pointerEvents = "none";
+						}
+					} else if (step === "carbon") {
+						if (fossils) fossils.style.opacity = "0";
+						if (logic) logic.style.opacity = "0";
+						if (carbon) {
+							carbon.style.opacity = "1";
+							carbon.style.pointerEvents = "auto"; // Enable interaction
+
+							// Force Aniso Validation
+							const viewer = document.getElementById("scrolly-viewer") as any;
+							if (viewer && viewer.model) {
+								const mat = viewer.model.materials[0];
+								if (mat) {
+									// Re-apply force
+									if (mat.setAnisotropyStrength) mat.setAnisotropyStrength(1);
+									else mat.anisotropyStrength = 1;
+								}
+							}
+						}
+					}
+				}
+			});
+		},
+		{ threshold: 0.5 },
+	);
+
+	document.querySelectorAll("[data-step]").forEach((el) => observer.observe(el));
+
+	// FORCE ANISO ON LOAD
+	const viewer = document.getElementById("scrolly-viewer");
+	if (viewer) {
+		viewer.addEventListener("load", () => {
+			const v = viewer as any;
+			if (!v.model) return;
+			const mat = v.model.materials[0];
+			if (mat) {
+				console.log("ScrollyViewer: Forcing Anisotropy...");
+				try {
+					if (mat.setAnisotropyStrength) mat.setAnisotropyStrength(1.0);
+					else mat.anisotropyStrength = 1.0;
+				} catch (e) {
+					console.error("Aniso Force Failed", e);
+				}
+			}
+		});
+	}
+</script>

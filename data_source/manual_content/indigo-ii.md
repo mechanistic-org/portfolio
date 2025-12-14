@@ -1,24 +1,16 @@
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** SGI was the leader in high-performance computing and visualization, pushing the boundaries of workstation graphics.
+> **Context:** The machine that made Jurassic Park.
 
-The project required packaging enterprise-grade RISC computing power into a desktop-friendly form factor without compromising thermal performance or manufacturability.
-
-## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
-
-*   **Engineered Strategy:** Engineered a high-density chassis layout to accommodate complex logic boards and power supplies.
-*   **Developed Strategy:** Developed custom injection-molded skins that aligned with SGI's iconic 'Granite' and 'Indigo' design language.
-*   **Optimized Strategy:** Optimized the internal sheet metal structure for EMI shielding and structural rigidity.
-*   **Worked Strategy:** Worked closely with manufacturing partners to ensure tool-less serviceability for key components.
-
-## Impact
-This workstation set a new benchmark for desktop performance and industrial design, winning multiple industry awards.
+The Indigo was SGI's first desktop workstation to bring 3D graphics to the masses (relatively speaking).
+*   **Cooling:** Cooling high-performance MIPS processors in a "Pizza Box" form factor required a custom plenum design.
+*   **Expansion:** The "GIO" bus allowed for massive expansion cards (GFX, Video I/O) to slide in without tools.
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-{{MODEL_URL}}
+:::note[Specs]
+*   **CPU:** MIPS R3000 / R4000
+*   **Graphics:** Elan / Extreme
+:::

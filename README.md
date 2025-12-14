@@ -41,3 +41,8 @@ To use the automated content generator:
 1.  Obtain a Google Gemini API Key.
 2.  `pip install google-generativeai`
 3.  Set environment variable: `GEMINI_API_KEY`.
+
+## 🚀 Deployment (Zero-Bloat Strategy)
+We do **not** use the Astro Adapter's automatic deploy.
+1.  **Build:** `npm run build` (Generates `dist/` static files).
+2.  **Deploy:** `npx wrangler pages deploy dist` (Uploads static files + `functions/` folder).

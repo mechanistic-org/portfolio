@@ -5,7 +5,7 @@ date: "6/1/2006"
 endDate: "2/1/2007"
 employer: "Digidesign"
 client: []
-industry: "Pro Audio"
+industry: "Other"
 category: "Control Surface"
 tools: ["ProEngineer"]
 toolIcons: ["ptc"]
@@ -18,37 +18,34 @@ teamSize: "Unknown"
 gallery: []
 documents: [{"name": "Digidesign Digi 003.pdf", "url": "/assets/r2/digi-003/Digidesign Digi 003.pdf"}]
 links: [{"name": "Digidesign Website", "url": "https://avid.com"}]
-heroImage: "/assets/placeholders/tech-2.jpg" 
+heroImage: "/assets/r2/digi-003/hero-fader.jpg" 
 draft: false
-description: "Digi 003."
+description: "Digi 003 - Other project."
 duration: "Active"
 statusLabel: "Completed"
 skillGraph: "/assets/r2/digi-003/skill-graph.svg"
 partGraph: "/assets/r2/digi-003/part-graph.svg"
 impact: ""
 ---
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** Digidesign (Avid) set the standard for professional digital audio workstations (Pro Tools).
+> **Context:** The bridge between the bedroom and the pro studio.
 
-The goal was to create a tactile control surface that provided professional mixers with precise, low-latency control over digital parameters.
+The Digi 003 was a FireWire control surface with motorized faders.
+*   **Motorized Faders:** We needed 8 touch-sensitive motorized faders that could snap to position instantly without burning out or fighting the user.
+*   **Jog Wheel:** The feel of the jog wheel had to be heavy and smooth, mimicking the ballistics of an analog tape machine reel.
 
 ## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
-
-*   **Integrated Strategy:** Integrated high-resolution motorized faders with custom touch-sensitive capacitive caps.
-*   **Designed Strategy:** Designed a rigid, ergonomic chassis that minimized resonance and provided a solid 'console' feel.
-*   **Engineered Strategy:** Engineered the internal layout to separate analog audio paths from digital control signals to minimize noise floor.
-*   **Implemented Strategy:** Implemented a modular assembly strategy to allow for scalable product variants.
-
-## Impact
-The unit became a staple in professional recording studios, bridging the gap between analog workflow and digital flexibility.
+*   **VFD Display:** We used a custom 2-line VFD (Vacuum Fluorescent Display) for its high brightness and wide viewing angle, critical for dark studios.
+*   **Chassis:** The "Saddle" capability allowed the unit to sit flat or pitch up, requiring a complex dual-injection molded foot architecture.
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-<ModelViewer />
+:::note[Specs]
+*   **Faders:** 8x Motorized
+*   **Comms:** FireWire 400
+*   **IO:** 18 in / 18 out
+:::
 

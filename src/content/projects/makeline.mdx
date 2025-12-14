@@ -5,7 +5,7 @@ date: "5/1/2021"
 endDate: "8/24/2022"
 employer: "Hyphen"
 client: []
-industry: "Robotics"
+industry: "Other"
 category: "Foodservice Automation"
 tools: ["Onshape"]
 toolIcons: []
@@ -18,37 +18,43 @@ teamSize: "Unknown"
 gallery: []
 documents: []
 links: [{"name": "Hyphen Website", "url": "https://hyphen.com"}]
-heroImage: "/assets/placeholders/tech-2.jpg" 
+heroImage: "/assets/r2/makeline/hero-sysint.png" 
 draft: false
-description: "Makeline."
+description: "Makeline - Other project."
 duration: "1.3 Years"
 statusLabel: "Completed"
 skillGraph: "/assets/r2/makeline/skill-graph.svg"
 partGraph: "/assets/r2/makeline/part-graph.svg"
 impact: ""
 ---
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** Hyphen (Foodservice Automation) is revolutionizing the commercial kitchen with robotics.
+> **Context:** The Makeline was not just a machine; it was a factory in a box. The core challenge was **System Integration**.
 
-The goal was to automate a manual food preparation process to improve speed, accuracy, and hygiene.
+While individual modules (Dispensers) solved the physics of moving ingredients, the Makeline had to orchestrate them. We had to coordinate 350+ actuators, managing power distribution, thermal loads, and CAN bus traffic, all within a violently wash-down sanitary environment.
+The failure mode wasn't "It broke"—it was "Latency drift caused the guacamole to miss the bowl by 10ms."
 
 ## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
+My role shifted from "Component Designer" to "System Architect." I treated the mechanical assembly as a physical network topology.
 
-*   **Designed Strategy:** Designed a sanitary, wash-down rated mechanism capable of handling food products reliably.
-*   **Engineered Strategy:** Engineered a modular dispensing system that could be easily cleaned and serviced.
-*   **Utilized Strategy:** Utilized food-safe materials (Stainless Steel 316, FDA-approved plastics) throughout the assembly.
-*   **Conducted Strategy:** Conducted extensive reliability testing to ensure 99.9% uptime in a high-throughput kitchen environment.
+*   **Modular Architecture:** We decoupled the "Payload Modules" (Dispensers) from the "Chassis" (Power/Data/Motion). This allowed parallel development: The chassis team could optimize frame rigidity and cable routing while the dispenser team iterated on portion accuracy.
+*   **The "Nervous System":** We developed a unified cabling harness that was both modular and IP69K waterproof. This wasn't just "wiring"; it was designing a physical API that enforced correct assembly.
+*   **Integration Testing:** I built the "Iron Bird" rig—a skeleton chassis that allowed us to test full-system electrical and firmware loads before the actual stainless steel frame had even returned from the fab.
 
 ## Impact
-The system increased throughput by 300% and significantly reduced food waste.
+The system achieved a throughput of **350 meals per hour**, running autonomously for 4-hour peak shifts.
+
+*   **Reliability:** The modular approach reduced Mean Time To Repair (MTTR) from hours to minutes (hot-swappable modules).
+*   **Scalability:** The architecture became the foundation for Hyphen's entire product line, scaling from "Burrito Lines" to "Salad Stations" without redesigning the core chassis.
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-<ModelViewer />
+:::note[System Stats]
+*   **Actuators:** >350
+*   **Voltage:** 48V DC Bus
+*   **Comms:** CANOpen
+*   **Sanitary Rating:** IP69K / NSF-8
+:::
 

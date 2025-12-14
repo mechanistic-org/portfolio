@@ -3,7 +3,7 @@ title: "Site Maintenance Manual"
 slug: "maintenance"
 sidebar:
   group: "System Manual"
-  order: 2
+  order: 1
 ---
 # Site Maintenance Manual (IFU)
 
@@ -46,7 +46,17 @@ The marquee on the Colophon page displays the tech stack.
 *   **Icons:** Uses [Simple Icons](https://simpleicons.org/). The `slugMap` object maps tool names to Simple Icons slugs (e.g., "Google Gemini" -> "googlegemini").
 *   **To Update:** Edit `src/pages/colophon.astro` directly. Add new tools to the `tools` array and update `slugMap`/`linkMap` if necessary.
 
-## 3. Ingestion Script
+66: 
+## 4. The "Zero-Bloat" Architecture
+To respect Cloudflare Pages limits (20k files, 25MB script size), we use a Hybrid Static approach:
+1.  **Astro:** Configured as `output: static`. Generates pure HTML/CSS/JS.
+2.  **Dynamic Routes:** Handled by **Native Pages Functions** (`functions/[[path]].js`).
+    *   *Why:* This keeps the Worker extremely lightweight (less than 50KB) because it ONLY handles the proxy logic, not the entire site render code.
+3.  **Asset Proxy:**
+    *   **Route:** `/r2/*` -> Maps to `projects` R2 bucket.
+    *   **Caching:** Uses `Cache-Control: no-cache` to ensure instant updates during dev (relies on Cloudflare CDN for edge caching).
+
+### 5. Ingestion Script
 The core engine of the site is `ingest_data.py`.
 
 ### Theory of Operation
@@ -74,28 +84,7 @@ To manage large assets (images, 3D models, PDFs), we use Cloudflare R2.
 python ingest_data.py
 ```
 
-### Scaffolding New Content
-To automatically generate placeholder markdown files for projects that don't have them:
-```bash
-python ingest_data.py --scaffold
-```
-This creates `{slug}.md` files in `data_source/manual_content/` with a standard "Challenge/Approach/Impact" template.
 
-### Data & Content Refinement
-When adding new projects or resetting data, run these scripts before ingestion:
-
-1.  **Regenerate Skills:**
-    ```bash
-    python scripts/refine_skills.py
-    ```
-    *   *Use when:* You add new projects and want them to have unique skill profiles immediately.
-
-2.  **Batch Generate Content:**
-    ```bash
-    python scripts/generate_content.py
-    ```
-    *   *Use when:* You have imported a batch of projects and need placeholder "Hero Content" to avoid empty pages.
-    *   *Note:* This script respects existing manual content (files > 1KB).
 
 ## 4. Project Detail Pages
 Project pages are generated from MDX files in `src/content/projects/`.
@@ -185,6 +174,11 @@ status: {
 
 ## 8. Troubleshooting
 
+### Zombie Asset Checks
+*   **Symptom:** Terminal shows hanging `curl` commands running for hours; system feels sluggish.
+*   **Cause:** Previous asset verification scripts (checking R2 headers) lacking timeouts (`--max-time`) may become zombie processes if the session suspends.
+*   **Fix:** Run `taskkill /F /IM curl.exe` to clear the process table.
+
 ### "PHASE STATS DUMP" in Terminal
 *   **Symptom:** Verbose logs showing `undefined` for `phase_stats` or `phases`.
 *   **Cause:** Legacy `console.log` debugging left in `[...slug].astro`.
@@ -217,6 +211,19 @@ status: {
     1.  The build system has been patched to explicitly filter out these files in `[...slug].astro`.
     2.  If it persists, run `scripts/debug_docs.py` (if available) or manually `grep` for files without frontmatter.
     3.  **Rule:** All docs MUST have a `title`.
+
+### Ghost Workspace ("workspace.json")
+*   **Symptom:** VS Code sidebar shows a `workspace.json` workspace that is slow or disconnected.
+*   **Cause:** VS Code creates an ephemeral workspace when multiple folders (`quantum`, `quantum-assets`) are opened without a defined `.code-workspace` file.
+*   **Fix:** Create and open a named workspace file (e.g., `ErikNorris.code-workspace`) that explicitly lists the folders.
+    ```json
+    {
+        "folders": [
+            { "path": "." },
+            { "path": "../quantum-assets" }
+        ]
+    }
+    ```
 
 ### Asset Staging Mismatch (Ghost Assets)
 *   **Symptom:** You place assets in `R2_STAGING` but they don't appear after ingestion.
@@ -336,7 +343,7 @@ status: {
 *   **Error:** `Unexpected character 0 (U+0030) before name` or similar parsing errors.
 *   **Cause 1 (Numeric Slugs):** A project slug starts with a number (e.g., `002-rack`). MDX compiles content into JavaScript, and identifiers cannot start with digits.
 *   **Fix 1:** Rename the project in `Main.csv` (or use the `Slug Name` column) to start with a letter (e.g., `rack-002`).
-*   **Cause 2 (Invalid Tags):** Markdown content contains text like `<0.5%`. MDX interprets `<` followed by a number/letter as an opening HTML tag.
+*   **Cause 2 (Invalid Tags):** Markdown content contains text like `&lt;0.5%`. MDX interprets `<` followed by a number/letter as an opening HTML tag.
 *   **Fix 2:** Escape the less-than sign: `&lt;0.5%`.
 
 ### Empty Content Collection
@@ -582,24 +589,6 @@ See `docs/IMAGE_WORKFLOW.md` for the full SOP.
     });
     ```
 
-## 12. Onshape Export Automation ("The Weaponizer")
-We use a custom Python script to guarantee **Meter-scale** exports from Onshape, preventing scaling issues in Plasticity/Blender.
-
-### Usage
-```bash
-python scripts/onshape_export.py "ONSHAPE_DOCUMENT_URL" --output filename.x_t
-```
-
-### Theory of Operation (Clone & Burn)
-To modify units without affecting the public/source document (which might be Read-Only), the script:
-1.  **Clones** the document to a private, temporary workspace.
-2.  **Sets Units** of the clone to `METER`.
-3.  **Exports** the Parasolid (`.x_t`).
-4.  **Deletes** the temporary clone.
-
-### Prerequisites
-*   `ONSHAPE_ACCESS_KEY` and `ONSHAPE_SECRET_KEY` must be set in environment variables.
-*   The API keys must have **Write** permissions (to create the temp doc).
 
 ## 13. Documentation System
 
@@ -698,14 +687,10 @@ Importing code from other themes often introduces inconsistent casing (e.g., `co
     1.  Ensure `.noise-overlay` is `z-index: 5` (or low).
     3.  Ensure `model-viewer` container is `z-[60]` (High).
 
-## 14. Resume Ingestion Workflow ("The Archivist")
-We use a dedicated pipeline to recover history from legacy files.
 
-1.  **Staging:** Place legacy files (`.doc`, `.docx`, `.pdf`) in `d:\GitHub\quantum-workspace\resume_ingest_resistance-is-futile`.
-2.  **Mining:** Run `python scripts/mine_resumes.py` to extract text and deduplicate.
-    *   **Output:** `data_source/inbox/RESUME_CORPUS.resume.md`.
-3.  **Synthesis:** Run `python scripts/ingest_inbox_raw.py` to generate the timeline.
-    *   **Trap:** Gemini 2.0 Flash hits `429` Rate Limits on large corpora.
-    *   **Fix:** The script uses `gemini-flash-latest` (1.5 Flash) and Batch Size 5 to respect quotas.
-    *   **Output:** `data_source/manual_content/RESUME_CORPUS_timeline.md`.
-4.  **Display:** The `src/pages/history.astro` page renders the "Source of Truth" (`Data/Main.csv`) and can be manually enriched with the synthesized timeline.
+### R2 Assets Not Updating (The "Green" Regression)
+*   **Symptom:** You updated an image in `R2_STAGING`, ran the sync script, but the live site still shows the old version.
+*   **Cause 1 (The Emulator Trap):** The `wrangler` command often defaults to `--local` mode, updating a hidden SQLite file instead of the real bucket.
+*   **Fix:** Ensure your sync command includes the `--remote` flag. (Note: `scripts/sync_r2.py` has been patched to handle this automatically).
+*   **Cause 2 (Edge Cache):** You previously served the file with `Cache-Control: immutable`. Use `curl -I [url]` to check headers.
+*   **Fix:** Change the filename (e.g., `-v2`) OR change the Worker headers to `no-cache` and purge the zone.

@@ -5,7 +5,7 @@ date: "6/1/2008"
 endDate: "3/1/2009"
 employer: "Kaleidescape"
 client: []
-industry: "Consumer Electronics"
+industry: "Other"
 category: "Server / Rackmount"
 tools: ["ProEngineer"]
 toolIcons: ["ptc"]
@@ -18,54 +18,29 @@ teamSize: "Unknown"
 gallery: []
 documents: []
 links: [{"name": "Kaleidescape Website", "url": "https://kaleidescape.com"}]
-heroImage: "/assets/placeholders/tech-2.jpg" 
+heroImage: "/assets/r2/kserver-5000/hero-server.jpg" 
 draft: false
-description: "KSERVER-5000."
+description: "KSERVER-5000 - Other project."
 duration: "Active"
 statusLabel: "Completed"
 skillGraph: "/assets/r2/kserver-5000/skill-graph.svg"
 partGraph: "/assets/r2/kserver-5000/part-graph.svg"
 impact: ""
 ---
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** The high-end custom integration market demanded a media server capable of storing and serving 40TB of uncompressed 4K cinema content, with an aesthetic suitable for luxury home theater racks.
+> **Context:** The original behemoths.
 
-Standard enterprise servers offered the performance but lacked the refinement and silence required for residential installation. We needed a device that could sit in a visible rack and look like a piece of high-end audio equipment while delivering enterprise-grade reliability. The challenge was to bridge the gap between **datacenter utility** and **luxury design**.
-
-## Engineering Approach
-I focused on precision machining and advanced vibration isolation to ensure the device felt as premium as it looked.
-
-*   **Chassis Design:** Machined the faceplate from a solid block of **6061-T6 Aluminum**, finishing it with a 120-grit glass bead blast, Type II architectural anodizing, and laser-etched branding.
-*   **Vibration Isolation:** Engineered a custom backplane and drive tray system where every drive sits on custom silicone dampers (soft-mount grommets) to isolate vibration from the chassis.
-*   **Tactile Engineering:** Tuned the drive tray latch mechanism to provide a solid, premium "click," ensuring the user feels the quality during interaction.
-*   **Airflow:** Designed a custom ducting system to direct air over the hottest drives first, ensuring uniform cooling (delta-T < 5°C) across the array with minimal noise.
-
-<div class="grid md:grid-cols-2 gap-8 my-12 items-center">
-  <div class="rounded-xl overflow-hidden border border-neutral-800 shadow-2xl">
-     <div class="bg-neutral-900 h-64 flex items-center justify-center text-neutral-500">
-        [PLACEHOLDER: MACHINING PATH]
-    </div>
-    <div class="bg-neutral-950 p-2 text-xs text-center text-neutral-500 font-mono">FIG 1: CNC TOOLPATH</div>
-  </div>
-  <div>
-    <h4 class="text-lg font-bold text-white mb-2">Specs</h4>
-    <ul class="space-y-2 text-sm text-neutral-300">
-      <li><strong>Material:</strong> 6061-T6 Al + SECC Steel</li>
-      <li><strong>Capacity:</strong> 88TB Raw</li>
-      <li><strong>Weight:</strong> 45 lbs (Unloaded)</li>
-    </ul>
-  </div>
-</div>
-
-## Impact
-The KServer-5000 became the benchmark for luxury media servers, proving that high-performance IT equipment can be beautiful.
-
-*   **Performance:** Delivers sustained 4K throughput with zero dropped frames.
-*   **Acoustics:** Operates silently enough for in-room installation.
-*   **Perception:** Praised by integrators for its build quality, often compared to high-end Swiss audio gear.
+The KSERVER-5000 was a 3U monster that stored the initial DVD libraries.
+*   **Proprietary OS:** Ran a custom K-OS (based on BSD) tailored for low-latency A/V streaming.
+*   **Hot Swappable:** First generation of the "Canister" drive carriers.
 
 ### Project Artifacts
-<ModelViewer alt="Project Asset" />
+:::note[Specs]
+*   **Height:** 3U / 5U
+*   **Drives:** 12-14
+:::
+

@@ -60,7 +60,7 @@ class OnshapeClient:
             "Accept": "application/json" # Generally acceptable
         }
 
-    def request(self, method, endpoint, query_params={}, body=None):
+    def request(self, method, endpoint, query_params={}, body=None, headers=None):
         url = f"{self.base_url}{endpoint}"
         
         # Manually serialize to ensure we control the body and headers exactly
@@ -68,12 +68,16 @@ class OnshapeClient:
         if body is not None:
              data = json.dumps(body)
         
-        headers = self._make_auth_headers(method, url, query_params)
+        auth_headers = self._make_auth_headers(method, url, query_params)
+        
+        if headers:
+            # Overwrite defaults with custom headers (e.g. Accept)
+            auth_headers.update(headers)
         
         response = requests.request(
             method,
             url,
-            headers=headers,
+            headers=auth_headers,
             params=query_params,
             data=data
         )

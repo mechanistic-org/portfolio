@@ -1,24 +1,24 @@
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** This project focused on delivering a robust mechanical solution for the Engineering sector.
+> **Context:** The "Director" was the interactive soul of the room. It needed to feel magical, not like a smartphone glued to a wall.
 
-The main challenge was to integrate complex functionality into a compact form factor while adhering to strict Smart Home Device constraints.
+The challenge was **Haptics**. Touching a glass screen on a wall feels dead. We wanted it to click like a physical button.
 
 ## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
-
-*   **Utilized Strategy:** Utilized Creo, SolidWorks to model and simulate the assembly before cutting metal.
-*   **Focused Strategy:** Focused on Design for Manufacturing (DFM) principles to reduce part count and assembly time.
-*   **Conducted Strategy:** Conducted rigorous material selection to ensure durability and cost-effectiveness.
-*   **Iterated Strategy:** Iterated on the design based on feedback from initial prototype testing.
+We suspended the entire glass display stack on a floating flexure system.
+*   **Piezo Actuation:** When the user touched an icon, a piezo actuator fired a calibrated impulse into the glass mass, simulating the "snap" of a mechanical dome.
+*   **Deadfront ID:** The OLED panel was bonded behind tinted glass so that when off, it disappeared completely into the black finish.
 
 ## Impact
-The project was successfully delivered, meeting all technical specifications and providing a solid foundation for future development.
+It redefined what a sophisticated switch felt like.
+*   **Award Winning:** The interaction design won multiple awards for its tactile realism.
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-{{MODEL_URL}}
+:::note[Specs]
+*   **Display:** OLED Touch
+*   **Feedback:** Piezo Haptic
+*   **Glass:** Chemically Strengthened
+:::

@@ -1,24 +1,18 @@
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** This project focused on delivering a robust mechanical solution for the Engineering sector.
+> **Context:** Not every switch needs a screen. The "Extension Switch" was the cost-effective worker bee.
 
-The main challenge was to integrate complex functionality into a compact form factor while adhering to strict User Interface constraints.
+It mimicked the design language of the Director but used a simplified 1-bit mechanical interface (Top/Bottom) for tactical control.
 
 ## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
-
-*   **Utilized Strategy:** Utilized Creo, SolidWorks to model and simulate the assembly before cutting metal.
-*   **Focused Strategy:** Focused on Design for Manufacturing (DFM) principles to reduce part count and assembly time.
-*   **Conducted Strategy:** Conducted rigorous material selection to ensure durability and cost-effectiveness.
-*   **Iterated Strategy:** Iterated on the design based on feedback from initial prototype testing.
-
-## Impact
-The project was successfully delivered, meeting all technical specifications and providing a solid foundation for future development.
+*   **Wireless Mesh:** It communicated with the Room Director via Thread (802.15.4), requiring a carefully tuned antenna implementation to blast through metal electrical boxes.
+*   **Universal Load:** It had to dim generic LED bulbs without flickering—a notorious challenge in 2-wire setups (no neutral).
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-{{MODEL_URL}}
+:::note[Specs]
+*   **Comms:** Thread
+*   **Dimming:** Phase Cut
+:::

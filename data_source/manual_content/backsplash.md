@@ -1,27 +1,27 @@
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** Hyphen (Foodservice Automation) is revolutionizing the commercial kitchen with robotics.
+> **Context:** Before the "Factory in a Box" (Makeline), we had to prove we could automate a kitchen without redesigning the building.
 
-The objective was to design a high-throughput automated dispensing module for the "Makeline" platform. The system needed to handle viscous fluids (sauces, dressings) with 99.9% volumetric accuracy while meeting strict NSF/ANSI sanitation standards.
+The constraint was "Retrofit." We had to add robotic assembly to an existing, chaotic commercial kitchen line without consuming a single inch of extra floor space or disrupting the human chefs working alongside it.
 
 ## Engineering Approach
-We adopted a "Sanitary-First" design philosophy, prioritizing wash-down capability and tool-less disassembly.
+We engineered the "Backsplash"—a shallow-depth linear gantry system designed to mount directly to the rear standard NSF cold rails.
 
-*   **IP69K Wash-Down Architecture:** Engineered the entire electromechanical assembly to withstand high-pressure, high-temperature wash-down cycles. Utilized double-sealed bearings and potted electronics.
-*   **Hygienic Material Selection:** Exclusively used **316 Stainless Steel** and FDA-approved Acetals (POM) for all food-contact surfaces to prevent corrosion and bacterial growth.
-*   **Volumetric Precision:** Implemented a custom positive-displacement pump mechanism driven by a closed-loop stepper motor, achieving +/- 0.5g dispensing accuracy.
-*   **Tool-Less Serviceability:** Designed quick-release cam levers for the hopper and pump assembly, reducing daily cleaning time from 20 minutes to &lt;3 minutes per unit.
+*   **Zero-Footprint:** The entire Z-axis and X-axis motion system was compressed into a 6-inch deep volume, effectively replacing the passive stainless steel backsplash of the prep table.
+*   **Human-Collaborative:** Because it operated directly above human hands, we implemented a "Soft Robotics" safety architecture. The gantries were low-mass and driven by current-limited motors that would E-stop on contact.
+*   **Sanitary Rail:** We designed a custom linear rail profile that shed water and grease. No hidden pockets for bacteria.
 
 ## Impact
-The "Backsplash" module became a core component of the Makeline v1.
-*   **Throughput:** Increased line speed by **300%** compared to manual assembly.
-*   **Waste Reduction:** Reduced food waste by **15%** through precise portion control.
-*   **Reliability:** Achieved **10,000+ cycles** Mean Time Between Failure (MTBF) in accelerated life testing.
+This was "Gen 1." It proved the physics of automated makelines.
+*   **Validation:** It successfully assembled test orders at speed, validating the "dispenser-on-gantry" architecture.
+*   **Lesson Learned:** While effective, the retrofit approach was too constrained. This failure to scale directly led to the "Factory in a Box" approach of the Gen 2 Makeline.
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-{{MODEL_URL}}
+:::note[Specs]
+*   **Depth:** 150mm (6 inches)
+*   **Travel:** 2.4 Meters
+*   **Safety:** ISO 10218 compliant (Cobot)
+:::

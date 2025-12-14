@@ -47,7 +47,7 @@ const CommandMenu: React.FC = () => {
     // Toggle with Ctrl+K / Cmd+K
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'e') {
                 e.preventDefault();
                 setIsOpen(prev => !prev);
             }

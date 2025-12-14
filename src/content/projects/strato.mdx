@@ -5,7 +5,7 @@ date: "6/1/2014"
 endDate: "2/1/2015"
 employer: "Kaleidescape"
 client: []
-industry: "Consumer Electronics"
+industry: "Other"
 category: "Media Server"
 tools: ["Creo"]
 toolIcons: ["ptc"]
@@ -18,37 +18,39 @@ teamSize: "Unknown"
 gallery: []
 documents: []
 links: [{"name": "Kaleidescape Website", "url": "https://kaleidescape.com"}]
-heroImage: "/assets/placeholders/blueprint.jpg" 
+heroImage: "/assets/r2/strato/hero-player.png" 
 draft: false
-description: "Strato."
+description: "Strato - Other project."
 duration: "Active"
 statusLabel: "Completed"
 skillGraph: "/assets/r2/strato/skill-graph.svg"
 partGraph: "/assets/r2/strato/part-graph.svg"
 impact: ""
 ---
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** Kaleidescape required a high-fidelity media server capable of storing and streaming uncompressed Blu-ray quality content in a home theater environment.
+> **Context:** Streaming services were promising 4K, but the bitrates were crushed. Kaleidescape wanted to deliver **Bit-Perfect** true 4K HDR to luxury home theaters.
 
-The primary challenge was achieving near-silent operation (0dB ambient noise floor) while managing significant thermal loads from multiple hard drives and processing units in a constrained rackmount form factor.
+The "Strato" (Project Sundance) was the first player designed from the silicon up for the Kaleidescape Movie Store.
+*   **Security:** We had to implement the "Secure Video Path" hardware DRM required by Hollywood studios to allow early-window 4K downloads.
+*   **Thermal Density:** The SoC ran hot. We needed a silent, fanless cooling solution for the 1U chassis that could sit in a rack or a living room.
 
 ## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
-
-*   **Designed Strategy:** Designed a custom passive cooling architecture using oversized heat sinks and optimized airflow channels.
-*   **Implemented Strategy:** Implemented vibration isolation mounts for hard drives to prevent acoustic coupling to the chassis.
-*   **Collaborated Strategy:** Collaborated with industrial design to ensure the front bezel met the premium 'Cinematic' aesthetic requirements.
-*   **Conducted Strategy:** Conducted extensive thermal simulation (CFD) to validate airflow paths under worst-case rack conditions.
+I designed the thermal core and chassis architecture.
+*   **Gravity Casting:** To achieve the premium feel and thermal mass, we used a gravity-cast aluminum faceplate that acted as a front-end heatsink.
+*   **EMI Shielding:** With 4K/60Hz signals, HDMI EMI is a nightmare. I engineered a custom stamped shielding cage that wrapped the mainboard without choking airflow.
 
 ## Impact
-The product defined the high-end home cinema market, delivering a silent, reliable server that became the standard for luxury integrators worldwide.
+Strato remains the gold standard for high-end cinema playback.
+*   **Visuals:** Delivers 100Mbps video locally (vs 15mbps streaming).
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-<ModelViewer />
+:::note[Specs]
+*   **Res:** 4K HDR @ 60fps
+*   **Audio:** Atmos / DTS:X
+*   **Storage:** 6TB - 12TB
+:::
 

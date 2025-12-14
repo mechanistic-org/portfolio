@@ -1,24 +1,26 @@
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** This project focused on delivering a robust mechanical solution for the Engineering sector.
+> **Context:** Noon Home wanted to overlay professional-grade lighting control onto existing residential wiring without centralized panels.
 
-The main challenge was to integrate complex functionality into a compact form factor while adhering to strict Smart Home Device constraints.
+The "Base" was the Trojan Horse. To the user, it was just a light switch. To the system, it was the central server.
+*   **Density:** We had to pack a sophisticated Linux computer, Wi-Fi/Bluetooth/Thread radios, and a 600W dimming circuit into a standard single-gang electrical box.
+*   **Thermals:** Dissipating heat from the high-voltage dimmer and the CPU without visible vents (which would ruin the aesthetic).
 
 ## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
-
-*   **Utilized Strategy:** Utilized Creo, SolidWorks to model and simulate the assembly before cutting metal.
-*   **Focused Strategy:** Focused on Design for Manufacturing (DFM) principles to reduce part count and assembly time.
-*   **Conducted Strategy:** Conducted rigorous material selection to ensure durability and cost-effectiveness.
-*   **Iterated Strategy:** Iterated on the design based on feedback from initial prototype testing.
+I architected the thermal stack and mechanical enclosure.
+*   **The "Chiropractor" Install:** The unit snapped into a separate "Baseplate" that handled the high-voltage wiring, allowing safe installation of the logic unit later.
+*   **Thermal Mass:** The aluminum bezel wasn't just decoration; it was the primary heatsink, conductively coupled to the triacs to wick heat out to the room air.
 
 ## Impact
-The project was successfully delivered, meeting all technical specifications and providing a solid foundation for future development.
+The Base enabled the "Noon Experience" without a hub.
+*   **Invisible Tech:** It hid a quad-core processor on the wall without looking like a gadget.
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-{{MODEL_URL}}
+:::note[Specs]
+*   **OS:** Linux
+*   **Power:** 120V / 600W
+*   **Comms:** Wi-Fi / BT / Thread
+:::

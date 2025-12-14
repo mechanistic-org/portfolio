@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectDirectory from "../../components/Projects/ProjectDirectory.astro";
 import ProjectGrid from "../../components/Projects/ProjectGrid.astro";
-import FilterMenu from "../../components/Projects/FilterMenu.astro";
+import ProjectGrid from "../../components/Projects/ProjectGrid.astro";
 import SkillsGraph from "../../components/DataViz/SkillsGraph";
 import MultiverseGraph from "../../components/DataViz/MultiverseGraph";
 import TimelineStream from "../../components/DataViz/TimelineStream";
@@ -15,7 +15,7 @@ import skillsData from "../../data/skills.json";
 import multiverseData from "../../data/timeline/multiverse.json";
 const allProjects = await getCollection(
 	"projects",
-	({ data }) => !data.draft && data.statusLabel !== "NO_DATA" && data.impact !== "NO_DATA",
+	({ data }) => !data.draft && data.statusLabel !== "NO_DATA" && (data as any).impact !== "NO_DATA",
 );
 const projects = allProjects.sort(
 	(a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime(),
@@ -78,15 +78,11 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 	<div class="site-container min-h-screen pt-32 pb-24 md:pb-36">
 		<!-- VIEW SWITCHER (The Control Console) -->
 		<!-- VIEW SWITCHER (The Control Console) -->
+		<!-- VIEW SWITCHER (The Control Console) -->
 		<div
-			class="mb-8 flex flex-col items-center justify-between gap-4 border-b border-white/10 pb-4 md:flex-row"
+			class="mb-8 flex flex-col items-center justify-center gap-4 border-b border-white/10 pb-4 md:flex-row"
 			data-scroll-effect="flee"
 		>
-			<!-- Filter Menu (Left) -->
-			<div>
-				<FilterMenu sectors={industries} categories={categories} tools={tools} clients={clients} />
-			</div>
-
 			<div class="flex items-center gap-1 rounded-lg border border-white/10 bg-neutral-900 p-1">
 				<button
 					class="view-toggle text-primary bg-primary/10 flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider uppercase transition-colors hover:text-white"
@@ -128,7 +124,9 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 		</div>
 
 		<!-- VIEW: LIST -->
-		<div id="view-list" class="view-container">
+		<!-- VIEW: LIST -->
+		<div id="view-list" class="view-container" style="display: block;">
+			<!-- DATA TABLE -->
 			<ProjectDirectory
 				projects={projects}
 				sectors={industries}
@@ -187,14 +185,14 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 		</div>
 
 		<!-- VIEW: RADIAL -->
-		<div id="view-radial" class="view-container animate-in zoom-in-95 hidden duration-500">
+		<div id="view-radial" class="view-container hidden">
 			<div
 				class="relative overflow-hidden rounded-xl border border-white/5 bg-black/20"
 				style="height: 75vh"
 			>
 				<RadialTaxonomy client:only="react" data={hierarchyData} />
 				<div
-					class="pointer-events-none absolute bottom-4 left-4 font-mono text-[10px] text-primary-500/50"
+					class="text-primary-500/50 pointer-events-none absolute bottom-4 left-4 font-mono text-[10px]"
 				>
 					MODE: ORBITAL_TAXONOMY<br />
 					ROOT: ERIK NORRIS
@@ -208,8 +206,14 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				const toggles = document.querySelectorAll(".view-toggle");
 				const containers = document.querySelectorAll(".view-container");
 
-				// Load preference
-				const savedView = localStorage.getItem("project_view_mode") || "list";
+				// Load preference with Validation
+				let savedView = localStorage.getItem("project_view_mode") || "list";
+				const validViews = ["list", "grid", "radial", "timeline", "skills", "multiverse"];
+				if (!validViews.includes(savedView)) {
+					savedView = "list";
+				}
+
+				console.log("Initializing View:", savedView);
 				switchView(savedView);
 
 				toggles.forEach((btn) => {
@@ -233,10 +237,13 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 					});
 
 					// Update Containers
-					containers.forEach((c) => {
+					containers.forEach((element) => {
+						const c = element as HTMLElement;
 						if (c.id === `view-${mode}`) {
+							c.style.display = "block"; // Force show
 							c.classList.remove("hidden");
 						} else {
+							c.style.display = "none"; // Force hide
 							c.classList.add("hidden");
 						}
 					});
@@ -415,15 +422,20 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				// });
 
 				function update(filtersToUse = filters, updateChips = true) {
-					// Filter
+					// 1. Filter
 					let active = rows.filter((row) => {
 						const d = row.dataset;
 						const rowTools = JSON.parse(d.tool || "[]");
-						const rowClients = JSON.parse(d.client || "[]"); // Assuming client is array
+						const rowClients = JSON.parse(d.client || "[]");
 
-						// Find title in the second cell (index 1)
-						const titleCell = row.children[1] as HTMLElement;
-						const rowTitle = titleCell?.innerText.toLowerCase() || "";
+						// Find title in the second cell (index 1) for List View, or dataset for Grid
+						let rowTitle = "";
+						if (row.tagName === "TR") {
+							const titleCell = row.children[1] as HTMLElement;
+							rowTitle = titleCell?.innerText.toLowerCase() || "";
+						} else {
+							rowTitle = d.title?.toLowerCase() || "";
+						}
 
 						const matchInd =
 							filtersToUse.industry === "all" || d.industry === filtersToUse.industry;
@@ -437,7 +449,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 						return matchInd && matchCat && matchStatus && matchTool && matchClient;
 					});
 
-					// Sort
+					// 2. Sort
 					active.sort((a, b) => {
 						const valA = getCellValue(a, sortState.column);
 						const valB = getCellValue(b, sortState.column);
@@ -447,25 +459,41 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 						return 0;
 					});
 
-					// Render
-					// First hide all rows
+					// 3. Render
+					// Hide all rows first
 					rows.forEach((r) => (r.style.display = "none"));
 
-					// Then append active rows in order to the tbody to ensure visual order matches sort order
+					// Append active rows to containers (maintaining sort order)
 					const tbody = document.getElementById("projects-table-body");
-					const gridContainer = document.querySelector("#view-grid .grid"); // Assuming ProjectGrid uses a grid container
+					const gridContainer = document.querySelector("#view-grid .grid");
 
 					if (tbody || gridContainer) {
 						active.forEach((r) => {
-							r.style.display = ""; // Reset display to default (table-row or block)
+							r.style.display = ""; // Reset display
 
-							// Re-append to maintain sort order in the DOM
 							if (r.tagName === "TR" && tbody) {
 								tbody.appendChild(r);
 							} else if (r.tagName === "DIV" && gridContainer) {
 								gridContainer.appendChild(r);
 							}
 						});
+					}
+
+					// 4. Update HUD Badge
+					const totalProjects = rows.length;
+					const activeCount = active.length;
+					const badge = document.getElementById("hud-project-count");
+
+					if (badge) {
+						badge.innerText = activeCount.toString();
+						if (activeCount < totalProjects) {
+							badge.classList.remove("hidden");
+							badge.classList.remove("opacity-0");
+						} else {
+							// If I have 100 projects and show 100, seeing (100) is cool.
+							// Let's trying showing it always if the badge exists.
+							badge.classList.remove("hidden");
+						}
 					}
 
 					// Reset selection on filter change
@@ -478,6 +506,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 					updateSortIcons();
 
 					// Hierarchical Filtering: Filter Categories based on selected Collection (Industry)
+					// Runs on both CLICK and HOVER to provide "Auto-Collapse/Expand" feedback.
 					const selectedIndustry = filtersToUse.industry;
 					const categoryButtons = document.querySelectorAll('.filter-btn[data-group="category"]');
 
@@ -543,8 +572,12 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 					});
 				}
 
-				buttons.forEach((btn) => {
-					const applyFilter = () => {
+				// EVENT DELEGATION: Robust against DOM changes
+				const handleFilterClick = (e: Event) => {
+					const target = e.target as HTMLElement;
+					const btn = target.closest(".filter-btn");
+
+					if (btn) {
 						const group = btn.getAttribute("data-group");
 						const val = btn.getAttribute("data-filter");
 						if (!group || !val) return;
@@ -556,65 +589,66 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 						btn.setAttribute("data-active", "true");
 
 						// Logic Update
-						// @ts-ignore
-						filters[group] = val;
+						(filters as any)[group] = val;
 						update(filters, true);
-					};
+					}
+				};
 
-					const previewFilter = () => {
+				document.addEventListener("click", handleFilterClick);
+
+				// PREVIEW DELEGATION (Hover)
+				document.addEventListener("mouseover", (e) => {
+					const target = e.target as HTMLElement;
+					const btn = target.closest(".filter-btn");
+
+					if (btn) {
 						const group = btn.getAttribute("data-group");
 						const val = btn.getAttribute("data-filter");
 						if (!group || !val) return;
 
-						// Create temp filters
+						// Create temp filters for preview
 						const tempFilters = { ...filters };
-						// @ts-ignore
-						tempFilters[group] = val;
-
-						update(tempFilters, false); // Don't update chips
-					};
-
-					btn.addEventListener("click", applyFilter);
-					btn.addEventListener("mouseenter", previewFilter);
+						(tempFilters as any)[group] = val;
+						update(tempFilters, false); // false = Don't commit UI chips yet
+					}
 				});
 
-				// Reset View Button
-				const resetBtn = document.getElementById("reset-filters-btn");
-				if (resetBtn) {
-					resetBtn.addEventListener("click", () => {
-						// Reset State
-						filters = {
-							industry: "all",
-							category: "all",
-							tool: "all",
-							status: "all",
-							client: "all",
-						};
-						sortState = { column: "date", direction: "desc" };
+				// RESET PREVIEW on Mouse Leave
+				document.addEventListener("mouseout", (e) => {
+					const target = e.target as HTMLElement;
+					const btn = target.closest(".filter-btn");
+					if (btn) {
+						// Revert to actual selected filters
+						update(filters, false);
+					}
+				});
 
-						// Reset UI Buttons
-						document.querySelectorAll(".filter-btn").forEach((b) => {
-							b.setAttribute("data-active", "false");
-						});
-						// Set "all" buttons to active
-						document.querySelectorAll('.filter-btn[data-filter="all"]').forEach((b) => {
-							b.setAttribute("data-active", "true");
-						});
+				// Global Reset Event Listener (From HUD)
+				window.addEventListener("reset-filters", () => {
+					// Reset State
+					filters = {
+						industry: "all",
+						category: "all",
+						tool: "all",
+						status: "all",
+						client: "all",
+					};
+					sortState = { column: "date", direction: "desc" };
 
-						// Reset Sort Icons
-						updateSortIcons();
-
-						// Update List
-						update(filters, true);
+					// Reset UI Buttons
+					document.querySelectorAll(".filter-btn").forEach((b) => {
+						b.setAttribute("data-active", "false");
 					});
-				}
-
-				// Revert on MouseLeave Dropdown
-				// Use the new container class from FilterMenu.astro
-				document.querySelectorAll(".filter-menu-container").forEach((menu) => {
-					menu.addEventListener("mouseleave", () => {
-						update(filters, false); // Revert to committed filters
+					// Set "all" buttons to active
+					document.querySelectorAll('.filter-btn[data-filter="all"]').forEach((b) => {
+						b.setAttribute("data-active", "true");
 					});
+
+					// Reset Sort Icons
+					updateSortIcons();
+
+					// Update List
+					update(filters, true);
 				});
 
 				sortHeaders.forEach((header) => {
@@ -680,6 +714,6 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 			}
 		</style>
+		<ScrollCoordinator />
 	</div>
-	<ScrollCoordinator />
 </BaseLayout>

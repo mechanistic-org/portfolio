@@ -5,7 +5,7 @@ date: "1/1/2019"
 endDate: "4/15/2019"
 employer: "Mechanistic (Consulting)"
 client: ["Synapse"]
-industry: "Consulting"
+industry: "Other"
 category: "Electromechanical Mechanism"
 tools: ["SolidWorks"]
 toolIcons: []
@@ -18,37 +18,44 @@ teamSize: "Unknown"
 gallery: []
 documents: []
 links: [{"name": "Synapse Website", "url": "https://synapse.com"}]
-heroImage: "/assets/placeholders/abstract.jpg" 
+heroImage: "/assets/r2/battery-lock/hero-explode.jpg" 
 draft: false
-description: "battery lock."
+description: "battery lock - Other project."
 duration: "Active"
 statusLabel: "Completed"
 skillGraph: "/assets/r2/battery-lock/skill-graph.svg"
 partGraph: "/assets/r2/battery-lock/part-graph.svg"
 impact: ""
 ---
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** As a lead mechanical engineer at Mechanistic, I tackled diverse challenges across consumer electronics, medical devices, and robotics.
+> **Context:** A micromobility fleet needed a way to secure high-value battery packs against theft while allowing authorized "Swap Teams" to replace them in seconds.
 
-This project required a rapid development cycle to move from concept to functional prototype within a tight timeline.
+The "Halfdome" project was an electromechanical battery lock designed for severe abuse:
+*   **Vibration:** It had to stay locked while bouncing down potholes at 20mph.
+*   **Security:** It needed to resist pry attacks and picking.
+*   **Environment:** It lived outside, exposed to rain, salt spray, and road grime.
 
 ## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
+We designed a custom motorized locking dog mechanism rather than a simple solenoid (which can vibrate open).
 
-*   **Leveraged Strategy:** Leveraged rapid prototyping (3D printing, laser cutting) to iterate on mechanisms daily.
-*   **Conducted Strategy:** Conducted feasibility analysis to select the optimal manufacturing process for scale.
-*   **Designed Strategy:** Designed custom jigs and fixtures to aid in assembly and testing.
-*   **Collaborated Strategy:** Collaborated cross-functionally with electrical and firmware teams to integrate complex subsystems.
+*   **Gearbox Design:** I engineered a high-reduction spur gear train driven by a small DC motor. This provided massive holding torque to the locking pin without requiring continuous power to stay locked (bi-stable design).
+*   **Sealing:** The entire mechanism was housed in a glass-filled nylon enclosure with an ultrasonic weld path, achieving IP67 ingress protection.
+*   **Feedback:** Integrated Hall Effect sensors provided closed-loop confirmation of "Locked" and "Unlocked" states to the main vehicle controller.
 
 ## Impact
-Delivered a fully functional prototype that met all performance requirements and enabled the client to secure Series A funding.
+This mechanism became the standard retention system for the fleet.
+*   **Reliability:** >10,000 cycle life tested under vibration load.
+*   **Security:** The non-backdrivable gear train made forced entry nearly impossible without destroying the latch.
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-<ModelViewer />
+:::note[Specs]
+*   **Actuation:** DC Motor + Gearbox
+*   **IP Rating:** IP67
+*   **Cycle Life:** 10k Cycles
+*   **Lock Force:** >500N
+:::
 

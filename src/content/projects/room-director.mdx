@@ -5,7 +5,7 @@ date: "8/1/2017"
 endDate: "1/1/2018"
 employer: "Noon"
 client: []
-industry: "Consumer Electronics"
+industry: "Other"
 category: "Smart Home Device"
 tools: ["Creo", "SolidWorks"]
 toolIcons: ["ptc"]
@@ -18,37 +18,37 @@ teamSize: "Unknown"
 gallery: [{"src": "/assets/r2/room-director/room-director-impact_testing_1-xl.webp", "width": 1920, "height": 2560, "aspectRatio": 0.75}]
 documents: []
 links: [{"name": "Noon Website", "url": "https://noonhome.com"}]
-heroImage: "/assets/placeholders/tech-1.jpg" 
+heroImage: "/assets/r2/room-director/hero-glass.png" 
 draft: false
-description: "Room Director."
+description: "Room Director - Other project."
 duration: "Active"
 statusLabel: "Completed"
 skillGraph: "/assets/r2/room-director/skill-graph.svg"
 partGraph: "/assets/r2/room-director/part-graph.svg"
 impact: ""
 ---
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** This project focused on delivering a robust mechanical solution for the Engineering sector.
+> **Context:** The "Director" was the interactive soul of the room. It needed to feel magical, not like a smartphone glued to a wall.
 
-The main challenge was to integrate complex functionality into a compact form factor while adhering to strict Smart Home Device constraints.
+The challenge was **Haptics**. Touching a glass screen on a wall feels dead. We wanted it to click like a physical button.
 
 ## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
-
-*   **Utilized Strategy:** Utilized Creo, SolidWorks to model and simulate the assembly before cutting metal.
-*   **Focused Strategy:** Focused on Design for Manufacturing (DFM) principles to reduce part count and assembly time.
-*   **Conducted Strategy:** Conducted rigorous material selection to ensure durability and cost-effectiveness.
-*   **Iterated Strategy:** Iterated on the design based on feedback from initial prototype testing.
+We suspended the entire glass display stack on a floating flexure system.
+*   **Piezo Actuation:** When the user touched an icon, a piezo actuator fired a calibrated impulse into the glass mass, simulating the "snap" of a mechanical dome.
+*   **Deadfront ID:** The OLED panel was bonded behind tinted glass so that when off, it disappeared completely into the black finish.
 
 ## Impact
-The project was successfully delivered, meeting all technical specifications and providing a solid foundation for future development.
+It redefined what a sophisticated switch felt like.
+*   **Award Winning:** The interaction design won multiple awards for its tactile realism.
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-<ModelViewer />
+:::note[Specs]
+*   **Display:** OLED Touch
+*   **Feedback:** Piezo Haptic
+*   **Glass:** Chemically Strengthened
+:::
 

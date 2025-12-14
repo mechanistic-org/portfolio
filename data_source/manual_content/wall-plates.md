@@ -1,24 +1,17 @@
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** This project focused on delivering a robust mechanical solution for the Engineering sector.
+> **Context:** Visible screws ruin the magic.
 
-The main challenge was to integrate complex functionality into a compact form factor while adhering to strict User Interface constraints.
-
-## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
-
-*   **Utilized Strategy:** Utilized Creo, SolidWorks to model and simulate the assembly before cutting metal.
-*   **Focused Strategy:** Focused on Design for Manufacturing (DFM) principles to reduce part count and assembly time.
-*   **Conducted Strategy:** Conducted rigorous material selection to ensure durability and cost-effectiveness.
-*   **Iterated Strategy:** Iterated on the design based on feedback from initial prototype testing.
-
-## Impact
-The project was successfully delivered, meeting all technical specifications and providing a solid foundation for future development.
+The Noon Wall Plate system was a modular, screwless mounting platform available in 1, 2, 3, and 4-gang configurations.
+*   **Floating Alignment:** Drywall is never flat. Electrical boxes are never level. The Wall Plate had a floating sub-frame that allowed the switches to self-align perfectly, hiding the messy construction reality behind it.
+*   **Snap-Fit:** The cosmetic cover snapped on magnetically (or via friction clips in earlier protos), presenting a seamless face to the user.
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-{{MODEL_URL}}
+:::note[Specs]
+*   **Material:** PC/ABS Matte
+*   **Gangs:** 1-4
+*   **Mount:** Screwless
+:::

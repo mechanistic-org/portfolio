@@ -4,6 +4,8 @@ interface Props {
 	alt?: string;
 	poster?: string;
 	environmentImage?: string;
+	cameraOrbit?: string;
+	autoRotate?: boolean;
 }
 
 const DEFAULT_POSTER = "/assets/branding/EN_Badge_wire_white_1200.svg";
@@ -15,6 +17,8 @@ const {
 	alt = "Neil Armstrong",
 	poster = DEFAULT_POSTER,
 	environmentImage,
+	cameraOrbit = "0deg 75deg 105%",
+	autoRotate = true,
 } = Astro.props;
 
 const isFallback = src === NEIL_ARMSTRONG_GLB;
@@ -30,7 +34,7 @@ const uid = "mv-" + Math.random().toString(36).substr(2, 9);
 		src={src}
 		poster={poster}
 		alt={alt}
-		auto-rotate
+		auto-rotate={autoRotate}
 		camera-controls
 		ar
 		touch-action="pan-y"
@@ -38,7 +42,7 @@ const uid = "mv-" + Math.random().toString(36).substr(2, 9);
 		shadow-softness="1"
 		exposure="1"
 		environment-image={finalEnv}
-		camera-orbit="0deg 75deg 105%"
+		camera-orbit={cameraOrbit}
 		field-of-view="30deg"
 		interaction-prompt="auto"
 		class="h-full w-full"
@@ -63,17 +67,43 @@ const uid = "mv-" + Math.random().toString(36).substr(2, 9);
 	</model-viewer>
 </div>
 
-<script define:vars={{ uid }}>
+<script define:vars={{ uid, autoRotate, cameraOrbit }}>
 	const viewer = document.querySelector(`#${uid}`);
 	const progressBar = viewer?.querySelector("[data-progress-bar]");
-	if (viewer && progressBar) {
-		viewer.addEventListener("progress", (e) => {
-			const p = e.detail.totalProgress * 100;
-			progressBar.style.width = `${p}%`;
-			if (p === 100)
-				setTimeout(() => {
-					progressBar.style.opacity = "0";
-				}, 500);
+
+	if (viewer) {
+		// Event: Progress Bar
+		if (progressBar) {
+			viewer.addEventListener("progress", (e) => {
+				const p = e.detail.totalProgress * 100;
+				progressBar.style.width = `${p}%`;
+				if (p === 100)
+					setTimeout(() => {
+						progressBar.style.opacity = "0";
+					}, 500);
+			});
+		}
+
+		// Event: Load - FORCE ANISOTROPY
+		viewer.addEventListener("load", () => {
+			if (!viewer.model) return;
+
+			// Hack: Force Anisotropy Strength to 1.0 because some exports default to 0
+			const mat = viewer.model.materials[0];
+			if (mat) {
+				const setMsg = (msg) => console.log(`[ModelViewer] ${msg}`);
+				try {
+					if (mat.setAnisotropyStrength) {
+						mat.setAnisotropyStrength(1.0);
+						setMsg("Forced Anisotropy Strength to 1.0 (via Setter)");
+					} else {
+						mat.anisotropyStrength = 1.0;
+						setMsg("Forced Anisotropy Strength to 1.0 (via Property)");
+					}
+				} catch (e) {
+					console.warn("[ModelViewer] Failed to force anisotropy:", e);
+				}
+			}
 		});
 	}
 </script>

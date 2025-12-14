@@ -1,0 +1,129 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ScrollyLogo from "@components/MDX/ScrollyLogo.astro";
+
+const metadata = {
+	title: "Chasing EN",
+	description:
+		"The evolution of the Erik Norris Monogram. From 14 failed iterations to a parametric truth forged in carbon.",
+};
+---
+
+<BaseLayout title={metadata.title} description={metadata.description}>
+	<div class="relative bg-neutral-950">
+		<!-- Intro Overlay (Scrolls away) -->
+		<!-- Intro Overlay (Fixed + Fade on Scroll) -->
+		<section
+			id="intro-overlay"
+			class="pointer-events-none fixed top-0 left-0 z-50 flex h-screen w-full flex-col items-center justify-center p-6 text-center mix-blend-difference transition-opacity duration-300"
+		>
+			<div class="space-y-4">
+				<h1 class="font-heading text-6xl font-bold tracking-tighter text-white md:text-9xl">
+					CHASING <span class="text-primary">EN</span>
+				</h1>
+				<p class="font-mono text-sm tracking-widest text-neutral-400 uppercase">
+					The Geometry of Identity
+				</p>
+			</div>
+			<div class="absolute bottom-12 animate-bounce">
+				<!-- Scroll hint -->
+				<svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+					><path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg
+				>
+			</div>
+		</section>
+
+		<script>
+			const intro = document.getElementById("intro-overlay");
+			window.addEventListener("scroll", () => {
+				if (!intro) return;
+				const scrolled = window.scrollY;
+				// Fade out quickly (within first 300px)
+				const opacity = Math.max(0, 1 - scrolled / 300);
+				intro.style.opacity = opacity.toString();
+			});
+		</script>
+
+		<!-- The Main Event -->
+		<ScrollyLogo />
+
+		<!-- Post-Script / Details -->
+		<section class="relative z-10 bg-neutral-900 py-32">
+			<div class="site-container max-w-4xl space-y-24">
+				<!-- Chapter 1: Entropy -->
+				<div class="grid gap-12 md:grid-cols-2 lg:gap-24">
+					<div class="space-y-6">
+						<div
+							class="inline-block rounded-full border border-white/10 px-3 py-1 font-mono text-xs text-neutral-500"
+						>
+							PHASE 1: ENTROPY
+						</div>
+						<h2 class="text-3xl font-bold text-white">The Fossil Record</h2>
+						<p class="text-lg leading-relaxed text-neutral-400">
+							We didn't sketch on paper. We sketched in CAD. Using Onshape's parametric history, we
+							generated 19 distinctive variants. Most were failures—too blocky, too fragile, or
+							reading as "ZN" instead of "EN".
+						</p>
+						<blockquote class="border-primary border-l-2 pl-6 text-xl text-white/80 italic">
+							"Before the signal, there was noise."
+						</blockquote>
+					</div>
+					<div class="flex items-center justify-center rounded-2xl bg-black/50 p-12">
+						<div class="font-mono text-6xl font-bold text-neutral-800">19</div>
+					</div>
+				</div>
+
+				<!-- Chapter 2: Logic -->
+				<div class="grid gap-12 md:grid-cols-2 lg:gap-24">
+					<div
+						class="order-2 flex items-center justify-center rounded-2xl bg-black/50 p-12 md:order-1"
+					>
+						<span class="font-mono text-green-500">G2 CONTINUITY // SOLVED</span>
+					</div>
+					<div class="order-1 space-y-6 md:order-2">
+						<div
+							class="inline-block rounded-full border border-white/10 px-3 py-1 font-mono text-xs text-neutral-500"
+						>
+							PHASE 2: LOGIC
+						</div>
+						<h2 class="text-3xl font-bold text-white">The Blueprint</h2>
+						<p class="text-lg leading-relaxed text-neutral-400">
+							Variant `EN_15` emerged as the survivor. It abandoned the sharp 45-degree cuts of
+							`EN_7` for continuous G2 curvature, allowing light to flow uninterrupted across the
+							surface.
+						</p>
+					</div>
+				</div>
+
+				<!-- Chapter 3: Anisotropy -->
+				<div class="grid gap-12 md:grid-cols-2 lg:gap-24">
+					<div class="space-y-6">
+						<div
+							class="inline-block rounded-full border border-white/10 px-3 py-1 font-mono text-xs text-neutral-500"
+						>
+							PHASE 3: MATTER
+						</div>
+						<h2 class="text-3xl font-bold text-white">Forged Carbon</h2>
+						<p class="text-lg leading-relaxed text-neutral-400">
+							Unlike woven carbon, forged carbon is chaotic. It represents the entropy of the
+							creative process solidified. The texture relies on <strong
+								>Anisotropic Reflection</strong
+							>—you must interact to perceive the value.
+						</p>
+					</div>
+					<div class="flex items-center justify-center rounded-2xl bg-black/50 p-12">
+						<!-- Small detail view could go here, or just stats -->
+						<div class="text-center">
+							<div class="text-4xl font-bold text-white">15 MB</div>
+							<div class="font-mono text-xs text-neutral-500">GLB ASSET SIZE</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</BaseLayout>

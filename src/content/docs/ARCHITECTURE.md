@@ -14,6 +14,15 @@ sidebar:
     *   **Usage:** Must be applied to the wrapper div of any MDX content render (e.g., `<div class="markdown-content"><Content /></div>`).
 *   **Interactivity:** React (for Charts), Vanilla JS (for 3D & UI)
 
+## 4. The "Zero-Bloat" Architecture
+To respect Cloudflare Pages limits (20k files, 25MB script size), we use a Hybrid Static approach:
+1.  **Astro:** Configured as `output: static`. Generates pure HTML/CSS/JS.
+2.  **Dynamic Routes:** Handled by **Native Pages Functions** (`functions/[[path]].js`).
+    *   *Why:* This keeps the Worker extremely lightweight (less than 50KB) because it ONLY handles the proxy logic, not the entire site render code.
+3.  **Asset Proxy:**
+    *   **Route:** `/r2/*` -> Maps to `projects` R2 bucket.
+    *   **Caching:** Uses `Cache-Control: no-cache` to ensure instant updates during dev (relies on Cloudflare CDN for edge caching).
+
 ### Deck Layout (`DeckLayout.astro`)
 *   **Purpose:** Cinematic, full-screen presentation mode for Pitch Decks and "Scrollytelling" narratives.
 *   **Architecture:**

@@ -1,24 +1,30 @@
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** As a lead mechanical engineer at Mechanistic, I tackled diverse challenges across consumer electronics, medical devices, and robotics.
+> **Context:** A smart bike is only smart if it can talk to the cloud. The "Sonoma" module was the brain of the Watson e-bike.
 
-This project required a rapid development cycle to move from concept to functional prototype within a tight timeline.
+The challenge was packaging a cellular modem, GPS, Bluetooth, and main compute board into a compact, bomb-proof enclosure that sat on the rear fender.
+*   **RF Performance:** The enclosure had to be RF transparent for LTE/GPS but structurally rigid enough to handle impact.
+*   **Thermal:** The cellular radio generated significant heat, but the unit was sealed (IP67) and sat in direct sunlight.
+*   **Interconnect:** It had to blind-mate to the bike's harnessing during a "hot swap" battery change.
 
 ## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
+We designed a sealed "Black Box" (or rather, a white one) using weather-resistant PC/ABS.
 
-*   **Leveraged Strategy:** Leveraged rapid prototyping (3D printing, laser cutting) to iterate on mechanisms daily.
-*   **Conducted Strategy:** Conducted feasibility analysis to select the optimal manufacturing process for scale.
-*   **Designed Strategy:** Designed custom jigs and fixtures to aid in assembly and testing.
-*   **Collaborated Strategy:** Collaborated cross-functionally with electrical and firmware teams to integrate complex subsystems.
+*   **RF Window:** We utilized a specific plastic grade that minimized signal attenuation, simulating antenna patterns to ensure connectivity in urban canyons.
+*   **Thermal Management:** I integrated a conductive thermal pad strategy to dump heat from the modem shield into the mounting bracket, turning the bike frame itself into a heatsink.
+*   **Gasket Design:** We used a custom perimeter gasket compressed by 6 custom security screws to ensure a 5-year watertight seal against pressure washing.
 
 ## Impact
-Delivered a fully functional prototype that met all performance requirements and enabled the client to secure Series A funding.
+This module enabled the "Dockless" capability of the fleet.
+*   **Connectivity:** Maintained reliable LTE link even in dense urban environments.
+*   **Survival:** Zero water ingress failures reported in pilot deployment.
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-{{MODEL_URL}}
+:::note[Specs]
+*   **Comms:** LTE / GPS / BLE
+*   **Enclosure:** PC/ABS UV Stabilized
+*   **Seal:** Custom Silicone Gasket
+:::

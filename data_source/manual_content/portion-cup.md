@@ -1,24 +1,28 @@
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** Hyphen (Foodservice Automation) is revolutionizing the commercial kitchen with robotics.
+> **Context:** Every salad needs dressing. But manually filling thousands of 2oz plastic cups is a repetitive motion injury waiting to happen.
 
-The goal was to automate a manual food preparation process to improve speed, accuracy, and hygiene.
+The Portion Cup module was designed to automate the high-volume dispensing of sauces into standard 2oz and 4oz polypropylene cups. The core engineering problem was **Denesting**.
+Plastic cups are stacked tightly. Static friction and vacuum lock make them stick together. If you grab one and get two, the machine jams. If you grab zero, you dump ranch dressing onto the conveyor belt.
 
 ## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
+We architected a standalone electromechanical module that could separate, fill, and stage cups for the main line.
 
-*   **Designed Strategy:** Designed a sanitary, wash-down rated mechanism capable of handling food products reliably.
-*   **Engineered Strategy:** Engineered a modular dispensing system that could be easily cleaned and serviced.
-*   **Utilized Strategy:** Utilized food-safe materials (Stainless Steel 316, FDA-approved plastics) throughout the assembly.
-*   **Conducted Strategy:** Conducted extensive reliability testing to ensure 99.9% uptime in a high-throughput kitchen environment.
+*   **Pneumatic Denester:** We moved away from mechanical cam fingers (which prone to crushing thin rims) and designed a vacuum-assist "pick and peel" mechanism. This used a localized air blast to break the vacuum seal between cups before the z-axis actuator pulled the bottom cup free.
+*   **Peristaltic Dosing:** To handle viscous fluids (Salsa, Ranch, Hummus) without cross-contamination, we utilized a peristaltic pump loop. This meant the machine never touched the food—only the FDA-approved tubing did.
+*   **Compact Footprint:** The entire unit had to fit within a 300mm wide slice of the line, requiring tight packaging of the pneumatics and control electronics.
 
 ## Impact
-The system increased throughput by 300% and significantly reduced food waste.
+This module eliminated one of the most tedious stations on the line.
+*   **Reliability:** achieved >99.5% successful denest rate.
+*   **Hygiene:** Closed-loop tubing system reduced cleaning time from 20 minutes to 2 minutes (just swap the tube).
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-{{MODEL_URL}}
+:::note[Specs]
+*   **Throughput:** 15 cups/minute
+*   **Formats:** 2oz, 4oz
+*   **Pump Type:** Peristaltic
+:::

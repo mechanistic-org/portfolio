@@ -155,3 +155,14 @@ Presets are black boxes that lock you into rigid aesthetics ("Melted Plastic").
 *   **Principle:** We acknowledge the giants we stand on (The Starter, Astro, Tailwind), but we claim dominion over the machine we built.
 *   **Practice:** We ruthlessly rename inherited variables (`quantum` -> `eriknorris`) to eliminate "Brand Debt."
 *   **Attribution:** We "Humble Brag" about our origins in the Colophon, but the Codebase itself speaks with one voice: **Ours.**
+
+### 17. The Law of Static Truth (Zero Bloat)
+**"If the Platform fights the Framework, choose the Platform."**
+*   **Context:** We hit Cloudflare's "Too Many Modules" limit when asking Astro to generate a complex Worker.
+*   **Decree:** We default to `output: static`. We rely on **Manual Pages Functions** (`functions/`) for dynamic logic (like R2 proxies) rather than trusting a black-box Adapter to bundle everything into one massive script.
+*   **Result:** deployments went from 20MB+ (Fail) to less than 500KB (Success).
+
+### 18. The Law of Remote Reality
+**"Localhost is a liar."**
+*   **Context:** We spent hours debugging "Green" images because `wrangler` was updating a local emulator instead of the live bucket.
+*   **Rule:** Always verify binary assets against the **Production URL** (`curl -I`), not the local staging folder.

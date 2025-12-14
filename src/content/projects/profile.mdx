@@ -5,7 +5,7 @@ date: "2/1/2005"
 endDate: "7/1/2005"
 employer: "Digidesign"
 client: []
-industry: "Pro Audio"
+industry: "Other"
 category: "Live Sound Console"
 tools: ["ProEngineer"]
 toolIcons: ["ptc"]
@@ -18,37 +18,34 @@ teamSize: "Unknown"
 gallery: []
 documents: []
 links: [{"name": "Digidesign Website", "url": "https://avid.com"}]
-heroImage: "/assets/placeholders/abstract.jpg" 
+heroImage: "/assets/r2/profile/hero-venue.jpg" 
 draft: false
-description: "Profile."
+description: "Profile - Other project."
 duration: "Active"
 statusLabel: "Completed"
 skillGraph: "/assets/r2/profile/skill-graph.svg"
 partGraph: "/assets/r2/profile/part-graph.svg"
 impact: ""
 ---
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** Digidesign (Avid) set the standard for professional digital audio workstations (Pro Tools).
+> **Context:** In a studio, if Pro Tools crashes, you reboot. In a live concert, you get fired.
 
-The goal was to create a tactile control surface that provided professional mixers with precise, low-latency control over digital parameters.
+The "Venue" (D-Show / Profile) line was Digidesign's entry into live sound reinforcement.
+*   **Redundancy:** Everything had to be redundant. Power supplies, computers, snakes.
+*   **Ergonomics:** The console needed to be "walkable". An engineer stands for 4 hours, reaching across a 5-foot surface.
 
 ## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
-
-*   **Integrated Strategy:** Integrated high-resolution motorized faders with custom touch-sensitive capacitive caps.
-*   **Designed Strategy:** Designed a rigid, ergonomic chassis that minimized resonance and provided a solid 'console' feel.
-*   **Engineered Strategy:** Engineered the internal layout to separate analog audio paths from digital control signals to minimize noise floor.
-*   **Implemented Strategy:** Implemented a modular assembly strategy to allow for scalable product variants.
-
-## Impact
-The unit became a staple in professional recording studios, bridging the gap between analog workflow and digital flexibility.
+*   **Encoder Reliability:** We utilized custom optical encoders with a specific rotational torque (1.5 N-mm) to give the engineer precise feedback without fatigue.
+*   **Structural Integrity:** Tour cases are brutal. The chassis was a monocoque steel weldment designed to survive being tipped off a loading dock.
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-<ModelViewer />
+:::note[Specs]
+*   **Inputs:** 48 - 96 Channels
+*   **Reliability:** 5-Nines
+*   **Weight:** >100lbs
+:::
 

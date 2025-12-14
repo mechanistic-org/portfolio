@@ -1,24 +1,25 @@
+
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## The Challenge
-> **Context:** Kaleidescape required a high-fidelity media server capable of storing and streaming uncompressed Blu-ray quality content in a home theater environment.
+> **Context:** Kaleidescape was known for $30k rack-mount gear. We needed a product for the living room that cost under $4k.
 
-The primary challenge was achieving near-silent operation (0dB ambient noise floor) while managing significant thermal loads from multiple hard drives and processing units in a constrained rackmount form factor.
+"Cinema One" (Project Macduff) was an exercise in aggressive integration.
+*   **The "Toast Turn":** The defining feature was the slot-load drive that "swallowed" a Blu-ray, ripped it to the internal HDD, and ejected it.
+*   **Acoustics:** It had to be silent while spinning a hard drive at 7200RPM and a blower fan.
 
 ## Engineering Approach
-We adopted a rigorous engineering methodology to solve these problems.
-
-*   **Designed Strategy:** Designed a custom passive cooling architecture using oversized heat sinks and optimized airflow channels.
-*   **Implemented Strategy:** Implemented vibration isolation mounts for hard drives to prevent acoustic coupling to the chassis.
-*   **Collaborated Strategy:** Collaborated with industrial design to ensure the front bezel met the premium 'Cinematic' aesthetic requirements.
-*   **Conducted Strategy:** Conducted extensive thermal simulation (CFD) to validate airflow paths under worst-case rack conditions.
+*   **Suspension:** I designed a custom Sorbothane suspension capability for the HDD cage to decouple vibrational energy from the chassis resonance.
+*   **Airflow:** We used a custom blower with a specific blade geometry to push air through the restrictive heatsink fins without generating turbulence noise (blade passing frequency tuning).
 
 ## Impact
-The product defined the high-end home cinema market, delivering a silent, reliable server that became the standard for luxury integrators worldwide.
+It captured a new "Mid-Market" segment for the company.
+*   **Award:** Won CEPro "Product of the Year".
 
 ### Project Artifacts
-<div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
-</div>
-{{MODEL_URL}}
+:::note[Specs]
+*   **Capacity:** 100 Blu-rays
+*   **Drive:** Slot-Load BD
+*   **Cooling:** Custom Blower
+:::

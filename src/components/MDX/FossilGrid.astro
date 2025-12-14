@@ -1,0 +1,33 @@
+---
+import { Image } from "astro:assets";
+
+const fossils = await Astro.glob("/src/assets/history/*.png");
+
+// Sort by number in filename "EN_1.png" -> 1
+const sortedFossils = fossils.sort((a, b) => {
+	const getNum = (path: string) => {
+		const match = path.match(/EN_(\d+)/);
+		return match ? parseInt(match[1]) : 999;
+	};
+	return getNum(a.default.src) - getNum(b.default.src);
+});
+---
+
+<div class="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-6">
+	{
+		sortedFossils.map((fossil) => (
+			<div class="group relative aspect-square overflow-hidden rounded-xl border border-white/5 bg-white/5 transition-all duration-500 hover:z-10 hover:scale-110 hover:border-[#2E5CFF] hover:shadow-[0_0_30px_rgba(46,92,255,0.3)]">
+				<Image
+					src={fossil.default}
+					alt="Evolutionary Fossil"
+					width={600}
+					height={600}
+					class="h-full w-full object-contain p-4 opacity-50 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+				/>
+				<div class="absolute bottom-2 left-3 font-mono text-[10px] text-neutral-500 transition-colors group-hover:text-[#2E5CFF]">
+					{fossil.default.src.split("/").pop()?.split(".")[0]}
+				</div>
+			</div>
+		))
+	}
+</div>
