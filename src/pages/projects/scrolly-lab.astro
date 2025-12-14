@@ -1,0 +1,248 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import StickyStage from "@components/Scrolly/StickyStage.astro";
+import ScrollTrigger from "@components/Scrolly/ScrollTrigger.astro";
+import NarrativeItem from "@components/Scrolly/NarrativeItem.astro";
+
+// GENERIC ASSETS
+const HERO_3D = "/assets/models/EN_Logo_ForgedCarbon.glb";
+const LOREM_IMG = "https://picsum.photos/seed/scrolly/800/600";
+
+// GENERATED CONTENT
+const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
+	id: i,
+	color: ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF"][
+		Math.floor(Math.random() * 6)
+	],
+	scale: 0.5 + Math.random(),
+}));
+---
+
+<BaseLayout title="Scrolly Engine Lab V2" description="Componentized Scrollytelling System">
+	<!-- INTRO (Stay Fixed) -->
+	<div
+		id="intro-layer"
+		class="pointer-events-none fixed inset-0 z-50 flex flex-col items-center justify-center bg-black transition-opacity duration-300"
+	>
+		<h1 class="font-heading text-9xl font-bold tracking-tighter text-white mix-blend-difference">
+			LAB_03
+		</h1>
+		<div class="mt-4 font-mono text-blue-500">SYSTEM_V3_NARRATIVE</div>
+	</div>
+
+	<!-- MAIN SCROLL STAGE -->
+	<main class="relative z-10 snap-y snap-proximity bg-neutral-900" style="height: 400vh;">
+		<!-- STICKY DECK -->
+		<div class="sticky top-0 h-screen w-full overflow-hidden">
+			<!-- STAGE 1: SWARM -->
+			<StickyStage id="stage-swarm" active={true}>
+				<div id="swarm-grid" class="perspective-1000 grid w-full max-w-4xl grid-cols-10 gap-2 p-8">
+					{
+						swarmlings.map((s) => (
+							<div
+								class="swarmling glass-panel aspect-square rounded-full transition-transform duration-75 ease-out"
+								data-scale={s.scale}
+								style={`background-color: ${s.color}; opacity: 0.5; transform: scale(${s.scale}); box-shadow: 0 0 10px ${s.color}40;`}
+							/>
+						))
+					}
+				</div>
+			</StickyStage>
+
+			<!-- STAGE 2: MEDIA -->
+			<StickyStage id="stage-media" overlay={true}>
+				<div
+					class="relative aspect-video w-full max-w-5xl transform overflow-hidden rounded-xl border border-white/10 bg-neutral-800 shadow-2xl transition-transform duration-1000 hover:scale-[1.02]"
+				>
+					<img src={LOREM_IMG} class="h-full w-full object-cover opacity-50" />
+					<div
+						class="absolute inset-0 flex items-center justify-center font-mono text-4xl text-white mix-blend-overlay"
+					>
+						MEDIA_COMPONENT
+					</div>
+				</div>
+			</StickyStage>
+
+			<!-- STAGE 3: HEAVY -->
+			<StickyStage id="stage-heavy">
+				<model-viewer
+					id="lab-viewer"
+					src={HERO_3D}
+					camera-controls
+					disable-zoom
+					auto-rotate
+					rotation-per-second="30deg"
+					shadow-intensity="1"
+					exposure="1"
+					class="h-full w-full"
+					style="background: radial-gradient(circle at center, #222 0%, #000 100%);"
+				>
+					<div
+						class="flex h-full w-full items-center justify-center bg-black font-mono text-[#2E5CFF]"
+						slot="progress-bar"
+					>
+						LOADING_COMPONENT...
+					</div>
+				</model-viewer>
+			</StickyStage>
+		</div>
+
+		<!-- SCROLL TRIGGERS -->
+		<div class="pointer-events-none absolute inset-0 flex flex-col">
+			<!-- Spacer for Intro -->
+			<div class="flex h-screen snap-start items-center justify-center">
+				<div class="border border-white/10 bg-black/50 p-4 font-mono text-sm text-white">
+					SYSTEM READY. SCROLL.
+				</div>
+			</div>
+
+			<ScrollTrigger step="stage-swarm" align="left">
+				<h2 class="mb-4 text-3xl font-bold text-white">The Swarm (V2)</h2>
+				<p class="text-neutral-400">
+					Rendering via &lt;StickyStage&gt;. Physics logic is preserved in the page script, but DOM
+					structure is now abstracted.
+				</p>
+			</ScrollTrigger>
+
+			<ScrollTrigger step="stage-media" align="right">
+				<h2 class="mb-4 text-3xl font-bold text-white">Media Abstraction</h2>
+				<p class="text-neutral-400">
+					Overlay mode enabled via props. &lt;StickyStage overlay={true}&gt; handles the dimming
+					automatically.
+				</p>
+			</ScrollTrigger>
+
+			<ScrollTrigger step="stage-heavy" align="center">
+				<h2 class="mb-4 text-3xl font-bold text-white">Heavy Metal</h2>
+				<p class="text-neutral-400">
+					3D Interaction enabled. The Observer script now targets the generic 'stage-*' ID pattern.
+				</p>
+			</ScrollTrigger>
+		</div>
+	</main>
+
+	<!-- V3: NARRATIVE DEEP DIVE (The Zigzag) -->
+	<section class="relative z-10 bg-neutral-900 pt-12 pb-32">
+		<div class="site-container max-w-4xl space-y-24">
+			<NarrativeItem step="01" title="The Swarm Architecture" subtitle="Phase 1: Entropy">
+				<p>
+					We replaced 50 hardcoded elements with a generated array. The physics engine tracks mouse
+					position relative to the center viewport, calculating a unique vector for each
+					"Swarmling".
+				</p>
+				<blockquote class="mt-4 border-l-2 border-red-500 pl-6 text-xl text-white/80 italic">
+					"Chaos is just high-frequency order."
+				</blockquote>
+			</NarrativeItem>
+
+			<NarrativeItem step="02" title="Media Abstraction" subtitle="Phase 2: Logic" reverse={true}>
+				<p>
+					The media layer uses a CSS-only stacking context managed by the <code
+						>&lt;StickyStage&gt;</code
+					> component. The overlay prop allows for seamless dimming without JS intervention.
+				</p>
+				<div slot="visual" class="flex h-full items-center justify-center">
+					<span class="font-mono text-green-500">COMPONENT // OPTIMIZED</span>
+				</div>
+			</NarrativeItem>
+
+			<NarrativeItem step="03" title="Heavy Asset Loading" subtitle="Phase 3: Material">
+				<p>
+					The ModelViewer is the heaviest component (16MB). We wrap it in a lazy-loaded container
+					that only activates pointer events when the user scrolls into the specific "Trigger Zone".
+				</p>
+			</NarrativeItem>
+		</div>
+	</section>
+
+	<div class="flex h-[50vh] snap-end items-center justify-center bg-neutral-800">
+		<h2 class="font-mono text-neutral-500">END_OF_TRANSSMISSION</h2>
+	</div>
+</BaseLayout>
+
+<script>
+	// UNIVERSAL SCROLL OBSERVER
+	// This script could eventually be moved to a <ScrollyLayout> client script
+
+	// 1. Intro Fade
+	const intro = document.getElementById("intro-layer");
+	window.addEventListener("scroll", () => {
+		if (intro) {
+			const opacity = Math.max(0, 1 - window.scrollY / 500);
+			intro.style.opacity = opacity.toString();
+		}
+	});
+
+	// 2. Stage Switcher
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					const targetId = entry.target.getAttribute("data-step");
+					const targetStage = document.getElementById(targetId || "");
+
+					if (targetId && targetStage) {
+						// Hide all stages
+						document.querySelectorAll("[data-scrolly-layer]").forEach((el) => {
+							(el as HTMLElement).style.opacity = "0";
+							(el as HTMLElement).style.pointerEvents = "none";
+						});
+
+						// Show target
+						targetStage.style.opacity = "1";
+
+						// IF it's an interactive stage (like 3D), enable pointer events
+						// Logic: If it contains a model-viewer, it's interactive
+						if (targetStage.querySelector("model-viewer")) {
+							targetStage.style.pointerEvents = "auto";
+						}
+					}
+				}
+			});
+		},
+		{ threshold: 0.5 },
+	);
+
+	document.querySelectorAll("[data-step]").forEach((el) => observer.observe(el));
+
+	// 3. SWARM PHYSICS (Kept Local for Lab)
+	const swarmGrid = document.getElementById("swarm-grid");
+	const swarmlings = document.querySelectorAll(".swarmling");
+
+	if (swarmGrid && swarmlings.length > 0) {
+		window.addEventListener("mousemove", (e) => {
+			const stage = document.getElementById("stage-swarm");
+			if (stage && getComputedStyle(stage).opacity === "0") return;
+
+			const mx = e.clientX;
+			const my = e.clientY;
+			const cx = window.innerWidth / 2;
+			const cy = window.innerHeight / 2;
+
+			const dx = (mx - cx) * 0.05;
+			const dy = (my - cy) * 0.05;
+			swarmGrid.style.transform = `translate(${dx}px, ${dy}px) rotateY(${dx * 0.1}deg) rotateX(${-dy * 0.1}deg)`;
+
+			swarmlings.forEach((s) => {
+				const box = s.getBoundingClientRect();
+				const sx = box.left + box.width / 2;
+				const sy = box.top + box.height / 2;
+				const dist = Math.hypot(mx - sx, my - sy);
+				const limit = 200;
+
+				if (dist < limit) {
+					const force = (limit - dist) / limit;
+					const ang = Math.atan2(my - sy, mx - sx);
+					const moveX = Math.cos(ang) * -30 * force;
+					const moveY = Math.sin(ang) * -30 * force;
+					const scale = (s as HTMLElement).dataset.scale || "1";
+					(s as HTMLElement).style.transform =
+						`translate(${moveX}px, ${moveY}px) scale(${parseFloat(scale) * 1.5})`;
+				} else {
+					const scale = (s as HTMLElement).dataset.scale || "1";
+					(s as HTMLElement).style.transform = `translate(0, 0) scale(${scale})`;
+				}
+			});
+		});
+	}
+</script>

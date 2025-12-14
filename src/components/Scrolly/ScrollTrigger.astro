@@ -1,0 +1,32 @@
+---
+interface Props {
+	step: string; // The ID of the StickyStage to activate (e.g. "stage-swarm")
+	align?: "left" | "right" | "center";
+}
+
+const { step, align = "center" } = Astro.props;
+
+const alignClasses = {
+	left: "justify-start",
+	right: "justify-end",
+	center: "justify-center",
+};
+---
+
+<div
+	class:list={[
+		"flex h-screen snap-center items-center p-12", // Default physics
+		alignClasses[align],
+	]}
+	data-step={step}
+>
+	<div
+		class:list={[
+			"max-w-md rounded-xl p-8 shadow-2xl backdrop-blur-lg transition-transform duration-500",
+			"border-l-4 border-neutral-700 bg-black/80", // Default style
+			"hover:scale-[1.02]", // Micro-interaction
+		]}
+	>
+		<slot />
+	</div>
+</div>

@@ -1,0 +1,40 @@
+---
+interface Props {
+	step: string; // "01", "02" etc
+	title: string;
+	subtitle?: string; // "Phase 1: Entropy"
+	reverse?: boolean; // Force image left, text right
+}
+
+const { step, title, subtitle, reverse = false } = Astro.props;
+---
+
+<div class="grid items-center gap-12 md:grid-cols-2 lg:gap-24">
+	<!-- Visual Side (Order depends on reverse prop) -->
+	<div
+		class:list={[
+			"flex aspect-video h-full items-center justify-center rounded-2xl border border-white/5 bg-black/50 p-12 md:aspect-auto",
+			reverse ? "md:order-1" : "md:order-2",
+		]}
+	>
+		<slot name="visual">
+			<!-- Default Placeholder -->
+			<div class="font-mono text-6xl font-bold text-neutral-800">{step}</div>
+		</slot>
+	</div>
+
+	<!-- Text Side -->
+	<div class:list={["space-y-6", reverse ? "md:order-2" : "md:order-1"]}>
+		{
+			subtitle && (
+				<div class="inline-block rounded-full border border-white/10 px-3 py-1 font-mono text-xs text-neutral-500 uppercase">
+					{subtitle}
+				</div>
+			)
+		}
+		<h2 class="text-3xl font-bold text-white">{title}</h2>
+		<div class="text-lg leading-relaxed text-neutral-400">
+			<slot />
+		</div>
+	</div>
+</div>
