@@ -1,0 +1,200 @@
+---
+import Layout from "@layouts/BaseLayout.astro";
+import { YouTube } from "@astro-community/astro-embed-youtube";
+
+const { entry, Content } = Astro.props;
+const data = entry.data;
+
+// Parse lists
+const gallery = data.gallery || [];
+---
+
+<Layout
+	title={`CLASSIFIED: ${data.title}`}
+	description="UNAUTHORIZED ACCESS DETECTED"
+	image={data.heroImage ?? ""}
+	type="project"
+>
+	<!-- VINTAGE CRT OVERLAY -->
+	<div
+		class="pointer-events-none fixed inset-0 z-[100] h-full w-full bg-[url('/assets/noise.png')] opacity-[0.03] mix-blend-overlay"
+	>
+	</div>
+	<div
+		class="pointer-events-none fixed inset-0 z-[100] h-full w-full shadow-[inset_0_0_100px_rgba(0,0,0,0.9)]"
+	>
+	</div>
+
+	<!-- MAIN TERMINAL CONTAINER -->
+	<div
+		class="min-h-screen bg-[#1a1510] font-mono text-[#ffb000] selection:bg-[#ffb000] selection:text-black"
+	>
+		<!-- HEADER: TAPE DRIVE & TIMER -->
+		<header
+			class="border-b-4 border-[#ffb000] bg-[#2b2520] p-4 text-xs font-bold tracking-widest uppercase md:p-8"
+		>
+			<div class="flex flex-col items-center justify-between gap-4 md:flex-row">
+				<!-- LEFT: TAPE REEL VISUAL -->
+				<div class="flex items-center gap-4">
+					<div class="relative h-12 w-12 rounded-full border-4 border-[#ffb000] bg-black">
+						<div
+							class="absolute inset-2 animate-[spin_3s_linear_infinite] rounded-full border-2 border-dashed border-[#ffb000] opacity-50"
+						>
+						</div>
+						<div
+							class="absolute top-1/2 left-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ffb000]"
+						>
+						</div>
+					</div>
+					<div class="flex flex-col">
+						<span>REEL: 724-X</span>
+						<span class="text-[#ff4400]">REC: ACTIVE</span>
+					</div>
+				</div>
+
+				<!-- CENTER: TITLE -->
+				<div class="text-center">
+					<h1 class="text-2xl md:text-4xl">TOP SECRET</h1>
+					<div class="mt-1 border-t border-[#ffb000] pt-1 text-[10px]">
+						EYES ONLY // CLEARANCE LEVEL 5
+					</div>
+				</div>
+
+				<!-- RIGHT: SELF DESTRUCT TIMER -->
+				<div class="flex flex-col items-end text-[#ff4400]">
+					<span>AUTO-DESTRUCT SEQUENCE</span>
+					<div class="font-mono text-2xl" id="countdown">00:30:00</div>
+				</div>
+			</div>
+		</header>
+
+		<main class="mx-auto max-w-4xl p-8 md:p-16">
+			<!-- FILE STAMP -->
+			<div class="mb-12 border-2 border-dashed border-[#ffb000]/30 p-8 text-center">
+				<h2
+					class="mb-4 text-5xl font-black tracking-tighter text-[#ffb000] uppercase opacity-90 mix-blend-screen md:text-7xl"
+				>
+					{data.title}
+				</h2>
+				<div
+					class="inline-block -rotate-6 border-4 border-[#ff4400] px-4 py-1 text-xl font-bold text-[#ff4400] opacity-80 backdrop-blur-sm"
+				>
+					CLASSIFIED
+				</div>
+			</div>
+
+			<!-- METADATA GRID (PUNCHED CARD STYLE) -->
+			<div
+				class="mb-12 grid gap-px border border-[#ffb000]/20 bg-[#ffb000]/20 sm:grid-cols-2 md:grid-cols-4"
+			>
+				<div class="bg-[#1a1510] p-4">
+					<div class="text-[10px] text-[#ffb000]/60">CODENAME</div>
+					<div>{data.slug.toUpperCase()}</div>
+				</div>
+				<div class="bg-[#1a1510] p-4">
+					<div class="text-[10px] text-[#ffb000]/60">DATE</div>
+					<div>{data.date}</div>
+				</div>
+				<div class="bg-[#1a1510] p-4">
+					<div class="text-[10px] text-[#ffb000]/60">AGENCY</div>
+					<div>{data.employer}</div>
+				</div>
+				<div class="bg-[#1a1510] p-4">
+					<div class="text-[10px] text-[#ffb000]/60">STATUS</div>
+					<div class="animate-pulse text-[#ff4400]">{data.statusLabel}</div>
+				</div>
+			</div>
+
+			<!-- REDACTED CONTENT -->
+			<article
+				class="prose prose-invert prose-lg prose-headings:font-bold prose-headings:uppercase prose-headings:text-[#ffb000] prose-strong:text-[#ffb000] prose-code:bg-[#ffb000]/10 prose-code:text-[#ff4400] max-w-none font-mono text-[#ffb000]/80"
+			>
+				<!-- INJECTED CENSORSHIP BAR -->
+				<div
+					class="not-prose mb-8 flex items-center gap-2 border-l-4 border-[#ff4400] bg-[#ff4400]/10 p-4 text-sm text-[#ff4400]"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="h-5 w-5"
+						viewBox="0 0 20 20"
+						fill="currentColor"
+						><path
+							fill-rule="evenodd"
+							d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+							clip-rule="evenodd"></path></svg
+					>
+					<span>WARNING: SECTIONS OF THIS DOCUMENT HAVE BEEN REDACTED FOR SECURITY.</span>
+				</div>
+
+				<Content components={{ YouTube }} />
+			</article>
+
+			<!-- BURN BUTTON -->
+			<div class="mt-24 flex justify-center border-t border-dashed border-[#ffb000]/30 pt-12">
+				<a
+					href="/projects"
+					class="group relative overflow-hidden bg-[#ff4400] px-8 py-4 font-bold text-black transition-colors hover:bg-[#ffb000]"
+				>
+					<span class="relative z-10">BURN DOCUMENT & EXIT</span>
+					<div
+						class="absolute inset-0 z-0 bg-[url('/assets/noise.png')] opacity-20 mix-blend-multiply"
+					>
+					</div>
+				</a>
+			</div>
+		</main>
+
+		<!-- FOOTER TICKER -->
+		<footer
+			class="fixed bottom-0 z-50 w-full border-t border-[#ffb000] bg-[#2b2520] py-1 text-center text-[10px] text-[#ffb000]/50 uppercase backdrop-blur"
+		>
+			// TRANSMISSION END // 37.7749° N, 122.4194° W // IP: [REDACTED]
+		</footer>
+	</div>
+</Layout>
+
+<script>
+	// SELF DESTRUCT TIMER
+	const timerEl = document.getElementById("countdown");
+	let timeLeft = 3000; // 30 seconds (centi)
+
+	const interval = setInterval(() => {
+		if (!timerEl) return;
+		timeLeft--;
+		if (timeLeft <= 0) {
+			clearInterval(interval);
+			timerEl.innerText = "00:00:00";
+			document.body.style.filter = "invert(1)";
+			setTimeout(() => {
+				alert("CONNECTION TERMINATED");
+				window.location.href = "/projects";
+			}, 500);
+		} else {
+			const sec = Math.floor(timeLeft / 100);
+			const ms = timeLeft % 100;
+			timerEl.innerText = `00:${sec.toString().padStart(2, "0")}:${ms.toString().padStart(2, "0")}`;
+		}
+	}, 10);
+</script>
+
+<style>
+	/* REDACTION STYLE (Global for this theme) */
+	:global(redacted) {
+		/* Not a real tag, but maybe we class text? */
+		background: black;
+		color: black;
+		cursor: help;
+	}
+	:global(redacted:hover) {
+		color: #ffb000;
+	}
+
+	/* Simulate redacted text blocks in Markdown */
+	/* We can't easily target specific words without a custom MDX component, 
+       but we can style ::selection to look "Classified" */
+	::selection {
+		background: #ff4400;
+		color: black;
+		text-shadow: none;
+	}
+</style>

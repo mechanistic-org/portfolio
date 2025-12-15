@@ -25,33 +25,47 @@ duration: "Active"
 statusLabel: "Completed"
 skillGraph: "/assets/r2/pet-scale/skill-graph.svg"
 partGraph: "/assets/r2/pet-scale/part-graph.svg"
-impact: ""
+impact: "Delivered a 'Red Flag' report that reshaped the acquisition terms. The startup's CEO admitted the findings were more thorough than VC vetting."
+cyberspace:
+  enable: true
+  stickies:
+    - id: "stage-challenge"
+      label: "The Challenge"
+      type: "media"
+      title: "Due Diligence"
+      text: "Determining if a smart home startup was real or vaporware."
+      align: "center"
+      data:
+        src: "/assets/placeholders/abstract.jpg"
+    - id: "stage-approach"
+      label: "Analysis"
+      type: "media"
+      title: "Forensic Audit"
+      text: "Tearing down the mechanical architecture and firmware logic."
+      align: "left"
+      data:
+         src: "/assets/placeholders/blueprint.jpg"
+    - id: "stage-impact"
+      label: "Impact"
+      type: "media"
+      title: "The Verdict"
+      text: "Architecture Sound, Implementation Flawed."
+      align: "right"
+      data:
+         src: "/assets/placeholders/tech-2.jpg"
+
+  narrative:
+    - step: "stage-challenge"
+      title: "Vaporware Check"
+      body: "A major player in the pet care space was looking to acquire a smart-home startup. My mission was Technical Due Diligence. The target was a 'Smart Cat Monitor'. The challenge wasn't building it; it was breaking it. I had to audit the mechanical architecture, firmware stability, and manufacturing readiness."
+    - step: "stage-approach"
+      title: "The Teardown"
+      reverse: true
+      body: "I treated the product like a crime scene. I analyzed the strain gauge integration (it was uncompensated and drifting). I audited the firmware sleep-wake cycles (battery life was 3 months, not the claimed 12). I reviewed the injection molding tool stack, finding marginal draft angles that would kill margins at scale."
+    - step: "stage-impact"
+      title: "Red Flag Report"
+      body: "I delivered a 'Red Flag' report that reshaped the acquisition terms. The startup's CEO later told me: 'This is more thorough than the VC vetting was...'"
 ---
 
-import { YouTube } from '@astro-community/astro-embed-youtube';
-import ModelViewer from '@components/mdx/ModelViewer.astro';
-
-## The Challenge
-> **Context:** A major player in the pet care space was looking to acquire a smart-home startup. They needed to know if the tech was real or vaporware.
-
-I was deployed to perform **Technical Due Diligence**. The target was a "Smart Cat Monitor"—essentially an IoT load cell platform. The challenge wasn't building it; it was *breaking* it. I had to audit the mechanical architecture, firmware stability, and manufacturing readiness to determine if the valuation matched the reality.
-
-## Engineering Approach
-I treated the product like a crime scene. I performed a forensic teardown and systems audit.
-
-*   **Load Cell Metrology:** I analyzed the strain gauge integration. Was it temperature compensated? Was the ADC resolution sufficient to detect a 4lb cat vs. a 5lb cat? (Result: The drift was significant due to poor creeping of the plastic load levers).
-*   **Firmware Logic:** I audited the sleep-wake cycles. The device claimed "1 year battery life," but my power analysis showed it woke up for false positives (vibrations) too often, cutting real life to 3 months.
-*   **DFM Audit:** I reviewed the injection molding tool stack. The draft angles were marginal, leading to high scrape rates and cosmetic defects that would kill margins at scale.
-
-## Impact
-I delivered a "Red Flag" report that reshaped the acquisition terms.
-The startup's CEO later told me:
-> *"This is more thorough than the VC vetting was..."*
-
-### Project Artifacts
-:::note[Findings]
-*   **Battery Life:** 3 Months (Claimed 12)
-*   **Sensor:** Strain Gauge (Uncompensated)
-*   **Verdict:** Architecture Sound, Implementation Flawed
-:::
-
+# Pet Scale
+(Converted to Hyperspace V4)

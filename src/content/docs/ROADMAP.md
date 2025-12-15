@@ -38,6 +38,13 @@ sidebar:
     *   **Description:** A "Plug-and-Play" authoring system that allows complex UI patterns (Zigzag Grids, 3D Viewers, Process Strips) to be inserted via shortcodes (`qq-*`). This transforms the IDE into a layout engine, ensuring every project page adheres to the strict "Visual Taxonomy" without manual coding.
 
 ## 📜 Change Log (Recent)
+*   **[Architecture] Theme Engine:** Refactored project routing to support multiple distinct layouts (`Hyperspace`, `Command`, `DataSheet`) via a scalable Registry pattern.
+*   **[Feature] Redacted Theme:** Implemented Tier 4 "NDA" archetype with 3 aesthetic variants:
+    *   **Terminal:** Green phosphor, ASCII art, CRT effects.
+    *   **Dossier:** Manila folder, typewriter typography, physical stamps.
+    *   **Omega:** "Mission Impossible" amber alert style.
+*   **[Polish] Command V3:** Upgraded Command theme with "Ouroboros HUD" (D3.js Skill/Phase visualization) and "Technical Frame" layout.
+*   **[Infrastructure] R3 Registry:** Established `public/assets/r3` as the standardized namespace for Theme Engine assets.
 *   **[Strategy] Genesis Analysis:** Conducted a deep architectural audit ("The Crisis of Faith") validating the "Infrastructure First" approach and establishing the "Builder vs. Operator" phase transition.
 *   **[Artifact] Genesis Story:** Mined the "Sonnie's Edge" / "Bucking Foundation" narrative into `src/content/docs/backlog/GENESIS_STORY.md`.
 *   **[Maintenance] Process Cleanup:** Identified and terminated zombie `curl` processes from legacy asset verification tasks to restore system stability.
@@ -284,6 +291,11 @@ sidebar:
 *   **Hook:** "An MRI machine for GLB files."
 *   **Tech:** `model-viewer` v3.4.0 API, Vanilla JS, Astro.
 *   **Description:** A runtime debugger that programmatically "kills" specific PBR texture channels (Normals, ORM, AO) and forces material overrides (Matte/Gloss/Metal) to isolate rendering artifacts without recompiling the asset.
+
+### The Redacted Trinity
+*   **Hook:** "Three ways to say 'No Comment'."
+*   **Tech:** Astro Layouts, CSS Blending Modes, CRT Emulation.
+*   **Description:** An exploration in "Thematic UI" where a single content source (`classified.mdx`) can be rendered as a Cold War Terminal, a Physical Dossier, or a High-Tech Self-Destruct sequence depending on the active Theme Router key.
 
 *   **The Technical Header (Spec Card):**
     *   **Hook:** "Turning the Portfolio into a Product Catalog."

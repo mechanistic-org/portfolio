@@ -97,5 +97,11 @@ export default defineConfig({
         optimizeDeps: {
             exclude: ["axobject-query"],
         },
+        server: {
+            fs: {
+                // Allow serving files from the sibling 'quantum-assets' repo via Symlinks
+                allow: ["../quantum-assets", "."],
+            },
+        },
     },
 });

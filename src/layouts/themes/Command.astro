@@ -1,0 +1,221 @@
+---
+import Layout from "@layouts/BaseLayout.astro";
+import ProjectHeader from "@components/Projects/ProjectHeader.astro"; // We might want a specialized "CommandHeader" later
+import ProjectTOC from "@components/Projects/ProjectTOC.astro";
+import OuroborosHUD from "@components/DataViz/OuroborosHUD"; 
+import ProjectGallery from "@components/Projects/ProjectGallery";
+import { YouTube } from "@astro-community/astro-embed-youtube";
+import ModelViewer from "@components/MDX/ModelViewer.astro";
+import ProjectInfoTable from "@components/Projects/ProjectInfoTable.astro";
+
+const { entry, nextProject, prevProject, Content, headings } = Astro.props;
+const data = entry.data;
+
+// Format dates
+const dateVal = data.date || new Date();
+const startDate = new Date(dateVal);
+const dateDisplay = startDate.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+
+// Parse lists
+const clients = data.client || [];
+const documents = data.documents || [];
+const links = data.links || [];
+const gallery = data.gallery || [];
+---
+
+<Layout
+	title={data.title}
+	description={data.description ?? ""}
+	image={data.heroImage ?? ""}
+	type="project"
+>
+	<!-- COMMAND HUD: Sticky Top Bar -->
+	<div class="sticky top-0 z-[100] border-b border-white/10 bg-black/90 backdrop-blur-md">
+		<ProjectInfoTable data={entry.data} nextProject={nextProject} prevProject={prevProject} />
+		<!-- Progress Bar (Visual Flair) -->
+		<div class="h-0.5 w-full bg-neutral-900">
+			<div
+				class="h-full w-full origin-left scale-x-0 bg-[#2E5CFF] transition-transform duration-100 ease-out"
+				id="reading-progress"
+			>
+			</div>
+		</div>
+	</div>
+
+	<!-- HERO SECTION (Command Style) -->
+	<header class="relative overflow-hidden border-b border-white/10 bg-neutral-900 py-24 md:py-32">
+		<!-- Background Grid/Noise -->
+		<div class="absolute inset-0 bg-[url('/assets/grid-pattern.svg')] opacity-10"></div>
+		<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+
+		<div class="site-container relative z-10">
+			<div class="mb-4 flex items-center gap-2 font-mono text-xs text-[#2E5CFF]">
+				<span class="animate-pulse">●</span>
+				<span>COMMAND_MODE // ACTIVE</span>
+			</div>
+			<h1
+				class="font-heading mb-6 text-6xl font-bold tracking-tighter text-white uppercase md:text-8xl"
+			>
+				{data.title}
+			</h1>
+			<p class="max-w-3xl border-l-4 border-[#2E5CFF] pl-6 font-mono text-lg text-neutral-400">
+				{data.description}
+			</p>
+		</div>
+	</header>
+
+	<div class="site-container grid gap-12 py-12 md:grid-cols-12">
+		<!-- MISSION PARAMETERS (Sidebar) -->
+		<aside
+			class="order-2 space-y-12 md:sticky md:top-32 md:order-1 md:col-span-4 md:h-fit lg:col-span-3"
+		>
+			<!-- Dashboard Widget (Ouroboros HUD) -->
+			{
+				(data.skillData || data.phase_stats) && (
+					<div class="group relative overflow-hidden bg-black/40 backdrop-blur-sm transition-all duration-500 hover:bg-black/60">
+						
+                        <!-- V3 FRAME: Technical Brackets -->
+						<div class="pointer-events-none absolute inset-0 z-20 border border-white/10 transition-colors duration-500 group-hover:border-[#2E5CFF]/30"></div>
+						
+                        <!-- Corners -->
+                        <div class="absolute left-0 top-0 z-30 h-2 w-2 border-l-2 border-t-2 border-[#2E5CFF]"></div>
+                        <div class="absolute right-0 top-0 z-30 h-2 w-2 border-r-2 border-t-2 border-[#2E5CFF]"></div>
+                        <div class="absolute bottom-0 left-0 z-30 h-2 w-2 border-b-2 border-l-2 border-[#2E5CFF]"></div>
+                        <div class="absolute bottom-0 right-0 z-30 h-2 w-2 border-b-2 border-r-2 border-[#2E5CFF]"></div>
+
+						<!-- Header -->
+						<div class="relative z-10 flex items-center justify-between border-b border-white/5 bg-white/5 px-4 py-2 font-mono text-[10px] font-bold text-[#2E5CFF] uppercase tracking-widest backdrop-blur-md">
+							<span>Mission Analytics</span>
+							<div class="flex items-center gap-2">
+                                <span class="h-1.5 w-1.5 rounded-full bg-[#2E5CFF] animate-pulse"></span>
+                                <span class="opacity-50">ON</span>
+                            </div>
+						</div>
+						
+						<div class="flex justify-center py-6">
+							<OuroborosHUD
+								client:visible
+								data={data as any}
+								width={260}
+								height={260}
+							/>
+						</div>
+
+						<!-- Footer Data Stream -->
+						<div class="flex justify-between border-t border-white/5 bg-black/20 px-4 py-2 font-mono text-[9px] text-neutral-500">
+							<span>ID: {entry.id.toUpperCase()}</span>
+                            <span class="text-[#2E5CFF]/60">MONITORING</span>
+						</div>
+					</div>
+				)
+			}
+
+			<div class="space-y-8 border-l border-white/10 pl-6">
+				<!-- Data List -->
+				<dl class="space-y-6 font-mono text-sm">
+					<div>
+						<dt class="mb-1 text-xs text-neutral-500 uppercase">Role</dt>
+						<dd class="text-white">{data.employer}</dd>
+					</div>
+					<div>
+						<dt class="mb-1 text-xs text-neutral-500 uppercase">Timeline</dt>
+						<dd class="text-white">{dateDisplay} — {data.duration}</dd>
+					</div>
+					{
+						clients.length > 0 && (
+							<div>
+								<dt class="mb-1 text-xs text-neutral-500 uppercase">Client</dt>
+								<dd class="text-white">{clients.join(", ")}</dd>
+							</div>
+						)
+					}
+					<div>
+						<dt class="mb-1 text-xs text-neutral-500 uppercase">Status</dt>
+						<dd class="text-[#2E5CFF]">{data.statusLabel}</dd>
+					</div>
+				</dl>
+
+				<ProjectTOC headings={headings} />
+			</div>
+
+			{/* DOWNLOADS & LINKS */}
+			{
+				(documents.length > 0 || links.length > 0) && (
+					<div class="border-t border-white/10 pt-4">
+						<h3 class="mb-3 font-mono text-xs font-bold text-neutral-500 uppercase">Artifacts</h3>
+						<ul class="space-y-2 font-mono text-xs">
+							{documents.map((doc: any) => (
+								<li>
+									<a
+										href={doc.url}
+										target="_blank"
+										class="group flex items-center gap-2 text-neutral-400 hover:text-[#2E5CFF]"
+									>
+										<span>[DOC]</span>
+										<span class="underline decoration-neutral-800 underline-offset-4 group-hover:decoration-[#2E5CFF]">
+											{doc.name}
+										</span>
+									</a>
+								</li>
+							))}
+							{links.map((link: any) => (
+								<li>
+									<a
+										href={link.url}
+										target="_blank"
+										class="group flex items-center gap-2 text-neutral-400 hover:text-[#2E5CFF]"
+									>
+										<span>[LINK]</span>
+										<span class="underline decoration-neutral-800 underline-offset-4 group-hover:decoration-[#2E5CFF]">
+											{link.name}
+										</span>
+									</a>
+								</li>
+							))}
+						</ul>
+					</div>
+				)
+			}
+		</aside>
+
+		<!-- MAIN INTELLIGENCE (Content) -->
+		<article class="order-1 md:order-2 md:col-span-8 lg:col-span-9">
+			{/* Hero Image (Industrial Frame) */}
+			<div class="mb-12 border-2 border-dashed border-white/10 bg-neutral-900 p-2">
+				<img
+					src={data.heroImage}
+					alt={data.title}
+					class="w-full grayscale transition-all duration-500 hover:grayscale-0"
+				/>
+			</div>
+
+			<div
+				class="prose prose-invert prose-lg prose-headings:font-heading prose-headings:uppercase prose-headings:tracking-tight prose-headings:text-white prose-p:text-neutral-300 prose-a:text-[#2E5CFF] prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-code:bg-white/10 prose-code:text-[#2E5CFF] prose-code:before:content-none prose-code:after:content-none max-w-none font-sans"
+			>
+				<Content components={{ YouTube, ModelViewer }} />
+			</div>
+
+			{
+				gallery.length > 0 && (
+					<div class="mt-24 border-t border-dashed border-white/20 pt-12">
+						<h3 class="mb-8 font-mono text-xl font-bold text-white uppercase">
+							/// Visual_Database
+						</h3>
+						<ProjectGallery client:visible images={gallery} />
+					</div>
+				)
+			}
+		</article>
+	</div>
+</Layout>
+
+<script>
+	// Scroll Progress Logic
+	window.addEventListener("scroll", () => {
+		const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+		const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+		const scrolled = (winScroll / height) * 100;
+		const bar = document.getElementById("reading-progress");
+		if (bar) bar.style.transform = `scaleX(${scrolled / 100})`;
+	});
+</script>

@@ -1,0 +1,70 @@
+---
+interface Props {
+  steps: { id: string; label: string }[];
+}
+
+const { steps } = Astro.props;
+---
+
+<nav class="fixed right-6 top-1/2 z-50 -translate-y-1/2 hidden md:block group">
+  <div class="flex flex-col gap-4">
+    {steps.map((step) => (
+      <a
+        href={`#${step.id}`}
+        class="nav-dot relative flex items-center justify-end"
+        data-target={step.id}
+        aria-label={`Scroll to ${step.label}`}
+      >
+        <!-- Label (Hover Reveal) -->
+        <span class="mr-4 -translate-x-2 text-xs font-mono text-white opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 whitespace-nowrap bg-black/50 px-2 py-1 rounded">
+          {step.label}
+        </span>
+        
+        <!-- Dot -->
+        <div class="h-2 w-2 rounded-full border border-white/50 bg-transparent transition-all duration-300 hover:scale-150 hover:bg-white hover:border-white nav-dot-circle shadow-[0_0_10px_rgba(0,0,0,0.5)]"></div>
+      </a>
+    ))}
+  </div>
+</nav>
+
+<style>
+  /* Active State Logic */
+  .active .nav-dot-circle {
+    background-color: #2E5CFF;
+    border-color: #2E5CFF;
+    transform: scale(1.5);
+    box-shadow: 0 0 15px rgba(46, 92, 255, 0.5);
+  }
+  
+  .active span {
+      color: #2E5CFF;
+      opacity: 1 !important;
+      transform: translateX(0) !important;
+  }
+</style>
+
+<script>
+    // HUD ACTIVE STATE SYNC
+    // This listens to the same 'scrolly-active' dataset that we might want to expose on the body or manage via observer
+    // For V1, we simply re-use an IntersectionObserver to toggle the 'active' class on matching links
+    
+    const dots = document.querySelectorAll('.nav-dot');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                 const id = entry.target.getAttribute('data-step');
+                 dots.forEach(dot => {
+                     if (dot.getAttribute('data-target') === id) {
+                         dot.classList.add('active');
+                     } else {
+                         dot.classList.remove('active');
+                     }
+                 });
+            }
+        });
+    }, { threshold: 0.5 });
+
+    // Observe the Trigger Zones (which have data-step)
+    document.querySelectorAll('[data-step]').forEach(el => observer.observe(el));
+</script>

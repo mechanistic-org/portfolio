@@ -1,0 +1,339 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import StickyStage from "@components/Scrolly/StickyStage.astro";
+import ScrollTrigger from "@components/Scrolly/ScrollTrigger.astro";
+import NarrativeItem from "@components/Scrolly/NarrativeItem.astro";
+import ScrollyHud from "@components/Scrolly/ScrollyHud.astro";
+import ProjectInfoTable from "@components/Projects/ProjectInfoTable.astro";
+
+const { entry, nextProject, prevProject } = Astro.props;
+const { cyberspace, title, description } = entry.data;
+// Backwards compatibility/Renaming
+const scrolly = cyberspace;
+
+const stickies = scrolly?.stickies || [];
+const narratives = scrolly?.narrative || [];
+
+// GENERATED CONTENT FOR SWARM (Should also be data driven eventually, but hardcoded for V4.2 proof)
+const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
+	id: i,
+	color: ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF"][
+		Math.floor(Math.random() * 6)
+	],
+	scale: 0.5 + Math.random(),
+}));
+---
+
+<BaseLayout title={title} description={description}>
+	<!-- FIXED INTRO -->
+	<div
+		id="intro-layer"
+		class="pointer-events-none fixed inset-0 z-50 flex flex-col items-center justify-center bg-black transition-opacity duration-300"
+	>
+		<h1 class="font-heading text-9xl font-bold tracking-tighter text-white mix-blend-difference">
+			{title.toUpperCase()}
+		</h1>
+		<div class="mt-4 font-mono text-[#2E5CFF]">HYPERSPACE_ENGINE_V4</div>
+	</div>
+
+	<!-- HUD -->
+	<ScrollyHud steps={stickies.map((s: any) => ({ id: s.id, label: s.label }))} />
+
+	<!-- TOP HUD (Project Info) - Initially Hidden/Offscreen -->
+	<div
+		id="top-hud"
+		class="fixed top-0 left-0 z-[9999] w-full transition-transform duration-500 ease-out"
+		style="transform: translateY(-100%);"
+	>
+		<ProjectInfoTable data={entry.data} nextProject={nextProject} prevProject={prevProject} />
+	</div>
+
+	<!-- MAIN ENGINE -->
+	<main
+		class="relative z-10 snap-y snap-proximity bg-neutral-900"
+		style={`height: ${stickies.length * 100 + 100}vh;`}
+	>
+		<!-- STICKY DECK -->
+		<div class="sticky top-0 h-screen w-full overflow-hidden">
+			{
+				stickies.map((stage: any, index: number) => (
+					<StickyStage id={stage.id} active={index === 0}>
+						{/* TYPE: SWARM */}
+						{stage.type === "swarm" && (
+							<div
+								id="swarm-grid"
+								class="perspective-1000 grid w-full max-w-4xl grid-cols-10 gap-2 p-8"
+							>
+								{swarmlings.map((s) => (
+									<div
+										class="swarmling glass-panel aspect-square rounded-full transition-transform duration-75 ease-out"
+										data-scale={s.scale}
+										style={`background-color: ${s.color}; opacity: 0.5; transform: scale(${s.scale}); box-shadow: 0 0 10px ${s.color}40;`}
+									/>
+								))}
+							</div>
+						)}
+
+						{/* TYPE: MODEL */}
+						{stage.type === "model" && (
+							<model-viewer
+								src={stage.data?.src}
+								camera-controls
+								disable-zoom
+								auto-rotate
+								rotation-per-second="30deg"
+								shadow-intensity="1"
+								exposure="1"
+								class="h-full w-full"
+								style="background: radial-gradient(circle at center, #222 0%, #000 100%);"
+							>
+								<div
+									slot="progress-bar"
+									class="pointer-events-none absolute top-0 left-0 h-1 w-full bg-neutral-800/50"
+									id={`loader-${stage.id}`}
+								>
+									<div
+										class="h-full bg-[#2E5CFF] transition-all duration-100 ease-out"
+										style="width: 0%"
+										data-progress-bar
+									/>
+								</div>
+							</model-viewer>
+						)}
+
+						{/* TYPE: MEDIA */}
+						{stage.type === "media" && (
+							<div class="relative h-full w-full">
+								{stage.data?.src && (
+									<img
+										src={stage.data.src}
+										alt={stage.title}
+										class="h-full w-full object-cover opacity-80"
+									/>
+								)}
+								<div class="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent" />
+							</div>
+						)}
+					</StickyStage>
+				))
+			}
+		</div>
+
+		<!-- TRIGGERS -->
+		<div class="pointer-events-none absolute inset-0 flex flex-col">
+			<!-- Intro Spacer -->
+			<div class="flex h-screen snap-start items-center justify-center">
+				<div
+					id="start-engine-btn"
+					class="border border-white/10 bg-black/50 p-4 font-mono text-sm text-white transition-all duration-300"
+				>
+					START_ENGINE
+				</div>
+			</div>
+
+			{
+				stickies.map((stage: any) => (
+					<ScrollTrigger step={stage.id} align={stage.align}>
+						<h2 class="mb-4 text-3xl font-bold text-white">{stage.title}</h2>
+						<p class="text-neutral-400">{stage.text}</p>
+					</ScrollTrigger>
+				))
+			}
+		</div>
+	</main>
+
+	<!-- NARRATIVE SECTION -->
+	{
+		narratives.length > 0 && (
+			<section class="relative z-10 bg-neutral-900 pt-12 pb-32">
+				<div class="site-container max-w-4xl space-y-24">
+					{narratives.map((n: any) => {
+						// Find the matching visual from the sticky stages
+						const relatedStage = stickies.find((s: any) => s.id === n.step);
+						const imgSrc = relatedStage?.data?.src;
+						const posterSrc = relatedStage?.data?.poster; // NEW: Support poster
+						const isModel = relatedStage?.type === "model";
+
+						return (
+							<NarrativeItem
+								step={n.step}
+								title={n.title}
+								subtitle={n.subtitle}
+								reverse={n.reverse}
+							>
+								<div
+									slot="visual"
+									class="group relative h-full w-full overflow-hidden rounded-xl bg-neutral-800"
+								>
+									{/* CASE 1: Standard Image */}
+									{imgSrc && !isModel && (
+										<img
+											src={imgSrc}
+											alt={n.title}
+											class="h-full w-full object-cover opacity-80 transition-opacity duration-500 hover:opacity-100"
+										/>
+									)}
+
+									{/* CASE 2: Model (Use Poster or Icon) */}
+									{isModel && (
+										<div class="flex h-full w-full items-center justify-center bg-black">
+											{posterSrc ? (
+												<img src={posterSrc} class="h-full w-full object-cover opacity-80" />
+											) : (
+												<div class="text-center">
+													<div class="mb-4 text-6xl">🧊</div>
+													<div class="font-mono text-xs text-neutral-500">[INTERACTIVE_MODEL]</div>
+												</div>
+											)}
+										</div>
+									)}
+
+									{/* CASE 3: Fallback */}
+									{!imgSrc && !isModel && !posterSrc && (
+										<div class="p-8 font-mono text-4xl font-bold text-neutral-700">{n.step}</div>
+									)}
+								</div>
+								<p>{n.body}</p>
+							</NarrativeItem>
+						);
+					})}
+				</div>
+			</section>
+		)
+	}
+
+	<!-- Scroll Cushion -->
+	<div class="h-[25vh] w-full snap-end bg-neutral-900"></div>
+</BaseLayout>
+
+<script>
+	// LOADER LOGIC
+	// improved to handle multiple viewers potentially
+	customElements.whenDefined("model-viewer").then(() => {
+		const viewers = document.querySelectorAll("model-viewer");
+		viewers.forEach((viewer) => {
+			viewer.addEventListener("progress", (e) => {
+				const p = (e as any).detail.totalProgress;
+				const bar = viewer.querySelector("[data-progress-bar]");
+				const loader = viewer.querySelector('[slot="progress-bar"]');
+
+				if (bar) {
+					(bar as HTMLElement).style.width = `${p * 100}%`;
+				}
+
+				if (p === 1) {
+					if (loader)
+						setTimeout(() => {
+							(loader as HTMLElement).style.opacity = "0";
+						}, 300);
+				}
+			});
+		});
+	});
+
+	// ENGINE SCRIPT (Physics & Logic)
+
+	// 1. Intro Fade & HUD REVEAL
+	const intro = document.getElementById("intro-layer");
+	const topHud = document.getElementById("top-hud");
+	const startBtn = document.getElementById("start-engine-btn");
+
+	window.addEventListener("scroll", () => {
+		const scrollY = window.scrollY;
+
+		if (intro) {
+			const opacity = Math.max(0, 1 - scrollY / 500);
+			intro.style.opacity = opacity.toString();
+		}
+
+		// HUD REVEAL LOGIC
+		// Button moves up and fades out
+		// HUD moves down and fades in
+		if (startBtn && topHud) {
+			if (scrollY > 100) {
+				// Expanded State
+				topHud.style.transform = "translateY(0%)";
+				startBtn.style.opacity = "0";
+				startBtn.style.transform = "translateY(-50px) scale(0.9)";
+				console.log("HUD: Showing");
+			} else {
+				// Default State
+				topHud.style.transform = "translateY(-100%)";
+				startBtn.style.opacity = "1";
+				startBtn.style.transform = "translateY(0) scale(1)";
+				console.log("HUD: Hiding");
+			}
+		}
+	});
+
+	// 2. Stage Switcher
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					const targetId = entry.target.getAttribute("data-step");
+					const targetStage = document.getElementById(targetId || "");
+
+					if (targetId && targetStage) {
+						// Hide all stages
+						document.querySelectorAll("[data-scrolly-layer]").forEach((el) => {
+							(el as HTMLElement).style.opacity = "0";
+							(el as HTMLElement).style.pointerEvents = "none";
+						});
+
+						// Show target
+						targetStage.style.opacity = "1";
+
+						if (targetStage.querySelector("model-viewer")) {
+							targetStage.style.pointerEvents = "auto";
+						}
+					}
+				}
+			});
+		},
+		{ threshold: 0.5 },
+	);
+
+	document.querySelectorAll("[data-step]").forEach((el) => observer.observe(el));
+
+	// 3. SWARM PHYSICS (Kept Generic)
+	const swarmGrid = document.getElementById("swarm-grid");
+	const swarmlings = document.querySelectorAll(".swarmling");
+
+	if (swarmGrid && swarmlings.length > 0) {
+		window.addEventListener("mousemove", (e) => {
+			// Optimization: Only run if any swarm stage is active?
+			// For V4 we just check if the element exists in DOM
+
+			const mx = e.clientX;
+			const my = e.clientY;
+			const cx = window.innerWidth / 2;
+			const cy = window.innerHeight / 2;
+
+			const dx = (mx - cx) * 0.05;
+			const dy = (my - cy) * 0.05;
+			swarmGrid.style.transform = `translate(${dx}px, ${dy}px) rotateY(${dx * 0.1}deg) rotateX(${-dy * 0.1}deg)`;
+
+			swarmlings.forEach((s) => {
+				const box = s.getBoundingClientRect();
+				const sx = box.left + box.width / 2;
+				const sy = box.top + box.height / 2;
+				const dist = Math.hypot(mx - sx, my - sy);
+				const limit = 200;
+
+				if (dist < limit) {
+					const force = (limit - dist) / limit;
+					const ang = Math.atan2(my - sy, mx - sx);
+					const moveX = Math.cos(ang) * -30 * force;
+					const moveY = Math.sin(ang) * -30 * force;
+					const scale = (s as HTMLElement).dataset.scale || "1";
+					(s as HTMLElement).style.transform =
+						`translate(${moveX}px, ${moveY}px) scale(${parseFloat(scale) * 1.5})`;
+				} else {
+					const scale = (s as HTMLElement).dataset.scale || "1";
+					(s as HTMLElement).style.transform = `translate(0, 0) scale(${scale})`;
+				}
+			});
+		});
+	}
+</script>

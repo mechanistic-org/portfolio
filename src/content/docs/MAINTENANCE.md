@@ -455,6 +455,16 @@ See `docs/IMAGE_WORKFLOW.md` for the full SOP.
 *   **Cause:** Python 3.14 compatibility issue with `pillow-avif-plugin`.
 *   **Fix:** Use `pillow-heif` instead. Run `pip install pillow-heif`.
 
+### Missing Theme Textures (Redacted/Command)
+*   **Symptom:** Redacted themes look plain; missing scanlines, noise, or paper textures (404 errors).
+*   **Cause:** The procedural textures for `r3` assets might be missing from the build.
+*   **Fix:**
+    1.  Check `public/assets/r3/common/`.
+    2.  If missing, use the **AI Image Generator** to recreate them:
+        *   `scanline.png`: "Seamless black scanline pattern, 4px height."
+        *   `noise.png`: "Monochrome digital static noise."
+        *   `paper-texture.png`: "Seamless beige manila paper texture."
+
 ### Missing Texture / "Clean" Look
 *   **Symptom:** The site looks too clean; the "film grain" is missing.
 *   **Cause:** The `.noise-overlay` might be hidden or the Data URI is corrupt.

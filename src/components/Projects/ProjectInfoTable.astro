@@ -1,0 +1,120 @@
+---
+interface Props {
+	data: any;
+	nextProject?: any;
+	prevProject?: any;
+}
+
+const { data, nextProject, prevProject } = Astro.props;
+
+// Format dates
+const dateVal = data.date || new Date();
+const startDate = new Date(dateVal);
+const dateDisplay = startDate.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+const clients = data.client || [];
+---
+
+<div
+	class="w-full border-b border-white/10 bg-black/80 backdrop-blur-md transition-all duration-500"
+>
+	<div class="site-container mx-auto max-w-7xl px-4 py-4 md:px-8">
+		<div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+			{/* LEFT: Project Identity */}
+			<div class="flex items-center gap-4">
+				<div class="h-2 w-2 animate-pulse rounded-full bg-blue-500"></div>
+				<h1 class="font-mono text-lg font-bold tracking-wider text-white uppercase">
+					{data.title}
+				</h1>
+			</div>
+
+			{/* CENTER: Navigation Controls */}
+			<div class="hidden items-center gap-2 md:flex">
+				{
+					prevProject ? (
+						<a
+							href={`/projects/${prevProject.id}`}
+							class="flex h-8 w-8 items-center justify-center rounded border border-white/10 bg-white/5 text-neutral-400 transition-colors hover:border-[#2E5CFF]/50 hover:text-white"
+							title="Previous"
+						>
+							←
+						</a>
+					) : (
+						<span class="flex h-8 w-8 cursor-not-allowed items-center justify-center rounded border border-white/5 text-neutral-800">
+							←
+						</span>
+					)
+				}
+
+				<a
+					href="/projects"
+					class="flex h-8 w-8 items-center justify-center rounded border border-white/10 bg-white/5 text-neutral-400 transition-colors hover:border-emerald-500/50 hover:text-white"
+					title="Index"
+				>
+					▦
+				</a>
+
+				{
+					nextProject ? (
+						<a
+							href={`/projects/${nextProject.id}`}
+							class="flex h-8 w-8 items-center justify-center rounded border border-white/10 bg-white/5 text-neutral-400 transition-colors hover:border-[#2E5CFF]/50 hover:text-white"
+							title="Next"
+						>
+							→
+						</a>
+					) : (
+						<span class="flex h-8 w-8 cursor-not-allowed items-center justify-center rounded border border-white/5 text-neutral-800">
+							→
+						</span>
+					)
+				}
+
+				<div class="mx-2 h-8 w-px bg-white/10"></div>
+
+				<a
+					href={`/raw/${data.id || "v4-test"}`}
+					class="flex h-8 items-center justify-center rounded border border-white/10 bg-black px-3 font-mono text-[10px] text-[#2E5CFF] transition-colors hover:bg-[#2E5CFF]/10"
+				>
+					RAW SOURCE
+				</a>
+			</div>
+
+			{/* RIGHT: Data Grid */}
+			<div class="grid grid-cols-2 gap-8 font-mono text-xs md:flex md:gap-12">
+				{/* ROLE */}
+				<div>
+					<div class="mb-1 tracking-wider text-neutral-500 uppercase">Role</div>
+					<div class="font-bold text-white">{data.employer}</div>
+				</div>
+
+				{/* CLIENT */}
+				{
+					clients.length > 0 && (
+						<div>
+							<div class="mb-1 tracking-wider text-neutral-500 uppercase">Client</div>
+							<div class="font-bold text-white">{clients[0]}</div>
+						</div>
+					)
+				}
+
+				{/* DURATION */}
+				<div>
+					<div class="mb-1 tracking-wider text-neutral-500 uppercase">Duration</div>
+					<div class="font-bold text-white">{data.duration}</div>
+				</div>
+
+				{/* TEAM (Derived or Fixed for now) */}
+				<div>
+					<div class="mb-1 tracking-wider text-neutral-500 uppercase">Team</div>
+					<div class="font-bold text-white">{data.team || "Solo"}</div>
+				</div>
+
+				{/* STATUS */}
+				<div>
+					<div class="mb-1 tracking-wider text-neutral-500 uppercase">Status</div>
+					<div class="font-bold text-[#2E5CFF]">{data.statusLabel}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

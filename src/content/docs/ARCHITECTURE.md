@@ -23,6 +23,26 @@ To respect Cloudflare Pages limits (20k files, 25MB script size), we use a Hybri
     *   **Route:** `/r2/*` -> Maps to `projects` R2 bucket.
     *   **Caching:** Uses `Cache-Control: no-cache` to ensure instant updates during dev (relies on Cloudflare CDN for edge caching).
 
+### 5. The Theme Engine (Hybrid Fleet)
+*   **Concept:** A flexible "Theme Registry" that decouples content from presentation, allowing different project archetypes to coexist.
+*   **Router:** `src/pages/projects/[...slug].astro`
+*   **Logic:**
+    1.  Checks frontmatter `theme` key (e.g., `theme: "command"`).
+    2.  Falls back to legacy flags (e.g., `cyberspace: true` -> Hyperspace).
+    3.  Defaults to `DataSheet` (Tier 3).
+*   **Tiers:**
+    *   **Tier 1 (Hyperspace):** Immersive 3D Scrollytelling.
+    *   **Tier 2 (Command):** High-density Dark Mode with "Ouroboros" HUD.
+    *   **Tier 3 (DataSheet):** Clean, print-friendly default.
+    *   **Tier 4 (Redacted):** "Eyes Only" variants (Terminal, Dossier, Omega).
+
+### 6. R3 Asset Namespace (`/assets/r3/`)
+*   **Concept:** A clean-slate asset registry for V4 Theme Engine components.
+*   **Structure:**
+    *   `/r3/common/`: Shared textures (Grids, Noise, Scanlines).
+    *   `/r3/[slug]/`: Project-specific assets.
+*   **Migration:** Replaces the legacy `/assets/r2/` dump pattern.
+
 ### Deck Layout (`DeckLayout.astro`)
 *   **Purpose:** Cinematic, full-screen presentation mode for Pitch Decks and "Scrollytelling" narratives.
 *   **Architecture:**
@@ -132,6 +152,16 @@ Assets are managed physically, not logically.
 *   **Skeleton (Truth):** `data_source/Main.csv` contains the definitive Dates, Titles, and Employers (parsed via D3).
 *   **Flesh (Narrative):** `data_source/manual_content/RESUME_CORPUS_timeline.md` contains rich, LLM-synthesized descriptions and "Lost Knowledge" extracted from legacy files.
 *   **Presentation:** `src/pages/history.astro` merges these data streams.
+
+## Asset Management Strategy
+**Principle:** Keep the Web Repo (`quantum`) lightweight.
+- **Heavy Assets (3D Models, R2 Images, Video):** Do NOT commit. Use Symlinks to `quantum-assets` for local dev.
+  - `public/assets/r2` <==> `quantum-assets/R2_STAGING`
+  - `public/assets/models` <==> `quantum-assets/models`
+- **Site Assets (Icons, UI Graphics, Small placeholders):** Commit directly to `quantum/public`.
+
+**Workflow:**
+- To add a new 3D model: Put it in `quantum-assets/models`. It automatically appears in `localhost/assets/models`.
 
 ### UI Elements
 *   **Visualization Engine (D3.js Refactor):**

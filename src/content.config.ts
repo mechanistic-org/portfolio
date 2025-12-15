@@ -94,6 +94,12 @@ const projectsCollection = defineCollection({
         additionalSkills: z.array(z.string()).default([]),
         skillGraph: z.string().optional(),
         partGraph: z.string().optional(),
+
+        // V4 Scrolly Engine
+        cyberspace: z.any().optional(),
+
+        // Theme Selector (Core Architecture)
+        theme: z.string().optional(),
     }),
 });
 
