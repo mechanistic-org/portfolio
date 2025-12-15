@@ -28,3 +28,4 @@ pnpm-debug.log*
 R2_STAGING/
 public/assets/r2/
 data_source/mined_assets/
+r2_backup_excluded/
