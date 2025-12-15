@@ -38,6 +38,9 @@ sidebar:
     *   **Description:** A "Plug-and-Play" authoring system that allows complex UI patterns (Zigzag Grids, 3D Viewers, Process Strips) to be inserted via shortcodes (`qq-*`). This transforms the IDE into a layout engine, ensuring every project page adheres to the strict "Visual Taxonomy" without manual coding.
 
 ## 📜 Change Log (Recent)
+*   **[Infrastructure] R2 Pruning:** Upgraded `sync_r2.py` with `--prune` (Mirror Mode) to support efficient asset replacement and cleanup of orphaned files.
+*   **[Maintenance] Documentation Consolidation:** Merged duplicate `IMAGE_WORKFLOW.md` SOPs into a strict Single Source of Truth.
+*   **[Security] Credential Rotation:** Hardened `sync_r2.py` with explicit `.env` path loading and `region_name='auto'` Boto3 patching to resolve signature verification failures.
 *   **[Architecture] Theme Engine:** Refactored project routing to support multiple distinct layouts (`Hyperspace`, `Command`, `DataSheet`) via a scalable Registry pattern.
 *   **[Feature] Redacted Theme:** Implemented Tier 4 "NDA" archetype with 3 aesthetic variants:
     *   **Terminal:** Green phosphor, ASCII art, CRT effects.

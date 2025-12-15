@@ -75,6 +75,17 @@ To manage large assets (images, 3D models, PDFs), we use Cloudflare R2.
 *   **Destination:** `https://assets.eriknorris.com/{slug}/` (Remote)
 *   **Command:** `python ingest_data.py` (Auto-runs sync)
 
+### R2 Pruning (Replacements)
+By default, the sync script is **Additive** (Uploads Only). If you rename or delete files locally and want R2 to match (Mirroring):
+
+```bash
+python scripts/sync_r2.py --prune
+```
+
+*   **Flags:**
+    *   `--prune`: Deletes remote files that do not exist locally.
+    *   `--dry-run`: Simulates the operation (Safe check).
+
 **Prerequisites:**
 1.  Ensure you are logged in: `npx wrangler login`
 2.  Ensure `scripts/sync_r2.py` has the correct `BUCKET_NAME`.
@@ -704,3 +715,12 @@ Importing code from other themes often introduces inconsistent casing (e.g., `co
 *   **Fix:** Ensure your sync command includes the `--remote` flag. (Note: `scripts/sync_r2.py` has been patched to handle this automatically).
 *   **Cause 2 (Edge Cache):** You previously served the file with `Cache-Control: immutable`. Use `curl -I [url]` to check headers.
 *   **Fix:** Change the filename (e.g., `-v2`) OR change the Worker headers to `no-cache` and purge the zone.
+
+### R2 SignatureDoesNotMatch (Credential Rotation)
+*   **Symptom:** `sync_r2.py` fails with: `The request signature we calculated does not match the signature you provided.`
+*   **Cause:** The Access Key or Secret Key in `.env` is invalid or expired. Cloudflare R2 tokens expire silently if created with a default TTL.
+*   **Fix:**
+    1.  Generate a NEW Token in Cloudflare (Select "Forever" or "End Date: 2099").
+    2.  Use "Account API Token" (surer than User Token).
+    3.  Update `R2_ACCESS_KEY_ID` and `R2_SECRET_ACCESS_KEY` in `.env`.
+    4.  **Important:** Boto3 requires `region_name='auto'` to authorize correctly (already patched in `scripts/sync_r2.py`).

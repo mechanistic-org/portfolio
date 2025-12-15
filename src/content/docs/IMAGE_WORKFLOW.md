@@ -1,6 +1,5 @@
 ﻿---
-title: "Quantum Image Workflow (SOP)
-"
+title: "Quantum Image Workflow (SOP)"
 slug: "image_workflow"
 sidebar:
   group: "Workflows"
@@ -10,11 +9,6 @@ sidebar:
 
 **Objective:** Standardize all portfolio assets to "Premium" quality using a Hybrid (Lightroom + Python) workflow.
 
-## Core Philosophy
-*   **Physical Asset Law:** Assets are files, not database entries.
-*   **Zero-Runtime:** All optimization happens *before* deploy. No on-the-fly processing.
-*   **Hybrid Workflow:** Human Art Direction (Lightroom) + Machine Precision (Python).
-
 ## 1. The Workspace
 We use a dedicated local workspace to keep the Git repo clean.
 
@@ -22,80 +16,12 @@ We use a dedicated local workspace to keep the Git repo clean.
 *   **Structure:**
     ```text
     /Quantum_Workspace/
-    â”œâ”€â”€ 02_MASTER/          # [LIGHTROOM EXPORT] High-Res TIFFs (The Source of Truth)
-    â”‚   â””â”€â”€ {project_slug}/
-    â”‚       â”œâ”€â”€ {slug}-hero-01.tif
-    â”‚       â””â”€â”€ {slug}-detail-01.tif
-    â””â”€â”€ 03_STAGING/         # [GENERATED] Maps to: ../quantum-assets/R2_STAGING/
-        â””â”€â”€ {project_slug}/
-            â”œâ”€â”€ hero-01-xl.avif
-            â”œâ”€â”€ hero-01-xl.webp
-            â””â”€â”€ ...
-    ```
-
-## 2. Naming Convention (Strict)
-All files must follow this regex-enforceable schema:
-
-`{project_slug}-{view_type}-{sequence}.{ext}`
-
-*   **`project_slug`**: Matches the folder name (e.g., `xbox`, `kavo-dental`).
-*   **`view_type`**:
-    *   **Product:** `hero`, `detail`, `context`, `iso`, `ortho`
-    *   **Engineering:** `prototype`, `assembly`, `teardown`, `test`
-    *   **Abstract:** `diagram`, `schematic`, `exploded`, `cutaway`, `render`
-    *   **Digital:** `ui`, `wireframe`, `arch`
-*   **`sequence`**: 2-digit number (01, 02, ...).
-
-**Example:** `xbox-detail-03.tif`
-
----
-
-## 3. The Workflow
-
-### Step 1: Ingest (The Darkroom)
-1.  Create a folder in `01_INGEST` named after the project slug (e.g., `01_INGEST/xbox`).
-2.  Dump all raw source material (CR2, JPG, PNG) into this folder.
-3.  **Lightroom:** Drag the `01_INGEST` folder into Lightroom Classic to import.
-
-### Step 2: Art Direction (Human)
-1.  **Cull:** Rate images. Select the best.
-2.  **Develop:** Color grade, crop, and correct perspective.
-3.  **Crop:** Ensure the aspect ratio is intentional.
-
-### Step 3: Export Master (The Hand-off)
-Use the **"Quantum Master"** Export Preset in Lightroom:
-
-*   **Export To:** Hard Drive (`~/Quantum_Workspace/02_MASTER/{slug}`)
-*   **File Naming:** Custom Name - Sequence -> `{slug}-{view_type}-` + Sequence #
-*   **File Settings:**
-    *   **Image Format:** TIFF
-    *   **Compression:** ZIP
-    *   **Bit Depth:** 16 bits/component
-    *   **Color Space:** sRGB (CRITICAL for web consistency)
-*   **Image Sizing:**
-    *   **Resize to Fit:** Long Edge
-    *   **Pixels:** 4000 pixels
-    *   **Resolution:** 72 pixels per inch
-*   **Output Sharpening:** Screen / Standard
-*   **Metadata:** All Metadata
-
-# Quantum Image Workflow (SOP)
-
-**Objective:** Standardize all portfolio assets to "Premium" quality using a Hybrid (Lightroom + Python) workflow.
-
-## 1. The Workspace
-We use a dedicated local workspace to keep the Git repo clean.
-
-*   **Location:** `~/Quantum_Workspace/` (User Home Directory)
-*   **Structure:**
-    ```text
-    /Quantum_Workspace/
-    â”œâ”€â”€ 01_INGEST/          # [DROP ZONE] Raw Camera Files (CR2, NEF) & Web Scraps
-    â”‚   â””â”€â”€ {project_slug}/
-    â”œâ”€â”€ 02_MASTER/          # [LIGHTROOM EXPORT] High-Res TIFFs (The Source of Truth)
-    â”‚   â””â”€â”€ {project_slug}/
-    â”‚       â”œâ”€â”€ {slug}-hero-01.tif
-    â”‚       â””â”€â”€ {slug}-detail-01.tif
+    ├── 01_INGEST/          # [DROP ZONE] Raw Camera Files (CR2, NEF) & Web Scraps
+    │   └── {project_slug}/
+    ├── 02_MASTER/          # [LIGHTROOM EXPORT] High-Res TIFFs (The Source of Truth)
+    │   └── {project_slug}/
+    │       ├── {slug}-hero-01.tif
+    │       └── {slug}-detail-01.tif
     ```
 
 ## 2. Naming Convention (Strict)
@@ -184,7 +110,7 @@ python ingest_data.py
 
 ---
 
-## 5. Technical Specifications
+## 4. Technical Specifications
 The Python script (`scripts/process_images.py`) implements the following standards:
 
 *   **Formats:**
@@ -201,7 +127,7 @@ The Python script (`scripts/process_images.py`) implements the following standar
 
 ---
 
-## 4. Lightroom Power User Tips
+## 5. Lightroom Power User Tips
 
 ### A. The "Sequence" Workflow (Animations)
 Don't export GIFs! Use Lightroom to export high-quality frames.
@@ -256,6 +182,3 @@ For product and hardware shots, vertical lines must be vertical.
 If you shoot in variable industrial lighting (dark server rooms vs. bright labs):
 *   Create a preset that applies different Noise Reduction settings based on ISO.
 *   *How:* Select two images (Low ISO, High ISO), edit them, select both, `Create Preset`, and check "ISO Adaptive".
-
-
-

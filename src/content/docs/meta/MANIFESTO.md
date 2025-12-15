@@ -2,8 +2,8 @@
 title: "Project Manifesto"
 slug: "manifesto"
 sidebar:
-  group: "System Manual"
-  order: 4
+  group: "Meta-Portfolio"
+  order: 2
 ---
 # Project Manifesto
 

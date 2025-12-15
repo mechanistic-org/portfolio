@@ -111,6 +111,12 @@ To create a "cinematic" feel without heavy libraries (like GSAP), we implemented
         *   **Note:** Uses `CLIENT_DOMAIN_MAP` to populate the `domain` field, enabling Clearbit API logo fetching.
     *   **Scaffolding:** The `--scaffold` flag triggers a generation mode that creates missing markdown templates in `data_source/manual_content/`, ensuring 100% content coverage.
 
+### Sibling Repo Pattern
+Assets are stored in a parallel repository (`quantum-assets`) to keep the main codebase lightweight (`<50MB`).
+*   **Code:** `d:\GitHub\quantum`
+*   **Assets:** `d:\GitHub\quantum-assets`
+*   **Link:** The ingestion and sync scripts automatically traverse up one level (`../quantum-assets`) to locate `R2_STAGING`.
+
 ### R2 Asset Sync
 Assets are managed physically, not logically.
 1.  **Stage:** Place files in `R2_STAGING/{slug}/` (e.g., `hero.png`, `model.glb`).
