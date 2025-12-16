@@ -25,6 +25,7 @@ interface Props {
 	authorsData?: CollectionEntry<"authors">[];
 	postFrontmatter?: CollectionEntry<"blog">["data"];
 	noindex?: boolean;
+	hideNav?: boolean;
 }
 
 const {
@@ -35,48 +36,16 @@ const {
 	authorsData,
 	postFrontmatter,
 	noindex = false,
+	hideNav = false,
 } = Astro.props as Props;
 ---
 
 <!doctype html>
 <html lang="en" class="dark" transition:animate="fade">
-	<head>
-		<BaseHead
-			type={type}
-			title={title}
-			description={description}
-			image={image ? image : undefined}
-			authors={authorsData ? authorsData : undefined}
-			postFrontmatter={postFrontmatter ? postFrontmatter : undefined}
-			noindex={noindex}
-		/>
-		<ClientRouter />
-		<style>
-			/* Global styles can go here if needed */
-		</style>
-		<script is:inline>
-			// 1. The Guard: Check theme preference immediately
-			const theme = (() => {
-				if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-					return localStorage.getItem("theme");
-				}
-				if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-					return "dark";
-				}
-				return "light";
-			})();
-
-			if (theme === "light") {
-				document.documentElement.classList.remove("dark");
-			} else {
-				document.documentElement.classList.add("dark");
-			}
-			window.localStorage.setItem("theme", theme);
-		</script>
-	</head>
+	<!-- ... head ... -->
 	<body
 		class:list={[
-			"overflow-y-scroll text-neutral-900 dark:text-neutral-200",
+			"text-neutral-900 dark:text-neutral-200",
 			{
 				"use-animations": siteData.useAnimations === true ? true : false,
 			},
@@ -86,7 +55,7 @@ const {
 		<div class="noise-overlay"></div>
 		<div class="relative z-10 flex min-h-lvh flex-col justify-between">
 			<div>
-				<Nav />
+				{!hideNav && <Nav />}
 				<main>
 					<slot />
 				</main>

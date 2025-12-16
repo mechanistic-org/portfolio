@@ -36,7 +36,7 @@ export default function WiggleLogo3D() {
                 <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
 
                 <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-                    <Model url="/assets/models/EN_Logo_ForgedCarbon.glb" />
+                    <Model url="/assets/models/en_logo.glb" />
                 </Float>
 
                 <Environment preset="city" />

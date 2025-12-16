@@ -44,7 +44,7 @@ const pageTitle = "System Topology | Site Map";
 								<div class="mb-4 flex items-center gap-4">
 									<div class="group-hover:bg-primary-500 h-3 w-3 rounded-full bg-neutral-700 transition-colors" />
 									<h2 class="text-xl font-bold tracking-wider text-white uppercase">{item.text}</h2>
-									{item.href && (
+									{"href" in item && (
 										<span class="rounded bg-neutral-950 px-2 py-1 font-mono text-xs text-neutral-500">
 											{item.href}
 										</span>
@@ -82,7 +82,7 @@ const pageTitle = "System Topology | Site Map";
 										</div>
 										{sortedProjects.map((p) => (
 											<a
-												href={`/projects/${p.slug}`}
+												href={`/projects/${p.id}`}
 												class="hover:text-primary-400 block truncate font-mono text-xs text-neutral-400"
 											>
 												{p.data.title}

@@ -1,0 +1,113 @@
+---
+const { currentRealm = "identity" } = Astro.props;
+import { Icon } from "astro-icon/components";
+---
+
+<nav
+	class="fixed bottom-0 left-0 z-50 flex w-full items-center justify-between border-t border-white/10 bg-black/90 px-6 py-4 backdrop-blur-md md:top-0 md:bottom-auto md:border-t-0 md:bg-transparent"
+>
+	<!-- Left: Branding (EN Logo) -->
+	<div class="flex items-center gap-4">
+		<img
+			src="/assets/branding/EN_logo_white_1200.svg"
+			alt="EN Logo"
+			class="h-8 w-auto opacity-80 transition-opacity hover:opacity-100"
+		/>
+	</div>
+
+	<!-- Center: The Jump Drive (Desktop) -->
+	<div
+		class="hidden items-center justify-center gap-1 rounded-full border border-white/10 bg-black/50 p-1 backdrop-blur-sm md:flex"
+	>
+		<a
+			href="#realm-identity"
+			class={`px-4 py-1 rounded-full font-mono text-xs uppercase tracking-wider transition-all ${currentRealm === "identity" ? "bg-white text-black" : "text-neutral-500 hover:text-white"}`}
+		>
+			Identity
+		</a>
+		<a
+			href="#realm-work"
+			class={`px-4 py-1 rounded-full font-mono text-xs uppercase tracking-wider transition-all ${currentRealm === "work" ? "bg-white text-black" : "text-neutral-500 hover:text-white"}`}
+		>
+			Work
+		</a>
+		<a
+			href="#realm-specs"
+			class={`px-4 py-1 rounded-full font-mono text-xs uppercase tracking-wider transition-all ${currentRealm === "specs" ? "bg-white text-black" : "text-neutral-500 hover:text-white"}`}
+		>
+			Specs
+		</a>
+		<a
+			href="#realm-system"
+			class={`px-4 py-1 rounded-full font-mono text-xs uppercase tracking-wider transition-all ${currentRealm === "system" ? "bg-white text-black" : "text-neutral-500 hover:text-white"}`}
+		>
+			System
+		</a>
+
+		<!-- Search Trigger -->
+		<div class="mx-1 h-3 w-px bg-white/20"></div>
+		<button
+			id="hud-search-trigger"
+			class="group flex items-center justify-center rounded-full p-1 text-neutral-500 transition-colors hover:text-white"
+			aria-label="Search"
+		>
+			<Icon name="tabler:search" class="h-4 w-4" />
+		</button>
+	</div>
+
+	<script>
+		const searchBtn = document.getElementById("hud-search-trigger");
+		searchBtn?.addEventListener("click", () => {
+			window.dispatchEvent(new CustomEvent("open-command-menu"));
+		});
+	</script>
+
+	<!-- Right: Comm Channels -->
+	<div class="flex items-center gap-4">
+		<!-- Construction Banner (Red Item) -->
+		<div
+			class="hidden border border-red-500/50 bg-red-900/10 px-2 py-1 font-mono text-[10px] tracking-widest text-red-500 uppercase md:block"
+		>
+			[ * UNDER_CONSTRUCTION ]
+		</div>
+	</div>
+
+	<div class="flex items-center gap-3 text-neutral-500">
+		<a
+			href="https://github.com/eriknorris"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="transition-colors hover:text-white"
+		>
+			<Icon name="tabler:brand-github" class="h-5 w-5" />
+		</a>
+		<a
+			href="https://linkedin.com/in/eriknorris"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="transition-colors hover:text-white"
+		>
+			<Icon name="tabler:brand-linkedin" class="h-5 w-5" />
+		</a>
+		<a href="mailto:erik@example.com" class="transition-colors hover:text-white">
+			<Icon name="tabler:mail" class="h-5 w-5" />
+		</a>
+		<div class="mx-1 h-4 w-px bg-white/20"></div>
+		<a
+			href="https://resume.eriknorris.com"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="group flex items-center gap-2 transition-colors hover:text-white"
+		>
+			<Icon name="tabler:file-text" class="h-5 w-5" />
+			<span class="hidden font-mono text-xs md:inline">RESUME</span>
+		</a>
+	</div>
+</nav>
+
+<style>
+	/* smooth scroll behavior for anchor links */
+	html {
+		scroll-behavior: smooth;
+	}
+</style>

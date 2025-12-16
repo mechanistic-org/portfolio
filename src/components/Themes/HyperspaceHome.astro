@@ -1,0 +1,134 @@
+---
+import Layout from "@layouts/BaseLayout.astro";
+// Adjusted relative imports for depth 3
+import WiggleLogoParallax from "../../components/Deck/WiggleLogoParallax";
+import ProjectStrip from "@components/Projects/ProjectStrip";
+import MultiverseGraph from "@components/DataViz/MultiverseGraph";
+import HyperspaceHUD from "@components/Nav/HyperspaceHUD.astro";
+import DecryptionDossier from "../../components/DataViz/DecryptionDossier";
+import LivingGantt from "../../components/DataViz/LivingGantt";
+import ProjectTunnel from "../../components/Projects/ProjectTunnel";
+import SlideProjector from "../../components/Projects/SlideProjector";
+import SystemAssembly from "../../components/System/SystemAssembly";
+import { getCollection } from "astro:content";
+import multiverseData from "../../data/timeline/multiverse.json";
+
+// Fetch Projects
+const allProjects = await getCollection("projects", ({ data }) => !data.draft);
+const sortedProjects = allProjects.sort(
+	(a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime(),
+);
+---
+
+<Layout title="Hyperspace | Erik Norris" description="System Index" hideNav={true}>
+	<!-- The HUD is fixed and persistent -->
+	<HyperspaceHUD />
+	<!-- SCROLL CONTAINER -->
+	<main
+		id="hyperspace-container"
+		class="h-screen w-full snap-y snap-proximity overflow-y-scroll bg-black text-white"
+	>
+		<!-- REALM I: IDENTITY (The Hook) -->
+		<section
+			id="realm-identity"
+			class="relative flex h-screen w-full snap-start flex-col items-center justify-center overflow-hidden"
+		>
+			<!-- Full Screen Canvas Layer -->
+			<div class="absolute inset-0 z-0 h-full w-full">
+				<WiggleLogoParallax client:only="react" />
+			</div>
+
+			<!-- Text Layer (z-10) -->
+			<div class="pointer-events-none z-10 -mt-20 text-center">
+				<h1 class="text-7xl font-black tracking-tighter mix-blend-difference md:text-9xl">
+					ERIK NORRIS
+				</h1>
+				<p class="text-primary mt-4 animate-pulse font-mono text-xl tracking-[0.5em] uppercase">
+					System Online
+				</p>
+			</div>
+			<div class="absolute bottom-12 z-10 animate-bounce opacity-50">
+				<span class="font-mono text-xs text-neutral-500">INITIATE SCROLL</span>
+			</div>
+		</section>
+		<!-- REALM II: WORK (The Output) -->
+		<section
+			id="realm-work"
+			class="relative min-h-screen w-full snap-start border-t border-white/10 bg-neutral-900"
+		>
+			<div class="site-container w-full max-w-none px-0">
+				<!-- Slide Projector (Compression Stroke) -->
+				<SlideProjector client:visible projects={sortedProjects} />
+			</div>
+		</section>
+		<!-- REALM III: SPECS (The Brain) -->
+		<section id="realm-specs" class="relative min-h-screen w-full snap-start bg-black">
+			<div class="relative z-10 w-full">
+				<LivingGantt client:visible />
+			</div>
+		</section>
+		<!-- REALM IV: SYSTEM (The Machine) -->
+		<section
+			id="realm-system"
+			class="relative flex h-screen w-full snap-start items-center justify-center border-t border-white/10 bg-neutral-950"
+		>
+			<div class="absolute inset-0 z-0"><SystemAssembly client:visible /></div>
+			<div class="pointer-events-none relative z-10 space-y-8 text-center">
+				<div class="inline-block rounded-full border border-green-500/30 bg-green-900/10 p-4">
+					<!-- SVG Icon -->
+					<svg
+						class="h-12 w-12 text-green-500"
+						fill="none"
+						stroke="currentColor"
+						viewBox="0 0 24 24"
+						><path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="1.5"
+							d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724
+1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924
+0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426
+1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0
+00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31
+2.37-2.37.996.608 2.296.07 2.572-1.065z"
+						></path><path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="1.5"
+							d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg
+					>
+				</div>
+				<h2 class="font-mono text-5xl tracking-widest text-white uppercase">System Architecture</h2>
+				<div
+					class="pointer-events-auto mx-auto grid max-w-lg grid-cols-2 gap-4 font-mono text-sm text-neutral-500"
+				>
+					<a
+						href="/colophon"
+						class="border border-white/10 bg-black/50 p-4 backdrop-blur transition-colors hover:border-white hover:text-white"
+					>
+						COLOPHON_
+					</a>
+					<a
+						href="/component-lab"
+						class="border border-white/10 bg-black/50 p-4 backdrop-blur transition-colors hover:border-white hover:text-white"
+					>
+						COMPONENT_LAB_
+					</a>
+				</div>
+			</div>
+			<footer class="absolute bottom-6 w-full text-center font-mono text-[10px] text-neutral-700">
+				ERIK NORRIS &copy; 2025 // NO FATE BUT WHAT WE MAKE
+			</footer>
+		</section>
+	</main>
+</Layout>
+<style>
+	/* Hide scrollbar for immersive feel */
+	main::-webkit-scrollbar {
+		display: none;
+	}
+	main {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+</style>

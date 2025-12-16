@@ -6,7 +6,14 @@ import ModelViewer from "@components/MDX/ModelViewer.astro";
 import Chip from "@components/DLS/Chip.astro";
 import Wire from "@components/DLS/Wire.astro";
 import ScrambleText from "@components/Effects/ScrambleText";
+import SlideProjector from "@components/Projects/SlideProjector";
 import Admonition from "@components/Admonition/Admonition.astro";
+import { getCollection } from "astro:content";
+
+const allProjects = await getCollection("projects", ({ data }) => !data.draft);
+const sortedProjects = allProjects.sort(
+	(a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime(),
+); // Mock data handling if types limit us in lab
 
 const title = "Component Laboratory";
 const description = "Live testing ground for Quantum Visual Taxonomy components.";
@@ -121,6 +128,19 @@ const description = "Live testing ground for Quantum Visual Taxonomy components.
 					<div class="text-3xl font-bold">
 						<ScrambleText client:visible text="SYSTEM_VERIFIED" />
 					</div>
+				</div>
+			</div>
+
+			<Wire />
+
+			{/* 7. SLIDE PROJECTOR */}
+			<div>
+				<h2>7. Slide Projector (Compression Stroke)</h2>
+				<p class="mb-4 text-sm text-neutral-500">
+					Mechanic: <strong>Pin + Transform</strong>. Scrolls 300vh to drive index.
+				</p>
+				<div class="not-prose overflow-hidden rounded-xl border border-neutral-800">
+					<SlideProjector client:visible projects={sortedProjects} />
 				</div>
 			</div>
 		</div>
