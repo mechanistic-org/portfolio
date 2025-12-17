@@ -160,14 +160,5 @@
     "max": "-",
     "unit": "T-Score",
     "notes": "Recovers quickly from stress"
-  },
-  {
-    "category": "Thermal Char.",
-    "parameter": "Irritability",
-    "typical": "63",
-    "min": "-",
-    "max": "-",
-    "unit": "T-Score",
-    "notes": "Passionate reactivity"
   }
 ]

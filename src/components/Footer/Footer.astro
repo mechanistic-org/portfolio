@@ -11,31 +11,11 @@ const today = new Date();
 	class="bg-background/80 border-border fixed bottom-0 left-0 z-50 w-full border-t backdrop-blur-md"
 >
 	<div
-		class="site-container flex h-8 items-center justify-between text-[10px] font-bold tracking-wider text-neutral-500 uppercase md:text-xs"
+		class="site-container flex h-8 items-center justify-center text-[10px] font-bold tracking-wider text-neutral-500 uppercase md:text-xs"
 	>
-		<!-- Left: System Status -->
-		<div class="flex items-center gap-2">
-			<span class="relative flex h-2 w-2">
-				<span
-					class="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"
-				></span>
-				<span class="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
-			</span>
-			<span>SYSTEM: OPERATIONAL</span>
-		</div>
-
-		<!-- Center: Location (Hidden on mobile to save space) -->
-		<div class="hidden md:block">
-			<span class="mr-4">LOC: 37.7749° N, 122.4194° W</span>
-			<span class="text-neutral-600">BLD: {buildData.duration}</span>
-		</div>
-
-		<!-- Right: Version & Copyright -->
+		<!-- Center: Copyright -->
 		<div class="flex items-center gap-4">
-			<RestartButton client:visible />
-			<a href="/data" class="transition-colors hover:text-white">TVA</a>
-			<span class="hidden md:inline">VER: 5.0.0</span>
-			<span>&copy; {today.getFullYear()} {siteData.name.toUpperCase()}</span>
+			<span>2025 ERIK NORRIS</span>
 		</div>
 	</div>
 </footer>

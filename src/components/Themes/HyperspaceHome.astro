@@ -82,9 +82,6 @@ function getHash(str: string) {
 					ERIK NORRIS
 				</h1>
 			</div>
-			<div class="absolute bottom-12 z-10 animate-bounce opacity-50">
-				<span class="font-mono text-xs text-neutral-500">INITIATE SCROLL</span>
-			</div>
 		</section>
 		<!-- REALM II: WORK (The Output) -->
 		<section
@@ -151,98 +148,99 @@ function getHash(str: string) {
 					<DatasheetTable />
 				</div>
 
-				<div>
-					<div class="mb-6 flex items-center justify-between border-b border-neutral-800 pb-2">
-						<h2 class="h2 flex items-center gap-3 text-white">
-							<span class="text-primary-500">///</span> Revision History
-						</h2>
-						<div class="font-mono text-xs text-neutral-500">branch: main</div>
-					</div>
-
-					<div
-						class="overflow-x-auto rounded-lg border border-neutral-800 bg-[#0d1117] p-6 font-mono text-sm"
-					>
-						{
-							hasHistory ? (
-								workHistory.map((job) => (
-									<div class="group relative border-l border-neutral-800 py-3 pl-8 transition-colors hover:bg-neutral-900/50">
-										<div
-											class="absolute top-5 -left-[5px] h-2.5 w-2.5 rounded-full border border-[#0d1117]"
-											style={`background-color: ${job.color}`}
-										/>
-
-										<div class="grid grid-cols-1 items-baseline gap-4 md:grid-cols-[120px_1fr_150px]">
-											<div class="text-xs text-neutral-500">
-												<span class="text-primary-500 opacity-50 group-hover:opacity-100">
-													{getHash(job.company)}
-												</span>
-												<span class="mx-2">|</span>
-												<span>{new Date(job.start).getFullYear()}</span>
-											</div>
-
-											<div>
-												<span class="group-hover:text-primary-500 font-semibold text-white transition-colors">
-													{job.title}
-												</span>
-												<span class="text-neutral-500"> @ </span>
-												<span style={`color: ${job.color}`}>{job.company}</span>
-												<p class="mt-1 text-xs leading-relaxed text-neutral-500 opacity-75">
-													{job.description}
-												</p>
-											</div>
-
-											<div class="hidden text-right text-xs text-neutral-600 md:block">
-												{job.duration_years ? `${job.duration_years} yr` : "HEAD"}
-											</div>
-										</div>
-									</div>
-								))
-							) : (
-								<div class="text-red-500">No history found.</div>
-							)
-						}
-
-						<div class="pt-4 pl-8 text-xs text-neutral-600">
-							<span class="opacity-50">Initial Commit</span>
-						</div>
-					</div>
-				</div>
-
 				<footer class="mt-24 w-full text-center font-mono text-[10px] text-neutral-700">
 					ERIK NORRIS &copy; 2025 // NO FATE BUT WHAT WE MAKE
 				</footer>
 			</div>
 		</section>
 
-		<style>
-			/* Hide scrollbar for immersive feel */
-			main::-webkit-scrollbar {
-				display: none;
-			}
-			main {
-				-ms-overflow-style: none;
-				scrollbar-width: none;
-			}
+		<!-- History/Log Component Inline -->
+		{
+			/* 
+			Refactored "Operational Log"
+			- Minimalist, Git-style
+			- JetBrains Mono
+		*/
+		}
+		<div class="site-container max-w-5xl px-4 md:px-0">
+			<!-- Header -->
+			<div class="mb-8 flex items-end justify-between border-b border-neutral-800 pb-2 font-mono">
+				<h2 class="text-xl tracking-widest text-white uppercase">
+					<span class="text-primary-500 mr-2">///</span>Operational Log
+				</h2>
+				<div class="text-[10px] text-neutral-600">KERNEL_PANIC_HISTORY</div>
+			</div>
 
-			/* Custom 0.1Hz (10s) Breathing Animation - Calm */
-			@keyframes breathe-glow {
-				0%,
-				100% {
-					opacity: 0.9;
-					transform: scale(1);
-					/* Removed text-shadow to prevent rendering artifacts */
-				}
-				50% {
-					opacity: 1;
-					transform: scale(1.03); /* Gentle expansion */
-					/* Optional: subtle filter brightness instead of shadow */
-					filter: brightness(1.2);
-				}
-			}
+			<!-- Log Container -->
+			<div class="font-mono text-sm">
+				{
+					hasHistory ? (
+						<div class="space-y-1">
+							{/* Minimal list spacing */}
+							{workHistory.map((job) => (
+								<div class="group flex items-baseline gap-4 py-1 text-neutral-400 transition-colors hover:text-white">
+									{/* Hash / ID */}
+									<div class="hidden w-20 shrink-0 font-mono text-[10px] text-neutral-600 md:block">
+										{getHash(job.company)}
+									</div>
 
-			.animate-breathe-glow {
-				animation: breathe-glow 10s ease-in-out infinite;
-			}
-		</style>
-	</main></Layout
->
+									{/* Date */}
+									<div class="w-16 shrink-0 text-neutral-500">
+										{new Date(job.start).getFullYear()}
+									</div>
+
+									{/* Content */}
+									<div class="flex-1">
+										<span
+											class={`font-bold text-white group-hover:text-[${job.color}] transition-colors`}
+										>
+											{job.company}
+										</span>
+										<span class="mx-2 text-neutral-700">/</span>
+										<span class="text-neutral-300">{job.title}</span>
+									</div>
+								</div>
+							))}
+						</div>
+					) : (
+						<div class="py-4 text-neutral-600">Log empty.</div>
+					)
+				}
+				<div class="mt-4 border-t border-neutral-900 pt-4 text-[10px] text-neutral-700">
+					END OF LOG
+				</div>
+			</div>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	/* Hide scrollbar for immersive feel */
+	main::-webkit-scrollbar {
+		display: none;
+	}
+	main {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+
+	/* Custom 0.1Hz (10s) Breathing Animation - Calm */
+	@keyframes breathe-glow {
+		0%,
+		100% {
+			opacity: 0.9;
+			transform: scale(1);
+			/* Removed text-shadow to prevent rendering artifacts */
+		}
+		50% {
+			opacity: 1;
+			transform: scale(1.03); /* Gentle expansion */
+			/* Optional: subtle filter brightness instead of shadow */
+			filter: brightness(1.2);
+		}
+	}
+
+	.animate-breathe-glow {
+		animation: breathe-glow 10s ease-in-out infinite;
+	}
+</style>

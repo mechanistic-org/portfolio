@@ -38,6 +38,10 @@ sidebar:
     *   **Description:** A "Plug-and-Play" authoring system that allows complex UI patterns (Zigzag Grids, 3D Viewers, Process Strips) to be inserted via shortcodes (`qq-*`). This transforms the IDE into a layout engine, ensuring every project page adheres to the strict "Visual Taxonomy" without manual coding.
 
 ## 📜 Change Log (Recent)
+*   **[v5.0.0] - Hyperspace Launch**
+    *   **[Feature] System Realm:** Restored full 3D fidelity to Realm IV (The Machine). Implemented "Exploded Stack" visualization with anisotropic glass materials.
+    *   **[Fix] Navigation Sync:** Resolved "Ghost Pill" issues in `HyperspaceHUD` by implementing "Sweet Spot" IntersectionObserver logic (`-25%` margin).
+    *   **[Infrastructure] Deployment:** Successfully deployed Hyperspace Theme to production (`a0abb61`).
 *   **[v1.0.0-beta] - NorrOS Soft Launch**
     *   **Default Theme:** Migrated `index.astro` to serve `HyperspaceHome` as the primary interface (`DEFAULT_THEME = 'hyperspace'`).
     *   **The 4-Stroke Engine:** Implemented the full "Scrollytelling" lifecycle:
@@ -220,6 +224,11 @@ sidebar:
 *   **[Feature] D3 Interaction:** Added "Jiggle" physics and size-pop on hover for Skills Graph.
 
 ## Colophon / Meta-Portfolio
+### The System Assembly (3D Stack)
+*   **Hook:** "Architecture you can touch."
+*   **Tech:** React Three Fiber, Framer Motion (Scroll), Glassmorphism.
+*   **Description:** A recursive visualization where the website renders *its own architecture* as 3D server blades. As the user scrolls, the stack "assembles" from an exploded diagram into a cohesive unit, mirroring the "Intake -> Compression" narrative. Validates the "Glass requires Environment" rendering law.
+
 ### NorrOS (Hyperspace)
 *   **Hook:** A scroll-driven operating system for the portfolio, replacing navigation with "Realms".
 *   **Tech:** Astro, React, Framer Motion, Three.js (R3F).

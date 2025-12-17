@@ -41,6 +41,19 @@ To respect Cloudflare Pages limits (20k files, 25MB script size), we use a Hybri
     *   **Tier 3 (DataSheet):** Clean, print-friendly default.
     *   **Tier 4 (Redacted):** "Eyes Only" variants (Terminal, Dossier, Omega).
 
+### Realm IV: System Architecture (The 3D Stack)
+*   **Concept:** A visual representation of the site's technology stack (React, Astro, R2) rendered as a 3D "Exploded View" assembly.
+*   **Tech:** `@react-three/fiber` (R3F), `@react-three/drei`.
+*   **Mechanism:**
+    *   **Scroll Binding:** The `SystemAssembly` component binds directly to the `#hyperspace-container` scroll event (via `getBoundingClientRect`) to determine a `progress` value (0.0 to 1.0).
+    *   **Visual Stack:** 
+        *   **Interface Layer (Blue):** React/Three.js.
+        *   **Logic Layer (Orange):** Astro/SSR.
+        *   **Infra Layer (Amber):** Cloudflare/R2.
+*   **Rendering Traps:**
+    *   **Lighting:** The "Glass" material (`meshPhysicalMaterial`) **REQUIRES** an `<Environment />` (e.g., `preset="city"`) to be visible. Without it, it renders as invisible/black against the void.
+    *   **Directives:** Uses `client:only="react"` to bypass SSR hydration mismatches for complex 3D scenes.
+
 ### 6. R3 Asset Namespace (`/assets/r3/`)
 *   **Concept:** A clean-slate asset registry for V4 Theme Engine components.
 *   **Structure:**

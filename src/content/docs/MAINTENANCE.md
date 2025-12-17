@@ -185,6 +185,25 @@ status: {
 
 ## 8. Troubleshooting
 
+### Blank System Realm (3D Void)
+*   **Symptom:** The System Realm (Realm IV) is black/blank. No 3D objects are visible.
+*   **Cause:**
+    1.  **Missing Environment:** Glass materials need an HDRI to reflect. If `<Environment />` is missing/commented out, the object is technically rendered but invisible.
+    2.  **Font Loading:** R3F `<Text>` component can crash the canvas if the font URL is unreachable or invalid during initial mount.
+*   **Fix:**
+    1.  **Isolate:** Add a "Reference Cube" (`<meshBasicMaterial color="red" />`) to see if the Canvas is running effectively.
+    2.  **Restore:** Ensure `<Environment preset="city" />` is active.
+    3.  **Fonts:** Temporarily disable custom font URLs in `<Text>` to rule out CORS/Network issues.
+
+### Navigation Pill "MIA" (Stuck State)
+*   **Symptom:** The active nav pill in `HyperspaceHUD` fails to update or gets stuck on the previous section.
+*   **Cause:**
+    1.  **ID Mismatch:** The component expects `data-nav-target="realm-archive"` but the HTML section is `id="realm-about"`.
+    2.  **Observer Threshold:** The `IntersectionObserver` `rootMargin` is too strict.
+*   **Fix:**
+    1.  **Sync IDs:** Ensure `HyperspaceHUD.astro` targets match `HyperspaceHome.astro` IDs exactly.
+    2.  **Tune Margin:** A `rootMargin` of `"-25% 0px -25% 0px"` (detecting the center 50% of the screen) is the robust "Sweet Spot" for Realm-based scrolling.
+
 ### Frozen Scroll Components (Hyperspace)
 *   **Symptom:** `SlideProjector` or `LivingGantt` won't animate; they stick and stay static.
 *   **Cause:** The component is likely listening to `window` scroll instead of the specific `#hyperspace-container` div.
