@@ -123,6 +123,46 @@ export default function LivingGantt() {
                     </p>
                 </div>
 
+                {/* SOURCE CONSOLE (Right Side Overlay) */}
+                <div className="absolute top-24 right-8 z-40 flex flex-col gap-2 w-64 pointer-events-auto">
+                    <div className="text-[10px] font-mono text-neutral-500 mb-2 border-b border-neutral-800 pb-1 flex justify-between">
+                        <span>SOURCE_FILES</span>
+                        <span className="text-green-500">ONLINE</span>
+                    </div>
+
+                    <a href="/docs/meta/bio" className="block p-3 bg-neutral-900/80 border-l-2 border-l-neutral-700 border-y border-r border-white/5 hover:border-l-[#2E5CFF] hover:bg-neutral-800 transition-all group backdrop-blur-sm">
+                        <div className="flex justify-between items-center">
+                            <span className="text-xs font-bold text-neutral-300 group-hover:text-white">BIO_LOG.md</span>
+                            <span className="text-[8px] px-1 bg-neutral-800 rounded group-hover:bg-[#2E5CFF] group-hover:text-white transition-colors">READ</span>
+                        </div>
+                        <div className="text-[10px] text-neutral-500 mt-1 font-mono group-hover:text-blue-400">The Operator Context</div>
+                    </a>
+
+                    <a href="/docs/meta/personal-user-manual" className="block p-3 bg-neutral-900/80 border-l-2 border-l-neutral-700 border-y border-r border-white/5 hover:border-l-[#00C2FF] hover:bg-neutral-800 transition-all group backdrop-blur-sm">
+                        <div className="flex justify-between items-center">
+                            <span className="text-xs font-bold text-neutral-300 group-hover:text-white">USR_MANUAL.sys</span>
+                            <span className="text-[8px] px-1 bg-neutral-800 rounded group-hover:bg-[#00C2FF] group-hover:text-black transition-colors">READ</span>
+                        </div>
+                        <div className="text-[10px] text-neutral-500 mt-1 font-mono group-hover:text-cyan-400">Operating Protocols</div>
+                    </a>
+
+                    <a href="/docs/meta/manifesto" className="block p-3 bg-neutral-900/80 border-l-2 border-l-neutral-700 border-y border-r border-white/5 hover:border-l-yellow-500 hover:bg-neutral-800 transition-all group backdrop-blur-sm">
+                        <div className="flex justify-between items-center">
+                            <span className="text-xs font-bold text-neutral-300 group-hover:text-white">MANIFESTO.txt</span>
+                            <span className="text-[8px] px-1 bg-neutral-800 rounded group-hover:bg-yellow-500 group-hover:text-black transition-colors">CORE</span>
+                        </div>
+                        <div className="text-[10px] text-neutral-500 mt-1 font-mono group-hover:text-yellow-400">System Directives</div>
+                    </a>
+
+                    <a href="/ExampleResume.pdf" target="_blank" className="block p-3 bg-neutral-900/80 border-l-2 border-l-neutral-700 border-y border-r border-white/5 hover:border-l-red-500 hover:bg-neutral-800 transition-all group backdrop-blur-sm">
+                        <div className="flex justify-between items-center">
+                            <span className="text-xs font-bold text-neutral-300 group-hover:text-white">RESUME_DUMP.pdf</span>
+                            <span className="text-[8px] px-1 bg-neutral-800 rounded group-hover:bg-red-500 group-hover:text-black transition-colors">DL</span>
+                        </div>
+                        <div className="text-[10px] text-neutral-500 mt-1 font-mono group-hover:text-red-400">Export V 1.0</div>
+                    </a>
+                </div>
+
                 {/* THE TAPE (Moves Left with Scroll) */}
                 <motion.div
                     style={{ x: useTransform(xSpring, value => `${value}%`) }}

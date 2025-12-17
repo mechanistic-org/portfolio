@@ -67,7 +67,28 @@ const DossierItem = ({ label, value, delay }: { label: string; value: string; de
 };
 
 // --- MAIN COMPONENT ---
-export default function DecryptionDossier() {
+const DecryptionDossier: React.FC = () => {
+    const [text, setText] = useState("");
+    const [phase, setPhase] = useState(0);
+    const [isOpen, setIsOpen] = useState(false); // Minimized by default per user request
+
+    const fullText = `
+        CURRENT STATUS
+        OPERATIONAL // CLASS 5
+
+        PRIMARY FUNCTION
+        FULL STACK ARCHITECTURE
+
+        CORE STACK
+        REACT // ASTRO // THREE.JS // TYPESCRIPT
+
+        RECENT DIRECTIVE
+        SYSTEM REFACTOR: COMPLETE
+
+        LOCATION
+        SECTOR 7G (REMOTE)
+    `;
+
     // Mock Data for "The Brain" - ideally passed in via props
     const intel = [
         { label: "Current Status", value: "OPERATIONAL // CLASS 5" },
@@ -78,28 +99,57 @@ export default function DecryptionDossier() {
     ];
 
     return (
-        <div className="w-full max-w-2xl mx-auto p-8 border border-white/10 bg-black/90 backdrop-blur-xl shadow-2xl relative overflow-hidden">
-            {/* Decoration: Scanline */}
-            <div className="absolute inset-0 pointer-events-none bg-[url('/assets/scanline.png')] opacity-10 mix-blend-overlay"></div>
-
-            <div className="relative z-10">
-                <div className="flex justify-between items-end border-b border-white/20 pb-4 mb-8">
-                    <h2 className="text-2xl font-bold text-white tracking-tighter">INTELLIGENCE_DOSSIER</h2>
-                    <span className="text-xs font-mono text-green-500 animate-pulse">● LIVE FEED</span>
+        <div className={`transition-all duration-300 ease-in-out ${isOpen ? 'w-full max-w-md' : 'w-auto'}`}>
+            <div
+                className={`border border-white/20 bg-black/80 backdrop-blur-md p-4 shadow-2xl ${isOpen ? 'rounded-lg' : 'rounded-full cursor-pointer hover:border-green-500/50'}`}
+                onClick={() => !isOpen && setIsOpen(true)}
+            >
+                {/* Header / Toggle */}
+                <div className="flex items-center justify-between mb-2">
+                    <h2 className={`font-bold text-white tracking-widest uppercase flex items-center gap-2 ${isOpen ? 'text-xl' : 'text-sm'}`}>
+                        {isOpen ? "INTELLIGENCE_DOSSIER" : "DOSSIER // ACCESS"}
+                        {!isOpen && <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>}
+                    </h2>
+                    {isOpen && (
+                        <button
+                            onClick={(e) => { e.stopPropagation(); setIsOpen(false); }}
+                            className="text-white/50 hover:text-white px-2 py-1 text-xs font-mono border border-transparent hover:border-white/20 rounded"
+                        >
+                            MINIMIZE [-]
+                        </button>
+                    )}
                 </div>
 
-                <div className="space-y-2">
-                    {intel.map((item, i) => (
-                        <DossierItem key={i} {...item} delay={i * 200} />
-                    ))}
-                </div>
+                {/* Content (Only when open) */}
+                {isOpen && (
+                    <>
+                        <div className="flex items-center gap-2 mb-6">
+                            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                            <span className="text-[10px] text-green-500 font-mono tracking-[0.2em] uppercase">Live Feed</span>
+                        </div>
 
-                <div className="mt-12 flex gap-4 border-t border-white/10 pt-8">
-                    <a href="/resume/pdf" className="flex-1 text-center bg-white text-black py-3 font-mono text-sm font-bold uppercase hover:bg-green-400 transition-colors">
-                        Download Complete File
-                    </a>
-                </div>
+                        <div className="space-y-6 min-h-[300px] border-t border-white/10 pt-4 font-mono text-sm leading-relaxed text-neutral-300">
+                            {text.split('\n').map((line, i) => (
+                                <div key={i} className="min-h-[1.5em]">
+                                    {line.trim() === "" ? <br /> : (
+                                        <div className={line.includes("//") ? "text-white font-bold" : "text-neutral-500 text-xs tracking-widest uppercase mb-1"}>
+                                            {line}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="mt-8 pt-4 border-t border-white/10">
+                            <button className="w-full py-3 bg-white text-black font-bold font-mono text-xs hover:bg-neutral-200 transition-colors tracking-widest uppercase">
+                                Download Complete File
+                            </button>
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );
-}
+};
+
+export default DecryptionDossier;

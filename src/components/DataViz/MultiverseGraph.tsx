@@ -23,7 +23,7 @@ interface MultiverseGraphProps {
 const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
     const svgRef = useRef<SVGSVGElement>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
-    const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
+    const [dimensions, setDimensions] = useState({ width: 0, height: 0 }); // Start at 0 to wait for resize
     const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 
     // Resize Observer
@@ -32,7 +32,9 @@ const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
         const resizeObserver = new ResizeObserver((entries) => {
             if (entries[0]) {
                 const { width, height } = entries[0].contentRect;
-                setDimensions({ width, height });
+                if (width > 0 && height > 0) {
+                    setDimensions({ width, height });
+                }
             }
         });
         resizeObserver.observe(wrapperRef.current);
@@ -41,26 +43,87 @@ const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
 
     useEffect(() => {
         if (!data || !data.nodes || !svgRef.current) return;
+        if (dimensions.width === 0 || dimensions.height === 0) return; // Wait for dimensions
 
         const { width, height } = dimensions;
+        // CRITICAL: Clone nodes to prevent D3 from mutating the original props/state across re-renders.
+        // This ensures the simulation starts fresh every time dimensions change.
+        const nodes = data.nodes.map(d => ({ ...d, group: d.group?.trim() }));
+
         const svg = d3.select(svgRef.current);
         svg.selectAll("*").remove(); // Clear previous render
 
-        // --- PHYSICS ENGINE ---
-        // The "Loom" that weaves the nodes together
-        const simulation = d3.forceSimulation(data.nodes)
-            .force("charge", d3.forceManyBody().strength(-20)) // Repulsion
-            .force("center", d3.forceCenter(width / 2, height / 2)) // Gravity Well
-            .force("collide", d3.forceCollide().radius((d: any) => d.value * 1.5 + 2).iterations(3)) // Collision
-            .force("y", d3.forceY(height / 2).strength(0.05)) // Vertical centering
-            .force("x", d3.forceX(width / 2).strength(0.05));
+        // --- GROUP PACKING LAYOUT ---
+        // 1. Prepare hierarchy for packing
+        const groupMap = d3.group(nodes, d => d.group);
+        const groupHierarchy = {
+            name: "root",
+            children: Array.from(groupMap, ([key, values]) => ({
+                name: key,
+                value: d3.sum(values, v => v.value)
+            }))
+        };
 
-        // --- RENDERING ---
+        const root = d3.hierarchy(groupHierarchy)
+            .sum(d => (d as any).value)
+            .sort((a, b) => (b.value || 0) - (a.value || 0));
+
+        const pack = d3.pack()
+            .size([width, height])
+            .padding(15); // Increased padding between employer bubbles for cleaner separation
+
+        const packedRoot = pack(root as any);
+        const groupNodes = packedRoot.children || [];
+
+        // Map group names to their calculated coordinates
+        const groupLayout: Record<string, { x: number, y: number, r: number }> = {};
+        groupNodes.forEach((node: any) => {
+            groupLayout[node.data.name] = { x: node.x, y: node.y, r: node.r };
+        });
+
+        // --- RENDER GROUPS (Background Bubbles) ---
+        const groupG = svg.append("g").attr("class", "groups");
+
+        const groupBubbles = groupG.selectAll(".group-bubble")
+            .data(groupNodes)
+            .enter().append("g")
+            .attr("transform", d => `translate(${d.x},${d.y})`);
+
+        // Group Circle
+        groupBubbles.append("circle")
+            .attr("r", d => d.r)
+            .attr("fill", "rgba(255, 255, 255, 0.03)")
+            .attr("stroke", "rgba(255, 255, 255, 0.1)")
+            .attr("stroke-dasharray", "4 4");
+
+        // Group Label
+        groupBubbles.append("text")
+            .attr("text-anchor", "middle")
+            .attr("dy", d => -d.r + 20)
+            .text(d => (d.data as any).name)
+            .attr("fill", "rgba(255, 255, 255, 0.5)")
+            .attr("font-size", d => Math.min(16, d.r / 5))
+            .attr("font-weight", "bold")
+            .style("text-transform", "uppercase")
+            .style("pointer-events", "none");
+
+
+        // --- PHYSICS ENGINE ---
+        // Nodes are attracted to their Group's center
+        const simulation = d3.forceSimulation(nodes)
+            .force("charge", d3.forceManyBody().strength(-2))
+            .force("collide", d3.forceCollide().radius((d: any) => Math.sqrt(d.value) * 3 + 1).iterations(2))
+
+            // Cluster Gravity: Pull STRICTLY to group center
+            .force("x", d3.forceX((d: any) => groupLayout[d.group]?.x || width / 2).strength(0.5))
+            .force("y", d3.forceY((d: any) => groupLayout[d.group]?.y || height / 2).strength(0.5));
+
+        // --- RENDERING LEAVES ---
         const g = svg.append("g");
 
         // NODE GROUPS (Bubbles)
         const node = g.selectAll(".node")
-            .data(data.nodes)
+            .data(nodes)
             .enter().append("g")
             .attr("class", "node")
             .attr("cursor", "pointer")
@@ -71,17 +134,17 @@ const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
 
         // CIRCLES (The Matter)
         node.append("circle")
-            .attr("r", (d) => d.value * 1.5)
+            .attr("r", (d) => Math.max(2, Math.sqrt(d.value) * 3))
             .attr("fill", (d) => d.color)
             .attr("stroke", "#fff")
             .attr("stroke-width", 1)
             .attr("opacity", 0.8)
             .on("mouseover", function (event, d) {
-                d3.select(this).transition().duration(200).attr("r", d.value * 1.5 + 5).attr("opacity", 1);
+                d3.select(this).transition().duration(200).attr("r", Math.max(2, Math.sqrt(d.value) * 3) + 5).attr("opacity", 1);
                 setSelectedNode(d);
             })
             .on("mouseout", function (event, d) {
-                d3.select(this).transition().duration(200).attr("r", d.value * 1.5).attr("opacity", 0.8);
+                d3.select(this).transition().duration(200).attr("r", Math.max(2, Math.sqrt(d.value) * 3)).attr("opacity", 0.8);
                 setSelectedNode(null);
             });
 
@@ -90,11 +153,11 @@ const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
         node.append("text")
             .attr("dy", ".3em")
             .attr("text-anchor", "middle")
-            .text((d) => d.value > 2 ? d.name.substring(0, 10) : "")
-            .attr("font-size", (d) => Math.max(8, d.value / 2))
+            .text((d) => d.value > 25 ? d.name.substring(0, 10) : "")
+            .attr("font-size", (d) => Math.max(8, Math.sqrt(d.value)))
             .attr("fill", "#fff")
             .attr("pointer-events", "none")
-            .style("display", (d) => d.value > 15 ? "block" : "none");
+            .style("display", (d) => d.value > 25 ? "block" : "none");
 
         // --- SIMULATION TICK ---
         simulation.on("tick", () => {
@@ -119,7 +182,9 @@ const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
             d.fy = null;
         }
 
-        // Zoom behavior
+        // Zoom behavior REMOVED to prevent scroll jacking.
+        // The graph is now a fixed layout visual.
+        /*
         const zoom = d3.zoom<SVGSVGElement, unknown>()
             .scaleExtent([0.1, 4])
             .on("zoom", (event) => {
@@ -127,12 +192,19 @@ const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
             });
 
         svg.call(zoom);
+        */
 
     }, [data, dimensions]);
 
     return (
-        <div ref={wrapperRef} className="w-full h-full relative" style={{ minHeight: '600px' }}>
-            <svg ref={svgRef} width="100%" height="100%" className="overflow-visible" />
+        <div ref={wrapperRef} className="w-full h-full relative">
+            <svg
+                ref={svgRef}
+                width="100%"
+                height="100%"
+                className="block overflow-visible"
+                style={{ cursor: 'grab' }}
+            />
 
             {/* POPOVER (The Reveal) */}
             {selectedNode && (

@@ -84,13 +84,13 @@ function StackLayer({
             </mesh>
 
             {/* Label Front */}
+            {/* Label Front */}
             <Text
                 position={[0, 0, 2.1]}
                 fontSize={0.3}
                 color="white"
                 anchorX="center"
                 anchorY="middle"
-                font="https://fonts.gstatic.com/s/jetbrainsmono/v13/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnF8RD8yKxTOlOV.woff"
             >
                 {label}
             </Text>
@@ -100,13 +100,14 @@ function StackLayer({
                 color="#aaa"
                 anchorX="center"
                 anchorY="middle"
-                font="https://fonts.gstatic.com/s/jetbrainsmono/v13/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnF8RD8yKxTOlOV.woff"
             >
                 {subtext}
             </Text>
         </group>
     );
 }
+
+
 
 // --- SCENE ---
 function AssemblyScene({ progress }: { progress: number }) {
@@ -119,9 +120,9 @@ function AssemblyScene({ progress }: { progress: number }) {
     return (
         <group rotation={[Math.PI / 6, Math.PI / 4, 0]}>
             <Float floatIntensity={0.5} speed={2}>
-                {/* 1. TOP LAYER: CLIENT */}
+                {/* 1. TOP LAYER: INTERFACE */}
                 <StackLayer
-                    label="CLIENT_SIDE"
+                    label="INTERFACE_LAYER"
                     subtext="REACT // THREE.JS"
                     color="#00d8ff"
                     baseY={1.2}
@@ -129,9 +130,9 @@ function AssemblyScene({ progress }: { progress: number }) {
                     delay={0}
                 />
 
-                {/* 2. MID LAYER: SERVER */}
+                {/* 2. MID LAYER: LOGIC */}
                 <StackLayer
-                    label="EDGE_COMPUTE"
+                    label="LOGIC_CORE"
                     subtext="ASTRO // SSR"
                     color="#ff5d00"
                     baseY={0}
@@ -148,8 +149,14 @@ function AssemblyScene({ progress }: { progress: number }) {
                     progress={progress}
                     delay={0.2}
                 />
+
+                {/* DEBUG: REFERENCE CUBE (Center of Scene) */}
+                <mesh>
+                    <boxGeometry args={[0.5, 0.5, 0.5]} />
+                    <meshBasicMaterial color="red" wireframe />
+                </mesh>
             </Float>
-            <Environment preset="city" />
+            {/* <Environment preset="city" /> */}
         </group>
     );
 }
@@ -158,7 +165,7 @@ function AssemblyScene({ progress }: { progress: number }) {
 
 // --- COMPONENT ---
 export default function SystemAssembly() {
-    const [progress, setProgress] = useState(0);
+    const [progress, setProgress] = useState(0.5); // Default to 0.5 to show *something*
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -166,35 +173,20 @@ export default function SystemAssembly() {
         if (!container) return;
 
         const handleScroll = () => {
+            // ... keep existing scroll logic ...
             if (!containerRef.current) return;
             const rect = containerRef.current.getBoundingClientRect();
             const viewportHeight = window.innerHeight;
-
-            // Logic:
-            // When section top enters bottom of viewport -> Start (0)
-            // When section bottom enters bottom of viewport -> End?
-            // Actually, we want it to assemble as we center it.
-
-            // Let's say: 
-            // 0% when Top of Section is at Bottom of Viewport.
-            // 100% when Top of Section is at Top of Viewport (or Center).
-
-            const start = viewportHeight; // Bottom of screen
-            const end = 0; // Top of screen
-
-            // rect.top is position relative to viewport top.
-            // distance = start - rect.top
-            // range = start - end = viewportHeight
-            // pct = distance / range
-
+            const start = viewportHeight;
+            const end = 0;
             const rawPct = (start - rect.top) / viewportHeight;
             const pct = Math.max(0, Math.min(1, rawPct));
-
             setProgress(pct);
         };
 
         container.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll();
+        // Initial Check
+        setTimeout(handleScroll, 100);
         return () => container.removeEventListener('scroll', handleScroll);
     }, []);
 
@@ -204,17 +196,30 @@ export default function SystemAssembly() {
             className="w-full h-full relative"
         >
             <Canvas shadows camera={{ position: [0, 0, 10], fov: 35 }}>
-                <ambientLight intensity={0.5} />
-                <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
-                <pointLight position={[-10, -10, -10]} intensity={0.5} />
+                <ambientLight intensity={2} />
+                <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} castShadow />
+                <pointLight position={[-10, -10, -10]} intensity={1} />
 
                 <AssemblyScene progress={progress} />
+
+                <Environment preset="city" />
             </Canvas>
 
-            <div className="absolute bottom-32 left-0 w-full text-center pointer-events-none">
-                <p className="font-mono text-xs text-neutral-500">
+
+
+            <div className="absolute bottom-32 left-0 w-full flex flex-col items-center pointer-events-none gap-4">
+                <p className="font-mono text-xs text-neutral-500 tracking-widest">
                     SYSTEM INTEGRITY: {Math.round(progress * 100)}%
                 </p>
+
+                {/* Manual Access Button - Enable Pointer Events */}
+                <a
+                    href="/architecture"
+                    className="pointer-events-auto px-6 py-2 border border-white/20 bg-black/50 backdrop-blur-md rounded-full text-xs font-mono text-white hover:bg-white hover:text-black transition-all duration-300 uppercase tracking-widest flex items-center gap-2"
+                >
+                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    Access System Manual
+                </a>
             </div>
         </div>
     );

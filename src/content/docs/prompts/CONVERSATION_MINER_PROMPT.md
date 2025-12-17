@@ -24,6 +24,7 @@ sidebar:
 > *   `README.md`: High-level setup or quick-start changes.
 > *   `src/content/docs/BRANDING_PROMPT.md`: Design Language System (DLS) and Style Guide definitions.
 > *   `src/content/docs/STYLE_GUIDE.md`: Updates to the Design Language System or Token Map.
+> *   `GAP_ANALYSIS.md`: A template or record of the Classic vs. Hyperspace feature parity check.
 >
 > **EXTRACT THE GOLD:**
 > 1.  **Decisions:** Why did we choose X over Y?

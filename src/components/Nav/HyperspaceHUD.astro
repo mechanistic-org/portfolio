@@ -4,7 +4,8 @@ import { Icon } from "astro-icon/components";
 ---
 
 <nav
-	class="fixed bottom-0 left-0 z-50 flex w-full items-center justify-between border-t border-white/10 bg-black/90 px-6 py-4 backdrop-blur-md md:top-0 md:bottom-auto md:border-t-0 md:bg-transparent"
+	id="hyperspace-nav"
+	class="fixed bottom-0 left-0 z-50 flex w-full items-center justify-between border-t border-transparent bg-transparent px-6 py-4 transition-all duration-500 md:top-0 md:bottom-auto md:border-t-0"
 >
 	<!-- Left: Branding (EN Logo) -->
 	<div class="flex items-center gap-4">
@@ -20,35 +21,39 @@ import { Icon } from "astro-icon/components";
 		class="hidden items-center justify-center gap-1 rounded-full border border-white/10 bg-black/50 p-1 backdrop-blur-sm md:flex"
 	>
 		<a
-			href="#realm-identity"
-			class={`px-4 py-1 rounded-full font-mono text-xs uppercase tracking-wider transition-all ${currentRealm === "identity" ? "bg-white text-black" : "text-neutral-500 hover:text-white"}`}
-		>
-			Identity
-		</a>
-		<a
 			href="#realm-work"
-			class={`px-4 py-1 rounded-full font-mono text-xs uppercase tracking-wider transition-all ${currentRealm === "work" ? "bg-white text-black" : "text-neutral-500 hover:text-white"}`}
+			data-nav-target="realm-work"
+			class="hover:!text-primary-500 rounded-full px-4 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-all duration-300 hover:bg-white/5"
 		>
 			Work
 		</a>
 		<a
 			href="#realm-specs"
-			class={`px-4 py-1 rounded-full font-mono text-xs uppercase tracking-wider transition-all ${currentRealm === "specs" ? "bg-white text-black" : "text-neutral-500 hover:text-white"}`}
+			data-nav-target="realm-specs"
+			class="hover:!text-primary-500 rounded-full px-4 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-all duration-300 hover:bg-white/5"
 		>
 			Specs
 		</a>
 		<a
 			href="#realm-system"
-			class={`px-4 py-1 rounded-full font-mono text-xs uppercase tracking-wider transition-all ${currentRealm === "system" ? "bg-white text-black" : "text-neutral-500 hover:text-white"}`}
+			data-nav-target="realm-system"
+			class="hover:!text-primary-500 rounded-full px-4 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-all duration-300 hover:bg-white/5"
 		>
 			System
+		</a>
+		<a
+			href="#realm-archive"
+			data-nav-target="realm-archive"
+			class="hover:!text-primary-500 rounded-full px-4 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-all duration-300 hover:bg-white/5"
+		>
+			Archive
 		</a>
 
 		<!-- Search Trigger -->
 		<div class="mx-1 h-3 w-px bg-white/20"></div>
 		<button
 			id="hud-search-trigger"
-			class="group flex items-center justify-center rounded-full p-1 text-neutral-500 transition-colors hover:text-white"
+			class="group hover:!text-primary-500 flex items-center justify-center rounded-full p-1 text-neutral-500 transition-colors duration-300 hover:bg-white/5"
 			aria-label="Search"
 		>
 			<Icon name="tabler:search" class="h-4 w-4" />
@@ -60,15 +65,85 @@ import { Icon } from "astro-icon/components";
 		searchBtn?.addEventListener("click", () => {
 			window.dispatchEvent(new CustomEvent("open-command-menu"));
 		});
+
+		// Scroll-Aware Visibility & Active State Logic
+		const nav = document.getElementById("hyperspace-nav");
+		const container = document.getElementById("hyperspace-container");
+		const links = document.querySelectorAll("[data-nav-target]");
+		const sections = document.querySelectorAll("section[id]");
+
+		if (nav && container) {
+			const handleScroll = () => {
+				const scrollY = container.scrollTop;
+				const threshold = window.innerHeight * 0.5; // Fade in halfway through Realm I
+
+				if (scrollY > threshold) {
+					// Scrolled State: Active Glass
+					nav.classList.add("bg-black/90", "backdrop-blur-md", "border-white/10");
+					nav.classList.remove("bg-transparent", "border-transparent");
+				} else {
+					// Top State: Fully Transparent
+					nav.classList.remove("bg-black/90", "backdrop-blur-md", "border-white/10");
+					nav.classList.add("bg-transparent", "border-transparent");
+				}
+			};
+
+			container.addEventListener("scroll", handleScroll, { passive: true });
+			// Init check
+			handleScroll();
+
+			// SCROLL SPY
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							const id = entry.target.id;
+							links.forEach((link) => {
+								if (link.getAttribute("data-nav-target") === id) {
+									// Add Active Classes
+									link.classList.add("bg-primary-500", "text-white", "font-bold");
+									link.classList.remove(
+										"text-neutral-500",
+										"hover:!text-primary-500",
+										"hover:bg-white/5",
+									);
+								} else {
+									// Remove Active Classes
+									link.classList.remove("bg-primary-500", "text-white", "font-bold");
+									link.classList.add(
+										"text-neutral-500",
+										"hover:!text-primary-500",
+										"hover:bg-white/5",
+									);
+								}
+							});
+						}
+					});
+				},
+				{
+					root: container,
+					rootMargin: "-25% 0px -25% 0px",
+					threshold: 0,
+				},
+			);
+
+			sections.forEach((section) => observer.observe(section));
+		}
 	</script>
 
 	<!-- Right: Comm Channels -->
 	<div class="flex items-center gap-4">
-		<!-- Construction Banner (Red Item) -->
+		<!-- Construction Banner (Amber Corner Brackets) -->
 		<div
-			class="hidden border border-red-500/50 bg-red-900/10 px-2 py-1 font-mono text-[10px] tracking-widest text-red-500 uppercase md:block"
+			class="relative hidden px-3 py-1 font-mono text-[10px] tracking-widest text-amber-500 uppercase md:block"
 		>
-			[ * UNDER_CONSTRUCTION ]
+			<!-- Corners -->
+			<div class="absolute top-0 left-0 h-2 w-2 border-t border-l border-amber-500"></div>
+			<div class="absolute top-0 right-0 h-2 w-2 border-t border-r border-amber-500"></div>
+			<div class="absolute bottom-0 left-0 h-2 w-2 border-b border-l border-amber-500"></div>
+			<div class="absolute right-0 bottom-0 h-2 w-2 border-r border-b border-amber-500"></div>
+
+			<span class="opacity-80">UNDER_CONSTRUCTION</span>
 		</div>
 	</div>
 
@@ -77,7 +152,7 @@ import { Icon } from "astro-icon/components";
 			href="https://github.com/eriknorris"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="transition-colors hover:text-white"
+			class="hover:!text-primary-500 transition-colors duration-300 hover:scale-110"
 		>
 			<Icon name="tabler:brand-github" class="h-5 w-5" />
 		</a>
@@ -85,11 +160,14 @@ import { Icon } from "astro-icon/components";
 			href="https://linkedin.com/in/eriknorris"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="transition-colors hover:text-white"
+			class="hover:!text-primary-500 transition-colors duration-300 hover:scale-110"
 		>
 			<Icon name="tabler:brand-linkedin" class="h-5 w-5" />
 		</a>
-		<a href="mailto:erik@example.com" class="transition-colors hover:text-white">
+		<a
+			href="mailto:erik@example.com"
+			class="hover:!text-primary-500 transition-colors duration-300 hover:scale-110"
+		>
 			<Icon name="tabler:mail" class="h-5 w-5" />
 		</a>
 		<div class="mx-1 h-4 w-px bg-white/20"></div>
@@ -97,9 +175,12 @@ import { Icon } from "astro-icon/components";
 			href="https://resume.eriknorris.com"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="group flex items-center gap-2 transition-colors hover:text-white"
+			class="group hover:!text-primary-500 flex items-center gap-2 transition-colors duration-300"
 		>
-			<Icon name="tabler:file-text" class="h-5 w-5" />
+			<Icon
+				name="tabler:file-text"
+				class="h-5 w-5 transition-transform duration-300 group-hover:scale-110"
+			/>
 			<span class="hidden font-mono text-xs md:inline">RESUME</span>
 		</a>
 	</div>

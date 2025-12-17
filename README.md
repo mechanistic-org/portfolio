@@ -7,6 +7,12 @@
 
 A technical portfolio site built to function as a datasheet. It combines high-performance web technologies with a data-driven content pipeline to showcase mechanical engineering work.
 
+### Theme Engine
+The site supports multiple themes via `src/pages/index.astro`.
+*   **Default:** `hyperspace` (NorrOS).
+*   **Legacy:** `classic` (Standard Home).
+*   **Selection:** controlled by `DEFAULT_THEME` constant or `?theme=` query param.
+
 ## 🚀 Quick Start
 
 1.  **Install Dependencies:**

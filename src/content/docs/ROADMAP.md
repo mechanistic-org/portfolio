@@ -38,6 +38,15 @@ sidebar:
     *   **Description:** A "Plug-and-Play" authoring system that allows complex UI patterns (Zigzag Grids, 3D Viewers, Process Strips) to be inserted via shortcodes (`qq-*`). This transforms the IDE into a layout engine, ensuring every project page adheres to the strict "Visual Taxonomy" without manual coding.
 
 ## 📜 Change Log (Recent)
+*   **[v1.0.0-beta] - NorrOS Soft Launch**
+    *   **Default Theme:** Migrated `index.astro` to serve `HyperspaceHome` as the primary interface (`DEFAULT_THEME = 'hyperspace'`).
+    *   **The 4-Stroke Engine:** Implemented the full "Scrollytelling" lifecycle:
+        1.  **Identity:** `WiggleLogoParallax` (Zoom/Orbit).
+        2.  **Work:** `SlideProjector` (Vertical Pin + List).
+        3.  **Specs:** `LivingGantt` (Horizontal Scroll).
+        4.  **System:** `SystemAssembly` (Scroll-driven Explosion).
+    *   **HUD:** Added global `HyperspaceHUD` with Search trigger and status indicator.
+    *   **Light Mode:** Enabled support in Realm II (Proof of Velocity).
 *   **[Infrastructure] R2 Pruning:** Upgraded `sync_r2.py` with `--prune` (Mirror Mode) to support efficient asset replacement and cleanup of orphaned files.
 *   **[Maintenance] Documentation Consolidation:** Merged duplicate `IMAGE_WORKFLOW.md` SOPs into a strict Single Source of Truth.
 *   **[Security] Credential Rotation:** Hardened `sync_r2.py` with explicit `.env` path loading and `region_name='auto'` Boto3 patching to resolve signature verification failures.
@@ -211,6 +220,11 @@ sidebar:
 *   **[Feature] D3 Interaction:** Added "Jiggle" physics and size-pop on hover for Skills Graph.
 
 ## Colophon / Meta-Portfolio
+### NorrOS (Hyperspace)
+*   **Hook:** A scroll-driven operating system for the portfolio, replacing navigation with "Realms".
+*   **Tech:** Astro, React, Framer Motion, Three.js (R3F).
+*   **Description:** A single-page application experience built on top of a static site generator. Uses sticky containers and manual scroll listeners to map vertical scroll progress to complex 3D and 2D animations (Zoom, Pan, Assemble).
+
 ### Narrative Scroll Engine (ScrollCoordinator)
 *   **Hook:** "Turns static layouts into cinematic, depth-aware stages."
 *   **Tech:** Astro, Vanilla JS, CSS Transforms.

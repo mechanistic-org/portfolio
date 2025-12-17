@@ -63,7 +63,7 @@ const { steps } = Astro.props;
                  });
             }
         });
-    }, { threshold: 0.5 });
+    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
 
     // Observe the Trigger Zones (which have data-step)
     document.querySelectorAll('[data-step]').forEach(el => observer.observe(el));

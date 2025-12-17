@@ -4,18 +4,20 @@
  * These are in a separate file so it can be imported into <style> tags in .astro components
  */
 @theme {
-	/* Cherenkov Blue #2E5CFF */
-	--color-primary-50: oklch(97.0% 0.01 255.0);
-	--color-primary-100: oklch(94.0% 0.03 255.0);
-	--color-primary-200: oklch(88.0% 0.06 255.0);
-	--color-primary-300: oklch(80.0% 0.12 255.0);
-	--color-primary-400: oklch(70.0% 0.18 255.0);
-	--color-primary-500: oklch(62.0% 0.22 255.0); /* Approx #2E5CFF */
-	--color-primary-600: oklch(55.0% 0.22 255.0);
-	--color-primary-700: oklch(45.0% 0.20 255.0);
-	--color-primary-800: oklch(35.0% 0.16 255.0);
-	--color-primary-900: oklch(25.0% 0.12 255.0);
-	--color-primary-950: oklch(15.0% 0.08 255.0);
+	/* Cherenkov Blue #2E5CFF (YInMn Blue) converted to oklch for consistency */
+	--color-primary-50: oklch(97.0% 0.01 264.0);
+	--color-primary-100: oklch(94.0% 0.03 264.0);
+	--color-primary-200: oklch(88.0% 0.06 264.0);
+	--color-primary-300: oklch(80.0% 0.12 264.0);
+	--color-primary-400: oklch(70.0% 0.18 264.0);
+	/* #2E5CFF (YInMn Blue) - Hardcoded for absolute brand consistency */
+	--color-primary-500: #2E5CFF;
+	--color-primary-600: #2E5CFF;
+	/* Match 500 to ensure default text-primary is vibrant */
+	--color-primary-700: oklch(45.0% 0.20 264.0);
+	--color-primary-800: oklch(35.0% 0.16 264.0);
+	--color-primary-900: oklch(25.0% 0.12 264.0);
+	--color-primary-950: oklch(15.0% 0.08 264.0);
 
 	/* neutral colors */
 	--color-neutral-50: oklch(98.51% 0 0);
@@ -68,6 +70,7 @@
 		from {
 			height: 0;
 		}
+
 		to {
 			height: var(--starwind-accordion-content-height);
 		}
@@ -77,6 +80,7 @@
 		from {
 			height: var(--starwind-accordion-content-height);
 		}
+
 		to {
 			height: 0;
 		}
@@ -86,6 +90,7 @@
 		from {
 			transform: translateX(0);
 		}
+
 		to {
 			transform: translateX(calc(-100% - 2.5rem));
 		}

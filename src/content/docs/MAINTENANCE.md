@@ -185,6 +185,16 @@ status: {
 
 ## 8. Troubleshooting
 
+### Frozen Scroll Components (Hyperspace)
+*   **Symptom:** `SlideProjector` or `LivingGantt` won't animate; they stick and stay static.
+*   **Cause:** The component is likely listening to `window` scroll instead of the specific `#hyperspace-container` div.
+*   **Fix:** Ensure `document.getElementById('hyperspace-container')` is passed as the event target or `useScroll` container.
+
+### Font 404s
+*   **Symptom:** `JetBrainsMono` returning 404 in console.
+*   **Fix:** Use the Google Fonts CDN URL in R3F `Text` components (`SystemAssembly.tsx`) instead of local paths if the public asset is missing.
+    *   URL: `https://fonts.gstatic.com/s/jetbrainsmono/v13/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnF8RD8yKxTOlOV.woff`
+
 ### Zombie Asset Checks
 *   **Symptom:** Terminal shows hanging `curl` commands running for hours; system feels sluggish.
 *   **Cause:** Previous asset verification scripts (checking R2 headers) lacking timeouts (`--max-time`) may become zombie processes if the session suspends.

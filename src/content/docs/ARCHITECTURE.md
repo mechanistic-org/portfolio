@@ -14,6 +14,11 @@ sidebar:
     *   **Usage:** Must be applied to the wrapper div of any MDX content render (e.g., `<div class="markdown-content"><Content /></div>`).
 *   **Interactivity:** React (for Charts), Vanilla JS (for 3D & UI)
 
+### The "Realm" Pattern (NorrOS)
+Instead of pages, the Hyperspace theme uses "Realms"—full-screen sections that control their own scroll mechanics.
+*   **Container-Based Scrolling:** Components (`SlideProjector`, `LivingGantt`) listen to `#hyperspace-container` scroll events, NOT `window` scroll. This is critical for the `h-screen fixed` layout.
+*   **The 4-Stroke Cycle:** The page is architected as a linear machine: Intake (Identity) -> Compression (Work) -> Power (Specs) -> Exhaust (System).
+
 ## 4. The "Zero-Bloat" Architecture
 To respect Cloudflare Pages limits (20k files, 25MB script size), we use a Hybrid Static approach:
 1.  **Astro:** Configured as `output: static`. Generates pure HTML/CSS/JS.
