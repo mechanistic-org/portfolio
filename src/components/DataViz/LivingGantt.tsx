@@ -114,14 +114,7 @@ export default function LivingGantt() {
             <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center">
 
                 {/* HUD Overlay (Fixed relative to viewport) */}
-                <div className="absolute top-24 left-8 z-20 pointer-events-none">
-                    <h2 className="text-4xl font-bold text-white uppercase tracking-tighter mix-blend-difference">
-                        Spectrum_Analysis
-                    </h2>
-                    <p className="font-mono text-xs text-neutral-500">
-                        TEMPORAL RESOLUTION: {totalYears} YRS
-                    </p>
-                </div>
+                {/* REMOVED: SPECTRUM_ANALYSIS Header */}
 
                 {/* SOURCE CONSOLE (Right Side Overlay) */}
                 <div className="absolute top-24 right-8 z-40 flex flex-col gap-2 w-64 pointer-events-auto">

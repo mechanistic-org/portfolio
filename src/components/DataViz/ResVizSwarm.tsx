@@ -22,6 +22,7 @@ interface NodeData extends d3.SimulationNodeDatum {
 
 interface ResVizSwarmProps {
     onNodeSelect?: (node: any) => void;
+    externalHoverId?: string;
 }
 
 // --- Color Map (from Colors.csv) ---
@@ -72,9 +73,10 @@ const COLOR_MAP: Record<string, string> = {
 
 const DEFAULT_COLOR = "#666666";
 
-export default function ResVizSwarm() {
+export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwarmProps) {
     const svgRef = useRef<SVGSVGElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
+    const mousePos = useRef<{ x: number, y: number } | null>(null);
     const [tooltip, setTooltip] = useState<{ x: number, y: number, data: NodeData | null }>({ x: 0, y: 0, data: null });
 
     // --- Process Data ---
@@ -123,42 +125,74 @@ export default function ResVizSwarm() {
         const minDate = d3.min(nodes, d => d.date) || new Date(2000, 0, 1);
 
         // VERTICAL: Now (Top) -> Start (Bottom)
-        // Increased padding to preventing clipping of large bubbles
+        // Adjusted padding: Increased top to 250px to prevent clipping of 'Dreamjob' bubble
         const timeScale = d3.scaleTime()
             .domain([new Date(), minDate])
-            .range([400, height - 200]);
+            .range([250, height - 150]);
 
         // Dynamic Color Scale (Flourish Style)
         const colorScale = d3.scaleOrdinal(d3.schemeTableau10);
 
         // --- Simulation ---
+        // Pre-scatter nodes for dramatic intro animation (Fly in from bottom/sides)
+        // Reset positions EVERY mount to ensure the intro effect always plays for the user
+        nodes.forEach(d => {
+            d.x = width / 2 + (Math.random() - 0.5) * 500;
+            d.y = height + 300 + Math.random() * 300; // Start well below view
+            d.vx = 0;
+            d.vy = 0;
+        });
+
         const simulation = d3.forceSimulation<NodeData>(nodes)
-            .force("x", d3.forceX(width / 2).strength(0.08)) // Center horizontally
-            .force("y", d3.forceY<NodeData>(d => timeScale(d.date as Date)).strength(1)) // Vertical Timeline
+            .alphaDecay(0.015) // Slower simulation ~4-5s total
+            .velocityDecay(0.4) // Heavy/Fluid friction
+            .force("x", d3.forceX(width / 2).strength(0.05)) // Center horizontally (gentle)
+            .force("y", d3.forceY<NodeData>(d => timeScale(d.date as Date)).strength(0.15)) // Floating entry, not snapping
             .force("collide", d3.forceCollide<NodeData>(d => (d as any).radius).strength(0.8)) // Allow slight overlap
             .force("charge", d3.forceManyBody().strength(-5))
+            .force("interact", () => {
+                // GRAVITY MOUSE PHYSICS
+                if (!mousePos.current) return;
+                const { x, y } = mousePos.current;
+
+                nodes.forEach(d => {
+                    const dx = x - d.x!;
+                    const dy = y - d.y!;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    // Interaction Radius: 200px
+                    if (dist < 200) {
+                        // Calculate gentle gravity force
+                        const force = (200 - dist) / 200;
+
+                        // Apply velocity modification (Attraction)
+                        // Using '0.5' strength factor for noticeable but not chaotic pull
+                        d.vx! += (dx / dist) * force * 0.5 * simulation.alpha();
+                        d.vy! += (dy / dist) * force * 0.5 * simulation.alpha();
+                    }
+                });
+            })
             .stop();
 
         const svg = d3.select(svgRef.current);
         svg.selectAll("*").remove();
 
+        // Setup Mouse Tracking for Physics
+        svg.on("mousemove", (event) => {
+            const [x, y] = d3.pointer(event);
+            mousePos.current = { x, y };
+            // Low alpha target keeps simulation "warm" but not frantic
+            simulation.alphaTarget(0.1).restart();
+        })
+            .on("mouseleave", () => {
+                mousePos.current = null;
+                simulation.alphaTarget(0);
+            });
+
         // --- Defs for Images ---
-        const defs = svg.append("defs");
-        nodes.forEach((d: any) => {
-            // Strict check for image presence to avoid 404 icons
-            if (d.img && d.img.length > 4 && !d.img.includes("placeholder")) {
-                defs.append("pattern")
-                    .attr("id", `img-${d.id}`)
-                    .attr("height", "100%")
-                    .attr("width", "100%")
-                    .attr("patternContentUnits", "objectBoundingBox")
-                    .append("image")
-                    .attr("height", 1)
-                    .attr("width", 1)
-                    .attr("preserveAspectRatio", "xMidYMid slice")
-                    .attr("href", d.img);
-            }
-        });
+        // DISABLED: Temporarily disabling images to ensure clean aesthetic vs broken/pixelated images
+        // const defs = svg.append("defs");
+        // nodes.forEach((d: any) => { ... });
 
         // --- Axis (Right Side) ---
         const yAxis = d3.axisRight(timeScale)
@@ -176,118 +210,155 @@ export default function ResVizSwarm() {
         const g = svg.append("g");
 
         // --- Nodes ---
-        const circle = g.selectAll("circle")
+        const nodeGroup = g.selectAll(".node-group")
             .data(nodes)
-            .join("circle")
-            .attr("r", (d: any) => d.radius)
-            // If big node + has valid image -> Use Image. Else Dynamic Color.
-            .attr("fill", (d: any) => {
-                const hasImg = d.radius > 30 && d.img && d.img.length > 4 && !d.img.includes("placeholder");
-                if (hasImg) return `url(#img-${d.id})`;
-                return colorScale(d.group);
-            })
-            .attr("stroke", (d: any) => {
-                const hasImg = d.radius > 30 && d.img && d.img.length > 4 && !d.img.includes("placeholder");
-                if (hasImg) return colorScale(d.group);
-                // Basic stroke for colored nodes
-                return "rgba(255,255,255,0.1)";
-            })
-            .attr("stroke-width", (d: any) => {
-                const hasImg = d.radius > 30 && d.img && d.img.length > 4 && !d.img.includes("placeholder");
-                return hasImg ? 3 : 1;
-            })
-            .attr("opacity", 0.9)
-            .attr("cursor", "crosshair")
-            .on("mouseover", function (event, d) {
-                d3.select(this)
-                    .transition().duration(200)
-                    .attr("stroke", "#fff")
-                    .attr("stroke-width", 3)
-                    .attr("filter", "drop-shadow(0 0 15px rgba(255,255,255,0.5))");
+            .join("g")
+            .attr("class", "node-group")
+            .attr("id", (d: any) => "node-" + d.id) // ID for External Selection
+            .attr("transform", (d: any) => `translate(${d.x},${d.y})`) // Prevent 0,0 Flash
+            .attr("cursor", "pointer");
 
-                const [x, y] = d3.pointer(event, containerRef.current);
-                setTooltip({ x, y, data: d });
+        // 1. Main Circle (Color Only for Cleanliness)
+        nodeGroup.append("circle")
+            .attr("r", (d: any) => d.radius)
+            .attr("fill", (d: any) => colorScale(d.group))
+            .attr("stroke", (d: any) => "rgba(255,255,255,0.1)")
+            .attr("stroke-width", 1)
+            .attr("opacity", 0.9);
+
+        // Event Listeners on the GROUP
+        nodeGroup
+            .on("click", (event, d) => {
+                // Keep click for mobile or persistent selection if needed
+                if (onNodeSelect) onNodeSelect(d);
+            })
+            .on("mouseover", function (event, d) {
+                // Visual Highlight
+                d3.select(this).select("circle")
+                    .transition().duration(200)
+                    .attr("stroke", "#fff") // Changed from #ff0000 to #fff
+                    .attr("stroke-width", 6) // Changed from 3 to 6
+                    .attr("filter", "drop-shadow(0 0 25px rgba(255,255,255,0.8))"); // Changed from 15px rgba(255,0,0,0.8) to 25px rgba(255,255,255,0.8)
+
+                // Show Label
+                d3.select("#label-" + d.id).transition().duration(200).style("opacity", 1);
+
+                // const [x, y] = d3.pointer(event, containerRef.current);
+                // setTooltip({ x, y, data: d });
+
+                // TRIGGER DATA BEAM ON HOVER
                 if (onNodeSelect) onNodeSelect(d);
             })
             .on("mouseout", function (event, d) {
-                // Restore original stroke
-                const hasImg = (d as any).radius > 30 && (d as any).img && (d as any).img.length > 4 && !(d as any).img.includes("placeholder");
-                const originalStroke = hasImg ? colorScale((d as any).group) : "rgba(255,255,255,0.1)";
-                const originalWidth = hasImg ? 3 : 1;
-
-                d3.select(this)
+                const originalStroke = "rgba(255,255,255,0.1)";
+                d3.select(this).select("circle")
                     .transition().duration(500)
                     .attr("stroke", originalStroke)
-                    .attr("stroke-width", originalWidth)
+                    .attr("stroke-width", 1)
                     .attr("filter", null);
 
-                setTooltip({ x: 0, y: 0, data: null });
+                // Hide Label
+                d3.select("#label-" + d.id).transition().duration(200).style("opacity", 0);
+
+                // setTooltip({ x: 0, y: 0, data: null });
+
+                // Optional: Reset Data Beam on mouseout? 
+                // Let's keep the last selection to avoid flashing "Awaiting Input" too much
+                // or resetting if they just move between bubbles.
+                // if (onNodeSelect) onNodeSelect(null); 
             });
 
         // --- Labels ---
         const label = g.selectAll("text.label")
-            .data(nodes.filter((d: any) => d.radius > 20)) // Label all decent sized nodes
+            .data(nodes.filter((d: any) => d.radius > 28))
             .join("text")
             .text((d: any) => d.name)
-            .attr("class", "label pointer-events-none font-bold text-white uppercase shadow-black drop-shadow-md")
+            .attr("class", "label pointer-events-none font-bold text-white uppercase")
+            .attr("id", (d: any) => "label-" + d.id) // Add ID for selection
             .attr("text-anchor", "middle")
             .attr("dy", ".35em")
-            .style("font-size", (d: any) => Math.min(14, d.radius / 2) + "px")
-            .style("opacity", 1)
-            // Add slight shadow for readability over images
-            .style("text-shadow", "0 2px 4px rgba(0,0,0,0.8)");
+            .style("font-size", (d: any) => Math.min(12, d.radius / 2.5) + "px")
+            .style("opacity", 0) // Default Hidden
+            // Clean Text Shadow (No Stroke)
+            .style("text-shadow", "0 1px 3px rgba(0,0,0,0.9)");
 
         // --- Tick ---
         simulation.on("tick", () => {
-            circle
-                .attr("cx", d => d.x!)
-                .attr("cy", d => d.y!);
+            // Move the Group
+            nodeGroup.attr("transform", d => `translate(${d.x},${d.y})`);
 
+            // Move the Labels
             label
                 .attr("x", d => d.x!)
                 .attr("y", d => d.y!);
         });
 
-        simulation.alpha(1).restart();
+        // Intro Trigger: Intersection Observer
+        // Increased threshold to 0.4 and added delay to ensure user sees the "Fly-in" Effect
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                // Restart simulation with high energy when visible
+                // Delay 500ms to allow "landing" before the show
+                setTimeout(() => {
+                    simulation.alpha(1).restart();
+                }, 500);
+            } else {
+                // Reset when out of view so it plays again next time
+                simulation.stop();
+                nodes.forEach(d => {
+                    d.x = width / 2 + (Math.random() - 0.5) * 500;
+                    d.y = height + 300 + Math.random() * 300; // Reset to below view
+                    d.vx = 0;
+                    d.vy = 0;
+                });
+            }
+        }, { threshold: 0.1 }); // Use lower threshold for Exit detection?
+        // No, keep 0.1 logic:
+        // Enter > 0.1? Start.
+        // Exit < 0.1? Reset.
+        // Actually, previously used 0.4 for delay. Let's start with 0.2 to be responsive but not flickery.
+
+        if (containerRef.current) observer.observe(containerRef.current);
 
         return () => {
             simulation.stop();
+            observer.disconnect();
         };
     }, [nodes, dimensions]);
+
+    // Effect for external hover (e.g., from a fiche strip)
+    useEffect(() => {
+        if (!svgRef.current) return;
+        const svg = d3.select(svgRef.current);
+
+        // 2. Highlight Target (Using Data Filter for robustness)
+        // Reset all visuals first
+        svg.selectAll(".node-group circle").attr("stroke", "rgba(255,255,255,0.1)").attr("stroke-width", 1).attr("filter", null);
+        svg.selectAll(".label").style("opacity", 0);
+
+        if (externalHoverId) {
+            // Highlight Bubble
+            svg.selectAll(".node-group")
+                .filter((d: any) => d.id === externalHoverId)
+                .select("circle:last-child")
+                .transition().duration(200)
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 6)
+                .attr("filter", "drop-shadow(0 0 25px rgba(255,255,255,0.8))");
+
+            // Highlight Label
+            svg.select("#label-" + externalHoverId)
+                .transition().duration(200)
+                .style("opacity", 1);
+        }
+    }, [externalHoverId]);
 
     return (
         <div ref={containerRef} className="relative w-full h-full bg-black overflow-hidden">
             {/* HUD / Label */}
-            <div className="sticky top-24 left-8 pointer-events-none z-10 mix-blend-difference">
-                <div className="text-[10px] text-neutral-500 font-mono mt-1">
-                    SCROLL TO TRAVERSE TIME
-                </div>
-            </div>
+            {/* REMOVED: SCROLL TO TRAVERSE TIME */}
 
             <svg ref={svgRef} className="w-full h-full block" />
-
-            {/* Tooltip Overlay */}
-            {tooltip.data && (
-                <div
-                    className="absolute z-50 pointer-events-none transform -translate-x-1/2 -translate-y-[120%]"
-                    style={{ left: tooltip.x, top: tooltip.y }}
-                >
-                    <div className="bg-neutral-900/90 border border-primary-500 p-3 rounded shadow-[0_0_15px_rgba(46,92,255,0.3)] backdrop-blur-sm min-w-[200px]">
-                        <div className="text-xs font-mono text-primary-500 mb-1">
-                            {tooltip.data.group}
-                        </div>
-                        <div className="text-white font-bold text-sm mb-1">
-                            {tooltip.data.name}
-                        </div>
-                        <div className="text-[10px] text-neutral-400">
-                            {tooltip.data.start_date.split('T')[0]}
-                            {tooltip.data.end_date ? ` -> ${tooltip.data.end_date.split('T')[0]}` : " -> Present"}
-                        </div>
-                    </div>
-                    {/* Tick / Arrow */}
-                    <div className="w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-primary-500 mx-auto" />
-                </div>
-            )}
         </div>
     );
 }

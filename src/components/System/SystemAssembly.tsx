@@ -207,6 +207,25 @@ export default function SystemAssembly() {
 
 
 
+            {/* CONTEXT OVERLAY */}
+            <div className="absolute top-32 left-8 md:left-24 pointer-events-none z-10">
+                <h2 className="text-sm font-mono text-primary-500 mb-2 tracking-widest">/// SYSTEM_ARCHITECTURE</h2>
+                <div className="space-y-4 max-w-xs text-xs font-mono text-neutral-400">
+                    <div>
+                        <strong className="text-white block mb-1">INTERFACE LAYER</strong>
+                        <p>React 19 + Three.js fiber rendering engine for high-performance visual state.</p>
+                    </div>
+                    <div>
+                        <strong className="text-white block mb-1">LOGIC CORE</strong>
+                        <p>Astro 5 server-side streaming and island architecture data handling.</p>
+                    </div>
+                    <div>
+                        <strong className="text-white block mb-1">INFRASTRUCTURE</strong>
+                        <p>Deployed on Cloudflare Edge with R2 object storage for global low-latency.</p>
+                    </div>
+                </div>
+            </div>
+
             <div className="absolute bottom-32 left-0 w-full flex flex-col items-center pointer-events-none gap-4">
                 <p className="font-mono text-xs text-neutral-500 tracking-widest">
                     SYSTEM INTEGRITY: {Math.round(progress * 100)}%

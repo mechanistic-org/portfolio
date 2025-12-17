@@ -12,7 +12,7 @@ import WorkRealm from "../../components/Realms/WorkRealm";
 import ProjectTunnel from "../../components/Projects/ProjectTunnel";
 import SlideProjector from "../../components/Projects/SlideProjector";
 import SystemAssembly from "../../components/System/SystemAssembly";
-import LivingGantt from "../../components/DataViz/LivingGantt";
+import ArchiveSankey from "../../components/DataViz/ArchiveSankey";
 import DatasheetTable from "@components/About/DatasheetTable.astro";
 import workHistoryRaw from "@/data/work_history.json";
 import { getCollection } from "astro:content";
@@ -89,7 +89,7 @@ function getHash(str: string) {
 			data-step="realm-work"
 			class="relative min-h-[300vh] w-full snap-start border-t border-white/10 bg-black"
 		>
-			<WorkRealm client:visible />
+			<WorkRealm client:only="react" />
 		</section>
 		<!-- REALM III: SPECS (The Brain) -->
 		<section
@@ -127,91 +127,81 @@ function getHash(str: string) {
 			</div>
 		</section>
 		<!-- REALM V: ARCHIVE (The Source) -->
+		<!-- REALM V: ARCHIVE (The Source) -->
 		<section
 			id="realm-archive"
 			data-step="realm-archive"
-			class="relative min-h-[400vh] w-full snap-start border-t border-white/10 bg-black"
+			class="relative z-20 flex h-screen w-full snap-start flex-col items-center justify-center overflow-hidden border-t border-white/10 bg-black"
 		>
-			<!-- THE SOURCE TAPE -->
-			<!-- LivingGantt handles its own sticky containers -->
-			<LivingGantt client:visible />
-
-			<!-- Manual Access Terminal (Sticky Overlay?? Or bottom of tape?) -->
-			<!-- Actually, LivingGantt is the experience. We can put the 'Manual' link in the HUD or in the Gantt itself. -->
-			<!-- For now, the Gantt HUD is sufficient. -->
-
-			<div class="site-container max-w-5xl">
-				<div class="mb-24">
-					<h2 class="mb-12 text-center font-mono text-5xl tracking-widest text-white uppercase">
-						Data Archive
-					</h2>
-					<DatasheetTable />
-				</div>
-
-				<footer class="mt-24 w-full text-center font-mono text-[10px] text-neutral-700">
-					ERIK NORRIS &copy; 2025 // NO FATE BUT WHAT WE MAKE
-				</footer>
+			<div class="relative h-full w-full max-w-7xl p-8">
+				<ArchiveSankey client:only="react" />
 			</div>
-		</section>
 
-		<!-- History/Log Component Inline -->
-		{
-			/* 
+			<footer
+				class="pointer-events-none absolute bottom-4 w-full text-center font-mono text-[10px] text-neutral-800"
+			>
+				ERIK NORRIS &copy; 2025 // NO FATE BUT WHAT WE MAKE
+			</footer>
+		</section>
+	</main>
+
+	<!-- History/Log Component Inline -->
+	{
+		/* 
 			Refactored "Operational Log"
 			- Minimalist, Git-style
 			- JetBrains Mono
 		*/
-		}
-		<div class="site-container max-w-5xl px-4 md:px-0">
-			<!-- Header -->
-			<div class="mb-8 flex items-end justify-between border-b border-neutral-800 pb-2 font-mono">
-				<h2 class="text-xl tracking-widest text-white uppercase">
-					<span class="text-primary-500 mr-2">///</span>Operational Log
-				</h2>
-				<div class="text-[10px] text-neutral-600">KERNEL_PANIC_HISTORY</div>
-			</div>
+	}
+	<div class="site-container max-w-5xl px-4 md:px-0">
+		<!-- Header -->
+		<div class="mb-8 flex items-end justify-between border-b border-neutral-800 pb-2 font-mono">
+			<h2 class="text-xl tracking-widest text-white uppercase">
+				<span class="text-primary-500 mr-2">///</span>Operational Log
+			</h2>
+			<div class="text-[10px] text-neutral-600">KERNEL_PANIC_HISTORY</div>
+		</div>
 
-			<!-- Log Container -->
-			<div class="font-mono text-sm">
-				{
-					hasHistory ? (
-						<div class="space-y-1">
-							{/* Minimal list spacing */}
-							{workHistory.map((job) => (
-								<div class="group flex items-baseline gap-4 py-1 text-neutral-400 transition-colors hover:text-white">
-									{/* Hash / ID */}
-									<div class="hidden w-20 shrink-0 font-mono text-[10px] text-neutral-600 md:block">
-										{getHash(job.company)}
-									</div>
-
-									{/* Date */}
-									<div class="w-16 shrink-0 text-neutral-500">
-										{new Date(job.start).getFullYear()}
-									</div>
-
-									{/* Content */}
-									<div class="flex-1">
-										<span
-											class={`font-bold text-white group-hover:text-[${job.color}] transition-colors`}
-										>
-											{job.company}
-										</span>
-										<span class="mx-2 text-neutral-700">/</span>
-										<span class="text-neutral-300">{job.title}</span>
-									</div>
+		<!-- Log Container -->
+		<div class="font-mono text-sm">
+			{
+				hasHistory ? (
+					<div class="space-y-1">
+						{/* Minimal list spacing */}
+						{workHistory.map((job) => (
+							<div class="group flex items-baseline gap-4 py-1 text-neutral-400 transition-colors hover:text-white">
+								{/* Hash / ID */}
+								<div class="hidden w-20 shrink-0 font-mono text-[10px] text-neutral-600 md:block">
+									{getHash(job.company)}
 								</div>
-							))}
-						</div>
-					) : (
-						<div class="py-4 text-neutral-600">Log empty.</div>
-					)
-				}
-				<div class="mt-4 border-t border-neutral-900 pt-4 text-[10px] text-neutral-700">
-					END OF LOG
-				</div>
+
+								{/* Date */}
+								<div class="w-16 shrink-0 text-neutral-500">
+									{new Date(job.start).getFullYear()}
+								</div>
+
+								{/* Content */}
+								<div class="flex-1">
+									<span
+										class={`font-bold text-white group-hover:text-[${job.color}] transition-colors`}
+									>
+										{job.company}
+									</span>
+									<span class="mx-2 text-neutral-700">/</span>
+									<span class="text-neutral-300">{job.title}</span>
+								</div>
+							</div>
+						))}
+					</div>
+				) : (
+					<div class="py-4 text-neutral-600">Log empty.</div>
+				)
+			}
+			<div class="mt-4 border-t border-neutral-900 pt-4 text-[10px] text-neutral-700">
+				END OF LOG
 			</div>
 		</div>
-	</main>
+	</div>
 </Layout>
 
 <style>
