@@ -241,7 +241,7 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
                     .attr("filter", "drop-shadow(0 0 25px rgba(255,255,255,0.8))"); // Changed from 15px rgba(255,0,0,0.8) to 25px rgba(255,255,255,0.8)
 
                 // Show Label
-                d3.select("#label-" + d.id).transition().duration(200).style("opacity", 1);
+                d3.select(`[id="label-${d.id}"]`).transition().duration(200).style("opacity", 1);
 
                 // const [x, y] = d3.pointer(event, containerRef.current);
                 // setTooltip({ x, y, data: d });
@@ -258,7 +258,7 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
                     .attr("filter", null);
 
                 // Hide Label
-                d3.select("#label-" + d.id).transition().duration(200).style("opacity", 0);
+                d3.select(`[id="label-${d.id}"]`).transition().duration(200).style("opacity", 0);
 
                 // setTooltip({ x: 0, y: 0, data: null });
 
@@ -347,7 +347,7 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
                 .attr("filter", "drop-shadow(0 0 25px rgba(255,255,255,0.8))");
 
             // Highlight Label
-            svg.select("#label-" + externalHoverId)
+            svg.select(`[id="label-${externalHoverId}"]`)
                 .transition().duration(200)
                 .style("opacity", 1);
         }

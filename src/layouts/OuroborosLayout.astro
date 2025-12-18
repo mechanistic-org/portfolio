@@ -1,0 +1,45 @@
+---
+import "@/styles/global.css";
+import BaseHead from "@layouts/BaseHead.astro";
+import CommandMenu from "@components/Search/CommandMenu";
+import BootSequence from "@components/Effects/BootSequence";
+// We EXCLUDE FiberGrid to avoid WebGL / 2D context conflicts
+// and to keep the Ouroboros experience focused.
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props as Props;
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<BaseHead title={title} description={description} />
+	</head>
+	<body class="overflow-hidden bg-black text-neutral-200">
+		<!-- The Noise layer is fine (CSS only) -->
+		<div class="noise-overlay pointer-events-none"></div>
+
+		<div class="relative z-10 h-screen w-screen overflow-hidden">
+			<slot />
+		</div>
+
+		<CommandMenu client:only="react" />
+		<BootSequence client:only="react" />
+	</body>
+</html>
+
+<style is:global>
+	/* Full bleed for the engine */
+	html,
+	body {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		background-color: black;
+	}
+</style>

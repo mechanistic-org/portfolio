@@ -1,0 +1,298 @@
+{
+    "nodes": [
+        {
+            "id": "home",
+            "name": "HOME",
+            "category": "ROOT",
+            "color": "#FFFFFF",
+            "url": "/"
+        },
+        {
+            "id": "realm-identity",
+            "name": "IDENTITY",
+            "category": "REALMS",
+            "color": "#2E5CFF",
+            "url": "/#realm-identity"
+        },
+        {
+            "id": "realm-work",
+            "name": "WORK",
+            "category": "REALMS",
+            "color": "#2E5CFF",
+            "url": "/#realm-work"
+        },
+        {
+            "id": "realm-specs",
+            "name": "SPECS",
+            "category": "REALMS",
+            "color": "#2E5CFF",
+            "url": "/#realm-specs"
+        },
+        {
+            "id": "realm-system",
+            "name": "SYSTEM",
+            "category": "REALMS",
+            "color": "#2E5CFF",
+            "url": "/#realm-system"
+        },
+        {
+            "id": "realm-archive",
+            "name": "ARCHIVE",
+            "category": "REALMS",
+            "color": "#2E5CFF",
+            "url": "/#realm-archive"
+        },
+        {
+            "id": "page-multiverse",
+            "name": "MULTIVERSE",
+            "category": "NETWORK",
+            "color": "#00C2FF",
+            "url": "/multiverse"
+        },
+        {
+            "id": "page-chronos",
+            "name": "CHRONOS",
+            "category": "NETWORK",
+            "color": "#00C2FF",
+            "url": "/chronos"
+        },
+        {
+            "id": "page-map",
+            "name": "SITEMAP",
+            "category": "NETWORK",
+            "color": "#00C2FF",
+            "url": "/map"
+        },
+        {
+            "id": "identity-expertise",
+            "name": "EXPERTISE",
+            "category": "IDENTITY",
+            "color": "#60A5FA",
+            "url": "/#realm-identity"
+        },
+        {
+            "id": "identity-tools",
+            "name": "TOOLS",
+            "category": "IDENTITY",
+            "color": "#60A5FA",
+            "url": "/#realm-identity"
+        },
+        {
+            "id": "identity-bio",
+            "name": "BIO",
+            "category": "IDENTITY",
+            "color": "#60A5FA",
+            "url": "/#realm-identity"
+        },
+        {
+            "id": "dreamjob",
+            "name": "DREAMJOB",
+            "category": "WORK",
+            "color": "#8da80c",
+            "url": "/projects/dreamjob"
+        },
+        {
+            "id": "Freelance",
+            "name": "FREELANCE",
+            "category": "WORK",
+            "color": "#286745",
+            "url": "/projects/Freelance"
+        },
+        {
+            "id": "Makeline",
+            "name": "MAKELINE",
+            "category": "WORK",
+            "color": "#726add",
+            "url": "/projects/Makeline"
+        },
+        {
+            "id": "Dispensers",
+            "name": "DISPENSERS",
+            "category": "WORK",
+            "color": "#726add",
+            "url": "/projects/Dispensers"
+        },
+        {
+            "id": "Backsplash",
+            "name": "BACKSPLASH",
+            "category": "WORK",
+            "color": "#726add",
+            "url": "/projects/Backsplash"
+        },
+        {
+            "id": "Portion Cup",
+            "name": "PORTION CUP",
+            "category": "WORK",
+            "color": "#726add",
+            "url": "/projects/Portion Cup"
+        },
+        {
+            "id": "Pet Scale",
+            "name": "PET SCALE",
+            "category": "WORK",
+            "color": "#286745",
+            "url": "/projects/Pet Scale"
+        },
+        {
+            "id": "battery lock",
+            "name": "BATTERY LOCK",
+            "category": "WORK",
+            "color": "#286745",
+            "url": "/projects/battery lock"
+        },
+        {
+            "id": "IOT module",
+            "name": "IOT MODULE",
+            "category": "WORK",
+            "color": "#286745",
+            "url": "/projects/IOT module"
+        },
+        {
+            "id": "bay wheels",
+            "name": "BAY WHEELS",
+            "category": "WORK",
+            "color": "#286745",
+            "url": "/projects/bay wheels"
+        },
+        {
+            "id": "Switches",
+            "name": "SWITCHES",
+            "category": "WORK",
+            "color": "#8f8315",
+            "url": "/projects/Switches"
+        },
+        {
+            "id": "Extension Switches",
+            "name": "EXTENSION SWITCHES",
+            "category": "WORK",
+            "color": "#8f8315",
+            "url": "/projects/Extension Switches"
+        },
+        {
+            "id": "Room Director",
+            "name": "ROOM DIRECTOR",
+            "category": "WORK",
+            "color": "#8f8315",
+            "url": "/projects/Room Director"
+        },
+        {
+            "id": "Wall Plates",
+            "name": "WALL PLATES",
+            "category": "WORK",
+            "color": "#8f8315",
+            "url": "/projects/Wall Plates"
+        },
+        {
+            "id": "Base",
+            "name": "BASE",
+            "category": "WORK",
+            "color": "#8f8315",
+            "url": "/projects/Base"
+        },
+        {
+            "id": "Glyph 2",
+            "name": "GLYPH 2",
+            "category": "WORK",
+            "color": "#6da409",
+            "url": "/projects/Glyph 2"
+        },
+        {
+            "id": "Glyph",
+            "name": "GLYPH",
+            "category": "WORK",
+            "color": "#6da409",
+            "url": "/projects/Glyph"
+        },
+        {
+            "id": "BFD",
+            "name": "BFD",
+            "category": "WORK",
+            "color": "#286745",
+            "url": "/projects/BFD"
+        },
+        {
+            "id": "Strato",
+            "name": "STRATO",
+            "category": "WORK",
+            "color": "#04e32f",
+            "url": "/projects/Strato"
+        },
+        {
+            "id": "Cinema One",
+            "name": "CINEMA ONE",
+            "category": "WORK",
+            "color": "#04e32f",
+            "url": "/projects/Cinema One"
+        },
+        {
+            "id": "M700",
+            "name": "M700",
+            "category": "WORK",
+            "color": "#04e32f",
+            "url": "/projects/M700"
+        },
+        {
+            "id": "DV700",
+            "name": "DV700",
+            "category": "WORK",
+            "color": "#04e32f",
+            "url": "/projects/DV700"
+        },
+        {
+            "id": "Disc Cartridges",
+            "name": "DISC CARTRIDGES",
+            "category": "WORK",
+            "color": "#04e32f",
+            "url": "/projects/Disc Cartridges"
+        },
+        {
+            "id": "specs-hardware",
+            "name": "HARDWARE",
+            "category": "SPECS",
+            "color": "#FBBF24",
+            "url": "/#realm-specs"
+        },
+        {
+            "id": "specs-software",
+            "name": "SOFTWARE",
+            "category": "SPECS",
+            "color": "#FBBF24",
+            "url": "/#realm-specs"
+        },
+        {
+            "id": "specs-infra",
+            "name": "INFRA",
+            "category": "SPECS",
+            "color": "#FBBF24",
+            "url": "/#realm-specs"
+        },
+        {
+            "id": "system-philosophy",
+            "name": "PHILOSOPHY",
+            "category": "SYSTEM",
+            "color": "#A78BFA",
+            "url": "/#realm-system"
+        },
+        {
+            "id": "system-workflows",
+            "name": "WORKFLOWS",
+            "category": "SYSTEM",
+            "color": "#A78BFA",
+            "url": "/#realm-system"
+        },
+        {
+            "id": "archive-timeline",
+            "name": "TIMELINE",
+            "category": "ARCHIVE",
+            "color": "#F87171",
+            "url": "/#realm-archive"
+        },
+        {
+            "id": "archive-flow",
+            "name": "CAREER_FLOW",
+            "category": "ARCHIVE",
+            "color": "#F87171",
+            "url": "/#realm-archive"
+        }
+    ]
+}

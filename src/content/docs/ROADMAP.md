@@ -382,6 +382,12 @@ sidebar:
 *   **[Refactor] Radial Branding:** Removed "Quantum" labels from Radial Taxonomy, replacing them with "Erik Norris".
 *   **[Safety] D3 Hardening:** Patched `RadialTaxonomy.tsx` to handle 0x0 container dimensions gracefully (preventing negative radius crashes).
 
+## 🚀 The Horizon (V6)
+*   **[Vision] The Ouroboros (Constellation Engine):**
+    *   **Goal:** Dissolve linear "Realms" into a unified, non-linear graph navigation.
+    *   **Concept:** "The Page is the Map." Zoom-based navigation through the 3D Multiverse of projects and skills.
+    *   **Reference:** `docs/backlog/OUROBOROS_VISION.md`.
+
 ## 🧊 The Backlog (Icebox)
 *   **[Refactor] Operation Identity Shift:**
     *   **Goal:** Rename repo (`quantum` -> `eriknorris`) and local folders.

@@ -12,18 +12,24 @@
 
 import StandardHome from "@components/Themes/StandardHome.astro";
 import HyperspaceHome from "@components/Themes/HyperspaceHome.astro";
+import OuroborosHome from "@components/Themes/OuroborosHome.astro";
 
 // Default Theme Strategy
-// Change this string to 'classic' to default to the old site.
+// v5: hyperspace
+// v6: ouroboros (Phase 6)
 const DEFAULT_THEME = "hyperspace";
 
 let activeTheme = DEFAULT_THEME;
 
 // 1. Check Query Param (Highest Priority)
-// usage: /?theme=classic
+// usage: /?theme=classic | ?theme=hyperspace | ?theme=ouroboros
 if (Astro.url.searchParams.has("theme")) {
 	const requestedTheme = Astro.url.searchParams.get("theme");
-	if (requestedTheme === "classic" || requestedTheme === "hyperspace") {
+	if (
+		requestedTheme === "classic" ||
+		requestedTheme === "hyperspace" ||
+		requestedTheme === "ouroboros"
+	) {
 		activeTheme = requestedTheme;
 	}
 }
@@ -31,4 +37,12 @@ if (Astro.url.searchParams.has("theme")) {
 // Future: Check Cookie Logic here
 ---
 
-{activeTheme === "classic" ? <StandardHome /> : <HyperspaceHome />}
+{
+	activeTheme === "classic" ? (
+		<StandardHome />
+	) : activeTheme === "hyperspace" ? (
+		<HyperspaceHome />
+	) : (
+		<OuroborosHome />
+	)
+}

@@ -541,8 +541,8 @@
       "img": "/assets/r2/m300/hero-sm.webp"
     },
     {
-      "id": "KSERVER-1500",
-      "name": "KSERVER-1500",
+      "id": "KSERVER-1500-2010",
+      "name": "KSERVER-1500 (2010)",
       "group": "Kaleidescape",
       "color": "#04e32f",
       "value": 179.1087386417331,
@@ -661,8 +661,8 @@
       "img": "/assets/r2/speed-reader/hero-sm.webp"
     },
     {
-      "id": "KSERVER-1500",
-      "name": "KSERVER-1500",
+      "id": "KSERVER-1500-2008",
+      "name": "KSERVER-1500 (2008)",
       "group": "Kaleidescape",
       "color": "#04e32f",
       "value": 183.2178857704904,
