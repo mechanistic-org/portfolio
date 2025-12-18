@@ -1,5 +1,5 @@
 import React, { useRef, useMemo } from 'react';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import {
     OrbitControls,
     Environment,
@@ -9,8 +9,10 @@ import {
     Float,
     Line
 } from '@react-three/drei';
+import { EffectComposer, Bloom, Noise, Vignette, ChromaticAberration } from '@react-three/postprocessing';
 import * as THREE from 'three';
 import ConstellationNode from './ConstellationNode';
+import Nebula from './Nebula';
 
 interface NodeData {
     id: string;
@@ -33,66 +35,94 @@ interface ConstellationEngineProps {
 function Stage({ data, layout = 'tectonic' }: { data: { nodes: NodeData[] }, layout?: 'tectonic' | 'cylinder' }) {
     const groupRef = useRef<THREE.Group>(null);
 
-    // Hierarchical Processing
+    // Macroscopic Global Physics
+    useFrame((state) => {
+        if (!groupRef.current) return;
+        // Slow majestic rotation
+        groupRef.current.rotation.y = state.clock.getElapsedTime() * 0.05;
+        groupRef.current.rotation.z = Math.sin(state.clock.getElapsedTime() * 0.1) * 0.02;
+    });
+
     const positionedNodes = useMemo(() => {
         const pNodes: any[] = [];
-        const rootNode = data.nodes.find(n => n.category === 'ROOT');
         const realmNodes = data.nodes.filter(n => n.category === 'REALMS');
-        const leafNodes = data.nodes.filter(n => n.category !== 'ROOT' && n.category !== 'REALMS');
+        const coreNodes = data.nodes.filter(n => n.category === 'CORE');
+        const leafNodes = data.nodes.filter(n => n.category !== 'REALMS' && n.category !== 'CORE');
 
-        // 1. PLACE ROOT
-        const corePos: [number, number, number] = [0, 0, 0];
-        if (rootNode) {
+        const origin: [number, number, number] = [0, 0, 0];
+
+        // 1. PLACE CORE (The Self) - Tight spherical cluster near origin
+        coreNodes.forEach((node, i) => {
+            const phi = Math.acos(-1 + (2 * i) / coreNodes.length);
+            const theta = Math.sqrt(coreNodes.length * Math.PI) * phi;
+            const dist = 6 + Math.random() * 2;
+
+            const pos: [number, number, number] = [
+                dist * Math.cos(theta) * Math.sin(phi),
+                dist * Math.sin(theta) * Math.sin(phi),
+                dist * Math.cos(phi)
+            ];
+
             pNodes.push({
-                ...rootNode,
-                position: corePos,
-                level: 'root',
-                clusterCenter: corePos
+                ...node,
+                position: pos,
+                level: 'core',
+                clusterCenter: origin
             });
-        }
+        });
 
-        // 2. ORBIT REALMS (The Hubs)
-        const realmRadius = 35;
+        // 2. ORBIT REALMS (The Macroscopic Anchors) - Non-coplanar spherical distribution
+        // Using fixed angles that are explicitly NOT on the XZ plane
+        const realmRadius = 45;
         const realmMap: Record<string, [number, number, number]> = {};
 
+        // Explicitly defining spherical coords for the 4 realms to ensure they aren't coplanar
+        // [phi (lat), theta (long)]
+        const coords: [number, number][] = [
+            [Math.PI * 0.4, 0],              // WORK
+            [Math.PI * 0.6, Math.PI * 0.5],   // SPECS
+            [Math.PI * 0.3, Math.PI],         // SYSTEM
+            [Math.PI * 0.7, Math.PI * 1.5]    // ARCHIVE
+        ];
+
         realmNodes.forEach((node, i) => {
-            const angle = (i / realmNodes.length) * Math.PI * 2;
+            const [phi, theta] = coords[i % coords.length];
             const pos: [number, number, number] = [
-                Math.cos(angle) * realmRadius,
-                0,
-                Math.sin(angle) * realmRadius
+                realmRadius * Math.sin(phi) * Math.cos(theta),
+                realmRadius * Math.cos(phi),
+                realmRadius * Math.sin(phi) * Math.sin(theta)
             ];
+
             realmMap[node.name.toUpperCase()] = pos;
             pNodes.push({
                 ...node,
                 position: pos,
                 level: 'realm',
-                clusterCenter: corePos // Linked to Root
+                clusterCenter: origin
             });
         });
 
-        // 3. CLUSTER LEAVES (The Spokes)
+        // 3. CLUSTER LEAVES (The Satellites) - Spherical branching
         leafNodes.forEach((node) => {
-            // Find parent hub by category name matching realm name
             const parentKey = node.category.toUpperCase();
-            const hubPos = realmMap[parentKey] || [0, 0, 0];
+            const hubPos = realmMap[parentKey] || realmMap['WORK'] || origin;
 
-            // Random offset within the sector cluster
+            // Distributed spherical cluster around hub
             const phi = Math.random() * Math.PI * 2;
             const theta = Math.random() * Math.PI;
-            const dist = 8 + Math.random() * 6;
+            const dist = 10 + Math.random() * 8;
 
             const pos: [number, number, number] = [
                 hubPos[0] + dist * Math.sin(theta) * Math.cos(phi),
-                hubPos[1] + dist * Math.sin(theta) * Math.sin(phi),
-                hubPos[2] + dist * Math.cos(theta)
+                hubPos[1] + dist * Math.cos(theta),
+                hubPos[2] + dist * Math.sin(theta) * Math.sin(phi)
             ];
 
             pNodes.push({
                 ...node,
                 position: pos,
                 level: 'leaf',
-                clusterCenter: hubPos // Linked to Realm Hub
+                clusterCenter: hubPos
             });
         });
 
@@ -101,20 +131,20 @@ function Stage({ data, layout = 'tectonic' }: { data: { nodes: NodeData[] }, lay
 
     return (
         <group ref={groupRef}>
-            {/* Hierarchical Connections */}
-            {positionedNodes.map((node, i) => {
-                if (node.id === 'home') return null; // Root has no parent
-                return (
-                    <Line
-                        key={`line-${node.id}-${i}`}
-                        points={[node.clusterCenter, node.position]}
-                        color={node.level === 'realm' ? "#FFFFFF" : (node.color || "#2E5CFF")}
-                        lineWidth={node.level === 'realm' ? 1.5 : 0.4}
-                        transparent
-                        opacity={node.level === 'realm' ? 0.4 : 0.15}
-                    />
-                );
-            })}
+            {/* The Nebula Background */}
+            <Nebula />
+
+            {/* Majestic Beams */}
+            {positionedNodes.map((node, i) => (
+                <Line
+                    key={`line-${node.id}-${i}`}
+                    points={[node.clusterCenter, node.position]}
+                    color={node.level === 'realm' ? "#FFFFFF" : (node.color || "#2E5CFF")}
+                    lineWidth={node.level === 'realm' ? 2 : 0.4}
+                    transparent
+                    opacity={node.level === 'realm' ? 0.3 : 0.15}
+                />
+            ))}
 
             {/* Nodes */}
             {positionedNodes.map((node) => (
@@ -122,19 +152,20 @@ function Stage({ data, layout = 'tectonic' }: { data: { nodes: NodeData[] }, lay
                     key={node.id}
                     data={node}
                     position={node.position}
-                    scale={node.level === 'root' ? 2 : node.level === 'realm' ? 1.5 : 1}
+                    scale={node.level === 'realm' ? 2 : node.level === 'core' ? 1.5 : 1}
                 />
             ))}
 
-            {/* Labels - Only for Root and Realms to provide "Direction to Approach" */}
+            {/* Macroscopic Labels */}
             {positionedNodes.filter(n => n.level !== 'leaf').map((node) => (
-                <group key={`label-con-${node.id}`} position={[node.position[0], node.position[1] + (node.level === 'root' ? 3 : 2), node.position[2]]}>
-                    <Float speed={2} rotationIntensity={0.1} floatIntensity={0.2}>
+                <group key={`label-con-${node.id}`} position={node.position}>
+                    <Float speed={1} rotationIntensity={0.1} floatIntensity={0.2}>
                         <Text
-                            fontSize={node.level === 'root' ? 5 : 3.5}
-                            color={node.level === 'root' ? "#FFFFFF" : "#00C2FF"}
+                            position={[0, node.level === 'realm' ? 3.5 : 2, 0]}
+                            fontSize={node.level === 'realm' ? 4.5 : 2.5}
+                            color={node.level === 'core' ? "#FFFFFF" : "#00C2FF"}
                             fillOpacity={0.9}
-                            outlineWidth={0.05}
+                            outlineWidth={0.06}
                             outlineColor="#000"
                             textAlign="center"
                         >
@@ -144,7 +175,19 @@ function Stage({ data, layout = 'tectonic' }: { data: { nodes: NodeData[] }, lay
                 </group>
             ))}
 
-            <Stars radius={200} depth={60} count={6000} factor={4} saturation={0} fade speed={1.5} />
+            <Stars radius={300} depth={80} count={9000} factor={7} saturation={0} fade speed={1} />
+
+            {/* $10M Post-Processing Glow */}
+            <EffectComposer>
+                <Bloom
+                    luminanceThreshold={1.0}
+                    mipmapBlur
+                    intensity={1.5}
+                    radius={0.4}
+                />
+                <Noise opacity={0.02} />
+                <Vignette eskil={false} offset={0.1} darkness={1.1} />
+            </EffectComposer>
         </group>
     );
 }

@@ -1,0 +1,53 @@
+{
+    "nodes": [
+        {
+            "id": "strato-core",
+            "name": "STRATO_ECOSYSTEM",
+            "category": "CORE",
+            "color": "#04e32f",
+            "url": "/projects/Strato"
+        },
+        {
+            "id": "strato-ui",
+            "name": "4K INTERFACE",
+            "category": "SYSTEMS",
+            "color": "#00C2FF",
+            "url": "/projects/Strato#ui"
+        },
+        {
+            "id": "strato-hw",
+            "name": "THERMAL DYNAMICS",
+            "category": "SYSTEMS",
+            "color": "#FFFFFF",
+            "url": "/projects/Strato#hw"
+        },
+        {
+            "id": "strato-id",
+            "name": "INDUSTRIAL DESIGN",
+            "category": "SYSTEMS",
+            "color": "#A78BFA",
+            "url": "/projects/Strato#id"
+        },
+        {
+            "id": "case-remote",
+            "name": "REMOTE CONTROL",
+            "category": "SUB-MODULES",
+            "color": "#FFFFFF",
+            "url": "/projects/Strato#remote"
+        },
+        {
+            "id": "case-app",
+            "name": "MOBILE APP",
+            "category": "SUB-MODULES",
+            "color": "#00C2FF",
+            "url": "/projects/Strato#app"
+        },
+        {
+            "id": "case-server",
+            "name": "SERVER ARCH",
+            "category": "SUB-MODULES",
+            "color": "#FBBF24",
+            "url": "/projects/Strato#server"
+        }
+    ]
+}

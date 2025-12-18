@@ -16,15 +16,19 @@ export default function ConstellationNode({ data, position, scale = 1 }: NodePro
     useFrame((state) => {
         if (!meshRef.current) return;
 
-        // 1. Subtle "Breathing" / Wiggle
+        // 1. MacOScopic "Breathing" - Slower and larger
         const t = state.clock.getElapsedTime();
-        const wiggle = Math.sin(t + (data.id?.charCodeAt(0) || 0)) * 0.05;
-        meshRef.current.position.y = position[1] + wiggle;
+        const slowWiggle = Math.sin(t * 0.5 + (data.id?.charCodeAt(0) || 0)) * 0.15;
+        meshRef.current.position.y = position[1] + slowWiggle;
+
+        // Slow Individual Spin
+        meshRef.current.rotation.x = t * 0.1;
+        meshRef.current.rotation.z = t * 0.05;
 
         // 2. Scale Lerp on Hover
         const baseScale = scale;
-        const targetScale = hovered ? baseScale * 1.5 : baseScale;
-        meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
+        const targetScale = hovered ? baseScale * 1.8 : baseScale; // More dramatic hover
+        meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.05); // Smoother transition
     });
 
     const handleNodeClick = (e: any) => {

@@ -1,20 +1,6 @@
 {
     "nodes": [
         {
-            "id": "home",
-            "name": "HOME",
-            "category": "ROOT",
-            "color": "#FFFFFF",
-            "url": "/"
-        },
-        {
-            "id": "realm-identity",
-            "name": "IDENTITY",
-            "category": "REALMS",
-            "color": "#2E5CFF",
-            "url": "/#realm-identity"
-        },
-        {
             "id": "realm-work",
             "name": "WORK",
             "category": "REALMS",
@@ -66,22 +52,22 @@
         {
             "id": "identity-expertise",
             "name": "EXPERTISE",
-            "category": "IDENTITY",
-            "color": "#60A5FA",
+            "category": "CORE",
+            "color": "#FFFFFF",
             "url": "/#realm-identity"
         },
         {
             "id": "identity-tools",
             "name": "TOOLS",
-            "category": "IDENTITY",
-            "color": "#60A5FA",
+            "category": "CORE",
+            "color": "#FFFFFF",
             "url": "/#realm-identity"
         },
         {
             "id": "identity-bio",
             "name": "BIO",
-            "category": "IDENTITY",
-            "color": "#60A5FA",
+            "category": "CORE",
+            "color": "#FFFFFF",
             "url": "/#realm-identity"
         },
         {
