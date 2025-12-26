@@ -52,14 +52,11 @@
 
 		--radius: 0.5rem;
 
-		/* default font */
-		font-family: var(--font-mono), "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+		/* Brutalist Header Font - Barlow Condensed (The "HUD" Look) */
+		--font-header: "Barlow Condensed", "Impact", "Arial Narrow", sans-serif;
 
-		/* Light Mode Grid Color (Process Blue C approx) */
-		--grid-color: rgba(0, 133, 202, 0.1);
-
-		/* Brutalist Header Font */
-		--font-header: "Inter", "Helvetica Neue", "Arial", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+		/* Default Body Font - Barlow (The "Engineer" Look) */
+		font-family: "Barlow", "Inter", system-ui, sans-serif;
 	}
 
 	html.dark {

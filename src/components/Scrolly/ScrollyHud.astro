@@ -7,13 +7,13 @@ interface Props {
 const { steps, showLabels = false } = Astro.props;
 ---
 
-<nav class="fixed right-6 top-1/2 z-50 -translate-y-1/2 hidden md:block group">
+<nav class="fixed right-6 top-1/2 z-[100] -translate-y-1/2 hidden md:block group pointer-events-auto scrolly-nav-container">
   <div class="flex flex-col gap-4">
     {steps.map((step) => (
       <a
-        href={`#trigger-${step.id}`}
+        href={`#${step.id}`}
         class="nav-dot relative flex items-center justify-end"
-        data-target={`trigger-${step.id}`}
+        data-target={`${step.id}`}
         aria-label={`Scroll to ${step.label}`}
       >
         <!-- Label (Hover Reveal) -->
@@ -31,57 +31,105 @@ const { steps, showLabels = false } = Astro.props;
   </div>
 </nav>
 
+<script>
+    function initScrollyHud() {
+        const navContainer = document.querySelector('.scrolly-nav-container');
+        const dots = document.querySelectorAll('.nav-dot');
+        // Try to find the specific container, or default to null (implying window/body scroll)
+        const container = document.getElementById('hyperspace-container');
+        const isWindowScroll = !container; 
+        const scrollRoot = container || null; // For IntersectionObserver root (null = viewport)
+
+        // 1. INTERSECTION OBSERVER (Active State)
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                     const id = entry.target.getAttribute('data-step');
+                     dots.forEach(dot => {
+                         if (dot.getAttribute('data-target') === id) {
+                             dot.classList.add('active');
+                         } else {
+                             dot.classList.remove('active');
+                         }
+                     });
+                }
+            });
+        }, { 
+            root: scrollRoot, 
+            rootMargin: '-45% 0px -45% 0px', // Very tight focus line in center
+            threshold: 0 
+        });
+
+        const sections = document.querySelectorAll('[data-step]');
+        if (sections.length === 0) {
+             // Retry if content hasn't loaded yet (rare race condition)
+             setTimeout(initScrollyHud, 100);
+             return;
+        }
+        sections.forEach(el => observer.observe(el));
+
+
+        // 2. CLICK HANDLING (Event Delegation)
+        // We attach to the parent to ensure we catch bubbling events
+        if (navContainer) {
+            navContainer.addEventListener('click', (e) => {
+                // Find closest anchor tag
+                const link = (e.target as HTMLElement).closest('.nav-dot');
+                if (!link) return; 
+
+                e.preventDefault();
+                const targetId = link.getAttribute('data-target');
+                if (!targetId) return;
+
+                // Robust ID finding (Handles Homepage #realm-x and Project #trigger-x)
+                let targetEl = document.getElementById(targetId);
+                if (!targetEl) targetEl = document.getElementById(`trigger-${targetId}`);
+                if (!targetEl) targetEl = document.getElementById(`realm-${targetId}`);
+                
+                if (targetEl) {
+                     // 🧮 Calculate Scroll Position
+                     let topPos = 0;
+                     
+                     if (container) {
+                        // Container Scroll
+                        topPos = targetEl.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop;
+                        container.scrollTo({ top: topPos, behavior: 'smooth' });
+                     } else {
+                        // Window Scroll
+                        // getBoundingClientRect().top is relative to viewport. 
+                        // window.scrollY is current scroll.
+                        // So absolute top is rect.top + scrollY.
+                        // We want to center it, so minus half viewport? Or just scroll to top?
+                        // Usually HUD navigates to the start of the section.
+                        topPos = targetEl.getBoundingClientRect().top + window.scrollY;
+                        window.scrollTo({ top: topPos, behavior: 'smooth' });
+                     }
+                }
+            });
+        }
+    }
+
+    // Start
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initScrollyHud);
+    } else {
+        initScrollyHud();
+    }
+</script>
+
 <style>
-  /* Active State Logic */
-  .active .nav-dot-circle {
-    background-color: #2E5CFF; /* YinMn Blue */
-    border-color: #2E5CFF;
+  /* Active State Logic - FORCED */
+  :global(.active) .nav-dot-circle {
+    background-color: #2E5CFF !important; /* YinMn Blue */
+    border-color: #2E5CFF !important;
     transform: scale(1.6);
-    box-shadow: 0 0 15px rgba(46, 92, 255, 0.6);
+    box-shadow: 0 0 15px rgba(46, 92, 255, 0.6) !important;
   }
   
-  .active span {
-      color: #2E5CFF;
+  :global(.active) span {
+      color: #2E5CFF !important;
       opacity: 1 !important;
       transform: translateX(0) !important;
-      border-color: #2E5CFF / 30;
+      border-color: rgba(46, 92, 255, 0.3) !important;
   }
 </style>
-
-<script>
-    // HUD ACTIVE STATE SYNC
-    // This listens to the same 'scrolly-active' dataset that we might want to expose on the body or manage via observer
-    // For V1, we simply re-use an IntersectionObserver to toggle the 'active' class on matching links
-    
-    const dots = document.querySelectorAll('.nav-dot');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                 const id = entry.target.getAttribute('data-step');
-                 dots.forEach(dot => {
-                     if (dot.getAttribute('data-target') === `trigger-${id}`) {
-                         dot.classList.add('active');
-                     } else {
-                         dot.classList.remove('active');
-                     }
-                 });
-            }
-        });
-    }, { rootMargin: '-20% 0px -20% 0px', threshold: 0.1 });
-
-    // Observe the Trigger Zones (which have data-step)
-    document.querySelectorAll('[data-step]').forEach(el => observer.observe(el));
-
-    // SMOOTH SCROLL FOR DOTS
-    dots.forEach(dot => {
-        dot.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = dot.getAttribute('data-target');
-            const targetEl = document.getElementById(targetId || '');
-            if (targetEl) {
-                targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        });
-    });
-</script>
