@@ -120,6 +120,15 @@ We use custom VS Code snippets to rapidly scaffold "Visual Taxonomy" components.
 *   **3D Models:** Add a `.glb` file in the folder. It will be auto-detected.
 *   **Videos:** Currently, the script inserts a placeholder YouTube ID. You must manually edit the generated `.mdx` file or update the script to map video IDs from a CSV column.
 
+### Interactive Gallery Triggers
+The `SharedLayoutGallery` supports interactive modules disguised as images.
+*   **Schema:** in `c24.mdx` (or any project):
+    ```yaml
+    - { src: "/assets/preview.png", title: "Launch Module", trigger: "time-capsule" }
+    ```
+*   **Supported Triggers:**
+    *   `time-capsule`: Launches the `TimeCapsule.tsx` modal (DigiME Intranet).
+
 ### Troubleshooting Charts
 If a chart isn't showing up:
 1.  **Check Data:** Ensure `Stats.csv` has non-zero values for Plastic/Metal/PCB for that project.
@@ -185,6 +194,46 @@ status: {
 
 ## 8. Troubleshooting
 
+### Astro Compiler Panic (Exit Code 2 / "originalIM was set twice")
+*   **Symptom:** `npm run dev` crashes instantly with `bad parser state` or `Go program has already exited`.
+*   **Cause:** A `.astro` file is missing the opening Frontmatter Fence (`---`) at the very top. The compiler misinterprets TypeScript interfaces as HTML/Content.
+*   **Fix:** Ensure the file starts immediately with `---`.
+
+### Raw HTML rendering in Hyperspace
+*   **Symptom:** Content with `<ul>` or `<strong>` tags renders as escaped text (e.g., `<p><ul>...</ul></p>`).
+*   **Cause:** Passing HTML strings through intermediate props (e.g., `<Component body={html} />`) can trigger auto-escaping.
+*   **Fix:** Use the "Slot Pattern".
+    1.  **Layout:** Render the HTML directly using `set:html` on a container: `<div set:html={n.body} />`.
+    2.  **Component:** Accept the rendered content via `<slot />`.
+
+### Asset Ingestion Fails (File Locking)
+*   **Symptom:** `ingest_data.py` crashes with `PermissionError: [WinError 32]` or `shutil` errors.
+*   **Cause:** The local dev server (`npm run dev`) locks files in `public/assets/r2`, preventing the script from overwriting them during sync.
+*   **Fix:** The script has been patched to use `try/except` blocks and `dirs_exist_ok=True`. If it persists, stop the dev server, run `python ingest_data.py`, then restart the server.
+
+### Overbaked 3D Models (Washed Out / Too Bright)
+*   **Symptom:** 3D model looks nuclear white or loses surface detail.
+*   **Cause:** Default `model-viewer` exposure (1.0) or "Neutral" environment map is too aggressive for our data-viz aesthetic.
+*   **Fix:**
+    1.  Force `exposure="0.3"` in the component props.
+    2.  Remove `environment-image` attribute (reverts to unlit/legacy shading).
+
+### Scrolly Sidenav Dots Not Filling
+*   **Symptom:** Sidenav dots remain empty circles even when the section is active.
+*   **Cause:** CSS Specificity issue or missing color token.
+*   **Fix:** Ensure the active class targets the inner circle with the specific YinMn Blue token:
+    ```css
+    .active .nav-dot-circle {
+        background-color: #2E5CFF; /* YinMn Blue */
+        border-color: #2E5CFF;
+    }
+    ```
+
+### Missing DataViz in Hyperspace Theme
+*   **Symptom:** You added `<MetricComparison />` to MDX, but it doesn't render on the page.
+*   **Cause:** The `Hyperspace.astro` layout is missing the `<slot />` element for the main content flow.
+*   **Fix:** Add `<section><slot /></section>` below the `Narrative` section in the layout file.
+
 ### Blank System Realm (3D Void)
 *   **Symptom:** The System Realm (Realm IV) is black/blank. No 3D objects are visible.
 *   **Cause:**
@@ -213,6 +262,19 @@ status: {
 *   **Symptom:** `JetBrainsMono` returning 404 in console.
 *   **Fix:** Use the Google Fonts CDN URL in R3F `Text` components (`SystemAssembly.tsx`) instead of local paths if the public asset is missing.
     *   URL: `https://fonts.gstatic.com/s/jetbrainsmono/v13/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnF8RD8yKxTOlOV.woff`
+
+### D3 Selector Crash (IDs with Spaces)
+*   **Symptom:** Visualization (Swarm/Sankey) crashes or fails to highlight nodes on hover.
+*   **Cause:** D3 `select("#id")` fails if the ID contains spaces (e.g., "Portion Cup").
+*   **Fix:** Use attribute selectors instead: `d3.select("[id='label-${d.id}']")`.
+
+### R3F Canvas Context Collision
+*   **Symptom:** 3D map is missing or background elements (FiberGrid) overlap incorrectly.
+*   **Fix:** Ensure the page uses **OuroborosLayout.astro**, which provides a clean WebGL shell without legacy 2D grid interference.
+
+### Missing Constellation Line Import
+*   **Symptom:** `Line` component is undefined in R3F.
+*   **Fix:** `Line` must be imported from `@react-three/drei`, NOT from standard three.js or fiber.
 
 ### Zombie Asset Checks
 *   **Symptom:** Terminal shows hanging `curl` commands running for hours; system feels sluggish.
@@ -409,6 +471,11 @@ status: {
 *   **Symptom:** Lists on project pages show two bullets (e.g., `â€¢ â€¢ Item`).
 *   **Cause:** Hardcoded bullet characters (`â€¢`) in the manual Markdown files colliding with CSS `list-style-type`.
 *   **Fix:** Remove all hardcoded bullets from `data_source/manual_content/*.md`. Let CSS handle the styling.
+
+### Tailwind v4 Typography
+*   **Requirement:** To use `prose` classes (e.g., `list-disc` inside markdown), the plugin must be registered in the **CSS Entry Point**, not just the config.
+*   **File:** `src/styles/global.css`
+*   **Code:** `@plugin "@tailwindcss/typography";`
 
 ### Missing Part Breakdown Graph
 *   **Symptom:** "Part Breakdown" graph is missing on a specific project page.
@@ -640,6 +707,27 @@ See `docs/IMAGE_WORKFLOW.md` for the full SOP.
     ```
 
 
+## 12. The data ingestion protocol
+We use a **Hybrid Ingestion Strategy** to feed "Intelligence Boluses" to LLMs like NotebookLM.
+
+### 12.1 The Stitcher Script (`scripts/stitcher.py`)
+*   **Purpose:** Consolidates scattered files into a single, context-rich Markdown Bolus.
+*   **Capabilities:**
+    *   **Text:** Extracts text from `.txt`, `.md`, `.py`, `.json`, `.csv`.
+    *   **PDF:** Extracts text using `pypdf`. *Warning: Fails on image-only scans.*
+    *   **PPTX:** Extracts text from slides using `python-pptx`.
+    *   **Msg:** Extracts email bodies from `.msg` files.
+*   **Limitations:**
+    *   **Flat Only:** Does not recurse into subfolders (prevents "Sludge Avalanches").
+    *   **No OCR:** Blind to pixels. If a PDF is a scan, it outputs "Text: None".
+
+### 12.2 The Hybrid Protocol (for NotebookLM)
+When preparing a folder for AI ingestion:
+1.  **Run Stitcher:** `python scripts/stitcher.py "D:\Path\To\Folder"`
+2.  **Upload the Bolus:** The `_INTELLIGENCE_*.md` file covers all text/email/code.
+3.  **Upload Visuals:** Drag original `.pdf` (scans), `.jpg`, and `.png` files alongside the bolus.
+4.  **Upload Data:** Drag `.xlsx` files (converted from legacy `.xls` if needed).
+
 ## 13. Documentation System
 
 All documentation is now consolidated in `src/content/docs/` to serve as the Single Source of Truth (SSOT).
@@ -689,6 +777,27 @@ Importing code from other themes often introduces inconsistent casing (e.g., `co
     # ingest_data.py
     clean_row = {k.strip(): (v.strip() if v else "") for k, v in row.items() if k}
     ```
+
+## 14. Asset Hygiene & Symlinks (The Air Gap)
+To prevent repo bloat (Git LFS limits), we strictly enforce an "Air Gap" for assets.
+
+### The Problem
+*   **Git:** Good for code (KB/MB). Bad for heavy assets (GB).
+*   **Cloudflare Pages:** Free tier limits size (<25MB script, <20k files).
+*   **Dev Server:** Needs access to all 100GB of assets to render the site.
+
+### The Solution: The Symlink Bridge
+We use a Symbolic Link to bridge the external `quantum-assets` repo into the `public` folder during local development.
+
+**Windows PowerShell (Run as Admin):**
+```powershell
+New-Item -ItemType SymbolicLink -Path "d:\GitHub\quantum\public\assets\r2" -Target "D:\GitHub\quantum-assets\R2_STAGING"
+```
+
+**Golden Rules:**
+1.  **NEVER COPY** files from `quantum-assets` into `quantum`.
+2.  **ALWAYS LINK.** If a file is missing, check the Symlink 404, then add it to `quantum-assets/R2_STAGING`.
+3.  **VERIFY:** If `npm run dev` throws 404s, stop. Do not move the file. Check if the symlink is valid and if the file exists in the *Target* directory.
 
 ### Changes Disappear After Build
 *   **Context:** You edited a file, ran `npm run dev`, and your changes vanished.

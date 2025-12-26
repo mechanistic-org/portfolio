@@ -14,6 +14,14 @@ sidebar:
     *   **Usage:** Must be applied to the wrapper div of any MDX content render (e.g., `<div class="markdown-content"><Content /></div>`).
 *   **Interactivity:** React (for Charts), Vanilla JS (for 3D & UI)
 
+### The "Mega-Gallery" Pattern (Deep Dive Chapter)
+**Problem:** High-density stories ("Deep Dives") require multiple narrative contacts (e.g., Mandate, Evolution, Prototype) to reference a single deep visual dataset without reloading or scrolling the visual.
+**Solution:** Decouple `sticky.id` from `narrative.step` 1:1 mapping.
+*   **Method:** Create ONE `sticky` (Type: Gallery, ID: `origin-story`) containing ALL assets (e.g., 20+ images).
+*   **Usage:** Point multiple `narrative` items to this same `step: "origin-story"`.
+*   **V2 Upgrade (Layout Engine):** The gallery is no longer just a grid. It can morph between `masonry`, `collage`, and `spotlight` modes per bubble, allowing the visual container to adapt its storytelling shape (Chaos -> Structure -> Hero) without breaking the SPA flow.
+*   **Result:** The Gallery remains pinned and interactive while the user scrolls through the narrative chapters.
+
 ### The "Realm" Pattern (NorrOS)
 Instead of pages, the Hyperspace theme uses "Realms"—full-screen sections that control their own scroll mechanics.
 *   **Container-Based Scrolling:** Components (`SlideProjector`, `LivingGantt`) listen to `#hyperspace-container` scroll events, NOT `window` scroll. This is critical for the `h-screen fixed` layout.
@@ -41,6 +49,14 @@ To respect Cloudflare Pages limits (20k files, 25MB script size), we use a Hybri
     *   **Tier 3 (DataSheet):** Clean, print-friendly default.
     *   **Tier 4 (Redacted):** "Eyes Only" variants (Terminal, Dossier, Omega).
 
+### 6. Interactive Patterns (The "Trojan Horse")
+*   **The "Time Capsule" Pattern:**
+    *   **Concept:** Embedding verified legacy software/content inside a simplified "OS" container (Retro Browser/Terminal) to prove historical competence without breaking the modern site aesthetic.
+    *   **Mechanism:** Uses a "Trojan Horse" image in the Masonry grid (`trigger: "time-capsule"`) to launch a React Portal (`TimeCapsule.tsx`).
+*   **The "Flux Capacitor" (RetroLogoAnimator):**
+    *   **Concept:** A React-based reconstruction of legacy GIF/Flash animations using modern state management (`framer-motion`).
+    *   **Aesthetic:** Intentionally accepts "Layout Thrashing" (DOM stacking) during crossfades to simulate "Holographic Instability."
+
 ### Realm IV: System Architecture (The 3D Stack)
 *   **Concept:** A visual representation of the site's technology stack (React, Astro, R2) rendered as a 3D "Exploded View" assembly.
 *   **Tech:** `@react-three/fiber` (R3F), `@react-three/drei`.
@@ -53,6 +69,23 @@ To respect Cloudflare Pages limits (20k files, 25MB script size), we use a Hybri
 *   **Rendering Traps:**
     *   **Lighting:** The "Glass" material (`meshPhysicalMaterial`) **REQUIRES** an `<Environment />` (e.g., `preset="city"`) to be visible. Without it, it renders as invisible/black against the void.
     *   **Directives:** Uses `client:only="react"` to bypass SSR hydration mismatches for complex 3D scenes.
+
+### Realm V: The Ouroboros Engine (Macroscopic Constellation)
+*   **Concept:** A non-linear navigation system where site nodes are distributed as celestial bodies in a 3D volume.
+*   **Design Law (Integral CORE):** The "Identity" nodes are not a separate realm; they are the **CORE** matter (white cluster) at the origin $(0,0,0)$ that exerts gravitational pull on all other realms.
+*   **Spatial Logic:** Uses **Spherical Coordinates** to ensure non-coplanar distribution. Realms exist on a primary shell (Radius: $R$), while Leaf nodes orbit their hubs on a secondary shell (Radius: $R + \text{offset}$).
+
+### Realm VI: The Ouroboros (Future Evolution)
+*   **Aesthetic:** "Constellation Engine."
+*   **Logic:** Non-linear graph navigation. The "Page" is a viewport into a 3D coordinate system rather than a vertical scroll container.
+*   **Transition:** Dissolving Realms into "Data Density" clusters where association (Skills -> Projects -> Impact) replaces chronological scrolling.
+*   **Reference:** `docs/backlog/OUROBOROS_VISION.md`
+*   **Physics Stack:**
+    *   **Global:** Slow majestic Y-axis rotation + Z-axis sine-drift.
+    *   **Local:** Low-frequency (0.5Hz) breathing + individual axial spin.
+*   **Atmosphere:**
+    *   **Bloom:** Applied selectively to nodes and hierarchical "Energy Beams."
+    *   **Nebula:** A custom fragment shader renders simplex noise clouds behind the starfield to provide color depth.
 
 ### 6. R3 Asset Namespace (`/assets/r3/`)
 *   **Concept:** A clean-slate asset registry for V4 Theme Engine components.
@@ -184,6 +217,23 @@ Assets are managed physically, not logically.
   - `public/assets/models` <==> `quantum-assets/models`
 - **Site Assets (Icons, UI Graphics, Small placeholders):** Commit directly to `quantum/public`.
 
+### Asset Air-Gap Strategy (Symlink Bridge)
+*   **Principle:** The web repo (`quantum`) must remain lightweight (<50MB).
+*   **Mechanism:** `public/assets/r2` is NOT a folder; it is a **Directory Junction** (Windows) or **Symlink** (Unix) pointing to `../quantum-assets/R2_STAGING`.
+*   **Workflow:**
+    1.  Place high-res asset in `D:\GitHub\quantum-assets\R2_STAGING\{project}\3d\`.
+    2.  Asset immediately becomes available at `http://localhost:4321/assets/r2/{project}/3d/`.
+    3.  **No Copying Required.** Avoids duplicate files and git bloat.
+
+### 3D Lighting Governance ("The Matte Standard")
+*   **Design Law:** All 3D models must adhere to the "Matte CAD" aesthetic (Flat, highly readable, low specular reflections).
+*   **Enforcement:** `ModelViewer.astro` acts as the governor.
+*   **Default Settings:**
+    *   `exposure="0.3"`: Prevents "overbaked" whiteout on bright textures.
+    *   `environment-image="null"`: Removes default HDRI reflections to flatten the look.
+    *   `auto-rotate="false"`: Respects user agency; models should wait for interaction.
+*   **Interactive Behavior:** Implements a "Wiggle + Elastic" script where models react to mouse proximity (Parallax) and snap back to origin after manual rotation.
+
 **Workflow:**
 - To add a new 3D model: Put it in `quantum-assets/models`. It automatically appears in `localhost/assets/models`.
 
@@ -203,6 +253,13 @@ Assets are managed physically, not logically.
         *   **Wide (AR > 1.6):** Spans 2 columns.
         *   **Standard:** Spans 1x1.
     *   **Styling:** Enforces `object-fit: cover` to prevent distortion (squishing) of images that don't perfectly match the cell ratio.
+*   **Shared Layout Gallery (`SharedLayoutGallery.tsx`):**
+    *   **Purpose:** The standard "iOS Photos"-style interactive grid for project artifacts.
+    *   **Density:** Configurable via `columns` prop.
+        *   **Standard (3 cols):** For "Hero" or high-fidelity images.
+        *   **High Density (5-6 cols):** For "Forensics" or "Evidence Locker" datasets (Post-it style).
+    *   **Z-Index Strategy:** Wrapper must be `relative z-50` (or `z-40`) to punch through sticky containers.
+    *   **Modal:** Uses `z-[200]` overlay, with navigation controls at `z-[210]` and close button at `z-[9999]` (God Tier) to ensure accessibility.
 *   **`Marquee.tsx`:** Shared React component used for both the Homepage Client Grid and Colophon Tech Stack. Supports `grayscale` and `speed` props.
 *   **`ScrollMechanism.astro`:**
     *   **Concept:** A physics-based Rack and Pinion gear system that rotates in sync with window scroll.

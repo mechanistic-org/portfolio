@@ -57,7 +57,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 		<div class="sticky top-0 h-screen w-full overflow-hidden">
 			{
 				stickies.map((stage: any, index: number) => (
-					<StickyStage id={stage.id} active={index === 0}>
+					<StickyStage id={`stage-${stage.id}`} active={index === 0}>
 						{/* TYPE: SWARM */}
 						{stage.type === "swarm" && (
 							<div
@@ -78,18 +78,25 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 						{stage.type === "model" && (
 							<model-viewer
 								src={stage.data?.src}
+								poster={stage.data?.poster}
+								loading="eager"
 								camera-controls
 								disable-zoom
-								auto-rotate
-								rotation-per-second="30deg"
+								auto-rotate="false"
 								shadow-intensity="1"
-								exposure="1"
+								exposure="0.4"
+								environment-image="neutral"
+								interaction-prompt="auto"
+								interaction-prompt-style="wiggle"
+								camera-orbit={stage.data?.cameraOrbit || "-30deg 75deg 110%"}
+								field-of-view="30deg"
+								ar
 								class="h-full w-full"
-								style="background: radial-gradient(circle at center, #222 0%, #000 100%);"
+								style="background: radial-gradient(circle at center, #111 0%, #000 100%);"
 							>
 								<div
 									slot="progress-bar"
-									class="pointer-events-none absolute top-0 left-0 h-1 w-full bg-neutral-800/50"
+									class="pointer-events-none absolute top-0 left-0 h-1 w-full bg-neutral-800/80"
 									id={`loader-${stage.id}`}
 								>
 									<div
@@ -202,6 +209,13 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 		)
 	}
 
+	<!-- MDX CONTENT SLOT -->
+	<section class="relative z-10 bg-neutral-900 pb-32">
+		<div class="site-container max-w-4xl">
+			<slot />
+		</div>
+	</section>
+
 	<!-- Scroll Cushion -->
 	<div class="h-[25vh] w-full snap-end bg-neutral-900"></div>
 </BaseLayout>
@@ -272,7 +286,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
 					const targetId = entry.target.getAttribute("data-step");
-					const targetStage = document.getElementById(targetId || "");
+					const targetStage = document.getElementById(`stage-${targetId}` || "");
 
 					if (targetId && targetStage) {
 						// Hide all stages
@@ -336,4 +350,58 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 			});
 		});
 	}
+
+	// 4. MODEL VIEWER REFINEMENTS (Wiggle & Elastic)
+	// We want a subtle "dance" when idle, and a snap-back to center after interaction.
+	// AND we want a mouse-parallax effect when the mouse moves.
+	const modelViewers = document.querySelectorAll("model-viewer");
+	let mouseX = 0;
+	let mouseY = 0;
+
+	window.addEventListener("mousemove", (e) => {
+		mouseX = e.clientX / window.innerWidth - 0.5;
+		mouseY = e.clientY / window.innerHeight - 0.5;
+	});
+
+	modelViewers.forEach((viewer: any) => {
+		const baseOrbit = viewer.getAttribute("camera-orbit") || "-30deg 75deg 110%";
+		let isInteracting = false;
+		let interactionTimer: any;
+		let time = Math.random() * 100;
+
+		function animateWiggle() {
+			if (!isInteracting && (viewer as any).model) {
+				time += 0.01;
+				const orbitParts = baseOrbit.split(" ");
+				const baseAzimuth = parseFloat(orbitParts[0]);
+				const basePolar = parseFloat(orbitParts[1]);
+
+				// 1. Idle Wiggle
+				const wiggleAzimuth = Math.sin(time * 0.5) * 2;
+				const wigglePolar = Math.cos(time * 0.3) * 1;
+
+				// 2. Mouse Parallax (Wiggle Effect)
+				const mouseAzimuth = mouseX * 8;
+				const mousePolar = mouseY * 4;
+
+				viewer.cameraOrbit = `${baseAzimuth + wiggleAzimuth + mouseAzimuth}deg ${basePolar + wigglePolar + mousePolar}deg ${orbitParts[2]}`;
+			}
+			requestAnimationFrame(animateWiggle);
+		}
+
+		animateWiggle();
+
+		viewer.addEventListener("camera-change", (e: any) => {
+			if (e.detail.source === "user-interaction") {
+				isInteracting = true;
+				clearTimeout(interactionTimer);
+				interactionTimer = setTimeout(() => {
+					isInteracting = false;
+					// SMOOTH RETURN
+					const currentOrbit = viewer.getAttribute("camera-orbit");
+					viewer.setAttribute("camera-orbit", baseOrbit);
+				}, 2000);
+			}
+		});
+	});
 </script>

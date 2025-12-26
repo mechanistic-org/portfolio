@@ -112,10 +112,11 @@ def sync_r2_assets(slug, source_dir):
         d = os.path.join(target_dir, item)
         if os.path.isfile(s):
             try:
+                if os.path.exists(d):
+                    os.remove(d) # Clean destination first
                 shutil.copy2(s, d)
             except Exception as e:
-                pass
-                # print(f"⚠️  Skipping locked file: {item}")
+                print(f"⚠️  Skipping locked file: {item} ({e})")
 
 def generate_radar_chart(skill_data, slug):
     """Generate SVG radar chart for skills"""
@@ -975,15 +976,16 @@ def sync_site_assets():
             
         # Sync files in root of _site
         for item in os.listdir(source):
-            s = os.path.join(source, item)
-            d = os.path.join(target, item)
-            if os.path.isfile(s):
-                shutil.copy2(s, d)
-            elif os.path.isdir(s):
-                # Recursive copy for subdirectories like logos
-                if os.path.exists(d):
-                    shutil.rmtree(d)
-                shutil.copytree(s, d)
+            try:
+                s = os.path.join(source, item)
+                d = os.path.join(target, item)
+                if os.path.isfile(s):
+                    shutil.copy2(s, d)
+                elif os.path.isdir(s):
+                    # Recursive copy for subdirectories like logos
+                    shutil.copytree(s, d, dirs_exist_ok=True)
+            except Exception as e:
+                print(f"⚠️  Skipping locked/missing asset: {item} ({e})")
 
 if __name__ == "__main__":
     start_time = time.time()

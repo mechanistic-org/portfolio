@@ -1,9 +1,11 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import ResVizSwarm from '../DataViz/ResVizSwarm';
 import multiverseData from '../../data/timeline/multiverse.json';
+import ProjectModal from '../Projects/ProjectModal';
 
 export default function WorkRealm() {
     const [activeNode, setActiveNode] = useState<any | null>(null);
+    const [selectedProject, setSelectedProject] = useState<any | null>(null);
     const [isHoveringStrip, setIsHoveringStrip] = useState(false);
     const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
@@ -80,7 +82,7 @@ export default function WorkRealm() {
                                         key={node.id}
                                         ref={(el) => { itemRefs.current[node.id] = el; }}
                                         onMouseEnter={() => setActiveNode(node)}
-                                        onClick={() => setActiveNode(node)}
+                                        onClick={() => setSelectedProject(node)}
                                         className={`
                                             relative p-6 border rounded-sm transition-all duration-300 cursor-pointer group
                                             ${isActive
@@ -118,6 +120,36 @@ export default function WorkRealm() {
                     </div>
                 </div>
 
+                {/* Project Technical Modal */}
+                {selectedProject && (
+                    <ProjectModal
+                        isOpen={!!selectedProject}
+                        onClose={() => setSelectedProject(null)}
+                        onNext={() => {
+                            const currentIndex = sortedNodes.findIndex(n => n.id === selectedProject.id);
+                            const nextNode = sortedNodes[(currentIndex + 1) % sortedNodes.length];
+                            setSelectedProject(nextNode);
+                            setActiveNode(nextNode);
+                        }}
+                        onPrev={() => {
+                            const currentIndex = sortedNodes.findIndex(n => n.id === selectedProject.id);
+                            const prevNode = sortedNodes[(currentIndex - 1 + sortedNodes.length) % sortedNodes.length];
+                            setSelectedProject(prevNode);
+                            setActiveNode(prevNode);
+                        }}
+                        project={{
+                            id: selectedProject.id,
+                            title: selectedProject.name,
+                            description: selectedProject.description,
+                            heroImage: selectedProject.img,
+                            employer: selectedProject.group,
+                            date: selectedProject.start_date,
+                            tags: selectedProject.skills,
+                            production: selectedProject.category, // Mapping category to production status for now
+                            industry: selectedProject.industry
+                        }}
+                    />
+                )}
             </div>
         </div>
     );

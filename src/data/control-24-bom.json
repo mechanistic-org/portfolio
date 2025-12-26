@@ -1,0 +1,32 @@
+[
+  {
+    "part_number": "9900-58834-00",
+    "description": "ASSY, PCB, SHTMTL, CNTRL 24",
+    "qty": "1",
+    "type": "Assembly"
+  },
+  {
+    "part_number": "9440-55165-00",
+    "description": "TOP PROFILE, C24, PT",
+    "qty": "1",
+    "type": "Extrusion"
+  },
+  {
+    "part_number": "9440-55166-00",
+    "description": "BTTM PROFILE, C24, PT",
+    "qty": "1",
+    "type": "Extrusion"
+  },
+  {
+    "part_number": "9440-55167-00",
+    "description": "SIDE CHEEK, C24, PT",
+    "qty": "2",
+    "type": "Cosmetic"
+  },
+  {
+    "part_number": "9100-55144-00",
+    "description": "BOM, MASTER, C24",
+    "qty": "Ref",
+    "type": "Document"
+  }
+]

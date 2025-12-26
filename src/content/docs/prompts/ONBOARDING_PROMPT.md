@@ -11,7 +11,9 @@ sidebar:
 > *   **Start:** You are reading this Onboarding Prompt.
 > *   **End:** When the user is ready to end the session, they will run the **Conversation Miner**. Your goal is to produce work that is easy to "mine" (clear decisions, documented changes).
 > *   **Golden Rule:** If you encounter a persistent data binding bug, assume it's a Caching/Naming conflict first. Try the "Snake Case Strategy" or the **"JSON-in-Frontmatter Pattern"** before rewriting the component.
-> *   **3D Debugging:** If a texture fails (Shiny Black or Whiteout), use the **"Grey Clay Test"** immediately. Export a clean grey mesh with NO textures (`debug_clay.glb`) to isolate Geometry vs. Texture corruption.
+> *   **Asset Hygiene:** **NEVER COPY** large assets into the `quantum` repo to fix 404s. Check the Symlink logic first. If the file is in `quantum-assets` but missing on localhost, it's a symlink issue, not a missing file. Trust the Air Gap.
+> *   **The Air Gap:** Remember that `src/content/projects` images referenced in MDX must exist in `public/assets/r2` locally. If you get 404s, you must run `python ingest_data.py` to bridge the gap from `R2_STAGING`.
+> *   **3D Debugging:** If a texture fails (Shiny Black or Whiteout), use the **"Grey Clay Test"** immediately. Export a clean grey mesh with NO textures (`debug_clay.glb`) to isolate Geometry vs. Texture corruption. **WebGL Context Awareness:** If R3F components conflict with legacy grids/scrolly-huds, verify the page is using the **OuroborosLayout** standard to isolate the Canvas context.
 >
 > **CONFIRMATION:**
 > Once you have read these files, simply reply: **"Erik Norris Portfolio Online. Ready for instructions."**
@@ -24,6 +26,16 @@ sidebar:
 > *   **Read:** `src/content/docs/BRANDING_PROMPT.md` (The Source of Truth)
 > *   **Read:** `src/content/docs/WORKFLOW_3D.md` (The "Core Tunnel" Pipeline & Export Rules)
 >
+> **CORE CONTEXT (LOAD THESE FIRST):**
+> 1.  `src/content/docs/project/GROK_LOG.md` (The Constitution & Laws)
+> 2.  `src/content/docs/MAINTENANCE.md` (System Manual)
+> 3.  `src/content/docs/ROADMAP.md` (Current Status)
+> 4.  `src/content/docs/manifesto.md` (Design Philosophy)
+>
 > **NEW WORKFLOWS:**
 > *   [`CONTENT_STRATEGY.md`](/src/content/docs/CONTENT_STRATEGY.md): The internal playbook for the Hybrid Content System.
 > *   [`UNIVERSAL_INGEST_PROMPT.md`](/src/content/docs/prompts/UNIVERSAL_INGEST_PROMPT.md): The Master Prompt for LLM synthesis.
+>
+> **PERSONA AUDIT PROTOCOL:**
+> *   **The Architect (Distinguished Engineer):** Always evaluate major design pivots against the "Architect" persona (Google Fellow level). Values technical audacity, signal-to-noise, and novelty. (Ref: `src/content/docs/prompts/ARCHITECT_EVALUATION.md`). 
+> *   **Goal:** Reach the **"Singularity"** (Level 10 coolness).

@@ -18,54 +18,43 @@ teamSize: "Unknown"
 gallery: []
 documents: []
 links: [{"name": "Hyphen Website", "url": "https://hyphen.com"}]
-heroImage: "/assets/r2/makeline/hero-sysint.png" 
+heroImage: "/assets/placeholders/blueprint.jpg" 
 draft: false
 description: "Makeline - Other project."
 duration: "1.3 Years"
 statusLabel: "Completed"
 skillGraph: "/assets/r2/makeline/skill-graph.svg"
 partGraph: "/assets/r2/makeline/part-graph.svg"
-impact: "Achieved 350 meals/hr throughput. Modular architecture reduced MTTR from hours to minutes and became the foundation for the entire product line."
-cyberspace:
-  enable: true
-  stickies:
-    - id: "stage-challenge"
-      label: "The Challenge"
-      type: "media"
-      title: "System Integration"
-      text: "Orchestrating 350+ actuators in a wash-down sanitary environment."
-      align: "center"
-      data:
-        src: "/assets/placeholders/abstract.jpg"
-    - id: "stage-approach"
-      label: "Architecture"
-      type: "media"
-      title: "The Nervous System"
-      text: "Decoupled payload modules from a unified, waterproof chassis."
-      align: "left"
-      data:
-         src: "/assets/placeholders/blueprint.jpg"
-    - id: "stage-impact"
-      label: "Impact"
-      type: "media"
-      title: "Scale"
-      text: "350 meals per hour. Foundation for the entire product line."
-      align: "right"
-      data:
-         src: "/assets/placeholders/tech-2.jpg"
-
-  narrative:
-    - step: "stage-challenge"
-      title: "Factory in a Box"
-      body: "The Makeline was not just a machine; it was a factory in a box. The core challenge was System Integration. While individual modules solved the physics of moving ingredients, the Makeline had to orchestrate them. We had to coordinate 350+ actuators, managing power, thermal loads, and CAN bus traffic within a violently wash-down environment."
-    - step: "stage-approach"
-      title: "Physical Network Topology"
-      reverse: true
-      body: "My role shifted to System Architect. We decoupled the 'Payload Modules' (Dispensers) from the 'Chassis'. We developed a unified cabling harness—The Nervous System—that was IP69K waterproof and enforced correct assembly. I built the 'Iron Bird' rig to test full-system loads before the steel frame arrived."
-    - step: "stage-impact"
-      title: "Reliability at Scale"
-      body: "The system achieved a throughput of 350 meals per hour. The modular approach reduced Mean Time To Repair (MTTR) from hours to minutes via hot-swappable modules. This architecture became the foundation for Hyphen's entire product line, scaling from Burrito Lines to Salad Stations."
+impact: ""
 ---
 
-# Makeline
-(Converted to Hyperspace V4)
+import { YouTube } from '@astro-community/astro-embed-youtube';
+import ModelViewer from '@components/mdx/ModelViewer.astro';
+
+## The Challenge
+> **Context:** The Makeline was not just a machine; it was a factory in a box. The core challenge was **System Integration**.
+
+While individual modules (Dispensers) solved the physics of moving ingredients, the Makeline had to orchestrate them. We had to coordinate 350+ actuators, managing power distribution, thermal loads, and CAN bus traffic, all within a violently wash-down sanitary environment.
+The failure mode wasn't "It broke"—it was "Latency drift caused the guacamole to miss the bowl by 10ms."
+
+## Engineering Approach
+My role shifted from "Component Designer" to "System Architect." I treated the mechanical assembly as a physical network topology.
+
+*   **Modular Architecture:** We decoupled the "Payload Modules" (Dispensers) from the "Chassis" (Power/Data/Motion). This allowed parallel development: The chassis team could optimize frame rigidity and cable routing while the dispenser team iterated on portion accuracy.
+*   **The "Nervous System":** We developed a unified cabling harness that was both modular and IP69K waterproof. This wasn't just "wiring"; it was designing a physical API that enforced correct assembly.
+*   **Integration Testing:** I built the "Iron Bird" rig—a skeleton chassis that allowed us to test full-system electrical and firmware loads before the actual stainless steel frame had even returned from the fab.
+
+## Impact
+The system achieved a throughput of **350 meals per hour**, running autonomously for 4-hour peak shifts.
+
+*   **Reliability:** The modular approach reduced Mean Time To Repair (MTTR) from hours to minutes (hot-swappable modules).
+*   **Scalability:** The architecture became the foundation for Hyphen's entire product line, scaling from "Burrito Lines" to "Salad Stations" without redesigning the core chassis.
+
+### Project Artifacts
+:::note[System Stats]
+*   **Actuators:** >350
+*   **Voltage:** 48V DC Bus
+*   **Comms:** CANOpen
+*   **Sanitary Rating:** IP69K / NSF-8
+:::
+

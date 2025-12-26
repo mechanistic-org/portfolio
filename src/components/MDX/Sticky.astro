@@ -1,0 +1,33 @@
+---
+interface Props {
+	title?: string;
+	rotation?: number;
+	color?: "zinc" | "blue" | "orange" | "green" | "red";
+}
+
+const { title, rotation = 0, color = "zinc" } = Astro.props;
+
+const colors = {
+	zinc: "bg-neutral-800/80 border-neutral-700 text-neutral-300",
+	blue: "bg-blue-600/20 border-blue-500/30 text-blue-300",
+	orange: "bg-orange-600/20 border-orange-500/30 text-orange-300",
+	green: "bg-green-600/20 border-green-500/30 text-green-300",
+	red: "bg-red-600/20 border-red-500/30 text-red-300",
+};
+
+const colorStyle = colors[color] || colors.zinc;
+---
+
+<div
+	class={`inline-block p-4 rounded-sm border shadow-xl backdrop-blur-md ${colorStyle} transform-gpu`}
+	style={`transform: rotate(${rotation}deg);`}
+>
+	{title && (
+		<div class="font-header text-[10px] font-bold uppercase tracking-widest opacity-60 mb-2">
+			{title}
+		</div>
+	)}
+	<div class="font-mono text-xs leading-relaxed">
+		<slot />
+	</div>
+</div>

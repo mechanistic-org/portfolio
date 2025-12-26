@@ -1,0 +1,168 @@
+---
+import { Image } from "astro:assets";
+
+interface Step {
+	id: string;
+	title: string;
+	subtitle?: string;
+	text: string;
+	image: string;
+	caption?: string;
+	alt?: string;
+}
+
+interface Props {
+	id?: string;
+	title: string;
+	subtitle?: string;
+	steps: Step[];
+}
+
+const { id = "war-story", title, subtitle, steps } = Astro.props;
+---
+
+<section id={id} class="relative w-full border-y border-white/5 bg-neutral-900 py-24">
+	<div class="container mx-auto mb-16 px-4 md:px-6">
+		<h2
+			class="font-display mb-4 text-3xl font-bold tracking-tighter text-white uppercase md:text-5xl"
+		>
+			{title}
+		</h2>
+		{
+			subtitle && (
+				<div class="flex items-center gap-4">
+					<div class="h-px w-12 bg-blue-500" />
+					<p class="font-mono text-sm tracking-widest text-blue-400 uppercase">{subtitle}</p>
+				</div>
+			)
+		}
+	</div>
+
+	<div class="container mx-auto px-4 md:px-6">
+		<div class="relative flex flex-col gap-8 md:grid md:grid-cols-12">
+			<div class="relative z-10 flex flex-col gap-[80vh] pt-[10vh] pb-[50vh] md:col-span-5">
+				{
+					steps.map((step, index) => (
+						<div
+							data-step-index={index}
+							class="scroll-step group relative rounded-lg border border-white/10 bg-black/80 p-8 shadow-2xl backdrop-blur-md transition-all duration-500 hover:border-blue-500/50"
+						>
+							{index !== steps.length - 1 && (
+								<div class="absolute bottom-0 left-8 hidden h-[80vh] w-px translate-y-full bg-gradient-to-b from-blue-500/50 to-transparent md:-ml-[1px] md:block" />
+							)}
+
+							<div class="mb-4 flex items-center justify-between border-b border-white/5 pb-2">
+								<span class="font-mono text-[10px] tracking-widest text-blue-500 uppercase">
+									Phase // 0{index + 1}
+								</span>
+								<span class="font-mono text-[10px] text-neutral-500 uppercase">{step.id}</span>
+							</div>
+
+							<h3 class="mb-2 text-2xl font-bold text-white">{step.title}</h3>
+							{step.subtitle && (
+								<h4 class="mb-4 font-mono text-sm text-neutral-400">{step.subtitle}</h4>
+							)}
+
+							<p class="font-sans text-base leading-relaxed text-neutral-300">{step.text}</p>
+
+							<div class="mt-6 overflow-hidden rounded-md border border-white/10 md:hidden">
+								<img src={step.image} alt={step.alt || step.title} class="h-auto w-full" />
+								{step.caption && (
+									<p class="border-t border-white/5 bg-neutral-900 p-2 font-mono text-[10px] text-neutral-500">
+										{step.caption}
+									</p>
+								)}
+							</div>
+						</div>
+					))
+				}
+			</div>
+
+			<div class="relative hidden md:col-span-7 md:block">
+				<div
+					class="sticky top-24 h-[60vh] w-full overflow-hidden rounded-xl border border-white/10 bg-black shadow-2xl"
+				>
+					{
+						steps.map((step, index) => (
+							<div
+								id={`evidence-${id}-${index}`}
+								class={`absolute inset-0 h-full w-full bg-neutral-900 transition-opacity duration-700 ease-in-out ${index === 0 ? "z-10 opacity-100" : "z-0 opacity-0"}`}
+							>
+								<img
+									src={step.image}
+									alt={step.alt || step.title}
+									class="h-full w-full object-contain p-8"
+								/>
+
+								<div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/90 to-transparent p-6">
+									<div class="flex items-end justify-between">
+										<div class="font-mono text-xs text-blue-400">
+											<span class="mb-1 block text-[10px] text-neutral-500">EVIDENCE // REF</span>
+											{step.caption || "CLASSIFIED"}
+										</div>
+										<div class="font-mono text-[10px] text-neutral-600">
+											IMG_SRC: {step.image.split("/").pop()}
+										</div>
+									</div>
+								</div>
+
+								<div class="pointer-events-none absolute inset-0 bg-[url('/assets/ui/grid-pattern.svg')] opacity-10 mix-blend-overlay" />
+							</div>
+						))
+					}
+
+					<div
+						class="absolute top-4 right-4 h-16 w-16 rounded-tr-lg border-t border-r border-blue-500/30"
+					>
+					</div>
+					<div
+						class="absolute bottom-4 left-4 h-16 w-16 rounded-bl-lg border-b border-l border-blue-500/30"
+					>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	function initWarStory() {
+		const sections = document.querySelectorAll('section[id^="war-story"]');
+
+		if (!sections.length) return;
+
+		const observerOptions = {
+			root: null,
+			rootMargin: "-40% 0px -40% 0px",
+			threshold: 0,
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					const stepEl = entry.target as HTMLElement;
+					const index = stepEl.dataset.stepIndex;
+					const container = stepEl.closest("section");
+					if (!container || !index) return;
+
+					const allImages = container.querySelectorAll('[id^="evidence-"]');
+					allImages.forEach((img) => {
+						img.classList.remove("opacity-100", "z-10");
+						img.classList.add("opacity-0", "z-0");
+					});
+
+					const activeImage = container.querySelector(`[id$="-${index}"]`);
+					if (activeImage) {
+						activeImage.classList.remove("opacity-0", "z-0");
+						activeImage.classList.add("opacity-100", "z-10");
+					}
+				}
+			});
+		}, observerOptions);
+
+		document.querySelectorAll(".scroll-step").forEach((step) => observer.observe(step));
+	}
+
+	initWarStory();
+	document.addEventListener("astro:after-swap", initWarStory);
+</script>

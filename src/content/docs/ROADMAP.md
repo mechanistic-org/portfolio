@@ -37,7 +37,51 @@ sidebar:
     *   **Tech:** VS Code Snippets + Astro MDX Components.
     *   **Description:** A "Plug-and-Play" authoring system that allows complex UI patterns (Zigzag Grids, 3D Viewers, Process Strips) to be inserted via shortcodes (`qq-*`). This transforms the IDE into a layout engine, ensuring every project page adheres to the strict "Visual Taxonomy" without manual coding.
 
+*   **Macroscopic Constellation Engine:**
+    *   **Hook:** Navigate the site as if it were a galaxy.
+    *   **Tech:** R3F, Post-processing (@react-three/bloom), GLSL (Custom Shaders).
+    *   **Description:** An interactive 3D navigator that maps site hierarchy into a celestial coordinate system. Features hierarchical bloom, macroscopic orbital physics, and recursive scaling for project-level deep dives.
+
 ## 📜 Change Log (Recent)
+*   **[v-Next] - Operation Time Capsule & C24 Refinement**
+    *   **[Feature] Time Capsule Engine:** Implemented `TimeCapsule.tsx`, a "Netscape/IE6" retro-browser modal triggered from the gallery to display legacy intranet evidence.
+    *   **[Feature] Flux Capacitor:** Created `RetroLogoAnimator.tsx` to reconstruct legacy 2002 branding sequences using React/Framer Motion with intentional "Holographic Instability".
+    *   **[Content] C24 Honors Class:** Refined Narrative Bubble 5 ("The Paper Trail") to focus on "Engineering Ops" and "Tribal Knowledge," upgrading the persona to "Infrastructure Architect."
+    *   **[Aesthetic] Masonry Scatter:** Enabled `scattered: true` layout in SharedLayoutGallery for "Messy Desk" forensics aesthetic.
+    *   **[Asset] DigiME Excavation:** Recovered high-res `digi_logo` variants and `gen_mod_guide.php` from 2006 archives.
+*   **[v-Next] - C24 Scrolly-Telling Polish**
+    *   **[Feature] Mega-Gallery Engine:** Upgraded `SharedLayoutGallery` with a multi-mode Layout Engine supporting `masonry`, `collage`, and `spotlight` presentations.
+    *   **[Design] Narrative Rhythm:** Implemented a "Visual Rhythm" strategy for C24, alternating between "Scattered Masonry" (Origin), "Spotlight" (Crisis), and "Collage" (Forensics) to prevent scroll fatigue.
+    *   **[Content] Narrative Refinement:** Polished Bubbles 1 & 2 ("Dodge the Lead Bullet", "Defying Gravity") using the "Gold Bar" mining protocol from NotebookLM.
+    *   **[Fix] Asset Sanitation:** Resolved critical Windows filename spacing issues in the Structural gallery via `sanitize_structural.py`.
+    *   **[Feature] C24 Origin Story:** Implemented "Deep Dive" chapter using the Mega-Gallery pattern (21-image grid).
+    *   **[Refactor] Hyperspace Text Engine:** Upgraded `NarrativeItem` to use Slot-based rendering for robust rich-text support.
+    *   **[Fix] Sticky Titles:** Added `invisible` prop to `ScrollTrigger` to remove obstructive default styling when titles are empty.
+*   **[v2.5.0] - Data Ingestion Upgrade**
+    *   **[Script] Stitcher v2:** Upgraded `stitcher.py` to support "Bolus Extraction" for PDF (`pypdf`) and PPTX (`python-pptx`).
+    *   **[Protocol] Hybrid Ingestion:** Enforced "The Law of Assets" (IV), establishing the Bolus (Text) + Original (Visual) separation for NotebookLM.
+    *   **[Content] Origin Story:** Mined the "Control 24" archives using the new protocol, drafting the "Code Name Curtis" and "Solo Governance" narratives.
+    *   **[Artifact] The Grok Log:** Established `GROK_LOG.md` as the project constitution to prevent regression.
+*   **[Polish] Control-24 & Symlink Protocol:**
+    *   **[Architecture] Symlink Bridge:** Established `public/assets/r2` -> `../quantum-assets/R2_STAGING` symlink as the Definitive Local Dev Strategy. Eliminated repo bloat while maintaining instant asset access.
+    *   **[Content] Control-24 Restoration:** Stabilized the `control-24` case study with verified "China Crisis" evidence, "Seven Millimeter" narrative, and a transparent "Cinematic Hero" layer.
+    *   **[Theme] Hyperspace Patch:** Fixed `Hyperspace.astro` to render the `heroImage` (30% opacity) in the intro layer, creating a verified "Movie Poster" aesthetic.
+*   **[Polish] C|24 Interactive Layers:**
+    *   **[3D]** Integrated `C24_shell.glb` with "Matte CAD" lighting (Exp 0.3) and "Elastic Snap" physics.
+    *   **[DataViz]** Functioning `MetricComparison` component showing transition stats.
+    *   **[Fix]** Restored DataViz slot in `Hyperspace` theme and fixed Sidenav active states.
+*   **C24 Gallery Refactor:**
+    *   **Interactivity:** Resolved `z-index` blocking issues; enabled metadata (Title/Desc) on Lightbox.
+    *   **Density Control:** Added `columns` prop to `SharedLayoutGallery` (Supports 2, 3, 4, 5, 6, 8 columns).
+    *   **Navigation:** Added explicit "GRID VIEW" (Close) button `z-[9999]` and standard Next/Prev arrows.
+    *   **Architecture:** Enforced "Air Gap" sync for `c24` assets via patched `ingest_data.py`.
+*   **[v6.0.0] - Ouroboros Constellation Arc**
+    *   **[Feature] Constellation Engine:** Launched the `ConstellationEngine.tsx`, a 3D physics-based navigator replacing the legacy Archive Sankey.
+    *   **[Vision] Macroscopic Physics:** Implemented "Celestial Drift" (slow global rotation) and non-coplanar spherical distribution to break the 2D plane logic.
+    *   **[Aesthetic] The $10M Glow:** Integrated a high-fidelity atmospheric stack (Bloom, Noise, Vignette) and a custom Shader-based **Nebula** for cosmic depth.
+    *   **[Architecture] Integral CORE:** Dissolved the explicit "HOME" hub in favor of an implicit origin where Identity nodes (Expertise, Bio, Tools) act as the "Fundamental Matter" of the system.
+    *   **[Feature] Sector Isolation:** Deployed `/work-constellation` and `/specs-constellation` as dedicated, deep-field sector exploration sandboxes.
+    *   **[Prototype] Project Systems:** Created the first recursive "System within a System" at `/projects/strato/system`, mapping a project’s internal case studies into their own constellation.
 *   **[v5.0.0] - Hyperspace Launch**
     *   **[Feature] System Realm:** Restored full 3D fidelity to Realm IV (The Machine). Implemented "Exploded Stack" visualization with anisotropic glass materials.
     *   **[Fix] Navigation Sync:** Resolved "Ghost Pill" issues in `HyperspaceHUD` by implementing "Sweet Spot" IntersectionObserver logic (`-25%` margin).
@@ -387,6 +431,13 @@ sidebar:
     *   **Goal:** Dissolve linear "Realms" into a unified, non-linear graph navigation.
     *   **Concept:** "The Page is the Map." Zoom-based navigation through the 3D Multiverse of projects and skills.
     *   **Reference:** `docs/backlog/OUROBOROS_VISION.md`.
+*   **[Exploration] Operation Tactile Depth:**
+    *   **Goal:** Move beyond "Clean" to "Physical."
+    *   **Pillars:**
+        *   **Haptic Audio:** UI sounds (clicks, hums, snaps) that reinforce mechanical interaction.
+        *   **Weight:** Elements should drag, collide, and resist like physical objects.
+        *   **Grit:** Intentional use of high-ISO noise, scratches, and "Messy" layouts (Scatter) to break the digital veneer.
+    *   **Benchmark:** Teenage Engineering (Playful) vs. C24 (Forensic).
 
 ## 🧊 The Backlog (Icebox)
 *   **[Refactor] Operation Identity Shift:**

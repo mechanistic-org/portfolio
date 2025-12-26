@@ -1,10 +1,12 @@
 ---
 interface Props {
-	step: string; // The ID of the StickyStage to activate (e.g. "stage-swarm")
+	step: string;
 	align?: "left" | "right" | "center";
+	invisible?: boolean;
+	wide?: boolean;
 }
 
-const { step, align = "center" } = Astro.props;
+const { step, align = "center", invisible = false, wide = false } = Astro.props;
 
 const alignClasses = {
 	left: "justify-start",
@@ -14,17 +16,17 @@ const alignClasses = {
 ---
 
 <div
-	class:list={[
-		"flex h-screen snap-center items-center p-12", // Default physics
-		alignClasses[align],
-	]}
+	id={`trigger-${step}`}
+	class:list={["flex h-screen snap-center items-center p-12", alignClasses[align]]}
 	data-step={step}
 >
 	<div
 		class:list={[
-			"max-w-md rounded-xl p-8 shadow-2xl backdrop-blur-lg transition-transform duration-500",
-			"border-l-4 border-neutral-700 bg-black/80", // Default style
-			"hover:scale-[1.02]", // Micro-interaction
+			"rounded-xl p-8 shadow-2xl backdrop-blur-lg transition-transform duration-500",
+			wide ? "w-full max-w-2xl" : "max-w-md",
+			invisible
+				? "invisible opacity-0"
+				: "border-l-4 border-neutral-700 bg-black/80 hover:scale-[1.02]",
 		]}
 	>
 		<slot />

@@ -1,0 +1,39 @@
+---
+interface Props {
+	data: {
+		part_number: string;
+		description: string;
+		qty: string;
+		type: string;
+	}[];
+}
+
+const { data } = Astro.props;
+---
+
+<div class="border border-white/10 bg-black/50 p-4 font-mono text-xs">
+	<div class="mb-4 flex items-center justify-between border-b border-white/10 pb-2">
+		<h3 class="text-sm font-bold text-[#2E5CFF]">BILL_OF_MATERIALS [EXTRACT]</h3>
+		<span class="text-neutral-500">REF: ECO_12263</span>
+	</div>
+
+	<div class="grid w-full grid-cols-[1fr_2fr_1fr] gap-4 text-neutral-400">
+		<div class="font-bold text-white">PART_NO</div>
+		<div class="font-bold text-white">DESCRIPTION</div>
+		<div class="font-bold text-white">QTY</div>
+
+		<div class="col-span-3 my-2 h-px bg-white/10"></div>
+
+		{
+			data.map((item) => (
+				<>
+					<div class="text-neutral-300">{item.part_number}</div>
+					<div class="truncate text-neutral-500 hover:text-white" title={item.description}>
+						{item.description}
+					</div>
+					<div class="text-right">{item.qty}</div>
+				</>
+			))
+		}
+	</div>
+</div>

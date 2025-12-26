@@ -4,9 +4,11 @@ import StickyStage from "@components/Scrolly/StickyStage.astro";
 import ScrollTrigger from "@components/Scrolly/ScrollTrigger.astro";
 import NarrativeItem from "@components/Scrolly/NarrativeItem.astro";
 import ScrollyHud from "@components/Scrolly/ScrollyHud.astro";
+import TextDeck from "@components/Scrolly/TextDeck.astro";
 import ProjectInfoTable from "@components/Projects/ProjectInfoTable.astro";
+import SharedLayoutGallery from "@components/Projects/SharedLayoutGallery";
 
-const { entry, nextProject, prevProject } = Astro.props;
+const { entry, nextProject, prevProject, Content } = Astro.props;
 const { cyberspace, title, description } = entry.data;
 // Backwards compatibility/Renaming
 const scrolly = cyberspace;
@@ -24,16 +26,30 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 }));
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} hideNav={true}>
 	<!-- FIXED INTRO -->
 	<div
 		id="intro-layer"
 		class="pointer-events-none fixed inset-0 z-50 flex flex-col items-center justify-center bg-black transition-opacity duration-300"
 	>
-		<h1 class="font-heading text-9xl font-bold tracking-tighter text-white mix-blend-difference">
-			{title.toUpperCase()}
-		</h1>
-		<div class="mt-4 font-mono text-[#2E5CFF]">HYPERSPACE_ENGINE_V4</div>
+		{
+			entry.data.heroImage && (
+				<div id="hero-parallax" class="absolute inset-0 h-full w-full">
+					<img
+						src={entry.data.heroImage}
+						alt=""
+						class="animate-breathe h-full w-full object-cover opacity-50"
+					/>
+				</div>
+			)
+		}
+		<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50"></div>
+		<h1
+			class="font-heading relative z-10 text-9xl font-bold tracking-tighter text-white mix-blend-difference"
+			set:html={title
+				.toUpperCase()
+				.replace("|", '<span class=\"font-thin text-white/50 opacity-60 mx-1\">|</span>')}
+		/>
 	</div>
 
 	<!-- HUD -->
@@ -57,7 +73,11 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 		<div class="sticky top-0 h-screen w-full overflow-hidden">
 			{
 				stickies.map((stage: any, index: number) => (
-					<StickyStage id={stage.id} active={index === 0}>
+					<StickyStage
+						id={`stage-${stage.id}`}
+						active={index === 0}
+						data-interactive={stage.type === "gallery" || stage.type === "model"}
+					>
 						{/* TYPE: SWARM */}
 						{stage.type === "swarm" && (
 							<div
@@ -78,18 +98,22 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 						{stage.type === "model" && (
 							<model-viewer
 								src={stage.data?.src}
+								poster={stage.data?.poster}
+								loading="eager"
 								camera-controls
 								disable-zoom
-								auto-rotate
-								rotation-per-second="30deg"
 								shadow-intensity="1"
-								exposure="1"
+								exposure="0.3"
+								interaction-prompt="none"
+								interaction-prompt-style="wiggle"
+								camera-orbit={stage.data?.cameraOrbit || "-30deg 75deg 110%"}
+								field-of-view="30deg"
 								class="h-full w-full"
-								style="background: radial-gradient(circle at center, #222 0%, #000 100%);"
+								style="background: radial-gradient(circle at center, #111 0%, #000 100%);"
 							>
 								<div
 									slot="progress-bar"
-									class="pointer-events-none absolute top-0 left-0 h-1 w-full bg-neutral-800/50"
+									class="pointer-events-none absolute top-0 left-0 h-1 w-full bg-neutral-800/80"
 									id={`loader-${stage.id}`}
 								>
 									<div
@@ -114,6 +138,20 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 								<div class="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent" />
 							</div>
 						)}
+
+						{/* TYPE: GALLERY */}
+						{stage.type === "gallery" && (
+							<SharedLayoutGallery
+								client:load
+								id={`gallery-${stage.id}`}
+								images={stage.data?.images || []}
+								columns={stage.data?.columns || 3}
+								layout={stage.data?.layout || "grid"}
+								scattered={stage.data?.scattered || false}
+								featuredIndices={stage.data?.featuredIndices || []}
+								showLabels={false}
+							/>
+						)}
 					</StickyStage>
 				))
 			}
@@ -122,7 +160,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 		<!-- TRIGGERS -->
 		<div class="pointer-events-none absolute inset-0 flex flex-col">
 			<!-- Intro Spacer -->
-			<div class="flex h-screen snap-start items-center justify-center">
+			<div class="flex h-[20vh] items-center justify-center">
 				<div
 					id="start-engine-btn"
 					class="border border-white/10 bg-black/50 p-4 font-mono text-sm text-white transition-all duration-300"
@@ -133,9 +171,17 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 
 			{
 				stickies.map((stage: any) => (
-					<ScrollTrigger step={stage.id} align={stage.align}>
-						<h2 class="mb-4 text-3xl font-bold text-white">{stage.title}</h2>
-						<p class="text-neutral-400">{stage.text}</p>
+					<ScrollTrigger
+						step={stage.id}
+						align={stage.align}
+						invisible={!stage.title && !stage.text && !stage.deck}
+						wide={!!stage.deck}
+					>
+						{stage.title && <h2 class="mb-4 text-3xl font-bold text-white">{stage.title}</h2>}
+						{stage.text && <p class="text-neutral-400" set:html={stage.text} />}
+
+						{/* DECK SUPPORT */}
+						{stage.deck && <TextDeck id={`deck-${stage.id}`} slides={stage.deck} />}
 					</ScrollTrigger>
 				))
 			}
@@ -193,7 +239,10 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 										<div class="p-8 font-mono text-4xl font-bold text-neutral-700">{n.step}</div>
 									)}
 								</div>
-								<p>{n.body}</p>
+								<div
+									class="prose prose-invert max-w-none text-lg leading-relaxed text-neutral-400"
+									set:html={n.body}
+								/>
 							</NarrativeItem>
 						);
 					})}
@@ -201,6 +250,13 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 			</section>
 		)
 	}
+
+	<!-- MDX CONTENT SLOT -->
+	<section class="relative z-10 bg-neutral-900 pb-32">
+		<div class="site-container max-w-4xl">
+			<Content />
+		</div>
+	</section>
 
 	<!-- Scroll Cushion -->
 	<div class="h-[25vh] w-full snap-end bg-neutral-900"></div>
@@ -235,15 +291,27 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 
 	// 1. Intro Fade & HUD REVEAL
 	const intro = document.getElementById("intro-layer");
+	const heroParallax = document.getElementById("hero-parallax");
 	const topHud = document.getElementById("top-hud");
 	const startBtn = document.getElementById("start-engine-btn");
 
 	window.addEventListener("scroll", () => {
 		const scrollY = window.scrollY;
 
+		// PARALLAX HERO
+		if (heroParallax) {
+			heroParallax.style.transform = `translateY(${scrollY * 0.5}px)`;
+		}
+
 		if (intro) {
-			const opacity = Math.max(0, 1 - scrollY / 500);
+			const opacity = Math.max(0, 1 - scrollY / 200);
 			intro.style.opacity = opacity.toString();
+			// Hide completely when invisible to prevent blocking clicks
+			if (opacity === 0) {
+				intro.style.visibility = "hidden";
+			} else {
+				intro.style.visibility = "visible";
+			}
 		}
 
 		// HUD REVEAL LOGIC
@@ -272,7 +340,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
 					const targetId = entry.target.getAttribute("data-step");
-					const targetStage = document.getElementById(targetId || "");
+					const targetStage = document.getElementById(`stage-${targetId}` || "");
 
 					if (targetId && targetStage) {
 						// Hide all stages
@@ -284,7 +352,11 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 						// Show target
 						targetStage.style.opacity = "1";
 
-						if (targetStage.querySelector("model-viewer")) {
+						if (
+							targetStage.dataset.interactive !== undefined ||
+							targetStage.querySelector("model-viewer") ||
+							targetStage.querySelector(".pointer-events-auto")
+						) {
 							targetStage.style.pointerEvents = "auto";
 						}
 					}
@@ -336,4 +408,52 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 			});
 		});
 	}
+
+	// 4. MODEL VIEWER REFINEMENTS (Wiggle & Elastic)
+	const modelViewers = document.querySelectorAll("model-viewer");
+	let mouseX = 0;
+	let mouseY = 0;
+
+	window.addEventListener("mousemove", (e) => {
+		mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+		mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+	});
+
+	modelViewers.forEach((viewer: any) => {
+		const baseOrbit = viewer.getAttribute("camera-orbit") || "-30deg 75deg 110%";
+		let isInteracting = false;
+		let interactionTimer: any;
+		let time = Math.random() * 100;
+
+		function animateWiggle() {
+			if (!isInteracting && (viewer as any).model) {
+				time += 0.01;
+				const orbitParts = baseOrbit.split(" ");
+				const baseAzimuth = parseFloat(orbitParts[0]);
+				const basePolar = parseFloat(orbitParts[1]);
+
+				// 1. Idle Wiggle (Increased Amplitude to match Homepage)
+				// NOTE: Frame rate is consistent, but C24 feels "heavier/slower" than EN Logo due to large scale (1m wide).
+				// Kept slower to convey mass.
+				const wiggleAzimuth = Math.sin(time * 0.5) * 20;
+				const wigglePolar = Math.cos(time * 0.3) * 10;
+
+				viewer.cameraOrbit = `${baseAzimuth + wiggleAzimuth}deg ${basePolar + wigglePolar}deg ${orbitParts[2]}`;
+			}
+			requestAnimationFrame(animateWiggle);
+		}
+
+		animateWiggle();
+
+		viewer.addEventListener("camera-change", (e: any) => {
+			if (e.detail.source === "user-interaction") {
+				isInteracting = true;
+				clearTimeout(interactionTimer);
+				interactionTimer = setTimeout(() => {
+					isInteracting = false;
+					viewer.setAttribute("camera-orbit", baseOrbit);
+				}, 2000);
+			}
+		});
+	});
 </script>

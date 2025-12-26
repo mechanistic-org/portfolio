@@ -5,11 +5,12 @@ interface Props {
 	overlay?: boolean; // If true, adds a dark overlay
 }
 
-const { id, active = false, overlay = false } = Astro.props;
+const { id, active = false, overlay = false, ...rest } = Astro.props;
 ---
 
 <div
 	id={id}
+	{...rest}
 	class:list={[
 		"pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-700", // Default hidden/non-interactive
 		active ? "opacity-100" : "opacity-0",

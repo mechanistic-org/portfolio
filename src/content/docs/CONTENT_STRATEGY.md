@@ -22,7 +22,8 @@ The system operates on a "Drop & Forget" principle. You place raw files into an 
 graph LR
     A[Voice Memo / Idea] -->|Save MP3| B(Inbox Folder)
     C[Legacy Resume] -->|Save TXT| B
-    B -->|Watchdog Script| D{Ingestion Engine}
+    NLM[NotebookLM Research] -->|Structured Spec| D{Ingestion Engine}
+    B -->|Watchdog Script| D
     D -->|Transcribe| E[Whisper API]
     D -->|Universal Prompt| F[LLM Synthesis]
     E --> F
@@ -52,6 +53,7 @@ Quantum uses a **Hybrid Architecture** to manage project data.
 ### Phase 1: Capture (The Universal Inbox)
 *   **Location:** `data_source/inbox/`
 *   **Philosophy:** "Universal Inbox" Pattern. External scripts or humans dump files here; the engine consumes them.
+*   **Research Phase:** Use **NotebookLM** as the pre-ingestion "Chief of Staff" to process large project archives (PDFs, Docs) into structured specifications. See [The NotebookLM Bridge](file:///d:/GitHub/quantum/src/content/docs/NOTEBOOK_LM_BRIDGE.md).
 *   **Rule:** Use the **Smart Filename Schema**: `{slug}.{context}.{ext}`
     *   **Simple:** `xbox.mp3` (Implies generic context)
     *   **Contextual:** `xbox.technical.mp3` (Instructs LLM to focus on metrics)

@@ -21,6 +21,7 @@ The design system is not just about "styling"; it is a functional specification.
 3.  **The Datasheet Aesthetic:** The UI should feel like a technical specification document. High information density, clear hierarchy, zero fluff.
 4.  **Honest Construction:** We show the seams. The "Construction Badge" and "Debug Mode" are features, not bugs.
 5.  **The Physical Output:** The system must degrade gracefully to paper. `Cmd+P` should yield a professional datasheet, not a broken website screenshot.
+6.  **Tactile Depth:** The interface is not glass; it is machinery. Switches click, cards have weight, and the lens has grit. We prioritize "Texture" over "Cleanliness."
 
 > **Live Visualization:** A living example of this style guide is available at [`/about/elements`](/about/elements).
 
@@ -102,6 +103,8 @@ These components are available for use in MDX content:
 *   **Wire:** `<Wire />` (The standard divider)
 *   **Zigzag Grid:** Alternating text/image layout for feature breakdowns.
 *   **Process Strip:** Horizontal scrolling container for linear timelines.
+*   **Evidence Badge:** `<EvidenceBadge source="..." page="..." />` (Small verified icon for grounding).
+*   **Evidence Locker:** `<EvidenceLocker sources={[]} />` (The bibliography/archive section).
 
 ### The Brick (Containers)
 *   **Usage:** Cards, Modals, Sections.
@@ -147,6 +150,17 @@ These components are available for use in MDX content:
 *   **Purpose:** Standardized "Head Unit" for project pages.
 *   **Behavior:** Encapsulates metadata (Role, Client, Status) in a high-density card.
 *   **Interaction:** "Mini Gauge" pulses to indicate project status (Blue=Done, Amber=WIP).
+
+### The Evidence Locker (Grounding)
+*   **Aesthetic:** "Verified Document" / "Archive" feel.
+*   **Usage:** Providing proof for technical claims.
+*   **Component:** `<EvidenceBadge />`
+    *   *Visual:* A subtle, monospaced tag next to a metric (e.g., `40% lift [SRC]`).
+    *   *Interaction:* Hover displays the source document name and page number. Click opens the "Evidence Locker" modal.
+*   **Component:** `<EvidenceLocker />`
+    *   *Visual:* A grid of "Artifact Cards" at the bottom of a project page.
+    *   *Content:* Screenshots of source documents, bibliography entries, and links to (internal) archives.
+    *   *Vibe:* "Proof of Work" transparency.
 
 ---
 
@@ -201,6 +215,11 @@ We use specific motion verbs to define the relationship between content layers:
 *   **Implementation:** Tailwind `animate-[scroll]` with a custom Keyframe in `global.css`.
 *   **Aesthetic:** infinite horizontal scroll, Monospaced, Uppercase.
 *   **Color:** `neutral-500` (Ghosted) to avoid stealing focus from the primary charts.
+
+### 3D Micro-Interactions
+*   **Idle State:** Models shouldn't be statues.
+*   **The "Wiggle":** Models should have a subtle, continuous sine-wave animation (Idle Breath) + Mouse Parallax (User Awareness).
+*   **The "Elastic Snap":** If a user manually rotates the model, it should wait 2 seconds after release, then smoothly interpolate (Spring Physics) back to its canonical "Hero Pose" (`camera-orbit`).
 
 ## 6. Future Enhancements (Roadmap)
 *   **Build Stats:** Expose `ingest_data.py` runtime metrics in the footer (e.g., "Built in 0.4s").

@@ -5,13 +5,14 @@
 2.  **Signal-to-Noise:** Can I find the information I need instantly, or is it buried in animations?
 3.  **Craftsmanship:** Are the interactions fluid, performant, and bug-free?
 4.  **Novelty:** Have I seen this 100 times before (Scrolljacking, Parallax)? Or is it a new interface paradigm?
+5.  **Verifiable Grounding:** Are these claims backed by evidence (Citations, Documentation), or is it "AI Smear"?
 
 ** The Scale (The "Cool" Metric) **
 *   **0-3 (Junior):** Bootstrap templates, "Hello World" projects, WordPress. Functional but generic.
 *   **4-6 (Senior):** High-quality custom React/Next.js/Astro sites. Clean typography, grid layouts, standard "Portfolio" sections. Competent, employable, but not memorable.
 *   **7-8 (Staff/Principal):** "Awwwards" Territory. WebGL flourishes, custom shaders, high-end motion design. Often sacrifices usability for "wow" factor. Very "Cool," but sometimes "Style over Substance."
 *   **9 (Distinguished):** The "Hacker/Maker" Zenith. Brutalist efficiency OR sublime interactivity. The "Stripe Home Page" standard. Code is art. The interface feels like a specialized tool, not a brochure.
-*   **10 (The Singularity):** An interface that dissolves the boundary between user and data. "Iron Man's HUD." It feels alive, organic, and inevitable.
+*   **Level 10 (The Singularity):** An interface that dissolves the boundary between user and data. "Iron Man's HUD." It feels alive, organic, and inevitable. **Crucially:** Every "Win" is backed by the "Evidence Locker" (verified citations), removing all doubt of its authenticity.
 
 **Task:**
 Evaluate the portfolio `eriknorris.com` (The "Hyperspace" Theme) against this scale.

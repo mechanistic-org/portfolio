@@ -42,7 +42,15 @@ const {
 
 <!doctype html>
 <html lang="en" class="dark" transition:animate="fade">
-	<!-- ... head ... -->
+	<BaseHead
+		type={type}
+		title={title}
+		description={description}
+		image={image}
+		authors={authorsData}
+		postFrontmatter={postFrontmatter}
+		noindex={noindex}
+	/>
 	<body
 		class:list={[
 			"text-neutral-900 dark:text-neutral-200",

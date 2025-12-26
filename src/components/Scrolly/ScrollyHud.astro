@@ -1,27 +1,31 @@
 ---
 interface Props {
   steps: { id: string; label: string }[];
+  showLabels?: boolean;
 }
 
-const { steps } = Astro.props;
+const { steps, showLabels = false } = Astro.props;
 ---
 
 <nav class="fixed right-6 top-1/2 z-50 -translate-y-1/2 hidden md:block group">
   <div class="flex flex-col gap-4">
     {steps.map((step) => (
       <a
-        href={`#${step.id}`}
+        href={`#trigger-${step.id}`}
         class="nav-dot relative flex items-center justify-end"
-        data-target={step.id}
+        data-target={`trigger-${step.id}`}
         aria-label={`Scroll to ${step.label}`}
       >
         <!-- Label (Hover Reveal) -->
+        <!-- Label (Hover Reveal) -->
+        {showLabels && (
         <span class="mr-4 -translate-x-2 text-xs font-mono text-white opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 whitespace-nowrap bg-black/50 px-2 py-1 rounded">
           {step.label}
         </span>
+        )}
         
         <!-- Dot -->
-        <div class="h-2 w-2 rounded-full border border-white/50 bg-transparent transition-all duration-300 hover:scale-150 hover:bg-white hover:border-white nav-dot-circle shadow-[0_0_10px_rgba(0,0,0,0.5)]"></div>
+        <div class="h-2 w-2 rounded-full border border-white/30 bg-white/10 transition-all duration-300 hover:scale-150 hover:bg-white/50 hover:border-white nav-dot-circle shadow-[0_0_10px_rgba(0,0,0,0.3)]"></div>
       </a>
     ))}
   </div>
@@ -30,16 +34,17 @@ const { steps } = Astro.props;
 <style>
   /* Active State Logic */
   .active .nav-dot-circle {
-    background-color: #2E5CFF;
+    background-color: #2E5CFF; /* YinMn Blue */
     border-color: #2E5CFF;
-    transform: scale(1.5);
-    box-shadow: 0 0 15px rgba(46, 92, 255, 0.5);
+    transform: scale(1.6);
+    box-shadow: 0 0 15px rgba(46, 92, 255, 0.6);
   }
   
   .active span {
       color: #2E5CFF;
       opacity: 1 !important;
       transform: translateX(0) !important;
+      border-color: #2E5CFF / 30;
   }
 </style>
 
@@ -55,7 +60,7 @@ const { steps } = Astro.props;
             if (entry.isIntersecting) {
                  const id = entry.target.getAttribute('data-step');
                  dots.forEach(dot => {
-                     if (dot.getAttribute('data-target') === id) {
+                     if (dot.getAttribute('data-target') === `trigger-${id}`) {
                          dot.classList.add('active');
                      } else {
                          dot.classList.remove('active');
@@ -63,8 +68,20 @@ const { steps } = Astro.props;
                  });
             }
         });
-    }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+    }, { rootMargin: '-20% 0px -20% 0px', threshold: 0.1 });
 
     // Observe the Trigger Zones (which have data-step)
     document.querySelectorAll('[data-step]').forEach(el => observer.observe(el));
+
+    // SMOOTH SCROLL FOR DOTS
+    dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = dot.getAttribute('data-target');
+            const targetEl = document.getElementById(targetId || '');
+            if (targetEl) {
+                targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        });
+    });
 </script>

@@ -198,8 +198,8 @@ def process_project(slug):
 
                 # Generate Breakpoints
                 for bp_name, width in BREAKPOINTS.items():
-                    # Don't upscale
-                    if width > img.width:
+                    # Don't upscale (allow 10% tolerance for near-misses)
+                    if width > (img.width * 1.1):
                         continue
 
                     # Calculate height to maintain aspect ratio

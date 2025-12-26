@@ -10,7 +10,7 @@ To prevent "Stacking Wars", we vertically partition the Z-space into strict flig
 | **STRATOSPHERE** | `500-999` | Tooltips, Popovers, Dropdowns |
 | **HIGH ALTITUDE** | `100` | Sticky Headers, Top HUDs, Navigation Bars |
 | **CRUISING** | `50` | Floating Action Buttons (FABs), Toast Notifications |
-| **LOW ALTITUDE** | `10` | Sticky Section Headers, "Sticky Stages" in Scrollytelling |
+| **LOW ALTITUDE** | `10-40` | Sticky Section Headers (`z-10`), Interactive Sticky Stages (`z-40`) |
 | **GROUND** | `1` | Standard interactive elements |
 | **SUBTERRANEAN** | `0` or `-1` | Backgrounds, Noise Layers, Canvas (Three.js) |
 

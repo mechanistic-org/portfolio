@@ -18,54 +18,35 @@ teamSize: "Unknown"
 gallery: []
 documents: []
 links: [{"name": "Kaleidescape Website", "url": "https://kaleidescape.com"}]
-heroImage: "/assets/r2/m700/hero-vault.png" 
+heroImage: "/assets/placeholders/blueprint.jpg" 
 draft: false
 description: "M700 - Other project."
 duration: "Active"
 statusLabel: "Completed"
 skillGraph: "/assets/r2/m700/skill-graph.svg"
 partGraph: "/assets/r2/m700/part-graph.svg"
-impact: "Reliable disc handling for 320 slots. Sub-3 second load times. Tolerated misaligned media."
-cyberspace:
-  enable: true
-  stickies:
-    - id: "stage-challenge"
-      label: "The Challenge"
-      type: "media"
-      title: "Optical Jukebox"
-      text: "Ingesting, identifying, and cataloging 320 physical discs."
-      align: "center"
-      data:
-        src: "/assets/placeholders/abstract.jpg"
-    - id: "stage-approach"
-      label: "Robotics"
-      type: "media"
-      title: "The Picker"
-      text: "Developing a compliant robotic hand for reliable media handling."
-      align: "left"
-      data:
-         src: "/assets/placeholders/blueprint.jpg"
-    - id: "stage-impact"
-      label: "Impact"
-      type: "media"
-      title: "Performance"
-      text: "3-Axis Cartesian Robot. Less than 3 second load time."
-      align: "right"
-      data:
-         src: "/assets/placeholders/tech-2.jpg"
-
-  narrative:
-    - step: "stage-challenge"
-      title: "Physical Media Management"
-      body: "Legal requirements meant users had to have the physical disc present to play the digital copy. The M700 Disc Vault was an Optical Jukebox that held 320 discs. It needed to automatically ingest, identify, and catalog discs dropped into the slot without scratching them or jamming."
-    - step: "stage-approach"
-      title: "Compliant Robotics"
-      reverse: true
-      body: "I worked on the 'Picker' mechanism—the robotic hand. We built in mechanical compliance to tolerate misaligned discs (up to 2mm). We encountered sensor issues with highly reflective Blu-rays triggering false positives on the IR break-beams, which we solved with a polarized filter system."
-    - step: "stage-impact"
-      title: "High Fidelity"
-      body: "The result was a robust 3-Axis Cartesian robot that could identify and load a move in less than 3 seconds. It became the cornerstone of the Kaleidescape physical-to-digital ecosystem."
+impact: ""
 ---
 
-# M700
-(Converted to Hyperspace V4)
+import { YouTube } from '@astro-community/astro-embed-youtube';
+import ModelViewer from '@components/mdx/ModelViewer.astro';
+
+## The Challenge
+> **Context:** Legal requirements meant users had to have the physical disc present to play the digital copy.
+
+The M700 Disc Vault was a **Optical Jukebox** that held 320 discs.
+*   **Robotics:** It needed to automatically ingest, identify, and catalog discs dropped into the slot by a user.
+*   **Reliability:** The mechanism had to handle thousands of load/unload cycles without scratching a disc or jamming.
+
+## Engineering Approach
+I worked on the "Picker" mechanism—the robotic hand that grabbed the disc.
+*   **Compliance:** The gripper had built-in mechanical compliance to tolerate misaligned discs (up to 2mm) without jamming.
+*   **Sensor Saturation:** We used IR break-beams to detect disc presence, but the highly reflective surface of Blu-rays caused false positives. I implemented a polarized filter system to kill the glare.
+
+### Project Artifacts
+:::note[Specs]
+*   **Capacity:** 320 Discs
+*   **Robot:** 3-Axis Cartesian
+*   **Speed:** <3s Load Time
+:::
+

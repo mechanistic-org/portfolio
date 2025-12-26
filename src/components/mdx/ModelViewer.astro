@@ -18,7 +18,7 @@ const {
 	poster = DEFAULT_POSTER,
 	environmentImage,
 	cameraOrbit = "0deg 75deg 105%",
-	autoRotate = true,
+	autoRotate = false,
 } = Astro.props;
 
 const isFallback = src === NEIL_ARMSTRONG_GLB;
@@ -40,7 +40,7 @@ const uid = "mv-" + Math.random().toString(36).substr(2, 9);
 		touch-action="pan-y"
 		shadow-intensity="1"
 		shadow-softness="1"
-		exposure="1"
+		exposure="0.3"
 		environment-image={finalEnv}
 		camera-orbit={cameraOrbit}
 		field-of-view="30deg"
