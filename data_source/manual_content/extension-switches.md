@@ -11,5 +11,5 @@ The Extension Switch used existing traveler wires not for power, but for **High 
 ### Project Artifacts
 :::note[Specs]
 *   **Comms:** Powerline Carrier (PLC)
-*   **Latency:** <50ms
+*   **Latency:** &lt;50ms
 :::
