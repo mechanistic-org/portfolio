@@ -17,23 +17,25 @@ if (isCI) {
     console.log('🌍 Environment: CI / Cloudflare (Detected)');
     console.log(`🔍 Checking for local-only symlink: ${symlinkPath}`);
 
-    if (fs.existsSync(symlinkPath)) {
-        try {
-            // Check if it is actually a symlink
-            const stats = fs.lstatSync(symlinkPath);
-            if (stats.isSymbolicLink()) {
-                console.log('⚠️  Symlink found. Removing it to prevent build crash...');
-                fs.unlinkSync(symlinkPath);
-                console.log('✅ Symlink removed. Build can proceed safely.');
-            } else {
-                console.log('ℹ️  Path exists but is not a symlink. Leaving it alone.');
-            }
-        } catch (error) {
-            console.error(`❌ Error verifying symlink: ${error.message}`);
-            // We don't exit(1) because we want the build to try anyway.
+    try {
+        // Attempt to check if *anything* exists at this path (file, dir, or broken symlink)
+        // lstatSync works on broken symlinks, where existsSync returns false!
+        const stats = fs.lstatSync(symlinkPath);
+
+        console.log('🔍 Path detected. Checking if it is a symlink...');
+        if (stats.isSymbolicLink()) {
+            console.log('⚠️  Symlink found (possibly broken). Removing it to prevent build crash...');
+            fs.unlinkSync(symlinkPath);
+            console.log('✅ Symlink removed. Build can proceed safely.');
+        } else {
+            console.log('ℹ️  Path exists but is not a symlink. Leaving it alone.');
         }
-    } else {
-        console.log('✅ No symlink found used. Good to go.');
+    } catch (error) {
+        if (error.code === 'ENOENT') {
+            console.log('✅ No symlink (or file) found at public/assets/r2. Good to go.');
+        } else {
+            console.error(`❌ Error verifying symlink: ${error.message}`);
+        }
     }
 } else {
     console.log('💻 Environment: Local Development');
