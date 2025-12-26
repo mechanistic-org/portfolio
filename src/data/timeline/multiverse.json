@@ -841,8 +841,8 @@
       "img": "/assets/r2/mbox-2-mini/hero-sm.webp"
     },
     {
-      "id": "control-24",
-      "name": "Control 24 (C|24)",
+      "id": "c24",
+      "name": "C|24",
       "group": "Digidesign",
       "color": "#40ef29",
       "value": 208.5,
@@ -858,7 +858,7 @@
         "CAD (Computer-Aided Design)",
         "Tolerance Analysis"
       ],
-      "img": "/assets/r2/control-24/hero.png",
+      "img": "/assets/r2/c24/hero-sm.webp",
       "description": "High-density 24-channel analog/digital hybrid control surface. Resolved 1mm+ vendor manufacturing variances during mass production."
     },
     {

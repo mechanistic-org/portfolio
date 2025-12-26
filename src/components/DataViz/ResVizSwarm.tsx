@@ -218,47 +218,52 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
             .attr("transform", (d: any) => `translate(${d.x},${d.y})`) // Prevent 0,0 Flash
             .attr("cursor", "pointer");
 
-        // 1. Main Circle (Color Only for Cleanliness)
+        // 1. Main Circle
+        // Deep Dive Projects: C|24, Backsplash, Makeline, Portion Cup, Pet Scale
+        const deepDives = ["c24", "backsplash", "makeline", "portion-cup", "pet-scale"];
+
         nodeGroup.append("circle")
             .attr("r", (d: any) => d.radius)
             .attr("fill", (d: any) => colorScale(d.group))
-            .attr("stroke", (d: any) => "rgba(255,255,255,0.1)")
-            .attr("stroke-width", 1)
+            .attr("stroke", (d: any) => deepDives.includes(d.id) ? "#2E5CFF" : "rgba(255,255,255,0.1)")
+            .attr("stroke-width", (d: any) => deepDives.includes(d.id) ? 3 : 1)
             .attr("opacity", 0.9);
 
         // Event Listeners on the GROUP
         nodeGroup
             .on("click", (event, d) => {
-                // Keep click for mobile or persistent selection if needed
-                if (onNodeSelect) onNodeSelect(d);
+                // Click to Navigate Logic
+                window.location.href = `/projects/${d.id}`;
             })
             .on("mouseover", function (event, d) {
                 // Visual Highlight
                 d3.select(this).select("circle")
                     .transition().duration(200)
-                    .attr("stroke", "#fff") // Changed from #ff0000 to #fff
-                    .attr("stroke-width", 6) // Changed from 3 to 6
-                    .attr("filter", "drop-shadow(0 0 25px rgba(255,255,255,0.8))"); // Changed from 15px rgba(255,0,0,0.8) to 25px rgba(255,255,255,0.8)
+                    .attr("stroke", "#fff")
+                    .attr("stroke-width", 6)
+                    .attr("filter", "drop-shadow(0 0 25px rgba(255,255,255,0.8))");
 
                 // Show Label
                 d3.select(`[id="label-${d.id}"]`).transition().duration(200).style("opacity", 1);
-
-                // const [x, y] = d3.pointer(event, containerRef.current);
-                // setTooltip({ x, y, data: d });
 
                 // TRIGGER DATA BEAM ON HOVER
                 if (onNodeSelect) onNodeSelect(d);
             })
             .on("mouseout", function (event, d) {
-                const originalStroke = "rgba(255,255,255,0.1)";
+                const isDeepDive = deepDives.includes(d.id);
+                // Restore logic: Deep Dive ? Blue : Transparent-ish White
+                const targetStroke = isDeepDive ? "#2E5CFF" : "rgba(255,255,255,0.1)";
+                const targetWidth = isDeepDive ? 3 : 1;
+
                 d3.select(this).select("circle")
                     .transition().duration(500)
-                    .attr("stroke", originalStroke)
-                    .attr("stroke-width", 1)
+                    .attr("stroke", targetStroke)
+                    .attr("stroke-width", targetWidth)
                     .attr("filter", null);
 
                 // Hide Label
                 d3.select(`[id="label-${d.id}"]`).transition().duration(200).style("opacity", 0);
+
 
                 // setTooltip({ x: 0, y: 0, data: null });
 
@@ -332,8 +337,18 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
         const svg = d3.select(svgRef.current);
 
         // 2. Highlight Target (Using Data Filter for robustness)
-        // Reset all visuals first
-        svg.selectAll(".node-group circle").attr("stroke", "rgba(255,255,255,0.1)").attr("stroke-width", 1).attr("filter", null);
+        // Reset all visuals first, respecting Deep Dives
+        // Deep Dive Projects: C|24, Backsplash, Makeline, Portion Cup, Pet Scale
+        const deepDives = ["c24", "backsplash", "makeline", "portion-cup", "pet-scale"];
+
+        svg.selectAll(".node-group").each(function (d: any) {
+            const isDeepDive = deepDives.includes(d.id);
+            d3.select(this).select("circle")
+                .attr("stroke", isDeepDive ? "#2E5CFF" : "rgba(255,255,255,0.1)")
+                .attr("stroke-width", isDeepDive ? 3 : 1)
+                .attr("filter", null);
+        });
+
         svg.selectAll(".label").style("opacity", 0);
 
         if (externalHoverId) {

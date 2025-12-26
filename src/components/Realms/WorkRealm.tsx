@@ -73,7 +73,7 @@ export default function WorkRealm() {
                         {/* Scroll Content - Added relative for offsetTop calc */}
                         <div
                             ref={stripContainerRef}
-                            className="w-full h-full overflow-y-auto px-8 py-32 space-y-4 no-scrollbar relative"
+                            className="w-full h-full overflow-y-auto px-8 py-32 space-y-4 no-scrollbar relative pr-16"
                         >
                             {sortedNodes.map((node) => {
                                 const isActive = activeNode?.id === node.id;
@@ -82,7 +82,7 @@ export default function WorkRealm() {
                                         key={node.id}
                                         ref={(el) => { itemRefs.current[node.id] = el; }}
                                         onMouseEnter={() => setActiveNode(node)}
-                                        onClick={() => setSelectedProject(node)}
+                                        onClick={() => window.location.href = `/projects/${node.id}`}
                                         className={`
                                             relative p-6 border rounded-sm transition-all duration-300 cursor-pointer group
                                             ${isActive
@@ -120,36 +120,7 @@ export default function WorkRealm() {
                     </div>
                 </div>
 
-                {/* Project Technical Modal */}
-                {selectedProject && (
-                    <ProjectModal
-                        isOpen={!!selectedProject}
-                        onClose={() => setSelectedProject(null)}
-                        onNext={() => {
-                            const currentIndex = sortedNodes.findIndex(n => n.id === selectedProject.id);
-                            const nextNode = sortedNodes[(currentIndex + 1) % sortedNodes.length];
-                            setSelectedProject(nextNode);
-                            setActiveNode(nextNode);
-                        }}
-                        onPrev={() => {
-                            const currentIndex = sortedNodes.findIndex(n => n.id === selectedProject.id);
-                            const prevNode = sortedNodes[(currentIndex - 1 + sortedNodes.length) % sortedNodes.length];
-                            setSelectedProject(prevNode);
-                            setActiveNode(prevNode);
-                        }}
-                        project={{
-                            id: selectedProject.id,
-                            title: selectedProject.name,
-                            description: selectedProject.description,
-                            heroImage: selectedProject.img,
-                            employer: selectedProject.group,
-                            date: selectedProject.start_date,
-                            tags: selectedProject.skills,
-                            production: selectedProject.category, // Mapping category to production status for now
-                            industry: selectedProject.industry
-                        }}
-                    />
-                )}
+                {/* Project Technical Modal Removed (Direct Navigation) */}
             </div>
         </div>
     );
