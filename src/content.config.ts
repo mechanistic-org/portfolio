@@ -100,6 +100,9 @@ const projectsCollection = defineCollection({
 
         // Theme Selector (Core Architecture)
         theme: z.string().optional(),
+
+        // Visibility
+        listed: z.boolean().default(true),
     }),
 });
 

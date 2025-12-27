@@ -13,6 +13,8 @@ const { cyberspace, title, description } = entry.data;
 // Backwards compatibility/Renaming
 const scrolly = cyberspace;
 
+import GlobalHomeButton from "@components/Nav/GlobalHomeButton.astro";
+
 const stickies = scrolly?.stickies || [];
 const narratives = scrolly?.narrative || [];
 
@@ -27,6 +29,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 ---
 
 <BaseLayout title={title} description={description} hideNav={true}>
+	<GlobalHomeButton />
 	<!-- FIXED INTRO -->
 	<div
 		id="intro-layer"

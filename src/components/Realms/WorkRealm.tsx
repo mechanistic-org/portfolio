@@ -11,11 +11,19 @@ export default function WorkRealm() {
 
     const stripContainerRef = useRef<HTMLDivElement>(null);
 
+    // Helper to generate valid URL slugs from human-readable IDs
+    const toSlug = (id: string) => id.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+
     // Sort nodes manually to match visual timeline (Newest Top)
+    // FILTER: Hide Redacted/Hidden Projects from the Gallery
+    const hiddenIds = ["classified", "classified-alpha", "classified-bravo", "electronic-battery-lock"];
+
     const sortedNodes = useMemo(() => {
-        return [...multiverseData.nodes].sort((a, b) =>
-            new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
-        );
+        return [...multiverseData.nodes]
+            .filter(node => !hiddenIds.includes(node.id))
+            .sort((a, b) =>
+                new Date(b.start_date).getTime() - new Date(a.start_date).getTime()
+            );
     }, []);
 
     // Auto-scroll Fiche Strip when Swarm updates Active Node
@@ -82,7 +90,7 @@ export default function WorkRealm() {
                                         key={node.id}
                                         ref={(el) => { itemRefs.current[node.id] = el; }}
                                         onMouseEnter={() => setActiveNode(node)}
-                                        onClick={() => window.location.href = `/projects/${node.id}`}
+                                        onClick={() => window.location.href = `/projects/${toSlug(node.id)}`}
                                         className={`
                                             relative p-6 border rounded-sm transition-all duration-300 cursor-pointer group
                                             ${isActive

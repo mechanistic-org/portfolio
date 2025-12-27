@@ -21,6 +21,7 @@ const clients = data.client || [];
 const documents = data.documents || [];
 const links = data.links || [];
 const gallery = data.gallery || [];
+import GlobalHomeButton from "@components/Nav/GlobalHomeButton.astro";
 ---
 
 <Layout
@@ -29,6 +30,7 @@ const gallery = data.gallery || [];
 	image={data.heroImage ?? ""}
 	type="project"
 >
+    <GlobalHomeButton />
 	<!-- COMMAND HUD: Sticky Top Bar -->
 	<div class="sticky top-0 z-[100] border-b border-white/10 bg-black/90 backdrop-blur-md">
 		<ProjectInfoTable data={entry.data} nextProject={nextProject} prevProject={prevProject} />

@@ -202,8 +202,10 @@ sidebar:
 *   **Build Stability:** Resolved Keystatic and a11y dependency conflicts.
 *   **Footer Update:** Replaced Debug toggle with System Restart button.
 *   **Filter Menu Refinement:** Removed redundant "[ All ... ]" options, implemented hierarchical filtering, and added "Reset View" logic.
-*   **Project List UX:** Removed "Link" column and enabled whole-row clickability.
-*   **Stability:** Fixed `ingest_data.py` corruption and 404 errors for missing assets.
+- [x] **Swarm Physics Tuning:** Replaced "Glycerin" feel with "Gravity Well". Dreamjob node now attracts cursor (Strength 5.0) and grows on proximity (45px -> 85px).
+- [x] **Asset Sovereignty:** Codified "Quantum Laws" in Onboarding Prompt to prevent unauthorized asset generation.
+- [x] **Dreamjob Restoration:** Restored canonical "Mechanical Arm" hero asset for Dreamjob project (fixed 404).
+- [x] **Layout Polish:** Adjusted Swarm top margin (140px) for balanced vertical distribution.
 *   **Rendering Fix:** Resolved critical rendering issue (blank page) on Project Detail pages.
 *   **Context Lifecycle:** Created `docs/ONBOARDING_PROMPT.md` and `docs/CONVERSATION_MINER_PROMPT.md` to standardize AI session management.
 *   **Colophon Scout:** Updated `CONVERSATION_MINER_PROMPT` to actively identify "Meta-Features" for the Colophon.

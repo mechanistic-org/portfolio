@@ -7,6 +7,8 @@ const data = entry.data;
 
 // Parse lists
 const gallery = data.gallery || [];
+
+import GlobalHomeButton from "@components/Nav/GlobalHomeButton.astro";
 ---
 
 <Layout
@@ -15,6 +17,7 @@ const gallery = data.gallery || [];
 	image={data.heroImage ?? ""}
 	type="project"
 >
+	<GlobalHomeButton />
 	<!-- VINTAGE CRT OVERLAY -->
 	<div
 		class="pointer-events-none fixed inset-0 z-[100] h-full w-full bg-[url('/assets/noise.png')] opacity-[0.03] mix-blend-overlay"

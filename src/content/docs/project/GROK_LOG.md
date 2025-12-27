@@ -56,3 +56,16 @@
 ## 🔮 V. Future Grok (Open Slots)
 *   [ ] **The Law of "Moves":** Defining the threshold for "Cool" vs "Gimmick" (re: Parallax/Breathe).
 
+---
+## 🎨 VI. The Law of Asset Sovereignty (The Interaction Decree)
+**Status:** ENFORCED
+**Date:** 2025-12-26
+**Context:** Friction encountered when Agent generated a generic "Dreamjob" asset to fix a 404, overwriting the canonical (but missing locally) asset. This violated the "Director's Vision".
+
+**The Law:**
+1.  **Implicit vs. Explicit:** The Agent must assume "Missing Asset" = "Needs Retrieval", NOT "Needs Creation".
+2.  **Localhost Air Gap:** The Agent must valididate Symlinks before questioning existence. A failure locally is not a failure globally.
+3.  **Creative License Limits:** Code is mutable; Content/Assets are immutable (unless explicitly in a "Constructed Reality" context like *Dreamjob* OR explicitly authorized).
+4.  **Quantum Exception:** For defined "Dream" projects, Synthesis is allowed if no historical truth exists.
+
+

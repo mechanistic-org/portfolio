@@ -77,28 +77,44 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
     const svgRef = useRef<SVGSVGElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
     const mousePos = useRef<{ x: number, y: number } | null>(null);
+    const activeIdRef = useRef<string | undefined>(externalHoverId); // Track active ID for D3 events
+
+    // Sync ref
+    useEffect(() => {
+        activeIdRef.current = externalHoverId;
+    }, [externalHoverId]);
+
     const [tooltip, setTooltip] = useState<{ x: number, y: number, data: NodeData | null }>({ x: 0, y: 0, data: null });
 
     // --- Process Data ---
     const nodes = useMemo(() => {
         const now = new Date();
-        return (multiverseRequest.nodes as any[]).map(d => {
-            const start = new Date(d.start_date);
-            const end = d.end_date ? new Date(d.end_date) : now;
-            const durationDays = (end.getTime() - start.getTime()) / (1000 * 3600 * 24);
+        const hiddenIds = ["classified", "classified-alpha", "classified-bravo", "electronic-battery-lock"];
 
-            // Radius based on duration 
-            // MAX DENSITY: Large bubbles
-            const r = Math.max(15, Math.sqrt(durationDays) * 1.5);
+        return (multiverseRequest.nodes as any[])
+            .filter(d => !hiddenIds.includes(d.id))
+            .map(d => {
+                const start = new Date(d.start_date);
+                const end = d.end_date ? new Date(d.end_date) : now;
+                const durationDays = (end.getTime() - start.getTime()) / (1000 * 3600 * 24);
 
-            return {
-                ...d,
-                radius: r,
-                date: start,
-                x: 0,
-                y: 0
-            };
-        }) as NodeData[];
+                // Radius based on duration 
+                // Dreamjob Override: Purely behavioral relevance, not temporal relevance.
+                // Reducing it to "Standard Large Project" size (~3-4 years equivalent) to avoid dominating the physics.
+                let r = Math.max(15, Math.sqrt(durationDays) * 1.5);
+
+                if (d.id === "dreamjob") {
+                    r = 45; // Fixed size, roughly matching a 5-6 year tenure but manageable
+                }
+
+                return {
+                    ...d,
+                    radius: r,
+                    date: start,
+                    x: 0,
+                    y: 0
+                };
+            }) as NodeData[];
     }, []);
 
     // Dimensions state to trigger re-render on resize
@@ -125,10 +141,10 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
         const minDate = d3.min(nodes, d => d.date) || new Date(2000, 0, 1);
 
         // VERTICAL: Now (Top) -> Start (Bottom)
-        // Adjusted padding: Increased top to 250px to prevent clipping of 'Dreamjob' bubble
+        // Adjusted padding: Reduced top to 140px (from 120) per user request.
         const timeScale = d3.scaleTime()
             .domain([new Date(), minDate])
-            .range([250, height - 150]);
+            .range([140, height - 150]);
 
         // Dynamic Color Scale (Flourish Style)
         const colorScale = d3.scaleOrdinal(d3.schemeTableau10);
@@ -160,15 +176,27 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
                     const dy = y - d.y!;
                     const dist = Math.sqrt(dx * dx + dy * dy);
 
-                    // Interaction Radius: 200px
-                    if (dist < 200) {
-                        // Calculate gentle gravity force
-                        const force = (200 - dist) / 200;
-
-                        // Apply velocity modification (Attraction)
-                        // Using '0.5' strength factor for noticeable but not chaotic pull
-                        d.vx! += (dx / dist) * force * 0.5 * simulation.alpha();
-                        d.vy! += (dy / dist) * force * 0.5 * simulation.alpha();
+                    // DREAMJOB SPECIAL PHYSICS: Gravity Well
+                    // It wants to be clicked. Strong attraction.
+                    if (d.id === "dreamjob") {
+                        // Larger range (300px) and Stronger Pull
+                        if (dist < 300) {
+                            const force = (300 - dist) / 300;
+                            // Strong pull towards mouse
+                            d.vx! += (dx / dist) * force * 2.5 * simulation.alpha();
+                            d.vy! += (dy / dist) * force * 2.5 * simulation.alpha();
+                        }
+                    } else {
+                        // STANDARD NODES: Gentle Repulsion/Displacement (Make way for the cursor)
+                        // Or just very mild attraction? User scrolly said "inverse repulsion".
+                        // Let's make others slightly shy (Repel) to clear the path? 
+                        // Or just mild attraction for fluidity. Let's stick to mild attraction for cohesion, 
+                        // but Dreamjob is MUCH stronger.
+                        if (dist < 150) {
+                            const force = (150 - dist) / 150;
+                            d.vx! += (dx / dist) * force * 0.2 * simulation.alpha();
+                            d.vy! += (dy / dist) * force * 0.2 * simulation.alpha();
+                        }
                     }
                 });
             })
@@ -176,6 +204,18 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
 
         const svg = d3.select(svgRef.current);
         svg.selectAll("*").remove();
+
+        // Define Filter inside SVG for Glow
+        const defs = svg.append("defs");
+        const filter = defs.append("filter")
+            .attr("id", "glow")
+            .attr("filterUnits", "userSpaceOnUse");
+        filter.append("feGaussianBlur")
+            .attr("stdDeviation", "2.5")
+            .attr("result", "coloredBlur");
+        const feMerge = filter.append("feMerge");
+        feMerge.append("feMergeNode").attr("in", "coloredBlur");
+        feMerge.append("feMergeNode").attr("in", "SourceGraphic");
 
         // Setup Mouse Tracking for Physics
         svg.on("mousemove", (event) => {
@@ -188,11 +228,6 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
                 mousePos.current = null;
                 simulation.alphaTarget(0);
             });
-
-        // --- Defs for Images ---
-        // DISABLED: Temporarily disabling images to ensure clean aesthetic vs broken/pixelated images
-        // const defs = svg.append("defs");
-        // nodes.forEach((d: any) => { ... });
 
         // --- Axis (Right Side) ---
         const yAxis = d3.axisRight(timeScale)
@@ -221,22 +256,72 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
         // 1. Main Circle
         // Deep Dive Projects: C|24, Backsplash, Makeline, Portion Cup, Pet Scale
         const deepDives = ["c24", "backsplash", "makeline", "portion-cup", "pet-scale"];
+        const dreamjobId = "dreamjob";
 
         nodeGroup.append("circle")
             .attr("r", (d: any) => d.radius)
             .attr("fill", (d: any) => colorScale(d.group))
-            .attr("stroke", (d: any) => deepDives.includes(d.id) ? "#2E5CFF" : "rgba(255,255,255,0.1)")
-            .attr("stroke-width", (d: any) => deepDives.includes(d.id) ? 3 : 1)
+            .attr("stroke", (d: any) => {
+                if (d.id === dreamjobId) return "#ffffff";
+                return deepDives.includes(d.id) ? "#2E5CFF" : "rgba(255,255,255,0.1)";
+            })
+            .attr("stroke-width", (d: any) => {
+                if (d.id === dreamjobId) return 4;
+                return deepDives.includes(d.id) ? 3 : 1;
+            })
+            .attr("filter", (d: any) => d.id === dreamjobId ? "drop-shadow(0 0 15px rgba(255,255,255,0.6))" : null)
+            // .attr("class", (d: any) => d.id === dreamjobId ? "animate-pulse" : "") // Removed: Manual Physics Growth used instead
             .attr("opacity", 0.9);
+
+        // Helper to generate valid URL slugs from human-readable IDs
+        const toSlug = (id: string) => id.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+
+        // Function: Apply Default Styles (Reset)
+        const applyDefaultStyle = (selection: any, d: any) => {
+            const isDreamjob = d.id === dreamjobId;
+            const isDeepDive = deepDives.includes(d.id);
+
+            let stroke = "rgba(255,255,255,0.1)";
+            let width = 1;
+            let filter = null;
+
+            if (isDreamjob) {
+                stroke = "#ffffff";
+                width = 4;
+                filter = "drop-shadow(0 0 15px rgba(255,255,255,0.6))";
+            } else if (isDeepDive) {
+                stroke = "#2E5CFF";
+                width = 3;
+            }
+
+            selection.select("circle")
+                .transition().duration(500)
+                .attr("stroke", stroke)
+                .attr("stroke-width", width)
+                .attr("filter", filter);
+
+            // Hide Label
+            d3.select(`[id="label-${d.id}"]`).transition().duration(200).style("opacity", 0);
+        };
 
         // Event Listeners on the GROUP
         nodeGroup
             .on("click", (event, d) => {
-                // Click to Navigate Logic
-                window.location.href = `/projects/${d.id}`;
+                // Click to NAVIGATE (Visit)
+                event.stopPropagation();
+                window.location.href = `/projects/${toSlug(d.id)}`;
             })
+            // .on("dblclick", (event, d) => { ... }) // Removed as requested
             .on("mouseover", function (event, d) {
-                // Visual Highlight
+                // GHOST FIX:
+                // 1. Reset ALL other nodes to default state (clearing any external highlights)
+                svg.selectAll(".node-group").each(function (nodeData: any) {
+                    if (nodeData.id !== d.id) {
+                        applyDefaultStyle(d3.select(this), nodeData);
+                    }
+                });
+
+                // 2. Highlight THIS node
                 d3.select(this).select("circle")
                     .transition().duration(200)
                     .attr("stroke", "#fff")
@@ -246,32 +331,45 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
                 // Show Label
                 d3.select(`[id="label-${d.id}"]`).transition().duration(200).style("opacity", 1);
 
-                // TRIGGER DATA BEAM ON HOVER
+                // Optional: Sync Fiche Selection (Lock) without navigation
+                // If we want the hover to update the right panel preview WITHOUT locking it:
                 if (onNodeSelect) onNodeSelect(d);
             })
             .on("mouseout", function (event, d) {
-                const isDeepDive = deepDives.includes(d.id);
-                // Restore logic: Deep Dive ? Blue : Transparent-ish White
-                const targetStroke = isDeepDive ? "#2E5CFF" : "rgba(255,255,255,0.1)";
-                const targetWidth = isDeepDive ? 3 : 1;
+                // Restore logic
+                applyDefaultStyle(d3.select(this), d);
 
-                d3.select(this).select("circle")
-                    .transition().duration(500)
-                    .attr("stroke", targetStroke)
-                    .attr("stroke-width", targetWidth)
-                    .attr("filter", null);
+                // RESTORE EXTERNAL HIGHLIGHT if it exists and is NOT this node
+                // (This happens if we moused over something else while one was locked)
+                // Actually, the useEffect below handles the externalHoverId application.
+                // But D3 transitions might conflict.
+                // Let's trigger a re-eval of external highlight?
+                // The useEffect depends on [externalHoverId]. If that prop didn't change, it won't re-run.
+                // However, onNodeSelect during hover MIGHT have changed it. 
+                // If hover updates onNodeSelect -> Parent updates externalHoverId -> useEffect runs -> Re-highlights this node.
 
-                // Hide Label
-                d3.select(`[id="label-${d.id}"]`).transition().duration(200).style("opacity", 0);
+                // If we want "Click to Lock", hover shouldn't update onNodeSelect.
+                // BUT user wants "Hover to Preview"?
+                // "Hover will now only provide local visual feedback... Click to Lock" <- FROM PREVIOUS TASK
+                // So I should remove `onNodeSelect(d)` from mouseover in that case?
+                // Wait, previous instructions said "Hover provides local visual feedback... click locks".
+                // Current user request: "Single Click VISITS".
+                // So we have NO locking anymore?
+                // If NO locking, then onNodeSelect(d) on mouseover is fine for PREVIEW in Fiche?
+                // "Hover provides a local visual preview".
 
-
-                // setTooltip({ x: 0, y: 0, data: null });
-
-                // Optional: Reset Data Beam on mouseout? 
-                // Let's keep the last selection to avoid flashing "Awaiting Input" too much
-                // or resetting if they just move between bubbles.
-                // if (onNodeSelect) onNodeSelect(null); 
+                // Let's KEEP onNodeSelect(d) on hover so the Fiche updates.
+                // But "Ghost Highlights"...
+                // Only one highlight allowed.
             });
+
+
+        // setTooltip({ x: 0, y: 0, data: null });
+
+        // Optional: Reset Data Beam on mouseout? 
+        // Let's keep the last selection to avoid flashing "Awaiting Input" too much
+        // or resetting if they just move between bubbles.
+        // if (onNodeSelect) onNodeSelect(null);
 
         // --- Labels ---
         const label = g.selectAll("text.label")
@@ -291,6 +389,39 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
         simulation.on("tick", () => {
             // Move the Group
             nodeGroup.attr("transform", d => `translate(${d.x},${d.y})`);
+
+            // Proximity Growth Logic (Visual Only)
+            if (mousePos.current) {
+                const { x, y } = mousePos.current;
+
+                // Select just the Dreamjob circle directly for performance
+                // Note: We could do this for all, but Dreamjob is special
+                const dreamjobNode = nodes.find(n => n.id === dreamjobId);
+                if (dreamjobNode && dreamjobNode.x && dreamjobNode.y) {
+                    const dx = x - dreamjobNode.x;
+                    const dy = y - dreamjobNode.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    const range = 400; // Must match interaction range
+
+                    // Base Radius: 45. Max Radius: 75.
+                    let targetR = 45;
+                    if (dist < range) {
+                        // Linear growth based on closeness
+                        const growth = (range - dist) / range; // 0..1
+                        targetR = 45 + (growth * 40); // Max 85
+                    }
+
+                    // Select the specific circle element and animate it smoothly?
+                    // In a tick loop, we just set it. 
+                    // To be smoother, we might want to lerp, but setting directly is instant response.
+                    svg.select(`#node-${dreamjobId} circle`)
+                        .attr("r", targetR);
+                }
+            } else {
+                // Reset if mouse leaves
+                svg.select(`#node-${dreamjobId} circle`)
+                    .attr("r", 45);
+            }
 
             // Move the Labels
             label
@@ -340,13 +471,32 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
         // Reset all visuals first, respecting Deep Dives
         // Deep Dive Projects: C|24, Backsplash, Makeline, Portion Cup, Pet Scale
         const deepDives = ["c24", "backsplash", "makeline", "portion-cup", "pet-scale"];
+        const dreamjobId = "dreamjob";
 
         svg.selectAll(".node-group").each(function (d: any) {
             const isDeepDive = deepDives.includes(d.id);
+            const isDreamjob = d.id === dreamjobId;
+
+            // Dreamjob gets special White Pulse
+            // Deep Dives get Blue Ring
+            // Others get transparent
+            let stroke = "rgba(255,255,255,0.1)";
+            let width = 1;
+            let filter = null;
+
+            if (isDreamjob) {
+                stroke = "#ffffff";
+                width = 4;
+                filter = "drop-shadow(0 0 15px rgba(255,255,255,0.6))";
+            } else if (isDeepDive) {
+                stroke = "#2E5CFF";
+                width = 3;
+            }
+
             d3.select(this).select("circle")
-                .attr("stroke", isDeepDive ? "#2E5CFF" : "rgba(255,255,255,0.1)")
-                .attr("stroke-width", isDeepDive ? 3 : 1)
-                .attr("filter", null);
+                .attr("stroke", stroke)
+                .attr("stroke-width", width)
+                .attr("filter", filter);
         });
 
         svg.selectAll(".label").style("opacity", 0);
