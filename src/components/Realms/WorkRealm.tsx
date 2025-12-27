@@ -1,3 +1,6 @@
+import { getAssetUrl } from '../../utils/assets';
+
+// ... existing imports
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import ResVizSwarm from '../DataViz/ResVizSwarm';
 import multiverseData from '../../data/timeline/multiverse.json';
@@ -117,7 +120,7 @@ export default function WorkRealm() {
                                         {isActive && node.img && !node.img.includes('placeholder') && (
                                             <div className="mt-4 h-32 w-full overflow-hidden rounded border border-white/10">
                                                 {/* Using standard img for now, potentially update to optimized image */}
-                                                <img src={node.img} className="w-full h-full object-cover opacity-80" alt={node.name} />
+                                                <img src={getAssetUrl(node.img || '')} className="w-full h-full object-cover opacity-80" alt={node.name} />
                                             </div>
                                         )}
                                     </div>

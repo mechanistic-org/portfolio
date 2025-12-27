@@ -26,6 +26,7 @@ interface Props {
 	postFrontmatter?: CollectionEntry<"blog">["data"];
 	noindex?: boolean;
 	hideNav?: boolean;
+	overflowHidden?: boolean;
 }
 
 const {
@@ -37,6 +38,7 @@ const {
 	postFrontmatter,
 	noindex = false,
 	hideNav = false,
+	overflowHidden = false,
 } = Astro.props as Props;
 ---
 
@@ -56,6 +58,7 @@ const {
 			"text-neutral-900 dark:text-neutral-200",
 			{
 				"use-animations": siteData.useAnimations === true ? true : false,
+				"overflow-hidden": overflowHidden,
 			},
 		]}
 	>
