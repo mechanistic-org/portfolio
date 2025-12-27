@@ -1,0 +1,36 @@
+.|Components          |||||0
+..|Electronic||General Components Suppliers|duracell.png||0
+...|Chip Directory|http://www.xs4all.nl/~ganswijk/chipdir||||0
+...|Digi-Key|http://www.digikey.com||||0
+...|EE Masters|http://www.eem.com||||0
+...|Feller|http://www.feller-at.com||||0
+...|Grainger|http://www.grainger.com||||0
+...|Graybar|http://www.graybar.com||||0
+...|IC Master|http://icmaster.com||||0
+...|McMaster Carr|http://www.mcmaster.com||||0
+...|Mouser|http://www.mouser.com||||0
+...|Radio Shack|http://www.radioshack.com/home/index.jsp||||0
+..|Fasteners|||||0
+...|Accurate Screw|http://www.accuratescrew.com||||0
+...|Allmetal|http://www.allmetalcorp.com||||0
+...|Bolt Depot|http://www.boltdepot.com/Catalog.aspx||||0
+...|Penn Engineering|http://www.pemnet.com||||0
+...|Precision Screw|http://www.precisionscrewandbolt.com||||0
+...|Southco|http://www.southco.com||||0
+...|Tinnerman|http://www.tinnerman.com||||0
+...|Fastener Info|||||0
+....|Tech Info|http://www.metricmcc.com/techinfo/overview.aspx?item=1||||0
+....|(+)Tech Info|http://www.accuratescrew.com/Industry-Technical.aspx||||0
+....|Thread Gauges, etc.|http://www.boltdepot.com/fastener-information/Printable-Fastener-Tools.aspx||||0
+....|Spec Sheets|http://www.coburnmyers.com/technical/dimensional-specifications.asp||||0
+....|(+)Spec Sheets|http://www.purchasepartners.com/fastenerspecs.htm||||0
+..|Mechanical|||||0
+...|Berg|http://www.wmberg.com||||0
+...|GlobalSpec|http://www.globalspec.com||||0
+...|Grainger|http://www.grainger.com/Grainger/wwg/start.shtml||||0
+...|Lord Corp.|http://www.lord.com||||0
+...|McMaster Carr|http://www.mcmaster.com||||0
+...|PIC Design|http://www.pic-design.com||||0
+...|Small Parts|http://www.smallparts.com||||0
+...|Stock Drive Products|http://www.sdp-si.com||||0
+...|Thomas|http://www.thomasnet.com/index.html||||0

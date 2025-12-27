@@ -1,0 +1,21 @@
+
+
+
+
+
+
+
+
+
+
+Table VI -Flatness
+
+Max. Dimension					    Thixomolded(r)/NADCA Precision
+of Molded Surface							Tolerance		
+
+Up to 3.00in.(76.20mm)						0.005in.(0.13mm)
+
+Additional tolerance
+for each additional in.(25.4mm)					0.002in.(0.05mm)
+
+

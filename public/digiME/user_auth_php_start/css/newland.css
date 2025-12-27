@@ -1,0 +1,41 @@
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+}
+td {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+}
+h1 {
+	font-size: 18pt;
+	font-weight: bold;
+	color: #505748;
+}
+h2 {
+	font-size: 16pt;
+	font-weight: bold;
+	color: #646482;
+}
+h3 {
+	font-size: 14pt;
+	font-weight: bold;
+}
+a {
+	color: #447832;
+	text-decoration: underline;
+}
+.author {
+	font-weight: bold;
+}
+.navhead {
+	font-size: 12pt;
+	font-weight: bold;
+	color: #505748;
+}
+.caption {
+	font-style: italic;
+}
+.error {
+	font-weight: bold;
+	color: #990000;
+}

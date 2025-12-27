@@ -1,0 +1,2 @@
+MATERIAL:  STEEL ALLOY, ASTM A322, GRADE $,
+BAR, $, (UNS $), $.

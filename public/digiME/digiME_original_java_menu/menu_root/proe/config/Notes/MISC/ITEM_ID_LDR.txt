@@ -1,0 +1,7 @@
+{0:7   ITEM IDENTIFICATION:  APPLY THE}
+{1:    FOLLOWING MARKING IAW MIL-STD-130.}
+{2:    MFR-      }{3:!}
+{4: }
+{5:         MANUFACTURER'S}
+{6:      CAGE CODE   PART NUMBER}
+{7: }

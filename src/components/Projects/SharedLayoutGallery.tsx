@@ -8,6 +8,8 @@ interface GalleryImage {
     aspectRatio?: number;
     title?: string;
     description?: string;
+    trigger?: string;
+    href?: string; //  <-- Added for link cards
 }
 
 import Masonry from "react-masonry-css";
@@ -16,7 +18,7 @@ interface SharedLayoutGalleryProps {
     images: GalleryImage[];
     id: string; // Unique ID for the gallery instance (to isolate layoutIds)
     columns?: 2 | 3 | 4 | 5 | 6 | 8; // Explicit column count control
-    layout?: "grid" | "masonry" | "collage" | "spotlight";
+    layout?: "grid" | "masonry" | "collage" | "spotlight" | "cards";
     scattered?: boolean;
     featuredIndices?: number[]; // Indices of images to highlight in collage mode
 }
@@ -135,8 +137,88 @@ export default function SharedLayoutGallery({ images, id, columns = 3, layout = 
         return rotations[index % rotations.length];
     };
 
+    const renderCardLayoutItem = (image: GalleryImage, index: number) => {
+        // Card Layout Implementation
+        return (
+            <motion.a
+                key={`${id}-card-${index}`}
+                href={image.href}
+                target={image.href ? "_blank" : undefined}
+                rel="noopener noreferrer"
+                className="group block bg-neutral-900 border border-white/5 hover:border-accent/40 rounded-sm overflow-hidden transition-colors h-full flex flex-col"
+                whileHover={{ y: -4 }}
+            >
+                {/* Image Top */}
+                <div className="relative aspect-video overflow-hidden bg-black/50 border-b border-white/5">
+                    <img
+                        src={image.src}
+                        alt={image.title}
+                        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                    />
+                    {image.href && (
+                        <div className="absolute top-2 right-2 p-1.5 bg-black/60 backdrop-blur-md rounded-full text-white/70 group-hover:text-white transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                        </div>
+                    )}
+                </div>
+
+                {/* Content Details */}
+                <div className="p-4 flex flex-col flex-grow">
+                    <h3 className="font-mono text-sm uppercase tracking-wider text-accent mb-2 truncate">
+                        {image.title || "Resource"}
+                    </h3>
+                    {image.description && (
+                        <p className="text-sm text-neutral-400 leading-snug line-clamp-3">
+                            {image.description}
+                        </p>
+                    )}
+                    {image.href && (
+                        <div className="mt-auto pt-4 flex items-center gap-2 text-[10px] uppercase tracking-widest text-neutral-600 group-hover:text-neutral-400 transition-colors">
+                            <span>{new URL(image.href).hostname.replace('www.', '')}</span>
+                        </div>
+                    )}
+                </div>
+            </motion.a>
+        );
+    };
+
     const renderImageCard = (image: GalleryImage, index: number) => {
-        // @ts-ignore
+        // SPECIAL CASE: Link Card
+        if (image.href) {
+            return (
+                <motion.a
+                    key={`${id}-img-${index}`}
+                    href={image.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`block cursor-pointer group relative overflow-hidden bg-black/20 border border-white/5 hover:border-accent/50 transition-all mb-4 ${getRotation(index)}`}
+                    whileHover={{ scale: 1.05, rotate: 0, zIndex: 10 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                >
+                    <img
+                        src={image.src}
+                        alt={image.title || "External Link"}
+                        className="w-full h-auto object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500 grayscale group-hover:grayscale-0"
+                    />
+                    {/* External Link Icon Overlay */}
+                    <div className="absolute top-2 right-2 p-1.5 bg-black/50 backdrop-blur-sm rounded-full opacity-60 group-hover:opacity-100 transition-opacity">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                    </div>
+
+                    {/* Title Overlay */}
+                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-black/70 backdrop-blur-md border-t border-white/10 group-hover:bg-accent/90 transition-colors duration-300">
+                        <p className="text-xs font-mono text-white/90 uppercase tracking-widest truncate group-hover:text-black font-bold">
+                            {image.title || "External Resource"}
+                        </p>
+                        <p className="text-[10px] text-white/50 truncate font-sans group-hover:text-black/70">
+                            {new URL(image.href).hostname.replace('www.', '')}
+                        </p>
+                    </div>
+                </motion.a>
+            );
+        }
+
+        // SPECIAL CASE: Time Capsule Trigger
         if (image.trigger === "time-capsule") {
             return (
                 <motion.div
@@ -155,13 +237,14 @@ export default function SharedLayoutGallery({ images, id, columns = 3, layout = 
             );
         }
 
+        // STANDARD: Lightbox Image
         return (
             <motion.div
                 key={`${id}-img-${index}`}
                 layoutId={`${id}-img-${index}`}
                 onClick={() => handleImageClick(image, index)}
-                className={`cursor-pointer group relative overflow-hidden bg-black/20 border border-white/5 hover:border-accent/50 transition-all mb-4 ${getRotation(index)}`} // Added transition-all and rotation
-                whileHover={{ scale: 1.05, rotate: 0, zIndex: 10 }} // Pop up and straighten on hover
+                className={`cursor-pointer group relative overflow-hidden bg-black/20 border border-white/5 hover:border-accent/50 transition-all mb-4 ${getRotation(index)}`}
+                whileHover={{ scale: 1.05, rotate: 0, zIndex: 10 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
             >
                 <img
@@ -184,7 +267,11 @@ export default function SharedLayoutGallery({ images, id, columns = 3, layout = 
     return (
         <div className="w-full pointer-events-auto relative z-50 h-full overflow-y-auto px-4 py-2 scrollbar-hide flex flex-col justify-center">
             {/* Layout Switcher */}
-            {layout === "grid" ? (
+            {layout === "cards" ? (
+                <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 m-auto w-full max-w-7xl`}>
+                    {uniqueImages.map((image, index) => renderCardLayoutItem(image, index))}
+                </div>
+            ) : layout === "grid" ? (
                 <div className={`grid grid-cols-2 ${gridClass} ${gapClass} m-auto w-full max-w-7xl`}>
                     {uniqueImages.map((image, index) => (
                         <div key={index}>
@@ -306,7 +393,7 @@ export default function SharedLayoutGallery({ images, id, columns = 3, layout = 
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 <img
-                                    src={uniqueImages[selectedIndex].src}
+                                    src={getAssetUrl(uniqueImages[selectedIndex].src)}
                                     alt="Selected"
                                     className="max-w-full max-h-full object-contain shadow-2xl"
                                 />

@@ -1,0 +1,11 @@
+.|Design Info Online|||||0
+..|eFunda|http://www.efunda.com/home.cfm||||0
+..|DuPont|http://plastics.dupont.com/NASApp/myplastics/Mediator?id=502&p=1&locale=en_US||||0
+..|Engineering Database|http://http://www.diracdelta.co.uk||||0
+..|Engineers Edge|http://www.engineersedge.com/Design_Data.shtml||||0
+..|GE Plastics Tools|http://tools.geplastics.com/webted/webted.html||||0
+..|Form Factors|http://www.formfactors.org/default.asp||||0
+..|iCrank|http://icrank.com/cgi-bin/pageman/pageout.cgi?path=/index_html.html||||0
+..|NASA Tech Briefs|http://www.nasatech.com||||0
+..|Online Conversion|http://www.onlineconversion.com||||0
+..|SDP Tech Library|http://www.sdp-si.com/herb/spk/sdp-si/D220/D220cat.htm#S1||||0

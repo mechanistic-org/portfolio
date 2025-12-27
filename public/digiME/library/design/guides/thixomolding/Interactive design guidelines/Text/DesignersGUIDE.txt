@@ -1,0 +1,796 @@
+DRAFT  28 AUG 99
+A PRODUCT DESIGNER'S GUIDE TO THE THIXOMOLDING(             
+OF 
+MAGNESIUM ALLOY PARTS
+
+
+An Introduction to Thixomolding
+
+Vigorous stirring of metallic alloys in the two-phase region, that is between the liquidus and solidus, produces a slurry which contains solid, spherical shaped primary dendrites (alpha particles) and the remaining liquid phase.(1)  Figure 1 shows a typical microstructure in an as-Thixomolded( AZ91D magnesium alloy.  The semi-solid slurry exhibits thixotropic properties, i.e., it retains the flow characteristics of the liquid metal but flows more smoothly, in a laminar mode, to fill the die cavity.
+
+It was recognized that the thixotropic flow behavior of a semi-solid metal alloy was similar to that of plastics used in injection molding, The next step was to adapt a plastic injection molding machine to handle semi-solid metals.  Working with metals requires processing at temperatures in the range of 1200F/650C.  Marrying magnesium alloys that can be readily processed into the thixotropic state with the plastic injection molding process gave birth to the Thixomolding( process.
+
+Thixomolding( is a revolutionary, semi-solid metal process for high speed injection molding of magnesium alloy to produce net-shape parts.  Ongoing programs at Thixomat, Inc. are also pursuing the adaptation of the Thixomolding( process to aluminum and zinc alloy part production.  The Thixomolding( process can produce finished parts in less than a minute in a clean, environmentally friendly, foundryless facility.  
+
+The Thixomolding( process is shown in a schematic diagram in Figure 2.
+
+
+
+
+
+Magnesium alloy pellets are fed into a heated barrel and screw system.  The barrel is continuously purged using a counter flow of Argon gas to prevent oxidation of the magnesium.  The magnesium feedstock is advanced forward by the screwing action and is heated into its two-phase region converting it into a thixotropic slurry.  Temperature control of the barrel is critical to the Thixomolding( process as the balance of solid alpha to liquid is controlled by the alloy content and the temperature.  The slurry is forwarded into an accumulation zone and the final step in the Thixomolding( cycle is to quickly advance the screw to inject the slurry into the die.  
+
+A 450 tonne Thixomolding( machine manufactured under license from Thixomat, Inc. by JSW in Hiroshima, Japan is pictured in Figure 3.  The machine is self contained in that melting and holding furnaces typical of a casting foundry are not required.  Installation in the manufacturing plant is relatively easy and site preparation is essentially the same as required for the installation of a plastic injection molder.
+
+The advantages of the Thixomolding( process over the die casting process which are of special interest to the Product Designer and manufacturer who uses the moldings are:
+
+	Higher Quality of Parts
+	
+* Wall thickness can range from as thin as 0.6mm/0.025in. up to 	20mm/0.78in. or greater
+* Smooth filling of the tool, via laminar flow, giving improved surface 	quality
+* Improved internal soundness with reductions in porosity to as low as 	0.069%
+* Provides a weldable part
+* Net-shape parts are being produced commercially 
+* Tight tolerances, excellent dimensional repeatability and flatness
+
+
+
+
+In addition, the Thixomolding(r) process provides for:
+
+	Environmentally Clean Operation and Improved Worker Safety
+* Safe: uses self contained, closed operating system
+* Elimination of foundry
+* No molten metal handling
+* No fluxes, sludge or dross
+* No waste disposal or need for waste management
+* No SF( cover gas required
+* Operating temperatures 30 to 125°C lower than die casting
+
+	Better Economy - Flexible Manufacturing Process
+* Lower capital investment
+* Rapid start-up (1 hour) and shut down
+* Higher metal yields; up to 50% improvement compared to cold chamber and better than 15% improvement compared to hot chamber die casting
+* Existing die casting and plastic injection molding tools can be readily modified for use
+* Improved tooling life
+* Less die lubrication required
+* Less part finishing required
+* Readily adaptable for closed cell computer aided manufacturing (CAM)
+* Reduced energy costs
+* Can easily switch alloys (e.g. AZ91D, AM50A or AM60B)
+
+When compared to plastic injection molded parts, magnesium thixomoldings provide the following additional advantages:
+
+* Stiffness to weight ratio and heat resistance higher than engineered thermoplastics (with comparable density)
+* Provides EMI shielding
+* Easy to recycle
+
+Overmolding of a plastic onto a Thixomolded( reinforcement results in a unique composite.  This method can be used to combine the stiffness, low density and EMI shielding of magnesium with , for example, the corrosion and impact resistance of a thermosetting plastic.  Applications in the automotive market are especially attractive for this type of macro composite.
+
+
+Designing the Part for Thixomolding(r)
+
+The ultimate objective of product development is to produce a component with the configuration that is optimum for its intended use, both economically and functionally.  This objective can be met by Thixomolded(r) parts by addressing three tasks:
+
+* Define a configuration that takes best advantage of the net-shape capability of the Thixomolding(r) Process and the properties of the selected Mg alloy to be used,
+
+* Employ design features that are consistent with good Thixomolding(r) practice such as maintaining laminar flow of the semi-solid metal through the gating system, and
+
+* Utilize tight tolerance control and aim to eliminate costly secondary machining.
+
+One way for the product designer to start the process is by sketching out a rough part design and then move to prepare a detailed engineering drawing.  More commonly done today, is to design on a work station with one of the CAD software packages.  This technique has it advantages as the CAD file can be used to produce quickly prototype parts and even production dies using CAM software linked to a suitable CNC unit or appropriate Rapid Prototyping Process unit.  
+
+In some instances, actual parts made by other processes, such as die casting, plastic injection molding or machining, may be available.  Rapid prototype components may also be available for examination.  You will want to discuss the details of your part requirements with the thixomolder who will be looking to work with you to take full advantage of the Thixomolding(r) process to save machining costs as well as weight by using the precision, thin section molding capabilities of this process.
+
+Design Considerations
+
+Structural Properties
+
+Most Thixomolded(r) parts must meet specified structural requirements in the application for which they are intended.  Magnesium alloys, such as AZ91D, AM50A, AM60B and others, which are used for Thixomolded(r) components are well understood and characterized.  
+
+Properties of commonly used magnesium Thixomolding(r) alloys are presented in Table I.  For purposes of comparison, an aluminum die casting alloy and two injection moldable thermoplastics are included.  Chemical compositions of the metal alloys are shown in Table II.
+
+Young's modulus for magnesium alloys which controls the stiffness of a particular component is 6.5 million psi which is less than an aluminium alloy but considerably higher than the thermoplastic materials.  Density on the other hand clearly favors the Mg alloys being 1/3 less than aluminum and quite comparable to the plastics.  Another way to say this is that the stiffness to weight ratio of magnesium moldings is greater than that on engineering plastics and equivalent to that of Al alloy die castings.  Coupled with its ability to provide electromagnetic interference (EMI) and radio frequency interference (RFI) shielding, Mg alloy moldings have successfully replaced plastic cases in several laptop computers and other electronic devises.
+
+When designing to replace an aluminum part, the product designer can add additional stiffness, if desired, to the replacement Mg alloy part.  This is accomplished by adding ribs or by adding to the thickness of the critical section since part dimensions control the section modulus and, in turn, have a strong effect on the stiffness of the part.  Again, the designer is encouraged at an early stage of his part design process to discuss his requirements with the thixomolder to ensure best utilization of the special design features of the Thixomolding(r) Process.
+
+	Understanding Stresses in Parts
+
+The typical mechanical properties of magnesium Thixomolded(r) alloys are given in Table I.  These can be used in the design process when yield strength, fatigue strength or creep performance are the controlling criteria.  Several means for determining stress state in Thixomolded(r) parts can be used.  Theoretical methods, such as standard handbook formulas for stress or "finite element analysis" (FEA) are applicable.  Applying strain gages on prototype parts, in simulated or actual service, has also been successfully carried out to determine the level of stresses that the part will experience in service.
+
+	Designing for Fatigue
+
+The fatigue strength of AZ91D Mg moldings, 14,000 psi, is estimated from rotating beam bending test results reported on die cast product.  The endurance limit was established at 5 x 108 cycles.  Fatigue conditions which impose fewer cycles or different combinations of stresses may be estimated using standard handbook conversions.
+
+Magnesium alloy moldings are sensitive to stress raisers.  However, several factors which are typical of good Thixomolding(r) practice also favor better fatigue performance:
+
+1. Generous radii and smooth transitions between sections, which enhance the flow of semi-solid metal in the die cavity, tend to reduce stress concentration.
+2. The as-thixomolded(r) surface is typically smooth and exhibits good mechanical properties.  The tendency for surface initiated fatigue cracks is reduced when near-net -shape moldings are used in service.  
+3. Care must be taken to avoid using stress checked dies as these give rise to ridges on the surface which act as stress raisers.
+
+
+
+
+	Designing for Impact Resistance
+
+The impact values which are also listed in Table 1 can serve as a means to compare one alloy versus another with all other factors being equal.  The impact properties of the Mg alloy should be compared with those of the material which has previously been used in the application.  This simple comparison will give an indication if equal, better or inferior performance can be expected.  The existing design should be examined to determine if the part is over designed and, if so, effort can be well spent to redesign  and optimize the design as a Thixomolded(r) magnesium component.
+
+When needed, areas of the part which will be subjected to high impact loads can be strengthened through the use of ribs, fins or other reinforcing features.  The new design can be evaluated by testing a prototype part, made from a similar alloy, under simulated, service conditions.  A final step to guarantee impact performance is to field test moldings made in the same alloy as the required part and using the production process.
+
+	Designing for Creep
+
+Creep is plastic deformation which occurs at stress levels below the yield strength of the material.  It usually is observed after prolonged exposure, typically months or years.  The creep rate of an alloy is a function of four variables:
+
+1. Temperature - The creep rate increases as temperature is raised.
+
+2. Time - Creep is progressive in that it accumulates with time through three stages; primary, secondary and tertiary stages.
+
+3. Stress Level - As the stress level increases the creep rate will also increase.
+
+4. Loading Conditions - Creep behavior will be somewhat different depending on loading conditions; tensile, bending and shear stressing.
+
+For each condition of temperature, stress level and loading condition, creep exhibits three distinct stages as mentioned earlier.  These are: primary, secondary and tertiary; a typical creep curve is shown in Figure 4.
+
+In the primary stage, creep progresses at a relatively rapid rate for a relatively short period of time.  The creep rate in this initial stage steadily decreases until it reaches the secondary stage.  Secondary creep, which continues for a relatively long time, progresses at a constant rate.  There is no loss of strength associated with the first two stages of creep.  Tertiary creep is characterized by an increasing creep rate and decreasing strength ultimately leading to failure.  
+
+Creep phenomena are usually associated with elevated temperature service conditions.  Creep does not occur in Mg alloys at room temperature (68F/20C) but it does occur at quite low stress levels, for example 2500psi(10.5 Mpa), at a temperature of 350F/177C in AZ91D alloy.  Creep may be a factor in sections of moldings subjected to sustained loads at temperatures in this range.
+
+The creep behaviors of AZ91D alloy tested at 353K in the Thixomolded(r) and die cast conditions are compared in Figure 5.  The Thixomolded(r) material exhibits superior creep resistance to the die cast component.  Steady state creep rates for Thixomolded(r) samples were reduced by as much as 45% from that measured on die cast AZ91D alloy.  
+
+This data shows that by using higher percent solids, the creep resistance can be improved.  If higher creep resistance is needed in a particular Mg alloy, the Thixomolding(r) processing conditions might be adjusted to increase the percent solids to take advantage of this behavior.
+
+When the combined conditions of temperature and stress suggest the possibility of creep, the following procedure is recommended:
+
+1. Check for creep deformation by testing the actual molding or a similar part in the specified alloy under simulated or actual service conditions.
+
+2. Determine the amount of creep deformation that can be tolerated in the particular application.  For example, a threaded bolt hole may creep only a few thousandths of an inch but substantially reduce the holding force of the bolt.  A larger amount of creep deformation in a structural member may not even be noticed nor cause any structural instability.
+
+3. In the bolt hole example described above, the product designer could modify the design to reduce stress on the bolt hole threads.  Increase the number or size of the bolts or go to a through hole and use a bolts with nuts to secure the part.
+
+4. Verify creep performance by testing the moldings under the most severe conditions to be expected in service.
+
+5. If creep resistance is going to be a design consideration, the product designer should discuss the selection molding process to optimize the creep performance of standard alloys or select one of the more creep resistance Mg alloys with the thixomolder.  These specialty alloys designed for creep resistance are more difficult to produce but do offer a significantly better creep performance at elevated temperatures.
+
+
+	Denting Resistance
+
+Dents are caused by impact loads too.  However, the materials resistance to denting is quite different from impact resistance.  When a material is dented, it remains intact; it does not rupture.  In some instances, the imposed stresses do not exceed the yield strength of the alloy and the material behave elastically and fully recovers its original shape.  The ability of a material to recover with minimal or no permanent deformation depends on it having a low modulus of elasticity and a relatively high yield strength.  This set of conditions allows magnesium alloy moldings to offer good dent resistance compared to other materials.  
+
+Testing of prototype parts can be done to determine the tolerance of a molded section to denting.  Adjustments to the design using reinforcements can raise the section modulus an make that section more dent resistant.
+
+Other Properties
+
+	Heat Transfer
+
+Product designers of electronic devises and computers must take into consideration the thermal energy that must be dissipated from the unit.  Heat sinks and computer housings made of Thixomolded(r) Mg alloys offer high thermal conductivity as shown in Table I.  Magnesium components have 85 to 90 % of the thermal transfer efficiency of aluminum.  The advantage swings to Mg when "specific" heat transfer capability is considered due to its lower density.  A most important "competitive materials" advantage is that the thermal conductivity of magnesium is several hundred times that of plastics.  Laptop computers have used this to advantage with Mg Thixomolded(r) cases reportedly running 3 to 5°C degrees cooler than units with plastic housings. 
+
+	EMI Shielding
+
+Most metals are conductors and therefore can reflect and absorb electromagnetic interference (EMI) to an appreciable degree.  EMI impairs the performance of an electronic system; radio frequency interference (RFI) is one type of EMI.  The amount of EMI shielding provided by a metal enclosure depends on the nature and the frequency of the interfering radiation, the electrical conductivity and magnetic permeability of the enclosure, its distance from the source of radiation and the absorption and reflection components of the radiation.
+
+Since plastics are inherently insulating and thus transparent to electromagnetic radiation, plastic cases must rely upon adding a conductive surface coating or by incorporating metallic particles into the body of the plastic case to satisfy shielding requirements.  Either of these approaches will add on a considerable cost penalty.
+
+For shielding by absorption, Al and Mg enclosures are about equally effective on an equal weight basis.  Here the high conductivity of aluminum is offset by the lower density of the magnesium alloy.  As the frequency of the radiation is increased, the section thickness required for a given level of shielding effectiveness becomes smaller.  Since Thixomolded(r) Mg can be molded into very thin sections, down to 0.6 mm, it offers superior EMI shielding and significant weight savings.  Again, if EMI/RFI shielding is important to your application, you will want to discuss your requirements with your thixomolder to develop the best design for your part.
+
+	Permeability 
+
+Due to the decreased turbulence in die filling and the lower molding temperatures compared with die casting of magnesium alloys, the Thixomolding(r) process produces parts with significantly reduced porosity.  Lower porosity benefits the molding by improving its mechanical properties and by providing components which are gas impermeable.  Result shown in Results in Table III compare the leak rate of Helium gas through Thixomolded(r) and die cast AZ91D components.  The Thixomolded(r) product even exhibits a lower leak rate than the secondary impregnated die casting.
+
+	Sound Damping
+
+Magnesium alloys are known to exhibit excellent sound damping qualities compared to other metallic alloys, including aluminum and steel, which are widely used in manufacturing.  This has been demonstrated commercially in a number of automotive applications such as engine valve covers.
+
+	Stress Corrosion Cracking
+
+While laboratory tests have shown that Thixomolded(r) AZ91D is more resistant to stress corrosion cracking (SCC) compared to the die casting alloy, the AZ series of alloys are known to be prone to cracking when subjected to sustained stresses of at least 30% of their tensile strength, 7000 psi(48 Mpa) or greater, in the presence of a corrosive atmosphere.  When sustained stresses of this level are expected, the following steps are recommended:
+
+1. Do a stress analysis of the part to verify the expected long term stress will be at or above this critical level,
+
+2. Evaluate the service environment to determine that it is corrosive to the alloy, and
+
+3. If both of the above conditions are present then consider the following actions:
+* Redesign the affected sections to reduce stress below the critical level,
+* Switch to an AM50A or AM60B alloy which are not subject to SCC problems, or 
+* Apply a coating/surface treatment to the component to protect it from the corrosive environment.
+
+	Galvanic and General Corrosion
+
+Galvanic corrosion is caused when dissimilar metals are brought into contact.  It is a topic that is important to the designer of Thixomolded(r) Mg alloy components as installation of the component will require some type of joining or fastening to other materials and parts.  The subject is addressed in some detail in the later section which addresses Fastening & Joining methods.
+
+Thixomolded components have been shown to be more corrosion resistant as compared to die cast part made in the same magnesium alloy.  Figure 20 compares the salt spray corrosion resistance of several magnesium alloys and shows a reduction in corrosion rate of 50% or more for the Thixomolded alloys.
+
+General corrosion of magnesium Thixomoldings(r) can occur under normal atmospheric operating conditions and cause a deterioration of the as-molded surface.  A variety of coatings and surface treatments are available to overcome this problem.  A selection of techniques are reviewed in the Surface Treatments section.  These method when properly applied can alleviate the general corrosion problem as well as eliminate the galvanic corrosion problem.  The product designer is directed to that section of the Guide for more details.
+
+
+Configuring the Part
+
+A systematic approach is needed to design a Thixomolded( part to achieve maximum performance, best economy and ease of manufacturing.  This section guides the designer through the product development process providing details of basic design features which should be incorporated into the final part configuration.
+
+It is critical to start a creative design process with a clearly worded statement which fully defines the functions which the component must perform.  Must the part withstand high stresses and of what type?  Is stiffness important and at what locations in the part?  Is the component to be used in a corrosive environment or at elevated temperature?  Is appearance critical?  What dimensions are more critical and what dimensional tolerance is required?  The Thixomolding( process inherently lends itself to tight, precision tolerances and thin sections so the designer should plan to make best use of these characteristics in developing the part configuration.   It is always best to develop a part design keeping in mind that near-net-shape is very important to minimize finishing costs on the component and make for a economical, and light weight part.
+
+After the configuration of the part has been established, the product designer must examine how features, such as ribs, metal flow from thick to thinner sections and so on, of the part will fit with the Thixomolding( process and its characteristics.  Each of these features must be designed so that the part will be completely filled with the semi-solid metal during the shot cycle, solidify quickly and without defects and readily eject from the die.  These manufacturing, process related, objectives must be met but the designer must also balance these with what is required in the Thixomolded( product.  The four areas where this balance can be critical are:
+
+1. Wall thickness should be kept as consistent as possible throughout the part.  Except at in gates, metal flows from thinner sections to thicker sections in the die cavity must be avoided.
+
+2. The intersections of features such as walls should blend with transition sections using generous radii.  Applying this practice promotes good flow and distribution of metal in the Thixomolding( and rarely creates a conflict between the process and the product requirements.
+
+3. Draft angles should be minimized to eliminate finish machining.  Thixomolding( lends itself to using zero draft and this capability should be used when it offers the designer an economic or weight savings advantage.  In all other instances, standard draft (3 degrees) for Thixomolded( components should be employed to facilitate easy ejection of the part from the tool.
+
+4. For appearance, sharp external corners can be designed into Thixomolded( parts.  However, corners should typically use a generous radius (rounded off) to achieve a longer die life.
+
+
+Various Features used in Thixomolded( Parts
+
+	Fillets and Corners
+
+Fillets, which connect interior surfaces of a part, are formed by external surfaces of the die.  Adequate radii offer a double benefit: first , they are essential to the structural integrity of the part and, secondly, the promote good metal flow in the tool and reduce erosion of the tool surfaces.  Figure 5 shows some guidelines to be used in designing Thixomolded( components.
+
+
+	Stiffening Ribs 
+
+Ribs are used for weight reduction and metal savings in moldings.  This feature is also used for reinforcing and stiffening thin sections in Thixomoldings.  The excellent thixotropic flow characteristics of semi-solid magnesium alloys allows deep, thin section configurations to be molded into the part.  Figure 7 shows guidelines for configuring ribs and combining these with other features.
+
+
+A common method to reduce heavy sections thickness of metal in a Thixomolding( is to redesign the heavy features using thin walls and ribs to provide needed stiffness.  Figures 8 and 9 show two example of effectively reducing heavy sections.
+
+	Die Parting
+
+The proper die parting line location is essential since there will be a line left in the Thixomolding( where the die halves meet.  The Thixomolding( must be trimmed along this line and the trim die must be configured to handle this job consistently.  If the parting line flash can be minimized it will reduce trimming costs.  Typically, Thixomolded( parts molded in a well maintained die set will have minimal parting line flash reducing or eliminating the need for clean-up operations and cosmetic puttying of the part.  Figures 10 and 11 illustrate how minor design changes can simplify the trimming operation.
+
+	Core Slides and Undercuts
+
+Bosses or very heavy sections often require core slides or moveable cores to form the feature because they are not oriented in the direction of die pull.  Use of core slides increases the cost of manufacturing and maintaining the tool and will also increase the shot cycle time.  Often core slides cause flash on the exterior surface of the part which requires removal which also adds additional cost.  Figure 12 gives an example of how tooling might be modified to make the part without the use of a moveable core or core slides.
+
+Bosses or heavy sections in molding often result in an undercut which will lock the part into the die and prohibit it from being ejected.  While there are methods to overcome undercuts, it is usually best to eliminate their use.  Figure 13 presents several ways of eliminating an undercut caused by an interior boss.
+
+
+	Die Draft
+
+Die draft or just "draft" refers to the taper given to walls and other part features of the die cavity to permit easy ejection of the Thixomolding(.  It is generally accepted in the light metal casting industry that magnesium alloys require less draft than aluminum alloys.  This observation has been used to particular advantage in parts where long fins and ribs are used.  Thixomolded( magnesium offers capability to further reduce die draft needed due to the reduced solidification shrinkage associated with molding of a semi-solid alloy.  A higher solids content in the semi-solid slurry will minimize solidification shrinkage and allow the designer to use low or zero draft.  This allows the design of near-net-shape parts which are optimized with regard to weight reduction and can eliminate costly finish machining operations.
+
+It is important to note that twice as much draft is recommended for inside surfaces compared to outside part surfaces.  The reason for this extra allowance is that as the alloys solidifies it shrinks onto the die features which form the inside surfaces (usually located in the ejector half of the tool set) and pull away from the outside surfaces.  
+
+The draft, D, for magnesium thixomoldings can be approximated using the formula:
+
+						D = (L ÷ C
+
+Where:  D is the draft in inches,
+	     L is the length of the dimension parallel to die draw in inches, and
+	     C is a constant which is characteristic of the type of feature and the 	     alloy used to make the part.
+
+For AZ91D, the following "C" values can be conservatively applied:
+
+			Inside			Outside
+			Surface			Surface 
+			   32				   74
+
+While many components are currently being Thixomolded(r) using zero draft, a 3% draft is usually recommended for inside/side walls when restrictive tolerance is not required for the part.  The product designer is encouraged to check with the thixomolder to get their recommendation for how best to use low or zero draft in a particular part design.
+
+	Designing Holes/Recesses in Parts
+
+The draft requirements for Thixomolded(r) holes or recesses will be less than used for die casting of magnesium alloys as a result of better dimensional control and reduced volumetric shrinkage.  Zero draft holes have been molded in production parts which are up to 4 inches in diameter and up to 1.75 inches in depth.  A 1% draft has been successfully used in production of a automotive shift cam for cored bores 1 inch deep with a 3/8 inch ID. Consult with your thixomolder for their recommendations for your part.
+
+Dimensional Tolerances
+
+As a general rule, the tolerance for dimensions to be used for Thixomolded(r) parts are those specified by NADCA (North American Die Casting Association) as Precision Tolerances.  However, parts in commercial production have demonstrated that dimensional tolerance can be held to 25% or less of the Precision Tolerance Specifications.  See NADCA's Product Specification Standards for Die Casting manual, 3ed Edition, 1997, Pub. No. 402. for details on Precision Tolerance Specifications.
+
+
+
+	Linear Dimensional Tolerance
+
+Experience has shown that Thixomolded(r) parts made in a production shop, can meet linear dimensional tolerances up to 70% better than those required by the Precision Tolerance Specification.  Again, it is recommended that the product designer work with the thixomolder to optimize the part for their particular application.  Precision Tolerance as set forth by NADCA are compared to those proposed for Thixomolded(r) parts in Table IV.
+
+	Parting Line Tolerances
+
+The Precision Tolerances specified by NADCA for across the parting line of the die are recommended for Thixomolded(r) parts.  The parting line tolerance would be the linear dimensional tolerance from Table III above plus the value given in Table V below.  The value selected from Table V depends on the projected area of the part in the plane of the die parting.  Note that the tolerances shown are "plus side only".  Due to the nature of a split die process, the dies halves can separate at the parting line and create only a larger, or "plus" side tolerance.  These tolerances should be specified only when necessary since added costs may be involved with dimensions which require closer precision.
+
+	Flatness Tolerance
+
+The Precision Tolerance Specifications for flatness developed by NADCA are applicable to Thixomolded(r) components.  Production experience with Thixomolded(r) parts are typically better than required by the Precision Tolerance Specification.  Table VI presents the Precision Tolerance requirements for flatness in Thixomolded(r) products.  Application of more restrictive tolerance requirements should be first reviewed with your licensed Thixomolder(r).
+
+Geometric Dimensioning
+
+Geometric dimensioning and tolerancing (GD&T) is a system developed for designers of components and tooling for simplifying the necessary dimensions and tolerances on engineering drawings.  It provides the means of stating necessary dimensional and tolerance requirements on an engineering drawing without having to rely upon implication or traditional dimensioning and notes.
+
+Designers who are not familiar with GD&T methodology are referred to the NADCA publication "Product Specification Standards for Die Casting, Sec 5/1997" on this topic.
+
+Prototyping Strategies for Thixomolded(r) Parts
+
+Prototypes are made and tested in order to determine how the finished component will perform in service.  A prototyping strategy must, therefore, be selected that will provide test results which are indicative of the actual part operating under service conditions.
+
+The best method to produce a prototype molding is to make it using the Thixomolding(r) process in the desired Mg alloy.  When a Mg molding is to be switched with an aluminum or magnesium die casting, the existing die, with a bit of rework, can be used to mold the part.  
+
+It is somewhat unusual to have an existing die which can be used so alternate prototyping choices have to be considered.  Machining of prototype parts from scrapped moldings or from wrought Mg alloy plate or billet can be used to advantage.  Usually, only small prototypes can be machined from scrap so that approach is somewhat limited.  Wrought Mg alloys are, however, available in large sizes but their properties, with the exception of stiffness, will be somewhat different than the molding alloy.  Wrought AZ31 magnesium plate is suggested as suitable machining grade for prototyping AZ91D moldings.
+
+Investment or plaster mold casting of the part in the Mg alloy of choice using a rapid prototype (RP) preform, made from a CAD file, and produced in a burnable plastic is also possible.  Similarly, other casting methods including sand casting can be use to approximate certain properties that will be obtained in the Thixomolded(r) part but not all properties will be the same.  Here as several pointers to aid the product engineer who wants to get a better handle on expected part performance using prototype components:
+
+1.  Strain gauge measurements
+Modulus of elasticity, density and Poisson's ratio are essentially the same for all Mg alloys.  To verify the Finite Element Analyses model of stress, strain gauging a prototype part in any Mg alloy will give the product designer an accurate indication of strain and stress level providing that the loading does not cause plastic flow.
+
+2.  Dynamic and static deflection
+Deflection measured in a Mg alloy prototype give a good indication of stiffness of the part as long as plastic deformation has not occurred.
+
+3.  Surface finish
+Difficult to duplicate but similar on a well produced die casting in the same Mg alloy.
+
+4.  Sound damping
+Typical of magnesium alloy components, sound damping characteristics of moldings are excellent.  Prototypes machined from any Mg alloy should have similar sound absorbing qualities compared to a Thixomolded(r) magnesium component.
+
+5.  Corrosion resistance
+As-Thixomolded(r) magnesium alloys offer improved corrosion resistance compared to the die cast alloy.  Salt spray exposures showed Thixomolded components to be at least 50% more corrosion resistant compared to die castings of the same alloys.  When atmospheric corrosion resistance needs to be established, samples cut from similar moldings in the specific alloy can be used for the evaluation.
+
+6.  Mechanical Properties
+Due to slower cooling during solidification, inferior surface quality and higher internal porosity, prototypes made using other casting techniques are always inferior to Thixomolded(r) components.  The best method to get a realistic measure of mechanical properties is to take and test sections of similar thickness and in the specific alloy from other Mg alloy moldings.  Contact your thixomolder, as they may already have this information or may be able to provide moldings for your evaluation.  
+
+Developing Thixomolding(r) Tooling/Dies
+
+The tool or Thixomolding(r) die is a closed cavity into which the semi-solid alloy is injected under high pressure (6000 to 17,000 psi) and temperature (up to 1200F/650C).  The alloy is then rapidly cooled until the molding is completely solid and is sufficiently rigid to allow ejection from the tool without distortion.
+
+Production dies which operate in this environment must be built using high quality tools steel, properly heat treated to the specified hardness.  The dimensions of the part cavity must be faithfully and precisely cut into the die block to meet the die designers specifications.  Both die halves, Cover and Ejector, must be able to withstand these demanding operating conditions and produce, on a continuous basis quality, near net shape parts that satisfy the customers requirements.  The details of a Thixomolding(r) die set are shown schematically in Figure 14.
+
+The part design requirements as specified by the product designer directly affect the size, type, features and, ultimately, the cost of the tooling needed for the job.  The topics which must be addressed in making the tooling decisions include number of parts to be molded on the die set, number of cavities/parts , need for cores/slides, surface finish on the cavity and so on.  The later will be influenced by the finish on the part, e.g. painted, plated or polished, as specified by the customer. Check Lists which identify important topics which will affect product and die designs are included in the Appendix Section of this Guide.
+
+It is important to recognize that, while Thixomolded(r) magnesium has a low level of internal porosity and shrinkage, pattern shrinkage, or that which one can expect in the molded part compared to the die, is essentially the same as found with the same alloy made by die casting.  A pattern shrinkage factor of 0.005 in/in(mm/mm) is recommended when designing tooling/dies for most Thixomolded(r) parts.  When molding very heavy section parts, a slurry with higher content of solids, say 35 to 60% may be desirable.  However, using high solids content may require the use of a reduced pattern shrinkage factor in designing those dies.  At an early stage in the die design process, the thixomolder should be consulted as to the proper practice for that particular molding.
+
+There are various types of Thixomolding(r) dies which can be used depending upon the part design and the quantity needed:
+
+Prototype and Market Entry Dies
+
+The prototype die is used to produce only a very small number of moldings, several hundred up to 1000 pieces, but still using a production process and conditions.  Provides parts for testing and end user evaluation.  Learn from these pre-production, lower cost tools and use this knowledge to develop reliable production die sets.
+
+In some instances, 1000 up to 15,000 parts are required and these can be made more inexpensively than going to production tooling using market entry dies.  The market entry dies are made using a less expensive die steel, P 20 tool steel for example, which is more readily machined and can be more readily reworked if necessary.  Welding and re-machining without the need to re-heat treat, can be used to rebuild portions of the tool, if for example the user decides to further refine the part.
+
+Production Dies
+
+Production dies are the most common type of tools made for Thixomolding(r).  Single cavity dies, multi-cavity and unit dies, with and without slides/cores are employed and these are schematically shown in Figure 15.  These types of dies are made using high quality tools steels such as H 11, H 13 or Premium H 13 to ensure long life and best quality of moldings produced on the die set.  The commonly used steels employed in Thixomolding(r) tooling are given in Table VII.
+
+As stated earlier, die designers should allow for a pattern shrinkage factor of 0.005 in/in(mm/mm) in designing Thixomolding(r) dies.
+
+Unit Dies
+
+A unit die is a lower cost production tool that uses a standardized die frame into which removable cavity sections can be placed.  These replaceable sections can be exchanged without removing the die frame from the machine.  Again, for most moldings in magnesium alloys allow for 0.005 in/in(mm/mm) for pattern shrinkage in designing unit die components  
+
+Unit dies limit the use of slides and lifters because of the need for interchangeability.
+
+Trim Dies
+
+Following its ejection from the die cavity, the molding must be trimmed to remove overflows, gates/runners and flash.  The trim die serves that purpose.  Trim dies are made in the same configuration as the Thixomolding(r) die and are of the same high quality to ensure good performance and long life.  
+
+The product designer may have interest in learning more detail about the Die Design and molding process.  In that case, you are directed at the Thixomat publication entitled " A Thixomolder's Guide to the Molding of Magnesium Alloy Parts".
+
+Finishing of Thixomolded(r) Parts
+
+This section deals with the Thixomolded(r) part after it is removed from the die and cools down on the run-out table.  It may have some degree of flashing at the parting line and it will have the in gates, runners, overflows and sprue to be removed.
+
+Trimming
+
+A trim press equipped with specially made dies is used to separate unwanted attachments from the molding.  These pieces are sheared off and usually returned for cleaning and chipping into reusable feedstock.  
+
+As in other metal-shearing operations, the rough molding must incorporate features to be able to withstand the shearing forces and not suffer any distortion in the molding itself.  The product designer is urged to consult with the thixomolder in the early stages of part design to ensure that proper allowance is made for the trimming operation.  Careful planning here may eliminate costly secondary finishing operations thus lowering final part costs.
+
+Vibratory finishing and particle blasting
+
+These methods are often used to remove thin metal flash which cannot be readily removed in the trimming operation.  The trimmed moldings are placed in a container with an abrasive media and vibrated or blasted with abrasive particles while contained in a sealed chamber.  The abrasive preferentially removes the protruding, thin flashed metal.
+
+Polishing
+
+In most decorative and in some structural applications, the flash lines that remain on the molding must also be removed.  This is accomplished by buffing or polishing these areas using belt sanding and/or grinding methods.  These are often hand operations.  As such, considerable care must be taken to ensure that metal removed does not weaken the part such that it will not meet design specifications.
+
+Machining
+
+Magnesium alloys exhibit the best machinability of any of the commercially used light metal alloys.  The energy required to machine magnesium parts is the lowest of any of the commercially used metallic alloys as shown in Table XV.  Thixomolded(r) magnesium parts are no exception to these statements.  Machining operations are performed at very high surface speeds, usually at the maximum speeds obtainable on modern machine tools.  Heavy cuts and high rates of feed and speed are often employed.  Energy used per in3 of metal removed is lower than for any other metal and tool life is typically several times longer.
+
+Sintered carbide tools are predominantly used for the machining of Mg alloy Thixomolded(r) parts.  The free-cutting characteristic of Mg alloys results in well-broken chips with no tendency for the metal to tear or drag.  Rough and finished cuts can usually be done in a single operation.  Deep holes, 15 to 20 diameters deep, can usually be drilled without the need to with-draw the bit for chip removal.  
+
+Fine magnesium particles produced during some machining operations can present a fire hazard.  However, potential problems associated with storing, machining, grinding and handling of magnesium can be eliminated by following industry guidelines which are available from the International Magnesium Association.  Cutting fluids/coolants can be used but it is desirable, and more economic, to use dry machining whenever possible.  
+
+A properly designed Thixomolding(r), to a net-shape, will minimize or eliminate the need for finish machining.  When machining is required, it can be carried out at high production rates.  Carbide cutting tools are commonly used and we suggest reviewing the reference cited for more details on machining of magnesium components.  
+
+Two points must be addressed when machining is to be required for finishing the molding.  These are:
+
+1. Determine with the thixomolder which features must be machined and which are to be produced as-cast.
+
+2. When finish machining is required, make adequate provisions for machining stock when designing the die.
+
+Machining operations can often be eliminated on components with complex features such as undercuts, or bosses and holes with the axis not quite parallel to the die opening direction.  Here, the die designer may be able to make use of core slides to provide the needed dimensions.  While the added die complexity will increase tooling costs, this additional cost can often be more than offset by the savings in machining time/costs.  Your thixomolder can provide a good assessment of the costs benefits for such an exchange.
+
+Surface Treatments
+
+Surface treatments are used on Thixomolded(r) components for one or more of the following reasons:
+
+* Provide a decorative finish
+
+* Form a protective barrier against the service environment
+
+* Fill and seal small surface imperfections 
+
+* Improve resistance to wear
+
+* Provide insulation from a dissimilar metal to prevent galvanic corrosion
+
+Coatings which provide insulation to prevent galvanic corrosion are covered in the section on Joining and Fastening and the reader is directed there to obtain more detailed information.  
+
+The sequence of processes steps for various surface treatments used on Mg Thixomolded(r) components is presented in Table VIII.
+
+
+
+	Decorative Finishes
+
+There are three types of decorative surface treatments used on magnesium moldings and these are: painting, bright finishing and plating.
+
+		Painting
+
+Magnesium Thixomolded(r) components are often painted to enhance their appearance and to achieve one of several surface effects.   A textured surface, for example, can be achieve to give a "woody" look to a component.  A smooth, glossy black finish is often preferred for camera and computer cases.
+
+Surface preparation prior to painting is critical to the service performance of painted magnesium moldings.  Both pretreatment and primer coatings are must be considered.  Chemical treatment of the surface, which prevents oxidation of the Thixomolding(r) in storage and during shipment, is used prior to priming.  These chemical pre-treatments, also known as conversion coatings, form a good paint base by offering a surface that provides for excellent adhesion and also retards the natural alkali which forms when a magnesium surface has been exposed by damage to the top coats.  Paints and powder coatings are available which are compatible with the alkaline surface of magnesium alloys.  The product designer is reminded that coatings and treatments should always be tested in the simulated service environment prior to be placed into service.
+
+Paint and powder coating systems which work well on zinc or aluminum die castings are generally satisfactory on Mg moldings.  Appropriate pre-treatment of the surface must be done and primed.  Primers for use on Mg moldings should contain an alkali-resistant additive such as polyvinyl butyral, vinyl., epoxy,  epoxyester, acrylic or polyurethane.
+
+Coatings have been effectively applied to magnesium by conventional solvent spray, by electrostatic powder and by electrophoretic deposition from an aqueous emulsion.  Electrostatic powder coatings using epoxy and epoxy-polyester powders give a tough, chip-resistant surface and are widely used in automotive applications.  Cathodic electrodeposition, in which the part being coated becomes a cathode for the electrodeposition of a resin from an aqueous emulsion, is also used effectively on Mg moldings..  This coating technique covers the part with a continuous paint film of uniform thickness.  Very good uniformity of thickness of the coating over complex surfaces including deep cavities is a unique advantage of this method.  General recommendations for painting systems for use on parts exposed to mild through harsh environments are presented in Table IX.  The chemical treatment products referred to in the table are products supplied by Dow Chemical. 
+
+		Discussion of Chemical Pretreatment and Short-term Protection
+
+There are a variety of chemical treatments or conversion coatings used on magnesium Thixomolded(r) components for short term surface protection.  Both chemical and electrochemical techniques are used.  These coatings replace the naturally occurring alkaline hydroxide-carbonate film with a layer of more corrosion inhibiting, less alkaline to slightly acid, material.
+
+Proprietary surface treatment for magnesium include several phosphate types as shown in Table X.  In general, phosphate coatings appear gray in color, are crystalline and quite porous.  These coatings give good paint adhesion which is mainly mechanical bonding.  However, the phosphate coatings are soluble and non inhibitive and are usually only recommended for mild environments such as in-door applications.  
+
+Other pretreatments are available and are listing in Table XI.  These coatings may be used, as indicated, either alone or in combination for short-term or long-term protection and as a base for painting.
+
+Thin films of oils or waxes when applied to bare Mg molding surfaces can provide short-term protection during shipping and storage in dry environments.  These coatings are low cost using brushing, spraying or dipping for application.  Before machining or further surface treatment, the oil or wax must be removed by vapor degreasing, alkaline cleaning or solvent dipping.  A rinse in "fresh" solvent finishes the cleaning process.  Proprietary oil/wax products which can be used on Mg alloy moldings are listed in Table XII.
+
+		Bright Finishes
+
+Some chemical treatments such as the # 21 type shown in Table XI, provide a semi-bright to bright silvery surface film on Mg alloy moldings.  This is a simple and economical method to apply a decorative finish for in-doors and mild out-doors service.  
+
+Polishing and buffing also produce a bright metallic luster on magnesium Thixomolded(r) parts.  Since mechanical finishes of this type develop a gray film over time in atmospheric exposure, the surface must be protected with a clear baked lacquer.  The most durable bright finish is obtained by using a mild etch followed with a clear anodize.  Specialty effects can be obtained using the mechanical method such as grit or sand blasting and scratch brushing.  The product designer is directed to the Dow Chemical literature for more details.
+
+		Plating
+
+Magnesium moldings can be electroplated to produce a bright, tarnish resistant surface.  The processing steps are as follows:  initially a immersion zinc coating is applied followed by a conventional chrome plating cycle.  This cycle begins with a copper strike , followed by a layer on nickel and finally finishes with a thin layer of chrome.  A buffing step is usually done on the copper strike when a highly reflective, mirror, finish is required.
+
+Adhesion of these electro-deposits to the Mg alloys is excellent.  Good resistance to corrosion and higher temperatures to 550F (290C) can be expected.  However, service testing of plated moldings is recommended to determine the optimum plating conditions to be used on the part for the specific service conditions.
+
+The electroless nickel plating of magnesium permits the chemical deposition a nickel coating directly on the magnesium molding with no corrosive attack on the surface of the part.  The nickel plate can be used as a final coat or as a strike coating over which standard plates can be deposited.  Bright nickel, chromium, tin, cadmium or zinc plating can be deposited over this strike coating of nickel.  No electric current is needed and the nickel coat can be built up to any desired thickness.  The process gives a uniform deposition rate with tight dimensional tolerance and better maintenance of detail than electroplating.  No auxiliary anodes or special racking are needed to reach deep recesses and blind holes.  When maximum adhesion and corrosion resistance are required, zinc immersion plus a copper strike should be applied prior to the electroless nickel plating.
+
+	Long-term Protection Against Environmental Exposure
+
+Long-term protection of magnesium Thixomolded(r) components exposed to harsh environments is achieved using Protective paint coatings or by Anodizing the surface.  The high purity Mg alloys used in the Thixomolding(r) process are inherently very resistance to atmospheric corrosion making an excellent base for the longer lasting coating systems.
+
+		Protective Painting
+
+These systems are similar to those used for decorative painting.  In both instances, the surface must be shielded against direct contact with the environment to prevent chemical attach and disruption of the bond between the coating and the surface of the part.  Check with the information provided in Table IX for recommended painting systems to be used on Mg parts in various environmental conditions for long-term service.
+
+		Anodizing
+
+The same procedures used for anodizing other metals are followed for magnesium.  That is:  surface cleaning, deoxidation and anodization.  Both alkaline and acid anodizing processes are used.  The usual anodized coatings do not lend themselves to dyeing.  However, their are several modifications to the process which are under development which do show some promise in this area.  For now, color effects on magnesium are achieved using clean anodizing or a bright pickle in combination with tinted or dip-dyed clear lacquers.
+
+In general, alkaline anodized parts must be post-treated for paint adhesion.  This type of anodized surface is harder and more wear and abrasion resistant than acid anodizes.  Acid anodized surfaces on magnesium moldings are more flexible, less subject to spalling or chipping and make excellent paint bases even under the more severe service conditions.  
+
+Filling and Sealing of Surface Imperfections
+
+Thixomolded(r) Mg components have very little internal porosity compared to die cast parts in the same alloy.  Therefore, moldings can reliably be placed into service where pressure tightness is required.  The product designer will want to pressure test early run parts to verify that correct processing was used that minimizes porosity 
+
+On occasion, surface imperfections as pits, woody areas and surface swirls can be encountered.  Too liberal die lube spraying for example, may cause some of these surface imperfections.  Puttying with polyester fillers or two component epoxies can be used to provide a cosmetically adequate repair.  These fillers can be applied by hand or by using pressure to force the compound into the imperfection to seal it off.
+
+Wear Resistance
+
+Magnesium moldings offer greater resistance to wear than their hardness(63 BHN for AZ91D for example) might indicate.  Quantitative data for wear performance is not readily available to document this point.  In applications where wear is expected to be a problem, the product designer should consider the application of a heavy chrome plate.  The thickness required should be determined by a wear test simulating expected field service.
+
+Joining and Fastening
+
+As observed with magnesium alloy components made by other manufacturing processes, Thixomolded(r) parts can be joined successfully to other materials including metallic alloys, plastics, ceramics and wood.  The basic principles for the design of fastening systems are essentially the same as for any common decorative or structural material.  The special properties of magnesium require that the product design pay attention to details in three areas:
+
+1. Control of assembly stresses
+
+2. Protection from galvanic corrosion
+
+3. Choice of appropriate fastening/joining system
+
+Controlling the Assembly Stresses
+
+The AZ alloys when alloyed with more than 1.5% aluminum may be susceptible to stress corrosion cracking (SCC).  The AM alloys, however, are not subject to this type of corrosion.  However, AZ91D which is the most commonly Thixomolded(r) alloy can exhibit this type of corrosion when subjected to improper designs.  SCC can occur when the molding is exposed to prolonged stresses of at least 30% of the tensile strength ( approximately 7000psi/48 MPa for AZ91D) in the presence of a corrosive atmosphere.
+
+Here is what you should not do when using an AZ91D molding!
+
+1. Do not force fit the part for bolting or riveting
+
+2. Do not forget the stress relief treatment following welding 
+
+3. Do not provide improper designs for press fit or cast-in-place inserts
+
+Alignment problems can occur when the components to be joined together are rigid and the tolerance control is poor.  Flexibility must be provided in the fastening system to avoid causing undesirable stresses in the magnesium molding.  Plastic components and light gauge metal sheets are quite flexible;  they can usually be pulled into alignment with placing too much stress on the relatively rigid molded part.  Joining with cast iron and steel parts, powder metallurgy parts and other cast metals which are also manufactured to close tolerances usually do not present an alignment problem.
+
+Thixomolded(r) magnesium parts can be welded because of their very low porosity.  Stress relieve the welded parts using s treatment of 2 hours at 350F(177C) to avoid any tendency to stress corrosion cracking in service.
+
+Inserts, whether pressed in or cast in, give rise to stresses in the bosses.  Proper design must be used to avoid too high stresses which can lead to cracking.  The design considerations to correctly handle inserts follows in a later section.
+
+Galvanic Corrosion
+
+Magnesium part surfaces, when exposed to an electrolyte, must be protected from being in contact with dissimilar metals to avoid galvanic corrosion.  Careful consideration must be given to designing the joints to eliminate this undesirable contact between dissimilar metals.
+
+There are four conditions that must exist for galvanic corrosion to occur and these are:
+
+* An anode which is corroding (the magnesium alloy in this case), 
+
+* A cathode, which is the dissimilar metal, 
+
+* An electrical contact, i.e., these metals are touching, and
+
+* An electrolyte which provides a continuous conducting liquid path.
+
+Elimination of any one of these conditions will prevent galvanic corrosion of magnesium.  This can be accomplished by:
+
+1. Minimize the presence of an electrolyte, usually water, at dissimilar metal contacting surfaces.
+
+2. Select metals that have the maximum compatibility with magnesium.
+
+3. Insulate the dissimilar metal from contact with the magnesium to break the electrical contact.
+
+	Eliminate the Electrolyte
+
+Design the part so that moisture does not accumulate.  If the part will be coupled with a dissimilar metal but no moisture will be present, there will not be galvanic corrosion.  Excluding moisture allows the product designer to use standard production fasteners and assembly methods in applications such as computers, cameras, office machines, electric motors and in interior automotive parts.
+
+	Selection of Metals with Maximum Compatibility
+
+Specific metals and alloys including coatings which are highly compatible with magnesium and are recommended for use as interfacing components, for insulators or for plating of incompatible metals and alloys are shown in Table XIII.  The wrought aluminium alloys in the 5000 and 6000 series are good performers as are several aluminum base and several zinc base gravity and die cast alloys and tin, zinc and cadmium plated metals.
+
+Wrought aluminum alloys are used for fasteners, shims and washers.  Aluminum alloy castings made in alloys 356, 357 and 360 may be joined directly to magnesium Thixomolded(r) components even in sever conditions.  The low copper content of these alloys is responsible for their compatibility with magnesium.  The zinc alloy castings also perform well when fastened to magnesium parts.  The coatings on steel shown in Table XIII are usually satisfactory in some mild conditions but insulators should be used to de-couple the dissimilar metals under more severe corrosion conditions.
+
+Steel and copper rivets, as well as screws and bolts made from steels, nickel base alloys, aluminum alloys, other than 5056, 6053 and 6061, and brass must not be used in the bare condition in magnesium assemblies that are exposed to moisture.  Coating of tin, zinc or cadmium should be applied to these metals to upgrade protection.  Organic coatings, such as vinyl plastisols, epoxies and high-temperature resistant fluorinated hydrocarbon resins can be used for insulating purpose on steel fasteners
+
+Aluminum rivets should be anodized or chemically treated before being used in the fastening application.  In order of preference, the aluminum alloys and heat treatments are 5056-H321, 6053-T61 and6061-T6.  Alloy 6061 bolts and hardware should be used wherever possible.  When steel bolts are required, these fasteners should be suitably plated and 5052 washers used under the heads and nuts.
+
+	Insulating Against Electrical Contact
+
+Proper design of assembled components calls for the insulation of incompatible metals where moisture will be present.  The following methods are recommended, either alone or in combination:
+
+* Non-absorbent tapes
+
+* Sealing compounds such as paints
+
+* Fabricated insulators
+
+Vinyl, rubber or other non-absorbent tapes can be used.  Cloth tapes on the other hand should not be used as they can act as wicks to draw moisture into the joint.  It is advisable to extend tapes, sealing compounds and painted coatings 1/8 to 1/4 in (3.2 to 6.4 mm) beyond the magnesium component.
+
+When painting for its insulating effect, coat the cathode metal surface rather than the magnesium.  For best protection, paint both the cathode and the anode (magnesium).  
+
+Fabricated insulators such as washers, bushing and grommets can be inserted between the magnesium part and its fasteners or between the magnesium and the cathodic components.  The material of choice depends on the application.  Highly torqued bolts would require a 5000 or 6000 series aluminum washers to take the load while plastic washers would be appropriate for light duty assemblies.  
+
+The product designer should keep in mind that it is good and efficient practice to combine the insulating function with other functions to minimize the number of parts in the assembled product.  A plastic washer placed under the head of a steel fastener, for example, will provide insulation and will also prevent damage to the decorative finish of the underlying magnesium component.
+
+Fastening Systems for Use with Thixomolded(r) Parts
+
+Just about any fastening system that can be used on metals can be successfully applied to joining Thixomolded(r) magnesium components.  However, those systems which require plastic deformation of the magnesium component, as magnesium alloys do not possess high ductility, are not generally applicable.  Fastening methods which do not work well on magnesium components include crimping, staking and swaging.  If using one of these techniques is considered necessary, some improvement in ductility can be facilitated by applying heat locally by using a heated tool or by spinning the tool against the surface of the part to generate frictional heat.
+
+The use of through bolts or rivets is an easy to apply fastening method as it places a compressive loading on the magnesium part.  Other methods such as cast-in or pressed-in inserts, self-cutting screws, push-on fasteners or tapping holes in the molding, require more attention to design details to avoid problems in service.
+
+	Threaded Fasteners
+
+Steel and aluminum bolts and studs are commonly employed to fasten magnesium molding to other components.  We have already discussed the most important consideration that the product designer must take into consideration, that is, galvanic corrosion.  In many cases, the moldings have thin sections so that the bolt passes through and is secured by a nut.  Fasteners can also be threaded into holes which are molded in or are tapped into the molding.  Where fasteners are threaded into the magnesium molding, coarse threads are preferred.
+
+The result of bolts being inserted into tapped holes in the molding can produced a dilation of the hole, thread shearing, and thread bending.  There can also be effects of the stiffness of the thread and the tolerance of the bolt as to how the fastener affects the load distribution.  Recent studies carried out by GM's Truck Engineering Group cites experimental results for various types of standard fasteners and the product designer may want to review their findings.  While actual testing of fastening systems in prototype moldings is the best method to verify performance short of using production moldings, the product designer should find the following guidelines useful in developing a good starting point:
+
+1. The joint should be designed so that the fastener fails rather than the Thixomolded(r) part.  Since the fastener or bolt treads are stronger that those of the magnesium molding, the fastener will be designed to break rather than thread stripping.  
+
+2. When mild steel or aluminum fasteners are used, the depth of the thread should be 1.5 diameters; for heat treated steel fasteners the depth of the thread should be 2.5 diameters.  Blind hole require and additional 0.5 diameters of thread depth.  
+
+3. Dilation will not be a problem when the boss diameter is a minimum of 2 times the fastener diameter.  Dilation which is an expansion of the boss caused by the wedging action of the threads, is not wanted as it weakens the joint by reducing contact between the mating threads.
+
+4. Holes to be tapped should be cored to ensure that fine grained metal of high quality is present in the threaded section.  When maximum strength is needed, the holes should be cored slightly undersize  and finished to the required tap drill diameter.
+
+5. It is possible to mold internal threads with the Thixomolding(r) process by using spin-out cores.  However, this advantage has to be carefully weight by the product designer in consultation with their thixomolder as these procedures can extend the cycle time during the molding process.  It may be more cost effective to tap the hole in a subsequent finishing operation.
+
+6. When the part will experience elevated temperatures in service, tests of moldings should carried out to determine if any stress relaxation occurs which would result in a decrease of the clamping force on the joint with time.
+
+	Inserts
+
+In some parts, the conditions expected at one or more locations in the molding will be more than the magnesium alloy can handle.  Such conditions usually fall into one or more of the following categories:
+
+* Internal threads in the molding are subject to excessive wear due to frequent removal and reinstallation of the fasteners,
+
+* Attachment points where high strength external threads are required,
+
+* Areas subjected to wear and abrasion such as bearing surfaces, and
+
+* Areas subject to very high loads.
+
+Inserts can play a very useful role in these situations.  The insert is made in a metal alloy which can better meet the required performance.  The insert and be place in the die and can be molded into the part directly.  Or it can be placed into, the molded part which has been designed/prepared to receive the insert.
+
+		Various Types
+
+The selection of a molded-in or a post-process insert is governed by the function it will serve and the cost of doing the job.  Molded-in place inserts allow flexibility with regard to securing the insert as the magnesium fills in around it.  Post-process inserts cannot tolerate features such as undercuts which facilitate good retention in molded-in inserts but prevent the insert from being pressed into the molding.  
+
+Molded-in place inserts will increase cycle time in the Thixomolding(r) process and this can impact the economics of the part.  This economic problem usually is experienced with small parts whose cycle time is very short.  The time to place an insert into the die with larger moldings will be less of a percentage of the cycle time as the machine cycle time is longer.
+
+		Shapes
+
+Practical inserts can be knurled, grooved, splined or eccentrically shaped in order to develop the required anchorage for the in-service loading.  Inserts should be designed to avoid sharp corners, projections surrounded by thin sections of magnesium or other features which concentrate stresses in the magnesium part.  Figures 16, 17, and 18, give examples of several insert designs that can be used in Thixomolded(r) parts.  
+
+		Choosing the Metal - Avoiding Galvanic Corrosion
+
+Steels, bronze, brass and zinc alloys are commonly used as insert material in magnesium parts.  While iron and copper base alloys are not compatible with magnesium, the inserts are buried in the part and moisture is sealed out.  If galvanic corrosion is a potential problem at the exterior surface of the magnesium component, the dissimilar metal insert can be coated with a compatible material or insulated from the magnesium.
+
+		Control of Stresses
+
+Inserts of any kind will introduce residual stresses in the surrounding magnesium.  These stresses must be kept to a minimum to avoid stresses which can induce stress corrosion cracking of the part.  This is especially critical in parts molded from AZ91D alloy which is sensitive to stress corrosion cracking.
+
+Molded-in place inserts absorb heat from the semi-solid magnesium during filling and cooling.  This heat can partly relieve stresses in the molding.  A rough rule of thumb indicates that inserts with wall thickness of 0.050 in(1.25 mm) or less will absorb sufficient heat to reduce residual stresses to safe limits.  Thicker section inserts require preheating to 700F(371C).  Safe design data for molded-in place steel inserts with sections thicker than 0.050 in are given in Figure 19. 
+
+The design of press- or shrink-fit inserts can be done based upon a stress analysis of inserting a classic right cylinder of the insert material into a magnesium boss of given geometry.  The residual stresses in the surrounding magnesium is a function of the diameter and elasticity of the insert and the boss.  Table XIV gives conservative results applicable to inserts made from any material.
+
+	Self-Cutting and Forming Fasteners
+
+This type of fastener includes self-tapping screws, spring clips and stamped nuts which can be used to anchor in the magnesium by cutting into or forming it as they are installed.  Magnesium alloys readily accept these fasteners because the alloys are soft compared to the hard steel fastener.  When using steel fasteners, however, the product designer must take precautions against galvanic corrosion.  The fastener manufacturers brochures and publications cite retention capabilities, installation forces and the dimensions of the part sections which will be receiving their fasteners.
+
+Spring clips and stamped nuts which are attached to integrally molded studs or posts provide an inexpensive fastening system.  However, these products only provide relatively low retention forces.  These fasteners are made from high strength steel with hard cutting edges and are installed by pushing or spinning onto the molded post.
+
+Standard self-tapping screws with positive thread forming action are very effective in magnesium components.  There are two types, one which cuts the thread and the other "rolls" in the thread.  The later does not product metal chips; the rolled thread type of self-tapping screw is preferred in electronic applications where metal chips can not be tolerated.  While the cost is higher, retention capacity is greater than the spring clips or stamped nuts.  Less expensive compared to using machine screws in tapped holes.  One limitation is that self-tapping screws provide lower retention capacity and do not lend themselves to repeated removal and reinstallation compared to tapped machine screws or bolts.  
+
+	Molded in Threads
+
+External and internal threads and be molded into magnesium parts.  Internal threads are usually formed by threaded core pins which must be removed by a screwing out action at the end of the molding operation.  Again, cycle time can be made longer which would have an unfavorable economic impact.  Tapping of the hole may be more cost effective.
+
+External threads can be formed across the parting line of the die set using slides or solid die features.  When forming threads across the parting line, some flash is usually left in the threads and can be difficult to remove.  If the flash is not too heavy, and if conditions of assembly and use permit, the first installation of the nut can clear the flash.  It is also possible to mold flats on the parting line at the root of the threads.  This flash can be more easily trimmed off.  When threads are formed with solid features, the part will have to be screwed off of the die.  Just as with internal threads this operation can adversely affect cycle time. 
+
+Welding, Soldering and Adhesive Bonding
+
+In contrast to die cast magnesium alloys, Thixomolded(r) components because of their very low porosity can be joined by welding and soldering.  Practices which have been successfully applied to sand cast parts and wrought component in magnesium alloy can be used.  Careful preparation and cleaning of the surfaces to be joined must be followed to ensure a quality, sound joint.  The product designer referred to the AWS Welding Handbook Vol. 3 which is listed in the Bibliography/References section.
+
+Thixomolded(r) AM60B components were welded using a pulsed GMAW process.  Filler wire was AZ61A.  Sound welds were obtained with no blisters observed on the base metal.  Tests across the weld indicated that joint efficiency, defined as the ratio of the Ultimate Tensile Strength (UTS) across the weld over the UTS of the base metal, was in excess of 70%.  The literature indicates that joint efficiencies of 60 to 100% have been achieved depending upon the welding process and conditions used as well as the base alloy and filler wire selection.  If welding is an option, the product designer should have weld tests performed on prototype parts in the specified alloy followed by evaluation of early run production parts.
+
+Soldering of magnesium alloys can be accomplished using appropriate surface preparation, solders and processes.  Bare Mg alloys can only be soldered using the abrasion or ultrasonic methods as there is no flux available to remove the oxide from the surface.  After degreasing the part, the surfaces to be joined are mechanically cleaned immediately before precoating with solder.  A clean stainless steel brush, stainless steel wool, or alumina abrasive cloth can be used.  A tin base solder, such as 60Sn-20 Zn, can be used first to precoat the surfaces by rubbing the surface of the part, while it is immersed in the molten solder, to remove the surface oxide and promote wetting.  Subsequently, the precoated part can be soldered using a soldering iron, torch or hot plate to the make the joint.
+
+Electroplated coatings offer an excellent base for soldering magnesium alloys.  For example in a electronics application, following cleaning, a zinc-immersion (zincate) coating is applied followed by a copper, tin or silver plating.  Soldering is carried out using procedures and materials used for the deposited metal.
+
+The product designer is referred to the Welding Handbook Volume 3 for specific details on usable solders and practices.
+
+Adhesive bonding can also be used on magnesium components.  However, there is essentially no information available in the published literature.  If adhesive bonding is of interest as a practical joining method, the product designer is encouraged to preform tests using cleaning methods and chemical pre-treatments identified earlier in combination with adhesives used for bonding aluminum or steel components.  A final check of bond performance with production moldings under service conditions is recommended.
+
+Preventing Defects in Thixomolded(r) Parts
+
+Defects in thixomoldings are undesirable especially in critically stressed areas and on surfaces which will be bright finished or painted.  Minor defects are made much more noticeable after the surface treatment.  Reducing or elimination of defects on moldings must be accomplished by careful control of the Thixomolding(r) process by the thixomolder.  The product designer must also possess a working knowledge of the type of defects that can be encountered in their parts.
+
+Cracks
+
+Cracks may appear in moldings when the operating conditions or part configuration is not correct.  In many instances, the process parameters such as die temperature, direction of metal flow in the cavity and die lubrication are contributing factors and can be adjusted by the operator to correct the problem.  However, some types of cracks are caused by the design of the part.  The thixomolder may request that certain features be changed on the part to reduce or eliminate cracking.  Shrinkage restrained cracking, for example, may be seen when a long run of metal ends at a restraining rib.  Here, the hot strength of the metal at the junction with the rib is exceeded and the metal tears apart.  This type of defect is not as prevalent in moldings compared to die castings because the inherent shrinkage is reduced by using semi-solid metal.  One solution to correct this type of cracking is to add more ribs to better distribute the shrinkage stresses or eject the molding earlier in the cycle.
+
+Moldings with thick sections which meet at right angles can experience corner cracks.  Here, the product designer may be asked to redesign the part using more liberal radii.  In addition, cracks can occur when a stream of cold metal meets a stream of hot metal coming into cavity.  This kind of problem can only be corrected by redirecting the filling pattern.
+
+Shrinks
+
+Ragged, irregular porosity or "shrinks" are caused by local overheating of the die when temperatures exceed 300°C(575°F).  Corrective action requires additional cooling be directed at the hot spot or the casting cycle time can be increased.  Again, because of the reduced shrinkage associated with the semi-solid metal, this type of defect in not as common as in die cast magnesium components.  As thick sections add to this type of problem, the product designer may be asked to redesign the part to make use metal saving cores to reduce the section thickness.
+
+Swirls, Misruns and Cold Shuts
+
+Cold dies contribute to defect of these types.  The operational solution is to run faster and reduce the cooling until good moldings are produced.  If the time required to fill the cavity is too long, misruns and cold shuts may result.  Other factors to consider are die lubrication techniques and size of the metal shot being injected into the die.
+
+"Woody" Areas
+
+Areas in the molding which are not completely filled have a woody appearance and hence the name.  These are usually corrected by adjusting the process parameters to improve flow of the slurry to the appropriate area.  This is achieved by opening up the gate/runner system or by increasing the metal pressure remembering that we want to maintain laminar flow conditions.  Die temperature, venting and lubrication may also be adjusted to help improve metal flow.
+
+Internal Porosity
+
+When the Thixomolding(r) process is running properly, there is little tendency to entrap gases in the molding.  For that reason, Thixomolded(r) parts lend themselves to welding and heat treatment, that is, blisters do not form.  The laminar flow of the semi-solid metal into the die pushes the gas out ahead of the advancing front.  Entrapped has gives rise to smooth internal defects in the form of bubbles.  If bubble defects are present, corrective action is needed verify and to maintain laminar flow conditions.  In addition, the thixomolder can look at modifying the venting, gating or die lubrication on the part.  Use of vacuum on the die will also reduce the tendency for gas entrapment.
+
+Gross shrinkage porosity tends to be large and irregular shaped defects.  This type of defect is most commonly observed in heavy sections and occurs when the metal pulls away from itself during solidification and no remaining liquid metal is available to feed that region.  Quality of the molding can be adversely affected when gross shrinkage porosity occurs in sections requiring finish machining, tapping and so on.  Thick sections experiencing this defect are often redesigned, e. g., holes for tapped threads are cored so that threads are in pore free metal.
+
+Surface Blisters
+
+A stated above, blisters are not usually a problem defect in moldings.  
+
+Nonmetallic Inclusions
+
+Since the Thixomolding(r) process is conducted in a sealed machine which is continuously purged with inert argon gas, there is little tendency to encounter entrapped inclusions.  If oxides or flux type of inclusions are found, the thixomolder should be advised to contact his feedstock supplier regard their quality control procedures.  Thixomat's licensed feedstock producers are certified and quality checked to ensure their supply of highest quality products.
+
+Segregation
+
+As the semi-solid metal flows into the die, the liquid portion tends to move out to the surfaces of the cavity.  This liquid is rich in aluminum and thus gives the surface improved corrosion resistance compared to die cast product as documented earlier in the Galvanic and General Corrosion Section.
+
+Soldering and Oxidation
+
+As Thixomolding(r) metals temperatures are as much as 100°F lower that die casting the same Mg alloy, their is much less tendency for the metal to solder or stick to the die.  Similarly, oxide deposits on a portion of the surface of a molding are most unusual.  Local cooling of the die between shots is used to counter these types of problems.
+
+Galling or Drag
+
+Drags are a manifestation of mechanical damage caused by undercuts in the die, improper draft angle or an ejector plate advancing unevenly thus cocking the molding resulting in galling of the surface.  Die rework will be necessary to correct this problem.
+
+Warped Moldings
+
+An undercut in the die can hang up a molding upon ejection causing deformation and warping of the part.  Non-uniform shrinkage, or inadequate draft, can cause the molding to hang up in the die thus ejection can warp the part.  Alignment of the ejector plate can also cause warping of the molding.  
+The Thixomolding(r) machine operator can take corrective actions; undercuts are best removed by reworking or polishing of the die.
+
+
+
+Heat Checking of the Die
+
+Thermal fatigue on the surface of long running die give rise to small surface cracks or heat checks.  At the first sign of heat checking, the die should be removed and polished.  Again, due to the lower operating temperatures of a Thixomolding(r) unit, die life is extended compared to die casting.
+
+Examples of Thixomolded(r) Parts/Case Histories
+
+Magnesium Thixomolding(r) are being used in a wide variety of commercial applications.  Several of the more important applications are in electronics, computers, automotive and power hand tools.  The following Case Histories are presented to give the product designer a good idea of why and where these magnesium moldings are being used in many important applications.
+(Case Histories are attached)
+
+Figures and Tables
+(attached)
+
+Bibliography/References
+
+R Kilbert, Phillips Plastics Corp., Private discussions on the Thixomolding(r) process and its practical application.
+
+R F Decker, et. al., "Progress in Thixomolding(r)", Internal report from Thixomat, Inc; June, 1996.
+
+S LeBeau and R Decker, " Microstructural Design of Thixomolded(r) Magnesium Alloys", Proceedings from the 5th International Conference on Semi-Solid Processing of Alloys and Composites, Colorado School of Mines, June 23-25, 1998; Edited by A K Bhasin et. al.; published by the Colorado School of Mines-1998.
+
+E A Herman, "Gating Die Casting Dies", NADCA publication E-514; 1998.
+
+"CWM Design and Specification Guide", brochure published by Chicago White Metal Casting, Inc; 1998.
+
+"EMI Shielding", Technical Data Sheet published by Hydro Magnesium; undated.
+
+S LeBeau, "Design for Thixomolding", private communication of Thixomat, Inc; May, 1999.
+
+"Machining Magnesium", Brochure published by Hydro Magnesium; May, 1998.
+
+Allen Schroeder, "Advanced Die Design For Thixomolding(r)", Presented at the Thixomolding(r) End Users Conference, San Diego, CA; May 16, 1998.
+
+"Product Design and Development for MAGNESIUM DIE CASTINGS". Dow Chemical Company publication, undated.
+
+"NADCA(r) Product Specification Standards for Die Castings", NADCA publication No. 402, 3ed edition; 1997.
+
+"Product Design for Die Casting", NADCA publication, 5th edition; 1998.
+
+"NADCA Product Specification Standards for Die Castings Produced by the Semi-Solid and Squeeze Cast Processes", NADCA publication, 1st edition; 1997.
+
+"Safety in Magnesium Die Casting", Brochure published by Hydro Magnesium; Oct. 1995.
+
+"Magnesium Die Castings", Brochure published by the International Magnesium Association; 1991.
+
+"Magnesium dust explosions", Diecaster Bulletin No. 2 published by Hydro Magnesium; Dec. 12,1997.
+
+"Storage, Handling and Processing of Magnesium Solids and Powders", NFPA publication No. 480, 1993 edition; Published by the National Fire Protection Association.
+
+"Injection Molding Processing Guide", Booklet published by General Electric Plastics, No. PBG-135; Jan., 1998.
+
+R D Carnahan, "Thixotropic Molding: Semisolid Injection Molding of Magnesium Alloys"  Proceedings 1999 
+
+D M Walukas, et al., "Thixomolding(r) of Magnesium", Proceedings of the 1st Int'l Conf. on Mg Science & Technology, Dead Sea, Israel, 1997.
+
+S LeBeau and D M Walukas, "Thixomolding(r) of Magnesium Components for Electronic Applications", Presented at the Plastics in Portable and Wireless Electronics Conference, Mesa, AR; Society of Plastics Engrs, 25 Jan'99.
+
+C vanSchilt, et al, "Development of Thixomolded(r) Telecommunications and Automotive Parts", Private communication from ThixoTech, Calgary, Alberta Canada, undated.
+
+S E LeBeau, et al., "Thixomolding(r) of Magnesium Automotive Parts", SAE Paper 980087, Int'l Congress & Expo, Detroit, Michigan, Feb 23-26, 1998.
+
+vanSchilt, C, et al., "Development of Thixomolded(r) Magnesium Products", Enercomp Conference Proceedings, Canada, 1995.
+
+Charles Mosebarger, ASM Int'l Materials Park, Ohio, Private communication on International Tool Steel Specifications.
+
+Metals Handbook - Desk Addition, ASM Int'l publication, 2ed Edition, 1998.
+
+Welding Handbook - Vol. 3 - Part 1, AWS, Miami, FL publication, 8th Edition, 1996.
+
+Thomas Doppke, "Magnesium Fastening"  GM Truck Engineering/Fastener Engineering Report; March, 1995.
+
+Leon Pasternak, Johnson Controls Inc -  Engineered Plastics Division, Private communication on properties of Thixomolded(r) components; August, 1999.
+
+Ken Saito, "Thixomolding of Magnesium Alloys", Proceedings IMA 53, Ube City, Japan, June, 1996.
+
+R D Carnahan, et al., "Influence of Solid Fraction on the Shrinkage and Physical Properties of Thixomolded(r) Mg Alloys", NADCA Publication, Die Casting Engr, May/June 1996
+
+S C Erickson, "Magnesium's High Damping Capacity for Automotive Noise and Vibration Attenuation", IMA Conf, 1975.
+
+Appended Information
+
+		(Follows text)
+
+Disclaimer Statement
+
+Disclaimer
+The values shown on the previous pages are considered to be typical of the performance of Thixomolded(r) magnesium alloys and are not intended for specification purposes.. Inasmuch as Thixomat, Inc does not control the in-plant processing being applied by its individual licensees, it does not guarantee that the same results as those described herein will be obtained. Each user of Thixomolded(r) components should make their own tests to determine the material's suitability for their own particular use. Statements concerning possible or suggested uses of the Thixomolded(r) magnesium parts described herein are not to be construed as constituting a license under any of Thixomat's  patents or granted trade marks.
+
+49
+
+
+27
+
+

@@ -1,0 +1,31 @@
+
+
+
+
+Table II:  Typical Chemical Compositions of Magnesium and Aluminum Alloys 
+
+
+			Grade	Alloy Type	%Mg	%Al	%Mn	    %Zn		%Si	   %Cu		%Ni	     %Fe           Others
+
+			AZ91D       Mg	Bal	 8.5	 0.30	     7.5		0.10max   0.030max  0.002max  0.005max  0.02max
+
+			AM60	       Mg	Bal	 6.0	0.45	    0.22max	0.10max   0.010max  0.002max  0.005max  0.02max
+
+			AM50        Mg		Bal	5.0	0.45	    0.22max	0.10max   0.010max  0.002max  0.004max  0.02max
+
+			380.2         Al		0.10	Bal	0.50	    0.10		    8.5	          3.5	     0.10         0.85	0.10Sn
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

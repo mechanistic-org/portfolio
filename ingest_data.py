@@ -573,7 +573,7 @@ def process_projects():
         name = row.get("Slug Name") or row.get("Name")
         if not name: continue
         
-        slug = name.lower().strip().replace(' ', '-').replace('/', '-')
+        slug = name.lower().strip().replace(' ', '-').replace('/', '-').replace('|', '-')
         if slug and slug[0].isdigit():
             print(f"⚠️  WARNING: Slug '{slug}' starts with a number. This will cause MDX errors. Please rename '{name}' in Main.csv.")
         
@@ -867,7 +867,9 @@ def process_projects():
             # Replace local asset paths with R2_DOMAIN
             if R2_DOMAIN.startswith("http"):
                 content_body = content_body.replace("/assets/r2/", f"{R2_DOMAIN}/")
+
         else:
+            model_viewer_tag = '<ModelViewer />' # Default fallback
             content_body = f"""
 import {{ YouTube }} from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';

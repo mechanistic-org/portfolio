@@ -1,0 +1,27 @@
+.|Department||ME Department Resources||digi_16_blue.png|||0
+..|ME Design Process|Product_Design_3.pdf||pdf.png|_blank|0
+..|ProE Notes|ProE_Notes_Rev_5.xls||excel.png|_blank|0
+..|ECO|||||0
+...|deliverables|ECO/READ_THIS_ECO_Deliverable_Template_Rev1.doc||word.png|_blank|0
+..|Forms|||||0
+...|Inspection|forms/InspectionDataSheet.doc||word.png|_blank|0
+...|Non-Conformance|forms/NonConformanceRecord.doc||word.png|_blank|0
+...|Part History|forms/PartHistoryRecord.doc||word.png|_blank|0
+...|Part Spec|forms/PurchasedPartsSpecification.doc||word.png|_blank|0
+...|P.O.|forms/PurchaseOrderForm.doc||word.png|_blank|0
+...|Purchase Req.|forms/PurchaseRequisition.doc||word.png|_blank|0
+...|Supplier History|forms/SupplierQualityHistoryRecord.doc||word.png|_blank|0
+..|RoHS|||||0
+...|Audit Data|RoHS/RoHS_audit_data_revc.xls||excel.png|_blank|0
+...|Sheetmetal Spec|RoHS/9470-19148-00_Rev3.doc||word.png|_blank|0
+..|SAP|||||0
+...|Material Template|SAP/Digi_Material_Group_Template_Spec.pdf||pdf.png|_blank|0
+...|PN Cheat Sheet|SAP/Pulling_PN.doc||word.png|_blank|0
+...|print BOM|SAP/print_BOM_from_SAP.doc||word.png|_blank|0
+...|Inactivating ALT BOM|SAP/Inactivating_ALT_BOM.doc||word.png|_blank|0
+..|Specifications|||||0
+...|Dark Blue|SPECs/9470-17138-00_REV_A.pdf|D-Show|pdf.png|_blank|0
+...|Silver|SPECs/9470-17139-000_REV_A.pdf|D-Show|pdf.png|_blank|0
+...|Powder Coat|SPECs/9470-17140-00_REV_A.pdf|General Spec|pdf.png|_blank|0
+...|Powder Coat|SPECs/9470-17141-00_REV_A.pdf|General Spec|pdf.png|_blank|0
+...|ProE Naming|SPECs/ProE_Naming_Convention_Rev2.doc||word.png|_blank|0

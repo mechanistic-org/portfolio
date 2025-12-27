@@ -1,0 +1,43 @@
+set config file option:
+pro_material_dir (top level material directory ex: x:\material
+
+also, here are some useful relations to put in the startparts.
+
+***********************************************************************
+/* SETS THE MATERIAL PARAMETER TO BE = TO CONDITION FIELD IN THE MATERIAL.
+MATERIAL = MATERIAL_PARAM("condition")
+
+/* THIS WILL REPLACE THE PART NUMBER IN THE BOM WITH WHATEVER YOU WANT.
+/* COMMENT THIS LINE AND MODIFY THE PART NUMBER PARAMETER.
+PART_NUMBER=REL_MODEL_NAME()
+
+/* TO CONVERT WEIGHT PARAMETER FROM GRAMS TO LBS
+/* 9806.65 = GRAVITY 1000000.00 = CONVERT TO NEWTONS
+/* .2248089 = NEWTON TO LB CONVERSION
+WEIGHT_LBS = MP_MASS("")*9806.65/1000000.00*0.2248089
+ /* WARNG: Model changed since mass props calculated. May need to recalculate.
+MASS_GRAM = MP_MASS("")
+ /* WARNG: Model changed since mass props calculated. May need to recalculate.
+
+/* RELATION TO ASSIGN WEIGHT TO PURCHASED PART MODEL:
+/* UN-COMMENT THE NEXT TWO LINES, COMMENT THE RELATION ABOVE,
+/* AND SET WEIGHT EQUAL TO THE DESIRED VALUE
+/* WEIGHT_LBS=
+/* MP_DENSITY=(WEIGHT_LBS/9806.65*1000000.00/0.2248089)/MP_VOLUME("")
+/* MASS_GRAM=
+/* MP_DENSITY=MASS_GRAM/MP_VOLUME("")
+***********************************************************************
+
+Setup your title block or notes to show &material to display the material condition
+and the weight of your parts. &weight_lbs and &mass_grams.
+
+Best of luck!
+
+Brian Lumb
+MCAD/PDM Systems Manager
+Lead Design Engineer
+Tality Corporation
+Lowell, MA 01851
+(w) 978-441-5044
+(f) 978-441-5114
+brian_lumb@usa.net

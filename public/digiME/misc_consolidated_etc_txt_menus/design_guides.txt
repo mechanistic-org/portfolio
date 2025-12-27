@@ -1,0 +1,77 @@
+.|Design Guides|||||0
+..|acoustic|||||0
+...|Leak Tolerant Design|design_guides/acoustic/Leak_Tolerant_Design.pdf||||0
+...|ATX Therm/Acoustic|design_guides/acoustic/microATX_thermal_acoustic_guide.pdf||||0
+...|Rooms for Speech|design_guides/acoustic/rooms_for_speech.pdf||||0
+..|Blow Molding|||||0
+...|The BM Process|http://www.oxfordsource.com/Home/Design/Blow_Molding/blow_molding.html||||0
+...|GE Design Guide|design_guides/blow_molding/GE_extr_blowmolding_DG.pdf||||0
+..|Design For Environment|||||0
+...|DFE Guide|design_guides/DFE_DFM_SE/DFE_guide.pdf||||0
+..|Extrusion|||||0
+...|AEC Design Guide|design_guides/extrusion/AEC-aluminum_extrusion_design_guide.pdf/||||0
+...|Extruded Elastomer|design_guides/extrusion/extruded_elastomer_DG.pdf/||||0
+...|HydroNA Design Guide|design_guides/extrusion/hydro_NA_alum_extru_DG.pdf||||0
+...|Plastic Extrusion|http://www.oxfordsource.com/Home/Design/Plastic-Extrusions/plastic-extrusions.html||||0
+...|Trim-Lok Guide|design_guides/extrusion/Trim-Lok_DG.pdf||||0
+..|Flexibl Circuits|||||0
+...|All Flex Guide|design_guides/flex_circuit/AllFlexDesignGuide.pdf||||0
+...|Minco Guide|design_guides/flex_circuit/||||0
+...|Intercon Guide|design_guides/flex_circuit/flex_intercon_DG.pdf||||0
+...|Miraco Laser|design_guides/flex_circuit/Micro-Laser-Design-Guide.pdf||||0
+..|Injection Molding|||||0
+...|DuPont Guide|design_guides/injection_molding/DuPont_DG.pdf||||0
+...|Estane Guide|design_guides/injection_molding/estane_IM_DG.pdf||||0
+...|GE IM Guide|design_guides/injection_molding/GE_IM_guide.pdf||||0
+...|GE mini Guide|design_guides/injection_molding/GE_mini_IM_DG.pdf||||0
+...|GE TP Guide|design_guides/injection_molding/GE_thermoplastic_DG.pdf||||0
+...|GE Basic Guidelines|design_guides/injection_molding/GE_molding_guidelines.pdf||||0
+...|IM Guidelines|http://www.rtpcompany.com/info/molding/index.htm||||0
+...|Mold Design|design_guides/injection_molding/mold_design.pdf||||0
+...|RIM Part Design|design_guides/injection_molding/RIM_partdesign.pdf||||0
+...|RIM Gating|design_guides/injection_molding/RIM_gating.pdf||||0
+...|Bayer RIM|http://www.rimmolding.com/rim/index.html||||0
+..|Input Devices|||||0
+...|MicroNav|design_guides/input_devices/MicroNav_datasheet.pdf||||0
+...|Micro Module|design_guides/input_devices/micromoduleintguide.pdf||||0
+..|IR Windows & Lightpipes|||||0
+...|IR Pipes|design_guides/IR_windows_lightpipes/IR_trans_hollow_waveguides.pdf||||0
+...|IR Windows|design_guides/IR_windows_lightpipes/IR_windows_Vishay.pdf||||0
+...|IR Materials|design_guides/IR_windows_lightpipes/IR_windows_Novalog.pdf||||0
+....|Wave Guides|||||0
+.....|3 Layer Dielectric|design_guides/IR_windows_lightpipes/RU-irfibers/hgw_3_layer_cvd.pdf||||0
+.....|Metal Vapor|design_guides/IR_windows_lightpipes/RU-irfibers/hgw_cds-pbs_opt_ex_2003.pdf||||0
+.....|Near IR|design_guides/IR_windows_lightpipes/RU-irfibers/hgw_gas_sensing_haan_1999.pdf||||0
+.....|High Power CO2|design_guides/IR_windows_lightpipes/RU-irfibers/hgw_high_power_co2.pdf||||0
+.....|Mech Properties|design_guides/IR_windows_lightpipes/RU-irfibers/hgw_mech_props.pdf||||0
+.....|Mode Coupling|design_guides/IR_windows_lightpipes/RU-irfibers/hgw_mode_coupling.pdf||||0
+.....|Small-Bore|design_guides/IR_windows_lightpipes/RU-irfibers/hgw_small_bore_3micron.pdf||||0
+.....|Optical Properties|design_guides/IR_windows_lightpipes/RU-irfibers/hgw_small_bore_review.pdf||||0
+.....|IR Fibers|design_guides/IR_windows_lightpipes/RU-irfibers/ir_fiber_review.pdf||||0
+.....|Sapphire|design_guides/IR_windows_lightpipes/RU-irfibers/sc_sapphire.pdf||||0
+..|Lamps & LEDs|||||0
+...|Luxeon|design_guides/lamps_LEDs/luxeon.pdf||||0
+..|LCD|||||0
+...|LCD Breadboard 1|design_guides/LCD/lcd_character_module1.pdf||||0
+...|LCD Breadboard 2|design_guides/LCD/lcd_character_module2.pdf||||0
+..|O-Ring & Seal|||||0
+...|Parker Guide|design_guides/O-ring_seal/o-ring_design.pdf||||0
+...|General Guide|design_guides/O-ring_seal/o-ring_General_Guidelines.pdf||||0
+...|Gland Design|design_guides/O-ring_seal/o-ring_Gland_Design.pdf||||0
+...|Selection Criteria|design_guides/O-ring_seal/o-ring_Selection_Criteria.pdf||||0
+...|O-Ring Sizes|design_guides/O-ring_seal/O-ring_sizes.pdf||||0
+...|O-Rings vs. Seals|design_guides/O-ring_seal/oring_vs_sealring.pdf||||0
+..|Pantone|||||0
+...|Plastic Cross Ref|design_guides/pantone/pantone_plastic_cross-reference.pdf||||0
+..|PC Miscellaneous|||||0
+...|Front Panel IO|design_guides/PC_misc/FPIO_Design_Guideline.pdf||||0
+...|SFX PS Guide|design_guides/PC_misc/sfx11_psu.pdf||||0
+...|SFX 12V Guide|design_guides/PC_misc/SFX12V.pdf||||0
+..|Photochemical Etch|||||0
+...|FotoFab Guide|design_guides/photochem_etch/fotofab_desginguide.pdf||||0
+..|Plastic Part|||||0
+...|Vibration|design_guides/plastic_part/design_for_vibe.pdf||||0
+...|Diagonal Ribs|design_guides/plastic_part/diagonal_ribs.pdf||||0
+...|Imapct Fatigue|design_guides/plastic_part/impact_fatigue.pdf||||0
+...|Joint Design|design_guides/plastic_part/joint_design.pdf||||0
+...|Snap Fit|design_guides/plastic_part/snap_press_fit_guide.pdf||||0

@@ -1,0 +1,575 @@
+
+mapkey menu-draftcheck @MAPKEY_LABELDraft Check;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1 `Analysis`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Analysis.psh_analysis_surfanl`;\
+mapkey(continued) ~ FocusIn `srfanal` `srfanal`;~ Open `srfanal` `TypeOptionMenu`;\
+mapkey(continued) ~ FocusIn `srfanal` `srfanal`;~ Close `srfanal` `TypeOptionMenu`;\
+mapkey(continued) ~ Select `srfanal` `TypeOptionMenu`1 `DraftCheck`;\
+mapkey(continued) ~ Open `srfanal` `DraftSelSrf_menu`;~ FocusIn `srfanal` `srfanal`;\
+mapkey(continued) ~ Close `srfanal` `DraftSelSrf_menu`;\
+mapkey(continued) ~ Select `srfanal` `DraftSelSrf_menu`1 `PART`;\
+mapkey(continued) ~ Select `srfanal` `DraftOpt_rad`1 `2`;\
+mapkey(continued) ~ Update `srfanal` `DraftAngle_pan` `0.900000`;
+
+mapkey menu-measureplane @MAPKEY_LABELmeasure planes;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Analysis`;\
+mapkey(continued) ~ FocusOut `main_dlg_cur` `PHTLeft.AssyTree`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Analysis.psh_analysis_measure`;\
+mapkey(continued) ~ FocusOut `main_dlg_cur` `PHTLeft.AssyTree`;\
+mapkey(continued) ~ Open `measure` `MsrTypeOptions`;~ Close `measure` `MsrTypeOptions`;\
+mapkey(continued) ~ Select `measure` `MsrTypeOptions`1  `Distance`;\
+mapkey(continued) ~ Open `measure` `DistFromOptions`;~ Close `measure` `DistFromOptions`;\
+mapkey(continued) ~ Select `measure` `DistFromOptions`1  `Plane`;\
+mapkey(continued) ~ Open `measure` `DistToOptions`;~ Close `measure` `DistToOptions`;\
+mapkey(continued) ~ Select `measure` `DistToOptions`1  `Plane`;\
+mapkey(continued) ~ Activate `measure` `DistFromSelect`;
+
+mapkey menu-pe @MAPKEY_LABELProtrusion Extrude;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_sld_protrusion`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_sld_protrusion`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `mb1`;
+
+mapkey menu-ps @MAPKEY_LABELProtrusion Sweep;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_sld_protrusion`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_sld_protrusion`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshProtSwpSld`;
+
+mapkey menu-pr @MAPKEY_LABELProtrusion Revolve;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_sld_protrusion`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_sld_protrusion`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshProtRevSld`;
+
+mapkey menu-pq @MAPKEY_LABELProtrusion Use Quilt;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_sld_protrusion`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_sld_protrusion`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshProtUseQltSld`;\
+mapkey(continued) ~ FocusIn `Odui_Dlg_00` `sel.selbut.quilt#0`;
+
+mapkey menu-pvs @MAPKEY_LABELProtrusion VSS;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_sld_protrusion`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_sld_protrusion`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshProtVarSecSwpSld`;
+
+mapkey menu-psb @MAPKEY_LABELProtrusion Swept Blend;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_sld_protrusion`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_sld_protrusion`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshProtSwpBlnSld`;
+
+mapkey menu-ce @MAPKEY_LABELCut Extrude;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_sld_cut`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_sld_cut`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshCutExtSld`;
+
+mapkey menu-cr @MAPKEY_LABELCut Revolve;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_sld_cut`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_sld_cut`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshCutRevSld`;
+
+mapkey menu-cs @MAPKEY_LABELCut Sweep;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_sld_cut`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_sld_cut`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshCutSwpSld`;
+
+mapkey meun-cvs @MAPKEY_LABELCut VSS;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_sld_cut`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_sld_cut`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshCutVarSecSwpSld`;
+
+mapkey menu-csb @MAPKEY_LABELCut Swept Blend;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_sld_cut`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_sld_cut`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshCutSwpBlnSld`;
+
+mapkey menu-cq @MAPKEY_LABELCut Use Quilt;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_sld_cut`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_sld_cut`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshCutUseQltSld`;\
+mapkey(continued) ~ FocusIn `Odui_Dlg_00` `sel.selbut.quilt#0`;
+
+mapkey menu-se @MAPKEY_LABELSurface Extrude;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshSurfExtrude`;
+
+mapkey menu-sr @MAPKEY_LABELSurface Revolve;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshSurfRevolve`;
+
+mapkey menu-ss @MAPKEY_LABELSurface Sweep;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshSurfSweep`;
+
+mapkey menu-sf @MAPKEY_LABELSurface Flat;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshSurfFlat`;
+
+mapkey menu-sb @MAPKEY_LABELBoundaries Surface;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshSurfBoundaries`;
+
+mapkey menu-c+ @MAPKEY_LABELCurve Layer On;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_lyrs`;\
+mapkey(continued) ~ Select `min_layers` `AssyTree`1  `node0:CURVE`;\
+mapkey(continued) ~ Activate `min_layers` `MakeShown`;~ Activate `min_layers` `RepaintBtn`;\
+mapkey(continued) ~ Activate `min_layers` `CloseBtn`;
+
+mapkey menu-c- @MAPKEY_LABELCurve Layer Off;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_lyrs`;\
+mapkey(continued) ~ Select `min_layers` `AssyTree`1  `node0:CURVE`;\
+mapkey(continued) ~ Activate `min_layers` `MakeBlank`;~ Activate `min_layers` `RepaintBtn`;\
+mapkey(continued) ~ Activate `min_layers` `CloseBtn`;
+
+mapkey menu-chamfer @MAPKEY_LABELChamfer;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_chamfer`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_chamfer`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshEdgeChamfer`;amfer`;
+
+mapkey menu-colors @MAPKEY_LABELColors;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1 `View`;~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdlsetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdlsetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `psh_view_appearances`;\
+mapkey(continued) ~ Open `appearance_mgr` `OSelectType`;~ Close `appearance_mgr` `OSelectType`;
+
+mapkey menu-meascurve @MAPKEY_LABELMeasure Curve Radius;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Analysis`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Analysis.psh_analysis_curvanl`;\
+mapkey(continued) ~ FocusIn `curvanl` `curvanl`;~ FocusIn `curvanl` `curvanl`;\
+mapkey(continued) ~ Open `curvanl` `TypeOptionMenu`;~ FocusIn `curvanl` `curvanl`;\
+mapkey(continued) ~ Close `curvanl` `TypeOptionMenu`;\
+mapkey(continued) ~ Select `curvanl` `TypeOptionMenu`1  `Radius`;
+
+mapkey menu-draft @MAPKEY_LABELDraft;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Insert.pshDraft`;
+
+mapkey menu-measure @MAPKEY_LABELMeasure;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Analysis`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Analysis.psh_analysis_measure`;\
+mapkey(continued) ~ Open `measure` `MsrTypeOptions`;~ Close `measure` `MsrTypeOptions`;\
+mapkey(continued) ~ Select `measure` `MsrTypeOptions`1  `Distance`;\
+mapkey(continued) ~ Open `measure` `DistFromOptions`;~ Close `measure` `DistFromOptions`;\
+mapkey(continued) ~ Select `measure` `DistFromOptions`1  `Plane`;
+
+mapkey menu-round @MAPKEY_LABELRound;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Insert.pshRound`;
+
+mapkey menu-s+ @MAPKEY_LABELSurface Layer On;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_lyrs`;\
+mapkey(continued) ~ Select `min_layers` `AssyTree`1  `node0:SURFACE`;\
+mapkey(continued) ~ Activate `min_layers` `MakeShown`;~ Activate `min_layers` `RepaintBtn`;\
+mapkey(continued) ~ Activate `min_layers` `CloseBtn`;
+
+mapkey menu-s- @MAPKEY_LABELSurface Layer Off;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_lyrs`;\
+mapkey(continued) ~ Select `min_layers` `AssyTree`1  `node0:SURFACE`;\
+mapkey(continued) ~ Activate `min_layers` `MakeBlank`;~ Activate `min_layers` `RepaintBtn`;\
+mapkey(continued) ~ Activate `min_layers` `CloseBtn`;
+
+mapkey menu-dftchk @MAPKEY_LABELDraft Check;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Analysis`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Analysis.psh_analysis_surfanl`;\
+mapkey(continued) ~ FocusIn `srfanal` `srfanal`;~ FocusIn `srfanal` `srfanal`;\
+mapkey(continued) ~ Open `srfanal` `TypeOptionMenu`;~ FocusIn `srfanal` `srfanal`;\
+mapkey(continued) ~ Close `srfanal` `TypeOptionMenu`;\
+mapkey(continued) ~ Select `srfanal` `TypeOptionMenu`1  `DraftCheck`;\
+mapkey(continued) ~ Update `srfanal` `DraftAngle_pan` `1.000000`;\
+mapkey(continued) ~ Select `srfanal` `DraftOpt_rad`1  `2`;~ Open `srfanal` `DraftSelSrf_menu`;\
+mapkey(continued) ~ FocusIn `srfanal` `srfanal`;~ Close `srfanal` `DraftSelSrf_menu`;\
+mapkey(continued) ~ Select `srfanal` `DraftSelSrf_menu`1  `PART`;
+
+mapkey menu-shell @MAPKEY_LABELShell;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Insert.pshShell`;
+
+mapkey menu-refs @MAPKEY_LABELSketcher Refs;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Sketch`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Sketch.pshReferences`;
+
+mapkey menu-asmvis @MAPKEY_LABELAssembly Component Visibility;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdlsetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdlsetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `psh_view_compdisp`;
+
+mapkey menu-pairsclr @MAPKEY_LABELPairs Clearance;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Analysis`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Analysis.psh_analysis_modelanl`;\
+mapkey(continued) ~ Open `modelprop` `MPTypeOptions`;~ Close `modelprop` `MPTypeOptions`;\
+mapkey(continued) ~ Select `modelprop` `MPTypeOptions`1  `PairsClearance`;
+
+
+mapkey menu-stransform @MAPKEY_LABELSurface Transform;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_surface_operation`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_surface_operation`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshSurfTransform`;
+
+mapkey menu-scopy @MAPKEY_LABELSurface Copy;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshSurfCopy`;
+
+mapkey menu-soffset @MAPKEY_LABELSurface Offset;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshSurfOffset`;\
+mapkey(continued) ~ FocusIn `Odui_Dlg_00` `sel.selbut.surface#0`;
+
+mapkey menu-smerge @MAPKEY_LABELSurface Merge;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_surface_operation`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_surface_operation`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshSurfMerge`;\
+mapkey(continued) ~ FocusIn `Odui_Dlg_00` `sel.selbut.parent_quilt#0`;
+
+mapkey menu-sextend @MAPKEY_LABELSurface Extend;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_surface_operation`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_surface_operation`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshSurfExtend`;
+
+
+mapkey menu-replace @MAPKEY_LABELTweak Replace;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_advanced`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_advanced`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshReplaceSurf`;
+
+mapkey menu-regen @MAPKEY_LABELRegenerate;#REGENERATE;
+
+mapkey menu-asmassemble @MAPKEY_LABELAssemble Component;#COMPONENT;#ASSEMBLE;
+
+mapkey menu-asmmodpart @MAPKEY_LABELModify Assembly Part;#MODIFY;#MOD PART;
+
+mapkey menu-asmsimrep @MAPKEY_LABELSimplified Rep;#SIMPLFD REP;
+
+mapkey menu-lights @MAPKEY_LABELEdit Lights;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdlsetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdlsetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `psh_view_lights`;
+
+
+mapkey menu-svss @MAPKEY_LABELSurface Variable Section Sweep;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshSurfVarSecSwp`;
+
+
+mapkey menu-ssb @MAPKEY_LABELSurface Swept Blend;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_surface`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshSurfSweptBlend`;
+
+
+mapkey menu-tpe @MAPKEY_LABELThin Protrusion Extrude;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_thn_protrusion`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_thn_protrusion`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshProtExtThn`;
+
+
+mapkey menu-tce @MAPKEY_LABELThin Cut Extrude;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `Insert.cb_thn_cut`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_thn_cut`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `pshCutExtThn`;
+
+
+mapkey menu-shadinghigh @MAPKEY_LABELHigh Quality Shading;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_advanced`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_advanced`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `psh_view_mdldisp`;\
+mapkey(continued) ~ Select `modeldisplay` `ModDsply_Tab`1  `ModDsply_Layout_Shade`;\
+mapkey(continued) ~ Update `modeldisplay` `ModDsply_SB_ShadeQlty`10 ;\
+mapkey(continued) ~ Activate `modeldisplay` `ModDsply_PB_OK`;
+
+
+mapkey menu-shadinglow @MAPKEY_LABELLow Quality Shading;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_advanced`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_advanced`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `psh_view_mdldisp`;\
+mapkey(continued) ~ Select `modeldisplay` `ModDsply_Tab`1  `ModDsply_Layout_Shade`;\
+mapkey(continued) ~ Update `modeldisplay` `ModDsply_SB_ShadeQlty`3 ;\
+mapkey(continued) ~ Activate `modeldisplay` `ModDsply_PB_OK`;
+
+
+mapkey menu-asmcompdisplay @MAPKEY_LABELComponent Display;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdlsetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdlsetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `psh_view_compdisp`;
+
+
+mapkey menu-asm-compdispmaster @MAPKEY_LABELComponent Display Master;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdlsetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdlsetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `psh_view_compdisp`;#SET CURRENT;\
+mapkey(continued) ~ Select `open_rep` `replist`1  `MASTER REP`;\
+mapkey(continued) ~ Activate `open_rep` `replist`1  `MASTER REP`;#DONE/RETURN;
+
+
+mapkey menu-modtreesettings @MAPKEY_LABELOpen Model Tree Settings;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LoadCfg`;~ Activate `file_open` `Open`;\
+mapkey(continued) ~ Move `main_dlg_cur` `PHTLeft.AssyTree`77;
+
+mapkey menu-modtree-addsupp @MAPKEY_LABELModel Tree Add Suppressed;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Filter`;~ Activate `mdl_filter` `supres_btn`1 ;\
+mapkey(continued) ~ Activate `mdl_filter` `ok_btn`;
+
+mapkey menu-modtree-remsupp @MAPKEY_LABELModel Tree Remove Suppressed;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Filter`;~ Activate `mdl_filter` `supres_btn`0 ;\
+mapkey(continued) ~ Activate `mdl_filter` `ok_btn`;
+
+mapkey menu-modtree-addexcl @MAPKEY_LABELModel Tree Add Excluded;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Filter`;~ Activate `mdl_filter` `exclud_btn`1 ;\
+mapkey(continued) ~ Activate `mdl_filter` `ok_btn`;
+
+mapkey menu-modtree-remexcl @MAPKEY_LABELModel Tree Remove Excluded;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Filter`;~ Activate `mdl_filter` `exclud_btn`0 ;\
+mapkey(continued) ~ Activate `mdl_filter` `ok_btn`;
+
+mapkey menu-modtree-addnum @MAPKEY_LABELModel Tree Add Number;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `SwitchCol`;\
+mapkey(continued) ~ Select `column` `ListName`1  `item01`;\
+mapkey(continued) ~ Activate `column` `ListName`1  `item01`;~ Activate `column` `OKBtn`;
+
+mapkey menu-modtree-remnum @MAPKEY_LABELModel Tree Remove Number;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `SwitchCol`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Activate `column` `OKBtn`;
+
+mapkey menu-modtreeclear @MAPKEY_LABELClear Model Tree Settings;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Filter`;~ Activate `mdl_filter` `supres_btn`0 ;\
+mapkey(continued) ~ Activate `mdl_filter` `exclud_btn`0 ;~ Activate `mdl_filter` `ok_btn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `SwitchCol`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Activate `column` `OKBtn`;
+
+mapkey menu-modtree-addname @MAPKEY_LABELModel Tree Add Name;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `SwitchCol`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;\
+mapkey(continued) ~ Select `column` `ListName`1  `item04`;\
+mapkey(continued) ~ Activate `column` `ListName`1  `item04`;~ Activate `column` `OKBtn`;
+
+mapkey menu-modtree-remname @MAPKEY_LABELModel Tree Remove Name;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdltreesetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `SwitchCol`;~ Activate `column` `RmvBtn`;\
+mapkey(continued) ~ Activate `column` `OKBtn`;
+
+
+mapkey menu-lights @MAPKEY_LABELEdit Lights;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_mdlsetup`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_mdlsetup`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `psh_view_lights`;\
+mapkey(continued) ~ Select `Light_mgr` `MenuBar1`1  `file`;~ Close `Light_mgr` `MenuBar1`;\
+mapkey(continued) ~ Activate `Light_mgr` `open`;~ Activate `file_open` `Open`;\
+mapkey(continued) ~ Activate `Light_mgr` `close`;
+
+
+mapkey menu-transparency @MAPKEY_LABELTransparency Display On;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_advanced`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_advanced`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `psh_view_mdldisp`;\
+mapkey(continued) ~ Select `modeldisplay` `ModDsply_Tab`1  `ModDsply_Layout_Shade`;\
+mapkey(continued) ~ Activate `modeldisplay` `ModDsply_ChkB_Transprncy`1 ;\
+mapkey(continued) ~ Activate `modeldisplay` `ModDsply_PB_OK`;OK`;
+
+
+mapkey menu-transparency-off @MAPKEY_LABELTransparency Display Off;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_advanced`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_advanced`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `psh_view_mdldisp`;\
+mapkey(continued) ~ Select `modeldisplay` `ModDsply_Tab`1  `ModDsply_Layout_Shade`;\
+mapkey(continued) ~ Activate `modeldisplay` `ModDsply_ChkB_Transprncy`0 ;\
+mapkey(continued) ~ Activate `modeldisplay` `ModDsply_PB_OK`;
+
+
+mapkey menu-ftr-delete @MAPKEY_LABELFeature Delete;#FEATURE;#DELETE;
+
+mapkey menu-ftr-pattern @MAPKEY_LABELFeature Pattern;#FEATURE;#PATTERN;
+
+mapkey menu-ftr-copy @MAPKEY_LABELFeature Copy;#FEATURE;#COPY;
+
+mapkey menu-ftr-redefine @MAPKEY_LABELFeature Redefine;#FEATURE;#REDEFINE;
+
+mapkey menu-ftr-modify @MAPKEY_LABELFeature Modify;#MODIFY;
+
+mapkey menu-shademed @MAPKEY_LABELMedium Shade Quality;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.cb_view_advanced`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.cb_view_advanced`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `psh_view_mdldisp`;\
+mapkey(continued) ~ Select `modeldisplay` `ModDsply_Tab`1  `ModDsply_Layout_Shade`;\
+mapkey(continued) ~ Update `modeldisplay` `ModDsply_SB_ShadeQlty`4 ;\
+mapkey(continued) ~ Update `modeldisplay` `ModDsply_SB_ShadeQlty`5 ;\
+mapkey(continued) ~ Update `modeldisplay` `ModDsply_SB_ShadeQlty`6 ;\
+mapkey(continued) ~ Update `modeldisplay` `ModDsply_SB_ShadeQlty`7 ;\
+mapkey(continued) ~ Activate `modeldisplay` `ModDsply_PB_Apply`;\
+mapkey(continued) ~ Activate `modeldisplay` `ModDsply_PB_OK`;
+
+
+mapkey menu-asmsimrep @MAPKEY_LABELSimplified Rep;#SIMPLFD REP;#REDEFINE;\
+mapkey(continued) ~ Activate `open_rep` `OK`;
+
+
+mapkey menu-color-on @MAPKEY_LABELColors Off;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Utilities`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Utilities.psh_util_env`;\
+mapkey(continued) ~ Activate `env_dlg` `colors`1 ;~ Activate `env_dlg` `OK_`;
+
+
+mapkey menu-colors-off @MAPKEY_LABELColors On;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Utilities`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Utilities.psh_util_env`;\
+mapkey(continued) ~ Activate `env_dlg` `colors`0 ;~ Activate `env_dlg` `OK_`;;
+
+
+mapkey menu-selbynumber @MAPKEY_LABELSelect By Number;#SEL BY MENU;\
+mapkey(continued) ~ Open `selspecdlg0` `SpecifyByMenu`;~ Close `selspecdlg0` `SpecifyByMenu`;\
+mapkey(continued) ~ Select `selspecdlg0` `SpecifyByMenu`1  `Number`;
+
+
+mapkey menu-selbyname @MAPKEY_LABELSelect By Name;#SEL BY MENU;\
+mapkey(continued) ~ Open `selspecdlg0` `SpecifyByMenu`;~ Close `selspecdlg0` `SpecifyByMenu`;\
+mapkey(continued) ~ Select `selspecdlg0` `SpecifyByMenu`1  `Name`;
+
+
+mapkey menu-sellastfeature @MAPKEY_LABELSelect Last Feature;#SEL BY MENU;\
+mapkey(continued) ~ Open `selspecdlg0` `SpecifyByMenu`;~ Close `selspecdlg0` `SpecifyByMenu`;\
+mapkey(continued) ~ Select `selspecdlg0` `SpecifyByMenu`1  `Last Feature`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;

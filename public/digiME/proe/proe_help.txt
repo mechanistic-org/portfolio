@@ -1,0 +1,13 @@
+.|HELP&nbsp;&nbsp;&nbsp;&nbsp;||This is the place for Proe help docs|||0
+..|AAX|\\brutus\HELP\aax\start.htm|Advanced Assembly Extension|||0
+..|ASM|\\brutus\HELP\asm\start.htm|Assembly Mode Functionality|||0
+..|DETAIL|\\brutus\HELP\detail\start.htm|Drawing Mode Functionality|||0
+..|FEATURE|\\brutus\HELP\feature\start.htm|Part Mode Functionality|||0
+..|FUNDAMENTALS|\\brutus\HELP\fundamentals\start.htm|Pro/ENGINEER Fundamentals|||0
+..|INTERFACE|\\brutus\HELP\interface\start.htm|Data Exchange|||0
+..|MODEL CHECK|\\brutus\HELP\modelcheck\start.htm|Model Check Functionality|||0
+..|PDM|\\brutus\HELP\pdm\start.htm|Pro/ENGINEER Collaborative Environment|||0
+..|PHOTORENDER|\\brutus\HELP\photo\start.htm|Pro/PHOToRENDER Functionality|||0
+..|SHEETMETAL|\\brutus\HELP\sheetmetaldesign\start.htm|Pro/SHEETMETAL Functionality|||0
+..|SKETCHER|\\brutus\HELP\sketcher\start.htm|Sketcher Mode Functionality|||0
+..|SURFACE|\\brutus\HELP\surface\start.htm|Pro/SURFACE Functionality|||0

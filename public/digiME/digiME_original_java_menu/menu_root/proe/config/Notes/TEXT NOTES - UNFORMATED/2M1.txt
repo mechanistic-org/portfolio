@@ -1,0 +1,2 @@
+MATERIAL:  WIRE ROD, ASTM A510, GRADE $, ROD,
+(UNS $), Ø $.

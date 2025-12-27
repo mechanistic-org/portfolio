@@ -1,0 +1,5 @@
+.|Dictionaries|||||0
+..|Acronym Dictionary|http://silmaril.ie/cgi-bin/uncgi/acronyms||||0
+..|Merriam Webster|http://www.m-w.com/dictionary||||0
+..|WordNet|http://wordnet.princeton.edu||||0
+..|Your Dictionary|http://www.yourdictionary.com||||0

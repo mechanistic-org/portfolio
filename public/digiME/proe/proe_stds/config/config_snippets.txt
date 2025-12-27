@@ -1,0 +1,1179 @@
+!********************************
+!use "asm" and "prt" in an a new <empty> asm or prt
+!from the File/New... menu to create startfile from
+!scratch.
+!
+!*********************************
+
+mapkey asm @MAPKEY_NAME Mapkey to create start assy;@MAPKEY_LABELSTART_ASSY;\
+mapkey(continued) %dal;%dad;%dar;%dac;#PAUSE;%sap;%map;%dap;%au;
+
+mapkey prt @MAPKEY_NAME Mapkey to create start part;\
+mapkey(continued) @MAPKEY_LABEL START_MODEL;%dl;%dd;%dr;%dc;%us;%mat;%spp;%mpp;%dpp;\
+mapkey(continued) #REGENERATE;
+
+
+mapkey au @MAPKEY_LABELdefine assembly units;#SET UP;#UNITS;#PAUSE;
+
+mapkey us @MAPKEY_NAME Define Units System;@MAPKEY_LABEL UNITS_SYSTEM;\
+mapkey(continued) #SET UP;#UNITS;#PRINCIPAL SYS;#PAUSE;
+
+mapkey mat @MAPKEY_NAMEassign material from library;\
+mapkey(continued) @MAPKEY_LABELassign material;#SET UP;#MATERIAL;#ASSIGN;
+
+!**********************************************
+! DATUM MAPKEYS
+!**********************************************
+mapkey dd @MAPKEY_NAMEcreates default datum planes;\
+mapkey(continued) @MAPKEY_LABELdefault datums;~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;~ Select `main_dlg_cur` `Insert.cb_datum`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_datum`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `psh_plane`;
+
+mapkey dad @MAPKEY_NAMEcreates default assy datums;\
+mapkey(continued) @MAPKEY_LABELdefault assy datums;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;~ Select `main_dlg_cur` `Insert.cb_datum`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_datum`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `psh_plane`;
+
+mapkey dr @MAPKEY_NAME Rename datums DTM1, DTM2, & DTM3 to standard names;\
+mapkey(continued) @MAPKEY_LABEL DATUM_RENAME;#DONE;#MODIFY;#DATUM/AXIS;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `DTM1::T5::()::0`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;~ Update `datum` `inp_name` `SIDE`;\
+mapkey(continued) ~ Activate `datum` `psh_ok`;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `DTM2::T5::()::0`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;~ Update `datum` `inp_name` `TOP`;\
+mapkey(continued) ~ Activate `datum` `psh_ok`;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `DTM3::T5::()::0`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;~ Update `datum` `inp_name` `FRONT`;\
+mapkey(continued) ~ Activate `datum` `psh_ok`;#DONE SEL;#DONE;
+
+
+mapkey dar @MAPKEY_NAME Rename assy datums ADTM1, ADTM2 & ADTM3 to std names;\
+mapkey(continued) @MAPKEY_LABEL DATUM_RENAME_ASSY;#MODIFY;#DATUM/AXIS;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `ADTM1::T5::()::0`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;\
+mapkey(continued) ~ Update `datum` `inp_name` `SIDE_ASSY`;~ Activate `datum` `psh_ok`;\
+mapkey(continued) #SEL BY MENU;~ Select `selspecdlg0` `NameList`1  `ADTM2::T5::()::0`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;\
+mapkey(continued) ~ Update `datum` `inp_name` `TOP_ASSY`;~ Activate `datum` `psh_ok`;\
+mapkey(continued) #SEL BY MENU;~ Select `selspecdlg0` `NameList`1  `ADTM3::T5::()::0`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;\
+mapkey(continued) ~ Update `datum` `inp_name` `FRONT_ASSY`;~ Activate `datum` `psh_ok`;#DONE;\
+mapkey(continued) #DONE/RETURN;
+
+mapkey dc ~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;~ Select `main_dlg_cur` `Insert.cb_datum`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_datum`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `psh_csys`;#DEFAULT;#DONE;
+
+mapkey dac @MAPKEY_NAMEcreates default assy csys;\
+mapkey(continued) @MAPKEY_LABELdefault assy csys;~ Select `main_dlg_cur` `MenuBar1`1  `Insert`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;~ Select `main_dlg_cur` `Insert.cb_datum`;\
+mapkey(continued) ~ Close `main_dlg_cur` `Insert.cb_datum`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `psh_csys`;#DEFAULT;#DONE;
+
+
+!**********************************************
+!PART PARAMETER MAPKEYS
+!**********************************************
+
+mapkey spp @MAPKEY_NAME Creation of Standard Part Parameters;\
+mapkey(continued) @MAPKEY_LABEL APPLY_PARAMETERS;#SET UP;#PARAMETERS;#CREATE;#STRING;\
+mapkey(continued) DESCRIPTION;<EMPTY_STR>;#CREATE;#STRING;DIGI_PART_NUMBER;<EMPTY_STR>;#CREATE;\
+mapkey(continued) #STRING;UNITS;<EMPTY_STR>;#STRING;MATERIAL;<EMPTY_STR>;#STRING;FINISH;\
+mapkey(continued) <EMPTY_STR>;#STRING;PROTOTYPE;<EMPTY_STR>;#STRING;REV;<EMPTY_STR>;#STRING;\
+mapkey(continued) ECN_NUMBER;<EMPTY_STR>;#STRING;ECN_DATE;<EMPTY_STR>;#STRING;ECN_ENGINEER;\
+mapkey(continued) <EMPTY_STR>;#STRING;ECN_ACTION;<EMPTY_STR>;#STRING;ECN_APPROVER;<EMPTY_STR>;\
+mapkey(continued) #STRING;MODELED_BY_1;<EMPTY_STR>;#STRING;MODELED_BY_2;<EMPTY_STR>;#STRING;\
+mapkey(continued) MODELED_BY_3;<EMPTY_STR>;#STRING;CHECKED_BY;<EMPTY_STR>;#STRING;\
+mapkey(continued) ENGINEER_NAME_1;<EMPTY_STR>;#STRING;ENGINEER_NAME_2;<EMPTY_STR>;#STRING;\
+mapkey(continued) DRAWN_BY;<EMPTY_STR>;#STRING;DRAWING_DATE;<EMPTY_STR>;#STRING;\
+mapkey(continued) DRAWING_APPROVAL_NAME;<EMPTY_STR>;#STRING;DRAWING_APPROVAL_DATE;<EMPTY_STR>;\
+mapkey(continued) #STRING;DRAWING_REV;<EMPTY_STR>;#STRING;DESIGN_APPROVAL_NAME;<EMPTY_STR>;\
+mapkey(continued) #STRING;MODEL_REV;<EMPTY_STR>;#STRING;MFR_NAME;<EMPTY_STR>;#STRING;\
+mapkey(continued) MFR_PART_NUMBER;<EMPTY_STR>;#STRING;MFR_DIE_NUMBER;<EMPTY_STR>;#STRING;\
+mapkey(continued) WHERE_USED_1;<EMPTY_STR>;#STRING;WHERE_USED_2;<EMPTY_STR>;#STRING;\
+mapkey(continued) WHERE_USED_3;<EMPTY_STR>;#STRING;WHERE_USED_4;<EMPTY_STR>;#STRING;\
+mapkey(continued) WHERE_USED_5;<EMPTY_STR>;#STRING;WHERE_USED_6;<EMPTY_STR>;#STRING;\
+mapkey(continued) WHERE_USED_7;<EMPTY_STR>;#STRING;WHERE_USED_8;<EMPTY_STR>;#STRING;\
+mapkey(continued) NEXT_ASSY_1;<EMPTY_STR>;#STRING;NEXT_ASSY_2;<EMPTY_STR>;#STRING;NEXT_ASSY_3;\
+mapkey(continued) <EMPTY_STR>;#STRING;NEXT_ASSY_4;<EMPTY_STR>;#STRING;NEXT_ASSY_5;<EMPTY_STR>;\
+mapkey(continued) #STRING;NEXT_ASSY_6;<EMPTY_STR>;#STRING;NEXT_ASSY_7;<EMPTY_STR>;#STRING;\
+mapkey(continued) NEXT_ASSY_8;<EMPTY_STR>;#DONE/RETURN;#DONE/RETURN;#DONE;
+
+
+
+mapkey mpp @MAPKEY_LABELmodify standard part parameters;#SET UP;#PARAMETERS;\
+mapkey(continued) #MODIFY;#DESCRIPTION;#PAUSE;#MODIFY;#DIGI_PART_NUMBER;#PAUSE;#MODIFY;#UNITS;\
+mapkey(continued) #PAUSE;#MODIFY;#MATERIAL;#PAUSE;#MODIFY;#FINISH;#PAUSE;#MODIFY;#PROTOTYPE;\
+mapkey(continued) #PAUSE;#MODIFY;#REV;#PAUSE;#MODIFY;#ECN_NUMBER;#PAUSE;#MODIFY;#ECN_DATE;\
+mapkey(continued) #PAUSE;#MODIFY;#ECN_ENGINEER;#PAUSE;#MODIFY;#ECN_ACTION;#PAUSE;#MODIFY;\
+mapkey(continued) #ECN_APPROVER;#PAUSE;#MODIFY;#MODELED_BY_1;#PAUSE;#MODIFY;#MODELED_BY_2;\
+mapkey(continued) #PAUSE;#MODIFY;#MODELED_BY_3;#PAUSE;#MODIFY;#CHECKED_BY;#PAUSE;#MODIFY;\
+mapkey(continued) #ENGINEER_NAME_1;#PAUSE;#MODIFY;#ENGINEER_NAME_2;#PAUSE;#MODIFY;#DRAWN_BY;\
+mapkey(continued) #PAUSE;#MODIFY;#DRAWING_DATE;#PAUSE;#MODIFY;#DRAWING_APPROVAL_NAME;#PAUSE;\
+mapkey(continued) #MODIFY;#DRAWING_APPROVAL_DATE;#PAUSE;#MODIFY;#DRAWING_REV;#PAUSE;#MODIFY;\
+mapkey(continued) #DESIGN_APPROVAL_NAME;#PAUSE;#MODIFY;#MODEL_REV;#PAUSE;#MODIFY;#MFR_NAME;\
+mapkey(continued) #PAUSE;#MODIFY;#MFR_PART_NUMBER;#PAUSE;#MODIFY;#MFR_DIE_NUMBER;#PAUSE;\
+mapkey(continued) #MODIFY;#WHERE_USED_1;#PAUSE;#MODIFY;#WHERE_USED_2;#PAUSE;#MODIFY;\
+mapkey(continued) #WHERE_USED_3;#PAUSE;#MODIFY;#WHERE_USED_4;#PAUSE;#MODIFY;#WHERE_USED_5;\
+mapkey(continued) #PAUSE;#MODIFY;#WHERE_USED_6;#PAUSE;#MODIFY;#WHERE_USED_7;#PAUSE;#MODIFY;\
+mapkey(continued) #WHERE_USED_8;#PAUSE;#MODIFY;#NEXT_ASSY_1;#PAUSE;#MODIFY;#NEXT_ASSY_2;#PAUSE;\
+mapkey(continued) #MODIFY;#NEXT_ASSY_3;#PAUSE;#MODIFY;#NEXT_ASSY_4;#PAUSE;#MODIFY;#NEXT_ASSY_5;\
+mapkey(continued) #PAUSE;#MODIFY;#NEXT_ASSY_6;#PAUSE;#MODIFY;#NEXT_ASSY_7;#PAUSE;#MODIFY;\
+mapkey(continued) #NEXT_ASSY_8;#PAUSE;#DONE/RETURN;#DONE/RETURN;#DONE;
+
+
+mapkey dpp @MAPKEY_LABELdesignate all part parameters;#SET UP;#PARAMETERS;\
+mapkey(continued) #DESIGNATE;#PARAMETERS;#DESCRIPTION;#DESCRIPTION;#SELECT ALL;#DONE SEL;\
+mapkey(continued) #DONE/RETURN;#DONE/RETURN;#DONE;
+
+!***********************************************
+!ASSEMBLY PARAMETER MAPKEYS
+!***********************************************
+
+
+
+!need to edit assembly parameters....."sap" , "map", AND "dap"
+
+mapkey sap @MAPKEY_NAMEcreates standard assy parameters;\
+mapkey(continued) @MAPKEY_LABELstandard assy parameters;#SET UP;#PARAMETERS;#CREATE;#STRING;\
+mapkey(continued) DESCRIPTION;<EMPTY_STR>;#STRING;DIGI_PART_NUMBER;<EMPTY_STR>;#STRING;UNITS;\
+mapkey(continued) <EMPTY_STR>;#STRING;MATERIAL;<EMPTY_STR>;#STRING;FINISH;<EMPTY_STR>;#STRING;\
+mapkey(continued) PROTOTYPE;<EMPTY_STR>;#STRING;REV;<EMPTY_STR>;#STRING;ECN_NUMBER;<EMPTY_STR>;\
+mapkey(continued) #STRING;ECN_DATE;<EMPTY_STR>;#STRING;ECN_ENGINEER;<EMPTY_STR>;#STRING;\
+mapkey(continued) ECN_ACTION;<EMPTY_STR>;#STRING;ECN_APPROVER;<EMPTY_STR>;#STRING;MODELED_BY_1;\
+mapkey(continued) <EMPTY_STR>;#STRING;MODELED_BY_2;<EMPTY_STR>;#STRING;MODELED_BY_3;\
+mapkey(continued) <EMPTY_STR>;#STRING;CHECKED_BY;<EMPTY_STR>;#STRING;ENGINEER_NAME_1;\
+mapkey(continued) <EMPTY_STR>;#STRING;ENGINEER_NAME_2;<EMPTY_STR>;#STRING;DRAWN_BY;<EMPTY_STR>;\
+mapkey(continued) #STRING;DRAWING_DATE;<EMPTY_STR>;#STRING;DRAWING_APPROVAL_DATE;<EMPTY_STR>;\
+mapkey(continued) #STRING;DRAWING_APPROVAL_NAME;<EMPTY_STR>;#STRING;DRAWING_REV;<EMPTY_STR>;\
+mapkey(continued) #STRING;DESIGN_APPROVAL_NAME;<EMPTY_STR>;#STRING;DESIGN_APPROVAL_DATE;\
+mapkey(continued) <EMPTY_STR>;#STRING;MODEL_REV;<EMPTY_STR>;#STRING;MFR_NAME;<EMPTY_STR>;\
+mapkey(continued) #STRING;MFR_PART_NUMBER;<EMPTY_STR>;#STRING;MFR_DIE_NUMBER;<EMPTY_STR>;\
+mapkey(continued) #STRING;WHERE_USED_1;<EMPTY_STR>;#STRING;WHERE_USED-2;WHERE_USED_2;\
+mapkey(continued) <EMPTY_STR>;#STRING;WHERE_USED_3;<EMPTY_STR>;#STRING;WHERE_USED_4;\
+mapkey(continued) <EMPTY_STR>;#STRING;WHERE_USED_5;<EMPTY_STR>;#STRING;WHERE_USED_6;\
+mapkey(continued) <EMPTY_STR>;#STRING;WHERE_USED_7;<EMPTY_STR>;#STRING;WHERE_USED_8;\
+mapkey(continued) <EMPTY_STR>;#STRING;NEXT_ASSY_1;<EMPTY_STR>;#STRING;NEXT_ASSY_2;<EMPTY_STR>;\
+mapkey(continued) #STRING;NEXT_ASSY_3;<EMPTY_STR>;#STRING;NEXT_ASSY_4;<EMPTY_STR>;#STRING;\
+mapkey(continued) NEXT_ASSY_5;<EMPTY_STR>;#STRING;NEXT_ASSY_6;<EMPTY_STR>;#STRING;NEXT_ASSY_7;\
+mapkey(continued) <EMPTY_STR>;#STRING;NEXT_ASSY_8;<EMPTY_STR>;#DONE/RETURN;#DONE/RETURN;#DONE;
+
+
+mapkey map @MAPKEY_LABELmodify standard assy parameters;#SET UP;#PARAMETERS;\
+mapkey(continued) #MODIFY;#DESCRIPTION;#PAUSE;#MODIFY;#DIGI_PART_NUMBER;#PAUSE;#MODIFY;#UNITS;\
+mapkey(continued) #PAUSE;#MODIFY;#MATERIAL;#PAUSE;#MODIFY;#FINISH;#PAUSE;#MODIFY;#PROTOTYPE;\
+mapkey(continued) #PAUSE;#MODIFY;#REV;#PAUSE;#MODIFY;#ECN_NUMBER;#PAUSE;#MODIFY;#ECN_DATE;\
+mapkey(continued) #PAUSE;#MODIFY;#ECN_ENGINEER;#PAUSE;#MODIFY;#ECN_ACTION;#PAUSE;#MODIFY;\
+mapkey(continued) #ECN_APPROVER;#PAUSE;#MODIFY;#MODELED_BY_1;#PAUSE;#MODIFY;#MODELED_BY_2;\
+mapkey(continued) #PAUSE;#MODIFY;#MODELED_BY_3;#PAUSE;#MODIFY;#CHECKED_BY;#PAUSE;#MODIFY;\
+mapkey(continued) #ENGINEER_NAME_1;#PAUSE;#MODIFY;#ENGINEER_NAME_2;#PAUSE;#MODIFY;#DRAWN_BY;\
+mapkey(continued) #PAUSE;#MODIFY;#DRAWING_DATE;#PAUSE;#MODIFY;#DRAWING_APPROVAL_DATE;#PAUSE;\
+mapkey(continued) #MODIFY;#DRAWING_APPROVAL_NAME;#PAUSE;#MODIFY;#DRAWING_REV;#PAUSE;#MODIFY;\
+mapkey(continued) #DESIGN_APPROVAL_NAME;#PAUSE;#MODIFY;#DESIGN_APPROVAL_DATE;#PAUSE;#MODIFY;\
+mapkey(continued) #MODEL_REV;#PAUSE;#MODIFY;#MFR_NAME;#PAUSE;#MODIFY;#MFR_PART_NUMBER;#PAUSE;\
+mapkey(continued) #MODIFY;#MFR_DIE_NUMBER;#PAUSE;#MODIFY;#WHERE_USED_1;#PAUSE;#MODIFY;\
+mapkey(continued) #WHERE_USED_2;#PAUSE;#MODIFY;#WHERE_USED_3;#PAUSE;#MODIFY;#WHERE_USED_4;\
+mapkey(continued) #PAUSE;#MODIFY;#WHERE_USED_5;#PAUSE;#MODIFY;#WHERE_USED_6;#PAUSE;#MODIFY;\
+mapkey(continued) #WHERE_USED_7;#PAUSE;#MODIFY;#WHERE_USED_8;#PAUSE;#MODIFY;#NEXT_ASSY_1;\
+mapkey(continued) #PAUSE;#MODIFY;#NEXT_ASSY_2;#PAUSE;#MODIFY;#NEXT_ASSY_3;#PAUSE;#MODIFY;\
+mapkey(continued) #NEXT_ASSY_4;#PAUSE;#MODIFY;#NEXT_ASSY_5;#PAUSE;#MODIFY;#NEXT_ASSY_6;#PAUSE;\
+mapkey(continued) #MODIFY;#NEXT_ASSY_7;#PAUSE;#MODIFY;#NEXT_ASSY_8;#PAUSE;#DONE/RETURN;\
+mapkey(continued) #DONE/RETURN;#DONE;
+
+
+mapkey dap @MAPKEY_LABELdesignate standard assy params;#SET UP;#PARAMETERS;\
+mapkey(continued) #DESIGNATE;#PARAMETERS;#SELECT ALL;#DONE SEL;#DONE/RETURN;#DONE/RETURN;#DONE;
+
+
+
+
+
+!*********************************************
+!NOTES AND RELATIONS
+!*********************************************
+
+mapkey nc @MAPKEY_NAME MAPKEY TO CREATE STANDARD NOTES;\
+mapkey(continued) @MAPKEY_LABEL CREATE_NOTES;#SET UP;#NOTES;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Note0_DESIGN_INTENT`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `DESIGN INTENT: ;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Note1_APPL_SPECS`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `1. APPLICABLE SPECS/STANDARDS:\\n \
+mapkey(continued) a. ASME Y14.5 1994\\n b. ASME Y14.1\\n c. MIL-STD-100`;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Note2_MATERIAL`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `2. MATERIAL: `;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;~ Update `note_3d` `inp_name` `Note3_FINISH`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `3. DIMENSIONAL LIMITS \\n APPLY \
+mapkey(continued) AFTER-BEFORE PLATING-COATING-FINAL\\n PROTECTIVE FINISH.\\n` ;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Parameter_Note`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` ` `;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Proprietary_Note`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` ` `;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Distribution_Note`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` ` `;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;\
+mapkey(continued) ~ Activate `note_3d` `psh_ok`;#DONE/RETURN;#DONE;%fin;
+
+
+mapkey fin @MAPKEY_NAMEFill in notes with Default values;\
+mapkey(continued) @MAPKEY_LABEL FILL_IN_NOTES;#SET UP;#NOTES;#MODIFY;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `Distribution_Note::T68::()::0`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;\
+mapkey(continued) ~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `*** DISTRIBUTION_NOTE *** EDIT AS \
+mapkey(continued) APPROPRIATE ***`;~ FocusOut `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Activate `note_3d` `psh_ok`;#MODIFY;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `Proprietary_Note::T68::()::28`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;\
+mapkey(continued) ~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `*** PROPRIETARY_NOTE *** EDIT AS \
+mapkey(continued) APPROPRIATE ***`;~ FocusOut `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Activate `note_3d` `psh_ok`;#MODIFY;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `Parameter_Note::T68::()::27`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;\
+mapkey(continued) ~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `{0:&AGENCY}{1: \
+mapkey(continued) }{2:&DESIGN_ACTIVITY}\n{3:  }\n{4:CAGE CODE: }{5:&CAGE_CODE}{6: }{7:P/N: \
+mapkey(continued) }{8:&PART_NUMBER}\n{9:&NOMENCLATURE}\n{10:  }\n{11:&Distribution_Note}`;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_place`;\
+mapkey(continued) #NO LEADER;#STANDARD;#DONE;@PAUSE_FOR_SCREEN_PICK;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;~ FocusOut `note_3d` `inp_name`;\
+mapkey(continued) ~ Activate `note_3d` `psh_ok`;#DONE/RETURN;#DONE;
+
+
+mapkey rn @MAPKEY NAME Retrieve notes and place on drawing;\
+mapkey(continued) @MAPKEY_LABEL RET_NOTES;#CREATE;#NOTE;;#MAKE NOTE;@PAUSE_FOR_SCREEN_PICK;\
+mapkey(continued) NOTES;` `;&Note1_APPL_SPECS;` `;&Note2_MATERIAL;` `;&Note3_FINISH;` `;&NOTE4;\
+mapkey(continued) ` `;&NOTE5;` `;&NOTE6;` `;&NOTE7;` `;&NOTE8;` `;&NOTE9&NOTE10;` `;&NOTE11;\
+mapkey(continued) ` `;&NOTE12;` `;&NOTE13;` `;&NOTE14;` `;&NOTE15&NOTE16;` `;&NOTE17;` `;\
+mapkey(continued) &NOTE18;` `;&NOTE19;` `;&NOTE20;` `;&NOTE21&NOTE22;` `;&NOTE23;` `;&NOTE24;\
+mapkey(continued) ` `;&NOTE25;;#MAKE NOTE;@PAUSE_FOR_SCREEN_PICK;` `;&DISTRIBUTION_NOTE;;\
+mapkey(continued) #DONE/RETURN;#DONE/RETURN;
+
+
+
+
+mapkey rl @MAPKEY_NAME Add relations;@MAPKEY_LABEL RELATIONS;#RELATIONS;#ADD;\
+mapkey(continued) /* RELATIONS WHICH ARE A PART OF DIGI START PART;/* MODIFIED 8 Jun 2002;/*;\
+mapkey(continued) /*  RELATION TO SET DRAWING_NUMBER = PART_NUMBER;/*;\
+mapkey(continued) DRAWING_NUMBER=PART_NUMBER;/*;UNIT_WEIGHT=MP_MASS("");;#DONE SEL;#DONE;
+
+
+
+
+
+
+
+
+
+
+mapkey menu-c+ @MAPKEY_LABELCurve Layer On;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerTreePB`1 ;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:CURVE`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:CURVE`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerShow`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ModelTreeBtn`;
+mapkey menu-c- @MAPKEY_LABELCurve Layer Off;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerTreePB`1 ;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:CURVE`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:CURVE`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerBlank`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ModelTreeBtn`;
+mapkey menu-c+ @MAPKEY_LABELCurve Layer On;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerTreePB`1 ;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:CURVE`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:CURVE`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerShow`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ModelTreeBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+mapkey menu-c- @MAPKEY_LABELCurve Layer Off;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerTreePB`1 ;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:CURVE`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:CURVE`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerBlank`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ModelTreeBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+mapkey menu-s+ @MAPKEY_LABELSurface Layer On;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerTreePB`1 ;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:SURFACE`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:SURFACE`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerShow`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ModelTreeBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+mapkey menu-s- @MAPKEY_LABELSurface Layer Off;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerTreePB`1 ;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:SURFACE`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:SURFACE`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerBlank`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ModelTreeBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+
+
+
+DUPLICATE?
+*******************  MODEL TREE BEGIN  *****************************
+
+
+mapkey menu-modtree-addexcl @MAPKEY_LABELModel Tree Add Excluded;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `FilterPb`;~ Activate `mdl_filter` `exclud_btn`1 ;\
+mapkey(continued) ~ Activate `mdl_filter` `ok_btn`;
+mapkey menu-modtree-addname @MAPKEY_LABELModel Tree Add Name;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ColumbPb`;~ Select `column` `ListName`1  `item04`;\
+mapkey(continued) ~ Activate `column` `AddBtn`;~ Activate `column` `OKBtn`;
+mapkey menu-modtree-addnum @MAPKEY_LABELModel Tree Add Number;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ColumbPb`;~ Select `column` `ListName`1  `item01`;\
+mapkey(continued) ~ Activate `column` `AddBtn`;~ Activate `column` `OKBtn`;
+mapkey menu-modtree-addsupp @MAPKEY_LABELModel Tree Add Suppressed;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `FilterPb`;~ Activate `mdl_filter` `supres_btn`1 ;\
+mapkey(continued) ~ Activate `mdl_filter` `ok_btn`;
+mapkey menu-modtreeclear @MAPKEY_LABELClear Model Tree Settings;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ColumbPb`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Activate `column` `OKBtn`;
+mapkey menu-modtree-remexcl @MAPKEY_LABELModel Tree Remove Excluded;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `FilterPb`;~ Activate `mdl_filter` `exclud_btn`0 ;\
+mapkey(continued) ~ Activate `mdl_filter` `ok_btn`;
+mapkey menu-modtree-remname @MAPKEY_LABELModel Tree Remove Name;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ColumbPb`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Select `column` `CurList`1  `item00`;~ Activate `column` `RmvBtn`;\
+mapkey(continued) ~ Activate `column` `OKBtn`;
+mapkey menu-modtree-remnum @MAPKEY_LABELModel Tree Remove Number;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ColumbPb`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Select `column` `CurList`1  `item00`;~ Activate `column` `RmvBtn`;\
+mapkey(continued) ~ Activate `column` `OKBtn`;
+mapkey menu-modtree-remsupp @MAPKEY_LABELModel Tree Remove Suppressed;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `FilterPb`;~ Activate `mdl_filter` `supres_btn`0 ;\
+mapkey(continued) ~ Activate `mdl_filter` `ok_btn`;
+mapkey menu-modtreesettings @MAPKEY_LABELOpen Model Tree Settings;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LoadCfgPb`;\
+mapkey(continued) ~ Select `file_open` `Ph_list.Filelist`1  `tree.cfg`;\
+mapkey(continued) ~ Activate `file_open` `Open`;
+
+*******************************  MODEL TREE  END  ********************************
+
+
+
+DUPLICATE?
+*************** LAYERS MAPKEYS  ************************
+
+
+mapkey menu-c+ @MAPKEY_LABELCurve Layer On;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_lyrs`;\
+mapkey(continued) ~ Select `min_layers` `AssyTree`1  `node0:CURVE`;\
+mapkey(continued) ~ Activate `min_layers` `MakeShown`;~ Activate `min_layers` `RepaintBtn`;\
+mapkey(continued) ~ Activate `min_layers` `CloseBtn`;
+
+mapkey menu-c- @MAPKEY_LABELCurve Layer Off;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_lyrs`;\
+mapkey(continued) ~ Select `min_layers` `AssyTree`1  `node0:CURVE`;\
+mapkey(continued) ~ Activate `min_layers` `MakeBlank`;~ Activate `min_layers` `RepaintBtn`;\
+mapkey(continued) ~ Activate `min_layers` `CloseBtn`;
+
+
+DUPLICATE?
+
+mapkey menu-selbydtm @MAPKEY_LABELSelect by Datum;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Edit`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;~ Activate `main_dlg_cur` `Edit.Find`;\
+mapkey(continued) ~ Select `selspecdlg0` `RuleTab`1  `Attributes`;\
+mapkey(continued) ~ Select `selspecdlg0` `RuleTypes`1  `Type`;\
+mapkey(continued) ~ Open `selspecdlg0` `ExtRulesLayout.ExtTyperuleLayout.TyperuleCatsList`;\
+mapkey(continued) ~ Close `selspecdlg0` `ExtRulesLayout.ExtTyperuleLayout.TyperuleCatsList`;\
+mapkey(continued) ~ Select `selspecdlg0` `ExtRulesLayout.ExtTyperuleLayout.TyperuleCatsList`1  \
+mapkey(continued) `Datum`;\
+mapkey(continued) ~ Input `selspecdlg0` `ExtRulesLayout.ExtTyperuleLayout.TyperuleTypesList` \
+mapkey(continued) `*`;\
+mapkey(continued) ~ Update `selspecdlg0` `ExtRulesLayout.ExtTyperuleLayout.TyperuleTypesList` \
+mapkey(continued) `*`;~ Activate `selspecdlg0` `EvaluateBtn`;
+
+mapkey menu-sellastfeature @MAPKEY_LABELSelect Last Feature;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Edit`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;~ Activate `main_dlg_cur` `Edit.Find`;\
+mapkey(continued) ~ Open `selspecdlg0` `SelOptionRadio`;~ Close `selspecdlg0` `SelOptionRadio`;\
+mapkey(continued) ~ Select `selspecdlg0` `SelOptionRadio`1  `Feature`;\
+mapkey(continued) ~ Open `selspecdlg0` `LookByOptionMenu`;\
+mapkey(continued) ~ Close `selspecdlg0` `LookByOptionMenu`;\
+mapkey(continued) ~ Select `selspecdlg0` `LookByOptionMenu`1  `Feature`;\
+mapkey(continued) ~ Select `selspecdlg0` `RuleTypes`1  `Last Feat`;\
+mapkey(continued) ~ Activate `selspecdlg0` `EvaluateBtn`;\
+mapkey(continued) ~ Select `selspecdlg0` `ResultList`1  `28173:52:`;\
+mapkey(continued) ~ Select `selspecdlg0` `ResultList`1  `28173:52:`;\
+mapkey(continued) ~ Select `selspecdlg0` `SelectedItemsList`1  `28173:52:`;\
+mapkey(continued) ~ Activate `selspecdlg0` `CancelButton`;
+
+
+
+mapkey menu-colors @MAPKEY_LABELColors;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.push_view_appearances`;\
+mapkey(continued) ~ FocusOut `pgl_appearance_editor` `AppearanceName`;
+
+
+
+
+mapkey nc @MAPKEY_NAME MAPKEY TO CREATE STANDARD NOTES;\
+mapkey(continued) @MAPKEY_LABEL CREATE_NOTES;#SET UP;#NOTES;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Note0_DESIGN_INTENT`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `DESIGN INTENT: ;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Note1_APPL_SPECS`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `1. APPLICABLE SPECS/STANDARDS:\\n \
+mapkey(continued) a. ASME Y14.5 1994\\n b. ASME Y14.1\\n c. MIL-STD-100`;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Note2_MATERIAL`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `2. MATERIAL: `;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;~ Update `note_3d` `inp_name` `Note3_FINISH`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `3. DIMENSIONAL LIMITS \\n APPLY \
+mapkey(continued) AFTER-BEFORE PLATING-COATING-FINAL\\n PROTECTIVE FINISH.\\n` ;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Parameter_Note`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` ` `;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Proprietary_Note`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` ` `;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Distribution_Note`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` ` `;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;\
+mapkey(continued) ~ Activate `note_3d` `psh_ok`;#DONE/RETURN;#DONE;%fin;
+mapkey fin @MAPKEY_NAMEFill in notes with Default values;\
+mapkey(continued) @MAPKEY_LABEL FILL_IN_NOTES;#SET UP;#NOTES;#MODIFY;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `Distribution_Note::T68::()::0`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;\
+mapkey(continued) ~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `*** DISTRIBUTION_NOTE *** EDIT AS \
+mapkey(continued) APPROPRIATE ***`;~ FocusOut `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Activate `note_3d` `psh_ok`;#MODIFY;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `Proprietary_Note::T68::()::28`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;\
+mapkey(continued) ~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `*** PROPRIETARY_NOTE *** EDIT AS \
+mapkey(continued) APPROPRIATE ***`;~ FocusOut `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Activate `note_3d` `psh_ok`;#MODIFY;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `Parameter_Note::T68::()::27`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;\
+mapkey(continued) ~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `{0:&AGENCY}{1: \
+mapkey(continued) }{2:&DESIGN_ACTIVITY}\n{3:  }\n{4:CAGE CODE: }{5:&CAGE_CODE}{6: }{7:P/N: \
+mapkey(continued) }{8:&PART_NUMBER}\n{9:&NOMENCLATURE}\n{10:  }\n{11:&Distribution_Note}`;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_place`;\
+mapkey(continued) #NO LEADER;#STANDARD;#DONE;@PAUSE_FOR_SCREEN_PICK;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;~ FocusOut `note_3d` `inp_name`;\
+mapkey(continued) ~ Activate `note_3d` `psh_ok`;#DONE/RETURN;#DONE;
+mapkey rn @MAPKEY NAME Retrieve notes and place on drawing;\
+mapkey(continued) @MAPKEY_LABEL RET_NOTES;#CREATE;#NOTE;;#MAKE NOTE;@PAUSE_FOR_SCREEN_PICK;\
+mapkey(continued) NOTES;` `;&Note1_APPL_SPECS;` `;&Note2_MATERIAL;` `;&Note3_FINISH;` `;&NOTE4;\
+mapkey(continued) ` `;&NOTE5;` `;&NOTE6;` `;&NOTE7;` `;&NOTE8;` `;&NOTE9&NOTE10;` `;&NOTE11;\
+mapkey(continued) ` `;&NOTE12;` `;&NOTE13;` `;&NOTE14;` `;&NOTE15&NOTE16;` `;&NOTE17;` `;\
+mapkey(continued) &NOTE18;` `;&NOTE19;` `;&NOTE20;` `;&NOTE21&NOTE22;` `;&NOTE23;` `;&NOTE24;\
+mapkey(continued) ` `;&NOTE25;;#MAKE NOTE;@PAUSE_FOR_SCREEN_PICK;` `;&DISTRIBUTION_NOTE;;\
+mapkey(continued) #DONE/RETURN;#DONE/RETURN;
+mapkey rl @MAPKEY_NAME Add relations;@MAPKEY_LABEL RELATIONS;#RELATIONS;#ADD;\
+mapkey(continued) /* RELATIONS WHICH ARE A PART OF DIGI START PART;/* MODIFIED 8 Jun 2002;/*;\
+mapkey(continued) /*  RELATION TO SET DRAWING_NUMBER = PART_NUMBER;/*;\
+mapkey(continued) DRAWING_NUMBER=PART_NUMBER;/*;UNIT_WEIGHT=MP_MASS("");;#DONE SEL;#DONE;
+mapkey sq @MAPKEY_NAMEShadeQuality;@MAPKEY_LABELsq;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1 `View`;~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_mdldisp`;\
+mapkey(continued) ~ Select `modeldisplay` `ModDsply_Tab`1 `ModDsply_Layout_Shade`;
+mapkey sb @MAPKEY_NAMEBoundary Surface Blend;@MAPKEY_LABELsb;%sn;#ADVANCED;\
+mapkey(continued) #DONE;#BOUNDARIES;#DONE;#DONE;
+mapkey sf @MAPKEY_NAMESurf Flat ;@MAPKEY_LABELsf;%sn;#FLAT;#DONE;
+mapkey sc @MAPKEY_NAMESet SpinCenter;@MAPKEY_LABELsc;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1 `View`;~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_panzoom`;\
+mapkey(continued) ~ Open `orient` `SetupOptions`;~ Close `orient` `SetupOptions`;\
+mapkey(continued) ~ Select `orient` `SetupOptions`1 `setup`;\
+mapkey(continued) ~ Activate `orient` `spincentPH.SpinCenterSelPB`;#ON SURFACE;
+mapkey rd @MAPKEY_NAMERedefine;@MAPKEY_LABELrd;#FEATURE;#REDEFINE;
+mapkey md @MAPKEY_NAMEmeasure distance by csys;@MAPKEY_LABELmeasure distance;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Analysis`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Analysis.psh_analysis_measure`;\
+mapkey(continued) ~ Open `measure` `MsrTypeOptions`;~ Close `measure` `MsrTypeOptions`;\
+mapkey(continued) ~ Select `measure` `MsrTypeOptions`1  `Distance`;\
+mapkey(continued) ~ Open `measure` `DistProjRefOptions`;~ Close `measure` `DistProjRefOptions`;\
+mapkey(continued) ~ Select `measure` `DistProjRefOptions`1  `Csys`;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `CS0::T25::()::0`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;#CARTESIAN;\
+mapkey(continued) ~ Activate `measure` `DistFromSelect`;#QUERY SEL;
+mapkey ms ~ Select `main_dlg_cur` `MenuBar1`1  `Analysis`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Analysis.psh_analysis_measure`;\
+mapkey(continued) ~ Open `measure` `DistFromOptions`;~ Close `measure` `DistFromOptions`;\
+mapkey(continued) ~ Select `measure` `DistFromOptions`1  `Surface`;\
+mapkey(continued) ~ Open `measure` `DistToOptions`;~ Close `measure` `DistToOptions`;\
+mapkey(continued) ~ Select `measure` `DistToOptions`1  `Surface`;\
+mapkey(continued) ~ Open `measure` `DistProjRefOptions`;~ Close `measure` `DistProjRefOptions`;\
+mapkey(continued) ~ Select `measure` `DistProjRefOptions`1  `Csys`;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `ASM_DEF_CSYS::T25::()::0`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;#CARTESIAN;\
+mapkey(continued) ~ Activate `measure` `DistFromSelect`;~ Activate `rmb_popup` `Query Sel`;
+mapkey menu-colors-off @MAPKEY_LABELColors On;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Utilities`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Utilities.psh_util_env`;\
+mapkey(continued) ~ Activate `env_dlg` `colors`0 ;~ Activate `env_dlg` `OK_`;;
+mapkey menu-c+ @MAPKEY_LABELCurve Layer On;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerTreePB`1 ;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:CURVE`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:CURVE`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerShow`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ModelTreeBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+mapkey menu-c- @MAPKEY_LABELCurve Layer Off;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerTreePB`1 ;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:CURVE`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:CURVE`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerBlank`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ModelTreeBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+mapkey menu-s+ @MAPKEY_LABELSurface Layer On;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerTreePB`1 ;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:SURFACE`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:SURFACE`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerShow`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ModelTreeBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+mapkey menu-s- @MAPKEY_LABELSurface Layer Off;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.ShowCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerTreePB`1 ;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:SURFACE`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:SURFACE`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerBlank`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerShowBtn`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ModelTreeBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+mapkey menu-colors @MAPKEY_LABELColors;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.push_view_appearances`;\
+mapkey(continued) ~ FocusOut `pgl_appearance_editor` `AppearanceName`;
+mapkey menu-selbydtm @MAPKEY_LABELSelect by Datum;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Edit`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;~ Activate `main_dlg_cur` `Edit.Find`;\
+mapkey(continued) ~ Select `selspecdlg0` `RuleTab`1  `Attributes`;\
+mapkey(continued) ~ Select `selspecdlg0` `RuleTypes`1  `Type`;\
+mapkey(continued) ~ Open `selspecdlg0` `ExtRulesLayout.ExtTyperuleLayout.TyperuleCatsList`;\
+mapkey(continued) ~ Close `selspecdlg0` `ExtRulesLayout.ExtTyperuleLayout.TyperuleCatsList`;\
+mapkey(continued) ~ Select `selspecdlg0` `ExtRulesLayout.ExtTyperuleLayout.TyperuleCatsList`1  \
+mapkey(continued) `Datum`;\
+mapkey(continued) ~ Input `selspecdlg0` `ExtRulesLayout.ExtTyperuleLayout.TyperuleTypesList` \
+mapkey(continued) `*`;\
+mapkey(continued) ~ Update `selspecdlg0` `ExtRulesLayout.ExtTyperuleLayout.TyperuleTypesList` \
+mapkey(continued) `*`;~ Activate `selspecdlg0` `EvaluateBtn`;
+mapkey menu-sellastfeature @MAPKEY_LABELSelect Last Feature;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Edit`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;~ Activate `main_dlg_cur` `Edit.Find`;\
+mapkey(continued) ~ Open `selspecdlg0` `SelOptionRadio`;~ Close `selspecdlg0` `SelOptionRadio`;\
+mapkey(continued) ~ Select `selspecdlg0` `SelOptionRadio`1  `Feature`;\
+mapkey(continued) ~ Open `selspecdlg0` `LookByOptionMenu`;\
+mapkey(continued) ~ Close `selspecdlg0` `LookByOptionMenu`;\
+mapkey(continued) ~ Select `selspecdlg0` `LookByOptionMenu`1  `Feature`;\
+mapkey(continued) ~ Select `selspecdlg0` `RuleTypes`1  `Last Feat`;\
+mapkey(continued) ~ Activate `selspecdlg0` `EvaluateBtn`;\
+mapkey(continued) ~ Select `selspecdlg0` `ResultList`1  `28173:52:`;\
+mapkey(continued) ~ Select `selspecdlg0` `ResultList`1  `28173:52:`;\
+mapkey(continued) ~ Select `selspecdlg0` `SelectedItemsList`1  `28173:52:`;\
+mapkey(continued) ~ Activate `selspecdlg0` `CancelButton`;
+mapkey menu-sf @MAPKEY_LABELSurface Flat;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Edit`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;~ Activate `main_dlg_cur` `Edit.pshFtFill`;
+mapkey menu-scopy @MAPKEY_LABELSurface Copy;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Edit`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Edit.psh_dwg_copy`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Edit`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Edit.psh_dwg_paste`;\
+mapkey(continued) ~ Enter `main_dlg_cur` `dashInst0.Quit`;\
+mapkey(continued) ~ Exit `main_dlg_cur` `dashInst0.Quit`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `dashInst0.Done`;
+mapkey menu-sextend @MAPKEY_LABELSurface Extend;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Edit`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Edit.pshFtExtend`;
+mapkey menu-smerge @MAPKEY_LABELSurface Merge;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Edit`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Edit.pshFtMerge`;
+mapkey menu-soffset @MAPKEY_LABELSurface Offset;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Edit`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Edit.pshFtOffset`;
+mapkey menu-stransform @MAPKEY_LABELSurface Transform;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Edit`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Edit.psh_dwg_copy`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Edit`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Edit.psh_paste_special`;
+mapkey menu-modtree-addexcl @MAPKEY_LABELModel Tree Add Excluded;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `FilterPb`;~ Activate `mdl_filter` `exclud_btn`1 ;\
+mapkey(continued) ~ Activate `mdl_filter` `ok_btn`;
+mapkey menu-modtree-addname @MAPKEY_LABELModel Tree Add Name;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ColumbPb`;~ Select `column` `ListName`1  `item04`;\
+mapkey(continued) ~ Activate `column` `AddBtn`;~ Activate `column` `OKBtn`;
+mapkey menu-modtree-addnum @MAPKEY_LABELModel Tree Add Number;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ColumbPb`;~ Select `column` `ListName`1  `item01`;\
+mapkey(continued) ~ Activate `column` `AddBtn`;~ Activate `column` `OKBtn`;
+mapkey menu-modtree-addsupp @MAPKEY_LABELModel Tree Add Suppressed;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `FilterPb`;~ Activate `mdl_filter` `supres_btn`1 ;\
+mapkey(continued) ~ Activate `mdl_filter` `ok_btn`;
+mapkey menu-modtreeclear @MAPKEY_LABELClear Model Tree Settings;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ColumbPb`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Activate `column` `CurList`1  `item00`;~ Activate `column` `OKBtn`;
+mapkey menu-modtree-remexcl @MAPKEY_LABELModel Tree Remove Excluded;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `FilterPb`;~ Activate `mdl_filter` `exclud_btn`0 ;\
+mapkey(continued) ~ Activate `mdl_filter` `ok_btn`;
+mapkey menu-modtree-remname @MAPKEY_LABELModel Tree Remove Name;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ColumbPb`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Select `column` `CurList`1  `item00`;~ Activate `column` `RmvBtn`;\
+mapkey(continued) ~ Activate `column` `OKBtn`;
+mapkey menu-modtree-remnum @MAPKEY_LABELModel Tree Remove Number;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ColumbPb`;~ Select `column` `CurList`0 ;\
+mapkey(continued) ~ Select `column` `CurList`1  `item00`;~ Activate `column` `RmvBtn`;\
+mapkey(continued) ~ Activate `column` `OKBtn`;
+mapkey menu-modtree-remsupp @MAPKEY_LABELModel Tree Remove Suppressed;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `FilterPb`;~ Activate `mdl_filter` `supres_btn`0 ;\
+mapkey(continued) ~ Activate `mdl_filter` `ok_btn`;
+mapkey menu-modtreesettings @MAPKEY_LABELOpen Model Tree Settings;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.SettingsCB`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LoadCfgPb`;\
+mapkey(continued) ~ Select `file_open` `Ph_list.Filelist`1  `tree.cfg`;\
+mapkey(continued) ~ Activate `file_open` `Open`;
+
+mapkey menu-c+ @MAPKEY_LABELCurve Layer On;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:5_ALL_CRVS`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:5_ALL_CRVS`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerBlank`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.OrientationCascadeBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.OrientationCascadeBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.HideCascadeBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.HideCascadeBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+mapkey menu-c- @MAPKEY_LABELCurve Layer Off;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:5_ALL_CRVS`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:5_ALL_CRVS`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerShow`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+mapkey menu-s+ @MAPKEY_LABELSurface Layer On;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:6_ALL_SRFS`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:6_ALL_SRFS`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerShow`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+mapkey menu-s- @MAPKEY_LABELSurface Layer Off;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:6_ALL_SRFS`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:6_ALL_SRFS`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerBlank`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+
+mapkey nc @MAPKEY_NAME MAPKEY TO CREATE STANDARD NOTES;\
+mapkey(continued) @MAPKEY_LABEL CREATE_NOTES;#SET UP;#NOTES;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Note0_DESIGN_INTENT`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `DESIGN INTENT: ;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Note1_APPL_SPECS`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `1. APPLICABLE SPECS/STANDARDS:\\n \
+mapkey(continued) a. ASME Y14.5 1994\\n b. ASME Y14.1\\n c. MIL-STD-100`;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Note2_MATERIAL`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `2. MATERIAL: `;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;~ Update `note_3d` `inp_name` `Note3_FINISH`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `3. DIMENSIONAL LIMITS \\n APPLY \
+mapkey(continued) AFTER-BEFORE PLATING-COATING-FINAL\\n PROTECTIVE FINISH.\\n` ;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Parameter_Note`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` ` `;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Proprietary_Note`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` ` `;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;#NEW;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;\
+mapkey(continued) ~ Update `note_3d` `inp_name` `Distribution_Note`;\
+mapkey(continued) ~ FocusOut `note_3d` `inp_name`;~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` ` `;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_ok`;\
+mapkey(continued) ~ Activate `note_3d` `psh_ok`;#DONE/RETURN;#DONE;%fin;
+mapkey fin @MAPKEY_NAMEFill in notes with Default values;\
+mapkey(continued) @MAPKEY_LABEL FILL_IN_NOTES;#SET UP;#NOTES;#MODIFY;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `Distribution_Note::T68::()::0`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;\
+mapkey(continued) ~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `*** DISTRIBUTION_NOTE *** EDIT AS \
+mapkey(continued) APPROPRIATE ***`;~ FocusOut `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Activate `note_3d` `psh_ok`;#MODIFY;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `Proprietary_Note::T68::()::28`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;\
+mapkey(continued) ~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `*** PROPRIETARY_NOTE *** EDIT AS \
+mapkey(continued) APPROPRIATE ***`;~ FocusOut `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Activate `note_3d` `psh_ok`;#MODIFY;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `Parameter_Note::T68::()::27`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;\
+mapkey(continued) ~ FocusIn `note_3d` `sym_area_note_text`;\
+mapkey(continued) ~ Update `note_3d` `sym_area_note_text` `{0:&AGENCY}{1: \
+mapkey(continued) }{2:&DESIGN_ACTIVITY}\n{3:  }\n{4:CAGE CODE: }{5:&CAGE_CODE}{6: }{7:P/N: \
+mapkey(continued) }{8:&PART_NUMBER}\n{9:&NOMENCLATURE}\n{10:  }\n{11:&Distribution_Note}`;\
+mapkey(continued) ~ FocusOut `note_3d` `sym_area_note_text`;~ Activate `note_3d` `psh_place`;\
+mapkey(continued) #NO LEADER;#STANDARD;#DONE;@PAUSE_FOR_SCREEN_PICK;\
+mapkey(continued) ~ FocusIn `note_3d` `inp_name`;~ FocusOut `note_3d` `inp_name`;\
+mapkey(continued) ~ Activate `note_3d` `psh_ok`;#DONE/RETURN;#DONE;
+mapkey rn @MAPKEY NAME Retrieve notes and place on drawing;\
+mapkey(continued) @MAPKEY_LABEL RET_NOTES;#CREATE;#NOTE;;#MAKE NOTE;@PAUSE_FOR_SCREEN_PICK;\
+mapkey(continued) NOTES;` `;&Note1_APPL_SPECS;` `;&Note2_MATERIAL;` `;&Note3_FINISH;` `;&NOTE4;\
+mapkey(continued) ` `;&NOTE5;` `;&NOTE6;` `;&NOTE7;` `;&NOTE8;` `;&NOTE9&NOTE10;` `;&NOTE11;\
+mapkey(continued) ` `;&NOTE12;` `;&NOTE13;` `;&NOTE14;` `;&NOTE15&NOTE16;` `;&NOTE17;` `;\
+mapkey(continued) &NOTE18;` `;&NOTE19;` `;&NOTE20;` `;&NOTE21&NOTE22;` `;&NOTE23;` `;&NOTE24;\
+mapkey(continued) ` `;&NOTE25;;#MAKE NOTE;@PAUSE_FOR_SCREEN_PICK;` `;&DISTRIBUTION_NOTE;;\
+mapkey(continued) #DONE/RETURN;#DONE/RETURN;
+mapkey rl @MAPKEY_NAME Add relations;@MAPKEY_LABEL RELATIONS;#RELATIONS;#ADD;\
+mapkey(continued) /* RELATIONS WHICH ARE A PART OF DIGI START PART;/* MODIFIED 8 Jun 2002;/*;\
+mapkey(continued) /*  RELATION TO SET DRAWING_NUMBER = PART_NUMBER;/*;\
+mapkey(continued) DRAWING_NUMBER=PART_NUMBER;/*;UNIT_WEIGHT=MP_MASS("");;#DONE SEL;#DONE;
+mapkey sq @MAPKEY_NAMEShadeQuality;@MAPKEY_LABELsq;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1 `View`;~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_mdldisp`;\
+mapkey(continued) ~ Select `modeldisplay` `ModDsply_Tab`1 `ModDsply_Layout_Shade`;
+mapkey sb @MAPKEY_NAMEBoundary Surface Blend;@MAPKEY_LABELsb;%sn;#ADVANCED;\
+mapkey(continued) #DONE;#BOUNDARIES;#DONE;#DONE;
+mapkey sf @MAPKEY_NAMESurf Flat ;@MAPKEY_LABELsf;%sn;#FLAT;#DONE;
+mapkey sc @MAPKEY_NAMESet SpinCenter;@MAPKEY_LABELsc;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1 `View`;~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_panzoom`;\
+mapkey(continued) ~ Open `orient` `SetupOptions`;~ Close `orient` `SetupOptions`;\
+mapkey(continued) ~ Select `orient` `SetupOptions`1 `setup`;\
+mapkey(continued) ~ Activate `orient` `spincentPH.SpinCenterSelPB`;#ON SURFACE;
+mapkey rd @MAPKEY_NAMERedefine;@MAPKEY_LABELrd;#FEATURE;#REDEFINE;
+mapkey md @MAPKEY_NAMEmeasure distance by csys;@MAPKEY_LABELmeasure distance;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `Analysis`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Analysis.psh_analysis_measure`;\
+mapkey(continued) ~ Open `measure` `MsrTypeOptions`;~ Close `measure` `MsrTypeOptions`;\
+mapkey(continued) ~ Select `measure` `MsrTypeOptions`1  `Distance`;\
+mapkey(continued) ~ Open `measure` `DistProjRefOptions`;~ Close `measure` `DistProjRefOptions`;\
+mapkey(continued) ~ Select `measure` `DistProjRefOptions`1  `Csys`;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `CS0::T25::()::0`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;#CARTESIAN;\
+mapkey(continued) ~ Activate `measure` `DistFromSelect`;#QUERY SEL;
+mapkey ms ~ Select `main_dlg_cur` `MenuBar1`1  `Analysis`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `Analysis.psh_analysis_measure`;\
+mapkey(continued) ~ Open `measure` `DistFromOptions`;~ Close `measure` `DistFromOptions`;\
+mapkey(continued) ~ Select `measure` `DistFromOptions`1  `Surface`;\
+mapkey(continued) ~ Open `measure` `DistToOptions`;~ Close `measure` `DistToOptions`;\
+mapkey(continued) ~ Select `measure` `DistToOptions`1  `Surface`;\
+mapkey(continued) ~ Open `measure` `DistProjRefOptions`;~ Close `measure` `DistProjRefOptions`;\
+mapkey(continued) ~ Select `measure` `DistProjRefOptions`1  `Csys`;#SEL BY MENU;\
+mapkey(continued) ~ Select `selspecdlg0` `NameList`1  `ASM_DEF_CSYS::T25::()::0`;\
+mapkey(continued) ~ Activate `selspecdlg0` `SelectButton`;#CARTESIAN;\
+mapkey(continued) ~ Activate `measure` `DistFromSelect`;~ Activate `rmb_popup` `Query Sel`;
+mapkey menu-c+ @MAPKEY_LABELCurve Layer On;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:5_ALL_CRVS`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:5_ALL_CRVS`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerBlank`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.OrientationCascadeBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.OrientationCascadeBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `View.HideCascadeBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `View.HideCascadeBtn`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+mapkey menu-c- @MAPKEY_LABELCurve Layer Off;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:5_ALL_CRVS`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:5_ALL_CRVS`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerShow`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+mapkey menu-s+ @MAPKEY_LABELSurface Layer On;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:6_ALL_SRFS`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:6_ALL_SRFS`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerShow`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+mapkey menu-s- @MAPKEY_LABELSurface Layer Off;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree`1  `node0:6_ALL_SRFS`;\
+mapkey(continued) ~ RButtonArm `main_dlg_cur` `PHTLeft.PHLayerUI.AssyTree` `node0:6_ALL_SRFS`;\
+mapkey(continued) ~ PopupOver `main_dlg_cur` `LayerActionMenu`1  `PHTLeft.PHLayerUI.AssyTree`;\
+mapkey(continued) ~ Open `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Close `main_dlg_cur` `LayerActionMenu`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `ActionMenuLayerBlank`;\
+mapkey(continued) ~ Select `main_dlg_cur` `MenuBar1`1  `View`;\
+mapkey(continued) ~ Close `main_dlg_cur` `MenuBar1`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `View.psh_view_repaint`;
+mapkey dl ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerNew_PushBtn`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_A`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_AL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_ALL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_ALL_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_ALL_P`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_ALL_PL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_ALL_PLA`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_ALL_PLAN`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_ALL_PLANE`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_ALL_PLANES`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerNameInput` `1_ALL_PLANES`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerIdInput` `1`;\
+mapkey(continued) ~ Activate `newlayerprops` `OkBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerNew_PushBtn`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_D`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_DE`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_DEF`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_DEF_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_DEF_P`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_DEF_PL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_DEF_PLA`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_DEF_PLAN`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_DEF_PLANE`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `1_DEF_PLANES`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerNameInput` `1_DEF_PLANES`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerIdInput` `2`;\
+mapkey(continued) ~ Activate `newlayerprops` `OkBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerNew_PushBtn`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `2`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `2_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `2_A`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `2_AL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `2_ALL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `2_ALL_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `2_ALL_C`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `2_ALL_CS`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `2_ALL_CSY`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `2_ALL_CSYS`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerNameInput` `2_ALL_CSYS`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerIdInput` `3`;\
+mapkey(continued) ~ Activate `newlayerprops` `OkBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerNew_PushBtn`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `3`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `3_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `3_A`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `3_AL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `3_ALL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `3_ALL_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `3_ALL_A`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `3_ALL_AX`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `3_ALL_AXE`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `3_ALL_AXES`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerNameInput` `3_ALL_AXES`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerIdInput` `4`;\
+mapkey(continued) ~ Activate `newlayerprops` `OkBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerNew_PushBtn`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `4`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `4_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `4_A`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `4_AL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `4_ALL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `4_ALL_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `4_ALL_P`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `4_ALL_PN`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `4_ALL_PNT`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `4_ALL_PNTS`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerNameInput` `4_ALL_PNTS`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerIdInput` `5`;\
+mapkey(continued) ~ Activate `newlayerprops` `OkBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerNew_PushBtn`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_A`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_AL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_ALL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_ALL_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_ALL_C`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_ALL_CR`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_ALL_CRV`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_ALL_CRVS`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerNameInput` `5_ALL_CRVS`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerIdInput` `6`;\
+mapkey(continued) ~ Activate `newlayerprops` `OkBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerNew_PushBtn`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_C`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_CR`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_CRV`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_CRVS`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_CRVS_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_CRVS_F`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_CRVS_FI`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `5_CRVS_FIT`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerNameInput` `5_CRVS_FIT`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerIdInput` `7`;\
+mapkey(continued) ~ Activate `newlayerprops` `OkBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerNew_PushBtn`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `6`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `6_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `6_A`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `6_AL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `6_ALL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `6_ALL_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `6_ALL_S`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `6_ALL_SR`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `6_ALL_SRF`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `6_ALL_SRFS`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerNameInput` `6_ALL_SRFS`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerIdInput` `8`;\
+mapkey(continued) ~ Activate `newlayerprops` `OkBtn`;\
+mapkey(continued) ~ Select `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Close `main_dlg_cur` `PHTLeft.PHLayerUI.LayerEditCasc`;\
+mapkey(continued) ~ Activate `main_dlg_cur` `LayerNew_PushBtn`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `7`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `7_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `7_A`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `7_AL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `7_ALL`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `7_ALL_`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `7_ALL_F`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `7_ALL_FE`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `7_ALL_FEA`;\
+mapkey(continued) ~ Input `newlayerprops` `LayerNameInput` `7_ALL_FEAT`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerNameInput` `7_ALL_FEAT`;\
+mapkey(continued) ~ Update `newlayerprops` `LayerIdInput` `9`;\
+mapkey(continued) ~ Activate `newlayerprops` `OkBtn`;
+
+
+
+

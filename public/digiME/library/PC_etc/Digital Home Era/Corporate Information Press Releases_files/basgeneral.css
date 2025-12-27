@@ -1,0 +1,75 @@
+H1 {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #000000; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+H1.reversed {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #ffffff; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+H1.blue {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #003366; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+H1.red {
+	FONT-WEIGHT: bold; FONT-SIZE: medium; COLOR: #ff0000; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+H2 {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #000000; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+H2.reversed {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #ffffff; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+H2.blue {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #003366; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+H2.red {
+	FONT-WEIGHT: bold; FONT-SIZE: small; COLOR: #ff0000; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+P {
+	FONT-WEIGHT: normal; FONT-SIZE: smaller; COLOR: #000000; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+P.reversed {
+	FONT-WEIGHT: normal; FONT-SIZE: smaller; COLOR: #ffffff; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+P.blue {
+	FONT-WEIGHT: normal; FONT-SIZE: smaller; COLOR: #003366; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+P.red {
+	FONT-WEIGHT: normal; FONT-SIZE: smaller; COLOR: #ff0000; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+P.footnote {
+	FONT-WEIGHT: normal; FONT-SIZE: 60%; COLOR: #000000; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+LI.general {
+	FONT-WEIGHT: normal; FONT-SIZE: smaller; COLOR: #000000; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+TD.general {
+	FONT-WEIGHT: normal; FONT-SIZE: smaller; COLOR: #000000; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+TD.blue {
+	FONT-WEIGHT: normal; FONT-SIZE: smaller; COLOR: #003366; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+TD.red {
+	FONT-WEIGHT: normal; FONT-SIZE: smaller; COLOR: #ff0000; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+TD.reversed {
+	FONT-WEIGHT: normal; FONT-SIZE: smaller; COLOR: #ffffff; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+TD.footnote {
+	FONT-WEIGHT: normal; FONT-SIZE: 60%; COLOR: #000000; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+TD.whitefootnote {
+	FONT-WEIGHT: normal; FONT-SIZE: 60%; COLOR: #ffffff; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+TH.reversed {
+	FONT-WEIGHT: bold; FONT-SIZE: smaller; COLOR: #ffffff; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+TH.general {
+	FONT-WEIGHT: bold; FONT-SIZE: smaller; COLOR: #000000; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+TH.blue {
+	FONT-WEIGHT: bold; FONT-SIZE: smaller; COLOR: #003366; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+TH.red {
+	FONT-WEIGHT: bold; FONT-SIZE: smaller; COLOR: #ff0000; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+A.whitelink {
+	FONT-WEIGHT: normal; FONT-SIZE: smaller; COLOR: #ffffff; FONT-STYLE: normal; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: underline
+}

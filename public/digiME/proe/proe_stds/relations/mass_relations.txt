@@ -1,0 +1,9 @@
+/* Volume is defined by the equation below.
+/* Because the part units are in MM, the
+/* part volume is computed in cubic millimeters.
+/* We want volume in cubic centimeters,
+/* which is the standard, so we convert it below.
+VOLUME=MP_VOLUME("")/1000
+
+/* Weight is defined by the equation below.
+WEIGHT=MP_MASS("")

@@ -1,0 +1,19 @@
+
+TABLE VII
+
+SPECIFICATIONS FOR STEELS USED IN THIXOMOLDING(r) TOOLING APPLICATIONS
+
+	Grade Designations*					Nominal Chemical Composition (w/%)		
+
+SAE/AISI	UNS	       JIS	      DIN			C	Mn	Si	Cr	Ni	       Mo	V
+
+    H-11         T20811	      SKD6	X38CRMOV51	          0.38       0.35    1.00     5.10     0.30max      1.30	0.45
+
+    H-13         T20813	     SKD61	X40CRMOV51	          0.38       0.35    1.00     5.10     0.30max      1.45	1.00
+
+    P-20          T51620	          --	  35CRMO4		          0.36       0.80    0.50     1.20          --             0.45	  --
+
+    4340          G43400	   SNCM439	  40NICRMO6		          0.40       0.70    0.25     0.80      1.80            0.25	  --
+
+
+*Specifications cited are USA, International, Japan and Germany, respectively.  All steels contain 0.35% max Cu, 0.035% max P and 0.04% max S.

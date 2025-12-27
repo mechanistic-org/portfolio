@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>\\digiME// - General Modeling Guide</title>
+<link rel="stylesheet" href="../images/emx_nav_left.css" type="text/css">
+<style>
+/* DigiME Lite Port Overrides */
+body { background-image: url(../images/bg_grad_180.jpg); }
+.digime-tree { list-style: none; padding: 0; margin: 0; }
+.digime-tree li { margin-bottom: 4px; }
+.digime-tree a { text-decoration: none; color: #003366; }
+.digime-tree a:hover { text-decoration: underline; }
+.normalbox { margin-bottom: 15px; background: #eee; padding: 5px; border: 1px solid #ccc; }
+</style>
+</head>
+<body>
+<div id="masthead">
+<h1 id="siteName">digiME (Lite Port)</h1>
+<div id="globalNav">
+<div id="globalLink">
+<a href="../index.html">digiME</a>
+<a href="../dept/dept.html">Department</a>
+<a href="../user_auth_php_start/login.html">Projects</a>
+<a href="../library/library.html">Library</a>
+<a href="../proe/proe.html">Pro/ENGINEER</a>
+<a href="../proi/proi.html">Pro/INTRALINK</a>
+<a href="../links/links.html">Links</a>
+</div>
+</div>
+</div>
+
+<div id="pagecell1">
+<div id="breadCrumb">
+<div> <a href="../index.html" class="breadCrumb1">Home&nbsp;</a> | <a href="../proe/./proe.html" class="breadCrumb5">ProENGINEER&nbsp;</a> | <a href="../proe/./proe.html" class="breadCrumb5">How-to Guides</a>  | <a href="change_license_server.html" class="breadCrumb5">Change License Server</a></div>
+</div>
+
+<div id="pageName">
+<h2><title>\\digiME// - General Modeling Guide</title></h2>
+</div>
+
+<div id="pageNav">
+
+  <div id="pageNav">
+    <div class="normalbox">
+    <!--  <div class="normal">Menu1</div> -->
+      <ul class="digime-tree"><li style="padding-left: 0px"><a href="">Change License Server</a></li>
+<li style="padding-left: 20px"><a href="change_license_server.html\#proe_setup">ProE PTCSetup</a></li>
+<li style="padding-left: 40px"><a href="">click Next></a></li>
+<li style="padding-left: 40px"><a href="">click Add</a></li>
+<li style="padding-left: 40px"><a href="">Hostname</a></li>
+<li style="padding-left: 40px"><a href="">click OK</a></li>
+<li style="padding-left: 40px"><a href="">delete old server</a></li>
+<li style="padding-left: 40px"><a href="">configure shortcut</a></li>
+<li style="padding-left: 40px"><a href="">click Next></a></li>
+<li style="padding-left: 40px"><a href="">click Next></a></li>
+<li style="padding-left: 40px"><a href="">click Configure</a></li>
+<li style="padding-left: 40px"><a href="">Exit</a></li>
+<li style="padding-left: 20px"><a href="change_license_server.html\#proi_setup">ProI PTCSetup</a></li>
+<li style="padding-left: 40px"><a href="">click Next></a></li>
+<li style="padding-left: 40px"><a href="">click Next></a></li>
+<li style="padding-left: 40px"><a href="">Hostname</a></li>
+<li style="padding-left: 40px"><a href="">click Next></a></li>
+<li style="padding-left: 40px"><a href="">configure shortcut</a></li>
+<li style="padding-left: 40px"><a href="">click Next></a></li>
+<li style="padding-left: 40px"><a href="">click Next></a></li>
+<li style="padding-left: 40px"><a href="">click Next></a></li>
+<li style="padding-left: 40px"><a href="">click Configure</a></li>
+<li style="padding-left: 40px"><a href="">Exit</a></li>
+</ul>
+
+    </div>    <!-- <div id="advert"> 
+      <img src="" alt="" width="107" height="66" /> Advertisement copy goes here.
+      Advertisement copy goes here.
+    </div> -->
+  </div>
+  
+</div>
+
+<div id="content">
+<div id="content">
+  <!--  <div class="feature"> <img alt="" width="280" height="200">
+        <h3>Feature Title </h3>
+        <p> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec molestie. Sed aliquam sem ut arcu. Phasellus sollicitudin. Vestibulum condimentum facilisis nulla. In hac habitasse platea dictumst. Nulla nonummy. Cras quis libero. Cras venenatis. Aliquam posuere lobortis pede. Nullam fringilla urna id leo. Praesent aliquet pretium erat. Praesent non odio. Pellentesque a magna a mauris vulputate lacinia. Aenean viverra. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Aliquam lacus. Mauris magna eros, semper a, tempor et, rutrum et, tortor. </p>
+    </div>  -->
+   	<div class="story">
+	        <h4><a name="top"></a>Change License Server </h4>
+
+
+
+  
+            <p>This document is intended to provide instructions for changing from one license server to another and deleting the original.</p>
+            <p> This is a very simple procedure and can easily be accomplished by individual engineers. Given an existing installation, there is no need to use the original installation CDs, as the setup is installed as part of the original installation. </p>
+            <hr>
+            <h3><a name="proe_setup" id="proe_setup"><img src="../images/ptc_logo_32x32.jpg" width="32" height="32" align="absmiddle"> 1. Configure ProENGINEER Batch File </a></h3>
+            <p>navigate to the \bin folder in the &lt;proe loadpoint&gt; installation directory, which should be something like <strong>D:\PTC\wildfire2_M181\bin, </strong>as shown below:</p>
+      <p><strong><img src="../proe/change_license_server/proe-bin-dir.jpg" width="579" height="772" border="0" class="right"></strong></p>
+      <p><br>
+        <br>
+        <br>
+      Double-click the ptcsetup.bat file as shown. </p>
+      <div class="clearit"></div>
+    <p><img src="../proe/change_license_server/screen_1.jpg" width="553" height="563" class="left"><br>
+      <br>
+      <br>
+      <br>
+      Now you will see the main screen of the License Manager Setup Tool.</p>
+    <p>Since you configuring an existing installation, no changes are necessary at this level.</p>
+    <p>Click Next&gt;.</p>
+    <div class="clearit"></div>
+	<p><img src="../proe/change_license_server/screen_2.jpg" width="553" height="563" border="0" class="right"><br>
+	  <br>
+	  <br>
+	  <br>
+	  The next screen shows the current license server.</p>
+	<p>Click Add. </p>
+	<div class="clearit"></div>
+    <p><img src="../proe/change_license_server/click_add_3.jpg" width="555" height="565" class="left"><br>
+      <br>
+      <br>
+      <br>
+      Type &quot;brutus&quot; in the Hostname field.</p>
+    <p>Click OK.  </p>
+    <div class="clearit"></div>
+    <p><img src="../proe/change_license_server/delete_4.jpg" width="555" height="565" class="right"><br>
+      <br>
+      <br>
+      Now that you have added 7788@brutus, you need to delete the old server, 7788@enorris-xp. </p>
+    <p>Highlight 7788@enorris-xp as shown and click Delete. </p>
+    <p>Then click Next&gt;. </p>
+    <div class="clearit"></div>
+	 <p><img src="../proe/change_license_server/click_next_5.jpg" width="555" height="565" class="left"><br>
+       <br>
+       <br>
+       <br>
+      Configure the Startup Directory.</p>
+     <p>Click Next&gt;.  </p>
+    <div class="clearit"></div>
+    <p><img src="../proe/change_license_server/clcik_next_6.jpg" width="555" height="565" class="right"><br>
+      <br>
+      <br>
+      Click Next&gt;.</p>
+    <div class="clearit"></div>
+	    <div class="clearit"></div>
+	 <p><img src="../proe/change_license_server/clcik_configure_7.jpg" width="555" height="565" class="left"><br>
+       <br>
+       <br>
+       <br>
+      Click Configure.  </p>
+     <div class="clearit"></div>
+    <p><img src="../proe/change_license_server/complete_8.jpg" width="553" height="593" class="right"><br>
+      <br>
+      <br>
+      Once the status bar is all green, and the Installation is Complete, it is safe to exit the Setup Tool.</p>
+    <p>Click Exit. </p>
+    <div class="clearit"></div>
+	
+	<p>&nbsp;</p>
+	<h3><a name="proi_setup" id="proi_setup"><img src="../images/ptc_logo_32x32.jpg" width="32" height="32" align="absmiddle"> 2. Configure ProINTRALINK Client Batch File </a></h3>
+	<p>navigate to the \bin folder in the &lt;prointralink client loadpoint&gt; installation directory, which should be something like <strong>D:\PTC\proiclient3.4\bin, </strong>as shown below:</p>
+	<p><strong><img src="../proe/change_license_server/client_bin_dir.jpg" width="696" height="411" border="0" class="right"></strong></p>
+	<p><br>
+        <br>
+        <br>
+  Double-click the ptcsetup.bat file as shown. </p>
+	<div class="clearit"></div>
+	<p><img src="../proe/change_license_server/client_screen1.jpg" width="553" height="563" class="left"><br>
+        <br>
+        <br>
+        <br>
+  Now you will see the main screen of the License Manager Setup Tool.</p>
+	<p>Since you configuring an existing installation, no changes are necessary at this level.</p>
+	<p>Click Next&gt;.</p>
+	<div class="clearit"></div>
+	<p><img src="../proe/change_license_server/client_screen2.jpg" width="553" height="563" border="0" class="right"><br>
+        <br>
+        <br>
+        <br>
+  The next screen defines the Data Server Hostname.</p>
+	<p>Enter &quot;enorris-xp&quot;</p>
+	<p>Make sure Single-Site is selected. </p>
+	<p>Click Next&gt;. </p>
+	<div class="clearit"></div>
+	<p><img src="../proe/change_license_server/client_screen3.jpg" width="553" height="563" class="left"><br>
+        <br>
+        <br>
+        <br>
+  Make sure 7788@brutus is listed as the only License Server. If not, click Add and type brutus in the Hostname field, and click OK. </p>
+	<p>When the FLEXlm License Servers dialog box lookslike the image on the left, click Next&gt;. </p>
+	<div class="clearit"></div>
+	<p><img src="../proe/change_license_server/client_screen4.jpg" width="553" height="563" class="right"><br>
+        <br>
+        <br>
+  Configure the shortcut parameters and Startup Directory. </p>
+	<p>Then click Next&gt;. </p>
+	<div class="clearit"></div>
+	<p><img src="../proe/change_license_server/client_screen5.jpg" width="553" height="563" class="left"><br>
+        <br>
+        <br>
+        <br>
+      Click Next&gt;. </p>
+	<div class="clearit"></div>
+	<p><img src="../proe/change_license_server/client_screen6.jpg" width="553" height="563" class="right"><br>
+        <br>
+        <br>
+  On the next screen click Edit and make sure the Select Licenses dialog box looks like the image on the right. If not, then select the appropriate Available License from the left-hand field and click the blue arrow to move itover to the right, under Licenses to Run.</p>
+	<p>Click Next&gt;.</p>
+	<div class="clearit"></div>
+	<div class="clearit"></div>
+	<p><img src="../proe/change_license_server/client_screen7.jpg" width="553" height="563" class="left"><br>
+        <br>
+        <br>
+        <br>
+  If desired, define the location of the ProENGINEER installation directory.</p>
+	<p>Click Configure. </p>
+	<div class="clearit"></div>
+	<p><img src="../proe/change_license_server/client_complete8.jpg" width="553" height="593" class="right"><br>
+        <br>
+        <br>
+  Once the status bar is all green, and the Installation is Complete, it is safe to exit the Setup Tool.</p>
+	<p>Click Exit. </p>
+	<div class="clearit"></div>
+	<p>&nbsp;</p>
+	<p>finished!</p>
+	<p>&nbsp;</p>
+	<p>&nbsp; </p>
+   	</div>
+  </div>
+</div>
+
+<div id="siteInfo">
+&copy; 2006 Digidesign Mechanical Engineering | <a href="/">Return Home</a>
+</div>
+</div>
+</body>
+</html>

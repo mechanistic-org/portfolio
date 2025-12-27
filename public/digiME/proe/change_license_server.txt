@@ -1,0 +1,23 @@
+.|Change License Server|||||0
+..|ProE PTCSetup|change_license_server.php\#proe_setup||||0
+...|click Next>||
+...|click Add||
+...|Hostname||
+...|click OK||
+...|delete old server||
+...|configure shortcut||
+...|click Next>||
+...|click Next>||
+...|click Configure||
+...|Exit||
+..|ProI PTCSetup|change_license_server.php\#proi_setup||||0
+...|click Next>||
+...|click Next>||
+...|Hostname||
+...|click Next>||
+...|configure shortcut||
+...|click Next>||
+...|click Next>||
+...|click Next>||
+...|click Configure||
+...|Exit||
