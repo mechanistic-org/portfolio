@@ -43,7 +43,16 @@ const {
 ---
 
 <!doctype html>
-<html lang="en" class="dark" transition:animate="fade">
+<html
+	lang="en"
+	class:list={[
+		"dark",
+		{
+			"overflow-hidden": overflowHidden,
+		},
+	]}
+	transition:animate="fade"
+>
 	<BaseHead
 		type={type}
 		title={title}
@@ -71,7 +80,7 @@ const {
 					<slot />
 				</main>
 			</div>
-			<Footer />
+			{!overflowHidden && <Footer />}
 		</div>
 		<CommandMenu client:only="react" />
 		<BootSequence client:only="react" />
