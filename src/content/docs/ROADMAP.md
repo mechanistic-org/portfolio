@@ -43,6 +43,9 @@ sidebar:
     *   **Description:** An interactive 3D navigator that maps site hierarchy into a celestial coordinate system. Features hierarchical bloom, macroscopic orbital physics, and recursive scaling for project-level deep dives.
 
 ## 📜 Change Log (Recent)
+*   **[Asset Pipeline]** Fixed C24 Hero Image missing from Project Card.
+    *   *Root Cause:* Source file `hero.png` failed regex validation in `process_images.py`.
+    *   *Resolution:* Renamed to `c24-hero-01.png` to satisfy taxonomy; verified generation of optimized slices.
 *   **[v-Next] - Operation Time Capsule & C24 Refinement**
     *   **[Feature] Time Capsule Engine:** Implemented `TimeCapsule.tsx`, a "Netscape/IE6" retro-browser modal triggered from the gallery to display legacy intranet evidence.
     *   **[Feature] Flux Capacitor:** Created `RetroLogoAnimator.tsx` to reconstruct legacy 2002 branding sequences using React/Framer Motion with intentional "Holographic Instability".

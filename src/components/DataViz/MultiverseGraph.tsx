@@ -291,6 +291,7 @@ const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
                 // ENTER
                 // 1. Fade in Groups
                 groupLayer.transition().duration(2000).attr("opacity", 1);
+                nodeLayer.transition().duration(2000).attr("opacity", 1); // Fix: fade nodes back in
 
                 // 2. Start Loops
                 loop(); // Start physical time
@@ -301,17 +302,15 @@ const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
             } else {
                 // EXIT
                 cancelAnimationFrame(animationFrameId);
+                // Fade out BOTH layers
                 groupLayer.transition().duration(500).attr("opacity", 0);
+                nodeLayer.transition().duration(500).attr("opacity", 0); // Fix: fade out nodes too
 
-                // Reset positions for next time
-                nodes.forEach((d: any) => {
-                    d.x = width / 2;
-                    d.y = height + 500;
-                    d.vx = 0; d.vy = 0;
-                });
-                nodeCircles.attr("transform", (d: any) => `translate(${d.x},${d.y})`);
+                // Reset positions for next time - but don't push them down!
+                // Just stop them. When we re-enter, alpha(1).restart() will explode them from center or new random pos.
+                nodeSim.stop();
             }
-        }, { threshold: 0.2 });
+        }, { threshold: 0.1 }); // Lower threshold to trigger exit sooner
 
         if (wrapperRef.current) observer.observe(wrapperRef.current);
 

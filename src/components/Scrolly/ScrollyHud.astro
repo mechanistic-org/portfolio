@@ -35,12 +35,9 @@ const { steps, showLabels = false } = Astro.props;
     function initScrollyHud() {
         const navContainer = document.querySelector('.scrolly-nav-container');
         const dots = document.querySelectorAll('.nav-dot');
-        // Try to find the specific container, or default to null (implying window/body scroll)
         const container = document.getElementById('hyperspace-container');
-        const isWindowScroll = !container; 
-        const scrollRoot = container || null; // For IntersectionObserver root (null = viewport)
-
-        // 1. INTERSECTION OBSERVER (Active State)
+        
+        // 1. INTERSECTION OBSERVER
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -55,25 +52,22 @@ const { steps, showLabels = false } = Astro.props;
                 }
             });
         }, { 
-            root: scrollRoot, 
-            rootMargin: '-45% 0px -45% 0px', // Very tight focus line in center
+            root: null, // Use viewport as root (works for full-screen scroll containers too)
+            rootMargin: '-40% 0px -40% 0px', 
             threshold: 0 
         });
 
         const sections = document.querySelectorAll('[data-step]');
+        
         if (sections.length === 0) {
-             // Retry if content hasn't loaded yet (rare race condition)
              setTimeout(initScrollyHud, 100);
              return;
         }
         sections.forEach(el => observer.observe(el));
 
-
-        // 2. CLICK HANDLING (Event Delegation)
-        // We attach to the parent to ensure we catch bubbling events
+        // 2. CLICK HANDLING
         if (navContainer) {
             navContainer.addEventListener('click', (e) => {
-                // Find closest anchor tag
                 const link = (e.target as HTMLElement).closest('.nav-dot');
                 if (!link) return; 
 
@@ -81,29 +75,12 @@ const { steps, showLabels = false } = Astro.props;
                 const targetId = link.getAttribute('data-target');
                 if (!targetId) return;
 
-                // Robust ID finding (Handles Homepage #realm-x and Project #trigger-x)
                 let targetEl = document.getElementById(targetId);
                 if (!targetEl) targetEl = document.getElementById(`trigger-${targetId}`);
-                if (!targetEl) targetEl = document.getElementById(`realm-${targetId}`);
+                if (!targetEl) targetEl = document.getElementById(`realm-${targetId}`); 
                 
                 if (targetEl) {
-                     // 🧮 Calculate Scroll Position
-                     let topPos = 0;
-                     
-                     if (container) {
-                        // Container Scroll
-                        topPos = targetEl.getBoundingClientRect().top - container.getBoundingClientRect().top + container.scrollTop;
-                        container.scrollTo({ top: topPos, behavior: 'smooth' });
-                     } else {
-                        // Window Scroll
-                        // getBoundingClientRect().top is relative to viewport. 
-                        // window.scrollY is current scroll.
-                        // So absolute top is rect.top + scrollY.
-                        // We want to center it, so minus half viewport? Or just scroll to top?
-                        // Usually HUD navigates to the start of the section.
-                        topPos = targetEl.getBoundingClientRect().top + window.scrollY;
-                        window.scrollTo({ top: topPos, behavior: 'smooth' });
-                     }
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         }

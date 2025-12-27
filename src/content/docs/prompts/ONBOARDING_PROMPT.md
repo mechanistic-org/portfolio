@@ -14,6 +14,7 @@ sidebar:
 > *   **Asset Hygiene:** **NEVER COPY** large assets into the `quantum` repo to fix 404s. Check the Symlink logic first. If the file is in `quantum-assets` but missing on localhost, it's a symlink issue, not a missing file. Trust the Air Gap.
 > *   **The Air Gap:** Remember that `src/content/projects` images referenced in MDX must exist in `public/assets/r2` locally. If you get 404s, you must run `python ingest_data.py` to bridge the gap from `R2_STAGING`.
 > *   **3D Debugging:** If a texture fails (Shiny Black or Whiteout), use the **"Grey Clay Test"** immediately. Export a clean grey mesh with NO textures (`debug_clay.glb`) to isolate Geometry vs. Texture corruption. **WebGL Context Awareness:** If R3F components conflict with legacy grids/scrolly-huds, verify the page is using the **OuroborosLayout** standard to isolate the Canvas context.
+> *   **The "Darkroom" (Asset Pipeline):** We use a strict Naming Convention Whitelist. If an image isn't named strictly (e.g., `slug-type-01.ext`), the build system will pretend it doesn't exist.
 >
 > **PROTOCOL: ASSET SOVEREIGNTY (THE QUANTUM LAWS):**
 > 1.  **Law of Continuity (Truth):** Existing assets (Historical Truth) must be preserved. A 404 on an existing project ID is a **failure of retrieval**, not an absence of existence. *Action:* If a historical asset matches a live URL but fails locally, debug the Symlink/Path first.

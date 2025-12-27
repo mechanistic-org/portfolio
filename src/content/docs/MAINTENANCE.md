@@ -557,6 +557,11 @@ See `docs/IMAGE_WORKFLOW.md` for the full SOP.
 
 ## Troubleshooting
 
+### Missing Images (Build Script Skips File)
+*   **Symptom:** Source file exists in `R2_MASTER` (e.g., `hero.png`), but `process_images.py` does not generate optimized assets in `R2_STAGING`.
+*   **Cause:** The build script uses a **Strict Whitelist (Regex)**. It ignores any file that does not match the `{slug}-{view_type}-{sequence}.{ext}` taxonomy (e.g., `c24-hero-01.png`). Simple names like `hero.png` or `temp.jpg` are treated as "Gravel" and silently skipped.
+*   **Fix:** Rename the source file to match the convention (e.g., rename `hero.png` -> `c24-hero-01.png`) and re-run the processor.
+
 ### Image Processing Errors
 *   **Symptom:** `AttributeError: 'Constant' object has no attribute 's'` during install.
 *   **Cause:** Python 3.14 compatibility issue with `pillow-avif-plugin`.

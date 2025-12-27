@@ -303,6 +303,7 @@ A hybrid workflow combining human art direction with machine precision.
 *   **Expanded Taxonomy:** Supports a broad range of technical view types (`iso`, `ortho`, `exploded`, `cutaway`, `schematic`) to support the "Hyper-Functional Brutalism" aesthetic.
 *   **Optimization:** `scripts/process_images.py` uses `Lanczos` resampling to generate `AVIF` (Primary) and `WebP` (Fallback) at standard breakpoints (`xl`, `lg`, `md`, `sm`).
 *   **Animation:** Stitches sequences into Animated WebP with **Variable Duration** (folder-based config) and **Letterboxing** (distortion prevention).
+*   **Naming Convention Enforcement:** The `process_images.py` script acts as a **Quality Gate**. Unlike `.gitignore` (which blacklists), this script uses a **Whitelist** approach. Files MUST match `^([\w-]+)-(hero|detail|...)-(\d{2})\.(ext)$`. This prevents unclassified assets from polluting the build.
 *   **Pass-Through:** Non-image assets (`.pdf`, `.glb`, `.mp4`) are copied directly to staging.
 
 
