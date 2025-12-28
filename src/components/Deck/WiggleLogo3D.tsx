@@ -1,22 +1,23 @@
-import React, { useRef } from 'react';
+import React, { useRef, Suspense } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF, Environment, Float, ContactShadows } from '@react-three/drei';
+import { useGLTF, Environment, Float, ContactShadows, PresentationControls } from '@react-three/drei';
 import * as THREE from 'three';
 
 function Model({ url }: { url: string }) {
     const { scene } = useGLTF(url);
     const ref = useRef<THREE.Group>(null);
 
-    // The "Wiggle" Animation
+    // The "Wiggle" Animation (Matched to Parallax Version)
     useFrame((state) => {
         if (!ref.current) return;
         const t = state.clock.getElapsedTime();
-        // Anisotropic "Breathing" rotation
+        // 1. Idle "Breathing" (Original)
         ref.current.rotation.y = Math.sin(t * 0.5) * 0.3;
         ref.current.rotation.x = Math.sin(t * 0.3) * 0.1;
     });
 
-    return <primitive object={scene} ref={ref} scale={2} />;
+    // Base Scale matched to WiggleLogoParallax (Starts at 9.0)
+    return <primitive object={scene} ref={ref} scale={9} />;
 }
 
 export default function WiggleLogo3D() {
@@ -30,14 +31,28 @@ export default function WiggleLogo3D() {
     // Placeholder URL until copy step is done: "/assets/models/EN_Logo_ForgedCarbon.glb"
 
     return (
-        <div className="w-full h-96">
+        <div className="w-full h-full">
             <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
                 <ambientLight intensity={0.5} />
                 <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
 
-                <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-                    <Model url="/assets/models/en_logo.glb" />
-                </Float>
+                <Suspense fallback={null}>
+                    <PresentationControls
+                        global={false} // Only work when hovering the canvas
+                        cursor={true}
+                        snap={true} // Elastic snap-back
+                        speed={2} // Interaction speed
+                        zoom={1} // Disable zoom
+                        rotation={[0, 0, 0]}
+                        polar={[-Math.PI / 4, Math.PI / 4]} // Vertical limits
+                        azimuth={[-Math.PI / 4, Math.PI / 4]} // Horizontal limits
+                        config={{ mass: 1, tension: 170, friction: 26 }} // Spring physics
+                    >
+                        <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
+                            <Model url="/assets/models/en_logo.glb" />
+                        </Float>
+                    </PresentationControls>
+                </Suspense>
 
                 <Environment preset="city" />
                 <ContactShadows position={[0, -2, 0]} opacity={0.5} scale={10} blur={2.5} far={4} />

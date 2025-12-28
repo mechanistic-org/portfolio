@@ -1,98 +1,40 @@
 ---
 import Layout from "@layouts/BaseLayout.astro";
-// Adjusted relative imports for depth 3
-import WiggleLogoParallax from "../../components/Deck/WiggleLogoParallax";
-import ProjectStrip from "@components/Projects/ProjectStrip";
-import MultiverseGraph from "@components/DataViz/MultiverseGraph";
+import HomeManifesto from "../../components/Home/HomeManifesto.astro";
 import HyperspaceHUD from "@components/Nav/HyperspaceHUD.astro";
 import ScrollyHud from "@components/Scrolly/ScrollyHud.astro";
-import DecryptionDossier from "../../components/DataViz/DecryptionDossier";
-import ResVizSwarm from "../../components/DataViz/ResVizSwarm";
 import WorkRealm from "../../components/Realms/WorkRealm";
-import ProjectTunnel from "../../components/Projects/ProjectTunnel";
-import SlideProjector from "../../components/Projects/SlideProjector";
-import SystemAssembly from "../../components/System/SystemAssembly";
-import ArchiveSankey from "../../components/DataViz/ArchiveSankey";
-import ConstellationEngine from "@components/Constellation/ConstellationEngine";
-import sitemapData from "../../data/sitemap.json";
-import DatasheetTable from "@components/About/DatasheetTable.astro";
-import workHistoryRaw from "@/data/work_history.json";
-import { getCollection } from "astro:content";
+import MultiverseGraph from "@components/DataViz/MultiverseGraph";
 import multiverseData from "../../data/timeline/multiverse.json";
-
-// Fetch Projects
-const allProjects = await getCollection(
-	"projects",
-	({ data }) => !data.draft && data.listed !== false,
-);
-const sortedProjects = allProjects.sort(
-	(a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime(),
-);
-
-// ABOUT / SPECS DATA
-interface Job {
-	company: string;
-	title: string;
-	start: string;
-	end: string;
-	color: string;
-	description: string;
-	is_consulting: boolean;
-	duration_years?: number;
-}
-
-const workHistory = workHistoryRaw as Job[];
-const hasHistory = Array.isArray(workHistory) && workHistory.length > 0;
-
-function getHash(str: string) {
-	let hash = 0;
-	for (let i = 0; i < str.length; i++) {
-		hash = (hash << 5) - hash + str.charCodeAt(i);
-		hash |= 0;
-	}
-	return Math.abs(hash).toString(16).substring(0, 7);
-}
 ---
 
-<Layout
-	title="Erik Norris | Senior Staff ME / Designer"
-	description="System Index"
-	hideNav={true}
-	overflowHidden={true}
->
+<Layout title="Erik Norris | Senior Staff ME / Designer" description="System Index" hideNav={true}>
 	<!-- The HUD is fixed and persistent -->
 	<HyperspaceHUD />
+	<script>
+		// Force scroll to top on load to ensure proper "Airlock" entry
+		if (history.scrollRestoration) {
+			history.scrollRestoration = "manual";
+		}
+		window.onload = function () {
+			window.scrollTo(0, 0);
+		};
+	</script>
 	<ScrollyHud
 		steps={[
+			// Manifesto uses internal IDs, but we track the 'Work' Realm
+			{ id: "realm-identity", label: "Identity" },
 			{ id: "realm-work", label: "Work" },
-			{ id: "realm-specs", label: "Specs" },
-			{ id: "realm-system", label: "System" },
-			{ id: "realm-archive", label: "Archive" },
+			{ id: "realm-specs", label: "About" },
 		]}
 	/>
 
-	<!-- SCROLL CONTAINER -->
-	<main id="hyperspace-container" class="h-screen w-full overflow-y-scroll bg-black text-white">
-		<!-- REALM I: IDENTITY (The Hook) -->
-		<section
-			id="realm-identity"
-			data-step="realm-identity"
-			class="relative flex h-screen w-full snap-start flex-col items-center justify-center overflow-hidden"
-		>
-			<!-- Full Screen Canvas Layer -->
-			<div class="absolute inset-0 z-0 h-full w-full">
-				<WiggleLogoParallax client:only="react" />
-			</div>
+	<!-- REALM I: MANIFESTO (The Airlock) -->
+	<!-- Removed nested main to prevent double scrollbar and snap issues -->
+	<div id="hyperspace-container" class="w-full text-white">
+		<HomeManifesto />
+	</div>
 
-			<!-- Text Layer (z-10) -->
-			<h1
-				class="animate-breathe-glow text-7xl font-medium text-white mix-blend-difference md:text-9xl"
-				style="font-family: 'Roboto Flex', sans-serif;"
-			>
-				E<span class="opacity-60">rik</span> N<span class="opacity-60">orris</span>
-			</h1>
-		</section>
-	</main>
 	<!-- REALM II: WORK (The Output) -->
 	<section
 		id="realm-work"
@@ -113,11 +55,19 @@ function getHash(str: string) {
 		</div>
 
 		{/* FOREGROUND: Floating Interface (Dossier) */}
+		{
+			/* HIDDEN PER USER REQUEST
 		<div class="absolute bottom-12 left-8 z-20">
 			<DecryptionDossier client:visible />
 		</div>
+		*/
+		}
 	</section>
-	<!-- REALM IV: SYSTEM (The Machine) -->
+
+	{/* SUSPENDED REALMS */}
+	{/* REALM IV: SYSTEM (The Machine) */}
+	{
+		/*
 	<section
 		id="realm-system"
 		data-step="realm-system"
@@ -125,7 +75,12 @@ function getHash(str: string) {
 	>
 		<div class="absolute inset-0 z-0"><SystemAssembly client:only="react" /></div>
 	</section>
-	<!-- REALM V: ARCHIVE (The Source) -->
+	*/
+	}
+
+	{/* REALM V: ARCHIVE (The Source) */}
+	{
+		/*
 	<section
 		id="realm-archive"
 		data-step="realm-archive"
@@ -134,9 +89,6 @@ function getHash(str: string) {
 		<div class="relative h-full w-full">
 			<!-- 3D Site Map (The Ultimate Fat Footer) -->
 			<ConstellationEngine client:only="react" data={sitemapData} layout="tectonic" />
-
-			<!-- Optional: Legacy Sankey Toggle / Commented out for now -->
-			{/* <div class="hidden"><ArchiveSankey client:only="react" /></div> */}
 		</div>
 
 		<footer
@@ -145,12 +97,28 @@ function getHash(str: string) {
 			&copy; 2025 Erik Norris
 		</footer>
 	</section>
+	</section>
+	*/
+	}
 </Layout>
 
-<style>
+<style is:global>
+	/* smooth scroll behavior for anchor links */
+	html {
+		scroll-behavior: smooth;
+		scroll-snap-type: y mandatory;
+	}
+
 	/* Hide scrollbar for immersive feel */
-	main::-webkit-scrollbar {
+	html::-webkit-scrollbar,
+	body::-webkit-scrollbar {
 		display: none;
+	}
+	html,
+	body {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+		overflow-x: hidden; /* Ensure double scrollbar is dead */
 	}
 	main {
 		-ms-overflow-style: none;
@@ -163,12 +131,10 @@ function getHash(str: string) {
 		100% {
 			opacity: 0.9;
 			transform: scale(1);
-			/* Removed text-shadow to prevent rendering artifacts */
 		}
 		50% {
 			opacity: 1;
 			transform: scale(1.03); /* Gentle expansion */
-			/* Optional: subtle filter brightness instead of shadow */
 			filter: brightness(1.2);
 		}
 	}

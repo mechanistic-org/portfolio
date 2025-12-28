@@ -23,19 +23,18 @@ import { Icon } from "astro-icon/components";
 		class="hidden items-center justify-center gap-1 rounded-full border border-white/10 bg-black/50 p-1 backdrop-blur-sm md:flex"
 	>
 		<a
-			href="#realm-work"
-			data-nav-target="realm-work"
+			href="/projects"
 			class="hover:!text-primary-500 rounded-full px-4 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-all duration-300 hover:bg-white/5"
 		>
 			Work
 		</a>
 		<a
-			href="#realm-specs"
-			data-nav-target="realm-specs"
+			href="/about"
 			class="hover:!text-primary-500 rounded-full px-4 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-all duration-300 hover:bg-white/5"
 		>
-			Specs
+			About
 		</a>
+		<!-- SUSPENDED: System & Archive
 		<a
 			href="#realm-system"
 			data-nav-target="realm-system"
@@ -50,6 +49,7 @@ import { Icon } from "astro-icon/components";
 		>
 			Archive
 		</a>
+		-->
 
 		<!-- Search Trigger -->
 		<div class="mx-1 h-3 w-px bg-white/20"></div>
@@ -68,15 +68,15 @@ import { Icon } from "astro-icon/components";
 			window.dispatchEvent(new CustomEvent("open-command-menu"));
 		});
 
-		// Scroll-Aware Visibility & Active State Logic
+		// Scroll-Aware Visibility & Active State Logic (Refactored for Body Scroll)
 		const nav = document.getElementById("hyperspace-nav");
-		const container = document.getElementById("hyperspace-container");
+		// Container is now just a wrapper, we track window scroll
 		const links = document.querySelectorAll("[data-nav-target]");
 		const sections = document.querySelectorAll("section[id]");
 
-		if (nav && container) {
+		if (nav) {
 			const handleScroll = () => {
-				const scrollY = container.scrollTop;
+				const scrollY = window.scrollY;
 				const threshold = window.innerHeight * 0.5; // Fade in halfway through Realm I
 
 				if (scrollY > threshold) {
@@ -90,11 +90,11 @@ import { Icon } from "astro-icon/components";
 				}
 			};
 
-			container.addEventListener("scroll", handleScroll, { passive: true });
+			window.addEventListener("scroll", handleScroll, { passive: true });
 			// Init check
 			handleScroll();
 
-			// SCROLL SPY
+			// SCROLL SPY - Uses IntersectionObserver on window viewport
 			const observer = new IntersectionObserver(
 				(entries) => {
 					entries.forEach((entry) => {
@@ -123,7 +123,7 @@ import { Icon } from "astro-icon/components";
 					});
 				},
 				{
-					root: container,
+					root: null, // Default is viewport (which is correct for Body Scroll)
 					rootMargin: "-25% 0px -25% 0px",
 					threshold: 0,
 				},
@@ -139,7 +139,6 @@ import { Icon } from "astro-icon/components";
 		<div
 			class="relative hidden px-3 py-1 font-mono text-[10px] tracking-widest text-amber-500 uppercase md:block"
 		>
-			<!-- Corners -->
 			<div class="absolute top-0 left-0 h-2 w-2 border-t border-l border-amber-500"></div>
 			<div class="absolute top-0 right-0 h-2 w-2 border-t border-r border-amber-500"></div>
 			<div class="absolute bottom-0 left-0 h-2 w-2 border-b border-l border-amber-500"></div>

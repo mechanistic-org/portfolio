@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
+import multiverseData from "../../data/timeline/multiverse.json";
 
 export const prerender = true;
 
@@ -16,20 +17,84 @@ import RedactedDossier from "@layouts/themes/RedactedDossier.astro";
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
 	const projects = await getCollection("projects");
-	return projects.map((entry) => ({
+	const paths: any[] = projects.map((entry) => ({
 		params: { slug: entry.id },
-		props: { entry },
+		props: { entry, placeholderData: null },
 	}));
+
+	// Auto-generate placeholders for missing Graph Nodes
+	const existingIds = new Set(projects.map((p) => p.id));
+	multiverseData.nodes.forEach((node: any) => {
+		if (
+			node.id &&
+			!existingIds.has(node.id) &&
+			node.category !== "CORE" &&
+			node.category !== "REALM"
+		) {
+			paths.push({
+				params: { slug: node.id },
+				props: { entry: null, placeholderData: node },
+			});
+		}
+	});
+
+	return paths;
 }
 
 // 2. For your template, you can get the entry directly from the prop
 interface Props {
-	entry: CollectionEntry<"projects">;
+	entry: CollectionEntry<"projects"> | null;
+	placeholderData: any;
 }
 
-const { entry } = Astro.props;
-const { Content, headings } = await render(entry);
-const data = entry.data as any;
+const { entry, placeholderData } = Astro.props;
+let Content: any = () => null;
+let headings: any[] = [];
+let data: any;
+
+if (entry) {
+	const rendered = await render(entry);
+	Content = rendered.Content;
+	headings = rendered.headings;
+	data = entry.data;
+} else if (placeholderData) {
+	// Construct simulated entry data from JSON
+	// Ensure we have a valid date object
+	const year = placeholderData.year || new Date().getFullYear();
+	data = {
+		title: placeholderData.name,
+		description: "Archived Record // Pending Digitization",
+		date: new Date(year, 0, 1),
+		heroImage: placeholderData.img,
+		theme: "hyperspace", // UPGRADED TO SCROLLY
+		tags: [placeholderData.group || "Archive", placeholderData.category || "Project"],
+		draft: false,
+		listed: true,
+		// Generic Scrolly Structure
+		cyberspace: {
+			enable: true,
+			stickies: [
+				{
+					id: "intro",
+					title: placeholderData.name,
+					text: `<strong>YEAR:</strong> ${year}<br/><strong>ROLE:</strong> ${placeholderData.category || "Contributor"}`,
+					align: "center",
+					type: "media",
+					data: {
+						src: placeholderData.img,
+					},
+				},
+				{
+					id: "details",
+					title: "PROJECT DATA",
+					text: `This project is currently archived. Full restoration pending.<br/><br/><strong>Group:</strong> ${placeholderData.group || "N/A"}`,
+					align: "center",
+					type: "void", // Just text
+				},
+			],
+		},
+	};
+}
 
 // Get all projects for navigation
 const allProjects = await getCollection("projects");
@@ -39,22 +104,27 @@ const sortedProjects = allProjects.sort(
 		new Date(b.data.date || new Date()).getTime() - new Date(a.data.date || new Date()).getTime(),
 );
 
-const currentIndex = sortedProjects.findIndex((p) => p.id === entry.id);
-const nextProject = currentIndex > 0 ? sortedProjects[currentIndex - 1] : null; // Newer project
+// Navigation (Only works for real projects, placeholders get no nav for now)
+const currentIndex = sortedProjects.findIndex((p) => p.id === entry?.id);
+const nextProject = currentIndex > 0 ? sortedProjects[currentIndex - 1] : null;
 const prevProject =
-	currentIndex < sortedProjects.length - 1 ? sortedProjects[currentIndex + 1] : null; // Older project
+	currentIndex > -1 && currentIndex < sortedProjects.length - 1
+		? sortedProjects[currentIndex + 1]
+		: null;
 
 // === ROUTER LOGIC ===
-// Determine which theme to use
-
-let theme = "datasheet"; // Default Safe Mode
+let theme = "datasheet"; // Default fallback
 
 // Check for explicit theme override
 if (data.theme) {
 	theme = data.theme.toLowerCase();
 }
-// Fallback: Check for legacy "cyberspace" flag
+// Check for legacy "cyberspace" flag
 else if (data.cyberspace?.enable) {
+	theme = "hyperspace";
+}
+// GLOBAL OVERRIDE: If no theme is set, upgrade to Hyperspace (Generic)
+else {
 	theme = "hyperspace";
 }
 
@@ -63,19 +133,59 @@ const ThemeComponents: Record<string, any> = {
 	datasheet: DataSheet,
 	hyperspace: Hyperspace,
 	command: Command,
-	redacted: Redacted, // Concept C (Default)
-	"redacted-terminal": RedactedTerminal, // Concept A (Alpha)
-	"redacted-dossier": RedactedDossier, // Concept B (Bravo)
+	redacted: Redacted,
+	"redacted-terminal": RedactedTerminal,
+	"redacted-dossier": RedactedDossier,
 };
 
 // Select Component (with fallback)
 const SelectedTheme = ThemeComponents[theme] || DataSheet;
 
-console.log(`[ROUTER] Project: ${entry.id} -> Theme: ${theme}`);
+// Construct valid entry for both real and placeholder
+// We clone data to avoid mutating the readonly content collection object if needed
+const finalEntry = entry
+	? { ...entry, data: { ...entry.data } }
+	: {
+			id: placeholderData.id,
+			collection: "projects",
+			data: data,
+		};
+
+// INJECT GENERIC SCROLLY STRUCTURE IF MISSING (For Legacy MDX upgrades)
+if (
+	theme === "hyperspace" &&
+	(!finalEntry.data.cyberspace || !finalEntry.data.cyberspace.stickies)
+) {
+	const year = finalEntry.data.date ? new Date(finalEntry.data.date).getFullYear() : "N/A";
+	finalEntry.data.cyberspace = {
+		enable: true,
+		stickies: [
+			{
+				id: "intro",
+				title: finalEntry.data.title,
+				text: `<strong>YEAR:</strong> ${year}<br/><strong>ROLE:</strong> ${finalEntry.data.employer || "Contributor"}`,
+				align: "center",
+				type: "media",
+				data: {
+					src: finalEntry.data.heroImage,
+				},
+			},
+			{
+				id: "details",
+				title: "PROJECT DATA",
+				text: `This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong> ${finalEntry.data.industry || "N/A"}`,
+				align: "center",
+				type: "void",
+			},
+		],
+	};
+}
+
+console.log(`[ROUTER] Project: ${finalEntry.id} -> Theme: ${theme}`);
 ---
 
 <SelectedTheme
-	entry={entry}
+	entry={finalEntry}
 	nextProject={nextProject}
 	prevProject={prevProject}
 	Content={Content}

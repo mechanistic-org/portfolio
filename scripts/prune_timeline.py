@@ -63,7 +63,7 @@ def prune_timeline():
         main_data = []
         for r in reader:
              # Clean keys
-             clean_r = {k.strip(): v.strip() for k, v in r.items() if k}
+             clean_r = {k.strip(): (v or "").strip() for k, v in r.items() if k}
              if clean_r.get('Slug Name') or clean_r.get('Name'):
                  main_data.append(clean_r)
     print(f"DEBUG: Found {len(main_data)} rows in Main.csv")
@@ -135,6 +135,40 @@ def prune_timeline():
         
         # --- BUILD ARTEFACTS ---
         
+        # --- INDUSTRY MAPPING (Taxonomy Fix) ---
+        # Map Employers/Categories to meaningful Industries if missing
+        industry = row.get('Industry')
+        if not industry or industry == "Other":
+            employer_map = {
+                "Hyphen": "Robotics & Automation",
+                "Momentum Machines": "Robotics & Automation",
+                "Digidesign": "Pro Audio",
+                "Avid": "Pro Audio",
+                "Noon Home": "Consumer Electronics",
+                "Noon": "Consumer Electronics",
+                "Avegant": "Consumer Electronics",
+                "Apple": "Consumer Electronics",
+                "Kaleidescape": "Consumer Electronics",
+                "Nima": "Consumer Electronics", 
+                "6SensorLabs": "Consumer Electronics",
+                "EP Technologies": "MedTech",
+                "Boston Scientific": "MedTech",
+                "Freelance": "Consulting",
+                "Independent": "Consulting"
+            }
+            
+            # 1. Try Employer match
+            industry = employer_map.get(employer)
+            
+            # 2. If still unknown, try Category heuristics
+            if not industry:
+                if "Audio" in category: industry = "Pro Audio"
+                elif "Automation" in category: industry = "Robotics & Automation"
+                elif "Medical" in category: industry = "MedTech"
+                elif "Consumer" in category: industry = "Consumer Electronics"
+                elif "Future" in category or "Goal" in category: industry = "Future"
+                else: industry = "Other"
+
         # 1. Multiverse Bubble Node
         bubbles.append({
             "id": name,
@@ -146,7 +180,7 @@ def prune_timeline():
             "start_date": start_date.isoformat(),
             "end_date": end_date.isoformat(),
             "category": category,
-            "industry": row.get('Industry') or "Other", # Needed for hierarchy
+            "industry": industry, # Patched
             "skills": top_skills,
             "img": f"/assets/r2/{name.lower().replace(' ', '-')}/hero-sm.webp"
         })

@@ -51,10 +51,6 @@ export default function LivingGantt() {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        // Find the scroll container
-        const scrollEl = document.getElementById('hyperspace-container');
-        if (!scrollEl) return;
-
         const handleScroll = () => {
             if (!containerRef.current) return;
 
@@ -64,32 +60,21 @@ export default function LivingGantt() {
             const vh = window.innerHeight;
             const totalHeight = rect.height - vh;
 
-            // Current scroll into the component
-            // when rect.top = vh (just entered), progress = 0
-            // when rect.top = 0 (sticky start), progress = ?
-            // when rect.bottom = 0 (just left), progress = 1?
+            // Rect.top is relative to viewport. 
+            // When component starts entering, rect.top > 0.
+            // When component fully covers, rect.top <= 0.
+            // We want progress 0 when rect.top = 0 (top of component hits top of screen)
 
-            // Sticky logic is tricky to calculate from just rect.top if it's already sticking.
-            // Actually, the Outer Div (containerRef, 400vh) scrolls comfortably.
-            // The Inner Div (sticky) stays put.
-            // So rect.top of the Outer Div goes from 0 to -300vh.
-
-            // Progress = -rect.top / (rect.height - vh)
-            // Clamp between 0 and 1
             const rawProgress = -rect.top / totalHeight;
             const progress = Math.max(0, Math.min(1, rawProgress));
-
-            // Map 0-1 to 0% -> -75% (to show 400vw width)
-            // If width is 400vw, we show 100vw at a time. Total travel needed is 300vw.
-            // So -300vw max offset. Or -75% of total width.
 
             setXOffset(progress * -75);
         };
 
-        scrollEl.addEventListener('scroll', handleScroll, { passive: true });
+        window.addEventListener('scroll', handleScroll, { passive: true });
         handleScroll(); // Init
 
-        return () => scrollEl.removeEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     // Spring physics for smooth feeling

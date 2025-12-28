@@ -18,24 +18,7 @@ const navConfig: navItem[] = [
 	},
 	{
 		text: "About",
-		dropdown: [
-			{
-				text: "BIO",
-				href: "/about/bio/",
-			},
-			{
-				text: "This Site",
-				href: "/colophon/",
-			},
-			{
-				text: "IFU",
-				href: "/about/ifu/",
-			},
-			{
-				text: "Elements",
-				href: "/about/elements/",
-			},
-		],
+		href: "/about/",
 	},
 	{
 		text: "Resume",

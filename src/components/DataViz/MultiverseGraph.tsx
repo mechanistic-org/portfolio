@@ -225,10 +225,24 @@ const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
             .attr("stroke", "rgba(255,255,255,0.2)")
             .attr("opacity", 0.9)
             .on("mouseover", function (event, d) {
+                // Ghost Fix: Reset ALL other nodes immediately to prevent 'trail'
+                nodeCircles.select("circle")
+                    .transition().duration(100)
+                    .attr("stroke", "rgba(255,255,255,0.2)")
+                    .attr("stroke-width", 1)
+                    .attr("filter", null)
+                    .style("opacity", 0.9);
+
                 d3.select(this)
                     .transition().duration(200)
                     .attr("stroke", "#fff").attr("stroke-width", 3)
-                    .attr("filter", "drop-shadow(0 0 10px rgba(255,255,255,0.5))");
+                    .attr("filter", "drop-shadow(0 0 10px rgba(255,255,255,0.5))")
+                    .style("opacity", 1);
+
+                // Hide all other labels
+                d3.selectAll(".node text").transition().style("opacity", 0);
+
+                // Show this label
                 d3.select(this.parentNode as Element).select("text").transition().style("opacity", 1);
                 setSelectedNode(d);
                 // Heat up physics slightly

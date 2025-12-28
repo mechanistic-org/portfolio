@@ -10,7 +10,7 @@
       "start_date": "2025-11-23T00:00:00",
       "end_date": "2040-12-31T00:00:00",
       "category": "Career Goal",
-      "industry": "Other",
+      "industry": "Future",
       "skills": [
         "Iterative Prototyping",
         "Prototyping",
@@ -18,7 +18,7 @@
         "Reliability Testing",
         "Design for Manufacturing (DFM)"
       ],
-      "img": "https://assets.eriknorris.com/dreamjob/dreamjob-hero-01.jpg"
+      "img": "/assets/r2/dreamjob/hero-sm.webp"
     },
     {
       "id": "Freelance",
@@ -50,7 +50,7 @@
       "start_date": "2021-05-01T00:00:00",
       "end_date": "2022-08-24T00:00:00",
       "category": "Foodservice Automation",
-      "industry": "Other",
+      "industry": "Robotics & Automation",
       "skills": [
         "Design for Manufacturing (DFM)",
         "Tolerance Analysis",
@@ -70,7 +70,7 @@
       "start_date": "2021-12-01T00:00:00",
       "end_date": "2022-08-24T00:00:00",
       "category": "Foodservice Automation",
-      "industry": "Other",
+      "industry": "Robotics & Automation",
       "skills": [
         "CAD (Computer-Aided Design)",
         "Design for Manufacturing (DFM)",
@@ -90,7 +90,7 @@
       "start_date": "2021-07-01T00:00:00",
       "end_date": "2021-12-31T00:00:00",
       "category": "Electromechanical Assy",
-      "industry": "Other",
+      "industry": "Robotics & Automation",
       "skills": [
         "CAD (Computer-Aided Design)",
         "Prototyping",
@@ -110,7 +110,7 @@
       "start_date": "2021-05-01T00:00:00",
       "end_date": "2021-08-15T00:00:00",
       "category": "Electromechanical Assy",
-      "industry": "Other",
+      "industry": "Robotics & Automation",
       "skills": [
         "CAD (Computer-Aided Design)",
         "Tolerance Analysis",
@@ -130,7 +130,7 @@
       "start_date": "2019-02-01T00:00:00",
       "end_date": "2019-03-15T00:00:00",
       "category": "Consumer Appliance",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Problem Solving",
         "Testing Automation",
@@ -210,7 +210,7 @@
       "start_date": "2017-07-01T00:00:00",
       "end_date": "2018-03-01T00:00:00",
       "category": "User Interface",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Prototyping",
         "Iterative Prototyping",
@@ -230,7 +230,7 @@
       "start_date": "2017-03-01T00:00:00",
       "end_date": "2018-02-01T00:00:00",
       "category": "User Interface",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Prototyping",
         "CAD (Computer-Aided Design)",
@@ -250,7 +250,7 @@
       "start_date": "2017-08-01T00:00:00",
       "end_date": "2018-01-01T00:00:00",
       "category": "Smart Home Device",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Prototyping",
         "Testing Automation",
@@ -270,7 +270,7 @@
       "start_date": "2017-03-01T00:00:00",
       "end_date": "2018-02-01T00:00:00",
       "category": "User Interface",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Prototyping",
         "Tolerance Analysis",
@@ -290,7 +290,7 @@
       "start_date": "2017-03-17T00:00:00",
       "end_date": "2018-05-01T00:00:00",
       "category": "Smart Home Device",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "CAD (Computer-Aided Design)",
         "Iterative Prototyping",
@@ -310,7 +310,7 @@
       "start_date": "2015-10-17T00:00:00",
       "end_date": "2017-03-01T00:00:00",
       "category": "Wearable / AR",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Design for Manufacturing (DFM)",
         "Iterative Prototyping",
@@ -321,24 +321,18 @@
       "img": "/assets/r2/glyph-2/hero-sm.webp"
     },
     {
-      "id": "Glyph",
-      "name": "Glyph",
+      "id": "Avegant Glyph",
+      "name": "Avegant Glyph",
       "group": "Avegant",
       "color": "#6da409",
-      "value": 202.59904454377534,
+      "value": 64.59904454377535,
       "year": 2015,
       "start_date": "2015-06-01T00:00:00",
       "end_date": "2017-03-01T00:00:00",
       "category": "Wearable / AR",
-      "industry": "Other",
-      "skills": [
-        "Prototyping",
-        "Iterative Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Design for Manufacturing (DFM)",
-        "Testing Automation"
-      ],
-      "img": "/assets/r2/glyph/hero-sm.webp"
+      "industry": "Consumer Electronics",
+      "skills": [],
+      "img": "/assets/r2/avegant-glyph/hero-sm.webp"
     },
     {
       "id": "BFD",
@@ -370,7 +364,7 @@
       "start_date": "2014-06-01T00:00:00",
       "end_date": "2015-02-01T00:00:00",
       "category": "Media Server",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Design for Manufacturing (DFM)",
         "Reliability Testing",
@@ -390,7 +384,7 @@
       "start_date": "2012-08-01T00:00:00",
       "end_date": "2013-09-01T00:00:00",
       "category": "Media Server",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "CAD (Computer-Aided Design)",
         "Design for Manufacturing (DFM)",
@@ -410,7 +404,7 @@
       "start_date": "2010-08-01T00:00:00",
       "end_date": "2011-07-01T00:00:00",
       "category": "Robotics / Disc Vault",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Problem Solving",
         "Iterative Prototyping",
@@ -430,7 +424,7 @@
       "start_date": "2010-08-02T00:00:00",
       "end_date": "2011-07-02T00:00:00",
       "category": "Robotics / Disc Vault",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Problem Solving",
         "Iterative Prototyping",
@@ -450,7 +444,7 @@
       "start_date": "2010-06-01T00:00:00",
       "end_date": "2010-12-01T00:00:00",
       "category": "Media Storage",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Design for Manufacturing (DFM)",
         "Prototyping",
@@ -470,7 +464,7 @@
       "start_date": "2009-04-20T00:00:00",
       "end_date": "2009-08-01T00:00:00",
       "category": "Remote Control",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Design for Manufacturing (DFM)",
         "CAD (Computer-Aided Design)",
@@ -490,7 +484,7 @@
       "start_date": "2010-06-01T00:00:00",
       "end_date": "2010-08-01T00:00:00",
       "category": "Remote Control",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Prototyping",
         "Usability Testing",
@@ -510,7 +504,7 @@
       "start_date": "2010-04-01T00:00:00",
       "end_date": "2010-07-01T00:00:00",
       "category": "Media Player",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Design for Manufacturing (DFM)",
         "Product Testing",
@@ -530,7 +524,7 @@
       "start_date": "2010-03-01T00:00:00",
       "end_date": "2010-05-01T00:00:00",
       "category": "Media Player",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Iterative Prototyping",
         "Prototyping",
@@ -541,8 +535,8 @@
       "img": "/assets/r2/m300/hero-sm.webp"
     },
     {
-      "id": "KSERVER-1500-2010",
-      "name": "KSERVER-1500 (2010)",
+      "id": "KSERVER-1500",
+      "name": "KSERVER-1500",
       "group": "Kaleidescape",
       "color": "#04e32f",
       "value": 179.1087386417331,
@@ -550,7 +544,7 @@
       "start_date": "2010-03-02T00:00:00",
       "end_date": "2010-05-02T00:00:00",
       "category": "Server / Rackmount",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Prototyping",
         "Materials Knowledge",
@@ -570,7 +564,7 @@
       "start_date": "2010-09-01T00:00:00",
       "end_date": "2011-06-01T00:00:00",
       "category": "Robotics / Disc Vault",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Problem Solving",
         "Iterative Prototyping",
@@ -590,7 +584,7 @@
       "start_date": "2009-06-01T00:00:00",
       "end_date": "2010-04-01T00:00:00",
       "category": "Media Player",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Design for Manufacturing (DFM)",
         "CAD (Computer-Aided Design)",
@@ -610,7 +604,7 @@
       "start_date": "2009-01-01T00:00:00",
       "end_date": "2009-06-01T00:00:00",
       "category": "Media Server",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Prototyping",
         "Iterative Prototyping",
@@ -630,7 +624,7 @@
       "start_date": "2008-06-01T00:00:00",
       "end_date": "2009-03-01T00:00:00",
       "category": "Server / Rackmount",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "CAD (Computer-Aided Design)",
         "Materials Knowledge",
@@ -650,7 +644,7 @@
       "start_date": "2008-05-01T00:00:00",
       "end_date": "2009-02-01T00:00:00",
       "category": "Data Ingestion",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Prototyping",
         "Tolerance Analysis",
@@ -661,8 +655,8 @@
       "img": "/assets/r2/speed-reader/hero-sm.webp"
     },
     {
-      "id": "KSERVER-1500-2008",
-      "name": "KSERVER-1500 (2008)",
+      "id": "KSERVER-1500",
+      "name": "KSERVER-1500",
       "group": "Kaleidescape",
       "color": "#04e32f",
       "value": 183.2178857704904,
@@ -670,7 +664,7 @@
       "start_date": "2008-05-01T00:00:00",
       "end_date": "2008-08-01T00:00:00",
       "category": "Server / Rackmount",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Prototyping",
         "Materials Knowledge",
@@ -690,7 +684,7 @@
       "start_date": "2008-03-01T00:00:00",
       "end_date": "2009-01-01T00:00:00",
       "category": "Media Player",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Iterative Prototyping",
         "Testing Automation",
@@ -710,7 +704,7 @@
       "start_date": "2008-03-02T00:00:00",
       "end_date": "2009-01-02T00:00:00",
       "category": "Media Player",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "CAD (Computer-Aided Design)",
         "Materials Knowledge",
@@ -730,7 +724,7 @@
       "start_date": "2008-03-01T00:00:00",
       "end_date": "2008-12-01T00:00:00",
       "category": "Media Player",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Iterative Prototyping",
         "Design for Manufacturing (DFM)",
@@ -750,7 +744,7 @@
       "start_date": "2008-03-02T00:00:00",
       "end_date": "2008-12-02T00:00:00",
       "category": "Media Player",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Iterative Prototyping",
         "CAD (Computer-Aided Design)",
@@ -770,7 +764,7 @@
       "start_date": "2008-03-03T00:00:00",
       "end_date": "2008-12-03T00:00:00",
       "category": "Server / Rackmount",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Iterative Prototyping",
         "Prototyping",
@@ -790,7 +784,7 @@
       "start_date": "2007-10-01T00:00:00",
       "end_date": "2008-04-01T00:00:00",
       "category": "USB Audio Interface",
-      "industry": "Other",
+      "industry": "Pro Audio",
       "skills": [
         "Design for Manufacturing (DFM)",
         "Iterative Prototyping",
@@ -810,7 +804,7 @@
       "start_date": "2007-05-01T00:00:00",
       "end_date": "2007-10-01T00:00:00",
       "category": "Rack Appliance",
-      "industry": "Other",
+      "industry": "Pro Audio",
       "skills": [
         "Problem Solving",
         "Agile Methodology",
@@ -830,7 +824,7 @@
       "start_date": "2007-02-01T00:00:00",
       "end_date": "2007-05-01T00:00:00",
       "category": "USB Audio Interface",
-      "industry": "Other",
+      "industry": "Pro Audio",
       "skills": [
         "Iterative Prototyping",
         "CAD (Computer-Aided Design)",
@@ -839,27 +833,6 @@
         "Materials Knowledge"
       ],
       "img": "/assets/r2/mbox-2-mini/hero-sm.webp"
-    },
-    {
-      "id": "c24",
-      "name": "C|24",
-      "group": "Digidesign",
-      "color": "#40ef29",
-      "value": 208.5,
-      "year": 2006,
-      "start_date": "2006-08-01T00:00:00",
-      "end_date": "2007-07-01T00:00:00",
-      "category": "Control Surface",
-      "industry": "Pro Audio",
-      "skills": [
-        "7mm Clearance Mandate",
-        "Precision Sheet Metal",
-        "Manufacturing QA",
-        "CAD (Computer-Aided Design)",
-        "Tolerance Analysis"
-      ],
-      "img": "/assets/r2/c24/c24-hero-01-sm.webp",
-      "description": "High-density 24-channel analog/digital hybrid control surface. Resolved 1mm+ vendor manufacturing variances during mass production."
     },
     {
       "id": "Mbox 2 Pro",
@@ -871,7 +844,7 @@
       "start_date": "2006-06-01T00:00:00",
       "end_date": "2006-11-01T00:00:00",
       "category": "USB Audio Interface",
-      "industry": "Other",
+      "industry": "Pro Audio",
       "skills": [
         "Prototyping",
         "CAD (Computer-Aided Design)",
@@ -891,7 +864,7 @@
       "start_date": "2006-06-01T00:00:00",
       "end_date": "2007-02-01T00:00:00",
       "category": "Control Surface",
-      "industry": "Other",
+      "industry": "Pro Audio",
       "skills": [
         "CAD (Computer-Aided Design)",
         "Prototyping",
@@ -900,6 +873,20 @@
         "Product Testing"
       ],
       "img": "/assets/r2/digi-003/hero-sm.webp"
+    },
+    {
+      "id": "C|24",
+      "name": "C|24",
+      "group": "Digidesign",
+      "color": "#40ef29",
+      "value": 58.11140992976701,
+      "year": 2006,
+      "start_date": "2006-08-01T00:00:00",
+      "end_date": "2007-07-01T00:00:00",
+      "category": "Control Surface",
+      "industry": "Pro Audio",
+      "skills": [],
+      "img": "/assets/r2/c|24/hero-sm.webp"
     },
     {
       "id": "Mbox 2",
@@ -911,7 +898,7 @@
       "start_date": "2005-09-01T00:00:00",
       "end_date": "2005-11-01T00:00:00",
       "category": "USB Audio Interface",
-      "industry": "Other",
+      "industry": "Pro Audio",
       "skills": [
         "Prototyping",
         "CAD (Computer-Aided Design)",
@@ -931,7 +918,7 @@
       "start_date": "2005-02-01T00:00:00",
       "end_date": "2005-07-01T00:00:00",
       "category": "Live Sound Console",
-      "industry": "Other",
+      "industry": "Pro Audio",
       "skills": [
         "Design for Manufacturing (DFM)",
         "Tolerance Analysis",
@@ -951,7 +938,7 @@
       "start_date": "2005-02-01T00:00:00",
       "end_date": "2005-07-01T00:00:00",
       "category": "Live Sound Console",
-      "industry": "Other",
+      "industry": "Pro Audio",
       "skills": [
         "Iterative Prototyping",
         "Testing Automation",
@@ -971,7 +958,7 @@
       "start_date": "2004-08-01T00:00:00",
       "end_date": "2005-03-01T00:00:00",
       "category": "Control Surface",
-      "industry": "Other",
+      "industry": "Pro Audio",
       "skills": [
         "Iterative Prototyping",
         "Prototyping",
@@ -991,7 +978,7 @@
       "start_date": "2004-04-01T00:00:00",
       "end_date": "2004-09-01T00:00:00",
       "category": "Control Surface",
-      "industry": "Other",
+      "industry": "Pro Audio",
       "skills": [
         "CAD (Computer-Aided Design)",
         "Prototyping",
@@ -1011,7 +998,7 @@
       "start_date": "2003-06-01T00:00:00",
       "end_date": "2004-04-01T00:00:00",
       "category": "Control Surface",
-      "industry": "Other",
+      "industry": "Pro Audio",
       "skills": [
         "CAD (Computer-Aided Design)",
         "Prototyping",
@@ -1031,7 +1018,7 @@
       "start_date": "2003-05-01T00:00:00",
       "end_date": "2003-10-01T00:00:00",
       "category": "Rack Appliance",
-      "industry": "Other",
+      "industry": "Pro Audio",
       "skills": [
         "Problem Solving",
         "Agile Methodology",
@@ -1051,7 +1038,7 @@
       "start_date": "2003-03-01T00:00:00",
       "end_date": "2003-10-01T00:00:00",
       "category": "USB Audio Interface",
-      "industry": "Other",
+      "industry": "Pro Audio",
       "skills": [
         "Prototyping",
         "Iterative Prototyping",
@@ -1191,7 +1178,7 @@
       "start_date": "2001-06-01T00:00:00",
       "end_date": "2001-08-01T00:00:00",
       "category": "Audio Interface",
-      "industry": "Other",
+      "industry": "Pro Audio",
       "skills": [
         "Design for Manufacturing (DFM)",
         "CAD (Computer-Aided Design)",
@@ -1471,7 +1458,7 @@
       "start_date": "1997-07-01T00:00:00",
       "end_date": "1997-12-01T00:00:00",
       "category": "Medical Equipment",
-      "industry": "Other",
+      "industry": "MedTech",
       "skills": [
         "Prototyping",
         "CAD (Computer-Aided Design)",
@@ -1511,7 +1498,7 @@
       "start_date": "1997-07-01T00:00:00",
       "end_date": "1997-10-01T00:00:00",
       "category": "Medical Equipment",
-      "industry": "Other",
+      "industry": "MedTech",
       "skills": [
         "Iterative Prototyping",
         "Usability Testing",
@@ -1531,7 +1518,7 @@
       "start_date": "1997-06-01T00:00:00",
       "end_date": "1997-08-01T00:00:00",
       "category": "Audio",
-      "industry": "Other",
+      "industry": "Pro Audio",
       "skills": [
         "Prototyping",
         "Testing Automation",
@@ -1611,7 +1598,7 @@
       "start_date": "1995-05-01T00:00:00",
       "end_date": "1996-01-01T00:00:00",
       "category": "Consumer Appliance",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Agile Methodology",
         "Problem Solving",
@@ -1631,7 +1618,7 @@
       "start_date": "1995-01-01T00:00:00",
       "end_date": "1995-03-01T00:00:00",
       "category": "Consumer Appliance",
-      "industry": "Other",
+      "industry": "Consumer Electronics",
       "skills": [
         "Problem Solving",
         "Agile Methodology",
@@ -1771,7 +1758,7 @@
       "start_date": "1987-01-01T00:00:00",
       "end_date": "1989-06-01T00:00:00",
       "category": "Medical Equipment",
-      "industry": "Other",
+      "industry": "MedTech",
       "skills": [
         "Design for Manufacturing (DFM)",
         "Iterative Prototyping",

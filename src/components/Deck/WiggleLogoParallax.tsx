@@ -81,27 +81,22 @@ function Model({ url, scrollY }: { url: string; scrollY: number }) {
 export default function WiggleLogoParallax() {
     const [scrollY, setScrollY] = useState(0);
 
-    // Track Container Scroll
+    // Track Window Scroll (Refactored for Body Scroll arch)
     useEffect(() => {
-        const container = document.getElementById('hyperspace-container');
-        if (!container) return;
-
         const handleScroll = () => {
-            setScrollY(container.scrollTop);
+            setScrollY(window.scrollY);
         };
 
-        container.addEventListener('scroll', handleScroll, { passive: true });
-        return () => container.removeEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
         <div className="w-full h-full">
             <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
-                {/* Aggressive Lighting Set for High Visibility */}
-                <ambientLight intensity={3.0} />
-                <spotLight position={[10, 10, 10]} angle={0.2} penumbra={1} intensity={5.0} />
-                <pointLight position={[-10, -5, -5]} intensity={3.0} color="#2E5CFF" />
-                <pointLight position={[0, 5, 5]} intensity={2.0} color="white" />
+                {/* Optimized Lighting (Matched to WiggleLogo3D 'Best Lit' Config) */}
+                <ambientLight intensity={0.5} />
+                <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
 
                 <PresentationControls
                     global={false} // Only spin when grabbing the mesh

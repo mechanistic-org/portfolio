@@ -1,0 +1,66 @@
+---
+interface Props {
+	title?: string;
+	subtitle?: string;
+	color?: string; // e.g. "text-primary-500"
+}
+
+const { title = "SYSTEM_PROCESS", subtitle = "ACTIVE", color = "text-primary-500" } = Astro.props;
+---
+
+<div class="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-hidden">
+	<!-- TOP BORDER & TELEMETRY -->
+	<div
+		class="absolute top-6 left-6 flex items-center gap-2 font-mono text-[10px] tracking-widest text-neutral-500"
+	>
+		<span class={`animate-pulse ${color}`}>■</span>
+		<span>{title}</span>
+		<span class="mx-2 opacity-20">|</span>
+		<span class="opacity-50">{subtitle}</span>
+	</div>
+
+	<!-- CORNER BRACKETS -->
+	<!-- Top Left -->
+	<div class={`absolute left-0 top-0 h-16 w-1 border-t border-l ${color} opacity-20`}></div>
+	<!-- Top Right -->
+	<div class={`absolute right-0 top-0 h-16 w-1 border-t border-r ${color} opacity-20`}></div>
+	<!-- Bottom Left -->
+	<div class={`absolute bottom-0 left-0 h-8 w-1 border-b border-l ${color} opacity-20`}></div>
+	<!-- Bottom Right -->
+	<div class={`absolute bottom-0 right-0 h-8 w-1 border-b border-r ${color} opacity-20`}></div>
+
+	<!-- RUNNING TERMINAL (Bottom Left) -->
+	<div class="absolute bottom-6 left-6 hidden w-64 md:block">
+		<div
+			class="relative h-20 overflow-hidden font-mono text-[9px] leading-relaxed text-neutral-700"
+		>
+			<div class="animate-terminal-scroll opacity-50">
+				0x4F: INIT_PROTOCOL<br />
+				0x52: LOAD_MEMORY_BLOCK<br />
+				0x8A: OPTIMIZE_SHADER<br />
+				0x9C: SYNC_COMPLETE<br />
+				0x4F: INIT_PROTOCOL<br />
+				0x52: LOAD_MEMORY_BLOCK<br />
+				0x8A: OPTIMIZE_SHADER<br />
+				0x9C: SYNC_COMPLETE<br />
+				> READY...
+			</div>
+			<div class="absolute bottom-0 left-0 h-8 w-full bg-gradient-to-t from-black to-transparent">
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	@keyframes terminal-scroll {
+		0% {
+			transform: translateY(0);
+		}
+		100% {
+			transform: translateY(-50%);
+		}
+	}
+	.animate-terminal-scroll {
+		animation: terminal-scroll 5s linear infinite;
+	}
+</style>
