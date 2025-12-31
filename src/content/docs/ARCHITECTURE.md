@@ -319,3 +319,19 @@ A hybrid workflow combining human art direction with machine precision.
     *   **Workflow A ("Express Lane"):** Direct export from Substance Painter (`glTF PBR Metal Roughness`). Best for reliable geometry and standard materials.
     *   **Workflow B ("Round Trip"):** Substance -> Blender -> GLB. Best for complex geometry requiring Draco compression, but prone to data loss (e.g., missing Tangents/Color Space issues).
 *   **Debug Tool:** `/about/test-logo` provides a hardware inspection layer for these assets.
+
+### Immersive Gallery Patterns (R&D)
+We established a "Menu of Immersion" to break the monotony of standard grids. These patterns are prototyped in `feature/immersive-prototypes`.
+
+1.  **The "Living Grid" (Smart Isotope)**
+    *   **Goal:** Efficient browsing with category exploration.
+    *   **Logic:** `SharedLayoutGallery` accepts a `category` prop on images. If categories exist, a Filter Bar renders. Selecting a filter animates the layout (shrinking/growing items) using `framer-motion` layout transitions.
+    *   **State:** `activeFilter` (String) filters the `uniqueImages` array before rendering.
+
+2.  **The "Conspiracy Board" (Canvas)**
+    *   **Goal:** Narrative immersion for "Origin Stories" or complex histories.
+    *   **Logic:** Absolute positioning with randomized rotation/scatter. `framer-motion` enables drag-and-drop physics. Z-index pops on drag.
+
+3.  **The "Comparator" (X-Ray)**
+    *   **Goal:** Technical "Before/After" storytelling.
+    *   **Logic:** Two images stacked absolutely. The top image is masked via `width` or `clip-path` controlled by a draggable handle (`useDragControls`).

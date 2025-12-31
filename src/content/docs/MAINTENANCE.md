@@ -9,7 +9,13 @@ sidebar:
 
 Internal documentation for maintaining and updating the portfolio site.
 
-## 1. Trust Wall Logic
+
+## 1. Git Workflow
+
+### Feature Branches
+*   `feature/immersive-prototypes`: Confirmed R&D branch. Contains the "Reality Distortion" field prototypes (Conspiracy Board, Comparator, Living Grid upgrades). Merged functionality into `SharedLayoutGallery`, but the specific components (`ConspiracyBoard.tsx`, `Comparator.tsx`) reside here for future use.
+
+## 2. Trust Wall Logic
 
 ### Priority Order (Ingestion Script)
 1.  **Hardcoded Map:** Checks `CLIENT_ICON_MAP` in `ingest_data.py` for a specific icon slug.
@@ -198,6 +204,11 @@ status: {
 *   **Symptom:** `npm run dev` crashes instantly with `bad parser state` or `Go program has already exited`.
 *   **Cause:** A `.astro` file is missing the opening Frontmatter Fence (`---`) at the very top. The compiler misinterprets TypeScript interfaces as HTML/Content.
 *   **Fix:** Ensure the file starts immediately with `---`.
+
+### Flexbox Centering vs. Overflow
+*   **Symptom:** Content at the top of a scrollable container is clipped/unreachable.
+*   **Cause:** Determining `justify-center` on a flex container that also has `overflow-y-auto`. When content exceeds the viewport, the "center" logic pushes the top content off-screen.
+*   **Fix:** Remove `justify-center` and use padding (e.g., `pt-24`) to position content safely below sticky headers.
 
 ### Raw HTML rendering in Hyperspace
 *   **Symptom:** Content with `<ul>` or `<strong>` tags renders as escaped text (e.g., `<p><ul>...</ul></p>`).

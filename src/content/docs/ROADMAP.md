@@ -43,6 +43,11 @@ sidebar:
     *   **Description:** An interactive 3D navigator that maps site hierarchy into a celestial coordinate system. Features hierarchical bloom, macroscopic orbital physics, and recursive scaling for project-level deep dives.
 
 ## 📜 Change Log (Recent)
+*   **[2025-12-30] Immersive Galleries (R&D)**
+    *   **[R&D] Reality Distortion:** Prototyped "Conspiracy Board" (Canvas) and "Comparator" (X-Ray) components.
+    *   **[Feat] Living Grid:** Upgraded `SharedLayoutGallery` to support Isotope-style category filtering using `framer-motion` layout animations.
+    *   **[Refactor] Archive:** Reverted C24 to standard galleries; archived immersive prototypes to `feature/immersive-prototypes`.
+    *   **[Fix] CSS:** Resolved "Invisible Filter Buttons" bug caused by flexbox vertical centering clipping overflow content.
 *   **[Asset Pipeline]** Fixed C24 Hero Image missing from Project Card.
     *   *Root Cause:* Source file `hero.png` failed regex validation in `process_images.py`.
     *   *Resolution:* Renamed to `c24-hero-01.png` to satisfy taxonomy; verified generation of optimized slices.
@@ -361,6 +366,12 @@ sidebar:
 *   **Hook:** A brand that breathes.
 *   **Tech:** React Three Fiber, GLTF, Framer Motion (wrapper).
 *   **Description:** An interactive 3D implementation of the "Erik Norris" logo using "Forged Carbon" shading and anisotropic lighting to simulate a living, breathing object.
+
+### The Living Grid
+*   **Hook:** "A portfolio that sorts itself out."
+*   **Tech:** `framer-motion`, React State
+*   **Description:** An upgrade to the standard lightbox gallery that adds physics-based filtering and sorting animations, turning static image dumps into interactive data explorations. 
+
 
 ### 3D Asset Lab (`test-logo.astro`)
 *   **Hook:** "An MRI machine for GLB files."
