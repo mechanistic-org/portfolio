@@ -3,9 +3,16 @@ interface Props {
 	data: any;
 	nextProject?: any;
 	prevProject?: any;
+	// NEW: Optional metrics for "Deep" Cockpit mode
+	metrics?: {
+		cogs?: { value: string; label: string };
+		profitability?: { value: string; label: string };
+		governance?: { ecos: string[]; dcos: number };
+		interventions?: { count: number; label: string };
+	};
 }
 
-const { data, nextProject, prevProject } = Astro.props;
+const { data, nextProject, prevProject, metrics } = Astro.props;
 
 // Format dates
 const dateVal = data.date || new Date();
@@ -15,106 +22,206 @@ const clients = data.client || [];
 ---
 
 <div
-	class="w-full border-b border-white/10 bg-black/80 backdrop-blur-md transition-all duration-500"
+	class="w-full border-b border-white/10 bg-black/95 backdrop-blur-md transition-all duration-500"
 >
-	<div class="site-container mx-auto max-w-7xl px-4 py-4 md:px-8">
+	<!-- ROW 1: STANDARD IDENTITY & NAV (Always Visible) -->
+	<div
+		class={`site-container mx-auto max-w-7xl px-4 py-4 md:px-8 ${metrics ? "border-b border-white/10" : ""}`}
+	>
 		<div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 			{/* LEFT: Project Identity */}
 			<div class="flex items-center gap-4">
-				<div class="h-2 w-2 animate-pulse rounded-full bg-blue-500"></div>
-				<h1 class="font-mono text-lg font-bold tracking-wider text-white uppercase">
-					{data.title}
-				</h1>
+				<div class="h-2 w-2 animate-pulse rounded-full bg-[#2E5CFF]"></div>
+				<div>
+					<h1 class="font-mono text-lg font-bold tracking-wider text-white uppercase">
+						{data.title}
+					</h1>
+					<div class="font-mono text-[10px] text-neutral-500">DOC_ID: {data.id}</div>
+				</div>
 			</div>
 
-			{/* CENTER: Navigation Controls */}
-			<div class="hidden items-center gap-2 md:flex">
-				{
-					prevProject ? (
-						<a
-							href={`/projects/${prevProject.id}`}
-							class="flex h-8 w-8 items-center justify-center rounded border border-white/10 bg-white/5 text-neutral-400 transition-colors hover:border-[#2E5CFF]/50 hover:text-white"
-							title="Previous"
-						>
-							&larr;
-						</a>
-					) : (
-						<span class="flex h-8 w-8 cursor-not-allowed items-center justify-center rounded border border-white/5 text-neutral-800">
-							&larr;
-						</span>
-					)
-				}
+			{/* CENTER: Role/Duration (Moved here for Cockpit Layout) */}
+			<div class="hidden items-center gap-12 md:flex">
+				<div class="text-right">
+					<div class="font-bold text-white uppercase">{data.employer}</div>
+					<div class="text-[10px] text-neutral-500 uppercase">Senior Mechanical Designer</div>
+				</div>
+				
+				{/* NAV CONTROLS */}
+				<div class="flex items-center gap-1">
+					{
+						prevProject ? (
+							<a
+								href={`/projects/${prevProject.id}`}
+								class="flex h-6 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-[#2E5CFF] hover:text-white"
+							>
+								&lt;
+							</a>
+						) : (
+							<span class="flex h-6 w-8 cursor-not-allowed items-center justify-center border border-white/5 bg-black text-neutral-800">
+								&lt;
+							</span>
+						)
+					}
+					<a
+						href="/projects"
+						class="flex h-6 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-emerald-500 hover:text-white"
+					>
+						:::
+					</a>
+					{
+						nextProject ? (
+							<a
+								href={`/projects/${nextProject.id}`}
+								class="flex h-6 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-[#2E5CFF] hover:text-white"
+							>
+								&gt;
+							</a>
+						) : (
+							<span class="flex h-6 w-8 cursor-not-allowed items-center justify-center border border-white/5 bg-black text-neutral-800">
+								&gt;
+							</span>
+						)
+					}
+				</div>
 
-				<a
-					href="/projects"
-					class="flex h-8 w-8 items-center justify-center rounded border border-white/10 bg-white/5 text-neutral-400 transition-colors hover:border-emerald-500/50 hover:text-white"
-					title="Index"
-				>
-					&#9638;
-				</a>
+				<div class="text-left">
+					<div class="font-bold text-white uppercase">Other</div>
+					<div class="text-[10px] text-neutral-500 uppercase">{data.category || "Project"}</div>
+				</div>
+			</div>
 
-				{
-					nextProject ? (
-						<a
-							href={`/projects/${nextProject.id}`}
-							class="flex h-8 w-8 items-center justify-center rounded border border-white/10 bg-white/5 text-neutral-400 transition-colors hover:border-[#2E5CFF]/50 hover:text-white"
-							title="Next"
-						>
-							&rarr;
-						</a>
-					) : (
-						<span class="flex h-8 w-8 cursor-not-allowed items-center justify-center rounded border border-white/5 text-neutral-800">
-							&rarr;
-						</span>
-					)
-				}
-
-				<div class="mx-2 h-8 w-px bg-white/10"></div>
-
+			{/* RIGHT: Status & Source */}
+			<div class="flex items-center gap-6 font-mono text-xs">
+				<div class="hidden md:block">
+					<span class="mr-2 text-neutral-600">DATE</span>
+					<span class="font-bold text-white">2006-08-01</span>
+				</div>
+				<div>
+					<span class="mr-2 text-neutral-600">STATUS</span>
+					<span class="font-bold text-emerald-500">{data.statusLabel}</span>
+				</div>
 				<a
 					href={`/raw/${data.id || "v4-test"}`}
-					class="flex h-8 items-center justify-center rounded border border-white/10 bg-black px-3 font-mono text-[10px] text-[#2E5CFF] transition-colors hover:bg-[#2E5CFF]/10"
+					class="flex h-6 items-center justify-center rounded border border-[#2E5CFF]/30 bg-[#2E5CFF]/10 px-2 font-mono text-[10px] font-bold text-[#2E5CFF] transition-colors hover:bg-[#2E5CFF] hover:text-white"
 				>
-					RAW SOURCE
+					RAW_SOURCE
 				</a>
-			</div>
-
-			{/* RIGHT: Data Grid */}
-			<div class="grid grid-cols-2 gap-8 font-mono text-xs md:flex md:gap-12">
-				{/* ROLE */}
-				<div>
-					<div class="mb-1 tracking-wider text-neutral-500 uppercase">Role</div>
-					<div class="font-bold text-white">{data.employer}</div>
-				</div>
-
-				{/* CLIENT */}
-				{
-					clients.length > 0 && (
-						<div>
-							<div class="mb-1 tracking-wider text-neutral-500 uppercase">Client</div>
-							<div class="font-bold text-white">{clients[0]}</div>
-						</div>
-					)
-				}
-
-				{/* DURATION */}
-				<div>
-					<div class="mb-1 tracking-wider text-neutral-500 uppercase">Duration</div>
-					<div class="font-bold text-white">{data.duration}</div>
-				</div>
-
-				{/* TEAM (Derived or Fixed for now) */}
-				<div>
-					<div class="mb-1 tracking-wider text-neutral-500 uppercase">Team</div>
-					<div class="font-bold text-white">{data.team || "Solo"}</div>
-				</div>
-
-				{/* STATUS */}
-				<div>
-					<div class="mb-1 tracking-wider text-neutral-500 uppercase">Status</div>
-					<div class="font-bold text-[#2E5CFF]">{data.statusLabel}</div>
-				</div>
 			</div>
 		</div>
 	</div>
+
+	<!-- ROW 2: DEEP INTELLIGENCE (Only renders if 'metrics' prop is passed) -->
+	{
+		metrics && (
+			<div class="site-container mx-auto grid max-w-7xl grid-cols-1 divide-y divide-white/10 border-b border-white/10 md:grid-cols-4 md:divide-x md:divide-y-0 text-white">
+				{/* 1. TIMELINE & TOOLS */}
+				<div class="grid grid-cols-2 divide-x divide-white/10 bg-white/5">
+					<div class="p-4">
+						<div class="mb-1 text-[10px] font-bold tracking-wider text-neutral-500 uppercase">
+							Duration
+						</div>
+						<div class="font-mono text-sm font-bold text-white">{data.duration}</div>
+					</div>
+					<div class="p-4">
+						<div class="mb-1 text-[10px] font-bold tracking-wider text-neutral-500 uppercase">
+							Primary Tools
+						</div>
+						<div class="inline-block rounded border border-white/20 bg-white/5 px-1 py-0.5 font-mono text-[10px] text-neutral-300">
+							ProEngineer
+						</div>
+					</div>
+				</div>
+
+				{/* 2. ORBIT DATA */}
+				<div class="bg-black p-4 col-span-1 md:col-span-1">
+					<div class="mb-1 text-[10px] font-bold tracking-wider text-neutral-500 uppercase">
+						Orbit Data
+					</div>
+					<div class="flex items-end justify-between">
+						<div class="font-mono text-xs text-neutral-300">
+							{data.teamSize || "Core Team"}
+						</div>
+						<div class="flex gap-2 font-mono text-lg font-bold leading-none">
+							<span class="text-white">37</span>
+							<span class="text-neutral-600">21</span>
+						</div>
+					</div>
+                    <div class="flex justify-end gap-2 text-[9px] text-neutral-600 uppercase tracking-widest mt-1">
+                        <span>INT</span>
+                        <span>EXT</span>
+                    </div>
+				</div>
+
+                {/* 3. COGS & PROFITABILITY (The Money) */}
+                <div class="bg-white/5 grid grid-cols-2 divide-x divide-white/10 col-span-1 md:col-span-2">
+                    <div class="p-4">
+                         <div class="mb-1 text-[10px] font-bold tracking-wider text-neutral-500 uppercase">
+                            COGS
+                        </div>
+                        <div class="font-mono text-lg font-bold text-white leading-none mb-1">
+                            {metrics.cogs?.value || "$----"}
+                        </div>
+                        <div class="text-[10px] text-neutral-500 leading-tight">
+                            {metrics.cogs?.label || "Direct Material"}
+                        </div>
+                        <div class="mt-3 font-mono text-lg font-bold text-neutral-600 leading-none mb-1">
+                            $ 0 k
+                        </div>
+                         <div class="text-[10px] text-neutral-600 leading-tight">
+                            Tooling Budget
+                        </div>
+                    </div>
+                     <div class="p-4">
+                         <div class="mb-1 text-[10px] font-bold tracking-wider text-neutral-500 uppercase">
+                            Profitability
+                        </div>
+                        <div class="font-mono text-lg font-bold text-emerald-400 leading-none mb-1">
+                            {metrics.profitability?.value || "--%"}
+                        </div>
+                        <div class="text-[10px] text-neutral-500 leading-tight">
+                            {metrics.profitability?.label || "Standard Margin"}
+                        </div>
+
+                         <div class="mt-3 font-mono text-lg font-bold text-emerald-800 leading-none mb-1">
+                            89%
+                        </div>
+                         <div class="text-[10px] text-emerald-900 leading-tight">
+                           IRR
+                        </div>
+                    </div>
+                </div>
+			</div>
+            
+            <div class="site-container mx-auto grid max-w-7xl grid-cols-1 divide-y divide-white/10 md:grid-cols-2 md:divide-x md:divide-y-0 text-white">
+                 {/* 4. GOVERNANCE */}
+                 <div class="p-4 bg-white/[0.02]">
+                    <div class="mb-2 text-[10px] font-bold tracking-wider text-neutral-500 uppercase">
+                        Governance
+                    </div>
+                    <div class="flex gap-2 mb-2">
+                        {metrics.governance?.ecos?.map(eco => (
+                             <span class="rounded bg-white/10 px-2 py-0.5 font-mono text-xs text-white border border-white/10">{eco}</span>
+                        ))}
+                    </div>
+                    <div class="flex justify-between text-[10px] text-neutral-500 font-mono">
+                        <span>3 Major ECOs</span>
+                        <span>0 DCOs</span>
+                    </div>
+                </div>
+
+                 {/* 5. INTERVENTIONS */}
+                  <div class="p-4 bg-black flex items-center gap-4">
+                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-500 animate-pulse" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/></svg>
+                    <div>
+                         <div class="flex items-baseline gap-2">
+                            <span class="font-mono text-xl font-bold text-white">{metrics.interventions?.count}</span>
+                            <span class="text-[10px] font-bold tracking-wider text-neutral-500 uppercase">Critical Interventions</span>
+                         </div>
+                         <div class="text-[10px] text-neutral-400">Confirmed Saves</div>
+                    </div>
+                </div>
+            </div>
+		)
+	}
 </div>

@@ -151,6 +151,17 @@ const finalEntry = entry
 			data: data,
 		};
 
+// === INTELLIGENCE INJECTION (C24) ===
+let metrics: any = undefined;
+if (finalEntry.id === "control-24" || finalEntry.id === "c24") {
+	metrics = {
+		cogs: { value: "$2,097.37", label: "Direct Material (BOM)" },
+		profitability: { value: "57.40%", label: "Standard Margin" },
+		governance: { ecos: ["EC012262", "EC012263"], dcos: 0 },
+		interventions: { count: 6, label: "Confirmed Saves" },
+	};
+}
+
 // INJECT GENERIC SCROLLY STRUCTURE IF MISSING (For Legacy MDX upgrades)
 if (
 	theme === "hyperspace" &&
@@ -190,4 +201,6 @@ console.log(`[ROUTER] Project: ${finalEntry.id} -> Theme: ${theme}`);
 	prevProject={prevProject}
 	Content={Content}
 	headings={headings}
+	metrics={metrics}
 />
+```
