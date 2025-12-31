@@ -1,0 +1,2 @@
+--- STDOUT ---
+Wrapper failed: write() argument must be str, not None

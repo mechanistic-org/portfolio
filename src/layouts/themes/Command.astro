@@ -29,6 +29,7 @@ import GlobalHomeButton from "@components/Nav/GlobalHomeButton.astro";
 	description={data.description ?? ""}
 	image={data.heroImage ?? ""}
 	type="project"
+    projectFrontmatter={data}
 >
     <GlobalHomeButton />
 	<!-- COMMAND HUD: Sticky Top Bar -->
@@ -104,8 +105,7 @@ import GlobalHomeButton from "@components/Nav/GlobalHomeButton.astro";
 						</div>
 
 						<!-- Footer Data Stream -->
-						<div class="flex justify-between border-t border-white/5 bg-black/20 px-4 py-2 font-mono text-[9px] text-neutral-500">
-							<span>ID: {entry.id.toUpperCase()}</span>
+							<span>ID: {(entry?.id || "UNKNOWN").toUpperCase()}</span>
                             <span class="text-[#2E5CFF]/60">MONITORING</span>
 						</div>
 					</div>

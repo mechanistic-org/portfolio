@@ -5,7 +5,7 @@ import ScrollTrigger from "@components/Scrolly/ScrollTrigger.astro";
 import NarrativeItem from "@components/Scrolly/NarrativeItem.astro";
 import ScrollyHud from "@components/Scrolly/ScrollyHud.astro";
 import TextDeck from "@components/Scrolly/TextDeck.astro";
-import ProjectInfoTable from "@components/Projects/ProjectInfoTable.astro";
+import ProjectManifestHUD from "@components/Projects/ProjectManifestHUD.astro";
 import SharedLayoutGallery from "@components/Projects/SharedLayoutGallery";
 
 const { entry, nextProject, prevProject, Content, metrics } = Astro.props;
@@ -14,6 +14,9 @@ const { cyberspace, title, description } = entry.data;
 const scrolly = cyberspace;
 
 import GlobalHomeButton from "@components/Nav/GlobalHomeButton.astro";
+// NEW COMPONENT IMPORTS
+import ConspiracyBoard from "@components/Projects/ConspiracyBoard";
+import Comparator from "@components/Projects/Comparator";
 
 const stickies = scrolly?.stickies || [];
 const narratives = scrolly?.narrative || [];
@@ -28,7 +31,13 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 }));
 ---
 
-<BaseLayout title={title} description={description} hideNav={true}>
+<BaseLayout
+	title={title}
+	description={description}
+	hideNav={true}
+	type="project"
+	projectFrontmatter={entry.data}
+>
 	<GlobalHomeButton />
 	<!-- FIXED INTRO -->
 	<div
@@ -49,7 +58,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 		<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50"></div>
 		<h1
 			class="font-heading relative z-10 text-9xl font-bold tracking-tighter text-white mix-blend-difference"
-			set:html={title
+			set:html={(title && typeof title === "string" ? title : String(title || "UNKNOWN"))
 				.toUpperCase()
 				.replace("|", '<span class=\"font-thin text-white opacity-85 mx-1\">|</span>')}
 		/>
@@ -64,12 +73,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 		class="fixed top-0 left-0 z-[9999] w-full transition-transform duration-500 ease-out"
 		style="transform: translateY(-100%);"
 	>
-		<ProjectInfoTable
-			data={entry.data}
-			nextProject={nextProject}
-			prevProject={prevProject}
-			metrics={metrics}
-		/>
+		<ProjectManifestHUD data={entry.data} nextProject={nextProject} prevProject={prevProject} />
 	</div>
 
 	<!-- MAIN ENGINE -->
@@ -84,7 +88,12 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 					<StickyStage
 						id={`stage-${stage.id}`}
 						active={index === 0}
-						data-interactive={stage.type === "gallery" || stage.type === "model"}
+						data-interactive={
+							stage.type === "gallery" ||
+							stage.type === "model" ||
+							stage.type === "conspiracy" ||
+							stage.type === "comparator"
+						}
 					>
 						{/* TYPE: SWARM */}
 						{stage.type === "swarm" && (
@@ -158,6 +167,22 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 								scattered={stage.data?.scattered || false}
 								featuredIndices={stage.data?.featuredIndices || []}
 								showLabels={false}
+							/>
+						)}
+
+						{/* TYPE: CONSPIRACY BOARD */}
+						{stage.type === "conspiracy" && (
+							<ConspiracyBoard client:load images={stage.data?.images || []} />
+						)}
+
+						{/* TYPE: COMPARATOR */}
+						{stage.type === "comparator" && (
+							<Comparator
+								client:load
+								beforeSrc={stage.data?.beforeSrc}
+								afterSrc={stage.data?.afterSrc}
+								beforeLabel={stage.data?.beforeLabel}
+								afterLabel={stage.data?.afterLabel}
 							/>
 						)}
 					</StickyStage>

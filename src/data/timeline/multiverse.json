@@ -1747,26 +1747,6 @@
         "Iterative Prototyping"
       ],
       "img": "/assets/r2/personal-iris/hero-sm.webp"
-    },
-    {
-      "id": "EPT-1000",
-      "name": "EPT-1000",
-      "group": "EP Technologies",
-      "color": "#e2f3e9",
-      "value": 205.8219205600679,
-      "year": 1987,
-      "start_date": "1987-01-01T00:00:00",
-      "end_date": "1989-06-01T00:00:00",
-      "category": "Medical Equipment",
-      "industry": "MedTech",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "Iterative Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Reliability Testing",
-        "Prototyping"
-      ],
-      "img": "/assets/r2/ept-1000/hero-sm.webp"
     }
   ]
 }

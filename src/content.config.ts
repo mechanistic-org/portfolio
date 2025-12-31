@@ -98,6 +98,24 @@ const projectsCollection = defineCollection({
         // V4 Scrolly Engine
         cyberspace: z.any().optional(),
 
+        // HUD Intelligence (V4.2 Upgrade)
+        metrics: z.object({
+            financial: z.object({
+                toolingBudget: z.number().optional(),
+                costOfGoodsSold: z.array(z.any()).optional(),
+                margins: z.array(z.any()).optional(),
+            }).optional(),
+            process: z.object({
+                engineeringChangeOrders: z.array(z.any()).optional(),
+                dcdCount: z.number().optional(),
+            }).optional(),
+            war_stories: z.array(z.number()).optional(),
+        }).optional(),
+        phase_stats: z.record(z.number()).optional(),
+        teamSize: z.string().optional(),
+        job_title: z.string().optional(),
+        war_stories: z.array(z.number()).optional(), // Legacy fallback
+
         // Theme Selector (Core Architecture)
         theme: z.string().optional(),
 

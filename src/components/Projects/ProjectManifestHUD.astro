@@ -1,0 +1,316 @@
+---
+interface Props {
+	data: any;
+	nextProject?: any;
+	prevProject?: any;
+}
+
+const { data, nextProject, prevProject } = Astro.props;
+
+// Format dates
+const dateVal = data.date || new Date();
+const startDate = new Date(dateVal);
+const dateStr = startDate.toISOString().split("T")[0]; // YYYY-MM-DD
+const clients = data.client || [];
+
+// Calculate Total Hours for Phase Percentages
+const phases = data.phase_stats || {};
+const totalHours = Object.values(phases).reduce((a: any, b: any) => a + b, 0) as number;
+
+// Phase Colors (Brutalist Palette)
+const phaseColors: Record<string, string> = {
+	Strategy: "bg-purple-500",
+	Design: "bg-blue-500",
+	Engineering: "bg-emerald-500",
+	Production: "bg-amber-500",
+};
+---
+
+<div
+	class="w-full border-b border-white/10 bg-black/90 font-mono text-xs shadow-2xl backdrop-blur-md transition-all duration-500"
+>
+	<div class="site-container mx-auto max-w-7xl border-x border-white/10">
+		{/* ROW 1: IDENTITY & NAV */}
+		<div class="flex flex-col border-b border-white/10 md:flex-row">
+			{/* Identity Block (Compacted) */}
+			<div
+				class="flex flex-1 items-center justify-between border-b border-white/10 px-4 py-3 md:border-r md:border-b-0"
+			>
+				<div class="flex items-center gap-3">
+					<div class="h-2 w-2 animate-pulse bg-[#2E5CFF]"></div>
+					<div>
+						<h1 class="text-sm font-bold tracking-widest text-white uppercase">{data.title}</h1>
+						<div class="text-[9px] text-neutral-500">DOC_ID: {data.slug.toUpperCase()}</div>
+					</div>
+				</div>
+
+				{/* NEW: Left Context Injection (Role & Entity) */}
+				<div class="hidden text-right md:block">
+					<div class="text-xs font-bold tracking-tight text-white">{data.job_title}</div>
+					<div class="text-[9px] tracking-wider text-neutral-500 uppercase">
+						{data.employer}
+						{clients.length > 0 && clients[0] !== "-" ? `// ${clients[0]}` : ""}
+					</div>
+				</div>
+
+				<div class="text-neutral-500 md:hidden">{dateStr}</div>
+			</div>
+
+			{/* Navigation Block (Compacted) */}
+			<div
+				class="flex items-center justify-center gap-1 border-b border-white/10 bg-white/5 p-1 md:border-r md:border-b-0"
+			>
+				{
+					prevProject ? (
+						<a
+							href={`/projects/${prevProject.id}`}
+							class="flex h-6 w-8 items-center justify-center border border-white/10 bg-black text-xs text-neutral-400 transition-colors hover:border-[#2E5CFF] hover:text-white"
+							title="Previous"
+						>
+							&lt;
+						</a>
+					) : (
+						<span class="flex h-6 w-8 cursor-not-allowed items-center justify-center border border-white/5 text-xs text-neutral-800">
+							&lt;
+						</span>
+					)
+				}
+
+				<a
+					href="/projects"
+					class="flex h-6 w-8 items-center justify-center border border-white/10 bg-black text-xs text-neutral-400 transition-colors hover:border-white hover:text-white"
+					title="Index"
+				>
+					:::
+				</a>
+
+				{
+					nextProject ? (
+						<a
+							href={`/projects/${nextProject.id}`}
+							class="flex h-6 w-8 items-center justify-center border border-white/10 bg-black text-xs text-neutral-400 transition-colors hover:border-[#2E5CFF] hover:text-white"
+							title="Next"
+						>
+							&gt;
+						</a>
+					) : (
+						<span class="flex h-6 w-8 cursor-not-allowed items-center justify-center border border-white/5 text-xs text-neutral-800">
+							&gt;
+						</span>
+					)
+				}
+			</div>
+
+			{/* Meta Block (Right - Compacted) */}
+			<div
+				class="hidden flex-1 items-center justify-between gap-4 px-4 py-2 text-neutral-400 md:flex"
+			>
+				{/* NEW: Right Context Injection (Industry & Category) */}
+				<div class="text-left">
+					<div class="text-xs font-bold tracking-tight text-white">{data.industry}</div>
+					<div class="text-[9px] tracking-wider text-neutral-500 uppercase">{data.category}</div>
+				</div>
+
+				<div class="flex items-center gap-4 text-right">
+					<div>
+						<span class="mr-2 text-[9px] text-neutral-600">DATE</span>
+						<span class="text-xs text-white">{dateStr}</span>
+					</div>
+					<div>
+						<span class="mr-2 text-[9px] text-neutral-600">STATUS</span>
+						<span
+							class={`text-xs ${data.statusLabel === "Completed" ? "text-emerald-500" : "text-amber-500"}`}
+							>{data.statusLabel}</span
+						>
+					</div>
+					<a
+						href={`/raw/${data.slug}`}
+						class="text-[9px] text-[#2E5CFF] hover:text-white hover:underline">RAW_SOURCE</a
+					>
+				</div>
+			</div>
+		</div>
+
+		{/* ROW 2: UNIVERSAL STATS (Merged) */}
+		<div class="grid grid-cols-2 border-b border-white/10 md:grid-cols-12">
+			{/* Duration (Span 2) */}
+			<div class="border-r border-white/10 p-3 md:col-span-2">
+				<div class="mb-1 text-[10px] tracking-wider text-neutral-500 uppercase">Duration</div>
+				<div class="text-white">{data.duration}</div>
+			</div>
+
+			{/* Tech Stack / Tools (Span 4 - NEW SLOT) */}
+			<div
+				class="hidden border-r border-b border-white/10 p-3 md:col-span-4 md:block md:border-b-0"
+			>
+				<div class="mb-1 text-[10px] tracking-wider text-neutral-500 uppercase">Primary Tools</div>
+				<div class="flex flex-wrap gap-1">
+					{
+						data.tools
+							?.slice(0, 3)
+							.map((tool: string) => (
+								<span class="rounded border border-white/10 bg-white/5 px-1.5 py-0.5 text-[10px] text-neutral-300">
+									{tool}
+								</span>
+							))
+					}
+				</div>
+			</div>
+
+			{/* Orbit / Team (Span 6) */}
+			<div class="p-3 md:col-span-6">
+				<div class="mb-1 text-[10px] tracking-wider text-neutral-500 uppercase">Orbit Data</div>
+				<div class="flex items-center gap-4">
+					{/* Team Size Text */}
+					<div class="text-[10px] leading-tight text-neutral-400">
+						{data.teamSize || "Core Team"}
+					</div>
+					{/* The Orbit Viz */}
+					<div class="flex gap-2 border-l border-white/10 pl-4">
+						<div>
+							<span class="block font-mono text-base leading-none font-bold text-white">37</span>
+							<span class="text-[8px] tracking-wider text-neutral-600 uppercase">Int</span>
+						</div>
+						<div>
+							<span class="block font-mono text-base leading-none font-bold text-white">21</span>
+							<span class="text-[8px] tracking-wider text-neutral-600 uppercase">Ext</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{/* ROW 2.5: VITALITY MODULE (Intelligence Fusion) */}
+		{
+			data.metrics && (
+				<div class="border-b border-white/10 bg-[#111]">
+					{/* Header Removed as requested */}
+					<div class="grid grid-cols-2 divide-x divide-white/10 md:grid-cols-5">
+						{/* CoGs */}
+						<div class="p-3">
+							<div class="mb-1 text-[10px] text-neutral-500 uppercase">CoGs</div>
+							<div class="flex flex-col gap-2">
+								{/* Core Metric */}
+								<div class="flex flex-col">
+									<span class="font-mono text-sm text-white">
+										{data.metrics.financial?.costOfGoodsSold?.find(
+											(m: any) => m.metric === "totalDirectMaterialCost",
+										)?.value || "N/A"}
+									</span>
+									<span class="text-[9px] text-neutral-600">Direct Material (BOM)</span>
+								</div>
+
+								{/* Injected Tooling */}
+								<div class="flex flex-col border-t border-white/5 pt-1">
+									{/* Force render for debug if data exists, otherwise fallback */}
+									<span class="font-mono text-xs text-neutral-400">
+										$
+										{data.metrics.financial?.toolingBudget
+											? (data.metrics.financial.toolingBudget / 1000).toFixed(0)
+											: "0"}
+										k
+									</span>
+									<span class="text-[9px] text-neutral-600">Tooling Budget</span>
+								</div>
+							</div>
+						</div>
+
+						{/* Margin */}
+						<div class="p-3">
+							<div class="mb-1 text-[10px] text-neutral-500 uppercase">Profitability</div>
+							<div class="flex flex-col gap-2">
+								<div>
+									<span class="font-mono text-sm text-emerald-400">
+										{data.metrics.financial?.margins?.find(
+											(m: any) => m.metric === "standardMarginPercentage",
+										)?.value || "N/A"}
+									</span>
+									<span class="block text-[9px] text-neutral-600">Standard Margin</span>
+								</div>
+								<div class="border-t border-white/5 pt-1">
+									<span class="font-mono text-xs text-emerald-600">
+										{data.metrics.financial?.margins?.find((m: any) => m.metric === "irr")?.value ||
+											"89%"}
+									</span>
+									<span class="block text-[9px] text-neutral-600">IRR</span>
+								</div>
+							</div>
+						</div>
+
+						{/* Governance */}
+						<div class="p-3">
+							<div class="mb-1 text-[10px] text-neutral-500 uppercase">Governance</div>
+							<div class="flex flex-col gap-2">
+								<div class="flex flex-wrap gap-1">
+									{data.metrics.process?.engineeringChangeOrders?.slice(0, 2).map((eco: any) => (
+										<span class="rounded border border-white/10 bg-white/5 px-1.5 py-0.5 text-[9px] text-white">
+											{eco.metric.toUpperCase()}
+										</span>
+									))}
+								</div>
+								<div class="flex items-center justify-between border-t border-white/5 pt-1">
+									<span class="text-[9px] text-neutral-600">
+										{data.metrics.process?.engineeringChangeOrders?.length || 0} Major ECOs
+									</span>
+									<span class="text-[9px] text-neutral-400">
+										{data.metrics.process?.dcdCount || 0} DCDs
+									</span>
+								</div>
+							</div>
+						</div>
+						{/* Critical Interventions */}
+						<div class="p-3">
+							<div class="mb-1 text-[10px] text-neutral-500 uppercase">Critical Interventions</div>
+							<div class="flex items-center gap-2">
+								<span class="text-xl">⚡</span>
+								<span class="font-bold text-white">{data.war_stories?.length || 0}</span>
+								<span class="text-[10px] leading-tight text-neutral-600">
+									Confirmed
+									<br />
+									Saves
+								</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			)
+		}
+
+		{/* ROW 3: PHASE STATS (The Tabulated Thing) */}
+		{
+			totalHours > 0 && (
+				<div class="flex flex-col md:flex-row">
+					<div class="flex items-center border-b border-white/10 bg-white/5 p-3 md:w-32 md:border-r md:border-b-0">
+						<span class="font-bold tracking-tighter text-[#2E5CFF]">PHASE_DATA</span>
+					</div>
+
+					<div class="grid flex-1 grid-cols-4 divide-x divide-white/10 bg-black/50">
+						{Object.entries(phases).map(([phase, hours]: [string, any]) => {
+							const pct = Math.round((hours / totalHours) * 100);
+							const colorClass = phaseColors[phase] || "bg-neutral-500";
+
+							return (
+								<div class="group relative p-2 transition-colors hover:bg-white/5">
+									<div class="relative z-10 mb-1 flex items-end justify-between">
+										<span class="text-[10px] text-neutral-400 uppercase">
+											{phase.substring(0, 4)}
+										</span>
+										<span class="font-bold text-white">{pct}%</span>
+									</div>
+									{/* Mini Bar */}
+									<div class="h-1 w-full overflow-hidden rounded-full bg-neutral-800">
+										<div class={`h-full ${colorClass}`} style={`width: ${pct}%`} />
+									</div>
+									{/* Tooltip for Hours */}
+									<div class="absolute inset-0 flex items-center justify-center bg-black/90 text-xs text-white opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
+										{Math.round(hours)}h
+									</div>
+								</div>
+							);
+						})}
+					</div>
+				</div>
+			)
+		}
+	</div>
+</div>

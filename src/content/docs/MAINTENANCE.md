@@ -126,14 +126,7 @@ We use custom VS Code snippets to rapidly scaffold "Visual Taxonomy" components.
 *   **3D Models:** Add a `.glb` file in the folder. It will be auto-detected.
 *   **Videos:** Currently, the script inserts a placeholder YouTube ID. You must manually edit the generated `.mdx` file or update the script to map video IDs from a CSV column.
 
-### Interactive Gallery Triggers
-The `SharedLayoutGallery` supports interactive modules disguised as images.
-*   **Schema:** in `c24.mdx` (or any project):
-    ```yaml
-    - { src: "/assets/preview.png", title: "Launch Module", trigger: "time-capsule" }
-    ```
-*   **Supported Triggers:**
-    *   `time-capsule`: Launches the `TimeCapsule.tsx` modal (DigiME Intranet).
+
 
 ### Troubleshooting Charts
 If a chart isn't showing up:
@@ -198,7 +191,27 @@ status: {
 ## 8. Project Directory Maintenance
 *   **Deep Linking:** You can link to a pre-filtered view using URL parameters: `https://eriknorris.com/projects?client=Google`.
 
-## 8. Troubleshooting
+### 8. Troubleshooting
+
+### "Zombie" Dev Servers
+*   **Symptom:** You make code changes, but the browser shows the old version. Screenshots show port `4321` but the terminal says `4323`.
+*   **Cause:** Multiple instances of `npm run dev` running in background terminals.
+*   **Fix:**
+    1.  Check terminal output for the *actual* active port.
+    2.  Run `taskkill /F /IM node.exe` (Windows) or `pkill -f node` (Mac/Linux) to nuke all stray servers.
+    3.  Restart *one* instance.
+
+### JSON Duplicate Keys
+*   **Symptom:** Console error `Encountered two children with the same key`.
+*   **Fix:** `src/data/timeline/sacred_timeline.json` requires unique `id` fields. Use `grep` to find duplicates (e.g., `KSERVER-1500`).
+
+### Ghost Data (The "Manifest Override")
+*   **Symptom:** HUD shows incorrect data (e.g., "$0k Budget") even though `.mdx` frontmatter is correct.
+*   **Cause:** Legacy data in `src/config/project_manifest.json` merges with and **overrides** MDX data.
+*   **Fix:**
+    1.  Search `project_manifest.json` for the slug key (e.g., `"c24": { ... }`).
+    2.  Delete the entire object entry.
+    3.  Restart the dev server to force a clean hydration from MDX.
 
 ### Astro Compiler Panic (Exit Code 2 / "originalIM was set twice")
 *   **Symptom:** `npm run dev` crashes instantly with `bad parser state` or `Go program has already exited`.
@@ -221,6 +234,16 @@ status: {
 *   **Symptom:** `ingest_data.py` crashes with `PermissionError: [WinError 32]` or `shutil` errors.
 *   **Cause:** The local dev server (`npm run dev`) locks files in `public/assets/r2`, preventing the script from overwriting them during sync.
 *   **Fix:** The script has been patched to use `try/except` blocks and `dirs_exist_ok=True`. If it persists, stop the dev server, run `python ingest_data.py`, then restart the server.
+
+### Ingestion Script Crashes (Windows Unicode)
+*   **Symptom:** `ingest_data.py` crashes instantly with `UnicodeEncodeError`.
+*   **Cause:** Windows console (CP1252) chokes on emoji output (`📂`, `🚀`).
+*   **Fix:** Ensure the script includes `sys.stdout.reconfigure(encoding='utf-8')` if running on Windows.
+
+### Ingestion Data Override (The "Golden Master" Protocol)
+*   **Context:** Sometimes MDX frontmatter fails to merge with the manifest due to dev server caching or schema issues.
+*   **Protocol:** For critical benchmark projects (e.g., C24), use a specific toggle in `ingest_data.py` to force-write the correct data to `project_manifest.json`.
+*   **Goal:** Ensure the HUD is factually correct even if the frontend cache is stale.
 
 ### Overbaked 3D Models (Washed Out / Too Bright)
 *   **Symptom:** 3D model looks nuclear white or loses surface detail.
@@ -245,47 +268,7 @@ status: {
 *   **Cause:** The `Hyperspace.astro` layout is missing the `<slot />` element for the main content flow.
 *   **Fix:** Add `<section><slot /></section>` below the `Narrative` section in the layout file.
 
-### Blank System Realm (3D Void)
-*   **Symptom:** The System Realm (Realm IV) is black/blank. No 3D objects are visible.
-*   **Cause:**
-    1.  **Missing Environment:** Glass materials need an HDRI to reflect. If `<Environment />` is missing/commented out, the object is technically rendered but invisible.
-    2.  **Font Loading:** R3F `<Text>` component can crash the canvas if the font URL is unreachable or invalid during initial mount.
-*   **Fix:**
-    1.  **Isolate:** Add a "Reference Cube" (`<meshBasicMaterial color="red" />`) to see if the Canvas is running effectively.
-    2.  **Restore:** Ensure `<Environment preset="city" />` is active.
-    3.  **Fonts:** Temporarily disable custom font URLs in `<Text>` to rule out CORS/Network issues.
 
-### Navigation Pill "MIA" (Stuck State)
-*   **Symptom:** The active nav pill in `HyperspaceHUD` fails to update or gets stuck on the previous section.
-*   **Cause:**
-    1.  **ID Mismatch:** The component expects `data-nav-target="realm-archive"` but the HTML section is `id="realm-about"`.
-    2.  **Observer Threshold:** The `IntersectionObserver` `rootMargin` is too strict.
-*   **Fix:**
-    1.  **Sync IDs:** Ensure `HyperspaceHUD.astro` targets match `HyperspaceHome.astro` IDs exactly.
-    2.  **Tune Margin:** A `rootMargin` of `"-25% 0px -25% 0px"` (detecting the center 50% of the screen) is the robust "Sweet Spot" for Realm-based scrolling.
-
-### Frozen Scroll Components (Hyperspace)
-*   **Symptom:** `SlideProjector` or `LivingGantt` won't animate; they stick and stay static.
-*   **Cause:** The component is likely listening to `window` scroll instead of the specific `#hyperspace-container` div.
-*   **Fix:** Ensure `document.getElementById('hyperspace-container')` is passed as the event target or `useScroll` container.
-
-### Font 404s
-*   **Symptom:** `JetBrainsMono` returning 404 in console.
-*   **Fix:** Use the Google Fonts CDN URL in R3F `Text` components (`SystemAssembly.tsx`) instead of local paths if the public asset is missing.
-    *   URL: `https://fonts.gstatic.com/s/jetbrainsmono/v13/tDbY2o-flEEny0FZhsfKu5WU4zr3E_BX0PnF8RD8yKxTOlOV.woff`
-
-### D3 Selector Crash (IDs with Spaces)
-*   **Symptom:** Visualization (Swarm/Sankey) crashes or fails to highlight nodes on hover.
-*   **Cause:** D3 `select("#id")` fails if the ID contains spaces (e.g., "Portion Cup").
-*   **Fix:** Use attribute selectors instead: `d3.select("[id='label-${d.id}']")`.
-
-### R3F Canvas Context Collision
-*   **Symptom:** 3D map is missing or background elements (FiberGrid) overlap incorrectly.
-*   **Fix:** Ensure the page uses **OuroborosLayout.astro**, which provides a clean WebGL shell without legacy 2D grid interference.
-
-### Missing Constellation Line Import
-*   **Symptom:** `Line` component is undefined in R3F.
-*   **Fix:** `Line` must be imported from `@react-three/drei`, NOT from standard three.js or fiber.
 
 ### Zombie Asset Checks
 *   **Symptom:** Terminal shows hanging `curl` commands running for hours; system feels sluggish.
@@ -886,3 +869,20 @@ New-Item -ItemType SymbolicLink -Path "d:\GitHub\quantum\public\assets\r2" -Targ
     2.  Use "Account API Token" (surer than User Token).
     3.  Update `R2_ACCESS_KEY_ID` and `R2_SECRET_ACCESS_KEY` in `.env`.
     4.  **Important:** Boto3 requires `region_name='auto'` to authorize correctly (already patched in `scripts/sync_r2.py`).
+
+### Asset Pipeline Troubleshooting ("The Two Ghosts")
+If assets appear locally but break on Production (or vice-versa), check these common traps:
+
+#### 1. The "Ghost Link" (Git vs. Symlink)
+*   **Symptom:** Images load locally but are 404 on Cloudflare.
+*   **Cause:** `public/assets/r2` is a Symlink/Junction. If `.gitignore` ignores it (CORRECT), Git won't track the *contents*.
+*   **Fix:**
+    *   **Prod:** Ensure `npm run sync:assets` is run to push files to R2. Cloudflare fetches from R2, not the repo.
+    *   **Git:** NEVER remove `public/assets/r2` from `.gitignore`. If you do, Git might try to index the symlink as a folder or deadlock on files.
+
+#### 2. The "Illegal Name" (Data Sanitation)
+*   **Symptom:** Asset generation fails, or files refuse to copy/sync.
+*   **Cause:** IDs with special characters (e.g., `C|24`) are valid strings but **illegal filenames** on Windows.
+*   **Fix:**
+    *   **Data:** Sanitize IDs in `multiverse.json` (e.g., `"id": "c24"`).
+    *   **Assets:** Ensure filenames verify against the whitelist regex `^([\w-]+)`. Use dashes, not pipes or slashes.

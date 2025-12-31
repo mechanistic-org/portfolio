@@ -46,7 +46,6 @@ export default function WiggleLogo3D() {
                         rotation={[0, 0, 0]}
                         polar={[-Math.PI / 4, Math.PI / 4]} // Vertical limits
                         azimuth={[-Math.PI / 4, Math.PI / 4]} // Horizontal limits
-                        config={{ mass: 1, tension: 170, friction: 26 }} // Spring physics
                     >
                         <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
                             <Model url="/assets/models/en_logo.glb" />

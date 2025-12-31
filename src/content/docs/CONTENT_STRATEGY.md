@@ -46,6 +46,12 @@ Quantum uses a **Hybrid Architecture** to manage project data.
 *   **Purpose:** Detailed case studies, storytelling, code blocks.
 *   **Why:** Markdown offers a superior authoring experience for long-form content.
 
+### Content Tiers
+To serve different user personas (Recruiters vs. Engineers), we support disparate "resolutions" of the same project:
+*   **Full (Hero):** Deep-dive, scrollytelling, "Bubbles", Galleries. (e.g., `c24`)
+*   **Lite (Datasheet):** Text-heavy, fast-loading, standard Markdown. (e.g., `c24-lite`)
+*   **Redacted (NDA):** Terminal-style, obfuscated details.
+
 ---
 
 ## 3. Tooling Stack & Extraction Strategy

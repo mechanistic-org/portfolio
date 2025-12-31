@@ -29,6 +29,7 @@ const gallery = data.gallery || [];
 	description={data.description ?? ""}
 	image={data.heroImage ?? ""}
 	type="project"
+	projectFrontmatter={data}
 >
 	<GlobalHomeButton />
 	<ProjectHeader entry={entry} nextProject={nextProject} prevProject={prevProject} />
@@ -37,53 +38,7 @@ const gallery = data.gallery || [];
 		<aside
 			class="order-2 space-y-8 md:sticky md:top-24 md:order-1 md:col-span-4 md:h-fit lg:col-span-3"
 		>
-			<div
-				class="rounded-xl border border-neutral-200 bg-white/50 p-6 dark:border-neutral-800 dark:bg-neutral-900/50"
-			>
-				<h3
-					class="mb-4 border-b border-neutral-200 pb-2 text-sm font-bold tracking-wider text-neutral-900 uppercase dark:border-neutral-800 dark:text-white"
-				>
-					Project Data
-				</h3>
-				<dl class="space-y-4 text-sm">
-					<div>
-						<>
-							<dt class="mb-1 text-neutral-500">Role</dt>
-							<dd class="font-medium text-neutral-900 dark:text-white">{data.employer}</dd>
-						</>
-					</div>
-					<div>
-						<>
-							<dt class="mb-1 text-neutral-500">Started</dt>
-							<dd class="font-medium text-white">{dateDisplay}</dd>
-						</>
-					</div>
-					<div>
-						<>
-							<dt class="mb-1 text-neutral-500">Duration</dt>
-							<dd class="font-medium text-white">{data.duration}</dd>
-						</>
-					</div>
-					{
-						clients.length > 0 && (
-							<div>
-								<>
-									<dt class="mb-1 text-neutral-500">Client / Partner</dt>
-									<dd class="font-medium text-neutral-900 dark:text-white">{clients.join(", ")}</dd>
-								</>
-							</div>
-						)
-					}
-					<div>
-						<dt class="mb-1 text-neutral-500">Status</dt>
-						<dd
-							class="bg-primary/10 text-primary border-primary/20 inline-flex items-center gap-2 rounded border px-2 py-1 text-xs font-bold"
-						>
-							{data.statusLabel}
-						</dd>
-					</div>
-				</dl>
-			</div>
+			{/* Project Data removed (moved to Header SpecCard) */}
 
 			{
 				data.additionalSkills && data.additionalSkills.length > 0 && (

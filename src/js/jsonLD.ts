@@ -13,13 +13,20 @@ export interface BlogProps {
 	canonicalUrl: URL;
 }
 
-export type JsonLDProps = BlogProps | GeneralProps;
+export interface ProjectProps {
+	type: "project";
+	projectFrontmatter: any; // Using any for flexibility with CollectionEntry data
+	image: any;
+	canonicalUrl: URL;
+}
+
+export type JsonLDProps = BlogProps | GeneralProps | ProjectProps;
 
 export default function jsonLDGenerator(props: JsonLDProps) {
 	const { type } = props;
+
 	if (type === "blog") {
 		const { postFrontmatter, image, authors, canonicalUrl } = props as BlogProps;
-
 		const authorsJsonLdArray = authors.map((author) => {
 			return {
 				"@type": "Person",
@@ -29,7 +36,6 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 		});
 
 		let authorsJsonLd;
-
 		if (authorsJsonLdArray.length === 1) {
 			authorsJsonLd = authorsJsonLdArray[0];
 		} else {
@@ -39,7 +45,7 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 		return `<script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Blogposting",
+        "@type": "BlogPosting",
         "mainEntityOfPage": {
           "@type": "WebPage",
           "@id": "${canonicalUrl}"
@@ -52,7 +58,45 @@ export default function jsonLDGenerator(props: JsonLDProps) {
         "dateModified": "${postFrontmatter.updatedDate}"
       }
     </script>`;
+	} else if (type === "project") {
+		const { projectFrontmatter, image, canonicalUrl } = props as ProjectProps;
+
+		if (!projectFrontmatter) {
+			return `<script type="application/ld+json">
+			{
+			"@context": "https://schema.org/",
+			"@type": "WebSite",
+			"name": "${siteData.title}",
+			"url": "${import.meta.env.SITE}"
+			}
+			</script>`;
+		}
+
+		// extract skills for keywords
+		const keywords = projectFrontmatter.additionalSkills
+			? projectFrontmatter.additionalSkills.join(", ")
+			: projectFrontmatter.compentencies
+				? projectFrontmatter.compentencies.join(", ")
+				: "";
+
+		return `<script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Project",
+        "name": "${projectFrontmatter.title}",
+        "description": "${projectFrontmatter.description}",
+        "url": "${canonicalUrl}",
+        "image": "${image?.src || siteData.defaultImage.src}",
+        "foundingDate": "${projectFrontmatter.date}",
+        "keywords": "${keywords}",
+        "maintainer": {
+            "@type": "Person",
+            "name": "${siteData.author.name}"
+        }
+      }
+    </script>`;
 	}
+
 	return `<script type="application/ld+json">
       {
       "@context": "https://schema.org/",

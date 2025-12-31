@@ -13,9 +13,15 @@ interface BaseProps {
 	noindex?: boolean;
 }
 
-interface GenProps extends BaseProps {
-	type: "general" | "project";
+interface GeneralProps extends BaseProps {
+	type: "general";
 	image?: ImageMetadata | string;
+}
+
+interface ProjectProps extends BaseProps {
+	type: "project";
+	image?: ImageMetadata | string;
+	projectFrontmatter: any; // specific or any
 }
 
 interface BlogProps extends BaseProps {
@@ -25,7 +31,13 @@ interface BlogProps extends BaseProps {
 	postFrontmatter: CollectionEntry<"blog">["data"];
 }
 
-const { type, title, description, image, noindex = false } = Astro.props as GenProps | BlogProps;
+const {
+	type,
+	title,
+	description,
+	image,
+	noindex = false,
+} = Astro.props as GeneralProps | BlogProps | ProjectProps;
 
 let optimizedImage;
 let jsonLD;
@@ -51,8 +63,35 @@ if (type === "blog") {
 		authors: authors,
 		canonicalUrl: canonicalUrl,
 	});
+} else if (type === "project") {
+	const { projectFrontmatter } = Astro.props as ProjectProps;
+
+	if (image) {
+		// Optimizing hero image for Project Schema
+		if (typeof image === "string") {
+			// If string, we can't easily use getImage unless we import it.
+			// For now assume raw string is fine or handled by upstream logic.
+			// But existing code expects ImageMetadata for getImage usually.
+			// We'll skip optimization if it's a string path (common in this codebase)
+			// or assume generic logic.
+		} else {
+			optimizedImage = await getImage({
+				src: image,
+				format: "webp",
+				quality: "high",
+				width: 1200,
+			});
+		}
+	}
+
+	jsonLD = jsonLDGenerator({
+		type: "project",
+		projectFrontmatter: projectFrontmatter,
+		image: optimizedImage || { src: image } || siteData.defaultImage, // Fallback logic
+		canonicalUrl: canonicalUrl,
+	});
 }
-// for general pages and projects
+// for general pages
 else {
 	jsonLD = jsonLDGenerator({
 		type: "general",
