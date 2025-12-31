@@ -5,6 +5,7 @@ import { hydeTraits, type HydeTrait } from '../../config/hydeData';
 interface HydeOuroborosProps {
     width?: number;
     height?: number;
+    isComplete?: boolean;
 }
 
 // Lobe Colors
@@ -15,7 +16,7 @@ const lobeColors: Record<string, string> = {
     "Deep": "#8B5CF6", // Purple
 };
 
-export default function HydeOuroboros({ width = 1000, height = 800 }: HydeOuroborosProps) {
+export default function HydeOuroboros({ width = 1000, height = 900, isComplete = false }: HydeOuroborosProps) {
     const [hoveredTrait, setHoveredTrait] = useState<HydeTrait | null>(null);
 
     // Filter traits by lobe
@@ -25,33 +26,15 @@ export default function HydeOuroboros({ width = 1000, height = 800 }: HydeOurobo
     const deepTraits = hydeTraits.filter(t => t.lobe === "Deep");
 
     // Geometry Definitions
-    // We define SVG paths for each Loop relative to a 1000x1000 ViewBox centered at 500,500
-    // These paths mimic the "Hyde" multi-lobed structure
-
-    // Main Loop (Personality): Large horizontal figure-8ish / orbit
-    const mainPathD = "M 500 500 C 700 300, 900 500, 700 700 S 300 700, 500 500";
-    // Wait, simpler spiral: Start center, loop right, loop down, loop left
-
-    // Let's define clearer orbital paths.
-    // Loop 1 (Main): Top-Right quadrant loop
-    const mainLoopD = "M 500 500 C 600 400, 800 400, 800 600 C 800 800, 600 800, 500 500";
-
-    // Loop 2 (Transition): Top-Left quadrant loop (Hard Skills)
-    const transLoopD = "M 500 500 C 400 400, 200 400, 200 600 C 200 800, 400 800, 500 500";
-
-    // Loop 3 (Deep): Bottom loop (Leadership) - or maybe a surrounding big loop?
-    // Let's make it a bottom lobe to complete a clover shape
-    const deepLoopD = "M 500 500 C 400 600, 400 850, 600 850 C 800 850, 800 600, 500 500";
-
-
-    // Helper to sample points along a path (Approximation)
-    // In a real SVG DOM we'd use getPointAtLength, but in SSR/React we simulate or use CSS motion path
-    // For now, let's use a parametric approximation for the "Clover" layout
-    // Actually, simple parametric circles are safer for React rendering without DOM measurement
+    // Golden Mean Setup:
+    // Lobe Radius (Main/Trans) = 180
+    // Geometric Centroid Y = 444
+    // Golden Text Radius (ry) = 180 * 1.618 ≈ 291
 
     const getParametricPos = (lobe: string, index: number, total: number) => {
         const cx = 500;
-        const cy = 400; // Shift center up slightly
+        const cy = 400; // Shift center up slightly to keep Lobes visual center
+        // Note: Text is centered at 444 (Geometric Mean), Lobes at 400/532 visually anchor it.
         const rBase = 150;
 
         let angleOffset = 0;
@@ -61,29 +44,23 @@ export default function HydeOuroboros({ width = 1000, height = 800 }: HydeOurobo
             case "Main":
                 // Right Lobe
                 angleOffset = 0;
-                radius = 200;
+                radius = 180;
                 break;
             case "Transition":
                 // Left Lobe
                 angleOffset = Math.PI; // 180 deg
-                radius = 200;
+                radius = 180;
                 break;
             case "Deep":
                 // Bottom Lobe
                 angleOffset = Math.PI / 2; // 90 deg (Bottom)
-                radius = 220;
+                radius = 200;
                 break;
         }
 
         // Calculate position on the specific lobe's perimeter
-        // We simulate the lobe as an ellipse offset from center
         const lobeCenterX = cx + Math.cos(angleOffset) * (radius * 0.8);
         const lobeCenterY = cy + Math.sin(angleOffset) * (radius * 0.6);
-
-        // Spread items along the lobe perimeter
-        // We want them to connect back to center?
-        // Let's just place them in a spiral around the Lobe Center for now
-        // This creates "Galaxies" of traits
 
         const phi = (index / total) * Math.PI * 2 * 2; // 2 loops
         const spiralR = 20 + (index / total) * radius; // Spiraling out
@@ -95,12 +72,11 @@ export default function HydeOuroboros({ width = 1000, height = 800 }: HydeOurobo
     };
 
     return (
-        <div className="relative w-full aspect-[4/3] flex items-center justify-center bg-neutral-950 rounded-3xl overflow-hidden border border-white/5 shadow-2xl">
+        <div className="relative w-full h-full flex items-center justify-center bg-neutral-950 rounded-3xl overflow-hidden border border-white/5 shadow-2xl">
 
-            {/* Background Texture */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(46,92,255,0.05)_0%,rgba(0,0,0,0)_60%)]" />
 
-            <svg viewBox="0 0 1000 800" className="w-full h-full">
+            {/* SVG: Centered at 500, 450 (Matches HTML Center) */}
+            <svg viewBox="0 0 1000 900" className="w-full h-full max-h-screen">
                 <defs>
                     <filter id="glow">
                         <feGaussianBlur stdDeviation="2.5" result="coloredBlur" />
@@ -109,81 +85,201 @@ export default function HydeOuroboros({ width = 1000, height = 800 }: HydeOurobo
                             <feMergeNode in="SourceGraphic" />
                         </feMerge>
                     </filter>
+                    <radialGradient id="gradAnchor" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                        <stop offset="0%" stopColor="white" stopOpacity="1" />
+                        <stop offset="100%" stopColor="white" stopOpacity="0" />
+                    </radialGradient>
+
+                    {/* Paths for Radial Text Labels - GOLDEN MEAN TUNED */}
+                    {/* Center: 500, 444 (AVG of centers) */}
+                    {/* rx: 340 (Width Constraint) */}
+                    {/* ry: 291 (Golden Ratio of Lobe Radius 180 * 1.618) */}
+
+                    {/* TRAITS (Top Right) - Arc from -10 to -80 degrees */}
+                    {/* Start (-80): x=500+340*0.17=558, y=444-291*0.98=159 */}
+                    {/* End (-10):   x=500+340*0.98=833, y=444-291*0.17=394 */}
+                    <path id="pathMain" d="M 558 159 A 340 291 0 0 1 833 394" />
+
+                    {/* SKILLS (Top Left) - Arc from -170 to -100 degrees */}
+                    {/* Start (-170): x=500+340*-0.98=167, y=444-291*0.17=394 */}
+                    {/* End (-100):   x=500+340*-0.17=442, y=444-291*0.98=159 */}
+                    <path id="pathTrans" d="M 167 394 A 340 291 0 0 1 442 159" />
+
+                    {/* VALUES (Bottom) - Arc from 70 to 110 degrees */}
+                    {/* Start (110): x=500+340*-0.34=384, y=444+291*0.94=717 */}
+                    {/* End (70):    x=500+340*0.34=616,  y=444+291*0.94=717 */}
+                    <path id="pathDeep" d="M 384 717 A 340 291 0 0 0 616 717" />
                 </defs>
 
-                {/* Connecting Lines (The Ouroboros Ribbon - Simulated) */}
-                {/* We draw curves from Center to each Lobe Center to signify connection */}
-                <path d="M 500 400 Q 700 400, 700 400" stroke={lobeColors["Main"]} strokeWidth="2" fill="none" opacity="0.2" />
-                <path d="M 500 400 Q 300 400, 300 400" stroke={lobeColors["Transition"]} strokeWidth="2" fill="none" opacity="0.2" />
-                <path d="M 500 400 Q 500 700, 500 650" stroke={lobeColors["Deep"]} strokeWidth="2" fill="none" opacity="0.2" />
+                {/* VISUALIZATION GROUP */}
+                <motion.g
+                    // User Request: "grow the viz more and quicker"
+                    animate={{ scale: isComplete ? 1.25 : 1 }}
+                    transition={{ duration: 0.8, ease: "circOut" }}
+                >
+                    {/* Connecting Lines REMOVED */}
 
 
-                {/* Main Lobe Render */}
-                {mainTraits.map((t, i) => {
-                    const pos = getParametricPos("Main", i, mainTraits.length);
-                    // Add slight random jitter for organic feel
-                    const jitterX = (Math.random() - 0.5) * 10;
-                    const jitterY = (Math.random() - 0.5) * 10;
-                    return (
-                        <Node
-                            key={t.name}
-                            x={pos.x + jitterX}
-                            y={pos.y + jitterY}
-                            trait={t}
-                            color={lobeColors["Main"]}
-                            setHover={setHoveredTrait}
-                        />
-                    );
-                })}
+                    {/* Main Lobe (Personality) - Center 660, 400 */}
+                    <motion.g
+                        initial={{ x: 660, y: 400 }}
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+                    >
+                        {mainTraits.map((t, i) => {
+                            const pos = getParametricPos("Main", i, mainTraits.length);
+                            const localX = pos.x - 660;
+                            const localY = pos.y - 400;
 
-                {/* Transition Lobe Render */}
-                {transTraits.map((t, i) => {
-                    const pos = getParametricPos("Transition", i, transTraits.length);
-                    return (
-                        <Node
-                            key={t.name}
-                            x={pos.x}
-                            y={pos.y}
-                            trait={t}
-                            color={lobeColors["Transition"]}
-                            setHover={setHoveredTrait}
-                        />
-                    );
-                })}
+                            const jitterX = (Math.random() - 0.5) * 2;
+                            const jitterY = (Math.random() - 0.5) * 2;
+                            return (
+                                <Node
+                                    key={t.name}
+                                    x={localX + jitterX}
+                                    y={localY + jitterY}
+                                    trait={t}
+                                    color={lobeColors["Main"]}
+                                    setHover={setHoveredTrait}
+                                />
+                            );
+                        })}
+                    </motion.g>
 
-                {/* Deep Lobe Render */}
-                {deepTraits.map((t, i) => {
-                    const pos = getParametricPos("Deep", i, deepTraits.length);
-                    return (
-                        <Node
-                            key={t.name}
-                            x={pos.x}
-                            y={pos.y}
-                            trait={t}
-                            color={lobeColors["Deep"]}
-                            setHover={setHoveredTrait}
-                        />
-                    );
-                })}
+                    {/* Transition Lobe (Skills) - Center 340, 400 */}
+                    <motion.g
+                        initial={{ x: 340, y: 400 }}
+                        animate={{ rotate: -360 }}
+                        transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+                    >
+                        {transTraits.map((t, i) => {
+                            const pos = getParametricPos("Transition", i, transTraits.length);
+                            const localX = pos.x - 340;
+                            const localY = pos.y - 400;
+                            return (
+                                <Node
+                                    key={t.name}
+                                    x={localX}
+                                    y={localY}
+                                    trait={t}
+                                    color={lobeColors["Transition"]}
+                                    setHover={setHoveredTrait}
+                                />
+                            );
+                        })}
+                    </motion.g>
 
-                {/* Anchor Node (Center) */}
+                    {/* Deep Lobe (Values) - Center 500, 532 */}
+                    <motion.g
+                        initial={{ x: 500, y: 532 }}
+                        animate={{ rotate: -360 }}
+                        transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+                    >
+                        {deepTraits.map((t, i) => {
+                            const pos = getParametricPos("Deep", i, deepTraits.length);
+                            const localX = pos.x - 500;
+                            const localY = pos.y - 532;
+                            return (
+                                <Node
+                                    key={t.name}
+                                    x={localX}
+                                    y={localY}
+                                    trait={t}
+                                    color={lobeColors["Deep"]}
+                                    setHover={setHoveredTrait}
+                                />
+                            );
+                        })}
+                    </motion.g>
+
+                    {/* Radial Labels - Using textPath for curvature */}
+                    {/* TRAITS (Right) */}
+                    <text fill={lobeColors["Main"]} opacity="0.3" fontSize="24" fontWeight="bold" letterSpacing="0.2em">
+                        <textPath href="#pathMain" startOffset="50%" textAnchor="middle">TRAITS</textPath>
+                    </text>
+
+                    {/* SKILLS (Left) */}
+                    <text fill={lobeColors["Transition"]} opacity="0.3" fontSize="24" fontWeight="bold" letterSpacing="0.2em">
+                        <textPath href="#pathTrans" startOffset="50%" textAnchor="middle">SKILLS</textPath>
+                    </text>
+
+                    {/* VALUES (Bottom) */}
+                    <text fill={lobeColors["Deep"]} opacity="0.3" fontSize="24" fontWeight="bold" letterSpacing="0.2em">
+                        <textPath href="#pathDeep" startOffset="50%" textAnchor="middle">VALUES</textPath>
+                    </text>
+                </motion.g>
+
+                {/* ANCHOR NODE (CREATIVITY / THE SOURCE) */}
                 {anchorTrait && (
-                    <g transform="translate(500, 400)" className="cursor-pointer hover:scale-110 transition-transform">
-                        <circle r="40" fill="url(#gradAnchor)" className="animate-pulse" />
-                        <circle r="40" fill="none" stroke="white" strokeWidth="2" strokeDasharray="4 4" />
-                        <text y="5" textAnchor="middle" fill="white" fontWeight="bold" fontSize="14" style={{ textTransform: 'uppercase' }}>
-                            {anchorTrait.name}
-                        </text>
-                        {/* Atomic Number */}
-                        <text y="-20" textAnchor="middle" fill="rgba(255,255,255,0.5)" fontSize="10">1</text>
-                    </g>
+                    <motion.g
+                        className="cursor-pointer"
+                        initial={{ x: 500, y: 450, scale: 1, opacity: 1 }}
+                        animate={isComplete ? { x: 500, y: 450, scale: 1.5, opacity: 1 } : { x: 500, y: 450, scale: 1, opacity: 1 }}
+                        transition={{ duration: 2 }}
+                    >
+                        {/* THE NEBULA RING (Golden Mean Pulse) */}
+                        {/* Matches Text Path: rx=340, ry=291, cy=444 (relative to group 450 -> -6) */}
+                        <motion.ellipse
+                            cx="0"
+                            cy="-6" // 450 - 6 = 444 (Geometric Center)
+                            rx={isComplete ? 800 : 340} // Expands on complete
+                            ry={isComplete ? 800 : 291}
+                            fill="none"
+                            stroke="url(#gradAnchor)"
+                            strokeWidth="2"
+                            animate={{
+                                opacity: isComplete ? 0 : [
+                                    // MORSE: HARDWARE
+                                    // H (....)
+                                    0.4, 0.1, 0.4, 0.1, 0.4, 0.1, 0.4, 0.1, 0,
+                                    // A (.-)
+                                    0.4, 0.1, 0.4, 0.4, 0.4, 0.1, 0,
+                                    // R (.-.)
+                                    0.4, 0.1, 0.4, 0.4, 0.4, 0.1, 0.4, 0.1, 0,
+                                    // D (-..)
+                                    0.4, 0.4, 0.4, 0.1, 0.4, 0.1, 0.4, 0.1, 0,
+                                    // W (.--)
+                                    0.4, 0.1, 0.4, 0.4, 0.4, 0.1, 0.4, 0.4, 0.4, 0.1, 0,
+                                    // A (.-)
+                                    0.4, 0.1, 0.4, 0.4, 0.4, 0.1, 0,
+                                    // R (.-.)
+                                    0.4, 0.1, 0.4, 0.4, 0.4, 0.1, 0.4, 0.1, 0,
+                                    // E (.)
+                                    0.4, 0.1, 0,
+                                    // WORD SPACE
+                                    0, 0, 0
+                                ],
+                                strokeWidth: [1, 4, 1] // Breathing thickness
+                            }}
+                            transition={{
+                                opacity: {
+                                    duration: 8,
+                                    repeat: Infinity,
+                                    ease: "linear",
+                                    times: [
+                                        0, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 0.14, 0.18, // H
+                                        0.20, 0.22, 0.24, 0.28, 0.32, // A
+                                        0.34, 0.36, 0.38, 0.42, 0.44, 0.46, 0.50, // R
+                                        0.52, 0.56, 0.58, 0.60, 0.62, 0.66, // D
+                                        0.68, 0.70, 0.72, 0.76, 0.78, 0.82, 0.86, // W
+                                        0.88, 0.90, 0.92, 0.96, 0.98, // A
+                                        // R (Truncated loop for fit)
+                                        1
+                                    ]
+                                },
+                                strokeWidth: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                            }}
+                        />
+
+                        {/* Core Circle - The "Singularity" */}
+                        <motion.circle
+                            r="40"
+                            fill="url(#gradAnchor)"
+                            animate={{ opacity: isComplete ? 0 : 1 }}
+                            transition={{ duration: 2 }}
+                        />
+                    </motion.g>
                 )}
-
-                {/* Radial Labels for Lobes */}
-                <text x="800" y="300" fill={lobeColors["Main"]} opacity="0.5" fontSize="24" fontWeight="bold" textAnchor="middle">PERSONALITY</text>
-                <text x="200" y="300" fill={lobeColors["Transition"]} opacity="0.5" fontSize="24" fontWeight="bold" textAnchor="middle">SKILLS</text>
-                <text x="500" y="750" fill={lobeColors["Deep"]} opacity="0.5" fontSize="24" fontWeight="bold" textAnchor="middle">VALUES</text>
-
             </svg>
 
             {/* Hover HUD */}
@@ -215,7 +311,6 @@ export default function HydeOuroboros({ width = 1000, height = 800 }: HydeOurobo
         </div>
     );
 }
-
 const Node = ({ x, y, trait, color, setHover }: { x: number, y: number, trait: HydeTrait, color: string, setHover: (t: HydeTrait | null) => void }) => (
     <g
         transform={`translate(${x}, ${y})`}

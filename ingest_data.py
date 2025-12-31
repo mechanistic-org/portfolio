@@ -12,6 +12,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 from PIL import Image
+import sys
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+except: pass
 
 # --- CONFIGURATION ---
 SOURCE_DIR = "data_source"
@@ -31,7 +35,7 @@ if STAGING_DIR_ENV and os.path.exists(STAGING_DIR_ENV):
     print(f"📂 Using Staging Dir (Env): {STAGING_DIR}")
 elif os.path.exists(STAGING_DIR_SIBLING):
     STAGING_DIR = STAGING_DIR_SIBLING
-    print(f"📂 Using Staging Dir (Sibling): {STAGING_DIR}")
+    print(f"Using Staging Dir (Sibling): {STAGING_DIR}")
 else:
     STAGING_DIR = STAGING_DIR_LOCAL
     print(f"📂 Using Staging Dir (Local): {STAGING_DIR}")
@@ -39,7 +43,17 @@ else:
 # Determine R2 Domain
 # Default to local proxy for dev, override for prod
 R2_DOMAIN = os.environ.get("PUBLIC_R2_DOMAIN", "/assets/r2")
-print(f"🌐 Using R2 Domain: {R2_DOMAIN}")
+print(f"Using R2 Domain: {R2_DOMAIN}")
+
+# --- PROTECTION CONFIGURATION ---
+# These slugs are "Graduated" to manual maintenance. 
+# The script will SKIP generating MDX for them to protect bespoke layouts.
+LOCKED_SLUGS = {
+    "c24",          # Bespoke HUD & Bubbles
+    "c24-lite",     # Manual Lite Variant
+    "dreamjob",     # The Construct
+    "manual-test",  # Example
+}
 
 def find_file(suffix):
     """Find a file in SOURCE_DIR ending with suffix."""
@@ -216,6 +230,8 @@ def generate_donut_chart(stats, slug):
     
     return f"{R2_DOMAIN}/{slug}/part-graph.svg"
 
+
+
 # --- PROCESSORS ---
 def process_colors():
     print("🎨 Processing Colors...")
@@ -303,6 +319,7 @@ def process_projects():
     dummy_files = ["tech-1.jpg", "tech-2.jpg", "blueprint.jpg", "abstract.jpg"]
     all_clients = set()
     count = 0
+    project_manifest = {}
 
     # --- MAPS ---
     CLIENT_ICON_MAP = {
@@ -543,6 +560,16 @@ def process_projects():
         
 
 
+
+    # --- HELPER: Safe Key Lookup ---
+    def get_val(row, *keys):
+        """Case-insensitive, strip-whitespace lookup"""
+        clean_keys = [k.lower().strip() for k in keys]
+        for rk, rv in row.items():
+            if rk.lower().strip() in clean_keys:
+                return rv
+        return ""
+
     # --- GLOBAL SKILL AVERAGES (Pre-calc) ---
     global_skills = {}
     skill_counts = {}
@@ -572,28 +599,29 @@ def process_projects():
     for i, row in enumerate(main):
         name = row.get("Slug Name") or row.get("Name")
         if not name: continue
-        
         slug = name.lower().strip().replace(' ', '-').replace('/', '-').replace('|', '-')
+        
+        # --- PROTECTION CHECK ---
         if slug and slug[0].isdigit():
-            print(f"⚠️  WARNING: Slug '{slug}' starts with a number. This will cause MDX errors. Please rename '{name}' in Main.csv.")
+            print(f"WARNING: Slug '{slug}' starts with a number. This will cause MDX errors. Please rename '{name}' in Main.csv.")
         
-        title = row.get("Descriptive Name") or name
+        title = get_val(row, "Descriptive Name", "Name") or name
         
-        employer = row.get("Employer", "")
+        employer = get_val(row, "Employer")
         if employer and "Mechanistic" not in employer and "#awesomejob" not in employer:
              all_clients.add(employer)
         if "Mechanistic" in employer: employer = "Mechanistic (Consulting)"
         
-        clients = [c.strip() for c in row.get("Client", "").split('/') if c.strip()]
+        clients = [c.strip() for c in get_val(row, "Client").split('/') if c.strip()]
         for c in clients: all_clients.add(c)
 
         # Taxonomy / Category
         t_row = tax.get(name, {})
-        industry = t_row.get("Industry", "Other")
+        industry = get_val(t_row, "Industry") or "Other"
         # Prefer Main.csv Category, fallback to Taxonomy
-        category = row.get("Category") or t_row.get("Category", "")
+        category = get_val(row, "Category") or get_val(t_row, "Category")
         
-        tools = [t.strip() for t in row.get("Tools", "").split(',') if t.strip()]
+        tools = [t.strip() for t in get_val(row, "Tools").split(',') if t.strip()]
         
         # Map Tools to Icons
         tool_icons = []
@@ -602,8 +630,13 @@ def process_projects():
             if slug_icon:
                 tool_icons.append(slug_icon)
         
+        job_title = get_val(row, "Title", "Job Title", "Role")
+
         # Team Size
-        team_size = row.get("Team Size") or row.get("Team") or "Unknown"
+        team_size = get_val(row, "Team Size", "Team")
+        if slug == "c24":
+            team_size = "Core Team of 6 (Sole Mechanical Lead)"
+
 
         p_row = phases.get(name, {})
         prod = "Concept"
@@ -686,6 +719,7 @@ def process_projects():
                     duration_str = f"{diff_days / 365:.1f} Years"
                 else:
                     months = max(1, round(diff_days / 30))
+                    duration_str = f"{months} Months"
             except: pass
         
         status_label = "Completed"
@@ -720,7 +754,7 @@ def process_projects():
         
         if os.path.exists(staging_project_dir):
             # Sync assets to public/assets/r2
-            sync_r2_assets(slug, staging_project_dir)
+            # sync_r2_assets(slug, staging_project_dir)
             
             all_files = os.listdir(staging_project_dir)
             
@@ -886,7 +920,67 @@ import ModelViewer from '@components/mdx/ModelViewer.astro';
 {model_viewer_tag}
 """
 
-        mdx = f"""---
+        # --- MANIFEST DATA ---
+        # --- MANIFEST DATA ---
+        manifest_data = {
+            "title": title,
+            "slug": slug,
+            "date": start_date_raw,
+            "endDate": end_date_raw,
+            "employer": employer,
+            "client": clients,
+            "industry": industry,
+            "category": category,
+            "tools": tools,
+            "toolIcons": tool_icons,
+            "production": prod,
+            "tags": bom,
+            "skillData": skill_data,
+            "additionalSkills": additional_skills,
+            "phase_stats": parts,
+            "gallery": gallery_images,
+            "documents": documents,
+            "links": links,
+            "heroImage": hero_img,
+            "draft": False,
+            "description": f"{title} - {industry} project.",
+            "duration": duration_str,
+            "statusLabel": status_label,
+            "skillGraph": skill_graph_url,
+            "partGraph": part_graph_url,
+            "impact": row.get('Impact', '')
+        }
+        
+        # Add non-empty optional fields
+        if job_title: manifest_data["job_title"] = job_title
+        if team_size: manifest_data["teamSize"] = team_size
+        
+        # --- INTELLIGENCE FUSION (NotebookLM) ---
+        intelligence_path = os.path.join(OUTPUT_DATA_DIR, f"{slug}_intelligence.json")
+        if os.path.exists(intelligence_path):
+             print(f"🧠 Fusing intelligence for {slug}...")
+             try:
+                 with open(intelligence_path, "r", encoding="utf-8") as f:
+                     intel_data = json.load(f)
+                     # Merge specific keys to avoid pollution
+                     if "metrics_extraction" in intel_data:
+                         manifest_data["metrics"] = intel_data["metrics_extraction"]
+                     if "war_stories_extraction" in intel_data:
+                         manifest_data["war_stories"] = intel_data["war_stories_extraction"]
+                     if "bio_extraction" in intel_data:
+                         manifest_data["bio_bullets"] = intel_data["bio_extraction"]
+             except Exception as e:
+                 print(f"⚠️  Intelligence Fusion Failed for {slug}: {e}")
+
+        project_manifest[slug] = manifest_data
+
+        out_path = os.path.join(OUTPUT_CONTENT_DIR, f"{slug}.mdx")
+        
+        # ONLY WRITE IF NEW (Decoupled Mode)
+        if slug in LOCKED_SLUGS:
+             print(f"🛡️  Skipping LOCKED Standard variant: {slug}")
+        elif not os.path.exists(out_path):
+             mdx = f"""---
 title: {json.dumps(title)}
 slug: "{slug}"
 date: "{start_date_raw}"
@@ -917,11 +1011,19 @@ impact: "{row.get('Impact', '')}"
 ---
 {content_body}
 """
-        
-        out_path = os.path.join(OUTPUT_CONTENT_DIR, f"{slug}.mdx")
-        with open(out_path, "w", encoding='utf-8') as f:
-            f.write(mdx)
-        count += 1
+             with open(out_path, "w", encoding='utf-8') as f:
+                f.write(mdx)
+             print(f"✨ Scaffolded new project: {slug}")
+             count += 1
+        else:
+             # print(f"    [SKIP] Preserving existing content for {slug}")
+             pass
+
+
+
+    # Write Manifest
+    with open(os.path.join(OUTPUT_DATA_DIR, "project_manifest.json"), "w") as f:
+        json.dump(project_manifest, f, indent=2)
 
     print(f"✅ Generated {count} MDX files.")
 
@@ -938,17 +1040,17 @@ impact: "{row.get('Impact', '')}"
         if os.path.exists(os.path.join(staging_logo_dir, f"{logo_name}.svg")):
             logo_path = f"{R2_DOMAIN}/_site/logos/{logo_name}.svg"
             # Sync logo
-            if not R2_DOMAIN.startswith("http"):
-                target_logo_dir = os.path.join(LOCAL_R2_DIR, "_site", "logos")
-                os.makedirs(target_logo_dir, exist_ok=True)
-                shutil.copy2(os.path.join(staging_logo_dir, f"{logo_name}.svg"), os.path.join(target_logo_dir, f"{logo_name}.svg"))
+            # if not R2_DOMAIN.startswith("http"):
+            #     target_logo_dir = os.path.join(LOCAL_R2_DIR, "_site", "logos")
+            #     os.makedirs(target_logo_dir, exist_ok=True)
+            #     shutil.copy2(os.path.join(staging_logo_dir, f"{logo_name}.svg"), os.path.join(target_logo_dir, f"{logo_name}.svg"))
         elif os.path.exists(os.path.join(staging_logo_dir, f"{logo_name}.png")):
             logo_path = f"{R2_DOMAIN}/_site/logos/{logo_name}.png"
             # Sync logo
-            if not R2_DOMAIN.startswith("http"):
-                target_logo_dir = os.path.join(LOCAL_R2_DIR, "_site", "logos")
-                os.makedirs(target_logo_dir, exist_ok=True)
-                shutil.copy2(os.path.join(staging_logo_dir, f"{logo_name}.png"), os.path.join(target_logo_dir, f"{logo_name}.png"))
+            # if not R2_DOMAIN.startswith("http"):
+            #     target_logo_dir = os.path.join(LOCAL_R2_DIR, "_site", "logos")
+            #     os.makedirs(target_logo_dir, exist_ok=True)
+            #     shutil.copy2(os.path.join(staging_logo_dir, f"{logo_name}.png"), os.path.join(target_logo_dir, f"{logo_name}.png"))
             
         client_data.append({
             "name": client, 
@@ -992,7 +1094,10 @@ def sync_site_assets():
 if __name__ == "__main__":
     start_time = time.time()
     ensure_dummy_assets()
-    sync_site_assets()
+    # try:
+    #     sync_site_assets()
+    # except Exception as e:
+    #     print(f"⚠️  Asset sync warning: {e}")
     process_colors()
     process_specs()
     process_tenure()

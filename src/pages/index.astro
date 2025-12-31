@@ -1,36 +1,7 @@
 ---
-/**
- * THEME ENGINE ROUTER
- *
- * This file acts as the "Dispatcher" for the homepage.
- * It does not render content directly but decides WHICH theme to render based on:
- * 1. Query Parameter (?theme=hyperspace or ?theme=ouroboros)
- * 2. Default Preference (Currently: Hyperspace)
- *
- * This architecture allows for multiple "front doors" to the same content.
- */
-
 import HyperspaceHome from "@components/Themes/HyperspaceHome.astro";
-import OuroborosHome from "@components/Themes/OuroborosHome.astro";
-
-// Default Theme Strategy
-// v5: hyperspace
-// v6: ouroboros (Phase 6)
-const DEFAULT_THEME = "hyperspace";
-
-let activeTheme = DEFAULT_THEME;
-
-// 1. Check Query Param (Highest Priority)
-// usage: /?theme=hyperspace | ?theme=ouroboros
-if (Astro.url.searchParams.has("theme")) {
-	const requestedTheme = Astro.url.searchParams.get("theme");
-	if (requestedTheme === "hyperspace" || requestedTheme === "ouroboros") {
-		activeTheme = requestedTheme;
-	}
-}
-
-// Future: Check Cookie Logic here
-// Legacy "Classic" theme has been deprecated.
+// THEME ENGINE SIMPLIFIED (Great Filter Edition)
+// We deleted Ouroboros, so we serve Hyperspace direct.
 ---
 
-{activeTheme === "hyperspace" ? <HyperspaceHome /> : <OuroborosHome />}
+<HyperspaceHome />

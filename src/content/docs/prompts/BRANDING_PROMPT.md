@@ -70,6 +70,13 @@ Review the above, then generate the `docs/STYLE_GUIDE.md` and propose 3 candidat
 *   **Concept:** Directional dependence. The surfacing of our materials (Forged Carbon) changes based on the angle of light/view, representing depth and complexity.
 *   **Key:** "The user must move to see the value." (e.g., Rotation interactions).
 
+### Motion: "The Mechanist"
+*   **Vibe:** Heavy, precise, industrial.
+*   **Physics:** High velocity, slight overshoot, hard settle.
+*   **Timing:** "Machine Gun" staggering (40-50ms intervals).
+*   **Usage:** For lists of capabilities or technical specs.
+*   **Keywords:** `ROBOTICS`, `ACTUATORS`, `PRECISION`, `TOLERANCE`.
+
 ## Scientific Visualization (D3)
 *   **Philosophy:** "Data as Artifact."
 *   **Rules:**

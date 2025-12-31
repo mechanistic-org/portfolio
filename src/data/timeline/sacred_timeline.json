@@ -231,13 +231,6 @@
     "content": "Speed Reader"
   },
   {
-    "id": "KSERVER-1500",
-    "start": "2008-05-01T00:00:00",
-    "end": "2008-08-01T00:00:00",
-    "group": "Server / Rackmount",
-    "content": "KSERVER-1500"
-  },
-  {
     "id": "KPLAYER-300",
     "start": "2008-03-01T00:00:00",
     "end": "2009-01-01T00:00:00",

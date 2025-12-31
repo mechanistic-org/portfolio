@@ -16,6 +16,7 @@ import GlobalHomeButton from "@components/Nav/GlobalHomeButton.astro";
 	description="UNAUTHORIZED ACCESS DETECTED"
 	image={data.heroImage ?? ""}
 	type="project"
+	projectFrontmatter={data}
 >
 	<GlobalHomeButton />
 	<!-- VINTAGE CRT OVERLAY -->
@@ -90,70 +91,68 @@ import GlobalHomeButton from "@components/Nav/GlobalHomeButton.astro";
 			<div
 				class="mb-12 grid gap-px border border-[#ffb000]/20 bg-[#ffb000]/20 sm:grid-cols-2 md:grid-cols-4"
 			>
-				<div class="bg-[#1a1510] p-4">
-					<div class="text-[10px] text-[#ffb000]/60">CODENAME</div>
-					<div>{data.slug.toUpperCase()}</div>
-				</div>
-				<div class="bg-[#1a1510] p-4">
-					<div class="text-[10px] text-[#ffb000]/60">DATE</div>
-					<div>{data.date}</div>
-				</div>
-				<div class="bg-[#1a1510] p-4">
-					<div class="text-[10px] text-[#ffb000]/60">AGENCY</div>
-					<div>{data.employer}</div>
-				</div>
-				<div class="bg-[#1a1510] p-4">
-					<div class="text-[10px] text-[#ffb000]/60">STATUS</div>
-					<div class="animate-pulse text-[#ff4400]">{data.statusLabel}</div>
-				</div>
+				<div class="text-[10px] text-[#ffb000]/60">CODENAME</div>
+				<div>{(data.slug || "UNKNOWN").toUpperCase()}</div>
 			</div>
-
-			<!-- REDACTED CONTENT -->
-			<article
-				class="prose prose-invert prose-lg prose-headings:font-bold prose-headings:uppercase prose-headings:text-[#ffb000] prose-strong:text-[#ffb000] prose-code:bg-[#ffb000]/10 prose-code:text-[#ff4400] max-w-none font-mono text-[#ffb000]/80"
-			>
-				<!-- INJECTED CENSORSHIP BAR -->
-				<div
-					class="not-prose mb-8 flex items-center gap-2 border-l-4 border-[#ff4400] bg-[#ff4400]/10 p-4 text-sm text-[#ff4400]"
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						class="h-5 w-5"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-						><path
-							fill-rule="evenodd"
-							d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-							clip-rule="evenodd"></path></svg
-					>
-					<span>WARNING: SECTIONS OF THIS DOCUMENT HAVE BEEN REDACTED FOR SECURITY.</span>
-				</div>
-
-				<Content components={{ YouTube }} />
-			</article>
-
-			<!-- BURN BUTTON -->
-			<div class="mt-24 flex justify-center border-t border-dashed border-[#ffb000]/30 pt-12">
-				<a
-					href="/projects"
-					class="group relative overflow-hidden bg-[#ff4400] px-8 py-4 font-bold text-black transition-colors hover:bg-[#ffb000]"
-				>
-					<span class="relative z-10">BURN DOCUMENT & EXIT</span>
-					<div
-						class="absolute inset-0 z-0 bg-[url('/assets/noise.png')] opacity-20 mix-blend-multiply"
-					>
-					</div>
-				</a>
+			<div class="bg-[#1a1510] p-4">
+				<div class="text-[10px] text-[#ffb000]/60">DATE</div>
+				<div>{data.date}</div>
+			</div>
+			<div class="bg-[#1a1510] p-4">
+				<div class="text-[10px] text-[#ffb000]/60">AGENCY</div>
+				<div>{data.employer}</div>
+			</div>
+			<div class="bg-[#1a1510] p-4">
+				<div class="text-[10px] text-[#ffb000]/60">STATUS</div>
+				<div class="animate-pulse text-[#ff4400]">{data.statusLabel}</div>
 			</div>
 		</main>
 
-		<!-- FOOTER TICKER -->
-		<footer
-			class="fixed bottom-0 z-50 w-full border-t border-[#ffb000] bg-[#2b2520] py-1 text-center text-[10px] text-[#ffb000]/50 uppercase backdrop-blur"
+		<!-- REDACTED CONTENT -->
+		<article
+			class="prose prose-invert prose-lg prose-headings:font-bold prose-headings:uppercase prose-headings:text-[#ffb000] prose-strong:text-[#ffb000] prose-code:bg-[#ffb000]/10 prose-code:text-[#ff4400] max-w-none font-mono text-[#ffb000]/80"
 		>
-			// TRANSMISSION END // 37.7749° N, 122.4194° W // IP: [REDACTED]
-		</footer>
+			<!-- INJECTED CENSORSHIP BAR -->
+			<div
+				class="not-prose mb-8 flex items-center gap-2 border-l-4 border-[#ff4400] bg-[#ff4400]/10 p-4 text-sm text-[#ff4400]"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-5 w-5"
+					viewBox="0 0 20 20"
+					fill="currentColor"
+					><path
+						fill-rule="evenodd"
+						d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+						clip-rule="evenodd"></path></svg
+				>
+				<span>WARNING: SECTIONS OF THIS DOCUMENT HAVE BEEN REDACTED FOR SECURITY.</span>
+			</div>
+
+			<Content components={{ YouTube }} />
+		</article>
+
+		<!-- BURN BUTTON -->
+		<div class="mt-24 flex justify-center border-t border-dashed border-[#ffb000]/30 pt-12">
+			<a
+				href="/projects"
+				class="group relative overflow-hidden bg-[#ff4400] px-8 py-4 font-bold text-black transition-colors hover:bg-[#ffb000]"
+			>
+				<span class="relative z-10">BURN DOCUMENT & EXIT</span>
+				<div
+					class="absolute inset-0 z-0 bg-[url('/assets/noise.png')] opacity-20 mix-blend-multiply"
+				>
+				</div>
+			</a>
+		</div>
 	</div>
+
+	<!-- FOOTER TICKER -->
+	<footer
+		class="fixed bottom-0 z-50 w-full border-t border-[#ffb000] bg-[#2b2520] py-1 text-center text-[10px] text-[#ffb000]/50 uppercase backdrop-blur"
+	>
+		// TRANSMISSION END // 37.7749° N, 122.4194° W // IP: [REDACTED]
+	</footer>
 </Layout>
 
 <script>

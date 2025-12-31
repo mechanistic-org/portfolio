@@ -39,6 +39,10 @@ To respect Cloudflare Pages limits (20k files, 25MB script size), we use a Hybri
 ### 5. The Theme Engine (Hybrid Fleet)
 *   **Concept:** A flexible "Theme Registry" that decouples content from presentation, allowing different project archetypes to coexist.
 *   **Router:** `src/pages/projects/[...slug].astro`
+*   **Data Merge Logic (The "Clean Merge" Pattern):**
+    *   **Problem:** If the manifest (CSV) contains `teamSize: null`, spreading it over existing MDX data `{ teamSize: "Core Team..." }` results in `null`, deleting the valid data.
+    *   **Solution:** Iteratively delete keys from `manifestData` that are `null`, `""`, or `"Unknown"` *before* the spread merge.
+    *   **Result:** Frontend robustly prefers MDX data over empty Manifest slots.
 *   **Logic:**
     1.  Checks frontmatter `theme` key (e.g., `theme: "command"`).
     2.  Falls back to legacy flags (e.g., `cyberspace: true` -> Hyperspace).
@@ -56,6 +60,16 @@ To respect Cloudflare Pages limits (20k files, 25MB script size), we use a Hybri
 *   **The "Flux Capacitor" (RetroLogoAnimator):**
     *   **Concept:** A React-based reconstruction of legacy GIF/Flash animations using modern state management (`framer-motion`).
     *   **Aesthetic:** Intentionally accepts "Layout Thrashing" (DOM stacking) during crossfades to simulate "Holographic Instability."
+
+### Animation Patterns (The Hybrid Engine)
+*   **The "Nuclear Key" Pattern (React/Framer Fix):**
+    *   **Problem:** Complex enter/exit animations (like the Manifesto "CREATIVITY" pop) sometimes fail to replay because React recycles the DOM node, or Framer Motion believes the state is already "visible" from a previous route cache.
+    *   **Solution:** Force a hard DOM remount by assigning a unique `key` prop based on a timestamp or random ID when the sequence triggers.
+    *   **Code:** `<Component key={resetKey} />` where `resetKey` is updated via `Date.now()`.
+*   **Hybrid Animation Strategy:**
+    *   **Decision:** We use **Framer Motion** for complex, state-driven physics (drag, layout transitions).
+    *   **Decision:** We use **Native CSS Keyframes** (injected `<style>`) for high-frequency "Machine Gun" effects (like the "Mechanistic Zipper").
+    *   **Why:** JS-driven staggering can stall if the main thread is busy. CSS keyframes (`animation-delay`) are managed by the browser compositor and are bulletproof for "Fire-and-Forget" sequences.
 
 ### Realm IV: System Architecture (The 3D Stack)
 *   **Concept:** A visual representation of the site's technology stack (React, Astro, R2) rendered as a 3D "Exploded View" assembly.
@@ -305,6 +319,20 @@ A hybrid workflow combining human art direction with machine precision.
 *   **Animation:** Stitches sequences into Animated WebP with **Variable Duration** (folder-based config) and **Letterboxing** (distortion prevention).
 *   **Naming Convention Enforcement:** The `process_images.py` script acts as a **Quality Gate**. Unlike `.gitignore` (which blacklists), this script uses a **Whitelist** approach. Files MUST match `^([\w-]+)-(hero|detail|...)-(\d{2})\.(ext)$`. This prevents unclassified assets from polluting the build.
 *   **Pass-Through:** Non-image assets (`.pdf`, `.glb`, `.mp4`) are copied directly to staging.
+
+### 10. Data Governance (The Safe-Slug Law)
+*   **ID as Filename:** In our architecture, a Data Node's `id` often maps directly to a **Folder Name** on disk.
+*   **Restriction:** IDs MUST NOT contain characters illegal in file systems (Windows/Unix).
+    *   **Forbidden:** `|` (Pipe), `/` (Slash), `\` (Backslash), `:` (Colon), `*` (Star).
+    *   **Case Study:** `C|24` allowed by JSON but broke `process_images.py` and Windows Explorer.
+*   **Policy:** Use `kebab-case` or `camelCase` for IDs. Use the `name` field for display strings (e.g., `id: "c24"`, `name: "C|24"`).
+
+### 11. The "Single Artifact" Strategy (Tiered Content)
+We rejected the "Lite Pair" model (generating `project-lite.mdx`) in favor of a simpler **Maturity Model**:
+*   **Tier 1 (The Legion):** Automated. `ingest_data.py` generates standard `mdx` from CSV.
+*   **Tier 2 (The Generals):** Manual. Complex projects (`c24`, `dreamjob`) are **LOCKED** in `ingest_data.py` (`LOCKED_SLUGS`).
+*   **Mechanism:** The script checks `LOCKED_SLUGS` before writing. If a match is found, it **skips** generation, preserving the bespoke hand-crafted file.
+*   **The "Ghost Data" Law:** MDX is the Truth. If `project_manifest.json` conflicts with `.mdx`, the build favors JSON. Therefore, when graduating a project directly to Tier 2, you MUST purges its entry from the generated manifest or rely on the `LOCKED` status to prevent script interference.
 
 
 

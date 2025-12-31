@@ -43,6 +43,29 @@ sidebar:
     *   **Description:** An interactive 3D navigator that maps site hierarchy into a celestial coordinate system. Features hierarchical bloom, macroscopic orbital physics, and recursive scaling for project-level deep dives.
 
 ## 📜 Change Log (Recent)
+*   **[Architecture] Single Artifact Pivot:**
+    *   **[Strategy]** Rejected "Automated Lite Pairs" in favor of "Maturity Model" (Manual Deep vs. Automated Standard).
+    *   **[Code]** Implemented `LOCKED_SLUGS` in `ingest_data.py` to protect bespoke assets (`c24`, `dreamjob`) while automating the rest of the portfolio.
+    *   **[Cleanup]** Purged 87 generated `*-lite.mdx` files.
+*   **[Fix] C24 Ghost Data:**
+    *   **[Debug]** Identified and removed legacy `c24` entry from `project_manifest.json` that was overriding proper MDX data ($184k Budget, 14 DCDs).
+    *   **[HUD]** Refactored `ProjectManifestHUD.astro` to correctly display new metrics (IRR, Tooling) and fixed "Identity Strip" layout.
+*   **[HUD] Data Integrity & Scalability Fix**
+    *   **[Data]** Fixed C24 HUD errors: "Role" now uses Title (Senior Mechanical Designer) instead of Employer, and "Duration" accurately calculates months.
+    *   **[Pipeline]** **Windows Stabilization:** Patched `ingest_data.py` to handle UTF-8 encoding (preventing emoji crashes) and file locking (Asset Sync bypass).
+    *   **[Architecture]** **"Clean Merge" Pattern:** Updated frontend logic to aggressively filter `null` values from manifest data, preventing them from overwriting valid MDX frontmatter headers.
+*   **[Animation]** **Mechanistic Engine Update**
+    *   **[FIX]** Resolved "Static" Creativity Animation in `ManifestoPanelOne` using nuclear key remounting (`key={Date.now()}`).
+    *   **[FEAT]** Implemented "Mechanistic Zipper" in `HomeManifesto` (Right Pane) with "Hammer Slam" CSS physics (cubic-bezier overshoots).
+    *   **[DATA]** Cleansed `sacred_timeline.json` of duplicate `KSERVER-1500` keys.
+*   **[Asset Pipeline]** **Air Gap Stabilization (Protocol v2)**
+    *   **[Fix]** Replaced fragile Symlink verification with robust **Directory Junction** (`mklink /J`) for Windows dev.
+    *   **[Fix]** Permanently resolved the "Disappearing Asset" bug by restoring strict `.gitignore` rules for `public/assets/r2` and enforcing the R2 Sync workflow.
+    *   **[Fix]** Sanitized `C|24` ID to `c24` to resolve OS-level file locking and path resolution errors ("The Two Ghosts" incident).
+*   **[Feature]** **Hybrid Homepage (Neural Stream)**
+    *   **[UI]** Implemented `HomeManifesto` with "Accordion Sequence" physics (Entry -> Compression -> Springback).
+    *   **[UI]** Added `DisciplineCycler` (Text Scrambler) and `BlipvertSubtitle` (Propaganda) components.
+    *   **[UX]** Restored `WiggleLogo` interactivity via `PresentationControls` (Elastic Inspection).
 *   **[Asset Pipeline]** Fixed C24 Hero Image missing from Project Card.
     *   *Root Cause:* Source file `hero.png` failed regex validation in `process_images.py`.
     *   *Resolution:* Renamed to `c24-hero-01.png` to satisfy taxonomy; verified generation of optimized slices.
@@ -297,6 +320,12 @@ sidebar:
 *   **Hook:** Depth without weight.
 *   **Tech:** Vanilla JS, CSS Variables (`--scroll-y`).
 *   **Description:** A performant scroll-driven parallax implementation that translates 3D model and text layers at different rates using CSS custom properties, avoiding heavy animation libraries for this specific touch.
+
+### The Mechanist Zipper
+*   **Hook:** A typographic piston engine that physically displaces UI elements.
+*   **Tech:** CSS Keyframes (`cubic-bezier` recoil), IntersectionObserver, Staggered Animation Delays.
+*   **Description:** A condensed list of industrial keywords (`ROBOTICS`, `PNEUMATICS`) that fires in a "Machine Gun" sequence (40ms spacing), utilizing layout flow to "squish" the adjacent telemetry chart against the ceiling.
+
 ### The Darkroom
 *   **Hook:** "Developing the future, one pixel at a time."
 *   **Tech:** Python, Pillow, Lanczos Resampling, Cloudflare R2.

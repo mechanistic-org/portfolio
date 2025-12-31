@@ -14,6 +14,7 @@ const inkColor = "#2a2a2a"; // Typewriter ribbon
 	description="CONFIDENTIAL DOSSIER"
 	image={data.heroImage ?? ""}
 	type="project"
+	projectFrontmatter={data}
 >
 	<!-- BACKGROUND TEXTURE (Paper) -->
 	<div class="fixed inset-0 z-[-1] bg-[#f3f0e6] bg-[url('/assets/paper-texture.png')]"></div>
@@ -74,63 +75,61 @@ const inkColor = "#2a2a2a"; // Typewriter ribbon
 
 				<!-- TYPED DATA -->
 				<div class="flex-1 space-y-4 pt-4 font-mono text-sm">
-					<div class="grid grid-cols-[120px_1fr] border-b border-dotted border-gray-400 pb-1">
-						<span class="opacity-50">CODENAME:</span>
-						<span class="font-bold">{data.slug.toUpperCase()}</span>
-					</div>
-					<div class="grid grid-cols-[120px_1fr] border-b border-dotted border-gray-400 pb-1">
-						<span class="opacity-50">DATE:</span>
-						<span>{data.date}</span>
-					</div>
-					<div class="grid grid-cols-[120px_1fr] border-b border-dotted border-gray-400 pb-1">
-						<span class="opacity-50">ASSIGNMENT:</span>
-						<span>{data.employer}</span>
-					</div>
-					<div class="grid grid-cols-[120px_1fr] border-b border-dotted border-gray-400 pb-1">
-						<span class="opacity-50">CLEARANCE:</span>
-						<span class="font-bold text-red-700">{data.statusLabel}</span>
-					</div>
+					<span class="opacity-50">CODENAME:</span>
+					<span class="font-bold">{(data.slug || "UNKNOWN").toUpperCase()}</span>
 				</div>
-			</div>
-
-			<!-- BODY CONTENT -->
-			<article
-				class="prose prose-zinc prose-lg prose-headings:font-bold prose-headings:uppercase prose-headings:font-sans max-w-none font-mono text-[#2a2a2a]"
-			>
-				<!-- Redaction Style Injection -->
-				<style>
-					.prose strong {
-						background-color: black;
-						color: black;
-						padding: 0 4px;
-					}
-					.prose strong:hover {
-						color: white !important; /* Peek */
-					}
-					/* Typewriter effect for paragraphs */
-					.prose p {
-						font-family: "Courier New", Courier, monospace;
-						font-weight: 500;
-					}
-				</style>
-
-				<Content components={{ YouTube }} />
-			</article>
-
-			<!-- FOOTER STAMP -->
-			<div
-				class="mt-16 flex items-center justify-between border-t-2 border-black pt-8 font-mono text-xs opacity-60"
-			>
-				<div>
-					ARCHIVED BY: AGENT NORRIS<br />
-					DATE: {new Date().toLocaleDateString()}
+				<div class="grid grid-cols-[120px_1fr] border-b border-dotted border-gray-400 pb-1">
+					<span class="opacity-50">DATE:</span>
+					<span>{data.date}</span>
 				</div>
-				<div
-					class="flex h-16 w-16 rotate-[-15deg] items-center justify-center rounded-full border-4 border-black font-bold"
-				>
-					FILE
+				<div class="grid grid-cols-[120px_1fr] border-b border-dotted border-gray-400 pb-1">
+					<span class="opacity-50">ASSIGNMENT:</span>
+					<span>{data.employer}</span>
+				</div>
+				<div class="grid grid-cols-[120px_1fr] border-b border-dotted border-gray-400 pb-1">
+					<span class="opacity-50">CLEARANCE:</span>
+					<span class="font-bold text-red-700">{data.statusLabel}</span>
 				</div>
 			</div>
 		</main>
+
+		<!-- BODY CONTENT -->
+		<article
+			class="prose prose-zinc prose-lg prose-headings:font-bold prose-headings:uppercase prose-headings:font-sans max-w-none font-mono text-[#2a2a2a]"
+		>
+			<!-- Redaction Style Injection -->
+			<style>
+				.prose strong {
+					background-color: black;
+					color: black;
+					padding: 0 4px;
+				}
+				.prose strong:hover {
+					color: white !important; /* Peek */
+				}
+				/* Typewriter effect for paragraphs */
+				.prose p {
+					font-family: "Courier New", Courier, monospace;
+					font-weight: 500;
+				}
+			</style>
+
+			<Content components={{ YouTube }} />
+		</article>
+
+		<!-- FOOTER STAMP -->
+		<div
+			class="mt-16 flex items-center justify-between border-t-2 border-black pt-8 font-mono text-xs opacity-60"
+		>
+			<div>
+				ARCHIVED BY: AGENT NORRIS<br />
+				DATE: {new Date().toLocaleDateString()}
+			</div>
+			<div
+				class="flex h-16 w-16 rotate-[-15deg] items-center justify-center rounded-full border-4 border-black font-bold"
+			>
+				FILE
+			</div>
+		</div>
 	</div>
 </Layout>

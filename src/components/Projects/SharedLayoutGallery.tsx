@@ -10,6 +10,7 @@ interface GalleryImage {
     description?: string;
     trigger?: string;
     href?: string; //  <-- Added for link cards
+    category?: string; // <-- Added for Isotope Filtering
 }
 
 import Masonry from "react-masonry-css";
@@ -23,9 +24,21 @@ interface SharedLayoutGalleryProps {
     featuredIndices?: number[]; // Indices of images to highlight in collage mode
 }
 
+// Helper to handle asset URLs
+const getAssetUrl = (src: string) => {
+    return src;
+};
+
 export default function SharedLayoutGallery({ images, id, columns = 3, layout = "grid", scattered = false, featuredIndices = [], showLabels = true }: SharedLayoutGalleryProps & { showLabels?: boolean }) {
     const [selectedId, setSelectedId] = useState<string | null>(null);
     const [showTimeCapsule, setShowTimeCapsule] = useState(false);
+    const [activeFilter, setActiveFilter] = useState("All");
+
+    // Extract Categories
+    const categories = React.useMemo(() => {
+        const cats = new Set(images.map(img => img.category).filter(Boolean));
+        return ["All", ...Array.from(cats)];
+    }, [images]);
 
     // Handle image click - intercept "time-capsule" trigger
     const handleImageClick = (image: GalleryImage, index: number) => {
@@ -38,16 +51,22 @@ export default function SharedLayoutGallery({ images, id, columns = 3, layout = 
     };
 
     // Deduplicate images to prevent rendering issues
+    // Deduplicate images -> THEN Filter
     const uniqueImages = React.useMemo(() => {
-        return images.filter((img, index, self) =>
+        const unique = images.filter((img, index, self) =>
             index === self.findIndex((t) => t.src === img.src)
         );
-    }, [images]);
+        if (activeFilter === "All") return unique;
+        return unique.filter(img => img.category === activeFilter);
+    }, [images, activeFilter]);
 
     const instanceId = React.useRef(Math.random().toString(36).substr(2, 5));
     useEffect(() => {
-        console.log(`[Gallery Debug] Instance: ${instanceId.current} | ID: ${id} | Images: ${images.length} | Unique: ${uniqueImages.length}`);
-        console.table(images.map(img => ({ src: img.src, title: img.title }))); // Dump the data
+        console.log(`[Gallery Debug] Instance: ${instanceId.current} | ID: ${id} | Images: ${images.length}`);
+        // DEBUG: Check for categories
+        const debugCats = images.map(img => img.category);
+        console.log(`[Gallery Debug] Categories found:`, debugCats);
+
         if (images.length !== uniqueImages.length) {
             console.warn(`[Gallery Debug] Duplicates in ${id}:`, images);
         }
@@ -265,7 +284,25 @@ export default function SharedLayoutGallery({ images, id, columns = 3, layout = 
     };
 
     return (
-        <div className="w-full pointer-events-auto relative z-50 h-full overflow-y-auto px-4 py-2 scrollbar-hide flex flex-col justify-center">
+        <div className="w-full pointer-events-auto relative z-50 h-full overflow-y-auto px-4 py-2 scrollbar-hide flex flex-col pt-24 pb-24">
+            {/* FILTER BAR */}
+            {categories.length > 2 && (
+                <div className="flex flex-wrap justify-center gap-4 mb-8 shrink-0">
+                    {categories.map(cat => (
+                        <button
+                            key={cat}
+                            onClick={() => setActiveFilter(cat as string)}
+                            className={`px-3 py-1 text-xs font-mono uppercase tracking-widest border transition-all duration-300 ${activeFilter === cat
+                                ? "border-accent text-accent bg-accent/10"
+                                : "border-transparent text-neutral-500 hover:text-white"
+                                }`}
+                        >
+                            {cat}
+                        </button>
+                    ))}
+                </div>
+            )}
+
             {/* Layout Switcher */}
             {layout === "cards" ? (
                 <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 m-auto w-full max-w-7xl`}>
@@ -390,12 +427,28 @@ export default function SharedLayoutGallery({ images, id, columns = 3, layout = 
                             <motion.div
                                 layoutId={selectedId}
                                 className="relative w-full h-full flex items-center justify-center max-h-[85vh] pointer-events-auto"
-                                onClick={(e) => e.stopPropagation()}
+                                drag="y"
+                                dragConstraints={{ top: 0, bottom: 0 }}
+                                dragElastic={0.7}
+                                onDragEnd={(e, { offset, velocity }) => {
+                                    const swipeThreshold = 100;
+                                    const velocityThreshold = 500;
+                                    if (offset.y > swipeThreshold || velocity.y > velocityThreshold) {
+                                        closeModal();
+                                    }
+                                }}
+                                onClick={(e) => {
+                                    // Allow clicks on the wrapper (padding area) to close, but stop propagation if we dragged?
+                                    // Actually, wrapper clicks should propagate to container (Close).
+                                    // But framer motion might block propagation on drag.
+                                    // We don't need explicit onClick here if we want bubbling.
+                                }}
                             >
                                 <img
                                     src={getAssetUrl(uniqueImages[selectedIndex].src)}
                                     alt="Selected"
-                                    className="max-w-full max-h-full object-contain shadow-2xl"
+                                    className="max-w-full max-h-full object-contain shadow-2xl cursor-pointer"
+                                    onClick={nextImage}
                                 />
                             </motion.div>
 
@@ -424,14 +477,7 @@ export default function SharedLayoutGallery({ images, id, columns = 3, layout = 
                             )}
                         </div>
 
-                        {/* Close Button (Moved to end for Z-stacking safety) */}
-                        <button
-                            onClick={(e) => closeModal(e)}
-                            className="absolute top-24 right-4 flex items-center gap-2 px-4 py-2 bg-black/50 hover:bg-white/10 backdrop-blur-md border border-white/10 rounded-full text-white/80 hover:text-white transition-all z-[10002] group"
-                        >
-                            <span className="text-xs font-mono uppercase tracking-widest hidden md:block">Grid View</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="group-hover:rotate-90 transition-transform"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                        </button>
+
                     </motion.div>
                 )}
             </AnimatePresence>

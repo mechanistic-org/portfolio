@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
 import multiverseData from "../../data/timeline/multiverse.json";
+import projectManifest from "../../config/project_manifest.json";
 
 export const prerender = true;
 
@@ -56,7 +57,33 @@ if (entry) {
 	const rendered = await render(entry);
 	Content = rendered.Content;
 	headings = rendered.headings;
-	data = entry.data;
+
+	// DECOUPLED DATA IDENTIFICATION
+	const manifestData = (projectManifest as any)[entry.id];
+	if (manifestData) {
+		// Hydrate Dates
+		if (manifestData.date) manifestData.date = new Date(manifestData.date);
+		if (manifestData.endDate) manifestData.endDate = new Date(manifestData.endDate);
+		// Merge
+		const manifestTeam = manifestData.teamSize || manifestData.team;
+		if (manifestTeam === "Unknown" && entry.data.teamSize) {
+			delete manifestData.teamSize;
+			delete manifestData.team;
+		}
+
+		data = { ...entry.data, ...manifestData };
+
+		// HERO PRESERVATION: If manifest forces a placeholder but we have a custom one, revert.
+		if (
+			data.heroImage?.includes("/assets/placeholders/") &&
+			entry.data.heroImage &&
+			!entry.data.heroImage.includes("/assets/placeholders/")
+		) {
+			data.heroImage = entry.data.heroImage;
+		}
+	} else {
+		data = entry.data;
+	}
 } else if (placeholderData) {
 	// Construct simulated entry data from JSON
 	// Ensure we have a valid date object
@@ -67,6 +94,7 @@ if (entry) {
 		date: new Date(year, 0, 1),
 		heroImage: placeholderData.img,
 		theme: "hyperspace", // UPGRADED TO SCROLLY
+		slug: placeholderData.id.toLowerCase().replace(/ /g, "-"),
 		tags: [placeholderData.group || "Archive", placeholderData.category || "Project"],
 		draft: false,
 		listed: true,
@@ -98,8 +126,20 @@ if (entry) {
 
 // Get all projects for navigation
 const allProjects = await getCollection("projects");
+
+// Decouple Sort & Hydrate for Nav
+const allProjectsHydrated = allProjects.map((p) => {
+	const m = (projectManifest as any)[p.id];
+	if (m) {
+		const newData = { ...p.data, ...m };
+		if (m.date) newData.date = new Date(m.date);
+		return { ...p, data: newData };
+	}
+	return p;
+});
+
 // Sort by date descending (newest first)
-const sortedProjects = allProjects.sort(
+const sortedProjects = allProjectsHydrated.sort(
 	(a, b) =>
 		new Date(b.data.date || new Date()).getTime() - new Date(a.data.date || new Date()).getTime(),
 );
@@ -144,7 +184,7 @@ const SelectedTheme = ThemeComponents[theme] || DataSheet;
 // Construct valid entry for both real and placeholder
 // We clone data to avoid mutating the readonly content collection object if needed
 const finalEntry = entry
-	? { ...entry, data: { ...entry.data } }
+	? { ...entry, data: data }
 	: {
 			id: placeholderData.id,
 			collection: "projects",

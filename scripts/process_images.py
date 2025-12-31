@@ -40,9 +40,12 @@ FORMATS = [
     {"ext": "webp", "quality": 85}
 ]
 
-# Regex for Naming Convention: {slug}-{view_type}-{sequence}.{ext}
+# Regex for Naming Convention (Strict Mode - Root Level)
 # Example: xbox-detail-01.tif
-NAMING_PATTERN = re.compile(r"^([\w-]+)-(hero|detail|context|iso|ortho|prototype|assembly|teardown|test|diagram|schematic|exploded|cutaway|render|ui|wireframe|arch)-(\d{2})\.(tif|tiff|jpg|jpeg|png)$", re.IGNORECASE)
+NAMING_PATTERN = re.compile(r"^([\w-]+)-(hero|detail|context|iso|ortho|prototype|assembly|teardown|test|diagram|schematic|exploded|cutaway|render|ui|wireframe|arch|social)-(\d{2})\.(tif|tiff|jpg|jpeg|png)$", re.IGNORECASE)
+
+# Reserved Folders for Pass-Through (Recursive Copy)
+RESERVED_FOLDERS = ['3d', 'docs', 'manuals', 'press', 'downloads', 'resources']
 
 def setup_directories():
     """Ensure workspace directories exist."""
@@ -55,6 +58,132 @@ def setup_directories():
         print(f"WARNING: Staging Directory not found at {STAGING_DIR}")
         print("Please ensure 'quantum-assets' repo is checked out as a sibling to 'quantum'.")
 
+def process_image_file(item, output_path, strict_naming=True):
+    """
+    Process a single image file.
+    strict_naming: If True, enforces NAMING_PATTERN. If False, allows any name (appends -bp).
+    """
+    
+    # OUTPUT NAME CALCULATION
+    if strict_naming:
+        match = NAMING_PATTERN.match(item.name)
+        if not match:
+             # Check for GIF (Animation)
+            if item.suffix.lower() == '.gif':
+                print(f"    [GIF] Processing {item.name}...")
+                try:
+                    shutil.copy2(item, output_path / item.name)
+                    with Image.open(item) as img:
+                        out_name = f"{item.stem}.webp"
+                        img.save(output_path / out_name, format='WEBP', save_all=True, optimize=True, quality=85)
+                        print(f"      -> Generated: {out_name}")
+                except Exception as e:
+                    print(f"      [ERROR] GIF processing failed: {e}")
+                return
+
+            print(f"    [SKIP] Invalid Strict Name: {item.name}")
+            return
+        
+        base_slug, view_type, sequence, ext = match.groups()
+        base_name = f"{base_slug}-{view_type}-{sequence}"
+    else:
+        # LOOSE MODE (Gallery)
+        # We just take the filename stem (no extension)
+        if item.suffix.lower() not in ['.jpg', '.jpeg', '.png', '.tif', '.tiff', '.webp']:
+             return # Skip non-images
+        base_name = item.stem
+
+    print(f"    [IMG] {item.name} -> {base_name}...")
+
+    try:
+        with Image.open(item) as img:
+            img = ImageOps.exif_transpose(img)
+            
+            # Convert to RGB
+            if img.mode in ('RGBA', 'LA') or (img.mode == 'P' and 'transparency' in img.info):
+                    pass 
+            elif img.mode != 'RGB':
+                img = img.convert('RGB')
+
+            # Generate Breakpoints
+            for bp_name, width in BREAKPOINTS.items():
+                # optimize: skip upscaling
+                if width > (img.width * 1.1):
+                    continue
+
+                aspect_ratio = img.height / img.width
+                height = int(width * aspect_ratio)
+
+                resized_img = img.resize((width, height), Image.Resampling.LANCZOS)
+
+                for fmt in FORMATS:
+                    out_ext = fmt["ext"]
+                    quality = fmt["quality"]
+                    out_filename = f"{base_name}-{bp_name}.{out_ext}"
+                    out_file = output_path / out_filename
+
+                    resized_img.save(out_file, quality=quality, optimize=True)
+                    # print(f"      -> {out_filename}")
+
+    except Exception as e:
+        print(f"    [ERROR] Failed to process {item.name}: {e}")
+
+def process_animation_sequence(folder, output_path):
+    """Stitches a folder of images into a single WebP animation."""
+    anim_name = folder.name.replace('anim_', '') # Clean name
+    print(f"  [ANIMATION] Stitching sequence: {folder.name} -> {anim_name}.webp")
+    
+    frames = sorted([f for f in folder.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.tif', '.tiff', '.png']])
+    if not frames:
+        print(f"    [SKIP] No valid frames found.")
+        return
+
+    try:
+        pil_frames = []
+        for f in frames:
+            img = Image.open(f)
+            img = ImageOps.exif_transpose(img)
+            if img.mode != 'RGB': img = img.convert('RGB')
+            pil_frames.append(img)
+        
+        # Determine Duration (default 500ms for UI flows, can be parsed from name)
+        duration = 500
+        # Check for _Xms in folder name
+        match = re.search(r'[_-](\d+)ms$', folder.name)
+        if match:
+            duration = int(match.group(1))
+            print(f"    [CONFIG] Duration: {duration}ms")
+
+        # Generate Breakpoints
+        for bp_name, width in BREAKPOINTS.items():
+            resized_frames = []
+            ref_img = pil_frames[0]
+            aspect_ratio = ref_img.height / ref_img.width
+            canvas_height = int(width * aspect_ratio)
+            canvas_size = (width, canvas_height)
+
+            for img in pil_frames:
+                padded_img = ImageOps.pad(img, canvas_size, method=Image.Resampling.LANCZOS, color=(0,0,0), centering=(0.5, 0.5))
+                resized_frames.append(padded_img)
+            
+            out_filename = f"{anim_name}-{bp_name}.webp"
+            out_file = output_path / out_filename
+            
+            resized_frames[0].save(
+                out_file, 
+                save_all=True, 
+                append_images=resized_frames[1:], 
+                optimize=True, 
+                quality=80, 
+                duration=duration, 
+                loop=0,
+                format='WEBP'
+            )
+            print(f"    -> Generated: {out_filename}")
+
+    except Exception as e:
+        print(f"    [ERROR] Animation stitching failed: {e}")
+
 def process_project(slug):
     """Process all images for a specific project slug."""
     input_path = MASTER_DIR / slug
@@ -64,163 +193,56 @@ def process_project(slug):
         print(f"Error: Project folder not found in MASTER: {input_path}")
         return
 
-    # Create output folder if it doesn't exist
     output_path.mkdir(parents=True, exist_ok=True)
 
     print(f"Processing Project: {slug}")
     print(f"  Input:  {input_path}")
     print(f"  Output: {output_path}")
 
-    # Find valid master files (and directories for animations)
-    items = sorted(input_path.iterdir())
-    
-    for item in items:
-        # --- ANIMATION SEQUENCE PROCESSING (Folder -> WebP) ---
-        if item.is_dir():
-            anim_name = item.name
-            print(f"  [ANIMATION] Found sequence folder: {anim_name}/")
-            
-            frames = sorted([f for f in item.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.tif', '.tiff', '.png']])
-            if not frames:
-                print(f"    [SKIP] No valid images in {anim_name}")
-                continue
-            
-            try:
-                # Load all frames
-                pil_frames = []
-                for f in frames:
-                    img = Image.open(f)
-                    # Fix EXIF Orientation
-                    img = ImageOps.exif_transpose(img)
-                    if img.mode != 'RGB': img = img.convert('RGB')
-                    pil_frames.append(img)
-                
-                # Generate Breakpoints for Animation
-                for bp_name, width in BREAKPOINTS.items():
-                    # Resize all frames
-                    resized_frames = []
-                    
-                    # Use first frame as reference for canvas size
-                    ref_img = pil_frames[0]
-                    aspect_ratio = ref_img.height / ref_img.width
-                    canvas_height = int(width * aspect_ratio)
-                    canvas_size = (width, canvas_height)
-
-                    for img in pil_frames:
-                        # Use ImageOps.pad to fit image within canvas without distortion (Letterboxing)
-                        # This prevents "squishing" if frames have different aspect ratios
-                        # Fill color: Black (0,0,0) matches the dark theme better than white
-                        
-                        # Fix: Ensure we are padding to the calculated canvas_size
-                        padded_img = ImageOps.pad(img, canvas_size, method=Image.Resampling.LANCZOS, color=(0,0,0), centering=(0.5, 0.5))
-                        resized_frames.append(padded_img)
-                    
-                    # Determine Duration
-                    # Look for duration in folder name (e.g. "base-click_testing_500ms")
-                    # Default: 2000ms (0.5fps)
-                    duration = 2000
-                    try:
-                        # Check for _Xms or -Xms suffix
-                        match = re.search(r'[_-](\d+)ms$', anim_name)
-                        if match:
-                            duration = int(match.group(1))
-                            print(f"    [CONFIG] Custom duration found: {duration}ms")
-                    except:
-                        pass
-
-                    # Save as Animated WebP
-                    out_filename = f"{anim_name}-{bp_name}.webp"
-                    out_file = output_path / out_filename
-                    
-                    resized_frames[0].save(
-                        out_file, 
-                        save_all=True, 
-                        append_images=resized_frames[1:], 
-                        optimize=True, 
-                        quality=80, 
-                        duration=duration, 
-                        loop=0,
-                        format='WEBP'
-                    )
-                    print(f"    -> Generated: {out_filename} (Animated Sequence)")
-            
-            except Exception as e:
-                print(f"    [ERROR] Animation processing failed: {e}")
-            continue
-
-        # --- PASS-THROUGH ASSETS ---
-        # Copy non-image assets directly (PDF, GLB, MP4, etc.)
+    # 1. PROCESS ROOT FILES (Strict Mode)
+    # These are your Hero, Detail, and Social images.
+    root_items = [f for f in input_path.iterdir() if f.is_file()]
+    for item in root_items:
+        # Pass-through Root Binaries (GLB, PDF)
         if item.suffix.lower() in ['.pdf', '.glb', '.gltf', '.mp4', '.mov', '.zip']:
-            print(f"  [COPY] {item.name}")
+            print(f"  [COPY] Root Asset: {item.name}")
             shutil.copy2(item, output_path / item.name)
             continue
-
-        # --- IMAGE PROCESSING ---
-        match = NAMING_PATTERN.match(item.name)
         
-        # Handle GIFs specifically (Animated WebP)
-        if item.suffix.lower() == '.gif':
-            print(f"  [GIF] Processing {item.name}...")
-            try:
-                # Copy original GIF as fallback
-                shutil.copy2(item, output_path / item.name)
-                
-                # Convert to Animated WebP
-                with Image.open(item) as img:
-                    out_name = f"{item.stem}.webp"
-                    img.save(output_path / out_name, format='WEBP', save_all=True, optimize=True, quality=85)
-                    print(f"    -> Generated: {out_name} (Animated WebP)")
-            except Exception as e:
-                print(f"    [ERROR] GIF processing failed: {e}")
+        process_image_file(item, output_path, strict_naming=True)
+
+    # 2. PROCESS SUBDIRECTORIES (The Routing Engine)
+    subdirs = [d for d in input_path.iterdir() if d.is_dir()]
+    
+    for folder in subdirs:
+        name = folder.name.lower()
+        
+        # ROUTE A: RESERVED PASS-THROUGH
+        if name in RESERVED_FOLDERS:
+            print(f"  [DOCS] Copying Reserved Folder: {name}/")
+            target_dir = output_path / name
+            if target_dir.exists(): shutil.rmtree(target_dir) # Clean overwrite
+            shutil.copytree(folder, target_dir)
+            continue
+        
+        # ROUTE B: ANIMATION SEQUENCE
+        if name.startswith('anim_'):
+            process_animation_sequence(folder, output_path)
             continue
 
-        if not match:
-            print(f"  [SKIP] Invalid Name: {item.name}")
+        # ROUTE C: GALLERY (Loose Naming)
+        if name.startswith('gallery_'):
+            print(f"  [GALLERY] Processing Folder: {name}/")
+            gallery_out = output_path / name
+            gallery_out.mkdir(exist_ok=True)
+            
+            gallery_imgs = [f for f in folder.iterdir() if f.is_file()]
+            for img in gallery_imgs:
+                process_image_file(img, gallery_out, strict_naming=False)
             continue
 
-        base_slug, view_type, sequence, ext = match.groups()
-        base_name = f"{base_slug}-{view_type}-{sequence}"
-        
-        print(f"  [PROCESSING] {item.name}...")
-
-        try:
-            with Image.open(item) as img:
-                # Fix EXIF Orientation
-                img = ImageOps.exif_transpose(img)
-                
-                # Convert to RGB (strip alpha if present, handle CMYK)
-                if img.mode in ('RGBA', 'LA') or (img.mode == 'P' and 'transparency' in img.info):
-                     # Keep alpha for WebP/AVIF if needed, but usually for photos we want RGB
-                     # For now, let's assume photos are RGB. If UI screenshot has transparency, we keep it.
-                     pass 
-                elif img.mode != 'RGB':
-                    img = img.convert('RGB')
-
-                # Generate Breakpoints
-                for bp_name, width in BREAKPOINTS.items():
-                    # Don't upscale (allow 10% tolerance for near-misses)
-                    if width > (img.width * 1.1):
-                        continue
-
-                    # Calculate height to maintain aspect ratio
-                    aspect_ratio = img.height / img.width
-                    height = int(width * aspect_ratio)
-
-                    # Resize (Lanczos for quality)
-                    resized_img = img.resize((width, height), Image.Resampling.LANCZOS)
-
-                    # Save in target formats
-                    for fmt in FORMATS:
-                        out_ext = fmt["ext"]
-                        quality = fmt["quality"]
-                        out_filename = f"{base_name}-{bp_name}.{out_ext}"
-                        out_file = output_path / out_filename
-
-                        resized_img.save(out_file, quality=quality, optimize=True)
-                        print(f"    -> Generated: {out_filename}")
-
-        except Exception as e:
-            print(f"  [ERROR] Failed to process {item.name}: {e}")
+        # ROUTE D: UNKNOWN / IGNORED
+        print(f"  [WARN] Unknown folder '{name}' ignored. Use 'gallery_', 'anim_', or reserved names.")
 
 def main():
     parser = argparse.ArgumentParser(description="Quantum Image Processor")
@@ -232,7 +254,6 @@ def main():
     setup_directories()
 
     if args.all:
-        # Scan MASTER_DIR for folders
         projects = [d.name for d in MASTER_DIR.iterdir() if d.is_dir()]
         for p in projects:
             process_project(p)

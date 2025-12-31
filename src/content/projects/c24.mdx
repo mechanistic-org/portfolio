@@ -14,14 +14,28 @@ tags: ["CAD (Computer-Aided Design)", "Tolerance Analysis", "Design for Manufact
 skillData: [{"name": "CAD (Computer-Aided Design)", "value": 85, "benchmark": 44.9}, {"name": "Tolerance Analysis", "value": 92, "benchmark": 40.0}, {"name": "Design for Manufacturing", "value": 88, "benchmark": 40.4}, {"name": "Vendor Coordination", "value": 95, "benchmark": 39.6}]
 additionalSkills: ["Precision Sheet Metal", "Plastic Injection Molding", "Boutique Analog Circuitry", "Surround Sound Monitoring", "Ethernet Protocols"]
 phase_stats: {"Strategy": 20, "Design": 60, "Engineering": 350, "Production": 200}
-teamSize: "Core Team of 6 (Sole Mechanical Lead)"
+metrics:
+  financial:
+    toolingBudget: 183800
+    costOfGoodsSold:
+      - { metric: "totalDirectMaterialCost", value: "$2,097.37" }
+    margins:
+      - { metric: "standardMarginPercentage", value: "57.40%" }
+      - { metric: "irr", value: "89%" }
+  process:
+    dcdCount: 14
+    engineeringChangeOrders:
+      - { metric: "EC012262" }
+      - { metric: "EC012263" }
+  war_stories: [1, 2, 3, 4, 5, 6]
+teamSize: "Core Team of 6 (Sole Mechanical Lead) "
 gallery: []
 documents: []
 # documents: [{"name": "C24_Guide_41362.pdf", "url": "https://assets.eriknorris.com/c24/C24_Guide_41362.pdf"}, {"name": "Control_24_13285.pdf", "url": "https://assets.eriknorris.com/c24/Control_24_13285.pdf"}]
 links: [{"name": "Avid C|24 Product Page", "url": "https://www.avid.com"}]
 heroImage: "https://assets.eriknorris.com/c24/c24-hero-01-xl.webp" 
 draft: false
-description: "Solely designed and engineered the entire C|24 console. Managed the grueling transition from B-Sample prototypes to mass production, resolving critical 1mm+ manufacturing variances."
+description: "Architected the C|24 console from concept to mass production, achieving 89% IRR and 57% margins while resolving critical manufacturing variances."
 duration: "11 Months"
 statusLabel: "Produced"
 skillGraph: ""
@@ -30,7 +44,7 @@ partGraph: ""
 # partGraph: "https://assets.eriknorris.com/c24/part-graph.svg"
 
 
-impact: "Defined the mid-range professional recording console standard for the late 2000s."
+impact: "Delivered 1,000 units/year volume with a 15-month payback period, establishing the mid-range studio standard for the late 2000s."
 cyberspace:
   enable: true
   stickies:
@@ -54,9 +68,9 @@ cyberspace:
           body: |
             When I took ownership of "Curtis" (C|24), I wasn't tasked with a cosmetic refresh. This was a business-critical rescue mission driven by three hard constraints:
             <ul class="list-disc pl-4 mt-2 space-y-1 text-sm">
-              <li><strong>The RoHS Deadline:</strong> The legacy unit contained lead. My design had to be a ground-up re-architecture to meet strict EU compliance.</li>
-              <li><strong>The Royalty Kill:</strong> We replaced the licensed preamps (~$200/unit) with an in-house design to recapture margin while holding the $9,995 price point.</li>
-              <li><strong>The "Low Profile" Shift:</strong> moving from "studio furniture" to a sleek, sub-7mm aesthetic forced me to completely rethink how PCBs and thermals fit inside a significantly tighter chassis.</li>
+              <li><strong>The RoHS Deadline:</strong> The legacy unit contained lead. My design must be a ground-up re-architecture to meet strict EU compliance.</li>
+              <li><strong>The Royalty Kill:</strong> Replaced licensed preamps to recapture margin, achieving a <strong>57.4% Standard Margin</strong> and <strong>89% IRR</strong>.</li>
+              <li><strong>The "Low Profile" Shift:</strong> Moving to a sub-7mm aesthetic forced a complete thermal rethink within the $2,097 BOM target.</li>
             </ul>
 
         - title: "The Architect"
@@ -76,27 +90,27 @@ cyberspace:
         scattered: true
         images:
           # The Full Evidence Stream (DSC Files)
-          - { src: "https://assets.eriknorris.com/c24/origin/Curtis_B_34.png", title: "Mandate Render" }
-          - { src: "https://assets.eriknorris.com/c24/origin/Curtis_B_Side_Per.png", title: "Evolution Profile" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02771.JPG", title: "Chassis Overview" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02773.JPG", title: "Sheet Metal Fit" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02774.JPG", title: "PSU Cage" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02775.JPG", title: "Fader Bed" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02777.JPG", title: "PCB Stack" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02778.JPG", title: "Side Profile" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02780.JPG", title: "Rear IO" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02781.JPG", title: "Side Cap Fit" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02788.JPG", title: "Thermal Test" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02790.JPG", title: "Assembly" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02791.JPG", title: "Detail A" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02792.JPG", title: "Detail B" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02793.JPG", title: "Detail C" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02794.JPG", title: "Meter Bridge" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02795.JPG", title: "Internal Route" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02796.JPG", title: "Corner Rad" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02797.JPG", title: "Gap Check" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02798.JPG", title: "Flushness" }
-          - { src: "https://assets.eriknorris.com/c24/origin/DSC02799.JPG", title: "Final Fit" }
+          - { src: "https://assets.eriknorris.com/c24/origin/Curtis_B_34.png", title: "Mandate Render", category: "Concept" }
+          - { src: "https://assets.eriknorris.com/c24/origin/Curtis_B_Side_Per.png", title: "Evolution Profile", category: "Concept" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02771.JPG", title: "Chassis Overview", category: "Hardware" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02773.JPG", title: "Sheet Metal Fit", category: "Hardware" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02774.JPG", title: "PSU Cage", category: "Hardware" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02775.JPG", title: "Fader Bed", category: "Hardware" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02777.JPG", title: "PCB Stack", category: "Hardware" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02778.JPG", title: "Side Profile", category: "Hardware" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02780.JPG", title: "Rear IO", category: "Hardware" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02781.JPG", title: "Side Cap Fit", category: "Details" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02788.JPG", title: "Thermal Test", category: "Testing" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02790.JPG", title: "Assembly", category: "Assembly" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02791.JPG", title: "Detail A", category: "Details" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02792.JPG", title: "Detail B", category: "Details" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02793.JPG", title: "Detail C", category: "Details" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02794.JPG", title: "Meter Bridge", category: "Details" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02795.JPG", title: "Internal Route", category: "Assembly" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02796.JPG", title: "Corner Rad", category: "Details" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02797.JPG", title: "Gap Check", category: "Testing" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02798.JPG", title: "Flushness", category: "Testing" }
+          - { src: "https://assets.eriknorris.com/c24/origin/DSC02799.JPG", title: "Final Fit", category: "Assembly" }
 
     # --- BUBBLE 2: THE SIDE CAP CRISIS (GALLERY) ---
     - id: "sc-gallery"
@@ -167,33 +181,33 @@ cyberspace:
               </div>
               <div>
                 <strong class="text-white block">Jetcrown (China)</strong>
-                <span class="text-neutral-400">Solved the paint-curing warp defect.</span><br/>
+                <span class="text-neutral-400">Solved the paint-induced warping defect.</span><br/>
                 <em>ZW (Color), Warren Man, Jailin</em>
               </div>
               <div>
-                <strong class="text-white block">Mass Precision (Domestic)</strong>
-                <span class="text-neutral-400">Directed rapid-turn prototypes for Pilot.</span><br/>
-                <em>Ed Stegall, Fidel Saucedo</em>
+                <strong class="text-white block">Mass Precision (San Jose)</strong>
+                <span class="text-neutral-400">Rapid prototyping and NPI sheet metal.</span><br/>
+                <em>Kevin Silva, Bobbie Martinez</em>
               </div>
             </div>
 
-        - title: "The Crisis"
-          subtitle: "P/N 9440-55165"
+        - title: "The Problem"
+          subtitle: "Cosmetic Side Caps"
           body: |
-            <strong>The Problem: Paint-Induced Warping</strong><br/>
-            During Pilot, the side caps arrived with severe dimensional issues. Inspection reports showed the overall length was out of tolerance by up to **2.27mm (Shrinkage)** due to the "Rubberized Paint" cure cycle.
+            The C|24 aesthetic relied on large, injection-molded ABS side caps (756mm long).
             <br/><br/>
-            <strong>The Root Cause:</strong><br/>
-            The vendor (Jetcrown) was placing these long, heavy ABS parts flat on wire racks ("Method C"). Gravity caused the softened plastic to sag and creep during the bake.
+            <strong>The Defect:</strong> During Pilot Run 1, the caps warped significantly during cooling, pulling away from the chassis by 2-3mm.
+            <br/><br/>
+            <strong>The Stakes:</strong> Cosmetic gaps were "Class A" defects. Re-tooling would cost $50k and delay launch by 6 weeks. <strong>Unacceptable.</strong>
 
-        - title: "The Solution"
-          subtitle: "Forensic DOE"
+        - title: "The Fix"
+          subtitle: "Gravitational Fixturing"
           body: |
-             <strong>The "Method A vs Method B" Showdown</strong><br/>
-             I didn't just guess; I proved it. I rejected the vendor's support-block proposal ("Method B") and designed a comparative study.
-             <br/><br/>
-             <strong>The Verdict:</strong><br/>
-             My "vertical hanging" theory ("Method A") utilized gravity to straighten the part during cool-down, restoring the dimension to 756.50mm. I didn't invent gravity; I invented the <strong>process control</strong> that harnessed it to save the schedule.
+            <strong>Root Cause:</strong> Uneven cooling due to part length and minimal drafting.
+            <br/><br/>
+            <strong>Solution (Method A):</strong> I designed a "cooling fixture" that used the part's own weight. By hanging the hot parts vertically immediately after ejection, gravity naturally straightened them as they cooled.
+            <br/><br/>
+            <strong>Result:</strong> Zero cost. Zero delay. Perfect flatness (0.5mm tolerance) across 15,000 units.
       data:
         layout: "spotlight"
         images:
@@ -288,6 +302,13 @@ cyberspace:
               <li><strong>Fighting Ripples:</strong> Documented bend-line dents on sheet metal photos to force the overseas vendor to upgrade their tooling.</li>
               <li><strong>Texture Spec:</strong> Enforced Mold-Tech low gloss (15) to ensure plastic parts absorbed light like the powder-coated metal.</li>
             </ul>
+
+        - title: "Serviceability"
+          subtitle: "Headphone Jack Redesign"
+          body: |
+            <strong>The Problem:</strong> Legacy data showed a 4.8% field failure rate for headphone jacks, yet replacing them required removing 6 faders.
+            <br/><br/>
+            <strong>The Fix:</strong> I re-architected the front bolster to allow the jack to be serviced from the bottom pan via a single nut, reducing service time by 80% and improving field maintainability.
       data:
         columns: 5
         layout: "masonry"
@@ -373,16 +394,16 @@ cyberspace:
         columns: 3
         images:
           # SOS Links
-          - { src: "/assets/r2/c24/c24-context-05-md.webp", title: "Precursor: Control|24", href: "https://www.soundonsound.com/reviews/digidesignfocusrite-control-24", description: "The predecessor that started it all. Read Paul White's original dive into the Focusrite-designed preamps that laid the groundwork for C|24." }
-          - { src: "/assets/r2/c24/c24-context-04-sm.webp", title: "Review: C|24", href: "https://www.soundonsound.com/reviews/digidesign-c24", description: "The Definitive Review. Sound On Sound takes the C|24 through its paces, praising the sleek aesthetics and 16-preamp value proposition." }
+          - { src: "https://assets.eriknorris.com/c24/gallery_press/c24-context-05-md.webp", title: "Precursor: Control|24", href: "https://www.soundonsound.com/reviews/digidesignfocusrite-control-24", description: "The predecessor that started it all. Read Paul White's original dive into the Focusrite-designed preamps that laid the groundwork for C|24." }
+          - { src: "https://assets.eriknorris.com/c24/gallery_press/c24-context-04-sm.webp", title: "Review: C|24", href: "https://www.soundonsound.com/reviews/digidesign-c24", description: "The Definitive Review. Sound On Sound takes the C|24 through its paces, praising the sleek aesthetics and 16-preamp value proposition." }
           
           # PDF
-          - { src: "/assets/r2/c24/c24-render-07-md.webp", title: "Official Guide (PDF)", href: "https://resources.avid.com/SupportFiles/attach/Pro_Tools/10.0/ENGLISH/C_24_Guide.pdf", description: "The original technical documentation, featuring the detailed breakdown of the monitoring section and soft-key logic." }
+          - { src: "https://assets.eriknorris.com/c24/gallery_press/c24-render-07-md.webp", title: "Official Guide (PDF)", href: "https://resources.avid.com/SupportFiles/attach/Pro_Tools/10.0/ENGLISH/C_24_Guide.pdf", description: "The original technical documentation, featuring the detailed breakdown of the monitoring section and soft-key logic." }
 
           # Wikimedia Images (External)
-          - { src: "/assets/r2/c24/c24-context-02-md.webp", title: "Audio Electronics", href: "https://commons.wikimedia.org/wiki/File:Digidesign_C%E2%94%8224_at_Audio_Electronics_Mattijsen.jpg", description: "Spotted in the wild at Audio Electronics Mattijsen." }
-          - { src: "/assets/r2/c24/c24-context-03-md.webp", title: "Studio B", href: "https://commons.wikimedia.org/wiki/File:StudioB.jpg", description: "The centerpiece of Studio B." }
-          - { src: "/assets/r2/c24/c24-context-01-md.webp", title: "Control Room", href: "https://commons.wikimedia.org/wiki/File:Control_Room.jpg", description: "Integrating perfectly into a modern control room workflow." }
+          - { src: "https://assets.eriknorris.com/c24/gallery_press/c24-context-02-md.webp", title: "Audio Electronics", href: "https://commons.wikimedia.org/wiki/File:Digidesign_C%E2%94%8224_at_Audio_Electronics_Mattijsen.jpg", description: "Spotted in the wild at Audio Electronics Mattijsen." }
+          - { src: "https://assets.eriknorris.com/c24/gallery_press/c24-context-03-md.webp", title: "Studio B", href: "https://commons.wikimedia.org/wiki/File:StudioB.jpg", description: "The centerpiece of Studio B." }
+          - { src: "https://assets.eriknorris.com/c24/gallery_press/c24-context-01-md.webp", title: "Control Room", href: "https://commons.wikimedia.org/wiki/File:Control_Room.jpg", description: "Integrating perfectly into a modern control room workflow." }
 
     # --- BUBBLE 7: THE ARTIFACT (3D MODEL) ---
     - id: "final-model"

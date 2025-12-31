@@ -1,0 +1,204 @@
+{
+    "metrics_extraction": {
+        "financial": {
+            "targetPricing": [
+                {
+                    "metric": "suggestedRetailPrice",
+                    "value": "$8,995.00"
+                },
+                {
+                    "metric": "suggestedRetailPriceUpdated",
+                    "value": "$9,995.00"
+                },
+                {
+                    "metric": "averageSellingPrice",
+                    "value": "$5,982.00"
+                },
+                {
+                    "metric": "dealerDiscount",
+                    "value": "30%"
+                },
+                {
+                    "metric": "rebate",
+                    "value": "5%"
+                }
+            ],
+            "costOfGoodsSold": [
+                {
+                    "metric": "estimatedStandardCost",
+                    "value": "$2,546.03"
+                },
+                {
+                    "metric": "estimatedStandardCostUpdated",
+                    "value": "$2,621.71"
+                },
+                {
+                    "metric": "totalElectricalEngineeringCost",
+                    "value": "$1,095.62"
+                },
+                {
+                    "metric": "totalMechanicalEngineeringCost",
+                    "value": "$499.00"
+                },
+                {
+                    "metric": "contractManufacturingCost",
+                    "value": "$466.14"
+                },
+                {
+                    "metric": "totalDirectMaterialCost",
+                    "value": "$2,097.37"
+                }
+            ],
+            "margins": [
+                {
+                    "metric": "grossMarginPercentage",
+                    "value": "52.40%"
+                },
+                {
+                    "metric": "standardMarginPercentage",
+                    "value": "57.40%"
+                }
+            ],
+            "toolingCosts": [
+                {
+                    "metric": "panel1Tooling",
+                    "value": "$11,520.00"
+                },
+                {
+                    "metric": "panel2Tooling",
+                    "value": "$8,400.00"
+                },
+                {
+                    "metric": "leftPlateTooling",
+                    "value": "$6,240.00"
+                },
+                {
+                    "metric": "estimatedCapitalAddition",
+                    "value": "$183,800"
+                }
+            ],
+            "volume": [
+                {
+                    "metric": "estimatedAnnualVolume",
+                    "value": "1,000 units"
+                }
+            ],
+            "returnOnInvestment": [
+                {
+                    "metric": "internalRateOfReturn",
+                    "value": "89%"
+                },
+                {
+                    "metric": "paybackPeriod",
+                    "value": "15 months"
+                }
+            ]
+        },
+        "process": {
+            "engineeringChangeOrders": [
+                {
+                    "metric": "eco12262",
+                    "description": "Release plastic parts",
+                    "date": "05-31-07"
+                },
+                {
+                    "metric": "eco12263",
+                    "description": "Release sheetmetal parts",
+                    "date": "3/6/2007"
+                },
+                {
+                    "metric": "eco13526",
+                    "description": "Modify jog wheel tolerance to +/- 0.05mm",
+                    "date": "10/30/2007"
+                }
+            ],
+            "scheduleEstimates": [
+                {
+                    "metric": "sheetMetalSchedule",
+                    "value": "164 days"
+                },
+                {
+                    "metric": "plasticSchedule",
+                    "value": "192 days"
+                },
+                {
+                    "metric": "pcbRev1Schedule",
+                    "value": "237 days"
+                }
+            ]
+        },
+        "manufacturing": {
+            "tolerances": [
+                {
+                    "metric": "gateTrimTolerance",
+                    "value": "< 0.127 mm"
+                },
+                {
+                    "metric": "generalDimensionTolerance",
+                    "value": "+/- 0.10 mm"
+                },
+                {
+                    "metric": "jogWheelTolerance",
+                    "value": "+/- 0.05 mm"
+                }
+            ],
+            "inspectionResults": [
+                {
+                    "metric": "measuredDimension756_63",
+                    "value": "755.218 mm",
+                    "deviation": "-1.312 mm"
+                },
+                {
+                    "metric": "measuredDimension755_28",
+                    "value": "754.124 mm",
+                    "deviation": "-2.39 mm"
+                }
+            ]
+        }
+    },
+    "war_stories_extraction": [
+        {
+            "title": "Side Cap Thermal Warping",
+            "crisis": "Application of rubberized soft paint and subsequent oven curing caused the ABS side caps to twist and bow, resulting in parts that did not fit the chassis geometry.",
+            "fix": "Rejected the vendor's flat-rack curing method and engineered a 'Vertical Hanging Fixture' to utilize gravity to maintain straightness during the bake cycle.",
+            "metric": "Flatness deviation reduced from >2.50mm to acceptable limits"
+        },
+        {
+            "title": "Headphone Jack Serviceability Redesign",
+            "crisis": "The original design required removing the entire front bolster and 5-6 faders to replace the headphone jack, which was a high-frequency failure item.",
+            "fix": "Redesigned the sheet metal bracket and plastic bolster to recess the jack, allowing it to be serviced by removing only the bottom pan and a single nut.",
+            "metric": "4.8% field failure rate (based on legacy data)"
+        },
+        {
+            "title": "Top Panel Fabrication Blockage",
+            "crisis": "The primary overseas vendor issued a 'no-bid' on the top panel due to the high density of welded standoffs and hole features, threatening the Pilot build schedule.",
+            "fix": "Implemented a dual-sourcing strategy using Mass Precision for rapid prototypes and negotiated a manual offset-welding process with the overseas vendor to bridge the gap.",
+            "metric": "11,144 holes (bottom panel complexity context)"
+        },
+        {
+            "title": "Jog Wheel Integration",
+            "crisis": "The mandate to lower costs required replacing the legacy custom encoder with a smaller commodity part (Bourns EM14), creating a mismatch with the industrial design feel.",
+            "fix": "Engineered a custom plastic surround and LED holder to adapt the 14mm encoder to the larger chassis opening, maintaining the premium 'scrub' feel.",
+            "metric": "14mm component size"
+        },
+        {
+            "title": "PCB Interference & DCD Protocol",
+            "crisis": "High component density led to physical interferences, such as power connectors on the SubMix I/O board clashing with the chassis.",
+            "fix": "Enforced a strict Data Control Drawing (DCD) protocol, requiring PCB designers to route within mechanical keep-outs, forcing connector relocations.",
+            "metric": "13 Revisions (MicPre 8 I/O DCD)"
+        },
+        {
+            "title": "Cosmetic CMF Defense",
+            "crisis": "Early units exhibited 'Dental White' (yellowish) silkscreening and visible metal ripples/dents along bend lines that warped the graphics.",
+            "fix": "Rejected inferior samples and enforced strict adherence to 'Spectral Master' color standards and Class A surface inspection criteria.",
+            "metric": "Class A Surface Spec"
+        }
+    ],
+    "bio_extraction": [
+        "• Situation: The C|24 console required integrating 19 distinct Printed Circuit Boards (PCBs) into a low-profile chassis with zero margin for interference. Task: Establish a governance protocol to ensure mechanical and electrical design synchronization and prevent costly board spins. Action: Architected and enforced a strict Data Control Drawing (DCD) system, authoring binding geometric constraints for every PCB. I managed up to 13 revisions per board (e.g., MicPre 8 I/O), personally resolving connector collisions and keep-out violations before layout finalization. Result: Achieved 100% mechanical fit on the first physical build, eliminating interference issues for the entire product line.",
+        "• Situation: During the critical Pilot phase, the \"Side Cap\" cosmetic parts failed inspection due to severe thermal warping caused by the vendor's standard paint curing process. Task: Diagnose the root cause and engineer a manufacturing solution to save the yield without slipping the schedule. Action: I engaged in technical diplomacy with the vendor (Jetcrown), rejecting their flat-rack process. I engineered a specific \"Vertical Hanging Fixture\" workflow that utilized gravity to straighten parts during the cure cycle and formalized this process via ECO 12740 (Rev C to D). Result: Eliminated the warp defect, ensuring parts met the \"Spectral Master DS-022\" aesthetic standard and protecting the Mass Production launch timeline.",
+        "• Situation: The primary overseas contract manufacturer (VTech/Kwanta) issued a \"no-bid\" on the product's main top panel due to the high density of welded hardware, threatening the Pilot build. Task: Secure parts for the immediate build while establishing a viable long-term production capability. Action: I orchestrated a dual-sourcing strategy, leveraging domestic partner Mass Precision for rapid-turn Pilot units while simultaneously negotiating with overseas engineers to validate a manual offset-welding process to bridge the gap until automation came online. Result: Delivered Pilot units on schedule and successfully qualified the long-term overseas manufacturing process for the product's most complex component.",
+        "• Situation: The engineering team faced data integrity risks during a complex transition to RoHS compliance and a Product Data Management (PDM) system upgrade. Task: Establish departmental data governance to prevent file corruption and ensure version control across the team. Action: I administered the Pro/Intralink 8.0 server migration and authored the \"General Modeling Guide\" for the department. I organized and led mandatory \"User Orientation\" training sessions, enforcing strict check-in/check-out protocols. Result: Maintained 100% data integrity for thousands of production files and preserved complex assembly relationships during the critical RoHS Bill of Materials conversion.",
+        "• Situation: The transition from Prototype to Mass Production involved a complex Bill of Materials (BOM) with over 30 custom molds and 15 sheet metal parts. Task: Execute rigorous Configuration Management to ensure all global vendors were building to the correct revision. Action: I acted as the primary Originator for all mechanical releases, authoring comprehensive Engineering Change Orders (e.g., ECO 12263 for Metal, ECO 12262 for Plastics). I defined precise material dispositions (Scrap vs. Use-As-Is) to minimize scrap costs while strictly enforcing new revision standards. Result: Successfully released the entire mechanical product structure to production, synchronizing a global supply chain across the US and China with zero revision-mismatch errors."
+    ]
+}

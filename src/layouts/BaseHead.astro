@@ -14,6 +14,7 @@ export interface Props {
 	description: string;
 	image?: ImageMetadata | string;
 	postFrontmatter?: CollectionEntry<"blog">["data"];
+	projectFrontmatter?: any; // For projects
 	authors?: CollectionEntry<"authors">[];
 	noindex?: boolean;
 }
@@ -25,6 +26,7 @@ const {
 	image,
 	authors,
 	postFrontmatter,
+	projectFrontmatter,
 	noindex = false,
 } = Astro.props as Props;
 
@@ -80,6 +82,7 @@ import JetBrainsMono from "@fontsource-variable/jetbrains-mono/files/jetbrains-m
 	image={image}
 	authors={authors}
 	postFrontmatter={postFrontmatter}
+	projectFrontmatter={projectFrontmatter}
 	noindex={noindex}
 />
 
