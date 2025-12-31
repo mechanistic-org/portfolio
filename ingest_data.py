@@ -216,6 +216,150 @@ def generate_donut_chart(stats, slug):
     
     return f"{R2_DOMAIN}/{slug}/part-graph.svg"
 
+def process_bubbles(slug, title):
+    """
+    The Bubble Compiler: Scans R2_STAGING/{slug}/bubbles/ and generates 'cyberspace' JSON.
+    Returns: (cyberspace_json_object, theme_override) or (None, None)
+    """
+    bubbles_dir = os.path.join(STAGING_DIR, slug, "bubbles")
+    if not os.path.exists(bubbles_dir):
+        return None, None
+
+    print(f"🔮 Compiling Bubbles for {slug}...")
+    
+    stickies = []
+    
+    # Get all subdirectories, sorted (01_, 02_, etc)
+    subdirs = sorted([d for d in os.listdir(bubbles_dir) if os.path.isdir(os.path.join(bubbles_dir, d))])
+    
+    for i, dirname in enumerate(subdirs):
+        bubble_path = os.path.join(bubbles_dir, dirname)
+        
+        # --- PARSE deck.md ---
+        deck_file = os.path.join(bubble_path, "deck.md")
+        slides = []
+        
+        if os.path.exists(deck_file):
+            with open(deck_file, "r", encoding="utf-8") as f:
+                raw_text = f.read()
+                
+            # Split by '---' separator
+            slide_texts = [s.strip() for s in raw_text.split("---") if s.strip()]
+            
+            for s_text in slide_texts:
+                lines = s_text.split('\n')
+                s_title = ""
+                s_subtitle = ""
+                s_body = ""
+                
+                body_lines = []
+                for line in lines:
+                    if line.startswith("# ") and not s_title:
+                        s_title = line[2:].strip()
+                    elif line.startswith("## ") and not s_subtitle:
+                        s_subtitle = line[3:].strip()
+                    else:
+                        body_lines.append(line)
+                
+                s_body = "\n".join(body_lines).strip()
+                slides.append({
+                    "title": s_title,
+                    "subtitle": s_subtitle,
+                    "body": s_body
+                })
+        else:
+            # Fallback if no deck.md (e.g. Model Bubble)
+            clean_name = dirname.split('_', 1)[-1].replace('_', ' ').title()
+            slides.append({
+                "title": clean_name,
+                "subtitle": "",
+                "body": ""
+            })
+
+        # --- GATHER ASSETS ---
+        # Images
+        bubble_images = []
+        all_files = sorted(os.listdir(bubble_path))
+        
+        has_model = False
+        model_file = None
+        
+        for f in all_files:
+            lower_f = f.lower()
+            if f.endswith(('.jpg', '.jpeg', '.png', '.webp', '.avif', '.gif')):
+                # Get Dimensions
+                width, height = 800, 600
+                try:
+                     with Image.open(os.path.join(bubble_path, f)) as img:
+                        width, height = img.size
+                except: pass
+                
+                bubble_images.append({
+                    "src": f"{R2_DOMAIN}/{slug}/bubbles/{dirname}/{f}",
+                    "width": width,
+                    "height": height,
+                    "aspectRatio": width/height if height > 0 else 1.33,
+                    "alt": f.split('.')[0]
+                })
+            
+            elif f.endswith('.glb'):
+                has_model = True
+                model_file = f
+        
+        # Sync Bubble Assets to Public R2
+        if not R2_DOMAIN.startswith("http"):
+             target_bubble_dir = os.path.join(LOCAL_R2_DIR, slug, "bubbles", dirname)
+             if os.path.exists(target_bubble_dir): shutil.rmtree(target_bubble_dir)
+             os.makedirs(target_bubble_dir, exist_ok=True)
+             for item in os.listdir(bubble_path):
+                s = os.path.join(bubble_path, item)
+                d = os.path.join(target_bubble_dir, item)
+                if os.path.isfile(s): shutil.copy2(s, d)
+
+        
+        # --- DETERMINE TYPE ---
+        b_type = "gallery"
+        if has_model: b_type = "model"
+        
+        # --- CONSTRUCT STICKY ---
+        sticky = {
+            "id": dirname, # Use folder name as ID
+            "type": b_type,
+            "deck": slides,
+            "data": {} 
+        }
+        
+        if b_type == "gallery":
+            sticky["data"] = {
+                "images": bubble_images,
+                "layout": "masonry" # Default
+            }
+            # Check for config.json override
+            config_path = os.path.join(bubble_path, "config.json")
+            if os.path.exists(config_path):
+                try:
+                    with open(config_path, 'r') as cf:
+                        conf = json.load(cf)
+                        sticky["data"].update(conf)
+                except: pass
+                
+        elif b_type == "model":
+             sticky["data"] = {
+                 "modelSrc": f"{R2_DOMAIN}/{slug}/bubbles/{dirname}/{model_file}",
+                 "poster": "", # TODO: Add poster support
+                 "cameraOrbit": "0deg 75deg 105%",
+                 "fieldOfView": "30deg"
+             }
+
+        stickies.append(sticky)
+
+    cyberspace = {
+        "layout": "linear",
+        "stickies": stickies
+    }
+    
+    return cyberspace, "RedactedDossier"
+
 # --- PROCESSORS ---
 def process_colors():
     print("🎨 Processing Colors...")
@@ -716,6 +860,9 @@ def process_projects():
         
         staging_project_dir = os.path.join(STAGING_DIR, slug)
         
+        # --- BUBBLE COMPILER ---
+        cyberspace_data, theme_override = process_bubbles(slug, title)
+        
         model_url = ""
         
         if os.path.exists(staging_project_dir):
@@ -902,6 +1049,8 @@ tags: {json.dumps(bom)}
 skillData: {json.dumps(skill_data)}
 additionalSkills: {json.dumps(additional_skills)}
 phase_stats: {json.dumps(parts)}
+cyberspace: {json.dumps(cyberspace_data) if cyberspace_data else "null"}
+theme: "{theme_override if theme_override else 'DataSheet'}"
 teamSize: "{team_size}"
 gallery: {json.dumps(gallery_images)}
 documents: {json.dumps(documents)}

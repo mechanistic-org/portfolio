@@ -75,6 +75,58 @@ def process_project(slug):
     items = sorted(input_path.iterdir())
     
     for item in items:
+        # --- BUBBLE PROCESSING (Recursive) ---
+        if item.is_dir() and item.name == "bubbles":
+            print(f"  [BUBBLE] Detected bubbles directory. Recursing...")
+            bubbles_out_path = output_path / "bubbles"
+            bubbles_out_path.mkdir(parents=True, exist_ok=True)
+            
+            for bubble_dir in sorted(item.iterdir()):
+                if not bubble_dir.is_dir(): continue
+                print(f"    Processing Bubble: {bubble_dir.name}")
+                
+                # Setup target dir
+                target_bubble_path = bubbles_out_path / bubble_dir.name
+                target_bubble_path.mkdir(parents=True, exist_ok=True)
+                
+                # Copy deck.md and config.json
+                for config_file in ["deck.md", "config.json"]:
+                   if (bubble_dir / config_file).exists():
+                       shutil.copy2(bubble_dir / config_file, target_bubble_path / config_file)
+
+                # Process Images inside Bubble
+                for bubble_file in bubble_dir.iterdir():
+                    if bubble_file.name in ["deck.md", "config.json"]: continue
+                    
+                    # Pass-throughs (SVG too)
+                    if bubble_file.suffix.lower() in ['.pdf', '.glb', '.gltf', '.mp4', '.mov', '.zip', '.svg']:
+                        shutil.copy2(bubble_file, target_bubble_path / bubble_file.name)
+                        continue
+                        
+                    # Standard Image Processing
+                    try:
+                         with Image.open(bubble_file) as img:
+                            img = ImageOps.exif_transpose(img)
+                            if img.mode != 'RGB': img = img.convert('RGB')
+                            
+                            # Generate Breakpoints
+                            for bp_name, width in BREAKPOINTS.items():
+                                if width > (img.width * 1.1): continue
+                                aspect_ratio = img.height / img.width
+                                height = int(width * aspect_ratio)
+                                resized_img = img.resize((width, height), Image.Resampling.LANCZOS)
+                                
+                                for fmt in FORMATS:
+                                    out_filename = f"{bubble_file.stem}-{bp_name}.{fmt['ext']}"
+                                    resized_img.save(target_bubble_path / out_filename, quality=fmt['quality'], optimize=True)
+                            
+                            # Safety Copy (Original for legacy links)
+                            shutil.copy2(bubble_file, target_bubble_path / bubble_file.name)
+
+                    except Exception as e:
+                        print(f"    [SKIP] Not an image or failed: {bubble_file.name} ({e})")
+            continue
+
         # --- ANIMATION SEQUENCE PROCESSING (Folder -> WebP) ---
         if item.is_dir():
             anim_name = item.name
@@ -146,6 +198,66 @@ def process_project(slug):
             
             except Exception as e:
                 print(f"    [ERROR] Animation processing failed: {e}")
+            continue
+
+        # --- BUBBLE PROCESSING (Recursive) ---
+        if item.is_dir() and item.name == "bubbles":
+            print(f"  [BUBBLE] Detected bubbles directory. Recursing...")
+            bubbles_out_path = output_path / "bubbles"
+            bubbles_out_path.mkdir(parents=True, exist_ok=True)
+            
+            for bubble_dir in sorted(item.iterdir()):
+                if not bubble_dir.is_dir(): continue
+                print(f"    Processing Bubble: {bubble_dir.name}")
+                
+                # Setup target dir
+                target_bubble_path = bubbles_out_path / bubble_dir.name
+                target_bubble_path.mkdir(parents=True, exist_ok=True)
+                
+                # Copy deck.md and config.json
+                for config_file in ["deck.md", "config.json"]:
+                   if (bubble_dir / config_file).exists():
+                       shutil.copy2(bubble_dir / config_file, target_bubble_path / config_file)
+
+                # Process Images inside Bubble
+                for bubble_file in bubble_dir.iterdir():
+                    if bubble_file.name in ["deck.md", "config.json"]: continue
+                    
+                    # Pass-throughs
+                    if bubble_file.suffix.lower() in ['.pdf', '.glb', '.gltf', '.mp4', '.mov', '.zip', '.svg']:
+                        shutil.copy2(bubble_file, target_bubble_path / bubble_file.name)
+                        continue
+                        
+                    # Standard Image Processing (Simplified for Bubbles - maintain original name or add sizing?)
+                    # For now, let's treat them as standard images but output to the bubble folder.
+                    # We reuse the logic but applied to this file.
+                    try:
+                         with Image.open(bubble_file) as img:
+                            img = ImageOps.exif_transpose(img)
+                            if img.mode != 'RGB': img = img.convert('RGB')
+                            
+                            # Generate Breakpoints
+                            for bp_name, width in BREAKPOINTS.items():
+                                if width > (img.width * 1.1): continue
+                                aspect_ratio = img.height / img.width
+                                height = int(width * aspect_ratio)
+                                resized_img = img.resize((width, height), Image.Resampling.LANCZOS)
+                                
+                                for fmt in FORMATS:
+                                    out_filename = f"{bubble_file.stem}-{bp_name}.{fmt['ext']}"
+                                    resized_img.save(target_bubble_path / out_filename, quality=fmt['quality'], optimize=True)
+                            
+                            # Also save original size as MD/WebP for reference if needed, or fallback?
+                            # Let's ensure the EXACT name requested by deck.md exists if possible, or we need to update deck.md.
+                            # Current deck.md refs: "DSC02771.JPG" or "c24-context-05-md.webp".
+                            # If deck.md asks for JPG, we should probably copy the JPG or update deck.md.
+                            # STICKY POINT: The deck.md files I wrote point to the RAW filenames (e.g. .JPG).
+                            # If I optimized them to .webp, the links break unless I update deck.md.
+                            # FOR SAFETY: I will copy the original file AND generate WebP.
+                            shutil.copy2(bubble_file, target_bubble_path / bubble_file.name)
+
+                    except Exception as e:
+                        print(f"    [SKIP] Not an image or failed: {bubble_file.name} ({e})")
             continue
 
         # --- PASS-THROUGH ASSETS ---
