@@ -57,6 +57,14 @@ To respect Cloudflare Pages limits (20k files, 25MB script size), we use a Hybri
     *   **Concept:** A React-based reconstruction of legacy GIF/Flash animations using modern state management (`framer-motion`).
     *   **Aesthetic:** Intentionally accepts "Layout Thrashing" (DOM stacking) during crossfades to simulate "Holographic Instability."
 
+### Component Architecture
+**ProjectInfoTable (The HUD)**
+*   **Dual-Mode Strategy:** The `ProjectInfoTable` component now supports two modes controlled by the `metrics` prop:
+    *   **Lite Mode:** (Default) Single row, navigation focused. Used for standard projects.
+    *   **Deep Mode (Cockpit):** Triggered when `metrics` object is passed. Renders a dense 2-row grid with COGS, Profitability, and Governance data.
+*   **Data Injection:** "Intelligence Data" (COGS, Margins) is **not** stored in MDX frontmatter yet. It is injected via `src/pages/projects/[...slug].astro` router logic during the `finalEntry` construction.
+    *   *Why?* To separate sensitive/calculated business logic from static content files until a proper "Intelligence Database" is connected.
+
 ### Realm IV: System Architecture (The 3D Stack)
 *   **Concept:** A visual representation of the site's technology stack (React, Astro, R2) rendered as a 3D "Exploded View" assembly.
 *   **Tech:** `@react-three/fiber` (R3F), `@react-three/drei`.

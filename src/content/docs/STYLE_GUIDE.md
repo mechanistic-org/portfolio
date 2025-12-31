@@ -151,6 +151,13 @@ These components are available for use in MDX content:
 *   **Behavior:** Encapsulates metadata (Role, Client, Status) in a high-density card.
 *   **Interaction:** "Mini Gauge" pulses to indicate project status (Blue=Done, Amber=WIP).
 
+### The Cockpit (Deep HUD)
+*   **Usage:** High-Fidelity Project Pages (e.g., `c24`).
+*   **Aesthetic:** "747 Flight Deck" / High-Check Density.
+*   **Trigger:** Automatically enabled when `metrics` data is injected via the router.
+*   **Typography:** `JetBrains Mono` (0.8rem). Labels are strictly uppercase `neutral-500`. Values are `emerald-400` (Profit) or `orange-500` (Alerts).
+*   **Layout:** 2-Row Grid. Top row = Specs. Bottom row = Intelligence (COGS, Margins, Governance).
+
 ### The Evidence Locker (Grounding)
 *   **Aesthetic:** "Verified Document" / "Archive" feel.
 *   **Usage:** Providing proof for technical claims.

@@ -43,6 +43,10 @@ sidebar:
     *   **Description:** An interactive 3D navigator that maps site hierarchy into a celestial coordinate system. Features hierarchical bloom, macroscopic orbital physics, and recursive scaling for project-level deep dives.
 
 ## 📜 Change Log (Recent)
+*   **[2025-12-31] Ghost Port & Cockpit Reconstruction**
+    *   **[FEAT] Cockpit HUD Reconstruction:** Re-implemented the "Deep Mode" HUD for the C24 project page, featuring a dense 2-row grid for COGS, Profitability, and Governance metrics.
+    *   **[FIX] Data Injection Pipeline:** Established a pattern for injecting sensitive/calculated project data via the router (`[...slug].astro`) rather than statically storing it in MDX.
+    *   **[INCIDENT] Ghost Port 001:** Resolved "Phantom Code" confusion caused by a zombie process serving a divergent state on port 4322. Documented widely to prevent recurrence.
 *   **[2025-12-30] Immersive Galleries (R&D)**
     *   **[R&D] Reality Distortion:** Prototyped "Conspiracy Board" (Canvas) and "Comparator" (X-Ray) components.
     *   **[Feat] Living Grid:** Upgraded `SharedLayoutGallery` to support Isotope-style category filtering using `framer-motion` layout animations.

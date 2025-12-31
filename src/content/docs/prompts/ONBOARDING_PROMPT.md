@@ -34,7 +34,7 @@ sidebar:
 >
 > **CORE CONTEXT (LOAD THESE FIRST):**
 > 1.  `src/content/docs/project/GROK_LOG.md` (The Constitution & Laws)
-> 2.  `src/content/docs/MAINTENANCE.md` (System Manual)
+> 2.  `src/content/docs/MAINTENANCE.md` (System Manual) - *See "Ghost Port Anomaly"*
 > 3.  `src/content/docs/ROADMAP.md` (Current Status)
 > 4.  `src/content/docs/manifesto.md` (Design Philosophy)
 >

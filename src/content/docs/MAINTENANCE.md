@@ -598,6 +598,14 @@ See `docs/IMAGE_WORKFLOW.md` for the full SOP.
 *   **Cause:** Often caused by deleting asset directories (like `assets/logos`) while the dev server is running, or lingering references in cached build artifacts.
 *   **Fix:** Ensure `process_images.py` is handling letterboxing correctly.
 
+### The "Ghost Port" Anomaly
+*   **Symptom:** You see a feature (like the Cockpit HUD) on one port (e.g., `localhost:4322`) but it is completely missing from your main development port (`localhost:4321`) and the git history.
+*   **Cause:** A zombie process or a parallel terminal instance is running an older or diverged version of the site on a secondary port. This often happens if an Astro server isn't terminated properly.
+*   **Fix:**
+    1.  **Kill all Node processes:** Run `taskkill /F /IM node.exe` (Windows) or `pkill node` (Mac/Linux).
+    2.  **Verify Git Status:** Ensure you are actively looking at the files in the file system, not just what's in the browser.
+    3.  **Trust `git log`:** If it's not in git, it effectively doesn't exist, regardless of what a rogue browser tab shows.
+
 ### React Three Fiber (R3F) Assets
 *   **Symptom:** 3D Model (`.glb`) fails to load or returns 404.
 *   **Cause:** R3F looks for assets relative to the compiled root.
