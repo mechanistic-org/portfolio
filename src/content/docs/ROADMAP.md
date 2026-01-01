@@ -43,6 +43,11 @@ sidebar:
     *   **Description:** An interactive 3D navigator that maps site hierarchy into a celestial coordinate system. Features hierarchical bloom, macroscopic orbital physics, and recursive scaling for project-level deep dives.
 
 ## 📜 Change Log (Recent)
+*   **[2025-12-31] C24 Fidelity Restoration**
+    *   **[Fix] Title Render:** Resolved persistent "Missing Pipe" issue in "C|24" due to font glyph stripping. Implemented `C24TitleAnimator.tsx` with a CSS-geometric pipe for robust visibility.
+    *   **[Interaction] Title Hover:** Implemented "Reveal on Hover" logic (`C | 24` -> `Control | 24`) with `pointer-events-auto` fix.
+    *   **[Cleanup] Artifact Overlay:** Removed `Deck` array from "The Artifact" bubble in `c24.mdx` to eliminate obstructing text overlay on the 3D model.
+    *   **[Docs] Context Protocol:** Hardened `ONBOARDING_PROMPT.md` with a "Coercive Handshake" to force agent acknowledgement of critical laws (Air Gap, Asset Sovereignty).
 *   **[2025-12-31] Ghost Port & Cockpit Reconstruction**
     *   **[FEAT] Cockpit HUD Reconstruction:** Re-implemented the "Deep Mode" HUD for the C24 project page, featuring a dense 2-row grid for COGS, Profitability, and Governance metrics.
     *   **[FIX] Data Injection Pipeline:** Established a pattern for injecting sensitive/calculated project data via the router (`[...slug].astro`) rather than statically storing it in MDX.

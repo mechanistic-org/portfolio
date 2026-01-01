@@ -52,6 +52,13 @@ sidebar:
 > ### `docs/ONBOARDING_PROMPT.md` (or `MINER`)
 > *   **Update:** [Specific instruction to improve the prompt]
 >
+> **MEMORY SYNAPSE (CRITICAL):**
+> *   **Update `src/content/docs/meta/AGENCY_MEMORY.md`:**
+>     *   **Clear** completed focus items.
+>     *   **Add** new "Active Intelligence" (URLs, Notebooks, Key Decisions).
+>     *   **Update** "Current Focus State" (Where did we leave off?).
+>     *   *This is your "Save Game" file. If you don't update it, the next agent starts from zero.*
+>
 > **DISCARD THE GRAVEL:**
 > *   Ignore syntax error fixes, typo corrections, and debugging loops.
 > *   Ignore code already committed to the repo.

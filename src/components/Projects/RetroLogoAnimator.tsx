@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const variants = [
-    "https://assets.eriknorris.com/c24/rigor/digi_logo_from_scratch_blue.png",
-    "https://assets.eriknorris.com/c24/rigor/digi_logo_from_scratch_cyan.png",
-    "https://assets.eriknorris.com/c24/rigor/digi_logo_from_scratch_green.png",
-    "https://assets.eriknorris.com/c24/rigor/digi_logo_from_scratch_orange.png",
-    "https://assets.eriknorris.com/c24/rigor/digi_logo_from_scratch_purple.png",
-    "https://assets.eriknorris.com/c24/rigor/digi_logo_from_scratch_grey.png"
+    "/assets/r2/c24/bubbles/05_paper_trail/digi_logo_from_scratch_blue.png",
+    "/assets/r2/c24/bubbles/05_paper_trail/digi_logo_from_scratch_cyan.png",
+    "/assets/r2/c24/bubbles/05_paper_trail/digi_logo_from_scratch_green.png",
+    "/assets/r2/c24/bubbles/05_paper_trail/digi_logo_from_scratch_orange.png",
+    "/assets/r2/c24/bubbles/05_paper_trail/digi_logo_from_scratch_purple.png",
+    "/assets/r2/c24/bubbles/05_paper_trail/digi_logo_from_scratch_grey.png"
 ];
 
 interface RetroLogoAnimatorProps {

@@ -47,6 +47,7 @@
 		"d3-sankey": "^0.12.3",
 		"embla-carousel-auto-scroll": "^8.6.0",
 		"embla-carousel-react": "^8.6.0",
+		"marked": "^17.0.1",
 		"motion-on-scroll": "^1.0.0",
 		"postprocessing": "^6.38.1",
 		"react": "^19.2.0",

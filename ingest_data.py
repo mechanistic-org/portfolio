@@ -286,6 +286,24 @@ def process_bubbles(slug, title):
         
         for f in all_files:
             lower_f = f.lower()
+            if f.lower().endswith(('.tif', '.tiff')):
+                # Convert TIFF to WebP
+                try:
+                    name_only = os.path.splitext(f)[0]
+                    webp_filename = f"{name_only}.webp"
+                    webp_path = os.path.join(bubble_path, webp_filename)
+                    
+                    if not os.path.exists(webp_path):
+                        print(f"    Values: Converting {f} to WebP...")
+                        with Image.open(os.path.join(bubble_path, f)) as img:
+                            img.convert("RGB").save(webp_path, "WEBP", quality=90)
+                    
+                    # Update f to point to the new webp file for downstream logic
+                    f = webp_filename
+                    lower_f = f.lower() # Update lower_f for the check below
+                except Exception as e:
+                    print(f"    ⚠️ Failed to convert {f}: {e}")
+
             if f.endswith(('.jpg', '.jpeg', '.png', '.webp', '.avif', '.gif')):
                 # Get Dimensions
                 width, height = 800, 600
@@ -309,12 +327,15 @@ def process_bubbles(slug, title):
         # Sync Bubble Assets to Public R2
         if not R2_DOMAIN.startswith("http"):
              target_bubble_dir = os.path.join(LOCAL_R2_DIR, slug, "bubbles", dirname)
-             if os.path.exists(target_bubble_dir): shutil.rmtree(target_bubble_dir)
              os.makedirs(target_bubble_dir, exist_ok=True)
              for item in os.listdir(bubble_path):
                 s = os.path.join(bubble_path, item)
                 d = os.path.join(target_bubble_dir, item)
-                if os.path.isfile(s): shutil.copy2(s, d)
+                if os.path.isfile(s): 
+                    try:
+                        shutil.copy2(s, d)
+                    except Exception as e:
+                        print(f"⚠️  Copy warning {item}: {e}")
 
         
         # --- DETERMINE TYPE ---
@@ -1016,13 +1037,25 @@ def process_projects():
                 content_body = content_body.replace("/assets/r2/", f"{R2_DOMAIN}/")
 
         else:
-            model_viewer_tag = '<ModelViewer />' # Default fallback
-            content_body = f"""
+            if cyberspace_data:
+                # 🚀 Deep Dive Project: Content is driven by 'cyberspace' JSON.
+                # Do NOT inject the "Neil Armstrong" placeholder.
+                # Just import the components needed for the theme to function if it decides to render them.
+                content_body = f"""
+import {{ YouTube }} from '@astro-community/astro-embed-youtube';
+import ModelViewer from '@components/mdx/ModelViewer.astro';
+
+{{/* Content driven by frontmatter.cyberspace */}}
+"""
+            else:
+                # 📄 Standard DataSheet: Needs fallback content if none provided
+                model_viewer_tag = '<ModelViewer />' # Default fallback
+                content_body = f"""
 import {{ YouTube }} from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
 ## Overview
-**{title}** ({row.get('Title', 'Engineer')}). 
+**{{title}}** ({{row.get('Title', 'Engineer')}}). 
 
 > *Auto-generated placeholder content.*
 
@@ -1030,7 +1063,7 @@ import ModelViewer from '@components/mdx/ModelViewer.astro';
 <div class="my-8">
   <YouTube id="dQw4w9WgXcQ" />
 </div>
-{model_viewer_tag}
+{{model_viewer_tag}}
 """
 
         mdx = f"""---
@@ -1050,7 +1083,7 @@ skillData: {json.dumps(skill_data)}
 additionalSkills: {json.dumps(additional_skills)}
 phase_stats: {json.dumps(parts)}
 cyberspace: {json.dumps(cyberspace_data) if cyberspace_data else "null"}
-theme: "{theme_override if theme_override else 'DataSheet'}"
+theme: "{'hyperspace' if cyberspace_data else 'DataSheet'}"
 teamSize: "{team_size}"
 gallery: {json.dumps(gallery_images)}
 documents: {json.dumps(documents)}

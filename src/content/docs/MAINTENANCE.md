@@ -263,6 +263,11 @@ status: {
     }
     ```
 
+### `pointer-events-none` blocking Hover Interactions
+*   **Symptom:** A component (like a Title Animator) visually renders but refuses to trigger `onMouseEnter` events.
+*   **Cause:** Parent containers or the element itself often inherit `pointer-events-none` from utility classes intended to "pass through" clicks.
+*   **Fix:** Explicitly add `pointer-events-auto` to the specific interactive child div.
+
 ### Missing DataViz in Hyperspace Theme
 *   **Symptom:** You added `<MetricComparison />` to MDX, but it doesn't render on the page.
 *   **Cause:** The `Hyperspace.astro` layout is missing the `<slot />` element for the main content flow.

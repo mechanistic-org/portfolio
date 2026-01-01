@@ -17,6 +17,7 @@ import GlobalHomeButton from "@components/Nav/GlobalHomeButton.astro";
 // NEW COMPONENT IMPORTS
 import ConspiracyBoard from "@components/Projects/ConspiracyBoard";
 import Comparator from "@components/Projects/Comparator";
+import C24TitleAnimator from "@components/Projects/C24TitleAnimator";
 
 const stickies = scrolly?.stickies || [];
 const narratives = scrolly?.narrative || [];
@@ -56,12 +57,24 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 			)
 		}
 		<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/50"></div>
-		<h1
-			class="font-heading relative z-10 text-9xl font-bold tracking-tighter text-white mix-blend-difference"
-			set:html={(title && typeof title === "string" ? title : String(title || "UNKNOWN"))
-				.toUpperCase()
-				.replace("|", '<span class=\"font-thin text-white opacity-85 mx-1\">|</span>')}
-		/>
+
+		{/* C24 ORIGIN STORY ANIMATION */}
+		{
+			// ROBUST CHECK: specific slug check was failing (undefined), falling back to URL path
+			Astro.url.pathname.includes("c24") ? (
+				<C24TitleAnimator client:load />
+			) : (
+				<h1
+					class="font-heading relative z-10 text-9xl font-bold tracking-tighter text-white mix-blend-difference"
+					set:html={(title && typeof title === "string" ? title : String(title || "UNKNOWN"))
+						.toUpperCase()
+						.replace(
+							"|",
+							'<span class=\"text-white opacity-60 mx-3\" style=\"font-family: Arial, sans-serif;\">|</span>',
+						)}
+				/>
+			)
+		}
 	</div>
 
 	<!-- HUD -->
@@ -378,11 +391,20 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 					if (targetId && targetStage) {
 						// Hide all stages
 						document.querySelectorAll("[data-scrolly-layer]").forEach((el) => {
-							(el as HTMLElement).style.opacity = "0";
-							(el as HTMLElement).style.pointerEvents = "none";
+							const elem = el as HTMLElement;
+							elem.style.opacity = "0";
+							elem.style.pointerEvents = "none";
+							// Fix ghosting: Ensure deep cleanup after transition
+							// We wait 700ms (matching CSS duration) then force visibility: hidden
+							setTimeout(() => {
+								if (elem.style.opacity === "0") {
+									elem.style.visibility = "hidden";
+								}
+							}, 700);
 						});
 
 						// Show target
+						targetStage.style.visibility = "visible"; // Ensure visible before fade
 						targetStage.style.opacity = "1";
 
 						if (

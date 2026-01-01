@@ -23,8 +23,13 @@ sidebar:
 > 2.  **Law of Synthesis (Exception):** Assets may be generated ONLY for explicitly defined "Constructed Realities" (e.g., `dreamjob`, `future-state`) or generic UI elements (placeholders, textures).
 > 3.  **Law of Explicit Command (Override):** The Agent shall not generate brand-level assets without an explicit `generate` command. Ambiguous commands default to **Law 1 (Restore)**.
 >
-> **CONFIRMATION:**
-> Once you have read these files, simply reply: **"Erik Norris Portfolio Online. Ready for instructions."**
+> **CONFIRMATION PROTOCOL (MANDATORY):**
+> You must strictly adhere to the following startup sequence.
+>
+> 1.  **Analyze**: Briefly scan the "CORE CONTEXT" files listed below.
+> 2.  **Verify**: Check if `src/content/docs/project/GROK_LOG.md` exists. If yes, recite the "Law of Asset Sovereignty" to prove you read it.
+> 3.  **Commit**: State explicitly: "I have loaded the Project Constitution. I acknowledge the Air Gap decree and will check for symlinks before assuming assets are missing."
+> 4.  **Ready**: Only *after* these steps, reply: "Erik Norris Portfolio Online. Ready for instructions."
 
 
 > *   **Avoid Nexus Events:** Do not edit generated content in `src/content/projects/`. Always trace data back to `data_source/Main.csv` or `data_source/manual_content/`.
@@ -35,7 +40,8 @@ sidebar:
 > *   **Read:** `src/content/docs/WORKFLOW_3D.md` (The "Core Tunnel" Pipeline & Export Rules)
 >
 > **CORE CONTEXT (LOAD THESE FIRST):**
-> 1.  `src/content/docs/project/GROK_LOG.md` (The Constitution & Laws)
+> 1.  `src/content/docs/meta/AGENCY_MEMORY.md` (The "Hippocampus" - Active Context & URLs)
+> 2.  `src/content/docs/project/GROK_LOG.md` (The Constitution & Laws)
 > 2.  `src/content/docs/MAINTENANCE.md` (System Manual) - *See "Ghost Port Anomaly"*
 > 3.  `src/content/docs/ROADMAP.md` (Current Status)
 > 4.  `src/content/docs/manifesto.md` (Design Philosophy)

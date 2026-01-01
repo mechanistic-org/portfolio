@@ -11,6 +11,7 @@ interface Props {
 }
 
 const { id, slides } = Astro.props;
+import { parse } from "marked";
 ---
 
 <div class="text-deck w-full" data-id={id}>
@@ -87,7 +88,7 @@ const { id, slides } = Astro.props;
 					)}
 					<div
 						class="prose prose-invert prose-sm leading-relaxed text-neutral-300"
-						set:html={slide.body}
+						set:html={parse(slide.body)}
 					/>
 				</div>
 			))
