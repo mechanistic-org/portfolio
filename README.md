@@ -1,54 +1,36 @@
+# Erik Norris
+### Mechanical Engineer | Product Architect | Tool Builder
 
-# Quantum
-> ⚠️ **CRITICAL:** Before modifying build settings or assets, read [**docs/ARCHITECTURE.md**](docs/ARCHITECTURE.md).
-> This project uses a specific "Zero-Bloat" strategy to survive Cloudflare limits.
+**[eriknorris.com](https://eriknorris.com)**
 
-**Erik Norris High-Performance Engineering Portfolio**
+This repository is the operating system for my professional identity. It is a "living portfolio" engine that ingests raw project data (CSV, JSON, CAD) and compiles it into a high-performance static website.
 
-A technical portfolio site built to function as a datasheet. It combines high-performance web technologies with a data-driven content pipeline to showcase mechanical engineering work.
+---
 
-### Theme Engine
-The site supports multiple themes via `src/pages/index.astro`.
-*   **Default:** `hyperspace` (NorrOS).
-*   **Legacy:** `classic` (Standard Home).
-*   **Selection:** controlled by `DEFAULT_THEME` constant or `?theme=` query param.
+### 🔧 The Stack
+*   **Engine:** Astro (Static Site Generation)
+*   **Language:** TypeScript, Python (Ingestion Pipeline)
+*   **Deployment:** Cloudflare Pages (Edge Network)
+*   **Asset Storage:** Cloudflare R2 (Object Storage)
+*   **Styling:** TailwindCSS + Custom "Sci-Fi" UI Library
 
-## 🚀 Quick Start
+### 🏗️ Architecture
+This project follows the **"Law of Asset Sovereignty"**:
+1.  **Data First:** Content is derived from structured data (`specs.csv`, `bom.csv`), not written as prose.
+2.  **Air Gapped:** Assets (images, 3D models) are stored separately in an R2 bucket (`assets.eriknorris.com`), never checked into Git.
+3.  **Zero Runtime:** The site is pre-compiled into static HTML for maximum speed and security.
 
-1.  **Install Dependencies:**
-    ```bash
-    npm install
-    ```
+### 🚀 Quick Start (Local Dev)
+```bash
+# 1. Install Dependencies
+npm install
 
-2.  **Run Development Server:**
-    ```bash
-    npm run dev
-    ```
+# 2. Run the Ingestion Engine (Process Data)
+python ingest_data.py
 
-3.  **Sync Assets (Upload to R2):**
-    ```bash
-    npm run sync:assets
-    ```
+# 3. Start the Dev Server
+npm run dev
+```
 
-3.  **Ingest Data (Regenerate Content):**
-    ```bash
-    python ingest_data.py
-    ```
-
-> **Performance Tip:** The site uses a "Living Grid" background. If performance is an issue on older devices, you can tweak `starCount` or `gridWidth` in `src/components/Interaction/FiberGrid.astro`.
-> **Pro Tip:** Use the **Component Laboratory** at `http://localhost:4321/component-lab` to test component rendering or visit `/about/elements` for the snippet reference guide.
-
-If you plan to process images locally:
-1.  **Workspace:** Run `python scripts/setup_workspace.py` to create the `~/Quantum_Workspace` structure.
-2.  **Libraries:** `pip install Pillow pillow-heif`
-
-## 🔧 Setup (Ingestion Engine)
-To use the automated content generator:
-1.  Obtain a Google Gemini API Key.
-2.  `pip install google-generativeai`
-3.  Set environment variable: `GEMINI_API_KEY`.
-
-## 🚀 Deployment (Zero-Bloat Strategy)
-We do **not** use the Astro Adapter's automatic deploy.
-1.  **Build:** `npm run build` (Generates `dist/` static files).
-2.  **Deploy:** `npx wrangler pages deploy dist` (Uploads static files + `functions/` folder).
+---
+*Built with [Cosmic Themes](https://github.com/Cosmic-Themes) & Custom Engineering.*
