@@ -329,7 +329,7 @@ def process_project(slug):
                         out_file = output_path / out_filename
 
                         resized_img.save(out_file, quality=quality, optimize=True)
-                        print(f"    -> Generated: {out_filename}")
+                        print(f"    -> Generated: {out_file.resolve()} (Exists: {out_file.exists()})")
 
         except Exception as e:
             print(f"  [ERROR] Failed to process {item.name}: {e}")

@@ -43,6 +43,15 @@ sidebar:
     *   **Description:** An interactive 3D navigator that maps site hierarchy into a celestial coordinate system. Features hierarchical bloom, macroscopic orbital physics, and recursive scaling for project-level deep dives.
 
 ## 📜 Change Log (Recent)
+*   **[2026-01-02] Sovereignty & Stability**
+    *   **[Architecture] Sovereignty Model:** Implemented `sovereign_manifest.json` to protect "Deep Projects" (C24, D-Command) from automated overwrite.
+    *   **[Cleanup] The Great Pruning:** Deleted obsolete scripts (`ingest_inbox.py`, `debug_*.py`) to enforce the "Two-Step Dance" workflow.
+    *   **[Fix] C24 UI Regressions:**
+        *   **HUD:** Resolved "Double Fixed" issue causing permanent HUD visibility.
+        *   **Links:** Fixed `ScrollyHud` hrefs to correctly target anchor IDs.
+        *   **Scrolling:** Moved `overflow-x: hidden` to `body` to restore scrolling.
+    *   **[Fix] Build Crash:** Identified and fixed a syntax error in `Hyperspace.astro` (`animateWiggle`) that was crashing the build pipeline.
+
 *   **[2025-12-31] C24 Fidelity Restoration**
     *   **[Fix] Title Render:** Resolved persistent "Missing Pipe" issue in "C|24" due to font glyph stripping. Implemented `C24TitleAnimator.tsx` with a CSS-geometric pipe for robust visibility.
     *   **[Interaction] Title Hover:** Implemented "Reveal on Hover" logic (`C | 24` -> `Control | 24`) with `pointer-events-auto` fix.

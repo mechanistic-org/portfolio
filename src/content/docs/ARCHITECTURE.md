@@ -143,6 +143,16 @@ To create a "cinematic" feel without heavy libraries (like GSAP), we implemented
     *   **Why Gemini?** Chosen for **Native Audio Support**. This allowed us to eliminate a dedicated transcription dependency (like Whisper/FFmpeg), drastically simplifying the local toolchain. We drop `.mp3` files directly into the context window.
     *   **Why Local Script?** A "Drop & Forget" filesystem watcher in `data_source/inbox` provided lower friction than a web UI for the specific "Brain Dump" use case.
 
+### 5. The Sovereignty Model (Deep Project Protection)
+**Problem:** Automated ingestion overwrites manually curated "Deep Dive" content.
+**Solution:** `sovereign_manifest.json` acts as an "Eject Button."
+*   **Mechanism:** `ingest_data.py` checks this manifest before writing MDX.
+*   **Logic:** If a project slug is present in the manifest, the script **SKIPS** MDX generation for that project, preserving manual custom components (e.g., `C24TitleAnimator`, `HyperspaceHUD`).
+*   **Workflow:**
+    1.  Add slug to `sovereign_manifest.json`.
+    2.  Manually edit `src/content/projects/{slug}.mdx`.
+    3.  Ingestion script acts normally for all *other* projects.
+
 ## âš™ï¸ Build System
 ### Configuration Gotchas
 *   **Keystatic Integration:** In `astro.config.mjs`, `keystatic()` **MUST** be the last item in the `integrations` array. If placed earlier, it causes `virtual:keystatic-config` resolution errors during the build.

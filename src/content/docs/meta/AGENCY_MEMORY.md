@@ -38,14 +38,17 @@ These are active AI/External resources that contain "Source of Truth" data not i
 ---
 
 ## 📍 Current Focus State (The "Cursor")
-*   **Active Phase:** Phase 2 (Deep Dive & Retro-Fit)
-*   **Recent Achievement:** Stabilized "Hyperspace HUD V2" on D-Command and C24. Implemented dynamic Orbit Viz ("Herding Cats") and Tool Chain injection.
-*   **Blocked On:** Need to start the **PCII / Buckley** campaign ("The Adhesion Battles").
-*   **Next Milestone:** Apply the "Forensic Narrative" pattern to Buckley.
+*   **Active Phase:** Phase 3 (Stability & Sovereignty)
+*   **Recent Achievement:** Established "Sovereignty Model" to protect Deep Projects. Fixed C24 UI regressions (HUD, Scroll, Links). Resolved critical build crash.
+*   **Blocked On:** None. Ready for next campaign.
+*   **Next Milestone:** Apply "Forensic Narrative" to Buckley/PCII.
 
 ---
 
 ## 🧱 The "Known Knowns" (Facts Established in Chat)
 *   **NotebookLM is "SME Level":** It is not generic. It has read the raw emails. Trust it.
 *   **The "Air Gap" is Real:** We have 40+ raw dump folders that need "Stitching."
-*   **Ingestion Logic:** We are moving toward a model where `ingest_data.py` handles the bulk (95 projects) via `Main.csv`, but "Deep Dives" (C24) are manually curated using High-Fidelity sources.
+*   **Ingestion Logic:** `ingest_data.py` handles the bulk, but "Deep Dives" (C24) are manually curated using High-Fidelity sources.
+*   **The "Sovereignty Valve":** `sovereign_manifest.json` is the supreme law. If a project is listed there, `ingest_data.py` MUST NOT overwrite its MDX.
+*   **The "Two-Step Dance":** Image processing (`process_images.py`) is manual and decoupled from metadata ingestion (`ingest_data.py`). We do not automate the "Art."
+*   **The "Esbuild Red Herring":** If `npm run build` fails with an obscure `Readable.push` pipe error, it is likely a **Syntax Error** in an Astro component's `<script>` block (e.g., missing function declaration). Don't blame the environment first.

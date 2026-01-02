@@ -1,0 +1,9 @@
+{
+    "sovereign_projects": [
+        "c24",
+        "d-control",
+        "d-command",
+        "icon-system"
+    ],
+    "description": "These projects are managed MANUALLY. ingest_data.py must SKIP them entirely."
+}

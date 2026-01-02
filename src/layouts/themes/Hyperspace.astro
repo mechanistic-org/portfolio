@@ -231,8 +231,13 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 						{stage.title && <h2 class="mb-4 text-3xl font-bold text-white">{stage.title}</h2>}
 						{stage.text && <p class="text-neutral-400" set:html={stage.text} />}
 
-						{/* DECK SUPPORT */}
-						{stage.deck && <TextDeck id={`deck-${stage.id}`} slides={stage.deck} />}
+						{/* DECK SUPPORT - Explicitly excluded for Resources and Artifact stages */}
+						{stage.deck &&
+							stage.deck.length > 0 &&
+							stage.id !== "06_press_resources" &&
+							stage.id !== "07_the_artifact" && (
+								<TextDeck id={`deck-${stage.id}`} slides={stage.deck} />
+							)}
 					</ScrollTrigger>
 				))
 			}
@@ -345,6 +350,23 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 	const heroParallax = document.getElementById("hero-parallax");
 	const topHud = document.getElementById("top-hud");
 	const startBtn = document.getElementById("start-engine-btn");
+
+	// FORCE INITIAL STATE - Fixes "Stuck Down" on reload/restoration edge cases
+	// Wrapped in listener to ensure reliable execution after layout
+	document.addEventListener("DOMContentLoaded", () => {
+		if (topHud && startBtn) {
+			// STRICT RESET: Always hide first
+			topHud.style.transform = "translateY(-100%)";
+			startBtn.style.opacity = "1";
+
+			// Double-check scroll position after layout
+			if (window.scrollY > 100) {
+				// If we restored to a scrolled position, show HUD
+				topHud.style.transform = "translateY(0%)";
+				startBtn.style.opacity = "0";
+			}
+		}
+	});
 
 	window.addEventListener("scroll", () => {
 		const scrollY = window.scrollY;
@@ -493,12 +515,58 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 				const basePolar = parseFloat(orbitParts[1]);
 
 				// 1. Idle Wiggle (Increased Amplitude to match Homepage)
-				// NOTE: Frame rate is consistent, but C24 feels "heavier/slower" than EN Logo due to large scale (1m wide).
-				// Kept slower to convey mass.
 				const wiggleAzimuth = Math.sin(time * 0.5) * 20;
 				const wigglePolar = Math.cos(time * 0.3) * 10;
 
 				viewer.cameraOrbit = `${baseAzimuth + wiggleAzimuth}deg ${basePolar + wigglePolar}deg ${orbitParts[2]}`;
+
+				// 2. RAINBOW CYCLE (Restoring user-requested animation)
+				try {
+					const material = (viewer as any).model.materials[0];
+					if (material) {
+						const hue = (time * 20) % 360;
+						const saturation = 100;
+						const lightness = 50;
+
+						// Simple HSL to RGB conversion for baseColorFactor
+						const c = ((1 - Math.abs((2 * lightness) / 100 - 1)) * saturation) / 100;
+						const x = c * (1 - Math.abs(((hue / 60) % 2) - 1));
+						const m = lightness / 100 - c / 2;
+						let r = 0,
+							g = 0,
+							b = 0;
+
+						if (0 <= hue && hue < 60) {
+							r = c;
+							g = x;
+							b = 0;
+						} else if (60 <= hue && hue < 120) {
+							r = x;
+							g = c;
+							b = 0;
+						} else if (120 <= hue && hue < 180) {
+							r = 0;
+							g = c;
+							b = x;
+						} else if (180 <= hue && hue < 240) {
+							r = 0;
+							g = x;
+							b = c;
+						} else if (240 <= hue && hue < 300) {
+							r = x;
+							g = 0;
+							b = c;
+						} else if (300 <= hue && hue < 360) {
+							r = c;
+							g = 0;
+							b = x;
+						}
+
+						material.pbrMetallicRoughness.setBaseColorFactor([r + m, g + m, b + m, 1.0]);
+					}
+				} catch (e) {
+					// Fail silently if material struct differs
+				}
 			}
 			requestAnimationFrame(animateWiggle);
 		}

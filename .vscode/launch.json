@@ -1,0 +1,37 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Site (Dev)",
+      "request": "launch",
+      "runtimeArgs": ["run", "dev"],
+      "runtimeExecutable": "npm",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node"
+    },
+    {
+      "name": "Sync Assets (Ingest)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/ingest_data.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Process Images (Current Slug)",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/scripts/process_images.py",
+      "args": ["${input:projectSlug}"],
+      "console": "integratedTerminal"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "projectSlug",
+      "type": "promptString",
+      "description": "Enter Project Slug (e.g., c24)",
+      "default": "c24"
+    }
+  ]
+}

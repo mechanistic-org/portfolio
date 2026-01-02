@@ -336,6 +336,14 @@ status: {
 *   **Cause:** AI tools often output `.png` by default, while legacy prompts/MDX might reference `.jpg`.
 *   **Fix:** Check the actual file extension in `R2_STAGING` and update the `.mdx` file to match (e.g., change `hero.jpg` to `hero.png`).
 
+### Build Crash (Esbuild Pipe Error / Readable.push)
+*   **Symptom:** `npm run build` fails with `Error: Readable.push` or generic pipe failure, often blaming `esbuild`.
+*   **Cause:** A hidden **Syntax Error** inside a `<script>` tag in an `.astro` file (e.g., a missing function declaration or unclosed bracket). Astro's compiler sometimes chokes entirely rather than reporting the line number.
+*   **Fix:**
+    1.  Check recent edits to `<script>` blocks.
+    2.  Look for "orphaned" code (code outside a function that should be inside one).
+    3.  Run `npm run dev` and watch the browser console for specific syntax errors that the build CLI missed.
+
 ### Build Issues
 *   **Async Rendering in Astro Templates**
     *   **Symptom:** Build fails with generic errors when using `await` inside a `.map()` in JSX.
@@ -549,6 +557,12 @@ The page at `/about/elements` is the source of truth for our visual system.
     *   **Fix:** Ensure the component is imported at the top of the MDX file (e.g., `import Chip from '@components/dls/Chip.astro';`).
 ### Image Assets (The Hybrid Workflow)
 See `docs/IMAGE_WORKFLOW.md` for the full SOP.
+
+### The "Two-Step Dance" (Image vs. Data)
+We have decoupled image processing from data ingestion to prevent "Script Bloat" and accidental overwrites.
+1.  **Step 1 (The Darkroom):** Run `python scripts/process_images.py {slug}` to optimize raw assets.
+2.  **Step 2 (The Refinery):** Run `python ingest_data.py` to update metadata and sync to R2.
+
 1.  **Ingest:** Import raw files into Lightroom Classic.
 2.  **Develop:** Use Lightroom Classic. Export using "Quantum Master" preset (TIFF, sRGB, 4000px) to `R2_MASTER`.
 3.  **Process:** Run `python scripts/process_images.py {slug}`.

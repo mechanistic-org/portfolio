@@ -59,6 +59,14 @@
 		font-family: "Barlow", "Inter", system-ui, sans-serif;
 	}
 
+	body {
+		/* Prevent Horizontal Scrollbar Ghosting */
+		overflow-x: hidden;
+		max-width: 100vw;
+	}
+
+
+
 	html.dark {
 		/* starwind dark theme config */
 		--background: var(--color-base-900);
@@ -230,4 +238,9 @@
 	100% {
 		transform: translateX(-50%);
 	}
+}
+
+/* LIGHTBOX OVERRIDE: Prevent Text Deck Z-Fighting */
+.yarl__portal {
+	z-index: 100000 !important;
 }

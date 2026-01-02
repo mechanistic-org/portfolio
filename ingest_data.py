@@ -231,6 +231,7 @@ def process_bubbles(slug, title):
     
     # Get all subdirectories, sorted (01_, 02_, etc)
     subdirs = sorted([d for d in os.listdir(bubbles_dir) if os.path.isdir(os.path.join(bubbles_dir, d))])
+    print(f"    DEBUG: Found {len(subdirs)} bubbles: {subdirs}")
     
     for i, dirname in enumerate(subdirs):
         bubble_path = os.path.join(bubbles_dir, dirname)
@@ -284,58 +285,96 @@ def process_bubbles(slug, title):
         has_model = False
         model_file = None
         
+            # --- SMART DEDUPLICATION ---
+            # Group by "Base Name" to avoid adding -lg, -md, -sm, -xl, .avif variants as separate images
+            # WEBP > JPG/PNG
+            # XL > LG > MD > SM
+            
+        # First, group files
+        image_groups = {}
+        
         for f in all_files:
             lower_f = f.lower()
-            if f.lower().endswith(('.tif', '.tiff')):
-                # Convert TIFF to WebP
-                try:
-                    name_only = os.path.splitext(f)[0]
-                    webp_filename = f"{name_only}.webp"
-                    webp_path = os.path.join(bubble_path, webp_filename)
-                    
-                    if not os.path.exists(webp_path):
-                        print(f"    Values: Converting {f} to WebP...")
-                        with Image.open(os.path.join(bubble_path, f)) as img:
-                            img.convert("RGB").save(webp_path, "WEBP", quality=90)
-                    
-                    # Update f to point to the new webp file for downstream logic
-                    f = webp_filename
-                    lower_f = f.lower() # Update lower_f for the check below
-                except Exception as e:
-                    print(f"    ⚠️ Failed to convert {f}: {e}")
-
-            if f.endswith(('.jpg', '.jpeg', '.png', '.webp', '.avif', '.gif')):
-                # Get Dimensions
-                width, height = 800, 600
-                try:
-                     with Image.open(os.path.join(bubble_path, f)) as img:
-                        width, height = img.size
-                except: pass
-                
-                bubble_images.append({
-                    "src": f"{R2_DOMAIN}/{slug}/bubbles/{dirname}/{f}",
-                    "width": width,
-                    "height": height,
-                    "aspectRatio": width/height if height > 0 else 1.33,
-                    "alt": f.split('.')[0]
-                })
             
-            elif f.endswith('.glb'):
+            # Check for Model
+            if lower_f.endswith('.glb'):
                 has_model = True
                 model_file = f
-        
-        # Sync Bubble Assets to Public R2
-        if not R2_DOMAIN.startswith("http"):
-             target_bubble_dir = os.path.join(LOCAL_R2_DIR, slug, "bubbles", dirname)
-             os.makedirs(target_bubble_dir, exist_ok=True)
-             for item in os.listdir(bubble_path):
-                s = os.path.join(bubble_path, item)
-                d = os.path.join(target_bubble_dir, item)
-                if os.path.isfile(s): 
-                    try:
-                        shutil.copy2(s, d)
-                    except Exception as e:
-                        print(f"⚠️  Copy warning {item}: {e}")
+                continue
+
+            if not lower_f.endswith(('.jpg', '.jpeg', '.png', '.webp', '.avif', '.gif')):
+                continue
+                
+            # Determine Base Name
+            # remove extension
+            name_no_ext = os.path.splitext(f)[0]
+            
+            # remove known size suffixes
+            base_name = name_no_ext
+            for suffix in ['-xl', '-lg', '-md', '-sm']:
+                if base_name.lower().endswith(suffix):
+                    base_name = base_name[:-len(suffix)]
+                    break
+                    
+            if base_name not in image_groups:
+                image_groups[base_name] = []
+            image_groups[base_name].append(f)
+            
+        # Pick best candidate for each group
+        for base_name in sorted(image_groups.keys()):
+            candidates = image_groups[base_name]
+            
+            # Scoring: 
+            # .webp = +2, .avif = +1 (prefer webp for compatibility if naive img tag)
+            # -xl = +10, -lg = +5, -md = +1
+            best_candidate = candidates[0]
+            best_score = -1
+            
+            for cand in candidates:
+                score = 0
+                lower_c = cand.lower()
+                if ".webp" in lower_c: score += 20
+                elif ".avif" in lower_c: score += 10 # If we support avif src directly
+                elif ".jpg" in lower_c or ".png" in lower_c: score += 5
+                
+                if "-xl" in lower_c: score += 4
+                elif "-lg" in lower_c: score += 3
+                elif "-md" in lower_c: score += 2
+                elif "-sm" in lower_c: score += 1
+                
+                if score > best_score:
+                    best_score = score
+                    best_candidate = cand
+            
+            f = best_candidate
+            
+            # Get Dimensions
+            width, height = 800, 600
+            try:
+                 with Image.open(os.path.join(bubble_path, f)) as img:
+                    width, height = img.size
+            except: pass
+            
+            bubble_images.append({
+                "src": f"{R2_DOMAIN}/{slug}/bubbles/{dirname}/{f}",
+                "width": width,
+                "height": height,
+                "aspectRatio": width/height if height > 0 else 1.33,
+                "alt": base_name
+            })
+            
+            # Sync Bubble Assets to Public R2
+            if not R2_DOMAIN.startswith("http"):
+                 target_bubble_dir = os.path.join(LOCAL_R2_DIR, slug, "bubbles", dirname)
+                 os.makedirs(target_bubble_dir, exist_ok=True)
+                 for item in os.listdir(bubble_path):
+                    s = os.path.join(bubble_path, item)
+                    d = os.path.join(target_bubble_dir, item)
+                    if os.path.isfile(s): 
+                        try:
+                            shutil.copy2(s, d)
+                        except Exception as e:
+                            print(f"⚠️  Copy warning {item}: {e}")
 
         
         # --- DETERMINE TYPE ---
@@ -452,6 +491,14 @@ def process_projects():
     main = read_csv_smart(find_file("Main.csv"), "Slug Name", required_headers={"Slug Name", "Employer"})
     print(f"DEBUG: Read {len(main)} rows from Main.csv")
     
+    # Load Sovereign Manifest
+    sovereign_projects = []
+    if os.path.exists("sovereign_manifest.json"):
+        with open("sovereign_manifest.json", "r") as f:
+            data = json.load(f)
+            sovereign_projects = data.get("sovereign_projects", [])
+            print(f"👑 Loaded {len(sovereign_projects)} Sovereign Projects from manifest.")
+
     tax = {r.get('Project Name') or r.get('Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Project Name")}
     if not tax: tax = {r.get('Name'): r for r in read_csv_smart(find_file("Taxonomy.csv"), "Name")}
     
@@ -880,6 +927,12 @@ def process_projects():
         gallery_images = []
         
         staging_project_dir = os.path.join(STAGING_DIR, slug)
+
+        # --- SOVEREIGN PROJECT CHECK ---
+        # If project is in sovereign_manifest.json, SKIP INGESTION.
+        if slug in sovereign_projects:
+            print(f"👑 Sovereign Project Detected: {slug} - SKIPPING AUTOMATION")
+            continue
         
         # --- BUBBLE COMPILER ---
         cyberspace_data, theme_override = process_bubbles(slug, title)
@@ -892,9 +945,11 @@ def process_projects():
             
             all_files = os.listdir(staging_project_dir)
             
+            
             # --- HERO SELECTION ---
             # Priority: {slug}-hero-*-xl.avif > .webp > hero.*
             hero_candidates = []
+            
             for f in all_files:
                 lower_f = f.lower()
                 # Safer Hero Check: Must contain "-hero-" or start with "hero-"
@@ -914,6 +969,9 @@ def process_projects():
                 hero_candidates.sort(key=lambda x: x[0], reverse=True)
                 best_hero = hero_candidates[0][1]
                 hero_img = f"{R2_DOMAIN}/{slug}/{best_hero}"
+                print(f"    DEBUG: Picked Hero {best_hero} (Score: {hero_candidates[0][0]})")
+            else:
+                print(f"    DEBUG: No hero candidates found in {staging_project_dir}")
 
             # --- 3D MODEL ---
             for f in all_files:
@@ -1144,37 +1202,10 @@ impact: "{row.get('Impact', 'Impact description unavailable.')}"
 
 
 
-def sync_site_assets():
-    """Sync _site directory from STAGING to LOCAL_R2_DIR"""
-    if R2_DOMAIN.startswith("http"):
-        # print("☁️  Skipping _site asset sync (using remote R2)")
-        return
 
-    print("🔄 Syncing _site assets...")
-    source = os.path.join(STAGING_DIR, "_site")
-    target = os.path.join(LOCAL_R2_DIR, "_site")
-    
-    if os.path.exists(source):
-        if not os.path.exists(target):
-            os.makedirs(target)
-            
-        # Sync files in root of _site
-        for item in os.listdir(source):
-            try:
-                s = os.path.join(source, item)
-                d = os.path.join(target, item)
-                if os.path.isfile(s):
-                    shutil.copy2(s, d)
-                elif os.path.isdir(s):
-                    # Recursive copy for subdirectories like logos
-                    shutil.copytree(s, d, dirs_exist_ok=True)
-            except Exception as e:
-                print(f"⚠️  Skipping locked/missing asset: {item} ({e})")
 
 if __name__ == "__main__":
     start_time = time.time()
-    ensure_dummy_assets()
-    sync_site_assets()
     process_colors()
     process_specs()
     process_tenure()
@@ -1182,7 +1213,7 @@ if __name__ == "__main__":
     
     # Auto-run R2 Sync
     try:
-        from sync_r2 import sync_assets
+        from scripts.sync_r2 import sync_assets
         
         end_time = time.time()
         duration = round(end_time - start_time, 2)

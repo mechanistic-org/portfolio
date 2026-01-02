@@ -43,7 +43,7 @@ export const TimeCapsule: React.FC<TimeCapsuleProps> = ({ isOpen, onClose }) => 
                             {/* Title Bar */}
                             <div className="flex items-center justify-between px-2 h-8 bg-gradient-to-r from-[#0058EE] via-[#3A93FF] to-[#0058EE]">
                                 <div className="flex items-center gap-2 text-white text-xs font-bold shadow-black drop-shadow-md">
-                                    <img src="https://assets.eriknorris.com/c24/rigor/digi_logo_grey_200.gif" className="h-4 w-4 bg-white/10 rounded-sm p-[1px]" />
+                                    <img src="/assets/r2/c24/bubbles/05_paper_trail/digi_logo_grey_200.gif" className="h-4 w-4 bg-white/10 rounded-sm p-[1px]" />
                                     \\digiME// - General Modeling Guide - Microsoft Internet Explorer
                                 </div>
                                 <div className="flex gap-1">
