@@ -86,7 +86,12 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 		class="fixed top-0 left-0 z-[9999] w-full transition-transform duration-500 ease-out"
 		style="transform: translateY(-100%);"
 	>
-		<ProjectManifestHUD data={entry.data} nextProject={nextProject} prevProject={prevProject} />
+		<ProjectManifestHUD
+			data={entry.data}
+			nextProject={nextProject}
+			prevProject={prevProject}
+			metrics={metrics}
+		/>
 	</div>
 
 	<!-- MAIN ENGINE -->

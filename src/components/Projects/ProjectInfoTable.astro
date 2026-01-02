@@ -9,6 +9,7 @@ interface Props {
 		profitability?: { value: string; label: string };
 		governance?: { ecos: string[]; dcos: number };
 		interventions?: { count: number; label: string };
+        financial?: { toolingBudget?: number; toolingActual?: number }; // Added for dynamic access
 	};
 }
 
@@ -17,90 +18,104 @@ const { data, nextProject, prevProject, metrics } = Astro.props;
 // Format dates
 const dateVal = data.date || new Date();
 const startDate = new Date(dateVal);
-const dateDisplay = startDate.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+const dateDisplay = startDate.toLocaleDateString("en-US", { month: "short", year: "numeric", day: "2-digit" }).replace(',', '');
+// Format: 2006-08-01 (approximate match to screenshot preference, user asked for YYYY-MM-DD format in screenshot "2006-08-01")
+const isoDate = startDate.toISOString().split('T')[0];
+
 const clients = data.client || [];
 ---
 
 <div
 	class="w-full border-b border-white/10 bg-black/95 backdrop-blur-md transition-all duration-500"
 >
-	<!-- ROW 1: STANDARD IDENTITY & NAV (Always Visible) -->
+	<!-- ROW 1: UNIFIED HEADER (Deep & Lite) -->
 	<div
 		class={`site-container mx-auto max-w-7xl px-4 py-4 md:px-8 ${metrics ? "border-b border-white/10" : ""}`}
 	>
 		<div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-			{/* LEFT: Project Identity */}
-			<div class="flex items-center gap-4">
-				<div class="h-2 w-2 animate-pulse rounded-full bg-[#2E5CFF]"></div>
-				<div>
-					<h1 class="font-mono text-lg font-bold tracking-wider text-white uppercase">
-						{data.title}
-					</h1>
-					<div class="font-mono text-[10px] text-neutral-500">DOC_ID: {data.id}</div>
+			{/* LEFT GROUP: Logo -> Name -> Title -> Category */}
+			<div class="flex items-center gap-6">
+                <!-- EN Logo Home Link -->
+                <a href="/" class="group flex items-center justify-center transition-opacity hover:opacity-80">
+                     <!-- Fake SVG Logo for now -->
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-white">
+                        <path d="M4 4H20V20H4V4Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M4 20L20 4" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </a>
+
+				<div class="flex items-center gap-4 border-l border-white/10 pl-6">
+					<div>
+						<div class="flex items-baseline gap-3">
+                            <h1 class="font-mono text-lg font-bold tracking-wider text-white uppercase">
+                                {data.title}
+                            </h1>
+                            <span class="font-mono text-[10px] text-neutral-500">DOC_ID: {data.id}</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-[10px] uppercase tracking-wider">
+                             <span class="font-bold text-white">{data.employer}</span>
+                             <span class="text-neutral-500">//</span>
+                             <span class="text-neutral-400">{data.category || "Project"}</span>
+                        </div>
+					</div>
 				</div>
 			</div>
 
-			{/* CENTER: Role/Duration (Moved here for Cockpit Layout) */}
-			<div class="hidden items-center gap-12 md:flex">
-				<div class="text-right">
-					<div class="font-bold text-white uppercase">{data.employer}</div>
-					<div class="text-[10px] text-neutral-500 uppercase">Senior Mechanical Designer</div>
-				</div>
-				
-				{/* NAV CONTROLS */}
-				<div class="flex items-center gap-1">
-					{
-						prevProject ? (
-							<a
-								href={`/projects/${prevProject.id}`}
-								class="flex h-6 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-[#2E5CFF] hover:text-white"
-							>
-								&lt;
-							</a>
-						) : (
-							<span class="flex h-6 w-8 cursor-not-allowed items-center justify-center border border-white/5 bg-black text-neutral-800">
-								&lt;
-							</span>
-						)
-					}
-					<a
-						href="/projects"
-						class="flex h-6 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-emerald-500 hover:text-white"
-					>
-						:::
-					</a>
-					{
-						nextProject ? (
-							<a
-								href={`/projects/${nextProject.id}`}
-								class="flex h-6 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-[#2E5CFF] hover:text-white"
-							>
-								&gt;
-							</a>
-						) : (
-							<span class="flex h-6 w-8 cursor-not-allowed items-center justify-center border border-white/5 bg-black text-neutral-800">
-								&gt;
-							</span>
-						)
-					}
-				</div>
+			{/* CENTER: Nav Controls */}
+            <div class="flex items-center gap-1">
+                {
+                    prevProject ? (
+                        <a
+                            href={`/projects/${prevProject.id}`}
+                            class="flex h-6 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-[#2E5CFF] hover:text-white"
+                        >
+                            &lt;
+                        </a>
+                    ) : (
+                        <span class="flex h-6 w-8 cursor-not-allowed items-center justify-center border border-white/5 bg-black text-neutral-800">
+                            &lt;
+                        </span>
+                    )
+                }
+                <a
+                    href="/projects"
+                    class="flex h-6 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-emerald-500 hover:text-white"
+                >
+                    :::
+                </a>
+                {
+                    nextProject ? (
+                        <a
+                            href={`/projects/${nextProject.id}`}
+                            class="flex h-6 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-[#2E5CFF] hover:text-white"
+                        >
+                            &gt;
+                        </a>
+                    ) : (
+                        <span class="flex h-6 w-8 cursor-not-allowed items-center justify-center border border-white/5 bg-black text-neutral-800">
+                            &gt;
+                        </span>
+                    )
+                }
+            </div>
 
-				<div class="text-left">
-					<div class="font-bold text-white uppercase">Other</div>
-					<div class="text-[10px] text-neutral-500 uppercase">{data.category || "Project"}</div>
+			{/* RIGHT: Date & Duration */}
+			<div class="hidden md:flex items-center gap-8">
+                <!-- Date -->
+				<div class="font-mono text-xs">
+					<span class="mr-2 text-neutral-600 uppercase">DATE</span>
+					<span class="font-bold text-white">{isoDate}</span>
 				</div>
-			</div>
+                
+                <!-- Duration -->
+                <div class="border border-emerald-500/30 bg-emerald-500/5 px-3 py-1 rounded">
+                     <div class="mb-0.5 text-[8px] font-bold tracking-wider text-emerald-500 uppercase leading-none">
+                        Duration
+                    </div>
+                    <div class="font-mono text-sm font-bold text-white leading-none">{data.duration}</div>
+                </div>
 
-			{/* RIGHT: Status & Source */}
-			<div class="flex items-center gap-6 font-mono text-xs">
-				<div class="hidden md:block">
-					<span class="mr-2 text-neutral-600">DATE</span>
-					<span class="font-bold text-white">2006-08-01</span>
-				</div>
-				<div>
-					<span class="mr-2 text-neutral-600">STATUS</span>
-					<span class="font-bold text-emerald-500">{data.statusLabel}</span>
-				</div>
+                <!-- Raw Source Link -->
 				<a
 					href={`/raw/${data.id || "v4-test"}`}
 					class="flex h-6 items-center justify-center rounded border border-[#2E5CFF]/30 bg-[#2E5CFF]/10 px-2 font-mono text-[10px] font-bold text-[#2E5CFF] transition-colors hover:bg-[#2E5CFF] hover:text-white"
@@ -115,22 +130,16 @@ const clients = data.client || [];
 	{
 		metrics && (
 			<div class="site-container mx-auto grid max-w-7xl grid-cols-1 divide-y divide-white/10 border-b border-white/10 md:grid-cols-4 md:divide-x md:divide-y-0 text-white">
-				{/* 1. TIMELINE & TOOLS */}
-				<div class="grid grid-cols-2 divide-x divide-white/10 bg-white/5">
-					<div class="p-4">
-						<div class="mb-1 text-[10px] font-bold tracking-wider text-neutral-500 uppercase">
-							Duration
-						</div>
-						<div class="font-mono text-sm font-bold text-white">{data.duration}</div>
-					</div>
-					<div class="p-4">
-						<div class="mb-1 text-[10px] font-bold tracking-wider text-neutral-500 uppercase">
-							Primary Tools
-						</div>
-						<div class="inline-block rounded border border-white/20 bg-white/5 px-1 py-0.5 font-mono text-[10px] text-neutral-300">
+				{/* 1. PRIMARY TOOLS (Moved from Top Row) */}
+				<div class="bg-white/5 p-4">
+                    <div class="mb-1 text-[10px] font-bold tracking-wider text-yellow-500 uppercase border-b border-yellow-500/20 pb-1 mb-2 inline-block">
+                        Primary Tools
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                         <div class="inline-block rounded border border-white/20 bg-white/10 px-1.5 py-0.5 font-mono text-[10px] text-neutral-300">
 							ProEngineer
 						</div>
-					</div>
+                    </div>
 				</div>
 
 				{/* 2. ORBIT DATA */}
@@ -165,8 +174,10 @@ const clients = data.client || [];
                         <div class="text-[10px] text-neutral-500 leading-tight">
                             {metrics.cogs?.label || "Direct Material"}
                         </div>
+                        
+                        <!-- Tooling Budget (Dynamic) -->
                         <div class="mt-3 font-mono text-lg font-bold text-neutral-600 leading-none mb-1">
-                            $ 0 k
+                             $ {(metrics.financial?.toolingBudget ? Math.round(metrics.financial.toolingBudget / 1000) : 0)} k
                         </div>
                          <div class="text-[10px] text-neutral-600 leading-tight">
                             Tooling Budget
@@ -205,13 +216,15 @@ const clients = data.client || [];
                         ))}
                     </div>
                     <div class="flex justify-between text-[10px] text-neutral-500 font-mono">
-                        <span>3 Major ECOs</span>
-                        <span>0 DCOs</span>
+                        <span>{metrics.governance?.ecos?.length || 0} Major ECOs</span>
+                        <div class="border border-red-500/50 text-red-500 px-1 rounded animate-pulse">
+                             {metrics.governance?.dcos || 0} DCOs
+                        </div>
                     </div>
                 </div>
 
                  {/* 5. INTERVENTIONS */}
-                  <div class="p-4 bg-black flex items-center gap-4">
+                  <div class="p-4 bg-black flex items-center gap-4 border-l-4 border-l-orange-500">
                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-orange-500 animate-pulse" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/></svg>
                     <div>
                          <div class="flex items-baseline gap-2">

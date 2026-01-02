@@ -196,10 +196,19 @@ const finalEntry = entry
 let metrics: any = undefined;
 if (finalEntry.id === "control-24" || finalEntry.id === "c24") {
 	metrics = {
-		cogs: { value: "$2,097.37", label: "Direct Material (BOM)" },
+		cogs: { value: "$423.27", label: "Direct Material (BOM)" },
 		profitability: { value: "57.40%", label: "Standard Margin" },
-		governance: { ecos: ["EC012262", "EC012263"], dcos: 0 },
+		governance: { ecos: ["EC012262", "EC012263", "ECO12740"], dcos: 19 },
 		interventions: { count: 6, label: "Confirmed Saves" },
+		financial: { toolingBudget: 180000, toolingActual: 34860 },
+	};
+} else if (finalEntry.id === "d-command") {
+	metrics = {
+		cogs: { value: "100%", label: "Production Yield" },
+		profitability: { value: "$630k", label: "Recall Avoidance" },
+		governance: { ecos: ["ECO6454", "ECO6455", "ECO6549"], dcos: 5 },
+		interventions: { count: 42, label: "Manual Inspections" },
+		financial: { toolingBudget: 210000, toolingActual: 0 },
 	};
 }
 
