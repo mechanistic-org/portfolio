@@ -1090,12 +1090,12 @@ documents: {json.dumps(documents)}
 links: {json.dumps(links)}
 heroImage: "{hero_img}" 
 draft: false
-description: "{title} - {industry} project."
+description: "{row.get('Description', f'{title} - {industry} project.')}"
 duration: "{duration_str}"
 statusLabel: "{status_label}"
 skillGraph: "{skill_graph_url}"
 partGraph: "{part_graph_url}"
-impact: "{row.get('Impact', '')}"
+impact: "{row.get('Impact', 'Impact description unavailable.')}"
 ---
 {content_body}
 """

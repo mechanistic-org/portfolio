@@ -14,20 +14,20 @@ tags: ["Iterative Prototyping", "Prototyping", "Tolerance Analysis"]
 skillData: [{"name": "Iterative Prototyping", "value": 57.1, "benchmark": 46.6}, {"name": "Prototyping", "value": 56.2, "benchmark": 46.7}, {"name": "Tolerance Analysis", "value": 50.8, "benchmark": 40.0}, {"name": "Reliability Testing", "value": 49.5, "benchmark": 40.4}, {"name": "Design for Manufacturing (DFM)", "value": 47.5, "benchmark": 44.5}, {"name": "CAD (Computer-Aided Design)", "value": 46.8, "benchmark": 44.9}]
 additionalSkills: ["Iterative Prototyping", "Prototyping", "Tolerance Analysis", "Reliability Testing", "Design for Manufacturing (DFM)", "CAD (Computer-Aided Design)", "Testing Automation", "Usability Testing", "Product Testing", "Materials Knowledge"]
 phase_stats: {"Strategy": 10.6, "Design": 93.3, "Engineering": 31.8, "Production": 29.7}
-cyberspace: null
-theme: "DataSheet"
+cyberspace: {"layout": "linear", "stickies": [{"id": "01_adhesion_crisis", "type": "gallery", "deck": [{"title": "The Crisis", "subtitle": "The Peel Test Failure", "body": "**The Symptom:**\nDuring Pilot Validation for the PCII (D-Control) Fader Bank, the cosmetic overlay began delaminating from the sub-chassis.\n\n**The Impact:**\n*   **Functional Failure:** The peeling overlay blocked the path of the motorized faders.\n*   **Brand Failure:** This was a $30k+ console; peeling stickers were unacceptable.\n*   **Schedule Failure:** The \"Stop Ship\" order was imminent.\n\n**The Initial Theory:**\nThe vendor claimed \"Bad Glue.\" They proposed switching adhesive vendors. I rejected this as \"Guesswork.\""}, {"title": "The Investigation", "subtitle": "Forensic DOE", "body": "**Method A vs Method B:**\nI designed a Design of Experiments (DOE) to isolate the root cause.\n\n*   **Variable 1 (Adhesive):** 3M 467MP vs. 3M 200MP.\n*   **Variable 2 (Surface Prep):** IPA Wipe vs. Plasma Treatment.\n*   **Variable 3 (Substrate):** ABS vs. PC/ABS blend.\n\n**The Smoking Gun:**\nDetailed forensic analysis revealed low **Surface Energy** (Dyne level) on the molded chassis. The adhesive wasn't failing; it was being repelled at the molecular level."}], "data": {"images": [], "layout": "masonry"}}, {"id": "02_process_control", "type": "gallery", "deck": [{"title": "The Solution", "subtitle": "Plasma & Dyne", "body": "**The Fix:**\nI mandated a **Corona Discharge (Plasma) Treatment** station on the assembly line.\n\n**The Science:**\n*   **Before:** Substrate Surface Energy < 32 Dyne/cm (Hydrophobic).\n*   **After:** Plasma bombardment raised Surface Energy > 48 Dyne/cm (Hydrophilic).\n\n**The Result:**\nAdhesion strength increased by **400%**. The failure mode shifted from \"Adhesive Failure\" (glue stays on sticker) to \"Cohesive Failure\" (foam tears), proving the bond was stronger than the material itself."}, {"title": "Process Lockdown", "subtitle": "Trust but Verify", "body": "**Dyne Pen Protocol:**\nI didn't just install the machine; I installed the *law*.\n\n*   **QC Step:** Every 50th unit required a \"Dyne Pen\" swipe test.\n*   **Visual Standard:** If the ink beaded up (Low Energy), the line stopped. If it wetted out (High Energy), the part passed.\n\nThis transformed an invisible chemical property into a visible Go/No-Go gauge for the factory floor."}], "data": {"images": [], "layout": "masonry"}}]}
+theme: "hyperspace"
 teamSize: "Unknown"
 gallery: []
 documents: []
 links: [{"name": "Digidesign Website", "url": "https://avid.com"}]
-heroImage: "/assets/placeholders/tech-1.jpg" 
+heroImage: "/assets/placeholders/blueprint.jpg" 
 draft: false
-description: "D-Control - Other project."
+description: "Forensic resolution of the PCII Adhesion Crisis."
 duration: "Active"
 statusLabel: "Completed"
 skillGraph: "/assets/r2/d-control/skill-graph.svg"
 partGraph: "/assets/r2/d-control/part-graph.svg"
-impact: ""
+impact: "Instituted Plasma Treatment line, increasing adhesion by 400% and solving critical peel failure."
 ---
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';

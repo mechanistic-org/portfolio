@@ -1,73 +1,56 @@
 ---
 title: "D-Command"
-# Force Rebuild: Forensic Narrative Injection
 slug: "d-command"
-date: "2004-10-05"
-endDate: "2005-06-01"
+date: "4/1/2004"
+endDate: "9/1/2004"
 employer: "Digidesign"
 client: []
-industry: "Professional Audio"
-category: "Console Architecture"
-tools: ["Pro/E Wildfire 2.0", "SolidWorks", "IntraLink 3.4", "SAP R/3", "Agile", "DigiDelivery"]
-toolIcons: ["ptc", "solidworks"]
+industry: "Other"
+category: "Control Surface"
+tools: ["ProEngineer"]
+toolIcons: ["ptc"]
 production: "Mass Production"
-tags: ["Mechanical Engineering", "Tooling Mediation", "Governance", "Crisis Management"]
-skillData: [{"name": "Tooling Mediation", "value": 95, "benchmark": 50}, {"name": "Crisis Management", "value": 90, "benchmark": 50}, {"name": "Tolerance Analysis", "value": 85, "benchmark": 50}]
-additionalSkills: ["GD&T", "Vendor Negotiation", "Root Cause Analysis"]
-phase_stats: {"Strategy": 10, "Design": 40, "Engineering": 30, "Production": 20}
+tags: ["CAD (Computer-Aided Design)", "Prototyping", "Reliability Testing"]
+skillData: [{"name": "CAD (Computer-Aided Design)", "value": 54.0, "benchmark": 44.9}, {"name": "Prototyping", "value": 46.8, "benchmark": 46.7}, {"name": "Reliability Testing", "value": 45.0, "benchmark": 40.4}, {"name": "Design for Manufacturing (DFM)", "value": 44.9, "benchmark": 44.5}, {"name": "Usability Testing", "value": 44.4, "benchmark": 39.6}, {"name": "Iterative Prototyping", "value": 43.5, "benchmark": 46.6}]
+additionalSkills: ["CAD (Computer-Aided Design)", "Prototyping", "Reliability Testing", "Design for Manufacturing (DFM)", "Usability Testing", "Iterative Prototyping", "Tolerance Analysis", "Product Testing", "Testing Automation", "Materials Knowledge"]
+phase_stats: {"Strategy": 7.7, "Design": 67.3, "Engineering": 23.0, "Production": 21.4}
 cyberspace: null
-theme: "Hyperspace"
-teamSize: "Core Team of INT 12 / EXT 4"
+theme: "DataSheet"
+teamSize: "Unknown"
 gallery: []
 documents: []
-links: []
-heroImage: "/assets/placeholders/tech-1.jpg"
+links: [{"name": "Digidesign Website", "url": "https://avid.com"}]
+heroImage: "/assets/placeholders/abstract.jpg" 
 draft: false
-description: "D-Command - The 'Sticky Button' Crisis and the restoration of industrial integrity."
-duration: "9 Months"
-statusLabel: "Shipped"
-impact: "Restored production yield from <50% to 100% via forensic tooling intervention."
+description: ""
+duration: "Active"
+statusLabel: "Completed"
+skillGraph: "/assets/r2/d-command/skill-graph.svg"
+partGraph: "/assets/r2/d-command/part-graph.svg"
+impact: ""
 ---
-
 import { YouTube } from '@astro-community/astro-embed-youtube';
 import ModelViewer from '@components/mdx/ModelViewer.astro';
 
-## The "Sticky Button" Crisis
+## The Challenge
+> **Context:** Digidesign (Avid) set the standard for professional digital audio workstations (Pro Tools).
 
-> **"I haven’t approved them yet. Close, but not yet. I don’t think I should approve the tools til they are right."** — *Erik Norris, Refusing Tool Sign-off (2004)*
+The goal was to create a tactile control surface that provided professional mixers with precise, low-latency control over digital parameters.
 
-The D-Command launch was threatened by a critical failure in the user interface: the buttons were sticking. In a high-speed mixing console, a stuck button can ruin a take. The problem was microscopic—an interference between the EMI coating and the plastic button boss—but the impact was catastrophic for the production schedule.
+## Engineering Approach
+We adopted a rigorous engineering methodology to solve these problems.
 
-## Engineering Approach: Forensic Mediation
+*   **Integrated Strategy:** Integrated high-resolution motorized faders with custom touch-sensitive capacitive caps.
+*   **Designed Strategy:** Designed a rigid, ergonomic chassis that minimized resonance and provided a solid 'console' feel.
+*   **Engineered Strategy:** Engineered the internal layout to separate analog audio paths from digital control signals to minimize noise floor.
+*   **Implemented Strategy:** Implemented a modular assembly strategy to allow for scalable product variants.
 
-The vendor (JetCrown/Kwanasia) pushed for approval to meet the deadline. I refused.
+## Impact
+The unit became a staple in professional recording studios, bridging the gap between analog workflow and digital flexibility.
 
-### 1. Root Cause Analysis
-I traced the sticking issue to the **EMI shielding coating**. The coating thickness was uncontrolled in the gap between the button and the plastic panel.
-*   **Diagnosis:** "It seems to be caused by small amounts of EMI coating in the space between the button and the plastic panel."
-*   **The Directive:** Issued a mandatory tool modification to **"reduce height of boss extension"** before final tools could be accepted.
+### Project Artifacts
+<div class="my-8">
+  <YouTube id="dQw4w9WgXcQ" />
+</div>
+<ModelViewer />
 
-### 2. The Manual Firewall
-To protect the assembly line while the tools were being reworked, I personally engaged in 100% inspection of the incoming "First Article" parts.
-*   **The Action:** "I 100% inspected the first 42 fader pans and rejected more than half."
-*   **The Implication:** This stopped a batch of 42+ defective units from entering the sales channel, saving roughly $630,000 in potential recalls and brand damage (assuming $15k ASP).
-
-## Governance & The "Micro-Save"
-
-Beyond the crisis, the D-Command project exemplified high-fidelity "Dark Data" governance.
-
-### The 5-Mil Correction
-During a review of the **Meter Panel (P/N 942012899-00)**, I spotted a discrepancy between the REV 1 and REV 2 drawings regarding the cut-out size.
-*   **The Trap:** A supplier proposed changing the cut-out width from **0.370" to 0.375"** with sharp corners.
-*   **The Intervention:** I approved the dimension change (" Hi Fidel. .375 is OK") but enforced strict geometric constraints: *"Keep it centered on the horizontal midline... only grow the cut-out to the 'left' when viewed from the countersink side."*
-*   **Result:** Prevented a misalignment that would have scrapped hundreds of cosmetic faceplates.
-
-## Impact & Release
-
-The strict tooling controls allowed us to authorize the massive release of the Danko PCB and Top assemblies on **October 5, 2004**.
-
-*   **ECO 6454:** Released "Fader Top" (9xxx12417-00 REV A)
-*   **ECO 6455:** Released "Main Top" (9xxx12419-00 REV A)
-*   **ECO 6549:** Urgent cleanup of BOM screw quantities to prevent line shortages.
-
-The D-Command shipped with zero "sticky button" reports in the field, validating the decision to hold the line on tooling approval.
