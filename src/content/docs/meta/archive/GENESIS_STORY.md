@@ -11,7 +11,7 @@ sidebar:
 
 ## 1. The Pivot: Why We Built The Machine
 The project began with a standard requirement: "I need a portfolio."
-We started with templates (Cosmic Themes' *Quantum*), but quickly hit a philosophical wall.
+We started with templates (Cosmic Themes' *ErikNorris*), but quickly hit a philosophical wall.
 
 **The Realization:**
 For a Process Engineer, a generic marketing site is a lie. It replaces the messy, high-fidelity reality of engineering with a "Shiny Black" veneer.

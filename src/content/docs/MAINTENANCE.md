@@ -77,7 +77,7 @@ The core engine of the site is `ingest_data.py`.
 
 ### Cloud Asset Sync
 To manage large assets (images, 3D models, PDFs), we use Cloudflare R2.
-*   **Source:** `../quantum-assets/R2_STAGING/{slug}/` (Sibling Directory - Recommended) or `R2_STAGING/{slug}/` (Local)
+*   **Source:** `../ErikNorris-assets/R2_STAGING/{slug}/` (Sibling Directory - Recommended) or `R2_STAGING/{slug}/` (Local)
 *   **Destination:** `https://assets.eriknorris.com/{slug}/` (Remote)
 *   **Command:** `python ingest_data.py` (Auto-runs sync)
 
@@ -108,7 +108,7 @@ Project pages are generated from MDX files in `src/content/projects/`.
 
 ### Authoring Project Pages (The Snippet Workflow)
 We use custom VS Code snippets to rapidly scaffold "Visual Taxonomy" components.
-1.  **Prerequisite:** Ensure `.vscode/quantum.code-snippets` is present in your workspace.
+1.  **Prerequisite:** Ensure `.vscode/ErikNorris.code-snippets` is present in your workspace.
 2.  **Workflow:** In any `.md` or `.mdx` file, type `qq-` to see available snippets.
     *   `qq-zigzag`: Insert Product Grid.
     *   `qq-process`: Insert Process Timeline.
@@ -315,21 +315,21 @@ status: {
 
 ### Ghost Workspace ("workspace.json")
 *   **Symptom:** VS Code sidebar shows a `workspace.json` workspace that is slow or disconnected.
-*   **Cause:** VS Code creates an ephemeral workspace when multiple folders (`quantum`, `quantum-assets`) are opened without a defined `.code-workspace` file.
+*   **Cause:** VS Code creates an ephemeral workspace when multiple folders (`ErikNorris`, `ErikNorris-assets`) are opened without a defined `.code-workspace` file.
 *   **Fix:** Create and open a named workspace file (e.g., `ErikNorris.code-workspace`) that explicitly lists the folders.
     ```json
     {
         "folders": [
             { "path": "." },
-            { "path": "../quantum-assets" }
+            { "path": "../ErikNorris-assets" }
         ]
     }
     ```
 
 ### Asset Staging Mismatch (Ghost Assets)
 *   **Symptom:** You place assets in `R2_STAGING` but they don't appear after ingestion.
-*   **Cause:** You might be using the local repo folder (`quantum/R2_STAGING`) instead of the external asset repo (`quantum-assets/R2_STAGING`).
-*   **Fix:** Always stage assets in `../quantum-assets/R2_STAGING`. The ingestion script looks there first.
+*   **Cause:** You might be using the local repo folder (`ErikNorris/R2_STAGING`) instead of the external asset repo (`ErikNorris-assets/R2_STAGING`).
+*   **Fix:** Always stage assets in `../ErikNorris-assets/R2_STAGING`. The ingestion script looks there first.
 
 ### Image Extension Mismatch (404s)
 *   **Symptom:** New AI-generated assets return 404 errors despite existing on disk.
@@ -493,7 +493,7 @@ status: {
 ### Blank 3D Model Viewer
 *   **Symptom:** Viewer loads but shows a blank/empty scene (not the fallback).
 *   **Cause:** `src` URL points to a non-existent file, often due to a mismatch between the generated slug and the `R2_STAGING` folder name.
-*   **Fix:** Ensure the folder in `quantum-assets/R2_STAGING/` matches the project slug exactly (e.g., `rack-002`, not `002-rack`).
+*   **Fix:** Ensure the folder in `ErikNorris-assets/R2_STAGING/` matches the project slug exactly (e.g., `rack-002`, not `002-rack`).
 
 ### Stale TypeScript Errors ("File Not Found")
 *   **Symptom:** `tsconfig.json` reports an error for a file that was recently deleted (e.g., "File '.../template-test.astro' not found").
@@ -564,7 +564,7 @@ We have decoupled image processing from data ingestion to prevent "Script Bloat"
 2.  **Step 2 (The Refinery):** Run `python ingest_data.py` to update metadata and sync to R2.
 
 1.  **Ingest:** Import raw files into Lightroom Classic.
-2.  **Develop:** Use Lightroom Classic. Export using "Quantum Master" preset (TIFF, sRGB, 4000px) to `R2_MASTER`.
+2.  **Develop:** Use Lightroom Classic. Export using "ErikNorris Master" preset (TIFF, sRGB, 4000px) to `R2_MASTER`.
 3.  **Process:** Run `python scripts/process_images.py {slug}`.
 4.  **Deploy:** Run `python ingest_data.py`.
 
@@ -813,16 +813,16 @@ To prevent repo bloat (Git LFS limits), we strictly enforce an "Air Gap" for ass
 *   **Dev Server:** Needs access to all 100GB of assets to render the site.
 
 ### The Solution: The Symlink Bridge
-We use a Symbolic Link to bridge the external `quantum-assets` repo into the `public` folder during local development.
+We use a Symbolic Link to bridge the external `ErikNorris-assets` repo into the `public` folder during local development.
 
 **Windows PowerShell (Run as Admin):**
 ```powershell
-New-Item -ItemType SymbolicLink -Path "d:\GitHub\quantum\public\assets\r2" -Target "D:\GitHub\quantum-assets\R2_STAGING"
+New-Item -ItemType SymbolicLink -Path "d:\GitHub\ErikNorris\public\assets\r2" -Target "D:\GitHub\ErikNorris-assets\R2_STAGING"
 ```
 
 **Golden Rules:**
-1.  **NEVER COPY** files from `quantum-assets` into `quantum`.
-2.  **ALWAYS LINK.** If a file is missing, check the Symlink 404, then add it to `quantum-assets/R2_STAGING`.
+1.  **NEVER COPY** files from `ErikNorris-assets` into `ErikNorris`.
+2.  **ALWAYS LINK.** If a file is missing, check the Symlink 404, then add it to `ErikNorris-assets/R2_STAGING`.
 3.  **VERIFY:** If `npm run dev` throws 404s, stop. Do not move the file. Check if the symlink is valid and if the file exists in the *Target* directory.
 
 ### Changes Disappear After Build

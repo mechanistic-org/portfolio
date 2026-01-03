@@ -10,7 +10,7 @@ sidebar:
 **Objective:** Generate "Datasheet-Grade" technical drawings and wireframes from 3D geometry for use as high-fidelity SVG assets.
 
 > **The "Blueprint" Aesthetic:**
-> Quantum uses vector lines to convey precision. These are not "illustrations"; they are **schematics**.
+> ErikNorris uses vector lines to convey precision. These are not "illustrations"; they are **schematics**.
 
 ---
 

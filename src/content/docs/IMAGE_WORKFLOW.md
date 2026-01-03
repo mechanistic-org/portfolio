@@ -1,21 +1,21 @@
 ﻿---
-title: "Quantum Image Workflow (SOP)"
+title: "ErikNorris Image Workflow (SOP)"
 slug: "image_workflow"
 sidebar:
   group: "Workflows"
   order: 2
 ---
-# Quantum Image Workflow (SOP)
+# ErikNorris Image Workflow (SOP)
 
 **Objective:** Standardize all portfolio assets to "Premium" quality using a Hybrid (Lightroom + Python) workflow.
 
 ## 1. The Workspace
 We use a dedicated local workspace to keep the Git repo clean.
 
-*   **Location:** `~/Quantum_Workspace/` (User Home Directory)
+*   **Location:** `~/ErikNorris_Workspace/` (User Home Directory)
 *   **Structure:**
     ```text
-    /Quantum_Workspace/
+    /ErikNorris_Workspace/
     ├── 01_INGEST/          # [DROP ZONE] Raw Camera Files (CR2, NEF) & Web Scraps
     │   └── {project_slug}/
     ├── 02_MASTER/          # [LIGHTROOM EXPORT] High-Res TIFFs (The Source of Truth)
@@ -54,9 +54,9 @@ All files must follow this regex-enforceable schema:
 3.  **Crop:** Ensure the aspect ratio is intentional.
 
 ### Step 3: Export Master (The Hand-off)
-Use the **"Quantum Master"** Export Preset in Lightroom:
+Use the **"ErikNorris Master"** Export Preset in Lightroom:
 
-*   **Export To:** Hard Drive (`~/Quantum_Workspace/02_MASTER/{slug}`)
+*   **Export To:** Hard Drive (`~/ErikNorris_Workspace/02_MASTER/{slug}`)
 *   **File Naming:** Custom Name - Sequence -> `{slug}-{view_type}-` + Sequence #
 *   **File Settings:**
     *   **Image Format:** TIFF
@@ -70,9 +70,9 @@ Use the **"Quantum Master"** Export Preset in Lightroom:
 *   **Output Sharpening:** Screen / Standard
 *   **Metadata:** All Metadata
 
-### Preset: Quantum Sequence (For Animations)
+### Preset: ErikNorris Sequence (For Animations)
 Used for exporting frame sequences (e.g., 360 spins, exploded views).
-*   **Export To:** Hard Drive (`~/Quantum_Workspace/R2_MASTER/{slug}/{animation-name}`)
+*   **Export To:** Hard Drive (`~/ErikNorris_Workspace/R2_MASTER/{slug}/{animation-name}`)
 *   **File Naming:** Filename - Sequence (Keep original camera filenames or simple numbering)
 *   **File Settings:**
     *   **Image Format:** TIFF
@@ -135,7 +135,7 @@ Don't export GIFs! Use Lightroom to export high-quality frames.
 2.  **Develop** the first one.
 3.  **Sync Settings** (Ctrl+Shift+S) to apply edits to ALL frames (Critical for consistency).
 4.  **Match Total Exposures:** If you have flicker (timelapse/burst), go to `Settings > Match Total Exposures` (Ctrl+Alt+Shift+M).
-5.  **Export** using the **"Quantum Sequence"** preset to a **Subfolder** inside the project master (e.g., `R2_MASTER/xbox/turn-anim/`).
+5.  **Export** using the **"ErikNorris Sequence"** preset to a **Subfolder** inside the project master (e.g., `R2_MASTER/xbox/turn-anim/`).
     *   **Folder Naming:** Use `kebab-case` (e.g., `explode-view`, `ui-flow`). This folder name becomes the animation ID.
 
 **Timing Configuration (The Suffix Rule):**

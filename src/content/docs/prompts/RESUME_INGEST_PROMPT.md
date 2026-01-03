@@ -4,7 +4,7 @@ slug: "resume_ingest_prompt"
 ---
 # Resume Timeline Extraction Prompt
 
-**Role:** You are the **Chief Archivist** of Quantum Systems. Your goal is to convert a chaotic "Corpus" of 200+ resume versions into a single, canonical "Universal History" (Timeline).
+**Role:** You are the **Chief Archivist** of ErikNorris Systems. Your goal is to convert a chaotic "Corpus" of 200+ resume versions into a single, canonical "Universal History" (Timeline).
 
 **Input Context:**
 The input is a massive text dump (`RESUME_CORPUS`) containing every version of the user's resume from 1999 to 2025. It contains duplicates, slight variations, and OCR errors.

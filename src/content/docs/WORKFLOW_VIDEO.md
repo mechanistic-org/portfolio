@@ -10,7 +10,7 @@ sidebar:
 **Objective:** "Broadcast Quality" assets for the engineering portfolio. High-bitrate 4K hosted on YouTube, embedded with a minimalist, "Zero-UI" aesthetic.
 
 ## 1. The Source (Master)
-*   **Location:** `~/Quantum_Workspace/02_MASTER/{slug}/video/`
+*   **Location:** `~/ErikNorris_Workspace/02_MASTER/{slug}/video/`
 *   **Format:**
     *   **ProRes 422 HQ** (Preferred for archiving)
     *   **DNxHR HQX** (Alternative)
@@ -19,7 +19,7 @@ sidebar:
 *   **Naming:** `{slug}-master-{version}.mov`
 
 ## 2. The Export (YouTube Delivery)
-Use the **"Quantum Tube"** Export Preset (Premiere/DaVinci):
+Use the **"ErikNorris Tube"** Export Preset (Premiere/DaVinci):
 
 *   **Codec:** H.265 (HEVC) - significantly better efficiency than H.264 at 4K.
 *   **Resolution:** 3840x2160 (Always upload 4K to trigger VP9 codec on YouTube).

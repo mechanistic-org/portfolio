@@ -119,7 +119,7 @@ To achieve **Level 10 (The Singularity)** on the Architect Evaluation, our claim
 **Crucial Clarification:** Your website has **ZERO ongoing dependency** on the NotebookLM service.
 
 *   **Transient Tool:** NotebookLM is used only during the **"Mining Phase"**. 
-*   **Static Extraction:** Once the metrics and "Evidence Locker" assets (screenshots) are committed to the `d:\GitHub\quantum` repository, they are permanent.
+*   **Static Extraction:** Once the metrics and "Evidence Locker" assets (screenshots) are committed to the `d:\GitHub\ErikNorris` repository, they are permanent.
 *   **Deletion Safety:** You can delete your notebooks in NotebookLM immediately after extraction. This will **not** break your site.
 
 ### What is lost if you delete a notebook?
@@ -164,7 +164,7 @@ For large, legacy email archives (`.pst`), follow this "Survey to Handoff" pipel
 - **Action:** Load the `orpheus_master.md`. Use the **Technical Spec Extractor** (from Section 3) to synthesize the case study.
 
 ### 4. Map (The Handoff)
-- **Goal:** Link to `d:\GitHub\quantum`.
+- **Goal:** Link to `d:\GitHub\ErikNorris`.
 - **Action:** Paste the refined spec into `data_source/inbox/{project_slug}.technical.txt`.
 - **Command:** Run `python scripts/ingest_inbox.py` to bake it into your site.
 
@@ -204,25 +204,25 @@ To move from "Verification Screenshots" to "High-Fidelity Assets," use NotebookL
 
 ## 8. The "Asset Air-Gap" Strategy (External Staging)
 
-To avoid bloating your main source code repository with "gobs of images," use the **Asset Air-Gap** protocol. This leverages your existing `@R2_STAGING` and `d:\GitHub\quantum-assets` structure.
+To avoid bloating your main source code repository with "gobs of images," use the **Asset Air-Gap** protocol. This leverages your existing `@R2_STAGING` and `d:\GitHub\ErikNorris-assets` structure.
 
-### Track A: The External Storage Locker (`quantum-assets`)
-- **Location:** `d:\GitHub\quantum-assets\R2_STAGING\{project_slug}\raw`
-- **Role:** This is your "Pile." It lives **outside** the `quantum` repo.
+### Track A: The External Storage Locker (`ErikNorris-assets`)
+- **Location:** `d:\GitHub\ErikNorris-assets\R2_STAGING\{project_slug}\raw`
+- **Role:** This is your "Pile." It lives **outside** the `ErikNorris` repo.
 - **Process:** Maintain your existing sequence folders and strict naming conventions here. Antigravity can read this directory to index your work without ever "adding" it to Git.
 
 ### Track B: The Intelligence Subset (NotebookLM)
 - **Role:** Technical grounding. 
 - **Process:** Upload only the files that represent "Intelligence Nodes" (e.g., technical PDFs, specific labeled photos of failures).
 
-### Track C: The Curation Layer (`quantum`)
-- **Location:** `d:\GitHub\quantum\public\assets\r2\{project_slug}`
+### Track C: The Curation Layer (`ErikNorris`)
+- **Location:** `d:\GitHub\ErikNorris\public\assets\r2\{project_slug}`
 - **Role:** Optimized, final assets.
-- **Process:** Once an asset is selected from the "Pile" (Track A) for the case study, Antigravity will copy and optimize it into the `quantum` repo.
+- **Process:** Once an asset is selected from the "Pile" (Track A) for the case study, Antigravity will copy and optimize it into the `ErikNorris` repo.
 
 > [!IMPORTANT]
 > **The Curation Loop:**
-> 1. User dumps 100+ raw items into `d:\GitHub\quantum-assets`.
+> 1. User dumps 100+ raw items into `d:\GitHub\ErikNorris-assets`.
 > 2. User selects 10 items for NotebookLM intelligence.
 > 3. Antigravity selects 5 "Hero" items from the externally indexed pile.
 > 4. Antigravity copies/optimizes only those 5 items into the main repo.
@@ -244,7 +244,7 @@ Exporting large 3D assemblies (e.g., 3,000+ parts) directly to the web will cras
 Bill of Materials (BOM) Excel files are high-density "Intelligence Gold." They bridge the gap between your CAD (Onshape) and your History (Emails).
 
 ### Step 1: Ingest
-- **Storage:** Put the original `.xls/.csv` in `d:\GitHub\quantum-assets\R2_STAGING\{project}\raw`.
+- **Storage:** Put the original `.xls/.csv` in `d:\GitHub\ErikNorris-assets\R2_STAGING\{project}\raw`.
 - **Intelligence:** Upload a copy to NotebookLM. If the Excel is complex, export a simplified **CSV** or **PDF** version of the "Main Assembly" tab for easier AI parsing.
 
 ### Step 2: The "Part Story" Prompt

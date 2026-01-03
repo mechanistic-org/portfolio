@@ -165,7 +165,7 @@ To create a "cinematic" feel without heavy libraries (like GSAP), we implemented
 2.  **Smart Header Hunting:** In `Expertise.csv`, the script dynamically locates the "Project Start" header row to handle the complex matrix structure (Skills vs Projects) and extracts metadata like "Phase" and "Weight".
 3.  **Asset Discovery:** Scans for assets in the following priority:
     1.  `R2_STAGING_PATH` (Env Var)
-    2.  `../quantum-assets/R2_STAGING` (Sibling Directory - Recommended for Dev)
+    2.  `../ErikNorris-assets/R2_STAGING` (Sibling Directory - Recommended for Dev)
     3.  `R2_STAGING` (Local Directory - Fallback)
 4.  **Skill Aggregation (The Benchmark):**
     *   Before generating individual project data, the script scours `Skills.csv` to calculate the **Global Average** for every tracked skill.
@@ -181,10 +181,10 @@ To create a "cinematic" feel without heavy libraries (like GSAP), we implemented
     *   **Scaffolding:** The `--scaffold` flag triggers a generation mode that creates missing markdown templates in `data_source/manual_content/`, ensuring 100% content coverage.
 
 ### Sibling Repo Pattern
-Assets are stored in a parallel repository (`quantum-assets`) to keep the main codebase lightweight (`<50MB`).
-*   **Code:** `d:\GitHub\quantum`
-*   **Assets:** `d:\GitHub\quantum-assets`
-*   **Link:** The ingestion and sync scripts automatically traverse up one level (`../quantum-assets`) to locate `R2_STAGING`.
+Assets are stored in a parallel repository (`ErikNorris-assets`) to keep the main codebase lightweight (`<50MB`).
+*   **Code:** `d:\GitHub\ErikNorris`
+*   **Assets:** `d:\GitHub\ErikNorris-assets`
+*   **Link:** The ingestion and sync scripts automatically traverse up one level (`../ErikNorris-assets`) to locate `R2_STAGING`.
 
 ### R2 Asset Sync
 Assets are managed physically, not logically.
@@ -229,17 +229,17 @@ Assets are managed physically, not logically.
 *   **Presentation:** `src/pages/history.astro` merges these data streams.
 
 ## Asset Management Strategy
-**Principle:** Keep the Web Repo (`quantum`) lightweight.
-- **Heavy Assets (3D Models, R2 Images, Video):** Do NOT commit. Use Symlinks to `quantum-assets` for local dev.
-  - `public/assets/r2` <==> `quantum-assets/R2_STAGING`
-  - `public/assets/models` <==> `quantum-assets/models`
-- **Site Assets (Icons, UI Graphics, Small placeholders):** Commit directly to `quantum/public`.
+**Principle:** Keep the Web Repo (`ErikNorris`) lightweight.
+- **Heavy Assets (3D Models, R2 Images, Video):** Do NOT commit. Use Symlinks to `ErikNorris-assets` for local dev.
+  - `public/assets/r2` <==> `ErikNorris-assets/R2_STAGING`
+  - `public/assets/models` <==> `ErikNorris-assets/models`
+- **Site Assets (Icons, UI Graphics, Small placeholders):** Commit directly to `ErikNorris/public`.
 
 ### Asset Air-Gap Strategy (Symlink Bridge)
-*   **Principle:** The web repo (`quantum`) must remain lightweight (<50MB).
-*   **Mechanism:** `public/assets/r2` is NOT a folder; it is a **Directory Junction** (Windows) or **Symlink** (Unix) pointing to `../quantum-assets/R2_STAGING`.
+*   **Principle:** The web repo (`ErikNorris`) must remain lightweight (<50MB).
+*   **Mechanism:** `public/assets/r2` is NOT a folder; it is a **Directory Junction** (Windows) or **Symlink** (Unix) pointing to `../ErikNorris-assets/R2_STAGING`.
 *   **Workflow:**
-    1.  Place high-res asset in `D:\GitHub\quantum-assets\R2_STAGING\{project}\3d\`.
+    1.  Place high-res asset in `D:\GitHub\ErikNorris-assets\R2_STAGING\{project}\3d\`.
     2.  Asset immediately becomes available at `http://localhost:4321/assets/r2/{project}/3d/`.
     3.  **No Copying Required.** Avoids duplicate files and git bloat.
 
@@ -253,7 +253,7 @@ Assets are managed physically, not logically.
 *   **Interactive Behavior:** Implements a "Wiggle + Elastic" script where models react to mouse proximity (Parallax) and snap back to origin after manual rotation.
 
 **Workflow:**
-- To add a new 3D model: Put it in `quantum-assets/models`. It automatically appears in `localhost/assets/models`.
+- To add a new 3D model: Put it in `ErikNorris-assets/models`. It automatically appears in `localhost/assets/models`.
 
 ### UI Elements
 *   **Visualization Engine (D3.js Refactor):**
@@ -316,7 +316,7 @@ To standardize the "Technical Datasheet" aesthetic, we established a "Visual Tax
 *   **Decision:** These components are designed to be "Plug-and-Play" via VS Code snippets, enforcing consistent structure across all project pages.
 A hybrid workflow combining human art direction with machine precision.
 *   **Philosophy:** "The Darkroom" (Lightroom) -> "The Machine" (Python) -> "The Cloud" (R2).
-*   **Source of Truth:** High-Res TIFFs (4000px) stored in local `~/Quantum_Workspace/R2_MASTER`.
+*   **Source of Truth:** High-Res TIFFs (4000px) stored in local `~/ErikNorris_Workspace/R2_MASTER`.
 *   **Smart Gallery Engine:** The pipeline reads the manual content markdown *before* generating the gallery. If an image (or animation) is used in the writeup, it is automatically excluded from the bottom gallery to prevent duplication.
 *   **Expanded Taxonomy:** Supports a broad range of technical view types (`iso`, `ortho`, `exploded`, `cutaway`, `schematic`) to support the "Hyper-Functional Brutalism" aesthetic.
 *   **Optimization:** `scripts/process_images.py` uses `Lanczos` resampling to generate `AVIF` (Primary) and `WebP` (Fallback) at standard breakpoints (`xl`, `lg`, `md`, `sm`).

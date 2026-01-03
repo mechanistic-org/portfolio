@@ -27,7 +27,7 @@ python scripts/scaffold_projects.py
 ## 2. Resume Mining ("The Archivist")
 To recover work history from legacy resume files (`.doc`, `.pdf`, `.docx`).
 
-1.  **Staging:** Place files in `d:\GitHub\quantum-workspace\resume_ingest_resistance-is-futile`.
+1.  **Staging:** Place files in `d:\GitHub\ErikNorris-workspace\resume_ingest_resistance-is-futile`.
 2.  **Mining:**
     ```bash
     python scripts/mine_resumes.py

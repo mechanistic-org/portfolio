@@ -4,6 +4,10 @@
     "esbenp.prettier-vscode",
     "bradlc.vscode-tailwindcss",
     "ms-python.python",
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "unifiedjs.vscode-mdx",
+    "tamasfe.even-better-toml",
+    "mikestead.dotenv",
+    "astral-sh.ruff"
   ]
 }

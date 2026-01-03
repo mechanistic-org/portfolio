@@ -34,7 +34,7 @@ Here is the report from the **Council of Voices**.
 ---
 
 ## 3. The Arbiter of Cool ðŸ•¶ï¸ 
-"Okay, the 'Quantum Darkroom' feature? *Chef's kiss.* Documenting your own image pipeline as a 'System Feature' is incredibly meta and on-brand. The 'Scramble Text' glitch effect is a bit 2023, but if it's used sparingly, I'll allow it. The typographyâ€”JetBrains Mono for body text? Bold. It commits to the bit. The 'Physical Spec' print mode optimization is the kind of hidden detail that makes this a *Portfolio* and not just a website. It feels... constructed."
+"Okay, the 'ErikNorris Darkroom' feature? *Chef's kiss.* Documenting your own image pipeline as a 'System Feature' is incredibly meta and on-brand. The 'Scramble Text' glitch effect is a bit 2023, but if it's used sparingly, I'll allow it. The typographyâ€”JetBrains Mono for body text? Bold. It commits to the bit. The 'Physical Spec' print mode optimization is the kind of hidden detail that makes this a *Portfolio* and not just a website. It feels... constructed."
 
 *   **Vibe Check:** "Hyper-Functional" confirmed.
 *   **Highlight:** The "Physical Spec" (Print Mode) is a massive flex.
@@ -42,7 +42,7 @@ Here is the report from the **Council of Voices**.
 
 ---
 
-## 4. The Quantum Observer ðŸŒŒ
+## 4. The ErikNorris Observer ðŸŒŒ
 "The system exhibits high coherence. The `Elements` page reflects the `Style Guide` artifact with near-perfect fidelity, reducing the entropy of the frontend. The `Colophon` is acting as a self-referential singularityâ€”the site is becoming aware of its own construction. However, the presence of hydration artifacts on the homepage suggests a disturbance in the 'Zero-Runtime' timeline. The wave function of the 'Projects' page seems to require an observer (JS) to collapse into visible content. Align this with the Manifesto or risk decoherence."
 
 *   **Entropy:** Low (High Coherence).

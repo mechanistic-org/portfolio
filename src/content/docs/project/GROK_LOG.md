@@ -12,7 +12,7 @@
 
 **The Law:**
 1.  **NO ASSETS IN SRC:** The `src/` directory is for code only.
-2.  **THE VAULT IS SOVEREIGN:** All heavy media lives in `D:\GitHub\quantum-assets\R2_STAGING`.
+2.  **THE VAULT IS SOVEREIGN:** All heavy media lives in `D:\GitHub\ErikNorris-assets\R2_STAGING`.
 3.  **SYMLINKS ARE THE BRIDGE:** We access assets *only* via the symlink `public/assets/r2` -> `R2_STAGING`.
 4.  **VERIFICATION:** If you see a file path that does not start with `/assets/r2/`, it is a violation.
 
@@ -66,6 +66,6 @@
 1.  **Implicit vs. Explicit:** The Agent must assume "Missing Asset" = "Needs Retrieval", NOT "Needs Creation".
 2.  **Localhost Air Gap:** The Agent must valididate Symlinks before questioning existence. A failure locally is not a failure globally.
 3.  **Creative License Limits:** Code is mutable; Content/Assets are immutable (unless explicitly in a "Constructed Reality" context like *Dreamjob* OR explicitly authorized).
-4.  **Quantum Exception:** For defined "Dream" projects, Synthesis is allowed if no historical truth exists.
+4.  **ErikNorris Exception:** For defined "Dream" projects, Synthesis is allowed if no historical truth exists.
 
 

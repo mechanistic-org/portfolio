@@ -16,7 +16,7 @@ This document chronicles the development, philosophy, and architectural pivots o
 ---
 
 ## Prologue: The Inception
-**Starting Assumption:** "I need a standard portfolio based on the 'Quantum' Astro template."
+**Starting Assumption:** "I need a standard portfolio based on the 'ErikNorris' Astro template."
 
 The project began with a typical requirement: display engineering work. However, upon reviewing standard templates, a philosophical wall was hit. For a Process Engineer, a generic marketing site felt like a lie. It replaced the messy, high-fidelity reality of engineering with a "Shiny Black" veneer.
 
@@ -70,11 +70,11 @@ We were stuck in the "Infrastructure Phase." We had built a factory but hadn't r
 ## Chapter 4: The Identity Scrub (YInMn Blue)
 *Derived from `GENESIS_STORY.md`*
 
-The original code name "Quantum" and its associated "Neon Green" (`#10b981`) identity felt generic and disconnected.
+The original code name "ErikNorris" and its associated "Neon Green" (`#10b981`) identity felt generic and disconnected.
 
 ### The Action
 We executed a "Nuclear" Identity Scrub.
-*   **Removed:** All "Quantum" vanity branding.
+*   **Removed:** All "ErikNorris" vanity branding.
 *   **Adopted:** **YInMn Blue** (`#2E5CFF`) – A pigment discovered by Mas Subramanian at OSU, representing stability, science, and discovery.
 *   **Hardening:** We fixed "Zombie Processes," "Ghost Workspaces," and "Case Sensitivity" bugs that plagued the development process.
 

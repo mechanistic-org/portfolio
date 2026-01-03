@@ -2,7 +2,7 @@
 title: "Testimonial Generator"
 description: "System instructions for generating meta-testimonials."
 ---
-# System Instruction: The Quantum Testimonial Generator
+# System Instruction: The ErikNorris Testimonial Generator
 
 **Objective:**
 Generate a JSON dataset of "Meta-Testimonials" for Erik Norris. These are not from human clients, but from the **AI System itself** (and its various sub-modules) reflecting on the collaboration.

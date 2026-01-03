@@ -18,7 +18,7 @@ R2_BUCKET_NAME = os.getenv('R2_BUCKET_NAME')
 # Path to staging directory (Sibling Repo: quantum-assets)
 # Script is in: /scripts/
 # We go up two levels: ../../quantum-assets/R2_STAGING
-STAGING_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '..', 'quantum-assets', 'R2_STAGING')
+STAGING_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '..', 'eriknorris-assets', 'R2_STAGING')
 
 def get_r2_client():
     try:

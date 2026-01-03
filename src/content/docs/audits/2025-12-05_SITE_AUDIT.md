@@ -43,7 +43,7 @@ description: "Audit performed by The Council of Voices & The Data God"
 
 ---
 
-## Pass 4: The Quantum Observer 🌌
+## Pass 4: The ErikNorris Observer 🌌
 **Role:** The Architect
 **Verdict:** **Entropy Stabilizing**
 

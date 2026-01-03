@@ -8,11 +8,11 @@ These prompts were used to generate the "Visual Taxonomy" assets for the `dreamj
 
 ## 1. Static Hero (`hero`)
 *   **Filename:** `dreamjob-hero-01.jpg`
-*   **Prompt:** A hyper-realistic close-up of a futuristic mechanical engineering assembly, representing the pinnacle of high-performance design. The object is a complex fusion of machined titanium, carbon fiber, and exposed circuitry. Lighting is cinematic and moody, with deep shadows and bright **electric blue accent lights (hex #2E5CFF)** highlighting the internal mechanism. The aesthetic is **'Quantum Laboratory'**—clean, precise, and scientific. Shallow depth of field. 8k resolution, sterile environment, white room reflection. Cinematic.
+*   **Prompt:** A hyper-realistic close-up of a futuristic mechanical engineering assembly, representing the pinnacle of high-performance design. The object is a complex fusion of machined titanium, carbon fiber, and exposed circuitry. Lighting is cinematic and moody, with deep shadows and bright **electric blue accent lights (hex #2E5CFF)** highlighting the internal mechanism. The aesthetic is **'ErikNorris Laboratory'**—clean, precise, and scientific. Shallow depth of field. 8k resolution, sterile environment, white room reflection. Cinematic.
 
 ## 2. Isometric View (`iso`)
 *   **Filename:** `dreamjob-iso-01.jpg`
-*   **Prompt:** Isometric view of a futuristic quantum engine core. Isolated on a pure black background (#000000). The object is dense, metallic, and highly detailed with gold and **electric blue** accents. Technical illustration style but photorealistic rendering. High contrast.
+*   **Prompt:** Isometric view of a futuristic ErikNorris engine core. Isolated on a pure black background (#000000). The object is dense, metallic, and highly detailed with gold and **electric blue** accents. Technical illustration style but photorealistic rendering. High contrast.
 
 ## 3. Schematic View (`schematic`)
 *   **Filename:** `dreamjob-schematic-01.jpg`
@@ -20,7 +20,7 @@ These prompts were used to generate the "Visual Taxonomy" assets for the `dreamj
 
 ## 4. Detail View (`detail`)
 *   **Filename:** `dreamjob-detail-01.jpg`
-*   **Prompt:** Extreme macro photography of woven carbon fiber texture intersecting with brushed titanium. Shallow depth of field. The lighting highlights the weave pattern. **Quantum blue** light reflection. 8k resolution.
+*   **Prompt:** Extreme macro photography of woven carbon fiber texture intersecting with brushed titanium. Shallow depth of field. The lighting highlights the weave pattern. **ErikNorris blue** light reflection. 8k resolution.
 
 ## 5. Cutaway View (`cutaway`)
 *   **Filename:** `dreamjob-cutaway-01.jpg`
@@ -41,23 +41,23 @@ These prompts were used to generate the "Visual Taxonomy" assets for the `dreamj
 
 ## 9. Context View (`context`)
 *   **Filename:** `dreamjob-context-01.jpg`
-*   **Prompt:** The futuristic quantum engine integrated into a high-tech server room bulkhead. Dark, moody, industrial environment. Cables and pipes connecting to it. Cinematic lighting, **blue status LEDs**.
+*   **Prompt:** The futuristic ErikNorris engine integrated into a high-tech server room bulkhead. Dark, moody, industrial environment. Cables and pipes connecting to it. Cinematic lighting, **blue status LEDs**.
 
 ## 10. Prototype View (`prototype`)
 *   **Filename:** `dreamjob-prototype-01.jpg`
-*   **Prompt:** Raw machined aluminum version of the quantum engine. Unfinished metal, tool marks visible. Sitting on a workbench with calipers and tools. Industrial lighting, depth of field.
+*   **Prompt:** Raw machined aluminum version of the ErikNorris engine. Unfinished metal, tool marks visible. Sitting on a workbench with calipers and tools. Industrial lighting, depth of field.
 
 ## 11. Assembly View (`assembly`)
 *   **Filename:** `dreamjob-assembly-01.jpg`
-*   **Prompt:** Robotic arms assembling the quantum engine. Sparks, motion blur. High-tech factory setting. Cinematic lighting.
+*   **Prompt:** Robotic arms assembling the ErikNorris engine. Sparks, motion blur. High-tech factory setting. Cinematic lighting.
 
 ## 12. Teardown View (`teardown`)
 *   **Filename:** `dreamjob-teardown-01.jpg`
-*   **Prompt:** The quantum engine disassembled on a dark table. Parts laid out in an organized knolling pattern. Oil stains, worn metal textures. Overhead view.
+*   **Prompt:** The ErikNorris engine disassembled on a dark table. Parts laid out in an organized knolling pattern. Oil stains, worn metal textures. Overhead view.
 
 ## 13. Test View (`test`)
 *   **Filename:** `dreamjob-test-01.jpg`
-*   **Prompt:** The quantum engine glowing **cold blue** in a cryo-testing chamber. Frost, liquid nitrogen fog, monitoring cables attached. Intense lighting, **superconductor** aesthetic.
+*   **Prompt:** The ErikNorris engine glowing **cold blue** in a cryo-testing chamber. Frost, liquid nitrogen fog, monitoring cables attached. Intense lighting, **superconductor** aesthetic.
 
 ## 14. Diagram View (`diagram`)
 *   **Filename:** `dreamjob-diagram-01.jpg`
@@ -65,7 +65,7 @@ These prompts were used to generate the "Visual Taxonomy" assets for the `dreamj
 
 ## 15. Render View (`render`)
 *   **Filename:** `dreamjob-render-01.jpg`
-*   **Prompt:** Studio lighting setup of the quantum engine. Perfect reflections, clean dark grey background. High-end product photography style.
+*   **Prompt:** Studio lighting setup of the ErikNorris engine. Perfect reflections, clean dark grey background. High-end product photography style.
 
 ## 16. UI View (`ui`)
 *   **Filename:** `dreamjob-ui-01.jpg`

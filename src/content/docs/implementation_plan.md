@@ -1,10 +1,10 @@
 ---
 title: "Implementation Plan"
 slug: "implementation_plan"
-description: "Strategic plan for Quantum Systems Refinement and narrative restructuring."
+description: "Strategic plan for ErikNorris Systems Refinement and narrative restructuring."
 ---
 
-# Implementation Plan: Quantum Systems Refinement (Post-Audit)
+# Implementation Plan: ErikNorris Systems Refinement (Post-Audit)
 
 **Objective:** Address the "Council of Voices" feedback while reinforcing the "15-20 Year Architecture" narrative.
 **Strategic Pivot:** "Dreamjob" is not a placeholder; it is the *destination* of the timeline. We will contextualize it as such.
@@ -21,7 +21,7 @@ description: "Strategic plan for Quantum Systems Refinement and narrative restru
 ### 1. Narrative & Content (The Recruiter / The Architect)
 Hardening the story and "Maintaing Face".
 
-#### [MODIFY] [dreamjob.mdx](file:///d:/GitHub/quantum/src/content/projects/dreamjob.mdx)
+#### [MODIFY] [dreamjob.mdx](file:///d:/GitHub/ErikNorris/src/content/projects/dreamjob.mdx)
 -   **Add Impact Metrics:** Add hard numbers to the `impact` field (e.g., "Reduced documentation time by 40%").
 -   **Contextualize the Construct:** Add a "Why this exists" section to the intro. Explain that this represents the *next* 20 years of work.
 -   **Add Call to Action:** "Ready to build this? [Contact Protocol]"
@@ -29,18 +29,18 @@ Hardening the story and "Maintaing Face".
 ### 2. Navigation & UX (The Brutal Roast)
 Fixing the "generic" feel and improving flow.
 
-#### [MODIFY] [navData.json.ts](file:///d:/GitHub/quantum/src/config/navData.json.ts)
+#### [MODIFY] [navData.json.ts](file:///d:/GitHub/ErikNorris/src/config/navData.json.ts)
 -   **Rename:** "Work" -> "Projects" (Clearer).
 -   **Prune:** Ensure the Dropdowns aren't overwhelming (Resume has too many items? Verify visually).
 
 ### 3. Visuals & "The Soul" (The Arbiter of Cool)
 Adding the "Grease" and "Analog" feel.
 
-#### [MODIFY] [BaseLayout.astro](file:///d:/GitHub/quantum/src/layouts/BaseLayout.astro) (or Global CSS)
+#### [MODIFY] [BaseLayout.astro](file:///d:/GitHub/ErikNorris/src/layouts/BaseLayout.astro) (or Global CSS)
 -   **Noise Overlay:** Add a subtle SVG noise filter to the `<body>` or a fixed overlay div to give it texture.
 -   **Scanlines:** Optional CSS radial gradient to vignette the edges.
 
-#### [MODIFY] [Header.astro](file:///d:/GitHub/quantum/src/components/Navigation/Header.astro)
+#### [MODIFY] [Header.astro](file:///d:/GitHub/ErikNorris/src/components/Navigation/Header.astro)
 -   **Micro-interactions:** Ensure hover states are brisk and "snappy".
 
 ## Verification Plan

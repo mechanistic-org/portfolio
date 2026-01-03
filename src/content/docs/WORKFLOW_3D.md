@@ -194,7 +194,7 @@ If your model looks solid but "flat" (missing the holographic flash), it is like
 ### A. Web Assets (GLB)
 *   **Format:** `glTF Binary (.glb)`.
 *   **Compression:** Draco (Recommended).
-*   **Location:** `../quantum-assets/R2_STAGING/{slug}/` (Props) or `R2_STAGING/_site/` (Branding).
+*   **Location:** `../ErikNorris-assets/R2_STAGING/{slug}/` (Props) or `R2_STAGING/_site/` (Branding).
 *   **Naming Convention (Branding):**
     *   **Schema:** `EN_{Asset}_{Material}_{Config}.glb`
     *   **Example:** `EN_Logo_MatteCarbon.glb`

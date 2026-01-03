@@ -8,17 +8,17 @@ sidebar:
 *   **Usage:** `python ingest_data.py`
 
 ### `scripts/process_images.py` (The Image Engine)
-*   **Purpose:** Optimizes images from the local `Quantum_Workspace` and places them in the `R2_STAGING` repo.
+*   **Purpose:** Optimizes images from the local `ErikNorris_Workspace` and places them in the `R2_STAGING` repo.
 *   **Usage:** 
     *   `python scripts/process_images.py {slug}` (Single Project)
     *   `python scripts/process_images.py --all` (Batch)
-*   **Input:** `~/Quantum_Workspace/R2_MASTER/{slug}/*.tif`
-*   **Output:** `../quantum-assets/R2_STAGING/{slug}/*.{avif,webp}`
+*   **Input:** `~/ErikNorris_Workspace/R2_MASTER/{slug}/*.tif`
+*   **Output:** `../ErikNorris-assets/R2_STAGING/{slug}/*.{avif,webp}`
 
 ## Maintenance Utilities
 
 ### `scripts/setup_workspace.py` (The Factory)
-*   **Purpose:** Initializes the local directory structure (`~/Quantum_Workspace`) based on the projects defined in `Main.csv`.
+*   **Purpose:** Initializes the local directory structure (`~/ErikNorris_Workspace`) based on the projects defined in `Main.csv`.
 *   **Usage:** `python scripts/setup_workspace.py`
 *   **When to run:** When onboarding a new machine or after adding new projects to the CSV.
 

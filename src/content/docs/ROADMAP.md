@@ -89,7 +89,7 @@ sidebar:
     *   **[Content] Origin Story:** Mined the "Control 24" archives using the new protocol, drafting the "Code Name Curtis" and "Solo Governance" narratives.
     *   **[Artifact] The Grok Log:** Established `GROK_LOG.md` as the project constitution to prevent regression.
 *   **[Polish] Control-24 & Symlink Protocol:**
-    *   **[Architecture] Symlink Bridge:** Established `public/assets/r2` -> `../quantum-assets/R2_STAGING` symlink as the Definitive Local Dev Strategy. Eliminated repo bloat while maintaining instant asset access.
+    *   **[Architecture] Symlink Bridge:** Established `public/assets/r2` -> `../ErikNorris-assets/R2_STAGING` symlink as the Definitive Local Dev Strategy. Eliminated repo bloat while maintaining instant asset access.
     *   **[Content] Control-24 Restoration:** Stabilized the `control-24` case study with verified "China Crisis" evidence, "Seven Millimeter" narrative, and a transparent "Cinematic Hero" layer.
     *   **[Theme] Hyperspace Patch:** Fixed `Hyperspace.astro` to render the `heroImage` (30% opacity) in the intro layer, creating a verified "Movie Poster" aesthetic.
 *   **[Polish] C|24 Interactive Layers:**
@@ -134,7 +134,7 @@ sidebar:
 *   **[Strategy] Genesis Analysis:** Conducted a deep architectural audit ("The Crisis of Faith") validating the "Infrastructure First" approach and establishing the "Builder vs. Operator" phase transition.
 *   **[Artifact] Genesis Story:** Mined the "Sonnie's Edge" / "Bucking Foundation" narrative into `src/content/docs/backlog/GENESIS_STORY.md`.
 *   **[Maintenance] Process Cleanup:** Identified and terminated zombie `curl` processes from legacy asset verification tasks to restore system stability.
-*   **[Refactor] Identity Scrub II:** Renamed internal package to `erik-norris-portfolio` and migrated system events from `quantum:boot` to `system:boot`.
+*   **[Refactor] Identity Scrub II:** Renamed internal package to `erik-norris-portfolio` and migrated system events from `ErikNorris:boot` to `system:boot`.
 *   **[Fix] Workspace Stability:** Created `ErikNorris.code-workspace` to resolve "Ghost Workspace" issues.
 *   **[Architecture] Zero-Bloat Pivot:** Abandoned `astro-adapter-cloudflare` in favor of `output: static` + Manual Pages Functions to resolve "Too Many Modules" build failure.
 *   **[Fix] Asset Regression:** Regenerated "Dreamjob" visual assets (converted Green -> Blue) and forced a `--remote` sync to correct the R2 Source of Truth.
@@ -159,7 +159,7 @@ sidebar:
 *   **[Materials]** Refined "Matte Forged Carbon" recipe with **Tri-planar Projection** to solve UV stretching artifacts.
 *   **[Feature] 3D Pipeline 2.0:** Integrated Adobe Substance 3D with "Harvesting Protocol" (Anti-Lock-In) and "Unlimited Asset" strategy.
 *   **[Design] Material Tokens:** Defined "Matte Forged Carbon" and "Titanium Ceramic" recipes in `STYLE_GUIDE.md`.
-*   **[Refactor] Identity Polish:** Scrubbed "Quantum" vanity branding from public documentation to align with "Erik Norris" identity.
+*   **[Refactor] Identity Polish:** Scrubbed "ErikNorris" vanity branding from public documentation to align with "Erik Norris" identity.
 *   **[Architecture] D3 Migration:** Completely removed `recharts` dependency. Refactored all dashboard visualizations (`SkillRadar`, `PhaseDonut`) to lightweight, native D3.js implementations.
 *   **[Feature] Impact Resonance:** Implemented a new physics-based "System Velocity" gauge to replace the static placeholder in the Mini-Dashboard.
 *   **[Fix] Docs System:** Restored documentation builds by implementing a robust `import.meta.glob` loader for the sidebar, bypassing Content Collection instability.
@@ -181,7 +181,7 @@ sidebar:
 *   **[Fix] ModelViewer:** Restored "Neil Armstrong" resilience fallback for components missing a custom GLB.
 *   **[SEO] Metadata:** Optimized Homepage title ("High-Performance Mechanical Design") and meta description.
 *   **[Fix] Chart Layout:** Resolved regression where Skill/Part graphs were stacking vertically on desktop. Restored side-by-side grid layout (`grid-cols-1 md:grid-cols-2`) in `[...slug].astro`.
-*   **[Fix] Asset Staging:** Corrected `R2_STAGING` path resolution. Enforced `../quantum-assets/R2_STAGING` as the single Source of Truth to prevent "Ghost Asset" confusion.
+*   **[Fix] Asset Staging:** Corrected `R2_STAGING` path resolution. Enforced `../ErikNorris-assets/R2_STAGING` as the single Source of Truth to prevent "Ghost Asset" confusion.
 *   **[Fix] Extension Mismatch:** Updated `dreamjob.mdx` to reference generated `.png` assets, resolving 404 errors caused by legacy `.jpg` references.
 *   **[Audit]** Established "The Council of Voices" Site Audit Protocol (`docs/prompts/SITE_AUDIT_PROMPT.md`).
 *   **[Audit]** Archived initial site benchmark: `docs/audits/2025-12-04_SITE_AUDIT.md`.
@@ -222,14 +222,14 @@ sidebar:
 *   **Site User Manual:** Added `/about/ifu` page documenting site maintenance.
 *   **Construction Badge:** Added environment-aware status indicator ("LOCAL DEV" / "UNDER CONSTRUCTION").
 *   **Documentation:** Restructured into `docs/` and migrated User Manual.
-*   **Asset Workflow Refactor:** Externalized `R2_STAGING` to sibling directory (`../quantum-assets`).
+*   **Asset Workflow Refactor:** Externalized `R2_STAGING` to sibling directory (`../ErikNorris-assets`).
 *   **Marquee Refactor:** Unified Homepage and Colophon marquees, fixed infinite loop and spacing issues.
 *   **Boot Sequence Refactor:** Converted from forced initial load effect to optional "Restart" action in footer.
 *   **Build Stability:** Resolved Keystatic and a11y dependency conflicts.
 *   **Footer Update:** Replaced Debug toggle with System Restart button.
 *   **Filter Menu Refinement:** Removed redundant "[ All ... ]" options, implemented hierarchical filtering, and added "Reset View" logic.
 - [x] **Swarm Physics Tuning:** Replaced "Glycerin" feel with "Gravity Well". Dreamjob node now attracts cursor (Strength 5.0) and grows on proximity (45px -> 85px).
-- [x] **Asset Sovereignty:** Codified "Quantum Laws" in Onboarding Prompt to prevent unauthorized asset generation.
+- [x] **Asset Sovereignty:** Codified "ErikNorris Laws" in Onboarding Prompt to prevent unauthorized asset generation.
 - [x] **Dreamjob Restoration:** Restored canonical "Mechanical Arm" hero asset for Dreamjob project (fixed 404).
 - [x] **Layout Polish:** Adjusted Swarm top margin (140px) for balanced vertical distribution.
 *   **Rendering Fix:** Resolved critical rendering issue (blank page) on Project Detail pages.
@@ -410,7 +410,7 @@ sidebar:
 *   **[3D] Express Lane:** Established direct GLB export pipeline from Substance Painter to Web, bypassing Blender-induced geometry corruption ("White Blob").
 *   **[3D] Anisotropy:** Validated `KHR_materials_anisotropy` workflow for "Holographic" Carbon Fiber using the `pbr-metal-roughness-anisotropy-angle` shader.
 *   **[Dev] Asset Forensics:** Built `test-logo.astro`, a hardware-accelerated diagnostic lab for inspecting PBR channels in the browser.
-*   **[FIX] 3D Pipeline:** Validated "Option B" (Quantum_ORM) as the primary workflow for Carbon materials. Direct export ("Option A") is deprecated for complex shaders due to Alpha channel bugs.
+*   **[FIX] 3D Pipeline:** Validated "Option B" (ErikNorris_ORM) as the primary workflow for Carbon materials. Direct export ("Option A") is deprecated for complex shaders due to Alpha channel bugs.
 
 *   **Documentation:** Restructured `docs/` into 4 distinct groups (System, Workflows, Reference, Prompts) for better discoverability.
 *   **Feature:** Implemented the **Universal Inbox** (`data_source/inbox/`) with a "Smart Filename" Schema (`slug.context.ext`) for zero-friction content ingestion.
@@ -427,7 +427,7 @@ sidebar:
 *   **[Design] The Triad:** Defined the core material palette: "Matte Forged Carbon", "Titanium Ceramic", and "Weathered Steel".
 
 #### [2025-12-06] The "Polish Arc"
-*   **[Polish] Branding Scrub:** Removed "Fortississimo" and "Quantum" vanity branding from `dreamjob.mdx` and system roadmaps to enforce "Erik Norris" identity.
+*   **[Polish] Branding Scrub:** Removed "Fortississimo" and "ErikNorris" vanity branding from `dreamjob.mdx` and system roadmaps to enforce "Erik Norris" identity.
 *   **[Feature] Pipeline Integration:** Integrated `SETUP_PLASTICITY_PIPELINE.md` into the global "System Manual" sidebar group.
 *   **[UI] Back Button Standardization:** Implemented `BackButton.astro` component to enforce consistent "Outline + Arrow" navigation across 404 and Colophon pages.
 *   **[Fix] Tinnitus Restoration:** Fixed broken external `noise.svg` dependency by baking a base64 Data URI directly into `global.css` (`.bg-noise`), restoring the signature "Hyper-Functional" grain overlay.
@@ -440,9 +440,9 @@ sidebar:
 
 #### [2025-12-11] The "Identity Scrub" & Stability Arc
 *   **[Identity] The Exorcism:** Executed full "Identity Scrub".
-    *   Renamed Presets: `Quantum_ORM` -> `EN_ORM`.
-    *   Renamed Docs: `quantum-darkroom.mdx` -> `darkroom.mdx`.
-    *   **Audit Result:** Confirmed zero remaining `quantum-` CSS classes.
+    *   Renamed Presets: `ErikNorris_ORM` -> `EN_ORM`.
+    *   Renamed Docs: `ErikNorris-darkroom.mdx` -> `darkroom.mdx`.
+    *   **Audit Result:** Confirmed zero remaining `ErikNorris-` CSS classes.
 *   **[Fix] Build Resilience:** Patched `SidebarNav.astro` and `[...slug].astro` to filter out legacy markdown files (missing frontmatter) that were causing `localeCompare` crashes.
 *   **[Feature] Social Presence:** Added dedicated "CV" icon (YinMn Blue) to the global navigation.
 *   **[Polish] Noise:** Increased noise overlay opacity to `0.05` for enhanced brutalist texture.
@@ -457,7 +457,7 @@ sidebar:
 
 *   **[Fix] Radial View:** Resolved "Blank Screen" critical failure by identifying and restoring missing DOM container (`div#view-radial`) in `index.astro`.
 *   **[Refactor] Taxonomy Cleanup:** Eliminated "Other" `industry` category by remapping 20+ projects to "Pro Audio", "Robotics", and "Computing" via `fix_industries.py`.
-*   **[Refactor] Radial Branding:** Removed "Quantum" labels from Radial Taxonomy, replacing them with "Erik Norris".
+*   **[Refactor] Radial Branding:** Removed "ErikNorris" labels from Radial Taxonomy, replacing them with "Erik Norris".
 *   **[Safety] D3 Hardening:** Patched `RadialTaxonomy.tsx` to handle 0x0 container dimensions gracefully (preventing negative radius crashes).
 
 ## 🚀 The Horizon (V6)
@@ -475,7 +475,7 @@ sidebar:
 
 ## 🧊 The Backlog (Icebox)
 *   **[Refactor] Operation Identity Shift:**
-    *   **Goal:** Rename repo (`quantum` -> `eriknorris`) and local folders.
+    *   **Goal:** Rename repo (`ErikNorris` -> `eriknorris`) and local folders.
     *   **Status:** Aborted (Dec 6, 2025). Too risky for current phase.
     *   **Plan:** Requires "Nuclear Option" script + manual folder renaming. Saved for post-V1.0 stability.
 *   **[Strategy] Visual Log Integration:**

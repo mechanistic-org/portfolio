@@ -34,7 +34,7 @@ graph LR
 ---
 
 ## 2. The Hybrid Content System
-Quantum uses a **Hybrid Architecture** to manage project data.
+ErikNorris uses a **Hybrid Architecture** to manage project data.
 
 ### Structured Data (CSV)
 *   **Source:** `data_source/Main.csv`, `Expertise.csv`
@@ -59,7 +59,7 @@ To serve different user personas (Recruiters vs. Engineers), we support disparat
 ### Phase 1: Capture (The Universal Inbox)
 *   **Location:** `data_source/inbox/`
 *   **Philosophy:** "Universal Inbox" Pattern. External scripts or humans dump files here; the engine consumes them.
-*   **Research Phase:** Use **NotebookLM** as the pre-ingestion "Chief of Staff" to process large project archives (PDFs, Docs) into structured specifications. See [The NotebookLM Bridge](file:///d:/GitHub/quantum/src/content/docs/NOTEBOOK_LM_BRIDGE.md).
+*   **Research Phase:** Use **NotebookLM** as the pre-ingestion "Chief of Staff" to process large project archives (PDFs, Docs) into structured specifications. See [The NotebookLM Bridge](file:///d:/GitHub/ErikNorris/src/content/docs/NOTEBOOK_LM_BRIDGE.md).
 *   **Rule:** Use the **Smart Filename Schema**: `{slug}.{context}.{ext}`
     *   **Simple:** `xbox.mp3` (Implies generic context)
     *   **Contextual:** `xbox.technical.mp3` (Instructs LLM to focus on metrics)
@@ -131,7 +131,7 @@ Check the local development server (`npm run dev`) to see your changes live.
 # Content Strategy & Workflow
 
 ## The Hybrid Content System
-Quantum uses a **Hybrid Architecture** to manage project data. This approach combines the structured efficiency of CSVs with the expressive power of Markdown.
+ErikNorris uses a **Hybrid Architecture** to manage project data. This approach combines the structured efficiency of CSVs with the expressive power of Markdown.
 
 ### 1. Structured Data (CSV)
 *   **Source:** `data_source/Main.csv`, `Expertise.csv`, etc.

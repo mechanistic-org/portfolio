@@ -1,14 +1,31 @@
 {
-	"folders": [
-		{
-			"path": "."
-		},
-		{
-			"path": "../quantum-assets"
-		},
-		{
-			"path": "../quantum-workspace"
-		}
-	],
-	"settings": {}
+"folders": [
+{
+"name": "Erik Norris (Repo)",
+"path": "."
+},
+{
+"name": "Assets (R2 Vault)",
+"path": "../eriknorris-assets"
+},
+{
+"name": "Workspace (Data Staging)",
+"path": "../eriknorris-workspace"
+},
+{
+"name": "Portfolio (Local Raw)",
+"path": "D:/portfolio"
+},
+{
+"name": "Portfolio (Network Raw)",
+"path": "//morespace/projects/portfolio"
+}
+],
+"settings": {
+"files.exclude": {
+"**/node_modules": true,
+"**/dist": true,
+"**/.astro": true
+}
+}
 }

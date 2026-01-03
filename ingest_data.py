@@ -23,7 +23,7 @@ LOCAL_R2_DIR = "public/assets/r2"
 # Determine Staging Dir
 # Priority: 1. Env Var, 2. Sibling Directory, 3. Local Directory
 STAGING_DIR_ENV = os.environ.get("R2_STAGING_PATH")
-STAGING_DIR_SIBLING = os.path.abspath(os.path.join(os.getcwd(), "..", "quantum-assets", "R2_STAGING"))
+STAGING_DIR_SIBLING = os.path.abspath(os.path.join(os.getcwd(), "..", "eriknorris-assets", "R2_STAGING"))
 STAGING_DIR_LOCAL = os.path.abspath("R2_STAGING")
 
 if STAGING_DIR_ENV and os.path.exists(STAGING_DIR_ENV):

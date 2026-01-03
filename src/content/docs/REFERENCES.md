@@ -1,10 +1,11 @@
 ﻿---
-title: "Project References & Context"
+title: "Project References & Context
+"
 slug: "references"
 ---
 # Project References & Context
 
-This document maintains a list of external documentation, style guides, and technical references that inform the Quantum project.
+This document maintains a list of external documentation, style guides, and technical references that inform the ErikNorris project.
 
 ## Core Technologies
 *   **Astro:** [Documentation](https://docs.astro.build/en/getting-started/)
