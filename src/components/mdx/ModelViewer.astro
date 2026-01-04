@@ -12,6 +12,8 @@ const DEFAULT_POSTER = "/assets/branding/EN_Badge_wire_white_1200.svg";
 const NEIL_ARMSTRONG_GLB = "https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb";
 const MOON_ENV = "https://modelviewer.dev/shared-assets/environments/moon_1k.hdr";
 
+import { getAssetUrl } from "../../utils/assets";
+
 const {
 	src = NEIL_ARMSTRONG_GLB,
 	alt = "Neil Armstrong",
@@ -20,6 +22,9 @@ const {
 	cameraOrbit = "0deg 75deg 105%",
 	autoRotate = false,
 } = Astro.props;
+
+const finalSrc = getAssetUrl(src);
+const finalPoster = getAssetUrl(poster);
 
 const isFallback = src === NEIL_ARMSTRONG_GLB;
 const finalEnv = environmentImage || (isFallback ? MOON_ENV : "neutral");
@@ -31,8 +36,8 @@ const uid = "mv-" + Math.random().toString(36).substr(2, 9);
 >
 	<model-viewer
 		id={uid}
-		src={src}
-		poster={poster}
+		src={finalSrc}
+		poster={finalPoster}
 		alt={alt}
 		auto-rotate={autoRotate}
 		camera-controls

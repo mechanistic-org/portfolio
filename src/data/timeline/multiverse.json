@@ -1,1752 +1,1733 @@
 {
-  "nodes": [
-    {
-      "id": "dreamjob",
-      "name": "dreamjob",
-      "group": "awesomejob",
-      "color": "#8da80c",
-      "value": 224.1558951327243,
-      "year": 2025,
-      "start_date": "2025-11-23T00:00:00",
-      "end_date": "2040-12-31T00:00:00",
-      "category": "Career Goal",
-      "industry": "Future",
-      "skills": [
-        "Iterative Prototyping",
-        "Prototyping",
-        "Tolerance Analysis",
-        "Reliability Testing",
-        "Design for Manufacturing (DFM)"
-      ],
-      "img": "/assets/placeholders/abstract.jpg"
-    },
-    {
-      "id": "Freelance",
-      "name": "Freelance",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 208.7242190053737,
-      "year": 2022,
-      "start_date": "2022-09-01T00:00:00",
-      "end_date": "2025-11-23T00:00:00",
-      "category": "Various",
-      "industry": "Other",
-      "skills": [
-        "Prototyping",
-        "Design for Manufacturing (DFM)",
-        "CAD (Computer-Aided Design)",
-        "Testing Automation",
-        "Tolerance Analysis"
-      ],
-      "img": "/assets/r2/freelance/hero-sm.webp"
-    },
-    {
-      "id": "Makeline",
-      "name": "Makeline",
-      "group": "Hyphen",
-      "color": "#726add",
-      "value": 199.73786103901938,
-      "year": 2021,
-      "start_date": "2021-05-01T00:00:00",
-      "end_date": "2022-08-24T00:00:00",
-      "category": "Foodservice Automation",
-      "industry": "Robotics & Automation",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "Tolerance Analysis",
-        "Prototyping",
-        "Iterative Prototyping",
-        "Reliability Testing"
-      ],
-      "img": "/assets/r2/makeline/hero-sm.webp"
-    },
-    {
-      "id": "Dispensers",
-      "name": "Dispensers",
-      "group": "Hyphen",
-      "color": "#726add",
-      "value": 193.834963087817,
-      "year": 2021,
-      "start_date": "2021-12-01T00:00:00",
-      "end_date": "2022-08-24T00:00:00",
-      "category": "Foodservice Automation",
-      "industry": "Robotics & Automation",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Design for Manufacturing (DFM)",
-        "Iterative Prototyping",
-        "Testing Automation",
-        "Prototyping"
-      ],
-      "img": "/assets/r2/dispensers/hero-sm.webp"
-    },
-    {
-      "id": "Backsplash",
-      "name": "Backsplash",
-      "group": "Hyphen",
-      "color": "#726add",
-      "value": 190.0948615284142,
-      "year": 2021,
-      "start_date": "2021-07-01T00:00:00",
-      "end_date": "2021-12-31T00:00:00",
-      "category": "Electromechanical Assy",
-      "industry": "Robotics & Automation",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Prototyping",
-        "Design for Manufacturing (DFM)",
-        "Iterative Prototyping",
-        "Testing Automation"
-      ],
-      "img": "/assets/r2/backsplash/hero-sm.webp"
-    },
-    {
-      "id": "Portion Cup",
-      "name": "Portion Cup",
-      "group": "Hyphen",
-      "color": "#726add",
-      "value": 184.63439094112067,
-      "year": 2021,
-      "start_date": "2021-05-01T00:00:00",
-      "end_date": "2021-08-15T00:00:00",
-      "category": "Electromechanical Assy",
-      "industry": "Robotics & Automation",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Tolerance Analysis",
-        "Testing Automation",
-        "Product Testing",
-        "Prototyping"
-      ],
-      "img": "/assets/r2/portion-cup/hero-sm.webp"
-    },
-    {
-      "id": "Pet Scale",
-      "name": "Pet Scale",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 175.37669618283368,
-      "year": 2019,
-      "start_date": "2019-02-01T00:00:00",
-      "end_date": "2019-03-15T00:00:00",
-      "category": "Consumer Appliance",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Problem Solving",
-        "Testing Automation",
-        "Agile Methodology",
-        "Data Analysis",
-        "Design Planning"
-      ],
-      "img": "/assets/r2/pet-scale/hero-sm.webp"
-    },
-    {
-      "id": "battery lock",
-      "name": "battery lock",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 184.4439089914137,
-      "year": 2019,
-      "start_date": "2019-01-01T00:00:00",
-      "end_date": "2019-04-15T00:00:00",
-      "category": "Electromechanical Mechanism",
-      "industry": "Other",
-      "skills": [
-        "Iterative Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Reliability Testing",
-        "Prototyping",
-        "Materials Knowledge"
-      ],
-      "img": "/assets/r2/battery-lock/hero-sm.webp"
-    },
-    {
-      "id": "IOT module",
-      "name": "IOT module",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 183.2178857704904,
-      "year": 2018,
-      "start_date": "2018-11-01T00:00:00",
-      "end_date": "2019-02-01T00:00:00",
-      "category": "Embedded Device",
-      "industry": "Other",
-      "skills": [
-        "Iterative Prototyping",
-        "Design for Manufacturing (DFM)",
-        "Tolerance Analysis",
-        "Product Testing",
-        "Prototyping"
-      ],
-      "img": "/assets/r2/iot-module/hero-sm.webp"
-    },
-    {
-      "id": "bay wheels",
-      "name": "bay wheels",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 189.98497031265828,
-      "year": 2018,
-      "start_date": "2018-11-01T00:00:00",
-      "end_date": "2019-05-01T00:00:00",
-      "category": "Micromobility",
-      "industry": "Other",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Design for Manufacturing (DFM)",
-        "Usability Testing",
-        "Prototyping",
-        "Product Testing"
-      ],
-      "img": "/assets/r2/bay-wheels/hero-sm.webp"
-    },
-    {
-      "id": "Switches",
-      "name": "Switches",
-      "group": "Noon",
-      "color": "#8f8315",
-      "value": 192.93061443340548,
-      "year": 2017,
-      "start_date": "2017-07-01T00:00:00",
-      "end_date": "2018-03-01T00:00:00",
-      "category": "User Interface",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Prototyping",
-        "Iterative Prototyping",
-        "Design for Manufacturing (DFM)",
-        "Usability Testing",
-        "Tolerance Analysis"
-      ],
-      "img": "/assets/r2/switches/hero-sm.webp"
-    },
-    {
-      "id": "Extension Switches",
-      "name": "Extension Switches",
-      "group": "Noon",
-      "color": "#8f8315",
-      "value": 196.20082930352362,
-      "year": 2017,
-      "start_date": "2017-03-01T00:00:00",
-      "end_date": "2018-02-01T00:00:00",
-      "category": "User Interface",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Design for Manufacturing (DFM)",
-        "Reliability Testing",
-        "Materials Knowledge"
-      ],
-      "img": "/assets/r2/extension-switches/hero-sm.webp"
-    },
-    {
-      "id": "Room Director",
-      "name": "Room Director",
-      "group": "Noon",
-      "color": "#8f8315",
-      "value": 188.30437921392434,
-      "year": 2017,
-      "start_date": "2017-08-01T00:00:00",
-      "end_date": "2018-01-01T00:00:00",
-      "category": "Smart Home Device",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Prototyping",
-        "Testing Automation",
-        "Design for Manufacturing (DFM)",
-        "Tolerance Analysis",
-        "CAD (Computer-Aided Design)"
-      ],
-      "img": "/assets/r2/room-director/hero-sm.webp"
-    },
-    {
-      "id": "Wall Plates",
-      "name": "Wall Plates",
-      "group": "Noon",
-      "color": "#8f8315",
-      "value": 196.20082930352362,
-      "year": 2017,
-      "start_date": "2017-03-01T00:00:00",
-      "end_date": "2018-02-01T00:00:00",
-      "category": "User Interface",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Prototyping",
-        "Tolerance Analysis",
-        "Iterative Prototyping",
-        "Reliability Testing",
-        "Testing Automation"
-      ],
-      "img": "/assets/r2/wall-plates/hero-sm.webp"
-    },
-    {
-      "id": "Base",
-      "name": "Base",
-      "group": "Noon",
-      "color": "#8f8315",
-      "value": 198.16157159698355,
-      "year": 2017,
-      "start_date": "2017-03-17T00:00:00",
-      "end_date": "2018-05-01T00:00:00",
-      "category": "Smart Home Device",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Iterative Prototyping",
-        "Prototyping",
-        "Usability Testing",
-        "Design for Manufacturing (DFM)"
-      ],
-      "img": "/assets/r2/base/hero-sm.webp"
-    },
-    {
-      "id": "Glyph 2",
-      "name": "Glyph 2",
-      "group": "Avegant",
-      "color": "#6da409",
-      "value": 200.16606101084864,
-      "year": 2015,
-      "start_date": "2015-10-17T00:00:00",
-      "end_date": "2017-03-01T00:00:00",
-      "category": "Wearable / AR",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "Iterative Prototyping",
-        "Tolerance Analysis",
-        "CAD (Computer-Aided Design)",
-        "Materials Knowledge"
-      ],
-      "img": "/assets/r2/glyph-2/hero-sm.webp"
-    },
-    {
-      "id": "Avegant Glyph",
-      "name": "Avegant Glyph",
-      "group": "Avegant",
-      "color": "#6da409",
-      "value": 64.59904454377535,
-      "year": 2015,
-      "start_date": "2015-06-01T00:00:00",
-      "end_date": "2017-03-01T00:00:00",
-      "category": "Wearable / AR",
-      "industry": "Consumer Electronics",
-      "skills": [],
-      "img": "/assets/r2/avegant-glyph/hero-sm.webp"
-    },
-    {
-      "id": "BFD",
-      "name": "BFD",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 216.86081401775743,
-      "year": 2016,
-      "start_date": "2016-12-01T00:00:00",
-      "end_date": "2024-03-14T00:00:00",
-      "category": "Sports and Fitness",
-      "industry": "Other",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Materials Knowledge",
-        "Design for Manufacturing (DFM)",
-        "Reliability Testing",
-        "Testing Automation"
-      ],
-      "img": "/assets/r2/bfd/hero-sm.webp"
-    },
-    {
-      "id": "Strato",
-      "name": "Strato",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 193.01258210544728,
-      "year": 2014,
-      "start_date": "2014-06-01T00:00:00",
-      "end_date": "2015-02-01T00:00:00",
-      "category": "Media Server",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "Reliability Testing",
-        "CAD (Computer-Aided Design)",
-        "Iterative Prototyping",
-        "Tolerance Analysis"
-      ],
-      "img": "/assets/r2/strato/hero-sm.webp"
-    },
-    {
-      "id": "Cinema One",
-      "name": "Cinema One",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 197.8141421125448,
-      "year": 2012,
-      "start_date": "2012-08-01T00:00:00",
-      "end_date": "2013-09-01T00:00:00",
-      "category": "Media Server",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Design for Manufacturing (DFM)",
-        "Materials Knowledge",
-        "Prototyping",
-        "Iterative Prototyping"
-      ],
-      "img": "/assets/r2/cinema-one/hero-sm.webp"
-    },
-    {
-      "id": "M700",
-      "name": "M700",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 196.111409929767,
-      "year": 2010,
-      "start_date": "2010-08-01T00:00:00",
-      "end_date": "2011-07-01T00:00:00",
-      "category": "Robotics / Disc Vault",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Problem Solving",
-        "Iterative Prototyping",
-        "Prototyping",
-        "Design Research",
-        "Lean Manufacturing"
-      ],
-      "img": "/assets/r2/m700/hero-sm.webp"
-    },
-    {
-      "id": "DV700",
-      "name": "DV700",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 196.111409929767,
-      "year": 2010,
-      "start_date": "2010-08-02T00:00:00",
-      "end_date": "2011-07-02T00:00:00",
-      "category": "Robotics / Disc Vault",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Problem Solving",
-        "Iterative Prototyping",
-        "Prototyping",
-        "Business Acumen",
-        "Assembly Processes"
-      ],
-      "img": "/assets/r2/dv700/hero-sm.webp"
-    },
-    {
-      "id": "Disc Cartridges",
-      "name": "Disc Cartridges",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 190.0948615284142,
-      "year": 2010,
-      "start_date": "2010-06-01T00:00:00",
-      "end_date": "2010-12-01T00:00:00",
-      "category": "Media Storage",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "Prototyping",
-        "Iterative Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Tolerance Analysis"
-      ],
-      "img": "/assets/r2/disc-cartridges/hero-sm.webp"
-    },
-    {
-      "id": "K-Remote",
-      "name": "K-Remote",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 184.34728988229637,
-      "year": 2009,
-      "start_date": "2009-04-20T00:00:00",
-      "end_date": "2009-08-01T00:00:00",
-      "category": "Remote Control",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "CAD (Computer-Aided Design)",
-        "Iterative Prototyping",
-        "Product Testing",
-        "Prototyping"
-      ],
-      "img": "/assets/r2/k-remote/hero-sm.webp"
-    },
-    {
-      "id": "Weemote",
-      "name": "Weemote",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 179.1087386417331,
-      "year": 2010,
-      "start_date": "2010-06-01T00:00:00",
-      "end_date": "2010-08-01T00:00:00",
-      "category": "Remote Control",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Prototyping",
-        "Usability Testing",
-        "Iterative Prototyping",
-        "Materials Knowledge",
-        "CAD (Computer-Aided Design)"
-      ],
-      "img": "/assets/r2/weemote/hero-sm.webp"
-    },
-    {
-      "id": "M500",
-      "name": "M500",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 183.10859506516852,
-      "year": 2010,
-      "start_date": "2010-04-01T00:00:00",
-      "end_date": "2010-07-01T00:00:00",
-      "category": "Media Player",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "Product Testing",
-        "Reliability Testing",
-        "Materials Knowledge",
-        "Prototyping"
-      ],
-      "img": "/assets/r2/m500/hero-sm.webp"
-    },
-    {
-      "id": "M300",
-      "name": "M300",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 179.1087386417331,
-      "year": 2010,
-      "start_date": "2010-03-01T00:00:00",
-      "end_date": "2010-05-01T00:00:00",
-      "category": "Media Player",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Iterative Prototyping",
-        "Prototyping",
-        "Usability Testing",
-        "Materials Knowledge",
-        "Tolerance Analysis"
-      ],
-      "img": "/assets/r2/m300/hero-sm.webp"
-    },
-    {
-      "id": "KSERVER-1500",
-      "name": "KSERVER-1500",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 179.1087386417331,
-      "year": 2010,
-      "start_date": "2010-03-02T00:00:00",
-      "end_date": "2010-05-02T00:00:00",
-      "category": "Server / Rackmount",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Prototyping",
-        "Materials Knowledge",
-        "CAD (Computer-Aided Design)",
-        "Iterative Prototyping",
-        "Reliability Testing"
-      ],
-      "img": "/assets/r2/kserver-1500/hero-sm.webp"
-    },
-    {
-      "id": "KVAULT-10",
-      "name": "KVAULT-10",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 194.0947179518496,
-      "year": 2010,
-      "start_date": "2010-09-01T00:00:00",
-      "end_date": "2011-06-01T00:00:00",
-      "category": "Robotics / Disc Vault",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Problem Solving",
-        "Iterative Prototyping",
-        "Prototyping",
-        "Technical Communication",
-        "Business Acumen"
-      ],
-      "img": "/assets/r2/kvault-10/hero-sm.webp"
-    },
-    {
-      "id": "Jewel",
-      "name": "Jewel",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 195.1702770140622,
-      "year": 2009,
-      "start_date": "2009-06-01T00:00:00",
-      "end_date": "2010-04-01T00:00:00",
-      "category": "Media Player",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "CAD (Computer-Aided Design)",
-        "Testing Automation",
-        "Usability Testing",
-        "Prototyping"
-      ],
-      "img": "/assets/r2/jewel/hero-sm.webp"
-    },
-    {
-      "id": "KSYSTEM-120",
-      "name": "KSYSTEM-120",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 188.17279836814924,
-      "year": 2009,
-      "start_date": "2009-01-01T00:00:00",
-      "end_date": "2009-06-01T00:00:00",
-      "category": "Media Server",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Prototyping",
-        "Iterative Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Materials Knowledge",
-        "Testing Automation"
-      ],
-      "img": "/assets/r2/ksystem-120/hero-sm.webp"
-    },
-    {
-      "id": "KSERVER-5000",
-      "name": "KSERVER-5000",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 194.0947179518496,
-      "year": 2008,
-      "start_date": "2008-06-01T00:00:00",
-      "end_date": "2009-03-01T00:00:00",
-      "category": "Server / Rackmount",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Materials Knowledge",
-        "Usability Testing",
-        "Tolerance Analysis",
-        "Reliability Testing"
-      ],
-      "img": "/assets/r2/kserver-5000/hero-sm.webp"
-    },
-    {
-      "id": "Speed Reader",
-      "name": "Speed Reader",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 194.2040086571715,
-      "year": 2008,
-      "start_date": "2008-05-01T00:00:00",
-      "end_date": "2009-02-01T00:00:00",
-      "category": "Data Ingestion",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Prototyping",
-        "Tolerance Analysis",
-        "Product Testing",
-        "Testing Automation",
-        "Design for Manufacturing (DFM)"
-      ],
-      "img": "/assets/r2/speed-reader/hero-sm.webp"
-    },
-    {
-      "id": "KSERVER-1500",
-      "name": "KSERVER-1500",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 183.2178857704904,
-      "year": 2008,
-      "start_date": "2008-05-01T00:00:00",
-      "end_date": "2008-08-01T00:00:00",
-      "category": "Server / Rackmount",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Prototyping",
-        "Materials Knowledge",
-        "CAD (Computer-Aided Design)",
-        "Iterative Prototyping",
-        "Reliability Testing"
-      ],
-      "img": "/assets/r2/kserver-1500/hero-sm.webp"
-    },
-    {
-      "id": "KPLAYER-300",
-      "name": "KPLAYER-300",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 195.2358510195238,
-      "year": 2008,
-      "start_date": "2008-03-01T00:00:00",
-      "end_date": "2009-01-01T00:00:00",
-      "category": "Media Player",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Iterative Prototyping",
-        "Testing Automation",
-        "Product Testing",
-        "CAD (Computer-Aided Design)",
-        "Tolerance Analysis"
-      ],
-      "img": "/assets/r2/kplayer-300/hero-sm.webp"
-    },
-    {
-      "id": "KPLAYER-6000",
-      "name": "KPLAYER-6000",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 195.2358510195238,
-      "year": 2008,
-      "start_date": "2008-03-02T00:00:00",
-      "end_date": "2009-01-02T00:00:00",
-      "category": "Media Player",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Materials Knowledge",
-        "Tolerance Analysis",
-        "Testing Automation",
-        "Iterative Prototyping"
-      ],
-      "img": "/assets/r2/kplayer-6000/hero-sm.webp"
-    },
-    {
-      "id": "KPLAYER-5000",
-      "name": "KPLAYER-5000",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 194.16771097666572,
-      "year": 2008,
-      "start_date": "2008-03-01T00:00:00",
-      "end_date": "2008-12-01T00:00:00",
-      "category": "Media Player",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Iterative Prototyping",
-        "Design for Manufacturing (DFM)",
-        "CAD (Computer-Aided Design)",
-        "Reliability Testing",
-        "Product Testing"
-      ],
-      "img": "/assets/r2/kplayer-5000/hero-sm.webp"
-    },
-    {
-      "id": "KPLAYER-2500",
-      "name": "KPLAYER-2500",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 194.16771097666572,
-      "year": 2008,
-      "start_date": "2008-03-02T00:00:00",
-      "end_date": "2008-12-02T00:00:00",
-      "category": "Media Player",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Iterative Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Design for Manufacturing (DFM)",
-        "Testing Automation",
-        "Tolerance Analysis"
-      ],
-      "img": "/assets/r2/kplayer-2500/hero-sm.webp"
-    },
-    {
-      "id": "KSERVER-2500",
-      "name": "KSERVER-2500",
-      "group": "Kaleidescape",
-      "color": "#04e32f",
-      "value": 194.16771097666572,
-      "year": 2008,
-      "start_date": "2008-03-03T00:00:00",
-      "end_date": "2008-12-03T00:00:00",
-      "category": "Server / Rackmount",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Iterative Prototyping",
-        "Prototyping",
-        "Materials Knowledge",
-        "Product Testing",
-        "Design for Manufacturing (DFM)"
-      ],
-      "img": "/assets/r2/kserver-2500/hero-sm.webp"
-    },
-    {
-      "id": "Mbox 2 Micro",
-      "name": "Mbox 2 Micro",
-      "group": "Digidesign",
-      "color": "#40ef29",
-      "value": 190.0948615284142,
-      "year": 2007,
-      "start_date": "2007-10-01T00:00:00",
-      "end_date": "2008-04-01T00:00:00",
-      "category": "USB Audio Interface",
-      "industry": "Pro Audio",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "Iterative Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Prototyping",
-        "Usability Testing"
-      ],
-      "img": "/assets/r2/mbox-2-micro/hero-sm.webp"
-    },
-    {
-      "id": "Rack 003",
-      "name": "Rack 003",
-      "group": "Digidesign",
-      "color": "#40ef29",
-      "value": 188.30437921392434,
-      "year": 2007,
-      "start_date": "2007-05-01T00:00:00",
-      "end_date": "2007-10-01T00:00:00",
-      "category": "Rack Appliance",
-      "industry": "Pro Audio",
-      "skills": [
-        "Problem Solving",
-        "Agile Methodology",
-        "Testing Automation",
-        "Data Analysis",
-        "Business Acumen"
-      ],
-      "img": "/assets/r2/rack-003/hero-sm.webp"
-    },
-    {
-      "id": "Mbox 2 Mini",
-      "name": "Mbox 2 Mini",
-      "group": "Digidesign",
-      "color": "#40ef29",
-      "value": 182.8863636973214,
-      "year": 2007,
-      "start_date": "2007-02-01T00:00:00",
-      "end_date": "2007-05-01T00:00:00",
-      "category": "USB Audio Interface",
-      "industry": "Pro Audio",
-      "skills": [
-        "Iterative Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Product Testing",
-        "Testing Automation",
-        "Materials Knowledge"
-      ],
-      "img": "/assets/r2/mbox-2-mini/hero-sm.webp"
-    },
-    {
-      "id": "Mbox 2 Pro",
-      "name": "Mbox 2 Pro",
-      "group": "Digidesign",
-      "color": "#40ef29",
-      "value": 188.30437921392434,
-      "year": 2006,
-      "start_date": "2006-06-01T00:00:00",
-      "end_date": "2006-11-01T00:00:00",
-      "category": "USB Audio Interface",
-      "industry": "Pro Audio",
-      "skills": [
-        "Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Design for Manufacturing (DFM)",
-        "Usability Testing",
-        "Materials Knowledge"
-      ],
-      "img": "/assets/r2/mbox-2-pro/hero-sm.webp"
-    },
-    {
-      "id": "Digi 003",
-      "name": "Digi 003",
-      "group": "Digidesign",
-      "color": "#40ef29",
-      "value": 193.01258210544728,
-      "year": 2006,
-      "start_date": "2006-06-01T00:00:00",
-      "end_date": "2007-02-01T00:00:00",
-      "category": "Control Surface",
-      "industry": "Pro Audio",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Prototyping",
-        "Testing Automation",
-        "Design for Manufacturing (DFM)",
-        "Product Testing"
-      ],
-      "img": "/assets/r2/digi-003/hero-sm.webp"
-    },
-    {
-      "id": "c24",
-      "name": "C|24",
-      "group": "Digidesign",
-      "color": "#40ef29",
-      "value": 58.11140992976701,
-      "year": 2006,
-      "start_date": "2006-08-01T00:00:00",
-      "end_date": "2007-07-01T00:00:00",
-      "category": "Control Surface",
-      "industry": "Pro Audio",
-      "skills": [],
-      "img": "/assets/r2/c24/c24-hero-01.png"
-    },
-    {
-      "id": "Mbox 2",
-      "name": "Mbox 2",
-      "group": "Digidesign",
-      "color": "#40ef29",
-      "value": 179.1087386417331,
-      "year": 2005,
-      "start_date": "2005-09-01T00:00:00",
-      "end_date": "2005-11-01T00:00:00",
-      "category": "USB Audio Interface",
-      "industry": "Pro Audio",
-      "skills": [
-        "Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Reliability Testing",
-        "Materials Knowledge",
-        "Design for Manufacturing (DFM)"
-      ],
-      "img": "/assets/r2/mbox-2/hero-sm.webp"
-    },
-    {
-      "id": "Profile",
-      "name": "Profile",
-      "group": "Digidesign",
-      "color": "#40ef29",
-      "value": 188.10635294096255,
-      "year": 2005,
-      "start_date": "2005-02-01T00:00:00",
-      "end_date": "2005-07-01T00:00:00",
-      "category": "Live Sound Console",
-      "industry": "Pro Audio",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "Tolerance Analysis",
-        "Product Testing",
-        "Iterative Prototyping",
-        "Reliability Testing"
-      ],
-      "img": "/assets/r2/profile/hero-sm.webp"
-    },
-    {
-      "id": "D-Show",
-      "name": "D-Show",
-      "group": "Digidesign",
-      "color": "#40ef29",
-      "value": 188.10635294096255,
-      "year": 2005,
-      "start_date": "2005-02-01T00:00:00",
-      "end_date": "2005-07-01T00:00:00",
-      "category": "Live Sound Console",
-      "industry": "Pro Audio",
-      "skills": [
-        "Iterative Prototyping",
-        "Testing Automation",
-        "Prototyping",
-        "Materials Knowledge",
-        "Product Testing"
-      ],
-      "img": "/assets/r2/d-show/hero-sm.webp"
-    },
-    {
-      "id": "D-Control",
-      "name": "D-Control",
-      "group": "Digidesign",
-      "color": "#40ef29",
-      "value": 191.56586274672011,
-      "year": 2004,
-      "start_date": "2004-08-01T00:00:00",
-      "end_date": "2005-03-01T00:00:00",
-      "category": "Control Surface",
-      "industry": "Pro Audio",
-      "skills": [
-        "Iterative Prototyping",
-        "Prototyping",
-        "Tolerance Analysis",
-        "Reliability Testing",
-        "Design for Manufacturing (DFM)"
-      ],
-      "img": "/assets/r2/d-control/hero-sm.webp"
-    },
-    {
-      "id": "D-Command",
-      "name": "D-Command",
-      "group": "Digidesign",
-      "color": "#40ef29",
-      "value": 188.30437921392434,
-      "year": 2004,
-      "start_date": "2004-04-01T00:00:00",
-      "end_date": "2004-09-01T00:00:00",
-      "category": "Control Surface",
-      "industry": "Pro Audio",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Prototyping",
-        "Reliability Testing",
-        "Design for Manufacturing (DFM)",
-        "Usability Testing"
-      ],
-      "img": "/assets/r2/d-command/hero-sm.webp"
-    },
-    {
-      "id": "Pro Control Jr",
-      "name": "Pro Control Jr",
-      "group": "Digidesign",
-      "color": "#40ef29",
-      "value": 195.20311776607412,
-      "year": 2003,
-      "start_date": "2003-06-01T00:00:00",
-      "end_date": "2004-04-01T00:00:00",
-      "category": "Control Surface",
-      "industry": "Pro Audio",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Prototyping",
-        "Design for Manufacturing (DFM)",
-        "Usability Testing",
-        "Tolerance Analysis"
-      ],
-      "img": "/assets/r2/pro-control-jr/hero-sm.webp"
-    },
-    {
-      "id": "Rack 002",
-      "name": "Rack 002",
-      "group": "Digidesign",
-      "color": "#40ef29",
-      "value": 188.30437921392434,
-      "year": 2003,
-      "start_date": "2003-05-01T00:00:00",
-      "end_date": "2003-10-01T00:00:00",
-      "category": "Rack Appliance",
-      "industry": "Pro Audio",
-      "skills": [
-        "Problem Solving",
-        "Agile Methodology",
-        "Testing Automation",
-        "Data Analysis",
-        "Project Management"
-      ],
-      "img": "/assets/r2/rack-002/hero-sm.webp"
-    },
-    {
-      "id": "Mbox",
-      "name": "Mbox",
-      "group": "Digidesign",
-      "color": "#40ef29",
-      "value": 191.65976015021852,
-      "year": 2003,
-      "start_date": "2003-03-01T00:00:00",
-      "end_date": "2003-10-01T00:00:00",
-      "category": "USB Audio Interface",
-      "industry": "Pro Audio",
-      "skills": [
-        "Prototyping",
-        "Iterative Prototyping",
-        "Tolerance Analysis",
-        "Reliability Testing",
-        "Usability Testing"
-      ],
-      "img": "/assets/r2/mbox/hero-sm.webp"
-    },
-    {
-      "id": "Xbox",
-      "name": "Xbox",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 183.10859506516852,
-      "year": 2002,
-      "start_date": "2002-09-01T00:00:00",
-      "end_date": "2002-12-01T00:00:00",
-      "category": "Gaming Console",
-      "industry": "Other",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "CAD (Computer-Aided Design)",
-        "Reliability Testing",
-        "Product Testing",
-        "Materials Knowledge"
-      ],
-      "img": "/assets/r2/xbox/hero-sm.webp"
-    },
-    {
-      "id": "Receiver 5",
-      "name": "Receiver 5",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 179.1087386417331,
-      "year": 2002,
-      "start_date": "2002-06-01T00:00:00",
-      "end_date": "2002-08-01T00:00:00",
-      "category": "Set-Top Box",
-      "industry": "Other",
-      "skills": [
-        "Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Testing Automation",
-        "Design for Manufacturing (DFM)",
-        "Materials Knowledge"
-      ],
-      "img": "/assets/r2/receiver-5/hero-sm.webp"
-    },
-    {
-      "id": "Receiver 4",
-      "name": "Receiver 4",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 185.87491742782046,
-      "year": 2002,
-      "start_date": "2002-01-01T00:00:00",
-      "end_date": "2002-05-01T00:00:00",
-      "category": "Set-Top Box",
-      "industry": "Other",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Reliability Testing",
-        "Prototyping",
-        "Materials Knowledge",
-        "Tolerance Analysis"
-      ],
-      "img": "/assets/r2/receiver-4/hero-sm.webp"
-    },
-    {
-      "id": "Receiver 3",
-      "name": "Receiver 3",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 179.1087386417331,
-      "year": 2001,
-      "start_date": "2001-10-01T00:00:00",
-      "end_date": "2001-12-01T00:00:00",
-      "category": "Set-Top Box",
-      "industry": "Other",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "Iterative Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Product Testing",
-        "Materials Knowledge"
-      ],
-      "img": "/assets/r2/receiver-3/hero-sm.webp"
-    },
-    {
-      "id": "Receiver 2",
-      "name": "Receiver 2",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 179.1087386417331,
-      "year": 2001,
-      "start_date": "2001-09-01T00:00:00",
-      "end_date": "2001-11-01T00:00:00",
-      "category": "Set-Top Box",
-      "industry": "Other",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Iterative Prototyping",
-        "Design for Manufacturing (DFM)",
-        "Tolerance Analysis",
-        "Materials Knowledge"
-      ],
-      "img": "/assets/r2/receiver-2/hero-sm.webp"
-    },
-    {
-      "id": "Mercury LC",
-      "name": "Mercury LC",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 190.14935757608987,
-      "year": 2001,
-      "start_date": "2001-07-01T00:00:00",
-      "end_date": "2002-01-01T00:00:00",
-      "category": "Set-Top Box",
-      "industry": "Other",
-      "skills": [
-        "Iterative Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Prototyping",
-        "Tolerance Analysis",
-        "Usability Testing"
-      ],
-      "img": "/assets/r2/mercury-lc/hero-sm.webp"
-    },
-    {
-      "id": "usb box",
-      "name": "usb box",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 179.1087386417331,
-      "year": 2001,
-      "start_date": "2001-06-01T00:00:00",
-      "end_date": "2001-08-01T00:00:00",
-      "category": "Audio Interface",
-      "industry": "Pro Audio",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "CAD (Computer-Aided Design)",
-        "Iterative Prototyping",
-        "Tolerance Analysis",
-        "Usability Testing"
-      ],
-      "img": "/assets/r2/usb-box/hero-sm.webp"
-    },
-    {
-      "id": "Remotes",
-      "name": "Remotes",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 183.2178857704904,
-      "year": 2001,
-      "start_date": "2001-05-01T00:00:00",
-      "end_date": "2001-08-01T00:00:00",
-      "category": "Remote Control",
-      "industry": "Other",
-      "skills": [
-        "Prototyping",
-        "Design for Manufacturing (DFM)",
-        "Iterative Prototyping",
-        "Tolerance Analysis",
-        "Product Testing"
-      ],
-      "img": "/assets/r2/remotes/hero-sm.webp"
-    },
-    {
-      "id": "Receiver 1",
-      "name": "Receiver 1",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 191.65976015021852,
-      "year": 2001,
-      "start_date": "2001-04-01T00:00:00",
-      "end_date": "2001-11-01T00:00:00",
-      "category": "Set-Top Box",
-      "industry": "Other",
-      "skills": [
-        "Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Iterative Prototyping",
-        "Reliability Testing",
-        "Product Testing"
-      ],
-      "img": "/assets/r2/receiver-1/hero-sm.webp"
-    },
-    {
-      "id": "Node",
-      "name": "Node",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 172.33987204485146,
-      "year": 2000,
-      "start_date": "2000-12-01T00:00:00",
-      "end_date": "2001-01-01T00:00:00",
-      "category": "IoT Node",
-      "industry": "Other",
-      "skills": [
-        "Problem Solving",
-        "Prototyping",
-        "Iterative Prototyping",
-        "Launch Planning",
-        "Technical Feasibility"
-      ],
-      "img": "/assets/r2/node/hero-sm.webp"
-    },
-    {
-      "id": "Media Nodes",
-      "name": "Media Nodes",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 188.17279836814924,
-      "year": 2000,
-      "start_date": "2000-11-01T00:00:00",
-      "end_date": "2001-04-01T00:00:00",
-      "category": "IoT Node",
-      "industry": "Other",
-      "skills": [
-        "Problem Solving",
-        "Iterative Prototyping",
-        "Prototyping",
-        "Consumer Psychology",
-        "Reliability Testing"
-      ],
-      "img": "/assets/r2/media-nodes/hero-sm.webp"
-    },
-    {
-      "id": "MP6000 MP3 Player",
-      "name": "MP6000 MP3 Player",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 186.12184355372418,
-      "year": 2000,
-      "start_date": "2000-07-01T00:00:00",
-      "end_date": "2000-11-01T00:00:00",
-      "category": "MP3 Player",
-      "industry": "Other",
-      "skills": [
-        "Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Iterative Prototyping",
-        "Usability Testing",
-        "Materials Knowledge"
-      ],
-      "img": "/assets/r2/mp6000-mp3-player/hero-sm.webp"
-    },
-    {
-      "id": "Keyboard",
-      "name": "Keyboard",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 179.1087386417331,
-      "year": 2000,
-      "start_date": "2000-05-01T00:00:00",
-      "end_date": "2000-07-01T00:00:00",
-      "category": "Peripheral",
-      "industry": "Other",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Prototyping",
-        "Iterative Prototyping",
-        "Materials Knowledge",
-        "Testing Automation"
-      ],
-      "img": "/assets/r2/keyboard/hero-sm.webp"
-    },
-    {
-      "id": "LapTV",
-      "name": "LapTV",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 179.1087386417331,
-      "year": 2000,
-      "start_date": "2000-04-01T00:00:00",
-      "end_date": "2000-06-01T00:00:00",
-      "category": "Portable Media",
-      "industry": "Other",
-      "skills": [
-        "Prototyping",
-        "Design for Manufacturing (DFM)",
-        "Product Testing",
-        "CAD (Computer-Aided Design)",
-        "Tolerance Analysis"
-      ],
-      "img": "/assets/r2/laptv/hero-sm.webp"
-    },
-    {
-      "id": "Remote",
-      "name": "Remote",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 172.01197381662155,
-      "year": 2000,
-      "start_date": "2000-04-01T00:00:00",
-      "end_date": "2000-05-01T00:00:00",
-      "category": "Remote Control",
-      "industry": "Other",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "CAD (Computer-Aided Design)",
-        "Reliability Testing",
-        "Tolerance Analysis",
-        "Prototyping"
-      ],
-      "img": "/assets/r2/remote/hero-sm.webp"
-    },
-    {
-      "id": "Netscreen-500",
-      "name": "Netscreen-500",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 178.94344562222102,
-      "year": 2000,
-      "start_date": "2000-02-01T00:00:00",
-      "end_date": "2000-04-01T00:00:00",
-      "category": "Security Appliance",
-      "industry": "Other",
-      "skills": [
-        "Agile Methodology",
-        "Problem Solving",
-        "Testing Automation",
-        "Data Analysis",
-        "Cross-functional Collaboration"
-      ],
-      "img": "/assets/r2/netscreen-500/hero-sm.webp"
-    },
-    {
-      "id": "SGI 320 540",
-      "name": "SGI 320 540",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 172.33987204485146,
-      "year": 1998,
-      "start_date": "1998-08-01T00:00:00",
-      "end_date": "1998-09-01T00:00:00",
-      "category": "Handheld / Mobile",
-      "industry": "Other",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Usability Testing",
-        "Tolerance Analysis"
-      ],
-      "img": "/assets/r2/sgi-320-540/hero-sm.webp"
-    },
-    {
-      "id": "HP Jornada",
-      "name": "HP Jornada",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 172.01197381662155,
-      "year": 1998,
-      "start_date": "1998-06-01T00:00:00",
-      "end_date": "1998-07-01T00:00:00",
-      "category": "Handheld / PDA",
-      "industry": "Other",
-      "skills": [
-        "Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Testing Automation",
-        "Reliability Testing",
-        "Materials Knowledge"
-      ],
-      "img": "/assets/r2/hp-jornada/hero-sm.webp"
-    },
-    {
-      "id": "DVDO Player",
-      "name": "DVDO Player",
-      "group": "frogdesign",
-      "color": "#8fd618",
-      "value": 179.1087386417331,
-      "year": 1998,
-      "start_date": "1998-03-01T00:00:00",
-      "end_date": "1998-05-01T00:00:00",
-      "category": "Media Player",
-      "industry": "Other",
-      "skills": [
-        "Iterative Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Materials Knowledge",
-        "Product Testing",
-        "Tolerance Analysis"
-      ],
-      "img": "/assets/r2/dvdo-player/hero-sm.webp"
-    },
-    {
-      "id": "Vadem Clio",
-      "name": "Vadem Clio",
-      "group": "frogdesign",
-      "color": "#8fd618",
-      "value": 172.33987204485146,
-      "year": 1997,
-      "start_date": "1997-10-01T00:00:00",
-      "end_date": "1997-11-01T00:00:00",
-      "category": "Handheld / PDA",
-      "industry": "Other",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "CAD (Computer-Aided Design)",
-        "Iterative Prototyping",
-        "Product Testing",
-        "Testing Automation"
-      ],
-      "img": "/assets/r2/vadem-clio/hero-sm.webp"
-    },
-    {
-      "id": "KaVo Dental Unit 2",
-      "name": "KaVo Dental Unit 2",
-      "group": "frogdesign",
-      "color": "#8fd618",
-      "value": 188.30437921392434,
-      "year": 1997,
-      "start_date": "1997-07-01T00:00:00",
-      "end_date": "1997-12-01T00:00:00",
-      "category": "Medical Equipment",
-      "industry": "MedTech",
-      "skills": [
-        "Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Reliability Testing",
-        "Design for Manufacturing (DFM)",
-        "Iterative Prototyping"
-      ],
-      "img": "/assets/r2/kavo-dental-unit-2/hero-sm.webp"
-    },
-    {
-      "id": "Acer Phone",
-      "name": "Acer Phone",
-      "group": "frogdesign",
-      "color": "#8fd618",
-      "value": 172.33987204485146,
-      "year": 1997,
-      "start_date": "1997-07-01T00:00:00",
-      "end_date": "1997-08-01T00:00:00",
-      "category": "Mobile Phone",
-      "industry": "Other",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "Iterative Prototyping",
-        "CAD (Computer-Aided Design)",
-        "Reliability Testing",
-        "Materials Knowledge"
-      ],
-      "img": "/assets/r2/acer-phone/hero-sm.webp"
-    },
-    {
-      "id": "KaVo Dental Unit 1",
-      "name": "KaVo Dental Unit 1",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 183.2178857704904,
-      "year": 1997,
-      "start_date": "1997-07-01T00:00:00",
-      "end_date": "1997-10-01T00:00:00",
-      "category": "Medical Equipment",
-      "industry": "MedTech",
-      "skills": [
-        "Iterative Prototyping",
-        "Usability Testing",
-        "CAD (Computer-Aided Design)",
-        "Materials Knowledge",
-        "Design for Manufacturing (DFM)"
-      ],
-      "img": "/assets/r2/kavo-dental-unit-1/hero-sm.webp"
-    },
-    {
-      "id": "Acer subwoofer",
-      "name": "Acer subwoofer",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 179.1087386417331,
-      "year": 1997,
-      "start_date": "1997-06-01T00:00:00",
-      "end_date": "1997-08-01T00:00:00",
-      "category": "Audio",
-      "industry": "Pro Audio",
-      "skills": [
-        "Prototyping",
-        "Testing Automation",
-        "Design for Manufacturing (DFM)",
-        "CAD (Computer-Aided Design)",
-        "Materials Knowledge"
-      ],
-      "img": "/assets/r2/acer-subwoofer/hero-sm.webp"
-    },
-    {
-      "id": "Newscorp STB",
-      "name": "Newscorp STB",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 192.88937726156686,
-      "year": 1997,
-      "start_date": "1997-02-01T00:00:00",
-      "end_date": "1997-10-01T00:00:00",
-      "category": "Set-Top Box",
-      "industry": "Other",
-      "skills": [
-        "Prototyping",
-        "Design for Manufacturing (DFM)",
-        "Materials Knowledge",
-        "CAD (Computer-Aided Design)",
-        "Usability Testing"
-      ],
-      "img": "/assets/r2/newscorp-stb/hero-sm.webp"
-    },
-    {
-      "id": "PB Convertible",
-      "name": "PB Convertible",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 171.67295829986475,
-      "year": 1996,
-      "start_date": "1996-02-01T00:00:00",
-      "end_date": "1996-03-01T00:00:00",
-      "category": "Personal Computer",
-      "industry": "Other",
-      "skills": [
-        "Iterative Prototyping",
-        "Design for Manufacturing (DFM)",
-        "Reliability Testing",
-        "CAD (Computer-Aided Design)",
-        "Materials Knowledge"
-      ],
-      "img": "/assets/r2/pb-convertible/hero-sm.webp"
-    },
-    {
-      "id": "Acer Aspire",
-      "name": "Acer Aspire",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 182.99809670330265,
-      "year": 1996,
-      "start_date": "1996-02-01T00:00:00",
-      "end_date": "1996-05-01T00:00:00",
-      "category": "Personal Computer",
-      "industry": "Other",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "Prototyping",
-        "Reliability Testing",
-        "Iterative Prototyping",
-        "CAD (Computer-Aided Design)"
-      ],
-      "img": "/assets/r2/acer-aspire/hero-sm.webp"
-    },
-    {
-      "id": "Fissler BBQ",
-      "name": "Fissler BBQ",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 193.01258210544728,
-      "year": 1995,
-      "start_date": "1995-05-01T00:00:00",
-      "end_date": "1996-01-01T00:00:00",
-      "category": "Consumer Appliance",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Agile Methodology",
-        "Problem Solving",
-        "Testing Automation",
-        "Data Analysis",
-        "Feasibility Analysis"
-      ],
-      "img": "/assets/r2/fissler-bbq/hero-sm.webp"
-    },
-    {
-      "id": "Sunbeam toaster",
-      "name": "Sunbeam toaster",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 178.7753744390572,
-      "year": 1995,
-      "start_date": "1995-01-01T00:00:00",
-      "end_date": "1995-03-01T00:00:00",
-      "category": "Consumer Appliance",
-      "industry": "Consumer Electronics",
-      "skills": [
-        "Problem Solving",
-        "Agile Methodology",
-        "Testing Automation",
-        "Data Analysis",
-        "KPI Tracking"
-      ],
-      "img": "/assets/r2/sunbeam-toaster/hero-sm.webp"
-    },
-    {
-      "id": "Frantic Frames",
-      "name": "Frantic Frames",
-      "group": "Mechanistic",
-      "color": "#286745",
-      "value": 196.111409929767,
-      "year": 1992,
-      "start_date": "1992-04-01T00:00:00",
-      "end_date": "1993-03-01T00:00:00",
-      "category": "Electromechanical Mechanism",
-      "industry": "Other",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Reliability Testing",
-        "Testing Automation",
-        "Design for Manufacturing (DFM)",
-        "Product Testing"
-      ],
-      "img": "/assets/r2/frantic-frames/hero-sm.webp"
-    },
-    {
-      "id": "Indy",
-      "name": "Indy",
-      "group": "Silicon Graphics",
-      "color": "#1fbe31",
-      "value": 195.2358510195238,
-      "year": 1992,
-      "start_date": "1992-03-01T00:00:00",
-      "end_date": "1993-01-01T00:00:00",
-      "category": "Workstation",
-      "industry": "Other",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "Testing Automation",
-        "Reliability Testing",
-        "Iterative Prototyping",
-        "Prototyping"
-      ],
-      "img": "/assets/r2/indy/hero-sm.webp"
-    },
-    {
-      "id": "Indigo II",
-      "name": "Indigo II",
-      "group": "Silicon Graphics",
-      "color": "#1fbe31",
-      "value": 201.08098441509532,
-      "year": 1991,
-      "start_date": "1991-04-01T00:00:00",
-      "end_date": "1992-10-01T00:00:00",
-      "category": "Workstation",
-      "industry": "Other",
-      "skills": [
-        "Prototyping",
-        "Iterative Prototyping",
-        "Materials Knowledge",
-        "CAD (Computer-Aided Design)",
-        "Design for Manufacturing (DFM)"
-      ],
-      "img": "/assets/r2/indigo-ii/hero-sm.webp"
-    },
-    {
-      "id": "Indigo",
-      "name": "Indigo",
-      "group": "Silicon Graphics",
-      "color": "#1fbe31",
-      "value": 201.578422665081,
-      "year": 1989,
-      "start_date": "1989-11-01T00:00:00",
-      "end_date": "1991-06-01T00:00:00",
-      "category": "Workstation",
-      "industry": "Other",
-      "skills": [
-        "Iterative Prototyping",
-        "Design for Manufacturing (DFM)",
-        "Product Testing",
-        "Usability Testing",
-        "CAD (Computer-Aided Design)"
-      ],
-      "img": "/assets/r2/indigo/hero-sm.webp"
-    },
-    {
-      "id": "Iris File",
-      "name": "Iris File",
-      "group": "Silicon Graphics",
-      "color": "#1fbe31",
-      "value": 192.88937726156686,
-      "year": 1990,
-      "start_date": "1990-02-01T00:00:00",
-      "end_date": "1990-10-01T00:00:00",
-      "category": "Server / Storage",
-      "industry": "Other",
-      "skills": [
-        "CAD (Computer-Aided Design)",
-        "Iterative Prototyping",
-        "Prototyping",
-        "Usability Testing",
-        "Reliability Testing"
-      ],
-      "img": "/assets/r2/iris-file/hero-sm.webp"
-    },
-    {
-      "id": "Personal IRIS",
-      "name": "Personal IRIS",
-      "group": "Silicon Graphics",
-      "color": "#1fbe31",
-      "value": 205.4875954749168,
-      "year": 1989,
-      "start_date": "1989-07-01T00:00:00",
-      "end_date": "1991-11-01T00:00:00",
-      "category": "Workstation",
-      "industry": "Other",
-      "skills": [
-        "Design for Manufacturing (DFM)",
-        "Product Testing",
-        "Materials Knowledge",
-        "Prototyping",
-        "Iterative Prototyping"
-      ],
-      "img": "/assets/r2/personal-iris/hero-sm.webp"
-    }
-  ]
+	"nodes": [
+		{
+			"id": "dreamjob",
+			"name": "dreamjob",
+			"group": "awesomejob",
+			"color": "#8da80c",
+			"value": 224.1558951327243,
+			"year": 2025,
+			"start_date": "2025-11-23T00:00:00",
+			"end_date": "2040-12-31T00:00:00",
+			"category": "Career Goal",
+			"industry": "Future",
+			"skills": [
+				"Iterative Prototyping",
+				"Prototyping",
+				"Tolerance Analysis",
+				"Reliability Testing",
+				"Design for Manufacturing (DFM)"
+			],
+			"img": "/assets/placeholders/abstract.jpg"
+		},
+		{
+			"id": "Freelance",
+			"name": "Freelance",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 208.7242190053737,
+			"year": 2022,
+			"start_date": "2022-09-01T00:00:00",
+			"end_date": "2025-11-23T00:00:00",
+			"category": "Various",
+			"industry": "Other",
+			"skills": [
+				"Prototyping",
+				"Design for Manufacturing (DFM)",
+				"CAD (Computer-Aided Design)",
+				"Testing Automation",
+				"Tolerance Analysis"
+			],
+			"img": "/assets/r2/freelance/hero-sm.webp"
+		},
+		{
+			"id": "Makeline",
+			"name": "Makeline",
+			"group": "Hyphen",
+			"color": "#726add",
+			"value": 199.73786103901938,
+			"year": 2021,
+			"start_date": "2021-05-01T00:00:00",
+			"end_date": "2022-08-24T00:00:00",
+			"category": "Foodservice Automation",
+			"industry": "Robotics & Automation",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"Tolerance Analysis",
+				"Prototyping",
+				"Iterative Prototyping",
+				"Reliability Testing"
+			],
+			"img": "/assets/r2/makeline/hero-sm.webp"
+		},
+		{
+			"id": "Dispensers",
+			"name": "Dispensers",
+			"group": "Hyphen",
+			"color": "#726add",
+			"value": 193.834963087817,
+			"year": 2021,
+			"start_date": "2021-12-01T00:00:00",
+			"end_date": "2022-08-24T00:00:00",
+			"category": "Foodservice Automation",
+			"industry": "Robotics & Automation",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Design for Manufacturing (DFM)",
+				"Iterative Prototyping",
+				"Testing Automation",
+				"Prototyping"
+			],
+			"img": "/assets/r2/dispensers/hero-sm.webp"
+		},
+		{
+			"id": "Backsplash",
+			"name": "Backsplash",
+			"group": "Hyphen",
+			"color": "#726add",
+			"value": 190.0948615284142,
+			"year": 2021,
+			"start_date": "2021-07-01T00:00:00",
+			"end_date": "2021-12-31T00:00:00",
+			"category": "Electromechanical Assy",
+			"industry": "Robotics & Automation",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Prototyping",
+				"Design for Manufacturing (DFM)",
+				"Iterative Prototyping",
+				"Testing Automation"
+			],
+			"img": "/assets/r2/backsplash/hero-sm.webp"
+		},
+		{
+			"id": "Portion Cup",
+			"name": "Portion Cup",
+			"group": "Hyphen",
+			"color": "#726add",
+			"value": 184.63439094112067,
+			"year": 2021,
+			"start_date": "2021-05-01T00:00:00",
+			"end_date": "2021-08-15T00:00:00",
+			"category": "Electromechanical Assy",
+			"industry": "Robotics & Automation",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Tolerance Analysis",
+				"Testing Automation",
+				"Product Testing",
+				"Prototyping"
+			],
+			"img": "/assets/r2/portion-cup/hero-sm.webp"
+		},
+		{
+			"id": "Pet Scale",
+			"name": "Pet Scale",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 175.37669618283368,
+			"year": 2019,
+			"start_date": "2019-02-01T00:00:00",
+			"end_date": "2019-03-15T00:00:00",
+			"category": "Consumer Appliance",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Problem Solving",
+				"Testing Automation",
+				"Agile Methodology",
+				"Data Analysis",
+				"Design Planning"
+			],
+			"img": "/assets/r2/pet-scale/hero-sm.webp"
+		},
+		{
+			"id": "battery lock",
+			"name": "battery lock",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 184.4439089914137,
+			"year": 2019,
+			"start_date": "2019-01-01T00:00:00",
+			"end_date": "2019-04-15T00:00:00",
+			"category": "Electromechanical Mechanism",
+			"industry": "Other",
+			"skills": [
+				"Iterative Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Reliability Testing",
+				"Prototyping",
+				"Materials Knowledge"
+			],
+			"img": "/assets/r2/battery-lock/hero-sm.webp"
+		},
+		{
+			"id": "IOT module",
+			"name": "IOT module",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 183.2178857704904,
+			"year": 2018,
+			"start_date": "2018-11-01T00:00:00",
+			"end_date": "2019-02-01T00:00:00",
+			"category": "Embedded Device",
+			"industry": "Other",
+			"skills": [
+				"Iterative Prototyping",
+				"Design for Manufacturing (DFM)",
+				"Tolerance Analysis",
+				"Product Testing",
+				"Prototyping"
+			],
+			"img": "/assets/r2/iot-module/hero-sm.webp"
+		},
+		{
+			"id": "bay wheels",
+			"name": "bay wheels",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 189.98497031265828,
+			"year": 2018,
+			"start_date": "2018-11-01T00:00:00",
+			"end_date": "2019-05-01T00:00:00",
+			"category": "Micromobility",
+			"industry": "Other",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Design for Manufacturing (DFM)",
+				"Usability Testing",
+				"Prototyping",
+				"Product Testing"
+			],
+			"img": "/assets/r2/bay-wheels/hero-sm.webp"
+		},
+		{
+			"id": "Switches",
+			"name": "Switches",
+			"group": "Noon",
+			"color": "#8f8315",
+			"value": 192.93061443340548,
+			"year": 2017,
+			"start_date": "2017-07-01T00:00:00",
+			"end_date": "2018-03-01T00:00:00",
+			"category": "User Interface",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Prototyping",
+				"Iterative Prototyping",
+				"Design for Manufacturing (DFM)",
+				"Usability Testing",
+				"Tolerance Analysis"
+			],
+			"img": "/assets/r2/switches/hero-sm.webp"
+		},
+		{
+			"id": "Extension Switches",
+			"name": "Extension Switches",
+			"group": "Noon",
+			"color": "#8f8315",
+			"value": 196.20082930352362,
+			"year": 2017,
+			"start_date": "2017-03-01T00:00:00",
+			"end_date": "2018-02-01T00:00:00",
+			"category": "User Interface",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Design for Manufacturing (DFM)",
+				"Reliability Testing",
+				"Materials Knowledge"
+			],
+			"img": "/assets/r2/extension-switches/hero-sm.webp"
+		},
+		{
+			"id": "Room Director",
+			"name": "Room Director",
+			"group": "Noon",
+			"color": "#8f8315",
+			"value": 188.30437921392434,
+			"year": 2017,
+			"start_date": "2017-08-01T00:00:00",
+			"end_date": "2018-01-01T00:00:00",
+			"category": "Smart Home Device",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Prototyping",
+				"Testing Automation",
+				"Design for Manufacturing (DFM)",
+				"Tolerance Analysis",
+				"CAD (Computer-Aided Design)"
+			],
+			"img": "/assets/r2/room-director/hero-sm.webp"
+		},
+		{
+			"id": "Wall Plates",
+			"name": "Wall Plates",
+			"group": "Noon",
+			"color": "#8f8315",
+			"value": 196.20082930352362,
+			"year": 2017,
+			"start_date": "2017-03-01T00:00:00",
+			"end_date": "2018-02-01T00:00:00",
+			"category": "User Interface",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Prototyping",
+				"Tolerance Analysis",
+				"Iterative Prototyping",
+				"Reliability Testing",
+				"Testing Automation"
+			],
+			"img": "/assets/r2/wall-plates/hero-sm.webp"
+		},
+		{
+			"id": "Base",
+			"name": "Base",
+			"group": "Noon",
+			"color": "#8f8315",
+			"value": 198.16157159698355,
+			"year": 2017,
+			"start_date": "2017-03-17T00:00:00",
+			"end_date": "2018-05-01T00:00:00",
+			"category": "Smart Home Device",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Iterative Prototyping",
+				"Prototyping",
+				"Usability Testing",
+				"Design for Manufacturing (DFM)"
+			],
+			"img": "/assets/r2/base/hero-sm.webp"
+		},
+		{
+			"id": "Glyph 2",
+			"name": "Glyph 2",
+			"group": "Avegant",
+			"color": "#6da409",
+			"value": 200.16606101084864,
+			"year": 2015,
+			"start_date": "2015-10-17T00:00:00",
+			"end_date": "2017-03-01T00:00:00",
+			"category": "Wearable / AR",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"Iterative Prototyping",
+				"Tolerance Analysis",
+				"CAD (Computer-Aided Design)",
+				"Materials Knowledge"
+			],
+			"img": "/assets/r2/glyph-2/hero-sm.webp"
+		},
+		{
+			"id": "Avegant Glyph",
+			"name": "Avegant Glyph",
+			"group": "Avegant",
+			"color": "#6da409",
+			"value": 64.59904454377535,
+			"year": 2015,
+			"start_date": "2015-06-01T00:00:00",
+			"end_date": "2017-03-01T00:00:00",
+			"category": "Wearable / AR",
+			"industry": "Consumer Electronics",
+			"skills": [],
+			"img": "/assets/r2/avegant-glyph/hero-sm.webp"
+		},
+		{
+			"id": "BFD",
+			"name": "BFD",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 216.86081401775743,
+			"year": 2016,
+			"start_date": "2016-12-01T00:00:00",
+			"end_date": "2024-03-14T00:00:00",
+			"category": "Sports and Fitness",
+			"industry": "Other",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Materials Knowledge",
+				"Design for Manufacturing (DFM)",
+				"Reliability Testing",
+				"Testing Automation"
+			],
+			"img": "/assets/r2/bfd/hero-sm.webp"
+		},
+		{
+			"id": "Strato",
+			"name": "Strato",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 193.01258210544728,
+			"year": 2014,
+			"start_date": "2014-06-01T00:00:00",
+			"end_date": "2015-02-01T00:00:00",
+			"category": "Media Server",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"Reliability Testing",
+				"CAD (Computer-Aided Design)",
+				"Iterative Prototyping",
+				"Tolerance Analysis"
+			],
+			"img": "/assets/r2/strato/hero-sm.webp"
+		},
+		{
+			"id": "Cinema One",
+			"name": "Cinema One",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 197.8141421125448,
+			"year": 2012,
+			"start_date": "2012-08-01T00:00:00",
+			"end_date": "2013-09-01T00:00:00",
+			"category": "Media Server",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Design for Manufacturing (DFM)",
+				"Materials Knowledge",
+				"Prototyping",
+				"Iterative Prototyping"
+			],
+			"img": "/assets/r2/cinema-one/hero-sm.webp"
+		},
+		{
+			"id": "M700",
+			"name": "M700",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 196.111409929767,
+			"year": 2010,
+			"start_date": "2010-08-01T00:00:00",
+			"end_date": "2011-07-01T00:00:00",
+			"category": "Robotics / Disc Vault",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Problem Solving",
+				"Iterative Prototyping",
+				"Prototyping",
+				"Design Research",
+				"Lean Manufacturing"
+			],
+			"img": "/assets/r2/m700/hero-sm.webp"
+		},
+		{
+			"id": "DV700",
+			"name": "DV700",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 196.111409929767,
+			"year": 2010,
+			"start_date": "2010-08-02T00:00:00",
+			"end_date": "2011-07-02T00:00:00",
+			"category": "Robotics / Disc Vault",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Problem Solving",
+				"Iterative Prototyping",
+				"Prototyping",
+				"Business Acumen",
+				"Assembly Processes"
+			],
+			"img": "/assets/r2/dv700/hero-sm.webp"
+		},
+		{
+			"id": "Disc Cartridges",
+			"name": "Disc Cartridges",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 190.0948615284142,
+			"year": 2010,
+			"start_date": "2010-06-01T00:00:00",
+			"end_date": "2010-12-01T00:00:00",
+			"category": "Media Storage",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"Prototyping",
+				"Iterative Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Tolerance Analysis"
+			],
+			"img": "/assets/r2/disc-cartridges/hero-sm.webp"
+		},
+		{
+			"id": "K-Remote",
+			"name": "K-Remote",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 184.34728988229637,
+			"year": 2009,
+			"start_date": "2009-04-20T00:00:00",
+			"end_date": "2009-08-01T00:00:00",
+			"category": "Remote Control",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"CAD (Computer-Aided Design)",
+				"Iterative Prototyping",
+				"Product Testing",
+				"Prototyping"
+			],
+			"img": "/assets/r2/k-remote/hero-sm.webp"
+		},
+		{
+			"id": "Weemote",
+			"name": "Weemote",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 179.1087386417331,
+			"year": 2010,
+			"start_date": "2010-06-01T00:00:00",
+			"end_date": "2010-08-01T00:00:00",
+			"category": "Remote Control",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Prototyping",
+				"Usability Testing",
+				"Iterative Prototyping",
+				"Materials Knowledge",
+				"CAD (Computer-Aided Design)"
+			],
+			"img": "/assets/r2/weemote/hero-sm.webp"
+		},
+		{
+			"id": "M500",
+			"name": "M500",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 183.10859506516852,
+			"year": 2010,
+			"start_date": "2010-04-01T00:00:00",
+			"end_date": "2010-07-01T00:00:00",
+			"category": "Media Player",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"Product Testing",
+				"Reliability Testing",
+				"Materials Knowledge",
+				"Prototyping"
+			],
+			"img": "/assets/r2/m500/hero-sm.webp"
+		},
+		{
+			"id": "M300",
+			"name": "M300",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 179.1087386417331,
+			"year": 2010,
+			"start_date": "2010-03-01T00:00:00",
+			"end_date": "2010-05-01T00:00:00",
+			"category": "Media Player",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Iterative Prototyping",
+				"Prototyping",
+				"Usability Testing",
+				"Materials Knowledge",
+				"Tolerance Analysis"
+			],
+			"img": "/assets/r2/m300/hero-sm.webp"
+		},
+		{
+			"id": "KSERVER-1500",
+			"name": "KSERVER-1500",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 179.1087386417331,
+			"year": 2010,
+			"start_date": "2010-03-02T00:00:00",
+			"end_date": "2010-05-02T00:00:00",
+			"category": "Server / Rackmount",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Prototyping",
+				"Materials Knowledge",
+				"CAD (Computer-Aided Design)",
+				"Iterative Prototyping",
+				"Reliability Testing"
+			],
+			"img": "/assets/r2/kserver-1500/hero-sm.webp"
+		},
+		{
+			"id": "KVAULT-10",
+			"name": "KVAULT-10",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 194.0947179518496,
+			"year": 2010,
+			"start_date": "2010-09-01T00:00:00",
+			"end_date": "2011-06-01T00:00:00",
+			"category": "Robotics / Disc Vault",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Problem Solving",
+				"Iterative Prototyping",
+				"Prototyping",
+				"Technical Communication",
+				"Business Acumen"
+			],
+			"img": "/assets/r2/kvault-10/hero-sm.webp"
+		},
+		{
+			"id": "Jewel",
+			"name": "Jewel",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 195.1702770140622,
+			"year": 2009,
+			"start_date": "2009-06-01T00:00:00",
+			"end_date": "2010-04-01T00:00:00",
+			"category": "Media Player",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"CAD (Computer-Aided Design)",
+				"Testing Automation",
+				"Usability Testing",
+				"Prototyping"
+			],
+			"img": "/assets/r2/jewel/hero-sm.webp"
+		},
+		{
+			"id": "KSYSTEM-120",
+			"name": "KSYSTEM-120",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 188.17279836814924,
+			"year": 2009,
+			"start_date": "2009-01-01T00:00:00",
+			"end_date": "2009-06-01T00:00:00",
+			"category": "Media Server",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Prototyping",
+				"Iterative Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Materials Knowledge",
+				"Testing Automation"
+			],
+			"img": "/assets/r2/ksystem-120/hero-sm.webp"
+		},
+		{
+			"id": "KSERVER-5000",
+			"name": "KSERVER-5000",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 194.0947179518496,
+			"year": 2008,
+			"start_date": "2008-06-01T00:00:00",
+			"end_date": "2009-03-01T00:00:00",
+			"category": "Server / Rackmount",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Materials Knowledge",
+				"Usability Testing",
+				"Tolerance Analysis",
+				"Reliability Testing"
+			],
+			"img": "/assets/r2/kserver-5000/hero-sm.webp"
+		},
+		{
+			"id": "Speed Reader",
+			"name": "Speed Reader",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 194.2040086571715,
+			"year": 2008,
+			"start_date": "2008-05-01T00:00:00",
+			"end_date": "2009-02-01T00:00:00",
+			"category": "Data Ingestion",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Prototyping",
+				"Tolerance Analysis",
+				"Product Testing",
+				"Testing Automation",
+				"Design for Manufacturing (DFM)"
+			],
+			"img": "/assets/r2/speed-reader/hero-sm.webp"
+		},
+
+		{
+			"id": "KPLAYER-300",
+			"name": "KPLAYER-300",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 195.2358510195238,
+			"year": 2008,
+			"start_date": "2008-03-01T00:00:00",
+			"end_date": "2009-01-01T00:00:00",
+			"category": "Media Player",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Iterative Prototyping",
+				"Testing Automation",
+				"Product Testing",
+				"CAD (Computer-Aided Design)",
+				"Tolerance Analysis"
+			],
+			"img": "/assets/r2/kplayer-300/hero-sm.webp"
+		},
+		{
+			"id": "KPLAYER-6000",
+			"name": "KPLAYER-6000",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 195.2358510195238,
+			"year": 2008,
+			"start_date": "2008-03-02T00:00:00",
+			"end_date": "2009-01-02T00:00:00",
+			"category": "Media Player",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Materials Knowledge",
+				"Tolerance Analysis",
+				"Testing Automation",
+				"Iterative Prototyping"
+			],
+			"img": "/assets/r2/kplayer-6000/hero-sm.webp"
+		},
+		{
+			"id": "KPLAYER-5000",
+			"name": "KPLAYER-5000",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 194.16771097666572,
+			"year": 2008,
+			"start_date": "2008-03-01T00:00:00",
+			"end_date": "2008-12-01T00:00:00",
+			"category": "Media Player",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Iterative Prototyping",
+				"Design for Manufacturing (DFM)",
+				"CAD (Computer-Aided Design)",
+				"Reliability Testing",
+				"Product Testing"
+			],
+			"img": "/assets/r2/kplayer-5000/hero-sm.webp"
+		},
+		{
+			"id": "KPLAYER-2500",
+			"name": "KPLAYER-2500",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 194.16771097666572,
+			"year": 2008,
+			"start_date": "2008-03-02T00:00:00",
+			"end_date": "2008-12-02T00:00:00",
+			"category": "Media Player",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Iterative Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Design for Manufacturing (DFM)",
+				"Testing Automation",
+				"Tolerance Analysis"
+			],
+			"img": "/assets/r2/kplayer-2500/hero-sm.webp"
+		},
+		{
+			"id": "KSERVER-2500",
+			"name": "KSERVER-2500",
+			"group": "Kaleidescape",
+			"color": "#04e32f",
+			"value": 194.16771097666572,
+			"year": 2008,
+			"start_date": "2008-03-03T00:00:00",
+			"end_date": "2008-12-03T00:00:00",
+			"category": "Server / Rackmount",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Iterative Prototyping",
+				"Prototyping",
+				"Materials Knowledge",
+				"Product Testing",
+				"Design for Manufacturing (DFM)"
+			],
+			"img": "/assets/r2/kserver-2500/hero-sm.webp"
+		},
+		{
+			"id": "Mbox 2 Micro",
+			"name": "Mbox 2 Micro",
+			"group": "Digidesign",
+			"color": "#40ef29",
+			"value": 190.0948615284142,
+			"year": 2007,
+			"start_date": "2007-10-01T00:00:00",
+			"end_date": "2008-04-01T00:00:00",
+			"category": "USB Audio Interface",
+			"industry": "Pro Audio",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"Iterative Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Prototyping",
+				"Usability Testing"
+			],
+			"img": "/assets/r2/mbox-2-micro/hero-sm.webp"
+		},
+		{
+			"id": "Rack 003",
+			"name": "Rack 003",
+			"group": "Digidesign",
+			"color": "#40ef29",
+			"value": 188.30437921392434,
+			"year": 2007,
+			"start_date": "2007-05-01T00:00:00",
+			"end_date": "2007-10-01T00:00:00",
+			"category": "Rack Appliance",
+			"industry": "Pro Audio",
+			"skills": [
+				"Problem Solving",
+				"Agile Methodology",
+				"Testing Automation",
+				"Data Analysis",
+				"Business Acumen"
+			],
+			"img": "/assets/r2/rack-003/hero-sm.webp"
+		},
+		{
+			"id": "Mbox 2 Mini",
+			"name": "Mbox 2 Mini",
+			"group": "Digidesign",
+			"color": "#40ef29",
+			"value": 182.8863636973214,
+			"year": 2007,
+			"start_date": "2007-02-01T00:00:00",
+			"end_date": "2007-05-01T00:00:00",
+			"category": "USB Audio Interface",
+			"industry": "Pro Audio",
+			"skills": [
+				"Iterative Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Product Testing",
+				"Testing Automation",
+				"Materials Knowledge"
+			],
+			"img": "/assets/r2/mbox-2-mini/hero-sm.webp"
+		},
+		{
+			"id": "Mbox 2 Pro",
+			"name": "Mbox 2 Pro",
+			"group": "Digidesign",
+			"color": "#40ef29",
+			"value": 188.30437921392434,
+			"year": 2006,
+			"start_date": "2006-06-01T00:00:00",
+			"end_date": "2006-11-01T00:00:00",
+			"category": "USB Audio Interface",
+			"industry": "Pro Audio",
+			"skills": [
+				"Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Design for Manufacturing (DFM)",
+				"Usability Testing",
+				"Materials Knowledge"
+			],
+			"img": "/assets/r2/mbox-2-pro/hero-sm.webp"
+		},
+		{
+			"id": "Digi 003",
+			"name": "Digi 003",
+			"group": "Digidesign",
+			"color": "#40ef29",
+			"value": 193.01258210544728,
+			"year": 2006,
+			"start_date": "2006-06-01T00:00:00",
+			"end_date": "2007-02-01T00:00:00",
+			"category": "Control Surface",
+			"industry": "Pro Audio",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Prototyping",
+				"Testing Automation",
+				"Design for Manufacturing (DFM)",
+				"Product Testing"
+			],
+			"img": "/assets/r2/digi-003/hero-sm.webp"
+		},
+		{
+			"id": "c24",
+			"name": "C|24",
+			"group": "Digidesign",
+			"color": "#40ef29",
+			"value": 58.11140992976701,
+			"year": 2006,
+			"start_date": "2006-08-01T00:00:00",
+			"end_date": "2007-07-01T00:00:00",
+			"category": "Control Surface",
+			"industry": "Pro Audio",
+			"skills": [],
+			"img": "/assets/r2/c24/c24-hero-01.png"
+		},
+		{
+			"id": "Mbox 2",
+			"name": "Mbox 2",
+			"group": "Digidesign",
+			"color": "#40ef29",
+			"value": 179.1087386417331,
+			"year": 2005,
+			"start_date": "2005-09-01T00:00:00",
+			"end_date": "2005-11-01T00:00:00",
+			"category": "USB Audio Interface",
+			"industry": "Pro Audio",
+			"skills": [
+				"Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Reliability Testing",
+				"Materials Knowledge",
+				"Design for Manufacturing (DFM)"
+			],
+			"img": "/assets/r2/mbox-2/hero-sm.webp"
+		},
+		{
+			"id": "Profile",
+			"name": "Profile",
+			"group": "Digidesign",
+			"color": "#40ef29",
+			"value": 188.10635294096255,
+			"year": 2005,
+			"start_date": "2005-02-01T00:00:00",
+			"end_date": "2005-07-01T00:00:00",
+			"category": "Live Sound Console",
+			"industry": "Pro Audio",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"Tolerance Analysis",
+				"Product Testing",
+				"Iterative Prototyping",
+				"Reliability Testing"
+			],
+			"img": "/assets/r2/profile/hero-sm.webp"
+		},
+		{
+			"id": "D-Show",
+			"name": "D-Show",
+			"group": "Digidesign",
+			"color": "#40ef29",
+			"value": 188.10635294096255,
+			"year": 2005,
+			"start_date": "2005-02-01T00:00:00",
+			"end_date": "2005-07-01T00:00:00",
+			"category": "Live Sound Console",
+			"industry": "Pro Audio",
+			"skills": [
+				"Iterative Prototyping",
+				"Testing Automation",
+				"Prototyping",
+				"Materials Knowledge",
+				"Product Testing"
+			],
+			"img": "/assets/r2/d-show/hero-sm.webp"
+		},
+		{
+			"id": "D-Control",
+			"name": "D-Control",
+			"group": "Digidesign",
+			"color": "#40ef29",
+			"value": 191.56586274672011,
+			"year": 2004,
+			"start_date": "2004-08-01T00:00:00",
+			"end_date": "2005-03-01T00:00:00",
+			"category": "Control Surface",
+			"industry": "Pro Audio",
+			"skills": [
+				"Iterative Prototyping",
+				"Prototyping",
+				"Tolerance Analysis",
+				"Reliability Testing",
+				"Design for Manufacturing (DFM)"
+			],
+			"img": "/assets/r2/d-control/hero-sm.webp"
+		},
+		{
+			"id": "D-Command",
+			"name": "D-Command",
+			"group": "Digidesign",
+			"color": "#40ef29",
+			"value": 188.30437921392434,
+			"year": 2004,
+			"start_date": "2004-04-01T00:00:00",
+			"end_date": "2004-09-01T00:00:00",
+			"category": "Control Surface",
+			"industry": "Pro Audio",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Prototyping",
+				"Reliability Testing",
+				"Design for Manufacturing (DFM)",
+				"Usability Testing"
+			],
+			"img": "/assets/r2/d-command/hero-sm.webp"
+		},
+		{
+			"id": "Pro Control Jr",
+			"name": "Pro Control Jr",
+			"group": "Digidesign",
+			"color": "#40ef29",
+			"value": 195.20311776607412,
+			"year": 2003,
+			"start_date": "2003-06-01T00:00:00",
+			"end_date": "2004-04-01T00:00:00",
+			"category": "Control Surface",
+			"industry": "Pro Audio",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Prototyping",
+				"Design for Manufacturing (DFM)",
+				"Usability Testing",
+				"Tolerance Analysis"
+			],
+			"img": "/assets/r2/pro-control-jr/hero-sm.webp"
+		},
+		{
+			"id": "Rack 002",
+			"name": "Rack 002",
+			"group": "Digidesign",
+			"color": "#40ef29",
+			"value": 188.30437921392434,
+			"year": 2003,
+			"start_date": "2003-05-01T00:00:00",
+			"end_date": "2003-10-01T00:00:00",
+			"category": "Rack Appliance",
+			"industry": "Pro Audio",
+			"skills": [
+				"Problem Solving",
+				"Agile Methodology",
+				"Testing Automation",
+				"Data Analysis",
+				"Project Management"
+			],
+			"img": "/assets/r2/rack-002/hero-sm.webp"
+		},
+		{
+			"id": "Mbox",
+			"name": "Mbox",
+			"group": "Digidesign",
+			"color": "#40ef29",
+			"value": 191.65976015021852,
+			"year": 2003,
+			"start_date": "2003-03-01T00:00:00",
+			"end_date": "2003-10-01T00:00:00",
+			"category": "USB Audio Interface",
+			"industry": "Pro Audio",
+			"skills": [
+				"Prototyping",
+				"Iterative Prototyping",
+				"Tolerance Analysis",
+				"Reliability Testing",
+				"Usability Testing"
+			],
+			"img": "/assets/r2/mbox/hero-sm.webp"
+		},
+		{
+			"id": "Xbox",
+			"name": "Xbox",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 183.10859506516852,
+			"year": 2002,
+			"start_date": "2002-09-01T00:00:00",
+			"end_date": "2002-12-01T00:00:00",
+			"category": "Gaming Console",
+			"industry": "Other",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"CAD (Computer-Aided Design)",
+				"Reliability Testing",
+				"Product Testing",
+				"Materials Knowledge"
+			],
+			"img": "/assets/r2/xbox/hero-sm.webp"
+		},
+		{
+			"id": "Receiver 5",
+			"name": "Receiver 5",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 179.1087386417331,
+			"year": 2002,
+			"start_date": "2002-06-01T00:00:00",
+			"end_date": "2002-08-01T00:00:00",
+			"category": "Set-Top Box",
+			"industry": "Other",
+			"skills": [
+				"Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Testing Automation",
+				"Design for Manufacturing (DFM)",
+				"Materials Knowledge"
+			],
+			"img": "/assets/r2/receiver-5/hero-sm.webp"
+		},
+		{
+			"id": "Receiver 4",
+			"name": "Receiver 4",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 185.87491742782046,
+			"year": 2002,
+			"start_date": "2002-01-01T00:00:00",
+			"end_date": "2002-05-01T00:00:00",
+			"category": "Set-Top Box",
+			"industry": "Other",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Reliability Testing",
+				"Prototyping",
+				"Materials Knowledge",
+				"Tolerance Analysis"
+			],
+			"img": "/assets/r2/receiver-4/hero-sm.webp"
+		},
+		{
+			"id": "Receiver 3",
+			"name": "Receiver 3",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 179.1087386417331,
+			"year": 2001,
+			"start_date": "2001-10-01T00:00:00",
+			"end_date": "2001-12-01T00:00:00",
+			"category": "Set-Top Box",
+			"industry": "Other",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"Iterative Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Product Testing",
+				"Materials Knowledge"
+			],
+			"img": "/assets/r2/receiver-3/hero-sm.webp"
+		},
+		{
+			"id": "Receiver 2",
+			"name": "Receiver 2",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 179.1087386417331,
+			"year": 2001,
+			"start_date": "2001-09-01T00:00:00",
+			"end_date": "2001-11-01T00:00:00",
+			"category": "Set-Top Box",
+			"industry": "Other",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Iterative Prototyping",
+				"Design for Manufacturing (DFM)",
+				"Tolerance Analysis",
+				"Materials Knowledge"
+			],
+			"img": "/assets/r2/receiver-2/hero-sm.webp"
+		},
+		{
+			"id": "Mercury LC",
+			"name": "Mercury LC",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 190.14935757608987,
+			"year": 2001,
+			"start_date": "2001-07-01T00:00:00",
+			"end_date": "2002-01-01T00:00:00",
+			"category": "Set-Top Box",
+			"industry": "Other",
+			"skills": [
+				"Iterative Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Prototyping",
+				"Tolerance Analysis",
+				"Usability Testing"
+			],
+			"img": "/assets/r2/mercury-lc/hero-sm.webp"
+		},
+		{
+			"id": "usb box",
+			"name": "usb box",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 179.1087386417331,
+			"year": 2001,
+			"start_date": "2001-06-01T00:00:00",
+			"end_date": "2001-08-01T00:00:00",
+			"category": "Audio Interface",
+			"industry": "Pro Audio",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"CAD (Computer-Aided Design)",
+				"Iterative Prototyping",
+				"Tolerance Analysis",
+				"Usability Testing"
+			],
+			"img": "/assets/r2/usb-box/hero-sm.webp"
+		},
+		{
+			"id": "Remotes",
+			"name": "Remotes",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 183.2178857704904,
+			"year": 2001,
+			"start_date": "2001-05-01T00:00:00",
+			"end_date": "2001-08-01T00:00:00",
+			"category": "Remote Control",
+			"industry": "Other",
+			"skills": [
+				"Prototyping",
+				"Design for Manufacturing (DFM)",
+				"Iterative Prototyping",
+				"Tolerance Analysis",
+				"Product Testing"
+			],
+			"img": "/assets/r2/remotes/hero-sm.webp"
+		},
+		{
+			"id": "Receiver 1",
+			"name": "Receiver 1",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 191.65976015021852,
+			"year": 2001,
+			"start_date": "2001-04-01T00:00:00",
+			"end_date": "2001-11-01T00:00:00",
+			"category": "Set-Top Box",
+			"industry": "Other",
+			"skills": [
+				"Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Iterative Prototyping",
+				"Reliability Testing",
+				"Product Testing"
+			],
+			"img": "/assets/r2/receiver-1/hero-sm.webp"
+		},
+		{
+			"id": "Node",
+			"name": "Node",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 172.33987204485146,
+			"year": 2000,
+			"start_date": "2000-12-01T00:00:00",
+			"end_date": "2001-01-01T00:00:00",
+			"category": "IoT Node",
+			"industry": "Other",
+			"skills": [
+				"Problem Solving",
+				"Prototyping",
+				"Iterative Prototyping",
+				"Launch Planning",
+				"Technical Feasibility"
+			],
+			"img": "/assets/r2/node/hero-sm.webp"
+		},
+		{
+			"id": "Media Nodes",
+			"name": "Media Nodes",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 188.17279836814924,
+			"year": 2000,
+			"start_date": "2000-11-01T00:00:00",
+			"end_date": "2001-04-01T00:00:00",
+			"category": "IoT Node",
+			"industry": "Other",
+			"skills": [
+				"Problem Solving",
+				"Iterative Prototyping",
+				"Prototyping",
+				"Consumer Psychology",
+				"Reliability Testing"
+			],
+			"img": "/assets/r2/media-nodes/hero-sm.webp"
+		},
+		{
+			"id": "MP6000 MP3 Player",
+			"name": "MP6000 MP3 Player",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 186.12184355372418,
+			"year": 2000,
+			"start_date": "2000-07-01T00:00:00",
+			"end_date": "2000-11-01T00:00:00",
+			"category": "MP3 Player",
+			"industry": "Other",
+			"skills": [
+				"Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Iterative Prototyping",
+				"Usability Testing",
+				"Materials Knowledge"
+			],
+			"img": "/assets/r2/mp6000-mp3-player/hero-sm.webp"
+		},
+		{
+			"id": "Keyboard",
+			"name": "Keyboard",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 179.1087386417331,
+			"year": 2000,
+			"start_date": "2000-05-01T00:00:00",
+			"end_date": "2000-07-01T00:00:00",
+			"category": "Peripheral",
+			"industry": "Other",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Prototyping",
+				"Iterative Prototyping",
+				"Materials Knowledge",
+				"Testing Automation"
+			],
+			"img": "/assets/r2/keyboard/hero-sm.webp"
+		},
+		{
+			"id": "LapTV",
+			"name": "LapTV",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 179.1087386417331,
+			"year": 2000,
+			"start_date": "2000-04-01T00:00:00",
+			"end_date": "2000-06-01T00:00:00",
+			"category": "Portable Media",
+			"industry": "Other",
+			"skills": [
+				"Prototyping",
+				"Design for Manufacturing (DFM)",
+				"Product Testing",
+				"CAD (Computer-Aided Design)",
+				"Tolerance Analysis"
+			],
+			"img": "/assets/r2/laptv/hero-sm.webp"
+		},
+		{
+			"id": "Remote",
+			"name": "Remote",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 172.01197381662155,
+			"year": 2000,
+			"start_date": "2000-04-01T00:00:00",
+			"end_date": "2000-05-01T00:00:00",
+			"category": "Remote Control",
+			"industry": "Other",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"CAD (Computer-Aided Design)",
+				"Reliability Testing",
+				"Tolerance Analysis",
+				"Prototyping"
+			],
+			"img": "/assets/r2/remote/hero-sm.webp"
+		},
+		{
+			"id": "Netscreen-500",
+			"name": "Netscreen-500",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 178.94344562222102,
+			"year": 2000,
+			"start_date": "2000-02-01T00:00:00",
+			"end_date": "2000-04-01T00:00:00",
+			"category": "Security Appliance",
+			"industry": "Other",
+			"skills": [
+				"Agile Methodology",
+				"Problem Solving",
+				"Testing Automation",
+				"Data Analysis",
+				"Cross-functional Collaboration"
+			],
+			"img": "/assets/r2/netscreen-500/hero-sm.webp"
+		},
+		{
+			"id": "SGI 320 540",
+			"name": "SGI 320 540",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 172.33987204485146,
+			"year": 1998,
+			"start_date": "1998-08-01T00:00:00",
+			"end_date": "1998-09-01T00:00:00",
+			"category": "Handheld / Mobile",
+			"industry": "Other",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Usability Testing",
+				"Tolerance Analysis"
+			],
+			"img": "/assets/r2/sgi-320-540/hero-sm.webp"
+		},
+		{
+			"id": "HP Jornada",
+			"name": "HP Jornada",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 172.01197381662155,
+			"year": 1998,
+			"start_date": "1998-06-01T00:00:00",
+			"end_date": "1998-07-01T00:00:00",
+			"category": "Handheld / PDA",
+			"industry": "Other",
+			"skills": [
+				"Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Testing Automation",
+				"Reliability Testing",
+				"Materials Knowledge"
+			],
+			"img": "/assets/r2/hp-jornada/hero-sm.webp"
+		},
+		{
+			"id": "DVDO Player",
+			"name": "DVDO Player",
+			"group": "frogdesign",
+			"color": "#8fd618",
+			"value": 179.1087386417331,
+			"year": 1998,
+			"start_date": "1998-03-01T00:00:00",
+			"end_date": "1998-05-01T00:00:00",
+			"category": "Media Player",
+			"industry": "Other",
+			"skills": [
+				"Iterative Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Materials Knowledge",
+				"Product Testing",
+				"Tolerance Analysis"
+			],
+			"img": "/assets/r2/dvdo-player/hero-sm.webp"
+		},
+		{
+			"id": "Vadem Clio",
+			"name": "Vadem Clio",
+			"group": "frogdesign",
+			"color": "#8fd618",
+			"value": 172.33987204485146,
+			"year": 1997,
+			"start_date": "1997-10-01T00:00:00",
+			"end_date": "1997-11-01T00:00:00",
+			"category": "Handheld / PDA",
+			"industry": "Other",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"CAD (Computer-Aided Design)",
+				"Iterative Prototyping",
+				"Product Testing",
+				"Testing Automation"
+			],
+			"img": "/assets/r2/vadem-clio/hero-sm.webp"
+		},
+		{
+			"id": "KaVo Dental Unit 2",
+			"name": "KaVo Dental Unit 2",
+			"group": "frogdesign",
+			"color": "#8fd618",
+			"value": 188.30437921392434,
+			"year": 1997,
+			"start_date": "1997-07-01T00:00:00",
+			"end_date": "1997-12-01T00:00:00",
+			"category": "Medical Equipment",
+			"industry": "MedTech",
+			"skills": [
+				"Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Reliability Testing",
+				"Design for Manufacturing (DFM)",
+				"Iterative Prototyping"
+			],
+			"img": "/assets/r2/kavo-dental-unit-2/hero-sm.webp"
+		},
+		{
+			"id": "Acer Phone",
+			"name": "Acer Phone",
+			"group": "frogdesign",
+			"color": "#8fd618",
+			"value": 172.33987204485146,
+			"year": 1997,
+			"start_date": "1997-07-01T00:00:00",
+			"end_date": "1997-08-01T00:00:00",
+			"category": "Mobile Phone",
+			"industry": "Other",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"Iterative Prototyping",
+				"CAD (Computer-Aided Design)",
+				"Reliability Testing",
+				"Materials Knowledge"
+			],
+			"img": "/assets/r2/acer-phone/hero-sm.webp"
+		},
+		{
+			"id": "KaVo Dental Unit 1",
+			"name": "KaVo Dental Unit 1",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 183.2178857704904,
+			"year": 1997,
+			"start_date": "1997-07-01T00:00:00",
+			"end_date": "1997-10-01T00:00:00",
+			"category": "Medical Equipment",
+			"industry": "MedTech",
+			"skills": [
+				"Iterative Prototyping",
+				"Usability Testing",
+				"CAD (Computer-Aided Design)",
+				"Materials Knowledge",
+				"Design for Manufacturing (DFM)"
+			],
+			"img": "/assets/r2/kavo-dental-unit-1/hero-sm.webp"
+		},
+		{
+			"id": "Acer subwoofer",
+			"name": "Acer subwoofer",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 179.1087386417331,
+			"year": 1997,
+			"start_date": "1997-06-01T00:00:00",
+			"end_date": "1997-08-01T00:00:00",
+			"category": "Audio",
+			"industry": "Pro Audio",
+			"skills": [
+				"Prototyping",
+				"Testing Automation",
+				"Design for Manufacturing (DFM)",
+				"CAD (Computer-Aided Design)",
+				"Materials Knowledge"
+			],
+			"img": "/assets/r2/acer-subwoofer/hero-sm.webp"
+		},
+		{
+			"id": "Newscorp STB",
+			"name": "Newscorp STB",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 192.88937726156686,
+			"year": 1997,
+			"start_date": "1997-02-01T00:00:00",
+			"end_date": "1997-10-01T00:00:00",
+			"category": "Set-Top Box",
+			"industry": "Other",
+			"skills": [
+				"Prototyping",
+				"Design for Manufacturing (DFM)",
+				"Materials Knowledge",
+				"CAD (Computer-Aided Design)",
+				"Usability Testing"
+			],
+			"img": "/assets/r2/newscorp-stb/hero-sm.webp"
+		},
+		{
+			"id": "PB Convertible",
+			"name": "PB Convertible",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 171.67295829986475,
+			"year": 1996,
+			"start_date": "1996-02-01T00:00:00",
+			"end_date": "1996-03-01T00:00:00",
+			"category": "Personal Computer",
+			"industry": "Other",
+			"skills": [
+				"Iterative Prototyping",
+				"Design for Manufacturing (DFM)",
+				"Reliability Testing",
+				"CAD (Computer-Aided Design)",
+				"Materials Knowledge"
+			],
+			"img": "/assets/r2/pb-convertible/hero-sm.webp"
+		},
+		{
+			"id": "Acer Aspire",
+			"name": "Acer Aspire",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 182.99809670330265,
+			"year": 1996,
+			"start_date": "1996-02-01T00:00:00",
+			"end_date": "1996-05-01T00:00:00",
+			"category": "Personal Computer",
+			"industry": "Other",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"Prototyping",
+				"Reliability Testing",
+				"Iterative Prototyping",
+				"CAD (Computer-Aided Design)"
+			],
+			"img": "/assets/r2/acer-aspire/hero-sm.webp"
+		},
+		{
+			"id": "Fissler BBQ",
+			"name": "Fissler BBQ",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 193.01258210544728,
+			"year": 1995,
+			"start_date": "1995-05-01T00:00:00",
+			"end_date": "1996-01-01T00:00:00",
+			"category": "Consumer Appliance",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Agile Methodology",
+				"Problem Solving",
+				"Testing Automation",
+				"Data Analysis",
+				"Feasibility Analysis"
+			],
+			"img": "/assets/r2/fissler-bbq/hero-sm.webp"
+		},
+		{
+			"id": "Sunbeam toaster",
+			"name": "Sunbeam toaster",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 178.7753744390572,
+			"year": 1995,
+			"start_date": "1995-01-01T00:00:00",
+			"end_date": "1995-03-01T00:00:00",
+			"category": "Consumer Appliance",
+			"industry": "Consumer Electronics",
+			"skills": [
+				"Problem Solving",
+				"Agile Methodology",
+				"Testing Automation",
+				"Data Analysis",
+				"KPI Tracking"
+			],
+			"img": "/assets/r2/sunbeam-toaster/hero-sm.webp"
+		},
+		{
+			"id": "Frantic Frames",
+			"name": "Frantic Frames",
+			"group": "Mechanistic",
+			"color": "#286745",
+			"value": 196.111409929767,
+			"year": 1992,
+			"start_date": "1992-04-01T00:00:00",
+			"end_date": "1993-03-01T00:00:00",
+			"category": "Electromechanical Mechanism",
+			"industry": "Other",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Reliability Testing",
+				"Testing Automation",
+				"Design for Manufacturing (DFM)",
+				"Product Testing"
+			],
+			"img": "/assets/r2/frantic-frames/hero-sm.webp"
+		},
+		{
+			"id": "Indy",
+			"name": "Indy",
+			"group": "Silicon Graphics",
+			"color": "#1fbe31",
+			"value": 195.2358510195238,
+			"year": 1992,
+			"start_date": "1992-03-01T00:00:00",
+			"end_date": "1993-01-01T00:00:00",
+			"category": "Workstation",
+			"industry": "Other",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"Testing Automation",
+				"Reliability Testing",
+				"Iterative Prototyping",
+				"Prototyping"
+			],
+			"img": "/assets/r2/indy/hero-sm.webp"
+		},
+		{
+			"id": "Indigo II",
+			"name": "Indigo II",
+			"group": "Silicon Graphics",
+			"color": "#1fbe31",
+			"value": 201.08098441509532,
+			"year": 1991,
+			"start_date": "1991-04-01T00:00:00",
+			"end_date": "1992-10-01T00:00:00",
+			"category": "Workstation",
+			"industry": "Other",
+			"skills": [
+				"Prototyping",
+				"Iterative Prototyping",
+				"Materials Knowledge",
+				"CAD (Computer-Aided Design)",
+				"Design for Manufacturing (DFM)"
+			],
+			"img": "/assets/r2/indigo-ii/hero-sm.webp"
+		},
+		{
+			"id": "Indigo",
+			"name": "Indigo",
+			"group": "Silicon Graphics",
+			"color": "#1fbe31",
+			"value": 201.578422665081,
+			"year": 1989,
+			"start_date": "1989-11-01T00:00:00",
+			"end_date": "1991-06-01T00:00:00",
+			"category": "Workstation",
+			"industry": "Other",
+			"skills": [
+				"Iterative Prototyping",
+				"Design for Manufacturing (DFM)",
+				"Product Testing",
+				"Usability Testing",
+				"CAD (Computer-Aided Design)"
+			],
+			"img": "/assets/r2/indigo/hero-sm.webp"
+		},
+		{
+			"id": "Iris File",
+			"name": "Iris File",
+			"group": "Silicon Graphics",
+			"color": "#1fbe31",
+			"value": 192.88937726156686,
+			"year": 1990,
+			"start_date": "1990-02-01T00:00:00",
+			"end_date": "1990-10-01T00:00:00",
+			"category": "Server / Storage",
+			"industry": "Other",
+			"skills": [
+				"CAD (Computer-Aided Design)",
+				"Iterative Prototyping",
+				"Prototyping",
+				"Usability Testing",
+				"Reliability Testing"
+			],
+			"img": "/assets/r2/iris-file/hero-sm.webp"
+		},
+		{
+			"id": "Personal IRIS",
+			"name": "Personal IRIS",
+			"group": "Silicon Graphics",
+			"color": "#1fbe31",
+			"value": 205.4875954749168,
+			"year": 1989,
+			"start_date": "1989-07-01T00:00:00",
+			"end_date": "1991-11-01T00:00:00",
+			"category": "Workstation",
+			"industry": "Other",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"Product Testing",
+				"Materials Knowledge",
+				"Prototyping",
+				"Iterative Prototyping"
+			],
+			"img": "/assets/r2/personal-iris/hero-sm.webp"
+		}
+	]
 }
