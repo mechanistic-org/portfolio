@@ -18,6 +18,7 @@ import GlobalHomeButton from "@components/Nav/GlobalHomeButton.astro";
 import ConspiracyBoard from "@components/Projects/ConspiracyBoard";
 import Comparator from "@components/Projects/Comparator";
 import C24TitleAnimator from "@components/Projects/C24TitleAnimator";
+import SCThermalMatrix from "@components/Visualizations/SCThermalMatrix";
 
 const stickies = scrolly?.stickies || [];
 const narratives = scrolly?.narrative || [];
@@ -203,6 +204,9 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 								afterLabel={stage.data?.afterLabel}
 							/>
 						)}
+
+						{/* TYPE: THERMAL VIZ */}
+						{stage.type === "thermal" && <SCThermalMatrix client:load />}
 					</StickyStage>
 				))
 			}

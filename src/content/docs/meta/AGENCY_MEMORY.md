@@ -43,10 +43,17 @@ These are active AI/External resources that contain "Source of Truth" data not i
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Phase:** Phase 3 (Stability & Sovereignty)
-- **Recent Achievement:** Established "Sovereignty Model" to protect Deep Projects. Fixed C24 UI regressions (HUD, Scroll, Links). Resolved critical build crash.
-- **Blocked On:** None. Ready for next campaign.
-- **Next Milestone:** Apply "Forensic Narrative" to Buckley/PCII.
+- **Active Phase:** Phase 4 (Viral Data & Ghost Protocol)
+- **Recent Achievement:** Established the **"Neural Scaffolding Strategy"** for SC48 (NotebookLM -> Directory Structure -> Asset Ingestion). Successfully validated the "Hybrid Registration Protocol" (Main.csv Stub + Manual MD Override).
+- **Blocked On:** SC48 Asset Migration (Auto-Migration Pending).
+- **Next Milestone:** Execute the "Auto-Migration" of 8 key evidence files to `R2_MASTER`.
+
+## 🔗 Active Intelligence (Neural Scaffolding)
+
+- **Protocol:** "The Neural Scaffolding Strategy"
+  - **Concept:** Use NotebookLM to pre-visualize the "Exhibit Halls" (Bubbles) before creating folders.
+  - **Oracle:** [SC48 NotebookLM](https://notebooklm.google.com/notebook/c783...?authuser=1)
+  - **Key Decision:** **"Auto-Migration Pivot"** - If the Agent knows the Source and Destination, it must Script the move. Do not ask the user to drag files.
 
 ---
 
@@ -63,3 +70,13 @@ These are active AI/External resources that contain "Source of Truth" data not i
   - **Tier 3 (The Workbench):** `D:\portfolio` (Staging, Context, Spreadsheets).
   - **Tier 2 (The Refinery):** `eriknorris-assets` (Web-Optimized Assets).
   - **Tier 1 (The Public):** `eriknorris` (Production Site).
+- **The "Ghost Pipeline" (Legacy Artifact):** `D:\GitHub\eriknorris-workspace\R2_MASTER` is a legacy backup. **DO NOT USE.** The Living Pipeline is `eriknorris-assets\R2_STAGING`.
+- **Career Contiguity:** The "Ransomware Gap" is bridged by **Metadata**. Even if files are missing, the _timestamps_ in `\\morespace` prove continuous work from 1996-2024.
+- **Stream Signatures:**
+  - **Noon:** Visual Polish (Gallery-First).
+  - **Hyphen:** Process & Safety (Methodology-First).
+  - **Kaleidescape:** Heavy Industry (Taxonomy-First).
+- **The "Brain vs. Body" Law:**
+  - **The Brain:** NotebookLM (PDFs, Context, Thinking).
+  - **The Body:** R2_STAGING (Images, GLBs, Display Assets).
+  - _We do not dump the Brain into the Body._

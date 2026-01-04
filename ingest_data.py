@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 from PIL import Image
+import re
 
 # --- CONFIGURATION ---
 SOURCE_DIR = "data_source"
@@ -394,14 +395,30 @@ def process_bubbles(slug, title):
                 "images": bubble_images,
                 "layout": "masonry" # Default
             }
-            # Check for config.json override
-            config_path = os.path.join(bubble_path, "config.json")
-            if os.path.exists(config_path):
-                try:
-                    with open(config_path, 'r') as cf:
-                        conf = json.load(cf)
-                        sticky["data"].update(conf)
-                except: pass
+        # --- CONFIG OVERRIDE (Any Type) ---
+        config_path = os.path.join(bubble_path, "config.json")
+        if os.path.exists(config_path):
+            try:
+                with open(config_path, 'r') as cf:
+                    conf = json.load(cf)
+                    # Allow type override
+                    if "type" in conf:
+                        sticky["type"] = conf["type"]
+                    # Merge data keys
+                    sticky["data"].update(conf)
+                    
+                    # Remove "type" from data if it accidentally got there (cleanup)
+                    if "type" in sticky["data"]:
+                        del sticky["data"]["type"]
+            except Exception as e:
+                print(f"    ⚠️ Config Error in {dirname}: {e}")
+
+        if b_type == "gallery":
+            sticky["data"]["layout"] = sticky["data"].get("layout", "masonry")
+                
+        elif b_type == "model":
+             # Ensure specific model data is preserved if not overridden
+             pass
                 
         elif b_type == "model":
              sticky["data"] = {
@@ -909,11 +926,32 @@ def process_projects():
         used_assets = set()
         
         manual_content_path = os.path.join(SOURCE_DIR, "manual_content", f"{slug}.md")
+        manual_hero_override = None
         if os.path.exists(manual_content_path):
             print(f"📄 Found manual content for {slug}")
-            with open(manual_content_path, "r", encoding="utf-8") as mf:
-                content_body = mf.read()
+            with open(manual_content_path, "r", encoding="utf-8-sig") as mf:
+                content_body = mf.read().strip()
                 
+                # --- FRONTMATTER PARSER (Regex) ---
+                # Check for YAML frontmatter block (Permissive)
+                fm_match = re.match(r'^\s*---(.*?)---\s*', content_body, re.DOTALL)
+                if fm_match:
+                    fm_text = fm_match.group(1)
+                    content_body = content_body[fm_match.end():].strip()
+                    print(f"    ✨ Parsed Manual Frontmatter. Body length: {len(content_body)}")
+
+                    # Parse Keys
+                    for line in fm_text.split('\n'):
+                        if ":" in line:
+                            k, v = line.split(":", 1)
+                            k = k.strip()
+                            v = v.strip().strip('"').strip("'")
+                            if k == "heroImage":
+                                manual_hero_override = v
+                                print(f"    ✨ Manual Hero Override: {v}")
+                else:
+                     print(f"    DEBUG: No Frontmatter Detected via Regex. Start: {repr(content_body[:15])}")
+
                 # Ensure imports are present
                 if "import { YouTube }" not in content_body:
                      content_body = f"import {{ YouTube }} from '@astro-community/astro-embed-youtube';\nimport ModelViewer from '@components/mdx/ModelViewer.astro';\n\n{content_body}"
@@ -972,6 +1010,10 @@ def process_projects():
                 print(f"    DEBUG: Picked Hero {best_hero} (Score: {hero_candidates[0][0]})")
             else:
                 print(f"    DEBUG: No hero candidates found in {staging_project_dir}")
+            
+            # --- APPLY MANUAL OVERRIDE ---
+            if manual_hero_override:
+                hero_img = manual_hero_override
 
             # --- 3D MODEL ---
             for f in all_files:

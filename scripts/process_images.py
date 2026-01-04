@@ -17,14 +17,14 @@ pillow_heif.register_heif_opener()
 SCRIPT_DIR = Path(__file__).resolve().parent
 # Repo Root (d:\GitHub\quantum)
 REPO_ROOT = SCRIPT_DIR.parent
-# Sibling Workspace (d:\GitHub\quantum-workspace)
-WORKSPACE_ROOT = REPO_ROOT.parent / "quantum-workspace"
+# Sibling Workspace (d:\GitHub\eriknorris-workspace)
+WORKSPACE_ROOT = REPO_ROOT.parent / "eriknorris-workspace"
 MASTER_DIR = WORKSPACE_ROOT / "R2_MASTER"
 
 # Repo Sibling Path (Relative to this script)
-# Script is in d:\GitHub\quantum\scripts
-# We want d:\GitHub\quantum-assets\R2_STAGING
-STAGING_DIR = REPO_ROOT.parent / "quantum-assets" / "R2_STAGING"
+# Script is in d:\GitHub\eriknorris\scripts
+# We want d:\GitHub\eriknorris-assets\R2_STAGING
+STAGING_DIR = REPO_ROOT.parent / "eriknorris-assets" / "R2_STAGING"
 
 # Breakpoints (Widths)
 BREAKPOINTS = {
