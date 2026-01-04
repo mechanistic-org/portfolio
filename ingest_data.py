@@ -955,6 +955,14 @@ def process_projects():
                 # Ensure imports are present
                 if "import { YouTube }" not in content_body:
                      content_body = f"import {{ YouTube }} from '@astro-community/astro-embed-youtube';\nimport ModelViewer from '@components/mdx/ModelViewer.astro';\n\n{content_body}"
+                
+                # --- ASSET PATH REPLACEMENT ---
+                # Replace hardcoded /assets/r2/ with actual R2_DOMAIN (for Prod)
+                if R2_DOMAIN != "/assets/r2":
+                    content_body = content_body.replace("/assets/r2", R2_DOMAIN)
+                    if manual_hero_override:
+                        manual_hero_override = manual_hero_override.replace("/assets/r2", R2_DOMAIN)
+                        print(f"    🔄 Replaced Asset Path in Override: {manual_hero_override}")
 
         # --- IMAGES ---
         # Look for images in STAGING_DIR/slug

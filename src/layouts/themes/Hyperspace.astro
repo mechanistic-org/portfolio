@@ -15,8 +15,8 @@ const scrolly = cyberspace;
 
 import GlobalHomeButton from "@components/Nav/GlobalHomeButton.astro";
 // NEW COMPONENT IMPORTS
-import ConspiracyBoard from "@components/Projects/ConspiracyBoard";
-import Comparator from "@components/Projects/Comparator";
+// import ConspiracyBoard from "@components/Projects/ConspiracyBoard";
+// import Comparator from "@components/Projects/Comparator";
 import C24TitleAnimator from "@components/Projects/C24TitleAnimator";
 import SCThermalMatrix from "@components/Visualizations/SCThermalMatrix";
 
@@ -189,12 +189,13 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 							/>
 						)}
 
-						{/* TYPE: CONSPIRACY BOARD */}
+						{/* TYPE: CONSPIRACY BOARD - DISABLED FOR MANIFESTO V4.2 BUILD
 						{stage.type === "conspiracy" && (
 							<ConspiracyBoard client:load images={stage.data?.images || []} />
 						)}
+						*/}
 
-						{/* TYPE: COMPARATOR */}
+						{/* TYPE: COMPARATOR - DISABLED FOR MANIFESTO V4.2 BUILD
 						{stage.type === "comparator" && (
 							<Comparator
 								client:load
@@ -204,6 +205,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 								afterLabel={stage.data?.afterLabel}
 							/>
 						)}
+						*/}
 
 						{/* TYPE: THERMAL VIZ */}
 						{stage.type === "thermal" && <SCThermalMatrix client:load />}
