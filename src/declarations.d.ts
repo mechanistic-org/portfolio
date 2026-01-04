@@ -145,6 +145,13 @@ declare module "*.astro" {
 	export const dropzone: any;
 	export const kbd: any;
 	export const progress: any;
+	export const alertDialogBackdrop: any;
+	export const alertDialogFooter: any;
+	export const alertDialogHeader: any;
+	export const progressIndicator: any;
+	export const aspectRatioWrapper: any;
+	export const dropzoneFilesList: any;
+	export const kbdGroup: any;
 	export const dialogCloseButton: any;
 	export const selectSearch: any;
 	export const selectContentInner: any;
