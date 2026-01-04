@@ -59,8 +59,12 @@ sidebar:
     - **Links:** Fixed `ScrollyHud` hrefs to correctly target anchor IDs.
     - **Scrolling:** Moved `overflow-x: hidden` to `body` to restore scrolling.
   - **[Fix] Build Crash:** Identified and fixed a syntax error in `Hyperspace.astro` (`animateWiggle`) that was crashing the build pipeline.
-
-- **[2026-01-03] SC48 & The Neural Scaffold**
+- **[2026-01-04] C24 & System Stabilization**
+  - **[Fix] C24 3D Pipeline:** Restored full `modelSrc` mapping in `Hyperspace.astro`, enabling correct GLB rendering across local/prod.
+  - **[Cleanup] Vestigial Code:** Removed broken `TextDeck` logic from Stage 06/07.
+  - **[Infrastructure] Golden Path:** Validated `getAssetUrl` integrity across all gallery components.
+  - **[Fix] IDE Errors:** Patched `tsconfig.json` with `dom` lib to resolve 70+ false positive errors.
+  - **[Polishing]** Removed debug logging from production components.
   - **[Protocol] Neural Scaffolding:** Established a new ingestion workflow: `NotebookLM` (Oracle) -> `Browser Agent` (Manifest Extraction) -> `Auto-Migration` (PowerShell). Replaced manual "Hunt and Drag" with "Approve and Watch."
   - **[Feature] SC48 Deep Dive:** Reconstructed the SC48 project using the **Hybrid Registration Protocol** (CSV Stub + Manual MD Override). Defined 4 "Exhibit Halls" (Meltdown, Origami, Brain, Shell) based on Oracle mining.
   - **[Infrastructure] Auto-Migration:** Implemented the "Law of Automation" – prohibiting the Agent from requesting manual file transfers when source/destination paths are known.
