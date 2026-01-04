@@ -1,6 +1,26 @@
 {
 	"nodes": [
 		{
+			"id": "SC48",
+			"name": "SC48",
+			"group": "Digidesign",
+			"color": "#40ef29",
+			"value": 185.0,
+			"year": 2008,
+			"start_date": "2008-01-01T00:00:00",
+			"end_date": "2009-01-01T00:00:00",
+			"category": "Live Sound Console",
+			"industry": "Pro Audio",
+			"skills": [
+				"Design for Manufacturing (DFM)",
+				"CAD (Computer-Aided Design)",
+				"Reliability Testing",
+				"Product Testing",
+				"Iterative Prototyping"
+			],
+			"img": "/assets/r2/sc48/SC48-hero-01-sm.webp"
+		},
+		{
 			"id": "dreamjob",
 			"name": "dreamjob",
 			"group": "awesomejob",
@@ -947,7 +967,7 @@
 				"Reliability Testing",
 				"Design for Manufacturing (DFM)"
 			],
-			"img": "/assets/r2/d-control/hero-sm.webp"
+			"img": "/assets/r2/d-control/d-control-hero-01-sm.webp"
 		},
 		{
 			"id": "D-Command",
@@ -967,7 +987,7 @@
 				"Design for Manufacturing (DFM)",
 				"Usability Testing"
 			],
-			"img": "/assets/r2/d-command/hero-sm.webp"
+			"img": "/assets/r2/d-command/d-command-hero-01-sm.webp"
 		},
 		{
 			"id": "Pro Control Jr",
