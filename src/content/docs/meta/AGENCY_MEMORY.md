@@ -44,12 +44,15 @@ These are active AI/External resources that contain "Source of Truth" data not i
 ## 📍 Current Focus State (The "Cursor")
 
 - **Active Phase:** Phase 4 (Viral Data & Ghost Protocol)
-- **Recent Achievement:** Established the **"Neural Scaffolding Strategy"** for SC48 (NotebookLM -> Directory Structure -> Asset Ingestion). Successfully validated the "Hybrid Registration Protocol" (Main.csv Stub + Manual MD Override).
-- **Blocked On:** SC48 Asset Migration (Auto-Migration Pending).
-- **Next Milestone:** Execute the "Auto-Migration" of 8 key evidence files to `R2_MASTER`.
+- **Primary Objective:** **Gap Analysis Fill**. (SC48 is wired but empty compared to C24).
+- **Secondary Objective:** **Documentation Hardening**. (Applying the "Mining" updates).
+- **Active Thread:** `415822ee-c0e1-427a-bc9f-493ee723413b` (SC48 Reconstruction).
 
-## 🔗 Active Intelligence (Neural Scaffolding)
+## 🔗 Active Intelligence (New Synapses)
 
+- **The Data Bridge:** We successfully bridged "Dead" binary data (Excel .xls) to "Live" visualization (D3/React). Pattern: `scripts/extract_thermal.py` -> `src/config/sc48_thermal_real.json` -> `SCThermalMatrix.tsx`.
+- **The Asset Lock:** `npm run dev` locks files in `public/assets`. Ingestion scripts CANNOT overwrite them while the server is running. FAILS SILENTLY.
+- **Regex Sovereignty:** `startswith("---")` is brittle. Always use Regex `^\s*---` for frontmatter parsing to handle BOM/Whitespace.
 - **Protocol:** "The Neural Scaffolding Strategy"
   - **Concept:** Use NotebookLM to pre-visualize the "Exhibit Halls" (Bubbles) before creating folders.
   - **Oracle:** [SC48 NotebookLM](https://notebooklm.google.com/notebook/c783...?authuser=1)
