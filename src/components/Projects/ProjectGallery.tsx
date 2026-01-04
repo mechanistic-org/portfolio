@@ -24,7 +24,7 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
 	if (!images || images.length === 0) return null;
 
 	// Format slides for Lightbox
-	const slides = images.map((img) => ({ src: getAssetUrl(img.src) }));
+	const slides = images.map((img) => ({ src: getAssetUrl(img.src) || "" }));
 
 	return (
 		<>
@@ -45,7 +45,7 @@ export default function ProjectGallery({ images }: ProjectGalleryProps) {
 							onClick={() => setIndex(i)}
 						>
 							<img
-								src={getAssetUrl(img.src)}
+								src={getAssetUrl(img.src) || ""}
 								alt={`Gallery image ${i + 1}`}
 								className="block h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
 								style={{ objectFit: "cover" }}

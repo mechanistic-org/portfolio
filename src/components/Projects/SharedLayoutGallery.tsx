@@ -172,7 +172,7 @@ export default function SharedLayoutGallery({
 				{/* Image Top */}
 				<div className="relative aspect-video overflow-hidden border-b border-white/5 bg-black/50">
 					<img
-						src={getAssetUrl(image.src)}
+						src={getAssetUrl(image.src) || ""}
 						alt={image.title}
 						className="h-full w-full object-cover opacity-80 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100"
 					/>
@@ -466,7 +466,7 @@ export default function SharedLayoutGallery({
 								<button
 									onClick={(e) => {
 										e.stopPropagation();
-										prevImage();
+										prevImage(e);
 									}}
 									className="absolute top-1/2 left-4 z-[10002] hidden -translate-y-1/2 p-4 text-white/50 transition-colors hover:text-white md:block"
 								>
@@ -488,7 +488,7 @@ export default function SharedLayoutGallery({
 								<button
 									onClick={(e) => {
 										e.stopPropagation();
-										nextImage();
+										nextImage(e);
 									}}
 									className="absolute top-1/2 right-4 z-[10002] hidden -translate-y-1/2 p-4 text-white/50 transition-colors hover:text-white md:block"
 								>
@@ -532,7 +532,7 @@ export default function SharedLayoutGallery({
 											className="max-h-full max-w-full cursor-pointer object-contain shadow-2xl"
 											onClick={(e) => {
 												e.stopPropagation();
-												nextImage();
+												nextImage(e);
 											}}
 										/>
 									</motion.div>
