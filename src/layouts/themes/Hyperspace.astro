@@ -7,6 +7,7 @@ import ScrollyHud from "@components/Scrolly/ScrollyHud.astro";
 import TextDeck from "@components/Scrolly/TextDeck.astro";
 import ProjectManifestHUD from "@components/Projects/ProjectManifestHUD.astro";
 import SharedLayoutGallery from "@components/Projects/SharedLayoutGallery";
+import { getAssetUrl } from "@/utils/assets";
 
 const { entry, nextProject, prevProject, Content, metrics } = Astro.props;
 const { cyberspace, title, description } = entry.data;
@@ -133,8 +134,8 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 						{/* TYPE: MODEL */}
 						{stage.type === "model" && (
 							<model-viewer
-								src={stage.data?.src}
-								poster={stage.data?.poster}
+								src={getAssetUrl(stage.data?.src || stage.data?.modelSrc)}
+								poster={getAssetUrl(stage.data?.poster)}
 								loading="eager"
 								camera-controls
 								disable-zoom
@@ -166,7 +167,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 							<div class="relative h-full w-full">
 								{stage.data?.src && (
 									<img
-										src={stage.data.src}
+										src={getAssetUrl(stage.data.src)}
 										alt={stage.title}
 										class="h-full w-full object-cover opacity-80"
 									/>
@@ -231,8 +232,8 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 					<ScrollTrigger
 						step={stage.id}
 						align={stage.align}
-						invisible={!stage.title && !stage.text && !stage.deck}
-						wide={!!stage.deck}
+						invisible={!stage.title && !stage.text && (!stage.deck || stage.deck.length === 0)}
+						wide={stage.deck && stage.deck.length > 0}
 					>
 						{stage.title && <h2 class="mb-4 text-3xl font-bold text-white">{stage.title}</h2>}
 						{stage.text && <p class="text-neutral-400" set:html={stage.text} />}
@@ -258,7 +259,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 					{narratives.map((n: any) => {
 						// Find the matching visual from the sticky stages
 						const relatedStage = stickies.find((s: any) => s.id === n.step);
-						const imgSrc = relatedStage?.data?.src;
+						const imgSrc = relatedStage?.data?.src || relatedStage?.data?.modelSrc;
 						const posterSrc = relatedStage?.data?.poster; // NEW: Support poster
 						const isModel = relatedStage?.type === "model";
 
@@ -276,7 +277,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 									{/* CASE 1: Standard Image */}
 									{imgSrc && !isModel && (
 										<img
-											src={imgSrc}
+											src={getAssetUrl(imgSrc)}
 											alt={n.title}
 											class="h-full w-full object-cover opacity-80 transition-opacity duration-500 hover:opacity-100"
 										/>
@@ -286,7 +287,10 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 									{isModel && (
 										<div class="flex h-full w-full items-center justify-center bg-black">
 											{posterSrc ? (
-												<img src={posterSrc} class="h-full w-full object-cover opacity-80" />
+												<img
+													src={getAssetUrl(posterSrc)}
+													class="h-full w-full object-cover opacity-80"
+												/>
 											) : (
 												<div class="text-center">
 													<div class="mb-4 text-6xl">🧊</div>
@@ -402,13 +406,11 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 				topHud.style.transform = "translateY(0%)";
 				startBtn.style.opacity = "0";
 				startBtn.style.transform = "translateY(-50px) scale(0.9)";
-				console.log("HUD: Showing");
 			} else {
 				// Default State
 				topHud.style.transform = "translateY(-100%)";
 				startBtn.style.opacity = "1";
 				startBtn.style.transform = "translateY(0) scale(1)";
-				console.log("HUD: Hiding");
 			}
 		}
 	});
