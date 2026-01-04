@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"; // Explicit React import for Astro
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import TimeCapsule from "./TimeCapsule";
 import RetroLogoAnimator from "./RetroLogoAnimator";
@@ -449,112 +450,122 @@ export default function SharedLayoutGallery({
 
 			<TimeCapsule isOpen={showTimeCapsule} onClose={() => setShowTimeCapsule(false)} />
 
-			{/* Fullscreen Overlay */}
-			<AnimatePresence>
-				{selectedId && (
-					<motion.div
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						exit={{ opacity: 0 }}
-						className="fixed inset-0 z-10001 flex items-center justify-center bg-black/95 p-4 backdrop-blur-xl md:p-8"
-						onClick={closeModal}
-					>
-						{/* Navigation Buttons */}
-						<button
-							onClick={prevImage}
-							className="absolute top-1/2 left-4 z-210 hidden -translate-y-1/2 p-4 text-white/50 transition-colors hover:text-white md:block" // increased z-index
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="32"
-								height="32"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							>
-								<path d="m15 18-6-6 6-6" />
-							</svg>
-						</button>
-
-						<button
-							onClick={nextImage}
-							className="absolute top-1/2 right-4 z-210 hidden -translate-y-1/2 p-4 text-white/50 transition-colors hover:text-white md:block" // increased z-index
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="32"
-								height="32"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							>
-								<path d="m9 18 6-6-6-6" />
-							</svg>
-						</button>
-
-						{/* Selected Image Container*/}
-						<div className="pointer-events-none relative flex h-full w-full max-w-7xl flex-col items-center justify-center">
+			{/* Fullscreen Overlay - Portaled to Body to escape Stacking Context */}
+			{typeof document !== "undefined" &&
+				createPortal(
+					<AnimatePresence>
+						{selectedId && (
 							<motion.div
-								layoutId={selectedId}
-								className="pointer-events-auto relative flex h-full max-h-[85vh] w-full items-center justify-center"
-								drag="y"
-								dragConstraints={{ top: 0, bottom: 0 }}
-								dragElastic={0.7}
-								onDragEnd={(e, { offset, velocity }) => {
-									const swipeThreshold = 100;
-									const velocityThreshold = 500;
-									if (offset.y > swipeThreshold || velocity.y > velocityThreshold) {
-										closeModal();
-									}
-								}}
-								onClick={(e) => {
-									// Allow clicks on the wrapper (padding area) to close, but stop propagation if we dragged?
-									// Actually, wrapper clicks should propagate to container (Close).
-									// But framer motion might block propagation on drag.
-									// We don't need explicit onClick here if we want bubbling.
-								}}
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								className="fixed inset-0 z-[10001] flex items-center justify-center bg-black/95 p-4 backdrop-blur-xl md:p-8"
+								onClick={closeModal}
 							>
-								<img
-									src={getAssetUrl(uniqueImages[selectedIndex].src)}
-									alt="Selected"
-									className="max-h-full max-w-full cursor-pointer object-contain shadow-2xl"
-									onClick={nextImage}
-								/>
-							</motion.div>
-
-							{/* Metadata Pane */}
-							{currentImage && (currentImage.title || currentImage.description) && (
-								<motion.div
-									initial={{ opacity: 0, y: 20 }}
-									animate={{ opacity: 1, y: 0 }}
-									transition={{ delay: 0.2 }}
-									className="pointer-events-auto mt-4 w-full max-w-2xl rounded-sm border-t border-white/10 bg-black/80 p-6 backdrop-blur-md"
-									onClick={(e) => e.stopPropagation()}
+								{/* Navigation Buttons */}
+								<button
+									onClick={(e) => {
+										e.stopPropagation();
+										prevImage();
+									}}
+									className="absolute top-1/2 left-4 z-[10002] hidden -translate-y-1/2 p-4 text-white/50 transition-colors hover:text-white md:block"
 								>
-									<div className="flex flex-col gap-2">
-										{currentImage.title && (
-											<h3 className="text-accent mb-1 border-b border-white/10 pb-2 font-mono text-sm tracking-widest uppercase">
-												{currentImage.title}
-											</h3>
-										)}
-										{currentImage.description && (
-											<p className="font-sans text-base leading-relaxed text-white/80">
-												{currentImage.description}
-											</p>
-										)}
-									</div>
-								</motion.div>
-							)}
-						</div>
-					</motion.div>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="32"
+										height="32"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										strokeWidth="2"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									>
+										<path d="m15 18-6-6 6-6" />
+									</svg>
+								</button>
+
+								<button
+									onClick={(e) => {
+										e.stopPropagation();
+										nextImage();
+									}}
+									className="absolute top-1/2 right-4 z-[10002] hidden -translate-y-1/2 p-4 text-white/50 transition-colors hover:text-white md:block"
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="32"
+										height="32"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										strokeWidth="2"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									>
+										<path d="m9 18 6-6-6-6" />
+									</svg>
+								</button>
+
+								{/* Selected Image Container*/}
+								<div className="pointer-events-none relative flex h-full w-full max-w-7xl flex-col items-center justify-center">
+									<motion.div
+										layoutId={selectedId}
+										className="pointer-events-auto relative flex h-full max-h-[85vh] w-full items-center justify-center"
+										drag="y"
+										dragConstraints={{ top: 0, bottom: 0 }}
+										dragElastic={0.7}
+										onDragEnd={(e, { offset, velocity }) => {
+											const swipeThreshold = 100;
+											const velocityThreshold = 500;
+											if (offset.y > swipeThreshold || velocity.y > velocityThreshold) {
+												closeModal();
+											}
+										}}
+										onClick={(e) => {
+											e.stopPropagation();
+										}}
+									>
+										<img
+											src={getAssetUrl(uniqueImages[selectedIndex].src)}
+											alt="Selected"
+											className="max-h-full max-w-full cursor-pointer object-contain shadow-2xl"
+											onClick={(e) => {
+												e.stopPropagation();
+												nextImage();
+											}}
+										/>
+									</motion.div>
+
+									{/* Metadata Pane */}
+									{currentImage && (currentImage.title || currentImage.description) && (
+										<motion.div
+											initial={{ opacity: 0, y: 20 }}
+											animate={{ opacity: 1, y: 0 }}
+											transition={{ delay: 0.2 }}
+											className="pointer-events-auto mt-4 w-full max-w-2xl rounded-sm border-t border-white/10 bg-black/80 p-6 backdrop-blur-md"
+											onClick={(e) => e.stopPropagation()}
+										>
+											<div className="flex flex-col gap-2">
+												{currentImage.title && (
+													<h3 className="text-accent mb-1 border-b border-white/10 pb-2 font-mono text-sm tracking-widest uppercase">
+														{currentImage.title}
+													</h3>
+												)}
+												{currentImage.description && (
+													<p className="font-sans text-base leading-relaxed text-white/80">
+														{currentImage.description}
+													</p>
+												)}
+											</div>
+										</motion.div>
+									)}
+								</div>
+							</motion.div>
+						)}
+					</AnimatePresence>,
+					document.body,
 				)}
-			</AnimatePresence>
 		</div>
 	);
 }
