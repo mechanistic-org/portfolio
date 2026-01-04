@@ -329,6 +329,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 </BaseLayout>
 
 <script>
+	import "@google/model-viewer";
 	// LOADER LOGIC
 	// improved to handle multiple viewers potentially
 	customElements.whenDefined("model-viewer").then(() => {

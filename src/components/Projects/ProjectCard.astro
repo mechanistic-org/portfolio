@@ -1,5 +1,5 @@
----
 import { Image } from "astro:assets";
+import { getAssetUrl } from "@utils/assets";
 
 const { project } = Astro.props;
 const { data, id } = project;
@@ -17,7 +17,7 @@ const href = `/projects/${id}/`;
 		{
 			typeof data.heroImage === "string" ? (
 				<img
-					src={data.heroImage}
+					src={getAssetUrl(data.heroImage) || ""}
 					alt={data.title}
 					class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
 					loading="lazy"
