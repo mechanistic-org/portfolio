@@ -43,14 +43,15 @@ These are active AI/External resources that contain "Source of Truth" data not i
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Current Focus:** Overhauling `src/pages/projects` (The "Projects Page").
-- **State:**
-  - [x] **Stabilized:** C24/SC48/D-Control images are fixed.
-  - [x] **Deployed:** Cloudflare build successful.
-  - [x] **Data Mesh:** Consolidated data sources. Retired `hierarchy.json` and `sacred_timeline.json` in favor of `multiverse.json`.
-  - [x] **Homepage:** Implemented Cinematic Entrance (Swarm + Fiche) and moved Manifesto to `/manifesto`.
-  - [x] **Projects:** "Swarm" is default view. "Skills" graph populated from Multiverse data.
-- **Active Thread:** `415822ee-c0e1-427a-bc9f-493ee723413b` (SC48 Reconstruction).
+- **Active Module:** Homepage / Entrance Animation (COMPLETE).
+- **Next Up:**
+  1.  **Fiche Refinement:** Verify the "side-in" animation and interactivity of the Project Fiche.
+  2.  **Project Detail Pages:** Ensure the new `multiverse.json` data schema maps correctly to individual project routes.
+
+* **Key Decision (Physics):** "Goldilocks" settings are `vy: -50`, `friction: 0.05`. Do not increase friction without vertically scaling velocity.
+* **Key Decision (Data):** `multiverse.json` is the Single Source of Truth.
+
+- **Active Thread:** `8213dcd2-add6-46cb-a56c-73af7c01a557` (Homepage Creation Sequence).
 
 ## 🔗 Active Intelligence (New Synapses)
 

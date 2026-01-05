@@ -5,7 +5,7 @@ import { Icon } from "astro-icon/components";
 
 <nav
 	id="hyperspace-nav"
-	class="fixed bottom-0 left-0 z-50 flex w-full items-center justify-between border-t border-transparent bg-transparent px-6 py-4 transition-all duration-500 md:top-0 md:bottom-auto md:border-t-0"
+	class="fixed bottom-0 left-0 z-100 flex w-full items-center justify-between border-t border-transparent bg-transparent px-6 py-4 transition-all duration-500 md:top-0 md:bottom-auto md:border-t-0"
 >
 	<!-- Left: Branding (EN Logo) -->
 	<div class="flex items-center gap-4">
@@ -24,13 +24,13 @@ import { Icon } from "astro-icon/components";
 	>
 		<a
 			href="/projects"
-			class="hover:!text-primary-500 rounded-full px-4 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-all duration-300 hover:bg-white/5"
+			class="hover:text-primary-500! rounded-full px-4 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-all duration-300 hover:bg-white/5"
 		>
 			Work
 		</a>
 		<a
 			href="/about"
-			class="hover:!text-primary-500 rounded-full px-4 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-all duration-300 hover:bg-white/5"
+			class="hover:text-primary-500! rounded-full px-4 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-all duration-300 hover:bg-white/5"
 		>
 			About
 		</a>
@@ -38,14 +38,14 @@ import { Icon } from "astro-icon/components";
 		<a
 			href="#realm-system"
 			data-nav-target="realm-system"
-			class="hover:!text-primary-500 rounded-full px-4 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-all duration-300 hover:bg-white/5"
+			class="hover:text-primary-500! rounded-full px-4 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-all duration-300 hover:bg-white/5"
 		>
 			System
 		</a>
 		<a
 			href="#realm-archive"
 			data-nav-target="realm-archive"
-			class="hover:!text-primary-500 rounded-full px-4 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-all duration-300 hover:bg-white/5"
+			class="hover:text-primary-500! rounded-full px-4 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-all duration-300 hover:bg-white/5"
 		>
 			Archive
 		</a>
@@ -55,7 +55,7 @@ import { Icon } from "astro-icon/components";
 		<div class="mx-1 h-3 w-px bg-white/20"></div>
 		<button
 			id="hud-search-trigger"
-			class="group hover:!text-primary-500 flex items-center justify-center rounded-full p-1 text-neutral-500 transition-colors duration-300 hover:bg-white/5"
+			class="group hover:text-primary-500! flex items-center justify-center rounded-full p-1 text-neutral-500 transition-colors duration-300 hover:bg-white/5"
 			aria-label="Search"
 		>
 			<Icon name="tabler:search" class="h-4 w-4" />
@@ -106,7 +106,7 @@ import { Icon } from "astro-icon/components";
 									link.classList.add("bg-primary-500", "text-white", "font-bold");
 									link.classList.remove(
 										"text-neutral-500",
-										"hover:!text-primary-500",
+										"hover:text-primary-500!",
 										"hover:bg-white/5",
 									);
 								} else {
@@ -114,7 +114,7 @@ import { Icon } from "astro-icon/components";
 									link.classList.remove("bg-primary-500", "text-white", "font-bold");
 									link.classList.add(
 										"text-neutral-500",
-										"hover:!text-primary-500",
+										"hover:text-primary-500!",
 										"hover:bg-white/5",
 									);
 								}
@@ -153,7 +153,7 @@ import { Icon } from "astro-icon/components";
 			href="https://github.com/eriknorris"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="hover:!text-primary-500 transition-colors duration-300 hover:scale-110"
+			class="hover:text-primary-500! transition-colors duration-300 hover:scale-110"
 		>
 			<Icon name="tabler:brand-github" class="h-5 w-5" />
 		</a>
@@ -161,13 +161,13 @@ import { Icon } from "astro-icon/components";
 			href="https://linkedin.com/in/eriknorris"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="hover:!text-primary-500 transition-colors duration-300 hover:scale-110"
+			class="hover:text-primary-500! transition-colors duration-300 hover:scale-110"
 		>
 			<Icon name="tabler:brand-linkedin" class="h-5 w-5" />
 		</a>
 		<a
 			href="mailto:erik@example.com"
-			class="hover:!text-primary-500 transition-colors duration-300 hover:scale-110"
+			class="hover:text-primary-500! transition-colors duration-300 hover:scale-110"
 		>
 			<Icon name="tabler:mail" class="h-5 w-5" />
 		</a>
@@ -176,7 +176,7 @@ import { Icon } from "astro-icon/components";
 			href="https://resume.eriknorris.com"
 			target="_blank"
 			rel="noopener noreferrer"
-			class="group hover:!text-primary-500 flex items-center gap-2 transition-colors duration-300"
+			class="group hover:text-primary-500! flex items-center gap-2 transition-colors duration-300"
 		>
 			<Icon
 				name="tabler:file-text"

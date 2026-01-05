@@ -584,6 +584,14 @@ status: {
 
 ## 9. Writing Manual Content
 
+### Invisible Swarm / "Zero Swarm"
+
+- **Symptom:** The Swarm component renders nothing (white/black space), even though data exists.
+- **Cause 1 (Physics Math):** If `velocityDecay` (friction) is too high (>0.2) and launch velocity is too low (<-50), the nodes stall off-screen and never enter the viewport.
+  - **Fix:** Ensure `vy / friction > required_distance`. set `friction` to `0.05`.
+- **Cause 2 (Dimensions):** If the `ResizeObserver` logic is deleted or failing, `dimensions` defaults to `{0,0}`, preventing the D3 simulation from starting.
+  - **Fix:** Verify `useResizeObserver` or explicit `ResizeObserver` logic exists in `ResVizSwarm.tsx`.
+
 When creating deep-dive content in `data_source/manual_content/{slug}.md`, follow the **Narrative STAR** framework.
 
 ### Template

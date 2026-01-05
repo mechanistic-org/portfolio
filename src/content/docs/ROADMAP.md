@@ -46,6 +46,11 @@ sidebar:
 
 ## 📜 Change Log (Recent)
 
+- **[2026-01-04] Homepage "Creation Sequence"**
+  - **Architecture:** Refactored `HyperspaceHome.astro` to use Vanilla JS scroll orchestration for performance.
+  - **Feature:** Implemented "Carny Bell" physics trigger for Swarm entrance.
+  - **Feature:** "Three-Click" Narrative: Logo -> Swarm -> Date Axis (Slow Fade).
+  - **Cleanup:** Consolidated all project data to `multiverse.json`; retired `hierarchy.json` and `sacred_timeline.json`.
 - **[2026-01-04] Data Consolidation & Stabilization**
   - **[Fix] Data Integrity:** Restored missing `SC48` node to `multiverse.json`; fixed broken image paths for `C|24`, `D-Control`, and `D-Command`.
   - **[Asset Pipeline]** Validated that `getAssetUrl` correctly handles R2 paths in production.
@@ -326,6 +331,11 @@ sidebar:
 ## Colophon / Meta-Portfolio
 
 ### The System Assembly (3D Stack)
+
+- **Swarm Physics Engine (The Carny Bell):**
+  - **Hook:** "A data visualization that respects gravity and drama."
+  - **Tech:** D3.js Force Simulation + React Intersection Observer (or Scroll Listener).
+  - **Description:** A custom physics solution dealing with "Launchpad" states and "Goldilocks" tuning to create a kinetic, scroll-triggered narrative entrance for data nodes.
 
 - **Hook:** "Architecture you can touch."
 - **Tech:** React Three Fiber, Framer Motion (Scroll), Glassmorphism.

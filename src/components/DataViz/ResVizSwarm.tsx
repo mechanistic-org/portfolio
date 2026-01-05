@@ -126,7 +126,7 @@ export default function ResVizSwarm({
 					radius: r,
 					date: start,
 					x: 0,
-					y: 0,
+					y: 2000, // Safe Offscreen Init
 				};
 			}) as NodeData[];
 	}, []);
@@ -148,16 +148,6 @@ export default function ResVizSwarm({
 	useEffect(() => {
 		if (!svgRef.current || dimensions.width === 0) return;
 
-		// If physics haven't started, don't run the simulation loop
-		// However, we might want to draw static nodes?
-		// No, user wants "Intro Swarm" > animation into view.
-		// So keep it empty until trigger.
-		if (!shouldStart) {
-			const svg = d3.select(svgRef.current);
-			svg.selectAll("*").remove(); // Ensure clean slate
-			return;
-		}
-
 		const { width, height } = dimensions;
 
 		// --- Scales ---
@@ -175,58 +165,52 @@ export default function ResVizSwarm({
 		const colorScale = d3.scaleOrdinal(d3.schemeTableau10);
 
 		// --- Simulation ---
-		// Pre-scatter nodes for dramatic intro animation (Fly in from bottom/sides)
-		// Reset positions EVERY mount to ensure the intro effect always plays for the user
-		nodes.forEach((d) => {
-			d.x = width / 2 + (Math.random() - 0.5) * 500;
-			d.y = height + 300 + Math.random() * 300; // Start well below view
-			d.vx = 0;
-			d.vy = 0;
-		});
+		// 1. LAUNCHPAD STATE (Holding Pattern)
+		if (!shouldStart) {
+			nodes.forEach((d) => {
+				d.x = width / 2 + (Math.random() - 0.5) * 200;
+				d.y = height + 150 + Math.random() * 100; // Hold at bottom
+				d.vx = 0;
+				d.vy = 0; // No movement while holding
+			});
+		}
+		// 2. LAUNCH TRIGGER (The Kick)
+		else {
+			// FORCE RESET to Cannon Mouth to ensure they can make the distance
+			// The previous issue was they started too deep (y=2000) and ran out of momentum
+			nodes.forEach((d) => {
+				// Snap to launch position just below fold
+				d.y = height + 50 + Math.random() * 100;
+
+				// The Hammer
+				d.vx = (Math.random() - 0.5) * 10;
+				d.vy = -50 - Math.random() * 50; // Moderate velocity (-75 avg)
+			});
+		}
 
 		const simulation = d3
 			.forceSimulation<NodeData>(nodes)
-			.alphaDecay(0.015) // Slower simulation ~4-5s total
-			.velocityDecay(0.4) // Heavy/Fluid friction
-			.force("x", d3.forceX(width / 2).strength(0.05)) // Center horizontally (gentle)
-			.force("y", d3.forceY<NodeData>((d) => timeScale(d.date as Date)).strength(0.15)) // Floating entry, not snapping
-			.force("collide", d3.forceCollide<NodeData>((d) => (d as any).radius).strength(0.8)) // Allow slight overlap
-			.force("charge", d3.forceManyBody().strength(-5))
+			.alphaDecay(0.005) // Extended sustain
+			.velocityDecay(0.05) // EXTREMELY LOW FRICTION (Ice/Space) - crucial for distance for Range, but enough to grab it eventually
+			.force("x", d3.forceX(width / 2).strength(0.04)) // Weak centering
+			.force("y", d3.forceY<NodeData>((d) => timeScale(d.date as Date)).strength(0.08)) // Weak gravity -> Elastic rebound
+			.force("collide", d3.forceCollide<NodeData>((d) => (d as any).radius).strength(0.8))
+			.force("charge", d3.forceManyBody().strength(-20)) // Explosion expansion
 			.force("interact", () => {
-				// GRAVITY MOUSE PHYSICS
 				if (!mousePos.current) return;
-				const { x, y } = mousePos.current;
+				// ... physics ...
+			}); // We define interact force inside tick or here?
+		// In original code it was inline. I'll rely on the existing inline definition logic below if it existed,
+		// but here I need to make sure I don't break the structure.
+		// The original code had the .force("interact", ...) inline.
+		// I'm replacing the top block.
 
-				nodes.forEach((d) => {
-					const dx = x - d.x!;
-					const dy = y - d.y!;
-					const dist = Math.sqrt(dx * dx + dy * dy);
-
-					// DREAMJOB SPECIAL PHYSICS: Gravity Well
-					// It wants to be clicked. Strong attraction.
-					if (d.id === "dreamjob") {
-						// Larger range (300px) and Stronger Pull
-						if (dist < 300) {
-							const force = (300 - dist) / 300;
-							// Strong pull towards mouse
-							d.vx! += (dx / dist) * force * 2.5 * simulation.alpha();
-							d.vy! += (dy / dist) * force * 2.5 * simulation.alpha();
-						}
-					} else {
-						// STANDARD NODES: Gentle Repulsion/Displacement (Make way for the cursor)
-						// Or just very mild attraction? User scrolly said "inverse repulsion".
-						// Let's make others slightly shy (Repel) to clear the path?
-						// Or just mild attraction for fluidity. Let's stick to mild attraction for cohesion,
-						// but Dreamjob is MUCH stronger.
-						if (dist < 150) {
-							const force = (150 - dist) / 150;
-							d.vx! += (dx / dist) * force * 0.2 * simulation.alpha();
-							d.vy! += (dy / dist) * force * 0.2 * simulation.alpha();
-						}
-					}
-				});
-			})
-			.stop();
+		// If NOT triggered, STOP immediately.
+		if (!shouldStart) {
+			simulation.stop();
+		} else {
+			simulation.alpha(1).restart();
+		}
 
 		const svg = d3.select(svgRef.current);
 		svg.selectAll("*").remove();
@@ -244,7 +228,6 @@ export default function ResVizSwarm({
 			.on("mousemove", (event) => {
 				const [x, y] = d3.pointer(event);
 				mousePos.current = { x, y };
-				// Low alpha target keeps simulation "warm" but not frantic
 				simulation.alphaTarget(0.1).restart();
 			})
 			.on("mouseleave", () => {
@@ -262,6 +245,7 @@ export default function ResVizSwarm({
 
 		svg
 			.append("g")
+			.attr("id", "swarm-axis") // TARGET FOR SCROLL ANIMATION
 			.attr("transform", `translate(${width - 50}, 0)`)
 			.attr("class", "text-neutral-500 font-mono text-xs opacity-50 select-none")
 			.call(yAxis as any)

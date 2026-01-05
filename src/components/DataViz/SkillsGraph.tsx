@@ -1,17 +1,12 @@
 import React, { useEffect, useRef, useMemo, useState } from "react";
 import * as d3 from "d3";
 
-interface MultiverseNode {
-	id: string;
-	name: string;
-	group: string;
-	value: number;
-	industry: string;
-	skills?: string[];
-}
+import type { MultiverseNode } from "@/types/MultiverseTypes";
 
 interface Props {
-	nodes: MultiverseNode[];
+	skillsData?: any[];
+	projects?: any[];
+	nodes?: MultiverseNode[];
 }
 
 interface SkillNode extends d3.SimulationNodeDatum {
@@ -19,9 +14,13 @@ interface SkillNode extends d3.SimulationNodeDatum {
 	value: number; // Avg/Total Score
 	group: string; // Industry
 	r: number;
+	x?: number;
+	y?: number;
+	vx?: number;
+	vy?: number;
 }
 
-const SkillsGraph: React.FC<Props> = ({ nodes: multiverseNodes }) => {
+const SkillsGraph: React.FC<Props> = ({ skillsData, projects, nodes: rawNodes }) => {
 	const svgRef = useRef<SVGSVGElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
 	const [tooltip, setTooltip] = useState<{
@@ -43,55 +42,103 @@ const SkillsGraph: React.FC<Props> = ({ nodes: multiverseNodes }) => {
 			{ total: number; count: number; maxProject: string; maxScore: number; industry: string }
 		>();
 
-		multiverseNodes.forEach((node) => {
-			if (!node.skills || !Array.isArray(node.skills)) return;
-
-			// Use node.value (Mass) as the weight for each skill in this project
-			const score = node.value || 100;
-
-			node.skills.forEach((skill) => {
-				if (!skillMap.has(skill)) {
-					skillMap.set(skill, {
-						total: 0,
-						count: 0,
-						maxProject: node.name,
-						maxScore: 0,
-						industry: node.industry || node.group || "General",
-					});
-				}
-				const current = skillMap.get(skill)!;
-				current.total += score;
-				current.count += 1;
-
-				// Track dominant project/industry for this skill
-				if (score > current.maxScore) {
-					current.maxScore = score;
-					current.maxProject = node.name;
-					current.industry = node.industry || node.group || "General";
-				}
+		// Mode A: Legacy Weighted Data (from skills.json via About.astro)
+		if (skillsData && projects) {
+			// 1. Create a quick lookup for Project Metadata (Industry/Group)
+			const projectMeta = new Map<string, string>();
+			projects.forEach((p) => {
+				if (p.id)
+					projectMeta.set(p.id.toLowerCase(), p.data.industry || p.data.category || "General");
+				if (p.data.title)
+					projectMeta.set(
+						p.data.title.toLowerCase(),
+						p.data.industry || p.data.category || "General",
+					);
 			});
-		});
+
+			// 2. Iterate over Skills Data
+			skillsData.forEach((project) => {
+				if (!project.skills || typeof project.skills !== "object") return;
+
+				const projectName = project.name || "Unknown";
+				const industry = projectMeta.get(projectName.toLowerCase()) || "General";
+
+				// Skills is an Object: { "Skill Name": Score, ... }
+				Object.entries(project.skills).forEach(([skillName, scoreRaw]) => {
+					const score = Number(scoreRaw) || 0;
+					if (score <= 0) return;
+
+					if (!skillMap.has(skillName)) {
+						skillMap.set(skillName, {
+							total: 0,
+							count: 0,
+							maxProject: projectName,
+							maxScore: 0,
+							industry: industry,
+						});
+					}
+
+					const entry = skillMap.get(skillName)!;
+					entry.total += score;
+					entry.count += 1;
+
+					// Update Dominant Industry if this score is higher
+					if (score > entry.maxScore) {
+						entry.maxScore = score;
+						entry.maxProject = projectName;
+						entry.industry = industry;
+					}
+				});
+			});
+		}
+		// Mode B: Multiverse Data (from multiverse.json via Projects/index.astro)
+		else if (rawNodes && rawNodes.length > 0) {
+			rawNodes.forEach((node) => {
+				if (!node.skills || !Array.isArray(node.skills)) return;
+
+				const industry = node.industry || node.category || "General";
+				const projectName = node.name;
+
+				node.skills.forEach((skillName) => {
+					if (!skillMap.has(skillName)) {
+						skillMap.set(skillName, {
+							total: 0,
+							count: 0,
+							maxProject: projectName,
+							maxScore: 0,
+							industry: industry,
+						});
+					}
+
+					const entry = skillMap.get(skillName)!;
+					entry.total += 5; // Arbitrary weight for frequency counting
+					entry.count += 1;
+
+					// Simple industry dominance (last one wins or standard)
+					// We'll keep the first one or update if we want "most frequent industry" which is complex.
+					// Let's just stick to "first encountered" or overwrite to keep it dynamic.
+					// Actually, let's prioritize "Robot & Automation" or "Pro Audio" over "Other".
+					// For now, simpler is better: overwrite.
+					entry.industry = industry;
+				});
+			});
+		}
 
 		// Create Nodes
 		return Array.from(skillMap.entries())
 			.map(([skill, stats]) => {
-				const avg = stats.total / stats.count; // or just total for magnitude?
-				// Let's use Total to show "Cumulative Experience" rather than Average intensity
-				// Actually, Average * Count = Total.
-				// Let's use Total but scaled down.
-
 				return {
 					id: skill,
 					value: stats.total,
 					group: stats.industry,
-					// Scale radius: Math.sqrt(total) is a good starting point for area-proportional sizing
-					r: Math.sqrt(stats.total) * 1.5 + 10,
+					// Scale radius: Math.sqrt(total)
+					r: Math.sqrt(stats.total) * 1.5 + 5, // Adjusted baseline for unweighted data
 					x: 0,
 					y: 0,
 				};
 			})
-			.filter((n) => n.value > 50); // Filter out very minor skills (noise reduction)
-	}, [multiverseNodes]);
+			.filter((n) => n.value > 10); // Filter out very minor skills (e.g. mention < 2 times if weight is 5)
+	}, [skillsData, projects, rawNodes]);
 
 	useEffect(() => {
 		if (!svgRef.current || !containerRef.current || nodes.length === 0) return;

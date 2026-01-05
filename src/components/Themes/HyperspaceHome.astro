@@ -58,7 +58,8 @@ import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
 		}
 
 		// Initialize positions off-screen
-		swarmCol.style.transform = `translateY(100vh)`; // Start completely below
+		swarmCol.style.opacity = "0"; // Start invisible
+		swarmCol.style.transform = "translateY(0)"; // Start in place
 		ficheCol.style.transform = `translateX(100vw)`; // Start completely right
 
 		// Use a simpler opacity transition for the container? No, keep it solid black.
@@ -75,24 +76,48 @@ import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
 			// Hide hint
 			if (hint) hint.style.opacity = y > 50 ? "0" : "1";
 
-			// 2. ENTRANCE ANIMATION (0 -> 600px)
-			// Fully entered by 600px scroll
-			const progress = Math.min(1, y / 600);
+			// 2. ENTRANCE ANIMATION (0 -> 400px)
+			// Fully entered by 400px scroll (Faster Stage Set)
+			const progress = Math.min(1, y / 400);
 
-			// Swarm: From Bottom (100vh -> 0)
-			// Use quadratic ease-out: 1 - (1-p)^2
+			// Swarm: STAGE IS STATIC, but Fades In (Cross-fade with Logo)
+			// Logo Fades Out 0-300. Swarm Fades In 100-400?
+			// Or just simple opacity mapping to progress.
+			// Let's make it fully visible by 300 to match the trigger.
+			const swarmOpacity = Math.min(1, y / 300);
+			swarmCol.style.opacity = swarmOpacity.toString();
+			// Ensure it is fixed at 0 if we removed the transform in CSS
+			swarmCol.style.transform = `translateY(0)`;
+
+			// Fiche: Still slides from right
 			const ease = 1 - Math.pow(1 - progress, 2);
-
-			const swarmY = 100 * (1 - ease); // Percent? No, vh is hard in JS. Use px?
-			// Actually, let's just use a fixed large pixel value or calc vh.
-			const vh = window.innerHeight;
 			const vw = window.innerWidth;
-
-			const targetSwarmY = vh * (1 - ease);
 			const targetFicheX = vw * (1 - ease);
-
-			swarmCol.style.transform = `translateY(${targetSwarmY}px)`;
 			ficheCol.style.transform = `translateX(${targetFicheX}px)`;
+
+			// 3. AXIS ANIMATION (Slow Entry 300 -> 800px)
+			const axis = document.getElementById("swarm-axis");
+			if (axis) {
+				// If scroll < 300: 0
+				// If scroll > 800: 1
+				const axisP = Math.max(0, Math.min(1, (y - 300) / 500));
+				axis.style.opacity = (axisP * 0.5).toString(); // Max opacity 0.5 as defined in CSS originally
+				// Optional: Slide in from right?
+				// axis.style.transform = `translateX(${(1 - axisP) * 50}px)`; // Can't easily transform SVG group via standard style unless it has ID styles.
+				// SVG transforms are "transform" attribute usually.
+				// But modern browsers handle style.transform on SVG.
+				// Let's stick to opacity for "come in quite slowly".
+				// User said "come in quite slowly from the right".
+				// Let's try transform.
+				axis.style.transform = `translate(${swarmCol.offsetWidth - 50 + (1 - axisP) * 100}px, 0)`;
+				// Wait, the axis group setup in D3 is `translate(${width - 50}, 0)`.
+				// If we override style.transform, we break that.
+				// WE CANNOT safely change transform of the SVG group created by D3 without losing the D3 position.
+				// UNLESS we use opacity only OR target a wrapper.
+				// We added id="swarm-axis" to the <g>.
+				// Simple opacity is safer.
+				axis.style.opacity = axisP.toString();
+			}
 		});
 
 		// Initial Trigger

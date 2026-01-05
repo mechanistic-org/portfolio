@@ -16,22 +16,19 @@ export default function WorkRealm() {
 	const swarmContainerRef = useRef<HTMLDivElement>(null); // Ref for the Swarm Column
 	const [isSwarmActive, setIsSwarmActive] = useState(false);
 
-	// Trigger Swarm Physics when scrolled into view
+	// Trigger Swarm Physics when scrolled past the Logo Fade (300px)
 	useEffect(() => {
-		if (!swarmContainerRef.current) return;
+		const handleScroll = () => {
+			if (!isSwarmActive && window.scrollY > 300) {
+				setIsSwarmActive(true);
+			}
+		};
 
-		const observer = new IntersectionObserver(
-			([entry]) => {
-				// Trigger when 10% visible to ensure it starts moving as it slides up
-				if (entry.isIntersecting && !isSwarmActive) {
-					setIsSwarmActive(true);
-				}
-			},
-			{ threshold: 0.1 },
-		);
+		window.addEventListener("scroll", handleScroll);
+		// Check initial position in case of refresh
+		handleScroll();
 
-		observer.observe(swarmContainerRef.current);
-		return () => observer.disconnect();
+		return () => window.removeEventListener("scroll", handleScroll);
 	}, [isSwarmActive]);
 
 	// Helper to generate valid URL slugs from human-readable IDs
@@ -83,7 +80,9 @@ export default function WorkRealm() {
 				<div
 					id="swarm-col"
 					ref={swarmContainerRef}
-					className="relative h-full w-full border-r border-white/10 will-change-transform"
+					className={`relative h-full w-full border-r border-white/10 transition-opacity delay-300 duration-1000 will-change-transform ${
+						isSwarmActive ? "opacity-100" : "opacity-0"
+					}`}
 				>
 					{/* Pass activeNode down so Swarm can highlight bubble when Strip is hovered */}
 					{/* Trigger physics only when visible */}
@@ -97,7 +96,9 @@ export default function WorkRealm() {
 				{/* RIGHT: The Fiche Strip */}
 				<div
 					id="fiche-col"
-					className="relative sticky top-0 hidden h-screen flex-col overflow-hidden border-l border-white/5 bg-black/50 backdrop-blur-sm will-change-transform lg:flex"
+					className={`relative sticky top-0 hidden h-screen flex-col overflow-hidden border-l border-white/5 bg-black/50 backdrop-blur-sm transition-all delay-500 duration-1000 ease-out will-change-transform lg:flex ${
+						isSwarmActive ? "translate-x-0 opacity-100" : "translate-x-12 opacity-0"
+					}`}
 					onMouseEnter={() => setIsHoveringStrip(true)}
 					onMouseLeave={() => setIsHoveringStrip(false)}
 				>

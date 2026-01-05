@@ -14,6 +14,20 @@ sidebar:
   - **Usage:** Must be applied to the wrapper div of any MDX content render (e.g., `<div class="markdown-content"><Content /></div>`).
 - **Interactivity:** React (for Charts), Vanilla JS (for 3D & UI)
 
+### The "Carny Bell" Entrance Protocol
+
+- **Concept:** A physics-driven entrance where the Swarm nodes "explode" onto the stage from the bottom, triggered precisely when the stage is revealed.
+- **Mechanism:**
+  - **Phase 1 (The Monolith):** Logo overlay is visible (`z-50`). Swarm is hidden (`opacity: 0`) but **pre-rendered** in a "Launchpad State" (held at `y = height + 150`).
+  - **Phase 2 (The Dissolve):** User scrolls 0-300px. Logo fades out. Swarm container fades in (`opacity -> 1`).
+  - **Phase 3 (The Trigger):** At `Scroll > 300px`, `shouldStart` becomes `true`.
+  - **Phase 4 (The Hammer):** Physics engine detects the trigger. Logic switches from "Hold" to "Kick".
+- **Physics Tuning (Goldilocks Zone):**
+  - **Launch Velocity (`vy`):** `-50` to `-100` (Visible upward surge).
+  - **Friction (`velocityDecay`):** `0.05` (Extremely low drag to allow max travel distance of ~1500px).
+  - **Safety:** Nodes initialize at `y=2000` to prevent "pop-in" glitches.
+- **Narrative Arc:** Mystery (Logo) -> Chaos (Explosion) -> Order (Timeline).
+
 ### The "Viral Data" Strategy (Visualization as Narrative)
 
 **Problem:** Writing distinct narratives for 100+ projects is impossible ("The CSV Disconnect").
