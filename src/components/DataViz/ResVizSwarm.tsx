@@ -159,7 +159,7 @@ export default function ResVizSwarm({
 		const timeScale = d3
 			.scaleTime()
 			.domain([new Date(), minDate])
-			.range([140, height - 150]);
+			.range([200, height - 150]);
 
 		// Dynamic Color Scale (Flourish Style)
 		const colorScale = d3.scaleOrdinal(d3.schemeTableau10);
@@ -259,7 +259,7 @@ export default function ResVizSwarm({
 			.selectAll(".node-group")
 			.data(nodes)
 			.join("g")
-			.attr("class", "node-group")
+			.attr("class", "node-group pointer-events-auto") // Added pointer-events-auto
 			.attr("id", (d: any) => "node-" + d.id) // ID for External Selection
 			.attr("transform", (d: any) => `translate(${d.x},${d.y})`) // Prevent 0,0 Flash
 			.attr("cursor", "pointer");

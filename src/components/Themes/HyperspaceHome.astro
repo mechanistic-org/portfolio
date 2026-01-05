@@ -21,13 +21,7 @@ import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
 	>
 		<WiggleLogo3D client:load />
 
-		<!-- Scroll Hint -->
-		<div
-			id="scroll-hint"
-			class="absolute bottom-12 left-1/2 -translate-x-1/2 animate-pulse font-mono text-xs text-white/30 transition-opacity duration-300"
-		>
-			INITIALIZE SYSTEM
-		</div>
+		<!-- Scroll Hint Removed -->
 	</div>
 
 	<!-- LAYER 1: WORK REALM (The Underlayer) -->
@@ -72,6 +66,20 @@ import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
 			// 1. LOGO FADE (0 -> 300px)
 			const logoOpacity = Math.max(0, 1 - y / 300);
 			logo.style.opacity = logoOpacity.toString();
+
+			// Z-INDEX FIX: Hide logo layer completely to unblock clicks
+			if (y > 300) {
+				logo.style.visibility = "hidden";
+			} else {
+				logo.style.visibility = "visible";
+			}
+
+			// Z-INDEX FIX: Disable pointer events on logo layer when it fades out to unblock Swarm
+			if (y > 200) {
+				logo.style.pointerEvents = "none";
+			} else {
+				logo.style.pointerEvents = "auto";
+			}
 
 			// Hide hint
 			if (hint) hint.style.opacity = y > 50 ? "0" : "1";

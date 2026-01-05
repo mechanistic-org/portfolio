@@ -96,7 +96,7 @@ export default function WorkRealm() {
 				{/* RIGHT: The Fiche Strip */}
 				<div
 					id="fiche-col"
-					className={`relative sticky top-0 hidden h-screen flex-col overflow-hidden border-l border-white/5 bg-black/50 backdrop-blur-sm transition-all delay-500 duration-1000 ease-out will-change-transform lg:flex ${
+					className={`pointer-events-auto relative hidden h-screen flex-col overflow-hidden border-l border-white/5 bg-black/50 backdrop-blur-sm transition-all delay-500 duration-1000 ease-out will-change-transform lg:flex ${
 						isSwarmActive ? "translate-x-0 opacity-100" : "translate-x-12 opacity-0"
 					}`}
 					onMouseEnter={() => setIsHoveringStrip(true)}
@@ -163,8 +163,8 @@ export default function WorkRealm() {
 											<span>{new Date(node.start_date).getFullYear()}</span>
 										</div>
 
-										{/* Active State Expansion: Could show image? */}
-										{isActive && node.img && !node.img.includes("placeholder") && (
+										{/* Active State Expansion: Show image (even if placeholder) */}
+										{isActive && node.img && (
 											<div className="mt-4 h-32 w-full overflow-hidden rounded border border-white/10">
 												{/* Using standard img for now, potentially update to optimized image */}
 												<img

@@ -12,7 +12,6 @@
 @import "./markdown-content.css" layer(components);
 @import "./buttons.css" layer(components);
 
-
 /* tailwind plugins */
 /* @plugin "@tailwindcss/forms"; */
 
@@ -64,8 +63,6 @@
 		overflow-x: hidden;
 		max-width: 100vw;
 	}
-
-
 
 	html.dark {
 		/* starwind dark theme config */
@@ -169,7 +166,6 @@
 }
 
 @layer utilities {
-
 	/* hover underline effect left-to-right
      use "group" class on a parent element, and "underline-ltr" on the element */
 	.underline-ltr {
@@ -227,6 +223,16 @@
 		z-index: 5;
 		opacity: 0.05;
 		background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+	}
+
+	/* Utility to hide scrollbar but allow scrolling */
+	.no-scrollbar {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
+
+	.no-scrollbar::-webkit-scrollbar {
+		display: none; /* Chrome, Safari and Opera */
 	}
 }
 
