@@ -46,6 +46,10 @@ sidebar:
 
 ## 📜 Change Log (Recent)
 
+- **[2026-01-04] Data Consolidation & Stabilization**
+  - **[Fix] Data Integrity:** Restored missing `SC48` node to `multiverse.json`; fixed broken image paths for `C|24`, `D-Control`, and `D-Command`.
+  - **[Asset Pipeline]** Validated that `getAssetUrl` correctly handles R2 paths in production.
+  - **[Architecture] Data Mesh:** Formalized the retirement of `hierarchy.json` and `sacred_timeline.json` in favor of a unified `multiverse.json`.
 - **[2026-01-03] Stratospheric Recon & Viral Strategy**
   - **[Analysis] The Delta Scan:** Conducted a "60k Feet" audit comparing the Cold Vault (`\\morespace`) to the Workbench (`D:\portfolio`). Identified ~30 "Redacted Specimens" (Lytro, Apple, Avegant) that are effectively Air-Gapped.
   - **[Strategy] Viral Data:** Pivot validated. We will use D3.js to visualize the "Metadata Sonar" of 70,000 files, proving career contiguity despite local data loss (Ransomware).

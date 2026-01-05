@@ -1,110 +1,116 @@
 ---
 import Layout from "@layouts/BaseLayout.astro";
-import HomeManifesto from "../../components/Home/HomeManifesto.astro";
 import HyperspaceHUD from "@components/Nav/HyperspaceHUD.astro";
-import ScrollyHud from "@components/Scrolly/ScrollyHud.astro";
 import WorkRealm from "../../components/Realms/WorkRealm";
-import MultiverseGraph from "@components/DataViz/MultiverseGraph";
-import multiverseData from "../../data/timeline/multiverse.json";
+import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
 ---
 
 <Layout title="Erik Norris | Senior Staff ME / Designer" description="System Index" hideNav={true}>
 	<!-- The HUD is fixed and persistent -->
 	<HyperspaceHUD />
-	<script>
-		// Force scroll to top on load to ensure proper "Airlock" entry
-		if (history.scrollRestoration) {
-			history.scrollRestoration = "manual";
-		}
-		window.onload = function () {
-			window.scrollTo(0, 0);
-		};
-	</script>
-	<ScrollyHud
-		steps={[
-			// Manifesto uses internal IDs, but we track the 'Work' Realm
-			{ id: "realm-identity", label: "Identity" },
-			{ id: "realm-work", label: "Work" },
-			{ id: "realm-specs", label: "About" },
-		]}
-	/>
 
-	<!-- REALM I: MANIFESTO (The Airlock) -->
-	<!-- Removed nested main to prevent double scrollbar and snap issues -->
-	<div id="hyperspace-container" class="w-full text-white">
-		<HomeManifesto />
+	<!-- SCROLL TRACK -->
+	<!-- A generic tall element to allow the user to "scroll" which drives the animation -->
+	<div class="pointer-events-none absolute top-0 left-0 z-0 h-[200vh] w-full"></div>
+
+	<!-- LAYER 2: LOGO (The Overlay) -->
+	<!-- Fixed position, sits on top. Fades out on scroll. -->
+	<div
+		id="logo-layer"
+		class="will-change-opacity pointer-events-none fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-75"
+	>
+		<WiggleLogo3D client:load />
+
+		<!-- Scroll Hint -->
+		<div
+			id="scroll-hint"
+			class="absolute bottom-12 left-1/2 -translate-x-1/2 animate-pulse font-mono text-xs text-white/30 transition-opacity duration-300"
+		>
+			INITIALIZE SYSTEM
+		</div>
 	</div>
 
-	<!-- REALM II: WORK (The Output) -->
-	<section
-		id="realm-work"
-		data-step="realm-work"
-		class="relative min-h-[300vh] w-full snap-start border-t border-white/10 bg-black"
+	<!-- LAYER 1: WORK REALM (The Underlayer) -->
+	<!-- Fixed position, starts visible but its CHILDREN will be offset -->
+	<div
+		id="work-layer"
+		class="fixed inset-0 z-10 h-full w-full bg-black transition-opacity duration-300"
 	>
 		<WorkRealm client:only="react" />
-	</section>
-	<!-- REALM III: SPECS (The Brain) -->
-	<section
-		id="realm-specs"
-		data-step="realm-specs"
-		class="relative min-h-screen w-full snap-start overflow-hidden border-t border-white/10 bg-black"
-	>
-		{/* BACKGROUND: Fullscreen Visual (Multiverse Graph) */}
-		<div class="absolute inset-0 z-0 h-full w-full">
-			<MultiverseGraph client:only="react" data={multiverseData} />
-		</div>
-
-		{/* FOREGROUND: Floating Interface (Dossier) */}
-		{
-			/* HIDDEN PER USER REQUEST
-		<div class="absolute bottom-12 left-8 z-20">
-			<DecryptionDossier client:visible />
-		</div>
-		*/
-		}
-	</section>
-
-	{/* REALM V & VI: RESERVED FOR EXPANSION */}
+	</div>
 </Layout>
 
+<script>
+	// SCROLL ORCHESTRATOR
+	// Drives the parallax transition between Logo and Swarm
+	const logo = document.getElementById("logo-layer");
+	const work = document.getElementById("work-layer");
+	const hint = document.getElementById("scroll-hint");
+
+	// Wait for React to mount and create the columns
+	const initScroll = () => {
+		const swarmCol = document.getElementById("swarm-col");
+		const ficheCol = document.getElementById("fiche-col");
+
+		if (!swarmCol || !ficheCol) {
+			requestAnimationFrame(initScroll);
+			return;
+		}
+
+		// Initialize positions off-screen
+		swarmCol.style.transform = `translateY(100vh)`; // Start completely below
+		ficheCol.style.transform = `translateX(100vw)`; // Start completely right
+
+		// Use a simpler opacity transition for the container? No, keep it solid black.
+
+		window.addEventListener("scroll", () => {
+			if (!logo) return;
+
+			const y = window.scrollY;
+
+			// 1. LOGO FADE (0 -> 300px)
+			const logoOpacity = Math.max(0, 1 - y / 300);
+			logo.style.opacity = logoOpacity.toString();
+
+			// Hide hint
+			if (hint) hint.style.opacity = y > 50 ? "0" : "1";
+
+			// 2. ENTRANCE ANIMATION (0 -> 600px)
+			// Fully entered by 600px scroll
+			const progress = Math.min(1, y / 600);
+
+			// Swarm: From Bottom (100vh -> 0)
+			// Use quadratic ease-out: 1 - (1-p)^2
+			const ease = 1 - Math.pow(1 - progress, 2);
+
+			const swarmY = 100 * (1 - ease); // Percent? No, vh is hard in JS. Use px?
+			// Actually, let's just use a fixed large pixel value or calc vh.
+			const vh = window.innerHeight;
+			const vw = window.innerWidth;
+
+			const targetSwarmY = vh * (1 - ease);
+			const targetFicheX = vw * (1 - ease);
+
+			swarmCol.style.transform = `translateY(${targetSwarmY}px)`;
+			ficheCol.style.transform = `translateX(${targetFicheX}px)`;
+		});
+
+		// Initial Trigger
+		window.dispatchEvent(new Event("scroll"));
+	};
+
+	// Start looking for React elements
+	initScroll();
+</script>
+
 <style is:global>
-	/* smooth scroll behavior for anchor links */
 	html {
-		scroll-behavior: smooth;
-		scroll-snap-type: y mandatory;
+		scroll-behavior: auto; /* Instant scroll for direct physics mapping */
+		height: 100%;
+		overflow-x: hidden;
 	}
-
-	/* Hide scrollbar for immersive feel */
-	html::-webkit-scrollbar,
-	body::-webkit-scrollbar {
-		display: none;
-	}
-	html,
 	body {
-		-ms-overflow-style: none;
-		scrollbar-width: none;
-		overflow-x: hidden; /* Ensure double scrollbar is dead */
-	}
-	main {
-		-ms-overflow-style: none;
-		scrollbar-width: none;
-	}
-
-	/* Custom 0.1Hz (10s) Breathing Animation - Calm */
-	@keyframes breathe-glow {
-		0%,
-		100% {
-			opacity: 0.9;
-			transform: scale(1);
-		}
-		50% {
-			opacity: 1;
-			transform: scale(1.03); /* Gentle expansion */
-			filter: brightness(1.2);
-		}
-	}
-
-	.animate-breathe-glow {
-		animation: breathe-glow 10s ease-in-out infinite;
+		background-color: black;
+		overscroll-behavior: none;
 	}
 </style>

@@ -23,6 +23,15 @@ sidebar:
 - **Tier 2 (Forensic Timeline):** For "Ghost Projects" (SC48) with missing emails. We visualize the _intervals_ between file creations to show "Crunch Time" and "Lulls."
 - **Tier 3 (Augmentation):** Overlaying these graphs onto "Gold" narratives (C24) to prove the scale of the work.
 
+### The "Multiverse" Consolidation (2026)
+
+- **Decision:** We are moving to a **Single Source of Truth** for visualized data.
+- **Master:** `src/data/timeline/multiverse.json` (Powers Swarm, Timeline, List, Skills).
+- **Legacy (To Retire):**
+  - `hierarchy.json` (Old Radial Data -> DELETE).
+  - `sacred_timeline.json` (Old CSV Export -> DELETE).
+- **Why:** Maintaining three parallel JSON files caused "Ghost Node" issues where projects like SC48 existed in one view but not another.
+
 ### The "Mega-Gallery" Pattern (Deep Dive Chapter)
 
 **Problem:** High-density stories ("Deep Dives") require multiple narrative contacts (e.g., Mandate, Evolution, Prototype) to reference a single deep visual dataset without reloading or scrolling the visual.

@@ -11,53 +11,27 @@ import RadialTaxonomy from "../../components/DataViz/RadialTaxonomy";
 import ScrollCoordinator from "@components/Effects/ScrollCoordinator.astro";
 
 // Data
-import skillsData from "../../data/skills.json";
+// import skillsData from "../../data/skills.json"; // REMOVED: Legacy Data Source
 import multiverseData from "../../data/timeline/multiverse.json";
-const allProjects = await getCollection(
-	"projects",
-	({ data }) => !data.draft && data.statusLabel !== "NO_DATA" && (data as any).impact !== "NO_DATA",
-);
+const allProjects = await getCollection("projects", ({ data }) => {
+	const hiddenIds = [
+		"classified",
+		"classified-alpha",
+		"classified-bravo",
+		"electronic-battery-lock",
+	];
+	return (
+		!data.draft &&
+		data.statusLabel !== "NO_DATA" &&
+		(data as any).impact !== "NO_DATA" &&
+		!hiddenIds.includes(data.slug || (data as any).id)
+	);
+});
 const projects = allProjects.sort(
 	(a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime(),
 );
 
-// Dynamic Hierarchy Generation
-const hierarchyData = {
-	name: "Erik Norris",
-	children: [] as any[],
-};
-
-// Helper to find or create a node
-const findOrCreate = (parent: any[], name: string) => {
-	let node = parent.find((n) => n.name === name);
-	if (!node) {
-		node = { name, children: [] };
-		parent.push(node);
-	}
-	return node;
-};
-
-projects.forEach((p) => {
-	// Level 1: Employer (or Client)
-	const employer = p.data.employer || p.data.client[0] || "Independent";
-	const employerNode = findOrCreate(hierarchyData.children, employer);
-
-	// Level 2: Industry (Segment)
-	// Prefer category if industry is "Other" or missing to avoid "Other" grouping
-	let segment = p.data.industry;
-	if (!segment || segment === "Other") {
-		segment = p.data.category || "Uncategorized";
-	}
-	const industryNode = findOrCreate(employerNode.children, segment);
-
-	// Level 3: Project
-	industryNode.children.push({
-		name: p.data.title,
-		id: p.id,
-		value: 10, // Uniform sizing or mapped to impact?
-		group: employer, // Color by employer
-	});
-});
+// Hierarchy is now handled internally by RadialTaxonomy using multiverse.json
 
 // Extract Facets for the UI (Keep existing logic for Directory view)
 const industries = [...new Set(projects.map((p) => p.data.industry).filter(Boolean))].sort();
@@ -143,7 +117,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 
 		<!-- VIEW: SKILLS -->
 		<div id="view-skills" class="view-container hidden">
-			<SkillsGraph client:only="react" skillsData={skillsData} projects={projects} />
+			<SkillsGraph client:only="react" nodes={multiverseData.nodes} />
 		</div>
 
 		<!-- VIEW: MULTIVERSE -->
@@ -190,7 +164,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				class="relative overflow-hidden rounded-xl border border-white/5 bg-black/20"
 				style="height: 75vh"
 			>
-				<RadialTaxonomy client:only="react" data={hierarchyData} />
+				<RadialTaxonomy client:only="react" />
 				<div
 					class="text-primary-500/50 pointer-events-none absolute bottom-4 left-4 font-mono text-[10px]"
 				>
@@ -207,10 +181,12 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				const containers = document.querySelectorAll(".view-container");
 
 				// Load preference with Validation
-				let savedView = localStorage.getItem("project_view_mode") || "list";
+				let savedView = localStorage.getItem("project_view_mode");
 				const validViews = ["list", "grid", "radial", "timeline", "skills", "multiverse"];
-				if (!validViews.includes(savedView)) {
-					savedView = "list";
+
+				// Default to 'multiverse' if no preference saved or invalid
+				if (!savedView || !validViews.includes(savedView)) {
+					savedView = "multiverse";
 				}
 
 				console.log("Initializing View:", savedView);

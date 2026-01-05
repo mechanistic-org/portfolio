@@ -43,9 +43,13 @@ These are active AI/External resources that contain "Source of Truth" data not i
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Phase:** Phase 4 (Viral Data & Ghost Protocol)
-- **Primary Objective:** **Gap Analysis Fill**. (SC48 is wired but empty compared to C24).
-- **Secondary Objective:** **Documentation Hardening**. (Applying the "Mining" updates).
+- **Current Focus:** Overhauling `src/pages/projects` (The "Projects Page").
+- **State:**
+  - [x] **Stabilized:** C24/SC48/D-Control images are fixed.
+  - [x] **Deployed:** Cloudflare build successful.
+  - [x] **Data Mesh:** Consolidated data sources. Retired `hierarchy.json` and `sacred_timeline.json` in favor of `multiverse.json`.
+  - [x] **Homepage:** Implemented Cinematic Entrance (Swarm + Fiche) and moved Manifesto to `/manifesto`.
+  - [x] **Projects:** "Swarm" is default view. "Skills" graph populated from Multiverse data.
 - **Active Thread:** `415822ee-c0e1-427a-bc9f-493ee723413b` (SC48 Reconstruction).
 
 ## 🔗 Active Intelligence (New Synapses)

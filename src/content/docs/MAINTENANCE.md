@@ -392,6 +392,15 @@ status: {
 - **Cause:** AI tools often output `.png` by default, while legacy prompts/MDX might reference `.jpg`.
 - **Fix:** Check the actual file extension in `R2_STAGING` and update the `.mdx` file to match (e.g., change `hero.jpg` to `hero.png`).
 
+### "Ghost" Images in JSON Data
+
+- **Symptom:** Image works locally but fails in production, or `multiverse.json` points to a file that doesn't exist.
+- **Cause:** Determining the "Hero" image relies on manual entry in `multiverse.json`, which can drift from the actual file system (e.g., `hero-sm.webp` vs `project-hero-01-sm.webp`).
+- **Fix:**
+  1.  Trust the File System, not the JSON.
+  2.  Check `list_dir public/assets/r2/[slug]`.
+  3.  Update `multiverse.json` to match the _exact_ filename found.
+
 ### Build Crash (Esbuild Pipe Error / Readable.push)
 
 - **Symptom:** `npm run build` fails with `Error: Readable.push` or generic pipe failure, often blaming `esbuild`.
