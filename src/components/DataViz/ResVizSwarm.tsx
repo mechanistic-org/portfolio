@@ -23,6 +23,7 @@ interface NodeData extends d3.SimulationNodeDatum {
 interface ResVizSwarmProps {
 	onNodeSelect?: (node: any) => void;
 	externalHoverId?: string;
+	shouldStart?: boolean;
 }
 
 // --- Color Map (from Colors.csv) ---
@@ -73,7 +74,11 @@ const COLOR_MAP: Record<string, string> = {
 
 const DEFAULT_COLOR = "#666666";
 
-export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwarmProps) {
+export default function ResVizSwarm({
+	onNodeSelect,
+	externalHoverId,
+	shouldStart = false,
+}: ResVizSwarmProps) {
 	const svgRef = useRef<SVGSVGElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
 	const mousePos = useRef<{ x: number; y: number } | null>(null);
@@ -142,6 +147,16 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
 
 	useEffect(() => {
 		if (!svgRef.current || dimensions.width === 0) return;
+
+		// If physics haven't started, don't run the simulation loop
+		// However, we might want to draw static nodes?
+		// No, user wants "Intro Swarm" > animation into view.
+		// So keep it empty until trigger.
+		if (!shouldStart) {
+			const svg = d3.select(svgRef.current);
+			svg.selectAll("*").remove(); // Ensure clean slate
+			return;
+		}
 
 		const { width, height } = dimensions;
 
@@ -482,7 +497,7 @@ export default function ResVizSwarm({ onNodeSelect, externalHoverId }: ResVizSwa
 			simulation.stop();
 			observer.disconnect();
 		};
-	}, [nodes, dimensions]);
+	}, [nodes, dimensions, shouldStart]);
 
 	// Effect for external hover (e.g., from a fiche strip)
 	useEffect(() => {

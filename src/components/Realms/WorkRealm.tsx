@@ -13,6 +13,26 @@ export default function WorkRealm() {
 	const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
 	const stripContainerRef = useRef<HTMLDivElement>(null);
+	const swarmContainerRef = useRef<HTMLDivElement>(null); // Ref for the Swarm Column
+	const [isSwarmActive, setIsSwarmActive] = useState(false);
+
+	// Trigger Swarm Physics when scrolled into view
+	useEffect(() => {
+		if (!swarmContainerRef.current) return;
+
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				// Trigger when 10% visible to ensure it starts moving as it slides up
+				if (entry.isIntersecting && !isSwarmActive) {
+					setIsSwarmActive(true);
+				}
+			},
+			{ threshold: 0.1 },
+		);
+
+		observer.observe(swarmContainerRef.current);
+		return () => observer.disconnect();
+	}, [isSwarmActive]);
 
 	// Helper to generate valid URL slugs from human-readable IDs
 	const toSlug = (id: string) =>
@@ -62,10 +82,16 @@ export default function WorkRealm() {
 				{/* LEFT: The Swarm */}
 				<div
 					id="swarm-col"
+					ref={swarmContainerRef}
 					className="relative h-full w-full border-r border-white/10 will-change-transform"
 				>
 					{/* Pass activeNode down so Swarm can highlight bubble when Strip is hovered */}
-					<ResVizSwarm onNodeSelect={setActiveNode} externalHoverId={activeNode?.id} />
+					{/* Trigger physics only when visible */}
+					<ResVizSwarm
+						onNodeSelect={setActiveNode}
+						externalHoverId={activeNode?.id}
+						shouldStart={isSwarmActive}
+					/>
 				</div>
 
 				{/* RIGHT: The Fiche Strip */}
