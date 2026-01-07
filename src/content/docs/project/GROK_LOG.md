@@ -68,6 +68,33 @@
 
 ---
 
+## 🔒 VII. The Law of The Vault (The Pipeline Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-01-06
+**Context:** Confusion between "Working" folders and "Production" folders led to "Ghost Data" risk (`R2_MASTER` vs `R2_STAGING`).
+**The Law:**
+
+1.  **INPUT (Dirty):** `D:\portfolio\portfolio_working` is the ONLY place for raw drops.
+2.  **VAULT (Clean):** `D:\GitHub\eriknorris-assets\R2_STAGING` is the ONLY Production Source.
+3.  **DEAD (Legacy):** `D:\GitHub\eriknorris-workspace\R2_MASTER` is a Ghost. Do not touch.
+
+---
+
+## 🏹 VIII. The Law of The Hunt (The NotebookLM Protocol)
+
+**Status:** ENFORCED
+**Date:** 2026-01-06
+**Context:** User needed a "Low Friction" way to extract assets without writing prompts.
+**The Law:**
+
+1.  **AGENT PILOT:** The Agent generates the `HUNTING_LIST` using the Browser Tool (NotebookLM Pilot).
+2.  **DENSE TABLES:** The output must be a Markdown Table (Project, Date, Sender, Filename).
+3.  **PRINTABLE ARTIFACT:** The list must be exported to `D:/portfolio/HUNTING_LIST_PRINTABLE.html` for physical printing (Ctrl+P).
+4.  **NO EPHEMERALITY:** The List is an Asset. It must be saved.
+
+---
+
 ## 🎨 VI. The Law of Asset Sovereignty (The Interaction Decree)
 
 **Status:** ENFORCED

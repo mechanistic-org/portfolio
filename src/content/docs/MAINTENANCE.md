@@ -320,6 +320,18 @@ status: {
 - **Cause:** Parent containers or the element itself often inherit `pointer-events-none` from utility classes intended to "pass through" clicks.
 - **Fix:** Explicitly add `pointer-events-auto` to the specific interactive child div.
 
+### Swarm Nodes Unclickable (Input Masking)
+
+- **Symptom:** Hovering over Swarm nodes does nothing; no tooltips, no highlight.
+- **Cause:** The "Carny Bell" Logo Layer (`z-50`) sits on top of the Swarm (`z-10`). Even if opacity is 0, it blocks clicks.
+- **Fix:** Use `visibility: hidden` or `pointer-events: none` on the overlay layer once the entrance sequence completes.
+
+### Double Scrollbars in Fiche
+
+- **Symptom:** Two vertical scrollbars appear on the right side.
+- **Cause:** The Fiche container is scrollable, and so is the Body.
+- **Fix:** Add the `.no-scrollbar` utility to the Fiche container to hide the track while preserving functionality.
+
 ### Missing DataViz in Hyperspace Theme
 
 - **Symptom:** You added `<MetricComparison />` to MDX, but it doesn't render on the page.
@@ -1063,3 +1075,18 @@ If assets appear locally but break on Production (or vice-versa), check these co
 - **Rule:**
   - **Direct Match:** If an isolated JPG exists (e.g., `fan_duct.jpg`), use it.
   - **The Container:** If the evidence is inside a PDF (e.g., `thermal_report.pdf`), ingest the _entire PDF_. Do not demand manual extraction. The PDF serves as both the "Artifact" (Download) and the "Data Source" (Mining).
+
+### Astro MDX: The Placeholder Trap
+
+- **Symptom:** A project page loads, but ignores your Custom Hero Image and shows a random placeholder (e.g., `tech-2.jpg`).
+- **Cause:** **Schema Validation Failure.** If your Frontmatter YAML is invalid (e.g., `teamSize: "18"` string instead of number, or malformed JSON-in-YAML), Astro silently _rejects_ the entire file and your `[...slug].astro` fallback logic kicks in to "simulate" the entry using `project_manifest.json` defaults.
+- **Fix:**
+  1.  Check the terminal for Zod validation errors.
+  2.  Use **Standard YAML**, not JSON-like syntax in frontmatter.
+  3.  Verify strict types (`teamSize` must be a `number`).
+
+### SwarmFiche: Double Scrollbars
+
+- **Symptom:** Two vertical scrollbars appear on the right side of the screen.
+- **Cause:** The Parallax container (`body`) and the Fiche List (`#fiche-col`) are both scrollable.
+- **Fix:** Apply the `.no-scrollbar` utility class to `#fiche-col`. This hides the visual bar but keeps the scroll functionality, allowing the Swarm to breathe.

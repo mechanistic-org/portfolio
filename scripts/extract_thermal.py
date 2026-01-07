@@ -2,8 +2,9 @@ import pandas as pd
 import json
 
 # Use the LOCAL copy we made
-FILE_PATH = "thermal_dump.xls" 
-OUTPUT_PATH = r"D:\GitHub\eriknorris\src\config\sc48_thermal_real.json"
+# Use the REAL network path
+FILE_PATH = r"//morespace/projects/portfolio/digidesign/Lux Tests/Lux Thermal_11-14-07a.xls"
+OUTPUT_PATH = r"d:\GitHub\eriknorris\src\data\sc48_thermal_real.json"
 
 try:
     print(f"📂 Reading: {FILE_PATH}")

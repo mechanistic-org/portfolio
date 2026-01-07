@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
-import thermalDataRaw from "../../config/sc48_thermal_real.json";
+import thermalDataRaw from "../../data/sc48_thermal_real.json";
 
 interface ThermalData {
 	timestamp: number;
@@ -31,7 +31,7 @@ const SCThermalMatrix: React.FC = () => {
 		const svg = d3.select(svgRef.current);
 		const width = 800;
 		const height = 400;
-		const margin = { top: 40, right: 30, bottom: 40, left: 50 };
+		const margin = { top: 60, right: 30, bottom: 40, left: 50 };
 
 		svg
 			.attr("viewBox", `0 0 ${width} ${height}`)
@@ -121,6 +121,46 @@ const SCThermalMatrix: React.FC = () => {
 		line("psu", "#00C851", "PSU");
 		line("amb", "#33b5e5", "AMB");
 
+		// 🎯 ANNOTATION: EQUILIBRIUM POINT
+		// Find T=45 timestamp (or closest)
+		const tTarget = 45;
+		const pt = data.find((d) => d.timestamp >= tTarget) || data[data.length - 1];
+
+		if (pt) {
+			const lineX = x(pt.timestamp);
+
+			// Dashed Line
+			svg
+				.append("line")
+				.attr("x1", lineX)
+				.attr("y1", margin.top)
+				.attr("x2", lineX)
+				.attr("y2", height - margin.bottom)
+				.attr("stroke", "#fff")
+				.attr("stroke-width", 1)
+				.attr("stroke-dasharray", "4 4")
+				.style("opacity", 0.5);
+
+			// Text Label
+			svg
+				.append("text")
+				.attr("x", lineX + 10)
+				.attr("y", margin.top + 20)
+				.attr("fill", "#fff")
+				.style("font-family", "monospace")
+				.style("font-size", "12px")
+				.text("◀ EQUILIBRIUM (Active Ducting)");
+
+			svg
+				.append("text")
+				.attr("x", lineX + 10)
+				.attr("y", margin.top + 35)
+				.attr("fill", "#888")
+				.style("font-family", "monospace")
+				.style("font-size", "10px")
+				.text("Temp stabilizes below 60°C limit");
+		}
+
 		// TITLE
 		svg
 			.append("text")
@@ -140,7 +180,7 @@ const SCThermalMatrix: React.FC = () => {
 			.attr("fill", "#666")
 			.style("font-family", "monospace")
 			.style("font-size", "10px")
-			.text("SOURCE: LUX THERMAL TEST_LOG_11-19-07a (RAW)");
+			.text("SOURCE: LUX THERMAL TEST_LOG_11-14-07a (RAW FORENSIC DATA)");
 	}, [data]);
 
 	return (

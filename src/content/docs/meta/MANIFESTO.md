@@ -5,6 +5,7 @@ sidebar:
   group: "Meta-Portfolio"
   order: 2
 ---
+
 # Project Manifesto
 
 **Role:** High-Performance Mechanical Engineering Portfolio
@@ -12,63 +13,86 @@ sidebar:
 **State:** V1.0 Production (Stable)
 
 ## ðŸ›‘ Core Directives (Non-Negotiable)
-*   **Manual Override:** If a file exists at `data_source/manual_content/{slug}.md`, the script injects **THAT** text into the MDX body.
-*   **Workflow:** To write a Case Study, create the markdown file in `manual_content/`, then run the script.
-*   **The Creative Matrix:** To avoid generic AI content, we employ a "Creative Matrix" for content generation. This maps specific Employers/Clients to specific Engineering Domains (e.g., Kaleidescape -> Thermal Management, Acoustics). This ensures that even auto-generated content respects the historical context of the work.
+
+- **Manual Override:** If a file exists at `data_source/manual_content/{slug}.md`, the script injects **THAT** text into the MDX body.
+- **Workflow:** To write a Case Study, create the markdown file in `manual_content/`, then run the script.
+- **The Creative Matrix:** To avoid generic AI content, we employ a "Creative Matrix" for content generation. This maps specific Employers/Clients to specific Engineering Domains (e.g., Kaleidescape -> Thermal Management, Acoustics). This ensures that even auto-generated content respects the historical context of the work.
 
 ### 4. Physical Asset Law
+
 We do not map assets in JSON. We place them physically in the file system.
-*   **Staging:** `R2_STAGING/{slug}/` (Local source for uploads)
-*   **Production:** `https://assets.eriknorris.com/{slug}/` (Remote R2 bucket)
-*   **Git Rule:** We **NEVER** commit large assets to the repo. `R2_STAGING` is ignored. The R2 Bucket is the Source of Truth for binary blobs.
-*   **Standard Files:**
-    *   `hero.png` (Cover Image)
-    *   `model.glb` (3D Model)
-    *   `*.pdf` (Documentation/Specs)
-    *   `gallery/*.{png,jpg}` (Gallery Images)
+
+- **Staging:** `R2_STAGING/{slug}/` (Local source for uploads)
+- **Production:** `https://assets.eriknorris.com/{slug}/` (Remote R2 bucket)
+- **Git Rule:** We **NEVER** commit large assets to the repo. `R2_STAGING` is ignored. The R2 Bucket is the Source of Truth for binary blobs.
+- **Standard Files:**
+  - `hero.png` (Cover Image)
+  - `model.glb` (3D Model)
+  - `*.pdf` (Documentation/Specs)
+  - `gallery/*.{png,jpg}` (Gallery Images)
 
 ### 5. The Law of Zero-Runtime Visualization
+
 If a chart doesn't need to change after page load, it should be an image.
-*   **Principle:** We prefer build-time SVG generation (Matplotlib) over client-side JS libraries (Recharts).
-*   **Benefit:** Faster LCP, no hydration errors, and perfect "Datasheet" aesthetics.
+
+- **Principle:** We prefer build-time SVG generation (Matplotlib) over client-side JS libraries (Recharts).
+- **Benefit:** Faster LCP, no hydration errors, and perfect "Datasheet" aesthetics.
 
 ### 6. Respect the User's Time
+
 We removed the forced "Matrix Boot Sequence" on initial load because it delayed access to content.
-*   **Principle:** Cool effects should be **opt-in** (like the Restart button), not mandatory roadblocks.
-*   **Rule:** Never block the main thread or the view for purely cosmetic reasons.
+
+- **Principle:** Cool effects should be **opt-in** (like the Restart button), not mandatory roadblocks.
+- **Rule:** Never block the main thread or the view for purely cosmetic reasons.
 
 ### 7. The Law of Narrative Impact
+
 We do not just list specs; we tell the engineering story.
-*   **Framework:** Use the **Narrative STAR** method (The Challenge -> Engineering Approach -> Impact) for manual content.
-*   **Style:** Avoid literal "Situation/Task/Action/Result" labels. Use engaging, project-specific headings that guide the reader through the problem-solving journey.
-*   **Goal:** Bridge the gap between a technical datasheet and a compelling case study.
-*   **Practice:** We explicitly define an `impact` field in the frontmatter to ensure the "Result" is the first thing a recruiter sees, enforcing the "BLUF" (Bottom Line Up Front) principle for engineering case studies.
+
+- **Framework:** Use the **Narrative STAR** method (The Challenge -> Engineering Approach -> Impact) for manual content.
+- **Style:** Avoid literal "Situation/Task/Action/Result" labels. Use engaging, project-specific headings that guide the reader through the problem-solving journey.
+- **Goal:** Bridge the gap between a technical datasheet and a compelling case study.
+- **Practice:** We explicitly define an `impact` field in the frontmatter to ensure the "Result" is the first thing a recruiter sees, enforcing the "BLUF" (Bottom Line Up Front) principle for engineering case studies.
+
 ### 8. Honest Construction
+
 We show the seams.
-*   **Principle:** The "Construction Badge", "Debug Mode", and "Build Stats" are features, not bugs.
-*   **Why:** We are engineers. We value the machine as much as the output.
+
+- **Principle:** The "Construction Badge", "Debug Mode", and "Build Stats" are features, not bugs.
+- **Why:** We are engineers. We value the machine as much as the output.
 
 ### 9. The Meta-Portfolio
+
 The site must document itself. Every major feature (AR Viewer, Build Timer, Print Mode) is an engineering project worthy of a case study. We do not hide the machinery; we celebrate it in the `/colophon`.
+
 ### 6. The Law of Hybrid Assets
+
 **"Human Eye, Machine Hand."**
 We do not rely on build-time plugins to guess how an image should look. Art direction (color, crop, tone) is a human task performed in professional tools (Lightroom). Optimization (compression, formatting, resizing) is a machine task performed by scripts. The two never overlap.
 
 ### 10. The Law of Robustness
+
 **"Works on my machine" is not a valid defense.**
-*   **Principle:** We build for the hostile environment (CI/CD), not the comfortable one (Localhost).
-*   **Practice:** We use strict relative paths, enforce case sensitivity in Git, and prefer "Nuclear Renames" over subtle fixes when resolution errors occur.
+
+- **Principle:** We build for the hostile environment (CI/CD), not the comfortable one (Localhost).
+- **Practice:** We use strict relative paths, enforce case sensitivity in Git, and prefer "Nuclear Renames" over subtle fixes when resolution errors occur.
 
 ### 11. The Law of Data Density (The Cockpit)
+
 **"Empty space is wasted space."**
-*   **Context:** For the Dashboard (`/resume/dashboard`), we embrace the "747 Cockpit" aesthetic.
+
+- **Context:** For the Dashboard (`/resume/dashboard`), we embrace the "747 Cockpit" aesthetic.
+
 ---
+
 title: "Project Manifesto"
 slug: "manifesto"
 sidebar:
-  group: "System Manual"
-  order: 4
+group: "System Manual"
+order: 4
+
 ---
+
 # Project Manifesto
 
 **Role:** High-Performance Mechanical Engineering Portfolio
@@ -76,102 +100,146 @@ sidebar:
 **State:** V1.0 Production (Stable)
 
 ## ðŸ›‘ Core Directives (Non-Negotiable)
-*   **Manual Override:** If a file exists at `data_source/manual_content/{slug}.md`, the script injects **THAT** text into the MDX body.
-*   **Workflow:** To write a Case Study, create the markdown file in `manual_content/`, then run the script.
-*   **The Creative Matrix:** To avoid generic AI content, we employ a "Creative Matrix" for content generation. This maps specific Employers/Clients to specific Engineering Domains (e.g., Kaleidescape -> Thermal Management, Acoustics). This ensures that even auto-generated content respects the historical context of the work.
+
+- **Manual Override:** If a file exists at `data_source/manual_content/{slug}.md`, the script injects **THAT** text into the MDX body.
+- **Workflow:** To write a Case Study, create the markdown file in `manual_content/`, then run the script.
+- **The Creative Matrix:** To avoid generic AI content, we employ a "Creative Matrix" for content generation. This maps specific Employers/Clients to specific Engineering Domains (e.g., Kaleidescape -> Thermal Management, Acoustics). This ensures that even auto-generated content respects the historical context of the work.
 
 ### 4. Physical Asset Law
+
 We do not map assets in JSON. We place them physically in the file system.
-*   **Staging:** `R2_STAGING/{slug}/` (Local source for uploads)
-*   **Production:** `https://assets.eriknorris.com/{slug}/` (Remote R2 bucket)
-*   **Git Rule:** We **NEVER** commit large assets to the repo. `R2_STAGING` is ignored. The R2 Bucket is the Source of Truth for binary blobs.
-*   **Standard Files:**
-    *   `hero.png` (Cover Image)
-    *   `model.glb` (3D Model)
-    *   `*.pdf` (Documentation/Specs)
-    *   `gallery/*.{png,jpg}` (Gallery Images)
+
+- **Staging:** `R2_STAGING/{slug}/` (Local source for uploads)
+- **Production:** `https://assets.eriknorris.com/{slug}/` (Remote R2 bucket)
+- **Git Rule:** We **NEVER** commit large assets to the repo. `R2_STAGING` is ignored. The R2 Bucket is the Source of Truth for binary blobs.
+- **Standard Files:**
+  - `hero.png` (Cover Image)
+  - `model.glb` (3D Model)
+  - `*.pdf` (Documentation/Specs)
+  - `gallery/*.{png,jpg}` (Gallery Images)
 
 ### 5. The Law of Zero-Runtime Visualization
+
 If a chart doesn't need to change after page load, it should be an image.
-*   **Principle:** We prefer build-time SVG generation (Matplotlib) over client-side JS libraries (Recharts).
-*   **Benefit:** Faster LCP, no hydration errors, and perfect "Datasheet" aesthetics.
+
+- **Principle:** We prefer build-time SVG generation (Matplotlib) over client-side JS libraries (Recharts).
+- **Benefit:** Faster LCP, no hydration errors, and perfect "Datasheet" aesthetics.
 
 ### 6. Respect the User's Time
+
 We removed the forced "Matrix Boot Sequence" on initial load because it delayed access to content.
-*   **Principle:** Cool effects should be **opt-in** (like the Restart button), not mandatory roadblocks.
-*   **Rule:** Never block the main thread or the view for purely cosmetic reasons.
+
+- **Principle:** Cool effects should be **opt-in** (like the Restart button), not mandatory roadblocks.
+- **Rule:** Never block the main thread or the view for purely cosmetic reasons.
 
 ### 7. The Law of Narrative Impact
+
 We do not just list specs; we tell the engineering story.
-*   **Framework:** Use the **Narrative STAR** method (The Challenge -> Engineering Approach -> Impact) for manual content.
-*   **Style:** Avoid literal "Situation/Task/Action/Result" labels. Use engaging, project-specific headings that guide the reader through the problem-solving journey.
-*   **Goal:** Bridge the gap between a technical datasheet and a compelling case study.
-*   **Practice:** We explicitly define an `impact` field in the frontmatter to ensure the "Result" is the first thing a recruiter sees, enforcing the "BLUF" (Bottom Line Up Front) principle for engineering case studies.
+
+- **Framework:** Use the **Narrative STAR** method (The Challenge -> Engineering Approach -> Impact) for manual content.
+- **Style:** Avoid literal "Situation/Task/Action/Result" labels. Use engaging, project-specific headings that guide the reader through the problem-solving journey.
+- **Goal:** Bridge the gap between a technical datasheet and a compelling case study.
+- **Practice:** We explicitly define an `impact` field in the frontmatter to ensure the "Result" is the first thing a recruiter sees, enforcing the "BLUF" (Bottom Line Up Front) principle for engineering case studies.
+
 ### 8. Honest Construction
+
 We show the seams.
-*   **Principle:** The "Construction Badge", "Debug Mode", and "Build Stats" are features, not bugs.
-*   **Why:** We are engineers. We value the machine as much as the output.
+
+- **Principle:** The "Construction Badge", "Debug Mode", and "Build Stats" are features, not bugs.
+- **Why:** We are engineers. We value the machine as much as the output.
 
 ### 9. The Meta-Portfolio
+
 The site must document itself. Every major feature (AR Viewer, Build Timer, Print Mode) is an engineering project worthy of a case study. We do not hide the machinery; we celebrate it in the `/colophon`.
+
 ### 6. The Law of Hybrid Assets
+
 **"Human Eye, Machine Hand."**
 We do not rely on build-time plugins to guess how an image should look. Art direction (color, crop, tone) is a human task performed in professional tools (Lightroom). Optimization (compression, formatting, resizing) is a machine task performed by scripts. The two never overlap.
 
 ### 10. The Law of Robustness
+
 **"Works on my machine" is not a valid defense."**
-*   **Principle:** We build for the hostile environment (CI/CD), not the comfortable one (Localhost).
-*   **Practice:** We use strict relative paths, enforce case sensitivity in Git, and prefer "Nuclear Renames" over subtle fixes when resolution errors occur.
+
+- **Principle:** We build for the hostile environment (CI/CD), not the comfortable one (Localhost).
+- **Practice:** We use strict relative paths, enforce case sensitivity in Git, and prefer "Nuclear Renames" over subtle fixes when resolution errors occur.
 
 ### 11. The Law of Data Density (The Cockpit)
-**"Empty space is wasted space."**
-*   **Context:** For the Dashboard (`/resume/dashboard`), we embrace the "747 Cockpit" aesthetic.
-*   **Principle:** The specialized user (Recruiter/Engineer) wants to see *everything* at once. Do not hide complex data behind clicks.
-*   **Practice:** Use Streamgraphs, Tickers, and dense Grids to visualize the "Magnitude" of the career. If the data exists, put it on the glass.
 
-*   **Living Data:** Visualizations (Radial View, Skills Graph) should be downstream of the source of truth (Content Collections). Never maintain parallel JSON files (`hierarchy.json`) if the data exists in frontmatter.
+**"Empty space is wasted space."**
+
+- **Context:** For the Dashboard (`/resume/dashboard`), we embrace the "747 Cockpit" aesthetic.
+- **Principle:** The specialized user (Recruiter/Engineer) wants to see _everything_ at once. Do not hide complex data behind clicks.
+- **Practice:** Use Streamgraphs, Tickers, and dense Grids to visualize the "Magnitude" of the career. If the data exists, put it on the glass.
+
+- **Living Data:** Visualizations (Radial View, Skills Graph) should be downstream of the source of truth (Content Collections). Never maintain parallel JSON files (`hierarchy.json`) if the data exists in frontmatter.
 
 ### 12. The Data God's Law
+
 **"The Projection is not the Reality."**
 The website (`src`) is merely a transient rendering of the underlying data (`data_source`). We honor the CSV as the single source of truth. We do not paint over the mirror; we change the object being reflected.
 
 ### 13. The Law of Vendor Independence (Anti-Lock-In)
-*   **Principle:** SaaS subscriptions are temporary; Assets are permanent.
-*   **The Test:** "If you can't open it in MS Paint, you don't own it."
+
+- **Principle:** SaaS subscriptions are temporary; Assets are permanent.
+- **The Test:** "If you can't open it in MS Paint, you don't own it."
+
 ### 14. The Law of Self-Reliance
-*   **Rule:** Bake critical assets.
-*   **Context:** We lost our noise overlay because it relied on an external Netlify URL.
-*   **Decree:** If it defines the *feel* of the site (fonts, noise, icons), it must live in the repo. No external CDNs for aesthetics.
+
+- **Rule:** Bake critical assets.
+- **Context:** We lost our noise overlay because it relied on an external Netlify URL.
+- **Decree:** If it defines the _feel_ of the site (fonts, noise, icons), it must live in the repo. No external CDNs for aesthetics.
 
 ### 15. The Law of the Stack
+
 **Never use Presets.**
 Presets are black boxes that lock you into rigid aesthetics ("Melted Plastic").
-*   **Rule:** Build every material from `00_BASE` up.
-*   **Why:** It forces you to understand the physics (Resin -> Fiber -> Flash -> Wear -> Dust).
-*   **Result:** A fully non-destructive, "Datasheet Grade" asset that you own completely.
+
+- **Rule:** Build every material from `00_BASE` up.
+- **Why:** It forces you to understand the physics (Resin -> Fiber -> Flash -> Wear -> Dust).
+- **Result:** A fully non-destructive, "Datasheet Grade" asset that you own completely.
 
 ### 16. The Law of Naming (The Load-Bearing Ghost)
+
 **"Do not name your tools after the box they came in. Name them after what they build."**
-*   **Principle:** We acknowledge the giants we stand on (The Starter, Astro, Tailwind), but we claim dominion over the machine we built.
-*   **Practice:** We ruthlessly rename inherited variables (`ErikNorris` -> `eriknorris`) to eliminate "Brand Debt."
-*   **Attribution:** We "Humble Brag" about our origins in the Colophon, but the Codebase itself speaks with one voice: **Ours.**
+
+- **Principle:** We acknowledge the giants we stand on (The Starter, Astro, Tailwind), but we claim dominion over the machine we built.
+- **Practice:** We ruthlessly rename inherited variables (`ErikNorris` -> `eriknorris`) to eliminate "Brand Debt."
+- **Attribution:** We "Humble Brag" about our origins in the Colophon, but the Codebase itself speaks with one voice: **Ours.**
 
 ### 17. The Law of Static Truth (Zero Bloat)
+
 **"If the Platform fights the Framework, choose the Platform."**
-*   **Context:** We hit Cloudflare's "Too Many Modules" limit when asking Astro to generate a complex Worker.
-*   **Decree:** We default to `output: static`. We rely on **Manual Pages Functions** (`functions/`) for dynamic logic (like R2 proxies) rather than trusting a black-box Adapter to bundle everything into one massive script.
-*   **Result:** deployments went from 20MB+ (Fail) to less than 500KB (Success).
+
+- **Context:** We hit Cloudflare's "Too Many Modules" limit when asking Astro to generate a complex Worker.
+- **Decree:** We default to `output: static`. We rely on **Manual Pages Functions** (`functions/`) for dynamic logic (like R2 proxies) rather than trusting a black-box Adapter to bundle everything into one massive script.
+- **Result:** deployments went from 20MB+ (Fail) to less than 500KB (Success).
 
 ### 18. The Law of Remote Reality
+
 **"Localhost is a liar."**
-*   **Context:** We spent hours debugging "Green" images because `wrangler` was updating a local emulator instead of the live bucket.
-*   **Rule:** Always verify binary assets against the **Production URL** (`curl -I`), not the local staging folder.
+
+- **Context:** We spent hours debugging "Green" images because `wrangler` was updating a local emulator instead of the live bucket.
+- **Rule:** Always verify binary assets against the **Production URL** (`curl -I`), not the local staging folder.
 
 ### 19. The Red Cube Law (Visual Integrity)
-"If a complex 3D scene fails, render a Red Wireframe Cube. If you cannot see the Cube, the engine is dead. If you *can* see the Cube but not your scene, your materials are lying to you."
-*   **Application:** Always include a DEBUG mode or primitive fallback when engineering complex WebGL experiences to distinguish between "Crash" and "Invisible."
+
+"If a complex 3D scene fails, render a Red Wireframe Cube. If you cannot see the Cube, the engine is dead. If you _can_ see the Cube but not your scene, your materials are lying to you."
+
+- **Application:** Always include a DEBUG mode or primitive fallback when engineering complex WebGL experiences to distinguish between "Crash" and "Invisible."
 
 ### 20. The Law of the Singularity (Level 10 Metric)
+
 "Architecture is the tool. The Singularity is when the tool stops feeling like a barrier and starts feeling like an extension of the mind."
-*   **Benchmark:** If an interface feels "Alive" (Organic physics, zero-latency feedback, predictive flow), it has reached the Singularity. 
-*   **Target:** eriknorris.com must not just be "Cool"; it must be "Inevitable."
+
+- **Benchmark:** If an interface feels "Alive" (Organic physics, zero-latency feedback, predictive flow), it has reached the Singularity.
+- **Target:** eriknorris.com must not just be "Cool"; it must be "Inevitable."
+
+### 21. The Law of the Oracle (NotebookLM)
+
+We do not write "Creative fiction." We mine **Forensic Truth**.
+
+- **The Oracle:** Feed raw PDF/EML evidence into NotebookLM.
+- **The Prompt:** "Extract War Stories, not Marketing Copy."
+- **The Output:** Detailed, technical narratives (e.g., "Deviation #8777", "31°C Thermal Delta") that verify our work.
+- _We do not dump the Brain (NotebookLM) into the Body (Website). We curate the output manually._

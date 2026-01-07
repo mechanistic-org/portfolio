@@ -39,19 +39,32 @@ These are active AI/External resources that contain "Source of Truth" data not i
 - **Status:** **VERIFIED**
 - **Contents:** Definitive versions for Pro/E (Wildfire 2.0), IntraLink (3.4), SAP, and DigiDelivery.
 
+### 4. **Operation Chronos (Asset Hunting)**
+
+- **Role:** Forensic Target List
+- **Artifact:** `HUNTING_LIST.md` (in Brain Artifacts) / `D:/portfolio/HUNTING_LIST_PRINTABLE.html`
+- **Status:** **ACTIVE**
+- **Contents:** Targeted list of 25+ specific forensic assets (Titan DXF, C24 Refresh AI, etc.) extracted from NotebookLM.
+
 ---
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Module:** Homepage / Entrance Animation (COMPLETE).
+- **Active Module:** Operation Chronos (Asset Hunting).
 - **Next Up:**
-  1.  **Fiche Refinement:** Verify the "side-in" animation and interactivity of the Project Fiche.
-  2.  **Project Detail Pages:** Ensure the new `multiverse.json` data schema maps correctly to individual project routes.
+  1.  **Asset Ingestion (`c24`, `project-003`, `webtv`):** User to drop assets into `portfolio_working`. Agent to refine to `R2_STAGING`.
+  2.  **Asset Processing:** Execute `process_images.py` to populate the new `01_forensics` bubbles.
+  3.  **Deck Generation:** Auto-generate `deck.md` files for the new forensic bubbles.
 
 * **Key Decision (Physics):** "Goldilocks" settings are `vy: -50`, `friction: 0.05`. Do not increase friction without vertically scaling velocity.
 * **Key Decision (Data):** `multiverse.json` is the Single Source of Truth.
+* **Key Decision (Architecture):** **"The Law of The Vault"** - `eriknorris-assets\R2_STAGING` is the ONLY Production Vault. `portfolio_working` is the ONLY Staging Input. `eriknorris-workspace\R2_MASTER` is DEAD (Legacy).
+* **Key Decision (Protocol):** **"Operation Chronos"** - Use NotebookLM to generate `HUNTING_LIST.md` (dense tables) and export to HTML for physical printing ("Low Friction" asset retrieval).
+* **Key Decision (Mining):** **"The MailStore Pivot"** - Python COM is too fragile for 15k+ item queries. Use MailStore Home to Index -> Search -> Export.
+* **Key Decision (Layout):** **"The Fiche Scroll Law"** - The Fiche container MUST use `.no-scrollbar` to prevent double-scrollbar visual glitches with the Parallax system.
+* **Key Decision (Assets):** **"The Numeric Bubble Law"** - SC48/D-Control Bubble folders MUST be prefixed (e.g., `01_3d`) to ensure `process_images.py` compiles them in the correct narrative order.
 
-- **Active Thread:** `8213dcd2-add6-46cb-a56c-73af7c01a557` (Homepage Creation Sequence).
+- **Active Thread:** `b5ef5f6b-77c6-4c25-b991-6ffab3b1b077` (D-Control Enrichment & MailStore Pivot).
 
 ## 🔗 Active Intelligence (New Synapses)
 
@@ -62,6 +75,9 @@ These are active AI/External resources that contain "Source of Truth" data not i
   - **Concept:** Use NotebookLM to pre-visualize the "Exhibit Halls" (Bubbles) before creating folders.
   - **Oracle:** [SC48 NotebookLM](https://notebooklm.google.com/notebook/c783...?authuser=1)
   - **Key Decision:** **"Auto-Migration Pivot"** - If the Agent knows the Source and Destination, it must Script the move. Do not ask the user to drag files.
+- **Forensic Code Names:**
+  - **D-Control:** "Project Buckley" (18 Engineers, Flagship).
+  - **D-Command:** "Project Danko" (14 Engineers, Mid-tier).
 
 ---
 
@@ -69,7 +85,7 @@ These are active AI/External resources that contain "Source of Truth" data not i
 
 - **NotebookLM is "SME Level":** It is not generic. It has read the raw emails. Trust it.
 - **The "Air Gap" is Real:** We have 40+ raw dump folders that need "Stitching."
-- **Ingestion Logic:** `ingest_data.py` handles the bulk, but "Deep Dives" (C24) are manually curated using High-Fidelity sources.
+- **Ingestion Logic:** `ingest_data.py` handles the bulk, but "Deep Dives" (C24, Buckley) are manually curated using High-Fidelity sources.
 - **The "Sovereignty Valve":** `sovereign_manifest.json` is the supreme law. If a project is listed there, `ingest_data.py` MUST NOT overwrite its MDX.
 - **The "Two-Step Dance":** Image processing (`process_images.py`) is manual and decoupled from metadata ingestion (`ingest_data.py`). We do not automate the "Art."
 - **The "Esbuild Red Herring":** If `npm run build` fails with an obscure `Readable.push` pipe error, it is likely a **Syntax Error** in an Astro component's `<script>` block (e.g., missing function declaration). Don't blame the environment first.

@@ -10,17 +10,227 @@ category: "Control Surface"
 tools: ["ProEngineer"]
 toolIcons: ["ptc"]
 production: "Mass Production"
-tags: ["CAD (Computer-Aided Design)", "Prototyping", "Reliability Testing"]
-skillData: [{"name": "CAD (Computer-Aided Design)", "value": 54.0, "benchmark": 44.9}, {"name": "Prototyping", "value": 46.8, "benchmark": 46.7}, {"name": "Reliability Testing", "value": 45.0, "benchmark": 40.4}, {"name": "Design for Manufacturing (DFM)", "value": 44.9, "benchmark": 44.5}, {"name": "Usability Testing", "value": 44.4, "benchmark": 39.6}, {"name": "Iterative Prototyping", "value": 43.5, "benchmark": 46.6}]
-additionalSkills: ["CAD (Computer-Aided Design)", "Prototyping", "Reliability Testing", "Design for Manufacturing (DFM)", "Usability Testing", "Iterative Prototyping", "Tolerance Analysis", "Product Testing", "Testing Automation", "Materials Knowledge"]
-phase_stats: {"Strategy": 7.7, "Design": 67.3, "Engineering": 23.0, "Production": 21.4}
-cyberspace: {"layout": "linear", "stickies": [{"id": "01_intro", "type": "gallery", "deck": [{"title": "Introduction", "subtitle": "The Little Brother", "body": "**Context:**\nFollowing the success of D-Control, D-Command was the \"mid-tier\" answer.\n\n**My Role:**\nI inherited the D-Command chassis design and optimized it for mass production, ensuring it shared the same DNA as the flagship."}], "data": {"images": [], "layout": "masonry"}}]}
+tags:
+  [
+    "CAD (Computer-Aided Design)",
+    "Prototyping",
+    "Reliability Testing",
+    "Project Danko",
+  ]
+skillData:
+  [
+    { "name": "CAD (Computer-Aided Design)", "value": 54.0, "benchmark": 44.9 },
+    { "name": "Prototyping", "value": 46.8, "benchmark": 46.7 },
+    { "name": "Reliability Testing", "value": 45.0, "benchmark": 40.4 },
+    {
+      "name": "Design for Manufacturing (DFM)",
+      "value": 44.9,
+      "benchmark": 44.5,
+    },
+    { "name": "Usability Testing", "value": 44.4, "benchmark": 39.6 },
+    { "name": "Iterative Prototyping", "value": 43.5, "benchmark": 46.6 },
+  ]
+additionalSkills:
+  [
+    "CAD (Computer-Aided Design)",
+    "Prototyping",
+    "Reliability Testing",
+    "Design for Manufacturing (DFM)",
+    "Usability Testing",
+    "Iterative Prototyping",
+    "Tolerance Analysis",
+    "Product Testing",
+    "Testing Automation",
+    "Materials Knowledge",
+  ]
+phase_stats:
+  { "Strategy": 7.7, "Design": 67.3, "Engineering": 23.0, "Production": 21.4 }
+cyberspace:
+  {
+    "layout": "linear",
+    "stickies":
+      [
+        {
+          "id": "01_intro",
+          "type": "gallery",
+          "deck":
+            [
+              {
+                "title": "The Mandate",
+                "subtitle": "Project Danko",
+                "body": "**Objective:**\nCapture the \"Mid-Tier\" studio market by delivering the flagship D-Control experience at **40% of the cost**.\n\n**The Strategy:**\nUnlike the flagship's modular unibody, we split Danko into two smaller, linkable units (Main + Fader). This slashed tooling costs but introduced a critical new weak point: **The Interconnect.**",
+              },
+            ],
+          "data":
+            {
+              "images":
+                [
+                  {
+                    "src": "/assets/r2/d-command/bubbles/01_intro/Control room 3-lg.webp",
+                    "width": 1280,
+                    "height": 960,
+                    "aspectRatio": 1.33,
+                    "alt": "Control Room Concept",
+                  },
+                  {
+                    "src": "/assets/r2/d-command/bubbles/01_intro/D-CommandLarge-md.webp",
+                    "width": 800,
+                    "height": 600,
+                    "aspectRatio": 1.33,
+                    "alt": "D-Command Main Unit",
+                  },
+                ],
+              "layout": "masonry",
+            },
+        },
+        {
+          "id": "02_architecture",
+          "type": "gallery",
+          "deck":
+            [
+              {
+                "title": "The Umbilical",
+                "subtitle": "Ground Loop Architecture",
+                "body": "**The Constraint:**\nLinking the Main Unit to the Fader Expansion created a massive ground loop risk. Logic threshold calculations suggested we needed \"40 heavy ground wires\" to prevent data corruption from voltage drop.\n\n**The Solution:**\nInstead of a costly active repeater, I designed a custom **DB25 Interface PCB** that split high-current power from sensitive data lines. We validated this with a strict **10-foot cable limit**, proving that a passive interconnect could work if the copper mass was allocated correctly.",
+              },
+            ],
+          "data":
+            {
+              "images":
+                [
+                  {
+                    "src": "/assets/r2/d-command/bubbles/02_architecture/danko_main_withlabels-lg.webp",
+                    "width": 1280,
+                    "height": 960,
+                    "aspectRatio": 1.33,
+                    "alt": "Danko Main Unit Architecture",
+                  },
+                  {
+                    "src": "/assets/r2/d-command/bubbles/02_architecture/DSC03259-lg.webp",
+                    "width": 1280,
+                    "height": 960,
+                    "aspectRatio": 1.33,
+                    "alt": "Internal Chassis Validation",
+                  },
+                  {
+                    "src": "/assets/r2/d-command/bubbles/02_architecture/danko_fader_withlabels-lg.webp",
+                    "width": 1280,
+                    "height": 960,
+                    "aspectRatio": 1.33,
+                    "alt": "Fader Module Architecture",
+                  },
+                ],
+              "layout": "masonry",
+            },
+        },
+        {
+          "id": "03_regulatory",
+          "type": "gallery",
+          "deck":
+            [
+              {
+                "title": "The Near-Miss",
+                "subtitle": "AC Withdraw Failure",
+                "body": "**The Crisis:**\nJust days before Mass Production, the unit **failed** the UL \"AC Withdraw\" test. The internal capacitance wasn't discharging fast enough (>60Vdc @ 2sec), posing a shock hazard.\n\n**The Fix:**\nWe couldn't re-spin the power supply. I engineered a retrofit harness with a specific **750K drain resistor** and sourced a new IEC filter with integrated bleeders, clearing the safety hold 48 hours before the factory start date.",
+              },
+            ],
+          "data":
+            {
+              "images":
+                [
+                  {
+                    "src": "/assets/r2/d-command/bubbles/03_regulatory/DSC03110-lg.webp",
+                    "width": 1280,
+                    "height": 960,
+                    "aspectRatio": 1.33,
+                    "alt": "Regulatory Lab Setup",
+                  },
+                  {
+                    "src": "/assets/r2/d-command/bubbles/03_regulatory/DSC03112-lg.webp",
+                    "width": 1280,
+                    "height": 960,
+                    "aspectRatio": 1.33,
+                    "alt": "Safety Testing Rig",
+                  },
+                ],
+              "layout": "masonry",
+            },
+        },
+        {
+          "id": "04_quality",
+          "type": "gallery",
+          "deck":
+            [
+              {
+                "title": "The Defense",
+                "subtitle": "The 'Tinderbox' PCBs",
+                "body": "**The Violation:**\nA prototype run of PCBs arrived marked as **UL 94 V-2** (flammable) instead of the mandatory **UL 94 V-0** (self-extinguishing). Our Compliance Lead called them a \"Virtual Tinderbox.\"\n\n**The Action:**\nI flagged this as a \"Blatant Violation\" of our safety spec, forced the vendor (RB Tech) to scrap the lot immediately, and instituted a new incoming inspection protocol to verify flammability ratings before boards ever hit the lab bench.",
+              },
+            ],
+          "data":
+            {
+              "images":
+                [
+                  {
+                    "src": "/assets/r2/d-command/bubbles/04_quality/PCll_Jr_Rev6_Main_Print-lg.webp",
+                    "width": 1280,
+                    "height": 960,
+                    "aspectRatio": 1.33,
+                    "alt": "PCll Jr Rev6 Main PCB",
+                  },
+                  {
+                    "src": "/assets/r2/d-command/bubbles/04_quality/DSC03122-lg.webp",
+                    "width": 1280,
+                    "height": 960,
+                    "aspectRatio": 1.33,
+                    "alt": "PCB Inspection",
+                  },
+                  {
+                    "src": "/assets/r2/d-command/bubbles/04_quality/PCll_Jr_Rev6_Fader_Print-lg.webp",
+                    "width": 1280,
+                    "height": 960,
+                    "aspectRatio": 1.33,
+                    "alt": "Fader PCB Detail",
+                  },
+                ],
+              "layout": "masonry",
+            },
+        },
+      ],
+    "narrative":
+      [
+        {
+          "step": "01_intro",
+          "title": "The Mid-Tier Gamble",
+          "subtitle": "2004",
+          "body": 'D-Control had conquered the high-end, but the mid-market was wide open. **Project Danko** was the answer. My directive was simple but brutal: *"Make it feel like a $100k console, but sell it for $15k."*',
+        },
+        {
+          "step": "02_architecture",
+          "title": "Splitting the Atom",
+          "subtitle": "The Risk of Modularity",
+          "body": "To hit the price point, we couldn't ship a massive unibody frame. We had to split the system into a **Main Unit** and a **Fader Expansion**. This created a new problem: How do you power and control a satellite unit without creating a ground loop that kills the digital audio stream?",
+        },
+        {
+          "step": "03_regulatory",
+          "title": "The 11th Hour",
+          "subtitle": "Safety Protocols",
+          "body": "Hardware design is a game of inches until it becomes a game of seconds. The **AC Withdraw Failure** wasn't just a bug; it was a layout oversight that threatened to delay the entire launch. The retrofit harness was classic triage engineering: ugly, invisible, but absolutely necessary.",
+        },
+        {
+          "step": "04_quality",
+          "title": "Holding the Line",
+          "subtitle": "Vendor Management",
+          "body": "When you push vendors on price, they sometimes cut corners on safety. The **'Tinderbox' PCB Incident** was a wake-up call. It taught me that 'Trust but Verify' isn't just a slogan—it's the only way to keep your product from literally catching fire.",
+        },
+      ],
+  }
 theme: "hyperspace"
 teamSize: "Unknown"
 gallery: []
 documents: []
-links: [{"name": "Digidesign Website", "url": "https://avid.com"}]
-heroImage: "/assets/placeholders/tech-1.jpg" 
+links: [{ "name": "Digidesign Website", "url": "https://avid.com" }]
+heroImage: "/assets/r2/d-command/d-command-hero-01-xl.webp"
 draft: false
 description: "The little brother to D-Control."
 duration: "Active"
@@ -29,28 +239,32 @@ skillGraph: "/assets/r2/d-command/skill-graph.svg"
 partGraph: "/assets/r2/d-command/part-graph.svg"
 impact: ""
 ---
-import { YouTube } from '@astro-community/astro-embed-youtube';
-import ModelViewer from '@components/mdx/ModelViewer.astro';
+
+import { YouTube } from "@astro-community/astro-embed-youtube";
+import ModelViewer from "@components/mdx/ModelViewer.astro";
 
 ## The Challenge
+
 > **Context:** Digidesign (Avid) set the standard for professional digital audio workstations (Pro Tools).
 
 The goal was to create a tactile control surface that provided professional mixers with precise, low-latency control over digital parameters.
 
 ## Engineering Approach
+
 We adopted a rigorous engineering methodology to solve these problems.
 
-*   **Integrated Strategy:** Integrated high-resolution motorized faders with custom touch-sensitive capacitive caps.
-*   **Designed Strategy:** Designed a rigid, ergonomic chassis that minimized resonance and provided a solid 'console' feel.
-*   **Engineered Strategy:** Engineered the internal layout to separate analog audio paths from digital control signals to minimize noise floor.
-*   **Implemented Strategy:** Implemented a modular assembly strategy to allow for scalable product variants.
+- **Integrated Strategy:** Integrated high-resolution motorized faders with custom touch-sensitive capacitive caps.
+- **Designed Strategy:** Designed a rigid, ergonomic chassis that minimized resonance and provided a solid 'console' feel.
+- **Engineered Strategy:** Engineered the internal layout to separate analog audio paths from digital control signals to minimize noise floor.
+- **Implemented Strategy:** Implemented a modular assembly strategy to allow for scalable product variants.
 
 ## Impact
+
 The unit became a staple in professional recording studios, bridging the gap between analog workflow and digital flexibility.
 
 ### Project Artifacts
+
 <div class="my-8">
-  <YouTube id="dQw4w9WgXcQ" />
+	<YouTube id="dQw4w9WgXcQ" />
 </div>
 <ModelViewer />
-

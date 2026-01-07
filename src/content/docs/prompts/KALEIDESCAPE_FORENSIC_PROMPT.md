@@ -1,0 +1,86 @@
+---
+title: "Kaleidescape Research Protocol"
+slug: "kaleidescape_research_protocol"
+sidebar:
+  group: "Prompts"
+---
+
+# NotebookLM Protocol: The Sequential Method (Broad Spectrum)
+
+**Diagnosis:**
+Our previous attempts were too narrow. By pre-defining the code names, we blinded the AI to the rest of the ecosystem.
+**The Fix:** We use "Broad Spectrum" queries. We ask for **ALL** projects, **ALL** failures, and **ALL** vendor friction, letting the AI (The "Oracle") tell _us_ what exists.
+
+---
+
+## 🔎 Query 1: The Hardware Decoder (Omnibus)
+
+_(Goal: Map the entire ecosystem)_
+
+> **Identify ALL hardware projects and code names mentioned in the archive.**
+> Do not limit yourself to "Orpheus" or "Mercury." Look for **Vesta**, **Ares**, **Apollo**, **Titan**, **Hydra**, **Macduff**, and any others.
+>
+> For each code name found:
+>
+> 1.  **Identity:** What is the actual product (e.g., "1U Server", "1080p Player")?
+> 2.  **Specs:** detailed dimensions, materials (Aluminum vs Steel), and chipsets (Sigma, Intel, Broadcom).
+> 3.  **Erik's Role:** Did Erik Norris lead the mechanical design for this specific unit?
+
+---
+
+## 🛠️ Query 2: The "War Stories" (Global Search)
+
+_(Goal: Find the failures across the entire timeline)_
+
+> **Describe the major Engineering Crises across ALL projects.**
+> Ignore success. We are looking for "The Agony of Hardware."
+>
+> Scan the entire archive for discussions involving:
+>
+> - **Thermal:** Overheating, fan curve tuning, "The Oven Test," specific temperature deltas.
+> - **Mechanical:** Interference, gap analysis, tolerance stack-up failures, mechanism jams (especially Disc Loaders).
+> - **Supply Chain:** Vendor failures (Mass Precision, Yomura, Steman), molding defects, or texture mismatches.
+>
+> For each crisis found:
+>
+> - **Project:** (e.g., "Orpheus")
+> - **The Symptom:** What physically went wrong?
+> - **The Fix:** How did Erik and the team solve it? (Tooling change? Firmware hack?)
+
+---
+
+## 💎 Query 3: Extreme Quality (The "Pixel Perfect" Standard)
+
+_(Goal: Forensic evidence of high standards)_
+
+> **Find specific instances where Erik Norris or the team rejected parts that other companies would have accepted.**
+>
+> - **Vendor Disputes**: Who was the vendor? What was the defect? What was the outcome?
+
+---
+
+## 👤 Query 4: The Biography (Leadership)
+
+_(Goal: The Career Narrative)_
+
+> **Synthesize the professional impact of Erik Norris at Kaleidescape.**
+>
+> - **Systems:** Describe his role in implementing **Windchill** (PDM).
+> - **Management:** How did he manage the remote engineering teams and Asian manufacturing partners?
+
+---
+
+## 👥 Query 5: The Orbit & Metrics (C24 Standard)
+
+_(Goal: Extract "Cast of Characters" and "Quantifiable Wins")_
+
+> **We need to populate the "Team Orbit" and "STAR Results" sections.**
+>
+> 1.  **The Cast (Orbit):**
+>     - List every **person** mentioned in a technical or leadership context.
+>     - Group them by **Internal** (Engineering, Manufacturing, PM) vs **External** (Vendors, Partners).
+>     - _Example:_ "Greg Curry (Test Lead), Weddy Wang (Steman), Roger Lee (Yomura)."
+> 2.  **The Numbers (STAR Metrics):**
+>     - List every specific **Dollar Amount**, **Percentage**, or **Quantity** found in the archive.
+>     - _Example:_ "Saved $24 per chassis," "Reduced thermal delta by 20°C," "Scrapped 3,400 screws," "$35k Tooling Budget."
+>     - Map these numbers to their specific projects (Orpheus, Mercury, etc.).

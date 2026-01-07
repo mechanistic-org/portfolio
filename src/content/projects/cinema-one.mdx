@@ -10,17 +10,47 @@ category: "Media Server"
 tools: ["Creo"]
 toolIcons: ["ptc"]
 production: "Mass Production"
-tags: ["CAD (Computer-Aided Design)", "Design for Manufacturing (DFM)", "Materials Knowledge"]
-skillData: [{"name": "CAD (Computer-Aided Design)", "value": 66.4, "benchmark": 44.9}, {"name": "Design for Manufacturing (DFM)", "value": 60.7, "benchmark": 44.5}, {"name": "Materials Knowledge", "value": 59.8, "benchmark": 40.5}, {"name": "Prototyping", "value": 59.1, "benchmark": 46.7}, {"name": "Iterative Prototyping", "value": 54.2, "benchmark": 46.6}, {"name": "Product Testing", "value": 50.7, "benchmark": 39.7}]
-additionalSkills: ["CAD (Computer-Aided Design)", "Design for Manufacturing (DFM)", "Materials Knowledge", "Prototyping", "Iterative Prototyping", "Product Testing", "Reliability Testing", "Simulation", "Tolerance Analysis", "Testing Automation"]
-phase_stats: {"Strategy": 19.8, "Design": 174.2, "Engineering": 59.4, "Production": 55.4}
+tags:
+  [
+    "CAD (Computer-Aided Design)",
+    "Design for Manufacturing (DFM)",
+    "Materials Knowledge",
+  ]
+skillData:
+  [
+    { "name": "CAD (Computer-Aided Design)", "value": 66.4, "benchmark": 44.9 },
+    {
+      "name": "Design for Manufacturing (DFM)",
+      "value": 60.7,
+      "benchmark": 44.5,
+    },
+    { "name": "Materials Knowledge", "value": 59.8, "benchmark": 40.5 },
+    { "name": "Prototyping", "value": 59.1, "benchmark": 46.7 },
+    { "name": "Iterative Prototyping", "value": 54.2, "benchmark": 46.6 },
+    { "name": "Product Testing", "value": 50.7, "benchmark": 39.7 },
+  ]
+additionalSkills:
+  [
+    "CAD (Computer-Aided Design)",
+    "Design for Manufacturing (DFM)",
+    "Materials Knowledge",
+    "Prototyping",
+    "Iterative Prototyping",
+    "Product Testing",
+    "Reliability Testing",
+    "Simulation",
+    "Tolerance Analysis",
+    "Testing Automation",
+  ]
+phase_stats:
+  { "Strategy": 19.8, "Design": 174.2, "Engineering": 59.4, "Production": 55.4 }
 cyberspace: null
 theme: "DataSheet"
 teamSize: "Unknown"
 gallery: []
 documents: []
-links: [{"name": "Kaleidescape Website", "url": "https://kaleidescape.com"}]
-heroImage: "/assets/placeholders/tech-1.jpg" 
+links: [{ "name": "Kaleidescape Website", "url": "https://kaleidescape.com" }]
+heroImage: "/assets/placeholders/tech-1.jpg"
 draft: false
 description: ""
 duration: "1.1 Years"
@@ -29,27 +59,60 @@ skillGraph: "/assets/r2/cinema-one/skill-graph.svg"
 partGraph: "/assets/r2/cinema-one/part-graph.svg"
 impact: ""
 ---
-import { YouTube } from '@astro-community/astro-embed-youtube';
-import ModelViewer from '@components/mdx/ModelViewer.astro';
+
+import { YouTube } from "@astro-community/astro-embed-youtube";
+import ModelViewer from "@components/mdx/ModelViewer.astro";
 
 ## The Challenge
+
 > **Context:** Kaleidescape was known for $30k rack-mount gear. We needed a product for the living room that cost under $4k.
 
 "Cinema One" (Project Macduff) was an exercise in aggressive integration.
-*   **The "Toast Turn":** The defining feature was the slot-load drive that "swallowed" a Blu-ray, ripped it to the internal HDD, and ejected it.
-*   **Acoustics:** It had to be silent while spinning a hard drive at 7200RPM and a blower fan.
+
+- **The "Toast Turn":** The defining feature was the slot-load drive that "swallowed" a Blu-ray, ripped it to the internal HDD, and ejected it.
+- **Acoustics:** It had to be silent while spinning a hard drive at 7200RPM and a blower fan.
 
 ## Engineering Approach
-*   **Suspension:** I designed a custom Sorbothane suspension capability for the HDD cage to decouple vibrational energy from the chassis resonance.
-*   **Airflow:** We used a custom blower with a specific blade geometry to push air through the restrictive heatsink fins without generating turbulence noise (blade passing frequency tuning).
+
+- **Suspension:** I designed a custom Sorbothane suspension capability for the HDD cage to decouple vibrational energy from the chassis resonance.
+- **Airflow:** We used a custom blower with a specific blade geometry to push air through the restrictive heatsink fins without generating turbulence noise (blade passing frequency tuning).
+
+### Forensic Engineering
+
+> **The "Flow Mark" Rejection (Cosmetic Crisis):**
+> The plastic top covers (Yomura) had visible flow lines on the front lip. The vendor attempted to "spot paint" the defect, but it looked like a smudge.
+>
+> - **The Stand:** We rejected 100% of the inventory (1,200 parts), forcing a line-down situation.
+> - **The Fix:** We forced a **Mold Flow Analysis** and re-tooling of the gate location rather than accepting a cosmetic compromise.
+>
+> **The "G-Force" (Shipping Failure):**
+> Units arrived with Optical Drives sheared off their mounts. The internal foam packaging compressed during transit, allowing the heavy steel chassis to accelerate inside the box.
+>
+> - **The Fix:** Redesigned the packaging density and filler blocks to decouple the unit from drop impacts.
+
+### Team Orbit
+
+- **Engineering Lead:** Erik Norris
+- **Industrial Design:** Argyle Design (Gabe Cohn)
+- **Plastics:** Yomura (Roger Lee, Grat Wu)
+- **CM:** Sanmina
+
+### Success Metrics
+
+- **33% Rejection Rate:** Forced a line-down situation to reject flawed cosmetic parts (Flow Marks), establishing a new "Apple-tier" quality standard for the mid-market product.
+- **$0.00:** Zero field failures reported for shipping damage after the packaging redesign (The "G-Force" fix).
 
 ## Impact
+
 It captured a new "Mid-Market" segment for the company.
-*   **Award:** Won CEPro "Product of the Year".
+
+- **Award:** Won CEPro "Product of the Year".
 
 ### Project Artifacts
+
 :::note[Specs]
-*   **Capacity:** 100 Blu-rays
-*   **Drive:** Slot-Load BD
-*   **Cooling:** Custom Blower
-:::
+
+- **Capacity:** 100 Blu-rays
+- **Drive:** Slot-Load BD
+- **Cooling:** Custom Blower
+  :::

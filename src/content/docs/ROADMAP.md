@@ -46,6 +46,39 @@ sidebar:
 
 ## 📜 Change Log (Recent)
 
+- **[2026-01-06] Operation Chronos (Timeline & Hunting)**
+  - **[Data] Timeline Truth:** Synced `multiverse.json` with Forensic Reality.
+    - **WebTV:** Added Titan, Mercury, Pluto, Galaxy (The Grind Era).
+    - **Digidesign:** Mapped C24 (Curtis), Project 003 (Kessel), Project 001 (Vandross).
+  - **[Protocol] Asset Hunting:** Established "Pilot Protocol" where Antigravity drives NotebookLM to generate `HUNTING_LIST.md`.
+  - **[Artifact]** Delivered `HUNTING_LIST_PRINTABLE.html` for low-friction MailStore retrieval.
+  - **[Architecture] The Vault:** Codified `eriknorris-assets\R2_STAGING` as the "True Vault" and declared `eriknorris-workspace` DEAD.
+  - **[Metric] Velocity:** Confirmed 45-day duration (Nov 22 Inception) for "Sovereign Pipeline" build.
+
+- **[2026-01-05] Forensic Enrichment (The Flagships)**
+  - **[Content] D-Control (Buckley):** Restored the flagship story using NotebookLM "War Stories" (Adhesion Crisis, Fader Wars, Thermal Bridge).
+    - **Asset:** Ingested `d-control-hero-01-xl.webp` and confirmed verified visual evidence.
+    - **Fix:** Resolved "Hero Image Placeholder" bug by enforcing Standard YAML Frontmatter (fixing schema validation failure).
+  - **[Content] D-Command (Danko):** Mined the "Mid-Tier" narrative (Tinderbox PCBs, Umbilical Ground Loops).
+  - **[Protocol]** Established "Code Name" metadata layer (Buckley, Danko, Curtis) for historical accuracy.
+
+- **[2026-01-05] SwarmFiche Stabilization**
+  - **[Fix] Interaction Gap:** Resolved `ResVizSwarm` clipping and unclickable nodes by ensuring `pointer-events-auto` propagated to D3 groups.
+  - **[Fix] Layout:** Fixed "Double Scrollbar" glitch in Fiche list by applying `.no-scrollbar` utility to the container.
+  - **[Fix] Z-Index:** Patched `HyperspaceHome` logo layer overlapping the interactive Swarm area.
+
+- **[2026-01-05] The MailStore Pivot (Harvester V2)**
+  - **[Strategy]** Retired custom Python extraction in favor of **MailStore Home**.
+  - **[Workflow]** Search (in MailStore) -> Export EML -> Stitch (Python) -> NotebookLM.
+  - **[Why]** Solves the "15k Item Timeout" and "MAPI Lock" issues inherent to direct Outlook automation.
+
+- **[2026-01-05] SC48 Standardization & Mining Pivot**
+  - **[Refactor] SC48 Bubbles:** Renamed bubble folders to `01_...` pattern to enforce correct compilation order and narrative flow.
+  - **[Fix] SwarmFiche:** Resolved "Unclickable Nodes" by applying `pointer-events-auto` to D3 groups.
+  - **[Fix] Scrollbars:** Implemented `.no-scrollbar` utility to fix "Double Scrollbar" glitch in Fiche container.
+  - **[Strategy] Email Mining:** Pivoted from custom Python scripts to **MailStore Home** for "Search-First" email extraction (The Harvester Pivot).
+  - **[Fix] Z-Index:** Patched `HyperspaceHome` to toggle `visibility: hidden` on logo layer to prevent input blocking.
+
 - **[2026-01-04] Homepage "Creation Sequence"**
   - **Architecture:** Refactored `HyperspaceHome.astro` to use Vanilla JS scroll orchestration for performance.
   - **Feature:** Implemented "Carny Bell" physics trigger for Swarm entrance.

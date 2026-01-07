@@ -11,16 +11,37 @@ tools: ["ProEngineer"]
 toolIcons: ["ptc"]
 production: "Mass Production"
 tags: ["Problem Solving", "Iterative Prototyping", "Prototyping"]
-skillData: [{"name": "Problem Solving", "value": 59.9, "benchmark": 10.9}, {"name": "Iterative Prototyping", "value": 49.4, "benchmark": 46.6}, {"name": "Prototyping", "value": 47.9, "benchmark": 46.7}, {"name": "Design Research", "value": 7.2, "benchmark": 5.5}, {"name": "Lean Manufacturing", "value": 7.2, "benchmark": 5.6}, {"name": "Materials Selection", "value": 7.2, "benchmark": 5.5}]
-additionalSkills: ["Problem Solving", "Iterative Prototyping", "Prototyping", "Design Research", "Lean Manufacturing", "Materials Selection", "Iterative Design", "Failure Mode and Effects Analysis (FMEA)", "Product Testing", "Usability Testing"]
-phase_stats: {"Strategy": 16.7, "Design": 147.0, "Engineering": 50.1, "Production": 46.8}
+skillData:
+  [
+    { "name": "Problem Solving", "value": 59.9, "benchmark": 10.9 },
+    { "name": "Iterative Prototyping", "value": 49.4, "benchmark": 46.6 },
+    { "name": "Prototyping", "value": 47.9, "benchmark": 46.7 },
+    { "name": "Design Research", "value": 7.2, "benchmark": 5.5 },
+    { "name": "Lean Manufacturing", "value": 7.2, "benchmark": 5.6 },
+    { "name": "Materials Selection", "value": 7.2, "benchmark": 5.5 },
+  ]
+additionalSkills:
+  [
+    "Problem Solving",
+    "Iterative Prototyping",
+    "Prototyping",
+    "Design Research",
+    "Lean Manufacturing",
+    "Materials Selection",
+    "Iterative Design",
+    "Failure Mode and Effects Analysis (FMEA)",
+    "Product Testing",
+    "Usability Testing",
+  ]
+phase_stats:
+  { "Strategy": 16.7, "Design": 147.0, "Engineering": 50.1, "Production": 46.8 }
 cyberspace: null
 theme: "DataSheet"
 teamSize: "Unknown"
 gallery: []
 documents: []
-links: [{"name": "Kaleidescape Website", "url": "https://kaleidescape.com"}]
-heroImage: "/assets/placeholders/abstract.jpg" 
+links: [{ "name": "Kaleidescape Website", "url": "https://kaleidescape.com" }]
+heroImage: "/assets/placeholders/abstract.jpg"
 draft: false
 description: "KVAULT-M700 Disc Vault"
 duration: "Active"
@@ -29,24 +50,51 @@ skillGraph: "/assets/r2/m700/skill-graph.svg"
 partGraph: "/assets/r2/m700/part-graph.svg"
 impact: ""
 ---
-import { YouTube } from '@astro-community/astro-embed-youtube';
-import ModelViewer from '@components/mdx/ModelViewer.astro';
+
+import { YouTube } from "@astro-community/astro-embed-youtube";
+import ModelViewer from "@components/mdx/ModelViewer.astro";
 
 ## The Challenge
+
 > **Context:** Legal requirements meant users had to have the physical disc present to play the digital copy.
 
 The M700 Disc Vault was a **Optical Jukebox** that held 320 discs.
-*   **Robotics:** It needed to automatically ingest, identify, and catalog discs dropped into the slot by a user.
-*   **Reliability:** The mechanism had to handle thousands of load/unload cycles without scratching a disc or jamming.
+
+- **Robotics:** It needed to automatically ingest, identify, and catalog discs dropped into the slot by a user.
+- **Reliability:** The mechanism had to handle thousands of load/unload cycles without scratching a disc or jamming.
 
 ## Engineering Approach
+
 I worked on the "Picker" mechanism—the robotic hand that grabbed the disc.
-*   **Compliance:** The gripper had built-in mechanical compliance to tolerate misaligned discs (up to 2mm) without jamming.
-*   **Sensor Saturation:** We used IR break-beams to detect disc presence, but the highly reflective surface of Blu-rays caused false positives. I implemented a polarized filter system to kill the glare.
+
+- **Compliance:** The gripper had built-in mechanical compliance to tolerate misaligned discs (up to 2mm) without jamming.
+- **Sensor Saturation:** We used IR break-beams to detect disc presence, but the highly reflective surface of Blu-rays caused false positives. I implemented a polarized filter system to kill the glare.
+
+### Forensic Engineering
+
+> **The "Vanishing" Disc (Mechanism Failure):**
+> Discs inserted backwards were invisible to the optical sensors, causing the robot to "double load" and jam.
+>
+> - **The Fix:** Redesigned the pinch roller assembly with **double-strength springs** and **solid mounts** (replacing rubber grommets) to prevent shaft deflection under higher load.
+> - **The "Butter Knife" Protocol:** Field reports indicated EMI gaskets could deform into the slot path. Dealers had to use a specific technique with a shim (or butter knife) to clear the obstruction.
+
+### Team Orbit
+
+- **Engineering Lead:** Erik Norris
+- **Mechanisms:** Nathan Forster
+- **Robotics Firmware:** Anton Markov
+- **Manufacturing:** Sanmina
+
+### Success Metrics
+
+- **$0.97/unit Savings:** Reduced spring costs from ~$5.00 to ~$4.00 (with roadmap to <$1.00) by qualifying production fourslide tooling at Scandic.
+- **3 Million Cycles:** Reliability validation achieved across 3,200 deployed units.
 
 ### Project Artifacts
+
 :::note[Specs]
-*   **Capacity:** 320 Discs
-*   **Robot:** 3-Axis Cartesian
-*   **Speed:** &lt;3s Load Time
-:::
+
+- **Capacity:** 320 Discs
+- **Robot:** 3-Axis Cartesian
+- **Speed:** &lt;3s Load Time
+  :::

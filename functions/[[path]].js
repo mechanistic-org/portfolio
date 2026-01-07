@@ -41,7 +41,7 @@ export async function onRequest(context) {
 
 		const report = `
 STATUS: RUNNING (Functions Mode)
-BINDING: env.PROJECTS is ${!!env.PROJECTS ? "DEFINED" : "MISSING"}
+BINDING: env.PROJECTS is ${env.PROJECTS ? "DEFINED" : "MISSING"}
 LIST PREFIX: '${prefix}'
 RESULT: ${r2Status}
 KEYS FOUND:
