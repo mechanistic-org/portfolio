@@ -799,6 +799,20 @@ We have decoupled image processing from data ingestion to prevent "Script Bloat"
 - **Cause:** Cloudflare R2 Bucket missing CORS headers for `localhost`.
 - **Fix:** Update R2 Bucket CORS Policy to allow `GET` from `http://localhost:4321`.
 
+### TypeScript Import Errors ("Cannot find module...")
+
+- **Symptom:** VS Code reports `Cannot find module ...` for local imports like `@config/projectData`.
+- **Cause:** The source file might be named `.json.ts` (e.g., `projectData.json.ts`). The TypeScript Language Server sometimes struggles to resolve this double-extension as a valid module, especially with `resolveJsonModule` constraints.
+- **Fix:** Access the file system and rename it to a standard `.ts` extension (e.g., `projectData.ts`). Update imports to match.
+
+### Missing Swarm Visualization ("White Gap")
+
+- **Symptom:** The SwarmFiche component renders an empty white space on the Homepage.
+- **Cause:** A D3 crash caused by `undefined` data passed to `getEntityColor`. D3 selection logic fails silently if an attribute function throws an error.
+- **Fix:**
+  1.  Ensure `color_registry.ts` has defensive guard clauses (`if (!name) return...`).
+  2.  Inspect `multiverse.json` for nodes with missing `employer` or `type` fields.
+
   ```json
   [
     {

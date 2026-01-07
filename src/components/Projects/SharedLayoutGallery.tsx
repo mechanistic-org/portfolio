@@ -459,7 +459,7 @@ export default function SharedLayoutGallery({
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
 								exit={{ opacity: 0 }}
-								className="fixed inset-0 z-[10001] flex items-center justify-center bg-black/95 p-4 backdrop-blur-xl md:p-8"
+								className="fixed inset-0 z-10001 flex items-center justify-center bg-black/95 p-4 backdrop-blur-xl md:p-8"
 								onClick={closeModal}
 							>
 								{/* Navigation Buttons */}
@@ -468,7 +468,7 @@ export default function SharedLayoutGallery({
 										e.stopPropagation();
 										prevImage(e);
 									}}
-									className="absolute top-1/2 left-4 z-[10002] hidden -translate-y-1/2 p-4 text-white/50 transition-colors hover:text-white md:block"
+									className="absolute top-1/2 left-4 z-10002 hidden -translate-y-1/2 p-4 text-white/50 transition-colors hover:text-white md:block"
 								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -490,7 +490,7 @@ export default function SharedLayoutGallery({
 										e.stopPropagation();
 										nextImage(e);
 									}}
-									className="absolute top-1/2 right-4 z-[10002] hidden -translate-y-1/2 p-4 text-white/50 transition-colors hover:text-white md:block"
+									className="absolute top-1/2 right-4 z-10002 hidden -translate-y-1/2 p-4 text-white/50 transition-colors hover:text-white md:block"
 								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"

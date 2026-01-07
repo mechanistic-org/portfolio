@@ -46,6 +46,12 @@ sidebar:
 
 ## 📜 Change Log (Recent)
 
+- **[2026-01-07] Stabilization & Color Sovereignty**
+  - **[Architecture] Sovereign Color Registry:** Finalized `src/config/color_registry.ts` as the single source of truth, replacing flexible but fragile CSV lookups.
+  - **[Fix] SwarmFiche Regression:** Hardened `getEntityColor` logic to prevent D3 crashes on undefined inputs, restoring the Swarm visualization.
+  - **[Refactor] Type Safety:** Renamed `projectData.json.ts` to `projectData.ts` to resolve persistent IDE lint errors and module resolution conflicts.
+  - **[Cleanup] Tailwind 4.0 Prep:** Resolved all deprecation warnings (`flex-grow`, `aspect-ratio`) and updated `global.css` utilities.
+
 - **[2026-01-06] Operation Chronos (Timeline & Hunting)**
   - **[Data] Timeline Truth:** Synced `multiverse.json` with Forensic Reality.
     - **WebTV:** Added Titan, Mercury, Pluto, Galaxy (The Grind Era).

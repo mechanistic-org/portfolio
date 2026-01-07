@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { CollectionEntry } from "astro:content";
-import { getAssetUrl } from "@utils/assets";
+import { type ProjectItem } from "@config/projectData";
 
 import Button from "@/components/Button/Button.astro";
 import { getLocaleFromUrl } from "@/js/localeUtils";
@@ -37,7 +37,7 @@ const { title, description, image, technologies, ...rest } = project.data;
 					width={800}
 					densities={[1.5, 2]}
 					alt={title}
-					class="aspect-[4/3] w-full object-cover"
+					class="aspect-4/3 w-full object-cover"
 				/>
 			</div>
 		</div>

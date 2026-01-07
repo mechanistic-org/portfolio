@@ -63,6 +63,8 @@ export function getEntityColor(
 	name: string,
 	type: "EMPLOYER" | "SKILL" | "TRAIT" | "OTHER" = "OTHER",
 ): string {
+	if (!name) return PALETTES.identity.neutral; // Guard against undefined name
+
 	// 1. Check Explicit Employer Identity (Auto-detect if type is OTHER)
 	// This ensures legacy data passing only the name still catches the Brand Identity.
 	if ((type === "EMPLOYER" || type === "OTHER") && EMPLOYER_MAP[name]) {
@@ -94,6 +96,7 @@ export function getEntityColor(
  * Simple deterministic string hash for color assignment
  */
 function simpleHash(str: string): number {
+	if (!str) return 0; // Guard against undefined/null
 	let hash = 0;
 	for (let i = 0; i < str.length; i++) {
 		const char = str.charCodeAt(i);

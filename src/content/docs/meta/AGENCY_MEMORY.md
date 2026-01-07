@@ -50,11 +50,10 @@ These are active AI/External resources that contain "Source of Truth" data not i
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Module:** Operation Chronos (Asset Hunting).
+- **Active Module:** Stabilization & Documentation (Post-Sovereignty).
 - **Next Up:**
-  1.  **Asset Ingestion (`c24`, `project-003`, `webtv`):** User to drop assets into `portfolio_working`. Agent to refine to `R2_STAGING`.
-  2.  **Asset Processing:** Execute `process_images.py` to populate the new `01_forensics` bubbles.
-  3.  **Deck Generation:** Auto-generate `deck.md` files for the new forensic bubbles.
+  1.  **Documentation Sync:** Ensure `ARCHITECTURE.md` reflects the new `color_registry.ts` reality.
+  2.  **Asset Ingestion:** Resume asset hunting with verified stabilization.
 
 * **Key Decision (Physics):** "Goldilocks" settings are `vy: -50`, `friction: 0.05`. Do not increase friction without vertically scaling velocity.
 * **Key Decision (Data):** `multiverse.json` is the Single Source of Truth.
@@ -63,6 +62,9 @@ These are active AI/External resources that contain "Source of Truth" data not i
 * **Key Decision (Mining):** **"The MailStore Pivot"** - Python COM is too fragile for 15k+ item queries. Use MailStore Home to Index -> Search -> Export.
 * **Key Decision (Layout):** **"The Fiche Scroll Law"** - The Fiche container MUST use `.no-scrollbar` to prevent double-scrollbar visual glitches with the Parallax system.
 * **Key Decision (Assets):** **"The Numeric Bubble Law"** - SC48/D-Control Bubble folders MUST be prefixed (e.g., `01_3d`) to ensure `process_images.py` compiles them in the correct narrative order.
+* **Key Decision (Color):** **"The Sovereign Color Law"** - `src/config/color_registry.ts` is the ONLY Source of Truth for Entity Coloring. `Colors.csv` retrieval is FORBIDDEN.
+* **Key Decision (Code):** **"The Module Naming Law"** - Do not use `.json.ts` for standard TypeScript modules/arrays. Rename to `.ts` to prevent TS Server resolution confusion.
+* **Key Decision (Resilience):** **"Safe-by-Default D3"** - Visualization components must implement defensive `get(key) || default_color` logic to preventing crashing the entire graph on a single missing key.
 
 - **Active Thread:** `b5ef5f6b-77c6-4c25-b991-6ffab3b1b077` (D-Control Enrichment & MailStore Pivot).
 

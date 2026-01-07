@@ -305,12 +305,20 @@ Assets are managed physically, not logically.
 
 ### Asset Air-Gap Strategy (Symlink Bridge)
 
-- **Principle:** The web repo (`ErikNorris`) must remain lightweight (<50MB).
-- **Mechanism:** `public/assets/r2` is NOT a folder; it is a **Directory Junction** (Windows) or **Symlink** (Unix) pointing to `../ErikNorris-assets/R2_STAGING`.
-- **Workflow:**
-  1.  Place high-res asset in `D:\GitHub\ErikNorris-assets\R2_STAGING\{project}\3d\`.
-  2.  Asset immediately becomes available at `http://localhost:4321/assets/r2/{project}/3d/`.
-  3.  **No Copying Required.** Avoids duplicate files and git bloat.
+### 3. Sovereign Color Registry (`color_registry.ts`)
+
+- **History:** Replaces the legacy `Colors.csv` (fragile hardcoded strings) with a type-safe TypeScript configuration.
+- **Location:** `src/config/color_registry.ts`.
+- **Architecture:** The registry uses a "Three-Tier" fallback logic:
+  1.  **Tier 1 (Identity):** Direct lookup in `EMPLOYER_MAP`. (e.g., "Apple" -> `#F5F5F7`).
+  2.  **Tier 2 (Psychology):** Loop lookup in `SKILL_COLOR_MAP`. (e.g., "Strategy" -> `indigo`).
+  3.  **Tier 3 (Data):** Deterministic Hash (`simpleHash`) from the `CATEGORICAL_PALETTE`.
+- **Resilience:** The registry exports `getEntityColor(name, type)` which includes defensive guard clauses. If `name` is undefined, it strictly returns a fallback neutral rather than crashing D3 visualizers.
+- **Usage:**
+  ```typescript
+  import { getEntityColor } from "@config/color_registry";
+  const fill = getEntityColor(node.id, "employer");
+  ```
 
 ### 3D Lighting Governance ("The Matte Standard")
 
