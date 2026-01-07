@@ -1,7 +1,6 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
 import multiverseData from "../../data/timeline/multiverse.json";
-import projectManifest from "../../config/project_manifest.json";
 
 export const prerender = true;
 
@@ -57,33 +56,7 @@ if (entry) {
 	const rendered = await render(entry);
 	Content = rendered.Content;
 	headings = rendered.headings;
-
-	// DECOUPLED DATA IDENTIFICATION
-	const manifestData = (projectManifest as any)[entry.id];
-	if (manifestData) {
-		// Hydrate Dates
-		if (manifestData.date) manifestData.date = new Date(manifestData.date);
-		if (manifestData.endDate) manifestData.endDate = new Date(manifestData.endDate);
-		// Merge
-		const manifestTeam = manifestData.teamSize || manifestData.team;
-		if (manifestTeam === "Unknown" && entry.data.teamSize) {
-			delete manifestData.teamSize;
-			delete manifestData.team;
-		}
-
-		data = { ...entry.data, ...manifestData };
-
-		// HERO PRESERVATION: If manifest forces a placeholder but we have a custom one, revert.
-		if (
-			data.heroImage?.includes("/assets/placeholders/") &&
-			entry.data.heroImage &&
-			!entry.data.heroImage.includes("/assets/placeholders/")
-		) {
-			data.heroImage = entry.data.heroImage;
-		}
-	} else {
-		data = entry.data;
-	}
+	data = entry.data;
 } else if (placeholderData) {
 	// Construct simulated entry data from JSON
 	// Ensure we have a valid date object
@@ -127,19 +100,8 @@ if (entry) {
 // Get all projects for navigation
 const allProjects = await getCollection("projects");
 
-// Decouple Sort & Hydrate for Nav
-const allProjectsHydrated = allProjects.map((p) => {
-	const m = (projectManifest as any)[p.id];
-	if (m) {
-		const newData = { ...p.data, ...m };
-		if (m.date) newData.date = new Date(m.date);
-		return { ...p, data: newData };
-	}
-	return p;
-});
-
 // Sort by date descending (newest first)
-const sortedProjects = allProjectsHydrated.sort(
+const sortedProjects = allProjects.sort(
 	(a, b) =>
 		new Date(b.data.date || new Date()).getTime() - new Date(a.data.date || new Date()).getTime(),
 );
@@ -253,4 +215,3 @@ console.log(`[ROUTER] Project: ${finalEntry.id} -> Theme: ${theme}`);
 	headings={headings}
 	metrics={metrics}
 />
-```

@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectDirectory from "../../components/Projects/ProjectDirectory.astro";
 import ProjectGrid from "../../components/Projects/ProjectGrid.astro";
-import ProjectGrid from "../../components/Projects/ProjectGrid.astro";
+
 import SkillsGraph from "../../components/DataViz/SkillsGraph";
 import MultiverseGraph from "../../components/DataViz/MultiverseGraph";
 import TimelineStream from "../../components/DataViz/TimelineStream";
@@ -13,32 +13,53 @@ import ScrollCoordinator from "@components/Effects/ScrollCoordinator.astro";
 // Data
 // import skillsData from "../../data/skills.json"; // REMOVED: Legacy Data Source
 import multiverseData from "../../data/timeline/multiverse.json";
-const allProjects = await getCollection("projects", ({ data }) => {
-	const hiddenIds = [
-		"classified",
-		"classified-alpha",
-		"classified-bravo",
-		"electronic-battery-lock",
-	];
-	return (
-		!data.draft &&
-		data.statusLabel !== "NO_DATA" &&
-		(data as any).impact !== "NO_DATA" &&
-		!hiddenIds.includes(data.slug || (data as any).id)
-	);
-});
-const projects = allProjects.sort(
-	(a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime(),
-);
+
+// Create a lookup map for the Multiverse (God Brain)
+const multiverseMap = new Map(multiverseData.nodes.map((n) => [n.id.toLowerCase(), n]));
+
+const rawProjects = await getCollection("projects");
+
+const projects = rawProjects
+	.filter(({ data }) => {
+		const hiddenIds = [
+			"classified",
+			"classified-alpha",
+			"classified-bravo",
+			"electronic-battery-lock",
+		];
+		return (
+			!data.draft &&
+			data.statusLabel !== "NO_DATA" &&
+			(data as any).impact !== "NO_DATA" &&
+			!hiddenIds.includes(data.slug || (data as any).id)
+		);
+	})
+	.map((p) => {
+		// TRUTH INJECTION: Overlay Multiverse data onto MDX frontmatter
+		const node = multiverseMap.get((p.data.slug || p.slug).toLowerCase());
+		if (node) {
+			// We modify the data object in memory for this render
+			if (node.client) p.data.client = node.client;
+			if (node.employer) p.data.employer = node.employer;
+			if (node.industry) p.data.industry = node.industry;
+			if (node.category) p.data.category = node.category;
+			if (node.tools) p.data.tools = node.tools;
+		}
+		return p;
+	})
+	.sort((a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime());
 
 // Hierarchy is now handled internally by RadialTaxonomy using multiverse.json
 
-// Extract Facets for the UI (Keep existing logic for Directory view)
+// Extract Facets for the UI (Now uses the Enriched Data)
+// Note: We use the enriched 'projects' array, so Facets match Rows exactly.
 const industries = [...new Set(projects.map((p) => p.data.industry).filter(Boolean))].sort();
 const categories = [
 	...new Set(projects.map((p) => p.data.category).filter(Boolean)),
 ].sort() as string[];
-const tools = [...new Set(projects.flatMap((p) => p.data.tools).filter(Boolean))].sort();
+// Tools need distinct list
+const tools = [...new Set(projects.flatMap((p) => p.data.tools || []).filter(Boolean))].sort();
+
 // Merge Employer and Client into one list
 const allClients = projects.flatMap((p) => {
 	const c = p.data.client || [];

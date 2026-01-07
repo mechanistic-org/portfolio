@@ -1,5 +1,6 @@
 ---
 import { getEntry } from "astro:content";
+import multiverseData from "../../data/timeline/multiverse.json";
 
 interface Props {
 	data: any;
@@ -20,29 +21,27 @@ const { data, nextProject, prevProject, metrics } = Astro.props;
 // Format dates
 const dateVal = data.date || new Date();
 const startDate = new Date(dateVal);
-// Format: 2006-08-01 (approximate match to screenshot preference)
 const isoDate = startDate.toISOString().split("T")[0];
 
-// Parse Team Size string "Core Team of INT 37 / EXT 21" -> int: 37, ext: 21
-const teamSizeStr = data.teamSize || "";
+// MULTIVERSE LOOKUP: Get the single source of truth
+const node = multiverseData.nodes.find(
+	(n) => n.id.toLowerCase() === (data.slug || "").toLowerCase(),
+);
+
 let intCount = 0;
 let extCount = 0;
 
-// Try regex parse
-const intMatch = teamSizeStr.match(/INT\s*(\d+)/i);
-const extMatch = teamSizeStr.match(/EXT\s*(\d+)/i);
-
-if (intMatch) intCount = parseInt(intMatch[1], 10);
-if (extMatch) extCount = parseInt(extMatch[1], 10);
-
-// Fallback logic if parsing fails but we have hardcoded data for specific known projects
-if (data.slug === "c24" && intCount === 0) {
-	intCount = 37;
-	extCount = 21;
-}
-if (data.slug === "d-command" && intCount === 0) {
-	intCount = 12;
-	extCount = 4;
+if (node && node.team) {
+	// Provenance: Hydrated from Main.csv
+	intCount = node.team.internal || 0;
+	extCount = node.team.external || 0;
+} else {
+	// Fallback: Legacy Regex (for un-hydrated nodes)
+	const teamSizeStr = data.teamSize || "";
+	const intMatch = teamSizeStr.match(/INT\s*(\d+)/i);
+	const extMatch = teamSizeStr.match(/EXT\s*(\d+)/i);
+	if (intMatch) intCount = parseInt(intMatch[1], 10);
+	if (extMatch) extCount = parseInt(extMatch[1], 10);
 }
 
 // Cap dots for visual sanity (max ~20 dots per row before wrapping or scaling)
@@ -189,6 +188,16 @@ const displayExt = Math.min(extCount, 25);
 				{/* COL 3: COGS / PROFITABILITY */}
 				<div class="grid grid-cols-2 gap-4 bg-white/5 p-3">
 					<div>
+						<div class="flex flex-col">
+							<h1 class="font-mono text-xl font-bold tracking-tight text-white uppercase sm:text-2xl">
+								{data.id || data.slug || "UNKNOWN"}
+							</h1>
+							{node.codename && (
+								<span class="text-accent/80 font-mono text-xs tracking-wider uppercase">
+									CN: {node.codename}
+								</span>
+							)}
+						</div>
 						<div class="mb-0.5 text-[9px] font-bold tracking-wider text-neutral-500 uppercase">
 							{metrics.cogs?.label || "COGS"}
 						</div>

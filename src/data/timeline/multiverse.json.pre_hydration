@@ -18,16 +18,7 @@
 				"Product Testing",
 				"Iterative Prototyping"
 			],
-			"img": "/assets/r2/sc48/SC48-hero-01-sm.webp",
-			"client": [],
-			"employer": "Digidesign",
-			"industry": "Technology",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/sc48/SC48-hero-01-sm.webp"
 		},
 		{
 			"id": "c24",
@@ -42,61 +33,7 @@
 			"category": "Audio Console",
 			"industry": "Pro Audio",
 			"skills": ["DFM", "Thermal Design", "Cost Reduction"],
-			"img": "/assets/r2/c24/hero-sm.webp",
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 37,
-				"external": 21,
-				"text": "Core Team of INT 37 / EXT 21"
-			}
-		},
-		{
-			"id": "d-command",
-			"name": "D-Command",
-			"codename": "Danko",
-			"group": "Digidesign",
-			"color": "#40ef29",
-			"value": 190.0,
-			"year": 2004,
-			"start_date": "2004-04-01T00:00:00",
-			"end_date": "2004-09-01T00:00:00",
-			"category": "Control Surface",
-			"industry": "Pro Audio",
-			"skills": ["CAD (Computer-Aided Design)", "Prototyping", "Reliability Testing"],
-			"img": "/assets/r2/d-command/hero-sm.webp",
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 12,
-				"external": 4,
-				"text": "Core Team of INT 12 / EXT 4"
-			}
-		},
-		{
-			"id": "d-control",
-			"name": "D-Control",
-			"codename": "Buckley",
-			"group": "Digidesign",
-			"color": "#40ef29",
-			"value": 200.0,
-			"year": 2004,
-			"start_date": "2004-08-01T00:00:00",
-			"end_date": "2005-03-01T00:00:00",
-			"category": "Control Surface",
-			"industry": "Pro Audio",
-			"skills": ["Iterative Prototyping", "Prototyping", "Tolerance Analysis"],
-			"img": "/assets/r2/d-control/d-control-hero-01-xl.webp",
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 18,
-				"external": 0,
-				"text": "Core Team of 18"
-			}
+			"img": "/assets/r2/c24/hero-sm.webp"
 		},
 		{
 			"id": "xbox-redesign",
@@ -219,22 +156,7 @@
 				"Reliability Testing",
 				"Design for Manufacturing (DFM)"
 			],
-			"img": "/assets/placeholders/abstract.jpg",
-			"stats": {
-				"employer": "awesomejob",
-				"plastic": "84",
-				"sheetmetal": "35",
-				"pcb": "53",
-				"pcba": "24"
-			},
-			"client": [],
-			"employer": "awesomejob",
-			"tools": [],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/placeholders/abstract.jpg"
 		},
 		{
 			"id": "Freelance",
@@ -254,22 +176,7 @@
 				"Testing Automation",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/freelance/hero-sm.webp",
-			"stats": {
-				"employer": "Mechanistic",
-				"plastic": "80",
-				"sheetmetal": "40",
-				"pcb": "79",
-				"pcba": "64"
-			},
-			"client": [],
-			"employer": "Mechanistic",
-			"tools": [],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/freelance/hero-sm.webp"
 		},
 		{
 			"id": "Makeline",
@@ -289,22 +196,7 @@
 				"Iterative Prototyping",
 				"Reliability Testing"
 			],
-			"img": "/assets/r2/makeline/hero-sm.webp",
-			"stats": {
-				"employer": "Hyphen",
-				"plastic": "12",
-				"sheetmetal": "76",
-				"pcb": "70",
-				"pcba": "60"
-			},
-			"client": [],
-			"employer": "Hyphen",
-			"tools": ["Onshape"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/makeline/hero-sm.webp"
 		},
 		{
 			"id": "Dispensers",
@@ -324,22 +216,7 @@
 				"Testing Automation",
 				"Prototyping"
 			],
-			"img": "/assets/r2/dispensers/hero-sm.webp",
-			"stats": {
-				"employer": "Hyphen",
-				"plastic": "61",
-				"sheetmetal": "50",
-				"pcb": "10",
-				"pcba": "72"
-			},
-			"client": [],
-			"employer": "Hyphen",
-			"tools": ["Onshape"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/dispensers/hero-sm.webp"
 		},
 		{
 			"id": "Backsplash",
@@ -359,22 +236,7 @@
 				"Iterative Prototyping",
 				"Testing Automation"
 			],
-			"img": "/assets/r2/backsplash/hero-sm.webp",
-			"stats": {
-				"employer": "Hyphen",
-				"plastic": "6",
-				"sheetmetal": "11",
-				"pcb": "17",
-				"pcba": "62"
-			},
-			"client": [],
-			"employer": "Hyphen",
-			"tools": ["Onshape"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/backsplash/hero-sm.webp"
 		},
 		{
 			"id": "Portion Cup",
@@ -394,15 +256,7 @@
 				"Product Testing",
 				"Prototyping"
 			],
-			"img": "/assets/r2/portion-cup/hero-sm.webp",
-			"client": [],
-			"employer": "Hyphen",
-			"tools": ["Onshape"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/portion-cup/hero-sm.webp"
 		},
 		{
 			"id": "Pet Scale",
@@ -422,15 +276,7 @@
 				"Data Analysis",
 				"Design Planning"
 			],
-			"img": "/assets/r2/pet-scale/hero-sm.webp",
-			"client": ["Synapse"],
-			"employer": "Mechanistic",
-			"tools": ["SolidWorks"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/pet-scale/hero-sm.webp"
 		},
 		{
 			"id": "battery lock",
@@ -450,15 +296,7 @@
 				"Prototyping",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/battery-lock/hero-sm.webp",
-			"client": ["Synapse"],
-			"employer": "Mechanistic",
-			"tools": ["SolidWorks"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/battery-lock/hero-sm.webp"
 		},
 		{
 			"id": "IOT module",
@@ -478,15 +316,7 @@
 				"Product Testing",
 				"Prototyping"
 			],
-			"img": "/assets/r2/iot-module/hero-sm.webp",
-			"client": ["Synapse"],
-			"employer": "Mechanistic",
-			"tools": ["SolidWorks"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/iot-module/hero-sm.webp"
 		},
 		{
 			"id": "bay wheels",
@@ -506,22 +336,7 @@
 				"Prototyping",
 				"Product Testing"
 			],
-			"img": "/assets/r2/bay-wheels/hero-sm.webp",
-			"stats": {
-				"employer": "Mechanistic",
-				"plastic": "99",
-				"sheetmetal": "69",
-				"pcb": "14",
-				"pcba": "50"
-			},
-			"client": ["Synapse"],
-			"employer": "Mechanistic",
-			"tools": ["SolidWorks"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/bay-wheels/hero-sm.webp"
 		},
 		{
 			"id": "Switches",
@@ -541,22 +356,7 @@
 				"Usability Testing",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/switches/hero-sm.webp",
-			"stats": {
-				"employer": "Noon",
-				"plastic": "5",
-				"sheetmetal": "13",
-				"pcb": "43",
-				"pcba": "86"
-			},
-			"client": [],
-			"employer": "Noon",
-			"tools": ["Creo", "SolidWorks"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/switches/hero-sm.webp"
 		},
 		{
 			"id": "Extension Switches",
@@ -576,15 +376,7 @@
 				"Reliability Testing",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/extension-switches/hero-sm.webp",
-			"client": [],
-			"employer": "Noon",
-			"tools": ["Creo", "SolidWorks"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/extension-switches/hero-sm.webp"
 		},
 		{
 			"id": "Room Director",
@@ -604,15 +396,7 @@
 				"Tolerance Analysis",
 				"CAD (Computer-Aided Design)"
 			],
-			"img": "/assets/r2/room-director/hero-sm.webp",
-			"client": [],
-			"employer": "Noon",
-			"tools": ["Creo", "SolidWorks"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/room-director/hero-sm.webp"
 		},
 		{
 			"id": "Wall Plates",
@@ -632,15 +416,7 @@
 				"Reliability Testing",
 				"Testing Automation"
 			],
-			"img": "/assets/r2/wall-plates/hero-sm.webp",
-			"client": [],
-			"employer": "Noon",
-			"tools": ["Creo", "SolidWorks"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/wall-plates/hero-sm.webp"
 		},
 		{
 			"id": "Base",
@@ -660,22 +436,7 @@
 				"Usability Testing",
 				"Design for Manufacturing (DFM)"
 			],
-			"img": "/assets/r2/base/hero-sm.webp",
-			"stats": {
-				"employer": "Noon",
-				"plastic": "10",
-				"sheetmetal": "24",
-				"pcb": "39",
-				"pcba": "94"
-			},
-			"client": [],
-			"employer": "Noon",
-			"tools": ["Creo", "SolidWorks"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/base/hero-sm.webp"
 		},
 		{
 			"id": "Glyph 2",
@@ -695,15 +456,7 @@
 				"CAD (Computer-Aided Design)",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/glyph-2/hero-sm.webp",
-			"client": [],
-			"employer": "Avegant",
-			"tools": ["SolidWorks"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/glyph-2/hero-sm.webp"
 		},
 		{
 			"id": "Avegant Glyph",
@@ -717,15 +470,7 @@
 			"category": "Wearable / AR",
 			"industry": "Consumer Electronics",
 			"skills": [],
-			"img": "/assets/r2/avegant-glyph/hero-sm.webp",
-			"client": [],
-			"employer": "Avegant",
-			"tools": ["SolidWorks"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/avegant-glyph/hero-sm.webp"
 		},
 		{
 			"id": "BFD",
@@ -745,22 +490,7 @@
 				"Reliability Testing",
 				"Testing Automation"
 			],
-			"img": "/assets/r2/bfd/hero-sm.webp",
-			"stats": {
-				"employer": "Mechanistic",
-				"plastic": "96",
-				"sheetmetal": "45",
-				"pcb": "12",
-				"pcba": "92"
-			},
-			"client": [],
-			"employer": "Mechanistic",
-			"tools": ["Onshape"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/bfd/hero-sm.webp"
 		},
 		{
 			"id": "Strato",
@@ -780,22 +510,7 @@
 				"Iterative Prototyping",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/strato/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "60",
-				"sheetmetal": "86",
-				"pcb": "29",
-				"pcba": "1"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["Creo"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/strato/hero-sm.webp"
 		},
 		{
 			"id": "Cinema One",
@@ -815,15 +530,7 @@
 				"Prototyping",
 				"Iterative Prototyping"
 			],
-			"img": "/assets/r2/cinema-one/hero-sm.webp",
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["Creo"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/cinema-one/hero-sm.webp"
 		},
 		{
 			"id": "m700",
@@ -844,22 +551,7 @@
 				"Design Research",
 				"Lean Manufacturing"
 			],
-			"img": "/assets/r2/m700/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "96",
-				"sheetmetal": "8",
-				"pcb": "48",
-				"pcba": "46"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/m700/hero-sm.webp"
 		},
 		{
 			"id": "dv700",
@@ -880,22 +572,7 @@
 				"Business Acumen",
 				"Assembly Processes"
 			],
-			"img": "/assets/r2/dv700/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "27",
-				"sheetmetal": "37",
-				"pcb": "15",
-				"pcba": "53"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/dv700/hero-sm.webp"
 		},
 		{
 			"id": "Disc Cartridges",
@@ -915,15 +592,7 @@
 				"CAD (Computer-Aided Design)",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/disc-cartridges/hero-sm.webp",
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/disc-cartridges/hero-sm.webp"
 		},
 		{
 			"id": "K-Remote",
@@ -943,22 +612,7 @@
 				"Product Testing",
 				"Prototyping"
 			],
-			"img": "/assets/r2/k-remote/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "28",
-				"sheetmetal": "34",
-				"pcb": "57",
-				"pcba": "50"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/k-remote/hero-sm.webp"
 		},
 		{
 			"id": "Weemote",
@@ -978,22 +632,7 @@
 				"Materials Knowledge",
 				"CAD (Computer-Aided Design)"
 			],
-			"img": "/assets/r2/weemote/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "19",
-				"sheetmetal": "67",
-				"pcb": "24",
-				"pcba": "69"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/weemote/hero-sm.webp"
 		},
 		{
 			"id": "M500",
@@ -1013,22 +652,7 @@
 				"Materials Knowledge",
 				"Prototyping"
 			],
-			"img": "/assets/r2/m500/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "23",
-				"sheetmetal": "6",
-				"pcb": "57",
-				"pcba": "47"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/m500/hero-sm.webp"
 		},
 		{
 			"id": "M300",
@@ -1048,22 +672,7 @@
 				"Materials Knowledge",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/m300/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "48",
-				"sheetmetal": "11",
-				"pcb": "85",
-				"pcba": "62"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/m300/hero-sm.webp"
 		},
 		{
 			"id": "KSERVER-1500",
@@ -1083,22 +692,7 @@
 				"Iterative Prototyping",
 				"Reliability Testing"
 			],
-			"img": "/assets/r2/kserver-1500/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "53",
-				"sheetmetal": "27",
-				"pcb": "8",
-				"pcba": "56"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/kserver-1500/hero-sm.webp"
 		},
 		{
 			"id": "KVAULT-10",
@@ -1118,22 +712,7 @@
 				"Technical Communication",
 				"Business Acumen"
 			],
-			"img": "/assets/r2/kvault-10/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "73",
-				"sheetmetal": "20",
-				"pcb": "7",
-				"pcba": "77"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/kvault-10/hero-sm.webp"
 		},
 		{
 			"id": "Jewel",
@@ -1153,22 +732,7 @@
 				"Usability Testing",
 				"Prototyping"
 			],
-			"img": "/assets/r2/jewel/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "1",
-				"sheetmetal": "57",
-				"pcb": "81",
-				"pcba": "86"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/jewel/hero-sm.webp"
 		},
 		{
 			"id": "KSYSTEM-120",
@@ -1188,22 +752,7 @@
 				"Materials Knowledge",
 				"Testing Automation"
 			],
-			"img": "/assets/r2/ksystem-120/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "53",
-				"sheetmetal": "100",
-				"pcb": "14",
-				"pcba": "23"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/ksystem-120/hero-sm.webp"
 		},
 		{
 			"id": "KSERVER-5000",
@@ -1223,22 +772,7 @@
 				"Tolerance Analysis",
 				"Reliability Testing"
 			],
-			"img": "/assets/r2/kserver-5000/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "36",
-				"sheetmetal": "68",
-				"pcb": "92",
-				"pcba": "20"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/kserver-5000/hero-sm.webp"
 		},
 		{
 			"id": "speed-reader",
@@ -1257,23 +791,9 @@
 				"Testing Automation",
 				"Design for Manufacturing (DFM)"
 			],
-			"img": "/assets/r2/speed-reader/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "8",
-				"sheetmetal": "79",
-				"pcb": "90",
-				"pcba": "3"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/speed-reader/hero-sm.webp"
 		},
+
 		{
 			"id": "kplayer-300",
 			"name": "KPLAYER-300",
@@ -1293,22 +813,7 @@
 				"CAD (Computer-Aided Design)",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/kplayer-300/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "14",
-				"sheetmetal": "69",
-				"pcb": "48",
-				"pcba": "93"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/kplayer-300/hero-sm.webp"
 		},
 		{
 			"id": "kplayer-6000",
@@ -1328,22 +833,7 @@
 				"Tolerance Analysis",
 				"Testing Automation"
 			],
-			"img": "/assets/r2/kplayer-6000/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "22",
-				"sheetmetal": "25",
-				"pcb": "32",
-				"pcba": "25"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/kplayer-6000/hero-sm.webp"
 		},
 		{
 			"id": "KPLAYER-5000",
@@ -1363,22 +853,7 @@
 				"Reliability Testing",
 				"Product Testing"
 			],
-			"img": "/assets/r2/kplayer-5000/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "97",
-				"sheetmetal": "26",
-				"pcb": "26",
-				"pcba": "55"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/kplayer-5000/hero-sm.webp"
 		},
 		{
 			"id": "KPLAYER-2500",
@@ -1398,22 +873,7 @@
 				"Testing Automation",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/kplayer-2500/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "51",
-				"sheetmetal": "87",
-				"pcb": "37",
-				"pcba": "80"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/kplayer-2500/hero-sm.webp"
 		},
 		{
 			"id": "KSERVER-2500",
@@ -1433,22 +893,7 @@
 				"Product Testing",
 				"Design for Manufacturing (DFM)"
 			],
-			"img": "/assets/r2/kserver-2500/hero-sm.webp",
-			"stats": {
-				"employer": "Kaleidescape",
-				"plastic": "68",
-				"sheetmetal": "2",
-				"pcb": "43",
-				"pcba": "49"
-			},
-			"client": [],
-			"employer": "Kaleidescape",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/kserver-2500/hero-sm.webp"
 		},
 		{
 			"id": "Mbox 2 Micro",
@@ -1468,15 +913,7 @@
 				"Prototyping",
 				"Usability Testing"
 			],
-			"img": "/assets/r2/mbox-2-micro/hero-sm.webp",
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/mbox-2-micro/hero-sm.webp"
 		},
 		{
 			"id": "Rack 003",
@@ -1496,15 +933,7 @@
 				"Data Analysis",
 				"Business Acumen"
 			],
-			"img": "/assets/r2/rack-003/hero-sm.webp",
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/rack-003/hero-sm.webp"
 		},
 		{
 			"id": "Mbox 2 Mini",
@@ -1524,15 +953,7 @@
 				"Testing Automation",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/mbox-2-mini/hero-sm.webp",
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/mbox-2-mini/hero-sm.webp"
 		},
 		{
 			"id": "Mbox 2 Pro",
@@ -1552,15 +973,7 @@
 				"Usability Testing",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/mbox-2-pro/hero-sm.webp",
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/mbox-2-pro/hero-sm.webp"
 		},
 		{
 			"id": "Digi 003",
@@ -1580,15 +993,7 @@
 				"Design for Manufacturing (DFM)",
 				"Product Testing"
 			],
-			"img": "/assets/r2/digi-003/hero-sm.webp",
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/digi-003/hero-sm.webp"
 		},
 		{
 			"id": "c24",
@@ -1596,22 +1001,14 @@
 			"codename": "Curtis",
 			"group": "Digidesign",
 			"color": "#40ef29",
-			"value": 190.0111409929767,
+			"value": 190.011140992976701,
 			"year": 2006,
 			"start_date": "2006-08-01T00:00:00",
 			"end_date": "2007-07-01T00:00:00",
 			"category": "Control Surface",
 			"industry": "Pro Audio",
 			"skills": [],
-			"img": "/assets/r2/c24/c24-hero-01-xl.webp",
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/c24/c24-hero-01-xl.webp"
 		},
 		{
 			"id": "Mbox 2",
@@ -1631,15 +1028,7 @@
 				"Materials Knowledge",
 				"Design for Manufacturing (DFM)"
 			],
-			"img": "/assets/r2/mbox-2/hero-sm.webp",
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/mbox-2/hero-sm.webp"
 		},
 		{
 			"id": "Profile",
@@ -1659,22 +1048,7 @@
 				"Iterative Prototyping",
 				"Reliability Testing"
 			],
-			"img": "/assets/r2/profile/hero-sm.webp",
-			"stats": {
-				"employer": "Digidesign",
-				"plastic": "67",
-				"sheetmetal": "88",
-				"pcb": "80",
-				"pcba": "78"
-			},
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/profile/hero-sm.webp"
 		},
 		{
 			"id": "D-Show",
@@ -1694,22 +1068,7 @@
 				"Materials Knowledge",
 				"Product Testing"
 			],
-			"img": "/assets/r2/d-show/hero-sm.webp",
-			"stats": {
-				"employer": "Digidesign",
-				"plastic": "99",
-				"sheetmetal": "29",
-				"pcb": "61",
-				"pcba": "22"
-			},
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/d-show/hero-sm.webp"
 		},
 		{
 			"id": "d-control",
@@ -1730,22 +1089,7 @@
 				"Reliability Testing",
 				"Design for Manufacturing (DFM)"
 			],
-			"img": "/assets/r2/d-control/d-control-hero-01-sm.webp",
-			"stats": {
-				"employer": "Digidesign",
-				"plastic": "59",
-				"sheetmetal": "91",
-				"pcb": "72",
-				"pcba": "51"
-			},
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/d-control/d-control-hero-01-sm.webp"
 		},
 		{
 			"id": "d-command",
@@ -1766,22 +1110,7 @@
 				"Design for Manufacturing (DFM)",
 				"Usability Testing"
 			],
-			"img": "/assets/r2/d-command/d-command-hero-01-sm.webp",
-			"stats": {
-				"employer": "Digidesign",
-				"plastic": "77",
-				"sheetmetal": "3",
-				"pcb": "72",
-				"pcba": "64"
-			},
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/d-command/d-command-hero-01-sm.webp"
 		},
 		{
 			"id": "Pro Control Jr",
@@ -1801,15 +1130,7 @@
 				"Usability Testing",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/pro-control-jr/hero-sm.webp",
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/pro-control-jr/hero-sm.webp"
 		},
 		{
 			"id": "Rack 002",
@@ -1829,15 +1150,7 @@
 				"Data Analysis",
 				"Project Management"
 			],
-			"img": "/assets/r2/rack-002/hero-sm.webp",
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/rack-002/hero-sm.webp"
 		},
 		{
 			"id": "Mbox",
@@ -1857,22 +1170,7 @@
 				"Reliability Testing",
 				"Usability Testing"
 			],
-			"img": "/assets/r2/mbox/hero-sm.webp",
-			"stats": {
-				"employer": "Digidesign",
-				"plastic": "21",
-				"sheetmetal": "39",
-				"pcb": "61",
-				"pcba": "61"
-			},
-			"client": [],
-			"employer": "Digidesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/mbox/hero-sm.webp"
 		},
 		{
 			"id": "Xbox",
@@ -1892,22 +1190,7 @@
 				"Product Testing",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/xbox/hero-sm.webp",
-			"stats": {
-				"employer": "Mechanistic",
-				"plastic": "93",
-				"sheetmetal": "26",
-				"pcb": "79",
-				"pcba": "20"
-			},
-			"client": ["Microsoft", "UltimateTV"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/xbox/hero-sm.webp"
 		},
 		{
 			"id": "Receiver 5",
@@ -1927,15 +1210,7 @@
 				"Design for Manufacturing (DFM)",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/receiver-5/hero-sm.webp",
-			"client": ["Microsoft", "UltimateTV"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/receiver-5/hero-sm.webp"
 		},
 		{
 			"id": "Receiver 4",
@@ -1955,15 +1230,7 @@
 				"Materials Knowledge",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/receiver-4/hero-sm.webp",
-			"client": ["Microsoft", "UltimateTV"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/receiver-4/hero-sm.webp"
 		},
 		{
 			"id": "Receiver 3",
@@ -1983,15 +1250,7 @@
 				"Product Testing",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/receiver-3/hero-sm.webp",
-			"client": ["Microsoft", "UltimateTV"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/receiver-3/hero-sm.webp"
 		},
 		{
 			"id": "Receiver 2",
@@ -2011,15 +1270,7 @@
 				"Tolerance Analysis",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/receiver-2/hero-sm.webp",
-			"client": ["Microsoft", "UltimateTV"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/receiver-2/hero-sm.webp"
 		},
 		{
 			"id": "Mercury LC",
@@ -2039,15 +1290,7 @@
 				"Tolerance Analysis",
 				"Usability Testing"
 			],
-			"img": "/assets/r2/mercury-lc/hero-sm.webp",
-			"client": ["Microsoft", "UltimateTV"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/mercury-lc/hero-sm.webp"
 		},
 		{
 			"id": "usb box",
@@ -2067,22 +1310,7 @@
 				"Tolerance Analysis",
 				"Usability Testing"
 			],
-			"img": "/assets/r2/usb-box/hero-sm.webp",
-			"stats": {
-				"employer": "Mechanistic",
-				"plastic": "18",
-				"sheetmetal": "1",
-				"pcb": "44",
-				"pcba": "66"
-			},
-			"client": ["UltimateTV"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/usb-box/hero-sm.webp"
 		},
 		{
 			"id": "Remotes",
@@ -2102,22 +1330,7 @@
 				"Tolerance Analysis",
 				"Product Testing"
 			],
-			"img": "/assets/r2/remotes/hero-sm.webp",
-			"stats": {
-				"employer": "Mechanistic",
-				"plastic": "81",
-				"sheetmetal": "49",
-				"pcb": "47",
-				"pcba": "4"
-			},
-			"client": ["UltimateTV"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/remotes/hero-sm.webp"
 		},
 		{
 			"id": "Receiver 1",
@@ -2137,15 +1350,7 @@
 				"Reliability Testing",
 				"Product Testing"
 			],
-			"img": "/assets/r2/receiver-1/hero-sm.webp",
-			"client": ["UltimateTV"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/receiver-1/hero-sm.webp"
 		},
 		{
 			"id": "Node",
@@ -2165,22 +1370,7 @@
 				"Launch Planning",
 				"Technical Feasibility"
 			],
-			"img": "/assets/r2/node/hero-sm.webp",
-			"stats": {
-				"employer": "Mechanistic",
-				"plastic": "47",
-				"sheetmetal": "58",
-				"pcb": "43",
-				"pcba": "48"
-			},
-			"client": ["UltimateTV"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/node/hero-sm.webp"
 		},
 		{
 			"id": "Media Nodes",
@@ -2200,15 +1390,7 @@
 				"Consumer Psychology",
 				"Reliability Testing"
 			],
-			"img": "/assets/r2/media-nodes/hero-sm.webp",
-			"client": ["UltimateTV"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/media-nodes/hero-sm.webp"
 		},
 		{
 			"id": "MP6000 MP3 Player",
@@ -2228,15 +1410,7 @@
 				"Usability Testing",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/mp6000-mp3-player/hero-sm.webp",
-			"client": ["Motorola"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/mp6000-mp3-player/hero-sm.webp"
 		},
 		{
 			"id": "Keyboard",
@@ -2256,22 +1430,7 @@
 				"Materials Knowledge",
 				"Testing Automation"
 			],
-			"img": "/assets/r2/keyboard/hero-sm.webp",
-			"stats": {
-				"employer": "Mechanistic",
-				"plastic": "85",
-				"sheetmetal": "85",
-				"pcb": "19",
-				"pcba": "75"
-			},
-			"client": ["WebTV"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/keyboard/hero-sm.webp"
 		},
 		{
 			"id": "LapTV",
@@ -2291,22 +1450,7 @@
 				"CAD (Computer-Aided Design)",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/laptv/hero-sm.webp",
-			"stats": {
-				"employer": "Mechanistic",
-				"plastic": "91",
-				"sheetmetal": "61",
-				"pcb": "73",
-				"pcba": "37"
-			},
-			"client": ["WebTV"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/laptv/hero-sm.webp"
 		},
 		{
 			"id": "Remote",
@@ -2326,22 +1470,7 @@
 				"Tolerance Analysis",
 				"Prototyping"
 			],
-			"img": "/assets/r2/remote/hero-sm.webp",
-			"stats": {
-				"employer": "Mechanistic",
-				"plastic": "53",
-				"sheetmetal": "23",
-				"pcb": "71",
-				"pcba": "21"
-			},
-			"client": ["WebTV"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/remote/hero-sm.webp"
 		},
 		{
 			"id": "Netscreen-500",
@@ -2361,22 +1490,7 @@
 				"Data Analysis",
 				"Cross-functional Collaboration"
 			],
-			"img": "/assets/r2/netscreen-500/hero-sm.webp",
-			"stats": {
-				"employer": "Mechanistic",
-				"plastic": "75",
-				"sheetmetal": "8",
-				"pcb": "88",
-				"pcba": "69"
-			},
-			"client": ["D2M"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/netscreen-500/hero-sm.webp"
 		},
 		{
 			"id": "SGI 320 540",
@@ -2396,15 +1510,7 @@
 				"Usability Testing",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/sgi-320-540/hero-sm.webp",
-			"client": ["Function"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/sgi-320-540/hero-sm.webp"
 		},
 		{
 			"id": "HP Jornada",
@@ -2424,15 +1530,7 @@
 				"Reliability Testing",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/hp-jornada/hero-sm.webp",
-			"client": ["Fitch"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/hp-jornada/hero-sm.webp"
 		},
 		{
 			"id": "DVDO Player",
@@ -2452,15 +1550,7 @@
 				"Product Testing",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/dvdo-player/hero-sm.webp",
-			"client": [],
-			"employer": "frogdesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/dvdo-player/hero-sm.webp"
 		},
 		{
 			"id": "Vadem Clio",
@@ -2480,15 +1570,7 @@
 				"Product Testing",
 				"Testing Automation"
 			],
-			"img": "/assets/r2/vadem-clio/hero-sm.webp",
-			"client": [],
-			"employer": "frogdesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/vadem-clio/hero-sm.webp"
 		},
 		{
 			"id": "KaVo Dental Unit 2",
@@ -2508,15 +1590,7 @@
 				"Design for Manufacturing (DFM)",
 				"Iterative Prototyping"
 			],
-			"img": "/assets/r2/kavo-dental-unit-2/hero-sm.webp",
-			"client": [],
-			"employer": "frogdesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/kavo-dental-unit-2/hero-sm.webp"
 		},
 		{
 			"id": "Acer Phone",
@@ -2536,15 +1610,7 @@
 				"Reliability Testing",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/acer-phone/hero-sm.webp",
-			"client": [],
-			"employer": "frogdesign",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/acer-phone/hero-sm.webp"
 		},
 		{
 			"id": "KaVo Dental Unit 1",
@@ -2564,15 +1630,7 @@
 				"Materials Knowledge",
 				"Design for Manufacturing (DFM)"
 			],
-			"img": "/assets/r2/kavo-dental-unit-1/hero-sm.webp",
-			"client": ["frogdesign"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/kavo-dental-unit-1/hero-sm.webp"
 		},
 		{
 			"id": "Acer subwoofer",
@@ -2592,15 +1650,7 @@
 				"CAD (Computer-Aided Design)",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/acer-subwoofer/hero-sm.webp",
-			"client": ["frogdesign"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/acer-subwoofer/hero-sm.webp"
 		},
 		{
 			"id": "Newscorp STB",
@@ -2620,15 +1670,7 @@
 				"CAD (Computer-Aided Design)",
 				"Usability Testing"
 			],
-			"img": "/assets/r2/newscorp-stb/hero-sm.webp",
-			"client": ["frogdesign"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/newscorp-stb/hero-sm.webp"
 		},
 		{
 			"id": "PB Convertible",
@@ -2648,15 +1690,7 @@
 				"CAD (Computer-Aided Design)",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/pb-convertible/hero-sm.webp",
-			"client": ["frogdesign"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/pb-convertible/hero-sm.webp"
 		},
 		{
 			"id": "Acer Aspire",
@@ -2676,15 +1710,7 @@
 				"Iterative Prototyping",
 				"CAD (Computer-Aided Design)"
 			],
-			"img": "/assets/r2/acer-aspire/hero-sm.webp",
-			"client": ["frogdesign"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/acer-aspire/hero-sm.webp"
 		},
 		{
 			"id": "Fissler BBQ",
@@ -2704,15 +1730,7 @@
 				"Data Analysis",
 				"Feasibility Analysis"
 			],
-			"img": "/assets/r2/fissler-bbq/hero-sm.webp",
-			"client": ["frogdesign"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/fissler-bbq/hero-sm.webp"
 		},
 		{
 			"id": "Sunbeam toaster",
@@ -2732,15 +1750,7 @@
 				"Data Analysis",
 				"KPI Tracking"
 			],
-			"img": "/assets/r2/sunbeam-toaster/hero-sm.webp",
-			"client": ["frogdesign"],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/sunbeam-toaster/hero-sm.webp"
 		},
 		{
 			"id": "Frantic Frames",
@@ -2760,15 +1770,7 @@
 				"Design for Manufacturing (DFM)",
 				"Product Testing"
 			],
-			"img": "/assets/r2/frantic-frames/hero-sm.webp",
-			"client": [],
-			"employer": "Mechanistic",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/frantic-frames/hero-sm.webp"
 		},
 		{
 			"id": "Indy",
@@ -2788,22 +1790,7 @@
 				"Iterative Prototyping",
 				"Prototyping"
 			],
-			"img": "/assets/r2/indy/hero-sm.webp",
-			"stats": {
-				"employer": "Silicon Graphics",
-				"plastic": "50",
-				"sheetmetal": "74",
-				"pcb": "39",
-				"pcba": "57"
-			},
-			"client": [],
-			"employer": "Silicon Graphics",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/indy/hero-sm.webp"
 		},
 		{
 			"id": "Indigo II",
@@ -2823,15 +1810,7 @@
 				"CAD (Computer-Aided Design)",
 				"Design for Manufacturing (DFM)"
 			],
-			"img": "/assets/r2/indigo-ii/hero-sm.webp",
-			"client": [],
-			"employer": "Silicon Graphics",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/indigo-ii/hero-sm.webp"
 		},
 		{
 			"id": "Indigo",
@@ -2851,22 +1830,7 @@
 				"Usability Testing",
 				"CAD (Computer-Aided Design)"
 			],
-			"img": "/assets/r2/indigo/hero-sm.webp",
-			"stats": {
-				"employer": "Silicon Graphics",
-				"plastic": "70",
-				"sheetmetal": "19",
-				"pcb": "68",
-				"pcba": "59"
-			},
-			"client": [],
-			"employer": "Silicon Graphics",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/indigo/hero-sm.webp"
 		},
 		{
 			"id": "Iris File",
@@ -2886,15 +1850,7 @@
 				"Usability Testing",
 				"Reliability Testing"
 			],
-			"img": "/assets/r2/iris-file/hero-sm.webp",
-			"client": [],
-			"employer": "Silicon Graphics",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/iris-file/hero-sm.webp"
 		},
 		{
 			"id": "Personal IRIS",
@@ -2914,15 +1870,7 @@
 				"Prototyping",
 				"Iterative Prototyping"
 			],
-			"img": "/assets/r2/personal-iris/hero-sm.webp",
-			"client": [],
-			"employer": "Silicon Graphics",
-			"tools": ["ProEngineer"],
-			"team": {
-				"internal": 0,
-				"external": 0,
-				"text": ""
-			}
+			"img": "/assets/r2/personal-iris/hero-sm.webp"
 		},
 		{
 			"id": "stratus",
