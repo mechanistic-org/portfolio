@@ -2,17 +2,9 @@
 import Layout from "@layouts/BaseLayout.astro";
 import { Content as ElementsContent } from "@/data/otherPages/elements/index.mdx";
 import tokens from "@/data/design_tokens.json";
-import colors from "../../../data_source_ARCHIVE/Colors.csv?raw";
+import { EMPLOYER_MAP } from "../../config/color_registry";
 
-// Parse CSV roughly for display
-const csvRows = colors
-	.trim()
-	.split("\n")
-	.slice(1)
-	.map((row) => {
-		const [name, color, type] = row.split(",");
-		return { name, color, type };
-	});
+// Replaces legacy CSV parsing
 ---
 
 <Layout title="Elements / DLS" description="Design Language System and Component Library">
@@ -147,7 +139,7 @@ const csvRows = colors
 			<section>
 				<div class="mb-8 flex items-end justify-between border-b border-white/5 pb-2">
 					<h2 class="font-mono text-sm text-white/60">03_DATA_MAPPING</h2>
-					<span class="font-mono text-xs text-white/40">LEGACY_COMPATIBILITY_LAYER</span>
+					<span class="font-mono text-xs text-white/40">SOVEREIGN_REGISTRY_V1</span>
 				</div>
 
 				<div class="w-full overflow-x-auto">
@@ -162,27 +154,27 @@ const csvRows = colors
 						</thead>
 						<tbody>
 							{
-								csvRows.map((row) => (
+								Object.entries(EMPLOYER_MAP).map(([name, color]) => (
 									<tr class="group border-b border-white/5 transition-colors hover:bg-white/5">
-										<td class="py-3 text-white">{row.name}</td>
-										<td class="py-3 text-neutral-500">{row.type}</td>
+										<td class="py-3 text-white">{name}</td>
+										<td class="py-3 text-neutral-500">EMPLOYER (Explicit)</td>
 										<td class="py-3">
 											<div class="flex items-center gap-2">
 												<div
-													class="h-3 w-3 rounded-full border border-white/20"
-													style={`background-color: ${row.color}`}
+													class="group relative h-3 w-3 rounded-full border border-white/10"
+													style={`background-color: ${color}`}
 												/>
 												<span class="text-neutral-400 transition-colors group-hover:text-white">
-													{row.color === tokens.palette.primary.base
+													{color === tokens.palette.primary.base
 														? "Primary"
-														: row.color === tokens.palette.secondary.base
+														: color === tokens.palette.secondary.base
 															? "Secondary"
 															: "Neutral"}
 												</span>
 											</div>
 										</td>
 										<td class="group-hover:text-primary-400 py-3 text-right font-mono text-neutral-600">
-											{row.color?.substring(0, 7)}
+											{color?.substring(0, 7)}
 										</td>
 									</tr>
 								))

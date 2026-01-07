@@ -26,51 +26,7 @@ interface ResVizSwarmProps {
 	shouldStart?: boolean;
 }
 
-// --- Color Map (from Colors.csv) ---
-const COLOR_MAP: Record<string, string> = {
-	// Employers
-	Mechanistic: "#2E5CFF",
-	Kaleidescape: "#2E5CFF",
-	frogdesign: "#2E5CFF",
-	Hyphen: "#00C2FF",
-	Digidesign: "#00C2FF",
-	"Silicon Graphics": "#00C2FF",
-	Noon: "#4B5563",
-	"EP Technologies": "#4B5563",
-	Avegant: "#9CA3AF",
-
-	// Skills (Fallback)
-	"Requirements Analysis": "#9CA3AF",
-	"Feasibility Assessment": "#4B5563",
-	"Concept Validation": "#2E5CFF",
-	Prototyping: "#00C2FF",
-	"High-Level Design": "#2E5CFF",
-	"Detailed Design": "#00C2FF", // and Engineering
-	"Material Selection": "#9CA3AF",
-	"ID Capture": "#2E5CFF",
-	"CAD Modeling": "#00C2FF",
-	"Structural Analysis": "#4B5563",
-	"Tolerance Analysis": "#9CA3AF",
-	DFM: "#2E5CFF",
-	DFA: "#00C2FF",
-	"Risk Assessment": "#4B5563",
-	"Prototype Testing": "#2E5CFF",
-	"Validation Testing": "#00C2FF",
-	"Thermal Analysis": "#9CA3AF",
-	Vibration: "#4B5563",
-	"Mechanical Testing": "#2E5CFF",
-	FMEA: "#00C2FF",
-	"Supply Chain": "#9CA3AF",
-	"Tooling Design": "#2E5CFF",
-	"Manufacturing Support": "#00C2FF",
-	"Quality Control": "#4B5563",
-	"Cost Analysis": "#9CA3AF",
-	Documentation: "#4B5563",
-	"Regulatory Compliance": "#9CA3AF",
-	IP: "#4B5563",
-	Sustainability: "#2E5CFF",
-	"Post-Launch Support": "#00C2FF",
-};
+import { getEntityColor } from "../../config/color_registry";
 
 const DEFAULT_COLOR = "#666666";
 
@@ -161,8 +117,9 @@ export default function ResVizSwarm({
 			.domain([new Date(), minDate])
 			.range([200, height - 150]);
 
-		// Dynamic Color Scale (Flourish Style)
-		const colorScale = d3.scaleOrdinal(d3.schemeTableau10);
+		// Use Registry for Semantic Coloring
+		// Note: We use 'OTHER' type to allow auto-detection of Employers vs Skills (hashing)
+		const getColor = (d: any) => getEntityColor(d.group, "OTHER");
 
 		// --- Simulation ---
 		// 1. LAUNCHPAD STATE (Holding Pattern)
@@ -272,7 +229,7 @@ export default function ResVizSwarm({
 		nodeGroup
 			.append("circle")
 			.attr("r", (d: any) => d.radius)
-			.attr("fill", (d: any) => colorScale(d.group))
+			.attr("fill", (d: any) => getColor(d))
 			.attr("stroke", (d: any) => {
 				if (d.id === dreamjobId) return "#ffffff";
 				return deepDives.includes(d.id) ? "#2E5CFF" : "rgba(255,255,255,0.1)";
