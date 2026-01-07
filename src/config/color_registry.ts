@@ -38,52 +38,55 @@ export const PALETTES = {
 } as const;
 
 // --- TIER 1: EMPLOYER IDENTITY MAPPING ---
-// Explicit overrides for known entities
-export const EMPLOYER_MAP: Record<string, string> = {
-	// BLUE (Primary/Secondary) - Creative/Tech
-	Mechanistic: PALETTES.identity.primary,
-	Kaleidescape: PALETTES.identity.primary,
-	frogdesign: PALETTES.identity.primary,
-	Hyphen: PALETTES.identity.secondary,
-	Digidesign: PALETTES.identity.secondary,
-	"Silicon Graphics": PALETTES.identity.secondary,
+// Explicit overrides for known entities using 8-digit Hex (Alpha)
+// SSOT provided by User 2026-01-07
+export const EMPLOYER_IDENTITY = {
+	Mechanistic: "#001BE6E6", // Deep Transparent Blue
+	Hyphen: "#50E5B4E6", // Cyan/Teal
+	Noon: "#F6BE15F5", // Golden Yellow
+	Avegant: "#6F727B7A", // Grayish
+	Kaleidescape: "#749ABEB3", // Muted Blue
+	Digidesign: "#7224DFDE", // Purple
+	frogdesign: "#40BA00BA", // Frog Green
+	"Silicon Graphics": "#0084FFAD", // SGI Blue
+} as const;
 
-	// NEUTRAL - Corporate/Hardware
-	Noon: PALETTES.identity.neutral,
+// Combined Resolver Map (Legacy support included)
+export const EMPLOYER_MAP: Record<string, string> = {
+	...EMPLOYER_IDENTITY,
+	// Fallbacks or Aliases if needed
 	"EP Technologies": PALETTES.identity.neutral,
-	Avegant: PALETTES.identity.accent,
 };
 
 // --- RESOLVER API ---
 
+import { generatePalette, type PaletteScheme } from "../utils/colorUtils";
+
 /**
- * Resolves the color for a given entity based on its type and name.
+ * Resolves the IDENTITY color for a given entity.
+ * This is the "Base Frequency" for that entity.
  */
 export function getEntityColor(
 	name: string,
 	type: "EMPLOYER" | "SKILL" | "TRAIT" | "OTHER" = "OTHER",
 ): string {
-	if (!name) return PALETTES.identity.neutral; // Guard against undefined name
+	if (!name) return PALETTES.identity.neutral;
 
-	// 1. Check Explicit Employer Identity (Auto-detect if type is OTHER)
-	// This ensures legacy data passing only the name still catches the Brand Identity.
-	if ((type === "EMPLOYER" || type === "OTHER") && EMPLOYER_MAP[name]) {
+	// 1. Check Explicit Employer Identity
+	// Normalize checks to handle case-sensitivity if needed, though Maps are sensitive.
+	// We check keys directly for speed.
+	if ((type === "EMPLOYER" || type === "OTHER") && name in EMPLOYER_MAP) {
 		return EMPLOYER_MAP[name];
 	}
 
-	// 2. Check Hyde Trait Logic (Psychology)
-	// Note: Ideally we'd look up the 'lobe' from hydeData,
-	// but for raw color resolution we default to Main unless specified.
+	// 2. Check Hyde Trait Logic
 	if (type === "TRAIT") {
 		return PALETTES.hyde.main;
 	}
 
 	// 3. Fallback / Skill Hashing
-	// If it's a known employer but not mapped, default to Neutral
 	if (type === "EMPLOYER") return PALETTES.identity.neutral;
 
-	// For skills, we want variety but consistency.
-	// We use a simple string hash to pick from the categorical palette.
 	if (type === "SKILL" || type === "OTHER") {
 		const hash = simpleHash(name);
 		return PALETTES.categorical[hash % PALETTES.categorical.length];
@@ -93,15 +96,24 @@ export function getEntityColor(
 }
 
 /**
+ * Returns a computed harmonious palette for a given entity.
+ * Example: Get a complementary color for a chart highlight.
+ */
+export function getEntityPalette(name: string, scheme: PaletteScheme = "monochromatic"): string[] {
+	const base = getEntityColor(name, "EMPLOYER"); // Default to employer logic for base
+	return generatePalette(base, scheme);
+}
+
+/**
  * Simple deterministic string hash for color assignment
  */
 function simpleHash(str: string): number {
-	if (!str) return 0; // Guard against undefined/null
+	if (!str) return 0;
 	let hash = 0;
 	for (let i = 0; i < str.length; i++) {
 		const char = str.charCodeAt(i);
 		hash = (hash << 5) - hash + char;
-		hash = hash & hash; // Convert to 32bit integer
+		hash = hash & hash;
 	}
 	return Math.abs(hash);
 }

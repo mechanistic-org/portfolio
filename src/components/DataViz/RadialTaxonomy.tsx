@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import multiverseData from "../../data/timeline/multiverse.json";
 import type { MultiverseNode } from "@/types/MultiverseTypes";
+import { getEntityColor } from "../../config/color_registry";
 
 // TRANSFORMER: Convert Flat Multiverse Data -> D3 Hierarchy
 // Hierarchy: Root -> Industry -> Group -> Project
@@ -112,7 +113,13 @@ const RadialTaxonomy: React.FC = () => {
 		node
 			.append("circle")
 			.attr("r", (d) => (d.depth === 0 ? 0 : d.children ? 4 : 6))
-			.attr("fill", (d) => (d.depth === 0 ? "none" : d.children ? "#444" : "#2E5CFF"))
+			.attr("fill", (d: any) => {
+				if (d.depth === 0) return "none";
+				if (d.children) return "#444";
+				// Leaf Nodes (Projects) -> Use Parent (Employer) Color
+				const employerName = d.parent?.data?.name;
+				return getEntityColor(employerName, "EMPLOYER");
+			}) // Fix chain breakage
 			.attr("cursor", "pointer")
 			.on("mouseover", function (event, d: any) {
 				if (d.depth !== 0) {
@@ -122,8 +129,12 @@ const RadialTaxonomy: React.FC = () => {
 				}
 			})
 			.on("mouseout", function (event, d: any) {
+				const employerName = d.parent?.data?.name;
+				const fill =
+					d.depth === 0 ? "none" : d.children ? "#444" : getEntityColor(employerName, "EMPLOYER");
+
 				d3.select(this)
-					.attr("fill", d.depth === 0 ? "none" : d.children ? "#444" : "#2E5CFF")
+					.attr("fill", fill)
 					.attr("r", d.depth === 0 ? 0 : d.children ? 4 : 6);
 			})
 			.on("click", (event, d: any) => {

@@ -118,8 +118,8 @@ export default function ResVizSwarm({
 			.range([200, height - 150]);
 
 		// Use Registry for Semantic Coloring
-		// Note: We use 'OTHER' type to allow auto-detection of Employers vs Skills (hashing)
-		const getColor = (d: any) => getEntityColor(d.group, "OTHER");
+		// Explicitly request EMPLOYER type to ensure checks overlap with generated palettes if needed.
+		const getColor = (d: any) => getEntityColor(d.group, "EMPLOYER");
 
 		// --- Simulation ---
 		// 1. LAUNCHPAD STATE (Holding Pattern)
