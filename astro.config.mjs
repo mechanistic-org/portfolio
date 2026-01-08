@@ -39,7 +39,9 @@ export default defineConfig({
 	// Use Static for Production (Cloudflare Pages) to avoid Worker limits
 	// Use Server for Local to support Keystatic API routes
 	output: isProduction ? "static" : "server",
-	adapter: cloudflare(),
+	// Only use the Cloudflare adapter in Server mode.
+	// In Static mode, we want a pure HTML build (no _worker.js) to bypass module limits.
+	adapter: isProduction ? undefined : cloudflare(),
 	site: "https://www.eriknorris.com",
 	redirects: isProduction
 		? {}
