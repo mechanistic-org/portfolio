@@ -34,6 +34,17 @@ const expressiveCodeOptions = {
 
 const isProduction = process.env.CF_PAGES === "1";
 
+// /// CRITICAL ARCHITECTURE WARNING ///////////////////////////////////////////
+// 1. PRODUCTION (Cloudflare) MUST be "static".
+//    - Why: "server" mode bundles the entire site into one _worker.js.
+//    - Risk: This hits the "10,000 Module Limit" and crashes the build.
+//    - Fix: We force "static" to generate pure HTML/CSS/JS files.
+//
+// 2. LOCAL (Dev) MUST be "server".
+//    - Why: Keystatic requires API routes (/api/keystatic) which need SSR.
+//    - Fix: We force "server" locally to allow CMS editing.
+// /////////////////////////////////////////////////////////////////////////////
+
 // https://astro.build/config
 export default defineConfig({
 	// Use Static for Production (Cloudflare Pages) to avoid Worker limits

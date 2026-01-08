@@ -4,16 +4,17 @@ import DatasheetTable from "@components/About/DatasheetTable.astro";
 import ScrollCoordinator from "@components/Effects/ScrollCoordinator.astro";
 
 // VIZ COMPONENTS
+// VIZ COMPONENTS
 import LivingGantt from "@components/DataViz/LivingGantt";
 import SkillsGraph from "@components/DataViz/SkillsGraph";
 import RadialTaxonomy from "@components/DataViz/RadialTaxonomy";
 
 // DATA
-import workHistoryRaw from "@/data/work_history.json";
-import skillsData from "@/data/skills.json";
 import { getCollection } from "astro:content";
+import { getCareerTimeline } from "@/utils/getCareerTimeline";
+import type { TimelineItem } from "@/utils/timelineParser";
 
-// --- DATA PREP (Copied from Projects Index for Compatibility) ---
+// --- DATA PREP ---
 const allProjects = await getCollection(
 	"projects",
 	({ data }) => !data.draft && data.statusLabel !== "NO_DATA" && (data as any).impact !== "NO_DATA",
@@ -21,6 +22,15 @@ const allProjects = await getCollection(
 const projects = allProjects.sort(
 	(a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime(),
 );
+// Transform projects into MultiverseNode format for SkillsGraph
+const projectNodes = projects.map((p) => ({
+	id: p.id,
+	name: p.data.title,
+	group: p.data.employer || "Independent",
+	industry: p.data.industry || p.data.category || "General",
+	skills: p.data.tools.concat(p.data.skillData.map((s) => s.name)).concat(p.data.tags),
+	data: p.data,
+}));
 
 // Hierarchy Generation for Radial Taxonomy
 const hierarchyData = {
@@ -40,12 +50,10 @@ projects.forEach((p) => {
 	const employerNode = findOrCreate(hierarchyData.children, employer);
 
 	let segment = p.data.industry;
-	// Use patched logic if still missing (though we fixed JSON, this is ASTRO data)
-	// Actually, Project Collections are Markdown, Multiverse is JSON.
-	// We should trust the Markdown data here or fallback to category.
 	if (!segment || segment === "Other") {
 		segment = p.data.category || "Uncategorized";
 	}
+	// const industryNode = findOrCreate(employerNode.children, segment); // Flattened for cleaner radial? No keep hierarchical.
 	const industryNode = findOrCreate(employerNode.children, segment);
 
 	industryNode.children.push({
@@ -56,21 +64,34 @@ projects.forEach((p) => {
 	});
 });
 
-// History Data for Corporate View
-interface Job {
-	company: string;
-	title: string;
-	start: string;
-	end: string;
-	color: string;
-	description: string;
-	is_consulting: boolean;
-	duration_years?: number;
-}
-const workHistory = workHistoryRaw as Job[];
-const hasHistory = Array.isArray(workHistory) && workHistory.length > 0;
+// History Data for Corporate View (Live from Keystatic)
+const timelineItems = await getCareerTimeline();
+
+// Helper to generate color hash for Timeline Items (since we don't have explicit colors in getCareerTimeline yet, or we reuse Employer Map)
+import { EMPLOYER_MAP } from "../../config/color_registry";
+const getEmployerColor = (companyName: string) => {
+	// Basic fuzzy match or default
+	const key = Object.keys(EMPLOYER_MAP).find((k) =>
+		companyName.toLowerCase().includes(k.toLowerCase()),
+	);
+	return key ? EMPLOYER_MAP[key as keyof typeof EMPLOYER_MAP] : "#666666";
+};
+
+// Map timelineItems to the "Job" interface expected by the view
+const workHistory = timelineItems.map((item) => ({
+	company: item.cardTitle.split("@")[1]?.trim() || "Independent",
+	title: item.cardTitle.split("@")[0]?.trim() || "Engineer",
+	start: item.title.split("-")[0]?.trim() || "2000",
+	end: item.title.split("-")[1]?.trim() || "Present",
+	color: getEmployerColor(item.cardTitle.split("@")[1]?.trim() || "Independent"),
+	description: item.cardSubtitle,
+	duration_years: 0, // Calc functionality removed for simplicity/robustness
+}));
+
+const hasHistory = workHistory.length > 0;
 function getHash(str: string) {
 	let hash = 0;
+	if (!str) return "000000";
 	for (let i = 0; i < str.length; i++) {
 		hash = (hash << 5) - hash + str.charCodeAt(i);
 		hash |= 0;
@@ -207,7 +228,7 @@ function getHash(str: string) {
 							<div class="text-primary absolute top-4 left-4 z-10 font-mono text-xs">
 								> SYSTEM.SKILL_MATRIX
 							</div>
-							<SkillsGraph client:visible skillsData={skillsData} projects={projects} />
+							<SkillsGraph client:visible nodes={projectNodes} />
 						</div>
 
 						<!-- Taxonomy -->

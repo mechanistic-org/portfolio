@@ -50,11 +50,12 @@ These are active AI/External resources that contain "Source of Truth" data not i
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Module:** Dreamjob Asset Regeneration (V7 Aesthetic).
+- **Active Module:** Documentation Consolidation & Deep HUD Verification.
 - **Current Focus:**
-  - [x] **Dreamjob Asset Restoration:** (COMPLETE) V7 Assets generated & deployed with Deep HUD.
-  - [ ] **Documentation Synchronization:** (ACTIVE) Translating "Dreamjob Principle" and V7 Aesthetic into core docs.
-  - [ ] **Deep HUD Optimization:** (PENDING) Standardizing the metric injection pattern.
+  - [x] **Dreamjob Asset Restoration:** (COMPLETE) V7 Assets generated.
+  - [x] **Documentation Synchronization:** (COMPLETE) Synced Laws to `03_THE_ENGINE_ROOM.md`.
+  - [x] **Legacy Data Cleanup:** (COMPLETE) Deleted `multiverse.json`/`work_history.json`.
+  - [ ] **Deep HUD Verification:** (ACTIVE) Confirm budget/COGS metrics appear in `dreamjob` page.
 
 * **Key Decision (Physics):** "Goldilocks" settings are `vy: -50`, `friction: 0.05`. Do not increase friction without vertically scaling velocity.
 * **Key Decision (Data):** `multiverse.json` is the Single Source of Truth.

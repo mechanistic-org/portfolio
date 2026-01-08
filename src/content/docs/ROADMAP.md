@@ -51,6 +51,13 @@ sidebar:
 
 ## 📜 Change Log (Recent)
 
+- **[2026-01-08] The Pure Static Pivot & Assembly Integration**
+  - **[Architecture] Pure Static:** Resolved "20,000 Module Wall" deployment failure by conditionally disabling `astro-adapter-cloudflare` and forcing `output: "static"` in production (`CF_PAGES=1`).
+  - **[Cleanup] Deployment Bloat:** Reduced production file count from 20k to ~170 files by stripping Keystatic and SSR logic from the build artifact.
+  - **[Refactor] History Assembly:** Unified the `/history` and `/resume/pdf` data source by replacing legacy `work_history.json` with a live `getCareerTimeline()` utility (derived from Keystatic).
+  - **[Documentation] Constitutional Sync:** Merged critical laws ("Sovereign Color", "Air Gap") from `AGENCY_MEMORY` into `03_THE_ENGINE_ROOM` to resolve "Split Brain" documentation.
+  - **[Artifact] Onboarding Lite:** Created `ONBOARDING_QUICK.md` ("The 1-Liner") for rapid context hydration.
+
 - **[2026-01-07] Stabilization & Color Sovereignty**
   - **[Architecture] Sovereign Color Registry:** Finalized `src/config/color_registry.ts` as the single source of truth, replacing flexible but fragile CSV lookups.
   - **[Fix] SwarmFiche Regression:** Hardened `getEntityColor` logic to prevent D3 crashes on undefined inputs, restoring the Swarm visualization.
