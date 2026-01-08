@@ -1,12 +1,13 @@
 ---
-import { parseTimelineMarkdown } from "../../utils/timelineParser";
+import { parseTimelineMarkdown, type TimelineItem } from "../../utils/timelineParser";
 
 interface Props {
-	markdownContent: string;
+	markdownContent?: string;
+	items?: TimelineItem[];
 }
 
-const { markdownContent } = Astro.props;
-const items = parseTimelineMarkdown(markdownContent);
+const { markdownContent, items: propItems } = Astro.props;
+const items = propItems || (markdownContent ? parseTimelineMarkdown(markdownContent) : []);
 
 // Group items by Year for a cleaner timeline
 const groupedItems = items.reduce(

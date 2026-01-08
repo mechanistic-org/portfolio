@@ -1,23 +1,32 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import CustomTimeline from "@components/Resume/CustomTimeline.astro";
-import fs from "node:fs";
-import path from "node:path";
+import workHistory from "../data/work_history.json";
+import type { TimelineItem } from "../utils/timelineParser";
 
-// ... same file reading logic ...
-const corpusPath = path.resolve("./data_source/manual_content/RESUME_CORPUS_timeline.md");
-let markdownContent = "";
+// Map JSON data to TimelineItem interface
+const timelineItems: TimelineItem[] = workHistory.map((job) => {
+	// Extract year for grouping (Assumes "M/D/YYYY" or similar format)
+	const startYear = job.start.includes("/") ? job.start.split("/").pop() : job.start;
+	const endYear =
+		job.end === "Present" ? "Present" : job.end.includes("/") ? job.end.split("/").pop() : job.end;
 
-try {
-	markdownContent = fs.readFileSync(corpusPath, "utf-8");
-} catch (error) {
-	console.error("Failed to read Resume Corpus:", error);
-	markdownContent = "## Error\nCould not load resume data.";
-}
+	return {
+		title: `${startYear} - ${endYear}`, // Format: "2022 - Present" to ensure grouping by Year
+		cardTitle: `${job.title} @ ${job.company}`,
+		cardSubtitle: job.description,
+		cardDetailedText: job.description,
+		responsibilities: [],
+		keyProjects: [],
+		techStack: [],
+	};
+});
 
 const pageTitle = "Universal History";
 const pageDescription =
 	"A complete, interactive timeline of professional history generated from the 20-year Resume Corpus.";
+
+export const prerender = true;
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription}>
@@ -31,7 +40,7 @@ const pageDescription =
 		</div>
 
 		<div class="w-full">
-			<CustomTimeline markdownContent={markdownContent} />
+			<CustomTimeline items={timelineItems} />
 		</div>
 	</div>
 </BaseLayout>
