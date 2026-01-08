@@ -5,7 +5,7 @@ import { Icon } from "astro-icon/components";
 import NavLink from "@components/Nav/NavLink.astro";
 
 // data
-import { type navDropdownItem } from "@config/navData.json";
+import { type navDropdownItem } from "@config/navData";
 
 interface Props {
 	navItem: navDropdownItem;
@@ -40,6 +40,7 @@ const { navItem } = Astro.props as Props;
 </li>
 
 <script>
+	/// <reference lib="dom" />
 	function mobileNavDropdownSetup() {
 		const dropdownMenus = document.querySelectorAll(
 			".mobile-nav__dropdown",

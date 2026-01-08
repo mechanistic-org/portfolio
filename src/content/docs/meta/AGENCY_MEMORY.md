@@ -50,10 +50,11 @@ These are active AI/External resources that contain "Source of Truth" data not i
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Module:** Stabilization & Documentation (Post-Sovereignty).
-- **Next Up:**
-  1.  **Documentation Sync:** Ensure `ARCHITECTURE.md` reflects the new `color_registry.ts` reality.
-  2.  **Asset Ingestion:** Resume asset hunting with verified stabilization.
+- **Active Module:** Dreamjob Asset Regeneration (V7 Aesthetic).
+- **Current Focus:**
+  - [x] **Dreamjob Asset Restoration:** (COMPLETE) V7 Assets generated & deployed with Deep HUD.
+  - [ ] **Documentation Synchronization:** (ACTIVE) Translating "Dreamjob Principle" and V7 Aesthetic into core docs.
+  - [ ] **Deep HUD Optimization:** (PENDING) Standardizing the metric injection pattern.
 
 * **Key Decision (Physics):** "Goldilocks" settings are `vy: -50`, `friction: 0.05`. Do not increase friction without vertically scaling velocity.
 * **Key Decision (Data):** `multiverse.json` is the Single Source of Truth.

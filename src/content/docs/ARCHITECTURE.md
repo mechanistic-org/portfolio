@@ -140,6 +140,18 @@ To respect Cloudflare Pages limits (20k files, 25MB script size), we use a Hybri
   - **Bloom:** Applied selectively to nodes and hierarchical "Energy Beams."
   - **Nebula:** A custom fragment shader renders simplex noise clouds behind the starfield to provide color depth.
 
+### The "Dreamjob Principle"
+
+- **Definition:** `dreamjob` is the _only_ project authorized to contain fictional or generated data/assets ("The Dream").
+- **Constraint:** All other projects must be driven by verifiable, real-world data ("The Reality").
+- **Implementation:** Fictional metrics (e.g., `UNDEFINED Acquisition Cost`) are injected via the `[...slug].astro` router only when `id === 'dreamjob'`.
+
+### Deep HUD (Hyperspace Deep)
+
+- **Trigger:** Projects with `metrics` data injected via `[...slug].astro`.
+- **UI:** Renders a secondary row in the Capsule HUD with high-fidelity financial/governance stats.
+- **Usage:** Currently active for `c24`, `d-command`, and `dreamjob`.
+
 ### 6. R3 Asset Namespace (`/assets/r3/`)
 
 - **Concept:** A clean-slate asset registry for V4 Theme Engine components.

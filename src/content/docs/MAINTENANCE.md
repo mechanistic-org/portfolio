@@ -165,6 +165,17 @@ If a chart isn't showing up:
 2.  **Check Generation:** Run `python ingest_data.py` and watch for errors.
 3.  **Check Output:** Verify `public/assets/r2/{slug}/part-graph.svg` exists.
 
+### Astro Runtime Import Errors (`.json.ts`)
+
+- **Symptom:** `Cannot find module ...` during `npm run dev` or build.
+- **Cause:** Renaming a file (e.g., `navData.json.ts` -> `navData.ts`) without updating all imports.
+- **Fix:** `grep` the codebase for the old filename. TypeScript compiler often misses these runtime/SSR dependencies if not explicitly checked.
+
+### Asset Regeneration (Dreamjob)
+
+- **Source Truth:** `DREAMJOB_REDUX_PROMPTS.md` contains the V7 generation prompts.
+- **Procedure:** Use "V7 Aesthetic" prompts. Ensure "No Text" constraint is active.
+
 ## 5. Maintenance & Enhancements
 
 To keep this site healthy:

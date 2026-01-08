@@ -18,12 +18,11 @@ interface Props {
 
 const { data, nextProject, prevProject, metrics } = Astro.props;
 
-// Format dates
+// Formatting
 const dateVal = data.date || new Date();
-const startDate = new Date(dateVal);
-const isoDate = startDate.toISOString().split("T")[0];
+const isoDate = new Date(dateVal).toISOString().split("T")[0];
 
-// MULTIVERSE LOOKUP: Get the single source of truth
+// MULTIVERSE LOOKUP
 const node = multiverseData.nodes.find(
 	(n) => n.id.toLowerCase() === (data.slug || "").toLowerCase(),
 );

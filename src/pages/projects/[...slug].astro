@@ -5,7 +5,7 @@ import multiverseData from "../../data/timeline/multiverse.json";
 export const prerender = true;
 
 // THEME REGISTRY
-import DataSheet from "@layouts/themes/DataSheet.astro";
+// import DataSheet from "@layouts/themes/DataSheet.astro"; // DELETED
 import Hyperspace from "@layouts/themes/Hyperspace.astro";
 import Command from "@layouts/themes/Command.astro";
 import Redacted from "@layouts/themes/Redacted.astro";
@@ -115,7 +115,7 @@ const prevProject =
 		: null;
 
 // === ROUTER LOGIC ===
-let theme = "datasheet"; // Default fallback
+let theme = "hyperspace"; // Default fallback (Was DataSheet)
 
 // Check for explicit theme override
 if (data.theme) {
@@ -132,7 +132,7 @@ else {
 
 // Map string to Component
 const ThemeComponents: Record<string, any> = {
-	datasheet: DataSheet,
+	datasheet: Hyperspace, // Re-route legacy datasheet to Hyperspace
 	hyperspace: Hyperspace,
 	command: Command,
 	redacted: Redacted,
@@ -142,7 +142,7 @@ const ThemeComponents: Record<string, any> = {
 };
 
 // Select Component (with fallback)
-const SelectedTheme = ThemeComponents[theme] || DataSheet;
+const SelectedTheme = ThemeComponents[theme] || Hyperspace;
 
 // Construct valid entry for both real and placeholder
 // We clone data to avoid mutating the readonly content collection object if needed
@@ -171,6 +171,14 @@ if (finalEntry.id === "control-24" || finalEntry.id === "c24") {
 		governance: { ecos: ["ECO6454", "ECO6455", "ECO6549"], dcos: 5 },
 		interventions: { count: 42, label: "Manual Inspections" },
 		financial: { toolingBudget: 210000, toolingActual: 0 },
+	};
+} else if (finalEntry.id === "dreamjob") {
+	metrics = {
+		cogs: { value: "UNDEFINED", label: "Acquisition Cost" },
+		profitability: { value: "INFINITE", label: "Potential Upside" },
+		governance: { ecos: ["PROTOCOL_OMEGA", "DIRECTIVE_PRIME"], dcos: 0 },
+		interventions: { count: 1, label: "Critical Path" },
+		financial: { toolingBudget: 0, toolingActual: 0 },
 	};
 }
 

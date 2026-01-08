@@ -7,7 +7,7 @@ import MobileNavDropdown from "@components/Nav/MobileNav/MobileNavDropdown.astro
 import Button from "@components/Button/Button.astro";
 
 // data
-import navData from "@config/navData.json";
+import navData from "@config/navData";
 ---
 
 <div id="mobile-nav__container">
@@ -69,6 +69,7 @@ import navData from "@config/navData.json";
 </div>
 
 <script>
+	/// <reference lib="dom" />
 	let mobileNavContainer: HTMLElement | null;
 	let mobileNavBurger: HTMLElement | null;
 	let mobileNavContent: HTMLElement | null;

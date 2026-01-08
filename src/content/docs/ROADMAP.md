@@ -44,6 +44,11 @@ sidebar:
   - **Tech:** R3F, Post-processing (@react-three/bloom), GLSL (Custom Shaders).
   - **Description:** An interactive 3D navigator that maps site hierarchy into a celestial coordinate system. Features hierarchical bloom, macroscopic orbital physics, and recursive scaling for project-level deep dives.
 
+- **[2026-01-08] Dreamjob V7 & Deep HUD**
+  - **[Feature] Dreamjob Redux:** Regenerated all ~18 assets using "V7 Mechanism" aesthetic (Titanium/Carbon, No Text).
+  - **[Feature] Deep HUD Integration:** Injected fictional "Deep" metrics for `dreamjob` via `[...slug].astro`, enabling the high-fidelity cockpit view.
+  - **[Fix] Nav Imports:** Resolved generic `navData` import errors crashing the build.
+
 ## 📜 Change Log (Recent)
 
 - **[2026-01-07] Stabilization & Color Sovereignty**
@@ -322,6 +327,11 @@ sidebar:
   - **Layout Stability:**
     - **Revert:** Rolled back experimental `gap-8` grid spacing to `gap-12` (original) to resolve layout collapse on `portion-cup` and `base`.
     - **Fix:** Resolved critical layout collapse in `[...slug].astro` caused by misplaced `<Content />` component and malformed JSX.
+
+- **Deep HUD Injection:**
+  - **Hook:** "Injecting fiction into the machine."
+  - **Tech:** Astro Dynamic Routing, Props Injection.
+  - **Description:** A mechanical way to distinguish "Deep" projects by injecting fictional or high-fidelity metrics directly into the page routing logic, allowing the UI to adapt without changing the underlying content schema.
 
 ## Meta-Portfolio (Colophon Features)
 

@@ -1,154 +1,127 @@
 ---
-// components
-import NavLink from "@components/Nav/NavLink.astro";
-import NavDropdown from "@components/Nav/NavDropdown.astro";
-import MobileNav from "@components/Nav/MobileNav/MobileNav.astro";
-import SiteLogo from "@components/SiteLogo/SiteLogo.astro";
-import Button from "@components/Button/Button.astro";
-import SocialCloud from "@components/SocialCloud/SocialCloud.astro";
+// Universal Capsule Nav (Hyperspace Standard)
+import { Icon } from "astro-icon/components";
+import navData from "../../config/navData"; // Adjusted import to relative path
 import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
+import MobileNav from "@components/Nav/MobileNav/MobileNav.astro";
 
-// data
-import navData from "@config/navData.json";
-// console.log(JSON.stringify(navData, null, 2));
+// Helper for loose matching active state
+const currentPath = Astro.url.pathname;
+const isActive = (href: string) => {
+	if (href === "/" && currentPath === "/") return true;
+	if (href !== "/" && currentPath.startsWith(href)) return true;
+	return false;
+};
 ---
 
-<div
-	id="nav__container"
-	class="fixed top-0 left-0 z-30 flex w-full flex-col bg-transparent py-1 duration-500"
-	transition:name={`nav`}
+<nav
+	id="universal-nav"
+	class="fixed top-0 left-0 z-50 flex w-full items-center justify-between border-b border-transparent px-6 py-4 transition-all duration-500 md:justify-center md:border-b-0"
 >
-	<div class="mx-auto flex w-full">
-		<div class="site-container flex h-20 w-full items-center">
-			<header class="flex h-full w-full items-center gap-2">
-				<!-- Left: Logo -->
-				<div class="flex h-full flex-1 items-center justify-start gap-3">
-					<SiteLogo />
-				</div>
+	<!-- LEFT: Logo (Visible on Mobile / Desktop) -->
+	<a href="/" class="absolute top-4 left-6 z-50 transition-opacity hover:opacity-80">
+		<img src="/assets/branding/EN_logo_white_1200.svg" alt="EN Logo" class="h-8 w-auto" />
+	</a>
 
-				<!-- Center: Desktop Nav -->
-				<div class="flex flex-1 items-center justify-center gap-4">
-					<nav class="hidden md:block">
-						<ul class="flex h-fit items-center px-4">
-							{
-								// if dropdown exists, setup the dropdown, otherwise it is just a link
-								navData.map((navItem) =>
-									"dropdown" in navItem ? (
-										// non-mobile dropdown menu
-										<NavDropdown navItem={navItem} />
-									) : (
-										// normal nav link
-										<NavLink {navItem} />
-									),
-								)
-							}
-						</ul>
-					</nav>
-
-					<button
-						id="search-trigger"
-						class="hover:text-primary-600 text-foreground hidden items-center justify-center transition-colors md:flex"
-						aria-label="Search"
-						title="Press Ctrl+E"
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="20"
-							height="20"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg
-						>
-					</button>
-				</div>
-
-				<!-- Right: Socials & Toggle -->
-				<div class="flex flex-1 items-center justify-end gap-4">
-					<div class="hidden md:block">
-						<!-- Construction Banner (Amber Corner Brackets) -->
-						<div
-							class="relative mr-4 inline-block px-3 py-1 font-mono text-[10px] tracking-widest text-amber-500 uppercase"
-						>
-							<div class="absolute top-0 left-0 h-2 w-2 border-t border-l border-amber-500"></div>
-							<div class="absolute top-0 right-0 h-2 w-2 border-t border-r border-amber-500"></div>
-							<div class="absolute bottom-0 left-0 h-2 w-2 border-b border-l border-amber-500">
+	<!-- CENTER: The Capsule (Desktop Only) -->
+	<div
+		id="nav-capsule"
+		class="hidden items-center justify-center gap-1 rounded-full border border-white/10 bg-black/80 p-1 backdrop-blur-md transition-all duration-300 md:flex"
+	>
+		{
+			navData.map((item) => {
+				if ("dropdown" in item) {
+					// RESUME DROPDOWN HANDLER via Popover or Hover logic
+					// For simplicity in this capsule, we make it a direct button that opens a mini-menu or just links to /resume
+					// The user requested a dropdown style. Let's build a simple hover group.
+					return (
+						<div class="group relative">
+							<button
+								class={`rounded-full px-4 py-1.5 font-mono text-xs tracking-wider uppercase transition-all duration-300 ${isActive("/resume") ? "bg-white/10 font-bold text-white" : "text-neutral-400 hover:bg-white/5 hover:text-white"} `}
+							>
+								{item.text}
+							</button>
+							{/* Dropdown Menu */}
+							<div class="absolute top-full left-1/2 mt-2 hidden w-48 -translate-x-1/2 flex-col gap-1 rounded-xl border border-white/10 bg-black/90 p-1 py-1 shadow-xl backdrop-blur-xl group-hover:flex">
+								{item.dropdown.map((subItem) => (
+									<a
+										href={subItem.href}
+										target={subItem.newTab ? "_blank" : "_self"}
+										class="block rounded-lg px-4 py-2 text-center font-mono text-xs text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
+									>
+										{subItem.text}
+									</a>
+								))}
 							</div>
-							<div class="absolute right-0 bottom-0 h-2 w-2 border-r border-b border-amber-500">
-							</div>
-							<span class="opacity-80">UNDER_CONSTRUCTION</span>
 						</div>
+					);
+				} else {
+					return (
+						<a
+							href={item.href}
+							class={`rounded-full px-4 py-1.5 font-mono text-xs tracking-wider uppercase transition-all duration-300 ${isActive(item.href) ? "bg-white/10 font-bold text-white" : "text-neutral-400 hover:bg-white/5 hover:text-white"} `}
+						>
+							{item.text}
+						</a>
+					);
+				}
+			})
+		}
 
-						<SocialCloud />
-					</div>
+		{/* Search Trigger */}
+		<div class="mx-1 h-3 w-px bg-white/20"></div>
+		<button
+			id="global-search-trigger"
+			class="group flex h-7 w-7 items-center justify-center rounded-full text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
+			aria-label="Search"
+		>
+			<Icon name="tabler:search" class="h-4 w-4" />
+		</button>
+	</div>
 
-					<ThemeToggle />
+	<!-- RIGHT: Socials & Mobile Toggle -->
+	<div class="absolute top-4 right-6 flex items-center gap-4">
+		{/* Desktop Socials */}
+		<div class="hidden items-center gap-3 text-neutral-500 md:flex">
+			<a
+				href="https://github.com/eriknorris"
+				target="_blank"
+				class="hover:text-primary transition-colors hover:scale-110"
+			>
+				<Icon name="tabler:brand-github" class="h-5 w-5" />
+			</a>
+			<a
+				href="https://linkedin.com/in/eriknorris"
+				target="_blank"
+				class="hover:text-primary transition-colors hover:scale-110"
+			>
+				<Icon name="tabler:brand-linkedin" class="h-5 w-5" />
+			</a>
+			<a
+				href="mailto:erik@example.com"
+				class="hover:text-primary transition-colors hover:scale-110"
+			>
+				<Icon name="tabler:mail" class="h-5 w-5" />
+			</a>
+			<ThemeToggle />
+		</div>
 
-					<!-- mobile nav menu, only load on small screens where it is visible -->
-					<div class="flex items-center gap-4 md:hidden">
-						<MobileNav />
-					</div>
-				</div>
-			</header>
+		{/* Mobile Toggle */}
+		<div class="md:hidden">
+			<MobileNav />
 		</div>
 	</div>
-</div>
+</nav>
 
 <script>
-	/* When the user scrolls down, hide the navbar. When the user scrolls up a bit, show the navbar */
-	const initNavbar = () => {
-		const navbar = document.getElementById("nav__container") as HTMLInputElement;
+	/// <reference lib="dom" />
+	const searchBtn = document.getElementById("global-search-trigger");
+	searchBtn?.addEventListener("click", () => {
+		// @ts-ignore
+		window.dispatchEvent(new CustomEvent("open-command-menu"));
+	});
 
-		if (navbar !== null) {
-			let prevScrollpos = window.scrollY;
-			let scrollUpDistance = 0;
-			let scrollDownDistance = 0;
-			const scrollHandler = () => {
-				const currentScrollPos = window.scrollY;
-
-				if (prevScrollpos > currentScrollPos) {
-					scrollDownDistance = 0;
-					scrollUpDistance = scrollUpDistance + prevScrollpos - currentScrollPos;
-					// only show the navbar if we've scrolled up a little bit. debouncing
-					if (scrollUpDistance > 50) {
-						navbar.style.top = "0px";
-					}
-				} else {
-					scrollUpDistance = 0;
-					scrollDownDistance = scrollDownDistance + currentScrollPos - prevScrollpos;
-					// only hide the navbar if we've scrolled down a little bit. debouncing
-					if (scrollDownDistance > 50) {
-						navbar.style.top = "-100px";
-					}
-				}
-				prevScrollpos = currentScrollPos;
-			};
-
-			// Add passive event listener for better performance
-			window.addEventListener("scroll", scrollHandler, { passive: true });
-		}
-	};
-
-	initNavbar();
-
-	document.addEventListener("astro:after-swap", initNavbar);
-
-	// Search Trigger Logic
-	const initSearchTrigger = () => {
-		const searchTrigger = document.getElementById("search-trigger");
-		if (searchTrigger) {
-			searchTrigger.addEventListener("click", () => {
-				window.dispatchEvent(new CustomEvent("open-command-menu"));
-			});
-		}
-	};
-
-	// Run on initial load
-	initSearchTrigger();
-
-	// Run on view transitions
-	document.addEventListener("astro:after-swap", initSearchTrigger);
+	// Scroll Logic for "Hiding" or "Glassing"?
+	// The user requested Floating Capsule. Usually implies it stays visible or creates a glass effect on scroll.
+	// Since we are top-fixed, let's just ensure it handles scroll gracefully (blur is already active).
 </script>

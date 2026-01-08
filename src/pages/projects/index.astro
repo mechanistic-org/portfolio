@@ -3,22 +3,19 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectDirectory from "../../components/Projects/ProjectDirectory.astro";
 import ProjectGrid from "../../components/Projects/ProjectGrid.astro";
-
 import SkillsGraph from "../../components/DataViz/SkillsGraph";
 import MultiverseGraph from "../../components/DataViz/MultiverseGraph";
 import TimelineStream from "../../components/DataViz/TimelineStream";
 import RadialTaxonomy from "../../components/DataViz/RadialTaxonomy";
 import ScrollCoordinator from "@components/Effects/ScrollCoordinator.astro";
 
-// Data
-// import skillsData from "../../data/skills.json"; // REMOVED: Legacy Data Source
+// Data import
 import multiverseData from "../../data/timeline/multiverse.json";
 
 // Create a lookup map for the Multiverse (God Brain)
 const multiverseMap = new Map(multiverseData.nodes.map((n) => [n.id.toLowerCase(), n]));
 
 const rawProjects = await getCollection("projects");
-
 const projects = rawProjects
 	.filter(({ data }) => {
 		const hiddenIds = [
@@ -57,6 +54,7 @@ const industries = [...new Set(projects.map((p) => p.data.industry).filter(Boole
 const categories = [
 	...new Set(projects.map((p) => p.data.category).filter(Boolean)),
 ].sort() as string[];
+
 // Tools need distinct list
 const tools = [...new Set(projects.flatMap((p) => p.data.tools || []).filter(Boolean))].sort();
 
@@ -71,8 +69,6 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 
 <BaseLayout title="Projects" description="Engineering Archive">
 	<div class="site-container min-h-screen pt-32 pb-24 md:pb-36">
-		<!-- VIEW SWITCHER (The Control Console) -->
-		<!-- VIEW SWITCHER (The Control Console) -->
 		<!-- VIEW SWITCHER (The Control Console) -->
 		<div
 			class="mb-8 flex flex-col items-center justify-center gap-4 border-b border-white/10 pb-4 md:flex-row"
@@ -118,7 +114,6 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 			</div>
 		</div>
 
-		<!-- VIEW: LIST -->
 		<!-- VIEW: LIST -->
 		<div id="view-list" class="view-container" style="display: block;">
 			<!-- DATA TABLE -->
@@ -209,8 +204,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				if (!savedView || !validViews.includes(savedView)) {
 					savedView = "multiverse";
 				}
-
-				console.log("Initializing View:", savedView);
+				// console.log("Initializing View:", savedView);
 				switchView(savedView);
 
 				toggles.forEach((btn) => {
@@ -220,7 +214,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 					});
 				});
 
-				function switchView(mode: string) {
+				function switchView(mode) {
 					// Update UI
 					toggles.forEach((btn) => {
 						const isMatch = btn.getAttribute("data-view") === mode;
@@ -235,12 +229,14 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 
 					// Update Containers
 					containers.forEach((element) => {
-						const c = element as HTMLElement;
+						const c = element;
 						if (c.id === `view-${mode}`) {
-							c.style.display = "block"; // Force show
+							// @ts-ignore
+							c.style.display = "block";
 							c.classList.remove("hidden");
 						} else {
-							c.style.display = "none"; // Force hide
+							// @ts-ignore
+							c.style.display = "none";
 							c.classList.add("hidden");
 						}
 					});
@@ -249,7 +245,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				}
 
 				// Target rows instead of cards
-				const rows = Array.from(document.querySelectorAll(".project-item")) as HTMLElement[];
+				const rows = Array.from(document.querySelectorAll(".project-item"));
 				const buttons = document.querySelectorAll(".filter-btn");
 				const sortHeaders = document.querySelectorAll(".sort-header");
 
@@ -263,13 +259,15 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 					status: "all",
 					client: "all",
 				};
-				let sortState = { column: "date", direction: "desc" }; // default sort
+				let sortState = {
+					column: "date",
+					direction: "desc",
+				}; // default sort
 
 				// URL Params Logic - Run BEFORE initial update
 				const urlParams = new URLSearchParams(window.location.search);
-
 				// Helper to apply param
-				const applyParam = (paramName: string, groupName: string) => {
+				const applyParam = (paramName, groupName) => {
 					const val = urlParams.get(paramName);
 					if (val) {
 						const decoded = decodeURIComponent(val);
@@ -313,7 +311,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 					}
 				}
 
-				function getCellValue(row: HTMLElement, column: string): string | number {
+				function getCellValue(row, column) {
 					const d = row.dataset;
 					switch (column) {
 						case "project":
@@ -352,6 +350,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 					if (selectedIndex >= 0 && selectedIndex < rows.length) {
 						const row = rows[selectedIndex];
 						// Only apply if row is visible
+						// @ts-ignore
 						if (row.style.display !== "none") {
 							row.classList.add(
 								"bg-primary/10",
@@ -360,7 +359,6 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 								"animate-pulse-slow",
 							);
 							row.classList.remove("border-transparent");
-
 							// Scroll into view if needed (smooth)
 							row.scrollIntoView({ behavior: "smooth", block: "nearest" });
 						}
@@ -372,6 +370,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 					// Only if not focused on an input
 					if (document.activeElement?.tagName === "INPUT") return;
 
+					// @ts-ignore
 					const visibleRows = rows.filter((r) => r.style.display !== "none");
 					if (visibleRows.length === 0) return;
 
@@ -421,6 +420,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				function update(filtersToUse = filters, updateChips = true) {
 					// 1. Filter
 					let active = rows.filter((row) => {
+						// @ts-ignore
 						const d = row.dataset;
 						const rowTools = JSON.parse(d.tool || "[]");
 						const rowClients = JSON.parse(d.client || "[]");
@@ -428,7 +428,8 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 						// Find title in the second cell (index 1) for List View, or dataset for Grid
 						let rowTitle = "";
 						if (row.tagName === "TR") {
-							const titleCell = row.children[1] as HTMLElement;
+							const titleCell = row.children[1];
+							// @ts-ignore
 							rowTitle = titleCell?.innerText.toLowerCase() || "";
 						} else {
 							rowTitle = d.title?.toLowerCase() || "";
@@ -458,6 +459,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 
 					// 3. Render
 					// Hide all rows first
+					// @ts-ignore
 					rows.forEach((r) => (r.style.display = "none"));
 
 					// Append active rows to containers (maintaining sort order)
@@ -466,8 +468,8 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 
 					if (tbody || gridContainer) {
 						active.forEach((r) => {
+							// @ts-ignore
 							r.style.display = ""; // Reset display
-
 							if (r.tagName === "TR" && tbody) {
 								tbody.appendChild(r);
 							} else if (r.tagName === "DIV" && gridContainer) {
@@ -510,13 +512,16 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 					if (selectedIndustry === "all") {
 						// Show all categories
 						categoryButtons.forEach((btn) => {
-							(btn as HTMLElement).style.display = "block";
+							// @ts-ignore
+							btn.style.display = "block";
 						});
 					} else {
 						// Get valid categories for this industry
-						const validCategories = new Set<string>();
+						const validCategories = new Set();
 						rows.forEach((row) => {
+							// @ts-ignore
 							if (row.dataset.industry === selectedIndustry) {
+								// @ts-ignore
 								if (row.dataset.category) validCategories.add(row.dataset.category);
 							}
 						});
@@ -525,9 +530,11 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 						categoryButtons.forEach((btn) => {
 							const btnVal = btn.getAttribute("data-filter");
 							if (btnVal === "all" || (btnVal && validCategories.has(btnVal))) {
-								(btn as HTMLElement).style.display = "block";
+								// @ts-ignore
+								btn.style.display = "block";
 							} else {
-								(btn as HTMLElement).style.display = "none";
+								// @ts-ignore
+								btn.style.display = "none";
 							}
 						});
 
@@ -570,10 +577,10 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				}
 
 				// EVENT DELEGATION: Robust against DOM changes
-				const handleFilterClick = (e: Event) => {
-					const target = e.target as HTMLElement;
+				const handleFilterClick = (e) => {
+					const target = e.target;
+					// @ts-ignore
 					const btn = target.closest(".filter-btn");
-
 					if (btn) {
 						const group = btn.getAttribute("data-group");
 						const val = btn.getAttribute("data-filter");
@@ -586,7 +593,8 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 						btn.setAttribute("data-active", "true");
 
 						// Logic Update
-						(filters as any)[group] = val;
+						// @ts-ignore
+						filters[group] = val;
 						update(filters, true);
 					}
 				};
@@ -595,9 +603,9 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 
 				// PREVIEW DELEGATION (Hover)
 				document.addEventListener("mouseover", (e) => {
-					const target = e.target as HTMLElement;
+					const target = e.target;
+					// @ts-ignore
 					const btn = target.closest(".filter-btn");
-
 					if (btn) {
 						const group = btn.getAttribute("data-group");
 						const val = btn.getAttribute("data-filter");
@@ -605,14 +613,16 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 
 						// Create temp filters for preview
 						const tempFilters = { ...filters };
-						(tempFilters as any)[group] = val;
+						// @ts-ignore
+						tempFilters[group] = val;
 						update(tempFilters, false); // false = Don't commit UI chips yet
 					}
 				});
 
 				// RESET PREVIEW on Mouse Leave
 				document.addEventListener("mouseout", (e) => {
-					const target = e.target as HTMLElement;
+					const target = e.target;
+					// @ts-ignore
 					const btn = target.closest(".filter-btn");
 					if (btn) {
 						// Revert to actual selected filters
@@ -630,7 +640,10 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 						status: "all",
 						client: "all",
 					};
-					sortState = { column: "date", direction: "desc" };
+					sortState = {
+						column: "date",
+						direction: "desc",
+					};
 
 					// Reset UI Buttons
 					document.querySelectorAll(".filter-btn").forEach((b) => {
@@ -645,6 +658,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 					updateSortIcons();
 
 					// Update List
+					// @ts-ignore
 					update(filters, true);
 				});
 
@@ -666,7 +680,8 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				});
 
 				// Listen for Radial Filter Events
-				window.addEventListener("radial-filter", (e: any) => {
+				// @ts-ignore
+				window.addEventListener("radial-filter", (e) => {
 					const { group, value } = e.detail;
 
 					// Apply Filter
@@ -686,6 +701,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 						if (targetBtn) targetBtn.setAttribute("data-active", "true");
 
 						// Render
+						// @ts-ignore
 						update(filters, true);
 					}
 				});
@@ -694,9 +710,11 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 
 		<style>
 			@reference "../../styles/global.css";
+
 			.filter-btn.active {
 				@apply bg-primary ring-primary text-black ring-2;
 			}
+
 			@keyframes pulse-slow {
 				0%,
 				100% {
@@ -711,6 +729,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 			}
 		</style>
+
 		<ScrollCoordinator />
-	</div>
-</BaseLayout>
+	</div></BaseLayout
+>
