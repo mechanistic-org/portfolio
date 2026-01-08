@@ -1,26 +1,9 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import CustomTimeline from "@components/Resume/CustomTimeline.astro";
-import workHistory from "../data/work_history.json";
-import type { TimelineItem } from "../utils/timelineParser";
+import { getCareerTimeline } from "../utils/getCareerTimeline";
 
-// Map JSON data to TimelineItem interface
-const timelineItems: TimelineItem[] = workHistory.map((job) => {
-	// Extract year for grouping (Assumes "M/D/YYYY" or similar format)
-	const startYear = job.start.includes("/") ? job.start.split("/").pop() : job.start;
-	const endYear =
-		job.end === "Present" ? "Present" : job.end.includes("/") ? job.end.split("/").pop() : job.end;
-
-	return {
-		title: `${startYear} - ${endYear}`, // Format: "2022 - Present" to ensure grouping by Year
-		cardTitle: `${job.title} @ ${job.company}`,
-		cardSubtitle: job.description,
-		cardDetailedText: job.description,
-		responsibilities: [],
-		keyProjects: [],
-		techStack: [],
-	};
-});
+const timelineItems = await getCareerTimeline();
 
 const pageTitle = "Universal History";
 const pageDescription =

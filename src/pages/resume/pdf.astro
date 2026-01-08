@@ -1,24 +1,9 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import workHistory from "../../data/work_history.json";
-import type { TimelineItem } from "../../utils/timelineParser";
+import { getCareerTimeline } from "../../utils/getCareerTimeline";
 
-// Map JSON data to TimelineItem interface
-const items: TimelineItem[] = workHistory.map((job) => {
-	const startYear = job.start.includes("/") ? job.start.split("/").pop() : job.start;
-	const endYear =
-		job.end === "Present" ? "Present" : job.end.includes("/") ? job.end.split("/").pop() : job.end;
-
-	return {
-		title: `${startYear} - ${endYear}`,
-		cardTitle: `${job.title} @ ${job.company}`,
-		cardSubtitle: job.description,
-		cardDetailedText: job.description,
-		responsibilities: [],
-		keyProjects: [],
-		techStack: [],
-	};
-});
+// Read and Parse Resume Data from Projects Collection
+const items = await getCareerTimeline();
 
 const pageTitle = "Erik Norris | Resume";
 
