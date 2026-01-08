@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ExplodedView from "../components/DataViz/ExplodedView";
+import { getCareerAssembly } from "../utils/mapCareerAssembly";
+
+const assembly = await getCareerAssembly();
+---
+
+<BaseLayout title="Assembly | Exploded View" description="System Architecture">
+	<main class="h-screen w-full overflow-hidden bg-black">
+		<ExplodedView client:only="react" data={assembly} />
+	</main>
+</BaseLayout>

@@ -236,5 +236,108 @@ export default config({
 				}),
 			},
 		}),
+
+		/**
+		 * * Projects Collection
+		 * The Core Data for the Portfolio.
+		 * Mapped to 'src/content.config.ts' schema.
+		 */
+		projects: collection({
+			label: "Projects",
+			slugField: "title",
+			path: "src/content/projects/*", // Flat files in src/content/projects/
+			columns: ["title", "industry", "date"],
+			entryLayout: "content",
+			format: { contentField: "content" },
+			schema: {
+				title: fields.slug({
+					name: { label: "Title" },
+					slug: {
+						label: "SEO-friendly slug",
+						description: "Never change the slug once a file is published!",
+					},
+				}),
+				description: fields.text({
+					label: "Description",
+					multiline: true,
+				}),
+				date: fields.date({ label: "Start Date" }),
+				endDate: fields.date({ label: "End Date" }),
+				industry: fields.text({ label: "Industry" }),
+				category: fields.text({ label: "Category" }),
+				employer: fields.text({ label: "Employer" }),
+
+				// Arrays
+				client: fields.array(fields.text({ label: "Client" }), {
+					label: "Clients",
+					itemLabel: (props) => props.value,
+				}),
+				tags: fields.array(fields.text({ label: "Tag" }), {
+					label: "Tags",
+					itemLabel: (props) => props.value,
+				}),
+				tools: fields.array(fields.text({ label: "Tool" }), {
+					label: "Tools",
+					itemLabel: (props) => props.value,
+				}),
+
+				// Complex Arrays (Skills & Gallery)
+				skillData: fields.array(
+					fields.object({
+						name: fields.text({ label: "Skill Name" }),
+						value: fields.number({ label: "Proficiency (%)" }),
+					}),
+					{
+						label: "Skill Matrix",
+						itemLabel: (props) => `${props.fields.name.value} (${props.fields.value.value}%)`,
+					},
+				),
+
+				gallery: fields.array(
+					fields.object({
+						src: fields.text({ label: "Source Path (R2)" }), // R2 Path as string (Law of Assets)
+						width: fields.number({ label: "Width" }),
+						height: fields.number({ label: "Height" }),
+						aspectRatio: fields.number({ label: "Aspect Ratio" }),
+					}),
+					{
+						label: "Gallery Images",
+						itemLabel: (props) => props.fields.src.value || "Image",
+					},
+				),
+
+				// Assets (Law of Assets: Text Strings for R2 paths)
+				heroImage: fields.text({
+					label: "Hero Image Path",
+					description: "Path to R2 asset (e.g. /assets/r2/project/hero.png)",
+				}),
+
+				// Content
+				content: fields.mdx({
+					label: "Case Study",
+					options: {
+						bold: true,
+						italic: true,
+						strikethrough: true,
+						code: true,
+						heading: [2, 3, 4, 5, 6],
+						blockquote: true,
+						orderedList: true,
+						unorderedList: true,
+						table: true,
+						link: true,
+						image: {
+							directory: "src/content/projects/", // Only for local edits, R2 is preferred
+							publicPath: "../",
+						},
+						divider: true,
+						codeBlock: true,
+					},
+					components: {
+						Admonition: ComponentBlocks.Admonition,
+					},
+				}),
+			},
+		}),
 	},
 });

@@ -75,9 +75,9 @@
 **Context:** Confusion between "Working" folders and "Production" folders led to "Ghost Data" risk (`R2_MASTER` vs `R2_STAGING`).
 **The Law:**
 
-1.  **INPUT (Dirty):** `D:\portfolio\portfolio_working` is the ONLY place for raw drops.
-2.  **VAULT (Clean):** `D:\GitHub\eriknorris-assets\R2_STAGING` is the ONLY Production Source.
-3.  **DEAD (Legacy):** `D:\GitHub\eriknorris-workspace\R2_MASTER` is a Ghost. Do not touch.
+1.  **INPUT (Sovereign Master):** `D:\GitHub\eriknorris-workspace\R2_MASTER` is the **Source of Truth**. You touch this to add new assets.
+2.  **TARGET (Deployment):** `D:\GitHub\eriknorris-assets\R2_STAGING` is the Sync Target. The script mirrors Master -> Staging.
+3.  **LOADING DOCK (Dirty):** `D:\portfolio\portfolio_working` is for uncurated dumps before they are promoted to Master.
 
 ---
 
