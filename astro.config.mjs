@@ -93,6 +93,7 @@ export default defineConfig({
 			CSS: false,
 			Image: false,
 			SVG: false,
+			Exclude: [/digiME/],
 		}),
 		keystatic(),
 	],
