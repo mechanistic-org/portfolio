@@ -23,9 +23,8 @@ const dateVal = data.date || new Date();
 const isoDate = new Date(dateVal).toISOString().split("T")[0];
 
 // MULTIVERSE LOOKUP
-const node = multiverseData.nodes.find(
-	(n) => n.id.toLowerCase() === (data.slug || "").toLowerCase(),
-);
+const targetId = data.id || data.slug || "";
+const node = multiverseData.nodes.find((n) => n.id.toLowerCase() === targetId.toLowerCase());
 
 let intCount = 0;
 let extCount = 0;
@@ -66,7 +65,9 @@ const displayExt = Math.min(extCount, 25);
 		<!-- LEFT: Title & Context -->
 		<div class="flex items-center gap-6 pl-6">
 			<div>
-				<span class="text-xs tracking-widest text-neutral-500 uppercase">{data.slug}</span>
+				<span class="text-xs tracking-widest text-neutral-500 uppercase"
+					>{data.id || data.slug}</span
+				>
 				<div class="flex items-center gap-3 text-[10px] tracking-wider uppercase">
 					<span class="font-bold text-white">{data.employer}</span>
 					<span class="text-neutral-500">//</span>
@@ -191,7 +192,7 @@ const displayExt = Math.min(extCount, 25);
 							<h1 class="font-mono text-xl font-bold tracking-tight text-white uppercase sm:text-2xl">
 								{data.id || data.slug || "UNKNOWN"}
 							</h1>
-							{node.codename && (
+							{node?.codename && (
 								<span class="text-accent/80 font-mono text-xs tracking-wider uppercase">
 									CN: {node.codename}
 								</span>

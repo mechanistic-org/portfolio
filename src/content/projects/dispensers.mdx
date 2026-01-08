@@ -1,61 +1,35 @@
 ---
-title: "Dispensers"
-slug: "dispensers"
-date: "12/1/2021"
-endDate: "8/24/2022"
-employer: "Hyphen"
+title: Dispensers
+slug: dispensers
+date: '2021-12-01T00:00:00'
+endDate: '2022-08-24T00:00:00'
+employer: Hyphen
 client: []
-industry: "Other"
-category: "Foodservice Automation"
-tools: ["Onshape"]
+industry: Robotics & Automation
+category: Foodservice Automation
+tools: [Onshape]
 toolIcons: []
-production: "Mass Production"
-tags: ["CAD (Computer-Aided Design)", "Design for Manufacturing (DFM)", "Iterative Prototyping"]
-skillData: [{"name": "CAD (Computer-Aided Design)", "value": 59.7, "benchmark": 44.9}, {"name": "Design for Manufacturing (DFM)", "value": 59.0, "benchmark": 44.5}, {"name": "Iterative Prototyping", "value": 57.4, "benchmark": 46.6}, {"name": "Testing Automation", "value": 55.6, "benchmark": 41.7}, {"name": "Prototyping", "value": 52.6, "benchmark": 46.7}, {"name": "Materials Knowledge", "value": 52.5, "benchmark": 40.5}]
-additionalSkills: ["CAD (Computer-Aided Design)", "Design for Manufacturing (DFM)", "Iterative Prototyping", "Testing Automation", "Prototyping", "Materials Knowledge", "Tolerance Analysis", "Product Testing", "Usability Testing", "Reliability Testing"]
-phase_stats: {"Strategy": 13.3, "Design": 117.0, "Engineering": 39.9, "Production": 37.2}
+production: Concept
+tags: [CAD (Computer-Aided Design), Design for Manufacturing (DFM), Iterative Prototyping,
+  Testing Automation, Prototyping]
+skillData: []
+additionalSkills: []
+phase_stats: {Strategy: 0, Design: 0, Engineering: 0, Production: 0}
 cyberspace: null
-theme: "DataSheet"
-teamSize: "Unknown"
+theme: DataSheet
+teamSize: ''
 gallery: []
 documents: []
-links: [{"name": "Hyphen Website", "url": "https://hyphen.com"}]
-heroImage: "/assets/placeholders/abstract.jpg" 
+links: []
+heroImage: /assets/r2/dispensers/hero-sm.webp
 draft: false
-description: ""
-duration: "Active"
-statusLabel: "Completed"
-skillGraph: "/assets/r2/dispensers/skill-graph.svg"
-partGraph: "/assets/r2/dispensers/part-graph.svg"
-impact: ""
+description: ''
+duration: Active
+statusLabel: Completed
+impact: ''
 ---
-import { YouTube } from '@astro-community/astro-embed-youtube';
-import ModelViewer from '@components/mdx/ModelViewer.astro';
 
-## The Challenge
-> **Context:** The Makeline needed hands. The Dispeners were those hands.
 
-The problem was universality. A single robotic module had to dispense ingredients ranging from water-thin dressings to chunky guacamole, pulled pork, and sticky rice.
-*   **Precision:** +/- 2g repeatability across all textures.
-*   **Sanitary:** NSF-8, IP69K washdown, tool-less disassembly for cleaning.
-*   **Smart:** Each dispenser needed to be an intelligent edge node, knowing its own calibration, fill level, and wear state.
+## Dispensers
 
-## Engineering Approach
-We developed "Gen 2" as a fully self-contained mechatronic brick.
-
-*   **Universal Agnostic Pumping:** We engineered a quick-change pump interface that accepted different pump heads (Gear, Lobe, Auger) depending on the ingredient rheology, all driven by the same core motorbox.
-*   **The "Smart Brick":** Embedded STM32 microcontroller handled the closed-loop motion profile locally. The dispenser didn't just receive "Turn ON" commands; it received "Dispense 45 grams of Guacamole" and handled the acceleration curves to prevent splashing.
-*   **Hygienic Design:** The entire fluid path was isolated from the electromechanical core. The motor coupled magnetically or via sealed spline, ensuring zero risk of food ingress into the chassis.
-
-## Impact
-This was the high-volume enabler.
-*   **Speed:** &lt;3 second cycle time per shot.
-*   **Uptime:** Hot-swappable in 5 seconds. If a pump jammed, the operator just pulled it and clicked in a fresh one.
-
-### Project Artifacts
-:::note[Technical Specs]
-*   **Accuracy:** +/- 2g
-*   **Rating:** IP69K
-*   **Comms:** CANOpen (Smart Node)
-*   **Power:** 48V BLDC
-:::
+> *Auto-generated scaffold from Multiverse Registry.*

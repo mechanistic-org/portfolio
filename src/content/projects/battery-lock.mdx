@@ -1,61 +1,35 @@
 ---
-title: "battery lock"
-slug: "battery-lock"
-date: "1/1/2019"
-endDate: "4/15/2019"
-employer: "Mechanistic (Consulting)"
-client: ["Synapse"]
-industry: "Other"
-category: "Electromechanical Mechanism"
-tools: ["SolidWorks"]
+title: battery lock
+slug: battery-lock
+date: '2019-01-01T00:00:00'
+endDate: '2019-04-15T00:00:00'
+employer: Mechanistic
+client: [Synapse]
+industry: Other
+category: Electromechanical Mechanism
+tools: [SolidWorks]
 toolIcons: []
-production: "Mass Production"
-tags: ["Iterative Prototyping", "CAD (Computer-Aided Design)", "Reliability Testing"]
-skillData: [{"name": "Iterative Prototyping", "value": 50.0, "benchmark": 46.6}, {"name": "CAD (Computer-Aided Design)", "value": 47.4, "benchmark": 44.9}, {"name": "Reliability Testing", "value": 45.9, "benchmark": 40.4}, {"name": "Prototyping", "value": 44.4, "benchmark": 46.7}, {"name": "Materials Knowledge", "value": 42.8, "benchmark": 40.5}, {"name": "Usability Testing", "value": 42.5, "benchmark": 39.6}]
-additionalSkills: ["Iterative Prototyping", "CAD (Computer-Aided Design)", "Reliability Testing", "Prototyping", "Materials Knowledge", "Usability Testing", "Tolerance Analysis", "Design for Manufacturing (DFM)", "Testing Automation", "Product Testing"]
-phase_stats: {"Strategy": 5.2, "Design": 45.8, "Engineering": 15.6, "Production": 14.6}
+production: Concept
+tags: [Iterative Prototyping, CAD (Computer-Aided Design), Reliability Testing, Prototyping,
+  Materials Knowledge]
+skillData: []
+additionalSkills: []
+phase_stats: {Strategy: 0, Design: 0, Engineering: 0, Production: 0}
 cyberspace: null
-theme: "DataSheet"
-teamSize: "Unknown"
+theme: DataSheet
+teamSize: ''
 gallery: []
 documents: []
-links: [{"name": "Synapse Website", "url": "https://synapse.com"}]
-heroImage: "/assets/placeholders/tech-2.jpg" 
+links: []
+heroImage: /assets/r2/battery-lock/hero-sm.webp
 draft: false
-description: ""
-duration: "Active"
-statusLabel: "Completed"
-skillGraph: "/assets/r2/battery-lock/skill-graph.svg"
-partGraph: "/assets/r2/battery-lock/part-graph.svg"
-impact: ""
+description: ''
+duration: Active
+statusLabel: Completed
+impact: ''
 ---
-import { YouTube } from '@astro-community/astro-embed-youtube';
-import ModelViewer from '@components/mdx/ModelViewer.astro';
 
-## The Challenge
-> **Context:** A micromobility fleet needed a way to secure high-value battery packs against theft while allowing authorized "Swap Teams" to replace them in seconds.
 
-The "Halfdome" project was an electromechanical battery lock designed for severe abuse:
-*   **Vibration:** It had to stay locked while bouncing down potholes at 20mph.
-*   **Security:** It needed to resist pry attacks and picking.
-*   **Environment:** It lived outside, exposed to rain, salt spray, and road grime.
+## battery lock
 
-## Engineering Approach
-We designed a custom motorized locking dog mechanism rather than a simple solenoid (which can vibrate open).
-
-*   **Gearbox Design:** I engineered a high-reduction spur gear train driven by a small DC motor. This provided massive holding torque to the locking pin without requiring continuous power to stay locked (bi-stable design).
-*   **Sealing:** The entire mechanism was housed in a glass-filled nylon enclosure with an ultrasonic weld path, achieving IP67 ingress protection.
-*   **Feedback:** Integrated Hall Effect sensors provided closed-loop confirmation of "Locked" and "Unlocked" states to the main vehicle controller.
-
-## Impact
-This mechanism became the standard retention system for the fleet.
-*   **Reliability:** >10,000 cycle life tested under vibration load.
-*   **Security:** The non-backdrivable gear train made forced entry nearly impossible without destroying the latch.
-
-### Project Artifacts
-:::note[Specs]
-*   **Actuation:** DC Motor + Gearbox
-*   **IP Rating:** IP67
-*   **Cycle Life:** 10k Cycles
-*   **Lock Force:** >500N
-:::
+> *Auto-generated scaffold from Multiverse Registry.*

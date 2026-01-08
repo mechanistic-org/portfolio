@@ -1,182 +1,134 @@
 ---
-title: "D-Control"
-slug: "d-control"
-date: "8/1/2004"
-endDate: "3/1/2005"
-employer: "Digidesign"
+title: D-Control
+slug: d-control
+date: '2004-08-01T00:00:00'
+endDate: '2005-03-01T00:00:00'
+employer: Digidesign
 client: []
-industry: "Other"
-category: "Control Surface"
-heroImage: "/assets/r2/d-control/d-control-hero-01-xl.webp"
-teamSize: "18"
-tools: ["ProEngineer"]
-toolIcons: ["ptc"]
-production: "Mass Production"
-tags:
-  [
-    "Iterative Prototyping",
-    "Prototyping",
-    "Tolerance Analysis",
-    "Project Buckley",
-  ]
-skillData:
-  [
-    { "name": "Iterative Prototyping", "value": 57.1, "benchmark": 46.6 },
-    { "name": "Prototyping", "value": 56.2, "benchmark": 46.7 },
-    { "name": "Tolerance Analysis", "value": 50.8, "benchmark": 40.0 },
-    { "name": "Reliability Testing", "value": 49.5, "benchmark": 40.4 },
-    {
-      "name": "Design for Manufacturing (DFM)",
-      "value": 47.5,
-      "benchmark": 44.5,
-    },
-    { "name": "CAD (Computer-Aided Design)", "value": 46.8, "benchmark": 44.9 },
-  ]
-additionalSkills:
-  [
-    "Iterative Prototyping",
-    "Prototyping",
-    "Tolerance Analysis",
-    "Reliability Testing",
-    "Design for Manufacturing (DFM)",
-    "CAD (Computer-Aided Design)",
-    "Testing Automation",
-    "Usability Testing",
-    "Product Testing",
-    "Materials Knowledge",
-  ]
-phase_stats:
-  { "Strategy": 10.6, "Design": 93.3, "Engineering": 31.8, "Production": 29.7 }
+industry: Pro Audio
+category: Control Surface
+tools: [ProEngineer]
+toolIcons: []
+production: Concept
+tags: [Iterative Prototyping, Prototyping, Tolerance Analysis]
+skillData: []
+additionalSkills: []
+phase_stats: {Strategy: 0, Design: 0, Engineering: 0, Production: 0}
 cyberspace:
-  layout: "linear"
+  layout: linear
   stickies:
-    - id: "01_adhesion_crisis"
-      type: "gallery"
-      deck:
-        - title: "The Crisis"
-          subtitle: "Paint Delamination"
-          body: |
-            **The Failure:**
-            During Pilot Validation, the cosmetic overlay on the Fader Bank began peeling. This was not just a blemish; it blocked the motorized faders, triggering a potential **Stop Ship** order.
+  - id: 01_adhesion_crisis
+    type: gallery
+    deck:
+    - {title: The Crisis, subtitle: The Peel Test Failure, body: '**The Symptom:**
 
-            **The Investigation:**
-            Vendor PPI blamed "Bad Glue." I rejected this as guesswork. **Deviation #1212** confirmed the parts arrived damaged out of the box. Forensic analysis revealed the root cause: Low Surface Energy (&lt;32 Dyne/cm) on the molded chassis was repelling the adhesive.
-        - title: "The Fix"
-          subtitle: "Plasma Treatment"
-          body: |
-            **Scientific Intervention:**
-            We implemented a **Corona Discharge (Plasma)** station on the line, bombarding the surface to raise energy levels >48 Dyne/cm.
+        During Pilot Validation for the PCII (D-Control) Fader Bank, the cosmetic
+        overlay began delaminating from the sub-chassis.
 
-            **The Result:**
-            Adhesion strength increased by **400%**. We moved from "Adhesive Failure" to "Cohesive Failure" (the foam tore before the glue let go). Documented in **Deviation #8777**.
-      data:
-        layout: "masonry"
-        images:
-          - src: "/assets/r2/d-control/bubbles/01_intro/DControlES-xlarge-xl.webp"
-            width: 1920
-            height: 1440
-            aspectRatio: 1.33
-            alt: "D-Control Pilot Unit"
-          - src: "/assets/r2/d-control/bubbles/01_intro/full_big-md.webp"
-            width: 800
-            height: 600
-            aspectRatio: 1.33
-            alt: "Fader Bank Detail"
-    - id: "02_fader_wars"
-      type: "gallery"
-      deck:
-        - title: "The Fader Wars"
-          subtitle: "Alps vs. P&G"
-          body: |
-            **The Conflict:**
-            Users loved the legacy P&G faders, but supply issues forced a transition to **Alps** components originally sourced for the Danko project.
 
-            **The Physics Problem:**
-            The Alps faders were physically different. They didn't fit the Buckley chassis envelope.
+        **The Impact:**
 
-            **The Engineering Hack:**
-            Me and Marc S. engineered a retrofit: we **rotated the faders 180 degrees** and redesigned the metal top plate to accommodate the inverted footprint. This allowed us to keep the existing sheet metal tooling while solving the supply chain bottleneck.
-      data:
-        layout: "masonry"
-        images:
-          - src: "/assets/r2/d-control/bubbles/02_process_control/PCll_Rendering-lg.webp"
-            width: 1280
-            height: 960
-            aspectRatio: 1.33
-            alt: "Fader Integration Render"
-    - id: "03_thermal_bridge"
-      type: "gallery"
-      deck:
-        - title: "The Meltdown"
-          subtitle: "Vegas Mode Thermal Runaway"
-          body: |
-            **The Load:**
-            With **3,000 LEDs** and **32 motorized faders** firing in "Vegas Mode," the enclosed chassis became a kiln. The internal PSU heatsink hit **56°C**, threatening component life.
+        *   **Functional Failure:** The peeling overlay blocked the path of the motorized
+        faders.
 
-            **The Thermal Bridge:**
-            Marketing forbade fans. My solution was to use the chassis itself as a giant radiator. I designed a custom **aluminum thermal bridge** that physically connected the PSU hot spots to the external metal skin.
+        *   **Brand Failure:** This was a $30k+ console; peeling stickers were unacceptable.
 
-            **The Scoreboard:**
-            Surface temperature stabilized at **31°C**, keeping internal components safely under their 60°C max rating.
-      data:
-        layout: "masonry"
-        images:
-          - src: "/assets/r2/d-control/bubbles/02_process_control/PCll_Front-lg.webp"
-            width: 1280
-            height: 960
-            aspectRatio: 1.33
-            alt: "Thermal Path Visualization"
-  narrative:
-    - step: "01_adhesion_crisis"
-      title: "Project Buckley"
-      subtitle: "2003-2004"
-      body: 'Code-named **"Buckley"**, this was the flagship. The goal was perfection. But when the cosmetic overlays started peeling off the $30k units, perfection felt a long way off. It was a classic vendor finger-pointing match until we brought in the forensics.'
-    - step: "02_fader_wars"
-      title: "The Feel Factor"
-      subtitle: "Supply Chain Judo"
-      body: "The Fader is the heart of the console. When we lost our primary vendor, we didn't just swap parts; we had to re-engineer the entire tactile interface. Rotating the component 180 degrees was a risky geometric puzzle, but it saved the tooling budget."
-    - step: "03_thermal_bridge"
-      title: "Silent Heat"
-      subtitle: "Thermal Management"
-      body: "In a recording studio, silence is golden. Fans were illegal. To dissipate the heat of 3,000 blazing LEDs, we turned the entire console body into a heatsink, proving that mass can be functional, not just structural."
-theme: "hyperspace"
+        *   **Schedule Failure:** The "Stop Ship" order was imminent.
+
+
+        **The Initial Theory:**
+
+        The vendor claimed "Bad Glue." They proposed switching adhesive vendors. I
+        rejected this as "Guesswork."'}
+    - {title: The Investigation, subtitle: Forensic DOE, body: '**Method A vs Method
+        B:**
+
+        I designed a Design of Experiments (DOE) to isolate the root cause.
+
+
+        *   **Variable 1 (Adhesive):** 3M 467MP vs. 3M 200MP.
+
+        *   **Variable 2 (Surface Prep):** IPA Wipe vs. Plasma Treatment.
+
+        *   **Variable 3 (Substrate):** ABS vs. PC/ABS blend.
+
+
+        **The Smoking Gun:**
+
+        Detailed forensic analysis revealed low **Surface Energy** (Dyne level) on
+        the molded chassis. The adhesive wasn''t failing; it was being repelled at
+        the molecular level.'}
+    data:
+      images: []
+      layout: masonry
+  - id: 01_intro
+    type: gallery
+    deck:
+    - {title: Intro, subtitle: '', body: ''}
+    data:
+      images:
+      - {src: /assets/r2/d-control/bubbles/01_intro/DControlES-xlarge-lg.webp, width: 1280,
+        height: 957, aspectRatio: 1.3375130616509927, alt: DControlES-xlarge}
+      - {src: /assets/r2/d-control/bubbles/01_intro/d-control-hero-01-xl.webp, width: 1920,
+        height: 1436, aspectRatio: 1.3370473537604457, alt: d-control-hero-01}
+      - {src: /assets/r2/d-control/bubbles/01_intro/full_big-md.webp, width: 800,
+        height: 408, aspectRatio: 1.9607843137254901, alt: full_big}
+      layout: masonry
+  - id: 02_process_control
+    type: gallery
+    deck:
+    - {title: The Solution, subtitle: Plasma & Dyne, body: '**The Fix:**
+
+        I mandated a **Corona Discharge (Plasma) Treatment** station on the assembly
+        line.
+
+
+        **The Science:**
+
+        *   **Before:** Substrate Surface Energy < 32 Dyne/cm (Hydrophobic).
+
+        *   **After:** Plasma bombardment raised Surface Energy > 48 Dyne/cm (Hydrophilic).
+
+
+        **The Result:**
+
+        Adhesion strength increased by **400%**. The failure mode shifted from "Adhesive
+        Failure" (glue stays on sticker) to "Cohesive Failure" (foam tears), proving
+        the bond was stronger than the material itself.'}
+    - {title: Process Lockdown, subtitle: Trust but Verify, body: '**Dyne Pen Protocol:**
+
+        I didn''t just install the machine; I installed the *law*.
+
+
+        *   **QC Step:** Every 50th unit required a "Dyne Pen" swipe test.
+
+        *   **Visual Standard:** If the ink beaded up (Low Energy), the line stopped.
+        If it wetted out (High Energy), the part passed.
+
+
+        This transformed an invisible chemical property into a visible Go/No-Go gauge
+        for the factory floor.'}
+    data:
+      images:
+      - {src: /assets/r2/d-control/bubbles/02_process_control/PCll_Front-xl.webp,
+        width: 1920, height: 1645, aspectRatio: 1.1671732522796352, alt: PCll_Front}
+      - {src: /assets/r2/d-control/bubbles/02_process_control/PCll_Rendering-xl.webp,
+        width: 1920, height: 1645, aspectRatio: 1.1671732522796352, alt: PCll_Rendering}
+      layout: masonry
+theme: RedactedDossier
+teamSize: Core Team of 18
 gallery: []
 documents: []
-links: [{ "name": "Digidesign Website", "url": "https://avid.com" }]
+links: []
+heroImage: /assets/r2/d-control/d-control-hero-01-xl.webp
 draft: false
-description: "Forensic resolution of the PCII Adhesion Crisis."
-duration: "Active"
-statusLabel: "Completed"
-skillGraph: "/assets/r2/d-control/skill-graph.svg"
-partGraph: "/assets/r2/d-control/part-graph.svg"
-impact: "Instituted Plasma Treatment line, increasing adhesion by 400% and solving critical peel failure."
+description: ''
+duration: Active
+statusLabel: Completed
+impact: ''
 ---
 
-import { YouTube } from "@astro-community/astro-embed-youtube";
-import ModelViewer from "@components/mdx/ModelViewer.astro";
 
-## The Challenge
+## D-Control
 
-> **Context:** Digidesign (Avid) set the standard for professional digital audio workstations (Pro Tools).
-
-The goal was to create a tactile control surface that provided professional mixers with precise, low-latency control over digital parameters.
-
-## Engineering Approach
-
-We adopted a rigorous engineering methodology to solve these problems.
-
-- **Integrated Strategy:** Integrated high-resolution motorized faders with custom touch-sensitive capacitive caps.
-- **Designed Strategy:** Designed a rigid, ergonomic chassis that minimized resonance and provided a solid 'console' feel.
-- **Engineered Strategy:** Engineered the internal layout to separate analog audio paths from digital control signals to minimize noise floor.
-- **Implemented Strategy:** Implemented a modular assembly strategy to allow for scalable product variants.
-
-## Impact
-
-The unit became a staple in professional recording studios, bridging the gap between analog workflow and digital flexibility.
-
-### Project Artifacts
-
-<div class="my-8">
-	<YouTube id="dQw4w9WgXcQ" />
-</div>
-<ModelViewer />
+> *Auto-generated scaffold from Multiverse Registry.*

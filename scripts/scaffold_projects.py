@@ -529,7 +529,7 @@ def process_projects():
         if not slug: continue
         
         # Normalize slug for filename
-        slug = slug.lower().strip().replace(' ', '-')
+        slug = slug.lower().strip().replace(' ', '-').rstrip('.')
         
         # --- PATHS ---
         mdx_path = os.path.join(OUTPUT_CONTENT_DIR, f"{slug}.mdx")
@@ -593,8 +593,8 @@ def process_projects():
             f.write("---\n")
             yaml.dump(fm, f, default_flow_style=None, sort_keys=False)
             f.write("---\n\n")
-            f.write(f"import {{ YouTube }} from '@astro-community/astro-embed-youtube';\n")
-            f.write(f"import ModelViewer from '@components/mdx/ModelViewer.astro';\n\n")
+            # f.write(f"import {{ YouTube }} from '@astro-community/astro-embed-youtube';\n")
+            # f.write(f"import ModelViewer from '@components/mdx/ModelViewer.astro';\n\n")
             f.write(f"## {fm['title']}\n\n")
             f.write(f"> *Auto-generated scaffold from Multiverse Registry.*\n")
 
@@ -608,4 +608,4 @@ if __name__ == "__main__":
     
     # Process
     process_projects()
-    print(f"DEBUG: Read {len(main)} rows from Main.csv")
+    # print(f"DEBUG: Read {len(main)} rows from Main.csv")

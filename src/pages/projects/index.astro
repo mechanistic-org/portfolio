@@ -17,7 +17,7 @@ const multiverseMap = new Map(multiverseData.nodes.map((n) => [n.id.toLowerCase(
 
 const rawProjects = await getCollection("projects");
 const projects = rawProjects
-	.filter(({ data }) => {
+	.filter(({ data, id }) => {
 		const hiddenIds = [
 			"classified",
 			"classified-alpha",
@@ -28,12 +28,12 @@ const projects = rawProjects
 			!data.draft &&
 			data.statusLabel !== "NO_DATA" &&
 			(data as any).impact !== "NO_DATA" &&
-			!hiddenIds.includes(data.slug || (data as any).id)
+			!hiddenIds.includes(data.slug || (data as any).id || id)
 		);
 	})
 	.map((p) => {
 		// TRUTH INJECTION: Overlay Multiverse data onto MDX frontmatter
-		const node = multiverseMap.get((p.data.slug || p.slug).toLowerCase());
+		const node = multiverseMap.get((p.data.slug || p.id).toLowerCase());
 		if (node) {
 			// We modify the data object in memory for this render
 			if (node.client) p.data.client = node.client;

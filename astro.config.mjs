@@ -9,6 +9,7 @@ import AutoImport from "astro-auto-import";
 import icon from "astro-icon";
 import react from "@astrojs/react";
 import keystatic from "@keystatic/astro";
+import cloudflare from "@astrojs/cloudflare";
 
 /** @type {import('astro-expressive-code').AstroExpressiveCodeOptions} */
 const expressiveCodeOptions = {
@@ -33,11 +34,10 @@ const expressiveCodeOptions = {
 
 // https://astro.build/config
 export default defineConfig({
-	// ⚠️ CRITICAL: Must be "static" (Pure Static Output)
-	// Do NOT add `adapter: cloudflare()`. It will re-enable the broken "Hybrid" build
-	// and bloat the Worker with site code, causing deployment failures.
-	// See [docs/ARCHITECTURE.md].
-	output: "static",
+	// ⚠️ CRITICAL: Keystatic requires Server mode for API routes.
+	// We use the Cloudflare adapter to support this.
+	output: "server",
+	adapter: cloudflare(),
 	site: "https://www.eriknorris.com",
 	redirects: {
 		"/admin": "/keystatic",
@@ -53,7 +53,14 @@ export default defineConfig({
 
 	integrations: [
 		AutoImport({
-			imports: ["@components/Admonition/Admonition.astro", "@components/Cta/Newsletter.astro"],
+			imports: [
+				"@components/Admonition/Admonition.astro",
+				"@components/Cta/Newsletter.astro",
+				"@components/mdx/ModelViewer.astro",
+				{
+					"@astro-community/astro-embed-youtube": ["YouTube"],
+				},
+			],
 		}),
 		icon({
 			tdesign: [
@@ -87,7 +94,7 @@ export default defineConfig({
 			Image: false,
 			SVG: false,
 		}),
-		// keystatic(),
+		keystatic(),
 	],
 	vite: {
 		plugins: [tailwindcss()],

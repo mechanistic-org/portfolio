@@ -1,58 +1,35 @@
 ---
-title: "Portion Cup"
-slug: "portion-cup"
-date: "5/1/2021"
-endDate: "8/15/2021"
-employer: "Hyphen"
+title: Portion Cup
+slug: portion-cup
+date: '2021-05-01T00:00:00'
+endDate: '2021-08-15T00:00:00'
+employer: Hyphen
 client: []
-industry: "Other"
-category: "Electromechanical Assy"
-tools: ["Onshape"]
+industry: Robotics & Automation
+category: Electromechanical Assy
+tools: [Onshape]
 toolIcons: []
-production: "Mass Production"
-tags: ["CAD (Computer-Aided Design)", "Tolerance Analysis", "Testing Automation"]
-skillData: [{"name": "CAD (Computer-Aided Design)", "value": 50.3, "benchmark": 44.9}, {"name": "Tolerance Analysis", "value": 45.5, "benchmark": 40.0}, {"name": "Testing Automation", "value": 45.0, "benchmark": 41.7}, {"name": "Product Testing", "value": 43.7, "benchmark": 39.7}, {"name": "Prototyping", "value": 43.5, "benchmark": 46.7}, {"name": "Usability Testing", "value": 43.4, "benchmark": 39.6}]
-additionalSkills: ["CAD (Computer-Aided Design)", "Tolerance Analysis", "Testing Automation", "Product Testing", "Prototyping", "Usability Testing", "Materials Knowledge", "Iterative Prototyping", "Design for Manufacturing (DFM)", "Reliability Testing"]
-phase_stats: {"Strategy": 5.3, "Design": 46.6, "Engineering": 15.9, "Production": 14.8}
+production: Concept
+tags: [CAD (Computer-Aided Design), Tolerance Analysis, Testing Automation, Product
+    Testing, Prototyping]
+skillData: []
+additionalSkills: []
+phase_stats: {Strategy: 0, Design: 0, Engineering: 0, Production: 0}
 cyberspace: null
-theme: "DataSheet"
-teamSize: "Unknown"
+theme: DataSheet
+teamSize: ''
 gallery: []
 documents: []
-links: [{"name": "Hyphen Website", "url": "https://hyphen.com"}]
-heroImage: "/assets/placeholders/blueprint.jpg" 
+links: []
+heroImage: /assets/r2/portion-cup/hero-sm.webp
 draft: false
-description: ""
-duration: "Active"
-statusLabel: "Completed"
-skillGraph: "/assets/r2/portion-cup/skill-graph.svg"
-partGraph: "/assets/r2/portion-cup/part-graph.svg"
-impact: ""
+description: ''
+duration: Active
+statusLabel: Completed
+impact: ''
 ---
-import { YouTube } from '@astro-community/astro-embed-youtube';
-import ModelViewer from '@components/mdx/ModelViewer.astro';
 
-## The Challenge
-> **Context:** Every salad needs dressing. But manually filling thousands of 2oz plastic cups is a repetitive motion injury waiting to happen.
 
-The Portion Cup module was designed to automate the high-volume dispensing of sauces into standard 2oz and 4oz polypropylene cups. The core engineering problem was **Denesting**.
-Plastic cups are stacked tightly. Static friction and vacuum lock make them stick together. If you grab one and get two, the machine jams. If you grab zero, you dump ranch dressing onto the conveyor belt.
+## Portion Cup
 
-## Engineering Approach
-We architected a standalone electromechanical module that could separate, fill, and stage cups for the main line.
-
-*   **Pneumatic Denester:** We moved away from mechanical cam fingers (which prone to crushing thin rims) and designed a vacuum-assist "pick and peel" mechanism. This used a localized air blast to break the vacuum seal between cups before the z-axis actuator pulled the bottom cup free.
-*   **Peristaltic Dosing:** To handle viscous fluids (Salsa, Ranch, Hummus) without cross-contamination, we utilized a peristaltic pump loop. This meant the machine never touched the food—only the FDA-approved tubing did.
-*   **Compact Footprint:** The entire unit had to fit within a 300mm wide slice of the line, requiring tight packaging of the pneumatics and control electronics.
-
-## Impact
-This module eliminated one of the most tedious stations on the line.
-*   **Reliability:** achieved >99.5% successful denest rate.
-*   **Hygiene:** Closed-loop tubing system reduced cleaning time from 20 minutes to 2 minutes (just swap the tube).
-
-### Project Artifacts
-:::note[Specs]
-*   **Throughput:** 15 cups/minute
-*   **Formats:** 2oz, 4oz
-*   **Pump Type:** Peristaltic
-:::
+> *Auto-generated scaffold from Multiverse Registry.*

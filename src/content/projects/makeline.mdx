@@ -1,60 +1,35 @@
 ---
-title: "Makeline"
-slug: "makeline"
-date: "5/1/2021"
-endDate: "8/24/2022"
-employer: "Hyphen"
+title: Makeline
+slug: makeline
+date: '2021-05-01T00:00:00'
+endDate: '2022-08-24T00:00:00'
+employer: Hyphen
 client: []
-industry: "Other"
-category: "Foodservice Automation"
-tools: ["Onshape"]
+industry: Robotics & Automation
+category: Foodservice Automation
+tools: [Onshape]
 toolIcons: []
-production: "Mass Production"
-tags: ["Design for Manufacturing (DFM)", "Tolerance Analysis", "Prototyping"]
-skillData: [{"name": "Design for Manufacturing (DFM)", "value": 63.9, "benchmark": 44.5}, {"name": "Tolerance Analysis", "value": 55.9, "benchmark": 40.0}, {"name": "Prototyping", "value": 54.9, "benchmark": 46.7}, {"name": "Iterative Prototyping", "value": 54.7, "benchmark": 46.6}, {"name": "Reliability Testing", "value": 54.5, "benchmark": 40.4}, {"name": "CAD (Computer-Aided Design)", "value": 52.2, "benchmark": 44.9}]
-additionalSkills: ["Design for Manufacturing (DFM)", "Tolerance Analysis", "Prototyping", "Iterative Prototyping", "Reliability Testing", "CAD (Computer-Aided Design)", "Usability Testing", "Simulation", "Materials Knowledge", "Testing Automation"]
-phase_stats: {"Strategy": 24.0, "Design": 211.2, "Engineering": 72.0, "Production": 67.2}
+production: Concept
+tags: [Design for Manufacturing (DFM), Tolerance Analysis, Prototyping, Iterative
+    Prototyping, Reliability Testing]
+skillData: []
+additionalSkills: []
+phase_stats: {Strategy: 0, Design: 0, Engineering: 0, Production: 0}
 cyberspace: null
-theme: "DataSheet"
-teamSize: "Unknown"
+theme: DataSheet
+teamSize: ''
 gallery: []
 documents: []
-links: [{"name": "Hyphen Website", "url": "https://hyphen.com"}]
-heroImage: "/assets/placeholders/tech-2.jpg" 
+links: []
+heroImage: /assets/r2/makeline/hero-sm.webp
 draft: false
-description: ""
-duration: "1.3 Years"
-statusLabel: "Completed"
-skillGraph: "/assets/r2/makeline/skill-graph.svg"
-partGraph: "/assets/r2/makeline/part-graph.svg"
-impact: ""
+description: ''
+duration: Active
+statusLabel: Completed
+impact: ''
 ---
-import { YouTube } from '@astro-community/astro-embed-youtube';
-import ModelViewer from '@components/mdx/ModelViewer.astro';
 
-## The Challenge
-> **Context:** The Makeline was not just a machine; it was a factory in a box. The core challenge was **System Integration**.
 
-While individual modules (Dispensers) solved the physics of moving ingredients, the Makeline had to orchestrate them. We had to coordinate 350+ actuators, managing power distribution, thermal loads, and CAN bus traffic, all within a violently wash-down sanitary environment.
-The failure mode wasn't "It broke"—it was "Latency drift caused the guacamole to miss the bowl by 10ms."
+## Makeline
 
-## Engineering Approach
-My role shifted from "Component Designer" to "System Architect." I treated the mechanical assembly as a physical network topology.
-
-*   **Modular Architecture:** We decoupled the "Payload Modules" (Dispensers) from the "Chassis" (Power/Data/Motion). This allowed parallel development: The chassis team could optimize frame rigidity and cable routing while the dispenser team iterated on portion accuracy.
-*   **The "Nervous System":** We developed a unified cabling harness that was both modular and IP69K waterproof. This wasn't just "wiring"; it was designing a physical API that enforced correct assembly.
-*   **Integration Testing:** I built the "Iron Bird" rig—a skeleton chassis that allowed us to test full-system electrical and firmware loads before the actual stainless steel frame had even returned from the fab.
-
-## Impact
-The system achieved a throughput of **350 meals per hour**, running autonomously for 4-hour peak shifts.
-
-*   **Reliability:** The modular approach reduced Mean Time To Repair (MTTR) from hours to minutes (hot-swappable modules).
-*   **Scalability:** The architecture became the foundation for Hyphen's entire product line, scaling from "Burrito Lines" to "Salad Stations" without redesigning the core chassis.
-
-### Project Artifacts
-:::note[System Stats]
-*   **Actuators:** >350
-*   **Voltage:** 48V DC Bus
-*   **Comms:** CANOpen
-*   **Sanitary Rating:** IP69K / NSF-8
-:::
+> *Auto-generated scaffold from Multiverse Registry.*

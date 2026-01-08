@@ -245,7 +245,7 @@ export default config({
 		projects: collection({
 			label: "Projects",
 			slugField: "title",
-			path: "src/content/projects/*", // Flat files in src/content/projects/
+			path: "src/content/projects/*/", // Folders in src/content/projects/
 			columns: ["title", "industry", "date"],
 			entryLayout: "content",
 			format: { contentField: "content" },
@@ -261,10 +261,15 @@ export default config({
 					label: "Description",
 					multiline: true,
 				}),
+				draft: fields.checkbox({
+					label: "Draft",
+					description: "Set this project as draft to prevent it from being published.",
+				}),
 				date: fields.date({ label: "Start Date" }),
 				endDate: fields.date({ label: "End Date" }),
 				industry: fields.text({ label: "Industry" }),
 				category: fields.text({ label: "Category" }),
+				production: fields.text({ label: "Production Status" }),
 				employer: fields.text({ label: "Employer" }),
 
 				// Arrays
@@ -280,18 +285,130 @@ export default config({
 					label: "Tools",
 					itemLabel: (props) => props.value,
 				}),
+				toolIcons: fields.array(fields.text({ label: "Icon Code" }), {
+					label: "Tool Icons",
+					itemLabel: (props) => props.value,
+				}),
+				// Legacy/Metadata Fields
+				teamSize: fields.text({ label: "Team Size" }),
+				theme: fields.text({ label: "Theme" }),
+				duration: fields.text({ label: "Duration" }),
+				statusLabel: fields.text({ label: "Status Label" }),
+				impact: fields.text({ label: "Impact" }),
 
-				// Complex Arrays (Skills & Gallery)
-				skillData: fields.array(
+				// Complex Objects
+				phase_stats: fields.object({
+					Strategy: fields.number({ label: "Strategy" }),
+					Design: fields.number({ label: "Design" }),
+					Engineering: fields.number({ label: "Engineering" }),
+					Production: fields.number({ label: "Production" }),
+				}),
+
+				links: fields.array(
 					fields.object({
-						name: fields.text({ label: "Skill Name" }),
-						value: fields.number({ label: "Proficiency (%)" }),
+						name: fields.text({ label: "Name" }),
+						url: fields.url({ label: "URL" }),
 					}),
 					{
-						label: "Skill Matrix",
-						itemLabel: (props) => `${props.fields.name.value} (${props.fields.value.value}%)`,
+						label: "Links",
+						itemLabel: (props) => props.fields.name.value,
 					},
 				),
+
+				documents: fields.array(
+					fields.object({
+						label: fields.text({ label: "Label" }),
+						url: fields.text({ label: "Path" }),
+					}),
+					{
+						label: "Documents",
+						itemLabel: (props) => props.fields.label.value,
+					},
+				),
+
+				// Cyberspace (Scrollytelling Config)
+				cyberspace: fields.object({
+					layout: fields.text({ label: "Layout" }),
+					stickies: fields.array(
+						fields.object({
+							id: fields.text({ label: "ID" }),
+							type: fields.text({ label: "Type" }),
+							title: fields.text({ label: "Title" }),
+
+							// Slide Deck
+							deck: fields.array(
+								fields.object({
+									title: fields.text({ label: "Title" }),
+									subtitle: fields.text({ label: "Subtitle" }),
+									body: fields.text({ label: "Body", multiline: true }),
+								}),
+								{
+									label: "Deck",
+									itemLabel: (props) => props.fields.title.value || "Slide",
+								},
+							),
+
+							// Data Payload (Union of all potential fields)
+							data: fields.object({
+								// Gallery Props
+								layout: fields.text({ label: "Layout" }),
+								columns: fields.number({ label: "Columns" }),
+								scattered: fields.checkbox({ label: "Scattered" }), // Added Field
+								featuredIndices: fields.array(fields.number({ label: "Index" }), {
+									label: "Featured Indices",
+									itemLabel: (props) => props.value?.toString() || "0",
+								}), // Added Field
+
+								images: fields.array(
+									fields.object({
+										src: fields.text({ label: "Src" }),
+										title: fields.text({ label: "Title" }),
+										description: fields.text({ label: "Description" }),
+										href: fields.text({ label: "Link" }),
+										width: fields.number({ label: "Width" }),
+										height: fields.number({ label: "Height" }),
+										aspectRatio: fields.number({ label: "Aspect Ratio" }),
+										alt: fields.text({ label: "Alt" }),
+									}),
+									{
+										label: "Images",
+										itemLabel: (props) => props.fields.src.value || "Image",
+									},
+								),
+
+								// Model Props
+								modelSrc: fields.text({ label: "Model Src" }),
+								poster: fields.text({ label: "Poster" }),
+								cameraOrbit: fields.text({ label: "Camera Orbit" }),
+								fieldOfView: fields.text({ label: "Field of View" }),
+
+								// Nested Metadata (Legacy)
+								data: fields.object({
+									title: fields.text({ label: "Title" }),
+									source: fields.text({ label: "Source" }),
+								}),
+							}),
+						}),
+						{
+							label: "Stickies",
+							itemLabel: (props) => props.fields.id.value || "Sticky",
+						},
+					),
+
+					// Legacy "Split Brain" Narrative (Text separated from Stickies)
+					narrative: fields.array(
+						fields.object({
+							step: fields.text({ label: "Step ID" }),
+							title: fields.text({ label: "Title" }),
+							subtitle: fields.text({ label: "Subtitle" }),
+							body: fields.text({ label: "Body", multiline: true }),
+						}),
+						{
+							label: "Legacy Narrative",
+							itemLabel: (props) => props.fields.step.value || "Step",
+						},
+					),
+				}),
 
 				gallery: fields.array(
 					fields.object({

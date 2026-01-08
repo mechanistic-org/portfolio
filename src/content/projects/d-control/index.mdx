@@ -1,0 +1,151 @@
+---
+title: "D-Control"
+date: "8/1/2004"
+endDate: "3/1/2005"
+employer: "Digidesign"
+client: []
+industry: "Other"
+category: "Control Surface"
+heroImage: "/assets/r2/d-control/d-control-hero-01-xl.webp"
+teamSize: "18"
+tools: ["ProEngineer"]
+toolIcons: ["ptc"]
+production: "Mass Production"
+tags:
+  [
+    "Iterative Prototyping",
+    "Prototyping",
+    "Tolerance Analysis",
+    "Project Buckley",
+  ]
+phase_stats:
+  { "Strategy": 10.6, "Design": 93.3, "Engineering": 31.8, "Production": 29.7 }
+cyberspace:
+  layout: "linear"
+  stickies:
+    - id: "01_adhesion_crisis"
+      type: "gallery"
+      deck:
+        - title: "The Crisis"
+          subtitle: "Paint Delamination"
+          body: |
+            **The Failure:**
+            During Pilot Validation, the cosmetic overlay on the Fader Bank began peeling. This was not just a blemish; it blocked the motorized faders, triggering a potential **Stop Ship** order.
+
+            **The Investigation:**
+            Vendor PPI blamed "Bad Glue." I rejected this as guesswork. **Deviation #1212** confirmed the parts arrived damaged out of the box. Forensic analysis revealed the root cause: Low Surface Energy (&lt;32 Dyne/cm) on the molded chassis was repelling the adhesive.
+        - title: "The Fix"
+          subtitle: "Plasma Treatment"
+          body: |
+            **Scientific Intervention:**
+            We implemented a **Corona Discharge (Plasma)** station on the line, bombarding the surface to raise energy levels >48 Dyne/cm.
+
+            **The Result:**
+            Adhesion strength increased by **400%**. We moved from "Adhesive Failure" to "Cohesive Failure" (the foam tore before the glue let go). Documented in **Deviation #8777**.
+      data:
+        layout: "masonry"
+        images:
+          - src: "/assets/r2/d-control/bubbles/01_intro/DControlES-xlarge-xl.webp"
+            width: 1920
+            height: 1440
+            aspectRatio: 1.33
+            alt: "D-Control Pilot Unit"
+          - src: "/assets/r2/d-control/bubbles/01_intro/full_big-md.webp"
+            width: 800
+            height: 600
+            aspectRatio: 1.33
+            alt: "Fader Bank Detail"
+    - id: "02_fader_wars"
+      type: "gallery"
+      deck:
+        - title: "The Fader Wars"
+          subtitle: "Alps vs. P&G"
+          body: |
+            **The Conflict:**
+            Users loved the legacy P&G faders, but supply issues forced a transition to **Alps** components originally sourced for the Danko project.
+
+            **The Physics Problem:**
+            The Alps faders were physically different. They didn't fit the Buckley chassis envelope.
+
+            **The Engineering Hack:**
+            Me and Marc S. engineered a retrofit: we **rotated the faders 180 degrees** and redesigned the metal top plate to accommodate the inverted footprint. This allowed us to keep the existing sheet metal tooling while solving the supply chain bottleneck.
+      data:
+        layout: "masonry"
+        images:
+          - src: "/assets/r2/d-control/bubbles/02_process_control/PCll_Rendering-lg.webp"
+            width: 1280
+            height: 960
+            aspectRatio: 1.33
+            alt: "Fader Integration Render"
+    - id: "03_thermal_bridge"
+      type: "gallery"
+      deck:
+        - title: "The Meltdown"
+          subtitle: "Vegas Mode Thermal Runaway"
+          body: |
+            **The Load:**
+            With **3,000 LEDs** and **32 motorized faders** firing in "Vegas Mode," the enclosed chassis became a kiln. The internal PSU heatsink hit **56°C**, threatening component life.
+
+            **The Thermal Bridge:**
+            Marketing forbade fans. My solution was to use the chassis itself as a giant radiator. I designed a custom **aluminum thermal bridge** that physically connected the PSU hot spots to the external metal skin.
+
+            **The Scoreboard:**
+            Surface temperature stabilized at **31°C**, keeping internal components safely under their 60°C max rating.
+      data:
+        layout: "masonry"
+        images:
+          - src: "/assets/r2/d-control/bubbles/02_process_control/PCll_Front-lg.webp"
+            width: 1280
+            height: 960
+            aspectRatio: 1.33
+            alt: "Thermal Path Visualization"
+  narrative:
+    - step: "01_adhesion_crisis"
+      title: "Project Buckley"
+      subtitle: "2003-2004"
+      body: 'Code-named **"Buckley"**, this was the flagship. The goal was perfection. But when the cosmetic overlays started peeling off the $30k units, perfection felt a long way off. It was a classic vendor finger-pointing match until we brought in the forensics.'
+    - step: "02_fader_wars"
+      title: "The Feel Factor"
+      subtitle: "Supply Chain Judo"
+      body: "The Fader is the heart of the console. When we lost our primary vendor, we didn't just swap parts; we had to re-engineer the entire tactile interface. Rotating the component 180 degrees was a risky geometric puzzle, but it saved the tooling budget."
+    - step: "03_thermal_bridge"
+      title: "Silent Heat"
+      subtitle: "Thermal Management"
+      body: "In a recording studio, silence is golden. Fans were illegal. To dissipate the heat of 3,000 blazing LEDs, we turned the entire console body into a heatsink, proving that mass can be functional, not just structural."
+theme: "hyperspace"
+gallery: []
+documents: []
+links: [{ "name": "Digidesign Website", "url": "https://avid.com" }]
+draft: false
+description: "Forensic resolution of the PCII Adhesion Crisis."
+duration: "Active"
+statusLabel: "Completed"
+impact: "Instituted Plasma Treatment line, increasing adhesion by 400% and solving critical peel failure."
+---
+
+
+## The Challenge
+
+> **Context:** Digidesign (Avid) set the standard for professional digital audio workstations (Pro Tools).
+
+The goal was to create a tactile control surface that provided professional mixers with precise, low-latency control over digital parameters.
+
+## Engineering Approach
+
+We adopted a rigorous engineering methodology to solve these problems.
+
+- **Integrated Strategy:** Integrated high-resolution motorized faders with custom touch-sensitive capacitive caps.
+- **Designed Strategy:** Designed a rigid, ergonomic chassis that minimized resonance and provided a solid 'console' feel.
+- **Engineered Strategy:** Engineered the internal layout to separate analog audio paths from digital control signals to minimize noise floor.
+- **Implemented Strategy:** Implemented a modular assembly strategy to allow for scalable product variants.
+
+## Impact
+
+The unit became a staple in professional recording studios, bridging the gap between analog workflow and digital flexibility.
+
+### Project Artifacts
+
+<div class="my-8">
+	<YouTube id="dQw4w9WgXcQ" />
+</div>
+<ModelViewer />

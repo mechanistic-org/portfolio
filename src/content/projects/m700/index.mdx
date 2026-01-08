@@ -1,0 +1,73 @@
+---
+title: "M700"
+date: "8/1/2010"
+endDate: "7/1/2011"
+employer: "Kaleidescape"
+client: []
+industry: "Other"
+category: "Robotics / Disc Vault"
+tools: ["ProEngineer"]
+toolIcons: ["ptc"]
+production: "Mass Production"
+tags: ["Problem Solving", "Iterative Prototyping", "Prototyping"]
+phase_stats:
+  { "Strategy": 16.7, "Design": 147.0, "Engineering": 50.1, "Production": 46.8 }
+cyberspace: null
+theme: "DataSheet"
+teamSize: "Unknown"
+gallery: []
+documents: []
+links: [{ "name": "Kaleidescape Website", "url": "https://kaleidescape.com" }]
+heroImage: "/assets/placeholders/abstract.jpg"
+draft: false
+description: "KVAULT-M700 Disc Vault"
+duration: "Active"
+statusLabel: "Completed"
+impact: ""
+---
+
+
+## The Challenge
+
+> **Context:** Legal requirements meant users had to have the physical disc present to play the digital copy.
+
+The M700 Disc Vault was a **Optical Jukebox** that held 320 discs.
+
+- **Robotics:** It needed to automatically ingest, identify, and catalog discs dropped into the slot by a user.
+- **Reliability:** The mechanism had to handle thousands of load/unload cycles without scratching a disc or jamming.
+
+## Engineering Approach
+
+I worked on the "Picker" mechanism—the robotic hand that grabbed the disc.
+
+- **Compliance:** The gripper had built-in mechanical compliance to tolerate misaligned discs (up to 2mm) without jamming.
+- **Sensor Saturation:** We used IR break-beams to detect disc presence, but the highly reflective surface of Blu-rays caused false positives. I implemented a polarized filter system to kill the glare.
+
+### Forensic Engineering
+
+> **The "Vanishing" Disc (Mechanism Failure):**
+> Discs inserted backwards were invisible to the optical sensors, causing the robot to "double load" and jam.
+>
+> - **The Fix:** Redesigned the pinch roller assembly with **double-strength springs** and **solid mounts** (replacing rubber grommets) to prevent shaft deflection under higher load.
+> - **The "Butter Knife" Protocol:** Field reports indicated EMI gaskets could deform into the slot path. Dealers had to use a specific technique with a shim (or butter knife) to clear the obstruction.
+
+### Team Orbit
+
+- **Engineering Lead:** Erik Norris
+- **Mechanisms:** Nathan Forster
+- **Robotics Firmware:** Anton Markov
+- **Manufacturing:** Sanmina
+
+### Success Metrics
+
+- **$0.97/unit Savings:** Reduced spring costs from ~$5.00 to ~$4.00 (with roadmap to &lt;$1.00) by qualifying production fourslide tooling at Scandic.
+- **3 Million Cycles:** Reliability validation achieved across 3,200 deployed units.
+
+### Project Artifacts
+
+:::note[Specs]
+
+- **Capacity:** 320 Discs
+- **Robot:** 3-Axis Cartesian
+- **Speed:** &lt;3s Load Time
+  :::

@@ -1,0 +1,51 @@
+---
+title: "Portion Cup"
+date: "5/1/2021"
+endDate: "8/15/2021"
+employer: "Hyphen"
+client: []
+industry: "Other"
+category: "Electromechanical Assy"
+tools: ["Onshape"]
+toolIcons: []
+production: "Mass Production"
+tags: ["CAD (Computer-Aided Design)", "Tolerance Analysis", "Testing Automation"]
+phase_stats: {"Strategy": 5.3, "Design": 46.6, "Engineering": 15.9, "Production": 14.8}
+cyberspace: null
+theme: "DataSheet"
+teamSize: "Unknown"
+gallery: []
+documents: []
+links: [{"name": "Hyphen Website", "url": "https://hyphen.com"}]
+heroImage: "/assets/placeholders/blueprint.jpg" 
+draft: false
+description: ""
+duration: "Active"
+statusLabel: "Completed"
+impact: ""
+---
+
+## The Challenge
+> **Context:** Every salad needs dressing. But manually filling thousands of 2oz plastic cups is a repetitive motion injury waiting to happen.
+
+The Portion Cup module was designed to automate the high-volume dispensing of sauces into standard 2oz and 4oz polypropylene cups. The core engineering problem was **Denesting**.
+Plastic cups are stacked tightly. Static friction and vacuum lock make them stick together. If you grab one and get two, the machine jams. If you grab zero, you dump ranch dressing onto the conveyor belt.
+
+## Engineering Approach
+We architected a standalone electromechanical module that could separate, fill, and stage cups for the main line.
+
+*   **Pneumatic Denester:** We moved away from mechanical cam fingers (which prone to crushing thin rims) and designed a vacuum-assist "pick and peel" mechanism. This used a localized air blast to break the vacuum seal between cups before the z-axis actuator pulled the bottom cup free.
+*   **Peristaltic Dosing:** To handle viscous fluids (Salsa, Ranch, Hummus) without cross-contamination, we utilized a peristaltic pump loop. This meant the machine never touched the food—only the FDA-approved tubing did.
+*   **Compact Footprint:** The entire unit had to fit within a 300mm wide slice of the line, requiring tight packaging of the pneumatics and control electronics.
+
+## Impact
+This module eliminated one of the most tedious stations on the line.
+*   **Reliability:** achieved >99.5% successful denest rate.
+*   **Hygiene:** Closed-loop tubing system reduced cleaning time from 20 minutes to 2 minutes (just swap the tube).
+
+### Project Artifacts
+:::note[Specs]
+*   **Throughput:** 15 cups/minute
+*   **Formats:** 2oz, 4oz
+*   **Pump Type:** Peristaltic
+:::

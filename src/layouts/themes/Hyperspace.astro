@@ -89,7 +89,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 		style="transform: translateY(-100%);"
 	>
 		<ProjectManifestHUD
-			data={entry.data}
+			data={{ ...entry.data, id: entry.id }}
 			nextProject={nextProject}
 			prevProject={prevProject}
 			metrics={metrics}
