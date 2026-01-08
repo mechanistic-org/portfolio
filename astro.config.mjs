@@ -32,16 +32,20 @@ const expressiveCodeOptions = {
 	},
 };
 
+const isProduction = process.env.CF_PAGES === "1";
+
 // https://astro.build/config
 export default defineConfig({
-	// ⚠️ CRITICAL: Keystatic requires Server mode for API routes.
-	// We use the Cloudflare adapter to support this.
-	output: "server",
+	// Use Static for Production (Cloudflare Pages) to avoid Worker limits
+	// Use Server for Local to support Keystatic API routes
+	output: isProduction ? "static" : "server",
 	adapter: cloudflare(),
 	site: "https://www.eriknorris.com",
-	redirects: {
-		"/admin": "/keystatic",
-	},
+	redirects: isProduction
+		? {}
+		: {
+				"/admin": "/keystatic",
+			},
 
 	i18n: {
 		defaultLocale: "en",
@@ -95,8 +99,8 @@ export default defineConfig({
 		// 	SVG: false,
 		// 	Exclude: [/digiME/],
 		// }),
-		keystatic(),
-	],
+		!isProduction ? keystatic() : null,
+	].filter(Boolean),
 	vite: {
 		plugins: [tailwindcss()],
 		optimizeDeps: {
