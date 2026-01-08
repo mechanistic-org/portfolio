@@ -87,14 +87,14 @@ export default defineConfig({
 		mdx(),
 		react(),
 		sitemap(),
-		compress({
-			HTML: true,
-			JavaScript: true,
-			CSS: false,
-			Image: false,
-			SVG: false,
-			Exclude: [/digiME/],
-		}),
+		// compress({
+		// 	HTML: true,
+		// 	JavaScript: true,
+		// 	CSS: false,
+		// 	Image: false,
+		// 	SVG: false,
+		// 	Exclude: [/digiME/],
+		// }),
 		keystatic(),
 	],
 	vite: {
