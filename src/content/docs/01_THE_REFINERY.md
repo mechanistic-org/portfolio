@@ -19,7 +19,7 @@ The "Hybrid" era of CSVs and manual markdown files is over. We have moved to a *
 
 1.  **Content (Text/Data):** Managed via **Keystatic** (`/keystatic`).
     - **Storage:** `src/content/projects/*.mdx`
-    - **Timeline:** `src/data/timeline/multiverse.json`
+    - **Timeline:** Dynamic via Collections (Metadata).
 2.  **Assets (Media):** Managed via **R2_MASTER**.
     - **Storage:** `D:\GitHub\eriknorris-workspace\R2_MASTER`
     - **Live:** `https://assets.eriknorris.com`
@@ -110,12 +110,12 @@ Even with Keystatic, the **Smelter** script remains vital for **Data Consistency
 
 **When to run it:**
 
-- After adding a new entry to `multiverse.json`.
+- After adding a new Project in Keystatic.
 - After adding new "Bubbles" (Image folders) to `R2_MASTER`.
 
 **What it does:**
 
-1.  **Reads** `multiverse.json` (The Timeline).
+1.  **Reads** Keystatic Collections (The Timeline).
 2.  **Scans** your Asset Vault for new folders.
 3.  **Injects** the "Cyberspace" JSON blob into your Project Frontmatter.
 4.  **Ensures** every timeline node has a corresponding MDX file.

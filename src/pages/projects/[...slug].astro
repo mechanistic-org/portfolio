@@ -1,6 +1,6 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
-import multiverseData from "../../data/timeline/multiverse.json";
+import { getMultiverseData } from "@/utils/getMultiverseData";
 
 export const prerender = true;
 
@@ -17,6 +17,8 @@ import RedactedDossier from "@layouts/themes/RedactedDossier.astro";
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
 	const projects = await getCollection("projects");
+	const multiverseData = await getMultiverseData();
+
 	const paths: any[] = projects.map((entry) => ({
 		params: { slug: entry.id },
 		props: { entry, placeholderData: null },

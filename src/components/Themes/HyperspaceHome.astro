@@ -3,6 +3,9 @@ import Layout from "@layouts/BaseLayout.astro";
 import HyperspaceHUD from "@components/Nav/HyperspaceHUD.astro";
 import WorkRealm from "../../components/Realms/WorkRealm";
 import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
+import { getMultiverseData } from "@/utils/getMultiverseData";
+
+const multiverseData = await getMultiverseData();
 ---
 
 <Layout title="Erik Norris | Senior Staff ME / Designer" description="System Index" hideNav={true}>
@@ -30,7 +33,7 @@ import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
 		id="work-layer"
 		class="fixed inset-0 z-10 h-full w-full bg-black transition-opacity duration-300"
 	>
-		<WorkRealm client:only="react" />
+		<WorkRealm client:only="react" nodes={multiverseData.nodes} />
 	</div>
 </Layout>
 

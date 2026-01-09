@@ -1,20 +1,16 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import UnifiedDashboard from "@components/Dashboard/UnifiedDashboard";
-import skillsData from "../../data/skills.json";
+import { getCareerTimeline } from "@/utils/getCareerTimeline";
+import { getMultiverseData } from "@/utils/getMultiverseData";
 import { getCollection } from "astro:content";
-
-import workHistory from "../../data/work_history.json";
 import specs from "../../data/specs.json";
-import multiverseData from "../../data/timeline/multiverse.json";
 
 // Fetch Global Data
-// For the "Mega" view, we want to show the "Ideal" (Dreamjob) vs the "Reality" (Projects)
-// We'll pass the "Dreamjob" skill set as the primary data visualization source
-const dreamJob = skillsData.find((s) => s.name === "dreamjob")?.skills || {};
-
-// We can also aggregate project stats here if needed
+const timelineItems = await getCareerTimeline();
+const multiverseData = await getMultiverseData();
 const projects = await getCollection("projects");
+
 const totalProjects = projects.length;
 const activeProjects = projects.filter(
 	// @ts-ignore
@@ -31,22 +27,29 @@ projects.forEach((p) => {
 		totalParts += Object.values(stats).reduce((a, b) => a + b, 0);
 	}
 });
-// Start: 1985 (from first entry in json)
-// End: Now
-const startYear = 1985; // Hardcoded from data/work_history.json
+
+const startYear = 1985;
 const currentYear = new Date().getFullYear();
 const totalYears = currentYear - startYear;
 
+// Map timelineItems to Work History format for Dashboard
+const workHistory = timelineItems.map((item) => ({
+	company: item.cardTitle.split("@")[1]?.trim() || "Independent",
+	title: item.cardTitle.split("@")[0]?.trim() || "Engineer",
+	start: item.title.split("-")[0]?.trim() || "2000",
+	end: item.title.split("-")[1]?.trim() || "Present",
+	description: item.cardSubtitle,
+}));
+
 const dashboardData = {
-	skillData: Object.entries(dreamJob).map(([name, value]) => ({ name, value, fullMark: 100 })),
-	// Mocking phase stats for the Mega View (Global Average) or Real Aggregation
+	// Mock Dreamjob for now (Can be hydrated from a specific 'manifesto' project later)
+	skillData: [],
 	phase_stats: {
 		Strategy: 25,
 		Design: 35,
 		Engineering: 30,
 		Production: 10,
 	},
-	// Data God Extensions
 	history: workHistory,
 	specs: specs,
 	multiverseData: multiverseData,

@@ -73,7 +73,7 @@ const ExplodedView: React.FC<WrapperProps> = ({ data }) => {
 			.force(
 				"link",
 				d3
-					.forceLink(links)
+					.forceLink<AssemblyNode, AssemblyLink>(links)
 					.id((d: any) => d.id)
 					.distance(50),
 			)
@@ -169,7 +169,10 @@ const ExplodedView: React.FC<WrapperProps> = ({ data }) => {
 		});
 
 		// Cleanup
-		return () => simulation.stop();
+		// Cleanup
+		return () => {
+			simulation.stop();
+		};
 	}, [data, dimensions]);
 
 	return (

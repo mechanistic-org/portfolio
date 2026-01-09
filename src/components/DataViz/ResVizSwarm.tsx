@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useMemo } from "react";
 import * as d3 from "d3";
-import multiverseRequest from "../../data/timeline/multiverse.json";
+import type { MultiverseNode } from "@/types/MultiverseTypes";
 
 // --- Types ---
 interface NodeData extends d3.SimulationNodeDatum {
@@ -21,6 +21,7 @@ interface NodeData extends d3.SimulationNodeDatum {
 }
 
 interface ResVizSwarmProps {
+	nodes: MultiverseNode[]; // NEW PROP
 	onNodeSelect?: (node: any) => void;
 	externalHoverId?: string;
 	shouldStart?: boolean;
@@ -31,6 +32,7 @@ import { getEntityColor } from "../../config/color_registry";
 const DEFAULT_COLOR = "#666666";
 
 export default function ResVizSwarm({
+	nodes: rawNodes, // Destructure prop
 	onNodeSelect,
 	externalHoverId,
 	shouldStart = false,
@@ -53,6 +55,8 @@ export default function ResVizSwarm({
 
 	// --- Process Data ---
 	const nodes = useMemo(() => {
+		if (!rawNodes) return [];
+
 		const now = new Date();
 		const hiddenIds = [
 			"classified",
@@ -61,7 +65,7 @@ export default function ResVizSwarm({
 			"electronic-battery-lock",
 		];
 
-		return (multiverseRequest.nodes as any[])
+		return rawNodes
 			.filter((d) => !hiddenIds.includes(d.id))
 			.map((d) => {
 				const start = new Date(d.start_date);

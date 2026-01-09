@@ -58,7 +58,8 @@ These are active AI/External resources that contain "Source of Truth" data not i
   - [ ] **Deep HUD Verification:** (ACTIVE) Confirm budget/COGS metrics appear in `dreamjob` page.
 
 * **Key Decision (Physics):** "Goldilocks" settings are `vy: -50`, `friction: 0.05`. Do not increase friction without vertically scaling velocity.
-* **Key Decision (Data):** `multiverse.json` is the Single Source of Truth.
+* **Key Decision (Viz-Deprecated):** `ArchiveSankey` and `LivingGantt` have been DEPRECATED ("little/no value") and removed from the active UI to simplify the experience.
+* **Key Decision (Data):** `multiverse.json` and `skills.json` have been **DELETED**. The "Keystatic -> Astro Collections -> Dynamic Prop Injection" pipeline is the ONLY source of truth.
 * **Key Decision (Architecture):** **"The Law of The Vault"** - `eriknorris-assets\R2_STAGING` is the ONLY Production Vault. `portfolio_working` is the ONLY Staging Input. `eriknorris-workspace\R2_MASTER` is DEAD (Legacy).
 * **Key Decision (Protocol):** **"Operation Chronos"** - Use NotebookLM to generate `HUNTING_LIST.md` (dense tables) and export to HTML for physical printing ("Low Friction" asset retrieval).
 * **Key Decision (Mining):** **"The MailStore Pivot"** - Python COM is too fragile for 15k+ item queries. Use MailStore Home to Index -> Search -> Export.

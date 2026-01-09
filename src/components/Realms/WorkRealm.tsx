@@ -3,10 +3,14 @@ import { getAssetUrl } from "../../utils/assets";
 // ... existing imports
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import ResVizSwarm from "../DataViz/ResVizSwarm";
-import multiverseData from "../../data/timeline/multiverse.json";
 import ProjectModal from "../Projects/ProjectModal";
+import type { MultiverseNode } from "@/types/MultiverseTypes";
 
-export default function WorkRealm() {
+interface WorkRealmProps {
+	nodes: MultiverseNode[];
+}
+
+export default function WorkRealm({ nodes: rawNodes }: WorkRealmProps) {
 	const [activeNode, setActiveNode] = useState<any | null>(null);
 	const [selectedProject, setSelectedProject] = useState<any | null>(null);
 	const [isHoveringStrip, setIsHoveringStrip] = useState(false);
@@ -48,10 +52,11 @@ export default function WorkRealm() {
 	];
 
 	const sortedNodes = useMemo(() => {
-		return [...multiverseData.nodes]
+		if (!rawNodes) return [];
+		return [...rawNodes]
 			.filter((node) => !hiddenIds.includes(node.id))
 			.sort((a, b) => new Date(b.start_date).getTime() - new Date(a.start_date).getTime());
-	}, []);
+	}, [rawNodes]);
 
 	// Auto-scroll Fiche Strip when Swarm updates Active Node
 	// FIX: Use manual scrollTop to prevent Main Window "Page Jump" caused by scrollIntoView()
@@ -87,6 +92,7 @@ export default function WorkRealm() {
 					{/* Pass activeNode down so Swarm can highlight bubble when Strip is hovered */}
 					{/* Trigger physics only when visible */}
 					<ResVizSwarm
+						nodes={rawNodes}
 						onNodeSelect={setActiveNode}
 						externalHoverId={activeNode?.id}
 						shouldStart={isSwarmActive}

@@ -3,14 +3,16 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectDirectory from "../../components/Projects/ProjectDirectory.astro";
 import ProjectGrid from "../../components/Projects/ProjectGrid.astro";
-import SkillsGraph from "../../components/DataViz/SkillsGraph";
+
 import MultiverseGraph from "../../components/DataViz/MultiverseGraph";
 import TimelineStream from "../../components/DataViz/TimelineStream";
 import RadialTaxonomy from "../../components/DataViz/RadialTaxonomy";
 import ScrollCoordinator from "@components/Effects/ScrollCoordinator.astro";
 
 // Data import
-import multiverseData from "../../data/timeline/multiverse.json";
+import { getMultiverseData } from "@/utils/getMultiverseData";
+
+const multiverseData = await getMultiverseData();
 
 // Create a lookup map for the Multiverse (God Brain)
 const multiverseMap = new Map(multiverseData.nodes.map((n) => [n.id.toLowerCase(), n]));
@@ -87,12 +89,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 				>
 					<span class="i-tdesign-app text-sm"></span> Grid
 				</button>
-				<button
-					class="view-toggle flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-colors hover:bg-white/5 hover:text-white"
-					data-view="skills"
-				>
-					<span class="i-tdesign-chart-bubble text-sm"></span> Skills
-				</button>
+
 				<button
 					class="view-toggle flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-colors hover:bg-white/5 hover:text-white"
 					data-view="multiverse"
@@ -129,11 +126,6 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 		<!-- VIEW: GRID -->
 		<div id="view-grid" class="view-container hidden">
 			<ProjectGrid projects={projects} />
-		</div>
-
-		<!-- VIEW: SKILLS -->
-		<div id="view-skills" class="view-container hidden">
-			<SkillsGraph client:only="react" nodes={multiverseData.nodes} />
 		</div>
 
 		<!-- VIEW: MULTIVERSE -->

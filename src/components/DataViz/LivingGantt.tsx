@@ -1,30 +1,28 @@
 import React, { useMemo, useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
-import multiverseRequest from "../../data/timeline/multiverse.json";
+import type { MultiverseNode } from "@/types/MultiverseTypes";
 
 // Type Definitions
-type ProjectNode = {
-	id: string;
-	name: string;
-	group: string; // Employer
-	start_date: string;
-	end_date: string;
-	skills: string[];
-	category: string;
-};
+// Reusing MultiverseNode for consistency, but mapped locally if needed.
+// Actually, let's just use MultiverseNode directly.
 
 import { getEntityColor } from "../../config/color_registry";
 
 const DEFAULT_COLOR = "#333";
 
-export default function LivingGantt() {
+interface LivingGanttProps {
+	nodes: MultiverseNode[];
+}
+
+export default function LivingGantt({ nodes: rawNodes }: LivingGanttProps) {
 	// 1. Process Data
 	const projects = useMemo(() => {
+		if (!rawNodes) return [];
 		// Sort by start date (Oldest -> Newest) for Left -> Right flow
-		return (multiverseRequest.nodes as ProjectNode[]).sort(
+		return [...rawNodes].sort(
 			(a, b) => new Date(a.start_date).getTime() - new Date(b.start_date).getTime(),
 		);
-	}, []);
+	}, [rawNodes]);
 
 	// Time Range
 	const minYear = 2007;

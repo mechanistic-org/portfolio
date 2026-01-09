@@ -45,7 +45,7 @@ python scripts/scaffold_projects.py
 
 **Triggers (When to Run):**
 
-1.  **New Timeline Node:** You added an entry to `multiverse.json`.
+1.  **New Timeline Node:** You created a new Project in Keystatic.
 2.  **Asset Drop:** You added a new folder to `R2_MASTER`.
 
 > [!TIP]

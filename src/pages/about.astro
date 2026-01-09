@@ -5,8 +5,7 @@ import ScrollCoordinator from "@components/Effects/ScrollCoordinator.astro";
 
 // VIZ COMPONENTS
 // VIZ COMPONENTS
-import LivingGantt from "@components/DataViz/LivingGantt";
-import SkillsGraph from "@components/DataViz/SkillsGraph";
+
 import RadialTaxonomy from "@components/DataViz/RadialTaxonomy";
 
 // DATA
@@ -197,46 +196,18 @@ function getHash(str: string) {
 			<!-- VIEW: SYSTEM (Visualizations) -->
 			<div id="view-system" class="view-panel animate-in fade-in hidden duration-500">
 				<div class="space-y-12">
-					<!-- 1. The Living Gantt -->
-					<div class="relative overflow-hidden rounded-xl border border-white/10 bg-black/50">
-						<div class="absolute top-4 left-4 z-10 font-mono text-xs text-green-500">
-							> SYSTEM.TIMELINE_STREAM
-						</div>
-						<!-- Container height handled by LivingGantt (400vh) - Wait, we need to contain it?
-                             LivingGantt is 400vh tall to drive scroll. Embedding it here might break page flow length.
-                             Actually, that's Awesome. It makes this tab tall.
-                        -->
-						<div class="relative h-[80vh] w-full overflow-y-scroll border-b border-white/5">
-							<!-- LivingGantt expects to be in the main flow. 
-                                  If we put it in a container, we need to ensure it works.
-                                  Let's just use it natively.
-                             -->
-							<div class="mb-8 w-full p-12 text-center text-neutral-500">
-								<span class="i-tabler-mouse mx-auto mb-2 block animate-bounce text-2xl"></span>
-								Interactive Timeline Active
-							</div>
-							<LivingGantt client:visible />
-						</div>
-					</div>
+					{/* 1. The Living Gantt - REMOVED */}
 
 					<!-- 2. Skills & Taxonomy Grid -->
 					<div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-						<!-- Skills -->
-						<div
-							class="relative h-[600px] overflow-hidden rounded-xl border border-white/10 bg-black/50 p-4"
-						>
-							<div class="text-primary absolute top-4 left-4 z-10 font-mono text-xs">
-								> SYSTEM.SKILL_MATRIX
-							</div>
-							<SkillsGraph client:visible nodes={projectNodes} />
-						</div>
+						<!-- Skills REMOVED -->
 
 						<!-- Taxonomy -->
 						<div
 							class="relative h-[600px] overflow-hidden rounded-xl border border-white/10 bg-black/50 p-4"
 						>
 							<div class="absolute top-4 left-4 z-10 font-mono text-xs text-purple-400">
-								> SYSTEM.TAXONOMY_TREE
+								&gt; SYSTEM.TAXONOMY_TREE
 							</div>
 							<RadialTaxonomy client:visible data={hierarchyData} />
 						</div>

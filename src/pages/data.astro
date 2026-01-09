@@ -1,7 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import MultiverseGraph from "../components/DataViz/MultiverseGraph";
-import multiverseData from "../data/timeline/multiverse.json";
+import { getMultiverseData } from "@/utils/getMultiverseData";
+
+const multiverseData = await getMultiverseData();
 
 const title = "The Timeline Authority";
 const description = "Visualizing the Quantum Project Multiverse.";

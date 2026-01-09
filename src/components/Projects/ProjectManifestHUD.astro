@@ -1,19 +1,13 @@
 ---
-import { getEntry } from "astro:content";
-import multiverseData from "../../data/timeline/multiverse.json";
+import { getMultiverseData } from "@/utils/getMultiverseData";
+
+const multiverseData = await getMultiverseData();
 
 interface Props {
 	data: any;
 	nextProject?: any;
 	prevProject?: any;
-	// NEW: Metrics passed from layout
-	metrics?: {
-		cogs?: { value: string; label: string };
-		profitability?: { value: string; label: string };
-		governance?: { ecos: string[]; dcos: number };
-		interventions?: { count: number; label: string };
-		financial?: { toolingBudget?: number; toolingActual?: number };
-	};
+	metrics?: any;
 }
 
 const { data, nextProject, prevProject, metrics } = Astro.props;
@@ -22,29 +16,7 @@ const { data, nextProject, prevProject, metrics } = Astro.props;
 const dateVal = data.date || new Date();
 const isoDate = new Date(dateVal).toISOString().split("T")[0];
 
-// MULTIVERSE LOOKUP
-const targetId = data.id || data.slug || "";
-const node = multiverseData.nodes.find((n) => n.id.toLowerCase() === targetId.toLowerCase());
-
-let intCount = 0;
-let extCount = 0;
-
-if (node && node.team) {
-	// Provenance: Hydrated from Main.csv
-	intCount = node.team.internal || 0;
-	extCount = node.team.external || 0;
-} else {
-	// Fallback: Legacy Regex (for un-hydrated nodes)
-	const teamSizeStr = data.teamSize || "";
-	const intMatch = teamSizeStr.match(/INT\s*(\d+)/i);
-	const extMatch = teamSizeStr.match(/EXT\s*(\d+)/i);
-	if (intMatch) intCount = parseInt(intMatch[1], 10);
-	if (extMatch) extCount = parseInt(extMatch[1], 10);
-}
-
-// Cap dots for visual sanity (max ~20 dots per row before wrapping or scaling)
-const displayInt = Math.min(intCount, 40);
-const displayExt = Math.min(extCount, 25);
+const title = data.title || data.id || "Project";
 ---
 
 <div class="w-full border-b border-white/10 bg-black/95 transition-all duration-500">
@@ -119,14 +91,16 @@ const displayExt = Math.min(extCount, 25);
 				<span class="mr-2 text-neutral-600 uppercase">DATE</span>
 				<span class="font-bold text-white">{isoDate}</span>
 			</div>
-			<div class="rounded border border-emerald-500/30 bg-emerald-500/5 px-3 py-1">
-				<div
-					class="mb-0.5 text-[8px] leading-none font-bold tracking-wider text-emerald-500 uppercase"
-				>
-					Duration
-				</div>
-				<div class="font-mono text-sm leading-none font-bold text-white">{data.duration}</div>
-			</div>
+			{
+				data.duration && (
+					<div class="rounded border border-emerald-500/30 bg-emerald-500/5 px-3 py-1">
+						<div class="mb-0.5 text-[8px] leading-none font-bold tracking-wider text-emerald-500 uppercase">
+							Duration
+						</div>
+						<div class="font-mono text-sm leading-none font-bold text-white">{data.duration}</div>
+					</div>
+				)
+			}
 			<a
 				href={`/raw/${data.id || "v4-test"}`}
 				class="flex h-6 items-center justify-center rounded border border-[#2E5CFF]/30 bg-[#2E5CFF]/10 px-2 font-mono text-[10px] font-bold text-[#2E5CFF] transition-colors hover:bg-[#2E5CFF] hover:text-white"
@@ -136,150 +110,6 @@ const displayExt = Math.min(extCount, 25);
 		</div>
 	</div>
 
-	<!-- ROW 2: DEEP INTELLIGENCE (Condensed 5-Column Grid) -->
-	{
-		metrics && (
-			<div class="grid w-full grid-cols-1 divide-y divide-white/10 border-t border-b border-white/10 bg-neutral-900/50 pl-16 text-white md:grid-cols-5 md:divide-x md:divide-y-0">
-				{/* COL 1: ORBIT DATA (Herding Cats Viz) */}
-				<div class="group relative bg-black p-3">
-					<div class="absolute top-2 right-2 h-1 w-1 rounded-full bg-white/20" />
-					<div class="mb-1 text-[9px] font-bold tracking-wider text-neutral-500 uppercase">
-						Orbit
-					</div>
-					<div class="flex items-end justify-between">
-						<div class="flex flex-col">
-							<div class="font-mono text-[10px] leading-tight text-neutral-400">
-								{intCount > 0 ? "Team Composition" : "Orbit"}
-							</div>
-							{/* Visual "Cat Herding" Dots - Dynamic */}
-							<div class="mt-1.5 flex h-2 w-full max-w-[120px] flex-wrap content-start gap-0.5">
-								{Array.from({ length: displayInt }).map((_, i) => (
-									<div
-										class={`h-1.5 w-0.5 rounded-sm ${i < 6 ? "bg-white" : "bg-neutral-700"}`}
-										title={i < 6 ? "Core Team" : "Internal Resource"}
-									/>
-								))}
-								{displayExt > 0 && <div class="w-1" />}
-								{Array.from({ length: displayExt }).map((_, i) => (
-									<div
-										class="h-1.5 w-0.5 rounded-sm bg-orange-500"
-										title="Vendor / External Partner"
-									/>
-								))}
-							</div>
-						</div>
-						<div class="flex items-end gap-3 font-mono text-sm font-bold">
-							{intCount > 0 && (
-								<div class="text-right">
-									<span class="mb-0.5 block text-[8px] leading-none text-neutral-600">INT</span>
-									<span class="leading-none text-white">{intCount}</span>
-								</div>
-							)}
-							{extCount > 0 && (
-								<div class="text-right">
-									<span class="mb-0.5 block text-[8px] leading-none text-orange-500/70">EXT</span>
-									<span class="leading-none text-orange-500">{extCount}</span>
-								</div>
-							)}
-						</div>
-					</div>
-				</div>
-
-				{/* COL 3: COGS / PROFITABILITY */}
-				<div class="grid grid-cols-2 gap-4 bg-white/5 p-3">
-					<div>
-						<div class="flex flex-col">
-							<h1 class="font-mono text-xl font-bold tracking-tight text-white uppercase sm:text-2xl">
-								{data.id || data.slug || "UNKNOWN"}
-							</h1>
-							{node?.codename && (
-								<span class="text-accent/80 font-mono text-xs tracking-wider uppercase">
-									CN: {node.codename}
-								</span>
-							)}
-						</div>
-						<div class="mb-0.5 text-[9px] font-bold tracking-wider text-neutral-500 uppercase">
-							{metrics.cogs?.label || "COGS"}
-						</div>
-						<div class="font-mono text-sm font-bold text-white">{metrics.cogs?.value}</div>
-						{/* Only show Tooling Budget if legit (not D-Command Yield mode) */}
-						{metrics.financial?.toolingBudget !== undefined &&
-							metrics.financial.toolingBudget > 0 && (
-								<div class="mt-1 font-mono text-[9px] text-neutral-500">
-									$ {Math.round(metrics.financial.toolingBudget / 1000)} k Tooling
-								</div>
-							)}
-					</div>
-					<div class="border-l border-white/10 pl-4">
-						<div class="mb-0.5 text-[9px] font-bold tracking-wider text-neutral-500 uppercase">
-							{metrics.profitability?.label || "Margin"}
-						</div>
-						<div class="font-mono text-sm font-bold text-emerald-400">
-							{metrics.profitability?.value}
-						</div>
-						<div class="mt-1 font-mono text-[9px] text-emerald-900">89% IRR</div>
-					</div>
-				</div>
-
-				{/* COL 4: GOVERNANCE (Merged) */}
-				<div class="bg-white/2 p-3">
-					<div class="mb-1 text-[9px] font-bold tracking-wider text-neutral-500 uppercase">
-						Governance
-					</div>
-					<div class="mb-2 flex flex-wrap gap-1">
-						{metrics.governance?.ecos?.map((eco: any) => (
-							<span class="rounded border border-white/10 bg-white/5 px-1 font-mono text-[9px] text-neutral-300">
-								{eco}
-							</span>
-						))}
-					</div>
-					<div class="flex items-center justify-between">
-						<span class="text-[8px] text-neutral-600">{metrics.governance?.ecos?.length} ECOs</span>
-						<span class="rounded border border-red-500/30 bg-red-500/5 px-1 font-mono text-[9px] text-red-500">
-							{metrics.governance?.dcos} DCOs
-						</span>
-					</div>
-				</div>
-
-				{/* COL 5: INTERVENTIONS (Merged) */}
-				<div class="flex flex-col justify-center border-l border-white/10 bg-black/40 p-3">
-					<div class="mb-1 flex items-center gap-2">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="h-4 w-4 text-orange-500"
-							viewBox="0 0 24 24"
-							fill="currentColor"
-						>
-							<path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" />
-						</svg>
-						<span class="text-[9px] font-bold tracking-wider text-orange-500 uppercase">
-							Interventions
-						</span>
-					</div>
-					<div class="flex items-baseline gap-2">
-						<span class="font-mono text-xl leading-none font-bold text-white">
-							{metrics.interventions?.count}
-						</span>
-						<span class="text-[9px] leading-none text-neutral-400">
-							{metrics.interventions?.label || "Confirmed Saves"}
-						</span>
-					</div>
-				</div>
-
-				{/* COL 5: PRIMARY TOOLS (Moved to Far Right) */}
-				<div class="border-l-2 border-yellow-500 bg-black/80 p-3">
-					<div class="mb-1 text-[9px] font-bold tracking-wider text-yellow-500 uppercase">
-						Primary Tools
-					</div>
-					<div class="flex flex-wrap content-start gap-1">
-						{data.tools?.map((tool: string) => (
-							<div class="inline-block rounded border border-white/20 bg-white/10 px-1.5 py-0.5 font-mono text-[9px] leading-none whitespace-nowrap text-neutral-300">
-								{tool}
-							</div>
-						))}
-					</div>
-				</div>
-			</div>
-		)
-	}
+	<!-- ROW 2: DISABLED -->
+	<!-- Metrics Grid was causing Astro Compiler Crash. Disabled for stability. -->
 </div>

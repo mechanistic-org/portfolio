@@ -58,6 +58,12 @@ sidebar:
   - **[Documentation] Constitutional Sync:** Merged critical laws ("Sovereign Color", "Air Gap") from `AGENCY_MEMORY` into `03_THE_ENGINE_ROOM` to resolve "Split Brain" documentation.
   - **[Artifact] Onboarding Lite:** Created `ONBOARDING_QUICK.md` ("The 1-Liner") for rapid context hydration.
 
+- **[2026-01-08] The Legacy Data Purge (Event Horizon)**
+  - **[Cleanup] Multiverse Deletion:** Deleted `multiverse.json` and `skills.json` (The "Static Monolith"). Data is now purely dynamic, sourced from Content Collections.
+  - **[Refactor] Dynamic Injection:** Updated all components (`WorkRealm`, `ResVizSwarm`) to accept data via props, breaking the hard dependency on static JSON.
+  - **[UX] Simplification:** Deprecated `LivingGantt` and `ArchiveSankey` ("Little/No Value") to streamline the narrative experience.
+  - **[Architecture] Pure Hyperspace:** The "Hyperspace" theme now runs on a fully dynamic data mesh.
+
 - **[2026-01-07] Stabilization & Color Sovereignty**
   - **[Architecture] Sovereign Color Registry:** Finalized `src/config/color_registry.ts` as the single source of truth, replacing flexible but fragile CSV lookups.
   - **[Fix] SwarmFiche Regression:** Hardened `getEntityColor` logic to prevent D3 crashes on undefined inputs, restoring the Swarm visualization.

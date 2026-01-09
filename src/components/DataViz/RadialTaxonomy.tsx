@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
-import multiverseData from "../../data/timeline/multiverse.json";
 import type { MultiverseNode } from "@/types/MultiverseTypes";
 import { getEntityColor } from "../../config/color_registry";
 
@@ -40,13 +39,25 @@ const buildHierarchy = (nodes: any[]): HierarchyNode => {
 	};
 };
 
-const RadialTaxonomy: React.FC = () => {
+interface RadialTaxonomyProps {
+	data?: HierarchyNode | { nodes: MultiverseNode[] }; // Accept pre-built hierarchy OR raw nodes
+}
+
+const RadialTaxonomy: React.FC<RadialTaxonomyProps> = ({ data: inputData }) => {
 	const svgRef = useRef<SVGSVGElement>(null);
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const [dimensions, setDimensions] = useState({ width: 800, height: 800 });
 
 	// Compute Data Once
-	const data = React.useMemo(() => buildHierarchy(multiverseData.nodes), []);
+	const data = React.useMemo(() => {
+		if (!inputData) return buildHierarchy([]);
+		// Check if inputData is raw nodes (has 'nodes' array)
+		if ("nodes" in inputData && Array.isArray(inputData.nodes)) {
+			return buildHierarchy(inputData.nodes);
+		}
+		// Otherwise assume it's already a HierarchyNode
+		return inputData as HierarchyNode;
+	}, [inputData]);
 
 	useEffect(() => {
 		if (!wrapperRef.current) return;
