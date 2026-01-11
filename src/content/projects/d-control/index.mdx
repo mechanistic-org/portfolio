@@ -33,7 +33,13 @@ cyberspace:
             During Pilot Validation, the cosmetic overlay on the Fader Bank began peeling. This was not just a blemish; it blocked the motorized faders, triggering a potential **Stop Ship** order.
 
             **The Investigation:**
-            Vendor PPI blamed "Bad Glue." I rejected this as guesswork. **Deviation #1212** confirmed the parts arrived damaged out of the box. Forensic analysis revealed the root cause: Low Surface Energy (&lt;32 Dyne/cm) on the molded chassis was repelling the adhesive.
+            Vendor PPI blamed "Bad Glue." I rejected this as guesswork. **Deviation #1212** confirmed the parts arrived damaged out of the box. Forensic analysis revealed the root cause: Low Surface Energy (<32 Dyne/cm) on the molded chassis was repelling the adhesive.
+
+            **The Investigation (DOE):**
+            We isolated the variables:
+            *   **Adhesive:** 3M 467MP vs. 200MP
+            *   **Prep:** IPA Wipe vs. Plasma
+            *   **Substrate:** ABS vs. PC/ABS blend
         - title: "The Fix"
           subtitle: "Plasma Treatment"
           body: |
@@ -42,6 +48,17 @@ cyberspace:
 
             **The Result:**
             Adhesion strength increased by **400%**. We moved from "Adhesive Failure" to "Cohesive Failure" (the foam tore before the glue let go). Documented in **Deviation #8777**.
+        - title: "Process Lockdown"
+          subtitle: "Dyne Pen Protocol"
+          body: |
+            **The Law:**
+            I didn't just install the machine; I installed the *law*.
+
+            **QC Standard:**
+            Every **50th unit** required a "Dyne Pen" swipe test.
+            *   **Beading:** FAIL (Line Stop, Recalibrate Plan).
+            *   **Wetting:** PASS (Continue).
+            This turned an invisible chemical property into a binary Go/No-Go gauge.
       data:
         layout: "masonry"
         images:
@@ -122,7 +139,6 @@ duration: "Active"
 statusLabel: "Completed"
 impact: "Instituted Plasma Treatment line, increasing adhesion by 400% and solving critical peel failure."
 ---
-
 
 ## The Challenge
 
