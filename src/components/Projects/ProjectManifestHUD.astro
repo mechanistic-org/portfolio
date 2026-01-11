@@ -1,5 +1,6 @@
 ---
 import { getMultiverseData } from "@/utils/getMultiverseData";
+import { Icon } from "astro-icon/components";
 
 const multiverseData = await getMultiverseData();
 
@@ -35,57 +36,58 @@ const title = data.title || data.id || "Project";
 	<!-- ROW 1: IDENTITY & NAV (Full Width, padded left for logo) -->
 	<div class="flex h-16 w-full items-center justify-between pr-4 pl-16 md:pr-8">
 		<!-- LEFT: Title & Context -->
-		<div class="flex items-center gap-6 pl-6">
+		<div class="flex max-w-[60%] items-center gap-6 overflow-hidden pl-4 md:pl-6">
 			<div>
-				<span class="text-xs tracking-widest text-neutral-500 uppercase"
+				<span
+					class="block truncate text-[10px] tracking-widest text-neutral-500 uppercase md:text-xs"
 					>{data.id || data.slug}</span
 				>
-				<div class="flex items-center gap-3 text-[10px] tracking-wider uppercase">
-					<span class="font-bold text-white">{data.employer}</span>
-					<span class="text-neutral-500">//</span>
-					<span class="text-neutral-400">{data.category || "Project"}</span>
+				<div class="flex items-center gap-2 text-[10px] tracking-wider uppercase md:gap-3">
+					<span class="truncate font-bold text-white">{data.employer}</span>
+					<span class="hidden text-neutral-500 md:inline">//</span>
+					<span class="hidden text-neutral-400 md:inline">{data.category || "Project"}</span>
 				</div>
 			</div>
 		</div>
 
-		<!-- CENTER: Nav Controls -->
-		<div class="flex items-center gap-1">
+		<!-- CENTER: Nav Controls (Visible on Mobile via Flex) -->
+		<div class="flex shrink-0 items-center gap-1">
 			{
 				prevProject ? (
 					<a
 						href={`/projects/${prevProject.id}`}
-						class="flex h-6 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-[#2E5CFF] hover:text-white"
+						class="flex h-8 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-[#2E5CFF] hover:text-white md:h-6 md:w-8"
 					>
 						&lt;
 					</a>
 				) : (
-					<span class="flex h-6 w-8 cursor-not-allowed items-center justify-center border border-white/5 bg-black text-neutral-800">
+					<span class="flex h-8 w-8 cursor-not-allowed items-center justify-center border border-white/5 bg-black text-neutral-800 md:h-6 md:w-8">
 						&lt;
 					</span>
 				)
 			}
 			<a
 				href="/projects"
-				class="flex h-6 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-emerald-500 hover:text-white"
-				>:::</a
+				class="flex h-8 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-emerald-500 hover:text-white md:h-6 md:w-8"
+				><Icon name="tabler:grid-dots" class="h-4 w-4" /></a
 			>
 			{
 				nextProject ? (
 					<a
 						href={`/projects/${nextProject.id}`}
-						class="flex h-6 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-[#2E5CFF] hover:text-white"
+						class="flex h-8 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-[#2E5CFF] hover:text-white md:h-6 md:w-8"
 					>
 						&gt;
 					</a>
 				) : (
-					<span class="flex h-6 w-8 cursor-not-allowed items-center justify-center border border-white/5 bg-black text-neutral-800">
+					<span class="flex h-8 w-8 cursor-not-allowed items-center justify-center border border-white/5 bg-black text-neutral-800 md:h-6 md:w-8">
 						&gt;
 					</span>
 				)
 			}
 		</div>
 
-		<!-- RIGHT: Date & Duration -->
+		<!-- RIGHT: Date & Duration (Desktop Only) -->
 		<div class="hidden items-center gap-8 md:flex">
 			<div class="font-mono text-xs">
 				<span class="mr-2 text-neutral-600 uppercase">DATE</span>
@@ -110,6 +112,66 @@ const title = data.title || data.id || "Project";
 		</div>
 	</div>
 
-	<!-- ROW 2: DISABLED -->
-	<!-- Metrics Grid was causing Astro Compiler Crash. Disabled for stability. -->
+	<!-- ROW 2: METRICS (Deep Mode Only) -->
+	{
+		metrics && (
+			<div class="hidden w-full grid-cols-6 divide-x divide-white/10 border-t border-white/10 bg-black/50 md:grid">
+				{/* 0. TEAM SIZE (New First Column) */}
+				<div class="flex flex-col justify-center px-4 py-2">
+					<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Team</div>
+					<div class="font-mono text-xs font-bold text-white">{data.teamSize || "Core Team"}</div>
+				</div>
+
+				{/* 1. COGS */}
+				<div class="flex flex-col justify-center px-4 py-2">
+					<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
+						{metrics.cogs.label}
+					</div>
+					<div class="font-mono text-sm font-bold text-white">{metrics.cogs.value}</div>
+				</div>
+
+				{/* 2. PROFITABILITY */}
+				<div class="flex flex-col justify-center px-4 py-2">
+					<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
+						{metrics.profitability.label}
+					</div>
+					<div class="font-mono text-sm font-bold text-[#2E5CFF]">
+						{metrics.profitability.value}
+					</div>
+				</div>
+
+				{/* 3. GOVERNANCE */}
+				<div class="flex flex-col justify-center px-4 py-2">
+					<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Governance</div>
+					<div class="flex items-center gap-2 font-mono text-xs text-neutral-300">
+						<span class="text-white">{metrics.governance.dcos} DCOs</span>
+						<span class="text-neutral-600">|</span>
+						<span class="truncate">{metrics.governance.ecos[0]}</span>
+					</div>
+				</div>
+
+				{/* 4. INTERVENTIONS */}
+				<div class="flex flex-col justify-center px-4 py-2">
+					<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
+						{metrics.interventions.label}
+					</div>
+					<div class="flex items-center gap-2">
+						<div class="font-mono text-sm font-bold text-white">{metrics.interventions.count}</div>
+						<div class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+					</div>
+				</div>
+
+				{/* 5. FINANCIAL */}
+				<div class="flex flex-col justify-center px-4 py-2">
+					<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Tooling Budget</div>
+					<div class="font-mono text-sm font-bold text-white">
+						${metrics.financial.toolingActual.toLocaleString()}
+						<span class="ml-1 text-[10px] text-neutral-500">
+							/ ${metrics.financial.toolingBudget.toLocaleString()}
+						</span>
+					</div>
+				</div>
+			</div>
+		)
+	}
 </div>

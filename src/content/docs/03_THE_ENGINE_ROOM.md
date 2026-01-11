@@ -13,21 +13,23 @@ sidebar:
 
 ## 1. System Architecture
 
-The EN-OS uses a **Hybrid Static** architecture to maintain "Zero-Bloat" speed.
+The EN-OS uses a **Pure Hyperspace** architecture (Dynamic Astro Collections) to maintain "Zero-Bloat" speed.
 
 ### Core Protocols (The Law)
 
 _Synthesized from Agency Memory_
 
-1.  **The Sovereign Color Law:** `src/config/color_registry.ts` is the ONLY Source of Truth for Entity Coloring. `Colors.csv` retrieval is FORBIDDEN.
-2.  **The Module Naming Law:** Do not use `.json.ts` for standard TypeScript modules/arrays. Rename to `.ts` to prevent TS Server resolution confusion.
-3.  **The Resilience Law (Safe-by-Default D3):** Visualization components must implement defensive `get(key) || default_color` logic to prevent crashing the entire graph on a single missing key.
-4.  **The Air Gap Law:** `eriknorris-assets\R2_STAGING` is the ONLY Production Vault. `portfolio_working` is the ONLY Staging Input. `eriknorris-workspace\R2_MASTER` is DEAD (Legacy).
+1.  **The Event Horizon Law:** `multiverse.json` and `skills.json` are DEAD. The "Keystatic -> Astro Collections -> Dynamic Prop Injection" pipeline is the ONLY source of truth.
+2.  **The Sovereign Color Law:** `src/config/color_registry.ts` is the ONLY Source of Truth for Entity Coloring. `Colors.csv` retrieval is FORBIDDEN.
+3.  **The Module Naming Law:** Do not use `.json.ts` for standard TypeScript modules/arrays. Rename to `.ts` to prevent TS Server resolution confusion.
+4.  **The Resilience Law (Safe-by-Default D3):** Visualization components must implement defensive `get(key) || default_color` logic to prevent crashing the entire graph on a single missing key.
+5.  **The Air Gap Law:** `eriknorris-assets\R2_STAGING` is the ONLY Production Vault. `portfolio_working` is the ONLY Staging Input. `eriknorris-workspace\R2_MASTER` is DEAD (Legacy).
 
 ### The Stack
 
 - **Framework:** Astro 5.0 (Static Output).
 - **CMS:** Keystatic (Local Markdown Management).
+- **Data Layer:** Astro Content Collections (`src/content/project`).
 - **Styling:** TailwindCSS v4 + Custom Brutalist Tokens.
 - **Interactivity:** React (Complex UI) + Vanilla JS (Scroll Physics).
 - **Hosting:** Cloudflare Pages.
@@ -37,8 +39,8 @@ _Synthesized from Agency Memory_
 To respect the 25MB script limit:
 
 1.  **Static HTML:** We pre-render everything possible.
-2.  **Asset Proxy:** We use a Cloudflare Worker (`functions/[[path]].js`) to serve heavy assets from R2, bypassing the git repo size limits.
-3.  **Lazy Hydration:** React components use `client:visible` only when necessary.
+2.  **Asset Proxy:** Cloudflare Worker (`functions/[[path]].js`) serves heavy assets from R2.
+3.  **Lite Components:** We disable deep nesting in high-frequency components (e.g., `ProjectManifestHUD`) to prevent Compiler Crashes.
 
 ### The Assembly Engine (`/assembly`)
 
@@ -73,8 +75,8 @@ Set `theme: "hyperspace"` in the project frontmatter.
 
 ### The Build Chain
 
-1.  **Ingest:** `python scripts/scaffold_projects.py` (Runs locally before commit, or in CI if configured).
-2.  **Build:** `npm run build` (Astro static generation).
+1.  **Validation:** `scripts/ci-prebuild.js` checks for critical files.
+2.  **Build:** `npm run build` (Astro static generation using `getMultiverseData`).
 3.  **Deploy:** Cloudflare pushes the `./dist` folder to the edge.
 
 ### Asset Air-Gap (Crucial)
@@ -99,6 +101,16 @@ The system uses a **Split-Output** strategy to survive.
 > We force `process.env.CF_PAGES ? "static" : "server"` in `astro.config.mjs`. **DO NOT REMOVE.**
 
 ## 8. Troubleshooting (The "Fix It" Guide)
+
+### WASM Compiler Crash (The 9000-Module Limit)
+
+**Symptom:** `npm run build` fails with `[UnknownCompilerError] ... undefined (reading 'exports')`.
+**Cause:** The Astro Compiler (WASM) runs out of stack memory when processing deeply nested JSX (e.g., complex Metrics Grids) in a project with very high module counts (9000+).
+**Fix:**
+
+1.  **Identify the Culprit:** Usually a component with complex conditional rendering (e.g., `ProjectManifestHUD`).
+2.  **Simplify:** Comment out deep nesting or split into smaller sub-components.
+3.  **Lite Mode:** Use a "Lite" version of the component for Production if refactoring is too costly.
 
 ### "Zombie" Dev Servers
 
@@ -137,6 +149,7 @@ The **Deep HUD** is a metadata layer injected into every project to surface "Eng
 - **Mechanism:** `ProjectManifestHUD.astro`
 - **Data Source:** Project Frontmatter (`metrics` object).
 - **Purpose:** To turn vague "stories" into quantifiable engineering case studies.
+- **Constraints:** Must be kept simple (Lite Mode) to avoid WASM crashes.
 
 **Metrics:**
 

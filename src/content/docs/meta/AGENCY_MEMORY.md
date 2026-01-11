@@ -46,21 +46,31 @@ These are active AI/External resources that contain "Source of Truth" data not i
 - **Status:** **ACTIVE**
 - **Contents:** Targeted list of 25+ specific forensic assets (Titan DXF, C24 Refresh AI, etc.) extracted from NotebookLM.
 
+### 5. **WebTV Galaxy (The Missing Link)**
+
+- **Role:** Forensic Narrative (Pre-Xbox)
+- **URL:** [NotebookLM: Galaxy](https://notebooklm.google.com/notebook/a743c4b4-0aaf-446f-b18c-13f23b38065e?authuser=1)
+- **Status:** **VERIFIED** (2026-01-10)
+- **Contents:**
+  - 150W Thermal Crisis (AMD K7).
+  - Transition to Xbox/eHome.
+  - "Blind Discovery" gems (Spoons, Datsun 510).
+
 ---
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Module:** Documentation Consolidation & Deep HUD Verification.
-- **Current Focus:**
-  - [x] **Dreamjob Asset Restoration:** (COMPLETE) V7 Assets generated.
-  - [x] **Documentation Synchronization:** (COMPLETE) Synced Laws to `03_THE_ENGINE_ROOM.md`.
-  - [x] **Legacy Data Cleanup:** (COMPLETE) Deleted `multiverse.json`/`work_history.json`.
-  - [ ] **Deep HUD Verification:** (ACTIVE) Confirm budget/COGS metrics appear in `dreamjob` page.
+- **Active Task:** **Identity Migration Complete. Commit Gen Blocked (Platform Issue).**
+- **Next Step:** Return to Product UI development (Manual commits for now).
+- **Context:** C24, SC48, and Galaxy are now standardized. The Data Layer is ready to drive the UI.
 
 * **Key Decision (Physics):** "Goldilocks" settings are `vy: -50`, `friction: 0.05`. Do not increase friction without vertically scaling velocity.
-* **Key Decision (Viz-Deprecated):** `ArchiveSankey` and `LivingGantt` have been DEPRECATED ("little/no value") and removed from the active UI to simplify the experience.
-* **Key Decision (Data):** `multiverse.json` and `skills.json` have been **DELETED**. The "Keystatic -> Astro Collections -> Dynamic Prop Injection" pipeline is the ONLY source of truth.
-* **Key Decision (Architecture):** **"The Law of The Vault"** - `eriknorris-assets\R2_STAGING` is the ONLY Production Vault. `portfolio_working` is the ONLY Staging Input. `eriknorris-workspace\R2_MASTER` is DEAD (Legacy).
+* **Key Decision (Viz-Deprecated):** `ArchiveSankey`, `LivingGantt`, and `SkillsGraph.tsx` have been DEPRECATED and removed/disabled to "kill the noise".
+* **Key Decision (Data):** **"The Event Horizon"** - `multiverse.json` and `skills.json` were PURGED (2026-01-08). The architecture is now "Pure Hyperspace" (Dynamic Astro Collections only).
+* **Key Decision (Architecture):** **"The Sovereign Pipeline"** - `eriknorris-workspace\R2_MASTER` is the **SOURCE OF TRUTH** (The Vault). `process_images.py` reads from here. `eriknorris-assets\R2_STAGING` is the **PUBLISHED MIRROR** (The Web). we DO NOT edit Staging directly.
+* `src/content/docs/prompts/UNIVERSAL_NOTEBOOK_PROMPT.md`: **The Extraction Standard.** (How we mine data).
+* `src/content/docs/prompts/BRANDING_PROMPT.md`: **The Design System.** (How we speak).
+* `src/content/docs/STYLE_GUIDE.md`: **The Token Map.** (How we style).
 * **Key Decision (Protocol):** **"Operation Chronos"** - Use NotebookLM to generate `HUNTING_LIST.md` (dense tables) and export to HTML for physical printing ("Low Friction" asset retrieval).
 * **Key Decision (Mining):** **"The MailStore Pivot"** - Python COM is too fragile for 15k+ item queries. Use MailStore Home to Index -> Search -> Export.
 * **Key Decision (Layout):** **"The Fiche Scroll Law"** - The Fiche container MUST use `.no-scrollbar` to prevent double-scrollbar visual glitches with the Parallax system.
@@ -68,11 +78,20 @@ These are active AI/External resources that contain "Source of Truth" data not i
 * **Key Decision (Color):** **"The Sovereign Color Law"** - `src/config/color_registry.ts` is the ONLY Source of Truth for Entity Coloring. `Colors.csv` retrieval is FORBIDDEN.
 * **Key Decision (Code):** **"The Module Naming Law"** - Do not use `.json.ts` for standard TypeScript modules/arrays. Rename to `.ts` to prevent TS Server resolution confusion.
 * **Key Decision (Resilience):** **"Safe-by-Default D3"** - Visualization components must implement defensive `get(key) || default_color` logic to preventing crashing the entire graph on a single missing key.
+* **Key Decision (UI):** **"Lite HUD"** - To prevent WASM crashes during build, deeply nested logic in `ProjectManifestHUD.astro` (Row 2 Metrics) has been disabled until further notice. Row 1 (Identity/Nav) is the priority.
+* **Key Decision (Keystone):** **"The Neural Assembly"** - The final visualization is a "Hybrid Brain" (D3 + R3F). 30 Notebook Nodes packed in a cranial volume (The Idea) that explode on scroll (The Engineering). This is the Opus.
+* **Key Decision (Pipeline):** **"The Sidecar Pattern"** - Specialized rendering logic (DXF, IGES) lives in `scripts/lib/` as standalone modules. `process_images.py` invokes them but does not contain their heavy dependencies.
+* **Key Decision (Archival):** **"The PDF Bridge"** - We generate PDFs from CAD data specifically for `NotebookLM` consumption, as it digests PDF vectors better than raw DXF text.
 
-- **Active Thread:** `b5ef5f6b-77c6-4c25-b991-6ffab3b1b077` (D-Control Enrichment & MailStore Pivot).
+- **Active Thread:** `777cb7ff-d7e0-468b-905f-b84f7965a3e1` (MDX Debugging & Tooling Repair).
 
 ## 🔗 Active Intelligence (New Synapses)
 
+- **The Numeric ID Law:** MDX is ruthless. Keys starting with numbers (`01_foo`) MUST be quoted (`"01_foo"`). Body text must escape `<` before numbers (`&lt;0.5`).
+- **The Generative Key Law:** An API Key is useless without the Project Permission. "Stream Error" usually means "API Not Enabled" in Google Cloud, not "Bad Code".
+- **The "Two Wallets" Law:** Google One "Ultra" (Consumer) does NOT pay for API usage. You must have a separate Google Cloud Billing account for the API Key to avoid `429 Free Tier` blocks.
+- **The "Zombie Model" Trap:** Antigravity IDE native buttons may use hardcoded, deprecated models (e.g. `1.5-flash`). Always verify access with `scripts/test_gemini_key.py`.
+- **Global Outage (Jan 2026):** The Antigravity IDE "Generate" mechanism is currently broken server-side. Do not debug local config for "Stream Error".
 - **The Data Bridge:** We successfully bridged "Dead" binary data (Excel .xls) to "Live" visualization (D3/React). Pattern: `scripts/extract_thermal.py` -> `src/config/sc48_thermal_real.json` -> `SCThermalMatrix.tsx`.
 - **The Asset Lock:** `npm run dev` locks files in `public/assets`. Ingestion scripts CANNOT overwrite them while the server is running. FAILS SILENTLY.
 - **Regex Sovereignty:** `startswith("---")` is brittle. Always use Regex `^\s*---` for frontmatter parsing to handle BOM/Whitespace.
@@ -80,6 +99,7 @@ These are active AI/External resources that contain "Source of Truth" data not i
   - **Concept:** Use NotebookLM to pre-visualize the "Exhibit Halls" (Bubbles) before creating folders.
   - **Oracle:** [SC48 NotebookLM](https://notebooklm.google.com/notebook/c783...?authuser=1)
   - **Key Decision:** **"Auto-Migration Pivot"** - If the Agent knows the Source and Destination, it must Script the move. Do not ask the user to drag files.
+- **Legacy CAD Pipeline:** `python scripts/lib/dxf_renderer.py [path]` can be run in standalone mode to visualize obscure "Deep Storage" folders without triggering a full site build.
 - **Forensic Code Names:**
   - **D-Control:** "Project Buckley" (18 Engineers, Flagship).
   - **D-Command:** "Project Danko" (14 Engineers, Mid-tier).
@@ -99,7 +119,7 @@ These are active AI/External resources that contain "Source of Truth" data not i
   - **Tier 3 (The Workbench):** `D:\portfolio` (Staging, Context, Spreadsheets).
   - **Tier 2 (The Refinery):** `eriknorris-assets` (Web-Optimized Assets).
   - **Tier 1 (The Public):** `eriknorris` (Production Site).
-- **The "Ghost Pipeline" (Legacy Artifact):** `D:\GitHub\eriknorris-workspace\R2_MASTER` is a legacy backup. **DO NOT USE.** The Living Pipeline is `eriknorris-assets\R2_STAGING`.
+- **The "Pipeline Law":** `D:\GitHub\eriknorris-workspace\R2_MASTER` is the **Input**. `D:\GitHub\eriknorris-assets\R2_STAGING` is the **Output**.
 - **Career Contiguity:** The "Ransomware Gap" is bridged by **Metadata**. Even if files are missing, the _timestamps_ in `\\morespace` prove continuous work from 1996-2024.
 - **Stream Signatures:**
   - **Noon:** Visual Polish (Gallery-First).

@@ -8,6 +8,17 @@ from PIL import Image, ImageOps
 import pillow_heif  # Modern AVIF support
 pillow_heif.register_heif_opener()
 
+# Add 'lib' submodule to path for sidecar imports
+SCRIPT_DIR = Path(__file__).resolve().parent
+sys.path.append(str(SCRIPT_DIR / "lib"))
+
+try:
+    import dxf_renderer
+    DXF_SUPPORT = True
+except ImportError:
+    DXF_SUPPORT = False
+    print("Warning: 'dxf_renderer' module not found or dependencies missing (ezdxf/matplotlib). DXF support disabled.")
+
 # --- CONFIGURATION ---
 # Logical Mapping:
 # INPUT: User's Local Workspace (The "Darkroom")
@@ -284,6 +295,15 @@ def process_project(slug):
                     print(f"    -> Generated: {out_name} (Animated WebP)")
             except Exception as e:
                 print(f"    [ERROR] GIF processing failed: {e}")
+            continue
+
+        # --- DXF PROCESSING (Sidecar) ---
+        if item.suffix.lower() == '.dxf':
+            if DXF_SUPPORT:
+                # We output to the same portfolio folder (PNGs will be picked up by gallery, SVGs available for diagrams)
+                dxf_renderer.convert_dxf_to_assets(item, output_path)
+            else:
+                print(f"  [SKIP] DXF found but dependencies missing: {item.name}")
             continue
 
         if not match:

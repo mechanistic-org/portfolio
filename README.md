@@ -11,7 +11,8 @@ This repository is the operating system for my professional identity. It is a "l
 ### 🔧 The Stack
 
 - **Engine:** Astro (Static Site Generation)
-- **Language:** TypeScript, Python (Ingestion Pipeline)
+- **CMS:** Keystatic (Local Markdown Management)
+- **Language:** TypeScript (Core), Python (Legacy Ingestion)
 - **Deployment:** Cloudflare Pages (Edge Network)
 - **Asset Storage:** Cloudflare R2 (Object Storage)
 - **Styling:** TailwindCSS + Custom "Sci-Fi" UI Library
