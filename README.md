@@ -21,10 +21,11 @@ This repository is the operating system for my professional identity. It is a "l
 
 This project follows the **"Law of Asset Sovereignty"**:
 
-1.  **Data First:** Content is derived from structured data (`specs.csv`, `bom.csv`), not written as prose.
-2.  **Air Gapped:** Assets (images, 3D models) are stored separately in an R2 bucket (`assets.eriknorris.com`), never checked into Git.
-3.  **Agentic Layer:** The `.agent` directory contains autonomous skills (`/scaffold-project`, `/deploy-production`) that manage the codebase.
-4.  **Zero Runtime:** The site is pre-compiled into static HTML for maximum speed and security.
+1.  **Intelligence First:** Content is mined from unstructured data (PDFs, Engineering Notebooks) using **NotebookLM**, then crystallized into Markdown Boluses (`_intelligence.md`).
+2.  **ETL Pipeline:** We run a sophisticated Extraction, Transformation, and Load pipeline: `Raw PDF` -> `NotebookLM Bolus` -> `Dynamic Astro Collection` -> `Static HTML`.
+3.  **Air Gapped:** Assets (images, 3D models) are stored separately in an R2 bucket (`assets.eriknorris.com`), never checked into Git.
+4.  **Agentic Layer:** The `.agent` directory contains autonomous skills (`/scaffold-project`, `/deploy-production`) that manage the codebase.
+5.  **Zero Runtime:** The site is pre-compiled into static HTML for maximum speed and security.
 
 ### 🚀 Quick Start (Local Dev)
 
