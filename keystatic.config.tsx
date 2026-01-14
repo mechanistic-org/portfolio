@@ -141,6 +141,18 @@ export default config({
 					itemLabel: (props) => props.value,
 				}),
 
+				// Forensic Architecture (Automated via hydrate_content.py)
+				toolchain: fields.array(fields.text({ label: "Item" }), {
+					label: "Forensic Toolchain",
+					itemLabel: (props) => props.value,
+					description: "Injected by Forensic Pipeline. Do not edit manually unless necessary.",
+				}),
+				forensic_summary: fields.text({
+					label: "Forensic Summary",
+					multiline: true,
+					description: "The 'Crisis & Intervention' STAR summary.",
+				}),
+
 				// Visual Presentation Mode (Refactor 2026-01-14)
 				presentation_mode: fields.select({
 					label: "Presentation Mode",

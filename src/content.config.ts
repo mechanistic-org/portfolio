@@ -119,6 +119,11 @@ const projectsCollection = defineCollection({
 				war_stories: z.array(z.number()).optional(),
 			})
 			.optional(),
+
+		// Forensic Architecture (injected by hydrate_content.py)
+		toolchain: z.array(z.string()).optional(),
+		forensic_summary: z.string().optional(),
+
 		phase_stats: z.record(z.number()).optional(),
 		teamSize: z.coerce.string().optional(),
 		job_title: z.string().optional(),
