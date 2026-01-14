@@ -11,7 +11,10 @@
 		"remove-keystatic": "node ./scripts/remove-keystatic.js",
 		"format": "prettier -w \"**/*\" --ignore-unknown --cache",
 		"lint": "eslint .",
-		"sync:assets": "python scripts/sync_r2.py"
+		"sync:assets": "python scripts/sync_r2.py",
+		"content:hydrate": "python scripts/hydrate_content.py",
+		"content:modernize": "python scripts/modernize_content.py",
+		"assets:process": "python scripts/process_images.py"
 	},
 	"dependencies": {
 		"@astro-community/astro-embed-youtube": "^0.5.9",
