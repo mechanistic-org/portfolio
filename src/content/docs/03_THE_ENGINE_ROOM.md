@@ -53,6 +53,16 @@ The **Exploded View** is the primary navigation interface, visualizing the caree
 
 ---
 
+## 1.5 The Agentic Layer (The Brain)
+
+The IDE is now augmented with a persistent brain located in `.agent/`. This moves the workflow from "Manual Prompts" to "Autonomous Reflexes."
+
+- **Skills (`.agent/skills`):** Learned capabilities (Mining, Troubleshooting, Onboarding).
+- **Rules (`.agent/rules`):** Inviolable constraints (Asset Sovereignty, Coding Standards).
+- **Workflows (`.agent/workflows`):** Deterministic scripts for Scaffolding and Deployment.
+
+---
+
 ## 2. The Theme Engine
 
 The site supports multiple "Realms" (Themes) controlled by Frontmatter.

@@ -1,10 +1,14 @@
 ﻿---
-title: "Onboarding Prompt"
+title: "Onboarding Prompt (LEGACY)"
 slug: "onboarding_prompt"
 sidebar:
   group: "System Manual"
-  order: 0
+  order: 99
 ---
+
+> **⚠️ DEPRECATED (Jan 2026):**
+> This prompt has been superseded by the `project_onboarding` Skill.
+> The Agent now performs these checks automatically. Retained for historical reference only.
 
 - **Self-Correction:** If a layout change fails and is reverted, document _why_ it failed in `STYLE_GUIDE.md` to prevent future loops.
   > **LIFECYCLE AWARENESS:**

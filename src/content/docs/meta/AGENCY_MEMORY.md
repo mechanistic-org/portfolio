@@ -100,6 +100,8 @@ These are active AI/External resources that contain "Source of Truth" data not i
 
 ## 🔗 Active Intelligence (New Synapses)
 
+- **Agent Status:** **FULLY OPERATIONAL** (Jan 2026). Skills (`conversation_miner`), Rules (`asset_sovereignty`), and Workflows (`scaffold`) are live.
+- **Content Status:** 100% C24 Schema Compliant (126 projects standardized via `modernize_content.py`).
 - **The Numeric ID Law:** MDX is ruthless. Keys starting with numbers (`01_foo`) MUST be quoted (`"01_foo"`). Body text must escape `<` before numbers (`&lt;0.5`).
 - **The Generative Key Law:** An API Key is useless without the Project Permission. "Stream Error" usually means "API Not Enabled" in Google Cloud, not "Bad Code".
 - **The "Two Wallets" Law:** Google One "Ultra" (Consumer) does NOT pay for API usage. You must have a separate Google Cloud Billing account for the API Key to avoid `429 Free Tier` blocks.

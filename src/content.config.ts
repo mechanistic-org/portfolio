@@ -1,41 +1,6 @@
 import { defineCollection, reference, z } from "astro:content";
 import { glob } from "astro/loaders";
 
-// 1. BLOG
-const blogCollection = defineCollection({
-	loader: glob({ pattern: "**/[^_]*{md,mdx}", base: "./src/data/blog" }),
-	schema: ({ image }) =>
-		z.object({
-			title: z.string(),
-			description: z.string(),
-			authors: z.array(reference("authors")),
-			pubDate: z
-				.string()
-				.or(z.date())
-				.transform((val) => new Date(val)),
-			updatedDate: z
-				.string()
-				.optional()
-				.transform((str) => (str ? new Date(str) : undefined)),
-			heroImage: image(),
-			tags: z.array(z.string()),
-			draft: z.boolean().optional(),
-		}),
-});
-
-// 2. AUTHORS
-const authorsCollection = defineCollection({
-	loader: glob({ pattern: "**/[^_]*{md,mdx}", base: "./src/data/authors" }),
-	schema: ({ image }) =>
-		z.object({
-			name: z.string(),
-			avatar: image(),
-			about: z.string(),
-			email: z.string(),
-			authorLink: z.string(),
-		}),
-});
-
 // 3. OTHER PAGES
 const otherPagesCollection = defineCollection({
 	loader: glob({ pattern: "**/[^_]*{md,mdx}", base: "./src/data/otherPages" }),
@@ -159,8 +124,6 @@ const projectsCollection = defineCollection({
 });
 
 export const collections = {
-	blog: blogCollection,
-	authors: authorsCollection,
 	otherPages: otherPagesCollection,
 	projects: projectsCollection,
 };

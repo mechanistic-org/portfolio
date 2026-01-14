@@ -10,6 +10,14 @@ sidebar:
 
 This document serves as the first line of defense for system issues, build failures, and pipeline errors.
 
+## Operational Workflows (Agentic)
+
+These tasks are now automated via Slash Commands in the IDE.
+
+- **New Project:** `/scaffold-project` (Generates strict C24 Schema).
+- **Deploy:** `/deploy-production` (Verify Build + Push to Main).
+- **Mass Update:** `python scripts/modernize_content.py` (Schema Injection).
+
 ## Asset Pipeline
 
 ### DXF Rendering Issues
