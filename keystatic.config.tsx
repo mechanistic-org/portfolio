@@ -141,6 +141,18 @@ export default config({
 					itemLabel: (props) => props.value,
 				}),
 
+				// Visual Presentation Mode (Refactor 2026-01-14)
+				presentation_mode: fields.select({
+					label: "Presentation Mode",
+					description: "Controls the visual styling in the Multiverse Graph",
+					defaultValue: "standard",
+					options: [
+						{ label: "Standard (Default)", value: "standard" },
+						{ label: "Deep Dive (Blue Ring)", value: "deep_dive" },
+						{ label: "Flagship (Pulse Effect)", value: "flagship" },
+					],
+				}),
+
 				// Skills Data
 				skillData: fields.array(
 					fields.object({

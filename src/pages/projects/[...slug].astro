@@ -157,48 +157,7 @@ const finalEntry = entry
 		};
 
 // === INTELLIGENCE INJECTION (C24) ===
-let metrics: any = undefined;
-if (finalEntry.id === "control-24" || finalEntry.id === "c24") {
-	metrics = {
-		cogs: { value: "$423.27", label: "Direct Material (BOM)" },
-		profitability: { value: "57.40%", label: "Standard Margin" },
-		governance: { ecos: ["EC012262", "EC012263", "ECO12740"], dcos: 19 },
-		interventions: { count: 6, label: "Confirmed Saves" },
-		financial: { toolingBudget: 180000, toolingActual: 34860 },
-	};
-} else if (finalEntry.id === "d-command") {
-	metrics = {
-		cogs: { value: "100%", label: "Production Yield" },
-		profitability: { value: "$630k", label: "Recall Avoidance" },
-		governance: { ecos: ["ECO6454", "ECO6455", "ECO6549"], dcos: 5 },
-		interventions: { count: 42, label: "Manual Inspections" },
-		financial: { toolingBudget: 210000, toolingActual: 0 },
-	};
-} else if (finalEntry.id === "sc48") {
-	metrics = {
-		cogs: { value: "-40%", label: "Part Count Reduction" },
-		profitability: { value: "$9,995", label: "Target MSRP" },
-		governance: { ecos: ["Legacy_Kill", "RoHS_Comp"], dcos: 12 },
-		interventions: { count: 3, label: "Major Systems" },
-		financial: { toolingBudget: 85000, toolingActual: 42000 },
-	};
-} else if (finalEntry.id === "webtv-galaxy") {
-	metrics = {
-		cogs: { value: "$134.42", label: "Proto Fan Bracket" },
-		profitability: { value: "ABORT", label: "Program Status" },
-		governance: { ecos: ["THERMAL_CRISIS", "150W_TDP"], dcos: 0 },
-		interventions: { count: 7, label: "Thermal Failures" },
-		financial: { toolingBudget: 15000, toolingActual: 1200 },
-	};
-} else if (finalEntry.id === "dreamjob") {
-	metrics = {
-		cogs: { value: "UNDEFINED", label: "Acquisition Cost" },
-		profitability: { value: "INFINITE", label: "Potential Upside" },
-		governance: { ecos: ["PROTOCOL_OMEGA", "DIRECTIVE_PRIME"], dcos: 0 },
-		interventions: { count: 1, label: "Critical Path" },
-		financial: { toolingBudget: 0, toolingActual: 0 },
-	};
-}
+// Intelligence Injection Removed - Data now sourced from MDX Frontmatter
 
 // INJECT GENERIC SCROLLY STRUCTURE IF MISSING (For Legacy MDX upgrades)
 if (
@@ -239,5 +198,5 @@ console.log(`[ROUTER] Project: ${finalEntry.id} -> Theme: ${theme}`);
 	prevProject={prevProject}
 	Content={Content}
 	headings={headings}
-	metrics={metrics}
+	metrics={finalEntry.data.metrics}
 />

@@ -65,6 +65,7 @@
 ## 🔮 V. Future Grok (Open Slots)
 
 - [ ] **The Law of "Moves":** Defining the threshold for "Cool" vs "Gimmick" (re: Parallax/Breathe).
+- [ ] **Terminology Shift:** Rename "Hyperspace" architecture to something more descriptive of the "Intelligence First" pipeline (Backlog).
 
 ---
 

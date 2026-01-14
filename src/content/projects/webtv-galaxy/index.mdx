@@ -2,73 +2,77 @@
 additionalSkills: []
 category: Set Top Box
 client:
-- Microsoft
-- WebTV
+  - Microsoft
+  - WebTV
 cyberspace:
   layout: linear
   stickies:
-  - data:
-      columns: 3
-      images: []
-      layout: masonry
-    deck:
-    - body: '"Galaxy" was not a low-cost WebTV successor; it was a high-end technology
-        showcase designed to be the media hub for the entire home.
+    - data:
+        columns: 3
+        images: []
+        layout: masonry
+      deck:
+        - body:
+            '"Galaxy" was not a low-cost WebTV successor; it was a high-end technology
+            showcase designed to be the media hub for the entire home.
 
-        **The Specs:** *   **CPU:** Desktop-class AMD K7 (Athlon) *   **Media:** 3x
-        DSS Tuners + HDTV Support *   **Storage:** 30+ Hour HDD (Quantum Fireball
-        lct20)'
-      subtitle: The God Box
-      title: The Mission
-    - body: 'The integration of a desktop CPU and three tuners created a thermal load
-        of **150 Watts**.
+            **The Specs:** *   **CPU:** Desktop-class AMD K7 (Athlon) *   **Media:** 3x
+            DSS Tuners + HDTV Support *   **Storage:** 30+ Hour HDD (Quantum Fireball
+            lct20)'
+          subtitle: The God Box
+          title: The Mission
+        - body:
+            "The integration of a desktop CPU and three tuners created a thermal load
+            of **150 Watts**.
 
-        **The Consequence:** *   **Box Growth:** Chassis forced to grow to 300mm depth.
-        *   **Noise:** Required a Delta fan running at 2700 RPM (37dB), violating
-        living room silence reqs. *   **Smart Card Failure:** Thermal sims showed
-        the Smart Card reader hitting 55°C—hot enough to warp plastic cards.'
-      subtitle: 150 Watts of Trouble
-      title: The Thermal Crisis
-    id: 01_the_mandate
-    type: gallery
-  - data:
-      columns: 3
-      images: []
-      layout: masonry
-    deck:
-    - body: 'Financial forensics reveal the high cost of custom cooling.
+            **The Consequence:** *   **Box Growth:** Chassis forced to grow to 300mm depth.
+            *   **Noise:** Required a Delta fan running at 2700 RPM (37dB), violating
+            living room silence reqs. *   **Smart Card Failure:** Thermal sims showed
+            the Smart Card reader hitting 55°C—hot enough to warp plastic cards."
+          subtitle: 150 Watts of Trouble
+          title: The Thermal Crisis
+      id: 01_the_mandate
+      type: gallery
+    - data:
+        columns: 3
+        images: []
+        layout: masonry
+      deck:
+        - body: 'Financial forensics reveal the high cost of custom cooling.
 
-        *   **$134.42:** Cost for a single "Elmer Fan Bracket" prototype. *   **$1,200/lot:**
-        CNC tooling charges just for chassis dimple forms. *   **$4,400/wk:** My weekly
-        burn rate coordinating the mechanical effort.'
-      subtitle: Prototype Economics
-      title: The Cost
-    - body: '**The Forensic Gems:** *   **"Spoons":** Code name for custom EMI contact
-        fingers designed to seal the RF from the powerful CPU. *   **The Anomaly:**
-        Buried in the project invoices was a purchase for "Datsun 510 Tension Rods"—a
-        glimpse into the personal restoration projects running parallel to the corporate
-        crunch.'
-      subtitle: The "Spoon" & The Datsun
-      title: Blind Discovery
-    id: 02_paper_trail
-    type: gallery
-  - data:
-      columns: 3
-      images: []
-      layout: masonry
-    deck:
-    - body: 'By Jan 2002, the "Cable Box" dream collapsed.
+            *   **$134.42:** Cost for a single "Elmer Fan Bracket" prototype. *   **$1,200/lot:**
+            CNC tooling charges just for chassis dimple forms. *   **$4,400/wk:** My weekly
+            burn rate coordinating the mechanical effort.'
+          subtitle: Prototype Economics
+          title: The Cost
+        - body:
+            '**The Forensic Gems:** *   **"Spoons":** Code name for custom EMI contact
+            fingers designed to seal the RF from the powerful CPU. *   **The Anomaly:**
+            Buried in the project invoices was a purchase for "Datsun 510 Tension Rods"—a
+            glimpse into the personal restoration projects running parallel to the corporate
+            crunch.'
+          subtitle: The "Spoon" & The Datsun
+          title: Blind Discovery
+      id: 02_paper_trail
+      type: gallery
+    - data:
+        columns: 3
+        images: []
+        layout: masonry
+      deck:
+        - body: 'By Jan 2002, the "Cable Box" dream collapsed.
 
-        *   **The Restructure:** "Layoffs at UltimateTV" signaled the end. *   **The
-        Bridge:** The mechanical team (Mechanistic) was immediately absorbed into
-        Microsoft "eHome." *   **The Legacy:** By March 2002, I was billing for **"Xbox
-        Redesign Work,"** carrying the Galaxy DNA directly into Project Midway.'
-      subtitle: Galaxy to Xbox
-      title: The Pivot
-    id: 03_the_transition
-    type: gallery
+            *   **The Restructure:** "Layoffs at UltimateTV" signaled the end. *   **The
+            Bridge:** The mechanical team (Mechanistic) was immediately absorbed into
+            Microsoft "eHome." *   **The Legacy:** By March 2002, I was billing for **"Xbox
+            Redesign Work,"** carrying the Galaxy DNA directly into Project Midway.'
+          subtitle: Galaxy to Xbox
+          title: The Pivot
+      id: 03_the_transition
+      type: gallery
 date: 2001-03-05
-description: The "Missing Link" between WebTV and Xbox. A 150W thermal crisis that
+description:
+  The "Missing Link" between WebTV and Xbox. A 150W thermal crisis that
   forced the evolution of the living room console.
 documents: []
 draft: false
@@ -81,19 +85,33 @@ impact: Precursor to Xbox Console Architecture
 industry: Consumer Electronics
 links: []
 metrics:
+  cogs:
+    value: "$134.42"
+    label: "Proto Fan Bracket"
+  profitability:
+    value: "ABORT"
+    label: "Program Status"
+  governance:
+    ecos:
+      - "THERMAL_CRISIS"
+      - "150W_TDP"
+    dcos: 0
+  interventions:
+    count: 7
+    label: "Thermal Failures"
   financial:
     costOfGoodsSold: []
     margins: []
-    toolingActual: 0
-    toolingBudget: 0
+    toolingActual: 1200
+    toolingBudget: 15000
   process:
     dcdCount: 0
     engineeringChangeOrders:
-    - Xbox_Redesign
+      - Xbox_Redesign
   war_stories:
-  - 0
-  - 1
-  - 2
+    - 0
+    - 1
+    - 2
 phase_stats:
   Design: 30
   Engineering: 70
@@ -104,19 +122,19 @@ skillData: []
 slug: webtv-galaxy
 statusLabel: Archived
 tags:
-- Thermal Management
-- Forensic Engineering
-- Thermal Analysis
-- Mechanical Engineering
-- Product Design
-- Rapid Prototyping
+  - Thermal Management
+  - Forensic Engineering
+  - Thermal Analysis
+  - Mechanical Engineering
+  - Product Design
+  - Rapid Prototyping
 teamSize: Core Team of 6
 theme: hyperspace
 title: WebTV Galaxy
 toolIcons: []
 tools:
-- Pro/ENGINEER
-- Thermal Simulation
+  - Pro/ENGINEER
+  - Thermal Simulation
 ---
 
 ## I. PROJECT SUMMARY

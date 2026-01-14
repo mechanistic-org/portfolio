@@ -9,15 +9,18 @@ interface Props {
 	nextProject?: any;
 	prevProject?: any;
 	metrics?: any;
+	presentation_mode?: string;
 }
 
-const { data, nextProject, prevProject, metrics } = Astro.props;
+const { data, nextProject, prevProject, metrics, presentation_mode = "standard" } = Astro.props;
 
 // Formatting
 const dateVal = data.date || new Date();
 const isoDate = new Date(dateVal).toISOString().split("T")[0];
 
 const title = data.title || data.id || "Project";
+const showMetrics =
+	(presentation_mode === "deep_dive" || presentation_mode === "flagship") && metrics;
 ---
 
 <div class="w-full border-b border-white/10 bg-black/95 transition-all duration-500">
@@ -114,7 +117,7 @@ const title = data.title || data.id || "Project";
 
 	<!-- ROW 2: METRICS (Deep Mode Only) -->
 	{
-		metrics && (
+		showMetrics && (
 			<div class="hidden w-full grid-cols-6 divide-x divide-white/10 border-t border-white/10 bg-black/50 md:grid">
 				{/* 0. TEAM SIZE (New First Column) */}
 				<div class="flex flex-col justify-center px-4 py-2">
@@ -123,54 +126,91 @@ const title = data.title || data.id || "Project";
 				</div>
 
 				{/* 1. COGS */}
-				<div class="flex flex-col justify-center px-4 py-2">
-					<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
-						{metrics.cogs.label}
+				{metrics.cogs ? (
+					<div class="flex flex-col justify-center px-4 py-2">
+						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
+							{metrics.cogs.label}
+						</div>
+						<div class="font-mono text-sm font-bold text-white">{metrics.cogs.value}</div>
 					</div>
-					<div class="font-mono text-sm font-bold text-white">{metrics.cogs.value}</div>
-				</div>
+				) : (
+					<div class="flex flex-col justify-center px-4 py-2 opacity-30">
+						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">COGS</div>
+						<div class="font-mono text-sm font-bold text-white">N/A</div>
+					</div>
+				)}
 
 				{/* 2. PROFITABILITY */}
-				<div class="flex flex-col justify-center px-4 py-2">
-					<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
-						{metrics.profitability.label}
+				{metrics.profitability ? (
+					<div class="flex flex-col justify-center px-4 py-2">
+						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
+							{metrics.profitability.label}
+						</div>
+						<div class="font-mono text-sm font-bold text-[#2E5CFF]">
+							{metrics.profitability.value}
+						</div>
 					</div>
-					<div class="font-mono text-sm font-bold text-[#2E5CFF]">
-						{metrics.profitability.value}
+				) : (
+					<div class="flex flex-col justify-center px-4 py-2 opacity-30">
+						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Margin</div>
+						<div class="font-mono text-sm font-bold text-white">N/A</div>
 					</div>
-				</div>
+				)}
 
 				{/* 3. GOVERNANCE */}
-				<div class="flex flex-col justify-center px-4 py-2">
-					<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Governance</div>
-					<div class="flex items-center gap-2 font-mono text-xs text-neutral-300">
-						<span class="text-white">{metrics.governance.dcos} DCOs</span>
-						<span class="text-neutral-600">|</span>
-						<span class="truncate">{metrics.governance.ecos[0]}</span>
+				{metrics.governance ? (
+					<div class="flex flex-col justify-center px-4 py-2">
+						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Governance</div>
+						<div class="flex items-center gap-2 font-mono text-xs text-neutral-300">
+							<span class="text-white">{metrics.governance.dcos} DCOs</span>
+							<span class="text-neutral-600">|</span>
+							<span class="truncate">{metrics.governance.ecos[0]}</span>
+						</div>
 					</div>
-				</div>
+				) : (
+					<div class="flex flex-col justify-center px-4 py-2 opacity-30">
+						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Governance</div>
+						<div class="font-mono text-sm font-bold text-white">N/A</div>
+					</div>
+				)}
 
 				{/* 4. INTERVENTIONS */}
-				<div class="flex flex-col justify-center px-4 py-2">
-					<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
-						{metrics.interventions.label}
+				{metrics.interventions ? (
+					<div class="flex flex-col justify-center px-4 py-2">
+						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
+							{metrics.interventions.label}
+						</div>
+						<div class="flex items-center gap-2">
+							<div class="font-mono text-sm font-bold text-white">
+								{metrics.interventions.count}
+							</div>
+							<div class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+						</div>
 					</div>
-					<div class="flex items-center gap-2">
-						<div class="font-mono text-sm font-bold text-white">{metrics.interventions.count}</div>
-						<div class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+				) : (
+					<div class="flex flex-col justify-center px-4 py-2 opacity-30">
+						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Interventions</div>
+						<div class="font-mono text-sm font-bold text-white">N/A</div>
 					</div>
-				</div>
+				)}
 
 				{/* 5. FINANCIAL */}
-				<div class="flex flex-col justify-center px-4 py-2">
-					<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Tooling Budget</div>
-					<div class="font-mono text-sm font-bold text-white">
-						${metrics.financial.toolingActual.toLocaleString()}
-						<span class="ml-1 text-[10px] text-neutral-500">
-							/ ${metrics.financial.toolingBudget.toLocaleString()}
-						</span>
+				{metrics.financial && metrics.financial.toolingBudget ? (
+					<div class="flex flex-col justify-center px-4 py-2">
+						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Tooling Budget</div>
+						<div class="font-mono text-sm font-bold text-white">
+							${metrics.financial.toolingActual.toLocaleString()}
+							<span class="ml-1 text-[10px] text-neutral-500">
+								/ ${metrics.financial.toolingBudget.toLocaleString()}
+							</span>
+						</div>
 					</div>
-				</div>
+				) : (
+					<div class="flex flex-col justify-center px-4 py-2 opacity-30">
+						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Tooling Budget</div>
+						<div class="font-mono text-sm font-bold text-white">N/A</div>
+					</div>
+				)}
 			</div>
 		)
 	}

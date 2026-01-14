@@ -33,6 +33,7 @@ export async function getMultiverseData() {
 			industry: p.data.industry || "Other",
 			skills: p.data.tools.concat(p.data.tags),
 			img: p.data.heroImage || "",
+			presentation_mode: p.data.presentation_mode || "standard",
 		};
 	});
 

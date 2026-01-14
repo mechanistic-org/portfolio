@@ -104,24 +104,23 @@ Keystatic is the **Single Source of Truth**. Use it to:
 
 ---
 
-## 4. The Smelter (`scripts/scaffold_projects.py`)
+## 4. The Smelter (`scripts/modernize_content.py`)
 
-Even with Keystatic, the **Smelter** script remains vital for **Data Consistency**.
+Even with Keystatic, the **Smelter** script remains vital for **Schema Compliance**.
 
 **When to run it:**
 
 - After adding a new Project in Keystatic.
-- After adding new "Bubbles" (Image folders) to `R2_MASTER`.
+- When the C24 Schema is updated and files need mass-patching.
 
 **What it does:**
 
-1.  **Reads** Keystatic Collections (The Timeline).
-2.  **Scans** your Asset Vault for new folders.
-3.  **Injects** the "Cyberspace" JSON blob into your Project Frontmatter.
-4.  **Ensures** every timeline node has a corresponding MDX file.
+1.  **Reads** all MDX files.
+2.  **Patches** missing fields (e.g., `metrics`, `context_tags`).
+3.  **Enforces** Snake Case naming conventions.
 
 ```powershell
-python scripts/scaffold_projects.py
+python scripts/modernize_content.py
 ```
 
 ---
@@ -132,7 +131,6 @@ python scripts/scaffold_projects.py
 
 1.  Did you put it in `R2_MASTER`?
 2.  Did you run the **Sync**?
-3.  Did you run the **Smelter** (to update the manifest)?
 
 ### "Keystatic crashed!"
 

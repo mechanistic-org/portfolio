@@ -18,6 +18,7 @@ interface NodeData extends d3.SimulationNodeDatum {
 	date: Date;
 	x?: number;
 	y?: number;
+	presentation_mode?: string;
 }
 
 interface ResVizSwarmProps {
@@ -77,7 +78,7 @@ export default function ResVizSwarm({
 				// Reducing it to "Standard Large Project" size (~3-4 years equivalent) to avoid dominating the physics.
 				let r = Math.max(15, Math.sqrt(durationDays) * 1.5);
 
-				if (d.id === "dreamjob") {
+				if (d.presentation_mode === "flagship") {
 					r = 45; // Fixed size, roughly matching a 5-6 year tenure but manageable
 				}
 
@@ -227,23 +228,23 @@ export default function ResVizSwarm({
 
 		// 1. Main Circle
 		// Deep Dive Projects: C|24, Backsplash, Makeline, Portion Cup, Pet Scale
-		const deepDives = ["c24", "backsplash", "makeline", "portion-cup", "pet-scale"];
-		const dreamjobId = "dreamjob";
+		// const deepDives = ["c24", "backsplash", "makeline", "portion-cup", "pet-scale"];
+		// const dreamjobId = "dreamjob";
 
 		nodeGroup
 			.append("circle")
 			.attr("r", (d: any) => d.radius)
 			.attr("fill", (d: any) => getColor(d))
 			.attr("stroke", (d: any) => {
-				if (d.id === dreamjobId) return "#ffffff";
-				return deepDives.includes(d.id) ? "#2E5CFF" : "rgba(255,255,255,0.1)";
+				if (d.presentation_mode === "flagship") return "#ffffff";
+				return d.presentation_mode === "deep_dive" ? "#2E5CFF" : "rgba(255,255,255,0.1)";
 			})
 			.attr("stroke-width", (d: any) => {
-				if (d.id === dreamjobId) return 4;
-				return deepDives.includes(d.id) ? 3 : 1;
+				if (d.presentation_mode === "flagship") return 4;
+				return d.presentation_mode === "deep_dive" ? 3 : 1;
 			})
 			.attr("filter", (d: any) =>
-				d.id === dreamjobId ? "drop-shadow(0 0 15px rgba(255,255,255,0.6))" : null,
+				d.presentation_mode === "flagship" ? "drop-shadow(0 0 15px rgba(255,255,255,0.6))" : null,
 			)
 			// .attr("class", (d: any) => d.id === dreamjobId ? "animate-pulse" : "") // Removed: Manual Physics Growth used instead
 			.attr("opacity", 0.9);
@@ -257,14 +258,14 @@ export default function ResVizSwarm({
 
 		// Function: Apply Default Styles (Reset)
 		const applyDefaultStyle = (selection: any, d: any) => {
-			const isDreamjob = d.id === dreamjobId;
-			const isDeepDive = deepDives.includes(d.id);
+			const isFlagship = d.presentation_mode === "flagship";
+			const isDeepDive = d.presentation_mode === "deep_dive";
 
 			let stroke = "rgba(255,255,255,0.1)";
 			let width = 1;
 			let filter: string | null = null;
 
-			if (isDreamjob) {
+			if (isFlagship) {
 				stroke = "#ffffff";
 				width = 4;
 				filter = "drop-shadow(0 0 15px rgba(255,255,255,0.6))";
@@ -379,7 +380,7 @@ export default function ResVizSwarm({
 
 				// Select just the Dreamjob circle directly for performance
 				// Note: We could do this for all, but Dreamjob is special
-				const dreamjobNode = nodes.find((n) => n.id === dreamjobId);
+				const dreamjobNode = nodes.find((n) => n.presentation_mode === "flagship");
 				if (dreamjobNode && dreamjobNode.x && dreamjobNode.y) {
 					const dx = x - dreamjobNode.x;
 					const dy = y - dreamjobNode.y;
@@ -397,11 +398,15 @@ export default function ResVizSwarm({
 					// Select the specific circle element and animate it smoothly?
 					// In a tick loop, we just set it.
 					// To be smoother, we might want to lerp, but setting directly is instant response.
-					svg.select(`#node-${dreamjobId} circle`).attr("r", targetR);
+					svg.select(`#node-${dreamjobNode.id} circle`).attr("r", targetR);
 				}
 			} else {
 				// Reset if mouse leaves
-				svg.select(`#node-${dreamjobId} circle`).attr("r", 45);
+				// Find flagship ID first
+				const flagshipStart = nodes.find((n) => n.presentation_mode === "flagship");
+				if (flagshipStart) {
+					svg.select(`#node-${flagshipStart.id} circle`).attr("r", 45);
+				}
 			}
 
 			// Move the Labels
@@ -451,13 +456,10 @@ export default function ResVizSwarm({
 
 		// 2. Highlight Target (Using Data Filter for robustness)
 		// Reset all visuals first, respecting Deep Dives
-		// Deep Dive Projects: C|24, Backsplash, Makeline, Portion Cup, Pet Scale
-		const deepDives = ["c24", "backsplash", "makeline", "portion-cup", "pet-scale"];
-		const dreamjobId = "dreamjob";
 
 		svg.selectAll(".node-group").each(function (d: any) {
-			const isDeepDive = deepDives.includes(d.id);
-			const isDreamjob = d.id === dreamjobId;
+			const isDeepDive = d.presentation_mode === "deep_dive";
+			const isFlagship = d.presentation_mode === "flagship";
 
 			// Dreamjob gets special White Pulse
 			// Deep Dives get Blue Ring
@@ -466,7 +468,7 @@ export default function ResVizSwarm({
 			let width = 1;
 			let filter: string | null = null;
 
-			if (isDreamjob) {
+			if (isFlagship) {
 				stroke = "#ffffff";
 				width = 4;
 				filter = "drop-shadow(0 0 15px rgba(255,255,255,0.6))";

@@ -11,6 +11,7 @@ export interface MultiverseNode {
 	industry?: string;
 	skills?: string[];
 	img?: string;
+	presentation_mode?: string;
 }
 
 export interface MultiverseGraphData {

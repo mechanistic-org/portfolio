@@ -93,6 +93,15 @@ const projectsCollection = defineCollection({
 		// HUD Intelligence (V4.2 Upgrade)
 		metrics: z
 			.object({
+				cogs: z.object({ value: z.string(), label: z.string() }).optional(),
+				profitability: z.object({ value: z.string(), label: z.string() }).optional(),
+				governance: z
+					.object({
+						ecos: z.array(z.string()),
+						dcos: z.number(),
+					})
+					.optional(),
+				interventions: z.object({ count: z.number(), label: z.string() }).optional(),
 				financial: z
 					.object({
 						toolingBudget: z.number().optional(),
@@ -117,6 +126,7 @@ const projectsCollection = defineCollection({
 
 		// Theme Selector (Core Architecture)
 		theme: z.string().optional(),
+		presentation_mode: z.string().optional(),
 
 		// Visibility
 		listed: z.boolean().default(true),

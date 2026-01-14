@@ -10,7 +10,9 @@ import SharedLayoutGallery from "@components/Projects/SharedLayoutGallery";
 import { getAssetUrl } from "@/utils/assets";
 
 const { entry, nextProject, prevProject, Content, metrics } = Astro.props;
-const { cyberspace, title, description } = entry.data;
+const { cyberspace, title, description, presentation_mode } = entry.data;
+// Strict Mode Logic
+const showHUD = presentation_mode === "deep_dive" || presentation_mode === "flagship";
 // Backwards compatibility/Renaming
 const scrolly = cyberspace;
 
@@ -83,18 +85,23 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 	<ScrollyHud steps={stickies.map((s: any) => ({ id: s.id, label: s.label }))} />
 
 	<!-- TOP HUD (Project Info) - Initially Hidden/Offscreen -->
-	<div
-		id="top-hud"
-		class="fixed top-0 left-0 z-9999 w-full transition-transform duration-500 ease-out"
-		style="transform: translateY(-100%);"
-	>
-		<ProjectManifestHUD
-			data={{ ...entry.data, id: entry.id }}
-			nextProject={nextProject}
-			prevProject={prevProject}
-			metrics={metrics}
-		/>
-	</div>
+	{
+		showHUD && (
+			<div
+				id="top-hud"
+				class="fixed top-0 left-0 z-9999 w-full transition-transform duration-500 ease-out"
+				style="transform: translateY(-100%);"
+			>
+				<ProjectManifestHUD
+					data={{ ...entry.data, id: entry.id }}
+					nextProject={nextProject}
+					prevProject={prevProject}
+					metrics={metrics}
+					presentation_mode={presentation_mode}
+				/>
+			</div>
+		)
+	}
 
 	<!-- MAIN ENGINE -->
 	<main

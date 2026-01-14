@@ -39,9 +39,12 @@ But we still need to sync assets and timeline data.
 
 **Command:**
 
+````powershell
 ```powershell
-python scripts/scaffold_projects.py
-```
+python scripts/modernize_content.py
+````
+
+````
 
 **Triggers (When to Run):**
 
@@ -62,7 +65,7 @@ python scripts/scaffold_projects.py
 
 ```powershell
 python scripts/sync_r2.py
-```
+````
 
 - **Prune (Mirror Mode):**
   ```powershell
