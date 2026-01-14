@@ -38,7 +38,29 @@ const Admonition = wrapper({
 	},
 });
 
+const ModelViewer = block({
+	label: "Model Viewer",
+	schema: {
+		src: fields.text({ label: "Source URL (GLB)" }),
+		alt: fields.text({ label: "Alt Text" }),
+		poster: fields.text({ label: "Poster Image" }),
+		environmentImage: fields.text({ label: "Environment Image" }),
+		cameraOrbit: fields.text({ label: "Camera Orbit" }),
+		autoRotate: fields.checkbox({ label: "Auto Rotate" }),
+	},
+});
+
+const YouTube = block({
+	label: "YouTube",
+	schema: {
+		id: fields.text({ label: "YouTube Video ID" }),
+		title: fields.text({ label: "Title" }),
+	},
+});
+
 export default {
 	Admonition,
 	Newsletter,
+	ModelViewer,
+	YouTube,
 };

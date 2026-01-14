@@ -69,35 +69,33 @@ def generate():
         return
 
     # Logic:
-    # Light Mode System -> needs high contrast key -> Black Logo
-    # Dark Mode System  -> needs high contrast key -> White Logo
+    # Instead of one SVG with CSS media queries (which can be flaky),
+    # we generate two separate SVGs and use HTML <link media="..."> to switch them.
     
-    svg_template = f'''<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
-  <style>
-    /* Default: Light Mode preference matches Black Logo */
-    .logo-dark {{ display: none; }}
-    .logo-light {{ display: block; }}
-
-    /* Dark Mode preference matches White Logo */
-    @media (prefers-color-scheme: dark) {{
-      .logo-dark {{ display: block; }}
-      .logo-light {{ display: none; }}
-    }}
-  </style>
-  
-  <!-- "logo-light" means "Logo for Light Mode" (Black Color) -->
-  <image class="logo-light" width="192" height="192" href="{black_b64}" />
-  
-  <!-- "logo-dark" means "Logo for Dark Mode" (White Color) -->
-  <image class="logo-dark" width="192" height="192" href="{white_b64}" />
+    # Light Mode Favicon -> Black Logo
+    light_svg = f'''<?xml version="1.0" encoding="UTF-8"?>
+<svg width="192" height="192" viewBox="0 0 192 192" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <image width="192" height="192" href="{black_b64}" />
 </svg>'''
 
-    print(f"Writing to {OUTPUT_PATH}...")
-    OUTPUT_PATH.write_text(svg_template, encoding='utf-8')
+    # Dark Mode Favicon -> White Logo
+    dark_svg = f'''<?xml version="1.0" encoding="UTF-8"?>
+<svg width="192" height="192" viewBox="0 0 192 192" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <image width="192" height="192" href="{white_b64}" />
+</svg>'''
+
+    LIGHT_OUTPUT = Path("public/favicon-light.svg")
+    DARK_OUTPUT = Path("public/favicon-dark.svg")
+
+    print(f"Writing to {LIGHT_OUTPUT}...")
+    LIGHT_OUTPUT.write_text(light_svg, encoding='utf-8')
+    
+    print(f"Writing to {DARK_OUTPUT}...")
+    DARK_OUTPUT.write_text(dark_svg, encoding='utf-8')
     
     # Verify size
-    size_kb = OUTPUT_PATH.stat().st_size / 1024
-    print(f"Success! Generated optimized dynamic favicon. Size: {size_kb:.2f} KB")
+    size_kb = LIGHT_OUTPUT.stat().st_size / 1024
+    print(f"Success! Generated separate light/dark favicons. Size: ~{size_kb:.2f} KB each")
 
 if __name__ == "__main__":
     generate()

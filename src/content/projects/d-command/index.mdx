@@ -1,214 +1,216 @@
 ---
-title: "D-Command"
-date: "4/1/2004"
-endDate: "9/1/2004"
-employer: "Digidesign"
+category: Control Surface
 client: []
-industry: "Other"
-category: "Control Surface"
-tools: ["ProEngineer"]
-toolIcons: ["ptc"]
-production: "Mass Production"
-tags:
-  [
-    "CAD (Computer-Aided Design)",
-    "Prototyping",
-    "Reliability Testing",
-    "Project Danko",
-  ]
-phase_stats:
-  { "Strategy": 7.7, "Design": 67.3, "Engineering": 23.0, "Production": 21.4 }
 cyberspace:
-  {
-    "layout": "linear",
-    "stickies":
-      [
-        {
-          "id": "01_intro",
-          "type": "gallery",
-          "deck":
-            [
-              {
-                "title": "The Mandate",
-                "subtitle": "Project Danko",
-                "body": "**Objective:**\nCapture the \"Mid-Tier\" studio market by delivering the flagship D-Control experience at **40% of the cost**.\n\n**The Strategy:**\nUnlike the flagship's modular unibody, we split Danko into two smaller, linkable units (Main + Fader). This slashed tooling costs but introduced a critical new weak point: **The Interconnect.**",
-              },
-            ],
-          "data":
-            {
-              "images":
-                [
-                  {
-                    "src": "/assets/r2/d-command/bubbles/01_intro/Control room 3-lg.webp",
-                    "width": 1280,
-                    "height": 960,
-                    "aspectRatio": 1.33,
-                    "alt": "Control Room Concept",
-                  },
-                  {
-                    "src": "/assets/r2/d-command/bubbles/01_intro/D-CommandLarge-md.webp",
-                    "width": 800,
-                    "height": 600,
-                    "aspectRatio": 1.33,
-                    "alt": "D-Command Main Unit",
-                  },
-                ],
-              "layout": "masonry",
-            },
-        },
-        {
-          "id": "02_architecture",
-          "type": "gallery",
-          "deck":
-            [
-              {
-                "title": "The Umbilical",
-                "subtitle": "Ground Loop Architecture",
-                "body": "**The Constraint:**\nLinking the Main Unit to the Fader Expansion created a massive ground loop risk. Logic threshold calculations suggested we needed \"40 heavy ground wires\" to prevent data corruption from voltage drop.\n\n**The Solution:**\nInstead of a costly active repeater, I designed a custom **DB25 Interface PCB** that split high-current power from sensitive data lines. We validated this with a strict **10-foot cable limit**, proving that a passive interconnect could work if the copper mass was allocated correctly.",
-              },
-            ],
-          "data":
-            {
-              "images":
-                [
-                  {
-                    "src": "/assets/r2/d-command/bubbles/02_architecture/danko_main_withlabels-lg.webp",
-                    "width": 1280,
-                    "height": 960,
-                    "aspectRatio": 1.33,
-                    "alt": "Danko Main Unit Architecture",
-                  },
-                  {
-                    "src": "/assets/r2/d-command/bubbles/02_architecture/DSC03259-lg.webp",
-                    "width": 1280,
-                    "height": 960,
-                    "aspectRatio": 1.33,
-                    "alt": "Internal Chassis Validation",
-                  },
-                  {
-                    "src": "/assets/r2/d-command/bubbles/02_architecture/danko_fader_withlabels-lg.webp",
-                    "width": 1280,
-                    "height": 960,
-                    "aspectRatio": 1.33,
-                    "alt": "Fader Module Architecture",
-                  },
-                ],
-              "layout": "masonry",
-            },
-        },
-        {
-          "id": "03_regulatory",
-          "type": "gallery",
-          "deck":
-            [
-              {
-                "title": "The Near-Miss",
-                "subtitle": "AC Withdraw Failure",
-                "body": "**The Crisis:**\nJust days before Mass Production, the unit **failed** the UL \"AC Withdraw\" test. The internal capacitance wasn't discharging fast enough (>60Vdc @ 2sec), posing a shock hazard.\n\n**The Fix:**\nWe couldn't re-spin the power supply. I engineered a retrofit harness with a specific **750K drain resistor** and sourced a new IEC filter with integrated bleeders, clearing the safety hold 48 hours before the factory start date.",
-              },
-            ],
-          "data":
-            {
-              "images":
-                [
-                  {
-                    "src": "/assets/r2/d-command/bubbles/03_regulatory/DSC03110-lg.webp",
-                    "width": 1280,
-                    "height": 960,
-                    "aspectRatio": 1.33,
-                    "alt": "Regulatory Lab Setup",
-                  },
-                  {
-                    "src": "/assets/r2/d-command/bubbles/03_regulatory/DSC03112-lg.webp",
-                    "width": 1280,
-                    "height": 960,
-                    "aspectRatio": 1.33,
-                    "alt": "Safety Testing Rig",
-                  },
-                ],
-              "layout": "masonry",
-            },
-        },
-        {
-          "id": "04_quality",
-          "type": "gallery",
-          "deck":
-            [
-              {
-                "title": "The Defense",
-                "subtitle": "The 'Tinderbox' PCBs",
-                "body": "**The Violation:**\nA prototype run of PCBs arrived marked as **UL 94 V-2** (flammable) instead of the mandatory **UL 94 V-0** (self-extinguishing). Our Compliance Lead called them a \"Virtual Tinderbox.\"\n\n**The Action:**\nI flagged this as a \"Blatant Violation\" of our safety spec, forced the vendor (RB Tech) to scrap the lot immediately, and instituted a new incoming inspection protocol to verify flammability ratings before boards ever hit the lab bench.",
-              },
-            ],
-          "data":
-            {
-              "images":
-                [
-                  {
-                    "src": "/assets/r2/d-command/bubbles/04_quality/PCll_Jr_Rev6_Main_Print-lg.webp",
-                    "width": 1280,
-                    "height": 960,
-                    "aspectRatio": 1.33,
-                    "alt": "PCll Jr Rev6 Main PCB",
-                  },
-                  {
-                    "src": "/assets/r2/d-command/bubbles/04_quality/DSC03122-lg.webp",
-                    "width": 1280,
-                    "height": 960,
-                    "aspectRatio": 1.33,
-                    "alt": "PCB Inspection",
-                  },
-                  {
-                    "src": "/assets/r2/d-command/bubbles/04_quality/PCll_Jr_Rev6_Fader_Print-lg.webp",
-                    "width": 1280,
-                    "height": 960,
-                    "aspectRatio": 1.33,
-                    "alt": "Fader PCB Detail",
-                  },
-                ],
-              "layout": "masonry",
-            },
-        },
-      ],
-    "narrative":
-      [
-        {
-          "step": "01_intro",
-          "title": "The Mid-Tier Gamble",
-          "subtitle": "2004",
-          "body": 'D-Control had conquered the high-end, but the mid-market was wide open. **Project Danko** was the answer. My directive was simple but brutal: *"Make it feel like a $100k console, but sell it for $15k."*',
-        },
-        {
-          "step": "02_architecture",
-          "title": "Splitting the Atom",
-          "subtitle": "The Risk of Modularity",
-          "body": "To hit the price point, we couldn't ship a massive unibody frame. We had to split the system into a **Main Unit** and a **Fader Expansion**. This created a new problem: How do you power and control a satellite unit without creating a ground loop that kills the digital audio stream?",
-        },
-        {
-          "step": "03_regulatory",
-          "title": "The 11th Hour",
-          "subtitle": "Safety Protocols",
-          "body": "Hardware design is a game of inches until it becomes a game of seconds. The **AC Withdraw Failure** wasn't just a bug; it was a layout oversight that threatened to delay the entire launch. The retrofit harness was classic triage engineering: ugly, invisible, but absolutely necessary.",
-        },
-        {
-          "step": "04_quality",
-          "title": "Holding the Line",
-          "subtitle": "Vendor Management",
-          "body": "When you push vendors on price, they sometimes cut corners on safety. The **'Tinderbox' PCB Incident** was a wake-up call. It taught me that 'Trust but Verify' isn't just a slogan—it's the only way to keep your product from literally catching fire.",
-        },
-      ],
-  }
-theme: "hyperspace"
-teamSize: "Core Team of INT 12 / EXT 4"
-gallery: []
+  layout: linear
+  narrative:
+  - body: 'D-Control had conquered the high-end, but the mid-market was wide open.
+      **Project Danko** was the answer. My directive was simple but brutal: *"Make
+      it feel like a $100k console, but sell it for $15k."*'
+    step: 01_intro
+    subtitle: '2004'
+    title: The Mid-Tier Gamble
+  - body: 'To hit the price point, we couldn''t ship a massive unibody frame. We had
+      to split the system into a **Main Unit** and a **Fader Expansion**. This created
+      a new problem: How do you power and control a satellite unit without creating
+      a ground loop that kills the digital audio stream?'
+    step: 02_architecture
+    subtitle: The Risk of Modularity
+    title: Splitting the Atom
+  - body: 'Hardware design is a game of inches until it becomes a game of seconds.
+      The **AC Withdraw Failure** wasn''t just a bug; it was a layout oversight that
+      threatened to delay the entire launch. The retrofit harness was classic triage
+      engineering: ugly, invisible, but absolutely necessary.'
+    step: 03_regulatory
+    subtitle: Safety Protocols
+    title: The 11th Hour
+  - body: When you push vendors on price, they sometimes cut corners on safety. The
+      **'Tinderbox' PCB Incident** was a wake-up call. It taught me that 'Trust but
+      Verify' isn't just a slogan—it's the only way to keep your product from literally
+      catching fire.
+    step: 04_quality
+    subtitle: Vendor Management
+    title: Holding the Line
+  stickies:
+  - data:
+      images:
+      - alt: Control Room Concept
+        aspectRatio: 1.33
+        height: 960
+        src: /assets/r2/d-command/bubbles/01_intro/Control room 3-lg.webp
+        width: 1280
+      - alt: D-Command Main Unit
+        aspectRatio: 1.33
+        height: 600
+        src: /assets/r2/d-command/bubbles/01_intro/D-CommandLarge-md.webp
+        width: 800
+      layout: masonry
+    deck:
+    - body: '**Objective:**
+
+        Capture the "Mid-Tier" studio market by delivering the flagship D-Control
+        experience at **40% of the cost**.
+
+
+        **The Strategy:**
+
+        Unlike the flagship''s modular unibody, we split Danko into two smaller, linkable
+        units (Main + Fader). This slashed tooling costs but introduced a critical
+        new weak point: **The Interconnect.**'
+      subtitle: Project Danko
+      title: The Mandate
+    id: 01_intro
+    type: gallery
+  - data:
+      images:
+      - alt: Danko Main Unit Architecture
+        aspectRatio: 1.33
+        height: 960
+        src: /assets/r2/d-command/bubbles/02_architecture/danko_main_withlabels-lg.webp
+        width: 1280
+      - alt: Internal Chassis Validation
+        aspectRatio: 1.33
+        height: 960
+        src: /assets/r2/d-command/bubbles/02_architecture/DSC03259-lg.webp
+        width: 1280
+      - alt: Fader Module Architecture
+        aspectRatio: 1.33
+        height: 960
+        src: /assets/r2/d-command/bubbles/02_architecture/danko_fader_withlabels-lg.webp
+        width: 1280
+      layout: masonry
+    deck:
+    - body: '**The Constraint:**
+
+        Linking the Main Unit to the Fader Expansion created a massive ground loop
+        risk. Logic threshold calculations suggested we needed "40 heavy ground wires"
+        to prevent data corruption from voltage drop.
+
+
+        **The Solution:**
+
+        Instead of a costly active repeater, I designed a custom **DB25 Interface
+        PCB** that split high-current power from sensitive data lines. We validated
+        this with a strict **10-foot cable limit**, proving that a passive interconnect
+        could work if the copper mass was allocated correctly.'
+      subtitle: Ground Loop Architecture
+      title: The Umbilical
+    id: 02_architecture
+    type: gallery
+  - data:
+      images:
+      - alt: Regulatory Lab Setup
+        aspectRatio: 1.33
+        height: 960
+        src: /assets/r2/d-command/bubbles/03_regulatory/DSC03110-lg.webp
+        width: 1280
+      - alt: Safety Testing Rig
+        aspectRatio: 1.33
+        height: 960
+        src: /assets/r2/d-command/bubbles/03_regulatory/DSC03112-lg.webp
+        width: 1280
+      layout: masonry
+    deck:
+    - body: '**The Crisis:**
+
+        Just days before Mass Production, the unit **failed** the UL "AC Withdraw"
+        test. The internal capacitance wasn''t discharging fast enough (>60Vdc @ 2sec),
+        posing a shock hazard.
+
+
+        **The Fix:**
+
+        We couldn''t re-spin the power supply. I engineered a retrofit harness with
+        a specific **750K drain resistor** and sourced a new IEC filter with integrated
+        bleeders, clearing the safety hold 48 hours before the factory start date.'
+      subtitle: AC Withdraw Failure
+      title: The Near-Miss
+    id: 03_regulatory
+    type: gallery
+  - data:
+      images:
+      - alt: PCll Jr Rev6 Main PCB
+        aspectRatio: 1.33
+        height: 960
+        src: /assets/r2/d-command/bubbles/04_quality/PCll_Jr_Rev6_Main_Print-lg.webp
+        width: 1280
+      - alt: PCB Inspection
+        aspectRatio: 1.33
+        height: 960
+        src: /assets/r2/d-command/bubbles/04_quality/DSC03122-lg.webp
+        width: 1280
+      - alt: Fader PCB Detail
+        aspectRatio: 1.33
+        height: 960
+        src: /assets/r2/d-command/bubbles/04_quality/PCll_Jr_Rev6_Fader_Print-lg.webp
+        width: 1280
+      layout: masonry
+    deck:
+    - body: '**The Violation:**
+
+        A prototype run of PCBs arrived marked as **UL 94 V-2** (flammable) instead
+        of the mandatory **UL 94 V-0** (self-extinguishing). Our Compliance Lead called
+        them a "Virtual Tinderbox."
+
+
+        **The Action:**
+
+        I flagged this as a "Blatant Violation" of our safety spec, forced the vendor
+        (RB Tech) to scrap the lot immediately, and instituted a new incoming inspection
+        protocol to verify flammability ratings before boards ever hit the lab bench.'
+      subtitle: The 'Tinderbox' PCBs
+      title: The Defense
+    id: 04_quality
+    type: gallery
+date: 2004-04-01
+description: The little brother to D-Control.
 documents: []
-links: [{ "name": "Digidesign Website", "url": "https://avid.com" }]
-heroImage: "/assets/r2/d-command/d-command-hero-01-xl.webp"
 draft: false
-description: "The little brother to D-Control."
-duration: "Active"
-statusLabel: "Completed"
-impact: ""
+duration: Active
+employer: Digidesign
+endDate: 2004-09-01
+gallery: []
+heroImage: /assets/r2/d-command/d-command-hero-01-xl.webp
+impact: ''
+industry: Other
+links:
+- name: Digidesign Website
+  url: https://avid.com
+phase_stats:
+  Design: 67.3
+  Engineering: 23.0
+  Production: 21.4
+  Strategy: 7.7
+production: Mass Production
+statusLabel: Completed
+tags:
+- Project Danko
+- Reliability Testing
+- Prototyping
+- Mechanical Engineering
+- Product Design
+- CAD (Computer-Aided Design)
+teamSize: Core Team of INT 12 / EXT 4
+theme: hyperspace
+title: D-Command
+toolIcons:
+- ptc
+tools:
+- Pro/ENGINEER
+
+# METRICS (The Real Data - C24 Schema)
+metrics:
+  financial:
+    toolingBudget: 0
+    toolingActual: 0
+    margins: []
+    costOfGoodsSold: []
+  process:
+    dcdCount: 0
+    engineeringChangeOrders: []
+  war_stories: []
+
+war_stories: []
 ---
 
 ## The Challenge
@@ -232,7 +234,5 @@ The unit became a staple in professional recording studios, bridging the gap bet
 
 ### Project Artifacts
 
-<div class="my-8">
-	<YouTube id="dQw4w9WgXcQ" />
-</div>
+<YouTube id="dQw4w9WgXcQ" />
 <ModelViewer />

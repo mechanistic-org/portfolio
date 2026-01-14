@@ -1,7 +1,7 @@
 ---
 title: "dreamjob"
-date: "11/23/2025"
-endDate: "12/31/2040"
+date: 2025-11-23
+endDate: 2040-12-31
 employer: "awesomejob"
 client: []
 industry: "Other"
@@ -29,6 +29,20 @@ description: ""
 duration: "15.1 Years"
 statusLabel: "Completed"
 impact: "Engineered a scalable Design System reducing deployment time by 40% and unifying 15+ years of cross-disciplinary data."
+
+# METRICS (The Real Data - C24 Schema)
+metrics:
+  financial:
+    toolingBudget: 0
+    toolingActual: 0
+    margins: []
+    costOfGoodsSold: []
+  process:
+    dcdCount: 0
+    engineeringChangeOrders: []
+  war_stories: []
+
+war_stories: []
 ---
 
 import Chip from "@components/dls/Chip.astro";
@@ -120,11 +134,11 @@ Beyond static images, the system supports interactive and semantic components.
 
 We use semantic chips to denote the lifecycle state of a project or component.
 
-<div class="my-4 flex gap-4">
+
 	<Chip variant="production" text="MASS PRODUCTION" />
 	<Chip variant="prototype" text="PROTOTYPE v0.9" />
 	<Chip variant="concept" text="CONCEPT STUDY" />
-</div>
+
 
 ### Interactive 3D
 
@@ -136,17 +150,17 @@ The "Physical Asset Law" mandates that we treat 3D models as first-class citizen
 
 For dynamic demonstrations, we embed optimized video content.
 
-<div class="my-8">
+
 	<YouTube id="dQw4w9WgXcQ" />
-</div>
+
 
 ### Glitch Effects
 
 To reinforce the "Cyber-Physical" brand identity, we employ controlled digital artifacts.
 
-<div class="my-8 text-4xl font-bold">
+
 	<ScrambleText text="SYSTEM_OPTIMIZED" />
-</div>
+
 
 <Admonition variant="tip">
 	**Optimization:** All assets shown here are processed by the

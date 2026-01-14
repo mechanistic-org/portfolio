@@ -41,6 +41,14 @@ This document serves as the first line of defense for system issues, build failu
   1.  **Frontmatter:** Quote ALL keys/values starting with a number: `01_intro` -> `"01_intro"`.
   2.  **Body Text:** Escape `<` if followed by a number: `<0.5mm` -> `&lt;0.5mm` or backtick `` `<0.5mm` ``.
 
+### Broken Site Logos / Favorites
+
+- **Symptom:** "EN" Logo appears as a broken image icon or text alt-tag in Header/Footer.
+- **Cause:** Missing or corrupt `EN_logo_1200.svg` in `public/assets/branding/`.
+- **Fix:** Restore the canonical "Fake SVGs" from the backup vault:
+  `copy "d:\portfolio\portfolio_working\EN_logo\EN_15-based_good-reference-but _fake-SVGS____\*.svg" "public/assets/branding\"`
+- **Note:** Do not use `Asset 2.svg` (Wireframe); it is incorrect.
+
 ### IDE Tooling Errors ("Stream Error")
 
 - **Symptom:** "Error generating commit message: ... stream error" or "404 models/gemini-1.5-flash not found".

@@ -18,10 +18,11 @@ import {
 } from "@keystatic/core";
 
 // components for preview purposes
-import ComponentBlocks from "@components/KeystaticComponents/ComponentBlocks";
+import ComponentBlocks from "./src/components/KeystaticComponents/ComponentBlocks";
 
 export default config({
 	// works in local mode in dev, then cloud mode in prod
+	// @ts-ignore
 	storage: import.meta.env.DEV === true ? { kind: "local" } : { kind: "cloud" },
 	// cloud deployment is free to sign up (up to 3 users per team)
 	// docs: https://keystatic.com/docs/cloud
@@ -289,6 +290,54 @@ export default config({
 					label: "Tool Icons",
 					itemLabel: (props) => props.value,
 				}),
+
+				// Skills Data
+				skillData: fields.array(
+					fields.object({
+						name: fields.text({ label: "Name" }),
+						value: fields.number({ label: "Value" }),
+					}),
+					{
+						label: "Skill Data",
+						itemLabel: (props) => props.fields.name.value || "Skill",
+					},
+				),
+				additionalSkills: fields.array(fields.text({ label: "Skill" }), {
+					label: "Additional Skills",
+					itemLabel: (props) => props.value,
+				}),
+				skillGraph: fields.text({ label: "Skill Graph (JSON)" }),
+				partGraph: fields.text({ label: "Part Graph (JSON)" }),
+				job_title: fields.text({ label: "Job Title" }),
+
+				// Stats & Metrics
+				stats: fields.object({
+					plastic: fields.number({ label: "Plastic" }),
+					metal: fields.number({ label: "Metal" }),
+					pcb: fields.number({ label: "PCB" }),
+				}),
+
+				metrics: fields.object({
+					financial: fields.object({
+						toolingBudget: fields.number({ label: "Tooling Budget" }),
+						toolingActual: fields.number({ label: "Tooling Actual" }),
+						costOfGoodsSold: fields.array(fields.text({ label: "Item" }), { label: "COGS" }),
+						margins: fields.array(fields.text({ label: "Item" }), { label: "Margins" }),
+					}),
+					process: fields.object({
+						engineeringChangeOrders: fields.array(fields.text({ label: "ECO" }), { label: "ECOs" }),
+						dcdCount: fields.number({ label: "DCD Count" }),
+					}),
+					war_stories: fields.array(fields.number({ label: "Story ID" }), {
+						label: "War Stories",
+						itemLabel: (props) => props.value?.toString() || "",
+					}),
+				}),
+				war_stories: fields.array(fields.number({ label: "Story ID (Legacy)" }), {
+					label: "War Stories (Legacy)",
+					itemLabel: (props) => props.value?.toString() || "",
+				}),
+
 				// Legacy/Metadata Fields
 				teamSize: fields.text({ label: "Team Size" }),
 				theme: fields.text({ label: "Theme" }),
@@ -429,6 +478,12 @@ export default config({
 					description: "Path to R2 asset (e.g. /assets/r2/project/hero.png)",
 				}),
 
+				// Slug field to prevent "Key not allowed" error
+				slug: fields.text({
+					label: "Slug (Read-Only)",
+					description: "This field is managed by the file path. Do not edit.",
+				}),
+
 				// Content
 				content: fields.mdx({
 					label: "Case Study",
@@ -452,6 +507,8 @@ export default config({
 					},
 					components: {
 						Admonition: ComponentBlocks.Admonition,
+						ModelViewer: ComponentBlocks.ModelViewer,
+						YouTube: ComponentBlocks.YouTube,
 					},
 				}),
 			},

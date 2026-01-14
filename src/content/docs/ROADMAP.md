@@ -51,11 +51,21 @@ sidebar:
 
 ## 📜 Change Log (Recent)
 
+- **[2026-01-12] Forensic Resume & LinkedIn Overhaul**
+  - **[Identity] Master Resume:** Established `MASTER_RESUME_GENERATED.md` as the "Universal Source of Truth," consolidating 30 years of history with "Forensic" fidelity (IP69K, Haptics, Magnesium).
+  - **[Platform] LinkedIn V4:** Finalized Profile Overhaul with "Anti-Collapse" formatting (Double Spacing + Emoji Bullets).
+    - **Bio:** "Hybrid Architect" narrative (WebTV -> Apple -> Forensic).
+    - **Headline:** "Forensic Engineering | Program Rescue".
+    - **Experience:** Full historic backfill (SGI to Present) with STAR-formatted wins.
+  - **[Site] Asset Sync:** Updated `src/config/work_history.json` to reflect the new Master Resume narrative on the `/resume/one-pager` Datasheet view.
+  - **[Protocol] External Synthesis:** Validated the "External Gemini" workflow for generating high-security career artifacts off-repo.
+
 - **[2026-01-11] Debugging & Stabilization (The Numeric Trap)**
   - **[Fix] MDX Crash:** Resolved persistent `MDXError: Unexpected character 0` by enforcing "The Numeric ID Law" (Quoting all zero-prefixed keys in `c24`, `sc48`, `d-control`).
   - **[Fix] Content Body:** Identified and escaped invalid JSX tags (`<0.5mm`) in legacy content that were masquerading as parser errors.
   - **[Asset] SC48 Restoration:** Restored missing `SC48-hero-01.png` from `R2_MASTER` using `process_images.py` to generate optimized WebP variants.
   - **[Tooling] IDE Repair:** Diagnosed "Stream Error" in Commit Generator as a Google Cloud API Permission/Quota issue (404 on Model), not a code regression.
+  - **[Fix] Branding:** Restored correct `EN_logo_1200` assets (Black/White variants) to `public/assets/branding/`. Resolved "Rusty" color issue and broken image links.
 
 - **[2026-01-09] Sovereign Asset Pipeline (Legacy CAD)**
   - **[Feature] DXF Engine:** Implemented `dxf_renderer.py`, a modular "sidecar" engine using `ezdxf` + `matplotlib`.

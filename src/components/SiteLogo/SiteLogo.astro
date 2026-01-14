@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 ---
 
 <a
-	class="primary-focus group/navlink relative block flex h-full w-40 items-center justify-center"
+	class="primary-focus group/navlink relative flex h-full w-40 items-center justify-center"
 	href="/"
 	aria-label="Home"
 	id="site-logo-container"
@@ -12,20 +12,29 @@ import { Image } from "astro:assets";
 	<img
 		src="/assets/branding/EN_logo_white_1200.svg"
 		alt="Erik Norris Logo"
-		class="hidden h-[70%] w-auto object-contain transition-transform duration-300 group-hover/navlink:scale-105 dark:block"
+		class="logo-dark h-[70%] w-auto object-contain transition-transform duration-300 group-hover/navlink:scale-105"
 	/>
 
 	<!-- Light Mode Logo -->
 	<img
 		src="/assets/branding/EN_logo_black_1200.svg"
 		alt="Erik Norris Logo"
-		class="block h-[70%] w-auto object-contain transition-transform duration-300 group-hover/navlink:scale-105 dark:hidden"
+		class="logo-light h-[70%] w-auto object-contain transition-transform duration-300 group-hover/navlink:scale-105"
 	/>
 </a>
 
 <style>
-	/* 
-	 * Ensure the logo color matches the text/theme.
-	 * The 'dark' class is typically controlled by the Tailwind 'darkMode' config or a parent class.
-	 */
+	/* Explicitly toggle logos based on html class, independent of Tailwind config */
+	:global(html.dark) .logo-light {
+		display: none;
+	}
+	:global(html.dark) .logo-dark {
+		display: block;
+	}
+	:global(html:not(.dark)) .logo-light {
+		display: block;
+	}
+	:global(html:not(.dark)) .logo-dark {
+		display: none;
+	}
 </style>

@@ -131,6 +131,7 @@ const projectsCollection = defineCollection({
 				financial: z
 					.object({
 						toolingBudget: z.number().optional(),
+						toolingActual: z.number().optional(),
 						costOfGoodsSold: z.array(z.any()).optional(),
 						margins: z.array(z.any()).optional(),
 					})

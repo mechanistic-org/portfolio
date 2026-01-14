@@ -1,110 +1,110 @@
 [
-  {
-    "company": "Mechanistic",
-    "title": "Senior Mechanical Engineer",
-    "start": "8/1/2022",
-    "end": "Present",
-    "color": "#10b981",
-    "description": "Independent engineering consultancy specializing in consumer electronics and robotics.",
-    "is_consulting": true
-  },
-  {
-    "company": "Hyphen",
-    "title": "Staff Mechanical Engineer",
-    "start": "5/1/2021",
-    "end": "8/1/2022",
-    "color": "#10b981",
-    "description": "Lead engineer for foodservice automation platforms.",
-    "is_consulting": false
-  },
-  {
-    "company": "Mechanistic",
-    "title": "Senior Mechanical Engineer",
-    "start": "5/1/2018",
-    "end": "5/1/2021",
-    "color": "#10b981",
-    "description": "Consulting engagements for high-profile hardware startups.",
-    "is_consulting": true
-  },
-  {
-    "company": "Noon",
-    "title": "Senior Mechanical Engineer",
-    "start": "3/1/2017",
-    "end": "5/1/2018",
-    "color": "#10b981",
-    "description": "Lighting control systems and smart home IoT devices.",
-    "is_consulting": false
-  },
-  {
-    "company": "Avegant",
-    "title": "Senior Mechanical Engineer",
-    "start": "6/1/2015",
-    "end": "3/1/2017",
-    "color": "#10b981",
-    "description": "Wearable display technology and AR headsets.",
-    "is_consulting": false
-  },
-  {
-    "company": "Kaleidescape",
-    "title": "Senior Mechanical Design Engineer",
-    "start": "5/1/2008",
-    "end": "6/1/2015",
-    "color": "#10b981",
-    "description": "High-end cinema servers and disc automation robotics.",
-    "is_consulting": false
-  },
-  {
-    "company": "Digidesign",
-    "title": "Senior Mechanical Designer",
-    "start": "6/1/2003",
-    "end": "5/1/2008",
-    "color": "#10b981",
-    "description": "Pro-audio control surfaces and interfaces.",
-    "is_consulting": false
-  },
-  {
-    "company": "Mechanistic",
-    "title": "Senior Mechanical Designer",
-    "start": "12/1/1999",
-    "end": "6/1/2003",
-    "color": "#10b981",
-    "description": "Early career consulting for Microsoft, WebTV, and Motorola.",
-    "is_consulting": true
-  },
-  {
-    "company": "frogdesign",
-    "title": "Mechanical Designer",
-    "start": "6/1/1997",
-    "end": "12/1/1999",
-    "color": "#10b981",
-    "description": "Industrial design and mechanical engineering for diverse clients.",
-    "is_consulting": false
-  },
-  {
-    "company": "Mechanistic",
-    "title": "Mechanical Designer",
-    "start": "9/1/1993",
-    "end": "6/1/1997",
-    "color": "#10b981",
-    "description": "Design support for medical and consumer products.",
-    "is_consulting": true
-  },
-  {
-    "company": "Silicon Graphics",
-    "title": "Technician IV",
-    "start": "7/1/1989",
-    "end": "9/1/1993",
-    "color": "#10b981",
-    "description": "Workstation assembly and mechanical support.",
-    "is_consulting": false
-  },
-  {
-    "company": "EP Technologies",
-    "title": "Production Supervisor",
-    "start": "6/1/1985",
-    "end": "7/1/1989",
-    "color": "#10b981",
-    "description": "Manufacturing supervision for cardiac ablation systems.",
-    "is_consulting": false
-  }
+	{
+		"company": "Mechanistic",
+		"title": "Senior Mechanical Engineer",
+		"start": "8/1/2022",
+		"end": "Present",
+		"color": "#10b981",
+		"description": "Independent engineering consultancy specializing in consumer electronics and robotics.",
+		"is_consulting": true
+	},
+	{
+		"company": "Hyphen",
+		"title": "Staff Mechanical Engineer",
+		"start": "5/1/2021",
+		"end": "8/1/2022",
+		"color": "#10b981",
+		"description": "Architected 'Factory-in-a-Box' (IP69K, 350+ actuators). Stabilized throughput to 350 meals/hr and reduced MTTR.",
+		"is_consulting": false
+	},
+	{
+		"company": "Mechanistic",
+		"title": "Senior Mechanical Engineer",
+		"start": "5/1/2018",
+		"end": "5/1/2021",
+		"color": "#10b981",
+		"description": "Ruggedized Gen 2 e-bike fleet (Glass-Filled Nylon). Reduced assembly time by 20% for Lyft/Bay Wheels.",
+		"is_consulting": true
+	},
+	{
+		"company": "Noon",
+		"title": "Senior Mechanical Engineer",
+		"start": "3/1/2017",
+		"end": "5/1/2018",
+		"color": "#10b981",
+		"description": "Pioneered 'Haptic Wall Switch' (Floating Flexure OLED + Piezo). Achieved Zero cosmetic yield loss via CMF rigor.",
+		"is_consulting": false
+	},
+	{
+		"company": "Avegant",
+		"title": "Senior Mechanical Engineer",
+		"start": "6/1/2015",
+		"end": "3/1/2017",
+		"color": "#10b981",
+		"description": "Solved 'Hot Head' crisis using Magnesium AZ91D thermal reservoir. Achieved sub-micron optics alignment.",
+		"is_consulting": false
+	},
+	{
+		"company": "Kaleidescape",
+		"title": "Senior Mechanical Design Engineer",
+		"start": "5/1/2008",
+		"end": "6/1/2015",
+		"color": "#10b981",
+		"description": "Rescued production (1,200 part rejection). Reduced shipping damage to 0% via forensic packaging design.",
+		"is_consulting": false
+	},
+	{
+		"company": "Digidesign",
+		"title": "Senior Mechanical Designer",
+		"start": "6/1/2003",
+		"end": "5/1/2008",
+		"color": "#10b981",
+		"description": "Led flagship console architecture (D-Control, C|24). Managed global NPI and complex electromechanical integration.",
+		"is_consulting": false
+	},
+	{
+		"company": "Mechanistic",
+		"title": "Senior Mechanical Designer",
+		"start": "12/1/1999",
+		"end": "6/1/2003",
+		"color": "#10b981",
+		"description": "Managed 150W thermal envelope for fanless devices (WebTV/UltimateTV). Designed high-volume enclosures (>100k units).",
+		"is_consulting": true
+	},
+	{
+		"company": "frogdesign",
+		"title": "Mechanical Designer",
+		"start": "6/1/1997",
+		"end": "12/1/1999",
+		"color": "#10b981",
+		"description": "Industrial design and mechanical engineering for diverse clients.",
+		"is_consulting": false
+	},
+	{
+		"company": "Mechanistic",
+		"title": "Mechanical Designer",
+		"start": "9/1/1993",
+		"end": "6/1/1997",
+		"color": "#10b981",
+		"description": "Design support for medical and consumer products.",
+		"is_consulting": true
+	},
+	{
+		"company": "Silicon Graphics",
+		"title": "Technician IV",
+		"start": "7/1/1989",
+		"end": "9/1/1993",
+		"color": "#10b981",
+		"description": "Workstation assembly and mechanical support.",
+		"is_consulting": false
+	},
+	{
+		"company": "EP Technologies",
+		"title": "Production Supervisor",
+		"start": "6/1/1985",
+		"end": "7/1/1989",
+		"color": "#10b981",
+		"description": "Manufacturing supervision for cardiac ablation systems.",
+		"is_consulting": false
+	}
 ]

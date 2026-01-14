@@ -1,0 +1,3455 @@
+{
+  "metadata": {
+    "total_connections": 649,
+    "generated_at": "2026-01-13T15:15:35.114286"
+  },
+  "top_companies": [
+    {
+      "name": "Apple",
+      "count": 28
+    },
+    {
+      "name": "Unknown",
+      "count": 15
+    },
+    {
+      "name": "Google",
+      "count": 15
+    },
+    {
+      "name": "Self-employed",
+      "count": 14
+    },
+    {
+      "name": "Hyphen",
+      "count": 11
+    },
+    {
+      "name": "Universal Audio",
+      "count": 10
+    },
+    {
+      "name": "Kaleidescape",
+      "count": 10
+    },
+    {
+      "name": "Avegant",
+      "count": 10
+    },
+    {
+      "name": "Function Engineering",
+      "count": 7
+    },
+    {
+      "name": "Avid",
+      "count": 6
+    },
+    {
+      "name": "Meta",
+      "count": 5
+    },
+    {
+      "name": "Stealth Startup",
+      "count": 5
+    },
+    {
+      "name": "Freelance",
+      "count": 5
+    },
+    {
+      "name": "Digidesign",
+      "count": 5
+    },
+    {
+      "name": "Retired",
+      "count": 4
+    },
+    {
+      "name": "Amazon",
+      "count": 4
+    },
+    {
+      "name": "MASS Precision",
+      "count": 4
+    },
+    {
+      "name": "Spanner",
+      "count": 3
+    },
+    {
+      "name": "Intuitive",
+      "count": 3
+    },
+    {
+      "name": "Synapse Product Development",
+      "count": 3
+    },
+    {
+      "name": "Genentech",
+      "count": 3
+    },
+    {
+      "name": "MASS Precision, Inc.",
+      "count": 2
+    },
+    {
+      "name": "Fresh Consulting",
+      "count": 2
+    },
+    {
+      "name": "Ewing-Foley, Inc",
+      "count": 2
+    },
+    {
+      "name": "HP",
+      "count": 2
+    },
+    {
+      "name": "Tesla",
+      "count": 2
+    },
+    {
+      "name": "Zoox",
+      "count": 2
+    },
+    {
+      "name": "Panasonic Well",
+      "count": 2
+    },
+    {
+      "name": "Robinhood",
+      "count": 2
+    },
+    {
+      "name": "Microsoft",
+      "count": 2
+    },
+    {
+      "name": "Function Engineering, Inc.",
+      "count": 2
+    },
+    {
+      "name": "NVIDIA",
+      "count": 2
+    },
+    {
+      "name": "Exasol",
+      "count": 2
+    },
+    {
+      "name": "SVC SAS",
+      "count": 2
+    },
+    {
+      "name": "Adobe",
+      "count": 2
+    },
+    {
+      "name": "Self Employed",
+      "count": 2
+    },
+    {
+      "name": "Zao Technology Innovations, Inc",
+      "count": 2
+    },
+    {
+      "name": "Axon",
+      "count": 2
+    },
+    {
+      "name": "GoPro",
+      "count": 2
+    },
+    {
+      "name": "Netflix",
+      "count": 2
+    },
+    {
+      "name": "Home",
+      "count": 2
+    },
+    {
+      "name": "PACE Anti-Piracy, Inc",
+      "count": 2
+    },
+    {
+      "name": "Tel-Tru Manufacturing Co.",
+      "count": 1
+    },
+    {
+      "name": "Design Visionaries",
+      "count": 1
+    },
+    {
+      "name": "OnePay",
+      "count": 1
+    },
+    {
+      "name": "DNA Group, Inc.",
+      "count": 1
+    },
+    {
+      "name": "Medical Solutions",
+      "count": 1
+    },
+    {
+      "name": "Bond Associates LLC",
+      "count": 1
+    },
+    {
+      "name": "Ouster",
+      "count": 1
+    },
+    {
+      "name": "SQUIRE",
+      "count": 1
+    }
+  ],
+  "timeline": [
+    {
+      "company": "Supermodelli LLC",
+      "role": "Co-Founder, Design & Engineering Lead",
+      "connectedOn": "2006-06-08"
+    },
+    {
+      "company": "Heike Consulting",
+      "role": "Principal",
+      "connectedOn": "2006-06-08"
+    },
+    {
+      "company": "ThousandEyes (part of Cisco)",
+      "role": "Director, Strategic Accounts",
+      "connectedOn": "2006-06-08"
+    },
+    {
+      "company": "Fender Musical Instruments Corporation",
+      "role": "Vice President of Research and Development, Electronics and Product Innovation",
+      "connectedOn": "2006-06-09"
+    },
+    {
+      "company": "Google",
+      "role": "Director, Indirect GTM, Global Channels",
+      "connectedOn": "2006-06-09"
+    },
+    {
+      "company": "Freelance",
+      "role": "Retired",
+      "connectedOn": "2006-06-09"
+    },
+    {
+      "company": "Private",
+      "role": "Conultant",
+      "connectedOn": "2006-06-09"
+    },
+    {
+      "company": "DeSogos.com",
+      "role": "Owner",
+      "connectedOn": "2006-06-09"
+    },
+    {
+      "company": "Cook County Health",
+      "role": "Director, Vaccine Operations & Logistics",
+      "connectedOn": "2006-06-09"
+    },
+    {
+      "company": "Various Clients",
+      "role": "Freelance Designer",
+      "connectedOn": "2006-06-09"
+    },
+    {
+      "company": "Revenue Juice",
+      "role": "Revenue Ops & HubSpot Nerd - Chief Strategist",
+      "connectedOn": "2006-06-12"
+    },
+    {
+      "company": "LinkedIn",
+      "role": "Distinguished Engineer",
+      "connectedOn": "2006-06-12"
+    },
+    {
+      "company": "Avid",
+      "role": "Product Designer - Audio Systems",
+      "connectedOn": "2006-06-13"
+    },
+    {
+      "company": "Pine Hill Marketing Solutions, LLC",
+      "role": "Marketing Consultant (Open to Full-Time Roles)",
+      "connectedOn": "2006-06-13"
+    },
+    {
+      "company": "NxRev, Inc.",
+      "role": "CEO/Principal",
+      "connectedOn": "2006-06-13"
+    },
+    {
+      "company": "Avid",
+      "role": "Program Manager",
+      "connectedOn": "2006-06-15"
+    },
+    {
+      "company": "Menlo Micro",
+      "role": "VP, New Product Introduction",
+      "connectedOn": "2006-06-19"
+    },
+    {
+      "company": "Genentech",
+      "role": "Senior Director, External Quality Operations",
+      "connectedOn": "2006-06-27"
+    },
+    {
+      "company": "Self-employed",
+      "role": "Independent application developer",
+      "connectedOn": "2006-07-05"
+    },
+    {
+      "company": "Nanoverse Technologies, Ltd.",
+      "role": "Senior Director of People Operations",
+      "connectedOn": "2006-07-06"
+    },
+    {
+      "company": "Self-employed",
+      "role": "Certified Public Accountant",
+      "connectedOn": "2006-07-28"
+    },
+    {
+      "company": "Self Employed",
+      "role": "Project Engineer",
+      "connectedOn": "2007-01-05"
+    },
+    {
+      "company": "Digidesign",
+      "role": "Professional Products Mkt Mgr",
+      "connectedOn": "2007-03-16"
+    },
+    {
+      "company": "SpecCoat",
+      "role": "Director of Business Development",
+      "connectedOn": "2007-04-12"
+    },
+    {
+      "company": "ALSO.",
+      "role": "Talent Acquisition",
+      "connectedOn": "2007-07-31"
+    },
+    {
+      "company": "RPG Associates",
+      "role": "Fractional/Full-Time: Head of Engineering | VP Engineering | Director Hardware Engineering | CTO",
+      "connectedOn": "2007-07-31"
+    },
+    {
+      "company": "Apple",
+      "role": "Systems & Data Program Manager",
+      "connectedOn": "2007-07-31"
+    },
+    {
+      "company": "Universal Audio",
+      "role": "Director of Manufacturing and Quality",
+      "connectedOn": "2007-07-31"
+    },
+    {
+      "company": "Digidesign",
+      "role": "Mechanical Designer",
+      "connectedOn": "2007-08-01"
+    },
+    {
+      "company": "Digidesign",
+      "role": "Layout engineering superviser",
+      "connectedOn": "2007-08-01"
+    },
+    {
+      "company": "Intuitive Surgical",
+      "role": "Senior Supplier Engineer",
+      "connectedOn": "2007-08-01"
+    },
+    {
+      "company": "Google",
+      "role": "Hardware Manager, Google",
+      "connectedOn": "2007-08-01"
+    },
+    {
+      "company": "Crescendo",
+      "role": "VP Global Workplace",
+      "connectedOn": "2007-08-02"
+    },
+    {
+      "company": "Digidesign",
+      "role": "Manufacturing Engineer Manger",
+      "connectedOn": "2007-08-03"
+    },
+    {
+      "company": "Astralis",
+      "role": "Vice President of Sales",
+      "connectedOn": "2007-08-04"
+    },
+    {
+      "company": "Sequential LLC",
+      "role": "Chief Executive Officer",
+      "connectedOn": "2007-08-21"
+    },
+    {
+      "company": "Apple",
+      "role": "QA Manager",
+      "connectedOn": "2007-09-02"
+    },
+    {
+      "company": "Ghost Autonomy",
+      "role": "Mechanical Engineering Leader | Product Development & Systems Development",
+      "connectedOn": "2007-09-07"
+    },
+    {
+      "company": "ChildX",
+      "role": "Board Member",
+      "connectedOn": "2007-09-22"
+    },
+    {
+      "company": "Enovar Consulting, LLC",
+      "role": "Principal Engineer, Founder",
+      "connectedOn": "2007-09-23"
+    },
+    {
+      "company": "Compass Commercial Realty LP",
+      "role": "Vice President, Central & Western Canada",
+      "connectedOn": "2007-10-31"
+    },
+    {
+      "company": "Nextracker Inc.",
+      "role": "Staff Technical Program Manager",
+      "connectedOn": "2007-12-22"
+    },
+    {
+      "company": "Oracle",
+      "role": "Datawarehouse Developer",
+      "connectedOn": "2008-01-18"
+    },
+    {
+      "company": "XMEMS",
+      "role": "Audio Applications Director",
+      "connectedOn": "2008-03-13"
+    },
+    {
+      "company": "Hazel Health",
+      "role": "Senior Software Engineer",
+      "connectedOn": "2008-04-08"
+    },
+    {
+      "company": "SENSTREAM, INC.",
+      "role": "Chief Product Officer",
+      "connectedOn": "2008-09-18"
+    },
+    {
+      "company": "Keller Williams Realty",
+      "role": "Realtor",
+      "connectedOn": "2008-09-18"
+    },
+    {
+      "company": "P\u012bQuant Digital Design Consulting",
+      "role": "Sole Proprietor",
+      "connectedOn": "2008-09-18"
+    },
+    {
+      "company": "Specialized Bicycle Components",
+      "role": "Principal Mechanical Engineer Helmets",
+      "connectedOn": "2008-09-18"
+    },
+    {
+      "company": "Universal Audio",
+      "role": "Vice President, Operations",
+      "connectedOn": "2008-09-25"
+    },
+    {
+      "company": "Self-employed",
+      "role": "Clinical Operations Advisor/Consultant/Mentor",
+      "connectedOn": "2008-10-03"
+    },
+    {
+      "company": "IDEXX",
+      "role": "Software Development Specialist",
+      "connectedOn": "2008-10-03"
+    },
+    {
+      "company": "Meta",
+      "role": "Senior Software Engineer",
+      "connectedOn": "2008-10-03"
+    },
+    {
+      "company": "OurGroceries, Inc.",
+      "role": "Head of Product",
+      "connectedOn": "2008-10-13"
+    },
+    {
+      "company": "Charp Insight",
+      "role": "Founder",
+      "connectedOn": "2008-10-13"
+    },
+    {
+      "company": "Adobe",
+      "role": "Head of AI Audio, Creators",
+      "connectedOn": "2008-10-13"
+    },
+    {
+      "company": "Cisco Cloud Networking Group (Meraki)",
+      "role": "Member of the Technical Staff",
+      "connectedOn": "2008-10-16"
+    },
+    {
+      "company": "Aitech Systems",
+      "role": "General Manager, Aitech Defense Solutions",
+      "connectedOn": "2008-10-22"
+    },
+    {
+      "company": "ChargePoint",
+      "role": "Senior Product Line Manager",
+      "connectedOn": "2008-10-25"
+    },
+    {
+      "company": "Universal Audio",
+      "role": "VP of Product",
+      "connectedOn": "2008-10-30"
+    },
+    {
+      "company": "Fawn",
+      "role": "Head of Hardware & Manufacturing",
+      "connectedOn": "2009-01-06"
+    },
+    {
+      "company": "Universal Audio",
+      "role": "Sr. Software Architect",
+      "connectedOn": "2009-03-10"
+    },
+    {
+      "company": "Ross Video",
+      "role": "Global Strategic Account Manager",
+      "connectedOn": "2009-03-10"
+    },
+    {
+      "company": "Amazon",
+      "role": "Director, Partner-Branded Fire TV",
+      "connectedOn": "2009-03-10"
+    },
+    {
+      "company": "Analog Devices",
+      "role": "Senior Technical Writer",
+      "connectedOn": "2009-03-10"
+    },
+    {
+      "company": "Cash App",
+      "role": "Content Specialist",
+      "connectedOn": "2009-03-10"
+    },
+    {
+      "company": "Aion",
+      "role": "Head of People Operations",
+      "connectedOn": "2009-03-10"
+    },
+    {
+      "company": "Google",
+      "role": "Technical Program Management - Android Automotive",
+      "connectedOn": "2009-03-10"
+    },
+    {
+      "company": "GoFundMe",
+      "role": "Senior Director, Engineering",
+      "connectedOn": "2009-03-10"
+    },
+    {
+      "company": "Cadence Design Systems",
+      "role": "Sr. Principal Product Engineer",
+      "connectedOn": "2009-03-10"
+    },
+    {
+      "company": "Kaleidescape",
+      "role": "Vice President of Engineering",
+      "connectedOn": "2009-03-10"
+    },
+    {
+      "company": "UCSF Medical Center",
+      "role": "Assistant Division Manager",
+      "connectedOn": "2009-03-11"
+    },
+    {
+      "company": "Universal Audio",
+      "role": "Director, Program Management",
+      "connectedOn": "2009-03-11"
+    },
+    {
+      "company": "Kaleidescape Canada Inc.",
+      "role": "Hardware Program Manager",
+      "connectedOn": "2009-03-24"
+    },
+    {
+      "company": "Stealth Startup",
+      "role": "Founder, AI x Health",
+      "connectedOn": "2009-03-30"
+    },
+    {
+      "company": "Azul",
+      "role": "VP - Human Resources",
+      "connectedOn": "2009-06-08"
+    },
+    {
+      "company": "Mass Precision",
+      "role": "Acct. Mgr./Sales",
+      "connectedOn": "2009-07-09"
+    },
+    {
+      "company": "Digital Dynamics, Inc.",
+      "role": "VP Engineering/Engineering Fellow",
+      "connectedOn": "2009-10-28"
+    },
+    {
+      "company": "Pal Pilot Corporation",
+      "role": "Business Development Manager",
+      "connectedOn": "2009-11-02"
+    },
+    {
+      "company": "Bluevial",
+      "role": "Builder & Tinkerer",
+      "connectedOn": "2009-11-05"
+    },
+    {
+      "company": "Zendesk",
+      "role": "Vice President HR Partners and M&A",
+      "connectedOn": "2009-11-14"
+    },
+    {
+      "company": "Apple",
+      "role": "Sr. Recruiter (AI/ML)",
+      "connectedOn": "2009-11-24"
+    },
+    {
+      "company": "Cerus",
+      "role": "Senior Director/Head of Hospital Marketing",
+      "connectedOn": "2009-11-24"
+    },
+    {
+      "company": "PACE Anti-Piracy, Inc",
+      "role": "Senior Software Engineer",
+      "connectedOn": "2009-11-24"
+    },
+    {
+      "company": "HuHu AI",
+      "role": "COO & Co-Founder",
+      "connectedOn": "2009-11-24"
+    },
+    {
+      "company": "College of the Adaptive Arts",
+      "role": "Student Services",
+      "connectedOn": "2009-11-24"
+    },
+    {
+      "company": "MASS Precision",
+      "role": "Customer Service",
+      "connectedOn": "2009-11-24"
+    },
+    {
+      "company": "Mathnasium of Aptos",
+      "role": "Owner",
+      "connectedOn": "2009-11-24"
+    },
+    {
+      "company": "Goldbelt Professional Services",
+      "role": "Data Analyst Consultant to Centers for Disease Control",
+      "connectedOn": "2009-11-24"
+    },
+    {
+      "company": "Ripple",
+      "role": "Director",
+      "connectedOn": "2009-11-24"
+    },
+    {
+      "company": "GBA",
+      "role": "Managing Partner",
+      "connectedOn": "2009-11-24"
+    },
+    {
+      "company": "AtScale",
+      "role": "Director of Sales",
+      "connectedOn": "2009-11-24"
+    },
+    {
+      "company": "Tacta Systems, Inc.",
+      "role": "Senior Mechanical Engineer",
+      "connectedOn": "2009-11-24"
+    },
+    {
+      "company": "Relievant Medsystems, Inc.",
+      "role": "Sr. Program Manager ",
+      "connectedOn": "2009-11-24"
+    },
+    {
+      "company": "Med-Tech Money Talks",
+      "role": "Founder / Moderator",
+      "connectedOn": "2009-11-24"
+    },
+    {
+      "company": "Sonatus",
+      "role": "Senior Staff Product Manager, Platform",
+      "connectedOn": "2009-11-24"
+    },
+    {
+      "company": "PULSE Market Catalysts",
+      "role": "Principal",
+      "connectedOn": "2009-11-25"
+    },
+    {
+      "company": "Chainalysis Government Solutions",
+      "role": "State and Local Government Account Executive ",
+      "connectedOn": "2009-11-25"
+    },
+    {
+      "company": "Stryker Sports Medicine",
+      "role": "Sr Manager, R&D",
+      "connectedOn": "2009-11-25"
+    },
+    {
+      "company": "Avid",
+      "role": "Director of Accessibility and Global ESG",
+      "connectedOn": "2009-11-25"
+    },
+    {
+      "company": "Makana Arts",
+      "role": "Artist/Owner",
+      "connectedOn": "2009-11-25"
+    },
+    {
+      "company": "Unknown",
+      "role": "",
+      "connectedOn": "2009-11-25"
+    },
+    {
+      "company": "GoPro",
+      "role": "Director of Electrical Engineering",
+      "connectedOn": "2009-11-25"
+    },
+    {
+      "company": "Lockheed Martin",
+      "role": "Sr Staff Mechanical Engineer",
+      "connectedOn": "2009-11-25"
+    },
+    {
+      "company": "7-Seat",
+      "role": "Founder & CEO",
+      "connectedOn": "2009-11-25"
+    },
+    {
+      "company": "Self-employed",
+      "role": "Independent Design Consultant",
+      "connectedOn": "2009-11-27"
+    },
+    {
+      "company": "Applied Intelligence LLC",
+      "role": "Futurist & Founder",
+      "connectedOn": "2009-11-27"
+    },
+    {
+      "company": "J.D. Power",
+      "role": "Technology Manager",
+      "connectedOn": "2009-11-27"
+    },
+    {
+      "company": "Latency: Zero, LLC",
+      "role": "Owner",
+      "connectedOn": "2009-11-27"
+    },
+    {
+      "company": "bloom (bloombaby.com), an iLinko Company",
+      "role": "Partner",
+      "connectedOn": "2009-11-27"
+    },
+    {
+      "company": "Sift",
+      "role": "CMO",
+      "connectedOn": "2009-11-28"
+    },
+    {
+      "company": "Freelance Contractor (Graphic + Interactive)",
+      "role": "Art Director / Designer",
+      "connectedOn": "2009-11-30"
+    },
+    {
+      "company": "Cox Communications",
+      "role": "Engin",
+      "connectedOn": "2009-11-30"
+    },
+    {
+      "company": "Medtronic",
+      "role": "Manufacturing Engineering",
+      "connectedOn": "2009-11-30"
+    },
+    {
+      "company": "Fitbit (now part of Google)",
+      "role": "Retired",
+      "connectedOn": "2009-12-01"
+    },
+    {
+      "company": "Enroute Cannabis",
+      "role": "Owner and Managing Partner",
+      "connectedOn": "2009-12-02"
+    },
+    {
+      "company": "formerly with Apple",
+      "role": "Retired Engineering Manager",
+      "connectedOn": "2009-12-02"
+    },
+    {
+      "company": "Google",
+      "role": "Staff Software Engineer",
+      "connectedOn": "2009-12-02"
+    },
+    {
+      "company": "CDP Community",
+      "role": "SVP Products, Services and Operations",
+      "connectedOn": "2009-12-02"
+    },
+    {
+      "company": "lenartstudios",
+      "role": "principal",
+      "connectedOn": "2009-12-02"
+    },
+    {
+      "company": "Johnson & Johnson MedTech",
+      "role": "Principal Clinical Engineer",
+      "connectedOn": "2009-12-03"
+    },
+    {
+      "company": "Apple",
+      "role": "AirPlay Audio Engineer",
+      "connectedOn": "2009-12-04"
+    },
+    {
+      "company": "Home",
+      "role": "Full-time Father",
+      "connectedOn": "2009-12-05"
+    },
+    {
+      "company": "GSM Outdoors",
+      "role": "Electrical Engineering Manager",
+      "connectedOn": "2009-12-05"
+    },
+    {
+      "company": "Snap Inc.",
+      "role": "Audio HW Lead",
+      "connectedOn": "2009-12-07"
+    },
+    {
+      "company": "Avid",
+      "role": "Administrative Assistant / Receptionist ~ Human Resources / Facilities",
+      "connectedOn": "2009-12-07"
+    },
+    {
+      "company": "University of Waterloo",
+      "role": "Lab Instructor - Systems Design Engineering",
+      "connectedOn": "2009-12-07"
+    },
+    {
+      "company": "Microsoft",
+      "role": "Principal Engineer",
+      "connectedOn": "2009-12-08"
+    },
+    {
+      "company": "Netflix",
+      "role": "Product Manager",
+      "connectedOn": "2009-12-08"
+    },
+    {
+      "company": "Self-employed",
+      "role": "Recording/Mix Engineer, Musician",
+      "connectedOn": "2009-12-08"
+    },
+    {
+      "company": "Coldwell Banker Realty",
+      "role": "Real Estate Professional",
+      "connectedOn": "2009-12-09"
+    },
+    {
+      "company": "MASS Precision",
+      "role": "Quality Manager",
+      "connectedOn": "2009-12-09"
+    },
+    {
+      "company": "Apple",
+      "role": "Software Engineer",
+      "connectedOn": "2009-12-10"
+    },
+    {
+      "company": "Inquis Medical, Inc.",
+      "role": "VP of Marketing",
+      "connectedOn": "2009-12-10"
+    },
+    {
+      "company": "Estas USA Camshaft Industry",
+      "role": "Head of Engineering and Development",
+      "connectedOn": "2009-12-11"
+    },
+    {
+      "company": "Unknown",
+      "role": "",
+      "connectedOn": "2009-12-12"
+    },
+    {
+      "company": "Universal Audio",
+      "role": "Senior Manufacturing Engineer",
+      "connectedOn": "2009-12-15"
+    },
+    {
+      "company": "kvetohecko.com",
+      "role": "Producer, Director, Writer",
+      "connectedOn": "2009-12-20"
+    },
+    {
+      "company": "Fox Entertainment",
+      "role": "Systems Engineer",
+      "connectedOn": "2009-12-21"
+    },
+    {
+      "company": "Apple",
+      "role": "Manager Core Audio Software",
+      "connectedOn": "2010-01-06"
+    },
+    {
+      "company": "Apple",
+      "role": "Staff DSP Engineer",
+      "connectedOn": "2010-01-06"
+    },
+    {
+      "company": "PACE Anti-Piracy, Inc",
+      "role": "VP of Product & Business Development",
+      "connectedOn": "2010-01-06"
+    },
+    {
+      "company": "Short term projects and interim assignments",
+      "role": "Independent HR Consultant",
+      "connectedOn": "2010-01-07"
+    },
+    {
+      "company": "Meta",
+      "role": "TPM",
+      "connectedOn": "2010-01-12"
+    },
+    {
+      "company": "Bose Professional",
+      "role": "VP of Engineering",
+      "connectedOn": "2010-01-14"
+    },
+    {
+      "company": "Genentech",
+      "role": "Patent Paralegal",
+      "connectedOn": "2010-01-17"
+    },
+    {
+      "company": "Siggins",
+      "role": "Real Estate Entrepreneur",
+      "connectedOn": "2010-01-25"
+    },
+    {
+      "company": "Warner Bros. Discovery",
+      "role": "Lab Manager - Seattle",
+      "connectedOn": "2010-01-25"
+    },
+    {
+      "company": "www.gambitlabs.io",
+      "role": "Interim CEO",
+      "connectedOn": "2010-02-06"
+    },
+    {
+      "company": "Mendor Oy",
+      "role": "Senior Vice President - Business Development",
+      "connectedOn": "2010-02-16"
+    },
+    {
+      "company": "City of Redwood City",
+      "role": "financial services manager",
+      "connectedOn": "2010-03-01"
+    },
+    {
+      "company": "The Camp Recovery Center",
+      "role": "Mental Health Counselor",
+      "connectedOn": "2010-03-04"
+    },
+    {
+      "company": "Christensen Product Design, Inc.",
+      "role": "President and Mechanical Design Lead",
+      "connectedOn": "2010-03-24"
+    },
+    {
+      "company": "Universal Audio",
+      "role": "Sr. Buyer/planner",
+      "connectedOn": "2010-03-24"
+    },
+    {
+      "company": "Newrez LLC",
+      "role": "Senior Loan Officer",
+      "connectedOn": "2010-03-30"
+    },
+    {
+      "company": "Nicoya Peninsula Reforestation Project",
+      "role": "Chief Executive Officer",
+      "connectedOn": "2010-04-15"
+    },
+    {
+      "company": "ARRK North America, Inc.",
+      "role": "Inside Sales General Manager ARRK North America Inc.",
+      "connectedOn": "2010-04-15"
+    },
+    {
+      "company": "(USTA) United States Tennis Association",
+      "role": "Controller",
+      "connectedOn": "2010-04-26"
+    },
+    {
+      "company": "Sierra College",
+      "role": "Advanced Manufacturing Instructor & Dept Chair",
+      "connectedOn": "2010-04-30"
+    },
+    {
+      "company": "Kaleidescape",
+      "role": "Staff Accountant",
+      "connectedOn": "2010-05-05"
+    },
+    {
+      "company": "Tesla",
+      "role": "Electrical PCB Layout Design Engineer",
+      "connectedOn": "2010-07-01"
+    },
+    {
+      "company": "Sherwood Oaks",
+      "role": "Film, Digital Media and TV Professional",
+      "connectedOn": "2010-08-23"
+    },
+    {
+      "company": "California College of the Arts",
+      "role": "Distinguished Professor in Design, Industrial Design and Interdisciplinary Design",
+      "connectedOn": "2010-08-30"
+    },
+    {
+      "company": "Weir Organized",
+      "role": "Owner",
+      "connectedOn": "2011-01-14"
+    },
+    {
+      "company": "Coldwell Banker",
+      "role": "Real Estate Consultant",
+      "connectedOn": "2011-02-28"
+    },
+    {
+      "company": "GLOW Surgical Arts",
+      "role": "President",
+      "connectedOn": "2011-03-04"
+    },
+    {
+      "company": "PolarStarMagnetics",
+      "role": "Founder of www.polarstarmagnetics.com",
+      "connectedOn": "2011-05-25"
+    },
+    {
+      "company": "Eloise Cameron Fine Art",
+      "role": "The Abstractionist\u00a9",
+      "connectedOn": "2011-05-25"
+    },
+    {
+      "company": "Need Ventures",
+      "role": "President",
+      "connectedOn": "2011-11-30"
+    },
+    {
+      "company": "MTF Sales and Solutions",
+      "role": "President",
+      "connectedOn": "2011-12-01"
+    },
+    {
+      "company": "Valmont Industries, Inc.",
+      "role": "Operations Manager",
+      "connectedOn": "2011-12-01"
+    },
+    {
+      "company": "Independent  Contractor",
+      "role": "Medical Device Consultant",
+      "connectedOn": "2011-12-01"
+    },
+    {
+      "company": "fertileground.org",
+      "role": "Board Member",
+      "connectedOn": "2011-12-27"
+    },
+    {
+      "company": "On Lok",
+      "role": "Purchasing Manager",
+      "connectedOn": "2012-01-25"
+    },
+    {
+      "company": "Speck Design",
+      "role": "Partner",
+      "connectedOn": "2012-01-25"
+    },
+    {
+      "company": "Morgan Stanley",
+      "role": "Associate Wealth Advisor",
+      "connectedOn": "2012-02-09"
+    },
+    {
+      "company": "WHIPSAW",
+      "role": "CEO, Principal Designer",
+      "connectedOn": "2012-02-10"
+    },
+    {
+      "company": "Rabbit Product Design",
+      "role": "Head of Sales and Marketing",
+      "connectedOn": "2012-02-12"
+    },
+    {
+      "company": "Form CNC Machining LLC",
+      "role": "COO",
+      "connectedOn": "2012-02-14"
+    },
+    {
+      "company": "New Deal Design",
+      "role": "Principal Designer / Owner / Coffeemaker",
+      "connectedOn": "2012-02-15"
+    },
+    {
+      "company": "Intuitive",
+      "role": "Director, Brand & Content Strategy",
+      "connectedOn": "2012-02-15"
+    },
+    {
+      "company": "Mighty Studios",
+      "role": "Founder, Director",
+      "connectedOn": "2012-02-15"
+    },
+    {
+      "company": "CHAVEZ FAMILY VISION INC",
+      "role": "Treasurer",
+      "connectedOn": "2012-02-15"
+    },
+    {
+      "company": "Superunknown Studios",
+      "role": "Chief Exploration Officer",
+      "connectedOn": "2012-02-15"
+    },
+    {
+      "company": "Blackmagic Design",
+      "role": "Head of Strategy - DaVinci Systems",
+      "connectedOn": "2012-02-15"
+    },
+    {
+      "company": "Independent Consultant",
+      "role": "Strategic Design Consultant",
+      "connectedOn": "2012-02-16"
+    },
+    {
+      "company": "Sagentia Medical",
+      "role": "Director, Business Development",
+      "connectedOn": "2012-02-17"
+    },
+    {
+      "company": "Alveo Technologies",
+      "role": "VP, Product Engineering and Manufacturing",
+      "connectedOn": "2012-02-18"
+    },
+    {
+      "company": "PA Consulting",
+      "role": "Executive Creative Director",
+      "connectedOn": "2012-02-23"
+    },
+    {
+      "company": "Function Engineering",
+      "role": "Engineer",
+      "connectedOn": "2012-05-10"
+    },
+    {
+      "company": "H90 AI Project",
+      "role": "Co-Founder",
+      "connectedOn": "2012-06-06"
+    },
+    {
+      "company": "BD",
+      "role": "Manage SORP Mfg Eng",
+      "connectedOn": "2012-07-10"
+    },
+    {
+      "company": "Spanner",
+      "role": "Founder & CDO",
+      "connectedOn": "2012-07-17"
+    },
+    {
+      "company": "Faire",
+      "role": "iOS Engineer",
+      "connectedOn": "2012-08-29"
+    },
+    {
+      "company": "Apple",
+      "role": "Wallet Payments & Commerce, Program Manager",
+      "connectedOn": "2012-09-11"
+    },
+    {
+      "company": "Nuvation Energy",
+      "role": "Principal Hardware Designer ",
+      "connectedOn": "2012-09-14"
+    },
+    {
+      "company": "Unknown",
+      "role": "",
+      "connectedOn": "2012-09-15"
+    },
+    {
+      "company": "York University",
+      "role": "Professor of Mathematics and Statistics (tenured, full)",
+      "connectedOn": "2012-09-21"
+    },
+    {
+      "company": "Rover Robotics",
+      "role": "Chief Executive Officer",
+      "connectedOn": "2012-10-12"
+    },
+    {
+      "company": "Alaska Native Tribal Health Consortium (ANTHC)",
+      "role": "Audiovisual and Videoconferencing Manager",
+      "connectedOn": "2012-10-12"
+    },
+    {
+      "company": "Self-employed",
+      "role": "Noisemaker & Storyteller",
+      "connectedOn": "2012-11-09"
+    },
+    {
+      "company": "Osceola Gallery",
+      "role": "Owner",
+      "connectedOn": "2012-11-14"
+    },
+    {
+      "company": "Delta Dental Ins.",
+      "role": "Project Manager III - Enterprise Program Management Office",
+      "connectedOn": "2012-11-26"
+    },
+    {
+      "company": "Gong cha M\u00e9xico",
+      "role": "Director general",
+      "connectedOn": "2013-01-25"
+    },
+    {
+      "company": "Spitz Design & Machine",
+      "role": "Owner",
+      "connectedOn": "2013-01-30"
+    },
+    {
+      "company": "Shmoftware",
+      "role": "Mobile & Web App Development",
+      "connectedOn": "2013-02-18"
+    },
+    {
+      "company": "Hamilton Regional Laboratory Medicine Program",
+      "role": "Director of microbiology",
+      "connectedOn": "2013-02-21"
+    },
+    {
+      "company": "Think Tank Photo",
+      "role": "Marketing Operations Specialist",
+      "connectedOn": "2013-04-04"
+    },
+    {
+      "company": "Self-employed",
+      "role": "AirBNB Super Host",
+      "connectedOn": "2013-04-11"
+    },
+    {
+      "company": "Velosity",
+      "role": "Sr. Sales Executive",
+      "connectedOn": "2013-04-24"
+    },
+    {
+      "company": "Function Engineering",
+      "role": "Senior Managing Engineer",
+      "connectedOn": "2013-04-25"
+    },
+    {
+      "company": "Self-employed",
+      "role": "Freelance Accounting",
+      "connectedOn": "2013-04-29"
+    },
+    {
+      "company": "OKhuman",
+      "role": "Software Development Consultant",
+      "connectedOn": "2013-04-29"
+    },
+    {
+      "company": "International Guitar Foundation",
+      "role": "Project Manager",
+      "connectedOn": "2013-06-03"
+    },
+    {
+      "company": "YOMURA TECHNOLOGIES., INC.",
+      "role": "Sales & Marketing Account Manager",
+      "connectedOn": "2013-06-06"
+    },
+    {
+      "company": "101 Limo",
+      "role": "Owner",
+      "connectedOn": "2013-06-13"
+    },
+    {
+      "company": "Alberta Education",
+      "role": "Manager",
+      "connectedOn": "2013-06-22"
+    },
+    {
+      "company": "Google",
+      "role": "Engineering Manager",
+      "connectedOn": "2013-08-22"
+    },
+    {
+      "company": "Nissha Co., Ltd.",
+      "role": "Director, Global Integration Planning",
+      "connectedOn": "2013-09-03"
+    },
+    {
+      "company": "Kaleidescape",
+      "role": "Director Hardware Engineering",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Retired",
+      "role": "Retired",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Technology Transformation Services (TTS)",
+      "role": "Deputy Director",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Modus Advanced",
+      "role": "Regional Sales Manager/FAE",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Illumina",
+      "role": "Sr. Staff Supplier Quality Engineer",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Retired",
+      "role": "Retired",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Axon",
+      "role": "Senior Director, Mechanical Engineering",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Ethereal Matter, Inc",
+      "role": "Founder",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "MASS Precision Inc.",
+      "role": "_",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Self-employed",
+      "role": "Advisor/Investor/Board Member",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Lam Research",
+      "role": "Supply Chain Business Manager",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Hover",
+      "role": "Director of IT & Corporate Security",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Audio Integrations Inc",
+      "role": "Project | Operations Manager",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Goods & Services",
+      "role": "Manufacturing Engineer",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Contour Inc.",
+      "role": "Owner",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Rapid Prototyping Corporation / RapidPro Manufacturing Corp.",
+      "role": "Production Manager",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "O'Hara Metal Products",
+      "role": "President",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Kaleidescape",
+      "role": "VP Sales Operations",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Retired",
+      "role": "Registered Patent Agent USPTO & Patent Law Practitioner, MSEE ,  MBA",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Function Engineering, Inc.",
+      "role": "Business Development ",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "MASS Precision, Inc.",
+      "role": "Vice President",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "None",
+      "role": "Retired",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "ABOVE.AI",
+      "role": "Industrial Design Principal | Investor",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Home",
+      "role": "Retired",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Roku",
+      "role": "Senior Software Developer",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "BARO STUDIO",
+      "role": "Account Manager",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Simmons and Harris, Inc.",
+      "role": "Executive Assistant to Chief Executive Officer",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "CasaAmigo",
+      "role": "Founder",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Pursuit",
+      "role": "VP of People",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "MASS Precision",
+      "role": "Program Manager",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Rapid Prototype Machining Corporation",
+      "role": "Founder & Seasoned CNC Specialist",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Glidance Inc",
+      "role": "Co-Founder, Chief of Staff",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Ewing-Foley, Inc",
+      "role": "Dir. Operations/OEM Business Dev.",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Branch",
+      "role": "Founder",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "MASS Precision",
+      "role": "engineering, programmer",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Jabra",
+      "role": "Senior Product Manager, Video Collaboration",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Pyramids Technology Corp",
+      "role": "Owner",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Function Engineering",
+      "role": "Managing Engineer & Office Lead",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Volex",
+      "role": " Regional and Key Accounts Sales Manager",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Universal Audio",
+      "role": "Senior Manufacturing Engineer",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Function Engineering",
+      "role": "Mechanical engineer",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "HLH Prototypes Co Ltd",
+      "role": "VP of Sales ",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "NovaSensor, an Amphenol Company",
+      "role": "General Manager",
+      "connectedOn": "2013-09-04"
+    },
+    {
+      "company": "Netflix",
+      "role": "Metadata Project Management",
+      "connectedOn": "2013-09-05"
+    },
+    {
+      "company": "Zao Technology Innovations Inc",
+      "role": "Principal",
+      "connectedOn": "2013-09-05"
+    },
+    {
+      "company": "Function Engineering",
+      "role": "President",
+      "connectedOn": "2013-09-05"
+    },
+    {
+      "company": "Team Sheeper",
+      "role": "CEO",
+      "connectedOn": "2013-09-05"
+    },
+    {
+      "company": "Unknown",
+      "role": "",
+      "connectedOn": "2013-09-05"
+    },
+    {
+      "company": "SharkNinja",
+      "role": "Chief Advanced Development & Design Officer",
+      "connectedOn": "2013-09-06"
+    },
+    {
+      "company": "Maven Robotics",
+      "role": "Hardware Design Lead",
+      "connectedOn": "2013-09-06"
+    },
+    {
+      "company": "Sanmina",
+      "role": "Business Unit Manager",
+      "connectedOn": "2013-09-06"
+    },
+    {
+      "company": "Apple",
+      "role": "Senior Engineering Manager",
+      "connectedOn": "2013-09-07"
+    },
+    {
+      "company": "Kaleidescape",
+      "role": "Director, Core Systems",
+      "connectedOn": "2013-09-08"
+    },
+    {
+      "company": "Function Engineering",
+      "role": "Senior Engineer",
+      "connectedOn": "2013-09-09"
+    },
+    {
+      "company": "Intuitive",
+      "role": "Principal Product Manager",
+      "connectedOn": "2013-09-09"
+    },
+    {
+      "company": "Arable",
+      "role": "Chief Financial Officer",
+      "connectedOn": "2013-09-09"
+    },
+    {
+      "company": "World Wildlife Fund",
+      "role": "Snr Program Officer",
+      "connectedOn": "2013-09-09"
+    },
+    {
+      "company": "roneda machine works",
+      "role": "Owner",
+      "connectedOn": "2013-09-09"
+    },
+    {
+      "company": "SHENZHEN IDEAL PLASTIC MOULD CO.LTD",
+      "role": "Vice GM",
+      "connectedOn": "2013-09-09"
+    },
+    {
+      "company": "Adyen",
+      "role": "Global Head of Partner Engineering",
+      "connectedOn": "2013-09-09"
+    },
+    {
+      "company": "Zao Technology Innovations, Inc",
+      "role": "Co-Founder and President",
+      "connectedOn": "2013-09-09"
+    },
+    {
+      "company": "M3 Partners Co., Ltd.",
+      "role": "Head of BD/PM",
+      "connectedOn": "2013-09-10"
+    },
+    {
+      "company": "SGMW",
+      "role": "Design Consultant (contract)",
+      "connectedOn": "2013-09-10"
+    },
+    {
+      "company": "Unknown",
+      "role": "",
+      "connectedOn": "2013-09-10"
+    },
+    {
+      "company": "Fungi Perfecti LLC",
+      "role": "Maintenance Supervisor/Electrician",
+      "connectedOn": "2013-09-11"
+    },
+    {
+      "company": "Apple",
+      "role": "Manager, Mechanical Engineering & Packaging",
+      "connectedOn": "2013-09-12"
+    },
+    {
+      "company": "VRP-Labs: Valley Research Park",
+      "role": "Research Lab Matchmaking",
+      "connectedOn": "2013-09-12"
+    },
+    {
+      "company": "Sputnik Enterprises Inc.",
+      "role": "President and CEO",
+      "connectedOn": "2013-09-13"
+    },
+    {
+      "company": "Presidio Medical, Inc.",
+      "role": "Co-founder & Board Member",
+      "connectedOn": "2013-09-16"
+    },
+    {
+      "company": "Sutter Health, Los Gatos Urgent Care",
+      "role": "Department Chair",
+      "connectedOn": "2013-09-16"
+    },
+    {
+      "company": "Maverix Biomics, Inc.",
+      "role": "President and CEO",
+      "connectedOn": "2013-09-24"
+    },
+    {
+      "company": "Zao Technology Innovations, Inc",
+      "role": "Mechanical Design, Tooling and Manufacturing Processes",
+      "connectedOn": "2013-09-25"
+    },
+    {
+      "company": "ON24",
+      "role": "Senior Director of Product Management",
+      "connectedOn": "2013-09-25"
+    },
+    {
+      "company": "stellar \u2605 design",
+      "role": "Founder + Industrial Designer",
+      "connectedOn": "2013-09-25"
+    },
+    {
+      "company": "Function Engineering",
+      "role": "Vice President",
+      "connectedOn": "2013-09-25"
+    },
+    {
+      "company": "Fresh Consulting",
+      "role": "Lead Mechanical Engineer",
+      "connectedOn": "2013-09-25"
+    },
+    {
+      "company": "Kodiak Sciences",
+      "role": "Senior Director Project, Program, and Portfolio Management",
+      "connectedOn": "2013-09-25"
+    },
+    {
+      "company": "JE Johnston & Co.",
+      "role": "Director of right now",
+      "connectedOn": "2013-09-25"
+    },
+    {
+      "company": "Paul Donovan Consulting Inc.",
+      "role": "Principal",
+      "connectedOn": "2013-09-25"
+    },
+    {
+      "company": "Cockroach Labs",
+      "role": "Director of Documentation ",
+      "connectedOn": "2013-09-25"
+    },
+    {
+      "company": "Axon",
+      "role": "Senior Director, Mechanical Engineering, Axon",
+      "connectedOn": "2013-09-25"
+    },
+    {
+      "company": "Oculus Lights",
+      "role": "Founder, Oculus Lights, a startup to re-light your night.",
+      "connectedOn": "2013-09-25"
+    },
+    {
+      "company": "GoPro",
+      "role": "Sr. Manager, MFG Engineering",
+      "connectedOn": "2013-09-25"
+    },
+    {
+      "company": "Forecast 3D",
+      "role": "Plant Director",
+      "connectedOn": "2013-09-25"
+    },
+    {
+      "company": "Sonos, Inc.",
+      "role": "Principal Prototype Engineer",
+      "connectedOn": "2013-09-25"
+    },
+    {
+      "company": "Universal Audio",
+      "role": "Principal Hardware Engineer",
+      "connectedOn": "2013-09-26"
+    },
+    {
+      "company": "Self Employed",
+      "role": "Strategic Advisor",
+      "connectedOn": "2013-09-26"
+    },
+    {
+      "company": "GMD-Gregg Miner Development",
+      "role": "Product Development Specialist",
+      "connectedOn": "2013-09-26"
+    },
+    {
+      "company": "Humanoid",
+      "role": "Head of Systems Engineering",
+      "connectedOn": "2013-09-26"
+    },
+    {
+      "company": "Dev Stream Labs Inc",
+      "role": "Chief Executive Officer",
+      "connectedOn": "2013-09-26"
+    },
+    {
+      "company": "Integra Consulting",
+      "role": "Owner/CEO",
+      "connectedOn": "2013-09-26"
+    },
+    {
+      "company": "Kaleidescape",
+      "role": "Director, International Sales",
+      "connectedOn": "2013-09-30"
+    },
+    {
+      "company": "Adobe",
+      "role": "Principal Product Manager",
+      "connectedOn": "2013-09-30"
+    },
+    {
+      "company": "Avid",
+      "role": "Engineering Project Lead",
+      "connectedOn": "2013-10-01"
+    },
+    {
+      "company": "HUGE DESIGN",
+      "role": "Partner",
+      "connectedOn": "2013-10-05"
+    },
+    {
+      "company": "Tact Product Development",
+      "role": "Sr. 3D Development Expert",
+      "connectedOn": "2013-10-05"
+    },
+    {
+      "company": "Jammon Design",
+      "role": "Principal",
+      "connectedOn": "2013-10-07"
+    },
+    {
+      "company": "ITESM",
+      "role": "Professor",
+      "connectedOn": "2013-10-09"
+    },
+    {
+      "company": "Portola Legal",
+      "role": "Owner",
+      "connectedOn": "2013-10-09"
+    },
+    {
+      "company": "Apple",
+      "role": "Engineering Project Manager - Touch and Sensing Incubation (R&D)",
+      "connectedOn": "2013-10-09"
+    },
+    {
+      "company": "SVC SAS",
+      "role": "Co-Founder and Partner",
+      "connectedOn": "2013-10-11"
+    },
+    {
+      "company": "Eight Sleep",
+      "role": "VP design",
+      "connectedOn": "2013-10-28"
+    },
+    {
+      "company": "Disruptive MedTech",
+      "role": "Founding Member",
+      "connectedOn": "2013-11-07"
+    },
+    {
+      "company": "Appiled Physics System",
+      "role": "RMA/Service Coordinator",
+      "connectedOn": "2013-11-13"
+    },
+    {
+      "company": "Kong Inc.",
+      "role": "Technical Recruiting Manager",
+      "connectedOn": "2013-12-10"
+    },
+    {
+      "company": "Google",
+      "role": "Software Engineer; Engineering Manager; Engineering Director ",
+      "connectedOn": "2014-01-02"
+    },
+    {
+      "company": "Twenty Twenty Therapeutics (formerly the Ophthalmic Innovations Group within Verily)",
+      "role": "Staff Mechanical Engineer",
+      "connectedOn": "2014-01-09"
+    },
+    {
+      "company": "Consure Medical",
+      "role": "Co-Founder & CEO",
+      "connectedOn": "2014-01-30"
+    },
+    {
+      "company": "Kodiak Robotics",
+      "role": "Staff IT Systems Engineer",
+      "connectedOn": "2014-01-30"
+    },
+    {
+      "company": "MasterSimon",
+      "role": "Founder",
+      "connectedOn": "2014-01-30"
+    },
+    {
+      "company": "Cocom Consumer Electronics Ltd",
+      "role": "CEO",
+      "connectedOn": "2014-01-30"
+    },
+    {
+      "company": "Oliver Wyman",
+      "role": "Principal",
+      "connectedOn": "2014-01-30"
+    },
+    {
+      "company": "Career Recruiters, Inc.",
+      "role": "President",
+      "connectedOn": "2014-01-30"
+    },
+    {
+      "company": "Hunt Energy Network",
+      "role": "Entrepreneur in Residence",
+      "connectedOn": "2014-02-28"
+    },
+    {
+      "company": "RTFM Engineering",
+      "role": "Engineering Manager",
+      "connectedOn": "2014-04-07"
+    },
+    {
+      "company": "Prompt Precision Manufacturing Inc",
+      "role": "President / CEO",
+      "connectedOn": "2014-04-07"
+    },
+    {
+      "company": "Solid Concepts",
+      "role": "Western Regional Sales Manager",
+      "connectedOn": "2014-04-17"
+    },
+    {
+      "company": "SVC SAS",
+      "role": "Co-Founder & Pr\u00e9sident Directeur G\u00e9n\u00e9ral",
+      "connectedOn": "2014-04-21"
+    },
+    {
+      "company": "Apple",
+      "role": "Senior Software Quality Assurance Manager",
+      "connectedOn": "2014-05-15"
+    },
+    {
+      "company": "Stealth Mode Startup Company",
+      "role": "Sr. Staff Mechanical Engineer",
+      "connectedOn": "2014-05-28"
+    },
+    {
+      "company": "idealfuture",
+      "role": "Founder and CEO",
+      "connectedOn": "2014-06-02"
+    },
+    {
+      "company": "Model Solution",
+      "role": "Mr. Danny Sung",
+      "connectedOn": "2014-06-02"
+    },
+    {
+      "company": "Apple",
+      "role": "Accessories - Mechanical Engineering Manager",
+      "connectedOn": "2014-06-02"
+    },
+    {
+      "company": "Genentech",
+      "role": "Nueroimmunolgy Trainer (Rotation)",
+      "connectedOn": "2014-06-23"
+    },
+    {
+      "company": "Epic Workshop, Inc.",
+      "role": "Senior Programmer",
+      "connectedOn": "2014-06-27"
+    },
+    {
+      "company": "The Brattle Group",
+      "role": "Principal",
+      "connectedOn": "2014-06-27"
+    },
+    {
+      "company": "Kaleidescape",
+      "role": "Director - Content Operations, Movie/Music Guide Services",
+      "connectedOn": "2014-06-27"
+    },
+    {
+      "company": "Cribl",
+      "role": "Chief Revenue Officer (CRO)",
+      "connectedOn": "2014-06-27"
+    },
+    {
+      "company": "TOPONE TOOLING ENGINEERING LIMITED",
+      "role": "Manager",
+      "connectedOn": "2014-06-27"
+    },
+    {
+      "company": "Advantech USA",
+      "role": "Sales Manager",
+      "connectedOn": "2014-06-27"
+    },
+    {
+      "company": "Celsia Inc.",
+      "role": "CEO | CTO",
+      "connectedOn": "2014-06-27"
+    },
+    {
+      "company": "Zee.Aero",
+      "role": "IT Lead",
+      "connectedOn": "2014-06-30"
+    },
+    {
+      "company": "Polymerase Capital",
+      "role": "Partner",
+      "connectedOn": "2014-07-01"
+    },
+    {
+      "company": "World Financial Group (WFG)",
+      "role": "Educator ",
+      "connectedOn": "2014-07-16"
+    },
+    {
+      "company": "Synapse Product Development",
+      "role": "Senior VP of Engineering, San Francisco Managing Director",
+      "connectedOn": "2014-07-21"
+    },
+    {
+      "company": "Aurora",
+      "role": "Staff Technical Recruiter",
+      "connectedOn": "2014-07-29"
+    },
+    {
+      "company": "National Small Business Association",
+      "role": "Leadership Council Member",
+      "connectedOn": "2014-07-31"
+    },
+    {
+      "company": "Rapid Axis",
+      "role": "Founder & President",
+      "connectedOn": "2014-08-04"
+    },
+    {
+      "company": "Nidus Biomedical",
+      "role": "Chief Operating Officer",
+      "connectedOn": "2014-08-04"
+    },
+    {
+      "company": "Apple",
+      "role": "Retail Leader",
+      "connectedOn": "2014-08-04"
+    },
+    {
+      "company": "Unknown",
+      "role": "",
+      "connectedOn": "2014-08-12"
+    },
+    {
+      "company": "David Fisher, Attorney at Law",
+      "role": "Owner",
+      "connectedOn": "2014-08-25"
+    },
+    {
+      "company": "Kaleidescape",
+      "role": "Vice  President of Manufacturing and Customer Support",
+      "connectedOn": "2014-08-26"
+    },
+    {
+      "company": "FSK Audio",
+      "role": "Co-Founder / CEO",
+      "connectedOn": "2014-08-26"
+    },
+    {
+      "company": "CIBC",
+      "role": "Strategic Advisor",
+      "connectedOn": "2014-08-26"
+    },
+    {
+      "company": "Self-employed",
+      "role": "Attorney",
+      "connectedOn": "2014-08-26"
+    },
+    {
+      "company": "Self-employed",
+      "role": "Retired",
+      "connectedOn": "2014-08-27"
+    },
+    {
+      "company": "SNC-Lavalin",
+      "role": "retired Professional Engineer",
+      "connectedOn": "2014-09-06"
+    },
+    {
+      "company": "Unknown",
+      "role": "",
+      "connectedOn": "2014-09-08"
+    },
+    {
+      "company": "Parafin",
+      "role": "Recruiting Manager",
+      "connectedOn": "2014-09-15"
+    },
+    {
+      "company": "Solid Concepts Inc.",
+      "role": "Project Engineer",
+      "connectedOn": "2014-09-16"
+    },
+    {
+      "company": "The Model Studio",
+      "role": "Owner",
+      "connectedOn": "2014-10-20"
+    },
+    {
+      "company": "Private Yacht",
+      "role": "USCG Master 200 GRT",
+      "connectedOn": "2015-01-22"
+    },
+    {
+      "company": "Pro Source Inc.",
+      "role": "Engineering Resource Manager ",
+      "connectedOn": "2015-01-24"
+    },
+    {
+      "company": "AMD",
+      "role": "Senior Program Manager, PDM - Strategy ",
+      "connectedOn": "2015-03-03"
+    },
+    {
+      "company": "General Pacific, Inc. (GenPac)",
+      "role": "Marketing and Sales",
+      "connectedOn": "2015-03-10"
+    },
+    {
+      "company": "Vowin Rapid prototypes Mfg",
+      "role": "Owner",
+      "connectedOn": "2015-03-22"
+    },
+    {
+      "company": "Hunter Industries",
+      "role": "Senior Hardware Development Engineer",
+      "connectedOn": "2015-04-27"
+    },
+    {
+      "company": "ButWhereToStart",
+      "role": "Founder and Owner",
+      "connectedOn": "2015-04-27"
+    },
+    {
+      "company": "Destination Wealth Management",
+      "role": "CEO,  Chairman Investment Committee",
+      "connectedOn": "2015-06-16"
+    },
+    {
+      "company": "Todd Zimmerman",
+      "role": "Owner",
+      "connectedOn": "2015-09-06"
+    },
+    {
+      "company": "Self-employed",
+      "role": "Sales Representative",
+      "connectedOn": "2015-09-30"
+    },
+    {
+      "company": "Avegant",
+      "role": "Sr Manufacturing Manager",
+      "connectedOn": "2015-10-04"
+    },
+    {
+      "company": "Scandic Springs",
+      "role": "Sales Engineer",
+      "connectedOn": "2015-10-16"
+    },
+    {
+      "company": "Meiyume",
+      "role": "Director Product Development Engineering",
+      "connectedOn": "2015-10-27"
+    },
+    {
+      "company": "Generac",
+      "role": "Senior Staff Mechanical Engineer",
+      "connectedOn": "2015-11-17"
+    },
+    {
+      "company": "Digidesign",
+      "role": "Sr CAD Engineer",
+      "connectedOn": "2015-11-18"
+    },
+    {
+      "company": "Karen Louie",
+      "role": "Social Media & Mobile Marketing Consultant & Strategist",
+      "connectedOn": "2015-11-30"
+    },
+    {
+      "company": "Unusual Machines",
+      "role": "Chief Executive Officer",
+      "connectedOn": "2015-12-11"
+    },
+    {
+      "company": "Avegant",
+      "role": "CEO & Founder",
+      "connectedOn": "2016-01-17"
+    },
+    {
+      "company": "Avegant",
+      "role": "Vice President of Opto-Mechanical Engineering",
+      "connectedOn": "2016-02-05"
+    },
+    {
+      "company": "Google",
+      "role": "Process Integration Engineer",
+      "connectedOn": "2016-02-05"
+    },
+    {
+      "company": "Exasol",
+      "role": "Chief Executive Officer",
+      "connectedOn": "2016-02-05"
+    },
+    {
+      "company": "American Public Media Group",
+      "role": "Corporate Controller",
+      "connectedOn": "2016-02-05"
+    },
+    {
+      "company": "Apple",
+      "role": "Mechanical Design Engineer",
+      "connectedOn": "2016-02-05"
+    },
+    {
+      "company": "Mise En Placement",
+      "role": "HR Business Partner / Executive Search Consultant",
+      "connectedOn": "2016-02-05"
+    },
+    {
+      "company": "Priatta Networks",
+      "role": "Co-founder and COO",
+      "connectedOn": "2016-02-05"
+    },
+    {
+      "company": "Saratoga, California",
+      "role": "Retired",
+      "connectedOn": "2016-02-05"
+    },
+    {
+      "company": "Amazon",
+      "role": "Sr. Electrical Engineer",
+      "connectedOn": "2016-02-05"
+    },
+    {
+      "company": "L&T Technology Services",
+      "role": "Senior Industrial Designer",
+      "connectedOn": "2016-02-05"
+    },
+    {
+      "company": "Avegant",
+      "role": "Design Director",
+      "connectedOn": "2016-02-06"
+    },
+    {
+      "company": "Rivian",
+      "role": "Staff Audio Systems Quality Assurance Engineer",
+      "connectedOn": "2016-02-08"
+    },
+    {
+      "company": "Avegant",
+      "role": "Strategic Partnerships",
+      "connectedOn": "2016-02-08"
+    },
+    {
+      "company": "Avegant",
+      "role": "VP of Engineering",
+      "connectedOn": "2016-02-09"
+    },
+    {
+      "company": "Hive",
+      "role": "Accounting Manager",
+      "connectedOn": "2016-02-11"
+    },
+    {
+      "company": "Genius Sports",
+      "role": "Vice President of Product - GeniusIQ",
+      "connectedOn": "2016-02-12"
+    },
+    {
+      "company": "Samsara",
+      "role": "Director of Product Marketing",
+      "connectedOn": "2016-02-17"
+    },
+    {
+      "company": "Next Generation Prenatal Imaging",
+      "role": "Operations Consultant",
+      "connectedOn": "2016-02-26"
+    },
+    {
+      "company": "Stealth Startup",
+      "role": "Founder",
+      "connectedOn": "2016-03-03"
+    },
+    {
+      "company": "UiPath Japan",
+      "role": "Enterprise Sales, Strategic Sales Div. -Expert of Hitachi, Manufacturing Sales Team at UiPath Japan",
+      "connectedOn": "2016-05-03"
+    },
+    {
+      "company": "WAYPOINT engineering, Inc.",
+      "role": "Consultant / Owner",
+      "connectedOn": "2016-05-18"
+    },
+    {
+      "company": "Freelance (Self employed)",
+      "role": "Contract Coordinator ",
+      "connectedOn": "2016-06-03"
+    },
+    {
+      "company": "Untapped",
+      "role": "Ondernemer, sparring partner & Business coach",
+      "connectedOn": "2016-06-20"
+    },
+    {
+      "company": "Apple",
+      "role": "Senior Technical Recruiter, Apple",
+      "connectedOn": "2016-07-15"
+    },
+    {
+      "company": "Michigan Technological University",
+      "role": "Managing Director - Michigan Tech Microfabrication Facility",
+      "connectedOn": "2016-07-15"
+    },
+    {
+      "company": "Avegant",
+      "role": "Platform Software Architect (SDE)",
+      "connectedOn": "2016-07-18"
+    },
+    {
+      "company": "Self-employed",
+      "role": "Product Management Professional",
+      "connectedOn": "2016-07-18"
+    },
+    {
+      "company": "Avegant",
+      "role": "Chief Operating Officer",
+      "connectedOn": "2016-07-18"
+    },
+    {
+      "company": "Exasol",
+      "role": "Chief Commercial Officer (CCO)",
+      "connectedOn": "2016-07-18"
+    },
+    {
+      "company": "IEC Corp",
+      "role": "Senior Software Engineer",
+      "connectedOn": "2016-07-18"
+    },
+    {
+      "company": "Meta",
+      "role": "Global Technology Sourcing - ISCE",
+      "connectedOn": "2016-07-18"
+    },
+    {
+      "company": "NVIDIA",
+      "role": "Vice President Developer Relations, IGM of M&E",
+      "connectedOn": "2016-07-18"
+    },
+    {
+      "company": "Avegant",
+      "role": "Embedded Software/Firmware Engineer, R&D",
+      "connectedOn": "2016-07-18"
+    },
+    {
+      "company": "Sherpa Design",
+      "role": "Lead Industrial Designer",
+      "connectedOn": "2016-07-19"
+    },
+    {
+      "company": "Apple",
+      "role": "Mechanical Design Engineer",
+      "connectedOn": "2016-07-19"
+    },
+    {
+      "company": "Ayar Labs",
+      "role": "Senior Optical Engineer",
+      "connectedOn": "2016-07-25"
+    },
+    {
+      "company": "Zoox",
+      "role": "Staff Technical Program Manager",
+      "connectedOn": "2016-08-03"
+    },
+    {
+      "company": "Oregon Health & Science University",
+      "role": "Radiologic Technologist",
+      "connectedOn": "2016-08-03"
+    },
+    {
+      "company": "Avegant",
+      "role": "Senior Mechanical Engineer",
+      "connectedOn": "2016-08-04"
+    },
+    {
+      "company": "CoreHW",
+      "role": "Senior Digital Design Engineer & Business Development Manager",
+      "connectedOn": "2016-08-15"
+    },
+    {
+      "company": "Mission College",
+      "role": "Student",
+      "connectedOn": "2016-09-07"
+    },
+    {
+      "company": "NVIDIA",
+      "role": "Product Program Manager",
+      "connectedOn": "2016-10-15"
+    },
+    {
+      "company": "Self-employed",
+      "role": "Product Development and Operations",
+      "connectedOn": "2016-10-20"
+    },
+    {
+      "company": "ALLSTAR Design",
+      "role": "CEO / Founder",
+      "connectedOn": "2016-10-20"
+    },
+    {
+      "company": "BlackBerry",
+      "role": "Vice President Of Product Strategy, IoT",
+      "connectedOn": "2016-10-20"
+    },
+    {
+      "company": "Unknown",
+      "role": "",
+      "connectedOn": "2016-10-20"
+    },
+    {
+      "company": "Kimball Electronics",
+      "role": "CTO & VP of Global Engineering",
+      "connectedOn": "2016-10-20"
+    },
+    {
+      "company": "Trilo Therapeutics",
+      "role": "Chief Business Officer",
+      "connectedOn": "2016-10-20"
+    },
+    {
+      "company": "Avid",
+      "role": "Senior Director of Product Management- Audio Hardware",
+      "connectedOn": "2016-10-20"
+    },
+    {
+      "company": "Function Engineering, Inc.",
+      "role": "Senior Managing Engineer",
+      "connectedOn": "2016-10-20"
+    },
+    {
+      "company": "HP",
+      "role": "Senior Vice President of Design and Sustainability",
+      "connectedOn": "2016-10-20"
+    },
+    {
+      "company": "Stealth Startup",
+      "role": "Head of Engineering",
+      "connectedOn": "2016-10-20"
+    },
+    {
+      "company": "Spanner",
+      "role": "Founder, President & CEO",
+      "connectedOn": "2016-10-20"
+    },
+    {
+      "company": "Google",
+      "role": "Global Supply Chain",
+      "connectedOn": "2016-10-20"
+    },
+    {
+      "company": "Google",
+      "role": "Director, Industrial Design for Home",
+      "connectedOn": "2016-10-20"
+    },
+    {
+      "company": "Chuchom Design Consulting",
+      "role": "Creative Director - Consultant",
+      "connectedOn": "2016-10-20"
+    },
+    {
+      "company": "Siemens",
+      "role": "Senior Director, Digital Experience",
+      "connectedOn": "2016-10-21"
+    },
+    {
+      "company": "Google",
+      "role": "Senior Manager - Product Design Engineering",
+      "connectedOn": "2016-10-21"
+    },
+    {
+      "company": "Palo Alto Networks",
+      "role": "Sr Director, Hardware Quality and Compliance Engineering",
+      "connectedOn": "2016-10-24"
+    },
+    {
+      "company": "Microsoft",
+      "role": "Principal Technical Program Manager - Quantum",
+      "connectedOn": "2016-10-24"
+    },
+    {
+      "company": "Designing the Mind",
+      "role": "Founder + Author",
+      "connectedOn": "2016-10-28"
+    },
+    {
+      "company": "Unknown",
+      "role": "",
+      "connectedOn": "2016-10-28"
+    },
+    {
+      "company": "GoProto, Inc.",
+      "role": "Chairman Of The Board at GoProto, Inc. (Acquired by Core Industrial Partners)",
+      "connectedOn": "2016-10-28"
+    },
+    {
+      "company": "Ammunition LLC",
+      "role": "Founder / Partner",
+      "connectedOn": "2016-10-31"
+    },
+    {
+      "company": "Whipsaw Inc",
+      "role": "Principal and CTO",
+      "connectedOn": "2016-11-01"
+    },
+    {
+      "company": "Spring Health",
+      "role": "Architect, Enterprise Applications",
+      "connectedOn": "2016-11-04"
+    },
+    {
+      "company": "Unknown",
+      "role": "",
+      "connectedOn": "2016-11-07"
+    },
+    {
+      "company": "Mec Studio",
+      "role": "Founder, Partner",
+      "connectedOn": "2016-11-29"
+    },
+    {
+      "company": "Lincoln Highway Technical Recruiting LLC",
+      "role": "Chief Technical Recruiter",
+      "connectedOn": "2016-12-06"
+    },
+    {
+      "company": "Apple",
+      "role": "Manager, Software Systems Program Management",
+      "connectedOn": "2016-12-08"
+    },
+    {
+      "company": "SETI Institute",
+      "role": "Trustee",
+      "connectedOn": "2016-12-12"
+    },
+    {
+      "company": "Apple",
+      "role": "Sr. Director, Home Hardware Engineering and FEA",
+      "connectedOn": "2016-12-20"
+    },
+    {
+      "company": "Kaleidescape",
+      "role": "Sr. Technical Support Engineer",
+      "connectedOn": "2016-12-28"
+    },
+    {
+      "company": "Liminal",
+      "role": "Chief Builder",
+      "connectedOn": "2016-12-28"
+    },
+    {
+      "company": "Kaleidescape",
+      "role": "NPI program Manger",
+      "connectedOn": "2016-12-28"
+    },
+    {
+      "company": "Green New Energy Materials Inc.",
+      "role": "Vice President of Sales - North America",
+      "connectedOn": "2016-12-28"
+    },
+    {
+      "company": "TechnipFMC",
+      "role": "Principal Mechanical Engineer",
+      "connectedOn": "2017-01-04"
+    },
+    {
+      "company": "Apple",
+      "role": "Product Manager",
+      "connectedOn": "2017-02-05"
+    },
+    {
+      "company": "Snowflake Computing",
+      "role": "Seed Investor and Advisor (Seed, A & B)",
+      "connectedOn": "2017-02-28"
+    },
+    {
+      "company": "Raytheon Technologies",
+      "role": "Principal Mechanical Engineer",
+      "connectedOn": "2017-04-27"
+    },
+    {
+      "company": "Indepedent Consultant",
+      "role": "Senoir CAD/PCB Designer",
+      "connectedOn": "2017-04-27"
+    },
+    {
+      "company": "PsiQuantum",
+      "role": "Firmware Technical Lead",
+      "connectedOn": "2017-04-27"
+    },
+    {
+      "company": "Marcus & Millichap",
+      "role": "Director of Investments",
+      "connectedOn": "2017-08-26"
+    },
+    {
+      "company": "Pano AI",
+      "role": "Senior Director, Talent and People",
+      "connectedOn": "2017-09-08"
+    },
+    {
+      "company": "SpaceX",
+      "role": "RF Software Engineer",
+      "connectedOn": "2017-09-08"
+    },
+    {
+      "company": "Amphenol AST",
+      "role": "director of marketing",
+      "connectedOn": "2017-10-25"
+    },
+    {
+      "company": "Apple",
+      "role": "Senior Software Engineer",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Motive",
+      "role": "Head of Embedded Firmware",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Malloy & Company",
+      "role": "Board Member & President",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Apple",
+      "role": "Engineering Manager, Machine Learning ",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Freelance",
+      "role": "Digital & Web Marketing Consultant",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Apple",
+      "role": "Sr. Manager, AppleCare Engineering",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Woodlands Digital Technologies",
+      "role": "Owner",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Apollo GraphQL",
+      "role": "Head of People Operations",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Yohana",
+      "role": "Head of Business Operations",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "StretchDollar",
+      "role": "Head of Product",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Hidden Hill Partners",
+      "role": "Managing Partner",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "SoundThinking (formerly ShotSpotter)",
+      "role": "Director of Quality Engineering",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Critical Mass",
+      "role": "Design \u2013 Critical Mass @ Apple \uf8ff and Airbnb",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "NXRZR LLC",
+      "role": "Technology Consultant",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "E15 VC",
+      "role": "Managing Partner",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Sakara Institute",
+      "role": "CEO",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Pro Unlimited, Sunnyvale",
+      "role": "Product Lifecycle Analyst @ Meta",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Google",
+      "role": "Communications Manager, Google Cloud",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Google",
+      "role": "Program Manager, Business Intelligence & Automation, Devices & Services Controllership Systems",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Woven by Toyota",
+      "role": "Senior Product Development Manager",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Creative Dock Group",
+      "role": "Performance Marketing Specialist",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Robinhood",
+      "role": "Senior Software Engineer",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Apple",
+      "role": "Engineering Manager",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Apple",
+      "role": "Engineering Program Manager",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "TEKsystems",
+      "role": "Quality Engineer at Adobe",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Panasonic Well",
+      "role": "Software Engineer",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Cooks Curious Crafts",
+      "role": "Toy Maker",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "SPAN",
+      "role": "Product Designer",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Apple",
+      "role": "Senior Tools & Automation Engineer - Apple Account & Family Experiences",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Card79 - www.card79.com",
+      "role": "Designer & Founder",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "HP IQ",
+      "role": "Senior Software Infrastructure Engineer II",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Antora Energy",
+      "role": "Head of Supply Chain",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "eero",
+      "role": "Manager SW Development",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Google",
+      "role": "Senior Software Engineer, Infrastructure, Google Cloud Platforms",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Stealth Startup",
+      "role": "Head of Hardware",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Braver Angels",
+      "role": "Co-Chair, Office of Field Operations",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Meta",
+      "role": "Embedded Software Engineer",
+      "connectedOn": "2017-10-26"
+    },
+    {
+      "company": "Amazon",
+      "role": "Senior Ops Manager - Product Manager",
+      "connectedOn": "2017-10-27"
+    },
+    {
+      "company": "Atlassian",
+      "role": "Principal Architect",
+      "connectedOn": "2017-10-27"
+    },
+    {
+      "company": "Mill",
+      "role": "Systems Engineering Lead",
+      "connectedOn": "2017-10-27"
+    },
+    {
+      "company": "Logitech",
+      "role": "Head of Hardware",
+      "connectedOn": "2017-10-27"
+    },
+    {
+      "company": "Jon Norton Design",
+      "role": "Owner",
+      "connectedOn": "2017-10-28"
+    },
+    {
+      "company": "Dolby Laboratories",
+      "role": "Digital Experience Manager",
+      "connectedOn": "2017-10-28"
+    },
+    {
+      "company": "Google",
+      "role": "Software Engineer",
+      "connectedOn": "2017-10-29"
+    },
+    {
+      "company": "Humane\u2122",
+      "role": "Lab and Prototyping",
+      "connectedOn": "2017-10-29"
+    },
+    {
+      "company": "General Motors",
+      "role": "Senior Manager DevQA",
+      "connectedOn": "2017-10-29"
+    },
+    {
+      "company": "\u014cURA",
+      "role": "Senior Support Engineering Manager",
+      "connectedOn": "2017-10-29"
+    },
+    {
+      "company": "Apple",
+      "role": "System Engineering Program Manager",
+      "connectedOn": "2017-10-30"
+    },
+    {
+      "company": "Freelance",
+      "role": "Active Community Citizen",
+      "connectedOn": "2017-10-30"
+    },
+    {
+      "company": "Empo Health",
+      "role": "Head of Hardware",
+      "connectedOn": "2017-11-06"
+    },
+    {
+      "company": "LaunchDarkly",
+      "role": "Senior Order Management and Collections Specialist",
+      "connectedOn": "2017-11-06"
+    },
+    {
+      "company": "Ambrose Labs, LLC",
+      "role": "Founder",
+      "connectedOn": "2017-11-08"
+    },
+    {
+      "company": "Freelance",
+      "role": "Stealth Mode/Start up Engineer",
+      "connectedOn": "2017-11-23"
+    },
+    {
+      "company": "Jaycon Systems LLC",
+      "role": "COO and Co-Founder",
+      "connectedOn": "2017-11-27"
+    },
+    {
+      "company": "Protec Arisawa",
+      "role": "President & CEO - Protec Arisawa America",
+      "connectedOn": "2018-01-08"
+    },
+    {
+      "company": "Kforce Inc",
+      "role": "Senior Software Engineer (web) -Nike",
+      "connectedOn": "2018-01-11"
+    },
+    {
+      "company": "Rittal North America LLC",
+      "role": "Account Manager MN, ND, SD Region",
+      "connectedOn": "2018-01-17"
+    },
+    {
+      "company": "Alcatraz",
+      "role": "Head of People",
+      "connectedOn": "2018-02-22"
+    },
+    {
+      "company": "HengDa Model (hong kong) Co., Limited",
+      "role": "Team Lead",
+      "connectedOn": "2018-02-27"
+    },
+    {
+      "company": "23andMe",
+      "role": "Staff Accountant",
+      "connectedOn": "2018-02-27"
+    },
+    {
+      "company": "Universal Audio",
+      "role": "Commodity Manager",
+      "connectedOn": "2018-03-08"
+    },
+    {
+      "company": "Amazon",
+      "role": "Software Engineer",
+      "connectedOn": "2018-05-05"
+    },
+    {
+      "company": "Robinhood",
+      "role": "Technical Recruiter",
+      "connectedOn": "2018-05-05"
+    },
+    {
+      "company": "RENA Technologies North America",
+      "role": "Engineering Manager",
+      "connectedOn": "2018-05-05"
+    },
+    {
+      "company": "Ross Gunn Design",
+      "role": "Principal",
+      "connectedOn": "2018-05-08"
+    },
+    {
+      "company": "Tools for Humanity",
+      "role": "Head of Device Product",
+      "connectedOn": "2018-05-09"
+    },
+    {
+      "company": "Panasonic Well",
+      "role": "Engineering Lead",
+      "connectedOn": "2018-05-18"
+    },
+    {
+      "company": "Apple",
+      "role": "Engineering Program Manager",
+      "connectedOn": "2018-05-19"
+    },
+    {
+      "company": "Steven Worden",
+      "role": "Retired",
+      "connectedOn": "2018-05-19"
+    },
+    {
+      "company": "BlendJet\u00ae",
+      "role": "Director Of Design",
+      "connectedOn": "2018-05-19"
+    },
+    {
+      "company": "Lucid Motors",
+      "role": "Senior Engineering Manager",
+      "connectedOn": "2018-05-20"
+    },
+    {
+      "company": "University of Technology Sydney",
+      "role": "Casual Academic ",
+      "connectedOn": "2018-05-21"
+    },
+    {
+      "company": "DaVita Kidney Care",
+      "role": "Technical Lead, Benefits",
+      "connectedOn": "2018-05-21"
+    },
+    {
+      "company": "HeliService Taiwan",
+      "role": "General Manager",
+      "connectedOn": "2018-05-27"
+    },
+    {
+      "company": "PayNearMe",
+      "role": "Advisor",
+      "connectedOn": "2018-06-03"
+    },
+    {
+      "company": "Tarana Wireless, Inc.",
+      "role": "Hardware Talent Leader",
+      "connectedOn": "2018-06-18"
+    },
+    {
+      "company": "Stealth AI Startup",
+      "role": "Founder",
+      "connectedOn": "2018-06-28"
+    },
+    {
+      "company": "Applied Intuition",
+      "role": "Recruiting",
+      "connectedOn": "2018-07-12"
+    },
+    {
+      "company": "MASS Precision  (Precision Metal Fabrication, Machining, Frames, Assembly)",
+      "role": "Director",
+      "connectedOn": "2018-07-12"
+    },
+    {
+      "company": "Responsible metal fab.",
+      "role": "Vice President: Sales/Engineering/Estimating",
+      "connectedOn": "2018-07-12"
+    },
+    {
+      "company": "Freelance",
+      "role": "Freelance",
+      "connectedOn": "2018-07-12"
+    },
+    {
+      "company": "Unknown",
+      "role": "",
+      "connectedOn": "2018-07-12"
+    },
+    {
+      "company": "Zscaler",
+      "role": "Senior Technical Recruiter",
+      "connectedOn": "2018-07-12"
+    },
+    {
+      "company": "GIGAmacro",
+      "role": "AI & Alliances Advisor",
+      "connectedOn": "2018-07-12"
+    },
+    {
+      "company": "Applied Materials",
+      "role": "Talent Acquisition for SPG:ETCH Group",
+      "connectedOn": "2018-07-19"
+    },
+    {
+      "company": "Stealth Startup",
+      "role": "Global Talent Acquisition Consultant",
+      "connectedOn": "2018-08-16"
+    },
+    {
+      "company": "LangChain",
+      "role": "Senior Technical Recruiter",
+      "connectedOn": "2018-08-20"
+    },
+    {
+      "company": "Retired",
+      "role": "Retired",
+      "connectedOn": "2018-08-21"
+    },
+    {
+      "company": "Zoox",
+      "role": "Senior Technical Recruiter",
+      "connectedOn": "2018-08-21"
+    },
+    {
+      "company": "Tesla",
+      "role": "Staff Recruiter, Manufacturing Engineering",
+      "connectedOn": "2018-08-28"
+    },
+    {
+      "company": "Synapse Product Development",
+      "role": "Head of Robotics and Automation",
+      "connectedOn": "2018-08-30"
+    },
+    {
+      "company": "HMBL, Inc.",
+      "role": "Co-founder and Technical Recruiter",
+      "connectedOn": "2018-10-05"
+    },
+    {
+      "company": "Unknown",
+      "role": "Consultant",
+      "connectedOn": "2018-10-10"
+    },
+    {
+      "company": "Tralongo Talent Advantage, Inc.",
+      "role": "CEO, People Expert",
+      "connectedOn": "2018-10-10"
+    },
+    {
+      "company": "Meta",
+      "role": "Product Design Engineering Manager",
+      "connectedOn": "2018-10-16"
+    },
+    {
+      "company": "A2e Technologies",
+      "role": "Recruiting Manager",
+      "connectedOn": "2018-11-26"
+    },
+    {
+      "company": "Artifex RDE",
+      "role": "President",
+      "connectedOn": "2019-02-21"
+    },
+    {
+      "company": "Deltrix Kiosks",
+      "role": "Business Development Manager",
+      "connectedOn": "2019-02-24"
+    },
+    {
+      "company": "Wayken Rapid Manufacturing",
+      "role": "Project Manager",
+      "connectedOn": "2019-04-08"
+    },
+    {
+      "company": "Synapse Product Development",
+      "role": "Principal Technical Program Manager, Health & MedTech",
+      "connectedOn": "2019-05-03"
+    },
+    {
+      "company": "Lumicity",
+      "role": "Sales Manager",
+      "connectedOn": "2019-09-23"
+    },
+    {
+      "company": "DGN Technologies Inc",
+      "role": "Senior Recruiter Team Lead",
+      "connectedOn": "2019-10-15"
+    },
+    {
+      "company": "Skydio",
+      "role": "AP Accountant",
+      "connectedOn": "2019-10-15"
+    },
+    {
+      "company": "SpanIdea Systems",
+      "role": "Hiring Manager",
+      "connectedOn": "2019-11-14"
+    },
+    {
+      "company": "Google",
+      "role": "Product Design Architect",
+      "connectedOn": "2019-12-10"
+    },
+    {
+      "company": "Pulse Biosciences, Inc.",
+      "role": "Sr. Director R&D, Mechanical Engineering",
+      "connectedOn": "2020-01-16"
+    },
+    {
+      "company": "A1J Tech",
+      "role": "Sr Technical Sales Engineer",
+      "connectedOn": "2020-01-16"
+    },
+    {
+      "company": "Unknown",
+      "role": "",
+      "connectedOn": "2020-02-18"
+    },
+    {
+      "company": "Milwaukee Tool",
+      "role": "Territory Manager - JSS",
+      "connectedOn": "2020-05-05"
+    },
+    {
+      "company": "Signify Technology",
+      "role": "Director",
+      "connectedOn": "2020-07-07"
+    },
+    {
+      "company": "Hyphen",
+      "role": "Co-founder & CTO",
+      "connectedOn": "2021-04-09"
+    },
+    {
+      "company": "Peregrine",
+      "role": "Senior Recruiter",
+      "connectedOn": "2021-04-21"
+    },
+    {
+      "company": "Intuitive",
+      "role": "Director of Automation Equipment and Test Engineering ",
+      "connectedOn": "2021-04-21"
+    },
+    {
+      "company": "Hyphen",
+      "role": "Co-Founder & CEO",
+      "connectedOn": "2021-06-05"
+    },
+    {
+      "company": "Widget Makers",
+      "role": "Operator",
+      "connectedOn": "2021-09-09"
+    },
+    {
+      "company": "Hyphen",
+      "role": "Lead Systems Engineer",
+      "connectedOn": "2021-09-09"
+    },
+    {
+      "company": "Kabata",
+      "role": "Staff Mechanical Engineer",
+      "connectedOn": "2021-09-09"
+    },
+    {
+      "company": "Unknown",
+      "role": "",
+      "connectedOn": "2021-09-09"
+    },
+    {
+      "company": "Clayton Controls",
+      "role": "Senior Technical Sales Engineer",
+      "connectedOn": "2021-09-09"
+    },
+    {
+      "company": "Charge Robotics",
+      "role": "Technical Lead, Mechanical Engineering",
+      "connectedOn": "2021-09-09"
+    },
+    {
+      "company": "Novo Nordisk",
+      "role": "Strategic Sourcing Specialist",
+      "connectedOn": "2021-09-09"
+    },
+    {
+      "company": "Hyphen",
+      "role": "Staff Mechanical Engineer",
+      "connectedOn": "2021-09-09"
+    },
+    {
+      "company": "Glydways",
+      "role": "Senior Product Designer",
+      "connectedOn": "2021-09-10"
+    },
+    {
+      "company": "Hound Labs, Inc.",
+      "role": "Research And Development Engineer",
+      "connectedOn": "2021-10-19"
+    },
+    {
+      "company": "Quanata",
+      "role": "Engineering Manager, Backend",
+      "connectedOn": "2021-11-17"
+    },
+    {
+      "company": "Culture Biosciences",
+      "role": "Engineering Manager",
+      "connectedOn": "2022-01-05"
+    },
+    {
+      "company": "Handstand",
+      "role": "Head of Growth & BD",
+      "connectedOn": "2022-01-07"
+    },
+    {
+      "company": "Gusto",
+      "role": "Staff Software Engineer",
+      "connectedOn": "2022-01-10"
+    },
+    {
+      "company": "Hyphen",
+      "role": "Chief Of Staff",
+      "connectedOn": "2022-01-24"
+    },
+    {
+      "company": "Hyphen",
+      "role": "VP, Operations",
+      "connectedOn": "2022-01-27"
+    },
+    {
+      "company": "Hyphen",
+      "role": "Senior Staff Software Engineer (Founding Engineer)",
+      "connectedOn": "2022-01-31"
+    },
+    {
+      "company": "HP",
+      "role": "3D Print Business Development",
+      "connectedOn": "2022-02-09"
+    },
+    {
+      "company": "Flamingo Estate",
+      "role": "Senior Director, Product Operations",
+      "connectedOn": "2022-02-09"
+    },
+    {
+      "company": "Ewing-Foley, Inc",
+      "role": "Strategic Account Manager at Ewing Foley",
+      "connectedOn": "2022-02-17"
+    },
+    {
+      "company": "Hyphen",
+      "role": "Vice President, Strategy + Business Operations",
+      "connectedOn": "2022-02-17"
+    },
+    {
+      "company": "SSA Group",
+      "role": "Area Chef",
+      "connectedOn": "2022-02-17"
+    },
+    {
+      "company": "Hyphen",
+      "role": "Production Manager",
+      "connectedOn": "2022-02-22"
+    },
+    {
+      "company": "Teletrac Navman",
+      "role": "Director of Product Management",
+      "connectedOn": "2022-03-08"
+    },
+    {
+      "company": "West Metro Aviation",
+      "role": "A&P/IA Mechanic",
+      "connectedOn": "2022-03-16"
+    },
+    {
+      "company": "Symbotic",
+      "role": "Vice President of Hardware Engineering",
+      "connectedOn": "2022-04-01"
+    },
+    {
+      "company": "Titoma B2B Electronics Design & Manufacturing",
+      "role": "Chairman Embedded Systems: Design & Manufacturing",
+      "connectedOn": "2022-04-01"
+    },
+    {
+      "company": "Together AI",
+      "role": "Senior Site Reliability Engineer",
+      "connectedOn": "2022-06-09"
+    },
+    {
+      "company": "MOS Plastics",
+      "role": "Principal Advanced Manufacturing Engineer",
+      "connectedOn": "2022-06-09"
+    },
+    {
+      "company": "First Resonance",
+      "role": "Manufacturing Success Manager",
+      "connectedOn": "2022-06-21"
+    },
+    {
+      "company": "Hyphen",
+      "role": "Cuilnary Operations Associate",
+      "connectedOn": "2022-06-21"
+    },
+    {
+      "company": "SuNPe PROTOTYPE (HK)CO.,LIMITED",
+      "role": "Rapid prototyping sales Manager",
+      "connectedOn": "2022-06-22"
+    },
+    {
+      "company": "CRAFT GROUP",
+      "role": "Managing Director",
+      "connectedOn": "2022-07-20"
+    },
+    {
+      "company": "Fresh Consulting",
+      "role": "Senior Mechanical Engineer at Meta via Fresh Consulting",
+      "connectedOn": "2022-08-16"
+    },
+    {
+      "company": "Second Order Effects, Inc",
+      "role": "CEO, Co-Founder",
+      "connectedOn": "2022-08-25"
+    },
+    {
+      "company": "Onyx",
+      "role": "Founder | Recruiting",
+      "connectedOn": "2022-08-25"
+    },
+    {
+      "company": "Poindexter by Design",
+      "role": "Co-Founder & Engineering Lead",
+      "connectedOn": "2022-08-25"
+    },
+    {
+      "company": "Poindexter By Design",
+      "role": "Co-Founder/Engineer",
+      "connectedOn": "2022-08-25"
+    },
+    {
+      "company": "Optimation Technology, Inc.",
+      "role": "Senior Program Manager",
+      "connectedOn": "2022-08-25"
+    },
+    {
+      "company": "NetApp",
+      "role": "Sr. Product Lifecycle Management Business Analyst",
+      "connectedOn": "2022-08-25"
+    },
+    {
+      "company": "Crafted Product Design",
+      "role": "Industrial Design Consultant",
+      "connectedOn": "2022-08-26"
+    },
+    {
+      "company": "Private Company",
+      "role": "Sr. Technical Recruiter",
+      "connectedOn": "2022-08-26"
+    },
+    {
+      "company": "Ono Food Co.",
+      "role": "Senior Engineering Technician",
+      "connectedOn": "2022-08-26"
+    },
+    {
+      "company": "Second Order Effects",
+      "role": "Director, Business Development",
+      "connectedOn": "2022-08-29"
+    },
+    {
+      "company": "Hansen & Adkins Auto Transport",
+      "role": "Customer Solutions Specialist",
+      "connectedOn": "2022-08-31"
+    },
+    {
+      "company": "Unknown",
+      "role": "",
+      "connectedOn": "2022-09-10"
+    },
+    {
+      "company": "West Coast Consulting",
+      "role": "Team Lead Recruitment (MSP/VMS for Social Media client ,Ride Sharing App and for Crypto client)",
+      "connectedOn": "2022-09-19"
+    },
+    {
+      "company": "MASS Precision, Inc.",
+      "role": "Vice President of Business Development",
+      "connectedOn": "2022-11-01"
+    },
+    {
+      "company": "Dialpad",
+      "role": "Senior Talent Business Partner",
+      "connectedOn": "2022-11-02"
+    },
+    {
+      "company": "Hestus",
+      "role": "Co-Founder and CTO",
+      "connectedOn": "2023-01-20"
+    },
+    {
+      "company": "SQUIRE",
+      "role": "Sr. Recruiter & ARG Country Manager",
+      "connectedOn": "2023-05-22"
+    },
+    {
+      "company": "Ouster",
+      "role": "Co-Founder, Principal Engineer",
+      "connectedOn": "2023-07-07"
+    },
+    {
+      "company": "Bond Associates LLC",
+      "role": "Founder, Executive Director, Recruiting",
+      "connectedOn": "2023-08-10"
+    },
+    {
+      "company": "Medical Solutions",
+      "role": "Direct Hire Healthcare Recruiter",
+      "connectedOn": "2023-08-17"
+    },
+    {
+      "company": "DNA Group, Inc.",
+      "role": "Director of Business Development, Western Region",
+      "connectedOn": "2024-06-13"
+    },
+    {
+      "company": "Spanner",
+      "role": "Director of ID & UX",
+      "connectedOn": "2025-01-11"
+    },
+    {
+      "company": "OnePay",
+      "role": "Head of Communications",
+      "connectedOn": "2025-04-24"
+    },
+    {
+      "company": "Hyphen",
+      "role": "Senior Mechanical Engineering Manager- Dispensers",
+      "connectedOn": "2025-05-01"
+    },
+    {
+      "company": "Design Visionaries",
+      "role": "President",
+      "connectedOn": "2025-05-06"
+    },
+    {
+      "company": "Tel-Tru Manufacturing Co.",
+      "role": "Director of Sales And Marketing, Executive Leadership Team Member",
+      "connectedOn": "2025-07-29"
+    }
+  ]
+}

@@ -1,13 +1,14 @@
-<svg width="192" height="192" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="192" height="192" viewBox="0 0 192 192" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <style>
     /* Default: Light Mode preference matches Black Logo */
-    .logo-dark { display: none; }
-    .logo-light { display: block; }
+    .logo-dark { opacity: 0; }
+    .logo-light { opacity: 1; }
 
     /* Dark Mode preference matches White Logo */
     @media (prefers-color-scheme: dark) {
-      .logo-dark { display: block; }
-      .logo-light { display: none; }
+      .logo-dark { opacity: 1; }
+      .logo-light { opacity: 0; }
     }
   </style>
   

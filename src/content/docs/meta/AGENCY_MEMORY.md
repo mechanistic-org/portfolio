@@ -56,13 +56,23 @@ These are active AI/External resources that contain "Source of Truth" data not i
   - Transition to Xbox/eHome.
   - "Blind Discovery" gems (Spoons, Datsun 510).
 
+### 6. **Project Commute (The Polar Archives)**
+
+- **Role:** Quantified Grit / Forensic Commute
+- **Path:** `D:\GitHub\eriknorris-workspace\__WORKOUT_data_working-copy`
+- **Status:** **VERIFIED** (2004-2006 Data)
+- **Contents:** `.hrm` files (Heart Rate/Speed) documenting the "Digi-Commute."
+- **Potential:** High-fidelity data visualization of "The Grind" (La Honda -> Daly City).
+
 ---
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Identity Migration Complete. Commit Gen Blocked (Platform Issue).**
-- **Next Step:** Return to Product UI development (Manual commits for now).
-- **Context:** C24, SC48, and Galaxy are now standardized. The Data Layer is ready to drive the UI.
+- **Active Task:** **Forensic Resume Alignment Complete.**
+- **Next Step:** Proceed to **Prospecting Protocols** (Tailoring/Pain Letters).
+- **Context:** Master Resume, LinkedIn Profile (Bio/Headline/Exp V4), and Site Datasheet are now **SYNCHRONIZED** with the "Forensic Architect" narrative.
+
+* **Key Decision (Assets):** **"The Fake SVG Pivot"** - The `EN_logo_1200` series are technically SVG wrappers around high-res rendered PNGs (`d:\portfolio\...\ _fake-SVGS____`). We accepted this as the **Source of Truth** (Sovereign) because the logo is natively 3D and has no perfect 2D vector equivalent. Do NOT try to replace them with wireframes.
 
 * **Key Decision (Physics):** "Goldilocks" settings are `vy: -50`, `friction: 0.05`. Do not increase friction without vertically scaling velocity.
 * **Key Decision (Viz-Deprecated):** `ArchiveSankey`, `LivingGantt`, and `SkillsGraph.tsx` have been DEPRECATED and removed/disabled to "kill the noise".
@@ -82,6 +92,9 @@ These are active AI/External resources that contain "Source of Truth" data not i
 * **Key Decision (Keystone):** **"The Neural Assembly"** - The final visualization is a "Hybrid Brain" (D3 + R3F). 30 Notebook Nodes packed in a cranial volume (The Idea) that explode on scroll (The Engineering). This is the Opus.
 * **Key Decision (Pipeline):** **"The Sidecar Pattern"** - Specialized rendering logic (DXF, IGES) lives in `scripts/lib/` as standalone modules. `process_images.py` invokes them but does not contain their heavy dependencies.
 * **Key Decision (Archival):** **"The PDF Bridge"** - We generate PDFs from CAD data specifically for `NotebookLM` consumption, as it digests PDF vectors better than raw DXF text.
+* **Key Decision (Identity):** **"The Forensic Architect"** - The Brand Voice is "Hyper-Functional Brutalist." We do not use fluff. We use density (IP69K, AZ91D, 5-Micron). The Master Resume logic is "Semantic Density" (for AI) + "Visual Hooks" (for Humans).
+* **Key Decision (Formatting):** **"The Double Spacing Law"** - LinkedIn collapses standard lists. We MUST use **Double Spacing** (Empty Lines) effectively between bullets to force a vertical list render.
+* **Key Decision (Sync):** **"The Datasheet Sync"** - `src/config/work_history.json` is the Source of Truth for the `/resume/one-pager` "Datasheet" View. It has been manually synced to the Master Resume.
 
 - **Active Thread:** `777cb7ff-d7e0-468b-905f-b84f7965a3e1` (MDX Debugging & Tooling Repair).
 

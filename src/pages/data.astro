@@ -4,6 +4,8 @@ import MultiverseGraph from "../components/DataViz/MultiverseGraph";
 import { getMultiverseData } from "@/utils/getMultiverseData";
 
 const multiverseData = await getMultiverseData();
+import NetworkBubbleGraph from "../components/DataViz/NetworkBubbleGraph";
+import networkTopology from "@/data/network_topology.json";
 
 const title = "The Timeline Authority";
 const description = "Visualizing the Quantum Project Multiverse.";
@@ -54,6 +56,56 @@ const description = "Visualizing the Quantum Project Multiverse.";
 				<h3 class="mb-2 font-bold text-white">[03] The Pruning Stick</h3>
 				<p>
 					Data integrity is enforced by the TVA protocol. Variance is pruned before visualization.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="site-container mt-12 border-t border-white/10 pt-12 pb-24">
+		<div class="prose mb-12 max-w-none">
+			<h1 class="font-header mb-4 text-5xl font-black">NETWORK TOPOLOGY</h1>
+			<p class="max-w-2xl font-mono text-lg text-gray-400">
+				// DATASET: LINKEDIN_CONNECTIONS_V2<br />
+				// PRIVACY_PROTOCOL: ANONYMIZED<br />
+				// SIGNAL_STRENGTH: HIGH
+			</p>
+		</div>
+
+		<div
+			class="relative w-full overflow-hidden rounded-xl border border-white/10 bg-black/20 backdrop-blur-sm"
+			style="height: 80vh;"
+		>
+			<NetworkBubbleGraph client:only="react" data={networkTopology} />
+
+			<div class="pointer-events-none absolute bottom-4 left-4 font-mono text-xs text-blue-500/50">
+				DATA.NODES = {networkTopology.metadata.total_connections}<br />
+				DATA.SOURCE = "CONNECTIONS.CSV"<br />
+			</div>
+		</div>
+
+		<div class="mt-12 grid grid-cols-1 gap-8 font-mono text-sm text-gray-400 md:grid-cols-3">
+			<div class="rounded-lg border border-white/5 p-4">
+				<h3 class="mb-2 font-bold text-white">[01] The Silicon Valley Core</h3>
+				<p>
+					Dense clusters at <span class="text-blue-400">Apple</span>, <span class="text-blue-400"
+						>Google</span
+					>, and <span class="text-blue-400">Avid</span> indicate verified historical impact.
+				</p>
+			</div>
+			<div class="rounded-lg border border-white/5 p-4">
+				<h3 class="mb-2 font-bold text-white">[02] Seniority Index</h3>
+				<p>
+					Connection roles skew heavily towards <span class="text-purple-400">Principal</span>, <span
+						class="text-purple-400">Director</span
+					>, and <span class="text-purple-400">Founder</span>.
+				</p>
+			</div>
+			<div class="rounded-lg border border-white/5 p-4">
+				<h3 class="mb-2 font-bold text-white">[03] Reach</h3>
+				<p>
+					Network spans <span class="text-green-400">Consumer Electronics</span>, <span
+						class="text-green-400">Pro Audio</span
+					>, and <span class="text-green-400">Hyper-Scale Tech</span>.
 				</p>
 			</div>
 		</div>
