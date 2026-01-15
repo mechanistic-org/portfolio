@@ -113,59 +113,70 @@ const SonicHeartbeat: React.FC<SonicHeartbeatProps> = ({ audioUrl }) => {
 								}}
 							/>
 						) : (
-							/* ACTIVE STATE: NotebookLM Dual-Voice Visualization */
-							/* Two overlapping sine waves (Blue & Green) simulating conversation */
-							<>
-								{/* Voice A (Blue/Purple) - The "Host" (Dynamic, Range, Fast) */}
-								<motion.path
-									key="voice-a"
-									// Sharper curves for dynamic voice
-									d="M 0,10 C 10,-10 20,25 30,5 S 50,10 50,10"
-									stroke="#8AB4F8"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									fill="none"
-									animate={{
-										// High Dynamic Range (Talking)
-										scaleY: [1, 2.2, 0.4, 1.8, 0.6, 2.5, 1],
-										// Faster horizontal flow
-										x: [-3, 0, 3, -1, -3],
-										opacity: [0.8, 1, 0.8],
-									}}
-									transition={{
-										scaleY: { duration: 1.8, repeat: Infinity, ease: "easeInOut" },
-										x: { duration: 2.5, repeat: Infinity, ease: "linear" },
-										opacity: { duration: 1.5, repeat: Infinity, ease: "easeInOut" },
-									}}
-									style={{ transformOrigin: "center" }}
-								/>
-
-								{/* Voice B (Green) - The "Expert" (Steady, Grounded, Slow) */}
-								<motion.path
-									key="voice-b"
-									// Smoother, wider curves
-									d="M 0,10 Q 25,20 50,10"
-									stroke="#81C995"
-									strokeWidth="2"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-									fill="none"
-									animate={{
-										// Low Dynamic Range (Listening/Agreeing)
-										scaleY: [1, 1.2, 0.9, 1.1, 0.95, 1],
-										// Slow horizontal drift
-										x: [2, 0, -2, 0, 2],
-									}}
-									transition={{
-										scaleY: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-										x: { duration: 5, repeat: Infinity, ease: "easeInOut" },
-									}}
-									style={{ transformOrigin: "center" }}
-								/>
-							</>
+							/* ACTIVE STATE: Digital EQ Visualization */
+							/* Segmented LED Bars (Green -> Yellow -> Red) */
+							<g transform="translate(4, 5)">
+								{/* EQ Container: 8 Bars */}
+								{Array.from({ length: 8 }).map((_, i) => (
+									<motion.rect
+										key={`bar-${i}`}
+										x={i * 5.5} // Spacing
+										y="0"
+										width="4"
+										height="20"
+										fill="url(#led-gradient)"
+										// Mask creates the "segment" look
+										mask="url(#segment-mask)"
+										style={{
+											transformBox: "fill-box",
+											transformOrigin: "bottom",
+										}}
+										animate={{
+											// Animate ScaleY to simulate audio levels
+											scaleY: [0.2, 0.8, 0.4, 0.9, 0.3, 0.7, 0.2].map((v) =>
+												Math.min(1, Math.max(0.1, v * (0.5 + Math.random()))),
+											),
+										}}
+										transition={{
+											duration: 0.4 + Math.random() * 0.2,
+											repeat: Infinity,
+											repeatType: "mirror",
+											ease: "linear",
+											delay: i * 0.05,
+										}}
+									/>
+								))}
+							</g>
 						)}
 					</AnimatePresence>
+
+					{/* Defs for Gradients/Masks (Inside the SVG) */}
+					<defs>
+						<linearGradient id="led-gradient" x1="0" x2="0" y1="1" y2="0">
+							<stop offset="0%" stopColor="#00ff00" /> {/* Low / Green */}
+							<stop offset="60%" stopColor="#ffff00" /> {/* Mid / Yellow */}
+							<stop offset="100%" stopColor="#ff0000" /> {/* High / Red */}
+						</linearGradient>
+						<mask id="segment-mask">
+							{/* Visible Area */}
+							<rect x="0" y="0" width="100%" height="100%" fill="white" />
+							{/* Grid Lines (Black = Hide) */}
+							<rect x="0" y="0" width="100%" height="100%" fill="url(#grid-pattern)" />
+						</mask>
+						<pattern
+							id="grid-pattern"
+							x="0"
+							y="0"
+							width="4"
+							height="2"
+							patternUnits="userSpaceOnUse"
+						>
+							{/* 1.5px Visible, 0.5px Gap? No. Pattern fills with what we want to DRAW. */}
+							{/* We are drawing on the MASK. White = Show, Black = Hide. */}
+							{/* If we want gaps, we need BLACK stripes. */}
+							<rect x="0" y="1.5" width="4" height="0.5" fill="black" />
+						</pattern>
+					</defs>
 				</svg>
 
 				{/* Status Text (Tiny) */}
