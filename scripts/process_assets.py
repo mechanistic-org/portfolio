@@ -382,8 +382,9 @@ def process_project(slug):
                     print(f"    [ERROR] FFmpeg failed: {result.stderr}")
 
             except FileNotFoundError:
-                print("    [ERROR] FFmpeg not found in PATH. Audio processing skipped.")
-                # Basic copy fallback? No, browsers don't play massive WAVs well.
+                print("    [WARNING] FFmpeg not found. Falling back to simple COPY (preserving format).")
+                shutil.copy2(audio_file, output_path / audio_file.name)
+                print(f"    -> Copied: {audio_file.name}")
         
         except Exception as e:
             print(f"    [ERROR] Audio processing failed: {e}")
