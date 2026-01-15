@@ -91,84 +91,81 @@ const SonicHeartbeat: React.FC<SonicHeartbeatProps> = ({ audioUrl }) => {
 					}}
 				/>
 
-
-
-					{/* The Trace */}
-					<svg viewBox="0 -10 50 30" fill="none" className="h-full w-full overflow-visible">
-						<AnimatePresence mode="wait">
-							{!isPlaying ? (
-								/* IDLE STATE: The Einthoven ECG (Green) */
+				{/* The Trace */}
+				<svg viewBox="0 -10 50 30" fill="none" className="h-full w-full overflow-visible">
+					<AnimatePresence mode="wait">
+						{!isPlaying ? (
+							/* IDLE STATE: The Einthoven ECG (Green) */
+							<motion.path
+								key="ecg"
+								d={ecgPath}
+								stroke="#00ff00"
+								strokeWidth="1.5"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								fill="none"
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1, pathLength: [0, 1] }}
+								exit={{ opacity: 0 }}
+								transition={{
+									pathLength: { duration: 1.2, repeat: Infinity, ease: "linear" },
+									opacity: { duration: 0.3 },
+								}}
+							/>
+						) : (
+							/* ACTIVE STATE: NotebookLM Dual-Voice Visualization */
+							/* Two overlapping sine waves (Blue & Green) simulating conversation */
+							<>
+								{/* Voice A (Blue/Purple) - The "Host" */}
 								<motion.path
-									key="ecg"
-									d={ecgPath}
-									stroke="#00ff00"
-									strokeWidth="1.5"
+									key="voice-a"
+									// A smooth sine-like curve
+									d="M 0,10 Q 12.5,0 25,10 T 50,10"
+									stroke="#8AB4F8" // NotebookLM Blue-ish
+									strokeWidth="2"
 									strokeLinecap="round"
 									strokeLinejoin="round"
 									fill="none"
-									initial={{ opacity: 0 }}
-									animate={{ opacity: 1, pathLength: [0, 1] }}
-									exit={{ opacity: 0 }}
-									transition={{
-										pathLength: { duration: 1.2, repeat: Infinity, ease: "linear" },
-										opacity: { duration: 0.3 },
+									animate={{
+										// Scale Y to simulate amplitude modulation (Active Talking)
+										scaleY: [1, 1.8, 0.5, 1.5, 0.8, 1.2, 1],
+										// Slight horizontal shift for flow
+										x: [-2, 0, 2, 0, -2],
 									}}
+									transition={{
+										scaleY: { duration: 2.1, repeat: Infinity, ease: "easeInOut" },
+										x: { duration: 4, repeat: Infinity, ease: "linear" },
+									}}
+									style={{ transformOrigin: "center" }}
 								/>
-							) : (
-								/* ACTIVE STATE: NotebookLM Dual-Voice Visualization */
-								/* Two overlapping sine waves (Blue & Green) simulating conversation */
-								<>
-									{/* Voice A (Blue/Purple) - The "Host" */}
-									<motion.path
-										key="voice-a"
-										// A smooth sine-like curve
-										d="M 0,10 Q 12.5,0 25,10 T 50,10"
-										stroke="#8AB4F8" // NotebookLM Blue-ish
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										fill="none"
-										animate={{
-											// Scale Y to simulate amplitude modulation (Active Talking)
-											scaleY: [1, 1.8, 0.5, 1.5, 0.8, 1.2, 1],
-											// Slight horizontal shift for flow
-											x: [-2, 0, 2, 0, -2]
-										}}
-										transition={{
-											scaleY: { duration: 2.1, repeat: Infinity, ease: "easeInOut" },
-											x: { duration: 4, repeat: Infinity, ease: "linear" }
-										}}
-										style={{ transformOrigin: "center" }}
-									/>
 
-									{/* Voice B (Green) - The "Guest" (Offset phase) */}
-									<motion.path
-										key="voice-b"
-										d="M 0,10 Q 12.5,20 25,10 T 50,10" // Inverted starting phase
-										stroke="#81C995" // NotebookLM Green-ish
-										strokeWidth="2"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										fill="none"
-										animate={{
-											scaleY: [1, 0.6, 1.4, 0.7, 1.3, 0.9, 1], // Counter-phase modulation
-											x: [2, 0, -2, 0, 2]
-										}}
-										transition={{
-											scaleY: { duration: 1.7, repeat: Infinity, ease: "easeInOut" },
-											x: { duration: 3.5, repeat: Infinity, ease: "linear" }
-										}}
-										style={{ transformOrigin: "center" }}
-									/>
-								</>
-							)}
-						</AnimatePresence>
-					</svg>
+								{/* Voice B (Green) - The "Guest" (Offset phase) */}
+								<motion.path
+									key="voice-b"
+									d="M 0,10 Q 12.5,20 25,10 T 50,10" // Inverted starting phase
+									stroke="#81C995" // NotebookLM Green-ish
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									fill="none"
+									animate={{
+										scaleY: [1, 0.6, 1.4, 0.7, 1.3, 0.9, 1], // Counter-phase modulation
+										x: [2, 0, -2, 0, 2],
+									}}
+									transition={{
+										scaleY: { duration: 1.7, repeat: Infinity, ease: "easeInOut" },
+										x: { duration: 3.5, repeat: Infinity, ease: "linear" },
+									}}
+									style={{ transformOrigin: "center" }}
+								/>
+							</>
+						)}
+					</AnimatePresence>
+				</svg>
 
-					{/* Status Text (Tiny) */}
-					<div className="absolute top-0.5 right-1 font-mono text-[6px] tracking-tighter text-white/50">
-						{isPlaying ? "VOX" : isHovered ? "100" : "60"}
-					</div>
+				{/* Status Text (Tiny) */}
+				<div className="absolute top-0.5 right-1 font-mono text-[6px] tracking-tighter text-white/50">
+					{isPlaying ? "VOX" : isHovered ? "100" : "60"}
 				</div>
 			</div>
 		</div>
