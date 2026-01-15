@@ -117,35 +117,43 @@ const SonicHeartbeat: React.FC<SonicHeartbeatProps> = ({ audioUrl }) => {
 					{/* Primary Trace (The Beam) */}
 					<motion.path
 						d={ecgPath}
-						stroke={isPlaying ? "#ff3333" : "#00ff00"} // Red if Active (Recording/Warning), Green if Idle
+						stroke="#00ff00" // Always Green (User request: "pleasant")
 						strokeWidth="1.5"
 						strokeLinecap="round"
 						strokeLinejoin="round"
 						fill="none"
-						// If playing, we add a chaotic vertical shake (Perturbation)
-						style={{
-							y: isPlaying ? [0, 1, -1, 0, 2, -2, 0] : 0,
-						}}
-						// Animate the drawing of the beat
-						animate={{
-							pathLength: [0, 1],
-							opacity: [1, 0], // Fade out tail
-							x: [0, 5], // Slight drift
-						}}
+						// Voice Logic: Instead of jittering y, we scale y smoothly to simulate amplitude
+						animate={
+							isPlaying
+								? {
+										pathLength: [0, 1],
+										opacity: [1, 0],
+										x: [0, 5],
+										// Scale Y to simulate voice modulation (EQ-ish)
+										scaleY: [1, 1.5, 0.5, 1.2, 0.8, 1],
+									}
+								: {
+										pathLength: [0, 1],
+										opacity: [1, 0],
+										x: [0, 5],
+										scaleY: 1,
+									}
+						}
 						// Transition controls the BPM
 						transition={{
 							pathLength: { duration: beatDuration * 0.8, repeat: Infinity, ease: "linear" },
 							opacity: { duration: beatDuration * 0.8, repeat: Infinity, ease: "easeOut" },
 							x: { duration: beatDuration, repeat: Infinity, ease: "linear" },
-							// Jitter transition for playing state
-							y: isPlaying ? { duration: 0.1, repeat: Infinity, repeatType: "mirror" } : {},
+							scaleY: isPlaying
+								? { duration: 0.2, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }
+								: {},
 						}}
 					/>
 				</svg>
 
 				{/* Status Text (Tiny) */}
 				<div className="absolute top-0.5 right-1 font-mono text-[6px] tracking-tighter text-white/50">
-					{isPlaying ? "REC" : isHovered ? "100" : "60"}
+					{isPlaying ? "VOX" : isHovered ? "100" : "60"}
 				</div>
 			</div>
 		</div>
