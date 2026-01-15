@@ -123,6 +123,16 @@ const projectsCollection = defineCollection({
 		// Forensic Architecture (injected by hydrate_content.py)
 		toolchain: z.array(z.string()).optional(),
 		forensic_summary: z.string().optional(),
+		audio_url: z.string().optional(),
+
+		// NotebookLM Metrics (String-based)
+		forensic_metrics: z
+			.object({
+				financial: z.string().optional(),
+				process: z.string().optional(),
+				technical: z.string().optional(),
+			})
+			.optional(),
 
 		phase_stats: z.record(z.number()).optional(),
 		teamSize: z.coerce.string().optional(),

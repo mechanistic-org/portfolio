@@ -100,11 +100,11 @@ def hydrate_content(dry_run=False, force=False):
         # Prepare Updates
         changes = []
         
-        # 1. Metrics
+        # 1. Metrics (Mapped to forensic_metrics to avoid schema conflict)
         if "metrics" in data:
-            if post.metadata.get("metrics") != data["metrics"]:
-                changes.append(f"  - Update 'metrics'")
-                post.metadata["metrics"] = data["metrics"]
+            if post.metadata.get("forensic_metrics") != data["metrics"]:
+                changes.append(f"  - Update 'metrics' -> 'forensic_metrics'")
+                post.metadata["forensic_metrics"] = data["metrics"]
         
         # 2. Presentation Mode
         if "presentation_mode" in data:
