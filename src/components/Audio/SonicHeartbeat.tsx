@@ -116,45 +116,50 @@ const SonicHeartbeat: React.FC<SonicHeartbeatProps> = ({ audioUrl }) => {
 							/* ACTIVE STATE: NotebookLM Dual-Voice Visualization */
 							/* Two overlapping sine waves (Blue & Green) simulating conversation */
 							<>
-								{/* Voice A (Blue/Purple) - The "Host" */}
+								{/* Voice A (Blue/Purple) - The "Host" (Dynamic, Range, Fast) */}
 								<motion.path
 									key="voice-a"
-									// A smooth sine-like curve
-									d="M 0,10 Q 12.5,0 25,10 T 50,10"
-									stroke="#8AB4F8" // NotebookLM Blue-ish
+									// Sharper curves for dynamic voice
+									d="M 0,10 C 10,-10 20,25 30,5 S 50,10 50,10"
+									stroke="#8AB4F8"
 									strokeWidth="2"
 									strokeLinecap="round"
 									strokeLinejoin="round"
 									fill="none"
 									animate={{
-										// Scale Y to simulate amplitude modulation (Active Talking)
-										scaleY: [1, 1.8, 0.5, 1.5, 0.8, 1.2, 1],
-										// Slight horizontal shift for flow
-										x: [-2, 0, 2, 0, -2],
+										// High Dynamic Range (Talking)
+										scaleY: [1, 2.2, 0.4, 1.8, 0.6, 2.5, 1],
+										// Faster horizontal flow
+										x: [-3, 0, 3, -1, -3],
+										opacity: [0.8, 1, 0.8],
 									}}
 									transition={{
-										scaleY: { duration: 2.1, repeat: Infinity, ease: "easeInOut" },
-										x: { duration: 4, repeat: Infinity, ease: "linear" },
+										scaleY: { duration: 1.8, repeat: Infinity, ease: "easeInOut" },
+										x: { duration: 2.5, repeat: Infinity, ease: "linear" },
+										opacity: { duration: 1.5, repeat: Infinity, ease: "easeInOut" },
 									}}
 									style={{ transformOrigin: "center" }}
 								/>
 
-								{/* Voice B (Green) - The "Guest" (Offset phase) */}
+								{/* Voice B (Green) - The "Expert" (Steady, Grounded, Slow) */}
 								<motion.path
 									key="voice-b"
-									d="M 0,10 Q 12.5,20 25,10 T 50,10" // Inverted starting phase
-									stroke="#81C995" // NotebookLM Green-ish
+									// Smoother, wider curves
+									d="M 0,10 Q 25,20 50,10"
+									stroke="#81C995"
 									strokeWidth="2"
 									strokeLinecap="round"
 									strokeLinejoin="round"
 									fill="none"
 									animate={{
-										scaleY: [1, 0.6, 1.4, 0.7, 1.3, 0.9, 1], // Counter-phase modulation
+										// Low Dynamic Range (Listening/Agreeing)
+										scaleY: [1, 1.2, 0.9, 1.1, 0.95, 1],
+										// Slow horizontal drift
 										x: [2, 0, -2, 0, 2],
 									}}
 									transition={{
-										scaleY: { duration: 1.7, repeat: Infinity, ease: "easeInOut" },
-										x: { duration: 3.5, repeat: Infinity, ease: "linear" },
+										scaleY: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+										x: { duration: 5, repeat: Infinity, ease: "easeInOut" },
 									}}
 									style={{ transformOrigin: "center" }}
 								/>
