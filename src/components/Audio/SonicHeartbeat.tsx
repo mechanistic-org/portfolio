@@ -91,28 +91,7 @@ const SonicHeartbeat: React.FC<SonicHeartbeatProps> = ({ audioUrl }) => {
 					}}
 				/>
 
-				{/* The Trace */}
-				<svg viewBox="0 -10 50 30" fill="none" className="h-full w-full overflow-visible">
-					{/* Shadow Trace (Phosphor Decay) */}
-					<motion.path
-						d={ecgPath}
-						stroke="#00ff00"
-						strokeWidth="1"
-						strokeOpacity="0.2"
-						fill="none"
-						initial={{ pathLength: 0, x: -10 }}
-						animate={{
-							pathLength: [0, 1, 1],
-							opacity: [0, 0.5, 0],
-							x: 0,
-						}}
-						transition={{
-							duration: beatDuration,
-							repeat: Infinity,
-							ease: "linear",
-							delay: 0.1, // Slight lag for "ghost" effect
-						}}
-					/>
+
 
 					{/* The Trace */}
 					<svg viewBox="0 -10 50 30" fill="none" className="h-full w-full overflow-visible">
