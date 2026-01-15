@@ -1,6 +1,5 @@
 ---
 const { currentRealm = "identity" } = Astro.props;
-import { Icon } from "astro-icon/components";
 ---
 
 <nav
@@ -118,17 +117,20 @@ import { Icon } from "astro-icon/components";
 
 	<!-- Right: Comm Channels -->
 	<div class="flex items-center gap-4">
-		<!-- Construction Banner (Amber Corner Brackets) -->
-		<div
-			class="relative hidden px-3 py-1 font-mono text-[10px] tracking-widest text-amber-500 uppercase md:block"
-		>
-			<div class="absolute top-0 left-0 h-2 w-2 border-t border-l border-amber-500"></div>
-			<div class="absolute top-0 right-0 h-2 w-2 border-t border-r border-amber-500"></div>
-			<div class="absolute bottom-0 left-0 h-2 w-2 border-b border-l border-amber-500"></div>
-			<div class="absolute right-0 bottom-0 h-2 w-2 border-r border-b border-amber-500"></div>
-
-			<span class="opacity-80">UNDER_CONSTRUCTION</span>
-		</div>
+		<!-- Left: Identity -->
+		<a href="/" class="group flex items-center gap-3">
+			<div class="relative h-8 w-8 overflow-hidden rounded-full border border-white/20 bg-black">
+				<!-- Brand Logo or Avatar -->
+				<div class="flex h-full w-full items-center justify-center text-[10px] text-white">EN</div>
+			</div>
+			<div class="flex flex-col">
+				<span
+					class="group-hover:text-primary font-mono text-xs font-bold tracking-widest text-white uppercase"
+					>Erik Norris</span
+				>
+				<span class="font-mono text-[9px] text-neutral-500">/// SYSTEM ARCHITECT</span>
+			</div>
+		</a>
 	</div>
 
 	<div class="flex items-center gap-3 text-neutral-500">

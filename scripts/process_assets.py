@@ -342,9 +342,11 @@ def process_project(slug):
                     resized_img = img.resize((width, height), Image.Resampling.LANCZOS)
 
                     # Save in target formats
+                # Save in target formats
                     for fmt in FORMATS:
                         out_ext = fmt["ext"]
                         quality = fmt["quality"]
+                        # Fix: Ensure logic handles output naming correctly
                         out_filename = f"{base_name}-{bp_name}.{out_ext}"
                         out_file = output_path / out_filename
 
@@ -353,6 +355,38 @@ def process_project(slug):
 
         except Exception as e:
             print(f"  [ERROR] Failed to process {item.name}: {e}")
+
+    # --- AUDIO PROCESSING (Singularity Audit: The Podcast Engine) ---
+    audio_files = sorted([f for f in input_path.iterdir() if f.suffix.lower() == '.wav'])
+    for audio_file in audio_files:
+        print(f"  [AUDIO] Processing {audio_file.name}...")
+        try:
+            # Output: .mp3 (192kbps)
+            mp3_out_name = f"{audio_file.stem}.mp3"
+            mp3_out_path = output_path / mp3_out_name
+
+            # Check if ffmpeg exists
+            import subprocess
+            try:
+                # Use subprocess to run ffmpeg
+                # cmd: ffmpeg -i input.wav -b:a 192k -y output.mp3
+                # -y force overwrite
+                cmd = ["ffmpeg", "-i", str(audio_file), "-b:a", "192k", "-y", str(mp3_out_path)]
+                
+                # Suppress output unless error
+                result = subprocess.run(cmd, capture_output=True, text=True)
+                
+                if result.returncode == 0:
+                     print(f"    -> Generated: {mp3_out_name} (192kbps MP3)")
+                else:
+                    print(f"    [ERROR] FFmpeg failed: {result.stderr}")
+
+            except FileNotFoundError:
+                print("    [ERROR] FFmpeg not found in PATH. Audio processing skipped.")
+                # Basic copy fallback? No, browsers don't play massive WAVs well.
+        
+        except Exception as e:
+            print(f"    [ERROR] Audio processing failed: {e}")
 
 def main():
     parser = argparse.ArgumentParser(description="Quantum Image Processor")
