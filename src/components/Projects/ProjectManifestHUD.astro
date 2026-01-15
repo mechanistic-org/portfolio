@@ -1,6 +1,7 @@
 ---
 import { getMultiverseData } from "@/utils/getMultiverseData";
 import { Icon } from "astro-icon/components";
+import SonicHeartbeat from "@components/Audio/SonicHeartbeat";
 
 const multiverseData = await getMultiverseData();
 
@@ -112,6 +113,10 @@ const showMetrics =
 			>
 				RAW_SOURCE
 			</a>
+			{/* SONIC HEARTBEAT (Singularity Audit) */}
+			<div class="ml-4 border-l border-white/10 pl-4">
+				<SonicHeartbeat client:load audioUrl={data.audio_url} />
+			</div>
 		</div>
 	</div>
 

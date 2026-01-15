@@ -140,6 +140,10 @@ These are active AI/External resources that contain "Source of Truth" data not i
   - **Noon:** Visual Polish (Gallery-First).
   - **Hyphen:** Process & Safety (Methodology-First).
   - **Kaleidescape:** Heavy Industry (Taxonomy-First).
+- **The "Toolchain Trinity" (New behaviors captured Jan 2026):**
+  - **Hydration:** `npm run content:hydrate` (Source: `scripts/hydrate_content.py`). The "Injector" (Metrics, Toolchains).
+  - **Modernization:** `npm run content:modernize` (Source: `scripts/modernize_content.py`). The "Standardizer" (C24 Schema Compliance).
+  - **Assets:** `npm run assets:process` (Source: `scripts/process_assets.py`). The "Refinery" (WebP, Audio, Resizing).
 - **The "Brain vs. Body" Law:**
   - **The Brain:** NotebookLM (PDFs, Context, Thinking).
   - **The Body:** R2_STAGING (Images, GLBs, Display Assets).

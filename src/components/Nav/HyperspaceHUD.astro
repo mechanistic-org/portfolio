@@ -1,6 +1,7 @@
 ---
 const { currentRealm = "identity" } = Astro.props;
 import { Icon } from "astro-icon/components";
+import SonicHeartbeat from "@components/Audio/SonicHeartbeat";
 ---
 
 <nav
@@ -157,6 +158,11 @@ import { Icon } from "astro-icon/components";
 		>
 			<Icon name="tabler:mail" class="h-5 w-5" />
 		</a>
+
+		{/* Global Audio (Identity Overview) */}
+		<div class="mx-1 h-4 w-px bg-white/20"></div>
+		<SonicHeartbeat client:load audioUrl="/assets/r2/identity/identity-overview.mp3" />
+
 		<div class="mx-1 h-4 w-px bg-white/20"></div>
 		<a
 			href="https://resume.eriknorris.com"

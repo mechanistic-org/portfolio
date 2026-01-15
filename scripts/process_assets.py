@@ -357,7 +357,7 @@ def process_project(slug):
             print(f"  [ERROR] Failed to process {item.name}: {e}")
 
     # --- AUDIO PROCESSING (Singularity Audit: The Podcast Engine) ---
-    audio_files = sorted([f for f in input_path.iterdir() if f.suffix.lower() == '.wav'])
+    audio_files = sorted([f for f in input_path.iterdir() if f.suffix.lower() in ['.wav', '.m4a']])
     for audio_file in audio_files:
         print(f"  [AUDIO] Processing {audio_file.name}...")
         try:

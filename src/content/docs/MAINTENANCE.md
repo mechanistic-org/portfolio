@@ -16,7 +16,37 @@ These tasks are now automated via Slash Commands in the IDE.
 
 - **New Project:** `/scaffold-project` (Generates strict C24 Schema).
 - **Deploy:** `/deploy-production` (Verify Build + Push to Main).
-- **Mass Update:** `python scripts/modernize_content.py` (Schema Injection).
+- **New Project:** `/scaffold-project` (Generates strict C24 Schema).
+- **Deploy:** `/deploy-production` (Verify Build + Push to Main).
+
+### The Toolchain Trinity (Core Scripts)
+
+These scripts are the engine of the "Forensic Data Factory."
+
+- **Hydration Engine:** `npm run content:hydrate`
+  - **Source:** `scripts/hydrate_content.py`
+  - **Purpose:** Injects NotebookLM "Bolus" data (JSON) into MDX Frontmatter (Metrics, Toolchains, Summaries).
+  - **Behavior:** Reads `notebook_dumps/`, matches by slug, updates `src/content/projects/`.
+
+- **Schema Modernizer:** `npm run content:modernize`
+  - **Source:** `scripts/modernize_content.py`
+  - **Purpose:** Mass-updates legacy content to the latest C24 Schema.
+  - **Behavior:** Injects default values for new fields (`cyberspace`, `metrics`, `statusLabel`). Use for bulk refactors.
+
+- **Asset Refinery:** `npm run assets:process`
+  - **Source:** `scripts/process_assets.py` (formerly `process_images.py`)
+  - **Purpose:** The "Heavy Lifter" for media.
+  - **Capabilities:**
+    - **Images:** Resizes to standard breakpoints (xl, lg, md, sm) and generates WebP.
+    - **Audio:**
+      - **Source:** `R2_MASTER/[slug]/[filename].wav`
+      - **Naming:** `[slug]-briefing.wav` (Standard) or `[slug]-deep_dive.wav`
+      - **Output:** `R2_STAGING/[slug]/[filename].mp3` (192kbps)
+      - **Global Audio:** Use `identity` slug (e.g., `R2_MASTER/identity/identity-overview.wav`).
+    - **Usage:**
+      - `npm run assets:process` (Process specific slugs in R2_MASTER).
+      - `npm run assets:process -- --all` (Re-process EVERYTHING).
+      - `npm run assets:process -- [slug]` (Target specific project).
 
 ## Asset Pipeline
 
