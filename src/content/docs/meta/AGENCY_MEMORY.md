@@ -68,9 +68,9 @@ These are active AI/External resources that contain "Source of Truth" data not i
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Forensic Resume Alignment Complete.**
-- **Next Step:** Proceed to **Prospecting Protocols** (Tailoring/Pain Letters).
-- **Context:** Master Resume, LinkedIn Profile (Bio/Headline/Exp V4), and Site Datasheet are now **SYNCHRONIZED** with the "Forensic Architect" narrative.
+- **Active Task:** **Orphan Remediation & Protocol Hardening.**
+- **Next Step:** Resume `ForensicDrawer` integration with secure data pipeline.
+- **Context:** **"The Orphan Crisis"** resolved. Fixed critical data loss where Astro/CMS were stripping `toolchain` and `forensic_summary`. Pipeline is now end-to-end secure.
 
 * **Key Decision (Assets):** **"The Fake SVG Pivot"** - The `EN_logo_1200` series are technically SVG wrappers around high-res rendered PNGs (`d:\portfolio\...\ _fake-SVGS____`). We accepted this as the **Source of Truth** (Sovereign) because the logo is natively 3D and has no perfect 2D vector equivalent. Do NOT try to replace them with wireframes.
 
@@ -78,7 +78,7 @@ These are active AI/External resources that contain "Source of Truth" data not i
 * **Key Decision (Viz-Deprecated):** `ArchiveSankey`, `LivingGantt`, and `SkillsGraph.tsx` have been DEPRECATED and removed/disabled to "kill the noise".
 * **Key Decision (Data):** **"The Event Horizon"** - `multiverse.json` and `skills.json` were PURGED (2026-01-08). The architecture is now "Pure Hyperspace" (Dynamic Astro Collections only).
 * **Key Decision (Architecture):** **"The Sovereign Pipeline"** - `eriknorris-workspace\R2_MASTER` is the **SOURCE OF TRUTH** (The Vault). `process_images.py` reads from here. `eriknorris-assets\R2_STAGING` is the **PUBLISHED MIRROR** (The Web). we DO NOT edit Staging directly.
-* `src/content/docs/prompts/UNIVERSAL_NOTEBOOK_PROMPT.md`: **The Extraction Standard.** (How we mine data).
+* `src/content/docs/prompts/NOTEBOOK_REFINE.md`: **The Extraction Standard (The Voice).** (How we mine data).
 * `src/content/docs/prompts/BRANDING_PROMPT.md`: **The Design System.** (How we speak).
 * `src/content/docs/STYLE_GUIDE.md`: **The Token Map.** (How we style).
 * **Key Decision (Protocol):** **"Operation Chronos"** - Use NotebookLM to generate `HUNTING_LIST.md` (dense tables) and export to HTML for physical printing ("Low Friction" asset retrieval).
@@ -96,7 +96,7 @@ These are active AI/External resources that contain "Source of Truth" data not i
 * **Key Decision (Formatting):** **"The Double Spacing Law"** - LinkedIn collapses standard lists. We MUST use **Double Spacing** (Empty Lines) effectively between bullets to force a vertical list render.
 * **Key Decision (Sync):** **"The Datasheet Sync"** - `src/config/work_history.json` is the Source of Truth for the `/resume/one-pager` "Datasheet" View. It has been manually synced to the Master Resume.
 
-- **Active Thread:** `777cb7ff-d7e0-468b-905f-b84f7965a3e1` (MDX Debugging & Tooling Repair).
+- **Active Thread:** `eec778fa-2ef8-4fc1-98a8-33814ef7f08b` (Orphan Remediation & Notebook Refinement).
 
 ## 🔗 Active Intelligence (New Synapses)
 
@@ -142,9 +142,31 @@ These are active AI/External resources that contain "Source of Truth" data not i
   - **Kaleidescape:** Heavy Industry (Taxonomy-First).
 - **The "Toolchain Trinity" (New behaviors captured Jan 2026):**
   - **Hydration:** `npm run content:hydrate` (Source: `scripts/hydrate_content.py`). The "Injector" (Metrics, Toolchains).
+  - **Taxonomy (Candidate):** **"The Forensic Chain"** (formerly Hyperspace).
+    - Lite HUD -> **Chain of Custody**.
+    - Deep HUD -> **Lab Analysis**.
+    - Dossier -> **Case Theory**.
+  - **The "Nav Visibility Law":** "No Variant has No Nav." We force the top HUD row (Title/Date) even in Lite/Standard mode.
+  - **The "YAML Asterisk Law":** Markdown strings starting with `*` Must be quoted in Frontmatter.
   - **Modernization:** `npm run content:modernize` (Source: `scripts/modernize_content.py`). The "Standardizer" (C24 Schema Compliance).
   - **Assets:** `npm run assets:process` (Source: `scripts/process_assets.py`). The "Refinery" (WebP, Audio, Resizing).
+- **Toolchain Trinity:** `hydrate` (injects data), `modernize` (updates schema), `process_assets` (normalizes media).
+- **Text Decks Constraint:** "Text Decks are a Black Hole."
+  - **The Data Lock (Backend):** Narrative content locked in `cyberspace` JSON is invisible to the `hydrate` toolchain and NotebookLM.
+  - **The Visibility Gap (Frontend):** Users do not engage with multi-slide text bubbles (e.g., 6 slides in Bubble 2). Critical narrative is lost/skipped.
+  - **Objective:** Replace legacy Text Decks with "Triple-Distilled" NotebookLM workflows. Explore interactions like "Accordion-on-Hover" or expanded text panes that surface content without obscuring galleries. (Status: PENDING_DESIGN)
 - **The "Brain vs. Body" Law:**
   - **The Brain:** NotebookLM (PDFs, Context, Thinking).
   - **The Body:** R2_STAGING (Images, GLBs, Display Assets).
   - _We do not dump the Brain into the Body._
+- **The "Schema Parity" Law (Jan 2026):**
+  - Any data injected by Python automation (`hydrate_content.py`) MUST have a corresponding definition in **both** `src/content.config.ts` (for Build) and `keystatic.config.tsx` (for CMS Safety).
+  - Failure to do so results in "The Orphan Trap" (Silent Data Stripping or Overwrite-Deletion).
+- **The "Source Loop" Law:**
+  - NotebookLM prompts MUST include a "Convert to Source" step. If the Output Note is not fed back into the Brain as a Source, the AI hallucinates, forgets, and drifts.
+
+## 🔮 The Lexicon (Agency Vocabulary)
+
+- **Red Gold:** High-value intelligence derived from crisis, failure, or "stepping into the fire." Unlike standard insights ("Gold"), Red Gold is structural wisdom that prevents catastrophic regression. It is "expensive" knowledge, forged in heat, and therefore the most precious asset in the repository.
+- **The Black Hole:** Data stores (like Text Decks) that are visible to the user but invisible to the Agent/Search.
+- **The Orphan:** Data that exists in the source (MDX) but is stripped by the destination (Astro/CMS) due to schema mismatch.

@@ -1,0 +1,15 @@
+---
+import ForensicDrawer from "./ForensicDrawer.tsx";
+
+interface Props {
+	title?: string;
+	metrics?: any;
+	caseTheory?: any[];
+}
+
+const { title, metrics, caseTheory } = Astro.props;
+---
+
+<ForensicDrawer client:idle title={title} metrics={metrics} caseTheory={caseTheory}>
+	<slot />
+</ForensicDrawer>

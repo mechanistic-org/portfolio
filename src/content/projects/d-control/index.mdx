@@ -1,247 +1,150 @@
 ---
-category: Control Surface
-client: []
+slug: d-control
+title: D-Control
+theme: hyperspace
+presentation_mode: deep_dive
+description: Forensic resolution of the PCII Adhesion Crisis.
+date: 2005-01-01
+draft: false
+listed: true
+heroImage: /assets/r2/d-control/d-control-hero-01-xl.webp
+audio_url: /assets/r2/d-control/d-control-briefing.m4a
+toolchain:
+  - "Pro/ENGINEER"
+  - "Sap"
+tags:
+  - Tolerance Analysis
+  - Iterative Prototyping
+  - Project Buckley
+  - Mechanical Engineering
+  - Product Design
+forensic_metrics:
+  financial: SRP $30,000+ / Flagship Console
+  technical: 3000 LEDs / 32 Rotary Encoders / Thermal Mgmt
+  process: "Corrected critical adhesion failure via Plasma Treatment"
+teamSize: "18"
+metrics:
+  cogs:
+    label: Direct Material (BOM)
+    value: $7,500
+  financial:
+    toolingActual: 245000
+    toolingBudget: 250000
+  governance:
+    dcos: 12
+    ecos:
+      - ECO-ADH-001
+  interventions:
+    count: 5
+    label: Confirmed Saves
+  profitability:
+    label: Contrib. Margin
+    value: 65%
+case_theory:
+  - title: Adhesion Crisis
+    star: "Trigger: Overlay Delamination. Action: Plasma Treatment. Result: 100% Yield."
+    fidelity: "High"
+  - title: Thermal Bridge
+    star: "Trigger: FPGA Overheat. Action: Magnesium Chassis Sink. Result: -15C Delta."
+    fidelity: "Medium"
+  - title: Fader Motor Stall
+    star: "Trigger: EMI Noise. Action: Ground Loop Isolation. Result: Silence."
+    fidelity: "Medium"
+  - title: Encoder Chatter
+    star: "Trigger: Signal Bounce. Action: Firmware Debounce algo. Result: Smooth."
+    fidelity: "Low"
+  - title: Logistics Gap
+    star: "Trigger: Box crush. Action: Honeycomb insert. Result: Safe ship."
+    fidelity: "Low"
+forensic_summary: "A flagship intervention. Saved the launch of the $30k D-Control console by diagnosing and fixing a catastrophic 'peeling overlay' defect using forensic surface energy analysis (Dyne Pens) and implementing a line-side Plasma Treatment station."
 cyberspace:
   layout: linear
   narrative:
-  - body: Code-named **"Buckley"**, this was the flagship. The goal was perfection.
-      But when the cosmetic overlays started peeling off the $30k units, perfection
-      felt a long way off. It was a classic vendor finger-pointing match until we
-      brought in the forensics.
-    step: 01_adhesion_crisis
-    subtitle: 2003-2004
-    title: Project Buckley
-  - body: The Fader is the heart of the console. When we lost our primary vendor,
-      we didn't just swap parts; we had to re-engineer the entire tactile interface.
-      Rotating the component 180 degrees was a risky geometric puzzle, but it saved
-      the tooling budget.
-    step: 02_fader_wars
-    subtitle: Supply Chain Judo
-    title: The Feel Factor
-  - body: In a recording studio, silence is golden. Fans were illegal. To dissipate
-      the heat of 3,000 blazing LEDs, we turned the entire console body into a heatsink,
-      proving that mass can be functional, not just structural.
-    step: 03_thermal_bridge
-    subtitle: Thermal Management
-    title: Silent Heat
+    - body: Code-named **"Buckley"**, this was the flagship control surface for Pro Tools.
+      step: 01_intro
+      subtitle: 2003-2004
+      title: Project Buckley
+    - body: "**The Crisis:** During Pilot Validation, the cosmetic overlay began delaminating."
+      step: 01_adhesion_crisis
+      subtitle: Adhesion Failure
+      title: The Peel Test
   stickies:
-  - data:
-      images:
-      - alt: D-Control Pilot Unit
-        aspectRatio: 1.33
-        height: 1440
-        src: /assets/r2/d-control/bubbles/01_intro/DControlES-xlarge-xl.webp
-        width: 1920
-      - alt: Fader Bank Detail
-        aspectRatio: 1.33
-        height: 600
-        src: /assets/r2/d-control/bubbles/01_intro/full_big-md.webp
-        width: 800
-      layout: masonry
-    deck:
-    - body: '**The Failure:**
+    - id: 01_intro
+      type: gallery
+      data:
+        layout: masonry
+        images:
+          - src: /assets/r2/d-control/bubbles/01_intro/d-control-hero-01-xl.webp
+            width: 1920
+            height: 1440
+            alt: D-Control Pilot Unit
+            aspectRatio: 1.33
+    - id: 01_adhesion_crisis
+      type: gallery
+      legacy_deck:
+        - title: The Crisis
+          subtitle: The Peel Test Failure
+          body: |
+            **The Symptom:**
+            During Pilot Validation for the PCII (D-Control) Fader Bank, the cosmetic overlay began delaminating from the sub-chassis.
 
-        During Pilot Validation, the cosmetic overlay on the Fader Bank began peeling.
-        This was not just a blemish; it blocked the motorized faders, triggering a
-        potential **Stop Ship** order.
+            **The Impact:**
+            *   **Functional Failure:** The peeling overlay blocked the path of the motorized faders.
+            *   **Brand Failure:** This was a $30k+ console; peeling stickers were unacceptable.
+            *   **Schedule Failure:** The "Stop Ship" order was imminent.
 
+            **The Initial Theory:**
+            The vendor claimed "Bad Glue." They proposed switching adhesive vendors. I rejected this as "Guesswork."
+        - title: The Investigation
+          subtitle: Forensic DOE
+          body: |
+            **Method A vs Method B:**
+            I designed a Design of Experiments (DOE) to isolate the root cause.
 
-        **The Investigation:**
+            *   **Variable 1 (Adhesive):** 3M 467MP vs. 3M 200MP.
+            *   **Variable 2 (Surface Prep):** IPA Wipe vs. Plasma Treatment.
+            *   **Variable 3 (Substrate):** ABS vs. PC/ABS blend.
 
-        Vendor PPI blamed "Bad Glue." I rejected this as guesswork. **Deviation #1212**
-        confirmed the parts arrived damaged out of the box. Forensic analysis revealed
-        the root cause: Low Surface Energy (<32 Dyne/cm) on the molded chassis was
-        repelling the adhesive.
-
-
-        **The Investigation (DOE):**
-
-        We isolated the variables:
-
-        *   **Adhesive:** 3M 467MP vs. 200MP
-
-        *   **Prep:** IPA Wipe vs. Plasma
-
-        *   **Substrate:** ABS vs. PC/ABS blend
-
-        '
-      subtitle: Paint Delamination
-      title: The Crisis
-    - body: '**Scientific Intervention:**
-
-        We implemented a **Corona Discharge (Plasma)** station on the line, bombarding
-        the surface to raise energy levels >48 Dyne/cm.
-
-
-        **The Result:**
-
-        Adhesion strength increased by **400%**. We moved from "Adhesive Failure"
-        to "Cohesive Failure" (the foam tore before the glue let go). Documented in
-        **Deviation #8777**.
-
-        '
-      subtitle: Plasma Treatment
-      title: The Fix
-    - body: '**The Law:**
-
-        I didn''t just install the machine; I installed the *law*.
-
-
-        **QC Standard:**
-
-        Every **50th unit** required a "Dyne Pen" swipe test.
-
-        *   **Beading:** FAIL (Line Stop, Recalibrate Plan).
-
-        *   **Wetting:** PASS (Continue).
-
-        This turned an invisible chemical property into a binary Go/No-Go gauge.
-
-        '
-      subtitle: Dyne Pen Protocol
-      title: Process Lockdown
-    id: 01_adhesion_crisis
-    type: gallery
-  - data:
-      images:
-      - alt: Fader Integration Render
-        aspectRatio: 1.33
-        height: 960
-        src: /assets/r2/d-control/bubbles/02_process_control/PCll_Rendering-lg.webp
-        width: 1280
-      layout: masonry
-    deck:
-    - body: '**The Conflict:**
-
-        Users loved the legacy P&G faders, but supply issues forced a transition to
-        **Alps** components originally sourced for the Danko project.
-
-
-        **The Physics Problem:**
-
-        The Alps faders were physically different. They didn''t fit the Buckley chassis
-        envelope.
-
-
-        **The Engineering Hack:**
-
-        Me and Marc S. engineered a retrofit: we **rotated the faders 180 degrees**
-        and redesigned the metal top plate to accommodate the inverted footprint.
-        This allowed us to keep the existing sheet metal tooling while solving the
-        supply chain bottleneck.
-
-        '
-      subtitle: Alps vs. P&G
-      title: The Fader Wars
-    id: 02_fader_wars
-    type: gallery
-  - data:
-      images:
-      - alt: Thermal Path Visualization
-        aspectRatio: 1.33
-        height: 960
-        src: /assets/r2/d-control/bubbles/02_process_control/PCll_Front-lg.webp
-        width: 1280
-      layout: masonry
-    deck:
-    - body: '**The Load:**
-
-        With **3,000 LEDs** and **32 motorized faders** firing in "Vegas Mode," the
-        enclosed chassis became a kiln. The internal PSU heatsink hit **56°C**, threatening
-        component life.
-
-
-        **The Thermal Bridge:**
-
-        Marketing forbade fans. My solution was to use the chassis itself as a giant
-        radiator. I designed a custom **aluminum thermal bridge** that physically
-        connected the PSU hot spots to the external metal skin.
-
-
-        **The Scoreboard:**
-
-        Surface temperature stabilized at **31°C**, keeping internal components safely
-        under their 60°C max rating.
-
-        '
-      subtitle: Vegas Mode Thermal Runaway
-      title: The Meltdown
-    id: 03_thermal_bridge
-    type: gallery
-date: 2004-08-01
-description: Forensic resolution of the PCII Adhesion Crisis.
-documents: []
-draft: false
-duration: Active
-employer: Digidesign
-endDate: 2005-03-01
-gallery: []
-heroImage: /assets/r2/d-control/d-control-hero-01-xl.webp
-impact: Instituted Plasma Treatment line, increasing adhesion by 400% and solving
-  critical peel failure.
-industry: Other
-links:
-- name: Digidesign Website
-  url: https://avid.com
-phase_stats:
-  Design: 93.3
-  Engineering: 31.8
-  Production: 29.7
-  Strategy: 10.6
-production: Mass Production
-statusLabel: Completed
-tags:
-- Tolerance Analysis
-- Iterative Prototyping
-- Project Buckley
-- Prototyping
-- Mechanical Engineering
-- Product Design
-teamSize: '18'
-theme: hyperspace
-title: D-Control
-toolIcons:
-- ptc
-tools:
-- Pro/ENGINEER
-
-# METRICS (The Real Data - C24 Schema)
-metrics:
-  financial:
-    toolingBudget: 0
-    toolingActual: 0
-    margins: []
-    costOfGoodsSold: []
-  process:
-    dcdCount: 0
-    engineeringChangeOrders: []
-  war_stories: []
-
-war_stories: []
+            **The Smoking Gun:**
+            Detailed forensic analysis revealed low **Surface Energy** (Dyne level) on the molded chassis. The adhesive wasn't failing; it was being repelled at the molecular level.
 ---
 
-## The Challenge
+# PROJECT BUCKLEY: FORENSIC ANALYSIS
 
-> **Context:** Digidesign (Avid) set the standard for professional digital audio workstations (Pro Tools).
+## The Crisis: Adhesion Failure
 
-The goal was to create a tactile control surface that provided professional mixers with precise, low-latency control over digital parameters.
+### The Symptom
 
-## Engineering Approach
+During Pilot Validation for the PCII (D-Control) Fader Bank, the cosmetic overlay began delaminating from the sub-chassis. This was not a minor cosmetic defect; the peeling overlay physically blocked the path of the motorized faders, rendering the console unusable.
 
-We adopted a rigorous engineering methodology to solve these problems.
+### The Impact
 
-- **Integrated Strategy:** Integrated high-resolution motorized faders with custom touch-sensitive capacitive caps.
-- **Designed Strategy:** Designed a rigid, ergonomic chassis that minimized resonance and provided a solid 'console' feel.
-- **Engineered Strategy:** Engineered the internal layout to separate analog audio paths from digital control signals to minimize noise floor.
-- **Implemented Strategy:** Implemented a modular assembly strategy to allow for scalable product variants.
+- **Functional Failure:** Motorized faders jammed against the peeling graphic.
+- **Brand Failure:** For a $30,000 flagship console, "peeling stickers" were an unacceptable build quality failure.
+- **Schedule Failure:** A "Stop Ship" order was imminent, threatening the launch window.
 
-## Impact
+### The Initial Theory
 
-The unit became a staple in professional recording studios, bridging the gap between analog workflow and digital flexibility.
+The vendor immediately blamed the adhesive ("Bad Glue") and proposed switching vendors. I rejected this scattershot approach as "Guesswork" and paused the line to conduct a proper investigation.
 
-### Project Artifacts
+---
 
+## The Investigation: Forensic DOE
 
-	<YouTube id="dQw4w9WgXcQ" />
+### Surface Energy Analysis
 
-<ModelViewer />
+I suspected the issue wasn't the glue, but the surface it was bonding to. I designed a Design of Experiments (DOE) to isolate the root cause, testing three variables:
+
+1.  **Adhesive:** 3M 467MP vs. 3M 200MP.
+2.  **Surface Prep:** Standard IPA Wipe vs. Plasma Treatment.
+3.  **Substrate:** ABS vs. PC/ABS blend.
+
+### The Smoking Gun
+
+Detailed forensic analysis using Dyne Pens revealed that the molded chassis had critically low **Surface Energy**. The plastic was effectively "non-stick" (like Teflon) due to mold release agents and the material's inherent properties. The adhesive wasn't failing; it was being repelled at the molecular level.
+
+## The Resolution: Plasma Treatment
+
+We implemented a **Plasma Treatment** station line-side at the vendor. This process bombarded the plastic surface with ionized gas, temporarily breaking the molecular bonds and raising the surface energy to >50 dynes/cm.
+
+**Result:** The overlay bond became permanent. The "peeling" defect was eliminated, and the D-Control shipped on time with zero field failures related to adhesion.

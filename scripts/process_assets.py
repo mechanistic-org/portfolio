@@ -209,6 +209,21 @@ def process_project(slug):
             
             except Exception as e:
                 print(f"    [ERROR] Animation processing failed: {e}")
+                print(f"    [ERROR] Animation processing failed: {e}")
+            continue
+
+        # --- DOCUMENTS PROCESSING (Pass-through) ---
+        if item.is_dir() and item.name == "documents":
+            print(f"  [DOCS] Detected documents directory. Syncing...")
+            docs_out_path = output_path / "documents"
+            docs_out_path.mkdir(parents=True, exist_ok=True)
+
+            for doc_file in item.iterdir():
+                if not doc_file.is_file(): continue
+                # Allow standard doc formats
+                if doc_file.suffix.lower() in ['.pdf', '.doc', '.docx', '.xls', '.xlsx', '.txt', '.zip']:
+                    shutil.copy2(doc_file, docs_out_path / doc_file.name)
+                    print(f"    -> Copied: {doc_file.name}")
             continue
 
         # --- BUBBLE PROCESSING (Recursive) ---

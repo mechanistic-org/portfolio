@@ -11,12 +11,18 @@ import { getAssetUrl } from "@/utils/assets";
 
 const { entry, nextProject, prevProject, Content, metrics } = Astro.props;
 const { cyberspace, title, description, presentation_mode } = entry.data;
-// Strict Mode Logic
-const showHUD = presentation_mode === "deep_dive" || presentation_mode === "flagship";
+// FORCE HUD for ALL MODES (User Directive: "NO variant that has NO nav")
+// Standard = Lite HUD (Top Row Only)
+// Deep Dive = Full HUD (Metrics Row)
+const showHUD = true;
+const useDossier = presentation_mode === "deep_dive";
+
 // Backwards compatibility/Renaming
 const scrolly = cyberspace;
 
 import GlobalHomeButton from "@components/Nav/GlobalHomeButton.astro";
+import ForensicDossier from "@components/Scrolly/ForensicDossier.astro";
+import ForensicMarker from "@components/Scrolly/ForensicMarker.tsx";
 // NEW COMPONENT IMPORTS
 // import ConspiracyBoard from "@components/Projects/ConspiracyBoard";
 // import Comparator from "@components/Projects/Comparator";
@@ -44,6 +50,22 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 	projectFrontmatter={entry.data}
 >
 	<GlobalHomeButton />
+
+	{/* FORENSIC DOSSIER (Deep Dive Only) */}
+	{
+		useDossier && (
+			<ForensicDossier
+				title={title}
+				metrics={entry.data.forensic_metrics}
+				caseTheory={entry.data.case_theory}
+			>
+				<div class="pb-24">
+					<Content />
+				</div>
+			</ForensicDossier>
+		)
+	}
+
 	<!-- FIXED INTRO -->
 	<div
 		id="intro-layer"
@@ -235,25 +257,38 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 			</div>
 
 			{
-				stickies.map((stage: any) => (
-					<ScrollTrigger
-						step={stage.id}
-						align={stage.align}
-						invisible={!stage.title && !stage.text && (!stage.deck || stage.deck.length === 0)}
-						wide={stage.deck && stage.deck.length > 0}
-					>
-						{stage.title && <h2 class="mb-4 text-3xl font-bold text-white">{stage.title}</h2>}
-						{stage.text && <p class="text-neutral-400" set:html={stage.text} />}
+				stickies.map((stage: any, index: number) => {
+					// Forensic Logic
+					const hasDeck = stage.deck && stage.deck.length > 0;
+					const hasLegacyDeck = stage.legacy_deck && stage.legacy_deck.length > 0;
+					const showMarker = useDossier && hasLegacyDeck; // Restore parallax for Deep Dive
 
-						{/* DECK SUPPORT - Explicitly excluded for Resources and Artifact stages */}
-						{stage.deck &&
-							stage.deck.length > 0 &&
-							stage.id !== "06_press_resources" &&
-							stage.id !== "07_the_artifact" && (
+					// Visibility & Width Logic
+					const isInvisible = !stage.title && !stage.text && !hasDeck && !showMarker;
+					const isWide = hasDeck || showMarker;
+
+					return (
+						<ScrollTrigger
+							step={stage.id}
+							align={stage.align}
+							invisible={isInvisible}
+							wide={isWide}
+						>
+							{stage.title && <h2 class="mb-4 text-3xl font-bold text-white">{stage.title}</h2>}
+							{stage.text && <p class="text-neutral-400" set:html={stage.text} />}
+
+							{/* DECK SUPPORT */}
+							{hasDeck && stage.id !== "06_press_resources" && stage.id !== "07_the_artifact" && (
 								<TextDeck id={`deck-${stage.id}`} slides={stage.deck} />
 							)}
-					</ScrollTrigger>
-				))
+
+							{/* FORENSIC MARKER (Parallax Restoration) */}
+							{showMarker && (
+								<ForensicMarker client:visible id={stage.id} index={index} label={stage.id} />
+							)}
+						</ScrollTrigger>
+					);
+				})
 			}
 		</div>
 	</main>
@@ -324,12 +359,16 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 		)
 	}
 
-	<!-- MDX CONTENT SLOT -->
-	<section class="relative z-10 bg-neutral-900 pb-32">
-		<div class="site-container max-w-4xl">
-			<Content />
-		</div>
-	</section>
+	<!-- MDX CONTENT SLOT (Standard Mode Only) -->
+	{
+		!useDossier && (
+			<section class="relative z-10 bg-neutral-900 pb-32">
+				<div class="site-container max-w-4xl">
+					<Content />
+				</div>
+			</section>
+		)
+	}
 
 	<!-- Scroll Cushion -->
 	<div class="h-[25vh] w-full snap-end bg-neutral-900"></div>

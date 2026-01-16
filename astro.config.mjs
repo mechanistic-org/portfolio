@@ -1,3 +1,4 @@
+// force reload 1
 import { defineConfig } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";

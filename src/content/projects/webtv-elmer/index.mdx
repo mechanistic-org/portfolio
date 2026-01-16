@@ -1,0 +1,146 @@
+---
+title: "Elmer / Zeus"
+slug: "webtv-elmer"
+date: 2000-11-01
+endDate: 2001-01-01
+duration: "3 Months"
+employer: "Mechanistic / WebTV"
+category: "Server Prototype"
+industry: "Consumer Electronics"
+production: "Prototype"
+statusLabel: "Archived"
+teamSize: "Core Team of INT 3 / EXT 2"
+theme: "hyperspace"
+presentation_mode: "deep_dive"
+
+# VISIBILITY
+listed: true
+draft: false
+
+# ASSETS
+heroImage: "/assets/placeholders/abstract.jpg"
+audio_url: "/assets/r2/webtv-elmer/webtv-elmer-briefing.m4a"
+
+# METRICS (Forensic Bolus)
+forensic_metrics:
+  financial: "N/A"
+  process: "Agile PDM for BOM management; FTP-based file exchange (ftp.mechanistic.com)"
+  technical: "Pro/ENGINEER (Solid Modeling); AutoCAD (DXF I/O Layouts)"
+
+# FORENSIC SUMMARY
+forensic_summary: "Rapid design and fabrication of a demonstration server enclosure for Western Cable Show (WCS) and CES 2001. Engineered a custom sheet metal and machined aluminum chassis to graft PCI extensibility onto legacy 'Mercury' hardware."
+
+# TOOLCHAIN
+toolchain:
+  - "Pro/ENGINEER (Solid Modeling)"
+  - "AutoCAD (DXF I/O Layouts)"
+
+# STANDARD METRICS (Fallback/Schema)
+metrics:
+  cogs:
+    value: "N/A"
+    label: "COGS"
+  profitability:
+    value: "N/A"
+    label: "ROI"
+  governance:
+    ecos: []
+    dcos: 0
+  interventions:
+    count: 4
+    label: "Critical Interventions"
+  financial:
+    toolingBudget: 0
+    toolingActual: 0
+    margins: []
+    costOfGoodsSold: []
+  process:
+    dcdCount: 0
+    engineeringChangeOrders: []
+  war_stories:
+    - 1
+    - 2
+    - 3
+    - 4
+
+# TAGS
+tags:
+  - "Rapid Prototyping"
+  - "Sheet Metal Fabrication"
+  - "Thermal Management"
+  - "Mechanical Engineering"
+  - "Server Design"
+
+# TOOLS (Mapped)
+tools:
+  - "Pro/ENGINEER"
+  - "AutoCAD"
+
+# LINKS
+links: []
+gallery: []
+documents: []
+cyberspace:
+  layout: "linear"
+  stickies: []
+---
+
+### Project Elmer / Zeus Forensic Report
+
+#### I. PROJECT SUMMARY
+
+- **Role:** Mechanical Engineer (Consultant)
+- **Objective:** Rapid design and fabrication of a short-run demonstration server ("Elmer," refined as "Zeus") for WebTV's HomeNet platform debut at WCS and CES 2001.
+- **Core Achievement:** Engineered a custom sheet metal and machined aluminum chassis to graft PCI extensibility onto legacy "Mercury" hardware, delivering 5 functional units within a 4-week window.
+
+#### II. THE CAST
+
+- **Leslie Leland:** Product Manager, WebTV (Client lead, schedule driver).
+- **Hedley Davis:** Engineering Lead (Architecture definition).
+- **Erturk Kocalar:** Electrical Engineer (PCI adapter/Ethernet integration).
+- **Val Kasvin:** Sputnik Models (Machined bezels, finishing).
+- **Shelly Evans:** EM Solutions (Sheet metal fabrication).
+
+#### III. CRITICAL MECHANICAL INTERVENTIONS
+
+**1. The "Bastard Box" Pivot & Chassis Architecture**
+
+- **The Trigger:** Requirement to integrate a PCI extender and Ethernet card into the existing "Mercury" set-top architecture, necessitating a volume increase.
+- **The Tension:** Initial concept ("Bastard Box" / "Double-high Mercury") was ill-defined with a hard deadline for the Western Cable Show (WCS).
+- **The Intervention:** Rejected the "Bastard Box" concept in favor of "Elmer"—a custom sheet metal base and cover designed to accommodate the vertical rise of the PCI riser card while maintaining the Mercury footprint.
+- **The Result:** Successful deployment of the "Elmer" chassis for WCS, subsequently refined into "Zeus" for CES by adding zinc plating and modifying I/O cutouts, leveraging existing vendor tooling to hit the 12/6/00 delivery.
+
+**2. PCI Extender & Ethernet Grafting**
+
+- **The Trigger:** The hardware architecture required removing a specific USB chip (U1701) from the Mercury board and grafting a PCI riser device from Emulation Technologies to support a Linksys LNEPCI2T Ethernet card.
+- **The Tension:** "We cannot drive the mechanicals on this... If this unit is to be roadworthy, mounting attach points are critical". The Ethernet card had no native mounting points within the chassis.
+- **The Intervention:** Engineered a custom "Card Bracket Rev. 1" and specific PCB spacer configurations (Keystone 8826) to rigidly secure the floating PCI assembly.
+- **The Result:** 100% component fit; enabled functional "HomeNet" server demos with valid Ethernet connectivity.
+
+**3. Thermal Management in a "Roadworthy" Demo**
+
+- **The Trigger:** Grafting high-heat components into a dense enclosure raised thermal risks. "The old node was an easy design to cool, this will not be".
+- **The Tension:** Demo units required high reliability on the trade show floor; passive cooling was deemed insufficient.
+- **The Intervention:** Designed custom "Elmer Fan Bracket Rev 2" to mount dual 60mm 12V fans (reused from Mercury stock) within the custom chassis. Optimized chassis perforation patterns near the power supply to ensure airflow pull-through.
+- **The Result:** Stable thermal performance during WCS and CES operations.
+
+**4. Hardware Standardization Crisis (Elmer vs. Zeus)**
+
+- **The Trigger:** Assembly errors occurred during the initial "Elmer" build due to mixed metric/SAE hardware. "There was a screw-up on Elmer".
+- **The Tension:** Risk of cross-threading or assembly failure during the final "Zeus" build for CES.
+- **The Intervention:** Enforced a strict standardization to 4-40 UNC hardware for all Zeus chassis fasteners, purging metric equivalents from the BOM.
+- **The Result:** Streamlined assembly for the final 5 Zeus units; zero fastener-related failures reported.
+
+#### IV. LINKEDIN ARTIFACTS
+
+- [ ] Engineered "Zeus" rapid-prototype server enclosure, delivering 5 functional units in 4 weeks for CES 2001 via hybrid sheet metal/machined fabrication.
+- [ ] Led mechanical integration of PCI extender architecture into legacy "Mercury" motherboard, designing custom retention brackets for non-standard ethernet expansion.
+- [ ] Managed vendor relationships with EM Solutions and Sputnik Models to execute a split-build strategy (Soft-tool metal + CNC plastic) under high-pressure deadlines.
+- [ ] Resolved critical thermal constraints for high-density demo units by designing custom dual-fan bracketry and optimizing chassis airflow ingress.
+- [ ] Standardized fastener BOM to 4-40 UNC for "Zeus" build, eliminating assembly errors observed in previous "Elmer" prototype iterations.
+
+#### V. TECHNICAL STACK & GOVERNANCE
+
+- **Tools:** Pro/ENGINEER (Solid Modeling), AutoCAD (DXF I/O Layouts).
+- **Partners:** EM Solutions (Sheet Metal), Sputnik Models (Machining/Finishing), Keystone (Hardware).
+- **Governance:** Agile PDM for BOM management (managed by Keva Nelson); FTP-based file exchange (ftp.mechanistic.com) for vendor handoffs.

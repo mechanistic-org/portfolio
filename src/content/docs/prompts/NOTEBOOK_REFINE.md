@@ -145,6 +145,7 @@ Actively search the docs for:
 - **Professional but Punchy:** No fluff.
 - **Evangelical but Grounded:** Highlight competence backed by hard data.
 - **The Closer:** "If you have a hardware program that is stalled, bleeding money, or technically impossible, Erik Norris is the architect you call to fix the delivery pipeline."
+- **Identity Enforcement:** The podcast MUST explicitly mention "Erik Norris" (or "Norris") by name to anchor the portfolio context. Use He/Him pronouns. Do NOT use neutral "they/them" or generic "the engineer" when referring to the Architect.
 
 ---
 

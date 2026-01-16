@@ -1,48 +1,55 @@
 ---
-category: Peripheral
-client:
-  - WebTV
-cyberspace: null
-date: 2000-05-01
-description: Integration of complex electromechanical components, including a custom navigation cluster and infrared communications module, into an ergonomic form factor for the Galaxy Home Network.
-documents: []
-draft: false
-duration: 2 years
-employer: Mechanistic
+title: "Cortez"
+slug: "webtv-cortez"
+date: 2000-04-01
 endDate: 2002-02-01
-gallery: []
-heroImage: /assets/placeholders/tech-1.jpg
-impact: Delivered a fully functional prototype that met all performance requirements and enabled executive demonstrations to partners like Sony and RCA.
-industry: Consumer Electronics
-links:
-  - name: WebTV Website
-    url: https://microsoft.com
-phase_stats:
-  Design: 40
-  Engineering: 40
-  Production: 20
-  Strategy: 0
-production: Mass Production
-slug: webtv-cortez
-statusLabel: Completed
-tags:
-  - Surface Modeling
-  - Prototyping
-  - Mechanical Engineering
-  - Product Design
-  - Complex Surfacing
-  - Vendor Management
-teamSize: "6"
-theme: DataSheet
-title: WebTV Cortez
-toolIcons:
-  - ptc
-tools:
-  - Pro/ENGINEER
-  - AutoCAD
+duration: "1.8 Years"
+employer: "Mechanistic / WebTV"
+category: "Input Device"
+industry: "Consumer Electronics"
+production: "Prototype"
+statusLabel: "Archived"
+teamSize: "Core Team of INT 2 / EXT 5"
+theme: "hyperspace"
+presentation_mode: "deep_dive"
 
-# METRICS (The Real Data - C24 Schema)
+# VISIBILITY
+listed: true
+draft: false
+
+# ASSETS
+heroImage: "/assets/placeholders/abstract.jpg"
+audio_url: "/assets/r2/webtv-cortez/webtv-cortez-briefing.m4a"
+
+# METRICS (NotebookLM Forensic Bolus)
+forensic_metrics:
+  financial: "N/A"
+  process: "Rigorous design reviews with ID and PM; Weekly status reports; FTP version control"
+  technical: "Pro/ENGINEER (Surface Modeling); AutoCAD (2D layouts); FTP"
+
+# FORENSIC SUMMARY
+forensic_summary: "Design the reference wireless infrared keyboard (incorporating remote control functions) for the WebTV Galaxy Home Network. Delivered complex Pro/ENGINEER surfacing for organic grip areas and resolved critical vendor key pitch constraints to release final CAD files for prototyping in six weeks."
+
+# TOOLCHAIN
+toolchain:
+  - "Pro/ENGINEER (Surface Modeling)"
+  - "AutoCAD (2D layouts/DXF conversion)"
+  - "FTP (Mechanistic server)"
+
+# STANDARD METRICS (Fallback/Schema)
 metrics:
+  cogs:
+    value: "N/A"
+    label: "COGS"
+  profitability:
+    value: "N/A"
+    label: "ROI"
+  governance:
+    ecos: []
+    dcos: 0
+  interventions:
+    count: 3
+    label: "Critical Interventions"
   financial:
     toolingBudget: 0
     toolingActual: 0
@@ -51,28 +58,86 @@ metrics:
   process:
     dcdCount: 0
     engineeringChangeOrders: []
-  war_stories: []
+  war_stories:
+    - 1
+    - 2
+    - 3
 
-war_stories: []
+# TAGS
+tags:
+  - "Surface Modeling"
+  - "Product Design"
+  - "Vendor Management"
+  - "Mechanical Engineering"
+  - "Prototyping"
+
+# TOOLS (Mapped)
+tools:
+  - "Pro/ENGINEER"
+  - "AutoCAD"
+
+# LINKS
+links: []
+gallery: []
+documents: []
+cyberspace:
+  layout: "linear"
+  stickies: []
 ---
 
-## The Challenge
+### Cortez Keyboard Forensic Report
 
-> **Context:** As Lead Mechanical Engineer (Consultant), I was tasked with designing the reference wireless infrared keyboard for the WebTV Galaxy Home Network. The design required flawless Pro/ENGINEER surfacing for complex, organic grip areas and tight integration of a remote control navigation cluster.
+**Source:** NotebookLM
+**Extracted:** May 16, 2024
 
-## Engineering Approach
+#### I. PROJECT SUMMARY
 
-- **Complex Surfacing:** Executed "flawless" Pro/ENGINEER surfacing for organic grip areas, reconciling strict Industrial Design aesthetics (Jeff Jones/PSDA) with tooling constraints.
-- **Component Integration:** Merged the "Cambria" remote control navigation cluster into the main housing, resolving complex button height and clearance issues.
-- **Vendor Liaison:** Managed technical communication with Silitek (Keyswitch Matrix), successfully resolving a critical 0.05mm key pitch discrepancy that threatened the bezel design.
-- **Rapid Prototyping:** Led the fabrication of high-fidelity hard models (Val Kasvin/Sputnik Models) for executive reviews.
+- **Role:** Lead Mechanical Engineer / Surface Modeler (Contractor via Mechanistic)
+- **Objective:** Engineer the reference wireless infrared keyboard ("Cortez") for the WebTV Galaxy Home Network, translating organic Industrial Design into tooling-ready Pro/ENGINEER surfaces.
+- **Core Achievement:** Delivered complex "highly sculpted" surface geometry in under 6 weeks while resolving a critical 0.05mm pitch mismatch between the ID intent and the vendor's (Silitek) standard manufacturing tooling.
 
-## Impact
+#### II. THE CAST (Team & Stakeholders)
 
-Delivered final tooling-ready CAD files in just six weeks, enabling successful executive demonstrations to partners like Sony and RCA.
+- **Leslie Leland**: Product Manager/WebTV (Primary point of contact for scope, BOM, and vendor management).
+- **Jeff Jones**: Industrial Designer/Peter Schmidt Design Assoc (PSDA) (ID lead responsible for surface intent and button layouts).
+- **Val Kasvin**: Model Maker/Sputnik Models (Fabricated high-fidelity Ren/hard models based on ProE releases).
+- **Alain Hon**: Engineering Contact/Silitek (Manufacturing partner for the keyswitch matrix; primary technical adversary/collaborator).
+- **Son Jae Park (SJ)**: Keyboard Project Leader/Microsoft (Liaison for technical drawing reviews and legacy data).
+- **Steve Nakayama**: Panasonic Industrial Company (Vendor providing critique and reference designs).
 
-### Project Artifacts
+#### III. CRITICAL MECHANICAL INTERVENTIONS (Ranked STAR Stories)
 
-<YouTube id="dQw4w9WgXcQ" />
+##### 1. The Key Pitch Integration Crisis
 
-<ModelViewer />
+- **The Trigger:** Silitek (the manufacturing vendor) utilized a standard key pitch of 19.05mm, whereas the Industrial Design targeted a tighter 19.00mm pitch to minimize the footprint.
+- **The Tension:** The cumulative error of the 0.05mm difference per key threatened to push the keys into the bezel. Silitek explicitly warned: "The rubber pad on the right-hand side is too close to the edge. It could be hard to design the PCB and membrane".
+- **The Intervention:** I generated cross-sections to map "keep-out" zones and coordinated a layout redesign. We eliminated the last row of keys (Page Up/Down) from the main matrix and moved functions (TV/Video, View, Codeset) to a separate elastomeric keypad, saving critical internal volume.
+- **The Result:** Successfully integrated the standard SK-7510 matrix into the custom ID form factor without requiring a prohibitive investment for new key tooling.
+
+##### 2. The Organic Surfacing Sprint
+
+- **The Trigger:** The ID required "highly organic shapes" for the grip areas and a "highly sculpted" back that were difficult to capture in CAD.
+- **The Tension:** Initial hard models were criticized for not sitting level on the table and having "sharp edges" on the "eye" detail. The top surface was deemed "entirely too flat" during design reviews.
+- **The Intervention:** I executed the surface modeling in Pro/ENGINEER, specifically implementing a top surface angle for slope (spending 28 hours on this feature alone), adding curvature to both hand grips, and modifying the top view outline to match updated ID specifications.
+- **The Result:** The final CAD files were released to prototype in six weeks, producing machined surfaces described as "flawless" by the design team.
+
+##### 3. The Navigation Cluster Integration
+
+- **The Trigger:** The design required the integration of a specific "Cambria" remote control navigation button cluster into the keyboard layout.
+- **The Tension:** Silitek flagged the initial navigation button layout as a "No Can Do," threatening the manufacturability of the primary user interface element.
+- **The Intervention:** I imported the navigation cluster geometry from separate ProE files, integrated it into the main housing, and adjusted the surfacing to accommodate new button heights and clearances, verifying the layout via 2D cross-sections sent to the vendor.
+- **The Result:** A unified database that allowed for the creation of a verification hard model with correct button placement and vendor sign-off.
+
+#### IV. LINKEDIN ARTIFACTS
+
+- [ ] Engineered complex Pro/ENGINEER surfaces for the "Cortez" wireless keyboard, delivering final tooling-ready files in just 6 weeks.
+- [ ] Managed technical liaison with Asian manufacturing partners (Silitek) to resolve critical 0.05mm key pitch discrepancies, avoiding significant tooling costs.
+- [ ] Led rapid prototyping cycles for high-fidelity hard models (0.6kg target weight), enabling successful executive demonstrations to partners like Sony and RCA.
+- [ ] Integrated complex electromechanical components, including a custom navigation cluster and infrared communications module, into an ergonomic form factor.
+- [ ] Directed surface development for a high-volume consumer peripheral, reconciling strict Industrial Design aesthetics with high-volume manufacturing constraints.
+
+#### V. TECHNICAL STACK & GOVERNANCE
+
+- **Tools:** Pro/ENGINEER (Surface Modeling), AutoCAD (2D layouts/DXF conversion), FTP (Mechanistic server for data exchange).
+- **Partners:** Silitek (Keyboards/Manufacturing), Sputnik Models (Prototyping), Panasonic (Reference designs), PSDA (Industrial Design).
+- **Governance:** Utilized weekly status reports and invoices, FTP sites for version control (`ftp.mechanistic.com`), and rigorous design reviews with ID and PM.

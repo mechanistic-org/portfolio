@@ -49,7 +49,7 @@ cyberspace:
             src: /assets/r2/d-command/bubbles/01_intro/D-CommandLarge-md.webp
             width: 800
         layout: masonry
-      deck:
+      legacy_deck:
         - body: '**Objective:**
 
             Capture the "Mid-Tier" studio market by delivering the flagship D-Control
@@ -83,7 +83,7 @@ cyberspace:
             src: /assets/r2/d-command/bubbles/02_architecture/danko_fader_withlabels-lg.webp
             width: 1280
         layout: masonry
-      deck:
+      legacy_deck:
         - body: '**The Constraint:**
 
             Linking the Main Unit to the Fader Expansion created a massive ground loop
@@ -114,7 +114,7 @@ cyberspace:
             src: /assets/r2/d-command/bubbles/03_regulatory/DSC03112-lg.webp
             width: 1280
         layout: masonry
-      deck:
+      legacy_deck:
         - body: '**The Crisis:**
 
             Just days before Mass Production, the unit **failed** the UL "AC Withdraw"
@@ -149,7 +149,7 @@ cyberspace:
             src: /assets/r2/d-command/bubbles/04_quality/PCll_Jr_Rev6_Fader_Print-lg.webp
             width: 1280
         layout: masonry
-      deck:
+      legacy_deck:
         - body: '**The Violation:**
 
             A prototype run of PCBs arrived marked as **UL 94 V-2** (flammable) instead
@@ -180,29 +180,26 @@ industry: Other
 links:
   - name: Digidesign Website
     url: https://avid.com
-phase_stats:
-  Design: 67.3
-  Engineering: 23.0
-  Production: 21.4
-  Strategy: 7.7
-production: Mass Production
-statusLabel: Completed
-tags:
-  - Project Danko
-  - Reliability Testing
-  - Prototyping
-  - Mechanical Engineering
-  - Product Design
-  - CAD (Computer-Aided Design)
-teamSize: Core Team of INT 12 / EXT 4
-theme: hyperspace
-title: D-Command
-toolIcons:
-  - ptc
-tools:
-  - Pro/ENGINEER
 
-# METRICS (The Real Data - C24 Schema)
+# METRICS (NotebookLM Forensic Bolus)
+forensic_metrics:
+  financial: "Stand cost reduced to ~$555 via DFM"
+  process: "Gap tolerance stabilized to 0.02 inches"
+  technical: "Passed UL/EMC Safety Requirements (USA, Canada, EU)"
+
+# FORENSIC SUMMARY
+forensic_summary: "The D-Command launch faced a critical yield crisis where plastic end caps warped and sheet metal fader pans bowed during assembly, making unit alignment impossible. I engineered a recovery plan involving manual 'tweaking' protocols for metal pans and redesigned side plates with floating hardware to absorb tolerance stack-up. These interventions stabilized the assembly process, allowed the units to pass regulatory compliance, and enabled the successful First Customer Ship in April 2005."
+
+# TOOLCHAIN
+toolchain:
+  - "Pro/E (CAD)"
+  - "Intralink (PDM)"
+  - "Sheet Metal Fabrication"
+  - "Injection Molding"
+  - "Powder Coating"
+  - "PEM Fasteners"
+  - "Microsoft Excel (BOMs)"
+
 metrics:
   cogs:
     value: "100%"
@@ -228,30 +225,89 @@ metrics:
     dcdCount: 0
     engineeringChangeOrders: []
   war_stories: []
+phase_stats:
+  Design: 67.3
+  Engineering: 23.0
+  Production: 21.4
+  Strategy: 7.7
+production: Mass Production
+statusLabel: Completed
+tags:
+  - Project Danko
+  - Reliability Testing
+  - Prototyping
+  - Mechanical Engineering
+  - Product Design
+  - CAD (Computer-Aided Design)
+teamSize: Core Team of INT 12 / EXT 4
+theme: hyperspace
+presentation_mode: deep_dive
+title: D-Command
+toolIcons:
+  - ptc
+tools:
+  - Pro/ENGINEER
 
-war_stories: []
+# ASSETS
+audio_url: "/assets/r2/d-command/d-command-briefing.m4a"
 ---
 
-## The Challenge
+### D-Command (Project Danko) Forensic Report
 
-> **Context:** Digidesign (Avid) set the standard for professional digital audio workstations (Pro Tools).
+#### I. PROJECT SUMMARY
 
-The goal was to create a tactile control surface that provided professional mixers with precise, low-latency control over digital parameters.
+- **Role:** Mechanical Engineer
+- **Objective:** Architect and stabilize the mechanical chassis and enclosure for "D-Command," a mid-sized tactile control surface derived from the flagship D-Control architecture.
+- **Core Achievement:** Engineered emergency recovery protocols for critical sheet metal yielding issues (pan bowing) and plastic injection failures (end-cap fracturing), rescuing the April 2005 First Customer Ship (FCS) date.
 
-## Engineering Approach
+#### II. THE CAST (Team & Stakeholders)
 
-We adopted a rigorous engineering methodology to solve these problems.
+- **Erik Norris:** Mechanical Engineer (Lead on Danko Mechanicals)
+- **Neal Breitbarth:** Mechanical Engineering Manager (Escalation point, DFM guidance)
+- **Al Siy:** QA/Manufacturing (Incoming inspection & vendor auditing)
+- **Fidel Saucedo:** Vendor Engineer, Mass Precision (Sheet metal fabrication partner)
+- **Thomas Oiwa:** Manufacturing Engineer (ECO implementation & assembly fixtures)
+- **Vicky Moreno:** Field Service/Manufacturing (Reporter of field failures)
+- **Terri Merrell:** Purchasing/Manufacturing (Vendor coordination)
 
-- **Integrated Strategy:** Integrated high-resolution motorized faders with custom touch-sensitive capacitive caps.
-- **Designed Strategy:** Designed a rigid, ergonomic chassis that minimized resonance and provided a solid 'console' feel.
-- **Engineered Strategy:** Engineered the internal layout to separate analog audio paths from digital control signals to minimize noise floor.
-- **Implemented Strategy:** Implemented a modular assembly strategy to allow for scalable product variants.
+#### III. CRITICAL MECHANICAL INTERVENTIONS (Ranked STAR Stories)
 
-## Impact
+##### 1. The Fader Pan "Bowing" Crisis
 
-The unit became a staple in professional recording studios, bridging the gap between analog workflow and digital flexibility.
+- **The Trigger:** During pre-production, Fader Module pans arrived significantly warped ("bowed") from the vendor. The hydraulic press used to insert PEM hardware was stretching the material at each insertion point, creating a cumulative arch.
+- **The Tension:** Units could not be assembled without extreme force. Field installers reported needing "ratchet straps" to compress the Main and Fader units together to align screw holes. Installers were resorting to placing shims under the feet to "hold it together".
+- **The Intervention:**
+  1.  **Immediate containment:** Deployed to the manufacturing floor to train assembly staff on a manual "tweaking" protocol to counteract the press-induced bow.
+  2.  **Root Cause Correction:** Directed Mass Precision to implement localized distortion compensation.
+  3.  **Tolerance Relief:** Redesigned the rear tie-plate brackets (**ECO 8000**) to ovalize mounting holes, allowing lateral float between the Main and Fader units.
+- **The Result:** Eliminated the need for field shims and ratchet straps. Restored chassis alignment to allow consistent 0.02" gaps between modules.
 
-### Project Artifacts
+##### 2. The End Cap Fracture Event
 
-<YouTube id="dQw4w9WgXcQ" />
-<ModelViewer />
+- **The Trigger:** Plastic side caps were cracking at the mold line/weld line during installation. The mounting holes were undersized relative to the boss, causing screw heads to bottom out against the structural foam and exert hoop stress on the part wall.
+- **The Tension:** High-visibility cosmetic failure on a premium product. Incoming inspection yield dropped to <40% (5 out of 10 sets passed).
+- **The Intervention:**
+  1.  **Design Change:** Executed **ECO 6310** to increase the diameter of mounting holes and internal bosses, reducing lateral stress on fasteners.
+  2.  **Tooling Mod:** Authorized T1 tooling modifications with PPI Plastics to relieve interference fit.
+- **The Result:** Yield restored to acceptable levels; new parts validated via "T1 approval" faxed to vendor.
+
+##### 3. UL/EMC Compliance Failure (AC Withdraw)\*\*
+
+- **The Trigger:** 48 hours prior to shipping, the unit failed the UL "AC Withdraw" test. Voltage did not drop below 60 Vdc within 2 seconds.
+- **The Tension:** "Line Down" scenario. Regulatory hold prevented shipment of finished goods inventory.
+- **The Intervention:** Engineered a retrofit solution involving the addition of a specific EMI gasket (PN 9440-13240-01) to the assembly. Pushed an urgent **ECO 8114** to modify the BOM and assembly prints immediately.
+- **The Result:** Unit passed UL re-test; Notice of Approval (NOA) received, clearing the product for USA, Canada, and EU shipment.
+
+#### IV. LINKEDIN ARTIFACTS
+
+- [ ] **Engineered** recovery of D-Command launch by redesigning 19 sheet metal components to correct press-induced warping, eliminating field assembly failures.
+- [ ] **Saved** ~$555 per unit in stand COGS through aggressive upfront DFM negotiation with metal fabricators.
+- **Led** root-cause analysis for 40% plastic yield loss, implementing ECO 6310 to resize bosses and stabilize injection molding tolerance.
+- **Resolved** critical UL/EMC "Line Down" failure 48 hours pre-launch via rapid design and deployment of EMI gasket retrofit (ECO 8114).
+- **Reduced** module-to-module assembly gaps to <0.02" by implementing optical profiling for incoming extrusion inspection.
+
+#### V. TECHNICAL STACK & GOVERNANCE
+
+- **Tools:** Pro/Engineer (3D Modeling/Surfacing), Intralink (PDM), Microsoft Excel (BOM Management).
+- **Partners:** Mass Precision (Sheet Metal/Machining - San Jose), PPI Plastics (Injection Molding), Kwanasia (Contract Manufacturing - China), Jetcrown (Plastics).
+- **Governance:** Engineering Change Orders (ECOs 6310, 8000, 8114, 6549, 6150), First Article Inspection (FAI) reports, Material Review Board (MRB) dispositions.

@@ -51,6 +51,19 @@ sidebar:
 
 ## 📜 Change Log (Recent)
 
+- **[2026-01-15] Hyperspace Migration & D-Control Restoration**
+  - **[Restoration] D-Control Deep Dive:** Restored Flagship status. Injected `metrics` via frontmatter for Deep HUD and extracted `legacy_deck` for Dossier Narrative.
+  - **[Migration] Archive Standardization:** Batch-migrated 120+ projects to `theme: hyperspace` using a new safe migration script.
+  - **[Fix] Lite HUD Visibility:** Enforced **"No Variant has No Nav"** rule. Modified `Hyperspace.astro` to render the Top HUD in Standard mode (Lite).
+  - **[Taxonomy] The Forensic Chain:** Proposed "Evidence Locker" paradigm as the successor to the "Hyperspace" naming convention.
+
+- **[2026-01-14] Site Stabilization (The Corpse Purge)**
+  - **[Architecture] Blog Decommissioning:** Removed all legacy blog infrastructure (`src/data/blog`, `authors`, and config references) to silence "No files found" warnings.
+  - **[Fix] Cloudflare Sharp:** Configured `adapter: cloudflare({ imageService: "compile" })` to resolve runtime warnings while preserving build-time image optimization.
+  - **[Cleanup] NPM Config:** Purged deprecated `.npmrc` settings (`auto-install-peers`, `node-linker`) to future-proof the environment.
+  - **[Cleanup] Corpse Code:** Fixed broken image reference in `HeroTinyImage.astro` (Ghost Asset) instead of deleting it.
+  - **[Fix] Schema Enforcement:** Resolved Keystatic validation error by enforcing String type for `teamSize` ("6") in `webtv-cortez`.
+
 - **[2026-01-12] Forensic Resume & LinkedIn Overhaul**
   - **[Identity] Master Resume:** Established `MASTER_RESUME_GENERATED.md` as the "Universal Source of Truth," consolidating 30 years of history with "Forensic" fidelity (IP69K, Haptics, Magnesium).
   - **[Platform] LinkedIn V4:** Finalized Profile Overhaul with "Anti-Collapse" formatting (Double Spacing + Emoji Bullets).
@@ -500,12 +513,12 @@ sidebar:
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Emergency Site Lockdown & Asset Plumbing.**
+- **Active Task:** **Implementing Forensic Chain Taxonomy.**
 - **Next Step:**
-  1.  User to run Symlink command (Admin).
-  2.  User to create `webtv-galaxy` physical folders.
-  3.  Agent to restore Navigation once assets are confirmed live.
-- **Context:** `webtv-galaxy.mdx` is hydrated with "The God Box" narrative. HUD is fixed for mobile. Site is in dark mode (socials only).
+  1.  Finalize `ForensicDrawer.tsx` (The Dossier).
+  2.  Verify "No Variant has No Nav" rule in HUD.
+  3.  Establish "Case Theory" vernacular.
+- **Context:** `ForensicDrawer.tsx` is the active workspace. Moving from "Hyperspace" to "Forensic Chain" naming convention.
 - **The Visual Taxonomy (Dreamjob):**
   - **Hook:** "A Rosetta Stone for the System aesthetic."
   - **Tech:** AI Generation (Gemini), Manual Content Injection.

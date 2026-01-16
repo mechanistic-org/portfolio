@@ -87,6 +87,16 @@ These scripts are the engine of the "Forensic Data Factory."
   `copy "d:\portfolio\portfolio_working\EN_logo\EN_15-based_good-reference-but _fake-SVGS____\*.svg" "public/assets/branding\"`
 - **Note:** Do not use `Asset 2.svg` (Wireframe); it is incorrect.
 
+### Cloudflare Image Service Warning
+
+- **Symptom:** `[WARN] Cloudflare does not support sharp at runtime. However, you can configure imageService: "compile"...`
+- **Cause:** The Cloudflare adapter detects Sharp is installed but unavailable in the Edge runtime.
+- **Fix:** Explicitly configure the adapter to use Sharp during the build/compile phase only:
+  ```js
+  // astro.config.mjs
+  adapter: isProduction ? undefined : cloudflare({ imageService: "compile" }),
+  ```
+
 ### IDE Tooling Errors ("Stream Error")
 
 - **Symptom:** "Error generating commit message: ... stream error" or "404 models/gemini-1.5-flash not found".
@@ -97,3 +107,40 @@ These scripts are the engine of the "Forensic Data Factory."
   1.  **Run Diagnostic:** `python scripts/test_gemini_key.py`.
   2.  **If Script Works:** The API Key is fine. The IDE is broken. **Use Manual Commits.**
   3.  **If Script Fails (429):** Add billing to Google Cloud Console for the project.
+
+### Asset & Schema Errors
+
+- **Symptom:** `ImageNotFound: Could not find requested image...`
+- **Cause:** A component is referencing a relative asset path that was deleted (e.g., `web-reaper/avatar.jpg`).
+- **Fix:** Grep the `src` directory for the missing filename. It's often in a "Tiny Image" component or legacy content.
+
+- **Symptom:** `YAMLException: can not read an implicit mapping pair; a colon is missed`
+- **Cause:** A markdown line in frontmatter starts with `*`. YAML interprets this as an alias anchor or list item.
+- **Fix:** **The Asterisk Law:** You MUST quote any string starting with `*` or special characters.
+  `narrative: "* The system failed..."` -> `narrative: "* The system failed..."` (Wait, quotes are required).
+  `narrative: "* The system"` (Fails).
+  `narrative: "* The system"` (Fixed: `narrative: '* The system'`).
+
+### Hyperspace Migration (Batch Upgrade)
+
+- **Script:** `node scripts/migrate_to_hyperspace.js`
+- **Usage:**
+  - `--dry-run`: Preview changes.
+  - `--write`: Apply changes (Back up first!).
+- **Logic:**
+  - Standardizes `theme: "hyperspace"`.
+  - Promotes `metrics` -> `deep_dive`.
+  - Renames `deck` -> `legacy_deck`.
+
+- **Symptom:** `Error: Field validation failed: teamSize: Must be a string`
+- **Cause:** Keystatic/Zod schema expects a String, but a Number was provided in the markdown frontmatter.
+- **Fix:** Quote the value in the `.mdx` file: `teamSize: 6` -> `teamSize: "6"`.
+
+### The Orphan Trap (Data Stripping)
+
+- **Symptom:** Python Hydration script runs successfully (`✅ Updated: 1`), but the data (`toolchain`, `forensic_summary`) does not appear in the Build or CMS.
+- **Cause:** **Schema Collision.** The field exists in the MDX file, but Astro's Zod Schema (`content.config.ts`) is in strict mode and silently strips undefined fields. If you open it in Keystatic, it will likely DELETE the field upon save because it's missing from `keystatic.config.tsx`.
+- **Fix:** **The Parity Law:**
+  1.  Define field in `src/content.config.ts` (Build Safety).
+  2.  Define field in `keystatic.config.tsx` (CMS Safety).
+  3.  Inject field via `hydrate_content.py` (Automation).
