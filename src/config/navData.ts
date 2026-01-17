@@ -25,7 +25,7 @@ const navConfig: navItem[] = [
 		dropdown: [
 			{
 				text: "PDF",
-				href: "/resume/pdf/",
+				href: "/assets/resume/Erik_Norris_Sr_Staff_Forensic_Architect_2026.pdf",
 				newTab: true,
 			},
 			{

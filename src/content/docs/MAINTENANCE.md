@@ -191,5 +191,20 @@ These scripts are the engine of the "Forensic Data Factory."
     return new URL(image.href).hostname;
   } catch {
     return "INTERNAL"; // or handle relative path manually
-  }
   ```
+
+### Auditory/Visual Engine Maintenance
+
+- **Symptom:** Morphing animation (ECG -> Pulse) looks broken, "teleporting" or snapping lines.
+- **Cause:** **Topology Mismatch.** Framer Motion cannot smoothly interpolate between paths with different point counts or command types (e.g., converting a Curve `C` to a Line `L`).
+- **Fix:** Normalize both paths to use the same number of Segment commands (`L`).
+  - **ECG Path:** 11 points (10 Line segments).
+  - **Pulse Path:** 11 points (10 Line segments).
+  - _Do not use Bezier curves for the target shape if the source is polygonal._
+
+- **Symptom:** Active EQ Visualization looks like a "Techno Strobe" or glitchy.
+- **Cause:** Animation cadence is too fast (<0.4s) or uses `linear` easing.
+- **Fix:** Tune to **Iambic Pentameter**.
+  - **Duration:** 0.6s - 1.0s.
+  - **Ease:** `easeInOut`.
+  - **Noise:** Inject randomized height variance (`Math.random()`) so bars don't move in unison.

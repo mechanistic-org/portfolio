@@ -394,5 +394,65 @@ export default config({
 				}),
 			},
 		}),
+
+		/**
+		 * * PROMPTS Engine Collection
+		 * The Sovereign PDM for AI Director's Notes & Hack Packs.
+		 * Taxonomy: Intake ➡ Compression ➡ Power ➡ Exhaust
+		 */
+		prompts: collection({
+			label: "Prompts",
+			slugField: "title",
+			path: "src/content/prompts/*/",
+			columns: ["title", "category", "role"],
+			entryLayout: "content",
+			format: { contentField: "content" },
+			schema: {
+				title: fields.slug({ name: { label: "Title" } }),
+				category: fields.select({
+					label: "Engine Cycle Phase",
+					description: "The 4-Stroke Taxonomy (Suck, Squeeze, Bang, Blow)",
+					options: [
+						{ label: "1. INTAKE (Mining/Extraction)", value: "intake" },
+						{ label: "2. COMPRESSION (Refining/Bolus)", value: "compression" },
+						{ label: "3. POWER (Generative/Creative)", value: "power" },
+						{ label: "4. EXHAUST (Governance/Audit)", value: "exhaust" },
+					],
+					defaultValue: "intake",
+				}),
+				role: fields.text({
+					label: "Persona / Role",
+					description: "Who is the AI pretending to be? (e.g., 'Senior Engineer')",
+				}),
+				hack_pack_source: fields.text({
+					label: "Hack Pack Source",
+					description: "Filename of the control document (e.g. AUDIO_PROTOCOL.md)",
+				}),
+				input_type: fields.text({
+					label: "Input Type",
+					description: "What do you feed this prompt? (e.g., Resume, PDF, Email)",
+				}),
+				output_format: fields.text({
+					label: "Output Format",
+					description: "What comes out? (e.g., JSON, Markdown, Audio)",
+				}),
+				system_instructions: fields.text({
+					label: "System Instructions",
+					multiline: true,
+					description: "High-level meta-instructions (The 'Guardrails').",
+				}),
+				content: fields.mdx({
+					label: "Prompt Content",
+					options: {
+						bold: true,
+						italic: true,
+						code: true,
+						codeBlock: true,
+						heading: [1, 2, 3, 4],
+						link: true,
+					},
+				}),
+			},
+		}),
 	},
 });

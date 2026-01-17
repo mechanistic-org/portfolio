@@ -97,9 +97,13 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Orphan Remediation & Protocol Hardening.**
-- **Next Step:** Resume `ForensicDrawer` integration with secure data pipeline.
-- **Context:** **"The Orphan Crisis"** resolved. Fixed critical data loss where Astro/CMS were stripping `toolchain` and `forensic_summary`. Pipeline is now end-to-end secure.
+- **Active Task:** **AEO Optimization & Visual Tuning.**
+- **Next Step:** Solidify Metadata Pipelines clearly for Answer Engines.
+- **Context:** **"The Pulse"** is refined. SonicHeartbeat is now a "Human" signal. AEO Audit confirmed structural readiness.
+
+* **Key Decision (Viz-Audio):** **"The SonicHeartbeat Standard"** - Idle = Pulse (Cycle), Active = Full EQ. Icon = Speaker (not Headphone).
+* **Key Decision (SEO):** **"The Answer Engine Verification"** - We are AEO Ready. JSON-LD for Projects is the structural key for Knowledge Graph entity recognition.
+* **Key Decision (Aesthetics):** **"The Iambic Cadence"** - Artificial strobing is rejected. Active visualizations must tune to "Human Breath" rhythms (~0.8s, EaseInOut) to align with the "Forensic/Organic" voice.
 
 * **Key Decision (Assets):** **"The Fake SVG Pivot"** - The `EN_logo_1200` series are technically SVG wrappers around high-res rendered PNGs (`d:\portfolio\...\ _fake-SVGS____`). We accepted this as the **Source of Truth** (Sovereign) because the logo is natively 3D and has no perfect 2D vector equivalent. Do NOT try to replace them with wireframes.
 
@@ -128,6 +132,7 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Sync):** **"The Datasheet Sync"** - `src/config/work_history.json` is the Source of Truth for the `/resume/one-pager` "Datasheet" View. It has been manually synced to the Master Resume.
 
 - **Active Thread:** `fed5af15-896c-4fa9-bfe9-85663ea21d01` (DigiME Restoration & Mining).
+- **Active Thread:** `397cf7f1-2a3c-4139-8879-9b80a9758ca7` (SonicHeartbeat & AEO Audit).
 
 ## 🔗 Active Intelligence (New Synapses)
 
