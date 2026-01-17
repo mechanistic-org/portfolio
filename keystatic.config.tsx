@@ -141,6 +141,13 @@ export default config({
 					itemLabel: (props) => props.value,
 				}),
 
+				// Forensic Metrics (Schema Parity Fix)
+				forensic_metrics: fields.object({
+					financial: fields.text({ label: "Financial Metric" }),
+					process: fields.text({ label: "Process Metric" }),
+					technical: fields.text({ label: "Technical Metric" }),
+				}),
+
 				// Forensic Architecture (Automated via hydrate_content.py)
 				toolchain: fields.array(fields.text({ label: "Item" }), {
 					label: "Forensic Toolchain",

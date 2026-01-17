@@ -1,0 +1,86 @@
+[
+  {
+    "date": "2007-11-16",
+    "score": 5,
+    "snippet": "Work with Ping on fader slot clearance issue (Ping submitted ECO).",
+    "type": "Status Report"
+  },
+  {
+    "date": "2007-11-30",
+    "score": 7,
+    "snippet": "Significant EM noise problems (PS under ADCs). Need to make more sheetmetal parts to continue detailed EM testing.",
+    "type": "Status Report"
+  },
+  {
+    "date": "2007-12-07",
+    "score": 6,
+    "snippet": "Crossflow (4x80mm 12V) doesn\u2019t work with filter/sidecap; ECO submission delayed due to more feedback.",
+    "type": "Status Report"
+  },
+  {
+    "date": "2007-12-14",
+    "score": 5,
+    "snippet": "Seems to be a problem with (a few) grayhill encoders binding \u2013 still working.",
+    "type": "Status Report"
+  },
+  {
+    "date": "2007-12-21",
+    "score": 5,
+    "snippet": "Vtech rubber foot substitute not direct replacement; new PN and ECO needed for C24 BOM.",
+    "type": "Status Report"
+  },
+  {
+    "date": "2008-01-11",
+    "score": 2,
+    "snippet": "General design work \u2013 continuing detailed design. New ACS encoder ring (presented and 90% approved).",
+    "type": "Status Report"
+  },
+  {
+    "date": "2008-01-18",
+    "score": 3,
+    "snippet": "Numerous meetings with Doug, David, et al. WRT schedule and deliverables.",
+    "type": "Status Report"
+  },
+  {
+    "date": "2008-01-25",
+    "score": 5,
+    "snippet": "Reached dead end on new control surface PCB DCDs until final control surface layout receipt.",
+    "type": "Status Report"
+  },
+  {
+    "date": "2008-02-01",
+    "score": 6,
+    "snippet": "Reached dead end on new control surface PCB DCDs until receipt of final control surface layout",
+    "type": "Status Report"
+  },
+  {
+    "date": "2008-02-08",
+    "score": 5,
+    "snippet": "Reached dead end on new control surface PCB DCDs until receipt of final control surface layout.",
+    "type": "Status Report"
+  },
+  {
+    "date": "2008-02-15",
+    "score": 6,
+    "snippet": "Work with David A. to finalize PCB outlines, conn placement etc. so I can release REV 1 DCDs.",
+    "type": "Status Report"
+  },
+  {
+    "date": "2008-02-29",
+    "score": 5,
+    "snippet": "Remaining issues to resolve and/or incorporate into design (some of these are answered, but I\u2019ll leave the list here for the time being\u2026)",
+    "type": "Status Report"
+  },
+  {
+    "date": "2008-03-13",
+    "score": 6,
+    "snippet": "Remaining issues to resolve and/or incorporate into design (some of these are answered, but I\u2019ll leave the list here for the time being\u2026)",
+    "type": "Status Report"
+  },
+  {
+    "date": "2008-03-28",
+    "score": 2,
+    "snippet": "released Rev 4 9150-58331-00 DCD; completed Rev 2 of Main IO connector layout.",
+    "type": "Status Report"
+  }
+]

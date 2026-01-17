@@ -57,6 +57,11 @@ sidebar:
   - **[Fix] Lite HUD Visibility:** Enforced **"No Variant has No Nav"** rule. Modified `Hyperspace.astro` to render the Top HUD in Standard mode (Lite).
   - **[Taxonomy] The Forensic Chain:** Proposed "Evidence Locker" paradigm as the successor to the "Hyperspace" naming convention.
 
+- **[2026-01-15] Asset Densification & Timeline Repair (The Wrangle)**
+  - **[Protocol] Operation SC48:** Established "Manual Curation" workflow for SC48 asset hydration (Scaffold -> Curate -> Optimize).
+  - **[Fix] The MDX Trap:** Repaired critical Cloudflare build failures caused by unescaped `<` characters in `d-command` and `sc48`.
+  - **[Fix] The Infinite Bubble:** Resolved "Time Dilation" bug in `d-control` visualization by enforcing `endDate: 2004-05-01` (was previously Open/Present).
+
 - **[2026-01-14] Site Stabilization (The Corpse Purge)**
   - **[Architecture] Blog Decommissioning:** Removed all legacy blog infrastructure (`src/data/blog`, `authors`, and config references) to silence "No files found" warnings.
   - **[Fix] Cloudflare Sharp:** Configured `adapter: cloudflare({ imageService: "compile" })` to resolve runtime warnings while preserving build-time image optimization.
@@ -453,19 +458,19 @@ sidebar:
   - **Description:** A custom physics solution dealing with "Launchpad" states and "Goldilocks" tuning to create a kinetic, scroll-triggered narrative entrance for data nodes.
 
 - **Hook:** "Architecture you can touch."
-- **Tech:** React Three Fiber, Framer Motion (Scroll), Glassmorphism.
+- **Tech:** React Three Fiber, Vanilla JS Scroll Listener, Glassmorphism.
 - **Description:** A recursive visualization where the website renders _its own architecture_ as 3D server blades. As the user scrolls, the stack "assembles" from an exploded diagram into a cohesive unit, mirroring the "Intake -> Compression" narrative. Validates the "Glass requires Environment" rendering law.
 
 ### NorrOS (Hyperspace)
 
 - **Hook:** A scroll-driven operating system for the portfolio, replacing navigation with "Realms".
-- **Tech:** Astro, React, Framer Motion, Three.js (R3F).
+- **Tech:** Astro, React, Vanilla JS (Scroll), Three.js (R3F).
 - **Description:** A single-page application experience built on top of a static site generator. Uses sticky containers and manual scroll listeners to map vertical scroll progress to complex 3D and 2D animations (Zoom, Pan, Assemble).
 
 ### Narrative Scroll Engine (ScrollCoordinator)
 
 - **Hook:** "Turns static layouts into cinematic, depth-aware stages."
-- **Tech:** Astro, Vanilla JS, CSS Transforms.
+- **Tech:** Astro, Vanilla JS (Performance), CSS Transforms.
 - **Description:** A headless behavior engine that orchestrates the "entrance and exit" of UI actors based on scroll position, allowing "Technical Topography" (data layers) to emerge as "Marketing Fluff" (headers) recedes.
 
 ### Dynamic Radial Taxonomy

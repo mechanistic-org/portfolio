@@ -23,6 +23,13 @@ These tasks are now automated via Slash Commands in the IDE.
 
 These scripts are the engine of the "Forensic Data Factory."
 
+### Architectural Patterns
+
+- **The Hybrid Scroll (Performance):**
+  - **Context:** Heavy 3D scenes (R3F) cause main-thread lag if coupled with React State-driven scroll hooks (like `useScroll`).
+  - **Pattern:** Use **Vanilla JS `scroll` listeners** attached to specific containers (e.g., `#hyperspace-container`) to calculate progress (0-1) and pass it into the Canvas via a single State update or Ref.
+  - **Benefit:** Decouples the 60fps render loop from the scroll event loop.
+
 - **Hydration Engine:** `npm run content:hydrate`
   - **Source:** `scripts/hydrate_content.py`
   - **Purpose:** Injects NotebookLM "Bolus" data (JSON) into MDX Frontmatter (Metrics, Toolchains, Summaries).
@@ -77,7 +84,19 @@ These scripts are the engine of the "Forensic Data Factory."
 - **Cause:** The MDX parser interprets unquoted keys starting with numbers (e.g., `01_intro:`) as octal or invalid identifiers. It also flags `<` symbols followed by numbers in body text (e.g., `<0.5mm`) as invalid JSX tags.
 - **Fix:**
   1.  **Frontmatter:** Quote ALL keys/values starting with a number: `01_intro` -> `"01_intro"`.
-  2.  **Body Text:** Escape `<` if followed by a number: `<0.5mm` -> `&lt;0.5mm` or backtick `` `<0.5mm` ``.
+  2.  **Body Text:** Escape `<` if followed by a number or currency: `<0.5mm` -> `&lt;0.5mm`.
+      - **Trap:** `<$15k` (interpreted as tag). FIX: `&lt;$15k` or `less than $15k`.
+      - **Trap:** `<40%` (interpreted as tag). FIX: `less than 40%`.
+
+### The Timeline Trap (Infinite Bubble)
+
+- **Symptom:** A project's bubble in the Visualization is massively oversized (e.g., covering the whole screen).
+- **Cause:** **Missing End Date.** If a project has `date` (Start) but no `endDate` or `duration`, the visualization engine assumes it is _still active_ (Duration = Start Date to Now -> 20+ Years).
+- **Fix:** Ensure every project has an `endDate` in frontmatter.
+  ```yaml
+  date: 2003-01-01
+  endDate: 2004-05-01 # Cap the duration
+  ```
 
 ### Broken Site Logos / Favorites
 
@@ -144,3 +163,33 @@ These scripts are the engine of the "Forensic Data Factory."
   1.  Define field in `src/content.config.ts` (Build Safety).
   2.  Define field in `keystatic.config.tsx` (CMS Safety).
   3.  Inject field via `hydrate_content.py` (Automation).
+
+### The "Ghost Folder" 404 (Static Assets)
+
+- **Symptom:** You add a folder to `public/` (e.g., `public/digiME`), but `localhost:4321/digiME/` returns a 404.
+- **Cause:**
+  1.  **Astro Caching:** The Dev Server does not always hot-reload structure changes in `public/`.
+  2.  **Zombie Processes (Windows):** `npm run dev` might fail to close the port, leaving a stale `node.exe` running on 4321 while your new server runs on 4322. You are browsing the OLD server.
+- **Fix:** Terminate with extreme prejudice.
+  ```powershell
+  taskkill /F /IM node.exe
+  npm run dev
+  ```
+
+### Gallery Crashes (Relative URLs)
+
+- **Symptom:** `TypeError: Invalid URL` crashing the entire Gallery component.
+- **Cause:** Using `new URL(image.href)` on a relative internal link (e.g., `/legacy`). The browser `URL` constructor mandates an absolute URI schema.
+- **Fix:**
+
+  ```tsx
+  // BAD
+  new URL(image.href).hostname;
+
+  // GOOD
+  try {
+    return new URL(image.href).hostname;
+  } catch {
+    return "INTERNAL"; // or handle relative path manually
+  }
+  ```

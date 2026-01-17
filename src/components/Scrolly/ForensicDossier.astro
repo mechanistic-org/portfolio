@@ -10,6 +10,6 @@ interface Props {
 const { title, metrics, caseTheory } = Astro.props;
 ---
 
-<ForensicDrawer client:idle title={title} metrics={metrics} caseTheory={caseTheory}>
+<ForensicDrawer client:only="react" title={title} metrics={metrics} caseTheory={caseTheory}>
 	<slot />
 </ForensicDrawer>

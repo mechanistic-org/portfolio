@@ -209,7 +209,15 @@ export default function SharedLayoutGallery({
 					)}
 					{image.href && (
 						<div className="mt-auto flex items-center gap-2 pt-4 text-[10px] tracking-widest text-neutral-600 uppercase transition-colors group-hover:text-neutral-400">
-							<span>{new URL(image.href).hostname.replace("www.", "")}</span>
+							<span>
+								{(() => {
+									try {
+										return new URL(image.href).hostname.replace("www.", "");
+									} catch {
+										return "INTERNAL";
+									}
+								})()}
+							</span>
 						</div>
 					)}
 				</div>
@@ -233,7 +241,7 @@ export default function SharedLayoutGallery({
 					<img
 						src={getAssetUrl(image.src)}
 						alt={image.title || "External Link"}
-						className="h-auto w-full object-cover opacity-60 grayscale transition-opacity duration-500 group-hover:opacity-100 group-hover:grayscale-0"
+						className="h-auto w-full object-cover transition-opacity duration-500 group-hover:opacity-100"
 					/>
 					{/* External Link Icon Overlay */}
 					<div className="absolute top-2 right-2 rounded-full bg-black/50 p-1.5 opacity-60 backdrop-blur-sm transition-opacity group-hover:opacity-100">
@@ -261,7 +269,13 @@ export default function SharedLayoutGallery({
 							{image.title || "External Resource"}
 						</p>
 						<p className="truncate font-sans text-[10px] text-white/50 group-hover:text-black/70">
-							{new URL(image.href).hostname.replace("www.", "")}
+							{(() => {
+								try {
+									return new URL(image.href).hostname.replace("www.", "");
+								} catch {
+									return "INTERNAL";
+								}
+							})()}
 						</p>
 					</div>
 				</motion.a>

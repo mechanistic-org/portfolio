@@ -15,6 +15,24 @@ description: "The Persistent Short-Term Memory store for the AI Agent. This file
 
 These are active AI/External resources that contain "Source of Truth" data not in the repo.
 
+### 🧊 Cryogenic Storage (Features on Ice)
+
+Features that were implemented but "unwound" for clarity, waiting for the right data or UI context to return.
+
+#### 1. **The Forensic Seismograph (Entropy Viz)**
+
+- **Concept:** visualizing "Project Entrophy" (Status Report Scores) as a background "Racegraph" in the HUD.
+- **Status:** **FROZEN** (2026-01-16).
+- **Reason:** Data was too stable (mostly 2/10), resulting in flat lines that looked like "muxed noise" or decoration.
+- **Tech Stack:** D3.js, `curveCatmullRom`, SVG Filters (Glow).
+- **The "ECG" Model:**
+  - **Cyan (Volume):** Forced "Heartbeat" (High/Low toggling on every point) to simulate pulse.
+  - **Orange (Entropy):** Value + `Math.sin()` jitter.
+  - **Green (Stability):** Inverted score (`10 - score`).
+- **Resurrection Requirements:**
+  - Need higher fidelity data (commits, email volume?) or a more interactive UI (tooltips) to explain the lines.
+  - See `implementation_plan.md` for historical logic.
+
 ### 1. **Project C|24 (Curtis)**
 
 - **Role:** SME Oracle / Evidence Locker
@@ -46,7 +64,18 @@ These are active AI/External resources that contain "Source of Truth" data not i
 - **Status:** **ACTIVE**
 - **Contents:** Targeted list of 25+ specific forensic assets (Titan DXF, C24 Refresh AI, etc.) extracted from NotebookLM.
 
-### 5. **WebTV Galaxy (The Missing Link)**
+### 5. **Operation SC48 (Asset Densification)**
+
+- **Role:** The Pilot Program for "Manual Curation".
+- **Status:** **ACTIVE** (Jan 2026).
+- **Protocol:** "The Wrangle" (Scaffold -> Curate -> Polish).
+- **Target:** Elevate SC48 visual density to the "C24 Benchmark" (5-10 images per bubble).
+- **Method:**
+  1.  Agent scaffolds empty folders in `R2_MASTER`.
+  2.  User drags assets from `d:/portfolio` into buckets.
+  3.  Agent runs `process_assets.py` to optimize.
+
+### 6. **WebTV Galaxy (The Missing Link)**
 
 - **Role:** Forensic Narrative (Pre-Xbox)
 - **URL:** [NotebookLM: Galaxy](https://notebooklm.google.com/notebook/a743c4b4-0aaf-446f-b18c-13f23b38065e?authuser=1)
@@ -82,11 +111,13 @@ These are active AI/External resources that contain "Source of Truth" data not i
 * `src/content/docs/prompts/BRANDING_PROMPT.md`: **The Design System.** (How we speak).
 * `src/content/docs/STYLE_GUIDE.md`: **The Token Map.** (How we style).
 * **Key Decision (Protocol):** **"Operation Chronos"** - Use NotebookLM to generate `HUNTING_LIST.md` (dense tables) and export to HTML for physical printing ("Low Friction" asset retrieval).
+* **Key Decision (Protocol):** **"The Phoenix Protocol"** - When restoring legacy functionality (e.g., DigiME Ghost Site), prefer **Linkage over Reconstruction**. Do not rebuild 2006 HTML in Astro. Host it statically (`public/digiME`) and link to it. Use Sovereign Assets (`R2_MASTER` -> `process_assets.py`) to generate high-fidelity previews (WebP) for the Gallery.
 * **Key Decision (Mining):** **"The MailStore Pivot"** - Python COM is too fragile for 15k+ item queries. Use MailStore Home to Index -> Search -> Export.
 * **Key Decision (Layout):** **"The Fiche Scroll Law"** - The Fiche container MUST use `.no-scrollbar` to prevent double-scrollbar visual glitches with the Parallax system.
 * **Key Decision (Assets):** **"The Numeric Bubble Law"** - SC48/D-Control Bubble folders MUST be prefixed (e.g., `01_3d`) to ensure `process_images.py` compiles them in the correct narrative order.
 * **Key Decision (Color):** **"The Sovereign Color Law"** - `src/config/color_registry.ts` is the ONLY Source of Truth for Entity Coloring. `Colors.csv` retrieval is FORBIDDEN.
 * **Key Decision (Code):** **"The Module Naming Law"** - Do not use `.json.ts` for standard TypeScript modules/arrays. Rename to `.ts` to prevent TS Server resolution confusion.
+* **Key Decision (Resilience):** **"The Relative Link Trap"** - `new URL(href)` crashes on relative paths (`/digiME/`). Always wrap URL parsing in `try { ... } catch { return "INTERNAL" }` or use a regex helper for internal routing consistency.
 * **Key Decision (Resilience):** **"Safe-by-Default D3"** - Visualization components must implement defensive `get(key) || default_color` logic to preventing crashing the entire graph on a single missing key.
 * **Key Decision (UI):** **"Lite HUD"** - To prevent WASM crashes during build, deeply nested logic in `ProjectManifestHUD.astro` (Row 2 Metrics) has been disabled until further notice. Row 1 (Identity/Nav) is the priority.
 * **Key Decision (Keystone):** **"The Neural Assembly"** - The final visualization is a "Hybrid Brain" (D3 + R3F). 30 Notebook Nodes packed in a cranial volume (The Idea) that explode on scroll (The Engineering). This is the Opus.
@@ -96,7 +127,7 @@ These are active AI/External resources that contain "Source of Truth" data not i
 * **Key Decision (Formatting):** **"The Double Spacing Law"** - LinkedIn collapses standard lists. We MUST use **Double Spacing** (Empty Lines) effectively between bullets to force a vertical list render.
 * **Key Decision (Sync):** **"The Datasheet Sync"** - `src/config/work_history.json` is the Source of Truth for the `/resume/one-pager` "Datasheet" View. It has been manually synced to the Master Resume.
 
-- **Active Thread:** `eec778fa-2ef8-4fc1-98a8-33814ef7f08b` (Orphan Remediation & Notebook Refinement).
+- **Active Thread:** `fed5af15-896c-4fa9-bfe9-85663ea21d01` (DigiME Restoration & Mining).
 
 ## 🔗 Active Intelligence (New Synapses)
 
@@ -164,6 +195,11 @@ These are active AI/External resources that contain "Source of Truth" data not i
   - Failure to do so results in "The Orphan Trap" (Silent Data Stripping or Overwrite-Deletion).
 - **The "Source Loop" Law:**
   - NotebookLM prompts MUST include a "Convert to Source" step. If the Output Note is not fed back into the Brain as a Source, the AI hallucinates, forgets, and drifts.
+  - If `endDate` is missing, the Visualization Engine calculates duration as `Start -> Now` (20+ Years), creating an "Infinite Bubble" that destroys the layout.
+  - **Fix:** Default to a 1-year duration if exact dates are unknown, or explicitly set `endDate`.
+- **The "Hyperspace Container" Law:**
+  - The main scrollable element in `Hyperspace` theme is `#hyperspace-container`.
+  - Do NOT attach scroll listeners to `window` or `body`. They will fire 0 events. You must listen to the specific ID.
 
 ## 🔮 The Lexicon (Agency Vocabulary)
 

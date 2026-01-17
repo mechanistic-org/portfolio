@@ -8,33 +8,14 @@ import { Image } from "astro:assets";
 	aria-label="Home"
 	id="site-logo-container"
 >
-	<!-- Dark Mode Logo (Default for 'System' aesthetic) -->
+	<!-- Primary Logo (White PNG) -->
 	<img
-		src="/assets/branding/EN_logo_white_1200.svg"
+		src="/assets/branding/EN_logo_white_1024.png"
 		alt="Erik Norris Logo"
-		class="logo-dark h-[70%] w-auto object-contain transition-transform duration-300 group-hover/navlink:scale-105"
-	/>
-
-	<!-- Light Mode Logo -->
-	<img
-		src="/assets/branding/EN_logo_black_1200.svg"
-		alt="Erik Norris Logo"
-		class="logo-light h-[70%] w-auto object-contain transition-transform duration-300 group-hover/navlink:scale-105"
+		class="h-[70%] w-auto object-contain transition-transform duration-300 group-hover/navlink:scale-105"
 	/>
 </a>
 
 <style>
-	/* Explicitly toggle logos based on html class, independent of Tailwind config */
-	:global(html.dark) .logo-light {
-		display: none;
-	}
-	:global(html.dark) .logo-dark {
-		display: block;
-	}
-	:global(html:not(.dark)) .logo-light {
-		display: block;
-	}
-	:global(html:not(.dark)) .logo-dark {
-		display: none;
-	}
+	/* Styles removed as light/dark toggling is no longer needed */
 </style>

@@ -9,7 +9,7 @@ import ProjectManifestHUD from "@components/Projects/ProjectManifestHUD.astro";
 import SharedLayoutGallery from "@components/Projects/SharedLayoutGallery";
 import { getAssetUrl } from "@/utils/assets";
 
-const { entry, nextProject, prevProject, Content, metrics } = Astro.props;
+const { entry, nextProject, prevProject, Content, metrics, entropy } = Astro.props;
 const { cyberspace, title, description, presentation_mode } = entry.data;
 // FORCE HUD for ALL MODES (User Directive: "NO variant that has NO nav")
 // Standard = Lite HUD (Top Row Only)
@@ -48,6 +48,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 	hideNav={true}
 	type="project"
 	projectFrontmatter={entry.data}
+	entropy={entropy}
 >
 	<GlobalHomeButton />
 
@@ -119,6 +120,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 					nextProject={nextProject}
 					prevProject={prevProject}
 					metrics={metrics}
+					entropy={entropy}
 					presentation_mode={presentation_mode}
 				/>
 			</div>
@@ -246,16 +248,6 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 
 		<!-- TRIGGERS -->
 		<div class="pointer-events-none absolute inset-0 flex flex-col">
-			<!-- Intro Spacer -->
-			<div class="flex h-[20vh] items-center justify-center">
-				<div
-					id="start-engine-btn"
-					class="border border-white/10 bg-black/50 p-4 font-mono text-sm text-white transition-all duration-300"
-				>
-					START_ENGINE
-				</div>
-			</div>
-
 			{
 				stickies.map((stage: any, index: number) => {
 					// Forensic Logic
@@ -406,21 +398,23 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 	const intro = document.getElementById("intro-layer");
 	const heroParallax = document.getElementById("hero-parallax");
 	const topHud = document.getElementById("top-hud");
-	const startBtn = document.getElementById("start-engine-btn");
 
 	// FORCE INITIAL STATE - Fixes "Stuck Down" on reload/restoration edge cases
 	// Wrapped in listener to ensure reliable execution after layout
+	if (history.scrollRestoration) {
+		history.scrollRestoration = "manual";
+	}
+
 	document.addEventListener("DOMContentLoaded", () => {
-		if (topHud && startBtn) {
+		if (topHud) {
 			// STRICT RESET: Always hide first
 			topHud.style.transform = "translateY(-100%)";
-			startBtn.style.opacity = "1";
+			window.scrollTo(0, 0);
 
 			// Double-check scroll position after layout
 			if (window.scrollY > 100) {
 				// If we restored to a scrolled position, show HUD
 				topHud.style.transform = "translateY(0%)";
-				startBtn.style.opacity = "0";
 			}
 		}
 	});
@@ -447,17 +441,13 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 		// HUD REVEAL LOGIC
 		// Button moves up and fades out
 		// HUD moves down and fades in
-		if (startBtn && topHud) {
+		if (topHud) {
 			if (scrollY > 100) {
 				// Expanded State
 				topHud.style.transform = "translateY(0%)";
-				startBtn.style.opacity = "0";
-				startBtn.style.transform = "translateY(-50px) scale(0.9)";
 			} else {
 				// Default State
 				topHud.style.transform = "translateY(-100%)";
-				startBtn.style.opacity = "1";
-				startBtn.style.transform = "translateY(0) scale(1)";
 			}
 		}
 	});

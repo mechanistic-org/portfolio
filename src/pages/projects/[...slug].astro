@@ -1,6 +1,8 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
 import { getMultiverseData } from "@/utils/getMultiverseData";
+import fs from "node:fs";
+import path from "node:path";
 
 export const prerender = true;
 
@@ -156,8 +158,32 @@ const finalEntry = entry
 			data: data,
 		};
 
-// === INTELLIGENCE INJECTION (C24) ===
-// Intelligence Injection Removed - Data now sourced from MDX Frontmatter
+// === INTELLIGENCE INJECTION (Entropy) ===
+let entropyData = [];
+// Only check for entropy on real projects (not placeholders)
+if (entry) {
+	try {
+		// Construct path relative to project root
+		// Assuming structure: src/content/projects/[id]/_entropy.json
+		const entropyPath = path.join(
+			process.cwd(),
+			"src",
+			"content",
+			"projects",
+			entry.id,
+			"_entropy.json",
+		);
+		if (fs.existsSync(entropyPath)) {
+			const fileContent = fs.readFileSync(entropyPath, "utf-8");
+			entropyData = JSON.parse(fileContent);
+			console.log(
+				`[INTELLIGENCE] Loaded entropy data for ${entry.id}: ${entropyData.length} events`,
+			);
+		}
+	} catch (e) {
+		console.warn(`[INTELLIGENCE] Failed to load entropy for ${entry.id}`, e);
+	}
+}
 
 // INJECT GENERIC SCROLLY STRUCTURE IF MISSING (For Legacy MDX upgrades)
 if (
@@ -199,4 +225,5 @@ console.log(`[ROUTER] Project: ${finalEntry.id} -> Theme: ${theme}`);
 	Content={Content}
 	headings={headings}
 	metrics={finalEntry.data.metrics}
+	entropy={entropyData}
 />

@@ -1,0 +1,80 @@
+[
+	{
+		"date": "2006-02-14",
+		"score": 2,
+		"snippet": "Program Kickoff. Initial tooling budget approved.",
+		"type": "Status Report"
+	},
+	{
+		"date": "2006-03-01",
+		"score": 3,
+		"snippet": "ID Team requests surface finish changes. Schedule impact minimal.",
+		"type": "Status Report"
+	},
+	{
+		"date": "2006-04-10",
+		"score": 5,
+		"snippet": "Tinderbox PCB thermal simulation shows hotspots. Respin likely.",
+		"type": "Status Report"
+	},
+	{
+		"date": "2006-05-15",
+		"score": 4,
+		"snippet": "Tooling T1 shots received. Texture depth inconsistent.",
+		"type": "Status Report"
+	},
+	{
+		"date": "2006-06-20",
+		"score": 9,
+		"snippet": "CRITICAL: Mold Cavity 4 collapsed during injection. Line Down.",
+		"type": "Status Report"
+	},
+	{
+		"date": "2006-06-27",
+		"score": 8,
+		"snippet": "Emergency tool repair underway. 3-week slip projected.",
+		"type": "Status Report"
+	},
+	{
+		"date": "2006-07-15",
+		"score": 6,
+		"snippet": "T2 shots verify repair. Sink marks on cosmetic surfaces.",
+		"type": "Status Report"
+	},
+	{
+		"date": "2006-08-01",
+		"score": 3,
+		"snippet": "Recovery plan approved. Expedite fees authorized.",
+		"type": "Status Report"
+	},
+	{
+		"date": "2006-09-10",
+		"score": 4,
+		"snippet": "PVT Build started. 5% yield fallout on Fader Caps.",
+		"type": "Status Report"
+	},
+	{
+		"date": "2006-10-05",
+		"score": 2,
+		"snippet": "Mass Production (MP) signed off. First units shipping.",
+		"type": "Status Report"
+	},
+	{
+		"date": "2007-01-15",
+		"score": 7,
+		"snippet": "Field Failure: Headphone Jack solder fracture reported in UK.",
+		"type": "ECO"
+	},
+	{
+		"date": "2007-02-01",
+		"score": 4,
+		"snippet": "ECO-1049: Structural rib added to jack mount. Retooling.",
+		"type": "ECO"
+	},
+	{
+		"date": "2007-03-01",
+		"score": 1,
+		"snippet": "Line stabilized. Yield > 98%. program healthy.",
+		"type": "Status Report"
+	}
+]

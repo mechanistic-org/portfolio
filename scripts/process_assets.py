@@ -55,6 +55,82 @@ FORMATS = [
 # Example: xbox-detail-01.tif
 NAMING_PATTERN = re.compile(r"^([\w-]+)-(hero|detail|context|iso|ortho|prototype|assembly|teardown|test|diagram|schematic|exploded|cutaway|render|ui|wireframe|arch)-(\d{2})\.(tif|tiff|jpg|jpeg|png)$", re.IGNORECASE)
 
+
+# --- HELPER FUNCTIONS ---
+def process_animation_sequence(input_dir, output_dir):
+    """Generates an animated WebP from a folder of frames."""
+    anim_name = input_dir.name
+    print(f"  [ANIMATION] Found sequence folder: {anim_name}/")
+    
+    frames = sorted([f for f in input_dir.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.tif', '.tiff', '.png']])
+    if not frames:
+        print(f"    [SKIP] No valid images in {anim_name}")
+        return
+    
+    try:
+        # Load all frames
+        pil_frames = []
+        for f in frames:
+            img = Image.open(f)
+            # Fix EXIF Orientation
+            img = ImageOps.exif_transpose(img)
+            if img.mode != 'RGB': img = img.convert('RGB')
+            pil_frames.append(img)
+        
+        # Generate Breakpoints for Animation
+        for bp_name, width in BREAKPOINTS.items():
+            # Resize all frames
+            resized_frames = []
+            
+            # Use first frame as reference for canvas size
+            ref_img = pil_frames[0]
+            aspect_ratio = ref_img.height / ref_img.width
+            canvas_height = int(width * aspect_ratio)
+            canvas_size = (width, canvas_height)
+
+            for img in pil_frames:
+                # Use ImageOps.pad to fit image within canvas without distortion
+                padded_img = ImageOps.pad(img, canvas_size, method=Image.Resampling.LANCZOS, color=(0,0,0), centering=(0.5, 0.5))
+                resized_frames.append(padded_img)
+            
+            # Determine Duration
+            duration = 2000
+            try:
+                match = re.search(r'[_-](\d+)ms$', anim_name)
+                if match:
+                    duration = int(match.group(1))
+                    print(f"    [CONFIG] Custom duration found: {duration}ms")
+            except:
+                pass
+
+            # Save as Animated WebP
+            out_filename = f"{anim_name}-{bp_name}.webp"
+            out_file = output_dir / out_filename
+            
+            resized_frames[0].save(
+                out_file, 
+                save_all=True, 
+                append_images=resized_frames[1:], 
+                optimize=True, 
+                quality=80, 
+                duration=duration, 
+                loop=0,
+                format='WEBP'
+            )
+            print(f"    -> Generated: {out_filename} (Animated Sequence)")
+
+            # NEW: Copy source frames to output so React components can reference them individually
+            # Create subfolder for frames to keep things clean
+            target_frame_dir = output_dir / anim_name
+            target_frame_dir.mkdir(parents=True, exist_ok=True)
+            
+            for frame_file in frames:
+               shutil.copy2(frame_file, target_frame_dir / frame_file.name)
+            print(f"    -> Copied {len(frames)} source frames to {target_frame_dir.name}")
+    
+    except Exception as e:
+        print(f"    [ERROR] Animation processing failed: {e}")
+
 def setup_directories():
     """Ensure workspace directories exist."""
     if not MASTER_DIR.exists():
@@ -109,8 +185,13 @@ def process_project(slug):
                 for bubble_file in bubble_dir.iterdir():
                     if bubble_file.name in ["deck.md", "config.json"]: continue
                     
+                    # NEW: Nested Animation Support (Check explicitly)
+                    if bubble_file.is_dir():
+                        process_animation_sequence(bubble_file, target_bubble_path)
+                        continue
+
                     # Pass-throughs (SVG too)
-                    if bubble_file.suffix.lower() in ['.pdf', '.glb', '.gltf', '.mp4', '.mov', '.zip', '.svg']:
+                    if bubble_file.suffix.lower() in ['.pdf', '.glb', '.gltf', '.mp4', '.mov', '.zip', '.svg', '.m4a']:
                         shutil.copy2(bubble_file, target_bubble_path / bubble_file.name)
                         continue
                         
@@ -139,78 +220,12 @@ def process_project(slug):
             continue
 
         # --- ANIMATION SEQUENCE PROCESSING (Folder -> WebP) ---
+        # --- ANIMATION SEQUENCE PROCESSING (Folder -> WebP) ---
         if item.is_dir():
-            anim_name = item.name
-            print(f"  [ANIMATION] Found sequence folder: {anim_name}/")
-            
-            frames = sorted([f for f in item.iterdir() if f.is_file() and f.suffix.lower() in ['.jpg', '.jpeg', '.tif', '.tiff', '.png']])
-            if not frames:
-                print(f"    [SKIP] No valid images in {anim_name}")
-                continue
-            
-            try:
-                # Load all frames
-                pil_frames = []
-                for f in frames:
-                    img = Image.open(f)
-                    # Fix EXIF Orientation
-                    img = ImageOps.exif_transpose(img)
-                    if img.mode != 'RGB': img = img.convert('RGB')
-                    pil_frames.append(img)
-                
-                # Generate Breakpoints for Animation
-                for bp_name, width in BREAKPOINTS.items():
-                    # Resize all frames
-                    resized_frames = []
-                    
-                    # Use first frame as reference for canvas size
-                    ref_img = pil_frames[0]
-                    aspect_ratio = ref_img.height / ref_img.width
-                    canvas_height = int(width * aspect_ratio)
-                    canvas_size = (width, canvas_height)
+             process_animation_sequence(item, output_path)
+             continue
 
-                    for img in pil_frames:
-                        # Use ImageOps.pad to fit image within canvas without distortion (Letterboxing)
-                        # This prevents "squishing" if frames have different aspect ratios
-                        # Fill color: Black (0,0,0) matches the dark theme better than white
-                        
-                        # Fix: Ensure we are padding to the calculated canvas_size
-                        padded_img = ImageOps.pad(img, canvas_size, method=Image.Resampling.LANCZOS, color=(0,0,0), centering=(0.5, 0.5))
-                        resized_frames.append(padded_img)
-                    
-                    # Determine Duration
-                    # Look for duration in folder name (e.g. "base-click_testing_500ms")
-                    # Default: 2000ms (0.5fps)
-                    duration = 2000
-                    try:
-                        # Check for _Xms or -Xms suffix
-                        match = re.search(r'[_-](\d+)ms$', anim_name)
-                        if match:
-                            duration = int(match.group(1))
-                            print(f"    [CONFIG] Custom duration found: {duration}ms")
-                    except:
-                        pass
 
-                    # Save as Animated WebP
-                    out_filename = f"{anim_name}-{bp_name}.webp"
-                    out_file = output_path / out_filename
-                    
-                    resized_frames[0].save(
-                        out_file, 
-                        save_all=True, 
-                        append_images=resized_frames[1:], 
-                        optimize=True, 
-                        quality=80, 
-                        duration=duration, 
-                        loop=0,
-                        format='WEBP'
-                    )
-                    print(f"    -> Generated: {out_filename} (Animated Sequence)")
-            
-            except Exception as e:
-                print(f"    [ERROR] Animation processing failed: {e}")
-                print(f"    [ERROR] Animation processing failed: {e}")
-            continue
 
         # --- DOCUMENTS PROCESSING (Pass-through) ---
         if item.is_dir() and item.name == "documents":
@@ -249,14 +264,17 @@ def process_project(slug):
                 for bubble_file in bubble_dir.iterdir():
                     if bubble_file.name in ["deck.md", "config.json"]: continue
                     
+                    # NEW: Nested Animation Support
+                    if bubble_file.is_dir():
+                        process_animation_sequence(bubble_file, target_bubble_path)
+                        continue
+
                     # Pass-throughs
                     if bubble_file.suffix.lower() in ['.pdf', '.glb', '.gltf', '.mp4', '.mov', '.zip', '.svg']:
                         shutil.copy2(bubble_file, target_bubble_path / bubble_file.name)
                         continue
                         
-                    # Standard Image Processing (Simplified for Bubbles - maintain original name or add sizing?)
-                    # For now, let's treat them as standard images but output to the bubble folder.
-                    # We reuse the logic but applied to this file.
+                    # Standard Image Processing
                     try:
                          with Image.open(bubble_file) as img:
                             img = ImageOps.exif_transpose(img)

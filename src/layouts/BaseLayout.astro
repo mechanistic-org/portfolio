@@ -25,6 +25,7 @@ interface Props {
 	authorsData?: CollectionEntry<"authors">[];
 	postFrontmatter?: CollectionEntry<"blog">["data"];
 	projectFrontmatter?: any;
+	entropy?: any;
 	noindex?: boolean;
 	hideNav?: boolean;
 	overflowHidden?: boolean;
@@ -38,6 +39,7 @@ const {
 	authorsData,
 	postFrontmatter,
 	projectFrontmatter,
+	entropy,
 	noindex = false,
 	hideNav = false,
 	overflowHidden = false,
@@ -47,6 +49,7 @@ const {
 <!doctype html>
 <html
 	lang="en"
+	class="dark"
 	class:list={[
 		{
 			"overflow-hidden": overflowHidden,
@@ -82,7 +85,7 @@ const {
 					<slot />
 				</main>
 			</div>
-			{!overflowHidden && <Footer />}
+			{!overflowHidden && <Footer entropy={entropy} />}
 		</div>
 		<CommandMenu client:only="react" />
 

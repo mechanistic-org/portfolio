@@ -3,6 +3,8 @@ import { getMultiverseData } from "@/utils/getMultiverseData";
 import { Icon } from "astro-icon/components";
 import SonicHeartbeat from "@components/Audio/SonicHeartbeat";
 import DossierToggle from "@components/Projects/DossierToggle";
+import TeamPipChart from "@components/DataViz/TeamPipChart";
+import ForensicSeismograph from "@components/DataViz/ForensicSeismograph";
 
 const multiverseData = await getMultiverseData();
 
@@ -11,10 +13,18 @@ interface Props {
 	nextProject?: any;
 	prevProject?: any;
 	metrics?: any;
+	entropy?: any;
 	presentation_mode?: string;
 }
 
-const { data, nextProject, prevProject, metrics, presentation_mode = "standard" } = Astro.props;
+const {
+	data,
+	nextProject,
+	prevProject,
+	metrics,
+	entropy,
+	presentation_mode = "standard",
+} = Astro.props;
 
 // Formatting
 const dateVal = data.date || new Date();
@@ -32,7 +42,7 @@ const showMetrics =
 		class="group absolute top-0 left-0 z-50 flex h-16 w-16 items-center justify-center border-r border-white/10 bg-black transition-colors hover:bg-white/5"
 	>
 		<img
-			src="/assets/branding/EN_logo_white_1200.svg"
+			src="/assets/branding/EN_logo_white_1024.png"
 			alt="EN Logo"
 			class="h-8 w-8 opacity-90 transition-all group-hover:scale-110 group-hover:opacity-100"
 		/>
@@ -55,41 +65,57 @@ const showMetrics =
 			</div>
 		</div>
 
-		<!-- CENTER: Nav Controls (Visible on Mobile via Flex) -->
-		<div class="flex shrink-0 items-center gap-1">
-			{
-				prevProject ? (
-					<a
-						href={`/projects/${prevProject.id}`}
-						class="flex h-8 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-[#2E5CFF] hover:text-white md:h-6 md:w-8"
-					>
-						&lt;
-					</a>
-				) : (
-					<span class="flex h-8 w-8 cursor-not-allowed items-center justify-center border border-white/5 bg-black text-neutral-800 md:h-6 md:w-8">
-						&lt;
-					</span>
-				)
-			}
-			<a
-				href="/projects"
-				class="flex h-8 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-emerald-500 hover:text-white md:h-6 md:w-8"
-				><Icon name="tabler:grid-dots" class="h-4 w-4" /></a
+		<!-- CENTER: SEISMOGRAPH & NAV (Grouped for Centering) -->
+		<div class="flex flex-1 items-center justify-center gap-8 xl:gap-12">
+			{/* SEISMOGRAPH */}
+			<div
+				class="flex items-center justify-center px-4 opacity-0 transition-opacity duration-500 md:opacity-100"
 			>
-			{
-				nextProject ? (
-					<a
-						href={`/projects/${nextProject.id}`}
-						class="flex h-8 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-[#2E5CFF] hover:text-white md:h-6 md:w-8"
-					>
-						&gt;
-					</a>
-				) : (
-					<span class="flex h-8 w-8 cursor-not-allowed items-center justify-center border border-white/5 bg-black text-neutral-800 md:h-6 md:w-8">
-						&gt;
-					</span>
-				)
-			}
+				{
+					entropy && entropy.length > 0 && (
+						<div class="h-8 w-[140px] xl:w-[180px]">
+							<ForensicSeismograph client:idle data={entropy} />
+						</div>
+					)
+				}
+			</div>
+
+			{/* NAV CONTROLS */}
+			<div class="flex shrink-0 items-center gap-1">
+				{
+					prevProject ? (
+						<a
+							href={`/projects/${prevProject.id}`}
+							class="flex h-8 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-[#2E5CFF] hover:text-white md:h-6 md:w-8"
+						>
+							&lt;
+						</a>
+					) : (
+						<span class="flex h-8 w-8 cursor-not-allowed items-center justify-center border border-white/5 bg-black text-neutral-800 md:h-6 md:w-8">
+							&lt;
+						</span>
+					)
+				}
+				<a
+					href="/projects"
+					class="flex h-8 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-emerald-500 hover:text-white md:h-6 md:w-8"
+					><Icon name="tabler:grid-dots" class="h-4 w-4" /></a
+				>
+				{
+					nextProject ? (
+						<a
+							href={`/projects/${nextProject.id}`}
+							class="flex h-8 w-8 items-center justify-center border border-white/10 bg-white/5 text-neutral-400 hover:bg-[#2E5CFF] hover:text-white md:h-6 md:w-8"
+						>
+							&gt;
+						</a>
+					) : (
+						<span class="flex h-8 w-8 cursor-not-allowed items-center justify-center border border-white/5 bg-black text-neutral-800 md:h-6 md:w-8">
+							&gt;
+						</span>
+					)
+				}
+			</div>
 		</div>
 
 		<!-- RIGHT: Date & Duration (Desktop Only) -->
@@ -116,7 +142,7 @@ const showMetrics =
 			</a>
 			{/* SONIC HEARTBEAT (Singularity Audit) */}
 			<div class="ml-4 flex items-center gap-4 border-l border-white/10 pl-4">
-				<DossierToggle client:load />
+				{presentation_mode === "deep_dive" && <DossierToggle client:load />}
 				<SonicHeartbeat client:load audioUrl={data.audio_url} />
 			</div>
 		</div>
@@ -125,99 +151,167 @@ const showMetrics =
 	<!-- ROW 2: METRICS (Deep Mode Only) -->
 	{
 		showMetrics && (
-			<div class="hidden w-full grid-cols-6 divide-x divide-white/10 border-t border-white/10 bg-black/50 md:grid">
-				{/* 0. TEAM SIZE (New First Column) */}
-				<div class="flex flex-col justify-center px-4 py-2">
-					<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Team</div>
-					<div class="font-mono text-xs font-bold text-white">{data.teamSize || "Core Team"}</div>
-				</div>
+			<div class="relative hidden w-full border-t border-white/10 bg-black/50 md:block">
+				{/* METRICS GRID (Foreground) */}
+				<div class="relative z-10 grid w-full grid-cols-6 divide-x divide-white/10">
+					{/* 0. TEAM SIZE (Pip Chart or Text) */}
+					<div class="col-span-1 border-r border-white/10 px-4 py-2">
+						{(() => {
+							// Parse "INT 37 / EXT 21" logic
+							const teamStr = data.teamSize || "";
+							const intMatch = teamStr.match(/INT\s*(\d+)/i);
+							const extMatch = teamStr.match(/EXT\s*(\d+)/i);
+							const coreMatch = teamStr.match(/Core\s*(\d+)/i);
 
-				{/* 1. COGS */}
-				{metrics.cogs ? (
-					<div class="flex flex-col justify-center px-4 py-2">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
-							{metrics.cogs.label}
-						</div>
-						<div class="font-mono text-sm font-bold text-white">{metrics.cogs.value}</div>
-					</div>
-				) : (
-					<div class="flex flex-col justify-center px-4 py-2 opacity-30">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">COGS</div>
-						<div class="font-mono text-sm font-bold text-white">N/A</div>
-					</div>
-				)}
+							const intCount = intMatch ? parseInt(intMatch[1]) : 0;
+							const extCount = extMatch ? parseInt(extMatch[1]) : 0;
+							const coreCount = coreMatch ? parseInt(coreMatch[1]) : 0;
 
-				{/* 2. PROFITABILITY */}
-				{metrics.profitability ? (
-					<div class="flex flex-col justify-center px-4 py-2">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
-							{metrics.profitability.label}
-						</div>
-						<div class="font-mono text-sm font-bold text-[#2E5CFF]">
-							{metrics.profitability.value}
-						</div>
+							if (intCount > 0 || extCount > 0) {
+								return (
+									<TeamPipChart
+										client:load
+										internal={intCount}
+										external={extCount}
+										core={coreCount}
+									/>
+								);
+							} else {
+								// Fallback
+								return (
+									<div class="flex h-full flex-col justify-center">
+										<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Team</div>
+										<div class="font-mono text-xs font-bold text-white">
+											{data.teamSize || "Core Team"}
+										</div>
+									</div>
+								);
+							}
+						})()}
 					</div>
-				) : (
-					<div class="flex flex-col justify-center px-4 py-2 opacity-30">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Margin</div>
-						<div class="font-mono text-sm font-bold text-white">N/A</div>
-					</div>
-				)}
 
-				{/* 3. GOVERNANCE */}
-				{metrics.governance ? (
-					<div class="flex flex-col justify-center px-4 py-2">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Governance</div>
-						<div class="flex items-center gap-2 font-mono text-xs text-neutral-300">
-							<span class="text-white">{metrics.governance.dcos} DCOs</span>
-							<span class="text-neutral-600">|</span>
-							<span class="truncate">{metrics.governance.ecos[0]}</span>
-						</div>
-					</div>
-				) : (
-					<div class="flex flex-col justify-center px-4 py-2 opacity-30">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Governance</div>
-						<div class="font-mono text-sm font-bold text-white">N/A</div>
-					</div>
-				)}
-
-				{/* 4. INTERVENTIONS */}
-				{metrics.interventions ? (
-					<div class="flex flex-col justify-center px-4 py-2">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
-							{metrics.interventions.label}
-						</div>
-						<div class="flex items-center gap-2">
-							<div class="font-mono text-sm font-bold text-white">
-								{metrics.interventions.count}
+					{/* 1. BOM / COGS */}
+					{metrics.cogs ? (
+						<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2">
+							<div class="flex w-full items-center justify-between">
+								{/* Left: BOM */}
+								<div class="flex flex-col">
+									<div class="text-[9px] tracking-widest text-neutral-500 uppercase">BOM</div>
+									<div class="font-mono text-sm font-bold text-white">{metrics.cogs.value}</div>
+								</div>
+								{/* Right: COGS */}
+								<div class="flex flex-col items-end opacity-50">
+									<div class="text-[9px] tracking-widest text-neutral-600 uppercase">COGS</div>
+									<div class="font-mono text-[10px] font-bold text-neutral-400">
+										{metrics.financial?.costOfGoodsSold?.length > 0
+											? metrics.financial.costOfGoodsSold[0]
+											: "--"}
+									</div>
+								</div>
 							</div>
-							<div class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
 						</div>
-					</div>
-				) : (
-					<div class="flex flex-col justify-center px-4 py-2 opacity-30">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Interventions</div>
-						<div class="font-mono text-sm font-bold text-white">N/A</div>
-					</div>
-				)}
+					) : (
+						<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2 opacity-30">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">BOM</div>
+							<div class="font-mono text-sm font-bold text-white">N/A</div>
+						</div>
+					)}
 
-				{/* 5. FINANCIAL */}
-				{metrics.financial && metrics.financial.toolingBudget ? (
-					<div class="flex flex-col justify-center px-4 py-2">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Tooling Budget</div>
-						<div class="font-mono text-sm font-bold text-white">
-							${metrics.financial.toolingActual.toLocaleString()}
-							<span class="ml-1 text-[10px] text-neutral-500">
-								/ ${metrics.financial.toolingBudget.toLocaleString()}
-							</span>
+					{/* 2. MARGIN */}
+					{metrics.profitability ? (
+						<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
+								{metrics.profitability.label}
+							</div>
+							<div class="font-mono text-sm font-bold text-[#2E5CFF]">
+								{metrics.profitability.value}
+							</div>
 						</div>
-					</div>
-				) : (
-					<div class="flex flex-col justify-center px-4 py-2 opacity-30">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Tooling Budget</div>
-						<div class="font-mono text-sm font-bold text-white">N/A</div>
-					</div>
-				)}
+					) : (
+						<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2 opacity-30">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Margin</div>
+							<div class="font-mono text-sm font-bold text-white">N/A</div>
+						</div>
+					)}
+
+					{/* 3. GOVERNANCE (ECO / DCD) */}
+					{metrics.governance ? (
+						<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2">
+							<div class="flex items-center justify-between gap-4">
+								{/* Left: ECOs */}
+								<div class="flex flex-col">
+									<div class="text-[9px] tracking-widest text-neutral-500 uppercase">ECOs</div>
+									<div class="font-mono text-xs text-white">
+										{metrics.governance.ecos && metrics.governance.ecos.length > 0 ? (
+											<span
+												class="cursor-help border-b border-dashed border-white/20 hover:border-white/50"
+												title={metrics.governance.ecos.join(", ")}
+											>
+												{metrics.governance.ecos[0]}
+											</span>
+										) : (
+											<span class="opacity-50">--</span>
+										)}
+									</div>
+								</div>
+								{/* Right: DCDs */}
+								<div class="flex flex-col items-end">
+									<div class="text-[9px] tracking-widest text-neutral-500 uppercase">DCDs</div>
+									<div class="font-mono text-xs font-bold text-white">
+										{metrics.governance.dcos}
+									</div>
+								</div>
+							</div>
+						</div>
+					) : (
+						<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2 opacity-30">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Governance</div>
+							<div class="font-mono text-sm font-bold text-white">N/A</div>
+						</div>
+					)}
+
+					{/* 4. INTERVENTIONS */}
+					{metrics.interventions ? (
+						<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
+								{metrics.interventions.label}
+							</div>
+							<div class="flex items-center gap-2">
+								<div class="font-mono text-sm font-bold text-white">
+									{metrics.interventions.count}
+								</div>
+								<div class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
+							</div>
+						</div>
+					) : (
+						<div class="flex flex-col justify-center px-4 py-2 opacity-30">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Interventions</div>
+							<div class="font-mono text-sm font-bold text-white">N/A</div>
+						</div>
+					)}
+
+					{/* 5. FINANCIAL */}
+					{metrics.financial && metrics.financial.toolingBudget ? (
+						<div class="flex flex-col justify-center px-4 py-2">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
+								Tooling Budget
+							</div>
+							<div class="font-mono text-sm font-bold text-white">
+								${metrics.financial.toolingActual.toLocaleString()}
+								<span class="ml-1 text-[10px] text-neutral-500">
+									/ ${metrics.financial.toolingBudget.toLocaleString()}
+								</span>
+							</div>
+						</div>
+					) : (
+						<div class="flex flex-col justify-center px-4 py-2 opacity-30">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
+								Tooling Budget
+							</div>
+							<div class="font-mono text-sm font-bold text-white">N/A</div>
+						</div>
+					)}
+				</div>
 			</div>
 		)
 	}

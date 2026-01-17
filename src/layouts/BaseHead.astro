@@ -39,10 +39,9 @@ import JetBrainsMono from "@fontsource-variable/jetbrains-mono/files/jetbrains-m
 <script is:inline>
 	// This code is inlined in the head to make it instant & blocking.
 	const getThemePreference = () => {
-		if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-			return localStorage.getItem("theme");
-		}
-		return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+		// FORCE DARK MODE (User Request 2026-01-16)
+		// We ignore localStorage because we want to enforce the new "Forever Dark" policy.
+		return "dark";
 	};
 	const isDark = getThemePreference() === "dark";
 	document.documentElement.classList[isDark ? "add" : "remove"]("dark");
