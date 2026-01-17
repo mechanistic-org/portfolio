@@ -62,14 +62,39 @@ const SonicHeartbeat: React.FC<SonicHeartbeatProps> = ({ audioUrl }) => {
 	// --- EINTHOVEN'S TRIANGLE (The P-Q-R-S-T Complex) ---
 	// A calibrated path representing a single cardiac cycle.
 	// 0,10 (Isoelectric) -> P Wave -> Q dip -> R spike -> S dip -> T Wave -> Isoelectric
+	// --- PATHS ---
+	// ECG: 11 Points (M + 10 Ls)
 	const ecgPath =
 		"M 0,10 L 10,10 L 12,8 L 14,10 L 15,11 L 18,-5 L 21,14 L 23,10 L 26,6 L 30,10 L 50,10";
 
 	// Heart Rate Logic
-	// Resting: 60 BPM (1s duration)
-	// Tachycardia (Hover): 100 BPM (0.6s duration)
-	// Perturbation (Playing): Random jitter handled via transform
 	const beatDuration = isHovered ? 0.6 : 1.2;
+
+	// Animation Cycle Logic (Idle / Ready State)
+	// Cycle: Pulse (ECG Only) -> Flash (ECG + EQ Background)
+	const [animPhase, setAnimPhase] = useState<"ecg" | "flash">("ecg");
+
+	useEffect(() => {
+		// If playing, we stop the cycle.
+		if (isPlaying) {
+			setAnimPhase("ecg");
+			return;
+		}
+
+		let timeout: ReturnType<typeof setTimeout>;
+		if (animPhase === "ecg") {
+			// ECG Phase: ~40bpm = 1.5s
+			timeout = setTimeout(() => {
+				setAnimPhase("flash");
+			}, 1500);
+		} else {
+			// Flash Phase: ~20bpm hold = 1.5s (Reduced from 3s to clear frame faster)
+			timeout = setTimeout(() => {
+				setAnimPhase("ecg");
+			}, 1500);
+		}
+		return () => clearTimeout(timeout);
+	}, [isPlaying, animPhase]);
 
 	return (
 		<div
@@ -80,7 +105,9 @@ const SonicHeartbeat: React.FC<SonicHeartbeatProps> = ({ audioUrl }) => {
 			title={isPlaying ? "Abort Protocol" : "Execute Protocol: Podcast"}
 		>
 			{/* Container (Phosphor Screen) */}
-			<div className="relative h-8 w-16 overflow-hidden rounded-sm border border-white/10 bg-black/40 backdrop-blur-sm">
+			<div
+				className={`relative h-8 w-16 overflow-hidden rounded-sm border bg-black/40 backdrop-blur-sm transition-colors duration-300 ${isPlaying ? "border-emerald-500/50 shadow-[0_0_10px_rgba(16,185,129,0.2)]" : "border-white/10"}`}
+			>
 				{/* The Grid (Subtle Background) */}
 				<div
 					className="absolute inset-0 opacity-10"
@@ -91,62 +118,134 @@ const SonicHeartbeat: React.FC<SonicHeartbeatProps> = ({ audioUrl }) => {
 					}}
 				/>
 
-				{/* The Trace */}
+				{/* Headphone Icon (Top Left, No Box) - Idle Only */}
+				<AnimatePresence>
+					{!isPlaying && (
+						<motion.div
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 0.5 }}
+							exit={{ opacity: 0 }}
+							className="absolute top-1 left-1 z-10 flex h-3 w-3 items-center justify-center"
+						>
+							<svg
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth="2"
+								className="h-2.5 w-2.5 text-white"
+							>
+								<path d="M11 5L6 9H2v6h4l5 4V5z" />
+								<path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+								<path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+							</svg>
+						</motion.div>
+					)}
+				</AnimatePresence>
+
+				{/* The Trace / Visualization */}
 				<svg viewBox="0 -10 50 30" fill="none" className="h-full w-full overflow-visible">
 					<AnimatePresence mode="wait">
 						{!isPlaying ? (
-							/* IDLE STATE: The Einthoven ECG (Green) */
-							<motion.path
-								key="ecg"
-								d={ecgPath}
-								stroke="#00ff00"
-								strokeWidth="1.5"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								fill="none"
-								initial={{ opacity: 0 }}
-								animate={{ opacity: 1, pathLength: [0, 1] }}
-								exit={{ opacity: 0 }}
-								transition={{
-									pathLength: { duration: 1.2, repeat: Infinity, ease: "linear" },
-									opacity: { duration: 0.3 },
-								}}
-							/>
+							/* READY STATE: Cycle (ECG <-> Flash) */
+							<>
+								{/* Background Flash (EQ) - Only during Flash Phase */}
+								<motion.g
+									key="idle-flash"
+									transform="translate(0, -6)"
+									initial={{ opacity: 0 }}
+									animate={{ opacity: animPhase === "flash" ? 0.3 : 0 }}
+									transition={{ duration: 0.5 }}
+								>
+									{Array.from({ length: 11 }).map((_, i) => (
+										<motion.rect
+											key={`flash-${i}`}
+											x={i * 4.54}
+											y="0"
+											width="3.5"
+											height="32"
+											fill="url(#led-gradient)"
+											mask="url(#segment-mask)"
+											// Varied heights for "Flash" (Noise pattern)
+											animate={{
+												scaleY: [0.3, 1.0, 0.3].map(
+													(v) => v * (0.2 + (i % 2) * 0.3 + Math.random() * 0.5),
+												),
+											}}
+											transition={{
+												duration: 1.5,
+												repeat: Infinity,
+												ease: "easeInOut",
+											}}
+										/>
+									))}
+								</motion.g>
+
+								{/* Dynamic ECG: Draws during 'ecg' phase, Holds then Decays during 'flash' phase */}
+								{animPhase === "ecg" ? (
+									<motion.path
+										key="ecg-draw"
+										d={ecgPath}
+										stroke="#00ff00"
+										strokeWidth="1.5"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										fill="none"
+										initial={{ pathLength: 0, opacity: 1 }}
+										animate={{ pathLength: 1, opacity: 1 }}
+										transition={{ duration: 1.5, ease: "linear" }}
+									/>
+								) : (
+									<motion.path
+										key="ecg-hold"
+										d={ecgPath}
+										stroke="#00ff00"
+										strokeWidth="1.5"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										fill="none"
+										initial={{ pathLength: 1, opacity: 1 }}
+										animate={{ pathLength: 1, opacity: 0 }} // Decay to empty frame
+										transition={{
+											opacity: { duration: 0.5, delay: 0.5, ease: "easeOut" },
+										}}
+									/>
+								)}
+							</>
 						) : (
-							/* ACTIVE STATE: Digital EQ Visualization */
-							/* Segmented LED Bars (Green -> Yellow -> Red) */
-							<g transform="translate(4, 5)">
-								{/* EQ Container: 8 Bars */}
-								{Array.from({ length: 8 }).map((_, i) => (
+							/* PLAYING STATE: ONLY EQ (Full Power) */
+							<motion.g
+								key="eq-active"
+								transform="translate(0, -6)"
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+							>
+								{Array.from({ length: 11 }).map((_, i) => (
 									<motion.rect
 										key={`bar-${i}`}
-										x={i * 5.5} // Spacing
+										x={i * 4.54}
 										y="0"
-										width="4"
-										height="20"
+										width="3.5"
+										height="32"
 										fill="url(#led-gradient)"
-										// Mask creates the "segment" look
 										mask="url(#segment-mask)"
-										style={{
-											transformBox: "fill-box",
-											transformOrigin: "bottom",
-										}}
+										style={{ transformBox: "fill-box", transformOrigin: "bottom" }}
 										animate={{
-											// Animate ScaleY to simulate audio levels
-											scaleY: [0.2, 0.8, 0.4, 0.9, 0.3, 0.7, 0.2].map((v) =>
-												Math.min(1, Math.max(0.1, v * (0.5 + Math.random()))),
+											scaleY: [0.1, 0.9, 0.3, 0.95, 0.2, 0.8, 0.1].map((v) =>
+												Math.min(1, Math.max(0.05, v * (0.5 + Math.random()))),
 											),
 										}}
 										transition={{
-											duration: 0.4 + Math.random() * 0.2,
+											// Iambic Cadence: Slower, rhythmic (approx 0.6s - 1.0s)
+											duration: 0.6 + Math.random() * 0.4,
 											repeat: Infinity,
 											repeatType: "mirror",
-											ease: "linear",
-											delay: i * 0.05,
+											ease: "easeInOut", // Organic ease
+											delay: i * 0.06, // Slower wave spread
 										}}
 									/>
 								))}
-							</g>
+							</motion.g>
 						)}
 					</AnimatePresence>
 
@@ -154,8 +253,8 @@ const SonicHeartbeat: React.FC<SonicHeartbeatProps> = ({ audioUrl }) => {
 					<defs>
 						<linearGradient id="led-gradient" x1="0" x2="0" y1="1" y2="0">
 							<stop offset="0%" stopColor="#00ff00" /> {/* Low / Green */}
-							<stop offset="60%" stopColor="#ffff00" /> {/* Mid / Yellow */}
-							<stop offset="100%" stopColor="#ff0000" /> {/* High / Red */}
+							<stop offset="70%" stopColor="#ffff00" /> {/* Mid / Yellow (Higher threshold) */}
+							<stop offset="95%" stopColor="#ff0000" /> {/* High / Red (Less clipping) */}
 						</linearGradient>
 						<mask id="segment-mask">
 							{/* Visible Area */}
@@ -171,18 +270,10 @@ const SonicHeartbeat: React.FC<SonicHeartbeatProps> = ({ audioUrl }) => {
 							height="2"
 							patternUnits="userSpaceOnUse"
 						>
-							{/* 1.5px Visible, 0.5px Gap? No. Pattern fills with what we want to DRAW. */}
-							{/* We are drawing on the MASK. White = Show, Black = Hide. */}
-							{/* If we want gaps, we need BLACK stripes. */}
 							<rect x="0" y="1.5" width="4" height="0.5" fill="black" />
 						</pattern>
 					</defs>
 				</svg>
-
-				{/* Status Text (Tiny) */}
-				<div className="absolute top-0.5 right-1 font-mono text-[6px] tracking-tighter text-white/50">
-					{isPlaying ? "VOX" : isHovered ? "100" : "60"}
-				</div>
 			</div>
 		</div>
 	);
