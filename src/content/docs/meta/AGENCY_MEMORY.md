@@ -97,9 +97,9 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **AEO Optimization & Visual Tuning.**
-- **Next Step:** Solidify Metadata Pipelines clearly for Answer Engines.
-- **Context:** **"The Pulse"** is refined. SonicHeartbeat is now a "Human" signal. AEO Audit confirmed structural readiness.
+- **Active Task:** **Prompt Engineering (Phase 3: Deep Dive).**
+- **Next Step:** Mine chat logs using `conversation-miner` to extract "Gold" from Triple Distilled projects.
+- **Context:** **RESUME SIDE QUEST COMPLETE.** The Master Resume is now Forensic-Grade (Metrics, Awards, DCD Governance). The LinkedIn Banner is finalized (V6 Shifted Hybrid).
 
 * **Key Decision (Viz-Audio):** **"The SonicHeartbeat Standard"** - Idle = Pulse (Cycle), Active = Full EQ. Icon = Speaker (not Headphone).
 * **Key Decision (SEO):** **"The Answer Engine Verification"** - We are AEO Ready. JSON-LD for Projects is the structural key for Knowledge Graph entity recognition.
@@ -130,6 +130,7 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Identity):** **"The Forensic Architect"** - The Brand Voice is "Hyper-Functional Brutalist." We do not use fluff. We use density (IP69K, AZ91D, 5-Micron). The Master Resume logic is "Semantic Density" (for AI) + "Visual Hooks" (for Humans).
 * **Key Decision (Formatting):** **"The Double Spacing Law"** - LinkedIn collapses standard lists. We MUST use **Double Spacing** (Empty Lines) effectively between bullets to force a vertical list render.
 * **Key Decision (Sync):** **"The Datasheet Sync"** - `src/config/work_history.json` is the Source of Truth for the `/resume/one-pager` "Datasheet" View. It has been manually synced to the Master Resume.
+* **Key Decision (Resume):** **"The PDF Single Source"** - `resume.eriknorris.com` is a Cloudflare Page Rule redirecting to `assets.eriknorris.com/resume/Erik_Norris_CV.pdf`. We upload the canonical PDF to R2 under this legacy name to maintain the redirect.
 
 - **Active Thread:** `fed5af15-896c-4fa9-bfe9-85663ea21d01` (DigiME Restoration & Mining).
 - **Active Thread:** `397cf7f1-2a3c-4139-8879-9b80a9758ca7` (SonicHeartbeat & AEO Audit).

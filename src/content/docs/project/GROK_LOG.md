@@ -108,3 +108,25 @@
 2.  **Localhost Air Gap:** The Agent must valididate Symlinks before questioning existence. A failure locally is not a failure globally.
 3.  **Creative License Limits:** Code is mutable; Content/Assets are immutable (unless explicitly in a "Constructed Reality" context like _Dreamjob_ OR explicitly authorized).
 4.  **ErikNorris Exception:** For defined "Dream" projects, Synthesis is allowed if no historical truth exists.
+
+## 📄 IX. The Law of the Master Resume (The Single Source Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-01-17
+**Context:** "Version Drift" between the website resume, the PDF resume, and the `eriknorris-assets` repo.
+**The Law:**
+
+1.  **CODE IS TRUTH:** `src/config/resume_master.ts` is the generator for ALL formats.
+2.  **ONE PDF:** The canonical PDF lives in `public/assets/resume/`. We do NOT store PDFs in `eriknorris-assets` anymore.
+3.  **VANITY COMPATIBILITY:** We explicitly patch the R2 bucket (`Erik_Norris_CV.pdf`) to keep the `resume.eriknorris.com` redirect alive, but the _source_ is always the repo PDF.
+
+## 🖼️ X. The LinkedIn Standard (The Banner Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-01-17
+**Context:** Standard banners were obstructed by the Profile Picture (Avatar), ruining the narrative flow.
+**The Law:**
+
+1.  **SHIFT RIGHT:** The semantic content of the banner MUST be shifted **400px to the Right**.
+2.  **THE VOID:** The Left 400px is reserved for the Avatar. It should be abstract or empty (Void).
+3.  **ASPECT RATIO:** 4:1 (1584x396px). Do not rely on LinkedIn's auto-crop.

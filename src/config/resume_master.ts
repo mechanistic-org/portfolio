@@ -11,46 +11,54 @@ export const resumeMaster = {
 	header: {
 		name: "ERIK NORRIS",
 		title: "Sr. Staff Mechanical Engineer / Designer | Forensic Architect",
-		tagline: "Technical Polyglot | Concept to Mass Production",
+		tagline: "Autodidact | Technical Polyglot | Concept to Mass Production | BBQs to Dental Chairs",
 		contact: {
 			location: "Redwood City, CA",
 			// phone: "Removed for Privacy",
 			email: "erik@eriknorris.com",
-			linkedin: "linkedin.com/in/eriklincicum",
-			portfolio: "www.eriknorris.com",
+			linkedin: "linkedin.com/in/eriknorris",
+			portfolio: "eriknorris.com",
 		},
 	},
 	summary: {
 		// Mode B: Forensic Architect Summary
 		executive:
-			"Forensic Product Architect operating at the volatile intersection of Industrial Design and Mass Production. Specializes in recovering stalled high-complexity programs (Robotics, Audio, Consumer) by applying rigorous forensic analysis to supply chain, thermal, and tolerance failures. Bridges the gap between 'Vision' and 'Yield' with a brutalist focus on functionality, cost, and manufacturing reality. Proven track record of rescuing NPI phases and delivering Class A cosmetic products in high-ambiguity environments.",
+			"I architect the hardware interface for the physical world—from the heat of a Fissler BBQ to the surgical precision of a KaVo Dental Chair. My career is defined by a relentless drive to translate 'Concept' into 'Mass Production' across every conceivable domain. I have helped validate the most beautiful PC ever made (SGI Indigo), engineered the Gold Standard for pro audio consoles (Avid D-Control), and optimized the OG gaming platform (Xbox). Whether it's managing the 150-watt thermal load of a retinal headset, ensuring IP69K washdown compliance for food robotics, or guiding a Class III cardiac catheter through the FDA—the physics change, but the mission remains the same: Zero Yield Loss. Zero Cosmetic Defects. Total Functional Integrity.",
 	},
 	competencies: {
 		engineering: [
+			"Forensic Engineering",
 			"Mechanical Architecture",
-			"Complex 3D Surfacing (Pro/E, Creo)",
+			"Complex Surface Modeling (Pro/E, Creo)",
 			"Mechanism Design",
 			"Thermal Management (Active/Passive)",
 		],
 		manufacturing: [
+			"New Product Introduction (NPI)",
+			"Design for Manufacturing (DFM)",
+			"Root Cause Analysis & Yield Improvement",
 			"Injection Molding (Class A)",
-			"Die Casting (Mg/Al)",
+			"Die Casting & Thixomolding",
 			"Sheet Metal (Progressive)",
-			"Thixo-molding",
-			"CNC",
 		],
 		tools: [
 			"PTC Creo / Pro/ENGINEER",
+			"PLM (Windchill Admin)",
 			"Onshape / SolidWorks",
-			"Windchill (Admin)",
-			"Intralink / AutoCAD",
-			"DVT/HALT/HASS",
+			"GD&T / Tolerance Analysis",
 		],
 		regulatory: [
 			"Technical Program Management",
-			"UL/FCC/CE Compliance",
+			"Supplier Qualification & Strategy",
+			"Regulatory Compliance (UL/FCC/CE)",
 			"Class III Medical Device Standards",
-			"Vendor Qualification",
+		],
+		ai: [
+			"Sovereign AI Systems Architecture",
+			"Retrieval-Augmented Generation (RAG)",
+			"Structured Data Synthesis",
+			"Advanced Prompt Engineering",
+			"Digital Forensics",
 		],
 	},
 	experience: [
