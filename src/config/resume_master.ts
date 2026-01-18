@@ -11,7 +11,7 @@ export const resumeMaster = {
 	header: {
 		name: "ERIK NORRIS",
 		title: "Sr. Staff Mechanical Engineer / Designer | Forensic Architect",
-		tagline: "Autodidact | Technical Polyglot | Concept to Mass Production | BBQs to Dental Chairs",
+		tagline: "Autodidact Technical Polyglot | Concept to Production | BBQs to Dental Chairs",
 		contact: {
 			location: "Redwood City, CA",
 			// phone: "Removed for Privacy",
