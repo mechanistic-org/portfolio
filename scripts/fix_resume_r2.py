@@ -34,8 +34,7 @@ def upload_resume_patch():
 
     # Targets
     targets = [
-        f"resume/{filename}",          # New Canonical
-        "resume/Erik_Norris_CV.pdf"    # Legacy Redirection
+        f"resume/{filename}"          # New Canonical Only
     ]
 
     with open(local_path, 'rb') as data:
