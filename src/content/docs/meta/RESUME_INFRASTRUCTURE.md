@@ -1,38 +1,65 @@
-# Resume Infrastructure & Redirect Protocol
+# Resume Infrastructure: The "Pulse" Protocol
 
 > [!IMPORTANT]
 > **Vanity URL:** `resume.eriknorris.com`
-> **Target:** `assets.eriknorris.com/resume/[FILENAME].pdf`
+> **Target:** `assets.eriknorris.com/resume/Erik_Norris_Resume_Current.pdf`
+> **Automation Level:** 95% (User Initiated, Script Executed)
 
-## Architecture
+## 1. The Strategy
 
-The "Resume" link is a **Cloudflare Page Rule Redirect**, not a DNS record or a CNAME.
+We moved from manual PDF exports to a **Code-First Pipeline**:
 
-### 1. The Trigger
+1.  **Source of Truth:**
+    - **Header/Skills:** `src/config/resume_master.ts`
+    - **Project Data:** `src/content/projects/*.mdx` (via Reverse Hydration)
+    - **Page Layout:** `src/pages/resume/index.astro` (Tailwind + CSS Print Media)
+2.  **Output:**
+    - **Public Asset:** `Erik_Norris_Resume_Current.pdf` (Stable URL, never changes).
+    - **Archive:** `archive/Erik_Norris_..._YYYY-MM-DD.pdf` (Historical record).
 
-- **Source URL:** `resume.eriknorris.com/*`
-- **Method:** Page Rule (Cloudflare Dashboard > Rules > Page Rules)
-- **Action:** 302 Temporary Redirect (or 301 Permanent)
+## 2. The Pipeline
 
-### 2. The Target (Source of Truth)
+To update the resume, run the FULL CYCLE:
 
-- **Destination:** `https://assets.eriknorris.com/resume/Erik_Norris_Sr_Staff_Forensic_Architect_2026.pdf`
-- **Storage:** Cloudflare R2 Bucket (`projects`) via `assets.eriknorris.com` domain.
+```bash
+# 1. Reverse Hydrate (MDX -> Text Prompts)
+python scripts/hydrate_content.py --reverse
 
-## How to Update the Resume
+# 2. Generate PDF (Localhost -> PDF)
+# Note: Requires 'npm run dev' running on port 4321
+node scripts/generate_resume_pdf.cjs
+```
 
-When you have a new PDF version, you must update TWO places:
+### Script Manifest
 
-1.  **The Asset (R2):**
-    - Save PDF to: `public/assets/resume/`
-    - Run Sync: `python scripts/sync_r2.py` (or `python scripts/fix_resume_r2.py`)
-    - _Result:_ The file exists in the cloud.
+- **`hydrate_content.py`**:
+  - Reads `src/content/projects/*.mdx`.
+  - Extracts "War Stories" and "Forensic Metrics".
+  - **Filter Logic:** Explicitly excludes "Berry Creek" from public artifacts.
+  - Updates: `public/assets/prompts/RESUME_READY.txt` and `public/assets/branding/LINKEDIN_READY.txt`.
+- **`generate_resume_pdf.cjs`**:
+  - Connects to `http://localhost:4321/resume` via Puppeteer.
+  - "Prints" the page to PDF (ensures pixel-perfect font rendering).
+  - Saves stable copy (`Current.pdf`) and timestamped copy (`Archive`).
 
-2.  **The Redirect (Cloudflare):**
-    - Go to Cloudflare Dashboard.
-    - Edit the Page Rule for `resume.eriknorris.com`.
-    - Update the **Destination URL** to match the new filename.
-    - _Result:_ The vanity URL points to the new file.
+## 3. Deployment & Redirects
 
-> [!TIP]
-> Keeping the filename consistent (e.g., `Erik_Norris_CV.pdf`) avoids step 2, but using specific filenames (e.g., `_2026_Forensic_Architect.pdf`) is better for SEO and versioning.
+The vanity URL `resume.eriknorris.com` is a **Cloudflare Page Rule** (302 Redirect).
+
+- **Old Way:** Update Page Rule every time filename changes.
+- **New Way (The Lazy Option):** The Page Rule points to `Erik_Norris_Resume_Current.pdf`. We simply overwrite this file in R2.
+
+**Deployment Trigger:**
+Pushing to `main` triggers Cloudflare Pages build, which deploys the `public/assets/resume` folder to the assets bucket.
+
+```bash
+git add .
+git commit -m "feat: update resume"
+git push origin main
+```
+
+## 4. Troubleshooting
+
+- **Title Wrapping:** Fixed by forcing `whitespace-nowrap` and reducing font size in `index.astro`.
+- **EBUSY Error:** Occurs if `Erik_Norris_Resume_Current.pdf` is open in Acrobat/Browser. **Close the file** before running the script.
+- **"Junk" PDF:** If the PDF looks like raw text, `generate_resume_pdf.cjs` fell back to text-mode (legacy). Ensure it's using the Puppeteer logic.
