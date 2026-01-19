@@ -33,7 +33,17 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
   - Need higher fidelity data (commits, email volume?) or a more interactive UI (tooltips) to explain the lines.
   - See `implementation_plan.md` for historical logic.
 
-### 1. **Project C|24 (Curtis)**
+### 2. **Project Hyphen (Forensic Strategy)**
+
+- **Status:** **PENDING** (Frozen Jan 2026).
+- **Goal:** Backport Resume "Red Gold" to Portfolio MDX.
+- **Key Targets:**
+  - **The Blind-Mate:** Do not just say "modular." Describe the kinematic alignment and float mechanisms that allow hot-swapping 350+ actuators.
+  - **The Sealing Logic:** Define the specific IP69K strategy (Gasket compression %s, Breather vents, Cable pass-throughs).
+  - **The MTTR Metric:** Move the "Hours to Minutes" stat from text into the `metrics.yaml` structure.
+- **Action:** Execute `conversation-miner` when the "Hack Pack" Prompt Engineering backlog is clear.
+
+### 3. **Project C|24 (Curtis)**
 
 - **Role:** SME Oracle / Evidence Locker
 - **URL:** [NotebookLM: C24](https://notebooklm.google.com/notebook/b8f893fe-234c-44ca-9d92-8fff6f82e53d?authuser=1)
@@ -97,10 +107,11 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Prompt Engineering (Phase 3: Deep Dive).**
-- **Next Step:** Mine chat logs using `conversation-miner` to extract "Gold" from Triple Distilled projects.
-- **Context:** **RESUME SIDE QUEST COMPLETE.** The Master Resume is now Forensic-Grade (Metrics, Awards, DCD Governance). The LinkedIn Banner is finalized (V6 Shifted Hybrid).
+- **Active Task:** **Mining Operations (Phase 4: Extraction).**
+- **Next Step:** Inject extracted "Red Gold" into target projects (`SC48`, `C24`, `Hyphen`).
+- **Context:** **RESUME SIDE QUEST COMPLETE.** The Master Resume is now Forensic-Grade (Metrics, Awards, DCD Governance). The LinkedIn Banner is finalized (V6 Shifted).
 
+* **Key Decision (Audio):** **"The Iron Dome"** - The Audio Host must be blind to instructions. We use `PODCAST_READY.txt` (Sanitized) and explicitly forbid instructional headers in the script source.
 * **Key Decision (Viz-Audio):** **"The SonicHeartbeat Standard"** - Idle = Pulse (Cycle), Active = Full EQ. Icon = Speaker (not Headphone).
 * **Key Decision (SEO):** **"The Answer Engine Verification"** - We are AEO Ready. JSON-LD for Projects is the structural key for Knowledge Graph entity recognition.
 * **Key Decision (Aesthetics):** **"The Iambic Cadence"** - Artificial strobing is rejected. Active visualizations must tune to "Human Breath" rhythms (~0.8s, EaseInOut) to align with the "Forensic/Organic" voice.
@@ -111,7 +122,8 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Viz-Deprecated):** `ArchiveSankey`, `LivingGantt`, and `SkillsGraph.tsx` have been DEPRECATED and removed/disabled to "kill the noise".
 * **Key Decision (Data):** **"The Event Horizon"** - `multiverse.json` and `skills.json` were PURGED (2026-01-08). The architecture is now "Pure Hyperspace" (Dynamic Astro Collections only).
 * **Key Decision (Architecture):** **"The Sovereign Pipeline"** - `eriknorris-workspace\R2_MASTER` is the **SOURCE OF TRUTH** (The Vault). `process_images.py` reads from here. `eriknorris-assets\R2_STAGING` is the **PUBLISHED MIRROR** (The Web). we DO NOT edit Staging directly.
-* `src/content/docs/prompts/NOTEBOOK_REFINE.md`: **The Extraction Standard (The Voice).** (How we mine data).
+* `public/assets/prompts/BOLUS_READY.txt`: **The Extraction Standard (JSON).** (How we mine data).
+* `public/assets/prompts/REPORT_READY.txt`: **The Report Standard (Markdown).** (The Narrative).
 * `src/content/docs/prompts/BRANDING_PROMPT.md`: **The Design System.** (How we speak).
 * `src/content/docs/STYLE_GUIDE.md`: **The Token Map.** (How we style).
 * **Key Decision (Protocol):** **"Operation Chronos"** - Use NotebookLM to generate `HUNTING_LIST.md` (dense tables) and export to HTML for physical printing ("Low Friction" asset retrieval).
@@ -131,6 +143,12 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Formatting):** **"The Double Spacing Law"** - LinkedIn collapses standard lists. We MUST use **Double Spacing** (Empty Lines) effectively between bullets to force a vertical list render.
 * **Key Decision (Sync):** **"The Datasheet Sync"** - `src/config/work_history.json` is the Source of Truth for the `/resume/one-pager` "Datasheet" View. It has been manually synced to the Master Resume.
 * **Key Decision (Resume):** **"The PDF Single Source"** - `resume.eriknorris.com` is a Cloudflare Page Rule redirecting to `assets.eriknorris.com/resume/Erik_Norris_CV.pdf`. We upload the canonical PDF to R2 under this legacy name to maintain the redirect.
+* **Key Decision (Brand):** **"The Architect Narrative"** - The definitive tagline is _"Autodidact Technical Polyglot | Concept to Production | BBQs to Dental Chairs."_ This captures the range from "Fissler BBQ" to "KaVo Dental" (Micro to Macro).
+* **Key Decision (LinkedIn):** **"Sovereign Decoupling"** - `linkedin_master.ts` is the Source of Truth for LinkedIn (Social Feed), decoupled from `resume_master.ts` (Legal PDF). This allows for Double Spacing (`\n\n`) and Unicode Bold (`𝗧𝗲𝘅𝘁`) which break PDF renderers.
+* **Key Decision (Tooling):** **"Unicode Bold Script"** - `scripts/compile_linkedin.py` is the sovereign tool that converts Markdown `**bold**` into Unicode Mathematical Sans Bold strings for LinkedIn paste-ability.
+* **Key Decision (Deployment):** **"The Two-Track Protocol"** - Resume updates require TWO actions:
+  1.  `git push` -> Updates Website (`eriknorris.com`), Nav Button, and HTML view.
+  2.  `python scripts/fix_resume_r2.py` -> Updates Vanity URL (`resume.eriknorris.com`) via R2.
 
 - **Active Thread:** `fed5af15-896c-4fa9-bfe9-85663ea21d01` (DigiME Restoration & Mining).
 - **Active Thread:** `397cf7f1-2a3c-4139-8879-9b80a9758ca7` (SonicHeartbeat & AEO Audit).

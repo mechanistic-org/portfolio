@@ -646,36 +646,37 @@ documents: []
 draft: false
 duration: Active
 employer: Digidesign
-endDate: 2007-01-15
+endDate: 2007-11-20
 audio_url: /assets/r2/c24/c24-briefing.m4a
 forensic_metrics:
-  financial: SRP $9,995.00 / Forecast 1k units/yr
-  technical: 19 PCBs / 24 Motorized Faders / 16 Preamps
-forensic_summary:
-  Managed mechanical architecture of 19 PCBs into a constrained chassis
-  (C|24) to replace legacy Control|24. Resolved critical 'no-bid' sheet metal crisis
-  via domestic bridge tooling and rescued ABS side-cap yield using gravity-assisted
-  paint fixtures.
+  financial: Target MSRP $9,995 (Maintained); COGS Reduced 4.0% ($2,036 -> $1,870); Gross Margin 51.20%; NPV $2.4M @ 12%; Eliminated Focusrite Royalty.
+  technical: Managed 19 PCB Layouts (50+ DCDs released); MicPre I/O required 12 DCD revisions; ECO 13707 executed to clarify tolerances.
+  process: Reduced plastic flatness deviation from >2.50mm to <0.50mm via 'Vertical Hanging'; Qualified 33+ welded stud Top Panel process after initial 'No-Bid'.
+forensic_summary: "The C|24 (Codename: Curtis) was a high-stakes platform refresh to eliminate royalties and achieve RoHS compliance. I solo-architected the mechanical integration of 19 PCBs and resolved three 'Red' level crises: the 'Banana' Defect (warped ABS requiring a custom Vertical Hanging process), the 'No-Bid' Top Panel (requiring a dual-source domestic bridge strategy), and the 'Kenny' Catastrophe (Sheet Metal cosmetic failure)."
 gallery: []
 heroImage: /assets/r2/c24/c24-hero-01-xl.webp
 industry: Pro Audio
 links: []
 metrics:
   cogs:
-    label: Direct Material (BOM)
-    value: $2,097.37
+    label: Est. Direct Material
+    value: $1,870.00
   financial:
     costOfGoodsSold:
-      - "$2,621.71"
-    margins: []
+      - "$1,870 (Phase 2 Target)"
+      - "$2,036 (Phase 1 Baseline)"
+    margins:
+      - "Gross Margin 51.2%"
     toolingActual: 34860
     toolingBudget: 180000
+    royaltySaved: "$200/unit (Focusrite Elimination)"
   governance:
     dcos: 19
     ecos:
-      - EC012262
-      - EC012263
+      - ECO12262
+      - ECO12263
       - ECO12740
+    dcdCount: 19
   interventions:
     count: 6
     label: Confirmed Saves
@@ -686,12 +687,24 @@ metrics:
       - ECO 12263 (Sheet Metal)
       - ECO 12993 (Headphone Jack)
   profitability:
-    label: Standard Margin
-    value: 56.2%
+    label: Gross Margin
+    value: 58%
   war_stories:
-    - 0
-    - 1
-    - 2
+    - label: "The 'Banana' Defect"
+      value: "Warped & Sticky ABS"
+      description: "Resolved critical 2.5mm warpage AND 'sticky paint' failure on Jetcrown end-caps via Vertical Hanging process."
+    - label: "The 'At Risk' Paradox"
+      value: "Output != Velocity"
+      description: "Personal output (Rev 12 boards) remained high while project slipped to 'At Risk' due to physics (EM noise) vs schedule collisions."
+    - label: "Headphone Jack Fire Drill"
+      value: "MTTR Redesign"
+      description: "Emergency chassis redesign to create a 'trap door' for serviceability, reducing field repair time from 2 hours to 10 mins."
+    - label: "The 'No-Bid' Sheet Metal Crisis"
+      value: "Dual-Source Bridge"
+      description: "Executed rapid domestic bridge strategy to survive a 'No-Bid' on the main top panel, protecting the Pilot schedule."
+    - label: "The DCD Protocol"
+      value: "100% Fit Rate"
+      description: "Enforced strict Data Control Drawing governance on 19 PCBs, achieving zero mechanical collisions on the first build."
 phase_stats:
   Design: 0
   Engineering: 0
@@ -716,101 +729,90 @@ toolIcons:
   - ptc
 toolchain:
   - Pro/Engineer Wildfire
-  - Pro/Intralink 3.4
-  - DXF (PCB)
-  - STEP (Vendor)
-  - VTech (CM)
-  - Jetcrown (Plastics)
+  - Pro/Intralink 8.0 (Admin)
+  - SAP (BOM Mgmt)
+  - Windchill
+  - Jetcrown (Plastics/Paint)
+  - VTech/Kenny (Sheet Metal/Assembly)
+  - Mass Precision (Bridge Mfg)
 tools:
   - Pro/ENGINEER
 war_stories: []
 ---
 
+# C|24 ("Curtis") Forensic Report
+
+**Source:** NotebookLM
+**Extracted:** 2025-12-22
+**Subject:** C|24 Console (Codename: Curtis)
+
 ## I. PROJECT SUMMARY
 
 - **Role:** Mechanical Engineering Lead / Industrial Design Lead
-- **Timeline:** 2005 (Concept) – November 2007 (FCS)
-- **Objective:** Replace the legacy Control|24 with a modernized, RoHS-compliant, low-profile control surface that eliminates the Focusrite royalty while adding 5.1 monitoring and improving manufacturability.
-- **Core Achievement:** Orchestrated the mechanical integration of 19 PCBs into a constrained chassis and salvaged a critical Pilot build by engineering a custom "Vertical Hanging" fixture solution for warped plastic components, ensuring a November 2007 launch.
+- **Mandate:** Execute a total platform modernization of the legacy Control|24 console. Objectives: Achieve RoHS compliance, integrate 5.1 surround monitoring, eliminate the Focusrite licensing royalty, and maintain a $9,995 MSRP while improving manufacturability.
+- **Core Achievement:** Solo-architected the mechanical integration of 19 distinct Printed Circuit Boards (PCBs) into a low-profile chassis and engineered a proprietary "Vertical Hanging" manufacturing process to salvage the cosmetic yield of the product's primary visual elements during a critical Pilot line-down crisis.
 
-## II. THE CAST (Team & Stakeholders)
+## II. THE ANATOMY OF FAILURE (Heuristic Analysis)
 
-**Internal: Digidesign / Avid**
+### 1. The "Banana" Defect (Thermal/Mechanical Crisis)
 
-- **Neal Breitbarth**: Mechanical/ID Lead (Industrial Design direction, thermal modeling)
-- **Mark Sires**: Senior Mechanical Engineer (Sheet metal, RoHS compliance)
-- **Robin Parnaby**: Hardware Engineering Lead (Primary electrical counterpart, PCB architecture)
-- **David Anthony**: Hardware Engineer (PSU, connectors, encoders)
-- **Michael Moskowitz**: Program Manager (Schedule, Phase Exits, Resource allocation)
-- **Matt Cho**: Program Manager (Vendor logistics, Tooling)
-- **Greg Westall**: Product Marketing (Feature definitions, cost targets)
-- **Stan Cotey**: Product Manager (Surface layout, graphics, user workflow)
-- **Kerwin Yuen**: Manufacturing Engineer (Pilot build lead, DFM feedback)
-- **Ed Bangert**: Manufacturing Engineer (Legacy parts, RoHS compliance)
-- **Ping Zhang**: Manufacturing Engineer (Documentation, CAD database, Intralink)
-- **Terri Merrell**: Senior Buyer/Planner (Vendor quotes, BOMs)
-- **Franco Piccininni**: PCB Design (Auto/Fader/Encoder layouts)
-- **Greg Vieyra**: PCB Design (MicPre, SubMix layouts)
-- **Jose Perez**: PCB Design (Comm, Monitor layouts)
-- **Marc Schuman**: Firmware Engineer (Display protocols)
+- **The Trigger:** During the Pilot build (June-July 2007), the ABS "Side Cap" components (P/N 9440-55165/166) consistently failed incoming inspection. Parts exhibited severe bowing and twisting, deviating up to **2.50mm** from flatness specifications, creating unacceptable gaps against the sheet metal chassis.
+- **The Failure:** Forensic analysis of inspection data (`before_and_after_rubber_paint.pdf`) revealed that the "Rubberized Soft Paint" curing process—requiring high-temperature baking—was causing the ABS substrate to shrink linearly by **~2.27mm** (from 756.51mm to 754.24mm) and sag due to improper racking. The vendor's standard "flat rack" method (Method C) was thermally deforming the parts beyond recovery.
+- **The Fix:** I rejected the vendor's (Jetcrown) proposed "support block" workarounds. I engineered and enforced **"Method A"**, a **Vertical Hanging Fixture** protocol. By suspending the parts vertically during the cure cycle, I utilized gravity to maintain part straightness during the glass-transition phase of the plastic. This process change was codified in **ECO 12740**, reducing flatness deviation to **&lt;0.50mm** and saving the Pilot schedule.
 
-**External: Global Supply Chain**
+### 2. The Top Panel "No-Bid" (Supply Chain Fracture)
 
-- **VTech (Kenny)**: Contract Manufacturer (Sheet Metal & Assembly) — Henry Lee, Ben Ho, Lucy Liu
-- **Jetcrown**: Plastics Injection Molding & Painting — ZW, Warren Man
-- **Mass Precision**: Domestic Sheet Metal (Proto/Bridge) — Ed Stegall, Fidel Saucedo
-- **Skynet**: Power Supply Vendor
+- **The Trigger:** The primary overseas contract manufacturer (VTech/Kwanta) issued a "no-bid" on the product's main interface surface, the Top Panel (9420-55105-00), citing extreme complexity.
+- **The Failure:** The design required a high density of welded standoffs (over 30 studs on a single panel) to support the channel strip PCBs. The vendor claimed their automated stud-welding equipment could not handle the proximity of the hardware, threatening to stall the entire production line.
+- **The Fix:** I executed a rapid **Dual-Source Bridge Strategy**. I leveraged domestic partner **Mass Precision** (Silicon Valley) to fabricate emergency sheet metal sets to keep the Pilot build alive (Source: `RE_ DigiDelivery from Erik Norris_ _Preliminary Curtis sheetmetal...`). Simultaneously, I negotiated a manual offset-welding process with the overseas vendor to bridge production until their automation could be retooled, preventing a "Stop Ship" scenario.
 
-## III. CRITICAL MECHANICAL INTERVENTIONS (Ranked STAR Stories)
+### 3. The Headphone Jack Fire Drill (Serviceability)
 
-### 1. The Side Cap "Banana" Defect (Thermal Warping)
+- **The Trigger:** Late in the design phase (April 2007), Customer Service data revealed the headphone jack on the legacy unit had a **4.8% field failure rate** (Source: `RE_ Potential Field_CS concern...`).
+- **The Failure:** The original C|24 mechanical design buried this jack beneath the fader banks, requiring a 2+ hour teardown for a common repair.
+- **The Fix:** I executed an emergency redesign of the Sheet Metal Headphone Bracket (9420-55126-00) and Plastic Front Bolster (9440-55167-00). I created a recessed "trap door" geometry, allowing the jack to be serviced from the bottom-front by removing a single nut and the bottom pan, drastically reducing Mean Time To Repair (MTTR).
 
-- **The Trigger:** During the Pilot build, the large ABS "Side Cap" parts (9440-55165/166) arrived with severe bowing (>2.50mm deviation) and twist, failing to mate with the sheet metal chassis.
-- **The Tension:** The defect was caused by the high heat required to cure the "Rubberized Soft Paint" (Spectral Master DS-022). The vendor's standard flat-rack curing method caused the plastic to sag and lock into a warped shape, threatening to scrap the entire cosmetic yield for launch.
-- **The Intervention:** I rejected the vendor's (Jetcrown) attempt to use simple support blocks ("Method B"). I engineered and approved "Method A," a **Vertical Hanging Fixture** protocol. By hanging the parts vertically during the bake cycle, we used gravity to pull the parts straight during the cure, rather than allowing them to sag.
-- **The Result:** Reduced flatness deviation to acceptable limits (\<0.5mm), allowing the parts to fit the chassis and saving the Pilot schedule. This process was formalized in ECO 12740.
+## III. GOVERNANCE & RHYTHM
 
-### 2. The "No-Bid" Sheet Metal Crisis
+- **The Pulse:** I established the **Data Control Drawing (DCD) Protocol** to manage the collision risk of 19 PCBs within a tight enclosure. I refused to accept PCB layouts that did not conform to my released DCDs.
+- **The Artifacts:**
+  - **DCDs:** Authored geometric contracts for every board. Notably, the **MicPre 8 I/O** required **12 Revisions** (Source: `REV 12 9150-55200-00 delivered to MUSE.msg`) to resolve connector interference and thermal clearances.
+  - **ECOs:** Served as primary Originator for all mechanical configuration management (e.g., **ECO 12263** for Sheet Metal Release, **ECO 12262** for Plastics, **ECO 13526** for Jog Wheel tolerance adjustments).
+  - **Tracking:** Administered the Pro/Intralink 8.0 server migration and authored the "General Modeling Guide" to enforce data integrity across the engineering team.
 
-- **The Trigger:** The primary overseas contract manufacturer (VTech/Kwanta) issued a "no-bid" on the main Top Panel (9420-55105-00) due to the extreme density of welded standoffs and tight tolerances required for the 24-channel strip.
-- **The Tension:** Without the top panel, the entire production line would stall. The vendor claimed the part was unmanufacturable with their current automation.
-- **The Intervention:** I implemented a dual-sourcing strategy. I engaged **Mass Precision** (San Jose) to fabricate emergency sheet metal for the Proto 3 and Pilot builds to keep the line moving. Simultaneously, I negotiated a manual welding process with the overseas vendor (Kenny) to bridge the gap until their automatic fastener machine was online.
-- **The Result:** We successfully built Pilot units using the domestic bridge run, and I later qualified the overseas process, protecting the November 2007 launch date.
+## IV. LINKEDIN ARTIFACTS (The Numbers)
 
-### 3. Headphone Jack Serviceability Fire Drill
+- [ ] **Engineered** a custom "Vertical Hanging" manufacturing process to resolve critical thermal warping in painted ABS components, reducing flatness deviation from >2.50mm to &lt;0.50mm and salvaging the Pilot yield.
+- **Led** the mechanical architecture of a $9,995 console, integrating 19 PCBs and eliminating a legacy royalty cost through grounds-up design modernization.
+- **Negotiated** a dual-source supply chain strategy, leveraging domestic fabrication to bridge a "no-bid" overseas production gap on the main top panel, protecting the Q4 launch window.
+- **Redesigned** the critical headphone I/O assembly (ECO 12993) to enable bottom-access field serviceability, converting a 2-hour repair procedure into a 10-minute operation.
+- **Enforced** a strict Data Control Drawing (DCD) protocol across a cross-functional team, managing over 30 revision cycles to achieve 100% mechanical-electrical fit on the first physical build.
 
-- **The Trigger:** Late in the design phase, Customer Service flagged the headphone jack as a high-failure-rate component (4.8% legacy failure rate). The original design buried the jack, requiring the removal of the entire upper bolster and fader banks to replace it.
-- **The Tension:** A field replacement would take hours, driving up warranty costs and user frustration. Manufacturing Engineering (Kerwin Yuen) escalated the concern as a critical FRU (Field Replaceable Unit) issue.
-- **The Intervention:** I executed an emergency redesign of the Sheet Metal Headphone Bracket (9420-55126-00) and the Plastic Front Bolster (9440-55167-00). I created a recess that allowed the jack to be serviced from the bottom/front by removing only a few screws, without tearing down the control surface.
-- **The Result:** ECO 12993 was released to modify the mounting feature, drastically reducing Mean Time To Repair (MTTR) for this critical component.
+## V. VISUAL EVIDENCE
 
-### 4. The DCD (Data Control Drawing) Protocol
+- **`944055165-166-00 baking fixture chg.xls`:** Photos comparing the failed "Method C" (flat rack) vs. the successful "Method A" (vertical hanging).
+- **`before_and_after_rubber_paint.pdf`:** Empirical data proving the 2.27mm linear shrinkage caused by the paint cure.
+- **`China Sheet Metal.pdf`:** Inspection photos documenting the "ripples/dents" cosmetic defects I managed to resolution.
+- **`DCD_9150-55200-00_REV_12.pdf`:** The "MicPre 8 I/O" control drawing, showing the rigorous geometric constraints I imposed.
+- **`ECO_12263.pdf`:** The formal release document for all sheet metal, listing me as Originator.
 
-- **The Trigger:** The unit required integrating 19 distinct PCBs (MicPre, SubMix, Faders, Encoders) into a sleek, low-profile industrial design with zero margin for error.
-- **The Tension:** "Wild west" file swapping was causing connector misalignments (e.g., MH5 interfering with routing on the SubMix IO) and threatening board spins.
-- **The Intervention:** I enforced a strict **Data Control Drawing (DCD)** exchange protocol. I refused to accept layouts that didn't match my Released DCDs (e.g., 9150-55200 Rev 12). I personally reviewed every DXF feedback from the layout team to verify mounting holes and keep-outs before authorizing fabrication.
-- \[ ] **Engineered** a custom "Vertical Hanging Fixture" manufacturing process to resolve critical thermal warping in painted ABS components, reducing flatness deviation from >2.50mm to \<0.50mm and saving the Pilot build schedule.
-- \[ ] **Led** the mechanical architecture and integration of 19 distinct PCBs into a low-profile chassis, enforcing a Data Control Drawing (DCD) protocol that achieved 100% mechanical fit on the first physical build.
-- \[ ] **Managed** a complex global supply chain transition, dual-sourcing sheet metal fabrication between Silicon Valley and China to bridge a "no-bid" production gap, protecting the November 2007 launch date.
-- \[ ] **Negotiated** DFM improvements with overseas vendors that reduced sheet metal tooling costs by 14.5% (from $40,770 to $34,860) while maintaining Class A cosmetic standards.
-- \[ ] **Redesigned** the headphone jack assembly (ECO 12993) to enable bottom-access field serviceability, significantly reducing warranty repair labor time for a high-frequency failure component.
+## VI. THE CAST (Team & Stakeholders)
 
-## V. TECHNICAL STACK & GOVERNANCE
+**Internal: Digidesign**
 
-- **Tools:**
-  - **CAD:** Pro/Engineer Wildfire (Solid & Surface modeling).
-  - **PDM:** Pro/Intralink 3.4 & 8.0 (Windchill) — Managed migration and user training.
-  - **Exchange:** AutoCAD (DXF) for PCB interchange; Adobe Illustrator for Artwork.
-- **Partners:**
-  - **CM:** VTech (Primary Assembler) / Kenny (Sheet Metal).
-  - **Plastics:** Jetcrown (Injection Molding & Painting).
-  - **Sheet Metal:** Mass Precision (Domestic/Proto).
+- **Neal Breitbarth**: ID / Mechanical Lead
+- **Robin Parnaby**: Hardware Engineering Lead
+- **David Anthony**: Hardware Engineer
+- **Matt Cho**: Program Manager
+
+**External Partners:**
+
+- **Ben Ho**: Mechanical Engineer (VTech - Kenny)
+- **Ed Stegall**: Project Manager (Mass Precision)
+- **ZW**: Engineering (Jetcrown)
   - **Components:** Skynet (Power Supply), Varitronix (LCDs).
 - **Governance:**
   - **ECO System:** Primary Originator for mechanical ECOs (e.g., ECO 12263 for Sheet Metal, ECO 12262 for Plastics).
-  - **Knowledge Management:** Authored "General Modeling Guide" and hosted internal engineering intranet for standards compliance.
-
-## VI. CITATIONS & VISUALS (The BUD Input)
 
 - **Visuals:**
   - `944055165-166-00 baking fixture chg.xls` (Photos of the warping fix).

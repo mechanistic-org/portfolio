@@ -18,6 +18,7 @@ These tasks are now automated via Slash Commands in the IDE.
 - **Deploy:** `/deploy-production` (Verify Build + Push to Main).
 - **New Project:** `/scaffold-project` (Generates strict C24 Schema).
 - **Deploy:** `/deploy-production` (Verify Build + Push to Main).
+- **Hack Pack:** `scripts/compile_hack_pack.py` (Generates `BOLUS` + `REPORT` + `PODCAST`).
 
 ### The Toolchain Trinity (Core Scripts)
 
@@ -208,6 +209,15 @@ These scripts are the engine of the "Forensic Data Factory."
   - **Duration:** 0.6s - 1.0s.
   - **Ease:** `easeInOut`.
   - **Noise:** Inject randomized height variance (`Math.random()`) so bars don't move in unison.
+
+### Audio Protocol Leakage (Iron Dome Failure)
+
+- **Symptom:** The Audio Host reads your prompts aloud (e.g., "System Instruction: You are a Forensic Architect...").
+- **Cause:** **Contamination.** You included "Instructional Headers" in a file visible to the Audio Model. The Audio Model treats ALL source text as "Script."
+- **Fix:**
+  1.  **Purge:** Remove `REFINE_READY.txt` from the source list.
+  2.  **Decouple:** Use `PODCAST_READY.txt` (which has NO instruction headers) + The "Densified Report" (converted to Source).
+  3.  **Reset:** You MUST start a new chat context. Once the model has "read" the bad prompt, it is poisoned.
 
 ### Resume Infrastructure (PDF Pipeline)
 

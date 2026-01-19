@@ -105,35 +105,39 @@ toolchain:
 
 metrics:
   cogs:
-    value: "$134.42"
-    label: "Proto Fan Bracket"
+    value: "$4,500.00"
+    label: "Invoice (MiniMerc)"
   profitability:
-    value: "ABORT"
-    label: "Program Status"
+    value: "150W"
+    label: "Thermal Load"
   governance:
     ecos:
       - "THERMAL_CRISIS"
       - "150W_TDP"
+      - "FCC_CLASS_A"
     dcos: 0
   interventions:
-    count: 7
-    label: "Thermal Failures"
+    count: 3
+    label: "Redesign Sprints"
   financial:
     costOfGoodsSold: []
     margins: []
     toolingActual: 1200
     toolingBudget: 15000
+    royaltySaved: "Zero Mods (FCC Class A)"
   process:
     dcdCount: 0
     engineeringChangeOrders:
-      - Xbox_Redesign
+      - "50-Hour Proto Sprint"
+      - "26-Hour Rev Turn"
+      - "Trash BPS Layout"
   war_stories:
     - 0
     - 1
     - 2
 phase_stats:
-  Design: 30
-  Engineering: 70
+  Design: 20
+  Engineering: 80
   Production: 0
   Strategy: 0
 production: Prototype
@@ -167,54 +171,61 @@ audio_url: "/assets/r2/webtv-galaxy/webtv-galaxy-briefing.m4a"
 
 #### I. PROJECT SUMMARY
 
-- **Role:** Lead Mechanical Architect / Principal Consultant (Mechanistic / Jenerik Operations)
-- **Objective:** Integrate desktop-class computing power (AMD K7 CPU, 3 Tuners, HDD) into a consumer electronics form factor for the "Galaxy" Home Network Gateway.
-- **Core Achievement:** Successfully engineered a chassis capable of dissipating a critical **150W thermal load** within a constrained 300mm footprint while maintaining EMI integrity and assembly feasibility.
+- **Role:** Lead Mechanical Architect / Principal Consultant (Mechanistic)
+- **Mandate:** Architect a "Technology Showcase" Home Gateway capable of integrating desktop-class computing power (AMD K7, 3 Tuners, HDD) into a consumer electronics form factor for Microsoft/WebTV.
+- **Core Achievement:** Successfully engineered a chassis architecture capable of dissipating a critical **150W thermal load** within a constrained 300mm footprint, preventing component failure while maintaining mass-production feasibility before the division was consolidated into Xbox.
 
-#### II. THE CAST (Team & Stakeholders)
-
-- **Erik Lincicum (Norris):** Lead Mechanical Engineer (Mechanistic).
-- **Roy Askeland:** Engineering Manager / WebTV (Microsoft). Primary client contact for mechanical strategy.
-- **Frank Salinas:** Hardware Systems Engineer / WebTV. Partner in Pro/E database management and "bug list" tracking.
-- **Shelly Evans:** NPI Manager / E-M Solutions. Critical vendor contact for quick-turn sheet metal fabrication.
-- **Avijit Goswami:** Thermal Consultant / Applied Thermal Technologies. Provider of CFD analysis data.
-- **Leslie Leland:** Product Design Manager / WebTV. Interface for Industrial Design and peripheral integration.
-- **Mike Hiett:** Senior Buyer / WebTV. Procurement logistics and vendor management.
-- **Chuck Pokonosky:** Vendor / D&D Manufacturing. Stamping feasibility analyst.
-
-#### III. CRITICAL MECHANICAL INTERVENTIONS (Ranked STAR Stories)
+#### II. THE ANATOMY OF FAILURE (Heuristic Analysis)
 
 ##### 1. The 150-Watt Thermal Crisis
 
-- **The Trigger:** April 23, 2001. Thermal simulations confirmed the AMD K7 processor and triple-tuner architecture generated a **150W total power load**, pushing internal ambient temperatures to critical levels.
-- **The Tension:** Initial "Mercury-like" form factors were insufficient. The Smart Card reader location hit **55.0°C**, threatening component failure and user safety.
-- **The Intervention:** I engineered a chassis depth expansion to **300mm** to support a high-velocity airflow tunnel. I integrated a massive **50x60x30mm extruded heatsink** and specified a Delta fan running at 2700 RPM. The airflow path was re-architected to intake over the HDD and exhaust through the PSU.
-- **The Result:** Validated CPU junction temperatures at **84.0°C** (safe operating range) and achieved **28.3 CFM** total airflow, preventing a program-killing thermal failure.
+- **The Trigger:** April 2001. CFD simulations confirmed that the integration of the AMD K7 desktop processor and triple-tuner architecture generated a **150W total power load**, pushing internal ambient temperatures to destructive levels.
+- **The Crisis:** The thermal density threatened component viability. Specifically, the Smart Card reader location hit **55.0°C**, creating a user-safety hazard and risking card failure. The standard "Mercury" form factor could not support the required heat rejection.
+- **The Fix:** I engineered a chassis depth expansion to **300mm** to support a high-velocity airflow tunnel. I specified a **50x60x30mm extruded heatsink** and a Delta fan running at 2700 RPM to force **28.3 CFM** through the enclosure. This intervention stabilized the CPU junction temperature at **84.0°C** and mitigated the Smart Card hotspot.
 
 ##### 2. The "Warped Base" Manufacturing Defect
 
-- **The Trigger:** June 20, 2001. D&D Manufacturing flagged a critical flaw in the stamping design. The specification of "drawn standoffs" for motherboard mounting created excessive stress in the sheet metal base.
-- **The Tension:** The vendor warned of severe **warping** during the stamping process, which would result in motherboard misalignment, connector failure, and unusable chassis yield.
-- **The Intervention:** I authorized a rapid redesign of the chassis floor, replacing the drawn standoffs with a "Hook 29" detail and adding specific **strengthening ribs** to counteract the material stress.
-- **The Result:** Stabilized the chassis geometry for high-volume progressive die stamping, ensuring flat mating surfaces for the PCB assembly.
+- **The Trigger:** June 2001. Fabrication vendor D&D Manufacturing flagged a critical flaw in the stamping design regarding the "drawn standoffs" specified for motherboard mounting.
+- **The Crisis:** The density and placement of these integral standoffs induced excessive material stress, causing the sheet metal base to **warp** during the stamping process. This threatened to yield twisted chassis bottoms that would not sit flat or align with the PCB.
+- **The Fix:** I authorized a redesign of the chassis floor, replacing the problematic drawn standoffs with a "Hook 29" detail and adding specific **strengthening ribs** to counteract the material distortion, ensuring flatness for the production line.
 
 ##### 3. The "Impossible Assembly" CPU Puck
 
-- **The Trigger:** July 27, 2001. The "Mechanical Design Hitlist" revealed that the CPU "puck" assembly could not be installed into the main chassis as a pre-assembled unit due to fastener interference with the fixed partition.
-- **The Tension:** This geometric conflict rendered the unit **unable to be assembled** on a production line, threatening the "DEV" build schedule.
-- **The Intervention:** I executed a modular redesign of the CPU enclosure, breaking it into sub-components for in-situ assembly. I simultaneously upgraded the EMI shielding strategy, implementing **EMI flanges** and a **12.5mm hex hole pattern** to maintain RF containment despite the segmented assembly.
-- **The Result:** Resolved the assembly bottleneck while enhancing EMI shielding effectiveness, allowing the DEV build to proceed on schedule.
+- **The Trigger:** July 2001. The "Mechanical Design Hitlist" identified that the CPU "puck" assembly could not be installed into the main chassis as a pre-assembled unit due to fastener interference with the fixed partition.
+- **The Crisis:** This geometric conflict rendered the unit **unable to be assembled** in a standard manufacturing sequence, threatening to halt the "DEV" build schedule.
+- **The Fix:** I executed a modular redesign of the CPU enclosure, breaking it into sub-components for _in situ_ assembly. I simultaneously upgraded the EMI shielding strategy, implementing **EMI flanges** and a **12.5mm hex hole pattern** to maintain RF containment despite the segmented assembly.
 
-#### IV. LINKEDIN ARTIFACTS
+#### III. GOVERNANCE & RHYTHM
 
-- [ ] **Engineered** a high-performance thermal solution for a 150W satellite gateway, utilizing CFD data to manage a 28.3 CFM airflow path for an AMD K7 processor.
-- [ ] **Led** the mechanical architecture of the "Galaxy" home gateway, coordinating cross-functional teams (ID, Thermal, Fab) to deliver functional prototypes in under 4 weeks.
-- [ ] **Saved** the manufacturing schedule during a critical vendor shutdown by personally coordinating off-cycle "quick turn" fabrication with E-M Solutions.
-- [ ] **Directed** the seamless transition of engineering assets from the cancelled "UltimateTV" program to the Microsoft Xbox division, designing new EMI liners and HDD carriers.
-- [ ] **Optimized** chassis cost and manufacturability by redesigning sheet metal features to eliminate warping risks, validating the solution through rapid prototyping.
+- **The Pulse:** Managed a high-velocity "Mechanical Design Hitlist" protocol to track and kill defects (EMI leaks, fitment issues, cabling routing) across multiple subsystems.
+- **The Artifacts:** Maintained the "Galaxy Mechanical Design Hitlist" and enforced a centralized **FTP workflow** ("share.webtv.net") to resolve version control chaos between WebTV engineering, ID partners, and fabrication vendors.
+- **Supply Chain Command:** Directly managed vendor relationships during critical failures, including coordinating 4-day "quick turn" fabrication cycles with E-M Solutions during a historic company-wide shutdown.
 
-#### V. TECHNICAL STACK & GOVERNANCE
+#### IV. LINKEDIN ARTIFACTS (The Numbers)
 
-- **Tools:** Pro/ENGINEER (Solid Modeling), AutoCAD (Legacy Data), IGES/DXF (Data Exchange), Microsoft Excel (BOM Management).
-- **Partners:** E-M Solutions (Sheet Metal/Quick Turn), Sputnik Models (Hard Models/Bezels), D&D Manufacturing (Stamping/Tooling), Applied Thermal Technologies (CFD/Thermal Analysis).
-- **Governance:** Implemented a rigorous **"Mechanical Design Hitlist"** protocol for tracking defects and enforced a centralized **FTP workflow** ("share.webtv.net") to eliminate version control errors across distributed teams.
+- [ ] **Engineered** a high-performance thermal architecture for a 150W satellite gateway, utilizing CFD data to manage a 28.3 CFM airflow path for an AMD K7 processor.
+- [ ] **Salvaged** the manufacturing schedule during a critical vendor shutdown by personally coordinating off-cycle "quick turn" fabrication, meeting a 4-day delivery target.
+- [ ] **Eliminated** catastrophic chassis warpage risk by redesigning stamping features and adding structural ribs, validating the solution for high-volume progressive die tooling.
+- [ ] **Directed** the transition of engineering assets from the cancelled "UltimateTV" program to the Microsoft Xbox division, redesigning EMI liners and HDD carriers for the console.
+- [ ] **Managed** a complex multi-vendor supply chain (E-M Solutions, Sputnik, NT Vision) to deliver functional mechanical prototypes for executive review in under 4 weeks.
+
+#### V. VISUAL EVIDENCE
+
+- `model-iso.jpg` (CFD Thermal simulation model)
+- `tempxz.jpg` (Heat map of the 150W load distribution)
+- `Base_Proto_Deviations.jpg` (Markup of manufacturing defects)
+- `Galaxy Mechanical Design Hitlist 7-27.doc` (The defect tracking log)
+
+#### VI. THE CAST (Team & Stakeholders)
+
+**Core Team:**
+
+- **Erik Lincicum (Norris):** Lead Mechanical Engineer (Mechanistic).
+- **Roy Askeland:** Engineering Manager / WebTV (Microsoft). Primary client contact.
+- **Frank Salinas:** Hardware Systems Engineer / WebTV.
+- **Leslie Leland:** Product Design Manager / WebTV.
+
+**Partners:**
+
+- **Shelly Evans:** NPI Manager / E-M Solutions.
+- **Avijit Goswami:** Thermal Consultant / Applied Thermal Technologies.

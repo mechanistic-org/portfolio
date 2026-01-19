@@ -51,6 +51,11 @@ sidebar:
 
 ## 📜 Change Log (Recent)
 
+- **[2026-01-18] Prompt Engineering V3 (The Refinery)**
+  - **[Architecture]** Split `notebook-refine` into `notebook-bolus` (JSON) and `notebook-report` (MD) to decouple logic from narrative.
+  - **[Protocol]** Established "Iron Dome" stealth protocols for Audio Generation, preventing the host from reading instructions.
+  - **[Resume]** Finalized "Forensic Architect" persona (PDF + LinkedIn V6) with validated "MTTR" and "Line-Down" metrics.
+
 - **[2026-01-15] Hyperspace Migration & D-Control Restoration**
   - **[Restoration] D-Control Deep Dive:** Restored Flagship status. Injected `metrics` via frontmatter for Deep HUD and extracted `legacy_deck` for Dossier Narrative.
   - **[Migration] Archive Standardization:** Batch-migrated 120+ projects to `theme: hyperspace` using a new safe migration script.

@@ -116,7 +116,18 @@ const projectsCollection = defineCollection({
 						dcdCount: z.number().optional(),
 					})
 					.optional(),
-				war_stories: z.array(z.number()).optional(),
+				war_stories: z
+					.array(
+						z.union([
+							z.number(),
+							z.object({
+								label: z.string(),
+								value: z.string(),
+								description: z.string(),
+							}),
+						]),
+					)
+					.optional(),
 			})
 			.optional(),
 
@@ -137,7 +148,18 @@ const projectsCollection = defineCollection({
 		phase_stats: z.record(z.number()).optional(),
 		teamSize: z.coerce.string().optional(),
 		job_title: z.string().optional(),
-		war_stories: z.array(z.number()).optional(), // Legacy fallback
+		war_stories: z
+			.array(
+				z.union([
+					z.number(),
+					z.object({
+						label: z.string(),
+						value: z.string(),
+						description: z.string(),
+					}),
+				]),
+			)
+			.optional(), // Legacy fallback
 
 		// Theme Selector (Core Architecture)
 		theme: z.string().optional(),

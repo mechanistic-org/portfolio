@@ -130,3 +130,24 @@
 1.  **SHIFT RIGHT:** The semantic content of the banner MUST be shifted **400px to the Right**.
 2.  **THE VOID:** The Left 400px is reserved for the Avatar. It should be abstract or empty (Void).
 3.  **ASPECT RATIO:** 4:1 (1584x396px). Do not rely on LinkedIn's auto-crop.
+
+## 👥 XI. The Law of Social Decoupling (The LinkedIn Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-01-17
+**Context:** LinkedIn's "Feed Algorithm" penalizes dense text blocks, while PDFs require them. Attempting to generate both from one source failed.
+
+**The Law:**
+
+1.  **SEPARATE MASTERS:** `linkedin_master.ts` (Social) is distinct from `resume_master.ts` (PDF).
+
+## 🤫 XII. The Law of the Iron Dome (The Stealth Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-01-18
+**Context:** The Audio Host (NotebookLM) was reading "System Instructions" aloud, breaking the immersion of the "Red Team Review" persona.
+**The Law:**
+
+1.  **NO INSTRUCTIONAL HEADERS:** The `PODCAST_READY.txt` file must contain _only_ the Cast List and Source Material. No "You are a..." preambles.
+2.  **DECOUPLED SOURCES:** We split the "Hack Pack" into `BOLUS_READY.txt` (JSON for the AI Brain) and `REPORT_READY.txt` (Text for the AI Eye).
+3.  **VERIFICATION:** If the Audio Host says "Here are your instructions," the protocol has failed. Reset the context.

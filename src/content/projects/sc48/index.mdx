@@ -174,50 +174,67 @@ links: []
 
 # METRICS (NotebookLM Forensic Bolus)
 forensic_metrics:
-  financial: "COGS Goal less than $15k met via 'No Extrusion' mandate"
-  process: "High Reuse Strategy (Profile/D-Show components)"
-  technical: "Solved 75°C Thermal Shutdown via 4U Chassis Redesign"
+  financial: "CNC Chassis Unit Price $561.46 (vs Hard Tooling); Sheet Metal = 20% of COGS."
+  process: "Executed 16+ config thermal matrix (3U vs 4U, 5V-12V fans) to solve shutdown."
+  technical: "Resolved 75°C 'System Shutdowned' thermal failure via 4U hybrid airflow architecture."
 
 # FORENSIC SUMMARY
-forensic_summary: "Tasked with embedding a full PC motherboard and DSP engine into a live sound console under a strict less than $15k COGS cap, I faced a critical thermal failure where the CPU hit 75°C and shut down during chamber testing. I intervened by re-architecting the chassis from 3U to 4U, replacing expensive aluminum extrusions with a complex folded sheet metal 'spine' (9420-58317-00), and implementing a high-velocity 3-fan 12V cooling architecture. This solved the thermal density issue while maintaining structural rigidity without exceeding the budget."
+forensic_summary: "The SC48 (Project Lux) embedded console faced a catastrophic thermal ceiling where the CPU hit 75°C, triggering automatic shutdown. I intervened by re-architecting the chassis from 3U to 4U, implementing a hybrid 80mm/120mm cooling solution with custom 'L-Plenums' and ducting. This brute-force validation matrix (18 configurations) proved the 4U layout reduced CPU rise to 13.8°C, solving the thermal crisis while maintaining the side-intake ID constraint."
 
 # TOOLCHAIN
 toolchain:
   - "Pro/ENGINEER Wildfire"
-  - "Thermal Chamber Testing"
-  - "Sheet Metal Fabrication (Mass Precision)"
-  - "Injection Molding (Jetcrown/PPI)"
-  - "COGS Rollup Analysis"
+  - "Thermal Data Logging (CSV)"
+  - "Windchill/Intralink"
+  - "VTech (China)"
+  - "Jetcrown (Plastics)"
+  - "Kontron (Embedded Support)"
 
 metrics:
   cogs:
-    value: "-40%"
-    label: "Part Count Reduction"
+    value: "$561.46"
+    label: "CNC Unit Price"
   profitability:
-    value: "$9,995"
-    label: "Target MSRP"
+    value: "13.8°C"
+    label: "CPU Temp Rise"
   governance:
     ecos:
-      - "Legacy_Kill"
-      - "RoHS_Comp"
-    dcos: 12
+      - "THERMAL_CRISIS"
+      - "SYSTEM_SHUTDOWN"
+    dcos: 18
   interventions:
-    count: 3
-    label: "Major Systems"
+    count: 18
+    label: "Thermal Configs"
   financial:
-    costOfGoodsSold: []
+    costOfGoodsSold:
+      - "$561.46 (CNC Chassis Strategy)"
     margins: []
-    toolingActual: 42000
+    toolingActual: 36000
     toolingBudget: 85000
   process:
-    dcdCount: 12
+    dcdCount: 18
     engineeringChangeOrders:
-      - Legacy_Kill
-      - RoHS_Comp
+      - "3U_to_4U_Pivot"
+      - "L_Plenum_Add"
   war_stories:
-    - 3
-    - 4
-    - 5
+    - label: "The Berry Creek Incident"
+      value: "Concussion / IP Conflicts"
+      description: "Sustained head injury from falling branch (22 stitches); managed IP conflict crisis from ER while on concussion protocol."
+    - label: "The 'Lead vs Lead' Mandate"
+      value: "Zero Draft Comms"
+      description: "Enforced 'Solder = LED' vs 'Person = LEED' spelling rule to prevent toxic manufacturing errors."
+    - label: "CNC First Strategy"
+      value: "$561.46 Unit Cost"
+      description: "Accepted high unit cost to avoid $50k hard tooling risk during validation."
+    - label: "The PMS Insert Crisis"
+      value: "Tolerance Stack"
+      description: "Rejected glue fix for popping inserts; recalculated tolerance to .170 +0.00/-0.012 for mechanical interference fit."
+    - label: "The 'Blind Mate' Alignment"
+      value: "The Floating Tray"
+      description: "Engineered ovalized 'wiggle room' tie plates to prevent connector smash during blind assembly."
+    - label: "The LED Bleed"
+      value: "Pixel Perfect Gate"
+      description: "Forced vendor to enlarge spacer holes to seat LED collars deeper, eliminating light bleed."
 phase_stats:
   Design: 0
   Engineering: 0
@@ -272,21 +289,27 @@ audio_url: "/assets/r2/sc48/sc48-briefing.m4a"
 - **The Trigger:** During "Capaldi FOH" environmental chamber testing, the embedded CPU temperature hit **75°C**, triggering an automatic system shutdown.
 - **The Tension:** The product is a live sound console; a thermal shutdown during a performance is a catastrophic, "show-stopping" failure mode. The density of the embedded PC motherboard (Kontron 986LCD-M) inside the console created a heat trap.
 - **The Intervention:** I executed a "Design of Experiments" thermal matrix, testing chassis heights (3U vs 4U) and fan voltages (5.6V to 12V). I re-architected the chassis to a **4U layout** and implemented a high-velocity cooling solution using **three 80mm fans at 12V**.
-- **The Result:** The intervention dropped the internal temperature rise to **22.6°C** (Left side), keeping the CPU well within the safe operating zone and eliminating the shutdown risk.
+- **The Result:** The intervention dropped the internal temperature rise to **22.6°C** (Left side), keeping the CPU well within the safe operating zone and eliminating the shutdown risk, satisfying the "Red Team" engineering review.
 
-##### 2. The "No Extrusion" Mandate (Cost Engineering)
+##### 2. The PMS Insert Crisis (Tolerance Stack)
 
-- **The Trigger:** To meet the aggressive COGS target for the "Embedded Live Sound" market, Finance/Management issued a hard constraint: "There will be no extrusions". Previous consoles relied on expensive aluminum extrusions for structural rigidity.
-- **The Tension:** A touring console must withstand significant vibration and shock. Removing the extrusion frame risked creating a "floppy" chassis that would fail drop tests or warp during transport.
-- **The Intervention:** I engineered the "4U Rake Back I-Beam" (P/N 9420-58317-00), a complex folded sheet metal spine that mimics the structural properties of an extrusion using lower-cost steel fabrication methods.
-- **The Result:** Achieved touring-grade rigidity using only standard sheet metal (Mass Precision/VTech), keeping the mechanical cost contribution to **20% of COGS** while maintaining the "Profile" family aesthetic.
+- **The Trigger:** During the "Origami Spine" assembly, the press-fit nuts (PMS inserts) began popping out of the top covers due to insufficient material retention in the sheet metal holes.
+- **The Tension:** The vendor proposed using glue to secure the inserts. I rejected this as "guesswork." A failure here would mean the console surface could detach in the field.
+- **The Intervention:** I rejected the "try harder" approach and recalculated the tolerance stack. I issued a directive to change the diameter hole size to exactly **.170 + 0.00/-0.012**.
+- **The Result:** This precise adjustment maximized metal retention for the fastener "bite," securing the inserts mechanically without adhesives. "That's why we don't use glue."
 
-##### 3. The Embedded PC Integration
+##### 3. The "Blind Mate" Alignment (Exhibition Hall 1)
 
-- **The Trigger:** The requirement to embed a standard Kontron Mini-ITX motherboard into a proprietary appliance chassis without exposing consumer PC ports to the user.
-- **The Tension:** standard ITX form factors conflict with console ergonomics, and direct rear-panel access was blocked by the chassis geometry.
-- **The Intervention:** I designed custom PCI brackets (P/N 9420-58318-00) and a riser system to mount the motherboard internally, routing IO to custom panel-mount connectors on the exterior.
-- **The Result:** Delivered a seamless "appliance" experience where the user interacts with "Console IO" rather than "Computer Ports."
+- **The Trigger:** The console required a "Blind Mate" connection between the PSU/CPU tray and the main chassis, critical for rapid assembly.
+- **The Tension:** If the alignment was off by even a millimeter, the connector pins would "smash" during insertion, destroying the unit.
+- **The Intervention:** I engineered a "Floating Tray" system using tie plates with **ovalized matching holes**. This allowed for specific X/Y "wiggle room" to accommodate the tolerance stack of the folded steel chassis.
+- **The Result:** Enabled a reliable "Blind Mate" insertion sequence that absorbed manufacturing variance, validated during the high-pressure "Exhibition Hall 1" setup.
+
+##### 4. The LED Bleed (Quality Gate)
+
+- **The Trigger:** Light from the "Denko Meters" was bleeding between the LED indicators, making the console look "cheap." The LED collars weren't seating deep enough to block the light.
+- **The Intervention:** I directed the vendor to **enlarge the hole of the spacer bar** so the LED collar fit perfectly inside, physically blocking the light path.
+- **The Result:** Eliminated the bleed and restored the definitive "Pixel Perfect" look required for the premium market.
 
 #### IV. LINKEDIN ARTIFACTS
 

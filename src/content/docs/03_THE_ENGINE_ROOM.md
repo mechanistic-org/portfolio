@@ -63,6 +63,19 @@ The IDE is now augmented with a persistent brain located in `.agent/`. This move
 
 ---
 
+## 1.6 The Stealth Protocol (Prompt Architecture)
+
+**The Problem:** The NotebookLM Audio Model reads "System Instructions" as content.
+**The Fix:** "Decoupled Intelligence" (The Two-Stage Rocket).
+
+1.  **Stage 1 (Text):** The Analyst Prompt (`REFINE_READY`). Stripped of "System" headers. Generates the structured data (Bolus).
+2.  **The Bridge:** Convert Analyst Output -> **Source**.
+3.  **Stage 2 (Audio):** The Host Prompt (`PODCAST_READY`). Contains the `AUDIO_PROTOCOL` (Phonetics). Reads the Source as "Fact."
+
+**Result:** High-Fidelity Audio without "Protocol Leakage."
+
+---
+
 ## 2. The Theme Engine
 
 The site supports multiple "Realms" (Themes) controlled by Frontmatter.

@@ -1,65 +1,88 @@
 ---
-title: webtv-pluto
-date: 2001-02-22T00:00:00.000Z
-endDate: 2001-04-16T00:00:00.000Z
-employer: Unknown
-client: []
+title: "WebTV Pluto (CES Demo)"
+slug: "webtv-pluto"
+date: 2000-12-01
+endDate: 2001-01-03
+employer: Mechanistic
+client:
+  - Microsoft
+  - WebTV
 industry: Consumer Electronics
-category: Set Top Box
-tools: []
-toolIcons: []
-production: Concept
+category: Set-Top Box
+production: Prototype
 tags:
   - Prototyping
+  - Crisis Engineering
+  - Vendor Management
 phase_stats:
   Strategy: 0
-  Design: 0
-  Engineering: 0
+  Design: 10
+  Engineering: 90
   Production: 0
 cyberspace:
   enable: true
   layout: linear
-  stickies:
-    - id: intro
-      title: webtv-pluto
-      text: '<strong>YEAR:</strong> 2001<br/><strong>ROLE:</strong> Unknown'
-      align: center
-      type: media
-      data:
-        src: /assets/placeholders/abstract.jpg
-    - id: details
-      title: PROJECT DATA
-      text: >-
-        This record has been upgraded to the Hyperspace
-        Protocol.<br/><br/><strong>Group:</strong> Consumer Electronics
-      align: center
-      type: void
+  stickies: []
 theme: hyperspace
-teamSize: Unknown
+teamSize: Core Team of 3
 gallery: []
 documents: []
 links: []
 heroImage: /assets/placeholders/abstract.jpg
 draft: false
-description: ''
-duration: Active
-statusLabel: Completed
-impact: ''
+description: "The 'Impossible Load' Holiday Sprint for CES."
+duration: 1 Month
+statusLabel: Archived
+impact: "Delivered functional prototypes for Jan 3 CES launch."
+
+# METRICS (NotebookLM Forensic Bolus)
+forensic_metrics:
+  financial: "N/A (Critical Trade Show Deliverable)"
+  process: "Simultaneous coordination of PCB fab, sheet metal (EMS), and machining (Sputnik)"
+  technical: "Completed Pro/E database for Zeus/Pluto enclosures in rapid sprint"
+
+# FORENSIC SUMMARY
+forensic_summary: "The Trigger: Hard deadline for CES (Jan 3) with PCBs arriving late Nov/early Dec and wrong hardware ordered, creating an 'impossible load' over the holidays. -> The Intervention: Completed Pro/E files for Zeus enclosure for rapid fab at EMS, managed bezel machining at Sputnik, and 'babysat' hardware procurement. -> The Result: Successful build completed over Christmas weekend; units shipped out on Dec 27th for the show."
+
+# TOOLCHAIN
+toolchain:
+  - "Pro/ENGINEER"
+  - "Agile (BOM Management)"
+
 metrics:
+  cogs:
+    value: "Dec 27"
+    label: "Ship Date"
+  profitability:
+    value: "CES"
+    label: "Deadline Hit"
+  governance:
+    ecos:
+      - "Christmas_Sprint"
+      - "BOM_Recovery"
+    dcos: 0
+  interventions:
+    count: 3
+    label: "Vendors Managed"
   financial:
-    toolingBudget: 0
-    toolingActual: 0
-    margins: []
     costOfGoodsSold: []
+    margins: []
+    toolingActual: 0
+    toolingBudget: 0
   process:
     dcdCount: 0
-    engineeringChangeOrders: []
+    engineeringChangeOrders:
+      - "Christmas_Build"
   war_stories: []
 war_stories: []
-presentation_mode: standard
+presentation_mode: deep_dive
 ---
 
+### WebTV Pluto/Zeus Forensic Report
 
-## webtv-pluto
+**Source:** NotebookLM Bolus ("project-zeus-pluto-ces-demo")
 
-> *Auto-generated scaffold from Multiverse Registry.*
+#### I. PROJECT SUMMARY
+
+- **Objective:** Deliver functional "Zeus" and "Pluto" node enclosures for the CES trade show under a "Crisis" schedule (Holiday 2000).
+- **Core Achievement:** Managed a 3-vendor supply chain (EMS, Sputnik, PCB Fab) simultaneously to deliver final units on **Dec 27th**, meeting the Jan 3rd show floor deadline.

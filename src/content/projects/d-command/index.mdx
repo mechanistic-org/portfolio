@@ -183,48 +183,51 @@ links:
 
 # METRICS (NotebookLM Forensic Bolus)
 forensic_metrics:
-  financial: "Stand cost reduced to ~$555 via DFM"
-  process: "Gap tolerance stabilized to 0.02 inches"
-  technical: "Passed UL/EMC Safety Requirements (USA, Canada, EU)"
-
-# FORENSIC SUMMARY
-forensic_summary: "The D-Command launch faced a critical yield crisis where plastic end caps warped and sheet metal fader pans bowed during assembly, making unit alignment impossible. I engineered a recovery plan involving manual 'tweaking' protocols for metal pans and redesigned side plates with floating hardware to absorb tolerance stack-up. These interventions stabilized the assembly process, allowed the units to pass regulatory compliance, and enabled the successful First Customer Ship in April 2005."
-
-# TOOLCHAIN
+  financial: "Recovered $155.70 scrap value from 6 rejected units; Pre-prod cost $10,493/unit."
+  process: "100% inspection of 42 Fader Pans (>50% reject rate); Managed 109 active drawings."
+  technical: 'Resolved ''Sideplate'' threaded insert failure via CNC-3645 dimple mod; Corrected 84.478" extrusion error.'
+forensic_summary: 'Project Danko (D-Command) utilized a ''Solo Mandate'' execution model. I managed 109 active drawings while resolving multiple vendor quality crises: the ''Warped Fader Pan'' (where I personally rejected >50% of the first 42 units), the ''Sideplate'' insert failure (requiring a CNC dimple retrofit), and the cosmetic End Cap yield collapse (10% -> 74%). Additionally, I diagnosed and corrected a critical CAD-to-Vendor translation error where extrusions were cut to 84.478" due to unregenerated models.'
 toolchain:
-  - "Pro/E (CAD)"
-  - "Intralink (PDM)"
-  - "Sheet Metal Fabrication"
-  - "Injection Molding"
-  - "Powder Coating"
-  - "PEM Fasteners"
-  - "Microsoft Excel (BOMs)"
-
+  - "Pro/ENGINEER Wildfire"
+  - "Pro/INTRALINK"
+  - "SAP (Migration Lead)"
+  - "Agile / ASK"
+  - "Mass Precision (Sheet Metal)"
+  - "PPI Plastics (Injection Molding)"
+  - "DigiDelivery"
 metrics:
   cogs:
-    value: "100%"
-    label: "Production Yield"
+    value: "$10,493"
+    label: "Pre-Prod Cost"
   profitability:
-    value: "$630k"
-    label: "Recall Avoidance"
+    value: "$155.70"
+    label: "Scrap Recovered"
   governance:
     ecos:
-      - "ECO6454"
-      - "ECO6455"
-      - "ECO6549"
-    dcos: 5
+      - "ECO6310"
+      - "ECO8198"
+      - "Deviation 1212"
+      - "ECO7927"
+    dcos: 109
   interventions:
     count: 42
-    label: "Manual Inspections"
+    label: "Faders Inspected"
   financial:
     toolingBudget: 210000
     toolingActual: 0
     margins: []
     costOfGoodsSold: []
   process:
-    dcdCount: 0
-    engineeringChangeOrders: []
-  war_stories: []
+    dcdCount: 109
+    engineeringChangeOrders:
+      - "ECO 6310 (Yield)"
+      - "ECO 8198 (Fit)"
+      - "Dev 1212 (Rework)"
+  war_stories:
+    - 0
+    - 1
+    - 2
+    - 3
 phase_stats:
   Design: 67.3
   Engineering: 23.0

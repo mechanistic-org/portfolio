@@ -1,13 +1,3 @@
----
-title: "Notebook Resume (The Master)"
-category: "power"
-role: "Career Architect"
-input_type: "Universal Context (All Projects + Archives)"
-output_format: "Hybrid Master Resume"
-system_instructions: "Synthesize a 'Killer Edge' Master Resume from the Universal Context."
-hack_pack_source: "AUDIO_PROTOCOL.md"
----
-
 **_ SYSTEM INSTRUCTION: DO NOT SUMMARIZE THIS DOCUMENT. USE IT AS A RULESET. _**
 
 ### IDENTITY

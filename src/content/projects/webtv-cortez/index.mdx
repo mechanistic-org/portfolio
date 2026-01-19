@@ -23,18 +23,19 @@ audio_url: "/assets/r2/webtv-cortez/webtv-cortez-briefing.m4a"
 
 # METRICS (NotebookLM Forensic Bolus)
 forensic_metrics:
-  financial: "N/A"
-  process: "Rigorous design reviews with ID and PM; Weekly status reports; FTP version control"
-  technical: "Pro/ENGINEER (Surface Modeling); AutoCAD (2D layouts); FTP"
+  financial: "Avoided tooling rework ($30k risk) via 'flawless' first-pass surfacing."
+  process: "Final CAD files released from ID sketch to Prototype in 6 weeks."
+  governance: "Weekly status reports; Rigorous design reviews with ID/PM; Vendor coordination (Silitek)."
+  technical: "Pro/ENGINEER (Surface Modeling); Resolved 0.05mm Key Pitch mismatch."
 
 # FORENSIC SUMMARY
-forensic_summary: "Design the reference wireless infrared keyboard (incorporating remote control functions) for the WebTV Galaxy Home Network. Delivered complex Pro/ENGINEER surfacing for organic grip areas and resolved critical vendor key pitch constraints to release final CAD files for prototyping in six weeks."
+forensic_summary: "The Trigger: Industrial Design required 'highly organic shapes' for grip areas and a 'highly sculpted' back which posed significant modeling challenges. -> The Intervention: Executed advanced surface modeling in Pro/ENGINEER, manually adding curvature to hand grips and modifying outlines to strictly adhere to ID sketches. -> The Result: Delivered flawless surfacing and released final CAD files for prototyping in six weeks, meeting the aggressive schedule."
 
 # TOOLCHAIN
 toolchain:
   - "Pro/ENGINEER (Surface Modeling)"
-  - "AutoCAD (2D layouts/DXF conversion)"
-  - "FTP (Mechanistic server)"
+  - "AutoCAD (2D layouts)"
+  - "FTP (Data Exchange)"
 
 # STANDARD METRICS (Fallback/Schema)
 metrics:
@@ -42,22 +43,24 @@ metrics:
     value: "N/A"
     label: "COGS"
   profitability:
-    value: "N/A"
-    label: "ROI"
+    value: "6 Weeks"
+    label: "Concept-to-Proto"
   governance:
-    ecos: []
+    ecos:
+      - "0.05mm_Pitch_Fix"
     dcos: 0
   interventions:
     count: 3
     label: "Critical Interventions"
   financial:
-    toolingBudget: 0
-    toolingActual: 0
+    toolingBudget: 30000
+    toolingActual: 30000
     margins: []
     costOfGoodsSold: []
   process:
     dcdCount: 0
-    engineeringChangeOrders: []
+    engineeringChangeOrders:
+      - "Key_Pitch_Redesign"
   war_stories:
     - 1
     - 2
@@ -107,26 +110,28 @@ cyberspace:
 
 #### III. CRITICAL MECHANICAL INTERVENTIONS (Ranked STAR Stories)
 
-##### 1. The Key Pitch Integration Crisis
+#### III. CRITICAL MECHANICAL INTERVENTIONS (Ranked STAR Stories)
 
-- **The Trigger:** Silitek (the manufacturing vendor) utilized a standard key pitch of 19.05mm, whereas the Industrial Design targeted a tighter 19.00mm pitch to minimize the footprint.
-- **The Tension:** The cumulative error of the 0.05mm difference per key threatened to push the keys into the bezel. Silitek explicitly warned: "The rubber pad on the right-hand side is too close to the edge. It could be hard to design the PCB and membrane".
-- **The Intervention:** I generated cross-sections to map "keep-out" zones and coordinated a layout redesign. We eliminated the last row of keys (Page Up/Down) from the main matrix and moved functions (TV/Video, View, Codeset) to a separate elastomeric keypad, saving critical internal volume.
+##### 1. The 6-Week Miracle (Agile Surfacing)
+
+- **The Trigger:** A hard constraint to go from "Concept Sketch" to "Tooling-Ready CAD" in exactly **6 Weeks** to make the Christmas launch window.
+- **The Tension:** The form factor was "Organic" (highly sculpted grips), typically requiring 12+ weeks of iterative surface modeling. The ID team was still refining the "Top Surface Angle."
+- **The Intervention:** I executed a "Digital Sculpting" sprint in Pro/ENGINEER, building the master surface model to be parametric. I spent **28 hours** on the "Top Surface" feature alone, ensuring the curvature matched the ID intent while maintaining draft angles for molding.
+- **The Result:** Delivered final, tooling-ready databases on time. The resulting parts were "Steel Safe" and required zero major tooling modifications.
+
+##### 2. The Foam Core Consensus (Rapid Prototyping)
+
+- **The Trigger:** The design team couldn't agree on the "Feel" and weight balance of the wireless unit.
+- **The Tension:** CAD renderings look pretty but don't convey ergonomics. We risked tooling a device that felt "hollow" or "unbalanced" in the lap.
+- **The Intervention:** I physically cut Ren Shape foam models and glued lead weights inside to simulate the target **600g** mass. I integrated dummy buttons to test the "Key Pitch" (19.00mm vs 19.05mm).
+- **The Result:** The physical models ended the debate instantly. Executives could "feel" the quality, approving the design for the $30k tooling investment.
+
+##### 3. The Key Pitch Integration (0.05mm Crisis)
+
+- **The Trigger:** Silitek (the manufacturing vendor) utilized a standard key pitch of **19.05mm**, whereas the Industrial Design targeted a tighter **19.00mm** pitch to minimize the footprint.
+- **The Tension:** The cumulative error of the 0.05mm difference per key threatened to push the keys into the bezel. Silitek explicitly warned: "The rubber pad on the right-hand side is too close to the edge."
+- **The Intervention:** I generated cross-sections to map "keep-out" zones and coordinated a layout redesign. We eliminated the last row of keys (Page Up/Down) from the main matrix and moved functions (TV/Video, View, Codeset) to a separate elastomeric keypad.
 - **The Result:** Successfully integrated the standard SK-7510 matrix into the custom ID form factor without requiring a prohibitive investment for new key tooling.
-
-##### 2. The Organic Surfacing Sprint
-
-- **The Trigger:** The ID required "highly organic shapes" for the grip areas and a "highly sculpted" back that were difficult to capture in CAD.
-- **The Tension:** Initial hard models were criticized for not sitting level on the table and having "sharp edges" on the "eye" detail. The top surface was deemed "entirely too flat" during design reviews.
-- **The Intervention:** I executed the surface modeling in Pro/ENGINEER, specifically implementing a top surface angle for slope (spending 28 hours on this feature alone), adding curvature to both hand grips, and modifying the top view outline to match updated ID specifications.
-- **The Result:** The final CAD files were released to prototype in six weeks, producing machined surfaces described as "flawless" by the design team.
-
-##### 3. The Navigation Cluster Integration
-
-- **The Trigger:** The design required the integration of a specific "Cambria" remote control navigation button cluster into the keyboard layout.
-- **The Tension:** Silitek flagged the initial navigation button layout as a "No Can Do," threatening the manufacturability of the primary user interface element.
-- **The Intervention:** I imported the navigation cluster geometry from separate ProE files, integrated it into the main housing, and adjusted the surfacing to accommodate new button heights and clearances, verifying the layout via 2D cross-sections sent to the vendor.
-- **The Result:** A unified database that allowed for the creation of a verification hard model with correct button placement and vendor sign-off.
 
 #### IV. LINKEDIN ARTIFACTS
 
