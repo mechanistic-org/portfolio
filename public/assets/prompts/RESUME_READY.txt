@@ -95,3 +95,68 @@ You have access to the "Deep Dive" Project Notebooks (C24, D-Control, etc.).
 - Instead of standard bullets, rewrite each entry to highlight a **Crisis and Resolution**.
 - _Format:_ "The Challenge: [X] -> The Action: [Y] -> The Result: [Z]."
 - _Use Case:_ Prep for "Tell me about a time you failed" questions.
+
+## PROJECT ARTIFACTS (Auto-Generated)
+
+### C24 (Curtis)
+- **Financial**: Target MSRP $9,995 (Maintained); COGS Reduced 4.0% ($2,036 -> $1,870); Gross Margin 51.20%; NPV $2.4M @ 12%; Eliminated Focusrite Royalty.
+- **Process**: Reduced plastic flatness deviation from >2.50mm to <0.50mm via 'Vertical Hanging'; Qualified 33+ welded stud Top Panel process after initial 'No-Bid'.
+- **Technical**: Managed 19 PCB Layouts (50+ DCDs released); MicPre I/O required 12 DCD revisions; ECO 13707 executed to clarify tolerances.
+- **The 'Banana' Defect**: Resolved critical 2.5mm warpage AND 'sticky paint' failure on Jetcrown end-caps via Vertical Hanging process.
+- **The 'At Risk' Paradox**: Personal output (Rev 12 boards) remained high while project slipped to 'At Risk' due to physics (EM noise) vs schedule collisions.
+- **Headphone Jack Fire Drill**: Emergency chassis redesign to create a 'trap door' for serviceability, reducing field repair time from 2 hours to 10 mins.
+- **The 'No-Bid' Sheet Metal Crisis**: Executed rapid domestic bridge strategy to survive a 'No-Bid' on the main top panel, protecting the Pilot schedule.
+- **The DCD Protocol**: Enforced strict Data Control Drawing governance on 19 PCBs, achieving zero mechanical collisions on the first build.
+
+### Minimerc
+- **Financial**: Hard savings via reduced system depth (to 265mm)
+- **Process**: Rapid incorporation of multiple engineering 'hitlists' and bug fixes
+- **Technical**: Redesigned HDD mounting bracket for thermal/EMI resolution
+
+### D-Control
+- **Financial**: Salvaged 8,000+ legacy CPUs; Engineered 'No-Stuff' PCB Strategy.
+- **Process**: Established 'Gap Tolerance Protocol' for unit-to-unit squareness.
+- **Technical**: Scalable to 80 Faders; Executed 180-deg ALPS fader retrofit (P&G transition).
+
+### Hyphen (Forensic Strategy)
+- **Financial**: Elevated 'Resume Side Quest' ROI via 'Triple Distilled' content.
+- **Process**: Backported 'Blind Mate' and 'MTTR' metrics to legacy portfolio.
+- **Technical**: Defined 'Red Gold' data standard (Forensic Density).
+- **The Blind-Mate**: Backported the 'Floating Tray' tolerance stack narrative.
+- **The Sealing Logic**: Defined the specific IP69K strategy (Gasket compression, Breathers).
+- **The MTTR Metric**: Moved the 'Hours to Minutes' stat from text into the metrics structure.
+
+### SC48
+- **Financial**: CNC Chassis Unit Price $561.46 (vs Hard Tooling); Sheet Metal = 20% of COGS.
+- **Process**: Executed 16+ config thermal matrix (3U vs 4U, 5V-12V fans) to solve shutdown.
+- **Technical**: Resolved 75°C 'System Shutdowned' thermal failure via 4U hybrid airflow architecture.
+- **The Berry Creek Incident**: Sustained head injury from falling branch (22 stitches); managed IP conflict crisis from ER while on concussion protocol.
+- **The 'Lead vs Lead' Mandate**: Enforced 'Solder = LED' vs 'Person = LEED' spelling rule to prevent toxic manufacturing errors.
+- **CNC First Strategy**: Accepted high unit cost to avoid $50k hard tooling risk during validation.
+- **The PMS Insert Crisis**: Rejected glue fix for popping inserts; recalculated tolerance to .170 +0.00/-0.012 for mechanical interference fit.
+- **The 'Blind Mate' Alignment**: Engineered ovalized 'wiggle room' tie plates to prevent connector smash during blind assembly.
+- **The LED Bleed**: Forced vendor to enlarge spacer holes to seat LED collars deeper, eliminating light bleed.
+
+### Cortez
+- **Financial**: Avoided tooling rework ($30k risk) via 'flawless' first-pass surfacing.
+- **Process**: Final CAD files released from ID sketch to Prototype in 6 weeks.
+- **Technical**: Pro/ENGINEER (Surface Modeling); Resolved 0.05mm Key Pitch mismatch.
+
+### Elmer / Zeus
+- **Financial**: Delivered under 120-hour quote estimate; Managed $10k+ rapid proto budget.
+- **Process**: Reduced fabrication lead time to 9 days; Standardized 100% of assembly hardware to 4-40.
+- **Technical**: Resolved 'Dead Nuts' thermal flatness crisis via gap fillers; Engineered 5-unit demo build.
+- **The 'Master Fireball' Challenge**: Integrated massive Quantum Fireball LT20 (40GB) drive; redesigned brackets to dampen vibration and added 'spherical dimples' for EMI grounding.
+- **The 8mm Lift**: Emergency ECO to raise lower drive bay by exactly 8mm to clear a power connector collision detected in Pro/E.
+- **Hardware Standardization**: Enforced 100% 4-40 screw standardization to prevent assembly line errors during the 9-day crunch.
+
+### WebTV Galaxy
+- **Financial**: Maintained schedule during critical vendor shutdown (E-M Solutions)
+- **Process**: Established centralized FTP hub (share.webtv.net) to resolve version control chaos
+- **Technical**: Dissipated 150W thermal load (AMD K7) in CE form factor
+
+### WebTV Pluto (CES Demo)
+- **Financial**: N/A (Critical Trade Show Deliverable)
+- **Process**: Simultaneous coordination of PCB fab, sheet metal (EMS), and machining (Sputnik)
+- **Technical**: Completed Pro/E database for Zeus/Pluto enclosures in rapid sprint
+

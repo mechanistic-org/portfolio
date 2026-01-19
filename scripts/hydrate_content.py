@@ -153,11 +153,129 @@ def hydrate_content(dry_run=False, force=False):
     if not dry_run:
         print(f"    Updated: {stats['updated']}")
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Hydrate Astro MDX content from NotebookLM JSON dumps.")
-    parser.add_argument("--dry-run", action="store_true", help="Preview changes without writing to disk.")
+
+# --- Reverse Hydration (MDX -> Resume/LinkedIn) ---
+
+def reverse_hydrate(dry_run=False):
+    """
+    Extracts 'forensic_metrics' and 'war_stories' from Project MDX files
+    and updates RESUME_READY.txt and LINKEDIN_READY.txt.
+    """
+    resume_path = Path("public/assets/prompts/RESUME_READY.txt")
+    linkedin_path = Path("public/assets/branding/LINKEDIN_READY.txt")
+    
+    # 1. Collect Data from MDX
+    project_data = {}
+    mdx_files = list(TARGET_DIR.glob("**/*.mdx"))
+    
+    for mdx_file in mdx_files:
+        try:
+            post = frontmatter.load(mdx_file)
+            project_slug = post.metadata.get("slug") or mdx_file.stem
+            
+            # Extract War Stories
+            war_stories = []
+            if "metrics" in post.metadata and "war_stories" in post.metadata["metrics"]:
+                stories = post.metadata["metrics"]["war_stories"]
+                for story in stories:
+                    if isinstance(story, dict): # Handle object format
+                        label = story.get('label')
+                        # EXCLUSION LIST: Items to keep in Project MDX but HIDE from Resume/LinkedIn
+                        if "Berry Creek" in label:
+                            continue
+                        war_stories.append(f"- **{label}**: {story.get('description')}")
+            
+            # Extract Forensic Metrics
+            forensics = []
+            if "forensic_metrics" in post.metadata:
+                fm = post.metadata["forensic_metrics"]
+                if fm.get("financial"): forensics.append(f"- **Financial**: {fm['financial']}")
+                if fm.get("process"): forensics.append(f"- **Process**: {fm['process']}")
+                if fm.get("technical"): forensics.append(f"- **Technical**: {fm['technical']}")
+
+            if war_stories or forensics:
+                project_data[project_slug] = {
+                    "title": post.metadata.get("title", project_slug),
+                    "war_stories": war_stories,
+                    "forensics": forensics
+                }
+                
+        except Exception as e:
+            print(f"⚠️  Error reading MDX {mdx_file}: {e}")
+
+    # 2. Generate Resume Section
+    new_resume_section = "\n## PROJECT ARTIFACTS (Auto-Generated)\n\n"
+    for slug, data in project_data.items():
+        new_resume_section += f"### {data['title']}\n"
+        for item in data['forensics']:
+            new_resume_section += item + "\n"
+        for item in data['war_stories']:
+            new_resume_section += item + "\n"
+        new_resume_section += "\n"
+
+    # 3. Update Resume File
+    if resume_path.exists():
+        with open(resume_path, "r", encoding="utf-8") as f:
+            content = f.read()
+            
+        # Basic append if marker not found (First Run)
+        if "## PROJECT ARTIFACTS (Auto-Generated)" not in content:
+            updated_content = content + "\n" + new_resume_section
+        else:
+            # Replace existing block (Regex or simple split would be better, but simple split for now)
+            pre_split = content.split("## PROJECT ARTIFACTS (Auto-Generated)")[0]
+            updated_content = pre_split + new_resume_section
+            
+        if not dry_run:
+            with open(resume_path, "w", encoding="utf-8") as f:
+                f.write(updated_content)
+            print("✅  Updated RESUME_READY.txt")
+        else:
+            print("⚪  [Dry Run] Would update RESUME_READY.txt")
+
+    # 4. Generate LinkedIn Section (Copy-Paste Ready)
+    # Format: 
+    # [Project Name]
+    # [Forensic Summary]
+    # - Bullet 1
+    # - Bullet 2
+    
+    new_linkedin_section = "\n## LINKEDIN EXPERIENCE BLURBS (Auto-Generated)\n\n"
+    for slug, data in project_data.items():
+        new_linkedin_section += f"**{data['title']}**\n"
+        for item in data['forensics']:
+            new_linkedin_section += item + "\n"
+        for item in data['war_stories']:
+            # Berry Creek filtering happens during data collection (step 1), so it's already filtered here.
+            # However, for safety and clarity if logic changes:
+            new_linkedin_section += item + "\n"
+        new_linkedin_section += "\n"
+
+    # 5. Update LinkedIn File
+    if linkedin_path.exists():
+        with open(linkedin_path, "r", encoding="utf-8") as f:
+            content = f.read()
+            
+        if "## LINKEDIN EXPERIENCE BLURBS (Auto-Generated)" not in content:
+            updated_content = content + "\n" + new_linkedin_section
+        else:
+             pre_split = content.split("## LINKEDIN EXPERIENCE BLURBS (Auto-Generated)")[0]
+             updated_content = pre_split + new_linkedin_section
+        
+        if not dry_run:
+            with open(linkedin_path, "w", encoding="utf-8") as f:
+                f.write(updated_content)
+            print("✅  Updated LINKEDIN_READY.txt")
+        else:
+            print("⚪  [Dry Run] Would update LINKEDIN_READY.txt")
     parser.add_argument("--force", action="store_true", help="Bypass Git safety check.")
+    parser.add_argument("--reverse", action="store_true", help="Run Reverse Hydration (MDX -> Resume).")
     
     args = parser.parse_args()
     
-    hydrate_content(dry_run=args.dry_run, force=args.force)
+    if args.reverse:
+        print("🔄  Starting Reverse Hydration...")
+        reverse_hydrate(dry_run=args.dry_run)
+    else:
+        hydrate_content(dry_run=args.dry_run, force=args.force)
+

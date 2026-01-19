@@ -56,11 +56,13 @@ function processMarkdown(text: string) {
 					<h1 class="font-sans text-4xl font-extrabold tracking-tight text-black uppercase">
 						{header.name}
 					</h1>
-					<h2 class="mt-1 font-mono text-lg font-bold tracking-tighter text-neutral-800">
+					<h2
+						class="mt-1 font-mono text-base font-bold tracking-tighter whitespace-nowrap text-neutral-800"
+					>
 						{header.title}
 					</h2>
 					<p
-						class="mt-4 font-mono text-xs tracking-widest text-neutral-500 uppercase md:block print:block"
+						class="mt-4 font-mono text-[10px] tracking-wider whitespace-nowrap text-neutral-500 uppercase md:block print:block"
 					>
 						// {header.tagline}
 					</p>
