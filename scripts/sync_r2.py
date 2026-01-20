@@ -56,6 +56,7 @@ def sync_assets():
     parser = argparse.ArgumentParser(description="Sync assets to Cloudflare R2")
     parser.add_argument('--prune', action='store_true', help="Delete remote files that do not exist locally")
     parser.add_argument('--dry-run', action='store_true', help="Show what would happen without making changes")
+    parser.add_argument('--force', action='store_true', help="Force upload even if sizes match")
     args = parser.parse_args()
 
     if not all([R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET_NAME]):
@@ -70,6 +71,7 @@ def sync_assets():
 
     action_label = "Syncing (Mirror)" if args.prune else "Syncing (Additive)"
     if args.dry_run: action_label += " [DRY RUN]"
+    if args.force: action_label += " [FORCE]"
     
     print(f"🚀 Starting {action_label}")
     print(f"   Source: {staging_path}")
@@ -105,17 +107,18 @@ def sync_assets():
             try:
                 # Check for existing
                 should_upload = True
-                try:
-                    metadata = s3.head_object(Bucket=R2_BUCKET_NAME, Key=s3_key)
-                    remote_size = metadata['ContentLength']
-                    local_size = os.path.getsize(local_path)
-                    
-                    if remote_size == local_size:
-                        skipped_count += 1
-                        should_upload = False
-                except:
-                    # File doesn't exist, proceed
-                    pass
+                if not args.force:
+                    try:
+                        metadata = s3.head_object(Bucket=R2_BUCKET_NAME, Key=s3_key)
+                        remote_size = metadata['ContentLength']
+                        local_size = os.path.getsize(local_path)
+                        
+                        if remote_size == local_size:
+                            skipped_count += 1
+                            should_upload = False
+                    except:
+                        # File doesn't exist, proceed
+                        pass
 
                 if should_upload:
                     if args.dry_run:

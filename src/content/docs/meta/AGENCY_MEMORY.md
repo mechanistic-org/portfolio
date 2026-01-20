@@ -107,9 +107,9 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Mining Operations (Phase 4: Extraction).**
-- **Next Step:** Inject extracted "Red Gold" into target projects (`SC48`, `C24`, `Hyphen`).
-- **Context:** **RESUME SIDE QUEST COMPLETE.** The Master Resume is now Forensic-Grade (Metrics, Awards, DCD Governance). The LinkedIn Banner is finalized (V6 Shifted).
+- **Active Task:** **Idle / Monitoring.**
+- **Next Step:** Await User Directive.
+- **Context:** **DEPLOYMENT COMPLETE (V6.1).** "Red Gold" Injected. R2 Assets Synced (Force). Hero Images Refreshed.
 
 * **Key Decision (Audio):** **"The Iron Dome"** - The Audio Host must be blind to instructions. We use `PODCAST_READY.txt` (Sanitized) and explicitly forbid instructional headers in the script source.
 * **Key Decision (Viz-Audio):** **"The SonicHeartbeat Standard"** - Idle = Pulse (Cycle), Active = Full EQ. Icon = Speaker (not Headphone).
@@ -230,3 +230,11 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **Red Gold:** High-value intelligence derived from crisis, failure, or "stepping into the fire." Unlike standard insights ("Gold"), Red Gold is structural wisdom that prevents catastrophic regression. It is "expensive" knowledge, forged in heat, and therefore the most precious asset in the repository.
 - **The Black Hole:** Data stores (like Text Decks) that are visible to the user but invisible to the Agent/Search.
 - **The Orphan:** Data that exists in the source (MDX) but is stripped by the destination (Astro/CMS) due to schema mismatch.
+- **The "Dumb Pipe" Law (Bubble Parsing):**
+  - `process_images.py` does NOT parse bubble folder names. It iterates `sorted(bubbles)`.
+  - **Naming:** You can name folders `01_discovery` or `01_foo`. The ONLY constraint is that the folder name must matches the `id` in the MDX `stickies` array.
+  - **Constraint:** Use descriptive names (`03a_thermal_failure`). "03" is opaque and unmaintainable.
+- **The "Force Sync" Law (R2 Deployment):**
+  - `sync_r2.py` checks file size to determine "freshness."
+  - **Trap:** Overwriting an image with a similarly compressed version (same byte size) causes a "False Negative" skip.
+  - **Fix:** Use `python scripts/sync_r2.py --force` to bypass size checks and guarantee deployment of critical visual updates (Hero Images).
