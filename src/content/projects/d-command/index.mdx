@@ -183,10 +183,10 @@ links:
 
 # METRICS (NotebookLM Forensic Bolus)
 forensic_metrics:
-  financial: "Recovered $155.70 scrap value from 6 rejected units; Pre-prod cost $10,493/unit."
-  process: "100% inspection of 42 Fader Pans (>50% reject rate); Managed 109 active drawings."
+  financial: "Recovered $155.70 scrap value; Pre-prod cost $10,493/unit; Field Complaint Rate held <4.6%."
+  process: "Rejected 57% of Sheet Metal; Top Cover Yield 10% (Paint); End Cap Yield 74% (Weld Lines)."
   technical: 'Resolved ''Sideplate'' threaded insert failure via CNC-3645 dimple mod; Corrected 84.478" extrusion error.'
-forensic_summary: 'Project Danko (D-Command) utilized a ''Solo Mandate'' execution model. I managed 109 active drawings while resolving multiple vendor quality crises: the ''Warped Fader Pan'' (where I personally rejected >50% of the first 42 units), the ''Sideplate'' insert failure (requiring a CNC dimple retrofit), and the cosmetic End Cap yield collapse (10% -> 74%). Additionally, I diagnosed and corrected a critical CAD-to-Vendor translation error where extrusions were cut to 84.478" due to unregenerated models.'
+forensic_summary: 'Project Danko (D-Command) utilized a ''Solo Mandate'' execution model. I managed 109 active drawings while resolving multiple vendor quality crises: the ''Warped Fader Pan'' (where I personally rejected 57% of the first 42 units), the ''Sideplate'' insert failure, and the cosmetic End Cap yield collapse (10% Top Cover yield / 74% End Cap yield). Additionally, I diagnosed and corrected a critical CAD-to-Vendor translation error where extrusions were cut to 84.478" due to unregenerated models.'
 toolchain:
   - "Pro/ENGINEER Wildfire"
   - "Pro/INTRALINK"
@@ -200,8 +200,8 @@ metrics:
     value: "$10,493"
     label: "Pre-Prod Cost"
   profitability:
-    value: "$155.70"
-    label: "Scrap Recovered"
+    value: "10% Yield"
+    label: "Top Cover Crisis"
   governance:
     ecos:
       - "ECO6310"
@@ -315,9 +315,10 @@ audio_url: "/assets/r2/d-command/d-command-briefing.m4a"
 - **Partners:** Mass Precision (Sheet Metal/Machining - San Jose), PPI Plastics (Injection Molding), Kwanasia (Contract Manufacturing - China), Jetcrown (Plastics).
 - **Governance:** Engineering Change Orders (ECOs 6310, 8000, 8114, 6549, 6150), First Article Inspection (FAI) reports, Material Review Board (MRB) dispositions.
 
-
 ---
+
 ## 🔍 Forensic Analysis (Audio Source)
-> *The following entities were identified in audio records but missing from written documentation.*
+
+> _The following entities were identified in audio records but missing from written documentation._
 
 - **Technical:** Rib, Tolerance Stack, Tolerance Stack

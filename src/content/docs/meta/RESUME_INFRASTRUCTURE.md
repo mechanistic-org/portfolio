@@ -62,4 +62,33 @@ git push origin main
 
 - **Title Wrapping:** Fixed by forcing `whitespace-nowrap` and reducing font size in `index.astro`.
 - **EBUSY Error:** Occurs if `Erik_Norris_Resume_Current.pdf` is open in Acrobat/Browser. **Close the file** before running the script.
-- **"Junk" PDF:** If the PDF looks like raw text, `generate_resume_pdf.cjs` fell back to text-mode (legacy). Ensure it's using the Puppeteer logic.
+- "Junk" PDF: If the PDF looks like raw text, `generate_resume_pdf.cjs` fell back to text-mode (legacy). Ensure it's using the Puppeteer logic.
+
+## 5. The "Forensic Seismograph" Protocol (Maintenance)
+
+When do we re-run this cycle? **Do not** rely on a simple calendar. The "Forensic" brand relies on _density_ of evidence, not freshness of dates.
+
+### The Trigger: "Gold Critical Mass"
+
+Re-run the **Mining -> Priming -> Resume** cycle when **ONE** of the following thresholds is met:
+
+1.  **The "Black Swan" Event (Immediate Trigger):**
+    - You solve a **crisis** that threatens the existence of a project/company.
+    - You invent a **novel workaround** (e.g., "The Headband Heat Sink") that redefines a constraint.
+    - _Action:_ Mine transcript immediately -> Updates Resume "War Stories" -> Updates NotebookLM.
+
+2.  **The "Standard Volume" Batch (Lagging Trigger):**
+    - **Interval:** Every **3-5** completed projects of "Standard" complexity.
+    - _Why?_ Routine excellence needs volume to become a pattern. One standard project changes nothing; five prove consistency.
+
+3.  **The "Vocabulary Shift" (Strategic Trigger):**
+    - You notice you are using new forensic terms (e.g., shifting from "Thermal Envelope" to "Entropy Management").
+    - _Action:_ Update `mine_themes.py` keywords -> Re-mine ALL transcripts -> Re-prime NotebookLM.
+
+### The Workflow Loop
+
+1.  **Record:** Capture the technical debrief (Podcast).
+2.  **Mine:** Run `scripts/mine_themes.py` and `scripts/mine_skepticism.py`.
+3.  **Consolidate:** Append findings to `GOLDEN_DIALOGUE_CORPUS.md`.
+4.  **Prime:** Feed corpus to NotebookLM to update the "Voice".
+5.  **Publish:** Run `hydrate_content.py` to push new "Gold" to Resume/LinkedIn text files.
