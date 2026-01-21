@@ -51,7 +51,7 @@ const specs = [
 	{ label: "CLIENT", value: data.employer || "Various" },
 	{ label: "DURATION", value: data.duration },
 	{ label: "TEAM", value: data.teamSize || "Solo" },
-];
+].filter((s) => s.value);
 
 // 3. Status Logic
 const statusColor =
