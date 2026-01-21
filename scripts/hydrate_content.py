@@ -268,8 +268,11 @@ def reverse_hydrate(dry_run=False):
             print("✅  Updated LINKEDIN_READY.txt")
         else:
             print("⚪  [Dry Run] Would update LINKEDIN_READY.txt")
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Hydrate content from JSON dumps or Reverse Hydrate MDX to Text.")
     parser.add_argument("--force", action="store_true", help="Bypass Git safety check.")
     parser.add_argument("--reverse", action="store_true", help="Run Reverse Hydration (MDX -> Resume).")
+    parser.add_argument("--dry-run", action="store_true", help="Simulate without writing.")
     
     args = parser.parse_args()
     

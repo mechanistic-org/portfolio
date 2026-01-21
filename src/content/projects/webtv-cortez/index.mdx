@@ -46,20 +46,42 @@ metrics:
     dcos: 0
     ecos:
       - 0.05mm_Pitch_Fix
+  quotes:
+    - "Who sculpts the back of a keyboard? A project manager sees a box and just says 'ship it'. Eric spent 28 hours on the top surface alone."
+    - "You don't win the key pitch argument by shouting. You win by proving it fits... down to the millimeter."
+    - "19.05mm vs 19.00mm? That's not a rounding error. That's a collision."
+    - "Sculpting with a hammer. That's what complex surfacing in Pro/E 2000 felt like."
   interventions:
     count: 3
     label: Critical Interventions
   process:
-    dcdCount: 0
+    yieldCrisis: null
+    dcdCount: 22
     engineeringChangeOrders:
-      - Key_Pitch_Redesign
+      - "Key_Deletion_Mod"
+      - "Pitch_Correction"
   profitability:
     label: Concept-to-Proto
     value: 6 Weeks
   war_stories:
-    - 1
-    - 2
-    - 3
+    - label: "The Pitch Fight"
+      value: "19.05mm Reality"
+      description: "Battled ID's 19.00mm spec against Vendor's 19.05mm standard. Proved cumulative error would crash keys into the bezel."
+    - label: "The $30k Deletion"
+      value: "Layout Hack"
+      description: "Saved $30k in new tooling by deleting the Page Up/Down keys from the main matrix and moving them to a separate pad."
+    - label: "The 6-Week Surface"
+      value: "Class A Rebuild"
+      description: "Rebuilt the entire organic surface model in 6 weeks to fix 'rocking' hard models and ensure IR transmission (3-15 deg slope)."
+    - label: "The 6-Week Miracle"
+      value: "Agile Surfacing"
+      description: "Delivered flawless Class-A surfacing in exactly 6 weeks, spending 28 hours on the master top surface to match ID intent."
+    - label: "The Lead Weight Hack"
+      value: "0.6kg Simulation"
+      description: "Hollowed out the internal Ren Shape model and glued in lead weights to hit the 0.6kg Sony target feel."
+    - label: "The Pitch War"
+      value: "19.05mm vs 19.00mm"
+      description: "Overturned Silitek's 'No Can Do' by proving the standard 19.05mm matrix fit within the custom ID bezel via cross-section analysis."
 presentation_mode: deep_dive
 production: Prototype
 slug: webtv-cortez

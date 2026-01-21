@@ -91,4 +91,13 @@ Re-run the **Mining -> Priming -> Resume** cycle when **ONE** of the following t
 2.  **Mine:** Run `scripts/mine_themes.py` and `scripts/mine_skepticism.py`.
 3.  **Consolidate:** Append findings to `GOLDEN_DIALOGUE_CORPUS.md`.
 4.  **Prime:** Feed corpus to NotebookLM to update the "Voice".
-5.  **Publish:** Run `hydrate_content.py` to push new "Gold" to Resume/LinkedIn text files.
+5.  **Prime:** Feed corpus to NotebookLM to update the "Voice".
+6.  **Publish:** Run `hydrate_content.py` to push new "Gold" to Resume/LinkedIn text files.
+
+### The "Staging" Guarantee
+
+> [!TIP]
+> **Persistence Protocol:**
+> All forensic updates are automatically staged in `public/assets/prompts/RESUME_READY.txt`.
+> This file acts as the **Long-Term Memory** for the resume. Even if we wait months to rebuild the PDF, the data is safely locked here.
+> **Next Refresh Action:** Open `RESUME_READY.txt` -> Select new bullets -> Update `resume_master.ts`.

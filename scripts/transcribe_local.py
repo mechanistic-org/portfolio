@@ -33,6 +33,7 @@ def load_params():
     parser.add_argument("--dry-run", action="store_true", help="Scan files but do not transcribe.")
     parser.add_argument("--force", action="store_true", help="Re-transcribe existing files.")
     parser.add_argument("--model", default=MODEL_SIZE, help="Whisper model to use.")
+    parser.add_argument("--source", default=SOURCE_DIR, help="Source directory for audio files.")
     return parser.parse_args()
 
 def clean_transcript(text):
@@ -57,10 +58,13 @@ def main():
     args = load_params()
     
     print(f"🎤 Initializing Local Transcriber [{args.model}]...")
-    os.makedirs(SOURCE_DIR, exist_ok=True)
     
-    files = [f for f in os.listdir(SOURCE_DIR) if f.lower().endswith(EXTENSIONS)]
-    print(f"📂 Found {len(files)} audio files in {SOURCE_DIR}")
+    # Use the source from args
+    target_dir = args.source
+    os.makedirs(target_dir, exist_ok=True)
+    
+    files = [f for f in os.listdir(target_dir) if f.lower().endswith(EXTENSIONS)]
+    print(f"📂 Found {len(files)} audio files in {target_dir}")
     
     if args.dry_run:
         print("Dry run complete.")
@@ -87,7 +91,7 @@ def main():
     process_count = 0
     
     for filename in files:
-        audio_path = os.path.join(SOURCE_DIR, filename)
+        audio_path = os.path.join(target_dir, filename)
         transcript_path = audio_path + ".transcript.txt"
         
         if os.path.exists(transcript_path) and not args.force:
@@ -126,9 +130,10 @@ def main():
             print(f"  ❌ Failed: {e}")
 
     # Write Report
-    with open(MINING_REPORT_PATH, "w", encoding="utf-8") as f:
+    report_path = os.path.join(target_dir, "mining_report.md")
+    with open(report_path, "w", encoding="utf-8") as f:
         f.write("\n".join(report_lines))
-    print(f"\n📜 Mining Report saved to: {MINING_REPORT_PATH}")
+    print(f"\n📜 Mining Report saved to: {report_path}")
     print(f"🎉 Complete. Processed {process_count} new files.")
 
 if __name__ == "__main__":

@@ -5,21 +5,22 @@ cyberspace:
   enable: true
   layout: linear
   stickies:
-  - align: center
-    data:
-      src: /assets/placeholders/tech-1.jpg
-    id: intro
-    text: <strong>YEAR:</strong> 2012<br/><strong>ROLE:</strong> Kaleidescape
-    title: Cinema One
-    type: media
-  - align: center
-    id: details
-    text: This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong>
-      Other
-    title: PROJECT DATA
-    type: void
+    - align: center
+      data:
+        src: /assets/placeholders/tech-1.jpg
+      id: intro
+      text: <strong>YEAR:</strong> 2012<br/><strong>ROLE:</strong> Kaleidescape
+      title: Cinema One
+      type: media
+    - align: center
+      id: details
+      text:
+        This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong>
+        Other
+      title: PROJECT DATA
+      type: void
 date: 2012-08-01 00:00:00+00:00
-description: ''
+description: ""
 documents: []
 draft: false
 duration: 1.1 Years
@@ -27,43 +28,56 @@ employer: Kaleidescape
 endDate: 2013-09-01 00:00:00+00:00
 gallery: []
 heroImage: /assets/placeholders/tech-1.jpg
-impact: ''
+impact: ""
 industry: Other
 links:
-- name: Kaleidescape Website
-  url: https://kaleidescape.com
+  - name: Kaleidescape Website
+    url: https://kaleidescape.com
 metrics:
   financial:
+    riskBuy: "$3,000 (Auth)"
     costOfGoodsSold: []
     margins: []
     toolingActual: 0
     toolingBudget: 0
   process:
+    yieldCrisis: "29% (Top Covers)"
     dcdCount: 0
-    engineeringChangeOrders: []
-  war_stories: []
+    engineeringChangeOrders:
+      - "Flow_Mark_Deviation"
+      - "R332_Cage_Relief"
+  quotes:
+    - "It feels like capitulation... but it's triage. He issued a deviation allowing a 25x20mm flow mark to unblock the line."
+    - "A mechanical interference was triggering a software fatal error. The drive cage was shaving off resistor R332, crashing the kernel."
+  war_stories:
+    - label: "The 'Tactical' Deviation"
+      value: "25x20mm Limit"
+      description: "Issued pragmatic deviation allowing cosmetic flow marks <25mm to unblock shipping while protecting the 100% failure lots."
+    - label: "The Gennum Crash Loop"
+      value: "R332 Resistor"
+      description: "Diagnosed a 'Software Fatal Error' on the Gennum VXP chip as physical interference: the drive cage was shearing off Resistor R332."
 phase_stats:
   Design: 174.2
   Engineering: 59.4
   Production: 55.4
   Strategy: 19.8
-presentation_mode: standard
+presentation_mode: deep_dive
 production: Mass Production
 slug: cinema-one
 statusLabel: Completed
 tags:
-- Mechanical Engineering
-- Materials Knowledge
-- Design for Manufacturing (DFM)
-- Product Design
-- CAD (Computer-Aided Design)
+  - Mechanical Engineering
+  - Materials Knowledge
+  - Design for Manufacturing (DFM)
+  - Product Design
+  - CAD (Computer-Aided Design)
 teamSize: Unknown
 theme: hyperspace
 title: Cinema One
 toolIcons:
-- ptc
+  - ptc
 tools:
-- PTC Creo
+  - PTC Creo
 war_stories: []
 ---
 
@@ -84,10 +98,10 @@ war_stories: []
 ### Forensic Engineering
 
 > **The "Flow Mark" Rejection (Cosmetic Crisis):**
-> The plastic top covers (Yomura) had visible flow lines on the front lip. The vendor attempted to "spot paint" the defect, but it looked like a smudge.
+> The plastic top covers (Yomura) had visible flow lines on the front lip.
 >
-> - **The Stand:** We rejected 100% of the inventory (1,200 parts), forcing a line-down situation.
-> - **The Fix:** We forced a **Mold Flow Analysis** and re-tooling of the gate location rather than accepting a cosmetic compromise.
+> - **The Crisis:** Sanmina reported a 100% failure rate on specific lots. Yield dropped to 29%.
+> - **The Fix:** Executed a "Tactical Pragmatism" strategy: Rejected the gross failures but issued a specific **Deviation** allowing flow marks smaller than **25x20mm** to unblock the line while re-tooling the gate.
 >
 > **The "G-Force" (Shipping Failure):**
 > Units arrived with Optical Drives sheared off their mounts. The internal foam packaging compressed during transit, allowing the heavy steel chassis to accelerate inside the box.
@@ -99,6 +113,7 @@ war_stories: []
 - **Engineering Lead:** Erik Norris
 - **Industrial Design:** Argyle Design (Gabe Cohn)
 - **Plastics:** Yomura (Roger Lee, Grat Wu)
+- **Quality/Mfg:** Sanmina (Julio Briseno)
 - **CM:** Sanmina
 
 ### Success Metrics

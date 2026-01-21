@@ -177,6 +177,9 @@ forensic_metrics:
   financial: "CNC Chassis Unit Price $561.46 (vs Hard Tooling); Protected <$15k COGS via Varitronix Reuse."
   process: "Executed 16+ config thermal matrix (3U vs 4U); Processed 12,000+ thermal data points."
   technical: "Resolved 75°C shutdown via 4U re-architecture; Engineered Custom Fan Brackets (9420-58498-00 / 9420-58488-00)."
+  quotes:
+    - "Without an aluminum frame, a touring console is basically a floppy sheet of metal... I bent the metal to trick the physics."
+    - "Does an inch and a half really solve a shutdown-level heat spike? It buys you air volume. That's the key."
 
 # FORENSIC SUMMARY
 forensic_summary: "The SC48 (Project Lux) embedded console faced a catastrophic thermal ceiling where the CPU hit 75°C, triggering automatic shutdown. I intervened by re-architecting the chassis from 3U to 4U, implementing a hybrid 80mm/120mm cooling solution with custom 'L-Plenums' and ducting. This brute-force validation matrix (18 configurations) proved the 4U layout reduced CPU rise to 13.8°C, solving the thermal crisis while maintaining the side-intake ID constraint."
@@ -236,6 +239,18 @@ metrics:
     - label: "The LED Bleed"
       value: "Pixel Perfect Gate"
       description: "Forced vendor to enlarge spacer holes to seat LED collars deeper, eliminating light bleed."
+    - label: "The 'Ghost Dimension'"
+      value: "1.6 Inch Delta"
+      description: "Discovered the ID model and Mechanical chassis were 1.6 inches apart in length three weeks before tooling release."
+    - label: "The Yield Flip"
+      value: "50% -> 100%"
+      description: "Identified a 50% yield loss on Fader Plates due to 'Over-Constraint'. Reduced 12 screw points to 6, restoring yield to 100%."
+    - label: "The PSU Heatsink Hack"
+      value: "Chassis Conduction"
+      description: "Modified PSU mounting brackets to replace rubber feet, using the chassis itself as a heatsink to prevent 75°C shutdown."
+    - label: "The Torque Strip Fix"
+      value: "Density Matching"
+      description: "Diagnosed fastener stripping failure: factory torque settings were mismatched to material density. Recalibrated line drivers."
 phase_stats:
   Design: 0
   Engineering: 0

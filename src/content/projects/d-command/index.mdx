@@ -176,8 +176,7 @@ employer: Digidesign
 endDate: 2004-09-01
 forensic_metrics:
   financial:
-    Recovered $155.70 scrap value; Pre-prod cost $10,493/unit; Field Complaint
-    Rate held <4.6%.
+    Recovered $155.70 scrap value; Pre-prod cost $10,493/unit; Field Complaint Rate held <4.6%. Combined volume of Buckley and Danko monitor allows offshore mfg.
   process:
     Rejected 57% of Sheet Metal; Top Cover Yield 10% (Paint); End Cap Yield
     74% (Weld Lines).
@@ -191,7 +190,9 @@ forensic_summary:
   the ''Sideplate'' insert failure, and the cosmetic End Cap yield collapse (10% Top
   Cover yield / 74% End Cap yield). Additionally, I diagnosed and corrected a critical
   CAD-to-Vendor translation error where extrusions were cut to 84.478" due to unregenerated
-  models.'
+  models.
+
+  "I'm squeezing a 2-month DFM and manufacturing process optimization campaign to help out on Buckley into 2.5 weeks." - *Erik Norris*'
 gallery: []
 heroImage: /assets/r2/d-command/d-command-hero-01-xl.webp
 impact: ""
@@ -215,6 +216,7 @@ metrics:
       - ECO8198
       - Deviation 1212
       - ECO7927
+      - "Solo Ownership (Drawings)"
   interventions:
     count: 42
     label: Faders Inspected
@@ -276,6 +278,7 @@ tools:
 #### II. THE CAST (Team & Stakeholders)
 
 - **Erik Norris:** Mechanical Engineer (Lead on Danko Mechanicals)
+- **Industrial Design:** NewDealDesign (Chris Lenart) / Pivot / Modus
 - **Neal Breitbarth:** Mechanical Engineering Manager (Escalation point, DFM guidance)
 - **Al Siy:** QA/Manufacturing (Incoming inspection & vendor auditing)
 - **Fidel Saucedo:** Vendor Engineer, Mass Precision (Sheet metal fabrication partner)
@@ -294,6 +297,13 @@ tools:
   2.  **Root Cause Correction:** Directed Mass Precision to implement localized distortion compensation.
   3.  **Tolerance Relief:** Redesigned the rear tie-plate brackets (**ECO 8000**) to ovalize mounting holes, allowing lateral float between the Main and Fader units.
 - **The Result:** Eliminated the need for field shims and ratchet straps. Restored chassis alignment to allow consistent 0.02" gaps between modules.
+
+##### 2. The Sticky Button Crisis (Process Hack)
+
+- **The Trigger:** Fader buttons were sticking in the "down" position.
+- **The Failure:** The hardware insertion process was physically deforming the plastic fader pan, bowing it enough to pinch the buttons.
+- **The Intervention:** Invented a "Post-Hardware Flattening" operation—a mandatory extra manufacturing step at Mass Precision to physically compress the bowing back into tolerance after insertion.
+- **The Result:** 100% elimination of sticky buttons without retooling the mold.
 
 ##### 2. The End Cap Fracture Event
 
@@ -322,5 +332,5 @@ tools:
 #### V. TECHNICAL STACK & GOVERNANCE
 
 - **Tools:** Pro/Engineer (3D Modeling/Surfacing), Intralink (PDM), Microsoft Excel (BOM Management).
-- **Partners:** Mass Precision (Sheet Metal/Machining - San Jose), PPI Plastics (Injection Molding), Kwanasia (Contract Manufacturing - China), Jetcrown (Plastics).
+- **Partners:** Mass Precision (Sheet Metal), PPI Plastics, NewDealDesign (ID), Pivot/Modus (ID).
 - **Governance:** Engineering Change Orders (ECOs 6310, 8000, 8114, 6549, 6150), First Article Inspection (FAI) reports, Material Review Board (MRB) dispositions.
