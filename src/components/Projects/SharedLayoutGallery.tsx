@@ -536,9 +536,6 @@ export default function SharedLayoutGallery({
 												closeModal();
 											}
 										}}
-										onClick={(e) => {
-											e.stopPropagation();
-										}}
 									>
 										<img
 											src={getAssetUrl(uniqueImages[selectedIndex].src)}
