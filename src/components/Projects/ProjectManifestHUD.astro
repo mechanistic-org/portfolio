@@ -245,9 +245,9 @@ const showMetrics =
 										{metrics.governance.ecos && metrics.governance.ecos.length > 0 ? (
 											<span
 												class="cursor-help border-b border-dashed border-white/20 hover:border-white/50"
-												title={metrics.governance.ecos.join(", ")}
+												title={metrics.governance.ecos.join("\n")}
 											>
-												{metrics.governance.ecos[0]}
+												{metrics.governance.ecos.length}
 											</span>
 										) : (
 											<span class="opacity-50">--</span>
