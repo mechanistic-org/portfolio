@@ -238,3 +238,14 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
   - `sync_r2.py` checks file size to determine "freshness."
   - **Trap:** Overwriting an image with a similarly compressed version (same byte size) causes a "False Negative" skip.
   - **Fix:** Use `python scripts/sync_r2.py --force` to bypass size checks and guarantee deployment of critical visual updates (Hero Images).
+- **The "Nuclear Repair" Pattern (Jan 2026):**
+  - **Context:** Systemic YAML corruption (invisible chars using `src: ... - id:`) cannot be fixed reliably with Regex.
+  - **Protocol:** Do not iterate. Write a script to _scrape_ the data (images/text) into a Python Dictionary and _dump_ a pristine new file.
+  - **Artifact:** `repair_dcontrol_nuclear_v2.py`.
+- **The "Schema Violation" Trap:**
+  - `InvalidContentEntryDataError` is absolute. Unions (like `war_stories`) must match _exactly_.
+  - **Example:** `zeus` used `title/subtitle` instead of `label/value`. Immediate build failure.
+  - **Fix:** Check `config.ts` first. Do not guess.
+- **The Cloudflare "Ghost" Error:**
+  - "Unknown internal error occurred" during Deployment (after Build Passing) is a platform flake.
+  - **Fix:** Retry Push. Do not debug code.

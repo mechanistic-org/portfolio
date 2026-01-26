@@ -1,5 +1,18 @@
 import { defineCollection, reference, z } from "astro:content";
-import { glob } from "astro/loaders";
+import {
+	INDUSTRIES,
+	CATEGORIES,
+	EMPLOYERS,
+	ROLES,
+	TOOLS,
+	INDUSTRY_VALUES,
+	CATEGORY_VALUES,
+	EMPLOYER_VALUES,
+	CLIENT_VALUES,
+	ROLE_VALUES,
+	TOOL_VALUES,
+} from "./config/taxonomy";
+import glob from "./content/loaders/glob.js";
 
 // 3. OTHER PAGES
 const otherPagesCollection = defineCollection({
@@ -21,13 +34,13 @@ const projectsCollection = defineCollection({
 		date: z.coerce.date().optional(),
 		endDate: z.coerce.date().optional(),
 
-		employer: z.string().optional(),
-		industry: z.string().default("Other"),
-		category: z.string().optional(),
-		tools: z.array(z.string()).default([]),
+		employer: z.enum(EMPLOYER_VALUES as any).optional(),
+		industry: z.enum(INDUSTRY_VALUES as any).default("consumer_electronics"),
+		category: z.enum(CATEGORY_VALUES as any).optional(),
+		tools: z.array(z.enum(TOOL_VALUES as any)).default([]),
 		production: z.string().optional(),
 
-		client: z.array(z.string()).default([]),
+		client: z.array(z.enum(CLIENT_VALUES as any)).default([]),
 		tags: z.array(z.string()).default([]),
 
 		skillData: z
@@ -53,7 +66,7 @@ const projectsCollection = defineCollection({
 		documents: z
 			.array(
 				z.object({
-					name: z.string(),
+					name: z.string().optional(),
 					url: z.string(),
 				}),
 			)
@@ -62,7 +75,7 @@ const projectsCollection = defineCollection({
 		links: z
 			.array(
 				z.object({
-					name: z.string(),
+					name: z.string().optional(),
 					url: z.string(),
 				}),
 			)
@@ -80,7 +93,7 @@ const projectsCollection = defineCollection({
 		draft: z.boolean().default(false),
 		description: z.string().optional(),
 
-		// New fields
+		// New Fields
 		duration: z.string().optional(),
 		statusLabel: z.string().optional(),
 		additionalSkills: z.array(z.string()).default([]),
@@ -93,15 +106,25 @@ const projectsCollection = defineCollection({
 		// HUD Intelligence (V4.2 Upgrade)
 		metrics: z
 			.object({
-				cogs: z.object({ value: z.string(), label: z.string() }).optional(),
-				profitability: z.object({ value: z.string(), label: z.string() }).optional(),
+				cogs: z
+					.object({ value: z.string(), label: z.string() })
+					.optional()
+					.or(z.record(z.unknown()).transform((val) => undefined)),
+				profitability: z
+					.object({ value: z.string(), label: z.string() })
+					.optional()
+					.or(z.record(z.unknown()).transform((val) => undefined)),
 				governance: z
 					.object({
 						ecos: z.array(z.string()),
 						dcos: z.number(),
 					})
-					.optional(),
-				interventions: z.object({ count: z.number(), label: z.string() }).optional(),
+					.optional()
+					.or(z.record(z.unknown()).transform((val) => undefined)),
+				interventions: z
+					.object({ count: z.number(), label: z.string() })
+					.optional()
+					.or(z.record(z.unknown()).transform((val) => undefined)),
 				financial: z
 					.object({
 						toolingBudget: z.number().optional(),
@@ -109,13 +132,15 @@ const projectsCollection = defineCollection({
 						costOfGoodsSold: z.array(z.any()).optional(),
 						margins: z.array(z.any()).optional(),
 					})
-					.optional(),
+					.optional()
+					.or(z.record(z.unknown()).transform((val) => undefined)),
 				process: z
 					.object({
 						engineeringChangeOrders: z.array(z.any()).optional(),
 						dcdCount: z.number().optional(),
 					})
-					.optional(),
+					.optional()
+					.or(z.record(z.unknown()).transform((val) => undefined)),
 				war_stories: z
 					.array(
 						z.union([
@@ -147,7 +172,7 @@ const projectsCollection = defineCollection({
 
 		phase_stats: z.record(z.number()).optional(),
 		teamSize: z.coerce.string().optional(),
-		job_title: z.string().optional(),
+		job_title: z.enum(ROLE_VALUES as any).optional(),
 		war_stories: z
 			.array(
 				z.union([

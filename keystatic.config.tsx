@@ -16,6 +16,7 @@ import {
 	fields,
 	// singleton,
 } from "@keystatic/core";
+import { INDUSTRIES, CATEGORIES, EMPLOYERS, CLIENTS, ROLES, TOOLS } from "./src/config/taxonomy";
 
 // components for preview purposes
 import ComponentBlocks from "./src/components/KeystaticComponents/ComponentBlocks";
@@ -101,6 +102,9 @@ export default config({
 			entryLayout: "content",
 			format: { contentField: "content" },
 			schema: {
+				// --------------------------------------------------------------------------
+				// 1. Core Identity
+				// --------------------------------------------------------------------------
 				title: fields.slug({
 					name: { label: "Title" },
 					slug: {
@@ -108,59 +112,39 @@ export default config({
 						description: "Never change the slug once a file is published!",
 					},
 				}),
-				description: fields.text({
-					label: "Description",
-					multiline: true,
-				}),
 				draft: fields.checkbox({
 					label: "Draft",
 					description: "Set this project as draft to prevent it from being published.",
 				}),
-				date: fields.date({ label: "Start Date" }),
-				endDate: fields.date({ label: "End Date" }),
-				industry: fields.text({ label: "Industry" }),
-				category: fields.text({ label: "Category" }),
-				production: fields.text({ label: "Production Status" }),
-				employer: fields.text({ label: "Employer" }),
-
-				// Arrays
-				client: fields.array(fields.text({ label: "Client" }), {
-					label: "Clients",
-					itemLabel: (props) => props.value,
+				listed: fields.checkbox({
+					label: "Listed",
+					description: "Show in project lists (default: true)",
+					defaultValue: true,
 				}),
-				tags: fields.array(fields.text({ label: "Tag" }), {
-					label: "Tags",
-					itemLabel: (props) => props.value,
+				heroImage: fields.text({
+					label: "Hero Image Path",
+					description: "Path to R2 asset (e.g. /assets/r2/project/hero.png)",
 				}),
-				tools: fields.array(fields.text({ label: "Tool" }), {
-					label: "Tools",
-					itemLabel: (props) => props.value,
-				}),
-				toolIcons: fields.array(fields.text({ label: "Icon Code" }), {
-					label: "Tool Icons",
-					itemLabel: (props) => props.value,
-				}),
-
-				// Forensic Metrics (Schema Parity Fix)
-				forensic_metrics: fields.object({
-					financial: fields.text({ label: "Financial Metric" }),
-					process: fields.text({ label: "Process Metric" }),
-					technical: fields.text({ label: "Technical Metric" }),
-				}),
-
-				// Forensic Architecture (Automated via hydrate_content.py)
-				toolchain: fields.array(fields.text({ label: "Item" }), {
-					label: "Forensic Toolchain",
-					itemLabel: (props) => props.value,
-					description: "Injected by Forensic Pipeline. Do not edit manually unless necessary.",
-				}),
-				forensic_summary: fields.text({
-					label: "Forensic Summary",
+				description: fields.text({
+					label: "Description",
 					multiline: true,
-					description: "The 'Crisis & Intervention' STAR summary.",
+					description: "Short summary for cards and headers.",
 				}),
 
-				// Visual Presentation Mode (Refactor 2026-01-14)
+				// --------------------------------------------------------------------------
+				// 2. Context & Classification
+				// --------------------------------------------------------------------------
+				industry: fields.select({
+					label: "Industry",
+					options: INDUSTRIES.map((i) => ({ label: i.label, value: i.value })),
+					defaultValue: INDUSTRIES[0].value,
+				}),
+				category: fields.select({
+					label: "Category",
+					options: CATEGORIES.map((c) => ({ label: c.label, value: c.value })),
+					defaultValue: CATEGORIES[0].value,
+				}),
+				theme: fields.text({ label: "Theme" }),
 				presentation_mode: fields.select({
 					label: "Presentation Mode",
 					description: "Controls the visual styling in the Multiverse Graph",
@@ -172,14 +156,79 @@ export default config({
 					],
 				}),
 
-				// Skills Data
+				// --------------------------------------------------------------------------
+				// 3. Timeline & Status
+				// --------------------------------------------------------------------------
+				date: fields.date({ label: "Start Date" }),
+				endDate: fields.date({ label: "End Date" }),
+				duration: fields.text({ label: "Duration (Text)" }),
+				production: fields.text({ label: "Production Status" }),
+				statusLabel: fields.text({ label: "Status Label" }),
+
+				// --------------------------------------------------------------------------
+				// 4. Role & Employment
+				// --------------------------------------------------------------------------
+				employer: fields.select({
+					label: "Employer",
+					options: EMPLOYERS.map((e) => ({ label: e.label, value: e.value })),
+					defaultValue: EMPLOYERS[0].value,
+				}),
+				job_title: fields.text({ label: "Job Title" }),
+				role: fields.select({
+					label: "Role",
+					options: ROLES.map((r) => ({ label: r.label, value: r.value })),
+					defaultValue: ROLES[0].value,
+				}), // Kept for schema parity
+				teamSize: fields.text({ label: "Team Size" }),
+				client: fields.array(
+					fields.select({
+						label: "Client",
+						options: CLIENTS.map((c) => ({ label: c.label, value: c.value })),
+						defaultValue: CLIENTS[0].value,
+					}),
+					{
+						label: "Clients",
+						itemLabel: (props) => props.value,
+					},
+				),
+				cast: fields.array(
+					fields.object({
+						name: fields.text({ label: "Name" }),
+						role: fields.text({ label: "Role" }),
+						org: fields.text({ label: "Organization" }),
+					}),
+					{
+						label: "Cast / Team",
+						itemLabel: (props) => props.fields.name.value || "Member",
+					},
+				),
+
+				// --------------------------------------------------------------------------
+				// 5. Skills & Tools
+				// --------------------------------------------------------------------------
+				tags: fields.array(fields.text({ label: "Tag" }), {
+					label: "Tags",
+					itemLabel: (props) => props.value,
+				}),
+				tools: fields.array(
+					fields.select({
+						label: "Tool",
+						options: TOOLS.map((t) => ({ label: t.label, value: t.value })),
+						defaultValue: TOOLS[0].value,
+					}),
+					{ label: "Tools", itemLabel: (props) => props.value },
+				),
+				toolIcons: fields.array(fields.text({ label: "Icon Code" }), {
+					label: "Tool Icons (Dev)",
+					itemLabel: (props) => props.value,
+				}),
 				skillData: fields.array(
 					fields.object({
 						name: fields.text({ label: "Name" }),
 						value: fields.number({ label: "Value" }),
 					}),
 					{
-						label: "Skill Data",
+						label: "Skill Data (Radar)",
 						itemLabel: (props) => props.fields.name.value || "Skill",
 					},
 				),
@@ -187,64 +236,146 @@ export default config({
 					label: "Additional Skills",
 					itemLabel: (props) => props.value,
 				}),
-				skillGraph: fields.text({ label: "Skill Graph (JSON)" }),
-				partGraph: fields.text({ label: "Part Graph (JSON)" }),
-				job_title: fields.text({ label: "Job Title" }),
 
-				// Stats & Metrics
-				stats: fields.object({
-					plastic: fields.number({ label: "Plastic" }),
-					metal: fields.number({ label: "Metal" }),
-					pcb: fields.number({ label: "PCB" }),
+				// --------------------------------------------------------------------------
+				// 6. Forensic Intelligence (Crucial Data)
+				// --------------------------------------------------------------------------
+				forensic_summary: fields.text({
+					label: "Forensic Summary",
+					multiline: true,
+					description: "The 'Crisis & Intervention' STAR summary.",
 				}),
-
 				metrics: fields.object({
+					// Top-level Quotes
+					quotes: fields.array(fields.text({ label: "Quote" }), { label: "Quotes" }),
+
+					// Financials
 					financial: fields.object({
 						toolingBudget: fields.number({ label: "Tooling Budget" }),
 						toolingActual: fields.number({ label: "Tooling Actual" }),
 						costOfGoodsSold: fields.array(fields.text({ label: "Item" }), { label: "COGS" }),
 						margins: fields.array(fields.text({ label: "Item" }), { label: "Margins" }),
+						quotes: fields.array(fields.text({ label: "Quote" }), { label: "Quotes" }),
+						royaltySaved: fields.text({ label: "Royalty Saved" }),
+						riskBuy: fields.text({ label: "Risk Buy" }),
+						toolingWaived: fields.number({ label: "Tooling Waived" }),
+						value: fields.text({ label: "Value" }),
+						label: fields.text({ label: "Label" }),
 					}),
+
+					// Process
 					process: fields.object({
 						engineeringChangeOrders: fields.array(fields.text({ label: "ECO" }), { label: "ECOs" }),
 						dcdCount: fields.number({ label: "DCD Count" }),
+						yieldCrisis: fields.text({ label: "Yield Crisis" }),
+						yieldRecovery: fields.text({ label: "Yield Recovery" }),
+						label: fields.text({ label: "Label" }),
+						value: fields.text({ label: "Value" }),
 					}),
-					war_stories: fields.array(fields.number({ label: "Story ID" }), {
-						label: "War Stories",
-						itemLabel: (props) => props.value?.toString() || "",
+
+					// Governance
+					governance: fields.object({
+						ecos: fields.array(fields.text({ label: "ECO" }), { label: "ECOs" }),
+						dcos: fields.number({ label: "DCOs" }),
+						dcdCount: fields.number({ label: "DCD Count" }),
 					}),
-				}),
-				war_stories: fields.array(fields.number({ label: "Story ID (Legacy)" }), {
-					label: "War Stories (Legacy)",
-					itemLabel: (props) => props.value?.toString() || "",
+
+					// Interventions
+					interventions: fields.object({
+						count: fields.number({ label: "Count" }),
+						label: fields.text({ label: "Label" }),
+					}),
+
+					// Profitability
+					profitability: fields.object({
+						value: fields.text({ label: "Value" }),
+						label: fields.text({ label: "Label" }),
+					}),
+
+					// COGS
+					cogs: fields.object({
+						value: fields.text({ label: "Value" }),
+						label: fields.text({ label: "Label" }),
+					}),
+
+					// Time to Market
+					time_to_market: fields.object({
+						value: fields.text({ label: "Value" }),
+						label: fields.text({ label: "Label" }),
+					}),
+
+					// War Stories (Rich)
+					war_stories: fields.array(
+						fields.object({
+							label: fields.text({ label: "Label" }),
+							value: fields.text({ label: "Value" }),
+							description: fields.text({ label: "Description", multiline: true }),
+						}),
+						{
+							label: "War Stories",
+							itemLabel: (props) => props.fields.label.value || "Story",
+						},
+					),
 				}),
 
-				// Legacy/Metadata Fields
-				teamSize: fields.text({ label: "Team Size" }),
-				theme: fields.text({ label: "Theme" }),
-				duration: fields.text({ label: "Duration" }),
-				statusLabel: fields.text({ label: "Status Label" }),
-				impact: fields.text({ label: "Impact" }),
+				// Legacy War Stories (Top Level)
+				war_stories: fields.array(
+					fields.object({
+						label: fields.text({ label: "Label" }),
+						value: fields.text({ label: "Value" }),
+						description: fields.text({ label: "Description", multiline: true }),
+					}),
+					{
+						label: "War Stories (Legacy Top-Level)",
+						itemLabel: (props) => props.fields.label.value || "Story",
+					},
+				),
 
-				// Complex Objects
+				forensic_metrics: fields.object({
+					financial: fields.text({ label: "Financial Metric", multiline: true }),
+					process: fields.text({ label: "Process Metric", multiline: true }),
+					technical: fields.text({ label: "Technical Metric", multiline: true }),
+					quotes: fields.array(fields.text({ label: "Quote" }), { label: "Quotes" }),
+					governance: fields.text({ label: "Governance", multiline: true }),
+				}),
+
+				impact: fields.text({ label: "Impact Statement" }),
+
+				// --------------------------------------------------------------------------
+				// 7. Stats & Graphs
+				// --------------------------------------------------------------------------
+				stats: fields.object({
+					plastic: fields.number({ label: "Plastic" }),
+					metal: fields.number({ label: "Metal" }),
+					pcb: fields.number({ label: "PCB" }),
+				}),
 				phase_stats: fields.object({
 					Strategy: fields.number({ label: "Strategy" }),
 					Design: fields.number({ label: "Design" }),
 					Engineering: fields.number({ label: "Engineering" }),
 					Production: fields.number({ label: "Production" }),
 				}),
+				phases: fields.object({
+					label: fields.text({ label: "Label" }),
+				}),
+				skillGraph: fields.text({ label: "Skill Graph (JSON)" }),
+				partGraph: fields.text({ label: "Part Graph (JSON)" }),
 
-				links: fields.array(
+				// --------------------------------------------------------------------------
+				// 8. Media & Links
+				// --------------------------------------------------------------------------
+				gallery: fields.array(
 					fields.object({
-						name: fields.text({ label: "Name" }),
-						url: fields.url({ label: "URL" }),
+						src: fields.text({ label: "Source Path (R2)" }),
+						width: fields.number({ label: "Width" }),
+						height: fields.number({ label: "Height" }),
+						aspectRatio: fields.number({ label: "Aspect Ratio" }),
 					}),
 					{
-						label: "Links",
-						itemLabel: (props) => props.fields.name.value,
+						label: "Gallery Images",
+						itemLabel: (props) => props.fields.src.value || "Image",
 					},
 				),
-
 				documents: fields.array(
 					fields.object({
 						label: fields.text({ label: "Label" }),
@@ -255,15 +386,46 @@ export default config({
 						itemLabel: (props) => props.fields.label.value,
 					},
 				),
+				links: fields.array(
+					fields.object({
+						name: fields.text({ label: "Name" }),
+						url: fields.url({ label: "URL" }),
+					}),
+					{
+						label: "Links",
+						itemLabel: (props) => props.fields.name.value,
+					},
+				),
+				audio_url: fields.text({
+					label: "Audio Briefing URL",
+					description: "Path to R2 audio asset.",
+				}),
 
-				// Cyberspace (Scrollytelling Config)
+				// --------------------------------------------------------------------------
+				// 9. Cyberspace Engine (Scrollytelling)
+				// --------------------------------------------------------------------------
 				cyberspace: fields.object({
+					enable: fields.checkbox({ label: "Enable Scrollytelling" }),
 					layout: fields.text({ label: "Layout" }),
 					stickies: fields.array(
 						fields.object({
 							id: fields.text({ label: "ID" }),
-							type: fields.text({ label: "Type" }),
 							title: fields.text({ label: "Title" }),
+							type: fields.text({ label: "Type" }),
+							align: fields.select({
+								label: "Alignment",
+								options: [
+									{ label: "Center", value: "center" },
+									{ label: "Left", value: "left" },
+									{ label: "Right", value: "right" },
+								],
+								defaultValue: "center",
+							}),
+							text: fields.text({ label: "Text", multiline: true }),
+							featuredIndices: fields.array(fields.number({ label: "Index" }), {
+								label: "Featured Indices",
+								itemLabel: (props) => props.value?.toString() || "0",
+							}),
 
 							// Slide Deck
 							deck: fields.array(
@@ -277,18 +439,28 @@ export default config({
 									itemLabel: (props) => props.fields.title.value || "Slide",
 								},
 							),
+							legacy_deck: fields.array(
+								fields.object({
+									title: fields.text({ label: "Title" }),
+									subtitle: fields.text({ label: "Subtitle" }),
+									body: fields.text({ label: "Body", multiline: true }),
+								}),
+								{
+									label: "Legacy Deck",
+									itemLabel: (props) => props.fields.title.value || "Slide",
+								},
+							),
 
-							// Data Payload (Union of all potential fields)
+							// Data Payload
 							data: fields.object({
-								// Gallery Props
 								layout: fields.text({ label: "Layout" }),
 								columns: fields.number({ label: "Columns" }),
-								scattered: fields.checkbox({ label: "Scattered" }), // Added Field
+								scattered: fields.checkbox({ label: "Scattered" }),
+								src: fields.text({ label: "Src" }),
 								featuredIndices: fields.array(fields.number({ label: "Index" }), {
 									label: "Featured Indices",
 									itemLabel: (props) => props.value?.toString() || "0",
-								}), // Added Field
-
+								}),
 								images: fields.array(
 									fields.object({
 										src: fields.text({ label: "Src" }),
@@ -305,14 +477,11 @@ export default config({
 										itemLabel: (props) => props.fields.src.value || "Image",
 									},
 								),
-
-								// Model Props
 								modelSrc: fields.text({ label: "Model Src" }),
 								poster: fields.text({ label: "Poster" }),
 								cameraOrbit: fields.text({ label: "Camera Orbit" }),
 								fieldOfView: fields.text({ label: "Field of View" }),
-
-								// Nested Metadata (Legacy)
+								// Nested Legacy Data
 								data: fields.object({
 									title: fields.text({ label: "Title" }),
 									source: fields.text({ label: "Source" }),
@@ -324,8 +493,7 @@ export default config({
 							itemLabel: (props) => props.fields.id.value || "Sticky",
 						},
 					),
-
-					// Legacy "Split Brain" Narrative (Text separated from Stickies)
+					// Narrative
 					narrative: fields.array(
 						fields.object({
 							step: fields.text({ label: "Step ID" }),
@@ -340,34 +508,24 @@ export default config({
 					),
 				}),
 
-				gallery: fields.array(
-					fields.object({
-						src: fields.text({ label: "Source Path (R2)" }), // R2 Path as string (Law of Assets)
-						width: fields.number({ label: "Width" }),
-						height: fields.number({ label: "Height" }),
-						aspectRatio: fields.number({ label: "Aspect Ratio" }),
-					}),
-					{
-						label: "Gallery Images",
-						itemLabel: (props) => props.fields.src.value || "Image",
-					},
-				),
-
-				// Assets (Law of Assets: Text Strings for R2 paths)
-				heroImage: fields.text({
-					label: "Hero Image Path",
-					description: "Path to R2 asset (e.g. /assets/r2/project/hero.png)",
+				// --------------------------------------------------------------------------
+				// 10. Technical & Legacy
+				// --------------------------------------------------------------------------
+				toolchain: fields.array(fields.text({ label: "Item" }), {
+					label: "Forensic Toolchain",
+					itemLabel: (props) => props.value,
+					description: "Injected by Forensic Pipeline.",
 				}),
-
-				// Slug field to prevent "Key not allowed" error
 				slug: fields.text({
-					label: "Slug (Read-Only)",
-					description: "This field is managed by the file path. Do not edit.",
+					label: "Slug (Explicit Field)",
+					description: "Legacy override. Usually managed by title.",
 				}),
 
-				// Content
+				// --------------------------------------------------------------------------
+				// 11. Long-Form Content
+				// --------------------------------------------------------------------------
 				content: fields.mdx({
-					label: "Case Study",
+					label: "Case Study Content",
 					options: {
 						bold: true,
 						italic: true,
@@ -380,7 +538,7 @@ export default config({
 						table: true,
 						link: true,
 						image: {
-							directory: "src/content/projects/", // Only for local edits, R2 is preferred
+							directory: "src/content/projects/",
 							publicPath: "../",
 						},
 						divider: true,
