@@ -14,7 +14,7 @@ import {
 	PRODUCTION_STATUS_VALUES,
 	PRODUCTION_SCALE_VALUES,
 } from "./config/taxonomy";
-import glob from "./content/loaders/glob.js";
+import { glob } from "astro/loaders";
 
 // 3. OTHER PAGES
 const otherPagesCollection = defineCollection({
@@ -197,7 +197,24 @@ const projectsCollection = defineCollection({
 	}),
 });
 
+// 5. DOCS
+const docsCollection = defineCollection({
+	loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/docs" }),
+	schema: z.object({
+		title: z.string(),
+		slug: z.string().optional(),
+		description: z.string().optional(),
+		sidebar: z
+			.object({
+				group: z.string().optional(),
+				order: z.number().optional(),
+			})
+			.optional(),
+	}),
+});
+
 export const collections = {
 	otherPages: otherPagesCollection,
 	projects: projectsCollection,
+	docs: docsCollection,
 };

@@ -129,6 +129,10 @@ const RadialTaxonomy: React.FC<RadialTaxonomyProps> = ({ data: inputData }) => {
 				if (d.children) return "#444";
 				// Leaf Nodes (Projects) -> Use Parent (Employer) Color
 				const employerName = d.parent?.data?.name;
+				// If we have Color in data use it, otherwise lookup
+				// But HierarchyNode conversion strips 'color'. We need to fix buildHierarchy or lookup here.
+				// Actually, buildHierarchy preserves 'value' and 'id'. We should map node colors in buildHierarchy too, OR just lookup.
+				// Since we fixed getEntityColor usage elsewhere, lookup is safe here given we pass same name.
 				return getEntityColor(employerName, "EMPLOYER");
 			}) // Fix chain breakage
 			.attr("cursor", "pointer")

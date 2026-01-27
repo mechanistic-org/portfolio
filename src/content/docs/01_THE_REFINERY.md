@@ -1,11 +1,11 @@
 ---
-title: "The Refinery: Asset & Content Sovereignty"
-slug: "the_refinery"
+title: 'The Refinery: Asset & Content Sovereignty'
+slug: the_refinery
 sidebar:
-  group: "Handbook"
+  group: Handbook
   order: 1
+description: 'Documentation for The Refinery: Asset & Content Sovereignty.'
 ---
-
 # The Refinery: Asset & Content Sovereignty
 
 > **Role:** The Archivist / The Data God
@@ -26,7 +26,6 @@ The "Hybrid" era of CSVs and manual markdown files is over. We have moved to a *
 3.  **Intelligence (The Fuel):** High-fidelity data for the **Assembly Engine**. (`src/content/projects/*/_intelligence.md`)
 
 ---
-
 ## 2. The Intelligence Bolus (Assembly Fuel)
 
 **Status:** The "Assembly" (`/assembly`) is transitioning to become the **Main Interface**.
@@ -61,7 +60,6 @@ _The strategic reasoning._
 ```
 
 ---
-
 ## 3. Content Protocol (Keystatic)
 
 **WE DO NOT EDIT MARKDOWN FILES MANUALLY.**
@@ -82,7 +80,6 @@ Keystatic is the **Single Source of Truth**. Use it to:
 - Curate the Gallery (Drag & Drop sorting).
 
 ---
-
 ## 3. Asset Protocol (The Air Gap)
 
 **Rule #1:** NEVER commit heavy assets (JPG, PNG, GLB, MP4) to the Git Repo.
@@ -103,7 +100,6 @@ Keystatic is the **Single Source of Truth**. Use it to:
 3.  **Sync:** Run the sync script to push Master changes to the World.
 
 ---
-
 ## 4. The Smelter (`scripts/modernize_content.py`)
 
 Even with Keystatic, the **Smelter** script remains vital for **Schema Compliance**.
@@ -124,7 +120,6 @@ python scripts/modernize_content.py
 ```
 
 ---
-
 ## 5. Troubleshooting
 
 ### "My image isn't showing up!"

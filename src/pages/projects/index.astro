@@ -4,7 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import ProjectDirectory from "../../components/Projects/ProjectDirectory.astro";
 import ProjectGrid from "../../components/Projects/ProjectGrid.astro";
 
-import MultiverseGraph from "../../components/DataViz/MultiverseGraph";
+import Assembly from "../../components/DataViz/Assembly";
 import TimelineStream from "../../components/DataViz/TimelineStream";
 import RadialTaxonomy from "../../components/DataViz/RadialTaxonomy";
 import ScrollCoordinator from "@components/Effects/ScrollCoordinator.astro";
@@ -70,7 +70,8 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 ---
 
 <BaseLayout title="Projects" description="Engineering Archive">
-	<div class="site-container min-h-screen pt-32 pb-24 md:pb-36">
+	<!-- FULL VIEWPORT DATA CONTAINER -->
+	<div class="site-container-full min-h-screen px-4 pt-32 pb-24 md:px-8 md:pb-36">
 		<!-- VIEW SWITCHER (The Control Console) -->
 		<div
 			class="mb-8 flex flex-col items-center justify-center gap-4 border-b border-white/10 pb-4 md:flex-row"
@@ -94,7 +95,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 					class="view-toggle flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-colors hover:bg-white/5 hover:text-white"
 					data-view="multiverse"
 				>
-					<span class="i-tdesign-lightbulb-circle text-sm"></span> Multiverse
+					<span class="i-tdesign-lightbulb-circle text-sm"></span> Assembly
 				</button>
 				<button
 					class="view-toggle flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-colors hover:bg-white/5 hover:text-white"
@@ -112,7 +113,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 		</div>
 
 		<!-- VIEW: LIST -->
-		<div id="view-list" class="view-container" style="display: block;">
+		<div id="view-list" class="view-container w-full" style="display: block;">
 			<!-- DATA TABLE -->
 			<ProjectDirectory
 				projects={projects}
@@ -124,24 +125,24 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 		</div>
 
 		<!-- VIEW: GRID -->
-		<div id="view-grid" class="view-container hidden">
+		<div id="view-grid" class="view-container hidden w-full">
 			<ProjectGrid projects={projects} />
 		</div>
 
-		<!-- VIEW: MULTIVERSE -->
+		<!-- VIEW: ASSEMBLY (Formerly Multiverse) -->
 		<div
 			id="view-multiverse"
-			class="view-container animate-in fade-in zoom-in-95 hidden duration-500"
+			class="view-container animate-in fade-in zoom-in-95 hidden w-full duration-500"
 		>
 			<div
 				class="relative overflow-hidden rounded-xl border border-white/5 bg-black/20"
-				style="height: 75vh"
+				style="height: calc(100vh - 250px)"
 			>
-				<MultiverseGraph client:only="react" data={multiverseData} />
+				<Assembly client:only="react" data={multiverseData} />
 				<div
 					class="pointer-events-none absolute bottom-4 left-4 font-mono text-[10px] text-green-500/50"
 				>
-					MODE: FORCE_PACKING<br />
+					MODE: ASSEMBLY::GRAVITY_WELL<br />
 					NODES: {multiverseData.nodes.length}
 				</div>
 			</div>
@@ -150,11 +151,11 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 		<!-- VIEW: TIMELINE -->
 		<div
 			id="view-timeline"
-			class="view-container animate-in slide-in-from-right-4 hidden duration-500"
+			class="view-container animate-in slide-in-from-right-4 hidden w-full duration-500"
 		>
 			<div
 				class="relative overflow-hidden rounded-xl border border-white/5 bg-black/20"
-				style="height: 75vh"
+				style="height: calc(100vh - 250px)"
 			>
 				<TimelineStream client:only="react" data={multiverseData} />
 				<div
@@ -167,12 +168,12 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 		</div>
 
 		<!-- VIEW: RADIAL -->
-		<div id="view-radial" class="view-container hidden">
+		<div id="view-radial" class="view-container hidden w-full">
 			<div
 				class="relative overflow-hidden rounded-xl border border-white/5 bg-black/20"
-				style="height: 75vh"
+				style="height: calc(100vh - 250px)"
 			>
-				<RadialTaxonomy client:only="react" />
+				<RadialTaxonomy client:only="react" data={multiverseData} />
 				<div
 					class="text-primary-500/50 pointer-events-none absolute bottom-4 left-4 font-mono text-[10px]"
 				>

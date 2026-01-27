@@ -1,16 +1,15 @@
 ---
-title: "Badge Construction Strategy (Shelved)"
-slug: "badge_strategy"
-status: "Backlog"
+title: Badge Construction Strategy (Shelved)
+slug: badge_strategy
+status: Backlog
+description: Documentation for Badge Construction Strategy (Shelved).
 ---
-
 # Badge Construction Strategy
 
 > **Status:** SHELVED (Dec 2025).
 > **Context:** The "Badge" asset (Woven wire, bolts) was deemed too skeuomorphic/ornate for the current "Brutalist/Datasheet" direction. This document preserves the technical workflow for unwrapping/building it if we return to it.
 
 ---
-
 ## 1. The Text Strategy (Vector -> 3D)
 Illustrator Text does not exist in the 3D world. Two choices:
 

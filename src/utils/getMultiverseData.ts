@@ -1,5 +1,6 @@
 import { getCollection } from "astro:content";
 import type { MultiverseNode } from "@/types/MultiverseTypes";
+import { getEntityColor } from "@/config/color_registry";
 
 /**
  * Returns the Multiverse Graph Data derived dynamically from the 'projects' collection.
@@ -24,7 +25,7 @@ export async function getMultiverseData() {
 			id: p.id,
 			name: p.data.title,
 			group: p.data.employer || "Independent",
-			color: "#2E5CFF", // Normalized to YInMn Blue default, components handle overrides
+			color: getEntityColor(p.data.employer || "Other", "EMPLOYER"),
 			value: value,
 			year: startDate.getFullYear(),
 			start_date: startDate.toISOString(),

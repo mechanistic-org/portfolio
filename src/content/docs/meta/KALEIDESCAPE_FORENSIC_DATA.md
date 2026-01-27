@@ -1,3 +1,9 @@
+---
+title: "Kaleidescape Forensic Intel"
+description: "Recovered sequential protocol and stitched email archive data."
+slug: "kaleidescape_forensic_data"
+---
+
 # Kaleidescape Forensic Intel (Recovered 2026-01-06)
 
 _Source: NotebookLM "Sequential Protocol" via Stitched Email Archive_

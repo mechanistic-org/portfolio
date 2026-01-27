@@ -1,3 +1,9 @@
+---
+title: "Resume Infrastructure: The Pulse Protocol"
+description: "Code-first pipeline for resume generation and 'Gold Critical Mass' triggers."
+slug: "resume_infrastructure"
+---
+
 # Resume Infrastructure: The "Pulse" Protocol
 
 > [!IMPORTANT]

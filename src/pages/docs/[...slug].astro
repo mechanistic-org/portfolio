@@ -10,7 +10,9 @@ export async function getStaticPaths() {
 	const docs = Object.values(globDocs).map((file: any) => {
 		const data = file.frontmatter || {};
 		const filenameParts = file.file.split("/");
-		const filename = filenameParts[filenameParts.length - 1].replace(/\.(mdx|md)$/, "");
+		const filename = filenameParts[filenameParts.length - 1]
+			.replace(/\.(mdx|md)$/i, "")
+			.toLowerCase();
 
 		const slug = data.slug || filename;
 		if (!slug) {

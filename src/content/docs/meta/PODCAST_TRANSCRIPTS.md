@@ -1,3 +1,9 @@
+---
+title: "Podcast Forensic Transcripts"
+description: "Deep dive transcripts containing forensic engineering audits."
+slug: "podcast_transcripts"
+---
+
 # Podcast Forensic Transcripts
 
 ## Transcript 1 (Zeus/UltimateTV)

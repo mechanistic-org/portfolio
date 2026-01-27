@@ -1,10 +1,10 @@
 ---
-title: "The Genesis: Truth, Polish, and The Bucking Foundation"
-slug: "genesis"
+title: 'The Genesis: Truth, Polish, and The Bucking Foundation'
+slug: genesis
 sidebar:
-  group: "Colophon Drafts"
+  group: Colophon Drafts
+description: 'Documentation for The Genesis: Truth, Polish, and The Bucking Foundation.'
 ---
-
 # The Genesis: Truth, Polish, and The Bucking Foundation
 
 > **Context:** This narrative was mined from a "Crisis of Faith" architectural review on 2025-12-12.

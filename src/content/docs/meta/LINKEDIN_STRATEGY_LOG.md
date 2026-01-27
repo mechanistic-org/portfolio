@@ -1,17 +1,16 @@
 ---
-title: "LinkedIn & Resume Strategy Log"
-slug: "linkedin_strategy_log"
+title: LinkedIn & Resume Strategy Log
+slug: linkedin_strategy_log
 sidebar:
-  group: "System Manual"
+  group: System Manual
+description: Documentation for LinkedIn & Resume Strategy Log.
 ---
-
 # LinkedIn & Resume Strategy Log
 
 > **Status:** RATIFIED (2026-01-12)
 > **Goal:** Defining the rules for representing the "Forensic Architect" persona on external platforms.
 
 ---
-
 ## 1. The "Forensic Architect" Persona
 
 We have pivoted from "Generalist Mechanical Engineer" to **"Forensic Product Architect"** and **"Program Rescue Specialist."**
@@ -21,7 +20,6 @@ We have pivoted from "Generalist Mechanical Engineer" to **"Forensic Product Arc
 - **The Hook:** "I don't just design; I rescue troubled programs."
 
 ---
-
 ## 2. LinkedIn Formatting Protocols
 
 ### The "Anti-Collapse" Rule (Double Spacing)
@@ -57,7 +55,6 @@ Every role MUST start with a **"Challenge"** line before the bullets. This frame
 - _Example:_ "**Challenge:** Architecting the 'Factory-in-a-Box'..."
 
 ---
-
 ## 3. The "Master Resume" Logic
 
 We do **NOT** maintain separate "Human" and "ATS" resumes. We maintain a single **"Universal Source of Truth"** (`MASTER_RESUME_GENERATED.md`) designed for:
@@ -70,7 +67,6 @@ We do **NOT** maintain separate "Human" and "ATS" resumes. We maintain a single 
 - **Legacy Aliases:** Mapped internally but never used as primary.
 
 ---
-
 ## 4. Site Synchronization
 
 - **Datasheet View (`/resume/one-pager`):** Sourced from `src/config/work_history.json`.

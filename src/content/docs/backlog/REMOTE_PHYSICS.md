@@ -1,10 +1,13 @@
 ---
-title: "Feature Exploration: Remote Physics"
-slug: "remote-physics"
-status: "concept"
-tags: ["visualization", "data", "audio"]
+title: 'Feature Exploration: Remote Physics'
+slug: remote-physics
+status: concept
+tags:
+  - visualization
+  - data
+  - audio
+description: 'Documentation for Feature Exploration: Remote Physics.'
 ---
-
 # Feature Exploration: Remote Physics & The Director's Cut
 
 > **Premise:** Visualizing the "distributed" nature of the career not just as a timeline, but as a physical exertion (Commute) and a data stream (Remote Output).

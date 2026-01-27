@@ -1,3 +1,9 @@
+---
+title: "The Grok Log"
+description: "Constitutional rulings and architectural laws preventing recurring reversions."
+slug: "grok_log"
+---
+
 # THE GROK LOG
 
 > "Lightning in a Bottle"

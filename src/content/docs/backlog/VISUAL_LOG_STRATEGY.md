@@ -1,10 +1,10 @@
 ---
-title: "Strategy: Visual Log Integration"
-slug: "visual_log_strategy"
+title: 'Strategy: Visual Log Integration'
+slug: visual_log_strategy
 sidebar:
-  group: "Backlog"
+  group: Backlog
+description: 'Documentation for Strategy: Visual Log Integration.'
 ---
-
 # Visual Log Integration Strategy
 
 **Status:** Paused (Dec 2025)

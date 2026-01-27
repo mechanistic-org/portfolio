@@ -60,6 +60,10 @@ export const EMPLOYER_MAP: Record<string, string> = {
 
 // --- RESOLVER API ---
 
+const NORMALIZED_EMPLOYER_MAP = Object.fromEntries(
+	Object.entries(EMPLOYER_MAP).map(([k, v]) => [k.toLowerCase(), v]),
+);
+
 import { generatePalette, type PaletteScheme } from "../utils/colorUtils";
 
 /**
@@ -72,11 +76,12 @@ export function getEntityColor(
 ): string {
 	if (!name) return PALETTES.identity.neutral;
 
-	// 1. Check Explicit Employer Identity
-	// Normalize checks to handle case-sensitivity if needed, though Maps are sensitive.
-	// We check keys directly for speed.
-	if ((type === "EMPLOYER" || type === "OTHER") && name in EMPLOYER_MAP) {
-		return EMPLOYER_MAP[name];
+	// 1. Check Explicit Employer Identity (Case-Insensitive)
+	if (type === "EMPLOYER" || type === "OTHER") {
+		const lowerName = name.toLowerCase();
+		if (lowerName in NORMALIZED_EMPLOYER_MAP) {
+			return NORMALIZED_EMPLOYER_MAP[lowerName];
+		}
 	}
 
 	// 2. Check Hyde Trait Logic

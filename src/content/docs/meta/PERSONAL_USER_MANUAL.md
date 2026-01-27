@@ -1,11 +1,11 @@
 ---
-title: "Personal User Manual"
-slug: "personal-user-manual"
+title: Personal User Manual
+slug: personal-user-manual
 sidebar:
-  group: "Meta-Portfolio"
+  group: Meta-Portfolio
   order: 3
+description: Documentation for Personal User Manual.
 ---
-
 # Personal User Manual: Erik Norris
 
 > **Type:** Human/Machine Interface Protocol

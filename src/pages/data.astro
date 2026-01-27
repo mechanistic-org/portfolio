@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import MultiverseGraph from "../components/DataViz/MultiverseGraph";
+import Assembly from "../components/DataViz/Assembly";
 import { getMultiverseData } from "@/utils/getMultiverseData";
 
 const multiverseData = await getMultiverseData();
@@ -26,7 +26,7 @@ const description = "Visualizing the Quantum Project Multiverse.";
 			class="relative w-full overflow-hidden rounded-xl border border-white/10 bg-black/20 backdrop-blur-sm"
 			style="height: 80vh;"
 		>
-			<MultiverseGraph client:only="react" data={multiverseData} />
+			<Assembly client:only="react" data={multiverseData} />
 
 			<div class="pointer-events-none absolute bottom-4 left-4 font-mono text-xs text-green-500/50">
 				SYSTEM.GRAVITY = -20<br />

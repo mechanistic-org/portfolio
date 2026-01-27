@@ -1,11 +1,11 @@
 ---
-title: "Maintenance & Troubleshooting"
-slug: "maintenance"
+title: Maintenance & Troubleshooting
+slug: maintenance
 sidebar:
-  group: "Workflows"
+  group: Workflows
   order: 99
+description: Documentation for Maintenance & Troubleshooting.
 ---
-
 # System Maintenance & Troubleshooting
 
 This document serves as the first line of defense for system issues, build failures, and pipeline errors.
@@ -116,6 +116,12 @@ These scripts are the engine of the "Forensic Data Factory."
   // astro.config.mjs
   adapter: isProduction ? undefined : cloudflare({ imageService: "compile" }),
   ```
+
+### Cloudflare KV Binding Error (Static Build)
+
+- **Symptom:** Build fails with `Invalid binding 'SESSION': binding not found in wrangler.toml`.
+- **Cause:** `adapter: undefined` (Static Mode) in `astro.config.mjs` disables server-side sessions, but `wrangler.toml` still has a `[[kv_namespaces]]` binding for `SESSION`.
+- **Fix:** Remove the `[[kv_namespaces]]` block from `wrangler.toml` when deploying a Static site.
 
 ### IDE Tooling Errors ("Stream Error")
 

@@ -1,11 +1,11 @@
 ---
-title: "The Operator: Bio"
-slug: "bio"
+title: 'The Operator: Bio'
+slug: bio
 sidebar:
-  group: "Meta-Portfolio"
+  group: Meta-Portfolio
   order: 0
+description: 'Documentation for The Operator: Bio.'
 ---
-
 # The Operator
 
 > **Name:** Erik Norris

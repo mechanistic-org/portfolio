@@ -1,3 +1,9 @@
+---
+title: "Golden Dialogue Corpus (The Frankenstein Primer)"
+description: "Curated 'Perfect Moments' of banter, technical skepticism, and 'Red Gold' metaphors."
+slug: "golden_dialogue_corpus"
+---
+
 # Golden Dialogue Corpus (The Frankenstein Primer)
 
 > **CONTEXT:** This documents contains curated "Perfect Moments" of banter, technical skepticism, and "Red Gold" metaphors from previous podcasts.

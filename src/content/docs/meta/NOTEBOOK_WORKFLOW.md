@@ -1,9 +1,9 @@
 ---
-title: "NotebookLM Workflow Protocols"
-slug: "notebook_workflow"
-last_updated: 2026-01-18
+title: NotebookLM Workflow Protocols
+slug: notebook_workflow
+last_updated: 2026-01-18T00:00:00.000Z
+description: Documentation for NotebookLM Workflow Protocols.
 ---
-
 # NotebookLM Workflow & The "Leakage" Principle
 
 > **CRITICAL OBSERVATION:** The Audio Model treats _all_ source text as "Content to be Performed."

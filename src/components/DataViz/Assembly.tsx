@@ -25,7 +25,7 @@ interface MultiverseGraphProps {
 	data: { nodes: Node[] };
 }
 
-const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
+const Assembly: React.FC<MultiverseGraphProps> = ({ data }) => {
 	const svgRef = useRef<SVGSVGElement>(null);
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const mousePos = useRef<{ x: number; y: number } | null>(null); // Physics Mouse Calc
@@ -127,7 +127,7 @@ const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
 					.strength(1),
 			) // Rigid collision
 			.force("charge", d3.forceManyBody().strength(10)) // Slight ATTRACTION
-			.force("center", d3.forceCenter(width / 2, height / 2).strength(0.01)) // Gentle centering
+			.force("center", d3.forceCenter(width / 2, height / 2).strength(0.05)) // Stronger centering to replace bounds
 			.force("wander", () => {
 				// Persistent Drift
 				groupNodes.forEach((d: any) => {
@@ -135,14 +135,7 @@ const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
 					d.vy += (Math.random() - 0.5) * 0.5;
 				});
 			})
-			.force("bounds", () => {
-				// Hard bounds with padding to keep them away from edges
-				groupNodes.forEach((d: any) => {
-					const r = d.r + 50; // Keep 50px from edge
-					d.x = Math.max(r, Math.min(width - r, d.x));
-					d.y = Math.max(r, Math.min(height - r, d.y));
-				});
-			})
+			// Bounds Removed to allow "breathing room"
 			.stop();
 
 		// B. SWARM SIM (The Nodes)
@@ -249,7 +242,7 @@ const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
 		nodeCircles
 			.append("circle")
 			.attr("r", (d: any) => d.radius)
-			.attr("fill", (d: any) => getEntityColor(d.group, "EMPLOYER"))
+			.attr("fill", (d: any) => d.color)
 			.attr("stroke", "rgba(255,255,255,0.2)")
 			.attr("opacity", 0.9)
 			.on("mouseover", function (event, d) {
@@ -394,4 +387,4 @@ const MultiverseGraph: React.FC<MultiverseGraphProps> = ({ data }) => {
 	);
 };
 
-export default MultiverseGraph;
+export default Assembly;

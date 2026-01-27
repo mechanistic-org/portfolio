@@ -1,15 +1,14 @@
 ---
-title: "System Stability Audit"
-date: "2026-01-11"
-status: "STABLE (with external block)"
+title: System Stability Audit
+date: '2026-01-11'
+status: STABLE (with external block)
+description: Documentation for System Stability Audit.
 ---
-
 # 🛡️ System Audit: 2026-01-11
 
 > **Executive Summary:** The **REPO** is healthy (`git clean`, `scripts` working). The **IDE** is degraded (Generate Button broken). The **PLATFORM** is in a stable post-migration state.
 
 ---
-
 ## 1. Core Diagnostics
 
 | System              | Status         | Diagnostic           | Notes                                               |
@@ -23,7 +22,6 @@ status: "STABLE (with external block)"
 > **Audit Ruling:** The "Generate" failure is **contained** to the IDE UI. It does not affect the codebase, the build, or the Python automation layer.
 
 ---
-
 ## 2. Transition State Map
 
 We are currently **Post-Migration** on 3/4 major fronts.
@@ -54,7 +52,6 @@ We are currently **Post-Migration** on 3/4 major fronts.
 - **Stability:** **High.** The "Event Horizon" purge was successful. No legacy JSON files detected in `src/data/timeline`.
 
 ---
-
 ## 3. Known Vulnerabilities ("The Watchlist")
 
 1.  **The "Generate" Trap:** Attempting to debug the IDE's "Stream Error" by changing _Repo_ files (`.env`, `config`) will cause regressions. **DO NOT TOUCH REPO CONFIG** to fix the IDE button.

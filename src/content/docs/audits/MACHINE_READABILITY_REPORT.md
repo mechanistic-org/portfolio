@@ -1,11 +1,11 @@
 ---
-title: "Machine Readability Report"
-slug: "machine-readability-report"
+title: Machine Readability Report
+slug: machine-readability-report
 sidebar:
-  group: "Audits"
+  group: Audits
   order: 10
+description: Documentation for Machine Readability Report.
 ---
-
 # Machine Readability Audit (ATS/AI)
 
 > **Auditor:** Antigravity (Agent)
@@ -21,7 +21,6 @@ While the portfolio excels in **Structured Data (JSON-LD)**—a rarity for engin
 A human recruiter sees a high-fidelity 3D interface. A machine recruiter sees: `Title: dreamjob | Desc: Other project.` This discrepancy will cause the portfolio to be filtered out by relevance algorithms before a human ever sees the 3D work.
 
 ---
-
 ## 🔍 The Findings
 
 ### 1. Metadata (The "Handshake")
@@ -47,7 +46,6 @@ The `application/ld+json` blocks are correctly implementing `WebSite` and `Proje
 *   **Why this matters:** This tells Google/LinkedIn explicitly: "This is a Project, not a Blog Post." Most portfolios lack this. **Keep this intact.**
 
 ---
-
 ## 🛠️ The Fix Plan
 
 ### Phase 1: The "High-Value" Metadata Patch
@@ -80,7 +78,6 @@ The `application/ld+json` blocks are correctly implementing `WebSite` and `Proje
 *   **Automation:** Update `ingest_data.py` to auto-generate the `description` field field using the "Narrative STAR" summary if the CSV description is generic.
 
 ---
-
 ## 🤖 Robot Persona Tips
 To ace the machine interview:
 1.  **Don't be subtle.** Bots don't get nuance. Use literal job titles in your H1s/Titles.

@@ -1,11 +1,11 @@
 ---
-title: "Quickstart (Cheat Sheet)"
-slug: "quickstart"
+title: Quickstart (Cheat Sheet)
+slug: quickstart
 sidebar:
-  group: "Handbook"
+  group: Handbook
   order: 0
+description: Documentation for Quickstart (Cheat Sheet).
 ---
-
 # ⚡ Quickstart: Daily Operations
 
 > **Role:** Operator / Pilot

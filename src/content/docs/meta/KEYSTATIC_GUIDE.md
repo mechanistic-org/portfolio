@@ -1,3 +1,9 @@
+---
+title: "Keystatic & Schema Survival Guide"
+description: "Manual for managing content via Keystatic and resolving validation errors."
+slug: "keystatic_guide"
+---
+
 # Keystatic & Schema Survival Guide
 
 > **Purpose:** This document is the "Jump Back In" manual for managing the Portfolio content via Keystatic and resolving validation errors.

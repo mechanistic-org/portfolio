@@ -1,11 +1,11 @@
 ---
-title: "Manifesto"
-slug: "manifesto"
+title: Manifesto
+slug: governance
 sidebar:
-  group: "System Manual"
+  group: System Manual
   order: 0
+description: Documentation for Manifesto.
 ---
-
 # Project Governance & Principles
 
 ## 1. The Dreamjob Principle

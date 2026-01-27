@@ -1,3 +1,9 @@
+---
+title: "Bubble Protocol"
+description: "The official naming convention and darkroom workflow for Project Bubbles."
+slug: "bubble_protocol"
+---
+
 # Bubble Compiler & Darkroom Protocol
 
 ## The Golden Rule
