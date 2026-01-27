@@ -36,10 +36,10 @@ const ForensicSeismograph: React.FC<ForensicSeismographProps> = ({ data }) => {
 			{/* LABEL */}
 			<div className="flex h-full flex-col items-end justify-center">
 				<span className="font-mono text-[9px] leading-none tracking-widest text-neutral-500 uppercase">
-					SEISMO
+					PROJECT
 				</span>
 				<span className="font-mono text-[9px] leading-none tracking-widest text-emerald-500 uppercase">
-					ACTIVE
+					ENTROPY
 				</span>
 			</div>
 
@@ -71,14 +71,15 @@ const ForensicSeismograph: React.FC<ForensicSeismographProps> = ({ data }) => {
 				})}
 
 				{/* TOOLTIP OVERLAY (Absolute constrained to widget or fixed) */}
+				{/* TOOLTIP OVERLAY (Absolute constrained to widget or fixed) */}
 				{hoveredEvent && (
-					<div className="pointer-events-none absolute bottom-full left-0 z-50 mb-2 max-w-[300px] min-w-[200px] border border-neutral-700 bg-black/90 p-2 text-xs shadow-xl backdrop-blur-sm">
-						<div className="mb-1 flex items-center justify-between border-b border-neutral-800 pb-1">
+					<div className="pointer-events-none absolute top-full left-0 z-[100] mt-4 max-w-[300px] min-w-[200px] border border-white/20 bg-black/95 p-3 text-xs shadow-2xl backdrop-blur-md">
+						<div className="mb-2 flex items-center justify-between border-b border-white/10 pb-2">
 							<span className="font-mono font-bold text-emerald-500">{hoveredEvent.date}</span>
 							<span className="font-mono text-neutral-500">MAG: {hoveredEvent.score}</span>
 						</div>
-						<div className="font-mono text-[10px] leading-tight whitespace-pre-wrap text-neutral-300">
-							{hoveredEvent.snippet}
+						<div className="font-mono text-[10px] leading-tight whitespace-pre-wrap text-white/80">
+							{hoveredEvent.snippet || "No event data available."}
 						</div>
 					</div>
 				)}

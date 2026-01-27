@@ -5,6 +5,7 @@ import SonicHeartbeat from "@components/Audio/SonicHeartbeat";
 import DossierToggle from "@components/Projects/DossierToggle";
 import TeamPipChart from "@components/DataViz/TeamPipChart";
 import ForensicSeismograph from "@components/DataViz/ForensicSeismograph";
+import ForensicTooltip from "@components/DLS/ForensicTooltip.astro";
 
 const multiverseData = await getMultiverseData();
 
@@ -33,6 +34,29 @@ const isoDate = new Date(dateVal).toISOString().split("T")[0];
 const title = data.title || data.id || "Project";
 const showMetrics =
 	(presentation_mode === "deep_dive" || presentation_mode === "flagship") && metrics;
+
+// Duration Logic
+let displayDuration = data.duration;
+if (!displayDuration && data.date) {
+	const start = new Date(data.date);
+	const end = data.endDate ? new Date(data.endDate) : new Date();
+
+	// Simple diff
+	const diffTime = Math.abs(end.getTime() - start.getTime());
+	const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+	if (diffDays < 30) {
+		displayDuration = "< 1 Mo";
+	} else {
+		const years = Math.floor(diffDays / 365);
+		const months = Math.floor((diffDays % 365) / 30);
+
+		const yrStr = years > 0 ? `${years} Yr${years > 1 ? "s" : ""}` : "";
+		const moStr = months > 0 ? `${months} Mo${months > 1 ? "s" : ""}` : "";
+
+		displayDuration = [yrStr, moStr].filter(Boolean).join(" ");
+	}
+}
 ---
 
 <div class="w-full border-b border-white/10 bg-black/95 transition-all duration-500">
@@ -73,7 +97,7 @@ const showMetrics =
 			>
 				{
 					entropy && entropy.length > 0 && (
-						<div class="h-8 w-[140px] xl:w-[180px]">
+						<div class="h-8 w-[140px] cursor-crosshair xl:w-[180px]">
 							<ForensicSeismograph client:idle data={entropy} />
 						</div>
 					)
@@ -125,12 +149,12 @@ const showMetrics =
 				<span class="font-bold text-white">{isoDate}</span>
 			</div>
 			{
-				data.duration && (
+				displayDuration && (
 					<div class="rounded border border-emerald-500/30 bg-emerald-500/5 px-3 py-1">
 						<div class="mb-0.5 text-[8px] leading-none font-bold tracking-wider text-emerald-500 uppercase">
 							Duration
 						</div>
-						<div class="font-mono text-sm leading-none font-bold text-white">{data.duration}</div>
+						<div class="font-mono text-sm leading-none font-bold text-white">{displayDuration}</div>
 					</div>
 				)
 			}
@@ -140,6 +164,51 @@ const showMetrics =
 			>
 				RAW_SOURCE
 			</a>
+
+			{/* PRODUCTION SCALE (Volume Bar) */}
+			{
+				data.productionScale && (
+					<div class="ml-4 flex flex-col items-end gap-0.5 border-l border-white/10 pl-4">
+						<div class="text-[8px] leading-none tracking-widest text-neutral-500 uppercase">
+							Scale
+						</div>
+						<div class="flex gap-0.5" title={`Production Scale: ${data.productionScale}`}>
+							{[1, 2, 3, 4, 5].map((level) => {
+								// Map scale to level with labels
+								const levels = [
+									{ id: "one_off", label: "One-Off" },
+									{ id: "limited", label: "Limited" },
+									{ id: "series", label: "Series" },
+									{ id: "mass", label: "Mass" },
+									{ id: "global", label: "Global" },
+								];
+
+								const currentLevelObj = levels[level - 1]; // 0-indexed
+								const scaleMap = {
+									one_off: 1,
+									limited: 2,
+									series: 3,
+									mass: 4,
+									global: 5,
+								} as any;
+
+								const projectLevel = scaleMap[data.productionScale] || 0;
+								const filled = level <= projectLevel;
+
+								return (
+									<ForensicTooltip content={currentLevelObj.label} side="top">
+										<div
+											class={`h-3 w-1 cursor-help rounded-sm transition-all duration-300 ${
+												filled ? "bg-amber-500 hover:bg-amber-400" : "bg-white/10 hover:bg-white/20"
+											}`}
+										/>
+									</ForensicTooltip>
+								);
+							})}
+						</div>
+					</div>
+				)
+			}
 			{/* SONIC HEARTBEAT (Singularity Audit) */}
 			<div class="ml-4 flex items-center gap-4 border-l border-white/10 pl-4">
 				{presentation_mode === "deep_dive" && <DossierToggle client:load />}
@@ -155,7 +224,7 @@ const showMetrics =
 				{/* METRICS GRID (Foreground) */}
 				<div class="relative z-10 grid w-full grid-cols-6 divide-x divide-white/10">
 					{/* 0. TEAM SIZE (Pip Chart or Text) */}
-					<div class="col-span-1 border-r border-white/10 px-4 py-2">
+					<div class="col-span-1 cursor-crosshair border-r border-white/10 px-4 py-2">
 						{(() => {
 							// Parse "INT 37 / EXT 21" logic
 							const teamStr = data.teamSize || "";

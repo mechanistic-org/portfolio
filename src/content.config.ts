@@ -11,6 +11,8 @@ import {
 	CLIENT_VALUES,
 	ROLE_VALUES,
 	TOOL_VALUES,
+	PRODUCTION_STATUS_VALUES,
+	PRODUCTION_SCALE_VALUES,
 } from "./config/taxonomy";
 import glob from "./content/loaders/glob.js";
 
@@ -38,7 +40,7 @@ const projectsCollection = defineCollection({
 		industry: z.enum(INDUSTRY_VALUES as any).default("consumer_electronics"),
 		category: z.enum(CATEGORY_VALUES as any).optional(),
 		tools: z.array(z.enum(TOOL_VALUES as any)).default([]),
-		production: z.string().optional(),
+		production: z.enum(PRODUCTION_STATUS_VALUES as any).optional(),
 
 		client: z.array(z.enum(CLIENT_VALUES as any)).default([]),
 		tags: z.array(z.string()).default([]),
@@ -95,7 +97,7 @@ const projectsCollection = defineCollection({
 
 		// New Fields
 		duration: z.string().optional(),
-		statusLabel: z.string().optional(),
+		productionScale: z.enum(PRODUCTION_SCALE_VALUES as any).optional(),
 		additionalSkills: z.array(z.string()).default([]),
 		skillGraph: z.string().optional(),
 		partGraph: z.string().optional(),

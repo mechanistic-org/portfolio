@@ -1,0 +1,26 @@
+---
+import Tooltip from "@components/Starwind/tooltip/Tooltip.astro";
+import TooltipContent from "@components/Starwind/tooltip/TooltipContent.astro";
+import TooltipTrigger from "@components/Starwind/tooltip/TooltipTrigger.astro";
+
+interface Props {
+	content: string;
+	side?: "top" | "bottom" | "left" | "right";
+	align?: "start" | "center" | "end";
+}
+
+const { content, side = "top", align = "center" } = Astro.props;
+---
+
+<Tooltip>
+	<TooltipTrigger>
+		<slot />
+	</TooltipTrigger>
+	<TooltipContent
+		side={side}
+		align={align}
+		class="rounded-none border border-white/20 bg-black/95 font-mono text-[10px] tracking-widest text-white uppercase shadow-[0_0_10px_rgba(0,0,0,0.5)] backdrop-blur-md"
+	>
+		{content}
+	</TooltipContent>
+</Tooltip>

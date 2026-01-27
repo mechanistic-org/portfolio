@@ -50,6 +50,27 @@ export const CLIENTS = [
 ] as const;
 export const CLIENT_VALUES = CLIENTS.map((c) => c.value);
 
+// Production Lifecycle (Design Thinking / NPD)
+export const PRODUCTION_STATUS = [
+	{ label: "Discovery (Research)", value: "discovery" },
+	{ label: "Definition (Strategy)", value: "definition" },
+	{ label: "Concept (Ideation)", value: "concept" },
+	{ label: "Prototype (Build)", value: "prototype" },
+	{ label: "Validation (Test)", value: "validation" },
+	{ label: "Production (Launch)", value: "production" },
+] as const;
+export const PRODUCTION_STATUS_VALUES = PRODUCTION_STATUS.map((s) => s.value);
+
+// Production Scale (Unit Volume / Magnitude)
+export const PRODUCTION_SCALE = [
+	{ label: "One-Off (1)", value: "one_off" },
+	{ label: "Limited (10s)", value: "limited" },
+	{ label: "Series (1,000s)", value: "series" },
+	{ label: "Mass (100k+)", value: "mass" },
+	{ label: "Global (Millions)", value: "global" },
+] as const;
+export const PRODUCTION_SCALE_VALUES = PRODUCTION_SCALE.map((s) => s.value);
+
 export const ROLES = [
 	{ label: "Mechanical Engineer", value: "mechanical_engineer" },
 	{ label: "Industrial Designer", value: "industrial_designer" },

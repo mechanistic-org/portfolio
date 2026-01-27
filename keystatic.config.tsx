@@ -16,7 +16,16 @@ import {
 	fields,
 	// singleton,
 } from "@keystatic/core";
-import { INDUSTRIES, CATEGORIES, EMPLOYERS, CLIENTS, ROLES, TOOLS } from "./src/config/taxonomy";
+import {
+	INDUSTRIES,
+	CATEGORIES,
+	EMPLOYERS,
+	CLIENTS,
+	ROLES,
+	TOOLS,
+	PRODUCTION_STATUS,
+	PRODUCTION_SCALE,
+} from "./src/config/taxonomy";
 
 // components for preview purposes
 import ComponentBlocks from "./src/components/KeystaticComponents/ComponentBlocks";
@@ -162,8 +171,16 @@ export default config({
 				date: fields.date({ label: "Start Date" }),
 				endDate: fields.date({ label: "End Date" }),
 				duration: fields.text({ label: "Duration (Text)" }),
-				production: fields.text({ label: "Production Status" }),
-				statusLabel: fields.text({ label: "Status Label" }),
+				production: fields.select({
+					label: "Production Status",
+					options: PRODUCTION_STATUS.map((s) => ({ label: s.label, value: s.value })),
+					defaultValue: PRODUCTION_STATUS[0].value,
+				}),
+				productionScale: fields.select({
+					label: "Production Scale",
+					options: PRODUCTION_SCALE.map((s) => ({ label: s.label, value: s.value })),
+					defaultValue: PRODUCTION_SCALE[0].value,
+				}),
 
 				// --------------------------------------------------------------------------
 				// 4. Role & Employment
