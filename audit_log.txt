@@ -1,0 +1,40 @@
+[FAIL] src\content\docs\INTERACTION.md: Malformed Frontmatter (No closing --- or split fail)
+[FAIL] src\content\docs\INTERNAL_SCRIPTS.md: Malformed Frontmatter (No closing --- or split fail)
+[FAIL] src\content\docs\meta\archive\BRIDGE_DECISION.md: YAML Syntax Error: end of the stream or a document separator is expected (9:1)
+
+  6 | description: 'Documentation for ...
+  7 | ---# Decision: The CAD-to-Poly  ...
+  8 | 
+  9 | > **The Verdict:**
+------^
+ 10 | > **Buy Plasticity ($149).** It ...
+ 11 | 
+[FAIL] src\content\docs\meta\MANIFESTO.md: Malformed Frontmatter (No closing --- or split fail)
+[FAIL] src\content\docs\reference\VISUAL_LOG.md: YAML Syntax Error: can not read a block mapping entry; a multiline key may not be an implicit key (10:1)
+
+  7 | 
+  8 | **Objective:** A chronological  ...
+  9 | 
+ 10 | ## Documentation Consolidation
+------^
+ 11 | 
+ 12 | <div class="grid grid-cols-1 md ...
+[FAIL] src\content\docs\REFERENCES.md: Malformed Frontmatter (No closing --- or split fail)
+[FAIL] src\content\docs\ROADMAP.md: Malformed Frontmatter (No closing --- or split fail)
+[FAIL] src\content\docs\STYLE_GUIDE.md: YAML Syntax Error: unidentified alias "*Status:**" (4:12)
+
+ 1 | 
+ 2 | # ERIK NORRIS: Design Language System (DLS)
+ 3 | 
+ 4 | **Status:** Draft v1.0
+----------------^
+ 5 | **Aesthetic:** Hyper-Functional Brutalism / ...
+ 6 | 
+[FAIL] src\content\docs\SUBSTANCE_MAXIMIZATION_PLAN.md: YAML Syntax Error: can not read a block mapping entry; a multiline key may not be an implicit key (13:1)
+
+ 10 | > **Context:** We hold an activ ...
+ 11 | > **Directive:** Extract maximu ...
+ 12 | 
+ 13 | 
+------^
+[FAIL] src\content\docs\WORKFLOW_VIDEO.md: Malformed Frontmatter (No closing --- or split fail)

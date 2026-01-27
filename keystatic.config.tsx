@@ -162,6 +162,7 @@ export default config({
 						{ label: "Standard (Default)", value: "standard" },
 						{ label: "Deep Dive (Blue Ring)", value: "deep_dive" },
 						{ label: "Flagship (Pulse Effect)", value: "flagship" },
+						{ label: "Notebook (Forensic)", value: "notebook" },
 					],
 				}),
 

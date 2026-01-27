@@ -56,7 +56,120 @@ def find_target_mdx(slug, content_dir):
 
     return None
 
-def hydrate_content(dry_run=False, force=False):
+
+# --- Mining Logic (Stickies) ---
+
+def get_title_from_slug(slug):
+    # "01_early_id" -> "Early Id"
+    parts = slug.split('_')
+    if len(parts) > 1 and parts[0].isdigit():
+        return " ".join([p.capitalize() for p in parts[1:]])
+    return slug.replace("_", " ").title()
+
+def parse_deck_md(bubble_dir):
+    """
+    Parses deck.md in the bubble directory.
+    Returns a list of slide objects for the 'deck' array.
+    """
+    deck_path = bubble_dir / "deck.md"
+    if not deck_path.exists():
+        return []
+
+    try:
+        post = frontmatter.load(deck_path)
+        slides = []
+        
+        # 1. Check for 'slides' in frontmatter (Structured)
+        if "slides" in post.metadata:
+            return post.metadata["slides"]
+
+        # 2. Key Wins / Loose H2 parsing (Fallback)
+        # Simple parsing of H2s as titles and content as body
+        content = post.content
+        lines = content.split('\n')
+        current_slide = {}
+        
+        for line in lines:
+            if line.strip().startswith("## "):
+                if current_slide:
+                    slides.append(current_slide)
+                current_slide = {
+                    "title": line.strip().replace("## ", ""),
+                    "subtitle": "",
+                    "body": ""
+                }
+            elif current_slide:
+                current_slide["body"] += line + "\n"
+        
+        if current_slide:
+            slides.append(current_slide)
+            
+        # Clean up bodies
+        for s in slides:
+            s["body"] = s["body"].strip()
+
+        return slides
+
+    except Exception as e:
+        print(f"      ⚠️  Error parsing deck.md in {bubble_dir.name}: {e}")
+        return []
+
+def mine_stickies(slug, master_root, public_base_url):
+    """
+    Scans R2_MASTER/{slug}/bubbles and returns a list of gallery stickies.
+    """
+    master_bubbles_dir = master_root / slug / "bubbles"
+    if not master_bubbles_dir.exists():
+        return []
+
+    print(f"  ⛏️  Mining bubbles from {master_bubbles_dir}...")
+    stickies = []
+    
+    # Sort folders
+    folders = sorted([f for f in master_bubbles_dir.iterdir() if f.is_dir()])
+    
+    for folder in folders:
+        # Check for images
+        images = []
+        img_files = sorted([f for f in folder.iterdir() if f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp', '.gif']])
+        
+        for img_file in img_files:
+            fname = img_file.stem
+            # Construct public src path
+            src = f"{public_base_url}/{slug}/bubbles/{folder.name}/{img_file.name}"
+            
+            images.append({
+                "src": src,
+                "alt": fname,
+                "aspectRatio": 1.5 
+            })
+            
+        # Parse Deck.md (Narrative Overlay)
+        deck_slides = parse_deck_md(folder)
+        
+        # We create a stickie if we have images OR deck content
+        if images or deck_slides:
+            sticky = {
+                "id": folder.name,
+                "title": get_title_from_slug(folder.name),
+                "type": "gallery",
+                "data": {
+                    "layout": "masonry",
+                    "columns": 3,
+                    "scattered": True,
+                    "images": images
+                },
+                "featuredIndices": [],
+                "deck": deck_slides # Inject the deck
+            }
+            stickies.append(sticky)
+            
+    return stickies
+
+
+# --- Main Hydration ---
+
+def hydrate_content(dry_run=False, force=False, target_slug=None):
     """
     Main hydration logic.
     """
@@ -66,7 +179,29 @@ def hydrate_content(dry_run=False, force=False):
         print(f"❌  Source directory '{SOURCE_DIR}' not found.")
         sys.exit(1)
 
-    json_files = list(SOURCE_DIR.glob("*.json"))
+    # Resolve Master Root (Sibling Repo)
+    # Assumption: eriknorris/scripts/hydrate_content.py -> eriknorris -> eriknorris-workspace -> R2_MASTER
+    # Script is in scripts/, so resolve up to repo root, then up to workspace
+    script_dir = Path(__file__).resolve().parent
+    repo_root = script_dir.parent
+    workspace_root = repo_root.parent / "eriknorris-workspace"
+    master_root = workspace_root / "R2_MASTER"
+    
+    # Public Base URL for assets
+    public_base_url = "/assets/r2"
+
+    all_json_files = list(SOURCE_DIR.glob("*.json"))
+    
+    if target_slug:
+        # Filter for specific slug
+        json_files = [f for f in all_json_files if f.stem == target_slug]
+        if not json_files:
+            print(f"❌  Target slug '{target_slug}' not found in '{SOURCE_DIR}'.")
+            return
+        print(f"🎯  Targeted Mode: Hydrating only '{target_slug}'")
+    else:
+        json_files = all_json_files
+
     if not json_files:
         print(f"⚠️  No JSON files found in '{SOURCE_DIR}'.")
         return
@@ -106,7 +241,7 @@ def hydrate_content(dry_run=False, force=False):
                 changes.append(f"  - Update 'metrics' -> 'forensic_metrics'")
                 post.metadata["forensic_metrics"] = data["metrics"]
         
-        # 2. Presentation Mode
+        # 2. Presentation Mode (Will be overridden if mining finds stickies)
         if "presentation_mode" in data:
             if post.metadata.get("presentation_mode") != data["presentation_mode"]:
                 changes.append(f"  - Update 'presentation_mode' to '{data['presentation_mode']}'")
@@ -125,6 +260,40 @@ def hydrate_content(dry_run=False, force=False):
             if post.metadata.get("toolchain") != data["toolchain"]:
                 changes.append(f"  - Update 'toolchain'")
                 post.metadata["toolchain"] = data["toolchain"]
+                
+        # 5. Mine Stickies (Bubbles)
+        # Attempt to mine stickies from R2_MASTER
+        mined_stickies = mine_stickies(slug, master_root, public_base_url)
+        if mined_stickies:
+            # Check if stickies changed
+            current_stickies = post.metadata.get("cyberspace", {}).get("stickies", [])
+            # Simple check, or deep compare? Let's assume if mined has content, we want it.
+            # But wait, what if manual edits? Stickies are usually auto-generated now.
+            
+            # Helper to get ID list for comparison
+            mined_ids = [s['id'] for s in mined_stickies]
+            current_ids = [s['id'] for s in current_stickies] if current_stickies else []
+            
+            # Update criteria: If IDs differ OR forcing update. 
+            # For now, let's update if we found stickies, assuming Master is truth.
+            
+            # Ensure cyberspace exists
+            if "cyberspace" not in post.metadata or post.metadata["cyberspace"] is None:
+                post.metadata["cyberspace"] = {}
+                
+            post.metadata["cyberspace"]["stickies"] = mined_stickies
+            
+            # Ensure layout
+            if "layout" not in post.metadata["cyberspace"]:
+                post.metadata["cyberspace"]["layout"] = "linear"
+            
+            changes.append(f"  - Mined {len(mined_stickies)} stickies from R2_MASTER")
+            
+            # FORCE Deep Dive if stickies exist
+            if post.metadata.get("presentation_mode") != "deep_dive":
+                post.metadata["presentation_mode"] = "deep_dive"
+                changes.append(f"  - Auto-switched to 'deep_dive' mode")
+
 
         # Apply Changes
         if changes:
@@ -274,11 +443,13 @@ if __name__ == "__main__":
     parser.add_argument("--reverse", action="store_true", help="Run Reverse Hydration (MDX -> Resume).")
     parser.add_argument("--dry-run", action="store_true", help="Simulate without writing.")
     
+    parser.add_argument("--slug", type=str, help="Target a specific project slug (Safe Mode).")
+    
     args = parser.parse_args()
     
     if args.reverse:
         print("🔄  Starting Reverse Hydration...")
         reverse_hydrate(dry_run=args.dry_run)
     else:
-        hydrate_content(dry_run=args.dry_run, force=args.force)
+        hydrate_content(dry_run=args.dry_run, force=args.force, target_slug=args.slug)
 
