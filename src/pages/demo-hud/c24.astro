@@ -5,7 +5,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 // 1. Hardcoded Entry Fetch (C24)
-const entry = await getEntry("projects", "c24-control-surface");
+const entry = await getEntry("projects", "c24");
 
 if (!entry) {
 	throw new Error("C24 Project Not Found");
