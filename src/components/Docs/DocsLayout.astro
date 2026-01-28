@@ -5,6 +5,7 @@ import SidebarNav from "./SidebarNav.astro";
 import TableOfContents from "./TableOfContents.astro";
 import DocsPagination from "./DocsPagination.astro";
 import TocLink from "./TocLink.astro";
+import UniversalHUD from "@components/Nav/UniversalHUD.astro";
 
 interface Props {
 	doc: CollectionEntry<"docs">;
@@ -33,8 +34,35 @@ const filteredHeadings = headings.filter(
 const { prev, next } = Astro.props as any; // Expecting these from the page
 ---
 
-<BaseLayout title={title} description={description}>
-	<div class="mx-auto flex w-full max-w-screen-2xl">
+<BaseLayout title={title} description={description} hideNav={true}>
+	<UniversalHUD mode="stealth">
+		<!-- LEFT: Context -->
+		<div slot="left" class="flex items-center gap-2">
+			<span class="font-mono text-xs font-bold tracking-widest text-white/50">SYSTEM</span>
+			<span class="font-mono text-[10px] text-neutral-600">/// DOCS</span>
+		</div>
+
+		<!-- RIGHT: System Links -->
+		<div slot="right" class="hidden items-center gap-6 md:flex">
+			<a
+				href="/projects"
+				class="font-mono text-xs font-bold tracking-widest text-neutral-400 uppercase transition-colors hover:text-white"
+				>Work</a
+			>
+			<a
+				href="/about"
+				class="font-mono text-xs font-bold tracking-widest text-neutral-400 uppercase transition-colors hover:text-white"
+				>About</a
+			>
+			<a
+				href="/resume"
+				class="font-mono text-xs font-bold tracking-widest text-neutral-400 uppercase transition-colors hover:text-white"
+				>Resume</a
+			>
+		</div>
+	</UniversalHUD>
+
+	<div class="mx-auto flex w-full max-w-screen-2xl pt-20">
 		{/* Desktop Sidebar */}
 		<aside
 			class="fixed top-16 hidden h-[calc(100vh-64px)] w-[280px] shrink-0 overflow-y-auto border-r border-neutral-800 py-8 pr-4 md:block"

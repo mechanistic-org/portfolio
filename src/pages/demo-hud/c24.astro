@@ -1,0 +1,64 @@
+---
+import { getEntry, render } from "astro:content";
+import TacticalHyperspace from "@layouts/themes/TacticalHyperspace.astro";
+import fs from "node:fs";
+import path from "node:path";
+
+// 1. Hardcoded Entry Fetch (C24)
+const entry = await getEntry("projects", "c24-control-surface");
+
+if (!entry) {
+	throw new Error("C24 Project Not Found");
+}
+
+const { Content, headings } = await render(entry);
+
+// 2. Load Entropy (Intelligence)
+let entropyData = [];
+try {
+	const entropyPath = path.join(
+		process.cwd(),
+		"src",
+		"content",
+		"projects",
+		entry.id,
+		"_entropy.json",
+	);
+	if (fs.existsSync(entropyPath)) {
+		const fileContent = fs.readFileSync(entropyPath, "utf-8");
+		entropyData = JSON.parse(fileContent);
+	}
+} catch (e) {
+	console.warn(`[DEMO] Failed to load entropy`, e);
+}
+
+// 3. Mock Metrics if missing (for demo impact)
+if (!entry.data.metrics) {
+	entry.data.metrics = {
+		financial: {
+			toolingBudget: 1400000,
+			toolingActual: 1250000,
+			costOfGoodsSold: ["$1200"],
+		},
+		governance: {
+			ecos: ["ECO-122", "ECO-123", "ECO-125"],
+			dcos: 0,
+		},
+		profitability: {
+			label: "MARGIN",
+			value: "62%",
+		},
+		interventions: {
+			label: "CRISIS",
+			count: 2,
+		},
+	};
+}
+---
+
+<TacticalHyperspace
+	entry={entry}
+	metrics={entry.data.metrics}
+	entropy={entropyData}
+	Content={Content}
+/>

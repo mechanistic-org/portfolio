@@ -1,0 +1,95 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	mode?: "stealth" | "standard" | "fleet" | "tactical" | "archive";
+	class?: string;
+}
+
+const { mode = "standard", class: className } = Astro.props;
+---
+
+<nav
+	id="universal-hud"
+	data-mode={mode}
+	class:list={[
+		"fixed top-0 left-0 z-[100] flex w-full items-center justify-between px-6 py-4 transition-all duration-500",
+		"border-b border-white/0", // Start transparent
+		className,
+	]}
+>
+	<!-- LEFT SLOT: Identity / Context -->
+	<div class="flex flex-1 items-center justify-start gap-4">
+		<a href="/" class="group flex items-center gap-2 transition-opacity hover:opacity-80">
+			<img src="/assets/branding/EN_logo_white_1024.png" alt="EN Logo" class="h-8 w-auto" />
+			{
+				mode === "projects" && (
+					<span class="font-mono text-xs font-bold tracking-widest text-white/50">PROJECTS</span>
+				)
+			}
+			<slot name="left" />
+		</a>
+	</div>
+
+	<!-- CENTER SLOT: Telemetry / Controls / Nav -->
+	<div
+		id="hud-center"
+		class="hidden flex-[2] items-center justify-center transition-all duration-300 md:flex"
+	>
+		<slot name="center" />
+	</div>
+
+	<!-- RIGHT SLOT: System / Actions -->
+	<div class="flex flex-1 items-center justify-end gap-4">
+		<slot name="right" />
+
+		<!-- Standard Mobile Toggle (Fallback) -->
+		<slot name="mobile-toggle">
+			<button id="mobile-menu-trigger" class="text-neutral-400 hover:text-white md:hidden">
+				<Icon name="tabler:menu-2" class="h-6 w-6" />
+			</button>
+		</slot>
+	</div>
+</nav>
+
+<script>
+	const hud = document.getElementById("universal-hud");
+
+	// Scroll Logic: Reactive Canopy
+	// 0-20px: Transparent (Stealth)
+	// >20px: Black Glass (Readable)
+	const updateHud = () => {
+		if (!hud) return;
+
+		// Stealth Mode: Always transparent, no glass
+		if (hud.dataset.mode === "stealth") {
+			hud.classList.remove("bg-black/80", "backdrop-blur-md", "border-white/10");
+			hud.classList.add("border-white/0");
+			return;
+		}
+
+		const y = window.scrollY;
+		const isScrolled = y > 20;
+
+		if (isScrolled) {
+			hud.classList.add("bg-black/80", "backdrop-blur-md", "border-white/10");
+			hud.classList.remove("border-white/0");
+		} else {
+			hud.classList.remove("bg-black/80", "backdrop-blur-md", "border-white/10");
+			hud.classList.add("border-white/0");
+		}
+	};
+
+	window.addEventListener("scroll", updateHud);
+	// Init on load
+	updateHud();
+
+	// Mobile Logic would go here (integrating existing MobileNav)
+</script>
+
+<style>
+	/* Mode-Specific Tweaks if needed */
+	[data-mode="tactical"] {
+		/* Specific tactical styling overrides */
+	}
+</style>

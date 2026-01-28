@@ -1,0 +1,104 @@
+---
+import Layout from "@layouts/BaseLayout.astro";
+import TelemetryHUD from "@components/Nav/TelemetryHUD.astro";
+import WorkRealm from "../../components/Realms/WorkRealm";
+import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
+import { getMultiverseData } from "@/utils/getMultiverseData";
+
+const multiverseData = await getMultiverseData();
+---
+
+<Layout
+	title="Index [DEMO-HUD]"
+	description="System Index - Telemetry Demo"
+	hideNav={true}
+	starfield={true}
+>
+	<!-- TELEMETRY HUD (Strategic View) -->
+	<div class="fixed top-0 left-0 z-50 w-full bg-transparent">
+		<TelemetryHUD />
+	</div>
+
+	<!-- SCROLL TRACK -->
+	<div
+		id="hyperspace-scroll-track"
+		class="pointer-events-none relative z-0 h-[200vh] w-full"
+		style="background-color: transparent !important;"
+	>
+	</div>
+
+	<!-- LAYER 2: LOGO (The Overlay) -->
+	<div
+		id="logo-layer"
+		class="will-change-opacity pointer-events-none fixed inset-0 z-40 flex items-center justify-center transition-opacity duration-75"
+	>
+		<WiggleLogo3D client:load />
+	</div>
+
+	<!-- LAYER 1: WORK REALM (The Underlayer) -->
+	<div
+		id="work-layer"
+		class="fixed inset-0 z-10 h-full w-full bg-transparent transition-opacity duration-300"
+	>
+		<WorkRealm client:only="react" nodes={multiverseData.nodes} />
+	</div>
+</Layout>
+
+<script>
+	// SCROLL ORCHESTRATOR COPY (Simplified)
+	const logo = document.getElementById("logo-layer");
+	const work = document.getElementById("work-layer");
+
+	const initScroll = () => {
+		const swarmCol = document.getElementById("swarm-col");
+		const ficheCol = document.getElementById("fiche-col");
+
+		if (!swarmCol || !ficheCol) {
+			requestAnimationFrame(initScroll);
+			return;
+		}
+
+		swarmCol.style.opacity = "0";
+		swarmCol.style.transform = "translateY(0)";
+		ficheCol.style.transform = `translateX(100vw)`;
+
+		window.addEventListener("scroll", () => {
+			if (!logo) return;
+			const y = window.scrollY;
+
+			// LOGO FADE
+			const logoOpacity = Math.max(0, 1 - y / 300);
+			logo.style.opacity = logoOpacity.toString();
+			logo.style.visibility = y > 300 ? "hidden" : "visible";
+			logo.style.pointerEvents = y > 200 ? "none" : "auto";
+
+			// SWARM ENTRANCE
+			const swarmOpacity = Math.min(1, y / 300);
+			swarmCol.style.opacity = swarmOpacity.toString();
+
+			// FICHE SLIDE
+			const progress = Math.min(1, y / 400);
+			const ease = 1 - Math.pow(1 - progress, 2);
+			const vw = window.innerWidth;
+			const targetFicheX = vw * (1 - ease);
+			ficheCol.style.transform = `translateX(${targetFicheX}px)`;
+		});
+		window.dispatchEvent(new Event("scroll"));
+	};
+	initScroll();
+</script>
+
+<style is:global>
+	canvas {
+		background-color: transparent !important;
+	}
+	html {
+		scroll-behavior: auto;
+		height: 100%;
+		overflow-x: hidden;
+	}
+	body {
+		background-color: black;
+		overscroll-behavior: none;
+	}
+</style>

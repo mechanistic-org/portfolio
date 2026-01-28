@@ -1,6 +1,6 @@
 ---
 import Layout from "@layouts/BaseLayout.astro";
-import HyperspaceHUD from "@components/Nav/HyperspaceHUD.astro";
+import UniversalHUD from "@components/Nav/UniversalHUD.astro";
 import WorkRealm from "../../components/Realms/WorkRealm";
 import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
 import { getMultiverseData } from "@/utils/getMultiverseData";
@@ -14,13 +14,29 @@ const multiverseData = await getMultiverseData();
 	hideNav={true}
 	starfield={true}
 >
-	<!-- The HUD is fixed and persistent, wrapper made transparent -->
-	<div class="fixed top-0 left-0 z-50 w-full bg-transparent">
-		<HyperspaceHUD />
-	</div>
+	<!-- UNIVERSAL HUD (STEALTH MODE) -->
+	<!-- Center is empty for Swarm visibility -->
+	<UniversalHUD mode="stealth">
+		<!-- RIGHT: System Links (Minimal Text) -->
+		<div slot="right" class="hidden items-center gap-6 md:flex">
+			<a
+				href="/projects"
+				class="font-mono text-xs font-bold tracking-widest text-neutral-400 uppercase transition-colors hover:text-white"
+				>Work</a
+			>
+			<a
+				href="/about"
+				class="font-mono text-xs font-bold tracking-widest text-neutral-400 uppercase transition-colors hover:text-white"
+				>About</a
+			>
+			<a
+				href="/resume"
+				class="font-mono text-xs font-bold tracking-widest text-neutral-400 uppercase transition-colors hover:text-white"
+				>Resume</a
+			>
+		</div>
+	</UniversalHUD>
 
-	<!-- SCROLL TRACK -->
-	<!-- A generic tall element to allow the user to "scroll" which drives the animation -->
 	<!-- SCROLL TRACK -->
 	<!-- A generic tall element to allow the user to "scroll" which drives the animation -->
 	<div

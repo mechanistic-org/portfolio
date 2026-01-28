@@ -4,6 +4,7 @@ import { Icon } from "astro-icon/components";
 import navData from "../../config/navData"; // Adjusted import to relative path
 import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
 import MobileNav from "@components/Nav/MobileNav/MobileNav.astro";
+import UniversalHUD from "@components/Nav/UniversalHUD.astro"; // NEW wrapper
 
 // Helper for loose matching active state
 const currentPath = Astro.url.pathname;
@@ -14,26 +15,19 @@ const isActive = (href: string) => {
 };
 ---
 
-<nav
-	id="universal-nav"
-	class="fixed top-0 left-0 z-50 flex w-full items-center justify-between border-b border-transparent px-6 py-4 transition-all duration-500 md:justify-center md:border-b-0"
->
-	<!-- LEFT: Logo (Visible on Mobile / Desktop) -->
-	<a href="/" class="absolute top-4 left-6 z-50 transition-opacity hover:opacity-80">
-		<img src="/assets/branding/EN_logo_white_1024.png" alt="EN Logo" class="h-8 w-auto" />
-	</a>
+<UniversalHUD mode="standard">
+	<!-- LEFT SLOT: Nothing extra, UniversalHUD handles Logo -->
+	<!-- But we can customize if needed. The default logo is fine. -->
 
-	<!-- CENTER: The Capsule (Desktop Only) -->
+	<!-- CENTER SLOT: The Capsule -->
 	<div
+		slot="center"
 		id="nav-capsule"
-		class="hidden items-center justify-center gap-1 rounded-full border border-white/10 bg-black/80 p-1 backdrop-blur-md transition-all duration-300 md:flex"
+		class="flex items-center justify-center gap-1 rounded-full border border-white/10 bg-black/80 p-1 backdrop-blur-md transition-all duration-300"
 	>
 		{
 			navData.map((item) => {
 				if ("dropdown" in item) {
-					// RESUME DROPDOWN HANDLER via Popover or Hover logic
-					// For simplicity in this capsule, we make it a direct button that opens a mini-menu or just links to /resume
-					// The user requested a dropdown style. Let's build a simple hover group.
 					return (
 						<div class="group relative">
 							<button
@@ -42,7 +36,6 @@ const isActive = (href: string) => {
 								{item.text}
 							</button>
 							{/* Dropdown Menu */}
-							{/* Dropdown Menu - padding-top creates invisible bridge for hover */}
 							<div class="absolute top-full left-1/2 hidden -translate-x-1/2 pt-4 group-hover:block">
 								<div class="flex w-48 flex-col gap-1 rounded-xl border border-white/10 bg-black/90 p-1 py-1 shadow-xl backdrop-blur-xl">
 									{item.dropdown.map((subItem) => (
@@ -82,9 +75,8 @@ const isActive = (href: string) => {
 		</button>
 	</div>
 
-	<!-- RIGHT: Socials & Mobile Toggle -->
-	<div class="absolute top-4 right-6 flex items-center gap-4">
-		{/* Desktop Socials */}
+	<!-- RIGHT SLOT: Socials -->
+	<div slot="right" class="flex items-center gap-4">
 		<div class="hidden items-center gap-3 text-neutral-500 md:flex">
 			<a
 				href="https://github.com/eriknorris"
@@ -108,13 +100,13 @@ const isActive = (href: string) => {
 			</a>
 			<ThemeToggle />
 		</div>
-
-		{/* Mobile Toggle */}
-		<div class="md:hidden">
-			<MobileNav />
-		</div>
 	</div>
-</nav>
+
+	<!-- Mobile Toggle Slot Override -->
+	<div slot="mobile-toggle" class="md:hidden">
+		<MobileNav />
+	</div>
+</UniversalHUD>
 
 <script>
 	/// <reference lib="dom" />
@@ -123,8 +115,4 @@ const isActive = (href: string) => {
 		// @ts-ignore
 		window.dispatchEvent(new CustomEvent("open-command-menu"));
 	});
-
-	// Scroll Logic for "Hiding" or "Glassing"?
-	// The user requested Floating Capsule. Usually implies it stays visible or creates a glass effect on scroll.
-	// Since we are top-fixed, let's just ensure it handles scroll gracefully (blur is already active).
 </script>

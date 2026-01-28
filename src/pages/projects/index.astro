@@ -1,20 +1,18 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import UniversalHUD from "@components/Nav/UniversalHUD.astro";
 import ProjectDirectory from "../../components/Projects/ProjectDirectory.astro";
 import ProjectGrid from "../../components/Projects/ProjectGrid.astro";
-
 import Assembly from "../../components/DataViz/Assembly";
 import TimelineStream from "../../components/DataViz/TimelineStream";
 import RadialTaxonomy from "../../components/DataViz/RadialTaxonomy";
 import ScrollCoordinator from "@components/Effects/ScrollCoordinator.astro";
-
-// Data import
 import { getMultiverseData } from "@/utils/getMultiverseData";
+import { Icon } from "astro-icon/components";
+import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
 
 const multiverseData = await getMultiverseData();
-
-// Create a lookup map for the Multiverse (God Brain)
 const multiverseMap = new Map(multiverseData.nodes.map((n) => [n.id.toLowerCase(), n]));
 
 const rawProjects = await getCollection("projects");
@@ -34,10 +32,8 @@ const projects = rawProjects
 		);
 	})
 	.map((p) => {
-		// TRUTH INJECTION: Overlay Multiverse data onto MDX frontmatter
 		const node = multiverseMap.get((p.data.slug || p.id).toLowerCase());
 		if (node) {
-			// We modify the data object in memory for this render
 			if (node.client) p.data.client = node.client;
 			if (node.employer) p.data.employer = node.employer;
 			if (node.industry) p.data.industry = node.industry;
@@ -48,19 +44,11 @@ const projects = rawProjects
 	})
 	.sort((a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime());
 
-// Hierarchy is now handled internally by RadialTaxonomy using multiverse.json
-
-// Extract Facets for the UI (Now uses the Enriched Data)
-// Note: We use the enriched 'projects' array, so Facets match Rows exactly.
 const industries = [...new Set(projects.map((p) => p.data.industry).filter(Boolean))].sort();
 const categories = [
 	...new Set(projects.map((p) => p.data.category).filter(Boolean)),
 ].sort() as string[];
-
-// Tools need distinct list
 const tools = [...new Set(projects.flatMap((p) => p.data.tools || []).filter(Boolean))].sort();
-
-// Merge Employer and Client into one list
 const allClients = projects.flatMap((p) => {
 	const c = p.data.client || [];
 	const e = p.data.employer ? [p.data.employer] : [];
@@ -69,52 +57,73 @@ const allClients = projects.flatMap((p) => {
 const clients = [...new Set(allClients.filter(Boolean))].sort();
 ---
 
-<BaseLayout title="Projects" description="Engineering Archive" starfield={true}>
-	<!-- FULL VIEWPORT DATA CONTAINER -->
-	<div class="site-container-full min-h-screen px-4 pt-32 pb-24 md:px-8 md:pb-36">
-		<!-- VIEW SWITCHER (The Control Console) -->
-		<div
-			class="mb-8 flex flex-col items-center justify-center gap-4 border-b border-white/10 pb-4 md:flex-row"
-			data-scroll-effect="flee"
-		>
-			<div class="flex items-center gap-1 rounded-lg border border-white/10 bg-neutral-900 p-1">
-				<button
-					class="view-toggle text-primary bg-primary/10 flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider uppercase transition-colors hover:text-white"
-					data-view="list"
-				>
-					<span class="i-tdesign-menu-2 text-sm"></span> List
-				</button>
-				<button
-					class="view-toggle flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-colors hover:bg-white/5 hover:text-white"
-					data-view="grid"
-				>
-					<span class="i-tdesign-app text-sm"></span> Grid
-				</button>
-
-				<button
-					class="view-toggle flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-colors hover:bg-white/5 hover:text-white"
-					data-view="multiverse"
-				>
-					<span class="i-tdesign-lightbulb-circle text-sm"></span> Assembly
-				</button>
-				<button
-					class="view-toggle flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-colors hover:bg-white/5 hover:text-white"
-					data-view="timeline"
-				>
-					<span class="i-tdesign-work-history text-sm"></span> Timeline
-				</button>
-				<button
-					class="view-toggle flex items-center gap-2 rounded px-3 py-1 font-mono text-xs tracking-wider text-neutral-500 uppercase transition-colors hover:bg-white/5 hover:text-white"
-					data-view="radial"
-				>
-					<span class="i-tdesign-share text-sm"></span> Radial
-				</button>
-			</div>
+<BaseLayout title="Work" description="Engineering Archive" starfield={true} hideNav={true}>
+	<!-- UNIVERSAL HUD: FLEET MODE ("HOTAS") -->
+	<UniversalHUD mode="stealth">
+		<!-- LEFT: Context -->
+		<div slot="left" class="flex items-center gap-2">
+			<span class="font-mono text-xs font-bold tracking-widest text-white/50">PROJECTS</span>
+			<span class="font-mono text-[10px] text-neutral-600">/// FLEET VIEW</span>
 		</div>
 
-		<!-- VIEW: LIST -->
-		<div id="view-list" class="view-container w-full" style="display: block;">
-			<!-- DATA TABLE -->
+		<!-- CENTER: The Controls (HOTAS) -->
+		<div slot="center" class="flex items-center gap-1 p-1">
+			<!-- View Toggles -->
+			<button
+				class="view-toggle flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 font-mono text-xs tracking-wider text-white uppercase transition-all duration-300"
+				data-view="list"
+			>
+				<Icon name="tabler:list" class="h-3.5 w-3.5" />
+				<span>Ref</span>
+			</button>
+			<button
+				class="view-toggle flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs tracking-wider text-neutral-400 uppercase transition-all duration-300 hover:bg-white/5 hover:text-white"
+				data-view="grid"
+			>
+				<Icon name="tabler:layout-grid" class="h-3.5 w-3.5" />
+				<span>Grid</span>
+			</button>
+			<button
+				class="view-toggle flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs tracking-wider text-neutral-400 uppercase transition-all duration-300 hover:bg-white/5 hover:text-white"
+				data-view="multiverse"
+			>
+				<Icon name="tabler:circles-relation" class="h-3.5 w-3.5" />
+				<span>Assembly</span>
+			</button>
+			<button
+				class="view-toggle flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs tracking-wider text-neutral-400 uppercase transition-all duration-300 hover:bg-white/5 hover:text-white"
+				data-view="timeline"
+			>
+				<Icon name="tabler:timeline" class="h-3.5 w-3.5" />
+				<span>Time</span>
+			</button>
+			<button
+				class="view-toggle flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs tracking-wider text-neutral-400 uppercase transition-all duration-300 hover:bg-white/5 hover:text-white"
+				data-view="radial"
+			>
+				<Icon name="tabler:chart-radar" class="h-3.5 w-3.5" />
+				<span>Radial</span>
+			</button>
+		</div>
+
+		<!-- RIGHT: System -->
+		<div slot="right" class="flex items-center gap-4">
+			<ThemeToggle />
+			<button
+				id="hud-search-trigger"
+				class="group flex items-center justify-center rounded-full p-2 text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
+				aria-label="Search"
+			>
+				<Icon name="tabler:search" class="h-4 w-4" />
+			</button>
+		</div>
+	</UniversalHUD>
+
+	<!-- FULL VIEWPORT DATA CONTAINER -->
+	<!-- Added pt-24 to account for Fixed HUD -->
+	<div class="site-container-full min-h-screen px-4 pt-24 pb-24 md:px-8 md:pb-36">
+		<!-- VIEW: LIST (Default) -->
+		<div id="view-list" class="view-container animate-in fade-in w-full duration-500">
 			<ProjectDirectory
 				projects={projects}
 				sectors={industries}
@@ -125,18 +134,21 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 		</div>
 
 		<!-- VIEW: GRID -->
-		<div id="view-grid" class="view-container hidden w-full">
+		<div
+			id="view-grid"
+			class="view-container animate-in fade-in zoom-in-95 hidden w-full duration-500"
+		>
 			<ProjectGrid projects={projects} />
 		</div>
 
-		<!-- VIEW: ASSEMBLY (Formerly Multiverse) -->
+		<!-- VIEW: ASSEMBLY -->
 		<div
 			id="view-multiverse"
 			class="view-container animate-in fade-in zoom-in-95 hidden w-full duration-500"
 		>
 			<div
-				class="relative overflow-hidden rounded-xl bg-transparent"
-				style="height: calc(100vh - 250px)"
+				class="relative overflow-hidden rounded-xl border border-white/5 bg-neutral-900/10"
+				style="height: calc(100vh - 150px)"
 			>
 				<Assembly client:only="react" data={multiverseData} />
 				<div
@@ -151,578 +163,77 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 		<!-- VIEW: TIMELINE -->
 		<div
 			id="view-timeline"
-			class="view-container animate-in slide-in-from-right-4 hidden w-full duration-500"
+			class="view-container animate-in fade-in zoom-in-95 hidden w-full duration-500"
 		>
 			<div
-				class="relative overflow-hidden rounded-xl bg-transparent"
-				style="height: calc(100vh - 250px)"
+				class="relative overflow-hidden rounded-xl border border-white/5 bg-neutral-900/10"
+				style="height: calc(100vh - 150px)"
 			>
 				<TimelineStream client:only="react" data={multiverseData} />
-				<div
-					class="pointer-events-none absolute bottom-4 left-4 font-mono text-[10px] text-green-500/50"
-				>
-					MODE: TEMPORAL_STREAM<br />
-					X-AXIS: TIME
-				</div>
 			</div>
 		</div>
 
 		<!-- VIEW: RADIAL -->
-		<div id="view-radial" class="view-container hidden w-full">
+		<div
+			id="view-radial"
+			class="view-container animate-in fade-in zoom-in-95 hidden w-full duration-500"
+		>
 			<div
-				class="relative overflow-hidden rounded-xl bg-transparent"
-				style="height: calc(100vh - 250px)"
+				class="relative overflow-hidden rounded-xl border border-white/5 bg-neutral-900/10"
+				style="height: calc(100vh - 150px)"
 			>
 				<RadialTaxonomy client:only="react" data={multiverseData} />
-				<div
-					class="text-primary-500/50 pointer-events-none absolute bottom-4 left-4 font-mono text-[10px]"
-				>
-					MODE: ORBITAL_TAXONOMY<br />
-					ROOT: ERIK NORRIS
-				</div>
 			</div>
 		</div>
 
 		<script>
+			// VIEW SWITCHER LOGIC
+			// Upgraded to connect to UniversalHUD buttons
 			document.addEventListener("astro:page-load", () => {
-				// VIEW SWITCHER LOGIC
 				const toggles = document.querySelectorAll(".view-toggle");
 				const containers = document.querySelectorAll(".view-container");
-
-				// Load preference with Validation
-				let savedView = localStorage.getItem("project_view_mode");
-				const validViews = ["list", "grid", "radial", "timeline", "skills", "multiverse"];
-
-				// Default to 'multiverse' if no preference saved or invalid
-				if (!savedView || !validViews.includes(savedView)) {
-					savedView = "multiverse";
-				}
-				// console.log("Initializing View:", savedView);
-				switchView(savedView);
 
 				toggles.forEach((btn) => {
 					btn.addEventListener("click", () => {
 						const view = btn.getAttribute("data-view");
-						if (view) switchView(view);
+						switchView(view);
 					});
 				});
 
 				function switchView(mode) {
-					// Update UI
+					// 1. Update Buttons
 					toggles.forEach((btn) => {
 						const isMatch = btn.getAttribute("data-view") === mode;
 						if (isMatch) {
-							btn.classList.add("text-primary", "bg-primary/10");
-							btn.classList.remove("text-neutral-500", "hover:bg-white/5");
+							// Active State
+							btn.classList.add("bg-white/10", "text-white");
+							btn.classList.remove("text-neutral-400", "hover:text-white", "hover:bg-white/5");
 						} else {
-							btn.classList.remove("text-primary", "bg-primary/10");
-							btn.classList.add("text-neutral-500", "hover:bg-white/5");
+							// Inactive State
+							btn.classList.remove("bg-white/10", "text-white");
+							btn.classList.add("text-neutral-400", "hover:text-white", "hover:bg-white/5");
 						}
 					});
 
-					// Update Containers
+					// 2. Update Containers
 					containers.forEach((element) => {
 						const c = element;
 						if (c.id === `view-${mode}`) {
-							// @ts-ignore
-							c.style.display = "block";
 							c.classList.remove("hidden");
 						} else {
-							// @ts-ignore
-							c.style.display = "none";
 							c.classList.add("hidden");
 						}
 					});
-
-					localStorage.setItem("project_view_mode", mode);
 				}
 
-				// Target rows instead of cards
-				const rows = Array.from(document.querySelectorAll(".project-item"));
-				const buttons = document.querySelectorAll(".filter-btn");
-				const sortHeaders = document.querySelectorAll(".sort-header");
-
-				if (rows.length === 0) return;
-
-				// State
-				let filters = {
-					industry: "all",
-					category: "all",
-					tool: "all",
-					status: "all",
-					client: "all",
-				};
-				let sortState = {
-					column: "date",
-					direction: "desc",
-				}; // default sort
-
-				// URL Params Logic - Run BEFORE initial update
-				const urlParams = new URLSearchParams(window.location.search);
-				// Helper to apply param
-				const applyParam = (paramName, groupName) => {
-					const val = urlParams.get(paramName);
-					if (val) {
-						const decoded = decodeURIComponent(val);
-						// @ts-ignore
-						filters[groupName] = decoded;
-						const btn = document.querySelector(
-							`.filter-btn[data-group="${groupName}"][data-filter="${decoded}"]`,
-						);
-						if (btn) {
-							btn.setAttribute("data-active", "true");
-							document
-								.querySelector(`.filter-btn[data-group="${groupName}"][data-filter="all"]`)
-								?.setAttribute("data-active", "false");
-						}
-					}
-				};
-
-				applyParam("client", "client");
-				applyParam("collection", "industry");
-				applyParam("category", "category");
-				applyParam("tool", "tool");
-				applyParam("status", "status");
-
-				function renderActiveFilters() {
-					// Count active filters (excluding "all")
-					let count = 0;
-					if (filters.industry !== "all") count++;
-					if (filters.category !== "all") count++;
-					if (filters.status !== "all") count++;
-					if (filters.tool !== "all") count++;
-					if (filters.client !== "all") count++;
-
-					const countBadge = document.getElementById("active-filter-count");
-					if (countBadge) {
-						if (count > 0) {
-							countBadge.innerText = count.toString();
-							countBadge.classList.remove("hidden");
-						} else {
-							countBadge.classList.add("hidden");
-						}
-					}
-				}
-
-				function getCellValue(row, column) {
-					const d = row.dataset;
-					switch (column) {
-						case "project":
-							return d.title?.toLowerCase() || "";
-						case "client":
-							// Client is an array string, just take the first one for sorting or join them
-							return (JSON.parse(d.client || "[]")[0] || "").toLowerCase();
-						case "sector":
-							return d.industry?.toLowerCase() || "";
-						case "category":
-							return d.category?.toLowerCase() || "";
-						case "year":
-							return parseInt(d.date || "0");
-						case "status":
-							return d.status?.toLowerCase() || "";
-						default:
-							return "";
-					}
-				}
-
-				// Keyboard Nav State
-				let selectedIndex = -1;
-
-				function updateActiveRow() {
-					// Remove active class from all
-					rows.forEach((r) => {
-						r.classList.remove(
-							"bg-primary/10",
-							"border-l-2",
-							"border-primary",
-							"animate-pulse-slow",
-						);
-						r.classList.add("border-transparent"); // Reset border
-					});
-
-					if (selectedIndex >= 0 && selectedIndex < rows.length) {
-						const row = rows[selectedIndex];
-						// Only apply if row is visible
-						// @ts-ignore
-						if (row.style.display !== "none") {
-							row.classList.add(
-								"bg-primary/10",
-								"border-l-2",
-								"border-primary",
-								"animate-pulse-slow",
-							);
-							row.classList.remove("border-transparent");
-							// Scroll into view if needed (smooth)
-							row.scrollIntoView({ behavior: "smooth", block: "nearest" });
-						}
-					}
-				}
-
-				// Keyboard Listeners
-				document.addEventListener("keydown", (e) => {
-					// Only if not focused on an input
-					if (document.activeElement?.tagName === "INPUT") return;
-
-					// @ts-ignore
-					const visibleRows = rows.filter((r) => r.style.display !== "none");
-					if (visibleRows.length === 0) return;
-
-					// Find current index in visible rows
-					let currentVisibleIndex = visibleRows.findIndex((r) => r === rows[selectedIndex]);
-
-					if (e.key === "j" || e.key === "ArrowDown") {
-						e.preventDefault();
-						if (currentVisibleIndex < visibleRows.length - 1) {
-							currentVisibleIndex++;
-						} else {
-							currentVisibleIndex = 0; // Loop to top
-						}
-						// Find the global index of the new visible row
-						selectedIndex = rows.indexOf(visibleRows[currentVisibleIndex]);
-						updateActiveRow();
-					} else if (e.key === "k" || e.key === "ArrowUp") {
-						e.preventDefault();
-						if (currentVisibleIndex > 0) {
-							currentVisibleIndex--;
-						} else {
-							currentVisibleIndex = visibleRows.length - 1; // Loop to bottom
-						}
-						selectedIndex = rows.indexOf(visibleRows[currentVisibleIndex]);
-						updateActiveRow();
-					} else if (e.key === "Enter") {
-						if (selectedIndex >= 0) {
-							const row = rows[selectedIndex];
-							const link = row.getAttribute("onclick");
-							// Extract URL from "window.location.href='/projects/slug/'"
-							const match = link?.match(/'([^']+)'/);
-							if (match) {
-								window.location.href = match[1];
-							}
-						}
-					}
-				});
-
-				// Sync Hover with Selection - REMOVED to prevent sticky highlight
-				// rows.forEach((row, index) => {
-				// 	row.addEventListener("mouseenter", () => {
-				// 		selectedIndex = index;
-				// 		updateActiveRow();
-				// 	});
-				// });
-
-				function update(filtersToUse = filters, updateChips = true) {
-					// 1. Filter
-					let active = rows.filter((row) => {
-						// @ts-ignore
-						const d = row.dataset;
-						const rowTools = JSON.parse(d.tool || "[]");
-						const rowClients = JSON.parse(d.client || "[]");
-
-						// Find title in the second cell (index 1) for List View, or dataset for Grid
-						let rowTitle = "";
-						if (row.tagName === "TR") {
-							const titleCell = row.children[1];
-							// @ts-ignore
-							rowTitle = titleCell?.innerText.toLowerCase() || "";
-						} else {
-							rowTitle = d.title?.toLowerCase() || "";
-						}
-
-						const matchInd =
-							filtersToUse.industry === "all" || d.industry === filtersToUse.industry;
-						const matchCat =
-							filtersToUse.category === "all" || d.category === filtersToUse.category;
-						const matchStatus = filtersToUse.status === "all" || d.status === filtersToUse.status;
-						const matchTool = filtersToUse.tool === "all" || rowTools.includes(filtersToUse.tool);
-						const matchClient =
-							filtersToUse.client === "all" || rowClients.includes(filtersToUse.client);
-
-						return matchInd && matchCat && matchStatus && matchTool && matchClient;
-					});
-
-					// 2. Sort
-					active.sort((a, b) => {
-						const valA = getCellValue(a, sortState.column);
-						const valB = getCellValue(b, sortState.column);
-
-						if (valA < valB) return sortState.direction === "asc" ? -1 : 1;
-						if (valA > valB) return sortState.direction === "asc" ? 1 : -1;
-						return 0;
-					});
-
-					// 3. Render
-					// Hide all rows first
-					// @ts-ignore
-					rows.forEach((r) => (r.style.display = "none"));
-
-					// Append active rows to containers (maintaining sort order)
-					const tbody = document.getElementById("projects-table-body");
-					const gridContainer = document.querySelector("#view-grid .grid");
-
-					if (tbody || gridContainer) {
-						active.forEach((r) => {
-							// @ts-ignore
-							r.style.display = ""; // Reset display
-							if (r.tagName === "TR" && tbody) {
-								tbody.appendChild(r);
-							} else if (r.tagName === "DIV" && gridContainer) {
-								gridContainer.appendChild(r);
-							}
-						});
-					}
-
-					// 4. Update HUD Badge
-					const totalProjects = rows.length;
-					const activeCount = active.length;
-					const badge = document.getElementById("hud-project-count");
-
-					if (badge) {
-						badge.innerText = activeCount.toString();
-						if (activeCount < totalProjects) {
-							badge.classList.remove("hidden");
-							badge.classList.remove("opacity-0");
-						} else {
-							// If I have 100 projects and show 100, seeing (100) is cool.
-							// Let's trying showing it always if the badge exists.
-							badge.classList.remove("hidden");
-						}
-					}
-
-					// Reset selection on filter change
-					selectedIndex = -1;
-					updateActiveRow();
-
-					if (updateChips) {
-						renderActiveFilters();
-					}
-					updateSortIcons();
-
-					// Hierarchical Filtering: Filter Categories based on selected Collection (Industry)
-					// Runs on both CLICK and HOVER to provide "Auto-Collapse/Expand" feedback.
-					const selectedIndustry = filtersToUse.industry;
-					const categoryButtons = document.querySelectorAll('.filter-btn[data-group="category"]');
-
-					if (selectedIndustry === "all") {
-						// Show all categories
-						categoryButtons.forEach((btn) => {
-							// @ts-ignore
-							btn.style.display = "block";
-						});
-					} else {
-						// Get valid categories for this industry
-						const validCategories = new Set();
-						rows.forEach((row) => {
-							// @ts-ignore
-							if (row.dataset.industry === selectedIndustry) {
-								// @ts-ignore
-								if (row.dataset.category) validCategories.add(row.dataset.category);
-							}
-						});
-
-						// Update button visibility
-						categoryButtons.forEach((btn) => {
-							const btnVal = btn.getAttribute("data-filter");
-							if (btnVal === "all" || (btnVal && validCategories.has(btnVal))) {
-								// @ts-ignore
-								btn.style.display = "block";
-							} else {
-								// @ts-ignore
-								btn.style.display = "none";
-							}
-						});
-
-						// Reset Category if current selection is invalid
-						if (filtersToUse.category !== "all" && !validCategories.has(filtersToUse.category)) {
-							// Only reset if we are committing changes (updateChips is true)
-							// If previewing, we might not want to force reset yet, or maybe we do?
-							// Let's reset it in the filters object but maybe not trigger another update loop immediately to avoid recursion
-							if (updateChips) {
-								filters.category = "all";
-								// Update UI for category reset
-								document.querySelectorAll('.filter-btn[data-group="category"]').forEach((b) => {
-									b.setAttribute("data-active", "false");
-								});
-								document
-									.querySelector('.filter-btn[data-group="category"][data-filter="all"]')
-									?.setAttribute("data-active", "true");
-								renderActiveFilters(); // Re-render chips
-							}
-						}
-					}
-				}
-
-				function updateSortIcons() {
-					sortHeaders.forEach((header) => {
-						const col = header.getAttribute("data-col");
-						const icon = header.querySelector(".sort-icon");
-						if (!icon) return;
-
-						if (col === sortState.column) {
-							icon.innerHTML = sortState.direction === "asc" ? "▲" : "▼";
-							header.classList.add("text-primary", "bg-primary/10", "rounded");
-							header.classList.remove("text-neutral-500");
-						} else {
-							icon.innerHTML = "↕"; // or some neutral icon
-							header.classList.remove("text-primary", "bg-primary/10", "rounded");
-							header.classList.add("text-neutral-500");
-						}
-					});
-				}
-
-				// EVENT DELEGATION: Robust against DOM changes
-				const handleFilterClick = (e) => {
-					const target = e.target;
-					// @ts-ignore
-					const btn = target.closest(".filter-btn");
-					if (btn) {
-						const group = btn.getAttribute("data-group");
-						const val = btn.getAttribute("data-filter");
-						if (!group || !val) return;
-
-						// UI Toggle
-						document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach((b) => {
-							b.setAttribute("data-active", "false");
-						});
-						btn.setAttribute("data-active", "true");
-
-						// Logic Update
-						// @ts-ignore
-						filters[group] = val;
-						update(filters, true);
-					}
-				};
-
-				document.addEventListener("click", handleFilterClick);
-
-				// PREVIEW DELEGATION (Hover)
-				document.addEventListener("mouseover", (e) => {
-					const target = e.target;
-					// @ts-ignore
-					const btn = target.closest(".filter-btn");
-					if (btn) {
-						const group = btn.getAttribute("data-group");
-						const val = btn.getAttribute("data-filter");
-						if (!group || !val) return;
-
-						// Create temp filters for preview
-						const tempFilters = { ...filters };
-						// @ts-ignore
-						tempFilters[group] = val;
-						update(tempFilters, false); // false = Don't commit UI chips yet
-					}
-				});
-
-				// RESET PREVIEW on Mouse Leave
-				document.addEventListener("mouseout", (e) => {
-					const target = e.target;
-					// @ts-ignore
-					const btn = target.closest(".filter-btn");
-					if (btn) {
-						// Revert to actual selected filters
-						update(filters, false);
-					}
-				});
-
-				// Global Reset Event Listener (From HUD)
-				window.addEventListener("reset-filters", () => {
-					// Reset State
-					filters = {
-						industry: "all",
-						category: "all",
-						tool: "all",
-						status: "all",
-						client: "all",
-					};
-					sortState = {
-						column: "date",
-						direction: "desc",
-					};
-
-					// Reset UI Buttons
-					document.querySelectorAll(".filter-btn").forEach((b) => {
-						b.setAttribute("data-active", "false");
-					});
-					// Set "all" buttons to active
-					document.querySelectorAll('.filter-btn[data-filter="all"]').forEach((b) => {
-						b.setAttribute("data-active", "true");
-					});
-
-					// Reset Sort Icons
-					updateSortIcons();
-
-					// Update List
-					// @ts-ignore
-					update(filters, true);
-				});
-
-				sortHeaders.forEach((header) => {
-					header.addEventListener("click", () => {
-						const col = header.getAttribute("data-col");
-						if (!col) return;
-
-						if (sortState.column === col) {
-							// Toggle direction
-							sortState.direction = sortState.direction === "asc" ? "desc" : "asc";
-						} else {
-							// New column, default to asc (or desc for year?)
-							sortState.column = col;
-							sortState.direction = col === "year" ? "desc" : "asc";
-						}
-						update();
-					});
-				});
-
-				// Listen for Radial Filter Events
-				// @ts-ignore
-				window.addEventListener("radial-filter", (e) => {
-					const { group, value } = e.detail;
-
-					// Apply Filter
-					// @ts-ignore
-					if (filters[group] !== undefined) {
-						// Update internal state
-						// @ts-ignore
-						filters[group] = value;
-
-						// Update UI Buttons
-						document.querySelectorAll(`.filter-btn[data-group="${group}"]`).forEach((b) => {
-							b.setAttribute("data-active", "false");
-						});
-						const targetBtn = document.querySelector(
-							`.filter-btn[data-group="${group}"][data-filter="${value}"]`,
-						);
-						if (targetBtn) targetBtn.setAttribute("data-active", "true");
-
-						// Render
-						// @ts-ignore
-						update(filters, true);
-					}
+				// Search Trigger Connect
+				const searchBtn = document.getElementById("hud-search-trigger");
+				searchBtn?.addEventListener("click", () => {
+					window.dispatchEvent(new CustomEvent("open-command-menu"));
 				});
 			});
 		</script>
 
-		<style>
-			@reference "../../styles/global.css";
-
-			.filter-btn.active {
-				@apply bg-primary ring-primary text-black ring-2;
-			}
-
-			@keyframes pulse-slow {
-				0%,
-				100% {
-					opacity: 1;
-				}
-				50% {
-					opacity: 0.8;
-					background-color: rgba(var(--color-primary), 0.15);
-				}
-			}
-			.animate-pulse-slow {
-				animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-			}
-		</style>
-
 		<ScrollCoordinator />
-	</div></BaseLayout
->
+	</div>
+</BaseLayout>

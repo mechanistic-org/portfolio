@@ -108,23 +108,17 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 	<!-- HUD -->
 	<ScrollyHud steps={stickies.map((s: any) => ({ id: s.id, label: s.label }))} />
 
-	<!-- TOP HUD (Project Info) - Initially Hidden/Offscreen -->
+	<!-- TOP HUD (Project Info) - Always Visible (Stealth Mode) -->
 	{
 		showHUD && (
-			<div
-				id="top-hud"
-				class="fixed top-0 left-0 z-9999 w-full transition-transform duration-500 ease-out"
-				style="transform: translateY(-100%);"
-			>
-				<ProjectManifestHUD
-					data={{ ...entry.data, id: entry.id }}
-					nextProject={nextProject}
-					prevProject={prevProject}
-					metrics={metrics}
-					entropy={entropy}
-					presentation_mode={presentation_mode}
-				/>
-			</div>
+			<ProjectManifestHUD
+				data={{ ...entry.data, id: entry.id }}
+				nextProject={nextProject}
+				prevProject={prevProject}
+				metrics={metrics}
+				entropy={entropy}
+				presentation_mode={presentation_mode}
+			/>
 		)
 	}
 
@@ -439,18 +433,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 			}
 		}
 
-		// HUD REVEAL LOGIC
-		// Button moves up and fades out
-		// HUD moves down and fades in
-		if (topHud) {
-			if (scrollY > 100) {
-				// Expanded State
-				topHud.style.transform = "translateY(0%)";
-			} else {
-				// Default State
-				topHud.style.transform = "translateY(-100%)";
-			}
-		}
+		// HUD REVEAL LOGIC REMOVED (Always Visible in Stealth Mode)
 	});
 
 	// 2. Stage Switcher

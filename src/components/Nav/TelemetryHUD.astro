@@ -1,0 +1,124 @@
+---
+import { Icon } from "astro-icon/components";
+import SonicHeartbeat from "@components/Audio/SonicHeartbeat";
+
+// Props for override
+const { currentRealm = "identity" } = Astro.props;
+---
+
+<nav
+	id="telemetry-hud"
+	class="pointer-events-none fixed inset-0 z-50 flex flex-col justify-between p-4 mix-blend-difference"
+>
+	<!-- TOP ROW: COMPASS STRIP -->
+	<div class="relative flex w-full items-center justify-center border-t border-white/20 pt-2">
+		<div class="absolute -top-1 left-1/2 h-2 w-0.5 bg-emerald-500"></div>
+		<!-- Compass Ticks -->
+		<div class="flex gap-16 font-mono text-[10px] text-white/50 opacity-80">
+			<span>270</span>
+			<span>285</span>
+			<span>300</span>
+			<span>315</span>
+			<span class="font-bold text-white">N (000)</span>
+			<span>015</span>
+			<span>030</span>
+			<span>045</span>
+			<span>090</span>
+		</div>
+	</div>
+
+	<!-- MIDDLE: TAPES -->
+	<div class="flex h-full w-full items-center justify-between px-4">
+		<!-- LEFT TAPE: VELOCITY (Skill/Activity) -->
+		<div class="relative flex h-64 flex-col items-end border-r border-white/20 pr-2">
+			<div class="w-full text-right text-[9px] text-neutral-500 uppercase">Velocity</div>
+			<!-- Moving Arrow -->
+			<div
+				class="absolute top-1/2 -right-3 h-0 w-0 border-y-4 border-l-8 border-y-transparent border-l-emerald-500"
+			>
+			</div>
+			<!-- Ticks -->
+			<div class="flex h-full flex-col justify-between py-4 font-mono text-[10px] text-white/40">
+				<span>100</span>
+				<span>90</span>
+				<span>80</span>
+				<span>--</span>
+				<span class="font-bold text-white">65</span>
+				<span>--</span>
+				<span>40</span>
+				<span>20</span>
+				<span>00</span>
+			</div>
+		</div>
+
+		<!-- CENTER: RETICLE (Strategic Mode = Open/Caged) -->
+		<div class="flex h-full w-full flex-col items-center justify-center opacity-30">
+			<!-- Crosshair -->
+			<div class="h-8 w-8 border border-white/20"></div>
+			<div class="-mt-2.5 h-0.5 w-4 bg-white/20"></div>
+			<div class="-mt-2 -ml-2.5 h-4 w-0.5 bg-white/20"></div>
+		</div>
+
+		<!-- RIGHT TAPE: ALTITUDE (Experience) -->
+		<div class="relative flex h-64 flex-col items-start border-l border-white/20 pl-2">
+			<div class="w-full text-left text-[9px] text-neutral-500 uppercase">Altitude</div>
+			<!-- Marker -->
+			<div
+				class="absolute top-[30%] -left-3 h-0 w-0 border-y-4 border-r-8 border-y-transparent border-r-emerald-500"
+			>
+			</div>
+			<!-- Ticks -->
+			<div class="flex h-full flex-col justify-between py-4 font-mono text-[10px] text-white/40">
+				<span>25Y</span>
+				<span>20Y</span>
+				<span class="font-bold text-white">15Y</span>
+				<span>10Y</span>
+				<span>05Y</span>
+				<span>00Y</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- BOTTOM ROW: NAV & COMMS -->
+	<div
+		class="pointer-events-auto flex w-full items-end justify-between border-b border-white/20 pb-2"
+	>
+		<!-- Branding -->
+		<div class="flex items-center gap-4">
+			<div
+				class="flex h-8 w-8 items-center justify-center rounded-full border border-white/20 text-[10px] text-white"
+			>
+				EN
+			</div>
+			<div class="flex flex-col">
+				<span class="text-xs font-bold tracking-widest text-white">ERIK NORRIS</span>
+				<span class="text-[9px] text-neutral-500">/// SYSTEM ARCHITECT [DEMO]</span>
+			</div>
+		</div>
+
+		<!-- Nav System -->
+		<div class="flex gap-1">
+			<a
+				href="/demo-hud"
+				class="border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-white hover:bg-emerald-500/20"
+				>HOME</a
+			>
+			<a
+				href="/demo-hud/projects"
+				class="border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-white hover:bg-emerald-500/20"
+				>WORK</a
+			>
+			<a
+				href="/demo-hud/c24"
+				class="border border-white/10 bg-white/5 px-3 py-1 font-mono text-xs text-white hover:bg-emerald-500/20"
+				>C24</a
+			>
+		</div>
+
+		<!-- Status -->
+		<div class="flex items-center gap-4 font-mono text-[10px] text-emerald-500">
+			<span>SYS: ONLINE</span>
+			<span>NAV: TELEMETRY</span>
+		</div>
+	</div>
+</nav>
