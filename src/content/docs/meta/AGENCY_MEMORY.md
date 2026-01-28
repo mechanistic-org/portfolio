@@ -105,10 +105,18 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Idle / Mining.**
-- **Next Step:** Conversation Miner Complete. Ready for Fresh Context.
-- **Context:** **DEPLOYMENT COMPLETE.** Metadata Refined (Taxonomy). HUD Visuals Upgraded (Entropy, Tooltips). Cloudflare KV Issues Resolved.
+- **Active Task:** **Idle / Mining (Complete).**
+- **Next Step:** Ready for next objective.
+- **Context:** **STICKIE PROTOCOL SECURED.** `hydrate_content.py` hardened against data loss. Documentation aligned.
+- **Recent Win:** Successfully deployed "Stickie Safety" laws to Production. Fixed `dist/search-index.json` build verification.
 
+* **Key Decision (Protocol):** **"Stickies over Bubbles"** - We renamed the protocol to `STICKIE_PROTOCOL.md` to match the UI Code. "Bubble" refers strictly to the _folder_. "Stickie" refers to the _artifact_.
+* **Key Decision (Automation):** **"Targeted Hydration"** - `hydrate_content.py` now supports `--slug`. We generally FORBID running it without a target to prevent accidental corpus-wide modification.
+* **Key Decision (Visuals):** **"The Turbulence Standard"** - Replaced soft `fractalNoise` with `turbulence` (Frequency 0.5, Octaves 4, Mix-Blend Overlay) for a sharper, more "Forensic" background texture that cuts through the dark mode.
+* **Key Decision (Visuals):** **"Stealth Mode"** - The Starfield is the primary substrate. Application UI (Project Portal, Colophon, Docs) floats in the void. Borders (`border-white/10`) and Opaque Backgrounds on View Containers are FORBIDDEN in this mode.
+* **Key Decision (Component):** **"The Universal HUD"** - Consolidates `HyperspaceHUD` and `ProjectManifestHUD`. Features `mode="stealth"` (Always Visible, Transparent Wrapper) and "HOTAS" style controls for the Fleet View.
+* **Key Decision (Stability):** **"The Slug Match Law"** - `getEntry("projects", slug)` requires the exact file slug. `c24-control-surface` (legacy ID) crashed the build; `c24` (current ID) fixed it. Always verify `src/content/projects` folder names before hardcoding IDs.
+* **Key Decision (Hydration):** **"The Starfield Priority"** - `CollimatedBackground` (Canvas) requires `client:load` on Project Pages (`[...slug].astro`) to prevent hydration mismatches and "Black Flash" visibility issues. `client:idle` is insufficient for heavy 3D backgrounds.
 * **Key Decision (Audio):** **"The Iron Dome"** - The Audio Host must be blind to instructions. We use `PODCAST_READY.txt` (Sanitized) and explicitly forbid instructional headers in the script source.
 * **Key Decision (Viz-Audio):** **"The SonicHeartbeat Standard"** - Idle = Pulse (Cycle), Active = Full EQ. Icon = Speaker (not Headphone).
 * **Key Decision (SEO):** **"The Answer Engine Verification"** - We are AEO Ready. JSON-LD for Projects is the structural key for Knowledge Graph entity recognition.
@@ -251,3 +259,11 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **The Cloudflare "Ghost" Error:**
   - "Unknown internal error occurred" during Deployment (after Build Passing) is a platform flake.
   - **Fix:** Retry Push. Do not debug code.
+- **The "Stickie Safety" Law (Jan 2026):**
+  - **Context:** Previous hydration scripts wiped `stickies` metadata, risking text loss for `deck.md`.
+  - **Protocol:** `hydrate_content.py` MUST parse `deck.md`. If `deck.md` is missing, generating a stickie is risky.
+  - **Constraint:** Use `--slug` to target updates (`npm run content:hydrate -- --slug c24`) rather than nuking the whole corpus.
+- **The "Stickie vs Bubble" Law:**
+  - **Bubble:** The _Folder_ (`R2_MASTER/slug/bubbles/`).
+  - **Stickie:** The _Code Object_ (`cyberspace.stickies`).
+  - They are 1:1 mapped, but the terminology is distinct. Docs and Code now reflect this (`STICKIE_PROTOCOL.md`).

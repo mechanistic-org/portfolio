@@ -6,6 +6,7 @@ sidebar:
   order: 99
 description: Documentation for Maintenance & Troubleshooting.
 ---
+
 # System Maintenance & Troubleshooting
 
 This document serves as the first line of defense for system issues, build failures, and pipeline errors.
@@ -215,6 +216,16 @@ These scripts are the engine of the "Forensic Data Factory."
   - **Duration:** 0.6s - 1.0s.
   - **Ease:** `easeInOut`.
   - **Noise:** Inject randomized height variance (`Math.random()`) so bars don't move in unison.
+
+### Starfield Visibility (The "Black Curtain" Trap)
+
+- **Symptom:** The Starfield is visible on Homepage but "Black" on Project Pages, or flashes black then appears.
+- **Cause:**
+  1.  **Hydration Latency:** `client:idle` (default) delays the R3F Canvas initialization until the main thread is free. On heavy project pages, this gap is visible as a black void.
+  2.  **Opaque Layers:** Tailwind defaults like `bg-black/90` on HUDs or `bg-neutral-900` on containers create overlapping "Curtains" that block the collimated background.
+- **Fix:**
+  1.  **Boost Hydration:** Use `client:load` for `<CollimatedBackground />` on `[...slug].astro`.
+  2.  **Enforce Stealth:** Locate opaque containers (Review Assembly/Timeline divs) and set `bg-transparent`.
 
 ### Audio Protocol Leakage (Iron Dome Failure)
 

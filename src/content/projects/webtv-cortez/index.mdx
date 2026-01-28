@@ -42,6 +42,7 @@ cyberspace:
         src: /assets/r2/webtv-cortez/bubbles/01_early_id/top.jpg
       layout: masonry
       scattered: true
+    deck: []
     featuredIndices: []
     id: 01_early_id
     title: Early Id
@@ -63,6 +64,7 @@ cyberspace:
         src: /assets/r2/webtv-cortez/bubbles/03_functional_model/UltimateTV_Keyboard-and-Remote_2.png
       layout: masonry
       scattered: true
+    deck: []
     featuredIndices: []
     id: 03_functional_model
     title: Functional Model
@@ -84,6 +86,7 @@ cyberspace:
         src: /assets/r2/webtv-cortez/bubbles/04_keycaps/keylegend.png
       layout: masonry
       scattered: true
+    deck: []
     featuredIndices: []
     id: 04_keycaps
     title: Keycaps
@@ -95,19 +98,23 @@ duration: 1.8 Years
 employer: mechanistic
 endDate: 2002-02-01
 forensic_metrics:
-  financial: Avoided $3.50/unit COGS increase (Scissors vs. Rubber Dome); Billed $24k+
-    in surfacing services.
-  governance: Weekly status reports; Rigorous design reviews with ID/PM; Vendor coordination
-    (Silitek).
-  process: Final CAD released to prototype in 6 weeks; Overturned vendor 'No Can Do'
-    via 3D proof.
-  technical: Pro/ENGINEER (Surface Modeling); Resolved 0.05mm Key Pitch mismatch.
-forensic_summary: 'The Trigger: Industrial Design required ''highly organic shapes''
-  for grip areas and a ''highly sculpted'' back which posed significant modeling challenges.
-  -> The Intervention: Executed advanced surface modeling in Pro/ENGINEER, manually
-  adding curvature to hand grips and modifying outlines to strictly adhere to ID sketches.
-  -> The Result: Delivered flawless surfacing and released final CAD files for prototyping
-  in six weeks, meeting the aggressive schedule.'
+  financial: Avoided custom 'scissors switch' tooling costs by forcing standard membrane
+    matrix into 'Airboard' form factor. Billed ~$25k in June 2000 alone for rapid
+    remediation.
+  governance: Direct Vendor-Engineering Loop (WebTV <> Mechanistic <> Silitek/Panasonic/Lite-On)
+    bypassing standard component procurement delays.
+  process: Implemented 'Surgical CAD' surface reconstruction to align ID curvature
+    with fixed PCB/membrane hard points.
+forensic_summary: 'TRIGGER: Vendor analysis (Silitek/Panasonic) revealed the ID intent
+  was mechanically impossible—specifically, the rubber pad was ''too close to the
+  edge'' for PCB sealing and the key matrix pitch (19.05mm) clashed with the 2D layout.
+  The initial hard model failed ergonomic validation (not level, too heavy). INTERVENTION:
+  Norris (as Lincicum) executed a high-intensity ''Surgical CAD'' sprint (100+ hours
+  in <2 weeks) to re-loft the top surfaces, enforce a 7-11 degree IR tilt, and modify
+  grip curvature while constraining internal geometry to standard low-cost key matrices.
+  RESULT: Delivered a manufacturable database that reconciled the ''Airboard'' form
+  factor with standard membrane switches, securing executive approval for the new
+  model despite ''beating on extra CAD hours''.'
 gallery: []
 heroImage: /assets/r2/webtv-cortez/webtv-cortez-hero-01-xl.webp
 industry: consumer_electronics
@@ -184,9 +191,10 @@ teamSize: Core Team of INT 2 / EXT 5
 theme: hyperspace
 title: Cortez
 toolchain:
-- Pro/ENGINEER (Surface Modeling)
-- AutoCAD (2D layouts)
-- FTP (Data Exchange)
+- Pro/ENGINEER (Surface Modeling, Mechanical Detail)
+- AutoCAD (DXF Data Exchange with Vendors)
+- 'Vendors: Silitek (Key Matrix), Panasonic (RF/Mechanical Review), Sputnik Models
+  (Hard Modeling), Lite-On'
 tools:
 - pro_engineer
 - autocad

@@ -1,0 +1,61 @@
+{
+	"id": "project_curtis_c24",
+	"presentation_mode": "deep_dive",
+	"metrics": {
+		"financial": "Achieved 51.8% Gross Margin on $9,995 MSRP; Eliminated ~$200/unit Focusrite royalty cost via ground-up redesign",
+		"process": "Salvaged Pilot yield on cosmetic plastics from 2.50mm warp to <0.50mm via custom fixture engineering",
+		"governance": "Managed integration of 19 PCBs and 15 chassis parts; Enforced strict Data Control Drawing (DCD) protocol"
+	},
+	"forensic_summary": "STAR Analysis: The C24 'Curtis' project faced a 'Death March' scenario characterized by concurrent thermal and supply chain failures. \n\n1. THE TRIGGER (Thermal Crisis): During Pilot, the ABS side caps (P/N 9440-55165) arrived with 2.50mm 'Banana' warping and 2.27mm linear shrinkage due to the heat cure cycle of the 'Rubberized Soft Paint' on flat racks.\n2. THE INTERVENTION (Process Engineering): I rejected the vendor's standard process and engineered 'Method A' (Vertical Hanging Fixture). I codified this in ECO 12740, utilizing gravity to maintain straightness during the paint cure glass-transition phase.\n3. THE TRIGGER (Supply Chain): Primary vendor VTech/Kwanta 'no-bidded' the complex top panel (9420-55105) due to high standoff density, threatening a line-down.\n4. THE INTERVENTION (Bridge Strategy): I executed a dual-source strategy, engaging Mass Precision (Silicon Valley) for emergency manual fabrication to save the Pilot schedule while qualifying the overseas automated process.\n5. THE RESULT: Delivered 500 units for Q4 2007 revenue, meeting RoHS compliance and removing legacy royalties.",
+	"toolchain": [
+		"Pro/Engineer Wildfire",
+		"Pro/Intralink 8.0 (Windchill)",
+		"Agile (ECO Management)",
+		"Vendors: VTech/Kenny (Sheet Metal)",
+		"Vendors: Jetcrown (Injection Molding/Paint)",
+		"Vendors: Mass Precision (Bridge Manufacturing)"
+	],
+	"cast": [
+		{
+			"name": "Erik Norris",
+			"role": "Lead Mechanical Engineer / Architect",
+			"org": "Digidesign"
+		},
+		{
+			"name": "Mike Moskowitz",
+			"role": "Program Manager",
+			"org": "Digidesign"
+		},
+		{
+			"name": "Neal Breitbarth",
+			"role": "Industrial Design Lead",
+			"org": "Digidesign"
+		},
+		{
+			"name": "Ping Zhang",
+			"role": "Manufacturing Engineer",
+			"org": "Digidesign"
+		},
+		{
+			"name": "Ed Stegall",
+			"role": "Fabrication Lead",
+			"org": "Mass Precision"
+		}
+	],
+	"timeline": {
+		"start": "2006-04-10",
+		"end": "2007-11-20"
+	},
+	"visuals_to_find": [
+		"944055165-166-00 baking fixture chg.pdf (Photos of warped parts vs. hanging fixture)",
+		"China Sheet Metal.pdf (Photos of ripples and dents in rejected panels)",
+		"before_and_after_rubber_paint.pdf (Data proving 2.27mm shrinkage)",
+		"C24_plastic_fit-misc.pdf (Fit check interference photos)",
+		"ECO_12263.pdf (Sheet metal release documentation)"
+	],
+	"quotes": [
+		"Realizing last minute that the rubberized paint may not work – despite questions/concerns being raised by QA earlier on in the process",
+		"There are real issues with the bending of the metal. on most of the edges you can feel a ripple/dents in the meta.",
+		"Operations have been opening discussions with a new console CM... Our main concern is with the size of this panel and their ability for their vendor to place the welded studs"
+	]
+}

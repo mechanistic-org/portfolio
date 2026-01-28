@@ -1,0 +1,60 @@
+{
+	"id": "galaxy-ultimatetv",
+	"presentation_mode": "deep_dive",
+	"metrics": {
+		"financial": "Managed $14k/mo burn rate on solo-consultant engineering services; mitigated cost of custom 4-day quick-turn fabrication cycles",
+		"process": "Achieved 28.3 CFM system airflow in high-density chassis; Resolved 100% of EMI chassis ground failures via flange redesign",
+		"governance": "Weekly 'Mechanical Hitlist' protocol tracking 30+ gating defects; Centralized FTP master database control"
+	},
+	"forensic_summary": "TRIGGER: Integration of 150W TDP AMD K7 CPU + 3 Tuners into consumer STB caused thermal crisis (Smart Card Reader >55°C) and sheet metal warpage risks. INTERVENTION: Architected 300mm chassis with directed airflow tunnel (intake over HDDs, exhaust via PSU) and 50x60x30mm extruded heatsink; Redesigned chassis floor with 'Hook 29' details and ribs to stabilize stamping. RESULT: Stabilized CPU junction at 84°C; Salvaged DEV build schedule despite vendor shutdowns; Assets transitioned to Xbox division.",
+	"toolchain": [
+		"Pro/ENGINEER (Master Assembly)",
+		"AutoCAD (Legacy 2D)",
+		"Applied Thermal Technologies (CFD)",
+		"E-M Solutions (Sheet Metal Fab)",
+		"Sputnik Models (Hard Models)",
+		"D&D Manufacturing (Stamping Feasibility)"
+	],
+	"cast": [
+		{
+			"name": "Erik Norris",
+			"role": "Principal Mechanical Architect",
+			"org": "Mechanistic"
+		},
+		{
+			"name": "Roy Askeland",
+			"role": "Engineering Manager",
+			"org": "WebTV / Microsoft"
+		},
+		{
+			"name": "Frank Salinas",
+			"role": "Hardware Systems Engineer",
+			"org": "WebTV / Microsoft"
+		},
+		{
+			"name": "Shelly Evans",
+			"role": "NPI Manager",
+			"org": "E-M Solutions"
+		},
+		{
+			"name": "Avijit Goswami",
+			"role": "Thermal Consultant",
+			"org": "Applied Thermal Technologies"
+		}
+	],
+	"timeline": {
+		"start": "2000-09-20",
+		"end": "2002-03-18"
+	},
+	"visuals_to_find": [
+		"model-iso.jpg (CFD Thermal Simulation)",
+		"tempxz.jpg (Thermal Heat Map)",
+		"Base_Proto_Deviations.jpg (QA Redlines)",
+		"Galaxy Mechanical Design Hitlist 7-27.doc (Defect Log)"
+	],
+	"quotes": [
+		"The only concern is the Smart Card location. It probably need to be moved closer to the inlet vent.",
+		"Our concern would be warping of the base in the stamping process due to the quantity and placement of the standoff's",
+		"Microsoft, has (surprise) chosen the PC in general and the gaming console platform specifically rather than the 'cable TV box'."
+	]
+}

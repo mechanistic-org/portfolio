@@ -260,6 +260,47 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
             if post.metadata.get("toolchain") != data["toolchain"]:
                 changes.append(f"  - Update 'toolchain'")
                 post.metadata["toolchain"] = data["toolchain"]
+
+        # 5. Intelligence Bolus (Raw Content Injection)
+        # Scan for corresponding {slug}.md in notebook_dumps
+        dump_md_path = SOURCE_DIR / f"{slug}.md"
+        if dump_md_path.exists():
+             # Determine target path resolved from target_mdx parent
+             target_intelligence = target_mdx.parent / "_intelligence.md"
+             
+             # Read source content
+             try:
+                 with open(dump_md_path, "r", encoding="utf-8") as f:
+                     raw_intelligence = f.read()
+                 
+                 # Check if update needed
+                 needs_update = True
+                 if target_intelligence.exists():
+                     with open(target_intelligence, "r", encoding="utf-8") as f:
+                         existing_intelligence = f.read()
+                     if existing_intelligence == raw_intelligence:
+                         needs_update = False
+                 
+                 if needs_update:
+                     # Helper to ensure we are not creating files in a flat structure where they shouldn't be
+                     # But our target_mdx logic handles folder vs file. 
+                     # If target_mdx is a file (projects/c24.mdx), target_mdx.parent is projects/
+                     # So we'd get projects/_intelligence.md which is WRONG.
+                     # We need to enforce a folder structure for intelligence.
+                     
+                     if target_mdx.name == "index.mdx":
+                         # Correct Folder Structure
+                         if not dry_run:
+                            with open(target_intelligence, "w", encoding="utf-8") as f:
+                                f.write(raw_intelligence)
+                            print(f"  - Created/Updated '_intelligence.md'")
+                         else:
+                            print(f"  - [Dry Run] would create/update '_intelligence.md'")
+                     else:
+                         print(f"  ⚠️  Skipping intelligence creation for flat file '{target_mdx.name}'. Migrate to folder structure first.")
+
+             except Exception as e:
+                 print(f"  ❌ Failed to process intelligence dump: {e}")
                 
         # 5. Mine Stickies (Bubbles)
         # Attempt to mine stickies from R2_MASTER
