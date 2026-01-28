@@ -102,7 +102,7 @@ export default function WorkRealm({ nodes: rawNodes }: WorkRealmProps) {
 				{/* RIGHT: The Fiche Strip */}
 				<div
 					id="fiche-col"
-					className={`pointer-events-auto relative hidden h-screen flex-col overflow-hidden border-l border-white/5 bg-black/50 backdrop-blur-sm transition-all delay-500 duration-1000 ease-out will-change-transform lg:flex ${
+					className={`pointer-events-auto relative hidden h-screen flex-col overflow-hidden border-l border-white/5 bg-transparent transition-all delay-500 duration-1000 ease-out will-change-transform lg:flex ${
 						isSwarmActive ? "translate-x-0 opacity-100" : "translate-x-12 opacity-0"
 					}`}
 					onMouseEnter={() => setIsHoveringStrip(true)}
@@ -119,15 +119,7 @@ export default function WorkRealm({ nodes: rawNodes }: WorkRealmProps) {
 					></div>
 
 					{/* Fiche Strip Container with CSS Mask for smooth fade */}
-					<div
-						className="relative h-full w-full overflow-hidden"
-						style={{
-							maskImage:
-								"linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
-							WebkitMaskImage:
-								"linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
-						}}
-					>
+					<div className="relative h-full w-full overflow-hidden">
 						{/* Scroll Content - Added relative for offsetTop calc */}
 						<div
 							ref={stripContainerRef}
@@ -145,8 +137,8 @@ export default function WorkRealm({ nodes: rawNodes }: WorkRealmProps) {
 										onClick={() => (window.location.href = `/projects/${toSlug(node.id)}`)}
 										className={`group relative cursor-pointer rounded-sm border p-6 transition-all duration-300 ${
 											isActive
-												? "z-10 scale-105 border-[#2E5090] bg-neutral-900 shadow-[0_0_30px_rgba(46,80,144,0.3)]"
-												: "border-white/5 bg-black/40 opacity-60 grayscale hover:border-white/20 hover:bg-neutral-900/80 hover:opacity-100 hover:grayscale-0"
+												? "z-10 scale-105 border-[#2E5090] bg-neutral-900/40 shadow-[0_0_30px_rgba(46,80,144,0.3)] backdrop-blur-md"
+												: "border-white/5 bg-transparent opacity-60 grayscale hover:border-white/20 hover:bg-neutral-900/20 hover:opacity-100 hover:grayscale-0 hover:backdrop-blur-sm"
 										} `}
 									>
 										<div className="mb-2 flex items-start justify-between">

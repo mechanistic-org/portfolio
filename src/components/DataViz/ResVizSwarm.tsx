@@ -504,7 +504,7 @@ export default function ResVizSwarm({
 	}, [externalHoverId]);
 
 	return (
-		<div ref={containerRef} className="relative h-full w-full overflow-hidden bg-black">
+		<div ref={containerRef} className="relative h-full w-full overflow-hidden bg-transparent">
 			{/* HUD / Label */}
 			{/* REMOVED: SCROLL TO TRAVERSE TIME */}
 

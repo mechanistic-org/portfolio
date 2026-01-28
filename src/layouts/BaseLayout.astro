@@ -12,7 +12,8 @@ import Footer from "@components/Footer/Footer.astro";
 import CommandMenu from "@components/Search/CommandMenu";
 
 // import CookieConsent from "@components/CookieConsent/CookieConsent.astro";
-// import FiberGrid from "@components/Interaction/FiberGrid.astro";
+// import CookieConsent from "@components/CookieConsent/CookieConsent.astro";
+import CollimatedBackground from "@components/Effects/CollimatedBackground"; // NEW: Audit Rec #1
 
 // data
 import siteData from "@config/siteData.json";
@@ -29,6 +30,7 @@ interface Props {
 	noindex?: boolean;
 	hideNav?: boolean;
 	overflowHidden?: boolean;
+	starfield?: boolean; // NEW: Audit Rec #1
 }
 
 const {
@@ -43,6 +45,7 @@ const {
 	noindex = false,
 	hideNav = false,
 	overflowHidden = false,
+	starfield = false,
 } = Astro.props as Props;
 ---
 
@@ -76,7 +79,7 @@ const {
 			},
 		]}
 	>
-		{/* <FiberGrid /> */}
+		{starfield && <CollimatedBackground client:load />}
 		<div class="noise-overlay"></div>
 		<div class="relative z-10 flex min-h-lvh flex-col justify-between">
 			<div>

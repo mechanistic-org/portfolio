@@ -69,7 +69,7 @@ const allClients = projects.flatMap((p) => {
 const clients = [...new Set(allClients.filter(Boolean))].sort();
 ---
 
-<BaseLayout title="Projects" description="Engineering Archive">
+<BaseLayout title="Projects" description="Engineering Archive" starfield={true}>
 	<!-- FULL VIEWPORT DATA CONTAINER -->
 	<div class="site-container-full min-h-screen px-4 pt-32 pb-24 md:px-8 md:pb-36">
 		<!-- VIEW SWITCHER (The Control Console) -->
@@ -135,7 +135,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 			class="view-container animate-in fade-in zoom-in-95 hidden w-full duration-500"
 		>
 			<div
-				class="relative overflow-hidden rounded-xl border border-white/5 bg-black/20"
+				class="relative overflow-hidden rounded-xl bg-transparent"
 				style="height: calc(100vh - 250px)"
 			>
 				<Assembly client:only="react" data={multiverseData} />
@@ -154,7 +154,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 			class="view-container animate-in slide-in-from-right-4 hidden w-full duration-500"
 		>
 			<div
-				class="relative overflow-hidden rounded-xl border border-white/5 bg-black/20"
+				class="relative overflow-hidden rounded-xl bg-transparent"
 				style="height: calc(100vh - 250px)"
 			>
 				<TimelineStream client:only="react" data={multiverseData} />
@@ -170,7 +170,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 		<!-- VIEW: RADIAL -->
 		<div id="view-radial" class="view-container hidden w-full">
 			<div
-				class="relative overflow-hidden rounded-xl border border-white/5 bg-black/20"
+				class="relative overflow-hidden rounded-xl bg-transparent"
 				style="height: calc(100vh - 250px)"
 			>
 				<RadialTaxonomy client:only="react" data={multiverseData} />

@@ -21,7 +21,7 @@ import SonicHeartbeat from "@components/Audio/SonicHeartbeat";
 
 	<!-- Center: The Jump Drive (Desktop) -->
 	<div
-		class="hidden items-center justify-center gap-1 rounded-full border border-white/10 bg-black/50 p-1 backdrop-blur-sm md:flex"
+		class="hidden items-center justify-center gap-1 rounded-full border border-white/10 bg-black/20 p-1 backdrop-blur-sm md:flex"
 	>
 		<a
 			href="/projects"
@@ -64,12 +64,12 @@ import SonicHeartbeat from "@components/Audio/SonicHeartbeat";
 				const threshold = window.innerHeight * 0.5; // Fade in halfway through Realm I
 
 				if (scrollY > threshold) {
-					// Scrolled State: Active Glass
-					nav.classList.add("bg-black/90", "backdrop-blur-md", "border-white/10");
+					// Scrolled State: Active Glass (Transparent)
+					nav.classList.add("bg-black/10", "backdrop-blur-md", "border-white/10");
 					nav.classList.remove("bg-transparent", "border-transparent");
 				} else {
 					// Top State: Fully Transparent
-					nav.classList.remove("bg-black/90", "backdrop-blur-md", "border-white/10");
+					nav.classList.remove("bg-black/10", "backdrop-blur-md", "border-white/10");
 					nav.classList.add("bg-transparent", "border-transparent");
 				}
 			};
@@ -121,7 +121,9 @@ import SonicHeartbeat from "@components/Audio/SonicHeartbeat";
 	<div class="flex items-center gap-4">
 		<!-- Left: Identity -->
 		<a href="/" class="group flex items-center gap-3">
-			<div class="relative h-8 w-8 overflow-hidden rounded-full border border-white/20 bg-black">
+			<div
+				class="relative h-8 w-8 overflow-hidden rounded-full border border-white/20 bg-transparent"
+			>
 				<!-- Brand Logo or Avatar -->
 				<div class="flex h-full w-full items-center justify-center text-[10px] text-white">EN</div>
 			</div>

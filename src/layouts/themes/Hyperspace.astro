@@ -49,6 +49,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 	type="project"
 	projectFrontmatter={entry.data}
 	entropy={entropy}
+	starfield={true}
 >
 	<GlobalHomeButton />
 
@@ -129,7 +130,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 
 	<!-- MAIN ENGINE -->
 	<main
-		class="relative z-10 snap-y snap-proximity bg-neutral-900"
+		class="relative z-10 snap-y snap-proximity bg-transparent"
 		style={`height: ${stickies.length * 100 + 100}vh;`}
 	>
 		<!-- STICKY DECK -->
@@ -177,7 +178,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 								camera-orbit={stage.data?.cameraOrbit || "-30deg 75deg 110%"}
 								field-of-view="30deg"
 								class="h-full w-full"
-								style="background: radial-gradient(circle at center, #111 0%, #000 100%);"
+								style="background: transparent;"
 							>
 								<div
 									slot="progress-bar"
@@ -288,7 +289,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 	<!-- NARRATIVE SECTION -->
 	{
 		narratives.length > 0 && (
-			<section class="relative z-10 bg-neutral-900 pt-12 pb-32">
+			<section class="relative z-10 bg-transparent pt-12 pb-32">
 				<div class="site-container max-w-4xl space-y-24">
 					{narratives.map((n: any) => {
 						// Find the matching visual from the sticky stages
@@ -354,7 +355,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 	<!-- MDX CONTENT SLOT (Standard Mode Only) -->
 	{
 		!useDossier && (
-			<section class="relative z-10 bg-neutral-900 pb-32">
+			<section class="relative z-10 bg-transparent pb-32">
 				<div class="site-container max-w-4xl">
 					<Content />
 				</div>
@@ -363,7 +364,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 	}
 
 	<!-- Scroll Cushion -->
-	<div class="h-[25vh] w-full snap-end bg-neutral-900"></div>
+	<div class="h-[25vh] w-full snap-end bg-transparent"></div>
 </BaseLayout>
 
 <script>

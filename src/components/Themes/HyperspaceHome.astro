@@ -8,13 +8,27 @@ import { getMultiverseData } from "@/utils/getMultiverseData";
 const multiverseData = await getMultiverseData();
 ---
 
-<Layout title="Erik Norris | Senior Staff ME / Designer" description="System Index" hideNav={true}>
-	<!-- The HUD is fixed and persistent -->
-	<HyperspaceHUD />
+<Layout
+	title="Erik Norris | Senior Staff ME / Designer"
+	description="System Index"
+	hideNav={true}
+	starfield={true}
+>
+	<!-- The HUD is fixed and persistent, wrapper made transparent -->
+	<div class="fixed top-0 left-0 z-50 w-full bg-transparent">
+		<HyperspaceHUD />
+	</div>
 
 	<!-- SCROLL TRACK -->
 	<!-- A generic tall element to allow the user to "scroll" which drives the animation -->
-	<div class="pointer-events-none absolute top-0 left-0 z-0 h-[200vh] w-full"></div>
+	<!-- SCROLL TRACK -->
+	<!-- A generic tall element to allow the user to "scroll" which drives the animation -->
+	<div
+		id="hyperspace-scroll-track"
+		class="pointer-events-none relative z-0 h-[200vh] w-full"
+		style="background-color: transparent !important;"
+	>
+	</div>
 
 	<!-- LAYER 2: LOGO (The Overlay) -->
 	<!-- Fixed position, sits on top. Fades out on scroll. -->
@@ -31,7 +45,7 @@ const multiverseData = await getMultiverseData();
 	<!-- Fixed position, starts visible but its CHILDREN will be offset -->
 	<div
 		id="work-layer"
-		class="fixed inset-0 z-10 h-full w-full bg-black transition-opacity duration-300"
+		class="fixed inset-0 z-10 h-full w-full bg-transparent transition-opacity duration-300"
 	>
 		<WorkRealm client:only="react" nodes={multiverseData.nodes} />
 	</div>
@@ -140,13 +154,18 @@ const multiverseData = await getMultiverseData();
 </script>
 
 <style is:global>
+	/* Ensure Canvas is transparent */
+	canvas {
+		background-color: transparent !important;
+	}
+
 	html {
 		scroll-behavior: auto; /* Instant scroll for direct physics mapping */
 		height: 100%;
 		overflow-x: hidden;
 	}
 	body {
-		background-color: black;
+		background-color: black; /* This is the bottom-most layer. If Starfield fails, we see this. */
 		overscroll-behavior: none;
 	}
 </style>

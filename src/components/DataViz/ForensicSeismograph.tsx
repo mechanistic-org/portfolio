@@ -84,6 +84,27 @@ const ForensicSeismograph: React.FC<ForensicSeismographProps> = ({ data }) => {
 					</div>
 				)}
 			</div>
+
+			{/* NEW: Audit Rec #2 - Accessible Data Table */}
+			<table className="sr-only">
+				<caption>Project Entropy Timeline</caption>
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Magnitude</th>
+						<th>Event Description</th>
+					</tr>
+				</thead>
+				<tbody>
+					{processedData.map((d, i) => (
+						<tr key={i}>
+							<td>{d.date}</td>
+							<td>{d.score}/10</td>
+							<td>{d.snippet}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
 		</div>
 	);
 };
