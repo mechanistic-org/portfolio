@@ -1,0 +1,15 @@
+---
+interface Props {
+	data: any;
+	startIndex: number;
+}
+const { data, startIndex } = Astro.props;
+---
+
+<div class="flex h-[200vh] w-full items-start justify-center border-y border-cyan-500/50 bg-black">
+	<div class="sticky top-1/2 -translate-y-1/2 text-center text-cyan-500">
+		<h2 class="mb-4 text-4xl font-bold">SCRUB SEQUENCE</h2>
+		<p class="font-mono text-neutral-400">ID: {data.id} // INDEX: {startIndex}</p>
+		<p class="mt-2 font-mono text-xs text-neutral-600">Scroll To Scrub</p>
+	</div>
+</div>

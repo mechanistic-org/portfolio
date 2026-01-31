@@ -23,6 +23,7 @@ const scrolly = cyberspace;
 import GlobalHomeButton from "@components/Nav/GlobalHomeButton.astro";
 import ForensicDossier from "@components/Scrolly/ForensicDossier.astro";
 import ForensicMarker from "@components/Scrolly/ForensicMarker.tsx";
+import DeepDiveRenderer from "@components/DeepDive/DeepDiveRenderer.astro"; // IMPL
 // NEW COMPONENT IMPORTS
 // import ConspiracyBoard from "@components/Projects/ConspiracyBoard";
 // import Comparator from "@components/Projects/Comparator";
@@ -123,161 +124,8 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 	}
 
 	<!-- MAIN ENGINE -->
-	<main
-		class="relative z-10 snap-y snap-proximity bg-transparent"
-		style={`height: ${stickies.length * 100 + 100}vh;`}
-	>
-		<!-- STICKY DECK -->
-		<div class="sticky top-0 h-screen w-full overflow-hidden">
-			{
-				stickies.map((stage: any, index: number) => (
-					<StickyStage
-						id={`stage-${stage.id}`}
-						active={index === 0}
-						data-interactive={
-							stage.type === "gallery" ||
-							stage.type === "model" ||
-							stage.type === "conspiracy" ||
-							stage.type === "comparator"
-						}
-					>
-						{/* TYPE: SWARM */}
-						{stage.type === "swarm" && (
-							<div
-								id="swarm-grid"
-								class="perspective-1000 grid w-full max-w-4xl grid-cols-10 gap-2 p-8"
-							>
-								{swarmlings.map((s) => (
-									<div
-										class="swarmling glass-panel aspect-square rounded-full transition-transform duration-75 ease-out"
-										data-scale={s.scale}
-										style={`background-color: ${s.color}; opacity: 0.5; transform: scale(${s.scale}); box-shadow: 0 0 10px ${s.color}40;`}
-									/>
-								))}
-							</div>
-						)}
-
-						{/* TYPE: MODEL */}
-						{stage.type === "model" && (
-							<model-viewer
-								src={getAssetUrl(stage.data?.src || stage.data?.modelSrc)}
-								poster={getAssetUrl(stage.data?.poster)}
-								loading="eager"
-								camera-controls
-								disable-zoom
-								shadow-intensity="1"
-								exposure="0.3"
-								interaction-prompt="none"
-								interaction-prompt-style="wiggle"
-								camera-orbit={stage.data?.cameraOrbit || "-30deg 75deg 110%"}
-								field-of-view="30deg"
-								class="h-full w-full"
-								style="background: transparent;"
-							>
-								<div
-									slot="progress-bar"
-									class="pointer-events-none absolute top-0 left-0 h-1 w-full bg-neutral-800/80"
-									id={`loader-${stage.id}`}
-								>
-									<div
-										class="h-full bg-[#2E5CFF] transition-all duration-100 ease-out"
-										style="width: 0%"
-										data-progress-bar
-									/>
-								</div>
-							</model-viewer>
-						)}
-
-						{/* TYPE: MEDIA */}
-						{stage.type === "media" && (
-							<div class="relative h-full w-full">
-								{stage.data?.src && (
-									<img
-										src={getAssetUrl(stage.data.src)}
-										alt={stage.title}
-										class="h-full w-full object-cover opacity-80"
-									/>
-								)}
-								<div class="absolute inset-0 bg-linear-to-t from-neutral-900 via-transparent to-transparent" />
-							</div>
-						)}
-
-						{/* TYPE: GALLERY */}
-						{stage.type === "gallery" && (
-							<SharedLayoutGallery
-								client:load
-								id={`gallery-${stage.id}`}
-								images={stage.data?.images || []}
-								columns={stage.data?.columns || 3}
-								layout={stage.data?.layout || "grid"}
-								scattered={stage.data?.scattered || false}
-								featuredIndices={stage.data?.featuredIndices || []}
-								showLabels={false}
-							/>
-						)}
-
-						{/* TYPE: CONSPIRACY BOARD - DISABLED FOR MANIFESTO V4.2 BUILD
-						{stage.type === "conspiracy" && (
-							<ConspiracyBoard client:load images={stage.data?.images || []} />
-						)}
-						*/}
-
-						{/* TYPE: COMPARATOR - DISABLED FOR MANIFESTO V4.2 BUILD
-						{stage.type === "comparator" && (
-							<Comparator
-								client:load
-								beforeSrc={stage.data?.beforeSrc}
-								afterSrc={stage.data?.afterSrc}
-								beforeLabel={stage.data?.beforeLabel}
-								afterLabel={stage.data?.afterLabel}
-							/>
-						)}
-						*/}
-
-						{/* TYPE: THERMAL VIZ */}
-						{stage.type === "thermal" && <SCThermalMatrix client:load />}
-					</StickyStage>
-				))
-			}
-		</div>
-
-		<!-- TRIGGERS -->
-		<div class="pointer-events-none absolute inset-0 flex flex-col">
-			{
-				stickies.map((stage: any, index: number) => {
-					// Forensic Logic
-					const hasDeck = stage.deck && stage.deck.length > 0;
-					const hasLegacyDeck = stage.legacy_deck && stage.legacy_deck.length > 0;
-					const showMarker = useDossier && hasLegacyDeck; // Restore parallax for Deep Dive
-
-					// Visibility & Width Logic
-					const isInvisible = !stage.title && !stage.text && !hasDeck && !showMarker;
-					const isWide = hasDeck || showMarker;
-
-					return (
-						<ScrollTrigger
-							step={stage.id}
-							align={stage.align}
-							invisible={isInvisible}
-							wide={isWide}
-						>
-							{stage.title && <h2 class="mb-4 text-3xl font-bold text-white">{stage.title}</h2>}
-							{stage.text && <p class="text-neutral-400" set:html={stage.text} />}
-
-							{/* DECK SUPPORT */}
-							{hasDeck && stage.id !== "06_press_resources" && stage.id !== "07_the_artifact" && (
-								<TextDeck id={`deck-${stage.id}`} slides={stage.deck} />
-							)}
-
-							{/* FORENSIC MARKER (Parallax Restoration) */}
-							{showMarker && (
-								<ForensicMarker client:visible id={stage.id} index={index} label={stage.id} />
-							)}
-						</ScrollTrigger>
-					);
-				})
-			}
-		</div>
+	<main class="relative z-10 snap-y snap-proximity bg-transparent">
+		<DeepDiveRenderer stickies={stickies} useDossier={useDossier} />
 	</main>
 
 	<!-- NARRATIVE SECTION -->
@@ -479,15 +327,12 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 
 	document.querySelectorAll("[data-step]").forEach((el) => observer.observe(el));
 
-	// 3. SWARM PHYSICS (Kept Generic)
-	const swarmGrid = document.getElementById("swarm-grid");
+	// 3. SWARM PHYSICS (MULTI-GRID SUPPORT)
+	const swarmGrids = document.querySelectorAll(".swarm-grid");
 	const swarmlings = document.querySelectorAll(".swarmling");
 
-	if (swarmGrid && swarmlings.length > 0) {
+	if (swarmGrids.length > 0 && swarmlings.length > 0) {
 		window.addEventListener("mousemove", (e) => {
-			// Optimization: Only run if any swarm stage is active?
-			// For V4 we just check if the element exists in DOM
-
 			const mx = e.clientX;
 			const my = e.clientY;
 			const cx = window.innerWidth / 2;
@@ -495,10 +340,17 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 
 			const dx = (mx - cx) * 0.05;
 			const dy = (my - cy) * 0.05;
-			swarmGrid.style.transform = `translate(${dx}px, ${dy}px) rotateY(${dx * 0.1}deg) rotateX(${-dy * 0.1}deg)`;
+
+			swarmGrids.forEach((grid) => {
+				(grid as HTMLElement).style.transform =
+					`translate(${dx}px, ${dy}px) rotateY(${dx * 0.1}deg) rotateX(${-dy * 0.1}deg)`;
+			});
 
 			swarmlings.forEach((s) => {
 				const box = s.getBoundingClientRect();
+				// Basic viewport check to avoid crunching off-screen particles
+				if (box.top > window.innerHeight || box.bottom < 0) return;
+
 				const sx = box.left + box.width / 2;
 				const sy = box.top + box.height / 2;
 				const dist = Math.hypot(mx - sx, my - sy);

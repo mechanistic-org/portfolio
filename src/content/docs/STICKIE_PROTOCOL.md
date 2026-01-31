@@ -58,9 +58,12 @@ Legacy CAD files (`.dxf`) found in a bubble are automatically processed by the `
   - `layout.pdf` (Archival / NotebookLM)
 - **Note:** The PDF is generated for "AI Mining" purposes (NotebookLM loves PDFs) and is safe to upload to your private notebook.
 
-## Stickie Taxonomy (The Narrative Arc)
+## Stickie Taxonomy (Human Organization)
 
-To ensure consistent storytelling, all "Deep Projects" (C24, SC48, Dreamjob) MUST organize their `bubbles/` folder using the following numbered sequence. This structure maps directly to the "Engineering Lifecycle" and Stickie order.
+> **The Dumb Pipe Law:** The Compiler does NOT understand "Phases" or "Narrative Arcs". It simply sorts folders **alphabetically**.
+> You **MUST** use the `01_` prefix to control the timeline order.
+
+To ensure consistent storytelling, we use the following convention to map the "Forensic Lifecycle" to the alphanumeric sort:
 
 | Prefix | Phase             | Description                                                     |
 | :----- | :---------------- | :-------------------------------------------------------------- |

@@ -11,6 +11,7 @@ export const INDUSTRY_VALUES = INDUSTRIES.map((i) => i.value);
 
 export const CATEGORIES = [
 	// Consumer
+	{ label: "Consumer Electronics", value: "consumer_electronics" },
 	{ label: "Mobile Device", value: "mobile_device" },
 	{ label: "Wearable / AR", value: "wearable_ar" },
 	{ label: "Home Entertainment", value: "home_entertainment" },
@@ -19,7 +20,6 @@ export const CATEGORIES = [
 
 	// Professional
 	{ label: "Enterprise Hardware", value: "enterprise_hardware" },
-	{ label: "Pro Audio", value: "pro_audio" },
 	{ label: "Medical Device", value: "medical_device" },
 	{ label: "Computing", value: "computing" },
 

@@ -1,0 +1,159 @@
+---
+import StickyStage from "@components/Scrolly/StickyStage.astro";
+import ScrollTrigger from "@components/Scrolly/ScrollTrigger.astro";
+import TextDeck from "@components/Scrolly/TextDeck.astro";
+import ForensicMarker from "@components/Scrolly/ForensicMarker.tsx";
+import SharedLayoutGallery from "@components/Projects/SharedLayoutGallery";
+import SCThermalMatrix from "@components/Visualizations/SCThermalMatrix";
+import { getAssetUrl } from "@/utils/assets";
+
+interface Props {
+	stickies: any[];
+	startIndex: number; // For offset calculation if needed
+	useDossier?: boolean;
+}
+
+const { stickies, startIndex = 0, useDossier = false } = Astro.props;
+
+// GENERATED CONTENT FOR SWARM (Should also be data driven eventually)
+const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
+	id: i,
+	color: ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF"][
+		Math.floor(Math.random() * 6)
+	],
+	scale: 0.5 + Math.random(),
+}));
+---
+
+<div class="relative w-full" style={`height: ${stickies.length * 100 + 100}vh;`}>
+	<!-- STICKY DECK -->
+	<div class="sticky top-0 h-screen w-full overflow-hidden">
+		{
+			stickies.map((stage: any, index: number) => (
+				<StickyStage
+					id={`stage-${stage.id}`}
+					active={index === 0}
+					data-interactive={
+						stage.type === "gallery" ||
+						stage.type === "model" ||
+						stage.type === "conspiracy" ||
+						stage.type === "comparator"
+					}
+				>
+					{/* TYPE: SWARM */}
+					{stage.type === "swarm" && (
+						<div class="swarm-grid perspective-1000 grid w-full max-w-4xl grid-cols-10 gap-2 p-8">
+							{swarmlings.map((s) => (
+								<div
+									class="swarmling glass-panel aspect-square rounded-full transition-transform duration-75 ease-out"
+									data-scale={s.scale}
+									style={`background-color: ${s.color}; opacity: 0.5; transform: scale(${s.scale}); box-shadow: 0 0 10px ${s.color}40;`}
+								/>
+							))}
+						</div>
+					)}
+
+					{/* TYPE: MODEL */}
+					{stage.type === "model" && (
+						<model-viewer
+							src={getAssetUrl(stage.data?.src || stage.data?.modelSrc)}
+							poster={getAssetUrl(stage.data?.poster)}
+							loading="eager"
+							camera-controls
+							disable-zoom
+							shadow-intensity="1"
+							exposure="0.3"
+							interaction-prompt="none"
+							interaction-prompt-style="wiggle"
+							camera-orbit={stage.data?.cameraOrbit || "-30deg 75deg 110%"}
+							field-of-view="30deg"
+							class="h-full w-full"
+							style="background: transparent;"
+						>
+							<div
+								slot="progress-bar"
+								class="pointer-events-none absolute top-0 left-0 h-1 w-full bg-neutral-800/80"
+								id={`loader-${stage.id}`}
+							>
+								<div
+									class="h-full bg-[#2E5CFF] transition-all duration-100 ease-out"
+									style="width: 0%"
+									data-progress-bar
+								/>
+							</div>
+						</model-viewer>
+					)}
+
+					{/* TYPE: MEDIA */}
+					{(stage.type === "media" || !stage.type) && (
+						<div class="relative h-full w-full">
+							{stage.data?.src && (
+								<img
+									src={getAssetUrl(stage.data.src)}
+									alt={stage.title}
+									class="h-full w-full object-cover opacity-80"
+								/>
+							)}
+							<div class="absolute inset-0 bg-linear-to-t from-neutral-900 via-transparent to-transparent" />
+						</div>
+					)}
+
+					{/* TYPE: GALLERY */}
+					{stage.type === "gallery" && (
+						<SharedLayoutGallery
+							client:load
+							id={`gallery-${stage.id}`}
+							images={stage.data?.images || []}
+							columns={stage.data?.columns || 3}
+							layout={stage.data?.layout || "grid"}
+							scattered={stage.data?.scattered || false}
+							featuredIndices={stage.data?.featuredIndices || []}
+							showLabels={false}
+						/>
+					)}
+
+					{/* TYPE: THERMAL VIZ */}
+					{stage.type === "thermal" && <SCThermalMatrix client:load />}
+				</StickyStage>
+			))
+		}
+	</div>
+
+	<!-- TRIGGERS -->
+	<div class="pointer-events-none absolute inset-0 flex flex-col">
+		{
+			stickies.map((stage: any, index: number) => {
+				// Forensic Logic
+				const hasDeck = stage.deck && stage.deck.length > 0;
+				const hasLegacyDeck = stage.legacy_deck && stage.legacy_deck.length > 0;
+				const showMarker = useDossier && hasLegacyDeck; // Restore parallax for Deep Dive
+
+				// Visibility & Width Logic
+				const isInvisible = !stage.title && !stage.text && !hasDeck && !showMarker;
+				const isWide = hasDeck || showMarker;
+
+				return (
+					<ScrollTrigger step={stage.id} align={stage.align} invisible={isInvisible} wide={isWide}>
+						{stage.title && <h2 class="mb-4 text-3xl font-bold text-white">{stage.title}</h2>}
+						{stage.text && <p class="text-neutral-400" set:html={stage.text} />}
+
+						{/* DECK SUPPORT */}
+						{hasDeck && stage.id !== "06_press_resources" && stage.id !== "07_the_artifact" && (
+							<TextDeck id={`deck-${stage.id}`} slides={stage.deck} />
+						)}
+
+						{/* FORENSIC MARKER (Parallax Restoration) */}
+						{showMarker && (
+							<ForensicMarker
+								client:visible
+								id={stage.id}
+								index={index + startIndex}
+								label={stage.id}
+							/>
+						)}
+					</ScrollTrigger>
+				);
+			})
+		}
+	</div>
+</div>

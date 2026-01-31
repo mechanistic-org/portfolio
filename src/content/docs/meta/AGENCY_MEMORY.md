@@ -267,3 +267,17 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
   - **Bubble:** The _Folder_ (`R2_MASTER/slug/bubbles/`).
   - **Stickie:** The _Code Object_ (`cyberspace.stickies`).
   - They are 1:1 mapped, but the terminology is distinct. Docs and Code now reflect this (`STICKIE_PROTOCOL.md`).
+
+## 🏛️ The Institution Era (Jan 2026 Shift)
+
+**The Pivot:**
+
+- **From:** "Startup" (Quantum Template, Nov 2025). Fluid, experimental, fragile.
+- **To:** "Institution" (Forensic Engine, Jan 2026). Rigid, legislated, automated.
+- **Why:** Forensic Complexity (C24, WebTV) crushed the startup model. Agents require Law (Antibodies) to function at scale.
+
+**Key Philosophies:**
+
+- **"Rigidity as a Feature":** We do not pivot. We ingest. The structure must be strong enough to hold 25 years of data.
+- **"Farming the Meta":** We turn internal struggle (technical debt) into public content (Colophon/LinkedIn). The _process_ is the product.
+- **"The Covenant is Burned":** We rejected the religious "Vassal" language. We are Engineers. `GROK_LOG` is a Statute Book (ISO Standard), not a Bible.

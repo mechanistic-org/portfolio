@@ -157,3 +157,44 @@ slug: "grok_log"
 1.  **NO INSTRUCTIONAL HEADERS:** The `PODCAST_READY.txt` file must contain _only_ the Cast List and Source Material. No "You are a..." preambles.
 2.  **DECOUPLED SOURCES:** We split the "Hack Pack" into `BOLUS_READY.txt` (JSON for the AI Brain) and `REPORT_READY.txt` (Text for the AI Eye).
 3.  **VERIFICATION:** If the Audio Host says "Here are your instructions," the protocol has failed. Reset the context.
+## XIII. The Automation of Intelligence (The Hydration Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-01-28
+**Context:** The "Assembly" metric relied on manual creation of `_intelligence.md` files, leading to sync drift.
+**The Law:**
+
+1.  **HYDRATION IS TRUTH:** The Hydration Script (`hydrate_content.py`) is the **Single Source of Truth** for asset generation.
+2.  **AUTO-INJECTION:** It MUST automatically detect `{slug}.md` files in `notebook_dumps/` and inject them as `_intelligence.md` into the project source.
+3.  **BANNED:** Manual creation of intelligence files is forbidden. `notebook_dumps/` is Staging; `src/` is Target.
+
+## XIV. The Tags Connectivity Law (The Fastener Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-01-28
+**Context:** D-Control was isolated in the graph because it lacked `tags` or `skillData`.
+**The Law:**
+
+1.  **NO ORPHANS:** All Project MDX files MUST contain a populated `tags` array derived from their `toolchain`.
+2.  **FASTENER PRINCIPLE:** Tags are the primary "Fastener" for the Assembly Graph physics engine. Empty tags = unconnected node.
+## XV. The Law of the Honda (The Stability Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-01-28
+**Context:** User inquired about using "Shiny Object" formats (JXL) vs "Reliable" formats (JPEG).
+**The Law:**
+
+1.  **THE HONDA STANDARD:** We prefer reliability over novelty. **JPEG** is the Honda Odyssey of formats—reliable, universal, compatible.
+2.  **BAN ON EXOTICS:** Formats like `.jxl` (JPEG XL) are BANNED from `R2_MASTER` until native Python/Pillow support is ubiquitous. We do not maintain brittle plugins.
+3.  **THE PIPELINE IS KING:** Assets exist to feed the Script, not to be archival masters. Archival TIFFs live in Cold Storage (NAS), not the Repo.
+
+## XVI. The Law of Resolution (The 2500 Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-01-28
+**Context:** Pipeline was skipping `xl` breakpoints (1920px) because source images were too small (<800px).
+**The Law:**
+
+1.  **FEED THE BEAST:** Input images to `R2_MASTER` MUST exceed the largest breakpoint (1920px).
+2.  **THE GOLDEN TARGET:** **2500px** (Width/Height) is the standard export size. This allows a clean Lanczos downsample to 1920px/1280px.
+3.  **LEGACY UPSCALING:** Archive assets (<1000px) MUST be passed through "Super Resolution" or "Upscayl" to reach ~2500px before ingest.

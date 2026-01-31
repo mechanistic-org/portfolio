@@ -126,8 +126,9 @@ export default config({
 					description: "Set this project as draft to prevent it from being published.",
 				}),
 				listed: fields.checkbox({
-					label: "Listed",
-					description: "Show in project lists (default: true)",
+					label: "Show in Project Index (Listed)",
+					description:
+						"Uncheck to hide this project from the main grid (it will still be accessible via URL).",
 					defaultValue: true,
 				}),
 				heroImage: fields.text({
@@ -284,7 +285,6 @@ export default config({
 					// Process
 					process: fields.object({
 						engineeringChangeOrders: fields.array(fields.text({ label: "ECO" }), { label: "ECOs" }),
-						dcdCount: fields.number({ label: "DCD Count" }),
 						yieldCrisis: fields.text({ label: "Yield Crisis" }),
 						yieldRecovery: fields.text({ label: "Yield Recovery" }),
 						label: fields.text({ label: "Label" }),
@@ -350,11 +350,11 @@ export default config({
 				),
 
 				forensic_metrics: fields.object({
-					financial: fields.text({ label: "Financial Metric", multiline: true }),
-					process: fields.text({ label: "Process Metric", multiline: true }),
-					technical: fields.text({ label: "Technical Metric", multiline: true }),
+					financial: fields.text({ label: "Financial Metric (Summary)", multiline: true }),
+					process: fields.text({ label: "Process Metric (Summary)", multiline: true }),
+					technical: fields.text({ label: "Technical Metric (Summary)", multiline: true }),
 					quotes: fields.array(fields.text({ label: "Quote" }), { label: "Quotes" }),
-					governance: fields.text({ label: "Governance", multiline: true }),
+					governance: fields.text({ label: "Governance (Summary)", multiline: true }),
 				}),
 
 				impact: fields.text({ label: "Impact Statement" }),
@@ -429,7 +429,26 @@ export default config({
 						fields.object({
 							id: fields.text({ label: "ID" }),
 							title: fields.text({ label: "Title" }),
-							type: fields.text({ label: "Type" }),
+							type: fields.select({
+								label: "Cine-Module Type",
+								description: "The render engine for this scene.",
+								options: [
+									{ label: "Standard (Hybrid)", value: "standard" },
+									{ label: "Filmstrip (Gallery)", value: "filmstrip" },
+									{ label: "Scrub Sequence (Exploded)", value: "sequence" },
+									{ label: "Parallax Deck (Ohm)", value: "parallax" },
+									// Legacy / Specifics
+									{ label: "Gallery (Standard)", value: "gallery" },
+									{ label: "Media (Standard)", value: "media" },
+									{ label: "Model (Standard)", value: "model" },
+									{ label: "Swarm (Standard)", value: "swarm" },
+									{ label: "Thermal (Standard)", value: "thermal" },
+									{ label: "Conspiracy (Standard)", value: "conspiracy" },
+									{ label: "Comparator (Standard)", value: "comparator" },
+									{ label: "Void (Standard)", value: "void" },
+								],
+								defaultValue: "standard",
+							}),
 							align: fields.select({
 								label: "Alignment",
 								options: [

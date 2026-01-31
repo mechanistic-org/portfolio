@@ -35,7 +35,10 @@ These scripts are the engine of the "Forensic Data Factory."
 - **Hydration Engine:** `npm run content:hydrate`
   - **Source:** `scripts/hydrate_content.py`
   - **Purpose:** Injects NotebookLM "Bolus" data (JSON) into MDX Frontmatter (Metrics, Toolchains, Summaries).
-  - **Behavior:** Reads `notebook_dumps/`, matches by slug, updates `src/content/projects/`.
+  - **Behavior:**
+    - **Mines Stickies:** Scans `R2_MASTER` for bubble assets.
+    - **Injects Intelligence:** Auto-detects `{slug}.md` in `notebook_dumps/` and copies it to `_intelligence.md` for Assembly metrics.
+    - **Updates Metadata:** Syncs `forensic_metrics`, `toolchain`, and `presentation_mode`.
 
 - **Schema Modernizer:** `npm run content:modernize`
   - **Source:** `scripts/modernize_content.py`
@@ -57,7 +60,44 @@ These scripts are the engine of the "Forensic Data Factory."
       - `npm run assets:process -- --all` (Re-process EVERYTHING).
       - `npm run assets:process -- [slug]` (Target specific project).
 
+### The Animation Sequence Protocol (Folder-to-WebP)
+
+**Context:** Used for "Stop Motion" style clips or frame-by-frame UI animations (like boot sequences).
+
+1.  **Trigger:** Create a **Folder** inside a project or bubble (instead of a single image file).
+2.  **Folder Metrics:**
+    - **Syntax:** `[sequence_name]-[duration]ms`
+    - **Example:** `boot_sequence-50ms` (Each frame plays for 50ms).
+    - **Default:** 2000ms if no suffix is provided.
+3.  **Content:**
+    - Place sequential images inside: `001.jpg`, `002.jpg`, etc.
+    - **Sorting:** Alphanumeric. Use leading zeros (`001`, not `1`) to ensure correct order.
+4.  **Output:**
+    - **Animated WebP:** `[sequence_name]-[breakpoint].webp` (The playable clip).
+    - **Frame Folder:** Copies source frames to `[output]/[sequence_name]/` for individual frame access (React components).
+
 ## Asset Pipeline
+
+### Standard Operating Procedure: Lightroom Export (The Honda Standard)
+
+**Rationale:** The `process_assets.py` script is a "Lossy Downscaler." It requires high-quality, high-resolution inputs (JPEGs) to generate optimized WebP outputs.
+
+**Export Settings (R2_MASTER):**
+
+1.  **File Settings:**
+    - **Format:** `JPEG` (Quality 90-100). Do NOT use TIFF (Overkill) or JXL (Unsupported).
+    - **Color Space:** `sRGB`.
+2.  **Image Sizing:**
+    - **Resize to Fit:** Width & Height.
+    - **W / H:** `2500` px. (Provides buffer for the `1920px` XL breakpoint).
+    - **Resolution:** `72` ppi (Metadata only).
+    - **Legacy Assets:** If original < 800px, use **Super Resolution** or **Upscayl** to target ~2500px BEFORE export.
+3.  **Output Sharpening:**
+    - **Sharpen For:** Screen (Standard).
+4.  **Metadata:**
+    - **Copyright Only:** Strip GPS/Camera info.
+
+---
 
 ### DXF Rendering Issues
 

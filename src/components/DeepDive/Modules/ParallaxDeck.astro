@@ -1,0 +1,24 @@
+---
+interface Props {
+	data: any;
+	startIndex: number;
+}
+const { data, startIndex } = Astro.props;
+---
+
+<div
+	class="flex min-h-screen w-full flex-col items-center justify-center border-y border-emerald-500/50 bg-neutral-900 py-24"
+>
+	<h2 class="sticky top-24 mb-8 text-4xl font-bold text-emerald-500">PARALLAX DECK</h2>
+	<div class="max-w-2xl space-y-24 text-neutral-300">
+		<p class="rounded-lg border border-emerald-500/30 bg-black/50 p-8 backdrop-blur-sm">
+			Card 1: {data.text || "No Data"}
+		</p>
+		<p class="rounded-lg border border-emerald-500/30 bg-black/50 p-8 backdrop-blur-sm">
+			Card 2: Parallax Layering Engine
+		</p>
+		<p class="rounded-lg border border-emerald-500/30 bg-black/50 p-8 backdrop-blur-sm">
+			Card 3: Atmospheric Unmasking
+		</p>
+	</div>
+</div>

@@ -1,0 +1,94 @@
+---
+import StandardDeepDive from "./Modules/StandardDeepDive.astro";
+import Filmstrip from "./Modules/Filmstrip.astro";
+import ScrubSequence from "./Modules/ScrubSequence.astro";
+import ParallaxDeck from "./Modules/ParallaxDeck.astro";
+
+interface Props {
+	stickies: any[];
+	useDossier?: boolean;
+}
+
+const { stickies, useDossier = false } = Astro.props;
+
+// CHUNKING LOGIC
+// We group consecutive "standard" stickies into a single StandardDeepDive component
+// specialized modules (filmstrip, sequence, parallax) break the flow and render independently
+const chunks = stickies.reduce((acc: any[], sticky: any) => {
+	const lastChunk = acc[acc.length - 1];
+
+	// Normalize type
+	// If type is missing or one of the standard variants, treat as "standard"
+	const standardTypes = [
+		"media",
+		"model",
+		"swarm",
+		"thermal",
+		"gallery",
+		"void",
+		"conspiracy",
+		"comparator",
+		undefined,
+		"undefined",
+		null,
+		"",
+	];
+	const isStandard = standardTypes.includes(sticky.type);
+
+	const currentType = isStandard ? "standard" : sticky.type;
+
+	if (currentType === "standard") {
+		if (lastChunk && lastChunk.type === "standard") {
+			lastChunk.items.push(sticky);
+		} else {
+			acc.push({ type: "standard", items: [sticky] });
+		}
+	} else {
+		// Specialized types are always discrete blocks
+		acc.push({ type: currentType, items: [sticky] });
+	}
+
+	return acc;
+}, []);
+
+// Index tracking for continuous numbering across chunks
+let runningIndex = 0;
+---
+
+<div class="deep-dive-renderer w-full">
+	{
+		chunks.map((chunk, chunkIndex) => {
+			const startIndex = runningIndex;
+			runningIndex += chunk.items.length;
+
+			if (chunk.type === "standard") {
+				return (
+					<StandardDeepDive
+						stickies={chunk.items}
+						startIndex={startIndex}
+						useDossier={useDossier}
+					/>
+				);
+			}
+
+			if (chunk.type === "filmstrip") {
+				// Filmstrip likely consumes a single "sticky" definition that contains the gallery data
+				// But our chunking logic wraps it in an array. We pass the first item.
+				return <Filmstrip data={chunk.items[0]} startIndex={startIndex} />;
+			}
+
+			if (chunk.type === "sequence") {
+				return <ScrubSequence data={chunk.items[0]} startIndex={startIndex} />;
+			}
+
+			if (chunk.type === "parallax") {
+				return <ParallaxDeck data={chunk.items[0]} startIndex={startIndex} />;
+			}
+
+			// FALLBACK for unknown types -> Render as Standard to prevent crash
+			return (
+				<StandardDeepDive stickies={chunk.items} startIndex={startIndex} useDossier={useDossier} />
+			);
+		})
+	}
+</div>
