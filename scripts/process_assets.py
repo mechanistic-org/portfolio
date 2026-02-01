@@ -219,11 +219,7 @@ def process_project(slug):
                         print(f"    [SKIP] Not an image or failed: {bubble_file.name} ({e})")
             continue
 
-        # --- ANIMATION SEQUENCE PROCESSING (Folder -> WebP) ---
-        # --- ANIMATION SEQUENCE PROCESSING (Folder -> WebP) ---
-        if item.is_dir():
-             process_animation_sequence(item, output_path)
-             continue
+
 
 
 
@@ -241,6 +237,25 @@ def process_project(slug):
                     print(f"    -> Copied: {doc_file.name}")
             continue
 
+        # --- 3D ASSETS PROCESSING (Pass-through) ---
+        if item.is_dir() and item.name == "3d":
+            print(f"  [3D] Detected 3d directory. Syncing...")
+            models_out_path = output_path / "3d"
+            models_out_path.mkdir(parents=True, exist_ok=True)
+
+            for model_file in item.iterdir():
+                if not model_file.is_file(): continue
+                # Allow standard 3D formats
+                if model_file.suffix.lower() in ['.glb', '.gltf', '.usdz', '.obj', '.fbx']:
+                    shutil.copy2(model_file, models_out_path / model_file.name)
+                    print(f"    -> Copied: {model_file.name}")
+            continue
+
+        # --- ANIMATION SEQUENCE PROCESSING (Fallback) ---
+        if item.is_dir():
+             process_animation_sequence(item, output_path)
+             continue
+             
         # --- BUBBLE PROCESSING (Recursive) ---
         if item.is_dir() and item.name == "bubbles":
             print(f"  [BUBBLE] Detected bubbles directory. Recursing...")

@@ -198,3 +198,14 @@ slug: "grok_log"
 1.  **FEED THE BEAST:** Input images to `R2_MASTER` MUST exceed the largest breakpoint (1920px).
 2.  **THE GOLDEN TARGET:** **2500px** (Width/Height) is the standard export size. This allows a clean Lanczos downsample to 1920px/1280px.
 3.  **LEGACY UPSCALING:** Archive assets (<1000px) MUST be passed through "Super Resolution" or "Upscayl" to reach ~2500px before ingest.
+
+## ?? XV. The Law of the Honda Standard (The Anti-Complexity Decree)
+
+**Status:** ENFORCED (Ratified 2026-01-31)
+**Trigger:** The "OpenClaw / Moltbook" Investigation.
+**Context:** The Architect was tempted to solve a simple problem (Social Posting) with a complex tool (Autonomous Agent Framework).
+
+**The Law:**
+1.  **REJECT THE VOLVO:** Do not build a "Heavy" solution (Agent Framework, Database, API Gateway) when a "Honda" solution (Python Script, Markdown File, Manual Copy-Paste) will suffice.
+2.  **THE FACSIMILE TRAP:** It is better to have a *Manual System* that runs (Path A) than an *Autonomous Agent* that requires maintenance (Path B).
+3.  **SOVEREIGNTY OVER AUTOMATION:** If "Automating" it requires giving away the keys (Cloud Auth, 3rd Party Service), **Do Not Do It.** We prefer "Telemetry" (User-Triggered Script) over "Autonomy" (Black Box Service).

@@ -8,6 +8,7 @@ description: "The Persistent Short-Term Memory store for the AI Agent. This file
 
 > **Use Case:** This file stores "Living Context" that is too specific for `GROK_LOG` (Laws) but too important to lose to "Amnesia."
 > **Instruction:** The Agent must scan this file at startup to sync with the current "Mental State" of the project.
+> **Mandatory:** The Agent MUST also read `src/content/docs/meta/AGENT_PROFILE.md` to understand the Operator's "Forensic Systemizer" profile.
 
 ---
 
@@ -281,3 +282,12 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **"Rigidity as a Feature":** We do not pivot. We ingest. The structure must be strong enough to hold 25 years of data.
 - **"Farming the Meta":** We turn internal struggle (technical debt) into public content (Colophon/LinkedIn). The _process_ is the product.
 - **"The Covenant is Burned":** We rejected the religious "Vassal" language. We are Engineers. `GROK_LOG` is a Statute Book (ISO Standard), not a Bible.
+
+### 6. **Project AVATARE (Identity Strategy)**
+-   **Concept:** Deploying a "Sovereign Persona" ("Norris_OS") to LinkedIn.
+-   **Status:** **READY** (Identity Kit Created).
+-   **Strategy:** "The Two-Lane Highway."
+    -   *Lane 1 (Hardware):* Forensic Deep Dives (Thermal/Yield).
+    -   *Lane 2 (Meta-OS):* Portfolio Architecture (Sovereignty/Air Gap).
+-   **Automation:** **DEFERRED.** We chose "Manual Telemetry" (User posts via Kit) over "OpenClaw" (Complexity).
+-   **Constraint:** The AI cannot "log in." The Human must be the "Actuator."

@@ -1,3 +1,8 @@
+---
+title: "Internal Scripts"
+description: "Archived legacy document."
+---
+
 ﻿---
 title: "Internal Scripts Reference"
 description: "Documentation for internal maintenance scripts."

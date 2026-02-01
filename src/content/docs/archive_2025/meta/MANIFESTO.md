@@ -1,3 +1,8 @@
+---
+title: "Manifesto"
+description: "Archived legacy document."
+---
+
 ﻿---
 title: "Project Manifesto"
 description: "The core principles, laws, and directives governing the ErikNorris portfolio."

@@ -162,6 +162,7 @@ const projectsCollection = defineCollection({
 		toolchain: z.array(z.string()).optional(),
 		forensic_summary: z.string().optional(),
 		audio_url: z.string().optional(),
+		notebook_url: z.string().optional(),
 
 		// NotebookLM Metrics (String-based)
 		forensic_metrics: z

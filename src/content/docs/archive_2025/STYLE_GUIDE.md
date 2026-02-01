@@ -1,3 +1,8 @@
+---
+title: "Style Guide"
+description: "Archived legacy document."
+---
+
 ﻿---
 title: "Design Language System (DLS)"
 description: "The official design language system and style guide for ErikNorris.com."

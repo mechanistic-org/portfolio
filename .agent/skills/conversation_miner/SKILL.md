@@ -1,9 +1,9 @@
 ---
 name: conversation_miner
-description: A protocol for mining high-value context ("Gold") from chat logs before deletion and updating project documentation.
+description: A protocol for mining high-value context ("Gold") from chat logs before deletion, sorting it into Tech (OS) and Meta (Profile) streams.
 ---
 
-# Conversation Miner Skill
+# Conversation Refinery Skill (v2)
 
 ## When to use this skill
 
@@ -13,20 +13,29 @@ description: A protocol for mining high-value context ("Gold") from chat logs be
 
 ## Instructions
 
-### 1. The Goal
+### 1. The Goal: Dual-Stream Refining
 
-Your objective is to review the entire interaction and generate a **Documentation Update Plan**. You must separate "Gold" (decisions, config, fixes, traps) from "Gravel" (typos, transient debugging).
+Your objective is to separate the conversation into two distinct streams. Do NOT dilute them by mixing.
 
-### 2. Target Files for Updates
+- **Stream A (Hard Ore):** Technical updates (Code, Config, Fixes).
+- **Stream B (Red Gold):** Meta updates (Identity, Decisions, Philosophy, Bio).
 
-Scan the conversation for updates relevant to:
+### 2. Target Files (Routing Logic)
 
-- `src/content/docs/ARCHITECTURE.md` (Why we did it)
+#### Stream A: The Machine (Technical)
+
+- `src/content/docs/ARCHITECTURE.md` (Why code changed)
 - `src/content/docs/MAINTENANCE.md` (How to fix it)
 - `src/content/docs/ROADMAP.md` (What we finished)
-- `src/content/docs/MANIFESTO.md` (Laws established)
-- `src/content/docs/BRANDING_PROMPT.md` (Design updates)
-- `src/content/docs/STYLE_GUIDE.md` (Token updates)
+- `src/content/docs/meta/AGENCY_MEMORY.md` (Active focus)
+
+#### Stream B: The Operator (Meta/Identity)
+
+- `src/content/docs/meta/AGENT_PROFILE.md` (Behavioral updates, new "Laws" of personality)
+- `src/content/docs/project/GROK_LOG.md` (Architectural Decrees)
+- `src/content/docs/meta/BIO.md` (Public narrative updates)
+- `src/content/docs/colophon/*.md` (Philosophical adds)
+- `src/content/docs/prompts/BRANDING_PROMPT.md` (Voice/Tone updates)
 
 ### 3. Protocol: "Extract the Gold"
 
@@ -37,6 +46,7 @@ Look for:
 - **Fixes:** Reproducible steps for bug fixes.
 - **Traps:** Edge cases found.
 - **Meta-Features:** Did we build something cool? (Add to Colophon in Roadmap).
+- **Self-Correction:** Did the user correct our tone/behavior? (Update `AGENT_PROFILE.md`).
 
 ### 4. Protocol: "Memory Synapse"
 
@@ -55,10 +65,17 @@ Generate a single markdown document categorized by file. Use tags to indicate st
 **Example Output:**
 
 ```markdown
-### `docs/MAINTENANCE.md`
+### `docs/MAINTENANCE.md` (Technical Stream)
 
 **Add to "Troubleshooting" section:**
 
 - **Symptom:** Page renders white.
 - **Fix:** Ensure `<Layout>` wraps the content.
+
+### `docs/meta/AGENT_PROFILE.md` (Meta Stream)
+
+**Add to "Communication Protocol":**
+
+- **Trigger:** User grew frustrated when I apologized excessively.
+- **Calibration:** "Do NOT apologize. Report yields only."
 ```

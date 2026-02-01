@@ -4,20 +4,23 @@ const globDocs = import.meta.glob("../../content/docs/**/*.{md,mdx}", { eager: t
 const docs = Object.values(globDocs)
 	.map((file: any) => {
 		const data = file.frontmatter || {};
-		// Extract slug from filename if not in frontmatter
-		// Handle nested directories if needed, but for now flat fallback
-		const filenameParts = file.file.split("/");
-		const filename = filenameParts[filenameParts.length - 1].replace(/\.(mdx|md)$/, "");
-		// If file is in a subdirectory (e.g. prompts/foo.md), preserve path?
-		// Current docs use direct slugs in frontmatter usually.
+
+		// Fix: Derive slug from full path relative to docs root
+		// file.file is absolute or relative from root. split on 'content/docs/'
+		const pathParts = file.file.split("/content/docs/");
+		const relativePath = pathParts[1] || file.file;
+		// Remove extension
+		const derivedSlug = relativePath.replace(/\.(mdx|md)$/, "");
+
 		return {
-			slug: data.slug || filename,
+			// Prefer explicit slug, fallback to derived path-based slug (handling subfolders)
+			slug: data.slug || derivedSlug,
 			data: data,
 		};
 	})
 	.sort((a, b) => {
 		// Priority sort for specific slugs
-		const priority = ["architecture", "introduction", "readme", "onboarding_prompt"];
+		const priority = ["forensic_registry", "gem_creation_guide", "architecture", "introduction"];
 		const slugA = a.slug.toLowerCase();
 		const slugB = b.slug.toLowerCase();
 

@@ -114,6 +114,42 @@ def parse_deck_md(bubble_dir):
         print(f"      ⚠️  Error parsing deck.md in {bubble_dir.name}: {e}")
         return []
 
+def mine_model(slug, master_root, public_base_url):
+    """
+    Scans R2_MASTER/{slug}/3d and returns a model sticky if found.
+    """
+    master_3d_dir = master_root / slug / "3d"
+    if not master_3d_dir.exists():
+        return None
+
+    # Priority: GLB > GLTF
+    model_files = sorted([f for f in master_3d_dir.iterdir() if f.suffix.lower() == '.glb'])
+    if not model_files:
+        model_files = sorted([f for f in master_3d_dir.iterdir() if f.suffix.lower() == '.gltf'])
+    
+    if not model_files:
+        return None
+    
+    model_file = model_files[0]
+    src = f"{public_base_url}/{slug}/3d/{model_file.name}"
+    
+    print(f"  🧊  Found 3D Model: {model_file.name}")
+    
+    sticky = {
+        "id": "3d_model",
+        "title": "Interactive Model",
+        "type": "model",
+        "align": "right",
+        "data": {
+             "modelSrc": src,
+             "cameraOrbit": "45deg 55deg 2.5m",
+             "fieldOfView": "30deg"
+        },
+        "featuredIndices": [],
+        "deck": []
+    }
+    return sticky
+
 def mine_stickies(slug, master_root, public_base_url):
     """
     Scans R2_MASTER/{slug}/bubbles and returns a list of gallery stickies.
@@ -131,12 +167,18 @@ def mine_stickies(slug, master_root, public_base_url):
     for folder in folders:
         # Check for images
         images = []
-        img_files = sorted([f for f in folder.iterdir() if f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp', '.gif']])
+        img_files = sorted([f for f in folder.iterdir() if f.suffix.lower() in ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.tif', '.tiff']])
         
         for img_file in img_files:
             fname = img_file.stem
             # Construct public src path
-            src = f"{public_base_url}/{slug}/bubbles/{folder.name}/{img_file.name}"
+            # Tiff Handling: Browser cannot render .tif. We point to the processed -xl.webp version.
+            if img_file.suffix.lower() in ['.tif', '.tiff']:
+                safe_name = f"{fname}-xl.webp"
+            else:
+                safe_name = img_file.name
+                
+            src = f"{public_base_url}/{slug}/bubbles/{folder.name}/{safe_name}"
             
             images.append({
                 "src": src,
@@ -302,9 +344,15 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
              except Exception as e:
                  print(f"  ❌ Failed to process intelligence dump: {e}")
                 
-        # 5. Mine Stickies (Bubbles)
+        # 5. Mine Stickies (Bubbles + Model)
         # Attempt to mine stickies from R2_MASTER
         mined_stickies = mine_stickies(slug, master_root, public_base_url)
+        
+        # Mine Model
+        model_sticky = mine_model(slug, master_root, public_base_url)
+        if model_sticky:
+            mined_stickies.append(model_sticky)
+            
         if mined_stickies:
             # Check if stickies changed
             current_stickies = post.metadata.get("cyberspace", {}).get("stickies", [])

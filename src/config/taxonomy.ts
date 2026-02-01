@@ -22,6 +22,7 @@ export const CATEGORIES = [
 	{ label: "Enterprise Hardware", value: "enterprise_hardware" },
 	{ label: "Medical Device", value: "medical_device" },
 	{ label: "Computing", value: "computing" },
+	{ label: "Control Surface", value: "control_surface" },
 
 	// Components
 	{ label: "Input Device", value: "input_device" },

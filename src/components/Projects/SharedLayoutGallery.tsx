@@ -166,7 +166,7 @@ export default function SharedLayoutGallery({
 				href={image.href}
 				target={image.href ? "_blank" : undefined}
 				rel="noopener noreferrer"
-				className="group hover:border-accent/40 flex h-full flex-col overflow-hidden rounded-sm border border-white/5 bg-neutral-900 transition-colors"
+				className="group hover:border-accent/40 pointer-events-auto flex h-full flex-col overflow-hidden rounded-sm border border-white/5 bg-neutral-900 transition-colors"
 				whileHover={{ y: -4 }}
 			>
 				{/* Image Top */}
@@ -234,7 +234,7 @@ export default function SharedLayoutGallery({
 					href={image.href}
 					target="_blank"
 					rel="noopener noreferrer"
-					className={`group hover:border-accent/50 relative mb-4 block cursor-pointer overflow-hidden border border-white/5 bg-black/20 transition-all ${getRotation(index)}`}
+					className={`group hover:border-accent/50 pointer-events-auto relative mb-4 block cursor-pointer overflow-hidden border border-white/5 bg-black/20 transition-all ${getRotation(index)}`}
 					whileHover={{ scale: 1.05, rotate: 0, zIndex: 10 }}
 					transition={{ type: "spring", stiffness: 300, damping: 30 }}
 				>
@@ -288,7 +288,7 @@ export default function SharedLayoutGallery({
 				<motion.div
 					key={`${id}-img-${index}`}
 					layoutId={`${id}-img-${index}`}
-					className={`relative mb-4 ${getRotation(index)} z-20`}
+					className={`relative mb-4 ${getRotation(index)} pointer-events-auto z-20`}
 				>
 					<RetroLogoAnimator onClick={() => handleImageClick(image, index)} />
 					{/* Visual cue label */}
@@ -307,7 +307,7 @@ export default function SharedLayoutGallery({
 				key={`${id}-img-${index}`}
 				layoutId={`${id}-img-${index}`}
 				onClick={() => handleImageClick(image, index)}
-				className={`group hover:border-accent/50 relative mb-4 cursor-pointer overflow-hidden border border-white/5 bg-black/20 transition-all ${getRotation(index)}`}
+				className={`group hover:border-accent/50 pointer-events-auto relative mb-4 cursor-pointer overflow-hidden border border-white/5 bg-black/20 transition-all ${getRotation(index)}`}
 				whileHover={{ scale: 1.05, rotate: 0, zIndex: 10 }}
 				transition={{ type: "spring", stiffness: 300, damping: 30 }}
 			>
@@ -329,10 +329,10 @@ export default function SharedLayoutGallery({
 	};
 
 	return (
-		<div className="scrollbar-hide pointer-events-auto relative z-50 flex h-full w-full flex-col overflow-y-auto px-4 py-2 pt-24 pb-24">
+		<div className="no-scrollbar pointer-events-none relative z-50 flex h-full w-full flex-col overflow-hidden px-4 py-2 pt-24 pb-24">
 			{/* FILTER BAR */}
 			{categories.length > 2 && (
-				<div className="mb-8 flex shrink-0 flex-wrap justify-center gap-4">
+				<div className="pointer-events-auto mb-8 flex shrink-0 flex-wrap justify-center gap-4">
 					{categories.map((cat) => (
 						<button
 							key={cat}

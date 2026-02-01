@@ -384,14 +384,22 @@ export default config({
 				// --------------------------------------------------------------------------
 				gallery: fields.array(
 					fields.object({
-						src: fields.text({ label: "Source Path (R2)" }),
+						src: fields.image({
+							label: "Source Path (R2)",
+							directory: "public/assets/r2",
+							publicPath: "/assets/r2/",
+						}),
 						width: fields.number({ label: "Width" }),
 						height: fields.number({ label: "Height" }),
 						aspectRatio: fields.number({ label: "Aspect Ratio" }),
 					}),
 					{
 						label: "Gallery Images",
-						itemLabel: (props) => props.fields.src.value || "Image",
+						itemLabel: (props) => {
+							const val = props.fields.src.value;
+							if (typeof val === "string") return val;
+							return val?.filename || "Image";
+						},
 					},
 				),
 				documents: fields.array(
@@ -417,6 +425,10 @@ export default config({
 				audio_url: fields.text({
 					label: "Audio Briefing URL",
 					description: "Path to R2 audio asset.",
+				}),
+				notebook_url: fields.url({
+					label: "NotebookLM URL",
+					description: "Link to the private Detail Pod (Restricted Access).",
 				}),
 
 				// --------------------------------------------------------------------------
@@ -493,14 +505,22 @@ export default config({
 								layout: fields.text({ label: "Layout" }),
 								columns: fields.number({ label: "Columns" }),
 								scattered: fields.checkbox({ label: "Scattered" }),
-								src: fields.text({ label: "Src" }),
+								src: fields.image({
+									label: "Src",
+									directory: "public/assets/r2",
+									publicPath: "/assets/r2/",
+								}),
 								featuredIndices: fields.array(fields.number({ label: "Index" }), {
 									label: "Featured Indices",
 									itemLabel: (props) => props.value?.toString() || "0",
 								}),
 								images: fields.array(
 									fields.object({
-										src: fields.text({ label: "Src" }),
+										src: fields.image({
+											label: "Src",
+											directory: "public/assets/r2",
+											publicPath: "/assets/r2/",
+										}),
 										title: fields.text({ label: "Title" }),
 										description: fields.text({ label: "Description" }),
 										href: fields.text({ label: "Link" }),
@@ -511,7 +531,11 @@ export default config({
 									}),
 									{
 										label: "Images",
-										itemLabel: (props) => props.fields.src.value || "Image",
+										itemLabel: (props) => {
+											const val = props.fields.src.value;
+											if (typeof val === "string") return val;
+											return val?.filename || "Image";
+										},
 									},
 								),
 								modelSrc: fields.text({ label: "Model Src" }),

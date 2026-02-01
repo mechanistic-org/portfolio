@@ -1,3 +1,8 @@
+---
+title: "References"
+description: "Archived legacy document."
+---
+
 ﻿---
 title: "Project References & Context"
 description: "External documentation, style guides, and technical references."
