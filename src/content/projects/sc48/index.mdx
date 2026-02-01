@@ -1,6 +1,19 @@
 ---
 additionalSkills: []
 audio_url: /assets/r2/sc48/sc48-briefing.m4a
+cast:
+- name: Erik Norris
+  org: Digidesign
+  role: Lead Mechanical Engineer / The Architect
+- name: Marc Schuman
+  org: Digidesign
+  role: HW/Thermal Engineering
+- name: Stan Cotey
+  org: Digidesign
+  role: Product Marketing
+- name: Neal Breitbarth
+  org: Digidesign
+  role: Mechanical Manager
 category: enterprise_hardware
 client: []
 cyberspace:
@@ -195,6 +208,10 @@ metrics:
   profitability:
     label: CPU Temp Rise
     value: 13.8°C
+  quotes:
+  - CPU temperature is 75C, system shutdowned
+  - There will be no extrusions
+  - Sheet metal is single largest cost component at 20% COGS
   war_stories:
   - description: Sustained head injury from falling branch (22 stitches); managed
       IP conflict crisis from ER while on concussion protocol.
@@ -230,11 +247,12 @@ metrics:
   - description: Modified PSU mounting brackets to replace rubber feet, using the
       chassis itself as a heatsink to prevent 75°C shutdown.
     label: The PSU Heatsink Hack
-    value: Chassis Conduction
-  - description: 'Diagnosed fastener stripping failure: factory torque settings were
-      mismatched to material density. Recalibrated line drivers.'
-    label: The Torque Strip Fix
     value: Density Matching
+  - description: Discovered the ID model and Mechanical chassis were 1.6 inches apart
+      in length three weeks before tooling release. "The Ghost Dimension."
+    label: The 'Ghost Dimension'
+    value: 1.6 Inch Delta
+notebook_url: https://notebooklm.google.com/notebook/c783f4a0-8b0d-4770-8e1d-c31e1239306d?authuser=1
 phase_stats:
   Design: 0
   Engineering: 0
@@ -266,7 +284,6 @@ toolchain:
 - Kontron (Embedded Computing)
 tools:
 - pro_engineer
-notebook_url: "https://notebooklm.google.com/notebook/c783f4a0-8b0d-4770-8e1d-c31e1239306d?authuser=1"
 ---
 
 ### [SC48 "Lux" / "Capaldi"] Forensic Report
@@ -330,3 +347,24 @@ notebook_url: "https://notebooklm.google.com/notebook/c783f4a0-8b0d-4770-8e1d-c3
 - **Governance:**
   - **ECO 12263:** Release of sheet metal package to VTech.
   - **Thermal Testing:** "Capaldi FOH in Temperature Chamber" data logs.
+
+---
+
+### Thermal Forensic Comparison: SC48 vs. WebTV Galaxy
+
+**Forensic Audit of Thermal Thresholds and System Stabilization.**
+
+| Feature                 | Project SC48 (Lux)                 | Project WebTV (Galaxy)               |
+| ----------------------- | ---------------------------------- | ------------------------------------ |
+| **Component**           | Kontron 986LCD-M (Embedded PC)     | AMD K7 CPU + Triple Tuners           |
+| **Total Thermal Load**  | High-Density DSP + XPe Host        | **150W TDP** (Desktop Class)         |
+| **The "Heat Wall"**     | **75.0°C** (Catastrophic Shutdown) | **84.0°C** (Thermal Equilibrium)     |
+| **Thermal Delta (t)**   | Stabilized at 22.6°C Rise          | High-Pressure Directed Conduction    |
+| **Failure Mode**        | System OS Halt / Log Error         | Media Corruption (Smart Card @ 55°C) |
+| **Mechanical Fix**      | Folded Steel "I-Beam" Spine        | Chassis Partition / 28.3 CFM Tunnel  |
+| **Material Constraint** | sub-$15k CoGS (No Extrusions)      | 300mm Footprint (Consumer STB)       |
+
+#### CONTRAST ANALYSIS: THE 75°C vs. 84°C DELTA
+
+- **The SC48 Failure (The Shutdown):** The 75°C reading was a **binary failure point**. Due to the XPe architecture and standard PC protection protocols, breaching 75°C triggered an emergency system shutdown to prevent component damage. The failure was architectural: ID mandated side-intake only in a sealed 4U box, creating a thermal dead zone for the motherboard.
+- **The Galaxy Stabilization (The High-Bar):** In contrast, 84.0°C on the Galaxy AMD K7 was a **managed victory**. While higher than the SC48 failure point, this temperature represented the stabilized junction point within the manufacturer's operating specification for a high-performance 150W chip. The "Crisis" was not the CPU temperature itself, but the radiation of that heat into the Smart Card Reader (55°C), which threatened data integrity.

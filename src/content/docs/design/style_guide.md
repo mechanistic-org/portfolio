@@ -8,8 +8,9 @@ title: "Design Language System (DLS)"
 description: "The official design language system and style guide for ErikNorris.com."
 slug: "style_guide"
 sidebar:
-  group: "Reference"
-  order: 1
+group: "Design"
+order: 1
+
 ---
 
 # ERIK NORRIS: Design Language System (DLS)

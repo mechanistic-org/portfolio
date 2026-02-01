@@ -27,7 +27,8 @@ last_updated: 2026-01-18
 
 - **Lead (Metal/Solder):** "Ledd"
 - **Lead (Person):** "Leed"
-- **Bow (Deformation):** "Boh"
+- **Bow (Deformation):** "Boh" (Rhymes with LOW)
 - **Part Numbers:** Read last 5 digits only (e.g., "55-105")
 - **Redwood City:** "Red-wood City"
 - **Mountain View:** "Mountain View"
+- **Erik Norris:** "Erik" or "Norris" (The Subject)

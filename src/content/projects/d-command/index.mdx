@@ -1,5 +1,30 @@
 ---
 audio_url: /assets/r2/d-command/d-command-briefing.m4a
+cast:
+- name: Erik Norris
+  org: Digidesign
+  role: Lead Mechanical Engineer / The Architect
+- name: Neal Breitbarth
+  org: Digidesign
+  role: Senior Mechanical and Industrial Design
+- name: Eli Manjarrez
+  org: Digidesign
+  role: Program Manager
+- name: Fidel Saucedo
+  org: Mass Precision
+  role: Vendor Liaison/Programmer
+- name: Terri Merrell
+  org: Digidesign
+  role: Materials Manager / Buyer
+- name: Marc Schuman
+  org: Digidesign
+  role: Firmware/Thermal Testing
+- name: Jason
+  org: PPI Plastics
+  role: Vendor Rep
+- name: Don Kingman
+  org: Alexandria Extrusion
+  role: Vendor Rep
 category: enterprise_hardware
 client: []
 cyberspace:
@@ -34,134 +59,86 @@ cyberspace:
     title: Holding the Line
   stickies:
   - data:
+      columns: 3
       images:
-      - alt: Control Room Concept
-        aspectRatio: 1.33
-        height: 960
-        src: /assets/r2/d-command/bubbles/01_intro/Control room 3-lg.webp
-        width: 1280
-      - alt: D-Command Main Unit
-        aspectRatio: 1.33
-        height: 600
-        src: /assets/r2/d-command/bubbles/01_intro/D-CommandLarge-md.webp
-        width: 800
+      - alt: Control room 3
+        aspectRatio: 1.5
+        src: /assets/r2/d-command/bubbles/01_intro/Control room 3.JPG
+      - alt: D-CommandLarge
+        aspectRatio: 1.5
+        src: /assets/r2/d-command/bubbles/01_intro/D-CommandLarge.jpg
       layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
     id: 01_intro
-    legacy_deck:
-    - body: '**Objective:**
-
-        Capture the "Mid-Tier" studio market by delivering the flagship D-Control
-        experience at **40% of the cost**.
-
-
-        **The Strategy:**
-
-        Unlike the flagship''s modular unibody, we split Danko into two smaller, linkable
-        units (Main + Fader). This slashed tooling costs but introduced a critical
-        new weak point: **The Interconnect.**'
-      subtitle: Project Danko
-      title: The Mandate
+    title: Intro
     type: gallery
   - data:
+      columns: 3
       images:
-      - alt: Danko Main Unit Architecture
-        aspectRatio: 1.33
-        height: 960
-        src: /assets/r2/d-command/bubbles/02_architecture/danko_main_withlabels-lg.webp
-        width: 1280
-      - alt: Internal Chassis Validation
-        aspectRatio: 1.33
-        height: 960
-        src: /assets/r2/d-command/bubbles/02_architecture/DSC03259-lg.webp
-        width: 1280
-      - alt: Fader Module Architecture
-        aspectRatio: 1.33
-        height: 960
-        src: /assets/r2/d-command/bubbles/02_architecture/danko_fader_withlabels-lg.webp
-        width: 1280
+      - alt: D-Command_fader_top
+        aspectRatio: 1.5
+        src: /assets/r2/d-command/bubbles/02_architecture/D-Command_fader_top.jpg
+      - alt: danko_fader_withlabels
+        aspectRatio: 1.5
+        src: /assets/r2/d-command/bubbles/02_architecture/danko_fader_withlabels.png
+      - alt: danko_main_withlabels
+        aspectRatio: 1.5
+        src: /assets/r2/d-command/bubbles/02_architecture/danko_main_withlabels.png
+      - alt: DSC03259
+        aspectRatio: 1.5
+        src: /assets/r2/d-command/bubbles/02_architecture/DSC03259.jpg
       layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
     id: 02_architecture
-    legacy_deck:
-    - body: '**The Constraint:**
-
-        Linking the Main Unit to the Fader Expansion created a massive ground loop
-        risk. Logic threshold calculations suggested we needed "40 heavy ground wires"
-        to prevent data corruption from voltage drop.
-
-
-        **The Solution:**
-
-        Instead of a costly active repeater, I designed a custom **DB25 Interface
-        PCB** that split high-current power from sensitive data lines. We validated
-        this with a strict **10-foot cable limit**, proving that a passive interconnect
-        could work if the copper mass was allocated correctly.'
-      subtitle: Ground Loop Architecture
-      title: The Umbilical
+    title: Architecture
     type: gallery
   - data:
+      columns: 3
       images:
-      - alt: Regulatory Lab Setup
-        aspectRatio: 1.33
-        height: 960
-        src: /assets/r2/d-command/bubbles/03_regulatory/DSC03110-lg.webp
-        width: 1280
-      - alt: Safety Testing Rig
-        aspectRatio: 1.33
-        height: 960
-        src: /assets/r2/d-command/bubbles/03_regulatory/DSC03112-lg.webp
-        width: 1280
+      - alt: DSC03110
+        aspectRatio: 1.5
+        src: /assets/r2/d-command/bubbles/03_regulatory/DSC03110.JPG
+      - alt: DSC03112
+        aspectRatio: 1.5
+        src: /assets/r2/d-command/bubbles/03_regulatory/DSC03112.JPG
+      - alt: DSC03113
+        aspectRatio: 1.5
+        src: /assets/r2/d-command/bubbles/03_regulatory/DSC03113.JPG
       layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
     id: 03_regulatory
-    legacy_deck:
-    - body: '**The Crisis:**
-
-        Just days before Mass Production, the unit **failed** the UL "AC Withdraw"
-        test. The internal capacitance wasn''t discharging fast enough (>60Vdc @ 2sec),
-        posing a shock hazard.
-
-
-        **The Fix:**
-
-        We couldn''t re-spin the power supply. I engineered a retrofit harness with
-        a specific **750K drain resistor** and sourced a new IEC filter with integrated
-        bleeders, clearing the safety hold 48 hours before the factory start date.'
-      subtitle: AC Withdraw Failure
-      title: The Near-Miss
+    title: Regulatory
     type: gallery
   - data:
+      columns: 3
       images:
-      - alt: PCll Jr Rev6 Main PCB
-        aspectRatio: 1.33
-        height: 960
-        src: /assets/r2/d-command/bubbles/04_quality/PCll_Jr_Rev6_Main_Print-lg.webp
-        width: 1280
-      - alt: PCB Inspection
-        aspectRatio: 1.33
-        height: 960
-        src: /assets/r2/d-command/bubbles/04_quality/DSC03122-lg.webp
-        width: 1280
-      - alt: Fader PCB Detail
-        aspectRatio: 1.33
-        height: 960
-        src: /assets/r2/d-command/bubbles/04_quality/PCll_Jr_Rev6_Fader_Print-lg.webp
-        width: 1280
+      - alt: DSC03122
+        aspectRatio: 1.5
+        src: /assets/r2/d-command/bubbles/04_quality/DSC03122.JPG
+      - alt: DSC03123
+        aspectRatio: 1.5
+        src: /assets/r2/d-command/bubbles/04_quality/DSC03123.JPG
+      - alt: DSC03182
+        aspectRatio: 1.5
+        src: /assets/r2/d-command/bubbles/04_quality/DSC03182.JPG
+      - alt: PCll_Jr_Rev6_Fader_Print
+        aspectRatio: 1.5
+        src: /assets/r2/d-command/bubbles/04_quality/PCll_Jr_Rev6_Fader_Print.jpg
+      - alt: PCll_Jr_Rev6_Main_Print
+        aspectRatio: 1.5
+        src: /assets/r2/d-command/bubbles/04_quality/PCll_Jr_Rev6_Main_Print.jpg
       layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
     id: 04_quality
-    legacy_deck:
-    - body: '**The Violation:**
-
-        A prototype run of PCBs arrived marked as **UL 94 V-2** (flammable) instead
-        of the mandatory **UL 94 V-0** (self-extinguishing). Our Compliance Lead called
-        them a "Virtual Tinderbox."
-
-
-        **The Action:**
-
-        I flagged this as a "Blatant Violation" of our safety spec, forced the vendor
-        (RB Tech) to scrap the lot immediately, and instituted a new incoming inspection
-        protocol to verify flammability ratings before boards ever hit the lab bench.'
-      subtitle: The 'Tinderbox' PCBs
-      title: The Defense
+    title: Quality
     type: gallery
 date: 2004-04-01
 description: The little brother to D-Control.
@@ -171,29 +148,25 @@ duration: Active
 employer: digidesign
 endDate: 2004-09-01
 forensic_metrics:
-  financial: Recovered $155.70 scrap value; Pre-prod cost $10,493/unit; Field Complaint
-    Rate held <4.6%. Combined volume of Buckley and Danko monitor allows offshore
-    mfg.
-  process: Rejected 57% of Sheet Metal; Top Cover Yield 10% (Paint); End Cap Yield
-    74% (Weld Lines).
-  technical: Resolved 'Sideplate' threaded insert failure via CNC-3645 dimple mod;
-    Corrected 84.478" extrusion error.
-forensic_summary: 'Project Danko (D-Command) utilized a "Solo Mandate" execution model.
-  I managed 109 active drawings while resolving multiple vendor quality crises:
-
-  the "Warped Fader Pan" (where I personally rejected 57% of the first 42 units),
-  the "Sideplate" insert failure, and the cosmetic End Cap yield collapse
-
-  (10% Top Cover yield / 74% End Cap yield). Additionally, I diagnosed and corrected
-  a critical CAD-to-Vendor translation error where extrusions were
-
-  cut to 84.478" due to unregenerated models.
-
-
-  "I''m squeezing a 2-month DFM and manufacturing process optimization campaign to
-  help out on Buckley into 2.5 weeks." - *Erik Norris*
-
-  '
+  financial: '[D-Command] Negotiated $5,000 expedite fee waiver with PPI Plastics;
+    waived tooling fees in exchange for delivery delays. Snake Cable COGS reduction
+    (100'' cut). [PCII Stand] $150K sunk tooling cost; One-coat paint process savings'
+  governance: '[D-Command] Solo mechanical documentation release (24+ parts); Weekly
+    QA Top Ten defect tracking. [PCII Stand] Vendor-direct negotiation (Alexandria
+    Extrusion)'
+  process: '[D-Command] Achieved 80% confidence in FCS through aggressive schedule
+    pull-ins; Rejected 50% of initial Fader Pan inventory to enforce flatness. [PCII
+    Stand] Secondary operation drawings for extrusion x-bars'
+forensic_summary: '[D-Command] TRIGGER: Integration of D-Control architecture into
+  a mid-format footprint (''Danko'') triggered yield-killing crises: ''Vegas Mode''
+  thermal peaks (61°C), LCD ''bleed'', and ''Warped Pan'' fitment issues. INTERVENTION:
+  The Architect engineered relief cuts for LCD cables, enforced strict cabling routing
+  for airflow, and instituted 100% manual inspection of incoming sheetmetal. RESULT:
+  Stabilized production yield and met FCS targets despite a ''Solo Mandate'' documentation
+  load. [PCII Stand] TRIGGER: ''Total devastation'' regarding Solid Concepts quote
+  for short-run parts while tooling was already $150k deep. INTERVENTION: Negotiated
+  1-step paint coverage to lower cost and coordinated directly with extrusion vendors
+  to delete grooves. RESULT: Cost reduction strategies allowed project to proceed.'
 gallery: []
 heroImage: /assets/r2/d-command/d-command-hero-01-xl.webp
 industry: consumer_electronics
@@ -228,6 +201,16 @@ metrics:
   profitability:
     label: Top Cover Crisis
     value: 10% Yield
+  quotes:
+  - I'm in shell-hell right now, but things are going better than yesterday
+  - Erik needs to complete all of his documentation, ECO's etc... at the end of the
+    day Erik is solo on the part and assembly drawings
+  - I rejected 4 sets out of a total of 19 sets for the following defects... unacceptable
+    paint masking... burrs
+  - This is a blatant violation of our published minimum FR-4 spec. ... a virtual
+    tinderbox.
+  - Pretty much total devastation.
+  - One-coat paint (1-step) coverage provides lower overall finishing costs...
   war_stories: []
 phase_stats:
   Design: 67.3
@@ -236,6 +219,7 @@ phase_stats:
   Strategy: 7.7
 presentation_mode: deep_dive
 production: production
+productionScale: limited
 slug: d-command
 tags:
 - Project Danko
@@ -248,17 +232,21 @@ teamSize: Core Team of INT 12 / EXT 4
 theme: hyperspace
 title: D-Command
 toolchain:
-- Pro/ENGINEER Wildfire
-- Pro/INTRALINK
-- SAP (Migration Lead)
-- Agile / ASK
-- Mass Precision (Sheet Metal)
+- Pro/ENGINEER (Wildfire)
+- Intralink / Windchill PDMLink
+- One-Off (ASK Database)
+- VNC (Remote Access)
+- Mass Precision (Sheetmetal)
 - PPI Plastics (Injection Molding)
-- DigiDelivery
+- Cycle Start (Machining)
+- Solid Concepts (Prototyping)
+- Alexandria Extrusion (Aluminum)
+- NxRev (Support)
+- Jetcrown
 tools:
 - pro_engineer
-productionScale: limited
 ---
+
 ### D-Command (Project Danko) Forensic Report
 
 #### I. PROJECT SUMMARY

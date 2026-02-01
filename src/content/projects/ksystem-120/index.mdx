@@ -1,27 +1,41 @@
 ---
+cast:
+- name: Erik Norris
+  org: Kaleidescape
+  role: Lead Mechanical Engineer / The Architect
+- name: Richard Lane
+  org: Kaleidescape
+  role: Director/Manager
+- name: Michael Clader
+  org: Kaleidescape
+  role: Director, Manufacturing Engineering
+- name: Orion Bruckman
+  org: Kaleidescape
+  role: Sr. Hardware Engineer
+- name: Rob Wudrick
+  org: Kaleidescape
+  role: HW Program Manager
+- name: Ed Stegall
+  org: Mass Precision
+  role: Contact/Engineer
+- name: Leanne Santos
+  org: Mass Precision
+  role: Project Engineer
+- name: Weddy Wang
+  org: Steman Co., Ltd.
+  role: Supplier
+- name: Jonathan Burke
+  org: Argyle Design
+  role: Designer
+- name: Gabe Cohn
+  org: Argyle Design
+  role: Mechanical Engineer
 category: home_entertainment
 client: []
 cyberspace:
   enable: true
   layout: linear
   stickies:
-  - data:
-      columns: 3
-      images: []
-      layout: masonry
-      scattered: true
-    deck:
-    - body: Sanmina Plant 4 delivered pilot build lids (PN 520-1066-00) that were
-        3mm too wide due to a weldment error.
-      subtitle: ''
-      title: The Crisis
-    - body: We physically hammered them with wooden blocks to pass EMI testing.
-      subtitle: ''
-      title: The Fix
-    featuredIndices: []
-    id: 01_hammered_lid
-    title: Hammered Lid
-    type: gallery
   - data:
       columns: 3
       images: []
@@ -38,6 +52,65 @@ cyberspace:
     featuredIndices: []
     id: 02_thumb_of_god
     title: Thumb Of God
+    type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: DSC05318
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/_lid/DSC05318.jpg
+      - alt: DSC05377
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/_lid/DSC05377.jpg
+      - alt: DSC05380
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/_lid/DSC05380.jpg
+      - alt: DSC05381
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/_lid/DSC05381.jpg
+      - alt: DSC05382
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/_lid/DSC05382.jpg
+      - alt: DSC05387
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/_lid/DSC05387.jpg
+      - alt: DSC05404
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/_lid/DSC05404.jpg
+      - alt: DSC05405
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/_lid/DSC05405.jpg
+      - alt: DSC05406
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/_lid/DSC05406.jpg
+      - alt: DSC05407
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/_lid/DSC05407.jpg
+      - alt: DSC05408
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/_lid/DSC05408.jpg
+      - alt: DSC05409
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/_lid/DSC05409.jpg
+      - alt: DSC05410
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/_lid/DSC05410.jpg
+      - alt: DSC05453
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/_lid/DSC05453.jpg
+      layout: masonry
+      scattered: true
+    deck:
+    - body: Sanmina Plant 4 delivered pilot build lids (PN 520-1066-00) that were
+        3mm too wide due to a weldment error.
+      subtitle: ''
+      title: The Crisis
+    - body: We physically hammered them with wooden blocks to pass EMI testing.
+      subtitle: ''
+      title: The Fix
+    featuredIndices: []
+    id: _lid
+    title: ' Lid'
     type: gallery
 date: 2009-01-01 00:00:00+00:00
 description: KSYSTEM-120 Mini System
@@ -82,14 +155,22 @@ metrics:
     engineeringChangeOrders: []
     yieldRecovery: 15.6% -> Production
   quotes:
-  - A 0.30mm gap is a thermal death sentence. It causes a 20°C delta across the interface.
-  - 0.137 inches? In consumer electronics, that's a mile. If you miss that, the buttons
-    bind.
+  - The line is down for several shortages, production is stopped and cannot continue.
+    Causes are numerous, mostly BOM errors...
+  - 'The lid appears to be 3mm wider than the chassis (Greg hammered it into shape
+    with a piece of wood. Erik: Can you look into this?'
+  - I should be able to eliminate the $2800 tooling for the base by substituting existing
+    Mass tools.
   war_stories:
   - description: Reduced CPU temp delta from 20°C to 3°C by replacing 0.30mm adhesive
       with Phase Change Material and high-pressure clips.
     label: The Thermal Blanket
     value: 20°C -> 3°C Delta
+  - description: Identified a 0.005" tolerance stack-up error in the fan tray assembly
+      that prevented lid closure, averting a yield crisis.
+    label: The 0.005" Tolerance Gap
+    value: Stack-Up Error
+notebook_url: https://notebooklm.google.com/notebook/2afcdfc1-f747-4822-830b-cb29a17c65c3?authuser=1
 phase_stats:
   Design: 66.4
   Engineering: 22.7
@@ -122,7 +203,6 @@ toolchain:
 tools:
 - pro_engineer
 war_stories: []
-notebook_url: "https://notebooklm.google.com/notebook/2afcdfc1-f747-4822-830b-cb29a17c65c3?authuser=1"
 ---
 
 ## The Challenge

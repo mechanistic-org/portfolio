@@ -303,7 +303,27 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
                 changes.append(f"  - Update 'toolchain'")
                 post.metadata["toolchain"] = data["toolchain"]
 
-        # 5. Intelligence Bolus (Raw Content Injection)
+        # 5. Cast
+        if "cast" in data:
+            if post.metadata.get("cast") != data["cast"]:
+                changes.append(f"  - Update 'cast'")
+                post.metadata["cast"] = data["cast"]
+
+        # 6. Quotes (Inject into metrics.quotes)
+        if "quotes" in data:
+            # Ensure metrics dict exists
+            if "metrics" not in post.metadata or post.metadata["metrics"] is None:
+                post.metadata["metrics"] = {}
+            
+            # Get current quotes
+            current_quotes = post.metadata["metrics"].get("quotes", [])
+            
+            # Prepare new quotes (simple replacement or append? JSON is source of truth, so replace)
+            if current_quotes != data["quotes"]:
+                changes.append(f"  - Update 'metrics.quotes'")
+                post.metadata["metrics"]["quotes"] = data["quotes"]
+
+        # 7. Intelligence Bolus (Raw Content Injection)
         # Scan for corresponding {slug}.md in notebook_dumps
         dump_md_path = SOURCE_DIR / f"{slug}.md"
         if dump_md_path.exists():

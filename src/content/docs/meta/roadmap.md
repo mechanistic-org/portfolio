@@ -1,12 +1,10 @@
 ---
-title: "Roadmap"
-description: "Archived legacy document."
----
-
-﻿---
 title: "Project Roadmap"
 description: "Future milestones and development plan."
 slug: "roadmap"
+sidebar:
+  group: System Manual
+  order: 10
 ---
 
 # Project Roadmap

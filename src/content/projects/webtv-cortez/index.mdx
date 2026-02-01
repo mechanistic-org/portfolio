@@ -1,5 +1,24 @@
 ---
 audio_url: /assets/r2/webtv-cortez/webtv-cortez-briefing.m4a
+cast:
+- name: Erik Norris (fka Lincicum)
+  org: Mechanistic
+  role: Lead Mechanical Engineer / Architect
+- name: Leslie Leland
+  org: WebTV
+  role: Product Manager
+- name: Jeff Jones
+  org: PSDA
+  role: Industrial Designer
+- name: Val Kasvin
+  org: Sputnik Models
+  role: Model Maker
+- name: Alain Hon
+  org: Lite-On/Silitek
+  role: Vendor Engineer
+- name: Son Jae Park
+  org: WebTV/Sejin
+  role: Keyboard Project Leader
 category: input_device
 cyberspace:
   layout: linear
@@ -91,6 +110,16 @@ cyberspace:
     id: 04_keycaps
     title: Keycaps
     type: gallery
+  - align: right
+    data:
+      cameraOrbit: 45deg 55deg 2.5m
+      fieldOfView: 30deg
+      modelSrc: /assets/r2/webtv-cortez/3d/cortez_master.glb
+    deck: []
+    featuredIndices: []
+    id: 3d_model
+    title: Interactive Model
+    type: model
 date: 2000-04-01
 documents: []
 draft: false
@@ -145,12 +174,13 @@ metrics:
     label: Concept-to-Proto
     value: 6 Weeks
   quotes:
-  - Who sculpts the back of a keyboard? A project manager sees a box and just says
-    'ship it'. Eric spent 28 hours on the top surface alone.
-  - You don't win the key pitch argument by shouting. You win by proving it fits...
-    down to the millimeter.
-  - 19.05mm vs 19.00mm? That's not a rounding error. That's a collision.
-  - Sculpting with a hammer. That's what complex surfacing in Pro/E 2000 felt like.
+  - First of all Silitek has two more keys than Magellan... that's why the SK-7510
+    Thomson key matrix couldn't fit into Cortez 2d layout.
+  - I need to get approval from Giff to go ahead with a brand new model and will take
+    some beating on the extra CAD hours. But I think the end product is going to be
+    well worth it.
+  - The rubber pad on the right-hand side is too close to the edge. It could be hard
+    to design the PCB and membrane.
   war_stories:
   - description: Battled ID's 19.00mm spec against Vendor's 19.05mm standard. Proved
       cumulative error would crash keys into the bezel.
@@ -176,6 +206,7 @@ metrics:
       matrix fit within the custom ID bezel via cross-section analysis.
     label: The Pitch War
     value: 19.05mm vs 19.00mm
+notebook_url: https://notebooklm.google.com/notebook/0e4b3124-6d3a-4835-8f2c-672d26b25989?authuser=1
 presentation_mode: deep_dive
 production: prototype
 productionScale: one_off
@@ -197,64 +228,45 @@ toolchain:
 tools:
 - pro_engineer
 - autocad
-notebook_url: "https://notebooklm.google.com/notebook/0e4b3124-6d3a-4835-8f2c-672d26b25989?authuser=1"
 ---
 
-### Cortez Keyboard Forensic Report
-
-**Source:** NotebookLM
-**Extracted:** May 16, 2024
+### [Cortez] Forensic Report
 
 #### I. PROJECT SUMMARY
 
-- **Role:** Lead Mechanical Engineer / Surface Modeler (Contractor via Mechanistic)
-- **Objective:** Engineer the reference wireless infrared keyboard ("Cortez") for the WebTV Galaxy Home Network, translating organic Industrial Design into tooling-ready Pro/ENGINEER surfaces.
-- **Core Achievement:** Delivered complex "highly sculpted" surface geometry in under 6 weeks while resolving a critical 0.05mm pitch mismatch between the ID intent and the vendor's (Silitek) standard manufacturing tooling.
+- **Role:** Product Designer / Surface Development Consultant (Mechanistic)
+- **Mandate:** Architect and deliver the reference wireless keyboard for the **Galaxy HomeNet** system. Integration required fitting specific key matrices into a high-aesthetic consumer envelope.
+- **Core Achievement:** Delivered a fully surfaced, manufacturing-ready Pro/ENGINEER database in a **6-week sprint**, salvaging the project from ergonomic and signal transmission failure.
 
-#### II. THE CAST (Team & Stakeholders)
+#### II. THE ANATOMY OF FAILURE (Heuristic Analysis)
 
-- **Leslie Leland**: Product Manager/WebTV (Primary point of contact for scope, BOM, and vendor management).
-- **Jeff Jones**: Industrial Designer/Peter Schmidt Design Assoc (PSDA) (ID lead responsible for surface intent and button layouts).
-- **Val Kasvin**: Model Maker/Sputnik Models (Fabricated high-fidelity Ren/hard models based on ProE releases).
-- **Alain Hon**: Engineering Contact/Silitek (Manufacturing partner for the keyswitch matrix; primary technical adversary/collaborator).
-- **Son Jae Park (SJ)**: Keyboard Project Leader/Microsoft (Liaison for technical drawing reviews and legacy data).
-- **Steve Nakayama**: Panasonic Industrial Company (Vendor providing critique and reference designs).
+- **Mechanical Crisis (The "Flat" Failure):** Early hard models revealed catastrophic defects: the unit sat unevenly on tabletops, and the top surface was "entirely flat," causing ergonomic strain. More critically, the infrared (IR) transmission angle was insufficient for reliable signal communication with the Galaxy Gateway.
+- **Supply Chain Friction (The Matrix War):** A fundamental interoperability conflict existed between Industrial Design (ID) and the vendor (Silitek). ID specified a **19mm key pitch**, while Silitek’s standard tooling utilized a **19.05mm pitch**. This 0.05mm delta created a "growing error" across the keyboard matrix, threatening to crash the keycaps into the bezel.
+- **The Fix:** The Architect restructured the entire CAD database.
+  1. **Angle Implementation:** Dedicated 28 hours to angling the top surface to hit the 3-15 degree variable IR tilt specification.
+  2. **Surface Lofting:** Added organic curvature to grip areas to eliminate the "flat" feel.
+  3. **Matrix Arbitration:** Forced a resolution by demanding accurate vendor CAD to validate "keep-out" zones, rectifying the 0.05mm accumulated tolerance error.
 
-#### III. CRITICAL MECHANICAL INTERVENTIONS (Ranked STAR Stories)
+#### III. GOVERNANCE & RHYTHM
 
-#### III. CRITICAL MECHANICAL INTERVENTIONS (Ranked STAR Stories)
+- **The Pulse:** High-velocity design iteration managed through weekly status reports and bi-weekly invoicing. Reviews triggered immediate CAD restructuring to accommodate shifting matrix dimensions.
+- **The Artifacts:** PRD WebTV Cortez Keyboard Specification 2.2; Lite-On/Silitek RFQ; Hard Model Review Log (June 19, 2000).
 
-##### 1. The 6-Week Miracle (Agile Surfacing)
+#### IV. LINKEDIN ARTIFACTS (The Numbers)
 
-- **The Trigger:** A hard constraint to go from "Concept Sketch" to "Tooling-Ready CAD" in exactly **6 Weeks** to make the Christmas launch window.
-- **The Tension:** The form factor was "Organic" (highly sculpted grips), typically requiring 12+ weeks of iterative surface modeling. The ID team was still refining the "Top Surface Angle."
-- **The Intervention:** I executed a "Digital Sculpting" sprint in Pro/ENGINEER, building the master surface model to be parametric. I spent **28 hours** on the "Top Surface" feature alone, ensuring the curvature matched the ID intent while maintaining draft angles for molding.
-- **The Result:** Delivered final, tooling-ready databases on time. The resulting parts were "Steel Safe" and required zero major tooling modifications.
+- **Billed $24,900** in a single month (June 2000) for accelerated surface development.
+- **Rectified a 0.05mm** accumulated tolerance error between ID intent and vendor tooling.
+- **Engineered a 3-15 degree** variable IR transmission angle into the primary housing.
+- **Accelerated delivery** of a production-ready database within a 42-day window.
+- **Secured executive approval** for a manufacturable database by reconciling ID intent with mechanical reality.
 
-##### 2. The Foam Core Consensus (Rapid Prototyping)
+#### V. VISUAL EVIDENCE
 
-- **The Trigger:** The design team couldn't agree on the "Feel" and weight balance of the wireless unit.
-- **The Tension:** CAD renderings look pretty but don't convey ergonomics. We risked tooling a device that felt "hollow" or "unbalanced" in the lap.
-- **The Intervention:** I physically cut Ren Shape foam models and glued lead weights inside to simulate the target **600g** mass. I integrated dummy buttons to test the "Key Pitch" (19.00mm vs 19.05mm).
-- **The Result:** The physical models ended the debate instantly. Executives could "feel" the quality, approving the design for the $30k tooling investment.
+- `02_Proto_early-ID.pdf` (Photos of the ergonomic failures)
+- `Hard_Model_Review_06_19.doc` (The punch list of defects)
+- `Microsoft Outlines Vision for Home of the Future.pdf` (The vision context)
 
-##### 3. The Key Pitch Integration (0.05mm Crisis)
+---
 
-- **The Trigger:** Silitek (the manufacturing vendor) utilized a standard key pitch of **19.05mm**, whereas the Industrial Design targeted a tighter **19.00mm** pitch to minimize the footprint.
-- **The Tension:** The cumulative error of the 0.05mm difference per key threatened to push the keys into the bezel. Silitek explicitly warned: "The rubber pad on the right-hand side is too close to the edge."
-- **The Intervention:** I generated cross-sections to map "keep-out" zones and coordinated a layout redesign. We eliminated the last row of keys (Page Up/Down) from the main matrix and moved functions (TV/Video, View, Codeset) to a separate elastomeric keypad.
-- **The Result:** Successfully integrated the standard SK-7510 matrix into the custom ID form factor without requiring a prohibitive investment for new key tooling.
-
-#### IV. LINKEDIN ARTIFACTS
-
-- [ ] Engineered complex Pro/ENGINEER surfaces for the "Cortez" wireless keyboard, delivering final tooling-ready files in just 6 weeks.
-- [ ] Managed technical liaison with Asian manufacturing partners (Silitek) to resolve critical 0.05mm key pitch discrepancies, avoiding significant tooling costs.
-- [ ] Led rapid prototyping cycles for high-fidelity hard models (0.6kg target weight), enabling successful executive demonstrations to partners like Sony and RCA.
-- [ ] Integrated complex electromechanical components, including a custom navigation cluster and infrared communications module, into an ergonomic form factor.
-- [ ] Directed surface development for a high-volume consumer peripheral, reconciling strict Industrial Design aesthetics with high-volume manufacturing constraints.
-
-#### V. TECHNICAL STACK & GOVERNANCE
-
-- **Tools:** Pro/ENGINEER (Surface Modeling), AutoCAD (2D layouts/DXF conversion), FTP (Mechanistic server for data exchange).
-- **Partners:** Silitek (Keyboards/Manufacturing), Sputnik Models (Prototyping), Panasonic (Reference designs), PSDA (Industrial Design).
-- **Governance:** Utilized weekly status reports and invoices, FTP sites for version control (`ftp.mechanistic.com`), and rigorous design reviews with ID and PM.
+**The Handoff:**
+For deep-dive matrix dimensions or specific surfacing loft parameters, that evidence is secured in the **Cortez Detail Pod**.

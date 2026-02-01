@@ -2,6 +2,9 @@
 title: "Duplicate Content Audit (2026-01-11)"
 description: "Audit of duplicate content across the scaffold."
 slug: "duplicate_content_audit_2026_01_11"
+sidebar:
+  group: Audits
+  order: 50
 ---
 
 # Global Duplicate Content Audit

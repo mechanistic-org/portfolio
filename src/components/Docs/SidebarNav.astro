@@ -44,17 +44,37 @@ const docsBySection = allDocs.reduce(
 const sectionOrder = [
 	"Handbook",
 	"System Manual",
+	"Design",
 	"Workflows",
 	"Reference",
 	"Prompts",
+	"Audits",
 	"getting-started",
 	"guides",
 	"reference",
 	"other",
 ];
 const sections = Object.keys(docsBySection).sort((a, b) => {
-	const indexA = sectionOrder.indexOf(a);
-	const indexB = sectionOrder.indexOf(b);
+	// Normalize to lowercase for case-insensitive sort if not in explicit list?
+	// But sectionOrder is explicit.
+	// Let's handle both cases in the comparator if needed, or just list them.
+	// The keys in docsBySection are either folder names (lowercase) or Frontmatter Groups (Capitalized).
+	// "design" folder -> key "design". "Audits" folder -> key "audits".
+	// "System Manual" -> key "System Manual" (Frontmatter).
+
+	// Let's normalize comparison.
+	const normalize = (s: string) => {
+		const map: Record<string, string> = {
+			design: "Design",
+			audits: "Audits",
+			reference: "Reference",
+		};
+		return map[s] || s;
+	};
+
+	const indexA = sectionOrder.indexOf(normalize(a));
+	const indexB = sectionOrder.indexOf(normalize(b));
+
 	if (indexA !== -1 && indexB !== -1) return indexA - indexB;
 	if (indexA !== -1) return -1;
 	if (indexB !== -1) return 1;
@@ -87,14 +107,15 @@ const formatSectionTitle = (slug: string) => {
 };
 ---
 
-<nav class="sidebar-nav space-y-8">
+<nav class="sidebar-nav space-y-4">
 	{
 		sections.map((section) => (
-			<div class="sidebar-section">
-				<div class="mb-2 px-4 font-sans text-sm font-bold tracking-wide text-neutral-500 uppercase">
+			<details class="sidebar-section group" open>
+				<summary class="mb-2 flex cursor-pointer list-none items-center justify-between px-4 font-sans text-sm font-bold tracking-wide text-neutral-500 uppercase select-none hover:text-neutral-300 [&::-webkit-details-marker]:hidden">
 					{formatSectionTitle(section)}
-				</div>
-				<ul class="space-y-1 border-l border-neutral-800">
+					<span class="transition-transform duration-200 group-open:rotate-90">›</span>
+				</summary>
+				<ul class="ml-2 space-y-1 border-l border-neutral-800 pl-2 transition-all duration-300 ease-in-out">
 					{docsBySection[section].map((doc) => (
 						<SidebarLink
 							link={`/docs/${doc.slug}`}
@@ -103,7 +124,7 @@ const formatSectionTitle = (slug: string) => {
 						/>
 					))}
 				</ul>
-			</div>
+			</details>
 		))
 	}
 </nav>

@@ -1,12 +1,10 @@
 ---
-title: "Internal Scripts"
-description: "Archived legacy document."
----
-
-﻿---
 title: "Internal Scripts Reference"
 description: "Documentation for internal maintenance scripts."
 slug: "internal_scripts"
+sidebar:
+  group: Workflows
+  order: 50
 ---
 
 # Internal Scripts Reference
