@@ -2,10 +2,10 @@
 import { getMultiverseData } from "@/utils/getMultiverseData";
 import { Icon } from "astro-icon/components";
 import SonicHeartbeat from "@components/Audio/SonicHeartbeat";
-import DossierToggle from "@components/Projects/DossierToggle";
 import TeamPipChart from "@components/DataViz/TeamPipChart";
 import ForensicSeismograph from "@components/DataViz/ForensicSeismograph";
 import ForensicTooltip from "@components/DLS/ForensicTooltip.astro";
+import TeamDrawer from "@components/Scrolly/TeamDrawer";
 
 const multiverseData = await getMultiverseData();
 
@@ -64,38 +64,82 @@ if (!displayDuration && data.date) {
 <!-- UNIVERSAL HUD WRAPPER -->
 <UniversalHUD mode="stealth">
 	<!-- LEFT SLOT: Title & Context -->
-	<div
-		slot="left"
-		class="flex max-w-full items-center gap-6 overflow-hidden md:max-w-[80%] md:pl-6"
-	>
+	<!-- LEFT SLOT: Title & Context -->
+	<div slot="left" class="flex max-w-full items-center gap-6 overflow-hidden md:pl-6">
 		<div>
 			<span class="block truncate text-[10px] tracking-widest text-neutral-500 uppercase md:text-xs"
 				>{data.id || data.slug}</span
 			>
 			<div class="flex items-center gap-2 text-[10px] tracking-wider uppercase md:gap-3">
-				<span class="truncate font-bold text-white">{data.employer}</span>
+				<span class="font-bold whitespace-nowrap text-white">{data.employer}</span>
 				<span class="hidden text-neutral-500 md:inline">//</span>
-				<span class="hidden text-neutral-400 md:inline">{data.category || "Project"}</span>
+				<span class="truncate text-neutral-400 md:inline">{data.category || "Project"}</span>
 			</div>
 		</div>
 	</div>
 
 	<!-- CENTER SLOT: SEISMOGRAPH & NAV -->
-	<div slot="center" class="flex items-center justify-center gap-8 xl:gap-12">
-		{/* SEISMOGRAPH */}
+	<div slot="center" class="relative flex items-center justify-center">
+		{/* SEISMOGRAPH & SCALE VIZ (Absolute positioned to left of center) */}
 		<div
-			class="hidden items-center justify-center px-4 opacity-0 transition-opacity duration-500 md:flex md:opacity-100"
+			class="absolute right-full mr-8 hidden items-center justify-center gap-8 px-4 opacity-0 transition-opacity duration-500 md:flex md:opacity-100"
 		>
+			{/* SCALE VIZ */}
+			{
+				data.productionScale && (
+					<div class="flex flex-col items-end gap-0.5">
+						<div class="text-[8px] leading-none tracking-widest text-neutral-500 uppercase">
+							Scale
+						</div>
+						<div class="flex gap-0.5" title={`Production Scale: ${data.productionScale}`}>
+							{[1, 2, 3, 4, 5].map((level) => {
+								// Map scale to level with labels
+								const levels = [
+									{ id: "one_off", label: "One-Off" },
+									{ id: "limited", label: "Limited" },
+									{ id: "series", label: "Series" },
+									{ id: "mass", label: "Mass" },
+									{ id: "global", label: "Global" },
+								];
+
+								const currentLevelObj = levels[level - 1]; // 0-indexed
+								const scaleMap = {
+									one_off: 1,
+									limited: 2,
+									series: 3,
+									mass: 4,
+									global: 5,
+								} as any;
+
+								const projectLevel = scaleMap[data.productionScale] || 0;
+								const filled = level <= projectLevel;
+
+								return (
+									<ForensicTooltip content={currentLevelObj.label} side="top">
+										<div
+											class={`h-3 w-1 cursor-help rounded-sm transition-all duration-300 ${
+												filled ? "bg-amber-500 hover:bg-amber-400" : "bg-white/10 hover:bg-white/20"
+											}`}
+										/>
+									</ForensicTooltip>
+								);
+							})}
+						</div>
+					</div>
+				)
+			}
+
+			{/* SEISMOGRAPH */}
 			{
 				entropy && entropy.length > 0 && (
-					<div class="h-8 w-[140px] cursor-crosshair xl:w-[180px]">
+					<div class="h-8 w-[100px] cursor-crosshair xl:w-[140px]">
 						<ForensicSeismograph client:idle data={entropy} />
 					</div>
 				)
 			}
 		</div>
 
-		{/* NAV CONTROLS */}
+		{/* NAV CONTROLS (Centered) */}
 		<div class="flex shrink-0 items-center gap-1">
 			{
 				prevProject ? (
@@ -131,242 +175,214 @@ if (!displayDuration && data.date) {
 				)
 			}
 		</div>
+
+		{/* RIGHT WING: DATE / DURATION / RAW (Absolute positioned to right of center) */}
+		<div class="absolute left-full ml-8 hidden items-center gap-6 whitespace-nowrap md:flex">
+			<div class="flex items-center gap-4 font-mono text-xs">
+				<div class="flex items-center gap-2">
+					<span class="text-[10px] text-neutral-600 uppercase">DATE</span>
+					<span class="font-bold text-white">{isoDate}</span>
+				</div>
+				{
+					displayDuration && (
+						<div class="flex items-center gap-2 border-l border-white/10 pl-4 text-emerald-500">
+							<div class="text-[8px] leading-none font-bold tracking-wider uppercase">DUR</div>
+							<div class="text-xs leading-none font-bold whitespace-nowrap text-white">
+								{displayDuration}
+							</div>
+						</div>
+					)
+				}
+			</div>
+			<a
+				href={`/raw/${data.id || "v4-test"}`}
+				class="flex h-6 items-center justify-center rounded border border-[#2E5CFF]/30 bg-[#2E5CFF]/10 px-2 font-mono text-[10px] font-bold text-[#2E5CFF] transition-colors hover:bg-[#2E5CFF] hover:text-white"
+			>
+				RAW_SOURCE
+			</a>
+		</div>
 	</div>
 
-	<!-- RIGHT SLOT: Date & Metrics -->
-	<div slot="right" class="hidden items-center gap-8 md:flex">
-		<div class="font-mono text-xs">
-			<span class="mr-2 text-neutral-600 uppercase">DATE</span>
-			<span class="font-bold text-white">{isoDate}</span>
-		</div>
-		{
-			displayDuration && (
-				<div class="rounded border border-emerald-500/30 bg-emerald-500/5 px-3 py-1">
-					<div class="mb-0.5 text-[8px] leading-none font-bold tracking-wider text-emerald-500 uppercase">
-						Duration
-					</div>
-					<div class="font-mono text-sm leading-none font-bold text-white">{displayDuration}</div>
-				</div>
-			)
-		}
-		<a
-			href={`/raw/${data.id || "v4-test"}`}
-			class="flex h-6 items-center justify-center rounded border border-[#2E5CFF]/30 bg-[#2E5CFF]/10 px-2 font-mono text-[10px] font-bold text-[#2E5CFF] transition-colors hover:bg-[#2E5CFF] hover:text-white"
-		>
-			RAW_SOURCE
-		</a>
-
-		{/* PRODUCTION SCALE (Volume Bar) */}
-		{
-			data.productionScale && (
-				<div class="ml-4 flex flex-col items-end gap-0.5 border-l border-white/10 pl-4">
-					<div class="text-[8px] leading-none tracking-widest text-neutral-500 uppercase">
-						Scale
-					</div>
-					<div class="flex gap-0.5" title={`Production Scale: ${data.productionScale}`}>
-						{[1, 2, 3, 4, 5].map((level) => {
-							// Map scale to level with labels
-							const levels = [
-								{ id: "one_off", label: "One-Off" },
-								{ id: "limited", label: "Limited" },
-								{ id: "series", label: "Series" },
-								{ id: "mass", label: "Mass" },
-								{ id: "global", label: "Global" },
-							];
-
-							const currentLevelObj = levels[level - 1]; // 0-indexed
-							const scaleMap = {
-								one_off: 1,
-								limited: 2,
-								series: 3,
-								mass: 4,
-								global: 5,
-							} as any;
-
-							const projectLevel = scaleMap[data.productionScale] || 0;
-							const filled = level <= projectLevel;
-
-							return (
-								<ForensicTooltip content={currentLevelObj.label} side="top">
-									<div
-										class={`h-3 w-1 cursor-help rounded-sm transition-all duration-300 ${
-											filled ? "bg-amber-500 hover:bg-amber-400" : "bg-white/10 hover:bg-white/20"
-										}`}
-									/>
-								</ForensicTooltip>
-							);
-						})}
-					</div>
-				</div>
-			)
-		}
+	<div slot="right" class="hidden items-center gap-6 md:flex">
 		{/* SONIC HEARTBEAT (Singularity Audit) */}
 		<div class="ml-4 flex items-center gap-4 border-l border-white/10 pl-4">
-			{presentation_mode === "deep_dive" && <DossierToggle client:load />}
 			<SonicHeartbeat client:load audioUrl={data.audio_url} />
 		</div>
 	</div>
-</UniversalHUD>
 
-<!-- METRICS DRAWER (DEEP MODE ONLY) -->
-<!-- Positioned below the fixed HUD -->
-{
-	showMetrics && (
-		<div class="fixed top-[60px] left-0 z-40 hidden w-full border-t border-white/5 md:block">
-			{/* METRICS GRID (Foreground) */}
-			<div class="relative z-10 grid w-full grid-cols-6 divide-x divide-white/10">
-				{/* 0. TEAM SIZE (Pip Chart or Text) */}
-				<div class="col-span-1 cursor-crosshair border-r border-white/10 px-4 py-2">
-					{(() => {
-						// Parse "INT 37 / EXT 21" logic
-						const teamStr = data.teamSize || "";
-						const intMatch = teamStr.match(/INT\s*(\d+)/i);
-						const extMatch = teamStr.match(/EXT\s*(\d+)/i);
-						const coreMatch = teamStr.match(/Core\s*(\d+)/i);
+	{/* METRICS DRAWER (DEEP MODE ONLY) */}
+	{/* Positioned below the fixed HUD */}
+	{
+		showMetrics && (
+			<div class="fixed top-[60px] left-0 z-40 hidden w-full border-t border-white/5 md:block">
+				{/* METRICS GRID (Foreground) */}
+				<div class="relative z-10 grid w-full grid-cols-6 divide-x divide-white/10">
+					{/* 0. TEAM SIZE (Pip Chart or Text) */}
+					<div class="col-span-1 cursor-crosshair border-r border-white/10 px-4 py-2">
+						{(() => {
+							// Parse "INT 37 / EXT 21" logic
+							const teamStr = data.teamSize || "";
+							const intMatch = teamStr.match(/INT\s*(\d+)/i);
+							const extMatch = teamStr.match(/EXT\s*(\d+)/i);
+							const coreMatch = teamStr.match(/Core\s*(\d+)/i);
 
-						const intCount = intMatch ? parseInt(intMatch[1]) : 0;
-						const extCount = extMatch ? parseInt(extMatch[1]) : 0;
-						const coreCount = coreMatch ? parseInt(coreMatch[1]) : 0;
+							const intCount = intMatch ? parseInt(intMatch[1]) : 0;
+							const extCount = extMatch ? parseInt(extMatch[1]) : 0;
+							const coreCount = coreMatch ? parseInt(coreMatch[1]) : 0;
 
-						if (intCount > 0 || extCount > 0) {
-							return (
-								<TeamPipChart
-									client:load
-									internal={intCount}
-									external={extCount}
-									core={coreCount}
-								/>
-							);
-						} else {
-							// Fallback
-							return (
-								<div class="flex h-full flex-col justify-center">
-									<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Team</div>
-									<div class="font-mono text-xs font-bold text-white">
-										{data.teamSize || "Core Team"}
+							if (intCount > 0 || extCount > 0) {
+								return (
+									<TeamPipChart
+										client:load
+										internal={intCount}
+										external={extCount}
+										core={coreCount}
+									/>
+								);
+							} else {
+								// Fallback
+								return (
+									<div class="flex h-full flex-col justify-center">
+										<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Team</div>
+										<div class="font-mono text-xs font-bold text-white">
+											{data.teamSize || "Core Team"}
+										</div>
+									</div>
+								);
+							}
+						})()}
+					</div>
+
+					{/* 1. BOM / COGS */}
+					{metrics.cogs ? (
+						<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2">
+							<div class="flex w-full items-center justify-between">
+								{/* Left: BOM */}
+								<div class="flex flex-col">
+									<div class="text-[9px] tracking-widest text-neutral-500 uppercase">BOM</div>
+									<div class="font-mono text-sm font-bold text-white">{metrics.cogs.value}</div>
+								</div>
+								{/* Right: COGS */}
+								<div class="flex flex-col items-end opacity-50">
+									<div class="text-[9px] tracking-widest text-neutral-600 uppercase">COGS</div>
+									<div class="font-mono text-[10px] font-bold text-neutral-400">
+										{metrics.financial?.costOfGoodsSold?.length > 0
+											? metrics.financial.costOfGoodsSold[0]
+											: "--"}
 									</div>
 								</div>
-							);
-						}
-					})()}
-				</div>
-
-				{/* 1. BOM / COGS */}
-				{metrics.cogs ? (
-					<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2">
-						<div class="flex w-full items-center justify-between">
-							{/* Left: BOM */}
-							<div class="flex flex-col">
-								<div class="text-[9px] tracking-widest text-neutral-500 uppercase">BOM</div>
-								<div class="font-mono text-sm font-bold text-white">{metrics.cogs.value}</div>
 							</div>
-							{/* Right: COGS */}
-							<div class="flex flex-col items-end opacity-50">
-								<div class="text-[9px] tracking-widest text-neutral-600 uppercase">COGS</div>
-								<div class="font-mono text-[10px] font-bold text-neutral-400">
-									{metrics.financial?.costOfGoodsSold?.length > 0
-										? metrics.financial.costOfGoodsSold[0]
-										: "--"}
+						</div>
+					) : (
+						<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2 opacity-30">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">BOM</div>
+							<div class="font-mono text-sm font-bold text-white">N/A</div>
+						</div>
+					)}
+
+					{/* 2. MARGIN */}
+					{metrics.profitability ? (
+						<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
+								{metrics.profitability.label}
+							</div>
+							<div class="font-mono text-sm font-bold text-[#2E5CFF]">
+								{metrics.profitability.value}
+							</div>
+						</div>
+					) : (
+						<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2 opacity-30">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Margin</div>
+							<div class="font-mono text-sm font-bold text-white">N/A</div>
+						</div>
+					)}
+
+					{/* 3. GOVERNANCE (ECO / DCD) */}
+					{metrics.governance ? (
+						<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2">
+							<div class="flex items-center justify-between gap-4">
+								{/* Left: ECOs */}
+								<div class="flex flex-col">
+									<div class="text-[9px] tracking-widest text-neutral-500 uppercase">ECOs</div>
+									<div class="font-mono text-xs text-white">
+										{metrics.governance.ecos && metrics.governance.ecos.length > 0 ? (
+											<span
+												class="cursor-help border-b border-dashed border-white/20 hover:border-white/50"
+												title={metrics.governance.ecos.join("\n")}
+											>
+												{metrics.governance.ecos.length}
+											</span>
+										) : (
+											<span class="opacity-50">--</span>
+										)}
+									</div>
+								</div>
+								{/* Right: DCDs */}
+								<div class="flex flex-col items-end">
+									<div class="text-[9px] tracking-widest text-neutral-500 uppercase">DCDs</div>
+									<div class="font-mono text-xs font-bold text-white">
+										{metrics.governance.dcos}
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				) : (
-					<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2 opacity-30">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">BOM</div>
-						<div class="font-mono text-sm font-bold text-white">N/A</div>
-					</div>
-				)}
-
-				{/* 2. MARGIN */}
-				{metrics.profitability ? (
-					<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
-							{metrics.profitability.label}
+					) : (
+						<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2 opacity-30">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Governance</div>
+							<div class="font-mono text-sm font-bold text-white">N/A</div>
 						</div>
-						<div class="font-mono text-sm font-bold text-[#2E5CFF]">
-							{metrics.profitability.value}
-						</div>
-					</div>
-				) : (
-					<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2 opacity-30">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Margin</div>
-						<div class="font-mono text-sm font-bold text-white">N/A</div>
-					</div>
-				)}
+					)}
 
-				{/* 3. GOVERNANCE (ECO / DCD) */}
-				{metrics.governance ? (
-					<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2">
-						<div class="flex items-center justify-between gap-4">
-							{/* Left: ECOs */}
-							<div class="flex flex-col">
-								<div class="text-[9px] tracking-widest text-neutral-500 uppercase">ECOs</div>
-								<div class="font-mono text-xs text-white">
-									{metrics.governance.ecos && metrics.governance.ecos.length > 0 ? (
-										<span
-											class="cursor-help border-b border-dashed border-white/20 hover:border-white/50"
-											title={metrics.governance.ecos.join("\n")}
-										>
-											{metrics.governance.ecos.length}
-										</span>
-									) : (
-										<span class="opacity-50">--</span>
-									)}
+					{/* 4. INTERVENTIONS */}
+					{metrics.interventions ? (
+						<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
+								{metrics.interventions.label}
+							</div>
+							<div class="flex items-center gap-2">
+								<div class="font-mono text-sm font-bold text-white">
+									{metrics.interventions.count}
 								</div>
-							</div>
-							{/* Right: DCDs */}
-							<div class="flex flex-col items-end">
-								<div class="text-[9px] tracking-widest text-neutral-500 uppercase">DCDs</div>
-								<div class="font-mono text-xs font-bold text-white">{metrics.governance.dcos}</div>
+								<div class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
 							</div>
 						</div>
-					</div>
-				) : (
-					<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2 opacity-30">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Governance</div>
-						<div class="font-mono text-sm font-bold text-white">N/A</div>
-					</div>
-				)}
+					) : (
+						<div class="flex flex-col justify-center px-4 py-2 opacity-30">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Interventions</div>
+							<div class="font-mono text-sm font-bold text-white">N/A</div>
+						</div>
+					)}
 
-				{/* 4. INTERVENTIONS */}
-				{metrics.interventions ? (
-					<div class="col-span-1 flex flex-col justify-center border-r border-white/10 px-4 py-2">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
-							{metrics.interventions.label}
-						</div>
-						<div class="flex items-center gap-2">
+					{/* 5. FINANCIAL */}
+					{metrics.financial && metrics.financial.toolingBudget ? (
+						<div class="flex flex-col justify-center px-4 py-2">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
+								Tooling Budget
+							</div>
 							<div class="font-mono text-sm font-bold text-white">
-								{metrics.interventions.count}
+								${metrics.financial.toolingActual.toLocaleString()}
+								<span class="ml-1 text-[10px] text-neutral-500">
+									/ ${metrics.financial.toolingBudget.toLocaleString()}
+								</span>
 							</div>
-							<div class="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
 						</div>
-					</div>
-				) : (
-					<div class="flex flex-col justify-center px-4 py-2 opacity-30">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Interventions</div>
-						<div class="font-mono text-sm font-bold text-white">N/A</div>
-					</div>
-				)}
-
-				{/* 5. FINANCIAL */}
-				{metrics.financial && metrics.financial.toolingBudget ? (
-					<div class="flex flex-col justify-center px-4 py-2">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Tooling Budget</div>
-						<div class="font-mono text-sm font-bold text-white">
-							${metrics.financial.toolingActual.toLocaleString()}
-							<span class="ml-1 text-[10px] text-neutral-500">
-								/ ${metrics.financial.toolingBudget.toLocaleString()}
-							</span>
+					) : (
+						<div class="flex flex-col justify-center px-4 py-2 opacity-30">
+							<div class="text-[9px] tracking-widest text-neutral-500 uppercase">
+								Tooling Budget
+							</div>
+							<div class="font-mono text-sm font-bold text-white">N/A</div>
 						</div>
-					</div>
-				) : (
-					<div class="flex flex-col justify-center px-4 py-2 opacity-30">
-						<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Tooling Budget</div>
-						<div class="font-mono text-sm font-bold text-white">N/A</div>
-					</div>
-				)}
+					)}
+				</div>
 			</div>
-		</div>
-	)
-}
+		)
+	}
+
+	<TeamDrawer
+		client:only="react"
+		team={data.cast}
+		warStories={data.metrics?.war_stories || data.war_stories}
+		title={data.title}
+	/>
+</UniversalHUD>

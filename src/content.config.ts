@@ -175,6 +175,15 @@ const projectsCollection = defineCollection({
 
 		phase_stats: z.record(z.number()).optional(),
 		teamSize: z.coerce.string().optional(),
+		cast: z
+			.array(
+				z.object({
+					name: z.string(),
+					role: z.string(),
+					org: z.string(),
+				}),
+			)
+			.optional(),
 		job_title: z.enum(ROLE_VALUES as any).optional(),
 		war_stories: z
 			.array(

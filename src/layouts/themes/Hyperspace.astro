@@ -20,7 +20,6 @@ const useDossier = presentation_mode === "deep_dive";
 // Backwards compatibility/Renaming
 const scrolly = cyberspace;
 
-import GlobalHomeButton from "@components/Nav/GlobalHomeButton.astro";
 import ForensicDossier from "@components/Scrolly/ForensicDossier.astro";
 import ForensicMarker from "@components/Scrolly/ForensicMarker.tsx";
 import DeepDiveRenderer from "@components/DeepDive/DeepDiveRenderer.astro"; // IMPL
@@ -52,15 +51,20 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 	entropy={entropy}
 	starfield={true}
 >
-	<GlobalHomeButton />
-
 	{/* FORENSIC DOSSIER (Deep Dive Only) */}
 	{
 		useDossier && (
 			<ForensicDossier
 				title={title}
 				metrics={entry.data.forensic_metrics}
-				caseTheory={entry.data.case_theory}
+				metrics={entry.data.forensic_metrics}
+				caseTheory={
+					entry.data.case_theory ||
+					(entry.data.war_stories || []).map((ws: any) => ({
+						title: `${ws.label} // ${ws.value}`,
+						star: ws.description,
+					}))
+				}
 			>
 				<div class="pb-24">
 					<Content />

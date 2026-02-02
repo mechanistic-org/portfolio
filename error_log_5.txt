@@ -1,0 +1,21 @@
+[2m20:47:46[22m [34m[@astrojs/cloudflare][39m Enabling sessions with Cloudflare KV with the "SESSION" KV binding.
+[2m20:47:46[22m [34m[@astrojs/cloudflare][39m If you see the error "Invalid binding `SESSION`" in your build output, you need to add the binding to your wrangler config file.
+[2m20:47:46[22m [34m[content][39m Syncing content
+[2m20:47:46[22m [34m[content][39m Content config changed
+[2m20:47:46[22m [34m[content][39m Clearing content store
+end of the stream or a document separator is expected
+  [1mHint:[22m
+[33m    Browser APIs are not available on the server.
+    
+    If the code is in a framework component, try to access these objects after rendering using lifecycle methods or use a `client:only` directive to make the component exclusively run on the client.
+    
+    See [4mhttps://docs.astro.build/en/guides/troubleshooting/#document-or-window-is-not-defined[24m for more information.
+    		[39m
+  [1mLocation:[22m
+    [4mD:\GitHub\eriknorris\src\content\projects\webtv-elmer\index.mdx:15:0[24m
+  [1mStack trace:[22m
+[2m    at generateError (file:///D:/GitHub/eriknorris/node_modules/js-yaml/dist/js-yaml.mjs:1289:10)
+    at readDocument (file:///D:/GitHub/eriknorris/node_modules/js-yaml/dist/js-yaml.mjs:2741:5)
+    at load$1 (file:///D:/GitHub/eriknorris/node_modules/js-yaml/dist/js-yaml.mjs:2810:19)
+    at safeParseFrontmatter (file:///D:/GitHub/eriknorris/node_modules/@astrojs/mdx/dist/utils.js:33:12)
+    at syncData (D:/GitHub/eriknorris/node_modules/astro/dist/content/loaders/glob.js:64:48)[22m

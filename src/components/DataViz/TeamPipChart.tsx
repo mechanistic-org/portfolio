@@ -1,4 +1,5 @@
 import React from "react";
+import { setTeamOpen } from "../../stores/dossierStore";
 
 interface TeamPipChartProps {
 	internal: number;
@@ -10,7 +11,6 @@ const TeamPipChart: React.FC<TeamPipChartProps> = ({ internal, external, core = 
 	// Config
 	const pipWidth = 3;
 	const pipGap = 2;
-	const maxWidth = 20 * (pipWidth + pipGap); // Break at ~20 pips
 
 	const renderPips = (count: number, isInternal: boolean) => {
 		const rows: React.ReactNode[] = [];
@@ -52,7 +52,11 @@ const TeamPipChart: React.FC<TeamPipChartProps> = ({ internal, external, core = 
 	};
 
 	return (
-		<div className="flex h-full w-full flex-col justify-center gap-2">
+		<div
+			onClick={() => setTeamOpen(true)}
+			className="flex h-full w-full cursor-pointer flex-col justify-center gap-2 transition-opacity hover:opacity-80"
+			title="View Team Roster"
+		>
 			{/* ROW 1: INT */}
 			<div className="flex w-full items-start justify-between">
 				{renderPips(internal, true)}

@@ -7,36 +7,36 @@ sidebar:
   order: 5
 ---
 
-# The Colophon: Improving the Signal-to-Noise Ratio
+# The Colophon: The Meta-Portfolio
 
 > **"The medium is the message."** — Marshall McLuhan
-> **"Works on my machine is not a valid defense."** — The Engine Room
+> **"The way you do anything is the way you do everything."** — The Code
 
-This portfolio is not a template. It is a custom-engineered **Forensic Filing System** built to handle 25+ years of high-density mechanical engineering data. It rejects the "Shiny Object" school of design in favor of **Hyper-Functional Brutalism**.
-
----
-
-## 1. The Philosophy: Forensic Brutalism
-
-We treat this website as an industrial machine, not a marketing brochure.
-
-- **Zero-Runtime Visualization:** If a chart doesn't need to change after load, it is baked into an SVG. We prefer **D3.js** for its precision over generic charting libraries.
-- **The Air Gap Law:** Intellectual Property is sacred. High-resolution raw assets (CAD, Emails) are air-gapped in "Detail Pods." This site only serves the "Forensic Summary."
-- **Show The Seams:** We expose the build timers, the debug badges, and the raw metrics. We value the machinery as much as the output.
+This portfolio is not just a showcase; it is a portal into the engineering mindset. It is a custom-engineered **Forensic Filing System** built to handle 25+ years of high-density mechanical engineering data.
 
 ---
 
-## 2. The Tech Stack (The Engine)
+## 1. The Philosophy: The Pursuit of Truth
 
-The system is built for speed, immutability, and archival longevity.
+We treat this website as an evolving project, worthy of the same rigor as the hardware it documents.
 
-| Layer       | Technology            | Rationale                                                     |
-| :---------- | :-------------------- | :------------------------------------------------------------ |
-| **Core**    | **Astro 5.0**         | Zero-JS default. Static HTML output.                          |
-| **CMS**     | **Keystatic**         | Local Markdown management. No database to crash.              |
-| **Styling** | **Tailwind v4**       | Utility-first. Custom "Brutalist" tokens.                     |
-| **Data**    | **Forensic Registry** | `PROJECT_INDEX.md` (JSON Bolus) governs retrieval.            |
-| **Assets**  | **Cloudflare R2**     | Global edge distribution for heavy binaries (`.glb`, `.pdf`). |
+- **The Portal:** The Colophon is the "Making Of" engine—a place to document the technological pursuit of truth and the tools that drive the hunt.
+- **Forensic Rigor:** We do not fake data. We do not use "Lorem Ipsum." Every metric, every part number, and every "War Story" is ground-truthed against reality.
+- **Curated Canon:** This section serves as the living history of the site's evolution, capturing the "self-imposed constraints" and the journey of building a digital home for physical work.
+
+---
+
+## 2. The Tech Stack (The Tools)
+
+The system is built for stability, clarity, and forensic density.
+
+| Layer       | Technology           | Rationale                                                               |
+| :---------- | :------------------- | :---------------------------------------------------------------------- |
+| **Core**    | **Astro 5.0**        | Zero-JS default. Static HTML output.                                    |
+| **CMS**     | **Keystatic**        | Local Markdown management. No database to crash.                        |
+| **Styling** | **Tailwind v4**      | Utility-first tokens.                                                   |
+| **Memory**  | **The Testimonials** | A collaboration log of the AI agents (The Council) who helped build it. |
+| **Assets**  | **Cloudflare R2**    | Global edge distribution for heavy binaries (`.glb`, `.pdf`).           |
 
 ---
 

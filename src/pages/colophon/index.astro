@@ -3,6 +3,7 @@ import Layout from "@layouts/BaseLayout.astro";
 import ColophonCard from "@components/ColophonCard.astro";
 import Marquee from "@components/Marquee/Marquee";
 import TestimonialWall from "@components/Testimonials/TestimonialWall";
+import ForensicWall from "@components/Forensics/ForensicWall";
 import UniversalHUD from "@components/Nav/UniversalHUD.astro";
 
 // Workaround for empty collection issue: manually load files via glob
@@ -106,6 +107,52 @@ const marqueeTools = [...tools, ...tools, ...tools];
 				/>
 			</div>
 
+			{/* Stream A: Mechanical Forensics (Career) */}
+			<div class="mb-24 text-left">
+				<div
+					class="border-primary/30 bg-primary/10 text-primary mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-xs tracking-widest uppercase"
+				>
+					Stream A
+				</div>
+				<h2 class="mb-8 text-3xl font-bold tracking-tight text-white md:text-4xl">
+					Mechanical Forensics
+				</h2>
+				<p class="mb-12 max-w-2xl text-lg text-neutral-400">
+					High-fidelity evidence extracted from the "Big 8" Deep Dive projects. The career canon.
+				</p>
+				<ForensicWall client:load />
+			</div>
+
+			{/* Stream B: System Architecture (The Machine) */}
+			<div class="mb-24 text-left">
+				<div
+					class="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 font-mono text-xs tracking-widest text-cyan-500 uppercase"
+				>
+					Stream B
+				</div>
+				<h2 class="mb-8 text-3xl font-bold tracking-tight text-white md:text-4xl">
+					System Architecture
+				</h2>
+				<p class="mb-8 max-w-2xl text-lg text-neutral-400">
+					The meta-narrative of building the portfolio itself. Treated as a living software product.
+				</p>
+
+				{/* Live System Stats (Removed per User Request) */}
+
+				{/* System Documentation Grid (Moved from Bottom) */}
+				<div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+					{features.map((post) => <ColophonCard post={post} />)}
+				</div>
+
+				{/* System Registry Placeholder (Waiting for Component) */}
+				<div
+					class="rounded-lg border border-dashed border-neutral-800 p-6 font-mono text-sm text-neutral-500"
+				>
+					System Registry Loaded: 3 Neural Nodes (Air Gap, Brutalism, AI). <br />
+					[Awaiting Visualization Component]
+				</div>
+			</div>
+
 			{/* Meta-Testimonial Wall */}
 			<div class="mb-24 text-left">
 				<div
@@ -123,13 +170,6 @@ const marqueeTools = [...tools, ...tools, ...tools];
 			</div>
 			<div class="relative left-[calc(50%-50vw)] -mx-[calc(50vw-50%)] mb-24 w-screen">
 				<TestimonialWall client:load />
-			</div>
-		</div>
-
-		{/* Blog Grid */}
-		<div class="site-container">
-			<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-				{features.map((post) => <ColophonCard post={post} />)}
 			</div>
 		</div>
 	</section>

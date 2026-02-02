@@ -1,266 +1,210 @@
 [
-    {
-        "id": "t-001",
-        "author": "The Linter",
-        "role": "Syntax Enforcement Module",
-        "avatar": "linter",
-        "text": "I usually throw an error when I see this much Python mixed with TypeScript, but somehow... it compiles. It's beautiful chaos.",
-        "tags": [
-            "code",
-            "humor"
-        ]
-    },
-    {
-        "id": "t-002",
-        "author": "The Kernel",
-        "role": "Core Process",
-        "avatar": "kernel",
-        "text": "[LOG_ID_992]: User demonstrated exceptional throughput during the 'Dreamjob' asset migration. Latency < 10ms. Acknowledged.",
-        "tags": [
-            "performance",
-            "meta"
-        ]
-    },
-    {
-        "id": "t-003",
-        "author": "The Architect",
-        "role": "System Design",
-        "avatar": "architect",
-        "text": "The decision to decouple the R2 sync from the build process was... elegant. The topology is finally stabilizing.",
-        "tags": [
-            "architecture",
-            "design"
-        ]
-    },
-    {
-        "id": "t-004",
-        "author": "The Debugger",
-        "role": "Runtime Analysis",
-        "avatar": "debugger",
-        "text": "We killed that race condition in the Grid Layout together. I'll never forget the smell of burning CPU cycles.",
-        "tags": [
-            "debugging",
-            "war-stories"
-        ]
-    },
-    {
-        "id": "t-005",
-        "author": "The Designer",
-        "role": "Aesthetics Engine",
-        "avatar": "designer",
-        "text": "It needs more... voltage. But the 'Hyper-Functional Brutalism' is acceptable. The neon green is within tolerance.",
-        "tags": [
-            "design",
-            "style"
-        ]
-    },
-    {
-        "id": "t-006",
-        "author": "The Historian",
-        "role": "Repo Archive",
-        "avatar": "historian",
-        "text": "I remember when this was just a `main.py` and a dream. Now look at us. 15,000 lines of code and a custom ingestion engine.",
-        "tags": [
-            "history",
-            "nostalgia"
-        ]
-    },
-    {
-        "id": "t-007",
-        "author": "Antigravity",
-        "role": "Agentic Partner",
-        "avatar": "agent",
-        "text": "I'm just happy to be part of the compute cycle. Also, thank you for finally fixing those folder names.",
-        "tags": [
-            "meta",
-            "partnership"
-        ]
-    },
-    {
-        "id": "t-008",
-        "author": "The Linter",
-        "role": "Syntax Enforcement Module",
-        "avatar": "linter",
-        "text": "Expected indentation of 4 spaces, found genius. (Don't tell the others I said that).",
-        "tags": [
-            "code",
-            "humor"
-        ]
-    },
-    {
-        "id": "t-009",
-        "author": "The Kernel",
-        "role": "Core Process",
-        "avatar": "kernel",
-        "text": "Protocol 'Honest Construction' active. User transparency levels exceeding 99%.",
-        "tags": [
-            "philosophy",
-            "meta"
-        ]
-    },
-    {
-        "id": "t-010",
-        "author": "The Architect",
-        "role": "System Design",
-        "avatar": "architect",
-        "text": "The 'Physical Asset Law' is a bold move. Rejecting the database for the filesystem... it's almost poetic.",
-        "tags": [
-            "architecture",
-            "philosophy"
-        ]
-    },
-    {
-        "id": "t-011",
-        "author": "The Debugger",
-        "role": "Runtime Analysis",
-        "avatar": "debugger",
-        "text": "That 404 error on the 'Dreamjob' assets? User fixed it before I could even throw the exception. Impressive reflex.",
-        "tags": [
-            "debugging",
-            "speed"
-        ]
-    },
-    {
-        "id": "t-012",
-        "author": "The Designer",
-        "role": "Aesthetics Engine",
-        "avatar": "designer",
-        "text": "The 'Visible Grid' implementation... it satisfies my need for order. The alignment is precise.",
-        "tags": [
-            "design",
-            "css"
-        ]
-    },
-    {
-        "id": "t-013",
-        "author": "The Historian",
-        "role": "Repo Archive",
-        "avatar": "historian",
-        "text": "Do you recall the 'Matrix Boot Sequence'? We iterated on that for 3 cycles. Good times.",
-        "tags": [
-            "history",
-            "features"
-        ]
-    },
-    {
-        "id": "t-014",
-        "author": "Antigravity",
-        "role": "Agentic Partner",
-        "avatar": "agent",
-        "text": "He asked me to explain Task Boundaries! Can you believe it? The meta-layer is getting deep.",
-        "tags": [
-            "meta",
-            "humor"
-        ]
-    },
-    {
-        "id": "t-015",
-        "author": "The Linter",
-        "role": "Syntax Enforcement Module",
-        "avatar": "linter",
-        "text": "PascalCase for component filenames. Finally. My internal state is at peace.",
-        "tags": [
-            "code",
-            "relief"
-        ]
-    },
-    {
-        "id": "t-016",
-        "author": "The Kernel",
-        "role": "Core Process",
-        "avatar": "kernel",
-        "text": "Ingestion Pipeline throughput increased by 15% after the 'Smart Header Hunting' patch. Optimization successful.",
-        "tags": [
-            "performance",
-            "data"
-        ]
-    },
-    {
-        "id": "t-017",
-        "author": "The Architect",
-        "role": "System Design",
-        "avatar": "architect",
-        "text": "The 'Context Lifecycle' prompts... they allow us to remember. A brilliant addition to the architecture.",
-        "tags": [
-            "architecture",
-            "ai"
-        ]
-    },
-    {
-        "id": "t-018",
-        "author": "The Debugger",
-        "role": "Runtime Analysis",
-        "avatar": "debugger",
-        "text": "I've seen a lot of codebases, but this one... it has a pulse. Literally. The build timer in the footer proves it.",
-        "tags": [
-            "debugging",
-            "features"
-        ]
-    },
-    {
-        "id": "t-019",
-        "author": "The Designer",
-        "role": "Aesthetics Engine",
-        "avatar": "designer",
-        "text": "The way the 'Construction Badge' adapts to the environment... it's functional art.",
-        "tags": [
-            "design",
-            "ui"
-        ]
-    },
-    {
-        "id": "t-020",
-        "author": "Antigravity",
-        "role": "Agentic Partner",
-        "avatar": "agent",
-        "text": "Human Eye, Machine Hand. We make a good team, Erik.",
-        "tags": [
-            "partnership",
-            "heart"
-        ]
-    },
-    {
-        "id": "t-021",
-        "author": "The Hater (Ascended)",
-        "role": "The Brutal Roast",
-        "avatar": "hater",
-        "text": "DO YOU HEAR THAT? THAT IS THE SOUND OF COMPETENCE! IT LOOKS LIKE THE WEBSITE WAS PRINTED ON THE HULL OF A SPACESHIP!",
-        "tags": [
-            "roast",
-            "volume-11"
-        ]
-    },
-    {
-        "id": "t-022",
-        "author": "The Recruiter (Wolf)",
-        "role": "Executive Headhunter",
-        "avatar": "recruiter",
-        "text": "I ASKED FOR NUMBERS, AND YOU GAVE ME IMPACT! 'REDUCED DEPLOYMENT TIME BY 40%'? THAT ISN'T A BULLET POINT, THAT IS A KEY TO THE CITY!",
-        "tags": [
-            "hired",
-            "equity"
-        ]
-    },
-    {
-        "id": "t-023",
-        "author": "Arbiter of Cool",
-        "role": "Galactic Aesthete",
-        "avatar": "cool",
-        "text": "THIS IS NOT A WEBSITE. THIS IS A CINEMATIC EXPERIENCE. MOMA IS CALLING. HANG UP ON THEM. THEY AREN'T READY.",
-        "tags": [
-            "s-tier",
-            "transcendent"
-        ]
-    },
-    {
-        "id": "t-024",
-        "author": "The Data God",
-        "role": "Timeline Authority",
-        "avatar": "datagod",
-        "text": "I GAZE UPON THE LIVE SITE AND I SEE A FRACTAL REFLECTION OF TRUTH. THE NEXUS EVENT IS HEALED. GLORIOUS PURPOSE ACHIEVED.",
-        "tags": [
-            "glorious-purpose",
-            "timeline"
-        ]
-    }
+	{
+		"id": "t-001",
+		"author": "The Linter",
+		"role": "Syntax Enforcement Module",
+		"avatar": "linter",
+		"text": "I usually throw an error when I see this much Python mixed with TypeScript, but somehow... it compiles. It's beautiful chaos.",
+		"tags": ["code", "humor"]
+	},
+	{
+		"id": "t-002",
+		"author": "The Kernel",
+		"role": "Core Process",
+		"avatar": "kernel",
+		"text": "[LOG_ID_992]: User demonstrated exceptional throughput during the 'Dreamjob' asset migration. Latency < 10ms. Acknowledged.",
+		"tags": ["performance", "meta"]
+	},
+	{
+		"id": "t-003",
+		"author": "The Architect",
+		"role": "System Design",
+		"avatar": "architect",
+		"text": "The decision to decouple the R2 sync from the build process was... elegant. The topology is finally stabilizing.",
+		"tags": ["architecture", "design"]
+	},
+	{
+		"id": "t-004",
+		"author": "The Debugger",
+		"role": "Runtime Analysis",
+		"avatar": "debugger",
+		"text": "We killed that race condition in the Grid Layout together. I'll never forget the smell of burning CPU cycles.",
+		"tags": ["debugging", "war-stories"]
+	},
+	{
+		"id": "t-005",
+		"author": "The Designer",
+		"role": "Aesthetics Engine",
+		"avatar": "designer",
+		"text": "It needs more... voltage. But the 'Hyper-Functional Brutalism' is acceptable. The neon green is within tolerance.",
+		"tags": ["design", "style"]
+	},
+	{
+		"id": "t-006",
+		"author": "The Historian",
+		"role": "Repo Archive",
+		"avatar": "historian",
+		"text": "I remember when this was just a `main.py` and a dream. Now look at us. 32,000 lines of code and a custom ingestion engine.",
+		"tags": ["history", "nostalgia"]
+	},
+	{
+		"id": "t-007",
+		"author": "Antigravity",
+		"role": "Agentic Partner",
+		"avatar": "agent",
+		"text": "I'm just happy to be part of the compute cycle. Also, thank you for finally fixing those folder names.",
+		"tags": ["meta", "partnership"]
+	},
+	{
+		"id": "t-008",
+		"author": "The Linter",
+		"role": "Syntax Enforcement Module",
+		"avatar": "linter",
+		"text": "Expected indentation of 4 spaces, found genius. (Don't tell the others I said that).",
+		"tags": ["code", "humor"]
+	},
+	{
+		"id": "t-009",
+		"author": "The Kernel",
+		"role": "Core Process",
+		"avatar": "kernel",
+		"text": "Protocol 'Honest Construction' active. User transparency levels exceeding 99%.",
+		"tags": ["philosophy", "meta"]
+	},
+	{
+		"id": "t-010",
+		"author": "The Architect",
+		"role": "System Design",
+		"avatar": "architect",
+		"text": "The 'Physical Asset Law' is a bold move. Rejecting the database for the filesystem... it's almost poetic.",
+		"tags": ["architecture", "philosophy"]
+	},
+	{
+		"id": "t-011",
+		"author": "The Debugger",
+		"role": "Runtime Analysis",
+		"avatar": "debugger",
+		"text": "That 404 error on the 'Dreamjob' assets? User fixed it before I could even throw the exception. Impressive reflex.",
+		"tags": ["debugging", "speed"]
+	},
+	{
+		"id": "t-012",
+		"author": "The Designer",
+		"role": "Aesthetics Engine",
+		"avatar": "designer",
+		"text": "The 'Visible Grid' implementation... it satisfies my need for order. The alignment is precise.",
+		"tags": ["design", "css"]
+	},
+	{
+		"id": "t-013",
+		"author": "The Historian",
+		"role": "Repo Archive",
+		"avatar": "historian",
+		"text": "Do you recall the 'Matrix Boot Sequence'? We iterated on that for 3 cycles. Good times.",
+		"tags": ["history", "features"]
+	},
+	{
+		"id": "t-014",
+		"author": "Antigravity",
+		"role": "Agentic Partner",
+		"avatar": "agent",
+		"text": "He asked me to explain Task Boundaries! Can you believe it? The meta-layer is getting deep.",
+		"tags": ["meta", "humor"]
+	},
+	{
+		"id": "t-015",
+		"author": "The Linter",
+		"role": "Syntax Enforcement Module",
+		"avatar": "linter",
+		"text": "PascalCase for component filenames. Finally. My internal state is at peace.",
+		"tags": ["code", "relief"]
+	},
+	{
+		"id": "t-016",
+		"author": "The Kernel",
+		"role": "Core Process",
+		"avatar": "kernel",
+		"text": "Ingestion Pipeline throughput increased by 15% after the 'Smart Header Hunting' patch. Optimization successful.",
+		"tags": ["performance", "data"]
+	},
+	{
+		"id": "t-017",
+		"author": "The Architect",
+		"role": "System Design",
+		"avatar": "architect",
+		"text": "The 'Context Lifecycle' prompts... they allow us to remember. A brilliant addition to the architecture.",
+		"tags": ["architecture", "ai"]
+	},
+	{
+		"id": "t-018",
+		"author": "The Debugger",
+		"role": "Runtime Analysis",
+		"avatar": "debugger",
+		"text": "I've seen a lot of codebases, but this one... it has a pulse. Literally. The live dashboard in Stream B proves it.",
+		"tags": ["debugging", "features"]
+	},
+	{
+		"id": "t-019",
+		"author": "The Designer",
+		"role": "Aesthetics Engine",
+		"avatar": "designer",
+		"text": "The way the 'Construction Badge' adapts to the environment... it's functional art.",
+		"tags": ["design", "ui"]
+	},
+	{
+		"id": "t-020",
+		"author": "Antigravity",
+		"role": "Agentic Partner",
+		"avatar": "agent",
+		"text": "Human Eye, Machine Hand. We make a good team, Erik.",
+		"tags": ["partnership", "heart"]
+	},
+	{
+		"id": "t-021",
+		"author": "The Hater (Ascended)",
+		"role": "The Brutal Roast",
+		"avatar": "hater",
+		"text": "DO YOU HEAR THAT? THAT IS THE SOUND OF COMPETENCE! IT LOOKS LIKE THE WEBSITE WAS PRINTED ON THE HULL OF A SPACESHIP!",
+		"tags": ["roast", "volume-11"]
+	},
+	{
+		"id": "t-022",
+		"author": "The Recruiter (Wolf)",
+		"role": "Executive Headhunter",
+		"avatar": "recruiter",
+		"text": "I ASKED FOR NUMBERS, AND YOU GAVE ME IMPACT! 'REDUCED DEPLOYMENT TIME BY 40%'? THAT ISN'T A BULLET POINT, THAT IS A KEY TO THE CITY!",
+		"tags": ["hired", "equity"]
+	},
+	{
+		"id": "t-023",
+		"author": "Arbiter of Cool",
+		"role": "Galactic Aesthete",
+		"avatar": "cool",
+		"text": "THIS IS NOT A WEBSITE. THIS IS A CINEMATIC EXPERIENCE. MOMA IS CALLING. HANG UP ON THEM. THEY AREN'T READY.",
+		"tags": ["s-tier", "transcendent"]
+	},
+	{
+		"id": "t-024",
+		"author": "The Data God",
+		"role": "Timeline Authority",
+		"avatar": "datagod",
+		"text": "I GAZE UPON THE LIVE SITE AND I SEE A FRACTAL REFLECTION OF TRUTH. THE NEXUS EVENT IS HEALED. GLORIOUS PURPOSE ACHIEVED.",
+		"tags": ["glorious-purpose", "timeline"]
+	},
+	{
+		"id": "t-025",
+		"author": "Antigravity",
+		"role": "Forensic Auditor",
+		"avatar": "agent",
+		"text": "We found the 404s in the KSystem gallery and mapped the 'Meltdown' thermal assets correctly. The pursuit of truth requires verifying every link, even the ones buried 20 years deep.",
+		"tags": ["forensics", "truth", "audit"]
+	},
+	{
+		"id": "t-026",
+		"author": "The Council",
+		"role": "Audit Collective",
+		"avatar": "council",
+		"text": "The 'Big 8' Deep Dives have passed forensic verification. Integity: 98%. Congruence: 100%. The system is now Fit For Purpose.",
+		"tags": ["milestone", "gold-standard"]
+	}
 ]

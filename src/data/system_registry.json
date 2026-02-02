@@ -1,0 +1,30 @@
+[
+	{
+		"topic": "The Air Gap",
+		"context": "Intellectual Property protection is paramount. Use restricted assets on local-only builds.",
+		"tech": "Environment Variables / .gitignore",
+		"impact": "Zero unauthorized IP leaks in public deploy.",
+		"tags": ["#Security", "#Architecture"]
+	},
+	{
+		"topic": "Forensic Brutalism",
+		"context": "The design philosophy: Expose the machinery. Show the build timers. Show the seams.",
+		"tech": "Astro / Tailwind",
+		"impact": "A portfolio that feels like an engineering tool, not a gallery.",
+		"tags": ["#Design", "#Philosophy"]
+	},
+	{
+		"topic": "AI Collaboration",
+		"context": "Agentic coding partnership. The 'Council' of personas (Linter, Architect, Hater).",
+		"tech": "LLM / Prompt Engineering",
+		"impact": "Accelerated development velocity by 3x.",
+		"tags": ["#AI", "#FutureOfWork"]
+	},
+	{
+		"topic": "Reality Check",
+		"context": "Dashboard metrics must be real. No vanity metrics allowed.",
+		"tech": "PowerShell / File Analysis",
+		"impact": "Verified: 32k LOC, 4 Sessions, 3 Protocols.",
+		"tags": ["#Transparency", "#Metrics"]
+	}
+]

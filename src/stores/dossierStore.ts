@@ -9,3 +9,9 @@ export function toggleDossier() {
 export function setDossierOpen(isOpen: boolean) {
 	isDossierOpen.set(isOpen);
 }
+
+export const isTeamOpen = atom(false);
+
+export function setTeamOpen(isOpen: boolean) {
+	isTeamOpen.set(isOpen);
+}

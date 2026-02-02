@@ -1,28 +1,45 @@
 ---
 title: Morpheus
-draft: true
-listed: false
+draft: false
+listed: true
 heroImage: /assets/placeholders/blueprint.jpg
 industry: consumer_electronics
 category: home_entertainment
 theme: hyperspace
-presentation_mode: standard
+presentation_mode: deep_dive
 date: 2008-01-01
 endDate: 2009-01-01
-duration: Active
-production: concept
+duration: 1 Year
+production: prototype
 employer: mechanistic
-role: mechanical_engineer
-teamSize: Unknown
+role: lead_mechanical_engineer
+teamSize: Core Team of 4
 client: []
-cast: []
-tags: []
-tools: []
+cast:
+  - name: Erik Norris
+    org: Mechanistic
+    role: Principal Mechanical Architect
+  - name: Chip
+    org: Orpheus Project
+    role: Lead
+  - name: Jenim
+    org: Orpheus Project
+    role: Firmware Lead
+tags:
+  - Mechanical Engineering
+  - Failure Analysis
+  - Supply Chain Management
+  - Logistics
+tools:
+  - pro_engineer
 toolIcons: []
 skillData: []
 additionalSkills: []
 metrics:
-  quotes: []
+  quotes:
+    - "Jenim could not talk to Chip. That's the error. Right on the screen. A total crash loop."
+    - "It wasn't the silicon at all. Eric Norris pins it on the thumb of God."
+    - "If you don't respect the actual physics of assembly, the thumb of God is going to find your project and is going to crush it."
   financial:
     toolingBudget: 0
     toolingActual: 0
@@ -30,11 +47,27 @@ metrics:
     margins: []
     quotes: []
   process:
-    engineeringChangeOrders: []
+    engineeringChangeOrders:
+      - Tooling Mod (Doorframe)
+      - K-Disc Alignment
+    yieldCrisis: 100% Scrap Rate (Avoided)
   governance:
-    ecos: []
+    ecos:
+      - Lens_Clearance_Mod
     dcos: 0
-  war_stories: []
+  war_stories:
+    - label: The Thumb of God
+      value: Mechanical Violence
+      description: "Diagnosed a 'Digital Crash' as physical failure. Assemblers were using excessive force to seat components, flexing the PCB and 'crushing' the traces (Mechanical Violence). Remedied by relieving interference points."
+    - label: The Logistics Empire
+      value: 400 SKUs
+      description: "Managed a logistics empire of 400 unique SKUs. Salvaged a 50-unit pilot build and a 300-unit production run that were destined for the scrap heap."
+    - label: 0-to-1 Tooling Save
+      value: IR Lens Hack
+      description: "The IR lens was too tall (0.60 vs 0.36 clearance). Instead of cutting a new mold ($$$/Time), I modified the doorframe tool to remove interference, preserving the schedule and budget."
+    - label: Acoustic Silence
+      value: 31dBA to 23dBA
+      description: "Dialed fans to the 7-8V sweet spot, reducing acoustic intensity by 30%. Turned an industrial machine into a whisper-quiet office device."
 war_stories: []
 forensic_metrics:
   quotes: []
@@ -42,7 +75,7 @@ stats: {}
 phase_stats:
   Strategy: 0
   Design: 0
-  Engineering: 0
+  Engineering: 100
   Production: 0
 phases: {}
 gallery: []
@@ -52,39 +85,54 @@ cyberspace:
   enable: true
   layout: linear
   stickies:
-  - id: intro
-    title: Morpheus
-    type: media
-    align: center
-    text: <strong>YEAR:</strong> 2007<br/><strong>ROLE:</strong> Unknown
-    featuredIndices: []
-    deck: []
-    legacy_deck: []
-    data:
-      scattered: false
-      src: /assets/placeholders/blueprint.jpg
+    - id: intro
+      title: Morpheus (Orpheus)
+      type: media
+      align: center
+      text: <strong>YEAR:</strong> 2008<br/><strong>ROLE:</strong> Principal Architect
       featuredIndices: []
-      images: []
-      data: {}
-  - id: details
-    title: PROJECT DATA
-    type: void
-    align: center
-    text: This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong>
-      Consumer Electronics
-    featuredIndices: []
-    deck: []
-    legacy_deck: []
-    data:
-      scattered: false
+      deck: []
+      legacy_deck: []
+      data:
+        scattered: false
+        src: /assets/placeholders/blueprint.jpg
+        featuredIndices: []
+        images: []
+        data: {}
+    - id: details
+      title: PROJECT DATA
+      type: void
+      align: center
+      text:
+        This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong>
+        Consumer Electronics
       featuredIndices: []
-      images: []
-      data: {}
+      deck: []
+      legacy_deck: []
+      data:
+        scattered: false
+        featuredIndices: []
+        images: []
+        data: {}
   narrative: []
 toolchain: []
 slug: morpheus
 productionScale: one_off
 ---
-## Morpheus
 
-> *Auto-generated scaffold from Multiverse Registry.*
+### Morpheus (Orpheus) Forensic Report
+
+#### I. PROJECT SUMMARY
+
+- **Role:** Principal Mechanical Architect (Mechanistic)
+- **Mandate:** Rescue the "Orpheus" pilot build from a catastrophic 100% failure rate.
+- **Core Achievement:** Identified "Mechanical Violence" (PCB flexing during assembly) as the root cause of digital failure, salvaging 350 units and stabilizing the logistics of 400 unique SKUs.
+
+#### II. THE ANATOMY OF FAILURE (Heuristic Analysis)
+
+- **The Trigger:** The "Orpheus" units were bricking immediately. Firmware lead (Jenim) suspected bad silicon.
+- **The Diagnosis:** Forensic analysis revealed the "Thumb of God"—assemblers were using excessive force to close the box due to tight tolerances, effectively crushing the PCB.
+- **The Fix:**
+  1.  **Mechanical Relief:** Relieved interference points to eliminate assembly stress.
+  2.  **Tooling Hack:** Modified the doorframe tool to clear the oversized IR lens (0.60" vs 0.36" gap) without scrapping the lens mold.
+  3.  **Acoustics:** Tuned thermal fans to 7-8V, dropping noise from 31dBA to 23dBA.
