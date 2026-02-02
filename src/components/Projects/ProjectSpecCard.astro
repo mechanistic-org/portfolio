@@ -35,10 +35,6 @@ const data = entry
 			employer: client, // mapping 'client' prop to 'employer' schema
 			date: year ? new Date(year.toString()) : new Date(),
 			impact: impact,
-			statusLabel: statusLabel || "Prototype",
-			teamSize: "Various",
-			duration: "Ongoing",
-			metrics: undefined, // Explicitly handle missing metrics in loose mode
 			toolchain: [],
 			tools: [],
 		};

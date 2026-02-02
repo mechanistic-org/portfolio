@@ -106,60 +106,7 @@ const projectsCollection = defineCollection({
 		cyberspace: z.any().optional(),
 
 		// HUD Intelligence (V4.2 Upgrade)
-		metrics: z
-			.object({
-				cogs: z
-					.object({ value: z.string(), label: z.string() })
-					.optional()
-					.or(z.record(z.unknown()).transform((val) => undefined)),
-				profitability: z
-					.object({ value: z.string(), label: z.string() })
-					.optional()
-					.or(z.record(z.unknown()).transform((val) => undefined)),
-				governance: z
-					.object({
-						ecos: z.array(z.string()).optional(),
-						dcos: z.number().optional(),
-						dcdCount: z.number().optional(), // Added legacy field
-					})
-					.optional()
-					.or(z.record(z.unknown()).transform((val) => undefined)),
-				interventions: z
-					.object({ count: z.number(), label: z.string() })
-					.optional()
-					.or(z.record(z.unknown()).transform((val) => undefined)),
-				quotes: z.array(z.string()).optional(), // Added quotes
-				time_to_market: z.record(z.unknown()).optional(), // Added time_to_market
-				financial: z
-					.object({
-						toolingBudget: z.number().optional(),
-						toolingActual: z.number().optional(),
-						costOfGoodsSold: z.array(z.any()).optional(),
-						margins: z.array(z.any()).optional(),
-					})
-					.optional()
-					.or(z.record(z.unknown()).transform((val) => undefined)),
-				process: z
-					.object({
-						engineeringChangeOrders: z.array(z.any()).optional(),
-						dcdCount: z.number().optional(),
-					})
-					.optional()
-					.or(z.record(z.unknown()).transform((val) => undefined)),
-				war_stories: z
-					.array(
-						z.union([
-							z.number(),
-							z.object({
-								label: z.string(),
-								value: z.string(),
-								description: z.string(),
-							}),
-						]),
-					)
-					.optional(),
-			})
-			.optional(),
+		metrics: z.any().optional(),
 
 		// Forensic Architecture (injected by hydrate_content.py)
 		toolchain: z.array(z.string()).optional(),
