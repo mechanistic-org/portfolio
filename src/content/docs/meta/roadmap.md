@@ -18,6 +18,8 @@ sidebar:
 - [x] **Visual Polish:** Starfield Transparency ("Black Curtain" Fix), Noise Calibration (Turbulence), WiggleLogo shadow removal.
 - [x] **Project Portal:** Full "Fleet View" integration with transparent Assembly/Timeline visualizations.
 - [x] **Site-Wide Stealth:** Extended transparent HUD to Colophon and Documentation pages.
+- [x] **HUD Layout Symmetry:** Resolved "Failed Center" layout by implementing absolute positioning for Scale (Left) and Metrics (Right).
+- [x] **Build Hardening:** Fixed systemic "Duplicate Mapping Key" YAML errors across 7 projects.
 
 ## Future / Backlog
 

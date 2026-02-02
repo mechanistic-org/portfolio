@@ -25,7 +25,7 @@ Your objective is to separate the conversation into two distinct streams. Do NOT
 #### Stream A: The Machine (Technical)
 
 - `src/content/docs/ARCHITECTURE.md` (Why code changed)
-- `src/content/docs/MAINTENANCE.md` (How to fix it)
+- `src/content/docs/handbook/OPERATIONS.md` (How to fix it)
 - `src/content/docs/ROADMAP.md` (What we finished)
 - `src/content/docs/meta/AGENCY_MEMORY.md` (Active focus)
 
