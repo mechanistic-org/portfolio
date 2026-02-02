@@ -38,11 +38,15 @@ const data = entry
 			statusLabel: statusLabel || "Prototype",
 			teamSize: "Various",
 			duration: "Ongoing",
+			metrics: undefined, // Explicitly handle missing metrics in loose mode
+			toolchain: [],
+			tools: [],
 		};
 
 // 1. Core Identification
 const id = entry ? entry.id.toUpperCase() : "KITCHEN-SINK";
-const date = new Date(data.date).getFullYear();
+const dateVal = new Date(data.date);
+const dateYear = dateVal.getFullYear();
 
 // 2. Dynamic Spec Map (The "Loop" capacity)
 // This can be expanded endlessly from the CSV in the future.
@@ -81,7 +85,7 @@ const statusColor =
 		<div class="flex items-center gap-4">
 			<span>REV: v1.0.4</span>
 			<span class="text-neutral-600">::</span>
-			<span>{date}</span>
+			<span>{dateYear}</span>
 		</div>
 	</div>
 

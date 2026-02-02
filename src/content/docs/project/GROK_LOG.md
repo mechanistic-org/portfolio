@@ -1,3 +1,10 @@
+---
+title: "The Grok Log"
+description: "The Project Constitution and Architectural Laws."
+sidebar:
+  order: 1
+---
+
 # THE GROK LOG
 
 > "Lightning in a Bottle"
