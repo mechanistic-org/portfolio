@@ -31,18 +31,30 @@ const otherPagesCollection = defineCollection({
 const projectsCollection = defineCollection({
 	loader: glob({ pattern: "**/*.mdx", base: "./src/content/projects" }),
 	schema: z.object({
-		title: z.string(),
+		title: z.string().catch("MISSING TITLE"),
 		slug: z.string().optional(),
 		date: z.coerce.date().optional(),
 		endDate: z.coerce.date().optional(),
 
-		employer: z.enum(EMPLOYER_VALUES as any).optional(),
-		industry: z.enum(INDUSTRY_VALUES as any).default("consumer_electronics"),
-		category: z.enum(CATEGORY_VALUES as any).optional(),
+		employer: z
+			.enum(EMPLOYER_VALUES as any)
+			.catch("Self-Employed")
+			.optional(),
+		industry: z
+			.enum(INDUSTRY_VALUES as any)
+			.catch("consumer_electronics")
+			.default("consumer_electronics"),
+		category: z
+			.enum(CATEGORY_VALUES as any)
+			.catch("Uncategorized")
+			.optional(),
 		tools: z.array(z.enum(TOOL_VALUES as any)).default([]),
 		production: z.enum(PRODUCTION_STATUS_VALUES as any).optional(),
 
-		client: z.array(z.enum(CLIENT_VALUES as any)).default([]),
+		client: z
+			.array(z.enum(CLIENT_VALUES as any))
+			.catch([])
+			.default([]),
 		tags: z.array(z.string()).default([]),
 
 		skillData: z
@@ -149,7 +161,7 @@ const projectsCollection = defineCollection({
 			.optional(), // Legacy fallback
 
 		// Theme Selector (Core Architecture)
-		theme: z.string().optional(),
+		theme: z.string().catch("hyperspace").optional(),
 		presentation_mode: z.string().optional(),
 
 		// Visibility

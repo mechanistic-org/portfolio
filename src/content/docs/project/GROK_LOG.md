@@ -182,3 +182,4 @@ sidebar:
 1.  **NO PASSIVE VOICE:** When reporting regressions, use Active Voice. "I deleted X," not "X was missing."
 2.  **OWN THE CLOBBER:** If a file works one day and breaks the next, assume "Edit Rot" (Agent Error) before "System Glitch."
 3.  **VERIFY PIXELS:** "It's Fixed" means "I see the pixels," not "The code compiled." Confusing the two is a fireable offense.
+4.  **ROOT CAUSE OVER PATCH:** Do not fix a syntax error without asking _why_ it happened. If a YAML key is missing, finding the _source_ (e.g., the Agent that wrote it) is more important than silencing the error.

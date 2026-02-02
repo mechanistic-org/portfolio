@@ -1,0 +1,38 @@
+name: Project CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  audit:
+    name: 🛡️ Shield Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install Python (for Shield Scripts)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: 🛡️ Audit Frontmatter (Shield 2)
+        run: npm run audit:frontmatter
+
+      - name: 🛡️ Check Astro Config
+        run: npm run astro check
+
+      # Note: Skipping check:hud (Shield 3) as it requires a running server
+      # We will add the static "The Jig" check here in Phase 2
