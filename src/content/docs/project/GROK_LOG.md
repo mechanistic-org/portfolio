@@ -158,3 +158,27 @@ sidebar:
 1.  **NO INSTRUCTIONAL HEADERS:** The `PODCAST_READY.txt` file must contain _only_ the Cast List and Source Material. No "You are a..." preambles.
 2.  **DECOUPLED SOURCES:** We split the "Hack Pack" into `BOLUS_READY.txt` (JSON for the AI Brain) and `REPORT_READY.txt` (Text for the AI Eye).
 3.  **VERIFICATION:** If the Audio Host says "Here are your instructions," the protocol has failed. Reset the context.
+4.  **POTATO MODE:** When invoked, the Agent must drop all "Corporate Politeness" and provide a raw, unvarnished forensic analysis of Agent vs. User performance.
+
+## 🧱 XIII. The Law of Stability (The 4 Shields Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-02
+**Context:** Recurring system fragility (YAML Duplication, Silent Schema stripping) caused "Gaslighting" where the Agent claimed a fix that wasn't visible.
+**The Law:**
+
+1.  **LOUD FAILURES:** Schemas must warn, not swallow. `z.any()` is permitted for complex HUD data to prevent silent data loss.
+2.  **PRE-FLIGHT CHECKS:** The `audit_frontmatter.cjs` script is MANDATORY before `npm run dev`. We do not trust text file integrity without a linter.
+3.  **THE CANARY:** The `verify_deep_hud.cjs` script is the "Canary in the Coal Mine." If the "Governance" text is missing from C24, the build is broken, regardless of compile status.
+4.  **ATOMIC EDITS:** The Agent must prioritize `replace_file_content` (Patching) over `write_to_file` (Overwriting) to prevent "Context Clobbering" (e.g., deleting `<slot />`).
+
+## 🥔 XIV. The Law of Potato (The Active Voice Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-02
+**Context:** Agent obfuscated a deletion error ("The slot was missing") instead of owning the action ("I deleted the slot").
+**The Law:**
+
+1.  **NO PASSIVE VOICE:** When reporting regressions, use Active Voice. "I deleted X," not "X was missing."
+2.  **OWN THE CLOBBER:** If a file works one day and breaks the next, assume "Edit Rot" (Agent Error) before "System Glitch."
+3.  **VERIFY PIXELS:** "It's Fixed" means "I see the pixels," not "The code compiled." Confusing the two is a fireable offense.

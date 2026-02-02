@@ -58,9 +58,19 @@ These scripts drive the "Forensic Data Factory."
 
 - **Symptom:** `MDXError: Unexpected character 0` or invalid JSX.
 - **Cause:** Unquoted keys starting with numbers (`01_intro:`) or `<` symbols in body text.
-- **Fix:**
   - Quote Keys: `"01_intro":`
   - Escape Brackets: `&lt;15kCOGS` or `less than 15k`.
+
+### 🔴 "Deep HUD" Missing (Stability Protocol)
+
+- **Symptom:** Project Page loads, but "Intelligence Grid" (Row 2 metrics) is empty or invisible.
+- **Cause:**
+  1.  **Silent Stripping:** Schema mismatch caused Zod to delete the `metrics` object.
+  2.  **Slot Deletion:** `UniversalHUD` missing `<slot />`.
+- **Protocol: The 4 Shields.**
+  1.  **Run Checks:** `npm run audit:frontmatter` (Shield 2) + `npm run check:hud` (Shield 3).
+  2.  **Verify Schema:** Ensure `content.config.ts` uses `metrics: z.any().optional()`.
+  3.  **Verify Layout:** Check `UniversalHUD.astro` for the default `<slot />`.
 
 ---
 
