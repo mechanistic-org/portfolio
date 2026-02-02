@@ -203,8 +203,8 @@ const statusColor =
 							GOVERNANCE
 						</dt>
 						<dd class="font-mono text-xs font-bold text-white">
-							{data.metrics.governance.dcdCount
-								? `${data.metrics.governance.dcdCount} DCDs`
+							{data.metrics.governance.dcdCount || data.metrics.governance.dcos
+								? `${data.metrics.governance.dcdCount || data.metrics.governance.dcos} DCDs`
 								: "N/A"}
 							{data.metrics.governance.ecos && ` / ${data.metrics.governance.ecos.length} ECOs`}
 						</dd>

@@ -118,8 +118,9 @@ const projectsCollection = defineCollection({
 					.or(z.record(z.unknown()).transform((val) => undefined)),
 				governance: z
 					.object({
-						ecos: z.array(z.string()),
-						dcos: z.number(),
+						ecos: z.array(z.string()).optional(),
+						dcos: z.number().optional(),
+						dcdCount: z.number().optional(), // Added legacy field
 					})
 					.optional()
 					.or(z.record(z.unknown()).transform((val) => undefined)),
@@ -127,6 +128,8 @@ const projectsCollection = defineCollection({
 					.object({ count: z.number(), label: z.string() })
 					.optional()
 					.or(z.record(z.unknown()).transform((val) => undefined)),
+				quotes: z.array(z.string()).optional(), // Added quotes
+				time_to_market: z.record(z.unknown()).optional(), // Added time_to_market
 				financial: z
 					.object({
 						toolingBudget: z.number().optional(),
