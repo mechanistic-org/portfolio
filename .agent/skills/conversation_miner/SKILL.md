@@ -65,7 +65,7 @@ Generate a single markdown document categorized by file. Use tags to indicate st
 **Example Output:**
 
 ```markdown
-### `docs/MAINTENANCE.md` (Technical Stream)
+### `docs/handbook/OPERATIONS.md` (Technical Stream)
 
 **Add to "Troubleshooting" section:**
 

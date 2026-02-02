@@ -166,6 +166,50 @@ const statusColor =
 		</div>
 	</div>
 
+	{/* --- DEEP HUD ROW 2: INTELLIGENCE GRID (COGS / MARGINS / GOVERNANCE) --- */}
+	{
+		(data.metrics?.cogs || data.metrics?.profitability || data.metrics?.governance) && (
+			<div class="grid grid-cols-3 gap-px border-t border-neutral-800 bg-neutral-800">
+				{/* COGS CELL */}
+				{data.metrics?.cogs && (
+					<div class="flex flex-col bg-neutral-900/50 px-4 py-3 backdrop-blur-sm">
+						<dt class="mb-1 font-mono text-[9px] tracking-wider text-neutral-500 uppercase">
+							{data.metrics.cogs.label || "COGS"}
+						</dt>
+						<dd class="font-mono text-xs font-bold text-white">{data.metrics.cogs.value}</dd>
+					</div>
+				)}
+
+				{/* MARGIN CELL */}
+				{data.metrics?.profitability && (
+					<div class="flex flex-col bg-neutral-900/50 px-4 py-3 backdrop-blur-sm">
+						<dt class="mb-1 font-mono text-[9px] tracking-wider text-emerald-500 uppercase">
+							{data.metrics.profitability.label || "MARGIN"}
+						</dt>
+						<dd class="font-mono text-xs font-bold text-white">
+							{data.metrics.profitability.value}
+						</dd>
+					</div>
+				)}
+
+				{/* GOVERNANCE CELL */}
+				{data.metrics?.governance && (
+					<div class="flex flex-col bg-neutral-900/50 px-4 py-3 backdrop-blur-sm">
+						<dt class="mb-1 font-mono text-[9px] tracking-wider text-amber-500 uppercase">
+							GOVERNANCE
+						</dt>
+						<dd class="font-mono text-xs font-bold text-white">
+							{data.metrics.governance.dcdCount
+								? `${data.metrics.governance.dcdCount} DCDs`
+								: "N/A"}
+							{data.metrics.governance.ecos && ` / ${data.metrics.governance.ecos.length} ECOs`}
+						</dd>
+					</div>
+				)}
+			</div>
+		)
+	}
+
 	{/* --- DECORATIVE CORNERS (The "Tech" Feel) --- */}
 	<div
 		class="pointer-events-none absolute top-0 left-0 h-2 w-2 border-t border-l border-[#2E5CFF] opacity-0 transition-opacity group-hover:opacity-100"

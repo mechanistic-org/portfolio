@@ -24,9 +24,9 @@ You must scan these files to establish state:
 
 1.  `src/content/docs/meta/AGENCY_MEMORY.md` (Active Context)
 2.  `src/content/docs/project/GROK_LOG.md` (The Constitution)
-3.  `src/content/docs/MAINTENANCE.md` (System Manual)
+3.  `src/content/docs/handbook/OPERATIONS.md` (System Manual)
 4.  `src/content/docs/ROADMAP.md` (Status)
-5.  `src/content/docs/manifesto.md` (Philosophy)
+5.  `src/content/docs/meta/MANIFESTO.md` (Philosophy)
 
 ### 3. Confirmation Protocol (Mandatory)
 
