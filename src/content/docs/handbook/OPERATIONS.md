@@ -113,3 +113,46 @@ These scripts drive the "Forensic Data Factory."
 
 - **Context:** 3D rendered logos (`EN_logo_1200`).
 - **Rule:** We accept high-res PNGs wrapped in SVG as the "Sovereign Asset" because the source is 3D geometry, not vector paths. Do not attempt to wireframe them.
+
+---
+
+## 6. UI Architecture ("Air Traffic Control")
+
+To prevent "Stacking Wars", we vertically partition the Z-space into strict flight levels.
+
+### The Z-Index Map
+
+| Layer             | Z-Index     | Usage                                                               |
+| :---------------- | :---------- | :------------------------------------------------------------------ |
+| **GOD TIER**      | `9999`      | Critical Debug Overlays, Critical Error Modals, Mouse Cursors       |
+| **ORBIT**         | `1000+`     | Full Screen Menus (Command Palette `z-[1001]`), Modals              |
+| **STRATOSPHERE**  | `500-999`   | Tooltips, Popovers, Dropdowns                                       |
+| **HIGH ALTITUDE** | `100`       | Sticky Headers, Top HUDs, Navigation Bars                           |
+| **CRUISING**      | `50`        | Floating Action Buttons (FABs), Toast Notifications                 |
+| **LOW ALTITUDE**  | `10-40`     | Sticky Section Headers (`z-10`), Interactive Sticky Stages (`z-40`) |
+| **GROUND**        | `1`         | Standard interactive elements                                       |
+| **SUBTERRANEAN**  | `0` or `-1` | Backgrounds, Noise Layers, Canvas (Three.js)                        |
+
+**Rules:**
+
+- **Never** use arbitrary numbers (e.g., `z-53`). Stick to the tiers.
+- **Top HUD:** Currently `z-[9999]` to override legacy Nav issues, but targeted for **HIGH ALTITUDE**.
+
+---
+
+## 7. Operational Utilities (Legacy/Maintenance)
+
+### `scripts/setup_workspace.py` (The Factory)
+
+- **Function:** Initializes the local directory structure (`~/ErikNorris_Workspace`) based on `Main.csv`.
+- **Use Case:** Onboarding a new machine or re-paving the environment.
+
+### `scripts/refine_skills.py` (The Balancer)
+
+- **Function:** Generates unique skill profiles for projects to prevent "Radar Chart Duplication".
+- **Output:** Overwrites `data_source/Skills.csv`.
+
+### `scripts/generate_content.py` (The Writer)
+
+- **Function:** Generates placeholder "Narrative STAR" case studies for projects that lack manual content.
+- **Output:** Creates files in `data_source/manual_content/`.
