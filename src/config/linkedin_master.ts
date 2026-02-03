@@ -1,4 +1,5 @@
 export const linkedinMaster = {
+	tagline: "Sr. Staff ME | Designer | Forensic Architect | High-Fidelity Hardware & Program Rescue",
 	about: `
 I architect the hardware interface for the physical world—from the heat of a Fissler BBQ to the surgical precision of a KaVo Dental Chair.
 
