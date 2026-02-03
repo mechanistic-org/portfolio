@@ -14,7 +14,8 @@
 		"prebuild": "npm run audit:frontmatter",
 		"content:hydrate": "python scripts/hydrate_content.py",
 		"content:modernize": "python scripts/modernize_content.py",
-		"assets:process": "python scripts/process_assets.py"
+		"assets:process": "python scripts/process_assets.py",
+		"test:visual": "npx tsx scripts/visual_smoke_test.ts"
 	},
 	"dependencies": {
 		"@astro-community/astro-embed-youtube": "^0.5.9",

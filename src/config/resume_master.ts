@@ -10,42 +10,43 @@ export interface ResumeRole {
 export const resumeMaster = {
 	header: {
 		name: "ERIK NORRIS",
-		title: "Sr. Staff Mechanical Engineer / Designer | Forensic Architect",
-		tagline: "Autodidact Technical Polyglot | Concept to Production | BBQs to Dental Chairs",
+		title: "Principal Mechanical Architect | Forensic Specialist",
+		// Updated Tagline per user request (LinkedIn Hybrid)
+		tagline:
+			"Sr. Staff ME | Designer | Forensic Architect | High-Fidelity Hardware & Program Rescue",
 		contact: {
 			location: "Redwood City, CA",
-			// phone: "Removed for Privacy",
 			email: "erik@eriknorris.com",
 			linkedin: "linkedin.com/in/eriknorris",
 			portfolio: "eriknorris.com",
+			resume: "resume.eriknorris.com",
+			// phone: "Removed for Privacy", // Kept commented out, handled in template
 		},
 	},
 	summary: {
-		// Mode B: Forensic Architect Summary
+		// Mode B: Forensic Architect Summary (Polished)
 		executive:
-			"I architect the hardware interface for the physical world—from the heat of a Fissler BBQ to the surgical precision of a KaVo Dental Chair. My career is defined by a relentless drive to translate 'Concept' into 'Mass Production' across every conceivable domain. I have helped validate the most beautiful PC ever made (SGI Indigo), engineered the Gold Standard for pro audio consoles (Avid D-Control), and optimized the OG gaming platform (Xbox). Whether it's managing the 150-watt thermal load of a retinal headset, ensuring IP69K washdown compliance for food robotics, or guiding a Class III cardiac catheter through the FDA—the physics change, but the mission remains the same: Zero Yield Loss. Zero Cosmetic Defects. Total Functional Integrity.",
+			"Engineering lead specializing in the recovery of high-complexity hardware programs through rigorous forensic analysis and surgical structural intervention. Proven record of stabilizing thermally hostile, high-density architectures (A/V Consoles, Home Gateways, Servers) while maintaining ruthless COGS discipline and Class A cosmetic standards. Expert at bridging the gap between Industrial Design intent and offshore manufacturing reality during 'Death March' schedules. Personally engineered and released over 113 unique mechanical parts into production, successfully transitioning legacy product lines to high-volume offshore manufacturing.",
 	},
 	competencies: {
 		engineering: [
-			"Forensic Engineering",
-			"Mechanical Architecture",
-			"Complex Surface Modeling (Pro/E, Creo)",
-			"Mechanism Design",
-			"Thermal Management (Active/Passive)",
+			"Pro/ENGINEER (Wildfire/Creo)",
+			"Advanced Surface Development",
+			"Sheet Metal Origami (Complex Folding)",
+			"Plastic Injection Molding (Structural Foam & Thin-wall)",
 		],
 		manufacturing: [
-			"New Product Introduction (NPI)",
-			"Design for Manufacturing (DFM)",
-			"Root Cause Analysis & Yield Improvement",
-			"Injection Molding (Class A)",
-			"Die Casting & Thixomolding",
-			"Sheet Metal (Progressive)",
+			"Forensic Log Analysis",
+			"ECO/ECN Codification",
+			"Yield Management",
+			"Vendor Liaison (VTech, Jetcrown, Mass Precision)",
+			"DFM/DFA",
 		],
 		tools: [
-			"PTC Creo / Pro/ENGINEER",
-			"PLM (Windchill Admin)",
-			"Onshape / SolidWorks",
-			"GD&T / Tolerance Analysis",
+			"CFD Simulation Analysis",
+			"DOE Thermal Matrix Testing",
+			"High-Velocity Airflow Architecture",
+			"Heat Sink Optimization",
 		],
 		regulatory: [
 			"Technical Program Management",
@@ -104,54 +105,110 @@ export const resumeMaster = {
 			blurb:
 				"Sole Mechanical Engineer responsible for the M500, M300, and Cinema One product lines.",
 			bullets: [
-				"**Crisis Management:** Detected 'Flow Mark' defects in 1,200 parts (Cinema One). Exercised **Line-Down** authority to reject inventory and force a root-cause gating change, establishing 'Apple-tier' cosmetic standards.",
+				"**Crisis Management:** Detected 'Flow Mark' defects in 1,200 parts (Cinema One). Exercised **Line-Down** authority to reject inventory and establish 'Apple-tier' cosmetic standards.",
 				"**Cost Reduction:** Redesigned the 'Macduff' chassis lid, consolidating three parts into one. Reduced assembly time by **15 minutes** and eliminated fastener count by 30%.",
-				"**System Integration:** Integrated slot-loading optical drives (Blu-ray) with custom vibration isolation dampers to prevent skip/read errors during operation.",
+				"**System Integration:** Integrated slot-loading optical drives (Blu-ray) with custom vibration isolation dampers to prevent skip/read errors.",
 			],
 		},
 		{
-			company: "DIGIDESIGN (AVID TECHNOLOGY)",
-			title: "Lead Mechanical Engineer / Industrial Designer",
+			company: "DIGIDESIGN (AVID) - SC48",
+			title: "Lead Mechanical Engineer | Project Lux",
 			location: "Daly City, CA",
-			dates: "2003 - 2008",
-			blurb: "Led flagship console architecture (D-Control, C|24, SC48).",
+			dates: "2007 - 2008",
+			blurb: "Architect an 'Embedded Live Sound' console under a ruthless <$15k COGS mandate.",
 			bullets: [
-				"**SC48 'Lux' Console:** Solved a critical 75°C CPU thermal shutdown during DVT by redesigning the chassis height from 3U to 4U and optimizing internal airflow paths. Eliminated custom aluminum extrusions, reducing chassis cost by **20%**.",
-				"**C|24 Governance:** Enforced strict **Data Control Drawing (DCD)** protocols for the integration of 19 PCBs, achieving 100% mechanical fit on the first pilot build.",
-				"**C|24 Manufacturing:** Designed a 'Vertical Hanging' fixture for painting ABS sidecaps, solving a 2mm warp/shrinkage issue that was causing assembly failure.",
+				"**The Hard Ore:** Eliminated a 100% show-stopping thermal failure by identifying the **75°C CPU shutdown threshold** via forensic log analysis (SC48_lux_thermal-testing.pdf); engineered a custom **4U side-intake ducting system** (P/N 9420-58856-00) that stabilized internal temperature rise to **22.6°C**.",
+				"**The Rhythm:** Managed high-velocity 'War Room' coordination between Industrial Design (ID) aesthetic constraints and Electrical Engineering (EE) thermal loads, utilizing a **16+ configuration test matrix** to validate the cooling architecture before tooling.",
+				"**The Integer:** Slashed mechanical material costs to **20% of total COGS** by replacing expensive aluminum extrusions with the **'4U Rake Back I-Beam'** (P/N 9420-58317-00), a custom folded steel spine that maintained touring-grade rigidity.",
 			],
 		},
 		{
-			company: "WEBTV / MICROSOFT",
-			title: "Mechanical Engineering Consultant",
-			location: "Mountain View, CA",
-			dates: "1999 - 2003",
-			blurb: "High-level surfacing and design consultancy via Mechanistic.",
+			company: "DIGIDESIGN (AVID) - C|24",
+			title: "Lead Mechanical Engineer | Project Curtis",
+			location: "Daly City, CA",
+			dates: "2006 - 2007",
+			blurb:
+				"Execute a RoHS/Refresh of legacy hardware to eliminate a $200 royalty while maintaining a $9,995 MSRP.",
 			bullets: [
-				"**Project Cortez (Wireless Keyboard):** Delivered complex, organic Pro/E surfaces for the infrared keyboard in **6 weeks**. Resolved a critical 0.05mm key pitch mismatch between ID intent and Silitek’s tooling.",
-				"**Project Elmer/Zeus (Servers):** Engineered rapid-prototype server enclosures for CES. Managed a hybrid build (soft-tool metal + CNC plastic) to deliver 5 functional units in **4 weeks**.",
-				"**Xbox Division:** Transitioned engineering assets from UltimateTV to Xbox, designing EMI liners and HDD carriers for early development kits.",
+				"**The Hard Ore:** Recovered Pilot yield on cosmetic plastics from **2.50mm warp to <0.50mm** via custom fixture engineering ('Method A'). Codified the vertical gravity-cure process in **ECO 12740** to utilize the glass-transition phase for straightness.",
+				"**The Rhythm:** Executed a dual-source bridge strategy by engaging Mass Precision (Silicon Valley) for emergency manual fabrication to bypass a critical **'No-Bid' supply chain gap** from the primary overseas vendor.",
+				"**The Integer:** Slashed COGS to achieve **51.8% Gross Margin** by eliminating legacy royalty structures and integrating 19 PCBs and 15 chassis parts into a compliant, RoHS-refreshed architecture.",
 			],
 		},
 		{
-			company: "MECHANISTIC",
-			title: "Principal / Freelance Product Designer",
-			location: "Bay Area",
-			dates: "1999 - 2003",
-			blurb: "Provided expert CAD surfacing and mechanical engineering services.",
-			bullets: [
-				"Provided expert CAD surfacing and mechanical engineering services for clients including Apple, Motorola, and SGI.",
-				"Designed complex organic surfaces for consumer peripherals using Pro/ENGINEER.",
-			],
-		},
-		{
-			company: "FROGDESIGN",
-			title: "Mechanical Designer",
+			company: "KALEIDESCAPE (ORPHEUS) - KSYSTEM-120",
+			title: "Senior Mechanical Design Engineer",
 			location: "Sunnyvale, CA",
-			dates: "1997 - 1998",
-			blurb: "Bridged the gap between high-concept Industrial Design and mass production.",
+			dates: "2008 - 2015",
+			blurb:
+				"Manufacturing ramp of high-density A/V servers bridging legacy systems and low-cost players.",
 			bullets: [
-				"Design Fidelity: Maintained subtle surface, gap, and finish requirements while ensuring manufacturability for clients like KaVo (Dental Systems) and Newscorp (Satellite Receivers).",
+				"**The Hard Ore:** Defeated the **'Thumb of God' flex crisis** (PCB crash loop) by directing surgical modifications to the electronics tray, including 'peninsula' relief slots (ECO 789/817) to prevent chassis walls from shearing resistors during assembly.",
+				'**The Rhythm:** Remediated a **0.005" tolerance stack-up error** in the fan tray assembly that prevented proper lid closure, averting a production yield crisis.',
+				"**The Integer:** Directed manufacturing transfer to Sanmina Guadalajara, resolving 3 critical stop-ship interference issues and negotiating CPU thermal solution unit price from **$9.63 down to $9.25**.",
+			],
+		},
+		{
+			company: "DIGIDESIGN (AVID) - D-COMMAND",
+			title: "Lead Mechanical Engineer | Project Danko",
+			location: "Daly City, CA",
+			dates: "2004 - 2005",
+			blurb:
+				"Engineer a mid-format control surface utilizing flagship architecture under extreme schedule compression.",
+			bullets: [
+				"**The Hard Ore:** Eliminated **5mm structural offsets** in chassis mating and a 'hammer-to-fit' assembly mode via **ECO 8000**, implementing universal mounting slots on rear brackets to force alignment across drifting extrusion profiles.",
+				"**The Rhythm:** Managed the entire mechanical documentation release solo, delivering **109 unique drawings** (Assemblies, Extrusions, Sheetmetal, Plastics) for the D-Command release under a 2-week deadline.",
+				"**The Integer:** Secured **-2.2dB EMI headroom margin** through rapid cable routing optimization and improved gasket sealing on RJ45 ports after initial scans exceeded Class A limits.",
+			],
+		},
+		{
+			company: "DIGIDESIGN (AVID) - D-CONTROL",
+			title: "Lead Mechanical Engineer | Project Buckley",
+			location: "Daly City, CA",
+			dates: "2003 - 2004",
+			blurb:
+				"Deliver the mechanical chassis and stand architecture for the 'ICON' flagship console.",
+			bullets: [
+				"**The Hard Ore:** Rescued the production line from a **4-week 'Line Down' stoppage** by re-engineering structural foam side caps to resolve a **50% yield failure rate** (ECO 6310).",
+				'**The Rhythm:** Modified geometric tolerances (increasing boss diameters from 0.37" to 0.25") to eliminate assembly stress cracking and accommodate molding variances.',
+				"**The Integer:** Stabilized escalating COGS by consolidating extrusion profiles to a **single unified design** across 7 modular stand configurations.",
+			],
+		},
+		{
+			company: "WEBTV (MICROSOFT) - GALAXY",
+			title: "Principal Mechanical Architect",
+			location: "Mountain View, CA",
+			dates: "2001 - 2003",
+			blurb:
+				"Architect a Home Network Gateway integrating a high-heat AMD K7 CPU into a consumer form factor.",
+			bullets: [
+				"**The Hard Ore:** Engineered a thermal architecture dissipating **150 Watts** within a 300mm footprint at 45°C ambient; specified a 28.3 CFM airflow tunnel and 50x60x30mm extruded heatsink.",
+				"**The Rhythm:** Resolved 100% of critical chassis warpage defects by redesigning stamping features from 'drawn standoffs' to **'Hook 29' details** with integrated strengthening ribs.",
+				"**The Integer:** Managed a **$14,200/month solo engineering burn rate**, simultaneously driving Galaxy, Mercury, and Xbox deliverables through a centralized FTP hub.",
+			],
+		},
+		{
+			company: "WEBTV (MICROSOFT) - CORTEZ",
+			title: "Product Designer",
+			location: "Mountain View, CA",
+			dates: "2000 - 2001",
+			blurb: "Mechanical design and complex surfacing for a reference wireless keyboard.",
+			bullets: [
+				"**The Hard Ore:** Rectified a **0.05mm accumulated tolerance error** between Industrial Design (19mm pitch) and vendor tooling (19.05mm) that threatened to misalign the bezel.",
+				"**The Rhythm:** Executed a 43-hour sprint to engineering a **3-15 degree variable IR transmission angle** and organic surface lofting into the primary housing geometry.",
+				"**The Integer:** Managed disparate vendor data streams (Panasonic/Silitek) to unify the mechanical database while reducing model weight to meet the **0.6kg target**.",
+			],
+		},
+		{
+			company: "WEBTV (MICROSOFT) - ELMER",
+			title: "Lead Mechanical Engineer",
+			location: "Mountain View, CA",
+			dates: "1999 - 2000",
+			blurb: "Rapidly deliver 'roadworthy' demonstration enclosures for the WCS and CES 2001.",
+			bullets: [
+				"**The Hard Ore:** Optimized convective airflow by redesigning chassis perforation patterns and implementing **'ThermaPad' gap fillers** to maintain 'dead nuts' flatness for CPU heat spreader contact.",
+				"**The Rhythm:** Enforced a strict **4-40 UNC hardware standardization** across the assembly, purging metric equivalents to prevent assembly line failure during a compressed 9-day fabrication cycle.",
+				"**The Integer:** Orchestrated delivery of 5 server enclosures and 12 node units by managing parallel workstreams between sheet metal (E-M Solutions) and model shops (Sputnik).",
 			],
 		},
 		{

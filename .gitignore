@@ -31,3 +31,4 @@ r2_backup_excluded/
 public/assets/r2/
 scripts/bin/
 ffmpeg_temp/
+/tools/

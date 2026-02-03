@@ -106,9 +106,11 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Idle / Mining (Complete).**
-- **Next Step:** Ready for next objective.
-- **Context:** **STICKIE PROTOCOL SECURED.** `hydrate_content.py` hardened against data loss. Documentation aligned.
+- **Active Task:** **Idle. (Resume Polish Complete).**
+- **Next Step:** Return to Deep Dive creation.
+- **Context:** **RESUME PIPELINE SECURED.** `resume_master.ts` is V2. LinkedIn is Synced. PDF is Auto-Deployed. Dark Mode Fixed.
+- **Recent Win:** Successfully executed "Forensic V2" polished resume and synchronized it across LinkedIn and PDF.
+- **Deferred Decision:** **"Death March" Word Choice** - We flagged the term "Death March" in the Resume Summary as potentially too aggressive. **ACTION:** Review this term during the next major Deep Dive/Content session. Consider "Schedule Compression" or "High-Velocity".
 - **Recent Win:** Successfully deployed "Stickie Safety" laws to Production. Fixed `dist/search-index.json` build verification.
 
 * **Key Decision (Protocol):** **"Stickies over Bubbles"** - We renamed the protocol to `STICKIE_PROTOCOL.md` to match the UI Code. "Bubble" refers strictly to the _folder_. "Stickie" refers to the _artifact_.

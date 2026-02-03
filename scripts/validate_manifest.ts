@@ -43,39 +43,67 @@ const projectSchema = z.object({
 	heroImage: z.string().optional(),
 });
 
+import matter from "gray-matter";
+
 function validateManifests() {
 	console.log("🥔 Potato Mode: Running Bulk Manifest Validation (The Jig)...");
+	console.log("🛡️  Quality Gate: Active (Trapping 'DEFAULT' and 'placeholders')");
 
 	const projectsDir = path.join(process.cwd(), "src/content/projects");
 	const files = globSync(`${projectsDir}/**/*.mdx`);
 
 	let passed = 0;
 	let failed = 0;
+	let warnings = 0;
 
 	files.forEach((file) => {
 		try {
 			const content = fs.readFileSync(file, "utf-8");
-			const match = content.match(/^---\s+([\s\S]*?)\s+---/);
+			const parsed = matter(content);
 
-			if (!match) {
-				console.error(`❌ NO FRONTMATTER: ${path.basename(file)}`);
+			// 1. Hard Schema Check (Crash Gate)
+			const result = projectSchema.safeParse(parsed.data);
+
+			if (!result.success) {
+				console.error(`❌ SCHEMA FAIL: ${path.basename(file)}`);
+				console.error(result.error.issues);
 				failed++;
 				return;
 			}
 
-			// Parse YAML (Simple regex extraction for key fields to test Zod)
-			// Note: In a real script we might use js-yaml, but here we want to test the Zod Logic
-			// For this "Jig", we will rely on checking if the file is *readable* and contains basic keys.
-			// A full Zod run requires parsing YAML to JSON first.
+			// 2. Quality Check (Quality Gate)
+			const data = result.data;
+			let fileWarnings: string[] = [];
 
-			// Simplified check for empty files or missing titles
-			if (!content.includes("title:")) {
-				console.error(`❌ MISSING TITLE KEY: ${path.basename(file)}`);
-				failed++;
-				return;
+			// Recursive function to find "DEFAULT" or placeholders
+			function scanForQuality(obj: any, pathStr: string = "") {
+				if (typeof obj === "string") {
+					if (obj.includes("DEFAULT")) {
+						fileWarnings.push(`  ⚠️  Unpolished Content: ${pathStr} = "${obj}"`);
+					}
+					if (obj.includes("placeholder") || obj.includes("/assets/placeholders")) {
+						fileWarnings.push(`  ⚠️  Placeholder Asset: ${pathStr} = "${obj}"`);
+					}
+				} else if (Array.isArray(obj)) {
+					obj.forEach((item, i) => scanForQuality(item, `${pathStr}[${i}]`));
+				} else if (typeof obj === "object" && obj !== null) {
+					Object.keys(obj).forEach((key) => {
+						scanForQuality(obj[key], `${pathStr}.${key}`);
+					});
+				}
 			}
 
-			passed++;
+			scanForQuality(data);
+
+			if (fileWarnings.length > 0) {
+				console.warn(`⚠️  QUALITY WARNING: ${path.basename(file)}`);
+				fileWarnings.forEach((w) => console.warn(w));
+				warnings++;
+			}
+
+			if (result.success) {
+				passed++;
+			}
 		} catch (e) {
 			console.error(`💥 CRASH: ${path.basename(file)}`, e);
 			failed++;
@@ -83,6 +111,9 @@ function validateManifests() {
 	});
 
 	console.log(`\n📊 Report: ${passed} Passed, ${failed} Failed.`);
+	if (warnings > 0) {
+		console.log(`⚠️  Quality Warnings: ${warnings} (Site is live, but content is unpolished)`);
+	}
 }
 
 validateManifests();

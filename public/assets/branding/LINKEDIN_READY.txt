@@ -1,6 +1,8 @@
 === LINKEDIN ABOUT SECTION (COPY BELOW) ===
 I architect the hardware interface for the physical world—from the heat of a Fissler BBQ to the surgical precision of a KaVo Dental Chair.
 
+𝗦𝗽𝗲𝗰𝗶𝗮𝗹𝗶𝘇𝗲𝘀 𝗶𝗻 𝗿𝗲𝗰𝗼𝘃𝗲𝗿𝗶𝗻𝗴 𝘀𝘁𝗮𝗹𝗹𝗲𝗱 𝗵𝗶𝗴𝗵-𝗰𝗼𝗺𝗽𝗹𝗲𝘅𝗶𝘁𝘆 𝗽𝗿𝗼𝗴𝗿𝗮𝗺𝘀 𝘁𝗵𝗿𝗼𝘂𝗴𝗵 𝗿𝗶𝗴𝗼𝗿𝗼𝘂𝘀 𝗳𝗼𝗿𝗲𝗻𝘀𝗶𝗰 𝗮𝗻𝗮𝗹𝘆𝘀𝗶𝘀.
+
 My career is defined by a relentless drive to translate "Concept" into "Mass Production" across every conceivable domain. I have engineered the most beautiful PC ever made (SGI Indigo), defined the Gold Standard for pro audio consoles (Avid D-Control), and pioneered the OG gaming platform (Xbox).
 
 Whether it's managing the 150-watt thermal load of a retinal headset, ensuring IP69K washdown compliance for food robotics, or guiding a Class III cardiac catheter through the FDA—the physics change, but the mission remains the same: Zero Yield Loss. Zero Cosmetic Defects. Total Functional Integrity.
@@ -36,7 +38,7 @@ TECHNICAL CORE
 
 === EXPERIENCE SECTIONS (COPY INDIVIDUALLY) ===
 --- HYPHEN ---
-𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Architecting the "Factory-in-a-Box" food robotics platform to survive IP69K washdown while orchestrating 350+ actuators.
+𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Lead engineer for the 'Factory-in-a-Box' food robotics platform.
 
 ▪️ Integrated 350+ electromechanical actuators into a constrained chassis.
 
@@ -46,136 +48,117 @@ TECHNICAL CORE
 
 
 --- NOON HOME ---
-𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Creating a "Magic Glass" switch that feels mechanical but looks seamless.
+𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Lead mechanical architect for the 'Haptic Switch' smart lighting controller.
 
 ▪️ Designed a floating flexure system to isolate the OLED display stack from mounting forces, resulting in 𝘇𝗲𝗿𝗼 𝗰𝗼𝘀𝗺𝗲𝘁𝗶𝗰 𝘆𝗶𝗲𝗹𝗱 𝗹𝗼𝘀𝘀 at assembly.
 
-▪️ Collaborated with ID to achieve "dead-front" aesthetics using precision tint-matching and seamless glass integration.
+▪️ Collaborated with ID to achieve 'dead-front' aesthetics using precision tint-matching and seamless glass integration.
 
 
 --- AVEGANT ---
-𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Dissipating 150W equivalent heat load from a retinal display headset without burning the user.
+𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Mechanical Lead for mixed-reality retinal imaging headsets.
 
-▪️ 𝗧𝗵𝗲𝗿𝗺𝗮𝗹 𝗘𝗻𝗴𝗶𝗻𝗲𝗲𝗿𝗶𝗻𝗴: Utilized the magnesium headband as a passive heat sink to dissipate heat, resolving a critical "Hot Head" user complaint.
+▪️ 𝗧𝗵𝗲𝗿𝗺𝗮𝗹 𝗘𝗻𝗴𝗶𝗻𝗲𝗲𝗿𝗶𝗻𝗴: Utilized the magnesium headband as a passive heat sink to dissipate 150W equivalent heat load, resolving a critical 'Hot Head' user complaint.
 
 ▪️ 𝗠𝗲𝗰𝗵𝗮𝗻𝗶𝘀𝗺 𝗗𝗲𝘀𝗶𝗴𝗻: Engineered a high-precision IPD adjustment mechanism, ensuring optical alignment stability under drop-test conditions.
 
 
 --- KALEIDESCAPE ---
-𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Maintaining "Apple-tier" cosmetic standards for $50k cinema servers in a low-volume environment.
+𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Sole Mechanical Engineer responsible for the M500, M300, and Cinema One product lines.
 
-▪️ 𝗖𝗿𝗶𝘀𝗶𝘀 𝗠𝗮𝗻𝗮𝗴𝗲𝗺𝗲𝗻𝘁: Detected "Flow Mark" defects in 1,200 parts (Cinema One). Exercised 𝗟𝗶𝗻𝗲-𝗗𝗼𝘄𝗻 authority to reject inventory and force a root-cause gating change.
+▪️ 𝗖𝗿𝗶𝘀𝗶𝘀 𝗠𝗮𝗻𝗮𝗴𝗲𝗺𝗲𝗻𝘁: Detected 'Flow Mark' defects in 1,200 parts (Cinema One). Exercised 𝗟𝗶𝗻𝗲-𝗗𝗼𝘄𝗻 authority to reject inventory and establish 'Apple-tier' cosmetic standards.
 
-▪️ 𝗖𝗼𝘀𝘁 𝗥𝗲𝗱𝘂𝗰𝘁𝗶𝗼𝗻: Redesigned the "Macduff" chassis lid, consolidating three parts into one. Reduced assembly time by 𝟭𝟱 𝗺𝗶𝗻𝘂𝘁𝗲𝘀 and eliminated fastener count by 30%.
+▪️ 𝗖𝗼𝘀𝘁 𝗥𝗲𝗱𝘂𝗰𝘁𝗶𝗼𝗻: Redesigned the 'Macduff' chassis lid, consolidating three parts into one. Reduced assembly time by 𝟭𝟱 𝗺𝗶𝗻𝘂𝘁𝗲𝘀 and eliminated fastener count by 30%.
 
 ▪️ 𝗦𝘆𝘀𝘁𝗲𝗺 𝗜𝗻𝘁𝗲𝗴𝗿𝗮𝘁𝗶𝗼𝗻: Integrated slot-loading optical drives (Blu-ray) with custom vibration isolation dampers to prevent skip/read errors.
 
 
---- DIGIDESIGN (AVID) ---
-𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Scaling from desktop interfaces to 12-foot wide enterprise mixing consoles (D-Control).
+--- DIGIDESIGN (AVID) - SC48 ---
+𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Architect an 'Embedded Live Sound' console under a ruthless <$15k COGS mandate.
 
-▪️ 𝗦𝗖𝟰𝟴 "𝗟𝘂𝘅" 𝗖𝗼𝗻𝘀𝗼𝗹𝗲: Solved a critical 75°C CPU thermal shutdown during DVT by redesigning the chassis height from 3U to 4U and optimizing internal airflow paths.
+▪️ 𝗧𝗵𝗲 𝗛𝗮𝗿𝗱 𝗢𝗿𝗲: Eliminated a 100% show-stopping thermal failure by identifying the 𝟳𝟱°𝗖 𝗖𝗣𝗨 𝘀𝗵𝘂𝘁𝗱𝗼𝘄𝗻 𝘁𝗵𝗿𝗲𝘀𝗵𝗼𝗹𝗱 via forensic log analysis; engineered a custom 𝟰𝗨 𝘀𝗶𝗱𝗲-𝗶𝗻𝘁𝗮𝗸𝗲 𝗱𝘂𝗰𝘁𝗶𝗻𝗴 𝘀𝘆𝘀𝘁𝗲𝗺 that stabilized internal temperature rise to 𝟮𝟮.𝟲°𝗖.
 
-▪️ 𝗖|𝟮𝟰 𝗚𝗼𝘃𝗲𝗿𝗻𝗮𝗻𝗰𝗲: Enforced strict 𝗗𝗮𝘁𝗮 𝗖𝗼𝗻𝘁𝗿𝗼𝗹 𝗗𝗿𝗮𝘄𝗶𝗻𝗴 (𝗗𝗖𝗗) protocols for the integration of 19 PCBs, achieving 100% mechanical fit on the first pilot build.
+▪️ 𝗧𝗵𝗲 𝗥𝗵𝘆𝘁𝗵𝗺: Managed high-velocity 'War Room' coordination between Industrial Design (ID) aesthetic constraints and Electrical Engineering (EE) thermal loads, utilizing a 𝟭𝟲+ 𝗰𝗼𝗻𝗳𝗶𝗴𝘂𝗿𝗮𝘁𝗶𝗼𝗻 𝘁𝗲𝘀𝘁 𝗺𝗮𝘁𝗿𝗶𝘅 to validate the cooling architecture before tooling.
 
-▪️ 𝗖|𝟮𝟰 𝗠𝗮𝗻𝘂𝗳𝗮𝗰𝘁𝘂𝗿𝗶𝗻𝗴: Designed a "Vertical Hanging" fixture for painting ABS sidecaps, solving a 2mm warp/shrinkage issue.
-
-
+▪️ 𝗧𝗵𝗲 𝗜𝗻𝘁𝗲𝗴𝗲𝗿: Slashed mechanical material costs to 𝟮𝟬% 𝗼𝗳 𝘁𝗼𝘁𝗮𝗹 𝗖𝗢𝗚𝗦 by replacing expensive aluminum extrusions with the '𝟰𝗨 𝗥𝗮𝗸𝗲 𝗕𝗮𝗰𝗸 𝗜-𝗕𝗲𝗮𝗺', a custom folded steel spine that maintained touring-grade rigidity.
 
 
+--- DIGIDESIGN (AVID) - C|24 ---
+𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Execute a RoHS/Refresh of legacy hardware to eliminate a $200 royalty while maintaining a $9,995 MSRP.
 
-## LINKEDIN EXPERIENCE BLURBS (Auto-Generated)
+▪️ 𝗧𝗵𝗲 𝗛𝗮𝗿𝗱 𝗢𝗿𝗲: Recovered Pilot yield on cosmetic plastics from 𝟮.𝟱𝟬𝗺𝗺 𝘄𝗮𝗿𝗽 𝘁𝗼 <𝟬.𝟱𝟬𝗺𝗺 via custom fixture engineering ('Method A'). Codified the vertical gravity-cure process in 𝗘𝗖𝗢 𝟭𝟮𝟳𝟰𝟬 to utilize the glass-transition phase for straightness.
 
-**C24 (Curtis)**
-- **Financial**: Target MSRP $9,995 (Maintained); COGS Reduced 4.0% ($2,036 -> $1,870); Gross Margin $3,060.88 (51.20% of Revenue); Total Est. Direct Mat'l Cost $2,097.37; Eliminated Focusrite Royalty.
-- **Process**: Reduced plastic flatness deviation from >2.50mm to <0.50mm via 'Vertical Hanging'; Qualified 33+ welded stud Top Panel process after initial 'No-Bid'.
-- **Technical**: Managed 19 PCB Layouts (50+ DCDs released); MicPre I/O required 12 DCD revisions; ECO 13707 executed to clarify tolerances.
-- **The 'Banana' Defect**: Resolved critical 2.5mm warpage AND 'sticky paint' failure on Jetcrown end-caps via Vertical Hanging process.
-- **51.8% Gross Margin**: Delivered product at 51.8% gross margin (vs 40% industry avg) despite 20% steel price hike during production.
-- **Hospital Wireless**: Coordinated critical 'Welded Stud' top panel crisis from a hotel room next to a hospital via sketchy wireless to save schedule.
-- **Headphone Jack Fire Drill**: Emergency chassis redesign to create a 'trap door' for serviceability, reducing field repair time from 2 hours to 10 mins.
-- **The 'No-Bid' Sheet Metal Crisis**: Executed rapid domestic bridge strategy to survive a 'No-Bid' on the main top panel, protecting the Pilot schedule.
-- **The DCD Protocol**: Enforced strict Data Control Drawing governance on 19 PCBs, achieving zero mechanical collisions on the first build.
-- **The 'Menlo Park' Handpack**: Personally applied UL stickers and packed the first 100 units in a warehouse to save the quarter when vendor failed.
-- **The VTech Short Circuit**: Vendor docs error left unused PEM studs shorting against PCBs. Engineered ECO 13381 (Manual Removal) to salvage inventory.
+▪️ 𝗧𝗵𝗲 𝗥𝗵𝘆𝘁𝗵𝗺: Executed a dual-source bridge strategy by engaging Mass Precision (Silicon Valley) for emergency manual fabrication to bypass a critical '𝗡𝗼-𝗕𝗶𝗱' 𝘀𝘂𝗽𝗽𝗹𝘆 𝗰𝗵𝗮𝗶𝗻 𝗴𝗮𝗽 from the primary overseas vendor.
 
-**Cinema One**
-- **The 'Tactical' Deviation**: Issued pragmatic deviation allowing cosmetic flow marks <25mm to unblock shipping while protecting the 100% failure lots.
-- **The Gennum Crash Loop**: Diagnosed a 'Software Fatal Error' on the Gennum VXP chip as physical interference: the drive cage was shearing off Resistor R332.
+▪️ 𝗧𝗵𝗲 𝗜𝗻𝘁𝗲𝗴𝗲𝗿: Slashed COGS to achieve 𝟱𝟭.𝟴% 𝗚𝗿𝗼𝘀𝘀 𝗠𝗮𝗿𝗴𝗶𝗻 by eliminating legacy royalty structures and integrating 19 PCBs and 15 chassis parts into a compliant, RoHS-refreshed architecture.
 
-**D-Command**
-- **Financial**: Recovered $155.70 scrap value; Pre-prod cost $10,493/unit; Field Complaint Rate held <4.6%. Combined volume of Buckley and Danko monitor allows offshore mfg.
-- **Process**: Rejected 57% of Sheet Metal; Top Cover Yield 10% (Paint); End Cap Yield 74% (Weld Lines).
-- **Technical**: Resolved 'Sideplate' threaded insert failure via CNC-3645 dimple mod; Corrected 84.478" extrusion error.
 
-**KSYSTEM-120**
-- **The Thermal Blanket**: Reduced CPU temp delta from 20°C to 3°C by replacing 0.30mm adhesive with Phase Change Material and high-pressure clips.
+--- KALEIDESCAPE (ORPHEUS) - KSYSTEM-120 ---
+𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Manufacturing ramp of high-density A/V servers bridging legacy systems and low-cost players.
 
-**Makeline**
-- **Financial**: Reduced MTTR from Hours to Minutes via Hot-Swap Modules.
-- **Process**: Parallel Workstreams: Chassis vs Payload (The Decoupling Strategy)
-- **Technical**: Orchestrated 350+ Actuators in IP69K Washdown Environment
+▪️ 𝗧𝗵𝗲 𝗛𝗮𝗿𝗱 𝗢𝗿𝗲: Defeated the '𝗧𝗵𝘂𝗺𝗯 𝗼𝗳 𝗚𝗼𝗱' 𝗳𝗹𝗲𝘅 𝗰𝗿𝗶𝘀𝗶𝘀 (PCB crash loop) by directing surgical modifications to the electronics tray, including 'peninsula' relief slots (ECO 789/817) to prevent chassis walls from shearing resistors during assembly.
 
-**Minimerc**
-- **Financial**: Hard savings via reduced system depth (to 265mm)
-- **Process**: Rapid incorporation of multiple engineering 'hitlists' and bug fixes
-- **Technical**: Redesigned HDD mounting bracket for thermal/EMI resolution
+▪️ 𝗧𝗵𝗲 𝗥𝗵𝘆𝘁𝗵𝗺: Remediated a 𝟬.𝟬𝟬𝟱" 𝘁𝗼𝗹𝗲𝗿𝗮𝗻𝗰𝗲 𝘀𝘁𝗮𝗰𝗸-𝘂𝗽 𝗲𝗿𝗿𝗼𝗿 in the fan tray assembly that prevented proper lid closure, averting a production yield crisis.
 
-**SC48**
-- **Financial**: CNC Chassis Unit Price $561.46 (vs Hard Tooling); Protected <$15k COGS via Varitronix Reuse.
-- **Process**: Executed 16+ config thermal matrix (3U vs 4U); Processed 12,000+ thermal data points.
-- **Technical**: Resolved 75°C shutdown via 4U re-architecture; Engineered Custom Fan Brackets (9420-58498-00 / 9420-58488-00).
-- **The 'Lead vs Lead' Mandate**: Enforced 'Solder = LED' vs 'Person = LEED' spelling rule to prevent toxic manufacturing errors.
-- **CNC First Strategy**: Accepted high unit cost to avoid $50k hard tooling risk during validation.
-- **The PMS Insert Crisis**: Rejected glue fix for popping inserts; recalculated tolerance to .170 +0.00/-0.012 for mechanical interference fit.
-- **The 'Blind Mate' Alignment**: Engineered ovalized 'wiggle room' tie plates to prevent connector smash during blind assembly.
-- **The LED Bleed**: Forced vendor to enlarge spacer holes to seat LED collars deeper, eliminating light bleed.
-- **The 'Ghost Dimension'**: Discovered the ID model and Mechanical chassis were 1.6 inches apart in length three weeks before tooling release.
-- **The Yield Flip**: Identified a 50% yield loss on Fader Plates due to 'Over-Constraint'. Reduced 12 screw points to 6, restoring yield to 100%.
-- **The PSU Heatsink Hack**: Modified PSU mounting brackets to replace rubber feet, using the chassis itself as a heatsink to prevent 75°C shutdown.
-- **The Torque Strip Fix**: Diagnosed fastener stripping failure: factory torque settings were mismatched to material density. Recalibrated line drivers.
+▪️ 𝗧𝗵𝗲 𝗜𝗻𝘁𝗲𝗴𝗲𝗿: Directed manufacturing transfer to Sanmina Guadalajara, resolving 3 critical stop-ship interference issues and negotiating CPU thermal solution unit price from $𝟵.𝟲𝟯 𝗱𝗼𝘄𝗻 𝘁𝗼 $𝟵.𝟮𝟱.
 
-**Cortez**
-- **Financial**: Avoided $3.50/unit COGS increase (Scissors vs. Rubber Dome); Billed $24k+ in surfacing services.
-- **Process**: Final CAD released to prototype in 6 weeks; Overturned vendor 'No Can Do' via 3D proof.
-- **Technical**: Pro/ENGINEER (Surface Modeling); Resolved 0.05mm Key Pitch mismatch.
-- **The Pitch Fight**: Battled ID's 19.00mm spec against Vendor's 19.05mm standard. Proved cumulative error would crash keys into the bezel.
-- **The $30k Deletion**: Saved $30k in new tooling by deleting the Page Up/Down keys from the main matrix and moving them to a separate pad.
-- **The 6-Week Surface**: Rebuilt the entire organic surface model in 6 weeks to fix 'rocking' hard models and ensure IR transmission (3-15 deg slope).
-- **The 6-Week Miracle**: Delivered flawless Class-A surfacing in exactly 6 weeks, spending 28 hours on the master top surface to match ID intent.
-- **The Lead Weight Hack**: Hollowed out the internal Ren Shape model and glued in lead weights to hit the 0.6kg Sony target feel.
-- **The Pitch War**: Overturned Silitek's 'No Can Do' by proving the standard 19.05mm matrix fit within the custom ID bezel via cross-section analysis.
 
-**Elmer / Zeus**
-- **Financial**: Authorized crisis pricing ($134.42/unit Fan Brackets) to hit 9-day FAB cycle; Managed $10k+ proto budget.
-- **Process**: Compressed fabrication lead time to 9 days; Standardized 100% of assembly hardware to 4-40.
-- **Technical**: Resolved 'Dead Nuts' thermal flatness crisis via gap fillers; Engineered 5-unit demo build.
-- **The 'Dead Nuts' Flatness**: Mandated 'dead nuts' flatness specs for the chassis floor to ensure conductive coupling with the 12V supply heat spreader.
-- **The 'Titan Div' Overlay**: Caught a fatal Compact Flash card collision 3 days before CES by manually overlaying DXF records from the PCB designer.
-- **The Perforation War**: Blocked ventilation holes under the main PCB to maximize thermal mass conduction, forcing air draft only near the PSU.
-- **The 4-40 Mandate**: Purged all metric hardware from the BOM after a mixed-screw prototype disaster. Standardized on 4-40 UNC to save the assembly line.
-- **The 8mm Lift**: Emergency ECO to raise lower drive bay by exactly 8mm to clear a power connector collision detected in Pro/E.
-- **Hardware Standardization**: Enforced 100% 4-40 screw standardization across 5 servers to prevent the 'metric vs SAE' assembly nightmare.
-- **The Virtual Catch**: Layered mechanical DXFs over PCB layouts to catch a Compact Flash collision week before metal cutting.
+--- DIGIDESIGN (AVID) - D-COMMAND ---
+𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Engineer a mid-format control surface utilizing flagship architecture under extreme schedule compression.
 
-**WebTV Galaxy**
-- **Financial**: Managed single-source mechanical deliverables @ ~$14k/month burn rate (Consultant).
-"Physics Abuse": 260W PSU max output, convection cooled at 35°C ambient.
+▪️ 𝗧𝗵𝗲 𝗛𝗮𝗿𝗱 𝗢𝗿𝗲: Eliminated 𝟱𝗺𝗺 𝘀𝘁𝗿𝘂𝗰𝘁𝘂𝗿𝗮𝗹 𝗼𝗳𝗳𝘀𝗲𝘁𝘀 in chassis mating and a 'hammer-to-fit' assembly mode via 𝗘𝗖𝗢 𝟴𝟬𝟬𝟬, implementing universal mounting slots on rear brackets to force alignment across drifting extrusion profiles.
 
-- **Process**: Implemented centralized FTP vault (share.webtv.net); 100% interference resolution (9 sub-assemblies).
+▪️ 𝗧𝗵𝗲 𝗥𝗵𝘆𝘁𝗵𝗺: Managed the entire mechanical documentation release solo, delivering 𝟭𝟬𝟵 𝘂𝗻𝗶𝗾𝘂𝗲 𝗱𝗿𝗮𝘄𝗶𝗻𝗴𝘀 (Assemblies, Extrusions, Sheetmetal, Plastics) for the D-Command release under a 2-week deadline.
 
-- **Technical**: Dissipated 150W thermal load (AMD K7) -> stabilized CPU at 84.0°C / Case at 89.3°C via 28.3 CFM airflow tunnel (Delta 2700rpm/37dB)
+▪️ 𝗧𝗵𝗲 𝗜𝗻𝘁𝗲𝗴𝗲𝗿: Secured -𝟮.𝟮𝗱𝗕 𝗘𝗠𝗜 𝗵𝗲𝗮𝗱𝗿𝗼𝗼𝗺 𝗺𝗮𝗿𝗴𝗶𝗻 through rapid cable routing optimization and improved gasket sealing on RJ45 ports after initial scans exceeded Class A limits.
 
-- **The 'Dog Unit' Request**: Requested a non-functional 'Dog Unit' immediately upon arrival to reverse-engineer failure points before looking at the spec sheet.
-- **The 'First Principles' Defense**: Halted a redesign loop by demanding a 'Dog Unit' teardown, proving field failures were due to contamination, not design.
-- **The 'God Box' Thermal Tax**: Identified a 150W 'God Box' prototype flaw where the Smart Card reader hit 55°C (melting point), forcing a chassis redesign.
-- **The 'Wind Tunnel' Pivot**: Redesigned the Hard Drive Bracket to act as a structural air dam, forcing 28.3 CFM over the drives to prevent thermal shutdown.
-- **The 'Hook 29' Fix**: Redesigned the base chassis with 'Hook 29' strengthening ribs after drawn standoffs caused 'potato chip' warping.
-- **The Meter Investigation**: Tracked down 'Linda the Repair Tech' to verify field failure rates on the LED Spacers, avoiding an unnecessary $15k tooling redesign.
-- **The 'Short Shot' Stand**: Held the line on cosmetic 'short shots' and sink marks, risking a schedule slip to prevent shipping a flawed flagship product.
 
-**WebTV Pluto (CES Demo)**
-- **Financial**: N/A (Critical Trade Show Deliverable)
-- **Process**: Simultaneous coordination of PCB fab, sheet metal (EMS), and machining (Sputnik)
-- **Technical**: Completed Pro/E database for Zeus/Pluto enclosures in rapid sprint
+--- DIGIDESIGN (AVID) - D-CONTROL ---
+𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Deliver the mechanical chassis and stand architecture for the 'ICON' flagship console.
+
+▪️ 𝗧𝗵𝗲 𝗛𝗮𝗿𝗱 𝗢𝗿𝗲: Rescued the production line from a 𝟰-𝘄𝗲𝗲𝗸 '𝗟𝗶𝗻𝗲 𝗗𝗼𝘄𝗻' 𝘀𝘁𝗼𝗽𝗽𝗮𝗴𝗲 by re-engineering structural foam side caps to resolve a 𝟱𝟬% 𝘆𝗶𝗲𝗹𝗱 𝗳𝗮𝗶𝗹𝘂𝗿𝗲 𝗿𝗮𝘁𝗲 (ECO 6310).
+
+▪️ 𝗧𝗵𝗲 𝗥𝗵𝘆𝘁𝗵𝗺: Modified geometric tolerances (increasing boss diameters from 0.37" to 0.25") to eliminate assembly stress cracking and accommodate molding variances.
+
+▪️ 𝗧𝗵𝗲 𝗜𝗻𝘁𝗲𝗴𝗲𝗿: Stabilized escalating COGS by consolidating extrusion profiles to a 𝘀𝗶𝗻𝗴𝗹𝗲 𝘂𝗻𝗶𝗳𝗶𝗲𝗱 𝗱𝗲𝘀𝗶𝗴𝗻 across 7 modular stand configurations.
+
+
+--- WEBTV (MICROSOFT) - GALAXY ---
+𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Architect a Home Network Gateway integrating a high-heat AMD K7 CPU into a consumer form factor.
+
+▪️ 𝗧𝗵𝗲 𝗛𝗮𝗿𝗱 𝗢𝗿𝗲: Engineered a thermal architecture dissipating 𝟭𝟱𝟬 𝗪𝗮𝘁𝘁𝘀 within a 300mm footprint at 45°C ambient; specified a 28.3 CFM airflow tunnel and 50x60x30mm extruded heatsink.
+
+▪️ 𝗧𝗵𝗲 𝗥𝗵𝘆𝘁𝗵𝗺: Resolved 100% of critical chassis warpage defects by redesigning stamping features from 'drawn standoffs' to '𝗛𝗼𝗼𝗸 𝟮𝟵' 𝗱𝗲𝘁𝗮𝗶𝗹𝘀 with integrated strengthening ribs.
+
+▪️ 𝗧𝗵𝗲 𝗜𝗻𝘁𝗲𝗴𝗲𝗿: Managed a $𝟭𝟰,𝟮𝟬𝟬/𝗺𝗼𝗻𝘁𝗵 𝘀𝗼𝗹𝗼 𝗲𝗻𝗴𝗶𝗻𝗲𝗲𝗿𝗶𝗻𝗴 𝗯𝘂𝗿𝗻 𝗿𝗮𝘁𝗲, simultaneously driving Galaxy, Mercury, and Xbox deliverables through a centralized FTP hub.
+
+
+--- WEBTV (MICROSOFT) - CORTEZ ---
+𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Mechanical design and complex surfacing for a reference wireless keyboard.
+
+▪️ 𝗧𝗵𝗲 𝗛𝗮𝗿𝗱 𝗢𝗿𝗲: Rectified a 𝟬.𝟬𝟱𝗺𝗺 𝗮𝗰𝗰𝘂𝗺𝘂𝗹𝗮𝘁𝗲𝗱 𝘁𝗼𝗹𝗲𝗿𝗮𝗻𝗰𝗲 𝗲𝗿𝗿𝗼𝗿 between Industrial Design (19mm pitch) and vendor tooling (19.05mm) that threatened to misalign the bezel.
+
+▪️ 𝗧𝗵𝗲 𝗥𝗵𝘆𝘁𝗵𝗺: Executed a 43-hour sprint to engineering a 𝟯-𝟭𝟱 𝗱𝗲𝗴𝗿𝗲𝗲 𝘃𝗮𝗿𝗶𝗮𝗯𝗹𝗲 𝗜𝗥 𝘁𝗿𝗮𝗻𝘀𝗺𝗶𝘀𝘀𝗶𝗼𝗻 𝗮𝗻𝗴𝗹𝗲 and organic surface lofting into the primary housing geometry.
+
+▪️ 𝗧𝗵𝗲 𝗜𝗻𝘁𝗲𝗴𝗲𝗿: Managed disparate vendor data streams (Panasonic/Silitek) to unify the mechanical database while reducing model weight to meet the 𝟬.𝟲𝗸𝗴 𝘁𝗮𝗿𝗴𝗲𝘁.
+
+
+--- WEBTV (MICROSOFT) - ELMER ---
+𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Rapidly deliver 'roadworthy' demonstration enclosures for the WCS and CES 2001.
+
+▪️ 𝗧𝗵𝗲 𝗛𝗮𝗿𝗱 𝗢𝗿𝗲: Optimized convective airflow by redesigning chassis perforation patterns and implementing '𝗧𝗵𝗲𝗿𝗺𝗮𝗣𝗮𝗱' 𝗴𝗮𝗽 𝗳𝗶𝗹𝗹𝗲𝗿𝘀 to maintain 'dead nuts' flatness for CPU heat spreader contact.
+
+▪️ 𝗧𝗵𝗲 𝗥𝗵𝘆𝘁𝗵𝗺: Enforced a strict 𝟰-𝟰𝟬 𝗨𝗡𝗖 𝗵𝗮𝗿𝗱𝘄𝗮𝗿𝗲 𝘀𝘁𝗮𝗻𝗱𝗮𝗿𝗱𝗶𝘇𝗮𝘁𝗶𝗼𝗻 across the assembly, purging metric equivalents to prevent assembly line failure during a compressed 9-day fabrication cycle.
+
+▪️ 𝗧𝗵𝗲 𝗜𝗻𝘁𝗲𝗴𝗲𝗿: Orchestrated delivery of 5 server enclosures and 12 node units by managing parallel workstreams between sheet metal (E-M Solutions) and model shops (Sputnik).
+
+
+--- EARLY CAREER ---
+𝗖𝗵𝗮𝗹𝗹𝗲𝗻𝗴𝗲: Roles establishing the foundation of high-performance product design.
+
+▪️ 𝗠𝗲𝗰𝗵𝗮𝗻𝗶𝘀𝘁𝗶𝗰 (𝟭𝟵𝟵𝟯–𝟭𝟵𝟵𝟲): Designed SwitchBlade inline speed skates and Sunbeam Toast Logic appliances.
+
+▪️ 𝗦𝗶𝗹𝗶𝗰𝗼𝗻 𝗚𝗿𝗮𝗽𝗵𝗶𝗰𝘀 (𝗦𝗚𝗜) (𝟭𝟵𝟴𝟵–𝟭𝟵𝟵𝟯): Performed thermal/acoustic analysis for Indigo and Indy workstations; managed prototype supply chains.
+
+▪️ 𝗘𝗣 𝗧𝗲𝗰𝗵𝗻𝗼𝗹𝗼𝗴𝗶𝗲𝘀 (𝟭𝟵𝟴𝟲–𝟭𝟵𝟴𝟵): Production Supervisor for Class III medical devices (Cardiac Ablation Catheters).
 

@@ -15,7 +15,26 @@ sidebar:
 
 ---
 
-## 1. The Toolchain Trinity (Core Scripts)
+## 1. The Forensics Suite (Audit Tools)
+
+These tools explicitly hunt for data corruption ("Ghost Assets") and fragility.
+
+- **The Jig (`npm run audit:frontmatter`)**
+  - **Source:** `scripts/validate_manifest.ts`
+  - **Function:** Bulk audits 120+ MDX files. Reports "Crash Failures" (Red) and "Quality Warnings" (Yellow) like "DEFAULT" titles.
+
+- **Air Gap Enforcer (`npm run check:assets` - _Pending alias_)**
+  - **Source:** `scripts/verify_asset_links.ts`
+  - **Function:** Scans MDX vs. `public/` to find broken links.
+  - **Rule:** If it finds a link in Markdown that doesn't exist on disk, it flags a "Ghost Asset."
+
+- **The Power Move (`npm run test:visual`)**
+  - **Source:** `scripts/visual_smoke_test.ts`
+  - **Function:** Puppeteer snapshots of core pages.
+
+---
+
+## 2. The Toolchain Trinity (Core Processing)
 
 These scripts drive the "Forensic Data Factory."
 

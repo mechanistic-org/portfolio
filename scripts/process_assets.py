@@ -142,7 +142,7 @@ def setup_directories():
         print(f"WARNING: Staging Directory not found at {STAGING_DIR}")
         print("Please ensure 'quantum-assets' repo is checked out as a sibling to 'quantum'.")
 
-def process_project(slug):
+def process_project(slug, force_mode=False):
     """Process all images for a specific project slug."""
     input_path = MASTER_DIR / slug
     output_path = STAGING_DIR / slug
@@ -398,6 +398,19 @@ def process_project(slug):
                         out_filename = f"{base_name}-{bp_name}.{out_ext}"
                         out_file = output_path / out_filename
 
+                        # Smart Skip: Check if output exists and is newer than source
+                        if out_file.exists() and not force_mode:
+                             source_mtime = item.stat().st_mtime
+                             target_mtime = out_file.stat().st_mtime
+                             
+                             if target_mtime >= source_mtime:
+                                 # print(f"    [SKIP] Up to date: {out_filename}") 
+                                 # Silent skip to reduce noise? User wants optimization.
+                                 # Or maybe print only if verbose?
+                                 # Let's print for now so user sees it working.
+                                 print(f"    [SKIP] Up to date: {out_filename}")
+                                 continue
+
                         resized_img.save(out_file, quality=quality, optimize=True)
                         print(f"    -> Generated: {out_file.resolve()} (Exists: {out_file.exists()})")
 
@@ -441,6 +454,7 @@ def main():
     parser = argparse.ArgumentParser(description="Quantum Image Processor")
     parser.add_argument("slug", nargs="?", help="Project slug to process (e.g., 'xbox')")
     parser.add_argument("--all", action="store_true", help="Process ALL projects in MASTER directory")
+    parser.add_argument("--force", action="store_true", help="Force re-processing of all assets (ignore mtime)")
     
     args = parser.parse_args()
 
@@ -450,9 +464,9 @@ def main():
         # Scan MASTER_DIR for folders
         projects = [d.name for d in MASTER_DIR.iterdir() if d.is_dir()]
         for p in projects:
-            process_project(p)
+            process_project(p, force_mode=args.force)
     elif args.slug:
-        process_project(args.slug)
+        process_project(args.slug, force_mode=args.force)
     else:
         parser.print_help()
 

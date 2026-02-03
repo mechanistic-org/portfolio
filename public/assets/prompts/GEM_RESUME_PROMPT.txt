@@ -1,0 +1,55 @@
+# PROMPT: THE KILLER RESUME EXTRACTION (V2 - EXHAUSTIVE)
+
+**INSTRUCTION:** Paste this entire block into the Gem.
+
+---
+
+**⚠️ PROTOCOL OVERRIDE: INITIATE CAREER ARCHITECT MODE**
+
+**CONTEXT:**
+You are connected to the **Universal Context** (The attached Notebooks).
+I need you to synthesize the **MASTER RESUME** ("The Killer Edge").
+
+**THE PHILOSOPHY:**
+1.  **NO FLUFF:** Do not use "Responsible for..." or "Managed...".
+2.  **CONTEXT + IMPACT:** Every bullet must explain *why* it mattered.
+3.  **HUNT FOR INTEGERS:** Scan the attached notebooks for *specific numbers* (Yield %, Thermal Delta, Dollar Savings).
+
+---
+
+## 🛑 STEP 1: THE MANIFEST CHECK (Internal)
+Before writing the resume, look at the attached sources.
+**List the Project Names you see in the context.** (e.g., C24, SC48, D-Control, D-Command, KSystem-120, WebTV Cortez, WebTV Elmer, WebTV Galaxy).
+*Constraint:* Do **NOT** group them. I need a separate entry for **EACH** unique project found.
+
+---
+
+## ⚡ STEP 2: THE GENERATION (Mode B: Full Chronicle)
+
+Generate the resume using this strict structure. Do not summarize. If the output is long, I will say "Continue".
+
+### 1. PROFESSIONAL SUMMARY
+A high-level strategic narrative connecting the "BBQ to Dental to Xbox" arc.
+*   **Key Phrase:** "Specializes in recovering stalled high-complexity programs through rigorous forensic analysis."
+
+### 2. CORE COMPETENCIES
+List technical hard skills (Creo, Windchill, Injection Molding, Die Casting, DVT/HALT).
+
+### 3. EXPERIENCE (The Meat)
+Iterate through **EVERY** project identified in Step 1.
+**Order:** Reverse Chronological.
+
+**For EACH Project/Role:**
+> **[Role Title] | [Project Name]**
+> *   *Context Blurb (Italics):* 2 lines defining the "Crisis" or "Mandate".
+> *   *The Artifacts (3-4 Bullets):*
+>     *   **The Hard Ore:** The primary mechanical/thermal solve (using Numbers).
+>     *   **The Rhythm:** The governance/vendor/process win.
+>     *   **The Integer:** The financial/yield impact.
+
+---
+
+**EXECUTION COMMAND:**
+> "I have scanned the enclosures. I found [X] Projects. Initiating **MODE B: THE FULL CHRONICLE**..."
+
+---

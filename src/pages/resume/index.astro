@@ -7,7 +7,10 @@ const { header, summary, competencies, experience, education, patents } = resume
 // Helper to process markdown-style bolding in bullets
 function processMarkdown(text: string) {
 	// Simple replace for **bold**
-	return text.replace(/\*\*(.*?)\*\*/g, '<strong class="font-bold text-black">$1</strong>');
+	return text.replace(
+		/\*\*(.*?)\*\*/g,
+		'<strong class="font-bold text-black dark:text-white">$1</strong>',
+	);
 }
 ---
 
@@ -19,7 +22,7 @@ function processMarkdown(text: string) {
     - Print-specific overrides
   -->
 	<div
-		class="min-h-screen w-full bg-[#f2f2f2] p-12 pt-48 md:p-24 md:pt-48 print:bg-white print:p-0"
+		class="min-h-screen w-full bg-[#f2f2f2] p-12 pt-48 md:p-24 md:pt-48 dark:bg-neutral-950 print:bg-white print:p-0"
 	>
 		<!-- Top Centered Print Button -->
 		<div class="mb-12 flex w-full justify-center print:hidden">
@@ -48,21 +51,25 @@ function processMarkdown(text: string) {
 		</div>
 
 		<div
-			class="mx-auto max-w-[216mm] bg-white p-[12mm] shadow-2xl print:max-w-none print:shadow-none"
+			class="mx-auto max-w-[216mm] bg-white p-[12mm] shadow-2xl dark:bg-neutral-900 print:max-w-none print:shadow-none"
 		>
 			<!-- HEADER -->
-			<header class="mb-6 flex items-start justify-between border-b-2 border-black pb-4">
+			<header
+				class="mb-6 flex items-start justify-between border-b-2 border-black pb-4 dark:border-neutral-700"
+			>
 				<div>
-					<h1 class="font-sans text-4xl font-extrabold tracking-tight text-black uppercase">
+					<h1
+						class="font-sans text-4xl font-extrabold tracking-tight text-black uppercase dark:text-white"
+					>
 						{header.name}
 					</h1>
 					<h2
-						class="mt-1 font-mono text-base font-bold tracking-tighter whitespace-nowrap text-neutral-800"
+						class="mt-1 font-mono text-base font-bold tracking-tighter whitespace-nowrap text-neutral-800 dark:text-neutral-300"
 					>
 						{header.title}
 					</h2>
 					<p
-						class="mt-4 font-mono text-[10px] tracking-wider whitespace-nowrap text-neutral-500 uppercase md:block print:block"
+						class="mt-4 font-mono text-[10px] tracking-wider whitespace-nowrap text-neutral-500 uppercase md:block dark:text-neutral-400 print:block"
 					>
 						// {header.tagline}
 					</p>
@@ -70,19 +77,23 @@ function processMarkdown(text: string) {
 
 				<!-- Web-Only Controls -->
 				<div class="flex flex-col items-end gap-2 print:hidden">
-					<div class="text-right text-xs text-neutral-900">
-						<div class="font-bold">{header.contact.phone}</div>
+					<div class="text-right text-xs text-neutral-900 dark:text-neutral-300">
+						<!-- <div class="font-bold">{header.contact.phone}</div> -->
 						<div>{header.contact.email}</div>
 						<div>{header.contact.location}</div>
-						<div class="text-primary-700 font-bold">{header.contact.portfolio}</div>
+						<div class="font-bold text-neutral-900 dark:text-white">{header.contact.resume}</div>
+						<div class="text-primary-700 dark:text-primary-400 font-bold">
+							{header.contact.portfolio}
+						</div>
 					</div>
 				</div>
 
 				<!-- Print-Only Contact Info -->
 				<div class="hidden text-right text-xs text-neutral-900 print:block">
-					<div class="font-bold">{header.contact.phone}</div>
+					<!-- <div class="font-bold">{header.contact.phone}</div> -->
 					<div>{header.contact.email}</div>
 					<div>{header.contact.location}</div>
+					<div class="font-bold text-neutral-900">{header.contact.resume}</div>
 					<div class="text-primary-700 font-bold">{header.contact.portfolio}</div>
 				</div>
 			</header>
@@ -90,11 +101,11 @@ function processMarkdown(text: string) {
 			<!-- SUMMARY -->
 			<section class="mb-6">
 				<h3
-					class="mb-2 border-b border-black/20 pb-1 font-sans text-sm font-bold tracking-wider text-black uppercase"
+					class="mb-2 border-b border-black/20 pb-1 font-sans text-sm font-bold tracking-wider text-black uppercase dark:border-white/20 dark:text-white"
 				>
 					Professional Summary
 				</h3>
-				<p class="text-justify text-sm leading-relaxed text-neutral-900">
+				<p class="text-justify text-sm leading-relaxed text-neutral-900 dark:text-neutral-300">
 					{summary.executive}
 				</p>
 			</section>
@@ -102,26 +113,26 @@ function processMarkdown(text: string) {
 			<!-- COMPETENCIES GRID -->
 			<section class="mb-6">
 				<h3
-					class="mb-2 border-b border-black/20 pb-1 font-sans text-sm font-bold tracking-wider text-black uppercase"
+					class="mb-2 border-b border-black/20 pb-1 font-sans text-sm font-bold tracking-wider text-black uppercase dark:border-white/20 dark:text-white"
 				>
 					Core Competencies
 				</h3>
 				<div class="grid grid-cols-3 gap-4 text-xs">
 					<div>
-						<div class="mb-1 font-bold text-black">ENGINEERING</div>
-						<ul class="list-disc space-y-0.5 pl-3 text-black">
+						<div class="mb-1 font-bold text-black dark:text-white">ENGINEERING</div>
+						<ul class="list-disc space-y-0.5 pl-3 text-black dark:text-neutral-300">
 							{competencies.engineering.map((item) => <li>{item}</li>)}
 						</ul>
 					</div>
 					<div>
-						<div class="mb-1 font-bold text-black">MANUFACTURING</div>
-						<ul class="list-disc space-y-0.5 pl-3 text-black">
+						<div class="mb-1 font-bold text-black dark:text-white">MANUFACTURING</div>
+						<ul class="list-disc space-y-0.5 pl-3 text-black dark:text-neutral-300">
 							{competencies.manufacturing.map((item) => <li>{item}</li>)}
 						</ul>
 					</div>
 					<div>
-						<div class="mb-1 font-bold text-black">TOOLS & REGULATORY</div>
-						<ul class="list-disc space-y-0.5 pl-3 text-black">
+						<div class="mb-1 font-bold text-black dark:text-white">TOOLS & REGULATORY</div>
+						<ul class="list-disc space-y-0.5 pl-3 text-black dark:text-neutral-300">
 							{competencies.tools.map((item) => <li>{item}</li>)}
 							<li class="h-1 list-none"></li>
 							{competencies.regulatory.map((item) => <li>{item}</li>)}
@@ -133,7 +144,7 @@ function processMarkdown(text: string) {
 			<!-- EXPERIENCE -->
 			<section class="mb-6">
 				<h3
-					class="mb-4 border-b border-black/20 pb-1 font-sans text-sm font-bold tracking-wider text-black uppercase"
+					class="mb-4 border-b border-black/20 pb-1 font-sans text-sm font-bold tracking-wider text-black uppercase dark:border-white/20 dark:text-white"
 				>
 					Professional Experience
 				</h3>
@@ -143,21 +154,25 @@ function processMarkdown(text: string) {
 						experience.map((role) => (
 							<div class="break-inside-avoid">
 								<div class="mb-1 flex items-baseline justify-between">
-									<div class="text-base font-bold text-black">
+									<div class="text-base font-bold text-black dark:text-white">
 										{role.company}
 										<span class="mx-2 font-normal text-neutral-500">|</span>
-										<span class="text-sm font-medium text-neutral-700">{role.title}</span>
+										<span class="text-sm font-medium text-neutral-700 dark:text-neutral-400">
+											{role.title}
+										</span>
 									</div>
-									<div class="font-mono text-xs text-neutral-700">{role.dates}</div>
+									<div class="font-mono text-xs text-neutral-700 dark:text-neutral-400">
+										{role.dates}
+									</div>
 								</div>
 
 								{/* Context Blurb */}
-								<div class="mb-2 border-l-2 border-neutral-300 pl-2 text-xs font-medium text-neutral-700 italic">
+								<div class="mb-2 border-l-2 border-neutral-300 pl-2 text-xs font-medium text-neutral-700 italic dark:border-neutral-700 dark:text-neutral-400">
 									{role.blurb}
 								</div>
 
 								{/* Bullets */}
-								<ul class="list-disc space-y-1 pl-4 text-sm leading-snug text-neutral-900">
+								<ul class="list-disc space-y-1 pl-4 text-sm leading-snug text-neutral-900 dark:text-neutral-300">
 									{role.bullets.map((bullet) => (
 										<li set:html={processMarkdown(bullet)} />
 									))}
@@ -169,14 +184,16 @@ function processMarkdown(text: string) {
 			</section>
 
 			<!-- FOOTER / EDUCATION -->
-			<section class="grid grid-cols-2 gap-8 border-t-2 border-black pt-4">
+			<section class="grid grid-cols-2 gap-8 border-t-2 border-black pt-4 dark:border-neutral-700">
 				<div>
-					<h3 class="mb-2 font-sans text-xs font-bold tracking-wider text-black uppercase">
+					<h3
+						class="mb-2 font-sans text-xs font-bold tracking-wider text-black uppercase dark:text-white"
+					>
 						Education
 					</h3>
 					{
 						education.map((edu) => (
-							<div class="text-xs text-black">
+							<div class="text-xs text-black dark:text-neutral-300">
 								<div class="font-bold">{edu.school}</div>
 								<div>{edu.degree}</div>
 							</div>
@@ -184,10 +201,12 @@ function processMarkdown(text: string) {
 					}
 				</div>
 				<div>
-					<h3 class="mb-2 font-sans text-xs font-bold tracking-wider text-black uppercase">
+					<h3
+						class="mb-2 font-sans text-xs font-bold tracking-wider text-black uppercase dark:text-white"
+					>
 						Awards & Patents
 					</h3>
-					<ul class="list-disc pl-3 text-xs text-black">
+					<ul class="list-disc pl-3 text-xs text-black dark:text-neutral-300">
 						{patents.map((pat) => <li>{pat}</li>)}
 					</ul>
 				</div>

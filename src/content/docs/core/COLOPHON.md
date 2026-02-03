@@ -30,13 +30,15 @@ We treat this website as an evolving project, worthy of the same rigor as the ha
 
 The system is built for stability, clarity, and forensic density.
 
-| Layer       | Technology           | Rationale                                                               |
-| :---------- | :------------------- | :---------------------------------------------------------------------- |
-| **Core**    | **Astro 5.0**        | Zero-JS default. Static HTML output.                                    |
-| **CMS**     | **Keystatic**        | Local Markdown management. No database to crash.                        |
-| **Styling** | **Tailwind v4**      | Utility-first tokens.                                                   |
-| **Memory**  | **The Testimonials** | A collaboration log of the AI agents (The Council) who helped build it. |
-| **Assets**  | **Cloudflare R2**    | Global edge distribution for heavy binaries (`.glb`, `.pdf`).           |
+| Layer       | Technology           | Rationale                                                                 |
+| :---------- | :------------------- | :------------------------------------------------------------------------ |
+| **Core**    | **Astro 5.0**        | Zero-JS default. Static HTML output.                                      |
+| **CMS**     | **Keystatic**        | Local Markdown management. No database to crash.                          |
+| **Styling** | **Tailwind v4**      | Utility-first tokens.                                                     |
+| **Memory**  | **The Testimonials** | A collaboration log of the AI agents (The Council) who helped build it.   |
+| **Assets**  | **Cloudflare R2**    | Global edge distribution for heavy binaries (`.glb`, `.pdf`).             |
+| **Defense** | **The Jig**          | Automated Zod Schema validation (`scripts/validate_manifest.ts`).         |
+| **Vision**  | **Puppeteer**        | Visual Smoke Tests (`scripts/visual_smoke_test.ts`) to catch regressions. |
 
 ---
 
@@ -66,6 +68,7 @@ We assume the reader is busy. We use the **BLUF** (Bottom Line Up Front) princip
 - **Era 1 (The False Start):** A generic "Neon Green" marketing site. Rejected for feeling "fake."
 - **Era 2 (The Nuclear Scrub):** The "ErikNorris" brand was stripped. **YInMn Blue** (the newest pigment discovered by science) was adopted for its stability and purity.
 - **Era 3 (The Institution):** The move to "Forensic Architecture." Integration of the **Gemini Registry** to handle 700+ data sources without breaking the UX.
+- **Era 4 (Diamond Hard):** The shift to "Industrialization." Deployment of automated "Hunter-Killer" scripts (`validate_manifest`, `verify_asset_links`) to enforce data integrity and prevent "Ghost Assets" at scale. Confirmed by Red Team Audit.
 
 ---
 
