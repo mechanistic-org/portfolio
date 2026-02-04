@@ -28,93 +28,133 @@ const { hideLogo } = Astro.props;
 		class="flex items-center justify-center gap-1 p-1 transition-all duration-300"
 	>
 		{
-			navData.map((item) => {
-				if ("dropdown" in item) {
-					return (
-						<div class="group relative">
-							<button
-								class={`rounded-full px-4 py-1.5 font-mono text-xs tracking-wider uppercase transition-all duration-300 ${isActive("/resume") ? "bg-white/10 font-bold text-white" : "text-neutral-400 hover:bg-white/5 hover:text-white"} `}
-							>
-								{item.text}
-							</button>
-							{/* Dropdown Menu */}
-							<div class="absolute top-full left-1/2 hidden -translate-x-1/2 pt-4 group-hover:block">
-								<div class="flex w-48 flex-col gap-1 rounded-xl border border-white/10 bg-black/90 p-1 py-1 shadow-xl backdrop-blur-xl">
-									{item.dropdown.map((subItem) => (
-										<a
-											href={subItem.href}
-											target={subItem.newTab ? "_blank" : "_self"}
-											class="block rounded-lg px-4 py-2 text-center font-mono text-xs text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
-										>
-											{subItem.text}
-										</a>
-									))}
+			currentPath.replace(/\/$/, "") === "/resume" ? (
+				/* RESUME MODE: SHOW PRINT BUTTON */
+				<button
+					id="nav-print-btn"
+					class="group flex cursor-pointer items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs font-bold tracking-wider text-white uppercase transition-all hover:bg-white/10"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="14"
+						height="14"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						class="text-neutral-400 group-hover:text-white"
+					>
+						<path d="M6 9V2h12v7" />
+						<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+						<path d="M6 14h12v8H6z" />
+					</svg>
+					<span>Save as PDF</span>
+				</button>
+			) : (
+				/* STANDARD MODE: SHOW NAV LINKS */
+				navData.map((item) => {
+					if ("dropdown" in item) {
+						return (
+							<div class="group relative">
+								<button
+									class={`rounded-full px-4 py-1.5 font-mono text-xs tracking-wider uppercase transition-all duration-300 ${isActive("/resume") ? "bg-white/10 font-bold text-white" : "text-neutral-400 hover:bg-white/5 hover:text-white"} `}
+								>
+									{item.text}
+								</button>
+								{/* Dropdown Menu */}
+								<div class="absolute top-full left-1/2 hidden -translate-x-1/2 pt-4 group-hover:block">
+									<div class="flex w-48 flex-col gap-1 rounded-xl border border-white/10 bg-black/90 p-1 py-1 shadow-xl backdrop-blur-xl">
+										{item.dropdown.map((subItem) => (
+											<a
+												href={subItem.href}
+												target={subItem.newTab ? "_blank" : "_self"}
+												class="block rounded-lg px-4 py-2 text-center font-mono text-xs text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
+											>
+												{subItem.text}
+											</a>
+										))}
+									</div>
 								</div>
 							</div>
-						</div>
-					);
-				} else {
-					return (
-						<a
-							href={item.href}
-							class={`rounded-full px-4 py-1.5 font-mono text-xs tracking-wider uppercase transition-all duration-300 ${isActive(item.href) ? "bg-white/10 font-bold text-white" : "text-neutral-400 hover:bg-white/5 hover:text-white"} `}
-						>
-							{item.text}
-						</a>
-					);
-				}
-			})
+						);
+					} else {
+						return (
+							<a
+								href={item.href}
+								class={`rounded-full px-4 py-1.5 font-mono text-xs tracking-wider uppercase transition-all duration-300 ${isActive(item.href) ? "bg-white/10 font-bold text-white" : "text-neutral-400 hover:bg-white/5 hover:text-white"} `}
+							>
+								{item.text}
+							</a>
+						);
+					}
+				})
+			)
 		}
 
-		{/* Search Trigger */}
-		<div class="mx-1 h-3 w-px bg-white/20"></div>
-		<button
-			id="global-search-trigger"
-			class="group flex h-7 w-7 items-center justify-center rounded-full text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
-			aria-label="Search"
-		>
-			<Icon name="tabler:search" class="h-4 w-4" />
-		</button>
-	</div>
+		{
+			/* Search Trigger (Keep checking if not on resume, or keep always? User replaced nav pill with button. I will keep search accessible unless they want it GONE gone. Plan implies replacement of nav pill links. I'll keep search as it's useful.) */
+		}
+		{
+			currentPath.replace(/\/$/, "") !== "/resume" && (
+				<>
+					<div class="mx-1 h-3 w-px bg-white/20" />
+					<button
+						id="global-search-trigger"
+						class="group flex h-7 w-7 items-center justify-center rounded-full text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
+						aria-label="Search"
+					>
+						<Icon name="tabler:search" class="h-4 w-4" />
+					</button>
+				</>
+			)
+		}
 
-	<!-- RIGHT SLOT: Socials -->
-	<div slot="right" class="flex items-center gap-4">
-		<div class="hidden items-center gap-3 text-neutral-500 md:flex">
-			<a
-				href="https://github.com/eriknorris"
-				target="_blank"
-				class="hover:text-primary transition-colors hover:scale-110"
-			>
-				<Icon name="tabler:brand-github" class="h-5 w-5" />
-			</a>
-			<a
-				href="https://linkedin.com/in/eriknorris"
-				target="_blank"
-				class="hover:text-primary transition-colors hover:scale-110"
-			>
-				<Icon name="tabler:brand-linkedin" class="h-5 w-5" />
-			</a>
-			<a
-				href="mailto:erik@example.com"
-				class="hover:text-primary transition-colors hover:scale-110"
-			>
-				<Icon name="tabler:mail" class="h-5 w-5" />
-			</a>
-			{/* ThemeToggle Removed per user request */}
+		<!-- RIGHT SLOT: Socials -->
+		<div slot="right" class="flex items-center gap-4">
+			<div class="hidden items-center gap-3 text-neutral-500 md:flex">
+				<a
+					href="https://github.com/eriknorris"
+					target="_blank"
+					class="hover:text-primary transition-colors hover:scale-110"
+				>
+					<Icon name="tabler:brand-github" class="h-5 w-5" />
+				</a>
+				<a
+					href="https://linkedin.com/in/eriknorris"
+					target="_blank"
+					class="hover:text-primary transition-colors hover:scale-110"
+				>
+					<Icon name="tabler:brand-linkedin" class="h-5 w-5" />
+				</a>
+				<a
+					href="mailto:erik@example.com"
+					class="hover:text-primary transition-colors hover:scale-110"
+				>
+					<Icon name="tabler:mail" class="h-5 w-5" />
+				</a>
+				{/* ThemeToggle Removed per user request */}
+			</div>
+		</div>
+
+		<!-- Mobile Toggle Slot Override -->
+		<div slot="mobile-toggle" class="md:hidden">
+			<MobileNav />
 		</div>
 	</div>
 
-	<!-- Mobile Toggle Slot Override -->
-	<div slot="mobile-toggle" class="md:hidden">
-		<MobileNav />
-	</div>
-</UniversalHUD>
+	<script>
+		/// <reference lib="dom" />
+		const searchBtn = document.getElementById("global-search-trigger");
+		searchBtn?.addEventListener("click", () => {
+			// @ts-ignore
+			window.dispatchEvent(new CustomEvent("open-command-menu"));
+		});
 
-<script>
-	/// <reference lib="dom" />
-	const searchBtn = document.getElementById("global-search-trigger");
-	searchBtn?.addEventListener("click", () => {
-		// @ts-ignore
-		window.dispatchEvent(new CustomEvent("open-command-menu"));
-	});
-</script>
+		const printBtn = document.getElementById("nav-print-btn");
+		printBtn?.addEventListener("click", () => {
+			window.print();
+		});
+	</script>
+</UniversalHUD>

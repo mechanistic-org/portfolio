@@ -2,7 +2,7 @@
 import { Icon } from "astro-icon/components";
 
 interface Props {
-	mode?: "stealth" | "standard" | "fleet" | "tactical" | "archive";
+	mode?: "stealth" | "standard" | "fleet" | "tactical" | "archive" | "projects";
 	class?: string;
 	hideLogo?: boolean;
 }
@@ -20,7 +20,7 @@ const { mode = "standard", class: className, hideLogo = false } = Astro.props;
 	]}
 >
 	<!-- LEFT SLOT: Identity / Context -->
-	<div class="flex items-center justify-start gap-4">
+	<div class="flex flex-1 items-center justify-start gap-4">
 		<a
 			href="/"
 			class={`group flex items-center gap-2 transition-opacity hover:opacity-80 ${hideLogo ? "pointer-events-none" : ""}`}
@@ -48,7 +48,7 @@ const { mode = "standard", class: className, hideLogo = false } = Astro.props;
 	</div>
 
 	<!-- RIGHT SLOT: System / Actions -->
-	<div class="ml-auto flex items-center justify-end gap-4">
+	<div class="flex flex-1 items-center justify-end gap-4">
 		<slot name="right" />
 
 		<!-- Standard Mobile Toggle (Fallback) -->
