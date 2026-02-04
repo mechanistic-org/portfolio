@@ -58,6 +58,12 @@ These scripts drive the "Forensic Data Factory."
 
 ## 2. Troubleshooting: The Build (Astro/Vite)
 
+### 🔴 "The Live Archive" Trap (Vite Parsing)
+
+- **Symptom:** Build fails on a file in `src/pages/archive/` or `_backup/`, even though it's not linked in the app.
+- **Cause:** Vite/Rollup analyzes the entire dependency graph of `src/pages`. If a "Dead" file imports a module that was moved or deleted (e.g., `../config` vs `../../config`), the build crashes.
+- **Fix:** "Dead Code must still Compile." Fix the relative path or delete the file. Do not assume "Archive" means "Ignored."
+
 ### 🔴 "Duplicated Mapping Key" (YAML Error)
 
 - **Symptom:** Build fails with `duplicated mapping key` in MDX frontmatter.
@@ -197,3 +203,24 @@ To prevent "Stacking Wars", we vertically partition the Z-space into strict flig
 
 - **Function:** Generates placeholder "Narrative STAR" case studies for projects that lack manual content.
 - **Output:** Creates files in `data_source/manual_content/`.
+
+---
+
+## 8. Troubleshooting: Visual Engineering (Stream A)
+
+### 🔴 "Left Bias" Nav Trap (HTML Structure)
+
+- **Symptom:** Right-side icons shift left or center, ignoring `justify-end`.
+- **Cause:** A missing closing `</div>` in a previous slot (e.g., Center) captures the Right slot as a child.
+- **Fix:** Verify `Nav.astro` structure. Use **CSS Grid** (`grid-cols-[1fr_auto_1fr]`) in `UniversalHUD` to enforce isolation.
+
+### 🔴 "Ghost Starfield" (Transparency)
+
+- **Symptom:** Starfield is enabled (`starfield={true}`), but the screen is black.
+- **Cause:** `bg-black` or `bg-neutral-950` classes on the `body` or wrapping `div` sit at Z-1, obscuring the Z-0 Canvas.
+- **Fix:** Set container backgrounds to `bg-transparent` to reveal the void.
+
+### ⚠️ "Vite EPERM Lock" (Windows)
+
+- **Symptom:** `Error: EPERM: operation not permitted, rename` during `npm run dev`.
+- **Fix:** Restart the terminal.

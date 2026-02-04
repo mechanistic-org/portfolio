@@ -203,3 +203,46 @@ sidebar:
 
 1.  **PHYSICAL COUNT:** The "Bolus Count" is not a database number. It is a physical count of `_intelligence.md` files sitting next to `index.mdx` in the project folders.
 2.  **NO ARTIFACT = NO SCORE:** If you don't create the file, the score doesn't go up. Scripted stats are derived from disk reality.
+
+---
+
+## 👁️ XVII. The Law of Transparency (The "Void" Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-04
+**Context:** Users perceive "Black Backgrounds" as "Broken Starfields."
+**The Law:**
+
+1.  **DEFAULT TRANSPARENCY:** The "Paper" (Layout) floats on the "Void" (Canvas). Containers (`body`, `main`) must be `bg-transparent` unless opacity is functionally required.
+2.  **RESUME VISIBILITY:** Even the Master Resume sits in the void. Data is white/black, but the universe is visible around it.
+
+## 🌑 XVIII. The Law of the Aesthetic Stack (The "Dark Mode" Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-04
+**Context:** Maintaining dual themes (Light/Dark) doubled asset complexity and diluted the "Forensic" brand identity.
+**The Law:**
+
+1.  **DARK MODE SOVEREIGNTY:** The site is Dark Mode only. No toggles.
+2.  **STATIC TRUTH:** We reject "Wiggling 3D Logos" in favor of the Static White Wordmark (`SiteLogo.astro`). Less noise, more signal.
+
+## 📐 XIX. The Law of Justification (The "Grid" Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-04
+**Context:** Flexbox failed to align Social Icons when HTML structure was imperfect ("Left Bias").
+**The Law:**
+
+1.  **GRID OVER FLEX:** For structural HUDs, use CSS Grid (`grid-cols-[1fr_auto_1fr]`) to enforce flight levels.
+2.  **NO AMBIGUITY:** Use `justify-self-start/center/end`. Do not rely on "Space Between" collapsing behavior.
+
+## ⚓ XX. The Law of the Anchor (The Consistency Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-04
+**Context:** User frustration when the "Home" experience (Hyperspace) removed the standard top-left Logo, removing the primary visual anchor found on all other pages.
+
+**The Law:**
+
+1.  **CONSISTENCY IS KING:** "Experimental" themes must still provide standard wayfinding. The "White EN Logo" in the top-left is a non-negotiable constant.
+2.  **WRAP, DON'T REINVENT:** Use the standard `<Nav>` component (which handles responsive paths, logos, and menus) rather than manually injecting `<UniversalHUD>` patches that drift from the standard.

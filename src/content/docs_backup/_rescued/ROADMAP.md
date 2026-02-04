@@ -51,6 +51,11 @@ sidebar:
 
 ## 📜 Change Log (Recent)
 
+- **[2026-02-04] Verification & Stability (The "False Positive" Fix)**
+  - **[Build] The Nuclear Stub Fallacy:** Diagnostics revealed that `detect-gpu`/`drei` were _not_ the cause of the SSR build failure. The root cause was a broken relative import in `legacy_about.astro`. Reversed the "Nuclear Stub" (mocking `detect-gpu`) to restore clean configuration.
+  - **[UX] The Anchor:** Restored the standard "White EN Logo" to the Hyperspace/Index theme, enforcing "Navigation Consistency" over "Thematic Minimalism."
+  - **[Fix] Nav Architecture:** Replaced manual `UniversalHUD` injection with the standard `Nav` wrapper in `HyperspaceHome` to ensure consistent logo/menu behavior.
+
 - **[2026-01-18] Prompt Engineering V3 (The Refinery)**
   - **[Architecture]** Split `notebook-refine` into `notebook-bolus` (JSON) and `notebook-report` (MD) to decouple logic from narrative.
   - **[Protocol]** Established "Iron Dome" stealth protocols for Audio Generation, preventing the host from reading instructions.
