@@ -14,13 +14,13 @@ const { mode = "standard", class: className, hideLogo = false } = Astro.props;
 	id="universal-hud"
 	data-mode={mode}
 	class:list={[
-		"fixed top-0 left-0 z-[100] flex w-full items-center justify-between px-6 py-4 transition-all duration-500",
+		"fixed top-0 left-0 z-[100] grid w-full grid-cols-[1fr_auto_1fr] items-center px-6 py-4 transition-all duration-500",
 		"border-b border-white/0", // Start transparent
 		className,
 	]}
 >
 	<!-- LEFT SLOT: Identity / Context -->
-	<div class="flex flex-1 items-center justify-start gap-4">
+	<div class="flex items-center gap-4 justify-self-start">
 		<a
 			href="/"
 			class={`group flex items-center gap-2 transition-opacity hover:opacity-80 ${hideLogo ? "pointer-events-none" : ""}`}
@@ -42,13 +42,13 @@ const { mode = "standard", class: className, hideLogo = false } = Astro.props;
 	<!-- CENTER SLOT: Telemetry / Controls / Nav -->
 	<div
 		id="hud-center"
-		class="absolute top-1/2 left-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center justify-center transition-all duration-300 md:flex"
+		class="hidden items-center justify-center justify-self-center transition-all duration-300 md:flex"
 	>
 		<slot name="center" />
 	</div>
 
 	<!-- RIGHT SLOT: System / Actions -->
-	<div class="flex flex-1 items-center justify-end gap-4">
+	<div class="flex items-center gap-4 justify-self-end">
 		<slot name="right" />
 
 		<!-- Standard Mobile Toggle (Fallback) -->
