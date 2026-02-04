@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react"; // Explicit React import for Astro
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import TimeCapsule from "./TimeCapsule";
-import RetroLogoAnimator from "./RetroLogoAnimator";
 
 interface GalleryImage {
 	src: string;
@@ -37,7 +35,7 @@ export default function SharedLayoutGallery({
 	showLabels = true,
 }: SharedLayoutGalleryProps & { showLabels?: boolean }) {
 	const [selectedId, setSelectedId] = useState<string | null>(null);
-	const [showTimeCapsule, setShowTimeCapsule] = useState(false);
+
 	const [activeFilter, setActiveFilter] = useState("All");
 
 	// Extract Categories
@@ -49,11 +47,8 @@ export default function SharedLayoutGallery({
 	// Handle image click - intercept "time-capsule" trigger
 	const handleImageClick = (image: GalleryImage, index: number) => {
 		// @ts-ignore - trigger property exists in data but not strictly typed yet
-		if (image.trigger === "time-capsule") {
-			setShowTimeCapsule(true);
-		} else {
-			setSelectedId(`${id}-img-${index}`);
-		}
+		// Normal lightbox
+		setSelectedId(`${id}-img-${index}`);
 	};
 
 	// Deduplicate images to prevent rendering issues
@@ -461,8 +456,6 @@ export default function SharedLayoutGallery({
 					</Masonry>
 				</div>
 			)}
-
-			<TimeCapsule isOpen={showTimeCapsule} onClose={() => setShowTimeCapsule(false)} />
 
 			{/* Fullscreen Overlay - Portaled to Body to escape Stacking Context */}
 			{typeof document !== "undefined" &&

@@ -1,4 +1,0 @@
-.|menu1       _|||||0
-..|submenu1|||||0
-...|sub-item1||digi_grey.png||
-...|sub-item2||||

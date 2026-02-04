@@ -1,3 +1,0 @@
-{0:    MATERIAL: STEEL, ASTM A36, ANGLE,}
-{1:    (UNS K02600) 2.5 X 1.5 X .188 INCH.}
-{2: }

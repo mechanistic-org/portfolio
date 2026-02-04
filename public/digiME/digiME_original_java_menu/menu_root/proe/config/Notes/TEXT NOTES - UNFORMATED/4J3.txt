@@ -1,5 +1,0 @@
-SURFACE TOLERANCES ARE AS FOLLOWS:
-
-
-SURFACE DIM. MM  UP TO 18      50      120     250       500     1000
-TOLERANCE MM     ±1           ±1.3    ±1.5     ±2.0      ±2.5     ±3.0

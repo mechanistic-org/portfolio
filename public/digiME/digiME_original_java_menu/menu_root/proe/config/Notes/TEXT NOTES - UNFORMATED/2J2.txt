@@ -1,1 +1,0 @@
-MATERIAL:  $, ASTM D2000, $.

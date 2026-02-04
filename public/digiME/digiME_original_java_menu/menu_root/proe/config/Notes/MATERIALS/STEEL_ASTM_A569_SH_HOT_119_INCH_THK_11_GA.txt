@@ -1,3 +1,0 @@
-{0:    MATERIAL: STEEL, ASTM A569, SHEET,}
-{1:    HOT ROLLED, .119 INCH THK (11 GA).}{2: }
-{3: }

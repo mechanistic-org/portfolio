@@ -58,7 +58,7 @@ def compile_linkedin():
                  final_output.append(blurb)
                  final_output.append("\n")
 
-    output_path = r"public/assets/branding/LINKEDIN_READY.txt"
+    output_path = r"public/assets/prompts/LINKEDIN_READY.txt"
     with open(output_path, "w", encoding="utf-8") as f:
         f.write("\n".join(final_output))
 

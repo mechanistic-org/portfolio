@@ -1,8 +1,7 @@
 ---
 title: "The Grok Log"
-description: "The Project Constitution and Architectural Laws."
-sidebar:
-  order: 1
+description: "Constitutional rulings and architectural laws preventing recurring reversions."
+slug: "grok_log"
 ---
 
 # THE GROK LOG
@@ -10,6 +9,8 @@ sidebar:
 > "Lightning in a Bottle"
 
 **Purpose:** This document serves as the project's "Constitution." It captures the hard-won intuition, architectural laws, and "Committee Rulings" that must be preserved across sessions. It prevents "Recurring Reversions."
+
+**Synced:** 2026-02-04 (Archive Synthesis)
 
 ---
 
@@ -69,10 +70,27 @@ sidebar:
 4.  **NO LEGACY BINARIES:** NotebookLM rejects `.xls` (97) and `.doc` (97). Convert to PDF or ignore.
 5.  **NO RECURSION:** The Stitcher is "Flat." It does not see subfolders (e.g., `ECOs/ECO_12262`). These require manual handling.
 
+---
+
 ## 🔮 V. Future Grok (Open Slots)
 
 - [ ] **The Law of "Moves":** Defining the threshold for "Cool" vs "Gimmick" (re: Parallax/Breathe).
 - [ ] **Terminology Shift:** Rename "Hyperspace" architecture to something more descriptive of the "Intelligence First" pipeline (Backlog).
+
+---
+
+## 🎨 VI. The Law of Asset Sovereignty (The Interaction Decree)
+
+**Status:** ENFORCED
+**Date:** 2025-12-26
+**Context:** Friction encountered when Agent generated a generic "Dreamjob" asset to fix a 404, overwriting the canonical (but missing locally) asset. This violated the "Director's Vision".
+
+**The Law:**
+
+1.  **Implicit vs. Explicit:** The Agent must assume "Missing Asset" = "Needs Retrieval", NOT "Needs Creation".
+2.  **Localhost Air Gap:** The Agent must valididate Symlinks before questioning existence. A failure locally is not a failure globally.
+3.  **Creative License Limits:** Code is mutable; Content/Assets are immutable (unless explicitly in a "Constructed Reality" context like _Dreamjob_ OR explicitly authorized).
+4.  **ErikNorris Exception:** For defined "Dream" projects, Synthesis is allowed if no historical truth exists.
 
 ---
 
@@ -103,19 +121,6 @@ sidebar:
 
 ---
 
-## 🎨 VI. The Law of Asset Sovereignty (The Interaction Decree)
-
-**Status:** ENFORCED
-**Date:** 2025-12-26
-**Context:** Friction encountered when Agent generated a generic "Dreamjob" asset to fix a 404, overwriting the canonical (but missing locally) asset. This violated the "Director's Vision".
-
-**The Law:**
-
-1.  **Implicit vs. Explicit:** The Agent must assume "Missing Asset" = "Needs Retrieval", NOT "Needs Creation".
-2.  **Localhost Air Gap:** The Agent must valididate Symlinks before questioning existence. A failure locally is not a failure globally.
-3.  **Creative License Limits:** Code is mutable; Content/Assets are immutable (unless explicitly in a "Constructed Reality" context like _Dreamjob_ OR explicitly authorized).
-4.  **ErikNorris Exception:** For defined "Dream" projects, Synthesis is allowed if no historical truth exists.
-
 ## 📄 IX. The Law of the Master Resume (The Single Source Decree)
 
 **Status:** ENFORCED
@@ -126,6 +131,8 @@ sidebar:
 1.  **CODE IS TRUTH:** `src/config/resume_master.ts` is the generator for ALL formats.
 2.  **ONE PDF:** The canonical PDF lives in `public/assets/resume/`. We do NOT store PDFs in `eriknorris-assets` anymore.
 3.  **VANITY COMPATIBILITY:** We explicitly patch the R2 bucket (`Erik_Norris_CV.pdf`) to keep the `resume.eriknorris.com` redirect alive, but the _source_ is always the repo PDF.
+
+---
 
 ## 🖼️ X. The LinkedIn Standard (The Banner Decree)
 
@@ -138,6 +145,8 @@ sidebar:
 2.  **THE VOID:** The Left 400px is reserved for the Avatar. It should be abstract or empty (Void).
 3.  **ASPECT RATIO:** 4:1 (1584x396px). Do not rely on LinkedIn's auto-crop.
 
+---
+
 ## 👥 XI. The Law of Social Decoupling (The LinkedIn Decree)
 
 **Status:** ENFORCED
@@ -147,6 +156,8 @@ sidebar:
 **The Law:**
 
 1.  **SEPARATE MASTERS:** `linkedin_master.ts` (Social) is distinct from `resume_master.ts` (PDF).
+
+---
 
 ## 🤫 XII. The Law of the Iron Dome (The Stealth Decree)
 
@@ -160,7 +171,74 @@ sidebar:
 3.  **VERIFICATION:** If the Audio Host says "Here are your instructions," the protocol has failed. Reset the context.
 4.  **POTATO MODE:** When invoked, the Agent must drop all "Corporate Politeness" and provide a raw, unvarnished forensic analysis of Agent vs. User performance.
 
-## 🧱 XIII. The Law of Stability (The 4 Shields Decree)
+---
+
+## XIII. The Automation of Intelligence (The Hydration Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-01-28
+**Context:** The "Assembly" metric relied on manual creation of `_intelligence.md` files, leading to sync drift.
+**The Law:**
+
+1.  **HYDRATION IS TRUTH:** The Hydration Script (`hydrate_content.py`) is the **Single Source of Truth** for asset generation.
+2.  **AUTO-INJECTION:** It MUST automatically detect `{slug}.md` files in `notebook_dumps/` and inject them as `_intelligence.md` into the project source.
+3.  **BANNED:** Manual creation of intelligence files is forbidden. `notebook_dumps/` is Staging; `src/` is Target.
+
+---
+
+## XIV. The Tags Connectivity Law (The Fastener Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-01-28
+**Context:** D-Control was isolated in the graph because it lacked `tags` or `skillData`.
+**The Law:**
+
+1.  **NO ORPHANS:** All Project MDX files MUST contain a populated `tags` array derived from their `toolchain`.
+2.  **FASTENER PRINCIPLE:** Tags are the primary "Fastener" for the Assembly Graph physics engine. Empty tags = unconnected node.
+
+---
+
+## XV. The Law of the Honda (The Stability Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-01-28
+**Context:** User inquired about using "Shiny Object" formats (JXL) vs "Reliable" formats (JPEG).
+**The Law:**
+
+1.  **THE HONDA STANDARD:** We prefer reliability over novelty. **JPEG** is the Honda Odyssey of formats—reliable, universal, compatible.
+2.  **BAN ON EXOTICS:** Formats like `.jxl` (JPEG XL) are BANNED from `R2_MASTER` until native Python/Pillow support is ubiquitous. We do not maintain brittle plugins.
+3.  **THE PIPELINE IS KING:** Assets exist to feed the Script, not to be archival masters. Archival TIFFs live in Cold Storage (NAS), not the Repo.
+
+---
+
+## XVI. The Law of Resolution (The 2500 Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-01-28
+**Context:** Pipeline was skipping `xl` breakpoints (1920px) because source images were too small (<800px).
+**The Law:**
+
+1.  **FEED THE BEAST:** Input images to `R2_MASTER` MUST exceed the largest breakpoint (1920px).
+2.  **THE GOLDEN TARGET:** **2500px** (Width/Height) is the standard export size. This allows a clean Lanczos downsample to 1920px/1280px.
+3.  **LEGACY UPSCALING:** Archive assets (<1000px) MUST be passed through "Super Resolution" or "Upscayl" to reach ~2500px before ingest.
+
+---
+
+## XVII. The Law of the Honda Standard (The Anti-Complexity Decree)
+
+**Status:** ENFORCED (Ratified 2026-01-31)
+**Trigger:** The "OpenClaw / Moltbook" Investigation.
+**Context:** The Architect was tempted to solve a simple problem (Social Posting) with a complex tool (Autonomous Agent Framework).
+
+**The Law:**
+
+1.  **REJECT THE VOLVO:** Do not build a "Heavy" solution (Agent Framework, Database, API Gateway) when a "Honda" solution (Python Script, Markdown File, Manual Copy-Paste) will suffice.
+2.  **THE FACSIMILE TRAP:** It is better to have a _Manual System_ that runs (Path A) than an _Autonomous Agent_ that requires maintenance (Path B).
+3.  **SOVEREIGNTY OVER AUTOMATION:** If "Automating" it requires giving away the keys (Cloud Auth, 3rd Party Service), **Do Not Do It.** We prefer "Telemetry" (User-Triggered Script) over "Autonomy" (Black Box Service).
+
+---
+
+## 🧱 XVIII. The Law of Stability (The 4 Shields Decree)
 
 **Status:** ENFORCED
 **Date:** 2026-02-02
@@ -172,7 +250,9 @@ sidebar:
 3.  **THE CANARY:** The `verify_deep_hud.cjs` script is the "Canary in the Coal Mine." If the "Governance" text is missing from C24, the build is broken, regardless of compile status.
 4.  **ATOMIC EDITS:** The Agent must prioritize `replace_file_content` (Patching) over `write_to_file` (Overwriting) to prevent "Context Clobbering" (e.g., deleting `<slot />`).
 
-## 🥔 XIV. The Law of Potato (The Active Voice Decree)
+---
+
+## 🥔 XIX. The Law of Potato (The Active Voice Decree)
 
 **Status:** ENFORCED
 **Date:** 2026-02-02
@@ -184,7 +264,9 @@ sidebar:
 3.  **VERIFY PIXELS:** "It's Fixed" means "I see the pixels," not "The code compiled." Confusing the two is a fireable offense.
 4.  **ROOT CAUSE OVER PATCH:** Do not fix a syntax error without asking _why_ it happened. If a YAML key is missing, finding the _source_ (e.g., the Agent that wrote it) is more important than silencing the error.
 
-## 🧹 XV. The Law of Visual Sanitation (The Label Decree)
+---
+
+## 🧹 XX. The Law of Visual Sanitation (The Label Decree)
 
 **Status:** ENFORCED
 **Date:** 2026-02-02
@@ -194,7 +276,9 @@ sidebar:
 1.  **CLEAN DATA UPSTREAM:** Do not rely on "Display Logic" to clean dirty IDs. Sanitize the data at the `map()` stage (e.g., `.replace("skill-", "")` inside the data transformer).
 2.  **COMPONENT TRUTH:** Never assume a component name matches the route. Always check `src/pages/{route}.astro` to verify which React component is actually mounted (e.g., `/assembly` -> `ExplodedView.tsx`).
 
-## 💊 XVI. The Law of the Bolus (The Artifact Decree)
+---
+
+## 💊 XXI. The Law of the Bolus (The Artifact Decree)
 
 **Status:** ENFORCED
 **Date:** 2026-02-02
@@ -206,7 +290,7 @@ sidebar:
 
 ---
 
-## 👁️ XVII. The Law of Transparency (The "Void" Decree)
+## 👁️ XXII. The Law of Transparency (The "Void" Decree)
 
 **Status:** ENFORCED
 **Date:** 2026-02-04
@@ -216,7 +300,9 @@ sidebar:
 1.  **DEFAULT TRANSPARENCY:** The "Paper" (Layout) floats on the "Void" (Canvas). Containers (`body`, `main`) must be `bg-transparent` unless opacity is functionally required.
 2.  **RESUME VISIBILITY:** Even the Master Resume sits in the void. Data is white/black, but the universe is visible around it.
 
-## 🌑 XVIII. The Law of the Aesthetic Stack (The "Dark Mode" Decree)
+---
+
+## 🌑 XXIII. The Law of the Aesthetic Stack (The "Dark Mode" Decree)
 
 **Status:** ENFORCED
 **Date:** 2026-02-04
@@ -226,7 +312,9 @@ sidebar:
 1.  **DARK MODE SOVEREIGNTY:** The site is Dark Mode only. No toggles.
 2.  **STATIC TRUTH:** We reject "Wiggling 3D Logos" in favor of the Static White Wordmark (`SiteLogo.astro`). Less noise, more signal.
 
-## 📐 XIX. The Law of Justification (The "Grid" Decree)
+---
+
+## 📐 XXIV. The Law of Justification (The "Grid" Decree)
 
 **Status:** ENFORCED
 **Date:** 2026-02-04
@@ -236,7 +324,9 @@ sidebar:
 1.  **GRID OVER FLEX:** For structural HUDs, use CSS Grid (`grid-cols-[1fr_auto_1fr]`) to enforce flight levels.
 2.  **NO AMBIGUITY:** Use `justify-self-start/center/end`. Do not rely on "Space Between" collapsing behavior.
 
-## ⚓ XX. The Law of the Anchor (The Consistency Decree)
+---
+
+## ⚓ XXV. The Law of the Anchor (The Consistency Decree)
 
 **Status:** ENFORCED
 **Date:** 2026-02-04

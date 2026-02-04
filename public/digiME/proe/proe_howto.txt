@@ -1,2 +1,0 @@
-.|How-to Guides|||||0
-..|Change License Server|change_license_server.php||||0

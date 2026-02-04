@@ -1,3 +1,0 @@
-.|Setup|||||0
-..|Config Options|./reference/W2_config_options_25921.pdf||pdf.png|
-..|more coming...|

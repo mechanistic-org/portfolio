@@ -9,11 +9,7 @@ export const prerender = true;
 // THEME REGISTRY
 // import DataSheet from "@layouts/themes/DataSheet.astro"; // DELETED
 import Hyperspace from "@layouts/themes/Hyperspace.astro";
-import Command from "@layouts/themes/Command.astro";
-import Redacted from "@layouts/themes/Redacted.astro";
-import RedactedTerminal from "@layouts/themes/RedactedTerminal.astro";
-import RedactedDossier from "@layouts/themes/RedactedDossier.astro";
-// Future themes:
+// 1. Generate a new path for every collection entry
 // import RetroConsole from "@layouts/themes/RetroConsole.astro";
 
 // 1. Generate a new path for every collection entry
@@ -138,11 +134,11 @@ else {
 const ThemeComponents: Record<string, any> = {
 	datasheet: Hyperspace, // Re-route legacy datasheet to Hyperspace
 	hyperspace: Hyperspace,
-	command: Command,
-	redacted: Redacted,
-	"redacted-terminal": RedactedTerminal,
-	"redacted-dossier": RedactedDossier,
-	redacteddossier: RedactedDossier,
+	command: Hyperspace, // Archived -> Hyperspace
+	redacted: Hyperspace, // Archived -> Hyperspace
+	"redacted-terminal": Hyperspace, // Archived -> Hyperspace
+	"redacted-dossier": Hyperspace, // Archived -> Hyperspace
+	redacteddossier: Hyperspace, // Archived -> Hyperspace
 };
 
 // Select Component (with fallback)

@@ -1,2 +1,0 @@
-{0: }{1:2. MATERIAL:   ASTM A36, STEEL, BAR, ROUND, HOT}
-{2:   ROLLED, n.25 INCH.}

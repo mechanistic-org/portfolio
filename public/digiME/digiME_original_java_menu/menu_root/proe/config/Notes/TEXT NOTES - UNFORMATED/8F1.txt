@@ -1,9 +1,0 @@
-UNLESS OTHERWISE SPECIFIED, WIRE LENGTH
-TOLERANCES ARE AS FOLLOWS:
-
-                METRIC                     INCH
-UNDER	-   500mm    ± 12mm      UNDER - 20 INCH    ± .5  INCH
-500	-   1000mm   ± 25mm      21 -    40 INCH    ± 1   INCH
-1001	-   2500mm   ± 50mm      41 -    100 INCH   ± 2   INCH
-2501	-   7500mm   ± 100mm     101 -   300 INCH   ± 3   INCH
-7501	-   OVER     ± 200mm     300 -   OVER       ± 4   INCH

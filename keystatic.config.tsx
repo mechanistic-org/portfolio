@@ -628,6 +628,10 @@ export default config({
 			format: { contentField: "content" },
 			schema: {
 				title: fields.slug({ name: { label: "Title" } }),
+				description: fields.text({
+					label: "Description",
+					description: "Short summary of the prompt's purpose.",
+				}),
 				category: fields.select({
 					label: "Engine Cycle Phase",
 					description: "The 4-Stroke Taxonomy (Suck, Squeeze, Bang, Blow)",
