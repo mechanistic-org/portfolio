@@ -14,7 +14,7 @@ function processMarkdown(text: string) {
 }
 ---
 
-<BaseLayout title="Resume | Erik Norris" description="Master Resume">
+<BaseLayout title="Resume | Erik Norris" description="Master Resume" starfield={true}>
 	<!-- 
     PRINT LAYOUT CONTAINER 
     - Forced white background
@@ -22,7 +22,7 @@ function processMarkdown(text: string) {
     - Print-specific overrides
   -->
 	<div
-		class="min-h-screen w-full bg-[#f2f2f2] p-12 pt-24 md:p-24 md:pt-24 dark:bg-neutral-950 print:bg-white print:p-0"
+		class="min-h-screen w-full bg-[#f2f2f2] p-12 pt-24 md:p-24 md:pt-24 dark:bg-transparent print:bg-white print:p-0"
 	>
 		<!-- Print Button Moved to Nav -->
 
