@@ -110,51 +110,51 @@ const { hideLogo } = Astro.props;
 				</>
 			)
 		}
+	</div>
 
-		<!-- RIGHT SLOT: Socials -->
-		<div slot="right" class="flex items-center gap-4">
-			<div class="hidden items-center gap-3 text-neutral-500 md:flex">
-				<a
-					href="https://github.com/eriknorris"
-					target="_blank"
-					class="hover:text-primary transition-colors hover:scale-110"
-				>
-					<Icon name="tabler:brand-github" class="h-5 w-5" />
-				</a>
-				<a
-					href="https://linkedin.com/in/eriknorris"
-					target="_blank"
-					class="hover:text-primary transition-colors hover:scale-110"
-				>
-					<Icon name="tabler:brand-linkedin" class="h-5 w-5" />
-				</a>
-				<a
-					href="mailto:erik@example.com"
-					class="hover:text-primary transition-colors hover:scale-110"
-				>
-					<Icon name="tabler:mail" class="h-5 w-5" />
-				</a>
-				{/* ThemeToggle Removed per user request */}
-			</div>
-		</div>
-
-		<!-- Mobile Toggle Slot Override -->
-		<div slot="mobile-toggle" class="md:hidden">
-			<MobileNav />
+	<!-- RIGHT SLOT: Socials -->
+	<div slot="right" class="flex items-center gap-4">
+		<div class="hidden items-center gap-3 text-neutral-500 md:flex">
+			<a
+				href="https://github.com/eriknorris"
+				target="_blank"
+				class="hover:text-primary transition-colors hover:scale-110"
+			>
+				<Icon name="tabler:brand-github" class="h-5 w-5" />
+			</a>
+			<a
+				href="https://linkedin.com/in/eriknorris"
+				target="_blank"
+				class="hover:text-primary transition-colors hover:scale-110"
+			>
+				<Icon name="tabler:brand-linkedin" class="h-5 w-5" />
+			</a>
+			<a
+				href="mailto:erik@example.com"
+				class="hover:text-primary transition-colors hover:scale-110"
+			>
+				<Icon name="tabler:mail" class="h-5 w-5" />
+			</a>
+			{/* ThemeToggle Removed per user request */}
 		</div>
 	</div>
 
-	<script>
-		/// <reference lib="dom" />
-		const searchBtn = document.getElementById("global-search-trigger");
-		searchBtn?.addEventListener("click", () => {
-			// @ts-ignore
-			window.dispatchEvent(new CustomEvent("open-command-menu"));
-		});
-
-		const printBtn = document.getElementById("nav-print-btn");
-		printBtn?.addEventListener("click", () => {
-			window.print();
-		});
-	</script>
+	<!-- Mobile Toggle Slot Override -->
+	<div slot="mobile-toggle" class="md:hidden">
+		<MobileNav />
+	</div>
 </UniversalHUD>
+
+<script>
+	/// <reference lib="dom" />
+	const searchBtn = document.getElementById("global-search-trigger");
+	searchBtn?.addEventListener("click", () => {
+		// @ts-ignore
+		window.dispatchEvent(new CustomEvent("open-command-menu"));
+	});
+
+	const printBtn = document.getElementById("nav-print-btn");
+	printBtn?.addEventListener("click", () => {
+		window.print();
+	});
+</script>
