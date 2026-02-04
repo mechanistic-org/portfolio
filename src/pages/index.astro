@@ -56,32 +56,29 @@ const consoleProjects = assembly.nodes
 <Layout
 	title="Erik Norris | Senior Staff ME / Designer"
 	description="Forensic Architecture Prototype v2"
-	hideNavLogo={true}
+	hideNavLogo={false}
+	starfield={true}
 >
 	<div
-		class="hxo-prototype min-h-screen max-w-[100vw] overflow-hidden bg-black font-sans text-zinc-300 selection:bg-lime-900 selection:text-white"
+		class="hxo-prototype min-h-screen max-w-[100vw] overflow-hidden bg-transparent font-sans text-zinc-300 selection:bg-lime-900 selection:text-white"
 	>
 		<main class="grid h-screen grid-cols-1 overflow-hidden lg:grid-cols-12">
 			{/* LEFT: THE SWARM (Navigation / Map) */}
 			{/* Enabled overflow-y-auto to allow scrolling the long timeline */}
 			<div
-				class="custom-scrollbar relative h-screen overflow-x-hidden overflow-y-auto border-r border-zinc-900 bg-black lg:col-span-7 xl:col-span-8"
+				class="custom-scrollbar relative h-screen overflow-x-hidden overflow-y-auto border-r border-zinc-900 bg-transparent lg:col-span-7 xl:col-span-8"
 			>
 				<HXOSwarmContainer client:load nodes={swarmNodes} />
 				{/* Overlay Title - Pushed down to clear fixed Nav */}
 				<div class="pointer-events-none absolute top-4 left-6 z-50">
-					{/* WIGGLE LOGO REPLACEMENT (Forged Carbon 3D) */}
-					{/* Scaled to fit "Green Box" area ~100px */}
-					<div class="relative h-24 w-24">
-						{/* WiggleLogo3D Removed per user request */}
-					</div>
+					{/* WIGGLE LOGO REMOVED: Using standard Nav Logo per user request */}
 				</div>
 			</div>
 
 			{/* RIGHT: THE CONSOLE (Details / Index) */}
 			{/* Must start below the 5rem Nav and fill the rest without overflow */}
 			<div
-				class="relative z-30 mt-16 flex h-[calc(100vh-4rem)] flex-col bg-black lg:col-span-5 xl:col-span-4"
+				class="relative z-30 mt-16 flex h-[calc(100vh-4rem)] flex-col bg-transparent lg:col-span-5 xl:col-span-4"
 			>
 				<HXOConsole client:load projects={consoleProjects} />
 			</div>

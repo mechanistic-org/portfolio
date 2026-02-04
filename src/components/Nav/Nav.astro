@@ -2,7 +2,7 @@
 // Universal Capsule Nav (Hyperspace Standard)
 import { Icon } from "astro-icon/components";
 import navData from "../../config/navData"; // Adjusted import to relative path
-import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
+// import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
 import MobileNav from "@components/Nav/MobileNav/MobileNav.astro";
 import UniversalHUD from "@components/Nav/UniversalHUD.astro"; // NEW wrapper
 
@@ -25,7 +25,7 @@ const { hideLogo } = Astro.props;
 	<div
 		slot="center"
 		id="nav-capsule"
-		class="flex items-center justify-center gap-1 rounded-full border border-white/10 bg-black/80 p-1 backdrop-blur-md transition-all duration-300"
+		class="flex items-center justify-center gap-1 p-1 transition-all duration-300"
 	>
 		{
 			navData.map((item) => {
@@ -100,7 +100,7 @@ const { hideLogo } = Astro.props;
 			>
 				<Icon name="tabler:mail" class="h-5 w-5" />
 			</a>
-			<ThemeToggle />
+			{/* ThemeToggle Removed per user request */}
 		</div>
 	</div>
 

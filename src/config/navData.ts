@@ -14,7 +14,7 @@ export type navItem = navLinkItem | navDropdownItem;
 const navConfig: navItem[] = [
 	// Removed Projects/About for HXO Consolidation
 	{
-		text: "Resume",
+		text: "Résumé",
 		dropdown: [
 			{
 				text: "PDF",
