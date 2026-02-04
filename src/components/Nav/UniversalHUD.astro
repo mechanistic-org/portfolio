@@ -4,9 +4,10 @@ import { Icon } from "astro-icon/components";
 interface Props {
 	mode?: "stealth" | "standard" | "fleet" | "tactical" | "archive";
 	class?: string;
+	hideLogo?: boolean;
 }
 
-const { mode = "standard", class: className } = Astro.props;
+const { mode = "standard", class: className, hideLogo = false } = Astro.props;
 ---
 
 <nav
@@ -20,8 +21,15 @@ const { mode = "standard", class: className } = Astro.props;
 >
 	<!-- LEFT SLOT: Identity / Context -->
 	<div class="flex items-center justify-start gap-4">
-		<a href="/" class="group flex items-center gap-2 transition-opacity hover:opacity-80">
-			<img src="/assets/branding/EN_logo_white_1024.png" alt="EN Logo" class="h-8 w-auto" />
+		<a
+			href="/"
+			class={`group flex items-center gap-2 transition-opacity hover:opacity-80 ${hideLogo ? "pointer-events-none" : ""}`}
+		>
+			{
+				!hideLogo && (
+					<img src="/assets/branding/EN_logo_white_1024.png" alt="EN Logo" class="h-8 w-auto" />
+				)
+			}
 			{
 				mode === "projects" && (
 					<span class="font-mono text-xs font-bold tracking-widest text-white/50">PROJECTS</span>

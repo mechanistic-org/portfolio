@@ -122,7 +122,7 @@ const projectsCollection = defineCollection({
 
 		// Forensic Architecture (injected by hydrate_content.py)
 		toolchain: z.array(z.string()).optional(),
-		forensic_summary: z.string().optional(),
+		forensic_summary: z.any().optional(), // CHANGED: Allow object or string to prevent crash
 		audio_url: z.string().optional(),
 		notebook_url: z.string().optional(),
 
@@ -163,6 +163,11 @@ const projectsCollection = defineCollection({
 		// Theme Selector (Core Architecture)
 		theme: z.string().catch("hyperspace").optional(),
 		presentation_mode: z.string().optional(),
+
+		// HXO / Tiering Architecture (V5)
+		hydration_status: z.string().optional(), // 'full', 'partial', 'executive'
+		tier: z.number().optional(), // 1, 2, 3
+		hxo_ready: z.boolean().default(false),
 
 		// Visibility
 		listed: z.boolean().default(true),

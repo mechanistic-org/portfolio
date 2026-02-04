@@ -24,6 +24,7 @@ interface NodeData extends d3.SimulationNodeDatum {
 interface ResVizSwarmProps {
 	nodes: MultiverseNode[]; // NEW PROP
 	onNodeSelect?: (node: any) => void;
+	onNodeClick?: (node: any) => void;
 	externalHoverId?: string;
 	shouldStart?: boolean;
 }
@@ -35,6 +36,7 @@ const DEFAULT_COLOR = "#666666";
 export default function ResVizSwarm({
 	nodes: rawNodes, // Destructure prop
 	onNodeSelect,
+	onNodeClick,
 	externalHoverId,
 	shouldStart = false,
 }: ResVizSwarmProps) {
@@ -152,12 +154,12 @@ export default function ResVizSwarm({
 
 		const simulation = d3
 			.forceSimulation<NodeData>(nodes)
-			.alphaDecay(0.005) // Extended sustain
-			.velocityDecay(0.05) // EXTREMELY LOW FRICTION (Ice/Space) - crucial for distance for Range, but enough to grab it eventually
-			.force("x", d3.forceX(width / 2).strength(0.04)) // Weak centering
-			.force("y", d3.forceY<NodeData>((d) => timeScale(d.date as Date)).strength(0.08)) // Weak gravity -> Elastic rebound
-			.force("collide", d3.forceCollide<NodeData>((d) => (d as any).radius).strength(0.8))
-			.force("charge", d3.forceManyBody().strength(-20)) // Explosion expansion
+			.alphaDecay(0.001) // Extremely low decay for perpetual motion
+			.velocityDecay(0.3) // Higher friction to control the Brownian jitter (was 0.05)
+			.force("x", d3.forceX(width / 2).strength(0.02)) // Reduced centering to allow drift
+			.force("y", d3.forceY<NodeData>((d) => timeScale(d.date as Date)).strength(0.1)) // Stronger gravity to keep structure
+			.force("collide", d3.forceCollide<NodeData>((d) => (d as any).radius + 2).strength(0.8)) // +2 padding for breathing room
+			.force("charge", d3.forceManyBody().strength(-15)) // Gentler repulsion
 			.force("interact", () => {
 				if (!mousePos.current) return;
 				// ... physics ...
@@ -198,21 +200,8 @@ export default function ResVizSwarm({
 			});
 
 		// --- Axis (Right Side) ---
-		const yAxis = d3
-			.axisRight(timeScale)
-			.ticks(height < 600 ? 5 : 10)
-			.tickFormat(d3.timeFormat("%Y") as any)
-			.tickSize(0)
-			.tickPadding(10);
-
-		svg
-			.append("g")
-			.attr("id", "swarm-axis") // TARGET FOR SCROLL ANIMATION
-			.attr("transform", `translate(${width - 50}, 0)`)
-			.attr("class", "text-neutral-500 font-mono text-xs opacity-50 select-none")
-			.call(yAxis as any)
-			.select(".domain")
-			.remove();
+		// REMOVED PER USER REQUEST
+		// const yAxis = d3.axisRight(timeScale)...
 
 		const g = svg.append("g");
 
@@ -295,30 +284,53 @@ export default function ResVizSwarm({
 			})
 			// .on("dblclick", (event, d) => { ... }) // Removed as requested
 			.on("mouseover", function (event, d) {
-				// GHOST FIX:
-				// 1. Reset ALL other nodes to default state (clearing any external highlights)
-				svg.selectAll(".node-group").each(function (nodeData: any) {
-					if (nodeData.id !== d.id) {
-						applyDefaultStyle(d3.select(this), nodeData);
-					}
-				});
+				// 0. EXCLUSIVE HIGHLIGHT (Anti-Clutter)
+				// Reset ALL nodes specifically
+				svg
+					.selectAll(".node-group circle")
+					.attr("stroke", (n: any) => {
+						if (n.presentation_mode === "flagship") return "#ffffff";
+						return n.presentation_mode === "deep_dive" ? "#2E5CFF" : "rgba(255,255,255,0.1)";
+					})
+					.attr("stroke-width", (n: any) => {
+						if (n.presentation_mode === "flagship") return 4;
+						return n.presentation_mode === "deep_dive" ? 3 : 1;
+					})
+					.attr("filter", null);
 
-				// 2. Highlight THIS node
+				svg.selectAll(".label").style("opacity", 0);
+
+				// 1. Highlight THIS node
 				d3.select(this)
 					.select("circle")
-					.transition()
-					.duration(200)
+					.raise() // Bring to front
 					.attr("stroke", "#fff")
-					.attr("stroke-width", 6)
-					.attr("filter", "drop-shadow(0 0 25px rgba(255,255,255,0.8))");
+					.attr("stroke-width", 4) // Reduced from 6 for elegance
+					.attr("filter", "drop-shadow(0 0 15px rgba(255,255,255,0.8))");
 
 				// Show Label
-				d3.select(`[id="label-${d.id}"]`).transition().duration(200).style("opacity", 1);
+				d3.select(`[id="label-${d.id}"]`).raise().style("opacity", 1);
+
+				// 2. PHYSICS RIPPLE (The Wake)
+				// Push neighbors away slightly
+				const currentNode = d as any;
+				nodes.forEach((n: any) => {
+					if (n.id === currentNode.id) return;
+					const dx = n.x - currentNode.x;
+					const dy = n.y - currentNode.y;
+					const dist = Math.sqrt(dx * dx + dy * dy);
+					if (dist < 100) {
+						const force = (100 - dist) / 100;
+						n.vx += (dx / dist) * force * 2;
+						n.vy += (dy / dist) * force * 2;
+					}
+				});
+				simulation.alphaTarget(0.3).restart();
 
 				// Optional: Sync Fiche Selection (Lock) without navigation
-				// If we want the hover to update the right panel preview WITHOUT locking it:
 				if (onNodeSelect) onNodeSelect(d);
 			})
+
 			.on("mouseout", function (event, d) {
 				// Restore logic
 				applyDefaultStyle(d3.select(this), d);
@@ -357,7 +369,7 @@ export default function ResVizSwarm({
 		// --- Labels ---
 		const label = g
 			.selectAll("text.label")
-			.data(nodes.filter((d: any) => d.radius > 28))
+			.data(nodes.filter((d: any) => d.radius > 10)) // SHOW ALL LABELS (Radius > 10)
 			.join("text")
 			.text((d: any) => d.name)
 			.attr("class", "label pointer-events-none font-bold text-white uppercase")
@@ -371,38 +383,51 @@ export default function ResVizSwarm({
 
 		// --- Tick ---
 		simulation.on("tick", () => {
+			// 0. AMBIENT MOTION (The Amoeba Effect)
+			// Add a tiny random velocity to ALL nodes to keep them "breeding/breathing"
+			nodes.forEach((d: any) => {
+				// Only if not being hovered/dragged? No, constant is better.
+				d.vx += (Math.random() - 0.5) * 0.15; // Jitter X
+				d.vy += (Math.random() - 0.5) * 0.15; // Jitter Y
+			});
+
 			// Move the Group
 			nodeGroup.attr("transform", (d) => `translate(${d.x},${d.y})`);
 
-			// Proximity Growth Logic (Visual Only)
+			// Proximity Growth & Lunge Logic
 			if (mousePos.current) {
 				const { x, y } = mousePos.current;
 
-				// Select just the Dreamjob circle directly for performance
-				// Note: We could do this for all, but Dreamjob is special
+				// Target the Flagship (Dreamjob)
 				const dreamjobNode = nodes.find((n) => n.presentation_mode === "flagship");
 				if (dreamjobNode && dreamjobNode.x && dreamjobNode.y) {
 					const dx = x - dreamjobNode.x;
 					const dy = y - dreamjobNode.y;
 					const dist = Math.sqrt(dx * dx + dy * dy);
-					const range = 400; // Must match interaction range
+					const range = 400; // Interaction radius (Increased for smoother approach)
 
-					// Base Radius: 45. Max Radius: 75.
-					let targetR = 45;
+					let targetR = 45; // Default radius
+
 					if (dist < range) {
+						// 1. GROWTH: Expand as mouse looks at it
 						// Linear growth based on closeness
 						const growth = (range - dist) / range; // 0..1
-						targetR = 45 + growth * 40; // Max 85
+						// easing?
+						const easeGrowth = growth * growth; // Quadratic for smoother feel
+						targetR = 45 + easeGrowth * 80; // Max 125 (Massive)
+
+						// 2. LUNGE: Pull towards mouse (Magnetic)
+						// We manipulate velocity to make it "swim" towards cursor
+						const lungeStrength = 0.02 * easeGrowth;
+						dreamjobNode.vx += dx * lungeStrength;
+						dreamjobNode.vy += dy * lungeStrength;
 					}
 
-					// Select the specific circle element and animate it smoothly?
-					// In a tick loop, we just set it.
-					// To be smoother, we might want to lerp, but setting directly is instant response.
+					// Apply Radius Update
 					svg.select(`#node-${dreamjobNode.id} circle`).attr("r", targetR);
 				}
 			} else {
-				// Reset if mouse leaves
-				// Find flagship ID first
+				// Reset size if mouse leaves
 				const flagshipStart = nodes.find((n) => n.presentation_mode === "flagship");
 				if (flagshipStart) {
 					svg.select(`#node-${flagshipStart.id} circle`).attr("r", 45);
@@ -410,6 +435,7 @@ export default function ResVizSwarm({
 			}
 
 			// Move the Labels
+			// FIX: Ensure labels track nodes correctly
 			label.attr("x", (d) => d.x!).attr("y", (d) => d.y!);
 		});
 

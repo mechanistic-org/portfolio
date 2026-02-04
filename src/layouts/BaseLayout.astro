@@ -13,7 +13,7 @@ import CommandMenu from "@components/Search/CommandMenu";
 
 // import CookieConsent from "@components/CookieConsent/CookieConsent.astro";
 // import CookieConsent from "@components/CookieConsent/CookieConsent.astro";
-import CollimatedBackground from "@components/Effects/CollimatedBackground"; // NEW: Audit Rec #1
+// import CollimatedBackground from "@components/Effects/CollimatedBackground"; // NEW: Audit Rec #1
 
 // data
 import siteData from "@config/siteData.json";
@@ -31,6 +31,7 @@ interface Props {
 	hideNav?: boolean;
 	overflowHidden?: boolean;
 	starfield?: boolean; // NEW: Audit Rec #1
+	hideNavLogo?: boolean;
 }
 
 const {
@@ -46,6 +47,7 @@ const {
 	hideNav = false,
 	overflowHidden = false,
 	starfield = false,
+	hideNavLogo = false,
 } = Astro.props as Props;
 ---
 
@@ -79,11 +81,11 @@ const {
 			},
 		]}
 	>
-		{starfield && <CollimatedBackground client:load />}
+		{/* {starfield && <CollimatedBackground client:only="react" />} */}
 		<div class="noise-overlay"></div>
 		<div class="relative z-10 flex min-h-lvh flex-col justify-between">
 			<div>
-				{!hideNav && <Nav />}
+				{!hideNav && <Nav hideLogo={hideNavLogo} />}
 				<main>
 					<slot />
 				</main>

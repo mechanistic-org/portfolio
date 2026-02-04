@@ -1,7 +1,8 @@
-// force reload 1
 import { defineConfig } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
+import path from "path";
+import { fileURLToPath } from "url";
 import sitemap from "@astrojs/sitemap";
 import expressiveCode from "astro-expressive-code";
 import mdx from "@astrojs/mdx";
@@ -45,6 +46,9 @@ const isProduction = process.env.CF_PAGES === "1";
 //    - Why: Keystatic requires API routes (/api/keystatic) which need SSR.
 //    - Fix: We force "server" locally to allow CMS editing.
 // /////////////////////////////////////////////////////////////////////////////
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // https://astro.build/config
 export default defineConfig({
@@ -124,6 +128,14 @@ export default defineConfig({
 			fs: {
 				// Allow serving files from the sibling 'quantum-assets' repo via Symlinks
 				allow: ["../eriknorris-assets", "."],
+			},
+		},
+		ssr: {
+			noExternal: ["three", "@react-three/fiber", "@react-three/drei"],
+		},
+		resolve: {
+			alias: {
+				"@": path.resolve(__dirname, "./src"),
 			},
 		},
 	},

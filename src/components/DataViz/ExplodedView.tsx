@@ -149,7 +149,7 @@ const ExplodedView: React.FC<WrapperProps> = ({ data }) => {
 		// Labels
 		node
 			.append("text")
-			.text((d) => d.id)
+			.text((d) => d.id.replace("skill-", ""))
 			.attr("x", (d) => (d.radius || 5) + 5)
 			.attr("y", 3)
 			.attr("font-size", (d) => (d.type === "project" ? "10px" : "8px"))

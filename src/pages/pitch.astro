@@ -1,6 +1,6 @@
 ---
 import DeckLayout from "@layouts/DeckLayout.astro";
-import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
+// import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
 import HydeOuroboros from "@components/Visualizations/HydeOuroboros";
 import SolarMetrics from "@components/CaseStudy/SolarMetrics";
 
@@ -20,7 +20,7 @@ const slides = [
 	>
 		<div class="relative z-10 flex w-full flex-col items-center">
 			<div class="flex h-[400px] w-full items-center justify-center">
-				<WiggleLogo3D client:only="react" />
+				{/* <WiggleLogo3D client:only="react" /> */}
 			</div>
 			<div class="pointer-events-none -mt-12 space-y-4 text-center">
 				<h1
@@ -146,7 +146,7 @@ const slides = [
 	>
 		<div class="z-10 w-full space-y-8 text-center">
 			<div class="flex h-64 w-full items-center justify-center">
-				<WiggleLogo3D client:only="react" />
+				{/* <WiggleLogo3D client:only="react" /> */}
 			</div>
 			<h2 class="text-6xl font-bold tracking-tighter">Ready to Deploy?</h2>
 			<a

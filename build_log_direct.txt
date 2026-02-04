@@ -1,0 +1,29 @@
+﻿[2m19:51:25[22m [34m[content][39m Syncing content
+[2m19:51:25[22m [34m[content][39m Synced content
+[2m19:51:25[22m [34m[types][39m Generated [2m380ms[22m
+[2m19:51:25[22m [34m[build][39m output: [34m"static"[39m
+[2m19:51:25[22m [34m[build][39m mode: [34m"static"[39m
+[2m19:51:25[22m [34m[build][39m directory: [34mD:\GitHub\eriknorris\dist\[39m
+[2m19:51:25[22m [34m[build][39m Collecting build info...
+[2m19:51:25[22m [34m[build][39m [32mΓ£ô Completed in 440ms.[39m
+[2m19:51:25[22m [34m[build][39m Building static entrypoints...
+node.exe : [31m[1m19:51:26[22m [ERROR] [vite][39m 
+[31mΓ£ù[39m Build failed in 1.47s
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" 
+"C:\Users\erik\AppData\Roaming\n ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~
+    + CategoryInfo          : NotSpecified: ([31m[1m19:51:... 
+   failed in 1.47s:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Could not resolve "../config/color_registry" from 
+"src/pages/archive/legacy_about.astro"
+file: D:/GitHub/eriknorris/src/pages/archive/legacy_about.astro
+  [1mStack trace:[22m
+[2m    at getRollupError (file:///D:/GitHub/eriknorris/node_mod
+ules/rollup/dist/es/shared/parseAst.js:401:41)
+    at ModuleLoader.handleInvalidResolvedId (file:///D:/GitHub/e
+riknorris/node_modules/rollup/dist/es/shared/node-entry.js:21590
+:24)[22m

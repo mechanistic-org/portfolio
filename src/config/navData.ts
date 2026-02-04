@@ -12,14 +12,7 @@ export interface navDropdownItem {
 export type navItem = navLinkItem | navDropdownItem;
 
 const navConfig: navItem[] = [
-	{
-		text: "Projects",
-		href: "/projects/",
-	},
-	{
-		text: "About",
-		href: "/about/",
-	},
+	// Removed Projects/About for HXO Consolidation
 	{
 		text: "Resume",
 		dropdown: [

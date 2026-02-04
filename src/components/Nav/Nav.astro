@@ -13,11 +13,13 @@ const isActive = (href: string) => {
 	if (href !== "/" && currentPath.startsWith(href)) return true;
 	return false;
 };
+
+const { hideLogo } = Astro.props;
 ---
 
-<UniversalHUD mode="standard">
-	<!-- LEFT SLOT: Nothing extra, UniversalHUD handles Logo -->
-	<!-- But we can customize if needed. The default logo is fine. -->
+<UniversalHUD mode="standard" hideLogo={hideLogo}>
+	<!-- LEFT SLOT: Nothing extra, UniversalHUD handles Logo mapping to / -->
+	<!-- The HXO Application at / initializes fresh on load, serving as practical reset. -->
 
 	<!-- CENTER SLOT: The Capsule -->
 	<div

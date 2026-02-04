@@ -14,10 +14,17 @@ def compile_linkedin():
         content = f.read()
 
     # Extract the "About" section (between backticks)
+    tagline_match = re.search(r'tagline:\s*"(.*?)"', content)
     about_match = re.search(r'about:\s*`([^`]*)`', content, re.DOTALL)
     experience_match = re.search(r'experience:\s*\[(.*)\]', content, re.DOTALL)
 
     final_output = []
+
+    if tagline_match:
+        tagline = tagline_match.group(1).strip()
+        final_output.append("=== HEADLINE (TAGLINE) ===")
+        final_output.append(tagline)
+        final_output.append("\n" + "="*40 + "\n")
 
     if about_match:
         about_text = about_match.group(1).strip()

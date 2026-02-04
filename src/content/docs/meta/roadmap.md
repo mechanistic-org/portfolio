@@ -20,6 +20,8 @@ sidebar:
 - [x] **Site-Wide Stealth:** Extended transparent HUD to Colophon and Documentation pages.
 - [x] **HUD Layout Symmetry:** Resolved "Failed Center" layout by implementing absolute positioning for Scale (Left) and Metrics (Right).
 - [x] **Build Hardening:** Fixed systemic "Duplicate Mapping Key" YAML errors across 7 projects.
+- [x] **Project Onboarding:** DV700 (Forensic Report + Schema Fix + 9 Bolus).
+- [x] **Visual Engineering:** Fixed "Skill Prefix" glitch in `/assembly` by sanitizing data in `ExplodedView.tsx`.
 
 ## Future / Backlog
 

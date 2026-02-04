@@ -143,6 +143,18 @@ These scripts drive the "Forensic Data Factory."
 - **Context:** 3D rendered logos (`EN_logo_1200`).
 - **Rule:** We accept high-res PNGs wrapped in SVG as the "Sovereign Asset" because the source is 3D geometry, not vector paths. Do not attempt to wireframe them.
 
+### 🔴 "The Ghost Component" (Edit Not Reflecting)
+
+- **Symptom:** You edit `Assembly.tsx` but the `/assembly` page never changes.
+- **Cause:** Wrong file. The page route (`src/pages/assembly.astro`) likely imports a _different_ component (e.g., `ExplodedView.tsx`) than the one you are editing.
+- **Fix:** ALWAYS check the `.astro` page import statements before debugging a React component.
+
+### 🔴 "Schema Enum Trap" (Content Collection)
+
+- **Symptom:** `Invalid enum value` for `tools` or `productionScale`.
+- **Cause:** Trying to put "Vendor Names" (e.g., Sanmina, Yomura) into the `tools` array, which is strict Zod Enums (Software only).
+- **Fix:** Move physical vendors to the `toolchain` string array (which is loose).
+
 ---
 
 ## 6. UI Architecture ("Air Traffic Control")

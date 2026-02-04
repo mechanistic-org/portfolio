@@ -67,7 +67,7 @@ projects.forEach((p) => {
 const timelineItems = await getCareerTimeline();
 
 // Helper to generate color hash for Timeline Items (since we don't have explicit colors in getCareerTimeline yet, or we reuse Employer Map)
-import { EMPLOYER_MAP } from "../config/color_registry";
+import { EMPLOYER_MAP } from "../../config/color_registry";
 const getEmployerColor = (companyName: string) => {
 	// Basic fuzzy match or default
 	const key = Object.keys(EMPLOYER_MAP).find((k) =>

@@ -22,25 +22,23 @@ function Model({ url }: { url: string }) {
 		ref.current.rotation.x = Math.sin(t * 0.3) * 0.1;
 	});
 
-	// Base Scale matched to WiggleLogoParallax (Starts at 9.0)
-	return <primitive object={scene} ref={ref} scale={9} />;
+	// Base Scale matched to WiggleLogoParallax (Starts at 9.0 -> Boosted to 12.0)
+	return <primitive object={scene} ref={ref} scale={12} />;
 }
 
 export default function WiggleLogo3D() {
-	// Path to the requested GLB (served via public or imported)
-	// Since it's in a separate repo, we assume it's copied to public/assets or we access via relative path if aligned?
-	// User path: d:\GitHub\quantum-assets\R2_STAGING\_site\EN_Logo_ForgedCarbon.glb
-	// We need to ensure this file is accessible to the dev server.
-	// Ideally, we copy it to public/assets/models/
-
-	// For now, I will assume I need to COPY it first.
-	// Placeholder URL until copy step is done: "/assets/models/EN_Logo_ForgedCarbon.glb"
+	// ... (comments omitted for brevity) ...
 
 	return (
 		<div className="h-full w-full bg-transparent">
 			<Canvas camera={{ position: [0, 0, 5], fov: 45 }} gl={{ alpha: true }}>
-				<ambientLight intensity={0.5} />
-				<spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
+				<ambientLight intensity={1.0} />
+				{/* Key Light: High Front-Right */}
+				<spotLight position={[5, 10, 10]} angle={0.25} penumbra={1} intensity={8} />
+				{/* Fill Light: Direct Frontal Flash to catch the Carbon texture */}
+				<directionalLight position={[0, 0, 5]} intensity={5} color="#ffffff" />
+				{/* Rim Light: Cool Blue from below/left */}
+				<pointLight position={[-5, -5, 5]} intensity={3} color="#44aaff" />
 
 				<Suspense fallback={null}>
 					<PresentationControls
@@ -58,7 +56,6 @@ export default function WiggleLogo3D() {
 						</Float>
 					</PresentationControls>
 				</Suspense>
-
 				<Environment preset="city" background={false} />
 				{/* <ContactShadows position={[0, -2, 0]} opacity={0.5} scale={10} blur={2.5} far={4} /> */}
 			</Canvas>

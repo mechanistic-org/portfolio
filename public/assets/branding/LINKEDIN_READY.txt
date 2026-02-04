@@ -1,3 +1,8 @@
+=== HEADLINE (TAGLINE) ===
+Sr. Staff ME | Designer | Forensic Architect | High-Fidelity Hardware & Program Rescue
+
+========================================
+
 === LINKEDIN ABOUT SECTION (COPY BELOW) ===
 I architect the hardware interface for the physical world—from the heat of a Fissler BBQ to the surgical precision of a KaVo Dental Chair.
 

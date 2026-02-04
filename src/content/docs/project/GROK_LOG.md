@@ -183,3 +183,23 @@ sidebar:
 2.  **OWN THE CLOBBER:** If a file works one day and breaks the next, assume "Edit Rot" (Agent Error) before "System Glitch."
 3.  **VERIFY PIXELS:** "It's Fixed" means "I see the pixels," not "The code compiled." Confusing the two is a fireable offense.
 4.  **ROOT CAUSE OVER PATCH:** Do not fix a syntax error without asking _why_ it happened. If a YAML key is missing, finding the _source_ (e.g., the Agent that wrote it) is more important than silencing the error.
+
+## 🧹 XV. The Law of Visual Sanitation (The Label Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-02
+**Context:** "skill-" prefixes persisted in the Assembly visualization despite code changes, because we were editing the wrong component (`Assembly.tsx` vs `ExplodedView.tsx`) and relying on CSS masking instead of data-cleaning.
+**The Law:**
+
+1.  **CLEAN DATA UPSTREAM:** Do not rely on "Display Logic" to clean dirty IDs. Sanitize the data at the `map()` stage (e.g., `.replace("skill-", "")` inside the data transformer).
+2.  **COMPONENT TRUTH:** Never assume a component name matches the route. Always check `src/pages/{route}.astro` to verify which React component is actually mounted (e.g., `/assembly` -> `ExplodedView.tsx`).
+
+## 💊 XVI. The Law of the Bolus (The Artifact Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-02
+**Context:** Confusion over why the "INTEL" count in the HUD was 8 instead of 9.
+**The Law:**
+
+1.  **PHYSICAL COUNT:** The "Bolus Count" is not a database number. It is a physical count of `_intelligence.md` files sitting next to `index.mdx` in the project folders.
+2.  **NO ARTIFACT = NO SCORE:** If you don't create the file, the score doesn't go up. Scripted stats are derived from disk reality.

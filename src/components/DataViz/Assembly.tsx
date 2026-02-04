@@ -63,6 +63,7 @@ const Assembly: React.FC<MultiverseGraphProps> = ({ data }) => {
 
 			return {
 				...d,
+				name: d.name.replace("skill-", ""),
 				group: d.group?.trim(),
 				radius: r,
 				// Initial State: Exploded off-screen (Bottom)
@@ -294,7 +295,7 @@ const Assembly: React.FC<MultiverseGraphProps> = ({ data }) => {
 			.append("text")
 			.attr("dy", ".35em")
 			.attr("text-anchor", "middle")
-			.text((d) => d.name)
+			.text((d) => d.name.replace("skill-", ""))
 			.attr("font-size", (d: any) => Math.max(9, d.radius / 3))
 			.attr("fill", "#fff")
 			.attr("pointer-events", "none")

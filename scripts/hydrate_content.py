@@ -432,6 +432,72 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
         print(f"    Updated: {stats['updated']}")
 
 
+# --- Auto-Tiering Logic (HXO) ---
+
+def auto_tier_projects(project_dir, dry_run=False):
+    """
+    Scans MDX files and assigns hydration_status and tier 
+    based on the depth of existing data.
+    """
+    print(f"📊  Running Auto-Tiering Analysis on '{project_dir}'...")
+    
+    stats = {1: 0, 2: 0, 3: 0, "updated": 0}
+    
+    # Iterate over MDX files (handles flat files and folder/index.mdx)
+    # We need to walk the directory
+    for root, dirs, files in os.walk(project_dir):
+        for filename in files:
+            if filename.endswith(".mdx"):
+                filepath = Path(root) / filename
+                
+                try:
+                    post = frontmatter.load(filepath)
+                    
+                    # 1. Detection Logic
+                    has_forensics = 'forensic_summary' in post.metadata
+                    has_audio = post.metadata.get('audio_url') is not None
+                    # Check for bolus/metrics (forensic_metrics or metrics)
+                    has_metrics = 'forensic_metrics' in post.metadata or 'metrics' in post.metadata
+                    
+                    # 2. Assignment Logic
+                    new_status = 'executive'
+                    new_tier = 3
+                    
+                    if has_forensics and (has_audio or has_metrics):
+                        new_status = 'full'
+                        new_tier = 1
+                    elif has_forensics:
+                        new_status = 'partial'
+                        new_tier = 2
+                    
+                    # 3. Check for changes
+                    current_status = post.metadata.get('hydration_status')
+                    current_tier = post.metadata.get('tier')
+                    
+                    if current_status != new_status or current_tier != new_tier:
+                        post.metadata['hydration_status'] = new_status
+                        post.metadata['tier'] = new_tier
+                        post.metadata['hxo_ready'] = (new_tier <= 2)
+                        
+                        if not dry_run:
+                            with open(filepath, 'wb') as f:
+                                frontmatter.dump(post, f)
+                        stats["updated"] += 1
+                        
+                    stats[new_tier] += 1
+                    
+                except Exception as e:
+                    print(f"⚠️  Error tiering {filename}: {e}")
+
+    print(f"    Tier 1 (Sovereign): {stats[1]}")
+    print(f"    Tier 2 (Partial):   {stats[2]}")
+    print(f"    Tier 3 (Executive): {stats[3]}")
+    if dry_run:
+        print(f"    [Dry Run] Would update {stats['updated']} files.")
+    else:
+        print(f"    Updated {stats['updated']} files.")
+
+
 # --- Reverse Hydration (MDX -> Resume/LinkedIn) ---
 
 def reverse_hydrate(dry_run=False):
@@ -554,11 +620,15 @@ if __name__ == "__main__":
     
     parser.add_argument("--slug", type=str, help="Target a specific project slug (Safe Mode).")
     
+    parser.add_argument("--tier", action="store_true", help="Run Auto-Tiering Analysis (HXO).")
+    
     args = parser.parse_args()
     
     if args.reverse:
         print("🔄  Starting Reverse Hydration...")
         reverse_hydrate(dry_run=args.dry_run)
+    elif args.tier:
+        auto_tier_projects(TARGET_DIR, dry_run=args.dry_run)
     else:
         hydrate_content(dry_run=args.dry_run, force=args.force, target_slug=args.slug)
 

@@ -1,8 +1,8 @@
 ---
 import Layout from "@layouts/BaseLayout.astro";
-import UniversalHUD from "@components/Nav/UniversalHUD.astro";
+
 import WorkRealm from "../../components/Realms/WorkRealm";
-import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
+// import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
 import { getMultiverseData } from "@/utils/getMultiverseData";
 
 const multiverseData = await getMultiverseData();
@@ -11,32 +11,8 @@ const multiverseData = await getMultiverseData();
 <Layout
 	title="Erik Norris | Senior Staff ME / Designer"
 	description="System Index"
-	hideNav={true}
 	starfield={true}
 >
-	<!-- UNIVERSAL HUD (STEALTH MODE) -->
-	<!-- Center is empty for Swarm visibility -->
-	<UniversalHUD mode="stealth">
-		<!-- RIGHT: System Links (Minimal Text) -->
-		<div slot="right" class="hidden items-center gap-6 md:flex">
-			<a
-				href="/projects"
-				class="font-mono text-xs font-bold tracking-widest text-neutral-400 uppercase transition-colors hover:text-white"
-				>Work</a
-			>
-			<a
-				href="/about"
-				class="font-mono text-xs font-bold tracking-widest text-neutral-400 uppercase transition-colors hover:text-white"
-				>About</a
-			>
-			<a
-				href="/resume"
-				class="font-mono text-xs font-bold tracking-widest text-neutral-400 uppercase transition-colors hover:text-white"
-				>Resume</a
-			>
-		</div>
-	</UniversalHUD>
-
 	<!-- SCROLL TRACK -->
 	<!-- A generic tall element to allow the user to "scroll" which drives the animation -->
 	<div
@@ -52,7 +28,7 @@ const multiverseData = await getMultiverseData();
 		id="logo-layer"
 		class="will-change-opacity pointer-events-none fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-75"
 	>
-		<WiggleLogo3D client:load />
+		{/* <WiggleLogo3D client:load /> */}
 
 		<!-- Scroll Hint Removed -->
 	</div>
