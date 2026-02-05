@@ -51,6 +51,12 @@ sidebar:
 
 ## 📜 Change Log (Recent)
 
+- **[2026-02-04] Spring Cleaning & Deployment (The Museum Strategy)**
+  - **[Deployment]** Successfully deployed to Production (Cloudflare Pages) with clean build (Exit Code 0).
+  - **[Archival]** Established `D:\GitHub\eriknorris-archive` as the sovereign museum. Moved `SlideProjector.tsx`, `LivingGantt.tsx`, and `archive_2025` out of the build path.
+  - **[Refactor]** Migrated all gradients to Tailwind 4.0 syntax (`bg-linear-to-*`), resolving 30+ deprecation warnings.
+  - **[Cauterization]** Removed dead code references (`KeyFeatures.astro` in `ProjectLayout`) to ensure a zero-warning build.
+
 - **[2026-02-04] The Great Restoration & Hybrid HUD**
   - **[Restoration]** Rescued `AGENCY_MEMORY`, `MANIFESTO`, and `backlog` from accidental archive. Synthesized 25-Law `GROK_LOG`.
   - **[Feature] Universal HUD:** Unified navigation system with "Right-Stuff" DLS (Stealth Mode, HOTAS Controls).

@@ -134,6 +134,18 @@ These scripts drive the "Forensic Data Factory."
 - **Context:** Parallax containers.
 - **Rule:** Use `.no-scrollbar` class to prevent double scrollbars (System + Container).
 
+### The "Linear Gradient" Law (Tailwind 4.0)
+
+- **Context:** CSS Gradients.
+- **Rule:** Use `bg-linear-to-r` (Standard) instead of `bg-gradient-to-r` (Legacy). The legacy syntax triggers deprecation warnings in v4.
+
+### The "Dead Code" Protocol (Museum Strategy)
+
+- **Context:** Deleting unused components.
+- **Rule:** Do NOT delete complex components (`SlideProjector.tsx`).
+- **Action:** Move them to `D:\GitHub\eriknorris-archive`.
+- **Why:** We preserve the "Red Gold" (Engineering Effort) even if it's no longer in production.
+
 ---
 
 ## 5. Asset Pipeline Standards

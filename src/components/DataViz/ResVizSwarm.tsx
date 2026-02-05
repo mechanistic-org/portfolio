@@ -26,7 +26,9 @@ interface ResVizSwarmProps {
 	onNodeSelect?: (node: any) => void;
 	onNodeClick?: (node: any) => void;
 	externalHoverId?: string;
+	selectedId?: string | null; // NEW: Focus Mode
 	shouldStart?: boolean;
+	isConsoleHovered?: boolean;
 }
 
 import { getEntityColor } from "../../config/color_registry";
@@ -38,12 +40,20 @@ export default function ResVizSwarm({
 	onNodeSelect,
 	onNodeClick,
 	externalHoverId,
+	selectedId,
 	shouldStart = false,
+	isConsoleHovered = false,
 }: ResVizSwarmProps) {
 	const svgRef = useRef<SVGSVGElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
 	const mousePos = useRef<{ x: number; y: number } | null>(null);
 	const activeIdRef = useRef<string | undefined>(externalHoverId); // Track active ID for D3 events
+	// PHYSICS ENGINE STATE (Persistent across renders)
+	const physicsStateRef = useRef({
+		lastMouseX: 0,
+		lastMouseTime: 0,
+		activeNodeId: null as string | null,
+	});
 
 	// Sync ref
 	useEffect(() => {
@@ -92,7 +102,7 @@ export default function ResVizSwarm({
 					y: 2000, // Safe Offscreen Init
 				};
 			}) as NodeData[];
-	}, []);
+	}, [rawNodes]);
 
 	// Dimensions state to trigger re-render on resize
 	const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -187,14 +197,225 @@ export default function ResVizSwarm({
 		feMerge.append("feMergeNode").attr("in", "coloredBlur");
 		feMerge.append("feMergeNode").attr("in", "SourceGraphic");
 
+		// State Refs for Physics Loop (Defined inside effect for closure access to fresh Props? No, props are dependencies).
+		// We can't put this in a ref if we want it to reset on re-mount?
+		// Actually, `activeIdRef` was earlier, but we need closure over `selectedId`.
+		// Let's use a local Mutable Object that persists across the Effect instance.
+		// State Refs for Physics Loop - LINKED TO COMPONENT REF
+		// This ensures state persists even if the Effect re-runs due to prop changes.
+		const physicsState = physicsStateRef.current;
+
+		// Helper: Visual Update (Consolidated)
+		const updateVisuals = (svgSelection: any, activeId: string | null) => {
+			if (!activeId) {
+				// Reset ALL to Default
+				svgSelection.selectAll(".node-group").each(function (d: any) {
+					// Logic duplicated from applyDefaultStyle
+					const isFlagship = d.presentation_mode === "flagship";
+					const isDeepDive = d.presentation_mode === "deep_dive";
+
+					let stroke = "rgba(255,255,255,0.1)";
+					let width = 1;
+					let filter: string | null = null;
+
+					if (isFlagship) {
+						stroke = "#ffffff";
+						width = 4;
+						filter = "drop-shadow(0 0 15px rgba(255,255,255,0.6))";
+					} else if (isDeepDive) {
+						stroke = "#2E5CFF";
+						width = 3;
+					}
+
+					d3.select(this)
+						.select("circle")
+						.transition()
+						.duration(200) // Fast transition
+						.attr("stroke", stroke)
+						.attr("stroke-width", width)
+						.attr("filter", filter);
+				});
+				svgSelection.selectAll(".label").style("opacity", 0);
+			} else {
+				// Highlight Active
+
+				// 1. Reset Others (Essential to clear previous)
+				// Use filter to exclude active one, but D3 .filter returns a new selection.
+				// Easier to Reset All then Highlight One? Slightly more overhead but cleaner state.
+				svgSelection.selectAll(".node-group").each(function (d: any) {
+					// Inline reset logic again or use helper if defined in scope
+					// Just keeping it simple
+					d3.select(this)
+						.select("circle")
+						.attr("stroke", "rgba(255,255,255,0.1)")
+						.attr("stroke-width", 1)
+						.attr("filter", null);
+				});
+				// Restore Special nodes base state? A bit complex.
+				// Let's use specific selector for speed.
+
+				// ACTUALLY: Just selecting the Previous Active ID would be faster.
+				// But we don't track "Previous" easily here.
+				// Let's just reset ALL to base state.
+				svgSelection.selectAll(".node-group").each(function (d: any) {
+					const isFlagship = d.presentation_mode === "flagship";
+					const isDeepDive = d.presentation_mode === "deep_dive";
+					if (d.id !== activeId) {
+						d3.select(this)
+							.select("circle")
+							.attr(
+								"stroke",
+								isFlagship ? "#ffffff" : isDeepDive ? "#2E5CFF" : "rgba(255,255,255,0.1)",
+							)
+							.attr("stroke-width", isFlagship ? 4 : isDeepDive ? 3 : 1)
+							.attr("filter", isFlagship ? "drop-shadow(0 0 15px rgba(255,255,255,0.6))" : null);
+					}
+				});
+				svgSelection.selectAll(".label").style("opacity", 0);
+
+				// 2. Highlight Target
+				const targetGroup = svgSelection
+					.selectAll(".node-group")
+					.filter((d: any) => d.id === activeId);
+
+				targetGroup
+					.select("circle")
+					.raise()
+					.attr("stroke", "#fff")
+					.attr("stroke-width", 4)
+					.attr("filter", "drop-shadow(0 0 15px rgba(255,255,255,0.8))");
+
+				svgSelection.select(`#label-${activeId}`).raise().style("opacity", 1);
+			}
+		};
+
 		// Setup Mouse Tracking for Physics
 		svg
 			.on("mousemove", (event) => {
 				const [x, y] = d3.pointer(event);
 				mousePos.current = { x, y };
+
+				// --- 1. VECTOR LOCK (Velocity Filter) ---
+				const now = Date.now();
+				const dt = now - physicsState.lastMouseTime;
+				const dx = x - physicsState.lastMouseX;
+				const velocityX = dt > 0 ? dx / dt : 0; // px/ms
+
+				physicsState.lastMouseX = x;
+				physicsState.lastMouseTime = now;
+
 				simulation.alphaTarget(0.1).restart();
+
+				// --- 2. CONSOLE SHIELD ---
+				// If Console is Active, FREEZE the physics state.
+				// We do NOT clear the selection, so the last active bubble remains selected
+				// allowing the user to interact with the Console links.
+				if (isConsoleHovered) {
+					return;
+				}
+
+				// --- 3. HYSTERESIS LOGIC (Spatial Deadband) ---
+
+				// Interaction Logic
+				let nextActiveNodeId = physicsState.activeNodeId;
+				let isHolding = false;
+
+				// 1. PRIORITY LOCK CHECK: Can we release the current node?
+				if (physicsState.activeNodeId) {
+					const activeNode = nodes.find((n) => n.id === physicsState.activeNodeId);
+
+					if (activeNode && typeof activeNode.x === "number" && typeof activeNode.y === "number") {
+						const ndx = x - activeNode.x;
+						const ndy = y - activeNode.y;
+						// Use simple distance (could optimize, but safe)
+						const dist = Math.sqrt(ndx * ndx + ndy * ndy);
+
+						// SPATIAL DIODE: Infinite bridge to the right
+						const thresholdX = activeNode.x + activeNode.radius * 0.5;
+						const isToTheRight = x > thresholdX;
+
+						// HYSTERESIS: Keep if within buffer
+						const bufferDist = activeNode.radius * 1.5;
+						const isWithinBuffer = dist < bufferDist;
+
+						if (isToTheRight || isWithinBuffer) {
+							// LOCKED: Do not search for new targets
+							isHolding = true;
+							nextActiveNodeId = physicsState.activeNodeId;
+							// console.log("HOLDING:", physicsState.activeNodeId, "Right:", isToTheRight, "Buffer:", isWithinBuffer);
+						} else {
+							// RELEASED
+							console.log(
+								"[Physics] RELEASING:",
+								physicsState.activeNodeId,
+								"Dist:",
+								dist.toFixed(1),
+								">",
+								bufferDist.toFixed(1),
+								"X:",
+								x.toFixed(1),
+								"<",
+								thresholdX.toFixed(1),
+							);
+							isHolding = false;
+							nextActiveNodeId = null;
+						}
+					}
+				}
+
+				// 2. ACQUISITION SEARCH: Only if not holding
+				if (!isHolding) {
+					// Find closest node (Optimization: Start with null)
+					let closestNode: NodeData | null = null;
+					let minDistance = Infinity;
+
+					nodes.forEach((node) => {
+						if (typeof node.x !== "number" || typeof node.y !== "number") return;
+						const ndx = x - node.x;
+						const ndy = y - node.y;
+						const dist = Math.sqrt(ndx * ndx + ndy * ndy);
+						if (dist < minDistance) {
+							minDistance = dist;
+							closestNode = node;
+						}
+					});
+
+					if (closestNode) {
+						const radius = (closestNode as NodeData).radius;
+						// ENTRY Condition: Inside 1.0x Radius AND Not Moving Right (Diode)
+						const isInside = minDistance < radius * 1.0;
+						const isMovingRight = velocityX > 0.1;
+
+						if (isInside && !isMovingRight) {
+							nextActiveNodeId = (closestNode as NodeData).id;
+						}
+					}
+				}
+
+				// Commit State Change
+				if (nextActiveNodeId !== physicsState.activeNodeId) {
+					physicsState.activeNodeId = nextActiveNodeId;
+
+					// Standard behavior (No Focus Mode check needed anymore)
+					if (onNodeSelect) {
+						const target = nodes.find((n) => n.id === nextActiveNodeId);
+						onNodeSelect(target || null);
+					}
+
+					// Always update visuals for feedback
+					updateVisuals(svg, nextActiveNodeId);
+				}
+			})
+			.on("click", (event) => {
+				// CLICK BACKGROUND -> DESELECT
+				if (onNodeClick) onNodeClick(null);
 			})
 			.on("mouseleave", () => {
+				// DO NOT CLEAR SELECTION ON MOUSELEAVE
+				// This prevents the selection from disappearing when the cursor
+				// enters the Console (which sits 'above' the SVG).
+				// We rely on 'Click Background' to clear, or 'Shield Freeze' to hold.
+
 				mousePos.current = null;
 				simulation.alphaTarget(0);
 			});
@@ -215,14 +436,20 @@ export default function ResVizSwarm({
 			.attr("transform", (d: any) => `translate(${d.x},${d.y})`) // Prevent 0,0 Flash
 			.attr("cursor", "pointer");
 
-		// 1. Main Circle
-		// Deep Dive Projects: C|24, Backsplash, Makeline, Portion Cup, Pet Scale
-		// const deepDives = ["c24", "backsplash", "makeline", "portion-cup", "pet-scale"];
-		// const dreamjobId = "dreamjob";
+		// ... (Circle/Styles)
 
+		// Event Listeners on the GROUP
+		// 1. Main Circle
 		nodeGroup
 			.append("circle")
 			.attr("r", (d: any) => d.radius)
+			.attr("cursor", "pointer") // Ensure pointer
+			.on("click", (event, d) => {
+				// Click to NAVIGATE (Visit)
+				console.log("[ResVizSwarm] Circle Clicked:", d.id);
+				event.stopPropagation();
+				window.location.href = `/projects/${toSlug(d.id)}`;
+			})
 			.attr("fill", (d: any) => getColor(d))
 			.attr("stroke", (d: any) => {
 				if (d.presentation_mode === "flagship") return "#ffffff";
@@ -278,9 +505,11 @@ export default function ResVizSwarm({
 		// Event Listeners on the GROUP
 		nodeGroup
 			.on("click", (event, d) => {
-				// Click to NAVIGATE (Visit)
+				// CLICK TO LOCK (Focus Mode)
 				event.stopPropagation();
-				window.location.href = `/projects/${toSlug(d.id)}`;
+
+				// Map Click to Selection (Lock)
+				if (onNodeClick) onNodeClick(d);
 			})
 			// .on("dblclick", (event, d) => { ... }) // Removed as requested
 			.on("mouseover", function (event, d) {

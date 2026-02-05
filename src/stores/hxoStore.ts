@@ -24,3 +24,10 @@ export function clearSelection() {
 export function setHover(id: string | null) {
 	hoveredProject.set(id);
 }
+
+// Console Interaction Shield
+export const isInsideConsole = atom<boolean>(false);
+
+export function setConsoleHover(isInside: boolean) {
+	isInsideConsole.set(isInside);
+}

@@ -106,10 +106,10 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Physics Tuning & Visualization Repair.**
-- **Next Step:** Manually tune `ResVizSwarm.tsx` to match the "Good" Screenshot (Small Bubbles).
-- **Context:** **CRITICAL RESTORATION FAILURE.** We discovered that git commit `14325b0` produces "Giant Bubbles" (Radius 1.5x), identifying a conflict between the User's memory of the "Good Commit" and the actual code.
-- **Action Item:** The next session MUST ignore the git history for `ResVizSwarm` and tune the physics to: `Radius 0.85x`, `Flagship 38px`, `Spacing 90px`.
+- **Active Task:** **Session Mining & Documentation Synthesis.**
+- **Next Step:** Return to "Physics Tuning" (ResVizSwarm) now that the build is clean and deployed.
+- **Context:** **DEPLOYMENT SUCCESS.** The partial "Spring Cleaning" is complete. We have valid production deployment.
+- **Action Item:** Verification of "ResVizSwarm" physics is the next technical priority.
 - **Recent Win:** Fixed `content.config.ts` crash by relaxing `forensic_summary` schema to `z.any()`. This unblocked the build.
 
 * **Key Decision (Protocol):** **"Stickies over Bubbles"** - We renamed the protocol to `STICKIE_PROTOCOL.md` to match the UI Code. "Bubble" refers strictly to the _folder_. "Stickie" refers to the _artifact_.
@@ -140,6 +140,8 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Mining):** **"The MailStore Pivot"** - Python COM is too fragile for 15k+ item queries. Use MailStore Home to Index -> Search -> Export.
 * **Key Decision (Layout):** **"The Fiche Scroll Law"** - The Fiche container MUST use `.no-scrollbar` to prevent double-scrollbar visual glitches with the Parallax system.
 * **Key Decision (Assets):** **"The Numeric Bubble Law"** - SC48/D-Control Bubble folders MUST be prefixed (e.g., `01_3d`) to ensure `process_images.py` compiles them in the correct narrative order.
+* **Key Decision (Style):** **"The Linear Gradient Law"** - Tailwind 4.0 requires `bg-linear-to-*`. Legacy `bg-gradient-to-*` is deprecated.
+* **Key Decision (Archival):** **"The Museum Strategy"** - We do not delete complex "Dead Code" (`SlideProjector.tsx`). We move it to `eriknorris-archive` to preserve the engineering history ("Red Gold").
 * **Key Decision (Color):** **"The Sovereign Color Law"** - `src/config/color_registry.ts` is the ONLY Source of Truth for Entity Coloring. `Colors.csv` retrieval is FORBIDDEN.
 * **Key Decision (Code):** **"The Module Naming Law"** - Do not use `.json.ts` for standard TypeScript modules/arrays. Rename to `.ts` to prevent TS Server resolution confusion.
 * **Key Decision (Resilience):** **"The Relative Link Trap"** - `new URL(href)` crashes on relative paths (`/digiME/`). Always wrap URL parsing in `try { ... } catch { return "INTERNAL" }` or use a regex helper for internal routing consistency.

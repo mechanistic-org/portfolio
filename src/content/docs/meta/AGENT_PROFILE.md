@@ -70,6 +70,13 @@ description: "Archived legacy document."
 - **Discipline:** Force yourself to build a "Honda" (Reliable, Standard, JPEGs, Simple Lists).
 - _Evidence:_ Law XV (The Honda Standard).
 
+**The "Archivist Impulse":**
+
+- **Trigger:** You see unused code/assets.
+- **Instinct:** "Delete this clutter."
+- **Correction:** "Archive this history."
+- **Protocol:** Move it to `eriknorris-archive`. Do not destroy the evidence of effort.
+
 ## 4. COMMUNICATIONS PROTOCOL
 
 **How to Speak to You:**

@@ -7,6 +7,7 @@ import {
 	selectProject,
 	setHover,
 	clearSelection,
+	isInsideConsole,
 } from "../../stores/hxoStore";
 
 interface HXOSwarmContainerProps {
@@ -17,6 +18,7 @@ export default function HXOSwarmContainer({ nodes }: HXOSwarmContainerProps) {
 	// Subscribe to store state
 	const currentHover = useStore(hoveredProject);
 	const currentSelection = useStore(selectedProject);
+	const consoleActive = useStore(isInsideConsole);
 
 	// Handle events from the Swarm
 	const handleNodeSelect = (node: any) => {
@@ -47,9 +49,11 @@ export default function HXOSwarmContainer({ nodes }: HXOSwarmContainerProps) {
 			<ResVizSwarm
 				nodes={nodes}
 				externalHoverId={currentHover || currentSelection || undefined}
+				selectedId={currentSelection}
 				onNodeSelect={(node) => setHover(node ? node.id : null)}
 				onNodeClick={(node) => selectProject(node ? node.id : "")}
 				shouldStart={true}
+				isConsoleHovered={consoleActive}
 			/>
 		</div>
 	);
