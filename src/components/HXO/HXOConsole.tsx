@@ -97,13 +97,16 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 	const ledgerRef = useRef<HTMLDivElement>(null);
 	const isinteractingWithLedger = useRef(false);
 
-	// [FIX] Disabled Auto-Scroll entirely to prevent jitter interaction.
-	// useEffect(() => {
-	// 	if (activeId && ledgerRef.current) {
-	// 		const row = ledgerRef.current.querySelector(`[data-id="${activeId}"]`);
-	// 		if (row) row.scrollIntoView({ behavior: "smooth", block: "center" });
-	// 	}
-	// }, [activeId]);
+	// [FIX] Restored Auto-Scroll with Jitter Protection
+	// Only scroll if the user is NOT physically interacting with the list (i.e. Swarm-driven)
+	useEffect(() => {
+		if (activeId && ledgerRef.current && !isinteractingWithLedger.current) {
+			const row = ledgerRef.current.querySelector(`[data-id="${activeId}"]`);
+			if (row) {
+				row.scrollIntoView({ behavior: "smooth", block: "center" });
+			}
+		}
+	}, [activeId]);
 
 	return (
 		<ErrorBoundary>
