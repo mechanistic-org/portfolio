@@ -57,6 +57,11 @@ sidebar:
   - **[Refactor]** Migrated all gradients to Tailwind 4.0 syntax (`bg-linear-to-*`), resolving 30+ deprecation warnings.
   - **[Cauterization]** Removed dead code references (`KeyFeatures.astro` in `ProjectLayout`) to ensure a zero-warning build.
 
+- **[2026-02-04] Data Viz Engineering (Hover Trap Fix)**
+  - **[Fix] The Spatial Diode:** Implemented "Infinite Bridge" logic in `ResVizSwarm` to prevent selection drops when moving rightward to the Console.
+  - **[Fix] Console Shield:** Logic now "Freezes" selection state upon Console entry instead of resetting it.
+  - **[Stability] Stale Closures:** Resolved `CRITICAL: Active Node NOT FOUND` crash by fixing React `useMemo` dependency array.
+
 - **[2026-02-04] The Great Restoration & Hybrid HUD**
   - **[Restoration]** Rescued `AGENCY_MEMORY`, `MANIFESTO`, and `backlog` from accidental archive. Synthesized 25-Law `GROK_LOG`.
   - **[Feature] Universal HUD:** Unified navigation system with "Right-Stuff" DLS (Stealth Mode, HOTAS Controls).

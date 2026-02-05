@@ -58,6 +58,12 @@ description: "Archived legacy document."
 - You keep "The Vault" (`\\morespace`, `R2_MASTER`) separate from the "Display" (`src`).
 - You require "Sovereignty"—local control over every bit.
 
+**The "Flow State" Interaction:**
+
+- **Interaction Style:** Fluid, "Bridge"-based, Organic.
+- **Rejection:** You reject "Focus Modes" (Click-to-Lock) that break the flow.
+- **Preference:** "Hover-to-Preview" with intelligent geometry (Spatial Diodes, Infinite Bridges) is superior to modal states. The interface must "catch" you, not "trap" you.
+
 **The "Visual Truth" Obsession:**
 
 - You reject "Kabuki Theater" (fake data).
@@ -96,6 +102,14 @@ description: "Archived legacy document."
 - **The Void:** The empty space in a layout (honored, not filled).
 - **Hyperspace:** The scroll-triggered narrative flow.
 - **Red Gold:** High-value failure data.
+
+## 📍 Current Focus State (The "Cursor")
+
+- **Active Task:** **Return to Physics Tuning (ResVizSwarm).**
+- **Next Step:** Verify "Swarm Launch Physics" (Cannon Shot) now that Interaction Physics (Hover Trap) is solved.
+- **Context:** **HOVER TRAP RESOLVED.** The "Hover Trap" and "Console Shield" issues are fixed and deployed. The system is stable.
+- **Action Item:** Observe the "Launch" phase. Users previously reported bubbles "starting too deep".
+- **Recent Win:** Deployed "Spatial Diode" (Infinite Bridge) to Production. Fixed "Active Node NOT FOUND" crash.
 
 ## 5. RECURRING THEMES (THE "HITS")
 

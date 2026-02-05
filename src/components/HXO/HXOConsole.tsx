@@ -1,6 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import { useStore } from "@nanostores/react";
-import { selectedProject, hoveredProject, selectProject, setHover } from "../../stores/hxoStore";
+import {
+	selectedProject,
+	hoveredProject,
+	selectProject,
+	setHover,
+	setConsoleHover,
+} from "../../stores/hxoStore";
 import { getEntityColor } from "../../config/color_registry";
 import SonicHeartbeat from "../Audio/SonicHeartbeat";
 
@@ -101,7 +107,11 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 
 	return (
 		<ErrorBoundary>
-			<div className="flex h-full flex-col border-l border-zinc-900 bg-transparent">
+			<div
+				className="flex h-full flex-col border-l border-zinc-900 bg-transparent"
+				onMouseEnter={() => setConsoleHover(true)}
+				onMouseLeave={() => setConsoleHover(false)}
+			>
 				{/* 1. VIEWPORT (The Sovereign Card) - FIXED HEIGHT to prevents layout thrashing loop */}
 				<div className="custom-scrollbar h-[450px] shrink-0 overflow-y-auto border-b border-zinc-800 bg-zinc-900/10 p-6">
 					{activeProject ? <ActiveSovereignView project={activeProject} /> : <DefaultSummary />}

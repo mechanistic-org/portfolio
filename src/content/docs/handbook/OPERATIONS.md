@@ -236,3 +236,30 @@ To prevent "Stacking Wars", we vertically partition the Z-space into strict flig
 
 - **Symptom:** `Error: EPERM: operation not permitted, rename` during `npm run dev`.
 - **Fix:** Restart the terminal.
+
+---
+
+## 9. Data Viz Engineering (D3/React)
+
+### 🟢 "The Hover Trap" (Interaction Logic)
+
+- **Context:** `ResVizSwarm.tsx` (Physics Engine).
+- **Problem:** Moving from a node to a distant UI element (like a Console) causes the selection to drop if the cursor passes through empty space.
+- **Solution: The Spatial Diode.**
+  - **Logic:** If `Cursor X > Node X` (Moving Right), HOLD selection indefinitely.
+  - **Code:** `const isToTheRight = x > node.x! + radius * 0.5;`
+  - **Why:** Creates an "Infinite Bridge" to the right-side UI.
+
+### 🟢 "The Console Shield" (Event Shielding)
+
+- **Context:** Overlaid UI components (Console, HUD).
+- **Problem:** Hovering a UI element triggers `mouseleave` on the canvas, clearing selection.
+- **Solution:** Freeze State.
+  - **Logic:** `if (isConsoleHovered) return;` in the physics loop.
+  - **Result:** The visualization "pauses" its interactive state while you use the overlay.
+
+### 🔴 "ResViz Stale Closure" (React/D3)
+
+- **Symptom:** `CRITICAL: Active Node NOT FOUND`.
+- **Cause:** `useMemo` or `useEffect` missing dependencies (e.g., `[rawNodes]`), causing the D3 simulation to reference an old array pointer.
+- **Fix:** Audit dependency arrays strictly.

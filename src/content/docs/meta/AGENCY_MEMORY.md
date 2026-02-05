@@ -106,11 +106,11 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Session Mining & Documentation Synthesis.**
-- **Next Step:** Return to "Physics Tuning" (ResVizSwarm) now that the build is clean and deployed.
-- **Context:** **DEPLOYMENT SUCCESS.** The partial "Spring Cleaning" is complete. We have valid production deployment.
-- **Action Item:** Verification of "ResVizSwarm" physics is the next technical priority.
-- **Recent Win:** Fixed `content.config.ts` crash by relaxing `forensic_summary` schema to `z.any()`. This unblocked the build.
+- **Active Task:** **Return to Physics Tuning (ResVizSwarm).**
+- **Next Step:** Verify "Swarm Launch Physics" (Cannon Shot) now that Interaction Physics (Hover Trap) is solved.
+- **Context:** **HOVER TRAP RESOLVED.** The "Hover Trap" and "Console Shield" issues are fixed and deployed. The system is stable.
+- **Action Item:** Observe the "Launch" phase. Users previously reported bubbles "starting too deep".
+- **Recent Win:** Deployed "Spatial Diode" (Infinite Bridge) to Production. Fixed "Active Node NOT FOUND" crash.
 
 * **Key Decision (Protocol):** **"Stickies over Bubbles"** - We renamed the protocol to `STICKIE_PROTOCOL.md` to match the UI Code. "Bubble" refers strictly to the _folder_. "Stickie" refers to the _artifact_.
 * **Key Decision (Visuals):** **"The Stream Standard"** - The Visualization physics must be `0.85x` scale (Stream) NOT `1.5x` (Planets). Do not restore the "Planets" commit.
