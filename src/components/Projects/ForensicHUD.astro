@@ -1,0 +1,94 @@
+---
+import { marked } from "marked";
+
+interface Props {
+	metrics?: {
+		financial?: string;
+		process?: string;
+		governance?: string;
+	};
+	transcript?: string;
+}
+
+console.log("ForensicHUD: Rendering...");
+const { metrics, transcript } = Astro.props;
+let transcriptHtml = "";
+
+if (transcript) {
+	try {
+		transcriptHtml = await marked.parse(transcript);
+	} catch (e) {
+		console.error("ForensicHUD Error:", e);
+	}
+}
+---
+
+{
+	(metrics || transcript) && (
+		<section class="border-border mt-16 border-t pt-12">
+			<div class="mb-8 flex items-center gap-3">
+				<div class="to-border h-px flex-1 bg-linear-to-r from-transparent" />
+				<h2 class="text-primary font-mono text-sm font-bold tracking-widest uppercase">
+					Forensic Intelligence
+				</h2>
+				<div class="to-border h-px flex-1 bg-linear-to-l from-transparent" />
+			</div>
+
+			{metrics && (
+				<div class="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3">
+					{metrics.financial && (
+						<div class="border-border bg-card/50 hover:bg-card/80 relative overflow-hidden rounded-lg border p-6 transition-colors">
+							<div class="absolute top-0 right-0 h-8 w-8 translate-x-1/2 -translate-y-1/2 rotate-45 transform bg-orange-500/10" />
+							<h3 class="text-muted-foreground font-mono text-xs font-bold tracking-wider uppercase">
+								Financial Impact
+							</h3>
+							<p class="mt-3 text-sm leading-relaxed text-pretty">{metrics.financial}</p>
+						</div>
+					)}
+					{metrics.process && (
+						<div class="border-border bg-card/50 hover:bg-card/80 relative overflow-hidden rounded-lg border p-6 transition-colors">
+							<div class="absolute top-0 right-0 h-8 w-8 translate-x-1/2 -translate-y-1/2 rotate-45 transform bg-blue-500/10" />
+							<h3 class="text-muted-foreground font-mono text-xs font-bold tracking-wider uppercase">
+								Process Engineering
+							</h3>
+							<p class="mt-3 text-sm leading-relaxed text-pretty">{metrics.process}</p>
+						</div>
+					)}
+					{metrics.governance && (
+						<div class="border-border bg-card/50 hover:bg-card/80 relative overflow-hidden rounded-lg border p-6 transition-colors">
+							<div class="absolute top-0 right-0 h-8 w-8 translate-x-1/2 -translate-y-1/2 rotate-45 transform bg-green-500/10" />
+							<h3 class="text-muted-foreground font-mono text-xs font-bold tracking-wider uppercase">
+								Governance
+							</h3>
+							<p class="mt-3 text-sm leading-relaxed text-pretty">{metrics.governance}</p>
+						</div>
+					)}
+				</div>
+			)}
+
+			{transcript && (
+				<details class="group bg-card/30 border-border rounded-lg border">
+					<summary class="hover:bg-muted/50 flex cursor-pointer items-center justify-between p-4 transition-colors select-none">
+						<div class="flex items-center gap-2">
+							<span class="bg-primary/20 text-primary rounded px-1.5 py-0.5 font-mono text-[10px] uppercase">
+								AEO-Bridge
+							</span>
+							<span class="text-muted-foreground font-mono text-sm tracking-wide uppercase">
+								Audio Briefing Transcript
+							</span>
+						</div>
+						<span class="text-muted-foreground text-xs transition-transform duration-300 group-open:rotate-180">
+							▼
+						</span>
+					</summary>
+					<div class="border-border border-t border-dashed p-6">
+						<div
+							class="prose prose-sm prose-invert text-muted-foreground/80 [&>h3]:text-primary [&>h4]:text-foreground max-w-none font-mono [&>h3]:uppercase [&>h4]:uppercase"
+							set:html={transcriptHtml}
+						/>
+					</div>
+				</details>
+			)}
+		</section>
+	)
+}

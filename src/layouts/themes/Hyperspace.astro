@@ -6,6 +6,7 @@ import NarrativeItem from "@components/Scrolly/NarrativeItem.astro";
 import ScrollyHud from "@components/Scrolly/ScrollyHud.astro";
 import TextDeck from "@components/Scrolly/TextDeck.astro";
 import ProjectManifestHUD from "@components/Projects/ProjectManifestHUD.astro";
+import ForensicHUD from "@components/Projects/ForensicHUD.astro";
 import SharedLayoutGallery from "@components/Projects/SharedLayoutGallery";
 import { getAssetUrl } from "@/utils/assets";
 
@@ -209,6 +210,13 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 			</section>
 		)
 	}
+
+	{/* AEO BRIDGE: Forensic Intelligence - Always visible in DOM */}
+	<section class="relative z-10 bg-transparent pb-32">
+		<div class="site-container max-w-4xl">
+			<ForensicHUD metrics={entry.data.forensic_metrics} transcript={entry.data.transcript} />
+		</div>
+	</section>
 
 	<!-- Scroll Cushion -->
 	<div class="h-[25vh] w-full snap-end bg-transparent"></div>

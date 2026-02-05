@@ -131,9 +131,12 @@ const projectsCollection = defineCollection({
 			.object({
 				financial: z.string().optional(),
 				process: z.string().optional(),
-				technical: z.string().optional(),
+				technical: z.string().optional(), // Legacy?
+				governance: z.string().optional(), // Added for Heavy 8 alignment
 			})
 			.optional(),
+
+		transcript: z.string().optional(), // Added for AEO Audio Bridge
 
 		phase_stats: z.record(z.number()).optional(),
 		teamSize: z.coerce.string().optional(),
