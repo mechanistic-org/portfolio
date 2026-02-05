@@ -42,12 +42,12 @@ const NetworkBubbleGraph: React.FC<{ data: NetworkData }> = ({ data }) => {
 
 		const root = d3
 			.hierarchy(idxData)
-			.sum((d) => d.value || 0)
-			.sort((a, b) => (b.value || 0) - (a.value || 0));
+			.sum((d: any) => d.value || 0)
+			.sort((a, b: any) => (b.value || 0) - (a.value || 0));
 
 		const pack = d3.pack().size([width, height]).padding(5);
 
-		pack(root);
+		const packedRoot = pack(root) as unknown as d3.HierarchyCircularNode<any>;
 
 		// Color Scale matching EN-OS Neon
 		const color = d3.scaleOrdinal().range(["#10B981", "#3B82F6", "#8B5CF6", "#F43F5E", "#F59E0B"]); // Emerald, Blue, Violet, Rose, Amber
@@ -70,14 +70,14 @@ const NetworkBubbleGraph: React.FC<{ data: NetworkData }> = ({ data }) => {
 
 		const node = g
 			.selectAll("g")
-			.data(root.leaves())
+			.data(packedRoot.leaves())
 			.join("g")
 			.attr("transform", (d) => `translate(${d.x},${d.y})`);
 
 		// Circles
 		node
 			.append("circle")
-			.attr("r", (d) => d.r)
+			.attr("r", (d: any) => d.r)
 			.attr("fill", (d) => color(d.data.name as string) as string)
 			.attr("fill-opacity", 0.2)
 			.attr("stroke", (d) => color(d.data.name as string) as string)
@@ -106,10 +106,10 @@ const NetworkBubbleGraph: React.FC<{ data: NetworkData }> = ({ data }) => {
 			.attr("dy", "0.3em")
 			.style("text-anchor", "middle")
 			.style("font-family", "monospace")
-			.style("font-size", (d) => `${Math.min(d.r / 3, 14)}px`) // Dynamic sizing
+			.style("font-size", (d: any) => `${Math.min(d.r / 3, 14)}px`) // Dynamic sizing
 			.style("fill", "#fff")
 			.style("pointer-events", "none")
-			.text((d) => (d.data.name as string).substring(0, d.r / 3 > 6 ? 15 : 5));
+			.text((d: any) => (d.data.name as string).substring(0, d.r / 3 > 6 ? 15 : 5));
 	}, [data, dimensions]);
 
 	return (

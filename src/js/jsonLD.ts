@@ -5,14 +5,6 @@ interface GeneralProps {
 	type: "general" | "project";
 }
 
-export interface BlogProps {
-	type: "blog";
-	postFrontmatter: CollectionEntry<"blog">["data"];
-	image: any; // result of getImage() from Seo.astro
-	authors: CollectionEntry<"authors">[];
-	canonicalUrl: URL;
-}
-
 export interface ProjectProps {
 	type: "project";
 	projectFrontmatter: any; // Using any for flexibility with CollectionEntry data
@@ -20,45 +12,12 @@ export interface ProjectProps {
 	canonicalUrl: URL;
 }
 
-export type JsonLDProps = BlogProps | GeneralProps | ProjectProps;
+export type JsonLDProps = GeneralProps | ProjectProps;
 
 export default function jsonLDGenerator(props: JsonLDProps) {
 	const { type } = props;
 
-	if (type === "blog") {
-		const { postFrontmatter, image, authors, canonicalUrl } = props as BlogProps;
-		const authorsJsonLdArray = authors.map((author) => {
-			return {
-				"@type": "Person",
-				name: author.data.name,
-				url: author.data.authorLink,
-			};
-		});
-
-		let authorsJsonLd;
-		if (authorsJsonLdArray.length === 1) {
-			authorsJsonLd = authorsJsonLdArray[0];
-		} else {
-			authorsJsonLd = authorsJsonLdArray;
-		}
-
-		return `<script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "BlogPosting",
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "${canonicalUrl}"
-        },
-        "headline": "${postFrontmatter.title}",
-        "description": "${postFrontmatter.description}",
-        "image": "${image.src}",
-        "author": ${JSON.stringify(authorsJsonLd)},
-        "datePublished": "${postFrontmatter.pubDate}",
-        "dateModified": "${postFrontmatter.updatedDate}"
-      }
-    </script>`;
-	} else if (type === "project") {
+	if (type === "project") {
 		const { projectFrontmatter, image, canonicalUrl } = props as ProjectProps;
 
 		if (!projectFrontmatter) {

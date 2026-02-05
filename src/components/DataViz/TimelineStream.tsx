@@ -1,23 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
+import type { MultiverseNode } from "@/types/MultiverseTypes";
 
-interface Node {
-	id: string;
-	name: string;
-	group: string;
-	color: string;
-	value: number;
-	year: number;
-	start_date: string;
-	end_date: string;
-	category: string;
-	img: string;
+interface Node extends MultiverseNode, d3.SimulationNodeDatum {
 	x?: number;
 	y?: number;
 }
 
 interface TimelineStreamProps {
-	data: { nodes: Node[] };
+	data: { nodes: MultiverseNode[] };
 }
 
 const TimelineStream: React.FC<TimelineStreamProps> = ({ data }) => {
@@ -65,8 +56,9 @@ const TimelineStream: React.FC<TimelineStreamProps> = ({ data }) => {
 			.padding(0.5);
 
 		// 2. PHYSICS
+		const nodes = data.nodes.map((d) => ({ ...d })) as Node[];
 		const simulation = d3
-			.forceSimulation(data.nodes)
+			.forceSimulation(nodes)
 			.force("x", d3.forceX((d: any) => xScale(new Date(d.start_date))).strength(0.8)) // Strong Pull to Date
 			.force("y", d3.forceY((d: any) => yScale(d.category) ?? height / 2).strength(0.1)) // Gentle Pull to Lane
 			.force(
@@ -93,7 +85,7 @@ const TimelineStream: React.FC<TimelineStreamProps> = ({ data }) => {
 		// NODES
 		const node = g
 			.selectAll(".node")
-			.data(data.nodes)
+			.data(nodes)
 			.enter()
 			.append("g")
 			.attr("class", "node")

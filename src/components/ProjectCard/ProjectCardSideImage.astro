@@ -23,7 +23,7 @@ const { image, title, description, href, imageSide, ...rest } = Astro.props as P
 <div class="mx-auto grid gap-x-8 md:grid-cols-2 md:gap-x-12 lg:gap-x-20" {...rest}>
 	<!-- image -->
 	<div class=`${imageSide === "right" ? "md:order-last": ""} mx-auto max-w-4xl`>
-		<Image class="object-cover" src={image} alt={title} height={700} />
+		<Image class="object-cover" src={image} alt={title} width={800} height={700} />
 	</div>
 
 	<!-- text -->

@@ -306,8 +306,8 @@ export default function UnifiedDashboard({
 
 				{/* 5. Spec Ticker (Footer) */}
 				<div className="relative flex h-10 items-center overflow-hidden border-t border-b border-neutral-800 bg-neutral-950 lg:col-span-12">
-					<div className="absolute top-0 bottom-0 left-0 z-10 w-24 bg-gradient-to-r from-neutral-950 to-transparent"></div>
-					<div className="absolute top-0 right-0 bottom-0 z-10 w-24 bg-gradient-to-l from-neutral-950 to-transparent"></div>
+					<div className="absolute top-0 bottom-0 left-0 z-10 w-24 bg-linear-to-r from-neutral-950 to-transparent"></div>
+					<div className="absolute top-0 right-0 bottom-0 z-10 w-24 bg-linear-to-l from-neutral-950 to-transparent"></div>
 					<div className="animate-scroll flex items-center gap-8 px-4 whitespace-nowrap">
 						{specs.concat(specs).map((spec, i) => (
 							<div key={i} className="flex items-center gap-2 font-mono text-xs text-neutral-500">

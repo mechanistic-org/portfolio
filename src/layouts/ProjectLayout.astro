@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import { type CollectionEntry, getEntries } from "astro:content";
 
 import Button from "@/components/Button/Button.astro";
-import KeyFeatures from "@/components/Projects/KeyFeatures.astro";
+
 import ProjectSpecCard from "@/components/Projects/ProjectSpecCard.astro";
 import TechStack from "@/components/Projects/TechStack.astro";
 import { getLocaleFromUrl } from "@/js/localeUtils";
@@ -18,8 +18,17 @@ interface Props {
 }
 
 const { project } = Astro.props as Props;
-const { title, description, image, technologies, demoUrl, githubUrl, completionDate, keyFeatures } =
-	project.data;
+const {
+	title,
+	description = "",
+	heroImage: image,
+	tools: technologies,
+	date: completionDate,
+	links = [],
+} = project.data;
+
+const demoUrl = links.find((l) => l.name === "Demo" || l.name === "Live")?.url;
+const githubUrl = links.find((l) => l.name === "GitHub" || l.name === "Repo")?.url;
 
 const currLocale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(currLocale);
@@ -47,6 +56,7 @@ const t = useTranslations(currLocale);
 							src={image}
 							alt={title}
 							width={1000}
+							height={600}
 							densities={[1.5, 2]}
 							quality="high"
 							format="webp"
@@ -63,13 +73,15 @@ const t = useTranslations(currLocale);
 			<div class="mx-auto max-w-3xl">
 				<div class="mb-12">
 					<h2 class="h2 mb-4">Technologies Used</h2>
-					<TechStack {technologies} />
+					<TechStack tools={technologies} />
 				</div>
 
-				<div class="mb-12">
+				{
+					/* <div class="mb-12">
 					<h2 class="h2 mb-4">Key Features</h2>
 					<KeyFeatures {keyFeatures} />
-				</div>
+				</div> */
+				}
 
 				<div class="markdown-content">
 					<slot />
@@ -77,7 +89,7 @@ const t = useTranslations(currLocale);
 
 				<div class="mt-10 flex flex-col gap-6">
 					<div class="opacity-70">
-						Completed on: {formatDate(completionDate, currLocale)}
+						Completed on: {formatDate(completionDate || new Date())}
 					</div>
 
 					<div class="flex flex-wrap gap-4">

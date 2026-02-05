@@ -1,28 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import { getEntityColor } from "../../config/color_registry";
+import type { MultiverseNode } from "@/types/MultiverseTypes";
 
-interface Node {
-	id: string;
-	name: string;
-	group: string;
-	color: string;
-	value: number; // Mass/Radius
-	year: number;
-	category: string;
-	img: string;
-	start_date: string;
-	end_date?: string;
+interface Node extends MultiverseNode, d3.SimulationNodeDatum {
 	x?: number;
 	y?: number;
 	fx?: number | null;
 	fy?: number | null;
-	// Calculated
 	radius?: number;
 }
 
 interface MultiverseGraphProps {
-	data: { nodes: Node[] };
+	data: { nodes: MultiverseNode[] };
 }
 
 const Assembly: React.FC<MultiverseGraphProps> = ({ data }) => {

@@ -28,20 +28,30 @@ const {
 
 // Normalization Logic: Use entry if available, else use loose props
 const data = entry
-	? entry.data
+	? {
+			...entry.data,
+			role: entry.data.job_title,
+			statusLabel: entry.data.production,
+			employer: entry.data.employer,
+		}
 	: {
 			title: title,
 			role: role,
-			employer: client, // mapping 'client' prop to 'employer' schema
+			job_title: role,
+			employer: client,
 			date: year ? new Date(year.toString()) : new Date(),
 			impact: impact,
 			toolchain: [],
 			tools: [],
+			metrics: undefined,
+			duration: undefined,
+			teamSize: undefined,
+			statusLabel: statusLabel,
 		};
 
 // 1. Core Identification
 const id = entry ? entry.id.toUpperCase() : "KITCHEN-SINK";
-const dateVal = new Date(data.date);
+const dateVal = data.date ? new Date(data.date) : new Date();
 const dateYear = dateVal.getFullYear();
 
 // 2. Dynamic Spec Map (The "Loop" capacity)

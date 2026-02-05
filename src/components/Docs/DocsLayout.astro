@@ -10,9 +10,11 @@ import UniversalHUD from "@components/Nav/UniversalHUD.astro";
 interface Props {
 	doc: CollectionEntry<"docs">;
 	headings?: import("astro").MarkdownHeading[];
+	prev?: { slug: string; title: string } | null;
+	next?: { slug: string; title: string } | null;
 }
 
-const { doc, headings = [] } = Astro.props;
+const { doc, headings = [], prev = null, next = null } = Astro.props;
 const { title, description = "" } = doc.data;
 
 // Filter headings
@@ -31,7 +33,7 @@ const filteredHeadings = headings.filter(
 // Fetching all docs here might be expensive on every page build if many docs.
 // Let's pass them from the [...slug].astro page.
 
-const { prev, next } = Astro.props as any; // Expecting these from the page
+// const { prev, next } = Astro.props as any; // Handled in Props interface
 ---
 
 <BaseLayout title={title} description={description} hideNav={true}>

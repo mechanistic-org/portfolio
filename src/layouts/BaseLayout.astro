@@ -19,12 +19,10 @@ import CollimatedBackground from "@components/Effects/CollimatedBackground"; // 
 import siteData from "@config/siteData.json";
 
 interface Props {
-	type?: "blog" | "general" | "project";
+	type?: "general" | "project";
 	title: string;
 	description: string;
 	image?: ImageMetadata | string;
-	authorsData?: CollectionEntry<"authors">[];
-	postFrontmatter?: CollectionEntry<"blog">["data"];
 	projectFrontmatter?: any;
 	entropy?: any;
 	noindex?: boolean;
@@ -39,8 +37,6 @@ const {
 	title,
 	description,
 	image,
-	authorsData,
-	postFrontmatter,
 	projectFrontmatter,
 	entropy,
 	noindex = false,
@@ -67,8 +63,6 @@ const {
 		title={title}
 		description={description}
 		image={image}
-		authors={authorsData}
-		postFrontmatter={postFrontmatter}
 		projectFrontmatter={projectFrontmatter}
 		noindex={noindex}
 	/>

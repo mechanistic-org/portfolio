@@ -34,11 +34,11 @@ const projects = rawProjects
 	.map((p) => {
 		const node = multiverseMap.get((p.data.slug || p.id).toLowerCase());
 		if (node) {
-			if (node.client) p.data.client = node.client;
-			if (node.employer) p.data.employer = node.employer;
+			// if (node.client) p.data.client = node.client; // Not in MultiverseNode
+			if (node.group) p.data.employer = node.group;
 			if (node.industry) p.data.industry = node.industry;
 			if (node.category) p.data.category = node.category;
-			if (node.tools) p.data.tools = node.tools;
+			if (node.skills) p.data.tools = node.skills;
 		}
 		return p;
 	})

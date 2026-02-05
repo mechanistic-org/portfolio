@@ -4,7 +4,7 @@ import { selectedProject, hoveredProject, selectProject, setHover } from "../../
 import { getEntityColor } from "../../config/color_registry";
 import SonicHeartbeat from "../Audio/SonicHeartbeat";
 
-const DEFAULT_COLOR = "#666666";
+// const DEFAULT_COLOR = "#666666";
 
 // Define the shape of the Project Node passed from Assembly
 // This wraps the Astro Content entry data
@@ -34,7 +34,7 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { has
 		this.state = { hasError: false };
 	}
 
-	static getDerivedStateFromError(error: any) {
+	static getDerivedStateFromError(_error: any) {
 		return { hasError: true };
 	}
 

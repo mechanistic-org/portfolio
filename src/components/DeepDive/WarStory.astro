@@ -48,7 +48,7 @@ const { id = "war-story", title, subtitle, steps } = Astro.props;
 							class="scroll-step group relative rounded-lg border border-white/10 bg-black/80 p-8 shadow-2xl backdrop-blur-md transition-all duration-500 hover:border-blue-500/50"
 						>
 							{index !== steps.length - 1 && (
-								<div class="absolute bottom-0 left-8 hidden h-[80vh] w-px translate-y-full bg-gradient-to-b from-blue-500/50 to-transparent md:-ml-[1px] md:block" />
+								<div class="absolute bottom-0 left-8 hidden h-[80vh] w-px translate-y-full bg-linear-to-b from-blue-500/50 to-transparent md:-ml-px md:block" />
 							)}
 
 							<div class="mb-4 flex items-center justify-between border-b border-white/5 pb-2">
@@ -94,7 +94,7 @@ const { id = "war-story", title, subtitle, steps } = Astro.props;
 									class="h-full w-full object-contain p-8"
 								/>
 
-								<div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/90 to-transparent p-6">
+								<div class="absolute bottom-0 left-0 w-full bg-linear-to-t from-black/90 to-transparent p-6">
 									<div class="flex items-end justify-between">
 										<div class="font-mono text-xs text-blue-400">
 											<span class="mb-1 block text-[10px] text-neutral-500">EVIDENCE // REF</span>

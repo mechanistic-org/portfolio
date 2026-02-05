@@ -285,7 +285,12 @@ export default function SharedLayoutGallery({
 					layoutId={`${id}-img-${index}`}
 					className={`relative mb-4 ${getRotation(index)} pointer-events-auto z-20`}
 				>
-					<RetroLogoAnimator onClick={() => handleImageClick(image, index)} />
+					<img
+						src="/digiME/images/digi_logo_grey_200.gif"
+						alt="DigiME Intranet"
+						className="cursor-pointer"
+						onClick={() => handleImageClick(image, index)}
+					/>
 					{/* Visual cue label */}
 					<div className="absolute right-0 bottom-0 left-0 translate-y-full bg-black/60 p-2 transition-transform duration-300 group-hover:translate-y-0">
 						<p className="text-accent text-center font-mono text-[10px] tracking-wider uppercase">

@@ -146,6 +146,7 @@ const projectsCollection = defineCollection({
 				}),
 			)
 			.optional(),
+		statusLabel: z.string().optional(),
 		job_title: z.enum(ROLE_VALUES as any).optional(),
 		war_stories: z
 			.array(

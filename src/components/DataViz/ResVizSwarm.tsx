@@ -400,7 +400,13 @@ export default function ResVizSwarm({
 
 				// Target the Flagship (Dreamjob)
 				const dreamjobNode = nodes.find((n) => n.presentation_mode === "flagship");
-				if (dreamjobNode && dreamjobNode.x && dreamjobNode.y) {
+				if (
+					dreamjobNode &&
+					dreamjobNode.x !== undefined &&
+					dreamjobNode.y !== undefined &&
+					dreamjobNode.vx !== undefined &&
+					dreamjobNode.vy !== undefined
+				) {
 					const dx = x - dreamjobNode.x;
 					const dy = y - dreamjobNode.y;
 					const dist = Math.sqrt(dx * dx + dy * dy);

@@ -9,13 +9,11 @@ import Seo from "@components/Seo/Seo.astro";
 import siteData from "@config/siteData.json";
 
 export interface Props {
-	type?: "blog" | "general" | "project" | undefined;
+	type?: "general" | "project" | undefined;
 	title: string;
 	description: string;
 	image?: ImageMetadata | string;
-	postFrontmatter?: CollectionEntry<"blog">["data"];
 	projectFrontmatter?: any; // For projects
-	authors?: CollectionEntry<"authors">[];
 	noindex?: boolean;
 }
 
@@ -24,8 +22,6 @@ const {
 	title,
 	description,
 	image,
-	authors,
-	postFrontmatter,
 	projectFrontmatter,
 	noindex = false,
 } = Astro.props as Props;
@@ -80,8 +76,6 @@ import JetBrainsMono from "@fontsource-variable/jetbrains-mono/files/jetbrains-m
 	title={title}
 	description={description}
 	image={image}
-	authors={authors}
-	postFrontmatter={postFrontmatter}
 	projectFrontmatter={projectFrontmatter}
 	noindex={noindex}
 />

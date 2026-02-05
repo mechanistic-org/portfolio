@@ -78,8 +78,7 @@ export default function Starfield(props: any) {
 				<bufferAttribute
 					attach="geometry-attributes-color"
 					count={colors.length / 3}
-					array={colors}
-					itemSize={3}
+					args={[colors, 3]}
 				/>
 			</Points>
 		</group>

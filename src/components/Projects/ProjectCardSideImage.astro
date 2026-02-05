@@ -7,6 +7,7 @@ import Button from "@/components/Button/Button.astro";
 import { getLocaleFromUrl } from "@/js/localeUtils";
 import { slugify } from "@/js/textUtils";
 import { getLocalizedRoute } from "@/js/translationUtils";
+import { getAssetUrl } from "@/utils/assets";
 
 const currLocale = getLocaleFromUrl(Astro.url);
 
@@ -17,7 +18,7 @@ interface Props {
 }
 
 const { project, imageSide = "left", animations = true } = Astro.props;
-const { title, description, image, technologies, ...rest } = project.data;
+const { title, description, heroImage, tools, ...rest } = project.data;
 ---
 
 <div class="flex flex-col gap-12 lg:flex-row" {...rest}>
@@ -33,8 +34,9 @@ const { title, description, image, technologies, ...rest } = project.data;
 		<div class="relative">
 			<div class="relative overflow-hidden rounded-xl border">
 				<Image
-					src={getAssetUrl(image) || ""}
+					src={getAssetUrl(heroImage) || ""}
 					width={800}
+					height={600}
 					densities={[1.5, 2]}
 					alt={title}
 					class="aspect-4/3 w-full object-cover"
@@ -59,7 +61,7 @@ const { title, description, image, technologies, ...rest } = project.data;
 			{/* Technologies */}
 			<div class="flex flex-wrap gap-2">
 				{
-					technologies.map((tech) => (
+					tools.map((tech) => (
 						<span class="bg-border text-foreground rounded-full px-3 py-1 text-sm">{tech}</span>
 					))
 				}

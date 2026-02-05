@@ -23,7 +23,7 @@ const { image, title, description, href, ...rest } = Astro.props as Props;
 <div class="border-base-600 flex flex-col border p-4" {...rest}>
 	<!-- image -->
 	<div class="mx-auto max-w-4xl">
-		<Image class="object-cover" src={getAssetUrl(image) || ""} alt={title} height={700} />
+		<Image class="object-cover" src={image} alt={title} width={800} height={700} />
 	</div>
 
 	<!-- text -->

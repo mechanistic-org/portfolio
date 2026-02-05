@@ -1,7 +1,7 @@
 ---
 import Layout from "@layouts/BaseLayout.astro";
 
-import WorkRealm from "../../components/Realms/WorkRealm";
+// import WorkRealm from "../../components/Realms/WorkRealm";
 // import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
 import { getMultiverseData } from "@/utils/getMultiverseData";
 
@@ -39,7 +39,7 @@ const multiverseData = await getMultiverseData();
 		id="work-layer"
 		class="fixed inset-0 z-10 h-full w-full bg-transparent transition-opacity duration-300"
 	>
-		<WorkRealm client:only="react" nodes={multiverseData.nodes} />
+		{/* <WorkRealm client:only="react" nodes={multiverseData.nodes} /> */}
 	</div>
 </Layout>
 

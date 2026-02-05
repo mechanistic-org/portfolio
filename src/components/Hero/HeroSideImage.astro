@@ -53,7 +53,7 @@ import ScrambleText from "@components/Effects/ScrambleText";
 
 	if (viewer && progress) {
 		viewer.addEventListener("progress", (e) => {
-			const event = e as CustomEvent;
+			const event = e as unknown as CustomEvent;
 			const p = event.detail.totalProgress * 100;
 			progress.style.width = `${p}%`;
 			if (p === 100)
