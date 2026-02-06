@@ -296,89 +296,90 @@ toolchain:
 tools:
   - pro_engineer
 transcript: |
-  ### [SC48 "Lux" / "Capaldi"] Forensic Report
-
-  #### I. PROJECT SUMMARY
-
-  - **Role:** Lead Mechanical Engineer / Industrial Designer
-  - **Objective:** Architect an "Embedded Live Sound" console integrating a DSP engine and PC motherboard into a touring-grade chassis under a strict less than $15k COGS cap.
-  - **Core Achievement:** Solved a critical **75°C** thermal shutdown failure by re-architecting the chassis from 3U to 4U, while simultaneously eliminating expensive aluminum extrusions to meet aggressive cost targets.
-
-  #### II. THE CAST (Team & Stakeholders)
-
-  - **Neal Breitbarth:** Mechanical Manager (My direct report; resource allocation).
-  - **Marc Schuman:** Hardware/Thermal Engineering (Partner in thermal matrix testing and sensor data analysis).
-  - **Stan Cotey:** Product Marketing (Defined the "Profile" aesthetic requirements).
-  - **Terri Merrell:** Senior Buyer (Managed vendor relations with VTech/Jetcrown).
-  - **VTech (China):** Contract Manufacturer (CMS) for final integration.
-  - **Jetcrown:** Plastics Vendor (Tooling and injection molding).
-
-  #### III. CRITICAL MECHANICAL INTERVENTIONS (Ranked STAR Stories)
-
-  ##### 1. The "Meltdown" Mitigation (Thermal Shutdown)
-
-  - **The Trigger:** During "Capaldi FOH" environmental chamber testing, the embedded CPU temperature hit **75°C**, triggering an automatic system shutdown.
-  - **The Tension:** The product is a live sound console; a thermal shutdown during a performance is a catastrophic, "show-stopping" failure mode. The density of the embedded PC motherboard (Kontron 986LCD-M) inside the console created a heat trap.
-  - **The Intervention:** I executed a "Design of Experiments" thermal matrix, testing chassis heights (3U vs 4U) and fan voltages (5.6V to 12V). I re-architected the chassis to a **4U layout** and implemented a high-velocity cooling solution using **three 80mm fans at 12V**.
-  - **The Result:** The intervention dropped the internal temperature rise to **22.6°C** (Left side), keeping the CPU well within the safe operating zone and eliminating the shutdown risk, satisfying the "Red Team" engineering review.
-
-  ##### 2. The PMS Insert Crisis (Tolerance Stack)
-
-  - **The Trigger:** During the "Origami Spine" assembly, the press-fit nuts (PMS inserts) began popping out of the top covers due to insufficient material retention in the sheet metal holes.
-  - **The Tension:** The vendor proposed using glue to secure the inserts. I rejected this as "guesswork." A failure here would mean the console surface could detach in the field.
-  - **The Intervention:** I rejected the "try harder" approach and recalculated the tolerance stack. I issued a directive to change the diameter hole size to exactly **.170 + 0.00/-0.012**.
-  - **The Result:** This precise adjustment maximized metal retention for the fastener "bite," securing the inserts mechanically without adhesives. "That's why we don't use glue."
-
-  ##### 3. The "Blind Mate" Alignment (Exhibition Hall 1)
-
-  - **The Trigger:** The console required a "Blind Mate" connection between the PSU/CPU tray and the main chassis, critical for rapid assembly.
-  - **The Tension:** If the alignment was off by even a millimeter, the connector pins would "smash" during insertion, destroying the unit.
-  - **The Intervention:** I engineered a "Floating Tray" system using tie plates with **ovalized matching holes**. This allowed for specific X/Y "wiggle room" to accommodate the tolerance stack of the folded steel chassis.
-  - **The Result:** Enabled a reliable "Blind Mate" insertion sequence that absorbed manufacturing variance, validated during the high-pressure "Exhibition Hall 1" setup.
-
-  ##### 4. The LED Bleed (Quality Gate)
-
-  - **The Trigger:** Light from the "Denko Meters" was bleeding between the LED indicators, making the console look "cheap." The LED collars weren't seating deep enough to block the light.
-  - **The Intervention:** I directed the vendor to **enlarge the hole of the spacer bar** so the LED collar fit perfectly inside, physically blocking the light path.
-  - **The Result:** Eliminated the bleed and restored the definitive "Pixel Perfect" look required for the premium market.
-
-  #### IV. LINKEDIN ARTIFACTS
-
-  - [ ] Engineered the SC48 "Lux" thermal management system, reducing CPU temps from a **75°C shutdown failure** to a stable **22.6°C rise** via 4U chassis re-architecture.
-  - [ ] Eliminated high-cost aluminum extrusions to hit a **less than $15k COGS** target, replacing them with a custom folded steel "I-Beam" spine (P/N 9420-58317-00).
-  - [ ] Managed the release of **26 unique sheet metal fabrication drawings** (SC48_REV-1) to VTech (China) for mass production.
-  - [ ] Directed the tooling strategy for **$30,000+** in plastic injection molds, utilizing family molds for Side Caps and Bolsters to maximize budget efficiency.
-  - [ ] Integrated a Kontron Mini-ITX motherboard into a ruggedized touring chassis, bridging the gap between Consumer PC standards and Pro Audio reliability.
-
-  #### V. TECHNICAL STACK & GOVERNANCE
-
-  - **Tools:** Pro/ENGINEER Wildfire, Thermal Chamber Testing, SAP (BOM Management).
-  - **Partners:** VTech (Turnkey Manufacturing), Jetcrown (Plastics), Mass Precision (Sheet Metal Protos), Kontron (Embedded Computing).
-  - **Governance:**
-    - **ECO 12263:** Release of sheet metal package to VTech.
-    - **Thermal Testing:** "Capaldi FOH in Temperature Chamber" data logs.
-
-  ---
-
-  ### Thermal Forensic Comparison: SC48 vs. WebTV Galaxy
-
-  **Forensic Audit of Thermal Thresholds and System Stabilization.**
-
-  | Feature                 | Project SC48 (Lux)                 | Project WebTV (Galaxy)               |
-  | ----------------------- | ---------------------------------- | ------------------------------------ |
-  | **Component**           | Kontron 986LCD-M (Embedded PC)     | AMD K7 CPU + Triple Tuners           |
-  | **Total Thermal Load**  | High-Density DSP + XPe Host        | **150W TDP** (Desktop Class)         |
-  | **The "Heat Wall"**     | **75.0°C** (Catastrophic Shutdown) | **84.0°C** (Thermal Equilibrium)     |
-  | **Thermal Delta (t)**   | Stabilized at 22.6°C Rise          | High-Pressure Directed Conduction    |
-  | **Failure Mode**        | System OS Halt / Log Error         | Media Corruption (Smart Card @ 55°C) |
-  | **Mechanical Fix**      | Folded Steel "I-Beam" Spine        | Chassis Partition / 28.3 CFM Tunnel  |
-  | **Material Constraint** | sub-$15k CoGS (No Extrusions)      | 300mm Footprint (Consumer STB)       |
-
-  #### CONTRAST ANALYSIS: THE 75°C vs. 84°C DELTA
-
-  - **The SC48 Failure (The Shutdown):** The 75°C reading was a **binary failure point**. Due to the XPe architecture and standard PC protection protocols, breaching 75°C triggered an emergency system shutdown to prevent component damage. The failure was architectural: ID mandated side-intake only in a sealed 4U box, creating a thermal dead zone for the motherboard.
-  - **The Galaxy Stabilization (The High-Bar):** In contrast, 84.0°C on the Galaxy AMD K7 was a **managed victory**. While higher than the SC48 failure point, this temperature represented the stabilized junction point within the manufacturer's operating specification for a high-performance 150W chip. The "Crisis" was not the CPU temperature itself, but the radiation of that heat into the Smart Card Reader (55°C), which threatened data integrity.
 ---
+
+### [SC48 "Lux" / "Capaldi"] Forensic Report
+
+#### I. PROJECT SUMMARY
+
+- **Role:** Lead Mechanical Engineer / Industrial Designer
+- **Objective:** Architect an "Embedded Live Sound" console integrating a DSP engine and PC motherboard into a touring-grade chassis under a strict less than $15k COGS cap.
+- **Core Achievement:** Solved a critical **75°C** thermal shutdown failure by re-architecting the chassis from 3U to 4U, while simultaneously eliminating expensive aluminum extrusions to meet aggressive cost targets.
+
+#### II. THE CAST (Team & Stakeholders)
+
+- **Neal Breitbarth:** Mechanical Manager (My direct report; resource allocation).
+- **Marc Schuman:** Hardware/Thermal Engineering (Partner in thermal matrix testing and sensor data analysis).
+- **Stan Cotey:** Product Marketing (Defined the "Profile" aesthetic requirements).
+- **Terri Merrell:** Senior Buyer (Managed vendor relations with VTech/Jetcrown).
+- **VTech (China):** Contract Manufacturer (CMS) for final integration.
+- **Jetcrown:** Plastics Vendor (Tooling and injection molding).
+
+#### III. CRITICAL MECHANICAL INTERVENTIONS (Ranked STAR Stories)
+
+##### 1. The "Meltdown" Mitigation (Thermal Shutdown)
+
+- **The Trigger:** During "Capaldi FOH" environmental chamber testing, the embedded CPU temperature hit **75°C**, triggering an automatic system shutdown.
+- **The Tension:** The product is a live sound console; a thermal shutdown during a performance is a catastrophic, "show-stopping" failure mode. The density of the embedded PC motherboard (Kontron 986LCD-M) inside the console created a heat trap.
+- **The Intervention:** I executed a "Design of Experiments" thermal matrix, testing chassis heights (3U vs 4U) and fan voltages (5.6V to 12V). I re-architected the chassis to a **4U layout** and implemented a high-velocity cooling solution using **three 80mm fans at 12V**.
+- **The Result:** The intervention dropped the internal temperature rise to **22.6°C** (Left side), keeping the CPU well within the safe operating zone and eliminating the shutdown risk, satisfying the "Red Team" engineering review.
+
+##### 2. The PMS Insert Crisis (Tolerance Stack)
+
+- **The Trigger:** During the "Origami Spine" assembly, the press-fit nuts (PMS inserts) began popping out of the top covers due to insufficient material retention in the sheet metal holes.
+- **The Tension:** The vendor proposed using glue to secure the inserts. I rejected this as "guesswork." A failure here would mean the console surface could detach in the field.
+- **The Intervention:** I rejected the "try harder" approach and recalculated the tolerance stack. I issued a directive to change the diameter hole size to exactly **.170 + 0.00/-0.012**.
+- **The Result:** This precise adjustment maximized metal retention for the fastener "bite," securing the inserts mechanically without adhesives. "That's why we don't use glue."
+
+##### 3. The "Blind Mate" Alignment (Exhibition Hall 1)
+
+- **The Trigger:** The console required a "Blind Mate" connection between the PSU/CPU tray and the main chassis, critical for rapid assembly.
+- **The Tension:** If the alignment was off by even a millimeter, the connector pins would "smash" during insertion, destroying the unit.
+- **The Intervention:** I engineered a "Floating Tray" system using tie plates with **ovalized matching holes**. This allowed for specific X/Y "wiggle room" to accommodate the tolerance stack of the folded steel chassis.
+- **The Result:** Enabled a reliable "Blind Mate" insertion sequence that absorbed manufacturing variance, validated during the high-pressure "Exhibition Hall 1" setup.
+
+##### 4. The LED Bleed (Quality Gate)
+
+- **The Trigger:** Light from the "Denko Meters" was bleeding between the LED indicators, making the console look "cheap." The LED collars weren't seating deep enough to block the light.
+- **The Intervention:** I directed the vendor to **enlarge the hole of the spacer bar** so the LED collar fit perfectly inside, physically blocking the light path.
+- **The Result:** Eliminated the bleed and restored the definitive "Pixel Perfect" look required for the premium market.
+
+#### IV. LINKEDIN ARTIFACTS
+
+- [ ] Engineered the SC48 "Lux" thermal management system, reducing CPU temps from a **75°C shutdown failure** to a stable **22.6°C rise** via 4U chassis re-architecture.
+- [ ] Eliminated high-cost aluminum extrusions to hit a **less than $15k COGS** target, replacing them with a custom folded steel "I-Beam" spine (P/N 9420-58317-00).
+- [ ] Managed the release of **26 unique sheet metal fabrication drawings** (SC48_REV-1) to VTech (China) for mass production.
+- [ ] Directed the tooling strategy for **$30,000+** in plastic injection molds, utilizing family molds for Side Caps and Bolsters to maximize budget efficiency.
+- [ ] Integrated a Kontron Mini-ITX motherboard into a ruggedized touring chassis, bridging the gap between Consumer PC standards and Pro Audio reliability.
+
+#### V. TECHNICAL STACK & GOVERNANCE
+
+- **Tools:** Pro/ENGINEER Wildfire, Thermal Chamber Testing, SAP (BOM Management).
+- **Partners:** VTech (Turnkey Manufacturing), Jetcrown (Plastics), Mass Precision (Sheet Metal Protos), Kontron (Embedded Computing).
+- **Governance:**
+  - **ECO 12263:** Release of sheet metal package to VTech.
+  - **Thermal Testing:** "Capaldi FOH in Temperature Chamber" data logs.
+
+---
+
+### Thermal Forensic Comparison: SC48 vs. WebTV Galaxy
+
+**Forensic Audit of Thermal Thresholds and System Stabilization.**
+
+| Feature                 | Project SC48 (Lux)                 | Project WebTV (Galaxy)               |
+| ----------------------- | ---------------------------------- | ------------------------------------ |
+| **Component**           | Kontron 986LCD-M (Embedded PC)     | AMD K7 CPU + Triple Tuners           |
+| **Total Thermal Load**  | High-Density DSP + XPe Host        | **150W TDP** (Desktop Class)         |
+| **The "Heat Wall"**     | **75.0°C** (Catastrophic Shutdown) | **84.0°C** (Thermal Equilibrium)     |
+| **Thermal Delta (t)**   | Stabilized at 22.6°C Rise          | High-Pressure Directed Conduction    |
+| **Failure Mode**        | System OS Halt / Log Error         | Media Corruption (Smart Card @ 55°C) |
+| **Mechanical Fix**      | Folded Steel "I-Beam" Spine        | Chassis Partition / 28.3 CFM Tunnel  |
+| **Material Constraint** | sub-$15k CoGS (No Extrusions)      | 300mm Footprint (Consumer STB)       |
+
+#### CONTRAST ANALYSIS: THE 75°C vs. 84°C DELTA
+
+- **The SC48 Failure (The Shutdown):** The 75°C reading was a **binary failure point**. Due to the XPe architecture and standard PC protection protocols, breaching 75°C triggered an emergency system shutdown to prevent component damage. The failure was architectural: ID mandated side-intake only in a sealed 4U box, creating a thermal dead zone for the motherboard.
+- **The Galaxy Stabilization (The High-Bar):** In contrast, 84.0°C on the Galaxy AMD K7 was a **managed victory**. While higher than the SC48 failure point, this temperature represented the stabilized junction point within the manufacturer's operating specification for a high-performance 150W chip. The "Crisis" was not the CPU temperature itself, but the radiation of that heat into the Smart Card Reader (55°C), which threatened data integrity.
 
 ### [SC48 "Lux" / "Capaldi"] Forensic Report
 

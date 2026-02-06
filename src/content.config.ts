@@ -136,7 +136,7 @@ const projectsCollection = defineCollection({
 			})
 			.optional(),
 
-		transcript: z.string().optional(), // Added for AEO Audio Bridge
+		transcript: z.string().nullable().optional(), // Added for AEO Audio Bridge
 
 		phase_stats: z.record(z.number()).optional(),
 		teamSize: z.coerce.string().optional(),

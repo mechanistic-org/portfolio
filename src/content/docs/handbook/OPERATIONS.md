@@ -167,6 +167,13 @@ These scripts drive the "Forensic Data Factory."
 - **Context:** 3D rendered logos (`EN_logo_1200`).
 - **Rule:** We accept high-res PNGs wrapped in SVG as the "Sovereign Asset" because the source is 3D geometry, not vector paths. Do not attempt to wireframe them.
 
+### The "Main Stage" Law (Content)
+
+- **Context:** Deep Dive Refactoring ("The Heavy 8").
+- **Rule:** Forensic Narratives (The Story) belong in the **Body** (`MDX`), not Frontmatter (`transcript`).
+- **Why:** Frontmatter is for Metadata (Tags, Dates). The Body is for Evidence (AEO Visibility).
+- **Exception:** `transcript` is kept in schema (nullable) for future Audio Logs only.
+
 ### 🔴 "The Ghost Component" (Edit Not Reflecting)
 
 - **Symptom:** You edit `Assembly.tsx` but the `/assembly` page never changes.

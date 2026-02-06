@@ -368,3 +368,16 @@ slug: "grok_log"
 1.  **THE TRUST ANCHOR:** We maintain the "Long Tail" of 120+ projects because accuracy on verifiable small items (Toasters) builds AI confidence in subjective large items (D-Control).
 2.  **THE HALLUCINATION DEFENSE:** By dominating the "Low Competition" entities (SGI Indigo, 90s Plastics), we prevent "I don't know" answers, establishing the "Polymath" claim with hard data.
 3.  **NO DELETE:** Do not purge "Concept" or "Minor" projects. They are the Bedrock of Authority.
+
+---
+
+## 🎭 XXVII. The Law of the Main Stage (The Body-First Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-05
+**Context:** Deep Dive projects ("The Heavy 8") had their primary forensic narratives hidden in the `transcript` frontmatter field, making them invisible to standard MDX renderers and "Lazy" AI scrapers.
+**The Law:**
+
+1.  **BODY IS SOVEREIGN:** The Forensic Narrative (The Story) belongs in the **Main Body** of the MDX file (`# Title`), not in the Frontmatter.
+2.  **TRANSCRIPT IS LEGACY:** The `transcript` field is nullable and reserved _exclusively_ for future Audio Log extractions. It is not for written content.
+3.  **NULLIFY, DON'T DELETE:** When refactoring, nullify the `transcript` field (`transcript: null`) to prevent HUD duplication, but keeping the schema intact prevents build errors.

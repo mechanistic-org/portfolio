@@ -208,51 +208,52 @@ tools:
   - pro_engineer
 war_stories: []
 transcript: |
-  ## The Challenge
-
-  > **Context:** The "Mini System" (Orpheus) was the first attempt at an all-in-one.
-
-  It combined a Server and a Player into a single chassis for smaller yachts and private jets.
-
-  - **Portability:** Designed to fit in tighter AV closets where a full rack wasn't an option.
-
-  ### Forensic Engineering
-
-  > **The "Hammered" Lid (Tolerance Failure):**
-  > During the pilot build, the sheet metal top covers (520-1066-00) arrived 3mm too wide due to a weldment error, crushing the internal drive cage.
-  >
-  > - **The Field Fix:** We physically **hammered** the lids into shape with a block of wood to pass EMI testing in the lab.
-  > - **The Resolution:** Manufacturing fixtures were modified at Sanmina Plant 4 to correct the blanking/forming sequence.
-  >
-  > **The "Thumb of God" (Thermal Crisis):**
-  > The system suffered hard hangs every 50 minutes. Root cause was variable thickness (up to **0.30mm**) in the thermal adhesive, creating a **20°C temperature delta**.
-  >
-  > - **The Fix:** Abandoned adhesive for **Phase Change Material (PCM)** and redesigned the retention clips to guarantee 50psi pressure, reducing the delta T to **3°C**.
-  >
-  > **The "Glowing Chassis" (Curvature Mismatch):**
-  > Rev 23 parts showed a **0.137 inch decrease** in screen curvature compared to CAD, causing light bleed and button binding.
-  >
-  > - **The Fix:** Engineered a new drive rail system to hard-tool specific features, eliminating tolerance stack-up and masking the bleed.
-
-  ### Team Orbit
-
-  - **Engineering Lead:** Erik Norris
-  - **Hardware:** Orion Bruckman
-  - **Mechanical:** Gabe Cohn (Argyle Design)
-  - **Thermal:** Nathan Forster
-  - **PCB:** Greg Curry (Player Board)
-  - **Components:** Kontron (Motherboard), R-Theta (Heatsinks)
-
-  ### Success Metrics
-
-  - **20°C Thermal Reduction:** Achieved by redesigning the retention mechanism to use PCM instead of adhesive.
-  - **50% Cost Reduction:** Reduced heatsink BOM cost from $7.12 to $3.61 by validating a new domestic vendor (R-Theta).
-
-  ### Project Artifacts
-
-  :::note[Specs]
-
-  - **Drivers:** 4x HDD
-  - **Outputs:** 1x HDMI
-    :::
 ---
+
+## The Challenge
+
+> **Context:** The "Mini System" (Orpheus) was the first attempt at an all-in-one.
+
+It combined a Server and a Player into a single chassis for smaller yachts and private jets.
+
+- **Portability:** Designed to fit in tighter AV closets where a full rack wasn't an option.
+
+### Forensic Engineering
+
+> **The "Hammered" Lid (Tolerance Failure):**
+> During the pilot build, the sheet metal top covers (520-1066-00) arrived 3mm too wide due to a weldment error, crushing the internal drive cage.
+>
+> - **The Field Fix:** We physically **hammered** the lids into shape with a block of wood to pass EMI testing in the lab.
+> - **The Resolution:** Manufacturing fixtures were modified at Sanmina Plant 4 to correct the blanking/forming sequence.
+>
+> **The "Thumb of God" (Thermal Crisis):**
+> The system suffered hard hangs every 50 minutes. Root cause was variable thickness (up to **0.30mm**) in the thermal adhesive, creating a **20°C temperature delta**.
+>
+> - **The Fix:** Abandoned adhesive for **Phase Change Material (PCM)** and redesigned the retention clips to guarantee 50psi pressure, reducing the delta T to **3°C**.
+>
+> **The "Glowing Chassis" (Curvature Mismatch):**
+> Rev 23 parts showed a **0.137 inch decrease** in screen curvature compared to CAD, causing light bleed and button binding.
+>
+> - **The Fix:** Engineered a new drive rail system to hard-tool specific features, eliminating tolerance stack-up and masking the bleed.
+
+### Team Orbit
+
+- **Engineering Lead:** Erik Norris
+- **Hardware:** Orion Bruckman
+- **Mechanical:** Gabe Cohn (Argyle Design)
+- **Thermal:** Nathan Forster
+- **PCB:** Greg Curry (Player Board)
+- **Components:** Kontron (Motherboard), R-Theta (Heatsinks)
+
+### Success Metrics
+
+- **20°C Thermal Reduction:** Achieved by redesigning the retention mechanism to use PCM instead of adhesive.
+- **50% Cost Reduction:** Reduced heatsink BOM cost from $7.12 to $3.61 by validating a new domestic vendor (R-Theta).
+
+### Project Artifacts
+
+:::note[Specs]
+
+- **Drivers:** 4x HDD
+- **Outputs:** 1x HDMI
+  :::

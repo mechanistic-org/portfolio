@@ -106,9 +106,9 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Focus:** Noon Home (Locoroll) Onboarding (Distributed Model: Sativa/Elvis/Base).
-- **Recent Win:** Successfully bridged the "Noon Cluster" to the main graph using `Mechanical Engineering` tags.
-- **Critical Learning:** "Bolus Count" requires explicit `_intelligence.md` files; inline forensic data is not counted by the HUD.
+- **Active Focus:** Session Mining & Project Standardization ("The Heavy 8").
+- **Recent Win:** Refactored 8 Legacy Projects to "Body-First" format. Tagged `d-command` with `deep_dive`.
+- **Critical Learning:** **"The Impostor" Identified.** `zeus` is a duplicate of `webtv-elmer` (Precursor vs. Evolved).
 - **Governance:** "Sovereign Schema" strictly enforces `cast.org` field. Missing this crashes the build.
 - **Context:** **HEAVY 8 HYDRATED.** The AEO Bridge is live. "Dark Data" is exposed.
 - **Action Item:** Monitor AI Recruiter interactions using the "Direct Link" prompt strategy.
@@ -145,6 +145,8 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Strategy):** **"The Moot Moat"** - We explicitly defend "Low Value" entities (Toasters) to create "Trust Anchors" for the AI. This validates the "Polymath" claim. The 120+ project count is not vanity; it is **Evidence**.
 * **Key Decision (Style):** **"The Linear Gradient Law"** - Tailwind 4.0 requires `bg-linear-to-*`. Legacy `bg-gradient-to-*` is deprecated.
 * **Key Decision (Archival):** **"The Museum Strategy"** - We do not delete complex "Dead Code" (`SlideProjector.tsx`). We move it to `eriknorris-archive` to preserve the engineering history ("Red Gold").
+* **Key Decision (Schema):** **"The Main Stage Law"** - Forensic Narratives belong in the Body (`MDX`), not Frontmatter (`transcript`). Frontmatter is for metadata; Body is for Evidence.
+* **Key Decision (Forensics):** **"The Impostor Detection"** - `zeus` was identified as a functional duplicate of `webtv-elmer`. We preserve it for now but mark it as an alias.
 * **Key Decision (Color):** **"The Sovereign Color Law"** - `src/config/color_registry.ts` is the ONLY Source of Truth for Entity Coloring. `Colors.csv` retrieval is FORBIDDEN.
 * **Key Decision (Code):** **"The Module Naming Law"** - Do not use `.json.ts` for standard TypeScript modules/arrays. Rename to `.ts` to prevent TS Server resolution confusion.
 * **Key Decision (Resilience):** **"The Relative Link Trap"** - `new URL(href)` crashes on relative paths (`/digiME/`). Always wrap URL parsing in `try { ... } catch { return "INTERNAL" }` or use a regex helper for internal routing consistency.
