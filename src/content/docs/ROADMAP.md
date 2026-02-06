@@ -49,6 +49,22 @@ sidebar:
   - **[Feature] Deep HUD Integration:** Injected fictional "Deep" metrics for `dreamjob` via `[...slug].astro`, enabling the high-fidelity cockpit view.
   - **[Fix] Nav Imports:** Resolved generic `navData` import errors crashing the build.
 
+### v1.08: The Noon Integration (2026-02-05)
+
+- **Feature:** Onboarded "Noon Home" Ecosystem (Locoroll).
+  - **Sativa (Room Director):** Documented "Cosmetic Crisis" (Coating/Yield).
+  - **Elvis (Extension Switch)::** Documented "Thermal Crisis" (Glue vs PSA).
+  - **Bazooka (Base):** Documented "Structural Wiggle".
+- **Fix:** Wired Noon cluster to main graph using "High Gravity" tags (`Mechanical Engineering`, `Product Design`).
+- **Fix:** Patched `zod` schema violation (missing `org` in cast) for 3 projects.
+- **Metric:** Bolus Count increased to 12.
+
+- **[2026-02-05] AEO Intelligence Bridge ("The Dark Data")**
+  - **[Injection] The Heavy 8:** Hydrated 8 flagship projects with high-fidelity forensic data (metrics + transcripts). AEO-verified "Banana Defect" and "51.8% Gross Margin" presence.
+  - **[Protocol] The Direct Link:** Established "Forensic Prompting" strategy to force AI Recruiters to bypass shallow scans and read deep-dive content.
+  - **[Strategy] The Moot Moat:** Validated the "Trust Transfer" hypothesis. We retain 120+ "Long Tail" projects as "Trust Anchors" to prove the "Polymath" claim to AIs, defending the zero-competition queries.
+  - **[Validation]** Raw HTML verification confirmed forensic payload availability on `eriknorris.com`.
+
 ## 📜 Change Log (Recent)
 
 - **[2026-02-04] Spring Cleaning & Deployment (The Museum Strategy)**

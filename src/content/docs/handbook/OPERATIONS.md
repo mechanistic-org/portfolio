@@ -32,6 +32,12 @@ These tools explicitly hunt for data corruption ("Ghost Assets") and fragility.
   - **Source:** `scripts/visual_smoke_test.ts`
   - **Function:** Puppeteer snapshots of core pages.
 
+- **The AEO Bridge (Deep Crawl Verification)**
+  - **Protocol:** The "Direct Link" Law.
+  - **Assumption:** AI Recruiters are lazy (Shallow Scan).
+  - **Action:** You must spoon-feed specific deep-link URLs (e.g., `/projects/c24`) to forced the AI to read the forensic footer.
+  - **Verification:** Use `curl` or `read_url_content` to verify "Dark Data" (e.g., "Banana Defect") is present in the raw HTML payload.
+
 ---
 
 ## 2. The Toolchain Trinity (Core Processing)

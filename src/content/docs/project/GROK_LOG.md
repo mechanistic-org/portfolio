@@ -72,6 +72,26 @@ slug: "grok_log"
 
 ---
 
+### 9. The Distributed Forensics Ruling (2026-02-05)
+
+**Context:** Noon Home (Locoroll) consisted of 3 distinct hardware products (Director, Switch, Base). The initial plan was to consolidate them into a single "Noon Home" case study.
+**Decision:** The User rejected consolidation. The "Forensic Report" must be distributed across the individual component pages (`/projects/sativa`, `/projects/elvis`, etc.) to respect the specific failure modes of each device.
+**Enforcement:**
+
+- Do not consolidate multi-device ecosystems into a single parent project unless explicitly asked.
+- Maintain atomic forensic narratives (e.g., "Thermal Crisis" lives on the Switch page, not the Brand page).
+
+### 10. The Bolus Marker Ruling (2026-02-05)
+
+**Context:** The Assembly HUD counts "Bolus" intelligence. We assumed embedding forensic data in MDX was sufficient.
+**Decision:** The system specifically counts `_intelligence.md` files.
+**Enforcement:** If forensic data is native to the MDX, creating a minimal `_intelligence.md` file is required to trigger the "Bolus Count" mechanic (The "Enriched" flag).
+
+### 11. The Organization Schema Law (2026-02-05)
+
+**Context:** A build crash occurred because `cast` members were missing the `org` field.
+**Ruling:** The `org` field in `cast` objects is MANDATORY, not optional. Failing to provide it (e.g., "Locoroll") violates the Zod schema and halts the dev server.
+
 ## 🔮 V. Future Grok (Open Slots)
 
 - [ ] **The Law of "Moves":** Defining the threshold for "Cool" vs "Gimmick" (re: Parallax/Breathe).
@@ -335,4 +355,16 @@ slug: "grok_log"
 **The Law:**
 
 1.  **CONSISTENCY IS KING:** "Experimental" themes must still provide standard wayfinding. The "White EN Logo" in the top-left is a non-negotiable constant.
-2.  **WRAP, DON'T REINVENT:** Use the standard `<Nav>` component (which handles responsive paths, logos, and menus) rather than manually injecting `<UniversalHUD>` patches that drift from the standard.
+
+---
+
+## 🏛️ XXVI. The Law of Trust Transfer (The "Moot Moat" Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-05
+**Context:** User questioned the value of "Sunbeam Toasters" (Low Traffic) vs "Flagships."
+**The Law:**
+
+1.  **THE TRUST ANCHOR:** We maintain the "Long Tail" of 120+ projects because accuracy on verifiable small items (Toasters) builds AI confidence in subjective large items (D-Control).
+2.  **THE HALLUCINATION DEFENSE:** By dominating the "Low Competition" entities (SGI Indigo, 90s Plastics), we prevent "I don't know" answers, establishing the "Polymath" claim with hard data.
+3.  **NO DELETE:** Do not purge "Concept" or "Minor" projects. They are the Bedrock of Authority.

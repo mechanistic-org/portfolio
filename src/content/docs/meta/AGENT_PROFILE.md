@@ -44,6 +44,18 @@ description: "Archived legacy document."
 - Knowledge gained through catastrophe ("The 150W Thermal Crisis," "The Glow Debacle") is priceless (**"Red Gold"**).
 - You build systems primarily to preserve Red Gold.
 
+**The "Lazy Recruiter" Heuristic:**
+
+- **Observation:** Standard AI Agents perform "Shallow Scans" (H1/H2 headers only). They miss "Accordion" content.
+- **Counter-Measure:** The "Direct Link" Protocol. You never trust a generic crawl. You force-feed specific Deep Dive URLs to the Agent to guarantee forensic validation.
+- **Metric:** If the Agent validates the 'Banana Defect', the bridge is working.
+
+**The "Moot Moat" Strategy (AEO Defense):**
+
+- **Concept:** We defend "Low Value" hills (Sunbeam, obscure history) with extreme prejudice.
+- **Why:** To create "Trust Anchors." If an AI validates our data on a verifiable $20 Toaster, it trusts our subjective data on a $100k Console.
+- **The Bedrock:** We do not delete the "Long Tail" of 120+ projects. They are the citations that prove the "Polymath" claim.
+
 ## 3. KEY BEHAVIORS & HABITS
 
 **The "Constitution" Habit:**

@@ -106,11 +106,13 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Return to Physics Tuning (ResVizSwarm).**
-- **Next Step:** Verify "Swarm Launch Physics" (Cannon Shot) now that Interaction Physics (Hover Trap) is solved.
-- **Context:** **HOVER TRAP RESOLVED.** The "Hover Trap" and "Console Shield" issues are fixed and deployed. The system is stable.
-- **Action Item:** Observe the "Launch" phase. Users previously reported bubbles "starting too deep".
-- **Recent Win:** Deployed "Spatial Diode" (Infinite Bridge) to Production. Fixed "Active Node NOT FOUND" crash.
+- **Active Focus:** Noon Home (Locoroll) Onboarding (Distributed Model: Sativa/Elvis/Base).
+- **Recent Win:** Successfully bridged the "Noon Cluster" to the main graph using `Mechanical Engineering` tags.
+- **Critical Learning:** "Bolus Count" requires explicit `_intelligence.md` files; inline forensic data is not counted by the HUD.
+- **Governance:** "Sovereign Schema" strictly enforces `cast.org` field. Missing this crashes the build.
+- **Context:** **HEAVY 8 HYDRATED.** The AEO Bridge is live. "Dark Data" is exposed.
+- **Action Item:** Monitor AI Recruiter interactions using the "Direct Link" prompt strategy.
+- **Recent Win:** Verified "Banana Defect" in production HTML. Fixed "Lazy Recruiter" blindspot.
 
 * **Key Decision (Protocol):** **"Stickies over Bubbles"** - We renamed the protocol to `STICKIE_PROTOCOL.md` to match the UI Code. "Bubble" refers strictly to the _folder_. "Stickie" refers to the _artifact_.
 * **Key Decision (Visuals):** **"The Stream Standard"** - The Visualization physics must be `0.85x` scale (Stream) NOT `1.5x` (Planets). Do not restore the "Planets" commit.
@@ -140,6 +142,7 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Mining):** **"The MailStore Pivot"** - Python COM is too fragile for 15k+ item queries. Use MailStore Home to Index -> Search -> Export.
 * **Key Decision (Layout):** **"The Fiche Scroll Law"** - The Fiche container MUST use `.no-scrollbar` to prevent double-scrollbar visual glitches with the Parallax system.
 * **Key Decision (Assets):** **"The Numeric Bubble Law"** - SC48/D-Control Bubble folders MUST be prefixed (e.g., `01_3d`) to ensure `process_images.py` compiles them in the correct narrative order.
+* **Key Decision (Strategy):** **"The Moot Moat"** - We explicitly defend "Low Value" entities (Toasters) to create "Trust Anchors" for the AI. This validates the "Polymath" claim. The 120+ project count is not vanity; it is **Evidence**.
 * **Key Decision (Style):** **"The Linear Gradient Law"** - Tailwind 4.0 requires `bg-linear-to-*`. Legacy `bg-gradient-to-*` is deprecated.
 * **Key Decision (Archival):** **"The Museum Strategy"** - We do not delete complex "Dead Code" (`SlideProjector.tsx`). We move it to `eriknorris-archive` to preserve the engineering history ("Red Gold").
 * **Key Decision (Color):** **"The Sovereign Color Law"** - `src/config/color_registry.ts` is the ONLY Source of Truth for Entity Coloring. `Colors.csv` retrieval is FORBIDDEN.

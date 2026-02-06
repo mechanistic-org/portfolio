@@ -1,36 +1,21 @@
 ---
 category: smart_home
-client: []
-cyberspace:
-  enable: true
-  layout: linear
-  stickies:
-  - align: center
-    data:
-      src: /assets/placeholders/abstract.jpg
-    id: intro
-    text: <strong>YEAR:</strong> 2017<br/><strong>ROLE:</strong> Noon
-    title: Room Director
-    type: media
-  - align: center
-    id: details
-    text: This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong>
-      Other
-    title: PROJECT DATA
-    type: void
+client:
+  - name: Locoroll
+    type: internal
 date: 2017-08-01 00:00:00+00:00
 documents: []
 draft: false
 duration: Active
 employer: noon
-endDate: 2018-01-01 00:00:00+00:00
+endDate: 2018-05-04 00:00:00+00:00
 gallery: []
 heroImage: /assets/placeholders/abstract.jpg
 hxo_ready: false
 hydration_status: executive
 industry: consumer_electronics
 links:
-- url: https://noonhome.com
+  - url: https://noonhome.com
 metrics:
   financial:
     costOfGoodsSold: []
@@ -39,7 +24,25 @@ metrics:
     toolingBudget: 0
   process:
     engineeringChangeOrders: []
+    yield: "Recovered from 6/7 cosmetic failure rate (coating peel) to launch readiness."
   war_stories: []
+  governance: "Waterfall Strategy with Functional Check Points (1-4)."
+cast:
+  - name: Erik Norris
+    role: Head of ME
+    org: Locoroll (Noon Home)
+  - name: Kelvin
+    role: Manufacturing Engineer (FIH)
+    org: FIH (Vendor)
+  - name: Sunny Yen
+    role: Test Engineer (FIH)
+    org: FIH (Vendor)
+  - name: Yvonne Lai
+    role: ME R&D
+    org: Vendor Team
+  - name: Joe Chu
+    role: Executive
+    org: Locoroll (Noon Home)
 phase_stats:
   Design: 67.3
   Engineering: 23
@@ -49,32 +52,59 @@ presentation_mode: standard
 production: production
 productionScale: series
 slug: room-director
-tags: []
+tags:
+  - consumer_electronics
+  - smart_home
+  - haptics
+  - oled
+  - adhesives
+  - failure_analysis
+  - manufacturing
+  - cosmetic_finishes
+  - Mechanical Engineering
+  - Product Design
+  - Plastics
 teamSize: Unknown
 theme: hyperspace
 tier: 3
-title: Room Director
+title: Room Director (Sativa)
 tools: []
+toolchain:
+  - Arena
+  - CAD
+  - FIH
+  - Memtech
+  - SABIC
+  - Proto Labs
 war_stories: []
 ---
 
 ## The Challenge
+
 > **Context:** The "Director" was the interactive soul of the room. It needed to feel magical, not like a smartphone glued to a wall.
 
 The challenge was **Haptics**. Touching a glass screen on a wall feels dead. We wanted it to click like a physical button.
 
 ## Engineering Approach
-We suspended the entire glass display stack on a floating flexure system.
-*   **Piezo Actuation:** When the user touched an icon, a piezo actuator fired a calibrated impulse into the glass mass, simulating the "snap" of a mechanical dome.
-*   **Deadfront ID:** The OLED panel was bonded behind tinted glass so that when off, it disappeared completely into the black finish.
 
-## Impact
-It redefined what a sophisticated switch felt like.
-*   **Award Winning:** The interaction design won multiple awards for its tactile realism.
+We suspended the entire glass display stack on a floating flexure system.
+
+- **Piezo Actuation:** When the user touched an icon, a piezo actuator fired a calibrated impulse into the glass mass, simulating the "snap" of a mechanical dome.
+- **Deadfront ID:** The OLED panel was bonded behind tinted glass so that when off, it disappeared completely into the black finish.
+
+## The Cosmetic Crisis: "Pixel Perfect" Friction
+
+Noon Home (Locoroll) was a "Rocket Ship" startup with Apple-level aesthetic ambitions. The industrial design demanded a flawless "VDI-15" fine matte finish on the polycarbonate housing, but early builds were decimated by yield loss.
+
+- **Coating Failure:** During EVT1 Drop Tests, "Front housing corner coating peel off" occurred on **6 of 7** Sativa units. The premium soft-touch coating could not survive the impact.
+- **Label Lift:** The main product labels peeled at the corners. Forensic analysis revealed a **Serial Number Notch** in the label design created a stress concentration point.
+- **The Fix:** I mandated a label redesign to eliminate the notch, forcing the supply chain (FIH) to adopt a print-on-demand serialization process, removing 1 manual assembly step and securing the cosmetic standard.
 
 ### Project Artifacts
+
 :::note[Specs]
-*   **Display:** OLED Touch
-*   **Feedback:** Piezo Haptic
-*   **Glass:** Chemically Strengthened
-:::
+
+- **Display:** OLED Touch (Corning 2320 Glass)
+- **Feedback:** Piezo Haptic Actuation
+- **Material:** PC SABIC EXL9330 (Black)
+  :::

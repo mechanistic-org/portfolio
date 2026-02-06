@@ -1,45 +1,48 @@
 ---
 category: input_device
-client: []
-cyberspace:
-  enable: true
-  layout: linear
-  stickies:
-  - align: center
-    data:
-      src: /assets/placeholders/tech-1.jpg
-    id: intro
-    text: <strong>YEAR:</strong> 2017<br/><strong>ROLE:</strong> Noon
-    title: Extension Switches
-    type: media
-  - align: center
-    id: details
-    text: This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong>
-      Other
-    title: PROJECT DATA
-    type: void
+client:
+  - name: Locoroll
+    type: internal
 date: 2017-03-01 00:00:00+00:00
 documents: []
 draft: false
 duration: Active
 employer: noon
-endDate: 2018-02-01 00:00:00+00:00
+endDate: 2018-05-04 00:00:00+00:00
 gallery: []
 heroImage: /assets/placeholders/tech-1.jpg
 hxo_ready: false
 hydration_status: executive
 industry: consumer_electronics
 links:
-- url: https://noonhome.com
+  - url: https://noonhome.com
 metrics:
   financial:
     costOfGoodsSold: []
-    margins: []
+    margins: ["Target Gross Margin $49/$59 on $79 MSRP (Elvis Gen 2)"]
     toolingActual: 0
     toolingBudget: 0
   process:
     engineeringChangeOrders: []
+    yield: "Recovered 100% of EVT2 units from catastrophic thermal failure (7/7) to launch."
   war_stories: []
+  governance: "Waterfall Strategy with Functional Check Points (1-4)."
+cast:
+  - name: Erik Norris
+    role: Head of ME / The Architect
+    org: Locoroll (Noon Home)
+  - name: Kelvin
+    role: Manufacturing Engineer (FIH)
+    org: FIH (Vendor)
+  - name: Sunny Yen
+    role: Test Engineer (FIH)
+    org: FIH (Vendor)
+  - name: Yvonne Lai
+    role: ME R&D
+    org: Vendor Team
+  - name: Joe Chu
+    role: Executive
+    org: Locoroll (Noon Home)
 phase_stats:
   Design: 148.3
   Engineering: 50.5
@@ -49,23 +52,52 @@ presentation_mode: standard
 production: production
 productionScale: series
 slug: extension-switches
-tags: []
+tags:
+  - consumer_electronics
+  - smart_home
+  - thermal_analysis
+  - forensic_engineering
+  - adhesives
+  - powerline_communication
+  - failure_analysis
+  - Mechanical Engineering
+  - Product Design
 teamSize: Unknown
 theme: hyperspace
 tier: 3
-title: Extension Switches
+title: Extension Switches (Elvis)
 tools: []
+toolchain:
+  - Arena
+  - CAD
+  - FIH
+  - Memtech
+  - SABIC
+  - Proto Labs
 war_stories: []
 ---
 
 ## The Challenge
+
 > **Context:** In "3-Way" switching (hallways, stairs), standard wiring is a mess.
 
 The Extension Switch used existing traveler wires not for power, but for **High Voltage Comms**.
-*   **Signaling:** We engineered a way to send digital pulses over the 120V traveler lines to sync state instantly with the main Director without relying on radio latency.
+
+- **Signaling:** We engineered a way to send digital pulses over the 120V traveler lines to sync state instantly with the main Director without relying on radio latency.
+
+### The Anatomy of Failure: "The Floating Cap"
+
+During EVT2 Thermal Stress testing (65°C to -20°C), the Elvis switch suffered a **100% failure rate (7 of 7 units)**. The defect was categorized as "Plastic Cap Floating," where the user-facing cosmetic cap separated from the housing.
+
+- **The Forensic Find:** Analysis revealed a **0.1mm CAD geometry mismatch** in the internal adhesive pocket. This deviation directly translated to the reveal area, creating uneven gaps that the specified Nitto 57120W PSA could not bridge under thermal contraction.
+- **The Fix:** I mandated a radical switch from PSA tape to **Liquid Structural Glue**, validated by Drop, Crush, and High Temp/Humidity tests. This intervention saved the schedule and secured the launch configuration.
 
 ### Project Artifacts
+
 :::note[Specs]
-*   **Comms:** Powerline Carrier (PLC)
-*   **Latency:** &lt;50ms
-:::
+
+- **Comms:** Powerline Carrier (PLC)
+- **Latency:** &lt;50ms
+- **Defect:** Floating Cap (7/7 Failure)
+- **Resolultion:** 100% Thermal Pass
+  :::
