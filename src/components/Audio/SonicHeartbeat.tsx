@@ -47,8 +47,6 @@ const SonicHeartbeat: React.FC<SonicHeartbeatProps> = ({ audioUrl }) => {
 		};
 	}, [audioUrl]);
 
-	if (!isVisible) return null;
-
 	const togglePlay = () => {
 		if (!audioRef.current) return;
 		if (isPlaying) {
@@ -95,6 +93,8 @@ const SonicHeartbeat: React.FC<SonicHeartbeatProps> = ({ audioUrl }) => {
 		}
 		return () => clearTimeout(timeout);
 	}, [isPlaying, animPhase]);
+
+	if (!isVisible) return null;
 
 	return (
 		<div
