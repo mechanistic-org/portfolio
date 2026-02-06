@@ -8,46 +8,41 @@ documents: []
 draft: false
 duration: 1.1 Years
 employer: noon
-endDate: 2018-05-04 00:00:00+00:00
+endDate: 2017-05-08 00:00:00+00:00
 gallery: []
 heroImage: /assets/placeholders/blueprint.jpg
 hxo_ready: false
-hydration_status: executive
+hydration_status: full
 industry: consumer_electronics
 links:
   - url: https://noonhome.com
 metrics:
-  financial:
-    costOfGoodsSold: []
-    margins: []
-    toolingActual: 0
-    toolingBudget: 0
-  process:
-    engineeringChangeOrders: []
-  war_stories: []
-  governance: "Waterfall Strategy with Functional Check Points (1-4)."
+  financial: "JDM partnership with Bel Power Solutions to manage High-Voltage BOM costs"
+  process: "Resolved 100% failure rate (7/7) in retention tests and Wiggle defects"
+  governance: "Rigorous Waterfall Strategy with Executive Gates (0-2)"
+  quotes:
+    - "DUT can't easy remove from Bazooka"
+    - "The 3Tabs concept have better solution"
 cast:
   - name: Erik Norris
-    role: Head of ME / The Architect
+    role: The Architect / Head of ME
     org: Locoroll (Noon Home)
+  - name: Craig Tuffrey
+    role: Operations Manager
+    org: Bel Power Solutions
   - name: Kelvin
-    role: Manufacturing Engineer (FIH)
-    org: FIH (Vendor)
-  - name: Sunny Yen
-    role: Test Engineer (FIH)
-    org: FIH (Vendor)
-  - name: Yvonne Lai
-    role: ME R&D
-    org: Vendor Team
-  - name: Joe Chu
-    role: Executive
-    org: Locoroll (Noon Home)
+    role: Manufacturing Engineer
+    org: FIH
+  - name: Nick
+    role: ME Lead
+    org: Locoroll
 phase_stats:
   Design: 180.4
   Engineering: 61.5
   Production: 57.4
   Strategy: 20.5
-presentation_mode: standard
+presentation_mode: deep_dive
+forensic_summary: "TRIGGER: High-voltage Bazooka base suffered critical Wiggle instability. INTERVENTION: 3Tabs concept."
 production: production
 productionScale: series
 slug: base
@@ -65,51 +60,32 @@ tags:
   - Plastics
 teamSize: Unknown
 theme: hyperspace
-tier: 3
+tier: 1
 title: Base (Bazooka)
+audio_url: /assets/r2/base/base-briefing.m4a
 tools: []
 toolchain:
-  - Arena
-  - CAD
+  - Arena (PLM)
+  - JIRA
+  - Bel Power Solutions
   - FIH
   - Memtech
-  - SABIC
-  - Proto Labs
-war_stories: []
+war_stories:
+  - label: "The 3Tabs Concept"
+    value: "100% Recovered"
+    description: "Resolved '100% Retention Failure' (7/7 stuck units) by redesigning inner structures to a 3-point engagement plane."
+  - label: "The 0.3mm Interference"
+    value: "Solved"
+    description: "Forensic analysis exposed a -0.3mm stack-up overlap in the slide-lock, fixed by increasing slot lengths."
+  - label: "The Pillow Defect"
+    value: "Fixed"
+    description: "Replaced deformation-inducing 'Square Dimples' with 'Circular Pips' to eliminate steel warping and restore flatness."
+  - label: "The Air-Gap Pivot"
+    value: "UL 1472"
+    description: "Forced a design regression from 'Cosmetic' to 'Functional Square' geometry to ensure UL 1472 safety compliance."
+  - label: "The Oven Test"
+    value: "Passed"
+    description: "Validated 850W thermal architecture via heat-wicking aluminum bezel and PCB layout changes."
 ---
 
-## The Challenge
-
-> **Context:** Noon Home wanted to overlay professional-grade lighting control onto existing residential wiring without centralized panels.
-
-The "Base" was the Trojan Horse. To the user, it was just a light switch. To the system, it was the central server.
-
-- **Density:** We had to pack a sophisticated Linux computer, Wi-Fi/Bluetooth/Thread radios, and a 600W dimming circuit into a standard single-gang electrical box.
-- **Thermals:** Dissipating heat from the high-voltage dimmer and the CPU without visible vents (which would ruin the aesthetic).
-
-## Engineering Approach
-
-I architected the thermal stack and mechanical enclosure.
-
-- **The "Chiropractor" Install:** The unit snapped into a separate "Baseplate" that handled the high-voltage wiring, allowing safe installation of the logic unit later.
-- **Thermal Mass:** The aluminum bezel wasn't just decoration; it was the primary heatsink, conductively coupled to the triacs to wick heat out to the room air.
-
-## Impact
-
-The Base enabled the "Noon Experience" without a hub.
-
-- **Invisible Tech:** It hid a quad-core processor on the wall without looking like a gadget.
-
-### Project Artifacts
-
-:::note[Specs]
-
-- **OS:** Linux
-- **Power:** 120V / 600W
-- **Comms:** Wi-Fi / BT / Thread
-- **Safety:** Air Gap Disconnect
-  :::
-
-### Structural Wiggle
-
-Initial prototypes exhibited structural wiggle due to insufficient ribbing on the internal chassis. This was resolved by adding gussets and increasing wall thickness in critical areas.
+# Forensic Report Pending
