@@ -70,8 +70,8 @@ const projectsCollection = defineCollection({
 			gallery: z
 				.array(
 					z.object({
-						// Shield Fix: Use string in CI (Air Gap), image validation locally
-						src: process.env.CI ? z.string() : image(),
+						// Shield Fix: Reverted to z.string() because image() crashes on public assets locally
+						src: z.string(),
 						width: z.number(),
 						height: z.number(),
 						aspectRatio: z.number(),
@@ -105,8 +105,8 @@ const projectsCollection = defineCollection({
 				})
 				.optional(),
 
-			// Shield Fix: Use string in CI (Air Gap), image validation locally
-			heroImage: process.env.CI ? z.string().optional() : image().optional(),
+			// Shield Fix: Reverted to z.string() because image() crashes on public assets locally
+			heroImage: z.string().optional(),
 			draft: z.boolean().default(false),
 			description: z.string().optional(),
 
