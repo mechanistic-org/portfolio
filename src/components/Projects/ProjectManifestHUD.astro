@@ -7,8 +7,6 @@ import ForensicSeismograph from "@components/DataViz/ForensicSeismograph";
 import ForensicTooltip from "@components/DLS/ForensicTooltip.astro";
 import TeamDrawer from "@components/Scrolly/TeamDrawer";
 
-const multiverseData = await getMultiverseData();
-
 interface Props {
 	data: any;
 	nextProject?: any;
@@ -33,7 +31,6 @@ const {
 const dateVal = data.date || new Date();
 const isoDate = new Date(dateVal).toISOString().split("T")[0];
 
-const title = data.title || data.id || "Project";
 const showMetrics =
 	(presentation_mode === "deep_dive" || presentation_mode === "flagship") && metrics;
 

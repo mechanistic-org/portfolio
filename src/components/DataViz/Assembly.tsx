@@ -19,7 +19,6 @@ const Assembly: React.FC<MultiverseGraphProps> = ({ data }) => {
 	const wrapperRef = useRef<HTMLDivElement>(null);
 	const mousePos = useRef<{ x: number; y: number } | null>(null); // Physics Mouse Calc
 	const [dimensions, setDimensions] = useState({ width: 0, height: 0 }); // Start at 0 to wait for resize
-	const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 
 	// Resize Observer
 	useEffect(() => {
@@ -172,7 +171,7 @@ const Assembly: React.FC<MultiverseGraphProps> = ({ data }) => {
 
 		// --- 3. LAYERS ---
 		const groupLayer = svg.append("g").attr("class", "groups").attr("opacity", 0);
-		const linkLayer = svg.append("g").attr("class", "links"); // Optional: links between nodes?
+
 		const nodeLayer = svg.append("g").attr("class", "nodes");
 
 		// --- 4. RENDER GROUPS (The Continents) ---
@@ -209,7 +208,7 @@ const Assembly: React.FC<MultiverseGraphProps> = ({ data }) => {
 			.append("g")
 			.attr("class", "node")
 			.attr("cursor", "pointer")
-			.on("click", (event, d) => (window.location.href = `/projects/${d.id}`))
+			.on("click", (_, d) => (window.location.href = `/projects/${d.id}`))
 			.call(
 				d3
 					.drag<any, any>()
@@ -235,7 +234,7 @@ const Assembly: React.FC<MultiverseGraphProps> = ({ data }) => {
 			.attr("fill", (d: any) => d.color)
 			.attr("stroke", "rgba(255,255,255,0.2)")
 			.attr("opacity", 0.9)
-			.on("mouseover", function (event, d) {
+			.on("mouseover", function (_, d) {
 				// Ghost Fix: Reset ALL other nodes immediately to prevent 'trail'
 				nodeCircles
 					.select("circle")
@@ -262,11 +261,11 @@ const Assembly: React.FC<MultiverseGraphProps> = ({ data }) => {
 					.select("text")
 					.transition()
 					.style("opacity", 1);
-				setSelectedNode(d);
+
 				// Heat up physics slightly
 				nodeSim.alphaTarget(0.1).restart();
 			})
-			.on("mouseout", function (event, d) {
+			.on("mouseout", function () {
 				d3.select(this)
 					.transition()
 					.duration(500)
@@ -277,7 +276,6 @@ const Assembly: React.FC<MultiverseGraphProps> = ({ data }) => {
 					.select("text")
 					.transition()
 					.style("opacity", 0);
-				setSelectedNode(null);
 			});
 
 		nodeCircles

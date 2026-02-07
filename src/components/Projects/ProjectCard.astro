@@ -5,7 +5,7 @@ import { getAssetUrl } from "@/utils/assets";
 const { project } = Astro.props;
 const { data, slug } = project;
 // Ensure we use 'tools' instead of 'technologies' which does not exist in schema
-const { title, description, tools = [], tags = [], heroImage: image } = data;
+const { title, description, tools = [], heroImage: image } = data;
 
 // Get image URL
 // We map 'heroImage' to 'image' for local variable use, ensuring it matches schema

@@ -66,6 +66,11 @@ These scripts drive the "Forensic Data Factory."
   - **Protocol:** Run after manually editing "Gold" content in MDX to save it to the Source of Truth.
   - **Output:** Updates `notebook_dumps/{slug}.json`.
 
+- **Sanitation Squad (`scripts/cleanup_unused_vars.py`)**
+  - **Function:** Parses `astro check` output to strip `ts(6133)` unused variable warnings.
+  - **Protocol:** Run `npx astro check > check_output.txt` first. Then run script.
+  - **Watcher:** Creating broken imports? Run `scripts/fix_broken_imports.py` immediately after.
+
 ---
 
 ## 2. Troubleshooting: The Build (Astro/Vite)
@@ -193,6 +198,7 @@ These scripts drive the "Forensic Data Factory."
 - **Rule:** Do NOT delete complex components (`SlideProjector.tsx`).
 - **Action:** Move them to `D:\GitHub\eriknorris-archive`.
 - **Why:** We preserve the "Red Gold" (Engineering Effort) even if it's no longer in production.
+- **Example:** `OuroborosHUD` (Archived Feb 2026).
 
 ---
 

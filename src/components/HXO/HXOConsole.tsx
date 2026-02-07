@@ -1,12 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useStore } from "@nanostores/react";
-import {
-	selectedProject,
-	hoveredProject,
-	selectProject,
-	setHover,
-	setConsoleHover,
-} from "../../stores/hxoStore";
+import { selectedProject, hoveredProject, setHover, setConsoleHover } from "../../stores/hxoStore";
 import SonicHeartbeat from "../Audio/SonicHeartbeat";
 
 // const DEFAULT_COLOR = "#666666";
@@ -175,69 +169,12 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 }
 
 // --- SUB-COMPONENT: Audio Player ---
-function AudioPlayer({ url }: { url: string }) {
-	const [isPlaying, setIsPlaying] = React.useState(false);
-	const audioRef = useRef<HTMLAudioElement>(null);
-
-	const togglePlay = () => {
-		if (!audioRef.current) return;
-		if (isPlaying) {
-			audioRef.current.pause();
-		} else {
-			audioRef.current.play();
-		}
-		setIsPlaying(!isPlaying);
-	};
-
-	return (
-		<div className="audio-mini-player mb-6 flex items-center gap-4 rounded-lg border border-zinc-800 bg-zinc-900/50 p-3">
-			<audio ref={audioRef} src={url} onEnded={() => setIsPlaying(false)} />
-			<button
-				onClick={togglePlay}
-				className="play-btn cursor-pointer rounded-full bg-lime-500 p-2 text-black transition-colors hover:scale-110 hover:bg-lime-400 active:scale-95"
-			>
-				{isPlaying ? (
-					// Pause Icon
-					<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-						<path d="M6 5h4v14H6zM14 5h4v14h-4z" />
-					</svg>
-				) : (
-					// Sonic Heartbeat Icon (Activity / Pulse)
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="16"
-						height="16"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						strokeWidth="2"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					>
-						<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						<path d="M3 12h4.5l1.5 -6l4 6l2 -4l1.5 4h4.5" />
-					</svg>
-				)}
-			</button>
-			<div className="flex-1">
-				<div className="mb-1 font-mono text-xs tracking-widest text-lime-400 uppercase">
-					Forensic Overview
-				</div>
-				<div className="h-1 w-full overflow-hidden rounded-full bg-zinc-800">
-					<div
-						className={`h-full bg-lime-500/50 transition-all duration-300 ${isPlaying ? "w-full animate-pulse" : "w-0"}`}
-					/>
-				</div>
-			</div>
-		</div>
-	);
-}
 
 // --- SUB-COMPONENT: React Port of SovereignNode ---
 function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 	if (!project || !project.data) return <div className="p-4 text-red-500">CORRUPT DATA</div>;
 
-	const { title, date, client, forensic_summary, metrics, audio_url, toolchain } = project.data;
+	const { title, date, client, forensic_summary, audio_url, toolchain } = project.data;
 	const year = date ? new Date(date).getFullYear() : "N/A";
 
 	return (

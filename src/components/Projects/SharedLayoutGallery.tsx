@@ -45,7 +45,7 @@ export default function SharedLayoutGallery({
 	}, [images]);
 
 	// Handle image click - intercept "time-capsule" trigger
-	const handleImageClick = (image: GalleryImage, index: number) => {
+	const handleImageClick = (_: GalleryImage, index: number) => {
 		// @ts-ignore - trigger property exists in data but not strictly typed yet
 		// Normal lightbox
 		setSelectedId(`${id}-img-${index}`);
@@ -61,7 +61,6 @@ export default function SharedLayoutGallery({
 		return unique.filter((img) => img.category === activeFilter);
 	}, [images, activeFilter]);
 
-	const instanceId = React.useRef(Math.random().toString(36).substr(2, 5));
 	useEffect(() => {
 		if (images.length !== uniqueImages.length) {
 			console.warn(`[Gallery Debug] Duplicates in ${id}:`, images);
@@ -144,7 +143,6 @@ export default function SharedLayoutGallery({
 
 	// Tighter gap for higher density
 	const gapClass = columns > 4 ? "gap-2" : "gap-4";
-	const masonryGap = columns > 4 ? "8px" : "16px"; // Pixel values for Masonry lib
 
 	// Deterministic Rotation for "Scattered" look
 	const getRotation = (index: number) => {
@@ -527,7 +525,7 @@ export default function SharedLayoutGallery({
 										drag="y"
 										dragConstraints={{ top: 0, bottom: 0 }}
 										dragElastic={0.7}
-										onDragEnd={(e, { offset, velocity }) => {
+										onDragEnd={(_, { offset, velocity }) => {
 											const swipeThreshold = 100;
 											const velocityThreshold = 500;
 											if (offset.y > swipeThreshold || velocity.y > velocityThreshold) {

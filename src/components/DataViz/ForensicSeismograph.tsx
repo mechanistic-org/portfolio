@@ -23,8 +23,7 @@ const ForensicSeismograph: React.FC<ForensicSeismographProps> = ({ data }) => {
 	if (processedData.length === 0) return null;
 
 	// Dimensions
-	const height = 30; // Compact height for footer
-	const width = 200; // Fixed width for now, or percent
+
 	const barWidth = 2;
 	const gap = 1;
 

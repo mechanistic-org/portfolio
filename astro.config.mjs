@@ -78,7 +78,7 @@ export default defineConfig({
 			imports: [
 				"@components/Cta/Newsletter.astro",
 				"@components/Admonition/Admonition.astro",
-				"@components/mdx/ModelViewer.astro",
+				"@components/MDX/ModelViewer.astro",
 				{
 					"@astro-community/astro-embed-youtube": ["YouTube"],
 				},

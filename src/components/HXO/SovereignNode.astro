@@ -2,9 +2,8 @@
 import { render } from "astro:content";
 
 const { project } = Astro.props;
-const { Content } = await render(project);
-const { title, date, client, forensic_summary, metrics, audio_url, toolchain, heroImage } =
-	project.data;
+const { Content: _ } = await render(project);
+const { title, date, client, forensic_summary, metrics, audio_url, toolchain } = project.data;
 const year = date ? new Date(date).getFullYear() : "N/A";
 ---
 

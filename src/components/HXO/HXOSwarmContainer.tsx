@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useStore } from "@nanostores/react";
 import ResVizSwarm from "../DataViz/ResVizSwarm";
 import {
@@ -21,17 +21,6 @@ export default function HXOSwarmContainer({ nodes }: HXOSwarmContainerProps) {
 	const consoleActive = useStore(isInsideConsole);
 
 	// Handle events from the Swarm
-	const handleNodeSelect = (node: any) => {
-		if (node) {
-			selectProject(node.id);
-			// Also set hover to keep it highlighted??
-			// Actually, selection usually implies a persistent lock.
-			// But the Swarm interaction logic (from analysis) treats hover/click differently.
-			// Let's assume click = Select.
-		} else {
-			clearSelection();
-		}
-	};
 
 	// Bridge Hover events?
 	// ResVizSwarm doesn't explicitly emit "onHover" in its props interface yet,

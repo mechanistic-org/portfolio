@@ -1,10 +1,5 @@
-import { defineCollection,  z } from "astro:content";
+import { defineCollection, z } from "astro:content";
 import {
-	INDUSTRIES,
-	CATEGORIES,
-	EMPLOYERS,
-	ROLES,
-	TOOLS,
 	INDUSTRY_VALUES,
 	CATEGORY_VALUES,
 	EMPLOYER_VALUES,
@@ -30,7 +25,7 @@ const otherPagesCollection = defineCollection({
 // 4. PROJECTS
 const projectsCollection = defineCollection({
 	loader: glob({ pattern: "**/*.mdx", base: "./src/content/projects" }),
-	schema: ({ image }) =>
+	schema: ({}) =>
 		z.object({
 			title: z.string().catch("MISSING TITLE"),
 			slug: z.string().optional(),

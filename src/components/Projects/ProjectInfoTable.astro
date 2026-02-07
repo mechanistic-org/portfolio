@@ -16,13 +16,15 @@ interface Props {
 const { data, nextProject, prevProject, metrics } = Astro.props;
 
 // Format dates
+const clients = data.client || [];
+const tools = data.tools || [];
 const dateVal = data.date || new Date();
 const startDate = new Date(dateVal);
-const dateDisplay = startDate.toLocaleDateString("en-US", { month: "short", year: "numeric", day: "2-digit" }).replace(',', '');
+
 // Format: 2006-08-01 (approximate match to screenshot preference, user asked for YYYY-MM-DD format in screenshot "2006-08-01")
 const isoDate = startDate.toISOString().split('T')[0];
 
-const clients = data.client || [];
+
 ---
 
 <div

@@ -12,7 +12,7 @@ interface Project {
 	};
 }
 
-function ProjectCard({ project, z, fadeDist }: { project: Project; z: number; fadeDist: number }) {
+function ProjectCard({ project, z }: { project: Project; z: number; fadeDist: number }) {
 	const ref = useRef<THREE.Group>(null);
 	const image = project.data.heroImage || "/assets/placeholders/tech-1.jpg"; // Valid fallback
 
