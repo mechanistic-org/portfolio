@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
-import { getEntityColor } from "../../config/color_registry";
 import type { MultiverseNode } from "@/types/MultiverseTypes";
 
 interface Node extends MultiverseNode, d3.SimulationNodeDatum {

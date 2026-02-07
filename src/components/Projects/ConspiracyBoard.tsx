@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { motion, useDragControls } from "framer-motion";
+import  { useRef } from "react";
+import { motion } from "framer-motion";
 
 interface Props {
     images: { src: string; title: string }[];

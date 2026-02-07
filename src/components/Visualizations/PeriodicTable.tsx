@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import type { PeriodicElement as ElementType } from '../../config/periodicTableData';
 
 interface Props {

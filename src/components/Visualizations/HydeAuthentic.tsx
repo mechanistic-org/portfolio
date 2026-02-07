@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import  {  useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { hydeTraits, type HydeTrait } from '../../config/hydeData';
 

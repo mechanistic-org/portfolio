@@ -1,4 +1,3 @@
-import { type CollectionEntry } from "astro:content";
 import siteData from "@config/siteData.json";
 
 interface GeneralProps {

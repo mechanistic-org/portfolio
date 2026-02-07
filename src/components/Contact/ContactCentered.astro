@@ -1,7 +1,7 @@
 ---
 import ContactForm from "@/components/Forms/ContactFormTwoCol.astro";
 import { getLocaleFromUrl } from "@/js/localeUtils";
-import { getLocalizedRoute, getTranslatedData, useTranslations } from "@/js/translationUtils";
+import {   useTranslations } from "@/js/translationUtils";
 const currLocale = getLocaleFromUrl(Astro.url);
 const t = useTranslations(currLocale);
 ---

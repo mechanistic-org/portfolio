@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import  { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { periodicTraits, type TraitItem } from "../../config/traitsData";
 

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Sector } from 'recharts';
+import  { useState } from 'react';
+import { PieChart, Pie, Cell,  ResponsiveContainer, Sector } from 'recharts';
 
 interface PhaseData {
     Strategy: number;

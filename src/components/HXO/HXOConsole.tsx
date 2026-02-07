@@ -7,7 +7,6 @@ import {
 	setHover,
 	setConsoleHover,
 } from "../../stores/hxoStore";
-import { getEntityColor } from "../../config/color_registry";
 import SonicHeartbeat from "../Audio/SonicHeartbeat";
 
 // const DEFAULT_COLOR = "#666666";

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import SkillRadarD3 from "../DataViz/SkillRadarD3";
 import PhaseDonutD3 from "../DataViz/PhaseDonutD3";
 import ImpactResonance from "../DataViz/ImpactResonance";

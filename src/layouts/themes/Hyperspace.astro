@@ -1,13 +1,9 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import StickyStage from "@components/Scrolly/StickyStage.astro";
-import ScrollTrigger from "@components/Scrolly/ScrollTrigger.astro";
 import NarrativeItem from "@components/Scrolly/NarrativeItem.astro";
 import ScrollyHud from "@components/Scrolly/ScrollyHud.astro";
-import TextDeck from "@components/Scrolly/TextDeck.astro";
 import ProjectManifestHUD from "@components/Projects/ProjectManifestHUD.astro";
 import ForensicHUD from "@components/Projects/ForensicHUD.astro";
-import SharedLayoutGallery from "@components/Projects/SharedLayoutGallery";
 import { getAssetUrl } from "@/utils/assets";
 
 const { entry, nextProject, prevProject, Content, metrics, entropy } = Astro.props;
@@ -22,13 +18,11 @@ const useDossier = presentation_mode === "deep_dive";
 const scrolly = cyberspace;
 
 import ForensicDossier from "@components/Scrolly/ForensicDossier.astro";
-import ForensicMarker from "@components/Scrolly/ForensicMarker.tsx";
 import DeepDiveRenderer from "@components/DeepDive/DeepDiveRenderer.astro"; // IMPL
 // NEW COMPONENT IMPORTS
 // import ConspiracyBoard from "@components/Projects/ConspiracyBoard";
 // import Comparator from "@components/Projects/Comparator";
 import C24TitleAnimator from "@components/Projects/C24TitleAnimator";
-import SCThermalMatrix from "@components/Visualizations/SCThermalMatrix";
 
 const stickies = scrolly?.stickies || [];
 const narratives = scrolly?.narrative || [];

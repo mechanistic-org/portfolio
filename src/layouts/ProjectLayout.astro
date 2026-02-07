@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { type CollectionEntry, getEntries } from "astro:content";
+import { type CollectionEntry } from "astro:content";
 
 import Button from "@/components/Button/Button.astro";
 
@@ -10,7 +10,6 @@ import ForensicHUD from "@/components/Projects/ForensicHUD.astro";
 import { getLocaleFromUrl } from "@/js/localeUtils";
 import { formatDate } from "@/js/textUtils";
 import { useTranslations } from "@/js/translationUtils";
-import { getLocalizedRoute } from "@/js/translationUtils";
 
 import BaseLayout from "./BaseLayout.astro";
 

@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
-import { motion, useDragControls, useMotionValue, useTransform } from "framer-motion";
+import  { useState, useRef, useEffect } from "react";
+import { motion,  useMotionValue } from "framer-motion";
 
 interface Props {
     beforeSrc: string;

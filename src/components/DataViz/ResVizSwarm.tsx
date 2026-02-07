@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useMemo } from "react";
+import  { useRef, useEffect, useState, useMemo } from "react";
 import * as d3 from "d3";
 import type { MultiverseNode } from "@/types/MultiverseTypes";
 
