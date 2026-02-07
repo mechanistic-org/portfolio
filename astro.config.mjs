@@ -58,7 +58,7 @@ export default defineConfig({
 	// Only use the Cloudflare adapter in Server mode.
 	// In Static mode, we want a pure HTML build (no _worker.js) to bypass module limits.
 	adapter: isProduction ? undefined : cloudflare({ imageService: "compile" }),
-	site: "https://www.eriknorris.com",
+	site: "https://eriknorris.com",
 	redirects: isProduction
 		? {}
 		: {

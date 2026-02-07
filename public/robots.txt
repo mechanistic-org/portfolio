@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.eriknorris.com/sitemap-index.xml
+Sitemap: https://eriknorris.com/sitemap-index.xml
