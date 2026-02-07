@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import HydeOuroboros from '../Visualizations/HydeOuroboros';
-import DisciplineCycler from './DisciplineCycler';
+import React, { useState, useEffect } from "react";
+import DisciplineCycler from "./DisciplineCycler";
 
 // DEFINE PURE CSS ANIMATION AT HEAD
 // This bypasses React/Framer timing issues entirely
@@ -16,91 +15,98 @@ const styles = `
 `;
 
 export default function ManifestoPanelOne() {
-    const [isSequenceComplete, setIsSequenceComplete] = useState(false);
-    const [resetKey, setResetKey] = useState(0);
-    const containerRef = React.useRef<HTMLDivElement>(null);
-    const [isCompressed, setIsCompressed] = useState(false);
+	const [isSequenceComplete, setIsSequenceComplete] = useState(false);
+	const [resetKey, setResetKey] = useState(0);
+	const containerRef = React.useRef<HTMLDivElement>(null);
+	const [isCompressed, setIsCompressed] = useState(false);
 
-    useEffect(() => {
-        // Inject Style Tag
-        const styleSheet = document.createElement("style");
-        styleSheet.innerText = styles;
-        document.head.appendChild(styleSheet);
-        return () => { document.head.removeChild(styleSheet); };
-    }, []);
+	useEffect(() => {
+		// Inject Style Tag
+		const styleSheet = document.createElement("style");
+		styleSheet.innerText = styles;
+		document.head.appendChild(styleSheet);
+		return () => {
+			document.head.removeChild(styleSheet);
+		};
+	}, []);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(([entry]) => {
-            if (!entry.isIntersecting) {
-                // RESET
-                setIsSequenceComplete(false);
-                setResetKey(p => p + 1);
-            }
-        }, { threshold: 0 });
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				if (!entry.isIntersecting) {
+					// RESET
+					setIsSequenceComplete(false);
+					setResetKey((p) => p + 1);
+				}
+			},
+			{ threshold: 0 },
+		);
 
-        const resizeObserver = new ResizeObserver((entries) => {
-            for (const entry of entries) {
-                setIsCompressed(entry.contentRect.width < window.innerWidth * 0.6);
-            }
-        });
+		const resizeObserver = new ResizeObserver((entries) => {
+			for (const entry of entries) {
+				setIsCompressed(entry.contentRect.width < window.innerWidth * 0.6);
+			}
+		});
 
-        if (containerRef.current) {
-            observer.observe(containerRef.current);
-            resizeObserver.observe(containerRef.current);
-        }
+		if (containerRef.current) {
+			observer.observe(containerRef.current);
+			resizeObserver.observe(containerRef.current);
+		}
 
-        return () => {
-            observer.disconnect();
-            resizeObserver.disconnect();
-        };
-    }, []);
+		return () => {
+			observer.disconnect();
+			resizeObserver.disconnect();
+		};
+	}, []);
 
-    return (
-        <div ref={containerRef} className="relative h-full w-full flex items-center justify-center overflow-hidden bg-black">
-            <React.Fragment key={resetKey}>
+	return (
+		<div
+			ref={containerRef}
+			className="relative flex h-full w-full items-center justify-center overflow-hidden bg-black"
+		>
+			<React.Fragment key={resetKey}>
+				{/* Visualizer */}
+				<div
+					className={`absolute inset-0 z-0 flex items-center justify-center transition-opacity duration-500 ${isCompressed ? "opacity-20" : "opacity-100"}`}
+				></div>
 
-                {/* Visualizer */}
-                <div className={`absolute inset-0 z-0 flex items-center justify-center transition-opacity duration-500 ${isCompressed ? 'opacity-20' : 'opacity-100'}`}>
-                    <HydeOuroboros width={1000} height={900} isComplete={isSequenceComplete} />
-                </div>
+				{/* Cycler */}
+				{!isSequenceComplete && (
+					<div
+						className={`relative z-10 flex h-full w-full flex-col items-center justify-center transition-opacity duration-300 ${isCompressed ? "opacity-0" : "opacity-100"}`}
+					>
+						<DisciplineCycler onComplete={() => setIsSequenceComplete(true)} />
+					</div>
+				)}
 
-                {/* Cycler */}
-                {!isSequenceComplete && (
-                    <div className={`relative z-10 flex flex-col items-center justify-center w-full h-full transition-opacity duration-300 ${isCompressed ? 'opacity-0' : 'opacity-100'}`}>
-                        <DisciplineCycler onComplete={() => setIsSequenceComplete(true)} />
-                    </div>
-                )}
-
-                {/* CREATIVITY - CSS ANIMATION */}
-                {isSequenceComplete && (
-                    <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
-                        <div
-                            // Force Re-render with key
-                            key={Date.now()}
-                            // PURE CSS CLASS - NO JS LIBRARY
-                            className="flex items-center justify-center relative z-50 pointer-events-auto animate-nexus-pop"
-                        >
-                            <div
-                                className={`font-black tracking-tighter text-white flex items-center justify-center
-                                    ${isCompressed
-                                        ? 'flex-col space-y-[-1vh] opacity-100'
-                                        : 'flex-row text-[15vw] md:text-[12vw]'
-                                    }
-                                `}
-                            >
-                                {isCompressed ? (
-                                    "CREATIVITY".split("").map((char, i) => (
-                                        <span key={i} className="text-[8vh] leading-none text-center">{char}</span>
-                                    ))
-                                ) : (
-                                    "CREATIVITY"
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                )}
-
-            </React.Fragment>
-        </div>
-    );
+				{/* CREATIVITY - CSS ANIMATION */}
+				{isSequenceComplete && (
+					<div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
+						<div
+							// Force Re-render with key
+							key={Date.now()}
+							// PURE CSS CLASS - NO JS LIBRARY
+							className="animate-nexus-pop pointer-events-auto relative z-50 flex items-center justify-center"
+						>
+							<div
+								className={`flex items-center justify-center font-black tracking-tighter text-white ${
+									isCompressed
+										? "flex-col space-y-[-1vh] opacity-100"
+										: "flex-row text-[15vw] md:text-[12vw]"
+								} `}
+							>
+								{isCompressed
+									? "CREATIVITY".split("").map((char, i) => (
+											<span key={i} className="text-center text-[8vh] leading-none">
+												{char}
+											</span>
+										))
+									: "CREATIVITY"}
+							</div>
+						</div>
+					</div>
+				)}
+			</React.Fragment>
+		</div>
+	);
 }

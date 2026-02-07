@@ -708,7 +708,7 @@ sidebar:
 - **[Vision] The Ouroboros (Constellation Engine):**
   - **Goal:** Dissolve linear "Realms" into a unified, non-linear graph navigation.
   - **Concept:** "The Page is the Map." Zoom-based navigation through the 3D Multiverse of projects and skills.
-  - **Reference:** `docs/backlog/OUROBOROS_VISION.md`.
+  - **Reference:** (Archived 2026-02-07)
 
 - **[Keystone] The Neural Assembly (The Brain):**
   - **Hook:** "A clear view into the Architect's brain."
