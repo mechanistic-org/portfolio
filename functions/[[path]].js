@@ -70,10 +70,8 @@ ERROR: ${errorDetails}
 			const object = await env.PROJECTS.get(key);
 
 			if (!object) {
-				return new Response(`R2 Object Not Found: ${key}`, {
-					status: 404,
-					headers: { "X-Debug-Key": key },
-				});
+				// Fallback to static assets if not in R2 (Hybrid Mode)
+				return context.next();
 			}
 
 			const headers = new Headers();

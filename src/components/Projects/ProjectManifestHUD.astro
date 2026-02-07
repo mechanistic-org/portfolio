@@ -246,7 +246,7 @@ if (!displayDuration && data.date) {
 	<div slot="right" class="hidden items-center gap-6 md:flex">
 		{/* SONIC HEARTBEAT (Singularity Audit) */}
 		<div class="ml-4 flex items-center gap-4 border-l border-white/10 pl-4">
-			<SonicHeartbeat client:load audioUrl={data.audio_url} />
+			<SonicHeartbeat client:only="react" audioUrl={data.audio_url} />
 		</div>
 	</div>
 
@@ -272,13 +272,12 @@ if (!displayDuration && data.date) {
 
 							if (intCount > 0 || extCount > 0) {
 								return (
-									// {/* <TeamPipChart
-									// 	client:load
-									// 	internal={intCount}
-									// 	external={extCount}
-									// 	core={coreCount}
-									// /> */}
-									<div>PipChart Disabled</div>
+									<TeamPipChart
+										client:load
+										internal={intCount}
+										external={extCount}
+										core={coreCount}
+									/>
 								);
 							} else {
 								// Fallback
