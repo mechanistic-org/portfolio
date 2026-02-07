@@ -129,50 +129,51 @@ if (!displayDuration && data.date) {
 				)
 			}
 
-			{/* 0. TEAM SIZE (Pip Chart or Text) */}
-			<div class="col-span-1 cursor-crosshair border-r border-white/10 px-4 py-2">
-				{
-					(() => {
-						// Parse "INT 37 / EXT 21" logic
-						const teamStr = data.teamSize || "";
-						const intMatch = teamStr.match(/INT\s*(\d+)/i);
-						const extMatch = teamStr.match(/EXT\s*(\d+)/i);
-						const coreMatch = teamStr.match(/Core\s*(\d+)/i);
+			{/* 0. TEAM SIZE (Pip Chart or Text) */}{
+				!showMetrics && (
+					<div class="col-span-1 cursor-crosshair border-r border-white/10 px-4 py-2">
+						{(() => {
+							// Parse "INT 37 / EXT 21" logic
+							const teamStr = data.teamSize || "";
+							const intMatch = teamStr.match(/INT\s*(\d+)/i);
+							const extMatch = teamStr.match(/EXT\s*(\d+)/i);
+							const coreMatch = teamStr.match(/Core\s*(\d+)/i);
 
-						const intCount = intMatch ? parseInt(intMatch[1]) : 0;
-						const extCount = extMatch ? parseInt(extMatch[1]) : 0;
-						const coreCount = coreMatch ? parseInt(coreMatch[1]) : 0;
+							const intCount = intMatch ? parseInt(intMatch[1]) : 0;
+							const extCount = extMatch ? parseInt(extMatch[1]) : 0;
+							const coreCount = coreMatch ? parseInt(coreMatch[1]) : 0;
 
-						if (intCount > 0 || extCount > 0) {
-							return (
-								<TeamPipChart
-									client:load
-									internal={intCount}
-									external={extCount}
-									core={coreCount}
-								/>
-							);
-						} else {
-							// Fallback
-							return (
-								<div class="flex h-full flex-col justify-center">
-									<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Team</div>
-									<div class="font-mono text-xs font-bold text-white">
-										{data.teamSize || "Core Team"}
+							if (intCount > 0 || extCount > 0) {
+								return (
+									<TeamPipChart
+										client:load
+										internal={intCount}
+										external={extCount}
+										core={coreCount}
+									/>
+								);
+							} else {
+								// Fallback
+								return (
+									<div class="flex h-full flex-col justify-center">
+										<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Team</div>
+										<div class="font-mono text-xs font-bold text-white">
+											{data.teamSize || "Core Team"}
+										</div>
 									</div>
-								</div>
-							);
-						}
-					})()
-				}
-			</div>
+								);
+							}
+						})()}
+					</div>
+				)
+			}
 
 			{/* ... (Metrics code omitted for brevity but preserved in file) ... */}
 
 			{/* SEISMOGRAPH */}
 			{
 				entropy && entropy.length > 0 && (
-					<div class="h-8 w-[100px] cursor-crosshair xl:w-[140px]">
+					<div class="h-8 w-[240px] cursor-crosshair xl:w-[320px]">
 						<ForensicSeismograph client:idle data={entropy} />
 					</div>
 				)

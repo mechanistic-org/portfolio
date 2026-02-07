@@ -137,6 +137,18 @@ These scripts drive the "Forensic Data Factory."
 
 ## 4. Visual Engineering Protocols
 
+### The "Native Fallback" Protocol (Feb 2026)
+
+- **Context:** Missing physical assets in Dev/CI (Air Gap).
+- **Rule:** UI components (`ProjectCard`, `ProjectLayout`) must implement a designated "NO VISUAL DATA" state (Wireframe/SVG).
+- **Constraint:** Do not rely on physical `placeholders/tech-1.jpg`. We deleted them to force architectural purity.
+
+### The "Symlink Integrity" Law
+
+- **Context:** `public/assets/r2`.
+- **Rule:** This must remain a Symlink to `R2_STAGING` (Local).
+- **Trap:** `Copy-Item` or Git operations might replace it with a directory. Verify via `Get-Item | Select LinkType`.
+
 ### The "Sovereign Color" Law
 
 - **Source:** `src/config/color_registry.ts`

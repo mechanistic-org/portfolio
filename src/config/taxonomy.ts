@@ -41,6 +41,7 @@ export const EMPLOYERS = [
 	{ label: "EP Technologies", value: "ep_technologies" },
 	{ label: "Avegant", value: "avegant" },
 	{ label: "Erik Norris", value: "erik_norris" }, // Meta-Node Employer
+	{ label: "Self-Employed", value: "Self-Employed" },
 ] as const;
 export const EMPLOYER_VALUES = EMPLOYERS.map((e) => e.value);
 

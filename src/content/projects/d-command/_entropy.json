@@ -1,0 +1,247 @@
+[
+	{
+		"date": "2003-04-29",
+		"score": 2,
+		"snippet": "Distributed extrusion drawings 942011481-484 to Mark.",
+		"type": "Commit",
+		"source_ref": "Digidesign_Volume_001.md"
+	},
+	{
+		"date": "2003-05-14",
+		"score": 5,
+		"snippet": "Distributed PC II stand/shelving costs for review.",
+		"type": "Document",
+		"source_ref": "Digidesign_Volume_001.md"
+	},
+	{
+		"date": "2003-06-09",
+		"score": 6,
+		"snippet": "Final feature set review for PCII Stand to finalize design.",
+		"type": "Meeting",
+		"source_ref": "Digidesign_Volume_001.md"
+	},
+	{
+		"date": "2003-09-03",
+		"score": 4,
+		"snippet": "Released PDFs for PCII stand sheetmetal rework.",
+		"type": "Document",
+		"source_ref": "Digidesign_Volume_001.md"
+	},
+	{
+		"date": "2003-10-13",
+		"score": 6,
+		"snippet": "Implementing changes to rigidify Buckley stand structure.",
+		"type": "Commit",
+		"source_ref": "Digidesign_Volume_002.md"
+	},
+	{
+		"date": "2003-12-10",
+		"score": 8,
+		"snippet": "Hardware Eng unavailable; Mechanical slippage likely for Danko.",
+		"type": "Memory",
+		"source_ref": "Digidesign_Volume_002.md"
+	},
+	{
+		"date": "2004-01-08",
+		"score": 6,
+		"snippet": "Pushing for closure on PCII Stand features for tooling release.",
+		"type": "Meeting",
+		"source_ref": "Digidesign_Volume_002.md"
+	},
+	{
+		"date": "2004-01-23",
+		"score": 9,
+		"snippet": "Jim West 'very disturbed' by late feature enhancements slipping program.",
+		"type": "Memory",
+		"source_ref": "Digidesign_Volume_002.md"
+	},
+	{
+		"date": "2004-04-01",
+		"score": 7,
+		"snippet": "ECO 6150 releases stand sheetmetal piece parts to production.",
+		"type": "Document",
+		"source_ref": "Digidesign_Volume_017.md"
+	},
+	{
+		"date": "2004-06-03",
+		"score": 5,
+		"snippet": "Released first pass of Danko mechanical schedule milestones.",
+		"type": "Document",
+		"source_ref": "Digidesign_Volume_003.md"
+	},
+	{
+		"date": "2004-06-19",
+		"score": 8,
+		"snippet": "Mechanical issues meeting: short top extrusions causing gaps.",
+		"type": "Meeting",
+		"source_ref": "Digidesign_Volume_003.md"
+	},
+	{
+		"date": "2004-06-25",
+		"score": 7,
+		"snippet": "QA Top Ten meeting: incoming parts geometry not being checked.",
+		"type": "Document",
+		"source_ref": "Digidesign_Volume_003.md"
+	},
+	{
+		"date": "2004-07-19",
+		"score": 6,
+		"snippet": "Data collection on D-Control gap measurements to determine specs.",
+		"type": "Document",
+		"source_ref": "Digidesign_Volume_003.md"
+	},
+	{
+		"date": "2004-08-02",
+		"score": 9,
+		"snippet": "QA rejected 4 of 19 end cap sets for defects.",
+		"type": "Photo",
+		"source_ref": "Digidesign_Volume_003.md"
+	},
+	{
+		"date": "2004-08-18",
+		"score": 9,
+		"snippet": "Endcaps arrived warped and scuffed; immediate vendor visit required.",
+		"type": "Memory",
+		"source_ref": "Digidesign_Volume_003.md"
+	},
+	{
+		"date": "2004-10-05",
+		"score": 7,
+		"snippet": "D-Command RTM ECOs pulled for initial PCB release.",
+		"type": "Document",
+		"source_ref": "Digidesign_Volume_013.md"
+	},
+	{
+		"date": "2004-10-25",
+		"score": 8,
+		"snippet": "Deviation #1212 created for 'almost' Rev B endcaps to salvage yield.",
+		"type": "Document",
+		"source_ref": "Digidesign_Volume_004.md"
+	},
+	{
+		"date": "2004-12-08",
+		"score": 9,
+		"snippet": "Mass Precision meeting regarding 0.160\" deviation in extrusion length.",
+		"type": "Meeting",
+		"source_ref": "Digidesign_Volume_015.md"
+	},
+	{
+		"date": "2004-12-13",
+		"score": 6,
+		"snippet": "Cable routing review completed; all parties signed off.",
+		"type": "Meeting",
+		"source_ref": "Digidesign_Volume_005.md"
+	},
+	{
+		"date": "2005-01-07",
+		"score": 5,
+		"snippet": "Mass Precision flags paint masking issues on extrusions.",
+		"type": "Memory",
+		"source_ref": "Digidesign_Volume_012.md"
+	},
+	{
+		"date": "2005-01-20",
+		"score": 9,
+		"snippet": "Pan masking problem identified; sanding off coating as preventive action.",
+		"type": "Memory",
+		"source_ref": "Digidesign_Volume_005.md"
+	},
+	{
+		"date": "2005-02-14",
+		"score": 9,
+		"snippet": "QA rejects parts: 'not properly deburred and paint masking unacceptable'.",
+		"type": "Photo",
+		"source_ref": "Digidesign_Volume_006.md"
+	},
+	{
+		"date": "2005-02-22",
+		"score": 7,
+		"snippet": "KMS flags drawing/ECO mismatch on 9420-12899-00; removed from masters.",
+		"type": "Document",
+		"source_ref": "Digidesign_Volume_013.md"
+	},
+	{
+		"date": "2005-03-02",
+		"score": 6,
+		"snippet": "Released D-Command Release Roadmap Rev 1.",
+		"type": "Document",
+		"source_ref": "Digidesign_Volume_006.md"
+	},
+	{
+		"date": "2005-03-29",
+		"score": 7,
+		"snippet": "Confirmed lightpipe holes off by 0.035\" in CAD file.",
+		"type": "Memory",
+		"source_ref": "Digidesign_Volume_014.md"
+	},
+	{
+		"date": "2005-06-01",
+		"score": 6,
+		"snippet": "Meeting request regarding production QA issues with Danko builds.",
+		"type": "Meeting",
+		"source_ref": "Digidesign_Volume_007.md"
+	},
+	{
+		"date": "2005-08-10",
+		"score": 8,
+		"snippet": "MRB purge: 57 Main Meter Breaks, 14 Fader Meter Breaks rejected.",
+		"type": "Memory",
+		"source_ref": "Digidesign_Volume_008.md"
+	},
+	{
+		"date": "2005-09-08",
+		"score": 4,
+		"snippet": "Printing 11x17 transport layout for Curtis ID meeting.",
+		"type": "Meeting",
+		"source_ref": "Digidesign_Volume_007.md"
+	},
+	{
+		"date": "2006-03-03",
+		"score": 7,
+		"snippet": "RC2 ID Review sign-off scheduled during Beer Bash.",
+		"type": "Meeting",
+		"source_ref": "Digidesign_Volume_010.md"
+	},
+	{
+		"date": "2006-04-25",
+		"score": 9,
+		"snippet": "Deviation 9970 held; HW Engineering must sign off on gasket.",
+		"type": "Document",
+		"source_ref": "Digidesign_Volume_008.md"
+	},
+	{
+		"date": "2006-05-04",
+		"score": 6,
+		"snippet": "Delivered Curtis DCDs (Rev 1-5) to Muse for layout.",
+		"type": "Commit",
+		"source_ref": "Digidesign_Volume_010.md"
+	},
+	{
+		"date": "2006-07-20",
+		"score": 4,
+		"snippet": "Delivered Rev 5 of 9150-55160-00 (AUTO C) to MUSE.",
+		"type": "Commit",
+		"source_ref": "Digidesign_Volume_011.md"
+	},
+	{
+		"date": "2007-03-06",
+		"score": 5,
+		"snippet": "Pro-E regeneration failure on D-CMD bottom pan reported.",
+		"type": "Memory",
+		"source_ref": "Digidesign_Volume_009.md"
+	},
+	{
+		"date": "2007-04-11",
+		"score": 5,
+		"snippet": "Providing renderings to clarify cosmetic surfaces for vendor Kenny.",
+		"type": "Photo",
+		"source_ref": "Digidesign_Volume_009.md"
+	},
+	{
+		"date": "2007-04-30",
+		"score": 9,
+		"snippet": "Emergency graphics review: Mic/Line inputs 1-8 mislabeled '9-16'.",
+		"type": "Meeting",
+		"source_ref": "Digidesign_Volume_009.md"
+	}
+]

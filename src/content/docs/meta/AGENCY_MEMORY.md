@@ -107,8 +107,8 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 ## 📍 Current Focus State (The "Cursor")
 
 - **Active Focus:** Forensic Titration Protocol (Next Session).
-- **Recent Win:** Resolved critical "Scroll Lock" and "Invalid Hook" regression in Hyperspace.
-- **Critical Learning:** **"The Noon Standard" is REJECTED.** The correct term is "Gold Standard."
+- **Recent Win:** Restored "SonicHeartbeat" (Client-Only) and "TeamPipChart". Fixed Hydration Error #418.
+- **Critical Learning:** **"The Symlink Trap"** - Deleting a file inside a symlinked folder deletes the Source. Verify `LinkType` before `Remove-Item`.
 - **Governance:** "Hybrid Mode" (Body + Gallery) is the architecture.
 - **Context:** **FORENSIC STANDARD ACTIVE.** Visual Drivers (Pips/Seismograph) are now mandatory. Audio is Late Binding.
 - **Action Item:** Rebuild remaining projects using the new `forensic_titration` skill.
@@ -116,6 +116,9 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Protocol):** **"The Gold Standard"** - We rejected "Noon Standard." The architecture of high-fidelity titration is "The Gold Standard."
 * **Key Decision (Architecture):** **"Late Binding"** - Audio and Transcripts are "Day 2" assets. They are OPTIONAL at onboarding and injected later via Surgical Edit.
 * **Key Decision (Visuals):** **"Mandatory Instruments"** - `productionScale` (Pip Chart) and `phase_stats` (Seismograph) are NOT optional. They must be inferred if missing.
+* **Key Decision (Hydration):** **"The Client-Only Standard"** - Interactive React components like `SonicHeartbeat` must use `client:only="react"` if they rely on non-deterministic data (`Math.random`) to prevent hydration mismatches.
+* **Key Decision (Architecture):** **"The Hybrid Fallback"** - `functions/[[path]].js` must fallback to `context.next()` (Static Assets) if an R2 object is missing (`404`). This enables local development without full R2 emulation.
+* **Key Decision (Security):** **"The Air Gap Confirmation"** - `d-command-briefing.m4a` was restored to `R2_STAGING` by the User. We do not commit big assets to the repo.
 
 * **Key Decision (Protocol):** **"Stickies over Bubbles"** - We renamed the protocol to `STICKIE_PROTOCOL.md` to match the UI Code. "Bubble" refers strictly to the _folder_. "Stickie" refers to the _artifact_.
 * **Key Decision (Visuals):** **"The Stream Standard"** - The Visualization physics must be `0.85x` scale (Stream) NOT `1.5x` (Planets). Do not restore the "Planets" commit.

@@ -430,6 +430,11 @@ export default config({
 					label: "NotebookLM URL",
 					description: "Link to the private Detail Pod (Restricted Access).",
 				}),
+				transcript: fields.text({
+					label: "Audio Transcript",
+					multiline: true,
+					description: "Transcript of the audio briefing (optional).",
+				}),
 
 				// --------------------------------------------------------------------------
 				// 9. Cyberspace Engine (Scrollytelling)
@@ -610,6 +615,30 @@ export default config({
 						ModelViewer: ComponentBlocks.ModelViewer,
 						YouTube: ComponentBlocks.YouTube,
 					},
+				}),
+
+				// --------------------------------------------------------------------------
+				// 12. HXO Architecture
+				// --------------------------------------------------------------------------
+				hydration_status: fields.select({
+					label: "Hydration Status",
+					options: [
+						{ label: "Full (Complete)", value: "full" },
+						{ label: "Partial (Draft)", value: "partial" },
+						{ label: "Executive (Summary)", value: "executive" },
+					],
+					defaultValue: "partial",
+				}),
+				tier: fields.integer({
+					label: "Tier",
+					description: "1=Flagship, 2=Core, 3=Archive",
+					defaultValue: 3,
+					validation: { min: 1, max: 3 },
+				}),
+				hxo_ready: fields.checkbox({
+					label: "HXO Ready",
+					description: "Is this project ready for the Holographic Experience Engine?",
+					defaultValue: false,
 				}),
 			},
 		}),

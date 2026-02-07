@@ -33,28 +33,32 @@ const ForensicSeismograph: React.FC<ForensicSeismographProps> = ({ data }) => {
 
 	return (
 		<div className="flex h-full items-center gap-4 select-none">
-			{/* LABEL */}
-			<div className="flex h-full flex-col items-end justify-center">
-				<span className="font-mono text-[9px] leading-none tracking-widest text-neutral-500 uppercase">
-					PROJECT
-				</span>
-				<span className="font-mono text-[9px] leading-none tracking-widest text-emerald-500 uppercase">
-					ENTROPY
-				</span>
-			</div>
-
-			{/* VIZ */}
+			{/* VIZ - FULL WIDTH EXPANSION */}
 			<div
-				className="relative flex h-[30px] items-end border-b border-emerald-900/30"
-				style={{ width: `${Math.min(processedData.length * (barWidth + gap), 300)}px` }}
+				className="relative flex h-[30px] w-full items-end border-b border-emerald-900/30"
 				onMouseLeave={() => setHoveredEvent(null)}
 			>
 				{processedData.map((event, i) => {
+					// Use index to calculate position percentage for even distribution
+					// OR keep bar width but spread them out?
+					// Use simple flex gap for now, but allow container to grow.
+					// Actually, let's keep the bar sizing but remove the hard cap on container width
+					// and let the bars flex or just stack left-to-right.
+
 					const h = (event.score / maxScore) * 100;
+
+					// Heatmap Logic
+					let barColor = "bg-emerald-700/50 hover:bg-emerald-400"; // Default (1-3)
+					if (event.score >= 9)
+						barColor = "bg-red-600/80 hover:bg-red-400"; // Catastrophe
+					else if (event.score >= 7)
+						barColor = "bg-orange-500/70 hover:bg-orange-300"; // Critical
+					else if (event.score >= 4) barColor = "bg-yellow-500/60 hover:bg-yellow-300"; // Significant
+
 					return (
 						<div
 							key={i}
-							className="group relative cursor-crosshair bg-emerald-700/50 transition-colors duration-200 hover:bg-emerald-400"
+							className={`group relative cursor-crosshair transition-colors duration-200 ${barColor}`}
 							style={{
 								width: `${barWidth}px`,
 								height: `${Math.max(h, 10)}%`, // Min height for visibility
@@ -71,9 +75,8 @@ const ForensicSeismograph: React.FC<ForensicSeismographProps> = ({ data }) => {
 				})}
 
 				{/* TOOLTIP OVERLAY (Absolute constrained to widget or fixed) */}
-				{/* TOOLTIP OVERLAY (Absolute constrained to widget or fixed) */}
 				{hoveredEvent && (
-					<div className="pointer-events-none absolute top-full left-0 z-[100] mt-4 max-w-[300px] min-w-[200px] border border-white/20 bg-black/95 p-3 text-xs shadow-2xl backdrop-blur-md">
+					<div className="pointer-events-none absolute top-full left-0 z-100 mt-4 max-w-[300px] min-w-[200px] border border-white/20 bg-black/95 p-3 text-xs shadow-2xl backdrop-blur-md">
 						<div className="mb-2 flex items-center justify-between border-b border-white/10 pb-2">
 							<span className="font-mono font-bold text-emerald-500">{hoveredEvent.date}</span>
 							<span className="font-mono text-neutral-500">MAG: {hoveredEvent.score}</span>
