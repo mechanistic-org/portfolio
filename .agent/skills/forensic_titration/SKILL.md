@@ -15,12 +15,18 @@ description: The official protocol for enriching project files using the "Hybrid
 
 This protocol defines the "Gold Standard" for ingesting forensic engineering data into the ErikNorris portfolio. It replaces ad-hoc file creation with a deterministic process that ensures **Asset Sovereignty**, **Readability**, and **Resume Continuity**.
 
-## The Architecture: "Hybrid Mode"
+## The Architecture: "The Hybrid Contract"
 
-A proper Project File (`index.mdx`) must serve two masters:
+**The SME (Erik) provides:**
 
-1.  **The Reader (Body):** Needs immediate access to the full "Deep Dive" narratives.
-2.  **The System (Frontmatter):** Needs structured data (`war_stories`, `galleries`) to power the HUD, Graph visualizations, and Resume generation.
+1.  **The Bolus:** A structured raw dump (JSON/Text) containing the "Red Gold" (War Stories, Thermal Crises).
+2.  **The Intent:** The "Why" (e.g., "This project proves I can handle 1500W thermal loads").
+
+**The Agent (You) provides:**
+
+1.  **The Construction:** You build the MDX body and Frontmatter structure.
+2.  **The Verification:** You run the Audit.
+3.  **The Safety (Backporting):** You ensure the data is saved back to the JSON Source of Truth via **Reverse Hydration**.
 
 ## Phase 1: Ingestion (The Bolus)
 
@@ -75,15 +81,16 @@ Create a **separate file** at `src/content/projects/{slug}/_intelligence.md`.
 
 - **Content:** Condensed Executive Summary (Sections I-V) ONLY.
 
-## Phase 4: Reverse Titration (The Script)
+## Phase 4: Reverse Titration (The Backport Mandate)
 
-Once verified:
+**CRITICAL:** Manual intelligence (War Stories authored in MDX) is ephemeral until backported.
 
 1.  Run `npm run audit:frontmatter` to verify schema.
-2.  **MANDATORY:** Run the Reverse Titration script:
+2.  **MANDATORY:** Run the Reverse Hydration (JSON) script to update the `notebook_dumps` Source of Truth:
     ```bash
-    python scripts/hydrate_content.py --reverse
+    python scripts/hydrate_content.py --reverse-json --slug [slug]
     ```
+    _Note: The legacy `--reverse` flag (Text) is for Resume generation. Use `--reverse-json` for Data Safety._
 
 ## Phase 5: Day 2 Audio Injection (Late Binding)
 
@@ -95,4 +102,4 @@ When Audio/Transcript assets become available later:
 
 - [ ] **Distilled:** War Stories + Cast + Phase Stats + Production Scale?
 - [ ] **Files:** Created BOTH `index.mdx` AND `_intelligence.md`?
-- [ ] **Reversed:** Ran `python scripts/hydrate_content.py --reverse`?
+- [ ] **Backported:** Ran `python scripts/hydrate_content.py --reverse-json` to save the JSON Lifeboat?

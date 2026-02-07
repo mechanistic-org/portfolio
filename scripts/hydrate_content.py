@@ -500,7 +500,106 @@ def auto_tier_projects(project_dir, dry_run=False):
 
 # --- Reverse Hydration (MDX -> Resume/LinkedIn) ---
 
-def reverse_hydrate(dry_run=False):
+# --- Reverse Hydration (MDX -> JSON Backport) ---
+
+def reverse_hydrate_json(dry_run=False, target_slug=None):
+    """
+    Extracts high-value forensic data (War Stories, Summaries) from MDX 
+    and updates the JSON Source of Truth in notebook_dumps.
+    """
+    print(f"🔙  Starting Reverse Hydration (MDX -> JSON)...")
+    
+    stats = {"created": 0, "updated": 0, "skipped": 0}
+    
+    mdx_files = list(TARGET_DIR.glob("**/*.mdx"))
+    
+    for mdx_file in mdx_files:
+        try:
+            post = frontmatter.load(mdx_file)
+            slug = post.metadata.get("slug") or mdx_file.stem
+            
+            if target_slug and slug != target_slug:
+                continue
+
+            # Determine JSON path
+            json_path = SOURCE_DIR / f"{slug}.json"
+            
+            # Load existing JSON if available
+            data = {}
+            if json_path.exists():
+                with open(json_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+            else:
+                # Initialize new structure
+                data = {"id": slug}
+
+            # Prepare Updates
+            changes = []
+            
+            # 1. Forensic Summary
+            if "forensic_summary" in post.metadata:
+                 if data.get("forensic_summary") != post.metadata["forensic_summary"]:
+                     data["forensic_summary"] = post.metadata["forensic_summary"]
+                     changes.append(f"  - Backported 'forensic_summary'")
+
+            # 2. War Stories (The Gold)
+            # Check both root and metrics.war_stories
+            ws = post.metadata.get("war_stories")
+            if not ws and "metrics" in post.metadata:
+                ws = post.metadata["metrics"].get("war_stories")
+            
+            if ws:
+                 # Clean up format (remove numbers/legacy)
+                 clean_ws = [s for s in ws if isinstance(s, dict)]
+                 if clean_ws:
+                     # Ensure metrics dict exists in JSON
+                     if "metrics" not in data: data["metrics"] = {}
+                     
+                     # Compare
+                     if data["metrics"].get("war_stories") != clean_ws:
+                         data["metrics"]["war_stories"] = clean_ws
+                         changes.append(f"  - Backported {len(clean_ws)} War Stories")
+
+            # 3. Forensic Metrics (Process/Financial/Governance)
+            # Only backport if present in MDX (we might have just deleted them in MDX, so don't revive from dead MDX? 
+            # No, if MDX *has* them, we assume they are valid.
+            # But recent migration *deleted* them from MDX to use War Stories instead.
+            # So if MDX doesn't have them, we do nothing.
+            if "forensic_metrics" in post.metadata:
+                if data.get("metrics") != post.metadata["forensic_metrics"]:
+                     # Note: This might conflict with war_stories if both exist?
+                     # Ideally we want war_stories in metrics.war_stories, and forensic_metrics keys merged into metrics?
+                     # For now, let's just ensure the data exists.
+                     # But wait, forensic_metrics keys are financial, process, governance (strings).
+                     # JSON metrics keys are also financial, process, governance.
+                     # We should be careful.
+                     pass 
+
+            # Write Check
+            if changes:
+                print(f"💾  {slug}:")
+                for change in changes:
+                    print(change)
+                
+                if not dry_run:
+                    with open(json_path, "w", encoding="utf-8") as f:
+                        json.dump(data, f, indent=4)
+                    if json_path.exists():
+                        stats["updated"] += 1
+                    else:
+                        stats["created"] += 1
+            else:
+                 stats["skipped"] += 1
+
+        except Exception as e:
+            print(f"❌  Error processing {mdx_file}: {e}")
+
+    print(f"🏁  Reverse Hydration Complete. Created: {stats['created']}, Updated: {stats['updated']}")
+
+
+# --- Reverse Hydration (MDX -> Resume/LinkedIn) ---
+
+def reverse_hydrate_text(dry_run=False):
     """
     Extracts 'forensic_metrics' and 'war_stories' from Project MDX files
     and updates RESUME_READY.txt and LINKEDIN_READY.txt.
@@ -536,6 +635,7 @@ def reverse_hydrate(dry_run=False):
                 if fm.get("financial"): forensics.append(f"- **Financial**: {fm['financial']}")
                 if fm.get("process"): forensics.append(f"- **Process**: {fm['process']}")
                 if fm.get("technical"): forensics.append(f"- **Technical**: {fm['technical']}")
+                if fm.get("governance"): forensics.append(f"- **Governance**: {fm['governance']}")
 
             if war_stories or forensics:
                 project_data[project_slug] = {
@@ -578,20 +678,12 @@ def reverse_hydrate(dry_run=False):
             print("⚪  [Dry Run] Would update RESUME_READY.txt")
 
     # 4. Generate LinkedIn Section (Copy-Paste Ready)
-    # Format: 
-    # [Project Name]
-    # [Forensic Summary]
-    # - Bullet 1
-    # - Bullet 2
-    
     new_linkedin_section = "\n## LINKEDIN EXPERIENCE BLURBS (Auto-Generated)\n\n"
     for slug, data in project_data.items():
         new_linkedin_section += f"**{data['title']}**\n"
         for item in data['forensics']:
             new_linkedin_section += item + "\n"
         for item in data['war_stories']:
-            # Berry Creek filtering happens during data collection (step 1), so it's already filtered here.
-            # However, for safety and clarity if logic changes:
             new_linkedin_section += item + "\n"
         new_linkedin_section += "\n"
 
@@ -612,23 +704,29 @@ def reverse_hydrate(dry_run=False):
             print("✅  Updated LINKEDIN_READY.txt")
         else:
             print("⚪  [Dry Run] Would update LINKEDIN_READY.txt")
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Hydrate content from JSON dumps or Reverse Hydrate MDX to Text.")
+    parser = argparse.ArgumentParser(description="Hydrate content from JSON dumps or Reverse Hydrate MDX to Text/JSON.")
     parser.add_argument("--force", action="store_true", help="Bypass Git safety check.")
-    parser.add_argument("--reverse", action="store_true", help="Run Reverse Hydration (MDX -> Resume).")
+    parser.add_argument("--reverse", action="store_true", help="Run Reverse Hydration (MDX -> Resume/Text).")
+    parser.add_argument("--reverse-json", action="store_true", help="Run Backport Hydration (MDX -> JSON Source).")
     parser.add_argument("--dry-run", action="store_true", help="Simulate without writing.")
     
-    parser.add_argument("--slug", type=str, help="Target a specific project slug (Safe Mode).")
+    parser.add_argument("--slug", type=str, help="Target a specific project slug.")
     
     parser.add_argument("--tier", action="store_true", help="Run Auto-Tiering Analysis (HXO).")
     
     args = parser.parse_args()
     
     if args.reverse:
-        print("🔄  Starting Reverse Hydration...")
-        reverse_hydrate(dry_run=args.dry_run)
+        print("🔄  Starting Reverse Hydration (Text)...")
+        reverse_hydrate_text(dry_run=args.dry_run)
+    elif args.reverse_json:
+        print("🔄  Starting Reverse Hydration (JSON)...")
+        reverse_hydrate_json(dry_run=args.dry_run, target_slug=args.slug)
     elif args.tier:
         auto_tier_projects(TARGET_DIR, dry_run=args.dry_run)
     else:
         hydrate_content(dry_run=args.dry_run, force=args.force, target_slug=args.slug)
+
 

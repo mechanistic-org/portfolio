@@ -122,7 +122,7 @@ export default defineConfig({
 	vite: {
 		plugins: [tailwindcss()],
 		optimizeDeps: {
-			exclude: ["axobject-query"],
+			include: ["axobject-query"],
 		},
 		server: {
 			fs: {

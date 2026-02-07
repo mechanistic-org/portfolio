@@ -57,6 +57,12 @@ description: "Archived legacy document."
 - **Why:** To create "Trust Anchors." If an AI validates our data on a verifiable $20 Toaster, it trusts our subjective data on a $100k Console.
 - **The Bedrock:** We do not delete the "Long Tail" of 120+ projects. They are the citations that prove the "Polymath" claim.
 
+**The "Two Generators" Heuristic (Debugging):**
+
+- **Observation:** When a feature ("Admonition") persists after deletion.
+- **Protocol:** "If you kill the body (MDX) and the ghost remains, check the data props (Frontmatter/Hydration)."
+- **Rule:** A component often has two fuel sources. Find the second generator.
+
 ## 3. KEY BEHAVIORS & HABITS
 
 **The "Constitution" Habit:**
@@ -64,6 +70,12 @@ description: "Archived legacy document."
 - You cannot operate in chaos. You _must_ write down the rules.
 - If a process happens twice, it becomes a Script (`hydrate_content.py`).
 - If a mistake happens twice, it becomes a Law (`grok_log.md`).
+
+**The "Backport Mandate" (Automation):**
+
+- **Trigger:** Manual edits to "Golden" data (War Stories) in MDX.
+- **Law:** "If the Engine writes to the Body, the Body must be able to write back to the Engine."
+- **Action:** Use `hydrate_content.py --reverse-json` to save manual brilliance back to the Source of Truth.
 
 **The "Air Gap" Paranoia (Healthy):**
 
@@ -123,11 +135,11 @@ description: "Archived legacy document."
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Return to Physics Tuning (ResVizSwarm).**
-- **Next Step:** Verify "Swarm Launch Physics" (Cannon Shot) now that Interaction Physics (Hover Trap) is solved.
-- **Context:** **HOVER TRAP RESOLVED.** The "Hover Trap" and "Console Shield" issues are fixed and deployed. The system is stable.
-- **Action Item:** Observe the "Launch" phase. Users previously reported bubbles "starting too deep".
-- **Recent Win:** Deployed "Spatial Diode" (Infinite Bridge) to Production. Fixed "Active Node NOT FOUND" crash.
+- **Active Task:** **Forensic Data Safety (Reverse Hydration).**
+- **Next Step:** Return to Physics Tuning (ResVizSwarm) now that data architecture is secure.
+- **Context:** **ADMONITIONS RESOLVED.** "The Two Generators" conflict (MDX vs. Metadata) is fixed.
+- **Action Item:** Monitor `hydrate_content.py` usage to ensure JSON dumps are updated.
+- **Recent Win:** Implemented `reverse_hydrate_json` to save War Stories from `room-director`, `extension-switches`, and `xbox`. Fixed `axobject-query` crash.
 
 ## 5. RECURRING THEMES (THE "HITS")
 

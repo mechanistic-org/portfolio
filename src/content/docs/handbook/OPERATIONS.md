@@ -60,6 +60,12 @@ These scripts drive the "Forensic Data Factory."
   - **Function:** Mass-updates legacy content to the latest C24 Schema (e.g., adding `metrics` blocks).
   - **Use Case:** Bulk architectural refactors.
 
+- **Reverse Hydration (`npm run content:hydrate -- --reverse-json`)**
+  - **Source:** `scripts/hydrate_content.py`
+  - **Function:** Backports MDX War Stories (Manual Edits) to JSON Dump files.
+  - **Protocol:** Run after manually editing "Gold" content in MDX to save it to the Source of Truth.
+  - **Output:** Updates `notebook_dumps/{slug}.json`.
+
 ---
 
 ## 2. Troubleshooting: The Build (Astro/Vite)
@@ -69,6 +75,18 @@ These scripts drive the "Forensic Data Factory."
 - **Symptom:** Build fails on a file in `src/pages/archive/` or `_backup/`, even though it's not linked in the app.
 - **Cause:** Vite/Rollup analyzes the entire dependency graph of `src/pages`. If a "Dead" file imports a module that was moved or deleted (e.g., `../config` vs `../../config`), the build crashes.
 - **Fix:** "Dead Code must still Compile." Fix the relative path or delete the file. Do not assume "Archive" means "Ignored."
+
+### 🔴 "AXObjectRoles" Runtime Error (Vite Bubbling)
+
+- **Symptom:** Browser Console Explodes with `SyntaxError: The requested module ... does not provide an export named 'AXObjectRoles'`.
+- **Context:** `eslint-plugin-jsx-a11y` leaks a CommonJS dependency (`axobject-query`) into the client bundle.
+- **Fix:** Force Vite to pre-bundle it.
+  ```js
+  // astro.config.mjs
+  optimizeDeps: {
+      include: ["axobject-query"],
+  },
+  ```
 
 ### 🔴 "Duplicated Mapping Key" (YAML Error)
 

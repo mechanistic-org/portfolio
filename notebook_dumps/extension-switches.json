@@ -1,0 +1,18 @@
+{
+    "id": "extension-switches",
+    "forensic_summary": "TRIGGER: 100% failure rate (7/7) in thermal stress test due to 'Floating Cap' defect. INTERVENTION: Mandated switch from PSA tape to Liquid Structural Glue after forensic stack-up analysis. RESULT: Secured launch configuration with 100% thermal reliability.",
+    "metrics": {
+        "war_stories": [
+            {
+                "label": "Thermal Failure",
+                "value": "100% Recovery",
+                "description": "Recovered 100% of EVT2 units from catastrophic thermal failure (7/7) to launch."
+            },
+            {
+                "label": "Governance",
+                "value": "Waterfall",
+                "description": "Waterfall Strategy with Functional Check Points (1-4)."
+            }
+        ]
+    }
+}

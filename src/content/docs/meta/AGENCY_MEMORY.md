@@ -106,12 +106,17 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Focus:** Forensic Titration Protocol (Next Session).
-- **Recent Win:** Restored "SonicHeartbeat" (Client-Only) and "TeamPipChart". Fixed Hydration Error #418.
-- **Critical Learning:** **"The Symlink Trap"** - Deleting a file inside a symlinked folder deletes the Source. Verify `LinkType` before `Remove-Item`.
+- **Active Focus:** Conversation Mining & Documentation.
+- **Recent Win:** Deployed "Data Safety" (Reverse Hydration) and fixed "Admonition Ghosts" (Two Generators).
+- **Critical Learning:** **"The Backport Mandate"** - MDX is a valid source of truth. Automation loops must be closed (MDX -> JSON) to prevent data loss.
 - **Governance:** "Hybrid Mode" (Body + Gallery) is the architecture.
 - **Context:** **FORENSIC STANDARD ACTIVE.** Visual Drivers (Pips/Seismograph) are now mandatory. Audio is Late Binding.
-- **Action Item:** Rebuild remaining projects using the new `forensic_titration` skill.
+- **Action Item:** Return to Physics Tuning (ResVizSwarm) now that the data layer is secure.
+
+* **Key Decision (Forensics):** **"The Seismograph Protocol"** - The Entropy Visualization (Racegraph) is now a modular component (`Seismograph.astro`) driven by `phase_stats`. It is MANDATORY for all Forensic Projects.
+* **Key Decision (Schema):** **"The Metrics Bifurcation"** - `metrics` is reserved for Structured Data Objects (Financial, Process). `forensic_metrics` is reserved for Narrative Strings (Friction, Method, Objective). Do NOT mix them.
+* **Key Decision (Schema):** **"The Taxonomy Lock"** - `role` and `employer` fields in MDX must strictly match `src/config/taxonomy.ts`. "Lead Mechanical Engineer" is invalid; use "Mechanical Engineer" + `cast` role for nuance.
+* **Key Decision (Identity):** **"The Mechanical Violence"** - We explicitly embraced the "Thumb of God" narrative for `morpheus`. Forensic Engineering is about physical force as much as code.
 
 * **Key Decision (Protocol):** **"The Gold Standard"** - We rejected "Noon Standard." The architecture of high-fidelity titration is "The Gold Standard."
 * **Key Decision (Architecture):** **"Late Binding"** - Audio and Transcripts are "Day 2" assets. They are OPTIONAL at onboarding and injected later via Surgical Edit.

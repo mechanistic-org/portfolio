@@ -1,0 +1,18 @@
+{
+    "id": "room-director",
+    "forensic_summary": "TRIGGER: 6/7 units suffered cosmetic coating failure and label peeling. INTERVENTION: Redesigned labels to eliminate stress concentrations and enforced VDI-15 matte finish standards. RESULT: Achieved launch readiness with recovered yield and defect-free cosmetic surfaces.",
+    "metrics": {
+        "war_stories": [
+            {
+                "label": "Cosmetic Crisis",
+                "value": "Yield Recovery",
+                "description": "Recovered from 6/7 cosmetic failure rate (coating peel) to launch readiness."
+            },
+            {
+                "label": "Governance",
+                "value": "Waterfall",
+                "description": "Waterfall Strategy with Functional Check Points (1-4)."
+            }
+        ]
+    }
+}

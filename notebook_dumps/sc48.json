@@ -1,57 +1,109 @@
 {
-	"id": "sc48_lux_capaldi",
-	"presentation_mode": "deep_dive",
-	"metrics": {
-		"financial": "Protected <$15k COGS target; Managed sheet metal budget at 20% of COGS ($561.46 CNC unit price)",
-		"process": "Stabilized thermal profile from 75°C shutdown failure to 22.6°C rise; Processed 12,000+ thermal data points",
-		"governance": "Solo Mechanical Lead managing ID/EE friction; Cross-functional 'War Room' coordination with VTech/Jetcrown"
-	},
-	"forensic_summary": "The Trigger: During 'Capaldi FOH' environmental chamber testing, the embedded Kontron 986LCD-M motherboard hit 75°C, triggering a hard 'System Shutdowned' failure. Management simultaneously issued a 'No Extrusion' mandate to meet the <$15k COGS target. The Intervention: Executed a 'Design of Experiments' thermal matrix testing chassis heights (3U vs 4U) and fan voltages. Engineered the '4U Rake Back I-Beam' (P/N 9420-58317-00), a complex folded steel spine to replace expensive aluminum extrusions, and implemented custom air ducting (P/N 9420-58856-00). The Result: Validated a 4U chassis architecture with a 3-fan array running at 12V, stabilizing internal temperature rise to 22.6°C and eliminating the shutdown risk while securing touring-grade rigidity without extrusions.",
-	"toolchain": [
-		"Pro/ENGINEER Wildfire",
-		"Thermal Chamber Testing",
-		"SAP (BOM Management)",
-		"VTech (Turnkey Manufacturing)",
-		"Jetcrown (Plastics)",
-		"Mass Precision (Sheet Metal Protos)",
-		"Kontron (Embedded Computing)"
-	],
-	"cast": [
-		{
-			"name": "Erik Norris",
-			"role": "Lead Mechanical Engineer / The Architect",
-			"org": "Digidesign"
-		},
-		{
-			"name": "Marc Schuman",
-			"role": "HW/Thermal Engineering",
-			"org": "Digidesign"
-		},
-		{
-			"name": "Stan Cotey",
-			"role": "Product Marketing",
-			"org": "Digidesign"
-		},
-		{
-			"name": "Neal Breitbarth",
-			"role": "Mechanical Manager",
-			"org": "Digidesign"
-		}
-	],
-	"timeline": {
-		"start": "2007-05-29",
-		"end": "2008-02-15"
-	},
-	"visuals_to_find": [
-		"SC48_lux_thermal-testing.pdf (Log entry: 'CPU temperature is 75C, system shutdowned')",
-		"9420-58317-00 (4U Rake Back I-Beam Fabrication Drawing)",
-		"9420-58856-00 (Fan Duct 1 Design)",
-		"BOM_GoGs_etc.pdf (COGS Rollup confirming 'No Extrusions' assumption)",
-		"SC48_shtmtl-parts_visual-index.pdf"
-	],
-	"quotes": [
-		"CPU temperature is 75C, system shutdowned",
-		"There will be no extrusions",
-		"Sheet metal is single largest cost component at 20% COGS"
-	]
+    "id": "sc48_lux_capaldi",
+    "presentation_mode": "deep_dive",
+    "metrics": {
+        "financial": "Protected <$15k COGS target; Managed sheet metal budget at 20% of COGS ($561.46 CNC unit price)",
+        "process": "Stabilized thermal profile from 75\u00b0C shutdown failure to 22.6\u00b0C rise; Processed 12,000+ thermal data points",
+        "governance": "Solo Mechanical Lead managing ID/EE friction; Cross-functional 'War Room' coordination with VTech/Jetcrown",
+        "war_stories": [
+            {
+                "description": "Sustained head injury from falling branch (22 stitches); managed IP conflict crisis from ER while on concussion protocol.",
+                "label": "The Berry Creek Incident",
+                "value": "Concussion / IP Conflicts"
+            },
+            {
+                "description": "Enforced 'Solder = LED' vs 'Person = LEED' spelling rule to prevent toxic manufacturing errors.",
+                "label": "The 'Lead vs Lead' Mandate",
+                "value": "Zero Draft Comms"
+            },
+            {
+                "description": "Accepted high unit cost to avoid $50k hard tooling risk during validation.",
+                "label": "CNC First Strategy",
+                "value": "$561.46 Unit Cost"
+            },
+            {
+                "description": "Rejected glue fix for popping inserts; recalculated tolerance to .170 +0.00/-0.012 for mechanical interference fit.",
+                "label": "The PMS Insert Crisis",
+                "value": "Tolerance Stack"
+            },
+            {
+                "description": "Engineered ovalized 'wiggle room' tie plates to prevent connector smash during blind assembly.",
+                "label": "The 'Blind Mate' Alignment",
+                "value": "The Floating Tray"
+            },
+            {
+                "description": "Forced vendor to enlarge spacer holes to seat LED collars deeper, eliminating light bleed.",
+                "label": "The LED Bleed",
+                "value": "Pixel Perfect Gate"
+            },
+            {
+                "description": "Discovered the ID model and Mechanical chassis were 1.6 inches apart in length three weeks before tooling release.",
+                "label": "The 'Ghost Dimension'",
+                "value": "1.6 Inch Delta"
+            },
+            {
+                "description": "Identified a 50% yield loss on Fader Plates due to 'Over-Constraint'. Reduced 12 screw points to 6, restoring yield to 100%.",
+                "label": "The Yield Flip",
+                "value": "50% -> 100%"
+            },
+            {
+                "description": "Modified PSU mounting brackets to replace rubber feet, using the chassis itself as a heatsink to prevent 75\u00b0C shutdown.",
+                "label": "The PSU Heatsink Hack",
+                "value": "Density Matching"
+            },
+            {
+                "description": "Discovered the ID model and Mechanical chassis were 1.6 inches apart in length three weeks before tooling release. \"The Ghost Dimension.\"",
+                "label": "The 'Ghost Dimension'",
+                "value": "1.6 Inch Delta"
+            }
+        ]
+    },
+    "forensic_summary": "The Trigger: During 'Capaldi FOH' environmental chamber testing, the embedded Kontron 986LCD-M motherboard hit 75\u00b0C, triggering a hard 'System Shutdowned' failure. Management simultaneously issued a 'No Extrusion' mandate to meet the <$15k COGS target. The Intervention: Executed a 'Design of Experiments' thermal matrix testing chassis heights (3U vs 4U) and fan voltages. Engineered the '4U Rake Back I-Beam' (P/N 9420-58317-00), a complex folded steel spine to replace expensive aluminum extrusions, and implemented custom air ducting (P/N 9420-58856-00). The Result: Validated a 4U chassis architecture with a 3-fan array running at 12V, stabilizing internal temperature rise to 22.6\u00b0C and eliminating the shutdown risk while securing touring-grade rigidity without extrusions.",
+    "toolchain": [
+        "Pro/ENGINEER Wildfire",
+        "Thermal Chamber Testing",
+        "SAP (BOM Management)",
+        "VTech (Turnkey Manufacturing)",
+        "Jetcrown (Plastics)",
+        "Mass Precision (Sheet Metal Protos)",
+        "Kontron (Embedded Computing)"
+    ],
+    "cast": [
+        {
+            "name": "Erik Norris",
+            "role": "Lead Mechanical Engineer / The Architect",
+            "org": "Digidesign"
+        },
+        {
+            "name": "Marc Schuman",
+            "role": "HW/Thermal Engineering",
+            "org": "Digidesign"
+        },
+        {
+            "name": "Stan Cotey",
+            "role": "Product Marketing",
+            "org": "Digidesign"
+        },
+        {
+            "name": "Neal Breitbarth",
+            "role": "Mechanical Manager",
+            "org": "Digidesign"
+        }
+    ],
+    "timeline": {
+        "start": "2007-05-29",
+        "end": "2008-02-15"
+    },
+    "visuals_to_find": [
+        "SC48_lux_thermal-testing.pdf (Log entry: 'CPU temperature is 75C, system shutdowned')",
+        "9420-58317-00 (4U Rake Back I-Beam Fabrication Drawing)",
+        "9420-58856-00 (Fan Duct 1 Design)",
+        "BOM_GoGs_etc.pdf (COGS Rollup confirming 'No Extrusions' assumption)",
+        "SC48_shtmtl-parts_visual-index.pdf"
+    ],
+    "quotes": [
+        "CPU temperature is 75C, system shutdowned",
+        "There will be no extrusions",
+        "Sheet metal is single largest cost component at 20% COGS"
+    ]
 }
