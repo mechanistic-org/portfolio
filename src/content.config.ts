@@ -25,7 +25,7 @@ const otherPagesCollection = defineCollection({
 // 4. PROJECTS
 const projectsCollection = defineCollection({
 	loader: glob({ pattern: "**/*.mdx", base: "./src/content/projects" }),
-	schema: ({}) =>
+	schema: () =>
 		z.object({
 			title: z.string().catch("MISSING TITLE"),
 			slug: z.string().optional(),

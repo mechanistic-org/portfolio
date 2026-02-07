@@ -108,6 +108,12 @@ description: "Archived legacy document."
 - **Correction:** "Archive this history."
 - **Protocol:** Move it to `eriknorris-archive`. Do not destroy the evidence of effort.
 
+**The "Clean Build" Mandate:**
+
+- **Trigger:** Warning messages in the build output (`ts(6133)` unused variables).
+- **Response:** "Noise hides signal." Eliminate ALL warnings.
+- **Protocol:** Failure to clean unused variables is a sign of "Lazy Architecture." We do not ship noise.
+
 ## 4. COMMUNICATIONS PROTOCOL
 
 **How to Speak to You:**

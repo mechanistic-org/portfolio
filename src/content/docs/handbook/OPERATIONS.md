@@ -298,6 +298,16 @@ To prevent "Stacking Wars", we vertically partition the Z-space into strict flig
 - **Symptom:** `Error: EPERM: operation not permitted, rename` during `npm run dev`.
 - **Fix:** Restart the terminal.
 
+### ⚠️ "Case-Sensitivity Trap" (Windows -> Linux)
+
+- **Symptom:** Build works locally (Windows) but fails on Cloudflare (Linux) with `Module not found` or `Casing mismatch`.
+- **Cause:** Windows FS is case-insensitive, but Git Index is case-sensitive. If you rename `mdx` to `MDX` in Explorer, Git might not register it.
+- **Protocol: The Triangle Rename.**
+  1.  `git mv folder folder_temp`
+  2.  `git mv folder_temp Folder`
+  3.  Commit immediately.
+- **Why:** Forces Git to register the move as a distinct operation.
+
 ---
 
 ## 9. Data Viz Engineering (D3/React)

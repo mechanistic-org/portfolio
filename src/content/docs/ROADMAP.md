@@ -71,7 +71,12 @@ sidebar:
 - **[2026-02-06] Session Mining & Stabilization (The Text Bridge)**
   - **[Fix] Base Project:** Resolved "Unstyled Route Trap" by removing illegal `quotes` field and stabilizing schema with `transcript: null`.
   - **[Protocol] AEO Strategy:** Defined "The Text Bridge Decree" (Law XXVIII), establishing MDX Body as the primary AEO target and Audio/Transcript as supporting metadata.
-  - **[Mining] Context Extraction:** Mined session ID 18 for architectural gold.
+    - **[Mining] Context Extraction:** Mined session ID 18 for architectural gold.
+
+- **[2026-02-07] CI/CD Stabilization (The Glass Floor)**
+  - **[Fix] Casing Normalization:** Executed "Triangle Rename" on `about`, `dls`, `mdx`, `contact` folders to resolve `ts(1261)` build failures on Linux environments.
+  - **[Cleanup] unused-vars:** Aggressively purged 50+ unused variables, enforcing a strict "Zero Warning" policy for the build.
+  - **[Deployment]** Validated production build with strict type checking (`npx astro check`).
 
 - **[2026-02-05] AEO Intelligence Bridge ("The Dark Data")**
   - **[Injection] The Heavy 8:** Hydrated 8 flagship projects with high-fidelity forensic data (metrics + transcripts). AEO-verified "Banana Defect" and "51.8% Gross Margin" presence.

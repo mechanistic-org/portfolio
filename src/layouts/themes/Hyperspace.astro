@@ -99,7 +99,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 						.toUpperCase()
 						.replace(
 							"|",
-							'<span class=\"text-white opacity-60 mx-3\" style=\"font-family: Arial, sans-serif;\">|</span>',
+							'<span class="text-white opacity-60 mx-3" style="font-family: Arial, sans-serif;">|</span>',
 						)}
 				/>
 			)
@@ -166,6 +166,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 											{posterSrc ? (
 												<img
 													src={getAssetUrl(posterSrc)}
+													alt={`Interactive 3D Model for ${n.title}`}
 													class="h-full w-full object-cover opacity-80"
 												/>
 											) : (
@@ -291,7 +292,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
 						const targetId = entry.target.getAttribute("data-step");
-						const targetStage = document.getElementById(`stage-${targetId}` || "");
+						const targetStage = document.getElementById(`stage-${targetId}`);
 
 						if (targetId && targetStage) {
 							// Hide all stages

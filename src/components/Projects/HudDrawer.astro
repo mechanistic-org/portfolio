@@ -14,7 +14,7 @@ const { sectors, categories, tools, clients } = Astro.props;
 <!-- HUD OVERLAY (Fixed) --><!-- Trigger Button is now in index.astro --><!-- THE DRAWER (Fixed Overlay) -->
 <div
 	id="hud-drawer-fixed"
-	class="fixed inset-x-0 top-0 z-[200] hidden h-[85vh] transform border-b border-white/10 shadow-2xl transition-transform duration-500 ease-in-out md:h-[60vh]"
+	class="fixed inset-x-0 top-0 z-200 hidden h-[85vh] transform border-b border-white/10 shadow-2xl transition-transform duration-500 ease-in-out md:h-[60vh]"
 	style="transform: translateY(-100%); background-color: #050505; display: none;"
 >
 	<!-- Drawer Header -->
@@ -135,7 +135,7 @@ const { sectors, categories, tools, clients } = Astro.props;
 
 	<!-- Drawer Footer (Visual Decor) -->
 	<div
-		class="from-primary/0 via-primary/50 to-primary/0 absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r opacity-20"
+		class="from-primary/0 via-primary/50 to-primary/0 absolute bottom-0 left-0 h-1 w-full bg-linear-to-r opacity-20"
 	>
 	</div>
 </div>
@@ -179,7 +179,7 @@ const { sectors, categories, tools, clients } = Astro.props;
 					drawer.classList.remove("hidden"); // Show it
 					drawer.style.display = ""; // Remove inline display:none
 					// Force reflow
-					drawer.offsetHeight;
+					void drawer.offsetHeight;
 					drawer.style.transform = "translateY(0%)";
 				}
 

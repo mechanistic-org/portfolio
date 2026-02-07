@@ -39,7 +39,12 @@ export default config({
 	// create a Keystatic Cloud account here: https://keystatic.cloud/
 	cloud: { project: "cosmic-themes/quantum" },
 	ui: {
-		brand: { name: "Cosmic Themes" },
+		brand: {
+			name: "Erik Norris",
+			mark: () => (
+				<img src="/assets/branding/EN_logo_white_1024.png" height={24} alt="Erik Norris Logo" />
+			),
+		},
 	},
 	collections: {
 		/**
@@ -107,7 +112,7 @@ export default config({
 			label: "Projects",
 			slugField: "title",
 			path: "src/content/projects/*/", // Folders in src/content/projects/
-			columns: ["title", "industry", "date"],
+			columns: ["title", "industry", "category", "employer", "production"],
 			entryLayout: "content",
 			format: { contentField: "content" },
 			schema: {

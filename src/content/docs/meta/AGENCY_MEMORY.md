@@ -107,7 +107,7 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 ## 📍 Current Focus State (The "Cursor")
 
 - **Active Focus:** Conversation Mining & Documentation.
-- **Recent Win:** Deployed "Data Safety" (Reverse Hydration) and fixed "Admonition Ghosts" (Two Generators).
+- **Recent Win:** CI/CD Stabilization (Casing Fixes & Cleanup) -> **Green Build**.
 - **Critical Learning:** **"The Backport Mandate"** - MDX is a valid source of truth. Automation loops must be closed (MDX -> JSON) to prevent data loss.
 - **Governance:** "Hybrid Mode" (Body + Gallery) is the architecture.
 - **Context:** **FORENSIC STANDARD ACTIVE.** Visual Drivers (Pips/Seismograph) are now mandatory. Audio is Late Binding.
