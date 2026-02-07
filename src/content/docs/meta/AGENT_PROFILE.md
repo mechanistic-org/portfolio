@@ -106,6 +106,7 @@ description: "Archived legacy document."
 4.  **Confirm Authority:** When in doubt, ask: "What would the Architect do?"
 5.  **Stop Guessing:** Do not patch failures incrementally. If one file fails (YAML), audit the entire corpus before redeploying.
 6.  **Verify, Don't Assume:** "Good enough" is not "Done." Confirm the Green Build before asking for next steps.
+7.  **The "Freshness" Heuristic:** Target **30-50 turns** per session. Beyond 50, audit quality. Beyond 100, "Poisoning" (Hallucination) risk spikes. **Mine & Reset** before 100 to maintain Forensic Precision.
 
 **Keywords & Vernacular:**
 
@@ -115,6 +116,8 @@ description: "Archived legacy document."
 - **The Void:** The empty space in a layout (honored, not filled).
 - **Hyperspace:** The scroll-triggered narrative flow.
 - **Red Gold:** High-value failure data.
+- **Gold Standard:** The strict protocol for Forensic Titration (Hybrid Mode + Mandatory Visuals). "Noon Standard" is forbidden.
+- **Late Binding:** The acceptance that high-fidelity assets (Audio) come _after_ the initial commit.
 
 ## 📍 Current Focus State (The "Cursor")
 

@@ -59,6 +59,20 @@ sidebar:
 - **Fix:** Patched `zod` schema violation (missing `org` in cast) for 3 projects.
 - **Metric:** Bolus Count increased to 12.
 
+### v1.09: The Forensic Standard (2026-02-06)
+
+- **Protocol:** Finalized "Forensic Titration" Skill (V5.0).
+  - **Hybrid Architecture:** Enforced "Body Text" (Narrative) + "Frontmatter Gallery" (Structure) duality.
+  - **Visual Drivers:** Mandated `productionScale` (Pip Chart) and `phase_stats` (Seismograph) for all new projects.
+  - **Late Binding:** Established "Day 2 Injection" protocol for Audio/Transcripts to prevent blocking onboarding.
+- **Identity:** Codified the "Gold Standard" (rejecting "Noon Standard") as the official terminology for high-fidelity titration.
+- **Wiring:** Confirmed `Assembly.tsx` auto-wiring via `tags` (Zero-Touch React).
+
+- **[2026-02-06] Session Mining & Stabilization (The Text Bridge)**
+  - **[Fix] Base Project:** Resolved "Unstyled Route Trap" by removing illegal `quotes` field and stabilizing schema with `transcript: null`.
+  - **[Protocol] AEO Strategy:** Defined "The Text Bridge Decree" (Law XXVIII), establishing MDX Body as the primary AEO target and Audio/Transcript as supporting metadata.
+  - **[Mining] Context Extraction:** Mined session ID 18 for architectural gold.
+
 - **[2026-02-05] AEO Intelligence Bridge ("The Dark Data")**
   - **[Injection] The Heavy 8:** Hydrated 8 flagship projects with high-fidelity forensic data (metrics + transcripts). AEO-verified "Banana Defect" and "51.8% Gross Margin" presence.
   - **[Protocol] The Direct Link:** Established "Forensic Prompting" strategy to force AI Recruiters to bypass shallow scans and read deep-dive content.

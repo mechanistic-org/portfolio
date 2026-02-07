@@ -76,8 +76,8 @@ export default defineConfig({
 	integrations: [
 		AutoImport({
 			imports: [
-				"@components/Admonition/Admonition.astro",
 				"@components/Cta/Newsletter.astro",
+				"@components/Admonition/Admonition.astro",
 				"@components/mdx/ModelViewer.astro",
 				{
 					"@astro-community/astro-embed-youtube": ["YouTube"],

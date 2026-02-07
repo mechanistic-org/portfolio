@@ -1,0 +1,101 @@
+---
+slug: bazooka
+title: Bazooka (Base Station)
+date: 2016-06-28
+endDate: 2017-08-31
+employer: noon_home
+industry: consumer_electronics
+category: consumer_electronics
+toolchain:
+  - "Creo (CAD Modeling)"
+  - "JIRA (Issue Tracking: BAZ-45, BAZ-81, BAZ-96, SAT-60)"
+  - "Bel Power Solutions (JDM Vendor - High Voltage)"
+  - "FIH (Foxconn International Holdings - System Integrator)"
+  - "Excel (Tolerance Stackup: Bazooka-Waldo_Cover_Retention.xlsx)"
+tags:
+  - Mechanical Engineering
+  - Consumer Electronics
+  - High Voltage
+  - Product Design
+metrics:
+  financial: "Managed high-voltage 850W architecture validation within JDM structure (Bel Power Solutions), avoiding total tooling scrap on die-cast aluminum housings"
+  process: "Scaled production fleet from 35 P1 prototypes to 921 DVT validation units to support rigorous thermal and mechanical stress testing"
+  governance: "Resolved 27 critical 'BAZ' defects including 'Audible buzzing', 'Inrush resistor damage', and 'Electric shock' risks through Gate 2 reviews"
+forensic_summary: "TRIGGER: The EVT2 build faced a 'Kill' scenario with a 100% mechanical retention failure (7/7 units 'stuck in Bazooka') and a critical safety failure where the cosmetic 'Air Gap' switch failed to break the 120V circuit consistently (BAZ-81). Simultaneously, tolerance analysis revealed a 0.3mm interference in the slide-lock mechanism due to 'pillowing' from square tooling dimples. INTERVENTION: The Architect mandated a 'Stop Ship' on the ID-driven round button, forcing a reversion to a functional square 'TEST' button to meet UL 1472. He orchestrated the '3Tabs concept' structural redesign to resolve the wiggle/stuck interface issues and directed a tooling change from square dimples to 'circular pips' to flatten the chassis. RESULT: Secured UL safety compliance, eliminated the 0.3mm interference, and achieved passing thermal metrics (<60°C touch temp)."
+cast:
+  - name: Erik Norris
+    role: Head of ME / The Architect
+    org: Locoroll (Noon Home)
+  - name: Craig Tuffrey
+    role: Operations Manager
+    org: Locoroll
+  - name: Kelvin
+    role: Manufacturing Engineer
+    org: FIH
+  - name: Curtis
+    role: Originator
+    org: Locoroll
+theme: hyperspace
+presentation_mode: deep_dive
+draft: false
+listed: true
+---
+
+# Project Bazooka (Base Station) Forensic Report
+
+## I. PROJECT SUMMARY
+
+- **Role:** Head of Mechanical Engineering ("The Architect"),
+- **Mandate:** Engineer "Bazooka" (Model N190), the high-voltage (120V) universal base station responsible for 650W-850W power delivery, phase angle control, and the structural docking of user-facing modules (Sativa/Elvis) within a JDM partnership (Bel Power Solutions),.
+- **Core Achievement:** Salvaged the program from a **100% mechanical retention failure rate** (7/7 units "stuck in Bazooka") and critical safety failures by directing a structural overhaul to the "3Tabs concept" and enforcing a "Stop Ship" redesign of the Air-Gap safety switch mechanism to meet UL 1472,.
+
+## II. THE ANATOMY OF FAILURE (Heuristic Analysis)
+
+### Thermal/Mechanical Crisis: "The Hot Box" & "The Trap"
+
+During EVT2 Environmental and Reliability testing, the Bazooka ecosystem exhibited catastrophic interface and thermal failures:
+
+- **Retention Failure (The Trap):** A **100% failure rate (7 of 7 units)** occurred where Sativa/Elvis modules became "stuck in Bazooka" and could not be removed. The friction lock failed, effectively sealing the high-voltage enclosure behind a permanent faceplate,.
+- **Thermal Runaway:** Forensic logs indicated "Bazooka front casing 'hot'" (BAZ-96) during operation. This thermal stress led to "Inrush resistors damaged" and "12 V capacitors failing as short," threatening the 10-year life mandate,.
+- **Corrosion:** "Bazooka metal material oxidize" and color deviation were observed on the bottom side after Wet Hands/Humidity testing, compromising the aesthetic and grounding integrity.
+
+### Quality/Supply Chain: The "Pillowed" Interference & Safety Gap
+
+Forensic analysis of the "Wiggle" and fitment issues revealed deep-seated tooling and safety defects:
+
+- **0.3mm Interference:** Tolerance stack-up analysis exposed a **-0.30mm interference** in the slide-lock mechanism (Z-axis), making assembly physically impossible under worst-case conditions.
+- **Tooling Defect ("Pillowing"):** The vendor utilized "Large square dimples" for the slide-lock hooks. These caused "pillowing" (deformation) of the surrounding steel chassis, consuming the tolerance budget,.
+- **Safety Critical (BAZ-81):** The cosmetic "Air Gap" switch design failed to consistently make electrical connection, risking user shock during bulb changes and failing **UL 1472** requirements,.
+
+### The Fix: Structural & Safety Triage
+
+I executed a multi-vector engineering intervention to re-architect the mechanical interface:
+
+1.  **Structural Redesign ("3Tabs"):** Mandated the **"3Tabs concept"** to resolve the "Wiggle" (SAT-60) and retention failures, forcing the JDM partner to re-tool inner structures for deterministic kinematic constraint,.
+2.  **Safety Override (BAZ-82):** Issued a directive to revert the "Air-Gap" button back to a functional **square "TEST" geometry**, rejecting the ID team's cosmetic preference to ensure consistent actuation. Introduced a new internal **"button contactor guide"** fastened to the PCB to isolate safety features from housing tolerances,.
+3.  **Tooling Modification:** Redlined the chassis tool to replace deformation-inducing "square dimples" with **"smaller circular dimples" (pips)**, eliminating the pillowing and restoring Z-axis clearance,.
+4.  **Grounding Repair:** Corrected the "Laser etched aways area" which was "grossly too large," ensuring proper conductivity between the Bazooka and Waldo chassis without exposing excessive raw metal to oxidation,.
+
+## III. GOVERNANCE & RHYTHM
+
+- **The Pulse:** The project followed a rigid **Waterfall Strategy** managed through "Functional Check Points" (CP1-CP4) and Executive Gates (0-2). I pushed UL certification from EVT2 to **DVT** to accommodate the "big changes" in safety architecture without triggering a compliance failure,.
+- **The Artifacts:**
+  - **JIRA Pulse:** Tickets **BAZ-45** ("Audible buzzing noise") and **BAZ-96** ("Front casing hot") served as the forensic log for critical safety failures,.
+  - **Tolerance Stackups:** A massive Excel log (`Colorado_Tolerance_Stackups_Fx.pdf`) tracked the "Z Axis Will tab fit be too loose?" analysis, exposing the 0.3mm interference.
+  - **Sample Allocation:** Managed the logistical flow of **921** DVT units to ensure statistically significant reliability data across 5 departments,.
+
+## IV. LINKEDIN ARTIFACTS (The Numbers)
+
+1.  **Recovered 100%** of EVT2 units from critical retention failure (7/7 stuck units) by engineering the "3Tabs" structural interface intervention,.
+2.  **Validated** the **850W** high-voltage architecture for **UL 1472** safety compliance, managing the JDM partnership through a critical "Stop Ship" redesign,.
+3.  **Scaled** the production fleet from **35** P1 prototypes to **921** DVT validation units to support rigorous thermal and mechanical stress testing,.
+4.  **Eliminated 0.3mm** of mechanical interference in the chassis assembly by enforcing forensic tolerance stack-up analysis and tooling modification,.
+5.  **Resolved 27** documented design/quality defects in the Base unit (BAZ-XX), including "audible buzzing," "inrush resistor damage," and "electric shock" risks,.
+
+## V. VISUAL EVIDENCE
+
+- `Bazooka_misc_1.pdf` (Schematics showing Air Gap and 120V architecture).
+- `Colorado_Tolerance_Stackups_Fx.pdf` (Visual analysis of the 0.3mm interference).
+- `SAT-ELV_misc.pdf` (Redlines showing the "Square Dimple" vs. "Round Pip" tooling change).
+- `EVT2_Reliability_Test_Reports.pdf` (Photos of units "stuck in Bazooka").
+- `to_bel_2017_04_06.pdf` (CAD details of the new "button contactor guide" for safety).

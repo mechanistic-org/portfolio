@@ -92,6 +92,18 @@ These scripts drive the "Forensic Data Factory."
   - Quote Keys: `"01_intro":`
   - Escape Brackets: `&lt;15kCOGS` or `less than 15k`.
 
+### 🔴 "Hook Violation" White Screen
+
+- **Symptom:** Page renders white or component fails silently. Console says `Rendered fewer hooks than expected`.
+- **Cause:** Conditional `return null` placed _before_ `useEffect` or `useState`.
+- **Fix:** Move all conditional returns to the **bottom** of the component, after all hooks are initialized. (Ref: `SonicHeartbeat.tsx` fix).
+
+### 🔴 "Unstyled Route" Trap
+
+- **Symptom:** Specific route (`/projects/base`) renders as raw HTML while others work.
+- **Cause:** Schema validator (Zod) rejects data _silently_ at the Layout level, causing the CSS bundle injection to fail for that specific page generation.
+- **Fix:** Rigorous line-by-line schema match against a known working file (`c24`). Watch out for `links: []` vs `links: null`.
+
 ### 🔴 "Deep HUD" Missing (Stability Protocol)
 
 - **Symptom:** Project Page loads, but "Intelligence Grid" (Row 2 metrics) is empty or invisible.

@@ -381,3 +381,53 @@ slug: "grok_log"
 1.  **BODY IS SOVEREIGN:** The Forensic Narrative (The Story) belongs in the **Main Body** of the MDX file (`# Title`), not in the Frontmatter.
 2.  **TRANSCRIPT IS LEGACY:** The `transcript` field is nullable and reserved _exclusively_ for future Audio Log extractions. It is not for written content.
 3.  **NULLIFY, DON'T DELETE:** When refactoring, nullify the `transcript` field (`transcript: null`) to prevent HUD duplication, but keeping the schema intact prevents build errors.
+
+---
+
+## 📜 XXVIII. The Law of the Text Bridge (The AEO Audio Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-06
+**Context:** User confusion regarding audio transcription strategy for AEO (AI Engine Optimization). Audio files are "Dark Matter" to agents.
+**The Law:**
+
+1.  **BODY IS KING:** The primary forensic narrative (The Crisis, The Fix, The Outcome) MUST live in the **Text Body** of the MDX file. This is the Searchable Truth.
+2.  **TRANSCRIPT IS SUPPORT:** The `transcript` field is reserved for the _verbatim_ log of the audio. It serves as "Deep Dive" metadata but is NOT a replacement for the curated body.
+3.  **NULL IS SAFE:** `transcript: null` is the legally recognized "Empty State" to prevent schema crashes. It does not imply "No Audio Allowed," only "No Transcript Yet."
+
+---
+
+## 🏗️ XXIX. The Law of Gold (The Terminology Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-06
+**Context:** User rejected the term "Noon Standard" as ephemeral.
+**The Law:**
+
+1.  **GOLD STANDARD:** The architecture of "Hybrid Content + Visual Drivers + Team Drawer" is officially designated **"The Gold Standard."**
+2.  **REJECTION:** "Noon Standard" is a forbidden term. Do not use it.
+
+---
+
+## ⏳ XXX. The Law of Late Binding (The Audio Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-06
+**Context:** Creating high-fidelity Audio/Transcripts at the same time as the Bolus blocked progress.
+**The Law:**
+
+1.  **DAY 2 INJECTION:** Audio artifacts are "Late Binding." It is legally acceptable to onboard a project with `audio_url: null`.
+2.  **SURGICAL ADD:** When Audio is ready, it is injected via specific edit, NOT via full re-hydration (which risks overwriting manual polish).
+
+---
+
+## 🔌 XXXI. The Law of Auto-Wiring (The Assembly Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-06
+**Context:** User feared manual React coding was needed to wire new projects into the Assembly graph.
+**The Law:**
+
+1.  **DATA IS PHYSICS:** The `Assembly.tsx` graph is purely data-driven.
+2.  **TAGS ARE WIRES:** To wire a project, you simply populate the `tags` array in Frontmatter (e.g., `["Mechanical Engineering", "Industrial Design"]`).
+3.  **ZERO TOUCH:** No React code changes are required to onboard a node.

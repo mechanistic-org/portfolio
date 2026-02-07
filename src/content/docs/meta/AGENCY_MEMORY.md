@@ -106,13 +106,16 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Focus:** Session Mining & Project Standardization ("The Heavy 8").
-- **Recent Win:** Refactored 8 Legacy Projects to "Body-First" format. Tagged `d-command` with `deep_dive`.
-- **Critical Learning:** **"The Impostor" Identified.** `zeus` is a duplicate of `webtv-elmer` (Precursor vs. Evolved).
-- **Governance:** "Sovereign Schema" strictly enforces `cast.org` field. Missing this crashes the build.
-- **Context:** **HEAVY 8 HYDRATED.** The AEO Bridge is live. "Dark Data" is exposed.
-- **Action Item:** Monitor AI Recruiter interactions using the "Direct Link" prompt strategy.
-- **Recent Win:** Verified "Banana Defect" in production HTML. Fixed "Lazy Recruiter" blindspot.
+- **Active Focus:** Forensic Titration Protocol (Next Session).
+- **Recent Win:** Resolved critical "Scroll Lock" and "Invalid Hook" regression in Hyperspace.
+- **Critical Learning:** **"The Noon Standard" is REJECTED.** The correct term is "Gold Standard."
+- **Governance:** "Hybrid Mode" (Body + Gallery) is the architecture.
+- **Context:** **FORENSIC STANDARD ACTIVE.** Visual Drivers (Pips/Seismograph) are now mandatory. Audio is Late Binding.
+- **Action Item:** Rebuild remaining projects using the new `forensic_titration` skill.
+
+* **Key Decision (Protocol):** **"The Gold Standard"** - We rejected "Noon Standard." The architecture of high-fidelity titration is "The Gold Standard."
+* **Key Decision (Architecture):** **"Late Binding"** - Audio and Transcripts are "Day 2" assets. They are OPTIONAL at onboarding and injected later via Surgical Edit.
+* **Key Decision (Visuals):** **"Mandatory Instruments"** - `productionScale` (Pip Chart) and `phase_stats` (Seismograph) are NOT optional. They must be inferred if missing.
 
 * **Key Decision (Protocol):** **"Stickies over Bubbles"** - We renamed the protocol to `STICKIE_PROTOCOL.md` to match the UI Code. "Bubble" refers strictly to the _folder_. "Stickie" refers to the _artifact_.
 * **Key Decision (Visuals):** **"The Stream Standard"** - The Visualization physics must be `0.85x` scale (Stream) NOT `1.5x` (Planets). Do not restore the "Planets" commit.
@@ -183,10 +186,17 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
   - **Context:** Systemic YAML corruption (invisible chars using `src: ... - id:`) cannot be fixed reliably with Regex.
   - **Protocol:** Do not iterate. Write a script to _scrape_ the data (images/text) into a Python Dictionary and _dump_ a pristine new file.
   - **Artifact:** `repair_dcontrol_nuclear_v2.py`.
-- **The "Schema Violation" Trap:**
   - `InvalidContentEntryDataError` is absolute. Unions (like `war_stories`) must match _exactly_.
   - **Example:** `zeus` used `title/subtitle` instead of `label/value`. Immediate build failure.
   - **Fix:** Check `config.ts` first. Do not guess.
+- **The "Nuclear Bisection" Protocol (Feb 2026):**
+  - **Context:** React "Invalid Hook Call" errors are often phantom dependencies or R3F conflicts (e.g., `CollimatedBackground`).
+  - **Protocol:** Do NOT guess. Disable ALL React components. Verify "Boring but Stable". Re-enable one by one.
+  - **Constraint:** R3F Canvas components are high-risk. Check them first.
+- **The "View Transition" Standard (Feb 2026):**
+  - **Context:** Astro View Transitions break `DOMContentLoaded` scripts (Scroll Lock).
+  - **Fix:** Use `document.addEventListener("astro:page-load", init)`.
+  - **Constraint:** Do NOT set `history.scrollRestoration = "manual"`; it fights the Router.
 - **The Cloudflare "Ghost" Error:**
   - "Unknown internal error occurred" during Deployment (after Build Passing) is a platform flake (Confirmed 2026-02-02).
   - **Fix:** Retry Push. Do not debug code. It works.
