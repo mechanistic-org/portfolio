@@ -1,0 +1,149 @@
+[
+	{
+		"date": "2016-06-28",
+		"score": 3,
+		"snippet": "Bazooka PRD Rev 02 released; references to Bel removed.",
+		"type": "Document",
+		"source_ref": "040-00014 Product Requirements Document Bazooka 02 (Source 96)"
+	},
+	{
+		"date": "2016-08-02",
+		"score": 4,
+		"snippet": "FIH receives Bazooka drawing for antenna simulation.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 367)"
+	},
+	{
+		"date": "2016-08-29",
+		"score": 6,
+		"snippet": "Rear module ID design risk flagged due to sample delay.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 375)"
+	},
+	{
+		"date": "2016-09-30",
+		"score": 5,
+		"snippet": "FIH provides Bazooka mock-up to verify wiggle/pull issues.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 377)"
+	},
+	{
+		"date": "2016-10-31",
+		"score": 8,
+		"snippet": "'3Tabs concept' introduced to solve Sativa/Bazooka wiggle issue.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 377)"
+	},
+	{
+		"date": "2016-11-09",
+		"score": 6,
+		"snippet": "Tooling kickoff for 3Tabs/Rear module structural strengthening.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 377)"
+	},
+	{
+		"date": "2017-01-06",
+		"score": 5,
+		"snippet": "EVT1 High Temperature and Humidity Test passed.",
+		"type": "Document",
+		"source_ref": "EVT1_Reliability_Test_Reports.pdf (Source 231)"
+	},
+	{
+		"date": "2017-01-20",
+		"score": 7,
+		"snippet": "EVT1 Salt Spray Test fails: 'Screws rust... Impedance unstable.'",
+		"type": "Document",
+		"source_ref": "EVT1_Reliability_Test_Reports.pdf (Source 233)"
+	},
+	{
+		"date": "2017-01-26",
+		"score": 5,
+		"snippet": "Received 50 EVT1 tooling samples for validation.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 385)"
+	},
+	{
+		"date": "2017-03-10",
+		"score": 2,
+		"snippet": "Bottom Housing DVT CAD file generated (BOTTOM_HOUSING_DVT_20170310).",
+		"type": "Document",
+		"source_ref": "BAZ-.pdf (Source 86)"
+	},
+	{
+		"date": "2017-04-06",
+		"score": 8,
+		"snippet": "Proposal to redesign Airgap switch with 'Button Contactor Guide'.",
+		"type": "Document",
+		"source_ref": "to_bel_2017_04_06.pdf (Source 455)"
+	},
+	{
+		"date": "2017-04-12",
+		"score": 4,
+		"snippet": "EVT2 Thermal Stress Test initiated on samples 45-51.",
+		"type": "Document",
+		"source_ref": "EVT2_Reliability_Test_Reports.pdf (Source 289)"
+	},
+	{
+		"date": "2017-04-21",
+		"score": 10,
+		"snippet": "EVT2 Impact Test: 7/7 units 'stuck in Bazooka' (Retention Failure).",
+		"type": "Document",
+		"source_ref": "EVT2_Reliability_Test_Reports.pdf (Source 296)"
+	},
+	{
+		"date": "2017-04-21",
+		"score": 6,
+		"snippet": "ME Design Lock Down milestone reached.",
+		"type": "Document",
+		"source_ref": "Colorado_EVT2_Reliability_Test_Proposed_REV_1_20170317.pdf (Source 160)"
+	},
+	{
+		"date": "2017-04-28",
+		"score": 6,
+		"snippet": "Tooling Release milestone.",
+		"type": "Document",
+		"source_ref": "Colorado_EVT2_Reliability_Test_Proposed_REV_1_20170317.pdf (Source 160)"
+	},
+	{
+		"date": "2017-04-30",
+		"score": 9,
+		"snippet": "UL Certification pushed to DVT due to 'big changes' (Air gap).",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 383)"
+	},
+	{
+		"date": "2017-05-03",
+		"score": 4,
+		"snippet": "Bazooka PRD Rev 1.0 released by Craig Tuffrey.",
+		"type": "Document",
+		"source_ref": "Bazooka PRD Rev. 1 (Source 114)"
+	},
+	{
+		"date": "2017-05-03",
+		"score": 5,
+		"snippet": "Final design sent to fix indentation issue (SAT-268).",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 381)"
+	},
+	{
+		"date": "2017-05-08",
+		"score": 5,
+		"snippet": "Tooling release for Rear Housing indentation fix.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 381)"
+	},
+	{
+		"date": "2017-05-20",
+		"score": 4,
+		"snippet": "DVT Assembly CAD file generated (BAZOOKA_DVT_ASM_20170520).",
+		"type": "Document",
+		"source_ref": "BAZ-.pdf (Source 85)"
+	},
+	{
+		"date": "2017-06-26",
+		"score": 3,
+		"snippet": "Redlines sent to Bel for drawing incorporation.",
+		"type": "Document",
+		"source_ref": "BAZ-.pdf (Source 93)"
+	}
+]

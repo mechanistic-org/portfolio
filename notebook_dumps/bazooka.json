@@ -1,4 +1,33 @@
 {
     "id": "bazooka",
-    "forensic_summary": "TRIGGER: The EVT2 build faced a 'Kill' scenario with a 100% mechanical retention failure (7/7 units 'stuck in Bazooka') and a critical safety failure where the cosmetic 'Air Gap' switch failed to break the 120V circuit consistently (BAZ-81). Simultaneously, tolerance analysis revealed a 0.3mm interference in the slide-lock mechanism due to 'pillowing' from square tooling dimples. INTERVENTION: The Architect mandated a 'Stop Ship' on the ID-driven round button, forcing a reversion to a functional square 'TEST' button to meet UL 1472. He orchestrated the '3Tabs concept' structural redesign to resolve the wiggle/stuck interface issues and directed a tooling change from square dimples to 'circular pips' to flatten the chassis. RESULT: Secured UL safety compliance, eliminated the 0.3mm interference, and achieved passing thermal metrics (<60\u00b0C touch temp)."
+    "forensic_summary": "TRIGGER: The EVT2 build faced a 'Kill' scenario with a 100% mechanical retention failure (7/7 units 'stuck in Bazooka') and a critical safety failure where the cosmetic 'Air Gap' switch failed to break the 120V circuit consistently (BAZ-81). Simultaneously, tolerance analysis revealed a 0.3mm interference in the slide-lock mechanism due to 'pillowing' from square tooling dimples. INTERVENTION: The Architect mandated a 'Stop Ship' on the ID-driven round button, forcing a reversion to a functional square 'TEST' button to meet UL 1472. He orchestrated the '3Tabs concept' structural redesign to resolve the wiggle/stuck interface issues and directed a tooling change from square dimples to 'circular pips' to flatten the chassis. RESULT: Secured UL safety compliance, eliminated the 0.3mm interference, and achieved passing thermal metrics (<60\u00b0C touch temp).",
+    "metrics": {
+        "war_stories": [
+            {
+                "label": "The '3Tabs' Intervention",
+                "value": "100% Retention Recovery",
+                "description": "Resolved catastrophic 100% failure rate (7/7 units stuck) by re-architecting internal latching structures."
+            },
+            {
+                "label": "UL 1472 Safety Stop",
+                "value": "Square Button Override",
+                "description": "Mandated regression to square 'TEST' button geometry to pass 100-cycle high-voltage endurance test."
+            },
+            {
+                "label": "Tooling Deformation Check",
+                "value": "Circular Pips vs Square Dimples",
+                "description": "Replaced square stamping dimples with circular pips to eliminate 'pillowing' and restore 0.3mm fit clearance."
+            },
+            {
+                "label": "Thermal 'Hot Box'",
+                "value": "<60\u00b0C Touch Temp",
+                "description": "Engineered 850W thermal extraction in enclosed chassis, resolving capacitor failure and acoustic buzzing."
+            },
+            {
+                "label": "Grounding Paradox",
+                "value": "Laser Etch Precision",
+                "description": "Balanced conductivity vs oxidation risk by optimizing laser etch area on die-cast housing."
+            }
+        ]
+    }
 }

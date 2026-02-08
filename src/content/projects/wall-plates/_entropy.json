@@ -1,0 +1,121 @@
+[
+	{
+		"date": "2016-12-12",
+		"score": 7,
+		"snippet": "Confirmed 2-gang chassis for EVT1; FIH provided DFM/modified 3D.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 34)"
+	},
+	{
+		"date": "2016-12-13",
+		"score": 6,
+		"snippet": "Waldo chassis tooling release plan set; requested 10 non-plated units.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 34)"
+	},
+	{
+		"date": "2017-01-13",
+		"score": 4,
+		"snippet": "Sample allocation defined for Waldo 1, 2, 3, and 4-gang units.",
+		"type": "Document",
+		"source_ref": "Colorado Sample Allocations 20170113_2.pdf (Source 25)"
+	},
+	{
+		"date": "2017-01-21",
+		"score": 8,
+		"snippet": "EVT1 parts ready; tooling lead-time successfully compressed to 6 weeks.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 34)"
+	},
+	{
+		"date": "2017-02-17",
+		"score": 5,
+		"snippet": "Faceplate T1 (First Test) estimated time of departure/delivery.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 35)"
+	},
+	{
+		"date": "2017-02-24",
+		"score": 6,
+		"snippet": "Faceplate and Chassis issue collection and design lock down.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 35)"
+	},
+	{
+		"date": "2017-03-01",
+		"score": 5,
+		"snippet": "DFM (Design for Manufacturing) review initiated (runs through 3/4).",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 35)"
+	},
+	{
+		"date": "2017-03-06",
+		"score": 6,
+		"snippet": "Tooling kickoff for Waldo EVT2 based on updated drawings.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 35)"
+	},
+	{
+		"date": "2017-03-13",
+		"score": 5,
+		"snippet": "New design change request issued for Chassis.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 35)"
+	},
+	{
+		"date": "2017-03-24",
+		"score": 3,
+		"snippet": "Chassis T0 (First Off Tool) schedule target.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 35)"
+	},
+	{
+		"date": "2017-03-27",
+		"score": 3,
+		"snippet": "Faceplate T0 (First Off Tool) schedule target.",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 35)"
+	},
+	{
+		"date": "2017-04-14",
+		"score": 9,
+		"snippet": "Forensic analysis reveals '0mm!' clearance between Cover Plate and Bazooka.",
+		"type": "Document",
+		"source_ref": "Colorado_Tolerance_Stackups_Fx.pdf (Source 8, 28)"
+	},
+	{
+		"date": "2017-04-14",
+		"score": 8,
+		"snippet": "Calculated -0.30mm interference in slide-lock mechanism (Z-axis).",
+		"type": "Document",
+		"source_ref": "Colorado_Tolerance_Stackups_Fx.pdf (Source 21, 26)"
+	},
+	{
+		"date": "2017-04-14",
+		"score": 7,
+		"snippet": "Identified 0.9mm potential 'jiggle' in snap width; tightening tolerances.",
+		"type": "Document",
+		"source_ref": "Colorado_Tolerance_Stackups_Fx.pdf (Source 29)"
+	},
+	{
+		"date": "2017-04-21",
+		"score": 7,
+		"snippet": "ME Design Lock Down milestone for EVT2/DVT.",
+		"type": "Document",
+		"source_ref": "EVT2_Reliability_Test.pdf (Source 31)"
+	},
+	{
+		"date": "2017-04-28",
+		"score": 6,
+		"snippet": "Tooling Release milestone.",
+		"type": "Document",
+		"source_ref": "EVT2_Reliability_Test.pdf (Source 31)"
+	},
+	{
+		"date": "2017-05-08",
+		"score": 4,
+		"snippet": "Continuous tracking of Waldo Chassis defects (WAL-10, WAL-15, WAL-22).",
+		"type": "Document",
+		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 34, 40)"
+	}
+]

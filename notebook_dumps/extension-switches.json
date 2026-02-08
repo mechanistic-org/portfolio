@@ -1,17 +1,32 @@
 {
     "id": "extension-switches",
-    "forensic_summary": "TRIGGER: 100% failure rate (7/7) in thermal stress test due to 'Floating Cap' defect. INTERVENTION: Mandated switch from PSA tape to Liquid Structural Glue after forensic stack-up analysis. RESULT: Secured launch configuration with 100% thermal reliability.",
+    "forensic_summary": "TRIGGER: Catastrophic 100% failure rate (7/7 units) in EVT2 Thermal Stress testing (65\u00b0C/-20\u00b0C) manifesting as 'Plastic Cap Floating', compounded by a 0.3mm tooling depth mismatch causing 'Gap between Elvis cap and front housing' and 'Cheep sound' acoustic defects. INTERVENTION: The Architect mandated a 'Stop Ship' on PSA tape, forcing a transition to liquid structural glue. Concurrently directed a tooling modification to replace Gloss finish with 'VDI-15' to resolve paint delamination and added internal ribs to dampen acoustic hollowness (SAT-281). RESULT: Glued units passed Crush, Drop, and Environmental tests, securing the launch configuration.",
     "metrics": {
         "war_stories": [
             {
-                "label": "Thermal Failure",
-                "value": "100% Recovery",
-                "description": "Recovered 100% of EVT2 units from catastrophic thermal failure (7/7) to launch."
+                "label": "Plastic Cap Floating",
+                "value": "Liquid Glue Intervention",
+                "description": "Resolved 100% EVT2 failure rate (7/7) by replacing PSA tape with liquid structural glue to bridge 0.3mm gap."
             },
             {
-                "label": "Governance",
-                "value": "Waterfall",
-                "description": "Waterfall Strategy with Functional Check Points (1-4)."
+                "label": "Acoustic 'Cheep' Sound",
+                "value": "Damping Grease & Ribs",
+                "description": "Eliminated high-frequency noise via UV-verified lubrication and internal structural ribbing."
+            },
+            {
+                "label": "Paint Delamination",
+                "value": "VDI-15 Texture",
+                "description": "Mandated tooling change from Gloss to VDI-15 to resolve cosmetic paint adhesion failures."
+            },
+            {
+                "label": "Yellowing Gate",
+                "value": "Delta E < 1.5",
+                "description": "Enforced strict spectrophotometer limits to catch UV coating degradation, driving resin study."
+            },
+            {
+                "label": "Cost Engineering",
+                "value": "$49 COGS Target",
+                "description": "Optimized Gen 2 mechanical BOM to hit $49 margin on $79 MSRP."
             }
         ]
     }
