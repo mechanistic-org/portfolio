@@ -1,43 +1,15 @@
-# Curtis (C|24) Forensic Report
+# Forensic Intelligence: C24
 
-## I. PROJECT SUMMARY
+## Bolus Count
 
-- **Role:** Lead Mechanical Engineer / Industrial Design Lead
-- **Mandate:** Execute a "RoHS/Refresh" of the legacy Control|24 console to eliminate a **~$200/unit Focusrite royalty**, integrate 5.1 surround monitoring, and maintain a **$9,995 MSRP** while achieving regulatory compliance.
-- **Core Achievement:** Delivered **500 units** for Q4 2007 FQA/Revenue recognition despite a "No-Bid" supply chain crisis and catastrophic thermal yield failure during Pilot.
+- **Total Reports:** 9 (Executive + 8 Discrete)
+- **Seismograph Events:** 52
+- **Visual Evidence:** 5 Files (PDFs/XLS)
 
-## II. THE ANATOMY OF FAILURE (Heuristic Analysis)
+## Key Signals
 
-_Application of Discovery Heuristics to the "Death March" scenario._
-
-- **Thermal/Mechanical Crisis:**
-  - **The Failure (The "Banana" Defect):** During Pilot, ABS Side Caps (P/N 9440-55165/166) arrived with **2.50mm** "Banana" warping and **2.27mm** linear shrinkage. The defect was traced to the "Rubberized Soft Paint" cure cycle where parts were baked on flat racks without support ("Method C"), causing them to sag and lock into deformed shapes.
-  - **The Fix (Process Engineering):** I rejected the vendor's standard process and engineered **"Method A"** (Vertical Hanging Fixture). I codified this in **ECO 12740**, utilizing gravity to maintain straightness during the paint cure glass-transition phase, reducing flatness deviation to **<0.50mm**.
-
-- **Quality/Supply Chain Friction:**
-  - **The Failure (The "No-Bid" Shock):** Primary vendor Kwanta/VTech issued a "No-Bid" on the complex Top Panel (9420-55105) mid-schedule due to high standoff density, threatening a line-down scenario. Secondary vendor "Kenny" produced parts with visible ripples, dents, and "dental white" silkscreening that washed out text.
-  - **The Fix (Bridge Strategy):** Executed a dual-source strategy, engaging **Mass Precision** (Silicon Valley) for emergency manual fabrication to bridge the Pilot schedule while qualifying a manual offset-welding process at the overseas vendor.
-
-## III. GOVERNANCE & RHYTHM
-
-- **The Pulse:** Project operated under "At Risk" / "Replan" status, slipping from Q1 '07 to Nov '07. Governance required high-frequency "War Room" coordination to manage the integration of **19 PCBs** and **15 chassis parts**.
-- **The Artifacts:**
-  - **ECO 12263:** Urgent "release all" order for sheet metal and artwork.
-  - **ECO 12740:** Large plastic tooling modifications and fixture process change.
-  - **DCD Protocol:** Enforced strict Data Control Drawings (e.g., _DCD_9150-55200-00_REV_12.pdf_) to manage mechanical keep-outs for PCB layouts.
-
-## IV. LINKEDIN ARTIFACTS (The Numbers)
-
-- **Slash** COGS to achieve **51.8% Gross Margin** on a $9,995 MSRP product by eliminating legacy royalty structures.
-- **Salvage** Pilot yield on cosmetic plastics from **2.50mm warp** to **<0.50mm** via custom fixture engineering.
-- **Execute** a **100-unit manual retrofit** (hand-packing/re-labeling) of power supplies to protect the First Customer Ship (FCS) date.
-- **Direct** the mechanical integration of **19 PCBs** and complex sheet metal assemblies across international vendors (Vtech, Jetcrown, Mass Precision).
-- **Negotiate** a dual-source bridge strategy, leveraging domestic fabrication to bypass a critical **"No-Bid"** overseas production gap.
-
-## V. VISUAL EVIDENCE
-
-- `944055165-166-00 baking fixture chg.pdf` (Photos of warped parts vs. hanging fixture)
-- `before_and_after_rubber_paint.pdf` (Data proving 2.27mm shrinkage)
-- `China Sheet Metal.pdf` (Photos of ripples and dents in rejected panels)
-- `C24_plastic_fit-misc.pdf` (Fit check interference photos)
-- `ECO_12263.pdf` (Sheet metal release documentation)
+- **Thermal Crisis:** Method A vs Method C (Banana Defect).
+- **Supply Chain:** Dual-Source Bridge (Mass Precision vs. Kwanta).
+- **Serviceability:** Trap Door Redesign (Headphone Jack).
+- **Governance:** DCD Protocol (Geometric Firewall).
+- **Value Engineering:** Bourns Jog Wheel Integration (Plastic Surround).

@@ -113,13 +113,16 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Focus:** Conversation Mining & Documentation.
-- **Recent Win:** Architectural Repair (Law XXXIII Enforcement) + HXO Upgrade.
-- **Critical Learning:** **"The Schema Bifurcation"** - `metrics` (Objects) vs `forensic_metrics` (Strings) must be enforced by code, not just policy.
-- **Governance:** "Hybrid Mode" (Body + Gallery) is the architecture.
-- **Context:** **FORENSIC STANDARD ACTIVE.** Visual Drivers (Pips/Seismograph) are now mandatory. Audio is Late Binding.
-- **Action Item:** Manual Audio Injection for `Morpheus` (Secondary Enrichment).
+- **Active Focus:** Noon Data Recovery & Protocol Verification.
+- **Recent Win:** C24 Forensic Titration (Golden Master) + Three-Body Safety Protocol.
+- **Critical Learning:** **"Bi-Directional Sync is Dangerous"** - Automating "Backporting" without a "Read-Only Source" caused data deletion propagation. The Three-Body Protocol fixes this.
+- **Governance:** "Flagship Mode" (Body + Gallery) is the fleet standard.
+- **Context:** **ASSET SOVEREIGNTY RESTORED.** `public/assets/r2` is now a verified Junction to `R2_STAGING`.
+- **Action Item:** Verify `bazooka` and `webtv-galaxy` rendering after fleet upgrade.
 
+* **Key Decision (Architecture):** **"The Flagship Standard"** - All Forensic Projects must use `presentation_mode: flagship`. This enables the "Hybrid" view (Body Text + HUD Drawer).
+* **Key Decision (Content):** **"No Text Decks"** - Text inside Gallery Stickies (`deck`) is banned. It belongs in the MDX Body. Gallery is for Visuals only.
+* **Key Decision (Sovereignty):** **"The Junction Law"** - The `public/assets/r2` link MUST be a Windows Junction (`New-Item -ItemType Junction`), not a symlink, for robust local dev resolution.
 * **Key Decision (Forensics):** **"The Seismograph Protocol"** - The Entropy Visualization (Racegraph) is now a modular component (`Seismograph.astro`) driven by `phase_stats`. It is MANDATORY for all Forensic Projects.
 * **Key Decision (Schema):** **"The Metrics Bifurcation"** - `metrics` is reserved for Structured Data Objects (Financial, Process). `forensic_metrics` is reserved for Narrative Strings (Friction, Method, Objective). Do NOT mix them.
 * **Key Decision (Schema):** **"The Taxonomy Lock"** - `role` and `employer` fields in MDX must strictly match `src/config/taxonomy.ts`. "Lead Mechanical Engineer" is invalid; use "Mechanical Engineer" + `cast` role for nuance.
@@ -135,6 +138,7 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Protocol):** **"Stickies over Bubbles"** - We renamed the protocol to `STICKIE_PROTOCOL.md` to match the UI Code. "Bubble" refers strictly to the _folder_. "Stickie" refers to the _artifact_.
 * **Key Decision (Visuals):** **"The Stream Standard"** - The Visualization physics must be `0.85x` scale (Stream) NOT `1.5x` (Planets). Do not restore the "Planets" commit.
 * **Key Decision (Automation):** **"Targeted Hydration"** - `hydrate_content.py` now supports `--slug`. We generally FORBID running it without a target to prevent accidental corpus-wide modification.
+* **Key Decision (Protocol):** **"The Three Body Protocol"** - To prevent data loss, we enforce an Asymmetric Safety Architecture: Source (Manual `.md`) -> Live (Rendered `.mdx`) -> Backup (Snapshot `.backup.md`).
 * **Key Decision (Visuals):** **"The Turbulence Standard"** - Replaced soft `fractalNoise` with `turbulence` (Frequency 0.5, Octaves 4, Mix-Blend Overlay) for a sharper, more "Forensic" background texture that cuts through the dark mode.
 * **Key Decision (Visuals):** **"Stealth Mode"** - The Starfield is the primary substrate. Application UI (Project Portal, Colophon, Docs) floats in the void. Borders (`border-white/10`) and Opaque Backgrounds on View Containers are FORBIDDEN in this mode.
 * **Key Decision (Component):** **"The Universal HUD"** - Consolidates `HyperspaceHUD` and `ProjectManifestHUD`. Features `mode="stealth"` (Always Visible, Transparent Wrapper) and "HOTAS" style controls for the Fleet View.

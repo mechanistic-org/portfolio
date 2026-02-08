@@ -604,6 +604,32 @@ def reverse_hydrate_json(dry_run=False, target_slug=None):
                      # We should be careful.
                      pass 
 
+            # 4. Body Content (The Intelligence Bolus)
+            # Three-Body Safety Protocol:
+            # 1. Source (notebook_dumps/{slug}.md): Master Text (User Manual). NEVER written by script.
+            # 2. Live (index.mdx): The rendered page. Hydrated from Source.
+            # 3. Backup (notebook_dumps/{slug}.backup.md): Snapshot of Live. Always written by script.
+
+            if post.content and post.content.strip():
+                 # Write to BACKUP file (Safety Copy)
+                 backup_path = SOURCE_DIR / f"{slug}.backup.md"
+                 
+                 # Read existing backup to check for drift
+                 current_backup = ""
+                 if backup_path.exists():
+                     with open(backup_path, "r", encoding="utf-8") as f:
+                         current_backup = f.read()
+                 
+                 if current_backup != post.content:
+                     if not dry_run:
+                        with open(backup_path, "w", encoding="utf-8") as f:
+                            f.write(post.content)
+                     changes.append(f"  - Snapshot Body to '{slug}.backup.md' (Safety Copy)")
+            else:
+                 # If Live Body is empty, DO NOT touch the Source.
+                 # Just log a warning or skip.
+                 pass 
+
             # Write Check
             if changes:
                 print(f"💾  {slug}:")

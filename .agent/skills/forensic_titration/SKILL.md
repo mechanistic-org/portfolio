@@ -26,7 +26,18 @@ This protocol defines the "Gold Standard" for ingesting forensic engineering dat
 
 1.  **The Construction:** You build the MDX body and Frontmatter structure.
 2.  **The Verification:** You run the Audit.
-3.  **The Safety (Backporting):** You ensure the data is saved back to the JSON Source of Truth via **Reverse Hydration**.
+3.  **The Safety (Three-Body Protocol):** You ensure the data is safe via the **Source / Live / Backup** architecture.
+
+## The Three-Body Safety Protocol
+
+To prevent accidental data loss during hydration, we strictly enforce a three-file architecture:
+
+1.  **THE SOURCE (Manual):** `notebook_dumps/{slug}.md`
+    - **Rule:** READ-ONLY to the script. This is the "User Manual Entry" file. Automation _cannot_ overwrite it.
+2.  **THE LIVE (Render):** `src/content/projects/{slug}/index.mdx`
+    - **Rule:** The rendered site. Can be hydrated (Forward) or snapshotted (Reverse).
+3.  **THE BACKUP (Snapshot):** `notebook_dumps/{slug}.backup.md`
+    - **Rule:** WRITE-ONLY. A snapshot of the Live file. If Live gets mangled, this file triggers an alert, but Source remains pristine.
 
 ## Phase 1: Ingestion (The Bolus)
 
@@ -67,10 +78,11 @@ Construct the file with this exact structure:
   - `slug`, `role`, `dates`, `toolchain`.
   - `productionScale`: **MANDATORY.** (series | limited | concept | prototype | one_off).
   - `phase_stats`: **MANDATORY.** `{ Design: #, Engineering: #, Production: #, Strategy: # }`.
+  - `presentation_mode`: **MANDATORY.** `flagship` (Enables Hybrid Body + HUD).
   - `tags`: **MANDATORY.** (Wires `Assembly.tsx`).
   - `metrics`: Inject `financial`, `process`, `governance` strings + `war_stories`.
   - `cast`: Insert your titrated cast list.
-  - `gallery`: Create shells for EACH Discrete Report.
+  - `gallery`: Create shells for EACH Discrete Report. Only use `images` array. **DO NOT uses `deck` text.**
 - **Body:**
   - Append Executive Report.
   - Append **Full Text** of all Discrete Reports as `##` headers.

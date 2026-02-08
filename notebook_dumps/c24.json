@@ -45,6 +45,16 @@
                 "description": "Vendor docs error left unused PEM studs shorting against PCBs. Engineered ECO 13381 (Manual Removal) to salvage inventory.",
                 "label": "The VTech Short Circuit",
                 "value": "Deadly Studs"
+            },
+            {
+                "description": "Engineered custom plastic surround for Bourns 14mm encoder to replace legacy jog wheel, maintaining premium feel while slashing component cost.",
+                "label": "Jog Wheel Integration",
+                "value": "Value Engineering"
+            },
+            {
+                "description": "Authorized Manual Offset Welding to bypass CNC limitations on high-density top panel, saving the Pilot schedule.",
+                "label": "Manual Offset Welding",
+                "value": "Tactical Bypass"
             }
         ]
     },

@@ -540,3 +540,45 @@ slug: "grok_log"
 2.  **FORENSIC = STRINGS:** The `forensic_metrics` field is reserved for Narrative Strings (e.g., `friction: "The Thumb of God"`).
 3.  **NO MIXING:** Scripts must explicity check types. If it's a Dictionary, it goes to `metrics`. If it's a String, it goes to `forensic_metrics`.
 4.  **AUTO-CORRECTION:** Scripts are authorized to auto-delete misfiled keys (clean the schema) during hydration.
+
+---
+
+## 🏴 XL. The Law of the Flagship (The Mode Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-07
+**Context:** "Deep Dive" mode (`deep_dive`) hid the body text, forcing users to read "Text Decks" in the gallery, which violates "Juice in the Body."
+**The Law:**
+
+1.  **FLAGSHIP IS STANDARD:** All Forensic Projects must use `presentation_mode: flagship`. This is the ONLY mode that renders both the **Forensic Body** (Text) and the **HUD Drawer** (Metrics).
+2.  **DEEP DIVE IS DEAD:** `deep_dive` is deprecated. It is for legacy "Immersive" tests only.
+3.  **NOTEBOOK IS WEAK:** `notebook` mode lacks the HUD Drawer. It is for "Lite" projects only.
+
+---
+
+## 🔇 XLI. The Law of the Silent Gallery (The No-Deck Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-07
+**Context:** C24 "Stickies" contained duplicate text in `deck: []`, creating a maintenance nightmare (Two Sources of Truth).
+**The Law:**
+
+1.  **VISUALS ONLY:** Gallery Stickies (`cyberspace.stickies`) are for Images and Models ONLY.
+2.  **NO TEXT DECKS:** The `deck` array must be empty (`[]`) or contain only titles. The narrative belongs in the MDX Body.
+3.  **TITLES ARE ALLOWED:** You may use `title` to label a carousel, but the `body` field is forbidden.
+
+---
+
+## 🛡️ XLII. The Law of the Three Bodies (The Safety Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-08
+**Context:** "Belt and Suspenders" bi-directional sync caused data loss when a deletion in Live propagated to the Source.
+**The Law:**
+
+1.  **ASYMMETRIC SAFETY:** Data flow is not symmetric.
+    - **Source (`notebook_dumps/*.md`):** User Write / Script Read. (The Immutable Master).
+    - **Live (`index.mdx`):** Script Write / User Write. (The Render).
+    - **Backup (`*.backup.md`):** Script Write Only. (The Snapshot).
+2.  **NO UPSTREAM CLOBBER:** The Script is FORBIDDEN from writing to the Source `.md` file. It may only write to the Backup.
+3.  **MANUAL RECOVERY:** If Live is mangled, we restore from Source, not from a potentially corrupted Backup.
