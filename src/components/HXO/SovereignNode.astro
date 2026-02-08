@@ -5,6 +5,32 @@ const { project } = Astro.props;
 const { Content: _ } = await render(project);
 const { title, date, client, forensic_summary, metrics, audio_url, toolchain } = project.data;
 const year = date ? new Date(date).getFullYear() : "N/A";
+
+// Helper to flatten metrics
+const flattenMetrics = (obj: Record<string, any>, prefix = "") => {
+	let acc: { key: string; val: string }[] = [];
+	if (!obj) return acc;
+
+	for (const [key, val] of Object.entries(obj)) {
+		if (key === "quotes" || key === "war_stories") continue;
+
+		const newKey = prefix ? `${prefix} ${key}` : key;
+
+		if (Array.isArray(val)) {
+			// Skip objects in arrays for now unless strictly needed
+			if (val.length > 0 && val.every((v) => typeof v !== "object")) {
+				acc.push({ key: newKey, val: val.join(", ") });
+			}
+		} else if (typeof val === "object" && val !== null) {
+			acc = acc.concat(flattenMetrics(val, newKey));
+		} else {
+			acc.push({ key: newKey, val: String(val) });
+		}
+	}
+	return acc;
+};
+
+const flatMetrics = metrics ? flattenMetrics(metrics) : [];
 ---
 
 <article
@@ -94,22 +120,19 @@ const year = date ? new Date(date).getFullYear() : "N/A";
 				</h4>
 				<ul class="space-y-3 font-mono text-sm">
 					{
-						metrics ? (
-							Object.entries(metrics).map(
-								([key, val]) =>
-									typeof val === "string" &&
-									key !== "quotes" &&
-									key !== "war_stories" && (
-										<li class="flex flex-col">
-											<span class="text-[10px] text-zinc-600 uppercase">
-												{key.replace(/_/g, " ")}
-											</span>
-											<span class="text-lime-300">{val}</span>
-										</li>
-									),
-							)
+						flatMetrics.length > 0 ? (
+							flatMetrics.map(({ key, val }) => (
+								<li class="mb-2 flex flex-col">
+									<span class="text-[10px] tracking-wider text-zinc-600 uppercase">
+										{key.replace(/_/g, " ")}
+									</span>
+									<span class="font-mono text-xs leading-tight wrap-break-word text-lime-300">
+										{val}
+									</span>
+								</li>
+							))
 						) : (
-							<li class="text-zinc-700 italic">Metrics gathering...</li>
+							<li class="text-xs text-zinc-700 italic">Metrics gathering...</li>
 						)
 					}
 				</ul>

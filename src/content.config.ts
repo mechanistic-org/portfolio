@@ -32,6 +32,11 @@ const projectsCollection = defineCollection({
 			date: z.coerce.date().optional(),
 			endDate: z.coerce.date().optional(),
 
+			// Trimain Strategy Fields
+			targets: z.array(z.enum(["main", "mech", "play"])).default(["main"]),
+			primary_home: z.enum(["main", "mech", "play"]).default("main"),
+			asset_bucket: z.enum(["main", "mech", "play"]).default("main").optional(),
+
 			employer: z
 				.enum(EMPLOYER_VALUES as any)
 				.catch("Self-Employed")

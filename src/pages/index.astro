@@ -4,6 +4,7 @@ import { getCareerAssembly } from "../utils/mapCareerAssembly";
 import HXOSwarmContainer from "../components/HXO/HXOSwarmContainer";
 import HXOConsole from "../components/HXO/HXOConsole";
 // import LazyWiggleLogo from "../components/Deck/LazyWiggleLogo";
+import { currentSite } from "@config/site_config";
 
 // 1. FETCH SOURCE OF TRUTH (The Assembly)
 const assembly = await getCareerAssembly();
@@ -11,6 +12,11 @@ const assembly = await getCareerAssembly();
 // 2. ADAPTER: Transform for Swarm (MultiverseNode)
 const swarmNodes = assembly.nodes
 	.filter((n) => n.type === "project")
+	// TRIMAIN FILTER (The Fuel Filter)
+	.filter((n) => {
+		const targets = n.data.targets || ["main"];
+		return targets.includes(currentSite);
+	})
 	// FIX: Remove "Meta" nodes (Bio/Philosophy) as requested by user
 	.filter((n) => n.data.employer !== "erik_norris" && n.id !== "meta/philosophy")
 	.map((n) => {
@@ -45,6 +51,11 @@ const swarmNodes = assembly.nodes
 // 3. ADAPTER: Transform for Console (ConsoleProject)
 const consoleProjects = assembly.nodes
 	.filter((n) => n.type === "project")
+	// TRIMAIN FILTER (The Fuel Filter)
+	.filter((n) => {
+		const targets = n.data.targets || ["main"];
+		return targets.includes(currentSite);
+	})
 	// FIX: Remove "Meta" nodes from Ledger too
 	.filter((n) => n.data.employer !== "erik_norris" && n.id !== "meta/philosophy")
 	.map((n) => ({

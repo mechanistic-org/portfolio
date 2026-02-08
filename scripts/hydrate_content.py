@@ -277,51 +277,80 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
         # Prepare Updates
         changes = []
         
-        # 1. Metrics (Mapped to forensic_metrics to avoid schema conflict)
+        # 1. Metrics & Forensic Metrics Logic (Law XXXIII)
         if "metrics" in data:
-            if post.metadata.get("forensic_metrics") != data["metrics"]:
-                changes.append(f"  - Update 'metrics' -> 'forensic_metrics'")
-                post.metadata["forensic_metrics"] = data["metrics"]
-        
-        # 2. Presentation Mode (Will be overridden if mining finds stickies)
-        if "presentation_mode" in data:
-            if post.metadata.get("presentation_mode") != data["presentation_mode"]:
-                changes.append(f"  - Update 'presentation_mode' to '{data['presentation_mode']}'")
-                post.metadata["presentation_mode"] = data["presentation_mode"]
-
-        # 3. Forensic Summary
-        if "forensic_summary" in data:
-             if post.metadata.get("forensic_summary") != data["forensic_summary"]:
-                changes.append(f"  - Update 'forensic_summary'")
-                post.metadata["forensic_summary"] = data["forensic_summary"]
-
-        # 4. Toolchain
-        if "toolchain" in data:
-            # Inject generic 'toolchain' array. 
-            # Note: We do NOT overwrite existing 'tools' if present, per requirements.
-            if post.metadata.get("toolchain") != data["toolchain"]:
-                changes.append(f"  - Update 'toolchain'")
-                post.metadata["toolchain"] = data["toolchain"]
-
-        # 5. Cast
-        if "cast" in data:
-            if post.metadata.get("cast") != data["cast"]:
-                changes.append(f"  - Update 'cast'")
-                post.metadata["cast"] = data["cast"]
-
-        # 6. Quotes (Inject into metrics.quotes)
-        if "quotes" in data:
-            # Ensure metrics dict exists
+            source_metrics = data["metrics"]
+            
+            # Ensure target structures exist
             if "metrics" not in post.metadata or post.metadata["metrics"] is None:
                 post.metadata["metrics"] = {}
-            
-            # Get current quotes
-            current_quotes = post.metadata["metrics"].get("quotes", [])
-            
-            # Prepare new quotes (simple replacement or append? JSON is source of truth, so replace)
-            if current_quotes != data["quotes"]:
-                changes.append(f"  - Update 'metrics.quotes'")
-                post.metadata["metrics"]["quotes"] = data["quotes"]
+            if "forensic_metrics" not in post.metadata or post.metadata["forensic_metrics"] is None:
+                post.metadata["forensic_metrics"] = {}
+
+            # Field Mapping
+            structured_keys = ["financial", "process", "governance", "technical"]
+            narrative_keys = ["financial", "process", "governance", "technical"] 
+            # Note: Keys are the same, types differ.
+
+            for key, val in source_metrics.items():
+                # Skip nulls
+                if val is None: continue
+
+                # Deep Structures (Objects/Arrays) -> metrics
+                if isinstance(val, (dict, list)):
+                    # Special Case: Quotes -> metrics.quotes
+                    if key == "quotes":
+                        if post.metadata["metrics"].get("quotes") != val:
+                            changes.append(f"  - Update 'metrics.quotes' (Corrected)")
+                            post.metadata["metrics"]["quotes"] = val
+                        
+                        # Schema Cleanup: Remove misfiled quotes from forensic_metrics
+                        if "forensic_metrics" in post.metadata and "quotes" in post.metadata["forensic_metrics"]:
+                            changes.append(f"  - Delete 'forensic_metrics.quotes' (Schema Cleanup)")
+                            del post.metadata["forensic_metrics"]["quotes"]
+                    
+                    # Special Case: War Stories -> metrics.war_stories
+                    elif key == "war_stories":
+                        if post.metadata["metrics"].get("war_stories") != val:
+                            changes.append(f"  - Update 'metrics.war_stories'")
+                            post.metadata["metrics"]["war_stories"] = val
+                    
+                    # Standard Structured Data
+                    elif key in structured_keys:
+                        if post.metadata["metrics"].get(key) != val:
+                            changes.append(f"  - Update 'metrics.{key}' (Structured)")
+                            post.metadata["metrics"][key] = val
+                    
+                    else:
+                        # Unknown object -> default to metrics to be safe
+                        if post.metadata["metrics"].get(key) != val:
+                            changes.append(f"  - Update 'metrics.{key}' (Unknown Object)")
+                            post.metadata["metrics"][key] = val
+
+                # Narrative Strings -> forensic_metrics
+                elif isinstance(val, str):
+                    if key in narrative_keys:
+                        if post.metadata["forensic_metrics"].get(key) != val:
+                            changes.append(f"  - Update 'forensic_metrics.{key}' (Narrative)")
+                            post.metadata["forensic_metrics"][key] = val
+                    else:
+                        # Unknown string -> where to put it? 
+                        # Default to forensic_metrics for strings to avoid schema crash in strict metrics
+                        if post.metadata["forensic_metrics"].get(key) != val:
+                            changes.append(f"  - Update 'forensic_metrics.{key}' (Unknown String)")
+                            post.metadata["forensic_metrics"][key] = val
+                            
+        # 6. Quotes (Legacy top-level injection check)
+        if "quotes" in data:
+             val = data["quotes"]
+             if post.metadata["metrics"].get("quotes") != val:
+                changes.append(f"  - Update 'metrics.quotes' (Root Source)")
+                post.metadata["metrics"]["quotes"] = val
+             
+             # Schema Cleanup
+             if "forensic_metrics" in post.metadata and "quotes" in post.metadata["forensic_metrics"]:
+                 changes.append(f"  - Delete 'forensic_metrics.quotes' (Schema Cleanup)")
+                 del post.metadata["forensic_metrics"]["quotes"]
 
         # 7. Intelligence Bolus (Raw Content Injection)
         # Scan for corresponding {slug}.md in notebook_dumps

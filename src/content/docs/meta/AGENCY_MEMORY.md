@@ -107,8 +107,8 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 ## 📍 Current Focus State (The "Cursor")
 
 - **Active Focus:** Conversation Mining & Documentation.
-- **Recent Win:** CI/CD Stabilization (Casing Fixes & Cleanup) -> **Green Build**.
-- **Critical Learning:** **"The Backport Mandate"** - MDX is a valid source of truth. Automation loops must be closed (MDX -> JSON) to prevent data loss.
+- **Recent Win:** Canonical Domain Resolution (Non-WWW) + Sitemap Protocol.
+- **Critical Learning:** **"The Aesthetic Override"** - Technical standards (`www` CNAME flattening) yield to Aesthetic preference (`non-www`) for personal brands.
 - **Governance:** "Hybrid Mode" (Body + Gallery) is the architecture.
 - **Context:** **FORENSIC STANDARD ACTIVE.** Visual Drivers (Pips/Seismograph) are now mandatory. Audio is Late Binding.
 - **Action Item:** Return to Physics Tuning (ResVizSwarm) now that the data layer is secure.
@@ -166,6 +166,8 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Layout):** **"The Nested Slot Trap"** - Never wrap a `slot="center"` inside another `slot="center"`. It traps subsequent slots (Right) inside the parent, breaking the sibling layout structure.
 * **Key Decision (Build):** **"The Duplicate Key Scan"** - "Duplicate Mapping Key" (YAML) errors often appear in `cast` or `teamSize` blocks after merges. Do not "patch" one file; audit ALL `src/content/projects` files immediately (`webtv-elmer` had a hidden duplicate `teamSize`).
 * **Key Decision (Keystone):** **"The Neural Assembly"** - The final visualization is a "Hybrid Brain" (D3 + R3F). 30 Notebook Nodes packed in a cranial volume (The Idea) that explode on scroll (The Engineering). This is the Opus.
+* **Key Decision (SEO):** **"The Clean URL Choice"** - We rejected `www` in favor of `eriknorris.com` (Root). Cloudflare "Primary Domain" handles the redirect logic, keeping the URL short and modern.
+* **Key Decision (CMS):** **"The Column Limit"** - Keystatic `columns` are strictly for _viewing_ metadata. Sorting is limited to `slug` until upstream fixes arrive. We sort via Search.
 * **Key Decision (Pipeline):** **"The Sidecar Pattern"** - Specialized rendering logic (DXF, IGES) lives in `scripts/lib/` as standalone modules. `process_images.py` invokes them but does not contain their heavy dependencies.
 * **Key Decision (Archival):** **"The PDF Bridge"** - We generate PDFs from CAD data specifically for `NotebookLM` consumption, as it digests PDF vectors better than raw DXF text.
 * **Key Decision (Identity):** **"The Forensic Architect"** - The Brand Voice is "Hyper-Functional Brutalist." We do not use fluff. We use density (IP69K, AZ91D, 5-Micron). The Master Resume logic is "Semantic Density" (for AI) + "Visual Hooks" (for Humans).

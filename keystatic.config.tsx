@@ -136,6 +136,41 @@ export default config({
 						"Uncheck to hide this project from the main grid (it will still be accessible via URL).",
 					defaultValue: true,
 				}),
+
+				// --------------------------------------------------------------------------
+				// Trimain Strategy (The Manifold)
+				// --------------------------------------------------------------------------
+				targets: fields.multiselect({
+					label: "Target Sites (The Manifold)",
+					options: [
+						{ label: "The Suit (eriknorris.com)", value: "main" },
+						{ label: "The Lab (mechanistic.com)", value: "mech" },
+						{ label: "The Garage (moreplay.com)", value: "play" },
+					],
+					defaultValue: ["main"],
+					description: "Where should this project appear?",
+				}),
+				primary_home: fields.select({
+					label: "Primary Home (Canonical)",
+					options: [
+						{ label: "The Suit (eriknorris.com)", value: "main" },
+						{ label: "The Lab (mechanistic.com)", value: "mech" },
+						{ label: "The Garage (moreplay.com)", value: "play" },
+					],
+					defaultValue: "main",
+					description: 'Which site is the "Owner" of this content? (Sets rel=canonical)',
+				}),
+				asset_bucket: fields.select({
+					label: "Asset Bucket (Sovereignty)",
+					options: [
+						{ label: "The Suit (assets.eriknorris.com)", value: "main" },
+						{ label: "The Lab (assets.mechanistic.com)", value: "mech" },
+						{ label: "The Garage (assets.moreplay.com)", value: "play" },
+					],
+					defaultValue: "main",
+					description:
+						"PHYSICAL location of assets. Uploading here implies the file lives in the chosen bucket.",
+				}),
 				heroImage: fields.text({
 					label: "Hero Image Path",
 					description: "Path to R2 asset (e.g. /assets/r2/project/hero.png)",

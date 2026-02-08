@@ -3,6 +3,7 @@ import { type CollectionEntry, getCollection, render } from "astro:content";
 import { getMultiverseData } from "@/utils/getMultiverseData";
 import fs from "node:fs";
 import path from "node:path";
+import { currentSite } from "@config/site_config";
 
 export const prerender = true;
 
@@ -14,7 +15,12 @@ import Hyperspace from "@layouts/themes/Hyperspace.astro";
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
-	const projects = await getCollection("projects");
+	const allProjects = await getCollection("projects");
+	const projects = allProjects.filter((p) => {
+		const targets = p.data.targets || ["main"];
+		return targets.includes(currentSite);
+	});
+
 	const multiverseData = await getMultiverseData();
 
 	const paths: any[] = projects.map((entry) => ({
@@ -23,20 +29,23 @@ export async function getStaticPaths() {
 	}));
 
 	// Auto-generate placeholders for missing Graph Nodes
-	const existingIds = new Set(projects.map((p) => p.id));
-	multiverseData.nodes.forEach((node: any) => {
-		if (
-			node.id &&
-			!existingIds.has(node.id) &&
-			node.category !== "CORE" &&
-			node.category !== "REALM"
-		) {
-			paths.push({
-				params: { slug: node.id },
-				props: { entry: null, placeholderData: node },
-			});
-		}
-	});
+	// Fuel Filter: Only generate placeholders for "The Suit" (main)
+	if (currentSite === "main") {
+		const existingIds = new Set(projects.map((p) => p.id));
+		multiverseData.nodes.forEach((node: any) => {
+			if (
+				node.id &&
+				!existingIds.has(node.id) &&
+				node.category !== "CORE" &&
+				node.category !== "REALM"
+			) {
+				paths.push({
+					params: { slug: node.id },
+					props: { entry: null, placeholderData: node },
+				});
+			}
+		});
+	}
 
 	return paths;
 }

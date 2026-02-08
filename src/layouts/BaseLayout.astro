@@ -1,6 +1,7 @@
 ---
 // style import
 import "@/styles/global.css";
+import "@/styles/themes.css"; // The Trimain Theme Engine
 // Trigger HMR Rebuild
 
 // component imports
@@ -16,6 +17,7 @@ import CommandMenu from "@components/Search/CommandMenu";
 
 // data
 import siteData from "@config/siteData.json";
+import { site } from "@config/site_config";
 
 interface Props {
 	type?: "general" | "project";
@@ -51,6 +53,7 @@ const {
 	lang="en"
 	class="dark"
 	class:list={[
+		site.theme, // Inject The Suit / Lab / Garage Theme
 		{
 			"overflow-hidden": overflowHidden,
 		},

@@ -59,6 +59,17 @@ sidebar:
 - **Fix:** Patched `zod` schema violation (missing `org` in cast) for 3 projects.
 - **Metric:** Bolus Count increased to 12.
 
+### v1.11: The Trimain Strategy (2026-02-07)
+
+- **Strategy:** "The Trimain" (Tri-Domain Portmanteau).
+  - **eriknorris.com (The Suit):** Forensic Authority & Conversion.
+  - **mechanistic.com (The Lab Coat):** Knowledge Base & Deep Dives.
+  - **moreplay.com (The Leather Jacket):** Playground & Wild Experiments.
+- **Architecture:** "One Repo, Three Builds".
+  - **Tech:** Astro Env Vars (`SITE_VARIANT`) + Cloudflare Pages.
+  - **Goal:** Leverage "Titanium Trust" (1998/1999/2002 domains) without tripling maintenance.
+- **Artifact:** `tri-domain_audit_report.md` (Formal Activation Plan).
+
 ### v1.09: The Forensic Standard (2026-02-06)
 
 - **Protocol:** Finalized "Forensic Titration" Skill (V5.0).
@@ -83,6 +94,17 @@ sidebar:
   - **[Protocol] The Direct Link:** Established "Forensic Prompting" strategy to force AI Recruiters to bypass shallow scans and read deep-dive content.
   - **[Strategy] The Moot Moat:** Validated the "Trust Transfer" hypothesis. We retain 120+ "Long Tail" projects as "Trust Anchors" to prove the "Polymath" claim to AIs, defending the zero-competition queries.
   - **[Validation]** Raw HTML verification confirmed forensic payload availability on `eriknorris.com`.
+
+### v1.10: The Canonical Standard (2026-02-07)
+
+- **Identity:** Rebranded Admin UI from "Cosmic Themes" to "Erik Norris" (White Logo).
+- **SEO Protocol:**
+  - **Canonical:** Enforced `eriknorris.com` (Non-WWW) as the Sovereign Domain.
+  - **Sitemap:** Aligned `robots.txt` protocol to prevent GSC "Redirect" errors.
+  - **Cloudflare:** Configured "Primary Domain" strategy for Clean URLs.
+- **UI Engineering:**
+  - **Keystatic:** Enhanced Project Collection with `Industry`, `Category`, `Employer` visibility columns.
+  - **Linting:** Migrated gradient syntax to Tailwind 4.0 (`bg-linear-to-r`) and fixed `z-index` warnings.
 
 ## 📜 Change Log (Recent)
 

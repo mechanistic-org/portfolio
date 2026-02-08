@@ -6,6 +6,7 @@ import { SEO } from "astro-seo";
 // component import
 import siteData from "@config/siteData.json";
 import jsonLDGenerator from "@js/jsonLD";
+import { currentSite, SITE_CONFIG } from "@config/site_config";
 
 interface BaseProps {
 	title: string;
@@ -34,7 +35,23 @@ const {
 
 let optimizedImage;
 let jsonLD;
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+
+// CANONICAL LOGIC (The Link Triangle)
+let canonicalBase = SITE_CONFIG[currentSite].domain;
+
+if (type === "project") {
+	const { projectFrontmatter } = Astro.props as ProjectProps;
+	// If the project specifies a primary_home, points canonical to that domain ("The Owner")
+	if (projectFrontmatter?.primary_home && SITE_CONFIG[projectFrontmatter.primary_home]) {
+		canonicalBase = SITE_CONFIG[projectFrontmatter.primary_home].domain;
+	}
+}
+// Ensure protocol
+if (!canonicalBase.startsWith("http")) {
+	canonicalBase = `https://${canonicalBase}`;
+}
+
+const canonicalUrl = new URL(Astro.url.pathname, canonicalBase);
 
 // if this is a blog page we do things differently
 if (type === "project") {

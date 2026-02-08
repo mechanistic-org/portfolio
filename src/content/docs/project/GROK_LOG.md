@@ -487,3 +487,42 @@ slug: "grok_log"
 1.  **NO TOUCHING:** Do not attempt to fix casing by renaming `NAME` -> `Name`. Windows will ignore it.
 2.  **THE NUCLEAR PATH:** You must rename `name` -> `Name_TEMP` -> [Commit] -> `Name_TEMP` -> `Name` -> [Commit].
 3.  **FLUSH THE INDEX:** This specific "Two-Step" dance is the ONLY way to force the Git Index to acknowledge the change on a case-insensitive OS.
+
+---
+
+## 🌐 XXXVI. The Law of the Clean URL (The Non-WWW Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-07
+**Context:** User rejected the technical "Best Practice" of `www` in favor of the aesthetic purity of `eriknorris.com` (Root Domain).
+**The Law:**
+
+1.  **AESTHETICS OVER STANDARD:** For this Portfolio, the "Cool Factor" of a short URL outweighs the DNS benefits of CNAME Flattening.
+2.  **SINGLE SOURCE:** `astro.config.mjs` MUST set `site: "https://eriknorris.com"`.
+3.  **CLOUDFLARE ENFORCEMENT:** Cloudflare Pages "Primary Domain" setting is the _only_ valid way to enforce the redirect. Do not use `.htaccess` or middleware.
+
+---
+
+## 🗺️ XXXVII. The Law of the Sitemap (The Protocol Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-07
+**Context:** Google Search Console rejected the sitemap because `robots.txt` pointed to a non-canonical URL (`www` vs `non-www` mismatch).
+**The Law:**
+
+1.  **PROTOCOL MATCH:** `robots.txt` sitemap URL MUST match the `site` config in `astro.config.mjs` EXACTLY.
+
+---
+
+## 🏛️ XXXVIII. The Law of Trimain (The Domain Decree)
+
+**Status:** PROPOSED (2026-02-07)
+**Context:** We hold three high-value domains (`eriknorris.com` [2002], `mechanistic.com` [1998], `moreplay.com` [1999]). Consolidating them into one URL wastes "Titanium Trust."
+**The Law:**
+
+1.  **SEPARATION OF VIBES:** Each domain has a specific voice.
+    - **The Suit (`eriknorris`):** Professional, Forensic, Conversion-Focused.
+    - **The Lab Coat (`mechanistic`):** Academic, Deep Technical, Authority-Focused.
+    - **The Leather Jacket (`moreplay`):** Experimental, Chaotic, Viral-Focused.
+2.  **ONE REPO, THREE BUILDS:** We do not fork the code. We use `SITE_VARIANT` build flags to conditionally render content.
+3.  **TITANIUM TRUST:** We leverage the age of these domains (25+ years) to bypass SEO sandboxes immediately.

@@ -1,0 +1,29 @@
+/*
+ * The Trimain Theme Engine
+ * Overrides core brand colors based on the active Site Variant.
+ */
+
+@layer base {
+	/* THE SUIT (Default / Main) - YInMn Blue */
+	html.theme-suit {
+		/* No overrides needed if default matches tailwind-theme, but explicit is safer */
+		--color-primary-500: #2e5cff;
+		--color-primary-600: #2e5cff;
+		--outline: #2e5cff;
+	}
+
+	/* THE LAB (Mechanistic) - Terminal Green */
+	html.theme-lab {
+		--color-primary-500: #00ff41;
+		--color-primary-600: #00cc33;
+		/* DeepDive Ring Color */
+		--outline: #00ff41;
+	}
+
+	/* THE GARAGE (MorePlay) - Chaos Magenta */
+	html.theme-play {
+		--color-primary-500: #ff00ff;
+		--color-primary-600: #cc00cc;
+		--outline: #ff00ff;
+	}
+}

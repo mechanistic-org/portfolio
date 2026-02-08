@@ -11,12 +11,17 @@ import ScrollCoordinator from "@components/Effects/ScrollCoordinator.astro";
 import { getMultiverseData } from "@/utils/getMultiverseData";
 import { Icon } from "astro-icon/components";
 import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
+import { currentSite } from "@config/site_config";
 
 const multiverseData = await getMultiverseData();
 const multiverseMap = new Map(multiverseData.nodes.map((n) => [n.id.toLowerCase(), n]));
 
 const rawProjects = await getCollection("projects");
 const projects = rawProjects
+	.filter(({ data }) => {
+		const targets = data.targets || ["main"];
+		return targets.includes(currentSite);
+	})
 	.filter(({ data, id }) => {
 		const hiddenIds = [
 			"classified",
