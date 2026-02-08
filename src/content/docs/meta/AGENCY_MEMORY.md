@@ -113,11 +113,11 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Focus:** Noon Data Recovery & Protocol Verification.
-- **Recent Win:** C24 Forensic Titration (Golden Master) + Three-Body Safety Protocol.
-- **Critical Learning:** **"Bi-Directional Sync is Dangerous"** - Automating "Backporting" without a "Read-Only Source" caused data deletion propagation. The Three-Body Protocol fixes this.
-- **Governance:** "Flagship Mode" (Body + Gallery) is the fleet standard.
-- **Context:** **ASSET SOVEREIGNTY RESTORED.** `public/assets/r2` is now a verified Junction to `R2_STAGING`.
+- **Active Focus:** **Noon 5 Recovery Complete & Protocol Verification.**
+- **Context:** **THE NOON 5 SECURED.** `c24`, `bazooka`, `sativa`, `extension-switches`, `wall-plates` are now "Gold Standard" (Phase 2).
+- **Recent Win:** Implemented **"Three Body Protocol"** across all 5 projects. Data is locked via `reverse_hydrate_json`.
+- **Governance:** **"Zero Data Loss Mandate"** - `Forensic Titration` skill updated to forbid overwrites.
+- **Critical Learning:** **"The Commit Trap"** - Committing locally does not trigger Cloudflare. Explicit `git push` is required.
 - **Action Item:** Verify `bazooka` and `webtv-galaxy` rendering after fleet upgrade.
 
 * **Key Decision (Architecture):** **"The Flagship Standard"** - All Forensic Projects must use `presentation_mode: flagship`. This enables the "Hybrid" view (Body Text + HUD Drawer).

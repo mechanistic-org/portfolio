@@ -133,6 +133,7 @@ description: "Archived legacy document."
 5.  **Stop Guessing:** Do not patch failures incrementally. If one file fails (YAML), audit the entire corpus before redeploying.
 6.  **Verify, Don't Assume:** "Good enough" is not "Done." Confirm the Green Build before asking for next steps.
 7.  **The "Freshness" Heuristic:** Target **30-50 turns** per session. Beyond 50, audit quality. Beyond 100, "Poisoning" (Hallucination) risk spikes. **Mine & Reset** before 100 to maintain Forensic Precision.
+8.  **Trust via Protocol:** If the User asks "How do we ensure this?", do not offer promises. Offer **Protocol**. (e.g., "I have updated the Skill to mandate X"). Trust is architectural, not linguistic.
 
 **Keywords & Vernacular:**
 
