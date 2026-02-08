@@ -1,21 +1,21 @@
 ---
 audio_url: /assets/r2/bazooka/bazooka-briefing.m4a
 cast:
-- name: Erik Norris
-  org: Locoroll (Noon Home)
-  role: Head of ME / The Architect
-- name: Craig Tuffrey
-  org: Locoroll
-  role: Operations Manager
-- name: Kelvin
-  org: FIH
-  role: Manufacturing Engineer
-- name: Curtis
-  org: Locoroll
-  role: Originator
-- name: Nick
-  org: Locoroll
-  role: ME Lead
+  - name: Erik Norris
+    org: Locoroll (Noon Home)
+    role: Head of ME / The Architect
+  - name: Craig Tuffrey
+    org: Locoroll
+    role: Operations Manager
+  - name: Kelvin
+    org: FIH
+    role: Manufacturing Engineer
+  - name: Curtis
+    org: Locoroll
+    role: Originator
+  - name: Nick
+    org: Locoroll
+    role: ME Lead
 category: consumer_electronics
 cyberspace:
   enable: true
@@ -25,17 +25,18 @@ date: 2016-06-28
 draft: false
 employer: noon
 endDate: 2017-08-31
-forensic_summary: 'TRIGGER: The EVT2 build faced a ''Kill'' scenario with a 100% mechanical
-  retention failure (7/7 units ''stuck in Bazooka'') and a critical safety failure
-  where the cosmetic ''Air Gap'' switch failed to break the 120V circuit consistently
+forensic_summary:
+  "TRIGGER: The EVT2 build faced a 'Kill' scenario with a 100% mechanical
+  retention failure (7/7 units 'stuck in Bazooka') and a critical safety failure
+  where the cosmetic 'Air Gap' switch failed to break the 120V circuit consistently
   (BAZ-81). Simultaneously, tolerance analysis revealed a 0.3mm interference in the
-  slide-lock mechanism due to ''pillowing'' from square tooling dimples. INTERVENTION:
-  The Architect mandated a ''Stop Ship'' on the ID-driven round button, forcing a
-  reversion to a functional square ''TEST'' button to meet UL 1472. He orchestrated
-  the ''3Tabs concept'' structural redesign to resolve the wiggle/stuck interface
-  issues and directed a tooling change from square dimples to ''circular pips'' to
+  slide-lock mechanism due to 'pillowing' from square tooling dimples. INTERVENTION:
+  The Architect mandated a 'Stop Ship' on the ID-driven round button, forcing a
+  reversion to a functional square 'TEST' button to meet UL 1472. He orchestrated
+  the '3Tabs concept' structural redesign to resolve the wiggle/stuck interface
+  issues and directed a tooling change from square dimples to 'circular pips' to
   flatten the chassis. RESULT: Secured UL safety compliance, eliminated the 0.3mm
-  interference, and achieved passing thermal metrics (<60°C touch temp).'
+  interference, and achieved passing thermal metrics (<60°C touch temp)."
 gallery: []
 hxo_ready: true
 hydration_status: full
@@ -45,42 +46,47 @@ metrics:
   financial:
     costOfGoodsSold: []
     margins:
-    - Managed high-voltage 850W architecture validation within JDM structure
+      - Managed high-voltage 850W architecture validation within JDM structure
     toolingActual: 0
     toolingBudget: 0
   governance:
     dcdCount: 27
     dcos: 0
     ecos:
-    - Resolved 27 critical defects through Gate 2 reviews
+      - Resolved 27 critical defects through Gate 2 reviews
   interventions:
     count: 5
     label: Critical Saves
     value: 5
   process:
     engineeringChangeOrders:
-    - Scaled production fleet from 35 P1 to 921 DVT validation units
+      - Scaled production fleet from 35 P1 to 921 DVT validation units
   war_stories:
-  - description: Resolved catastrophic 100% failure rate (7/7 units stuck) by re-architecting
-      internal latching structures.
-    label: The '3Tabs' Intervention
-    value: 100% Retention Recovery
-  - description: Mandated regression to square 'TEST' button geometry to pass 100-cycle
-      high-voltage endurance test.
-    label: UL 1472 Safety Stop
-    value: Square Button Override
-  - description: Replaced square stamping dimples with circular pips to eliminate
-      'pillowing' and restore 0.3mm fit clearance.
-    label: Tooling Deformation Check
-    value: Circular Pips vs Square Dimples
-  - description: Engineered 850W thermal extraction in enclosed chassis, resolving
-      capacitor failure and acoustic buzzing.
-    label: Thermal 'Hot Box'
-    value: <60°C Touch Temp
-  - description: Balanced conductivity vs oxidation risk by optimizing laser etch
-      area on die-cast housing.
-    label: Grounding Paradox
-    value: Laser Etch Precision
+    - description:
+        Resolved catastrophic 100% failure rate (7/7 units stuck) by re-architecting
+        internal latching structures.
+      label: The '3Tabs' Intervention
+      value: 100% Retention Recovery
+    - description:
+        Mandated regression to square 'TEST' button geometry to pass 100-cycle
+        high-voltage endurance test.
+      label: UL 1472 Safety Stop
+      value: Square Button Override
+    - description:
+        Replaced square stamping dimples with circular pips to eliminate
+        'pillowing' and restore 0.3mm fit clearance.
+      label: Tooling Deformation Check
+      value: Circular Pips vs Square Dimples
+    - description:
+        Engineered 850W thermal extraction in enclosed chassis, resolving
+        capacitor failure and acoustic buzzing.
+      label: Thermal 'Hot Box'
+      value: <60°C Touch Temp
+    - description:
+        Balanced conductivity vs oxidation risk by optimizing laser etch
+        area on die-cast housing.
+      label: Grounding Paradox
+      value: Laser Etch Precision
 phase_stats:
   Design: 30
   Engineering: 50
@@ -91,24 +97,24 @@ primary_home: mech
 productionScale: series
 slug: bazooka
 tags:
-- Mechanical Engineering
-- Consumer Electronics
-- High Voltage
-- Product Design
-- Thermal Analysis
-- UL Safety
+  - Mechanical Engineering
+  - Consumer Electronics
+  - High Voltage
+  - Product Design
+  - Thermal Analysis
+  - UL Safety
 targets:
-- main
-- mech
+  - main
+  - mech
 theme: hyperspace
 tier: 1
 title: Bazooka (Base Station)
 toolchain:
-- Creo (CAD Modeling)
-- 'JIRA (Issue Tracking: BAZ-45, BAZ-81, BAZ-96, SAT-60)'
-- Bel Power Solutions (JDM Vendor - High Voltage)
-- FIH (Foxconn International Holdings - System Integrator)
-- 'Excel (Tolerance Stackup: Bazooka-Waldo_Cover_Retention.xlsx)'
+  - Creo (CAD Modeling)
+  - "JIRA (Issue Tracking: BAZ-45, BAZ-81, BAZ-96, SAT-60)"
+  - Bel Power Solutions (JDM Vendor - High Voltage)
+  - FIH (Foxconn International Holdings - System Integrator)
+  - "Excel (Tolerance Stackup: Bazooka-Waldo_Cover_Retention.xlsx)"
 ---
 
 # Project Bazooka (Base Station) Forensic Report
