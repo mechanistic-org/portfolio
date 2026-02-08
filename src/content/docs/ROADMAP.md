@@ -106,6 +106,17 @@ sidebar:
   - **Keystatic:** Enhanced Project Collection with `Industry`, `Category`, `Employer` visibility columns.
   - **Linting:** Migrated gradient syntax to Tailwind 4.0 (`bg-linear-to-r`) and fixed `z-index` warnings.
 
+  - **Linting:** Migrated gradient syntax to Tailwind 4.0 (`bg-linear-to-r`) and fixed `z-index` warnings.
+
+### v1.12: The Forensic Upgrade (2026-02-07)
+
+- **[Architectural Repair] Law XXXIII Enforcement:**
+  - **[Fix] Schema Bifurcation:** Refactored `hydrate_content.py` to strictly enforce `metrics` (Objects) vs `forensic_metrics` (Strings).
+  - **[Auto-Repair]** Migrated legacy `quotes` for 4 projects (`romeo`, `titan-k`, `xbox`, `acer-phone`).
+- **[HXO] Deep Visualization:**
+  - **[Feature] Recursive Flattening:** Upgraded `SovereignNode.astro` to render deep nested metrics (e.g., `Morpheus`), unlocking visibility for complex forensic data.
+- **[Deployment]** Fixed `wrangler.toml` configuration to unblock Cloudflare Pages builds.
+
 ## 📜 Change Log (Recent)
 
 - **[2026-02-04] Spring Cleaning & Deployment (The Museum Strategy)**

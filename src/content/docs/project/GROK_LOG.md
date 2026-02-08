@@ -526,3 +526,17 @@ slug: "grok_log"
     - **The Leather Jacket (`moreplay`):** Experimental, Chaotic, Viral-Focused.
 2.  **ONE REPO, THREE BUILDS:** We do not fork the code. We use `SITE_VARIANT` build flags to conditionally render content.
 3.  **TITANIUM TRUST:** We leverage the age of these domains (25+ years) to bypass SEO sandboxes immediately.
+
+---
+
+## 🏛️ XXXIX. The Law of Schema Separation (The Metrics Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-07
+**Context:** `hydrate_content.py` was blindly copying JSON `metrics` into MDX `forensic_metrics`, causing Schema Mismatches (Objects vs Strings) and "InvalidContentEntryDataError".
+**The Law:**
+
+1.  **METRICS = OBJECTS:** The `metrics` field is reserved for Structured Data Objects (e.g., `financial: { costOfGoodsSold: 400 }`).
+2.  **FORENSIC = STRINGS:** The `forensic_metrics` field is reserved for Narrative Strings (e.g., `friction: "The Thumb of God"`).
+3.  **NO MIXING:** Scripts must explicity check types. If it's a Dictionary, it goes to `metrics`. If it's a String, it goes to `forensic_metrics`.
+4.  **AUTO-CORRECTION:** Scripts are authorized to auto-delete misfiled keys (clean the schema) during hydration.

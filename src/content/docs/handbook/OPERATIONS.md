@@ -71,6 +71,10 @@ These scripts drive the "Forensic Data Factory."
   - **Protocol:** Run `npx astro check > check_output.txt` first. Then run script.
   - **Watcher:** Creating broken imports? Run `scripts/fix_broken_imports.py` immediately after.
 
+- **Schema Investigator (`scripts/audit_metrics.py`)**
+  - **Function:** Audits MDX files for Law XXXIX Violations (Schema Separation).
+  - **Protocol:** Run `python scripts/audit_metrics.py` before committing.
+
 ---
 
 ## 2. Troubleshooting: The Build (Astro/Vite)
@@ -137,6 +141,19 @@ These scripts drive the "Forensic Data Factory."
   1.  **Run Checks:** `npm run audit:frontmatter` (Shield 2) + `npm run check:hud` (Shield 3).
   2.  **Verify Schema:** Ensure `content.config.ts` uses `metrics: z.any().optional()`.
   3.  **Verify Layout:** Check `UniversalHUD.astro` for the default `<slot />`.
+
+  4.  **Verify Layout:** Check `UniversalHUD.astro` for the default `<slot />`.
+
+### 🔴 "Schema Validation" (Metric Mix)
+
+- **Symptom:** `InvalidContentEntryDataError: metrics.quotes`.
+- **Cause:** Mixing Objects (Metrics) with Strings (Forensics).
+- **Fix:** Run `python scripts/hydrate_content.py --slug [slug] --force` to auto-migrate.
+
+### 🔴 "The Grep Trap" (Windows)
+
+- **Symptom:** `grep` not found in PowerShell.
+- **Fix:** Use Python scripts (`scripts/audit_metrics.py`) or `Select-String`. Do not rely on bash tools in docs.
 
 ---
 

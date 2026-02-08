@@ -6,6 +6,6 @@ compatibility_flags = ["nodejs_compat"]
 # Bind the R2 Bucket (This applies to ALL variants unless overridden)
 [[r2_buckets]]
 binding = "PROJECTS"
-bucket_name = "projects"
+bucket_name = "assets-eriknorris-com"
 
 

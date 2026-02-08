@@ -5,97 +5,106 @@ import HXOSwarmContainer from "../components/HXO/HXOSwarmContainer";
 import HXOConsole from "../components/HXO/HXOConsole";
 // import LazyWiggleLogo from "../components/Deck/LazyWiggleLogo";
 import { currentSite } from "@config/site_config";
+import UnderConstruction from "../components/UnderConstruction.astro";
 
-// 1. FETCH SOURCE OF TRUTH (The Assembly)
-const assembly = await getCareerAssembly();
+const isUnderConstruction = currentSite !== "main";
 
-// 2. ADAPTER: Transform for Swarm (MultiverseNode)
-const swarmNodes = assembly.nodes
-	.filter((n) => n.type === "project")
-	// TRIMAIN FILTER (The Fuel Filter)
-	.filter((n) => {
-		const targets = n.data.targets || ["main"];
-		return targets.includes(currentSite);
-	})
-	// FIX: Remove "Meta" nodes (Bio/Philosophy) as requested by user
-	.filter((n) => n.data.employer !== "erik_norris" && n.id !== "meta/philosophy")
-	.map((n) => {
-		const tier = n.data.tier || 3;
-		let presentation_mode = "standard";
+// Initialize empty
+let swarmNodes = [];
+let consoleProjects = [];
 
-		// Tier 1 logic
-		// FIX: Do not force Tier 1 to Flagship (45px). Let physics determine size by duration.
-		// if (tier === 1) presentation_mode = "flagship";
+if (!isUnderConstruction) {
+	// 1. FETCH SOURCE OF TRUTH (The Assembly)
+	const assembly = await getCareerAssembly();
 
-		// Meta-Node Override (Bio/Philosophy)
-		if (n.data.employer === "erik_norris") {
-			presentation_mode = "flagship";
-			// We might want a "meta" mode in the future, but for now Flagship gives the glow.
-		} else if (tier === 2) {
-			presentation_mode = "deep_dive"; // Keep Deep Dive for styling, but radius is calculated
-		}
+	// 2. ADAPTER: Transform for Swarm (MultiverseNode)
+	swarmNodes = assembly.nodes
+		.filter((n) => n.type === "project")
+		// TRIMAIN FILTER (The Fuel Filter)
+		.filter((n) => {
+			const targets = n.data.targets || ["main"];
+			return targets.includes(currentSite);
+		})
+		// FIX: Remove "Meta" nodes (Bio/Philosophy) as requested by user
+		.filter((n) => n.data.employer !== "erik_norris" && n.id !== "meta/philosophy")
+		.map((n) => {
+			const tier = n.data.tier || 3;
+			let presentation_mode = "standard";
 
-		return {
+			// Tier 1 logic
+			// FIX: Do not force Tier 1 to Flagship (45px). Let physics determine size by duration.
+			// if (tier === 1) presentation_mode = "flagship";
+
+			// Meta-Node Override (Bio/Philosophy)
+			if (n.data.employer === "erik_norris") {
+				presentation_mode = "flagship";
+				// We might want a "meta" mode in the future, but for now Flagship gives the glow.
+			} else if (tier === 2) {
+				presentation_mode = "deep_dive"; // Keep Deep Dive for styling, but radius is calculated
+			}
+
+			return {
+				id: n.id,
+				name: n.data.title,
+				group: n.data.employer === "erik_norris" ? "meta" : n.data.employer || "Private", // Custom Group for Color
+				start_date: n.data.date ? new Date(n.data.date).toISOString() : new Date().toISOString(),
+				end_date: n.data.endDate ? new Date(n.data.endDate).toISOString() : undefined, // FIX: Pass End Date to Physics Engine
+				value: n.data.employer === "erik_norris" ? 60 : 20, // Bigger Mass for Bio
+				presentation_mode,
+				// Pass-throughs
+				category: n.data.category,
+			};
+		});
+
+	// 3. ADAPTER: Transform for Console (ConsoleProject)
+	consoleProjects = assembly.nodes
+		.filter((n) => n.type === "project")
+		// TRIMAIN FILTER (The Fuel Filter)
+		.filter((n) => {
+			const targets = n.data.targets || ["main"];
+			return targets.includes(currentSite);
+		})
+		// FIX: Remove "Meta" nodes from Ledger too
+		.filter((n) => n.data.employer !== "erik_norris" && n.id !== "meta/philosophy")
+		.map((n) => ({
 			id: n.id,
-			name: n.data.title,
-			group: n.data.employer === "erik_norris" ? "meta" : n.data.employer || "Private", // Custom Group for Color
-			start_date: n.data.date ? new Date(n.data.date).toISOString() : new Date().toISOString(),
-			end_date: n.data.endDate ? new Date(n.data.endDate).toISOString() : undefined, // FIX: Pass End Date to Physics Engine
-			value: n.data.employer === "erik_norris" ? 60 : 20, // Bigger Mass for Bio
-			presentation_mode,
-			// Pass-throughs
-			category: n.data.category,
-		};
-	});
-
-// 3. ADAPTER: Transform for Console (ConsoleProject)
-const consoleProjects = assembly.nodes
-	.filter((n) => n.type === "project")
-	// TRIMAIN FILTER (The Fuel Filter)
-	.filter((n) => {
-		const targets = n.data.targets || ["main"];
-		return targets.includes(currentSite);
-	})
-	// FIX: Remove "Meta" nodes from Ledger too
-	.filter((n) => n.data.employer !== "erik_norris" && n.id !== "meta/philosophy")
-	.map((n) => ({
-		id: n.id,
-		data: n.data,
-	}));
+			data: n.data,
+		}));
+}
 ---
 
-<Layout
-	title="Erik Norris | Senior Staff ME / Designer"
-	description="Forensic Architecture Prototype v2"
-	hideNavLogo={false}
-	starfield={true}
->
-	<div
-		class="hxo-prototype min-h-screen max-w-[100vw] overflow-hidden bg-transparent font-sans text-zinc-300 selection:bg-lime-900 selection:text-white"
-	>
-		<main class="grid h-screen grid-cols-1 overflow-hidden lg:grid-cols-12">
-			{/* LEFT: THE SWARM (Navigation / Map) */}
-			{/* Enabled overflow-y-auto to allow scrolling the long timeline */}
-			<div
-				class="custom-scrollbar relative h-screen overflow-x-hidden overflow-y-auto border-r border-zinc-900 bg-transparent lg:col-span-7 xl:col-span-8"
-			>
-				<HXOSwarmContainer client:load nodes={swarmNodes} />
-				{/* Overlay Title - Pushed down to clear fixed Nav */}
-				<div class="pointer-events-none absolute top-4 left-6 z-50">
-					{/* WIGGLE LOGO REMOVED: Using standard Nav Logo per user request */}
-				</div>
-			</div>
+{
+	isUnderConstruction ? (
+		<UnderConstruction />
+	) : (
+		<Layout
+			title="Erik Norris | Senior Staff ME / Designer"
+			description="Forensic Architecture Prototype v2"
+			hideNavLogo={false}
+			starfield={true}
+		>
+			<div class="hxo-prototype min-h-screen max-w-[100vw] overflow-hidden bg-transparent font-sans text-zinc-300 selection:bg-lime-900 selection:text-white">
+				<main class="grid h-screen grid-cols-1 overflow-hidden lg:grid-cols-12">
+					{/* LEFT: THE SWARM (Navigation / Map) */}
+					{/* Enabled overflow-y-auto to allow scrolling the long timeline */}
+					<div class="custom-scrollbar relative h-screen overflow-x-hidden overflow-y-auto border-r border-zinc-900 bg-transparent lg:col-span-7 xl:col-span-8">
+						<HXOSwarmContainer client:load nodes={swarmNodes} />
+						{/* Overlay Title - Pushed down to clear fixed Nav */}
+						<div class="pointer-events-none absolute top-4 left-6 z-50">
+							{/* WIGGLE LOGO REMOVED: Using standard Nav Logo per user request */}
+						</div>
+					</div>
 
-			{/* RIGHT: THE CONSOLE (Details / Index) */}
-			{/* Must start below the 5rem Nav and fill the rest without overflow */}
-			<div
-				class="relative z-30 mt-16 flex h-[calc(100vh-4rem)] flex-col bg-transparent lg:col-span-5 xl:col-span-4"
-			>
-				<HXOConsole client:load projects={consoleProjects} />
+					{/* RIGHT: THE CONSOLE (Details / Index) */}
+					{/* Must start below the 5rem Nav and fill the rest without overflow */}
+					<div class="relative z-30 mt-16 flex h-[calc(100vh-4rem)] flex-col bg-transparent lg:col-span-5 xl:col-span-4">
+						<HXOConsole client:load projects={consoleProjects} />
+					</div>
+				</main>
 			</div>
-		</main>
-	</div>
-</Layout>
+		</Layout>
+	)
+}
 
 <style>
 	/* Quick helper for scrollbar */

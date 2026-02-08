@@ -102,16 +102,23 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **Contents:** `.hrm` files (Heart Rate/Speed) documenting the "Digi-Commute."
 - **Potential:** High-fidelity data visualization of "The Grind" (La Honda -> Daly City).
 
+### 7. **Project Morpheus (Visual Taxonomy)**
+
+- **Role:** High-Fidelity Deep Dive (Hollow Core)
+- **Status:** **SECONDARY ENRICHMENT** (Secondary Visuals Active, Forensic Core Missing)
+- **Constraint:** Lacks "Red Gold" (NotebookLM output). Audio is missing.
+- **Action:** Retain as "Deep Dive" visual verification but mark as "Hollow" until raw data is ingested.
+
 ---
 
 ## 📍 Current Focus State (The "Cursor")
 
 - **Active Focus:** Conversation Mining & Documentation.
-- **Recent Win:** Canonical Domain Resolution (Non-WWW) + Sitemap Protocol.
-- **Critical Learning:** **"The Aesthetic Override"** - Technical standards (`www` CNAME flattening) yield to Aesthetic preference (`non-www`) for personal brands.
+- **Recent Win:** Architectural Repair (Law XXXIII Enforcement) + HXO Upgrade.
+- **Critical Learning:** **"The Schema Bifurcation"** - `metrics` (Objects) vs `forensic_metrics` (Strings) must be enforced by code, not just policy.
 - **Governance:** "Hybrid Mode" (Body + Gallery) is the architecture.
 - **Context:** **FORENSIC STANDARD ACTIVE.** Visual Drivers (Pips/Seismograph) are now mandatory. Audio is Late Binding.
-- **Action Item:** Return to Physics Tuning (ResVizSwarm) now that the data layer is secure.
+- **Action Item:** Manual Audio Injection for `Morpheus` (Secondary Enrichment).
 
 * **Key Decision (Forensics):** **"The Seismograph Protocol"** - The Entropy Visualization (Racegraph) is now a modular component (`Seismograph.astro`) driven by `phase_stats`. It is MANDATORY for all Forensic Projects.
 * **Key Decision (Schema):** **"The Metrics Bifurcation"** - `metrics` is reserved for Structured Data Objects (Financial, Process). `forensic_metrics` is reserved for Narrative Strings (Friction, Method, Objective). Do NOT mix them.
