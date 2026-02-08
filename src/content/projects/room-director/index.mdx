@@ -1,89 +1,105 @@
 ---
-slug: room-director
-title: Room Director (Sativa)
-date: 2016-09-01
-endDate: 2017-06-01
-employer: noon
-industry: consumer_electronics
-category: consumer_electronics
-targets: ["main", "mech"]
-primary_home: "mech"
-toolchain:
-  - "Arena (PLM/BOM Management)"
-  - "JIRA (Issue Tracking: SAT-XX)"
-  - "FIH (Manufacturing/Assembly)"
-  - "Memtech (Injection Molding/Plastics)"
-  - "Biel (Glass Vendor)"
-  - "AUO (OLED Display)"
-tags:
-  - Mechanical Engineering
-  - Consumer Electronics
-  - Haptics & Touch
-  - Display Integration
-  - Manufacturing Ops
-forensic_summary: "TRIGGER: Catastrophic structural disintegration during Impact Testing where 7 of 7 Sativa units suffered 'Front housing and back cover separate', compounded by a 6/7 failure rate for 'Front housing corner coating peel off' during micro-drops. INTERVENTION: The Architect mandated a structural overhaul to a 'Full Circle Hinge' design, adding reinforcement ribs and removing chamfers to lock the housing. Concurrently enforced a 'VDI-15' finish change on the substrate to resolve paint adhesion delamination. RESULT: Modified mockups passed Drop, Crush, and Rapid Pull tests, securing the premium 'Room Director' configuration for DVT."
+audio_url: /assets/r2/room-director/room-director-briefing.m4a
 cast:
-  - name: Erik Norris
-    role: Head of ME / The Architect
-    org: Locoroll (Noon Home)
-  - name: Kelvin
-    role: Manufacturing Engineer
-    org: FIH
-  - name: Sunny Yen
-    role: Test Engineer
-    org: FIH
-  - name: Nick
-    role: ME Lead
-    org: Locoroll
-theme: hyperspace
-presentation_mode: flagship
+- name: Erik Norris
+  org: Locoroll (Noon Home)
+  role: Head of ME / The Architect
+- name: Kelvin
+  org: FIH
+  role: Manufacturing Engineer
+- name: Sunny Yen
+  org: FIH
+  role: Test Engineer
+- name: Nick
+  org: Locoroll
+  role: ME Lead
+category: consumer_electronics
+cyberspace:
+  enable: true
+  layout: linear
+  stickies: []
+date: 2016-09-01
 draft: false
+employer: noon
+endDate: 2017-06-01
+forensic_summary: 'TRIGGER: Catastrophic structural disintegration during Impact Testing
+  where 7 of 7 Sativa units suffered ''Front housing and back cover separate'', compounded
+  by a 6/7 failure rate for ''Front housing corner coating peel off'' during micro-drops.
+  INTERVENTION: The Architect mandated a structural overhaul to a ''Full Circle Hinge''
+  design, adding reinforcement ribs and removing chamfers to lock the housing. Concurrently
+  enforced a ''VDI-15'' finish change on the substrate to resolve paint adhesion delamination.
+  RESULT: Modified mockups passed Drop, Crush, and Rapid Pull tests, securing the
+  premium ''Room Director'' configuration for DVT.'
+gallery: []
+hxo_ready: true
+hydration_status: full
+industry: consumer_electronics
 listed: true
-productionScale: series
+metrics:
+  financial:
+    margins:
+    - Managed High-Fidelity OLED integration costs via JDM partnership (FIH/Biel/AUO)
+  governance:
+    dcdCount: 27
+    ecos:
+    - Directed $3,000 tooling budget for VDI-15 intervention
+  interventions:
+    count: 5
+    label: Critical Saves
+    value: 5
+  process:
+    yield:
+    - Resolved 100% failure rate (7/7) in Impact Test 'Front housing and back cover
+      separate'
+  war_stories:
+  - description: Redesigned hinge geometry to 'Full Circle' profile to arrest 100%
+      impact failure rate (7/7).
+    label: Structural Disintegration
+    value: Full Circle Hinge
+  - description: Mandated substrate change from Gloss to VDI-15 to resolve 85% paint
+      peel failure (SAT-127).
+    label: Paint Delamination
+    value: VDI-15 Texture
+  - description: Enforced 5-hour liquid glue cure process to bridge 0.3mm gap and
+      prevent Touch Panel lift-off.
+    label: Display Integrity
+    value: Liquid Glue vs Tape
+  - description: Engineered IR film stack and curved-glass pad printing to conceal
+      sensors and seal light leakage.
+    label: Dead Front Aesthetic
+    value: IR Film & Pad Printing
+  - description: Managed AUO/Biel partnership to align OLED Active Area with Glass
+      Viewing Area, overcoming code incompatibility.
+    label: OLED Integration
+    value: JDM Governance
 phase_stats:
   Design: 20
   Engineering: 50
   Production: 30
   Strategy: 0
-metrics:
-  financial:
-    margins:
-      [
-        "Managed High-Fidelity OLED integration costs via JDM partnership (FIH/Biel/AUO)",
-      ]
-  process:
-    yield:
-      [
-        "Resolved 100% failure rate (7/7) in Impact Test 'Front housing and back cover separate'",
-      ]
-  war_stories:
-    - label: "Structural Disintegration"
-      value: "Full Circle Hinge"
-      description: "Redesigned hinge geometry to 'Full Circle' profile to arrest 100% impact failure rate (7/7)."
-    - label: "Paint Delamination"
-      value: "VDI-15 Texture"
-      description: "Mandated substrate change from Gloss to VDI-15 to resolve 85% paint peel failure (SAT-127)."
-    - label: "Display Integrity"
-      value: "Liquid Glue vs Tape"
-      description: "Enforced 5-hour liquid glue cure process to bridge 0.3mm gap and prevent Touch Panel lift-off."
-    - label: "Dead Front Aesthetic"
-      value: "IR Film & Pad Printing"
-      description: "Engineered IR film stack and curved-glass pad printing to conceal sensors and seal light leakage."
-    - label: "OLED Integration"
-      value: "JDM Governance"
-      description: "Managed AUO/Biel partnership to align OLED Active Area with Glass Viewing Area, overcoming code incompatibility."
-  governance:
-    dcdCount: 27
-    ecos: ["Directed $3,000 tooling budget for VDI-15 intervention"]
-  interventions:
-    count: 5
-    label: "Critical Saves"
-    value: 5
-cyberspace:
-  enable: true
-  layout: linear
-  stickies: [] # Phase 2 Clean: Empty Deck
-gallery: []
+presentation_mode: flagship
+primary_home: mech
+productionScale: series
+slug: room-director
+tags:
+- Mechanical Engineering
+- Consumer Electronics
+- Haptics & Touch
+- Display Integration
+- Manufacturing Ops
+targets:
+- main
+- mech
+theme: hyperspace
+tier: 1
+title: Room Director (Sativa)
+toolchain:
+- Arena (PLM/BOM Management)
+- 'JIRA (Issue Tracking: SAT-XX)'
+- FIH (Manufacturing/Assembly)
+- Memtech (Injection Molding/Plastics)
+- Biel (Glass Vendor)
+- AUO (OLED Display)
 ---
 
 # Project Sativa (Room Director) Forensic Report
