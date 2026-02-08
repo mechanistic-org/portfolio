@@ -15,6 +15,12 @@ description: The official protocol for enriching project files using the "Hybrid
 
 This protocol defines the "Gold Standard" for ingesting forensic engineering data into the ErikNorris portfolio. It replaces ad-hoc file creation with a deterministic process that ensures **Asset Sovereignty**, **Readability**, and **Resume Continuity**.
 
+> [!CAUTION]
+> **ZERO DATA LOSS MANDATE**
+> Before applying this skill, you MUST check if the target project already has forensic data (MDX/JSON).
+> If data exists, you must **APPEND** or **MERGE**, never **OVERWRITE** without a backup.
+> YOU MUST run `python scripts/hydrate_content.py --reverse-json --slug [slug]` immediately after any manual titration to lock the state.
+
 ## The Architecture: "The Hybrid Contract"
 
 **The SME (Erik) provides:**
