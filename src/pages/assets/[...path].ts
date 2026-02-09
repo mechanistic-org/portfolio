@@ -3,6 +3,8 @@ import fs from "node:fs";
 import path from "node:path";
 import mime from "mime-types";
 
+export const prerender = false;
+
 // PROXY CONFIGURATION
 // ----------------------------------------------------------------------------
 // The absolute path to the R2_STAGING folder on your local machine.
