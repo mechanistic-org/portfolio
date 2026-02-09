@@ -1,0 +1,14 @@
+[
+	{
+		"AllowedOrigins": [
+			"https://eriknorris.com",
+			"https://www.eriknorris.com",
+			"http://localhost:4321",
+			"https://*.eriknorris-com.pages.dev"
+		],
+		"AllowedMethods": ["GET", "HEAD"],
+		"AllowedHeaders": ["*"],
+		"ExposeHeaders": ["ETag"],
+		"MaxAgeSeconds": 3000
+	}
+]

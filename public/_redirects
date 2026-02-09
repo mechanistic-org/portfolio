@@ -1,7 +1,0 @@
-# PROXY BYPASS (R2 Direct Access)
-# Since we deleted public/assets/r2 to fix the Windows File Watcher issue,
-# locally we use src/pages/assets/[...path].ts to serve files.
-# In Production, we use this redirect to send traffic directly to the R2 bucket.
-# Domain: assets.eriknorris.com (as defined in sync_r2.py bucket target)
-
-/assets/*  https://assets.eriknorris.com/:splat  302

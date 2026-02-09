@@ -52,12 +52,14 @@ const __dirname = path.dirname(__filename);
 
 // https://astro.build/config
 export default defineConfig({
-	// Use Static for Production (Cloudflare Pages) to avoid Worker limits
-	// Use Server for Local to support Keystatic API routes
-	output: isProduction ? "static" : "server",
-	// Only use the Cloudflare adapter in Server mode.
-	// In Static mode, we want a pure HTML build (no _worker.js) to bypass module limits.
-	adapter: isProduction ? undefined : cloudflare({ imageService: "compile" }),
+	// HYBRID ARCHITECTURE (Restored Feb 2026)
+	// We use "server" mode to enable the Asset Router (src/pages/assets/[...path].ts)
+	// along with Keystatic API routes.
+	output: "server",
+	// Cloudflare Adapter handles the Worker generation.
+	adapter: cloudflare({
+		imageService: "compile",
+	}),
 	site: "https://eriknorris.com",
 	redirects: isProduction
 		? {}
