@@ -1,5 +1,7 @@
 import { getCareerAssembly } from "../../../utils/mapCareerAssembly";
 
+export const prerender = true;
+
 export async function GET() {
 	try {
 		const assembly = await getCareerAssembly();
