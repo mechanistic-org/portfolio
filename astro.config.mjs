@@ -157,7 +157,7 @@ export default defineConfig({
 		resolve: {
 			alias: {
 				"@": path.resolve(__dirname, "./src"),
-				"react-dom/server": "react-dom/server.edge",
+				...(isProduction ? { "react-dom/server": "react-dom/server.edge" } : {}),
 			},
 		},
 	},

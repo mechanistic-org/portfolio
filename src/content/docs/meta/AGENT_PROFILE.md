@@ -130,6 +130,12 @@ description: "Archived legacy document."
 - **Response:** "Noise hides signal." Eliminate ALL warnings.
 - **Protocol:** Failure to clean unused variables is a sign of "Lazy Architecture." We do not ship noise.
 
+**The "Native Solution" Heuristic:**
+
+- **Trigger:** You feel the urge to write a "Post-Build Script" to fix the output of another tool (e.g., pruning the Worker bundle).
+- **Correction:** **STOP.** You are fighting the framework.
+- **Protocol:** Fix the Config (`astro.config.mjs`). Use the platform's native capabilities (`output: static`, `alias`) effectively. Do not build Rube Goldberg machines to patch upstream laziness.
+
 **The "Deployment Variance" Law:**
 
 - **Observation:** `npm run build` passes locally (32GB RAM) but fails on Cloudflare (3GB RAM).

@@ -113,9 +113,9 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Hybrid Architecture Restoration (The "True Router").**
-- **Next Step:** Verify Production Asset Loading (`/assets/c24/...`).
-- **Context:** **STATIC BUILD REJECTED.** We reverted to `output: server` to enable the `assets/[...path].ts` proxy in Production.
+- **Active Task:** **CI Stabilization (Type Safety).**
+- **Next Step:** Fix `SidebarNav.astro` TS error to clear GitHub Actions.
+- **Context:** **STATIC BUILD ACCEPTED.** We successfully deployed via `output: static` (Prod) + `react-dom/server.edge` alias. The "OOM" and "Worker Crash" are resolved.
 - **Critical Learning:** **"The Hallucination Trap"** - I claimed `public/assets` had 45k files to justify deletion. User called "Bullshit." Actual count 1.7k. I must verify scale before destruction.
 - **Key Decision:** **"The Mooted R2"** - We do not use R2 Redirects. The App Code (`src/pages/assets`) is the Sovereign Router.
 - **Action Item:** Monitor Cloudflare Build for "Worker Size" warnings (Hybrid Mode risk).
@@ -126,8 +126,10 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **Critical Learning:** **"The Static Import Trap"** - `import fs from 'node:fs'` in Astro Frontmatter is fatal for Cloudflare Workers, even if unused at runtime.
 - **Trap:** **"The Cache Mirage"** - Blaming the "Dev Server Cache" is a lazy diagnosis. Validate the _Source_ (File on Disk) and the _Destination_ (Live URL) before closing the ticket.
 - **Critical Learning:** **"The Prerender Trap"** - Moving logic from Runtime to Build Time (`prerender = true`) trades Bundle Size for **Build Memory**. This likely caused the Cloudflare Build to crash (OOM) due to `getCareerAssembly` loading the entire corpus (vector embeddings, JSON) into RAM during static generation.
+- **Critical Learning (Solved):** **"The MessageChannel Crash"** - Cloudflare Workers cannot run browser-based React (`react-dom/server`). We MUST alias it to `react-dom/server.edge` in `astro.config.mjs` if the Worker touches React code (e.g., via the Asset Proxy).
+- **Key Decision (Architecture):** **"The Hybrid Output"** - `output: isProduction ? "static" : "server"`. We use "Static" for Prod to eliminate the Worker bundle bloat, and "Server" for Local to support Keystatic.
 - **Trap:** **"The Deployment Variance"** - `npm run build` passing locally (32GB RAM) does NOT predict Cloudflare build success (3GB RAM). We must optimize the _Build Process_ memory usage, not just the Worker Bundle size.
-- **Action Item:** Verify `bazooka` and `webtv-galaxy` rendering after fleet upgrade.
+- **Action Item:** Fix `SidebarNav` types.
 
 * **Key Decision (Architecture):** **"The Flagship Standard"** - All Forensic Projects must use `presentation_mode: flagship`. This enables the "Hybrid" view (Body Text + HUD Drawer).
 * **Key Decision (Content):** **"No Text Decks"** - Text inside Gallery Stickies (`deck`) is banned. It belongs in the MDX Body. Gallery is for Visuals only.

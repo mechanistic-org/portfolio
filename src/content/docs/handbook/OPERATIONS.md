@@ -185,6 +185,20 @@ These scripts drive the "Forensic Data Factory."
 - **Cause:** Static imports (`import fs from "node:fs"`) or ungated runtime usage (`fs.readFileSync`) in Astro components being bundled for Cloudflare Workers.
 - **Fix:** Use dynamic imports (`await import("node:fs")`) inside `try/catch` blocks and gate runtime logic with `if (import.meta.env.DEV)` so it is dead-code-eliminated from the production worker.
 
+### ⚠️ "MessageChannel is not defined" (React Worker Crash)
+
+- **Symptom:** Cloudflare Deployment fails with `Uncaught ReferenceError: MessageChannel is not defined`.
+- **Cause:** The Worker bundle includes the _Browser_ build of `react-dom/server`, which relies on `MessageChannel` (scheduler). Workers require the _Edge_ build.
+- **Fix:** Alias the import in `astro.config.mjs` (Conditionally!):
+  ```js
+  resolve: {
+    alias: {
+      // ONLY apply in Production to avoid breaking Local Dev (Node)
+      ...(isProduction ? { "react-dom/server": "react-dom/server.edge" } : {}),
+    },
+  },
+  ```
+
 ---
 
 ## 4. Visual Engineering Protocols
