@@ -2,8 +2,13 @@
 import FossilGrid from "./FossilGrid.astro";
 
 // Assets
-const LOGIC_MAP = "/assets/vectors/EN_logic_map.svg";
-const HERO_IMG = "/assets/branding/EN_logo_white_1024.png";
+// Assets
+import logicMap from "@assets/vectors/EN_logic_map.svg";
+// import heroImg from "@assets/branding/EN_logo_white_1024.png";
+const heroImg = { src: "/assets/branding/logo.png" };
+
+const LOGIC_MAP = logicMap.src;
+const HERO_IMG = heroImg.src;
 ---
 
 <section class="relative min-h-[300vh]">

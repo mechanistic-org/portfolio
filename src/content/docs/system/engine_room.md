@@ -1,11 +1,12 @@
 ---
-title: 'The Engine Room: Architecture & Maintenance'
+title: "The Engine Room: Architecture & Maintenance"
 slug: the_engine_room
 sidebar:
   group: Handbook
   order: 3
-description: 'Documentation for The Engine Room: Architecture & Maintenance.'
+description: "Documentation for The Engine Room: Architecture & Maintenance."
 ---
+
 # The Engine Room: Architecture & Maintenance
 
 > **Role:** The Engineer / The Mechanic
@@ -52,6 +53,7 @@ The **Exploded View** is the primary navigation interface, visualizing the caree
 - **Mind (Payload):** Raw Intelligence Boluses (`_intelligence.md`).
 
 ---
+
 ## 1.5 The Agentic Layer (The Brain)
 
 The IDE is now augmented with a persistent brain located in `.agent/`. This moves the workflow from "Manual Prompts" to "Autonomous Reflexes."
@@ -61,6 +63,7 @@ The IDE is now augmented with a persistent brain located in `.agent/`. This move
 - **Workflows (`.agent/workflows`):** Deterministic scripts for Scaffolding and Deployment.
 
 ---
+
 ## 1.6 The Stealth Protocol (Prompt Architecture)
 
 **The Problem:** The NotebookLM Audio Model reads "System Instructions" as content.
@@ -73,6 +76,7 @@ The IDE is now augmented with a persistent brain located in `.agent/`. This move
 **Result:** High-Fidelity Audio without "Protocol Leakage."
 
 ---
+
 ## 2. The Theme Engine
 
 The site supports multiple "Realms" (Themes) controlled by Frontmatter.
@@ -87,6 +91,7 @@ The site supports multiple "Realms" (Themes) controlled by Frontmatter.
 Set `theme: "hyperspace"` in the project frontmatter.
 
 ---
+
 ## 3. Deployment Protocol (CI/CD)
 
 **Trigger:** `git push` to `main`.
@@ -105,6 +110,7 @@ Set `theme: "hyperspace"` in the project frontmatter.
 - **Rule:** NEVER commit heavy assets to `d:\GitHub\ErikNorris`.
 
 ---
+
 ### 7. Deployment Protocol (The 9k Limit)
 
 The system uses a **Split-Output** strategy to survive.
@@ -148,7 +154,7 @@ taskkill /F /IM node.exe
 ### 404 on Assets
 
 **Symptom:** Images missing in Production.
-**Cause:** "Physical Asset Law" violation. You referenced a local path (`/assets/r2/`) that only exists on your laptop.
+**Cause:** "Physical Asset Law" violation. You referenced a local path (`/assets/`) that only exists on your laptop.
 **Fix:** Ensure the Ingestion Script ran and verified the asset exists in the `R2_STAGING` bucket.
 
 ### Build Crash (Heap OOM)
@@ -176,6 +182,7 @@ The **Deep HUD** is a metadata layer injected into every project to surface "Eng
 - **Physical:** Material Composition (Plastic/Metal/PCB ratio).
 
 ---
+
 ## 6. The Dreamjob Principle (Future State)
 
 The timeline includes a **"Dreamjob" Node (2025-2040)**.
@@ -186,6 +193,7 @@ The timeline includes a **"Dreamjob" Node (2025-2040)**.
 - **Implementation:** A standard `projet` entry with `date: 2025-11-23` (Future) and high-fidelity "aspirational" metadata.
 
 ---
+
 ## 5. Maintenance Scripts
 
 Located in `scripts/`:

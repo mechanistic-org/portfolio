@@ -18,7 +18,7 @@
 				"Product Testing",
 				"Iterative Prototyping"
 			],
-			"img": "/assets/r2/sc48/SC48-hero-01-sm.webp"
+			"img": "/assets/sc48/SC48-hero-01-sm.webp"
 		},
 		{
 			"id": "c24",
@@ -33,7 +33,7 @@
 			"category": "Audio Console",
 			"industry": "Pro Audio",
 			"skills": ["DFM", "Thermal Design", "Cost Reduction"],
-			"img": "/assets/r2/c24/hero-sm.webp"
+			"img": "/assets/c24/hero-sm.webp"
 		},
 		{
 			"id": "xbox-redesign",
@@ -122,7 +122,7 @@
 			"category": "Audio Console",
 			"industry": "Pro Audio",
 			"skills": ["Design for Manufacturing (DFM)", "CAD (Computer-Aided Design)", "Prototyping"],
-			"img": "/assets/r2/project-003/hero-sm.webp"
+			"img": "/assets/project-003/hero-sm.webp"
 		},
 		{
 			"id": "Project 001 (Vandross)",
@@ -176,7 +176,7 @@
 				"Testing Automation",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/freelance/hero-sm.webp"
+			"img": "/assets/freelance/hero-sm.webp"
 		},
 		{
 			"id": "Makeline",
@@ -196,7 +196,7 @@
 				"Iterative Prototyping",
 				"Reliability Testing"
 			],
-			"img": "/assets/r2/makeline/hero-sm.webp"
+			"img": "/assets/makeline/hero-sm.webp"
 		},
 		{
 			"id": "Dispensers",
@@ -216,7 +216,7 @@
 				"Testing Automation",
 				"Prototyping"
 			],
-			"img": "/assets/r2/dispensers/hero-sm.webp"
+			"img": "/assets/dispensers/hero-sm.webp"
 		},
 		{
 			"id": "Backsplash",
@@ -236,7 +236,7 @@
 				"Iterative Prototyping",
 				"Testing Automation"
 			],
-			"img": "/assets/r2/backsplash/hero-sm.webp"
+			"img": "/assets/backsplash/hero-sm.webp"
 		},
 		{
 			"id": "Portion Cup",
@@ -256,7 +256,7 @@
 				"Product Testing",
 				"Prototyping"
 			],
-			"img": "/assets/r2/portion-cup/hero-sm.webp"
+			"img": "/assets/portion-cup/hero-sm.webp"
 		},
 		{
 			"id": "Pet Scale",
@@ -276,7 +276,7 @@
 				"Data Analysis",
 				"Design Planning"
 			],
-			"img": "/assets/r2/pet-scale/hero-sm.webp"
+			"img": "/assets/pet-scale/hero-sm.webp"
 		},
 		{
 			"id": "battery lock",
@@ -296,7 +296,7 @@
 				"Prototyping",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/battery-lock/hero-sm.webp"
+			"img": "/assets/battery-lock/hero-sm.webp"
 		},
 		{
 			"id": "IOT module",
@@ -316,7 +316,7 @@
 				"Product Testing",
 				"Prototyping"
 			],
-			"img": "/assets/r2/iot-module/hero-sm.webp"
+			"img": "/assets/iot-module/hero-sm.webp"
 		},
 		{
 			"id": "bay wheels",
@@ -336,7 +336,7 @@
 				"Prototyping",
 				"Product Testing"
 			],
-			"img": "/assets/r2/bay-wheels/hero-sm.webp"
+			"img": "/assets/bay-wheels/hero-sm.webp"
 		},
 		{
 			"id": "Switches",
@@ -356,7 +356,7 @@
 				"Usability Testing",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/switches/hero-sm.webp"
+			"img": "/assets/switches/hero-sm.webp"
 		},
 		{
 			"id": "Extension Switches",
@@ -376,7 +376,7 @@
 				"Reliability Testing",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/extension-switches/hero-sm.webp"
+			"img": "/assets/extension-switches/hero-sm.webp"
 		},
 		{
 			"id": "Room Director",
@@ -396,7 +396,7 @@
 				"Tolerance Analysis",
 				"CAD (Computer-Aided Design)"
 			],
-			"img": "/assets/r2/room-director/hero-sm.webp"
+			"img": "/assets/room-director/hero-sm.webp"
 		},
 		{
 			"id": "Wall Plates",
@@ -416,7 +416,7 @@
 				"Reliability Testing",
 				"Testing Automation"
 			],
-			"img": "/assets/r2/wall-plates/hero-sm.webp"
+			"img": "/assets/wall-plates/hero-sm.webp"
 		},
 		{
 			"id": "Base",
@@ -436,7 +436,7 @@
 				"Usability Testing",
 				"Design for Manufacturing (DFM)"
 			],
-			"img": "/assets/r2/base/hero-sm.webp"
+			"img": "/assets/base/hero-sm.webp"
 		},
 		{
 			"id": "Glyph 2",
@@ -456,7 +456,7 @@
 				"CAD (Computer-Aided Design)",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/glyph-2/hero-sm.webp"
+			"img": "/assets/glyph-2/hero-sm.webp"
 		},
 		{
 			"id": "Avegant Glyph",
@@ -470,7 +470,7 @@
 			"category": "Wearable / AR",
 			"industry": "Consumer Electronics",
 			"skills": [],
-			"img": "/assets/r2/avegant-glyph/hero-sm.webp"
+			"img": "/assets/avegant-glyph/hero-sm.webp"
 		},
 		{
 			"id": "BFD",
@@ -490,7 +490,7 @@
 				"Reliability Testing",
 				"Testing Automation"
 			],
-			"img": "/assets/r2/bfd/hero-sm.webp"
+			"img": "/assets/bfd/hero-sm.webp"
 		},
 		{
 			"id": "Strato",
@@ -510,7 +510,7 @@
 				"Iterative Prototyping",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/strato/hero-sm.webp"
+			"img": "/assets/strato/hero-sm.webp"
 		},
 		{
 			"id": "Cinema One",
@@ -530,7 +530,7 @@
 				"Prototyping",
 				"Iterative Prototyping"
 			],
-			"img": "/assets/r2/cinema-one/hero-sm.webp"
+			"img": "/assets/cinema-one/hero-sm.webp"
 		},
 		{
 			"id": "m700",
@@ -551,7 +551,7 @@
 				"Design Research",
 				"Lean Manufacturing"
 			],
-			"img": "/assets/r2/m700/hero-sm.webp"
+			"img": "/assets/m700/hero-sm.webp"
 		},
 		{
 			"id": "dv700",
@@ -572,7 +572,7 @@
 				"Business Acumen",
 				"Assembly Processes"
 			],
-			"img": "/assets/r2/dv700/hero-sm.webp"
+			"img": "/assets/dv700/hero-sm.webp"
 		},
 		{
 			"id": "Disc Cartridges",
@@ -592,7 +592,7 @@
 				"CAD (Computer-Aided Design)",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/disc-cartridges/hero-sm.webp"
+			"img": "/assets/disc-cartridges/hero-sm.webp"
 		},
 		{
 			"id": "K-Remote",
@@ -612,7 +612,7 @@
 				"Product Testing",
 				"Prototyping"
 			],
-			"img": "/assets/r2/k-remote/hero-sm.webp"
+			"img": "/assets/k-remote/hero-sm.webp"
 		},
 		{
 			"id": "Weemote",
@@ -632,7 +632,7 @@
 				"Materials Knowledge",
 				"CAD (Computer-Aided Design)"
 			],
-			"img": "/assets/r2/weemote/hero-sm.webp"
+			"img": "/assets/weemote/hero-sm.webp"
 		},
 		{
 			"id": "M500",
@@ -652,7 +652,7 @@
 				"Materials Knowledge",
 				"Prototyping"
 			],
-			"img": "/assets/r2/m500/hero-sm.webp"
+			"img": "/assets/m500/hero-sm.webp"
 		},
 		{
 			"id": "M300",
@@ -672,7 +672,7 @@
 				"Materials Knowledge",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/m300/hero-sm.webp"
+			"img": "/assets/m300/hero-sm.webp"
 		},
 		{
 			"id": "KSERVER-1500",
@@ -692,7 +692,7 @@
 				"Iterative Prototyping",
 				"Reliability Testing"
 			],
-			"img": "/assets/r2/kserver-1500/hero-sm.webp"
+			"img": "/assets/kserver-1500/hero-sm.webp"
 		},
 		{
 			"id": "KVAULT-10",
@@ -712,7 +712,7 @@
 				"Technical Communication",
 				"Business Acumen"
 			],
-			"img": "/assets/r2/kvault-10/hero-sm.webp"
+			"img": "/assets/kvault-10/hero-sm.webp"
 		},
 		{
 			"id": "Jewel",
@@ -732,7 +732,7 @@
 				"Usability Testing",
 				"Prototyping"
 			],
-			"img": "/assets/r2/jewel/hero-sm.webp"
+			"img": "/assets/jewel/hero-sm.webp"
 		},
 		{
 			"id": "KSYSTEM-120",
@@ -752,7 +752,7 @@
 				"Materials Knowledge",
 				"Testing Automation"
 			],
-			"img": "/assets/r2/ksystem-120/hero-sm.webp"
+			"img": "/assets/ksystem-120/hero-sm.webp"
 		},
 		{
 			"id": "KSERVER-5000",
@@ -772,7 +772,7 @@
 				"Tolerance Analysis",
 				"Reliability Testing"
 			],
-			"img": "/assets/r2/kserver-5000/hero-sm.webp"
+			"img": "/assets/kserver-5000/hero-sm.webp"
 		},
 		{
 			"id": "speed-reader",
@@ -791,7 +791,7 @@
 				"Testing Automation",
 				"Design for Manufacturing (DFM)"
 			],
-			"img": "/assets/r2/speed-reader/hero-sm.webp"
+			"img": "/assets/speed-reader/hero-sm.webp"
 		},
 
 		{
@@ -813,7 +813,7 @@
 				"CAD (Computer-Aided Design)",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/kplayer-300/hero-sm.webp"
+			"img": "/assets/kplayer-300/hero-sm.webp"
 		},
 		{
 			"id": "kplayer-6000",
@@ -833,7 +833,7 @@
 				"Tolerance Analysis",
 				"Testing Automation"
 			],
-			"img": "/assets/r2/kplayer-6000/hero-sm.webp"
+			"img": "/assets/kplayer-6000/hero-sm.webp"
 		},
 		{
 			"id": "KPLAYER-5000",
@@ -853,7 +853,7 @@
 				"Reliability Testing",
 				"Product Testing"
 			],
-			"img": "/assets/r2/kplayer-5000/hero-sm.webp"
+			"img": "/assets/kplayer-5000/hero-sm.webp"
 		},
 		{
 			"id": "KPLAYER-2500",
@@ -873,7 +873,7 @@
 				"Testing Automation",
 				"Tolerance Analysis"
 			],
-			"img": "/assets/r2/kplayer-2500/hero-sm.webp"
+			"img": "/assets/kplayer-2500/hero-sm.webp"
 		},
 		{
 			"id": "KSERVER-2500",
@@ -893,7 +893,7 @@
 				"Product Testing",
 				"Design for Manufacturing (DFM)"
 			],
-			"img": "/assets/r2/kserver-2500/hero-sm.webp"
+			"img": "/assets/kserver-2500/hero-sm.webp"
 		},
 		{
 			"id": "Mbox 2 Micro",
@@ -913,7 +913,7 @@
 				"Prototyping",
 				"Usability Testing"
 			],
-			"img": "/assets/r2/mbox-2-micro/hero-sm.webp"
+			"img": "/assets/mbox-2-micro/hero-sm.webp"
 		},
 		{
 			"id": "Rack 003",
@@ -933,7 +933,7 @@
 				"Data Analysis",
 				"Business Acumen"
 			],
-			"img": "/assets/r2/rack-003/hero-sm.webp"
+			"img": "/assets/rack-003/hero-sm.webp"
 		},
 		{
 			"id": "Mbox 2 Mini",
@@ -953,7 +953,7 @@
 				"Testing Automation",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/mbox-2-mini/hero-sm.webp"
+			"img": "/assets/mbox-2-mini/hero-sm.webp"
 		},
 		{
 			"id": "Mbox 2 Pro",
@@ -973,7 +973,7 @@
 				"Usability Testing",
 				"Materials Knowledge"
 			],
-			"img": "/assets/r2/mbox-2-pro/hero-sm.webp"
+			"img": "/assets/mbox-2-pro/hero-sm.webp"
 		},
 		{
 			"id": "Digi 003",
@@ -993,7 +993,7 @@
 				"Design for Manufacturing (DFM)",
 				"Product Testing"
 			],
-			"img": "/assets/r2/digi-003/hero-sm.webp"
+			"img": "/assets/digi-003/hero-sm.webp"
 		},
 		{
 			"id": "c24",

@@ -1,11 +1,12 @@
 ---
-title: 'The Studio: Building & Customizing'
+title: "The Studio: Building & Customizing"
 slug: the_studio
 sidebar:
   group: Handbook
   order: 2
-description: 'Documentation for The Studio: Building & Customizing.'
+description: "Documentation for The Studio: Building & Customizing."
 ---
+
 # The Studio: Building & Customizing
 
 > **Role:** The Architect / The Visual Designer
@@ -51,6 +52,7 @@ We prioritize geometry over texture hacks.
 > 3. Ensure your GLB export has **Tangents** checked.
 
 ---
+
 ## 2. The Vector Pipeline (Blueprints)
 
 We use SVG lines to create "Technical Blueprint" assets.
@@ -79,6 +81,7 @@ import Blueprint from '../assets/blueprint.svg?raw';
 ```
 
 ---
+
 ## 3. The Project Template ("Machine Interface")
 
 When creating a new case study in `src/content/docs/project/`, use these Scrollytelling components.
@@ -114,10 +117,11 @@ Horizontal scrolling sequence for engineering steps.
 Standard GLB viewer.
 
 ```astro
-<ModelViewer src="/assets/r2/xbox/controller.glb" alt="Controller" />
+<ModelViewer src="/assets/xbox/controller.glb" alt="Controller" />
 ```
 
 ---
+
 ## 4. Material Recipes
 
 ### Matte Forged Carbon

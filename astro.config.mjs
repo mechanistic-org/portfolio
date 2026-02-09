@@ -127,7 +127,11 @@ export default defineConfig({
 		server: {
 			fs: {
 				// Allow serving files from the sibling 'quantum-assets' repo via Symlinks
-				allow: ["../eriknorris-assets", "."],
+				allow: ["."],
+			},
+			watch: {
+				// Use absolute path to ensure Windows watcher ignores the Junction
+				ignored: [path.resolve(__dirname, "./public/assets/**"), "**/public/assets/**"],
 			},
 		},
 		ssr: {

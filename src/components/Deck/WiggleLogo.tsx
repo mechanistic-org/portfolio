@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+const logo = { src: "/assets/branding/logo.png" };
 
 export default function WiggleLogo() {
 	return (
@@ -22,7 +23,7 @@ export default function WiggleLogo() {
 				className="relative z-10"
 			>
 				<img
-					src="/assets/branding/EN_logo_white_1024.png"
+					src={logo.src}
 					alt="Erik Norris Quantum Logo"
 					className="h-full w-full object-contain"
 				/>

@@ -173,6 +173,12 @@ These scripts drive the "Forensic Data Factory."
 - **Cause:** Stale `node.exe` process holding the port.
 - **Fix:** `taskkill /F /IM node.exe`.
 
+### ⚠️ "The Asset Mirage" (Dev vs Live Divergence)
+
+- **Symptom:** Audio/Image works in `npm run dev` (Localhost) but returns 404 on Production.
+- **Cause:** Local filesystem resolution (Symlinks) works, but the Asset Pipeline failed to upload the file to R2 or the `public` folder commit was incomplete.
+- **Fix:** Verify `public/assets/r2` contents. If missing, manually stage the asset in `R2_STAGING` and run `process_assets.py --force`.
+
 ---
 
 ## 4. Visual Engineering Protocols

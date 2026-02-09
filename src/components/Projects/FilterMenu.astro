@@ -7,6 +7,8 @@ interface Props {
 }
 
 const { sectors, categories, tools, clients } = Astro.props;
+// import logo from "@assets/branding/EN_logo_white_1024.png";
+const logo = { src: "/assets/branding/logo.png" };
 ---
 
 <div class="filter-menu-container group relative inline-block text-left">
@@ -15,7 +17,7 @@ const { sectors, categories, tools, clients } = Astro.props;
 		class="text-primary flex items-center gap-2 font-mono text-sm font-bold tracking-widest uppercase transition-colors hover:text-white"
 	>
 		<!-- Logo -->
-		<img src="/assets/branding/EN_logo_white_1024.png" alt="View" class="h-5 w-auto" />
+		<img src={logo.src} alt="View" class="h-5 w-auto" />
 		<span
 			id="active-filter-count"
 			class="bg-primary hidden rounded-full px-1.5 py-0.5 text-[10px] text-black">0</span

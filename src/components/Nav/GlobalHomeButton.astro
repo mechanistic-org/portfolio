@@ -1,10 +1,11 @@
 ---
-
+// import logo from "@assets/branding/EN_logo_white_1024.png";
+const logo = { src: "/assets/branding/logo.png" };
 ---
 
 <a href="/" aria-label="Home" class="fixed top-0 left-0 z-50 flex items-center px-6 py-4">
 	<img
-		src="/assets/branding/EN_logo_white_1024.png"
+		src={logo.src}
 		alt="Home"
 		class="h-8 w-auto opacity-80 transition-opacity hover:opacity-100"
 		style="height: 2rem;"

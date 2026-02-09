@@ -24,11 +24,14 @@ export function getAssetUrl(path: string, sourceBucket?: SiteVariant): string {
 	// For now, we allow it if the code explicitly asked for it (sourceBucket param).
 	// If no sourceBucket was passed, it defaults to local, which is safe.
 
-	// Note: We might need to handle /assets/r2/ prefix if it's already in the path
+	// Note: We need to strip /assets/ prefix if it's already in the path
 	// Since we are moving to absolute URLs, we should likely strip any legacy proxy paths.
 	// Legacy Path: /assets/r2/project/image.jpg
 	// Target: https://assets.mechanistic.com/project/image.jpg
-	const finalPath = cleanPath.replace(/^assets\/r2\//, "");
+	const finalPath = cleanPath.replace(
+		/^(\/)?assets\/(r2\/)?/,
+		"",
+	); /* Strip /assets/ and optional r2/ */
 
 	return `${baseUrl}/${finalPath}`;
 }

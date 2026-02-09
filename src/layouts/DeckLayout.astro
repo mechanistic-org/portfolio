@@ -4,6 +4,7 @@ interface Props {
 }
 
 const { title } = Astro.props;
+import noise from "@assets/noise.png";
 ---
 
 <!doctype html>
@@ -31,7 +32,7 @@ const { title } = Astro.props;
 		{/* Cinematic Grain Overlay */}
 		<div
 			class="pointer-events-none fixed inset-0 z-50 opacity-[0.03] mix-blend-overlay"
-			style="background-image: url('/assets/noise.png');"
+			style={`background-image: url('${noise.src}');`}
 		>
 		</div>
 	</body>

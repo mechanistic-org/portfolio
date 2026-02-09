@@ -44,7 +44,7 @@ Failure to optimize assets results in 404s, slow loads, and "Structure Rot."
 
 ## Troubleshooting
 
-- **Images 404:** Did you run `process_images.py`? Check `public/assets/r2/{slug}/bubbles`.
+- **Images 404:** Did you run `process_images.py`? Check `public/assets/{slug}/bubbles`.
 - **Text Missing:** Did you create `deck.md` in the bubble folder?
 - **Layout Ignored:** Did you create `config.json` in the bubble folder?
 

@@ -20,6 +20,7 @@ These tasks are now automated via Slash Commands in the IDE.
 - **New Project:** `/scaffold-project` (Generates strict C24 Schema).
 - **Deploy:** `/deploy-production` (Verify Build + Push to Main).
 - **Hack Pack:** `scripts/compile_hack_pack.py` (Generates `BOLUS` + `REPORT` + `PODCAST`).
+- **Master Resume:** [`/resume/Erik_Norris_Resume_Current.pdf`](/resume/Erik_Norris_Resume_Current.pdf)
 
 ### The Toolchain Trinity (Core Scripts)
 
@@ -280,7 +281,7 @@ These scripts are the engine of the "Forensic Data Factory."
 
 - **Source of Truth:** `src/config/resume_master.ts` (Structured Content).
 - **Generation:** Interactive Browser Print (`/resume`) -> Save to PDF.
-- **Canonical Path:** `public/assets/resume/Erik_Norris_Sr_Staff_Forensic_Architect_[YEAR].pdf`.
+- **Canonical Path:** `public/resume/Erik_Norris_Sr_Staff_Forensic_Architect_[YEAR].pdf`.
 - **Legacy Vanity URL (`resume.eriknorris.com`):**
   - **Mechanism:** Cloudflare Page Rule redirects `resume.eriknorris.com` -> `https://assets.eriknorris.com/resume/Erik_Norris_CV.pdf`.
   - **The Fix:** We must upload the _new_ canonical PDF to R2 under the _old_ filename (`Erik_Norris_CV.pdf`) to maintain the link.

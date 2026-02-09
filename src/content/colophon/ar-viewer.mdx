@@ -7,24 +7,29 @@ order: 2
 ---
 
 ## The Challenge
+
 > **Context:** Hardware is physical. A 2D image of a complex assembly (like a server rack or turbine) fails to convey scale, depth, and spatial relationships.
 
 We needed a way to bring the "Physical Asset" to the web without requiring the user to download a 50MB app or install a plugin. The goal was **Zero-Friction Immersion**.
 
 ## Engineering Approach
+
 We selected Google's `<model-viewer>` web component for its robust feature set and "Zero-Runtime" overhead (it only loads the 3D engine when needed).
 
-*   **Adaptive Lighting:** The component detects the asset type. If it's a "Project" (machined part), it uses a neutral studio environment. If it's the "Neil Armstrong" fallback, it switches to a high-contrast `moon_1k.hdr` environment map.
-*   **ARCore Integration:** On mobile devices, the component exposes an "AR" button. This leverages the native iOS/Android AR Quick Look viewers, allowing the user to place the server rack or engine part directly on their desk.
-*   **Performance:** We use `.glb` (binary glTF) compression to keep assets under 5MB, ensuring they load as fast as a high-res image.
+- **Adaptive Lighting:** The component detects the asset type. If it's a "Project" (machined part), it uses a neutral studio environment. If it's the "Neil Armstrong" fallback, it switches to a high-contrast `moon_1k.hdr` environment map.
+- **ARCore Integration:** On mobile devices, the component exposes an "AR" button. This leverages the native iOS/Android AR Quick Look viewers, allowing the user to place the server rack or engine part directly on their desk.
+- **Performance:** We use `.glb` (binary glTF) compression to keep assets under 5MB, ensuring they load as fast as a high-res image.
 
 ## Impact
-*   **Engagement:** Users spend 3x longer on pages with 3D assets.
-*   **Clarity:** "View in Room" capability allows non-technical stakeholders to understand the physical scale of the hardware immediately.
-*   **Legacy:** This feature turns the portfolio from a "Brochure" into a "Virtual Showroom".
+
+- **Engagement:** Users spend 3x longer on pages with 3D assets.
+- **Clarity:** "View in Room" capability allows non-technical stakeholders to understand the physical scale of the hardware immediately.
+- **Legacy:** This feature turns the portfolio from a "Brochure" into a "Virtual Showroom".
 
 ### Project Artifacts
-{/* <model-viewer src="/assets/r2/neil-armstrong/model.glb" alt="Neil Armstrong" ar ar-modes="webxr scene-viewer quick-look" environment-image="/assets/moon_1k.hdr" shadow-intensity="1" camera-controls touch-action="pan-y"></model-viewer> */}
-<div class="p-4 border border-yellow-500/50 bg-yellow-500/10 text-yellow-200 font-mono text-sm">
-  [System Note: 3D Assets Pending Ingestion]
+
+{/* <model-viewer src="/assets/neil-armstrong/model.glb" alt="Neil Armstrong" ar ar-modes="webxr scene-viewer quick-look" environment-image="/assets/moon_1k.hdr" shadow-intensity="1" camera-controls touch-action="pan-y"></model-viewer> */}
+
+<div class="border border-yellow-500/50 bg-yellow-500/10 p-4 font-mono text-sm text-yellow-200">
+	[System Note: 3D Assets Pending Ingestion]
 </div>

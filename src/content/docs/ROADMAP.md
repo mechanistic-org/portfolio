@@ -408,7 +408,7 @@ sidebar:
 - **[Feature] Raw Mode:** Added `/raw/[slug]` endpoint and UI button to view raw markdown source, enforcing the "Datasheet" aesthetic.
 - **[Audit] Gap Tightening:** Verified and standardized `gap-8` (reduced from `gap-12`) for higher information density in Project Layouts.
 - **[Style] Grid System:** Refined global grid size from 50px to 40px (Tailwind scale) and tuned glassmorphism for better legibility.
-- **[Fix] Asset Pipeline:** Hardened `ingest_data.py` to auto-correct local asset paths (`/assets/r2/`) to remote R2 URLs in manual content, enforcing the "Physical Asset Law".
+- **[Fix] Asset Pipeline:** Hardened `ingest_data.py` to auto-correct local asset paths (`/assets/`) to remote R2 URLs in manual content, enforcing the "Physical Asset Law".
 - **[Fix] ModelViewer:** Restored "Neil Armstrong" resilience fallback for components missing a custom GLB.
 - **[SEO] Metadata:** Optimized Homepage title ("High-Performance Mechanical Design") and meta description.
 - **[Fix] Chart Layout:** Resolved regression where Skill/Part graphs were stacking vertically on desktop. Restored side-by-side grid layout (`grid-cols-1 md:grid-cols-2`) in `[...slug].astro`.

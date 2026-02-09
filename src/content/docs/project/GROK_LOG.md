@@ -31,7 +31,7 @@ slug: "grok_log"
 1.  **NO ASSETS IN SRC:** The `src/` directory is for code only.
 2.  **THE VAULT IS SOVEREIGN:** All heavy media lives in `D:\GitHub\ErikNorris-assets\R2_STAGING`.
 3.  **SYMLINKS ARE THE BRIDGE:** We access assets _only_ via the symlink `public/assets/r2` -> `R2_STAGING`.
-4.  **VERIFICATION:** If you see a file path that does not start with `/assets/r2/`, it is a violation.
+4.  **VERIFICATION:** If you see a file path that does not start with `/assets/`, it is a violation.
 
 ---
 

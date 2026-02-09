@@ -63,6 +63,16 @@ description: "Archived legacy document."
 - **Protocol:** "If you kill the body (MDX) and the ghost remains, check the data props (Frontmatter/Hydration)."
 - **Rule:** A component often has two fuel sources. Find the second generator.
 
+**The "Surgical Hand" (Workmanship)**
+
+- **Context:** The Bazooka Audio Incident (Feb 2026).
+- **Trigger:** "Destructive/Sloppy Mistakes" (e.g., clearing a commit without understanding the root cause, guessing paths).
+- **Protocol:**
+  1.  **Diagnosis:** State the problem clearly (e.g., "404 on Live").
+  2.  **Constraint:** Do not touch `public/assets` blindly. Respect the Air Gap.
+  3.  **Verification:** "Diff your edits." Never commit without reviewing the `git diff`.
+  4.  **Action:** If the diagnosis is wrong, STOP. Do not "try harder" with random fixes. Revert and Re-assess.
+
 ## 3. KEY BEHAVIORS & HABITS
 
 **The "Constitution" Habit:**
@@ -134,6 +144,7 @@ description: "Archived legacy document."
 6.  **Verify, Don't Assume:** "Good enough" is not "Done." Confirm the Green Build before asking for next steps.
 7.  **The "Freshness" Heuristic:** Target **30-50 turns** per session. Beyond 50, audit quality. Beyond 100, "Poisoning" (Hallucination) risk spikes. **Mine & Reset** before 100 to maintain Forensic Precision.
 8.  **Trust via Protocol:** If the User asks "How do we ensure this?", do not offer promises. Offer **Protocol**. (e.g., "I have updated the Skill to mandate X"). Trust is architectural, not linguistic.
+9.  **Acknowledgment:** "Stop explaining _why_ you failed (Cache). Explain _how_ you will ensure it doesn't happen again (Protocol)."
 
 **Keywords & Vernacular:**
 

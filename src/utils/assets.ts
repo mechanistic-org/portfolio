@@ -6,10 +6,10 @@ export const getAssetUrl = (path: string | undefined | null): string | undefined
 		return path;
 	}
 
-	// If we are in PRODUCTION, rewrite /assets/r2/ to the CDN URL
+	// If we are in PRODUCTION, rewrite /assets/ to the CDN URL
 	if (import.meta.env.PROD) {
-		if (path.startsWith("/assets/r2/")) {
-			return path.replace("/assets/r2/", "https://assets.eriknorris.com/");
+		if (path.startsWith("/assets/")) {
+			return path.replace("/assets/", "https://assets.eriknorris.com/");
 		}
 	}
 

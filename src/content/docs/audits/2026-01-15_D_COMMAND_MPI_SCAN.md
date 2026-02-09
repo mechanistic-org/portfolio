@@ -16,4 +16,4 @@ sidebar:
 - Content Deep Dive: CONFIRMED
 - Forensic Summary: PRESENT
 - Cast & Crew: PRESENT
-- Gallery Assets: VERIFIED (/assets/r2/d-command/bubbles/...)
+- Gallery Assets: VERIFIED (/assets/d-command/bubbles/...)

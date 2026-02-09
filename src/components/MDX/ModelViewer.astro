@@ -8,7 +8,9 @@ interface Props {
 	autoRotate?: boolean;
 }
 
-const DEFAULT_POSTER = "/assets/branding/EN_logo_white_1024.png";
+// import logo from "@assets/branding/EN_logo_white_1024.png";
+const logo = { src: "/assets/branding/logo.png" };
+const DEFAULT_POSTER = logo.src;
 const NEIL_ARMSTRONG_GLB = "https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb";
 const MOON_ENV = "https://modelviewer.dev/shared-assets/environments/moon_1k.hdr";
 

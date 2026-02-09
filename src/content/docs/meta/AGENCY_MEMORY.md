@@ -118,6 +118,8 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **Recent Win:** Implemented **"Three Body Protocol"** across all 5 projects. Data is locked via `reverse_hydrate_json`.
 - **Governance:** **"Zero Data Loss Mandate"** - `Forensic Titration` skill updated to forbid overwrites.
 - **Critical Learning:** **"The Commit Trap"** - Committing locally does not trigger Cloudflare. Explicit `git push` is required.
+- **Critical Learning:** **"The Surgical Hand"** - A fix is not a fix until it survives a `git diff` and a Live Verification. I failed to respect the "Air Gap" by guessing paths (`public/assets/bazooka` listing attempt).
+- **Trap:** **"The Cache Mirage"** - Blaming the "Dev Server Cache" is a lazy diagnosis. Validate the _Source_ (File on Disk) and the _Destination_ (Live URL) before closing the ticket.
 - **Action Item:** Verify `bazooka` and `webtv-galaxy` rendering after fleet upgrade.
 
 * **Key Decision (Architecture):** **"The Flagship Standard"** - All Forensic Projects must use `presentation_mode: flagship`. This enables the "Hybrid" view (Body Text + HUD Drawer).
