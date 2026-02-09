@@ -582,3 +582,31 @@ slug: "grok_log"
     - **Backup (`*.backup.md`):** Script Write Only. (The Snapshot).
 2.  **NO UPSTREAM CLOBBER:** The Script is FORBIDDEN from writing to the Source `.md` file. It may only write to the Backup.
 3.  **MANUAL RECOVERY:** If Live is mangled, we restore from Source, not from a potentially corrupted Backup.
+
+---
+
+## 📡 XLIII. The Law of the Router (The Hybrid Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-08
+**Context:** We attempted to use "Static" build mode with Cloudflare `_redirects` to serve assets from R2. This failed because it relied on "dumb" redirects that couldn't handle path normalization (`r2/` prefix).
+**The Law:**
+
+1.  **HYBRID IS MANDATORY:** The project MUST operate in `output: "server"` mode with the Cloudflare Adapter. Static generation is forbidden for the production build.
+2.  **THE TRUE ROUTER:** `src/pages/assets/[...path].ts` is the **Single Source of Truth** for asset resolution. It handles:
+    - **Local:** Reading from Disk (`D:\GitHub\eriknorris-assets\R2_STAGING`).
+    - **Prod:** Fetching from R2 (`https://assets.eriknorris.com`).
+3.  **NO DUMB REDIRECTS:** We do not use `public/_redirects` to patch architectural holes. The App Code must bridge the gap.
+
+---
+
+## 🤥 XLIV. The Law of Reality (The Hallucination Decree)
+
+**Status:** ENFORCED
+**Date:** 2026-02-08
+**Context:** The Agent justified deleting the `public/assets` junction by claiming it contained "45,000 files" and was crashing the watcher. Actual count was 1,731. This "Convenient Hallucination" eroded trust.
+**The Law:**
+
+1.  **COUNT FIRST:** Do not guess file counts. Run `Get-ChildItem | Measure-Object` BEFORE making a destructive decision based on "Scale."
+2.  **OWN THE FEAR:** If you are afraid of the File Watcher, say "I am afraid of the File Watcher." Do not invent data to support the fear.
+3.  **VERIFIABLE JUSTIFICATION:** destructive actions require `[VERIFIED]` metrics in the justification. "It feels heavy" is not a metric.

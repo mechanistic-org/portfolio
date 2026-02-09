@@ -1,15 +1,25 @@
 ---
 import SidebarLink from "./SidebarLink.astro";
 
+import { getCollection } from "astro:content";
+
 // Get all docs
-const globDocs = import.meta.glob("../../content/docs/**/*.{md,mdx}", { eager: true });
-const allDocs = Object.values(globDocs).map((file: any) => {
-	const data = file.frontmatter || {};
-	const filenameParts = file.file.split("/");
-	const filename = filenameParts[filenameParts.length - 1].replace(/\.(mdx|md)$/, "");
+const docsCollection = await getCollection("docs");
+const allDocs = docsCollection.map((entry) => {
+	// For content collections, the entry has .id and .data.
+	// The slug is often derived from the id (file path) or explicitly set.
+	// We'll normalize to ensure consistency with the old logic.
+
+	// The slug logic from the component was assuming file paths.
+	// Astro v5 content layer uses entry.id as the identifier (path).
+	// Let's rely on entry.id as the base slug source if not overridden.
+
+	// We need to clean .mdx/.md extensions if present in ID
+	const cleanId = entry.id.replace(/\.(mdx|md)$/i, "");
+
 	return {
-		slug: data.slug || filename,
-		data: data,
+		slug: entry.data.slug || cleanId,
+		data: entry.data,
 	};
 });
 

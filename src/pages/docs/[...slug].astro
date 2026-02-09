@@ -1,40 +1,28 @@
 ---
-// import { getCollection, render } from "astro:content"; // Removed
+import { getCollection, render } from "astro:content";
 import DocsLayout from "@/components/Docs/DocsLayout.astro";
 
 export const prerender = true;
 
 export async function getStaticPaths() {
-	const globDocs = import.meta.glob("../../content/docs/**/*.{md,mdx}", { eager: true });
+	const docsCollection = await getCollection("docs");
 
-	const docs = Object.values(globDocs).map((file: any) => {
-		const data = file.frontmatter || {};
-		const filenameParts = file.file.split("/");
-		const filename = filenameParts[filenameParts.length - 1]
-			.replace(/\.(mdx|md)$/i, "")
-			.toLowerCase();
-
-		const slug = data.slug || filename;
-		if (!slug) {
-			console.error(`[DEBUG] Missing slug for file: ${file.file}`);
-		}
-		// console.log(`[DEBUG] ${filename} -> ${slug}`);
-
+	const docs = docsCollection.map((entry: any) => {
+		const slug = entry.id.replace(/\.(mdx|md)$/i, "").toLowerCase();
 		return {
 			params: { slug },
-			props: { file, slug },
+			props: { entry, slug },
 		};
 	});
 
 	// Sort docs to determine order for prev/next
 	// Reuse sort logic from index/sidebar
-	// Filter out docs without titles (e.g. raw markdown dumps) to prevent build crashes
 	const validDocs = docs.filter(
-		(d: any) => d && d.params && d.params.slug && d.props.file.frontmatter?.title,
+		(d: any) => d && d.params && d.params.slug && d.props.entry.data.title,
 	);
 	const sortedDocs = validDocs.sort((a: any, b: any) => {
-		const orderA = a.props.file.frontmatter?.sidebar?.order ?? 999;
-		const orderB = b.props.file.frontmatter?.sidebar?.order ?? 999;
+		const orderA = a.props.entry.data.sidebar?.order ?? 999;
+		const orderB = b.props.entry.data.sidebar?.order ?? 999;
 		if (orderA !== orderB) return orderA - orderB;
 		return String(a.params.slug).localeCompare(String(b.params.slug));
 	});
@@ -50,13 +38,13 @@ export async function getStaticPaths() {
 				prev: prevDoc
 					? {
 							slug: prevDoc.params.slug,
-							title: prevDoc.props.file.frontmatter?.title || prevDoc.params.slug,
+							title: prevDoc.props.entry.data.title || prevDoc.params.slug,
 						}
 					: null,
 				next: nextDoc
 					? {
 							slug: nextDoc.params.slug,
-							title: nextDoc.props.file.frontmatter?.title || nextDoc.params.slug,
+							title: nextDoc.props.entry.data.title || nextDoc.params.slug,
 						}
 					: null,
 			},
@@ -64,18 +52,26 @@ export async function getStaticPaths() {
 	});
 }
 
-const { file, slug, prev, next } = Astro.props;
-const Content = file.Content || file.default;
-const headings = file.getHeadings ? await file.getHeadings() : [];
+const { entry, slug, prev, next } = Astro.props;
+let Content;
+import type { MarkdownHeading } from "astro";
+let headings: MarkdownHeading[] = [];
+
+if (entry) {
+	const rendered = await render(entry);
+	Content = rendered.Content;
+	headings = rendered.headings;
+}
 
 // Mock collection entry for the layout
-const doc = {
+// DocsLayout expects a doc object with slug and data
+const docFn = {
 	slug: slug,
-	data: file.frontmatter || {},
+	data: entry?.data || {},
 	collection: "docs",
 };
 ---
 
-<DocsLayout doc={doc as any} headings={headings} prev={prev} next={next}>
-	<Content />
+<DocsLayout doc={docFn as any} headings={headings} prev={prev} next={next}>
+	{Content ? <Content /> : <p>Loading...</p>}
 </DocsLayout>

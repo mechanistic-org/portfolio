@@ -16,6 +16,21 @@ import cloudflare from "@astrojs/cloudflare";
 /** @type {import('astro-expressive-code').AstroExpressiveCodeOptions} */
 const expressiveCodeOptions = {
 	themes: ["slack-dark"],
+	shiki: {
+		langs: [
+			"json",
+			"javascript",
+			"typescript",
+			"html",
+			"css",
+			"bash",
+			"markdown",
+			"mdx",
+			"python",
+			"yaml",
+			"astro",
+		],
+	},
 	styleOverrides: {
 		borderRadius: "0",
 		borderColor: "#525252",

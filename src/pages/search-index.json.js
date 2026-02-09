@@ -1,5 +1,7 @@
 import { getCollection } from "astro:content";
 
+export const prerender = true;
+
 export async function GET() {
 	const projects = await getCollection(
 		"projects",

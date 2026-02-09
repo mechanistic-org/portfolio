@@ -192,6 +192,8 @@ const docsCollection = defineCollection({
 			.object({
 				group: z.string().optional(),
 				order: z.number().optional(),
+				label: z.string().optional(),
+				badge: z.string().optional(),
 			})
 			.optional(),
 	}),
