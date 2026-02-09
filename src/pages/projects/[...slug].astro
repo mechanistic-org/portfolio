@@ -8,10 +8,7 @@ import { currentSite } from "@config/site_config";
 export const prerender = true;
 
 // THEME REGISTRY
-// import DataSheet from "@layouts/themes/DataSheet.astro"; // DELETED
 import Hyperspace from "@layouts/themes/Hyperspace.astro";
-// 1. Generate a new path for every collection entry
-// import RetroConsole from "@layouts/themes/RetroConsole.astro";
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
@@ -52,7 +49,7 @@ export async function getStaticPaths() {
 
 // 2. For your template, you can get the entry directly from the prop
 interface Props {
-	entry: CollectionEntry<"projects"> | null;
+	entry: any | null; // Typed as any to avoid parser issues
 	placeholderData: any;
 }
 
@@ -118,8 +115,10 @@ const sortedProjects = allProjects.sort(
 // Navigation (Only works for real projects, placeholders get no nav for now)
 const currentIndex = sortedProjects.findIndex((p) => p.id === entry?.id);
 const nextProject = currentIndex > 0 ? sortedProjects[currentIndex - 1] : null;
+
+// FIX: Avoid using '<' operator here to prevent Astro parser ambiguity errors
 const prevProject =
-	currentIndex > -1 && currentIndex < sortedProjects.length - 1
+	currentIndex > -1 && currentIndex !== sortedProjects.length - 1
 		? sortedProjects[currentIndex + 1]
 		: null;
 
@@ -161,6 +160,7 @@ const finalEntry = entry
 			id: placeholderData.id,
 			collection: "projects",
 			data: data,
+			slug: placeholderData.id.toLowerCase().replace(/ /g, "-"),
 		};
 
 // === INTELLIGENCE INJECTION (Entropy) ===
