@@ -9,7 +9,7 @@ export async function GET() {
 					meta: {
 						nodeCount: assembly.nodes.length,
 						linkCount: assembly.links.length,
-						bolusCheck: assembly.nodes.filter((n: any) => n.intelligence).length,
+						bolusCheck: assembly.nodes.filter((n: any) => n.hasIntelligence).length,
 					},
 					sample: assembly.nodes.slice(0, 2),
 					links: assembly.links.slice(0, 2),

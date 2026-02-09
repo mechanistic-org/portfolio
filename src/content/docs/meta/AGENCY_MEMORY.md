@@ -125,6 +125,8 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **Critical Learning:** **"The Surgical Hand"** - A fix is not a fix until it survives a `git diff` and a Live Verification. I failed to respect the "Air Gap" by guessing paths (`public/assets/bazooka` listing attempt).
 - **Critical Learning:** **"The Static Import Trap"** - `import fs from 'node:fs'` in Astro Frontmatter is fatal for Cloudflare Workers, even if unused at runtime.
 - **Trap:** **"The Cache Mirage"** - Blaming the "Dev Server Cache" is a lazy diagnosis. Validate the _Source_ (File on Disk) and the _Destination_ (Live URL) before closing the ticket.
+- **Critical Learning:** **"The Prerender Trap"** - Moving logic from Runtime to Build Time (`prerender = true`) trades Bundle Size for **Build Memory**. This likely caused the Cloudflare Build to crash (OOM) due to `getCareerAssembly` loading the entire corpus (vector embeddings, JSON) into RAM during static generation.
+- **Trap:** **"The Deployment Variance"** - `npm run build` passing locally (32GB RAM) does NOT predict Cloudflare build success (3GB RAM). We must optimize the _Build Process_ memory usage, not just the Worker Bundle size.
 - **Action Item:** Verify `bazooka` and `webtv-galaxy` rendering after fleet upgrade.
 
 * **Key Decision (Architecture):** **"The Flagship Standard"** - All Forensic Projects must use `presentation_mode: flagship`. This enables the "Hybrid" view (Body Text + HUD Drawer).

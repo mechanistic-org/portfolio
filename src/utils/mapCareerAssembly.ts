@@ -17,6 +17,7 @@ export interface AssemblyNode extends d3.SimulationNodeDatum {
 	type: "project" | "skill" | "employer";
 	data: any; // Raw Frontmatter
 	intelligence?: string; // The Bolus (Markdown content from _intelligence.md)
+	hasIntelligence?: boolean; // Lightweight flag for Visuals (Glow)
 	radius?: number; // Visual Mass
 	color?: string; // Hex Token
 }
@@ -40,7 +41,9 @@ const intelligenceGlobs = import.meta.glob("../content/projects/**/_intelligence
 	import: "default",
 });
 
-export async function getCareerAssembly(): Promise<CareerAssembly> {
+export async function getCareerAssembly(
+	options: { includeIntelligence?: boolean } = { includeIntelligence: false },
+): Promise<CareerAssembly> {
 	// A. FETCH RAW MATERIALS
 	const projects = await getCollection("projects", ({ data }) => {
 		return data.draft !== true;
@@ -68,7 +71,11 @@ export async function getCareerAssembly(): Promise<CareerAssembly> {
 				k.includes(`/${project.id.split("/")[0]}/_intelligence.md`),
 		);
 
-		if (bolusKey) {
+		const hasIntelligence = !!bolusKey;
+
+		// OPTIMIZATION: Only load heavy text content if explicitly requested.
+		// Defaults to FALSE to save memory during SSG Build (OOM Fix).
+		if (bolusKey && options.includeIntelligence) {
 			try {
 				// Determine if glob returns a string or a promise depending on Vite setup.
 				// With { eager: false } (default), it's a function returning a promise.
@@ -86,6 +93,7 @@ export async function getCareerAssembly(): Promise<CareerAssembly> {
 			type: "project",
 			data: project.data,
 			intelligence: intelligenceContent,
+			hasIntelligence, // Lightweight flag for UI
 			radius: 20, // Base mass
 		});
 

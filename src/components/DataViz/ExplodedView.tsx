@@ -140,11 +140,11 @@ const ExplodedView: React.FC<WrapperProps> = ({ data }) => {
 				return "#ccc";
 			})
 			.attr("stroke", (d) => {
-				if (d.intelligence) return "#22d3ee"; // Cyan-400 (The Glow Color)
+				if (d.hasIntelligence) return "#22d3ee"; // Cyan-400 (The Glow Color)
 				return "#1e293b"; // Slate-800
 			})
-			.attr("stroke-width", (d) => (d.intelligence ? 2 : 1))
-			.style("filter", (d) => (d.intelligence ? "url(#intelligence-glow)" : null));
+			.attr("stroke-width", (d) => (d.hasIntelligence ? 2 : 1))
+			.style("filter", (d) => (d.hasIntelligence ? "url(#intelligence-glow)" : null));
 
 		// Labels
 		node
@@ -184,7 +184,7 @@ const ExplodedView: React.FC<WrapperProps> = ({ data }) => {
 					<span>LINKS ::</span> <span className="text-right">{data.links.length}</span>
 					<span>INTEL ::</span>{" "}
 					<span className="text-right text-cyan-400">
-						{data.nodes.filter((n) => n.intelligence).length} BOLUS
+						{data.nodes.filter((n) => n.hasIntelligence).length} BOLUS
 					</span>
 				</div>
 				<div className="mt-3 text-xs text-slate-500">

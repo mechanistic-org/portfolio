@@ -130,6 +130,12 @@ description: "Archived legacy document."
 - **Response:** "Noise hides signal." Eliminate ALL warnings.
 - **Protocol:** Failure to clean unused variables is a sign of "Lazy Architecture." We do not ship noise.
 
+**The "Deployment Variance" Law:**
+
+- **Observation:** `npm run build` passes locally (32GB RAM) but fails on Cloudflare (3GB RAM).
+- **Rule:** **"Local Success is a Lie."** You must design for the _Constraint_, not the _Dev Environment_.
+- **Protocol:** If a build involves heavy data processing (`getCareerAssembly`), assume OOM on the edge. Favor partial hydration or splitting data loads.
+
 ## 4. COMMUNICATIONS PROTOCOL
 
 **How to Speak to You:**
