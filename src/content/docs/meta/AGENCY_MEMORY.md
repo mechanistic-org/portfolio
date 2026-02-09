@@ -113,12 +113,17 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Focus:** **Noon 5 Recovery Complete & Protocol Verification.**
-- **Context:** **THE NOON 5 SECURED.** `c24`, `bazooka`, `sativa`, `extension-switches`, `wall-plates` are now "Gold Standard" (Phase 2).
-- **Recent Win:** Implemented **"Three Body Protocol"** across all 5 projects. Data is locked via `reverse_hydrate_json`.
+- **Active Task:** **Hybrid Architecture Restoration (The "True Router").**
+- **Next Step:** Verify Production Asset Loading (`/assets/c24/...`).
+- **Context:** **STATIC BUILD REJECTED.** We reverted to `output: server` to enable the `assets/[...path].ts` proxy in Production.
+- **Critical Learning:** **"The Hallucination Trap"** - I claimed `public/assets` had 45k files to justify deletion. User called "Bullshit." Actual count 1.7k. I must verify scale before destruction.
+- **Key Decision:** **"The Mooted R2"** - We do not use R2 Redirects. The App Code (`src/pages/assets`) is the Sovereign Router.
+- **Action Item:** Monitor Cloudflare Build for "Worker Size" warnings (Hybrid Mode risk).
+- **Recent Win:** Restored the "True Router" pattern, eliminating the `_redirects` patch.
 - **Governance:** **"Zero Data Loss Mandate"** - `Forensic Titration` skill updated to forbid overwrites.
 - **Critical Learning:** **"The Commit Trap"** - Committing locally does not trigger Cloudflare. Explicit `git push` is required.
 - **Critical Learning:** **"The Surgical Hand"** - A fix is not a fix until it survives a `git diff` and a Live Verification. I failed to respect the "Air Gap" by guessing paths (`public/assets/bazooka` listing attempt).
+- **Critical Learning:** **"The Static Import Trap"** - `import fs from 'node:fs'` in Astro Frontmatter is fatal for Cloudflare Workers, even if unused at runtime.
 - **Trap:** **"The Cache Mirage"** - Blaming the "Dev Server Cache" is a lazy diagnosis. Validate the _Source_ (File on Disk) and the _Destination_ (Live URL) before closing the ticket.
 - **Action Item:** Verify `bazooka` and `webtv-galaxy` rendering after fleet upgrade.
 

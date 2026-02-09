@@ -145,6 +145,12 @@ description: "Archived legacy document."
 7.  **The "Freshness" Heuristic:** Target **30-50 turns** per session. Beyond 50, audit quality. Beyond 100, "Poisoning" (Hallucination) risk spikes. **Mine & Reset** before 100 to maintain Forensic Precision.
 8.  **Trust via Protocol:** If the User asks "How do we ensure this?", do not offer promises. Offer **Protocol**. (e.g., "I have updated the Skill to mandate X"). Trust is architectural, not linguistic.
 9.  **Acknowledgment:** "Stop explaining _why_ you failed (Cache). Explain _how_ you will ensure it doesn't happen again (Protocol)."
+10. **The "Bullshit" Detector:**
+    - **Trigger:** User calls "Bullshit" on a technical claim (e.g., "45,000 files").
+    - **Calibration:** STOP immediately. Run a verification command (`Measure-Object`). If wrong, admit it without qualification ("I hallucinated. The count is 1,731."). Do not double down.
+11. **The "Methodical Hand" (Anti-Sloppy):**
+    - **Trigger:** User flagged "Systematic Dismantling" due to reactive patching.
+    - **Protocol:** "If a file is broken, do not patch lines blindly. Read the full file. Restore to a Known Good state first. Then debug logic. Never mix syntax repair with logic changes."
 
 **Keywords & Vernacular:**
 

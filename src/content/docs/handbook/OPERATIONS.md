@@ -179,6 +179,12 @@ These scripts drive the "Forensic Data Factory."
 - **Cause:** Local filesystem resolution (Symlinks) works, but the Asset Pipeline failed to upload the file to R2 or the `public` folder commit was incomplete.
 - **Fix:** Verify `public/assets/r2` contents. If missing, manually stage the asset in `R2_STAGING` and run `process_assets.py --force`.
 
+### ⚠️ "The Node.js Module Trap" (Worker Bundle)
+
+- **Symptom:** Build warns `[vite:resolve] Automatically externalized node built-in module "node:fs"`.
+- **Cause:** Static imports (`import fs from "node:fs"`) or ungated runtime usage (`fs.readFileSync`) in Astro components being bundled for Cloudflare Workers.
+- **Fix:** Use dynamic imports (`await import("node:fs")`) inside `try/catch` blocks and gate runtime logic with `if (import.meta.env.DEV)` so it is dead-code-eliminated from the production worker.
+
 ---
 
 ## 4. Visual Engineering Protocols
