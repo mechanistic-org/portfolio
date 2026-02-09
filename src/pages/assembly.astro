@@ -3,6 +3,8 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ExplodedView from "../components/DataViz/ExplodedView";
 import { getCareerAssembly } from "../utils/mapCareerAssembly";
 
+export const prerender = true;
+
 const assembly = await getCareerAssembly();
 ---
 

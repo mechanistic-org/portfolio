@@ -67,10 +67,10 @@ const __dirname = path.dirname(__filename);
 
 // https://astro.build/config
 export default defineConfig({
-	// HYBRID ARCHITECTURE (Restored Feb 2026)
-	// We use "server" mode to enable the Asset Router (src/pages/assets/[...path].ts)
-	// along with Keystatic API routes.
-	output: "server",
+	// HYBRID ARCHITECTURE (Dual-Mode)
+	// 1. LOCAL: "server" mode to support Keystatic and dynamic previews.
+	// 2. PROD: "static" mode to prevent OOM errors by generating HTML files + minimal Worker.
+	output: isProduction ? "static" : "server",
 	// Cloudflare Adapter handles the Worker generation.
 	adapter: cloudflare({
 		imageService: "compile",

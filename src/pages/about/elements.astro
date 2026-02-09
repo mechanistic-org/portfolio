@@ -1,5 +1,7 @@
 ---
 import Layout from "@layouts/BaseLayout.astro";
+
+export const prerender = true;
 import { Content as ElementsContent } from "@/data/otherPages/elements/index.mdx";
 import tokens from "@/data/design_tokens.json";
 import { EMPLOYER_MAP } from "../../config/color_registry";

@@ -13,6 +13,8 @@ import { Icon } from "astro-icon/components";
 import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
 import { currentSite } from "@config/site_config";
 
+export const prerender = true;
+
 const multiverseData = await getMultiverseData();
 const multiverseMap = new Map(multiverseData.nodes.map((n) => [n.id.toLowerCase(), n]));
 

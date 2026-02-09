@@ -6,6 +6,8 @@ import { getMultiverseData } from "@/utils/getMultiverseData";
 import { getCollection } from "astro:content";
 import specs from "../../data/specs.json";
 
+export const prerender = true;
+
 // Fetch Global Data
 const timelineItems = await getCareerTimeline();
 const multiverseData = await getMultiverseData();

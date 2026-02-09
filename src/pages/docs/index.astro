@@ -1,4 +1,5 @@
 ---
+export const prerender = true;
 // Workaround for empty collection issue: manually load files via glob
 const globDocs = import.meta.glob("../../content/docs/**/*.{md,mdx}", { eager: true });
 const docs = Object.values(globDocs)
