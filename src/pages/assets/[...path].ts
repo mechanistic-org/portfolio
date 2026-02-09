@@ -3,13 +3,14 @@ import fs from "node:fs";
 import path from "node:path";
 import mime from "mime-types";
 
-export const prerender = false;
+// STARTUP:
+// Local (Server Mode): This file acts as a dynamic SSR proxy. getStaticPaths is ignored.
+// Prod (Static Mode): getStaticPaths is REQUIRED. We return [] to generate NO pages.
+//                     The traffic is handled by public/_redirects -> R2.
+export async function getStaticPaths() {
+	return [];
+}
 
-// PROXY CONFIGURATION
-// ----------------------------------------------------------------------------
-// The absolute path to the R2_STAGING folder on your local machine.
-// This bypasses the need for a Junction in 'public/' and prevents the
-// File Watcher (Vite/Chokidar) from indexing thousands of files.
 const R2_STAGING_ROOT = "D:/GitHub/eriknorris-assets/R2_STAGING";
 // ----------------------------------------------------------------------------
 
