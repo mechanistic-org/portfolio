@@ -44,50 +44,56 @@ export const GET: APIRoute = async ({ params, request, locals }) => {
 
 	// 3. LOCAL STRATEGY (Disk Read)
 	// This runs in Node.js during 'npm run dev' or 'npm run build' (SSG)
-	try {
-		// DYNAMIC IMPORTS: Explicitly prevent bundling these into the Worker
-		const fs = (await import("node:fs")).default;
-		const path = (await import("node:path")).default;
-		const mime = (await import("mime-types")).default;
+	// STRICTLY GUARDED: This block is unreachable in Cloudflare Production
+	if (import.meta.env.DEV) {
+		try {
+			// DYNAMIC IMPORTS: Explicitly prevent bundling these into the Worker
+			const fs = (await import("node:fs")).default;
+			const path = (await import("node:path")).default;
+			const mime = (await import("mime-types")).default;
 
-		// Hardcoded path to your GitHub repo root or where assets are stored locally
-		// Adjust this if your assets are not in the R2_STAGING_ROOT structure locally
-		// Assuming R2_STAGING_ROOT maps to a local folder or we just serve from public/ for dev?
-		// Wait, "Hybrid" architecture usually means we read from a local source of truth.
-		// If assets are in `public/assets`, Astro handles them.
-		// If this route is catching them, they must be outside public or virtual.
-		// Assuming they are in a folder named 'd-site-staging' at project root or similar.
-		// For safety, let's assume they are in 'public' or just fail gracefully.
+			// Hardcoded path to your GitHub repo root or where assets are stored locally
+			// Adjust this if your assets are not in the R2_STAGING_ROOT structure locally
+			// Assuming R2_STAGING_ROOT maps to a local folder or we just serve from public/ for dev?
+			// Wait, "Hybrid" architecture usually means we read from a local source of truth.
+			// If assets are in `public/assets`, Astro handles them.
+			// If this route is catching them, they must be outside public or virtual.
+			// Assuming they are in a folder named 'd-site-staging' at project root or similar.
+			// For safety, let's assume they are in 'public' or just fail gracefully.
 
-		const filePath = path.resolve(process.cwd(), R2_STAGING_ROOT, assetPath);
-		const normalizedRoot = path.resolve(process.cwd(), R2_STAGING_ROOT);
+			const filePath = path.resolve(process.cwd(), R2_STAGING_ROOT, assetPath);
+			const normalizedRoot = path.resolve(process.cwd(), R2_STAGING_ROOT);
 
-		// Security Check
-		if (!filePath.startsWith(normalizedRoot)) {
-			// Allow if it is just a subpath
-			// Actually, we should just check if it exists.
-			// return new Response("Forbidden", { status: 403 });
+			// Security Check
+			if (!filePath.startsWith(normalizedRoot)) {
+				// Allow if it is just a subpath
+				// Actually, we should just check if it exists.
+				// return new Response("Forbidden", { status: 403 });
+			}
+
+			if (!fs.existsSync(filePath)) {
+				// Fallback to checking public/assets if not found in staging root?
+				// For now, just return 404
+				return new Response(`Not Found Local: ${filePath}`, { status: 404 });
+			}
+
+			const contentType = mime.lookup(filePath) || "application/octet-stream";
+			const stream = fs.createReadStream(filePath);
+
+			// @ts-ignore - ReadableStream type mismatch is expected
+			return new Response(stream, {
+				status: 200,
+				headers: {
+					"Content-Type": contentType,
+					"Cache-Control": "no-cache", // Don't cache locally for rapid iteration
+				},
+			});
+		} catch (e) {
+			console.error(`[Local Proxy] Error serving ${assetPath}:`, e);
+			return new Response("Internal Server Error", { status: 500 });
 		}
-
-		if (!fs.existsSync(filePath)) {
-			// Fallback to checking public/assets if not found in staging root?
-			// For now, just return 404
-			return new Response(`Not Found Local: ${filePath}`, { status: 404 });
-		}
-
-		const contentType = mime.lookup(filePath) || "application/octet-stream";
-		const stream = fs.createReadStream(filePath);
-
-		// @ts-ignore - ReadableStream type mismatch is expected
-		return new Response(stream, {
-			status: 200,
-			headers: {
-				"Content-Type": contentType,
-				"Cache-Control": "no-cache", // Don't cache locally for rapid iteration
-			},
-		});
-	} catch (e) {
-		console.error(`[Local Proxy] Error serving ${assetPath}:`, e);
-		return new Response("Internal Server Error", { status: 500 });
 	}
+
+	// Fallback for PROD if R2 binding fails or not found (and we are not in DEV)
+	return new Response("Not Found (Production Fallback)", { status: 404 });
 };

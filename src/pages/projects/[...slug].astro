@@ -1,8 +1,6 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
 import { getMultiverseData } from "@/utils/getMultiverseData";
-import fs from "node:fs";
-import path from "node:path";
 import { currentSite } from "@config/site_config";
 
 export const prerender = true;
@@ -164,25 +162,32 @@ const finalEntry = entry
 		};
 
 // === INTELLIGENCE INJECTION (Entropy) ===
-let entropyData = [];
-// Only check for entropy on real projects (not placeholders)
+// Replaced fs.readFileSync with import.meta.glob for Cloudflare Compatibility
+let entropyData: any[] = [];
+const entropyFiles = import.meta.glob("/src/content/projects/**/_entropy.json", { eager: true });
+
 if (entry) {
 	try {
-		// Construct path relative to project root
-		// Assuming structure: src/content/projects/[id]/_entropy.json
-		const entropyPath = path.join(
-			process.cwd(),
-			"src",
-			"content",
-			"projects",
-			entry.id,
-			"_entropy.json",
+		// Construct the key that matches the glob result
+		// Glob keys are absolute from project root start with /src/...
+		// We need to find the key that ends with /projects/{entry.id}/_entropy.json
+		const expectedSuffix = `/src/content/projects/${entry.id}/_entropy.json`;
+
+		const matchingKey = Object.keys(entropyFiles).find(
+			(key) => key.endsWith(expectedSuffix) || key === expectedSuffix,
 		);
-		if (fs.existsSync(entropyPath)) {
-			const fileContent = fs.readFileSync(entropyPath, "utf-8");
-			entropyData = JSON.parse(fileContent);
+
+		if (matchingKey) {
+			const fileModule: any = entropyFiles[matchingKey];
+			// If it's a JSON module, the default export or the module itself is the data
+			entropyData = fileModule.default || fileModule;
+			// Check if it's an array
+			if (!Array.isArray(entropyData)) {
+				// Sometimes importing json gives the object directly
+				entropyData = Array.isArray(fileModule) ? fileModule : [];
+			}
 			console.log(
-				`[INTELLIGENCE] Loaded entropy data for ${entry.id}: ${entropyData.length} events`,
+				`[INTELLIGENCE] Loaded entropy data for ${entry.id}: ${entropyData.length || 0} events`,
 			);
 		}
 	} catch (e) {
