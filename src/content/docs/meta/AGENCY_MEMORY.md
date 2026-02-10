@@ -113,9 +113,9 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Project Normalization (The "Ready State").**
-- **Next Step:** Resolve missing dumps for `d-show` and `mix-rack`. Hydrate `dv700` and `ksystem-120`.
-- **Status:** WebTV Cluster (`galaxy`, `elmer`, `cortez`) and Avid (`sc48`, `d-command`) Enriched & Deployed.
+- **Active Task:** **Main Site Stabilization (Feb 10, 2026).**
+- **Next Step:** Resolve React Hydration Error #418 (De-prioritized).
+- **Status:** Logo/Favicon fixed (`logo.png` is Truth). Asset Proxy fixed (Local Preview Support).
 - **Conflict:** `d-command` has existing body text that conflicts with `_intelligence.md`. Needs manual titration.
 - **Source of Truth:** `src/content/docs/project/ROADMAP_ACTIVE.md`
 - **Critical Learning:** **"The Access Dossier"** is DEAD. Do not restore the slide-out drawer.
@@ -123,8 +123,12 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **Critical Learning:** **"The Quantity Fallacy"** - I claimed 45k files; reality was 1.7k. The Watcher crash was likely due to **Recursion** (`_site` inside `R2_STAGING`) or simple Windows FS friction, not just volume. **Verify counters before making architectural arguments.**
 - **Critical Learning:** **"The Split Brain"** - We successfully standardized the codebase on `/assets/` (removing `/assets/r2/`).
 - **Critical Learning:** **"The Flail Check"** - When a fix fails (Direct Read), do not oscillate wildy. Stop. Measure. Verify.
+- **Critical Learning:** **"The Legacy Shadow"** - `public/favicon.ico` overrides `<link rel="icon">` in some browsers/contexts. Delete legacy files to enforce the new Source of Truth.
 - **Action Item:** Monitor `npm run dev` memory usage.
 
+* **Key Decision (Assets):** **"The White Logo Standard"** - `logo.png` is the canonical White Logo. `EN_logo_white_1024.png` does not exist in the current R2 stash.
+* **Key Decision (UX):** **"The Local Preview Parity"** - Local Preview must match Production behavior BUT must serve assets from disk if Cloudflare context is missing (`src/pages/assets/[...path].ts` fallback).
+* **Key Decision (Schema):** **"The Keystatic Mirror"** - Keystatic Config must strictly match Astro Content Schema types (`number` vs `text`) to prevent validation locks.
 * **Key Decision (Architecture):** **"The Flagship Standard"** - All Forensic Projects must use `presentation_mode: flagship`. This enables the "Hybrid" view (Body Text + HUD Drawer).
 * **Key Decision (Content):** **"No Text Decks"** - Text inside Gallery Stickies (`deck`) is banned. It belongs in the MDX Body. Gallery is for Visuals only.
 

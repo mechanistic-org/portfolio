@@ -28,10 +28,15 @@ sidebar:
 
 ## 🚀 Active Work (Feb 2026)
 
-- **[2026-02-09] (Forensics)**: **WebTV & Avid Injection.** Manually enriched `galaxy`, `elmer`, `cortez`, `sc48`, `d-command` with high-fidelity "Red Gold" narratives.
-- **[2026-02-09] (Infrastructure)**: **Virtual Bridge Protocol.** Replaced `public/assets` Junction with a direct-read Virtual Proxy in `[...path].ts`.
-- **[2026-02-09] (Governance)**: **Grok Log V2.** Refactored 44 Laws into 9 Constitutive Doctrines.
-- **[2026-02-08] (Governance)**: **Project Onboarding.** Loaded Core Context Files.
+- [2026-02-10] (Infrastructure): **Main Site Stabilization.**
+  - **Asset Proxy:** Implemented "Virtual Fallback" to Local Disk for `npm run preview`.
+  - **Keystatic:** Fixed Schema Type Mismatches (`interventions.value`, `process.yield`).
+  - **Identity:** Standardized Site Favicons to `logo.png` (White Branding). Deleted legacy `favicon.ico`.
+  - **Feature:** Enabled `ConspiracyBoard` Component (`StandardDeepDive`).
+- [2026-02-09] (Forensics): **WebTV & Avid Injection.** Manually enriched `galaxy`, `elmer`, `cortez`, `sc48`, `d-command` with high-fidelity "Red Gold" narratives.
+- [2026-02-09] (Infrastructure): **Virtual Bridge Protocol.** Replaced `public/assets` Junction with a direct-read Virtual Proxy in `[...path].ts`.
+- [2026-02-09] (Governance): **Grok Log V2.** Refactored 44 Laws into 9 Constitutive Doctrines.
+- [2026-02-08] (Governance): **Project Onboarding.** Loaded Core Context Files.
 
 ## 🚀 The Horizon (V6 Vision)
 

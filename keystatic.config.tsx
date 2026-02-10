@@ -41,9 +41,7 @@ export default config({
 	ui: {
 		brand: {
 			name: "Erik Norris",
-			mark: () => (
-				<img src="/assets/branding/EN_logo_white_1024.png" height={24} alt="Erik Norris Logo" />
-			),
+			mark: () => <img src="/assets/branding/logo.png" height={24} alt="Erik Norris Logo" />,
 		},
 	},
 	collections: {
