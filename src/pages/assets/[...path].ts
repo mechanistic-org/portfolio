@@ -66,8 +66,12 @@ export const GET: APIRoute = async ({ params, locals }) => {
 			// Assuming they are in a folder named 'd-site-staging' at project root or similar.
 			// For safety, let's assume they are in 'public' or just fail gracefully.
 
-			const filePath = path.resolve(process.cwd(), R2_STAGING_ROOT, assetPath);
-			const normalizedRoot = path.resolve(process.cwd(), R2_STAGING_ROOT);
+			const filePath = path.resolve(R2_STAGING_ROOT, assetPath);
+			const normalizedRoot = path.resolve(R2_STAGING_ROOT);
+
+			console.log(`[Asset Proxy] Request: ${assetPath}`);
+			console.log(`[Asset Proxy] Resolved Path: ${filePath}`);
+			console.log(`[Asset Proxy] Exists? ${fs.existsSync(filePath)}`);
 
 			// Security Check
 			if (!filePath.startsWith(normalizedRoot)) {

@@ -325,6 +325,7 @@ export default config({
 					// Process
 					process: fields.object({
 						engineeringChangeOrders: fields.array(fields.text({ label: "ECO" }), { label: "ECOs" }),
+						yield: fields.array(fields.text({ label: "Yield Item" }), { label: "Yield" }), // Changed to Array
 						yieldCrisis: fields.text({ label: "Yield Crisis" }),
 						yieldRecovery: fields.text({ label: "Yield Recovery" }),
 						label: fields.text({ label: "Label" }),
@@ -342,6 +343,7 @@ export default config({
 					interventions: fields.object({
 						count: fields.number({ label: "Count" }),
 						label: fields.text({ label: "Label" }),
+						value: fields.number({ label: "Value" }), // Changed to Number to match '5'
 					}),
 
 					// Profitability

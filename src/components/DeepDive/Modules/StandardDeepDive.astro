@@ -5,6 +5,7 @@ import TextDeck from "@components/Scrolly/TextDeck.astro";
 import ForensicMarker from "@components/Scrolly/ForensicMarker.tsx";
 import SharedLayoutGallery from "@components/Projects/SharedLayoutGallery";
 import SCThermalMatrix from "@components/Visualizations/SCThermalMatrix";
+import ConspiracyBoard from "@components/Projects/ConspiracyBoard";
 import { getAssetUrl } from "@/utils/assets";
 
 interface Props {
@@ -114,6 +115,11 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 
 					{/* TYPE: THERMAL VIZ */}
 					{stage.type === "thermal" && <SCThermalMatrix client:load />}
+
+					{/* TYPE: CONSPIRACY BOARD */}
+					{stage.type === "conspiracy" && (
+						<ConspiracyBoard client:visible images={stage.data?.images || []} />
+					)}
 				</StickyStage>
 			))
 		}
