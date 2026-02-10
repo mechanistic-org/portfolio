@@ -23,9 +23,9 @@ description: The startup protocol for the ErikNorris project. Loads context and 
 You must scan these files to establish state:
 
 1.  `src/content/docs/meta/AGENCY_MEMORY.md` (Active Context)
-2.  `src/content/docs/project/GROK_LOG.md` (The Constitution)
+2.  `src/content/docs/project/GROK_LOG_V2.md` (The Constitution)
 3.  `src/content/docs/handbook/OPERATIONS.md` (System Manual)
-4.  `src/content/docs/ROADMAP.md` (Status)
+4.  `src/content/docs/project/ROADMAP_ACTIVE.md` (Active Context)
 5.  `src/content/docs/meta/MANIFESTO.md` (Philosophy)
 
 ### 3. Confirmation Protocol (Mandatory)

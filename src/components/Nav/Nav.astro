@@ -147,14 +147,20 @@ const { hideLogo } = Astro.props;
 
 <script>
 	/// <reference lib="dom" />
-	const searchBtn = document.getElementById("global-search-trigger");
-	searchBtn?.addEventListener("click", () => {
-		// @ts-ignore
-		window.dispatchEvent(new CustomEvent("open-command-menu"));
-	});
+	/* 
+	   ASTRO VIEW TRANSITIONS HANDLER 
+	   Re-attach listeners on navigation
+	*/
+	document.addEventListener("astro:page-load", () => {
+		const searchBtn = document.getElementById("global-search-trigger");
+		searchBtn?.addEventListener("click", () => {
+			// @ts-ignore
+			window.dispatchEvent(new CustomEvent("open-command-menu"));
+		});
 
-	const printBtn = document.getElementById("nav-print-btn");
-	printBtn?.addEventListener("click", () => {
-		window.print();
+		const printBtn = document.getElementById("nav-print-btn");
+		printBtn?.addEventListener("click", () => {
+			window.print();
+		});
 	});
 </script>

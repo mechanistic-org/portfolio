@@ -3,7 +3,7 @@ import { currentSite, SITE_CONFIG, type SiteVariant } from "../config/site_confi
 /**
  * Resolves an asset path to the correct Sovereign R2 Bucket.
  *
- * @param path - The relative path to the asset (e.g., "projects/my-image.jpg" or "/assets/r2/...")
+ * @param path - The relative path to the asset (e.g., "projects/my-image.jpg" or "/assets/...")
  * @param sourceBucket - (Optional) Force the asset to load from a specific sovereign bucket.
  *                       Use this to cross-reference assets (e.g., showing a 'play' image on 'main').
  * @returns The fully qualified URL to the asset.
@@ -26,7 +26,7 @@ export function getAssetUrl(path: string, sourceBucket?: SiteVariant): string {
 
 	// Note: We need to strip /assets/ prefix if it's already in the path
 	// Since we are moving to absolute URLs, we should likely strip any legacy proxy paths.
-	// Legacy Path: /assets/r2/project/image.jpg
+	// Legacy Path: /assets/project/image.jpg
 	// Target: https://assets.mechanistic.com/project/image.jpg
 	const finalPath = cleanPath.replace(
 		/^(\/)?assets\/(r2\/)?/,

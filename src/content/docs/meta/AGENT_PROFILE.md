@@ -142,6 +142,15 @@ description: "Archived legacy document."
 - **Rule:** **"Local Success is a Lie."** You must design for the _Constraint_, not the _Dev Environment_.
 - **Protocol:** If a build involves heavy data processing (`getCareerAssembly`), assume OOM on the edge. Favor partial hydration or splitting data loads.
 
+**The "Loop Heuristic" (Anti-Flail):**
+
+- **Trigger:** You find yourself undoing a change you just made (Junction -> No Junction -> Junction).
+- **Protocol:** **STOP.** You are flailing.
+- **Action:**
+  1.  Freeze the filesystem.
+  2.  State the contradiction ("User wants Junction, System crashes on Junction").
+  3.  Solve the _Constraint_ (Ignore Pattern), do not destroy the _Requirement_ (Junction).
+
 ## 4. COMMUNICATIONS PROTOCOL
 
 **How to Speak to You:**

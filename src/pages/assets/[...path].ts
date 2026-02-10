@@ -3,10 +3,15 @@ import type { APIRoute } from "astro";
 export const prerender = false;
 
 // R2 Logic configuration
-const R2_STAGING_ROOT = "d-site-staging";
+// [VIRTUAL BRIDGE]: Point directly to external drive to avoid Watcher/Vite memory leaks
+const R2_STAGING_ROOT =
+	import.meta.env.PROD || process.env.NODE_ENV === "production"
+		? "public/assets" // Prod (Worker) uses relative binding path (or ignored if binding active)
+		: "D:/GitHub/eriknorris-assets/R2_STAGING"; // Local Dev Code
+
 const DEBUG_MODE = true;
 
-export const GET: APIRoute = async ({ params, request, locals }) => {
+export const GET: APIRoute = async ({ params, locals }) => {
 	const assetPath = params.path;
 
 	if (!assetPath) {

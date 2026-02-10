@@ -155,7 +155,25 @@ These scripts drive the "Forensic Data Factory."
 - **Symptom:** `grep` not found in PowerShell.
 - **Fix:** Use Python scripts (`scripts/audit_metrics.py`) or `Select-String`. Do not rely on bash tools in docs.
 
----
+### 🔴 "The Watcher Trap" (Windows Junctions)
+
+- **Symptom:** `npm run dev` hangs or OOMs immediately on startup.
+- **Cause:** Vite/Rollup Watcher on Windows chokes on large Junctions (even ~1700 files) if they contain recursion or complex trees (`_site` inside `R2_STAGING`).
+- **Fix:**
+  1.  **Isolate:** Config `astro.config.mjs` to `ignored: ["**/public/assets/**"]`.
+  2.  **Verify:** If ignoring fails, you must DELETE the Junction and use **Direct External Read** (modifying `[...path].ts`) or debug the folder structure for loops. Do not just restart the server.
+
+### 7. **Memory Leak (60GB RAM)**
+
+- **Symptom:** `Node.js` consumes 100% RAM. Site does not load.
+- **Cause:** **Watcher Recursion.** You likely have a Junction (`public/assets`) pointing to a drive (`R2_STAGING`) that contains a copy of the build output (`_site`), creating an infinite loop.
+- **Fix:** DELETE the Junction. Use the **Virtual Bridge** Protocol (Law I).
+
+### 🔴 "The Split Brain" (Link Rot)
+
+- **Symptom:** Half the site loads images, half 404s.
+- **Cause:** Mixed usage of `/assets/r2/` (Legacy) and `/assets/` (Modern).
+- **Fix:** **Standardize immediately.** Run a global find/replace to enforce `/assets/`. Do not support dual paths.
 
 ## 3. Troubleshooting: The Platform (Cloudflare)
 
@@ -209,11 +227,11 @@ These scripts drive the "Forensic Data Factory."
 - **Rule:** UI components (`ProjectCard`, `ProjectLayout`) must implement a designated "NO VISUAL DATA" state (Wireframe/SVG).
 - **Constraint:** Do not rely on physical `placeholders/tech-1.jpg`. We deleted them to force architectural purity.
 
-### The "Symlink Integrity" Law
+### The "Virtual Bridge" Standard (Law I)
 
-- **Context:** `public/assets/r2`.
-- **Rule:** This must remain a Symlink to `R2_STAGING` (Local).
-- **Trap:** `Copy-Item` or Git operations might replace it with a directory. Verify via `Get-Item | Select LinkType`.
+- **Context:** `public/assets`.
+- **Rule:** This folder must NOT exist locally. It is virtualized by `src/pages/assets/[...path].ts`.
+- **Trap:** Do NOT create a Junction or Symlink here. It causes the 60GB Memory Leak.
 
 ### The "Sovereign Color" Law
 
@@ -264,6 +282,12 @@ These scripts drive the "Forensic Data Factory."
 - **Rule:** Forensic Narratives (The Story) belong in the **Body** (`MDX`), not Frontmatter (`transcript`).
 - **Why:** Frontmatter is for Metadata (Tags, Dates). The Body is for Evidence (AEO Visibility).
 - **Exception:** `transcript` is kept in schema (nullable) for future Audio Logs only.
+- **[Ref:] "The Ready State" Standard (Normalization Target):**
+  - **Context:** Feb 2026 Normalization Drive.
+  - **Rule:** A project is "Ready" ONLY when:
+    1.  **Hydrated:** Contains `bolus`, `report`, `discrete_reports`.
+    2.  **Safe Body:** All text text dumped into the Markdown Body (visible/searchable).
+    3.  **No Drawers:** "Access Dossier" / "Forensic Drawer" functionality is **DISABLED**.
 
 ### 🔴 "The Ghost Component" (Edit Not Reflecting)
 

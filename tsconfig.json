@@ -28,5 +28,5 @@
 		}
 	},
 	"include": ["src", ".astro/types.d.ts", "src/**/*.astro", "src/**/*.ts", "src/**/*.tsx"],
-	"exclude": ["dist", "node_modules", ".git"]
+	"exclude": ["dist", "node_modules", ".git", "public/assets"]
 }

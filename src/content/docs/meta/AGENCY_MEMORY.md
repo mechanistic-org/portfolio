@@ -113,29 +113,22 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **CI Stabilization (Type Safety).**
-- **Next Step:** Fix `SidebarNav.astro` TS error to clear GitHub Actions.
-- **Context:** **STATIC BUILD ACCEPTED.** We successfully deployed via `output: static` (Prod) + `react-dom/server.edge` alias. The "OOM" and "Worker Crash" are resolved.
-- **Critical Learning:** **"The Hallucination Trap"** - I claimed `public/assets` had 45k files to justify deletion. User called "Bullshit." Actual count 1.7k. I must verify scale before destruction.
-- **Key Decision:** **"The Mooted R2"** - We do not use R2 Redirects. The App Code (`src/pages/assets`) is the Sovereign Router.
-- **Action Item:** Monitor Cloudflare Build for "Worker Size" warnings (Hybrid Mode risk).
-- **Recent Win:** Restored the "True Router" pattern, eliminating the `_redirects` patch.
-- **Governance:** **"Zero Data Loss Mandate"** - `Forensic Titration` skill updated to forbid overwrites.
-- **Critical Learning:** **"The Commit Trap"** - Committing locally does not trigger Cloudflare. Explicit `git push` is required.
-- **Critical Learning:** **"The Surgical Hand"** - A fix is not a fix until it survives a `git diff` and a Live Verification. I failed to respect the "Air Gap" by guessing paths (`public/assets/bazooka` listing attempt).
-- **Critical Learning:** **"The Static Import Trap"** - `import fs from 'node:fs'` in Astro Frontmatter is fatal for Cloudflare Workers, even if unused at runtime.
-- **Trap:** **"The Cache Mirage"** - Blaming the "Dev Server Cache" is a lazy diagnosis. Validate the _Source_ (File on Disk) and the _Destination_ (Live URL) before closing the ticket.
-- **Critical Learning:** **"The Prerender Trap"** - Moving logic from Runtime to Build Time (`prerender = true`) trades Bundle Size for **Build Memory**. This likely caused the Cloudflare Build to crash (OOM) due to `getCareerAssembly` loading the entire corpus (vector embeddings, JSON) into RAM during static generation.
-- **Critical Learning (Solved):** **"The MessageChannel Crash"** - Cloudflare Workers cannot run browser-based React (`react-dom/server`). We MUST alias it to `react-dom/server.edge` in `astro.config.mjs` if the Worker touches React code (e.g., via the Asset Proxy).
-- **Key Decision (Architecture):** **"The Hybrid Output"** - `output: isProduction ? "static" : "server"`. We use "Static" for Prod to eliminate the Worker bundle bloat, and "Server" for Local to support Keystatic.
-- **Trap:** **"The Deployment Variance"** - `npm run build` passing locally (32GB RAM) does NOT predict Cloudflare build success (3GB RAM). We must optimize the _Build Process_ memory usage, not just the Worker Bundle size.
-- **Action Item:** Fix `SidebarNav` types.
+- **Active Task:** **Project Normalization (The "Ready State").**
+- **Next Step:** Hydrate remaining ~7 projects (`d-command`, `d-control`, `dv700`, `ksystem-120`, `sc48`, `webtv-cortez`, `webtv-elmer`, `webtv-galaxy`).
+- **Conflict:** `d-command` has existing body text that conflicts with `_intelligence.md`. Needs manual titration.
+- **Source of Truth:** `src/content/docs/project/ROADMAP_ACTIVE.md`
+- **Critical Learning:** **"The Access Dossier"** is DEAD. Do not restore the slide-out drawer.
+- **Critical Learning:** **"The Junction Trap"** - Never Junction a folder that might contain build artifacts (`_site`). It causes infinite Watcher recursion.
+- **Critical Learning:** **"The Quantity Fallacy"** - I claimed 45k files; reality was 1.7k. The Watcher crash was likely due to **Recursion** (`_site` inside `R2_STAGING`) or simple Windows FS friction, not just volume. **Verify counters before making architectural arguments.**
+- **Critical Learning:** **"The Split Brain"** - We successfully standardized the codebase on `/assets/` (removing `/assets/r2/`).
+- **Critical Learning:** **"The Flail Check"** - When a fix fails (Direct Read), do not oscillate wildy. Stop. Measure. Verify.
+- **Action Item:** Monitor `npm run dev` memory usage.
 
 * **Key Decision (Architecture):** **"The Flagship Standard"** - All Forensic Projects must use `presentation_mode: flagship`. This enables the "Hybrid" view (Body Text + HUD Drawer).
 * **Key Decision (Content):** **"No Text Decks"** - Text inside Gallery Stickies (`deck`) is banned. It belongs in the MDX Body. Gallery is for Visuals only.
-* **Key Decision (Sovereignty):** **"The Junction Law"** - The `public/assets/r2` link MUST be a Windows Junction (`New-Item -ItemType Junction`), not a symlink, for robust local dev resolution.
+
 * **Key Decision (Forensics):** **"The Seismograph Protocol"** - The Entropy Visualization (Racegraph) is now a modular component (`Seismograph.astro`) driven by `phase_stats`. It is MANDATORY for all Forensic Projects.
-* **Key Decision (Schema):** **"The Metrics Bifurcation"** - `metrics` is reserved for Structured Data Objects (Financial, Process). `forensic_metrics` is reserved for Narrative Strings (Friction, Method, Objective). Do NOT mix them.
+
 * **Key Decision (Schema):** **"The Taxonomy Lock"** - `role` and `employer` fields in MDX must strictly match `src/config/taxonomy.ts`. "Lead Mechanical Engineer" is invalid; use "Mechanical Engineer" + `cast` role for nuance.
 * **Key Decision (Identity):** **"The Mechanical Violence"** - We explicitly embraced the "Thumb of God" narrative for `morpheus`. Forensic Engineering is about physical force as much as code.
 
@@ -165,7 +158,7 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Physics):** "Goldilocks" settings are `vy: -50`, `friction: 0.05`. Do not increase friction without vertically scaling velocity.
 * **Key Decision (Viz-Deprecated):** `ArchiveSankey`, `LivingGantt`, and `SkillsGraph.tsx` have been DEPRECATED and removed/disabled to "kill the noise".
 * **Key Decision (Data):** **"The Event Horizon"** - `multiverse.json` and `skills.json` were PURGED (2026-01-08). The architecture is now "Pure Hyperspace" (Dynamic Astro Collections only).
-* **Key Decision (Architecture):** **"The Sovereign Pipeline"** - `eriknorris-workspace\R2_MASTER` is the **SOURCE OF TRUTH** (The Vault). `process_images.py` reads from here. `eriknorris-assets\R2_STAGING` is the **PUBLISHED MIRROR** (The Web). we DO NOT edit Staging directly.
+
 * `public/assets/prompts/BOLUS_READY.txt`: **The Extraction Standard (JSON).** (How we mine data).
 * `public/assets/prompts/REPORT_READY.txt`: **The Report Standard (Markdown).** (The Narrative).
 * `src/content/docs/prompts/BRANDING_PROMPT.md`: **The Design System.** (How we speak).
@@ -175,10 +168,10 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Mining):** **"The MailStore Pivot"** - Python COM is too fragile for 15k+ item queries. Use MailStore Home to Index -> Search -> Export.
 * **Key Decision (Layout):** **"The Fiche Scroll Law"** - The Fiche container MUST use `.no-scrollbar` to prevent double-scrollbar visual glitches with the Parallax system.
 * **Key Decision (Assets):** **"The Numeric Bubble Law"** - SC48/D-Control Bubble folders MUST be prefixed (e.g., `01_3d`) to ensure `process_images.py` compiles them in the correct narrative order.
-* **Key Decision (Strategy):** **"The Moot Moat"** - We explicitly defend "Low Value" entities (Toasters) to create "Trust Anchors" for the AI. This validates the "Polymath" claim. The 120+ project count is not vanity; it is **Evidence**.
+
 * **Key Decision (Style):** **"The Linear Gradient Law"** - Tailwind 4.0 requires `bg-linear-to-*`. Legacy `bg-gradient-to-*` is deprecated.
 * **Key Decision (Archival):** **"The Museum Strategy"** - We do not delete complex "Dead Code" (`SlideProjector.tsx`). We move it to `eriknorris-archive` to preserve the engineering history ("Red Gold").
-* **Key Decision (Schema):** **"The Main Stage Law"** - Forensic Narratives belong in the Body (`MDX`), not Frontmatter (`transcript`). Frontmatter is for metadata; Body is for Evidence.
+
 * **Key Decision (Forensics):** **"The Impostor Detection"** - `zeus` was identified as a functional duplicate of `webtv-elmer`. We preserve it for now but mark it as an alias.
 * **Key Decision (Color):** **"The Sovereign Color Law"** - `src/config/color_registry.ts` is the ONLY Source of Truth for Entity Coloring. `Colors.csv` retrieval is FORBIDDEN.
 * **Key Decision (Code):** **"The Module Naming Law"** - Do not use `.json.ts` for standard TypeScript modules/arrays. Rename to `.ts` to prevent TS Server resolution confusion.
@@ -186,7 +179,7 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Resilience):** **"Safe-by-Default D3"** - Visualization components must implement defensive `get(key) || default_color` logic to preventing crashing the entire graph on a single missing key.
 * **Key Decision (UI):** **"Lite HUD"** - To prevent WASM crashes during build, deeply nested logic in `ProjectManifestHUD.astro` (Row 2 Metrics) has been disabled until further notice. Row 1 (Identity/Nav) is the priority.
 * **Key Decision (Layout):** **"The Nested Slot Trap"** - Never wrap a `slot="center"` inside another `slot="center"`. It traps subsequent slots (Right) inside the parent, breaking the sibling layout structure.
-* **Key Decision (Build):** **"The Duplicate Key Scan"** - "Duplicate Mapping Key" (YAML) errors often appear in `cast` or `teamSize` blocks after merges. Do not "patch" one file; audit ALL `src/content/projects` files immediately (`webtv-elmer` had a hidden duplicate `teamSize`).
+
 * **Key Decision (Keystone):** **"The Neural Assembly"** - The final visualization is a "Hybrid Brain" (D3 + R3F). 30 Notebook Nodes packed in a cranial volume (The Idea) that explode on scroll (The Engineering). This is the Opus.
 * **Key Decision (SEO):** **"The Clean URL Choice"** - We rejected `www` in favor of `eriknorris.com` (Root). Cloudflare "Primary Domain" handles the redirect logic, keeping the URL short and modern.
 * **Key Decision (CMS):** **"The Column Limit"** - Keystatic `columns` are strictly for _viewing_ metadata. Sorting is limited to `slug` until upstream fixes arrive. We sort via Search.
@@ -255,8 +248,6 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **"Farming the Meta":** We turn internal struggle (technical debt) into public content (Colophon/LinkedIn). The _process_ is the product.
 - **"The Covenant is Burned":** We rejected the religious "Vassal" language. We are Engineers. `GROK_LOG` is a Statute Book (ISO Standard), not a Bible.
 
-### 6. **Project AVATARE (Identity Strategy)**
-
 - **Concept:** Deploying a "Sovereign Persona" ("Norris_OS") to LinkedIn.
 - **Status:** **READY** (Identity Kit Created).
 - **Strategy:** "The Two-Lane Highway."
@@ -264,3 +255,12 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
   - _Lane 2 (Meta-OS):_ Portfolio Architecture (Sovereignty/Air Gap).
 - **Automation:** **DEFERRED.** We chose "Manual Telemetry" (User posts via Kit) over "OpenClaw" (Complexity).
 - **Constraint:** The AI cannot "log in." The Human must be the "Actuator."
+
+### 7. **Resume Refactor (Maxi-Resume) (Feb 2026)**
+
+- **Goal:** Unify "Human" (PDF) and "Agent" (Prompt) Resume sources.
+- **Status:** **DEPLOYED**.
+- **Key Decision (Content):** **"The Forensic Bullet"** -> `Trigger/Intervention/Result`. No generic responsibilities.
+- **Key Decision (Architecture):** `resume_master.ts` (PDF Source) and `RESUME_READY.txt` (Agent Source) must be manually synced to prevent hallucination.
+- **Key Decision (UX):** **"The View Transition Fix"** -> `Nav.astro` requires `astro:page-load` for the Print button to work in SPA mode.
+- **Key Decision (Identity):** **"The Mechanistic Era"** -> The "Consultancy" role (2022-Present) is the "Red Team" anchor. It MUST be the first entry.

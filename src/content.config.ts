@@ -187,13 +187,11 @@ const docsCollection = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		slug: z.string().optional(),
-		description: z.string().optional(),
 		sidebar: z
 			.object({
 				group: z.string().optional(),
 				order: z.number().optional(),
 				label: z.string().optional(),
-				badge: z.string().optional(),
 			})
 			.optional(),
 	}),

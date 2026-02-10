@@ -1,9 +1,6 @@
 import { getCollection } from "astro:content";
 import type { TimelineItem } from "./timelineParser";
 
-// Helper to determine sort order for present jobs
-const isPresent = (dateStr: string) => dateStr.toLowerCase() === "present";
-
 export async function getCareerTimeline(): Promise<TimelineItem[]> {
 	// 1. Fetch all non-draft projects
 	const projects = await getCollection("projects", ({ data }) => {
@@ -21,13 +18,6 @@ export async function getCareerTimeline(): Promise<TimelineItem[]> {
 	// We will generate items for distinct Roles/Tenures based on the frontmatter.
 
 	const items: TimelineItem[] = projects.map((p) => {
-		const startYear = p.data.date ? new Date(p.data.date).getFullYear().toString() : "2025";
-		const endYear = p.data.endDate
-			? new Date(p.data.endDate).getFullYear().toString()
-			: p.data.date
-				? "2025"
-				: "Present"; // Default logic needs refinement
-
 		// Better Date Logic:
 		const sDate = p.data.date ? new Date(p.data.date) : new Date();
 		const eDate = p.data.endDate ? new Date(p.data.endDate) : null;
