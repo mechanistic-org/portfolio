@@ -114,7 +114,8 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 ## 📍 Current Focus State (The "Cursor")
 
 - **Active Task:** **Project Normalization (The "Ready State").**
-- **Next Step:** Hydrate remaining ~7 projects (`d-command`, `d-control`, `dv700`, `ksystem-120`, `sc48`, `webtv-cortez`, `webtv-elmer`, `webtv-galaxy`).
+- **Next Step:** Resolve missing dumps for `d-show` and `mix-rack`. Hydrate `dv700` and `ksystem-120`.
+- **Status:** WebTV Cluster (`galaxy`, `elmer`, `cortez`) and Avid (`sc48`, `d-command`) Enriched & Deployed.
 - **Conflict:** `d-command` has existing body text that conflicts with `_intelligence.md`. Needs manual titration.
 - **Source of Truth:** `src/content/docs/project/ROADMAP_ACTIVE.md`
 - **Critical Learning:** **"The Access Dossier"** is DEAD. Do not restore the slide-out drawer.
@@ -148,6 +149,10 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Component):** **"The Universal HUD"** - Consolidates `HyperspaceHUD` and `ProjectManifestHUD`. Features `mode="stealth"` (Always Visible, Transparent Wrapper) and "HOTAS" style controls for the Fleet View.
 * **Key Decision (Stability):** **"The Slug Match Law"** - `getEntry("projects", slug)` requires the exact file slug. `c24-control-surface` (legacy ID) crashed the build; `c24` (current ID) fixed it. Always verify `src/content/projects` folder names before hardcoding IDs.
 * **Key Decision (Hydration):** **"The Starfield Priority"** - `CollimatedBackground` (Canvas) requires `client:load` on Project Pages (`[...slug].astro`) to prevent hydration mismatches and "Black Flash" visibility issues. `client:idle` is insufficient for heavy 3D backgrounds.
+
+- **Critical Learning:** **"The Missing Dump Trap"** - Hydration fails silently if `notebook_dumps` (JSON) are missing (`mix-rack`, `d-show`). Always verify source data existence before running batch hydration.
+- **Critical Learning:** **"The Forensic Injection Standard"** - Manual enrichment of `forensic_summary` (War Stories) is the "Red Gold". It overrides generic AI summaries. WebTV (`galaxy`, `elmer`, `cortez`) and Avid (`sc48`, `d-command`) are now enriched.
+
 * **Key Decision (Audio):** **"The Iron Dome"** - The Audio Host must be blind to instructions. We use `PODCAST_READY.txt` (Sanitized) and explicitly forbid instructional headers in the script source.
 * **Key Decision (Viz-Audio):** **"The SonicHeartbeat Standard"** - Idle = Pulse (Cycle), Active = Full EQ. Icon = Speaker (not Headphone).
 * **Key Decision (SEO):** **"The Answer Engine Verification"** - We are AEO Ready. JSON-LD for Projects is the structural key for Knowledge Graph entity recognition.

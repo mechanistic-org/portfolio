@@ -6,7 +6,7 @@ export const prerender = false;
 // [VIRTUAL BRIDGE]: Point directly to external drive to avoid Watcher/Vite memory leaks
 const R2_STAGING_ROOT =
 	import.meta.env.PROD || process.env.NODE_ENV === "production"
-		? "public/assets" // Prod (Worker) uses relative binding path (or ignored if binding active)
+		? "" // Prod (Worker) uses root relative to binding (e.g. "branding/logo.png")
 		: "D:/GitHub/eriknorris-assets/R2_STAGING"; // Local Dev Code
 
 const DEBUG_MODE = true;

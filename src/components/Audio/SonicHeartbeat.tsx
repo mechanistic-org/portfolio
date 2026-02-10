@@ -6,12 +6,17 @@ interface SonicHeartbeatProps {
 }
 
 const SonicHeartbeat: React.FC<SonicHeartbeatProps> = ({ audioUrl }) => {
-	// 1. Always call hooks at the top level (Rules of Hooks)
+	// 1. Always call hooks at the top level
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [isHovered, setIsHovered] = useState(false);
 	const [isVisible, setVisible] = useState(true);
 	const [animPhase, setAnimPhase] = useState<"ecg" | "flash">("ecg");
+	const [isMounted, setIsMounted] = useState(false); // NEW: Hydration Guard
 	const audioRef = useRef<HTMLAudioElement | null>(null);
+
+	useEffect(() => {
+		setIsMounted(true);
+	}, []);
 
 	// 2. Initialize Audio
 	useEffect(() => {
@@ -208,13 +213,18 @@ const SonicHeartbeat: React.FC<SonicHeartbeatProps> = ({ audioUrl }) => {
 										fill="url(#led-gradient)"
 										mask="url(#segment-mask)"
 										style={{ transformBox: "fill-box", transformOrigin: "bottom" }}
-										animate={{
-											scaleY: [0.1, 0.9, 0.3, 0.95, 0.2, 0.8, 0.1].map((v) =>
-												Math.min(1, Math.max(0.05, v * (0.5 + Math.random()))),
-											),
-										}}
+										// FIX: Hydration Mismatch. Only animate random values on client.
+										animate={
+											isMounted
+												? {
+														scaleY: [0.1, 0.9, 0.3, 0.95, 0.2, 0.8, 0.1].map((v) =>
+															Math.min(1, Math.max(0.05, v * (0.5 + Math.random()))),
+														),
+													}
+												: { scaleY: 0.5 } // Static fallback for SSR
+										}
 										transition={{
-											duration: 0.6 + Math.random() * 0.4,
+											duration: 0.6 + (isMounted ? Math.random() * 0.4 : 0),
 											repeat: Infinity,
 											repeatType: "mirror",
 											ease: "easeInOut",

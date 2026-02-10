@@ -49,7 +49,10 @@ if (!isUnderConstruction) {
 				name: n.data.title,
 				group: n.data.employer === "erik_norris" ? "meta" : n.data.employer || "Private", // Custom Group for Color
 				start_date: n.data.date ? new Date(n.data.date).toISOString() : new Date().toISOString(),
-				end_date: n.data.endDate ? new Date(n.data.endDate).toISOString() : undefined, // FIX: Pass End Date to Physics Engine
+				// FIX: Bake "Now" at build time to prevent Hydration Mismatch (Server vs Client time drift)
+				end_date: n.data.endDate
+					? new Date(n.data.endDate).toISOString()
+					: new Date().toISOString(),
 				value: n.data.employer === "erik_norris" ? 60 : 20, // Bigger Mass for Bio
 				presentation_mode,
 				// Pass-throughs

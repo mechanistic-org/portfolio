@@ -16,12 +16,19 @@ sidebar:
 - **Objective:** Bring ALL hydrated projects to a known baseline: "Text in Body".
 - **Next Steps:**
   1.  Hydrate remaining ~7 projects (Bolus/Report -> Body).
+      - [x] `webtv-galaxy` (Thermal Crisis)
+      - [x] `webtv-elmer` (Cost War)
+      - [x] `webtv-cortez` (Satellite)
+      - [x] `sc48` (Meltdown)
+      - [x] `d-command` (Conflict)
+      - [ ] `d-show` / `mix-rack` (Missing Dumps)
   2.  **Verify:** No "Slide-out Drawers". All content must be in the main body.
   3.  **Status:** "Access Dossier" / "Forensic Drawer" functionality is **REMOVED**.
 - **Context:** Normalizing the portfolio to a known baseline before starting Deep Dive curation (Images, 3D, Video).
 
 ## 🚀 Active Work (Feb 2026)
 
+- **[2026-02-09] (Forensics)**: **WebTV & Avid Injection.** Manually enriched `galaxy`, `elmer`, `cortez`, `sc48`, `d-command` with high-fidelity "Red Gold" narratives.
 - **[2026-02-09] (Infrastructure)**: **Virtual Bridge Protocol.** Replaced `public/assets` Junction with a direct-read Virtual Proxy in `[...path].ts`.
 - **[2026-02-09] (Governance)**: **Grok Log V2.** Refactored 44 Laws into 9 Constitutive Doctrines.
 - **[2026-02-08] (Governance)**: **Project Onboarding.** Loaded Core Context Files.
