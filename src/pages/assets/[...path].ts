@@ -24,7 +24,9 @@ export const GET: APIRoute = async ({ params, locals }) => {
 	if (import.meta.env.PROD && locals?.runtime?.env?.R2_ASSETS) {
 		try {
 			// @ts-ignore
-			const object = await locals.runtime.env.R2_ASSETS.get(path.join(R2_STAGING_ROOT, assetPath));
+			// FIX: Do not use path.join in Cloudflare Worker (Node API missing)
+			// R2_STAGING_ROOT is "" in Prod, so we just use the assetPath directly.
+			const object = await locals.runtime.env.R2_ASSETS.get(assetPath);
 
 			if (!object) {
 				return new Response(`Not Found: ${assetPath}`, { status: 404 });
