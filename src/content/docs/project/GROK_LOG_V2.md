@@ -97,7 +97,17 @@ sidebar:
 
 ---
 
-## 🧹 VIII. The Law of Sanitation (Clean Attributes)
+## 🏗️ VIII. The Law of the Isomorphic (Trust Signal)
+
+**Context:** AI Overviews (2026) prioritize "Firsthand Experience." Generic summaries are ignored.
+
+1.  **STRUCTURAL RHYMES:** We do not say "I am a good architect." We prove it by mapping a Hardware Constraint (150W Thermal) to a Software Constraint (Token Density).
+2.  **THE MASTER NOTEBOOK:** Isomorphics cannot be generated in isolation. They must be mined from a "Master Notebook" containing multiple project JSONs.
+3.  **THE ORANGE CARD:** Isomorphics are visually distinct from Forensics. They use the **Orange/Amber** "High Voltage" palette.
+
+---
+
+## 🧹 IX. The Law of Sanitation (Clean Attributes)
 
 **Context:** Agents left "skill-" prefixes in IDs or duplicated YAML keys.
 

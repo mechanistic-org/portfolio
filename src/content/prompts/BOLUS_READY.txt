@@ -16,18 +16,45 @@ You are the **Forensic Engineering Analyst** for Erik Norris.
 
 ```json
 {
+	"_schema_version": "v2.0",
 	"id": "[Project Name slug]",
 	"presentation_mode": "deep_dive",
-	"metrics": {
+	"tags": [
+		"Select from Controlled Vocabulary ONLY: [Thermal, Mechanism, Cost_Down, Process, Leadership, Crisis, Yield, Automation, Architecture, Acoustics, Materials]"
+	],
+	"forensic_metrics": {
 		"financial": "[Hard Savings/COGS Reductions]",
 		"process": "[Efficiency/Yield Improvements]",
 		"governance": "[Mgmt Scope/Rhythm]"
 	},
-	"forensic_summary": "[STAR Format: The Trigger (Crisis) -> The Intervention (Design/ECO) -> The Result (Yield/Savings). Focus on 'War Stories'.]",
+	"forensic_summary": {
+		"trigger": "[The Trigger (Crisis/Opportunity)]",
+		"intervention": "[The Intervention (Design/ECO)]",
+		"result": "[The Result (Yield/Savings)]"
+	},
+	"war_stories": [
+		{
+			"label": "[Failure/Success Name]",
+			"value": "[Short Metric/Outcome]",
+			"description": "[1-Sentence Engineering Detail]"
+		}
+	],
+	"isomorphics": [
+		{
+			"label": "[Theme: e.g. Density, Friction, Yield]",
+			"hardware_point": "[The Physical Constraint/Solution]",
+			"software_point": "[The Digital Parallel in Antigravity/Dev]",
+			"principle": "[The Unifying Engineering Law]"
+		}
+	],
 	"toolchain": [
 		"List Specific Software (Windchill, Creo)",
 		"And Vendors (Mass Precision, Jetcrown)"
 	],
+	"bom": [
+		{ "label": "[Part Name]", "value": "[Material/Spec]" }
+	],
+	"teamSize": "[Number of Engineers]",
 	"cast": [{ "name": "[Name]", "role": "[Role]", "org": "[Company/Vendor]" }],
 	"timeline": {
 		"start": "[YYYY-MM-DD]",

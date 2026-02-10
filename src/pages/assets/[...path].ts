@@ -20,13 +20,19 @@ export const GET: APIRoute = async ({ params, locals }) => {
 
 	// 1. PRODUCTION STRATEGY (Cloudflare Proxy)
 	// If running on Cloudflare, fetch from R2 directly via the binding
-	// @ts-ignore
-	if (import.meta.env.PROD && locals?.runtime?.env?.R2_ASSETS) {
+	if (import.meta.env.PROD) {
+		// @ts-ignore
+		const R2 = locals?.runtime?.env?.PROJECTS;
+
+		if (!R2) {
+			console.error("[R2 Proxy] Critical: 'PROJECTS' binding missing in Prod!");
+			return new Response("Configuration Error: Missing R2 Binding", { status: 500 });
+		}
+
 		try {
-			// @ts-ignore
 			// FIX: Do not use path.join in Cloudflare Worker (Node API missing)
 			// R2_STAGING_ROOT is "" in Prod, so we just use the assetPath directly.
-			const object = await locals.runtime.env.R2_ASSETS.get(assetPath);
+			const object = await R2.get(assetPath);
 
 			if (!object) {
 				return new Response(`Not Found: ${assetPath}`, { status: 404 });

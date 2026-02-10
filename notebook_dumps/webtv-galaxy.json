@@ -1,54 +1,11 @@
 {
     "id": "galaxy-ultimatetv",
     "presentation_mode": "deep_dive",
-    "metrics": {
-        "financial": "Managed $14k/mo burn rate on solo-consultant engineering services; mitigated cost of custom 4-day quick-turn fabrication cycles",
-        "process": "Achieved 28.3 CFM system airflow in high-density chassis; Resolved 100% of EMI chassis ground failures via flange redesign",
-        "governance": "Weekly 'Mechanical Hitlist' protocol tracking 30+ gating defects; Centralized FTP master database control",
-        "war_stories": [
-            {
-                "description": "Requested a non-functional 'Dog Unit' immediately upon arrival to reverse-engineer failure points before looking at the spec sheet.",
-                "label": "The 'Dog Unit' Request",
-                "value": "First Principles"
-            },
-            {
-                "description": "Halted a redesign loop by demanding a 'Dog Unit' teardown, proving field failures were due to contamination, not design.",
-                "label": "The 'First Principles' Defense",
-                "value": "Teardown Authority"
-            },
-            {
-                "description": "Identified a 150W 'God Box' prototype flaw where the Smart Card reader hit 55\\xB0C (melting point), forcing a chassis redesign.",
-                "label": "The 'God Box' Thermal Tax",
-                "value": "55\\xB0C Credit Card"
-            },
-            {
-                "description": "Redesigned the Hard Drive Bracket to act as a structural air dam, forcing 28.3 CFM over the drives to prevent thermal shutdown.",
-                "label": "The 'Wind Tunnel' Pivot",
-                "value": "Structure as Duct"
-            },
-            {
-                "description": "Redesigned the base chassis with 'Hook 29' strengthening ribs after drawn standoffs caused 'potato chip' warping.",
-                "label": "The 'Hook 29' Fix",
-                "value": "Stamping Yield"
-            },
-            {
-                "description": "Tracked down 'Linda the Repair Tech' to verify field failure rates on the LED Spacers, avoiding an unnecessary $15k tooling redesign.",
-                "label": "The Meter Investigation",
-                "value": "Human Intelligence"
-            },
-            {
-                "description": "Held the line on cosmetic 'short shots' and sink marks, risking a schedule slip to prevent shipping a flawed flagship product.",
-                "label": "The 'Short Shot' Stand",
-                "value": "Quality Gate"
-            },
-            {
-                "description": "The product didn't ship, but the DNA survived. The wind tunnel architecture and thermal learnings were directly absorbed by the Xbox team. We built the one that broke to teach them how to build the one that didn't.",
-                "label": "Reincarnation",
-                "value": "Xbox Thermal DNA"
-            }
-        ]
+    "forensic_summary": {
+        "trigger": "Integration of 150W TDP AMD K7 CPU + 3 Tuners into consumer STB caused thermal crisis (Smart Card Reader >55\u00b0C) and sheet metal warpage risks.",
+        "intervention": "Architected 300mm chassis with directed airflow tunnel (intake over HDDs, exhaust via PSU) and 50x60x30mm extruded heatsink; Redesigned chassis floor with 'Hook 29' details and ribs to stabilize stamping.",
+        "result": "Stabilized CPU junction at 84\u00b0C; Salvaged DEV build schedule despite vendor shutdowns; Assets transitioned to Xbox division."
     },
-    "forensic_summary": "TRIGGER: Integration of 150W TDP AMD K7 CPU + 3 Tuners into consumer STB caused thermal crisis (Smart Card Reader >55\u00b0C) and sheet metal warpage risks. INTERVENTION: Architected 300mm chassis with directed airflow tunnel (intake over HDDs, exhaust via PSU) and 50x60x30mm extruded heatsink; Redesigned chassis floor with 'Hook 29' details and ribs to stabilize stamping. RESULT: Stabilized CPU junction at 84\u00b0C; Salvaged DEV build schedule despite vendor shutdowns; Assets transitioned to Xbox division.",
     "toolchain": [
         "Pro/ENGINEER (Master Assembly)",
         "AutoCAD (Legacy 2D)",
@@ -98,5 +55,53 @@
         "The only concern is the Smart Card location. It probably need to be moved closer to the inlet vent.",
         "Our concern would be warping of the base in the stamping process due to the quantity and placement of the standoff's",
         "Microsoft, has (surprise) chosen the PC in general and the gaming console platform specifically rather than the 'cable TV box'."
-    ]
+    ],
+    "forensic_metrics": {
+        "financial": "Managed $14k/mo burn rate on solo-consultant engineering services; mitigated cost of custom 4-day quick-turn fabrication cycles",
+        "process": "Achieved 28.3 CFM system airflow in high-density chassis; Resolved 100% of EMI chassis ground failures via flange redesign",
+        "governance": "Weekly 'Mechanical Hitlist' protocol tracking 30+ gating defects; Centralized FTP master database control"
+    },
+    "war_stories": [
+        {
+            "description": "Requested a non-functional 'Dog Unit' immediately upon arrival to reverse-engineer failure points before looking at the spec sheet.",
+            "label": "The 'Dog Unit' Request",
+            "value": "First Principles"
+        },
+        {
+            "description": "Halted a redesign loop by demanding a 'Dog Unit' teardown, proving field failures were due to contamination, not design.",
+            "label": "The 'First Principles' Defense",
+            "value": "Teardown Authority"
+        },
+        {
+            "description": "Identified a 150W 'God Box' prototype flaw where the Smart Card reader hit 55\\xB0C (melting point), forcing a chassis redesign.",
+            "label": "The 'God Box' Thermal Tax",
+            "value": "55\\xB0C Credit Card"
+        },
+        {
+            "description": "Redesigned the Hard Drive Bracket to act as a structural air dam, forcing 28.3 CFM over the drives to prevent thermal shutdown.",
+            "label": "The 'Wind Tunnel' Pivot",
+            "value": "Structure as Duct"
+        },
+        {
+            "description": "Redesigned the base chassis with 'Hook 29' strengthening ribs after drawn standoffs caused 'potato chip' warping.",
+            "label": "The 'Hook 29' Fix",
+            "value": "Stamping Yield"
+        },
+        {
+            "description": "Tracked down 'Linda the Repair Tech' to verify field failure rates on the LED Spacers, avoiding an unnecessary $15k tooling redesign.",
+            "label": "The Meter Investigation",
+            "value": "Human Intelligence"
+        },
+        {
+            "description": "Held the line on cosmetic 'short shots' and sink marks, risking a schedule slip to prevent shipping a flawed flagship product.",
+            "label": "The 'Short Shot' Stand",
+            "value": "Quality Gate"
+        },
+        {
+            "description": "The product didn't ship, but the DNA survived. The wind tunnel architecture and thermal learnings were directly absorbed by the Xbox team. We built the one that broke to teach them how to build the one that didn't.",
+            "label": "Reincarnation",
+            "value": "Xbox Thermal DNA"
+        }
+    ],
+    "_schema_version": "v2.0"
 }

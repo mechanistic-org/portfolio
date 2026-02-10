@@ -278,68 +278,80 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
         # Prepare Updates
         changes = []
         
-        # 1. Metrics & Forensic Metrics Logic (Law XXXIII)
-        if "metrics" in data:
-            source_metrics = data["metrics"]
-            
-            # Ensure target structures exist
-            if "metrics" not in post.metadata or post.metadata["metrics"] is None:
-                post.metadata["metrics"] = {}
+        # 1. Forensic Metrics (Direct Injection)
+        if "forensic_metrics" in data:
+            fm = data["forensic_metrics"]
+            # Ensure target exists
             if "forensic_metrics" not in post.metadata or post.metadata["forensic_metrics"] is None:
                 post.metadata["forensic_metrics"] = {}
+            
+            # Direct Map
+            for key, val in fm.items():
+                if post.metadata["forensic_metrics"].get(key) != val:
+                    changes.append(f"  - Update 'forensic_metrics.{key}'")
+                    post.metadata["forensic_metrics"][key] = val
 
-            # Field Mapping
-            structured_keys = ["financial", "process", "governance", "technical"]
-            narrative_keys = ["financial", "process", "governance", "technical"] 
-            # Note: Keys are the same, types differ.
+        # 2. War Stories (Direct Injection)
+        if "war_stories" in data:
+            ws = data["war_stories"]
+            if post.metadata.get("war_stories") != ws:
+                changes.append(f"  - Update 'war_stories' ({len(ws)} items)")
+                post.metadata["war_stories"] = ws
 
-            for key, val in source_metrics.items():
-                # Skip nulls
-                if val is None: continue
+        # 3. Isomorphics (Direct Injection)
+        if "isomorphics" in data:
+            iso = data["isomorphics"]
+            if post.metadata.get("isomorphics") != iso:
+                changes.append(f"  - Update 'isomorphics' ({len(iso)} items)")
+                post.metadata["isomorphics"] = iso
 
-                # Deep Structures (Objects/Arrays) -> metrics
-                if isinstance(val, (dict, list)):
-                    # Special Case: Quotes -> metrics.quotes
-                    if key == "quotes":
-                        if post.metadata["metrics"].get("quotes") != val:
-                            changes.append(f"  - Update 'metrics.quotes' (Corrected)")
-                            post.metadata["metrics"]["quotes"] = val
-                        
-                        # Schema Cleanup: Remove misfiled quotes from forensic_metrics
-                        if "forensic_metrics" in post.metadata and "quotes" in post.metadata["forensic_metrics"]:
-                            changes.append(f"  - Delete 'forensic_metrics.quotes' (Schema Cleanup)")
-                            del post.metadata["forensic_metrics"]["quotes"]
-                    
-                    # Special Case: War Stories -> metrics.war_stories
-                    elif key == "war_stories":
-                        if post.metadata["metrics"].get("war_stories") != val:
-                            changes.append(f"  - Update 'metrics.war_stories'")
-                            post.metadata["metrics"]["war_stories"] = val
-                    
-                    # Standard Structured Data
-                    elif key in structured_keys:
-                        if post.metadata["metrics"].get(key) != val:
-                            changes.append(f"  - Update 'metrics.{key}' (Structured)")
-                            post.metadata["metrics"][key] = val
-                    
-                    else:
-                        # Unknown object -> default to metrics to be safe
-                        if post.metadata["metrics"].get(key) != val:
-                            changes.append(f"  - Update 'metrics.{key}' (Unknown Object)")
-                            post.metadata["metrics"][key] = val
+        # 4. Seismobolus (Direct Injection)
+        if "seismobolus" in data:
+            seismo = data["seismobolus"]
+            if post.metadata.get("seismobolus") != seismo:
+                changes.append(f"  - Update 'seismobolus' ({len(seismo)} events)")
+                post.metadata["seismobolus"] = seismo
 
-                # Narrative Strings -> forensic_metrics
-                elif isinstance(val, str):
-                    if key in narrative_keys:
-                        if post.metadata["forensic_metrics"].get(key) != val:
-                            changes.append(f"  - Update 'forensic_metrics.{key}' (Narrative)")
-                            post.metadata["forensic_metrics"][key] = val
-                    else:
-                        # Unknown string -> where to put it? 
-                        # Default to forensic_metrics for strings to avoid schema crash in strict metrics
-                        if post.metadata["forensic_metrics"].get(key) != val:
-                            changes.append(f"  - Update 'forensic_metrics.{key}' (Unknown String)")
-                            post.metadata["forensic_metrics"][key] = val
+        # 5. Reports (Direct Injection to Metadata - NOT Body for now)
+        if "reports" in data:
+            reports = data["reports"]
+            if post.metadata.get("reports") != reports:
+                changes.append(f"  - Update 'reports' ({len(reports)} items)")
+                post.metadata["reports"] = reports
+
+        # --- V2.0 SCHEMA UPDATES (Feb 2026) ---
+        
+        # 8. BOM (Bill of Materials)
+        if "bom" in data:
+            if post.metadata.get("bom") != data["bom"]:
+                changes.append(f"  - Update 'bom' ({len(data['bom'])} items)")
+                post.metadata["bom"] = data["bom"]
+
+        # 9. Team Size
+        if "teamSize" in data:
+            if post.metadata.get("teamSize") != data["teamSize"]:
+                changes.append(f"  - Update 'teamSize'")
+                post.metadata["teamSize"] = data["teamSize"]
+
+        # 10. Tags (Controlled Vocabulary)
+        if "tags" in data:
+            if post.metadata.get("tags") != data["tags"]:
+                changes.append(f"  - Update 'tags' ({len(data['tags'])} items)")
+                post.metadata["tags"] = data["tags"]
+
+        # 11. Forensic Summary (Strict Object)
+        if "forensic_summary" in data:
+            fs = data["forensic_summary"]
+            
+            # V2 Safety Check: Must be Dict
+            if isinstance(fs, str):
+                print(f"  ❌ ERROR: {slug} has V1 String Summary. Migration Required.")
+                continue # Skip this file to prevent corruption
+            
+            if post.metadata.get("forensic_summary") != fs:
+                changes.append(f"  - Update 'forensic_summary' (Structured V2)")
+                post.metadata["forensic_summary"] = fs
+
                             
         # 6. Quotes (Legacy top-level injection check)
         if "quotes" in data:

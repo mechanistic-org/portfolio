@@ -1,4 +1,9 @@
 {
     "id": "philosophy",
-    "forensic_summary": "OBJECTIVE: To define the principles of HXO. FRICTION: Entropics. METHOD: Rigorous Design."
+    "forensic_summary": {
+        "trigger": "Legacy Data (Migration)",
+        "intervention": "Legacy Data (Migration)",
+        "result": "OBJECTIVE: To define the principles of HXO. FRICTION: Entropics. METHOD: Rigorous Design."
+    },
+    "_schema_version": "v2.0"
 }

@@ -1,64 +1,93 @@
 {
-	"id": "project-danko-d-command",
-	"presentation_mode": "deep_dive",
-	"metrics": {
-		"financial": "[D-Command] Negotiated $5,000 expedite fee waiver with PPI Plastics; waived tooling fees in exchange for delivery delays. Snake Cable COGS reduction (100' cut). [PCII Stand] $150K sunk tooling cost; One-coat paint process savings",
-		"process": "[D-Command] Achieved 80% confidence in FCS through aggressive schedule pull-ins; Rejected 50% of initial Fader Pan inventory to enforce flatness. [PCII Stand] Secondary operation drawings for extrusion x-bars",
-		"governance": "[D-Command] Solo mechanical documentation release (24+ parts); Weekly QA Top Ten defect tracking. [PCII Stand] Vendor-direct negotiation (Alexandria Extrusion)"
-	},
-	"forensic_summary": "[D-Command] TRIGGER: Integration of D-Control architecture into a mid-format footprint ('Danko') triggered yield-killing crises: 'Vegas Mode' thermal peaks (61°C), LCD 'bleed', and 'Warped Pan' fitment issues. INTERVENTION: The Architect engineered relief cuts for LCD cables, enforced strict cabling routing for airflow, and instituted 100% manual inspection of incoming sheetmetal. RESULT: Stabilized production yield and met FCS targets despite a 'Solo Mandate' documentation load. [PCII Stand] TRIGGER: 'Total devastation' regarding Solid Concepts quote for short-run parts while tooling was already $150k deep. INTERVENTION: Negotiated 1-step paint coverage to lower cost and coordinated directly with extrusion vendors to delete grooves. RESULT: Cost reduction strategies allowed project to proceed.",
-	"toolchain": [
-		"Pro/ENGINEER (Wildfire)",
-		"Intralink / Windchill PDMLink",
-		"One-Off (ASK Database)",
-		"VNC (Remote Access)",
-		"Mass Precision (Sheetmetal)",
-		"PPI Plastics (Injection Molding)",
-		"Cycle Start (Machining)",
-		"Solid Concepts (Prototyping)",
-		"Alexandria Extrusion (Aluminum)",
-		"NxRev (Support)",
-		"Jetcrown"
-	],
-	"cast": [
-		{
-			"name": "Erik Norris",
-			"role": "Lead Mechanical Engineer / The Architect",
-			"org": "Digidesign"
-		},
-		{
-			"name": "Neal Breitbarth",
-			"role": "Senior Mechanical and Industrial Design",
-			"org": "Digidesign"
-		},
-		{ "name": "Eli Manjarrez", "role": "Program Manager", "org": "Digidesign" },
-		{ "name": "Fidel Saucedo", "role": "Vendor Liaison/Programmer", "org": "Mass Precision" },
-		{ "name": "Terri Merrell", "role": "Materials Manager / Buyer", "org": "Digidesign" },
-		{ "name": "Marc Schuman", "role": "Firmware/Thermal Testing", "org": "Digidesign" },
-		{ "name": "Jason", "role": "Vendor Rep", "org": "PPI Plastics" },
-		{ "name": "Don Kingman", "role": "Vendor Rep", "org": "Alexandria Extrusion" }
-	],
-	"timeline": {
-		"start": "2003-07-29",
-		"end": "2005-05-17"
-	},
-	"visuals_to_find": [
-		"MVC-001F.JPG (Defect photo: Paint masking/burrs)",
-		"942011718-00_A_RL.pdf (Redlined leg drawing)",
-		"D_Control_Gap_Measurement_Report.doc (Forensic gap analysis)",
-		"PCII_CONFIGS.pdf (Stand configurations mockup)",
-		"919012903-00_REVB.pdf (Rib assembly cosmetic spec)",
-		"Danko_022805.xls (Compliance/Yield Test Matrix)",
-		"942012887-00_C_EXTERNAL_DWG.pdf (Paint conflict print)",
-		"H040128C1.pdf (The 'Devastation' Quote)",
-		"PC2_stand_shtmtl_costing_05_06_04.xls"
-	],
-	"quotes": [
-		"I'm in shell-hell right now, but things are going better than yesterday",
-		"Erik needs to complete all of his documentation, ECO's etc... at the end of the day Erik is solo on the part and assembly drawings",
-		"I rejected 4 sets out of a total of 19 sets for the following defects... unacceptable paint masking... burrs",
-		"This is a blatant violation of our published minimum FR-4 spec. ... a virtual tinderbox.",
-		"Pretty much total devastation.",
-		"One-coat paint (1-step) coverage provides lower overall finishing costs..."
-	]
+    "id": "project-danko-d-command",
+    "presentation_mode": "deep_dive",
+    "forensic_summary": {
+        "trigger": "Integration of D-Control architecture into a mid-format footprint ('Danko') triggered yield-killing crises: 'Vegas Mode' thermal peaks (61\u00b0C), LCD 'bleed', and 'Warped Pan' fitment issues.",
+        "intervention": "The Architect engineered relief cuts for LCD cables, enforced strict cabling routing for airflow, and instituted 100% manual inspection of incoming sheetmetal.",
+        "result": "Stabilized production yield and met FCS targets despite a 'Solo Mandate' documentation load. [PCII Stand] TRIGGER: 'Total devastation' regarding Solid Concepts quote for short-run parts while tooling was already $150k deep. INTERVENTION: Negotiated 1-step paint coverage to lower cost and coordinated directly with extrusion vendors to delete grooves. RESULT: Cost reduction strategies allowed project to proceed."
+    },
+    "toolchain": [
+        "Pro/ENGINEER (Wildfire)",
+        "Intralink / Windchill PDMLink",
+        "One-Off (ASK Database)",
+        "VNC (Remote Access)",
+        "Mass Precision (Sheetmetal)",
+        "PPI Plastics (Injection Molding)",
+        "Cycle Start (Machining)",
+        "Solid Concepts (Prototyping)",
+        "Alexandria Extrusion (Aluminum)",
+        "NxRev (Support)",
+        "Jetcrown"
+    ],
+    "cast": [
+        {
+            "name": "Erik Norris",
+            "role": "Lead Mechanical Engineer / The Architect",
+            "org": "Digidesign"
+        },
+        {
+            "name": "Neal Breitbarth",
+            "role": "Senior Mechanical and Industrial Design",
+            "org": "Digidesign"
+        },
+        {
+            "name": "Eli Manjarrez",
+            "role": "Program Manager",
+            "org": "Digidesign"
+        },
+        {
+            "name": "Fidel Saucedo",
+            "role": "Vendor Liaison/Programmer",
+            "org": "Mass Precision"
+        },
+        {
+            "name": "Terri Merrell",
+            "role": "Materials Manager / Buyer",
+            "org": "Digidesign"
+        },
+        {
+            "name": "Marc Schuman",
+            "role": "Firmware/Thermal Testing",
+            "org": "Digidesign"
+        },
+        {
+            "name": "Jason",
+            "role": "Vendor Rep",
+            "org": "PPI Plastics"
+        },
+        {
+            "name": "Don Kingman",
+            "role": "Vendor Rep",
+            "org": "Alexandria Extrusion"
+        }
+    ],
+    "timeline": {
+        "start": "2003-07-29",
+        "end": "2005-05-17"
+    },
+    "visuals_to_find": [
+        "MVC-001F.JPG (Defect photo: Paint masking/burrs)",
+        "942011718-00_A_RL.pdf (Redlined leg drawing)",
+        "D_Control_Gap_Measurement_Report.doc (Forensic gap analysis)",
+        "PCII_CONFIGS.pdf (Stand configurations mockup)",
+        "919012903-00_REVB.pdf (Rib assembly cosmetic spec)",
+        "Danko_022805.xls (Compliance/Yield Test Matrix)",
+        "942012887-00_C_EXTERNAL_DWG.pdf (Paint conflict print)",
+        "H040128C1.pdf (The 'Devastation' Quote)",
+        "PC2_stand_shtmtl_costing_05_06_04.xls"
+    ],
+    "quotes": [
+        "I'm in shell-hell right now, but things are going better than yesterday",
+        "Erik needs to complete all of his documentation, ECO's etc... at the end of the day Erik is solo on the part and assembly drawings",
+        "I rejected 4 sets out of a total of 19 sets for the following defects... unacceptable paint masking... burrs",
+        "This is a blatant violation of our published minimum FR-4 spec. ... a virtual tinderbox.",
+        "Pretty much total devastation.",
+        "One-coat paint (1-step) coverage provides lower overall finishing costs..."
+    ],
+    "forensic_metrics": {
+        "financial": "[D-Command] Negotiated $5,000 expedite fee waiver with PPI Plastics; waived tooling fees in exchange for delivery delays. Snake Cable COGS reduction (100' cut). [PCII Stand] $150K sunk tooling cost; One-coat paint process savings",
+        "process": "[D-Command] Achieved 80% confidence in FCS through aggressive schedule pull-ins; Rejected 50% of initial Fader Pan inventory to enforce flatness. [PCII Stand] Secondary operation drawings for extrusion x-bars",
+        "governance": "[D-Command] Solo mechanical documentation release (24+ parts); Weekly QA Top Ten defect tracking. [PCII Stand] Vendor-direct negotiation (Alexandria Extrusion)"
+    },
+    "_schema_version": "v2.0"
 }

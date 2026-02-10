@@ -1,0 +1,33 @@
+{
+    "id": "room-director",
+    "forensic_summary": "TRIGGER: Catastrophic structural disintegration during Impact Testing where 7 of 7 Sativa units suffered 'Front housing and back cover separate', compounded by a 6/7 failure rate for 'Front housing corner coating peel off' during micro-drops. INTERVENTION: The Architect mandated a structural overhaul to a 'Full Circle Hinge' design, adding reinforcement ribs and removing chamfers to lock the housing. Concurrently enforced a 'VDI-15' finish change on the substrate to resolve paint adhesion delamination. RESULT: Modified mockups passed Drop, Crush, and Rapid Pull tests, securing the premium 'Room Director' configuration for DVT.",
+    "metrics": {
+        "war_stories": [
+            {
+                "label": "Structural Disintegration",
+                "value": "Full Circle Hinge",
+                "description": "Redesigned hinge geometry to 'Full Circle' profile to arrest 100% impact failure rate (7/7)."
+            },
+            {
+                "label": "Paint Delamination",
+                "value": "VDI-15 Texture",
+                "description": "Mandated substrate change from Gloss to VDI-15 to resolve 85% paint peel failure (SAT-127)."
+            },
+            {
+                "label": "Display Integrity",
+                "value": "Liquid Glue vs Tape",
+                "description": "Enforced 5-hour liquid glue cure process to bridge 0.3mm gap and prevent Touch Panel lift-off."
+            },
+            {
+                "label": "Dead Front Aesthetic",
+                "value": "IR Film & Pad Printing",
+                "description": "Engineered IR film stack and curved-glass pad printing to conceal sensors and seal light leakage."
+            },
+            {
+                "label": "OLED Integration",
+                "value": "JDM Governance",
+                "description": "Managed AUO/Biel partnership to align OLED Active Area with Glass Viewing Area, overcoming code incompatibility."
+            }
+        ]
+    }
+}

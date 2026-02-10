@@ -1,0 +1,104 @@
+{
+    "id": "orpheus-mini-system-ksystem-120",
+    "presentation_mode": "deep_dive",
+    "metrics": {
+        "financial": "Eliminated $2,800 tooling costs by substituting existing Mass Precision tools; Negotiated reduced NRE ($1,904) for proto builds; Potential $20k savings identified by cutting glow board PCBs.",
+        "process": "Yield improved from ~80% in pilot to 'almost 100%' in latter batches via process adjustments.",
+        "governance": "Weekly Mechanical/ID Meetings; Bi-weekly production calls with Sanmina Enclosures (Plant 4); Line Down crisis management.",
+        "war_stories": [
+            {
+                "description": "Reduced CPU temp delta from 20\u00b0C to 3\u00b0C by replacing 0.30mm adhesive with Phase Change Material and high-pressure clips.",
+                "label": "The Thermal Blanket",
+                "value": "20\u00b0C -> 3\u00b0C Delta"
+            },
+            {
+                "description": "Identified a 0.005\" tolerance stack-up error in the fan tray assembly that prevented lid closure, averting a yield crisis.",
+                "label": "The 0.005\" Tolerance Gap",
+                "value": "Stack-Up Error"
+            }
+        ]
+    },
+    "forensic_summary": "TRIGGER: The 'Orpheus' launch faced multiple converging crises: a 'Line Down' event due to BOM shortages/errors, a thermal 'hard hang' every 50 minutes caused by the motherboard, and EMI failures requiring chassis modifications. Additionally, early metal chassis lids were 3mm too wide, requiring manual 'hammering' to fit. \n\nINTERVENTION: The Architect (Erik Norris) orchestrated a multi-front recovery. He executed sheet metal redesigns to add screws for EMI containment, modified heatsink specs for thermal compliance, and coordinated rapid tooling substitutions with Mass Precision to bypass delays. A 'White Glove' inspection protocol was implemented to resolve cosmetic debris issues.\n\nRESULT: The chassis passed Radiated Emissions tests, production yields stabilized at nearly 100%, and the product successfully launched in March 2009.",
+    "toolchain": [
+        "Software: Pro/ENGINEER (ProE)",
+        "Software: Windchill PDM",
+        "Software: Arena PLM",
+        "Software: AutoCAD (DWG/DXF)",
+        "Vendor: Mass Precision (Sheetmetal/Tooling)",
+        "Vendor: Prompt Precision (Prototyping)",
+        "Vendor: Sanmina (Guadalajara Plant 4 - Enclosures/Assembly)",
+        "Vendor: Steman / Weddy Wang (Plastics/Tooling)",
+        "Vendor: Kontron (Motherboards/Heatsinks)",
+        "Vendor: Argyle Design (ID/Mechanical Consultants)"
+    ],
+    "cast": [
+        {
+            "name": "Erik Norris",
+            "role": "Lead Mechanical Engineer / The Architect",
+            "org": "Kaleidescape"
+        },
+        {
+            "name": "Richard Lane",
+            "role": "Director/Manager",
+            "org": "Kaleidescape"
+        },
+        {
+            "name": "Michael Clader",
+            "role": "Director, Manufacturing Engineering",
+            "org": "Kaleidescape"
+        },
+        {
+            "name": "Orion Bruckman",
+            "role": "Sr. Hardware Engineer",
+            "org": "Kaleidescape"
+        },
+        {
+            "name": "Rob Wudrick",
+            "role": "HW Program Manager",
+            "org": "Kaleidescape"
+        },
+        {
+            "name": "Ed Stegall",
+            "role": "Contact/Engineer",
+            "org": "Mass Precision"
+        },
+        {
+            "name": "Leanne Santos",
+            "role": "Project Engineer",
+            "org": "Mass Precision"
+        },
+        {
+            "name": "Weddy Wang",
+            "role": "Supplier",
+            "org": "Steman Co., Ltd."
+        },
+        {
+            "name": "Jonathan Burke",
+            "role": "Designer",
+            "org": "Argyle Design"
+        },
+        {
+            "name": "Gabe Cohn",
+            "role": "Mechanical Engineer",
+            "org": "Argyle Design"
+        }
+    ],
+    "timeline": {
+        "start": "2008-05-15",
+        "end": "2009-05-26"
+    },
+    "visuals_to_find": [
+        "glow_12_24_08.pdf (PCB vs Screen location)",
+        "Orpheus Thermal Results_Rev2.pdf",
+        "Orpheus Fan Mount Issue.doc",
+        "MOV05629.MPG (Power Button clicking issue)",
+        "Orpheus_sheetmetal_MCT_REV_B - redlined.xls",
+        "stack1_cylinder.jpg (IR Lens rendering)",
+        "DSCF2788.jpg (Internal bracket issues)"
+    ],
+    "quotes": [
+        "The line is down for several shortages, production is stopped and cannot continue. Causes are numerous, mostly BOM errors...",
+        "The lid appears to be 3mm wider than the chassis (Greg hammered it into shape with a piece of wood. Erik: Can you look into this?",
+        "I should be able to eliminate the $2800 tooling for the base by substituting existing Mass tools."
+    ]
+}

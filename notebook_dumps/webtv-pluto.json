@@ -1,4 +1,9 @@
 {
     "id": "webtv-pluto",
-    "forensic_summary": "The Trigger: Hard deadline for CES (Jan 3) with PCBs arriving late Nov/early Dec and wrong hardware ordered, creating an 'impossible load' over the holidays. -> The Intervention: Completed Pro/E files for Zeus enclosure for rapid fab at EMS, managed bezel machining at Sputnik, and 'babysat' hardware procurement. -> The Result: Successful build completed over Christmas weekend; units shipped out on Dec 27th for the show."
+    "forensic_summary": {
+        "trigger": "Hard deadline for CES (Jan 3) with PCBs arriving late Nov/early Dec and wrong hardware ordered, creating an 'impossible load' over the holidays. -> The",
+        "intervention": "Completed Pro/E files for Zeus enclosure for rapid fab at EMS, managed bezel machining at Sputnik, and 'babysat' hardware procurement. -> The",
+        "result": "Successful build completed over Christmas weekend; units shipped out on Dec 27th for the show."
+    },
+    "_schema_version": "v2.0"
 }

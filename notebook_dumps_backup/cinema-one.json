@@ -1,0 +1,17 @@
+{
+    "id": "cinema-one",
+    "metrics": {
+        "war_stories": [
+            {
+                "description": "Issued pragmatic deviation allowing cosmetic flow marks <25mm to unblock shipping while protecting the 100% failure lots.",
+                "label": "The 'Tactical' Deviation",
+                "value": "25x20mm Limit"
+            },
+            {
+                "description": "Diagnosed a 'Software Fatal Error' on the Gennum VXP chip as physical interference: the drive cage was shearing off Resistor R332.",
+                "label": "The Gennum Crash Loop",
+                "value": "R332 Resistor"
+            }
+        ]
+    }
+}

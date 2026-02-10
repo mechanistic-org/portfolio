@@ -1,37 +1,60 @@
 ---
 audio_url: /assets/extension-switches/extension-switches-briefing.m4a
 cast:
-  - name: Erik Norris
-    org: Locoroll (Noon Home)
-    role: Head of ME / The Architect
-  - name: Kelvin
-    org: FIH
-    role: Manufacturing Engineer
-  - name: Nick
-    org: Locoroll
-    role: ME Lead
-  - name: Will
-    org: Locoroll
-    role: ME Lead
+- name: Erik Norris
+  org: Locoroll (Noon Home)
+  role: Head of ME / The Architect
+- name: Kelvin
+  org: FIH
+  role: Manufacturing Engineer
+- name: Nick
+  org: Locoroll
+  role: ME Lead
+- name: Will
+  org: Locoroll
+  role: ME Lead
 category: consumer_electronics
 cyberspace:
   enable: true
   layout: linear
-  stickies: []
+  stickies:
+  - data:
+      columns: 3
+      images:
+      - alt: IMG_20170420_171537
+        aspectRatio: 1.5
+        src: /assets/r2/extension-switches/bubbles/03_click_testing/IMG_20170420_171537-xl.webp
+      - alt: IMG_20170420_171607
+        aspectRatio: 1.5
+        src: /assets/r2/extension-switches/bubbles/03_click_testing/IMG_20170420_171607-xl.webp
+      - alt: IMG_20170420_171705
+        aspectRatio: 1.5
+        src: /assets/r2/extension-switches/bubbles/03_click_testing/IMG_20170420_171705-xl.webp
+      - alt: IMG_20170420_171744
+        aspectRatio: 1.5
+        src: /assets/r2/extension-switches/bubbles/03_click_testing/IMG_20170420_171744-xl.webp
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 03_click_testing
+    title: Click Testing
+    type: gallery
 date: 2016-12-12
 draft: false
 employer: noon
 endDate: 2018-08-01
 forensic_summary:
-  "TRIGGER: Catastrophic 100% failure rate (7/7 units) in EVT2 Thermal
-  Stress testing (65°C/-20°C) manifesting as 'Plastic Cap Floating', compounded
-  by a 0.3mm tooling depth mismatch causing 'Gap between Elvis cap and front housing'
-  and 'Cheep sound' acoustic defects. INTERVENTION: The Architect mandated a 'Stop
-  Ship' on PSA tape, forcing a transition to liquid structural glue. Concurrently
-  directed a tooling modification to replace Gloss finish with 'VDI-15' to resolve
-  paint delamination and added internal ribs to dampen acoustic hollowness (SAT-281).
-  RESULT: Glued units passed Crush, Drop, and Environmental tests, securing the launch
-  configuration."
+  intervention: The Architect mandated a 'Stop Ship' on PSA tape, forcing a transition
+    to liquid structural glue. Concurrently directed a tooling modification to replace
+    Gloss finish with 'VDI-15' to resolve paint delamination and added internal ribs
+    to dampen acoustic hollowness (SAT-281).
+  result: Glued units passed Crush, Drop, and Environmental tests, securing the launch
+    configuration.
+  trigger: Catastrophic 100% failure rate (7/7 units) in EVT2 Thermal Stress testing
+    (65°C/-20°C) manifesting as 'Plastic Cap Floating', compounded by a 0.3mm tooling
+    depth mismatch causing 'Gap between Elvis cap and front housing' and 'Cheep sound'
+    acoustic defects.
 gallery: []
 hxo_ready: true
 hydration_status: full
@@ -40,71 +63,83 @@ listed: true
 metrics:
   financial:
     margins:
-      - Target Gross Margin $49/$59 on $79 MSRP (Elvis Gen 2)
-      - "Tooling modification cost: USD$3,000 for VDI-15 texture change"
+    - Target Gross Margin $49/$59 on $79 MSRP (Elvis Gen 2)
+    - 'Tooling modification cost: USD$3,000 for VDI-15 texture change'
   governance:
     dcdCount: 0
     ecos:
-      - Stop Ship on PSA tape
+    - Stop Ship on PSA tape
   interventions:
     count: 5
     label: Critical Saves
     value: 5
   process:
     yield:
-      - Recovered 100% of EVT2 units from 'Plastic Cap Floating' (7/7 failure) via liquid
-        glue intervention
+    - Recovered 100% of EVT2 units from 'Plastic Cap Floating' (7/7 failure) via liquid
+      glue intervention
   war_stories:
-    - description:
-        Resolved 100% EVT2 failure rate (7/7) by replacing PSA tape with
-        liquid structural glue to bridge 0.3mm gap.
-      label: Plastic Cap Floating
-      value: Liquid Glue Intervention
-    - description:
-        Eliminated high-frequency noise via UV-verified lubrication and internal
-        structural ribbing.
-      label: Acoustic 'Cheep' Sound
-      value: Damping Grease & Ribs
-    - description:
-        Mandated tooling change from Gloss to VDI-15 to resolve cosmetic
-        paint adhesion failures.
-      label: Paint Delamination
-      value: VDI-15 Texture
-    - description:
-        Enforced strict spectrophotometer limits to catch UV coating degradation,
-        driving resin study.
-      label: Yellowing Gate
-      value: Delta E < 1.5
-    - description: Optimized Gen 2 mechanical BOM to hit $49 margin on $79 MSRP.
-      label: Cost Engineering
-      value: $49 COGS Target
+  - description: Resolved 100% EVT2 failure rate (7/7) by replacing PSA tape with
+      liquid structural glue to bridge 0.3mm gap.
+    label: Plastic Cap Floating
+    value: Liquid Glue Intervention
+  - description: Eliminated high-frequency noise via UV-verified lubrication and internal
+      structural ribbing.
+    label: Acoustic 'Cheep' Sound
+    value: Damping Grease & Ribs
+  - description: Mandated tooling change from Gloss to VDI-15 to resolve cosmetic
+      paint adhesion failures.
+    label: Paint Delamination
+    value: VDI-15 Texture
+  - description: Enforced strict spectrophotometer limits to catch UV coating degradation,
+      driving resin study.
+    label: Yellowing Gate
+    value: Delta E < 1.5
+  - description: Optimized Gen 2 mechanical BOM to hit $49 margin on $79 MSRP.
+    label: Cost Engineering
+    value: $49 COGS Target
 phase_stats:
   Design: 20
   Engineering: 40
   Production: 40
   Strategy: 0
-presentation_mode: flagship
+presentation_mode: deep_dive
 primary_home: mech
 productionScale: series
 slug: extension-switches
 tags:
-  - Mechanical Engineering
-  - Consumer Electronics
-  - Cost Engineering
-  - Acoustics
-  - High Volume Manufacturing
+- Acoustics
 targets:
-  - main
-  - mech
+- main
+- mech
 theme: hyperspace
 tier: 1
 title: Extension Switch (Elvis)
 toolchain:
-  - Arena PLM (Part Number 432-00007)
-  - "JIRA (Issue Tracking: SAT-149, SAT-238, SAT-281)"
-  - FIH (Foxconn International Holdings - Manufacturing)
-  - Memtech (Injection Molding/Tooling)
-  - "SABIC (Resin: EXL 9330 / CX7240U)"
+- Arena PLM (Part Number 432-00007)
+- 'JIRA (Issue Tracking: SAT-149, SAT-238, SAT-281)'
+- FIH (Foxconn International Holdings - Manufacturing)
+- Memtech (Injection Molding/Tooling)
+- 'SABIC (Resin: EXL 9330 / CX7240U)'
+war_stories:
+- description: Resolved 100% EVT2 failure rate (7/7) by replacing PSA tape with liquid
+    structural glue to bridge 0.3mm gap.
+  label: Plastic Cap Floating
+  value: Liquid Glue Intervention
+- description: Eliminated high-frequency noise via UV-verified lubrication and internal
+    structural ribbing.
+  label: Acoustic 'Cheep' Sound
+  value: Damping Grease & Ribs
+- description: Mandated tooling change from Gloss to VDI-15 to resolve cosmetic paint
+    adhesion failures.
+  label: Paint Delamination
+  value: VDI-15 Texture
+- description: Enforced strict spectrophotometer limits to catch UV coating degradation,
+    driving resin study.
+  label: Yellowing Gate
+  value: Delta E < 1.5
+- description: Optimized Gen 2 mechanical BOM to hit $49 margin on $79 MSRP.
+  label: Cost Engineering
+  value: $49 COGS Target
 ---
 
 # Project Elvis (Extension Switch) Forensic Report

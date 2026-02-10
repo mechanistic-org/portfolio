@@ -1,18 +1,18 @@
 ---
 audio_url: /assets/wall-plates/wall-plates-briefing.m4a
 cast:
-  - name: Erik Norris
-    org: Locoroll (Noon Home)
-    role: Head of ME / The Architect
-  - name: Colin Davis
-    org: Function Engineering
-    role: Stack Engineer
-  - name: Kelvin
-    org: FIH
-    role: Manufacturing Engineer
-  - name: Will
-    org: Locoroll
-    role: ME Lead
+- name: Erik Norris
+  org: Locoroll (Noon Home)
+  role: Head of ME / The Architect
+- name: Colin Davis
+  org: Function Engineering
+  role: Stack Engineer
+- name: Kelvin
+  org: FIH
+  role: Manufacturing Engineer
+- name: Will
+  org: Locoroll
+  role: ME Lead
 category: consumer_electronics
 cyberspace:
   enable: true
@@ -23,15 +23,16 @@ draft: false
 employer: noon
 endDate: 2017-08-31
 forensic_summary:
-  "TRIGGER: Forensic tolerance analysis revealed a catastrophic '0mm!'
-  clearance condition where the Waldo cover plate would collide with the high-voltage
-  Bazooka module if 'biased down', risking live exposure. Simultaneously, the stamped
-  steel chassis suffered 'pillowing' from aggressive square dimples, consuming Z-axis
-  tolerance. INTERVENTION: The Architect mandated a 'Stackup Loop' review, reducing
-  the perimeter Y-gap from 0.3mm to 0.2mm to mechanically constrain the plate. Directed
-  a tooling change to 'minimize to round pip' to flatten the chassis and added 'local
-  pads' for snap tuning. RESULT: Secured 'Zero to Zero' flushness without interference
-  and standardized the aesthetic to Satin VDI 15."
+  intervention: The Architect mandated a 'Stackup Loop' review, reducing the perimeter
+    Y-gap from 0.3mm to 0.2mm to mechanically constrain the plate. Directed a tooling
+    change to 'minimize to round pip' to flatten the chassis and added 'local pads'
+    for snap tuning.
+  result: Secured 'Zero to Zero' flushness without interference and standardized the
+    aesthetic to Satin VDI 15.
+  trigger: Forensic tolerance analysis revealed a catastrophic '0mm!' clearance condition
+    where the Waldo cover plate would collide with the high-voltage Bazooka module
+    if 'biased down', risking live exposure. Simultaneously, the stamped steel chassis
+    suffered 'pillowing' from aggressive square dimples, consuming Z-axis tolerance.
 gallery: []
 hxo_ready: true
 hydration_status: full
@@ -40,42 +41,38 @@ listed: true
 metrics:
   financial:
     margins:
-      - Compressed chassis tooling lead times to 6 weeks for EVT1
+    - Compressed chassis tooling lead times to 6 weeks for EVT1
   governance:
     dcdCount: 0
     ecos:
-      - "Tooling Redline: Square Dimples"
+    - 'Tooling Redline: Square Dimples'
   interventions:
     count: 5
     label: Critical Saves
     value: 5
   process:
     yield:
-      - Tightened injection molding tolerances to +/- 0.05mm
+    - Tightened injection molding tolerances to +/- 0.05mm
   war_stories:
-    - description:
-        Eliminated 0mm interference risk by reducing perimeter gap, preventing
-        high-voltage collision.
-      label: Zero Clearance Kill
-      value: 0.3mm -> 0.2mm
-    - description:
-        Replaced aggressive square dimples with circular pips to stop steel
-        deformation.
-      label: Chassis Pillowing
-      value: Dimple to Pip
-    - description:
-        Identified plating failure causing grounding loss; managed via non-plated
-        EVT units.
-      label: Black Zinc Stop
-      value: Grounding Failure
-    - description:
-        Tightened tolerances to +/- 0.05mm and added local pads to fix faceplate
-        looseness.
-      label: The Jiggle
-      value: Snap Tuning
-    - description: Compressed complex 2-gang tooling lead time to hit EVT1 schedule.
-      label: Speed Tooling
-      value: 6-Week Delivery
+  - description: Eliminated 0mm interference risk by reducing perimeter gap, preventing
+      high-voltage collision.
+    label: Zero Clearance Kill
+    value: 0.3mm -> 0.2mm
+  - description: Replaced aggressive square dimples with circular pips to stop steel
+      deformation.
+    label: Chassis Pillowing
+    value: Dimple to Pip
+  - description: Identified plating failure causing grounding loss; managed via non-plated
+      EVT units.
+    label: Black Zinc Stop
+    value: Grounding Failure
+  - description: Tightened tolerances to +/- 0.05mm and added local pads to fix faceplate
+      looseness.
+    label: The Jiggle
+    value: Snap Tuning
+  - description: Compressed complex 2-gang tooling lead time to hit EVT1 schedule.
+    label: Speed Tooling
+    value: 6-Week Delivery
 phase_stats:
   Design: 20
   Engineering: 50
@@ -85,24 +82,39 @@ presentation_mode: flagship
 primary_home: mech
 productionScale: series
 slug: wall-plates
-tags:
-  - Mechanical Engineering
-  - Tolerance Analysis
-  - High Voltage Safety
-  - Tooling Strategy
-  - CMF Execution
+tags: []
 targets:
-  - main
-  - mech
+- main
+- mech
 theme: hyperspace
 tier: 1
 title: Wall Plate (Waldo)
 toolchain:
-  - Creo (CAD Modeling)
-  - Excel (Tolerance Stackup Analysis)
-  - "JIRA (Issue Tracking: WAL-10, WAL-15, WAL-22, WAL-23)"
-  - FIH (Manufacturing Vendor)
-  - Memtech (Injection Molding)
+- Creo (CAD Modeling)
+- Excel (Tolerance Stackup Analysis)
+- 'JIRA (Issue Tracking: WAL-10, WAL-15, WAL-22, WAL-23)'
+- FIH (Manufacturing Vendor)
+- Memtech (Injection Molding)
+war_stories:
+- description: Eliminated 0mm interference risk by reducing perimeter gap, preventing
+    high-voltage collision.
+  label: Zero Clearance Kill
+  value: 0.3mm -> 0.2mm
+- description: Replaced aggressive square dimples with circular pips to stop steel
+    deformation.
+  label: Chassis Pillowing
+  value: Dimple to Pip
+- description: Identified plating failure causing grounding loss; managed via non-plated
+    EVT units.
+  label: Black Zinc Stop
+  value: Grounding Failure
+- description: Tightened tolerances to +/- 0.05mm and added local pads to fix faceplate
+    looseness.
+  label: The Jiggle
+  value: Snap Tuning
+- description: Compressed complex 2-gang tooling lead time to hit EVT1 schedule.
+  label: Speed Tooling
+  value: 6-Week Delivery
 ---
 
 # Project Waldo Forensic Report

@@ -1,0 +1,99 @@
+{
+    "id": "d-control_buckley",
+    "presentation_mode": "deep_dive",
+    "metrics": {
+        "financial": "Stand CoGS crept 'way higher' due to rigidity measures (Source)",
+        "process": "Resolved 50% yield crisis on PPI Side Caps (Source)",
+        "governance": "Weekly Con Call / Crisis Management (Line Down)",
+        "war_stories": [
+            {
+                "description": "Authorized manual bending of warped fader plates (Part 11517) on the line to keep the line moving. 'If you stop to retool, you never ship.",
+                "label": "The 'Blacksmithing' Protocol",
+                "value": "Manual Metal Bending"
+            },
+            {
+                "description": "Accepted 61\\xB0C thermal risk on LED supply during 'All Lights Flashing' demo mode to enable the 180-degree fader flip.",
+                "label": "Vegas Mode Thermal Spike",
+                "value": "61\\xB0C Heatsink"
+            },
+            {
+                "description": "Inverted assembly order: bolted units together first to create a rigid block, then attached wobbly stand legs, saving hours of alignment time.",
+                "label": "The Rigid Block Match",
+                "value": "Assembly Inversion"
+            },
+            {
+                "description": "Prioritized revenue over cosmetics: tracked specific serial numbers of warped End Caps (26% failure rate) to ship ''Pragmatic Units''.",
+                "label": "Deviation 7896",
+                "value": "74% Yield Accepted"
+            },
+            {
+                "description": "Created the 'Danko' mid-tier product using the premium 'Buckley' PCB by simply not populating ('No-Stuff') 7 specific resistors.",
+                "label": "The 'No-Stuff' Pivot",
+                "value": "Inventory Hack"
+            },
+            {
+                "description": "Battled IT to reboot license servers at 9 PM to check in 'Version 35' of a standard nut (SNUT.part) that was locking the entire assembly.",
+                "label": "The SNUT.part Conflict",
+                "value": "Intralink War"
+            },
+            {
+                "description": "Diagnosed 20% frequency shift in touch faders as parasitic capacitance from nearby LEDs. Fixed with a generic 0805 C0G capacitor.",
+                "label": "The Parasitic Touch",
+                "value": "LED Interference"
+            }
+        ]
+    },
+    "forensic_summary": "TRIGGER: Post-FCS 'Line Down' crisis caused by cosmetic and structural failure of Plastic Side Caps (PPI), halting D-Control shipments for 3-4 weeks due to 50% yield rates (Source). INTERVENTION: Erik Norris volunteered as 'point guy' (Source), initiating a site visit to PPI and releasing ECO 6310 to increase mounting boss diameter/height and modify tooling (Source,). RESULT: Stabilized production line and resolved critical 'gap' and 'paint adhesion' issues plaguing the main module assembly (Source,).",
+    "toolchain": [
+        "Pro/ENGINEER (3D CAD)",
+        "Pro/INTRALINK (Data Management)",
+        "SAP (ERP)",
+        "ASK (BOM Management)",
+        "Vendor: Mass Precision (Sheet Metal)",
+        "Vendor: PPI (Structural Foam/Plastics)",
+        "Vendor: Alexandria (Extrusions)"
+    ],
+    "cast": [
+        {
+            "name": "Erik Norris",
+            "role": "Lead Mechanical Engineer / The Architect",
+            "org": "Digidesign"
+        },
+        {
+            "name": "Neal Breitbarth",
+            "role": "Mechanical Engineering Manager",
+            "org": "Digidesign"
+        },
+        {
+            "name": "Al Siy",
+            "role": "QA Engineer",
+            "org": "Digidesign"
+        },
+        {
+            "name": "Terri Merrell",
+            "role": "Senior Buyer/Planner",
+            "org": "Digidesign"
+        },
+        {
+            "name": "Ed Stegall",
+            "role": "Vendor Contact",
+            "org": "Mass Precision"
+        }
+    ],
+    "timeline": {
+        "start": "2003-04-18",
+        "end": "2005-08-01"
+    },
+    "visuals_to_find": [
+        "QA_Top_10_Issues--08-06-2004.doc",
+        "944011669-00.pdf (Sidecap)",
+        "ECO_6310 (Plastic Boss Modification)",
+        "PCII_CONFIGS.pdf (Stand Configuration)",
+        "ICON Leg Damage photos"
+    ],
+    "quotes": [
+        "These side cap problems have prevented us from shipping DCtrl systems on a regular basis for the last 3-4 weeks. (Source)",
+        "The stand CoGS have already crept *way* higher than we were expecting them to (largely due to the measures that were taken to improve strength and rigidity). (Source)",
+        "Erik Norris volunteered to be point guy from the Mechanical group on these issues. (Source)"
+    ]
+}

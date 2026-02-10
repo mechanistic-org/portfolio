@@ -1,49 +1,11 @@
 {
     "id": "webtv-elmer-zeus-project",
     "presentation_mode": "deep_dive",
-    "metrics": {
-        "financial": "Managed $10k+ rapid prototyping budget for high-pressure trade show build; negotiated short-run fab costs (e.g., $242.35/cover for zinc-plated revisions).",
-        "process": "Reduced complex sheet metal fabrication cycle to 9 days; Standardized 100% of assembly hardware to 4-40 spec to eliminate line-down risks.",
-        "governance": "Orchestrated parallel workstreams between sheet metal (E-M Solutions) and model shops (Sputnik) under a high-velocity 'War Room' cadence.",
-        "war_stories": [
-            {
-                "description": "Mandated 'dead nuts' flatness specs for the chassis floor to ensure conductive coupling with the 12V supply heat spreader.",
-                "label": "The 'Dead Nuts' Flatness",
-                "value": "Thermal Conduct"
-            },
-            {
-                "description": "Caught a fatal Compact Flash card collision 3 days before CES by manually overlaying DXF records from the PCB designer.",
-                "label": "The 'Titan Div' Overlay",
-                "value": "Collision Check"
-            },
-            {
-                "description": "Blocked ventilation holes under the main PCB to maximize thermal mass conduction, forcing air draft only near the PSU.",
-                "label": "The Perforation War",
-                "value": "Flow Logic"
-            },
-            {
-                "description": "Purged all metric hardware from the BOM after a mixed-screw prototype disaster. Standardized on 4-40 UNC to save the assembly line.",
-                "label": "The 4-40 Mandate",
-                "value": "Standardization"
-            },
-            {
-                "description": "Emergency ECO to raise lower drive bay by exactly 8mm to clear a power connector collision detected in Pro/E.",
-                "label": "The 8mm Lift",
-                "value": "Connector Collision"
-            },
-            {
-                "description": "Enforced 100% 4-40 screw standardization across 5 servers to prevent the 'metric vs SAE' assembly nightmare.",
-                "label": "Hardware Standardization",
-                "value": "Ruthless 4-40 Policy"
-            },
-            {
-                "description": "Layered mechanical DXFs over PCB layouts to catch a Compact Flash collision week before metal cutting.",
-                "label": "The Virtual Catch",
-                "value": "DXF Exchange"
-            }
-        ]
+    "forensic_summary": {
+        "trigger": "The 'Elmer' main board relied on an aluminum heat spreader requiring a 'dead nuts flat' chassis for thermal conduction, a tolerance impossibility for sheet metal. Simultaneously, a 'screw-up' on the prototype build mixed metric and SAE hardware, threatening assembly yield.",
+        "intervention": "Norris ('The Architect') rejected the 'Bastard Box' concept, executing a custom chassis design that removed perforation under the PCB for mass conduction while forcing convective airflow near the PSU. He enforced a strict 4-40 UNC hardware standardization for the 'Zeus' revision.",
+        "result": "Delivery of 5 functional server enclosures and 12 nodes for Western Cable Show and CES 2001 on a compressed 9-day fabrication cycle with zero thermal failures."
     },
-    "forensic_summary": "TRIGGER: The 'Elmer' main board relied on an aluminum heat spreader requiring a 'dead nuts flat' chassis for thermal conduction, a tolerance impossibility for sheet metal. Simultaneously, a 'screw-up' on the prototype build mixed metric and SAE hardware, threatening assembly yield. INTERVENTION: Norris ('The Architect') rejected the 'Bastard Box' concept, executing a custom chassis design that removed perforation under the PCB for mass conduction while forcing convective airflow near the PSU. He enforced a strict 4-40 UNC hardware standardization for the 'Zeus' revision. RESULT: Delivery of 5 functional server enclosures and 12 nodes for Western Cable Show and CES 2001 on a compressed 9-day fabrication cycle with zero thermal failures.",
     "toolchain": [
         "Pro/ENGINEER (Solid Modeling)",
         "AutoCAD (DXF I/O Layouts)",
@@ -98,5 +60,48 @@
         "If the chassis bottom was dead nuts flat, I'd say keep the holes. But since it's likely not exceedingly flat, I feel that we need the entire area under the bar.",
         "There was a screw-up on Elmer and I want to confirm for Zeus... can you confirm that we are using 4-40 hardware throughout?",
         "No one likes my code name so we are calling it a 'double-high' Mercury... That bezel will be needed by 12/19."
-    ]
+    ],
+    "forensic_metrics": {
+        "financial": "Managed $10k+ rapid prototyping budget for high-pressure trade show build; negotiated short-run fab costs (e.g., $242.35/cover for zinc-plated revisions).",
+        "process": "Reduced complex sheet metal fabrication cycle to 9 days; Standardized 100% of assembly hardware to 4-40 spec to eliminate line-down risks.",
+        "governance": "Orchestrated parallel workstreams between sheet metal (E-M Solutions) and model shops (Sputnik) under a high-velocity 'War Room' cadence."
+    },
+    "war_stories": [
+        {
+            "description": "Mandated 'dead nuts' flatness specs for the chassis floor to ensure conductive coupling with the 12V supply heat spreader.",
+            "label": "The 'Dead Nuts' Flatness",
+            "value": "Thermal Conduct"
+        },
+        {
+            "description": "Caught a fatal Compact Flash card collision 3 days before CES by manually overlaying DXF records from the PCB designer.",
+            "label": "The 'Titan Div' Overlay",
+            "value": "Collision Check"
+        },
+        {
+            "description": "Blocked ventilation holes under the main PCB to maximize thermal mass conduction, forcing air draft only near the PSU.",
+            "label": "The Perforation War",
+            "value": "Flow Logic"
+        },
+        {
+            "description": "Purged all metric hardware from the BOM after a mixed-screw prototype disaster. Standardized on 4-40 UNC to save the assembly line.",
+            "label": "The 4-40 Mandate",
+            "value": "Standardization"
+        },
+        {
+            "description": "Emergency ECO to raise lower drive bay by exactly 8mm to clear a power connector collision detected in Pro/E.",
+            "label": "The 8mm Lift",
+            "value": "Connector Collision"
+        },
+        {
+            "description": "Enforced 100% 4-40 screw standardization across 5 servers to prevent the 'metric vs SAE' assembly nightmare.",
+            "label": "Hardware Standardization",
+            "value": "Ruthless 4-40 Policy"
+        },
+        {
+            "description": "Layered mechanical DXFs over PCB layouts to catch a Compact Flash collision week before metal cutting.",
+            "label": "The Virtual Catch",
+            "value": "DXF Exchange"
+        }
+    ],
+    "_schema_version": "v2.0"
 }

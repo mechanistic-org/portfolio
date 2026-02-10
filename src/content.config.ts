@@ -125,7 +125,26 @@ const projectsCollection = defineCollection({
 
 			// Forensic Architecture (injected by hydrate_content.py)
 			toolchain: z.array(z.string()).optional(),
-			forensic_summary: z.any().optional(), // CHANGED: Allow object or string to prevent crash
+
+			// V2.0 SCHEMA (Feb 2026) - STRICT OBJECT
+			// We rejected the Component Union. It must be an object.
+			forensic_summary: z
+				.object({
+					trigger: z.string(),
+					intervention: z.string(),
+					result: z.string(),
+				})
+				.optional(),
+
+			bom: z
+				.array(
+					z.object({
+						label: z.string(),
+						value: z.string().optional(),
+					}),
+				)
+				.optional(),
+
 			audio_url: z.string().optional(),
 			notebook_url: z.string().optional(),
 
@@ -167,6 +186,18 @@ const projectsCollection = defineCollection({
 				)
 				.optional(), // Legacy fallback
 
+			// Trust Signals (Isomorphic Narrative)
+			isomorphics: z
+				.array(
+					z.object({
+						label: z.string(),
+						hardware_point: z.string(),
+						software_point: z.string(),
+						principle: z.string(),
+					}),
+				)
+				.optional(),
+
 			// Theme Selector (Core Architecture)
 			theme: z.string().catch("hyperspace").optional(),
 			presentation_mode: z.string().optional(),
@@ -186,6 +217,7 @@ const docsCollection = defineCollection({
 	loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/docs" }),
 	schema: z.object({
 		title: z.string(),
+		description: z.string().optional(),
 		slug: z.string().optional(),
 		sidebar: z
 			.object({

@@ -99,3 +99,17 @@ export const TOOLS = [
 	{ label: "AutoCAD", value: "autocad" },
 ] as const;
 export const TOOL_VALUES = TOOLS.map((t) => t.value);
+
+export const TAGS = [
+	"Thermal",
+	"Mechanism",
+	"Cost_Down",
+	"Process",
+	"Leadership",
+	"Crisis",
+	"Yield",
+	"Automation",
+	"Architecture",
+	"Acoustics",
+	"Materials",
+] as const;

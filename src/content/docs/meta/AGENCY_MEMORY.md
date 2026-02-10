@@ -42,7 +42,19 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
   - **The MTTR Metric:** Move the "Hours to Minutes" stat from text into the `metrics.yaml` structure.
 - **Action:** Execute `conversation-miner` when the "Hack Pack" Prompt Engineering backlog is clear.
 
-### 3. **Project C|24 (Curtis)**
+### 3. **The Refinery 2.0 Workflow (Unified Pipeline)**
+
+- **Role:** The Standard Operating Procedure for Data Injection.
+- **Status:** **ACTIVE** (Feb 2026).
+- **Components:**
+  1.  **Bolus:** Metrics + War Stories (Legacy).
+  2.  **Seismobolus:** Chronological Event Log (Entropy).
+  3.  **Reports:** Markdown Narrative Blocks.
+  4.  **Isomorphics:** Trust Signals (Structural Rhymes).
+- **Protocol:** [Extract All -> Assemble JSON -> Inject Single Payload].
+- **Artifact:** `workflow_sop.md`.
+
+### 4. **Project C|24 (Curtis)**
 
 - **Role:** SME Oracle / Evidence Locker
 - **URL:** [NotebookLM: C24](https://notebooklm.google.com/notebook/b8f893fe-234c-44ca-9d92-8fff6f82e53d?authuser=1)
@@ -113,9 +125,12 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Main Site Stabilization (Feb 10, 2026).**
-- **Next Step:** Resolve React Hydration Error #418 (De-prioritized).
-- **Status:** Logo/Favicon fixed (`logo.png` is Truth). Asset Proxy fixed (Local Preview Support).
+- **Active Task:** **Forensic Reconstruction (Refinery 2.0).**
+- **Next Step:** Receive `d-command` JSON payload for Full Flow Injection.
+- **Status:** `isomorphics`, `seismobolus`, and `reports` schemas are LIVE. `hydrate_content.py` is upgrade to support them.
+- **Strategy:** **"Hybrid Batch"** -> Retrofit 5 Projects (Isomorphics Only) + Rebuild 8 Projects (Full Flow).
+- **Critical Learning:** **"The Isomorphic Paradox"** - You cannot generate structural rhymes from a single project. You need a **"Master Notebook"** (Level 2) containing all JSONs to find the patterns.
+- **Critical Learning:** **"The Scroll Depth Trust"** - 2026 SEO (E-E-A-T) demands "Firsthand Experience." The "Isomorphic Card" is our primary Trust Signal.
 - **Conflict:** `d-command` has existing body text that conflicts with `_intelligence.md`. Needs manual titration.
 - **Source of Truth:** `src/content/docs/project/ROADMAP_ACTIVE.md`
 - **Critical Learning:** **"The Access Dossier"** is DEAD. Do not restore the slide-out drawer.
@@ -124,6 +139,7 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **Critical Learning:** **"The Split Brain"** - We successfully standardized the codebase on `/assets/` (removing `/assets/r2/`).
 - **Critical Learning:** **"The Flail Check"** - When a fix fails (Direct Read), do not oscillate wildy. Stop. Measure. Verify.
 - **Critical Learning:** **"The Legacy Shadow"** - `public/favicon.ico` overrides `<link rel="icon">` in some browsers/contexts. Delete legacy files to enforce the new Source of Truth.
+- **Critical Learning:** **"The Worker Constraint"** - Cloudflare Workers do NOT have Node.js APIs (`path`, `fs`). Do not use `path.join` in Production code blocks. Use direct string manipulation for R2 keys.
 - **Action Item:** Monitor `npm run dev` memory usage.
 
 * **Key Decision (Assets):** **"The White Logo Standard"** - `logo.png` is the canonical White Logo. `EN_logo_white_1024.png` does not exist in the current R2 stash.

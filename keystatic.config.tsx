@@ -25,6 +25,7 @@ import {
 	TOOLS,
 	PRODUCTION_STATUS,
 	PRODUCTION_SCALE,
+	TAGS,
 } from "./src/config/taxonomy";
 
 // components for preview purposes
@@ -263,10 +264,17 @@ export default config({
 				// --------------------------------------------------------------------------
 				// 5. Skills & Tools
 				// --------------------------------------------------------------------------
-				tags: fields.array(fields.text({ label: "Tag" }), {
-					label: "Tags",
-					itemLabel: (props) => props.value,
-				}),
+				tags: fields.array(
+					fields.select({
+						label: "Tag",
+						options: TAGS.map((t) => ({ label: t, value: t })),
+						defaultValue: TAGS[0],
+					}),
+					{
+						label: "Tags (Controlled)",
+						itemLabel: (props) => props.value,
+					},
+				),
 				tools: fields.array(
 					fields.select({
 						label: "Tool",
@@ -297,11 +305,28 @@ export default config({
 				// --------------------------------------------------------------------------
 				// 6. Forensic Intelligence (Crucial Data)
 				// --------------------------------------------------------------------------
-				forensic_summary: fields.text({
-					label: "Forensic Summary",
-					multiline: true,
-					description: "The 'Crisis & Intervention' STAR summary.",
-				}),
+				// --------------------------------------------------------------------------
+				// 6. Forensic Intelligence (Crucial Data)
+				// --------------------------------------------------------------------------
+				forensic_summary: fields.object(
+					{
+						trigger: fields.text({ label: "Trigger (Crisis)", multiline: true }),
+						intervention: fields.text({ label: "Intervention (Action)", multiline: true }),
+						result: fields.text({ label: "Result (Outcome)", multiline: true }),
+					},
+					{ label: "Forensic Summary (STAR)" },
+				),
+
+				bom: fields.array(
+					fields.object({
+						label: fields.text({ label: "Part Name" }),
+						value: fields.text({ label: "Material/Spec" }),
+					}),
+					{
+						label: "Bill of Materials (BOM)",
+						itemLabel: (props) => props.fields.label.value || "Part",
+					},
+				),
 				metrics: fields.object({
 					// Top-level Quotes
 					quotes: fields.array(fields.text({ label: "Quote" }), { label: "Quotes" }),

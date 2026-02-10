@@ -5,18 +5,38 @@ cyberspace:
   enable: true
   layout: linear
   stickies:
-  - align: center
-    data:
-    id: intro
-    text: <strong>YEAR:</strong> 2012<br/><strong>ROLE:</strong> Kaleidescape
-    title: Cinema One
-    type: media
-  - align: center
-    id: details
-    text: This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong>
-      Other
-    title: PROJECT DATA
-    type: void
+  - data:
+      columns: 3
+      images: []
+      layout: masonry
+      scattered: true
+    deck:
+    - body: Rejected 204 top covers (33%) from Yomura due to cosmetic flow marks.
+      subtitle: ''
+      title: The Stand
+    - body: Established Apple-tier quality expectations for the mid-market product.
+      subtitle: ''
+      title: The Standard
+    featuredIndices: []
+    id: 01_flow_mark_reject
+    title: Flow Mark Reject
+    type: gallery
+  - data:
+      columns: 3
+      images: []
+      layout: masonry
+      scattered: true
+    deck:
+    - body: Units were shearing off ODD mounts during shipping.
+      subtitle: ''
+      title: The Crisis
+    - body: Redesigned packaging density to decouple the unit from drop impacts.
+      subtitle: ''
+      title: The Fix
+    featuredIndices: []
+    id: 02_g_force
+    title: G Force
+    type: gallery
 date: 2012-08-01 00:00:00+00:00
 documents: []
 draft: false
@@ -61,23 +81,26 @@ phase_stats:
   Engineering: 59.4
   Production: 55.4
   Strategy: 19.8
-presentation_mode: flagship
+presentation_mode: deep_dive
 production: production
 productionScale: one_off
 slug: cinema-one
-tags:
-- Mechanical Engineering
-- Materials Knowledge
-- Design for Manufacturing (DFM)
-- Product Design
-- CAD (Computer-Aided Design)
+tags: []
 teamSize: Unknown
 theme: hyperspace
 tier: 3
 title: Cinema One
 tools:
 - ptc_creo
-war_stories: []
+war_stories:
+- description: Issued pragmatic deviation allowing cosmetic flow marks <25mm to unblock
+    shipping while protecting the 100% failure lots.
+  label: The 'Tactical' Deviation
+  value: 25x20mm Limit
+- description: 'Diagnosed a ''Software Fatal Error'' on the Gennum VXP chip as physical
+    interference: the drive cage was shearing off Resistor R332.'
+  label: The Gennum Crash Loop
+  value: R332 Resistor
 ---
 
 ## The Challenge
