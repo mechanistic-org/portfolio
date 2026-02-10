@@ -8,6 +8,13 @@ export const getAssetUrl = (path: string | undefined | null): string | undefined
 
 	// If we are in PRODUCTION, rewrite /assets/ to the CDN URL
 	if (import.meta.env.PROD) {
+		// R2 Assets (referenced as /assets/r2/...)
+		// bucket root is flat (e.g. c24/...), so we must strip /assets/r2/
+		if (path.startsWith("/assets/r2/")) {
+			return path.replace("/assets/r2/", "https://assets.eriknorris.com/");
+		}
+
+		// Standard Assets (branding, etc referenced as /assets/...)
 		if (path.startsWith("/assets/")) {
 			return path.replace("/assets/", "https://assets.eriknorris.com/");
 		}

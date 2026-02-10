@@ -4,12 +4,19 @@ import ForensicDrawer from "./ForensicDrawer.tsx";
 interface Props {
 	title?: string;
 	metrics?: any;
+	forensicSummary?: any;
 	caseTheory?: any[];
 }
 
-const { title, metrics, caseTheory } = Astro.props;
+const { title, metrics, forensicSummary, caseTheory } = Astro.props;
 ---
 
-<ForensicDrawer client:only="react" title={title} metrics={metrics} caseTheory={caseTheory}>
+<ForensicDrawer
+	client:only="react"
+	title={title}
+	metrics={metrics}
+	forensicSummary={forensicSummary}
+	caseTheory={caseTheory}
+>
 	<slot />
 </ForensicDrawer>

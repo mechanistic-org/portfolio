@@ -13,6 +13,11 @@ interface ForensicDrawerProps {
 	children: React.ReactNode;
 	title?: string;
 	metrics?: any;
+	forensicSummary?: {
+		trigger?: string;
+		intervention?: string;
+		result?: string;
+	};
 	caseTheory?: CaseTheoryItem[];
 }
 
@@ -20,6 +25,7 @@ const ForensicDrawer: React.FC<ForensicDrawerProps> = ({
 	children,
 	title = "CONFIDENTIAL",
 	metrics,
+	forensicSummary,
 	caseTheory = [],
 }) => {
 	const isOpen = useStore(isDossierOpen);
@@ -100,6 +106,51 @@ const ForensicDrawer: React.FC<ForensicDrawerProps> = ({
 												<span className="text-emerald-400">{String(value)}</span>
 											</div>
 										))}
+									</div>
+								)}
+
+								{/* FORENSIC SUMMARY (V2 Schema) */}
+								{forensicSummary && (
+									<div className="mb-12 space-y-6 border-l-2 border-amber-500/30 pl-6">
+										<h3 className="font-mono text-xs tracking-widest text-amber-500 uppercase">
+											Mission Brief (Forensic Summary)
+										</h3>
+
+										{/* TRIGGER */}
+										{forensicSummary.trigger && (
+											<div className="group">
+												<div className="mb-1 font-mono text-[10px] tracking-widest text-red-500/80 uppercase">
+													[ Trigger ]
+												</div>
+												<div className="font-mono text-xs leading-relaxed text-red-100/90">
+													{forensicSummary.trigger}
+												</div>
+											</div>
+										)}
+
+										{/* INTERVENTION */}
+										{forensicSummary.intervention && (
+											<div className="group">
+												<div className="mb-1 font-mono text-[10px] tracking-widest text-blue-500/80 uppercase">
+													[ Intervention ]
+												</div>
+												<div className="font-mono text-xs leading-relaxed text-blue-100/90">
+													{forensicSummary.intervention}
+												</div>
+											</div>
+										)}
+
+										{/* RESULT */}
+										{forensicSummary.result && (
+											<div className="group">
+												<div className="mb-1 font-mono text-[10px] tracking-widest text-emerald-500/80 uppercase">
+													[ Result ]
+												</div>
+												<div className="font-mono text-xs leading-relaxed whitespace-pre-wrap text-emerald-100/90">
+													{forensicSummary.result}
+												</div>
+											</div>
+										)}
 									</div>
 								)}
 

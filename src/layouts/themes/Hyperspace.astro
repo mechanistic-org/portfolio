@@ -52,6 +52,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 			<ForensicDossier
 				title={title}
 				metrics={entry.data.forensic_metrics}
+				forensicSummary={entry.data.forensic_summary}
 				caseTheory={
 					entry.data.case_theory ||
 					(entry.data.war_stories || []).map((ws: any) => ({
