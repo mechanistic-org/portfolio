@@ -1,0 +1,184 @@
+[
+	{
+		"date": "2008-05-07",
+		"score": 4,
+		"snippet": "Distributed Orpheus Acoustic Testing results (2nd round).",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_005.md"
+	},
+	{
+		"date": "2008-05-15",
+		"score": 3,
+		"snippet": "Delivered 'to_MASS_05_15_08.zip' to vendor for quoting 1-10 units.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_007.md"
+	},
+	{
+		"date": "2008-06-11",
+		"score": 5,
+		"snippet": "Established schedule with Argyle: 20-30 prototype units required by late July.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_006.md"
+	},
+	{
+		"date": "2008-06-30",
+		"score": 6,
+		"snippet": "Mechanical Project Meeting: 'Ugly Build' target slipped to July 22.",
+		"type": "Document",
+		"source_ref": "03_Engineering_status.pdf"
+	},
+	{
+		"date": "2008-07-22",
+		"score": 5,
+		"snippet": "Loaded chassis files (Base, PCB Bracket, Fan Tray) for release to 8/1 build.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_012.md"
+	},
+	{
+		"date": "2008-08-05",
+		"score": 6,
+		"snippet": "EMI pre-scan passed Radiated Emissions with 2nd round metals.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_010.md"
+	},
+	{
+		"date": "2008-08-14",
+		"score": 4,
+		"snippet": "First Article Inspection (FAI) Report generated for Orpheus Fan Mounts.",
+		"type": "Document",
+		"source_ref": "03_Engineering_FAIs.pdf"
+	},
+	{
+		"date": "2008-09-03",
+		"score": 5,
+		"snippet": "Initial Thermal Test conducted at 24°C; fans at 100% maxing CPU.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_006.md"
+	},
+	{
+		"date": "2008-10-13",
+		"score": 4,
+		"snippet": "Submitted ECO 000708 releasing Orpheus sheetmetal and plastics to Production.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_010.md"
+	},
+	{
+		"date": "2008-10-19",
+		"score": 7,
+		"snippet": "EMI Scan failure; requires addition of four extra screws to pass.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_010.md"
+	},
+	{
+		"date": "2008-11-04",
+		"score": 3,
+		"snippet": "Loaded and released KDISK-M blanking plate (501-1132-00) on ECO 734.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_010.md"
+	},
+	{
+		"date": "2008-12-24",
+		"score": 7,
+		"snippet": "Glow quality crisis: 'Does not look good.' Proposal to remove 5 LEDs.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_008.md"
+	},
+	{
+		"date": "2008-12-29",
+		"score": 6,
+		"snippet": "Proposed mechanical spacing fix for 'blobby' glow (glow_12_29_08.pdf).",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_008.md"
+	},
+	{
+		"date": "2009-01-06",
+		"score": 8,
+		"snippet": "Thermal Crisis: Orpheus units hard hanging every 50 minutes (missing thermal paste).",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_005.md"
+	},
+	{
+		"date": "2009-01-20",
+		"score": 5,
+		"snippet": "Proposed design change for IR lens to match Mercury shape.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_004.md"
+	},
+	{
+		"date": "2009-01-29",
+		"score": 9,
+		"snippet": "'Thumb of God': 5 of 13 AV boards damaged by tray screw hole during assembly.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_004.md"
+	},
+	{
+		"date": "2009-02-20",
+		"score": 9,
+		"snippet": "Pilot assembly suspended due to system functional test failures.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_004.md"
+	},
+	{
+		"date": "2009-02-23",
+		"score": 9,
+		"snippet": "Crisis Meeting: 'Sanmina spinning up production engine and now at a dead stop.'",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_001.md"
+	},
+	{
+		"date": "2009-02-24",
+		"score": 8,
+		"snippet": "Decision to delay launch to ensure FCC compliance (missing grounding spring).",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_004.md"
+	},
+	{
+		"date": "2009-03-03",
+		"score": 10,
+		"snippet": "Official Orpheus (Mini System) Launch Announcement.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_003.md"
+	},
+	{
+		"date": "2009-03-03",
+		"score": 6,
+		"snippet": "OOBE Inspection Report: 'Foot not flush', 'Debris flecks', 'Vinyl tape work-around'.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_003.md"
+	},
+	{
+		"date": "2009-03-04",
+		"score": 7,
+		"snippet": "KDISK Alignment Issue: Cartridges not aligned, bias downward and left.",
+		"type": "Photo",
+		"source_ref": "Kaleidescape_Volume_003.md"
+	},
+	{
+		"date": "2009-03-11",
+		"score": 6,
+		"snippet": "Reported 'Power Button Sticks' issue; silicone not concentric with sheetmetal.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_003.md"
+	},
+	{
+		"date": "2009-03-12",
+		"score": 5,
+		"snippet": "Resistor rework identified to fix 'blotchiness' in glow voltage drop.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_003.md"
+	},
+	{
+		"date": "2009-03-24",
+		"score": 4,
+		"snippet": "Request Sanmina inspect 20 pieces for dimple height and punching flash.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_003.md"
+	},
+	{
+		"date": "2009-04-22",
+		"score": 5,
+		"snippet": "Released Sheet Metal DFx ECO to clean up production issues.",
+		"type": "Document",
+		"source_ref": "Kaleidescape_Volume_002.md"
+	}
+]

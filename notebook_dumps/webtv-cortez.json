@@ -1,20 +1,74 @@
 {
+    "_schema_version": "v2.0",
     "id": "cortez-wireless-keyboard",
-    "presentation_mode": "deep_dive",
-    "forensic_summary": {
-        "trigger": "Vendor analysis (Silitek/Panasonic) revealed the ID intent was mechanically impossible\u2014specifically, the rubber pad was 'too close to the edge' for PCB sealing and the key matrix pitch (19.05mm) clashed with the 2D layout. The initial hard model failed ergonomic validation (not level, too heavy).",
-        "intervention": "Norris (as Lincicum) executed a high-intensity 'Surgical CAD' sprint (100+ hours in <2 weeks) to re-loft the top surfaces, enforce a 7-11 degree IR tilt, and modify grip curvature while constraining internal geometry to standard low-cost key matrices.",
-        "result": "Delivered a manufacturable database that reconciled the 'Airboard' form factor with standard membrane switches, securing executive approval for the new model despite 'beating on extra CAD hours'."
-    },
-    "toolchain": [
-        "Pro/ENGINEER (Surface Modeling, Mechanical Detail)",
-        "AutoCAD (DXF Data Exchange with Vendors)",
-        "Vendors: Silitek (Key Matrix), Panasonic (RF/Mechanical Review), Sputnik Models (Hard Modeling), Lite-On"
+    "presentation_mode": "flagship",
+    "tags": [
+        "Mechanism",
+        "Crisis",
+        "Yield",
+        "Process",
+        "Materials"
     ],
+    "forensic_metrics": {
+        "financial": "Billed $24,900 in June 2000 for accelerated surface development rescue [1, 2]",
+        "process": "Compressed 12-week surfacing cycle into 6-week sprint from broken wireframe to manufacturing release [3]",
+        "governance": "High-frequency iteration: Weekly status reports paired with bi-weekly invoicing and immediate CAD restructuring post-review [1]"
+    },
+    "forensic_summary": {
+        "intervention": "Norris (as Lincicum) executed a high-intensity 'Surgical CAD' sprint (100+ hours in <2 weeks) to re-loft the top surfaces, enforce a 7-11 degree IR tilt, and modify grip curvature while constraining internal geometry to standard low-cost key matrices.",
+        "result": "Delivered a manufacturable database that reconciled the 'Airboard' form factor with standard membrane switches, securing executive approval for the new model despite 'beating on extra CAD hours'.",
+        "trigger": "Vendor analysis (Silitek/Panasonic) revealed the ID intent was mechanically impossible\u2014specifically, the rubber pad was 'too close to the edge' for PCB sealing and the key matrix pitch (19.05mm) clashed with the 2D layout. The initial hard model failed ergonomic validation (not level, too heavy)."
+    },
+    "war_stories": [
+        {
+            "label": "The Flat Failure",
+            "value": "0\u00b0 to 15\u00b0 Tilt",
+            "description": "Initial hard model rejected for lacking curvature and IR tilt; required total surface reconstruction in 28 hours [6]."
+        },
+        {
+            "label": "The Matrix War",
+            "value": "0.05mm Pitch Delta",
+            "description": "ID specified 19mm pitch vs Silitek standard 19.05mm; accumulation across 85 keys threatened bezel alignment/yield [7, 10, 11]."
+        },
+        {
+            "label": "Panasonic Data Void",
+            "value": "Wireframe vs Surface",
+            "description": "Vendor provided useless IGES wireframes derived from Catia; forced blind reconstruction of navigation surfaces [4, 12]."
+        }
+    ],
+    "isomorphics": [
+        {
+            "label": "Tolerance Accumulation",
+            "hardware_point": "0.05mm pitch error x 15 keys = 0.75mm misalignment (Bezel Interference)",
+            "software_point": "Floating point error accumulation in render loops causing texture tearing",
+            "principle": "Law of Propagated Error"
+        }
+    ],
+    "toolchain": [
+        "Pro/ENGINEER (Surfacing)",
+        "Silitek (Vendor - Key Matrix)",
+        "Panasonic (Vendor - Reference Design)",
+        "Sputnik Models (Prototyping)"
+    ],
+    "bom": [
+        {
+            "label": "Housing",
+            "value": "Injection Molded ABS (Target 0.6kg)"
+        },
+        {
+            "label": "Key Matrix",
+            "value": "Silitek SK-7510 (Modified 19.05mm)"
+        },
+        {
+            "label": "Grip Areas",
+            "value": "Co-molded Santoprene"
+        }
+    ],
+    "teamSize": "1 Lead ME + 1 ID Liaison",
     "cast": [
         {
-            "name": "Erik Norris (fka Lincicum)",
-            "role": "Lead Mechanical Engineer / Architect",
+            "name": "Erik Norris (Lincicum)",
+            "role": "Product Designer / Surface Architect",
             "org": "Mechanistic"
         },
         {
@@ -24,82 +78,287 @@
         },
         {
             "name": "Jeff Jones",
-            "role": "Industrial Designer",
+            "role": "Industrial Design",
             "org": "PSDA"
         },
         {
             "name": "Val Kasvin",
             "role": "Model Maker",
             "org": "Sputnik Models"
-        },
-        {
-            "name": "Alain Hon",
-            "role": "Vendor Engineer",
-            "org": "Lite-On/Silitek"
-        },
-        {
-            "name": "Son Jae Park",
-            "role": "Keyboard Project Leader",
-            "org": "WebTV/Sejin"
         }
     ],
     "timeline": {
-        "start": "2000-04-13",
-        "end": "2000-11-15"
+        "start": "2000-05-01",
+        "end": "2000-06-27"
     },
     "visuals_to_find": [
-        "SK-7510 Key switch layout Drawing KK7510-401.dwg",
+        "SK-7510 Key switch layout Drawing KK7510-401 (May 16 2000).dwg",
         "cortezkeys.pdf",
-        "kb6-r03_Panasonic_Critique.pdf",
-        "keylegend.pdf",
-        "Cortez_Hard_Model_Photos.jpg"
+        "kb6-r03_$B9=@.^_(J.pdf (Panasonic RFQ Critique)",
+        "id_ir.prt.zip (Panasonic's deficient 3D file)",
+        "rel_2d_6_27.zip (Final Release)"
     ],
     "quotes": [
-        "First of all Silitek has two more keys than Magellan... that's why the SK-7510 Thomson key matrix couldn't fit into Cortez 2d layout.",
-        "I need to get approval from Giff to go ahead with a brand new model and will take some beating on the extra CAD hours. But I think the end product is going to be well worth it.",
-        "The rubber pad on the right-hand side is too close to the edge. It could be hard to design the PCB and membrane."
+        "Top surface entirely flat. Can you add curvature overall? [6]",
+        "The 3D file I received from Panasonic does not have much information. It is a wire frame file and does not show navigation keys. [4, 12]",
+        "Silitek's SK-7500 and SK-7510 has 19.05 mm pitch... We can design a keyboard in smaller pitch, ex. 19mm. [7]"
     ],
-    "forensic_metrics": {
-        "financial": "Avoided custom 'scissors switch' tooling costs by forcing standard membrane matrix into 'Airboard' form factor. Billed ~$25k in June 2000 alone for rapid remediation.",
-        "process": "Implemented 'Surgical CAD' surface reconstruction to align ID curvature with fixed PCB/membrane hard points.",
-        "governance": "Direct Vendor-Engineering Loop (WebTV <> Mechanistic <> Silitek/Panasonic/Lite-On) bypassing standard component procurement delays."
-    },
-    "war_stories": [
+    "seismobolus": [
         {
-            "description": "Battled ID's 19.00mm spec against Vendor's 19.05mm standard. Proved cumulative error would crash keys into the bezel.",
-            "label": "The Pitch Fight",
-            "value": "19.05mm Reality"
+            "date": "2000-04-13",
+            "score": 3,
+            "snippet": "RFQ, spec, and JPEG sent to Lite-On/Silitek for Cortez.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_002.md"
         },
         {
-            "description": "Saved $30k in new tooling by deleting the Page Up/Down keys from the main matrix and moving them to a separate pad.",
-            "label": "The $30k Deletion",
-            "value": "Layout Hack"
+            "date": "2000-04-20",
+            "score": 4,
+            "snippet": "Silitek sends reliability test specs and preliminary development schedule.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_006.md"
         },
         {
-            "description": "Rebuilt the entire organic surface model in 6 weeks to fix 'rocking' hard models and ensure IR transmission (3-15 deg slope).",
-            "label": "The 6-Week Surface",
-            "value": "Class A Rebuild"
+            "date": "2000-05-05",
+            "score": 5,
+            "snippet": "Request for keyswitch matrix confirmation: scissors vs rubber dome.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_006.md"
         },
         {
-            "description": "Delivered flawless Class-A surfacing in exactly 6 weeks, spending 28 hours on the master top surface to match ID intent.",
-            "label": "The 6-Week Miracle",
-            "value": "Agile Surfacing"
+            "date": "2000-05-09",
+            "score": 6,
+            "snippet": "New keyswitch matrix SK-7500 received; larger than Panasonic reference.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_006.md"
         },
         {
-            "description": "Hollowed out the internal Ren Shape model and glued in lead weights to hit the 0.6kg Sony target feel.",
-            "label": "The Lead Weight Hack",
-            "value": "0.6kg Simulation"
+            "date": "2000-05-11",
+            "score": 4,
+            "snippet": "Lite-On/Silitek Cortez Quotation received in Word97 format.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_002.md"
         },
         {
-            "description": "Overturned Silitek's 'No Can Do' by proving the standard 19.05mm matrix fit within the custom ID bezel via cross-section analysis.",
-            "label": "The Pitch War",
-            "value": "19.05mm vs 19.00mm"
+            "date": "2000-05-12",
+            "score": 5,
+            "snippet": "Panasonic critique: size +4mm, battery cover moved.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_006.md"
         },
         {
-            "description": "The timeline was 6 weeks. I billed $24,900 in one month. They didn't buy a CAD jockey; they bought insurance. I delivered a production-ready database that fixed the physics of the IR signal and the geometry of the key pitch before they cut steel.",
-            "label": "The $25k Invocie",
-            "value": "Buying Insurance"
+            "date": "2000-05-16",
+            "score": 7,
+            "snippet": "Silitek mechanical review: rubber pad too close, 19mm pitch conflict.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_002.md"
+        },
+        {
+            "date": "2000-05-16",
+            "score": 3,
+            "snippet": "Received SK-7510 Key switch layout Drawing KK7510-401.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_002.md"
+        },
+        {
+            "date": "2000-05-16",
+            "score": 4,
+            "snippet": "Erik sends current surface JPGs; Leslie asks about Nav Cluster.",
+            "type": "Photo",
+            "source_ref": "WebTV_Volume_006.md"
+        },
+        {
+            "date": "2000-05-17",
+            "score": 5,
+            "snippet": "Silitek demands 19.05mm pitch; ID specified 19mm.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_006.md"
+        },
+        {
+            "date": "2000-05-17",
+            "score": 3,
+            "snippet": "Received cortezkeys.zip containing matrix definitions.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_006.md"
+        },
+        {
+            "date": "2000-05-18",
+            "score": 6,
+            "snippet": "Confirmed elimination of last row keys to save space.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_006.md"
+        },
+        {
+            "date": "2000-05-18",
+            "score": 4,
+            "snippet": "Quote requested for Hard Model; primer finish, working keyswitch pocket.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_006.md"
+        },
+        {
+            "date": "2000-06-08",
+            "score": 3,
+            "snippet": "Invoice COR-WNI-001 submitted: $10,000 for 100 hours.",
+            "type": "Document",
+            "source_ref": "Cortez_invoices.pdf"
+        },
+        {
+            "date": "2000-06-08",
+            "score": 5,
+            "snippet": "Hard model build instructions issued; target weight 0.6kg.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_006.md"
+        },
+        {
+            "date": "2000-06-14",
+            "score": 5,
+            "snippet": "Release of rel_3d_6_14.zip to FTP.",
+            "type": "Commit",
+            "source_ref": "WebTV_Volume_006.md"
+        },
+        {
+            "date": "2000-06-19",
+            "score": 8,
+            "snippet": "Hard Model Review: Unit 'entirely flat', corners 'puffy'.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_002.md"
+        },
+        {
+            "date": "2000-06-19",
+            "score": 7,
+            "snippet": "IR Tilt Crisis: Model lacks 3-15 degree transmission angle.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_002.md"
+        },
+        {
+            "date": "2000-06-20",
+            "score": 3,
+            "snippet": "Invoice COR-WNI-002 submitted: $9,800 for 98 hours.",
+            "type": "Document",
+            "source_ref": "Cortez_invoices.pdf"
+        },
+        {
+            "date": "2000-06-21",
+            "score": 6,
+            "snippet": "Silitek flags navigation buttons as 'No Can Do'.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_002.md"
+        },
+        {
+            "date": "2000-06-22",
+            "score": 5,
+            "snippet": "Keyboard slope target defined: 5 to 12 degrees.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_006.md"
+        },
+        {
+            "date": "2000-06-23",
+            "score": 6,
+            "snippet": "Decision to recut model based on new ProE file.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_006.md"
+        },
+        {
+            "date": "2000-06-25",
+            "score": 4,
+            "snippet": "Final review of changes with Jeff Jones scheduled.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_006.md"
+        },
+        {
+            "date": "2000-06-27",
+            "score": 9,
+            "snippet": "Completion of 43-hour sprint: Surface angle (28hrs), Grips (9hrs).",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_006.md"
+        },
+        {
+            "date": "2000-06-27",
+            "score": 8,
+            "snippet": "Final Release: rel_2d_6_27.zip (IGS, DXF, PDF).",
+            "type": "Commit",
+            "source_ref": "WebTV_Volume_006.md"
+        },
+        {
+            "date": "2000-06-27",
+            "score": 3,
+            "snippet": "Invoice COR-WNI-003 submitted: $5,100 for 51 hours.",
+            "type": "Document",
+            "source_ref": "Cortez_invoices.pdf"
+        },
+        {
+            "date": "2000-07-05",
+            "score": 5,
+            "snippet": "New hard model received and verified at WebTV.",
+            "type": "Memory",
+            "source_ref": "WebTV_Volume_006.md"
+        },
+        {
+            "date": "2000-09-15",
+            "score": 4,
+            "snippet": "Confirmation: 'The cortez fix looks great'.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_007.md"
+        },
+        {
+            "date": "2000-10-17",
+            "score": 7,
+            "snippet": "Panasonic provides deficient 3D file (wireframe only).",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_002.md"
+        },
+        {
+            "date": "2000-10-18",
+            "score": 8,
+            "snippet": "Data crisis: Panasonic uses Catia/IDEAS; cannot rework files.",
+            "type": "Document",
+            "source_ref": "WebTV_Volume_002.md"
+        },
+        {
+            "date": "2002-02-14",
+            "score": 2,
+            "snippet": "Cortez images archived to 'big node.zip'.",
+            "type": "Commit",
+            "source_ref": "WebTV_Volume_002.md"
         }
     ],
-    "_schema_version": "v2.0"
+    "metrics": {
+        "war_stories": [
+            {
+                "description": "Battled ID's 19.00mm spec against Vendor's 19.05mm standard. Proved cumulative error would crash keys into the bezel.",
+                "label": "The Pitch Fight",
+                "value": "19.05mm Reality"
+            },
+            {
+                "description": "Saved $30k in new tooling by deleting the Page Up/Down keys from the main matrix and moving them to a separate pad.",
+                "label": "The $30k Deletion",
+                "value": "Layout Hack"
+            },
+            {
+                "description": "Rebuilt the entire organic surface model in 6 weeks to fix 'rocking' hard models and ensure IR transmission (3-15 deg slope).",
+                "label": "The 6-Week Surface",
+                "value": "Class A Rebuild"
+            },
+            {
+                "description": "Delivered flawless Class-A surfacing in exactly 6 weeks, spending 28 hours on the master top surface to match ID intent.",
+                "label": "The 6-Week Miracle",
+                "value": "Agile Surfacing"
+            },
+            {
+                "description": "Hollowed out the internal Ren Shape model and glued in lead weights to hit the 0.6kg Sony target feel.",
+                "label": "The Lead Weight Hack",
+                "value": "0.6kg Simulation"
+            },
+            {
+                "description": "Overturned Silitek's 'No Can Do' by proving the standard 19.05mm matrix fit within the custom ID bezel via cross-section analysis.",
+                "label": "The Pitch War",
+                "value": "19.05mm vs 19.00mm"
+            },
+            {
+                "description": "The timeline was 6 weeks. I billed $24,900 in one month. They didn't buy a CAD jockey; they bought insurance. I delivered a production-ready database that fixed the physics of the IR signal and the geometry of the key pitch before they cut steel.",
+                "label": "The $25k Invocie",
+                "value": "Buying Insurance"
+            }
+        ]
+    }
 }

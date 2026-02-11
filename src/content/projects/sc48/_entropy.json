@@ -196,11 +196,32 @@
 		"source_ref": "RE_ Varitronix Viewing angle--UPDATE (390).msg [28]"
 	},
 	{
+		"date": "2005-08-19",
+		"score": 3,
+		"snippet": "Schuman proposes Varitronix display for Capaldi (Lynyrd Mini) project.",
+		"type": "Document",
+		"source_ref": "Varitronix display options.msg"
+	},
+	{
 		"date": "2005-08-31",
 		"score": 5,
 		"snippet": "Moskowitz demands PRD update for display specs/Katakana support.",
 		"type": "Document",
 		"source_ref": "RE_ Varitronix Viewing angle--UPDATE (375).msg [29]"
+	},
+	{
+		"date": "2005-08-31",
+		"score": 4,
+		"snippet": "Moskowitz notes Capaldi CoGS/budget uncertain due to unset ID/electrical design.",
+		"type": "Document",
+		"source_ref": "RE_ Varitronix Viewing angle--UPDATE (375).msg"
+	},
+	{
+		"date": "2005-09-06",
+		"score": 3,
+		"snippet": "Kessel/Capaldi display form-factor strategy confirmed (new ROM vs re-located connector).",
+		"type": "Document",
+		"source_ref": "RE_ Varitronix display options (397).msg"
 	},
 	{
 		"date": "2005-10-13",
@@ -236,6 +257,13 @@
 		"snippet": "Curtis Meeting: Submix knob board design complete.",
 		"type": "Meeting Notes",
 		"source_ref": "4.5.06 Curtis Meeting Notes.msg [34]"
+	},
+	{
+		"date": "2006-04-21",
+		"score": 2,
+		"snippet": "Capaldi listed as pending project stacking up after Goodman/Mercury.",
+		"type": "Document",
+		"source_ref": "FW_ Curtis _Phase 1_5_ SW PRD - timing_.msg"
 	},
 	{
 		"date": "2006-06-23",
@@ -278,6 +306,13 @@
 		"snippet": "Curtis Meeting: 125 Faders ordered for build.",
 		"type": "Meeting Notes",
 		"source_ref": "RE_ Minutes_ Curtis meeting - 1_9_07.msg [40]"
+	},
+	{
+		"date": "2007-02-12",
+		"score": 1,
+		"snippet": "Kontron 986LCD-M User Manual Rev D updated (Reference for SC48 integration).",
+		"type": "Document",
+		"source_ref": "KTD-00691-J 986LCD-M Family User Manual.pdf"
 	},
 	{
 		"date": "2007-03-12",
@@ -336,6 +371,13 @@
 		"source_ref": "BOM_GoGs_etc.pdf [48]"
 	},
 	{
+		"date": "2007-05-29",
+		"score": 6,
+		"snippet": "COGS Rollup Rev 1 generated for Embedded Live Sound (SC48).",
+		"type": "Document",
+		"source_ref": "BOM_GoGs_etc.pdf"
+	},
+	{
 		"date": "2007-06-15",
 		"score": 3,
 		"snippet": "SC48 COGS Rollup Rev 2 generated (Added ROI).",
@@ -343,10 +385,52 @@
 		"source_ref": "BOM_GoGs_etc.pdf [48]"
 	},
 	{
+		"date": "2007-06-15",
+		"score": 4,
+		"snippet": "COGS Rollup Rev 2 generated; ROI added. \"There will be no extrusions\" mandate.",
+		"type": "Document",
+		"source_ref": "BOM_GoGs_etc.pdf"
+	},
+	{
 		"date": "2007-06-25",
 		"score": 10,
 		"snippet": "SC48 Thermal Failure: CPU hit 75C and system shutdowned.",
 		"type": "Log",
 		"source_ref": "SC48_lux_thermal-testing.pdf [49]"
+	},
+	{
+		"date": "2007-06-25",
+		"score": 10,
+		"snippet": "Thermal Failure: \"CPU temperature is 75C, system shutdowned\" during Capaldi FOH test.",
+		"type": "Log",
+		"source_ref": "SC48_lux_thermal-testing.pdf"
+	},
+	{
+		"date": "2008-02-28",
+		"score": 5,
+		"snippet": "Initial Release of SC48 Main Right PCB (9150-58333-00).",
+		"type": "Document",
+		"source_ref": "SC48_PCB_DCDs.pdf"
+	},
+	{
+		"date": "2008-03-03",
+		"score": 2,
+		"snippet": "SC48 Main Right PCB Rev 2: Relocated 2 MH, added LEDs/Encoders.",
+		"type": "Document",
+		"source_ref": "SC48_PCB_DCDs.pdf"
+	},
+	{
+		"date": "2008-03-20",
+		"score": 2,
+		"snippet": "SC48 Main Right PCB Rev 3: Updated to match artwork placement.",
+		"type": "Document",
+		"source_ref": "SC48_PCB_DCDs.pdf"
+	},
+	{
+		"date": "2008-04-10",
+		"score": 3,
+		"snippet": "SC48 Main Right PCB Rev 4: Updated to match layout.",
+		"type": "Document",
+		"source_ref": "SC48_PCB_DCDs.pdf"
 	}
 ]

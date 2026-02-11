@@ -46,8 +46,8 @@ These scripts drive the "Forensic Data Factory."
 
 - **Hydration Engine (`npm run content:hydrate`)**
   - **Source:** `scripts/hydrate_content.py`
-  - **Function:** Injects NotebookLM "Bolus" data (JSON) into MDX Frontmatter.
-  - **Protocol:** ALWAYS use with a target slug. `npm run content:hydrate -- --slug c24`. Never hydrate blindly.
+  - **Function:** Injects NotebookLM "Bolus" data (JSON) into MDX Frontmatter and **Auto-Generates** `PROJECT_INDEX.md`.
+  - **Protocol:** ALWAYS use with a target slug. `npm run content:hydrate -- --slug c24`. Never hydrate blindly (unless regenerating the Index, in which case use `--force`).
   - **Trap:** Running without a slug risks overwriting custom frontmatter edits across 20+ projects.
 
 - **Asset Refinery (`npm run assets:process`)**

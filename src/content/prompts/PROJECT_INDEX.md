@@ -56,12 +56,12 @@ total_entries: 123
 ### D-Control (`d-control`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Post-FCS 'Line Down' crisis caused by cosmetic and structural failure of Plastic Side Caps (PPI), halting D-Control shipments for 3-4 weeks due to 50% yield rates (Source). INTERVENTION: Erik Norris volunteered as 'point guy' (Source), initiating a site visit to PPI and releasing ECO 6310 to increase mounting boss diameter/height and modify tooling (Source,). RESULT: Stabilized production line and resolved critical 'gap' and 'paint adhesion' issues plaguing the main module assembly (Source,).
+> **Forensic Summary:** TRIGGER: Post-FCS 'Line Down' crisis halted D-Control shipments for 3-4 weeks due to warping and bonding defects in structural foam side caps (yields <50%) [2]. INTERVENTION: Erik Norris volunteered as 'point guy'; released ECO 6310 to increase mounting boss diameter/height; forced vendor (PPI) to modify tooling to eliminate downward-facing bosses [5, 6]. RESULT: Stabilized production line, resolved critical 'gap' and 'paint adhesion' issues, and resumed regular system shipments [2, 7].
 
 **Key Metrics:**
-- **Financial:** Stand CoGS crept 'way higher' due to rigidity measures (Source)
-- **Governance:** Weekly Con Call / Crisis Management (Line Down)
-- **Process:** Resolved 50% yield crisis on PPI Side Caps (Source)
+- **Financial:** Stabilized Stand CoGS which had crept 'way higher' due to rigidity measures [1]
+- **Governance:** Weekly 'QA Top 10' / 'Line Down' Crisis Management on production floor [4, 5]
+- **Process:** Recovered from 50-74% yield failure on PPI Side Caps to active shipping [2, 3]
 
 ---
 
@@ -88,12 +88,12 @@ total_entries: 123
 ### D-Command (`index`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Integration of D-Control architecture into a mid-format footprint ('Danko') triggered yield-killing crises: 'Vegas Mode' thermal peaks (61°C), LCD 'bleed', and 'Warped Pan' fitment issues. INTERVENTION: The Architect engineered relief cuts for LCD cables, enforced strict cabling routing for airflow, and instituted 100% manual inspection of incoming sheetmetal. RESULT: Stabilized production yield and met FCS targets despite a 'Solo Mandate' documentation load. [PCII Stand] TRIGGER: 'Total devastation' regarding Solid Concepts quote for short-run parts while tooling was already $150k deep. INTERVENTION: Negotiated 1-step paint coverage to lower cost and coordinated directly with extrusion vendors to delete grooves. RESULT: Cost reduction strategies allowed project to proceed.
+> **Forensic Summary:** TRIGGER: Thermal spikes during 'Vegas Mode' (61°C) and massive yield failure (50%) on Fader Pans due to warping INTERVENTION: Engineered sheet metal relief cuts for LCDs; Enforced strict cable routing for airflow; Instituted 100% manual flatness inspection RESULT: Protected assembly yield; Saved FCS date via aggressive schedule pull-ins
 
 **Key Metrics:**
-- **Financial:** [D-Command] Negotiated $5,000 expedite fee waiver with PPI Plastics; waived tooling fees in exchange for delivery delays. Snake Cable COGS reduction (100' cut). [PCII Stand] $150K sunk tooling cost; One-coat paint process savings
-- **Governance:** [D-Command] Solo mechanical documentation release (24+ parts); Weekly QA Top Ten defect tracking. [PCII Stand] Vendor-direct negotiation (Alexandria Extrusion)
-- **Process:** [D-Command] Achieved 80% confidence in FCS through aggressive schedule pull-ins; Rejected 50% of initial Fader Pan inventory to enforce flatness. [PCII Stand] Secondary operation drawings for extrusion x-bars
+- **Financial:** Negotiated $5,000 expedite fee waiver; Reduced COGS by eliminating 100ft of snake cable per unit
+- **Governance:** Solo Mandate: Managed release of 24+ unique sheet metal parts alone
+- **Process:** Achieved 80% FCS confidence despite 50% initial Fader Pan rejection rate
 
 ---
 

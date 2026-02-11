@@ -1,20 +1,73 @@
 {
-    "id": "d-control_buckley",
+    "_schema_version": "v2.0",
+    "id": "d-control",
     "presentation_mode": "deep_dive",
-    "forensic_summary": {
-        "trigger": "Post-FCS 'Line Down' crisis caused by cosmetic and structural failure of Plastic Side Caps (PPI), halting D-Control shipments for 3-4 weeks due to 50% yield rates (Source).",
-        "intervention": "Erik Norris volunteered as 'point guy' (Source), initiating a site visit to PPI and releasing ECO 6310 to increase mounting boss diameter/height and modify tooling (Source,).",
-        "result": "Stabilized production line and resolved critical 'gap' and 'paint adhesion' issues plaguing the main module assembly (Source,)."
-    },
-    "toolchain": [
-        "Pro/ENGINEER (3D CAD)",
-        "Pro/INTRALINK (Data Management)",
-        "SAP (ERP)",
-        "ASK (BOM Management)",
-        "Vendor: Mass Precision (Sheet Metal)",
-        "Vendor: PPI (Structural Foam/Plastics)",
-        "Vendor: Alexandria (Extrusions)"
+    "tags": [
+        "Crisis",
+        "Yield",
+        "Process",
+        "Mechanism",
+        "Architecture",
+        "Materials"
     ],
+    "forensic_metrics": {
+        "financial": "Stabilized Stand CoGS which had crept 'way higher' due to rigidity measures [1]",
+        "process": "Recovered from 50-74% yield failure on PPI Side Caps to active shipping [2, 3]",
+        "governance": "Weekly 'QA Top 10' / 'Line Down' Crisis Management on production floor [4, 5]"
+    },
+    "forensic_summary": {
+        "trigger": "Post-FCS 'Line Down' crisis halted D-Control shipments for 3-4 weeks due to warping and bonding defects in structural foam side caps (yields <50%) [2].",
+        "intervention": "Erik Norris volunteered as 'point guy'; released ECO 6310 to increase mounting boss diameter/height; forced vendor (PPI) to modify tooling to eliminate downward-facing bosses [5, 6].",
+        "result": "Stabilized production line, resolved critical 'gap' and 'paint adhesion' issues, and resumed regular system shipments [2, 7]."
+    },
+    "war_stories": [
+        {
+            "label": "The Side Cap Meltdown",
+            "value": "3-4 Week Line Down",
+            "description": "Structural foam parts warped and cracked; rescued by ECO 6310 resizing bosses to tolerate molding variances [2, 6]."
+        },
+        {
+            "label": "The Rigidity Fix",
+            "value": "CoGS Stabilization",
+            "description": "Consolidated extrusion profiles to a single unified design to offset costs of added steel stiffeners required for stand rigidity [8, 9]."
+        },
+        {
+            "label": "The Stripped PEMs",
+            "value": "Field Failure",
+            "description": "Sheet metal inserts stripped during install due to torque required to align warped plastics; resolved by widening plastic clearance holes [9, 10]."
+        }
+    ],
+    "isomorphics": [
+        {
+            "label": "Tolerance",
+            "hardware_point": "Widening bolt holes (ECO 6310) allows imperfectly molded plastic to assemble without stress.",
+            "software_point": "Loose coupling / Postel's Law (be liberal in what you accept) in API design.",
+            "principle": "Robustness Principle"
+        }
+    ],
+    "toolchain": [
+        "Pro/ENGINEER (3D CAD) [11]",
+        "Pro/INTRALINK (Data Management) [8]",
+        "SAP (ERP) [12]",
+        "Vendor: Mass Precision (Sheet Metal) [13]",
+        "Vendor: PPI (Structural Foam/Plastics) [6]",
+        "Vendor: Alexandria (Extrusions) [11]"
+    ],
+    "bom": [
+        {
+            "label": "Side Cap (Left/Right)",
+            "value": "Structural Foam (PPI) [6]"
+        },
+        {
+            "label": "Stand Extrusion",
+            "value": "Aluminum 6061 T51 [14]"
+        },
+        {
+            "label": "Fader Top",
+            "value": "ABS V0 w/ EMI Coating [15]"
+        }
+    ],
+    "teamSize": "5 (Core Mechanical/QA)",
     "cast": [
         {
             "name": "Erik Norris",
@@ -44,61 +97,44 @@
     ],
     "timeline": {
         "start": "2003-04-18",
-        "end": "2005-08-01"
+        "end": "2005-08-09"
     },
     "visuals_to_find": [
-        "QA_Top_10_Issues--08-06-2004.doc",
-        "944011669-00.pdf (Sidecap)",
-        "ECO_6310 (Plastic Boss Modification)",
-        "PCII_CONFIGS.pdf (Stand Configuration)",
-        "ICON Leg Damage photos"
+        "QA_Top_10_Issues--08-06-2004.doc [16]",
+        "944011669-00.pdf (Sidecap) [17]",
+        "ECO_6310 (Plastic Boss Modification) [6]",
+        "PCII_CONFIGS.pdf (Stand Configuration) [18]",
+        "942011518-01 (Side Panel / PEM issue) [19]"
     ],
     "quotes": [
-        "These side cap problems have prevented us from shipping DCtrl systems on a regular basis for the last 3-4 weeks. (Source)",
-        "The stand CoGS have already crept *way* higher than we were expecting them to (largely due to the measures that were taken to improve strength and rigidity). (Source)",
-        "Erik Norris volunteered to be point guy from the Mechanical group on these issues. (Source)"
+        "These side cap problems have prevented us from shipping DCtrl systems on a regular basis for the last 3-4 weeks. [2]",
+        "The stand CoGS have already crept *way* higher than we were expecting them to (largely due to the measures that were taken to improve strength and rigidity). [1]",
+        "Erik Norris volunteered to be point guy from the Mechanical group on these issues. [5]"
     ],
-    "forensic_metrics": {
-        "financial": "Stand CoGS crept 'way higher' due to rigidity measures (Source)",
-        "process": "Resolved 50% yield crisis on PPI Side Caps (Source)",
-        "governance": "Weekly Con Call / Crisis Management (Line Down)"
+    "phase_stats": {
+        "Design": 10,
+        "Engineering": 50,
+        "Production": 30,
+        "Strategy": 10
     },
-    "war_stories": [
-        {
-            "description": "Authorized manual bending of warped fader plates (Part 11517) on the line to keep the line moving. 'If you stop to retool, you never ship.",
-            "label": "The 'Blacksmithing' Protocol",
-            "value": "Manual Metal Bending"
-        },
-        {
-            "description": "Accepted 61\\xB0C thermal risk on LED supply during 'All Lights Flashing' demo mode to enable the 180-degree fader flip.",
-            "label": "Vegas Mode Thermal Spike",
-            "value": "61\\xB0C Heatsink"
-        },
-        {
-            "description": "Inverted assembly order: bolted units together first to create a rigid block, then attached wobbly stand legs, saving hours of alignment time.",
-            "label": "The Rigid Block Match",
-            "value": "Assembly Inversion"
-        },
-        {
-            "description": "Prioritized revenue over cosmetics: tracked specific serial numbers of warped End Caps (26% failure rate) to ship ''Pragmatic Units''.",
-            "label": "Deviation 7896",
-            "value": "74% Yield Accepted"
-        },
-        {
-            "description": "Created the 'Danko' mid-tier product using the premium 'Buckley' PCB by simply not populating ('No-Stuff') 7 specific resistors.",
-            "label": "The 'No-Stuff' Pivot",
-            "value": "Inventory Hack"
-        },
-        {
-            "description": "Battled IT to reboot license servers at 9 PM to check in 'Version 35' of a standard nut (SNUT.part) that was locking the entire assembly.",
-            "label": "The SNUT.part Conflict",
-            "value": "Intralink War"
-        },
-        {
-            "description": "Diagnosed 20% frequency shift in touch faders as parasitic capacitance from nearby LEDs. Fixed with a generic 0805 C0G capacitor.",
-            "label": "The Parasitic Touch",
-            "value": "LED Interference"
-        }
-    ],
-    "_schema_version": "v2.0"
+    "productionScale": "series",
+    "metrics": {
+        "war_stories": [
+            {
+                "description": "Structural foam parts warped and cracked; rescued by ECO 6310 resizing bosses to tolerate molding variances [2, 6].",
+                "label": "The Side Cap Meltdown",
+                "value": "3-4 Week Line Down"
+            },
+            {
+                "description": "Consolidated extrusion profiles to a single unified design to offset costs of added steel stiffeners required for stand rigidity [8, 9].",
+                "label": "The Rigidity Fix",
+                "value": "CoGS Stabilization"
+            },
+            {
+                "description": "Sheet metal inserts stripped during install due to torque required to align warped plastics; resolved by widening plastic clearance holes [9, 10].",
+                "label": "The Stripped PEMs",
+                "value": "Field Failure"
+            }
+        ]
+    }
 }

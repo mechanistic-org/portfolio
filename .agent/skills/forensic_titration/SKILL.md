@@ -84,20 +84,18 @@ Construct the file with this exact structure:
   - `slug`, `role`, `dates`, `toolchain`.
   - `productionScale`: **MANDATORY.** (series | limited | concept | prototype | one_off).
   - `phase_stats`: **MANDATORY.** `{ Design: #, Engineering: #, Production: #, Strategy: # }`.
-  - `presentation_mode`: **MANDATORY.** `flagship` (Enables Hybrid Body + HUD).
+  - `presentation_mode`: **MANDATORY.** `flagship` (Enables Hybrid Body + HUD; **NO DRAWER**).
   - `tags`: **MANDATORY.** (Wires `Assembly.tsx`).
   - `metrics`: Inject `financial`, `process`, `governance` strings + `war_stories`.
   - `cast`: Insert your titrated cast list.
-  - `gallery`: Create shells for EACH Discrete Report. Only use `images` array. **DO NOT uses `deck` text.**
+  - `gallery`: Create shells for EACH Discrete Report. Only use `images` array. **DO NOT use `deck` text.**
 - **Body:**
   - Append Executive Report.
   - Append **Full Text** of all Discrete Reports as `##` headers.
 
-### Step B: The Intelligence File (`_intelligence.md`)
-
-Create a **separate file** at `src/content/projects/{slug}/_intelligence.md`.
-
-- **Content:** Condensed Executive Summary (Sections I-V) ONLY.
+> **CRITICAL ARCHITECTURE UPDATE (Feb 2026):**
+> We have **REMOVED** the "Access Dossier" / "Forensic Drawer".
+> Do **NOT** create a separate `_intelligence.md` file. All forensic narratives must live in the main `index.mdx` body to comply with the "Single Body" Search Indexing Law.
 
 ## Phase 4: Reverse Titration (The Backport Mandate)
 
@@ -119,5 +117,5 @@ When Audio/Transcript assets become available later:
 ## Checklist
 
 - [ ] **Distilled:** War Stories + Cast + Phase Stats + Production Scale?
-- [ ] **Files:** Created BOTH `index.mdx` AND `_intelligence.md`?
+- [ ] **Files:** Created `index.mdx` (Single Body Source)? -> **NO `_intelligence.md`**.
 - [ ] **Backported:** Ran `python scripts/hydrate_content.py --reverse-json` to save the JSON Lifeboat?

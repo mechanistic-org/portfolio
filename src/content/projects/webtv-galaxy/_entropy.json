@@ -1,0 +1,247 @@
+[
+	{
+		"date": "2000-09-18",
+		"score": 3,
+		"snippet": "Keva Nelson sends Mercury/Portal Node mechanical specs and BOMs.",
+		"type": "Document",
+		"source_ref": "WebTV_Volume_006.md"
+	},
+	{
+		"date": "2000-10-17",
+		"score": 2,
+		"snippet": "Confusion over Galaxy Bezel build quantity (4 vs 5 units) with Sputnik Models.",
+		"type": "Document",
+		"source_ref": "WebTV_Volume_006.md"
+	},
+	{
+		"date": "2000-11-01",
+		"score": 4,
+		"snippet": "Erik requests specs for Titan and 'New Server' (Galaxy precursor) from Leslie Leland.",
+		"type": "Document",
+		"source_ref": "WebTV_Volume_004.md"
+	},
+	{
+		"date": "2000-11-20",
+		"score": 5,
+		"snippet": "Hedley Davis releases schedule for 'Mercury Zeus Server' (Galaxy prototype) for CES.",
+		"type": "Document",
+		"source_ref": "WebTV_Volume_004.md"
+	},
+	{
+		"date": "2001-01-25",
+		"score": 6,
+		"snippet": "Frank Salinas sends preliminary Galaxy layout and FTP access protocols.",
+		"type": "Document",
+		"source_ref": "Microsoft_Volume_001.md"
+	},
+	{
+		"date": "2001-03-05",
+		"score": 4,
+		"snippet": "Roy Askeland requests brainstorming session for Galaxy component concepts.",
+		"type": "Document",
+		"source_ref": "WebTV_Volume_004.md"
+	},
+	{
+		"date": "2001-03-09",
+		"score": 3,
+		"snippet": "Erik establishes 'ftp.mechanistic.com' as central hub for Galaxy data transfer.",
+		"type": "Document",
+		"source_ref": "Microsoft_Volume_001.md"
+	},
+	{
+		"date": "2001-04-03",
+		"score": 4,
+		"snippet": "Frank Salinas schedules 'Galaxy Design Status' meeting to discuss thermal data.",
+		"type": "Document",
+		"source_ref": "Microsoft_Volume_001.md"
+	},
+	{
+		"date": "2001-04-09",
+		"score": 7,
+		"snippet": "Roy Askeland reprimands Erik: 'Pay attention. What did you spend 21 hours doing?'",
+		"type": "Document",
+		"source_ref": "WebTV_Volume_008.md"
+	},
+	{
+		"date": "2001-04-10",
+		"score": 6,
+		"snippet": "Roy summons Erik to Applied Thermal Technologies for simulation review.",
+		"type": "Document",
+		"source_ref": "WebTV_Volume_008.md"
+	},
+	{
+		"date": "2001-04-23",
+		"score": 9,
+		"snippet": "Simulation confirms 150W load; CPU at 84°C, Smart Card in thermal dead zone.",
+		"type": "Document",
+		"source_ref": "Microsoft_Volume_001.md"
+	},
+	{
+		"date": "2001-04-24",
+		"score": 8,
+		"snippet": "Frank forwards thermal report (ATT08512.txt) confirming 150W crisis to Erik.",
+		"type": "Document",
+		"source_ref": "03_Engineering_thermal.pdf"
+	},
+	{
+		"date": "2001-05-04",
+		"score": 5,
+		"snippet": "Frank requests tooling feasibility for Galaxy chassis from NT Vision.",
+		"type": "Document",
+		"source_ref": "Microsoft_Volume_001.md"
+	},
+	{
+		"date": "2001-05-11",
+		"score": 5,
+		"snippet": "Frank distributes Galaxy BOM; chassis parts marked 'TBD'.",
+		"type": "Document",
+		"source_ref": "Microsoft_Volume_001.md"
+	},
+	{
+		"date": "2001-05-16",
+		"score": 6,
+		"snippet": "Design review locks EMI tabs/spoons and 'toggle locks' for base chassis.",
+		"type": "Document",
+		"source_ref": "03_Engineering_status.pdf"
+	},
+	{
+		"date": "2001-06-06",
+		"score": 5,
+		"snippet": "Erik releases 'galaxy_06_06_01.zip' to FTP site.",
+		"type": "Commit",
+		"source_ref": "Microsoft_Volume_001.md"
+	},
+	{
+		"date": "2001-06-11",
+		"score": 5,
+		"snippet": "Erik reports 42-hour week working on hitlist; database delivery for review.",
+		"type": "Document",
+		"source_ref": "WebTV_Volume_006.md"
+	},
+	{
+		"date": "2001-06-21",
+		"score": 4,
+		"snippet": "Frank sends IGES drawings of Galaxy assembly to Chris Lenart (ID).",
+		"type": "Document",
+		"source_ref": "WebTV_Volume_006.md"
+	},
+	{
+		"date": "2001-06-26",
+		"score": 7,
+		"snippet": "Frank sends 'cpu_06_26_01.zip' Pro/E files for the CPU Puck sub-assembly.",
+		"type": "Commit",
+		"source_ref": "Microsoft_Volume_001.md"
+	},
+	{
+		"date": "2001-06-26",
+		"score": 6,
+		"snippet": "David Conroy demands 'Mercury' front panel be replaced with Galaxy specific design.",
+		"type": "Document",
+		"source_ref": "Microsoft_Volume_001.md"
+	},
+	{
+		"date": "2001-06-28",
+		"score": 4,
+		"snippet": "Erik hits 'disk full' error on WebTV FTP; moves files to Mechanistic server.",
+		"type": "Document",
+		"source_ref": "WebTV_Volume_006.md"
+	},
+	{
+		"date": "2001-07-07",
+		"score": 6,
+		"snippet": "Erik confirms files released to prototype on 06/28; invoice submitted.",
+		"type": "Document",
+		"source_ref": "WebTV_Volume_006.md"
+	},
+	{
+		"date": "2001-07-09",
+		"score": 7,
+		"snippet": "Shelly Evans (E-M Solutions) confirms 'quick turn' fabrication of covers/bases.",
+		"type": "Document",
+		"source_ref": "Microsoft_Volume_001.md"
+	},
+	{
+		"date": "2001-07-10",
+		"score": 8,
+		"snippet": "Frank sends 'Base_Proto_Deviations.jpg' confirming manufacturing defects/redlines.",
+		"type": "Photo",
+		"source_ref": "Microsoft_Volume_001.md"
+	},
+	{
+		"date": "2001-07-27",
+		"score": 8,
+		"snippet": "Frank issues 'Galaxy Mechanical Design Hitlist' for DEV 2.1 build.",
+		"type": "Document",
+		"source_ref": "03_Engineering_status.pdf"
+	},
+	{
+		"date": "2001-08-07",
+		"score": 6,
+		"snippet": "Erik completes database updates based on prototyping review.",
+		"type": "Document",
+		"source_ref": "WebTV_Volume_006.md"
+	},
+	{
+		"date": "2001-08-19",
+		"score": 6,
+		"snippet": "Erik reports Galaxy 'pretty much wrapped up'; pivots to Mercury LC.",
+		"type": "Document",
+		"source_ref": "WebTV_Volume_006.md"
+	},
+	{
+		"date": "2001-09-04",
+		"score": 7,
+		"snippet": "Frank releases 'Galaxy Mechanical Design Hotlist.doc'.",
+		"type": "Document",
+		"source_ref": "Microsoft_Volume_001.md"
+	},
+	{
+		"date": "2001-09-05",
+		"score": 5,
+		"snippet": "Frank proposes new 'Board Mount Dimple' to solve stamping issues.",
+		"type": "Document",
+		"source_ref": "Microsoft_Volume_001.md"
+	},
+	{
+		"date": "2001-09-14",
+		"score": 10,
+		"snippet": "Frank sends 'New images'. Attachments include 'NEWWTC.jpg'.",
+		"type": "Photo",
+		"source_ref": "Microsoft_Volume_001.md"
+	},
+	{
+		"date": "2001-11-20",
+		"score": 5,
+		"snippet": "Erik confirms 'Minimerc' status: 'glad it all came together'.",
+		"type": "Document",
+		"source_ref": "UltimateTV_Volume_001.md"
+	},
+	{
+		"date": "2002-01-24",
+		"score": 9,
+		"snippet": "Erik confirms 'layoffs at UltimateTV' and 'harsh restructuring'.",
+		"type": "Document",
+		"source_ref": "UltimateTV_Volume_001.md"
+	},
+	{
+		"date": "2002-02-26",
+		"score": 9,
+		"snippet": "Erik advises: 'Microsoft has chosen... the gaming console... rather than the cable TV box'.",
+		"type": "Document",
+		"source_ref": "Microsoft_Volume_002.md"
+	},
+	{
+		"date": "2002-03-18",
+		"score": 8,
+		"snippet": "Erik submits invoice for 'xbox redesign work'.",
+		"type": "Document",
+		"source_ref": "Microsoft_Volume_002.md"
+	},
+	{
+		"date": "2002-05-24",
+		"score": 5,
+		"snippet": "PO issued for 'Tuscany Power Supply' integration into Xbox chassis.",
+		"type": "Document",
+		"source_ref": "Microsoft_Volume_002.md"
+	}
+]
