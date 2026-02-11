@@ -61,9 +61,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 					}))
 				}
 			>
-				<div class="pb-24">
-					<Content />
-				</div>
+				{/* CONTENT MOVED TO MAIN FLOW TO ENSURE VISIBILITY ("Ready State") */}
 			</ForensicDossier>
 		)
 	}
@@ -195,21 +193,15 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 		)
 	}
 
-	<!-- MDX CONTENT SLOT (Standard Mode Only) -->
-	{
-		!useDossier && (
-			<section class="relative z-10 bg-transparent pb-32">
-				<div class="site-container max-w-4xl">
-					<Content />
-				</div>
-			</section>
-		)
-	}
-
-	{/* AEO BRIDGE: Forensic Intelligence - Always visible in DOM */}
+	<!-- MDX CONTENT SLOT (Visible in All Modes) -->
+	{/* "Ready State" / Forensic Report Body Text */}
+	<!-- MDX CONTENT SLOT (Visible in All Modes) -->
+	{/* "Ready State" / Forensic Report Body Text */}
 	<section class="relative z-10 bg-transparent pb-32">
 		<div class="site-container max-w-4xl">
-			<ForensicHUD metrics={entry.data.forensic_metrics} transcript={entry.data.transcript} />
+			<article class="prose prose-invert prose-lg max-w-none">
+				<Content />
+			</article>
 		</div>
 	</section>
 

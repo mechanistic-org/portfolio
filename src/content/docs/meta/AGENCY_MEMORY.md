@@ -218,7 +218,10 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (LinkedIn):** **"Sovereign Decoupling"** - `linkedin_master.ts` is the Source of Truth for LinkedIn (Social Feed), decoupled from `resume_master.ts` (Legal PDF). This allows for Double Spacing (`\n\n`) and Unicode Bold (`𝗧𝗲𝘅𝘁`) which break PDF renderers.
 * **Key Decision (Tooling):** **"Unicode Bold Script"** - `scripts/compile_linkedin.py` is the sovereign tool that converts Markdown `**bold**` into Unicode Mathematical Sans Bold strings for LinkedIn paste-ability.
 * **Key Decision (Design):** **"The Forensic Tooltip"** - Tooltips must use the "Black Glass" aesthetic (`bg-black/95`, `backdrop-blur`, `mono-spaced`) to align with the Forensic Voice. No default white browser tooltips.
-* **Key Decision (Taxonomy):** **"The Lifecycle Law"** - "Production Status" is strictly defined: `Discovery` -> `Definition` -> `Concept` -> `Prototype` -> `Validation` -> `Production`.
+* **Key Decision (Taxonomy):**- **The "Lifecycle Law"** - "Production Status" is strictly defined: `Discovery` -> `Definition` -> `Concept` -> `Prototype` -> `Validation` -> `Production`.
+* **Key Decision (Schema):** **"The Keystatic Strict Mode"** - Transited to V2 Schema (`forensic_summary` object, `tags` enum, `bom`). Migration scripts (`migrate_v1_to_v2.py`) are strictly one-way.
+* **Key Decision (Assets):** **"The R2 Prefix Split"** - Production uses root-relative paths (`c24/image.png`). Local Dev uses `R2_STAGING` which mimics the bucket. `src/utils/assets.ts` (Prod) rewrites `/assets/r2/` -> `https://assets...`. `src/pages/assets/[...path].ts` (Dev) MUST strip `r2/` from the request path to match disk.
+* **Key Decision (Content):** **"The Ready State"** - A project is valid ONLY if body text is visible. "Admonitions" are deprecated/banned. If they appear, it is a render-ghost.
 
 - **The "Dumb Pipe" Law (Bubble Parsing):**
   - `process_images.py` does NOT parse bubble folder names. It iterates `sorted(bubbles)`.

@@ -203,6 +203,22 @@ These scripts drive the "Forensic Data Factory."
 - **Cause:** Static imports (`import fs from "node:fs"`) or ungated runtime usage (`fs.readFileSync`) in Astro components being bundled for Cloudflare Workers.
 - **Fix:** Use dynamic imports (`await import("node:fs")`) inside `try/catch` blocks and gate runtime logic with `if (import.meta.env.DEV)` so it is dead-code-eliminated from the production worker.
 
+### ⚠️ "The Content Regression Trap" (Ready State)
+
+- **Symptom:** Body text (Forensic Report) is present in `.mdx` but missing from the rendered page ("Ready State is GONE").
+- **Cause:**
+  1.  **Layout Logic:** `DeepDiveRenderer` or `ForensicDossier` might conditionally hide the `<Content />` slot.
+  2.  **Mode Mismatch:** `presentation_mode: deep_dive` might assume a "Visual Only" experience.
+- **Fix:** Audit `Hyperspace.astro` to ensure `<Content />` is always rendered, or strictly define where it lives (Drawer vs Main).
+
+### ⚠️ "The Ghost Admonition" (Legacy Leak)
+
+- **Symptom:** User reports "Admonitions are back," but `grep` shows no `<Admonition>` tags in the file.
+- **Cause:**
+  1.  **Render Injection:** A component (`Markdown` renderer) might be injecting default content.
+  2.  **File Confusion:** Inspecting `index.mdx` while the system reads `_index.mdx` or `forensic_report.md`.
+- **Protocol:** Trust `grep` but verify the _rendered_ HTML source.
+
 ### ⚠️ "MessageChannel is not defined" (React Worker Crash)
 
 - **Symptom:** Cloudflare Deployment fails with `Uncaught ReferenceError: MessageChannel is not defined`.

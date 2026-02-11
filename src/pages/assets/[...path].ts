@@ -57,23 +57,39 @@ export const GET: APIRoute = async ({ params, locals }) => {
 	// - 'npm run preview' (PROD mode but no Cloudflare bindings)
 	try {
 		// DYNAMIC IMPORTS: Explicitly prevent bundling these into the Worker
+		// DYNAMIC IMPORTS: Explicitly prevent bundling these into the Worker
 		const fs = (await import("node:fs")).default;
 		const path = (await import("node:path")).default;
 		const mime = (await import("mime-types")).default;
 
-		// DECODE: Handle spaces and special chars (e.g. "Briefing%20Effect.m4a")
-		const decodedPath = decodeURIComponent(assetPath);
+		// DECODE: Handle spaces and special chars
+		let decodedPath = decodeURIComponent(assetPath);
+
+		// NORMALIZE SLASHES: Ensure consistent forward slashes for checking
+		let checkPath = decodedPath.replace(/\\/g, "/");
+
+		// [DEV FIX] Strip 'r2/' prefix if present
+		if (checkPath.startsWith("r2/")) {
+			decodedPath = checkPath.substring(3);
+		} else if (checkPath.startsWith("/r2/")) {
+			// Handle potential leading slash
+			decodedPath = checkPath.substring(4);
+		}
+
+		// RESOLVE ROOT: Ensure OS-correct slashes for the root
+		const stagingRoot = path.resolve("D:/GitHub/eriknorris-assets/R2_STAGING");
 
 		// JOIN: Use path.join to correctly handle slashes on Windows
-		const filePath = path.join(R2_STAGING_ROOT, decodedPath);
-		// Security check could go here if needed
+		const filePath = path.join(stagingRoot, decodedPath);
 
-		console.log(`[Asset Proxy] Requesting: ${assetPath}`);
-		console.log(`[Asset Proxy] Resolved to: ${filePath}`);
-		console.log(`[Asset Proxy] Exists? ${fs.existsSync(filePath)}`);
+		// console.log(`[Asset Proxy] Requesting: ${assetPath}`);
+		// console.log(`[Asset Proxy] Normalized Path: ${decodedPath}`);
+		// console.log(`[Asset Proxy] Resolving against: ${stagingRoot}`);
+		// console.log(`[Asset Proxy] Final Path: ${filePath}`);
+		// console.log(`[Asset Proxy] Exists? ${fs.existsSync(filePath)}`);
 
 		if (!fs.existsSync(filePath)) {
-			console.error(`[Asset Proxy] File Not Found: ${filePath}`);
+			console.warn(`[Asset Proxy] 404 - File Not Found at: ${filePath}`);
 			return new Response(`Not Found Local: ${filePath}`, { status: 404 });
 		}
 

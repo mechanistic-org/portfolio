@@ -1,0 +1,10 @@
+---
+const { title = "Note", type = "info" } = Astro.props;
+---
+
+<div class={`admonition admonition-${type} my-4 border-l-4 border-blue-500 bg-blue-900/20 p-4`}>
+	<div class="mb-2 font-bold text-blue-400">{title}</div>
+	<div class="text-neutral-300">
+		<slot />
+	</div>
+</div>
