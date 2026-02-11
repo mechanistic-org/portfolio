@@ -43,9 +43,9 @@ Iterate through **EVERY** project identified in Step 1.
 > **[Role Title] | [Project Name]**
 > *   *Context Blurb (Italics):* 2 lines defining the "Crisis" or "Mandate".
 > *   *The Artifacts (3-4 Bullets):*
->     *   **The Hard Ore:** The primary mechanical/thermal solve (using Numbers).
->     *   **The Rhythm:** The governance/vendor/process win.
->     *   **The Integer:** The financial/yield impact.
+>     *   **The Trigger:** The Crisis or specific technical failure (e.g. Thermal Runaway).
+>     *   **The Intervention:** The specific Engineering Action or ECO (e.g. Vertical Hanging Fixture).
+>     *   **The Result:** The Hard Metric or Yield Improvement (e.g. 100% Fit Rate).
 
 ---
 

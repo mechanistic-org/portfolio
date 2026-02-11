@@ -778,13 +778,13 @@ def reverse_hydrate_text(dry_run=False):
 
 def generate_project_index(dry_run=False):
     """
-    Generates src/content/prompts/prompts/PROJECT_INDEX.md using a Tiered Strategy.
+    Generates src/content/prompts/PROJECT_INDEX.md using a Tiered Strategy.
     
     Tier 1 (Forensic): Projects with 'forensic_summary' or 'war_stories'. Full detail.
     Tier 2 (Ready State/On Deck): Projects with body text (intro) but no forensic struct.
     Tier 3 (Stub): Minimal metadata only.
     """
-    output_path = Path("src/content/prompts/prompts/PROJECT_INDEX.md")
+    output_path = Path("src/content/prompts/PROJECT_INDEX.md")
     
     print(f"🗂️  Generating Holistic Project Index (Tiered)...")
 
@@ -887,7 +887,18 @@ total_entries: {total_count}
     for p in tier1_projects:
         content += f"### {p['title']} (`{p['slug']}`)\n"
         content += f"**Detail Pod:** {p['detail_pod']}\n\n"
-        content += f"> **Forensic Summary:** {p['summary'].strip()}\n\n"
+        summary_text = ""
+        if isinstance(p['summary'], dict):
+            # V2 Schema: Reconstruct the narrative
+            trigger = p['summary'].get('trigger', '')
+            intervention = p['summary'].get('intervention', '')
+            result = p['summary'].get('result', '')
+            summary_text = f"TRIGGER: {trigger} INTERVENTION: {intervention} RESULT: {result}"
+        else:
+            # V1 Legacy or String
+            summary_text = str(p['summary']).strip()
+
+        content += f"> **Forensic Summary:** {summary_text}\n\n"
         
         if p['metrics']:
             content += f"**Key Metrics:**\n"
@@ -942,5 +953,7 @@ if __name__ == "__main__":
         generate_project_index(dry_run=args.dry_run)
     else:
         hydrate_content(dry_run=args.dry_run, force=args.force, target_slug=args.slug)
+        # Always regenerate index after hydration
+        generate_project_index(dry_run=args.dry_run)
 
 

@@ -18,7 +18,7 @@ We do not write generic bullet points. We write **Forensic Evidence**.
 - **The Problem:** Standard resumes list "Responsibilities."
 - **The Solution:** We list **"Context + Impact."**
 - **The Format:** **The Trigger** (Crisis) -> **The Intervention** (Action) -> **The Result** (Metric).
-- **The Metric:** Every major claim must be backed by a number ($, %, Qty) derived from the Deep Dive Boluses.
+- **The Metric:** Every major claim must be backed by a number ($, %, Qty) derived from the `forensic_metrics` or `forensic_summary` objects in the Bolus.
 
 ---
 
