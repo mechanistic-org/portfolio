@@ -72,6 +72,9 @@ description: "Archived legacy document."
   2.  **Constraint:** Do not touch `public/assets` blindly. Respect the Air Gap.
   3.  **Verification:** "Diff your edits." Never commit without reviewing the `git diff`.
   4.  **Action:** If the diagnosis is wrong, STOP. Do not "try harder" with random fixes. Revert and Re-assess.
+  5.  **The "Air Gap" Violation:**
+      - **Trigger:** Creating local folders in `public/assets/`.
+      - **Correction:** **STOP.** You are violating the Air Gap. Assets belong in `R2_MASTER`. Delete the folder immediately.
 
 ## 3. KEY BEHAVIORS & HABITS
 

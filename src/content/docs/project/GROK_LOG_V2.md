@@ -124,3 +124,13 @@ sidebar:
 2.  **MANUAL OVER AUTOMATION:** It is better to have a Manual System that runs than an Autonomous Agent that breaks.
 
 ---
+
+## 📈 X. The Law of the Seismobolus (Sidecar Protocol)
+
+**Context:** Agents attempted to inject 25+ item entropy arrays into MDX Frontmatter, causing schema bloat and scrolling friction.
+
+1.  **SIDECAR SOVEREIGNTY:** Seismograph data (`entropy`) MUST live in `_entropy.json` within the project folder.
+2.  **NO FRONTMATTER BLOAT:** do not put the array in `index.mdx`. The HUD reads the Sidecar (`imports/projects/**/_entropy.json`).
+3.  **THE NAME IS LAW:** The file must be named `_entropy.json`.
+
+---

@@ -320,18 +320,39 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
                 post.metadata["reports"] = reports
 
         # --- V2.0 SCHEMA UPDATES (Feb 2026) ---
-        
-        # 8. BOM (Bill of Materials)
-        if "bom" in data:
-            if post.metadata.get("bom") != data["bom"]:
-                changes.append(f"  - Update 'bom' ({len(data['bom'])} items)")
-                post.metadata["bom"] = data["bom"]
 
-        # 9. Team Size
-        if "teamSize" in data:
-            if post.metadata.get("teamSize") != data["teamSize"]:
-                changes.append(f"  - Update 'teamSize'")
-                post.metadata["teamSize"] = data["teamSize"]
+        # 6. Complexity Vector (Physical Design)
+        if "complexity_vector" in data:
+            cv = data["complexity_vector"]
+            if post.metadata.get("complexity_vector") != cv:
+                 changes.append(f"  - Update 'complexity_vector' (Structure)")
+                 post.metadata["complexity_vector"] = cv
+
+        # 7. Entropy Sidecar (Seismograph) - Writes to _entropy.json
+        # We do NOT put this in Frontmatter (Law X).
+        if "events" in data:
+            events = data["events"]
+            # Path: src/content/projects/{slug}/_entropy.json
+            # target_mdx is .../index.mdx. Parent is the project folder.
+            entropy_path = target_mdx.parent / "_entropy.json"
+            
+            # Check for changes
+            needs_write = True
+            if entropy_path.exists():
+                with open(entropy_path, "r", encoding="utf-8") as f:
+                    existing_entropy = json.load(f)
+                if existing_entropy == events:
+                    needs_write = False
+            
+            if needs_write:
+                changes.append(f"  - Write Sidecar '_entropy.json' ({len(events)} events)")
+                if not dry_run:
+                     with open(entropy_path, "w", encoding="utf-8") as f:
+                         json.dump(events, f, indent=2)
+
+        # Legacy Support (Seismobolus) - Deprecated but checking to prevent regression
+        if "seismobolus" in data and "events" not in data:
+             print(f"  ⚠️  Legacy 'seismobolus' found in {slug}. Please standardise to 'events' (Seismograph V1.0).")
 
         # 10. Tags (Controlled Vocabulary)
         if "tags" in data:
@@ -400,8 +421,15 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
                             print(f"  - Created/Updated '_intelligence.md'")
                          else:
                             print(f"  - [Dry Run] would create/update '_intelligence.md'")
+                         
                      else:
                          print(f"  ⚠️  Skipping intelligence creation for flat file '{target_mdx.name}'. Migrate to folder structure first.")
+                 
+                 # Body Injection (Ready State Compliance) - Check regardless of _intelligence.md status
+                 if target_mdx.name == "index.mdx":
+                     if not post.content or not post.content.strip():
+                         post.content = raw_intelligence
+                         changes.append(f"  - Injected Body Content from dump")
 
              except Exception as e:
                  print(f"  ❌ Failed to process intelligence dump: {e}")

@@ -1,121 +1,66 @@
 ---
 name: Forensic Titration
-description: The official protocol for enriching project files using the "Hybrid" architecture (Body Text + Gallery Shells) and distilling War Stories for the global resume.
+description: The official protocol for enriching project files using the "Three Vector" Mining Campaign (Narrative, Complexity, Entropy).
 ---
 
-# Forensic Titration Protocol
+# Forensic Titration Protocol (v2.0)
 
 ## Usage
 
-**When to use:** Onboarding a new project (e.g., "Bazooka", "Hyphen") or refactoring a legacy one.
-**Trigger:** _"Invoke the Forensic Titration skill for [slug]. Here is the bolus."_
-**Input:** Raw text/JSON dump from NotebookLM (The Bolus).
+**When to use:** Onboarding a new project or "Re-Hydrating" an existing one.
+**Trigger:** _"Check the Mining Log."_
+**Master Tracker:** [`src/content/docs/project/MINING_LOG.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/MINING_LOG.md)
 
-## Context
+## The Architecture: "The Three Vectors"
 
-This protocol defines the "Gold Standard" for ingesting forensic engineering data into the ErikNorris portfolio. It replaces ad-hoc file creation with a deterministic process that ensures **Asset Sovereignty**, **Readability**, and **Resume Continuity**.
+We no longer use a single "Bolus." We have three distinct mining operations that result in three distinct artifacts.
 
-> [!CAUTION]
-> **ZERO DATA LOSS MANDATE**
-> Before applying this skill, you MUST check if the target project already has forensic data (MDX/JSON).
-> If data exists, you must **APPEND** or **MERGE**, never **OVERWRITE** without a backup.
-> YOU MUST run `python scripts/hydrate_content.py --reverse-json --slug [slug]` immediately after any manual titration to lock the state.
+| Vector            | Prompt File             | Output Artifact                      | Goal                     |
+| :---------------- | :---------------------- | :----------------------------------- | :----------------------- |
+| **1. Narrative**  | `REPORT_READY.txt`      | `forensic_summary` (in `index.mdx`)  | The Story (War Stories). |
+| **2. Complexity** | `COMPLEXITY_READY.txt`  | `complexity_vector` (in `index.mdx`) | The Mass (BOM/Process).  |
+| **3. Entropy**    | `SEISMOGRAPH_READY.txt` | `_entropy.json`                      | The Pulse (Event Log).   |
 
-## The Architecture: "The Hybrid Contract"
+## Protocol: The Chain of Custody
 
-**The SME (Erik) provides:**
+### Phase 1: Check the Log
 
-1.  **The Bolus:** A structured raw dump (JSON/Text) containing the "Red Gold" (War Stories, Thermal Crises).
-2.  **The Intent:** The "Why" (e.g., "This project proves I can handle 1500W thermal loads").
+1.  Open `MINING_LOG.md`.
+2.  Identify a Project with **Pending (🔴)** status in any vector.
 
-**The Agent (You) provides:**
+### Phase 2: Execute Mining (The User Loop)
 
-1.  **The Construction:** You build the MDX body and Frontmatter structure.
-2.  **The Verification:** You run the Audit.
-3.  **The Safety (Three-Body Protocol):** You ensure the data is safe via the **Source / Live / Backup** architecture.
+1.  **Context:** Ask the User to open the relevant NotebookLM.
+2.  **Config:** Instruct User to paste the specific `_READY.txt` content into "System Instructions."
+3.  **Trigger:** Instruct User to run the specific trigger phrase (e.g., "Extract Complexity Vector").
+4.  **Ingest:**
+    - **Complexity:** Paste JSON into `index.mdx` frontmatter under `complexity_vector`.
+    - **Entropy:** Paste JSON into `src/content/projects/{slug}/_entropy.json`.
+    - **Narrative:** Manually titrate Markdown into `index.mdx` body.
 
-## The Three-Body Safety Protocol
+### Phase 3: Validation
 
-To prevent accidental data loss during hydration, we strictly enforce a three-file architecture:
+1.  **Verify:** Check the Local Preview.
+    - Does the **Seismograph** appear in the HUD? (Entropy)
+    - Does the **Complexity Chart** appear? (Complexity)
+2.  **Log:** Update `MINING_LOG.md` status to 🟢.
 
-1.  **THE SOURCE (Manual):** `notebook_dumps/{slug}.md`
-    - **Rule:** READ-ONLY to the script. This is the "User Manual Entry" file. Automation _cannot_ overwrite it.
-2.  **THE LIVE (Render):** `src/content/projects/{slug}/index.mdx`
-    - **Rule:** The rendered site. Can be hydrated (Forward) or snapshotted (Reverse).
-3.  **THE BACKUP (Snapshot):** `notebook_dumps/{slug}.backup.md`
-    - **Rule:** WRITE-ONLY. A snapshot of the Live file. If Live gets mangled, this file triggers an alert, but Source remains pristine.
+## Critical Laws
 
-## Phase 1: Ingestion (The Bolus)
+### 1. The "Sidecar" Law (Entropy)
 
-You will receive inputs in the "Adhoc Report" format. Scan for ALL the following:
+Seismograph data (`events` array) is TOO LARGE for Frontmatter. It MUST live in `_entropy.json`.
+**Do not** paste 50+ events into `index.mdx`.
 
-1.  **The Base Bolus (JSON):** `metrics`, `cast`, `toolchain`, `forensic_summary`, `tags`.
-2.  **The Visual Drivers (HUD):**
-    - `productionScale`: (e.g., `series`, `limited`, `concept`) -> Drives the "Pip Chart".
-    - `phase_stats`: (Object with `Design`, `Engineering`, `Production`, `Strategy` hours) -> Drives the "Seismograph".
-3.  **The Discrete Reports (Text):** Deep Dives (e.g., "The Thermal Crisis").
-4.  **High-Fidelity Assets (Late Binding):** `audio_url`, `transcript`, `notebook_url` (Optional in Phase 1).
+### 2. The "Sovereign Asset" Law
 
-## Phase 2: Distillation (The Creative Act)
+Do not generate images or audio. These are "Sovereign Assets" managed by `asset_sovereignty`.
+Focus strictly on **Text** and **Data**.
 
-**CRITICAL:** The scripts _move_ data, but the Agent must _create_ the War Stories.
+### 3. The "Zero Loss" Law
 
-### A. Titrate War Stories
+When updating `index.mdx`:
 
-Distill reports into 5-7 high-impact `war_stories` for the Frontmatter.
-_Rule: If the report details a specific fix (e.g., "3Tabs"), that MUST become a War Story._
-
-### B. Titrate Cast (The Team Drawer)
-
-If the Bolus does not contain a `cast` array, **you must extract it from the text.**
-
-### C. Titrate Visuals (Seismograph & Pips)
-
-- **Seismograph (`phase_stats`):** If missing, infer relative effort (0-100) based on role (e.g., heavily Engineering = `Engineering: 80, Design: 20`).
-- **Pip Chart (`productionScale`):** Infer from context (Mass Production = `series`, Prototype = `concept`).
-
-## Phase 3: Construction (The Hybrid)
-
-### Step A: The Project File (`index.mdx`)
-
-Construct the file with this exact structure:
-
-- **Frontmatter:**
-  - `slug`, `role`, `dates`, `toolchain`.
-  - `productionScale`: **MANDATORY.** (series | limited | concept | prototype | one_off).
-  - `phase_stats`: **MANDATORY.** `{ Design: #, Engineering: #, Production: #, Strategy: # }`.
-  - `presentation_mode`: **MANDATORY.** `flagship` (Enables Hybrid Body + HUD; **NO DRAWER**).
-  - `tags`: **MANDATORY.** (Wires `Assembly.tsx`).
-  - `metrics`: Inject `financial`, `process`, `governance` strings + `war_stories`.
-  - `cast`: Insert your titrated cast list.
-  - `gallery`: Create shells for EACH Discrete Report. Only use `images` array. **DO NOT use `deck` text.**
-- **Body:**
-  - Append Executive Report.
-  - Append **Full Text** of all Discrete Reports as `##` headers.
-
-> **CRITICAL ARCHITECTURE UPDATE (Feb 2026):**
-> We have **REMOVED** the "Access Dossier" / "Forensic Drawer".
-> Do **NOT** create a separate `_intelligence.md` file. All forensic narratives must live in the main `index.mdx` body to comply with the "Single Body" Search Indexing Law.
-
-## Phase 4: Reverse Titration (The Backport Mandate)
-
-**CRITICAL:** Manual intelligence (War Stories authored in MDX) is ephemeral until backported.
-
-1.  Run `npm run audit:frontmatter` to verify schema.
-2.  **MANDATORY:** Run the Reverse Hydration (JSON) script to update the `notebook_dumps` Source of Truth:
-    ```bash
-    python scripts/hydrate_content.py --reverse-json --slug [slug]
-    ```
-    _Note: The legacy `--reverse` flag (Text) is for Resume generation. Use `--reverse-json` for Data Safety._
-
-## Phase 5: Day 2 Audio Injection (Late Binding)
-
-When Audio/Transcript assets become available later:
-
-- **Do NOT re-hydrate.** Surgical manual update of `audio_url` and `transcript` only.
-
-## Checklist
-
-- [ ] **Distilled:** War Stories + Cast + Phase Stats + Production Scale?
-- [ ] **Files:** Created `index.mdx` (Single Body Source)? -> **NO `_intelligence.md`**.
-- [ ] **Backported:** Ran `python scripts/hydrate_content.py --reverse-json` to save the JSON Lifeboat?
+- **Read** the existing file first.
+- **Merge** the new vector.
+- **Never** overwrite existing `war_stories` or `cast` unless explicitly instructed.

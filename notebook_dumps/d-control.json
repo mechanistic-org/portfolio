@@ -1,140 +1,440 @@
 {
-    "_schema_version": "v2.0",
-    "id": "d-control",
-    "presentation_mode": "deep_dive",
-    "tags": [
-        "Crisis",
-        "Yield",
-        "Process",
-        "Mechanism",
-        "Architecture",
-        "Materials"
-    ],
-    "forensic_metrics": {
-        "financial": "Stabilized Stand CoGS which had crept 'way higher' due to rigidity measures [1]",
-        "process": "Recovered from 50-74% yield failure on PPI Side Caps to active shipping [2, 3]",
-        "governance": "Weekly 'QA Top 10' / 'Line Down' Crisis Management on production floor [4, 5]"
-    },
-    "forensic_summary": {
-        "trigger": "Post-FCS 'Line Down' crisis halted D-Control shipments for 3-4 weeks due to warping and bonding defects in structural foam side caps (yields <50%) [2].",
-        "intervention": "Erik Norris volunteered as 'point guy'; released ECO 6310 to increase mounting boss diameter/height; forced vendor (PPI) to modify tooling to eliminate downward-facing bosses [5, 6].",
-        "result": "Stabilized production line, resolved critical 'gap' and 'paint adhesion' issues, and resumed regular system shipments [2, 7]."
-    },
-    "war_stories": [
-        {
-            "label": "The Side Cap Meltdown",
-            "value": "3-4 Week Line Down",
-            "description": "Structural foam parts warped and cracked; rescued by ECO 6310 resizing bosses to tolerate molding variances [2, 6]."
-        },
-        {
-            "label": "The Rigidity Fix",
-            "value": "CoGS Stabilization",
-            "description": "Consolidated extrusion profiles to a single unified design to offset costs of added steel stiffeners required for stand rigidity [8, 9]."
-        },
-        {
-            "label": "The Stripped PEMs",
-            "value": "Field Failure",
-            "description": "Sheet metal inserts stripped during install due to torque required to align warped plastics; resolved by widening plastic clearance holes [9, 10]."
-        }
-    ],
-    "isomorphics": [
-        {
-            "label": "Tolerance",
-            "hardware_point": "Widening bolt holes (ECO 6310) allows imperfectly molded plastic to assemble without stress.",
-            "software_point": "Loose coupling / Postel's Law (be liberal in what you accept) in API design.",
-            "principle": "Robustness Principle"
-        }
-    ],
-    "toolchain": [
-        "Pro/ENGINEER (3D CAD) [11]",
-        "Pro/INTRALINK (Data Management) [8]",
-        "SAP (ERP) [12]",
-        "Vendor: Mass Precision (Sheet Metal) [13]",
-        "Vendor: PPI (Structural Foam/Plastics) [6]",
-        "Vendor: Alexandria (Extrusions) [11]"
-    ],
-    "bom": [
-        {
-            "label": "Side Cap (Left/Right)",
-            "value": "Structural Foam (PPI) [6]"
-        },
-        {
-            "label": "Stand Extrusion",
-            "value": "Aluminum 6061 T51 [14]"
-        },
-        {
-            "label": "Fader Top",
-            "value": "ABS V0 w/ EMI Coating [15]"
-        }
-    ],
-    "teamSize": "5 (Core Mechanical/QA)",
-    "cast": [
-        {
-            "name": "Erik Norris",
-            "role": "Lead Mechanical Engineer / The Architect",
-            "org": "Digidesign"
-        },
-        {
-            "name": "Neal Breitbarth",
-            "role": "Mechanical Engineering Manager",
-            "org": "Digidesign"
-        },
-        {
-            "name": "Al Siy",
-            "role": "QA Engineer",
-            "org": "Digidesign"
-        },
-        {
-            "name": "Terri Merrell",
-            "role": "Senior Buyer/Planner",
-            "org": "Digidesign"
-        },
-        {
-            "name": "Ed Stegall",
-            "role": "Vendor Contact",
-            "org": "Mass Precision"
-        }
-    ],
-    "timeline": {
-        "start": "2003-04-18",
-        "end": "2005-08-09"
-    },
-    "visuals_to_find": [
-        "QA_Top_10_Issues--08-06-2004.doc [16]",
-        "944011669-00.pdf (Sidecap) [17]",
-        "ECO_6310 (Plastic Boss Modification) [6]",
-        "PCII_CONFIGS.pdf (Stand Configuration) [18]",
-        "942011518-01 (Side Panel / PEM issue) [19]"
-    ],
-    "quotes": [
-        "These side cap problems have prevented us from shipping DCtrl systems on a regular basis for the last 3-4 weeks. [2]",
-        "The stand CoGS have already crept *way* higher than we were expecting them to (largely due to the measures that were taken to improve strength and rigidity). [1]",
-        "Erik Norris volunteered to be point guy from the Mechanical group on these issues. [5]"
-    ],
-    "phase_stats": {
-        "Design": 10,
-        "Engineering": 50,
-        "Production": 30,
-        "Strategy": 10
-    },
-    "productionScale": "series",
-    "metrics": {
-        "war_stories": [
-            {
-                "description": "Structural foam parts warped and cracked; rescued by ECO 6310 resizing bosses to tolerate molding variances [2, 6].",
-                "label": "The Side Cap Meltdown",
-                "value": "3-4 Week Line Down"
-            },
-            {
-                "description": "Consolidated extrusion profiles to a single unified design to offset costs of added steel stiffeners required for stand rigidity [8, 9].",
-                "label": "The Rigidity Fix",
-                "value": "CoGS Stabilization"
-            },
-            {
-                "description": "Sheet metal inserts stripped during install due to torque required to align warped plastics; resolved by widening plastic clearance holes [9, 10].",
-                "label": "The Stripped PEMs",
-                "value": "Field Failure"
-            }
-        ]
-    }
+	"_schema_version": "v2.0",
+	"id": "d-control",
+	"presentation_mode": "deep_dive",
+	"tags": ["Architecture", "Crisis", "Yield", "Materials", "Process", "Leadership", "Thermal"],
+	"forensic_metrics": {
+		"financial": "Cost delta analysis of external vs internal monitor ($50-$100 impact); Evaluation of ALPS faders ($15) vs Penny & Giles for cost reduction/retrofit",
+		"process": "Compressed 2-month DFM and manufacturing optimization campaign into 2.5 weeks",
+		"governance": "Cross-functional 'Digi-Buckley' meetings; Sustaining D-Control issues email group created for production assembly feedback"
+	},
+	"forensic_summary": {
+		"trigger": "Flagship console launch to replace ProControl; Critical tolerance accumulation issues in modular 16/32 fader configurations causing assembly failures",
+		"intervention": "Erik Norris 'rigidified' sheet metal structure; Implemented 'ratcheting compression strap' assembly method to force unit alignment; Manual 'tweaking' of warped fader pans during assembly",
+		"result": "Successful launch of D-Control (Buckley) and D-Command (Danko); TEC Award nomination"
+	},
+	"war_stories": [
+		{
+			"label": "The Bowed Fader Pan",
+			"value": "50% Rejection Rate",
+			"description": "PEM hardware insertion stretched sheet metal, causing an 'arch' or 'bow' from front to back, requiring manual bending to fix."
+		},
+		{
+			"label": "The Cracked End Cap",
+			"value": "Field Failures",
+			"description": "Plastic end caps cracking due to interference with screw heads and torque stress; resolved by ECO to increase hole diameters."
+		},
+		{
+			"label": "The V-2 Tinderbox",
+			"value": "Safety Crisis",
+			"description": "Discovery that PCBs were manufactured with V-2 material (flammable) instead of V-0, described as 'a virtual tinderbox' relative to spec."
+		}
+	],
+	"isomorphics": [
+		{
+			"label": "Tolerance Stack-up",
+			"hardware_point": "Multiplying effect on tolerance error due to length/width of multiple unit assemblies (Main + Fader)",
+			"software_point": "Firmware updates required to support different fader orientations (ALPS vs P&G)",
+			"principle": "Modular System Integration Laws"
+		}
+	],
+	"toolchain": [
+		"Pro-E (PTC)",
+		"Windchill/Intralink",
+		"SAP (BOM management)",
+		"Vendors: Mass Precision (Sheet Metal), Jetcrown (Plastics), PPI Plastics, Alps, Penny & Giles"
+	],
+	"bom": [
+		{
+			"label": "Fader Motor Assembly",
+			"value": "915010917"
+		},
+		{
+			"label": "Fader Pan Rail",
+			"value": "942011688"
+		},
+		{
+			"label": "PCII Main Foot Plate",
+			"value": "942011678-00"
+		},
+		{
+			"label": "Plastic Texture",
+			"value": "Mold-Tech MT-11020"
+		},
+		{
+			"label": "Powder Coat",
+			"value": "Metallic Silver / Pantone Cool Gray 6 U"
+		}
+	],
+	"teamSize": "Large Cross-functional Team (Mech, HW, QA, Mfg)",
+	"cast": [
+		{
+			"name": "Erik Norris",
+			"role": "Lead Mechanical Engineer / The Architect",
+			"org": "Digidesign"
+		},
+		{
+			"name": "Neal Breitbarth",
+			"role": "Mechanical Engineering Manager",
+			"org": "Digidesign"
+		},
+		{
+			"name": "Marc Schuman",
+			"role": "Hardware Engineering",
+			"org": "Digidesign"
+		},
+		{
+			"name": "Ed Stegall",
+			"role": "Vendor Point of Contact",
+			"org": "Mass Precision"
+		},
+		{
+			"name": "Vicky Moreno",
+			"role": "Field Service / QA",
+			"org": "Digidesign"
+		}
+	],
+	"timeline": {
+		"start": "2003-09-01",
+		"end": "2005-06-01"
+	},
+	"visuals_to_find": [
+		"Technicolor Full 2 lowres.jpg",
+		"Crack.jpg",
+		"Left leg stand 3.jpg",
+		"DSC01740.jpg (Misaligned hole)"
+	],
+	"quotes": [
+		"I'm squeezing a 2-month DFM and manufacturing process optimization campaign to help out on Buckley into 2.5 weeks... working at home on assembly jigs for fader packs right now... <click><drone><click>",
+		"I am ready, willing and able to implement. I just need resolution. There are time/cost constraints mandating judgment calls that are way above my head.",
+		"The difference between an acceptable unit and failing unit is actually smaller than is advertised. I think this is due to the multiplying effect on tolerance error due to the length and width of each unit."
+	],
+	"complexity_vector": {
+		"part_count_growth": [
+			{
+				"phase": "Concept (ProControl Legacy)",
+				"count": 450,
+				"date": "2003-01"
+			},
+			{
+				"phase": "EVT (Buckley Proto)",
+				"count": 850,
+				"date": "2003-10"
+			},
+			{
+				"phase": "DVT (Modular Scale-up)",
+				"count": 1200,
+				"date": "2004-02"
+			},
+			{
+				"phase": "PVT (Pre-Production)",
+				"count": 2100,
+				"date": "2004-05"
+			},
+			{
+				"phase": "MP (32-80 Fader Configs)",
+				"count": 2500,
+				"date": "2004-06"
+			}
+		],
+		"process_density": [
+			{
+				"part_name": "Fader Pan Assembly (Buckley)",
+				"material": "Sheet Metal (Steel)",
+				"steps": [
+					"Turret Punch / Laser Cut",
+					"Brake Forming",
+					"PEM Hardware Insertion (Source of 'Bowing')",
+					"Masking",
+					"Powder Coat (Metallic Silver)",
+					"Manual Rectification ('Tweaking' on table edge)",
+					"Alignment via Ratcheting Compression Strap"
+				],
+				"complexity_score": 9
+			},
+			{
+				"part_name": "Side End Cap (Left/Right)",
+				"material": "Structural Foam / Plastic",
+				"steps": [
+					"Injection Molding",
+					"Bonding (2-piece assembly)",
+					"Painting (Color Match Critical)",
+					"Drilling (ECO for hole enlargement)",
+					"Installation (High torque sensitivity)"
+				],
+				"complexity_score": 8
+			}
+		],
+		"tooling_chain": [
+			{
+				"tool_name": "End Cap Molds",
+				"type": "Hard Tooling (Structural Foam)",
+				"vendor": "PPI Plastics",
+				"lead_time_weeks": 12,
+				"cost_impact": "High (Warping/Cracking Issues)"
+			},
+			{
+				"tool_name": "Stand Leg Extrusion Dies",
+				"type": "Hard Tooling (Aluminum Extrusion)",
+				"vendor": "Anaheim Extrusion",
+				"lead_time_weeks": 4,
+				"cost_impact": "Med"
+			},
+			{
+				"tool_name": "Chassis Sheet Metal",
+				"type": "Soft Tooling (Turret/Brake)",
+				"vendor": "Mass Precision",
+				"lead_time_weeks": 2,
+				"cost_impact": "High (Volume Dependent)"
+			}
+		],
+		"supply_chain_nodes": [
+			{
+				"location": "San Jose, CA",
+				"role": "Sheet Metal Fabrication",
+				"vendor": "Mass Precision"
+			},
+			{
+				"location": "Unknown (Domestic)",
+				"role": "Plastic Molding",
+				"vendor": "PPI Plastics"
+			},
+			{
+				"location": "Fremont, CA / Korea",
+				"role": "PCB Fabrication (V-0 Compliance Issues)",
+				"vendor": "RB / Raymond"
+			},
+			{
+				"location": "Daly City, CA",
+				"role": "Final Assembly / QA",
+				"vendor": "Digidesign Mfg"
+			}
+		]
+	},
+	"events": [
+		{
+			"date": "2002-12-20",
+			"score": 2,
+			"snippet": "Release for Design Review of Communication PCB.",
+			"type": "Document",
+			"source_ref": "03_Engineering_plastic-parts.pdf"
+		},
+		{
+			"date": "2003-01-23",
+			"score": 3,
+			"snippet": "Components moved and added per Design Review.",
+			"type": "Document",
+			"source_ref": "03_Engineering_plastic-parts.pdf"
+		},
+		{
+			"date": "2003-09-11",
+			"score": 4,
+			"snippet": "Confirmation that Buckley and Danko can be no-stuff variants.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_001.md"
+		},
+		{
+			"date": "2003-10-12",
+			"score": 5,
+			"snippet": "PCII boards with hand-trimmed LCDs stored near foam-core model.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_001.md"
+		},
+		{
+			"date": "2003-10-13",
+			"score": 6,
+			"snippet": "Sheetmetal changes implemented to 'rigidify' the structure.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_002.md"
+		},
+		{
+			"date": "2003-10-28",
+			"score": 7,
+			"snippet": "Disagreement on DCDs; Norris booked solid on Buckley priorities.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_002.md"
+		},
+		{
+			"date": "2004-02-11",
+			"score": 4,
+			"snippet": "Plastic parts released; texture defined as Mold-Tech MT-11020.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_002.md"
+		},
+		{
+			"date": "2004-02-23",
+			"score": 5,
+			"snippet": "Stand configuration BOMs released to Digi-Buckley list.",
+			"type": "Document",
+			"source_ref": "Digidesign_Volume_002.md"
+		},
+		{
+			"date": "2004-05-31",
+			"score": 8,
+			"snippet": "Production unit issues reported in Australia: holes misalignment.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_003.md"
+		},
+		{
+			"date": "2004-06-01",
+			"score": 5,
+			"snippet": "Hole modification (0.170\") applied based on Buckley discovery.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_003.md"
+		},
+		{
+			"date": "2004-06-08",
+			"score": 7,
+			"snippet": "Gap issues and end cap screw problems halt shipping.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_003.md"
+		},
+		{
+			"date": "2004-06-19",
+			"score": 6,
+			"snippet": "Norris volunteers as point man for mechanical assembly issues.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_003.md"
+		},
+		{
+			"date": "2004-06-21",
+			"score": 5,
+			"snippet": "Vertical mains cabling rejected due to agency certification issues.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_003.md"
+		},
+		{
+			"date": "2004-06-22",
+			"score": 8,
+			"snippet": "Top rear side panel screw stripped again during install.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_003.md"
+		},
+		{
+			"date": "2004-06-23",
+			"score": 6,
+			"snippet": "Replacement end caps fit better than cracked originals.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_003.md"
+		},
+		{
+			"date": "2004-07-01",
+			"score": 4,
+			"snippet": "ECO 6323 released to remedy Middle Leg hardware kit.",
+			"type": "Document",
+			"source_ref": "Digidesign_Volume_003.md"
+		},
+		{
+			"date": "2004-07-07",
+			"score": 6,
+			"snippet": "Buckley Stand ECOs: cable routing slots and foot stiffener.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_015.md"
+		},
+		{
+			"date": "2004-07-28",
+			"score": 9,
+			"snippet": "50% yield on side caps; drilling required to ship.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_003.md"
+		},
+		{
+			"date": "2004-08-10",
+			"score": 7,
+			"snippet": "Cracking complaint on D-Control end cap reported.",
+			"type": "Photo",
+			"source_ref": "Digidesign_Volume_004.md"
+		},
+		{
+			"date": "2004-08-11",
+			"score": 5,
+			"snippet": "Request to switch to floating hardware on side panels.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_004.md"
+		},
+		{
+			"date": "2004-08-17",
+			"score": 8,
+			"snippet": "Stand leg holes found 1/8th inch off during install.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_004.md"
+		},
+		{
+			"date": "2004-11-05",
+			"score": 6,
+			"snippet": "Metal confirmed too thin for standard floating PEMs.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_016.md"
+		},
+		{
+			"date": "2005-01-27",
+			"score": 5,
+			"snippet": "Silver grid overlays causing color consistency issues.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_005.md"
+		},
+		{
+			"date": "2005-02-22",
+			"score": 6,
+			"snippet": "Push for rework of sideplates to prevent install mangling.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_005.md"
+		},
+		{
+			"date": "2005-04-20",
+			"score": 8,
+			"snippet": "Bowed fader pans traced to PEM insertion stretching.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_007.md"
+		},
+		{
+			"date": "2005-04-20",
+			"score": 7,
+			"snippet": "Manual bending ('tweaking') implemented to fix pan flatness.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_007.md"
+		},
+		{
+			"date": "2005-05-04",
+			"score": 5,
+			"snippet": "D-Control EMI gasket modified to fit D-Command.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_007.md"
+		},
+		{
+			"date": "2005-05-13",
+			"score": 6,
+			"snippet": "Ratcheting strap method cited for pressing units together.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_017.md"
+		},
+		{
+			"date": "2005-05-16",
+			"score": 6,
+			"snippet": "Misalignment issues suspected to be warped fader pans.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_007.md"
+		},
+		{
+			"date": "2005-07-06",
+			"score": 4,
+			"snippet": "Rev 22 sheet metal parts released to test improvements.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_007.md"
+		},
+		{
+			"date": "2005-08-09",
+			"score": 8,
+			"snippet": "Extrusion die wearout causes 0.160 inch oversize parts.",
+			"type": "Commit",
+			"source_ref": "Digidesign_Volume_008.md"
+		},
+		{
+			"date": "2006-06-12",
+			"score": 5,
+			"snippet": "PEM standoffs on Meter Panel interfere with Plastic Shrouds.",
+			"type": "Photo",
+			"source_ref": "Digidesign_Volume_017.md"
+		}
+	]
 }

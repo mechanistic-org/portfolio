@@ -1,247 +1,205 @@
 [
-	{
-		"date": "2003-04-29",
-		"score": 2,
-		"snippet": "Distributed extrusion drawings 942011481-484 to Mark.",
-		"type": "Commit",
-		"source_ref": "Digidesign_Volume_001.md"
-	},
-	{
-		"date": "2003-05-14",
-		"score": 5,
-		"snippet": "Distributed PC II stand/shelving costs for review.",
-		"type": "Document",
-		"source_ref": "Digidesign_Volume_001.md"
-	},
-	{
-		"date": "2003-06-09",
-		"score": 6,
-		"snippet": "Final feature set review for PCII Stand to finalize design.",
-		"type": "Meeting",
-		"source_ref": "Digidesign_Volume_001.md"
-	},
-	{
-		"date": "2003-09-03",
-		"score": 4,
-		"snippet": "Released PDFs for PCII stand sheetmetal rework.",
-		"type": "Document",
-		"source_ref": "Digidesign_Volume_001.md"
-	},
-	{
-		"date": "2003-10-13",
-		"score": 6,
-		"snippet": "Implementing changes to rigidify Buckley stand structure.",
-		"type": "Commit",
-		"source_ref": "Digidesign_Volume_002.md"
-	},
-	{
-		"date": "2003-12-10",
-		"score": 8,
-		"snippet": "Hardware Eng unavailable; Mechanical slippage likely for Danko.",
-		"type": "Memory",
-		"source_ref": "Digidesign_Volume_002.md"
-	},
-	{
-		"date": "2004-01-08",
-		"score": 6,
-		"snippet": "Pushing for closure on PCII Stand features for tooling release.",
-		"type": "Meeting",
-		"source_ref": "Digidesign_Volume_002.md"
-	},
-	{
-		"date": "2004-01-23",
-		"score": 9,
-		"snippet": "Jim West 'very disturbed' by late feature enhancements slipping program.",
-		"type": "Memory",
-		"source_ref": "Digidesign_Volume_002.md"
-	},
-	{
-		"date": "2004-04-01",
-		"score": 7,
-		"snippet": "ECO 6150 releases stand sheetmetal piece parts to production.",
-		"type": "Document",
-		"source_ref": "Digidesign_Volume_017.md"
-	},
-	{
-		"date": "2004-06-03",
-		"score": 5,
-		"snippet": "Released first pass of Danko mechanical schedule milestones.",
-		"type": "Document",
-		"source_ref": "Digidesign_Volume_003.md"
-	},
-	{
-		"date": "2004-06-19",
-		"score": 8,
-		"snippet": "Mechanical issues meeting: short top extrusions causing gaps.",
-		"type": "Meeting",
-		"source_ref": "Digidesign_Volume_003.md"
-	},
-	{
-		"date": "2004-06-25",
-		"score": 7,
-		"snippet": "QA Top Ten meeting: incoming parts geometry not being checked.",
-		"type": "Document",
-		"source_ref": "Digidesign_Volume_003.md"
-	},
-	{
-		"date": "2004-07-19",
-		"score": 6,
-		"snippet": "Data collection on D-Control gap measurements to determine specs.",
-		"type": "Document",
-		"source_ref": "Digidesign_Volume_003.md"
-	},
-	{
-		"date": "2004-08-02",
-		"score": 9,
-		"snippet": "QA rejected 4 of 19 end cap sets for defects.",
-		"type": "Photo",
-		"source_ref": "Digidesign_Volume_003.md"
-	},
-	{
-		"date": "2004-08-18",
-		"score": 9,
-		"snippet": "Endcaps arrived warped and scuffed; immediate vendor visit required.",
-		"type": "Memory",
-		"source_ref": "Digidesign_Volume_003.md"
-	},
-	{
-		"date": "2004-10-05",
-		"score": 7,
-		"snippet": "D-Command RTM ECOs pulled for initial PCB release.",
-		"type": "Document",
-		"source_ref": "Digidesign_Volume_013.md"
-	},
-	{
-		"date": "2004-10-25",
-		"score": 8,
-		"snippet": "Deviation #1212 created for 'almost' Rev B endcaps to salvage yield.",
-		"type": "Document",
-		"source_ref": "Digidesign_Volume_004.md"
-	},
-	{
-		"date": "2004-12-08",
-		"score": 9,
-		"snippet": "Mass Precision meeting regarding 0.160\" deviation in extrusion length.",
-		"type": "Meeting",
-		"source_ref": "Digidesign_Volume_015.md"
-	},
-	{
-		"date": "2004-12-13",
-		"score": 6,
-		"snippet": "Cable routing review completed; all parties signed off.",
-		"type": "Meeting",
-		"source_ref": "Digidesign_Volume_005.md"
-	},
-	{
-		"date": "2005-01-07",
-		"score": 5,
-		"snippet": "Mass Precision flags paint masking issues on extrusions.",
-		"type": "Memory",
-		"source_ref": "Digidesign_Volume_012.md"
-	},
-	{
-		"date": "2005-01-20",
-		"score": 9,
-		"snippet": "Pan masking problem identified; sanding off coating as preventive action.",
-		"type": "Memory",
-		"source_ref": "Digidesign_Volume_005.md"
-	},
-	{
-		"date": "2005-02-14",
-		"score": 9,
-		"snippet": "QA rejects parts: 'not properly deburred and paint masking unacceptable'.",
-		"type": "Photo",
-		"source_ref": "Digidesign_Volume_006.md"
-	},
-	{
-		"date": "2005-02-22",
-		"score": 7,
-		"snippet": "KMS flags drawing/ECO mismatch on 9420-12899-00; removed from masters.",
-		"type": "Document",
-		"source_ref": "Digidesign_Volume_013.md"
-	},
-	{
-		"date": "2005-03-02",
-		"score": 6,
-		"snippet": "Released D-Command Release Roadmap Rev 1.",
-		"type": "Document",
-		"source_ref": "Digidesign_Volume_006.md"
-	},
-	{
-		"date": "2005-03-29",
-		"score": 7,
-		"snippet": "Confirmed lightpipe holes off by 0.035\" in CAD file.",
-		"type": "Memory",
-		"source_ref": "Digidesign_Volume_014.md"
-	},
-	{
-		"date": "2005-06-01",
-		"score": 6,
-		"snippet": "Meeting request regarding production QA issues with Danko builds.",
-		"type": "Meeting",
-		"source_ref": "Digidesign_Volume_007.md"
-	},
-	{
-		"date": "2005-08-10",
-		"score": 8,
-		"snippet": "MRB purge: 57 Main Meter Breaks, 14 Fader Meter Breaks rejected.",
-		"type": "Memory",
-		"source_ref": "Digidesign_Volume_008.md"
-	},
-	{
-		"date": "2005-09-08",
-		"score": 4,
-		"snippet": "Printing 11x17 transport layout for Curtis ID meeting.",
-		"type": "Meeting",
-		"source_ref": "Digidesign_Volume_007.md"
-	},
-	{
-		"date": "2006-03-03",
-		"score": 7,
-		"snippet": "RC2 ID Review sign-off scheduled during Beer Bash.",
-		"type": "Meeting",
-		"source_ref": "Digidesign_Volume_010.md"
-	},
-	{
-		"date": "2006-04-25",
-		"score": 9,
-		"snippet": "Deviation 9970 held; HW Engineering must sign off on gasket.",
-		"type": "Document",
-		"source_ref": "Digidesign_Volume_008.md"
-	},
-	{
-		"date": "2006-05-04",
-		"score": 6,
-		"snippet": "Delivered Curtis DCDs (Rev 1-5) to Muse for layout.",
-		"type": "Commit",
-		"source_ref": "Digidesign_Volume_010.md"
-	},
-	{
-		"date": "2006-07-20",
-		"score": 4,
-		"snippet": "Delivered Rev 5 of 9150-55160-00 (AUTO C) to MUSE.",
-		"type": "Commit",
-		"source_ref": "Digidesign_Volume_011.md"
-	},
-	{
-		"date": "2007-03-06",
-		"score": 5,
-		"snippet": "Pro-E regeneration failure on D-CMD bottom pan reported.",
-		"type": "Memory",
-		"source_ref": "Digidesign_Volume_009.md"
-	},
-	{
-		"date": "2007-04-11",
-		"score": 5,
-		"snippet": "Providing renderings to clarify cosmetic surfaces for vendor Kenny.",
-		"type": "Photo",
-		"source_ref": "Digidesign_Volume_009.md"
-	},
-	{
-		"date": "2007-04-30",
-		"score": 9,
-		"snippet": "Emergency graphics review: Mic/Line inputs 1-8 mislabeled '9-16'.",
-		"type": "Meeting",
-		"source_ref": "Digidesign_Volume_009.md"
-	}
+  {
+    "date": "2004-01-20",
+    "score": 8,
+    "snippet": "Parametric catastrophe: D-Control Stand model 'blows up' requiring 6.5hr rebuild.",
+    "type": "Commit",
+    "source_ref": "All notes 2/10/2026 [1]"
+  },
+  {
+    "date": "2004-04-14",
+    "score": 3,
+    "snippet": "Vendor quotation received for Fader Top (944012917-00) tooling.",
+    "type": "Document",
+    "source_ref": "Digidesign_Volume_003.md [2]"
+  },
+  {
+    "date": "2004-06-03",
+    "score": 4,
+    "snippet": "First Danko structure tree released; sheetmetal-only assemblies defined.",
+    "type": "Document",
+    "source_ref": "Digidesign_Volume_003.md [3]"
+  },
+  {
+    "date": "2004-06-16",
+    "score": 3,
+    "snippet": "Meter boards released for layout; DCDs requested from Architect.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_004.md [4]"
+  },
+  {
+    "date": "2004-07-26",
+    "score": 6,
+    "snippet": "Risk Mitigation: 68K Comm board prioritized for FCS over 5282.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_003.md [5]"
+  },
+  {
+    "date": "2004-08-22",
+    "score": 9,
+    "snippet": "Vegas Mode Overdrive: Fader unit heatsink hits 61\u00b0C under stress.",
+    "type": "Test",
+    "source_ref": "Digidesign_Volume_003.md [6]"
+  },
+  {
+    "date": "2004-10-06",
+    "score": 7,
+    "snippet": "Top Cover Yield Crisis: 'Yields suck (~10%)' due to painting/masking.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_004.md [7]"
+  },
+  {
+    "date": "2004-10-14",
+    "score": 5,
+    "snippet": "All 8 ECOs for PCB assemblies processed; 'Danko Rocks'.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_004.md [8]"
+  },
+  {
+    "date": "2004-11-01",
+    "score": 4,
+    "snippet": "Sheetmetal release (5 of 5) completed.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_004.md [9]"
+  },
+  {
+    "date": "2004-11-22",
+    "score": 6,
+    "snippet": "Governance: Engineering Pilot phase deferred; units designated 'Pre-production'.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_005.md [10]"
+  },
+  {
+    "date": "2004-12-09",
+    "score": 5,
+    "snippet": "Late night 'Wednesday team' fix for headphone circuitry updates.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_005.md [11]"
+  },
+  {
+    "date": "2005-01-04",
+    "score": 5,
+    "snippet": "Sink hole problem identified in plastic Top Covers.",
+    "type": "Meeting",
+    "source_ref": "Digidesign_Volume_005.md [12]"
+  },
+  {
+    "date": "2005-01-19",
+    "score": 8,
+    "snippet": "Triage: Non-standard build authorized to meet Jan 31 compliance deadline.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_005.md [13]"
+  },
+  {
+    "date": "2005-01-26",
+    "score": 4,
+    "snippet": "Two units assembled for EMI pre-scan; third unit materials short.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_005.md [14]"
+  },
+  {
+    "date": "2005-02-14",
+    "score": 7,
+    "snippet": "Defect: 'Green Bleed' from LCDs confirmed on pre-production units.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_006.md [15]"
+  },
+  {
+    "date": "2005-02-15",
+    "score": 6,
+    "snippet": "Sideplate inventory ($13k) at risk; rework feasibility questioned.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_005.md [16]"
+  },
+  {
+    "date": "2005-02-17",
+    "score": 5,
+    "snippet": "Headphone jack mechanical conflict: Recess vs Flush mounting debate.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_010.md [17]"
+  },
+  {
+    "date": "2005-02-23",
+    "score": 7,
+    "snippet": "Root Cause: LCD bleed caused by flex cable pressure; relief cuts required.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_006.md [18]"
+  },
+  {
+    "date": "2005-03-21",
+    "score": 8,
+    "snippet": "Rework Failure: Sideplate rework attempt renders parts as scrap.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_006.md [19]"
+  },
+  {
+    "date": "2005-03-30",
+    "score": 8,
+    "snippet": "Compliance Fail: Main and Fader units fail UL AC Withdraw test.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_006.md [20]"
+  },
+  {
+    "date": "2005-04-19",
+    "score": 9,
+    "snippet": "Compliance Pass: UL Notice of Approval received.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_007.md [21]"
+  },
+  {
+    "date": "2005-04-20",
+    "score": 7,
+    "snippet": "Process Fix: Manual 'tweaking' of warped Fader Pans formalized.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_010.md [22]"
+  },
+  {
+    "date": "2005-04-26",
+    "score": 4,
+    "snippet": "BOM Error: Incorrect screw length identified in Bracket Kit.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_007.md [23]"
+  },
+  {
+    "date": "2005-04-28",
+    "score": 10,
+    "snippet": "FCS: First D-Command unit shipped to customer.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_007.md [24]"
+  },
+  {
+    "date": "2005-05-04",
+    "score": 6,
+    "snippet": "Escape: EMI Gasket missing from original BOM; ECO 8114 generated.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_010.md [25]"
+  },
+  {
+    "date": "2005-05-13",
+    "score": 3,
+    "snippet": "Post-FCS Clean-up: List of mechanical ECOs to address ramp issues.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_007.md [26]"
+  },
+  {
+    "date": "2005-05-15",
+    "score": 7,
+    "snippet": "Field Report: Units required shims/straps to 'hold it together'.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_015.md [27]"
+  },
+  {
+    "date": "2005-06-29",
+    "score": 5,
+    "snippet": "Alignment Friction: 4.6% complaint rate on connecting brackets.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_015.md [28]"
+  },
+  {
+    "date": "2005-07-06",
+    "score": 3,
+    "snippet": "Engineering test protos ordered for Rev 22 sheetmetal improvements.",
+    "type": "Email",
+    "source_ref": "Digidesign_Volume_007.md [29]"
+  }
 ]

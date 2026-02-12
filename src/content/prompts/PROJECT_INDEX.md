@@ -1,7 +1,7 @@
 ---
 title: "Project Index"
 description: "Holistic Forensic Archive & Catalog"
-last_updated: "2026-02-10"
+last_updated: "2026-02-11"
 total_entries: 123
 ---
 
@@ -38,30 +38,24 @@ total_entries: 123
 ### C24 (`c24`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Legacy Data (Migration) INTERVENTION: Legacy Data (Migration) RESULT: STAR Analysis: The C24 'Curtis' project faced a 'Death March' scenario characterized by concurrent thermal and supply chain failures. 
-
-1. THE TRIGGER (Thermal Crisis): During Pilot, the ABS side caps (P/N 9440-55165) arrived with 2.50mm 'Banana' warping and 2.27mm linear shrinkage due to the heat cure cycle of the 'Rubberized Soft Paint' on flat racks.
-2. THE INTERVENTION (Process Engineering): I rejected the vendor's standard process and engineered 'Method A' (Vertical Hanging Fixture). I codified this in ECO 12740, utilizing gravity to maintain straightness during the paint cure glass-transition phase.
-3. THE TRIGGER (Supply Chain): Primary vendor VTech/Kwanta 'no-bidded' the complex top panel (9420-55105) due to high standoff density, threatening a line-down.
-4. THE INTERVENTION (Bridge Strategy): I executed a dual-source strategy, engaging Mass Precision (Silicon Valley) for emergency manual fabrication to save the Pilot schedule while qualifying the overseas automated process.
-5. THE RESULT: Delivered 500 units for Q4 2007 revenue, meeting RoHS compliance and removing legacy royalties.
+> **Forensic Summary:** TRIGGER: Concurrent 'No-Bid' Supply Chain Crisis (Kwanta) and 'Banana Defect' Thermal Failure (Jetcrown) during Pilot INTERVENTION: Dual-Source Bridge Strategy (Mass Precision) and Vertical Hanging Fixture Protocol (ECO 12740) RESULT: Salvaged Nov 2007 Launch; Delivered 500 units for Q4 FQA
 
 **Key Metrics:**
-- **Financial:** Combined volume with Kessel/Capaldi to hit 5k chip minimum for custom ROM savings
-- **Governance:** International onsite tooling review (Dongguan)
-- **Process:** Simultaneous release of internal plastic parts to tooling
+- **Financial:** Eliminated ~$200/unit Focusrite Royalty; 51.8% Gross Margin
+- **Governance:** Weekly Pulse / War Room coordination
+- **Process:** Headphone MTTR reduced from 2hrs to <10min; Side Cap flatness deviation <0.50mm
 
 ---
 
 ### D-Control (`d-control`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Post-FCS 'Line Down' crisis halted D-Control shipments for 3-4 weeks due to warping and bonding defects in structural foam side caps (yields <50%) [2]. INTERVENTION: Erik Norris volunteered as 'point guy'; released ECO 6310 to increase mounting boss diameter/height; forced vendor (PPI) to modify tooling to eliminate downward-facing bosses [5, 6]. RESULT: Stabilized production line, resolved critical 'gap' and 'paint adhesion' issues, and resumed regular system shipments [2, 7].
+> **Forensic Summary:** TRIGGER: Flagship console launch to replace ProControl; Critical tolerance accumulation issues in modular 16/32 fader configurations causing assembly failures INTERVENTION: Erik Norris 'rigidified' sheet metal structure; Implemented 'ratcheting compression strap' assembly method to force unit alignment; Manual 'tweaking' of warped fader pans during assembly RESULT: Successful launch of D-Control (Buckley) and D-Command (Danko); TEC Award nomination
 
 **Key Metrics:**
-- **Financial:** Stabilized Stand CoGS which had crept 'way higher' due to rigidity measures [1]
-- **Governance:** Weekly 'QA Top 10' / 'Line Down' Crisis Management on production floor [4, 5]
-- **Process:** Recovered from 50-74% yield failure on PPI Side Caps to active shipping [2, 3]
+- **Financial:** Cost delta analysis of external vs internal monitor ($50-$100 impact); Evaluation of ALPS faders ($15) vs Penny & Giles for cost reduction/retrofit
+- **Governance:** Cross-functional 'Digi-Buckley' meetings; Sustaining D-Control issues email group created for production assembly feedback
+- **Process:** Compressed 2-month DFM and manufacturing optimization campaign into 2.5 weeks
 
 ---
 
@@ -88,24 +82,24 @@ total_entries: 123
 ### D-Command (`index`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Thermal spikes during 'Vegas Mode' (61°C) and massive yield failure (50%) on Fader Pans due to warping INTERVENTION: Engineered sheet metal relief cuts for LCDs; Enforced strict cable routing for airflow; Instituted 100% manual flatness inspection RESULT: Protected assembly yield; Saved FCS date via aggressive schedule pull-ins
+> **Forensic Summary:** TRIGGER: Vegas Mode Stress Test & 'Green Bleed' Interference INTERVENTION: Sheetmetal relief cuts for LCDs; 100% manual inspection for pans RESULT: Thermal stability confirmed (40-min stress test); Unit Shipped 4/28/2005
 
 **Key Metrics:**
-- **Financial:** Negotiated $5,000 expedite fee waiver; Reduced COGS by eliminating 100ft of snake cable per unit
-- **Governance:** Solo Mandate: Managed release of 24+ unique sheet metal parts alone
-- **Process:** Achieved 80% FCS confidence despite 50% initial Fader Pan rejection rate
+- **Financial:** Waived tooling fees from PPI Plastics via negotiation
+- **Governance:** 1 Lead Engineer (Solo Mandate) vs. Full Console Release
+- **Process:** 50% rejection rate on first 42 Fader Pans due to warping
 
 ---
 
 ### KSYSTEM-120 (`ksystem-120`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: The 'Orpheus' launch faced multiple converging crises: a 'Line Down' event due to BOM shortages/errors, a thermal 'hard hang' every 50 minutes caused by the motherboard, and EMI failures requiring chassis modifications. Additionally, early metal chassis lids were 3mm too wide, requiring manual 'hammering' to fit. INTERVENTION: The Architect (Erik Norris) orchestrated a multi-front recovery. He executed sheet metal redesigns to add screws for EMI containment, modified heatsink specs for thermal compliance, and coordinated rapid tooling substitutions with Mass Precision to bypass delays. A 'White Glove' inspection protocol was implemented to resolve cosmetic debris issues. RESULT: The chassis passed Radiated Emissions tests, production yields stabilized at nearly 100%, and the product successfully launched in March 2009.
+> **Forensic Summary:** TRIGGER: Catastrophic 'Thumb of God' PCB failures (20% fallout) and 'Hammered Lid' interference halting pilot build INTERVENTION: Mechanical redesign: 4-hole PCB rigidifying fix, 'peninsula' relief cuts, elimination of lid weldment, material reversion to G30 steel RESULT: Stabilized production yield, eliminated assembly violence, enabled 300-unit ramp
 
 **Key Metrics:**
-- **Financial:** Eliminated $2,800 tooling costs by substituting existing Mass Precision tools; Negotiated reduced NRE ($1,904) for proto builds; Potential $20k savings identified by cutting glow board PCBs.
-- **Governance:** Weekly Mechanical/ID Meetings; Bi-weekly production calls with Sanmina Enclosures (Plant 4); Line Down crisis management.
-- **Process:** Yield improved from ~80% in pilot to 'almost 100%' in latter batches via process adjustments.
+- **Financial:** Saved 300-unit production run; CPU thermal cost reduced $9.63 to $9.25
+- **Process:** Reduced PCB fallout from 20% to stable; Transitioned metal from Mass Precision to Sanmina
+- **Governance:** Weekly Mechanical/ID Meetings; High-frequency 'War Room' coordination
 
 ---
 
@@ -154,12 +148,12 @@ total_entries: 123
 ### SC48 (`sc48`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: During 'Capaldi FOH' environmental chamber testing, the embedded Kontron 986LCD-M motherboard hit 75°C, triggering a hard 'System Shutdowned' failure. Management simultaneously issued a 'No Extrusion' mandate to meet the <$15k COGS target. The INTERVENTION: Executed a 'Design of Experiments' thermal matrix testing chassis heights (3U vs 4U) and fan voltages. Engineered the '4U Rake Back I-Beam' (P/N 9420-58317-00), a complex folded steel spine to replace expensive aluminum extrusions, and implemented custom air ducting (P/N 9420-58856-00). The RESULT: Validated a 4U chassis architecture with a 3-fan array running at 12V, stabilizing internal temperature rise to 22.6°C and eliminating the shutdown risk while securing touring-grade rigidity without extrusions.
+> **Forensic Summary:** TRIGGER: Catastrophic Thermal Failure: 'CPU temperature is 75C, system shutdowned' during Capali FOH Chamber Test. INTERVENTION: Thermodynamic Re-architecture & Airflow Optimization. RESULT: Stabilized Operating Temperature; Prevention of Scrap.
 
 **Key Metrics:**
-- **Financial:** Protected <$15k COGS target; Managed sheet metal budget at 20% of COGS ($561.46 CNC unit price)
-- **Governance:** Solo Mechanical Lead managing ID/EE friction; Cross-functional 'War Room' coordination with VTech/Jetcrown
-- **Process:** Stabilized thermal profile from 75°C shutdown failure to 22.6°C rise; Processed 12,000+ thermal data points
+- **Financial:** Scrap Avoidance [Saving_The_SC48_From_Overheating_And_Scrap]
+- **Governance:** Engineering/Compliance Handoff
+- **Process:** Thermal Chamber Validation
 
 ---
 
@@ -190,7 +184,7 @@ total_entries: 123
 ### Cortez (`webtv-cortez`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Vendor analysis (Silitek/Panasonic) revealed the ID intent was mechanically impossible—specifically, the rubber pad was 'too close to the edge' for PCB sealing and the key matrix pitch (19.05mm) clashed with the 2D layout. The initial hard model failed ergonomic validation (not level, too heavy). INTERVENTION: Norris (as Lincicum) executed a high-intensity 'Surgical CAD' sprint (100+ hours in <2 weeks) to re-loft the top surfaces, enforce a 7-11 degree IR tilt, and modify grip curvature while constraining internal geometry to standard low-cost key matrices. RESULT: Delivered a manufacturable database that reconciled the 'Airboard' form factor with standard membrane switches, securing executive approval for the new model despite 'beating on extra CAD hours'.
+> **Forensic Summary:** TRIGGER: Vendor analysis (Silitek/Panasonic) revealed the ID intent was mechanically impossible—specifically, the rubber pad was 'too close to the edge' for PCB sealing and the key matrix pitch (19.05mm) clashed with the 2D layout. The initial hard model failed ergonomic validation (not level, too heavy). INTERVENTION: Norris (as Lincicum) executed a high-intensity 'Surgical CAD' sprint (100+ hours in &lt;2 weeks) to re-loft the top surfaces, enforce a 7-11 degree IR tilt, and modify grip curvature while constraining internal geometry to standard low-cost key matrices. RESULT: Delivered a manufacturable database that reconciled the 'Airboard' form factor with standard membrane switches, securing executive approval for the new model despite 'beating on extra CAD hours'.
 
 **Key Metrics:**
 - **Financial:** Avoided custom 'scissors switch' tooling costs by forcing standard membrane matrix into 'Airboard' form factor. Billed ~$25k in June 2000 alone for rapid remediation.
@@ -199,10 +193,10 @@ total_entries: 123
 
 ---
 
-### Elmer / Zeus (`webtv-elmer`)
+### Elmer / Zeus (HomeNet) (`webtv-elmer`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: The 'Elmer' main board relied on an aluminum heat spreader requiring a 'dead nuts flat' chassis for thermal conduction, a tolerance impossibility for sheet metal. Simultaneously, a 'screw-up' on the prototype build mixed metric and SAE hardware, threatening assembly yield. INTERVENTION: Norris ('The Architect') rejected the 'Bastard Box' concept, executing a custom chassis design that removed perforation under the PCB for mass conduction while forcing convective airflow near the PSU. He enforced a strict 4-40 UNC hardware standardization for the 'Zeus' revision. RESULT: Delivery of 5 functional server enclosures and 12 nodes for Western Cable Show and CES 2001 on a compressed 9-day fabrication cycle with zero thermal failures.
+> **Forensic Summary:** TRIGGER: The 'Elmer' main board relied on an aluminum heat spreader requiring a 'dead nuts flat' chassis for thermal conduction, a tolerance impossibility for sheet metal [8], [9]. Simultaneously, a 'screw-up' on the prototype build mixed metric and SAE hardware, threatening assembly yield [6]. INTERVENTION: Norris ('The Architect') rejected the 'Bastard Box' concept, executing a custom chassis design that removed perforation under the PCB for mass conduction while forcing convective airflow near the PSU. He enforced a strict 4-40 UNC hardware standardization for the 'Zeus' revision. RESULT: Delivery of 5 functional server enclosures and 12 nodes for Western Cable Show and CES 2001 on a compressed 9-day fabrication cycle with zero thermal failures.
 
 **Key Metrics:**
 - **Financial:** Managed $10k+ rapid prototyping budget for high-pressure trade show build; negotiated short-run fab costs (e.g., $242.35/cover for zinc-plated revisions).
@@ -214,12 +208,12 @@ total_entries: 123
 ### WebTV Galaxy (`webtv-galaxy`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Integration of 150W TDP AMD K7 CPU + 3 Tuners into consumer STB caused thermal crisis (Smart Card Reader >55°C) and sheet metal warpage risks. INTERVENTION: Architected 300mm chassis with directed airflow tunnel (intake over HDDs, exhaust via PSU) and 50x60x30mm extruded heatsink; Redesigned chassis floor with 'Hook 29' details and ribs to stabilize stamping. RESULT: Stabilized CPU junction at 84°C; Salvaged DEV build schedule despite vendor shutdowns; Assets transitioned to Xbox division.
+> **Forensic Summary:** TRIGGER: Integration of desktop-class AMD K7 architecture (150W TDP) into a consumer set-top box form factor. INTERVENTION: Engineered a 300mm chassis extension with a directed airflow tunnel (28.3 CFM) and modular 'CPU Puck' sub-assembly. RESULT: Stabilized CPU junction temperature at 84.0°C and Smart Card ambient &lt;55.0°C; assets pivoted to Xbox division upon program cancellation.
 
 **Key Metrics:**
-- **Financial:** Managed $14k/mo burn rate on solo-consultant engineering services; mitigated cost of custom 4-day quick-turn fabrication cycles
-- **Governance:** Weekly 'Mechanical Hitlist' protocol tracking 30+ gating defects; Centralized FTP master database control
-- **Process:** Achieved 28.3 CFM system airflow in high-density chassis; Resolved 100% of EMI chassis ground failures via flange redesign
+- **Financial:** Managed $14,200/month consulting burn rate for solo mechanical architecture.
+- **Process:** Coordinated 4-day 'quick turn' fabrication cycles during vendor shutdowns.
+- **Governance:** Orchestrated weekly 'Hitlist' engineering reviews tracking 30+ blocking defects per cycle.
 
 ---
 

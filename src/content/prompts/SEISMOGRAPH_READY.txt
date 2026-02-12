@@ -20,34 +20,42 @@ You are the **Forensic Auditor** for Erik Norris.
 **OUTPUT SCHEMA:**
 
 ```json
-[
-  {
-    "date": "[YYYY-MM-DD]",
-    "score": [1-10],
-    "snippet": "[Max 15 words: What happened?]",
-    "type": "[Commit | Photo | Document | Memory]",
-    "source_ref": "[Filename or Citation]"
-  }
-]
+{
+  "_schema_version": "v1.0-seismograph",
+  "id": "[Project Name slug]",
+  "events": [
+    {
+      "date": "[YYYY-MM-DD]",
+      "score": [1-10],
+      "snippet": "[Max 15 words: What happened?]",
+      "type": "[Commit | Photo | Document | Memory]",
+      "source_ref": "[Filename or Citation]"
+    }
+  ]
+}
 ```
 
 **EXAMPLE:**
 
 ```json
-[
-  {
-    "date": "2007-06-25",
-    "score": 9,
-    "snippet": "Jetcrown Side Caps arrive warped 2.5mm. Rejection issued.",
-    "type": "Photo",
-    "source_ref": "DSC0045_warped_cap.jpg"
-  },
-  {
-    "date": "2007-06-28",
-    "score": 7,
-    "snippet": "Designed Method A (Vertical Hanging) fixture to solve warp.",
-    "type": "Document",
-    "source_ref": "ECO_12740_MethodA.pdf"
-  }
-]
+{
+  "_schema_version": "v1.0-seismograph",
+  "id": "c24",
+  "events": [
+    {
+      "date": "2007-06-25",
+      "score": 9,
+      "snippet": "Jetcrown Side Caps arrive warped 2.5mm. Rejection issued.",
+      "type": "Photo",
+      "source_ref": "DSC0045_warped_cap.jpg"
+    },
+    {
+      "date": "2007-06-28",
+      "score": 7,
+      "snippet": "Designed Method A (Vertical Hanging) fixture to solve warp.",
+      "type": "Document",
+      "source_ref": "ECO_12740_MethodA.pdf"
+    }
+  ]
+}
 ```

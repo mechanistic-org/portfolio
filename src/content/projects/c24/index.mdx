@@ -25,6 +25,87 @@ cast:
   role: Engineering
 category: control_surface
 client: []
+complexity_vector:
+  part_count_growth:
+  - count: 1
+    date: 2005-06
+    phase: Concept (Legacy Teardown)
+  - count: 19
+    date: 2006-11
+    phase: Proto 1 (Architecture)
+  - count: 250
+    date: 2007-04
+    phase: Proto 2 (Integration)
+  - count: 450
+    date: 2007-06
+    phase: Pilot (Validation)
+  - count: 500
+    date: 2007-11
+    phase: MP (FCS)
+  process_density:
+  - complexity_score: 9
+    material: ABS Plastic
+    part_name: Side Cap (Left/Right)
+    part_number: 9440-55165/166
+    steps:
+    - Injection Molding (T1)
+    - Racking (Vertical Fixture Method A)
+    - Rubberized Soft Paint Application
+    - Heat Cure (Glass Transition Phase)
+    - Cooling (Gravity Stabilization)
+    - Dimensional Inspection
+  - complexity_score: 8
+    material: Steel (Sheet Metal)
+    part_name: Top Panel
+    part_number: 9420-55105
+    steps:
+    - CNC Punching
+    - Forming/Bending
+    - Stud Welding (High Density - Manual Override)
+    - Powder Coat (Cool Grey 2)
+    - Silkscreening (White)
+    - Manual Countersink (Recovery)
+  - complexity_score: 6
+    material: Sheet Metal
+    part_name: Headphone Bracket
+    part_number: 9420-55126
+    steps:
+    - Laser Cut
+    - Form
+    - PEM Insertion
+    - Trap Door Alignment (ECO 12993)
+  supply_chain_nodes:
+  - location: San Jose, USA
+    role: Bridge Sheet Metal (Pilot)
+    vendor: Mass Precision
+  - location: Dongguan, China
+    role: Plastics/Painting
+    vendor: Jetcrown
+  - location: Dongguan, China
+    role: FATP / Sheet Metal
+    vendor: VTech (Kenny)
+  - location: Menlo Park, USA
+    role: Hand-Pack / PSU Retrofit
+    vendor: Digidesign OPS
+  - location: Taipei, Taiwan
+    role: Power Supply Unit
+    vendor: Skynet
+  tooling_chain:
+  - cost_impact: High (Yield Rescue)
+    lead_time_weeks: 2
+    tool_name: Side Cap Paint Fixture (Method A)
+    type: Soft Tooling (Custom Rack)
+    vendor: Jetcrown
+  - cost_impact: Critical (No-Bid Failure)
+    lead_time_weeks: 8
+    tool_name: Top Panel Auto-Welder
+    type: Hard Tooling (CNC)
+    vendor: Kwanta/Kenny
+  - cost_impact: Med (Bridge Strategy)
+    lead_time_weeks: 1
+    tool_name: Manual Offset Welder
+    type: Soft Tooling (Bridge)
+    vendor: Mass Precision / Kenny
 cyberspace:
   enable: true
   layout: linear
@@ -615,32 +696,30 @@ draft: false
 employer: digidesign
 endDate: 2007-11-20
 forensic_metrics:
-  financial: Combined volume with Kessel/Capaldi to hit 5k chip minimum for custom
-    ROM savings
-  governance: International onsite tooling review (Dongguan)
-  process: Simultaneous release of internal plastic parts to tooling
+  financial: Eliminated ~$200/unit Focusrite Royalty; 51.8% Gross Margin
+  governance: Weekly Pulse / War Room coordination
+  process: Headphone MTTR reduced from 2hrs to <10min; Side Cap flatness deviation
+    <0.50mm
 forensic_summary:
-  intervention: Legacy Data (Migration)
-  result: "STAR Analysis: The C24 'Curtis' project faced a 'Death March' scenario
-    characterized by concurrent thermal and supply chain failures. \n\n1. THE TRIGGER
-    (Thermal Crisis): During Pilot, the ABS side caps (P/N 9440-55165) arrived with
-    2.50mm 'Banana' warping and 2.27mm linear shrinkage due to the heat cure cycle
-    of the 'Rubberized Soft Paint' on flat racks.\n2. THE INTERVENTION (Process Engineering):
-    I rejected the vendor's standard process and engineered 'Method A' (Vertical Hanging
-    Fixture). I codified this in ECO 12740, utilizing gravity to maintain straightness
-    during the paint cure glass-transition phase.\n3. THE TRIGGER (Supply Chain):
-    Primary vendor VTech/Kwanta 'no-bidded' the complex top panel (9420-55105) due
-    to high standoff density, threatening a line-down.\n4. THE INTERVENTION (Bridge
-    Strategy): I executed a dual-source strategy, engaging Mass Precision (Silicon
-    Valley) for emergency manual fabrication to save the Pilot schedule while qualifying
-    the overseas automated process.\n5. THE RESULT: Delivered 500 units for Q4 2007
-    revenue, meeting RoHS compliance and removing legacy royalties."
-  trigger: Legacy Data (Migration)
+  intervention: Dual-Source Bridge Strategy (Mass Precision) and Vertical Hanging
+    Fixture Protocol (ECO 12740)
+  result: Salvaged Nov 2007 Launch; Delivered 500 units for Q4 FQA
+  trigger: Concurrent 'No-Bid' Supply Chain Crisis (Kwanta) and 'Banana Defect' Thermal
+    Failure (Jetcrown) during Pilot
 gallery: []
 heroImage: /assets/c24/c24-hero-01-xl.webp
 hxo_ready: true
 hydration_status: full
 industry: pro_audio
+isomorphics:
+- hardware_point: Top Panel Standoff Spacing < Auto-Welder Head Clearance
+  label: Density
+  principle: Physical density constraints force manual process overrides
+  software_point: N/A
+- hardware_point: ABS Glass Transition vs. Paint Cure Temp (Gravity Sag)
+  label: Thermodynamics
+  principle: Material phase change requires orientation-specific fixturing
+  software_point: N/A
 links: []
 listed: false
 metrics:
@@ -680,10 +759,11 @@ metrics:
     label: Gross Margin
     value: 58%
   quotes:
-  - I need these parts ASAP as we discussed in staff meeting.
-  - Please take a quick look at the deliverable here... This was the release of all
-    internal small plastic parts
-  - We think the best time for you to arrive at Jetcrown should be Jun. 15, 2007.
+  - The Units that are due were in the paint shop and it was discovered that the C'snks
+    were omitted. This is a manual operation.
+  - twist due to paint cure effect? curing fixture?
+  - Modification lead time is longer. To avoid any unfavorable status during pilot
+    run in Vtech, the modification will be delayed...
   time_to_market: {}
   war_stories:
   - description: Resolved critical 2.5mm warpage AND 'sticky paint' failure on Jetcrown
@@ -739,7 +819,15 @@ role: mechanical_engineer
 skillData: []
 slug: c24
 stats: {}
-tags: []
+tags:
+- Thermal
+- Crisis
+- Process
+- Cost_Down
+- Mechanism
+- Leadership
+- Architecture
+- Materials
 teamSize: Core 6 / INT 37 / EXT 21
 theme: hyperspace
 tier: 1
@@ -756,46 +844,18 @@ tools:
 - pro_engineer
 transcript: null
 war_stories:
-- description: Resolved critical 2.5mm warpage AND 'sticky paint' failure on Jetcrown
-    end-caps via Vertical Hanging process.
-  label: The 'Banana' Defect
-  value: Warped & Sticky ABS
-- description: Delivered product at 51.8% gross margin (vs 40% industry avg) despite
-    20% steel price hike during production.
-  label: 51.8% Gross Margin
-  value: Record Profit
-- description: Coordinated critical 'Welded Stud' top panel crisis from a hotel room
-    next to a hospital via sketchy wireless to save schedule.
-  label: Hospital Wireless
-  value: Remote Obsession
-- description: Emergency chassis redesign to create a 'trap door' for serviceability,
-    reducing field repair time from 2 hours to 10 mins.
-  label: Headphone Jack Fire Drill
-  value: MTTR Redesign
-- description: Executed rapid domestic bridge strategy to survive a 'No-Bid' on the
-    main top panel, protecting the Pilot schedule.
-  label: The 'No-Bid' Sheet Metal Crisis
-  value: Dual-Source Bridge
-- description: Enforced strict Data Control Drawing governance on 19 PCBs, achieving
-    zero mechanical collisions on the first build.
-  label: The DCD Protocol
-  value: 100% Fit Rate
-- description: Personally applied UL stickers and packed the first 100 units in a
-    warehouse to save the quarter when vendor failed.
-  label: The 'Menlo Park' Handpack
-  value: Manual Fulfillment
-- description: Vendor docs error left unused PEM studs shorting against PCBs. Engineered
-    ECO 13381 (Manual Removal) to salvage inventory.
-  label: The VTech Short Circuit
-  value: Deadly Studs
-- description: Engineered custom plastic surround for Bourns 14mm encoder to replace
-    legacy jog wheel, maintaining premium feel while slashing component cost.
-  label: Jog Wheel Integration
-  value: Value Engineering
-- description: Authorized Manual Offset Welding to bypass CNC limitations on high-density
-    top panel, saving the Pilot schedule.
-  label: Manual Offset Welding
-  value: Tactical Bypass
+- description: Engineered 'Method A' Vertical Hanging Fixture to utilize gravity against
+    glass-transition sag during rubberized paint cure cycle.
+  label: The Banana Defect
+  value: 2.50mm to <0.5mm
+- description: Engaged domestic vendor Mass Precision for manual offset welding to
+    bridge Pilot when overseas automation failed due to standoff density.
+  label: The No-Bid Shock
+  value: Line Down Averted
+- description: Emergency redesign of front bolster to create recessed access for headphone
+    jack, converting RTF liability to Field Replaceable Unit.
+  label: The Trap Door Protocol
+  value: 4.8% Failure Rate
 ---
 
 # C|24 ("Curtis") Forensic Report

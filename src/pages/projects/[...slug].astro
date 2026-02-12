@@ -179,13 +179,17 @@ if (entry) {
 
 		if (matchingKey) {
 			const fileModule: any = entropyFiles[matchingKey];
-			// If it's a JSON module, the default export or the module itself is the data
-			entropyData = fileModule.default || fileModule;
-			// Check if it's an array
-			if (!Array.isArray(entropyData)) {
-				// Sometimes importing json gives the object directly
-				entropyData = Array.isArray(fileModule) ? fileModule : [];
+			const rawData = fileModule.default || fileModule;
+
+			// SCHEMA ADAPTER: Support both Legacy Array and v1.0 Object
+			if (Array.isArray(rawData)) {
+				entropyData = rawData; // Legacy: [...]
+			} else if (rawData.events && Array.isArray(rawData.events)) {
+				entropyData = rawData.events; // v1.0: { events: [...] }
+			} else {
+				entropyData = [];
 			}
+
 			console.log(
 				`[INTELLIGENCE] Loaded entropy data for ${entry.id}: ${entropyData.length || 0} events`,
 			);
