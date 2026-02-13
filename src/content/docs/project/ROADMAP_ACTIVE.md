@@ -35,6 +35,11 @@ sidebar:
   - **Feature:** Enabled `ConspiracyBoard` Component (`StandardDeepDive`).
   - **Critical Fix:** Removed `path.join` from Production Asset Proxy (Cloudflare Worker 500 Error Fix).
   - **Critical Fix:** Switched `HXOSwarmContainer` to `client:only` (Hydration #418 Fix).
+- [2026-02-12] (Infrastructure): **The Pipeline Unblocking.**
+  - **Hydration:** Patched `hydrate_content.py` to inject `events` (Seismograph), `bom`, `teamSize`, and `transcript`.
+  - **Schema:** Updated `content.config.ts` to support V2 Forensic fields.
+  - **HUD:** Wired `SonicHeartbeat` and `ForensicSeismograph` in `ForensicHUD.astro`.
+  - **SEO:** Fixed `jsonLD.ts` schema mapping (`tags` -> `keywords`).
 - [2026-02-09] (Forensics): **WebTV & Avid Injection.** Manually enriched `galaxy`, `elmer`, `cortez`, `sc48`, `d-command` with high-fidelity "Red Gold" narratives.
 - [2026-02-09] (Infrastructure): **Virtual Bridge Protocol.** Replaced `public/assets` Junction with a direct-read Virtual Proxy in `[...path].ts`.
 - [2026-02-09] (Governance): **Grok Log V2.** Refactored 44 Laws into 9 Constitutive Doctrines.

@@ -134,3 +134,13 @@ sidebar:
 3.  **THE NAME IS LAW:** The file must be named `_entropy.json`.
 
 ---
+
+## ☁️ XI. The Law of Text Sovereignty (Cloud Limit)
+
+**Context:** Research into using Google Docs as a "Cloud CMS" (Feb 2026) revealed it adds sync friction without solving core problems.
+
+1.  **TEXT IS LOCAL:** Narrative content (War Stories, MDX Body) MUST originate in local Markdown. We do not edit body text in the Cloud.
+2.  **DATA IS POTENTIAL:** Quantitative Metadata (Status, Tags, Pricing) MAY eventually live in a Sovereign Sheet (`Global_Config.gsheet`) for bulk-edit capability, but currently remains **STATUS QUO** (Local YAML).
+3.  **NO MIDDLEWARE:** We reject "Cloud Courier" scripts that just move text. If it doesn't transform data, it doesn't exist.
+
+---

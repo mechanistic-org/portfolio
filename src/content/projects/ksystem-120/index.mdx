@@ -1,149 +1,406 @@
 ---
+bom:
+- label: 501-1092-00
+  value: BASE, Chassis - Orpheus
+- label: 501-1106-00
+  value: Drive Cage, Inner, 2.5 inch Drives
+- label: 323-1102-00
+  value: 'Custom #2-56 Stud'
+- label: 520-1066-00
+  value: Cover
+- label: 327-1008-00
+  value: EMI Gasket, Kontron Mobo
 cast:
-  - name: Erik Norris
-    org: Kaleidescape
-    role: Sr. Mechanical Design Engineer
-  - name: Richard Lane
-    org: Kaleidescape
-    role: VP Engineering
-  - name: Michael Clader
-    org: Kaleidescape
-    role: Director, Mfg Engineering
-  - name: Rob Wudrick
-    org: Kaleidescape
-    role: HW Program Manager
-  - name: Ed Stegall
-    org: Mass Precision
-    role: Vendor Lead
-  - name: Weddy Wang
-    org: Steman
-    role: Vendor Lead
+- name: Erik Norris
+  org: Kaleidescape
+  role: The Architect / Senior Mechanical Design Engineer
+- name: Michael Clader
+  org: Kaleidescape
+  role: Director, Manufacturing Engineering
+- name: Jonathan Burke
+  org: Argyle Design
+  role: Industrial Design / Mechanical
+- name: Cristina Soto
+  org: Sanmina-SCI
+  role: Program Manager
+- name: Weddy Wang
+  org: Steman Co., Ltd.
+  role: Vendor (Plastics)
 category: home_entertainment
 client: []
+complexity_vector:
+  part_count_growth:
+  - count: 15
+    date: 2008-05
+    phase: Proto 1 (Mass Precision)
+  - count: 50
+    date: 2009-02
+    phase: Pilot (Sanmina)
+  - count: 300
+    date: 2009-03
+    phase: Production Run 1
+  - count: 400
+    date: 2009-04
+    phase: Production Run 2
+  - count: 800000
+    date: 2009-FY
+    phase: Target Annual Volume
+  process_density:
+  - complexity_score: 9
+    material: G30 Steel / CRS
+    part_name: 501-1092-00 Chassis Base
+    steps:
+    - Turret Punching
+    - Forming (Dimples/Flanges)
+    - 'Deburring (Failure Point: Flash Remnants)'
+    - PEM Insertion (Clinch Nuts)
+    - 'Masking (Complex: Vinyl vs. Hard Fixture)'
+    - Painting (Zero Overspray / Joined Paint)
+    - EMI Gasket Application
+  - complexity_score: 8
+    material: G30 Steel (Reverted from CRS)
+    part_name: 520-1066-00 Top Cover
+    steps:
+    - Blanking
+    - Forming (Side Flanges)
+    - Spot Welding (Lip Bracket)
+    - Grinding/Filling (Cosmetic Class A)
+    - Painting
+    - Masking (Critical Cosmetic Reveal)
+  - complexity_score: 7
+    material: Polycarbonate (White/Grey)
+    part_name: 502-1107-00 Front Bezel (Glow)
+    steps:
+    - Injection Molding
+    - Heat Staking (IR Window)
+    - Polishing (High Gloss)
+    - Internal Paint Masking (Failed/Rejected)
+    - Manual Marker Rework (Pilot)
+  supply_chain_nodes:
+  - location: San Jose, CA
+    role: Sheet Metal Fabricator (Proto)
+    vendor: Mass Precision
+  - location: Guadalajara, Mexico
+    role: Sheet Metal / Assembly (Prod)
+    vendor: Sanmina Plant 4
+  - location: Taipei, Taiwan
+    role: Injection Molding
+    vendor: Steman (Weddy Wang)
+  - location: Waterloo, ON
+    role: Electrical Engineering / QA
+    vendor: Kaleidescape Canada
+  - location: Sunnyvale, CA
+    role: Mechanical / Operations
+    vendor: Kaleidescape HQ
+  tooling_chain:
+  - cost_impact: High (Reduced Opex from $3.63 to $1.60/unit)
+    lead_time_weeks: 2
+    tool_name: Hard Paint Fixture (Base)
+    type: Hard Tooling
+    vendor: Sanmina Plant 4
+  - cost_impact: High (Rib removal would scrap tool)
+    lead_time_weeks: 8
+    tool_name: Front Bezel Injection Mold
+    type: Hard Tooling
+    vendor: Steman (Weddy Wang)
+  - cost_impact: Low
+    lead_time_weeks: 1
+    tool_name: Chassis Punch/Form
+    type: Soft Tooling (Turret)
+    vendor: Mass Precision (Proto) / Sanmina (Prod)
 cyberspace:
   enable: true
   layout: linear
   stickies:
-    - data:
-        columns: 3
-        images:
-          - alt: DSC05318
-            aspectRatio: 1.5
-            src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05318.jpg
-          - alt: DSC05377
-            aspectRatio: 1.5
-            src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05377.jpg
-          - alt: DSC05380
-            aspectRatio: 1.5
-            src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05380.jpg
-          - alt: DSC05381
-            aspectRatio: 1.5
-            src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05381.jpg
-          - alt: DSC05382
-            aspectRatio: 1.5
-            src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05382.jpg
-          - alt: DSC05387
-            aspectRatio: 1.5
-            src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05387.jpg
-          - alt: DSC05404
-            aspectRatio: 1.5
-            src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05404.jpg
-          - alt: DSC05405
-            aspectRatio: 1.5
-            src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05405.jpg
-          - alt: DSC05406
-            aspectRatio: 1.5
-            src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05406.jpg
-          - alt: DSC05407
-            aspectRatio: 1.5
-            src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05407.jpg
-          - alt: DSC05408
-            aspectRatio: 1.5
-            src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05408.jpg
-          - alt: DSC05409
-            aspectRatio: 1.5
-            src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05409.jpg
-          - alt: DSC05410
-            aspectRatio: 1.5
-            src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05410.jpg
-          - alt: DSC05453
-            aspectRatio: 1.5
-            src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05453.jpg
-        layout: masonry
-        scattered: true
-      deck:
-        - body:
-            Sanmina Plant 4 delivered pilot build lids (PN 520-1066-00) that were
-            3mm too wide due to a weldment error.
-          subtitle: ""
-          title: The Crisis
-        - body: We physically hammered them with wooden blocks to pass EMI testing.
-          subtitle: ""
-          title: The Fix
-      featuredIndices: []
-      id: 01_hammered_lid
-      title: Hammered Lid
-      type: gallery
-    - data:
-        columns: 3
-        images: []
-        layout: masonry
-        scattered: true
-      deck:
-        - body: Thermal adhesive variations caused 20°C temperature spikes in the CPU.
-          subtitle: ""
-          title: The Crisis
-        - body:
-            Switched to Phase Change Material (PCM) and heavy spring-loaded clips
-            (50psi) to guarantee contact.
-          subtitle: ""
-          title: The Fix
-      featuredIndices: []
-      id: 02_thumb_of_god
-      title: Thumb Of God
-      type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: DSC05318
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05318.jpg
+      - alt: DSC05377
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05377.jpg
+      - alt: DSC05380
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05380.jpg
+      - alt: DSC05381
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05381.jpg
+      - alt: DSC05382
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05382.jpg
+      - alt: DSC05387
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05387.jpg
+      - alt: DSC05404
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05404.jpg
+      - alt: DSC05405
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05405.jpg
+      - alt: DSC05406
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05406.jpg
+      - alt: DSC05407
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05407.jpg
+      - alt: DSC05408
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05408.jpg
+      - alt: DSC05409
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05409.jpg
+      - alt: DSC05410
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05410.jpg
+      - alt: DSC05453
+        aspectRatio: 1.5
+        src: /assets/r2/ksystem-120/bubbles/01_hammered_lid/DSC05453.jpg
+      layout: masonry
+      scattered: true
+    deck:
+    - body: Sanmina Plant 4 delivered pilot build lids (PN 520-1066-00) that were
+        3mm too wide due to a weldment error.
+      subtitle: ''
+      title: The Crisis
+    - body: We physically hammered them with wooden blocks to pass EMI testing.
+      subtitle: ''
+      title: The Fix
+    featuredIndices: []
+    id: 01_hammered_lid
+    title: Hammered Lid
+    type: gallery
+  - data:
+      columns: 3
+      images: []
+      layout: masonry
+      scattered: true
+    deck:
+    - body: Thermal adhesive variations caused 20°C temperature spikes in the CPU.
+      subtitle: ''
+      title: The Crisis
+    - body: Switched to Phase Change Material (PCM) and heavy spring-loaded clips
+        (50psi) to guarantee contact.
+      subtitle: ''
+      title: The Fix
+    featuredIndices: []
+    id: 02_thumb_of_god
+    title: Thumb Of God
+    type: gallery
 date: 2008-06-11 00:00:00+00:00
 description: KSYSTEM-120 Mini System
 documents: []
 draft: false
 employer: kaleidescape
 endDate: 2009-03-31 00:00:00+00:00
+events:
+- date: '2008-05-05'
+  score: 6
+  snippet: EMI scans failed due to poor chassis connector mating and Ethernet jack
+    grounding.
+  source_ref: Kaleidescape_Volume_014.md (Orpheus EMI scans summary)
+  type: Document
+- date: '2008-05-19'
+  score: 4
+  snippet: Internal bracket issues identified; photo documentation of interference.
+  source_ref: Kaleidescape_Volume_014.md (DSCF2788.JPG)
+  type: Photo
+- date: '2008-06-10'
+  score: 7
+  snippet: Prototypes built without thermal paste; tape used instead. Capacitor blown
+    off board.
+  source_ref: Kaleidescape_Volume_013.md (Orpheus new builds of Player PCB...)
+  type: Email
+- date: '2008-06-24'
+  score: 5
+  snippet: Prompt Precision delivers 10 proto chassis; suggests design changes for
+    fabrication.
+  source_ref: Kaleidescape_Volume_012.md (Orpheus Review)
+  type: Email
+- date: '2008-07-01'
+  score: 3
+  snippet: Delivery of 10 proto chassis confirmed; meeting requested for design update.
+  source_ref: Kaleidescape_Volume_012.md (Orpheus Build)
+  type: Email
+- date: '2008-07-14'
+  score: 6
+  snippet: Assembly/Mechanical review delayed due to Mercury issues and server crash.
+  source_ref: 'Kaleidescape_Volume_011.md (RE: Orpheus - next build from Prompt)'
+  type: Email
+- date: '2008-07-28'
+  score: 8
+  snippet: 'PCB Flex Crisis: Carrier frame lacks rigidity; solder joints breaking
+    during assembly.'
+  source_ref: 'Kaleidescape_Volume_011.md (RE: Orpheus PCB carrier problem?)'
+  type: Email
+- date: '2008-07-29'
+  score: 5
+  snippet: Prompt Precision parts found appreciably less accurate than Mass Precision
+    parts.
+  source_ref: 'Kaleidescape_Volume_011.md (RE: Orpheus: Summary of installation problems)'
+  type: Email
+- date: '2008-07-30'
+  score: 7
+  snippet: Chassis buy placed on HOLD due to boards being damaged by inaccurate chassis.
+  source_ref: Kaleidescape_Volume_011.md (hardware meeting notes)
+  type: Document
+- date: '2008-08-05'
+  score: 5
+  snippet: EMI pre-scan passed radiated emissions after moving earth ground.
+  source_ref: 'Kaleidescape_Volume_010.md (Orpheus: Results of EMI pre-scan)'
+  type: Email
+- date: '2008-08-26'
+  score: 6
+  snippet: Meritronics build halted temporarily; cartridge fit changes not ready.
+  source_ref: Kaleidescape_Volume_010.md (Meritronics Build)
+  type: Email
+- date: '2008-09-15'
+  score: 6
+  snippet: Door IR range failure (3-4 inches); hinges lifting due to missing rivets.
+  source_ref: Kaleidescape_Volume_010.md (Orpheus first plastics assembly notes)
+  type: Email
+- date: '2008-09-26'
+  score: 5
+  snippet: Magnetic sensor failure; screw contacting chassis reduces magnetic field.
+  source_ref: Kaleidescape_Volume_010.md (Orpheus Magnetic Sensor)
+  type: Email
+- date: '2008-10-08'
+  score: 5
+  snippet: Light bleed from LEDs discovered in dark room testing.
+  source_ref: Kaleidescape_Volume_010.md (Button bleed.doc)
+  type: Document
+- date: '2008-10-27'
+  score: 4
+  snippet: Launch plans update; Pilot run set for Jan 19th.
+  source_ref: Kaleidescape_Volume_009.md (Orpheus launch plans update...)
+  type: Email
+- date: '2008-12-01'
+  score: 4
+  snippet: Light blocking label failed; switched to opaque Lexan FR25A.
+  source_ref: Kaleidescape_Volume_008.md (Orpheus - light shield material change)
+  type: Email
+- date: '2008-12-15'
+  score: 3
+  snippet: Drive Cage (520-1083-00) loaded into Arena for release.
+  source_ref: 'Kaleidescape_Volume_008.md (RE: Revised Orpheus files)'
+  type: Record
+- date: '2008-12-29'
+  score: 6
+  snippet: Glow board PCB moved closer to screen in Rev 3, causing artifacts.
+  source_ref: Kaleidescape_Volume_008.md (glow_12_29_08.pdf)
+  type: Document
+- date: '2009-01-05'
+  score: 8
+  snippet: Fan bracket preventing lid from closing on latest Meritronics build.
+  source_ref: 'Kaleidescape_Volume_005.md (RE: Orpheus Fan Mount Issue)'
+  type: Email
+- date: '2009-01-07'
+  score: 7
+  snippet: Hard hang every 50 mins; thermal paste missing on CPU confirmed.
+  source_ref: Kaleidescape_Volume_005.md (KAL visit for Orpheus Pilot run Day 1)
+  type: Email
+- date: '2009-01-12'
+  score: 5
+  snippet: 'T1 sample review: Door top does not close properly; side bezels misaligned.'
+  source_ref: Kaleidescape_Volume_005.md (Orpheus T1 sample review...)
+  type: Email
+- date: '2009-02-20'
+  score: 8
+  snippet: Production stopped; material expedite required for Sanmina.
+  source_ref: 'Kaleidescape_Volume_004.md (RE: Orpheus production stopped)'
+  type: Email
+- date: '2009-02-23'
+  score: 9
+  snippet: Pilot assembly suspended; 50 units unsalable due to FCC non-compliance.
+  source_ref: Kaleidescape_Volume_003.md (Orpheus Status)
+  type: Email
+- date: '2009-02-24'
+  score: 7
+  snippet: Launch delayed; waiting for 350 drive cages from Plant 4.
+  source_ref: 'Kaleidescape_Volume_003.md (RE: Orpheus Status)'
+  type: Email
+- date: '2009-02-27'
+  score: 9
+  snippet: 'Stop Ship: Top lid weldment out of spec; pressing drive cage down.'
+  source_ref: Kaleidescape_Volume_003.md (Orpheus top lid)
+  type: Email
+- date: '2009-02-28'
+  score: 9
+  snippet: Assemblers breaking weld attachments trying to pry lids into position.
+  source_ref: 'Kaleidescape_Volume_003.md (RE: Orpheus top lid)'
+  type: Email
+- date: '2009-03-02'
+  score: 7
+  snippet: Deviation issued to PL4 to ship 50 pcs with interfering lip.
+  source_ref: 'Kaleidescape_Volume_003.md (RE: NPI Orpheus Status Update)'
+  type: Email
+- date: '2009-03-03'
+  score: 6
+  snippet: 'OOBE Inspection: Punching flash remnants; masking lines not straight.'
+  source_ref: Kaleidescape_Volume_003.md (P1 Orpheus -- OOBE inspection report)
+  type: Email
+- date: '2009-03-04'
+  score: 7
+  snippet: KDISK cartridges not aligned; downward/leftward bias detected.
+  source_ref: Kaleidescape_Volume_003.md (1098_03_03_09.pdf)
+  type: Photo
+- date: '2009-03-10'
+  score: 5
+  snippet: Black-out tape applied incorrectly on 501-1106-00.
+  source_ref: Kaleidescape_Volume_003.md (P1 Orpheus -- 501-1106-00 report)
+  type: Email
+- date: '2009-03-11'
+  score: 6
+  snippet: Power button sticking/clicking; silicone not concentric with sheetmetal.
+  source_ref: Kaleidescape_Volume_003.md (pwr_button_03_11_09.pdf)
+  type: Document
+- date: '2009-03-24'
+  score: 5
+  snippet: Masking tolerances unclear on 501-1092-00 drawing for Sanmina.
+  source_ref: 'Kaleidescape_Volume_003.md (RE: P1 Orpheus -- 501-1092-00)'
+  type: Email
+- date: '2009-04-20'
+  score: 4
+  snippet: Production unit found with serial connector installed upside down.
+  source_ref: 'Kaleidescape_Volume_002.md (RE: Orpheus - upside down serial connector)'
+  type: Email
+- date: '2009-05-04'
+  score: 3
+  snippet: 'Test reports released: Vibration & Drop tests for KSYSTEM-120.'
+  source_ref: Kaleidescape_Volume_002.md (Kaleidescape Vibrational & drop.pdf)
+  type: Document
 forensic_metrics:
-  financial: Saved 300-unit production run; CPU thermal cost reduced $9.63 to $9.25
-  process: "Reduced PCB fallout from 20% to stable; Transitioned metal from Mass Precision to Sanmina"
-  governance: "Weekly Mechanical/ID Meetings; High-frequency 'War Room' coordination"
+  financial: Negotiated CPU thermal solution unit price down from $9.63 to $9.25
+  governance: Weekly Mechanical / ID Meeting (Norris, Burke, Lane, Wudrick)
+  process: Masking throughput increased from 3 pcs/hr to 20 pcs/hr via process refinement
 forensic_summary:
-  trigger: "Catastrophic 'Thumb of God' PCB failures (20% fallout) and 'Hammered Lid' interference halting pilot build"
-  intervention: "Mechanical redesign: 4-hole PCB rigidifying fix, 'peninsula' relief cuts, elimination of lid weldment, material reversion to G30 steel"
-  result: "Stabilized production yield, eliminated assembly violence, enabled 300-unit ramp"
+  intervention: Identified and eliminated 0.005-0.020 inch tolerance stack-up error
+    in fan tray assembly; Issued deviation for top cover lip interference
+  result: Salvaged stalled 50-unit Pilot Build; enabled 300-unit Production ramp;
+    Achieved FCC Class B compliance
+  trigger: 'Three concurrent ''stop-ship'' interference crises: The Hammered Lid,
+    The Thumb of God, and The Glow Debacle'
 gallery: []
 hxo_ready: true
 hydration_status: full
 industry: consumer_electronics
-links:
-  - name: Kaleidescape Website
-    url: https://kaleidescape.com
 isomorphics:
-  - label: Interference / Stack-up
-    hardware_point: "The 'Peninsula Cut' - removing PCB material to prevent chassis collision during insertion"
-    software_point: "Crash Loop (Gennum could not talk to chip)"
-    principle: "Tolerance Stack-up (Two objects cannot occupy the same space)"
-toolchain:
-  - Windchill
-  - Pro/Engineer (Creo)
-  - Arena
-  - Mass Precision (Vendor)
-  - Sanmina (Vendor)
-  - Prompt Precision (Vendor)
-bom:
-  - label: Chassis Cover
-    value: 520-1066-00
-  - label: Chassis Base
-    value: 501-1092-00 (G30 Steel)
-  - label: Custom Heatsink
-    value: 326-1010-00
-  - label: Drive Cage
-    value: 501-1106-00
+- hardware_point: Fan tray assembly tolerance error (0.005-0.020) preventing lid closure
+  label: Tolerance Stack-up
+  principle: The Law of Cumulative Error
+  software_point: KEAOS error code database lack of granularity for manufacturing
+    diagnostics
+links:
+- name: Kaleidescape Website
+  url: https://kaleidescape.com
+metrics:
+  quotes:
+  - 'Preliminary report: When the inner and outer sheetmetal cages are riveted together,
+    it is not possible to assemble drive plane PCB.'
+  - Note the lower left PCB dimple crashes with the DVD.
+  - Erik gave a deviation to PL4 to send the 50 pcs with this lip as is, but in the
+    time to integrated to the Ksystem it does not let the HDD cartridge pull easy.
 phase_stats:
   Design: 30
   Engineering: 50
@@ -154,29 +411,40 @@ production: production
 productionScale: series
 slug: ksystem-120
 tags:
-  - Crisis
-  - Yield
-  - Mechanism
-  - Process
-  - Thermal
-  - Leadership
-teamSize: "6"
+- Thermal
+- Mechanism
+- Cost_Down
+- Process
+- Crisis
+- Yield
+- Leadership
+- Architecture
+teamSize: 6 (Norris, Clader, Burke, Wudrick, Lane, Forster)
 theme: hyperspace
 tier: 1
 title: KSYSTEM-120
+toolchain:
+- Windchill
+- Pro/Engineer (Creo)
+- Arena
+- Mass Precision (Vendor)
+- Sanmina (Vendor)
+- Prompt Precision (Vendor)
 tools:
-  - pro_engineer
-transcript: ""
+- pro_engineer
+transcript: ''
 war_stories:
-  - label: The Thumb of God
-    value: 20% Fallout -> Stable
-    description: "Assembly force was flexing the PCB, shearing off resistor R332 and breaking BGA solder joints; fixed by adding standoffs and cutting a relief slot in the tray."
-  - label: The Hammered Lid
-    value: Line Down / Stop Ship
-    description: "Assemblers prying lids until welds broke due to out-of-spec weldment crushing drive cage; fixed by removing weldment and adding closure hooks."
-  - label: The Glow Debacle
-    value: Cosmetic Failure
-    description: "LEDs too close to bezel caused 'blobby' light; fixed by mechanically spacing PCB back 3-6mm and using low-profile LEDs."
+- description: Inner and outer sheetmetal cages were riveted together, making it impossible
+    to assemble the drive plane PCB
+  label: The PCB Cage Trap
+  value: Assembly Blockage
+- description: Lower left PCB dimple crashed with the DVD drive during fit check
+  label: The PCB Crash
+  value: Interference
+- description: Dim LED spots tracked with component placement; required resistor value
+    adjustments to compensate for plastic bend
+  label: The Glow Debacle
+  value: Quality Crisis
 ---
 
 # KSYSTEM-120 (Orpheus) Forensic Report

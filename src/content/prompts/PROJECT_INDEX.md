@@ -1,7 +1,7 @@
 ---
 title: "Project Index"
 description: "Holistic Forensic Archive & Catalog"
-last_updated: "2026-02-11"
+last_updated: "2026-02-12"
 total_entries: 123
 ---
 
@@ -13,7 +13,7 @@ total_entries: 123
 ---
 
 ## 1. The Forensic Registry (Tier 1)
-**Count:** 21
+**Count:** 22
 *High-fidelity entries with structured forensic data, war stories, and metrics.*
 
 ### Bazooka (Base Station) (`bazooka`)
@@ -94,12 +94,24 @@ total_entries: 123
 ### KSYSTEM-120 (`ksystem-120`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Catastrophic 'Thumb of God' PCB failures (20% fallout) and 'Hammered Lid' interference halting pilot build INTERVENTION: Mechanical redesign: 4-hole PCB rigidifying fix, 'peninsula' relief cuts, elimination of lid weldment, material reversion to G30 steel RESULT: Stabilized production yield, eliminated assembly violence, enabled 300-unit ramp
+> **Forensic Summary:** TRIGGER: Three concurrent 'stop-ship' interference crises: The Hammered Lid, The Thumb of God, and The Glow Debacle INTERVENTION: Identified and eliminated 0.005-0.020 inch tolerance stack-up error in fan tray assembly; Issued deviation for top cover lip interference RESULT: Salvaged stalled 50-unit Pilot Build; enabled 300-unit Production ramp; Achieved FCC Class B compliance
 
 **Key Metrics:**
-- **Financial:** Saved 300-unit production run; CPU thermal cost reduced $9.63 to $9.25
-- **Process:** Reduced PCB fallout from 20% to stable; Transitioned metal from Mass Precision to Sanmina
-- **Governance:** Weekly Mechanical/ID Meetings; High-frequency 'War Room' coordination
+- **Financial:** Negotiated CPU thermal solution unit price down from $9.63 to $9.25
+- **Governance:** Weekly Mechanical / ID Meeting (Norris, Burke, Lane, Wudrick)
+- **Process:** Masking throughput increased from 3 pcs/hr to 20 pcs/hr via process refinement
+
+---
+
+### M700 Vesta Vault Recovery (`m700`)
+**Detail Pod:** _[URL_PENDING]_
+
+> **Forensic Summary:** TRIGGER: Catastrophic field failures (disc jams, scratching, 'unreadable' media) due to tolerance drift INTERVENTION: Complete mechanical subsystem redesign: Dual radial spring balance bars, solid motor mounts, and disc guide retrofit RESULT: Eliminated 100% of 'dirty roller' slippage failures and recovered 100% of questioned carousel inventory
+
+**Key Metrics:**
+- **Financial:** $24 per unit savings on chassis costs via hard tooling transition
+- **Governance:** Weekly Reliability Investigation / High-touch 'Run-In' test cycle
+- **Process:** Analyzed 3,000,000+ disc injection cycles to isolate 10% failure threshold
 
 ---
 
@@ -184,36 +196,36 @@ total_entries: 123
 ### Cortez (`webtv-cortez`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Vendor analysis (Silitek/Panasonic) revealed the ID intent was mechanically impossible—specifically, the rubber pad was 'too close to the edge' for PCB sealing and the key matrix pitch (19.05mm) clashed with the 2D layout. The initial hard model failed ergonomic validation (not level, too heavy). INTERVENTION: Norris (as Lincicum) executed a high-intensity 'Surgical CAD' sprint (100+ hours in &lt;2 weeks) to re-loft the top surfaces, enforce a 7-11 degree IR tilt, and modify grip curvature while constraining internal geometry to standard low-cost key matrices. RESULT: Delivered a manufacturable database that reconciled the 'Airboard' form factor with standard membrane switches, securing executive approval for the new model despite 'beating on extra CAD hours'.
+> **Forensic Summary:** TRIGGER: Vendor analysis (Silitek/Panasonic) revealed the ID intent was mechanically impossible—specifically, the rubber pad was 'too close to the edge' for PCB sealing and the key matrix pitch (19.05mm) clashed with the 2D layout. The initial hard model failed ergonomic validation (not level, too heavy). INTERVENTION: Norris (as Lincicum) executed a high-intensity 'Surgical CAD' sprint (100+ hours in <2 weeks) to re-loft the top surfaces, enforce a 7-11 degree IR tilt, and modify grip curvature while constraining internal geometry to standard low-cost key matrices. RESULT: Delivered a manufacturable database that reconciled the 'Airboard' form factor with standard membrane switches, securing executive approval for the new model despite 'beating on extra CAD hours'.
 
 **Key Metrics:**
-- **Financial:** Avoided custom 'scissors switch' tooling costs by forcing standard membrane matrix into 'Airboard' form factor. Billed ~$25k in June 2000 alone for rapid remediation.
-- **Governance:** Direct Vendor-Engineering Loop (WebTV <> Mechanistic <> Silitek/Panasonic/Lite-On) bypassing standard component procurement delays.
-- **Process:** Implemented 'Surgical CAD' surface reconstruction to align ID curvature with fixed PCB/membrane hard points.
+- **Financial:** Billed $24,900 in June 2000 for accelerated surface development rescue [1, 2]
+- **Governance:** High-frequency iteration: Weekly status reports paired with bi-weekly invoicing and immediate CAD restructuring post-review [1]
+- **Process:** Compressed 12-week surfacing cycle into 6-week sprint from broken wireframe to manufacturing release [3]
 
 ---
 
 ### Elmer / Zeus (HomeNet) (`webtv-elmer`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: The 'Elmer' main board relied on an aluminum heat spreader requiring a 'dead nuts flat' chassis for thermal conduction, a tolerance impossibility for sheet metal [8], [9]. Simultaneously, a 'screw-up' on the prototype build mixed metric and SAE hardware, threatening assembly yield [6]. INTERVENTION: Norris ('The Architect') rejected the 'Bastard Box' concept, executing a custom chassis design that removed perforation under the PCB for mass conduction while forcing convective airflow near the PSU. He enforced a strict 4-40 UNC hardware standardization for the 'Zeus' revision. RESULT: Delivery of 5 functional server enclosures and 12 nodes for Western Cable Show and CES 2001 on a compressed 9-day fabrication cycle with zero thermal failures.
+> **Forensic Summary:** TRIGGER: The 'Elmer' main board relied on an aluminum heat spreader requiring a 'dead nuts flat' chassis for thermal conduction, a tolerance impossibility for sheet metal [8], [9]. Simultaneously, a 'screw-up' on the prototype build mixed metric and SAE hardware [6]. INTERVENTION: Norris ('The Architect') rejected the 'Bastard Box' concept [10] and executed a custom chassis design removing perforation under the PCB for mass conduction [11]. He enforced a strict 4-40 UNC hardware standardization for the 'Zeus' revision [6]. RESULT: Delivery of 5 functional server enclosures and 12 nodes for Western Cable Show and CES 2001 on a compressed 9-day fabrication cycle with zero thermal failures [4], [5].
 
 **Key Metrics:**
-- **Financial:** Managed $10k+ rapid prototyping budget for high-pressure trade show build; negotiated short-run fab costs (e.g., $242.35/cover for zinc-plated revisions).
-- **Governance:** Orchestrated parallel workstreams between sheet metal (E-M Solutions) and model shops (Sputnik) under a high-velocity 'War Room' cadence.
-- **Process:** Reduced complex sheet metal fabrication cycle to 9 days; Standardized 100% of assembly hardware to 4-40 spec to eliminate line-down risks.
+- **Financial:** Managed $10k+ rapid prototyping budget for high-pressure trade show build [1], [2]; Negotiated short-run fab costs (e.g., $164.95/cover) [3].
+- **Governance:** Orchestrated parallel workstreams between sheet metal (E-M Solutions) and model shops (Sputnik) under a high-velocity 'War Room' cadence [7].
+- **Process:** Reduced complex sheet metal fabrication cycle to 9 days [4], [5]; Standardized 100% of assembly hardware to 4-40 spec to eliminate line-down risks [6].
 
 ---
 
 ### WebTV Galaxy (`webtv-galaxy`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Integration of desktop-class AMD K7 architecture (150W TDP) into a consumer set-top box form factor. INTERVENTION: Engineered a 300mm chassis extension with a directed airflow tunnel (28.3 CFM) and modular 'CPU Puck' sub-assembly. RESULT: Stabilized CPU junction temperature at 84.0°C and Smart Card ambient &lt;55.0°C; assets pivoted to Xbox division upon program cancellation.
+> **Forensic Summary:** TRIGGER: Integration of desktop-class AMD K7 architecture (150W TDP) into a consumer set-top box form factor. INTERVENTION: Engineered a 300mm chassis extension with a directed airflow tunnel (28.3 CFM) and modular 'CPU Puck' sub-assembly. RESULT: Stabilized CPU junction temperature at 84.0°C and Smart Card ambient <55.0°C; assets pivoted to Xbox division upon program cancellation.
 
 **Key Metrics:**
-- **Financial:** Managed $14,200/month consulting burn rate for solo mechanical architecture.
-- **Process:** Coordinated 4-day 'quick turn' fabrication cycles during vendor shutdowns.
-- **Governance:** Orchestrated weekly 'Hitlist' engineering reviews tracking 30+ blocking defects per cycle.
+- **Financial:** Managed $14k/mo burn rate on solo-consultant engineering services; mitigated cost of custom 4-day quick-turn fabrication cycles
+- **Governance:** Weekly 'Mechanical Hitlist' protocol tracking 30+ gating defects; Centralized FTP master database control
+- **Process:** Achieved 28.3 CFM system airflow in high-density chassis; Resolved 100% of EMI chassis ground failures via flange redesign
 
 ---
 
@@ -239,7 +251,7 @@ total_entries: 123
 
 
 ## 2. The Project Catalog (Tier 2)
-**Count:** 102
+**Count:** 101
 *Standard entries, ready-state drafts, and archival stub records.*
 
 - **Acer Aspire** (`acer-aspire`): > **Context:** Consultancies are the boot camp of design.
@@ -289,7 +301,6 @@ total_entries: 123
 - **LapTV** (`laptv`): > **Context:** As a lead mechanical engineer at Mechanistic, I tackled diverse challenges across consumer electronics, medical devices, and robotics.
 - **M300** (`m300`): KPLAYER-M300 Movie Player
 - **M500** (`m500`): KPLAYER-M500 Player
-- **M700** (`m700`): KVAULT-M700 Disc Vault
 - **Mars (Kaleidescape)** (`mars-k`): > *Auto-generated scaffold from Multiverse Registry.*
 - **Mars (WebTV)** (`mars-w`): > *Auto-generated scaffold from Multiverse Registry.*
 - **Mbox** (`mbox`): > **Context:** Digidesign (Avid) set the standard for professional digital audio workstations (Pro Tools).

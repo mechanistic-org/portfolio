@@ -211,6 +211,16 @@ These scripts drive the "Forensic Data Factory."
   2.  **Mode Mismatch:** `presentation_mode: deep_dive` might assume a "Visual Only" experience.
 - **Fix:** Audit `Hyperspace.astro` to ensure `<Content />` is always rendered, or strictly define where it lives (Drawer vs Main).
 
+### ⚠️ "The Schema Trap" (Missing Fields)
+
+- **Symptom:** Build fails with `Property 'events' does not exist` or data missing in HUD.
+- **Cause:** `src/content.config.ts` Schema definition does not match the Hydrated Data or Props Interface.
+- **Procotol:** The Trinity must match:
+  1.  **Hydration:** `hydrate_content.py` (Injects Data).
+  2.  **Schema:** `content.config.ts` (Validates Data).
+  3.  **UI:** `ForensicHUD.astro` (Renders Data).
+- **Fix:** Update `content.config.ts` immediately after patching hydration logic.
+
 ### ⚠️ "The Ghost Admonition" (Legacy Leak)
 
 - **Symptom:** User reports "Admonitions are back," but `grep` shows no `<Admonition>` tags in the file.

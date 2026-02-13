@@ -39,25 +39,25 @@ If you are a new Agent starting a session:
 
 ## 1. The Heavy Cylinder (Tier 1)
 
-| Project          | Slug          | Narrative | Complexity | Entropy | Notes                    |
-| :--------------- | :------------ | :-------: | :--------: | :-----: | :----------------------- |
-| **C24**          | `c24`         |    🟢     |     🟢     |   🟢    | Hydrated via NotebookLM. |
-| **D-Control**    | `d-control`   |    🟢     |     🟢     |   🟢    | Hydrated via Agent.      |
-| **D-Command**    | `d-command`   |    🟢     |     🟢     |   🟢    | Hydrated via Agent.      |
-| **SC48**         | `sc48`        |    🟢     |     🟢     |   🟢    | Hydrated via Agent.      |
-| **M700 Vault**   | `dv700`       |    🟢     |     🔴     |   🔴    |                          |
-| **K-System 120** | `ksystem-120` |    🟢     |     🔴     |   🔴    |                          |
+| Project          | Slug          | Narrative | Complexity | Entropy | Notes                                          |
+| :--------------- | :------------ | :-------: | :--------: | :-----: | :--------------------------------------------- |
+| **C24**          | `c24`         |    🟢     |     🟢     |   🟢    | Hydrated via NotebookLM.                       |
+| **D-Control**    | `d-control`   |    🟢     |     🟢     |   🟢    | Hydrated via Agent.                            |
+| **D-Command**    | `d-command`   |    🟢     |     🟢     |   🟢    | Hydrated via Agent.                            |
+| **SC48**         | `sc48`        |    🟢     |     🟢     |   🟢    | Hydrated via Agent.                            |
+| **M700 Vault**   | `m700`        |    🟢     |     🟢     |   🟢    | Hydrated via Agent (Force-Dominant Narrative). |
+| **K-System 120** | `ksystem-120` |    🟢     |     🟢     |   🟢    | Hydrated via Agent.                            |
 
 ## 2. The Surgical Cylinder (Tier 2)
 
-| Project           | Slug                 | Narrative | Complexity | Entropy | Notes |
-| :---------------- | :------------------- | :-------: | :--------: | :-----: | :---- |
-| **Bazooka**       | `bazooka`            |    🟢     |     🔴     |   🔴    |       |
-| **Elvis**         | `extension-switches` |    🟢     |     🔴     |   🔴    |       |
-| **Room Director** | `room-director`      |    🟢     |     🔴     |   🔴    |       |
-| **Waldo**         | `wall-plates`        |    🟢     |     🔴     |   🔴    |       |
-| **Minimerc**      | `minimerc`           |    🟢     |     🔴     |   🔴    |       |
-| **Makeline**      | `makeline`           |    🟢     |     🔴     |   🔴    |       |
+| Project           | Slug                 | Narrative | Complexity | Entropy | Notes                                               |
+| :---------------- | :------------------- | :-------: | :--------: | :-----: | :-------------------------------------------------- |
+| **Bazooka**       | `bazooka`            |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph. |
+| **Elvis**         | `extension-switches` |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph. |
+| **Room Director** | `room-director`      |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph. |
+| **Waldo**         | `wall-plates`        |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph. |
+| **Minimerc**      | `minimerc`           |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph. |
+| **Makeline**      | `makeline`           |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph. |
 
 ## 3. The Historical Cylinder (Tier 3)
 

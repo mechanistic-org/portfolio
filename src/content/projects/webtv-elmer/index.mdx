@@ -1,27 +1,35 @@
 ---
 audio_url: /assets/webtv-elmer/webtv-elmer-briefing.m4a
+bom:
+- label: Zeus Top Cover
+  value: Zinc Plated Sheet Metal [3]
+- label: Zeus Base
+  value: Zinc Plated Sheet Metal [3]
+- label: Fan Bracket
+  value: Custom Sheet Metal [13]
+- label: Fans
+  value: Delta 60mm 12V [14]
+- label: Standoffs
+  value: Keystone 8405 / 8714 / 2202 [15]
 cast:
-  - name: Erik Norris
-    org: Mechanistic
-    role: Lead Mechanical Engineer (The Architect)
-  - name: Leslie Leland
-    org: WebTV
-    role: Product Manager
-  - name: Mark Carbone
-    org: WebTV
-    role: Program Manager (Thermal Lead)
-  - name: Shelly Evans
-    org: E-M Solutions
-    role: NPI Manager
-  - name: Val Kasvin
-    org: Sputnik Models
-    role: Model Maker
-  - name: Hedley Davis
-    org: WebTV
-    role: Engineering Lead
-  - name: Pete Schmidt
-    org: Peter Schmidt Design Assoc
-    role: Industrial Design
+- name: Erik Norris
+  org: Mechanistic
+  role: Lead Mechanical Engineer (The Architect)
+- name: Leslie Leland
+  org: WebTV
+  role: Product Manager
+- name: Mark Carbone
+  org: WebTV
+  role: Program Manager (Thermal Lead)
+- name: Hedley Davis
+  org: WebTV
+  role: Engineering Lead
+- name: Shelly Evans
+  org: E-M Solutions
+  role: NPI Manager
+- name: Val Kasvin
+  org: Sputnik Models
+  role: Model Maker
 category: home_entertainment
 cyberspace:
   layout: linear
@@ -32,38 +40,34 @@ duration: 3 Months
 employer: mechanistic
 endDate: 2001-01-06
 forensic_metrics:
-  financial:
-    Managed $10k+ rapid prototyping budget for high-pressure trade show build;
-    negotiated short-run fab costs (e.g., $242.35/cover for zinc-plated revisions).
-  governance:
-    Orchestrated parallel workstreams between sheet metal (E-M Solutions)
-    and model shops (Sputnik) under a high-velocity 'War Room' cadence.
-  process:
-    Reduced complex sheet metal fabrication cycle to 9 days; Standardized 100%
-    of assembly hardware to 4-40 spec to eliminate line-down risks.
+  financial: Managed $10k+ rapid prototyping budget for high-pressure trade show build
+    [1], [2]; Negotiated short-run fab costs (e.g., $164.95/cover) [3].
+  governance: Orchestrated parallel workstreams between sheet metal (E-M Solutions)
+    and model shops (Sputnik) under a high-velocity 'War Room' cadence [7].
+  process: Reduced complex sheet metal fabrication cycle to 9 days [4], [5]; Standardized
+    100% of assembly hardware to 4-40 spec to eliminate line-down risks [6].
 forensic_summary:
-  intervention:
-    Norris ('The Architect') rejected the 'Bastard Box' concept, executing
-    a custom chassis design that removed perforation under the PCB for mass conduction
-    while forcing convective airflow near the PSU. He enforced a strict 4-40 UNC hardware
-    standardization for the 'Zeus' revision.
-  result:
-    Delivery of 5 functional server enclosures and 12 nodes for Western Cable
-    Show and CES 2001 on a compressed 9-day fabrication cycle with zero thermal failures.
-  trigger:
-    The 'Elmer' main board relied on an aluminum heat spreader requiring a
+  intervention: Norris ('The Architect') rejected the 'Bastard Box' concept [10] and
+    executed a custom chassis design removing perforation under the PCB for mass conduction
+    [11]. He enforced a strict 4-40 UNC hardware standardization for the 'Zeus' revision
+    [6].
+  result: Delivery of 5 functional server enclosures and 12 nodes for Western Cable
+    Show and CES 2001 on a compressed 9-day fabrication cycle with zero thermal failures
+    [4], [5].
+  trigger: The 'Elmer' main board relied on an aluminum heat spreader requiring a
     'dead nuts flat' chassis for thermal conduction, a tolerance impossibility for
-    sheet metal [8], [9]. Simultaneously, a 'screw-up' on the prototype build mixed metric
-    and SAE hardware, threatening assembly yield [6].
+    sheet metal [8], [9]. Simultaneously, a 'screw-up' on the prototype build mixed
+    metric and SAE hardware [6].
 gallery: []
 hxo_ready: true
 hydration_status: full
 industry: consumer_electronics
 isomorphics:
-  - hardware_point: Mixed metric/SAE fasteners cause assembly friction and cross-threading.
-    label: Standardization
-    principle: Reducing component entropy increases system yield.
-    software_point: Inconsistent dependency versions cause build failures ('Dependency Hell').
+- hardware_point: Mixed metric/SAE fasteners cause assembly friction and cross-threading.
+  label: Standardization
+  principle: Reducing component entropy increases system yield.
+  software_point: Inconsistent dependency versions cause build failures ('Dependency
+    Hell').
 links: []
 listed: true
 metrics:
@@ -78,61 +82,55 @@ metrics:
   governance:
     dcos: 5
     ecos:
-      - 4-40_Standardization
+    - 4-40_Standardization
   interventions:
     count: 3
     label: Crisis Recoveries
   process:
     engineeringChangeOrders:
-      - Heat_Spreader_Flatness
-      - Hardware_Std
-      - DXF_Collision_Check
+    - Heat_Spreader_Flatness
+    - Hardware_Std
+    - DXF_Collision_Check
   profitability:
     label: Quote Target
     value: 120hrs
   quotes:
-    - If the chassis bottom was dead nuts flat, I'd say keep the holes. But since it's
-      likely not exceedingly flat, I feel that we need the entire area under the bar.
-    - There was a screw-up on Elmer and I want to confirm for Zeus... can you confirm
-      that we are using 4-40 hardware throughout?
-    - No one likes my code name so we are calling it a 'double-high' Mercury... That
-      bezel will be needed by 12/19.
+  - If the chassis bottom was dead nuts flat, I'd say keep the holes. But since it's
+    likely not exceedingly flat, I feel that we need the entire area under the bar.
+    [19]
+  - There was a screw-up on Elmer and I want to confirm for Zeus... can you confirm
+    that we are using 4-40 hardware throughout? [20]
+  - No one likes my code name so we are calling it a 'double-high' Mercury... That
+    bezel will be needed by 12/19. [21]
   war_stories:
-    - description:
-        Mandated 'dead nuts' flatness specs for the chassis floor to ensure
-        conductive coupling with the 12V supply heat spreader.
-      label: The 'Dead Nuts' Flatness
-      value: Thermal Conduct
-    - description:
-        Caught a fatal Compact Flash card collision 3 days before CES by
-        manually overlaying DXF records from the PCB designer.
-      label: The 'Titan Div' Overlay
-      value: Collision Check
-    - description:
-        Blocked ventilation holes under the main PCB to maximize thermal
-        mass conduction, forcing air draft only near the PSU.
-      label: The Perforation War
-      value: Flow Logic
-    - description:
-        Purged all metric hardware from the BOM after a mixed-screw prototype
-        disaster. Standardized on 4-40 UNC to save the assembly line.
-      label: The 4-40 Mandate
-      value: Standardization
-    - description:
-        Emergency ECO to raise lower drive bay by exactly 8mm to clear a
-        power connector collision detected in Pro/E.
-      label: The 8mm Lift
-      value: Connector Collision
-    - description:
-        Enforced 100% 4-40 screw standardization across 5 servers to prevent
-        the 'metric vs SAE' assembly nightmare.
-      label: Hardware Standardization
-      value: Ruthless 4-40 Policy
-    - description:
-        Layered mechanical DXFs over PCB layouts to catch a Compact Flash
-        collision week before metal cutting.
-      label: The Virtual Catch
-      value: DXF Exchange
+  - description: Mandated 'dead nuts' flatness specs for the chassis floor to ensure
+      conductive coupling with the 12V supply heat spreader.
+    label: The 'Dead Nuts' Flatness
+    value: Thermal Conduct
+  - description: Caught a fatal Compact Flash card collision 3 days before CES by
+      manually overlaying DXF records from the PCB designer.
+    label: The 'Titan Div' Overlay
+    value: Collision Check
+  - description: Blocked ventilation holes under the main PCB to maximize thermal
+      mass conduction, forcing air draft only near the PSU.
+    label: The Perforation War
+    value: Flow Logic
+  - description: Purged all metric hardware from the BOM after a mixed-screw prototype
+      disaster. Standardized on 4-40 UNC to save the assembly line.
+    label: The 4-40 Mandate
+    value: Standardization
+  - description: Emergency ECO to raise lower drive bay by exactly 8mm to clear a
+      power connector collision detected in Pro/E.
+    label: The 8mm Lift
+    value: Connector Collision
+  - description: Enforced 100% 4-40 screw standardization across 5 servers to prevent
+      the 'metric vs SAE' assembly nightmare.
+    label: Hardware Standardization
+    value: Ruthless 4-40 Policy
+  - description: Layered mechanical DXFs over PCB layouts to catch a Compact Flash
+      collision week before metal cutting.
+    label: The Virtual Catch
+    value: DXF Exchange
 notebook_url: https://notebooklm.google.com/notebook/5fb69a8b-1ce6-4861-be36-46429138a43d?authuser=1
 phase_stats:
   Design: 60
@@ -143,62 +141,39 @@ production: prototype
 productionScale: one_off
 slug: webtv-elmer
 tags:
-  - Thermal
-  - Process
-  - Crisis
-  - Yield
-  - Leadership
+- Thermal
+- Process
+- Crisis
+- Yield
+- Leadership
 teamSize: 1 (Solo Mandate) [4]
 theme: hyperspace
 tier: 1
 title: Elmer / Zeus (HomeNet)
 toolchain:
-  - Pro/ENGINEER (Solid Modeling)
-  - AutoCAD (DXF I/O Layouts)
-  - E-M Solutions (Sheet Metal/Plating)
-  - Sputnik Models (Machining/Finishing/Bezels)
-  - Keystone (Hardware)
-  - TACgraphics (Labels)
+- Pro/ENGINEER (Solid Modeling)
+- AutoCAD (DXF I/O Layouts)
+- E-M Solutions (Sheet Metal/Plating)
+- Sputnik Models (Machining/Finishing/Bezels)
+- Keystone (Hardware)
+- TACgraphics (Labels)
 tools:
-  - pro_engineer
-  - autocad
-transcript: ""
+- pro_engineer
+- autocad
+transcript: ''
 war_stories:
-  - description:
-      Mandated 'dead nuts' flatness specs for the chassis floor to ensure
-      conductive coupling with the 12V supply heat spreader.
-    label: The 'Dead Nuts' Flatness
-    value: Thermal Conduct
-  - description:
-      Caught a fatal Compact Flash card collision 3 days before CES by manually
-      overlaying DXF records from the PCB designer.
-    label: The 'Titan Div' Overlay
-    value: Collision Check
-  - description:
-      Blocked ventilation holes under the main PCB to maximize thermal mass
-      conduction, forcing air draft only near the PSU.
-    label: The Perforation War
-    value: Flow Logic
-  - description:
-      Purged all metric hardware from the BOM after a mixed-screw prototype
-      disaster. Standardized on 4-40 UNC to save the assembly line.
-    label: The 4-40 Mandate
-    value: Standardization
-  - description:
-      Emergency ECO to raise lower drive bay by exactly 8mm to clear a power
-      connector collision detected in Pro/E.
-    label: The 8mm Lift
-    value: Connector Collision
-  - description:
-      Enforced 100% 4-40 screw standardization across 5 servers to prevent
-      the 'metric vs SAE' assembly nightmare.
-    label: Hardware Standardization
-    value: Ruthless 4-40 Policy
-  - description:
-      Layered mechanical DXFs over PCB layouts to catch a Compact Flash collision
-      week before metal cutting.
-    label: The Virtual Catch
-    value: DXF Exchange
+- description: Removed perforation under heat spreader to maximize conductive mass,
+    rejecting the impossible flatness requirement [8], [11].
+  label: The Dead Nuts Flat Fallacy
+  value: Thermal Stabilization
+- description: Purged mixed metric/SAE hardware, standardizing to 4-40 UNC to prevent
+    assembly line stoppages [8], [6].
+  label: The Hardware Screw-Up
+  value: 100% Assembly Yield
+- description: Killed the ill-defined 'Bastard Box' concept to focus resources on
+    refining the Elmer/Zeus chassis for the hard deadline [12], [10].
+  label: The Bastard Box Pivot
+  value: Schedule Rescue
 ---
 
 ### Project Elmer / Zeus Forensic Report

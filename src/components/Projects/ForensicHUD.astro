@@ -1,6 +1,9 @@
 ---
 import { marked } from "marked";
 
+import SonicHeartbeat from "@/components/Audio/SonicHeartbeat";
+import ForensicSeismograph from "@/components/DataViz/ForensicSeismograph";
+
 interface Props {
 	metrics?: {
 		financial?: string;
@@ -8,10 +11,12 @@ interface Props {
 		governance?: string;
 	};
 	transcript?: string;
+	audioUrl?: string;
+	events?: any[];
 }
 
 console.log("ForensicHUD: Rendering...");
-const { metrics, transcript } = Astro.props;
+const { metrics, transcript, audioUrl, events } = Astro.props;
 let transcriptHtml = "";
 
 if (transcript) {
@@ -24,13 +29,27 @@ if (transcript) {
 ---
 
 {
-	(metrics || transcript) && (
+	(metrics || transcript || audioUrl || events) && (
 		<section class="border-border mt-16 border-t pt-12">
 			<div class="mb-8 flex items-center gap-3">
 				<div class="to-border h-px flex-1 bg-linear-to-r from-transparent" />
-				<h2 class="text-primary font-mono text-sm font-bold tracking-widest uppercase">
-					Forensic Intelligence
-				</h2>
+
+				{/* Audio Vector (Sonic Heartbeat) */}
+				<div class="flex items-center gap-4">
+					{audioUrl && <SonicHeartbeat client:load audioUrl={audioUrl} />}
+
+					<h2 class="text-primary font-mono text-sm font-bold tracking-widest uppercase">
+						Forensic Intelligence
+					</h2>
+
+					{/* Seismo Vector (Entropy Events) */}
+					{events && events.length > 0 && (
+						<div class="hidden md:block">
+							<ForensicSeismograph client:visible events={events} />
+						</div>
+					)}
+				</div>
+
 				<div class="to-border h-px flex-1 bg-linear-to-l from-transparent" />
 			</div>
 

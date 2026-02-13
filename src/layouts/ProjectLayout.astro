@@ -147,6 +147,8 @@ const t = useTranslations(currLocale);
 				<ForensicHUD
 					metrics={project.data.forensic_metrics}
 					transcript={project.data.transcript ?? undefined}
+					audioUrl={project.data.audio_url ?? undefined}
+					events={project.data.events ?? undefined}
 				/>
 			</div>
 		</div>

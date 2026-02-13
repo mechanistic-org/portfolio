@@ -278,6 +278,17 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
         # Prepare Updates
         changes = []
         
+        # 0. SEO Essentials (Critical for Social Sharing/AEO)
+        if "title" in data:
+            if post.metadata.get("title") != data["title"]:
+                 changes.append(f"  - Update 'title' (SEO)")
+                 post.metadata["title"] = data["title"]
+        
+        if "description" in data:
+            if post.metadata.get("description") != data["description"]:
+                 changes.append(f"  - Update 'description' (SEO)")
+                 post.metadata["description"] = data["description"]
+
         # 1. Forensic Metrics (Direct Injection)
         if "forensic_metrics" in data:
             fm = data["forensic_metrics"]
@@ -290,6 +301,32 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
                 if post.metadata["forensic_metrics"].get(key) != val:
                     changes.append(f"  - Update 'forensic_metrics.{key}'")
                     post.metadata["forensic_metrics"][key] = val
+
+        # 1.5 Forensic Context (BOM, Team, Cast)
+        # These were previously ignored "Dark Data"
+        if "bom" in data:
+            if post.metadata.get("bom") != data["bom"]:
+                 changes.append(f"  - Update 'bom' (Forensic Context)")
+                 post.metadata["bom"] = data["bom"]
+
+        if "teamSize" in data:
+            if post.metadata.get("teamSize") != data["teamSize"]:
+                 changes.append(f"  - Update 'teamSize' (Forensic Context)")
+                 post.metadata["teamSize"] = data["teamSize"]
+
+        if "cast" in data:
+            if post.metadata.get("cast") != data["cast"]:
+                 changes.append(f"  - Update 'cast' (Forensic Context)")
+                 post.metadata["cast"] = data["cast"]
+                 
+        if "transcript" in data:
+            # Check for empty transcript cleanup
+            if not data["transcript"] and "transcript" in post.metadata:
+                 changes.append(f"  - Cleared empty 'transcript'")
+                 post.metadata["transcript"] = ""
+            elif post.metadata.get("transcript") != data["transcript"]:
+                 changes.append(f"  - Update 'transcript' (Accessibility)")
+                 post.metadata["transcript"] = data["transcript"]
 
         # 2. War Stories (Direct Injection)
         if "war_stories" in data:
@@ -305,13 +342,13 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
                 changes.append(f"  - Update 'isomorphics' ({len(iso)} items)")
                 post.metadata["isomorphics"] = iso
 
-        # 4. Seismobolus (Direct Injection)
-        if "seismobolus" in data:
-            seismo = data["seismobolus"]
-            if post.metadata.get("seismobolus") != seismo:
-                changes.append(f"  - Update 'seismobolus' ({len(seismo)} events)")
-                post.metadata["seismobolus"] = seismo
-
+        # 4. Seismobolus (Legacy) & Consolidating to 'events' (Seismograph)
+        # The 'ForensicSeismograph' component reads 'events', not 'seismobolus'
+        if "events" in data:
+             if post.metadata.get("events") != data["events"]:
+                  changes.append(f"  - Update 'events' ({len(data['events'])} items) [Unblocked Seismograph]")
+                  post.metadata["events"] = data["events"]
+        
         # 5. Reports (Direct Injection to Metadata - NOT Body for now)
         if "reports" in data:
             reports = data["reports"]
@@ -377,6 +414,10 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
         # 6. Quotes (Legacy top-level injection check)
         if "quotes" in data:
              val = data["quotes"]
+             # Ensure metrics dict exists
+             if "metrics" not in post.metadata or post.metadata["metrics"] is None:
+                 post.metadata["metrics"] = {}
+
              if post.metadata["metrics"].get("quotes") != val:
                 changes.append(f"  - Update 'metrics.quotes' (Root Source)")
                 post.metadata["metrics"]["quotes"] = val

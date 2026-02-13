@@ -31,11 +31,11 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 		}
 
 		// extract skills for keywords
-		const keywords = projectFrontmatter.additionalSkills
-			? projectFrontmatter.additionalSkills.join(", ")
-			: projectFrontmatter.compentencies
-				? projectFrontmatter.compentencies.join(", ")
-				: "";
+		const keywords = projectFrontmatter.tags
+			? projectFrontmatter.tags.join(", ")
+			: projectFrontmatter.additionalSkills
+				? projectFrontmatter.additionalSkills.join(", ")
+				: "Forensic Engineering";
 
 		return `<script type="application/ld+json">
       {

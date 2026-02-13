@@ -198,6 +198,19 @@ const projectsCollection = defineCollection({
 				)
 				.optional(),
 
+			// Seismograph Events (Entropy Vector)
+			events: z
+				.array(
+					z.object({
+						date: z.string(),
+						score: z.number(),
+						snippet: z.string(),
+						source_ref: z.string().optional(),
+						type: z.string().optional(),
+					}),
+				)
+				.optional(),
+
 			// Theme Selector (Core Architecture)
 			theme: z.string().catch("hyperspace").optional(),
 			presentation_mode: z.string().optional(),

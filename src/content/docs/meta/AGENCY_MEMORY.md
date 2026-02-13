@@ -136,11 +136,11 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Forensic Hydration (Heavy Cylinder Cohort).**
+- **Active Task:** **Mining Session Context.** -> **Asset Verification (K-System 120).**
 - **Active Roadmap:** [`src/content/docs/project/ROADMAP_ACTIVE.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/ROADMAP_ACTIVE.md) (The Horizon)
 - **Mining Log:** [`src/content/docs/project/MINING_LOG.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/MINING_LOG.md) (The Re-Hydration Tracker)
 - **Project Index:** [`src/content/prompts/PROJECT_INDEX.md`](file:///d:/GitHub/eriknorris/src/content/prompts/PROJECT_INDEX.md) (The Registry)
-- **Status:** C24 Hydrated (Forensic V2 + Seismograph Sidecar). D-Control Pending.
+- **Status:** **Pipeline Unblocked.** `c24`, `d-control`, `sc48` fully hydrated with Audio/Seismo/BOM.
 - **Strategy:** **"Hybrid Batch"** -> Retrofit 5 Projects (Isomorphics Only) + Rebuild 8 Projects (Full Flow).
 - **Critical Learning:** **"The Isomorphic Paradox"** - You cannot generate structural rhymes from a single project. You need a **"Master Notebook"** (Level 2) containing all JSONs to find the patterns.
 - **Critical Learning:** **"The Scroll Depth Trust"** - 2026 SEO (E-E-A-T) demands "Firsthand Experience." The "Isomorphic Card" is our primary Trust Signal.
@@ -155,7 +155,10 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **Critical Learning:** **"The Worker Constraint"** - Cloudflare Workers do NOT have Node.js APIs (`path`, `fs`). Do not use `path.join` in Production code blocks. Use direct string manipulation for R2 keys.
 - **Critical Learning:** **"The Index Authority"** - `PROJECT_INDEX.md` is NOT a manual file. It is a build artifact of `hydrate_content.py`. Editing it by hand is a "Ghost Action" that will be overwritten.
 - **Critical Learning:** **"The Sidecar Verification"** - `_entropy.json` is the correct home for Seismograph events. `hydrate_content.py` must run with `--slug` to avoid corpus drift.
-- **Action Item:** Proceed to D-Control (New Session).
+- **Critical Learning:** **"The Ternary Trap"** - TypeScript Ternary operators in `jsonLD.ts` are fragile. Verify syntax (`? :`) carefully when adding new conditions. One missing char breaks the build.
+- **Critical Learning:** **"The Legacy Body Trap"** - `hydrate_content.py` preserves existing body content. If a project has legacy "marketing fluff", it blocks the "Red Gold" injection. Manual intervention is required to replace it with the Forensic Narrative.
+- **Critical Learning:** **"The Asset Ghost"** - `ksystem-120` is throwing 404s for specific assets (`DSC05387.jpg`). This indicates a sync gap between `R2_STAGING` and the codebase references.
+- **Action Item:** Proceed to Visual Verification (Browser).
 
 * **Key Decision (Assets):** **"The White Logo Standard"** - `logo.png` is the canonical White Logo. `EN_logo_white_1024.png` does not exist in the current R2 stash.
 * **Key Decision (UX):** **"The Local Preview Parity"** - Local Preview must match Production behavior BUT must serve assets from disk if Cloudflare context is missing (`src/pages/assets/[...path].ts` fallback).
@@ -198,6 +201,8 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Physics):** "Goldilocks" settings are `vy: -50`, `friction: 0.05`. Do not increase friction without vertically scaling velocity.
 * **Key Decision (Viz-Deprecated):** `ArchiveSankey`, `LivingGantt`, and `SkillsGraph.tsx` have been DEPRECATED and removed/disabled to "kill the noise".
 * **Key Decision (Data):** **"The Event Horizon"** - `multiverse.json` and `skills.json` were PURGED (2026-01-08). The architecture is now "Pure Hyperspace" (Dynamic Astro Collections only).
+* **Key Decision (Cloud):** **"The Drive Limit"** - Evaluated Google Drive as a Narrative CMS (Feb 2026). **REJECTED.** Narrative text must remain Local Markdown. Drive/Sheets is a potential _future_ pattern for Metadata (Bulk Edit) but is currently **STATUS QUO** (Local).
+* **Key Decision (Brand):** **"The Semantic Pause"** - Evaluated renaming the codebase to "ENgine" (Feb 2026). **REJECTED.** While the "Product Reality ENgine" concept is approved, renaming 50+ files from "Hyperspace" to "Console" is "Productizing" (High Effort) vs "Portfoliodoc" (Low Effort). We adopt the **"UI Rename"** strategy only.
 
 * `src/content/prompts/BOLUS_READY.txt`: **The Extraction Standard (JSON).** (How we mine data).
 * `src/content/prompts/REPORT_READY.txt`: **The Report Standard (Markdown).** (The Narrative).

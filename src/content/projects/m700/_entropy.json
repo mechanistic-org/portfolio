@@ -1,0 +1,240 @@
+[
+  {
+    "date": "2009-02-13",
+    "score": 8,
+    "snippet": "First 50 HDD assemblies built with spring 501-1127-00 installed incorrectly.",
+    "type": "Commit",
+    "source_ref": "Kaleidescape_Volume_004.md"
+  },
+  {
+    "date": "2009-03-19",
+    "score": 6,
+    "snippet": "Sanmina reports DVD/Fan brackets do not sit flat on chassis.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_003.md"
+  },
+  {
+    "date": "2011-01-20",
+    "score": 7,
+    "snippet": "Carousel T1 results: Massive flash from intentional over-pressure to fill tool.",
+    "type": "Photo",
+    "source_ref": "03_carousel.pdf"
+  },
+  {
+    "date": "2011-03-17",
+    "score": 5,
+    "snippet": "Short shot detected on carousel due to air trap.",
+    "type": "Photo",
+    "source_ref": "03_carousel.pdf"
+  },
+  {
+    "date": "2012-01-23",
+    "score": 6,
+    "snippet": "Roller slot contamination observed on SN 885. Rework instructions issued.",
+    "type": "Document",
+    "source_ref": "04_QC_etc.pdf"
+  },
+  {
+    "date": "2014-01-09",
+    "score": 7,
+    "snippet": "SN 445 fails run-in. Disc sticking out. Roller testing initiated.",
+    "type": "Document",
+    "source_ref": "03_roller-testing.pdf"
+  },
+  {
+    "date": "2014-01-14",
+    "score": 5,
+    "snippet": "Defective front slot pinch roller transferred to Engineering for autopsy.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-02-24",
+    "score": 5,
+    "snippet": "Testing SN 3150 with SN 804 rollers. Fibers found on rollers.",
+    "type": "Document",
+    "source_ref": "03_roller-testing.pdf"
+  },
+  {
+    "date": "2014-02-27",
+    "score": 7,
+    "snippet": "Root Cause: Front inner guide confirmed scratching discs. Video evidence.",
+    "type": "Video",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-03-05",
+    "score": 6,
+    "snippet": "Escalation 126532: M700 continually jamming. Customer requesting replacement.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-03-06",
+    "score": 4,
+    "snippet": "Logistics: 7 RMA units arrived in Sunnyvale for forensic teardown.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-03-07",
+    "score": 8,
+    "snippet": "Escalation 129483: Roller spring visibly deformed/angled high in field unit.",
+    "type": "Photo",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-03-10",
+    "score": 8,
+    "snippet": "Sensor board failure traced to bad solder joint at R22 (Sanmina process).",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-03-11",
+    "score": 6,
+    "snippet": "SN 2820 fails run-in. ODD possibly damaged by double-disc insert.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-03-12",
+    "score": 5,
+    "snippet": "Datalogger analysis: Units subjected to 41G shock during handling.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-03-12",
+    "score": 9,
+    "snippet": "Missing E-clip identified as root cause for field return SN 0600000030287.",
+    "type": "Photo",
+    "source_ref": "Kaleidescape_Volume_021.md"
+  },
+  {
+    "date": "2014-03-13",
+    "score": 4,
+    "snippet": "Case 129750: Dealer inserted 6 discs backwards. System eventually rejected.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-03-18",
+    "score": 3,
+    "snippet": "Service testing Region 2 units with Region 2 discs to reduce false NTF.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-03-19",
+    "score": 6,
+    "snippet": "Escalation: Disc already present in drive. Vault failing errors 78 & 97.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-03-24",
+    "score": 6,
+    "snippet": "Run-in failure mode: Rollers pushing disc too far out front slot.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_021.md"
+  },
+  {
+    "date": "2014-03-25",
+    "score": 8,
+    "snippet": "Hardware Meeting: Pivot to stronger springs, solid motor mounts, extended gear.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-03-26",
+    "score": 5,
+    "snippet": "Quote requested for prototype springs 330-1050-02/03/04.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_023.md"
+  },
+  {
+    "date": "2014-04-03",
+    "score": 7,
+    "snippet": "Sunnyvale stock audit reveals warped carousels. Packaging suspect.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_020.md"
+  },
+  {
+    "date": "2014-04-07",
+    "score": 6,
+    "snippet": "Diagnosis confirmed: Dirty rollers cause friction drop and disc slippage.",
+    "type": "Photo",
+    "source_ref": "03_pinch-roller.pdf"
+  },
+  {
+    "date": "2014-04-08",
+    "score": 5,
+    "snippet": "Vendor RubberTek contacted regarding poor dirt resistance of roller material.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-04-10",
+    "score": 4,
+    "snippet": "RubberTek responds: 'Inevitable for most rubber... to get dirt'.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-04-17",
+    "score": 7,
+    "snippet": "Double strength springs and modified inner guide pass validation.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-05-08",
+    "score": 5,
+    "snippet": "JIRA ESCALATION-588 Closed. Jamming issue tracked to dispersion.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md"
+  },
+  {
+    "date": "2014-06-25",
+    "score": 5,
+    "snippet": "Proposal to ship vaults without rack ears to prevent foam cutting.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_019.md"
+  },
+  {
+    "date": "2014-07-07",
+    "score": 6,
+    "snippet": "RMA 48932: Confirmed scratching on front disc guide.",
+    "type": "Photo",
+    "source_ref": "Kaleidescape_Volume_019.md"
+  },
+  {
+    "date": "2014-07-16",
+    "score": 6,
+    "snippet": "Outer disc guide identified as sole point of scratching due to left shift.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_019.md"
+  },
+  {
+    "date": "2014-09-05",
+    "score": 6,
+    "snippet": "Tinnerman clips found damaged by vendor (Demsa). Front panel retention compromised.",
+    "type": "Photo",
+    "source_ref": "Kaleidescape_Volume_019.md"
+  },
+  {
+    "date": "2014-09-23",
+    "score": 7,
+    "snippet": "Severe quality issue: 502-1192-00 rejected at Sanmina for scratches/dings.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_019.md"
+  },
+  {
+    "date": "2014-09-30",
+    "score": 8,
+    "snippet": "Stronger spring changes rolled into production to fix stuck discs.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_019.md"
+  }
+]
