@@ -1,170 +1,167 @@
-[
-	{
-		"date": "2016-07-30",
-		"score": 2,
-		"snippet": "First Version (v01) of Elvis BOM released.",
-		"type": "Document",
-		"source_ref": "BOM_CoGs_etc.pdf (Source 77)"
-	},
-	{
-		"date": "2016-08-21",
-		"score": 5,
-		"snippet": "P1 System Level Assembly completed for Elvis.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 279)"
-	},
-	{
-		"date": "2016-10-31",
-		"score": 8,
-		"snippet": "'3Tabs concept' introduced to solve Elvis/Bazooka wiggle issue.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 307)"
-	},
-	{
-		"date": "2016-11-22",
-		"score": 2,
-		"snippet": "Added LCR Part Numbers for Elvis to BOM.",
-		"type": "Document",
-		"source_ref": "BOM_CoGs_etc.pdf (Source 77)"
-	},
-	{
-		"date": "2016-12-06",
-		"score": 4,
-		"snippet": "On-site visit to mold shop to define cosmetic limit/golden samples.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 308)"
-	},
-	{
-		"date": "2017-01-09",
-		"score": 3,
-		"snippet": "Rejected 'MT11010' texture on Elvis cap; maintained custom finish.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 308)"
-	},
-	{
-		"date": "2017-01-18",
-		"score": 8,
-		"snippet": "Elvis fails Hardwood Drop Test: 'Front housing coating peel off'.",
-		"type": "Document",
-		"source_ref": "DVT_Reliability_Test_Reports.pdf (Source 92)"
-	},
-	{
-		"date": "2017-01-26",
-		"score": 5,
-		"snippet": "Decided Elvis finish is 10% gloss for EVT2.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 311)"
-	},
-	{
-		"date": "2017-02-07",
-		"score": 5,
-		"snippet": "Verified bonded coating on main switch for 20K cycles.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 320)"
-	},
-	{
-		"date": "2017-02-23",
-		"score": 6,
-		"snippet": "Proposal to remove SN notch to fix label lift (Defect 710-00011).",
-		"type": "Document",
-		"source_ref": "SAT-ELV_misc.pdf (Source 363)"
-	},
-	{
-		"date": "2017-03-02",
-		"score": 5,
-		"snippet": "Locoroll CMF V16 released; Elvis defined as Satin VDI 15.",
-		"type": "Document",
-		"source_ref": "Locoroll CMF V16_2017_3_2 .pdf (Source 327)"
-	},
-	{
-		"date": "2017-03-07",
-		"score": 6,
-		"snippet": "Agreed to 'NON-polish' on dimmer key to remove UV coating.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 315)"
-	},
-	{
-		"date": "2017-03-11",
-		"score": 10,
-		"snippet": "EVT2 Thermal Stress Test: 7/7 Elvis caps float/fail (Plastic Cap Floating).",
-		"type": "Document",
-		"source_ref": "EVT2_Reliability_Test_Reports.pdf (Source 205)"
-	},
-	{
-		"date": "2017-04-06",
-		"score": 4,
-		"snippet": "Approved preparation of CX7240U White resin for Front Cover.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 298)"
-	},
-	{
-		"date": "2017-04-12",
-		"score": 10,
-		"snippet": "EVT2 Impact Test: 7/7 units 'stuck in Bazooka' (Retention Failure).",
-		"type": "Document",
-		"source_ref": "EVT2_Reliability_Test_Reports.pdf (Source 206)"
-	},
-	{
-		"date": "2017-04-21",
-		"score": 7,
-		"snippet": "ME Design Lock Down milestone.",
-		"type": "Document",
-		"source_ref": "EVT2_Reliability_Test.pdf (Source 154)"
-	},
-	{
-		"date": "2017-04-24",
-		"score": 9,
-		"snippet": "Glued samples passed Crush and Drop tests; Liquid glue validated.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 297)"
-	},
-	{
-		"date": "2017-05-02",
-		"score": 6,
-		"snippet": "Studying grease and Dry Lubricant to solve 'Cheep sound'.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 299)"
-	},
-	{
-		"date": "2017-05-03",
-		"score": 4,
-		"snippet": "Updated CMF for perceived quality (SAT-282); changing textures.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 317)"
-	},
-	{
-		"date": "2017-05-05",
-		"score": 7,
-		"snippet": "Key Life Test passed 109k cycles with grease/lube fix.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 299)"
-	},
-	{
-		"date": "2017-05-05",
-		"score": 5,
-		"snippet": "Tooling modification start for Front Cap and Dimmer Key.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 277)"
-	},
-	{
-		"date": "2017-06-08",
-		"score": 4,
-		"snippet": "Elvis DVT First Article Inspection (FAI) for 8 pcs.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 278)"
-	},
-	{
-		"date": "2017-06-13",
-		"score": 3,
-		"snippet": "Working meeting: $79 MSRP Elvis, Gen 2 gross margin target $49/$59.",
-		"type": "Document",
-		"source_ref": "2017_06_13_working_meetings.pdf (Source 1)"
-	},
-	{
-		"date": "2017-06-17",
-		"score": 6,
-		"snippet": "Elvis DVT Volume Build (1140 units) start.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf (Source 278)"
-	}
-]
+{
+	"_schema_version": "v1.0-seismograph",
+	"id": "extension-switches",
+	"events": [
+		{
+			"date": "2016-07-30",
+			"score": 1,
+			"snippet": "BOM v01 released. Initial baseline for Sativa/Elvis.",
+			"type": "Document",
+			"source_ref": "BOM_Sativa_Elvis_LCR_1111_EVT1_11_23_FIHupdate.pdf [1]"
+		},
+		{
+			"date": "2016-11-17",
+			"score": 2,
+			"snippet": "Added Locoroll PNs for Sativa, Elvis & Waldo (v02).",
+			"type": "Document",
+			"source_ref": "BOM_Sativa_Elvis_LCR_1111_EVT1_11_23_FIHupdate.pdf [1]"
+		},
+		{
+			"date": "2016-12-06",
+			"score": 3,
+			"snippet": "Customer on-site to define cosmetic limit/golden samples.",
+			"type": "Record",
+			"source_ref": "Locorol action review_05082017 ver2.pdf [2]"
+		},
+		{
+			"date": "2017-01-09",
+			"score": 4,
+			"snippet": "Molder proposed MT11010 texture for Elvis cap. Rejected by Locoroll.",
+			"type": "Record",
+			"source_ref": "Locorol action review_05082017 ver2.pdf [2]"
+		},
+		{
+			"date": "2017-01-12",
+			"score": 7,
+			"snippet": "EVT1 Reliability Test: Elvis break down reported during testing.",
+			"type": "Document",
+			"source_ref": "EVT1_Reliability_Test_Reports.pdf [3]"
+		},
+		{
+			"date": "2017-01-13",
+			"score": 2,
+			"snippet": "Sample Allocations: 20 Sativa/Elvis units to ME Design.",
+			"type": "Document",
+			"source_ref": "Colorado Sample Allocations 20170113_2.pdf [4]"
+		},
+		{
+			"date": "2017-01-26",
+			"score": 6,
+			"snippet": "Plastic resin lead-time crisis. EVT2 partial build authorized with alternative resin.",
+			"type": "Record",
+			"source_ref": "Locorol action review_05082017 ver2.pdf [5]"
+		},
+		{
+			"date": "2017-02-10",
+			"score": 5,
+			"snippet": "Defect 710-00011: Main label edge lift Proposal #3 (Modify outline).",
+			"type": "Document",
+			"source_ref": "710-00011_edge-lift-proposal_2017_02_10.pdf [6]"
+		},
+		{
+			"date": "2017-02-14",
+			"score": 6,
+			"snippet": "Visual confirmation of 'Bottom Inner Edges/Corners Lift' defect.",
+			"type": "Photo",
+			"source_ref": "710-00011_edge-lift-proposal_2017_02_14_locoroll.pdf [7]"
+		},
+		{
+			"date": "2017-02-20",
+			"score": 4,
+			"snippet": "Issue: Logo on Elvis cap too soft/pillowed from UV coating.",
+			"type": "Record",
+			"source_ref": "Locorol action review_05082017 ver2.pdf [8]"
+		},
+		{
+			"date": "2017-02-23",
+			"score": 3,
+			"snippet": "ECN generated for label edge lift proposal.",
+			"type": "Document",
+			"source_ref": "710-00011_edge-lift-proposal_2017_02_23_ECN.pdf [9]"
+		},
+		{
+			"date": "2017-03-28",
+			"score": 8,
+			"snippet": "Crush test executed. Improved adhesive failed to withstand force.",
+			"type": "Document",
+			"source_ref": "JIRA_SAT-149_comments_2017_04_XX.pdf [10]"
+		},
+		{
+			"date": "2017-04-12",
+			"score": 9,
+			"snippet": "EVT2 HW Test Report: 'Cap and front housing gap too big' (7/7 Fail).",
+			"type": "Document",
+			"source_ref": "EVT2_Reliability_Test_Reports.pdf [11]"
+		},
+		{
+			"date": "2017-04-13",
+			"score": 5,
+			"snippet": "Tolerance analysis: Waldo Cover-Chassis perimeter fit check.",
+			"type": "Document",
+			"source_ref": "Waldo_Cover-Chassis_Perimeter.pdf [12]"
+		},
+		{
+			"date": "2017-04-18",
+			"score": 8,
+			"snippet": "Reliability Status: Drop Test FAIL (Sound when shaken, coating peel).",
+			"type": "Document",
+			"source_ref": "LCR Reliability_ME_HW Test Status_20170418.pdf [13]"
+		},
+		{
+			"date": "2017-04-20",
+			"score": 7,
+			"snippet": "CAD geometry error identified: 0.1mm mismatch in adhesive pocket.",
+			"type": "Memory",
+			"source_ref": "JIRA_SAT-149_comments_2017_04_XX.pdf [10]"
+		},
+		{
+			"date": "2017-04-24",
+			"score": 8,
+			"snippet": "Glued samples passed Pre-test (Crush, Drop, Env). Migration approved.",
+			"type": "Record",
+			"source_ref": "Locorol action review_05082017 ver2.pdf [14]"
+		},
+		{
+			"date": "2017-04-27",
+			"score": 7,
+			"snippet": "Key Life Test FAIL: Key jammed (2/11 units) and force out of spec.",
+			"type": "Document",
+			"source_ref": "LCR Reliability_ME_HW Test Status_20170427 (1).pdf [15]"
+		},
+		{
+			"date": "2017-05-02",
+			"score": 2,
+			"snippet": "Color chip tracker update: 13 unfinished chips identified.",
+			"type": "Document",
+			"source_ref": "color_chip_tracker_2017_05_02.pdf [16]"
+		},
+		{
+			"date": "2017-05-03",
+			"score": 5,
+			"snippet": "'Cheep sound' issue resolved by studying grease types + dry lubricant.",
+			"type": "Record",
+			"source_ref": "Locorol action review_05082017 ver2.pdf [17]"
+		},
+		{
+			"date": "2017-05-05",
+			"score": 9,
+			"snippet": "Root Cause Confirmed: Bezel depth 0.3mm vs 0.2mm design.",
+			"type": "Record",
+			"source_ref": "Locorol action review_05082017 ver2.pdf [14]"
+		},
+		{
+			"date": "2017-05-08",
+			"score": 6,
+			"snippet": "DVT Build Schedule: ME tooling modification start.",
+			"type": "Record",
+			"source_ref": "Locorol action review_05082017 ver2.pdf [18]"
+		},
+		{
+			"date": "2017-05-13",
+			"score": 4,
+			"snippet": "Drawing A03 Release: Adjusted tolerances for gluing process.",
+			"type": "Document",
+			"source_ref": "NOON_misc_1.pdf [19]"
+		}
+	]
+}

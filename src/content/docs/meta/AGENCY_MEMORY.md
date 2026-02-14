@@ -75,6 +75,26 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
   - **Complexity Vector:** 5-phase growth (450 -> 2500 parts).
 - **Actionable:** Fully Hydrated (`json` + `md` + `_entropy.json`).
 
+### 6. **Project Bazooka (Norris)**
+
+- **Role:** Forensic Gold Standard (Scars/Complexity)
+- **Status:** **PARTIAL** (2026-02-13)
+- **Contents:**
+  - **Scars:** 5 Critical Interventions (The "3Tabs" Fix).
+  - **Complexity Visualizer:** 109 Drawings, 19 PCBs.
+  - **Team Pip Logic:** Auto-calculated "INT 5".
+- **Actionable:** `bazooka.json` (Source) -> `index.mdx` (Target). Missing `_entropy.json`.
+
+### 7. **Project 320-Slot (Carousel)**
+
+- **Role:** Deep Dive / Case Study (M700 Child)
+- **Status:** **HYDRATED** (2026-02-13)
+- **Contents:**
+  - **Narrative:** "The Potato Chip Pathology" (Warping).
+  - **Complexity:** V2.1 Vector (Part Count, Tool Chain).
+  - **Entropy:** 30+ events (Sidecar).
+- **Actionable:** Linked to `m700`. Sidecar enforced.
+
 ### 2. **Project Dreamjob (Visual Taxonomy)**
 
 - **Role:** Theoretical Manifesto
@@ -136,9 +156,9 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Mining Session Context.** -> **Asset Verification (K-System 120).**
+- **Active Task:** **Mining Session Context** -> **Refining 320-Slot Visuals**
 - **Active Roadmap:** [`src/content/docs/project/ROADMAP_ACTIVE.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/ROADMAP_ACTIVE.md) (The Horizon)
-- **Mining Log:** [`src/content/docs/project/MINING_LOG.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/MINING_LOG.md) (The Re-Hydration Tracker)
+- **Mining Log:** [`src/content/docs/audits/MINING_LOG_2026_02_13.md`](file:///d:/GitHub/eriknorris/src/content/docs/audits/MINING_LOG_2026_02_13.md) (The Re-Hydration Tracker)
 - **Project Index:** [`src/content/prompts/PROJECT_INDEX.md`](file:///d:/GitHub/eriknorris/src/content/prompts/PROJECT_INDEX.md) (The Registry)
 - **Status:** **Pipeline Unblocked.** `c24`, `d-control`, `sc48` fully hydrated with Audio/Seismo/BOM.
 - **Strategy:** **"Hybrid Batch"** -> Retrofit 5 Projects (Isomorphics Only) + Rebuild 8 Projects (Full Flow).

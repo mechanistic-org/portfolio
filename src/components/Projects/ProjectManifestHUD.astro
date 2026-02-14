@@ -3,6 +3,7 @@ import { getMultiverseData } from "@/utils/getMultiverseData";
 import { Icon } from "astro-icon/components";
 import SonicHeartbeat from "@components/Audio/SonicHeartbeat";
 import TeamPipChart from "@components/DataViz/TeamPipChart";
+import ComplexityViz from "@components/DataViz/ComplexityViz.astro";
 import ForensicSeismograph from "@components/DataViz/ForensicSeismograph";
 import ForensicTooltip from "@components/DLS/ForensicTooltip.astro";
 import TeamDrawer from "@components/Scrolly/TeamDrawer";
@@ -264,9 +265,14 @@ if (!displayDuration && data.date) {
 							const extMatch = teamStr.match(/EXT\s*(\d+)/i);
 							const coreMatch = teamStr.match(/Core\s*(\d+)/i);
 
-							const intCount = intMatch ? parseInt(intMatch[1]) : 0;
-							const extCount = extMatch ? parseInt(extMatch[1]) : 0;
-							const coreCount = coreMatch ? parseInt(coreMatch[1]) : 0;
+							let intCount = intMatch ? parseInt(intMatch[1]) : 0;
+							let extCount = extMatch ? parseInt(extMatch[1]) : 0;
+							let coreCount = coreMatch ? parseInt(coreMatch[1]) : 0;
+
+							// Auto-Calculate from Cast if missing specific string format
+							if (intCount === 0 && extCount === 0 && data.cast && data.cast.length > 0) {
+								intCount = data.cast.length;
+							}
 
 							if (intCount > 0 || extCount > 0) {
 								return (
@@ -290,6 +296,13 @@ if (!displayDuration && data.date) {
 							}
 						})()}
 					</div>
+
+					{/* 0.5 COMPLEXITY VECTOR (New V2.1) */}
+					{data.complexity_vector && (
+						<div class="col-span-1 border-r border-white/10 px-4 py-2">
+							<ComplexityViz data={data.complexity_vector} />
+						</div>
+					)}
 
 					{/* 1. BOM / COGS */}
 					{metrics.cogs ? (
@@ -420,7 +433,7 @@ if (!displayDuration && data.date) {
 	<TeamDrawer
 		client:only="react"
 		team={data.cast}
-		warStories={data.metrics?.war_stories || data.war_stories}
+		warStories={data.scars || data.metrics?.war_stories || data.war_stories}
 		title={data.title}
 	/>
 </UniversalHUD>

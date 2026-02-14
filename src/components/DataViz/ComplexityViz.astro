@@ -1,0 +1,61 @@
+---
+interface Props {
+	data: any;
+}
+
+const { data } = Astro.props;
+---
+
+<div class="flex flex-col justify-center gap-1.5">
+	<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Complexity</div>
+	<div class="grid grid-cols-1 gap-x-4 gap-y-0.5">
+		{
+			Array.isArray(data) ? (
+				data.map((item) => (
+					<div class="group flex items-center justify-between gap-3 font-mono text-[10px] leading-none">
+						<span class="text-neutral-600 transition-colors group-hover:text-neutral-400">
+							{item.label}
+						</span>
+						<span class="font-bold text-white transition-colors group-hover:text-emerald-400">
+							{item.value}
+						</span>
+					</div>
+				))
+			) : (
+				/* V2.1 Complexity Vector Handling */
+				<>
+					{data.part_count_growth && data.part_count_growth.length > 0 && (
+						<div class="group flex items-center justify-between gap-3 font-mono text-[10px] leading-none">
+							<span class="text-neutral-600 transition-colors group-hover:text-neutral-400">
+								Part Count
+							</span>
+							<span class="font-bold text-white transition-colors group-hover:text-emerald-400">
+								{data.part_count_growth[data.part_count_growth.length - 1].count}
+							</span>
+						</div>
+					)}
+					{data.process_density && data.process_density.length > 0 && (
+						<div class="group flex items-center justify-between gap-3 font-mono text-[10px] leading-none">
+							<span class="text-neutral-600 transition-colors group-hover:text-neutral-400">
+								Proc Density
+							</span>
+							<span class="font-bold text-white transition-colors group-hover:text-emerald-400">
+								{Math.max(...data.process_density.map((p: any) => p.complexity_score))}
+							</span>
+						</div>
+					)}
+					{data.tooling_chain && (
+						<div class="group flex items-center justify-between gap-3 font-mono text-[10px] leading-none">
+							<span class="text-neutral-600 transition-colors group-hover:text-neutral-400">
+								Tool Chain
+							</span>
+							<span class="font-bold text-white transition-colors group-hover:text-emerald-400">
+								{data.tooling_chain.length} Nodes
+							</span>
+						</div>
+					)}
+				</>
+			)
+		}
+	</div>
+</div>

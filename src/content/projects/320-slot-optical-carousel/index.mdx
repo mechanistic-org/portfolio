@@ -1,0 +1,182 @@
+---
+slug: 320-slot-optical-carousel
+title: 320-Slot Carousel
+duration: 2011-2014
+employer: kaleidescape
+client: []
+industry: consumer_electronics
+category: module_subsystem
+production: production
+productionScale: series
+tier: 2
+hxo_ready: true
+hydration_status: partial
+presentation_mode: deep_dive
+metrics:
+  financial:
+    toolingBudget: 2500
+    toolingActual: 2500
+forensic_metrics:
+  financial: "$2500 tooling mod investment (Ribs & Rads)"
+  process: "7-Stage Tooling Iteration (T1-T7)"
+  governance: "Weekly Pulse / T-Shot Inspection Reports"
+forensic_summary:
+  trigger: "T1 'Massive Flash' Crisis (2011) & 'Tight Slot' Field Failures (2014)"
+  intervention: "Redesigned cooling (15C/25C), 'Ribs & Rads' tooling mods, and high-force spring compensation"
+  result: "Stabilized yield despite 1.00mm-1.08mm rib variance and warpage"
+scars:
+  - label: "The Tight Slot War"
+    value: "200% Spring Force"
+    description: "Overpowered friction from warped slots (1.37mm vs 1.5mm) by doubling roller spring pressure and hard-mounting drive shafts to eliminate deflection."
+  - label: "The Oven Test"
+    value: "T1-T7 Iteration"
+    description: "Battled thermal shrinkage where parts were 385.90mm vs 386.65mm spec; fixed via cycle time increases and cooling re-architecture."
+isomorphics:
+  - label: "Friction"
+    hardware_point: "Variable slot width (1.00mm-1.08mm) causing load failures"
+    software_point: "VaultManager 'Shimmy' logic to break stiction"
+    principle: "Mechanical compliance must exceed manufacturing variance"
+complexity_vector:
+  part_count_growth:
+    - phase: "T1 Trial (Mold Bring-up)"
+      count: 1
+      date: "2011-01"
+    - phase: "T4 (Process Stabilization)"
+      count: 1
+      date: "2011-03"
+    - phase: "MP (Mass Production)"
+      count: 1
+      date: "2011-04"
+    - phase: "Yield Remediation (Hard Mounts)"
+      count: 4
+      date: "2014-09"
+    - phase: "Spring Force Redesign"
+      count: 3
+      date: "2014-10"
+  process_density:
+    - part_name: "Carousel Chassis (502-1164-00)"
+      material: "PA-757 ABS"
+      steps:
+        - "Injection Molding (High Pressure)"
+        - "Differential Cooling (15°C Outer / 25°C Core)"
+        - "Texture (MT-11020)"
+        - "Polishing (Cavity Side)"
+        - "Metrology Inspection (Rib Thickness)"
+      complexity_score: 9
+    - part_name: "Pinch Roller Assembly"
+      material: "Mixed"
+      steps:
+        - "Shaft Machining"
+        - "Spring Winding (200% Force Increase)"
+        - "Hard Mount Spacer Installation"
+        - "Grease Application"
+        - "Alignment Calibration"
+      complexity_score: 7
+  tooling_chain:
+    - tool_name: "Carousel Main Mold"
+      type: "Hard Tooling (Steel)"
+      vendor: "YungChing"
+      lead_time_weeks: 12
+      cost_impact: "$2,500 (Ribs & Rads Mod)"
+    - tool_name: "Cooling Fixture"
+      type: "Process Tooling"
+      vendor: "YungChing"
+      lead_time_weeks: 1
+      cost_impact: "Low"
+    - tool_name: "Roller Spring"
+      type: "Soft Tooling"
+      vendor: "McMaster/Custom"
+      lead_time_weeks: 2
+      cost_impact: "Low"
+  supply_chain_nodes:
+    - location: "Taipei, Taiwan"
+      role: "Injection Molding"
+      vendor: "YungChing"
+    - location: "Taipei, Taiwan"
+      role: "Rubber/Silicone"
+      vendor: "Kingley Rubber"
+    - location: "Guadalajara, Mexico"
+      role: "FATP / QA Inspection"
+      vendor: "Sanmina"
+toolchain:
+  - "Creo (CAD)"
+  - "Moldflow"
+  - "YungChing (Molder)"
+  - "Sanmina (CM)"
+bom:
+  - label: "Carousel"
+    value: "PG-22 & PG-33 / HIPS + ABS"
+  - label: "Pinch Roller Assembly"
+    value: "Custom Spring / Hard Mount Spacers"
+teamSize: "1 (The Architect)"
+cast:
+  - name: "Erik Norris"
+    role: "Lead Mechanical / The Architect"
+    org: "Kaleidescape"
+  - name: "Weddy Wang"
+    role: "Vendor Lead"
+    org: "Steman/YungChing"
+  - name: "Michael Clader"
+    role: "Dir. MFG Engineering"
+    org: "Kaleidescape"
+timeline:
+  start: "2011-01-20"
+  end: "2014-10-09"
+links:
+  - name: Parent Project
+    url: /projects/m700
+tags:
+  - Thermal
+  - Mechanism
+  - Yield
+  - Crisis
+  - Process
+  - Materials
+---
+
+# 320-Slot Optical Carousel Forensic Report
+
+## I. PROJECT SUMMARY
+
+- **Role:** Lead Mechanical Engineer ("The Architect")
+- **Mandate:** Engineer a high-density, 320-slot optical storage mechanism capable of precision robotic loading within a consumer appliance footprint, overcoming the inherent thermal instability of large-diameter injection molding.
+- **Core Achievement:** Stabilized yield for a 386mm diameter complex part, effectively managing thermal shrinkage and warpage to secure a $2,500 tooling recovery and long-term field reliability.
+
+## II. THE ANATOMY OF FAILURE (Heuristic Analysis)
+
+_Discovery Heuristics applied to T-Shot Logs and Field Failure Data._
+
+### 1. Thermal Crisis (The Molding Struggle)
+
+- **The Trigger (Crisis):** The T1 shots (Jan 2011) were a catastrophic failure. The molder used "intentional over-pressure" to fill the tool, resulting in "massive flash" and broken ribs stuck in the cavity. Materials (PG-22 & PG-33) proved brittle, and parts were significantly undersized due to thermal shrinkage.
+- **The Intervention (Fix):** I initiated the "Ribs & Rads" modification plan ($2500 investment / 1 week). We added a 3rd rib, increased rib thickness to 1.5mm, and radically reconfigured cooling targets (15°C outer ring / 25°C core) to force dimensional compliance.
+- **The Result (Impact):** By T4, the part was filling consistently. While dimensions remained slightly undersized (385.90mm actual vs 386.65mm spec), the structural integrity stabilized, allowing us to move to texture and polish.
+
+### 2. Quality Crisis (The "Tight Slot" War)
+
+- **The Trigger (Crisis):** In 2014, field units began failing run-in tests with "un-insertable" discs or discs being "lost" out the front rollers. Forensic metrology identified a "tight slot" arc (Slots 200-280) where rib thickness had drifted to 1.00mm-1.08mm (vs 0.86mm nominal), creating friction that overpowered the drive rollers.
+- **The Intervention (Fix):** I engineered a mechanical override for the friction. We designed hard mount spacers to replace rubber grommets on the drive roller shaft—eliminating shaft deflection under load—and increased roller spring force by up to 200% to force discs through the warped slots.
+- **The Result (Impact):** Eliminated the "lost disc" failure mode and stabilized the injection cycle for the 200-280 slot range, salvaging existing inventory without a full tool rebuild.
+
+## III. GOVERNANCE & RHYTHM
+
+- **The Pulse:** Brutal, high-frequency iteration. We ran a 7-stage tooling trial (T1-T7) between Jan and April 2011, with immediate "T-Shot" inspection reports dissecting every flash, void, and dimension.
+- **The Artifacts:**
+  - `03_carousel.pdf`: The chronological record of the molding battle.
+  - `502-1164-00_slot_problems_11_16_11.pdf`: Data visualization of slot variance.
+  - `Rev 11 ECN`: Correcting critical tolerance typos.
+
+## IV. LINKEDIN ARTIFACTS (The Numbers)
+
+- Salvaged a T1 molding disaster via a targeted **$2,500 "Ribs & Rads" tooling modification**.
+- Stabilized **320 micro-tolerance slots** across a 386mm diameter chassis prone to thermal warpage.
+- Reduced field failures by **100%** in the critical 200-280 slot arc via hard-mount drive train redesign.
+- Managed a 7-stage rapid tooling iteration cycle to achieve fill consistency within **3 months**.
+- Identified and remediated **1.08mm rib thickness deviations** that threatened total system yield.
+
+## V. VISUAL EVIDENCE
+
+- **03_carousel.pdf:** Photos of broken ribs, massive T1 flash, and cross-section analysis.
+- **502-1164-00_slot_problems_11_16_11.pdf:** Metrology heatmaps showing the "tight slot" arc.
+- **Problem areas on the carousel to check for T6 run.pdf:** Macro photography of specific flashing defects blocking slots 116 and 160.
+- **Pilot Carousel Observations.pdf:** Detailed rib thickness measurements verifying the root cause of friction.

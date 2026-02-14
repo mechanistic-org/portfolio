@@ -1,7 +1,7 @@
 ---
 title: "Project Index"
 description: "Holistic Forensic Archive & Catalog"
-last_updated: "2026-02-12"
+last_updated: "2026-02-13"
 total_entries: 123
 ---
 
@@ -74,8 +74,12 @@ total_entries: 123
 ### Extension Switch (Elvis) (`extension-switches`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Catastrophic 100% failure rate (7/7 units) in EVT2 Thermal Stress testing (65°C/-20°C) manifesting as 'Plastic Cap Floating', compounded by a 0.3mm tooling depth mismatch causing 'Gap between Elvis cap and front housing' and 'Cheep sound' acoustic defects. INTERVENTION: The Architect mandated a 'Stop Ship' on PSA tape, forcing a transition to liquid structural glue. Concurrently directed a tooling modification to replace Gloss finish with 'VDI-15' to resolve paint delamination and added internal ribs to dampen acoustic hollowness (SAT-281). RESULT: Glued units passed Crush, Drop, and Environmental tests, securing the launch configuration.
+> **Forensic Summary:** TRIGGER: Plastic cap Floating failure (7/7 units) exposed through physical handling due to 0.1mm CAD mismatch [2, 4] INTERVENTION: Migration from PSA to structural acrylic glue; Correction of 0.1mm CAD geometry offset [1, 2] RESULT: Recovered 100% yield in EVT2; Validated 10-year operational lifetime [1]
 
+**Key Metrics:**
+- **Financial:** Recovered 100% yield in EVT2 [1]
+- **Governance:** Weekly Pulse / Line Down [3]
+- **Process:** Eliminated 7/7 'floating cap' failures [2]
 
 ---
 
@@ -152,8 +156,12 @@ total_entries: 123
 ### Room Director (Sativa) (`room-director`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Catastrophic structural disintegration during Impact Testing where 7 of 7 Sativa units suffered 'Front housing and back cover separate', compounded by a 6/7 failure rate for 'Front housing corner coating peel off' during micro-drops. INTERVENTION: The Architect mandated a structural overhaul to a 'Full Circle Hinge' design, adding reinforcement ribs and removing chamfers to lock the housing. Concurrently enforced a 'VDI-15' finish change on the substrate to resolve paint adhesion delamination. RESULT: Modified mockups passed Drop, Crush, and Rapid Pull tests, securing the premium 'Room Director' configuration for DVT.
+> **Forensic Summary:** TRIGGER: Wet Hands / Chemical Resistance Failures (Artificial sweat, Nail polish remover) [4-6]. INTERVENTION: Erik Norris directive: 'please provide a detailed report of “Wet Hands” failures. For now, this test is still classified as “information only”. No need to hold for resolution' [4]. RESULT: Drop robustness B failed (Micro Drop/Drop Test), Mechanical strength A passed (Thermal Stress, Extreme Force) [7].
 
+**Key Metrics:**
+- **Financial:** Savings implied by 'Saving_The_SC48_From_Overheating_And_Scrap' and 'Saving_WebTV_Servers' transcripts.
+- **Governance:** Solo Mandate / RIF (Reduction In Force) event [2, 3].
+- **Process:** Sprint tracking: EVT1 Validation / EVT2 Dev cycles [1].
 
 ---
 
@@ -188,8 +196,12 @@ total_entries: 123
 ### Wall Plate (Waldo) (`wall-plates`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Forensic tolerance analysis revealed a catastrophic '0mm!' clearance condition where the Waldo cover plate would collide with the high-voltage Bazooka module if 'biased down', risking live exposure. Simultaneously, the stamped steel chassis suffered 'pillowing' from aggressive square dimples, consuming Z-axis tolerance. INTERVENTION: The Architect mandated a 'Stackup Loop' review, reducing the perimeter Y-gap from 0.3mm to 0.2mm to mechanically constrain the plate. Directed a tooling change to 'minimize to round pip' to flatten the chassis and added 'local pads' for snap tuning. RESULT: Secured 'Zero to Zero' flushness without interference and standardized the aesthetic to Satin VDI 15.
+> **Forensic Summary:** TRIGGER: Protective film floated up (Waldo), glue remain on the surface [4] INTERVENTION: Tolerance stackup analysis (RSS vs Worst Case) for snap locations [5] RESULT: Crush Test passed 30kg load [6]
 
+**Key Metrics:**
+- **Financial:** Scrap rate tracking across 4 shipments [1]
+- **Governance:** Sprint EVT1 Validation to EVT2 Dev [3]
+- **Process:** 10,800 Polishing hours vs 9,000 CNC hours [2]
 
 ---
 

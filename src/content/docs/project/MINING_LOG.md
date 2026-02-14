@@ -50,14 +50,14 @@ If you are a new Agent starting a session:
 
 ## 2. The Surgical Cylinder (Tier 2)
 
-| Project           | Slug                 | Narrative | Complexity | Entropy | Notes                                               |
-| :---------------- | :------------------- | :-------: | :--------: | :-----: | :-------------------------------------------------- |
-| **Bazooka**       | `bazooka`            |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph. |
-| **Elvis**         | `extension-switches` |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph. |
-| **Room Director** | `room-director`      |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph. |
-| **Waldo**         | `wall-plates`        |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph. |
-| **Minimerc**      | `minimerc`           |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph. |
-| **Makeline**      | `makeline`           |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph. |
+| Project           | Slug                 | Narrative | Complexity | Entropy | Notes                                                 |
+| :---------------- | :------------------- | :-------: | :--------: | :-----: | :---------------------------------------------------- |
+| **Bazooka**       | `bazooka`            |    🟢     |     🟢     |   🔴    | Narrative & Complexity Enriched. Missing Seismograph. |
+| **Elvis**         | `extension-switches` |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph.   |
+| **Room Director** | `room-director`      |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph.   |
+| **Waldo**         | `wall-plates`        |    🟢     |     🟢     |   🟢    | Fully Hydrated (Glue Residue/Labels/Tolerance).       |
+| **Minimerc**      | `minimerc`           |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph.   |
+| **Makeline**      | `makeline`           |    🟢     |     🔴     |   🔴    | Narrative Enriched. Missing Complexity/Seismograph.   |
 
 ## 3. The Historical Cylinder (Tier 3)
 

@@ -1,19 +1,102 @@
 ---
 audio_url: /assets/room-director/room-director-briefing.m4a
+bom:
+- label: ASSY,ME,SATIVA
+  value: 740-00007 rev 02 [11]
+- label: PLASTIC,FRONT,HOUSING
+  value: 432-00023 rev 01 [11]
+- label: OLED GASKET
+  value: 437-00001 rev 01 [11]
+- label: SHIELDING,COVER,RF
+  value: 430-00002 rev 01 [11]
 cast:
 - name: Erik Norris
-  org: Locoroll (Noon Home)
-  role: Head of ME / The Architect
-- name: Kelvin
-  org: FIH
-  role: Manufacturing Engineer
-- name: Sunny Yen
-  org: FIH
-  role: Test Engineer
-- name: Nick
-  org: Locoroll
-  role: ME Lead
+  org: Locoroll / Noon Home
+  role: Principal Architect / Lead ME
+- name: Ricky Lin
+  org: FIH / Vendor
+  role: Engineer
+- name: Yvonne Lai
+  org: FIH / Vendor
+  role: Engineer
+- name: John Gilmore
+  org: Noon Home
+  role: Management
 category: consumer_electronics
+complexity_vector:
+  part_count_growth:
+  - count: 12
+    date: 2016-06
+    phase: Concept
+  - count: 35
+    date: 2017-01
+    phase: EVT (Eng Validation)
+  - count: 48
+    date: 2017-04
+    phase: DVT (Design Validation)
+  - count: 52
+    date: 2017-07
+    phase: PVT (Prod Validation)
+  - count: 55
+    date: 2017-09
+    phase: MP (Mass Production)
+  process_density:
+  - complexity_score: 9
+    material: Corning 2320 Glass (Ionized)
+    part_name: Sativa Cover Glass (Lens)
+    steps:
+    - CNC Cutting
+    - Ion Exchange (Chemical Strengthening)
+    - Mirror Polishing
+    - Oleophobic Coating Application
+    - Back Painting (Black Mask)
+    - UV Curing
+  - complexity_score: 6
+    material: Steel
+    part_name: Waldo Mounting Chassis
+    steps:
+    - Progressive Die Stamping
+    - Folding/Forming
+    - Black Zinc Plating
+    - Laser Etching (Graphics)
+    - Heat Treatment (Proposed for stiffness)
+  - complexity_score: 7
+    material: PC (SABIC EXL 9330)
+    part_name: Sativa Front Housing
+    steps:
+    - Injection Molding
+    - Insert Molding (Threaded Inserts)
+    - Painting (Satin VDI 15)
+    - Matte UV Coating (10%)
+  supply_chain_nodes:
+  - location: Shenzhen, China
+    role: FATP (Final Assembly)
+    vendor: FIH (Foxconn)
+  - location: China
+    role: Plastics/Housing Fab
+    vendor: Memtech
+  - location: China
+    role: Glass Fabrication
+    vendor: Biel
+  - location: China
+    role: Battery Cell
+    vendor: McNair
+  tooling_chain:
+  - cost_impact: High
+    lead_time_weeks: 8
+    tool_name: Sativa Front Housing Mold
+    type: Hard Tooling (Injection)
+    vendor: Memtech
+  - cost_impact: Med
+    lead_time_weeks: 6
+    tool_name: Waldo Chassis Progressive Die
+    type: Hard Tooling (Stamping)
+    vendor: FIH / Sub-tier
+  - cost_impact: Low
+    lead_time_weeks: 2
+    tool_name: OLED Gasket Die
+    type: Soft Tooling (Die Cut)
+    vendor: Yuhui (裕暉)
 cyberspace:
   enable: true
   layout: linear
@@ -22,19 +105,124 @@ date: 2016-09-01
 draft: false
 employer: noon
 endDate: 2017-06-01
+events:
+- date: '2016-02-26'
+  score: 5
+  snippet: 'Waldo Issue Tracker: Black zinc plating chipping, chassis deformation,
+    burr edges.'
+  source_ref: Waldo_MECHANICAL___TEST-related_issue-tracker_2016_02_26.pdf
+  type: Document
+- date: '2017-01-13'
+  score: 2
+  snippet: 'Sample allocation: Bare PCBs, Batteries, LCM modules assigned to engineering
+    team.'
+  source_ref: Colorado Sample Allocations 20170113_2.pdf
+  type: Document
+- date: '2017-02-14'
+  score: 6
+  snippet: 'Defect: Sativa/Elvis label edge lift. Proposal: Switch 3M 467 to 9453LE.'
+  source_ref: 710-00011_edge-lift-proposal_2017_02_14_locoroll.pdf
+  type: Document
+- date: '2017-02-15'
+  score: 3
+  snippet: 'Adhesive Validation: 3M 9453LE undergoing thermal shock. 1 unit passed.'
+  source_ref: 710-00011_edge-lift-proposal_2017_02_15_fih.pdf
+  type: Document
+- date: '2017-02-23'
+  score: 4
+  snippet: ECN generated for label adhesive change to 3M 9453LE.
+  source_ref: 710-00011_edge-lift-proposal_2017_02_23_ECN.pdf
+  type: Document
+- date: '2017-03-17'
+  score: 1
+  snippet: 'Production Mark: MFG DATE recorded on Rocky4 carton label.'
+  source_ref: Packaging_Test_Results_Review.pdf
+  type: Photo
+- date: '2017-03-28'
+  score: 5
+  snippet: Crush Test execution recorded.
+  source_ref: Crush test_20170328.pdf
+  type: Document
+- date: '2017-04-13'
+  score: 4
+  snippet: 'Verification: Gloss surface change noted on Waldo units (Sunny Yen).'
+  source_ref: EVT2_Reliability_Test_Reports.pdf
+  type: Document
+- date: '2017-04-18'
+  score: 8
+  snippet: 'Reliability Crisis: Drop Test FAIL (LCM crack). Storage Temp FAIL (Cap
+    floating).'
+  source_ref: LCR Reliability_ME_HW Test Status_20170418.pdf
+  type: Document
+- date: '2017-04-27'
+  score: 8
+  snippet: 'Blocker: Dust Test FAIL. Units cannot be removed from Bazooka chassis.'
+  source_ref: LCR Reliability_ME_HW Test Status_20170427 (1).pdf
+  type: Document
+- date: '2017-04-27'
+  score: 7
+  snippet: 'Structural Failure: Back cover & front housing detach during Crush Test.'
+  source_ref: LCR Reliability_ME_HW Test Status_20170427 (1).pdf
+  type: Document
+- date: '2017-05-26'
+  score: 3
+  snippet: Redlines issued for Bazooka Metal Front Housing (0048-BZKA-01).
+  source_ref: 2D_3D_UPDATES_TRACKER_2017_06_05.pdf
+  type: Document
+- date: '2017-05-30'
+  score: 2
+  snippet: 'Drawing Revision: ASSY, FRONT HOUSING SATIVA (740-00049).'
+  source_ref: misc-bolus.pdf
+  type: Document
+- date: '2017-06-05'
+  score: 2
+  snippet: 'Tracker Update: Monitoring DVT components (Nuts, Glass, Labels).'
+  source_ref: 2D_3D_UPDATES_TRACKER_2017_06_05.pdf
+  type: Document
+- date: '2017-07-04'
+  score: 6
+  snippet: 'Drop Test (1.3m): Internal loose parts audible on Sativa #6 / Elvis #7.'
+  source_ref: DVT_Reliability_Test_Reports.pdf
+  type: Document
+- date: '2017-07-10'
+  score: 9
+  snippet: 'Drop Test Breakthrough: Sativa #2 / Elvis #2 PASS 1.3m drops.'
+  source_ref: DVT_Reliability_Test_Reports.pdf
+  type: Document
+- date: '2017-07-10'
+  score: 5
+  snippet: 'Cosmetic Fail: Protective film glue residue remaining on Waldo surface.'
+  source_ref: Packaging_Test_Results_Review.pdf
+  type: Photo
+- date: '2017-07-10'
+  score: 9
+  snippet: 'Command Decision: Norris overrides ''Wet Hands'' failure. Proceeds with
+    FAIL result.'
+  source_ref: DVT_Reliability_Test_Reports.pdf
+  type: Document
+forensic_metrics:
+  financial: Savings implied by 'Saving_The_SC48_From_Overheating_And_Scrap' and 'Saving_WebTV_Servers'
+    transcripts.
+  governance: Solo Mandate / RIF (Reduction In Force) event [2, 3].
+  process: 'Sprint tracking: EVT1 Validation / EVT2 Dev cycles [1].'
 forensic_summary:
-  intervention: The Architect mandated a structural overhaul to a 'Full Circle Hinge'
-    design, adding reinforcement ribs and removing chamfers to lock the housing. Concurrently
-    enforced a 'VDI-15' finish change on the substrate to resolve paint adhesion delamination.
-  result: Modified mockups passed Drop, Crush, and Rapid Pull tests, securing the
-    premium 'Room Director' configuration for DVT.
-  trigger: Catastrophic structural disintegration during Impact Testing where 7 of
-    7 Sativa units suffered 'Front housing and back cover separate', compounded by
-    a 6/7 failure rate for 'Front housing corner coating peel off' during micro-drops.
+  intervention: 'Erik Norris directive: ''please provide a detailed report of “Wet
+    Hands” failures. For now, this test is still classified as “information only”.
+    No need to hold for resolution'' [4].'
+  result: Drop robustness B failed (Micro Drop/Drop Test), Mechanical strength A passed
+    (Thermal Stress, Extreme Force) [7].
+  trigger: Wet Hands / Chemical Resistance Failures (Artificial sweat, Nail polish
+    remover) [4-6].
 gallery: []
 hxo_ready: true
 hydration_status: full
 industry: consumer_electronics
+isomorphics:
+- hardware_point: Single Architect (Erik Norris) carrying entire mechanical load across
+    multiple programs (Sativa, Elvis, Waldo).
+  label: Solo Mandate
+  principle: Single Point of Failure / Bus Factor 1.
+  software_point: Monolithic kernel maintained by a single developer.
 listed: true
 metrics:
   financial:
@@ -82,13 +270,37 @@ phase_stats:
 presentation_mode: flagship
 primary_home: mech
 productionScale: series
+scars:
+- description: Artificial sweat and chemical agents caused gloss surface changes and
+    roughness on Sativa/Elvis units during EVT2 [6, 8].
+  label: The Wet Hands Crisis
+  value: FAIL (Cosmetic/Functional)
+- description: Protective film glue remained on the surface of Waldo units, causing
+    cosmetic rejection [9, 10].
+  label: Protective Film Debacle
+  value: Yield Impact
+- description: Sativa units failed Micro Drop and standard Drop Tests during reliability
+    validation [7].
+  label: Drop Test Failure
+  value: EVT2 Failure
 slug: room-director
-tags: []
+tags:
+- Thermal
+- Mechanism
+- Crisis
+- Yield
+- Leadership
+- Process
 targets:
 - main
 - mech
+teamSize: 8+ (Erik Norris, Ricky Lin, Yvonne Lai, Eddie Liang, Potter Kao, Alvin,
+  Kelvin, Benson)
 theme: hyperspace
 tier: 1
+timeline:
+  end: '2020-04-05'
+  start: '2016-09-08'
 title: Room Director (Sativa)
 toolchain:
 - Arena (PLM/BOM Management)
@@ -97,27 +309,6 @@ toolchain:
 - Memtech (Injection Molding/Plastics)
 - Biel (Glass Vendor)
 - AUO (OLED Display)
-war_stories:
-- description: Redesigned hinge geometry to 'Full Circle' profile to arrest 100% impact
-    failure rate (7/7).
-  label: Structural Disintegration
-  value: Full Circle Hinge
-- description: Mandated substrate change from Gloss to VDI-15 to resolve 85% paint
-    peel failure (SAT-127).
-  label: Paint Delamination
-  value: VDI-15 Texture
-- description: Enforced 5-hour liquid glue cure process to bridge 0.3mm gap and prevent
-    Touch Panel lift-off.
-  label: Display Integrity
-  value: Liquid Glue vs Tape
-- description: Engineered IR film stack and curved-glass pad printing to conceal sensors
-    and seal light leakage.
-  label: Dead Front Aesthetic
-  value: IR Film & Pad Printing
-- description: Managed AUO/Biel partnership to align OLED Active Area with Glass Viewing
-    Area, overcoming code incompatibility.
-  label: OLED Integration
-  value: JDM Governance
 ---
 
 # Project Sativa (Room Director) Forensic Report

@@ -313,6 +313,14 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
             if post.metadata.get("teamSize") != data["teamSize"]:
                  changes.append(f"  - Update 'teamSize' (Forensic Context)")
                  post.metadata["teamSize"] = data["teamSize"]
+        # AUTO-GENERATION: If teamSize missing but Cast exists
+        elif "cast" in data or "cast" in post.metadata:
+             cast_list = data.get("cast") or post.metadata.get("cast")
+             if cast_list:
+                 auto_team = f"INT {len(cast_list)}"
+                 if post.metadata.get("teamSize") != auto_team:
+                     changes.append(f"  - Auto-Generate 'teamSize': {auto_team}")
+                     post.metadata["teamSize"] = auto_team
 
         if "cast" in data:
             if post.metadata.get("cast") != data["cast"]:
@@ -328,13 +336,22 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
                  changes.append(f"  - Update 'transcript' (Accessibility)")
                  post.metadata["transcript"] = data["transcript"]
 
-        # 2. War Stories (Direct Injection)
-        if "war_stories" in data:
-            ws = data["war_stories"]
-            if post.metadata.get("war_stories") != ws:
-                changes.append(f"  - Update 'war_stories' ({len(ws)} items)")
-                post.metadata["war_stories"] = ws
+        # 2. Scars (formerly War Stories) - V2.1 Renaming
+        # Check 'scars' first, then 'war_stories' fallback
+        scars_data = data.get("scars")
+        if not scars_data:
+            scars_data = data.get("war_stories")
 
+        if scars_data:
+            if post.metadata.get("scars") != scars_data:
+                changes.append(f"  - Update 'scars' ({len(scars_data)} items)")
+                post.metadata["scars"] = scars_data
+                
+            # Cleanup Legacy
+            if "war_stories" in post.metadata:
+                 changes.append(f"  - Remove legacy 'war_stories' (Migrated to 'scars')")
+                 del post.metadata["war_stories"]
+                 
         # 3. Isomorphics (Direct Injection)
         if "isomorphics" in data:
             iso = data["isomorphics"]
@@ -364,8 +381,15 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
             if post.metadata.get("complexity_vector") != cv:
                  changes.append(f"  - Update 'complexity_vector' (Structure)")
                  post.metadata["complexity_vector"] = cv
+                 
+        # 7. Timeline (V2.1)
+        if "timeline" in data:
+            tl = data["timeline"]
+            if post.metadata.get("timeline") != tl:
+                 changes.append(f"  - Update 'timeline'")
+                 post.metadata["timeline"] = tl
 
-        # 7. Entropy Sidecar (Seismograph) - Writes to _entropy.json
+        # 8. Entropy Sidecar (Seismograph) - Writes to _entropy.json
         # We do NOT put this in Frontmatter (Law X).
         if "events" in data:
             events = data["events"]

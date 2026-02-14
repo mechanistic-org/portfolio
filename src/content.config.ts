@@ -145,6 +145,10 @@ const projectsCollection = defineCollection({
 				)
 				.optional(),
 
+			// V2.1: Complexity Vector (Physical Design)
+			complexity_vector: z.any().optional(),
+			timeline: z.any().optional(),
+
 			audio_url: z.string().optional(),
 			notebook_url: z.string().optional(),
 
@@ -173,7 +177,9 @@ const projectsCollection = defineCollection({
 				.optional(),
 			statusLabel: z.string().optional(),
 			job_title: z.enum(ROLE_VALUES as any).optional(),
-			war_stories: z
+
+			// RENAMED from war_stories to scars (V2.1)
+			scars: z
 				.array(
 					z.union([
 						z.number(),
@@ -184,7 +190,10 @@ const projectsCollection = defineCollection({
 						}),
 					]),
 				)
-				.optional(), // Legacy fallback
+				.optional(),
+
+			// Legacy Fallback (Deprecated)
+			war_stories: z.any().optional(),
 
 			// Trust Signals (Isomorphic Narrative)
 			isomorphics: z

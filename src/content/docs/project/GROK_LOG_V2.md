@@ -144,3 +144,32 @@ sidebar:
 3.  **NO MIDDLEWARE:** We reject "Cloud Courier" scripts that just move text. If it doesn't transform data, it doesn't exist.
 
 ---
+
+## 🩹 XII. The Law of the Scars (Tone Shift)
+
+**Context:** "War Stories" felt like a tech-bro trope. "Scars" implies endurance, healing, and lessons learned.
+
+1.  **RENAME:** The schema key is `scars`. The UI label is "Scars".
+2.  **FALLBACK:** We support `war_stories` in JSON for legacy compatibility, but `hydrate_content.py` MUST transform it to `scars` in Frontmatter.
+
+---
+
+## 📊 XIII. The Law of the Complexity Vector (Trust Signal)
+
+**Context:** Users trust "Hard Numbers" (Part Counts) over "Soft Adjectives" (Complex).
+
+1.  **THE COMPONENT:** `ComplexityViz.astro` is the Visualization standard.
+2.  **THE DATA:** `complexity_vector` is the Schema standard.
+3.  **THE MEANING:** 109 Drawings > "Many Drawings". Quantify the friction.
+
+---
+
+## 🔬 XIV. The Law of the Case Study (Deep Dive)
+
+**Context:** Users get lost in "Mega-Projects" (M700) when specific subsystems (Carousel) have their own complex pathology.
+
+1.  **THE PARENT-CHILD LINK:** Deep Dives (Subsytems) are separate Projects (`category: module_subsystem`).
+    - The **Parent** (M700) links to the **Child** (Carousel) via `links` and Body Text.
+    - The **Child** (Carousel) links back to the **Parent**.
+2.  **THE NARRATIVE SCOPE:** The Child Project focuses _exclusively_ on the subsystem pathology (e.g. "Potato Chip Warping"). The Parent focuses on the Product Level (e.g. "Vault Recovery").
+3.  **NO ORPHANS:** A Case Study MUST have a Parent. It cannot stand alone.

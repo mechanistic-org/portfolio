@@ -1,128 +1,130 @@
 ---
 bom:
-- label: Pinch Roller Spring
-  value: Dual radial spring balance bar
-- label: Roller Shaft
-  value: Reinforced/Thicker Shaft with Pillow Block Extension
-- label: Tinnerman Clip
-  value: C4893-017 (Stud Receiver)
+  - label: Pinch Roller Spring
+    value: Dual radial spring balance bar
+  - label: Roller Shaft
+    value: Reinforced/Thicker Shaft with Pillow Block Extension
+  - label: Tinnerman Clip
+    value: C4893-017 (Stud Receiver)
 cast:
-- name: Erik Norris
-  org: Kaleidescape
-  role: Lead Mechanical Engineer / The Architect
-- name: Nathan Forster
-  org: Kaleidescape
-  role: Hardware Systems Engineer
-- name: Somboun Thavy
-  org: Kaleidescape
-  role: Technician / Run-In Test
+  - name: Erik Norris
+    org: Kaleidescape
+    role: Lead Mechanical Engineer / The Architect
+  - name: Nathan Forster
+    org: Kaleidescape
+    role: Hardware Systems Engineer
+  - name: Somboun Thavy
+    org: Kaleidescape
+    role: Technician / Run-In Test
 category: module_subsystem
 client: []
 complexity_vector:
   part_count_growth:
-  - count: 1
-    date: 2008-07
-    phase: Concept / Soft Tooling
-  - count: 20
-    date: 2009-03
-    phase: EVT (Eng Validation)
-  - count: 3364
-    date: 2014-02
-    phase: MP (Mass Production)
+    - count: 1
+      date: 2008-07
+      phase: Concept / Soft Tooling
+    - count: 20
+      date: 2009-03
+      phase: EVT (Eng Validation)
+    - count: 3364
+      date: 2014-02
+      phase: MP (Mass Production)
   process_density:
-  - complexity_score: 9
-    material: PG-22 / PG-33 Plastic
-    part_name: Carousel (320 Slot)
-    steps:
-    - Injection Molding (Yomura)
-    - Texture MT-11020 Application
-    - Cooling/Fixture Setting (Critical for Warp Control)
-    - Inspection (Gate/Ejector Pin)
-  - complexity_score: 8
-    material: Rubber Sleeve / Steel Shaft
-    part_name: Pinch Roller Assembly
-    steps:
-    - Molding
-    - Coating Application (Friction enhancement)
-    - Shaft Insertion
-    - Spring Tensioning (Dual Radial Balance Bar)
-    - Run-In Testing (Torque/Slip)
-  - complexity_score: 6
-    material: Sheet Metal
-    part_name: Base Chassis
-    steps:
-    - Stamping (Hard Tooling)
-    - Forming (Mole-hills)
-    - PEM Insertion (Clinch Nuts)
-    - Painting
-    - Riveting
+    - complexity_score: 9
+      material: PG-22 / PG-33 Plastic
+      part_name: Carousel (320 Slot)
+      steps:
+        - Injection Molding (Yomura)
+        - Texture MT-11020 Application
+        - Cooling/Fixture Setting (Critical for Warp Control)
+        - Inspection (Gate/Ejector Pin)
+    - complexity_score: 8
+      material: Rubber Sleeve / Steel Shaft
+      part_name: Pinch Roller Assembly
+      steps:
+        - Molding
+        - Coating Application (Friction enhancement)
+        - Shaft Insertion
+        - Spring Tensioning (Dual Radial Balance Bar)
+        - Run-In Testing (Torque/Slip)
+    - complexity_score: 6
+      material: Sheet Metal
+      part_name: Base Chassis
+      steps:
+        - Stamping (Hard Tooling)
+        - Forming (Mole-hills)
+        - PEM Insertion (Clinch Nuts)
+        - Painting
+        - Riveting
   supply_chain_nodes:
-  - location: Guadalajara, Mexico
-    role: FATP (Final Assembly)
-    vendor: Sanmina
-  - location: Taipei, Taiwan
-    role: Plastics Injection (Carousel)
-    vendor: Yomura
-  - location: China
-    role: Sheet Metal Fab
-    vendor: Mass
-  - location: Waterloo, ON
-    role: Engineering / FA Lab
-    vendor: Kaleidescape
+    - location: Guadalajara, Mexico
+      role: FATP (Final Assembly)
+      vendor: Sanmina
+    - location: Taipei, Taiwan
+      role: Plastics Injection (Carousel)
+      vendor: Yomura
+    - location: China
+      role: Sheet Metal Fab
+      vendor: Mass
+    - location: Waterloo, ON
+      role: Engineering / FA Lab
+      vendor: Kaleidescape
   tooling_chain:
-  - cost_impact: High
-    lead_time_weeks: 8
-    tool_name: Carousel Mold
-    type: Hard Tooling (Injection)
-    vendor: Yomura (Taiwan)
-  - cost_impact: Med (ROI @ 1500 units)
-    lead_time_weeks: 12
-    tool_name: Chassis Progressive Die
-    type: Hard Tooling (Staged)
-    vendor: Mass / China
-  - cost_impact: Low
-    lead_time_weeks: 4
-    tool_name: Roller Shaft Extrusion/Turn
-    type: Soft Tooling -> Hard
-    vendor: RubberTek
+    - cost_impact: High
+      lead_time_weeks: 8
+      tool_name: Carousel Mold
+      type: Hard Tooling (Injection)
+      vendor: Yomura (Taiwan)
+    - cost_impact: Med (ROI @ 1500 units)
+      lead_time_weeks: 12
+      tool_name: Chassis Progressive Die
+      type: Hard Tooling (Staged)
+      vendor: Mass / China
+    - cost_impact: Low
+      lead_time_weeks: 4
+      tool_name: Roller Shaft Extrusion/Turn
+      type: Soft Tooling -> Hard
+      vendor: RubberTek
 cyberspace:
   enable: true
   layout: linear
   stickies:
-  - data:
-      columns: 3
-      images: []
-      layout: masonry
-      scattered: true
-    deck:
-    - body: Static electricity and sensor blindness caused discs to disappear inside
-        the vault.
-      subtitle: ''
-      title: The Crisis
-    - body: Redesigned the pinch roller assembly with solid mounts and double-strength
-        springs.
-      subtitle: ''
-      title: The Fix
-    featuredIndices: []
-    id: 01_vanishing_discs
-    title: Vanishing Discs
-    type: gallery
-  - data:
-      columns: 3
-      images: []
-      layout: masonry
-      scattered: true
-    deck:
-    - body: EMI gaskets deformed into the slot path.
-      subtitle: ''
-      title: The Issue
-    - body: Dealers had to use a specific shim (butter knife) to clear the obstruction.
-      subtitle: ''
-      title: The Workaround
-    featuredIndices: []
-    id: 02_butter_knife
-    title: Butter Knife
-    type: gallery
+    - data:
+        columns: 3
+        images: []
+        layout: masonry
+        scattered: true
+      deck:
+        - body:
+            Static electricity and sensor blindness caused discs to disappear inside
+            the vault.
+          subtitle: ""
+          title: The Crisis
+        - body:
+            Redesigned the pinch roller assembly with solid mounts and double-strength
+            springs.
+          subtitle: ""
+          title: The Fix
+      featuredIndices: []
+      id: 01_vanishing_discs
+      title: Vanishing Discs
+      type: gallery
+    - data:
+        columns: 3
+        images: []
+        layout: masonry
+        scattered: true
+      deck:
+        - body: EMI gaskets deformed into the slot path.
+          subtitle: ""
+          title: The Issue
+        - body: Dealers had to use a specific shim (butter knife) to clear the obstruction.
+          subtitle: ""
+          title: The Workaround
+      featuredIndices: []
+      id: 02_butter_knife
+      title: Butter Knife
+      type: gallery
 date: 2010-08-01 00:00:00+00:00
 description: KVAULT-M700 Disc Vault
 documents: []
@@ -130,205 +132,38 @@ draft: false
 duration: Active
 employer: kaleidescape
 endDate: 2011-07-01 00:00:00+00:00
-events:
-- date: '2009-02-13'
-  score: 8
-  snippet: First 50 HDD assemblies built with spring 501-1127-00 installed incorrectly.
-  source_ref: Kaleidescape_Volume_004.md
-  type: Commit
-- date: '2009-03-19'
-  score: 6
-  snippet: Sanmina reports DVD/Fan brackets do not sit flat on chassis.
-  source_ref: Kaleidescape_Volume_003.md
-  type: Document
-- date: '2011-01-20'
-  score: 7
-  snippet: 'Carousel T1 results: Massive flash from intentional over-pressure to fill
-    tool.'
-  source_ref: 03_carousel.pdf
-  type: Photo
-- date: '2011-03-17'
-  score: 5
-  snippet: Short shot detected on carousel due to air trap.
-  source_ref: 03_carousel.pdf
-  type: Photo
-- date: '2012-01-23'
-  score: 6
-  snippet: Roller slot contamination observed on SN 885. Rework instructions issued.
-  source_ref: 04_QC_etc.pdf
-  type: Document
-- date: '2014-01-09'
-  score: 7
-  snippet: SN 445 fails run-in. Disc sticking out. Roller testing initiated.
-  source_ref: 03_roller-testing.pdf
-  type: Document
-- date: '2014-01-14'
-  score: 5
-  snippet: Defective front slot pinch roller transferred to Engineering for autopsy.
-  source_ref: Kaleidescape_Volume_022.md
-  type: Document
-- date: '2014-02-24'
-  score: 5
-  snippet: Testing SN 3150 with SN 804 rollers. Fibers found on rollers.
-  source_ref: 03_roller-testing.pdf
-  type: Document
-- date: '2014-02-27'
-  score: 7
-  snippet: 'Root Cause: Front inner guide confirmed scratching discs. Video evidence.'
-  source_ref: Kaleidescape_Volume_022.md
-  type: Video
-- date: '2014-03-05'
-  score: 6
-  snippet: 'Escalation 126532: M700 continually jamming. Customer requesting replacement.'
-  source_ref: Kaleidescape_Volume_022.md
-  type: Document
-- date: '2014-03-06'
-  score: 4
-  snippet: 'Logistics: 7 RMA units arrived in Sunnyvale for forensic teardown.'
-  source_ref: Kaleidescape_Volume_022.md
-  type: Document
-- date: '2014-03-07'
-  score: 8
-  snippet: 'Escalation 129483: Roller spring visibly deformed/angled high in field
-    unit.'
-  source_ref: Kaleidescape_Volume_022.md
-  type: Photo
-- date: '2014-03-10'
-  score: 8
-  snippet: Sensor board failure traced to bad solder joint at R22 (Sanmina process).
-  source_ref: Kaleidescape_Volume_022.md
-  type: Document
-- date: '2014-03-11'
-  score: 6
-  snippet: SN 2820 fails run-in. ODD possibly damaged by double-disc insert.
-  source_ref: Kaleidescape_Volume_022.md
-  type: Document
-- date: '2014-03-12'
-  score: 5
-  snippet: 'Datalogger analysis: Units subjected to 41G shock during handling.'
-  source_ref: Kaleidescape_Volume_022.md
-  type: Document
-- date: '2014-03-12'
-  score: 9
-  snippet: Missing E-clip identified as root cause for field return SN 0600000030287.
-  source_ref: Kaleidescape_Volume_021.md
-  type: Photo
-- date: '2014-03-13'
-  score: 4
-  snippet: 'Case 129750: Dealer inserted 6 discs backwards. System eventually rejected.'
-  source_ref: Kaleidescape_Volume_022.md
-  type: Document
-- date: '2014-03-18'
-  score: 3
-  snippet: Service testing Region 2 units with Region 2 discs to reduce false NTF.
-  source_ref: Kaleidescape_Volume_022.md
-  type: Document
-- date: '2014-03-19'
-  score: 6
-  snippet: 'Escalation: Disc already present in drive. Vault failing errors 78 & 97.'
-  source_ref: Kaleidescape_Volume_022.md
-  type: Document
-- date: '2014-03-24'
-  score: 6
-  snippet: 'Run-in failure mode: Rollers pushing disc too far out front slot.'
-  source_ref: Kaleidescape_Volume_021.md
-  type: Document
-- date: '2014-03-25'
-  score: 8
-  snippet: 'Hardware Meeting: Pivot to stronger springs, solid motor mounts, extended
-    gear.'
-  source_ref: Kaleidescape_Volume_022.md
-  type: Document
-- date: '2014-03-26'
-  score: 5
-  snippet: Quote requested for prototype springs 330-1050-02/03/04.
-  source_ref: Kaleidescape_Volume_023.md
-  type: Document
-- date: '2014-04-03'
-  score: 7
-  snippet: Sunnyvale stock audit reveals warped carousels. Packaging suspect.
-  source_ref: Kaleidescape_Volume_020.md
-  type: Document
-- date: '2014-04-07'
-  score: 6
-  snippet: 'Diagnosis confirmed: Dirty rollers cause friction drop and disc slippage.'
-  source_ref: 03_pinch-roller.pdf
-  type: Photo
-- date: '2014-04-08'
-  score: 5
-  snippet: Vendor RubberTek contacted regarding poor dirt resistance of roller material.
-  source_ref: Kaleidescape_Volume_022.md
-  type: Document
-- date: '2014-04-10'
-  score: 4
-  snippet: 'RubberTek responds: ''Inevitable for most rubber... to get dirt''.'
-  source_ref: Kaleidescape_Volume_022.md
-  type: Document
-- date: '2014-04-17'
-  score: 7
-  snippet: Double strength springs and modified inner guide pass validation.
-  source_ref: Kaleidescape_Volume_022.md
-  type: Document
-- date: '2014-05-08'
-  score: 5
-  snippet: JIRA ESCALATION-588 Closed. Jamming issue tracked to dispersion.
-  source_ref: Kaleidescape_Volume_022.md
-  type: Document
-- date: '2014-06-25'
-  score: 5
-  snippet: Proposal to ship vaults without rack ears to prevent foam cutting.
-  source_ref: Kaleidescape_Volume_019.md
-  type: Document
-- date: '2014-07-07'
-  score: 6
-  snippet: 'RMA 48932: Confirmed scratching on front disc guide.'
-  source_ref: Kaleidescape_Volume_019.md
-  type: Photo
-- date: '2014-07-16'
-  score: 6
-  snippet: Outer disc guide identified as sole point of scratching due to left shift.
-  source_ref: Kaleidescape_Volume_019.md
-  type: Document
-- date: '2014-09-05'
-  score: 6
-  snippet: Tinnerman clips found damaged by vendor (Demsa). Front panel retention
-    compromised.
-  source_ref: Kaleidescape_Volume_019.md
-  type: Photo
-- date: '2014-09-23'
-  score: 7
-  snippet: 'Severe quality issue: 502-1192-00 rejected at Sanmina for scratches/dings.'
-  source_ref: Kaleidescape_Volume_019.md
-  type: Document
-- date: '2014-09-30'
-  score: 8
-  snippet: Stronger spring changes rolled into production to fix stuck discs.
-  source_ref: Kaleidescape_Volume_019.md
-  type: Document
+
 forensic_metrics:
   financial: $24 per unit savings on chassis costs via hard tooling transition
   governance: Weekly Reliability Investigation / High-touch 'Run-In' test cycle
   process: Analyzed 3,000,000+ disc injection cycles to isolate 10% failure threshold
 forensic_summary:
-  intervention: 'Complete mechanical subsystem redesign: Dual radial spring balance
-    bars, solid motor mounts, and disc guide retrofit'
-  result: Eliminated 100% of 'dirty roller' slippage failures and recovered 100% of
+  intervention:
+    "Complete mechanical subsystem redesign: Dual radial spring balance
+    bars, solid motor mounts, and disc guide retrofit"
+  result:
+    Eliminated 100% of 'dirty roller' slippage failures and recovered 100% of
     questioned carousel inventory
-  trigger: Catastrophic field failures (disc jams, scratching, 'unreadable' media)
+  trigger:
+    Catastrophic field failures (disc jams, scratching, 'unreadable' media)
     due to tolerance drift
 gallery: []
 hxo_ready: false
 hydration_status: executive
 industry: consumer_electronics
 isomorphics:
-- hardware_point: Surface coatings (chemical friction) failed under environmental
-    stress (dust); Mechanical force (springs/geometry) proved robust
-  label: Friction vs. Force
-  principle: Mechanical determinism supercedes material coefficient reliance in dirty
-    environments.
-  software_point: Firmware retry logic vs. physical sensor state truth
+  - hardware_point:
+      Surface coatings (chemical friction) failed under environmental
+      stress (dust); Mechanical force (springs/geometry) proved robust
+    label: Friction vs. Force
+    principle:
+      Mechanical determinism supercedes material coefficient reliance in dirty
+      environments.
+    software_point: Firmware retry logic vs. physical sensor state truth
 links:
-- url: https://kaleidescape.com
+  - url: https://kaleidescape.com
+  - name: "Deep Dive: 320-Slot Carousel"
+    url: /projects/320-slot-optical-carousel
 metrics:
   financial:
     costOfGoodsSold: []
@@ -338,11 +173,11 @@ metrics:
   process:
     engineeringChangeOrders: []
   quotes:
-  - Disc vanished into thin air from slot 1
-  - Potato chipped about 3-4 mm which doesn’t seem too bad... but they were worse
-    than the top ones.
-  - I'll start on the first one ASAP tomorrow. I don't want to impede to normal flow
-    of repairs...
+    - Disc vanished into thin air from slot 1
+    - Potato chipped about 3-4 mm which doesn’t seem too bad... but they were worse
+      than the top ones.
+    - I'll start on the first one ASAP tomorrow. I don't want to impede to normal flow
+      of repairs...
   war_stories: []
 phase_stats:
   Design: 147
@@ -354,30 +189,33 @@ production: production
 productionScale: one_off
 slug: m700
 tags:
-- Crisis
-- Mechanism
-- Yield
-- Process
-- Leadership
+  - Crisis
+  - Mechanism
+  - Yield
+  - Process
+  - Leadership
 teamSize: 4 (Erik Norris, Nathan Forster, Rob Wudrick, Somboun Thavy)
 theme: hyperspace
 tier: 3
 title: M700 Vesta Vault Recovery
 tools: []
-war_stories:
-- description: Identified 'potato chipped' warping in 200-series carousel slots; developed
-    inspection criteria to validate inventory rather than scrap it
-  label: The Potato Chip Carousel
-  value: 3-4mm Warp
-- description: Discovered coated rollers had high initial grip but failed rapidly
-    with dust; reverted to mechanical force solution (stronger springs) over surface
-    friction
-  label: The Dirty Roller Friction Drop
-  value: 4x Force Degradation
-- description: Root caused 'Disc vanished into thin air' log errors to sensor misalignment
-    and 'wringing' effect between static-charged discs
-  label: The Vanishing Disc
-  value: Log Error 1410140
+scars:
+  - description:
+      Identified 'potato chipped' warping in 200-series carousel slots; developed
+      inspection criteria to validate inventory rather than scrap it
+    label: The Potato Chip Carousel
+    value: 3-4mm Warp
+  - description:
+      Discovered coated rollers had high initial grip but failed rapidly
+      with dust; reverted to mechanical force solution (stronger springs) over surface
+      friction
+    label: The Dirty Roller Friction Drop
+    value: 4x Force Degradation
+  - description:
+      Root caused 'Disc vanished into thin air' log errors to sensor misalignment
+      and 'wringing' effect between static-charged discs
+    label: The Vanishing Disc
+    value: Log Error 1410140
 ---
 
 based on the engineering logs and meeting minutes, the **Dual Radial Spring Balance Bar** and the **Pillow Block Extension** were two halves of a mechanical redesign implemented to solve the "Dirty Roller" crisis.

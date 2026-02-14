@@ -1,36 +1,148 @@
 {
-    "id": "extension-switches",
-    "forensic_summary": {
-        "trigger": "Catastrophic 100% failure rate (7/7 units) in EVT2 Thermal Stress testing (65\u00b0C/-20\u00b0C) manifesting as 'Plastic Cap Floating', compounded by a 0.3mm tooling depth mismatch causing 'Gap between Elvis cap and front housing' and 'Cheep sound' acoustic defects.",
-        "intervention": "The Architect mandated a 'Stop Ship' on PSA tape, forcing a transition to liquid structural glue. Concurrently directed a tooling modification to replace Gloss finish with 'VDI-15' to resolve paint delamination and added internal ribs to dampen acoustic hollowness (SAT-281).",
-        "result": "Glued units passed Crush, Drop, and Environmental tests, securing the launch configuration."
-    },
-    "war_stories": [
-        {
-            "label": "Plastic Cap Floating",
-            "value": "Liquid Glue Intervention",
-            "description": "Resolved 100% EVT2 failure rate (7/7) by replacing PSA tape with liquid structural glue to bridge 0.3mm gap."
-        },
-        {
-            "label": "Acoustic 'Cheep' Sound",
-            "value": "Damping Grease & Ribs",
-            "description": "Eliminated high-frequency noise via UV-verified lubrication and internal structural ribbing."
-        },
-        {
-            "label": "Paint Delamination",
-            "value": "VDI-15 Texture",
-            "description": "Mandated tooling change from Gloss to VDI-15 to resolve cosmetic paint adhesion failures."
-        },
-        {
-            "label": "Yellowing Gate",
-            "value": "Delta E < 1.5",
-            "description": "Enforced strict spectrophotometer limits to catch UV coating degradation, driving resin study."
-        },
-        {
-            "label": "Cost Engineering",
-            "value": "$49 COGS Target",
-            "description": "Optimized Gen 2 mechanical BOM to hit $49 margin on $79 MSRP."
-        }
-    ],
-    "_schema_version": "v2.0"
+	"id": "extension-switches",
+	"_schema_version": "v2.0",
+	"presentation_mode": "deep_dive",
+	"tags": ["Yield", "Crisis", "Mechanism", "Process", "Materials", "Leadership"],
+	"forensic_metrics": {
+		"financial": "Recovered 100% yield in EVT2 [1]",
+		"process": "Eliminated 7/7 'floating cap' failures [2]",
+		"governance": "Weekly Pulse / Line Down [3]"
+	},
+	"forensic_summary": {
+		"trigger": "Plastic cap Floating failure (7/7 units) exposed through physical handling due to 0.1mm CAD mismatch [2, 4]",
+		"intervention": "Migration from PSA to structural acrylic glue; Correction of 0.1mm CAD geometry offset [1, 2]",
+		"result": "Recovered 100% yield in EVT2; Validated 10-year operational lifetime [1]"
+	},
+	"war_stories": [
+		{
+			"label": "The Floating Cap Crisis",
+			"value": "0% to 100% Yield",
+			"description": "0.1mm CAD mismatch caused 100% failure rate (7/7); solved by switching from PSA to structural acrylic glue [1, 2]"
+		},
+		{
+			"label": "The Cheep Sound",
+			"value": "Acoustic Fix",
+			"description": "Switch noise resolved by studying grease types and adding dry lubricant [5]"
+		}
+	],
+	"isomorphics": [
+		{
+			"label": "Yield",
+			"hardware_point": "0.1mm geometry offset causes 100% assembly failure [2]",
+			"software_point": "SW v0.005 unable to drive LCM for worst-case thermal test [6]",
+			"principle": "Microscopic deviations in constraint boundaries trigger macroscopic system failure"
+		}
+	],
+	"toolchain": ["Arena", "JIRA", "Creo", "Memtech (Vendor)", "FIH (Vendor)"],
+	"bom": [
+		{
+			"label": "Front Housing",
+			"value": "PC+ABS CX7240U-8T9A1580 [7]"
+		},
+		{
+			"label": "Adhesive (Failed)",
+			"value": "Nitto 57120W [2]"
+		},
+		{
+			"label": "Color Chip",
+			"value": "SABIC EXL9330 [8]"
+		}
+	],
+	"teamSize": "1",
+	"cast": [
+		{
+			"name": "Erik Norris",
+			"role": "The Architect",
+			"org": "Locoroll"
+		},
+		{
+			"name": "Nick",
+			"role": "Mechanical Lead",
+			"org": "Locoroll"
+		},
+		{
+			"name": "Kelvin",
+			"role": "MPM",
+			"org": "FIH"
+		}
+	],
+	"timeline": {
+		"start": "2016-06-01",
+		"end": "2017-08-31"
+	},
+	"visuals_to_find": [
+		"Sativa_#27 (LCM crack).jpg",
+		"S_#52_MA1FB65100D4F_paint peel off.jpg",
+		"Plastic cap Floating-7/7 [Elvis]"
+	],
+	"quotes": [
+		"[Erik Norris] please provide a detailed report of “Wet Hands” failures. For now, this test is still classified as “information only”. No need to hold for resolution – OK to proceed with FAIL result. [9]",
+		"Recovered 100% yield in EVT2 by isolating and correcting a microscopic 0.1mm CAD geometry offset [1]",
+		"This product at kick-off and architecture stage was not informed a 10-year life long. [10]"
+	],
+	"complexity_vector": {
+		"part_count_growth": [
+			{ "phase": "P1 (Proto)", "count": 19, "date": "2016-09" },
+			{ "phase": "EVT1 (Eng Validation)", "count": 169, "date": "2016-11" },
+			{ "phase": "EVT2 (Design Freeze)", "count": 466, "date": "2017-01" },
+			{ "phase": "DVT (Design Validation)", "count": 772, "date": "2017-04" },
+			{ "phase": "PVT (Prod Validation)", "count": 4000, "date": "2017-06" }
+		],
+		"process_density": [
+			{
+				"part_name": "Metal Color Chip",
+				"material": "ADC12 Aluminum Alloy",
+				"steps": [
+					"Die Cast",
+					"De-Gate",
+					"De-flash",
+					"Drilling",
+					"Tapping",
+					"CNC",
+					"Polishing",
+					"Wash & Dry",
+					"Sand Blast",
+					"Paint",
+					"Laser Trim",
+					"Laser Mark",
+					"Pad Print"
+				],
+				"complexity_score": 13
+			},
+			{
+				"part_name": "Front Housing",
+				"material": "PC SABIC EXL 9330",
+				"steps": [
+					"Injection Molding",
+					"Heat Staking",
+					"UV Coating (10% Matte)",
+					"Adhesive Application (Migrated to Glue)"
+				],
+				"complexity_score": 4
+			}
+		],
+		"tooling_chain": [
+			{
+				"tool_name": "Front Housing Mold (Elvis)",
+				"type": "Hard Tooling",
+				"vendor": "Memtech",
+				"lead_time_weeks": 8,
+				"cost_impact": "High (Retooling required for 0.1mm geometry offset)"
+			},
+			{
+				"tool_name": "Die Cast Mold (Color Chip)",
+				"type": "Hard Tooling",
+				"vendor": "Best / Tongda",
+				"lead_time_weeks": 6,
+				"cost_impact": "Med"
+			}
+		],
+		"supply_chain_nodes": [
+			{ "location": "China", "role": "FATP", "vendor": "FIH (Foxconn)" },
+			{ "location": "China", "role": "Plastics/Molding", "vendor": "Memtech" },
+			{ "location": "China", "role": "Battery", "vendor": "McNair" },
+			{ "location": "Global", "role": "MCU", "vendor": "STMicroelectronics" },
+			{ "location": "Global", "role": "eMMC", "vendor": "Micron" }
+		]
+	}
 }

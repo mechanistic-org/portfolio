@@ -1,219 +1,128 @@
 [
-	{
-		"date": "2016-06-28",
-		"score": 4,
-		"snippet": "Decision to move forward with current Sativa glass design.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2016-07-30",
-		"score": 2,
-		"snippet": "First Version (v01) of Sativa/Elvis BOM released.",
-		"type": "Document",
-		"source_ref": "BOM_CoGs_etc.pdf"
-	},
-	{
-		"date": "2016-08-11",
-		"score": 5,
-		"snippet": "P1 Gerber files released for fabrication.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2016-09-06",
-		"score": 6,
-		"snippet": "Sativa P1 System Level Assembly completed and shipped to USA.",
-		"type": "Document",
-		"source_ref": "Colorado Sample Allocations 20170113.pdf"
-	},
-	{
-		"date": "2016-09-12",
-		"score": 7,
-		"snippet": "Proposal to use adhesive instead of tape for Cover Glass in EVT1.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2016-09-21",
-		"score": 5,
-		"snippet": "Locked down 3D drawings for EVT1 build.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2016-10-31",
-		"score": 8,
-		"snippet": "'3Tabs concept' introduced to solve Sativa/Bazooka wiggle issue.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2016-11-08",
-		"score": 5,
-		"snippet": "EVT1 SMT (Surface Mount Technology) production start.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2016-11-14",
-		"score": 3,
-		"snippet": "Added LCM (Liquid Crystal Module) part to BOM.",
-		"type": "Document",
-		"source_ref": "BOM_CoGs_etc.pdf"
-	},
-	{
-		"date": "2016-11-15",
-		"score": 5,
-		"snippet": "EVT1 System Assembly start.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2016-12-06",
-		"score": 4,
-		"snippet": "On-site visit to mold shop to define cosmetic limit/golden samples.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2017-01-18",
-		"score": 8,
-		"snippet": "Sativa fails Hardwood Drop Test: 'Front housing coating peel off' (2/3).",
-		"type": "Document",
-		"source_ref": "DVT_Reliability_Test_Reports.pdf"
-	},
-	{
-		"date": "2017-01-25",
-		"score": 9,
-		"snippet": "Mandated VDI-15 texture change to fix paint adhesion ($3000 tooling mod).",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2017-02-06",
-		"score": 5,
-		"snippet": "Erik Norris official start date as Head of ME.",
-		"type": "Memory",
-		"source_ref": "Locoroll-Noon_Volume_001.md"
-	},
-	{
-		"date": "2017-02-13",
-		"score": 4,
-		"snippet": "Investigating adding RAM to Sativa for EVT2.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2017-03-06",
-		"score": 6,
-		"snippet": "Implemented 3M 9453LE adhesive for EVT2 to fix label lift.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2017-03-11",
-		"score": 10,
-		"snippet": "EVT2 Thermal Stress Test: 7/7 Elvis caps float/fail due to geometry mismatch.",
-		"type": "Document",
-		"source_ref": "EVT2_Reliability_Test_Reports.pdf"
-	},
-	{
-		"date": "2017-03-15",
-		"score": 3,
-		"snippet": "Released Colorado Cosmetic Tracker.",
-		"type": "Document",
-		"source_ref": "Colorado_Cosmetic_Tracker_23017_03_15.pdf"
-	},
-	{
-		"date": "2017-04-12",
-		"score": 9,
-		"snippet": "Thermal Shock Test: 7/7 units fail (Plastic Cap Floating).",
-		"type": "Document",
-		"source_ref": "DVT_Reliability_Test_Reports.pdf"
-	},
-	{
-		"date": "2017-04-17",
-		"score": 10,
-		"snippet": "Impact Test: 7/7 Sativa housings separate/explode; Front boss broken.",
-		"type": "Document",
-		"source_ref": "DVT_Reliability_Test_Reports.pdf"
-	},
-	{
-		"date": "2017-04-18",
-		"score": 8,
-		"snippet": "Drop Test: Sativa LCM crack observed (1/6).",
-		"type": "Document",
-		"source_ref": "DVT_Reliability_Test_Reports.pdf"
-	},
-	{
-		"date": "2017-04-21",
-		"score": 6,
-		"snippet": "ME Design Lock Down milestone.",
-		"type": "Document",
-		"source_ref": "Colorado_EVT2_Reliability_Test_Proposed_REV_1_20170317.pdf"
-	},
-	{
-		"date": "2017-04-24",
-		"score": 9,
-		"snippet": "Glued samples passed to Eric; Validation units PASS Crush/Drop tests.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2017-04-28",
-		"score": 6,
-		"snippet": "Tooling release milestone.",
-		"type": "Document",
-		"source_ref": "Colorado_EVT2_Reliability_Test_Proposed_REV_1_20170317.pdf"
-	},
-	{
-		"date": "2017-05-04",
-		"score": 5,
-		"snippet": "Tooling modification start for Front Cover.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2017-05-08",
-		"score": 5,
-		"snippet": "Tooling modification start for Rear Housing.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2017-06-07",
-		"score": 5,
-		"snippet": "DVT Sativa SMT start.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2017-06-12",
-		"score": 5,
-		"snippet": "DVT Sativa System Assembly start.",
-		"type": "Document",
-		"source_ref": "Locorol action review_05082017 ver2.pdf"
-	},
-	{
-		"date": "2017-06-26",
-		"score": 2,
-		"snippet": "CAD file renaming to match Arena Item Numbers.",
-		"type": "Document",
-		"source_ref": "BAZ-.pdf"
-	},
-	{
-		"date": "2017-07-13",
-		"score": 4,
-		"snippet": "Meeting regarding 'Room Awareness' and Gen 2 Sativa.",
-		"type": "Document",
-		"source_ref": "2017_07_13_meeting_notes.pdf"
-	},
-	{
-		"date": "2018-05-11",
-		"score": 2,
-		"snippet": "Erik Norris severance payment processed.",
-		"type": "Memory",
-		"source_ref": "Locoroll-Noon_Volume_001.md"
-	}
+  {
+    "date": "2016-02-26",
+    "score": 5,
+    "snippet": "Waldo Issue Tracker: Black zinc plating chipping, chassis deformation, burr edges.",
+    "type": "Document",
+    "source_ref": "Waldo_MECHANICAL___TEST-related_issue-tracker_2016_02_26.pdf"
+  },
+  {
+    "date": "2017-01-13",
+    "score": 2,
+    "snippet": "Sample allocation: Bare PCBs, Batteries, LCM modules assigned to engineering team.",
+    "type": "Document",
+    "source_ref": "Colorado Sample Allocations 20170113_2.pdf"
+  },
+  {
+    "date": "2017-02-14",
+    "score": 6,
+    "snippet": "Defect: Sativa/Elvis label edge lift. Proposal: Switch 3M 467 to 9453LE.",
+    "type": "Document",
+    "source_ref": "710-00011_edge-lift-proposal_2017_02_14_locoroll.pdf"
+  },
+  {
+    "date": "2017-02-15",
+    "score": 3,
+    "snippet": "Adhesive Validation: 3M 9453LE undergoing thermal shock. 1 unit passed.",
+    "type": "Document",
+    "source_ref": "710-00011_edge-lift-proposal_2017_02_15_fih.pdf"
+  },
+  {
+    "date": "2017-02-23",
+    "score": 4,
+    "snippet": "ECN generated for label adhesive change to 3M 9453LE.",
+    "type": "Document",
+    "source_ref": "710-00011_edge-lift-proposal_2017_02_23_ECN.pdf"
+  },
+  {
+    "date": "2017-03-17",
+    "score": 1,
+    "snippet": "Production Mark: MFG DATE recorded on Rocky4 carton label.",
+    "type": "Photo",
+    "source_ref": "Packaging_Test_Results_Review.pdf"
+  },
+  {
+    "date": "2017-03-28",
+    "score": 5,
+    "snippet": "Crush Test execution recorded.",
+    "type": "Document",
+    "source_ref": "Crush test_20170328.pdf"
+  },
+  {
+    "date": "2017-04-13",
+    "score": 4,
+    "snippet": "Verification: Gloss surface change noted on Waldo units (Sunny Yen).",
+    "type": "Document",
+    "source_ref": "EVT2_Reliability_Test_Reports.pdf"
+  },
+  {
+    "date": "2017-04-18",
+    "score": 8,
+    "snippet": "Reliability Crisis: Drop Test FAIL (LCM crack). Storage Temp FAIL (Cap floating).",
+    "type": "Document",
+    "source_ref": "LCR Reliability_ME_HW Test Status_20170418.pdf"
+  },
+  {
+    "date": "2017-04-27",
+    "score": 8,
+    "snippet": "Blocker: Dust Test FAIL. Units cannot be removed from Bazooka chassis.",
+    "type": "Document",
+    "source_ref": "LCR Reliability_ME_HW Test Status_20170427 (1).pdf"
+  },
+  {
+    "date": "2017-04-27",
+    "score": 7,
+    "snippet": "Structural Failure: Back cover & front housing detach during Crush Test.",
+    "type": "Document",
+    "source_ref": "LCR Reliability_ME_HW Test Status_20170427 (1).pdf"
+  },
+  {
+    "date": "2017-05-26",
+    "score": 3,
+    "snippet": "Redlines issued for Bazooka Metal Front Housing (0048-BZKA-01).",
+    "type": "Document",
+    "source_ref": "2D_3D_UPDATES_TRACKER_2017_06_05.pdf"
+  },
+  {
+    "date": "2017-05-30",
+    "score": 2,
+    "snippet": "Drawing Revision: ASSY, FRONT HOUSING SATIVA (740-00049).",
+    "type": "Document",
+    "source_ref": "misc-bolus.pdf"
+  },
+  {
+    "date": "2017-06-05",
+    "score": 2,
+    "snippet": "Tracker Update: Monitoring DVT components (Nuts, Glass, Labels).",
+    "type": "Document",
+    "source_ref": "2D_3D_UPDATES_TRACKER_2017_06_05.pdf"
+  },
+  {
+    "date": "2017-07-04",
+    "score": 6,
+    "snippet": "Drop Test (1.3m): Internal loose parts audible on Sativa #6 / Elvis #7.",
+    "type": "Document",
+    "source_ref": "DVT_Reliability_Test_Reports.pdf"
+  },
+  {
+    "date": "2017-07-10",
+    "score": 9,
+    "snippet": "Drop Test Breakthrough: Sativa #2 / Elvis #2 PASS 1.3m drops.",
+    "type": "Document",
+    "source_ref": "DVT_Reliability_Test_Reports.pdf"
+  },
+  {
+    "date": "2017-07-10",
+    "score": 5,
+    "snippet": "Cosmetic Fail: Protective film glue residue remaining on Waldo surface.",
+    "type": "Photo",
+    "source_ref": "Packaging_Test_Results_Review.pdf"
+  },
+  {
+    "date": "2017-07-10",
+    "score": 9,
+    "snippet": "Command Decision: Norris overrides 'Wet Hands' failure. Proceeds with FAIL result.",
+    "type": "Document",
+    "source_ref": "DVT_Reliability_Test_Reports.pdf"
+  }
 ]

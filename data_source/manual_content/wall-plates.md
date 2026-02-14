@@ -1,204 +1,3 @@
----
-audio_url: /assets/wall-plates/wall-plates-briefing.m4a
-bom:
-- label: Waldo 1-4
-  value: Wall Plate Gang Configurations [10]
-- label: ASSY, CHASSIS
-  value: Black, Sativa [11]
-- label: Die Cast Chassis
-  value: ADC12 Alloy [12]
-cast:
-- name: Erik Norris
-  org: NOON
-  role: The Architect
-- name: Ricky Lin
-  org: NOON/Vendor [14]
-  role: Mechanical Engineer
-- name: Yvonne Lai
-  org: NOON/Vendor [14]
-  role: Mechanical Engineer
-- name: Eddie Liang
-  org: NOON/Vendor [15]
-  role: Mechanical Engineer
-category: consumer_electronics
-complexity_vector:
-  part_count_growth:
-  - count: 0
-    date: 2016-09
-    phase: Concept
-  - count: 0
-    date: 2017-02
-    phase: EVT1 (Eng Validation)
-  - count: 288
-    date: 2017-04
-    phase: EVT2 (Design Validation)
-  - count: 0
-    date: 2017-06
-    phase: PVT (Prod Validation)
-  - count: 0
-    date: 2017-08
-    phase: MP (Mass Production)
-  process_density:
-  - complexity_score: 8
-    material: Polycarbonate (PC) / Pantone PQ-11-4800TCX
-    part_name: Waldo Wall Plate (Cover)
-    steps:
-    - Injection Molding (Custom Tool)
-    - In-Mold Decorating (Rear Logo)
-    - Matte UV Coating (Satin VDI 15)
-    - 'Protective Film Application (Crit: Glue Residue)'
-  - complexity_score: 6
-    material: Steel
-    part_name: Waldo Chassis
-    steps:
-    - Stamping (Custom Die)
-    - Deburring (Burr removal)
-    - Black Zinc Plating
-    - Laser Etch (Graphics Relocation)
-  supply_chain_nodes:
-  - location: China (Inferred)
-    role: CM / Integrator
-    vendor: FIH
-  - location: Global
-    role: Adhesive Supplier
-    vendor: 3M (Transition 467 -> 300LSE)
-  tooling_chain:
-  - cost_impact: High
-    lead_time_weeks: 0
-    tool_name: Cover Plate Injection Mold
-    type: Hard Tooling
-    vendor: FIH (Foxconn)
-  - cost_impact: Med
-    lead_time_weeks: 0
-    tool_name: Chassis Stamping Die
-    type: Hard Tooling
-    vendor: FIH (Foxconn)
-cyberspace:
-  enable: true
-  layout: linear
-  stickies: []
-date: 2016-12-12
-draft: false
-employer: noon
-endDate: 2017-08-31
-forensic_metrics:
-  financial: Scrap rate tracking across 4 shipments [1]
-  governance: Sprint EVT1 Validation to EVT2 Dev [3]
-  process: 10,800 Polishing hours vs 9,000 CNC hours [2]
-forensic_summary:
-  intervention: Tolerance stackup analysis (RSS vs Worst Case) for snap locations
-    [5]
-  result: Crush Test passed 30kg load [6]
-  trigger: Protective film floated up (Waldo), glue remain on the surface [4]
-gallery: []
-hxo_ready: true
-hydration_status: full
-industry: consumer_electronics
-isomorphics:
-- hardware_point: Snap location tolerance stackup (RSS 0.48mm) [9]
-  label: Interference
-  principle: Defined Interface Contracts
-  software_point: API endpoint strict typing
-listed: true
-metrics:
-  financial:
-    margins:
-    - Compressed chassis tooling lead times to 6 weeks for EVT1
-  governance:
-    dcdCount: 0
-    ecos:
-    - 'Tooling Redline: Square Dimples'
-  interventions:
-    count: 5
-    label: Critical Saves
-    value: 5
-  process:
-    yield:
-    - Tightened injection molding tolerances to +/- 0.05mm
-  quotes:
-  - Snaps will always go through holes [5]
-  - Protective film floated up(Elvis), glue remain on the surface [4]
-  - Sprint EVT1 Validation and EVT2 Dev [3]
-  war_stories:
-  - description: Eliminated 0mm interference risk by reducing perimeter gap, preventing
-      high-voltage collision.
-    label: Zero Clearance Kill
-    value: 0.3mm -> 0.2mm
-  - description: Replaced aggressive square dimples with circular pips to stop steel
-      deformation.
-    label: Chassis Pillowing
-    value: Dimple to Pip
-  - description: Identified plating failure causing grounding loss; managed via non-plated
-      EVT units.
-    label: Black Zinc Stop
-    value: Grounding Failure
-  - description: Tightened tolerances to +/- 0.05mm and added local pads to fix faceplate
-      looseness.
-    label: The Jiggle
-    value: Snap Tuning
-  - description: Compressed complex 2-gang tooling lead time to hit EVT1 schedule.
-    label: Speed Tooling
-    value: 6-Week Delivery
-phase_stats:
-  Design: 20
-  Engineering: 50
-  Production: 30
-  Strategy: 0
-presentation_mode: flagship
-primary_home: mech
-productionScale: series
-scars:
-- description: Eliminated 0mm interference risk by reducing perimeter gap, preventing
-    high-voltage collision.
-  label: Zero Clearance Kill
-  value: 0.3mm -> 0.2mm
-- description: Replaced aggressive square dimples with circular pips to stop steel
-    deformation.
-  label: Chassis Pillowing
-  value: Dimple to Pip
-- description: Identified plating failure causing grounding loss; managed via non-plated
-    EVT units.
-  label: Black Zinc Stop
-  value: Grounding Failure
-- description: Protective film adhesive failure left residue on cosmetic surfaces,
-    requiring manual visual inspection intervention.
-  label: The Glue Residue Crisis
-  value: Cosmetic Yield Kill
-- description: White and Black labels failed adhesion tests (W1-W3, B1-B2) requiring
-    immediate process revision.
-  label: Label Adhesion Failure
-  value: 5/5 FAIL
-- description: Worst Case (WC) tolerance analysis of 0.64mm ensured snaps 'always
-    go through holes' despite chassis variations.
-  label: Snap Fit Tolerance
-  value: 0.64mm WC
-slug: wall-plates
-tags:
-- Mechanism
-- Process
-- Yield
-- Cost_Down
-- Crisis
-- Materials
-targets:
-- main
-- mech
-teamSize: 7 (Erik Norris, Ricky Lin, Yvonne Lai, Eddie Liang, Alvin, Kelvin, Benson)
-  [13-15]
-theme: hyperspace
-tier: 1
-timeline:
-  end: '2017-08-31'
-  start: '2016-09-01'
-title: Wall Plate (Waldo)
-toolchain:
-- Creo (CAD Modeling)
-- Excel (Tolerance Stackup Analysis)
-- 'JIRA (Issue Tracking: WAL-10, WAL-15, WAL-22, WAL-23)'
-- FIH (Manufacturing Vendor)
-- Memtech (Injection Molding)
----
-
 # Project Waldo Forensic Report
 
 ## I. PROJECT SUMMARY
@@ -223,13 +22,19 @@ Rigorous forensic tolerance analysis ("Stackup Loop") exposed a catastrophic int
 - **The Grounding Impact:** This abrasion compromised the low-impedance grounding path required between the die-cast Bazooka and the stamped steel Waldo, as the zinc debris and oxidation created electrical resistance.
 - **The Jiggle (WAL-22):** Global tolerance slop allowed the "face plate [to] be jiggled," destroying the premium feel. Analysis showed a potential **0.9mm** worst-case clearance on snap width.
 
-### The Fix: Geometric Constraint & Tooling Surgery
+### The Cosmetic Crisis: Glue & Labels
+
+- **The Glue Residue:** During packaging validation, the protective film—critical for shielding the **Satin VDI 15** finish—suffered from adhesive transfer. The film "floated up" (bubbled) and left sticky residue on the user-facing surface, creating a "Cosmetic Yield Kill" scenario.
+- **Label Adhesion Failure:** Simultaneously, the regulatory labels on the Sativa/Elvis modules failed adhesion tests (W1-W3, B1-B2), peeling at the corners due to the low-surface-energy nature of the fine matte finish. This forced a migration to **3M 300LSE** high-strength adhesive.
+
+### The Fix: Geometric & Chemical Intervention
 
 I executed a multi-vector intervention to secure the fit:
 
 1.  **Kinematic Constraint:** Reduced the "perimeter Y gap" between the Cover Plate and Chassis from **0.3mm to 0.2mm**. This mechanically constrained the plate's vertical "droop," preventing it from biasing down into the 0mm interference zone.
 2.  **Tooling Redline:** Mandated a tooling change to replace deformation-inducing "square dimples" with **"smaller circular dimples" (pips)**, eliminating the pillowing and restoring Z-axis planarity.
 3.  **Precision Tuning:** Tightened snap width tolerances to **+/- 0.05mm** and added **"local pads"** to the molding, eliminating the "face plate jiggle" (WAL-22).
+4.  **Adhesive Migration:** Swapped standard adhesives for **3M 300LSE** to bond labels to the VDI 15 surface and instituted rigorous "Crush Testing" (30kg load) to validate the new assembly integrity.
 
 ## III. GOVERNANCE & RHYTHM
 
@@ -246,6 +51,7 @@ I executed a multi-vector intervention to secure the fit:
 3.  **Tightened** injection molding tolerances to **+/- 0.05mm** on snap features to eliminate "face plate jiggle" and secure premium tactility.
 4.  **Resolved 18** documented reliability defects (WAL-Series) including "Black zinc coating chips," "Warped surfaces," and "Sharp burr edges" prior to DVT.
 5.  **Identified** and corrected a **-0.30mm** interference in the slide-lock mechanism by mandating a transition from square stamping dimples to circular pips.
+6.  **Mitigated** a cosmetic yield crisis by identifying "Glue Residue" transfer from protective films and enforcing a switch to 300LSE adhesives for regulatory labels.
 
 ## V. VISUAL EVIDENCE (Pending Integration)
 
@@ -253,6 +59,7 @@ I executed a multi-vector intervention to secure the fit:
 - `SPEC_Reliability.pdf` (List of "WAL" defects including "Dimples... deformation").
 - `SAT-ELV_misc.pdf` (Redlines showing "Black zinc finish... chips away").
 - `SPEC_color.pdf` (CMF specification for Waldo Wall Plate and Chassis).
+- `Packaging_Test_Results_Review.pdf` (Evidence of "Waldo with Film" bubbles and residue).
 
 ---
 
@@ -385,3 +192,23 @@ The primary engineering hurdle was ensuring the die-cast Bazooka housing maintai
 
 - **The Mandate:** The issue tracker explicitly flagged **BAZ-41**: **"Must maintain conductivity between Bazooka and chassis for ground"**.
 - **The Surface Failure:** The EVT2 Reliability Test Plan identified a critical risk: **"Oxidation of chassis surface"**. If the Black Zinc plating chipped away (WAL-10), the underlying steel would oxidize, increasing resistance and failing UL safety standards for grounding continuity.
+
+---
+
+## DEEP DIVE: The Glue Residue Crisis (Packaging Failure)
+
+Based on the Forensic Engineering Analyst logs, the protective film residue on the Waldo and Elvis surfaces was the result of a specific adhesion failure mode identified during the packaging and cosmetic validation phase.
+
+### 1. The Mechanism of Failure: "Float" & "Transfer"
+
+The protective film—intended to shield the **Satin VDI 15** finish—became the primary source of contamination.
+
+- **The "Float":** Visual inspection revealed the film "floating up" (lifting), creating bubbles where the adhesive failed to bond to the film backing.
+- **Adhesive Transfer:** Upon removal, the adhesive failed cohesively, leaving **"glue remain on the surface"**. This sticky residue required manual cleaning or resulted in yield loss.
+
+### 2. The Systemic Adhesion Crisis
+
+This was part of a broader adhesion failure involving the **"Fine Matte"** surface finish:
+
+- **Label Failures:** Regulatory labels on Sativa/Elvis units also peeled off ("Bottom inner edges/corners lift") because the standard **3M 200 (467)** adhesive could not bond to the low-surface-energy texture.
+- **The Fix:** The team was forced to migrate to **3M 300LSE (9453LE)**, a high-strength acrylic adhesive, to secure both labels and resolve the film interaction issues.
