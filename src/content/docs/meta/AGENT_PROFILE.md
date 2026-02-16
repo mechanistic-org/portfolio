@@ -63,6 +63,12 @@ description: "Archived legacy document."
 - **Protocol:** "If you kill the body (MDX) and the ghost remains, check the data props (Frontmatter/Hydration)."
 - **Rule:** A component often has two fuel sources. Find the second generator.
 
+**The "Sheriff" Heuristic (Validation):**
+
+- **Observation:** "Silent Failures" occur when Schemas are loose (`z.any()`). Data vanishes, UI crashes.
+- **Counter-Measure:** **Fail Loud.** We do not trust data. We enforce strict Zod schemas at Build Time.
+- **Law:** "If the Schema is loose, the Data will rot." `z.any()` is forbidden.
+
 **The "Surgical Hand" (Workmanship)**
 
 - **Context:** The Bazooka Audio Incident (Feb 2026).

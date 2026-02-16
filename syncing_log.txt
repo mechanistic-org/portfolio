@@ -1,0 +1,18 @@
+[2m00:35:02[22m [34m[@astrojs/cloudflare][39m Enabling sessions with Cloudflare KV with the "SESSION" KV binding.
+[2m00:35:02[22m [34m[@astrojs/cloudflare][39m If you see the error "Invalid binding `SESSION`" in your build output, you need to add the binding to your wrangler config file.
+[2m00:35:02[22m [34m[content][39m Syncing content
+[2m00:35:02[22m [34m[content][39m Content config changed
+[2m00:35:02[22m [34m[content][39m Clearing content store
+[31m[InvalidContentEntryDataError][39m [1mprojects → webtv-cortez[22m data does not match collection schema.
+
+  [1mmetrics.process.yieldCrisis**: **metrics.process.yieldCrisis[22m: Expected type `"string"`, received `"null"`
+
+  [1mHint:[22m
+[33m    See [4mhttps://docs.astro.build/en/guides/content-collections/[24m for more information on content schemas.[39m
+  [1mError reference:[22m
+    [36m[4mhttps://docs.astro.build/en/reference/errors/invalid-content-entry-data-error/[24m[39m
+  [1mLocation:[22m
+    [4mD:\GitHub\eriknorris\src\content\projects\webtv-cortez\index.mdx:0:0[24m
+  [1mStack trace:[22m
+[2m    at getEntryDataAndImages (file:///D:/GitHub/eriknorris/node_modules/astro/dist/content/utils.js:161:26)
+    at async syncData (D:/GitHub/eriknorris/node_modules/astro/dist/content/loaders/glob.js:97:28)[22m

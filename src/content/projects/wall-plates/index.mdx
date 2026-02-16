@@ -1,78 +1,78 @@
 ---
 audio_url: /assets/wall-plates/wall-plates-briefing.m4a
 bom:
-- label: Waldo 1-4
-  value: Wall Plate Gang Configurations [10]
-- label: ASSY, CHASSIS
-  value: Black, Sativa [11]
-- label: Die Cast Chassis
-  value: ADC12 Alloy [12]
+  - label: Waldo 1-4
+    value: Wall Plate Gang Configurations [10]
+  - label: ASSY, CHASSIS
+    value: Black, Sativa [11]
+  - label: Die Cast Chassis
+    value: ADC12 Alloy [12]
 cast:
-- name: Erik Norris
-  org: NOON
-  role: The Architect
-- name: Ricky Lin
-  org: NOON/Vendor [14]
-  role: Mechanical Engineer
-- name: Yvonne Lai
-  org: NOON/Vendor [14]
-  role: Mechanical Engineer
-- name: Eddie Liang
-  org: NOON/Vendor [15]
-  role: Mechanical Engineer
+  - name: Erik Norris
+    org: NOON
+    role: The Architect
+  - name: Ricky Lin
+    org: NOON/Vendor [14]
+    role: Mechanical Engineer
+  - name: Yvonne Lai
+    org: NOON/Vendor [14]
+    role: Mechanical Engineer
+  - name: Eddie Liang
+    org: NOON/Vendor [15]
+    role: Mechanical Engineer
 category: consumer_electronics
 complexity_vector:
   part_count_growth:
-  - count: 0
-    date: 2016-09
-    phase: Concept
-  - count: 0
-    date: 2017-02
-    phase: EVT1 (Eng Validation)
-  - count: 288
-    date: 2017-04
-    phase: EVT2 (Design Validation)
-  - count: 0
-    date: 2017-06
-    phase: PVT (Prod Validation)
-  - count: 0
-    date: 2017-08
-    phase: MP (Mass Production)
+    - count: 0
+      date: 2016-09
+      phase: Concept
+    - count: 0
+      date: 2017-02
+      phase: EVT1 (Eng Validation)
+    - count: 288
+      date: 2017-04
+      phase: EVT2 (Design Validation)
+    - count: 0
+      date: 2017-06
+      phase: PVT (Prod Validation)
+    - count: 0
+      date: 2017-08
+      phase: MP (Mass Production)
   process_density:
-  - complexity_score: 8
-    material: Polycarbonate (PC) / Pantone PQ-11-4800TCX
-    part_name: Waldo Wall Plate (Cover)
-    steps:
-    - Injection Molding (Custom Tool)
-    - In-Mold Decorating (Rear Logo)
-    - Matte UV Coating (Satin VDI 15)
-    - 'Protective Film Application (Crit: Glue Residue)'
-  - complexity_score: 6
-    material: Steel
-    part_name: Waldo Chassis
-    steps:
-    - Stamping (Custom Die)
-    - Deburring (Burr removal)
-    - Black Zinc Plating
-    - Laser Etch (Graphics Relocation)
+    - complexity_score: 8
+      material: Polycarbonate (PC) / Pantone PQ-11-4800TCX
+      part_name: Waldo Wall Plate (Cover)
+      steps:
+        - Injection Molding (Custom Tool)
+        - In-Mold Decorating (Rear Logo)
+        - Matte UV Coating (Satin VDI 15)
+        - "Protective Film Application (Crit: Glue Residue)"
+    - complexity_score: 6
+      material: Steel
+      part_name: Waldo Chassis
+      steps:
+        - Stamping (Custom Die)
+        - Deburring (Burr removal)
+        - Black Zinc Plating
+        - Laser Etch (Graphics Relocation)
   supply_chain_nodes:
-  - location: China (Inferred)
-    role: CM / Integrator
-    vendor: FIH
-  - location: Global
-    role: Adhesive Supplier
-    vendor: 3M (Transition 467 -> 300LSE)
+    - location: China (Inferred)
+      role: CM / Integrator
+      vendor: FIH
+    - location: Global
+      role: Adhesive Supplier
+      vendor: 3M (Transition 467 -> 300LSE)
   tooling_chain:
-  - cost_impact: High
-    lead_time_weeks: 0
-    tool_name: Cover Plate Injection Mold
-    type: Hard Tooling
-    vendor: FIH (Foxconn)
-  - cost_impact: Med
-    lead_time_weeks: 0
-    tool_name: Chassis Stamping Die
-    type: Hard Tooling
-    vendor: FIH (Foxconn)
+    - cost_impact: High
+      lead_time_weeks: 0
+      tool_name: Cover Plate Injection Mold
+      type: Hard Tooling
+      vendor: FIH (Foxconn)
+    - cost_impact: Med
+      lead_time_weeks: 0
+      tool_name: Chassis Stamping Die
+      type: Hard Tooling
+      vendor: FIH (Foxconn)
 cyberspace:
   enable: true
   layout: linear
@@ -86,7 +86,8 @@ forensic_metrics:
   governance: Sprint EVT1 Validation to EVT2 Dev [3]
   process: 10,800 Polishing hours vs 9,000 CNC hours [2]
 forensic_summary:
-  intervention: Tolerance stackup analysis (RSS vs Worst Case) for snap locations
+  intervention:
+    Tolerance stackup analysis (RSS vs Worst Case) for snap locations
     [5]
   result: Crush Test passed 30kg load [6]
   trigger: Protective film floated up (Waldo), glue remain on the surface [4]
@@ -95,30 +96,30 @@ hxo_ready: true
 hydration_status: full
 industry: consumer_electronics
 isomorphics:
-- hardware_point: Snap location tolerance stackup (RSS 0.48mm) [9]
-  label: Interference
-  principle: Defined Interface Contracts
-  software_point: API endpoint strict typing
+  - hardware_point: Snap location tolerance stackup (RSS 0.48mm) [9]
+    label: Interference
+    principle: Defined Interface Contracts
+    software_point: API endpoint strict typing
 listed: true
 metrics:
   financial:
     margins:
-    - Compressed chassis tooling lead times to 6 weeks for EVT1
+      - Compressed chassis tooling lead times to 6 weeks for EVT1
   governance:
     dcdCount: 0
     ecos:
-    - 'Tooling Redline: Square Dimples'
+      - "Tooling Redline: Square Dimples"
   interventions:
     count: 5
     label: Critical Saves
     value: 5
   process:
     yield:
-    - Tightened injection molding tolerances to +/- 0.05mm
+      - Tightened injection molding tolerances to +/- 0.05mm
   quotes:
-  - Snaps will always go through holes [5]
-  - Protective film floated up(Elvis), glue remain on the surface [4]
-  - Sprint EVT1 Validation and EVT2 Dev [3]
+    - Snaps will always go through holes [5]
+    - Protective film floated up(Elvis), glue remain on the surface [4]
+    - Sprint EVT1 Validation and EVT2 Dev [3]
 phase_stats:
   Design: 20
   Engineering: 50
@@ -128,43 +129,45 @@ presentation_mode: flagship
 primary_home: mech
 productionScale: series
 scars:
-- description: Protective film adhesive failure left residue on cosmetic surfaces,
-    requiring manual visual inspection intervention [4, 7].
-  label: The Glue Residue Crisis
-  value: Cosmetic Yield Kill
-- description: White and Black labels failed adhesion tests (W1-W3, B1-B2) requiring
-    immediate process revision [8].
-  label: Label Adhesion Failure
-  value: 5/5 FAIL
-- description: Worst Case (WC) tolerance analysis of 0.64mm ensured snaps 'always
-    go through holes' despite chassis variations [5].
-  label: Snap Fit Tolerance
-  value: 0.64mm WC
+  - description:
+      Protective film adhesive failure left residue on cosmetic surfaces,
+      requiring manual visual inspection intervention [4, 7].
+    label: The Glue Residue Crisis
+    value: Cosmetic Yield Kill
+  - description:
+      White and Black labels failed adhesion tests (W1-W3, B1-B2) requiring
+      immediate process revision [8].
+    label: Label Adhesion Failure
+    value: 5/5 FAIL
+  - description:
+      Worst Case (WC) tolerance analysis of 0.64mm ensured snaps 'always
+      go through holes' despite chassis variations [5].
+    label: Snap Fit Tolerance
+    value: 0.64mm WC
 slug: wall-plates
 tags:
-- Mechanism
-- Process
-- Yield
-- Cost_Down
-- Crisis
-- Materials
+  - Mechanism
+  - Process
+  - Yield
+  - Cost_Down
+  - Crisis
+  - Materials
 targets:
-- main
-- mech
-teamSize: 7 (Erik Norris, Ricky Lin, Yvonne Lai, Eddie Liang, Alvin, Kelvin, Benson)
+  - main
+  - mech
+teamSize:
+  7 (Erik Norris, Ricky Lin, Yvonne Lai, Eddie Liang, Alvin, Kelvin, Benson)
   [13-15]
 theme: hyperspace
 tier: 1
-timeline:
-- end
-- start
+timeline: []
 title: Wall Plate (Waldo)
 toolchain:
-- Creo (CAD Modeling)
-- Excel (Tolerance Stackup Analysis)
-- 'JIRA (Issue Tracking: WAL-10, WAL-15, WAL-22, WAL-23)'
-- FIH (Manufacturing Vendor)
-- Memtech (Injection Molding)
+  - Creo (CAD Modeling)
+  - Excel (Tolerance Stackup Analysis)
+  - "JIRA (Issue Tracking: WAL-10, WAL-15, WAL-22, WAL-23)"
+  - FIH (Manufacturing Vendor)
+  - Memtech (Injection Molding)
 ---
 
 Waldo Wall Plates and Chassis Forensic Report
@@ -194,8 +197,6 @@ V. VISUAL EVIDENCE
 • Packaging_Test_Results_Review.pdf
 • Crush test_20170419 Regression.pdf
 • Waldo_Cover-Chassis_snaps.pdf
-
-
 
 Waldo EVT2: Mechanical Forensic & Tolerance Review
 I. EXECUTIVE SUMMARY
@@ -239,36 +240,36 @@ VI. VISUAL ARTIFACTS
 • Defects: Design Issues.pdf (Page 1: Pillowed Dimples & Plating Chips)
 • CMF: NOON_misc_1.pdf (Page 1: Waldo Dimensions & Finish)
 
-
 Can you explain the difference between RSS and Worst Case tolerance analysis in the snap design?
 
 Based on the forensic engineering logs for the Waldo project, the difference between Worst Case (WC) and Root Sum Squared (RSS) analysis was the deciding factor between a design that appeared broken and one that was viable for mass production.
 Here is the breakdown of how these methodologies diverged in the snap design:
+
 1. The Methodology War
-• Worst Case (WC): This method assumes a "perfect storm" where every single component in the assembly measures at its maximum or minimum allowable limit simultaneously. It is an arithmetic sum of the tolerances. In the Waldo logs, this is explicitly noted as the standard for short tolerance loops: "Worst Case tolerance are used when loop is 3 or fewer parts".
-• Root Sum Squared (RSS): This method assumes tolerances follow a normal statistical distribution (Bell curve). It assumes that it is statistically unlikely for a thick chassis to be paired with a short snap and a high rib all at the same time. It calculates the square root of the sum of the squared tolerances, resulting in a tighter, more optimistic tolerance window.
+   • Worst Case (WC): This method assumes a "perfect storm" where every single component in the assembly measures at its maximum or minimum allowable limit simultaneously. It is an arithmetic sum of the tolerances. In the Waldo logs, this is explicitly noted as the standard for short tolerance loops: "Worst Case tolerance are used when loop is 3 or fewer parts".
+   • Root Sum Squared (RSS): This method assumes tolerances follow a normal statistical distribution (Bell curve). It assumes that it is statistically unlikely for a thick chassis to be paired with a short snap and a high rib all at the same time. It calculates the square root of the sum of the squared tolerances, resulting in a tighter, more optimistic tolerance window.
 2. Case Study: The Z-Axis Snap Hazard
-The critical nature of this distinction is visible in the Z-Axis Snap Engagement analysis (will the snap click, or will it be blocked?):
-• The Stack: The loop consisted of three parts:
-1. Chassis Material Thickness (-1.20mm)
-2. Cover Plate Rib Height (-2.71mm)
-3. Cover Plate Snap Height (4.07mm).
-• The Worst Case (WC) Verdict: FAILURE
-◦ Calculation: 0.16 ± 0.20
-◦ Result: A minimum clearance of -0.04mm.
-◦ Implication: In the worst-case scenario, the parts interfere. The snap would physically collide with the chassis before locking into place, leading to a failure to seat. The engineering note advised: "Snaps may not fully engage/seat. May need to tighten tolerances on dwgs".
-• The RSS Verdict: PASS
-◦ Calculation: 0.16 ± 0.12
-◦ Result: A minimum clearance of +0.04mm.
-◦ Implication: Statistically, the vast majority of units will have a positive gap, meaning they will assemble correctly. The calculated variation drops from 0.20mm (WC) to 0.12mm (RSS), eliminating the theoretical interference.
-3. The "Y-Axis" Safety Margin
-In contrast, the Y-Axis analysis (do the snaps align with the holes?) passed both methods easily, confirming the robust nature of that specific geometry:
-• WC: Minimum clearance of 0.24mm.
-• RSS: Minimum clearance of 0.36mm.
-• Conclusion: "Snaps will always go through holes".
-Summary
-For the Waldo project, Worst Case analysis exposed the "hard stops"—theoretical failures that could stop shipment if tolerances drifted. RSS provided the "production reality," estimating actual yield. Because the snap loop had only 3 parts, the engineers prioritized the Worst Case findings, recommending tighter drawing tolerances to eliminate the -0.04mm interference risk.
-What are the primary safety and quality standards for Noon lighting products?
+   The critical nature of this distinction is visible in the Z-Axis Snap Engagement analysis (will the snap click, or will it be blocked?):
+   • The Stack: The loop consisted of three parts:
+3. Chassis Material Thickness (-1.20mm)
+4. Cover Plate Rib Height (-2.71mm)
+5. Cover Plate Snap Height (4.07mm).
+   • The Worst Case (WC) Verdict: FAILURE
+   ◦ Calculation: 0.16 ± 0.20
+   ◦ Result: A minimum clearance of -0.04mm.
+   ◦ Implication: In the worst-case scenario, the parts interfere. The snap would physically collide with the chassis before locking into place, leading to a failure to seat. The engineering note advised: "Snaps may not fully engage/seat. May need to tighten tolerances on dwgs".
+   • The RSS Verdict: PASS
+   ◦ Calculation: 0.16 ± 0.12
+   ◦ Result: A minimum clearance of +0.04mm.
+   ◦ Implication: Statistically, the vast majority of units will have a positive gap, meaning they will assemble correctly. The calculated variation drops from 0.20mm (WC) to 0.12mm (RSS), eliminating the theoretical interference.
+6. The "Y-Axis" Safety Margin
+   In contrast, the Y-Axis analysis (do the snaps align with the holes?) passed both methods easily, confirming the robust nature of that specific geometry:
+   • WC: Minimum clearance of 0.24mm.
+   • RSS: Minimum clearance of 0.36mm.
+   • Conclusion: "Snaps will always go through holes".
+   Summary
+   For the Waldo project, Worst Case analysis exposed the "hard stops"—theoretical failures that could stop shipment if tolerances drifted. RSS provided the "production reality," estimating actual yield. Because the snap loop had only 3 parts, the engineers prioritized the Worst Case findings, recommending tighter drawing tolerances to eliminate the -0.04mm interference risk.
+   What are the primary safety and quality standards for Noon lighting products?
 
 Noon Product Family: Compliance & Quality Forensic Extract
 I. REGULATORY GOVERNANCE (The Safety "Hard Stops")
@@ -339,50 +340,52 @@ Can you explain the difference between RSS and Worst Case tolerance analysis in 
 
 Based on the forensic engineering logs for the Waldo project, the distinction between Worst Case (WC) and Root Sum Squared (RSS) analysis was the deciding factor between a design that appeared mechanically broken and one that was viable for production.
 Here is the forensic breakdown of how these methodologies diverged in the snap design:
+
 1. The Methodology War
-• Worst Case (WC): This method assumes a "perfect storm" where every component in the assembly measures at its maximum or minimum allowable limit simultaneously. It is an arithmetic sum of the tolerances. In the Waldo logs, this is explicitly noted as the governing standard for short loops: "Worst Case tolerance are used when loop is 3 or fewer parts".
-• Root Sum Squared (RSS): This method assumes tolerances follow a normal statistical distribution (Bell curve). It assumes it is statistically unlikely for a thick chassis to be paired with a short snap and a high rib simultaneously. It calculates the square root of the sum of the squared tolerances, resulting in a tighter, more optimistic window.
+   • Worst Case (WC): This method assumes a "perfect storm" where every component in the assembly measures at its maximum or minimum allowable limit simultaneously. It is an arithmetic sum of the tolerances. In the Waldo logs, this is explicitly noted as the governing standard for short loops: "Worst Case tolerance are used when loop is 3 or fewer parts".
+   • Root Sum Squared (RSS): This method assumes tolerances follow a normal statistical distribution (Bell curve). It assumes it is statistically unlikely for a thick chassis to be paired with a short snap and a high rib simultaneously. It calculates the square root of the sum of the squared tolerances, resulting in a tighter, more optimistic window.
 2. Case Study: The Z-Axis Snap Hazard
-The critical nature of this distinction is visible in the Z-Axis Snap Engagement analysis (checking if the snap will click or be blocked):
-• The Stack: The loop consisted of exactly 3 parts, triggering the Worst Case mandate,:
-1. Chassis Material Thickness (-1.20mm)
-2. Cover Plate Rib Height (-2.71mm)
-3. Cover Plate Snap Height (4.07mm).
-• The Worst Case (WC) Verdict: FAILURE
-◦ Calculation: 0.16 ± 0.20
-◦ Result: A minimum clearance of -0.04mm,.
-◦ Implication: In the worst-case scenario, the parts interfere. The snap would physically collide with the chassis before locking into place. The engineering log warned: "Snaps may not fully engage/seat. May need to tighten tolerances on dwgs",.
-• The RSS Verdict: PASS
-◦ Calculation: 0.16 ± 0.12
-◦ Result: A minimum clearance of +0.04mm,.
-◦ Implication: Statistically, the vast majority of units will have a positive gap, meaning they will assemble correctly. The calculated variation drops from 0.20mm (WC) to 0.12mm (RSS), eliminating the theoretical interference.
-3. The "Y-Axis" Safety Margin
-In contrast, the Y-Axis analysis (do the snaps align with the holes?) passed both methods easily, confirming the robust nature of that specific geometry:
-• WC: Minimum clearance of 0.24mm,.
-• RSS: Minimum clearance of 0.36mm.
-• Conclusion: "Snaps will always go through holes",.
-Summary
-For the Waldo snaps, Worst Case analysis exposed the "hard stops"—theoretical failures that could stop shipment if tolerances drifted. RSS provided the "production reality," estimating actual yield. Because the snap loop had only 3 parts, the engineers prioritized the Worst Case findings, identifying the -0.04mm interference risk that required drawing updates,.
-Tell me more about the Waldo glue residue crisis.
+   The critical nature of this distinction is visible in the Z-Axis Snap Engagement analysis (checking if the snap will click or be blocked):
+   • The Stack: The loop consisted of exactly 3 parts, triggering the Worst Case mandate,:
+3. Chassis Material Thickness (-1.20mm)
+4. Cover Plate Rib Height (-2.71mm)
+5. Cover Plate Snap Height (4.07mm).
+   • The Worst Case (WC) Verdict: FAILURE
+   ◦ Calculation: 0.16 ± 0.20
+   ◦ Result: A minimum clearance of -0.04mm,.
+   ◦ Implication: In the worst-case scenario, the parts interfere. The snap would physically collide with the chassis before locking into place. The engineering log warned: "Snaps may not fully engage/seat. May need to tighten tolerances on dwgs",.
+   • The RSS Verdict: PASS
+   ◦ Calculation: 0.16 ± 0.12
+   ◦ Result: A minimum clearance of +0.04mm,.
+   ◦ Implication: Statistically, the vast majority of units will have a positive gap, meaning they will assemble correctly. The calculated variation drops from 0.20mm (WC) to 0.12mm (RSS), eliminating the theoretical interference.
+6. The "Y-Axis" Safety Margin
+   In contrast, the Y-Axis analysis (do the snaps align with the holes?) passed both methods easily, confirming the robust nature of that specific geometry:
+   • WC: Minimum clearance of 0.24mm,.
+   • RSS: Minimum clearance of 0.36mm.
+   • Conclusion: "Snaps will always go through holes",.
+   Summary
+   For the Waldo snaps, Worst Case analysis exposed the "hard stops"—theoretical failures that could stop shipment if tolerances drifted. RSS provided the "production reality," estimating actual yield. Because the snap loop had only 3 parts, the engineers prioritized the Worst Case findings, identifying the -0.04mm interference risk that required drawing updates,.
+   Tell me more about the Waldo glue residue crisis.
 
 Waldo Forensic Report: The Protective Film Residue Crisis
 I. INCIDENT SUMMARY
 Subject: Cosmetic Contamination / Adhesive Transfer Component: Waldo Wall Plate (Protective Shipping Film) Status: CRITICAL YIELD KILL
 The "Glue Residue Crisis" was a catastrophic breakdown in the final mile of the manufacturing process. The protective film—intended to shield the pristine "Satin VDI 15" polycarbonate finish during transit—became a source of contamination itself. Instead of peeling clean, the film suffered from adhesive transfer, leaving sticky residue on the user-facing surfaces of the device.
 II. THE MECHANISM OF FAILURE
+
 1. The "Float" Phenomenon (The Trigger) Visual inspection during packaging validation (Rocky4/DIY4 protocols) revealed that the protective film was not maintaining a uniform bond with the Waldo faceplate.
-• Observation: The film was "floating up" from the surface, creating visible "bubbles under the film".
-• Implication: This separation allowed air pockets to form, likely weakening the bond between the adhesive and the film backing while the adhesive remained wet out on the plastic surface.
+   • Observation: The film was "floating up" from the surface, creating visible "bubbles under the film".
+   • Implication: This separation allowed air pockets to form, likely weakening the bond between the adhesive and the film backing while the adhesive remained wet out on the plastic surface.
 2. Adhesive Transfer (The Result) When the film was removed, the adhesive failed cohesively or adhesively at the film-backing interface rather than the device interface.
-• The Defect: "Glue remain on the surface".
-• Severity: This required manual cleaning intervention or resulted in scrapped parts, effectively negating the purpose of the protective film. The defect was flagged as a "Known issue" in the packaging reviews.
-III. FORENSIC CONTEXT
-This failure occurred simultaneously with a broader "Adhesion Crisis" across the Sativa/Elvis/Waldo ecosystem during EVT2:
-• Label Failures: While the protective film was leaving residue, the regulatory labels (Sativa/Elvis) were falling off entirely due to the "Fine Matte" surface rejecting the 3M 200 (467) adhesive.
-• Abrasion Risks: The packaging tests also exposed "switch tray cornor abrasion," necessitating the protective film in the first place. We were trapped in a loop: the packaging caused abrasion, so we added film; the film failed, leaving glue residue.
-IV. VISUAL EVIDENCE
-• Packaging_Test_Results_Review.pdf: Contains photographic evidence of "Waldo with Film(bubble under the film)" and the resulting residue.
-What are the specific labels that failed adhesion tests?
+   • The Defect: "Glue remain on the surface".
+   • Severity: This required manual cleaning intervention or resulted in scrapped parts, effectively negating the purpose of the protective film. The defect was flagged as a "Known issue" in the packaging reviews.
+   III. FORENSIC CONTEXT
+   This failure occurred simultaneously with a broader "Adhesion Crisis" across the Sativa/Elvis/Waldo ecosystem during EVT2:
+   • Label Failures: While the protective film was leaving residue, the regulatory labels (Sativa/Elvis) were falling off entirely due to the "Fine Matte" surface rejecting the 3M 200 (467) adhesive.
+   • Abrasion Risks: The packaging tests also exposed "switch tray cornor abrasion," necessitating the protective film in the first place. We were trapped in a loop: the packaging caused abrasion, so we added film; the film failed, leaving glue residue.
+   IV. VISUAL EVIDENCE
+   • Packaging_Test_Results_Review.pdf: Contains photographic evidence of "Waldo with Film(bubble under the film)" and the resulting residue.
+   What are the specific labels that failed adhesion tests?
 
 Based on the forensic engineering logs, the following specific labels suffered catastrophic adhesion and durability failures during the EVT1 and EVT2 validation phases:
 I. THE PRIMARY OFFENDER: Sativa/Elvis Main Label (710-00011)
@@ -402,24 +405,26 @@ The serial number label on the "Bazooka" base unit failed mechanical durability 
 • The Impact: This defect (BAZ 87) threatened the traceability of the units, as the white ink could be easily removed, rendering the serial number useless.
 IV. THE YIELD KILLER: Protective Film
 While not a permanent label, the temporary protective film for the Waldo wall plate failed adhesively in two directions:
+
 1. Float: It failed to stick to the device ("floated up"), allowing bubbles.
 2. Transfer: It stuck too well to the device upon removal, leaving "glue remain on the surface".
-How did the 0.64mm Worst Case tolerance risk impact the EVT2 assembly?
+   How did the 0.64mm Worst Case tolerance risk impact the EVT2 assembly?
 
 Based on the forensic tolerance logs, the 0.64mm figure refers to the Nominal Clearance calculated for the Y-Axis Snap Alignment (fitting the cover plate snaps into the chassis slots).
 Here is how this specific metric impacted the EVT2 assembly:
+
 1. The "Safety Net" Validation
-While the user prompt characterizes it as a "risk," the 0.64mm nominal value was actually the critical safety buffer that prevented assembly failure.
-• The Analysis: The engineering team applied a Worst Case (WC) tolerance stack-up to this 0.64mm nominal gap.
-• The Calculation: 0.64mm (Nom) ± 0.40mm (Tol) = 0.24mm (Min Clearance).
-• The Verdict: Because the Worst Case scenario still resulted in a positive clearance of 0.24mm, the analysis concluded: "Snaps will always go through holes".
+   While the user prompt characterizes it as a "risk," the 0.64mm nominal value was actually the critical safety buffer that prevented assembly failure.
+   • The Analysis: The engineering team applied a Worst Case (WC) tolerance stack-up to this 0.64mm nominal gap.
+   • The Calculation: 0.64mm (Nom) ± 0.40mm (Tol) = 0.24mm (Min Clearance).
+   • The Verdict: Because the Worst Case scenario still resulted in a positive clearance of 0.24mm, the analysis concluded: "Snaps will always go through holes".
 2. Contrast with Z-Axis Failure
-The robustness of this 0.64mm Y-axis clearance allowed the team to isolate the real threat.
-• While the Y-Axis (0.64mm Nom) was safe, the Z-Axis analysis exposed a true interference risk of -0.06mm (interference) to 0.34mm (gap).
-• Impact: The confirmed safety of the Y-axis (0.64mm) meant the team did not need to modify the tooling for snap position (X/Y), allowing them to focus resources on resolving the Z-axis engagement depth ("Snaps may not fully engage/seat") and the "Bazooka" retention interference.
+   The robustness of this 0.64mm Y-axis clearance allowed the team to isolate the real threat.
+   • While the Y-Axis (0.64mm Nom) was safe, the Z-Axis analysis exposed a true interference risk of -0.06mm (interference) to 0.34mm (gap).
+   • Impact: The confirmed safety of the Y-axis (0.64mm) meant the team did not need to modify the tooling for snap position (X/Y), allowing them to focus resources on resolving the Z-axis engagement depth ("Snaps may not fully engage/seat") and the "Bazooka" retention interference.
 3. Enabling the EVT2 Build
-This validation was a primary "Go" signal for the 288-unit EVT2 allocation. By confirming that the snaps would physically clear the steel chassis slots even under worst-case manufacturing variations, the architecture team avoided a "hard stop" that would have prevented the cover plates from being installed at all.
-Tell me more about the 'Pillowed Dimple' defect on the steel chassis.
+   This validation was a primary "Go" signal for the 288-unit EVT2 allocation. By confirming that the snaps would physically clear the steel chassis slots even under worst-case manufacturing variations, the architecture team avoided a "hard stop" that would have prevented the cover plates from being installed at all.
+   Tell me more about the 'Pillowed Dimple' defect on the steel chassis.
 
 Based on the forensic engineering logs, the "Pillowed Dimple" defect (Log ID: WAL-15) was a specific metal deformation issue identified during the manufacturing of the Waldo chassis (the stamped steel mounting plate).
 I. The Mechanism of Failure
@@ -486,46 +491,47 @@ Which resins were used for the color-matched white parts?
 
 Based on the forensic manufacturing logs, the engineering team utilized two primary resin families to achieve the specific "White" aesthetic (Pantone PQ-11-4800TCX) required for the Locoroll product line (Elvis, Sativa, and Waldo).
 The material selection was driven by a "Long lead time" crisis and color-matching difficulties, necessitating a split strategy between Polycarbonate (PC) and PC/ABS blends.
+
 1. SABIC LEXAN EXL9330 (Polycarbonate)
-This was the baseline material for the "White" housings and Waldo wall plates before supply chain issues forced alternatives.
-• Target Color Code: WH8E554 (Standard White) and 8T9A1034 (Custom Match).
-• The Crisis: During the EVT2 build, the team faced a shortage of the correct Pantone-matched resin.
-◦ Interim Fix: They used EXL9330-WH6E276 for the majority of the build, noting explicitly that it was "yellower than the Pantone white".
-◦ DVT Solution: For the DVT phase, they committed to a 500kg MOQ of EXL9330-8T9A1034 to correct the color.
+   This was the baseline material for the "White" housings and Waldo wall plates before supply chain issues forced alternatives.
+   • Target Color Code: WH8E554 (Standard White) and 8T9A1034 (Custom Match).
+   • The Crisis: During the EVT2 build, the team faced a shortage of the correct Pantone-matched resin.
+   ◦ Interim Fix: They used EXL9330-WH6E276 for the majority of the build, noting explicitly that it was "yellower than the Pantone white".
+   ◦ DVT Solution: For the DVT phase, they committed to a 500kg MOQ of EXL9330-8T9A1034 to correct the color.
 2. SABIC CYCOLOY CX7240U (PC/ABS Blend)
-This resin was introduced specifically for the Elvis front cover and Waldo faceplates to resolve lead time and color-matching constraints.
-• Target Color Code: 8T9A1580 (Custom Match White).
-• Application:
-◦ Elvis Front Housing: The logs confirm a "Green light" to prepare CX7240U-8T9A1580 to meet the schedule.
-◦ Waldo Faceplates: Technical drawings for the Waldo 1-Gang through 4-Gang plates specify PC/ABS SABIC CX7240U-8T9A1580 with a "YS 20019 B" finish.
-• Variant: An earlier or alternative code, 8T9A1584, also appears in the BOM for Elvis components.
-Summary of Resin-Color Combinations
-Component
-Resin Family
-Resin Grade
-Color Code
-Status
-Waldo / Elvis
-PC/ABS
-SABIC CX7240U
-8T9A1580
-Primary (Color Matched)
-Sativa / General
-PC
-SABIC EXL9330
-WH8E554
-Legacy / Baseline
-EVT2 Build
-PC
-SABIC EXL9330
-WH6E276
-"Yellower" Interim
-DVT Build
-PC
-SABIC EXL9330
-8T9A1034
-DVT Color Match
-How did the 4-gang Waldo faceplate tolerances differ from the 2-gang?
+   This resin was introduced specifically for the Elvis front cover and Waldo faceplates to resolve lead time and color-matching constraints.
+   • Target Color Code: 8T9A1580 (Custom Match White).
+   • Application:
+   ◦ Elvis Front Housing: The logs confirm a "Green light" to prepare CX7240U-8T9A1580 to meet the schedule.
+   ◦ Waldo Faceplates: Technical drawings for the Waldo 1-Gang through 4-Gang plates specify PC/ABS SABIC CX7240U-8T9A1580 with a "YS 20019 B" finish.
+   • Variant: An earlier or alternative code, 8T9A1584, also appears in the BOM for Elvis components.
+   Summary of Resin-Color Combinations
+   Component
+   Resin Family
+   Resin Grade
+   Color Code
+   Status
+   Waldo / Elvis
+   PC/ABS
+   SABIC CX7240U
+   8T9A1580
+   Primary (Color Matched)
+   Sativa / General
+   PC
+   SABIC EXL9330
+   WH8E554
+   Legacy / Baseline
+   EVT2 Build
+   PC
+   SABIC EXL9330
+   WH6E276
+   "Yellower" Interim
+   DVT Build
+   PC
+   SABIC EXL9330
+   8T9A1034
+   DVT Color Match
+   How did the 4-gang Waldo faceplate tolerances differ from the 2-gang?
 
 Based on the forensic engineering documents, specifically the tolerance stack-up analyses, the 4-gang Waldo faceplate tolerances differed from the 2-gang in the following ways:
 • Derived Analysis (Proxy Method): The 4-gang tolerances were not calculated from scratch but were extrapolated from the 2-gang parts. The engineering team used the 2-gang manufacturing tolerances as a baseline to validate the 4-gang design, identifying the 4-gang configuration as the "Worst Case" due to its extended length (approx. 215mm vs. 123mm).
@@ -556,7 +562,7 @@ III. GOVERNANCE & RHYTHM
 • The Pulse: Color Chips were serialized (e.g., 041-00008 for Sativa Bronze Paint) and tracked via "Color Chip Trackers" to ensure every vendor (FIH, Biel, Memtech) calibrated to the same "Golden Sample".
 • The Artifacts:
 ◦ 040-00020: The "Cosmetic Specification" bible defining defects (Orange Peel, Blisters, Flow Lines).
-◦ 710-00013: The "Chip Details Label" attached to every sample, recording precise Lab* spectrophotometer values (Konica Minolta 2600d) to quantify drift.
+◦ 710-00013: The "Chip Details Label" attached to every sample, recording precise Lab\* spectrophotometer values (Konica Minolta 2600d) to quantify drift.
 IV. LINKEDIN ARTIFACTS (The Numbers)
 • Defined a 10-year operational lifetime cosmetic standard validated by 300-hour accelerated UV testing.
 • Enforced zero-tolerance adhesion metrics (Class 5B/4B) via ASTM D3359 Cross-Cut Tape testing on all painted surfaces.
@@ -578,30 +584,31 @@ II. THE ANATOMY OF FAILURE (Heuristic Analysis)
 Discovery Heuristics Applied: Quality (Aesthetic Consistency), Solo Mandate (Supply Chain Constraints).
 • The Trigger (Crisis): The supply chain for the baseline Polycarbonate (SABIC LEXAN EXL9330) could not deliver the custom Pantone PQ-11-4800TCX match in time for the EVT2 build. The specific custom color code 8T9A1034 carried a 6-week lead time and a 500kg Minimum Order Quantity (MOQ), threatening to stall the 288-unit Waldo build and Elvis validation.
 • The Intervention (The "Yellow" Compromise): For the EVT2 build, we executed a "partial" material strategy:
+
 1. Elvis (Limited): Secured only 50 units using the correct new resin.
 2. General Population (The "Yellow" Parts): The remainder of the build utilized an interim resin, EXL9330-WH6E276. The logs explicitly flagged this material as "yellower than the Pantone white," accepting a known cosmetic defect to maintain schedule velocity.
 3. The PC/ABS Pivot: To solve this permanently for DVT, we authorized a material change for the Elvis Cap and Waldo Faceplates to SABIC CYCOLOY CX7240U (PC/ABS blend), utilizing color code 8T9A1580 (or 8T9A1584) to achieve the target white.
-• The Result (Impact):
-◦ EVT2 Survival: The build proceeded with mixed aesthetics; "White" parts varied between the correct Pantone and the "yellower" substitute.
-◦ Financial Commitment: We were forced to issue a $4,900 liability PO for the 500kg MOQ of the custom 8T9A1034 resin to secure the DVT timeline.
-◦ Sativa "Grey" Shift: On the Sativa unit, color matching failed functionally. To hide "front housing coating peel off" (Defect SAT-127) and scratch visibility, we abandoned the white substrate entirely, pivoting to a "Gray" PC+ABS resin (CX7240U-7T3A1948) to mask defects under the paint.
-III. GOVERNANCE & RHYTHM
-• The Pulse: Managed via the "Locoroll action review," tracking resin arrival dates (e.g., "CX7240U-8T9A1580 is around 5/20") against tool trials at Memtech and Tongda.
-• The Artifacts:
-◦ NOON_misc_1.pdf (Defined Color Chip standards for 8T9A1580).
-◦ Locorol action review_05082017 ver2.pdf (Documented the "yellower" deviation).
-IV. LINKEDIN ARTIFACTS (The Numbers)
-• Authorized a $4,900 strategic material liability to secure custom color resins for DVT.
-• Mitigated a 6-week lead time risk by qualifying an interim "Yellow" resin (WH6E276) for EVT2.
-• Transitioned 2 major cosmetic components (Elvis Cap, Waldo Plate) from PC to PC/ABS (CX7240U) to stabilize color.
-• Directed a 500kg MOQ purchase to lock in the 8T9A1034 custom white formula.
-• Reduced cosmetic scrap by pivoting Sativa substrates to Gray (7T3A1948) to mask coating failures.
-V. VISUAL EVIDENCE
-• Locorol action review_05082017 ver2.pdf
-• NOON_misc_1.pdf
-• BOM_CoGs_etc.pdf
-• EVT2_Reliability_Test_Plan.pdf
-How did the 4-gang Waldo faceplate perform in DVT?
+   • The Result (Impact):
+   ◦ EVT2 Survival: The build proceeded with mixed aesthetics; "White" parts varied between the correct Pantone and the "yellower" substitute.
+   ◦ Financial Commitment: We were forced to issue a $4,900 liability PO for the 500kg MOQ of the custom 8T9A1034 resin to secure the DVT timeline.
+   ◦ Sativa "Grey" Shift: On the Sativa unit, color matching failed functionally. To hide "front housing coating peel off" (Defect SAT-127) and scratch visibility, we abandoned the white substrate entirely, pivoting to a "Gray" PC+ABS resin (CX7240U-7T3A1948) to mask defects under the paint.
+   III. GOVERNANCE & RHYTHM
+   • The Pulse: Managed via the "Locoroll action review," tracking resin arrival dates (e.g., "CX7240U-8T9A1580 is around 5/20") against tool trials at Memtech and Tongda.
+   • The Artifacts:
+   ◦ NOON_misc_1.pdf (Defined Color Chip standards for 8T9A1580).
+   ◦ Locorol action review_05082017 ver2.pdf (Documented the "yellower" deviation).
+   IV. LINKEDIN ARTIFACTS (The Numbers)
+   • Authorized a $4,900 strategic material liability to secure custom color resins for DVT.
+   • Mitigated a 6-week lead time risk by qualifying an interim "Yellow" resin (WH6E276) for EVT2.
+   • Transitioned 2 major cosmetic components (Elvis Cap, Waldo Plate) from PC to PC/ABS (CX7240U) to stabilize color.
+   • Directed a 500kg MOQ purchase to lock in the 8T9A1034 custom white formula.
+   • Reduced cosmetic scrap by pivoting Sativa substrates to Gray (7T3A1948) to mask coating failures.
+   V. VISUAL EVIDENCE
+   • Locorol action review_05082017 ver2.pdf
+   • NOON_misc_1.pdf
+   • BOM_CoGs_etc.pdf
+   • EVT2_Reliability_Test_Plan.pdf
+   How did the 4-gang Waldo faceplate perform in DVT?
 
 4-Gang Waldo Faceplate Forensic Report: DVT Status
 I. COMPONENT SUMMARY

@@ -1,83 +1,83 @@
 ---
 bom:
-- label: Carousel
-  value: PG-22 & PG-33 / HIPS + ABS
-- label: Pinch Roller Assembly
-  value: Custom Spring / Hard Mount Spacers
+  - label: Carousel
+    value: PG-22 & PG-33 / HIPS + ABS
+  - label: Pinch Roller Assembly
+    value: Custom Spring / Hard Mount Spacers
 cast:
-- name: Erik Norris
-  org: Kaleidescape
-  role: Lead Mechanical / The Architect
-- name: Weddy Wang
-  org: Steman/YungChing
-  role: Vendor Lead
-- name: Michael Clader
-  org: Kaleidescape
-  role: Dir. MFG Engineering
+  - name: Erik Norris
+    org: Kaleidescape
+    role: Lead Mechanical / The Architect
+  - name: Weddy Wang
+    org: Steman/YungChing
+    role: Vendor Lead
+  - name: Michael Clader
+    org: Kaleidescape
+    role: Dir. MFG Engineering
 category: module_subsystem
 client: []
 complexity_vector:
   part_count_growth:
-  - count: 1
-    date: 2011-01
-    phase: T1 Trial (Mold Bring-up)
-  - count: 1
-    date: 2011-03
-    phase: T4 (Process Stabilization)
-  - count: 1
-    date: 2011-04
-    phase: MP (Mass Production)
-  - count: 4
-    date: 2014-09
-    phase: Yield Remediation (Hard Mounts)
-  - count: 3
-    date: 2014-10
-    phase: Spring Force Redesign
+    - count: 1
+      date: 2011-01
+      phase: T1 Trial (Mold Bring-up)
+    - count: 1
+      date: 2011-03
+      phase: T4 (Process Stabilization)
+    - count: 1
+      date: 2011-04
+      phase: MP (Mass Production)
+    - count: 4
+      date: 2014-09
+      phase: Yield Remediation (Hard Mounts)
+    - count: 3
+      date: 2014-10
+      phase: Spring Force Redesign
   process_density:
-  - complexity_score: 9
-    material: PA-757 ABS
-    part_name: Carousel Chassis (502-1164-00)
-    steps:
-    - Injection Molding (High Pressure)
-    - Differential Cooling (15°C Outer / 25°C Core)
-    - Texture (MT-11020)
-    - Polishing (Cavity Side)
-    - Metrology Inspection (Rib Thickness)
-  - complexity_score: 7
-    material: Mixed
-    part_name: Pinch Roller Assembly
-    steps:
-    - Shaft Machining
-    - Spring Winding (200% Force Increase)
-    - Hard Mount Spacer Installation
-    - Grease Application
-    - Alignment Calibration
+    - complexity_score: 9
+      material: PA-757 ABS
+      part_name: Carousel Chassis (502-1164-00)
+      steps:
+        - Injection Molding (High Pressure)
+        - Differential Cooling (15°C Outer / 25°C Core)
+        - Texture (MT-11020)
+        - Polishing (Cavity Side)
+        - Metrology Inspection (Rib Thickness)
+    - complexity_score: 7
+      material: Mixed
+      part_name: Pinch Roller Assembly
+      steps:
+        - Shaft Machining
+        - Spring Winding (200% Force Increase)
+        - Hard Mount Spacer Installation
+        - Grease Application
+        - Alignment Calibration
   supply_chain_nodes:
-  - location: Taipei, Taiwan
-    role: Injection Molding
-    vendor: YungChing
-  - location: Taipei, Taiwan
-    role: Rubber/Silicone
-    vendor: Kingley Rubber
-  - location: Guadalajara, Mexico
-    role: FATP / QA Inspection
-    vendor: Sanmina
+    - location: Taipei, Taiwan
+      role: Injection Molding
+      vendor: YungChing
+    - location: Taipei, Taiwan
+      role: Rubber/Silicone
+      vendor: Kingley Rubber
+    - location: Guadalajara, Mexico
+      role: FATP / QA Inspection
+      vendor: Sanmina
   tooling_chain:
-  - cost_impact: $2,500 (Ribs & Rads Mod)
-    lead_time_weeks: 12
-    tool_name: Carousel Main Mold
-    type: Hard Tooling (Steel)
-    vendor: YungChing
-  - cost_impact: Low
-    lead_time_weeks: 1
-    tool_name: Cooling Fixture
-    type: Process Tooling
-    vendor: YungChing
-  - cost_impact: Low
-    lead_time_weeks: 2
-    tool_name: Roller Spring
-    type: Soft Tooling
-    vendor: McMaster/Custom
+    - cost_impact: $2,500 (Ribs & Rads Mod)
+      lead_time_weeks: 12
+      tool_name: Carousel Main Mold
+      type: Hard Tooling (Steel)
+      vendor: YungChing
+    - cost_impact: Low
+      lead_time_weeks: 1
+      tool_name: Cooling Fixture
+      type: Process Tooling
+      vendor: YungChing
+    - cost_impact: Low
+      lead_time_weeks: 2
+      tool_name: Roller Spring
+      type: Soft Tooling
+      vendor: McMaster/Custom
 duration: 2011-2014
 employer: kaleidescape
 forensic_metrics:
@@ -85,7 +85,8 @@ forensic_metrics:
   governance: Weekly Pulse / T-Shot Inspection Reports
   process: 7-Stage Tooling Iteration (T1-T7)
 forensic_summary:
-  intervention: Redesigned cooling (15C/25C), 'Ribs & Rads' tooling mods, and high-force
+  intervention:
+    Redesigned cooling (15C/25C), 'Ribs & Rads' tooling mods, and high-force
     spring compensation
   result: Stabilized yield despite 1.00mm-1.08mm rib variance and warpage
   trigger: T1 'Massive Flash' Crisis (2011) & 'Tight Slot' Field Failures (2014)
@@ -93,53 +94,53 @@ hxo_ready: true
 hydration_status: partial
 industry: consumer_electronics
 isomorphics:
-- hardware_point: Variable slot width (1.00mm-1.08mm) causing load failures
-  label: Friction
-  principle: Mechanical compliance must exceed manufacturing variance
-  software_point: VaultManager 'Shimmy' logic to break stiction
+  - hardware_point: Variable slot width (1.00mm-1.08mm) causing load failures
+    label: Friction
+    principle: Mechanical compliance must exceed manufacturing variance
+    software_point: VaultManager 'Shimmy' logic to break stiction
 links:
-- name: Parent Project
-  url: /projects/m700
+  - name: Parent Project
+    url: /projects/m700
 metrics:
   financial:
     toolingActual: 2500
     toolingBudget: 2500
   quotes:
-  - 'Erik is designing: Solid mounts for motor plate... Gear with extended neck...
-    Various inner disk guide versions... Three versions of the spring.'
-  - Erik - please provide disposition for these carrousels.
-  - Time for experimentation is over if we want to keep the schedule.
+    - "Erik is designing: Solid mounts for motor plate... Gear with extended neck...
+      Various inner disk guide versions... Three versions of the spring."
+    - Erik - please provide disposition for these carrousels.
+    - Time for experimentation is over if we want to keep the schedule.
 presentation_mode: deep_dive
 production: production
 productionScale: series
 scars:
-- description: Overpowered friction from warped slots (1.37mm vs 1.5mm) by doubling
-    roller spring pressure and hard-mounting drive shafts to eliminate deflection.
-  label: The Tight Slot War
-  value: 200% Spring Force
-- description: Battled thermal shrinkage where parts were 385.90mm vs 386.65mm spec;
-    fixed via cycle time increases and cooling re-architecture.
-  label: The Oven Test
-  value: T1-T7 Iteration
+  - description:
+      Overpowered friction from warped slots (1.37mm vs 1.5mm) by doubling
+      roller spring pressure and hard-mounting drive shafts to eliminate deflection.
+    label: The Tight Slot War
+    value: 200% Spring Force
+  - description:
+      Battled thermal shrinkage where parts were 385.90mm vs 386.65mm spec;
+      fixed via cycle time increases and cooling re-architecture.
+    label: The Oven Test
+    value: T1-T7 Iteration
 slug: 320-slot-optical-carousel
 tags:
-- Thermal
-- Mechanism
-- Yield
-- Crisis
-- Process
-- Materials
+  - Thermal
+  - Mechanism
+  - Yield
+  - Crisis
+  - Process
+  - Materials
 teamSize: 1 (The Architect)
 tier: 2
-timeline:
-- end
-- start
+timeline: []
 title: 320-Slot Carousel
 toolchain:
-- Creo (CAD)
-- Moldflow
-- YungChing (Molder)
-- Sanmina (CM)
+  - Creo (CAD)
+  - Moldflow
+  - YungChing (Molder)
+  - Sanmina (CM)
 ---
 
 320-Slot Optical Carousel Forensic Report
@@ -149,55 +150,54 @@ I. PROJECT SUMMARY
 • Core Achievement: Stabilized yield for a 386mm diameter complex part, effectively managing thermal shrinkage and warpage to secure a $2,500 tooling recovery and long-term field reliability.
 II. THE ANATOMY OF FAILURE (Heuristic Analysis)
 Discovery Heuristics applied to T-Shot Logs and Field Failure Data.
+
 1. Thermal Crisis (The Molding Struggle)
-• The Trigger (Crisis): The T1 shots (Jan 2011) were a catastrophic failure. The molder used "intentional over-pressure" to fill the tool, resulting in "massive flash" and broken ribs stuck in the cavity. Materials (PG-22 & PG-33) proved brittle, and parts were significantly undersized due to thermal shrinkage.
-• The Intervention (Fix): I initiated the "Ribs & Rads" modification plan ($2500 investment / 1 week). We added a 3rd rib, increased rib thickness to 1.5mm, and radically reconfigured cooling targets (15°C outer ring / 25°C core) to force dimensional compliance.
-• The Result (Impact): By T4, the part was filling consistently. While dimensions remained slightly undersized (385.90mm actual vs 386.65mm spec), the structural integrity stabilized, allowing us to move to texture and polish.
+   • The Trigger (Crisis): The T1 shots (Jan 2011) were a catastrophic failure. The molder used "intentional over-pressure" to fill the tool, resulting in "massive flash" and broken ribs stuck in the cavity. Materials (PG-22 & PG-33) proved brittle, and parts were significantly undersized due to thermal shrinkage.
+   • The Intervention (Fix): I initiated the "Ribs & Rads" modification plan ($2500 investment / 1 week). We added a 3rd rib, increased rib thickness to 1.5mm, and radically reconfigured cooling targets (15°C outer ring / 25°C core) to force dimensional compliance.
+   • The Result (Impact): By T4, the part was filling consistently. While dimensions remained slightly undersized (385.90mm actual vs 386.65mm spec), the structural integrity stabilized, allowing us to move to texture and polish.
 2. Quality Crisis (The "Tight Slot" War)
-• The Trigger (Crisis): In 2014, field units began failing run-in tests with "un-insertable" discs or discs being "lost" out the front rollers. Forensic metrology identified a "tight slot" arc (Slots 200-280) where rib thickness had drifted to 1.00mm-1.08mm (vs 0.86mm nominal), creating friction that overpowered the drive rollers.
-• The Intervention (Fix): I engineered a mechanical override for the friction. We designed hard mount spacers to replace rubber grommets on the drive roller shaft—eliminating shaft deflection under load—and increased roller spring force by up to 200% to force discs through the warped slots.
-• The Result (Impact): Eliminated the "lost disc" failure mode and stabilized the injection cycle for the 200-280 slot range, salvaging existing inventory without a full tool rebuild.
-III. GOVERNANCE & RHYTHM
-• The Pulse: Brutal, high-frequency iteration. We ran a 7-stage tooling trial (T1-T7) between Jan and April 2011, with immediate "T-Shot" inspection reports dissecting every flash, void, and dimension.
-• The Artifacts:
-◦ T-Shot Logs: 03_carousel.pdf (The chronological record of the molding battle).
-◦ Friction Heatmaps: 502-1164-00_slot_problems_11_16_11.pdf (Data visualization of slot variance).
-◦ ECOs: Rev 11 ECN (Correcting critical tolerance typos).
-IV. LINKEDIN ARTIFACTS (The Numbers)
-• Salvaged a T1 molding disaster via a targeted $2,500 "Ribs & Rads" tooling modification.
-• Stabilized 320 micro-tolerance slots across a 386mm diameter chassis prone to thermal warpage.
-• Reduced field failures by 100% in the critical 200-280 slot arc via hard-mount drive train redesign.
-• Managed a 7-stage rapid tooling iteration cycle to achieve fill consistency within 3 months.
-• Identified and remediated 1.08mm rib thickness deviations that threatened total system yield.
-V. VISUAL EVIDENCE
-• 03_carousel.pdf: Photos of broken ribs, massive T1 flash, and cross-section analysis.
-• 502-1164-00_slot_problems_11_16_11.pdf: Metrology heatmaps showing the "tight slot" arc.
-• Problem areas on the carousel to check for T6 run.pdf: Macro photography of specific flashing defects blocking slots 116 and 160.
-• Pilot Carousel Observations.pdf: Detailed rib thickness measurements verifying the root cause of friction.
-
-
-
+   • The Trigger (Crisis): In 2014, field units began failing run-in tests with "un-insertable" discs or discs being "lost" out the front rollers. Forensic metrology identified a "tight slot" arc (Slots 200-280) where rib thickness had drifted to 1.00mm-1.08mm (vs 0.86mm nominal), creating friction that overpowered the drive rollers.
+   • The Intervention (Fix): I engineered a mechanical override for the friction. We designed hard mount spacers to replace rubber grommets on the drive roller shaft—eliminating shaft deflection under load—and increased roller spring force by up to 200% to force discs through the warped slots.
+   • The Result (Impact): Eliminated the "lost disc" failure mode and stabilized the injection cycle for the 200-280 slot range, salvaging existing inventory without a full tool rebuild.
+   III. GOVERNANCE & RHYTHM
+   • The Pulse: Brutal, high-frequency iteration. We ran a 7-stage tooling trial (T1-T7) between Jan and April 2011, with immediate "T-Shot" inspection reports dissecting every flash, void, and dimension.
+   • The Artifacts:
+   ◦ T-Shot Logs: 03_carousel.pdf (The chronological record of the molding battle).
+   ◦ Friction Heatmaps: 502-1164-00_slot_problems_11_16_11.pdf (Data visualization of slot variance).
+   ◦ ECOs: Rev 11 ECN (Correcting critical tolerance typos).
+   IV. LINKEDIN ARTIFACTS (The Numbers)
+   • Salvaged a T1 molding disaster via a targeted $2,500 "Ribs & Rads" tooling modification.
+   • Stabilized 320 micro-tolerance slots across a 386mm diameter chassis prone to thermal warpage.
+   • Reduced field failures by 100% in the critical 200-280 slot arc via hard-mount drive train redesign.
+   • Managed a 7-stage rapid tooling iteration cycle to achieve fill consistency within 3 months.
+   • Identified and remediated 1.08mm rib thickness deviations that threatened total system yield.
+   V. VISUAL EVIDENCE
+   • 03_carousel.pdf: Photos of broken ribs, massive T1 flash, and cross-section analysis.
+   • 502-1164-00_slot_problems_11_16_11.pdf: Metrology heatmaps showing the "tight slot" arc.
+   • Problem areas on the carousel to check for T6 run.pdf: Macro photography of specific flashing defects blocking slots 116 and 160.
+   • Pilot Carousel Observations.pdf: Detailed rib thickness measurements verifying the root cause of friction.
 
 What are the engineering proposals to fix the Carousel warpage?
 
 Based on the forensic engineering logs and project correspondence, the engineering proposals to address and mitigate Carousel Warpage (specifically affecting yield in the M700/DV700 Vaults) focused on three vectors: root cause prevention in logistics, mechanical compensation in the drive train, and containment via inspection.
+
 1. Root Cause Prevention: The Packaging Redesign
-To address warpage occurring post-manufacture, the team identified shipping stress as a primary contributor.
-• Proposal: Redesign the shipping packaging used by the Taiwan manufacturer (Yomura/YungChing).
-• Logic: Forensic analysis of stock in Sunnyvale revealed warped carousels that had passed initial QC, implicating the transit environment. Tighter packaging was suspected of compressing the large-diameter parts over time.
-• Action: Erik Norris coordinated with the vendor to "loosen up" the packaging specifications to reduce compressive stress during transit.
+   To address warpage occurring post-manufacture, the team identified shipping stress as a primary contributor.
+   • Proposal: Redesign the shipping packaging used by the Taiwan manufacturer (Yomura/YungChing).
+   • Logic: Forensic analysis of stock in Sunnyvale revealed warped carousels that had passed initial QC, implicating the transit environment. Tighter packaging was suspected of compressing the large-diameter parts over time.
+   • Action: Erik Norris coordinated with the vendor to "loosen up" the packaging specifications to reduce compressive stress during transit.
 2. Mechanical Compensation: The "Hard Mount" Overrides
-Since warpage resulted in "tight slots" (specifically in the 200–280 arc) that generated friction exceeding the pinch rollers' grip, I proposed modifying the drive train to mechanically overpower the defect rather than scrapping inventory.
-• Hard Mount Spacers: Replace the compliant rubber grommets on the drive roller shaft with hard mount spacers.
-◦ Why: Warped slots caused high friction. The existing rubber grommets allowed the drive shaft to deflect (bend) away from the disc under load, causing slippage. Solid spacers eliminated this compliance, forcing the disc through the warped slot.
-• Modified Inner Disc Guide: Redesign the inner guide to provide physical backing support to the driven roller.
-◦ Why: This prevented the driven roller from bending backward under the increased loads required to insert discs into warped slots.
-• Spring Force Escalation: Implement "Double Force" springs (approx. 200% increase).
-◦ Why: To generate sufficient normal force to overcome the friction of the "tight slots" and maintain traction on slippery or dirty discs.
+   Since warpage resulted in "tight slots" (specifically in the 200–280 arc) that generated friction exceeding the pinch rollers' grip, I proposed modifying the drive train to mechanically overpower the defect rather than scrapping inventory.
+   • Hard Mount Spacers: Replace the compliant rubber grommets on the drive roller shaft with hard mount spacers.
+   ◦ Why: Warped slots caused high friction. The existing rubber grommets allowed the drive shaft to deflect (bend) away from the disc under load, causing slippage. Solid spacers eliminated this compliance, forcing the disc through the warped slot.
+   • Modified Inner Disc Guide: Redesign the inner guide to provide physical backing support to the driven roller.
+   ◦ Why: This prevented the driven roller from bending backward under the increased loads required to insert discs into warped slots.
+   • Spring Force Escalation: Implement "Double Force" springs (approx. 200% increase).
+   ◦ Why: To generate sufficient normal force to overcome the friction of the "tight slots" and maintain traction on slippery or dirty discs.
 3. Containment & Governance
-• Enhanced Inspection Criteria (Rev 2): Development of a specific "Warpage Inspection" protocol (Rev 1 & Rev 2) requiring 100% inspection of carousels prior to installation. This included using gauge blocks and measuring vertical deflection to flag "out of spec" parts immediately.
-• Sensor Board Calibration: A proposal was made to physically adjust the sensor board to calibrate carousel position against the warpage, but this was deemed "unlikely to be effective" due to the design constraints, leading back to the mechanical hardening approach.
-What are the details of the 'ribs and rads' modification?
+   • Enhanced Inspection Criteria (Rev 2): Development of a specific "Warpage Inspection" protocol (Rev 1 & Rev 2) requiring 100% inspection of carousels prior to installation. This included using gauge blocks and measuring vertical deflection to flag "out of spec" parts immediately.
+   • Sensor Board Calibration: A proposal was made to physically adjust the sensor board to calibrate carousel position against the warpage, but this was deemed "unlikely to be effective" due to the design constraints, leading back to the mechanical hardening approach.
+   What are the details of the 'ribs and rads' modification?
 
 Forensic Data Extraction: "Ribs & Rads" Modification
 CONTEXT: Phase: T4 Tooling Intervention (January 28, 2011). Objective: Salvage mold integrity following T1 "Massive Flash" failure. Cost Impact: $2,500.
@@ -243,10 +243,11 @@ II. THE ANATOMY OF THE CRASH The failure mode was catastrophic for a "luxury" ro
 • The "Un-insertable" Loop: Logs revealed repeated timeouts where the system attempted to load a disc, failed due to friction, and queued it for ejection, effectively rendering that section of the carousel dead.
 • Warpage Amplification: The issue was exacerbated by packaging stress during transit from Taiwan, which compressed the large-diameter parts, locking the warpage into the 200–280 arc.
 III. THE ENGINEERING INTERVENTION (Mechanical Hardening) We could not simply "tune" our way out of this; we had to mechanically overpower the defect.
+
 1. Hard Mount Protocol: I designed hard mount spacers to replace the compliant rubber grommets on the drive shaft. This eliminated shaft deflection, forcing the roller to transfer 100% of its torque into moving the disc, regardless of slot friction.
 2. Force Multiplication: We increased the pinch roller spring force by 50%–200%. This massive increase in normal force ensured that even with "greasy/dirty deposits" or warped slots, the drive maintained traction.
 3. Support Reinforcement: Redesigned the inner disc guide to provide a physical backstop for the driven roller, preventing it from bowing backward under load.
-How did you solve the 2014 tight slot field failures?
+   How did you solve the 2014 tight slot field failures?
 
 Based on the forensic engineering logs, solving the 2014 "Tight Slot" field failures required a shift from "tuning" the system to mechanically overpowering the defect. The variances in the molded carousel (specifically in the 200–280 slot arc) created friction levels that the original drive train—designed for compliance—could not overcome.
 Here is the forensic breakdown of the solution:
@@ -431,10 +432,11 @@ The T4 trial was a partial functional success but a dimensional failure.
 • The Residual Defects: Despite better flow, the radial fill pattern still trapped air at the extremities. Photos from T4 show "Air trap," "Short shot," and "Flash" persisting.
 III. THE NEXT PIVOT (T4 -> T5 Strategy)
 Because geometry alone didn't fix the shrinkage, we pivoted to Process & Thermal management:
+
 1. Cooling Architecture: Radical cooling targets set: 15°C on the outside ring vs. 25°C on the core side to force the outer diameter to set correctly.
 2. Venting Escalation: Widened all vents to 20mm and increased vent depth by 100% (0.02mm -> 0.04mm) to combat the dieseling/burns.
 3. Cycle Time: Increased cycle time to apply longer "holding pressure" to pack the dimension out.
-What was the result of switching from GPPS to ABS?
+   What was the result of switching from GPPS to ABS?
 
 Forensic Data Extraction: Material Pivot (GPPS to ABS)
 CONTEXT: Phase: T3 Tooling Trial (January 27, 2011) Pivot: From Chi Mei Polyrex® PG-22 (GPPS) to Chi Mei Polylac® PA-757 (ABS). Identity Anchor: "The Architect"
@@ -446,10 +448,11 @@ II. THE ENGINEERING INTERVENTION (Ductility Injection) We authorized the switch 
 • The Logic: ABS provided the necessary tensile elongation to allow the ribs to flex slightly during the ejection stroke without exceeding their yield strength.
 • The Execution: T3 trial ran a split lot: 46 shots of PA-757 ABS and 46 shots of PH-88 HIPS to compare performance.
 III. THE RESULT (Yield Stabilization) The material switch was the primary factor in moving from "Tool Down" to "Part Exists."
+
 1. Yield Spike: We went from 0 usable parts (T0-T2) to 92 produced parts (46 ABS + 46 HIPS) in T3 immediately following the switch.
 2. Structural Integrity: The "broken ribs stuck in tool" defect was eliminated. The ABS allowed for consistent filling and clean ejection by T4.
 3. The New Battle: While ABS solved the structural failure, it did not solve the dimensional failure. The part filled consistently but remained undersized (385.90mm vs 386.65mm), shifting the engineering focus from "Material Science" to "Thermal Management" (cooling fixtures and cycle times).
-What was the result of the T3 material trials?
+   What was the result of the T3 material trials?
 
 Forensic Data Extraction: T3 Material Trial Results
 CONTEXT: Phase: T3 Tooling Trial (January 27, 2011) Vendor: ShenMing Objective: Validate material substitution (ABS/HIPS) to solve the "Brittle Fracture" crisis of T1.
@@ -537,22 +540,23 @@ Following the T1/T2 failures where PG-22 (GPPS) proved too brittle to eject from
 ◦ HIPS: Chi Mei Polyrex® PH-88.
 • The Logic: Use materials with sufficient ductility to survive the high-friction ejection process without snapping ribs.
 II. THE ANATOMY OF THE RESULT
+
 1. Yield Stabilization (The Breakthrough) The move to ductile materials was the decisive factor in achieving the first successful extraction of parts.
-• Yield: 92 Total Units (46 ABS + 46 HIPS).
-• Status: "Crankin' out parts!". This contrasted sharply with the Yield 0 of previous trials where parts stuck in the tool.
+   • Yield: 92 Total Units (46 ABS + 46 HIPS).
+   • Status: "Crankin' out parts!". This contrasted sharply with the Yield 0 of previous trials where parts stuck in the tool.
 2. Structural & Cosmetic Defects While the parts didn't shatter, they showed signs of stress and flow hesitation.
-• Pin Punch: Evidence of "deformation around the ejector pins," indicating the part was still sticking slightly or the material was soft upon ejection.
-• Knit Lines: Visible "knit lines on the tops of the disc ribs" where flow fronts merged.
-• Short Shots: Progression photos showed the sequence of fill, confirming that "short shots" occurred before the process stabilized.
+   • Pin Punch: Evidence of "deformation around the ejector pins," indicating the part was still sticking slightly or the material was soft upon ejection.
+   • Knit Lines: Visible "knit lines on the tops of the disc ribs" where flow fronts merged.
+   • Short Shots: Progression photos showed the sequence of fill, confirming that "short shots" occurred before the process stabilized.
 3. Functional Validation
-• Flatness: "First reports are that the parts are quite flat".
-• Fit Check: A functional test with a disc confirmed it "seemed to fit OK" in the slots.
-III. PROCESS PARAMETERS
-• Clamp Force: Increased to 650 Ton (vs 500 Ton in T2).
-• Cycle Time: Stabilized at 45–47 seconds.
-• Cavity Temp: Held at 50°C to facilitate flow.
-FORENSIC CONCLUSION: The T3 trial proved that the carousel geometry was manufacturable if ABS or HIPS was used. The success of this trial justified the subsequent $2,500 "Ribs & Rads" investment in T4 to refine flow and dimensions, eventually leading to the selection of ABS as the primary material for T6.
-What was the result of the T7 tooling trial?
+   • Flatness: "First reports are that the parts are quite flat".
+   • Fit Check: A functional test with a disc confirmed it "seemed to fit OK" in the slots.
+   III. PROCESS PARAMETERS
+   • Clamp Force: Increased to 650 Ton (vs 500 Ton in T2).
+   • Cycle Time: Stabilized at 45–47 seconds.
+   • Cavity Temp: Held at 50°C to facilitate flow.
+   FORENSIC CONCLUSION: The T3 trial proved that the carousel geometry was manufacturable if ABS or HIPS was used. The success of this trial justified the subsequent $2,500 "Ribs & Rads" investment in T4 to refine flow and dimensions, eventually leading to the selection of ABS as the primary material for T6.
+   What was the result of the T7 tooling trial?
 
 Forensic Data Extraction: T7 Tooling Trial Status
 CONTEXT: Phase: T7 Tooling Iteration (Scheduled April 20, 2011) Vendor: YungChing Identity Anchor: "The Architect"
@@ -568,9 +572,10 @@ to what Kaleidescape products was the carousel common?
 Forensic Data Extraction: Carousel Platform Commonality
 CONTEXT: Component: 502-1164-00 (320-Slot Carousel) Codename: Vesta Identity Anchor: "The Architect"
 I. THE SHARED ARCHITECTURE The 320-slot injection-molded carousel was the central storage engine common to the Vault product line. It was not unique to a single SKU but served as the shared "magazine" for two distinct market offerings:
+
 1. KVAULT-M700 (M700 Disc Vault): The Premiere line loader designed for high-capacity systems.
 2. KVAULT-DV700 (DV700 Disc Vault): The companion vault utilized with the Cinema One/Alto ecosystem.
-II. TECHNICAL SPECIFICATIONS
-• Project Designation: Vesta.
-• Capacity: 320 Discs (CD, DVD, Blu-ray).
-• Failure Mode Correlation: Both the M700 and DV700 shared the same tooling genetics, meaning the "Tight Slot" warpage (slots 200–280) and "Inventory Disturbance" errors affected both populations identically, requiring the same mechanical interventions (hard mounts/high-force springs) across the entire fleet.
+   II. TECHNICAL SPECIFICATIONS
+   • Project Designation: Vesta.
+   • Capacity: 320 Discs (CD, DVD, Blu-ray).
+   • Failure Mode Correlation: Both the M700 and DV700 shared the same tooling genetics, meaning the "Tight Slot" warpage (slots 200–280) and "Inventory Disturbance" errors affected both populations identically, requiring the same mechanical interventions (hard mounts/high-force springs) across the entire fleet.

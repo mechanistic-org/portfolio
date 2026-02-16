@@ -292,7 +292,7 @@ total_entries: 122
 - **BFD** (`bfd`): > **Context:** As a lead mechanical engineer at Mechanistic, I tackled diverse challenges across consumer electronics, medical devices, and robotics.
 - **Cambria** (`cambria`): > *Auto-generated scaffold from Multiverse Registry.*
 - **Canary** (`canary`): > *Auto-generated scaffold from Multiverse Registry.*
-- **Cinema One** (`cinema-one`): > **Context:** Kaleidescape was known for $30k rack-mount gear. We needed a product for the living room that cost under $4k.
+- **Cinema One (Codenamed Macduff)** (`cinema-one`): High-fidelity movie server engineering transparency report.
 - **D-Show** (`d-show`): > **Context:** Digidesign (Avid) set the standard for professional digital audio workstations (Pro Tools).
 - **Digi 003** (`digi-003`): > **Context:** The bridge between the bedroom and the pro studio.
 - **Disc Cartridges** (`disc-cartridges`): > **Context:** Before Blue-ray, we had to legally bind the physical DVD to the digital import.

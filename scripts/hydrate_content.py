@@ -289,7 +289,45 @@ def parse_spec_v2(txt_path):
     data = {}
     
     # Strategy 1: Fenced Code Blocks (Standard Markdown)
-    json_blocks = re.findall(r'```json\s*(\{.*?\})\s*```', content, re.DOTALL)
+    # Strategy 1: Fenced Code Blocks (Standard Markdown)
+    # Relaxed Regex: Capture everything inside fences, then filter for JSON
+    json_blocks = []
+    raw_blocks = re.findall(r'```json\s*(.*?)\s*```', content, re.DOTALL | re.IGNORECASE)
+    
+    with open("debug_log.txt", "a", encoding="utf-8") as debug_f:
+        debug_f.write(f"DEBUG: Content len: {len(content)}\n")
+        debug_f.write(f"DEBUG: snippet start: {content[:100]}\n")
+        debug_f.write(f"DEBUG: snippet end: {content[-100:]}\n")
+        debug_f.write(f"DEBUG: raw_blocks count: {len(raw_blocks)}\n")
+    
+    for block in raw_blocks:
+        block = block.strip()
+        
+        # 1. Global Sanitization (String Level)
+        # Remove "source_indices" lines
+        block = re.sub(r'"source_indices":\s*\[.*?\],?', '', block, flags=re.DOTALL)
+        # Remove trailing commas before closing braces/brackets
+        block = re.sub(r',\s*}', '}', block, flags=re.DOTALL)
+        block = re.sub(r',\s*]', ']', block, flags=re.DOTALL)
+
+        # 2. Decoder Loop (Handle Concatenation & Garbage)
+        decoder = json.JSONDecoder()
+        pos = 0
+        while pos < len(block):
+            next_brace = block.find('{', pos)
+            if next_brace == -1: break
+            
+            try:
+                obj, idx = decoder.raw_decode(block, next_brace)
+                # Success!
+                # Re-serialize to string to keep downstream logic consistent
+                # (Or just append the substring `block[next_brace:idx]`)
+                json_blocks.append(json.dumps(obj)) 
+                pos = idx
+            except json.JSONDecodeError:
+                # Malformed or not JSON, skip this brace
+                pos = next_brace + 1
+
     
     if json_blocks:
         print(f"   🔹 Found {len(json_blocks)} Fenced JSON blocks")
@@ -299,26 +337,31 @@ def parse_spec_v2(txt_path):
         chunks = re.split(r'\nrun\n', content, flags=re.IGNORECASE)
         # Also handle file start/end if 'run' is missing at boundaries
         if len(chunks) == 1 and not content.strip().startswith('```'):
-             # Try parsing the whole file if it's just one JSON
              chunks = [content]
              
         for i, chunk in enumerate(chunks):
             chunk = chunk.strip()
             if not chunk: continue
             
-            # Find start and end of JSON { }
-            # Heuristic: Find first { and last }
-            start = chunk.find('{')
-            end = chunk.rfind('}')
+            # Same Robust Logic for Raw Chunks
+            # 1. Global Sanitization
+            chunk = re.sub(r'"source_indices":\s*\[.*?\],?', '', chunk, flags=re.DOTALL)
+            chunk = re.sub(r',\s*}', '}', chunk, flags=re.DOTALL)
+            chunk = re.sub(r',\s*]', ']', chunk, flags=re.DOTALL)
             
-            if start != -1 and end != -1 and end > start:
-                potential_json = chunk[start:end+1]
+            # 2. Decoder Loop
+            decoder = json.JSONDecoder()
+            pos = 0
+            while pos < len(chunk):
+                next_brace = chunk.find('{', pos)
+                if next_brace == -1: break
+                
                 try:
-                    block_data = json.loads(potential_json)
-                    json_blocks.append(potential_json) # reuse logic below
-                except:
-                    # Not valid JSON, probably text narrative
-                    pass
+                    obj, idx = decoder.raw_decode(chunk, next_brace)
+                    json_blocks.append(json.dumps(obj)) 
+                    pos = idx
+                except json.JSONDecodeError:
+                    pos = next_brace + 1
     
     if not json_blocks:
          print(f"   ⚠️  No JSON blocks found in {txt_path.name}")
@@ -328,15 +371,86 @@ def parse_spec_v2(txt_path):
     
     for i, block in enumerate(json_blocks):
         try:
-            if isinstance(block, str):
-                block_data = json.loads(block)
-            else:
-                block_data = block
+            chunk_data = json.loads(block)
+            with open("debug_log.txt", "a", encoding="utf-8") as debug_f:
+                debug_f.write(f"DEBUG: Parsed block type: {type(chunk_data)}\n")
+                
+            data.update(chunk_data)
             
-            # Merge logic: shallow merge
-            data.update(block_data)
-        except json.JSONDecodeError as e:
-            print(f"   ❌ JSON Parse Error in block {i+1}: {e}")
+            with open("debug_log.txt", "a", encoding="utf-8") as debug_f:
+                debug_f.write(f"DEBUG: Successfully merged block with keys: {list(chunk_data.keys())}\n")
+        except Exception as e:
+            with open("debug_log.txt", "a", encoding="utf-8") as debug_f:
+                debug_f.write(f"DEBUG: Merge Error: {e}\nBlock snippet start: {block[:100]}...\nBlock snippet end: {block[-100:]}\n")
+            print(f"   ❌ Merge Error in block {i+1}: {e}")
+
+    return normalize_rich_data(data)
+
+
+def normalize_rich_data(data):
+    """
+    Normalizes rich data keys (metal_components, hardware_engineering) 
+    into standard 'bom' and 'cast' arrays.
+    """
+    # BOM Mapping
+    bom_sources = [
+        "metal_components", "plastic_components", 
+        "pcb_and_electrical", "films_labels_gaskets", 
+        "fasteners_and_hardware"
+    ]
+    
+    combined_bom = data.get("bom", [])
+    
+    for key in bom_sources:
+        if key in data:
+            items = data[key]
+            if isinstance(items, list):
+                for item in items:
+                    # Normalize Item
+                    # Logic: label = description, value = material (fallback to part_number)
+                    label = item.get("description", item.get("part_number", "Unknown"))
+                    value = item.get("material", item.get("part_number", ""))
+                    
+                    entry = {
+                        "label": label,
+                        "value": value,
+                        "url": item.get("url", "")
+                    }
+                    combined_bom.append(entry)
+            
+    if combined_bom:
+        data["bom"] = combined_bom
+        
+    # Cast/Team Mapping
+    team_sources = ["hardware_engineering", "hardware_coops"]
+    combined_cast = data.get("cast", [])
+    
+    for key in team_sources:
+        if key in data:
+            items = data[key]
+            if isinstance(items, list):
+                for item in items:
+                    # Logic: name, role, org = "Kaleidescape"
+                    name = item.get("name", "Unknown")
+                    role = item.get("role", "Engineer")
+                    
+                    entry = {
+                        "name": name,
+                        "role": role,
+                        "org": "Kaleidescape"
+                    }
+                    combined_cast.append(entry)
+                    
+    if combined_cast:
+        data["cast"] = combined_cast
+
+    # Timeline Mapping
+    if "timeline_events" in data:
+        # Standardize to 'events'
+        events = data["timeline_events"]
+        # Ensure it's a list
+        if isinstance(events, list):
+            data["events"] = events
 
     return data
 
@@ -503,6 +617,88 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
             
             data = parse_spec_v2(txt_path)
             source_type = "SPEC V2 (.txt)"
+            
+            # --- NEW: Rich Data Normalization (Post-Ready State) ---
+            from datetime import datetime # Ensure import if not at top
+            
+            def normalize_rich_data(data):
+                """
+                Extracts and normalizes 'Rich' keys (metal_components, hardware_engineering)
+                into standard 'bom' and 'cast' arrays.
+                """
+                # 1. BOM Extraction
+                rich_bom_keys = [
+                    "metal_components", 
+                    "plastic_components", 
+                    "pcb_and_electrical", 
+                    "films_labels_gaskets", 
+                    "fasteners_and_hardware"
+                ]
+                
+                extracted_bom = []
+                
+                for key in rich_bom_keys:
+                    if key in data and isinstance(data[key], list):
+                        with open("debug_log.txt", "a", encoding="utf-8") as debug_f:
+                            debug_f.write(f"DEBUG: Extracting BOM data from '{key}'...\n")
+                            
+                        # print(f"   🛠️  Extracting BOM data from '{key}'...")
+                        for item in data[key]:
+                            # Map to Standard BOM Object { label, value }
+                            # Schema: label=description, value=material (or part_number fallback)
+                            
+                            label = item.get("description", item.get("label", "Unknown"))
+                            
+                            # Value Strategy: Material first, then Part Number
+                            val = item.get("material")
+                            if not val or val == "N/A":
+                                val = item.get("part_number")
+                            elif item.get("part_number") and item.get("part_number") != "N/A":
+                                # format: "Material (Part#)"
+                                val = f"{val} ({item.get('part_number')})"
+                                
+                            extracted_bom.append({
+                                "label": label,
+                                "value": val
+                            })
+                            
+                if extracted_bom:
+                    # Merge into existing 'bom'
+                    current_bom = data.get("bom", [])
+                    # We simply append/merge. Smart merge handles dupes by label.
+                    data["bom"] = current_bom + extracted_bom
+                    with open("debug_log.txt", "a", encoding="utf-8") as debug_f:
+                        debug_f.write(f"DEBUG: Merged {len(extracted_bom)} rich items into 'bom'.\n")
+
+                # 2. Team Extraction
+                rich_team_keys = ["hardware_engineering", "hardware_coops", "firmware_engineering", "industrial_design"]
+                
+                extracted_cast = []
+                
+                for key in rich_team_keys:
+                    if key in data and isinstance(data[key], list):
+                         print(f"   👥 Extracting Team data from '{key}'...")
+                         for item in data[key]:
+                             # Map to Standard Cast Object { name, role, org }
+                             name = item.get("name")
+                             role = item.get("role")
+                             org = item.get("org", "Kaleidescape") # Default for Cinema One era
+                             
+                             if name and role:
+                                 extracted_cast.append({
+                                     "name": name,
+                                     "role": role,
+                                     "org": org
+                                 })
+                                 
+                if extracted_cast:
+                    current_cast = data.get("cast", [])
+                    data["cast"] = current_cast + extracted_cast
+                    print(f"   ✅ Merged {len(extracted_cast)} rich items into 'cast'.")
+
+            # Apply Normalization
+            normalize_rich_data(data)
+
             # Safety: If parse failed (empty data), should we fallback?
             if not data and json_path.exists():
                  print(f"   ⚠️  Spec V2 parse failed/empty. Falling back to JSON.")
@@ -635,6 +831,21 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
             if post.metadata.get("reports") != reports:
                 changes.append(f"  - Update 'reports' ({len(reports)} items)")
                 post.metadata["reports"] = reports
+
+        # 5. BOM & Team (Rich Data from Text Dump)
+        if "bom" in data:
+            current = post.metadata.get("bom") or []
+            merged = smart_merge_lists(current, data["bom"], "label")
+            if current != merged:
+                changes.append(f"  - Update 'bom' (Merged {len(data['bom'])} items)")
+                post.metadata["bom"] = merged
+
+        if "cast" in data:
+            current = post.metadata.get("cast") or []
+            merged = smart_merge_lists(current, data["cast"], "name")
+            if current != merged:
+                changes.append(f"  - Update 'cast' (Merged {len(data['cast'])} items)")
+                post.metadata["cast"] = merged
 
         # --- V2.2: FORENSIC LOCKER (Local _data.json) ---
         # "Smart Router" for Structured Data Infusion

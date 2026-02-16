@@ -121,7 +121,88 @@ const projectsCollection = defineCollection({
 			cyberspace: z.any().optional(),
 
 			// HUD Intelligence (V4.2 Upgrade)
-			metrics: z.any().optional(),
+			metrics: z
+				.object({
+					quotes: z.array(z.string()).optional(),
+					financial: z
+						.object({
+							toolingBudget: z.number().optional(),
+							toolingActual: z.number().optional(),
+							costOfGoodsSold: z.array(z.string()).optional(),
+							margins: z.array(z.string()).optional(),
+							quotes: z.array(z.string()).optional(),
+							royaltySaved: z.string().nullable().optional(),
+							riskBuy: z.string().nullable().optional(),
+							toolingWaived: z.number().optional(),
+							value: z.string().nullable().optional(),
+							label: z.string().nullable().optional(),
+						})
+						.optional(),
+					process: z
+						.object({
+							engineeringChangeOrders: z.array(z.string()).optional(),
+							yield: z.array(z.string()).optional(),
+							yieldCrisis: z.string().nullable().optional(),
+							yieldRecovery: z.string().nullable().optional(),
+							label: z.string().nullable().optional(),
+							value: z.string().nullable().optional(),
+						})
+						.optional(),
+					production: z
+						.object({
+							label: z.string().nullable().optional(),
+							value: z.string().nullable().optional(),
+						})
+						.optional(),
+					quality: z
+						.object({
+							label: z.string().nullable().optional(),
+							value: z.string().nullable().optional(),
+						})
+						.optional(),
+					governance: z
+						.object({
+							ecos: z.array(z.string()).optional(),
+							dcos: z.number().optional(),
+							dcdCount: z.number().optional(),
+						})
+						.optional(),
+					interventions: z
+						.object({
+							count: z.number().optional(),
+							label: z.string().nullable().optional(),
+							value: z.number().optional(),
+						})
+						.optional(),
+					profitability: z
+						.object({
+							value: z.string().nullable().optional(),
+							label: z.string().nullable().optional(),
+						})
+						.optional(),
+					cogs: z
+						.object({
+							value: z.string().nullable().optional(),
+							label: z.string().nullable().optional(),
+						})
+						.optional(),
+					time_to_market: z
+						.object({
+							value: z.string().nullable().optional(),
+							label: z.string().nullable().optional(),
+						})
+						.optional(),
+					war_stories: z
+						.array(
+							z.object({
+								label: z.string(),
+								value: z.string(),
+								description: z.string().nullable().optional(),
+							}),
+						)
+						.optional(),
+				})
+				.optional(),
 
 			// Forensic Architecture (injected by hydrate_content.py)
 			toolchain: z.array(z.string()).optional(),
@@ -146,12 +227,81 @@ const projectsCollection = defineCollection({
 				.optional(),
 
 			// V2.1: Complexity Vector (Physical Design)
-			complexity_vector: z.any().optional(),
+			complexity_vector: z
+				.object({
+					part_count_growth: z
+						.array(
+							z.object({
+								phase: z.string(),
+								count: z.number(),
+								date: z.string(),
+								note: z.string().optional(),
+							}),
+						)
+						.optional(),
+					process_density: z
+						.array(
+							z.object({
+								part_name: z.string(),
+								part_number: z.string().optional(),
+								material: z.string().optional(),
+								steps: z.array(z.string()).optional(),
+								complexity_score: z.number().optional(),
+								failure_mode: z.string().optional(),
+								notes: z.string().optional(),
+							}),
+						)
+						.optional(),
+					tooling_chain: z
+						.array(
+							z.object({
+								tool_name: z.string(),
+								type: z.string().optional(),
+								vendor: z.string().optional(),
+								lead_time_weeks: z.number().optional(), // Changed to number to support floats
+								cost_impact: z.string().optional(),
+								status: z.string().optional(),
+								risk: z.string().optional(),
+								notes: z.string().optional(),
+							}),
+						)
+						.optional(),
+					supply_chain_nodes: z
+						.array(
+							z.object({
+								location: z.string(),
+								role: z.string(),
+								vendor: z.string().optional(),
+								notes: z.string().optional(),
+							}),
+						)
+						.optional(),
+					legacy_metrics: z
+						.array(
+							z.object({
+								label: z.string(),
+								value: z.string(),
+							}),
+						)
+						.optional(),
+				})
+				.optional(),
 
 			// V2.2: Structured Content Catch-All (Oddballs)
-			forensic_data: z.any().optional(),
+			// V2.2: Structured Content Catch-All (Oddballs)
+			// DEPRECATED: Use forensic_metrics instead. This field is banned.
+			forensic_data: z.never().optional(),
 
-			timeline: z.any().optional(),
+			// V2.1: Timeline (Events)
+			timeline: z
+				.array(
+					z.object({
+						date: z.string().or(z.date()),
+						title: z.string(),
+						description: z.string(),
+					}),
+				)
+				.optional(),
 
 			audio_url: z.string().optional(),
 			notebook_url: z.string().optional(),

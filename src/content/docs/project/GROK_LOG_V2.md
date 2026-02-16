@@ -214,3 +214,14 @@ sidebar:
 1.  **FIX UPSTREAM:** If a bug recurs after Hydration, the flaw is in the **Source** (`notebook_dumps/*.txt`), not the **Destination** (`index.mdx`). You MUST fix the dump file.
 2.  **ESCAPE AT SOURCE:** Special characters that break MDX (like `<` before a number) must be escaped (`\<`) in the raw text dump.
 3.  **VERIFY THE FLOW:** Do not just edit the MDX. Run `hydrate_content.py` locally to prove the fix survives the pipeline.
+
+---
+
+## 🤠 XIX. The Law of Strictness (The Sheriff)
+
+**Context:** Recurring "Silent Failures" where data vanished because the Schema (`z.any()`) allowed garbage in, but the UI (`.map()`) crashed on render.
+
+1.  **NO AMBIGUITY:** `z.any()` is **FORBIDDEN** in `src/content.config.ts`.
+2.  **FAIL LOUD:** The Schema must reject invalid data at _Build Time_, not Render Time.
+3.  **NULL SAFETY:** If a field can be legacy-empty, use `.nullable()`. Do not relax the type to `any`.
+4.  **BANNED FIELDS:** Use `z.never()` to explicitly block zombie fields (like `forensic_data`) from re-infecting the codebase.

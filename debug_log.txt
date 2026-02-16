@@ -1,0 +1,91 @@
+DEBUG: Content len: 182283
+DEBUG: snippet start: Cinema One (Codenamed Macduff) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design E
+DEBUG: snippet end: scussing slot placement and dimensions with the hardware team.",
+"source_indices": [16-18]
+}] }
+```
+
+DEBUG: raw_blocks count: 2
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['metal_components', 'plastic_components', 'pcb_and_electrical', 'films_labels_gaskets', 'fasteners_and_hardware']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['hardware_engineering', 'hardware_coops', 'software_and_ux', 'manufacturing_and_operations', 'executive_and_marketing', 'support_and_sales', 'it']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['date', 'event', 'description']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['timeline_events']
+DEBUG: Extracting BOM data from 'metal_components'...
+DEBUG: Extracting BOM data from 'plastic_components'...
+DEBUG: Extracting BOM data from 'pcb_and_electrical'...
+DEBUG: Extracting BOM data from 'films_labels_gaskets'...
+DEBUG: Extracting BOM data from 'fasteners_and_hardware'...
+DEBUG: Merged 55 rich items into 'bom'.
+DEBUG: Content len: 68488
+DEBUG: snippet start: Cinema One (Codenamed Macduff) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design E
+DEBUG: snippet end: dows.pdf.
+• Spec: 3mm x 3mm target area.
+• Interface: Mated with H131M0 (later N029M0) Pogo pins,.
+
+
+DEBUG: raw_blocks count: 0
+DEBUG: Content len: 68488
+DEBUG: snippet start: Cinema One (Codenamed Macduff) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design E
+DEBUG: snippet end: dows.pdf.
+• Spec: 3mm x 3mm target area.
+• Interface: Mated with H131M0 (later N029M0) Pogo pins,.
+
+
+DEBUG: raw_blocks count: 0
+DEBUG: Content len: 78185
+DEBUG: snippet start: Cinema One (Codenamed Macduff) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design E
+DEBUG: snippet end: ndows.pdf.
+• Spec: 3mm x 3mm target area.
+• Interface: Mated with H131M0 (later N029M0) Pogo pins,.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']

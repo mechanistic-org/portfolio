@@ -355,6 +355,18 @@ export default config({
 						value: fields.text({ label: "Value" }),
 					}),
 
+					// Production (Added for Cinema One)
+					production: fields.object({
+						label: fields.text({ label: "Label" }),
+						value: fields.text({ label: "Value" }),
+					}),
+
+					// Quality (Added for Cinema One)
+					quality: fields.object({
+						label: fields.text({ label: "Label" }),
+						value: fields.text({ label: "Value" }),
+					}),
+
 					// Governance
 					governance: fields.object({
 						ecos: fields.array(fields.text({ label: "ECO" }), { label: "ECOs" }),
@@ -491,22 +503,17 @@ export default config({
 					},
 				),
 
-				// V2.1: Timeline (Object)
-				timeline: fields.object(
+				// V2.1: Timeline (Events)
+				timeline: fields.array(
+					fields.object({
+						date: fields.date({ label: "Date" }),
+						title: fields.text({ label: "Title" }),
+						description: fields.text({ label: "Description", multiline: true }),
+					}),
 					{
-						start: fields.date({ label: "Start Date" }),
-						end: fields.date({ label: "End Date" }),
-						duration: fields.text({ label: "Duration" }),
-						phases: fields.array(
-							fields.object({
-								label: fields.text({ label: "Phase Label" }),
-								start: fields.date({ label: "Start" }),
-								end: fields.date({ label: "End" }),
-							}),
-							{ label: "Phases", itemLabel: (props) => props.fields.label.value },
-						),
+						label: "Timeline (Events)",
+						itemLabel: (props) => props.fields.title.value || "Event",
 					},
-					{ label: "Timeline (V2.1)" },
 				),
 
 				// V2.1: Complexity Vector (Physical Design)
@@ -538,10 +545,11 @@ export default config({
 								tool_name: fields.text({ label: "Tool Name" }),
 								type: fields.text({ label: "Type" }),
 								vendor: fields.text({ label: "Vendor" }),
-								lead_time_weeks: fields.integer({ label: "Lead Time (Weeks)" }),
+								lead_time_weeks: fields.number({ label: "Lead Time (Weeks)" }),
 								cost_impact: fields.text({ label: "Cost Impact" }),
 								status: fields.text({ label: "Status" }),
 								risk: fields.text({ label: "Risk", multiline: true }),
+								notes: fields.text({ label: "Notes", multiline: true }),
 							}),
 							{ label: "Tooling Chain", itemLabel: (props) => props.fields.tool_name.value },
 						),
