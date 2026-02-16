@@ -1,12 +1,19 @@
-import os
-import argparse
-import json
 import sys
+import json
+import os
+import shutil
 import subprocess
-import frontmatter
-from pathlib import Path
-from datetime import datetime
 import re
+from pathlib import Path
+import frontmatter
+import yaml
+import argparse
+from datetime import datetime
+
+# Force UTF-8 for Windows Consoles/Redirection
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding='utf-8')
+    sys.stderr.reconfigure(encoding='utf-8')
 
 # --- Configuration ---
 SOURCE_DIR = Path("notebook_dumps")
