@@ -1,89 +1,91 @@
+import frontmatter
+import yaml
 import json
-import re
+import argparse
 from pathlib import Path
-import sys
 
-# Configuration
-SOURCE_DIR = Path("notebook_dumps")
+# Config
+ROOT_DIR = Path(__file__).parent.parent
+PROJECTS_DIR = ROOT_DIR / "src/content/projects"
+DUMPS_DIR = ROOT_DIR / "notebook_dumps"
 
-def migrate_v1_to_v2():
-    print("🚀 Starting V1 -> V2 Schema Migration...")
+TARGETS = [
+    "bazooka",
+    "extension-switches",
+    "room-director",
+    "wall-plates",
+    "minimerc",
+    "makeline"
+]
+
+def migrate_project(slug):
+    mdx_path = PROJECTS_DIR / slug / "index.mdx"
+    if not mdx_path.exists():
+        print(f"❌ Project not found: {slug}")
+        return
+
+    try:
+        post = frontmatter.load(mdx_path)
+    except Exception as e:
+        print(f"❌ Error loading {slug}: {e}")
+        return
+
+    output = []
     
-    if not SOURCE_DIR.exists():
-        print(f"❌ Source directory '{SOURCE_DIR}' not found.")
-        sys.exit(1)
+    # Header
+    output.append(f"# Spec: V2 (Auto-Migrated)")
+    output.append(f"# Project: {post.get('title', slug)}")
+    output.append("")
 
-    json_files = list(SOURCE_DIR.glob("*.json"))
-    print(f"🔍 Found {len(json_files)} JSON files.")
+    # Narrative Block
+    if post.get("forensic_summary"):
+        output.append("## Narrative")
+        output.append("```json")
+        output.append(json.dumps({"forensic_summary": post["forensic_summary"]}, indent=2))
+        output.append("```")
+        output.append("")
+
+    # Complexity Block
+    if post.get("complexity_vector"):
+        output.append("## Complexity")
+        output.append("```json")
+        output.append(json.dumps({"complexity_vector": post["complexity_vector"]}, indent=2))
+        output.append("```")
+        output.append("")
+
+    # Entropy Block (Events)
+    if post.get("events"):
+        output.append("## Entropy")
+        output.append("```json")
+        output.append(json.dumps({"events": post["events"]}, indent=2))
+        output.append("```")
+        output.append("")
     
-    stats = {"migrated": 0, "skipped": 0, "errors": 0}
+    # Scars (War Stories)
+    if post.get("scars"):
+        output.append("## Scars")
+        output.append("```json")
+        output.append(json.dumps({"war_stories": post["scars"]}, indent=2))
+        output.append("```")
+        output.append("")
 
-    for json_file in json_files:
-        try:
-            with open(json_file, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            
-            needs_save = False
-            slug = json_file.stem
+    # Write to notebook_dumps
+    dump_path = DUMPS_DIR / f"{slug}.txt"
+    with open(dump_path, 'w', encoding='utf-8') as f:
+        f.write("\n".join(output))
+        
+    print(f"✅ Migrated {slug} -> {dump_path}")
 
-            # Check for forensic_summary
-            if "forensic_summary" in data:
-                summary = data["forensic_summary"]
-                
-                # If String -> Migrate
-                if isinstance(summary, str):
-                    print(f"  ⚡ Migrating '{slug}'...")
-                    
-                    # Naive Parsing Strategy
-                    # Try to split by "Trigger:" "Intervention:" "Result:"
-                    # Or just default to Legacy
-                    
-                    new_summary = {
-                        "trigger": "Legacy Data (Migration)",
-                        "intervention": "Legacy Data (Migration)",
-                        "result": summary
-                    }
-                    
-                    # Regex Tries
-                    # Matches "Trigger: ... Intervention: ... Result: ..."
-                    pattern = r"(?:Trigger|Crisis):\s*(.*?)\s*(?:Intervention|Action|Fix):\s*(.*?)\s*(?:Result|Outcome):\s*(.*)"
-                    match = re.search(pattern, summary, re.IGNORECASE | re.DOTALL)
-                    
-                    if match:
-                        new_summary["trigger"] = match.group(1).strip()
-                        new_summary["intervention"] = match.group(2).strip()
-                        new_summary["result"] = match.group(3).strip()
-                        print(f"    ✅ Parsed structure successfully.")
-                    else:
-                        print(f"    ⚠️  Could not parse structure. Wrappping entire string in 'result'.")
-
-                    data["forensic_summary"] = new_summary
-                    needs_save = True
-                    stats["migrated"] += 1
-                
-                elif isinstance(summary, dict):
-                     # Already V2
-                     pass
-            
-            # Save if needed
-            if needs_save:
-                # Add version tag
-                data["_schema_version"] = "v2.0"
-                
-                with open(json_file, "w", encoding="utf-8") as f:
-                    json.dump(data, f, indent=4)
-            else:
-                stats["skipped"] += 1
-
-        except Exception as e:
-            print(f"❌ Error processing '{json_file}': {e}")
-            stats["errors"] += 1
-
-    print("-" * 30)
-    print(f"🏁 Migration Complete.")
-    print(f"   Migrated: {stats['migrated']}")
-    print(f"   Skipped:  {stats['skipped']}")
-    print(f"   Errors:   {stats['errors']}")
+def main():
+    print("🚀 Starting V1 -> V2 Spec Migration...")
+    
+    # Ensure dumps dir exists
+    DUMPS_DIR.mkdir(parents=True, exist_ok=True)
+    
+    for slug in TARGETS:
+        migrate_project(slug)
+        
+    print("🏁 Migration Complete.")
 
 if __name__ == "__main__":
-    migrate_v1_to_v2()
+    main()

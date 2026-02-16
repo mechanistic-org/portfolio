@@ -4,125 +4,143 @@
     "score": 5,
     "snippet": "Waldo Issue Tracker: Black zinc plating chipping, chassis deformation, burr edges.",
     "type": "Document",
-    "source_ref": "Waldo_MECHANICAL___TEST-related_issue-tracker_2016_02_26.pdf"
+    "source_ref": "Waldo_MECHANICAL___TEST-related_issue-tracker_2016_02_26.pdf",
+    "time_delta": 0
   },
   {
     "date": "2017-01-13",
     "score": 2,
     "snippet": "Sample allocation: Bare PCBs, Batteries, LCM modules assigned to engineering team.",
     "type": "Document",
-    "source_ref": "Colorado Sample Allocations 20170113_2.pdf"
+    "source_ref": "Colorado Sample Allocations 20170113_2.pdf",
+    "time_delta": 322
   },
   {
     "date": "2017-02-14",
     "score": 6,
     "snippet": "Defect: Sativa/Elvis label edge lift. Proposal: Switch 3M 467 to 9453LE.",
     "type": "Document",
-    "source_ref": "710-00011_edge-lift-proposal_2017_02_14_locoroll.pdf"
+    "source_ref": "710-00011_edge-lift-proposal_2017_02_14_locoroll.pdf",
+    "time_delta": 32
   },
   {
     "date": "2017-02-15",
     "score": 3,
     "snippet": "Adhesive Validation: 3M 9453LE undergoing thermal shock. 1 unit passed.",
     "type": "Document",
-    "source_ref": "710-00011_edge-lift-proposal_2017_02_15_fih.pdf"
+    "source_ref": "710-00011_edge-lift-proposal_2017_02_15_fih.pdf",
+    "time_delta": 1
   },
   {
     "date": "2017-02-23",
     "score": 4,
     "snippet": "ECN generated for label adhesive change to 3M 9453LE.",
     "type": "Document",
-    "source_ref": "710-00011_edge-lift-proposal_2017_02_23_ECN.pdf"
+    "source_ref": "710-00011_edge-lift-proposal_2017_02_23_ECN.pdf",
+    "time_delta": 8
   },
   {
     "date": "2017-03-17",
     "score": 1,
     "snippet": "Production Mark: MFG DATE recorded on Rocky4 carton label.",
     "type": "Photo",
-    "source_ref": "Packaging_Test_Results_Review.pdf"
+    "source_ref": "Packaging_Test_Results_Review.pdf",
+    "time_delta": 22
   },
   {
     "date": "2017-03-28",
     "score": 5,
     "snippet": "Crush Test execution recorded.",
     "type": "Document",
-    "source_ref": "Crush test_20170328.pdf"
+    "source_ref": "Crush test_20170328.pdf",
+    "time_delta": 11
   },
   {
     "date": "2017-04-13",
     "score": 4,
     "snippet": "Verification: Gloss surface change noted on Waldo units (Sunny Yen).",
     "type": "Document",
-    "source_ref": "EVT2_Reliability_Test_Reports.pdf"
+    "source_ref": "EVT2_Reliability_Test_Reports.pdf",
+    "time_delta": 16
   },
   {
     "date": "2017-04-18",
     "score": 8,
     "snippet": "Reliability Crisis: Drop Test FAIL (LCM crack). Storage Temp FAIL (Cap floating).",
     "type": "Document",
-    "source_ref": "LCR Reliability_ME_HW Test Status_20170418.pdf"
+    "source_ref": "LCR Reliability_ME_HW Test Status_20170418.pdf",
+    "time_delta": 5
   },
   {
     "date": "2017-04-27",
     "score": 8,
     "snippet": "Blocker: Dust Test FAIL. Units cannot be removed from Bazooka chassis.",
     "type": "Document",
-    "source_ref": "LCR Reliability_ME_HW Test Status_20170427 (1).pdf"
+    "source_ref": "LCR Reliability_ME_HW Test Status_20170427 (1).pdf",
+    "time_delta": 9
   },
   {
     "date": "2017-04-27",
     "score": 7,
     "snippet": "Structural Failure: Back cover & front housing detach during Crush Test.",
     "type": "Document",
-    "source_ref": "LCR Reliability_ME_HW Test Status_20170427 (1).pdf"
+    "source_ref": "LCR Reliability_ME_HW Test Status_20170427 (1).pdf",
+    "time_delta": 0
   },
   {
     "date": "2017-05-26",
     "score": 3,
     "snippet": "Redlines issued for Bazooka Metal Front Housing (0048-BZKA-01).",
     "type": "Document",
-    "source_ref": "2D_3D_UPDATES_TRACKER_2017_06_05.pdf"
+    "source_ref": "2D_3D_UPDATES_TRACKER_2017_06_05.pdf",
+    "time_delta": 29
   },
   {
     "date": "2017-05-30",
     "score": 2,
     "snippet": "Drawing Revision: ASSY, FRONT HOUSING SATIVA (740-00049).",
     "type": "Document",
-    "source_ref": "misc-bolus.pdf"
+    "source_ref": "misc-bolus.pdf",
+    "time_delta": 4
   },
   {
     "date": "2017-06-05",
     "score": 2,
     "snippet": "Tracker Update: Monitoring DVT components (Nuts, Glass, Labels).",
     "type": "Document",
-    "source_ref": "2D_3D_UPDATES_TRACKER_2017_06_05.pdf"
+    "source_ref": "2D_3D_UPDATES_TRACKER_2017_06_05.pdf",
+    "time_delta": 6
   },
   {
     "date": "2017-07-04",
     "score": 6,
     "snippet": "Drop Test (1.3m): Internal loose parts audible on Sativa #6 / Elvis #7.",
     "type": "Document",
-    "source_ref": "DVT_Reliability_Test_Reports.pdf"
+    "source_ref": "DVT_Reliability_Test_Reports.pdf",
+    "time_delta": 29
   },
   {
     "date": "2017-07-10",
     "score": 9,
     "snippet": "Drop Test Breakthrough: Sativa #2 / Elvis #2 PASS 1.3m drops.",
     "type": "Document",
-    "source_ref": "DVT_Reliability_Test_Reports.pdf"
+    "source_ref": "DVT_Reliability_Test_Reports.pdf",
+    "time_delta": 6
   },
   {
     "date": "2017-07-10",
     "score": 5,
     "snippet": "Cosmetic Fail: Protective film glue residue remaining on Waldo surface.",
     "type": "Photo",
-    "source_ref": "Packaging_Test_Results_Review.pdf"
+    "source_ref": "Packaging_Test_Results_Review.pdf",
+    "time_delta": 0
   },
   {
     "date": "2017-07-10",
     "score": 9,
     "snippet": "Command Decision: Norris overrides 'Wet Hands' failure. Proceeds with FAIL result.",
     "type": "Document",
-    "source_ref": "DVT_Reliability_Test_Reports.pdf"
+    "source_ref": "DVT_Reliability_Test_Reports.pdf",
+    "time_delta": 0
   }
 ]

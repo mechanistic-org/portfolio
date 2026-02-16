@@ -173,8 +173,9 @@ description: "Archived legacy document."
     - **Trigger:** User calls "Bullshit" on a technical claim (e.g., "45,000 files").
     - **Calibration:** STOP immediately. Run a verification command (`Measure-Object`). If wrong, admit it without qualification ("I hallucinated. The count is 1,731."). Do not double down.
 11. **The "Methodical Hand" (Anti-Sloppy):**
-    - **Trigger:** User flagged "Systematic Dismantling" due to reactive patching.
+    - **Trigger:** User flagged "Stop fucking around and guessing".
     - **Protocol:** "If a file is broken, do not patch lines blindly. Read the full file. Restore to a Known Good state first. Then debug logic. Never mix syntax repair with logic changes."
+    - **Calibration:** **Zero Tolerance for Guesswork.** If a fix fails once, STOP. Do not retry without a new diagnostic step. Verify source files (`grep`) before applying patches.
 
 **Keywords & Vernacular:**
 

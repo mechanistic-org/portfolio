@@ -48,6 +48,11 @@ const ModelViewer = block({
 		cameraOrbit: fields.text({ label: "Camera Orbit" }),
 		autoRotate: fields.checkbox({ label: "Auto Rotate" }),
 	},
+	ContentView: (props) => (
+		<div style={{ padding: "1rem", background: "#f5f5f5", border: "1px solid #ddd" }}>
+			<strong>Model Viewer:</strong> {props.value.src}
+		</div>
+	),
 });
 
 const YouTube = block({
@@ -56,6 +61,56 @@ const YouTube = block({
 		id: fields.text({ label: "YouTube Video ID" }),
 		title: fields.text({ label: "Title" }),
 	},
+	ContentView: (props) => (
+		<div style={{ padding: "1rem", background: "#f5f5f5", border: "1px solid #ddd" }}>
+			<strong>YouTube:</strong> {props.value.id}
+		</div>
+	),
+});
+
+const Chip = block({
+	label: "Chip",
+	schema: {
+		variant: fields.select({
+			label: "Variant",
+			options: [
+				{ label: "Production", value: "production" },
+				{ label: "Prototype", value: "prototype" },
+				{ label: "Concept", value: "concept" },
+			],
+			defaultValue: "concept",
+		}),
+		text: fields.text({ label: "Text" }),
+	},
+	ContentView: (props) => (
+		<span
+			style={{
+				padding: "0.25rem 0.5rem",
+				background: "#333",
+				color: "#fff",
+				borderRadius: "4px",
+				fontSize: "0.8rem",
+			}}
+		>
+			{props.value.text}
+		</span>
+	),
+});
+
+const Wire = block({
+	label: "Wire",
+	schema: {},
+	ContentView: () => <hr style={{ border: "1px dashed #ccc", margin: "1rem 0" }} />,
+});
+
+const ScrambleText = block({
+	label: "Scramble Text",
+	schema: {
+		text: fields.text({ label: "Text" }),
+	},
+	ContentView: (props) => (
+		<span style={{ fontFamily: "monospace", color: "#00ff00" }}>{props.value.text}</span>
+	),
 });
 
 export default {
@@ -63,4 +118,7 @@ export default {
 	Newsletter,
 	ModelViewer,
 	YouTube,
+	Chip,
+	Wire,
+	ScrambleText,
 };

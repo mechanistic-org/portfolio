@@ -1,0 +1,77 @@
+---
+import Table from "@/components/Starwind/table/Table.astro";
+import TableHeader from "@/components/Starwind/table/TableHeader.astro";
+import TableBody from "@/components/Starwind/table/TableBody.astro";
+import TableRow from "@/components/Starwind/table/TableRow.astro";
+import TableHead from "@/components/Starwind/table/TableHead.astro";
+import TableCell from "@/components/Starwind/table/TableCell.astro";
+
+interface Props {
+	data: Record<string, any>;
+}
+
+const { data } = Astro.props;
+
+// Helper to check if value is array of objects (Table-able)
+const isTableData = (value: any) => {
+	return Array.isArray(value) && value.length > 0 && typeof value[0] === "object";
+};
+
+// Helper to get headers from first item
+const getHeaders = (value: any[]) => {
+	return Object.keys(value[0]);
+};
+---
+
+<div class="space-y-8">
+	{
+		Object.entries(data).map(([key, value]) => (
+			<div class="space-y-2">
+				<h3 class="text-muted-foreground font-mono text-xs font-bold tracking-wider uppercase">
+					// {key.replace(/_/g, " ")} //
+				</h3>
+
+				{isTableData(value) ? (
+					<div class="border-border rounded-lg border">
+						<Table class="text-xs">
+							<TableHeader>
+								<TableRow class="hover:bg-transparent">
+									{getHeaders(value).map((header) => (
+										<TableHead class="text-muted-foreground font-mono text-xs font-bold tracking-wider uppercase">
+											{header}
+										</TableHead>
+									))}
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								{value.map((row: any) => (
+									<TableRow class="hover:bg-muted/30 border-border/50 transition-colors">
+										{Object.values(row).map((cell: any) => (
+											<TableCell class="font-mono">
+												{Array.isArray(cell) ? (
+													<div class="flex flex-wrap gap-1">
+														{cell.map((item) => (
+															<span class="bg-muted text-muted-foreground rounded px-1.5 py-0.5 text-[10px]">
+																{item}
+															</span>
+														))}
+													</div>
+												) : (
+													String(cell)
+												)}
+											</TableCell>
+										))}
+									</TableRow>
+								))}
+							</TableBody>
+						</Table>
+					</div>
+				) : (
+					<pre class="bg-muted/30 text-muted-foreground overflow-x-auto rounded-lg p-4 font-mono text-xs">
+						{JSON.stringify(value, null, 2)}
+					</pre>
+				)}
+			</div>
+		))
+	}
+</div>

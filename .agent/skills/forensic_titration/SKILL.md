@@ -36,16 +36,24 @@ We no longer use a single "Bolus." We have three distinct mining operations that
 4.  **Ingest:**
     - **Complexity:** Paste JSON into `index.mdx` frontmatter under `complexity_vector`.
     - **Entropy:** Paste JSON into `src/content/projects/{slug}/_entropy.json`.
-    - **Narrative:** Manually titrate Markdown into `index.mdx` body.
+    - **Narrative:** Run `python scripts/hydrate_content.py --slug {slug} --force`. **DO NOT** manually edit.
 
 ### Phase 3: Validation
 
 1.  **Verify:** Check the Local Preview.
-    - Does the **Seismograph** appear in the HUD? (Entropy)
-    - Does the **Complexity Chart** appear? (Complexity)
+    - **Body Check:** Does `index.mdx` contain the full "Forensic Report" header? (Matches `c24` standard).
+    - **Sidecar Check:** Does `_entropy.json` exist?
 2.  **Log:** Update `MINING_LOG.md` status to 🟢.
 
 ## Critical Laws
+
+### 1. The "Normalization" Law (Narrative)
+
+**Context:** We are currently normalizing all projects to a "Ready State" (Tier 1 Standard).
+
+- **Automated Injection:** The `notebook_dumps/{slug}.md` file is the Sovereign Source.
+- **No Manual Curation:** **DO NOT** manually edit or "titrate" the body text for Tier 1/2 projects. Use the script.
+- **Reference Class:** All projects must be structurally identical to `c24`.
 
 ### 1. The "Sidecar" Law (Entropy)
 

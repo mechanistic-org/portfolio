@@ -45,7 +45,7 @@ if (transcript) {
 					{/* Seismo Vector (Entropy Events) */}
 					{events && events.length > 0 && (
 						<div class="hidden md:block">
-							<ForensicSeismograph client:visible events={events} />
+							<ForensicSeismograph client:visible data={events} />
 						</div>
 					)}
 				</div>

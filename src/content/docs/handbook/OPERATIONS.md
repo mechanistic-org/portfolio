@@ -119,6 +119,15 @@ These scripts drive the "Forensic Data Factory."
   - Quote Keys: `"01_intro":`
   - Escape Brackets: `&lt;15kCOGS` or `less than 15k`.
 
+### 🔴 "MDX Regression" (Hydration Overwrite)
+
+- **Symptom:** You fixed an MDX error manually, but it returned after running `hydrate_content.py`.
+- **Cause:** The Script is the Source of Truth. If the bug exists in `notebook_dumps/c24.txt`, it will overwrite your manual fix in `index.mdx`.
+- **Fix (Law XVIII):**
+  1.  **Grep the Source:** `grep "<" notebook_dumps/c24.txt`
+  2.  **Escape Upstream:** Change `<0.5mm` to `\<0.5mm` in the `.txt` file.
+  3.  **Re-Hydrate:** Run the script to propagate the fix safely.
+
 ### 🔴 "Hook Violation" White Screen
 
 - **Symptom:** Page renders white or component fails silently. Console says `Rendered fewer hooks than expected`.
@@ -379,6 +388,13 @@ To prevent "Stacking Wars", we vertically partition the Z-space into strict flig
 - **Symptom:** Right-side icons shift left or center, ignoring `justify-end`.
 - **Cause:** A missing closing `</div>` in a previous slot (e.g., Center) captures the Right slot as a child.
 - **Fix:** Verify `Nav.astro` structure. Use **CSS Grid** (`grid-cols-[1fr_auto_1fr]`) in `UniversalHUD` to enforce isolation.
+
+### 🔴 "Invisible Component" Trap (Stacking Context)
+
+- **Symptom:** Component is mounted (logs firing) but invisible on screen.
+- **Cause:** `Hyperspace` theme uses a fixed `Intro` layer at `z-50`.
+- **Fix:** Apply `relative z-[60]` (or higher) and a `bg-black/90` backdrop to the component container.
+- **Protocol:** Use the "DEBUG Banner" pattern (temporary red border + text) to verify mounting before adjusting Z-index.
 
 ### 🔴 "Ghost Starfield" (Transparency)
 

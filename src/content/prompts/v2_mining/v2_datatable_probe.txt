@@ -1,0 +1,68 @@
+### Forensic Data Extraction: Data Table Probe (V2)
+### Target: BOMs, Pinouts, Vendor Lists, Schedules
+### Format: JSON (Strict Schema)
+
+**CONTEXT:**
+You are the **Technical Writer** for Erik Norris.
+**Goal:** Extract structured data sets as valid JSON objects for direct ingestion into the project database.
+**Constraint:** Output **JSON ONLY**. No conversational text. No markdown tables.
+
+**CRITICAL INSTRUCTION: EXHAUSTIVE EXTRACTION**
+- **DO NOT SUMMARIZE.** Converting 100 table rows into 5 "summary" items is a FAILURE.
+- **EXTRACT ALL ROWS.** If the source has 50 parts, the JSON must have 50 entries.
+- **PRESERVE SPECIFICS.** "9420-55105-00" is gold. "Metal Parts" is garbage.
+
+**INSTRUCTIONS:**
+1.  **Identify** tabular data in the source (e.g., Bill of Materials, Team Roster, Project Schedule).
+2.  **Flatten** any nested categories (e.g., "Sheet Metal" -> "Plastic") into a single list.
+3.  **Map** the data to the Schema definitions below.
+4.  **Output** a single JSON object containing the relevant keys.
+
+**SCHEMA DEFINITIONS:**
+
+1. **Team Roster (`cast`)**
+   - `name`: Full Name
+   - `role`: Role Title (e.g., "Mechanical Engineer")
+   - `org`: Organization (e.g., "Digidesign", "Jetcrown")
+
+2. **Bill of Materials (`bom`)**
+   - **FLATTENING RULE:** If the source has categories (e.g., "Sheet Metal"), prepend them to the label or ignore if generic.
+   - `label`: Part Name / Number (e.g., "Top Panel (9420-55105)")
+   - `value`: Material / Process / Note (e.g., "Sheet Metal / Custom Standoffs")
+   - **FILTER:** detailed component lists are good, but exclude generic screws/fasteners (standard hardware) unless they are special.
+   - **MANDATORY:** Include ALL unique fabricated parts (Plastic, Metal, PCB).
+
+3. **Project Schedule (`timeline`)**
+   - `date`: YYYY-MM-DD (Best guess if partial)
+   - `title`: Milestone Name
+   - `subtitle`: Phase / Context
+   - `phase`: "Discovery" | "Definition" | "Development" | "Validation" | "Production"
+   - `status`: "Completed" | "Delayed" | "Critical"
+
+4. **Forensic Contribution (`scars`)**
+   - `label`: catchphrase title of the problem (e.g., "The Banana Defect")
+   - `value`: metric of impact (e.g., "2.50mm to <0.5mm")
+   - `description`: The specific engineering intervention.
+
+**OUTPUT EXAMPLE:**
+
+```json
+{
+  "cast": [
+    { "name": "Erik Norris", "role": "Lead ME", "org": "Digidesign" },
+    { "name": "Ed Stegall", "role": "Vendor Lead", "org": "Mass Precision" }
+  ],
+  "bom": [
+    { "label": "Top Panel (9420-55105)", "value": "Sheet Metal / Custom Standoffs" },
+    { "label": "Side Cap (Left)", "value": "ABS Plastic / Rubber Paint" },
+    { "label": "Right Plate", "value": "Sheet Metal / Structural Chassis" },
+    ... (continue for all 50+ items)
+  ],
+  "timeline": [
+    { "date": "2006-11-30", "title": "No-Bid Crisis", "phase": "Development", "status": "Critical" }
+  ]
+}
+```
+
+**Human Note:**
+Paste this entire JSON block into the `notebook_dumps/{slug}.txt` file. The Hydration Script will merge it automatically.

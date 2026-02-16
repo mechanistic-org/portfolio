@@ -1,8 +1,8 @@
 ---
 title: "Project Index"
 description: "Holistic Forensic Archive & Catalog"
-last_updated: "2026-02-13"
-total_entries: 123
+last_updated: "2026-02-15"
+total_entries: 122
 ---
 
 # 📂 The Project Index
@@ -13,14 +13,30 @@ total_entries: 123
 ---
 
 ## 1. The Forensic Registry (Tier 1)
-**Count:** 22
+**Count:** 23
 *High-fidelity entries with structured forensic data, war stories, and metrics.*
+
+### 320-Slot Carousel (`320-slot-optical-carousel`)
+**Detail Pod:** _[URL_PENDING]_
+
+> **Forensic Summary:** TRIGGER: T1 'Massive Flash' Crisis (2011) & 'Tight Slot' Field Failures (2014) INTERVENTION: Redesigned cooling (15C/25C), 'Ribs & Rads' tooling mods, and high-force spring compensation RESULT: Stabilized yield despite 1.00mm-1.08mm rib variance and warpage
+
+**Key Metrics:**
+- **Financial:** $2500 tooling mod investment (Ribs & Rads)
+- **Governance:** Weekly Pulse / T-Shot Inspection Reports
+- **Process:** 7-Stage Tooling Iteration (T1-T7)
+
+---
 
 ### Bazooka (Base Station) (`bazooka`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: The EVT2 build faced a 'Kill' scenario with a 100% mechanical retention failure (7/7 units 'stuck in Bazooka') and a critical safety failure where the cosmetic 'Air Gap' switch failed to break the 120V circuit consistently (BAZ-81). Simultaneously, tolerance analysis revealed a 0.3mm interference in the slide-lock mechanism due to 'pillowing' from square tooling dimples. INTERVENTION: The Architect mandated a 'Stop Ship' on the ID-driven round button, forcing a reversion to a functional square 'TEST' button to meet UL 1472. He orchestrated the '3Tabs concept' structural redesign to resolve the wiggle/stuck interface issues and directed a tooling change from square dimples to 'circular pips' to flatten the chassis. RESULT: Secured UL safety compliance, eliminated the 0.3mm interference, and achieved passing thermal metrics (<60°C touch temp).
+> **Forensic Summary:** TRIGGER: Failed 100% of dust ingress removal tests (14/14 units seized in chassis) [1] INTERVENTION: Identified 1 critical EMI noise source isolated directly to the Bazooka architecture during EVT2 [1] RESULT: Logged 5 distinct mechanical defects in EVT2 chassis design, including warping, burrs, and inconsistent hook tension [1]
 
+**Key Metrics:**
+- **Financial:** Scheduled 1,500 unit production run for July 2017 ramp [1]
+- **Governance:** EVT1 Validation and EVT2 Dev concurrent sprints [2]
+- **Process:** Rejected 10-Year lifecycle requirement during EVT2 due to lack of initial mandate [1]
 
 ---
 
@@ -50,12 +66,12 @@ total_entries: 123
 ### D-Control (`d-control`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Flagship console launch to replace ProControl; Critical tolerance accumulation issues in modular 16/32 fader configurations causing assembly failures INTERVENTION: Erik Norris 'rigidified' sheet metal structure; Implemented 'ratcheting compression strap' assembly method to force unit alignment; Manual 'tweaking' of warped fader pans during assembly RESULT: Successful launch of D-Control (Buckley) and D-Command (Danko); TEC Award nomination
+> **Forensic Summary:** TRIGGER: Flagship console launch to replace ProControl; Critical tolerance accumulation issues in modular 16/32 fader configurations causing assembly failures [6] INTERVENTION: Erik Norris 'rigidified' sheet metal structure [7]; Implemented 'ratcheting compression strap' assembly method to force unit alignment [8]; Manual 'tweaking' of warped fader pans during assembly [9] RESULT: Successful launch of D-Control (Buckley) and D-Command (Danko); TEC Award nomination [10]
 
 **Key Metrics:**
-- **Financial:** Cost delta analysis of external vs internal monitor ($50-$100 impact); Evaluation of ALPS faders ($15) vs Penny & Giles for cost reduction/retrofit
-- **Governance:** Cross-functional 'Digi-Buckley' meetings; Sustaining D-Control issues email group created for production assembly feedback
-- **Process:** Compressed 2-month DFM and manufacturing optimization campaign into 2.5 weeks
+- **Financial:** Cost delta analysis of external vs internal monitor ($50-$100 impact) [1]; Evaluation of ALPS faders ($15) vs Penny & Giles for cost reduction/retrofit [2, 3]
+- **Governance:** Cross-functional 'Digi-Buckley' meetings; Sustaining D-Control issues email group created for production assembly feedback [5]
+- **Process:** Compressed 2-month DFM and manufacturing optimization campaign into 2.5 weeks [4]
 
 ---
 
@@ -86,43 +102,43 @@ total_entries: 123
 ### D-Command (`index`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Vegas Mode Stress Test & 'Green Bleed' Interference INTERVENTION: Sheetmetal relief cuts for LCDs; 100% manual inspection for pans RESULT: Thermal stability confirmed (40-min stress test); Unit Shipped 4/28/2005
+> **Forensic Summary:** TRIGGER: Vegas Mode Stress Test & 'Green Bleed' Interference [3, 4] INTERVENTION: Sheetmetal relief cuts for LCDs; 100% manual inspection for pans [1] RESULT: Thermal stability confirmed (40-min stress test); Unit Shipped 4/28/2005 [1, 5]
 
 **Key Metrics:**
-- **Financial:** Waived tooling fees from PPI Plastics via negotiation
-- **Governance:** 1 Lead Engineer (Solo Mandate) vs. Full Console Release
-- **Process:** 50% rejection rate on first 42 Fader Pans due to warping
+- **Financial:** Waived tooling fees from PPI Plastics via negotiation [1]
+- **Governance:** 1 Lead Engineer (Solo Mandate) vs. Full Console Release [2]
+- **Process:** 50% rejection rate on first 42 Fader Pans due to warping [1]
 
 ---
 
 ### KSYSTEM-120 (`ksystem-120`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Three concurrent 'stop-ship' interference crises: The Hammered Lid, The Thumb of God, and The Glow Debacle INTERVENTION: Identified and eliminated 0.005-0.020 inch tolerance stack-up error in fan tray assembly; Issued deviation for top cover lip interference RESULT: Salvaged stalled 50-unit Pilot Build; enabled 300-unit Production ramp; Achieved FCC Class B compliance
+> **Forensic Summary:** TRIGGER: Three concurrent 'stop-ship' interference crises: The Hammered Lid, The Thumb of God, and The Glow Debacle [4] INTERVENTION: Identified and eliminated 0.005-0.020 inch tolerance stack-up error in fan tray assembly [1]; Issued deviation for top cover lip interference [5] RESULT: Salvaged stalled 50-unit Pilot Build; enabled 300-unit Production ramp [4]; Achieved FCC Class B compliance [1]
 
 **Key Metrics:**
-- **Financial:** Negotiated CPU thermal solution unit price down from $9.63 to $9.25
-- **Governance:** Weekly Mechanical / ID Meeting (Norris, Burke, Lane, Wudrick)
-- **Process:** Masking throughput increased from 3 pcs/hr to 20 pcs/hr via process refinement
+- **Financial:** Negotiated CPU thermal solution unit price down from $9.63 to $9.25 [1]
+- **Governance:** Weekly Mechanical / ID Meeting (Norris, Burke, Lane, Wudrick) [3]
+- **Process:** Masking throughput increased from 3 pcs/hr to 20 pcs/hr via process refinement [2]
 
 ---
 
 ### M700 Vesta Vault Recovery (`m700`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Catastrophic field failures (disc jams, scratching, 'unreadable' media) due to tolerance drift INTERVENTION: Complete mechanical subsystem redesign: Dual radial spring balance bars, solid motor mounts, and disc guide retrofit RESULT: Eliminated 100% of 'dirty roller' slippage failures and recovered 100% of questioned carousel inventory
+> **Forensic Summary:** TRIGGER: Catastrophic field failures (disc jams, scratching, 'unreadable' media) due to tolerance drift [3] INTERVENTION: Complete mechanical subsystem redesign: Dual radial spring balance bars, solid motor mounts, and disc guide retrofit [1, 4] RESULT: Eliminated 100% of 'dirty roller' slippage failures and recovered 100% of questioned carousel inventory [1]
 
 **Key Metrics:**
-- **Financial:** $24 per unit savings on chassis costs via hard tooling transition
-- **Governance:** Weekly Reliability Investigation / High-touch 'Run-In' test cycle
-- **Process:** Analyzed 3,000,000+ disc injection cycles to isolate 10% failure threshold
+- **Financial:** $24 per unit savings on chassis costs via hard tooling transition [1]
+- **Governance:** Weekly Reliability Investigation / High-touch 'Run-In' test cycle [2]
+- **Process:** Analyzed 3,000,000+ disc injection cycles to isolate 10% failure threshold [1]
 
 ---
 
 ### Makeline (`makeline`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Legacy Data (Migration) INTERVENTION: Legacy Data (Migration) RESULT: Architected the mechanical system for the world's first automated Makeline. Shifted from component design to 'System Architecture,' treating the assembly as a physical network topology. Intervened to decouple the 'Payload Modules' (Dispensers) from the 'Chassis,' allowing parallel development and scaling. Built the 'Iron Bird' integration rig to validate 48V/CAN bus loads before steel fabrication.
+> **Forensic Summary:** TRIGGER: Legacy Data (Migration) - System integration of the IP69K variety. INTERVENTION: Architected the mechanical system for the world's first automated Makeline. Shifted from component design to 'System Architecture,' treating the assembly as a physical network topology. Intervened to decouple the 'Payload Modules' (Dispensers) from the 'Chassis,' allowing parallel development and scaling. Built the 'Iron Bird' integration rig to validate 48V/CAN bus loads before steel fabrication. RESULT: Established a modular architecture enabling parallel development and successfully validated the system via the 'Iron Bird' rig.
 
 **Key Metrics:**
 - **Financial:** Reduced MTTR from Hours to Minutes via Hot-Swap Modules.
@@ -134,7 +150,7 @@ total_entries: 123
 ### Minimerc (`minimerc`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Urgent need for a 'Mercury Low Cost' (MLC) unit requiring significant mechanical compaction and thermal/EMI resolution. -> The INTERVENTION: Redesigned HDD mounting bracket to reduce depth to 265mm and resolved complex vent/EMI shielding issues in the Pro/E database. -> The RESULT: Database ready for release and final prototype photos delivered, despite exceeding initial time estimates (58 hours logged).
+> **Forensic Summary:** TRIGGER: Urgent need for a 'Mercury Low Cost' (MLC) unit requiring significant mechanical compaction and thermal/EMI resolution. INTERVENTION: Redesigned HDD mounting bracket to reduce depth to 265mm and resolved complex vent/EMI shielding issues in the Pro/E database. RESULT: Database ready for release and final prototype photos delivered, despite exceeding initial time estimates (58 hours logged).
 
 **Key Metrics:**
 - **Financial:** Hard savings via reduced system depth (to 265mm)
@@ -263,7 +279,7 @@ total_entries: 123
 
 
 ## 2. The Project Catalog (Tier 2)
-**Count:** 101
+**Count:** 99
 *Standard entries, ready-state drafts, and archival stub records.*
 
 - **Acer Aspire** (`acer-aspire`): > **Context:** Consultancies are the boot camp of design.
@@ -281,9 +297,7 @@ total_entries: 123
 - **Digi 003** (`digi-003`): > **Context:** The bridge between the bedroom and the pro studio.
 - **Disc Cartridges** (`disc-cartridges`): > **Context:** Before Blue-ray, we had to legally bind the physical DVD to the digital import.
 - **Dispensers** (`dispensers`): > **Context:** The Makeline needed hands. The Dispeners were those hands.
-- **dreamjob** (`dreamjob`): > **Context:** This is not a placeholder. This is the **Target Coordinate**.
 - **DVDO Player** (`dvdo-player`): > **Context:** Consultancies are the boot camp of design.
-- **Elmer** (`elmer`): > *Auto-generated scaffold from Multiverse Registry.*
 - **Entwhistle** (`entwhistle`): > *Auto-generated scaffold from Multiverse Registry.*
 - **EPT-1000** (`ept-1000`): Cardiac Ablation System
 - **Fissler BBQ** (`fissler-bbq`): > **Context:** Consultancies are the boot camp of design.
@@ -357,7 +371,7 @@ total_entries: 123
 - **Sugarfoot** (`sugarfoot`): > *Auto-generated scaffold from Multiverse Registry.*
 - **Sunbeam toaster** (`sunbeam-toaster`): > **Context:** Consultancies are the boot camp of design.
 - **Sunbeam window toaster** (`sunbeam-window-toaster`): Sunbeam window toaster - Consumer Appliances project.
-- **Sundance** (`sundance`): > *Auto-generated scaffold from Multiverse Registry.*
+- **Sundance** (`sundance`): Sundance Forensic Report
 - **Switches** (`switches`): > **Context:** Not every switch needs a screen. The "Extension Switch" was the cost-effective worker bee.
 - **KSYSTEM DS (Titan)** (`titan-k`): > *Auto-generated scaffold from Multiverse Registry.*
 - **usb box** (`usb-box`): > **Context:** As a lead mechanical engineer at Mechanistic, I tackled diverse challenges across consumer electronics, medical devices, and robotics.

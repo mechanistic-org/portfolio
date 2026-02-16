@@ -147,6 +147,10 @@ const projectsCollection = defineCollection({
 
 			// V2.1: Complexity Vector (Physical Design)
 			complexity_vector: z.any().optional(),
+
+			// V2.2: Structured Content Catch-All (Oddballs)
+			forensic_data: z.any().optional(),
+
 			timeline: z.any().optional(),
 
 			audio_url: z.string().optional(),

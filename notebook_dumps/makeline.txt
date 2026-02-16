@@ -1,0 +1,61 @@
+# Spec: V2 (Auto-Migrated)
+# Project: Makeline
+
+## Narrative
+```json
+{
+  "forensic_summary": {
+    "intervention": "Architected the mechanical system for the world's first automated Makeline. Shifted from component design to 'System Architecture,' treating the assembly as a physical network topology. Intervened to decouple the 'Payload Modules' (Dispensers) from the 'Chassis,' allowing parallel development and scaling. Built the 'Iron Bird' integration rig to validate 48V/CAN bus loads before steel fabrication.",
+    "result": "Established a modular architecture enabling parallel development and successfully validated the system via the 'Iron Bird' rig.",
+    "trigger": "Legacy Data (Migration) - System integration of the IP69K variety."
+  }
+}
+```
+
+## Complexity
+```json
+{
+  "complexity_vector": {
+    "legacy_metrics": [
+      {
+        "label": "Metric",
+        "value": "Value"
+      }
+    ],
+    "part_count_growth": [],
+    "process_density": [],
+    "supply_chain_nodes": [],
+    "tooling_chain": []
+  }
+}
+```
+
+## Entropy
+```json
+{
+  "events": []
+}
+```
+
+## Scars
+```json
+{
+  "war_stories": [
+    {
+      "description": "Defined the specific IP69K strategy (Gasket compression, Breathers) to ensure waterproof sealing in a washdown environment.",
+      "label": "The Sealing Logic",
+      "value": "IP69K"
+    },
+    {
+      "description": "Moved the 'Hours to Minutes' stat from text into the metrics structure, focusing on rapid module replacement.",
+      "label": "The MTTR Metric",
+      "value": "C24"
+    }
+  ]
+}
+```
+
+## Legacy Assets
+- makeline_spin
+- concepts_1.gif
+- concepts_1.psd

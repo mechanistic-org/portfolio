@@ -5,6 +5,7 @@ interface EntropyEvent {
 	score: number;
 	snippet: string;
 	type: string;
+	time_delta?: number;
 }
 
 interface ForensicSeismographProps {
@@ -24,7 +25,20 @@ const ForensicSeismograph: React.FC<ForensicSeismographProps> = ({ data }) => {
 
 	// Dimensions
 
-	const barWidth = 2;
+	// Velocity Visualization (Bar Width)
+	// Base width is 2.
+	// If delta is huge (>30 days), width should be large (Stuck).
+	// If delta is tiny (1 day), width should be minimal (Rapid).
+	const getBarWidth = (delta: number | undefined) => {
+		if (delta === undefined) return 2; // Default
+		// Clamp delta for visualization
+		if (delta <= 2) return 1; // Rapid Fire (1-2 days)
+		if (delta <= 7) return 2; // Normal Pace (1 week)
+		if (delta <= 14) return 4; // Slowing (2 weeks)
+		if (delta <= 30) return 6; // Stalled (1 month)
+		return 12; // Coma (>1 month)
+	};
+
 	const gap = 1;
 
 	// Normalize scores (0-10 scale typically)
@@ -45,6 +59,7 @@ const ForensicSeismograph: React.FC<ForensicSeismographProps> = ({ data }) => {
 					// and let the bars flex or just stack left-to-right.
 
 					const h = (event.score / maxScore) * 100;
+					const w = getBarWidth(event.time_delta);
 
 					// Heatmap Logic
 					let barColor = "bg-emerald-700/50 hover:bg-emerald-400"; // Default (1-3)
@@ -54,12 +69,16 @@ const ForensicSeismograph: React.FC<ForensicSeismographProps> = ({ data }) => {
 						barColor = "bg-orange-500/70 hover:bg-orange-300"; // Critical
 					else if (event.score >= 4) barColor = "bg-yellow-500/60 hover:bg-yellow-300"; // Significant
 
+					// Velocity/Stagnation Opacity
+					// If stuck (wide bar), make it ghost-like?
+					// Or keep it heavy? Let's keep color standard but width tells the story.
+
 					return (
 						<div
 							key={i}
 							className={`group relative cursor-crosshair transition-colors duration-200 ${barColor}`}
 							style={{
-								width: `${barWidth}px`,
+								width: `${w}px`,
 								height: `${Math.max(h, 10)}%`, // Min height for visibility
 								marginLeft: i === 0 ? 0 : `${gap}px`,
 							}}

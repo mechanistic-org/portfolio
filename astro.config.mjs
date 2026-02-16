@@ -96,6 +96,9 @@ export default defineConfig({
 				"@components/Cta/Newsletter.astro",
 				"@components/Admonition/Admonition.astro",
 				"@components/MDX/ModelViewer.astro",
+				"@components/DLS/Chip.astro",
+				"@components/DLS/Wire.astro",
+				"@components/Effects/ScrambleText.tsx",
 				{
 					"@astro-community/astro-embed-youtube": ["YouTube"],
 				},

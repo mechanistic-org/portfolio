@@ -1,142 +1,162 @@
 [
-	{
-		"date": "2011-01-10",
-		"score": 8,
-		"snippet": "T0 Trial (ChunKing): Yield 0. Part stuck in tool due to miscalc shot volume.",
-		"type": "Document",
-		"source_ref": "03_carousel.pdf"
-	},
-	{
-		"date": "2011-01-20",
-		"score": 9,
-		"snippet": "T1 Trial (ChunKing): Massive flash from intentional over-pressure. Broken ribs stuck in tool.",
-		"type": "Photo",
-		"source_ref": "03_carousel.pdf"
-	},
-	{
-		"date": "2011-01-25",
-		"score": 5,
-		"snippet": "T2 Trial: Venting insufficient. Cavity polish insufficient. Proposed 'active' ejection mechanism.",
-		"type": "Document",
-		"source_ref": "03_carousel.pdf"
-	},
-	{
-		"date": "2011-01-27",
-		"score": 6,
-		"snippet": "T3 Trial (ShenMing): 46 ABS + 46 HIPS shots. Evaluating material ductility vs brittleness.",
-		"type": "Document",
-		"source_ref": "03_carousel.pdf"
-	},
-	{
-		"date": "2011-01-28",
-		"score": 7,
-		"snippet": "T4 Plan: $2500 'Ribs & Rads' investment. Increase rib thickness to 1.5mm.",
-		"type": "Document",
-		"source_ref": "03_carousel.pdf"
-	},
-	{
-		"date": "2011-03-17",
-		"score": 6,
-		"snippet": "T4 Result: Consistent fill achieved. Diameter undersize (385.90mm vs 386.65mm).",
-		"type": "Document",
-		"source_ref": "03_carousel.pdf"
-	},
-	{
-		"date": "2011-03-25",
-		"score": 4,
-		"snippet": "T5 Result: No dimensional improvement. Samples delivered to Sunnyvale for analysis.",
-		"type": "Document",
-		"source_ref": "03_carousel.pdf"
-	},
-	{
-		"date": "2011-04-08",
-		"score": 5,
-		"snippet": "T6-1 Result: Rib fin defects (short shots/voids) persist due to air entrapment.",
-		"type": "Document",
-		"source_ref": "03_carousel.pdf"
-	},
-	{
-		"date": "2011-04-14",
-		"score": 7,
-		"snippet": "T6-2 Trial (YungChing): ABORTED. Damaged thermocouples stopped trial.",
-		"type": "Document",
-		"source_ref": "03_carousel.pdf"
-	},
-	{
-		"date": "2011-04-20",
-		"score": 3,
-		"snippet": "T7 Trial scheduled with YungChing.",
-		"type": "Document",
-		"source_ref": "03_carousel.pdf"
-	},
-	{
-		"date": "2011-11-08",
-		"score": 2,
-		"snippet": "Samples received for pilot inspection.",
-		"type": "Document",
-		"source_ref": "03_carousel.pdf"
-	},
-	{
-		"date": "2011-11-10",
-		"score": 3,
-		"snippet": "Documentation of flash condition on 'raw' (non-reworked) sample parts.",
-		"type": "Photo",
-		"source_ref": "03_carousel.pdf"
-	},
-	{
-		"date": "2011-11-16",
-		"score": 8,
-		"snippet": "Forensic Metrology: Slot 205 ribs measure 1.08mm (spec 0.86mm). Slot width 1.37mm.",
-		"type": "Document",
-		"source_ref": "502-1164-00_slot_problems_11_16_11.pdf"
-	},
-	{
-		"date": "2011-11-17",
-		"score": 5,
-		"snippet": "Ejector pin pads flagged as 'too high' (Must be 0 +/- 0.1mm).",
-		"type": "Document",
-		"source_ref": "03_carousel.pdf"
-	},
-	{
-		"date": "2011-11-30",
-		"score": 4,
-		"snippet": "Rework Procedure: 'Do not force discs.' Use 3 inspection discs to cycle 320 slots.",
-		"type": "Document",
-		"source_ref": "03_carousel.pdf"
-	},
-	{
-		"date": "2012-01-05",
-		"score": 4,
-		"snippet": "ECN Rev 11: Corrected tolerance typo (-0.50) and gate numbering schema.",
-		"type": "Document",
-		"source_ref": "03_carousel.pdf"
-	},
-	{
-		"date": "2014-03-24",
-		"score": 6,
-		"snippet": "Field Crisis: 'Tight slots' in 200-series causing friction/injection failures.",
-		"type": "Document",
-		"source_ref": "Kaleidescape_Volume_023.md"
-	},
-	{
-		"date": "2014-03-24",
-		"score": 3,
-		"snippet": "Missing roller spring retaining clips identified in KRMA returns.",
-		"type": "Photo",
-		"source_ref": "Kaleidescape_Volume_023.md"
-	},
-	{
-		"date": "2014-04-03",
-		"score": 5,
-		"snippet": "Warpage Inspection REV 1: Criteria set at >1mm vertical deflection.",
-		"type": "Document",
-		"source_ref": "Problem areas on the carousel to check for T6 run.pdf"
-	},
-	{
-		"date": "2014-10-09",
-		"score": 3,
-		"snippet": "Cosmetic Spec REV 2: 'Ugly bottom' strategy. Bottom surface designated Class C.",
-		"type": "Document",
-		"source_ref": "Kaleidescape_Volume_019.md"
-	}
+  {
+    "date": "2011-01-10",
+    "score": 8,
+    "snippet": "T0 Trial (ChunKing): Yield 0. Part stuck in tool due to miscalc shot volume.",
+    "type": "Document",
+    "source_ref": "03_carousel.pdf",
+    "time_delta": 0
+  },
+  {
+    "date": "2011-01-20",
+    "score": 9,
+    "snippet": "T1 Trial (ChunKing): Massive flash from intentional over-pressure. Broken ribs stuck in tool.",
+    "type": "Photo",
+    "source_ref": "03_carousel.pdf",
+    "time_delta": 10
+  },
+  {
+    "date": "2011-01-25",
+    "score": 5,
+    "snippet": "T2 Trial: Venting insufficient. Cavity polish insufficient. Proposed 'active' ejection mechanism.",
+    "type": "Document",
+    "source_ref": "03_carousel.pdf",
+    "time_delta": 5
+  },
+  {
+    "date": "2011-01-27",
+    "score": 6,
+    "snippet": "T3 Trial (ShenMing): 46 ABS + 46 HIPS shots. Evaluating material ductility vs brittleness.",
+    "type": "Document",
+    "source_ref": "03_carousel.pdf",
+    "time_delta": 2
+  },
+  {
+    "date": "2011-01-28",
+    "score": 7,
+    "snippet": "T4 Plan: $2500 'Ribs & Rads' investment. Increase rib thickness to 1.5mm.",
+    "type": "Document",
+    "source_ref": "03_carousel.pdf",
+    "time_delta": 1
+  },
+  {
+    "date": "2011-03-17",
+    "score": 6,
+    "snippet": "T4 Result: Consistent fill achieved. Diameter undersize (385.90mm vs 386.65mm).",
+    "type": "Document",
+    "source_ref": "03_carousel.pdf",
+    "time_delta": 48
+  },
+  {
+    "date": "2011-03-25",
+    "score": 4,
+    "snippet": "T5 Result: No dimensional improvement. Samples delivered to Sunnyvale for analysis.",
+    "type": "Document",
+    "source_ref": "03_carousel.pdf",
+    "time_delta": 8
+  },
+  {
+    "date": "2011-04-08",
+    "score": 5,
+    "snippet": "T6-1 Result: Rib fin defects (short shots/voids) persist due to air entrapment.",
+    "type": "Document",
+    "source_ref": "03_carousel.pdf",
+    "time_delta": 14
+  },
+  {
+    "date": "2011-04-14",
+    "score": 7,
+    "snippet": "T6-2 Trial (YungChing): ABORTED. Damaged thermocouples stopped trial.",
+    "type": "Document",
+    "source_ref": "03_carousel.pdf",
+    "time_delta": 6
+  },
+  {
+    "date": "2011-04-20",
+    "score": 3,
+    "snippet": "T7 Trial scheduled with YungChing.",
+    "type": "Document",
+    "source_ref": "03_carousel.pdf",
+    "time_delta": 6
+  },
+  {
+    "date": "2011-11-08",
+    "score": 2,
+    "snippet": "Samples received for pilot inspection.",
+    "type": "Document",
+    "source_ref": "03_carousel.pdf",
+    "time_delta": 202
+  },
+  {
+    "date": "2011-11-10",
+    "score": 3,
+    "snippet": "Documentation of flash condition on 'raw' (non-reworked) sample parts.",
+    "type": "Photo",
+    "source_ref": "03_carousel.pdf",
+    "time_delta": 2
+  },
+  {
+    "date": "2011-11-16",
+    "score": 8,
+    "snippet": "Forensic Metrology: Slot 205 ribs measure 1.08mm (spec 0.86mm). Slot width 1.37mm.",
+    "type": "Document",
+    "source_ref": "502-1164-00_slot_problems_11_16_11.pdf",
+    "time_delta": 6
+  },
+  {
+    "date": "2011-11-17",
+    "score": 5,
+    "snippet": "Ejector pin pads flagged as 'too high' (Must be 0 +/- 0.1mm).",
+    "type": "Document",
+    "source_ref": "03_carousel.pdf",
+    "time_delta": 1
+  },
+  {
+    "date": "2011-11-30",
+    "score": 4,
+    "snippet": "Rework Procedure: 'Do not force discs.' Use 3 inspection discs to cycle 320 slots.",
+    "type": "Document",
+    "source_ref": "03_carousel.pdf",
+    "time_delta": 13
+  },
+  {
+    "date": "2012-01-05",
+    "score": 4,
+    "snippet": "ECN Rev 11: Corrected tolerance typo (-0.50) and gate numbering schema.",
+    "type": "Document",
+    "source_ref": "03_carousel.pdf",
+    "time_delta": 36
+  },
+  {
+    "date": "2014-03-24",
+    "score": 6,
+    "snippet": "Field Crisis: 'Tight slots' in 200-series causing friction/injection failures.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_023.md",
+    "time_delta": 809
+  },
+  {
+    "date": "2014-03-24",
+    "score": 3,
+    "snippet": "Missing roller spring retaining clips identified in KRMA returns.",
+    "type": "Photo",
+    "source_ref": "Kaleidescape_Volume_023.md",
+    "time_delta": 0
+  },
+  {
+    "date": "2014-04-03",
+    "score": 5,
+    "snippet": "Warpage Inspection REV 1: Criteria set at >1mm vertical deflection.",
+    "type": "Document",
+    "source_ref": "Problem areas on the carousel to check for T6 run.pdf",
+    "time_delta": 10
+  },
+  {
+    "date": "2014-10-09",
+    "score": 3,
+    "snippet": "Cosmetic Spec REV 2: 'Ugly bottom' strategy. Bottom surface designated Class C.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_019.md",
+    "time_delta": 189
+  }
 ]

@@ -20,7 +20,7 @@ const TeamPipChart: React.FC<TeamPipChartProps> = ({ internal, external, core = 
 		while (remaining > 0) {
 			const rowCount = Math.min(remaining, 25); // Increased to 25 to fit better
 			rows.push(
-				<div key={`row-${rowIdx}`} className="flex items-center" style={{ height: 6 }}>
+				<div key={`row-${rowIdx}`} className="flex shrink-0 items-center" style={{ height: 6 }}>
 					<svg
 						width={rowCount * (pipWidth + pipGap)}
 						height="6"
@@ -37,7 +37,7 @@ const TeamPipChart: React.FC<TeamPipChartProps> = ({ internal, external, core = 
 									y={0}
 									width={pipWidth}
 									height={6}
-									fill={isInternal ? (isCorePip ? "#ffffff" : "#454545") : "#F59E0B"}
+									fill={isInternal ? (isCorePip ? "#ffffff" : "#737373") : "#F59E0B"}
 									className={isCorePip ? "animate-pulse" : ""}
 								/>
 							);

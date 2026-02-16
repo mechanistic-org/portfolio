@@ -4,202 +4,231 @@
     "score": 8,
     "snippet": "Parametric catastrophe: D-Control Stand model 'blows up' requiring 6.5hr rebuild.",
     "type": "Commit",
-    "source_ref": "All notes 2/10/2026 [1]"
+    "source_ref": "All notes 2/10/2026 [1]",
+    "time_delta": 0
   },
   {
     "date": "2004-04-14",
     "score": 3,
     "snippet": "Vendor quotation received for Fader Top (944012917-00) tooling.",
     "type": "Document",
-    "source_ref": "Digidesign_Volume_003.md [2]"
+    "source_ref": "Digidesign_Volume_003.md [2]",
+    "time_delta": 85
   },
   {
     "date": "2004-06-03",
     "score": 4,
     "snippet": "First Danko structure tree released; sheetmetal-only assemblies defined.",
     "type": "Document",
-    "source_ref": "Digidesign_Volume_003.md [3]"
+    "source_ref": "Digidesign_Volume_003.md [3]",
+    "time_delta": 50
   },
   {
     "date": "2004-06-16",
     "score": 3,
     "snippet": "Meter boards released for layout; DCDs requested from Architect.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_004.md [4]"
+    "source_ref": "Digidesign_Volume_004.md [4]",
+    "time_delta": 13
   },
   {
     "date": "2004-07-26",
     "score": 6,
     "snippet": "Risk Mitigation: 68K Comm board prioritized for FCS over 5282.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_003.md [5]"
+    "source_ref": "Digidesign_Volume_003.md [5]",
+    "time_delta": 40
   },
   {
     "date": "2004-08-22",
     "score": 9,
     "snippet": "Vegas Mode Overdrive: Fader unit heatsink hits 61\u00b0C under stress.",
     "type": "Test",
-    "source_ref": "Digidesign_Volume_003.md [6]"
+    "source_ref": "Digidesign_Volume_003.md [6]",
+    "time_delta": 27
   },
   {
     "date": "2004-10-06",
     "score": 7,
     "snippet": "Top Cover Yield Crisis: 'Yields suck (~10%)' due to painting/masking.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_004.md [7]"
+    "source_ref": "Digidesign_Volume_004.md [7]",
+    "time_delta": 45
   },
   {
     "date": "2004-10-14",
     "score": 5,
     "snippet": "All 8 ECOs for PCB assemblies processed; 'Danko Rocks'.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_004.md [8]"
+    "source_ref": "Digidesign_Volume_004.md [8]",
+    "time_delta": 8
   },
   {
     "date": "2004-11-01",
     "score": 4,
     "snippet": "Sheetmetal release (5 of 5) completed.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_004.md [9]"
+    "source_ref": "Digidesign_Volume_004.md [9]",
+    "time_delta": 18
   },
   {
     "date": "2004-11-22",
     "score": 6,
     "snippet": "Governance: Engineering Pilot phase deferred; units designated 'Pre-production'.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_005.md [10]"
+    "source_ref": "Digidesign_Volume_005.md [10]",
+    "time_delta": 21
   },
   {
     "date": "2004-12-09",
     "score": 5,
     "snippet": "Late night 'Wednesday team' fix for headphone circuitry updates.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_005.md [11]"
+    "source_ref": "Digidesign_Volume_005.md [11]",
+    "time_delta": 17
   },
   {
     "date": "2005-01-04",
     "score": 5,
     "snippet": "Sink hole problem identified in plastic Top Covers.",
     "type": "Meeting",
-    "source_ref": "Digidesign_Volume_005.md [12]"
+    "source_ref": "Digidesign_Volume_005.md [12]",
+    "time_delta": 26
   },
   {
     "date": "2005-01-19",
     "score": 8,
     "snippet": "Triage: Non-standard build authorized to meet Jan 31 compliance deadline.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_005.md [13]"
+    "source_ref": "Digidesign_Volume_005.md [13]",
+    "time_delta": 15
   },
   {
     "date": "2005-01-26",
     "score": 4,
     "snippet": "Two units assembled for EMI pre-scan; third unit materials short.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_005.md [14]"
+    "source_ref": "Digidesign_Volume_005.md [14]",
+    "time_delta": 7
   },
   {
     "date": "2005-02-14",
     "score": 7,
     "snippet": "Defect: 'Green Bleed' from LCDs confirmed on pre-production units.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_006.md [15]"
+    "source_ref": "Digidesign_Volume_006.md [15]",
+    "time_delta": 19
   },
   {
     "date": "2005-02-15",
     "score": 6,
     "snippet": "Sideplate inventory ($13k) at risk; rework feasibility questioned.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_005.md [16]"
+    "source_ref": "Digidesign_Volume_005.md [16]",
+    "time_delta": 1
   },
   {
     "date": "2005-02-17",
     "score": 5,
     "snippet": "Headphone jack mechanical conflict: Recess vs Flush mounting debate.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_010.md [17]"
+    "source_ref": "Digidesign_Volume_010.md [17]",
+    "time_delta": 2
   },
   {
     "date": "2005-02-23",
     "score": 7,
     "snippet": "Root Cause: LCD bleed caused by flex cable pressure; relief cuts required.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_006.md [18]"
+    "source_ref": "Digidesign_Volume_006.md [18]",
+    "time_delta": 6
   },
   {
     "date": "2005-03-21",
     "score": 8,
     "snippet": "Rework Failure: Sideplate rework attempt renders parts as scrap.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_006.md [19]"
+    "source_ref": "Digidesign_Volume_006.md [19]",
+    "time_delta": 26
   },
   {
     "date": "2005-03-30",
     "score": 8,
     "snippet": "Compliance Fail: Main and Fader units fail UL AC Withdraw test.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_006.md [20]"
+    "source_ref": "Digidesign_Volume_006.md [20]",
+    "time_delta": 9
   },
   {
     "date": "2005-04-19",
     "score": 9,
     "snippet": "Compliance Pass: UL Notice of Approval received.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_007.md [21]"
+    "source_ref": "Digidesign_Volume_007.md [21]",
+    "time_delta": 20
   },
   {
     "date": "2005-04-20",
     "score": 7,
     "snippet": "Process Fix: Manual 'tweaking' of warped Fader Pans formalized.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_010.md [22]"
+    "source_ref": "Digidesign_Volume_010.md [22]",
+    "time_delta": 1
   },
   {
     "date": "2005-04-26",
     "score": 4,
     "snippet": "BOM Error: Incorrect screw length identified in Bracket Kit.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_007.md [23]"
+    "source_ref": "Digidesign_Volume_007.md [23]",
+    "time_delta": 6
   },
   {
     "date": "2005-04-28",
     "score": 10,
     "snippet": "FCS: First D-Command unit shipped to customer.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_007.md [24]"
+    "source_ref": "Digidesign_Volume_007.md [24]",
+    "time_delta": 2
   },
   {
     "date": "2005-05-04",
     "score": 6,
     "snippet": "Escape: EMI Gasket missing from original BOM; ECO 8114 generated.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_010.md [25]"
+    "source_ref": "Digidesign_Volume_010.md [25]",
+    "time_delta": 6
   },
   {
     "date": "2005-05-13",
     "score": 3,
     "snippet": "Post-FCS Clean-up: List of mechanical ECOs to address ramp issues.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_007.md [26]"
+    "source_ref": "Digidesign_Volume_007.md [26]",
+    "time_delta": 9
   },
   {
     "date": "2005-05-15",
     "score": 7,
     "snippet": "Field Report: Units required shims/straps to 'hold it together'.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_015.md [27]"
+    "source_ref": "Digidesign_Volume_015.md [27]",
+    "time_delta": 2
   },
   {
     "date": "2005-06-29",
     "score": 5,
     "snippet": "Alignment Friction: 4.6% complaint rate on connecting brackets.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_015.md [28]"
+    "source_ref": "Digidesign_Volume_015.md [28]",
+    "time_delta": 45
   },
   {
     "date": "2005-07-06",
     "score": 3,
     "snippet": "Engineering test protos ordered for Rev 22 sheetmetal improvements.",
     "type": "Email",
-    "source_ref": "Digidesign_Volume_007.md [29]"
+    "source_ref": "Digidesign_Volume_007.md [29]",
+    "time_delta": 7
   }
 ]

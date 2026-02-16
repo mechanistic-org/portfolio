@@ -156,12 +156,16 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Mining Session Context** -> **Refining 320-Slot Visuals**
+- **Active Task:** **Forensic Data Safety (Source Validation).**
+- **Next Step:** Verify `m700` hydration stability.
+- **Context:** **VELOCITY VIZ DEPLOYED.** `ForensicSeismograph` now visualizes `time_delta` via bar width.
+- **Action Item:** Monitor `notebook_dumps` for unescaped `<` characters.
+- **Recent Win:** Fixed critical C24 MDX recursion by patching `notebook_dumps/c24.txt`. Codified "Law ofSource Safety" (Law XVIII).
 - **Active Roadmap:** [`src/content/docs/project/ROADMAP_ACTIVE.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/ROADMAP_ACTIVE.md) (The Horizon)
-- **Mining Log:** [`src/content/docs/audits/MINING_LOG_2026_02_13.md`](file:///d:/GitHub/eriknorris/src/content/docs/audits/MINING_LOG_2026_02_13.md) (The Re-Hydration Tracker)
+- **Mining Log:** [`src/content/docs/project/MINING_LOG.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/MINING_LOG.md) (The Re-Hydration Tracker)
 - **Project Index:** [`src/content/prompts/PROJECT_INDEX.md`](file:///d:/GitHub/eriknorris/src/content/prompts/PROJECT_INDEX.md) (The Registry)
-- **Status:** **Pipeline Unblocked.** `c24`, `d-control`, `sc48` fully hydrated with Audio/Seismo/BOM.
-- **Strategy:** **"Hybrid Batch"** -> Retrofit 5 Projects (Isomorphics Only) + Rebuild 8 Projects (Full Flow).
+- **Status:** **Standardization COMPLETE (Level 2).** All 12 Tier 1 projects audited at >99% parity.
+- **Strategy:** **"Strict Separation"** -> JSON is Metadata. Text is Body. No regex parsing.
 - **Critical Learning:** **"The Isomorphic Paradox"** - You cannot generate structural rhymes from a single project. You need a **"Master Notebook"** (Level 2) containing all JSONs to find the patterns.
 - **Critical Learning:** **"The Scroll Depth Trust"** - 2026 SEO (E-E-A-T) demands "Firsthand Experience." The "Isomorphic Card" is our primary Trust Signal.
 - **Conflict:** `d-command` has existing body text that conflicts with `_intelligence.md`. Needs manual titration.
@@ -209,7 +213,12 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 * **Key Decision (Hydration):** **"The Starfield Priority"** - `CollimatedBackground` (Canvas) requires `client:load` on Project Pages (`[...slug].astro`) to prevent hydration mismatches and "Black Flash" visibility issues. `client:idle` is insufficient for heavy 3D backgrounds.
 
 - **Critical Learning:** **"The Missing Dump Trap"** - Hydration fails silently if `notebook_dumps` (JSON) are missing (`mix-rack`, `d-show`). Always verify source data existence before running batch hydration.
-- **Critical Learning:** **"The Forensic Injection Standard"** - Manual enrichment of `forensic_summary` (War Stories) is the "Red Gold". It overrides generic AI summaries. WebTV (`galaxy`, `elmer`, `cortez`) and Avid (`sc48`, `d-command`) are now enriched.
+- **Critical Learning:** **"The Fidelity Hierarchy"** - We defined 3 Levels: Raw (1), Normalized (2), Synthesized (3). We target Level 2 ("The Bones") for hydration. Level 3 ("The Polish") is a separate, optional pass.
+- **Critical Learning:** **"The Verification Pause"** - Do not execute global batch operations (like hydration) _before_ reporting the audit status to the User. Fix the tool, report the plan, _then_ execute.
+- **Critical Learning:** **"The Subtractive Extraction"** - To achieve Level 2, we must _subtract_ JSON objects using `JSONDecoder`, not regex-match them. This guarantees 100% of the remaining text is preserved.
+- **Critical Learning (UI):** **"The Z-Index Stratosphere"** - The `Hyperspace` theme's Intro Layer sits at `z-50`. To ensure visibility, the `ForensicDossier` (and any Top HUD element) must be at `z-[60]` or higher with `relative` positioning. Static layouts get buried.
+- **Critical Learning (Hydration):** **"The Key Collision"** - `YAMLException: duplicated mapping key` is frequently caused by `hydrate_content.py` appending default keys (`category`, `presentation_mode`) that already exist deeper in the legacy frontmatter. **Fix:** Use `grep` to locate the hidden duplicate before nuking the file.
+- **Critical Learning (Pipeline):** **"The Smart Merge Standard"** - We successfully implemented `smart_merge_lists` in `hydrate_content.py`. This is now the "Gold Standard" for re-hydration: it treats JSON as additive (Upsert) and protects manual edits in `cast` or `timeline`.
 
 * **Key Decision (Audio):** **"The Iron Dome"** - The Audio Host must be blind to instructions. We use `PODCAST_READY.txt` (Sanitized) and explicitly forbid instructional headers in the script source.
 * **Key Decision (Viz-Audio):** **"The SonicHeartbeat Standard"** - Idle = Pulse (Cycle), Active = Full EQ. Icon = Speaker (not Headphone).
@@ -300,6 +309,10 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **The Cloudflare "Ghost" Error:**
   - "Unknown internal error occurred" during Deployment (after Build Passing) is a platform flake (Confirmed 2026-02-02).
   - **Fix:** Retry Push. Do not debug code. It works.
+- **The "Strict Separation" Protocol (Feb 2026):**
+  - **Context:** Regex splitting by "run" was brittle and lost Q&A data.
+  - **Protocol:** `hydrate_content.py` uses `JSONDecoder` to _subtract_ JSON blocks. The remainder is Sovereign Narrative.
+  - **Constraint:** JSON is Metadata. Text is Body. They must never mix in the `.md` file.
 - **The "Stickie Safety" Law (Jan 2026):**
   - **Context:** Previous hydration scripts wiped `stickies` metadata, risking text loss for `deck.md`.
   - **Protocol:** `hydrate_content.py` MUST parse `deck.md`. If `deck.md` is missing, generating a stickie is risky.

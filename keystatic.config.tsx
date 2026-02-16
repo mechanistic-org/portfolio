@@ -401,6 +401,19 @@ export default config({
 					),
 				}),
 
+				// V2.1: Scars (Renamed from war_stories)
+				scars: fields.array(
+					fields.object({
+						label: fields.text({ label: "Label" }),
+						value: fields.text({ label: "Value" }),
+						description: fields.text({ label: "Description", multiline: true }),
+					}),
+					{
+						label: "Scars (War Stories V2.1)",
+						itemLabel: (props) => props.fields.label.value || "Scar",
+					},
+				),
+
 				// Legacy War Stories (Top Level)
 				war_stories: fields.array(
 					fields.object({
@@ -414,15 +427,143 @@ export default config({
 					},
 				),
 
-				forensic_metrics: fields.object({
-					financial: fields.text({ label: "Financial Metric (Summary)", multiline: true }),
-					process: fields.text({ label: "Process Metric (Summary)", multiline: true }),
-					technical: fields.text({ label: "Technical Metric (Summary)", multiline: true }),
-					quotes: fields.array(fields.text({ label: "Quote" }), { label: "Quotes" }),
-					governance: fields.text({ label: "Governance (Summary)", multiline: true }),
+				forensic_metrics: fields.object(
+					{
+						financial: fields.text({ label: "Financial (Summary)", multiline: true }),
+						process: fields.text({ label: "Process (Summary)", multiline: true }),
+						governance: fields.text({ label: "Governance (Summary)", multiline: true }),
+						technical: fields.text({ label: "Technical (Summary)", multiline: true }),
+						quotes: fields.array(fields.text({ label: "Quote", multiline: true }), {
+							label: "Quotes",
+							itemLabel: (props) => props.value || "Quote",
+						}),
+					},
+					{ label: "Metrics / KPI" },
+				),
+
+				// Legacy Top-Level Quotes (found in webtv-galaxy)
+				quotes: fields.array(fields.text({ label: "Quote", multiline: true }), {
+					label: "Quotes (Legacy Top-Level)",
+					itemLabel: (props) => props.value || "Quote",
 				}),
 
+				// V2.1: Isomorphics (Trust Signals)
+				isomorphics: fields.array(
+					fields.object({
+						label: fields.text({ label: "Label" }),
+						hardware_point: fields.text({ label: "Hardware Point (Physical)", multiline: true }),
+						software_point: fields.text({ label: "Software Point (Logical)", multiline: true }),
+						principle: fields.text({ label: "Principle (Synthesis)", multiline: true }),
+					}),
+					{
+						label: "Isomorphics (Trust Signals)",
+						itemLabel: (props) => props.fields.label.value || "Signal",
+					},
+				),
+
+				// V2.1: Events (Seismograph)
+				events: fields.array(
+					fields.object({
+						date: fields.date({ label: "Date" }),
+						score: fields.integer({ label: "Score (Entropy)" }),
+						snippet: fields.text({ label: "Snippet", multiline: true }),
+						type: fields.text({ label: "Type" }),
+						source_ref: fields.text({ label: "Source Ref" }),
+					}),
+					{
+						label: "Events (Seismograph)",
+						itemLabel: (props) => props.fields.snippet.value || "Event",
+					},
+				),
+
 				impact: fields.text({ label: "Impact Statement" }),
+
+				// V2.1: Reports (Direct Injection)
+				reports: fields.array(
+					fields.object({
+						label: fields.text({ label: "Label" }),
+						value: fields.text({ label: "Value" }),
+						url: fields.url({ label: "URL" }),
+					}),
+					{
+						label: "Reports",
+						itemLabel: (props) => props.fields.label.value || "Report",
+					},
+				),
+
+				// V2.1: Timeline (Object)
+				timeline: fields.object(
+					{
+						start: fields.date({ label: "Start Date" }),
+						end: fields.date({ label: "End Date" }),
+						duration: fields.text({ label: "Duration" }),
+						phases: fields.array(
+							fields.object({
+								label: fields.text({ label: "Phase Label" }),
+								start: fields.date({ label: "Start" }),
+								end: fields.date({ label: "End" }),
+							}),
+							{ label: "Phases", itemLabel: (props) => props.fields.label.value },
+						),
+					},
+					{ label: "Timeline (V2.1)" },
+				),
+
+				// V2.1: Complexity Vector (Physical Design)
+				complexity_vector: fields.object(
+					{
+						part_count_growth: fields.array(
+							fields.object({
+								phase: fields.text({ label: "Phase" }),
+								count: fields.integer({ label: "Count" }),
+								date: fields.text({ label: "Date (YYYY-MM)" }),
+								note: fields.text({ label: "Note", multiline: true }),
+							}),
+							{ label: "Part Count Growth", itemLabel: (props) => props.fields.phase.value },
+						),
+						process_density: fields.array(
+							fields.object({
+								part_name: fields.text({ label: "Part Name" }),
+								part_number: fields.text({ label: "Part Number" }),
+								material: fields.text({ label: "Material" }),
+								steps: fields.array(fields.text({ label: "Step" }), { label: "Steps" }),
+								complexity_score: fields.integer({ label: "Score (1-10)" }),
+								failure_mode: fields.text({ label: "Failure Mode", multiline: true }),
+								notes: fields.text({ label: "Notes", multiline: true }),
+							}),
+							{ label: "Process Density", itemLabel: (props) => props.fields.part_name.value },
+						),
+						tooling_chain: fields.array(
+							fields.object({
+								tool_name: fields.text({ label: "Tool Name" }),
+								type: fields.text({ label: "Type" }),
+								vendor: fields.text({ label: "Vendor" }),
+								lead_time_weeks: fields.integer({ label: "Lead Time (Weeks)" }),
+								cost_impact: fields.text({ label: "Cost Impact" }),
+								status: fields.text({ label: "Status" }),
+								risk: fields.text({ label: "Risk", multiline: true }),
+							}),
+							{ label: "Tooling Chain", itemLabel: (props) => props.fields.tool_name.value },
+						),
+						supply_chain_nodes: fields.array(
+							fields.object({
+								location: fields.text({ label: "Location" }),
+								role: fields.text({ label: "Role" }),
+								vendor: fields.text({ label: "Vendor" }),
+								notes: fields.text({ label: "Notes", multiline: true }),
+							}),
+							{ label: "Supply Chain Nodes", itemLabel: (props) => props.fields.location.value },
+						),
+						legacy_metrics: fields.array(
+							fields.object({
+								label: fields.text({ label: "Label" }),
+								value: fields.text({ label: "Value" }),
+							}),
+							{ label: "Legacy Metrics", itemLabel: (props) => props.fields.label.value },
+						),
+					},
+					{ label: "Complexity Vector" },
+				),
 
 				// --------------------------------------------------------------------------
 				// 7. Stats & Graphs
@@ -477,6 +618,11 @@ export default config({
 						itemLabel: (props) => props.fields.label.value,
 					},
 				),
+
+				visuals_to_find: fields.array(fields.text({ label: "Visual" }), {
+					label: "Visuals to Find (Legacy)",
+					itemLabel: (props) => props.value || "Visual",
+				}),
 				links: fields.array(
 					fields.object({
 						name: fields.text({ label: "Name" }),
@@ -679,6 +825,9 @@ export default config({
 						Admonition: ComponentBlocks.Admonition,
 						ModelViewer: ComponentBlocks.ModelViewer,
 						YouTube: ComponentBlocks.YouTube,
+						Chip: ComponentBlocks.Chip,
+						Wire: ComponentBlocks.Wire,
+						ScrambleText: ComponentBlocks.ScrambleText,
 					},
 				}),
 

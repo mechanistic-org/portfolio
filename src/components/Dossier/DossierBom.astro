@@ -1,0 +1,56 @@
+---
+import Table from "@/components/Starwind/table/Table.astro";
+import TableHeader from "@/components/Starwind/table/TableHeader.astro";
+import TableBody from "@/components/Starwind/table/TableBody.astro";
+import TableRow from "@/components/Starwind/table/TableRow.astro";
+import TableHead from "@/components/Starwind/table/TableHead.astro";
+import TableCell from "@/components/Starwind/table/TableCell.astro";
+
+interface Props {
+	bom: {
+		label: string;
+		value: string;
+	}[];
+}
+
+const { bom } = Astro.props;
+
+// Sort alphabetically by label? Or keep original order?
+// Original order might be grouped by category if the source was good.
+// But let's respect the source order.
+---
+
+<div class="border-border rounded-lg border">
+	<Table class="text-xs">
+		<TableHeader>
+			<TableRow class="hover:bg-transparent">
+				<TableHead
+					class="text-muted-foreground w-[200px] font-mono text-xs font-bold tracking-wider uppercase"
+					>Part / Component</TableHead
+				>
+				<TableHead
+					class="text-muted-foreground font-mono text-xs font-bold tracking-wider uppercase"
+					>Specification / Material</TableHead
+				>
+			</TableRow>
+		</TableHeader>
+		<TableBody>
+			{
+				bom && bom.length > 0 ? (
+					bom.map((item) => (
+						<TableRow class="hover:bg-muted/30 border-border/50 transition-colors">
+							<TableCell class="text-foreground font-mono font-medium">{item.label}</TableCell>
+							<TableCell class="text-muted-foreground">{item.value}</TableCell>
+						</TableRow>
+					))
+				) : (
+					<TableRow>
+						<TableCell colspan={2} class="text-muted-foreground h-24 text-center font-mono">
+							// MANIFEST EMPTY //
+						</TableCell>
+					</TableRow>
+				)
+			}
+		</TableBody>
+	</Table>
+</div>

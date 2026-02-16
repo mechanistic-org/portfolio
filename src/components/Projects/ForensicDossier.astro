@@ -1,0 +1,124 @@
+---
+import Tabs from "@/components/Starwind/tabs/Tabs.astro";
+import TabsList from "@/components/Starwind/tabs/TabsList.astro";
+import TabsTrigger from "@/components/Starwind/tabs/TabsTrigger.astro";
+import TabsContent from "@/components/Starwind/tabs/TabsContent.astro";
+
+import DossierCast from "../Dossier/DossierCast.astro";
+import DossierBom from "../Dossier/DossierBom.astro";
+import DossierTimeline from "../Dossier/DossierTimeline.astro";
+import DossierScars from "../Dossier/DossierScars.astro";
+import DossierData from "../Dossier/DossierData.astro";
+
+interface Props {
+	cast?: any[];
+	bom?: any[];
+	timeline?: any[];
+	scars?: any[];
+	forensic_data?: Record<string, any>;
+}
+
+const { cast, bom, timeline, scars, forensic_data } = Astro.props;
+
+console.log(
+	"FORENSIC DOSSIER DEBUG - Cast:",
+	cast?.length,
+	"BOM:",
+	bom?.length,
+	"Scars:",
+	scars?.length,
+);
+
+const hasData =
+	(cast && cast.length > 0) ||
+	(bom && bom.length > 0) ||
+	(scars && scars.length > 0) ||
+	timeline !== undefined ||
+	(forensic_data && Object.keys(forensic_data).length > 0);
+
+console.log("ForensicDossier Debug:", {
+	hasData,
+	castLen: cast?.length,
+	bomLen: bom?.length,
+	timelineLen: timeline?.length,
+	scarsLen: scars?.length,
+});
+---
+
+{
+	hasData && (
+		<section class="relative z-60 mt-24">
+			<Tabs defaultValue="" class="grid w-full grid-cols-1 gap-8 md:grid-cols-[250px_1fr]">
+				<TabsList class="flex h-fit w-full flex-col items-stretch justify-start space-y-1 rounded-none bg-transparent p-0">
+					<TabsTrigger
+						value="cast"
+						class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
+					>
+						Team
+					</TabsTrigger>
+					<TabsTrigger
+						value="scars"
+						class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
+					>
+						War Stories
+					</TabsTrigger>
+					<TabsTrigger
+						value="bom"
+						class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
+					>
+						Manifest
+					</TabsTrigger>
+					<TabsTrigger
+						value="timeline"
+						class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
+					>
+						Chronology
+					</TabsTrigger>
+					{forensic_data && Object.keys(forensic_data).length > 0 && (
+						<TabsTrigger
+							value="data"
+							class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
+						>
+							Data
+						</TabsTrigger>
+					)}
+				</TabsList>
+
+				<TabsContent
+					value="cast"
+					class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
+				>
+					<DossierCast cast={cast || []} />
+				</TabsContent>
+
+				<TabsContent
+					value="scars"
+					class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
+				>
+					<DossierScars scars={scars || []} />
+				</TabsContent>
+
+				<TabsContent
+					value="bom"
+					class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
+				>
+					<DossierBom bom={bom || []} />
+				</TabsContent>
+
+				<TabsContent
+					value="timeline"
+					class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
+				>
+					<DossierTimeline timeline={timeline || []} />
+				</TabsContent>
+
+				<TabsContent
+					value="data"
+					class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
+				>
+					<DossierData data={forensic_data || {}} />
+				</TabsContent>
+			</Tabs>
+		</section>
+	)
+}

@@ -17,7 +17,7 @@ const useDossier = presentation_mode === "deep_dive";
 // Backwards compatibility/Renaming
 const scrolly = cyberspace;
 
-import ForensicDossier from "@components/Scrolly/ForensicDossier.astro";
+import ForensicDossier from "@components/Projects/ForensicDossier.astro";
 import DeepDiveRenderer from "@components/DeepDive/DeepDiveRenderer.astro"; // IMPL
 // NEW COMPONENT IMPORTS
 // import ConspiracyBoard from "@components/Projects/ConspiracyBoard";
@@ -47,24 +47,6 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 	starfield={true}
 >
 	{/* FORENSIC DOSSIER (Deep Dive Only) */}
-	{
-		useDossier && (
-			<ForensicDossier
-				title={title}
-				metrics={entry.data.forensic_metrics}
-				forensicSummary={entry.data.forensic_summary}
-				caseTheory={
-					entry.data.case_theory ||
-					(entry.data.war_stories || []).map((ws: any) => ({
-						title: `${ws.label} // ${ws.value}`,
-						star: ws.description,
-					}))
-				}
-			>
-				{/* CONTENT MOVED TO MAIN FLOW TO ENSURE VISIBILITY ("Ready State") */}
-			</ForensicDossier>
-		)
-	}
 
 	<!-- FIXED INTRO -->
 
@@ -117,6 +99,18 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 				metrics={metrics}
 				entropy={entropy}
 				presentation_mode={presentation_mode}
+			/>
+		)
+	}
+
+	{/* NEW FORENSIC DOSSIER TABS (Visible in Deep Dive) */}
+	{
+		useDossier && (
+			<ForensicDossier
+				cast={entry.data.cast}
+				bom={entry.data.bom}
+				timeline={entry.data.timeline}
+				scars={entry.data.scars}
 			/>
 		)
 	}

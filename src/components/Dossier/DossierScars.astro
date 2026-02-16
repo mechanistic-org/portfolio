@@ -1,0 +1,45 @@
+---
+interface Props {
+	scars: {
+		label: string;
+		value: string;
+		description: string;
+	}[];
+}
+
+const { scars } = Astro.props;
+---
+
+<div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+	{
+		scars && scars.length > 0 ? (
+			scars.map((scar) => (
+				<div class="bg-card/20 border-border group relative flex flex-col gap-3 rounded-lg border p-5 transition-colors hover:border-red-500/30">
+					{/* Header */}
+					<div class="flex items-start justify-between gap-4">
+						<h3 class="font-bold text-red-500 transition-colors group-hover:text-red-400">
+							{scar.label}
+						</h3>
+						<span class="shrink-0 rounded bg-red-500/10 px-2 py-1 font-mono text-[10px] font-bold tracking-wider text-red-500 uppercase">
+							// CRITICAL
+						</span>
+					</div>
+
+					{/* Metric/Value */}
+					<div class="text-foreground font-mono text-xs font-bold">{scar.value}</div>
+
+					{/* Description */}
+					<p class="text-muted-foreground text-sm leading-relaxed">{scar.description}</p>
+
+					{/* Decorative Corner */}
+					<div class="absolute -top-px -right-px h-3 w-3 border-t border-r border-red-500/0 transition-colors group-hover:border-red-500/50" />
+					<div class="absolute -bottom-px -left-px h-3 w-3 border-b border-l border-red-500/0 transition-colors group-hover:border-red-500/50" />
+				</div>
+			))
+		) : (
+			<div class="text-muted-foreground col-span-full py-8 text-center font-mono text-sm">
+				// NO ANOMALIES DETECTED //
+			</div>
+		)
+	}
+</div>

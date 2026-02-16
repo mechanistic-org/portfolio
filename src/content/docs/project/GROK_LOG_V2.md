@@ -173,3 +173,44 @@ sidebar:
     - The **Child** (Carousel) links back to the **Parent**.
 2.  **THE NARRATIVE SCOPE:** The Child Project focuses _exclusively_ on the subsystem pathology (e.g. "Potato Chip Warping"). The Parent focuses on the Product Level (e.g. "Vault Recovery").
 3.  **NO ORPHANS:** A Case Study MUST have a Parent. It cannot stand alone.
+
+---
+
+## 🗑️ XV. The Law of the Raw Dump (Ingestion)
+
+**Context:** NotebookLM exports `.txt` files containing multiple JSON blocks separated by `run` delimiters. Agents tried to manually clean them or create separate files.
+
+1.  **RAW IS LAW:** Do not clean the `.txt` file. We ingest the **Raw Artifact**.
+2.  **THE COMPILER PARSES:** `hydrate_content.py` successfully splits by `run` and merges the JSON blocks.
+3.  **NO SPLITTING:** We do not create `foo_narrative.json` and `foo_complexity.json`. We keep the single `foo.txt` as the **Source of Truth**.
+
+---
+
+## 🏺 XVI. The Law of Strict Separation (Sovereign Narrative)
+
+**Context:** Previous parsers tried to "identify" content by regex matching user commands ("run for c24"), leading to data loss in "Discrete Reports" (Q&A).
+
+1.  **JSON IS METADATA:** Any JSON block found in the dump is extracted for Metadata (Frontmatter/Sidecars) and **removed** from the text buffer.
+2.  **TEXT IS NARRATIVE:** The _entire_ remaining text stream (including prompts, Q&A, and headers) is the Sovereign Narrative. We do not delete "tell me about" prompts; they are part of the forensic record.
+3.  **NO BODY JSON:** The final `.md` Body MUST NOT contain raw JSON blocks. They are strictly separated.
+4.  **SUBTRACTIVE EXTRACTION:** We do not "clean" text with Regex. We use `JSONDecoder` to _subtract_ valid objects. The remainder is the "Bones" (Level 2 Fidelity).
+
+---
+
+## 💎 XVII. The Law of Fidelity (The Three Levels)
+
+**Context:** Confusion about "Bit-for-Bit" vs "Refined" text led to a clear standardization of Audit Levels (Feb 2026).
+
+1.  **LEVEL 1 (RAW):** The `.txt` Dump. Contains JSON, CLI commands, and erratic whitespace. 100% Data, 0% Readability.
+2.  **LEVEL 2 (NORMALIZED):** **[The Ready State]** The "Bones." Subtractive Extraction removes JSON/CLI noise. Narrative is preserved 1:1 (>99% Parity). No AI Rewriting.
+3.  **LEVEL 3 (SYNTHESIZED):** The "Polish." LLM-assisted de-duping and narrative flow correction. This is an _enhancement_, not a requirement for hydration.
+
+---
+
+## 🔒 XVIII. The Law of Source Safety (Anti-Regression)
+
+**Context:** Repeated build failures occurred because manual syntax fixes in `index.mdx` (e.g., escaping `<0.5mm`) were overwritten by `hydrate_content.py` pulling from the raw `notebook_dumps/`.
+
+1.  **FIX UPSTREAM:** If a bug recurs after Hydration, the flaw is in the **Source** (`notebook_dumps/*.txt`), not the **Destination** (`index.mdx`). You MUST fix the dump file.
+2.  **ESCAPE AT SOURCE:** Special characters that break MDX (like `<` before a number) must be escaped (`\<`) in the raw text dump.
+3.  **VERIFY THE FLOW:** Do not just edit the MDX. Run `hydrate_content.py` locally to prove the fix survives the pipeline.

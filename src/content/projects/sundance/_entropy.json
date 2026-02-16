@@ -1,0 +1,314 @@
+[
+  {
+    "date": "2014-05-15",
+    "score": 3,
+    "snippet": "Product definition: Native 4K / Storage, 4-disk server, no RAID.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_021.md [1]",
+    "time_delta": 0
+  },
+  {
+    "date": "2014-06-09",
+    "score": 5,
+    "snippet": "Distributed ID/MD requirements document; power supply external vs internal debate.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_021.md [2]",
+    "time_delta": 25
+  },
+  {
+    "date": "2014-06-11",
+    "score": 3,
+    "snippet": "Flagged missing IR lens location and I/O connector layout in requirements.",
+    "type": "Commit",
+    "source_ref": "Kaleidescape_Volume_021.md [3]",
+    "time_delta": 2
+  },
+  {
+    "date": "2014-06-16",
+    "score": 4,
+    "snippet": "Presented Sundance ID slide deck to hardware team.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_020.md [4]",
+    "time_delta": 5
+  },
+  {
+    "date": "2014-06-20",
+    "score": 5,
+    "snippet": "Released Mechanical Design Review 1 presentation.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_021.md [5]",
+    "time_delta": 4
+  },
+  {
+    "date": "2014-07-07",
+    "score": 3,
+    "snippet": "Distributed sketches of separated front panel concepts.",
+    "type": "Photo",
+    "source_ref": "Kaleidescape_Volume_020.md [6]",
+    "time_delta": 17
+  },
+  {
+    "date": "2014-07-10",
+    "score": 5,
+    "snippet": "Released Draft Sundance PRD v3 for review.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_020.md [7]",
+    "time_delta": 3
+  },
+  {
+    "date": "2014-07-14",
+    "score": 2,
+    "snippet": "Reviewed REV 1 mainboard mechanical drawing; identified keepouts.",
+    "type": "Commit",
+    "source_ref": "Kaleidescape_Volume_020.md [8]",
+    "time_delta": 4
+  },
+  {
+    "date": "2014-08-15",
+    "score": 4,
+    "snippet": "Sent Sundance Overview to Function Engineering for external review.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_019.md [9]",
+    "time_delta": 32
+  },
+  {
+    "date": "2014-08-25",
+    "score": 6,
+    "snippet": "Received preliminary design review report from Function Engineering.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_019.md [10]",
+    "time_delta": 10
+  },
+  {
+    "date": "2014-08-29",
+    "score": 4,
+    "snippet": "Received updated Rev 2 mechanical drawing for mainboard placement.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_019.md [11]",
+    "time_delta": 4
+  },
+  {
+    "date": "2014-09-03",
+    "score": 4,
+    "snippet": "Distributed Updated ID Presentation focusing on rear panel options.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_017.md [12]",
+    "time_delta": 5
+  },
+  {
+    "date": "2014-09-11",
+    "score": 6,
+    "snippet": "Released plastic files to Yomura for quote/DFM.",
+    "type": "Commit",
+    "source_ref": "Kaleidescape_Volume_018.md [13]",
+    "time_delta": 8
+  },
+  {
+    "date": "2014-09-16",
+    "score": 6,
+    "snippet": "Released sheet metal files to Mass Precision for PROTO1 quote.",
+    "type": "Commit",
+    "source_ref": "Kaleidescape_Volume_019.md [14]",
+    "time_delta": 5
+  },
+  {
+    "date": "2014-09-16",
+    "score": 4,
+    "snippet": "Vendor flagged issue with dimple/extrusion feature on Top Cover.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_019.md [15]",
+    "time_delta": 0
+  },
+  {
+    "date": "2014-09-19",
+    "score": 5,
+    "snippet": "Approved $7682 purchase order to Solid Concepts for PROTO1 plastics.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_018.md [16]",
+    "time_delta": 3
+  },
+  {
+    "date": "2014-09-22",
+    "score": 4,
+    "snippet": "Added last-minute Backplate part (520-1220-00) to Mass build.",
+    "type": "Commit",
+    "source_ref": "Kaleidescape_Volume_018.md [17]",
+    "time_delta": 3
+  },
+  {
+    "date": "2014-09-23",
+    "score": 7,
+    "snippet": "Yomura reports MacDuff covers rejected by Sanmina for flow marks.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_018.md [18]",
+    "time_delta": 1
+  },
+  {
+    "date": "2014-10-09",
+    "score": 6,
+    "snippet": "Received rework report; Supply Chain releases 425 pcs per deviation.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_018.md [19]",
+    "time_delta": 16
+  },
+  {
+    "date": "2014-10-16",
+    "score": 7,
+    "snippet": "Received PROTO1 metal; drilled out 4 extra rivets not to print.",
+    "type": "Photo",
+    "source_ref": "Kaleidescape_Volume_017.md [20]",
+    "time_delta": 7
+  },
+  {
+    "date": "2014-10-22",
+    "score": 5,
+    "snippet": "Sent flow-mark elimination proposal to Yomura for analysis.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_017.md [21]",
+    "time_delta": 6
+  },
+  {
+    "date": "2014-10-30",
+    "score": 4,
+    "snippet": "Presented 'Front Panel ID Adjustments' to engineering team.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_018.md [22]",
+    "time_delta": 8
+  },
+  {
+    "date": "2014-11-05",
+    "score": 5,
+    "snippet": "Uploaded CAD snapshot for PROTO2 review.",
+    "type": "Commit",
+    "source_ref": "Kaleidescape_Volume_017.md [23]",
+    "time_delta": 6
+  },
+  {
+    "date": "2014-11-07",
+    "score": 6,
+    "snippet": "Acoustic testing results: 3dBA above target.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_017.md [24]",
+    "time_delta": 2
+  },
+  {
+    "date": "2014-11-12",
+    "score": 4,
+    "snippet": "Requested quote for PROTO 1.5 plastics from Solid Concepts.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_017.md [25]",
+    "time_delta": 5
+  },
+  {
+    "date": "2014-12-01",
+    "score": 5,
+    "snippet": "Cosmetic review feedback: Prefer countersunk screws for rack ears.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_017.md [26]",
+    "time_delta": 19
+  },
+  {
+    "date": "2014-12-09",
+    "score": 6,
+    "snippet": "EMI pre-scan indicates Sundance is 'quiet'.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_017.md [27]",
+    "time_delta": 8
+  },
+  {
+    "date": "2014-12-24",
+    "score": 4,
+    "snippet": "Received moldflow analysis for flow-mark elimination from Yomura.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_017.md [28]",
+    "time_delta": 15
+  },
+  {
+    "date": "2015-01-09",
+    "score": 8,
+    "snippet": "Flagged 5-10 week schedule slip due to new 2D documentation tasks.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_017.md [29]",
+    "time_delta": 16
+  },
+  {
+    "date": "2015-01-26",
+    "score": 5,
+    "snippet": "Requested quote from Star Prototype for Sundance plastic parts.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_016.md [30]",
+    "time_delta": 17
+  },
+  {
+    "date": "2015-01-27",
+    "score": 6,
+    "snippet": "Loaded Sundance files (Rev 3/Rev 2) into Arena PLM.",
+    "type": "Commit",
+    "source_ref": "Kaleidescape_Volume_022.md [31]",
+    "time_delta": 1
+  },
+  {
+    "date": "2015-02-04",
+    "score": 5,
+    "snippet": "Yomura confirms receipt of 'all new' design files.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md [32]",
+    "time_delta": 8
+  },
+  {
+    "date": "2015-02-05",
+    "score": 4,
+    "snippet": "Outlined paint strategy: AFT to match silver paint.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md [33]",
+    "time_delta": 1
+  },
+  {
+    "date": "2015-02-06",
+    "score": 7,
+    "snippet": "ECO-001466 (Sundance Release) effective: Mechanical and PCB BOMs.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md [34]",
+    "time_delta": 1
+  },
+  {
+    "date": "2015-02-11",
+    "score": 6,
+    "snippet": "Reviewed AFT prototype chassis; noted deformation at HDD vents.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md [35]",
+    "time_delta": 5
+  },
+  {
+    "date": "2015-02-12",
+    "score": 6,
+    "snippet": "Issued preliminary report on AFT prototype defects.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md [36]",
+    "time_delta": 1
+  },
+  {
+    "date": "2015-02-23",
+    "score": 7,
+    "snippet": "Yomura reports missing SABIC CYCOLOY 6250 material.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md [37]",
+    "time_delta": 11
+  },
+  {
+    "date": "2015-02-24",
+    "score": 7,
+    "snippet": "Reported casted plastics delayed; pushed Hunter build to March 9.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md [38]",
+    "time_delta": 1
+  },
+  {
+    "date": "2015-02-25",
+    "score": 6,
+    "snippet": "Advised canceling paint on cast parts to salvage schedule.",
+    "type": "Document",
+    "source_ref": "Kaleidescape_Volume_022.md [39]",
+    "time_delta": 1
+  }
+]

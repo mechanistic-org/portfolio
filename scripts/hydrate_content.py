@@ -6,6 +6,7 @@ import subprocess
 import frontmatter
 from pathlib import Path
 from datetime import datetime
+import re
 
 # --- Configuration ---
 SOURCE_DIR = Path("notebook_dumps")
@@ -59,6 +60,58 @@ def find_target_mdx(slug, content_dir):
 
 
 # --- Mining Logic (Stickies) ---
+
+
+def smart_merge_lists(existing_list, new_list, key_field):
+    """
+    Merges new_list into existing_list using an 'Upsert' strategy based on key_field.
+    - If an item in new_list matches an item in existing_list by key_field, OVERWRITE the existing item.
+    - If no match, APPEND the new item.
+    Returns the merged list.
+    """
+    if not existing_list:
+        return new_list
+    if not new_list:
+        return existing_list
+
+    merged_map = {}
+    
+    def get_key(item):
+        if isinstance(item, dict):
+             return item.get(key_field)
+        return str(item)
+        
+    for item in existing_list:
+        k = get_key(item)
+        if k:
+            merged_map[k] = item
+            
+    for item in new_list:
+        k = get_key(item)
+        if k:
+            merged_map[k] = item
+            
+    result_list = []
+    seen_keys = set()
+    
+    # 1. Pass through existing (updating inplace)
+    for item in existing_list:
+        k = get_key(item)
+        if k:
+            if k in merged_map:
+                result_list.append(merged_map[k])
+                seen_keys.add(k)
+            else:
+                 result_list.append(item)
+                 
+    # 2. Append new
+    for item in new_list:
+        k = get_key(item)
+        if k and k not in seen_keys:
+            result_list.append(item)
+             
+    return result_list
+
 
 def get_title_from_slug(slug):
     # "01_early_id" -> "Early Id"
@@ -210,6 +263,158 @@ def mine_stickies(slug, master_root, public_base_url):
     return stickies
 
 
+# --- Spec V2 Parsing ---
+
+# --- Spec V2 Parsing ---
+
+def parse_spec_v2(txt_path):
+    """
+    Parses a Spec V2 (.txt) file containing multiple JSON blocks and Markdown.
+    Supports both Fenced Markdown (```json) and Raw NotebookLM Dumps (separated by 'run').
+    Merges all JSON blocks into a single data dictionary.
+    """
+    try:
+        content = txt_path.read_text(encoding="utf-8")
+    except Exception as e:
+        print(f"❌ Error reading spec file {txt_path}: {e}")
+        return {}
+
+    data = {}
+    
+    # Strategy 1: Fenced Code Blocks (Standard Markdown)
+    json_blocks = re.findall(r'```json\s*(\{.*?\})\s*```', content, re.DOTALL)
+    
+    if json_blocks:
+        print(f"   🔹 Found {len(json_blocks)} Fenced JSON blocks")
+    else:
+        # Strategy 2: Raw Dump Splitting (NotebookLM 'run' separator)
+        # Split by 'run' on its own line
+        chunks = re.split(r'\nrun\n', content, flags=re.IGNORECASE)
+        # Also handle file start/end if 'run' is missing at boundaries
+        if len(chunks) == 1 and not content.strip().startswith('```'):
+             # Try parsing the whole file if it's just one JSON
+             chunks = [content]
+             
+        for i, chunk in enumerate(chunks):
+            chunk = chunk.strip()
+            if not chunk: continue
+            
+            # Find start and end of JSON { }
+            # Heuristic: Find first { and last }
+            start = chunk.find('{')
+            end = chunk.rfind('}')
+            
+            if start != -1 and end != -1 and end > start:
+                potential_json = chunk[start:end+1]
+                try:
+                    block_data = json.loads(potential_json)
+                    json_blocks.append(potential_json) # reuse logic below
+                except:
+                    # Not valid JSON, probably text narrative
+                    pass
+    
+    if not json_blocks:
+         print(f"   ⚠️  No JSON blocks found in {txt_path.name}")
+         return {}
+
+    print(f"   🔹 Merging {len(json_blocks)} JSON blocks from {txt_path.name}")
+    
+    for i, block in enumerate(json_blocks):
+        try:
+            if isinstance(block, str):
+                block_data = json.loads(block)
+            else:
+                block_data = block
+            
+            # Merge logic: shallow merge
+            data.update(block_data)
+        except json.JSONDecodeError as e:
+            print(f"   ❌ JSON Parse Error in block {i+1}: {e}")
+
+    return data
+
+
+def parse_notebook_dump(txt_path):
+    """
+    Parses a raw NotebookLM text dump (`.txt`) to extract the Narrative content.
+    
+    Strategy (Strict Separation):
+    1. Scan the entire file for valid JSON objects using `json.JSONDecoder`.
+    2. Extract and DISCARD these JSON blocks (they are metadata, handled by parse_spec_v2).
+    3. The remaining text is the "Full Raw Narrative".
+    4. Perform minimal cleanup (whitespace, specific delimiters).
+    """
+    try:
+        content = txt_path.read_text(encoding="utf-8")
+    except Exception as e:
+        print(f"❌ Error reading {txt_path}: {e}")
+        return None
+
+    # Robust JSON Subtraction using JSONDecoder
+    decoder = json.JSONDecoder()
+    pos = 0
+    cleaned_segments = []
+    
+    while pos < len(content):
+        # Find next potential JSON start
+        # Use simple search for '{'
+        next_brace = content.find('{', pos)
+        
+        if next_brace == -1:
+            # No more JSON candidates, append the rest
+            cleaned_segments.append(content[pos:])
+            break
+            
+        # Append text before the brace
+        if next_brace > pos:
+            cleaned_segments.append(content[pos:next_brace])
+            
+        # Try to decode a JSON object starting at next_brace
+        try:
+            # raw_decode returns (object, end_index) where end_index is relative to string start
+            # But wait, raw_decode takes input string.
+            # We pass content[next_brace:]? No, raw_decode takes full string and idx.
+            _, end_offset = decoder.raw_decode(content, next_brace)
+            
+            # If successful, we found a JSON block!
+            # We SKIP it (do not append to segments)
+            # raw_decode returns the absolute end index, so we just set pos to that.
+            pos = end_offset
+            
+        except json.JSONDecodeError:
+            # Not a valid JSON start. Treat the brace as text.
+            cleaned_segments.append(content[next_brace])
+            pos = next_brace + 1
+            
+    full_narrative = "".join(cleaned_segments)
+    
+    # Post-Processing / Cleanup
+    lines = full_narrative.split('\n')
+    final_lines = []
+    
+    for line in lines:
+        line = line.strip()
+        # Filter out 'run' commands that are often left over as isolated lines
+        # e.g. "run", "run for c24", "please run"
+        # Heuristic: Short line starting with "run"
+        if len(line) < 50 and line.lower().startswith("run"):
+            continue
+            
+        if not line:
+            final_lines.append("") # Keep paragraph breaks
+            continue
+            
+        final_lines.append(line)
+        
+    result = "\n".join(final_lines).strip()
+    
+    if not result:
+        return None
+        
+    return result
+
+
+
 # --- Main Hydration ---
 
 def hydrate_content(dry_run=False, force=False, target_slug=None):
@@ -233,28 +438,31 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
     # Public Base URL for assets
     public_base_url = "/assets/r2"
 
+    
+    # Discovery Phase: Collect all unique slugs from .txt (V2) and .json (Legacy)
+    all_txt_files = list(SOURCE_DIR.glob("*.txt"))
     all_json_files = list(SOURCE_DIR.glob("*.json"))
     
+    all_slugs = set([f.stem for f in all_txt_files] + [f.stem for f in all_json_files])
+    
     if target_slug:
-        # Filter for specific slug
-        json_files = [f for f in all_json_files if f.stem == target_slug]
-        if not json_files:
-            print(f"❌  Target slug '{target_slug}' not found in '{SOURCE_DIR}'.")
-            return
+        if target_slug not in all_slugs:
+             print(f"❌  Target slug '{target_slug}' not found in '{SOURCE_DIR}'.")
+             return
+        target_slugs = [target_slug]
         print(f"🎯  Targeted Mode: Hydrating only '{target_slug}'")
     else:
-        json_files = all_json_files
+        target_slugs = sorted(list(all_slugs))
 
-    if not json_files:
-        print(f"⚠️  No JSON files found in '{SOURCE_DIR}'.")
+    if not target_slugs:
+        print(f"⚠️  No Spec files found in '{SOURCE_DIR}'.")
         return
 
-    print(f"🔍  Found {len(json_files)} JSON files. Scanning targets...")
+    print(f"🔍  Found {len(target_slugs)} Projects. Scanning targets...")
     
     stats = {"matched": 0, "skipped": 0, "updated": 0}
 
-    for json_file in json_files:
-        slug = json_file.stem # Filename without extension
+    for slug in target_slugs:
         target_mdx = find_target_mdx(slug, TARGET_DIR)
 
         if not target_mdx:
@@ -264,9 +472,46 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
 
         stats["matched"] += 1
 
-        # Load Data
-        with open(json_file, "r", encoding="utf-8") as f:
-            data = json.load(f)
+        # Load Data (Priority: TXT > JSON)
+        txt_path = SOURCE_DIR / f"{slug}.txt"
+        json_path = SOURCE_DIR / f"{slug}.json"
+        
+        data = {}
+        source_type = "UNKNOWN"
+
+        if txt_path.exists():
+            # NEW: Narrative Titration (Smart Parse)
+            # If we have a spec v2 txt, but no matching .md (or force), try to extract narrative
+            dump_md_path = SOURCE_DIR / f"{slug}.md"
+            if force or not dump_md_path.exists():
+                 # Only parse if we have a txt file
+                 # We already checked txt_path.exists()
+                 extracted_narrative = parse_notebook_dump(txt_path)
+                 if extracted_narrative:
+                     print(f"   ✨ Smart Parsing Narrative from {txt_path.name}...")
+                     if not dry_run:
+                        with open(dump_md_path, "w", encoding="utf-8") as f:
+                            f.write(extracted_narrative)
+                     print(f"   📄 Generated Sovereign Narrative: {dump_md_path.name}")
+            
+            data = parse_spec_v2(txt_path)
+            source_type = "SPEC V2 (.txt)"
+            # Safety: If parse failed (empty data), should we fallback?
+            if not data and json_path.exists():
+                 print(f"   ⚠️  Spec V2 parse failed/empty. Falling back to JSON.")
+                 with open(json_path, "r", encoding="utf-8") as f:
+                    data = json.load(f)
+                 source_type = "LEGACY (.json)"
+        elif json_path.exists():
+            with open(json_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            source_type = "LEGACY (.json)"
+        
+        if not data:
+            print(f"   ❌ No data found for {slug}. Skipping.")
+            continue
+
+        print(f"🚀  Hydrating {slug} [{source_type}]")
 
         # Load MDX
         try:
@@ -305,9 +550,12 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
         # 1.5 Forensic Context (BOM, Team, Cast)
         # These were previously ignored "Dark Data"
         if "bom" in data:
-            if post.metadata.get("bom") != data["bom"]:
-                 changes.append(f"  - Update 'bom' (Forensic Context)")
-                 post.metadata["bom"] = data["bom"]
+            current_bom = post.metadata.get("bom") or []
+            merged_bom = smart_merge_lists(current_bom, data["bom"], "label")
+            
+            if current_bom != merged_bom:
+                 changes.append(f"  - Update 'bom' (Merged {len(data['bom'])} items)")
+                 post.metadata["bom"] = merged_bom
 
         if "teamSize" in data:
             if post.metadata.get("teamSize") != data["teamSize"]:
@@ -323,9 +571,12 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
                      post.metadata["teamSize"] = auto_team
 
         if "cast" in data:
-            if post.metadata.get("cast") != data["cast"]:
-                 changes.append(f"  - Update 'cast' (Forensic Context)")
-                 post.metadata["cast"] = data["cast"]
+            current_cast = post.metadata.get("cast") or []
+            merged_cast = smart_merge_lists(current_cast, data["cast"], "name")
+            
+            if current_cast != merged_cast:
+                 changes.append(f"  - Update 'cast' (Merged {len(data['cast'])} items)")
+                 post.metadata["cast"] = merged_cast
                  
         if "transcript" in data:
             # Check for empty transcript cleanup
@@ -343,9 +594,12 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
             scars_data = data.get("war_stories")
 
         if scars_data:
-            if post.metadata.get("scars") != scars_data:
-                changes.append(f"  - Update 'scars' ({len(scars_data)} items)")
-                post.metadata["scars"] = scars_data
+            current_scars = post.metadata.get("scars") or []
+            merged_scars = smart_merge_lists(current_scars, scars_data, "label")
+            
+            if current_scars != merged_scars:
+                changes.append(f"  - Update 'scars' (Merged {len(scars_data)} items)")
+                post.metadata["scars"] = merged_scars
                 
             # Cleanup Legacy
             if "war_stories" in post.metadata:
@@ -361,17 +615,78 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
 
         # 4. Seismobolus (Legacy) & Consolidating to 'events' (Seismograph)
         # The 'ForensicSeismograph' component reads 'events', not 'seismobolus'
+        # LAW UPDATE: Seismobolus data MUST live in _entropy.json sidecar.
+        # We do NOT inject into Frontmatter to prevent bloat.
         if "events" in data:
-             if post.metadata.get("events") != data["events"]:
-                  changes.append(f"  - Update 'events' ({len(data['events'])} items) [Unblocked Seismograph]")
-                  post.metadata["events"] = data["events"]
+             # Ensure we cleanup legacy if it exists
+             if "events" in post.metadata:
+                  changes.append(f"  - Remove 'events' from Frontmatter (Moved to Sidecar)")
+                  del post.metadata["events"]
         
-        # 5. Reports (Direct Injection to Metadata - NOT Body for now)
         if "reports" in data:
             reports = data["reports"]
             if post.metadata.get("reports") != reports:
                 changes.append(f"  - Update 'reports' ({len(reports)} items)")
                 post.metadata["reports"] = reports
+
+        # --- V2.2: FORENSIC LOCKER (Local _data.json) ---
+        # "Smart Router" for Structured Data Infusion
+        target_locker = target_mdx.parent / "_data.json"
+        if target_locker.exists():
+            try:
+                with open(target_locker, "r", encoding="utf-8") as f:
+                    locker_data = json.load(f)
+                
+                print(f"   🔓 Unlocked Forensic Data: {target_locker.name}")
+                
+                # Container for "Oddballs"
+                forensic_data = post.metadata.get("forensic_data") or {}
+                
+                for key, val in locker_data.items():
+                    # 1. Known Schema Keys -> Map Directly
+                    if key in ["bom", "cast", "scars", "timeline", "forensic_metrics", "reports", "forensic_summary"]:
+                        # Deep Merge Logic (Basic)
+                        # Specific handling for Arrays vs Objects might be needed
+                        # For now, we trust the Locker is "High Fidelity" and overrides/merges
+                        if key == "bom":
+                             current = post.metadata.get("bom") or []
+                             merged = smart_merge_lists(current, val, "label")
+                             if current != merged:
+                                 changes.append(f"  - [Locker] Update 'bom' ({len(val)} items)")
+                                 post.metadata["bom"] = merged
+                                 
+                        elif key == "cast":
+                             current = post.metadata.get("cast") or []
+                             merged = smart_merge_lists(current, val, "name")
+                             if current != merged:
+                                 changes.append(f"  - [Locker] Update 'cast' ({len(val)} items)")
+                                 post.metadata["cast"] = merged
+                                 
+                        elif key == "scars":
+                             current = post.metadata.get("scars") or []
+                             merged = smart_merge_lists(current, val, "label")
+                             if current != merged:
+                                 changes.append(f"  - [Locker] Update 'scars' ({len(val)} items)")
+                                 post.metadata["scars"] = merged
+                                 
+                        else:
+                            # Direct Overwrite for Objects/Strings
+                            if post.metadata.get(key) != val:
+                                changes.append(f"  - [Locker] Update '{key}'")
+                                post.metadata[key] = val
+                                
+                    else:
+                        # 2. Unknown Keys -> Route to 'forensic_data' (Catch-All)
+                        if forensic_data.get(key) != val:
+                            changes.append(f"  - [Locker] Stashed Oddball '{key}' in forensic_data")
+                            forensic_data[key] = val
+                            
+                # Save the Catch-All
+                if forensic_data:
+                    post.metadata["forensic_data"] = forensic_data
+
+            except Exception as e:
+                print(f"   ❌ Error reading Forensic Locker {target_locker}: {e}")
 
         # --- V2.0 SCHEMA UPDATES (Feb 2026) ---
 
@@ -384,15 +699,67 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
                  
         # 7. Timeline (V2.1)
         if "timeline" in data:
-            tl = data["timeline"]
-            if post.metadata.get("timeline") != tl:
-                 changes.append(f"  - Update 'timeline'")
-                 post.metadata["timeline"] = tl
+            current_timeline = post.metadata.get("timeline") or []
+            # For timeline, unique key is tricky. Let's use 'title'. 
+            # If same title (e.g. "Production Start"), we update details.
+            merged_timeline = smart_merge_lists(current_timeline, data["timeline"], "title")
+            
+            # Sort by Date? 
+            # Ideally yes, but let's trust manual order or sort in UI.
+            # Sorting here might break if format varies.
+            
+            if current_timeline != merged_timeline:
+                 changes.append(f"  - Update 'timeline' (Merged {len(data['timeline'])} items)")
+                 post.metadata["timeline"] = merged_timeline
 
         # 8. Entropy Sidecar (Seismograph) - Writes to _entropy.json
         # We do NOT put this in Frontmatter (Law X).
         if "events" in data:
             events = data["events"]
+            
+            # --- V2.3 VELOCITY CALCULATION ---
+            # 1. Sort by Date
+            # Handle potential missing dates or bad formats? Assuming ISO YYYY-MM-DD
+            try:
+                events.sort(key=lambda x: x.get("date", "0000-00-00"))
+                
+                # 2. Calculate Delta
+                from datetime import datetime
+                
+                for i in range(len(events)):
+                    current_event = events[i]
+                    current_date_str = current_event.get("date")
+                    
+                    if not current_date_str:
+                         current_event["time_delta"] = 0
+                         continue
+
+                    # Parse
+                    try:
+                        c_date = datetime.strptime(current_date_str, "%Y-%m-%d")
+                    except ValueError:
+                         # Fallback for strict ISO or just ignore
+                         current_event["time_delta"] = 0
+                         continue
+
+                    if i > 0:
+                        prev_event = events[i-1]
+                        prev_date_str = prev_event.get("date")
+                        if prev_date_str:
+                             try:
+                                 p_date = datetime.strptime(prev_date_str, "%Y-%m-%d")
+                                 delta = (c_date - p_date).days
+                                 current_event["time_delta"] = max(0, delta) # No negatives
+                             except ValueError:
+                                 current_event["time_delta"] = 0
+                        else:
+                             current_event["time_delta"] = 0 # Start of time
+                    else:
+                        current_event["time_delta"] = 0 # First event
+                        
+            except Exception as e:
+                print(f"   ⚠️  Velocity Calc Failed: {e}")
+
             # Path: src/content/projects/{slug}/_entropy.json
             # target_mdx is .../index.mdx. Parent is the project folder.
             entropy_path = target_mdx.parent / "_entropy.json"
@@ -406,7 +773,7 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
                     needs_write = False
             
             if needs_write:
-                changes.append(f"  - Write Sidecar '_entropy.json' ({len(events)} events)")
+                changes.append(f"  - Write Sidecar '_entropy.json' ({len(events)} events) with Velocity Data")
                 if not dry_run:
                      with open(entropy_path, "w", encoding="utf-8") as f:
                          json.dump(events, f, indent=2)
@@ -492,9 +859,11 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
                  
                  # Body Injection (Ready State Compliance) - Check regardless of _intelligence.md status
                  if target_mdx.name == "index.mdx":
-                     if not post.content or not post.content.strip():
-                         post.content = raw_intelligence
-                         changes.append(f"  - Injected Body Content from dump")
+                     # FORCE OVERWRITE if --force is used, or if empty
+                     if force or not post.content or not post.content.strip():
+                         if post.content != raw_intelligence:
+                             post.content = raw_intelligence
+                             changes.append(f"  - Injected Sovereign Body Content (Force={force})")
 
              except Exception as e:
                  print(f"  ❌ Failed to process intelligence dump: {e}")

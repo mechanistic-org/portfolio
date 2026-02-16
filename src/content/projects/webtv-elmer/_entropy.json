@@ -1,170 +1,234 @@
 [
-	{
-		"date": "2000-09-14",
-		"score": 2,
-		"snippet": "Frank Salinas sends Mercury sheet metal Pro/E files to Erik Lincicum.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_002.md (Email: FW: Pro/E Files)"
-	},
-	{
-		"date": "2000-09-15",
-		"score": 4,
-		"snippet": "Erik proposes timeline: Bezel design by PSDA, Mech design starts immediately.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_002.md (Email: RE: Elmer Info)"
-	},
-	{
-		"date": "2000-09-18",
-		"score": 3,
-		"snippet": "Keva Nelson sends Mercury System BOM and Elmer I/O Component specs.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_006.md (Email: FW: Mechanical Parts/Specs)"
-	},
-	{
-		"date": "2000-09-19",
-		"score": 3,
-		"snippet": "Leonard Bernal sends Elmer Proto DXF; Erik confirms receipt and starts CAD.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_006.md (Email: RE: Elmer Proto DXF)"
-	},
-	{
-		"date": "2000-10-24",
-		"score": 5,
-		"snippet": "Elmer Status: Bezel Pro-E in progress, Sheet metal ready Friday.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_001.md (Email: Demo Models Status 10/24)"
-	},
-	{
-		"date": "2000-10-24",
-		"score": 7,
-		"snippet": "Bastard Box concept defined: 'Elmer smooshed with a Mercury', 'Not defined yet'.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_001.md (Email: Demo Models Status 10/24)"
-	},
-	{
-		"date": "2000-10-25",
-		"score": 9,
-		"snippet": "Bastard Box Killed: 'It's dead - we'll use Elmer.'",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_006.md (Email: WCS Demo Unit Update)"
-	},
-	{
-		"date": "2000-10-31",
-		"score": 5,
-		"snippet": "5 Elmer enclosures in for WCS. Erik making mods for PCI card.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_002.md (Email: Status on WCS Demo Mechanicals)"
-	},
-	{
-		"date": "2000-11-01",
-		"score": 3,
-		"snippet": "Erik requests 'One Pager' for 'New Server' (Zeus) and Titan projects.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_005.md (Email: Hi!)"
-	},
-	{
-		"date": "2000-11-02",
-		"score": 3,
-		"snippet": "Hedley Davis confirms unit name change from 'Mercury based server' to 'Zues' (sic).",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_005.md (Email: DXF file for Mercury)"
-	},
-	{
-		"date": "2000-11-03",
-		"score": 2,
-		"snippet": "Erik requests physical samples: Mercury components, Zeus power supply, HDD.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_004.md (Email: mechanical samples)"
-	},
-	{
-		"date": "2000-11-08",
-		"score": 6,
-		"snippet": "Erik orders Qty 5 'Elmer Fan Brkt Rev 2' and 'Card Bracket Rev 1'.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_001.md (Email: RE: Quotes-Elmer)"
-	},
-	{
-		"date": "2000-11-08",
-		"score": 4,
-		"snippet": "Erturk Kocalar sends 'The one pager' scope artifact (eric_0001a.tif) to Erik.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_004.md (Email: RE: mechanical samples)"
-	},
-	{
-		"date": "2000-11-14",
-		"score": 4,
-		"snippet": "Erik releasing Zeus sheetmetal files tomorrow; contingency plan for DC connector holes.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_003.md (Email: RE: dc connector)"
-	},
-	{
-		"date": "2000-11-15",
-		"score": 8,
-		"snippet": "Mark Carbone flags 'Dead Nuts Flat' thermal risk for heat spreader.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_005.md (Email: Zeus cooling)"
-	},
-	{
-		"date": "2000-11-16",
-		"score": 7,
-		"snippet": "Leslie transmits 'New Perf for Zeus' (Perf.jpg) ECO to fix thermals.",
-		"type": "Photo",
-		"source_ref": "WebTV_Volume_005.md (Email: New Perf for Zeus)"
-	},
-	{
-		"date": "2000-11-17",
-		"score": 3,
-		"snippet": "Leslie requests DXF of Elmer back panel for 'DEMO UNIT ONLY' labels.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_001.md (Email: dxf)"
-	},
-	{
-		"date": "2000-11-20",
-		"score": 5,
-		"snippet": "Zeus ProE files completed and sent to EMS. Delivery target 12/8.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_002.md (Email: FW: Schedules for CES demo DSAs...)"
-	},
-	{
-		"date": "2000-11-21",
-		"score": 4,
-		"snippet": "Shelly Evans quotes Zeus Top Cover at $242.35 ea (Zinc plating added).",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_004.md (Email: Pricing Zeus Project)"
-	},
-	{
-		"date": "2000-11-22",
-		"score": 5,
-		"snippet": "Keva Nelson issues ECO C03055: 'ZEUS - RELEASE BOM FOR BUILD'.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_001.md (Email: Nelson, Keva has sent ECO C03055 to you)"
-	},
-	{
-		"date": "2000-11-28",
-		"score": 7,
-		"snippet": "Erturk flags hardware risk: Keystone standoffs are SAE, Mercury uses Metric.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_004.md (Email: stand offs)"
-	},
-	{
-		"date": "2000-12-01",
-		"score": 6,
-		"snippet": "Shelly Evans confirms early delivery of 5 Zeus enclosures (Cover, Base, Bracket).",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_004.md (Email: RE: Zues Enclosures to arrive today.)"
-	},
-	{
-		"date": "2000-12-04",
-		"score": 8,
-		"snippet": "Leslie cites 'screw-up on Elmer', demands confirmation of 4-40 hardware.",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_004.md (Email: Preliminary Zeus BOM)"
-	},
-	{
-		"date": "2000-12-05",
-		"score": 9,
-		"snippet": "Erik confirms: 'Yes, we are using 4-40 hardware throughout Zeus.'",
-		"type": "Document",
-		"source_ref": "WebTV_Volume_004.md (Email: RE: Preliminary Zeus BOM)"
-	}
+  {
+    "date": "2000-10-25",
+    "score": 9,
+    "snippet": "Leland kills 'Bastard Box' concept. Pivot to 'Elmer' initiated.",
+    "type": "Commit",
+    "source_ref": "Email Archive [1]",
+    "time_delta": 0
+  },
+  {
+    "date": "2000-10-26",
+    "score": 5,
+    "snippet": "Design Scope 'One Pager' transmitted by Kocalar.",
+    "type": "Document",
+    "source_ref": "eric_0001a.tif [2]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-11-01",
+    "score": 3,
+    "snippet": "Weekly 'Atlas' War Room sync (3:00 PM).",
+    "type": "Memory",
+    "source_ref": "Forensic Report [3]",
+    "time_delta": 6
+  },
+  {
+    "date": "2000-11-02",
+    "score": 7,
+    "snippet": "Carbone flags 'Dead Nuts Flat' thermal risk on Elmer mainboard.",
+    "type": "Document",
+    "source_ref": "Forensic Report [4]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-11-03",
+    "score": 8,
+    "snippet": "Thermal ECO: Perforation deleted under heat spreader (Conduction fix).",
+    "type": "Document",
+    "source_ref": "Perf.jpg [5]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-11-03",
+    "score": 6,
+    "snippet": "Thermal ECO: Perforation increased near PSU (Convection fix).",
+    "type": "Document",
+    "source_ref": "Perf.jpg [5]",
+    "time_delta": 0
+  },
+  {
+    "date": "2000-11-04",
+    "score": 4,
+    "snippet": "'ThermaPad' gap filler specified to mitigate sheet metal tolerance.",
+    "type": "Document",
+    "source_ref": "Forensic Report [5]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-11-05",
+    "score": 7,
+    "snippet": "Logistics reports mixed metric/SAE hardware 'screw-up' on Elmer proto.",
+    "type": "Memory",
+    "source_ref": "Forensic Report [6]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-11-06",
+    "score": 8,
+    "snippet": "Draconian 4-40 UNC standardization enforced for Zeus build.",
+    "type": "Commit",
+    "source_ref": "Zeus BOM [7]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-11-08",
+    "score": 3,
+    "snippet": "Weekly 'Atlas' War Room sync (3:00 PM).",
+    "type": "Memory",
+    "source_ref": "Forensic Report [3]",
+    "time_delta": 2
+  },
+  {
+    "date": "2000-11-10",
+    "score": 5,
+    "snippet": "Designed 'Card Bracket Rev 1' for PCI/Ethernet grafting.",
+    "type": "Document",
+    "source_ref": "Forensic Report [8]",
+    "time_delta": 2
+  },
+  {
+    "date": "2000-11-12",
+    "score": 4,
+    "snippet": "Designed 'Elmer Fan Bracket Rev 2' for dual 60mm fans.",
+    "type": "Document",
+    "source_ref": "Forensic Report [9]",
+    "time_delta": 2
+  },
+  {
+    "date": "2000-11-14",
+    "score": 6,
+    "snippet": "Titan (Pluto) Node: Compact Flash collision identified.",
+    "type": "Document",
+    "source_ref": "Forensic Report [10]",
+    "time_delta": 2
+  },
+  {
+    "date": "2000-11-15",
+    "score": 6,
+    "snippet": "Titan (Pluto) Node: Ethernet mounting misalignment identified.",
+    "type": "Document",
+    "source_ref": "Forensic Report [10]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-11-15",
+    "score": 3,
+    "snippet": "Weekly 'Atlas' War Room sync (3:00 PM).",
+    "type": "Memory",
+    "source_ref": "Forensic Report [3]",
+    "time_delta": 0
+  },
+  {
+    "date": "2000-11-16",
+    "score": 5,
+    "snippet": "DXF exchange with Haufschild (PCB) to resolve Titan collisions.",
+    "type": "Document",
+    "source_ref": "Forensic Report [10]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-11-18",
+    "score": 4,
+    "snippet": "Titan Node fabrication file validated.",
+    "type": "Document",
+    "source_ref": "titan.dxf [11]",
+    "time_delta": 2
+  },
+  {
+    "date": "2000-11-20",
+    "score": 5,
+    "snippet": "Fabrication Data upload to vendor via FTP.",
+    "type": "Document",
+    "source_ref": "elmer_proto.zip [12]",
+    "time_delta": 2
+  },
+  {
+    "date": "2000-11-21",
+    "score": 6,
+    "snippet": "EMS flags laser burn on electro-galvanized; switch to CRS.",
+    "type": "Memory",
+    "source_ref": "Forensic Report [7]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-11-22",
+    "score": 3,
+    "snippet": "Weekly 'Atlas' War Room sync (3:00 PM).",
+    "type": "Memory",
+    "source_ref": "Forensic Report [3]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-11-23",
+    "score": 7,
+    "snippet": "Split-build activated: EMS (Metal) and Sputnik (Bezels).",
+    "type": "Commit",
+    "source_ref": "Forensic Report [7]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-11-25",
+    "score": 4,
+    "snippet": "EMS executes soft-tool laser cutting for chassis.",
+    "type": "Commit",
+    "source_ref": "Forensic Report [7]",
+    "time_delta": 2
+  },
+  {
+    "date": "2000-11-27",
+    "score": 5,
+    "snippet": "Sputnik Models machining plastic bezels.",
+    "type": "Commit",
+    "source_ref": "Forensic Report [7]",
+    "time_delta": 2
+  },
+  {
+    "date": "2000-11-28",
+    "score": 6,
+    "snippet": "Manual machining rework of 'botched' perf top at Sputnik.",
+    "type": "Memory",
+    "source_ref": "Forensic Report [13]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-11-29",
+    "score": 3,
+    "snippet": "Weekly 'Atlas' War Room sync (3:00 PM).",
+    "type": "Memory",
+    "source_ref": "Forensic Report [3]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-12-06",
+    "score": 9,
+    "snippet": "Delivery: 'Elmer' units deployed for Western Cable Show.",
+    "type": "Commit",
+    "source_ref": "Forensic Report [14]",
+    "time_delta": 7
+  },
+  {
+    "date": "2000-12-10",
+    "score": 5,
+    "snippet": "Refinement: Zinc plating added for 'Zeus' final revision.",
+    "type": "Commit",
+    "source_ref": "Forensic Report [14]",
+    "time_delta": 4
+  },
+  {
+    "date": "2000-12-20",
+    "score": 4,
+    "snippet": "Final QC: Zero thermal failures reported on WCS units.",
+    "type": "Memory",
+    "source_ref": "Forensic Report [15]",
+    "time_delta": 10
+  },
+  {
+    "date": "2001-01-05",
+    "score": 10,
+    "snippet": "Launch: 5 Zeus Servers / 12 Pluto Nodes deployed at CES 2001.",
+    "type": "Commit",
+    "source_ref": "Forensic Report [16]",
+    "time_delta": 16
+  }
 ]
