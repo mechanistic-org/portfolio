@@ -7,6 +7,7 @@ import ComplexityViz from "@components/DataViz/ComplexityViz.astro";
 import ForensicSeismograph from "@components/DataViz/ForensicSeismograph";
 import ForensicTooltip from "@components/DLS/ForensicTooltip.astro";
 import TeamDrawer from "@components/Scrolly/TeamDrawer";
+import { CATEGORIES } from "@/config/taxonomy";
 
 interface Props {
 	data: any;
@@ -71,7 +72,11 @@ if (!displayDuration && data.date) {
 			<div class="flex items-center gap-2 text-[10px] tracking-wider uppercase md:gap-3">
 				<span class="font-bold whitespace-nowrap text-white">{data.employer}</span>
 				<span class="hidden text-neutral-500 md:inline">//</span>
-				<span class="truncate text-neutral-400 md:inline">{data.category || "Project"}</span>
+				<span class="truncate text-neutral-400 md:inline"
+					>{
+						CATEGORIES.find((c) => c.value === data.category)?.label || data.category || "Project"
+					}</span
+				>
 			</div>
 		</div>
 	</div>
@@ -129,7 +134,7 @@ if (!displayDuration && data.date) {
 
 			{/* 0. TEAM SIZE (Pip Chart or Text) */}{
 				!showMetrics && (
-					<div class="col-span-1 cursor-crosshair border-r border-white/10 px-4 py-2">
+					<div class="cursor-crosshair border-r border-white/10 px-4 py-2">
 						{(() => {
 							// Parse "INT 37 / EXT 21" logic
 							const teamStr = data.teamSize || "";

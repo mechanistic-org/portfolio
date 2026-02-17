@@ -1,7 +1,7 @@
 ---
 title: "Project Index"
 description: "Holistic Forensic Archive & Catalog"
-last_updated: "2026-02-16"
+last_updated: "2026-02-17"
 total_entries: 122
 ---
 
@@ -13,7 +13,7 @@ total_entries: 122
 ---
 
 ## 1. The Forensic Registry (Tier 1)
-**Count:** 23
+**Count:** 24
 *High-fidelity entries with structured forensic data, war stories, and metrics.*
 
 ### 320-Slot Carousel (`320-slot-optical-carousel`)
@@ -25,6 +25,16 @@ total_entries: 122
 - **Financial:** $2500 tooling mod investment (Ribs & Rads)
 - **Governance:** Weekly Pulse / T-Shot Inspection Reports
 - **Process:** 7-Stage Tooling Iteration (T1-T7)
+
+---
+
+### Avegant Glyph (`avegant-glyph`)
+**Detail Pod:** _[URL_PENDING]_
+
+> **Forensic Summary:** TRIGGER: Catastrophic yield collapse in Mass Production. Total RTY (Rolling Throughput Yield) plummeted to 35.40% in Week 10. The optical engine was sieged by 'impurities' (dust/particles), specifically 91 units (41%) failing for DMD dust. INTERVENTION: Implementation of a rigorous 'Cleanroom' protocol and specific optical inspection stations (O4/O7). Engineers were forced to manually 'wipe DMD clean' under 20x magnification microscopes. A 'Blue dot' defect required investigating the diffuser injection molding process. RESULT: Yield recovery was slow and painful. By Week 16, Cleanroom RTY crawled to 70.97%, but total yield remained volatile, hitting 0.00% in Weeks 15 and 29.
+
+**Key Metrics:**
+- **Quotes:** []
 
 ---
 
@@ -279,13 +289,12 @@ total_entries: 122
 
 
 ## 2. The Project Catalog (Tier 2)
-**Count:** 99
+**Count:** 98
 *Standard entries, ready-state drafts, and archival stub records.*
 
 - **Acer Aspire** (`acer-aspire`): > **Context:** Consultancies are the boot camp of design.
 - **Acer Phone** (`acer-phone`): > **Context:** Consultancies are the boot camp of design.
 - **Acer subwoofer** (`acer-subwoofer`): > **Context:** Consultancies are the boot camp of design.
-- **Avegant Glyph** (`avegant-glyph`): Avegant Glyph (Vulcan) Forensic Report
 - **Backsplash** (`backsplash`): > **Context:** Before the "Factory in a Box" (Makeline), we had to prove we could automate a kitchen without redesigning the building.
 - **battery lock** (`battery-lock`): > **Context:** A micromobility fleet needed a way to secure high-value battery packs against theft while allowing authorized "Swap Teams" to replace them in seconds.
 - **bay wheels** (`bay-wheels`): > **Context:** Lyft (Bay Wheels) needed a next-gen shared e-bike that could survive the urban jungle.
@@ -348,7 +357,7 @@ total_entries: 122
 - **Personal IRIS** (`personal-iris`): > **Context:** The machine that made Jurassic Park.
 - **Pet Scale** (`pet-scale`): > **Context:** A major player in the pet care space was looking to acquire a smart-home startup. They needed to know if the tech was real or vaporware.
 - **Pinata** (`pinata`): > *Auto-generated scaffold from Multiverse Registry.*
-- **Portion Cup** (`portion-cup`): > **Context:** Every salad needs dressing. But manually filling thousands of 2oz plastic cups is a repetitive motion injury waiting to happen.
+- **Portion Cup** (`portion-cup`): Portion Cup Dispensing Module Forensic Report
 - **Pro Control Jr** (`pro-control-jr`): > **Context:** Digidesign (Avid) set the standard for professional digital audio workstations (Pro Tools).
 - **Profile** (`profile`): > **Context:** In a studio, if Pro Tools crashes, you reboot. In a live concert, you get fired.
 - **Project 001 (Vandross)** (`project-001-(vandross)`): > *Auto-generated scaffold from Multiverse Registry.*

@@ -244,3 +244,13 @@ sidebar:
 
 1.  **JIT SUPREMACY:** Use `z-[60]` (Explicit JIT) to force the layer order. Do not rely on `z-50` + `relative` alone.
 2.  **AUTO-OPEN TABS:** A Dossier must never render "Closed" by default. Logic must calculate the `defaultValue` based on available data (`cast`, `bom`, etc.) so the user sees the "Full Graph" immediately.
+
+---
+
+## 🤿 XXII. The Law of the Deep Dive (Layout Topology)
+
+**Context:** The `standard` presentation mode forces `teamSize` and `duration` into the header center slot. When data is "Unknown" or long-string, it collides with the Project Title due to absolute positioning.
+
+1.  **DEEP DIVE BY DEFAULT:** For Forensic/Archival projects (where data might be raw/partial), use `presentation_mode: deep_dive`.
+2.  **DRAWER SAFETY:** `deep_dive` moves metrics (Team, BOM, Governance) to the collapsible Drawer, clearing the header for the Title.
+3.  **STANDARD IS PRIVILEGE:** Only use `standard` mode for "Flagship" projects (Tier 1) where metadata is curated and character-counted to fit the HUD grid.

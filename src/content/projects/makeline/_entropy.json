@@ -1,1 +1,130 @@
-[]
+[
+  {
+    "date": "2020-06-01",
+    "score": 7,
+    "snippet": "Pivot triggered. Ono Food Co concept abandoned for Makeline architecture.",
+    "type": "Memory",
+    "source_ref": "Automated Makeline prepares 350 meals per hour [1]",
+    "time_delta": 0
+  },
+  {
+    "date": "2021-06-20",
+    "score": 3,
+    "snippet": "BOM locked for Tilt Ramp assembly. Structure defined.",
+    "type": "Document",
+    "source_ref": "BOM_TILT_RAMP_working_2021_06_20 [2]",
+    "time_delta": 384
+  },
+  {
+    "date": "2021-07-10",
+    "score": 2,
+    "snippet": "Quote issued: CNC machining for Worm Gear Housing/Shaft.",
+    "type": "Document",
+    "source_ref": "SP17D020-20210710A Prototypes Quotation [3]",
+    "time_delta": 20
+  },
+  {
+    "date": "2021-08-11",
+    "score": 8,
+    "snippet": "Identity Shift: Ono becomes Hyphen. 350 meals/hr spec published.",
+    "type": "Document",
+    "source_ref": "Hyphen Launches the World's First Robotic Makeline [4]",
+    "time_delta": 32
+  },
+  {
+    "date": "2021-10-05",
+    "score": 4,
+    "snippet": "IP Anchor: Priority date established for modular system patent.",
+    "type": "Document",
+    "source_ref": "US Patent 2024/0164588 A1 [5]",
+    "time_delta": 55
+  },
+  {
+    "date": "2022-05-04",
+    "score": 5,
+    "snippet": "Control Plane Validation: Beckhoff C6030/EtherCAT architecture confirmed.",
+    "type": "Document",
+    "source_ref": "Automated Makeline prepares 350 meals per hour [6]",
+    "time_delta": 211
+  },
+  {
+    "date": "2022-07-21",
+    "score": 9,
+    "snippet": "Liquidity Event: Chipotle Cultivate Next fund invests. Scale authorized.",
+    "type": "Document",
+    "source_ref": "CHIPOTLE INVESTS IN ROBOTIC MAKELINE [7]",
+    "time_delta": 78
+  },
+  {
+    "date": "2023-01-14",
+    "score": 3,
+    "snippet": "IP Expansion: Provisional patent filed for sensor/window logic.",
+    "type": "Document",
+    "source_ref": "US Patent 2024/0164588 A1 [5]",
+    "time_delta": 177
+  },
+  {
+    "date": "2023-10-03",
+    "score": 6,
+    "snippet": "Alpha Test: Digital makeline pilot announced at Cultivate Center.",
+    "type": "Document",
+    "source_ref": "CHIPOTLE TEAMS UP WITH HYPHEN [8]",
+    "time_delta": 262
+  },
+  {
+    "date": "2024-01-26",
+    "score": 4,
+    "snippet": "IP Formalization: Full utility patent filed. Inventors: Fukuba, Norris.",
+    "type": "Document",
+    "source_ref": "US Patent 2024/0164588 A1 [5]",
+    "time_delta": 115
+  },
+  {
+    "date": "2024-02-28",
+    "score": 5,
+    "snippet": "Capital Reinforcement: Cultivate Next fund doubled to $100M.",
+    "type": "Document",
+    "source_ref": "CHIPOTLE DOUBLES ITS COMMITMENT [9]",
+    "time_delta": 33
+  },
+  {
+    "date": "2024-09-16",
+    "score": 10,
+    "snippet": "Live Fire: Unit active at Corona del Mar. Revenue generation starts.",
+    "type": "Photo",
+    "source_ref": "CHIPOTLE DEBUTS AUTOCADO AND AUGMENTED MAKELINE [10]",
+    "time_delta": 201
+  },
+  {
+    "date": "2025-08-12",
+    "score": 7,
+    "snippet": "Competitor Buy-in: CAVA invests $5M in Series B. Cross-brand validation.",
+    "type": "Document",
+    "source_ref": "Cava joins Chipotle in backing Hyphen [11]",
+    "time_delta": 330
+  },
+  {
+    "date": "2025-11-01",
+    "score": 4,
+    "snippet": "Market Shift: Sweetgreen sells robotics arm, validating Hyphen's model.",
+    "type": "Document",
+    "source_ref": "Strategic and Technical Analysis... [12]",
+    "time_delta": 81
+  },
+  {
+    "date": "2025-12-12",
+    "score": 5,
+    "snippet": "Forecast: $1.3B pipeline opportunity identified. Scale pressure.",
+    "type": "Document",
+    "source_ref": "[2025.12.12] Monthly All-Hands [13]",
+    "time_delta": 41
+  },
+  {
+    "date": "2026-02-03",
+    "score": 6,
+    "snippet": "Fiscal Reality: 2026 guidance assumes flat sales; efficiency critical.",
+    "type": "Document",
+    "source_ref": "Strategic and Technical Analysis... [14]",
+    "time_delta": 53
+  }
+]
