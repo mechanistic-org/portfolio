@@ -1,0 +1,194 @@
+[
+  {
+    "date": "2000-03-13",
+    "score": 5,
+    "snippet": "Product Concept authorized. Target: Low cost, phone-powered, no disposable batteries.",
+    "type": "Document",
+    "source_ref": "MP3 Concept Sheet.pdf [1]",
+    "time_delta": 0
+  },
+  {
+    "date": "2000-03-14",
+    "score": 3,
+    "snippet": "Solteras defines scope: Mic housing with N.C. switch (ITT/Dong Hyun).",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [2]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-07-13",
+    "score": 2,
+    "snippet": "ID Spec: Wire/Cord defined as Pantone 431C. Matte Chrome finish specified.",
+    "type": "Document",
+    "source_ref": "mp3 module specs.pdf [3]",
+    "time_delta": 121
+  },
+  {
+    "date": "2000-07-26",
+    "score": 6,
+    "snippet": "Consultant Agreement executed: Mechanistic engaged for complex surfacing.",
+    "type": "Document",
+    "source_ref": "mp3_proposal_07_26_00.pdf [4]",
+    "time_delta": 13
+  },
+  {
+    "date": "2000-07-27",
+    "score": 8,
+    "snippet": "Crisis: Ultrasonic welding deemed impossible due to spacing. Assembly method questioned.",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [5]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-07-27",
+    "score": 3,
+    "snippet": "Section A-A drawing generated to analyze housing volume.",
+    "type": "Document",
+    "source_ref": "mp3.pdf [6]",
+    "time_delta": 0
+  },
+  {
+    "date": "2000-08-02",
+    "score": 4,
+    "snippet": "BOM Rev 1.0 issued for diagnostic 'square version' prototype.",
+    "type": "Document",
+    "source_ref": "MP3 BOM9.26.00 [7]",
+    "time_delta": 6
+  },
+  {
+    "date": "2000-08-14",
+    "score": 3,
+    "snippet": "Top PCB layout sketches: Component keepouts defined for JLS1300-0101.",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [8]",
+    "time_delta": 12
+  },
+  {
+    "date": "2000-08-17",
+    "score": 2,
+    "snippet": "Change Order: Pantone 431C swapped to Black.",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [9]",
+    "time_delta": 3
+  },
+  {
+    "date": "2000-08-29",
+    "score": 4,
+    "snippet": "Shinwoo Audio establishes M-12 Plug measurement protocol.",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [10]",
+    "time_delta": 12
+  },
+  {
+    "date": "2000-08-31",
+    "score": 5,
+    "snippet": "Quality Alert: Plug dimension C guaranteed via A-part jig setup.",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [11]",
+    "time_delta": 2
+  },
+  {
+    "date": "2000-09-26",
+    "score": 7,
+    "snippet": "BOM Rev 8.0: Micronas DSP lead time hits 23 weeks ($7.95 unit cost).",
+    "type": "Document",
+    "source_ref": "MP3 BOM9.26.00 [12]",
+    "time_delta": 26
+  },
+  {
+    "date": "2000-09-26",
+    "score": 7,
+    "snippet": "BOM Rev 8.0: National Semi USB controller lead time hits 16 weeks.",
+    "type": "Document",
+    "source_ref": "MP3 BOM9.26.00 [12]",
+    "time_delta": 0
+  },
+  {
+    "date": "2000-10-09",
+    "score": 3,
+    "snippet": "Design Directive: Review Samsung MP3 Headset for jack integration.",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [13]",
+    "time_delta": 13
+  },
+  {
+    "date": "2000-10-16",
+    "score": 9,
+    "snippet": "Tooling Violation: Rib 5 snap cannot be molded together. 'Add Bridge'.",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [14]",
+    "time_delta": 7
+  },
+  {
+    "date": "2000-10-16",
+    "score": 5,
+    "snippet": "Button design proposal: Move switches to actuate.",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [15]",
+    "time_delta": 0
+  },
+  {
+    "date": "2000-10-19",
+    "score": 4,
+    "snippet": "Snap fit dimensions defined: 0.4mm engagement.",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [16]",
+    "time_delta": 3
+  },
+  {
+    "date": "2000-10-30",
+    "score": 5,
+    "snippet": "Shinwoo Audio requests clearance definition between switch housing and PCB2.",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [17]",
+    "time_delta": 11
+  },
+  {
+    "date": "2000-10-31",
+    "score": 9,
+    "snippet": "Critical Risk: Housing transformation expected during temperature shock testing.",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [18]",
+    "time_delta": 1
+  },
+  {
+    "date": "2000-10-31",
+    "score": 6,
+    "snippet": "Directive: Maximize wall thickness to mitigate thermal warping.",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [18]",
+    "time_delta": 0
+  },
+  {
+    "date": "2000-10-31",
+    "score": 4,
+    "snippet": "Logo Lens Y axis shift identified.",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [19]",
+    "time_delta": 0
+  },
+  {
+    "date": "2000-10-31",
+    "score": 5,
+    "snippet": "Tooling Query: Do we need rib at end to limit travel in Y?",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [20]",
+    "time_delta": 0
+  },
+  {
+    "date": "2000-11-03",
+    "score": 6,
+    "snippet": "Assembly Mismatch 01 identified. Strain relief failing during pull test.",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [21]",
+    "time_delta": 3
+  },
+  {
+    "date": "2000-11-27",
+    "score": 8,
+    "snippet": "Injection Failure: Cover thickness must increase by 0.4mm to mold successfully.",
+    "type": "Document",
+    "source_ref": "MP600_faxes.pdf [22]",
+    "time_delta": 24
+  }
+]

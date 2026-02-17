@@ -13,7 +13,7 @@ total_entries: 122
 ---
 
 ## 1. The Forensic Registry (Tier 1)
-**Count:** 24
+**Count:** 25
 *High-fidelity entries with structured forensic data, war stories, and metrics.*
 
 ### 320-Slot Carousel (`320-slot-optical-carousel`)
@@ -35,6 +35,18 @@ total_entries: 122
 
 **Key Metrics:**
 - **Quotes:** []
+
+---
+
+### Hyphen Makeline (`backsplash`)
+**Detail Pod:** _[URL_PENDING]_
+
+> **Forensic Summary:** TRIGGER: Volumetric Impossible State (70+ actuators in kitchen footprint) INTERVENTION: Signal Distribution Architecture (EtherCAT Motherboard) RESULT: Operational Density Achieved (350 meals/hr)
+
+**Key Metrics:**
+- **Financial:** Secured $25M in Series B funding
+- **Governance:** TwinCAT Core Isolation
+- **Process:** 15-minute cleaning cycle via 'push-to-unlock'
 
 ---
 
@@ -289,13 +301,12 @@ total_entries: 122
 
 
 ## 2. The Project Catalog (Tier 2)
-**Count:** 98
+**Count:** 97
 *Standard entries, ready-state drafts, and archival stub records.*
 
 - **Acer Aspire** (`acer-aspire`): > **Context:** Consultancies are the boot camp of design.
 - **Acer Phone** (`acer-phone`): > **Context:** Consultancies are the boot camp of design.
 - **Acer subwoofer** (`acer-subwoofer`): > **Context:** Consultancies are the boot camp of design.
-- **Hyphen Makeline** (`backsplash`): Hyphen Augmented Makeline Forensic Report
 - **battery lock** (`battery-lock`): > **Context:** A micromobility fleet needed a way to secure high-value battery packs against theft while allowing authorized "Swap Teams" to replace them in seconds.
 - **bay wheels** (`bay-wheels`): > **Context:** Lyft (Bay Wheels) needed a next-gen shared e-bike that could survive the urban jungle.
 - **BFD** (`bfd`): > **Context:** As a lead mechanical engineer at Mechanistic, I tackled diverse challenges across consumer electronics, medical devices, and robotics.
@@ -305,7 +316,7 @@ total_entries: 122
 - **D-Show** (`d-show`): > **Context:** Digidesign (Avid) set the standard for professional digital audio workstations (Pro Tools).
 - **Digi 003** (`digi-003`): > **Context:** The bridge between the bedroom and the pro studio.
 - **Disc Cartridges** (`disc-cartridges`): > **Context:** Before Blue-ray, we had to legally bind the physical DVD to the digital import.
-- **Dispensers** (`dispensers`): > **Context:** The Makeline needed hands. The Dispeners were those hands.
+- **Dispensers** (`dispensers`): Hyphen Augmented Makeline Forensic Report (2022–2024)
 - **DVDO Player** (`dvdo-player`): > **Context:** Consultancies are the boot camp of design.
 - **Entwhistle** (`entwhistle`): > *Auto-generated scaffold from Multiverse Registry.*
 - **EPT-1000** (`ept-1000`): Cardiac Ablation System
@@ -346,7 +357,7 @@ total_entries: 122
 - **Media Nodes** (`media-nodes`): > **Context:** As a lead mechanical engineer at Mechanistic, I tackled diverse challenges across consumer electronics, medical devices, and robotics.
 - **Mercury LC** (`mercury-lc`): > **Context:** The internet on your TV. Before Smart TVs existed.
 - **Morpheus** (`morpheus`): - **Role:** Principal Mechanical Architect (Mechanistic)
-- **Motorola MP3** (`motorola-mp3`): > *Auto-generated scaffold from Multiverse Registry.*
+- **Motorola MP3** (`motorola-mp3`): Motorola MP600 (Typan) Forensic Report
 - **MP6000 MP3 Player** (`mp6000-mp3-player`): > **Context:** As a lead mechanical engineer at Mechanistic, I tackled diverse challenges across consumer electronics, medical devices, and robotics.
 - **Netscreen-500** (`netscreen-500`): > **Context:** Consultancies are the boot camp of design.
 - **Newscorp STB** (`newscorp-stb`): > **Context:** The internet on your TV. Before Smart TVs existed.

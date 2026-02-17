@@ -254,3 +254,13 @@ sidebar:
 1.  **DEEP DIVE BY DEFAULT:** For Forensic/Archival projects (where data might be raw/partial), use `presentation_mode: deep_dive`.
 2.  **DRAWER SAFETY:** `deep_dive` moves metrics (Team, BOM, Governance) to the collapsible Drawer, clearing the header for the Title.
 3.  **STANDARD IS PRIVILEGE:** Only use `standard` mode for "Flagship" projects (Tier 1) where metadata is curated and character-counted to fit the HUD grid.
+
+---
+
+## 💉 XXIII. The Law of Direct Injection (TEMPORARY / MIGRATION ONLY)
+
+**Context:** During the **Ready State Normalization** phase (Feb 2026), Agents tried to "Normalize" or refactor high-quality NLM output (`dispensers`), introducing hallucination risk. This Law is a **Scaffold** to protect data integrity during ingestion. It must be rescinded once the corpus is fully hydrated.
+
+1.  **DIRECT INJECTION:** If the Source (`notebook_dumps/*.txt`) contains a high-fidelity Forensic Report (Sections I-V), you inject it **VERBATIM** into the MDX Body.
+2.  **NO REFACTORING:** Do not normalize. Do not reformat. The NLM output is the Authority during migration.
+3.  **ESCAPE AT PRE-FLIGHT:** You MUST scan the raw text for MDX breakers (`<` + Number) and escape them (`\<`) _before_ injection. (See Law XVIII).

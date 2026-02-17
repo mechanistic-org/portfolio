@@ -45,38 +45,39 @@ These vectors are explicitly mined using `deep_research_prompt_v1.txt`:
 
 > **Criteria:** Full NotebookLM Hydration (Narrative + Complexity + Entropy) via `hydrate_content.py`.
 
-| Project           | Slug                        | Status | Notes            |
-| :---------------- | :-------------------------- | :----: | :--------------- |
-| **C24**           | `c24`                       |   🟢   | **Ready State.** |
-| **D-Control**     | `d-control`                 |   🟢   | **Ready State.** |
-| **D-Command**     | `d-command`                 |   🟢   | **Ready State.** |
-| **SC48**          | `sc48`                      |   🟢   | **Ready State.** |
-| **M700 Vault**    | `m700`                      |   🟢   | **Ready State.** |
-| **K-System 120**  | `ksystem-120`               |   🟢   | **Ready State.** |
-| **320 Carousel**  | `320-slot-optical-carousel` |   🟢   | **Ready State.** |
-| **Bazooka**       | `bazooka`                   |   🟢   | **Ready State.** |
-| **Elvis**         | `extension-switches`        |   🟢   | **Ready State.** |
-| **Room Director** | `room-director`             |   🟢   | **Ready State.** |
-| **Waldo**         | `wall-plates`               |   🟢   | **Ready State.** |
-| **Cortez**        | `webtv-cortez`              |   🟢   | **Ready State.** |
-| **Elmer**         | `webtv-elmer`               |   🟢   | **Ready State.** |
-| **Galaxy**        | `webtv-galaxy`              |   🟢   | **Ready State.** |
-| **Sundance**      | `sundance`                  |   🟢   | **Ready State.** |
-| **Avegant Glyph** | `avegant-glyph`             |   🟢   | **Ready State.** |
-| **Cinema One**    | `cinema-one`                |   🟢   | **Ready State.** |
-| **Portion Cup**   | `portion-cup`               |   🟢   | **Ready State.** |
-| **Backsplash**    | `backsplash`                |   🟢   | **Ready State.** |
-| **Makeline**      | `makeline`                  |   🟢   | **Ready State.** |
+| Project           | Slug                        | Status | Audio 1 | Notes            |
+| :---------------- | :-------------------------- | :----: | :-----: | :--------------- |
+| **C24**           | `c24`                       |   🟢   |   🔊    | **Ready State.** |
+| **D-Control**     | `d-control`                 |   🟢   |   🔊    | **Ready State.** |
+| **D-Command**     | `d-command`                 |   🟢   |         | **Ready State.** |
+| **SC48**          | `sc48`                      |   🟢   |         | **Ready State.** |
+| **M700 Vault**    | `m700`                      |   🟢   |   🔊    | **Ready State.** |
+| **K-System 120**  | `ksystem-120`               |   🟢   |         | **Ready State.** |
+| **320 Carousel**  | `320-slot-optical-carousel` |   🟢   |         | **Ready State.** |
+| **Bazooka**       | `bazooka`                   |   🟢   |         | **Ready State.** |
+| **Elvis**         | `extension-switches`        |   🟢   |         | **Ready State.** |
+| **Room Director** | `room-director`             |   🟢   |         | **Ready State.** |
+| **Waldo**         | `wall-plates`               |   🟢   |         | **Ready State.** |
+| **Cortez**        | `webtv-cortez`              |   🟢   |   🔊    | **Ready State.** |
+| **Elmer**         | `webtv-elmer`               |   🟢   |         | **Ready State.** |
+| **Galaxy**        | `webtv-galaxy`              |   🟢   |   🔊    | **Ready State.** |
+| **Sundance**      | `sundance`                  |   🟢   |         | **Ready State.** |
+| **Avegant Glyph** | `avegant-glyph`             |   🟢   |         | **Ready State.** |
+| **Cinema One**    | `cinema-one`                |   🟢   |         | **Ready State.** |
+| **Portion Cup**   | `portion-cup`               |   🟢   |   🔊    | **Ready State.** |
+| **Backsplash**    | `backsplash`                |   🟢   |   🔊    | **Ready State.** |
+| **Makeline**      | `makeline`                  |   🟢   |   🔊    | **Ready State.** |
+| **Dispensers**    | `dispensers`                |   🟢   |   🔊    | **Ready State.** |
 
 ## 2. Deep Dive (The Deep Research)
 
 > **Criteria:** Full Graph Reconstruction. Physical BOM, Team Topology (Cast), Executive Schedule (Timeline), and Deep Research Vectors.
 
-| Project           | Slug            | Team | BOM | Timeline | Failure | Silence | Price | Legacy | Trophy |
-| :---------------- | :-------------- | :--: | :-: | :------: | :-----: | :-----: | :---: | :----: | :----: |
-| **C24**           | `c24`           |  ✅  | ✅  |    ✅    |   ✅    |   ✅    |  ✅   |   ✅   |   ✅   |
-| **Cinema One**    | `cinema-one`    |  ✅  | ✅  |    ✅    |   ✅    |   ✅    |  ✅   |   ✅   |   ✅   |
-| **Avegant Glyph** | `avegant-glyph` |  ✅  | ✅  |    ✅    |   ✅    |   ✅    |  ✅   |   ✅   |   ✅   |
+| Project           | Slug            | Team | BOM | Timeline | Failure | Silence | Price | Legacy | Trophy | Audio 2 |
+| :---------------- | :-------------- | :--: | :-: | :------: | :-----: | :-----: | :---: | :----: | :----: | :-----: |
+| **C24**           | `c24`           |  ✅  | ✅  |    ✅    |   ✅    |   ✅    |  ✅   |   ✅   |   ✅   |         |
+| **Cinema One**    | `cinema-one`    |  ✅  | ✅  |    ✅    |   ✅    |   ✅    |  ✅   |   ✅   |   ✅   |         |
+| **Avegant Glyph** | `avegant-glyph` |  ✅  | ✅  |    ✅    |   ✅    |   ✅    |  ✅   |   ✅   |   ✅   |         |
 
 ## 3. Meta 1 (The First Loading)
 
@@ -134,3 +135,27 @@ These vectors are explicitly mined using `deep_research_prompt_v1.txt`:
   - Set `presentation_mode: deep_dive`.
 - **[TECH] Schema Repair:** Fixed `metrics.governance.dcos` type mismatch (String "DCO-21-004" -> Number 1).
 - **[STATUS] Portion Cup:** **READY STATE**. Validated fix via `npm run dev`. HUD rendering correctly.
+
+## 📝 Session Log: 2026-02-17 (Dispensers Deep Dive)
+
+**Objective:** Scaffold and Hydrate `dispensers` (Hyphen Array) to Tier 1 / Deep Dive status.
+
+- **[TECH] Direct Injection Protocol:**
+  - **Constraint:** User rejected "Normalization" (Refactoring).
+  - **Strategy:** **Direct NLM Dump.** The `notebook_dumps/dispensers.txt` content (Main Report + Discrete Analyses) was injected _verbatim_ into `index.mdx`.
+  - **Rationale:** The `deep_research_prompt_v1.txt` output is already compliant (Sections I-V). Refactoring introduces risk of hallucination or data loss.
+- **[TECH] Tier Upgrade:** Upgraded `dispensers` from Tier 3 to **Tier 1 (Deep Dive)**.
+- **[STATUS] Dispensers:** **READY STATE**. Full Graph Reconstruction (BOM, Cast, Complexity) + Forensic Narrative.
+
+## 📝 Session Log: 2026-02-17 (Motorola MP3 & Audio Schema)
+
+**Objective:** Refine `motorola-mp3` and update Mining Log schema for Audio tracking.
+
+- **[TECH] Motorola MP3 Refinement:**
+  - **Hydration:** Injected Forensic Report and Complexity Vector via `hydrate_content.py` (Force Mode).
+  - **HUD Fix:** Switched to `presentation_mode: deep_dive` to prevent metadata overlap with title.
+  - **Entropy:** Populated `_entropy.json` with 25+ Seismograph events.
+- **[TECH] Mining Log Schema Update:**
+  - **Audio 1 (Ready State):** Added column to track existing "Voice of God" transcripts.
+  - **Audio 2 (Deep Dive):** Added column for future "REV 2" bulk transcription.
+- **[STATUS] Motorola MP3:** **READY STATE**.

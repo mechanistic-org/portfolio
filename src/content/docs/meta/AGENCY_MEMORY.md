@@ -163,6 +163,16 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
   3.  **Verify:** Check `notebook_dumps/[slug].json` to ensure the data was backported.
 - **Why:** This ensures manual edits become part of the "Source of Truth" (JSON) and aren't overwritten by future hydrations.
 
+### 9. **Project Motorola MP3 (Refinement)**
+
+- **Role:** Forensic Refinement / HUD Standard
+- **Status:** **READY STATE** (2026-02-17)
+- **Contents:**
+  - **Failure:** Housing Deformation (Temperature Shock).
+  - **Legacy:** The "Rib 5 Snap" tooling violation.
+  - **Entropy:** 25+ Seismograph events.
+- **Actionable:** `presentation_mode: deep_dive` enforced to resolve HUD overlap.
+
 ---
 
 ## 📍 Current Focus State (The "Cursor")
@@ -230,6 +240,7 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **Critical Learning (UI):** **"The Z-Index Stratosphere"** - The `Hyperspace` theme's Intro Layer sits at `z-50`. To ensure visibility, the `ForensicDossier` (and any Top HUD element) must be at `z-[60]` or higher with `relative` positioning. Static layouts get buried.
 - **Critical Learning (Hydration):** **"The Key Collision"** - `YAMLException: duplicated mapping key` is frequently caused by `hydrate_content.py` appending default keys (`category`, `presentation_mode`) that already exist deeper in the legacy frontmatter. **Fix:** Use `grep` to locate the hidden duplicate before nuking the file.
 - **Critical Learning (Pipeline):** **"The Smart Merge Standard"** - We successfully implemented `smart_merge_lists` in `hydrate_content.py`. This is now the "Gold Standard" for re-hydration: it treats JSON as additive (Upsert) and protects manual edits in `cast` or `timeline`.
+- **Critical Learning (Forensics):** **"The NLM Direct Bypass"** - When refining a project with high-quality NLM output (like `dispensers`), **DO NOT NORMALIZE** or refactor. Inject the raw markdown directly. The "Forensic Report" format from `deep_research_prompt_v1.txt` is already compliant. Refactoring is Over-Optimization.
 
 * **Key Decision (Audio):** **"The Iron Dome"** - The Audio Host must be blind to instructions. We use `PODCAST_READY.txt` (Sanitized) and explicitly forbid instructional headers in the script source.
 * **Key Decision (Viz-Audio):** **"The SonicHeartbeat Standard"** - Idle = Pulse (Cycle), Active = Full EQ. Icon = Speaker (not Headphone).
@@ -368,3 +379,5 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **Critical Learning:** **"The V-2 Tinderbox"** - (D-Control) Material Compliance (UL 94 V-0) is a "Hard Filter." It is the difference between a product and a liability. We track these "Near Misses" as high-value Entropy events.
 - **Critical Learning:** **"The Lateral Injection"** - (Avegant) We successfully backported manual "Cast" data into the JSON source using `--reverse-json`. This validates the "Bi-Directional" nature of the content pipeline.
 - **Key Decision (Taxonomy):** **"The Deep Dive Standard"** - We replaced "Snapshot" with a rigorous 3-Phase Taxonomy: Ready State -> Deep Dive -> Meta 1. "Deep Dive" requires 5 specific vectors: Failure, Silence, Price, Legacy, Trophy.
+- **Critical Learning:** **"The HUD Mode Law"** - `standard` presentation mode causes Title/Metadata overlap in the Header. `deep_dive` is the mandatory fix for projects with long titles or complex metadata.
+- **Critical Learning:** **"The Audio 1 Standard"** - Added "Audio 1" column to `MINING_LOG.md` to track "Voice of God" transcripts explicitly.

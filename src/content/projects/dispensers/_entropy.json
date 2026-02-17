@@ -1,0 +1,122 @@
+[
+  {
+    "date": "2022-04-06",
+    "score": 4,
+    "snippet": "Engineering constraint identified: 70+ actuators must fit standard kitchen appliance footprint.",
+    "type": "Document",
+    "source_ref": "Automated foodservice with EtherCAT to disrupt restaurant industry - Motion Control Tips [1]",
+    "time_delta": 0
+  },
+  {
+    "date": "2022-07-14",
+    "score": 5,
+    "snippet": "Control architecture finalized: Beckhoff C6030 IPC selected for machine control/IoT gateway.",
+    "type": "Document",
+    "source_ref": "Automated foodservice to disrupt restaurant industry - Design World [2]",
+    "time_delta": 99
+  },
+  {
+    "date": "2022-07-21",
+    "score": 9,
+    "snippet": "Capital Injection: Chipotle invests via Cultivate Next to accelerate R&D.",
+    "type": "Document",
+    "source_ref": "CHIPOTLE INVESTS IN ROBOTIC MAKELINE... [3]",
+    "time_delta": 7
+  },
+  {
+    "date": "2023-01-26",
+    "score": 6,
+    "snippet": "IP Filing: Provisional Application 63/441,406 lodged for dispensing mechanics.",
+    "type": "Document",
+    "source_ref": "US20240164588A1.pdf [4]",
+    "time_delta": 189
+  },
+  {
+    "date": "2023-02-15",
+    "score": 7,
+    "snippet": "Prototype Installation: Systems deployed to Chipotle Cultivate Center (Irvine, CA).",
+    "type": "Document",
+    "source_ref": "Chipotle to Test Robotic Makelines | Food On Demand [5]",
+    "time_delta": 20
+  },
+  {
+    "date": "2023-06-14",
+    "score": 5,
+    "snippet": "IP Iteration: Provisional Application 63/521,042 filed (Refined dispenser logic).",
+    "type": "Document",
+    "source_ref": "US20240164588A1.pdf [4]",
+    "time_delta": 119
+  },
+  {
+    "date": "2023-10-03",
+    "score": 8,
+    "snippet": "Beta Test: Automated digital makeline testing for bowls/salads announced.",
+    "type": "Document",
+    "source_ref": "CHIPOTLE TEAMS UP WITH HYPHEN TO BEGIN TESTING NEW DIGITAL MAKELINE [6]",
+    "time_delta": 111
+  },
+  {
+    "date": "2023-10-03",
+    "score": 3,
+    "snippet": "Failure Mode Observed: Promotional footage reveals 'ingredient ricochet' risk.",
+    "type": "Memory",
+    "source_ref": "All notes 2/17/2026 [7]",
+    "time_delta": 0
+  },
+  {
+    "date": "2024-01-26",
+    "score": 6,
+    "snippet": "IP Formalization: Non-provisional Patent Application 18/424,497 filed.",
+    "type": "Document",
+    "source_ref": "US20240164588A1.pdf [4]",
+    "time_delta": 115
+  },
+  {
+    "date": "2024-02-28",
+    "score": 7,
+    "snippet": "Funding Doubled: Cultivate Next fund expands to $100M, validating progress.",
+    "type": "Document",
+    "source_ref": "All notes 2/17/2026 [8]",
+    "time_delta": 33
+  },
+  {
+    "date": "2024-05-23",
+    "score": 3,
+    "snippet": "Public Disclosure: Patent published. Fig 8A reveals food hopper/chute assembly.",
+    "type": "Document",
+    "source_ref": "US20240164588A1.pdf [9]",
+    "time_delta": 85
+  },
+  {
+    "date": "2024-05-23",
+    "score": 4,
+    "snippet": "Mechanism Detail: 'Food Dispensing Module' configuration (Para 0091) documented.",
+    "type": "Document",
+    "source_ref": "US20240164588A1.pdf [10]",
+    "time_delta": 0
+  },
+  {
+    "date": "2024-09-16",
+    "score": 10,
+    "snippet": "Live Deployment: Augmented Makeline active at Corona del Mar (CDM) location.",
+    "type": "Document",
+    "source_ref": "CHIPOTLE DEBUTS AUTOCADO AND THE AUGMENTED MAKELINE... [11]",
+    "time_delta": 116
+  },
+  {
+    "date": "2024-09-16",
+    "score": 8,
+    "snippet": "Operational Shift: Makeline processes 65% of digital orders (bowls/salads).",
+    "type": "Document",
+    "source_ref": "CHIPOTLE DEBUTS AUTOCADO AND THE AUGMENTED MAKELINE... [12]",
+    "time_delta": 0
+  },
+  {
+    "date": "2024-12-31",
+    "score": 5,
+    "snippet": "Forensic Summary: Dispenser Taxonomy (Types A-F) finalized to solve viscosity.",
+    "type": "Document",
+    "source_ref": "All notes 2/17/2026 [7]",
+    "time_delta": 106
+  }
+]
