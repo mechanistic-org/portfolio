@@ -65,6 +65,8 @@ These vectors are explicitly mined using `deep_research_prompt_v1.txt`:
 | **Avegant Glyph** | `avegant-glyph`             |   🟢   | **Ready State.** |
 | **Cinema One**    | `cinema-one`                |   🟢   | **Ready State.** |
 | **Portion Cup**   | `portion-cup`               |   🟢   | **Ready State.** |
+| **Backsplash**    | `backsplash`                |   🟢   | **Ready State.** |
+| **Makeline**      | `makeline`                  |   🟢   | **Ready State.** |
 
 ## 2. Deep Dive (The Deep Research)
 
@@ -121,6 +123,7 @@ These vectors are explicitly mined using `deep_research_prompt_v1.txt`:
 - **[STATUS] WebTV Cortez:** **STABLE**. Null metrics resolved. High-fidelity forensic narrative verified (The $30k Ransom).
 - **[STATUS] Avegant Glyph:** **READY STATE**. Hydrated with Narrative, Complexity, and Entropy vectors.
 - **[STATUS] Mining Protocol:** **REFINED**. Adopted "Deep Dive/Ready State/Meta 1" taxonomy. Integrated `deep_research_prompt_v1.txt` vectors.
+
 ## 📝 Session Log: 2026-02-16 (Portion Cup HUD Standardization)
 
 **Objective:** Standardize Portion Cup metadata and fix HUD schema errors.

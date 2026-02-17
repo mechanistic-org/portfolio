@@ -1,0 +1,258 @@
+[
+  {
+    "date": "2020-08-04",
+    "score": 1,
+    "snippet": "Newhaven Display mechanical drawing reformatted; component level update.",
+    "type": "Document",
+    "source_ref": "NHD-3.12-25664UCW2.pdf",
+    "time_delta": 0
+  },
+  {
+    "date": "2020-08-21",
+    "score": 2,
+    "snippet": "Schematic release: BFD_BBSHD-CAV3-PR.",
+    "type": "Document",
+    "source_ref": "BFD_BBSHD-CAV3-PR_2020_08_21.pdf",
+    "time_delta": 17
+  },
+  {
+    "date": "2021-05-28",
+    "score": 5,
+    "snippet": "Task: Finalize Module Display Mounting Grid for backsplash integration.",
+    "type": "Document",
+    "source_ref": "FD Ono Foods Task Based Cost Estimate 210528.0 (2).pdf",
+    "time_delta": 280
+  },
+  {
+    "date": "2021-05-28",
+    "score": 6,
+    "snippet": "Risk audit: Verify conductive spring interface between Display and PCBAs.",
+    "type": "Document",
+    "source_ref": "FD Ono Foods Task Based Cost Estimate 210528.0 (2).pdf",
+    "time_delta": 0
+  },
+  {
+    "date": "2021-05-28",
+    "score": 4,
+    "snippet": "Engineering Directive: Place LEDs and finalize Light Diffuser for makeline.",
+    "type": "Document",
+    "source_ref": "FD Ono Foods Task Based Cost Estimate 210528.0 (2).pdf",
+    "time_delta": 0
+  },
+  {
+    "date": "2021-06-17",
+    "score": 3,
+    "snippet": "Functional Concept 'Dry Beam' defined on whiteboard.",
+    "type": "Photo",
+    "source_ref": "makeline.pdf (Page 3)",
+    "time_delta": 20
+  },
+  {
+    "date": "2021-06-24",
+    "score": 3,
+    "snippet": "Interface definitions sketched; scope architecture for cabinet fill/lift.",
+    "type": "Photo",
+    "source_ref": "makeline.pdf (Page 3)",
+    "time_delta": 7
+  },
+  {
+    "date": "2021-07-10",
+    "score": 2,
+    "snippet": "Quotation generated for Worm Gear Housing and Shaft prototypes.",
+    "type": "Document",
+    "source_ref": "SP17D020-20210710A Prototypes Quotation for Ono Food Co..pdf",
+    "time_delta": 16
+  },
+  {
+    "date": "2021-07-29",
+    "score": 4,
+    "snippet": "Prototype status: 'Parts in hand' for grid drive representation.",
+    "type": "Photo",
+    "source_ref": "makeline.pdf (Page 2)",
+    "time_delta": 19
+  },
+  {
+    "date": "2021-08-11",
+    "score": 8,
+    "snippet": "Hyphen officially launches Robotic Makeline; pivot from Ono Food Co.",
+    "type": "Document",
+    "source_ref": "Hyphen Launches the World's First Robotic Makeline... [1]",
+    "time_delta": 13
+  },
+  {
+    "date": "2021-08-13",
+    "score": 4,
+    "snippet": "Scheduled 'Build + Test' phase end.",
+    "type": "Photo",
+    "source_ref": "makeline.pdf (Page 2)",
+    "time_delta": 2
+  },
+  {
+    "date": "2021-12-03",
+    "score": 6,
+    "snippet": "Beckhoff confirms deployment of C6030 IPC and EJ series I/O.",
+    "type": "Document",
+    "source_ref": "Modular, Fully Automated Makeline... [2]",
+    "time_delta": 112
+  },
+  {
+    "date": "2022-03-15",
+    "score": 9,
+    "snippet": "Visual confirmation: 'PC case' wiring harness REV001 fully populated.",
+    "type": "Photo",
+    "source_ref": "backsplash.pdf (Page 1 Label)",
+    "time_delta": 102
+  },
+  {
+    "date": "2022-03-15",
+    "score": 7,
+    "snippet": "Integration of Beckhoff EJ modules within backsplash infrastructure slot.",
+    "type": "Photo",
+    "source_ref": "backsplash.pdf (Page 1)",
+    "time_delta": 0
+  },
+  {
+    "date": "2022-05-04",
+    "score": 5,
+    "snippet": "Beckhoff case study: Makeline achieves 350 MPH, 99% accuracy.",
+    "type": "Document",
+    "source_ref": "Automated Makeline prepares 350 meals per hour... [3]",
+    "time_delta": 50
+  },
+  {
+    "date": "2022-07-22",
+    "score": 7,
+    "snippet": "Chipotle Cultivate Next fund invests; 'analog' top line confirmed.",
+    "type": "Document",
+    "source_ref": "Hyphen's automated Makeline is next level... [4]",
+    "time_delta": 79
+  },
+  {
+    "date": "2023-02-15",
+    "score": 6,
+    "snippet": "Chipotle CEO confirms prototype install at Irvine Cultivate Center.",
+    "type": "Document",
+    "source_ref": "Chipotle to Test Robotic Makelines | Food On Demand [5]",
+    "time_delta": 208
+  },
+  {
+    "date": "2023-10-03",
+    "score": 8,
+    "snippet": "Chipotle formally initiates testing of Automated Digital Makeline.",
+    "type": "Document",
+    "source_ref": "CHIPOTLE TEAMS UP WITH HYPHEN... [6]",
+    "time_delta": 230
+  },
+  {
+    "date": "2024-05-23",
+    "score": 8,
+    "snippet": "Patent published: Defines 'Infrastructure Slot' for thermal/power management.",
+    "type": "Document",
+    "source_ref": "US20240164588A1.pdf",
+    "time_delta": 233
+  },
+  {
+    "date": "2024-09-16",
+    "score": 9,
+    "snippet": "Deployment: Makeline live at Corona del Mar; Autocado at Huntington Beach.",
+    "type": "Document",
+    "source_ref": "CHIPOTLE DEBUTS AUTOCADO... [7]",
+    "time_delta": 116
+  },
+  {
+    "date": "2024-10-24",
+    "score": 3,
+    "snippet": "Onshape case study: 3D printing farm (9 printers) cited for iteration.",
+    "type": "Document",
+    "source_ref": "Hyphen's Restaurant Robotics - Onshape [8]",
+    "time_delta": 38
+  },
+  {
+    "date": "2025-08-12",
+    "score": 8,
+    "snippet": "Financial Injection: Cava joins Chipotle with $10M investment.",
+    "type": "Document",
+    "source_ref": "Cava joins Chipotle in backing Hyphen... [9]",
+    "time_delta": 292
+  },
+  {
+    "date": "2025-08-13",
+    "score": 8,
+    "snippet": "Series B Close: $25M total raised to scale manufacturing.",
+    "type": "Document",
+    "source_ref": "Hyphen Raises $25M to Scale Automated Makelines... [10]",
+    "time_delta": 1
+  },
+  {
+    "date": "2025-11-20",
+    "score": 5,
+    "snippet": "Hyphen Summit 2025 convened.",
+    "type": "Document",
+    "source_ref": "[2025.12.12] Monthly All-Hands.pdf [11]",
+    "time_delta": 99
+  },
+  {
+    "date": "2025-12-01",
+    "score": 7,
+    "snippet": "Milestone: 1st Install completed.",
+    "type": "Document",
+    "source_ref": "[2025.12.12] Monthly All-Hands.pdf [11]",
+    "time_delta": 11
+  },
+  {
+    "date": "2025-12-12",
+    "score": 6,
+    "snippet": "Capital Status: $10M follow-on secured from Cultivate Next.",
+    "type": "Document",
+    "source_ref": "[2025.12.12] Monthly All-Hands.pdf [12]",
+    "time_delta": 11
+  },
+  {
+    "date": "2026-01-09",
+    "score": 7,
+    "snippet": "Engineering Complete: CAVA Makeline (V5112) reconfiguration finished.",
+    "type": "Document",
+    "source_ref": "[2026.01.09] Monthly All-Hands.pdf [13]",
+    "time_delta": 28
+  },
+  {
+    "date": "2026-01-09",
+    "score": 6,
+    "snippet": "Validation: Initial HVAC testing passed for V5112 config.",
+    "type": "Document",
+    "source_ref": "[2026.01.09] Monthly All-Hands.pdf [13]",
+    "time_delta": 0
+  },
+  {
+    "date": "2026-01-09",
+    "score": 5,
+    "snippet": "Commercial Pipeline Opportunity valued at $1,398,587,745.",
+    "type": "Document",
+    "source_ref": "[2026.01.09] Monthly All-Hands.pdf [14]",
+    "time_delta": 0
+  },
+  {
+    "date": "2026-01-27",
+    "score": 7,
+    "snippet": "Logistics: System scheduled to ship to Alexandria, VA.",
+    "type": "Document",
+    "source_ref": "[2026.01.09] Monthly All-Hands.pdf [13]",
+    "time_delta": 18
+  },
+  {
+    "date": "2026-02-02",
+    "score": 8,
+    "snippet": "Field Ops: System install and startup at CAVA Alexandria.",
+    "type": "Document",
+    "source_ref": "[2026.01.09] Monthly All-Hands.pdf [13]",
+    "time_delta": 6
+  },
+  {
+    "date": "2026-02-16",
+    "score": 3,
+    "snippet": "Media coverage: CIO article highlights 'compact size' constraints.",
+    "type": "Document",
+    "source_ref": "Robots make a smash in Chipotle kitchens | CIO [15]",
+    "time_delta": 14
+  }
+]

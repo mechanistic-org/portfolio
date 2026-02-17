@@ -295,7 +295,7 @@ total_entries: 122
 - **Acer Aspire** (`acer-aspire`): > **Context:** Consultancies are the boot camp of design.
 - **Acer Phone** (`acer-phone`): > **Context:** Consultancies are the boot camp of design.
 - **Acer subwoofer** (`acer-subwoofer`): > **Context:** Consultancies are the boot camp of design.
-- **Backsplash** (`backsplash`): > **Context:** Before the "Factory in a Box" (Makeline), we had to prove we could automate a kitchen without redesigning the building.
+- **Hyphen Makeline** (`backsplash`): Hyphen Augmented Makeline Forensic Report
 - **battery lock** (`battery-lock`): > **Context:** A micromobility fleet needed a way to secure high-value battery packs against theft while allowing authorized "Swap Teams" to replace them in seconds.
 - **bay wheels** (`bay-wheels`): > **Context:** Lyft (Bay Wheels) needed a next-gen shared e-bike that could survive the urban jungle.
 - **BFD** (`bfd`): > **Context:** As a lead mechanical engineer at Mechanistic, I tackled diverse challenges across consumer electronics, medical devices, and robotics.

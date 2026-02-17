@@ -1,0 +1,24 @@
+DEBUG: Content len: 64233
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Engineer
+DEBUG: snippet end: h high contrast, creating an unmistakable call to action that appears to float on the black surface.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 64233
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Engineer
+DEBUG: snippet end: h high contrast, creating an unmistakable call to action that appears to float on the black surface.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
