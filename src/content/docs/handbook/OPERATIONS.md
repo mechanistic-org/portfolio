@@ -252,6 +252,20 @@ These scripts drive the "Forensic Data Factory."
   },
   ```
 
+### ⚠️ "The Ghost Filter" (Project Shows 'Archived')
+
+- **Symptom:** You hydrated the project, but the UI shows "PROJECT DATA: This project is currently archived."
+- **Cause:** `targets: []` in Frontmatter. The Router filters it out of the Main Site, falling back to the Knowledge Graph Placeholder.
+- **Fix:** Set `targets: ["main"]` in `index.mdx`.
+
+### ⚠️ "The Void Mask" (Invisible HUD)
+
+- **Symptom:** `ForensicDossier` is mounted (logs firing) but invisible.
+- **Cause:** `Hyperspace` Intro Layer (`z-50`) occludes the Dossier if Z-Index is weak or Tab is closed.
+- **Fix:**
+  1.  **Force Z-Space:** Use `z-[60]` on the Dossier Container.
+  2.  **Auto-Open:** Ensure `Tabs` has a `defaultValue` (e.g., "cast") calculated from props.
+
 ---
 
 ## 4. Visual Engineering Protocols

@@ -225,3 +225,22 @@ sidebar:
 2.  **FAIL LOUD:** The Schema must reject invalid data at _Build Time_, not Render Time.
 3.  **NULL SAFETY:** If a field can be legacy-empty, use `.nullable()`. Do not relax the type to `any`.
 4.  **BANNED FIELDS:** Use `z.never()` to explicitly block zombie fields (like `forensic_data`) from re-infecting the codebase.
+
+---
+
+## 👻 XX. The Law of the Ghost Filter (Router Logic)
+
+**Context:** `avegant-glyph` appeared as "Archived" despite having full data because `targets: []` caused the Router to filter it out of the Main Site, falling back to a Placeholder Node.
+
+1.  **EXPLICIT TARGETS:** A Project is ONLY visible if `targets` includes the current site (`"main"`).
+2.  **DEFAULT TO MAIN:** If migrating legacy content, ensure `targets: ["main"]` is set. Empty Array = Invisible.
+3.  **THE PLACEHOLDER FALLBACK:** If `getCollection` filters a project out, `[...slug].astro` will try to load it from the Knowledge Graph (`multiverseData`). If found, it renders as a **"Project Data / Archived"** placeholder. This is a Feature, not a Bug, but confusing if unintentional.
+
+---
+
+## 🌑 XXI. The Law of the Void Mask (Z-Index stacking)
+
+**Context:** The `ForensicDossier` (HUD) was invisible because it sat at `z-60` (Tailwind arbitrary) which failed to override the `Hyperspace` Intro Layer (`z-50`) due to stacking context quirks, effectively rendering it _behind_ the black void.
+
+1.  **JIT SUPREMACY:** Use `z-[60]` (Explicit JIT) to force the layer order. Do not rely on `z-50` + `relative` alone.
+2.  **AUTO-OPEN TABS:** A Dossier must never render "Closed" by default. Logic must calculate the `defaultValue` based on available data (`cast`, `bom`, etc.) so the user sees the "Full Graph" immediately.

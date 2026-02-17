@@ -1,7 +1,7 @@
 ---
 title: "Project Index"
 description: "Holistic Forensic Archive & Catalog"
-last_updated: "2026-02-15"
+last_updated: "2026-02-16"
 total_entries: 122
 ---
 
@@ -285,7 +285,7 @@ total_entries: 122
 - **Acer Aspire** (`acer-aspire`): > **Context:** Consultancies are the boot camp of design.
 - **Acer Phone** (`acer-phone`): > **Context:** Consultancies are the boot camp of design.
 - **Acer subwoofer** (`acer-subwoofer`): > **Context:** Consultancies are the boot camp of design.
-- **Avegant Glyph** (`avegant-glyph`): > **Context:** Avegant needed to translate their "Virtual Retinal Display" technology from a messy lab prototype into a mass-manufacturable consumer product.
+- **Avegant Glyph** (`avegant-glyph`): Avegant Glyph (Vulcan) Forensic Report
 - **Backsplash** (`backsplash`): > **Context:** Before the "Factory in a Box" (Makeline), we had to prove we could automate a kitchen without redesigning the building.
 - **battery lock** (`battery-lock`): > **Context:** A micromobility fleet needed a way to secure high-value battery packs against theft while allowing authorized "Swap Teams" to replace them in seconds.
 - **bay wheels** (`bay-wheels`): > **Context:** Lyft (Bay Wheels) needed a next-gen shared e-bike that could survive the urban jungle.

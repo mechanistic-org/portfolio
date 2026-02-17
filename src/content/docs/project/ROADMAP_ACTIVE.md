@@ -44,6 +44,10 @@ sidebar:
 - [2026-02-09] (Infrastructure): **Virtual Bridge Protocol.** Replaced `public/assets` Junction with a direct-read Virtual Proxy in `[...path].ts`.
 - [2026-02-09] (Governance): **Grok Log V2.** Refactored 44 Laws into 9 Constitutive Doctrines.
 - [2026-02-08] (Governance): **Project Onboarding.** Loaded Core Context Files.
+- [2026-02-16] (Forensics): **Avegant Glyph Restoration.**
+  - **Full Graph:** Enriched Phase IV (BOM/Cast/Timeline).
+  - **Visual:** Fixed "Ghost Filter" (`targets: []`) and "Void Mask" (Z-Index) bugs.
+  - **Status:** **VALIDATED.** Text-Only Mode active.
 
 ## 🚀 The Horizon (V6 Vision)
 

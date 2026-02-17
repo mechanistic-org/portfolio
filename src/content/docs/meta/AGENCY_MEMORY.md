@@ -152,19 +152,30 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **Constraint:** Lacks "Red Gold" (NotebookLM output). Audio is missing.
 - **Action:** Retain as "Deep Dive" visual verification but mark as "Hollow" until raw data is ingested.
 
+### 8. **The Lateral Injection Protocol (Forensic Bridge)**
+
+- **Role:** The "Unstructured Data" Handler.
+- **Status:** **ACTIVE** (Feb 2026).
+- **Context:** When a user provides raw text/JSON that isn't in a NotebookLM dump (e.g., "Here is the cast list").
+- **Protocol:**
+  1.  **Inject:** Manually edit the "Live Artifact" (`index.mdx`).
+  2.  **Solidify:** Run `npm run content:hydrate -- --reverse-json` immediately.
+  3.  **Verify:** Check `notebook_dumps/[slug].json` to ensure the data was backported.
+- **Why:** This ensures manual edits become part of the "Source of Truth" (JSON) and aren't overwritten by future hydrations.
+
 ---
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Forensic Data Safety (Source Validation).**
-- **Next Step:** Verify `m700` hydration stability.
-- **Context:** **VELOCITY VIZ DEPLOYED.** `ForensicSeismograph` now visualizes `time_delta` via bar width.
-- **Action Item:** Monitor `notebook_dumps` for unescaped `<` characters.
-- **Recent Win:** Fixed critical C24 MDX recursion by patching `notebook_dumps/c24.txt`. Codified "Law ofSource Safety" (Law XVIII).
+- **Active Task:** **Session Mining & Protocol Refinement.**
+- **Next Step:** Return to "Production Mode" for next project (`d-control` or `m700`).
+- **Context:** **DEEP DIVE STANDARD ESTABLISHED.** `c24`, `cinema-one`, `avegant-glyph` are the "Deep Dive" benchmarks.
+- **Action Item:** Monitor `MINING_LOG.md` for "Pending" (⭕) vectors.
+- **Recent Win:** Documented "The Snoop Dogg Pivot" and "Lateral Injection". Refined Mining Log Taxonomy.
 - **Active Roadmap:** [`src/content/docs/project/ROADMAP_ACTIVE.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/ROADMAP_ACTIVE.md) (The Horizon)
 - **Mining Log:** [`src/content/docs/project/MINING_LOG.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/MINING_LOG.md) (The Re-Hydration Tracker)
 - **Project Index:** [`src/content/prompts/PROJECT_INDEX.md`](file:///d:/GitHub/eriknorris/src/content/prompts/PROJECT_INDEX.md) (The Registry)
-- **Status:** **Standardization COMPLETE (Level 2).** All 12 Tier 1 projects audited at >99% parity.
+- **Status:** **Refining (Level 2.5).** Deep Research vectors (Failure/Silence/Price/Legacy/Trophy) are now tracked.
 - **Strategy:** **"Strict Separation"** -> JSON is Metadata. Text is Body. No regex parsing.
 - **Critical Learning:** **"The Isomorphic Paradox"** - You cannot generate structural rhymes from a single project. You need a **"Master Notebook"** (Level 2) containing all JSONs to find the patterns.
 - **Critical Learning:** **"The Scroll Depth Trust"** - 2026 SEO (E-E-A-T) demands "Firsthand Experience." The "Isomorphic Card" is our primary Trust Signal.
@@ -355,3 +366,5 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 - **Critical Learning:** **"The Blacksmithing Protocol"** - (D-Control) We successfully codified the "Manual Rectification" heuristic. If a part fails yield (50% Rejection), we do not stop the line. We bend the metal. This is "Rigidity as a Feature" applied to Process.
 - **Critical Learning:** **"The V-2 Tinderbox"** - (D-Control) Material Compliance (UL 94 V-0) is a "Hard Filter." It is the difference between a product and a liability. We track these "Near Misses" as high-value Entropy events.
+- **Critical Learning:** **"The Lateral Injection"** - (Avegant) We successfully backported manual "Cast" data into the JSON source using `--reverse-json`. This validates the "Bi-Directional" nature of the content pipeline.
+- **Key Decision (Taxonomy):** **"The Deep Dive Standard"** - We replaced "Snapshot" with a rigorous 3-Phase Taxonomy: Ready State -> Deep Dive -> Meta 1. "Deep Dive" requires 5 specific vectors: Failure, Silence, Price, Legacy, Trophy.
