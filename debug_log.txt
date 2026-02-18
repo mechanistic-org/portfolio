@@ -455,3 +455,1778 @@ DEBUG: Parsed block type: <class 'dict'>
 DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
 DEBUG: Parsed block type: <class 'dict'>
 DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 57714
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "320-slot-optical-carousel",
+	"presentation_mode": "deep_dive",
+DEBUG: snippet end: equiring the same mechanical interventions (hard mounts/high-force springs) across the entire fleet.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 105867
+DEBUG: snippet start: run
+
+Avegant Glyph (Vulcan) Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Mechanical Architect / P
+DEBUG: snippet end:  mass production pads never achieved the acoustic isolation promised by the design specification.
+
+
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 64233
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Engineer
+DEBUG: snippet end: h high contrast, creating an unmistakable call to action that appears to float on the black surface.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 61462
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "bazooka-base-station",
+	"presentation_mode": "deep_dive",
+	"ta
+DEBUG: snippet end:  force Bel (the vendor) to synchronize CAD structures with the Arena BOM before DVT tooling release.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 52517
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "curtis_c24",
+	"presentation_mode": "deep_dive",
+	"tags": [
+		"
+DEBUG: snippet end: eavy" premium feel required for professional audio editing despite the lighter underlying hardware.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 78185
+DEBUG: snippet start: Cinema One (Codenamed Macduff) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design E
+DEBUG: snippet end: ndows.pdf.
+• Spec: 3mm x 3mm target area.
+• Interface: Mated with H131M0 (later N029M0) Pogo pins,.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 35953
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "project-danko-d-command",
+	"presentation_mode": "deep_dive",
+	
+DEBUG: snippet end: all D-Command anywhere or in any way that blocks free air flow at any time around the back panel".
+
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 54294
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "d-control-buckley",
+	"presentation_mode": "deep_dive",
+	"tags"
+DEBUG: snippet end: ) confirmation from UL.
+• 918014555-00_REVC.pdf - The AC Harness modified with the bleeder resistor.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 61283
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report (2022–2024)
+I. PROJECT SUMMARY
+• Role: Principal Syst
+DEBUG: snippet end: citors (SuperCaps >1.5F) which would otherwise look like a short circuit to standard power supplies.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 54517
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "elvis-extension-switch",
+	"presentation_mode": "deep_dive",
+	"
+DEBUG: snippet end: l Yield Crisis: 0% Yield (7/7 Fail) due to Floating Cap.
+• Recovery: 100% Yield via Structural Glue.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 22035
+DEBUG: snippet start: run specifically for KPLAYER-6000, codenamed Apollo, no other projects
+
+KPLAYER-6000 [Apollo] Forens
+DEBUG: snippet end: ct accuracy, rendering the aggressive upscaling logic of the Apollo era obsolete for modern content.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 38256
+DEBUG: snippet start: run
+
+Hunter Forensic Report
+I. PROJECT SUMMARY
+• Role: Sr. Mechanical Design Engineer
+• Mandate: Exe
+DEBUG: snippet end: n and mechanical redesign allowed the Hunter project to proceed with a viable power supply solution.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 28710
+DEBUG: snippet start: run
+
+KSERVER-5000 (k2) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design Engineer 
+DEBUG: snippet end: home movies) remain unaffected and can still be imported and played without the disc on all systems.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 38826
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "ksystem-120-orpheus",
+	"presentation_mode": "deep_dive",
+	"tag
+DEBUG: snippet end: d in lieu of paint) was applied incorrectly, leaving raw metal visible in critical aesthetic areas,.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 52986
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "m700-vesta-vault-recovery",
+	"presentation_mode": "deep_dive",
+DEBUG: snippet end: e intervention, effectively re-cutting the entire steel cavity to save the project from low yields.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 116026
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report (2022-2024)
+I. PROJECT SUMMARY
+• Role: Automated Digi
+DEBUG: snippet end: ed capacity is the mathematical prerequisite for scaling unit volumes from $3 million to $4 million.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 970
+DEBUG: snippet start: # Spec: V2 (Auto-Migrated)
+# Project: Minimerc
+
+## Narrative
+```json
+{
+  "forensic_summary": {
+    "
+DEBUG: snippet end: ts
+- minimerc3.gif
+- minimerc4_main.gif
+- minimerc5.jpg
+- minimerc6.jpg
+- minimerc7.jpg
+- turbo.jpg
+
+DEBUG: raw_blocks count: 3
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['forensic_summary']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['complexity_vector']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['war_stories']
+DEBUG: Content len: 63064
+DEBUG: snippet start: run
+
+Motorola MP600 (Typan) Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Product Architect / Mech
+DEBUG: snippet end: olution essentially prioritized external structural survival over internal component breathing room.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 47955
+DEBUG: snippet start: 
+Portion Cup Dispensing Module Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Engineer
+DEBUG: snippet end:  illustrates the Axial Thrust (F n ,F s ) vectors that necessitated this reinforced bearing design.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 60122
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "sativa-room-director",
+	"presentation_mode": "deep_dive",
+	"ta
+DEBUG: snippet end: e Elvis unit to save cost/complexity. Required tooling modification to block the light pipe cavity.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 58243
+DEBUG: snippet start: tell me about Erik Norris' Design Of Experiments and validation of thermal system performance and de
+DEBUG: snippet end: s.",
+      "type": "Document",
+      "source_ref": "20080215_LUX_SHTMTL_QUOTE.pdf [25]"
+    }
+  ]
+}
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 72413
+DEBUG: snippet start: Sundance Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design Engineer
+• Mandate: Exe
+DEBUG: snippet end:  document).
+• Sundance Metal Base Tooling - Drive Cage Rounds.pdf (Tooling changes made on the fly).
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 54695
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "waldo_wall_plates",
+	"presentation_mode": "deep_dive",
+	"tags"
+DEBUG: snippet end: Page 1: DIY4 Abrasion Defects)
+• Locorol action review_05082017 ver2.pdf (Page 2: DVT Schedule Risk)
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 57849
+DEBUG: snippet start: Cortez Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Mechanical Engineer / Surface Development Con
+DEBUG: snippet end: INEER to bridge the gap between the curved 2D ID sections and the flat 2D mechanical keep-out zones.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 46199
+DEBUG: snippet start: WebTV Elmer (Zeus) Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Mechanical Engineer ("The Archite
+DEBUG: snippet end: nch,.
+V. VISUAL EVIDENCE
+• elmer_proto.zip (Fabrication Data)
+• base_proto_deviations.jpg (QC Record
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 60902
+DEBUG: snippet start: WebTV Galaxy Forensic Report
+I. PROJECT SUMMARY
+• Role: Principal Mechanical Architect / Proprietor 
+DEBUG: snippet end: rmal comfort of downstream components like the CPU (which hit 84.0°C) to protect the magnetic media.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 57714
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "320-slot-optical-carousel",
+	"presentation_mode": "deep_dive",
+DEBUG: snippet end: equiring the same mechanical interventions (hard mounts/high-force springs) across the entire fleet.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 105867
+DEBUG: snippet start: run
+
+Avegant Glyph (Vulcan) Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Mechanical Architect / P
+DEBUG: snippet end:  mass production pads never achieved the acoustic isolation promised by the design specification.
+
+
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 64233
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Engineer
+DEBUG: snippet end: h high contrast, creating an unmistakable call to action that appears to float on the black surface.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 61462
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "bazooka-base-station",
+	"presentation_mode": "deep_dive",
+	"ta
+DEBUG: snippet end:  force Bel (the vendor) to synchronize CAD structures with the Arena BOM before DVT tooling release.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 52517
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "curtis_c24",
+	"presentation_mode": "deep_dive",
+	"tags": [
+		"
+DEBUG: snippet end: eavy" premium feel required for professional audio editing despite the lighter underlying hardware.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 78185
+DEBUG: snippet start: Cinema One (Codenamed Macduff) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design E
+DEBUG: snippet end: ndows.pdf.
+• Spec: 3mm x 3mm target area.
+• Interface: Mated with H131M0 (later N029M0) Pogo pins,.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 35953
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "project-danko-d-command",
+	"presentation_mode": "deep_dive",
+	
+DEBUG: snippet end: all D-Command anywhere or in any way that blocks free air flow at any time around the back panel".
+
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 54294
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "d-control-buckley",
+	"presentation_mode": "deep_dive",
+	"tags"
+DEBUG: snippet end: ) confirmation from UL.
+• 918014555-00_REVC.pdf - The AC Harness modified with the bleeder resistor.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 61283
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report (2022–2024)
+I. PROJECT SUMMARY
+• Role: Principal Syst
+DEBUG: snippet end: citors (SuperCaps >1.5F) which would otherwise look like a short circuit to standard power supplies.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 54517
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "elvis-extension-switch",
+	"presentation_mode": "deep_dive",
+	"
+DEBUG: snippet end: l Yield Crisis: 0% Yield (7/7 Fail) due to Floating Cap.
+• Recovery: 100% Yield via Structural Glue.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 22035
+DEBUG: snippet start: run specifically for KPLAYER-6000, codenamed Apollo, no other projects
+
+KPLAYER-6000 [Apollo] Forens
+DEBUG: snippet end: ct accuracy, rendering the aggressive upscaling logic of the Apollo era obsolete for modern content.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 38256
+DEBUG: snippet start: run
+
+Hunter Forensic Report
+I. PROJECT SUMMARY
+• Role: Sr. Mechanical Design Engineer
+• Mandate: Exe
+DEBUG: snippet end: n and mechanical redesign allowed the Hunter project to proceed with a viable power supply solution.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 28710
+DEBUG: snippet start: run
+
+KSERVER-5000 (k2) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design Engineer 
+DEBUG: snippet end: home movies) remain unaffected and can still be imported and played without the disc on all systems.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 38826
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "ksystem-120-orpheus",
+	"presentation_mode": "deep_dive",
+	"tag
+DEBUG: snippet end: d in lieu of paint) was applied incorrectly, leaving raw metal visible in critical aesthetic areas,.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 52986
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "m700-vesta-vault-recovery",
+	"presentation_mode": "deep_dive",
+DEBUG: snippet end: e intervention, effectively re-cutting the entire steel cavity to save the project from low yields.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 116026
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report (2022-2024)
+I. PROJECT SUMMARY
+• Role: Automated Digi
+DEBUG: snippet end: ed capacity is the mathematical prerequisite for scaling unit volumes from $3 million to $4 million.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 970
+DEBUG: snippet start: # Spec: V2 (Auto-Migrated)
+# Project: Minimerc
+
+## Narrative
+```json
+{
+  "forensic_summary": {
+    "
+DEBUG: snippet end: ts
+- minimerc3.gif
+- minimerc4_main.gif
+- minimerc5.jpg
+- minimerc6.jpg
+- minimerc7.jpg
+- turbo.jpg
+
+DEBUG: raw_blocks count: 3
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['forensic_summary']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['complexity_vector']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['war_stories']
+DEBUG: Content len: 63064
+DEBUG: snippet start: run
+
+Motorola MP600 (Typan) Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Product Architect / Mech
+DEBUG: snippet end: olution essentially prioritized external structural survival over internal component breathing room.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 47955
+DEBUG: snippet start: 
+Portion Cup Dispensing Module Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Engineer
+DEBUG: snippet end:  illustrates the Axial Thrust (F n ,F s ) vectors that necessitated this reinforced bearing design.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 60122
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "sativa-room-director",
+	"presentation_mode": "deep_dive",
+	"ta
+DEBUG: snippet end: e Elvis unit to save cost/complexity. Required tooling modification to block the light pipe cavity.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 58243
+DEBUG: snippet start: tell me about Erik Norris' Design Of Experiments and validation of thermal system performance and de
+DEBUG: snippet end: s.",
+      "type": "Document",
+      "source_ref": "20080215_LUX_SHTMTL_QUOTE.pdf [25]"
+    }
+  ]
+}
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 72413
+DEBUG: snippet start: Sundance Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design Engineer
+• Mandate: Exe
+DEBUG: snippet end:  document).
+• Sundance Metal Base Tooling - Drive Cage Rounds.pdf (Tooling changes made on the fly).
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 54695
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "waldo_wall_plates",
+	"presentation_mode": "deep_dive",
+	"tags"
+DEBUG: snippet end: Page 1: DIY4 Abrasion Defects)
+• Locorol action review_05082017 ver2.pdf (Page 2: DVT Schedule Risk)
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 57849
+DEBUG: snippet start: Cortez Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Mechanical Engineer / Surface Development Con
+DEBUG: snippet end: INEER to bridge the gap between the curved 2D ID sections and the flat 2D mechanical keep-out zones.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 46199
+DEBUG: snippet start: WebTV Elmer (Zeus) Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Mechanical Engineer ("The Archite
+DEBUG: snippet end: nch,.
+V. VISUAL EVIDENCE
+• elmer_proto.zip (Fabrication Data)
+• base_proto_deviations.jpg (QC Record
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 60902
+DEBUG: snippet start: WebTV Galaxy Forensic Report
+I. PROJECT SUMMARY
+• Role: Principal Mechanical Architect / Proprietor 
+DEBUG: snippet end: rmal comfort of downstream components like the CPU (which hit 84.0°C) to protect the magnetic media.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 57714
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "320-slot-optical-carousel",
+	"presentation_mode": "deep_dive",
+DEBUG: snippet end: equiring the same mechanical interventions (hard mounts/high-force springs) across the entire fleet.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 105867
+DEBUG: snippet start: run
+
+Avegant Glyph (Vulcan) Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Mechanical Architect / P
+DEBUG: snippet end:  mass production pads never achieved the acoustic isolation promised by the design specification.
+
+
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 64233
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Engineer
+DEBUG: snippet end: h high contrast, creating an unmistakable call to action that appears to float on the black surface.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 61462
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "bazooka-base-station",
+	"presentation_mode": "deep_dive",
+	"ta
+DEBUG: snippet end:  force Bel (the vendor) to synchronize CAD structures with the Arena BOM before DVT tooling release.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 52517
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "curtis_c24",
+	"presentation_mode": "deep_dive",
+	"tags": [
+		"
+DEBUG: snippet end: eavy" premium feel required for professional audio editing despite the lighter underlying hardware.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 78185
+DEBUG: snippet start: Cinema One (Codenamed Macduff) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design E
+DEBUG: snippet end: ndows.pdf.
+• Spec: 3mm x 3mm target area.
+• Interface: Mated with H131M0 (later N029M0) Pogo pins,.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 35953
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "project-danko-d-command",
+	"presentation_mode": "deep_dive",
+	
+DEBUG: snippet end: all D-Command anywhere or in any way that blocks free air flow at any time around the back panel".
+
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 54294
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "d-control-buckley",
+	"presentation_mode": "deep_dive",
+	"tags"
+DEBUG: snippet end: ) confirmation from UL.
+• 918014555-00_REVC.pdf - The AC Harness modified with the bleeder resistor.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 61283
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report (2022–2024)
+I. PROJECT SUMMARY
+• Role: Principal Syst
+DEBUG: snippet end: citors (SuperCaps >1.5F) which would otherwise look like a short circuit to standard power supplies.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 54517
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "elvis-extension-switch",
+	"presentation_mode": "deep_dive",
+	"
+DEBUG: snippet end: l Yield Crisis: 0% Yield (7/7 Fail) due to Floating Cap.
+• Recovery: 100% Yield via Structural Glue.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 22035
+DEBUG: snippet start: run specifically for KPLAYER-6000, codenamed Apollo, no other projects
+
+KPLAYER-6000 [Apollo] Forens
+DEBUG: snippet end: ct accuracy, rendering the aggressive upscaling logic of the Apollo era obsolete for modern content.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 38256
+DEBUG: snippet start: run
+
+Hunter Forensic Report
+I. PROJECT SUMMARY
+• Role: Sr. Mechanical Design Engineer
+• Mandate: Exe
+DEBUG: snippet end: n and mechanical redesign allowed the Hunter project to proceed with a viable power supply solution.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 28710
+DEBUG: snippet start: run
+
+KSERVER-5000 (k2) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design Engineer 
+DEBUG: snippet end: home movies) remain unaffected and can still be imported and played without the disc on all systems.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 38826
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "ksystem-120-orpheus",
+	"presentation_mode": "deep_dive",
+	"tag
+DEBUG: snippet end: d in lieu of paint) was applied incorrectly, leaving raw metal visible in critical aesthetic areas,.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 52986
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "m700-vesta-vault-recovery",
+	"presentation_mode": "deep_dive",
+DEBUG: snippet end: e intervention, effectively re-cutting the entire steel cavity to save the project from low yields.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 116026
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report (2022-2024)
+I. PROJECT SUMMARY
+• Role: Automated Digi
+DEBUG: snippet end: ed capacity is the mathematical prerequisite for scaling unit volumes from $3 million to $4 million.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 970
+DEBUG: snippet start: # Spec: V2 (Auto-Migrated)
+# Project: Minimerc
+
+## Narrative
+```json
+{
+  "forensic_summary": {
+    "
+DEBUG: snippet end: ts
+- minimerc3.gif
+- minimerc4_main.gif
+- minimerc5.jpg
+- minimerc6.jpg
+- minimerc7.jpg
+- turbo.jpg
+
+DEBUG: raw_blocks count: 3
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['forensic_summary']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['complexity_vector']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['war_stories']
+DEBUG: Content len: 63064
+DEBUG: snippet start: run
+
+Motorola MP600 (Typan) Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Product Architect / Mech
+DEBUG: snippet end: olution essentially prioritized external structural survival over internal component breathing room.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 47955
+DEBUG: snippet start: 
+Portion Cup Dispensing Module Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Engineer
+DEBUG: snippet end:  illustrates the Axial Thrust (F n ,F s ) vectors that necessitated this reinforced bearing design.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 60122
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "sativa-room-director",
+	"presentation_mode": "deep_dive",
+	"ta
+DEBUG: snippet end: e Elvis unit to save cost/complexity. Required tooling modification to block the light pipe cavity.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 58243
+DEBUG: snippet start: tell me about Erik Norris' Design Of Experiments and validation of thermal system performance and de
+DEBUG: snippet end: s.",
+      "type": "Document",
+      "source_ref": "20080215_LUX_SHTMTL_QUOTE.pdf [25]"
+    }
+  ]
+}
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 72413
+DEBUG: snippet start: Sundance Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design Engineer
+• Mandate: Exe
+DEBUG: snippet end:  document).
+• Sundance Metal Base Tooling - Drive Cage Rounds.pdf (Tooling changes made on the fly).
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 54695
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "waldo_wall_plates",
+	"presentation_mode": "deep_dive",
+	"tags"
+DEBUG: snippet end: Page 1: DIY4 Abrasion Defects)
+• Locorol action review_05082017 ver2.pdf (Page 2: DVT Schedule Risk)
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 57849
+DEBUG: snippet start: Cortez Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Mechanical Engineer / Surface Development Con
+DEBUG: snippet end: INEER to bridge the gap between the curved 2D ID sections and the flat 2D mechanical keep-out zones.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 46199
+DEBUG: snippet start: WebTV Elmer (Zeus) Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Mechanical Engineer ("The Archite
+DEBUG: snippet end: nch,.
+V. VISUAL EVIDENCE
+• elmer_proto.zip (Fabrication Data)
+• base_proto_deviations.jpg (QC Record
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 60902
+DEBUG: snippet start: WebTV Galaxy Forensic Report
+I. PROJECT SUMMARY
+• Role: Principal Mechanical Architect / Proprietor 
+DEBUG: snippet end: rmal comfort of downstream components like the CPU (which hit 84.0°C) to protect the magnetic media.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 57714
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "320-slot-optical-carousel",
+	"presentation_mode": "deep_dive",
+DEBUG: snippet end: equiring the same mechanical interventions (hard mounts/high-force springs) across the entire fleet.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 105867
+DEBUG: snippet start: run
+
+Avegant Glyph (Vulcan) Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Mechanical Architect / P
+DEBUG: snippet end:  mass production pads never achieved the acoustic isolation promised by the design specification.
+
+
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 64233
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Engineer
+DEBUG: snippet end: h high contrast, creating an unmistakable call to action that appears to float on the black surface.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 61462
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "bazooka-base-station",
+	"presentation_mode": "deep_dive",
+	"ta
+DEBUG: snippet end:  force Bel (the vendor) to synchronize CAD structures with the Arena BOM before DVT tooling release.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 52517
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "curtis_c24",
+	"presentation_mode": "deep_dive",
+	"tags": [
+		"
+DEBUG: snippet end: eavy" premium feel required for professional audio editing despite the lighter underlying hardware.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 78185
+DEBUG: snippet start: Cinema One (Codenamed Macduff) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design E
+DEBUG: snippet end: ndows.pdf.
+• Spec: 3mm x 3mm target area.
+• Interface: Mated with H131M0 (later N029M0) Pogo pins,.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 35953
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "project-danko-d-command",
+	"presentation_mode": "deep_dive",
+	
+DEBUG: snippet end: all D-Command anywhere or in any way that blocks free air flow at any time around the back panel".
+
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 54294
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "d-control-buckley",
+	"presentation_mode": "deep_dive",
+	"tags"
+DEBUG: snippet end: ) confirmation from UL.
+• 918014555-00_REVC.pdf - The AC Harness modified with the bleeder resistor.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 61283
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report (2022–2024)
+I. PROJECT SUMMARY
+• Role: Principal Syst
+DEBUG: snippet end: citors (SuperCaps >1.5F) which would otherwise look like a short circuit to standard power supplies.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 54517
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "elvis-extension-switch",
+	"presentation_mode": "deep_dive",
+	"
+DEBUG: snippet end: l Yield Crisis: 0% Yield (7/7 Fail) due to Floating Cap.
+• Recovery: 100% Yield via Structural Glue.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 22035
+DEBUG: snippet start: run specifically for KPLAYER-6000, codenamed Apollo, no other projects
+
+KPLAYER-6000 [Apollo] Forens
+DEBUG: snippet end: ct accuracy, rendering the aggressive upscaling logic of the Apollo era obsolete for modern content.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 38256
+DEBUG: snippet start: run
+
+Hunter Forensic Report
+I. PROJECT SUMMARY
+• Role: Sr. Mechanical Design Engineer
+• Mandate: Exe
+DEBUG: snippet end: n and mechanical redesign allowed the Hunter project to proceed with a viable power supply solution.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 28710
+DEBUG: snippet start: run
+
+KSERVER-5000 (k2) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design Engineer 
+DEBUG: snippet end: home movies) remain unaffected and can still be imported and played without the disc on all systems.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 38826
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "ksystem-120-orpheus",
+	"presentation_mode": "deep_dive",
+	"tag
+DEBUG: snippet end: d in lieu of paint) was applied incorrectly, leaving raw metal visible in critical aesthetic areas,.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 52986
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "m700-vesta-vault-recovery",
+	"presentation_mode": "deep_dive",
+DEBUG: snippet end: e intervention, effectively re-cutting the entire steel cavity to save the project from low yields.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 116026
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report (2022-2024)
+I. PROJECT SUMMARY
+• Role: Automated Digi
+DEBUG: snippet end: ed capacity is the mathematical prerequisite for scaling unit volumes from $3 million to $4 million.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 970
+DEBUG: snippet start: # Spec: V2 (Auto-Migrated)
+# Project: Minimerc
+
+## Narrative
+```json
+{
+  "forensic_summary": {
+    "
+DEBUG: snippet end: ts
+- minimerc3.gif
+- minimerc4_main.gif
+- minimerc5.jpg
+- minimerc6.jpg
+- minimerc7.jpg
+- turbo.jpg
+
+DEBUG: raw_blocks count: 3
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['forensic_summary']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['complexity_vector']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['war_stories']
+DEBUG: Content len: 63064
+DEBUG: snippet start: run
+
+Motorola MP600 (Typan) Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Product Architect / Mech
+DEBUG: snippet end: olution essentially prioritized external structural survival over internal component breathing room.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 47955
+DEBUG: snippet start: 
+Portion Cup Dispensing Module Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Engineer
+DEBUG: snippet end:  illustrates the Axial Thrust (F n ,F s ) vectors that necessitated this reinforced bearing design.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 60122
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "sativa-room-director",
+	"presentation_mode": "deep_dive",
+	"ta
+DEBUG: snippet end: e Elvis unit to save cost/complexity. Required tooling modification to block the light pipe cavity.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 58243
+DEBUG: snippet start: tell me about Erik Norris' Design Of Experiments and validation of thermal system performance and de
+DEBUG: snippet end: s.",
+      "type": "Document",
+      "source_ref": "20080215_LUX_SHTMTL_QUOTE.pdf [25]"
+    }
+  ]
+}
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 72413
+DEBUG: snippet start: Sundance Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design Engineer
+• Mandate: Exe
+DEBUG: snippet end:  document).
+• Sundance Metal Base Tooling - Drive Cage Rounds.pdf (Tooling changes made on the fly).
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 54695
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "waldo_wall_plates",
+	"presentation_mode": "deep_dive",
+	"tags"
+DEBUG: snippet end: Page 1: DIY4 Abrasion Defects)
+• Locorol action review_05082017 ver2.pdf (Page 2: DVT Schedule Risk)
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 57849
+DEBUG: snippet start: Cortez Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Mechanical Engineer / Surface Development Con
+DEBUG: snippet end: INEER to bridge the gap between the curved 2D ID sections and the flat 2D mechanical keep-out zones.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 46199
+DEBUG: snippet start: WebTV Elmer (Zeus) Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Mechanical Engineer ("The Archite
+DEBUG: snippet end: nch,.
+V. VISUAL EVIDENCE
+• elmer_proto.zip (Fabrication Data)
+• base_proto_deviations.jpg (QC Record
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 60902
+DEBUG: snippet start: WebTV Galaxy Forensic Report
+I. PROJECT SUMMARY
+• Role: Principal Mechanical Architect / Proprietor 
+DEBUG: snippet end: rmal comfort of downstream components like the CPU (which hit 84.0°C) to protect the magnetic media.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 57714
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "320-slot-optical-carousel",
+	"presentation_mode": "deep_dive",
+DEBUG: snippet end: equiring the same mechanical interventions (hard mounts/high-force springs) across the entire fleet.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 105867
+DEBUG: snippet start: run
+
+Avegant Glyph (Vulcan) Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Mechanical Architect / P
+DEBUG: snippet end:  mass production pads never achieved the acoustic isolation promised by the design specification.
+
+
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 64233
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Engineer
+DEBUG: snippet end: h high contrast, creating an unmistakable call to action that appears to float on the black surface.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 61462
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "bazooka-base-station",
+	"presentation_mode": "deep_dive",
+	"ta
+DEBUG: snippet end:  force Bel (the vendor) to synchronize CAD structures with the Arena BOM before DVT tooling release.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 52517
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "curtis_c24",
+	"presentation_mode": "deep_dive",
+	"tags": [
+		"
+DEBUG: snippet end: eavy" premium feel required for professional audio editing despite the lighter underlying hardware.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 78185
+DEBUG: snippet start: Cinema One (Codenamed Macduff) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design E
+DEBUG: snippet end: ndows.pdf.
+• Spec: 3mm x 3mm target area.
+• Interface: Mated with H131M0 (later N029M0) Pogo pins,.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 35953
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "project-danko-d-command",
+	"presentation_mode": "deep_dive",
+	
+DEBUG: snippet end: all D-Command anywhere or in any way that blocks free air flow at any time around the back panel".
+
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 54294
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "d-control-buckley",
+	"presentation_mode": "deep_dive",
+	"tags"
+DEBUG: snippet end: ) confirmation from UL.
+• 918014555-00_REVC.pdf - The AC Harness modified with the bleeder resistor.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 61283
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report (2022–2024)
+I. PROJECT SUMMARY
+• Role: Principal Syst
+DEBUG: snippet end: citors (SuperCaps >1.5F) which would otherwise look like a short circuit to standard power supplies.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 54517
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "elvis-extension-switch",
+	"presentation_mode": "deep_dive",
+	"
+DEBUG: snippet end: l Yield Crisis: 0% Yield (7/7 Fail) due to Floating Cap.
+• Recovery: 100% Yield via Structural Glue.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 22035
+DEBUG: snippet start: run specifically for KPLAYER-6000, codenamed Apollo, no other projects
+
+KPLAYER-6000 [Apollo] Forens
+DEBUG: snippet end: ct accuracy, rendering the aggressive upscaling logic of the Apollo era obsolete for modern content.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 38256
+DEBUG: snippet start: run
+
+Hunter Forensic Report
+I. PROJECT SUMMARY
+• Role: Sr. Mechanical Design Engineer
+• Mandate: Exe
+DEBUG: snippet end: n and mechanical redesign allowed the Hunter project to proceed with a viable power supply solution.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 28710
+DEBUG: snippet start: run
+
+KSERVER-5000 (k2) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design Engineer 
+DEBUG: snippet end: home movies) remain unaffected and can still be imported and played without the disc on all systems.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 38826
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "ksystem-120-orpheus",
+	"presentation_mode": "deep_dive",
+	"tag
+DEBUG: snippet end: d in lieu of paint) was applied incorrectly, leaving raw metal visible in critical aesthetic areas,.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 52986
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "m700-vesta-vault-recovery",
+	"presentation_mode": "deep_dive",
+DEBUG: snippet end: e intervention, effectively re-cutting the entire steel cavity to save the project from low yields.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 116026
+DEBUG: snippet start: run
+
+Hyphen Augmented Makeline Forensic Report (2022-2024)
+I. PROJECT SUMMARY
+• Role: Automated Digi
+DEBUG: snippet end: ed capacity is the mathematical prerequisite for scaling unit volumes from $3 million to $4 million.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 970
+DEBUG: snippet start: # Spec: V2 (Auto-Migrated)
+# Project: Minimerc
+
+## Narrative
+```json
+{
+  "forensic_summary": {
+    "
+DEBUG: snippet end: ts
+- minimerc3.gif
+- minimerc4_main.gif
+- minimerc5.jpg
+- minimerc6.jpg
+- minimerc7.jpg
+- turbo.jpg
+
+DEBUG: raw_blocks count: 3
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['forensic_summary']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['complexity_vector']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['war_stories']
+DEBUG: Content len: 63064
+DEBUG: snippet start: run
+
+Motorola MP600 (Typan) Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Product Architect / Mech
+DEBUG: snippet end: olution essentially prioritized external structural survival over internal component breathing room.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 47955
+DEBUG: snippet start: 
+Portion Cup Dispensing Module Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Engineer
+DEBUG: snippet end:  illustrates the Axial Thrust (F n ,F s ) vectors that necessitated this reinforced bearing design.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 60122
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "sativa-room-director",
+	"presentation_mode": "deep_dive",
+	"ta
+DEBUG: snippet end: e Elvis unit to save cost/complexity. Required tooling modification to block the light pipe cavity.
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 58243
+DEBUG: snippet start: tell me about Erik Norris' Design Of Experiments and validation of thermal system performance and de
+DEBUG: snippet end: s.",
+      "type": "Document",
+      "source_ref": "20080215_LUX_SHTMTL_QUOTE.pdf [25]"
+    }
+  ]
+}
+
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 72413
+DEBUG: snippet start: Sundance Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design Engineer
+• Mandate: Exe
+DEBUG: snippet end:  document).
+• Sundance Metal Base Tooling - Drive Cage Rounds.pdf (Tooling changes made on the fly).
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 54695
+DEBUG: snippet start: {
+	"_schema_version": "v2.0",
+	"id": "waldo_wall_plates",
+	"presentation_mode": "deep_dive",
+	"tags"
+DEBUG: snippet end: Page 1: DIY4 Abrasion Defects)
+• Locorol action review_05082017 ver2.pdf (Page 2: DVT Schedule Risk)
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'presentation_mode', 'tags', 'forensic_metrics', 'forensic_summary', 'war_stories', 'isomorphics', 'toolchain', 'bom', 'teamSize', 'cast', 'timeline', 'visuals_to_find', 'quotes']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 57849
+DEBUG: snippet start: Cortez Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Mechanical Engineer / Surface Development Con
+DEBUG: snippet end: INEER to bridge the gap between the curved 2D ID sections and the flat 2D mechanical keep-out zones.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 46199
+DEBUG: snippet start: WebTV Elmer (Zeus) Forensic Report
+I. PROJECT SUMMARY
+• Role: Lead Mechanical Engineer ("The Archite
+DEBUG: snippet end: nch,.
+V. VISUAL EVIDENCE
+• elmer_proto.zip (Fabrication Data)
+• base_proto_deviations.jpg (QC Record
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 60902
+DEBUG: snippet start: WebTV Galaxy Forensic Report
+I. PROJECT SUMMARY
+• Role: Principal Mechanical Architect / Proprietor 
+DEBUG: snippet end: rmal comfort of downstream components like the CPU (which hit 84.0°C) to protect the magnetic media.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']

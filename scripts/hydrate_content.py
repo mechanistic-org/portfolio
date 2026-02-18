@@ -744,6 +744,11 @@ def hydrate_content(dry_run=False, force=False, target_slug=None, priority="sour
         # Prepare Updates
         changes = []
         
+        # BLOCKER: Garbage Timeline Data from Source
+        # We only support 'events' (from timeline_events). 'timeline' is legacy.
+        if "timeline" in data:
+             del data["timeline"]
+        
         # 0. SEO Essentials (Critical for Social Sharing/AEO)
         if "title" in data:
             if post.metadata.get("title") != data["title"]:
@@ -810,8 +815,6 @@ def hydrate_content(dry_run=False, force=False, target_slug=None, priority="sour
 
         # 2. Scars (formerly War Stories) - V2.1 Renaming
         # Check 'scars' first, then 'war_stories' fallback
-        # 2. Scars (formerly War Stories) - V2.1 Renaming
-        # Check 'scars' first, then 'war_stories' fallback
         scars_data = data.get("scars")
         if not scars_data:
             scars_data = data.get("war_stories")
@@ -821,14 +824,19 @@ def hydrate_content(dry_run=False, force=False, target_slug=None, priority="sour
             # Scars use "label" as key
             merged_scars = smart_merge_lists(current_scars, scars_data, "label", priority)
             
+            # Update Scars if changed or new
             if current_scars != merged_scars:
-                changes.append(f"  - Update 'scars' (Merged {len(scars_data)} items)")
+                changes.append(f"  - Update 'scars' (Merged {len(merged_scars)} items)")
                 post.metadata["scars"] = merged_scars
-                
-            # Cleanup Legacy
-            if "war_stories" in post.metadata:
-                 changes.append(f"  - Remove legacy 'war_stories' (Migrated to 'scars')")
-                 del post.metadata["war_stories"]
+
+        # CLEANUP: Legacy Removal (Schema Compliance)
+        if "war_stories" in post.metadata:
+             del post.metadata["war_stories"]
+             changes.append("  - Cleaned up legacy 'war_stories' (Root)")
+        
+        if "metrics" in post.metadata and "war_stories" in post.metadata["metrics"]:
+             del post.metadata["metrics"]["war_stories"]
+             changes.append("  - Cleaned up legacy 'metrics.war_stories'")
                  
         # 3. Isomorphics (Direct Injection)
         if "isomorphics" in data:
@@ -846,6 +854,26 @@ def hydrate_content(dry_run=False, force=False, target_slug=None, priority="sour
              if "events" in post.metadata:
                   changes.append(f"  - Remove 'events' from Frontmatter (Moved to Sidecar)")
                   del post.metadata["events"]
+        
+        # CLEANUP: Validate Timeline Schema
+        # Schema requires array of objects {date, title, description}
+        if "timeline" in post.metadata:
+            tl = post.metadata["timeline"]
+            
+            should_delete = False
+            # Case 1: Legacy String Array ["start", "end"]
+            if isinstance(tl, list) and len(tl) > 0 and isinstance(tl[0], str):
+                 should_delete = True
+                 reason = "String Array"
+            # Case 2: Legacy Object { start: ..., end: ... }
+            elif isinstance(tl, dict):
+                 should_delete = True
+                 reason = "Legacy Object"
+            # Case 3: Empty List (keep? or delete? Schema allows empty or optional)
+            
+            if should_delete:
+                 del post.metadata["timeline"]
+                 changes.append(f"  - Cleaned up legacy 'timeline' ({reason})")
         
         if "reports" in data:
             reports = data["reports"]

@@ -195,15 +195,6 @@ const projectsCollection = defineCollection({
 							label: z.string().nullable().optional(),
 						})
 						.optional(),
-					war_stories: z
-						.array(
-							z.object({
-								label: z.string(),
-								value: z.string(),
-								description: z.string().nullable().optional(),
-							}),
-						)
-						.optional(),
 				})
 				.optional(),
 
