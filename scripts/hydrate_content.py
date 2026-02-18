@@ -948,14 +948,15 @@ def hydrate_content(dry_run=False, force=False, target_slug=None, priority="sour
                                 post.metadata[key] = val
                                 
                     else:
-                        # 2. Unknown Keys -> Route to 'forensic_data' (Catch-All)
-                        if forensic_data.get(key) != val:
-                            changes.append(f"  - [Locker] Stashed Oddball '{key}' in forensic_data")
-                            forensic_data[key] = val
+                        # 2. Unknown Keys -> IGNORE or LOG
+                        # LAW UPDATE: Do NOT stash in 'forensic_data' (Banned Schema).
+                        # We simply drop them to comply with strict schema.
+                        # print(f"  - [Locker] Dropping unknown key '{key}' (Schema Strictness)")
+                        pass
                             
-                # Save the Catch-All
-                if forensic_data:
-                    post.metadata["forensic_data"] = forensic_data
+                # Save the Catch-All -> DISABLED
+                # if forensic_data:
+                #     post.metadata["forensic_data"] = forensic_data
 
             except Exception as e:
                 print(f"   ❌ Error reading Forensic Locker {target_locker}: {e}")
