@@ -46,3 +46,15 @@ DEBUG: Parsed block type: <class 'dict'>
 DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
 DEBUG: Parsed block type: <class 'dict'>
 DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']
+DEBUG: Content len: 28710
+DEBUG: snippet start: run
+
+KSERVER-5000 (k2) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design Engineer 
+DEBUG: snippet end: home movies) remain unaffected and can still be imported and played without the disc on all systems.
+DEBUG: raw_blocks count: 0
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'complexity_vector', 'visual_candidates']
+DEBUG: Parsed block type: <class 'dict'>
+DEBUG: Successfully merged block with keys: ['_schema_version', 'id', 'events']

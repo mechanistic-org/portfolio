@@ -340,7 +340,7 @@ total_entries: 122
 - **KPLAYER-300** (`kplayer-300`): KPLAYER-300 Mini Player
 - **KPLAYER-5000** (`kplayer-5000`): KPLAYER-5000 Movie Player 2
 - **KPLAYER-6000** (`kplayer-6000`): KPLAYER-6000 1080p Player
-- **KSERVER-1500** (`kserver-1500`): KSERVER-1500 1U Server
+- **KSERVER-1500 'Hunter'** (`kserver-1500`): KSERVER-1500 1U Server ('Hunter' Refresh)
 - **KSERVER-2500** (`kserver-2500`): KSERVER-2500 5U Server
 - **KSERVER-5000** (`kserver-5000`): KSERVER-5000 3U Server
 - **KVAULT-10** (`kvault-10`): KVAULT-10 Modular Disc Vault

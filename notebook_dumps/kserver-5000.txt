@@ -1,0 +1,554 @@
+run
+
+KSERVER-5000 (k2) Forensic Report
+I. PROJECT SUMMARY
+• Role: Senior Mechanical Design Engineer / Architect
+• Mandate: Engineer a "headless" enterprise-grade storage array capable of bit-for-bit preservation of massive optical media collections within a residential acoustic and thermal envelope. Eliminate the physical friction of disc playback while navigating a hostile copyright landscape.
+• Core Achievement: The deployment of RAID-K, a proprietary fault-tolerance architecture optimized for high-bitrate video streaming, delivering 99.9% uptime across an 11-year production lifecycle (2007–2018).
+II. THE ANATOMY OF FAILURE (Heuristic Analysis)
+Forensic analysis of the KSERVER-5000 reveals a hardware architecture at war with its environment.
+• The Trigger (Crisis): Thermal Saturation. The 3U chassis houses 14 mechanical hard drives and a high-current power supply, generating a thermal density that exceeds standard residential AV equipment tolerances. Dust accumulation on the front intake grille creates a "suffocation event," spiking internal drive temperatures and risking catastrophic array failure.
+• The Intervention (Fix): Aggressive Airflow Geometry. The chassis was engineered with a dedicated 40 CFM airflow path, utilizing specialized 3-fan and 5-fan brackets to force convection through the drive cage. The operational ceiling was capped at a ruthless 86°F (30°C) intake temperature—significantly lower than the 95°F allowed for player units—to protect the magnetic storage integrity.
+• The Result (Impact): Enterprise Reliability. Despite the thermal load, the system achieved "bulletproof" status in the field. However, long-term survivability is contingent on the "clean or die" protocol: vacuuming intakes every four months and replacing aging fan brackets before bearing seizure.
+• The Trigger (Crisis): The DVD CCA Litigation. Legal action threatened to brick the core functionality of disc import, alleging breach of CSS license agreements. The entire "import-and-play" utility of the server was under existential threat.
+• The Intervention (Fix): The Grandfather Clause. A hard bifurcation of the hardware lineage. Units activated prior to the settlement date retained full import/playback rights. Post-settlement units required physical disc presence in a vault.
+• The Result (Impact): Market Distortion. Created a "Grandfathered" class of hardware that appreciates in value, with legacy KSERVER-5000 units commanding 2,000–3,800 on the secondary market, outlasting the depreciation curve of all contemporary electronics.
+III. GOVERNANCE & RHYTHM
+• The Pulse: High-friction NPI (New Product Introduction) cycles governed by strict "Run-In" validation. Units subjected to 400-cycle mechanical stress tests to weed out "infant mortality" in drive latches and loading mechanisms.
+• The Artifacts:
+    ◦ SVC-KIT-0130: The critical field-replacement kit for the Sparkle Power supply (FSP700PSASK-KS).
+    ◦ kOS (Kaleidescape Operating System): A custom BSD-derived kernel optimized for read-heavy video streaming and proprietary RAID calculations.
+    ◦ The 1-Minute Rule: A mandatory governance protocol requiring a 60-second power-down wait time before drive extraction to prevent head crashes on spinning platters.
+IV. LINKEDIN ARTIFACTS (The Numbers)
+• Scaled storage capacity to 72 TB using proprietary 6TB disk cartridges.
+• Streamed up to 50 simultaneous DVD-quality zones from a single array.
+• Sustained 15 simultaneous Blu-ray quality bitstreams without packet loss.
+• Engineered a 14-bay hot-swappable drive cage with dedicated hot-spare protection.
+• Maintained an 11-year active production run (2007–2018), defying industry obsolescence cycles.
+• Mitigated thermal risks with a 30°C (86°F) hard thermal ceiling.
+• Protected data integrity via RAID-K, surviving single-drive failures with zero data loss.
+• Clustered multiple 3U units to manage libraries exceeding 10,000+ titles.
+V. VISUAL EVIDENCE
+• Sparkle Power FSP700PSASK-KS: The primary failure point in aging units.
+• KDISK-6000-L: The physical manifest of the proprietary storage strategy.
+• Front Panel Intake Grille: The primary forensic site for thermal failure analysis (dust occlusion).
+How do grandfathered units bypass current import restrictions?
+What are the specific steps for the 'clean or die' protocol?
+Explain how RAID-K handles data recovery after a drive failure.
+run
+
+{
+	"_schema_version": "v1.0-complexity",
+	"id": "kserver-5000-k2",
+	"complexity_vector": {
+		"part_count_growth": [
+			{
+				"phase": "Concept",
+				"count": 45,
+				"date": "2006-06"
+			},
+			{
+				"phase": "EVT (Eng Validation)",
+				"count": 120,
+				"date": "2006-12"
+			},
+			{
+				"phase": "DVT (Design Validation)",
+				"count": 185,
+				"date": "2007-03"
+			},
+			{
+				"phase": "PVT (Prod Validation)",
+				"count": 210,
+				"date": "2007-06"
+			},
+			{
+				"phase": "MP (Mass Production)",
+				"count": 227,
+				"date": "2007-08",
+				"notes": "Derived from BOM 801-1004_mech.xls; excludes drive population variance [Source 8]"
+			}
+		],
+		"process_density": [
+			{
+				"part_name": "MECH Assy, Drive Cage - 3U Server (520-1015)",
+				"material": "Steel (CRS) / Riveted Assembly",
+				"steps": [
+					"Progressive Die Stamping",
+					"Deburring",
+					"E-Coat/Plating",
+					"Riveting (Parts 501-1024, 501-1025, 501-1065)",
+					"Integration of Drive Guides (330-1006)",
+					"Snap-in Panel Assembly (502-1042)"
+				],
+				"complexity_score": 9,
+				"notes": "Critical alignment for 14 blind-mate backplane connectors [Source 8]"
+			},
+			{
+				"part_name": "ASSEMBLY, Printed, Front Screen (521-1004)",
+				"material": "Polycarbonate / ABS / Metal Inserts",
+				"steps": [
+					"Injection Molding",
+					"Ultrasonic Heat Staking (Metal Inserts)",
+					"Pad Printing (Logo/Text)",
+					"Sub-assembly with Front Bezel Inner Door (520-1041)"
+				],
+				"complexity_score": 8,
+				"notes": "High cosmetic requirement; visible 'Jewel' of the system [Source 8]"
+			},
+			{
+				"part_name": "MECH Assy, Chassis Cover (520-1038)",
+				"material": "Heavy Gauge Steel",
+				"steps": [
+					"Blanking",
+					"Forming",
+					"Welding (Parts 501-1018, 501-1046)",
+					"Powder Coating",
+					"Lining with Sound Dampening Material"
+				],
+				"complexity_score": 6,
+				"notes": "Structural integrity required to support stacked rack loads [Source 8]"
+			}
+		],
+		"tooling_chain": [
+			{
+				"tool_name": "Chassis Stamping Dies",
+				"type": "Hard Tooling (Progressive)",
+				"vendor": "Sanmina",
+				"lead_time_weeks": 12,
+				"cost_impact": "High",
+				"notes": "Located in Mexico/USA; critical for dimensional accuracy of 3U fit [Source 296, 304]"
+			},
+			{
+				"tool_name": "Front Bezel Molds",
+				"type": "Hard Tooling (Injection)",
+				"vendor": "Yomura",
+				"lead_time_weeks": 10,
+				"cost_impact": "Medium",
+				"notes": "Located in Taiwan; responsible for cosmetic plastics [Source 617]"
+			},
+			{
+				"tool_name": "PSU Enclosure Dies",
+				"type": "Hard Tooling",
+				"vendor": "Sparkle Power",
+				"lead_time_weeks": 8,
+				"cost_impact": "Medium",
+				"notes": "Custom enclosure for FSP700PSASK-KS [Source 27, 960]"
+			}
+		],
+		"supply_chain_nodes": [
+			{
+				"location": "San Jose, CA / Mexico",
+				"role": "FATP (Final Assembly)",
+				"vendor": "Sanmina",
+				"notes": "Primary CM for metal fabrication and assembly [Source 304]"
+			},
+			{
+				"location": "Taiwan",
+				"role": "Power Supply Vendor",
+				"vendor": "Sparkle Power Inc. (SPI)",
+				"notes": "Supplier of FSP700PSASK-KS [Source 27, 960]"
+			},
+			{
+				"location": "Germany / Taiwan",
+				"role": "Motherboard Fab",
+				"vendor": "Kontron",
+				"notes": "Supplier of Mini-ITX industrial boards (423-0389-00-A) [Source 476]"
+			},
+			{
+				"location": "Taiwan",
+				"role": "Mechanical Components",
+				"vendor": "Steman",
+				"notes": "Supplier of feet and chassis hardware [Source 415]"
+			}
+		]
+	},
+	"visual_candidates": [
+		"Source 7: 501-1211-00_REV_2.pdf (PSU Plate Drawing)",
+		"Source 49: 3U Server Front Angle Product Shot",
+		"Source 52: 3U Server Open Drive Bay",
+		"Source 883: 3U Server Front Panel Removal Diagram",
+		"Source 902: Disk Cartridge Insertion Diagram"
+	]
+}
+What is the specific RAM used in the 3U server?
+How much content fits on the maximum 72TB storage?
+Why do legacy units command such high secondary market prices?
+run
+
+{
+  "_schema_version": "v1.0-seismograph",
+  "id": "kserver-5000-k2",
+  "events": [
+    {
+      "date": "2005-10-04",
+      "score": 1,
+      "snippet": "Initial chassis hardware sourcing: Rack ear screws created in BOM.",
+      "type": "Commit",
+      "source_ref": "801-1004 - 801-1004.xls [1]"
+    },
+    {
+      "date": "2006-01-27",
+      "score": 4,
+      "snippet": "Production release of 14-port SATA2 Controller PCB Assy.",
+      "type": "Commit",
+      "source_ref": "801-1004 - 801-1004.xls [1]"
+    },
+    {
+      "date": "2006-02-21",
+      "score": 4,
+      "snippet": "Production release of 14-port SATA Drive Plane PCB.",
+      "type": "Commit",
+      "source_ref": "801-1004 - 801-1004.xls [1]"
+    },
+    {
+      "date": "2006-03-30",
+      "score": 2,
+      "snippet": "Base Assembly 3U Server Revision L created.",
+      "type": "Commit",
+      "source_ref": "801-1004 - 801-1004.xls [1]"
+    },
+    {
+      "date": "2006-04-14",
+      "score": 6,
+      "snippet": "Critical mechanical assemblies created: Drive Cage, Fan Tray, PSU Bracket.",
+      "type": "Commit",
+      "source_ref": "801-1004 - 801-1004.xls [1]"
+    },
+    {
+      "date": "2006-04-20",
+      "score": 2,
+      "snippet": "Glowstrip Board PCB Assembly released for front bezel.",
+      "type": "Commit",
+      "source_ref": "801-1004 - 801-1004.xls [1]"
+    },
+    {
+      "date": "2006-06-02",
+      "score": 3,
+      "snippet": "Chassis Cover and Rack Mount Bracket welded assemblies created.",
+      "type": "Commit",
+      "source_ref": "801-1004 - 801-1004.xls [1]"
+    },
+    {
+      "date": "2006-10-24",
+      "score": 3,
+      "snippet": "Mechanical assembly created for CoolerMaster Power Supply integration.",
+      "type": "Commit",
+      "source_ref": "801-1004 - 801-1004.xls [1]"
+    },
+    {
+      "date": "2006-11-03",
+      "score": 3,
+      "snippet": "Front Screen Printed Assembly released (Polycarb/ABS).",
+      "type": "Commit",
+      "source_ref": "801-1004 - 801-1004.xls [1]"
+    },
+    {
+      "date": "2006-12-05",
+      "score": 3,
+      "snippet": "Base Chassis Assembly and Nitrogon Heatsink Bracket created.",
+      "type": "Commit",
+      "source_ref": "801-1004 - 801-1004.xls [1]"
+    },
+    {
+      "date": "2007-07-19",
+      "score": 4,
+      "snippet": "Pogo Front Panel PCB reinforced to improve button strength.",
+      "type": "Commit",
+      "source_ref": "801-1004 - 801-1004.xls [1]"
+    },
+    {
+      "date": "2008-05-19",
+      "score": 5,
+      "snippet": "Internal bracket issues identified during KPlayer-6000 manufacturing review.",
+      "type": "Memory",
+      "source_ref": "Kaleidescape_Volume_014.md [2]"
+    },
+    {
+      "date": "2008-06-25",
+      "score": 3,
+      "snippet": "Heatsink rubber/adhesive specs defined (Shin-Etsu / Sony Chemicals).",
+      "type": "Document",
+      "source_ref": "Kaleidescape_Volume_012.md [3]"
+    },
+    {
+      "date": "2008-07-24",
+      "score": 5,
+      "snippet": "Server SN 7350 failed Hot Room testing; returned to MFG.",
+      "type": "Memory",
+      "source_ref": "Kaleidescape_Volume_009.md [4]"
+    },
+    {
+      "date": "2008-10-03",
+      "score": 2,
+      "snippet": "Forensic timestamp of BOM generation for 801-1004.",
+      "type": "Document",
+      "source_ref": "801-1004 - 801-1004.xls [1]"
+    },
+    {
+      "date": "2008-10-13",
+      "score": 4,
+      "snippet": "Server SN 7350 returned again; Power button mechanical failure.",
+      "type": "Memory",
+      "source_ref": "Kaleidescape_Volume_009.md [4]"
+    },
+    {
+      "date": "2009-02-06",
+      "score": 7,
+      "snippet": "Production crisis: 'Time for experimentation is over' decision demand.",
+      "type": "Memory",
+      "source_ref": "Kaleidescape_Volume_004.md [5]"
+    },
+    {
+      "date": "2012-03-08",
+      "score": 9,
+      "snippet": "Permanent Injunction Order issued against Kaleidescape in DVD CCA case.",
+      "type": "Document",
+      "source_ref": "DVD Copy Control Ass'n, Inc. v. Kaleidescape, Inc. [6]"
+    },
+    {
+      "date": "2014-03-07",
+      "score": 6,
+      "snippet": "DV700 Disc Vault jammed; blockage detected in field unit.",
+      "type": "Memory",
+      "source_ref": "Kaleidescape_Volume_020.md [7]"
+    },
+    {
+      "date": "2014-03-09",
+      "score": 8,
+      "snippet": "Fatal Error 001E4043 on Server; corrosion found on drive connectors.",
+      "type": "Photo",
+      "source_ref": "Kaleidescape_Volume_020.md [8]"
+    },
+    {
+      "date": "2014-03-10",
+      "score": 5,
+      "snippet": "Run-In Test failure: Disc sticking out at front slot.",
+      "type": "Memory",
+      "source_ref": "Kaleidescape_Volume_020.md [9]"
+    },
+    {
+      "date": "2014-03-14",
+      "score": 7,
+      "snippet": "Urgent request for Vault spring parts from Sanmina.",
+      "type": "Memory",
+      "source_ref": "Kaleidescape_Volume_022.md [10]"
+    },
+    {
+      "date": "2014-04-14",
+      "score": 8,
+      "snippet": "Server boot failure logged: 'khdutilenv; possible HDD failure'.",
+      "type": "Memory",
+      "source_ref": "Kaleidescape_Volume_022.md [11]"
+    },
+    {
+      "date": "2014-05-19",
+      "score": 7,
+      "snippet": "Thermal Event: Drive slot 1 exceeded 51.0C fatal limit.",
+      "type": "Memory",
+      "source_ref": "Kaleidescape_Volume_018.md [12]"
+    },
+    {
+      "date": "2014-05-19",
+      "score": 6,
+      "snippet": "Discrepant Material Report issued for Prompt Precision PSU parts.",
+      "type": "Document",
+      "source_ref": "Kaleidescape_Volume_018.md [13]"
+    },
+    {
+      "date": "2014-05-20",
+      "score": 6,
+      "snippet": "Production defect: 3U Server chassis reported 'Bowed'.",
+      "type": "Memory",
+      "source_ref": "Kaleidescape_Volume_018.md [14]"
+    },
+    {
+      "date": "2014-06-02",
+      "score": 10,
+      "snippet": "Settlement reached: End of DVD CCA litigation announced.",
+      "type": "Document",
+      "source_ref": "Kaleidescape and DVD CCA Announce Settlement Agreement [15]"
+    },
+    {
+      "date": "2014-06-18",
+      "score": 7,
+      "snippet": "Server recovered from 'Circular Descriptor' file system crash loop.",
+      "type": "Memory",
+      "source_ref": "Kaleidescape_Volume_021.md [16]"
+    },
+    {
+      "date": "2014-07-21",
+      "score": 8,
+      "snippet": "Server failed boot with 'Malformed System Image' error.",
+      "type": "Memory",
+      "source_ref": "Kaleidescape_Volume_019.md [17]"
+    },
+    {
+      "date": "2014-07-30",
+      "score": 8,
+      "snippet": "Multiple servers reset 600+ times due to General Protection Fault.",
+      "type": "Memory",
+      "source_ref": "Kaleidescape_Volume_020.md [18]"
+    },
+    {
+      "date": "2014-10-09",
+      "score": 3,
+      "snippet": "Rework report submitted by Yomura for covers 502-1192-00.",
+      "type": "Document",
+      "source_ref": "Kaleidescape_Volume_018.md [19]"
+    },
+    {
+      "date": "2014-10-29",
+      "score": 7,
+      "snippet": "Server 176AE7 resetting every 6-10 minutes; no clear cause.",
+      "type": "Memory",
+      "source_ref": "Kaleidescape_Volume_018.md [20]"
+    },
+    {
+      "date": "2014-11-30",
+      "score": 10,
+      "snippet": "Injunction Effective Date: End of 'Grandfathered' system sales.",
+      "type": "Document",
+      "source_ref": "Kaleidescape and DVD CCA Announce Settlement Agreement [21]"
+    },
+    {
+      "date": "2015-02-09",
+      "score": 6,
+      "snippet": "Quality Control failure identified: Beta units shipped as production.",
+      "type": "Memory",
+      "source_ref": "Kaleidescape_Volume_020.md [22]"
+    },
+    {
+      "date": "2018-12-21",
+      "score": 5,
+      "snippet": "Field report: KSERVER-5000 'Blue Light' failure (No HDD/NIC LEDs).",
+      "type": "Memory",
+      "source_ref": "Kserver 5000 No Hdd Lights No NIC Lights [23]"
+    },
+    {
+      "date": "2024-01-11",
+      "score": 4,
+      "snippet": "Official confirmation of Sparkle Power supply replacement part availability.",
+      "type": "Memory",
+      "source_ref": "yet another server fail - Kaleidescape Owners Forum [24]"
+    }
+  ]
+}
+How does RAID-K protect data if a drive fails?
+What makes the KSERVER-5000 a 'Grandfathered' system exactly?
+Where can I find a replacement Sparkle Power supply?
+What is the specific RAM used in the 3U server?
+
+Forensic Data Extraction: Memory Architecture Analysis
+SUBJECT: KSERVER-5000 (3U Server) COMPONENT: Volatile Memory Subsystem
+SPECIFICATION: The KSERVER-5000 utilizes a standard, off-the-shelf memory architecture common to the 2007–2008 industrial computing era.
+• Type: DDR2 SDRAM (Non-ECC)
+• Speed: 533 MHz
+• Standard: PC2-4200
+• Form Factor: 240-pin DIMM
+CAPACITY:
+• Stock Configuration: 512 MB (Single Stick). This conservative allocation is sufficient for playback but creates latency in the Web Utility interface during library management.
+• Maximum Capacity: 2 GB (2x 1 GB Sticks). The architecture supports expansion via two DIMM slots on the motherboard.
+FIELD VALIDATION: Forensic analysis of field repairs indicates that upgrading from 512 MB to 2 GB significantly improves the responsiveness of the browser-based management interface, particularly in clustered systems with large libraries (>10,000 titles). It does not impact video playback performance, which is handled by separate hardware decoding.
+VALIDATED REPLACEMENT PART:
+• Corsair VS1GB533D2: 1GB DDR2 533MHz (PC2-4200). Identified by field technicians as a compatible, stable replacement for the OEM memory.
+How does upgrading to 2GB of RAM improve the interface?
+What are the ventilation requirements for a rack-mounted server?
+Tell me about RAID-K data protection and the hot spare.
+How much content fits on the maximum 72TB storage?
+
+With the KSERVER-5000 array fully saturated using fourteen 6TB disk cartridges, the architecture delivers a maximum storage ceiling of 72 TB.
+STORAGE DENSITY METRICS:
+• 1,950 imported Blu-ray quality titles.
+• 10,800 DVD quality downloads.
+This configuration pushes the 14-bay chassis to its theoretical limit within the Premiere line production parameters, requiring specific kOS firmware versions to recognize the high-density magnetic storage.
+How does RAID-K protect data if a drive fails?
+What are the ventilation requirements to prevent thermal failure?
+How did the 2014 settlement change DVD playback rights?
+Why do legacy units command such high secondary market prices?
+
+Forensic Market Analysis: Legacy Hardware Valuation
+I. EXECUTIVE SUMMARY
+Subject: KSERVER-5000 (3U Server) / Premiere Line Market Behavior: Inverse Depreciation. Root Cause: A "Legal Singularity" generated by the 2014 DVD CCA settlement created a finite class of hardware with capabilities that are illegal to reproduce in new manufacturing.
+II. THE "GRANDFATHER" ANOMALY (Legal Scarcity)
+The primary driver of secondary market value is not silicon, but litigation. The KSERVER-5000 sits on the favorable side of a hard regulatory cutoff.
+• The Trigger Date: November 30, 2014. Under the settlement agreement between Kaleidescape and the DVD Copy Control Association (DVD CCA), any system sold after this date lost the ability to "Import" CSS-protected DVDs.
+• The Functional Delta:
+    ◦ Grandfathered (Pre-11/30/14): Capable of "Import." The user rips the DVD to the RAID-K array. The physical disc is removed and stored in a box/attic. Playback is instant and disc-free.
+    ◦ Non-Grandfathered (Post-11/30/14): Restricted to "Catalog." The system scrapes metadata, but playback requires the physical disc to be present in a player tray or a Disc Vault (M700/DV700).
+• The Value Proposition: A "Grandfathered" KSERVER-5000 is the only legally sanctioned appliance in existence that decouples the physical DVD media from the playback experience without requiring massive robotic vaults for every disc. This capability is finite; the supply of these licenses is capped and declining due to hardware attrition.
+III. ARCHITECTURAL EXTENSION (The Co-Star Bridge)
+Kaleidescape engineered a survival path for this legacy hardware, preventing it from becoming electronic waste in the 4K era.
+• The Mechanism: Co-Star. This hardware switch integrates the legacy Premiere line (KSERVER-5000) with the modern Encore line (Strato 4K players).
+• The Utility: It allows the KSERVER-5000 to function as a massive "bit-bucket" for a user's legacy SD (DVD) and HD (Blu-ray) library, while the Strato handles 4K UHD downloads. The OSD (On Screen Display) merges both libraries into a single interface.
+• The Result: High-net-worth clients do not need to "rip and replace" their library. The KSERVER-5000 remains the engine room for the legacy collection, sustaining its utility and resale value.
+IV. MECHANICAL DENSITY & YIELD
+The KSERVER-5000 offers storage density/footprint ratios that remain competitive for physical media archives.
+• Bay Count: 14 hot-swappable drive bays in a 3U chassis.
+• Scalability: Validated for up to 72TB of protected storage using 6TB cartridges.
+• Fault Tolerance: RAID-K architecture provides robust protection against drive failure without the rigid drive-matching requirements of standard RAID configurations.
+• Throughput: Capable of sustaining 50 simultaneous DVD streams or 15 Blu-ray streams, a throughput capability engineered for super-yachts and mega-estates that exceeds typical DIY NAS performance.
+V. VALUATION METRICS (Evidence)
+• Grandfathered Units: Commands premiums of $2,000 – $3,850 depending on drive population.
+• Parts/Repair: Even failed chassis sell for $350 – $725 due to the scarcity of proprietary power supplies (Sparkle FSP700PSASK-KS) and replacement drive trays.
+• The "Clean or Die" Premium: Units maintained in low-dust environments with functioning fan brackets retain maximum value due to the difficulty of sourcing replacement cooling assemblies.
+How do grandfathered units bypass the need for a vault?
+What are the specific storage limits for the KSERVER-5000?
+Can modern 4K players still access content from legacy servers?
+What makes the KSERVER-5000 a 'Grandfathered' system exactly?
+
+Forensic Data Extraction: "Grandfathered" Status Definition
+SUBJECT: KSERVER-5000 (3U Server) LEGAL CONTEXT: DVD Copy Control Association v. Kaleidescape, Inc.
+CORE DEFINITION: A "Grandfathered" KSERVER-5000 is a unit sold and activated prior to November 30, 2014. This status grants the hardware specific legal and functional privileges regarding the importation of CSS-protected DVDs that were stripped from later units due to the settlement agreement between Kaleidescape and the DVD Copy Control Association (DVD CCA).
+THE FUNCTIONAL DIVIDE:
+• Grandfathered (Pre-Nov 30, 2014):
+    ◦ Import Rights: Can legally decrypt and copy CSS-protected DVDs bit-for-bit to the server's hard drive array.
+    ◦ Playback Rights: Can play these imported DVDs without the physical disc present in a player or vault. The digital copy on the server is sufficient for playback.
+    ◦ Value: These units command a premium on the secondary market (2,000–3,800+) because they offer a "disc-free" experience for legacy DVD collections that modern hardware cannot legally replicate.
+• Non-Grandfathered (Post-Nov 30, 2014):
+    ◦ Import Restrictions: Cannot import CSS-protected DVDs. The system will "Catalog" them instead.
+    ◦ Playback Restrictions: To play a cataloged DVD, the physical disc must be present in the optical tray of a player or a Disc Vault at the time of playback to verify ownership.
+    ◦ Architecture: Requires the addition of high-capacity robotic Disc Vaults (like the DV700) to achieve a similar "jukebox" experience, increasing the physical footprint and mechanical complexity of the system.
+VERIFICATION: The status follows the server chassis serial number, not the disk cartridges. To confirm status, the serial number must be cross-referenced with Kaleidescape Support or checked against the manufacturing date relative to the injunction effective date.
+What are the specific RAM part requirements for a replacement?
+How do I upgrade to the maximum storage capacity?
+How can I verify if my unit is grandfathered?
+What are the ventilation requirements for a rack-mounted server?
+
+Forensic Data Extraction: Thermal & Ventilation Specifications
+SUBJECT: KSERVER-5000 (3U Server) / Premiere Line CRITICALITY: High (Thermal Saturation Risk)
+THERMAL MANDATE: The KSERVER-5000 is an industrial component operating at the limit of residential thermal tolerances. Unlike player units which tolerate up to 95°F (35°C), the 3U Server requires a ruthless 86°F (30°C) maximum intake temperature to preserve the 14-drive array.
+AIRFLOW GEOMETRY: The chassis utilizes a forced-convection architecture, pulling cool air from the front and exhausting waste heat through the rear.
+• Flow Rate: 40 CFM (68 m³/hr) minimum.
+• Heat Output: Up to 921 BTU/hr (270W) depending on drive population (older 1TB drives generated more heat than modern 6TB cartridges).
+SPATIAL HARD LIMITS (The "Kill Zone"): Violation of these spatial boundaries results in immediate recirculation of waste heat and array destabilization.
+• Front Intake: 1.0 inch (2.5 cm) minimum clearance.
+    ◦ Warning: Rack doors must not intrude on this volume. If the rack has a solid door, the server will suffocate.
+• Rear Exhaust: 2.0 inches (5.0 cm) minimum clearance.
+    ◦ Warning: Cabling bundles must not obstruct the rear exhaust ports.
+• Sides: 1.0 inch (2.5 cm) clearance recommended for general rack ambient management.
+FORENSIC NOTE: The 3U Server's front panel opens outward and downward. Any rack design that does not account for this mechanical articulation will prevent drive serviceability and intake cleaning, leading to eventual thermal failure due to dust occlusion.
+How does RAID-K protect data if a drive fails?
+How does the Co-Star switch bridge legacy and modern systems?
+What are the common signs of a power supply failure?
+How did the 2014 settlement change DVD playback rights?
+
+Forensic Data Extraction: Legal Intervention & Playback Rights
+SUBJECT: KSERVER-5000 / Premiere Line Architecture EVENT: DVD Copy Control Association v. Kaleidescape, Inc. Settlement EFFECTIVE DATE: November 30, 2014
+The 2014 settlement introduced a hard "regulatory fork" in the Kaleidescape ecosystem, permanently altering the functional definition of the hardware based on its activation date.
+I. THE LEGAL SINGULARITY (November 30, 2014)
+The settlement agreement enforced a permanent injunction against Kaleidescape, ruling that the company's "Import" feature for CSS-protected DVDs violated the "General Specifications" of the CSS license—specifically the requirement that a physical disc be present at the time of playback.
+This created two distinct classes of hardware:
+1. The "Grandfathered" Class (Pre-11/30/14)
+Status: Unrestricted.
+• Rights: Systems sold and activated prior to the cutoff retained the ability to decrypt and copy CSS-protected DVDs bit-for-bit to the server array.
+• Playback Behavior: "Disc-Free." Once imported, the physical DVD is ejected and stored offline (e.g., in a box or attic). The server plays the digital file directly from the RAID-K array without verifying physical disc presence.
+• Market Impact: These units became finite "Golden Ticket" assets, as they are the only legally sanctioned devices capable of this functionality.
+2. The Restricted Class (Post-11/30/14)
+Status: Restricted ("Catalog Only").
+• Rights: Systems activated after the cutoff are legally blocked from bypassing CSS encryption for storage purposes. They cannot "Import" commercial DVDs.
+• Playback Behavior: "Disc-Required." The system can only "Catalog" the title—downloading metadata, cover art, and bookmarks. To play the movie, the physical disc must be inserted into a player tray or a robotic Disc Vault (DV700/M700) at the time of viewing to satisfy the CSS authentication check.
+• The Workaround: This restriction forced the engineering of high-capacity robotic vaults (M700/DV700) to automate the "physical presence" requirement, simulating the server experience by mechanically managing hundreds of discs.
+II. EXCEPTION PROTOCOLS
+• Blu-ray Discs: The settlement did not alter Blu-ray playback. Due to separate AACS licensing, Blu-ray playback has always required the physical disc to be present (in a tray or vault) for playback, regardless of the server's age.
+• Home Content: Unprotected DVDs (e.g., home movies) remain unaffected and can still be imported and played without the disc on all systems.

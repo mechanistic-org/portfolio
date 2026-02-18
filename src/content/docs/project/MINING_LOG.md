@@ -58,6 +58,9 @@ These vectors are explicitly mined using `deep_research_prompt_v1.txt`:
 | **Elvis**         | `extension-switches`        |   🟢   |         | **Ready State.** |
 | **Room Director** | `room-director`             |   🟢   |         | **Ready State.** |
 | **Waldo**         | `wall-plates`               |   🟢   |         | **Ready State.** |
+| **KServer-5000**  | `kserver-5000`              |   🟢   |         | **Ready State.** |
+| **KServer-1500**  | `kserver-1500`              |   🟢   |         | **Ready State.** |
+| **Motorola MP3**  | `motorola-mp3`              |   🟢   |         | **Ready State.** |
 | **Cortez**        | `webtv-cortez`              |   🟢   |   🔊    | **Ready State.** |
 | **Elmer**         | `webtv-elmer`               |   🟢   |         | **Ready State.** |
 | **Galaxy**        | `webtv-galaxy`              |   🟢   |   🔊    | **Ready State.** |
@@ -159,3 +162,48 @@ These vectors are explicitly mined using `deep_research_prompt_v1.txt`:
   - **Audio 1 (Ready State):** Added column to track existing "Voice of God" transcripts.
   - **Audio 2 (Deep Dive):** Added column for future "REV 2" bulk transcription.
 - **[STATUS] Motorola MP3:** **READY STATE**.
+
+## 📝 Session Log: 2026-02-17 (KServer-1500 Hunter Refinement)
+
+**Objective:** Refine `kserver-1500` (Hunter) from raw notebook dump.
+
+- **[TECH] Hunter Forensic Injection:**
+  - **Source:** `notebook_dumps/kserver-1500.txt`.
+  - **Narrative:** Injected Sections I-V (Forensic Report).
+  - **Metadata:** Updated Date (2014), Title ("Hunter"), and Mode (`deep_dive`).
+  - **Entropy:** Created `_entropy.json` with 35 forensic events.
+- **[TECH] Schema & Layout Fixes:**
+  - **Frontmatter:** Fixed "MISSING TITLE" bug by quoting title string (YAML parsing error).
+  - **Schema:** Corrected `scars` object structure and quoted `complexity_vector` strings.
+- **[STATUS] KServer-1500:** **READY STATE**.
+
+## 📝 Session Log: 2026-02-17 (KServer-5000 Refinement)
+
+**Objective:** Refine `kserver-5000` from raw notebook dump to Deep Dive status.
+
+- **[TECH] Refinement:**
+  - **Hydration:** Injected Forensic Report and Complexity Vector via `hydrate_content.py` (Force Mode).
+  - **Entropy:** Populated `_entropy.json` with 30+ forensic events.
+  - **Frontmatter:** Upgraded to `deep_dive` mode, `tier: 1`, `series` production scale.
+- **[STATUS] KServer-5000:** **READY STATE**.
+
+## 📝 Session Log: 2026-02-17 (Schedule Forensics)
+
+**Objective:** Convert legacy MPP schedules to Forensic Timeline format for NotebookLM.
+
+- **[TECH] MPP Conversion:**
+  - **Tool:** Created `scripts/convert_mpp.py` using `mpxj` and OpenJDK 17.
+  - **Result:** Converted 11 `.mpp` files to Excel.
+  - **Optimization:** Created `scripts/format_schedules_nlm.py` to generate `nlm_optimized_schedules.txt`.
+- **[ASSET] Forensic Timelines:**
+  - `schedules/nlm_avegant.txt`
+  - `schedules/nlm_digidesign.txt`
+  - `schedules/nlm_kaleidescape.txt`
+- **[ANALYSIS] Slippage Report:**
+  - **Target:** "Curtis" Project (Digidesign).
+  - **Finding:** Analyzed 49 snapshots. "Project Finish" drifted (~3 months) over 1 year.
+  - **Output:** `schedules/curtis_slippage_report.csv`.
+- **[ANALYSIS] Task Volatility:**
+  - **Target:** "Curtis" (Digidesign) Task Revision History.
+  - **Finding:** "Marketing approval" changed 87 times. Top volatile tasks identified.
+  - **Output:** `schedules/curtis_task_volatility.csv`.
