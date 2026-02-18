@@ -875,6 +875,11 @@ def hydrate_content(dry_run=False, force=False, target_slug=None, priority="sour
                  del post.metadata["timeline"]
                  changes.append(f"  - Cleaned up legacy 'timeline' ({reason})")
         
+        # CLEANUP: Remove Banned 'forensic_data' (Use 'forensic_metrics' or 'forensic_summary')
+        if "forensic_data" in post.metadata:
+             del post.metadata["forensic_data"]
+             changes.append("  - Cleaned up banned 'forensic_data' (Schema Law)")
+        
         if "reports" in data:
             reports = data["reports"]
             if post.metadata.get("reports") != reports:
