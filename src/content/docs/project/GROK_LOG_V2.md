@@ -209,7 +209,7 @@ sidebar:
 
 ## 🔒 XVIII. The Law of Source Safety (Anti-Regression)
 
-**Context:** Repeated build failures occurred because manual syntax fixes in `index.mdx` (e.g., escaping `<0.5mm`) were overwritten by `hydrate_content.py` pulling from the raw `notebook_dumps/`.
+**Context:** Repeated build failures occurred because manual syntax fixes in `index.mdx` (e.g., escaping `&lt;0.5mm`) were overwritten by `hydrate_content.py` pulling from the raw `notebook_dumps/`.
 
 1.  **FIX UPSTREAM:** If a bug recurs after Hydration, the flaw is in the **Source** (`notebook_dumps/*.txt`), not the **Destination** (`index.mdx`). You MUST fix the dump file.
 2.  **ESCAPE AT SOURCE:** Special characters that break MDX (like `<` before a number) must be escaped (`\<`) in the raw text dump.

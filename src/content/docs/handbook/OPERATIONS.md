@@ -134,7 +134,7 @@ These scripts drive the "Forensic Data Factory."
 - **Cause:** The Script is the Source of Truth. If the bug exists in `notebook_dumps/c24.txt`, it will overwrite your manual fix in `index.mdx`.
 - **Fix (Law XVIII):**
   1.  **Grep the Source:** `grep "<" notebook_dumps/c24.txt`
-  2.  **Escape Upstream:** Change `<0.5mm` to `\<0.5mm` in the `.txt` file.
+  2.  **Escape Upstream:** Change `&lt;0.5mm` to `\<0.5mm` in the `.txt` file.
   3.  **Re-Hydrate:** Run the script to propagate the fix safely.
 
 ### 🔴 "Hook Violation" White Screen

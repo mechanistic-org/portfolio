@@ -81,7 +81,7 @@ total_entries: 122
 **Key Metrics:**
 - **Financial:** Eliminated ~$200/unit Focusrite Royalty; 51.80% Gross Margin [1, 2]
 - **Governance:** Weekly Pulse / War Room coordination [5]
-- **Process:** Headphone MTTR reduced from 2hrs to <10min [3]; Side Cap flatness deviation <0.50mm [4]
+- **Process:** Headphone MTTR reduced from 2hrs to &lt;10min [3]; Side Cap flatness deviation &lt;0.50mm [4]
 
 ---
 
@@ -246,7 +246,7 @@ total_entries: 122
 ### Cortez (`webtv-cortez`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Vendor analysis (Silitek/Panasonic) revealed the ID intent was mechanically impossible—specifically, the rubber pad was 'too close to the edge' for PCB sealing and the key matrix pitch (19.05mm) clashed with the 2D layout. The initial hard model failed ergonomic validation (not level, too heavy). INTERVENTION: Norris (as Lincicum) executed a high-intensity 'Surgical CAD' sprint (100+ hours in <2 weeks) to re-loft the top surfaces, enforce a 7-11 degree IR tilt, and modify grip curvature while constraining internal geometry to standard low-cost key matrices. RESULT: Delivered a manufacturable database that reconciled the 'Airboard' form factor with standard membrane switches, securing executive approval for the new model despite 'beating on extra CAD hours'.
+> **Forensic Summary:** TRIGGER: Vendor analysis (Silitek/Panasonic) revealed the ID intent was mechanically impossible—specifically, the rubber pad was 'too close to the edge' for PCB sealing and the key matrix pitch (19.05mm) clashed with the 2D layout. The initial hard model failed ergonomic validation (not level, too heavy). INTERVENTION: Norris (as Lincicum) executed a high-intensity 'Surgical CAD' sprint (100+ hours in &lt;2 weeks) to re-loft the top surfaces, enforce a 7-11 degree IR tilt, and modify grip curvature while constraining internal geometry to standard low-cost key matrices. RESULT: Delivered a manufacturable database that reconciled the 'Airboard' form factor with standard membrane switches, securing executive approval for the new model despite 'beating on extra CAD hours'.
 
 **Key Metrics:**
 - **Financial:** Billed $24,900 in June 2000 for accelerated surface development rescue [1, 2]
@@ -270,7 +270,7 @@ total_entries: 122
 ### WebTV Galaxy (`webtv-galaxy`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Integration of desktop-class AMD K7 architecture (150W TDP) into a consumer set-top box form factor. INTERVENTION: Engineered a 300mm chassis extension with a directed airflow tunnel (28.3 CFM) and modular 'CPU Puck' sub-assembly. RESULT: Stabilized CPU junction temperature at 84.0°C and Smart Card ambient <55.0°C; assets pivoted to Xbox division upon program cancellation.
+> **Forensic Summary:** TRIGGER: Integration of desktop-class AMD K7 architecture (150W TDP) into a consumer set-top box form factor. INTERVENTION: Engineered a 300mm chassis extension with a directed airflow tunnel (28.3 CFM) and modular 'CPU Puck' sub-assembly. RESULT: Stabilized CPU junction temperature at 84.0°C and Smart Card ambient &lt;55.0°C; assets pivoted to Xbox division upon program cancellation.
 
 **Key Metrics:**
 - **Financial:** Managed $14k/mo burn rate on solo-consultant engineering services; mitigated cost of custom 4-day quick-turn fabrication cycles

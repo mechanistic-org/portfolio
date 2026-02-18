@@ -416,10 +416,10 @@ I. THE FAILURE MODE: STALLED ACTUATORS In a high-density automation environment 
 1. Thermal Runaway: The wiring harnesses melt or the motor windings burn out.
 2. System Latch-Off: Standard breakers trip and require manual physical intervention to reset, halting the Makeline.
 II. THE INTERVENTION: HICCUPPLUS™ LOGIC The system power supplies (PULS CP10/CP20 series) utilize a proprietary "HiccupPLUS" mode to manage these heavy overloads without shutting down permanently or destroying hardware.
-• The Trigger (<13V): The protocol activates only when the output voltage dips below 13Vdc (indicating a hard short or heavy overload, such as a stalled motor),,.
+• The Trigger (&lt;13V): The protocol activates only when the output voltage dips below 13Vdc (indicating a hard short or heavy overload, such as a stalled motor),,.
 • The Duty Cycle (2s / 18s): Unlike a standard fuse, the PSU enters a deterministic oscillation:
 1. Surge Phase (2 Seconds): The unit delivers continuous peak current (up to 3x nominal) for 2 seconds. This allows high-inrush loads (like starting a heavy motor) to overcome inertia without tripping,,.
-2. Cool-Down Phase (18 Seconds): If the voltage remains low (fault persists), the output switches OFF for approximately 18 seconds. This drastically reduces the RMS (Average) Current to safe levels (e.g., <5A), preventing the cables from heating up to melting point,,.
+2. Cool-Down Phase (18 Seconds): If the voltage remains low (fault persists), the output switches OFF for approximately 18 seconds. This drastically reduces the RMS (Average) Current to safe levels (e.g., &lt;5A), preventing the cables from heating up to melting point,,.
 3. Auto-Restart: After the 18-second cool-down, the system automatically attempts to restart. This cycle repeats indefinitely until the jam is cleared.
 III. OPERATIONAL ADVANTAGE
 • Self-Healing: Once the jam is cleared (e.g., via the "de-agglomeration" routine), the power supply automatically resumes normal 24V output on the next cycle. No manual fuse replacement or breaker reset is required,.

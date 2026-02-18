@@ -1,0 +1,7 @@
+[31m[1m11:23:43[22m [ERROR] [vite][39m [31m✗[39m Build failed in 707ms
+[@mdx-js/rollup] Unexpected character `4` (U+0034) before name, expected a character that can start a name, such as a letter, `$`, or `_`
+file: D:/GitHub/eriknorris/src/content/projects/backsplash/index.mdx:339:108
+  [1mLocation:[22m
+    [4mD:/GitHub/eriknorris/src/content/projects/backsplash/index.mdx:339:108[24m
+  [1mStack trace:[22m
+[2m    at Object.transform (file:///D:/GitHub/eriknorris/node_modules/@astrojs/mdx/dist/vite-plugin-mdx.js:62:15)[22m

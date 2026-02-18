@@ -241,12 +241,12 @@ slug: "grok_log"
 
 **Status:** ENFORCED
 **Date:** 2026-01-28
-**Context:** Pipeline was skipping `xl` breakpoints (1920px) because source images were too small (<800px).
+**Context:** Pipeline was skipping `xl` breakpoints (1920px) because source images were too small (&lt;800px).
 **The Law:**
 
 1.  **FEED THE BEAST:** Input images to `R2_MASTER` MUST exceed the largest breakpoint (1920px).
 2.  **THE GOLDEN TARGET:** **2500px** (Width/Height) is the standard export size. This allows a clean Lanczos downsample to 1920px/1280px.
-3.  **LEGACY UPSCALING:** Archive assets (<1000px) MUST be passed through "Super Resolution" or "Upscayl" to reach ~2500px before ingest.
+3.  **LEGACY UPSCALING:** Archive assets (&lt;1000px) MUST be passed through "Super Resolution" or "Upscayl" to reach ~2500px before ingest.
 
 ---
 

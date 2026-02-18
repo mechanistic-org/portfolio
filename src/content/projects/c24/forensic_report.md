@@ -44,7 +44,7 @@
 - **The Trigger:** During the Pilot build, the large ABS "Side Cap" parts (9440-55165/166) arrived with severe bowing (>2.50mm deviation) and twist, failing to mate with the sheet metal chassis.
 - **The Tension:** The defect was caused by the high heat required to cure the "Rubberized Soft Paint" (Spectral Master DS-022). The vendor's standard flat-rack curing method caused the plastic to sag and lock into a warped shape, threatening to scrap the entire cosmetic yield for launch.
 - **The Intervention:** I rejected the vendor's (Jetcrown) attempt to use simple support blocks ("Method B"). I engineered and approved "Method A," a **Vertical Hanging Fixture** protocol. By hanging the parts vertically during the bake cycle, we used gravity to pull the parts straight during the cure, rather than allowing them to sag.
-- **The Result:** Reduced flatness deviation to acceptable limits (<0.5mm), allowing the parts to fit the chassis and saving the Pilot schedule. This process was formalized in ECO 12740.
+- **The Result:** Reduced flatness deviation to acceptable limits (&lt;0.5mm), allowing the parts to fit the chassis and saving the Pilot schedule. This process was formalized in ECO 12740.
 
 ### 2. The "No-Bid" Sheet Metal Crisis
 
@@ -69,7 +69,7 @@
 
 ## IV. LINKEDIN ARTIFACTS
 
-- **Engineered** a custom "Vertical Hanging Fixture" manufacturing process to resolve critical thermal warping in painted ABS components, reducing flatness deviation from >2.50mm to <0.50mm and saving the Pilot build schedule.
+- **Engineered** a custom "Vertical Hanging Fixture" manufacturing process to resolve critical thermal warping in painted ABS components, reducing flatness deviation from >2.50mm to &lt;0.50mm and saving the Pilot build schedule.
 - **Led** the mechanical architecture and integration of 19 distinct PCBs into a low-profile chassis, enforcing a Data Control Drawing (DCD) protocol that achieved 100% mechanical fit on the first physical build.
 - **Managed** a complex global supply chain transition, dual-sourcing sheet metal fabrication between Silicon Valley and China to bridge a "no-bid" production gap, protecting the November 2007 launch date.
 - **Negotiated** DFM improvements with overseas vendors that reduced sheet metal tooling costs while maintaining Class A cosmetic standards.

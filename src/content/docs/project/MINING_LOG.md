@@ -111,7 +111,7 @@ These vectors are explicitly mined using `deep_research_prompt_v1.txt`:
 - **[TECH] Velocity Impl:** Updated `ForensicSeismograph.tsx` to visualize time deltas.
 - **[TECH] Hydration Upgrade:** `hydrate_content.py` now calculates `time_delta`.
 - **[CRITICAL] Source Safety:** Discovered that `hydrate_content.py` overwrites manual MDX fixes.
-  - **Action:** Fixed C24 MDX errors (`<0.50mm`) in `notebook_dumps/c24.txt`.
+  - **Action:** Fixed C24 MDX errors (`&lt;0.50mm`) in `notebook_dumps/c24.txt`.
   - **Law XVIII:** Codified "Law of Source Safety" in `GROK_LOG_V2.md`.
 - **[META] Calibration:** User enforced "Zero Tolerance for Guessing."
 - **[STATUS] C24:** **STABLE**. MDX parsing errors fixed.

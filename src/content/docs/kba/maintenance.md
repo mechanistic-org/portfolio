@@ -124,12 +124,12 @@ These scripts are the engine of the "Forensic Data Factory."
 ### MDX Errors (Astro Content Layer)
 
 - **Symptom:** `MDXError: Unexpected character 0` (or 1-9) preventing dev server startup.
-- **Cause:** The MDX parser interprets unquoted keys starting with numbers (e.g., `01_intro:`) as octal or invalid identifiers. It also flags `<` symbols followed by numbers in body text (e.g., `<0.5mm`) as invalid JSX tags.
+- **Cause:** The MDX parser interprets unquoted keys starting with numbers (e.g., `01_intro:`) as octal or invalid identifiers. It also flags `<` symbols followed by numbers in body text (e.g., `&lt;0.5mm`) as invalid JSX tags.
 - **Fix:**
   1.  **Frontmatter:** Quote ALL keys/values starting with a number: `01_intro` -> `"01_intro"`.
-  2.  **Body Text:** Escape `<` if followed by a number or currency: `<0.5mm` -> `&lt;0.5mm`.
+  2.  **Body Text:** Escape `<` if followed by a number or currency: `&lt;0.5mm` -> `&lt;0.5mm`.
       - **Trap:** `<$15k` (interpreted as tag). FIX: `&lt;$15k` or `less than $15k`.
-      - **Trap:** `<40%` (interpreted as tag). FIX: `less than 40%`.
+      - **Trap:** `&lt;40%` (interpreted as tag). FIX: `less than 40%`.
 
 ### The Timeline Trap (Infinite Bubble)
 
@@ -252,7 +252,7 @@ These scripts are the engine of the "Forensic Data Factory."
   - _Do not use Bezier curves for the target shape if the source is polygonal._
 
 - **Symptom:** Active EQ Visualization looks like a "Techno Strobe" or glitchy.
-- **Cause:** Animation cadence is too fast (<0.4s) or uses `linear` easing.
+- **Cause:** Animation cadence is too fast (&lt;0.4s) or uses `linear` easing.
 - **Fix:** Tune to **Iambic Pentameter**.
   - **Duration:** 0.6s - 1.0s.
   - **Ease:** `easeInOut`.

@@ -1,0 +1,39 @@
+
+> eriknorris@5.0.0 prebuild
+> npm run audit:frontmatter
+
+
+> eriknorris@5.0.0 audit:frontmatter
+> node scripts/audit_frontmatter.cjs
+
+🛡️  Shield 2: Auditing Frontmatter for Stability...
+✅ Frontmatter Integrity: 100%
+
+> eriknorris@5.0.0 build
+> node scripts/ci-prebuild.js && astro build
+
+-------------------------------------------------------
+🔧 Pre-Build Environment Check
+-------------------------------------------------------
+💻 Environment: Local Development
+🛡️  Preserving asset symlinks for local preview.
+-------------------------------------------------------
+[2m11:20:26[22m [34m[@astrojs/cloudflare][39m Enabling sessions with Cloudflare KV with the "SESSION" KV binding.
+[2m11:20:26[22m [34m[@astrojs/cloudflare][39m If you see the error "Invalid binding `SESSION`" in your build output, you need to add the binding to your wrangler config file.
+[2m11:20:26[22m [34m[content][39m Syncing content
+[2m11:20:26[22m [34m[content][39m Synced content
+[2m11:20:26[22m [34m[types][39m Generated [2m517ms[22m
+[2m11:20:26[22m [34m[build][39m output: [34m"server"[39m
+[2m11:20:26[22m [34m[build][39m mode: [34m"server"[39m
+[2m11:20:26[22m [34m[build][39m directory: [34mD:\GitHub\eriknorris\dist\[39m
+[2m11:20:26[22m [34m[build][39m adapter: [32m@astrojs/cloudflare[39m
+[2m11:20:26[22m [34m[build][39m Collecting build info...
+[2m11:20:26[22m [34m[build][39m [32m✓ Completed in 556ms.[39m
+[2m11:20:26[22m [34m[build][39m Building server entrypoints...
+[31m[1m11:20:27[22m [ERROR] [vite][39m [31m✗[39m Build failed in 1.05s
+[@mdx-js/rollup] Unexpected character `3` (U+0033) before name, expected a character that can start a name, such as a letter, `$`, or `_`
+file: D:/GitHub/eriknorris/src/content/projects/avegant-glyph/index.mdx:824:221
+  [1mLocation:[22m
+    [4mD:/GitHub/eriknorris/src/content/projects/avegant-glyph/index.mdx:824:221[24m
+  [1mStack trace:[22m
+[2m    at Object.transform (file:///D:/GitHub/eriknorris/node_modules/@astrojs/mdx/dist/vite-plugin-mdx.js:62:15)[22m

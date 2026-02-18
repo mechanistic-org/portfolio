@@ -49,7 +49,7 @@ sidebar:
 
 - **[2026-01-11] Debugging & Stabilization (The Numeric Trap)**
   - **[Fix] MDX Crash:** Resolved persistent `MDXError: Unexpected character 0` by enforcing "The Numeric ID Law" (Quoting all zero-prefixed keys in `c24`, `sc48`, `d-control`).
-  - **[Fix] Content Body:** Identified and escaped invalid JSX tags (`<0.5mm`) in legacy content that were masquerading as parser errors.
+  - **[Fix] Content Body:** Identified and escaped invalid JSX tags (`&lt;0.5mm`) in legacy content that were masquerading as parser errors.
   - **[Asset] SC48 Restoration:** Restored missing `SC48-hero-01.png` from `R2_MASTER` using `process_images.py` to generate optimized WebP variants.
   - **[Tooling] IDE Repair:** Diagnosed "Stream Error" in Commit Generator as a Google Cloud API Permission/Quota issue (404 on Model), not a code regression.
   - **[Fix] Branding:** Restored correct `EN_logo_1200` assets (Black/White variants) to `public/assets/branding/`. Resolved "Rusty" color issue and broken image links.

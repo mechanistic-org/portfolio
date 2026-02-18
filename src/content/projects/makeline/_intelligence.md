@@ -58,7 +58,7 @@ Design must align with the "15-Minute" breakdown cadence.
 • Clearance: Floor-mounted units require 6.0 inches (150 mm) of unobstructed clearance beneath the unit to permit cleaning of the facility floor, or they must be sealed completely to the substrate.
 IV. THERMAL & PERFORMANCE METRICS (NSF 4 & 7)
 Thermodynamic failure results in immediate pathogen proliferation.
-• The Cold Chain (NSF 7): Refrigerated storage must maintain internal product temperatures (typically <40°F) even under high-ambient stress. The Makeline utilizes self-evaporating condensate systems to eliminate floor drains.
+• The Cold Chain (NSF 7): Refrigerated storage must maintain internal product temperatures (typically &lt;40°F) even under high-ambient stress. The Makeline utilizes self-evaporating condensate systems to eliminate floor drains.
 • The Heat Hold (NSF 4): Hot holding units must sustain product temperatures >140°F. Validation requires thermal mapping using thermocouples embedded in test media.
 • Data Integrity: Modern compliance (Special Purpose - NSF 169) increasingly favors automated logging of temperature and holding times to generate a tamper-proof audit trail.
 V. VISUAL EVIDENCE (Compliance Artifacts)
@@ -289,11 +289,11 @@ How the system manages thermodynamic waste (water) without a physical drain.
 • Impact: This eliminates the specific requirement for floor drains, allowing the unit to be installed in "dry" zones of the kitchen or moved without construction permits.
 III. REFRIGERATION TOPOLOGY (R290 Standard)
 • Chemical Substrate: The cold cabinets utilize R290 (Propane) refrigerant.
-• Thermal Envelope: The system maintains internal product temperatures below the HACCP threshold (typically <41°F) while operating in high-ambient kitchen environments.
+• Thermal Envelope: The system maintains internal product temperatures below the HACCP threshold (typically &lt;41°F) while operating in high-ambient kitchen environments.
 • Front-Breathing Lungs: The HVAC architecture is "front-breathing". Intake and exhaust airflow are routed through the front toe-kick or grille. This allows the unit to be pushed flush against rear walls or existing equipment without overheating, maximizing floor plan density in cramped urban kitchens.
 IV. THERMAL VERIFICATION (The Digital Paper Trail)
 Regulatory compliance is enforced via software, not just insulation.
-• Sensor Grid: The system employs nonstop time and temperature monitoring of all cabinets (Hot: 125°F–180°F; Cold: <41°F).
+• Sensor Grid: The system employs nonstop time and temperature monitoring of all cabinets (Hot: 125°F–180°F; Cold: &lt;41°F).
 • Automated Logging: The C6030 IPC logs thermal data to the cloud (AWS IoT Core), creating a tamper-proof audit trail for health inspectors. This replaces manual "clipboard checks" and ensures continuous HACCP compliance without human intervention.
 V. VISUAL EVIDENCE
 • Spec Sheet Data: "Hyphen doesn’t require plumbing, drains, vents, or hoods — simply plug it in and start serving on day one."
@@ -405,7 +405,7 @@ I. HOT DISPENSE ZONE (Active Heating)
 • Mandate: HACCP compliance for holding potentially hazardous foods (braised meats, beans, rice) out of the "Danger Zone."
 • Mechanism: Thermal insulation paired with resistive heating elements managed by the central C6030 IPC via EtherCAT. The system performs nonstop time and temperature monitoring to generate a tamper-proof audit trail.
 II. COLD DISPENSE ZONE (Active Refrigeration)
-• Target Range: Engineered to maintain internal product temperatures below the HACCP threshold (typically <41°F / 5°C) in high-ambient kitchen environments, consistent with NSF 7 standards for commercial refrigeration.
+• Target Range: Engineered to maintain internal product temperatures below the HACCP threshold (typically &lt;41°F / 5°C) in high-ambient kitchen environments, consistent with NSF 7 standards for commercial refrigeration.
 • Infrastructure:
 ◦ Refrigerant: Utilizes R290 (Propane), an environmentally compliant hydrocarbon refrigerant.
 ◦ Condensate Management: Features self-evaporating condensate systems. Moisture is collected and evaporated using waste heat, eliminating the requirement for facility floor drains and plumbing connections.

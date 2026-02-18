@@ -114,7 +114,7 @@ Longitudinal data identified the headphone jack as a high-frequency failure poin
 - **The Fight:** Marketing (Matt Cho/David Gibbons) rejected the initial redesign for aesthetic reasons ("ergonomic perspective, it doesn’t work").
 - **The Fix:** I overruled the aesthetic objection and executed **ECO 12993** ("MODIFY HEADPHONE JACK MOUNTING FEATURE").
 - **The Mechanism:** I redesigned the **Headphone Bracket (9420-55126-00)** and **Front Bolster (9440-55167-00)** to create a recessed "trap door." This allowed the jack to be serviced from the bottom-front by removing a single nut, bypassing the fader bank entirely.
-- **The Result:** Converted a 2-hour "Return-to-Factory" liability into a **<10 minute** Field Replaceable Unit (FRU).
+- **The Result:** Converted a 2-hour "Return-to-Factory" liability into a **&lt;10 minute** Field Replaceable Unit (FRU).
 
 ## II. THE "TOY-LIKE" AESTHETIC & GAPS (Thermal/Fitment)
 
@@ -126,7 +126,7 @@ Users described the C|24 build quality as "cheesy" or "toy-like" compared to the
 - **The Trigger:** During Pilot, the **"Banana Defect"** emerged. ABS Side Caps (9440-55165/166) arrived with **2.50mm of warpage** and **2.27mm of linear shrinkage**.
 - **The Root Cause:** The "Rubberized Soft Paint" (Spectral Master DS-022) required a high-heat cure. The vendor (Jetcrown) baked parts flat ("Method C"), causing them to sag and lock into a warped shape.
 - **The Fix:** I engineered **"Method A"** (Vertical Hanging Fixture) and codified it in **ECO 12740**. This utilized gravity to keep the parts straight during the glass-transition phase.
-- **The Result:** Reduced flatness deviation to **<0.50mm**, allowing the plastics to mate with the steel chassis. The "toy-like" gaps were the scars of this thermal battle.
+- **The Result:** Reduced flatness deviation to **&lt;0.50mm**, allowing the plastics to mate with the steel chassis. The "toy-like" gaps were the scars of this thermal battle.
 
 ## III. THE "DIRTY" POWER SUPPLY (EMI/Thermal)
 

@@ -139,7 +139,7 @@ IV. MATERIAL HEURISTICS (NSF 51)
 V. VALIDATION METRICS (The "Proof")
 • Visual Inspection: "Accessible" means an inspector can physically see and touch the surface. "Readily Accessible" means it can be reached without tools.
 • The Soil Test: Manufacturers must prove that cleaning procedures (manual or CIP) effectively remove physical soil (e.g., using a tracer or visual check).
-• Temperature Recovery: For refrigeration (NSF 7), the unit must prove it can maintain safe temperatures (<41°F) even after the "open door" cleaning and loading cycles.
+• Temperature Recovery: For refrigeration (NSF 7), the unit must prove it can maintain safe temperatures (&lt;41°F) even after the "open door" cleaning and loading cycles.
 VI. REFERENCE ARTIFACTS
 • NSF/ANSI 169: Special Purpose Food Equipment.
 • NSF/ANSI 18: Manual Food and Beverage Dispensing Equipment.
