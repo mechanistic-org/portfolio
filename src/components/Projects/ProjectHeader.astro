@@ -71,9 +71,24 @@ const data = entry.data as any; // Cast to any to resolve schema type lag
 				<a
 					href={`/raw/${entry.id}`}
 					class="flex h-8 items-center justify-center rounded border border-white/10 bg-black px-3 font-mono text-[10px] text-[#2E5CFF] transition-colors hover:bg-[#2E5CFF]/10"
+					title="View Source Code"
 				>
-					RAW SOURCE
+					CODE
 				</a>
+
+				{
+					data.nlm_url && (
+						<a
+							href={data.nlm_url}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="flex h-8 items-center justify-center rounded border border-white/10 bg-[#2E5CFF]/10 px-3 font-mono text-[10px] text-[#2E5CFF] transition-colors hover:bg-[#2E5CFF] hover:text-white"
+							title="View Forensic Source (NotebookLM)"
+						>
+							SOURCE
+						</a>
+					)
+				}
 			</div>
 		</div>
 

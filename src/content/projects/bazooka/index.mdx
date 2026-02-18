@@ -1,220 +1,220 @@
 ---
 audio_url: /assets/bazooka/bazooka-briefing.m4a
 bom:
-  - label: Housing, Front, Bazooka
-    value: PC - SABIC LEXAN 940 (Black) [9]
-  - label: Mylar, Red, Bazooka
-    value: 041-00009 [10]
-  - label: Grey Ink Overlay
-    value: Ink on Black Lexan 8B35 Film [11]
-  - label: Housing, Grey 1
-    value: Tampo on ADC12 Aluminum [12]
+- label: Housing, Front, Bazooka
+  value: PC - SABIC LEXAN 940 (Black) [9]
+- label: Mylar, Red, Bazooka
+  value: 041-00009 [10]
+- label: Grey Ink Overlay
+  value: Ink on Black Lexan 8B35 Film [11]
+- label: Housing, Grey 1
+  value: Tampo on ADC12 Aluminum [12]
 cast:
-  - name: Erik Norris
-    org: The Noon Company [9]
-    role: The Architect / Lead Mechanical
-  - name: Sunny Yuan
-    org: FIH [13]
-    role: Verification Engineer
-  - name: Kelvin
-    org: FIH [14]
-    role: DVT Monitor
-  - name: Nick
-    org: Locoroll [15]
-    role: Mechanical Engineer
+- name: Erik Norris
+  org: The Noon Company [9]
+  role: The Architect / Lead Mechanical
+- name: Sunny Yuan
+  org: FIH [13]
+  role: Verification Engineer
+- name: Kelvin
+  org: FIH [14]
+  role: DVT Monitor
+- name: Nick
+  org: Locoroll [15]
+  role: Mechanical Engineer
 category: consumer_electronics
 complexity_vector:
   part_count_growth:
-    - count: 35
-      date: 2016-09
-      phase: Concept (P1)
-    - count: 188
-      date: 2016-11
-      phase: EVT (EVT1)
-    - count: 570
-      date: 2017-01
-      phase: EVT2
-    - count: 921
-      date: 2017-04
-      phase: DVT (Design Validation)
-    - count: 2000
-      date: 2017-06
-      phase: PVT (Prod Validation)
+  - count: 35
+    date: 2016-09
+    phase: Concept (P1)
+  - count: 188
+    date: 2016-11
+    phase: EVT (EVT1)
+  - count: 570
+    date: 2017-01
+    phase: EVT2
+  - count: 921
+    date: 2017-04
+    phase: DVT (Design Validation)
+  - count: 2000
+    date: 2017-06
+    phase: PVT (Prod Validation)
   process_density:
-    - complexity_score: 8
-      material: ADC12 Aluminum Alloy
-      part_name: "Front Housing "
-      steps:
-        - Die Casting
-        - CNC Machining
-        - Anodize (Satin)
-        - Laser Etch (Markings)
-    - complexity_score: 6
-      material: SPCC Steel
-      part_name: "Mounting Chassis "
-      steps:
-        - CNC Punch Press
-        - Stamping (Forming Dimples)
-        - Black Zinc Plating
-        - Heat Treatment (Proposed)
+  - complexity_score: 8
+    material: ADC12 Aluminum Alloy
+    part_name: 'Front Housing '
+    steps:
+    - Die Casting
+    - CNC Machining
+    - Anodize (Satin)
+    - Laser Etch (Markings)
+  - complexity_score: 6
+    material: SPCC Steel
+    part_name: 'Mounting Chassis '
+    steps:
+    - CNC Punch Press
+    - Stamping (Forming Dimples)
+    - Black Zinc Plating
+    - Heat Treatment (Proposed)
   supply_chain_nodes:
-    - location: Campbell, CA
-      role: Engineering HQ
-      vendor: The Noon Company
-    - location: Taipei, Taiwan
-      role: Reliability Testing / IQC
-      vendor: FIH
-    - location: Shenzhen/Dongguan (implied)
-      role: Power Supply / Integration
-      vendor: Bel Fuse
-    - location: China
-      role: Metal Stamping
-      vendor: Tongda
+  - location: Campbell, CA
+    role: Engineering HQ
+    vendor: The Noon Company
+  - location: Taipei, Taiwan
+    role: Reliability Testing / IQC
+    vendor: FIH
+  - location: Shenzhen/Dongguan (implied)
+    role: Power Supply / Integration
+    vendor: Bel Fuse
+  - location: China
+    role: Metal Stamping
+    vendor: Tongda
   tooling_chain:
-    - cost_impact: High
-      lead_time_weeks: 8
-      tool_name: Housing, Front Die Cast
-      type: Hard Tooling
-      vendor: Bel (via Tier 2)
-    - cost_impact: Med
-      lead_time_weeks: 4
-      tool_name: Chassis Stamping Die
-      type: Soft Tooling (CNC Punch) -> Hard Tooling
-      vendor: Tongda
-    - cost_impact: Med
-      lead_time_weeks: 6
-      tool_name: "Rear Housing Mold "
-      type: Hard Tooling (Injection)
-      vendor: Memtech
+  - cost_impact: High
+    lead_time_weeks: 8
+    tool_name: Housing, Front Die Cast
+    type: Hard Tooling
+    vendor: Bel (via Tier 2)
+  - cost_impact: Med
+    lead_time_weeks: 4
+    tool_name: Chassis Stamping Die
+    type: Soft Tooling (CNC Punch) -> Hard Tooling
+    vendor: Tongda
+  - cost_impact: Med
+    lead_time_weeks: 6
+    tool_name: 'Rear Housing Mold '
+    type: Hard Tooling (Injection)
+    vendor: Memtech
 cyberspace:
   enable: true
   layout: linear
   stickies:
-    - data:
-        columns: 3
-        images:
-          - alt: IMG_20170419_135338
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135338-xl.webp
-          - alt: IMG_20170419_135557
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135557-xl.webp
-          - alt: IMG_20170419_135649
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135649-xl.webp
-          - alt: IMG_20170419_135715
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135715-xl.webp
-          - alt: IMG_20170419_135859
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135859-xl.webp
-        layout: masonry
-        scattered: true
-      deck: []
-      featuredIndices: []
-      id: 03_base_click_testing_1
-      title: Base Click Testing 1
-      type: gallery
-    - data:
-        columns: 3
-        images:
-          - alt: IMG_20170420_172124
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_pull_testing_1/IMG_20170420_172124-xl.webp
-          - alt: IMG_20170420_172208
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_pull_testing_1/IMG_20170420_172208-xl.webp
-          - alt: IMG_20170420_172350
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_pull_testing_1/IMG_20170420_172350-xl.webp
-        layout: masonry
-        scattered: true
-      deck: []
-      featuredIndices: []
-      id: 03_base_pull_testing_1
-      title: Base Pull Testing 1
-      type: gallery
-    - data:
-        columns: 3
-        images:
-          - alt: IMG_20170419_140610
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_side_pull_testing/IMG_20170419_140610-xl.webp
-          - alt: IMG_20170420_173140
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173140-xl.webp
-          - alt: IMG_20170420_173144
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173144-xl.webp
-          - alt: IMG_20170420_173202
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173202-xl.webp
-          - alt: IMG_20170420_173231
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173231-xl.webp
-        layout: masonry
-        scattered: true
-      deck: []
-      featuredIndices: []
-      id: 03_base_side_pull_testing
-      title: Base Side Pull Testing
-      type: gallery
-    - data:
-        columns: 3
-        images:
-          - alt: IMG_20170830_103733
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103733-xl.webp
-          - alt: IMG_20170830_103738
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103738-xl.webp
-          - alt: IMG_20170830_103757
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103757-xl.webp
-          - alt: IMG_20170830_103909
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103909-xl.webp
-          - alt: IMG_20170830_103936
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103936-xl.webp
-        layout: masonry
-        scattered: true
-      deck: []
-      featuredIndices: []
-      id: 03_base_test_btn_1
-      title: Base Test Btn 1
-      type: gallery
-    - data:
-        columns: 3
-        images:
-          - alt: IMG_20170904_151956
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_151956-xl.webp
-          - alt: IMG_20170904_155245
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155245-xl.webp
-          - alt: IMG_20170904_155252
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155252-xl.webp
-          - alt: IMG_20170904_155257
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155257-xl.webp
-          - alt: IMG_20170904_155320
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155320-xl.webp
-          - alt: IMG_20170928_153842-2
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170928_153842-2-xl.webp
-          - alt: IMG_20170928_153842
-            aspectRatio: 1.5
-            src: /assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170928_153842-xl.webp
-        layout: masonry
-        scattered: true
-      deck: []
-      featuredIndices: []
-      id: 03_base_test_btn_2
-      title: Base Test Btn 2
-      type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: IMG_20170419_135338
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135338-xl.webp
+      - alt: IMG_20170419_135557
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135557-xl.webp
+      - alt: IMG_20170419_135649
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135649-xl.webp
+      - alt: IMG_20170419_135715
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135715-xl.webp
+      - alt: IMG_20170419_135859
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135859-xl.webp
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 03_base_click_testing_1
+    title: Base Click Testing 1
+    type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: IMG_20170420_172124
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_pull_testing_1/IMG_20170420_172124-xl.webp
+      - alt: IMG_20170420_172208
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_pull_testing_1/IMG_20170420_172208-xl.webp
+      - alt: IMG_20170420_172350
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_pull_testing_1/IMG_20170420_172350-xl.webp
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 03_base_pull_testing_1
+    title: Base Pull Testing 1
+    type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: IMG_20170419_140610
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_side_pull_testing/IMG_20170419_140610-xl.webp
+      - alt: IMG_20170420_173140
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173140-xl.webp
+      - alt: IMG_20170420_173144
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173144-xl.webp
+      - alt: IMG_20170420_173202
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173202-xl.webp
+      - alt: IMG_20170420_173231
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173231-xl.webp
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 03_base_side_pull_testing
+    title: Base Side Pull Testing
+    type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: IMG_20170830_103733
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103733-xl.webp
+      - alt: IMG_20170830_103738
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103738-xl.webp
+      - alt: IMG_20170830_103757
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103757-xl.webp
+      - alt: IMG_20170830_103909
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103909-xl.webp
+      - alt: IMG_20170830_103936
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103936-xl.webp
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 03_base_test_btn_1
+    title: Base Test Btn 1
+    type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: IMG_20170904_151956
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_151956-xl.webp
+      - alt: IMG_20170904_155245
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155245-xl.webp
+      - alt: IMG_20170904_155252
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155252-xl.webp
+      - alt: IMG_20170904_155257
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155257-xl.webp
+      - alt: IMG_20170904_155320
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155320-xl.webp
+      - alt: IMG_20170928_153842-2
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170928_153842-2-xl.webp
+      - alt: IMG_20170928_153842
+        aspectRatio: 1.5
+        src: /assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170928_153842-xl.webp
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 03_base_test_btn_2
+    title: Base Test Btn 2
+    type: gallery
 date: 2016-06-28
 draft: false
 employer: noon
@@ -222,55 +222,50 @@ endDate: 2017-08-31
 forensic_metrics:
   financial: Scheduled 1,500 unit production run for July 2017 ramp [1]
   governance: EVT1 Validation and EVT2 Dev concurrent sprints [2]
-  process:
-    Rejected 10-Year lifecycle requirement during EVT2 due to lack of initial
+  process: Rejected 10-Year lifecycle requirement during EVT2 due to lack of initial
     mandate [1]
 forensic_summary:
-  intervention:
-    Identified 1 critical EMI noise source isolated directly to the Bazooka
+  intervention: Identified 1 critical EMI noise source isolated directly to the Bazooka
     architecture during EVT2 [1]
-  result:
-    Logged 5 distinct mechanical defects in EVT2 chassis design, including warping,
+  result: Logged 5 distinct mechanical defects in EVT2 chassis design, including warping,
     burrs, and inconsistent hook tension [1]
-  trigger:
-    Failed 100% of dust ingress removal tests (14/14 units seized in chassis)
+  trigger: Failed 100% of dust ingress removal tests (14/14 units seized in chassis)
     [1]
 gallery: []
 hxo_ready: true
 hydration_status: full
 industry: consumer_electronics
 isomorphics:
-  - hardware_point:
-      14/14 units seized in chassis due to dust ingress/tolerance stackup
-      [1]
-    label: Interference Fit
-    principle: Law of Friction and Clearance (Tribology)
-    software_point: Deadlock in thread synchronization (Resource Starvation)
+- hardware_point: 14/14 units seized in chassis due to dust ingress/tolerance stackup
+    [1]
+  label: Interference Fit
+  principle: Law of Friction and Clearance (Tribology)
+  software_point: Deadlock in thread synchronization (Resource Starvation)
 listed: true
 metrics:
   financial:
     costOfGoodsSold: []
     margins:
-      - Managed high-voltage 850W architecture validation within JDM structure
+    - Managed high-voltage 850W architecture validation within JDM structure
     toolingActual: 0
     toolingBudget: 0
   governance:
     dcdCount: 27
     dcos: 0
     ecos:
-      - Resolved 27 critical defects through Gate 2 reviews
+    - Resolved 27 critical defects through Gate 2 reviews
   interventions:
     count: 5
     label: Critical Saves
     value: 5
   process:
     engineeringChangeOrders:
-      - Scaled production fleet from 35 P1 to 921 DVT validation units
+    - Scaled production fleet from 35 P1 to 921 DVT validation units
   quotes:
-    - Failed 100% of dust ingress removal tests (14/14 units seized in chassis) [1].
-    - Rejected 10-Year lifecycle requirement during EVT2 due to lack of initial architectural
-      mandate [1].
-    - DUT can't easy remove from Bazooka- 7/7[Sativa],- 7/7[Elvis] [3].
+  - Failed 100% of dust ingress removal tests (14/14 units seized in chassis) [1].
+  - Rejected 10-Year lifecycle requirement during EVT2 due to lack of initial architectural
+    mandate [1].
+  - DUT can't easy remove from Bazooka- 7/7[Sativa],- 7/7[Elvis] [3].
 phase_stats:
   Design: 30
   Engineering: 50
@@ -280,43 +275,42 @@ presentation_mode: deep_dive
 primary_home: mech
 productionScale: series
 scars:
-  - description:
-      DUT (Device Under Test) cannot be easily removed from Bazooka chassis
-      during dust testing, resulting in total mechanism seizure [3, 4].
-    label: The Seizure Crisis
-    value: 100% Failure Rate (14/14)
-  - description:
-      Critical EMI noise source isolated directly to the Bazooka architecture
-      during EVT2 validation [1].
-    label: EMI Noise Source
-    value: 1 Critical Source
-  - description:
-      Worst-case thermal testing deferred to EVT2 because v0.005 SW could
-      not drive LCM to necessary conditions [5].
-    label: Thermal Deferral
-    value: 45.3℃ Limit
+- description: DUT (Device Under Test) cannot be easily removed from Bazooka chassis
+    during dust testing, resulting in total mechanism seizure [3, 4].
+  label: The Seizure Crisis
+  value: 100% Failure Rate (14/14)
+- description: Critical EMI noise source isolated directly to the Bazooka architecture
+    during EVT2 validation [1].
+  label: EMI Noise Source
+  value: 1 Critical Source
+- description: Worst-case thermal testing deferred to EVT2 because v0.005 SW could
+    not drive LCM to necessary conditions [5].
+  label: Thermal Deferral
+  value: 45.3℃ Limit
 slug: bazooka
 tags:
-  - Thermal
-  - Mechanism
-  - Crisis
-  - Yield
-  - Architecture
-  - Materials
+- Thermal
+- Mechanism
+- Crisis
+- Yield
+- Architecture
+- Materials
 targets:
-  - main
-  - mech
+- main
+- mech
 teamSize: 1 (The Architect - Erik Norris)
 theme: hyperspace
 tier: 1
-timeline: []
+timeline:
+  end: '2017-07-30'
+  start: '2017-01-27'
 title: Bazooka (Base Station)
 toolchain:
-  - Creo (CAD Modeling)
-  - "JIRA (Issue Tracking: BAZ-45, BAZ-81, BAZ-96, SAT-60)"
-  - Bel Power Solutions (JDM Vendor - High Voltage)
-  - FIH (Foxconn International Holdings - System Integrator)
-  - "Excel (Tolerance Stackup: Bazooka-Waldo_Cover_Retention.xlsx)"
+- Creo (CAD Modeling)
+- 'JIRA (Issue Tracking: BAZ-45, BAZ-81, BAZ-96, SAT-60)'
+- Bel Power Solutions (JDM Vendor - High Voltage)
+- FIH (Foxconn International Holdings - System Integrator)
+- 'Excel (Tolerance Stackup: Bazooka-Waldo_Cover_Retention.xlsx)'
 ---
 
 Bazooka Forensic Report
@@ -355,6 +349,9 @@ V. VISUAL EVIDENCE
 • Locorol action review_05082017 ver2.pdf (EMI failure documentation)
 • Colorado_Tolerance_Stackups_Fx.pdf (Tolerance analysis for top/bottom gaps)
 
+
+
+
 What are the core design requirements for the Bazooka product?
 
 Forensic Audit: Bazooka Product Requirements
@@ -362,41 +359,40 @@ CONTEXT: The following design requirements are extracted from the Product Requir
 MANDATE: Bazooka serves as the Base Station (Wall Plate/Chassis), providing structural mounting, high-voltage termination, and a power interface for the Sativa (Master) and Elvis (Extension) control modules.
 I. ARCHITECTURAL PRIORITIES
 The documented constraint hierarchy for the Bazooka architecture is explicitly ranked:
-
 1. Feature (Functionality)
 2. Size (Fitment)
 3. Cost (BOM targets)
-   II. ELECTRICAL SPECIFICATIONS (High Voltage & Harvesting)
-   The electrical architecture is designed to bridge high-voltage mains with low-voltage logic, featuring a critical "Energy Harvesting" requirement for installations lacking a neutral wire.
-   • Input Power: 100 to 132VAC at 50/60Hz (Single Phase).
-   • Load Capacity:
-   ◦ 2016 Baseline: 650W electronic switch with phase angle control.
-   ◦ 2017 Revision: Increased to 850W electronic switch.
-   • Power Interface (Auxiliary):
-   ◦ Must provide isolated output to the mating controller (Sativa/Elvis).
-   ◦ Voltage: 5.5V (Typ) or 4.95V (Typ).
-   ◦ Current: 1A maximum, with reduced output during "energy harvesting" mode (no neutral wire present).
-   • Quiescent Power: Must consume \<0.6W (2016) or \<1.1W (2017) when idle.
-   • Surge Protection: Rated for 2.5KV.
-   III. MECHANICAL CONSTRAINTS (The Chassis)
-   The mechanical design is governed by the need to fit into standard residential infrastructure while managing the physical "Air Gap" safety feature.
-   • Enclosure Dimensions: 105 x 44 x 32 mm.
-   • Fitment: Base and wires must fit within 95% of residential light switch electrical boxes (3” x 2” x 1⅞“).
-   • Air Gap Switch: A mechanical switch is required to physically disengage the AC line connection when the mating assembly is removed.
-   ◦ Cycle Life: Rated for 10,000 cycles.
-   ◦ Actuation: Controlled via an external "Test" button.
-   • Material Composition: Aluminum front housing with a plastic rear enclosure.
-   IV. INTERFACE & CONTROL LOGIC
-   • Communication: UART interface (9600 bits/sec, 8 data bits, no parity) for status exchange with the attached controller.
-   • Dimming Control: Phase angle control capable of 0.01-degree precision, supporting both leading and trailing (reverse) edge dimming.
-   • Zero Crossing: Hardware detection required to sync phase control.
-   V. RELIABILITY & COMPLIANCE (The Conflict Zone)
-   • Regulatory: Must meet UL 1472, ICES-003, and FCC Part 15 Subpart B standards.
-   • Environmental: RoHS II compliant and REACH \<0.1% SVHC.
-   • Lifecycle Dispute:
-   ◦ The PRD explicitly requires an Operational Lifetime of minimum 10 years.
-   ◦ Forensic Note: This requirement was formally rejected by the engineering architect during EVT2 due to the lack of an initial mandate to support such duration in the mechanical architecture.
-   How does Locoroll validate product durability through reliability testing?
+II. ELECTRICAL SPECIFICATIONS (High Voltage & Harvesting)
+The electrical architecture is designed to bridge high-voltage mains with low-voltage logic, featuring a critical "Energy Harvesting" requirement for installations lacking a neutral wire.
+• Input Power: 100 to 132VAC at 50/60Hz (Single Phase).
+• Load Capacity:
+◦ 2016 Baseline: 650W electronic switch with phase angle control.
+◦ 2017 Revision: Increased to 850W electronic switch.
+• Power Interface (Auxiliary):
+◦ Must provide isolated output to the mating controller (Sativa/Elvis).
+◦ Voltage: 5.5V (Typ) or 4.95V (Typ).
+◦ Current: 1A maximum, with reduced output during "energy harvesting" mode (no neutral wire present).
+• Quiescent Power: Must consume \<0.6W (2016) or \<1.1W (2017) when idle.
+• Surge Protection: Rated for 2.5KV.
+III. MECHANICAL CONSTRAINTS (The Chassis)
+The mechanical design is governed by the need to fit into standard residential infrastructure while managing the physical "Air Gap" safety feature.
+• Enclosure Dimensions: 105 x 44 x 32 mm.
+• Fitment: Base and wires must fit within 95% of residential light switch electrical boxes (3” x 2” x 1⅞“).
+• Air Gap Switch: A mechanical switch is required to physically disengage the AC line connection when the mating assembly is removed.
+◦ Cycle Life: Rated for 10,000 cycles.
+◦ Actuation: Controlled via an external "Test" button.
+• Material Composition: Aluminum front housing with a plastic rear enclosure.
+IV. INTERFACE & CONTROL LOGIC
+• Communication: UART interface (9600 bits/sec, 8 data bits, no parity) for status exchange with the attached controller.
+• Dimming Control: Phase angle control capable of 0.01-degree precision, supporting both leading and trailing (reverse) edge dimming.
+• Zero Crossing: Hardware detection required to sync phase control.
+V. RELIABILITY & COMPLIANCE (The Conflict Zone)
+• Regulatory: Must meet UL 1472, ICES-003, and FCC Part 15 Subpart B standards.
+• Environmental: RoHS II compliant and REACH \<0.1% SVHC.
+• Lifecycle Dispute:
+◦ The PRD explicitly requires an Operational Lifetime of minimum 10 years.
+◦ Forensic Note: This requirement was formally rejected by the engineering architect during EVT2 due to the lack of an initial mandate to support such duration in the mechanical architecture.
+How does Locoroll validate product durability through reliability testing?
 
 Forensic Audit: Durability Validation Protocol
 CONTEXT: Locoroll verifies product durability through a rigorous "Waterfall Strategy", a testing hierarchy designed to sequentially stress units from environmental conditioning through to catastrophic mechanical failure. This approach allows for maximum data extraction from limited sample sizes by prioritizing "highest risk failure modes" before destructive testing.
@@ -441,33 +437,32 @@ Inspection is not subjective; it is a calibrated process defined by the "Time an
 • Manipulation: The part is rotated vertically and horizontally (+/- 60°) to catch light reflections on defects.
 III. DEFECT TOLERANCE VECTORS (Acceptance Criteria)
 The specification enforces strict limits on molding and finishing anomalies. "Undefined features" like sinks, flash, or voids are generally rejected unless explicitly toleranced.
-
 1. Dimensional Defects
-   • Flash: Maximum 0.05mm allowed.
-   • Gate Vestige: Must be flush to 0.254mm (or 0.05mm in some contexts) below the surface.
-   • Sharp Edges: None permitted; typically broken to a max radius of 0.5mm.
+• Flash: Maximum 0.05mm allowed.
+• Gate Vestige: Must be flush to 0.254mm (or 0.05mm in some contexts) below the surface.
+• Sharp Edges: None permitted; typically broken to a max radius of 0.5mm.
 2. Visual Defects (Class A)
-   • Dot Defects:
-   ◦ < 0.1mm: Ignored (considered invisible).
-   ◦ > 0.3mm: Rejection (0 allowed).
-   ◦ Density: Must be spaced 10mm (min) apart.
-   • Scratches:
-   ◦ Class A: Max width 0.05mm, total length limited (e.g., \<12mm depending on specific criteria tables).
-   ◦ Class B: Scratches not felt by a fingernail may be accepted using a 25% contrast rule.
-   • Molding Issues: Sinks, weld lines, flow marks, and gas traps are not accepted on appearance surfaces.
-   IV. SURFACE FINISH VALIDATION
-   The cosmetic durability is stress-tested to ensure the finish survives the "10-Year" mandate.
-   • Pencil Hardness: The surface must resist scratching from calibrated pencils.
-   ◦ Lens: 2H hardness required.
-   ◦ UV Coating (Low Gloss): H hardness required.
-   ◦ Failure Note: EVT2 units failed this test (Sativa/Elvis scratched at 3/3 units).
-   • Cross-Cut Adhesion: A lattice pattern is cut into the paint and ripped off with 3M 610 tape.
-   ◦ Pass Criteria: 5B (0% removal) to 3B (\<15% removal) classifications are typically acceptable.
-   • Abrasion (RCA/Taber):
-   ◦ RCA: Must withstand 50 cycles minimum.
-   ◦ Taber: Up to 300-500 cycles depending on substrate/paint contrast.
-   • Chemical Resistance: Surfaces are wiped with Ethanol, Isopropanol, and "Artificial Sweat" to check for staining or peeling.
-   What caused all 14 units to seize in the chassis?
+• Dot Defects:
+◦ < 0.1mm: Ignored (considered invisible).
+◦ > 0.3mm: Rejection (0 allowed).
+◦ Density: Must be spaced 10mm (min) apart.
+• Scratches:
+◦ Class A: Max width 0.05mm, total length limited (e.g., \<12mm depending on specific criteria tables).
+◦ Class B: Scratches not felt by a fingernail may be accepted using a 25% contrast rule.
+• Molding Issues: Sinks, weld lines, flow marks, and gas traps are not accepted on appearance surfaces.
+IV. SURFACE FINISH VALIDATION
+The cosmetic durability is stress-tested to ensure the finish survives the "10-Year" mandate.
+• Pencil Hardness: The surface must resist scratching from calibrated pencils.
+◦ Lens: 2H hardness required.
+◦ UV Coating (Low Gloss): H hardness required.
+◦ Failure Note: EVT2 units failed this test (Sativa/Elvis scratched at 3/3 units).
+• Cross-Cut Adhesion: A lattice pattern is cut into the paint and ripped off with 3M 610 tape.
+◦ Pass Criteria: 5B (0% removal) to 3B (\<15% removal) classifications are typically acceptable.
+• Abrasion (RCA/Taber):
+◦ RCA: Must withstand 50 cycles minimum.
+◦ Taber: Up to 300-500 cycles depending on substrate/paint contrast.
+• Chemical Resistance: Surfaces are wiped with Ethanol, Isopropanol, and "Artificial Sweat" to check for staining or peeling.
+What caused all 14 units to seize in the chassis?
 
 Forensic Analysis: The "Dust Lockout" Seizure
 CONTEXT: During EVT2 validation, the Bazooka architecture suffered a catastrophic mechanical deadlock. 100% of the test units (14/14) seized, rendering the Sativa and Elvis control modules irremovable from the chassis following environmental exposure,,.
@@ -494,25 +489,24 @@ What were the five mechanical defects found in EVT2?
 Forensic Data Extraction: EVT2 Mechanical Defects
 CONTEXT: During the EVT2 validation phase, the Bazooka Chassis (the structural backbone of the Base Station) exhibited critical manufacturing and design flaws. These were logged in the "Design Issues to Resolve for EVT2" punch list, revealing a lack of process control in the metal stamping and finishing stages.
 THE ANATOMY OF FAILURE (The 5 Defects):
-
 1. Structural Deformation (The "Square Dimple" Flaw):
-   ◦ Defect: "Large square dimples" used to maintain spacing for the slide-lock hooks caused severe stress concentrations, resulting in the "deformation of immediate surrounding areas."
-   ◦ Impact: This deformation compromised the planar integrity of the chassis, contributing to the mechanism seizure issues,.
+◦ Defect: "Large square dimples" used to maintain spacing for the slide-lock hooks caused severe stress concentrations, resulting in the "deformation of immediate surrounding areas."
+◦ Impact: This deformation compromised the planar integrity of the chassis, contributing to the mechanism seizure issues,.
 2. Planar Warping (The Bowed Slots):
-   ◦ Defect: The "Bottom slots" of the chassis were found to be "bowed," leading to inconsistent orientation of cutouts. Additionally, "wavering/warped surfaces" were observed at the mounting area.
-   ◦ Impact: This threatened the interference fit with the finish plate and the overall installation flushness,.
+◦ Defect: The "Bottom slots" of the chassis were found to be "bowed," leading to inconsistent orientation of cutouts. Additionally, "wavering/warped surfaces" were observed at the mounting area.
+◦ Impact: This threatened the interference fit with the finish plate and the overall installation flushness,.
 3. Inconsistent Hook Tension (Asymmetry):
-   ◦ Defect: Manufacturing tolerances drifted significantly between sides. The "Left hanging hook" was tighter than the right (WAL 17), and the "Right side of slide-lock" was noticeably tighter than the left.
-   ◦ Impact: Created unpredictable insertion/removal forces for the user, violating the "smooth action" requirement.
+◦ Defect: Manufacturing tolerances drifted significantly between sides. The "Left hanging hook" was tighter than the right (WAL 17), and the "Right side of slide-lock" was noticeably tighter than the left.
+◦ Impact: Created unpredictable insertion/removal forces for the user, violating the "smooth action" requirement.
 4. Dangerous Artifacts (Burrs):
-   ◦ Defect: "Burr edge" (WAL 19) detected on the metal stamping.
-   ◦ Impact: A safety and quality violation. Sharp edges on a user-accessible metal chassis pose a laceration risk and indicate poor tooling maintenance.
+◦ Defect: "Burr edge" (WAL 19) detected on the metal stamping.
+◦ Impact: A safety and quality violation. Sharp edges on a user-accessible metal chassis pose a laceration risk and indicate poor tooling maintenance.
 5. Geometric Misalignment:
-   ◦ Defect: The "Right folded bottom edge sits high," breaking the symmetry of the enclosure.
-   ◦ Impact: Prevented the unit from seating continuously against the wall box, potentially causing rocking or gaps after installation.
-   SECONDARY FAILURE (Cosmetic/Yield):
-   • Plating Failure: The "Black zinc finish" chipped away after multiple installation cycles. While classified as a finish issue, this indicated poor adhesion (plating quality) unacceptable for a mechanical friction interface,.
-   How did circular dimples fix the chassis deformation issue?
+◦ Defect: The "Right folded bottom edge sits high," breaking the symmetry of the enclosure.
+◦ Impact: Prevented the unit from seating continuously against the wall box, potentially causing rocking or gaps after installation.
+SECONDARY FAILURE (Cosmetic/Yield):
+• Plating Failure: The "Black zinc finish" chipped away after multiple installation cycles. While classified as a finish issue, this indicated poor adhesion (plating quality) unacceptable for a mechanical friction interface,.
+How did circular dimples fix the chassis deformation issue?
 
 Forensic Analysis: Geometry Modification (Square vs. Circular Dimples)
 CONTEXT: The Bazooka Chassis relied on stamped dimples to maintain critical spacing for the slide-lock mechanism. In the EVT2 baseline, these features were designed as "Large square dimples."
@@ -539,39 +533,37 @@ What was the justification for rejecting the 10-year requirement?
 Forensic Analysis: Justification for 10-Year Requirement Rejection
 CONTEXT: During the EVT2 validation phase, "The Architect" (Erik Norris) and the engineering JDM partner (FIH) formally rejected the Product Requirements Document (PRD) mandate for an "Operational lifetime of min 10 years",. This rejection was a defensive governance maneuver to prevent scope creep from stalling the transition to Mass Production (MP).
 THE JUSTIFICATION MATRIX:
-
 1. Retroactive Mandate (Scope Creep):
-   ◦ The primary justification was that the 10-year requirement was not present during the architectural kick-off. FIH explicitly noted: "This product at kick-off and architecture stage was not informed a 10-year life long".
-   ◦ Imposing this standard at EVT2 was viewed as a critical violation of the initial design constraints (Feature, Size, Cost).
+◦ The primary justification was that the 10-year requirement was not present during the architectural kick-off. FIH explicitly noted: "This product at kick-off and architecture stage was not informed a 10-year life long".
+◦ Imposing this standard at EVT2 was viewed as a critical violation of the initial design constraints (Feature, Size, Cost).
 2. Component Vendor Limitations:
-   ◦ The supply chain could not support the requirement. Critical component vendors, specifically for the LCM (Display) and ICs (TI/Murata), refused to guarantee a 10-year operational life.
-   ◦ Without vendor-backed guarantees, the engineering team could not certify the system reliability for that duration without assuming catastrophic liability.
+◦ The supply chain could not support the requirement. Critical component vendors, specifically for the LCM (Display) and ICs (TI/Murata), refused to guarantee a 10-year operational life.
+◦ Without vendor-backed guarantees, the engineering team could not certify the system reliability for that duration without assuming catastrophic liability.
 3. Mechanical Deficiency (The Structure):
-   ◦ The physical architecture was not engineered for a decade of abuse. FIH stated flatly: "ME structure and durability is not designed for a 10-year life".
-   ◦ Evidence of this fragility was already present in EVT2 defects, such as the "Black zinc finish" chipping after multiple installation cycles and the chassis deforming under standard screw torque. These "yield" issues would have become "critical failures" under a 10-year validation regime.
+◦ The physical architecture was not engineered for a decade of abuse. FIH stated flatly: "ME structure and durability is not designed for a 10-year life".
+◦ Evidence of this fragility was already present in EVT2 defects, such as the "Black zinc finish" chipping after multiple installation cycles and the chassis deforming under standard screw torque. These "yield" issues would have become "critical failures" under a 10-year validation regime.
 4. Validation Schedule Deadlock:
-   ◦ The reliability testing plan was calibrated for a "2 years cycle simulation".
-   ◦ Scaling testing to validate a 10-year lifespan (e.g., increasing cycle counts from ~10k to ~50k+) would have forced a total re-schedule of the Design Validation Test (DVT) phase, delaying tooling kick-off and missing the July 2017 production ramp,.
-   THE VERDICT: The requirement was struck to preserve the shipping schedule. The engineering team accepted that the device was effectively a consumer electronics product (2-3 year lifecycle) rather than infrastructure hardware (10+ year lifecycle), a reality later confirmed by field failures occurring at the ~30-month mark.
-   How were the mechanical seizure issues resolved after EVT2?
+◦ The reliability testing plan was calibrated for a "2 years cycle simulation".
+◦ Scaling testing to validate a 10-year lifespan (e.g., increasing cycle counts from ~10k to ~50k+) would have forced a total re-schedule of the Design Validation Test (DVT) phase, delaying tooling kick-off and missing the July 2017 production ramp,.
+THE VERDICT: The requirement was struck to preserve the shipping schedule. The engineering team accepted that the device was effectively a consumer electronics product (2-3 year lifecycle) rather than infrastructure hardware (10+ year lifecycle), a reality later confirmed by field failures occurring at the ~30-month mark.
+How were the mechanical seizure issues resolved after EVT2?
 
 Forensic Analysis: Post-EVT2 Seizure Resolution
 CONTEXT: Following the catastrophic 100% seizure rate (14/14 units) during EVT2 dust testing, where Sativa and Elvis modules became mechanically welded to the Bazooka chassis, the engineering team executed a multi-vector intervention to salvage the DVT timeline.
 THE RESOLUTION ARCHITECTURE:
-
 1. Structural Remediation (The "Dimple" Fix):
-   ◦ Problem: The "Large square dimples" used for slide-lock spacing acted as stress risers, causing the stamped metal chassis to "pillow" and deform. This warped the planar mating surface, contributing to the interference fit that locked the units.
-   ◦ Fix: The tooling was modified to replace the square geometry with "smaller circular dimples" of identical depth. This distributed mechanical stress evenly, restoring the chassis flatness required for the slide-lock mechanism to function without binding.
+◦ Problem: The "Large square dimples" used for slide-lock spacing acted as stress risers, causing the stamped metal chassis to "pillow" and deform. This warped the planar mating surface, contributing to the interference fit that locked the units.
+◦ Fix: The tooling was modified to replace the square geometry with "smaller circular dimples" of identical depth. This distributed mechanical stress evenly, restoring the chassis flatness required for the slide-lock mechanism to function without binding.
 2. Interference Reduction (Tooling Mods):
-   ◦ Problem: Excessive friction and mechanical overlap in the retention features.
-   ◦ Fix: Engineering issued a tooling modification to "remove the features of rib and hook" from the mating geometry. Additionally, position pins were modified: their height was increased (0.80mm to 1.30mm) and thickness added to the sides to improve alignment without relying on the high-friction hook features.
+◦ Problem: Excessive friction and mechanical overlap in the retention features.
+◦ Fix: Engineering issued a tooling modification to "remove the features of rib and hook" from the mating geometry. Additionally, position pins were modified: their height was increased (0.80mm to 1.30mm) and thickness added to the sides to improve alignment without relying on the high-friction hook features.
 3. Validation Protocol Shift (The Waldo Factor):
-   ◦ Problem: Initial failures occurred when testing the Bazooka and Control Module (DUT) in isolation, allowing excessive dust ingress into the mechanism.
-   ◦ Fix: The validation protocol was updated to test the full assembly. When the DUT was combined with "Bazooka and Waldo" (the faceplate) and re-tested, the assembly passed the dust ingress parameters. The faceplate provided the necessary environmental seal to prevent particulate accumulation in the slide-lock mechanism.
+◦ Problem: Initial failures occurred when testing the Bazooka and Control Module (DUT) in isolation, allowing excessive dust ingress into the mechanism.
+◦ Fix: The validation protocol was updated to test the full assembly. When the DUT was combined with "Bazooka and Waldo" (the faceplate) and re-tested, the assembly passed the dust ingress parameters. The faceplate provided the necessary environmental seal to prevent particulate accumulation in the slide-lock mechanism.
 4. Installation Tolerance Expansion:
-   ◦ Problem: "New Work Adjustable Boxes" caused chassis deformation during installation, leading to binding.
-   ◦ Fix: The width of the mounting slots on the chassis was increased by 2mm (1mm in each direction) to allow for greater play during installation, decoupling the chassis structure from wall box misalignment.
-   Explain the energy harvesting feature for installations without a neutral wire.
+◦ Problem: "New Work Adjustable Boxes" caused chassis deformation during installation, leading to binding.
+◦ Fix: The width of the mounting slots on the chassis was increased by 2mm (1mm in each direction) to allow for greater play during installation, decoupling the chassis structure from wall box misalignment.
+Explain the energy harvesting feature for installations without a neutral wire.
 
 Forensic Engineering Analysis: Energy Harvesting Architecture
 CONTEXT: The "Energy Harvesting" feature was a critical architectural requirement outlined in the internal Product Requirements Documents (PRDs) for the Bazooka Base Station. It was engineered to address the "retrofit" market—specifically older homes (pre-1980s) where electrical switch boxes often lack a neutral return wire.
@@ -611,17 +603,16 @@ Forensic Analysis: The 30-Month "Time-Bomb"
 CONTEXT: Post-market surveillance data, specifically extracted from high-volume retail feedback (Home Depot reviews), identified a statistically significant mortality cluster for the Noon "Extension Switches" (Elvis). This data serves as the ex-post facto validation for the engineering team's refusal to certify a 10-year lifecycle during the EVT2 phase.
 THE FAILURE PATTERN (28-30 Months) Field reports indicate a distinct "wear-out" phase occurring between 28 and 30 months of operation. This timeline aligns with a typical consumer electronics lifecycle (2-3 years) but represents a catastrophic failure for residential infrastructure hardware, which typically demands 10-15 years of service.
 THE ROOT CAUSE MECHANISMS Forensic reconstruction attributes these failures to two primary architectural deficiencies:
-
 1. Time Dependent Dielectric Breakdown (TDDB):
-   ◦ The Mechanism: The gate dielectric within the ICs wears out and breaks down over time when subjected to high electric fields. The damage accumulates until the oxide structure collapses, leading to leakage or shorts.
-   ◦ The Trigger: The high-density dimming circuitry within the Extension Switches operated at power densities that accelerated this breakdown, creating a predictable "expiration date" for the silicon.
+◦ The Mechanism: The gate dielectric within the ICs wears out and breaks down over time when subjected to high electric fields. The damage accumulates until the oxide structure collapses, leading to leakage or shorts.
+◦ The Trigger: The high-density dimming circuitry within the Extension Switches operated at power densities that accelerated this breakdown, creating a predictable "expiration date" for the silicon.
 2. Thermal Suffocation (Shallow Boxes):
-   ◦ The Constraint: The device was often installed in "shallow junction boxes" common in older construction.
-   ◦ The Impact: The confined volume prevented adequate heat dissipation. The resulting thermal stress degraded solder joints and component interfaces, leading to intermittent connectivity and eventual system death.
-   THE "NO TROUBLE FOUND" (NTF) PHENOMENON A complicating factor in the forensic analysis was the high rate of "No Trouble Found" returns. 4 out of 5 returned units would pass standard bench testing.
-   • The Reality: The failures were often environmental. Surface residues on the PCBA caused parasitic leakage that only manifested in humid field environments, or intermittent signal distortion occurred only under specific thermal loads not replicated on a cool test bench.
-   FORENSIC CONCLUSION: The 30-month failure data confirms that the rejection of the 10-year lifecycle requirement during EVT2 was factually correct. The physical architecture—constrained by the "Size" and "Feature" mandates—lacked the thermal and electrical headroom to survive a decade of continuous operation. The product was engineered as a high-performance sprinter, but the market demanded a marathon runner.
-   How were the chassis warping and hook tension issues resolved?
+◦ The Constraint: The device was often installed in "shallow junction boxes" common in older construction.
+◦ The Impact: The confined volume prevented adequate heat dissipation. The resulting thermal stress degraded solder joints and component interfaces, leading to intermittent connectivity and eventual system death.
+THE "NO TROUBLE FOUND" (NTF) PHENOMENON A complicating factor in the forensic analysis was the high rate of "No Trouble Found" returns. 4 out of 5 returned units would pass standard bench testing.
+• The Reality: The failures were often environmental. Surface residues on the PCBA caused parasitic leakage that only manifested in humid field environments, or intermittent signal distortion occurred only under specific thermal loads not replicated on a cool test bench.
+FORENSIC CONCLUSION: The 30-month failure data confirms that the rejection of the 10-year lifecycle requirement during EVT2 was factually correct. The physical architecture—constrained by the "Size" and "Feature" mandates—lacked the thermal and electrical headroom to survive a decade of continuous operation. The product was engineered as a high-performance sprinter, but the market demanded a marathon runner.
+How were the chassis warping and hook tension issues resolved?
 
 Forensic Engineering Analysis: Resolution of Chassis Warping and Hook Tension
 CONTEXT: The Bazooka Chassis (Base Station) acts as the structural backbone for the Noon system. During EVT2, the component suffered from critical planar warping and inconsistent hook tension, which led to mechanical seizures (100% failure in dust testing) and "wavering" surfaces that compromised installation flushness.
@@ -639,11 +630,10 @@ The "hook tension" issues—specifically the "Left hanging hook" being tighter t
 ◦ Fix: The mounting slots were widened by 2mm (1mm in each direction). This "floating" tolerance decoupled the chassis structure from the wall box, preventing installation torque from transferring stress into the hook mechanisms.
 • Hanging Hook Geometry: Specific DFM feedback noted that the gap between the hook and chassis was too small for the stamping process. The cut-out was modified (originally suggested as 4mm, optimized to 2mm) to ensure the hook could be stamped cleanly without "burr edges" (WAL 19) or inconsistent tension.
 SUMMARY OF INTERVENTION:
-
 1. Replaced square dimples with circular dimples to eliminate warping.
 2. Widened mounting slots by 2mm to prevent installation-induced deformation.
 3. Modified hook cut-outs to 2mm to ensure consistent stamping tolerance.
-   How did the audible buzzing issue (BAZ-45) get resolved?
+How did the audible buzzing issue (BAZ-45) get resolved?
 
 Forensic Resolution: Audible Buzzing (BAZ-45)
 CONTEXT: During the EVT1/EVT2 validation phases, the Bazooka architecture exhibited a persistent acoustic defect identified as BAZ-45: "Bazooka makes audible buzzing noise". This issue was distinct from the EMI failure (SAT-280) and required a physical modification to the power delivery network.
@@ -690,8 +680,7 @@ CONTEXT: You are the Forensic Engineering Analyst for Erik Norris. Subject: BAZ-
 The following forensic extraction catalogs the critical BAZ- (Bazooka) issue tickets logged during the chaotic EVT1/EVT2 phases. These tickets represent the "death by a thousand cuts" that threatened the structural and electrical integrity of the Base Station.
 The "Architect" (Erik Norris) resolved these not through individual patches, but through a systemic DVT overhaul documented in the EVT2-->DVT changes log.
 
----
-
+--------------------------------------------------------------------------------
 I. THE ACOUSTIC & ELECTRICAL CRISIS (The "Singing" Capacitors)
 The Failure: The high-voltage dimming circuitry exhibited severe piezoelectric resonance, creating audible noise that violated the "premium" user experience.
 • BAZ-45: "Bazooka makes audible buzzing noise".

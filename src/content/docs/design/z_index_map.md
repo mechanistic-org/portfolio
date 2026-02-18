@@ -16,6 +16,7 @@ To prevent "Stacking Wars", we vertically partition the Z-space into strict flig
 | **ORBIT**         | `1000+`     | Full Screen Menus (Command Palette `z-[1001]`), Modals              |
 | **STRATOSPHERE**  | `500-999`   | Tooltips, Popovers, Dropdowns                                       |
 | **HIGH ALTITUDE** | `100`       | Sticky Headers, Top HUDs, Navigation Bars                           |
+| **INTERCEPT**     | `90`        | Metrics Drawer (Deep Dive HUD)                                      |
 | **CRUISING**      | `50`        | Floating Action Buttons (FABs), Toast Notifications                 |
 | **LOW ALTITUDE**  | `10-40`     | Sticky Section Headers (`z-10`), Interactive Sticky Stages (`z-40`) |
 | **GROUND**        | `1`         | Standard interactive elements                                       |

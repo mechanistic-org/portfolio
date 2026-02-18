@@ -32,7 +32,7 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
   - **Green (Stability):** Inverted score (`10 - score`).
 - **Interaction:** `cursor-crosshair` for data, `cursor-help` for tooltips.
 
-### 2. **Project Hyphen (Forensic Strategy)**
+### 2. **Project Backport (Forensic Strategy)**
 
 - **Status:** **PENDING** (Frozen Jan 2026).
 - **Goal:** Backport Resume "Red Gold" to Portfolio MDX.
@@ -177,11 +177,11 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Session Mining & Protocol Refinement.**
+- **Active Task:** **Forensic HUD Verification & Z-Index Governance.**
 - **Next Step:** Return to "Production Mode" for next project (`d-control` or `m700`).
-- **Context:** **DEEP DIVE STANDARD ESTABLISHED.** `c24`, `cinema-one`, `avegant-glyph` are the "Deep Dive" benchmarks.
+- **Context:** **DEEP DIVE STANDARD ESTABLISHED.** `c24` is now "HUD Verified" (Metrics Drawer Active).
 - **Action Item:** Monitor `MINING_LOG.md` for "Pending" (⭕) vectors.
-- **Recent Win:** Documented "The Snoop Dogg Pivot" and "Lateral Injection". Refined Mining Log Taxonomy.
+- **Recent Win:** Fixed `YAMLException` crash and established "The Intercept Layer" (`z-90`) in `z_index_map.md`.
 - **Active Roadmap:** [`src/content/docs/project/ROADMAP_ACTIVE.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/ROADMAP_ACTIVE.md) (The Horizon)
 - **Mining Log:** [`src/content/docs/project/MINING_LOG.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/MINING_LOG.md) (The Re-Hydration Tracker)
 - **Project Index:** [`src/content/prompts/PROJECT_INDEX.md`](file:///d:/GitHub/eriknorris/src/content/prompts/PROJECT_INDEX.md) (The Registry)
@@ -241,6 +241,7 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **Critical Learning (Hydration):** **"The Key Collision"** - `YAMLException: duplicated mapping key` is frequently caused by `hydrate_content.py` appending default keys (`category`, `presentation_mode`) that already exist deeper in the legacy frontmatter. **Fix:** Use `grep` to locate the hidden duplicate before nuking the file.
 - **Critical Learning (Pipeline):** **"The Smart Merge Standard"** - We successfully implemented `smart_merge_lists` in `hydrate_content.py`. This is now the "Gold Standard" for re-hydration: it treats JSON as additive (Upsert) and protects manual edits in `cast` or `timeline`.
 - **Critical Learning (Forensics):** **"The NLM Direct Bypass"** - When refining a project with high-quality NLM output (like `dispensers`), **DO NOT NORMALIZE** or refactor. Inject the raw markdown directly. The "Forensic Report" format from `deep_research_prompt_v1.txt` is already compliant. Refactoring is Over-Optimization.
+- **Critical Learning (UI):** **"The Intercept Layer"** - We established `z-[90]` as the flight level for "Drawer" elements (HUD Metrics). This prevents them from being hidden by the Intro Layer (`z-50`) while staying below Global Nav (`z-100`). Always update `z_index_map.md` when defining new layers.
 
 * **Key Decision (Audio):** **"The Iron Dome"** - The Audio Host must be blind to instructions. We use `PODCAST_READY.txt` (Sanitized) and explicitly forbid instructional headers in the script source.
 * **Key Decision (Viz-Audio):** **"The SonicHeartbeat Standard"** - Idle = Pulse (Cycle), Active = Full EQ. Icon = Speaker (not Headphone).

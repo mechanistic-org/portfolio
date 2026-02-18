@@ -59,6 +59,7 @@ These vectors are explicitly mined using `deep_research_prompt_v1.txt`:
 | **Room Director** | `room-director`             |   🟢   |         | **Ready State.** |
 | **Waldo**         | `wall-plates`               |   🟢   |         | **Ready State.** |
 | **KServer-5000**  | `kserver-5000`              |   🟢   |         | **Ready State.** |
+| **KPlayer-6000**  | `kplayer-6000`              |   🟢   |         | **Ready State.** |
 | **KServer-1500**  | `kserver-1500`              |   🟢   |         | **Ready State.** |
 | **Motorola MP3**  | `motorola-mp3`              |   🟢   |         | **Ready State.** |
 | **Cortez**        | `webtv-cortez`              |   🟢   |   🔊    | **Ready State.** |
@@ -207,3 +208,17 @@ These vectors are explicitly mined using `deep_research_prompt_v1.txt`:
   - **Target:** "Curtis" (Digidesign) Task Revision History.
   - **Finding:** "Marketing approval" changed 87 times. Top volatile tasks identified.
   - **Output:** `schedules/curtis_task_volatility.csv`.
+- **[VISUALIZATION] Forensics Dashboard:**
+  - **Page:** `src/pages/forensics.astro`.
+  - **Component:** `ScheduleVolatilityChart.tsx` (Recharts).
+  - **Feature:** "The Cone of Uncertainty" visualization (Slip + Revisions).
+
+## 📝 Session Log: 2026-02-17 (KPlayer-6000 Refinement)
+
+**Objective:** Refine `kplayer-6000` (Apollo) from raw notebook dump.
+
+- **[TECH] Apollo Refinement:**
+  - **Hydration:** Injected Forensic Report (Sections I-V) and Complexity Vector.
+  - **Asset Sovereignty:** Assets identified as missing (Text-Only Mode).
+  - **Entropy:** Populated `_entropy.json` with 25+ forensic events (Crisis: Bezel Interference).
+- **[STATUS] KPlayer-6000:** **READY STATE**.

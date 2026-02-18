@@ -2,216 +2,215 @@
 additionalSkills: []
 audio_url: /assets/webtv-galaxy/webtv-galaxy-briefing.m4a
 bom:
-  - label: CPU
-    value: AMD K7 (150W System TDP)
-  - label: Cooling
-    value: Delta 2700 RPM Fan / Custom Extruded Heatsink
-  - label: Storage
-    value: Dual Quantum Fireball lct20 HDDs
-  - label: Chassis
-    value: CRS with Zinc Plating (0.91mm)
+- label: CPU
+  value: AMD K7 (150W System TDP)
+- label: Cooling
+  value: Delta 2700 RPM Fan / Custom Extruded Heatsink
+- label: Storage
+  value: Dual Quantum Fireball lct20 HDDs
+- label: Chassis
+  value: CRS with Zinc Plating (0.91mm)
 cast:
-  - name: Erik Norris
-    org: Mechanistic
-    role: Principal Mechanical Architect
-  - name: Roy Askeland
-    org: WebTV / Microsoft
-    role: Engineering Manager
-  - name: Frank Salinas
-    org: WebTV / Microsoft
-    role: Hardware Systems Engineer
-  - name: Shelly Evans
-    org: E-M Solutions
-    role: NPI Manager
-  - name: Avijit Goswami
-    org: Applied Thermal Technologies
-    role: Thermal Consultant
+- name: Erik Norris
+  org: Mechanistic
+  role: Principal Mechanical Architect
+- name: Roy Askeland
+  org: WebTV / Microsoft
+  role: Engineering Manager
+- name: Frank Salinas
+  org: WebTV / Microsoft
+  role: Hardware Systems Engineer
+- name: Shelly Evans
+  org: E-M Solutions
+  role: NPI Manager
+- name: Avijit Goswami
+  org: Applied Thermal Technologies
+  role: Thermal Consultant
 category: home_entertainment
 client:
-  - microsoft
-  - webtv
+- microsoft
+- webtv
 complexity_vector:
   part_count_growth:
-    - count: 15
-      date: 2000-09
-      phase: Concept (ID Proposal)
-    - count: 85
-      date: 2001-04
-      phase: EVT (Thermal/Layout)
-    - count: 210
-      date: 2001-07
-      phase: DVT (DEV 2.1 Build)
-    - count: 0
-      date: 2002-01
-      phase: PVT (Cancelled/Xbox Pivot)
+  - count: 15
+    date: 2000-09
+    phase: Concept (ID Proposal)
+  - count: 85
+    date: 2001-04
+    phase: EVT (Thermal/Layout)
+  - count: 210
+    date: 2001-07
+    phase: DVT (DEV 2.1 Build)
+  - count: 0
+    date: 2002-01
+    phase: PVT (Cancelled/Xbox Pivot)
   process_density:
-    - complexity_score: 9
-      material: 0.91mm CRS (Cold Rolled Steel)
-      part_name: Chassis Base Pan
-      steps:
-        - Progressive Die Stamping
-        - Hook 29 Stress Relief Forming
-        - Structural Rib Embossing (Warpage Mitigation)
-        - Drawn Standoff Creation
-        - Zinc/Tin Plating
-    - complexity_score: 8
-      material: 1.0mm SPTE (Tin-Plated Steel)
-      part_name: CPU Puck Shield (Top)
-      steps:
-        - CNC Turret Punch (12.5mm Hex Array)
-        - Forming (Continuous EMI Flanges)
-        - In-Situ Sub-Assembly Integration
-    - complexity_score: 6
-      material: Extruded Aluminum
-      part_name: Heatsink Assembly
-      steps:
-        - Custom Profile Extrusion (50x60x30mm)
-        - Cross-Cut Sawing
-        - Face Machining
-        - Phase Change Interface Application
+  - complexity_score: 9
+    material: 0.91mm CRS (Cold Rolled Steel)
+    part_name: Chassis Base Pan
+    steps:
+    - Progressive Die Stamping
+    - Hook 29 Stress Relief Forming
+    - Structural Rib Embossing (Warpage Mitigation)
+    - Drawn Standoff Creation
+    - Zinc/Tin Plating
+  - complexity_score: 8
+    material: 1.0mm SPTE (Tin-Plated Steel)
+    part_name: CPU Puck Shield (Top)
+    steps:
+    - CNC Turret Punch (12.5mm Hex Array)
+    - Forming (Continuous EMI Flanges)
+    - In-Situ Sub-Assembly Integration
+  - complexity_score: 6
+    material: Extruded Aluminum
+    part_name: Heatsink Assembly
+    steps:
+    - Custom Profile Extrusion (50x60x30mm)
+    - Cross-Cut Sawing
+    - Face Machining
+    - Phase Change Interface Application
   supply_chain_nodes:
-    - location: Sunnyvale, CA
-      role: Mechanical Architecture
-      vendor: Mechanistic
-    - location: Fremont, CA
-      role: Rapid Fabrication
-      vendor: E-M Solutions
-    - location: Santa Clara, CA
-      role: Thermal CFD Analysis
-      vendor: Applied Thermal Technologies
-    - location: Singapore
-      role: Tooling Feasibility
-      vendor: NT Vision
-    - location: Mountain View, CA
-      role: Program HQ
-      vendor: WebTV / Microsoft
+  - location: Sunnyvale, CA
+    role: Mechanical Architecture
+    vendor: Mechanistic
+  - location: Fremont, CA
+    role: Rapid Fabrication
+    vendor: E-M Solutions
+  - location: Santa Clara, CA
+    role: Thermal CFD Analysis
+    vendor: Applied Thermal Technologies
+  - location: Singapore
+    role: Tooling Feasibility
+    vendor: NT Vision
+  - location: Mountain View, CA
+    role: Program HQ
+    vendor: WebTV / Microsoft
   tooling_chain:
-    - cost_impact: High
-      lead_time_weeks: 12
-      tool_name: Base Chassis Progressive Die
-      type: Hard Tooling
-      vendor: D&D Manufacturing / NT Vision (Singapore)
-    - cost_impact: High ($134.42 per fan bracket)
-      lead_time_weeks: 0.8
-      tool_name: Quick-Turn Prototype Line
-      type: Soft Tooling (Laser/Brake)
-      vendor: E-M Solutions (Fremont)
-    - cost_impact: High ($2,500 per unit)
-      lead_time_weeks: 2
-      tool_name: Front Bezel CNC
-      type: Soft Tooling (Machined)
-      vendor: Sputnik Models
+  - cost_impact: High
+    lead_time_weeks: 12
+    tool_name: Base Chassis Progressive Die
+    type: Hard Tooling
+    vendor: D&D Manufacturing / NT Vision (Singapore)
+  - cost_impact: High ($134.42 per fan bracket)
+    lead_time_weeks: 0.8
+    tool_name: Quick-Turn Prototype Line
+    type: Soft Tooling (Laser/Brake)
+    vendor: E-M Solutions (Fremont)
+  - cost_impact: High ($2,500 per unit)
+    lead_time_weeks: 2
+    tool_name: Front Bezel CNC
+    type: Soft Tooling (Machined)
+    vendor: Sputnik Models
 cyberspace:
   layout: linear
   stickies:
-    - data:
-        columns: 3
-        images:
-          - alt: galaxy3
-            aspectRatio: 1.5
-            src: /assets/r2/webtv-galaxy/bubbles/01_early_id/galaxy3.jpg
-          - alt: set top 2 prp2
-            aspectRatio: 1.5
-            src: /assets/r2/webtv-galaxy/bubbles/01_early_id/set top 2 prp2.jpg
-        layout: masonry
-        scattered: true
-      deck: []
-      featuredIndices: []
-      id: 01_early_id
-      title: Early Id
-      type: gallery
-    - data:
-        columns: 3
-        images:
-          - alt: galaxy_HDD Copy 1 (1)
-            aspectRatio: 1.5
-            src: /assets/r2/webtv-galaxy/bubbles/03_architecture/galaxy_HDD Copy 1 (1).png
-          - alt: galaxy_HDD Copy 1
-            aspectRatio: 1.5
-            src: /assets/r2/webtv-galaxy/bubbles/03_architecture/galaxy_HDD Copy 1.png
-        layout: masonry
-        scattered: true
-      deck: []
-      featuredIndices: []
-      id: 03_architecture
-      title: Architecture
-      type: gallery
-    - data:
-        columns: 3
-        images:
-          - alt: Assembly 1
-            aspectRatio: 1.5
-            src: /assets/r2/webtv-galaxy/bubbles/03_cpu/Assembly 1.png
-          - alt: galaxy_CPU (1)
-            aspectRatio: 1.5
-            src: /assets/r2/webtv-galaxy/bubbles/03_cpu/galaxy_CPU (1).png
-          - alt: galaxy_CPU
-            aspectRatio: 1.5
-            src: /assets/r2/webtv-galaxy/bubbles/03_cpu/galaxy_CPU.png
-        layout: masonry
-        scattered: true
-      deck: []
-      featuredIndices: []
-      id: 03_cpu
-      title: Cpu
-      type: gallery
-    - data:
-        columns: 3
-        images:
-          - alt: galaxy_HDD (1)
-            aspectRatio: 1.5
-            src: /assets/r2/webtv-galaxy/bubbles/03_hdd/galaxy_HDD (1).png
-          - alt: galaxy_HDD
-            aspectRatio: 1.5
-            src: /assets/r2/webtv-galaxy/bubbles/03_hdd/galaxy_HDD.png
-        layout: masonry
-        scattered: true
-      deck: []
-      featuredIndices: []
-      id: 03_hdd
-      title: Hdd
-      type: gallery
-    - data:
-        columns: 3
-        images:
-          - alt: Base_Proto_Deviations
-            aspectRatio: 1.5
-            src: /assets/r2/webtv-galaxy/bubbles/03_metal/Base_Proto_Deviations.jpg
-          - alt: DIMPLE_FORM
-            aspectRatio: 1.5
-            src: /assets/r2/webtv-galaxy/bubbles/03_metal/DIMPLE_FORM.png
-          - alt: galaxy_
-            aspectRatio: 1.5
-            src: /assets/r2/webtv-galaxy/bubbles/03_metal/galaxy_.png
-        layout: masonry
-        scattered: true
-      deck: []
-      featuredIndices: []
-      id: 03_metal
-      title: Metal
-      type: gallery
-    - data:
-        columns: 3
-        images:
-          - alt: model-iso
-            aspectRatio: 1.5
-            src: /assets/r2/webtv-galaxy/bubbles/03_thermal/model-iso.jpg
-          - alt: tempxz
-            aspectRatio: 1.5
-            src: /assets/r2/webtv-galaxy/bubbles/03_thermal/tempxz.jpg
-          - alt: velxz
-            aspectRatio: 1.5
-            src: /assets/r2/webtv-galaxy/bubbles/03_thermal/velxz.jpg
-        layout: masonry
-        scattered: true
-      deck: []
-      featuredIndices: []
-      id: 03_thermal
-      title: Thermal
-      type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: galaxy3
+        aspectRatio: 1.5
+        src: /assets/r2/webtv-galaxy/bubbles/01_early_id/galaxy3.jpg
+      - alt: set top 2 prp2
+        aspectRatio: 1.5
+        src: /assets/r2/webtv-galaxy/bubbles/01_early_id/set top 2 prp2.jpg
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 01_early_id
+    title: Early Id
+    type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: galaxy_HDD Copy 1 (1)
+        aspectRatio: 1.5
+        src: /assets/r2/webtv-galaxy/bubbles/03_architecture/galaxy_HDD Copy 1 (1).png
+      - alt: galaxy_HDD Copy 1
+        aspectRatio: 1.5
+        src: /assets/r2/webtv-galaxy/bubbles/03_architecture/galaxy_HDD Copy 1.png
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 03_architecture
+    title: Architecture
+    type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: Assembly 1
+        aspectRatio: 1.5
+        src: /assets/r2/webtv-galaxy/bubbles/03_cpu/Assembly 1.png
+      - alt: galaxy_CPU (1)
+        aspectRatio: 1.5
+        src: /assets/r2/webtv-galaxy/bubbles/03_cpu/galaxy_CPU (1).png
+      - alt: galaxy_CPU
+        aspectRatio: 1.5
+        src: /assets/r2/webtv-galaxy/bubbles/03_cpu/galaxy_CPU.png
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 03_cpu
+    title: Cpu
+    type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: galaxy_HDD (1)
+        aspectRatio: 1.5
+        src: /assets/r2/webtv-galaxy/bubbles/03_hdd/galaxy_HDD (1).png
+      - alt: galaxy_HDD
+        aspectRatio: 1.5
+        src: /assets/r2/webtv-galaxy/bubbles/03_hdd/galaxy_HDD.png
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 03_hdd
+    title: Hdd
+    type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: Base_Proto_Deviations
+        aspectRatio: 1.5
+        src: /assets/r2/webtv-galaxy/bubbles/03_metal/Base_Proto_Deviations.jpg
+      - alt: DIMPLE_FORM
+        aspectRatio: 1.5
+        src: /assets/r2/webtv-galaxy/bubbles/03_metal/DIMPLE_FORM.png
+      - alt: galaxy_
+        aspectRatio: 1.5
+        src: /assets/r2/webtv-galaxy/bubbles/03_metal/galaxy_.png
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 03_metal
+    title: Metal
+    type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: model-iso
+        aspectRatio: 1.5
+        src: /assets/r2/webtv-galaxy/bubbles/03_thermal/model-iso.jpg
+      - alt: tempxz
+        aspectRatio: 1.5
+        src: /assets/r2/webtv-galaxy/bubbles/03_thermal/tempxz.jpg
+      - alt: velxz
+        aspectRatio: 1.5
+        src: /assets/r2/webtv-galaxy/bubbles/03_thermal/velxz.jpg
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 03_thermal
+    title: Thermal
+    type: gallery
 date: 2001-03-05
-description:
-  The "Missing Link" between WebTV and Xbox. A 150W thermal crisis that
+description: The "Missing Link" between WebTV and Xbox. A 150W thermal crisis that
   forced the evolution of the living room console.
 documents: []
 draft: false
@@ -219,24 +218,18 @@ duration: 1.5 Years
 employer: mechanistic
 endDate: 2002-03-18
 forensic_metrics:
-  financial:
-    Managed $14k/mo burn rate on solo-consultant engineering services; mitigated
+  financial: Managed $14k/mo burn rate on solo-consultant engineering services; mitigated
     cost of custom 4-day quick-turn fabrication cycles
-  governance:
-    Weekly 'Mechanical Hitlist' protocol tracking 30+ gating defects; Centralized
+  governance: Weekly 'Mechanical Hitlist' protocol tracking 30+ gating defects; Centralized
     FTP master database control
-  process:
-    Achieved 28.3 CFM system airflow in high-density chassis; Resolved 100%
+  process: Achieved 28.3 CFM system airflow in high-density chassis; Resolved 100%
     of EMI chassis ground failures via flange redesign
 forensic_summary:
-  intervention:
-    Engineered a 300mm chassis extension with a directed airflow tunnel
+  intervention: Engineered a 300mm chassis extension with a directed airflow tunnel
     (28.3 CFM) and modular 'CPU Puck' sub-assembly.
-  result:
-    Stabilized CPU junction temperature at 84.0°C and Smart Card ambient <55.0°C;
+  result: Stabilized CPU junction temperature at 84.0°C and Smart Card ambient <55.0°C;
     assets pivoted to Xbox division upon program cancellation.
-  trigger:
-    Integration of desktop-class AMD K7 architecture (150W TDP) into a consumer
+  trigger: Integration of desktop-class AMD K7 architecture (150W TDP) into a consumer
     set-top box form factor.
 gallery: []
 heroImage: /assets/webtv-galaxy/webtv-galaxy-hero-01-xl.webp
@@ -244,12 +237,11 @@ hxo_ready: true
 hydration_status: full
 industry: consumer_electronics
 isomorphics:
-  - hardware_point:
-      Dissipating 150W within a consumer acoustic envelope required redefining
-      the physical volume.
-    label: Density
-    principle: Thermodynamics dictates architecture; form must follow heat flux.
-    software_point: Refactoring code monoliths to run on constrained hardware resources.
+- hardware_point: Dissipating 150W within a consumer acoustic envelope required redefining
+    the physical volume.
+  label: Density
+  principle: Thermodynamics dictates architecture; form must follow heat flux.
+  software_point: Refactoring code monoliths to run on constrained hardware resources.
 links: []
 metrics:
   cogs:
@@ -264,29 +256,29 @@ metrics:
   governance:
     dcos: 0
     ecos:
-      - THERMAL_CRISIS
-      - 150W_TDP
-      - FCC_CLASS_A
+    - THERMAL_CRISIS
+    - 150W_TDP
+    - FCC_CLASS_A
   interventions:
     count: 3
     label: Redesign Sprints
   process:
     engineeringChangeOrders:
-      - 50-Hour Proto Sprint
-      - 26-Hour Rev Turn
-      - 50-Hour Proto Sprint
-      - 26-Hour Rev Turn
-      - Trash BPS Layout
+    - 50-Hour Proto Sprint
+    - 26-Hour Rev Turn
+    - 50-Hour Proto Sprint
+    - 26-Hour Rev Turn
+    - Trash BPS Layout
   profitability:
     label: Thermal Load
     value: 150W
   quotes:
-    - The only concern is the Smart Card location. It probably need to be moved closer
-      to the inlet vent.
-    - Our concern would be warping of the base in the stamping process due to the quantity
-      and placement of the standoff's
-    - Microsoft, has (surprise) chosen the PC in general and the gaming console platform
-      specifically rather than the 'cable TV box'.
+  - The only concern is the Smart Card location. It probably need to be moved closer
+    to the inlet vent.
+  - Our concern would be warping of the base in the stamping process due to the quantity
+    and placement of the standoff's
+  - Microsoft, has (surprise) chosen the PC in general and the gaming console platform
+    specifically rather than the 'cable TV box'.
 notebook_url: https://notebooklm.google.com/notebook/a743c4b4-0aaf-446f-b18c-13f23b38065e?authuser=1
 phase_stats:
   Design: 20
@@ -297,84 +289,76 @@ presentation_mode: deep_dive
 production: prototype
 productionScale: one_off
 quotes:
-  - The only concern is the Smart Card location. It probably need to be moved closer
-    to the inlet vent.
-  - Microsoft, has (surprise) chosen the PC in general and the gaming console platform
-    specifically rather than the 'cable TV box'.
-  - Galaxy is a next generation DSS Satellite product... This product will be WebTV’s
-    new technology showcase.
+- The only concern is the Smart Card location. It probably need to be moved closer
+  to the inlet vent.
+- Microsoft, has (surprise) chosen the PC in general and the gaming console platform
+  specifically rather than the 'cable TV box'.
+- Galaxy is a next generation DSS Satellite product... This product will be WebTV’s
+  new technology showcase.
 scars:
-  - description:
-      Requested a non-functional 'Dog Unit' immediately upon arrival to reverse-engineer
-      failure points before looking at the spec sheet.
-    label: The 'Dog Unit' Request
-    value: First Principles
-  - description:
-      Halted a redesign loop by demanding a 'Dog Unit' teardown, proving
-      field failures were due to contamination, not design.
-    label: The 'First Principles' Defense
-    value: Teardown Authority
-  - description:
-      Identified a 150W 'God Box' prototype flaw where the Smart Card reader
-      hit 55\xB0C (melting point), forcing a chassis redesign.
-    label: The 'God Box' Thermal Tax
-    value: 55\xB0C Credit Card
-  - description:
-      Redesigned the Hard Drive Bracket to act as a structural air dam, forcing
-      28.3 CFM over the drives to prevent thermal shutdown.
-    label: The 'Wind Tunnel' Pivot
-    value: Structure as Duct
-  - description:
-      Redesigned the base chassis with 'Hook 29' strengthening ribs after
-      drawn standoffs caused 'potato chip' warping.
-    label: The 'Hook 29' Fix
-    value: Stamping Yield
-  - description:
-      Tracked down 'Linda the Repair Tech' to verify field failure rates
-      on the LED Spacers, avoiding an unnecessary $15k tooling redesign.
-    label: The Meter Investigation
-    value: Human Intelligence
-  - description:
-      Held the line on cosmetic 'short shots' and sink marks, risking a schedule
-      slip to prevent shipping a flawed flagship product.
-    label: The 'Short Shot' Stand
-    value: Quality Gate
-  - description:
-      The product didn't ship, but the DNA survived. The wind tunnel architecture
-      and thermal learnings were directly absorbed by the Xbox team. We built the one
-      that broke to teach them how to build the one that didn't.
-    label: Reincarnation
-    value: Xbox Thermal DNA
+- description: Requested a non-functional 'Dog Unit' immediately upon arrival to reverse-engineer
+    failure points before looking at the spec sheet.
+  label: The 'Dog Unit' Request
+  value: First Principles
+- description: Halted a redesign loop by demanding a 'Dog Unit' teardown, proving
+    field failures were due to contamination, not design.
+  label: The 'First Principles' Defense
+  value: Teardown Authority
+- description: Identified a 150W 'God Box' prototype flaw where the Smart Card reader
+    hit 55\xB0C (melting point), forcing a chassis redesign.
+  label: The 'God Box' Thermal Tax
+  value: 55\xB0C Credit Card
+- description: Redesigned the Hard Drive Bracket to act as a structural air dam, forcing
+    28.3 CFM over the drives to prevent thermal shutdown.
+  label: The 'Wind Tunnel' Pivot
+  value: Structure as Duct
+- description: Redesigned the base chassis with 'Hook 29' strengthening ribs after
+    drawn standoffs caused 'potato chip' warping.
+  label: The 'Hook 29' Fix
+  value: Stamping Yield
+- description: Tracked down 'Linda the Repair Tech' to verify field failure rates
+    on the LED Spacers, avoiding an unnecessary $15k tooling redesign.
+  label: The Meter Investigation
+  value: Human Intelligence
+- description: Held the line on cosmetic 'short shots' and sink marks, risking a schedule
+    slip to prevent shipping a flawed flagship product.
+  label: The 'Short Shot' Stand
+  value: Quality Gate
+- description: The product didn't ship, but the DNA survived. The wind tunnel architecture
+    and thermal learnings were directly absorbed by the Xbox team. We built the one
+    that broke to teach them how to build the one that didn't.
+  label: Reincarnation
+  value: Xbox Thermal DNA
 skillData: []
 slug: webtv-galaxy
 tags:
-  - Thermal
-  - Architecture
-  - Crisis
-  - Process
-  - Leadership
-  - Yield
+- Thermal
+- Architecture
+- Crisis
+- Process
+- Leadership
+- Yield
 teamSize: INT 5
 theme: hyperspace
 tier: 1
 timeline: []
 title: WebTV Galaxy
 toolchain:
-  - Pro/ENGINEER (Master Assembly)
-  - AutoCAD (Legacy 2D)
-  - Applied Thermal Technologies (CFD)
-  - E-M Solutions (Sheet Metal Fab)
-  - Sputnik Models (Hard Models)
-  - D&D Manufacturing (Stamping Feasibility)
+- Pro/ENGINEER (Master Assembly)
+- AutoCAD (Legacy 2D)
+- Applied Thermal Technologies (CFD)
+- E-M Solutions (Sheet Metal Fab)
+- Sputnik Models (Hard Models)
+- D&D Manufacturing (Stamping Feasibility)
 tools:
-  - pro_engineer
-  - thermal_simulation
-transcript: ""
+- pro_engineer
+- thermal_simulation
+transcript: ''
 visuals_to_find:
-  - model-iso.jpg (CFD Thermal Simulation)
-  - tempxz.jpg (Heat Map)
-  - Base_Proto_Deviations.jpg (QA Redlines)
-  - Galaxy Mechanical Design Hitlist 7-27.doc
+- model-iso.jpg (CFD Thermal Simulation)
+- tempxz.jpg (Heat Map)
+- Base_Proto_Deviations.jpg (QA Redlines)
+- Galaxy Mechanical Design Hitlist 7-27.doc
 ---
 
 WebTV Galaxy Forensic Report
@@ -410,6 +394,7 @@ V. VISUAL EVIDENCE
 What was the final decision regarding the Hook 29 detail?
 How did the team resolve the CPU puck installation interference?
 Tell me more about the 37dB noise tradeoff for cooling.
+
 
 What was the critical failure point for the Smart Card?
 How did the 'Hook 29' detail solve chassis warpage issues?
@@ -514,18 +499,17 @@ The "Puck" was originally conceived as a sealed, pre-assembled module containing
 II. THE INTERVENTION (Modular Decomposition)
 The engineering team executed a rapid architectural decomposition, transforming the "Puck" from a sealed box into a modular "clam-shell" assembly designed for in-situ construction.
 • Deconstructed Assembly: Instead of dropping in a finished unit, the assembly logic was rewritten to build the unit layer-by-layer inside the chassis:
-
 1. Bottom Shield (P/N 210-01005-001): Installed first to establish the ground plane.
 2. PCB & Thermal Stack: The motherboard and the massive 50x60x30mm heatsink were installed onto the bottom shield.
 3. Top Cover (P/N 210-01004-001): The heavy-gauge 1.0mm SPTE top cover was secured last, locking the assembly together.
-   III. SECONDARY ENGINEERING (EMI & Thermal Recovery)
-   Breaking the sealed module compromised the original electromagnetic interference (EMI) containment strategy for the noisy 150W processor. This necessitated immediate "Hitlist" Engineering Change Orders (ECOs):
-   • Continuous EMI Flanges: The original design used "tabs" that protruded into the board for grounding. These were unreliable in the new configuration. I implemented continuous EMI flanges on the top cover to ensure 360-degree contact with the PCB's metal grounding ring, creating a verified Faraday cage.
-   • Hexagonal Venting: To balance the thermal exhaust needs of the now-embedded module with RF shielding, the hole pattern was pushed to a 12.5mm hexagonal grid (flat-to-flat). This maximized the open area ratio for the side exhaust vents while remaining below the wavelength threshold for EMI leakage.
-   How did the 150W thermal load impact the HDD placement?
-   What other peripherals were under development for the Home Network?
-   How did the hex hole pattern balance EMI and airflow?
-   Tell me more about the 37dB noise tradeoff for cooling.
+III. SECONDARY ENGINEERING (EMI & Thermal Recovery)
+Breaking the sealed module compromised the original electromagnetic interference (EMI) containment strategy for the noisy 150W processor. This necessitated immediate "Hitlist" Engineering Change Orders (ECOs):
+• Continuous EMI Flanges: The original design used "tabs" that protruded into the board for grounding. These were unreliable in the new configuration. I implemented continuous EMI flanges on the top cover to ensure 360-degree contact with the PCB's metal grounding ring, creating a verified Faraday cage.
+• Hexagonal Venting: To balance the thermal exhaust needs of the now-embedded module with RF shielding, the hole pattern was pushed to a 12.5mm hexagonal grid (flat-to-flat). This maximized the open area ratio for the side exhaust vents while remaining below the wavelength threshold for EMI leakage.
+How did the 150W thermal load impact the HDD placement?
+What other peripherals were under development for the Home Network?
+How did the hex hole pattern balance EMI and airflow?
+Tell me more about the 37dB noise tradeoff for cooling.
 
 Galaxy Forensic Report: The Acoustic Penalty (37dB)
 SUBJECT: Acoustic vs. Thermal Trade-off Analysis COMPONENT: Active Cooling Subsystem (Delta Fan) STATUS: USER EXPERIENCE FAILURE / HARDWARE SURVIVAL
@@ -574,7 +558,7 @@ The Galaxy mandate called for a "High performance" system capable of recording "
 • The Bottleneck: While the AMD K7 CPU was a desktop-class "Thunderbird" running at high speeds, the I/O subsystem was tethered to a budget drive designed for "word processing" and "browsing the Internet", not high-bandwidth multi-stream MPEG2 video recording.
 III. FORENSIC EVIDENCE (Data Corruption)
 The recovered digital artifacts from the WebTV archives exhibit severe binary corruption, consistent with magnetic media failure or thermal degradation.
-• The Artifacts: WebTV_Volume_002, 005, and 007 contain extensive blocks of undecipherable binary garbage (e.g., tъw 8G>V) rather than legible filesystem data.
+• The Artifacts: WebTV_Volume_002, 005, and 007 contain extensive blocks of undecipherable binary garbage (e.g.,  tъw 8G>V) rather than legible filesystem data.
 • The Verdict: The specific combination of a "value" drive running near its thermal redline likely resulted in the total loss of the prototype software environment, leaving only fragmented binary residue.
 How did the 150W thermal load affect video conferencing and intercom plans?
 What was the role of the Home Network Gateway in the entertainment center?
@@ -641,16 +625,15 @@ III. FORENSIC EVIDENCE (The Paper Trail)
 The shift is visible in the financial artifacts. The billing codes switched overnight from satellite gateways to gaming consoles.
 • The Smoking Gun: On March 18, 2002, Mechanistic submitted invoice xbo_wni_001.xls. The description explicitly changed from "Galaxy" deliverables to "xbox redesign work".
 • The Tasking: The engineering mandate shifted from cooling a 150W K7 processor to:
-
 1. EMI Redesign: Eliminating the bottom plastic pan of the Xbox EMI liner.
 2. Storage Bridges: Designing a "bridge-type" carrier for the Xbox DVD and HDD.
 3. Cost Reduction: Identifying and removing non-contacting EMI fingers from the Xbox top cover to optimize stamping yield.
-   IV. CONCLUSION
-   The Galaxy project served as a "thermal live-fire exercise." The lessons learned from managing 150W densities, directed airflow tunnels, and high-speed storage integration in the Galaxy chassis were immediately weaponized to refine the Xbox architecture, which shared the same "PC in a box" DNA.
-   Tell me about the 150W thermal solution for Galaxy.
-   How did the 37dB fan noise impact user experience?
-   Why was the Galaxy project transitioned to the Xbox?
-   How were the Smart Card and CPU heat issues resolved?
+IV. CONCLUSION
+The Galaxy project served as a "thermal live-fire exercise." The lessons learned from managing 150W densities, directed airflow tunnels, and high-speed storage integration in the Galaxy chassis were immediately weaponized to refine the Xbox architecture, which shared the same "PC in a box" DNA.
+Tell me about the 150W thermal solution for Galaxy.
+How did the 37dB fan noise impact user experience?
+Why was the Galaxy project transitioned to the Xbox?
+How were the Smart Card and CPU heat issues resolved?
 
 Galaxy Forensic Report: Thermal Crisis Resolution
 SUBJECT: Thermodynamic Mitigation Strategy (CPU & Smart Card) ROLE: Principal Mechanical Architect STATUS: RESOLVED VIA ARCHITECTURAL MUTATION
@@ -684,16 +667,15 @@ III. FORENSIC EVIDENCE (The Paper Trail)
 The shift is visible in the financial artifacts. The billing codes switched overnight from satellite gateways to gaming consoles.
 • The Smoking Gun: On March 18, 2002, Mechanistic submitted invoice xbo_wni_001.xls. The description explicitly changed from "Galaxy" deliverables to "xbox redesign work".
 • The New Mandate: The engineering mandate shifted from cooling a 150W K7 processor to:
-
 1. EMI Redesign: Eliminating the bottom plastic pan of the Xbox EMI liner.
 2. Storage Bridges: Designing a "bridge-type" carrier for the Xbox DVD and HDD.
 3. Cost Reduction: Identifying and removing non-contacting EMI fingers from the Xbox top cover to optimize stamping yield.
-   IV. CONCLUSION
-   The Galaxy project served as a "thermal live-fire exercise." The lessons learned from managing 150W densities, directed airflow tunnels, and high-speed storage integration in the Galaxy chassis were immediately weaponized to refine the Xbox architecture, which shared the same "PC in a box" DNA.
-   Tell me about the Elmer and Titan prototype builds.
-   What other living room peripherals was WebTV developing?
-   How did the Mercury LC design differ from Galaxy?
-   What was the total airflow required to cool Galaxy?
+IV. CONCLUSION
+The Galaxy project served as a "thermal live-fire exercise." The lessons learned from managing 150W densities, directed airflow tunnels, and high-speed storage integration in the Galaxy chassis were immediately weaponized to refine the Xbox architecture, which shared the same "PC in a box" DNA.
+Tell me about the Elmer and Titan prototype builds.
+What other living room peripherals was WebTV developing?
+How did the Mercury LC design differ from Galaxy?
+What was the total airflow required to cool Galaxy?
 
 Based on the forensic thermal simulation logs and engineering artifacts, the Galaxy chassis required a total volumetric airflow of 28.3 CFM (Cubic Feet per Minute) to maintain operational stability.
 This airflow requirement was non-negotiable due to the following system constraints:

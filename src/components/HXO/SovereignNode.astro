@@ -12,7 +12,7 @@ const flattenMetrics = (obj: Record<string, any>, prefix = "") => {
 	if (!obj) return acc;
 
 	for (const [key, val] of Object.entries(obj)) {
-		if (key === "quotes" || key === "war_stories") continue;
+		if (key === "quotes" || key === "scars") continue;
 
 		const newKey = prefix ? `${prefix} ${key}` : key;
 

@@ -48,6 +48,10 @@ sidebar:
   - **Full Graph:** Enriched Phase IV (BOM/Cast/Timeline).
   - **Visual:** Fixed "Ghost Filter" (`targets: []`) and "Void Mask" (Z-Index) bugs.
   - **Status:** **VALIDATED.** Text-Only Mode active.
+- [2026-02-17] (Forensics): **Schedule Forensics Engine.**
+  - **Pipeline:** Automated MPP -> Excel -> NLM Text conversion for 95 schedules (`digidesign`, `avegant`, `kaleidescape`).
+  - **Analysis:** "Cone of Uncertainty" Volatility & Slippage Analysis (`scripts/analyze_task_volatility.py`).
+  - **Dashboard:** Live "Forensic Volatility Index" visualization (`/forensics`).
 
 ## 🚀 The Horizon (V6 Vision)
 
@@ -75,3 +79,8 @@ sidebar:
 - **[Refactor] Semantic Naming Strategy:**
   - **Goal:** Replace "Hyperspace" and standardize logic.
   - **Status:** **Friction.** Currently suffering from "Context Drag". Needs comprehensive semantic theming.
+
+- **[Infrastructure] Cloudflare Cleanup (Quantum):**
+  - **Goal:** Delete legacy "Quantum" project (175+ deployments) which blocks standard deletion.
+  - **Tool:** `scripts/nuke_cloudflare_deployments.py`.
+  - **Status:** **Deferred** (Feb 17). Script created, execution queued.

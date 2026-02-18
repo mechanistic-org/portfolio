@@ -1,7 +1,7 @@
 ---
 title: "Project Index"
 description: "Holistic Forensic Archive & Catalog"
-last_updated: "2026-02-17"
+last_updated: "2026-02-18"
 total_entries: 122
 ---
 
@@ -76,12 +76,12 @@ total_entries: 122
 ### C24 (`c24`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: Concurrent 'No-Bid' Supply Chain Crisis (Kwanta) and 'Banana Defect' Thermal Failure (Jetcrown) during Pilot INTERVENTION: Dual-Source Bridge Strategy (Mass Precision) and Vertical Hanging Fixture Protocol (ECO 12740) RESULT: Salvaged Nov 2007 Launch; Delivered 500 units for Q4 FQA
+> **Forensic Summary:** TRIGGER: Concurrent 'No-Bid' Supply Chain Crisis (Kwanta) and 'Banana Defect' Thermal Failure (Jetcrown) during Pilot [6, 7] INTERVENTION: Dual-Source Bridge Strategy (Mass Precision) and Vertical Hanging Fixture Protocol (ECO 12740) [6, 7] RESULT: Salvaged Nov 2007 Launch; Delivered 500 units for Q4 FQA [1, 7]
 
 **Key Metrics:**
-- **Financial:** Eliminated ~$200/unit Focusrite Royalty; 51.8% Gross Margin
-- **Governance:** Weekly Pulse / War Room coordination
-- **Process:** Headphone MTTR reduced from 2hrs to <10min; Side Cap flatness deviation <0.50mm
+- **Financial:** Eliminated ~$200/unit Focusrite Royalty; 51.80% Gross Margin [1, 2]
+- **Governance:** Weekly Pulse / War Room coordination [5]
+- **Process:** Headphone MTTR reduced from 2hrs to <10min [3]; Side Cap flatness deviation <0.50mm [4]
 
 ---
 

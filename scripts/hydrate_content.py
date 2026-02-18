@@ -69,12 +69,12 @@ def find_target_mdx(slug, content_dir):
 # --- Mining Logic (Stickies) ---
 
 
-def smart_merge_lists(existing_list, new_list, key_field):
+def smart_merge_lists(existing_list, new_list, key_field, priority="source"):
     """
-    Merges new_list into existing_list using an 'Upsert' strategy based on key_field.
-    - If an item in new_list matches an item in existing_list by key_field, OVERWRITE the existing item.
-    - If no match, APPEND the new item.
-    Returns the merged list.
+    Merges new_list into existing_list.
+    Priority:
+    - 'source' (Default): new_list overwrites existing_list.
+    - 'target': existing_list keeps its values if conflict.
     """
     if not existing_list:
         return new_list
@@ -87,35 +87,53 @@ def smart_merge_lists(existing_list, new_list, key_field):
         if isinstance(item, dict):
              return item.get(key_field)
         return str(item)
-        
-    for item in existing_list:
-        k = get_key(item)
-        if k:
-            merged_map[k] = item
-            
-    for item in new_list:
-        k = get_key(item)
-        if k:
-            merged_map[k] = item
+
+    # If Priority is TARGET, load EXISTING first, then NEW (only if missing)
+    # Actually, dictionary overwrite logic is: last one wins.
+    
+    if priority == "target":
+        # Load NEW first
+        for item in new_list:
+            k = get_key(item)
+            if k: merged_map[k] = item
+        # Load EXISTING second (Winner)
+        for item in existing_list:
+            k = get_key(item)
+            if k: merged_map[k] = item
+    else:
+        # Priority Source (Default)
+        # Load EXISTING first
+        for item in existing_list:
+            k = get_key(item)
+            if k: merged_map[k] = item
+        # Load NEW second (Winner)
+        for item in new_list:
+            k = get_key(item)
+            if k: merged_map[k] = item
             
     result_list = []
     seen_keys = set()
     
-    # 1. Pass through existing (updating inplace)
-    for item in existing_list:
+    # Reconstruct List (Preserve Order of Primary Source)
+    primary_list = existing_list if priority == "target" else new_list
+    secondary_list = new_list if priority == "target" else existing_list
+
+    # 1. Add all from Primary (with merged values)
+    for item in primary_list:
         k = get_key(item)
         if k:
             if k in merged_map:
                 result_list.append(merged_map[k])
                 seen_keys.add(k)
-            else:
-                 result_list.append(item)
-                 
-    # 2. Append new
-    for item in new_list:
+        else:
+             result_list.append(item)
+             
+    # 2. Add remaining from Secondary
+    for item in secondary_list:
         k = get_key(item)
         if k and k not in seen_keys:
-            result_list.append(item)
+            result_list.append(merged_map[k])
+            seen_keys.add(k)
              
     return result_list
 
@@ -538,7 +556,7 @@ def parse_notebook_dump(txt_path):
 
 # --- Main Hydration ---
 
-def hydrate_content(dry_run=False, force=False, target_slug=None):
+def hydrate_content(dry_run=False, force=False, target_slug=None, priority="source"):
     """
     Main hydration logic.
     """
@@ -754,7 +772,7 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
         # These were previously ignored "Dark Data"
         if "bom" in data:
             current_bom = post.metadata.get("bom") or []
-            merged_bom = smart_merge_lists(current_bom, data["bom"], "label")
+            merged_bom = smart_merge_lists(current_bom, data["bom"], "label", priority)
             
             if current_bom != merged_bom:
                  changes.append(f"  - Update 'bom' (Merged {len(data['bom'])} items)")
@@ -775,7 +793,7 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
 
         if "cast" in data:
             current_cast = post.metadata.get("cast") or []
-            merged_cast = smart_merge_lists(current_cast, data["cast"], "name")
+            merged_cast = smart_merge_lists(current_cast, data["cast"], "name", priority)
             
             if current_cast != merged_cast:
                  changes.append(f"  - Update 'cast' (Merged {len(data['cast'])} items)")
@@ -792,13 +810,16 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
 
         # 2. Scars (formerly War Stories) - V2.1 Renaming
         # Check 'scars' first, then 'war_stories' fallback
+        # 2. Scars (formerly War Stories) - V2.1 Renaming
+        # Check 'scars' first, then 'war_stories' fallback
         scars_data = data.get("scars")
         if not scars_data:
             scars_data = data.get("war_stories")
 
         if scars_data:
             current_scars = post.metadata.get("scars") or []
-            merged_scars = smart_merge_lists(current_scars, scars_data, "label")
+            # Scars use "label" as key
+            merged_scars = smart_merge_lists(current_scars, scars_data, "label", priority)
             
             if current_scars != merged_scars:
                 changes.append(f"  - Update 'scars' (Merged {len(scars_data)} items)")
@@ -1107,6 +1128,13 @@ def hydrate_content(dry_run=False, force=False, target_slug=None):
             
             # Update criteria: If IDs differ OR forcing update. 
             # For now, let's update if we found stickies, assuming Master is truth.
+            # Using Priority Flag for Stickies? 
+            # If priority="target" and we have stickies, we should probably keep them if they exist?
+            # Stickies are complex. Let's assume if priority=target, we trust the manual edits to stickies too.
+            
+            if priority == "target" and current_stickies:
+                 # Merge? Stickies don't merge well. Let's keep existing.
+                 mined_stickies = current_stickies
             
             # Ensure cyberspace exists
             if "cyberspace" not in post.metadata or post.metadata["cyberspace"] is None:
@@ -1264,23 +1292,27 @@ def reverse_hydrate_json(dry_run=False, target_slug=None):
                      data["forensic_summary"] = post.metadata["forensic_summary"]
                      changes.append(f"  - Backported 'forensic_summary'")
 
-            # 2. War Stories (The Gold)
-            # Check both root and metrics.war_stories
-            ws = post.metadata.get("war_stories")
-            if not ws and "metrics" in post.metadata:
-                ws = post.metadata["metrics"].get("war_stories")
+            # 2. Scars (Formerly War Stories)
+            # Check for 'scars' in MDX
+            scars = post.metadata.get("scars")
+             
+            # Fallback check for legacy war_stories in metrics (should be gone, but safety)
+            if not scars and "metrics" in post.metadata:
+                scars = post.metadata["metrics"].get("war_stories")
             
-            if ws:
+            if scars:
                  # Clean up format (remove numbers/legacy)
-                 clean_ws = [s for s in ws if isinstance(s, dict)]
-                 if clean_ws:
-                     # Ensure metrics dict exists in JSON
-                     if "metrics" not in data: data["metrics"] = {}
-                     
-                     # Compare
-                     if data["metrics"].get("war_stories") != clean_ws:
-                         data["metrics"]["war_stories"] = clean_ws
-                         changes.append(f"  - Backported {len(clean_ws)} War Stories")
+                 clean_scars = [s for s in scars if isinstance(s, dict)]
+                 if clean_scars:
+                     # Backport to JSON 'scars' field
+                     if data.get("scars") != clean_scars:
+                         data["scars"] = clean_scars
+                         changes.append(f"  - Backported {len(clean_scars)} Scars")
+                          
+                     # Clean up legacy war_stories if present in JSON
+                     if "war_stories" in data:
+                         del data["war_stories"]
+                         changes.append(f"  - Removed legacy 'war_stories' from JSON")
 
             # 3. Forensic Metrics (Process/Financial/Governance)
             # Only backport if present in MDX (we might have just deleted them in MDX, so don't revive from dead MDX? 
@@ -1364,6 +1396,10 @@ def reverse_hydrate_text(dry_run=False):
             post = frontmatter.load(mdx_file)
             project_slug = post.metadata.get("slug") or mdx_file.stem
             
+            # --- SIMULATION EXCLUSION (The Realm Protocol) ---
+            if post.metadata.get("realm") == "simulation":
+                continue
+            
             # Extract War Stories
             war_stories = []
             if "metrics" in post.metadata and "war_stories" in post.metadata["metrics"]:
@@ -1375,6 +1411,15 @@ def reverse_hydrate_text(dry_run=False):
                         if "Berry Creek" in label:
                             continue
                         war_stories.append(f"- **{label}**: {story.get('description')}")
+            
+            # Extract Scars (New Standard)
+            if "scars" in post.metadata:
+                scars = post.metadata["scars"]
+                for scar in scars:
+                    if isinstance(scar, dict):
+                        label = scar.get('label')
+                        if "Berry Creek" in label: continue
+                        war_stories.append(f"- **{label}**: {scar.get('description')}")
             
             # Extract Forensic Metrics
             forensics = []
@@ -1479,6 +1524,12 @@ def generate_project_index(dry_run=False):
             post = frontmatter.load(mdx_file)
             slug = post.metadata.get("slug") or mdx_file.stem
             title = post.metadata.get("title", slug)
+            
+            # --- SIMULATION EXCLUSION (The Realm Protocol) ---
+            # "Simulations" (Dreamjob) are excluded from the Forensic Registry.
+            # "Real Concepts" (production: concept, realm: reality) ARE included.
+            if post.metadata.get("realm") == "simulation":
+                continue
             
             # --- TIER 1 CHECKS ---
             summary = post.metadata.get("forensic_summary")
@@ -1619,6 +1670,8 @@ if __name__ == "__main__":
     parser.add_argument("--tier", action="store_true", help="Run Auto-Tiering Analysis (HXO).")
     parser.add_argument("--index", action="store_true", help="Generate Project Index (Forensic Registry).")
     
+    parser.add_argument("--priority", type=str, default="source", choices=["source", "target"], help="Conflict resolution priority.")
+    
     args = parser.parse_args()
     
     if args.reverse:
@@ -1632,7 +1685,7 @@ if __name__ == "__main__":
     elif args.index:
         generate_project_index(dry_run=args.dry_run)
     else:
-        hydrate_content(dry_run=args.dry_run, force=args.force, target_slug=args.slug)
+        hydrate_content(dry_run=args.dry_run, force=args.force, target_slug=args.slug, priority=args.priority)
         # Always regenerate index after hydration
         generate_project_index(dry_run=args.dry_run)
 

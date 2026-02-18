@@ -3,110 +3,107 @@ category: enterprise_hardware
 client: []
 complexity_vector:
   part_count_growth:
-    - count: 45
-      date: 2006-06
-      phase: Concept
-    - count: 120
-      date: 2006-12
-      phase: EVT (Eng Validation)
-    - count: 185
-      date: 2007-03
-      phase: DVT (Design Validation)
-    - count: 210
-      date: 2007-06
-      phase: PVT (Prod Validation)
-    - count: 227
-      date: 2007-08
-      notes:
-        Derived from BOM 801-1004_mech.xls; excludes drive population variance
-        [Source 8]
-      phase: MP (Mass Production)
+  - count: 45
+    date: 2006-06
+    phase: Concept
+  - count: 120
+    date: 2006-12
+    phase: EVT (Eng Validation)
+  - count: 185
+    date: 2007-03
+    phase: DVT (Design Validation)
+  - count: 210
+    date: 2007-06
+    phase: PVT (Prod Validation)
+  - count: 227
+    date: 2007-08
+    notes: Derived from BOM 801-1004_mech.xls; excludes drive population variance
+      [Source 8]
+    phase: MP (Mass Production)
   process_density:
-    - complexity_score: 9
-      material: Steel (CRS) / Riveted Assembly
-      notes: Critical alignment for 14 blind-mate backplane connectors [Source 8]
-      part_name: MECH Assy, Drive Cage - 3U Server (520-1015)
-      steps:
-        - Progressive Die Stamping
-        - Deburring
-        - E-Coat/Plating
-        - Riveting (Parts 501-1024, 501-1025, 501-1065)
-        - Integration of Drive Guides (330-1006)
-        - Snap-in Panel Assembly (502-1042)
-    - complexity_score: 8
-      material: Polycarbonate / ABS / Metal Inserts
-      notes: High cosmetic requirement; visible 'Jewel' of the system [Source 8]
-      part_name: ASSEMBLY, Printed, Front Screen (521-1004)
-      steps:
-        - Injection Molding
-        - Ultrasonic Heat Staking (Metal Inserts)
-        - Pad Printing (Logo/Text)
-        - Sub-assembly with Front Bezel Inner Door (520-1041)
-    - complexity_score: 6
-      material: Heavy Gauge Steel
-      notes: Structural integrity required to support stacked rack loads [Source 8]
-      part_name: MECH Assy, Chassis Cover (520-1038)
-      steps:
-        - Blanking
-        - Forming
-        - Welding (Parts 501-1018, 501-1046)
-        - Powder Coating
-        - Lining with Sound Dampening Material
+  - complexity_score: 9
+    material: Steel (CRS) / Riveted Assembly
+    notes: Critical alignment for 14 blind-mate backplane connectors [Source 8]
+    part_name: MECH Assy, Drive Cage - 3U Server (520-1015)
+    steps:
+    - Progressive Die Stamping
+    - Deburring
+    - E-Coat/Plating
+    - Riveting (Parts 501-1024, 501-1025, 501-1065)
+    - Integration of Drive Guides (330-1006)
+    - Snap-in Panel Assembly (502-1042)
+  - complexity_score: 8
+    material: Polycarbonate / ABS / Metal Inserts
+    notes: High cosmetic requirement; visible 'Jewel' of the system [Source 8]
+    part_name: ASSEMBLY, Printed, Front Screen (521-1004)
+    steps:
+    - Injection Molding
+    - Ultrasonic Heat Staking (Metal Inserts)
+    - Pad Printing (Logo/Text)
+    - Sub-assembly with Front Bezel Inner Door (520-1041)
+  - complexity_score: 6
+    material: Heavy Gauge Steel
+    notes: Structural integrity required to support stacked rack loads [Source 8]
+    part_name: MECH Assy, Chassis Cover (520-1038)
+    steps:
+    - Blanking
+    - Forming
+    - Welding (Parts 501-1018, 501-1046)
+    - Powder Coating
+    - Lining with Sound Dampening Material
   supply_chain_nodes:
-    - location: San Jose, CA / Mexico
-      notes: Primary CM for metal fabrication and assembly [Source 304]
-      role: FATP (Final Assembly)
-      vendor: Sanmina
-    - location: Taiwan
-      notes: Supplier of FSP700PSASK-KS [Source 27, 960]
-      role: Power Supply Vendor
-      vendor: Sparkle Power Inc. (SPI)
-    - location: Germany / Taiwan
-      notes: Supplier of Mini-ITX industrial boards (423-0389-00-A) [Source 476]
-      role: Motherboard Fab
-      vendor: Kontron
-    - location: Taiwan
-      notes: Supplier of feet and chassis hardware [Source 415]
-      role: Mechanical Components
-      vendor: Steman
+  - location: San Jose, CA / Mexico
+    notes: Primary CM for metal fabrication and assembly [Source 304]
+    role: FATP (Final Assembly)
+    vendor: Sanmina
+  - location: Taiwan
+    notes: Supplier of FSP700PSASK-KS [Source 27, 960]
+    role: Power Supply Vendor
+    vendor: Sparkle Power Inc. (SPI)
+  - location: Germany / Taiwan
+    notes: Supplier of Mini-ITX industrial boards (423-0389-00-A) [Source 476]
+    role: Motherboard Fab
+    vendor: Kontron
+  - location: Taiwan
+    notes: Supplier of feet and chassis hardware [Source 415]
+    role: Mechanical Components
+    vendor: Steman
   tooling_chain:
-    - cost_impact: High
-      lead_time_weeks: 12
-      notes:
-        Located in Mexico/USA; critical for dimensional accuracy of 3U fit [Source
-        296, 304]
-      tool_name: Chassis Stamping Dies
-      type: Hard Tooling (Progressive)
-      vendor: Sanmina
-    - cost_impact: Medium
-      lead_time_weeks: 10
-      notes: Located in Taiwan; responsible for cosmetic plastics [Source 617]
-      tool_name: Front Bezel Molds
-      type: Hard Tooling (Injection)
-      vendor: Yomura
-    - cost_impact: Medium
-      lead_time_weeks: 8
-      notes: Custom enclosure for FSP700PSASK-KS [Source 27, 960]
-      tool_name: PSU Enclosure Dies
-      type: Hard Tooling
-      vendor: Sparkle Power
+  - cost_impact: High
+    lead_time_weeks: 12
+    notes: Located in Mexico/USA; critical for dimensional accuracy of 3U fit [Source
+      296, 304]
+    tool_name: Chassis Stamping Dies
+    type: Hard Tooling (Progressive)
+    vendor: Sanmina
+  - cost_impact: Medium
+    lead_time_weeks: 10
+    notes: Located in Taiwan; responsible for cosmetic plastics [Source 617]
+    tool_name: Front Bezel Molds
+    type: Hard Tooling (Injection)
+    vendor: Yomura
+  - cost_impact: Medium
+    lead_time_weeks: 8
+    notes: Custom enclosure for FSP700PSASK-KS [Source 27, 960]
+    tool_name: PSU Enclosure Dies
+    type: Hard Tooling
+    vendor: Sparkle Power
 cyberspace:
   enable: true
   layout: linear
   stickies:
-    - align: center
-      data: null
-      id: intro
-      text: <strong>YEAR:</strong> 2008<br/><strong>ROLE:</strong> Kaleidescape
-      title: KSERVER-5000
-      type: media
-    - align: center
-      id: details
-      text:
-        This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong>
-        Other
-      title: PROJECT DATA
-      type: void
+  - align: center
+    data: null
+    id: intro
+    text: <strong>YEAR:</strong> 2008<br/><strong>ROLE:</strong> Kaleidescape
+    title: KSERVER-5000
+    type: media
+  - align: center
+    id: details
+    text: This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong>
+      Other
+    title: PROJECT DATA
+    type: void
 date: 2008-06-01 00:00:00+00:00
 description: KSERVER-5000 3U Server
 documents: []
@@ -119,7 +116,7 @@ hxo_ready: false
 hydration_status: executive
 industry: consumer_electronics
 links:
-  - url: https://kaleidescape.com
+- url: https://kaleidescape.com
 metrics:
   financial:
     costOfGoodsSold: []
@@ -140,7 +137,7 @@ scars: []
 slug: kserver-5000
 tags: []
 targets:
-  - main
+- main
 teamSize: Unknown
 theme: hyperspace
 tier: 1
@@ -184,9 +181,11 @@ How do grandfathered units bypass current import restrictions?
 What are the specific steps for the 'clean or die' protocol?
 Explain how RAID-K handles data recovery after a drive failure.
 
+
 What is the specific RAM used in the 3U server?
 How much content fits on the maximum 72TB storage?
 Why do legacy units command such high secondary market prices?
+
 
 How does RAID-K protect data if a drive fails?
 What makes the KSERVER-5000 a 'Grandfathered' system exactly?
@@ -293,17 +292,16 @@ The 2014 settlement introduced a hard "regulatory fork" in the Kaleidescape ecos
 I. THE LEGAL SINGULARITY (November 30, 2014)
 The settlement agreement enforced a permanent injunction against Kaleidescape, ruling that the company's "Import" feature for CSS-protected DVDs violated the "General Specifications" of the CSS license—specifically the requirement that a physical disc be present at the time of playback.
 This created two distinct classes of hardware:
-
 1. The "Grandfathered" Class (Pre-11/30/14)
-   Status: Unrestricted.
-   • Rights: Systems sold and activated prior to the cutoff retained the ability to decrypt and copy CSS-protected DVDs bit-for-bit to the server array.
-   • Playback Behavior: "Disc-Free." Once imported, the physical DVD is ejected and stored offline (e.g., in a box or attic). The server plays the digital file directly from the RAID-K array without verifying physical disc presence.
-   • Market Impact: These units became finite "Golden Ticket" assets, as they are the only legally sanctioned devices capable of this functionality.
+Status: Unrestricted.
+• Rights: Systems sold and activated prior to the cutoff retained the ability to decrypt and copy CSS-protected DVDs bit-for-bit to the server array.
+• Playback Behavior: "Disc-Free." Once imported, the physical DVD is ejected and stored offline (e.g., in a box or attic). The server plays the digital file directly from the RAID-K array without verifying physical disc presence.
+• Market Impact: These units became finite "Golden Ticket" assets, as they are the only legally sanctioned devices capable of this functionality.
 2. The Restricted Class (Post-11/30/14)
-   Status: Restricted ("Catalog Only").
-   • Rights: Systems activated after the cutoff are legally blocked from bypassing CSS encryption for storage purposes. They cannot "Import" commercial DVDs.
-   • Playback Behavior: "Disc-Required." The system can only "Catalog" the title—downloading metadata, cover art, and bookmarks. To play the movie, the physical disc must be inserted into a player tray or a robotic Disc Vault (DV700/M700) at the time of viewing to satisfy the CSS authentication check.
-   • The Workaround: This restriction forced the engineering of high-capacity robotic vaults (M700/DV700) to automate the "physical presence" requirement, simulating the server experience by mechanically managing hundreds of discs.
-   II. EXCEPTION PROTOCOLS
-   • Blu-ray Discs: The settlement did not alter Blu-ray playback. Due to separate AACS licensing, Blu-ray playback has always required the physical disc to be present (in a tray or vault) for playback, regardless of the server's age.
-   • Home Content: Unprotected DVDs (e.g., home movies) remain unaffected and can still be imported and played without the disc on all systems.
+Status: Restricted ("Catalog Only").
+• Rights: Systems activated after the cutoff are legally blocked from bypassing CSS encryption for storage purposes. They cannot "Import" commercial DVDs.
+• Playback Behavior: "Disc-Required." The system can only "Catalog" the title—downloading metadata, cover art, and bookmarks. To play the movie, the physical disc must be inserted into a player tray or a robotic Disc Vault (DV700/M700) at the time of viewing to satisfy the CSS authentication check.
+• The Workaround: This restriction forced the engineering of high-capacity robotic vaults (M700/DV700) to automate the "physical presence" requirement, simulating the server experience by mechanically managing hundreds of discs.
+II. EXCEPTION PROTOCOLS
+• Blu-ray Discs: The settlement did not alter Blu-ray playback. Due to separate AACS licensing, Blu-ray playback has always required the physical disc to be present (in a tray or vault) for playback, regardless of the server's age.
+• Home Content: Unprotected DVDs (e.g., home movies) remain unaffected and can still be imported and played without the disc on all systems.

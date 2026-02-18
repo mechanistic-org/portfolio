@@ -75,6 +75,15 @@ These scripts drive the "Forensic Data Factory."
   - **Function:** Audits MDX files for Law XXXIX Violations (Schema Separation).
   - **Protocol:** Run `python scripts/audit_metrics.py` before committing.
 
+- **Schedule Forensics Pipeline (`scripts/convert_mpp.py`)**
+  - **Function:** Converts legacy Microsoft Project (`.mpp`) files to Forensic Text (`nlm_optimized_schedules.txt`).
+  - **Dependencies:** Requires Java (OpenJDK 17) and `mpxj`.
+  - **Protocol:**
+    1.  Place `.mpp` files in `schedules/[client_name]`.
+    2.  Run `python scripts/convert_mpp.py`.
+    3.  Run `python scripts/format_schedules_nlm.py` to tokenize for AI ingestion.
+  - **Output:** `nlm_[client].txt` (for NotebookLM) and `curtis_task_volatility.csv` (for Dashboard).
+
 ---
 
 ## 2. Troubleshooting: The Build (Astro/Vite)
@@ -347,6 +356,24 @@ These scripts drive the "Forensic Data Factory."
 ### 🔴 "Schema Enum Trap" (Content Collection)
 
 - **Symptom:** `Invalid enum value` for `tools` or `productionScale`.
+
+### 🔴 "The Hidden Duplicate" (YAMLException)
+
+- **Symptom:** Build crashes with `YAMLException: duplicated mapping key`. You check the frontmatter and see only one key.
+- **Cause:** `hydrate_content.py` often appends a new `metrics:` block at the very end of the file (Line 1300+), while an empty `metrics: {}` exists at the top (Line 10).
+- **Fix:**
+  1.  Do NOT just scan the top. Scroll to the bottom.
+  2.  Use `Ctrl+F` for "metrics:".
+  3.  Delete the bottom duplicate. Move valid data to the top level.
+
+### 🔴 "The Invisible Drawer" (Z-Index Trap)
+
+- **Symptom:** HUD Metrics Drawer is in the DOM (`div.fixed`) but invisible.
+- **Cause:** It is sitting at `z-40` or `z-50`, which puts it _behind_ the `Hyperspace` Intro Layer or Canvas.
+- **Fix (Law XXIV):**
+  1.  **Elevate:** Set `z-[90]` (The Intercept Layer).
+  2.  **Contrast:** Add `bg-black/80 backdrop-blur-md` to force it out of the void.
+  3.  **Debug:** Temporarily hardcode `const showMetrics = true` to rule out logic failures first.
 - **Cause:** Trying to put "Vendor Names" (e.g., Sanmina, Yomura) into the `tools` array, which is strict Zod Enums (Software only).
 - **Fix:** Move physical vendors to the `toolchain` string array (which is loose).
 
@@ -392,6 +419,12 @@ To prevent "Stacking Wars", we vertically partition the Z-space into strict flig
 
 - **Function:** Generates placeholder "Narrative STAR" case studies for projects that lack manual content.
 - **Output:** Creates files in `data_source/manual_content/`.
+
+### `scripts/nuke_cloudflare_deployments.py` (The Nuclear Option)
+
+- **Function:** Batch-deletes Cloudflare Pages deployments to bypass the "Too many deployments" deletion blocker.
+- **Usage:** `python scripts/nuke_cloudflare_deployments.py --account-id [ID] --project-name quantum --delete-project --api-token [TOKEN]`
+- **Context:** Required when Wrangler/Dashboard fails to delete a legacy project due to timeout.
 
 ---
 

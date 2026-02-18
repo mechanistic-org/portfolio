@@ -58,13 +58,13 @@ sidebar:
 
 ---
 
-## 🛡️ IV. The Law of Sovereignty (Air Gap)
+### 🛡️ IV. The Sovereign Air Gap Decree (Binary Only)
 
-**Context:** Agents tried to "generate" assets associated with deep IP (e.g., C24 Schematics) when they were missing locally.
+**Context:** Confusion about "Asset Generation" vs "Text Ingestion" led to friction.
 
-1.  **THE AIR GAP:** Missing Asset != Needs Creation. It means "Fetch from R2."
-2.  **NO GENERATION:** Do not generate "Placeholder" assets for Sovereign Projects (C24, D-Control). A 404 is better than a Fake.
-3.  **THE VAULT:** `D:\GitHub\eriknorris-workspace\R2_MASTER` is the **Input Source**. You touch this to add new files.
+1.  **BINARY ONLY:** The Air Gap applies to **Binary Assets > 1MB** (Images, Videos, PDFs). These live in `R2_MASTER`.
+2.  **TEXT IS FREE:** Text-based data (JSON, MDX, Code) is **EXEMPT**. It flows freely to ensure the "Gem" is smart.
+3.  **THE VAULT:** `D:\GitHub\eriknorris-workspace\R2_MASTER` is the **Input Source** for Binaries.
 
 ---
 
@@ -222,9 +222,9 @@ sidebar:
 **Context:** Recurring "Silent Failures" where data vanished because the Schema (`z.any()`) allowed garbage in, but the UI (`.map()`) crashed on render.
 
 1.  **NO AMBIGUITY:** `z.any()` is **FORBIDDEN** in `src/content.config.ts`.
-2.  **FAIL LOUD:** The Schema must reject invalid data at _Build Time_, not Render Time.
-3.  **NULL SAFETY:** If a field can be legacy-empty, use `.nullable()`. Do not relax the type to `any`.
-4.  **BANNED FIELDS:** Use `z.never()` to explicitly block zombie fields (like `forensic_data`) from re-infecting the codebase.
+2.  **FAIL LOUD:** The Schema must reject invalid data at _Build Time_.
+3.  **MIGRATION MANDATE:** Legacy fields like `war_stories` must be migrated to strict types (`scars`).
+4.  **BANNED FIELDS:** Use `z.never()` to explicitly block zombie fields.
 
 ---
 
@@ -264,3 +264,24 @@ sidebar:
 1.  **DIRECT INJECTION:** If the Source (`notebook_dumps/*.txt`) contains a high-fidelity Forensic Report (Sections I-V), you inject it **VERBATIM** into the MDX Body.
 2.  **NO REFACTORING:** Do not normalize. Do not reformat. The NLM output is the Authority during migration.
 3.  **ESCAPE AT PRE-FLIGHT:** You MUST scan the raw text for MDX breakers (`<` + Number) and escape them (`\<`) _before_ injection. (See Law XVIII).
+
+---
+
+## 🛑 XXIV. The Law of the Intercept (Z-Index Layering)
+
+**Context:** The `ProjectManifestHUD` (Metrics Drawer) was invisible because it sat at `z-40` (Low Altitude), hidden behind the `Hyperspace` Intro Layer (`z-50`).
+
+1.  **THE INTERCEPT LAYER:** We established a new Flight Level: **INTERCEPT** at `z-[90]`.
+2.  **THE GAP:** This layer sits precisely between **CRUISING** (`z-50`, Standard UI) and **HIGH ALTITUDE** (`z-100`, Global Nav).
+3.  **USAGE:** Reserved for "Drawer" elements that must be visible over content but under the main HUD.
+4.  **BACKDROP:** Use `bg-black/80` + `backdrop-blur-md` to ensure legibility over the Starfield.
+
+---
+
+## 🗺️ XXV. The Law of the Living Map (Documentation)
+
+**Context:** The User requested the `z-index-map` during debugging. It existed but was outdated.
+
+1.  **DOCUMENTATION IS CODE:** The `z_index_map.md` is not a suggestion. It is the Air Traffic Control registry.
+2.  **UPDATE ON CHANGE:** If you invent a new Z-Index (like `z-90`), you **MUST** update `src/content/docs/design/z_index_map.md` immediately.
+3.  **NO GHOST LAYERS:** Undocumented Z-Indices are banned. If it's not on the Map, it's a collision waiting to happen.

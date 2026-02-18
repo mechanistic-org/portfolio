@@ -36,20 +36,14 @@ const hasData =
 	timeline !== undefined ||
 	(forensic_data && Object.keys(forensic_data).length > 0);
 
-const defaultTab =
-	(cast && cast.length > 0 && "cast") ||
-	(scars && scars.length > 0 && "scars") ||
-	(bom && bom.length > 0 && "bom") ||
-	(timeline && timeline.length > 0 && "timeline") ||
-	(forensic_data && Object.keys(forensic_data).length > 0 && "data") ||
-	"";
+const defaultTab = "";
 
 // console.log("ForensicDossier Debug:", { ... });
 ---
 
 {
 	hasData && (
-		<section class="relative z-[60] mt-24">
+		<section class="relative z-60 mt-24">
 			<Tabs
 				defaultValue={defaultTab}
 				class="grid w-full grid-cols-1 gap-8 md:grid-cols-[250px_1fr]"

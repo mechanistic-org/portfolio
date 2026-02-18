@@ -37,6 +37,9 @@ const projectsCollection = defineCollection({
 			primary_home: z.enum(["main", "mech", "play"]).default("main"),
 			asset_bucket: z.enum(["main", "mech", "play"]).default("main").optional(),
 
+			// Reality Discriminator (The Simulation Protocol)
+			realm: z.enum(["reality", "simulation"]).default("reality"),
+
 			employer: z
 				.enum(EMPLOYER_VALUES as any)
 				.catch("Self-Employed")
@@ -305,6 +308,7 @@ const projectsCollection = defineCollection({
 
 			audio_url: z.string().optional(),
 			notebook_url: z.string().optional(),
+			nlm_url: z.string().nullable().optional(), // NotebookLM "Oracle" Link
 
 			// NotebookLM Metrics (String-based)
 			forensic_metrics: z
@@ -332,11 +336,11 @@ const projectsCollection = defineCollection({
 			statusLabel: z.string().optional(),
 			job_title: z.enum(ROLE_VALUES as any).optional(),
 
-			// RENAMED from war_stories to scars (V2.1)
+			// Forensic Narrative (The Scars)
 			scars: z
 				.array(
 					z.union([
-						z.number(),
+						z.number(), // Legacy Ref Support
 						z.object({
 							label: z.string(),
 							value: z.string(),
@@ -345,9 +349,6 @@ const projectsCollection = defineCollection({
 					]),
 				)
 				.optional(),
-
-			// Legacy Fallback (Deprecated)
-			war_stories: z.any().optional(),
 
 			// Trust Signals (Isomorphic Narrative)
 			isomorphics: z
