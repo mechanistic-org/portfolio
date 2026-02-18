@@ -55,60 +55,54 @@ export const GET: APIRoute = async ({ params, locals }) => {
 	// Runs in:
 	// - 'npm run dev' (DEV mode)
 	// - 'npm run preview' (PROD mode but no Cloudflare bindings)
-	try {
-		// DYNAMIC IMPORTS: Explicitly prevent bundling these into the Worker
-		// DYNAMIC IMPORTS: Explicitly prevent bundling these into the Worker
-		const fs = (await import("node:fs")).default;
-		const path = (await import("node:path")).default;
-		const mime = (await import("mime-types")).default;
+	if (import.meta.env.DEV) {
+		try {
+			// DYNAMIC IMPORTS: Explicitly prevent bundling these into the Worker
+			const fs = (await import("node:fs")).default;
+			const path = (await import("node:path")).default;
+			const mime = (await import("mime-types")).default;
 
-		// DECODE: Handle spaces and special chars
-		let decodedPath = decodeURIComponent(assetPath);
+			// DECODE: Handle spaces and special chars
+			let decodedPath = decodeURIComponent(assetPath);
 
-		// NORMALIZE SLASHES: Ensure consistent forward slashes for checking
-		let checkPath = decodedPath.replace(/\\/g, "/");
+			// NORMALIZE SLASHES: Ensure consistent forward slashes for checking
+			let checkPath = decodedPath.replace(/\\/g, "/");
 
-		// [DEV FIX] Strip 'r2/' prefix if present
-		if (checkPath.startsWith("r2/")) {
-			decodedPath = checkPath.substring(3);
-		} else if (checkPath.startsWith("/r2/")) {
-			// Handle potential leading slash
-			decodedPath = checkPath.substring(4);
+			// [DEV FIX] Strip 'r2/' prefix if present
+			if (checkPath.startsWith("r2/")) {
+				decodedPath = checkPath.substring(3);
+			} else if (checkPath.startsWith("/r2/")) {
+				// Handle potential leading slash
+				decodedPath = checkPath.substring(4);
+			}
+
+			// RESOLVE ROOT: Ensure OS-correct slashes for the root
+			const stagingRoot = path.resolve("D:/GitHub/eriknorris-assets/R2_STAGING");
+
+			// JOIN: Use path.join to correctly handle slashes on Windows
+			const filePath = path.join(stagingRoot, decodedPath);
+
+			if (!fs.existsSync(filePath)) {
+				console.warn(`[Asset Proxy] 404 - File Not Found at: ${filePath}`);
+				return new Response(`Not Found Local: ${filePath}`, { status: 404 });
+			}
+
+			const contentType = mime.lookup(filePath) || "application/octet-stream";
+			const stream = fs.createReadStream(filePath);
+
+			// @ts-ignore
+			return new Response(stream, {
+				status: 200,
+				headers: {
+					"Content-Type": contentType,
+					"Cache-Control": "no-cache",
+				},
+			});
+		} catch (e) {
+			console.error(`[Local Proxy] Error serving ${assetPath}:`, e);
+			return new Response(`Internal Server Error: ${e}`, { status: 500 });
 		}
-
-		// RESOLVE ROOT: Ensure OS-correct slashes for the root
-		const stagingRoot = path.resolve("D:/GitHub/eriknorris-assets/R2_STAGING");
-
-		// JOIN: Use path.join to correctly handle slashes on Windows
-		const filePath = path.join(stagingRoot, decodedPath);
-
-		// console.log(`[Asset Proxy] Requesting: ${assetPath}`);
-		// console.log(`[Asset Proxy] Normalized Path: ${decodedPath}`);
-		// console.log(`[Asset Proxy] Resolving against: ${stagingRoot}`);
-		// console.log(`[Asset Proxy] Final Path: ${filePath}`);
-		// console.log(`[Asset Proxy] Exists? ${fs.existsSync(filePath)}`);
-
-		if (!fs.existsSync(filePath)) {
-			console.warn(`[Asset Proxy] 404 - File Not Found at: ${filePath}`);
-			return new Response(`Not Found Local: ${filePath}`, { status: 404 });
-		}
-
-		const contentType = mime.lookup(filePath) || "application/octet-stream";
-		const stream = fs.createReadStream(filePath);
-
-		// @ts-ignore
-		return new Response(stream, {
-			status: 200,
-			headers: {
-				"Content-Type": contentType,
-				"Cache-Control": "no-cache",
-			},
-		});
-	} catch (e) {
-		console.error(`[Local Proxy] Error serving ${assetPath}:`, e);
-		// Only return 500 if we are definitely trying to serve locally.
-		// If imports failed because we are in a Worker environment that doesn't support 'node:fs', it might be different.
-		// But since we checked for bindings first, we assume we are in a Node-capable env (Dev or Preview).
-		return new Response(`Internal Server Error: ${e}`, { status: 500 });
 	}
+
+	return new Response("Not Found", { status: 404 });
 };
