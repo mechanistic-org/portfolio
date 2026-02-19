@@ -103,16 +103,24 @@ const siteData: SiteDataProps = {
 	skills: [
 		"Mechanical Architecture",
 		"Forensic Engineering",
-		"Consumer Product Design",
+		"Consumer Product Design", // Unambiguous hardware focus
 		"High-Fidelity Hardware",
 		"Program Rescue",
-		"SolidWorks",
-		"Thermal Management",
+		"Consumer Electronics",
 		"Wearable AR",
+		"MCAD", // Renamed from CAD
+		"SolidWorks",
+		"Onshape",
+		"PTC Creo",
+		"Rapid Prototyping", // Promoted
 		"Manufacturing Strategy",
 		"Plastic Injection Molding",
 		"Sheet Metal Architecture",
 		"Mechanism Design",
+		"Thermal Management",
+		"Electromechanical Integration", // Replaces "Electronics"
+		"Design Verification Testing (DVT)",
+		"Product Lifecycle Management (PLM)",
 		"Team Leadership",
 	],
 	sameAs: [
