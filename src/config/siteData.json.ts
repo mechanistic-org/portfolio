@@ -1,30 +1,30 @@
 export interface SocialLinkProps {
 	platform:
-	| "github"
-	| "twitter"
-	| "mastodon"
-	| "linkedin"
-	| "instagram"
-	| "threads"
-	| "facebook"
-	| "youtube"
-	| "twitch"
-	| "tiktok"
-	| "snapchat"
-	| "reddit"
-	| "pinterest"
-	| "medium"
-	| "dev"
-	| "dribbble"
-	| "behance"
-	| "codepen"
-	| "producthunt"
-	| "discord"
-	| "slack"
-	| "whatsapp"
-	| "telegram"
-	| "email" // you should always at least have an email
-	| "resume";
+		| "github"
+		| "twitter"
+		| "mastodon"
+		| "linkedin"
+		| "instagram"
+		| "threads"
+		| "facebook"
+		| "youtube"
+		| "twitch"
+		| "tiktok"
+		| "snapchat"
+		| "reddit"
+		| "pinterest"
+		| "medium"
+		| "dev"
+		| "dribbble"
+		| "behance"
+		| "codepen"
+		| "producthunt"
+		| "discord"
+		| "slack"
+		| "whatsapp"
+		| "telegram"
+		| "email" // you should always at least have an email
+		| "resume";
 	link: string;
 }
 
@@ -49,6 +49,9 @@ export interface SiteDataProps {
 		type: "production" | "under-construction" | "maintenance";
 		text?: string;
 	};
+	skills: string[];
+	sameAs: string[];
+	alumni: string;
 }
 
 // Update this file with your site specific information
@@ -97,6 +100,20 @@ const siteData: SiteDataProps = {
 		type: "under-construction", // "production" | "under-construction" | "maintenance"
 		text: "UNDER CONSTRUCTION",
 	},
+	skills: [
+		"Mechanical Architecture",
+		"Forensic Engineering",
+		"Consumer Product Design",
+		"High-Fidelity Hardware",
+		"Program Rescue",
+	],
+	sameAs: [
+		"https://www.linkedin.com/in/eriknorris/",
+		"https://github.com/eriknorris",
+		"https://mechanistic.com",
+		"https://moreplay.com",
+	],
+	alumni: "Mechanistic",
 };
 
 export default siteData;

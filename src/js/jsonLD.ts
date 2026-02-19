@@ -1,7 +1,8 @@
 import siteData from "@config/siteData.json";
 
 interface GeneralProps {
-	type: "general" | "project";
+	type: "general";
+	url: URL;
 }
 
 export interface ProjectProps {
@@ -53,6 +54,31 @@ export default function jsonLDGenerator(props: JsonLDProps) {
         }
       }
     </script>`;
+	}
+
+	const { url } = props as GeneralProps;
+	// ProfilePage Logic (Homepage Only or General fallback)
+	if (url.pathname === "/" || url.pathname === "") {
+		return `<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": ["ProfilePage", "Person"],
+		  "name": "${siteData.author.name}",
+		  "jobTitle": "Principal Mechanical Architect",
+		  "description": "${siteData.description}",
+		  "url": "${import.meta.env.SITE}",
+		  "sameAs": [
+			${siteData.sameAs.map((link) => `"${link}"`).join(",\n\t\t\t")}
+		  ],
+		  "knowsAbout": [
+			${siteData.skills.map((skill) => `"${skill}"`).join(",\n\t\t\t")}
+		  ],
+		  "alumniOf": {
+			"@type": "Organization",
+			"name": "${siteData.alumni}"
+		  }
+		}
+		</script>`;
 	}
 
 	return `<script type="application/ld+json">
