@@ -127,6 +127,16 @@ These scripts drive the "Forensic Data Factory."
 - **Cause:** Unquoted keys starting with numbers (`01_intro:`) or `<` symbols in body text.
   - Quote Keys: `"01_intro":`
   - Escape Brackets: `&lt;15kCOGS` or `less than 15k`.
+- **Note (Feb 2026):** `vite-plugin-mdx` specifically crashes on `<` followed by a **digit** (e.g. `<10min`). Run `scripts/fix_mdx_syntax.py` to sanitize.
+
+### 🔴 "The Edge Runtime Trap" (Node.js Modules)
+
+- **Symptom:** Build fails with `[vite:resolve] Automatically externalized node built-in module "node:fs"`.
+- **Context:** Cloudflare Workers do not support Node.js APIs (`fs`, `path`).
+- **Fix:**
+  1.  **Gate Logic:** Use `if (import.meta.env.DEV) { ... }`.
+  2.  **Vite Ignore:** Use `/* @vite-ignore */` on dynamic imports: `await import(/* @vite-ignore */ "node:fs")`.
+  3.  **Refactor:** Move logic to a build script if possible. Do not import `fs` in runtime components.
 
 ### 🔴 "MDX Regression" (Hydration Overwrite)
 

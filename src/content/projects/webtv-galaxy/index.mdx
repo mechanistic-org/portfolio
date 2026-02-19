@@ -1,5 +1,8 @@
 ---
 additionalSkills: []
+title: "WebTV Galaxy"
+presentation_mode: deep_dive
+heroImage: /assets/r2/webtv-galaxy/webtv-galaxy-hero-01-xl.webp
 audio_url: /assets/webtv-galaxy/webtv-galaxy-briefing.m4a
 bom:
 - label: CPU
@@ -331,14 +334,7 @@ scars:
   value: Xbox Thermal DNA
 skillData: []
 slug: webtv-galaxy
-tags:
-- Thermal
-- Architecture
-- Crisis
-- Process
-- Leadership
-- Yield
-teamSize: INT 5
+tags: [Architecture, Crisis, Process, Leadership, Yield]
 theme: hyperspace
 tier: 1
 timeline: []
@@ -359,6 +355,7 @@ visuals_to_find:
 - tempxz.jpg (Heat Map)
 - Base_Proto_Deviations.jpg (QA Redlines)
 - Galaxy Mechanical Design Hitlist 7-27.doc
+teamSize: INT 5
 ---
 
 WebTV Galaxy Forensic Report
@@ -394,7 +391,6 @@ V. VISUAL EVIDENCE
 What was the final decision regarding the Hook 29 detail?
 How did the team resolve the CPU puck installation interference?
 Tell me more about the 37dB noise tradeoff for cooling.
-
 
 What was the critical failure point for the Smart Card?
 How did the 'Hook 29' detail solve chassis warpage issues?
@@ -499,17 +495,18 @@ The "Puck" was originally conceived as a sealed, pre-assembled module containing
 II. THE INTERVENTION (Modular Decomposition)
 The engineering team executed a rapid architectural decomposition, transforming the "Puck" from a sealed box into a modular "clam-shell" assembly designed for in-situ construction.
 • Deconstructed Assembly: Instead of dropping in a finished unit, the assembly logic was rewritten to build the unit layer-by-layer inside the chassis:
+
 1. Bottom Shield (P/N 210-01005-001): Installed first to establish the ground plane.
 2. PCB & Thermal Stack: The motherboard and the massive 50x60x30mm heatsink were installed onto the bottom shield.
 3. Top Cover (P/N 210-01004-001): The heavy-gauge 1.0mm SPTE top cover was secured last, locking the assembly together.
-III. SECONDARY ENGINEERING (EMI & Thermal Recovery)
-Breaking the sealed module compromised the original electromagnetic interference (EMI) containment strategy for the noisy 150W processor. This necessitated immediate "Hitlist" Engineering Change Orders (ECOs):
-• Continuous EMI Flanges: The original design used "tabs" that protruded into the board for grounding. These were unreliable in the new configuration. I implemented continuous EMI flanges on the top cover to ensure 360-degree contact with the PCB's metal grounding ring, creating a verified Faraday cage.
-• Hexagonal Venting: To balance the thermal exhaust needs of the now-embedded module with RF shielding, the hole pattern was pushed to a 12.5mm hexagonal grid (flat-to-flat). This maximized the open area ratio for the side exhaust vents while remaining below the wavelength threshold for EMI leakage.
-How did the 150W thermal load impact the HDD placement?
-What other peripherals were under development for the Home Network?
-How did the hex hole pattern balance EMI and airflow?
-Tell me more about the 37dB noise tradeoff for cooling.
+   III. SECONDARY ENGINEERING (EMI & Thermal Recovery)
+   Breaking the sealed module compromised the original electromagnetic interference (EMI) containment strategy for the noisy 150W processor. This necessitated immediate "Hitlist" Engineering Change Orders (ECOs):
+   • Continuous EMI Flanges: The original design used "tabs" that protruded into the board for grounding. These were unreliable in the new configuration. I implemented continuous EMI flanges on the top cover to ensure 360-degree contact with the PCB's metal grounding ring, creating a verified Faraday cage.
+   • Hexagonal Venting: To balance the thermal exhaust needs of the now-embedded module with RF shielding, the hole pattern was pushed to a 12.5mm hexagonal grid (flat-to-flat). This maximized the open area ratio for the side exhaust vents while remaining below the wavelength threshold for EMI leakage.
+   How did the 150W thermal load impact the HDD placement?
+   What other peripherals were under development for the Home Network?
+   How did the hex hole pattern balance EMI and airflow?
+   Tell me more about the 37dB noise tradeoff for cooling.
 
 Galaxy Forensic Report: The Acoustic Penalty (37dB)
 SUBJECT: Acoustic vs. Thermal Trade-off Analysis COMPONENT: Active Cooling Subsystem (Delta Fan) STATUS: USER EXPERIENCE FAILURE / HARDWARE SURVIVAL
@@ -558,7 +555,7 @@ The Galaxy mandate called for a "High performance" system capable of recording "
 • The Bottleneck: While the AMD K7 CPU was a desktop-class "Thunderbird" running at high speeds, the I/O subsystem was tethered to a budget drive designed for "word processing" and "browsing the Internet", not high-bandwidth multi-stream MPEG2 video recording.
 III. FORENSIC EVIDENCE (Data Corruption)
 The recovered digital artifacts from the WebTV archives exhibit severe binary corruption, consistent with magnetic media failure or thermal degradation.
-• The Artifacts: WebTV_Volume_002, 005, and 007 contain extensive blocks of undecipherable binary garbage (e.g.,  tъw 8G>V) rather than legible filesystem data.
+• The Artifacts: WebTV_Volume_002, 005, and 007 contain extensive blocks of undecipherable binary garbage (e.g., tъw 8G>V) rather than legible filesystem data.
 • The Verdict: The specific combination of a "value" drive running near its thermal redline likely resulted in the total loss of the prototype software environment, leaving only fragmented binary residue.
 How did the 150W thermal load affect video conferencing and intercom plans?
 What was the role of the Home Network Gateway in the entertainment center?
@@ -625,15 +622,16 @@ III. FORENSIC EVIDENCE (The Paper Trail)
 The shift is visible in the financial artifacts. The billing codes switched overnight from satellite gateways to gaming consoles.
 • The Smoking Gun: On March 18, 2002, Mechanistic submitted invoice xbo_wni_001.xls. The description explicitly changed from "Galaxy" deliverables to "xbox redesign work".
 • The Tasking: The engineering mandate shifted from cooling a 150W K7 processor to:
+
 1. EMI Redesign: Eliminating the bottom plastic pan of the Xbox EMI liner.
 2. Storage Bridges: Designing a "bridge-type" carrier for the Xbox DVD and HDD.
 3. Cost Reduction: Identifying and removing non-contacting EMI fingers from the Xbox top cover to optimize stamping yield.
-IV. CONCLUSION
-The Galaxy project served as a "thermal live-fire exercise." The lessons learned from managing 150W densities, directed airflow tunnels, and high-speed storage integration in the Galaxy chassis were immediately weaponized to refine the Xbox architecture, which shared the same "PC in a box" DNA.
-Tell me about the 150W thermal solution for Galaxy.
-How did the 37dB fan noise impact user experience?
-Why was the Galaxy project transitioned to the Xbox?
-How were the Smart Card and CPU heat issues resolved?
+   IV. CONCLUSION
+   The Galaxy project served as a "thermal live-fire exercise." The lessons learned from managing 150W densities, directed airflow tunnels, and high-speed storage integration in the Galaxy chassis were immediately weaponized to refine the Xbox architecture, which shared the same "PC in a box" DNA.
+   Tell me about the 150W thermal solution for Galaxy.
+   How did the 37dB fan noise impact user experience?
+   Why was the Galaxy project transitioned to the Xbox?
+   How were the Smart Card and CPU heat issues resolved?
 
 Galaxy Forensic Report: Thermal Crisis Resolution
 SUBJECT: Thermodynamic Mitigation Strategy (CPU & Smart Card) ROLE: Principal Mechanical Architect STATUS: RESOLVED VIA ARCHITECTURAL MUTATION
@@ -667,15 +665,16 @@ III. FORENSIC EVIDENCE (The Paper Trail)
 The shift is visible in the financial artifacts. The billing codes switched overnight from satellite gateways to gaming consoles.
 • The Smoking Gun: On March 18, 2002, Mechanistic submitted invoice xbo_wni_001.xls. The description explicitly changed from "Galaxy" deliverables to "xbox redesign work".
 • The New Mandate: The engineering mandate shifted from cooling a 150W K7 processor to:
+
 1. EMI Redesign: Eliminating the bottom plastic pan of the Xbox EMI liner.
 2. Storage Bridges: Designing a "bridge-type" carrier for the Xbox DVD and HDD.
 3. Cost Reduction: Identifying and removing non-contacting EMI fingers from the Xbox top cover to optimize stamping yield.
-IV. CONCLUSION
-The Galaxy project served as a "thermal live-fire exercise." The lessons learned from managing 150W densities, directed airflow tunnels, and high-speed storage integration in the Galaxy chassis were immediately weaponized to refine the Xbox architecture, which shared the same "PC in a box" DNA.
-Tell me about the Elmer and Titan prototype builds.
-What other living room peripherals was WebTV developing?
-How did the Mercury LC design differ from Galaxy?
-What was the total airflow required to cool Galaxy?
+   IV. CONCLUSION
+   The Galaxy project served as a "thermal live-fire exercise." The lessons learned from managing 150W densities, directed airflow tunnels, and high-speed storage integration in the Galaxy chassis were immediately weaponized to refine the Xbox architecture, which shared the same "PC in a box" DNA.
+   Tell me about the Elmer and Titan prototype builds.
+   What other living room peripherals was WebTV developing?
+   How did the Mercury LC design differ from Galaxy?
+   What was the total airflow required to cool Galaxy?
 
 Based on the forensic thermal simulation logs and engineering artifacts, the Galaxy chassis required a total volumetric airflow of 28.3 CFM (Cubic Feet per Minute) to maintain operational stability.
 This airflow requirement was non-negotiable due to the following system constraints:

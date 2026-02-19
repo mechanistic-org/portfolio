@@ -222,3 +222,19 @@ These vectors are explicitly mined using `deep_research_prompt_v1.txt`:
   - **Asset Sovereignty:** Assets identified as missing (Text-Only Mode).
   - **Entropy:** Populated `_entropy.json` with 25+ forensic events (Crisis: Bezel Interference).
 - **[STATUS] KPlayer-6000:** **READY STATE**.
+
+## 📝 Session Log: 2026-02-18 (Build Stabilization)
+
+**Objective:** Stabilize Cloudflare Build (Asset Proxy & MDX Crashing).
+
+- **[TECH] Asset Proxy Hardening:**
+  - **Issue:** `src/pages/assets/[...path].ts` imported `node:fs` in development, but Vite bundled it for Cloudflare, causing "Edge Runtime" crash.
+  - **Fix:** Used dynamic `await import(/* @vite-ignore */ "node:fs")` gated strictly behind `if (import.meta.env.DEV)`.
+- **[TECH] MDX Sanitization (The Global Escape):**
+  - **Issue:** Build failed with `Unexpected character` in `vite-plugin-mdx`.
+  - **Root Cause:** 43 instances of `<` followed by a number (e.g. `<10min`) in `c24`, `makeline`, `sc48`. Valid HTML but invalid JSX.
+  - **Fix:** Created `scripts/fix_mdx_syntax.py` to regex-replace `(?<!\\)<(\d)` with `&lt;\1`.
+- **[TECH] Cinema-One Repair:**
+  - **Issue:** Recursive `forensic_data` block caused schema violation.
+  - **Fix:** Surgically removed the block and deleted the source `_data.json` to prevent re-hydration.
+- **[STATUS] Build:** **STABLE**. Deployment verified.

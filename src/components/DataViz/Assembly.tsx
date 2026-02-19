@@ -54,9 +54,9 @@ const Assembly: React.FC<MultiverseGraphProps> = ({ data }) => {
 				name: d.name.replace("skill-", ""),
 				group: d.group?.trim(),
 				radius: r,
-				// Initial State: Exploded off-screen (Bottom)
-				x: width / 2 + (Math.random() - 0.5) * 500,
-				y: height + 500 + Math.random() * 500,
+				// Initial State: Random X, Bottom Y (to float up)
+				x: width / 2 + (Math.random() - 0.5) * 100,
+				y: height + Math.random() * 200,
 			};
 		});
 

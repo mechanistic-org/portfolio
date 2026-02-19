@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import type { CareerAssembly, AssemblyNode, AssemblyLink } from "../../utils/mapCareerAssembly";
+import { getEntityColor } from "../../config/color_registry";
 
 interface WrapperProps {
 	data: CareerAssembly;
@@ -68,6 +69,76 @@ const ExplodedView: React.FC<WrapperProps> = ({ data }) => {
 		svg.call(zoom);
 
 		// SIMULATION
+		// TIME SCALE
+		// Determine range
+		const dates = nodes
+			.map((d: any) => (d.date ? new Date(d.date) : null))
+			.filter((d) => d) as Date[];
+		const minDate = d3.min(dates) || new Date(2000, 0, 1);
+		const maxDate = new Date(); // Top is Now
+
+		// Map Time to Y-Axis (Top=Now, Bottom=Past)
+		const timeScale = d3
+			.scaleTime()
+			.domain([maxDate, minDate])
+			.range([100, height - 100]); // Padding
+
+		// SKILL TAXONOMY (The Circuit Board Lanes)
+		const LANE_LEFT = width * 0.25; // Hard Skills (Tools, Tech)
+		const LANE_CENTER = width * 0.5; // Projects (Time Spine)
+		const LANE_RIGHT = width * 0.75; // Soft Skills (Management, Process)
+
+		const HARD_SKILLS = new Set([
+			"solidworks",
+			"pro/e",
+			"onshape",
+			"cad",
+			"autocad",
+			"keyshot",
+			"mechanical engineering",
+			"product design",
+			"industrial design",
+			"mechanism",
+			"plastic",
+			"steel",
+			"aluminum",
+			"materials",
+			"electronics",
+			"pcb",
+			"hardware architecture",
+			"mechatronics",
+			"injection molding",
+			"die casting",
+			"sheet metal",
+			"machining",
+			"dfm",
+			"manufacturing",
+			"thermal",
+			"rf",
+			"emi",
+			"audio",
+			"testing",
+			"rapid prototyping",
+		]);
+
+		const SOFT_SKILLS = new Set([
+			"leadership",
+			"management",
+			"engineering management",
+			"team lead",
+			"cross-functional",
+			"strategy",
+			"product management",
+			"program management",
+			"process",
+			"agile",
+			"research",
+			"r&d",
+			"crisis",
+			"yield",
+			"cost_down",
+		]);
+
 		const simulation = d3
 			.forceSimulation(nodes)
 			.force(
@@ -77,11 +148,38 @@ const ExplodedView: React.FC<WrapperProps> = ({ data }) => {
 					.id((d: any) => d.id)
 					.distance(50),
 			)
-			.force("charge", d3.forceManyBody().strength(-100))
-			.force("center", d3.forceCenter(width / 2, height / 2))
+			.force("charge", d3.forceManyBody().strength(-150))
+			.force(
+				"x",
+				d3
+					.forceX<AssemblyNode>((d: any) => {
+						if (d.type === "project") return LANE_CENTER;
+
+						// Skill Partitioning
+						const name = d.id.toLowerCase();
+						if (HARD_SKILLS.has(name) || Array.from(HARD_SKILLS).some((k) => name.includes(k)))
+							return LANE_LEFT;
+						if (SOFT_SKILLS.has(name) || Array.from(SOFT_SKILLS).some((k) => name.includes(k)))
+							return LANE_RIGHT;
+
+						return LANE_LEFT; // Default to Left (Hard) for unlabeled tech info
+					})
+					.strength((d: any) => (d.type === "project" ? 0.5 : 0.3)), // Strict lanes
+			)
+			.force(
+				"y",
+				d3
+					.forceY<AssemblyNode>((d: any) => {
+						if (d.type === "project" && d.date) {
+							return timeScale(new Date(d.date));
+						}
+						return height / 2;
+					})
+					.strength((d: any) => (d.type === "project" ? 0.9 : 0.05)), // Vertical sorting for projects
+			)
 			.force(
 				"collide",
-				d3.forceCollide().radius((d: any) => (d.radius || 10) + 5),
+				d3.forceCollide().radius((d: any) => (d.radius || 10) + 8),
 			);
 
 		// RENDER LINKS
@@ -103,13 +201,51 @@ const ExplodedView: React.FC<WrapperProps> = ({ data }) => {
 			.attr("class", "node-group")
 			.style("cursor", "pointer") // Indicate interactivity
 			.on("click", (event, d) => {
+				event.stopPropagation(); // Prevent background click
 				if (d.type === "project") {
 					// Strip extension if present (e.g. c24/index.mdx -> c24, or acer.mdx -> acer)
 					// Handle index files: c24/index.mdx -> c24
 					// Handle flat files: acer.mdx -> acer
 					const slug = d.id.replace(/\/index\.mdx$/, "").replace(/\.(mdx|md)$/, "");
 					window.location.href = `/projects/${slug}`;
+				} else if (d.type === "skill") {
+					// Normalize tag to slug (must match logic in [tag].astro)
+					const slug = d.id
+						.replace("skill-", "")
+						.toLowerCase()
+						.replace(/[^a-z0-9]+/g, "-")
+						.replace(/^-|-$/g, "");
+					window.location.href = `/tags/${slug}`;
 				}
+			})
+			.on("mouseenter", (event, d) => {
+				// Dim all nodes and links
+				node.style("opacity", 0.1);
+				link.style("opacity", 0.1);
+
+				// Highlight selected node
+				d3.select(event.currentTarget).style("opacity", 1);
+
+				// Highlight connected links
+				link
+					.filter((l: any) => l.source.id === d.id || l.target.id === d.id)
+					.style("opacity", 1)
+					.attr("stroke", "#22d3ee")
+					.attr("stroke-width", 2);
+
+				// Highlight connected nodes
+				const connectedNodeIds = new Set();
+				links.forEach((l: any) => {
+					if (l.source.id === d.id) connectedNodeIds.add(l.target.id);
+					if (l.target.id === d.id) connectedNodeIds.add(l.source.id);
+				});
+
+				node.filter((n: any) => connectedNodeIds.has(n.id)).style("opacity", 1);
+			})
+			.on("mouseleave", () => {
+				// Reset all nodes and links
+				node.style("opacity", 1);
+				link.style("opacity", 1).attr("stroke", "#334155").attr("stroke-width", 1);
 			})
 			.call(
 				d3
@@ -135,7 +271,11 @@ const ExplodedView: React.FC<WrapperProps> = ({ data }) => {
 			.append("circle")
 			.attr("r", (d) => d.radius || 5)
 			.attr("fill", (d) => {
-				if (d.type === "project") return "#2E5CFF"; // YInMn Blue
+				if (d.type === "project") {
+					// Use Color Registry
+					// Group is usually the employer slug or name
+					return getEntityColor(d.group || "", "EMPLOYER");
+				}
 				if (d.type === "skill") return "#475569"; // Slate-600
 				return "#ccc";
 			})
@@ -155,7 +295,12 @@ const ExplodedView: React.FC<WrapperProps> = ({ data }) => {
 			.attr("font-size", (d) => (d.type === "project" ? "10px" : "8px"))
 			.attr("fill", (d) => (d.type === "project" ? "#e2e8f0" : "#94a3b8"))
 			.style("pointer-events", "none")
-			.style("font-family", "Barlow, sans-serif"); // V7 Aesthetic
+			.style("font-family", "Barlow, sans-serif") // V7 Aesthetic
+			.style("paint-order", "stroke")
+			.style("stroke", "#020617") // Slate-950 (Background Color)
+			.style("stroke-width", "3px")
+			.style("stroke-linecap", "round")
+			.style("stroke-linejoin", "round");
 
 		// TICK
 		simulation.on("tick", () => {
@@ -188,8 +333,8 @@ const ExplodedView: React.FC<WrapperProps> = ({ data }) => {
 					</span>
 				</div>
 				<div className="mt-3 text-xs text-slate-500">
-					<p>BLUE: Project Node</p>
-					<p>GRAY: Skill Fastener</p>
+					<p>PHYSICS: Mass = Duration | Gravity = Time</p>
+					<p>LINKS: Shared Skills & Tags</p>
 					<p className="glow text-cyan-400">CYAN: Intelligence Detected</p>
 				</div>
 			</div>

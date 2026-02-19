@@ -20,6 +20,8 @@ export interface AssemblyNode extends d3.SimulationNodeDatum {
 	hasIntelligence?: boolean; // Lightweight flag for Visuals (Glow)
 	radius?: number; // Visual Mass
 	color?: string; // Hex Token
+	group?: string; // Employer / Category for coloring
+	date?: string | Date; // Start Date for Time Gravity
 }
 
 export interface AssemblyLink extends d3.SimulationLinkDatum<AssemblyNode> {
@@ -87,14 +89,35 @@ export async function getCareerAssembly(
 			}
 		}
 
-		// 2. Create Project Node
+		// 2. Calculate Radius (Mass) based on Duration
+		// Format: "1.8 Years", "7 Months", "1 Year"
+		let durationYears = 1; // Default mass
+		if (project.data.duration) {
+			const match = project.data.duration.match(/([\d.]+)/);
+			if (match) {
+				const val = parseFloat(match[1]);
+				if (project.data.duration.toLowerCase().includes("month")) {
+					durationYears = val / 12;
+				} else {
+					durationYears = val;
+				}
+			}
+		}
+
+		// Physics Mass: Sqrt mapping to prevent massive influencers
+		// Base: 10, Multiplier: 25, Max: 60
+		const radius = Math.max(15, Math.min(60, Math.sqrt(durationYears) * 25));
+
+		// 3. Create Project Node
 		nodes.push({
 			id: project.id,
 			type: "project",
 			data: project.data,
 			intelligence: intelligenceContent,
-			hasIntelligence, // Lightweight flag for UI
-			radius: 20, // Base mass
+			hasIntelligence,
+			radius: radius,
+			group: project.data.employer || "Private", // Added for Color Registry
+			date: project.data.date, // Pass Start Date
 		});
 
 		// C. FABRICATE FASTENERS (SKILLS)

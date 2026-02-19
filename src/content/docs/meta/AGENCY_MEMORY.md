@@ -177,11 +177,11 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Forensic HUD Verification & Z-Index Governance.**
-- **Next Step:** Return to "Production Mode" for next project (`d-control` or `m700`).
-- **Context:** **DEEP DIVE STANDARD ESTABLISHED.** `c24` is now "HUD Verified" (Metrics Drawer Active).
+- **Active Task:** **Mining Session Data (Documentation).**
+- **Next Step:** Verify Cloudflare Deployment.
+- **Context:** **BUILD STABILIZED.** Fixed critical MDX crash (<Digit) and Asset Proxy Node.js trap.
 - **Action Item:** Monitor `MINING_LOG.md` for "Pending" (⭕) vectors.
-- **Recent Win:** Fixed `YAMLException` crash and established "The Intercept Layer" (`z-90`) in `z_index_map.md`.
+- **Recent Win:** Sanitized 43 unescaped MDX tags across the corpus.
 - **Active Roadmap:** [`src/content/docs/project/ROADMAP_ACTIVE.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/ROADMAP_ACTIVE.md) (The Horizon)
 - **Mining Log:** [`src/content/docs/project/MINING_LOG.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/MINING_LOG.md) (The Re-Hydration Tracker)
 - **Project Index:** [`src/content/prompts/PROJECT_INDEX.md`](file:///d:/GitHub/eriknorris/src/content/prompts/PROJECT_INDEX.md) (The Registry)
@@ -203,6 +203,7 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **Critical Learning:** **"The Ternary Trap"** - TypeScript Ternary operators in `jsonLD.ts` are fragile. Verify syntax (`? :`) carefully when adding new conditions. One missing char breaks the build.
 - **Critical Learning:** **"The Legacy Body Trap"** - `hydrate_content.py` preserves existing body content. If a project has legacy "marketing fluff", it blocks the "Red Gold" injection. Manual intervention is required to replace it with the Forensic Narrative.
 - **Critical Learning:** **"The Asset Ghost"** - `ksystem-120` is throwing 404s for specific assets (`DSC05387.jpg`). This indicates a sync gap between `R2_STAGING` and the codebase references.
+- **Critical Learning:** **"The MDX Digit Trap"** - `vite-plugin-mdx` crashes if `<` is followed by a number (e.g. `<10min`) because it parses it as an invalid JSX tag. **Fix:** Use `fix_mdx_syntax.py` to escape to `&lt;`.
 - **Action Item:** Proceed to Visual Verification (Browser).
 
 * **Key Decision (Assets):** **"The White Logo Standard"** - `logo.png` is the canonical White Logo. `EN_logo_white_1024.png` does not exist in the current R2 stash.

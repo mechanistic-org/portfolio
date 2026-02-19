@@ -3,81 +3,83 @@ category: enterprise_hardware
 client: []
 complexity_vector:
   part_count_growth:
-  - count: 100
-    date: '2014-10-06'
-    note: Reworking 100pcs urgent due to paint shortage/defects [1]
-    phase: Protocol/Rework (Macduff Covers)
-  - count: 425
-    date: '2014-10-08'
-    note: Yield 29% (123 accepted / 302 rejected) due to scratches/paint defects [2],
-      [3]
-    phase: Inspection/Sorting
-  - count: 366
-    date: '2015-02-13'
-    note: Shipped via Air Freight to 'Hunter' (Destination/Vendor) [4]
-    phase: Shipment to Hunter
+    - count: 100
+      date: "2014-10-06"
+      note: Reworking 100pcs urgent due to paint shortage/defects [1]
+      phase: Protocol/Rework (Macduff Covers)
+    - count: 425
+      date: "2014-10-08"
+      note:
+        Yield 29% (123 accepted / 302 rejected) due to scratches/paint defects [2],
+        [3]
+      phase: Inspection/Sorting
+    - count: 366
+      date: "2015-02-13"
+      note: Shipped via Air Freight to 'Hunter' (Destination/Vendor) [4]
+      phase: Shipment to Hunter
   process_density:
-  - complexity_score: 9
-    material: Plastic
-    part_name: Cover, Top Chassis (Macduff)
-    part_number: 502-1192-00
-    steps:
-    - Molding (Yomura)
-    - Painting (Shortage noted [5])
-    - Rework (Flow mark elimination [6])
-    - 'Cosmetic Inspection (High fallout: Scratches/Paint [3])'
-    - Sorting/Recovery [7]
-    - Air Freight to Hunter [4]
-    yield_warning: Initial yield 29% at Sanmina inspection [2]
-  - complexity_score: 4
-    material: Storage Media
-    part_name: HGST 4TB Drive
-    part_number: HDN724040ALE640
-    steps:
-    - SMART Tests [8]
-    - Head Load/Unload Tests [8]
-    - Voltage Ripple Tests [8]
+    - complexity_score: 9
+      material: Plastic
+      part_name: Cover, Top Chassis (Macduff)
+      part_number: 502-1192-00
+      steps:
+        - Molding (Yomura)
+        - Painting (Shortage noted [5])
+        - Rework (Flow mark elimination [6])
+        - "Cosmetic Inspection (High fallout: Scratches/Paint [3])"
+        - Sorting/Recovery [7]
+        - Air Freight to Hunter [4]
+      yield_warning: Initial yield 29% at Sanmina inspection [2]
+    - complexity_score: 4
+      material: Storage Media
+      part_name: HGST 4TB Drive
+      part_number: HDN724040ALE640
+      steps:
+        - SMART Tests [8]
+        - Head Load/Unload Tests [8]
+        - Voltage Ripple Tests [8]
   supply_chain_nodes:
-  - location: Taipei, Taiwan
-    role: Plastic Molding/Painting
-    vendor: Yomura Technologies [10]
-  - location: Guadalajara, Mexico
-    role: FATP / Inspection
-    vendor: Sanmina Plant 4 [11], [2]
-  - location: '[Destination]'
-    role: Project/Assembly Location
-    vendor: Hunter [12], [4]
+    - location: Taipei, Taiwan
+      role: Plastic Molding/Painting
+      vendor: Yomura Technologies [10]
+    - location: Guadalajara, Mexico
+      role: FATP / Inspection
+      vendor: Sanmina Plant 4 [11], [2]
+    - location: "[Destination]"
+      role: Project/Assembly Location
+      vendor: Hunter [12], [4]
   tooling_chain:
-  - cost_impact: High (40% Down Payment Req) [9]
-    status: PO Issued Oct 2014 [9]
-    tool_name: Sundance Tooling (502-1225-00)
-    type: Hard Tooling (NRE)
-    vendor: Yomura (Taiwan)
-  - status: Modification for flow-mark elimination [6]
-    tool_name: Macduff Cover Mold (502-1192-00)
-    type: Hard Tooling
-    vendor: Yomura (Taiwan)
+    - cost_impact: High (40% Down Payment Req) [9]
+      status: PO Issued Oct 2014 [9]
+      tool_name: Sundance Tooling (502-1225-00)
+      type: Hard Tooling (NRE)
+      vendor: Yomura (Taiwan)
+    - status: Modification for flow-mark elimination [6]
+      tool_name: Macduff Cover Mold (502-1192-00)
+      type: Hard Tooling
+      vendor: Yomura (Taiwan)
 cyberspace:
   enable: true
   layout: linear
   stickies:
-  - align: center
-    data: null
-    id: intro
-    text: <strong>YEAR:</strong> 2014<br/><strong>ROLE:</strong> Kaleidescape
-    title: KSERVER-1500 'Hunter'
-    type: media
-  - align: center
-    id: details
-    text: This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong>
-      Other
-    title: PROJECT DATA
-    type: void
+    - align: center
+      data: null
+      id: intro
+      text: <strong>YEAR:</strong> 2014<br/><strong>ROLE:</strong> Kaleidescape
+      title: KSERVER-1500 'Hunter'
+      type: media
+    - align: center
+      id: details
+      text:
+        This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong>
+        Other
+      title: PROJECT DATA
+      type: void
 date: 2014-03-14 00:00:00+00:00
 description: KSERVER-1500 1U Server ('Hunter' Refresh)
 documents: []
 draft: false
-duration: Active
+duration: 11 Months
 employer: kaleidescape
 endDate: 2014-08-01 00:00:00+00:00
 gallery: []
@@ -85,7 +87,7 @@ hxo_ready: false
 hydration_status: hydrated
 industry: consumer_electronics
 links:
-- url: https://kaleidescape.com
+  - url: https://kaleidescape.com
 metrics:
   financial:
     costOfGoodsSold: []
@@ -103,23 +105,25 @@ presentation_mode: deep_dive
 production: production
 productionScale: one_off
 scars:
-- description: 'The Intervention: Initiated the ''1U Server Refresh''. Power - Sourced
-    and qualified the Sparkle SPI300F4BB. Storage - Pivoted to HGST Deskstar NAS drives.
-    Compute - Investigated Atom Baytrail and Celeron options.'
-  label: The Trigger (Crisis)
-  value: The 1U Server motherboard chipset and processor were scheduled to go EOL
-    in June 2014, threatening the continuity of the Premiere line.
+  - description:
+      "The Intervention: Initiated the '1U Server Refresh'. Power - Sourced
+      and qualified the Sparkle SPI300F4BB. Storage - Pivoted to HGST Deskstar NAS drives.
+      Compute - Investigated Atom Baytrail and Celeron options."
+    label: The Trigger (Crisis)
+    value:
+      The 1U Server motherboard chipset and processor were scheduled to go EOL
+      in June 2014, threatening the continuity of the Premiere line.
 slug: kserver-1500
-tags: []
-teamSize: Unknown
+tags: [Materials, Process, Crisis]
 theme: hyperspace
 tier: 3
 title: KSERVER-1500 'Hunter'
 tools: []
 visual_candidates:
-- 502-1192-00 deviation pics for review [13]
-- YOMURA Quotation Sundance 141015.pdf [14]
-- PROPOSED REV RUN ORPHEUS (300pzs).xls [15]
+  - 502-1192-00 deviation pics for review [13]
+  - YOMURA Quotation Sundance 141015.pdf [14]
+  - PROPOSED REV RUN ORPHEUS (300pzs).xls [15]
+teamSize: INT 10
 ---
 
 Hunter Forensic Report
@@ -155,7 +159,6 @@ Tell me more about the Sparkle SPI300F4BB power supply.
 What mechanical changes were required for the Hunter refresh?
 How were the HGST 4TB Deskstar NAS drives qualified?
 
-
 What are the specs for the Sparkle SPI300F4BB power supply?
 How did the 4TB HGST drives handle chassis vibration?
 Tell me more about the Sundance 4-disk server project.
@@ -183,24 +186,25 @@ How were the HGST 4TB Deskstar NAS drives qualified?
 
 Based on the engineering logs, the HGST 4TB Deskstar NAS (Model HDN724040ALE640) drives were qualified for the 1U Server (KSERVER-1500) and 3U Server (KSERVER-5000) through a rigorous, multi-month testing regimen designed to validate their use as a lower-cost alternative to Enterprise-class Ultrastar drives.
 The qualification process involved the following specific methodologies and findings:
+
 1. Qualification Methodology
-The engineering team employed a battery of stress tests to verify mechanical, thermal, and electrical stability:
-• Long-Term Reliability (Disk Stress) Test: Multiple servers (specifically 3U chassis S/N 8335) were populated with the Deskstar NAS drives and subjected to 100% throttle read/write workloads for extended periods (exceeding 60 days). Logs indicate the drives sustained hundreds of millions of read/write operations without functional errors.
-• Thermal Validation: Engineers performed "KEAOS Thermal tests" and "Thermal Disk Stress tests" to ensure the drives stayed within safe operating temperatures in the 1U chassis (which has tighter thermal constraints than the 3U). The 4TB models were found to run 2–4°C cooler than the Ultrastar equivalents due to lower power consumption.
-• Power & Acoustic Testing: The qualification included "Voltage Ripple" tests to ensure power rail stability and acoustic measuring. In the 1U server, the Deskstar NAS drives were measured idling at 32.8 dBA.
-• Specific Functional Tests:
-◦ Head Load/Unload: To verify mechanical durability.
-◦ Spin Down/Up: To test recovery and power management behavior.
+   The engineering team employed a battery of stress tests to verify mechanical, thermal, and electrical stability:
+   • Long-Term Reliability (Disk Stress) Test: Multiple servers (specifically 3U chassis S/N 8335) were populated with the Deskstar NAS drives and subjected to 100% throttle read/write workloads for extended periods (exceeding 60 days). Logs indicate the drives sustained hundreds of millions of read/write operations without functional errors.
+   • Thermal Validation: Engineers performed "KEAOS Thermal tests" and "Thermal Disk Stress tests" to ensure the drives stayed within safe operating temperatures in the 1U chassis (which has tighter thermal constraints than the 3U). The 4TB models were found to run 2–4°C cooler than the Ultrastar equivalents due to lower power consumption.
+   • Power & Acoustic Testing: The qualification included "Voltage Ripple" tests to ensure power rail stability and acoustic measuring. In the 1U server, the Deskstar NAS drives were measured idling at 32.8 dBA.
+   • Specific Functional Tests:
+   ◦ Head Load/Unload: To verify mechanical durability.
+   ◦ Spin Down/Up: To test recovery and power management behavior.
 2. Strategic "Gap Analysis" (Deskstar vs. Ultrastar)
-A critical part of the qualification was risk assessment regarding the differences between the "NAS" and "Enterprise" lines:
-• Rotational Vibration (RV) Sensors: Engineers confirmed with HGST that while the Deskstar NAS drives possessed some level of RV sensing, they lacked the sophisticated Enterprise-class sensors found in Ultrastar drives. Engineering deemed them acceptable for the 1U (horizontal mount) and 3U (vertical mount) after the stress tests showed no performance degradation due to vibration.
-• SMART Monitoring Discrepancies: During testing, the Kaleidescape "Landscape" monitoring system flagged several SMART errors (specifically regarding throughput performance and spin-up time). However, cross-verification using HGST's proprietary HiTest tool showed the drives as "Healthy" with "No Errors." Engineering concluded the drives were fit for use despite the Landscape warnings.
+   A critical part of the qualification was risk assessment regarding the differences between the "NAS" and "Enterprise" lines:
+   • Rotational Vibration (RV) Sensors: Engineers confirmed with HGST that while the Deskstar NAS drives possessed some level of RV sensing, they lacked the sophisticated Enterprise-class sensors found in Ultrastar drives. Engineering deemed them acceptable for the 1U (horizontal mount) and 3U (vertical mount) after the stress tests showed no performance degradation due to vibration.
+   • SMART Monitoring Discrepancies: During testing, the Kaleidescape "Landscape" monitoring system flagged several SMART errors (specifically regarding throughput performance and spin-up time). However, cross-verification using HGST's proprietary HiTest tool showed the drives as "Healthy" with "No Errors." Engineering concluded the drives were fit for use despite the Landscape warnings.
 3. Production Release
-Following the successful completion of these tests, the HGST 4TB Deskstar NAS drive was formally released to production under Kaleidescape part number 371-1041-00 via ECO-001442 in September 2014.
-What are the common symptoms of a drive failure?
-How do RAID-K and hot spares protect server data?
-What should I do if the server is busy?
-Why did the Sparkle SPI300F4BB require mechanical adjustments to the backplate?
+   Following the successful completion of these tests, the HGST 4TB Deskstar NAS drive was formally released to production under Kaleidescape part number 371-1041-00 via ECO-001442 in September 2014.
+   What are the common symptoms of a drive failure?
+   How do RAID-K and hot spares protect server data?
+   What should I do if the server is busy?
+   Why did the Sparkle SPI300F4BB require mechanical adjustments to the backplate?
 
 Based on the engineering logs for the Hunter (1U Server KSERVER-1500) refresh, the Sparkle SPI300F4BB power supply required mechanical adjustments (specifically the creation of a mounting bracket) to ensure backward compatibility with the existing inventory of legacy 1U chassis.
 The specific reasons and context for these adjustments include:
@@ -292,19 +296,20 @@ Atom Baytrail was identified as the primary hardware candidate due to its superi
 • Sourcing: Engineering evaluated COTS (Commercial Off-The-Shelf) boards from Commell and Aaeon (specifically a 4-SATA port variant) and considered leveraging the custom Sundance mainboard (designed by Cocom) to unify the platform.
 III. THE FAILURE MODES (Technical Blocks)
 The transition faced three critical engineering hurdles that threatened the project timeline:
+
 1. Software Incompatibility (The UEFI Wall):
-◦ The Conflict: The legacy eCos real-time operating system used by the 1U Server encountered severe compatibility issues with the UEFI shell standard on Baytrail architecture.
-◦ The Pivot: This incompatibility forced the team to reconsider Celeron processors, which offered a more traditional x86 architecture ("legacy boot") friendlier to eCos, despite potentially higher power draw.
+   ◦ The Conflict: The legacy eCos real-time operating system used by the 1U Server encountered severe compatibility issues with the UEFI shell standard on Baytrail architecture.
+   ◦ The Pivot: This incompatibility forced the team to reconsider Celeron processors, which offered a more traditional x86 architecture ("legacy boot") friendlier to eCos, despite potentially higher power draw.
 2. Performance Regression:
-◦ Throughput Risk: Engineering analysis indicated that standard Atom Baytrail boards were slower than the current legacy 1U server board, posing a risk to system performance during high-load scenarios (e.g., RAID rebuilds or concurrent streaming).
+   ◦ Throughput Risk: Engineering analysis indicated that standard Atom Baytrail boards were slower than the current legacy 1U server board, posing a risk to system performance during high-load scenarios (e.g., RAID rebuilds or concurrent streaming).
 3. Mechanical Mismatch:
-◦ Fitment: The new motherboards did not match the mounting points of the legacy 1U chassis. This necessitated the design of a specific metal adapter bracket (Redlined under part numbers like 501-1074 for 3U or similar for 1U) to "slot in" the new electronics without re-tooling the expensive chassis base.
-IV. THE INTERVENTION (Last Time Buy)
-Due to the software risks with Baytrail and the lead time for the Sundance custom board, the immediate tactical resolution was a supply chain intervention rather than a technical one. The team executed a Last Time Buy (LTB) of 300 legacy chipsets to secure production through the transition period while development on the Baytrail/Celeron solution continued.
-What was the eventual motherboard solution for the 1U refresh?
-How did the 4TB Deskstar drives differ from Enterprise versions?
-Tell me more about the T5 Torx screw change.
-How did the 2TB drives improve thermal output over 1TB?
+   ◦ Fitment: The new motherboards did not match the mounting points of the legacy 1U chassis. This necessitated the design of a specific metal adapter bracket (Redlined under part numbers like 501-1074 for 3U or similar for 1U) to "slot in" the new electronics without re-tooling the expensive chassis base.
+   IV. THE INTERVENTION (Last Time Buy)
+   Due to the software risks with Baytrail and the lead time for the Sundance custom board, the immediate tactical resolution was a supply chain intervention rather than a technical one. The team executed a Last Time Buy (LTB) of 300 legacy chipsets to secure production through the transition period while development on the Baytrail/Celeron solution continued.
+   What was the eventual motherboard solution for the 1U refresh?
+   How did the 4TB Deskstar drives differ from Enterprise versions?
+   Tell me more about the T5 Torx screw change.
+   How did the 2TB drives improve thermal output over 1TB?
 
 Based on the provided engineering specifications and technical analysis, the introduction of 2TB disk cartridges significantly improved the thermal efficiency of the 1U Server (KSERVER-1500) compared to the original 1TB configuration.
 Thermal Output Reduction
@@ -320,22 +325,23 @@ Tell me more about the EOL motherboard replacement issues.
 
 Based on the forensic engineering logs regarding the Hunter (1U Server Refresh) project, the motherboard replacement was driven by a critical component obsolescence event scheduled for June 2015, where the legacy Commell chipset and processor were reaching End-of-Life (EOL).
 The transition faced three distinct categories of failure modes that complicated the replacement:
+
 1. The "UEFI Wall" (Software Incompatibility)
-The most significant blocker was a conflict between the 1U Server's legacy operating system and modern boot architectures.
-• The Conflict: The 1U Server runs on eCos (Embedded Configurable Operating System), a real-time OS. The primary hardware candidate for the refresh, the Atom Baytrail platform, utilizes a UEFI shell for booting.
-• The Failure: eCos proved incompatible with the UEFI environment found on standard Baytrail boards.
-• The Pivot: This forced the engineering team to investigate Celeron processors as an alternative, as they offered a legacy boot mode that could support the older eCos architecture.
+   The most significant blocker was a conflict between the 1U Server's legacy operating system and modern boot architectures.
+   • The Conflict: The 1U Server runs on eCos (Embedded Configurable Operating System), a real-time OS. The primary hardware candidate for the refresh, the Atom Baytrail platform, utilizes a UEFI shell for booting.
+   • The Failure: eCos proved incompatible with the UEFI environment found on standard Baytrail boards.
+   • The Pivot: This forced the engineering team to investigate Celeron processors as an alternative, as they offered a legacy boot mode that could support the older eCos architecture.
 2. Performance Regression
-Despite being "newer" technology, the low-power candidates initially failed to meet the performance benchmarks of the legacy hardware.
-• Throughput Deficit: Engineering analysis indicated that standard Atom Baytrail boards were actually slower than the existing legacy 1U server board (likely a Pentium M or Celeron M variant), creating a risk of performance regression in a "new" product.
-• SATA Port Scarcity: The 1U Server requires 4 SATA ports for its drive array. Many off-the-shelf Baytrail boards did not support this native density, forcing the team to look at specific vendors like Aaeon (which had a 4-SATA variant) or consider custom board designs from partners like Cocom.
+   Despite being "newer" technology, the low-power candidates initially failed to meet the performance benchmarks of the legacy hardware.
+   • Throughput Deficit: Engineering analysis indicated that standard Atom Baytrail boards were actually slower than the existing legacy 1U server board (likely a Pentium M or Celeron M variant), creating a risk of performance regression in a "new" product.
+   • SATA Port Scarcity: The 1U Server requires 4 SATA ports for its drive array. Many off-the-shelf Baytrail boards did not support this native density, forcing the team to look at specific vendors like Aaeon (which had a 4-SATA variant) or consider custom board designs from partners like Cocom.
 3. Mechanical & Supply Chain Constraints
-• Fitment: The new motherboards did not natively fit the mounting points of the legacy 1U chassis. This required the design of metal adapter brackets to "bridge" the new electronics into the old metalwork.
-• Supply Triage: To mitigate the immediate "line down" risk while these engineering hurdles were cleared, the team executed a Last Time Buy (LTB) of 300 legacy chipsets to keep the production line running through the transition period.
-What were the thermal output specs for the 1U server?
-How did the Celeron transition address the UEFI shell incompatibility?
-What cooling requirements are needed for a 1U server installation?
-What are the ventilation requirements for the KSERVER-1500?
+   • Fitment: The new motherboards did not natively fit the mounting points of the legacy 1U chassis. This required the design of metal adapter brackets to "bridge" the new electronics into the old metalwork.
+   • Supply Triage: To mitigate the immediate "line down" risk while these engineering hurdles were cleared, the team executed a Last Time Buy (LTB) of 300 legacy chipsets to keep the production line running through the transition period.
+   What were the thermal output specs for the 1U server?
+   How did the Celeron transition address the UEFI shell incompatibility?
+   What cooling requirements are needed for a 1U server installation?
+   What are the ventilation requirements for the KSERVER-1500?
 
 Based on the provided engineering specifications and installation guides, the KSERVER-1500 (1U Server) has strict ventilation requirements to ensure proper cooling and reliability, given its high component density.
 Core Ventilation Requirements:
@@ -355,8 +361,9 @@ Did the team ever solve the PSU mechanical interference issue?
 Based on the engineering logs and project updates, the team did resolve the power supply mechanical interference issue for the Hunter (1U Server) refresh, but they did so by abandoning the problematic component rather than modifying it.
 The Failure (Interference): The initial candidate, Sparkle FSP150-50LM, failed physical qualification because it was a "touch fit" with the 1U chassis lid, meaning it physically contacted the top cover, creating a mechanical interference and vibration risk.
 The Solution (Substitution & Adaptation):
+
 1. Pivot to New Candidate: The engineering team disqualified the interfering unit and selected the Sparkle SPI300F4BB instead. This model was verified to have a quiet fan and did not suffer from the same vertical clearance issues.
 2. Mechanical Adaptation: While the SPI300F4BB cleared the lid, it did not natively fit the legacy chassis mounting points. The team engineered a solution involving:
-◦ Chassis Redlines: The 1U chassis base (501-1007) was redlined from Rev C to Rev D to accommodate the new layout.
-◦ Mounting Bracket: A custom bracket/plate was required to adapt the new power supply to the old chassis rear panel, ensuring the AC inlet aligned correctly without scrapping the existing inventory of metalwork.
-This combination of component substitution and mechanical redesign allowed the Hunter project to proceed with a viable power supply solution.
+   ◦ Chassis Redlines: The 1U chassis base (501-1007) was redlined from Rev C to Rev D to accommodate the new layout.
+   ◦ Mounting Bracket: A custom bracket/plate was required to adapt the new power supply to the old chassis rear panel, ensuring the AC inlet aligned correctly without scrapping the existing inventory of metalwork.
+   This combination of component substitution and mechanical redesign allowed the Hunter project to proceed with a viable power supply solution.

@@ -99,6 +99,26 @@ sidebar:
 
 ## 🏗️ VIII. The Law of the Isomorphic (Trust Signal)
 
+**Context:** "Projects" without "Lessons" are just Portfolio filler.
+
+1.  **ISOMORPHISM:** Every Project must map a "Hardware Failure" to a "Software Principle."
+2.  **THE BRIDGE:**
+    - _Hardware:_ "Warped Plastic" -> _Software:_ "Race Condition."
+    - _Hardware:_ "Tolerance Stack" -> _Software:_ "Dependency Hell."
+
+---
+
+## ⚡ IX. The Law of the Structured Assembly (The Circuit Board)
+
+**Context:** The "Assembly" visualization became a "Hairball" of unreadable connections.
+
+1.  **THE TRI-PARTITE LAYOUT:** The Graph must follow a strict horizontal lane structure.
+    - **Left Lane (25%):** Hard Skills (Tools, Materials, Physics).
+    - **Center Lane (50%):** The Timeline (Projects ordered by Date).
+    - **Right Lane (75%):** Soft Skills (Leadership, Strategy, Process).
+2.  **THE RIVER:** The Y-Axis is **Time Sovereign**. Gravity pulls projects to their chronological position. They do not float.
+3.  **THE WIRING:** Links must flow across the spine (Left -> Center -> Right), resembling a PCB trace.
+
 **Context:** AI Overviews (2026) prioritize "Firsthand Experience." Generic summaries are ignored.
 
 1.  **STRUCTURAL RHYMES:** We do not say "I am a good architect." We prove it by mapping a Hardware Constraint (150W Thermal) to a Software Constraint (Token Density).
@@ -284,4 +304,15 @@ sidebar:
 
 1.  **DOCUMENTATION IS CODE:** The `z_index_map.md` is not a suggestion. It is the Air Traffic Control registry.
 2.  **UPDATE ON CHANGE:** If you invent a new Z-Index (like `z-90`), you **MUST** update `src/content/docs/design/z_index_map.md` immediately.
-3.  **NO GHOST LAYERS:** Undocumented Z-Indices are banned. If it's not on the Map, it's a collision waiting to happen.
+
+---
+
+## 🚫 XXVI. The Law of the Escape (MDX Sanitization)
+
+**Context:** The build crashed because `vite-plugin-mdx` treats `<` followed by a number (e.g., `<10min`, `<41°F`) as an invalid JSX tag start, throwing `Unexpected character`.
+
+1.  **NO UNESCAPED BRACKETS:** You must escape less-than symbols when used as mathematical operators or abbreviations before numbers.
+    - **Bad:** `Yield <50%`, `Temp <41°F`.
+    - **Good:** `Yield &lt;50%`, `Temp &lt;41°F`.
+2.  **THE SCRIPT IS LAW:** Do not manually fix 40 files. Use `scripts/fix_mdx_syntax.py` (or similar regex pattern `(?<!\\)<(\d)`) to sanitize the corpus.
+3.  **THE SOURCE TRUTH:** If the error persists, check the original `notebook_dumps/` text. The hydration script might be re-injecting the unescaped characters.

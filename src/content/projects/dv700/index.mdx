@@ -1,29 +1,30 @@
 ---
 cast:
-- name: Erik Norris
-  org: Kaleidescape
-  role: Lead Mechanical Engineer / The Architect
-- name: Nathan Forster
-  org: Kaleidescape
-  role: Hardware Systems Engineer
-- name: Somboun Thavy
-  org: Kaleidescape
-  role: Engineering Technician
-- name: Rob Wudrick
-  org: Kaleidescape
-  role: HW Program Manager
-- name: John Lio
-  org: Kaleidescape
-  role: VP Manufacturing Operations
-- name: Grat Wu
-  org: Yomura Technologies
-  role: Vendor Contact
+  - name: Erik Norris
+    org: Kaleidescape
+    role: Lead Mechanical Engineer / The Architect
+  - name: Nathan Forster
+    org: Kaleidescape
+    role: Hardware Systems Engineer
+  - name: Somboun Thavy
+    org: Kaleidescape
+    role: Engineering Technician
+  - name: Rob Wudrick
+    org: Kaleidescape
+    role: HW Program Manager
+  - name: John Lio
+    org: Kaleidescape
+    role: VP Manufacturing Operations
+  - name: Grat Wu
+    org: Yomura Technologies
+    role: Vendor Contact
 client: []
 cyberspace:
   enable: true
   layout: deep_dive
 date: 2014-02-24
-description: Emergency stabilization of the installed fleet. Multi-threaded root cause
+description:
+  Emergency stabilization of the installed fleet. Multi-threaded root cause
   analysis of critical field failures.
 duration: 10 Months
 employer: kaleidescape
@@ -33,13 +34,16 @@ forensic_metrics:
   governance: Weekly Reliability Investigation meetings; 100% incoming RMA inspection
   process: Recovered ~60% yield from rejected cover stock via revised inspection criteria
 forensic_summary:
-  intervention: Erik Norris led a multi-threaded investigation, redesigning the pinch
+  intervention:
+    Erik Norris led a multi-threaded investigation, redesigning the pinch
     roller assembly (solid motor mounts, extended gears), implementing new inner disc
     guides to prevent scratching, and revising cosmetic inspection standards to unblock
     production.
-  result: Identification of root causes (e.g., abrasive dust, missing e-clips, 'potato
+  result:
+    Identification of root causes (e.g., abrasive dust, missing e-clips, 'potato
     chipped' carousels) and release of corrective tooling/parts to stabilize the fleet.
-  trigger: High field failure rates for M700/DV700 vaults due to 'disc unreadable'
+  trigger:
+    High field failure rates for M700/DV700 vaults due to 'disc unreadable'
     errors, jammed discs, and 'line down' production stops caused by cosmetic cover
     defects.
 hxo_ready: true
@@ -49,20 +53,20 @@ presentation_mode: flagship
 production: production
 productionScale: mass
 slug: dv700
-tags: []
-teamSize: INT 6
+tags: [Yield, Mechanism, Process]
 theme: hyperspace
 tier: 1
 title: M700 / DV700 Vault
 toolchain:
-- Windchill (PDM)
-- Arena (BOM/Change Mgmt)
-- Sanmina (Manufacturing - Guadalajara)
-- Mass Precision (Sheet metal)
-- Yomura (Plastics/Tooling - Taiwan)
-- Scandic (Springs)
+  - Windchill (PDM)
+  - Arena (BOM/Change Mgmt)
+  - Sanmina (Manufacturing - Guadalajara)
+  - Mass Precision (Sheet metal)
+  - Yomura (Plastics/Tooling - Taiwan)
+  - Scandic (Springs)
 tools:
-- windchill
+  - windchill
+teamSize: INT 6
 ---
 
 # M700 / DV700 Vault Forensic Report

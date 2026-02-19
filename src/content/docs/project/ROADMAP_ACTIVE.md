@@ -52,6 +52,21 @@ sidebar:
   - **Pipeline:** Automated MPP -> Excel -> NLM Text conversion for 95 schedules (`digidesign`, `avegant`, `kaleidescape`).
   - **Analysis:** "Cone of Uncertainty" Volatility & Slippage Analysis (`scripts/analyze_task_volatility.py`).
   - **Dashboard:** Live "Forensic Volatility Index" visualization (`/forensics`).
+- [2026-02-18] (Infrastructure): **Build Stabilization (MDX & Edge).**
+  - **MDX:** Sanitized 43 unescaped `<Number` sequences (e.g. `<10min`) causing `vite-plugin-mdx` compilation failure.
+  - **Asset Proxy:** Hardened `[...path].ts` with `@vite-ignore` to prevent `node:fs` leakage into Cloudflare Worker bundle.
+  - **Schema:** Fixed `cinema-one` recursion and `dreamjob` simulation compliance.
+  - **Status:** **DEPLOYED.**
+- [2026-02-18] (Forensics): **Tagging Campaign (The Great Migration).**
+  - **Ingestion:** Ingested `LinkedIn Skills.csv` (40+ terms) to create a high-fidelity taxonomy.
+  - **Enrichment:** Ran `scripts/suggest_tags.cjs --apply` to inject thousands of tags across 125+ projects (Pro/E, SolidWorks, Leadership).
+  - **Repair:** Executed `scripts/repair_tags_final.cjs` to fix widespread YAML corruption (`[object Object]`, Malformed Lists) in ~100 files.
+  - **Status:** **VERIFIED.** Database is clean.
+- [2026-02-18] (Architecture): **The Structured Assembly (The Circuit Board).**
+  - **Physics:** Refactored `ExplodedView.tsx` from "Network Graph" to "Laned Layout".
+  - **Taxonomy:** Defined `Left Lane` (Hard Skills), `Center Lane` (Timeline), `Right Lane` (Soft Skills).
+  - **Result:** Turned the "Hairball" into a readable "PCB Wiring" diagram.
+  - **Codified:** Added _Law IX (The Structured Assembly)_ to `GROK_LOG_V2.md`.
 
 ## 🚀 The Horizon (V6 Vision)
 
