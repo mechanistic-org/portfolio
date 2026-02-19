@@ -41,16 +41,15 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 		return `<script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Project",
+        "@type": ["Project", "CreativeWork"],
         "name": "${projectFrontmatter.title}",
         "description": "${projectFrontmatter.description}",
         "url": "${canonicalUrl}",
         "image": "${image?.src || siteData.defaultImage.src}",
-        "foundingDate": "${projectFrontmatter.date}",
+        "dateCreated": "${projectFrontmatter.date}",
         "keywords": "${keywords}",
-        "maintainer": {
-            "@type": "Person",
-            "name": "${siteData.author.name}"
+        "creator": {
+            "@id": "${import.meta.env.SITE}#identity"
         }
       }
     </script>`;
@@ -67,6 +66,7 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 		  "dateModified": "${new Date().toISOString()}",
 		  "mainEntity": {
 			"@type": "Person",
+			"@id": "${import.meta.env.SITE}#identity",
 			"name": "${siteData.author.name}",
 			"jobTitle": "Principal Mechanical Architect",
 			"description": "${siteData.description}",
