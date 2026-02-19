@@ -128,7 +128,37 @@ export default defineConfig({
 		expressiveCode(expressiveCodeOptions),
 		mdx(),
 		react(),
-		sitemap(),
+		sitemap({
+			filter: (page) => {
+				const isDilute =
+					page.includes("/colophon/") ||
+					page.includes("/docs/") ||
+					page.includes("/raw/") ||
+					page.includes("/archive/") ||
+					page.includes("/resume/"); // Exclude alternate resume views, main resume is typically /about/bio or similar?
+				// Actually list shows https://eriknorris.com/resume/ exists. Keep that one?
+				// User said "orphaned/unused".
+				// Let's be strict on docs/colophon/raw/archive first.
+				// If page is exactly resume/, keep it?
+				// content: https://eriknorris.com/resume/
+				// content: https://eriknorris.com/resume/pdf/
+				// Let's filter sub-resumes.
+				if (
+					page.includes("/colophon/") ||
+					page.includes("/docs/") ||
+					page.includes("/raw/") ||
+					page.includes("/archive/")
+				) {
+					return false;
+				}
+				// Filter resume sub-pages but keep the main one?
+				// The URL is https://eriknorris.com/resume/
+				if (page.includes("/resume/") && page !== "https://eriknorris.com/resume/") {
+					return false;
+				}
+				return true;
+			},
+		}),
 		// compress({
 		// 	HTML: true,
 		// 	JavaScript: true,
