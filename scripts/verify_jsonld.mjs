@@ -23,6 +23,7 @@ async function check() {
 					const isProject = content.includes("Project");
 					const isCreativeWork = content.includes("CreativeWork");
 					const hasCreator = content.includes('"creator":');
+					const hasBreadcrumbs = content.includes("BreadcrumbList");
 
 					console.log(`\n--- JSON-LD BLOCK ${i + 1} ---`);
 					if (content.length > 500) {
@@ -41,6 +42,7 @@ async function check() {
 					console.log(`[#identity ID]:  ${hasIdentity}`);
 					console.log(`[Project Type]:  ${isProject} && ${isCreativeWork}`);
 					console.log(`[Creator Link]:  ${hasCreator}`);
+					console.log(`[Breadcrumbs]:   ${hasBreadcrumbs}`);
 				});
 			} else {
 				console.log("❌ NO JSON-LD FILES FOUND");

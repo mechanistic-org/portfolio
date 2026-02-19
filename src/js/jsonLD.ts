@@ -16,12 +16,13 @@ export type JsonLDProps = GeneralProps | ProjectProps;
 
 export default function jsonLDGenerator(props: JsonLDProps) {
 	const { type } = props;
+	let mainSchema = "";
 
 	if (type === "project") {
 		const { projectFrontmatter, image, canonicalUrl } = props as ProjectProps;
 
 		if (!projectFrontmatter) {
-			return `<script type="application/ld+json">
+			mainSchema = `<script type="application/ld+json">
 			{
 			"@context": "https://schema.org/",
 			"@type": "WebSite",
@@ -29,16 +30,15 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 			"url": "${import.meta.env.SITE}"
 			}
 			</script>`;
-		}
+		} else {
+			// extract skills for keywords
+			const keywords = projectFrontmatter.tags
+				? projectFrontmatter.tags.join(", ")
+				: projectFrontmatter.additionalSkills
+					? projectFrontmatter.additionalSkills.join(", ")
+					: "Forensic Engineering";
 
-		// extract skills for keywords
-		const keywords = projectFrontmatter.tags
-			? projectFrontmatter.tags.join(", ")
-			: projectFrontmatter.additionalSkills
-				? projectFrontmatter.additionalSkills.join(", ")
-				: "Forensic Engineering";
-
-		return `<script type="application/ld+json">
+			mainSchema = `<script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": ["Project", "CreativeWork"],
@@ -53,12 +53,12 @@ export default function jsonLDGenerator(props: JsonLDProps) {
         }
       }
     </script>`;
-	}
-
-	const { url } = props as GeneralProps;
-	// ProfilePage Logic (Homepage Only or General fallback)
-	if (url.pathname === "/" || url.pathname === "") {
-		return `<script type="application/ld+json">
+		}
+	} else {
+		const { url } = props as GeneralProps;
+		// ProfilePage Logic (Homepage Only)
+		if (url.pathname === "/" || url.pathname === "") {
+			mainSchema = `<script type="application/ld+json">
 		{
 		  "@context": "https://schema.org",
 		  "@type": "ProfilePage",
@@ -91,9 +91,8 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 		  }
 		}
 		</script>`;
-	}
-
-	return `<script type="application/ld+json">
+		} else {
+			mainSchema = `<script type="application/ld+json">
       {
       "@context": "https://schema.org/",
       "@type": "WebSite",
@@ -101,4 +100,44 @@ export default function jsonLDGenerator(props: JsonLDProps) {
       "url": "${import.meta.env.SITE}"
       }
     </script>`;
+		}
+	}
+
+	// Breadcrumb Logic
+	const breadcrumbs = [
+		{
+			"@type": "ListItem",
+			position: 1,
+			name: "Home",
+			item: import.meta.env.SITE,
+		},
+	];
+
+	if (type === "project") {
+		const { projectFrontmatter, canonicalUrl } = props as ProjectProps;
+		if (projectFrontmatter) {
+			breadcrumbs.push({
+				"@type": "ListItem",
+				position: 2,
+				name: "Projects",
+				item: `${import.meta.env.SITE}/projects`,
+			});
+			breadcrumbs.push({
+				"@type": "ListItem",
+				position: 3,
+				name: projectFrontmatter.title,
+				item: canonicalUrl.href,
+			});
+		}
+	}
+
+	const breadcrumbSchema = `<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": ${JSON.stringify(breadcrumbs)}
+    }
+    </script>`;
+
+	return `${mainSchema}\n${breadcrumbSchema}`;
 }
