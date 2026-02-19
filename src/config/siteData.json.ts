@@ -128,6 +128,7 @@ const siteData: SiteDataProps = {
 		"https://github.com/eriknorris",
 		"https://mechanistic.com",
 		"https://moreplay.com",
+		"https://resume.eriknorris.com",
 	],
 	employers: [
 		"Hyphen",
