@@ -1,4 +1,5 @@
 import siteData from "@config/siteData.json";
+import workHistory from "@config/work_history.json";
 
 interface GeneralProps {
 	type: "general";
@@ -16,94 +17,95 @@ export type JsonLDProps = GeneralProps | ProjectProps;
 
 export default function jsonLDGenerator(props: JsonLDProps) {
 	const { type } = props;
-	let mainSchema = "";
+	const schemaPayload: any[] = [];
+
+	// 1. Global WebSite Schema (The Domain)
+	// Wraps the entire domain in a unified logical property
+	schemaPayload.push({
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"@id": `${import.meta.env.SITE}#website`,
+		url: import.meta.env.SITE,
+		name: "Erik Norris - Forensic Architecture Ledger",
+		publisher: {
+			"@id": `${import.meta.env.SITE}#identity`,
+		},
+	});
 
 	if (type === "project") {
 		const { projectFrontmatter, image, canonicalUrl } = props as ProjectProps;
 
-		if (!projectFrontmatter) {
-			mainSchema = `<script type="application/ld+json">
-			{
-			"@context": "https://schema.org/",
-			"@type": "WebSite",
-			"name": "${siteData.title}",
-			"url": "${import.meta.env.SITE}"
-			}
-			</script>`;
-		} else {
-			// extract skills for keywords
+		if (projectFrontmatter) {
+			// 2. The Case Study Payload (TechArticle)
+			// Maps specific projects as "Evidence Nodes" linked to the main entity
 			const keywords = projectFrontmatter.tags
 				? projectFrontmatter.tags.join(", ")
 				: projectFrontmatter.additionalSkills
 					? projectFrontmatter.additionalSkills.join(", ")
 					: "Forensic Engineering";
 
-			mainSchema = `<script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": ["Project", "CreativeWork"],
-        "name": "${projectFrontmatter.title}",
-        "description": "${projectFrontmatter.description}",
-        "url": "${canonicalUrl}",
-        "image": "${image?.src || siteData.defaultImage.src}",
-        "dateCreated": "${projectFrontmatter.date}",
-        "keywords": "${keywords}",
-        "creator": {
-            "@id": "${import.meta.env.SITE}#identity"
-        }
-      }
-    </script>`;
+			const about = [
+				...(projectFrontmatter.tags || []),
+				...(projectFrontmatter.additionalSkills || []),
+			].map((skill) => ({
+				"@type": "Thing",
+				name: skill,
+			}));
+
+			schemaPayload.push({
+				"@context": "https://schema.org",
+				"@type": ["TechArticle", "CreativeWork", "Project"],
+				headline: projectFrontmatter.title,
+				description: projectFrontmatter.description,
+				url: canonicalUrl,
+				image: image?.src || siteData.defaultImage.src,
+				dateCreated: projectFrontmatter.date,
+				keywords: keywords,
+				author: {
+					"@id": `${import.meta.env.SITE}#identity`,
+				},
+				creator: {
+					"@id": `${import.meta.env.SITE}#identity`,
+				},
+				about: about,
+			});
 		}
 	} else {
 		const { url } = props as GeneralProps;
-		// ProfilePage Logic (Homepage Only)
+		// 3. The Entity (ProfilePage/Person)
+		// Only on Homepage to avoid duplication, or could be on all pages if we want strong identity signal everywhere
 		if (url.pathname === "/" || url.pathname === "") {
-			mainSchema = `<script type="application/ld+json">
-		{
-		  "@context": "https://schema.org",
-		  "@type": "ProfilePage",
-		  "dateCreated": "${new Date().toISOString()}",
-		  "dateModified": "${new Date().toISOString()}",
-		  "mainEntity": {
-			"@type": "Person",
-			"@id": "${import.meta.env.SITE}#identity",
-			"name": "${siteData.author.name}",
-			"jobTitle": "Principal Mechanical Architect",
-			"description": "${siteData.description}",
-			"image": "${import.meta.env.SITE}${siteData.defaultImage.src}",
-			"url": "${import.meta.env.SITE}",
-			"sameAs": [
-			${siteData.sameAs.map((link) => `"${link}"`).join(",\n\t\t\t")}
-			],
-			"knowsAbout": [
-			${siteData.skills.map((skill) => `"${skill}"`).join(",\n\t\t\t")}
-			],
-			"alumniOf": [
-			${siteData.employers
-				.map(
-					(employer) => `{
-				"@type": "Organization",
-				"name": "${employer}"
-			}`,
-				)
-				.join(",\n\t\t\t")}
-			]
-		  }
-		}
-		</script>`;
-		} else {
-			mainSchema = `<script type="application/ld+json">
-      {
-      "@context": "https://schema.org/",
-      "@type": "WebSite",
-      "name": "${siteData.title}",
-      "url": "${import.meta.env.SITE}"
-      }
-    </script>`;
+			schemaPayload.push({
+				"@context": "https://schema.org",
+				"@type": "ProfilePage",
+				dateCreated: new Date().toISOString(),
+				dateModified: new Date().toISOString(),
+				mainEntity: {
+					"@type": "Person",
+					"@id": `${import.meta.env.SITE}#identity`,
+					name: siteData.author.name,
+					jobTitle: "Principal Mechanical Architect",
+					description: siteData.description,
+					image: `${import.meta.env.SITE}${siteData.defaultImage.src}`,
+					url: import.meta.env.SITE,
+					sameAs: siteData.sameAs,
+					knowsAbout: siteData.skills,
+					alumniOf: workHistory.map((job) => ({
+						"@type": "OrganizationRole",
+						alumniOf: {
+							"@type": "Organization",
+							name: job.company,
+						},
+						roleName: job.title,
+						startDate: job.start.split("/").pop(), // Extract Year
+						endDate: job.end === "Present" ? undefined : job.end.split("/").pop(),
+					})),
+				},
+			});
 		}
 	}
 
-	// Breadcrumb Logic
+	// 4. Breadcrumb Logic
 	const breadcrumbs = [
 		{
 			"@type": "ListItem",
@@ -131,13 +133,18 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 		}
 	}
 
-	const breadcrumbSchema = `<script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": ${JSON.stringify(breadcrumbs)}
-    }
-    </script>`;
+	schemaPayload.push({
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: breadcrumbs,
+	});
 
-	return `${mainSchema}\n${breadcrumbSchema}`;
+	// Return concatenated script tags
+	return schemaPayload
+		.map(
+			(schema) => `<script type="application/ld+json">
+${JSON.stringify(schema, null, 2)}
+</script>`,
+		)
+		.join("\n");
 }

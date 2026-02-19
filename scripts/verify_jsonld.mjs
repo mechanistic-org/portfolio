@@ -24,25 +24,33 @@ async function check() {
 					const isCreativeWork = content.includes("CreativeWork");
 					const hasCreator = content.includes('"creator":');
 					const hasBreadcrumbs = content.includes("BreadcrumbList");
+					const hasWebSite = content.includes('"@type": "WebSite"');
+					const hasTechArticle = content.includes("TechArticle");
+					const hasOrgRole = content.includes("OrganizationRole");
+					const hasAbout = content.includes('"about":');
 
 					console.log(`\n--- JSON-LD BLOCK ${i + 1} ---`);
-					if (content.length > 500) {
+					if (content.length > 2000) {
 						console.log(
-							content.substring(0, 200) +
+							content.substring(0, 500) +
 								"\n...[snip]...\n" +
-								content.substring(content.length - 100),
+								content.substring(content.length - 200),
 						);
 					} else {
 						console.log(content);
 					}
 					console.log("\n--- ANALYSIS ---");
 					console.log(`URL: ${url}`);
-					console.log(`[Profile Page]: ${isProfile}`);
-					console.log(`[Person Entity]: ${isPerson}`);
-					console.log(`[#identity ID]:  ${hasIdentity}`);
-					console.log(`[Project Type]:  ${isProject} && ${isCreativeWork}`);
-					console.log(`[Creator Link]:  ${hasCreator}`);
-					console.log(`[Breadcrumbs]:   ${hasBreadcrumbs}`);
+					console.log(`[Profile Page]:   ${isProfile}`);
+					console.log(`[Person Entity]:  ${isPerson}`);
+					console.log(`[#identity ID]:   ${hasIdentity}`);
+					console.log(`[Project Type]:   ${isProject} && ${isCreativeWork}`);
+					console.log(`[TechArticle]:    ${hasTechArticle}`);
+					console.log(`[Creator Link]:   ${hasCreator}`);
+					console.log(`[Breadcrumbs]:    ${hasBreadcrumbs}`);
+					console.log(`[WebSite Schema]: ${hasWebSite}`);
+					console.log(`[Alumni Roles]:   ${hasOrgRole}`);
+					console.log(`[About Keywords]: ${hasAbout}`);
 				});
 			} else {
 				console.log("❌ NO JSON-LD FILES FOUND");
