@@ -1,10 +1,14 @@
 # Erik Norris
 
-### Mechanical Engineer | Forensic Architect | Tool Builder
+### Principal Mechanical Architect | Forensic Engineering | Digital Systems
 
 **[eriknorris.com](https://eriknorris.com)**
 
-This repository is the operating system for my professional identity. It is a "living portfolio" engine that ingests raw project data (CSV, JSON, CAD) and compiles it into a high-performance static website.
+> **"I built this sovereign infrastructure because I treat software intent with the exact same forensic rigor I apply to physical hardware."**
+
+This repository is a headless, agentic data pipeline that compiles **digital exhaust into data stories**. It is a "living portfolio" engine that forensically titrates 30 years of engineering "Red Gold" (raw project data, CAD, PDFs) into a high-performance static identity.
+
+Operating at the intersection of deep engineering legacy and modern software agility, I architect the hardware interface for the physical world.
 
 ---
 

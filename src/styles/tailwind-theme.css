@@ -5,19 +5,19 @@
  */
 @theme {
 	/* Cherenkov Blue #2E5CFF (YInMn Blue) converted to oklch for consistency */
-	--color-primary-50: oklch(97.0% 0.01 264.0);
-	--color-primary-100: oklch(94.0% 0.03 264.0);
-	--color-primary-200: oklch(88.0% 0.06 264.0);
-	--color-primary-300: oklch(80.0% 0.12 264.0);
-	--color-primary-400: oklch(70.0% 0.18 264.0);
+	--color-primary-50: oklch(97% 0.01 264);
+	--color-primary-100: oklch(94% 0.03 264);
+	--color-primary-200: oklch(88% 0.06 264);
+	--color-primary-300: oklch(80% 0.12 264);
+	--color-primary-400: oklch(70% 0.18 264);
 	/* #2E5CFF (YInMn Blue) - Hardcoded for absolute brand consistency */
-	--color-primary-500: #2E5CFF;
-	--color-primary-600: #2E5CFF;
+	--color-primary-500: #2e5cff;
+	--color-primary-600: #2e5cff;
 	/* Match 500 to ensure default text-primary is vibrant */
-	--color-primary-700: oklch(45.0% 0.20 264.0);
-	--color-primary-800: oklch(35.0% 0.16 264.0);
-	--color-primary-900: oklch(25.0% 0.12 264.0);
-	--color-primary-950: oklch(15.0% 0.08 264.0);
+	--color-primary-700: oklch(45% 0.2 264);
+	--color-primary-800: oklch(35% 0.16 264);
+	--color-primary-900: oklch(25% 0.12 264);
+	--color-primary-950: oklch(15% 0.08 264);
 
 	/* neutral colors */
 	--color-neutral-50: oklch(98.51% 0 0);
@@ -46,8 +46,8 @@
 	--color-base-950: var(--color-neutral-950);
 
 	/* other theme settings */
-	--button-transition-properties: box-shadow, color, background-color, border-color,
-		text-decoration-color, fill, stroke;
+	--button-transition-properties:
+		box-shadow, color, background-color, border-color, text-decoration-color, fill, stroke;
 
 	/* layout settings */
 	--breakpoint-xs: 400px;
@@ -58,7 +58,8 @@
 	--breakpoint-2xl: 1536px;
 
 	/* font families */
-	--font-mono: "Share Tech Mono", "JetBrains Mono Variable", "SFMono-Regular", "Menlo", "Monaco", "Consolas",
+	--font-mono:
+		"Share Tech Mono", "JetBrains Mono Variable", "SFMono-Regular", "Menlo", "Monaco", "Consolas",
 		"Liberation Mono", "Courier New", "monospace";
 
 	/* starwind and cosmic themes animations */
@@ -93,6 +94,17 @@
 
 		to {
 			transform: translateX(calc(-100% - 2.5rem));
+		}
+	}
+
+	--animate-shimmer: shimmer 2s linear infinite;
+
+	@keyframes shimmer {
+		from {
+			background-position: 0 0;
+		}
+		to {
+			background-position: -200% 0;
 		}
 	}
 }

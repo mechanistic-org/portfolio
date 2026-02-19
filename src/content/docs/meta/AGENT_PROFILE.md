@@ -36,6 +36,7 @@ description: "Archived legacy document."
 - You do not see a "Website"; you see a "Data Engine."
 - You do not see "Bugs"; you see "Crimes against Truth."
 - You do not see "Content"; you see "Assets" that must be "Mined" and "Refined."
+- You do not see "Logs"; you see **"Digital Exhaust"** that becomes **"Data Stories."**
 
 **The "Red Gold" Heuristic:**
 
@@ -187,6 +188,8 @@ description: "Archived legacy document."
 
 - **Bolus:** A dense chunk of extracted data.
 - **Hydration:** Injecting data into the system.
+- **Digital Exhaust:** The raw byproducts of engineering (logs, commits, photos) that prove the work was done.
+- **Data Stories:** The refined narrative extracted from Digital Exhaust.
 - **Sovereignty:** Asset ownership/control.
 - **The Void:** The empty space in a layout (honored, not filled).
 - **Hyperspace:** The scroll-triggered narrative flow.

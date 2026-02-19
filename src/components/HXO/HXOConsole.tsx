@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from "react";
+import TextShimmer from "../Effects/TextShimmer";
+
 import { useStore } from "@nanostores/react";
 import { selectedProject, hoveredProject, setHover, setConsoleHover } from "../../stores/hxoStore";
 import SonicHeartbeat from "../Audio/SonicHeartbeat";
@@ -15,6 +17,10 @@ interface ConsoleProject {
 		client?: string[];
 		audio_url?: string;
 		forensic_summary?: {
+			trigger?: string;
+			intervention?: string;
+			result?: string;
+			// Legacy fallback
 			objective?: string;
 			friction?: string;
 			method?: string;
@@ -108,9 +114,14 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 				onMouseEnter={() => setConsoleHover(true)}
 				onMouseLeave={() => setConsoleHover(false)}
 			>
-				{/* 1. VIEWPORT (The Sovereign Card) - FIXED HEIGHT to prevents layout thrashing loop */}
-				<div className="custom-scrollbar h-[450px] shrink-0 overflow-y-auto border-b border-zinc-800 bg-zinc-900/10 p-6">
-					{activeProject ? <ActiveSovereignView project={activeProject} /> : <DefaultSummary />}
+				{/* 1. VIEWPORT (The Sovereign Card) - DYNAMIC HEIGHT (Auto-Expand/Collapse) */}
+				<div className="custom-scrollbar max-h-[70%] shrink-0 overflow-y-auto border-b border-zinc-800 bg-zinc-900/10 p-6 transition-all duration-300 ease-in-out">
+					{/* Show Active View ONLY if there is an active project AND we are not just previewing the HOVER word */}
+					{activeProject && !activeProject.id.startsWith("demo_") ? (
+						<ActiveSovereignView project={activeProject} />
+					) : (
+						<DefaultSummary projects={projects} />
+					)}
 				</div>
 
 				{/* 2. LEDGER (The List) */}
@@ -206,25 +217,65 @@ function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 
 			{/* Forensic Grid (Condensed for Viewport) */}
 			<div className="space-y-6">
-				<div className="objective">
-					<h3 className="mb-2 font-mono text-xs tracking-widest text-zinc-500 uppercase">
-						Objective
-					</h3>
-					<p className="text-sm leading-relaxed font-light text-zinc-300">
-						{forensic_summary?.objective || "Engineering objective data pending..."}
-					</p>
-				</div>
+				{/* V2 SCHEMA: Result (Outcome) */}
+				{forensic_summary?.result && (
+					<div className="objective">
+						<h3 className="mb-2 font-mono text-xs tracking-widest text-zinc-500 uppercase">
+							Outcome
+						</h3>
+						<p className="text-sm leading-relaxed font-light text-zinc-300">
+							{forensic_summary.result}
+						</p>
+					</div>
+				)}
 
-				{(forensic_summary?.friction || forensic_summary?.method) && (
+				{/* V1 LEGACY: Objective */}
+				{forensic_summary?.objective && !forensic_summary?.result && (
+					<div className="objective">
+						<h3 className="mb-2 font-mono text-xs tracking-widest text-zinc-500 uppercase">
+							Objective
+						</h3>
+						<p className="text-sm leading-relaxed font-light text-zinc-300">
+							{forensic_summary.objective}
+						</p>
+					</div>
+				)}
+
+				{/* V2 SCHEMA: Trigger & Intervention */}
+				{(forensic_summary?.trigger || forensic_summary?.intervention) && (
 					<div className="rounded border border-zinc-800 bg-zinc-900/30 p-4 text-sm">
-						<div className="mb-2">
-							<span className="mr-2 font-mono text-xs text-red-400 uppercase">[FRICTION]</span>
-							<span className="text-zinc-300">{forensic_summary.friction}</span>
-						</div>
-						<div>
-							<span className="mr-2 font-mono text-xs text-emerald-400 uppercase">[METHOD]</span>
-							<span className="text-zinc-300">{forensic_summary.method}</span>
-						</div>
+						{forensic_summary.trigger && (
+							<div className="mb-2">
+								<span className="mr-2 font-mono text-xs text-red-500 uppercase">[TRIGGER]</span>
+								<span className="text-zinc-300">{forensic_summary.trigger}</span>
+							</div>
+						)}
+						{forensic_summary.intervention && (
+							<div>
+								<span className="mr-2 font-mono text-xs text-emerald-400 uppercase">
+									[INTERVENTION]
+								</span>
+								<span className="text-zinc-300">{forensic_summary.intervention}</span>
+							</div>
+						)}
+					</div>
+				)}
+
+				{/* V1 LEGACY: Friction & Method */}
+				{!forensic_summary?.trigger && (forensic_summary?.friction || forensic_summary?.method) && (
+					<div className="rounded border border-zinc-800 bg-zinc-900/30 p-4 text-sm">
+						{forensic_summary.friction && (
+							<div className="mb-2">
+								<span className="mr-2 font-mono text-xs text-red-400 uppercase">[FRICTION]</span>
+								<span className="text-zinc-300">{forensic_summary.friction}</span>
+							</div>
+						)}
+						{forensic_summary.method && (
+							<div>
+								<span className="mr-2 font-mono text-xs text-emerald-400 uppercase">[METHOD]</span>
+								<span className="text-zinc-300">{forensic_summary.method}</span>
+							</div>
+						)}
 					</div>
 				)}
 
@@ -257,30 +308,74 @@ function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 }
 
 // --- SUB-COMPONENT: Default Summary (Index Card) ---
-function DefaultSummary() {
+function DefaultSummary({ projects }: { projects: ConsoleProject[] }) {
+	const [isHoveringDemo, setIsHoveringDemo] = React.useState(false);
+
+	const handleMouseEnter = () => {
+		// Pick random ENRICHED project (Has forensic summary) to demonstrate swarm interaction
+		const enrichedProjects = projects.filter(
+			(p) =>
+				p.data.forensic_summary &&
+				(p.data.forensic_summary.result ||
+					p.data.forensic_summary.objective ||
+					p.data.forensic_summary.trigger),
+		);
+
+		if (enrichedProjects.length > 0) {
+			const randomProject = enrichedProjects[Math.floor(Math.random() * enrichedProjects.length)];
+			setHover(randomProject.id); // Triggers Swarm Highlight
+			setIsHoveringDemo(true);
+		}
+	};
+
+	const handleMouseLeave = () => {
+		setHover(null); // Clears Swarm Highlight
+		setIsHoveringDemo(false);
+	};
+
 	return (
 		<article className="hxo-node animate-in fade-in flex h-full flex-col justify-center duration-500">
 			<header className="mb-6">
-				<div className="mb-2 flex items-center gap-4">
-					<span className="font-mono text-sm tracking-widest text-lime-400">INDEX</span>
-				</div>
-				<h2 className="font-display mb-4 text-3xl font-bold text-white">Forensic Architecture</h2>
+				{/* Removed "INDEX" Header as requested */}
+				<h2 className="font-display mb-4 text-3xl font-bold text-white">
+					(Product Reality) <TextShimmer className="font-bold">EN</TextShimmer>gine
+				</h2>
 			</header>
 
 			<div className="space-y-6">
 				<div className="objective">
-					<h3 className="mb-2 font-mono text-xs tracking-widest text-zinc-500 uppercase">
-						Mission Status
-					</h3>
 					<p className="text-sm leading-relaxed font-light text-zinc-300">
-						Welcome to the archived ledger of Erik Norris. This console provides forensic access to
-						over 20 years of engineering, design, and leadership data.
+						The archived ledger of Erik Norris, Principal Mechanical Architect. A sovereign engine
+						providing forensic access to over 30 years of high-fidelity hardware design.
 					</p>
+
 					<p className="mt-4 text-sm leading-relaxed font-light text-zinc-300">
-						<span className="text-lime-400">HOVER</span> over the Swarm or Ledger to preview
-						individual case files.
-						<br />
-						<span className="text-lime-400">CLICK</span> to access the full dossier.
+						You have accessed a headless, agentic data pipeline that compiles digital exhaust into
+						data stories. I built this sovereign infrastructure because I treat software intent with
+						the exact same forensic rigor I apply to physical hardware.
+					</p>
+
+					<p className="mt-4 text-sm leading-relaxed font-light text-zinc-300">
+						This console indexes typical engineering ephemera: mechanical architecture, consumer
+						product design, and program rescue. It stabilizes the entropy of manufacturing into a
+						living, air-gapped ledger of product reality.
+					</p>
+
+					<p className="mt-4 text-sm leading-relaxed font-light text-zinc-300">
+						Operating at the intersection of deep engineering legacy and modern software agility, I
+						architect the hardware interface for the physical world.
+					</p>
+
+					<p className="mt-6 text-sm leading-relaxed font-light text-zinc-300">
+						<span
+							className="cursor-help font-mono text-lime-400 transition-colors hover:text-white"
+							onMouseEnter={handleMouseEnter}
+							onMouseLeave={handleMouseLeave}
+							title="Demonstrates swarm interaction"
+						>
+							HOVER
+						</span>{" "}
+						for preview.
 					</p>
 				</div>
 			</div>
