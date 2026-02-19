@@ -58,9 +58,9 @@ export interface SiteDataProps {
 const siteData: SiteDataProps = {
 	name: "Erik Norris' Portfolio",
 	// Your website's title and description (meta fields)
-	title: "Erik Norris | High-Performance Mechanical Design",
+	title: "Erik Norris | Principal Mechanical Architect",
 	description:
-		"Technical portfolio of Erik Norris, Senior Mechanical Engineer. Specializing in high-performance consumer electronics, medical devices, and precision automation.",
+		"The archived ledger of Erik Norris, Principal Mechanical Architect. A sovereign engine providing forensic access to over 30 years of high-fidelity hardware design. You have accessed a headless, agentic data pipeline that compiles digital exhaust into data stories.",
 	useViewTransitions: true,
 	useAnimations: true,
 
@@ -93,8 +93,8 @@ const siteData: SiteDataProps = {
 
 	// default image for meta tags if the page doesn't have an image already
 	defaultImage: {
-		src: "/images/cosmic-themes-logo.jpg",
-		alt: "Stellar logo",
+		src: "/assets/branding/logo.png",
+		alt: "Erik Norris - Principal Mechanical Architect",
 	},
 	status: {
 		type: "under-construction", // "production" | "under-construction" | "maintenance"
@@ -106,6 +106,14 @@ const siteData: SiteDataProps = {
 		"Consumer Product Design",
 		"High-Fidelity Hardware",
 		"Program Rescue",
+		"SolidWorks",
+		"Thermal Management",
+		"Wearable AR",
+		"Manufacturing Strategy",
+		"Plastic Injection Molding",
+		"Sheet Metal Architecture",
+		"Mechanism Design",
+		"Team Leadership",
 	],
 	sameAs: [
 		"https://www.linkedin.com/in/eriknorris/",
