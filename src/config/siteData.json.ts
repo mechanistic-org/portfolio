@@ -51,7 +51,7 @@ export interface SiteDataProps {
 	};
 	skills: string[];
 	sameAs: string[];
-	alumni: string;
+	employers: string[];
 }
 
 // Update this file with your site specific information
@@ -113,7 +113,16 @@ const siteData: SiteDataProps = {
 		"https://mechanistic.com",
 		"https://moreplay.com",
 	],
-	alumni: "Mechanistic",
+	employers: [
+		"Hyphen",
+		"Noon",
+		"Avegant",
+		"Kaleidescape",
+		"Digidesign",
+		"frogdesign",
+		"Silicon Graphics",
+		"EP Technologies",
+	],
 };
 
 export default siteData;

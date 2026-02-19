@@ -12,8 +12,19 @@ async function check() {
 		if (matches.length > 0) {
 			console.log(`FOUND ${matches.length} JSON-LD BLOCKS:\n`);
 			matches.forEach((m, i) => {
-				console.log(`--- BLOCK ${i + 1} ---`);
-				console.log(m[1].trim());
+				const content = m[1];
+				const hasProfile = content.includes('"@type": "ProfilePage"');
+				const hasMainEntity = content.includes('"mainEntity": {');
+				const hasPerson = content.includes('"@type": "Person"');
+				const hasAlumni = content.includes('"alumniOf": [');
+				const hasEP = content.includes('"name": "EP Technologies"');
+
+				console.log(`--- BLOCK ${i + 1} CHECK ---`);
+				console.log(`Has ProfilePage: ${hasProfile}`);
+				console.log(`Has mainEntity:  ${hasMainEntity}`);
+				console.log(`Has Person:      ${hasPerson}`);
+				console.log(`Has Alumni Array:${hasAlumni}`);
+				console.log(`Has EP Tech:     ${hasEP}`);
 				console.log("------------------\n");
 			});
 		} else {

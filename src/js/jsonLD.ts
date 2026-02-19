@@ -62,20 +62,32 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 		return `<script type="application/ld+json">
 		{
 		  "@context": "https://schema.org",
-		  "@type": ["ProfilePage", "Person"],
-		  "name": "${siteData.author.name}",
-		  "jobTitle": "Principal Mechanical Architect",
-		  "description": "${siteData.description}",
-		  "url": "${import.meta.env.SITE}",
-		  "sameAs": [
+		  "@type": "ProfilePage",
+		  "dateCreated": "${new Date().toISOString()}",
+		  "dateModified": "${new Date().toISOString()}",
+		  "mainEntity": {
+			"@type": "Person",
+			"name": "${siteData.author.name}",
+			"jobTitle": "Principal Mechanical Architect",
+			"description": "${siteData.description}",
+			"image": "${import.meta.env.SITE}${siteData.defaultImage.src}",
+			"url": "${import.meta.env.SITE}",
+			"sameAs": [
 			${siteData.sameAs.map((link) => `"${link}"`).join(",\n\t\t\t")}
-		  ],
-		  "knowsAbout": [
+			],
+			"knowsAbout": [
 			${siteData.skills.map((skill) => `"${skill}"`).join(",\n\t\t\t")}
-		  ],
-		  "alumniOf": {
-			"@type": "Organization",
-			"name": "${siteData.alumni}"
+			],
+			"alumniOf": [
+			${siteData.employers
+				.map(
+					(employer) => `{
+				"@type": "Organization",
+				"name": "${employer}"
+			}`,
+				)
+				.join(",\n\t\t\t")}
+			]
 		  }
 		}
 		</script>`;
