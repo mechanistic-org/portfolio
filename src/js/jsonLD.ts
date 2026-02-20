@@ -1,4 +1,4 @@
-import siteData from "@config/siteData.json";
+import siteData from "@config/siteData.json.ts";
 import workHistory from "@config/work_history.json";
 
 interface GeneralProps {
