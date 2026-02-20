@@ -4,7 +4,7 @@ description: Build, Commit, and Push to Main (Triggering Cloudflare).
 
 # Deploy to Production
 
-Trigger this workflow by running `/deploy-production` or asking to "Push to Main".
+Trigger this workflow by running `/deploy_production` or asking to "Push to Main".
 
 1.  **Safety Check**:
     - Run `git status` to show pending changes.

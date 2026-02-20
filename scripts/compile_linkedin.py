@@ -1,5 +1,6 @@
 
 import re
+import os
 
 # Unicode Math Sans Bold Map
 def to_bold(text):
@@ -58,7 +59,12 @@ def compile_linkedin():
                  final_output.append(blurb)
                  final_output.append("\n")
 
-    output_path = r"public/assets/prompts/LINKEDIN_READY.txt"
+    # [STANDARDIZED] Write to root prompts/
+    output_path = r"prompts/LINKEDIN_READY.txt"
+    
+    # Ensure dir exists (though we just made it via command)
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    
     with open(output_path, "w", encoding="utf-8") as f:
         f.write("\n".join(final_output))
 

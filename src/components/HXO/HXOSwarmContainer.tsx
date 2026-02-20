@@ -1,4 +1,3 @@
-import React from "react";
 import { useStore } from "@nanostores/react";
 import ResVizSwarm from "../DataViz/ResVizSwarm";
 import {
@@ -12,9 +11,10 @@ import {
 
 interface HXOSwarmContainerProps {
 	nodes: any[];
+	links?: any[];
 }
 
-export default function HXOSwarmContainer({ nodes }: HXOSwarmContainerProps) {
+export default function HXOSwarmContainer({ nodes, links }: HXOSwarmContainerProps) {
 	// Subscribe to store state
 	const currentHover = useStore(hoveredProject);
 	const currentSelection = useStore(selectedProject);
@@ -37,6 +37,7 @@ export default function HXOSwarmContainer({ nodes }: HXOSwarmContainerProps) {
 		<div className="h-full w-full">
 			<ResVizSwarm
 				nodes={nodes}
+				links={links}
 				externalHoverId={currentHover || currentSelection || undefined}
 				selectedId={currentSelection}
 				onNodeSelect={(node) => setHover(node ? node.id : null)}

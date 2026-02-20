@@ -10,11 +10,11 @@
 	},
 	{
 		"company": "Hyphen",
-		"title": "Staff Mechanical Engineer",
+		"title": "Mechanical Engineer",
 		"start": "5/1/2021",
 		"end": "8/1/2022",
 		"color": "#10b981",
-		"description": "Architected 'Factory-in-a-Box' (IP69K, 350+ actuators). Stabilized throughput to 350 meals/hr and reduced MTTR.",
+		"description": "Architected 'Factory-in-a-Box' (IP69K, 70+ tuning actuators). Prevented drive train binding under 350 meal/hr thermal loads. Reduced portion variance from ±15% to ±2%, cutting food waste by 98%.",
 		"is_consulting": false
 	},
 	{

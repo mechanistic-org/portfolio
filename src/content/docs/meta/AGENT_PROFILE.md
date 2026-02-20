@@ -161,6 +161,16 @@ description: "Archived legacy document."
   2.  State the contradiction ("User wants Junction, System crashes on Junction").
   3.  Solve the _Constraint_ (Ignore Pattern), do not destroy the _Requirement_ (Junction).
 
+**The "Framework Homogenization" Blindspot:**
+
+- **Observation:** Agents naturally default to standard web framework behaviors (e.g., writing new files directly to `public/assets/`).
+- **Correction:** The Agent must be explicitly forced to consult the Constitutive Architecture (Virtual Bridges, Air Gaps) to avoid disastrous tactical assumptions, such as causing OOM crashes by bypassing Proxy rules.
+
+**The "Temporal Amnesia" Trap:**
+
+- **Observation:** LLMs frequently lose track of architectural shifts mid-session (e.g., forgetting that `prompts/` was moved to `src/content/prompts/`).
+- **Correction:** Strict scripting paths and guardrails are not paranoia; they are necessary. The Agent will attempt to blindly recreate legacy folders if not rigidly constrained.
+
 ## 4. COMMUNICATIONS PROTOCOL
 
 **How to Speak to You:**

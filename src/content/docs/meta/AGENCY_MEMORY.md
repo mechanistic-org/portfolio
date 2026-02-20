@@ -12,176 +12,25 @@ description: "The Persistent Short-Term Memory store for the AI Agent. This file
 
 ---
 
-## 🔗 External Oracles (Active Intelligence)
+## 🔗 Active Intelligence & Project Tracking
 
-These are active AI/External resources that contain "Source of Truth" data not in the repo.
-
-### 🧊 Cryogenic Storage (Features on Ice)
-
-Features that were implemented but "unwound" for clarity, waiting for the right data or UI context to return.
-
-### 1. **The Forensic Seismograph (Entropy Viz)**
-
-- **Concept:** Visualizing "Project Entropy" (Status Report Scores) as a background "Racegraph" in the HUD.
-- **Status:** **ACTIVE** (Resurrected 2026-01-26).
-- **Update:** Relabeled to **"PROJECT ENTROPY"**.
-- **Tech Stack:** D3.js + **Forensic Tooltip** (Black Glass DLS).
-- **The "ECG" Model:**
-  - **Cyan (Volume):** Forced "Heartbeat" (High/Low toggling on every point) to simulate pulse.
-  - **Orange (Entropy):** Value + `Math.sin()` jitter.
-  - **Green (Stability):** Inverted score (`10 - score`).
-- **Interaction:** `cursor-crosshair` for data, `cursor-help` for tooltips.
-
-### 2. **Project Backport (Forensic Strategy)**
-
-- **Status:** **PENDING** (Frozen Jan 2026).
-- **Goal:** Backport Resume "Red Gold" to Portfolio MDX.
-- **Key Targets:**
-  - **The Blind-Mate:** Do not just say "modular." Describe the kinematic alignment and float mechanisms that allow hot-swapping 350+ actuators.
-  - **The Sealing Logic:** Define the specific IP69K strategy (Gasket compression %s, Breather vents, Cable pass-throughs).
-  - **The MTTR Metric:** Move the "Hours to Minutes" stat from text into the `metrics.yaml` structure.
-- **Action:** Execute `conversation-miner` when the "Hack Pack" Prompt Engineering backlog is clear.
-
-### 3. **The Refinery 2.0 Workflow (Unified Pipeline)**
-
-- **Role:** The Standard Operating Procedure for Data Injection.
-- **Status:** **ACTIVE** (Feb 2026).
-- **Components:**
-  1.  **Bolus:** Metrics + War Stories (Legacy).
-  2.  **Seismobolus:** Chronological Event Log (Entropy).
-  3.  **Reports:** Markdown Narrative Blocks.
-  4.  **Isomorphics:** Trust Signals (Structural Rhymes).
-- **Protocol:** [Extract All -> Assemble JSON -> Inject Single Payload].
-- **Artifact:** `workflow_sop.md`.
-
-### 4. **Project C|24 (Curtis)**
-
-- **Role:** SME Oracle / Evidence Locker
-- **URL:** [NotebookLM: C24](https://notebooklm.google.com/notebook/b8f893fe-234c-44ca-9d92-8fff6f82e53d?authuser=1)
-- **Status:** **HYDRATED** (2026-02-11)
-- **Contents:**
-  - Synthesized "Why" behind the RoHS/Focusrite split.
-  - 6x "Saved Notes" (Pinboard) ready for copy-paste into MDX.
-  - Contains analysis of 70+ forensic PDFs (vendor emails, dimensional reports).
-- **Actionable:** Hydrated into `notebook_dumps/c24.json` (Bolus) and `_intelligence.md` (Report).
-
-### 5. **Project D-Control (Buckley)**
-
-- **Role:** Flagship Console forensics
-- **Status:** **HYDRATED** (2026-02-11)
-- **Contents:**
-  - **The Blacksmithing Protocol:** Manual rectification of 50% yield loss.
-  - **The V-2 Tinderbox:** PCB flammability crisis.
-  - **Complexity Vector:** 5-phase growth (450 -> 2500 parts).
-- **Actionable:** Fully Hydrated (`json` + `md` + `_entropy.json`).
-
-### 6. **Project Bazooka (Norris)**
-
-- **Role:** Forensic Gold Standard (Scars/Complexity)
-- **Status:** **PARTIAL** (2026-02-13)
-- **Contents:**
-  - **Scars:** 5 Critical Interventions (The "3Tabs" Fix).
-  - **Complexity Visualizer:** 109 Drawings, 19 PCBs.
-  - **Team Pip Logic:** Auto-calculated "INT 5".
-- **Actionable:** `bazooka.json` (Source) -> `index.mdx` (Target). Missing `_entropy.json`.
-
-### 7. **Project 320-Slot (Carousel)**
-
-- **Role:** Deep Dive / Case Study (M700 Child)
-- **Status:** **HYDRATED** (2026-02-13)
-- **Contents:**
-  - **Narrative:** "The Potato Chip Pathology" (Warping).
-  - **Complexity:** V2.1 Vector (Part Count, Tool Chain).
-  - **Entropy:** 30+ events (Sidecar).
-- **Actionable:** Linked to `m700`. Sidecar enforced.
-
-### 2. **Project Dreamjob (Visual Taxonomy)**
-
-- **Role:** Theoretical Manifesto
-- **URL:** _[Insert URL if exists]_
-- **Status:** **PENDING**
-
-### 3. **Digidesign Tool Chain (Forensic Audit)**
-
-- **Role:** Technical Truth Source (2003-2007)
-- **Artifact:** `digi_tool_chain_inventory.md`
-- **Status:** **VERIFIED**
-- **Contents:** Definitive versions for Pro/E (Wildfire 2.0), IntraLink (3.4), SAP, and DigiDelivery.
-
-### 4. **Operation Chronos (Asset Hunting)**
-
-- **Role:** Forensic Target List
-- **Artifact:** `HUNTING_LIST.md` (in Brain Artifacts) / `D:/portfolio/HUNTING_LIST_PRINTABLE.html`
-- **Status:** **ACTIVE**
-- **Contents:** Targeted list of 25+ specific forensic assets (Titan DXF, C24 Refresh AI, etc.) extracted from NotebookLM.
-
-### 5. **Operation SC48 (Asset Densification)**
-
-- **Role:** The Pilot Program for "Manual Curation".
-- **Status:** **ACTIVE** (Jan 2026).
-- **Protocol:** "The Wrangle" (Scaffold -> Curate -> Polish).
-- **Target:** Elevate SC48 visual density to the "C24 Benchmark" (5-10 images per bubble).
-- **Method:**
-  1.  Agent scaffolds empty folders in `R2_MASTER`.
-  2.  User drags assets from `d:/portfolio` into buckets.
-  3.  Agent runs `process_assets.py` to optimize.
-
-### 6. **WebTV Galaxy (The Missing Link)**
-
-- **Role:** Forensic Narrative (Pre-Xbox)
-- **URL:** [NotebookLM: Galaxy](https://notebooklm.google.com/notebook/a743c4b4-0aaf-446f-b18c-13f23b38065e?authuser=1)
-- **Status:** **VERIFIED** (2026-01-10)
-- **Contents:**
-  - 150W Thermal Crisis (AMD K7).
-  - Transition to Xbox/eHome.
-  - "Blind Discovery" gems (Spoons, Datsun 510).
-  - **TITRATED:** `webtv-elmer` (Seismobolus Active), `webtv-cortez` (Seismobolus Active).
-
-### 6. **Project Commute (The Polar Archives)**
-
-- **Role:** Quantified Grit / Forensic Commute
-- **Path:** `D:\GitHub\eriknorris-workspace\__WORKOUT_data_working-copy`
-- **Status:** **VERIFIED** (2004-2006 Data)
-- **Contents:** `.hrm` files (Heart Rate/Speed) documenting the "Digi-Commute."
-- **Potential:** High-fidelity data visualization of "The Grind" (La Honda -> Daly City).
-
-### 7. **Project Morpheus (Visual Taxonomy)**
-
-- **Role:** High-Fidelity Deep Dive (Hollow Core)
-- **Status:** **SECONDARY ENRICHMENT** (Secondary Visuals Active, Forensic Core Missing)
-- **Constraint:** Lacks "Red Gold" (NotebookLM output). Audio is missing.
-- **Action:** Retain as "Deep Dive" visual verification but mark as "Hollow" until raw data is ingested.
-
-### 8. **The Lateral Injection Protocol (Forensic Bridge)**
-
-- **Role:** The "Unstructured Data" Handler.
-- **Status:** **ACTIVE** (Feb 2026).
-- **Context:** When a user provides raw text/JSON that isn't in a NotebookLM dump (e.g., "Here is the cast list").
-- **Protocol:**
-  1.  **Inject:** Manually edit the "Live Artifact" (`index.mdx`).
-  2.  **Solidify:** Run `npm run content:hydrate -- --reverse-json` immediately.
-  3.  **Verify:** Check `notebook_dumps/[slug].json` to ensure the data was backported.
-- **Why:** This ensures manual edits become part of the "Source of Truth" (JSON) and aren't overwritten by future hydrations.
-
-### 9. **Project Motorola MP3 (Refinement)**
-
-- **Role:** Forensic Refinement / HUD Standard
-- **Status:** **READY STATE** (2026-02-17)
-- **Contents:**
-  - **Failure:** Housing Deformation (Temperature Shock).
-  - **Legacy:** The "Rib 5 Snap" tooling violation.
-  - **Entropy:** 25+ Seismograph events.
-- **Actionable:** `presentation_mode: deep_dive` enforced to resolve HUD overlap.
+> **[ARCHITECTURAL DECREE]**
+> Project Hydration, Deep Dives, and Case Studies are **NO LONGER TRACKED HERE**.
+> All project status tracking, entropy vectors, and hydration metrics have been evicted from the Hippocampus to reduce context saturation.
+>
+> **Master Sovereign Ledger:** `src/content/docs/project/MINING_LOG.md`
+>
+> _Agents: Do NOT append new project victories or hydrated statuses to this file. Log them in the `MINING_LOG` instead._
 
 ---
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Mining Session Data (Documentation).**
-- **Next Step:** Verify Cloudflare Deployment.
-- **Context:** **BUILD STABILIZED.** Fixed critical MDX crash (<Digit) and Asset Proxy Node.js trap.
+- **Active Task:** **Maintaining Defensive Architecture Across Scripts.**
+- **Next Step:** Ensure no subsequent scripts bypass the Air Gap rules.
+- **Context:** **PIPELINE HARDENED.** The `/harvest_linkedin` and `/update_resume` pipelines now strictly obey Asset Sovereignty.
 - **Action Item:** Monitor `MINING_LOG.md` for "Pending" (⭕) vectors.
-- **Recent Win:** Sanitized 43 unescaped MDX tags across the corpus.
+- **Recent Win:** Sanitized unescaped MDX tags; Eliminated ghost duplicates in LinkedIn harvest; Re-established the prompt migration to `src/content/prompts/`.
 - **Active Roadmap:** [`src/content/docs/project/ROADMAP_ACTIVE.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/ROADMAP_ACTIVE.md) (The Horizon)
 - **Mining Log:** [`src/content/docs/project/MINING_LOG.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/MINING_LOG.md) (The Re-Hydration Tracker)
 - **Project Index:** [`src/content/prompts/PROJECT_INDEX.md`](file:///d:/GitHub/eriknorris/src/content/prompts/PROJECT_INDEX.md) (The Registry)
@@ -204,6 +53,8 @@ Features that were implemented but "unwound" for clarity, waiting for the right 
 - **Critical Learning:** **"The Legacy Body Trap"** - `hydrate_content.py` preserves existing body content. If a project has legacy "marketing fluff", it blocks the "Red Gold" injection. Manual intervention is required to replace it with the Forensic Narrative.
 - **Critical Learning:** **"The Asset Ghost"** - `ksystem-120` is throwing 404s for specific assets (`DSC05387.jpg`). This indicates a sync gap between `R2_STAGING` and the codebase references.
 - **Critical Learning:** **"The MDX Digit Trap"** - `vite-plugin-mdx` crashes if `<` is followed by a number (e.g. `<10min`) because it parses it as an invalid JSX tag. **Fix:** Use `fix_mdx_syntax.py` to escape to `&lt;`.
+- **Critical Learning:** **"The Prompt Native Location"** - The root `prompts/` directory was deprecated and moved to `src/content/prompts/` to integrate with Astro collections. Scripts generating text artifacts must route here to prevent LLM amnesia.
+- **Critical Learning:** **"The Asset Sovereignty Clarification"** - Web Assets (PDFs, Images) belong under the Air Gap in `R2_STAGING`. Internal LLM prompts (`.txt` files) belong in the local repo (`src/content/prompts/`). Do not conflate the pipelines.
 - **Action Item:** Proceed to Visual Verification (Browser).
 
 * **Key Decision (Assets):** **"The White Logo Standard"** - `logo.png` is the canonical White Logo. `EN_logo_white_1024.png` does not exist in the current R2 stash.

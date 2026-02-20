@@ -51,9 +51,14 @@ Look for:
 ### 4. Protocol: "Memory Synapse"
 
 - **Update `src/content/docs/meta/AGENCY_MEMORY.md`**:
-  - Clear completed focus items.
-  - Add new "Active Intelligence" (URLs, Notebooks).
+  - Clear completed focus items (Purge closed loops!).
+  - Add new "Active Intelligence" (URLs, Notebooks) ONLY if it's broad meta-focus.
   - Update "Current Focus State" (Where did we leave off?).
+  - **[CRITICAL LAW]**: DO NOT log project hydration status or project milestones here.
+
+- **Update `src/content/docs/project/MINING_LOG.md`**:
+  - This is the **Sovereign Ledger** for Project Status.
+  - If a project was enriched, hydrated, or modified, log it HERE, not in Memory.
 
 ### 5. Output Format
 

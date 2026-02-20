@@ -3,16 +3,13 @@ import Layout from "@layouts/BaseLayout.astro";
 
 // import WorkRealm from "../../components/Realms/WorkRealm";
 // import WiggleLogo3D from "@components/Deck/WiggleLogo3D";
+import { site } from "@config/site_config";
 import { getMultiverseData } from "@/utils/getMultiverseData";
 
 const multiverseData = await getMultiverseData();
 ---
 
-<Layout
-	title="Erik Norris | Senior Staff ME / Designer"
-	description="System Index"
-	starfield={true}
->
+<Layout title={site.title} description="System Index" starfield={true}>
 	<!-- SCROLL TRACK -->
 	<!-- A generic tall element to allow the user to "scroll" which drives the animation -->
 	<div

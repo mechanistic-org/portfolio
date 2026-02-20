@@ -1,0 +1,70 @@
+# Deep Research Prompt Strategy (V1)
+
+# CONTEXT: AGENT_MODE / FORENSIC_MINING
+
+You are acting as a **Principal Forensic Researcher**. Your goal is to find "External War Stories" that validate the internal engineering logs of Erik Norris.
+Do not provide generic summaries. Dig for specific timestamps, failure modes, and user quotes.
+
+---
+
+## MODULE 1: The "Specific Failure" Mirror
+
+**Use Case:** When we know exactly what broke internally (e.g., "C24 Faders").
+
+**PROMPT:**
+"Act as a Forensic Thread Archaeologist. Search specifically for user reports of '[Project Name] [Specific Internal Failure Mode]' between [Launch Year] and [Launch Year + 3].
+
+- **Target Sources:** Gearspace (formerly Gearslutz), AVSForum, Reddit, specialized enthusiast boards.
+- **Extraction Goal:** Find a specific user who described exactly the symptom we fixed (e.g., 'fader fighting', 'noisy fan', 'warped plastic').
+- **Output Format:** Direct Quote + User Sentiment + Date."
+
+---
+
+## MODULE 2: The "Market Silence" Diagnostic
+
+**Use Case:** When we suspect the product failed due to apathy (e.g., Room Director).
+
+**PROMPT:**
+"Conduct a 'Share of Voice' analysis for [Project Name] in [Launch Year]. Compare forum thread counts and review volumes against its primary competitor [Competitor Name].
+
+- **Hypothesis:** Was this product 'controversial' (high volume, mixed sentiment) or 'ignored' (low volume)?
+- **Key Indicator:** Did professional reviewers cover it, or only press release re-posts?"
+
+---
+
+## MODULE 3: The "Price/Value" Friction Test
+
+**Use Case:** For products with high COGS/Price challenges (e.g., D-Command, Cortez).
+
+**PROMPT:**
+"Find 'Value for Money' debates regarding [Project Name]. Look for users strictly comparing it to [Competitor/Alternative].
+
+- **Specific keywords:** 'Overpriced', 'Rip-off', 'Bargain', 'Worth it for the X feature'.
+- **Extraction Goal:** Isolate the specific feature that users felt justified (or failed to justify) the price tag."
+
+---
+
+## MODULE 4: The "Legacy" Impact Check
+
+**Use Case:** For long-tail validation (e.g., Galaxy, Sundance).
+
+**PROMPT:**
+"Search for 'Retro Reviews' or 'Nostalgia' posts about [Project Name] written after [Year 2020].
+
+- **Hypothesis:** Does this device have a 'cult following' today?
+- **Extraction Goal:** What ONE feature do modern collectors praise? (e.g., 'The DAC sound', 'The build quality')."
+
+---
+
+## MODULE 5: The "Trophy Case" (Awards & IP)
+
+**Use Case:** To validate high-level recognition and technical novelty.
+
+**PROMPT:**
+"Search for [Project Name] in patent databases (Google Patents) and Industry Award archives (TEC Awards, CES Innovations, Red Dot) between [Year] and [Year+2].
+
+- **Queries:** 'Digidesign Patent [Year]', '[Project Name] Award Winner', 'Erik Norris Patent'.
+- **Extraction Goal:** List exactly:
+  1.  **Patents:** Patent #, Title, and Abstract. (Look for 'Norris' in Inventors list).
+  2.  **Awards:** Authority (e.g., TEC), Category, and Year.
+  3.  **Reviews:** 'Editor's Choice' or 'Best of Show' mentions."

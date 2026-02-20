@@ -18,7 +18,8 @@ def clean_unused_vars(log_file):
             lines = f.readlines()
 
     # Regex for parsed error line (without ANSI)
-    # src/content.config.ts:33:11 - warning ts(6133): 'image' is declared but its value is never read.
+    # src/components/Audio/SonicHeartbeat.tsx:11:9 - warning ts(6133): 't' is declared but its value is never read.
+    # We make the regex more permissive to catch spaces, quotes, and the structure
     regex_str = r"^(.*?):(\d+):(\d+)\s+-\s+warning\s+ts\(6133\):\s+'(.*?)'\s+is\s+declared\s+but\s+its\s+value\s+is\s+never\s+read\.?"
     pattern = re.compile(regex_str, re.IGNORECASE)
     
@@ -26,7 +27,7 @@ def clean_unused_vars(log_file):
 
     for line in lines:
         clean_line = strip_ansi(line).strip()
-        match = pattern.match(clean_line)
+        match = re.search(regex_str, clean_line, re.IGNORECASE)
         if match:
             file_path, line_num, col_num, var_name = match.groups()
             

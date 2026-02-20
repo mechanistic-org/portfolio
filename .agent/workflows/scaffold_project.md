@@ -4,7 +4,7 @@ description: Scaffolds a new project entry using the production-grade C24 schema
 
 # Scaffold New Project
 
-Trigger this workflow by running `/scaffold-project` or asking to "Scaffold a new project".
+Trigger this workflow by running `/scaffold_project` or asking to "Scaffold a new project".
 
 1.  **Request Input**: Ask the user for the following required fields:
     - `slug` (Must be snake_case, e.g., `project_feature`)

@@ -238,3 +238,10 @@ These vectors are explicitly mined using `deep_research_prompt_v1.txt`:
   - **Issue:** Recursive `forensic_data` block caused schema violation.
   - **Fix:** Surgically removed the block and deleted the source `_data.json` to prevent re-hydration.
 - **[STATUS] Build:** **STABLE**. Deployment verified.
+
+## 📝 Session Log: 2026-02-20 (Air Gap Enforcement & Resume Pipeline)
+
+**Objective:** Stabilize LinkedIn/Resume generation and enforce Air Gap laws.
+
+- **[TECH] Resumes & LinkedIn:** Successfully rewrote `scripts/harvest_linkedin.py` to decouple outputs into <2000-character "Experience" buckets and discrete "Projects". Enforced Asset Sovereignty on `scripts/generate_resume_pdf.cjs` to print directly to `R2_STAGING`.
+- **[CRITICAL] Asset Sovereignty:** Accidental creation of `public/assets/` was caught and deleted to prevent 60GB memory leak. Re-established that Prompt output must go to `src/content/prompts/` and web assets go to `R2_STAGING`.

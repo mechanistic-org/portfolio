@@ -1,6 +1,6 @@
 # 👻 Ghost Asset Report
 
-**Total Broken Links:** 225
+**Total Broken Links:** 233
 
 | Project | Missing Asset |
 | :--- | :--- |
@@ -19,6 +19,7 @@
 | `webtv-galaxy` | `/assets/r2/webtv-galaxy/bubbles/03_thermal/model-iso.jpg` |
 | `webtv-galaxy` | `/assets/r2/webtv-galaxy/bubbles/03_thermal/tempxz.jpg` |
 | `webtv-galaxy` | `/assets/r2/webtv-galaxy/bubbles/03_thermal/velxz.jpg` |
+| `webtv-galaxy` | `/assets/r2/webtv-galaxy/webtv-galaxy-hero-01-xl.webp` |
 | `webtv-cortez` | `/assets/r2/webtv-cortez/bubbles/01_early_id/back.jpg` |
 | `webtv-cortez` | `/assets/r2/webtv-cortez/bubbles/01_early_id/bot.jpg` |
 | `webtv-cortez` | `/assets/r2/webtv-cortez/bubbles/01_early_id/front.jpg` |
@@ -229,3 +230,10 @@
 | `bazooka` | `/assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155320-xl.webp` |
 | `bazooka` | `/assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170928_153842-2-xl.webp` |
 | `bazooka` | `/assets/r2/bazooka/bubbles/03_base_test_btn_2/IMG_20170928_153842-xl.webp` |
+| `backsplash` | `/assets/r2/backsplash/bubbles/01_misc/IMG_0237_60.png` |
+| `backsplash` | `/assets/r2/backsplash/bubbles/01_misc/IMG_0238_60.png` |
+| `backsplash` | `/assets/r2/backsplash/bubbles/01_misc/PXL_20211028_190650248_60.png` |
+| `backsplash` | `/assets/r2/backsplash/bubbles/01_misc/PXL_20211102_180108511_60.png` |
+| `backsplash` | `/assets/r2/backsplash/bubbles/01_misc/PXL_20211102_190316482_60.png` |
+| `backsplash` | `/assets/r2/backsplash/bubbles/01_misc/PXL_20211102_214847653_60.png` |
+| `backsplash` | `/assets/r2/backsplash/hero.webp` |

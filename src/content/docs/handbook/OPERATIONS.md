@@ -191,11 +191,17 @@ These scripts drive the "Forensic Data Factory."
   1.  **Isolate:** Config `astro.config.mjs` to `ignored: ["**/public/assets/**"]`.
   2.  **Verify:** If ignoring fails, you must DELETE the Junction and use **Direct External Read** (modifying `[...path].ts`) or debug the folder structure for loops. Do not just restart the server.
 
-### 7. **Memory Leak (60GB RAM)**
+### 🔴 "The Ghost Duplicate" (Data Harvesting)
 
-- **Symptom:** `Node.js` consumes 100% RAM. Site does not load.
-- **Cause:** **Watcher Recursion.** You likely have a Junction (`public/assets`) pointing to a drive (`R2_STAGING`) that contains a copy of the build output (`_site`), creating an infinite loop.
-- **Fix:** DELETE the Junction. Use the **Virtual Bridge** Protocol (Law I).
+- **Symptom:** Ghost duplicate entries appearing in Python script harvest outputs (e.g., two "Makeline" projects).
+- **Cause:** Two different slugs (e.g., `backsplash` and `makeline`) share the exact same `title: Hyphen Makeline` in their MDX frontmatter.
+- **Fix:** Ensure frontmatter titles are strictly unique and descriptive. Simple extraction scripts group by exact title keys unless specifically mapped.
+
+### 🔴 "The Memory Leak Crash" (60GB Leak)
+
+- **Symptom:** `Node.js` consumes 100% RAM. Site does not load. Vite/Watcher crashes.
+- **Cause:** A local `public/assets` directory was created (often accidentally by LLM generation scripts defaulting to web standards) or contains a recursive Junction mapping to `R2_STAGING`.
+- **Fix:** Ensure a local `public/assets` directory **NEVER** exists. All assets must be served via the `[...path].ts` Virtual Bridge from `R2_STAGING`. Delete local `public/assets` immediately. Do not attempt to symlink.
 
 ### 🔴 "The Split Brain" (Link Rot)
 

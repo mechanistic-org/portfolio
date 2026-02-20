@@ -73,11 +73,14 @@ export const resumeMaster = {
 			title: "Mechanical Engineer",
 			location: "San Jose, CA",
 			dates: "2021 - 2022",
-			blurb: "Lead engineer for the 'Factory-in-a-Box' food robotics platform.",
+			blurb: "Lead architect for the 'Factory-in-a-Box' IP69K food robotics platform.",
 			bullets: [
-				"**System Decoupling:** Architected the mechanical system for the world's first automated Makeline, shifting from component design to 'System Architecture' by treating assembly as a physical network topology.",
-				"**The Hard Ore:** Reduced **Mean Time To Repair (MTTR)** from hours to minutes by decoupling 'Payload Modules' (Dispensers) from the chassis, allowing hot-swap maintenance.",
-				"**Integration:** Built the 'Iron Bird' rig to validate 48V/CAN bus loads and orchestrated **350+ actuators** in an IP69K washdown environment.",
+				"**The Trigger (Dispensers):** 'Material Diversity' failure. Non-Newtonian food ingredients (carnitas, rice) exhibited agglomeration and ricochet, defying standard industrial dosing logic.",
+				"**The Intervention:** Developed a Dispenser Taxonomy (Types A–F) utilizing 70+ actuators with dynamic 'auto-tuning' capability to decouple dispensing precision from fluid viscosity.",
+				"**The Result:** Reduced portion variance from the industry standard ±15% to **±2%**, cutting food waste by 98% while sustaining a 350-meal-per-hour throughput target.",
+				"**The Trigger (Drive Train):** Thermal expansion mismatch between Acetal internal gears and Aluminum enclosures caused binding risks under intense 350-meal/hour thermal loads.",
+				"**The Intervention:** Integrated rigid Sleeve Alignment Guides to enforce concentricity and fortified assemblies with Low-Clearance Retaining Rings to prevent axial helix migration.",
+				"**The Result:** Stabilized the drive train to achieve **99.9% order accuracy** and established a modular architecture enabling hot-swap maintenance (MTTR < 5 mins) during lunch rushes.",
 			],
 		},
 		{

@@ -60,7 +60,7 @@ const siteData: SiteDataProps = {
 	// Your website's title and description (meta fields)
 	title: "Erik Norris | Principal Mechanical Architect",
 	description:
-		"The archived ledger of Erik Norris, Principal Mechanical Architect. A sovereign engine providing forensic access to over 30 years of high-fidelity hardware design. You have accessed a headless, agentic data pipeline that compiles digital exhaust into data stories.",
+		"I stabilize the entropy of manufacturing. Operating at the intersection of high-fidelity hardware design and program rescue, I treat physical engineering with the forensic rigor of a software codebase. The difference between a rescued program and a failed one is rarely the capability of the engineer; it is almost always the fidelity of the record. I architect the hardware interface for the physical world, document the product reality, and transform digital exhaust into data-driven stories. From napkin geometry to production tooling, from abstract mechanical concepts to validated physical constraints, my methodology is absolute: structure the chaos, index the decisions, ship the hardware. To capture this discipline, I built an operating system for professional identity. It is a custom, Git-versioned portfolio engine that forensically indexes mechanical architecture, consumer product design, and program rescue into a searchable record of reality.",
 	useViewTransitions: true,
 	useAnimations: true,
 

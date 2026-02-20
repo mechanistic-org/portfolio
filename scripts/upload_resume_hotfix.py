@@ -19,8 +19,8 @@ def upload_resume():
         region_name='auto'
     )
 
-    # Local Source
-    local_path = r"d:\GitHub\eriknorris\public\assets\resume\Erik_Norris_Resume_Current.pdf"
+    # Local Source (Air Gapped Vault)
+    local_path = r"D:\GitHub\eriknorris-assets\R2_STAGING\resume\Erik_Norris_Resume_Current.pdf"
     
     # Remote Target (Matches the Redirect Rule)
     remote_key = "resume/Erik_Norris_Sr_Staff_Forensic_Architect_2026.pdf"
