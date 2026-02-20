@@ -1,12 +1,12 @@
 --- 𝗧𝗔𝗚𝗟𝗜𝗡𝗘 ---
-Principal Mechanical Engineer & Systems Architect | High-Fidelity Hardware & Program Rescue | Structure the chaos. Index the decisions. Ship the hardware.
+Principal Mechanical Architect specializing in high-fidelity hardware and program rescue. I stabilize the entropy of product development: structure the chaos, index the decisions, ship the hardware.
 
 --- 𝗔𝗕𝗢𝗨𝗧 ---
-I stabilize the entropy of manufacturing.
-
 Operating at the intersection of high-fidelity hardware design and program rescue, I treat physical engineering with the forensic rigor of a software codebase. The difference between a rescued program and a failed one is rarely the capability of the engineer; it is almost always the fidelity of the record.
 
-I architect the hardware interface for the physical world, document the product reality, and transform digital exhaust into stories. From napkin geometry to production tooling, from abstract mechanical concepts to validated physical constraints, my methodology is absolute: structure the chaos, index the decisions, ship the hardware.
+I architect the hardware interface for the physical world, document the product reality, and transform digital exhaust into stories. From napkin geometry to production tooling, from abstract mechanical concepts to validated physical constraints, my methodology is absolute:
+
+Stabilize the entropy of product development — structure the chaos, index the decisions, ship the hardware.
 
 To capture this discipline, I built an operating system for professional identity. It is a custom, Git-versioned portfolio engine that forensically indexes mechanical architecture, consumer product design, and program rescue into a searchable record of reality.
 

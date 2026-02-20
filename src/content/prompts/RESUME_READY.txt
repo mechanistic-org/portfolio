@@ -30,11 +30,11 @@ Generate the resume using this strict structural hierarchy.
 
 - **Name:** ERIK NORRIS
 - **Title:** Principal Mechanical Architect | Forensic Specialist
-- **Tagline:** "Sr. Staff ME | Designer | Forensic Architect | High-Fidelity Hardware & Program Rescue"
+- **Tagline:** "Principal Mechanical Architect specializing in high-fidelity hardware and program rescue. I stabilize the entropy of product development: structure the chaos, index the decisions, ship the hardware."
 
 #### 2. PROFESSIONAL SUMMARY (The Narrative)
 
-> Lead Mechanical Architect specializing in the recovery of high-complexity hardware programs through rigorous forensic analysis and surgical structural intervention. My career is defined by intervening in "Kill" scenarios—from reversing a 100% mechanical failure on the **Bazooka Base Station** to engineering a dual-source bridge strategy that saved the **C24 Console** from a supply chain collapse. Whether architecting the world's first automated **Makeline** or resolving a 0.05mm pitch conflict on a wireless keyboard, I focus on one metric: **Shipability**.
+> Operating at the intersection of high-fidelity hardware design and program rescue, I treat physical engineering with the forensic rigor of a software codebase. The difference between a rescued program and a failed one is rarely the capability of the engineer; it is almost always the fidelity of the record. From integrating a modular food dispensing system in the IP69K washdown environment of the Makeline, to tuning the 250g tactile snap of the Noon Smart Switch—I have transitioned programs from catastrophic failure to global compliance. I engineered the dual-source bridge strategy that saved the C24 Console from supply chain collapse, and reversed a 100% mechanical retention failure on the Bazooka Base Station. From the 28.3 CFM forced-air wind tunnels of the WebTV Galaxy to the silent thermal dissipation of the Kaleidescape Cinema One, my methodology is absolute: stabilize the entropy of product development — structure the chaos, index the decisions, ship the hardware.
 
 #### 3. CORE COMPETENCIES (The ATS Filter)
 

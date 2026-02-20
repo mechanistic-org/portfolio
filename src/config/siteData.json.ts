@@ -60,7 +60,7 @@ const siteData: SiteDataProps = {
 	// Your website's title and description (meta fields)
 	title: "Erik Norris | Principal Mechanical Architect",
 	description:
-		"I stabilize the entropy of manufacturing. Operating at the intersection of high-fidelity hardware design and program rescue, I treat physical engineering with the forensic rigor of a software codebase. The difference between a rescued program and a failed one is rarely the capability of the engineer; it is almost always the fidelity of the record. I architect the hardware interface for the physical world, document the product reality, and transform digital exhaust into data-driven stories. From napkin geometry to production tooling, from abstract mechanical concepts to validated physical constraints, my methodology is absolute: structure the chaos, index the decisions, ship the hardware. To capture this discipline, I built an operating system for professional identity. It is a custom, Git-versioned portfolio engine that forensically indexes mechanical architecture, consumer product design, and program rescue into a searchable record of reality.",
+		"Principal Mechanical Architect specializing in high-fidelity hardware and program rescue. I stabilize the entropy of product development: structure the chaos, index the decisions, ship the hardware.",
 	useViewTransitions: true,
 	useAnimations: true,
 
@@ -101,27 +101,24 @@ const siteData: SiteDataProps = {
 		text: "UNDER CONSTRUCTION",
 	},
 	skills: [
-		"Mechanical Architecture",
-		"Forensic Engineering",
-		"Consumer Product Design", // Unambiguous hardware focus
-		"High-Fidelity Hardware",
-		"Program Rescue",
-		"Consumer Electronics",
-		"Wearable AR",
-		"MCAD", // Renamed from CAD
-		"SolidWorks",
-		"Onshape",
-		"PTC Creo",
-		"Rapid Prototyping", // Promoted
-		"Manufacturing Strategy",
+		"Forensic System Architecture",
+		"Root Cause Analysis (RCA)",
+		"Advanced Surface Class-A",
+		"Precision Sheet Metal Topology",
+		"Haptic & Kinematic Tuning",
+		"Thermal-Acoustic Optimization",
 		"Plastic Injection Molding",
-		"Sheet Metal Architecture",
-		"Mechanism Design",
-		"Thermal Management",
-		"Electromechanical Integration", // Replaces "Electronics"
-		"Design Verification Testing (DVT)",
-		"Product Lifecycle Management (PLM)",
-		"Team Leadership",
+		"Sovereign Assembly Strategies",
+		"Yield Recovery (0% to 100%)",
+		"Dual-Source Supply Chain",
+		"DFx for Automated Assembly",
+		"Die Casting & CNC Machining",
+		"Rapid Tooling Qualification",
+		"Thermal Simulation (CFD)",
+		"Regulatory Compliance (UL 1472 / FCC)",
+		"Tolerance Analysis",
+		"Class III Medical Standards",
+		"High-Velocity Airflow Systems",
 	],
 	sameAs: [
 		"https://www.linkedin.com/in/eriknorris/",

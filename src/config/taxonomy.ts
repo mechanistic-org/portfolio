@@ -101,15 +101,14 @@ export const TOOLS = [
 export const TOOL_VALUES = TOOLS.map((t) => t.value);
 
 export const TAGS = [
+	"Forensics",
+	"Tolerance Analysis",
+	"DFM_DFA",
+	"Root Cause Analysis",
 	"Thermal",
 	"Mechanism",
 	"Cost_Down",
-	"Process",
 	"Leadership",
 	"Crisis",
 	"Yield",
-	"Automation",
-	"Architecture",
-	"Acoustics",
-	"Materials",
 ] as const;

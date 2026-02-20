@@ -20,4 +20,4 @@ Trigger this workflow by running `/deploy_production` or asking to "Push to Main
 
 4.  **Verification**:
     - Notify user: _"Pushed to main. Cloudflare Pages build triggered."_
-    - Remind user to check `https://eriknorris.pages.dev` (or the equivalent URL) in 2 minutes.
+    - Remind user to check `https://eriknorris.com` in 2 minutes.

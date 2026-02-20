@@ -356,9 +356,9 @@ function DefaultSummary({ projects }: { projects: ConsoleProject[] }) {
 					</p>
 
 					<p className="mt-4 text-sm leading-relaxed font-light text-zinc-300">
-						This console indexes typical engineering ephemera: mechanical architecture, consumer
-						product design, and program rescue. It stabilizes the entropy of manufacturing into a
-						living, air-gapped ledger of product reality.
+						This console indexes mission-critical engineering artifacts: mechanical architecture,
+						consumer product design, and program rescue. I stabilize the entropy of product
+						development into a living, air-gapped ledger of product reality.
 					</p>
 
 					<p className="mt-4 text-sm leading-relaxed font-light text-zinc-300">

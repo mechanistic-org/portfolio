@@ -11,8 +11,9 @@ export interface SiteConfig {
 export const SITE_CONFIG: Record<SiteVariant, SiteConfig> = {
 	main: {
 		domain: "eriknorris.com",
-		title: "Erik Norris | Principal Mechanical Engineer & Systems Architect",
-		description: "The Suit: Professional Face & Source of Truth.",
+		title: "Erik Norris | Principal Mechanical Architect",
+		description:
+			"Principal Mechanical Architect specializing in high-fidelity hardware and program rescue. I stabilize the entropy of product development: structure the chaos, index the decisions, ship the hardware.",
 		theme: "theme-suit",
 		r2_bucket: "https://assets.eriknorris.com",
 	},

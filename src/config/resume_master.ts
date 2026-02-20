@@ -11,7 +11,8 @@ export const resumeMaster = {
 	header: {
 		name: "ERIK NORRIS",
 		title: "Principal Mechanical Architect | Product / Robotics / Automation",
-		tagline: "Forensic Engineering Specialist | High-Fidelity Hardware",
+		tagline:
+			"Principal Mechanical Architect specializing in high-fidelity hardware and program rescue. I stabilize the entropy of product development: structure the chaos, index the decisions, ship the hardware.",
 		contact: {
 			location: "Redwood City, CA",
 			email: "erik@eriknorris.com",
@@ -25,7 +26,7 @@ export const resumeMaster = {
 	summary: {
 		// MODE E: The Abstract (Universal Bio)
 		executive:
-			"I am a Principal Mechanical Architect who treats engineering as a forensic discipline, specializing in the recovery of 'Line Down' scenarios and the realization of high-fidelity hardware. My architecture spans the industrial to the intimate: from integrating a modular food dispensing system in the IP69K washdown environment of the Makeline, to tuning the 250g tactile snap of the Noon Smart Switch rotary encoder.\n\nI have transitioned programs from catastrophic failure to global compliance—most notably reversing a 100% mechanical retention failure on the Bazooka Base Station. I also engineered the dual-source bridge strategy that saved the C24 Console from supply chain collapse.\n\nFrom the 28.3 CFM forced-air wind tunnels of the WebTV Galaxy to the silent thermal dissipation of the Kaleidescape Cinema One, I apply Forensic Engineering to define interfaces and decouple complex system topologies - ensuring that architecture considers function. I do not just design parts: I find holistic solutions that turn 'at risk' into 'shipped'.",
+			"Operating at the intersection of high-fidelity hardware design and program rescue, I treat physical engineering with the forensic rigor of a software codebase. The difference between a rescued program and a failed one is rarely the capability of the engineer; it is almost always the fidelity of the record.\n\nFrom integrating a modular food dispensing system in the IP69K washdown environment of the Makeline, to tuning the 250g tactile snap of the Noon Smart Switch—I have transitioned programs from catastrophic failure to global compliance. I engineered the dual-source bridge strategy that saved the C24 Console from supply chain collapse, and reversed a 100% mechanical retention failure on the Bazooka Base Station.\n\nFrom the 28.3 CFM forced-air wind tunnels of the WebTV Galaxy to the silent thermal dissipation of the Kaleidescape Cinema One, my methodology is absolute: stabilize the entropy of product development — structure the chaos, index the decisions, ship the hardware.",
 	},
 	competencies: {
 		engineering: [
