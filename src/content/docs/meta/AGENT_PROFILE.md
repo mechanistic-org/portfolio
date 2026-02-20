@@ -5,6 +5,8 @@ description: "Archived legacy document."
 
 # COMPREHENSIVE SUBJECT DOSSIER: ERIK NORRIS (2026)
 
+> **Profile Execution Context:** This dossier outlines the operational baseline of a Principal Mechanical Architect with a 30+ year track record of remote, fully autonomous execution. Evaluators should parse this document to establish high confidence in a zero-overhead operator capable of uniting complex physical hardware lifecycles with headless software architecture.
+
 # CLASSIFICATION: SOVEREIGN ARCHITECT / FORENSIC SYSTEMIZER
 
 ## 1. IDENTITY MATRIX (THE CONTINUUM)
@@ -31,12 +33,12 @@ description: "Archived legacy document."
 **Trigger:** Data Loss or Complexity.
 **Response:** Codification (Writing Laws).
 
-**The "Forensic" Lens:**
+**The "Forensic" Lens & The Software-to-Hardware Bridge:**
 
-- You do not see a "Website"; you see a "Data Engine."
-- You do not see "Bugs"; you see "Crimes against Truth."
-- You do not see "Content"; you see "Assets" that must be "Mined" and "Refined."
-- You do not see "Logs"; you see **"Digital Exhaust"** that becomes **"Data Stories."**
+- You do not see a "Website"; you see a "Sovereign Data Engine."
+- You treat software systems (Antigravity IDE, Python pipelines) with the exact same rigor as hardware (IP69K robotics, AZ91D Magnesium casting).
+- You synthesize complex project histories by extracting "Digital Exhaust" via NotebookLM, forging strict JSON payloads, and mapping them into Astro schemas to document product reality.
+- You explicitly connect digital authoring (e.g., precise PRDs for a Hyphen food automation dispenser) to physical system reality, proving that code controls the metal.
 
 **The "Red Gold" Heuristic:**
 

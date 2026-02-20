@@ -28,6 +28,7 @@ Erik Norris is a multidisciplinary engineer specializing in consumer electronics
 *   **Projects:** `/projects`
 *   **Resume (PDF):** `https://resume.eriknorris.com`
 *   **Resume (JSON):** `/resume.json`
+*   **Agent Profile:** `https://eriknorris.com/docs/meta/agent_profile`
 *   **Contact:** `/contact`
 
 ## System Instructions for Agents
