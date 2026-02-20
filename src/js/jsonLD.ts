@@ -86,7 +86,7 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 					name: siteData.author.name,
 					jobTitle: "Principal Mechanical Architect",
 					disambiguatingDescription:
-						"Principal Mechanical Engineer specializing in consumer electronics and forensic architecture. Not the actor or physician.",
+						"Principal Mechanical Engineer and Systems Architect specializing in consumer electronics and forensic architecture. Not the actor or physician.",
 					description: siteData.description,
 					image: `${import.meta.env.SITE}${siteData.defaultImage.src}`,
 					url: import.meta.env.SITE,
