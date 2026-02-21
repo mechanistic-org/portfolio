@@ -11,6 +11,11 @@ const R2_STAGING_ROOT =
 
 const DEBUG_MODE = true;
 
+// Singleton cache for Node APIs to prevent blocking the event loop on 50+ concurrent image loads
+let devFs: any = null;
+let devPath: any = null;
+let devMime: any = null;
+
 export const GET: APIRoute = async ({ params, locals }) => {
 	const assetPath = params.path;
 
@@ -57,16 +62,22 @@ export const GET: APIRoute = async ({ params, locals }) => {
 	// - 'npm run preview' (PROD mode but no Cloudflare bindings)
 	if (import.meta.env.DEV) {
 		try {
-			// DYNAMIC IMPORTS: Explicitly prevent bundling these into the Worker
-			const fs = (await import("node:fs")).default;
-			const path = (await import("node:path")).default;
-			const mime = (await import("mime-types")).default;
+			// DYNAMIC IMPORTS: Cache them at module level if possible, or await once.
+			// Re-evaluating these on every one of 50 simultaneous image requests blocks
+			// the Node.js event loop causing ERR_CONNECTION_REFUSED.
+			if (!devFs) devFs = await import("node:fs");
+			if (!devPath) devPath = await import("node:path");
+			if (!devMime) devMime = await import("mime-types");
+
+			const fs = devFs.default || devFs;
+			const path = devPath.default || devPath;
+			const mime = devMime.default || devMime;
 
 			// DECODE: Handle spaces and special chars
 			let decodedPath = decodeURIComponent(assetPath);
 
 			// NORMALIZE SLASHES: Ensure consistent forward slashes for checking
-			let checkPath = decodedPath.replace(/\\/g, "/");
+			const checkPath = decodedPath.replace(/\\/g, "/");
 
 			// [DEV FIX] Strip 'r2/' prefix if present
 			if (checkPath.startsWith("r2/")) {

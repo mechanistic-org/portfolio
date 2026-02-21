@@ -209,6 +209,12 @@ These scripts drive the "Forensic Data Factory."
 - **Cause:** Mixed usage of `/assets/r2/` (Legacy) and `/assets/` (Modern).
 - **Fix:** **Standardize immediately.** Run a global find/replace to enforce `/assets/`. Do not support dual paths.
 
+### 🔴 "The Connection Refused" Trap (Vite Proxy Concurrency)
+
+- **Symptom:** Browser throws `net::ERR_CONNECTION_REFUSED` for local images (like gallery thumbnails), but a single `curl` or `Invoke-WebRequest` works fine.
+- **Cause:** The Node Event Loop is blocked. The `[...path].ts` virtual bridge was dynamically executing `(await import("node:fs"))` inside the GET handler for _every_ incoming request. When a page requests 50 images at once, the 50 simultaneous synchronous module evaluations choke the Vite event listener.
+- **Fix:** Cache dynamic Node API imports at the module level (Singleton pattern: `let devFs = null; if (!devFs) devFs = await import(...)`) so they only evaluate once per worker lifecycle, freeing the Event Loop.
+
 ## 3. Troubleshooting: The Platform (Cloudflare)
 
 ### ⚠️ "Sharp Missing at Runtime"

@@ -1,0 +1,111 @@
+---
+import { Icon } from "astro-icon/components";
+import Sheet from "@/components/Starwind/sheet/Sheet.astro";
+import SheetTrigger from "@/components/Starwind/sheet/SheetTrigger.astro";
+import SheetContent from "@/components/Starwind/sheet/SheetContent.astro";
+import SheetHeader from "@/components/Starwind/sheet/SheetHeader.astro";
+import SheetTitle from "@/components/Starwind/sheet/SheetTitle.astro";
+import SheetDescription from "@/components/Starwind/sheet/SheetDescription.astro";
+
+// Encapsulated data panels
+import ForensicDossier from "./ForensicDossier.astro";
+import ProjectMetricsGrid from "./ProjectMetricsGrid.astro";
+
+interface Props {
+	entry: any;
+	nextProject?: any;
+	prevProject?: any;
+}
+
+const { entry, nextProject, prevProject } = Astro.props;
+
+const data = entry.data;
+const metrics = data.metrics || {};
+const entropy = data.entropy || [];
+
+const hasData =
+	(data.cast && data.cast.length > 0) ||
+	(data.bom && data.bom.length > 0) ||
+	(data.scars && data.scars.length > 0) ||
+	data.timeline !== undefined ||
+	(data.forensic_data && Object.keys(data.forensic_data).length > 0) ||
+	metrics ||
+	entropy.length > 0;
+---
+
+{
+	hasData && (
+		<Sheet>
+			{/* ATC TELEMETRY TRIGGER (CRUISING z-50) */}
+			{/* Fixed to bottom right, stylized as a tactical sensor button */}
+			<!-- Note: Starwind Sheet uses HTML structure, so SheetTrigger wraps the button -->
+			<div class="fixed right-6 bottom-6 z-50 flex flex-col items-end gap-2 md:right-8 md:bottom-8">
+				<SheetTrigger
+					class="group flex h-12 items-center gap-3 overflow-hidden rounded-full border border-emerald-500/30 bg-black/60 px-4 text-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.1)] backdrop-blur-md transition-all hover:border-emerald-400 hover:bg-emerald-950/40 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] md:px-5"
+				>
+					<div class="relative flex h-3 w-3 items-center justify-center">
+						<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+						<span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+					</div>
+					<span class="font-mono text-[10px] font-bold tracking-widest uppercase md:text-xs">
+						Telemetry
+					</span>
+					<Icon
+						name="tabler:radar"
+						class="h-4 w-4 opacity-50 transition-opacity group-hover:opacity-100 md:h-5 md:w-5"
+					/>
+				</SheetTrigger>
+			</div>
+
+			{/* THE ATC RADAR CONSOLE (ORBIT z-1001) */}
+			<SheetContent
+				side="right"
+				class="z-1001 w-full max-w-[500px] border-l border-white/10 bg-black/95 p-0 backdrop-blur-2xl sm:max-w-[600px]"
+			>
+				<SheetHeader class="border-b border-white/5 bg-white/5 p-6 md:p-8">
+					<div class="flex items-center gap-3">
+						<Icon name="tabler:database-export" class="h-5 w-5 text-emerald-500" />
+						<SheetTitle class="font-mono text-sm tracking-widest text-white uppercase">
+							ATC Manifest
+						</SheetTitle>
+					</div>
+					<SheetDescription class="font-mono text-[10px] text-neutral-500 uppercase">
+						Deep Dive Telemetry & Logistics
+					</SheetDescription>
+				</SheetHeader>
+
+				<div class="h-[calc(100vh-100px)] w-full overflow-y-auto overflow-x-hidden p-6 md:p-8">
+					<div class="flex flex-col gap-12">
+						{/* HUD METRICS (Re-flowed for vertical Drawer) */}
+						<div class="flex flex-col gap-4">
+							<h3 class="font-mono text-[10px] font-bold tracking-widest text-[#2E5CFF] uppercase">
+								Core Metrics
+							</h3>
+							<div class="-mx-4 md:mx-0">
+								<ProjectMetricsGrid
+									data={data}
+									metrics={metrics}
+								/>
+							</div>
+						</div>
+
+						{/* DOSSIER TABS (Stack beneath metrics) */}
+						<div class="flex flex-col gap-4">
+							<h3 class="font-mono text-[10px] font-bold tracking-widest text-[#2E5CFF] uppercase">
+								Forensic Records
+							</h3>
+							<div class="-mx-4 md:mx-0">
+								<ForensicDossier
+									cast={data.cast}
+									bom={data.bom}
+									timeline={data.timeline}
+									scars={data.scars}
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</SheetContent>
+		</Sheet>
+	)
+}

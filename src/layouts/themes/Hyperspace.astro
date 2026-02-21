@@ -16,7 +16,7 @@ const useDossier = presentation_mode === "deep_dive";
 // Backwards compatibility/Renaming
 const scrolly = cyberspace;
 
-import ForensicDossier from "@components/Projects/ForensicDossier.astro";
+import TelemetryConsole from "@components/Projects/TelemetryConsole.astro";
 import DeepDiveRenderer from "@components/DeepDive/DeepDiveRenderer.astro"; // IMPL
 // NEW COMPONENT IMPORTS
 // import ConspiracyBoard from "@components/Projects/ConspiracyBoard";
@@ -102,14 +102,13 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 		)
 	}
 
-	{/* NEW FORENSIC DOSSIER TABS (Visible in Deep Dive) */}
+	{/* THE ATC TELEMETRY CONSOLE (Replaces Inline Dossier) */}
 	{
 		useDossier && (
-			<ForensicDossier
-				cast={entry.data.cast}
-				bom={entry.data.bom}
-				timeline={entry.data.timeline}
-				scars={entry.data.scars}
+			<TelemetryConsole
+				entry={entry}
+				nextProject={nextProject}
+				prevProject={prevProject}
 			/>
 		)
 	}

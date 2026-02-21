@@ -316,3 +316,13 @@ sidebar:
     - **Good:** `Yield &lt;50%`, `Temp &lt;41°F`.
 2.  **THE SCRIPT IS LAW:** Do not manually fix 40 files. Use `scripts/fix_mdx_syntax.py` (or similar regex pattern `(?<!\\)<(\d)`) to sanitize the corpus.
 3.  **THE SOURCE TRUTH:** If the error persists, check the original `notebook_dumps/` text. The hydration script might be re-injecting the unescaped characters.
+
+---
+
+## ⚡ XXVII. The Law of the Synchronous Block (Event Loop Preservation)
+
+**Context:** The browser crashed with `net::ERR_CONNECTION_REFUSED` when loading 50+ images for the C24 bubble gallery. The Vite Dev Server proxy (`src/pages/assets/[...path].ts`) was dynamically awaiting imports `(await import("node:fs"))` _inside_ the GET handler for every single request.
+
+1.  **NO DYNAMIC IMPORTS IN LOOPS:** Do not execute `await import("node:fs")` or similar Node API imports inside high-frequency endpoints or loops.
+2.  **THE SINGLETON CACHE:** If you must use dynamic imports to prevent Worker bundling errors (e.g. `node:fs` leaking to Cloudflare), cache them at the module level (e.g. `let devFs: any = null;`).
+3.  **THE EVENT LOOP:** A burst of 50 simultaneous dynamic imports blocks the Node Event Loop, forcing the server to silently drop connections without throwing standard 500 errors.

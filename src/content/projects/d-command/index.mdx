@@ -1,234 +1,229 @@
 ---
 audio_url: /assets/d-command/d-command-briefing.m4a
 bom:
-  - label: Fader Pan
-    value: Sheetmetal (Warped/Rejected) [1]
-  - label: LCD Scribble Strip
-    value: Display Component (Flex Cable Vulnerability) [3]
-  - label: PEM Inserts
-    value: Threaded Fasteners (Stripped/Spinning out) [1]
+- label: Fader Pan
+  value: Sheetmetal (Warped/Rejected) [1]
+- label: LCD Scribble Strip
+  value: Display Component (Flex Cable Vulnerability) [3]
+- label: PEM Inserts
+  value: Threaded Fasteners (Stripped/Spinning out) [1]
 cast:
-  - name: Erik Norris
-    org: Digidesign
-    role: The Architect (Lead Mechanical)
-  - name: Neal Breitbarth
-    org: Digidesign
-    role: Engineering Manager
-  - name: Marc Schuman
-    org: Digidesign
-    role: Hardware Engineer (Thermal Testing)
-  - name: Kenny Patnaude
-    org: Dale Pro Audio
-    role: Field Reporter
+- name: Erik Norris
+  org: Digidesign
+  role: The Architect (Lead Mechanical)
+- name: Neal Breitbarth
+  org: Digidesign
+  role: Engineering Manager
+- name: Marc Schuman
+  org: Digidesign
+  role: Hardware Engineer (Thermal Testing)
+- name: Kenny Patnaude
+  org: Dale Pro Audio
+  role: Field Reporter
 category: enterprise_hardware
 client: []
 complexity_vector:
   part_count_growth:
-    - count: 19
-      date: 2004-06
-      note: Initial sheetmetal proto release to Mass Precision (19 zip files)
-      phase: Concept / Proto
-    - count: 24
-      date: 2004-10
-      note: Unique sheet metal parts under 'Solo Mandate'
-      phase: EVT (Eng Validation)
-    - count: 109
-      date: 2005-02
-      note: Total drawings (Assy + Extrusions) out for review/redline before MP
-      phase: DVT (Design Validation)
-    - count: 150
-      date: 2005-04
-      note: FCS achieved; estimated system parts including fasteners/kits
-      phase: MP (Mass Production)
+  - count: 19
+    date: 2004-06
+    note: Initial sheetmetal proto release to Mass Precision (19 zip files)
+    phase: Concept / Proto
+  - count: 24
+    date: 2004-10
+    note: Unique sheet metal parts under 'Solo Mandate'
+    phase: EVT (Eng Validation)
+  - count: 109
+    date: 2005-02
+    note: Total drawings (Assy + Extrusions) out for review/redline before MP
+    phase: DVT (Design Validation)
+  - count: 150
+    date: 2005-04
+    note: FCS achieved; estimated system parts including fasteners/kits
+    phase: MP (Mass Production)
   process_density:
-    - complexity_score: 9
-      failure_mode: 50% Rejection Rate due to PEM insertion stretching material
-      material: Sheet Metal (Steel)
-      part_name: Fader Pan Chassis (9420-12901)
-      steps:
-        - CNC Turret Punch
-        - Brake Forming
-        - PEM Hardware Insertion (Triggered Warping)
-        - Manual 'Tweak' Inspection (100% sort)
-        - Secondary Flattening Operation
-        - Powder Coat
-        - Silk Screen
-    - complexity_score: 7
-      failure_mode: Mechanical interference with flex cable causing light bleed
-      material: Sheet Metal
-      part_name: LCD Scribble Strip Bracket
-      steps:
-        - Laser Cut
-        - Forming
-        - Post-Design Relief Cut (Green Bleed Fix)
-        - Flex Cable Routing
-        - Assembly
-    - complexity_score: 6
-      failure_mode: Die wear causing 0.160 inch deviation
-      material: Aluminum
-      part_name: Main/Fader Extrusions
-      steps:
-        - Extrusion Die Run
-        - Stretch/Straighten
-        - Cut to Length
-        - Drill/Tap
-        - Masking (Critical for EMI)
-        - Paint
+  - complexity_score: 9
+    failure_mode: 50% Rejection Rate due to PEM insertion stretching material
+    material: Sheet Metal (Steel)
+    part_name: Fader Pan Chassis (9420-12901)
+    steps:
+    - CNC Turret Punch
+    - Brake Forming
+    - PEM Hardware Insertion (Triggered Warping)
+    - Manual 'Tweak' Inspection (100% sort)
+    - Secondary Flattening Operation
+    - Powder Coat
+    - Silk Screen
+  - complexity_score: 7
+    failure_mode: Mechanical interference with flex cable causing light bleed
+    material: Sheet Metal
+    part_name: LCD Scribble Strip Bracket
+    steps:
+    - Laser Cut
+    - Forming
+    - Post-Design Relief Cut (Green Bleed Fix)
+    - Flex Cable Routing
+    - Assembly
+  - complexity_score: 6
+    failure_mode: Die wear causing 0.160 inch deviation
+    material: Aluminum
+    part_name: Main/Fader Extrusions
+    steps:
+    - Extrusion Die Run
+    - Stretch/Straighten
+    - Cut to Length
+    - Drill/Tap
+    - Masking (Critical for EMI)
+    - Paint
   supply_chain_nodes:
-    - location: San Jose, CA, USA
-      role: Sheet Metal Fabrication
-      vendor: Mass Precision
-    - location: Corona, CA, USA
-      role: Plastic Injection Molding
-      vendor: PPI Plastics
-    - location: Anaheim, CA, USA
-      role: Aluminum Extrusion
-      vendor: Anaheim Extrusion
-    - location: China
-      role: Turnkey Assembly / Plastics
-      vendor: Jetcrown / Kwanasia
-    - location: Daly City, CA, USA
-      role: Final Assembly / Integration
-      vendor: Digidesign MFG
+  - location: San Jose, CA, USA
+    role: Sheet Metal Fabrication
+    vendor: Mass Precision
+  - location: Corona, CA, USA
+    role: Plastic Injection Molding
+    vendor: PPI Plastics
+  - location: Anaheim, CA, USA
+    role: Aluminum Extrusion
+    vendor: Anaheim Extrusion
+  - location: China
+    role: Turnkey Assembly / Plastics
+    vendor: Jetcrown / Kwanasia
+  - location: Daly City, CA, USA
+    role: Final Assembly / Integration
+    vendor: Digidesign MFG
   tooling_chain:
-    - cost_impact: High ($5k expedite fee waived)
-      lead_time_weeks: 8
-      status: T3 Sign-off delayed
-      tool_name: Top Cover Injection Molds
-      type: Hard Tooling
-      vendor: PPI Plastics
-    - cost_impact: Medium
-      lead_time_weeks: 2
-      status: Process failure requiring secondary op
-      tool_name: Fader Pan Turret/Brake
-      type: Soft Tooling
-      vendor: Mass Precision
-    - cost_impact: Low
-      lead_time_weeks: 4
-      status: Die ending in 12685-00 completed
-      tool_name: Rail Extrusion Dies
-      type: Hard Tooling
-      vendor: Anaheim Extrusion
+  - cost_impact: High ($5k expedite fee waived)
+    lead_time_weeks: 8
+    status: T3 Sign-off delayed
+    tool_name: Top Cover Injection Molds
+    type: Hard Tooling
+    vendor: PPI Plastics
+  - cost_impact: Medium
+    lead_time_weeks: 2
+    status: Process failure requiring secondary op
+    tool_name: Fader Pan Turret/Brake
+    type: Soft Tooling
+    vendor: Mass Precision
+  - cost_impact: Low
+    lead_time_weeks: 4
+    status: Die ending in 12685-00 completed
+    tool_name: Rail Extrusion Dies
+    type: Hard Tooling
+    vendor: Anaheim Extrusion
 cyberspace:
   layout: linear
   narrative:
-    - body:
-        'D-Control had conquered the high-end, but the mid-market was wide open.
-        **Project Danko** was the answer. My directive was simple but brutal: *"Make
-        it feel like a $100k console, but sell it for $15k."*'
-      step: 01_intro
-      subtitle: "2004"
-      title: The Mid-Tier Gamble
-    - body:
-        "To hit the price point, we couldn't ship a massive unibody frame. We had
-        to split the system into a **Main Unit** and a **Fader Expansion**. This created
-        a new problem: How do you power and control a satellite unit without creating
-        a ground loop that kills the digital audio stream?"
-      step: 02_architecture
-      subtitle: The Risk of Modularity
-      title: Splitting the Atom
-    - body:
-        "Hardware design is a game of inches until it becomes a game of seconds.
-        The **AC Withdraw Failure** wasn't just a bug; it was a layout oversight that
-        threatened to delay the entire launch. The retrofit harness was classic triage
-        engineering: ugly, invisible, but absolutely necessary."
-      step: 03_regulatory
-      subtitle: Safety Protocols
-      title: The 11th Hour
-    - body:
-        When you push vendors on price, they sometimes cut corners on safety. The
-        **'Tinderbox' PCB Incident** was a wake-up call. It taught me that 'Trust but
-        Verify' isn't just a slogan—it's the only way to keep your product from literally
-        catching fire.
-      step: 04_quality
-      subtitle: Vendor Management
-      title: Holding the Line
+  - body: 'D-Control had conquered the high-end, but the mid-market was wide open.
+      **Project Danko** was the answer. My directive was simple but brutal: *"Make
+      it feel like a $100k console, but sell it for $15k."*'
+    step: 01_intro
+    subtitle: '2004'
+    title: The Mid-Tier Gamble
+  - body: 'To hit the price point, we couldn''t ship a massive unibody frame. We had
+      to split the system into a **Main Unit** and a **Fader Expansion**. This created
+      a new problem: How do you power and control a satellite unit without creating
+      a ground loop that kills the digital audio stream?'
+    step: 02_architecture
+    subtitle: The Risk of Modularity
+    title: Splitting the Atom
+  - body: 'Hardware design is a game of inches until it becomes a game of seconds.
+      The **AC Withdraw Failure** wasn''t just a bug; it was a layout oversight that
+      threatened to delay the entire launch. The retrofit harness was classic triage
+      engineering: ugly, invisible, but absolutely necessary.'
+    step: 03_regulatory
+    subtitle: Safety Protocols
+    title: The 11th Hour
+  - body: When you push vendors on price, they sometimes cut corners on safety. The
+      **'Tinderbox' PCB Incident** was a wake-up call. It taught me that 'Trust but
+      Verify' isn't just a slogan—it's the only way to keep your product from literally
+      catching fire.
+    step: 04_quality
+    subtitle: Vendor Management
+    title: Holding the Line
   stickies:
-    - data:
-        columns: 3
-        images:
-          - alt: Control room 3
-            aspectRatio: 1.5
-            src: /assets/d-command/bubbles/01_intro/Control room 3.JPG
-          - alt: D-CommandLarge
-            aspectRatio: 1.5
-            src: /assets/d-command/bubbles/01_intro/D-CommandLarge.jpg
-        layout: masonry
-        scattered: true
-      deck: []
-      featuredIndices: []
-      id: 01_intro
-      title: Intro
-      type: gallery
-    - data:
-        columns: 3
-        images:
-          - alt: D-Command_fader_top
-            aspectRatio: 1.5
-            src: /assets/d-command/bubbles/02_architecture/D-Command_fader_top.jpg
-          - alt: danko_fader_withlabels
-            aspectRatio: 1.5
-            src: /assets/d-command/bubbles/02_architecture/danko_fader_withlabels.png
-          - alt: danko_main_withlabels
-            aspectRatio: 1.5
-            src: /assets/d-command/bubbles/02_architecture/danko_main_withlabels.png
-          - alt: DSC03259
-            aspectRatio: 1.5
-            src: /assets/d-command/bubbles/02_architecture/DSC03259.jpg
-        layout: masonry
-        scattered: true
-      deck: []
-      featuredIndices: []
-      id: 02_architecture
-      title: Architecture
-      type: gallery
-    - data:
-        columns: 3
-        images:
-          - alt: DSC03110
-            aspectRatio: 1.5
-            src: /assets/d-command/bubbles/03_regulatory/DSC03110.JPG
-          - alt: DSC03112
-            aspectRatio: 1.5
-            src: /assets/d-command/bubbles/03_regulatory/DSC03112.JPG
-          - alt: DSC03113
-            aspectRatio: 1.5
-            src: /assets/d-command/bubbles/03_regulatory/DSC03113.JPG
-        layout: masonry
-        scattered: true
-      deck: []
-      featuredIndices: []
-      id: 03_regulatory
-      title: Regulatory
-      type: gallery
-    - data:
-        columns: 3
-        images:
-          - alt: DSC03122
-            aspectRatio: 1.5
-            src: /assets/d-command/bubbles/04_quality/DSC03122.JPG
-          - alt: DSC03123
-            aspectRatio: 1.5
-            src: /assets/d-command/bubbles/04_quality/DSC03123.JPG
-          - alt: DSC03182
-            aspectRatio: 1.5
-            src: /assets/d-command/bubbles/04_quality/DSC03182.JPG
-          - alt: PCll_Jr_Rev6_Fader_Print
-            aspectRatio: 1.5
-            src: /assets/d-command/bubbles/04_quality/PCll_Jr_Rev6_Fader_Print.jpg
-          - alt: PCll_Jr_Rev6_Main_Print
-            aspectRatio: 1.5
-            src: /assets/d-command/bubbles/04_quality/PCll_Jr_Rev6_Main_Print.jpg
-        layout: masonry
-        scattered: true
-      deck: []
-      featuredIndices: []
-      id: 04_quality
-      title: Quality
-      type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: Control room 3
+        aspectRatio: 1.5
+        src: /assets/d-command/bubbles/01_intro/Control room 3.JPG
+      - alt: D-CommandLarge
+        aspectRatio: 1.5
+        src: /assets/d-command/bubbles/01_intro/D-CommandLarge.jpg
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 01_intro
+    title: Intro
+    type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: D-Command_fader_top
+        aspectRatio: 1.5
+        src: /assets/d-command/bubbles/02_architecture/D-Command_fader_top.jpg
+      - alt: danko_fader_withlabels
+        aspectRatio: 1.5
+        src: /assets/d-command/bubbles/02_architecture/danko_fader_withlabels.png
+      - alt: danko_main_withlabels
+        aspectRatio: 1.5
+        src: /assets/d-command/bubbles/02_architecture/danko_main_withlabels.png
+      - alt: DSC03259
+        aspectRatio: 1.5
+        src: /assets/d-command/bubbles/02_architecture/DSC03259.jpg
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 02_architecture
+    title: Architecture
+    type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: DSC03110
+        aspectRatio: 1.5
+        src: /assets/d-command/bubbles/03_regulatory/DSC03110.JPG
+      - alt: DSC03112
+        aspectRatio: 1.5
+        src: /assets/d-command/bubbles/03_regulatory/DSC03112.JPG
+      - alt: DSC03113
+        aspectRatio: 1.5
+        src: /assets/d-command/bubbles/03_regulatory/DSC03113.JPG
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 03_regulatory
+    title: Regulatory
+    type: gallery
+  - data:
+      columns: 3
+      images:
+      - alt: DSC03122
+        aspectRatio: 1.5
+        src: /assets/d-command/bubbles/04_quality/DSC03122.JPG
+      - alt: DSC03123
+        aspectRatio: 1.5
+        src: /assets/d-command/bubbles/04_quality/DSC03123.JPG
+      - alt: DSC03182
+        aspectRatio: 1.5
+        src: /assets/d-command/bubbles/04_quality/DSC03182.JPG
+      - alt: PCll_Jr_Rev6_Fader_Print
+        aspectRatio: 1.5
+        src: /assets/d-command/bubbles/04_quality/PCll_Jr_Rev6_Fader_Print.jpg
+      - alt: PCll_Jr_Rev6_Main_Print
+        aspectRatio: 1.5
+        src: /assets/d-command/bubbles/04_quality/PCll_Jr_Rev6_Main_Print.jpg
+      layout: masonry
+      scattered: true
+    deck: []
+    featuredIndices: []
+    id: 04_quality
+    title: Quality
+    type: gallery
 date: 2004-04-01
-description:
-  The mid-format control surface that integrated D-Control architecture
+description: The mid-format control surface that integrated D-Control architecture
   into a cost-effective $15k package.
 documents: []
 draft: false
@@ -240,27 +235,48 @@ forensic_metrics:
   governance: 1 Lead Engineer (Solo Mandate) vs. Full Console Release [2]
   process: 50% rejection rate on first 42 Fader Pans due to warping [1]
 forensic_summary:
-  trigger: "The 'Mid-Market' Paradox. Marketing demanded a $15k console that 'felt like' our $100k flagship (D-Control). To hit this aggressive price point, we had to split the architecture into a Main Unit and a Fader Expansion, creating a 'Split-Chassis' grounding nightmare. Simultaneously, the first batch of Fader Pans arrived with a 50% rejection rate due to 'Oil-Canning' warpage from high-density PEM insertion."
-  intervention: "I executed a 'Shadow Logistics' campaign to bypass the bureaucratic DFM process. I worked directly with the sheet metal vendor (Mass Precision) to implement a secondary flattening operation and engineered a 'relief cut' pattern to neutralize the PEM stress. For the grounding issue, I designed a massive, custom 'umbilical' grounding strap system that physically bonded the two chassis with near-zero impedance, eliminating the digital ground loop hum."
-  result: "Recovered the Fader Pan yield from 50% to 98% in two weeks. The grounding architecture silenced the hum, allowing D-Command to ship on time and dominate the mid-tier massive, effectively killing the analog console market for post-production."
-
+  intervention: I executed a 'Shadow Logistics' campaign to bypass the bureaucratic
+    DFM process. I worked directly with the sheet metal vendor (Mass Precision) to
+    implement a secondary flattening operation and engineered a 'relief cut' pattern
+    to neutralize the PEM stress. For the grounding issue, I designed a massive, custom
+    'umbilical' grounding strap system that physically bonded the two chassis with
+    near-zero impedance, eliminating the digital ground loop hum.
+  result: Recovered the Fader Pan yield from 50% to 98% in two weeks. The grounding
+    architecture silenced the hum, allowing D-Command to ship on time and dominate
+    the mid-tier massive, effectively killing the analog console market for post-production.
+  trigger: The 'Mid-Market' Paradox. Marketing demanded a $15k console that 'felt
+    like' our $100k flagship (D-Control). To hit this aggressive price point, we had
+    to split the architecture into a Main Unit and a Fader Expansion, creating a 'Split-Chassis'
+    grounding nightmare. Simultaneously, the first batch of Fader Pans arrived with
+    a 50% rejection rate due to 'Oil-Canning' warpage from high-density PEM insertion.
 gallery: []
 heroImage: /assets/d-command/d-command-hero-01-xl.webp
 hxo_ready: true
 hydration_status: full
 industry: consumer_electronics
 isomorphics:
-  - hardware_point: Sheetmetal chassis crushing LCD flex cables [3]
-    label: Constraint/Interference
-    principle: Pauli Exclusion Principle (Two objects cannot occupy the same space)
-    software_point: Race condition in shared memory access
-  - hardware_point: The Solo Mandate (1 Engineer for entire console) [2]
-    label: Governance/Risk
-    principle: Single Point of Failure (SPOF)
-    software_point: Bus Factor of 1
+- hardware_point: Sheetmetal chassis crushing LCD flex cables [3]
+  label: Constraint/Interference
+  principle: Pauli Exclusion Principle (Two objects cannot occupy the same space)
+  software_point: Race condition in shared memory access
+- hardware_point: The Solo Mandate (1 Engineer for entire console) [2]
+  label: Governance/Risk
+  principle: Single Point of Failure (SPOF)
+  software_point: Bus Factor of 1
+- hardware_point: A single Lead Mechanical Engineer carried the entire architectural
+    load for 24+ unique parts with zero redundancy, creating a severe single point
+    of failure bottleneck. Bypassed standard bureaucratic latency using 'Shadow Logistics'
+    and rapid at-home jig fabrication, compressing a 2-month DFM campaign into a 2.5-week
+    sprint.
+  label: Solo Mandate
+  principle: Single points of human intelligence must be amplified by asymmetric workflows
+    to survive massive operational loads.
+  software_point: Agentic Multiplication / Force Multipliers — Equip key human architects
+    with parallelized agentic workflows (AI code generation, automated CI/CD validation)
+    to eliminate the biological ceiling of a 'Solo Mandate'.
 links:
-  - name: Digidesign Website
-    url: https://avid.com
+- name: Digidesign Website
+  url: https://avid.com
 metrics:
   cogs:
     label: Pre-Prod Cost
@@ -273,28 +289,28 @@ metrics:
   governance:
     dcos: 109
     ecos:
-      - ECO6310
-      - ECO8198
-      - Deviation 1212
-      - ECO7927
-      - Solo Ownership (Drawings)
+    - ECO6310
+    - ECO8198
+    - Deviation 1212
+    - ECO7927
+    - Solo Ownership (Drawings)
   interventions:
     count: 42
     label: Faders Inspected
   process:
     engineeringChangeOrders:
-      - ECO 6310 (Yield)
-      - ECO 8198 (Fit)
-      - Dev 1212 (Rework)
+    - ECO 6310 (Yield)
+    - ECO 8198 (Fit)
+    - Dev 1212 (Rework)
   profitability:
     label: Top Cover Crisis
     value: 10% Yield
   quotes:
-    - Erik needs to complete all of his documentation, ECO's etc... at the end of the
-      day Erik is solo on the part and assembly drawings [2]
-    - We strapped and squeezed and pressed and prayed - finally we put shims under the
-      feet to 'hold it together' [10]
-    - Internal 'attic' temperatures peaked at 41°C; LED supply heatsinks hit 61°C [1]
+  - Erik needs to complete all of his documentation, ECO's etc... at the end of the
+    day Erik is solo on the part and assembly drawings [2]
+  - We strapped and squeezed and pressed and prayed - finally we put shims under the
+    feet to 'hold it together' [10]
+  - Internal 'attic' temperatures peaked at 41°C; LED supply heatsinks hit 61°C [1]
 phase_stats:
   Design: 0
   Engineering: 0
@@ -303,35 +319,37 @@ phase_stats:
 presentation_mode: deep_dive
 productionScale: series
 scars:
-  - description:
-      Engineers used a hidden command (Shift + Option) to force continuous
-      fader motion and max LED brightness, pushing LED heatsinks to 61°C to validate
-      thermal design [1, 4].
-    label: The Vegas Mode Overdrive
-    value: 41°C Attic Temp
-  - description:
-      Sheetmetal chassis physically pressed against LCD flex cables, causing
-      green backlight to bleed into Mute switches; fixed via relief cuts [1, 3].
-    label: The Green Bleed
-    value: LCD Flex Failure
-  - description:
-      Management acknowledged Erik Norris was 'solo on the part and assembly
-      drawings' for the entire console, creating a single point of failure [2].
-    label: The Solo Mandate
-    value: Zero Redundancy
-tags: [Crisis, Yield, Leadership, Mechanism, Process]
+- description: Engineers used a hidden command (Shift + Option) to force continuous
+    fader motion and max LED brightness, pushing LED heatsinks to 61°C to validate
+    thermal design [1, 4].
+  label: The Vegas Mode Overdrive
+  value: 41°C Attic Temp
+- description: Sheetmetal chassis physically pressed against LCD flex cables, causing
+    green backlight to bleed into Mute switches; fixed via relief cuts [1, 3].
+  label: The Green Bleed
+  value: LCD Flex Failure
+- description: Management acknowledged Erik Norris was 'solo on the part and assembly
+    drawings' for the entire console, creating a single point of failure [2].
+  label: The Solo Mandate
+  value: Zero Redundancy
+tags:
+- Crisis
+- Yield
+- Leadership
+- Mechanism
+- Process
+teamSize: '1 (Lead Mechanical: Erik Norris)'
 theme: hyperspace
 tier: 1
 title: D-Command
 toolchain:
-  - Pro/E (Creo)
-  - Intralink (Windchill)
-  - Mass Precision (Sheet Metal Vendor)
-  - PPI Plastics (Injection Molding Vendor)
+- Pro/E (Creo)
+- Intralink (Windchill)
+- Mass Precision (Sheet Metal Vendor)
+- PPI Plastics (Injection Molding Vendor)
 tools:
-  - pro_engineer
+- pro_engineer
 transcript: null
-teamSize: "1 (Lead Mechanical: Erik Norris)"
 ---
 
 Project Danko (D-Command) Forensic Report

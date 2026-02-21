@@ -26,11 +26,11 @@ description: "The Persistent Short-Term Memory store for the AI Agent. This file
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Agentic Optimization (The "Trimain" Footprint).**
-- **Next Step:** Return to Forensic Analysis or New Deep Dives.
-- **Context:** **SEO PIPELINE SECURED.** `llms.txt` now points directly to the auto-generated `AGENT_PROFILE.md` route, ensuring 100% Agentic Consumption.
-- **Action Item:** Await User instruction for next major feature or narrative refinement.
-- **Recent Win:** Standardized the "Forensic Architect" narrative across all config files and PDF generators; Proven headless scraping accessibility.
+- **Active Task:** **Fixing C24 Image Loading Bug & Asset Proxy Mechanics**
+- **Next Step:** Await project onboarding or additional forensic extraction.
+- **Context:** The Telemetry Drawer and C24 images are now loading properly without 404s or connection refusals.
+- **Action Item:** Return control to the User.
+- **Recent Win:** Identified and eliminated a massive Node Event Loop block inside `src/pages/assets/[...path].ts` that caused Vite dev server to crash (`ERR_CONNECTION_REFUSED`) under burst loads (like C24's 50-image gallery).
 - **Active Roadmap:** [`src/content/docs/project/ROADMAP_ACTIVE.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/ROADMAP_ACTIVE.md) (The Horizon)
 - **Mining Log:** [`src/content/docs/project/MINING_LOG.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/MINING_LOG.md) (The Re-Hydration Tracker)
 - **Project Index:** [`src/content/prompts/PROJECT_INDEX.md`](file:///d:/GitHub/eriknorris/src/content/prompts/PROJECT_INDEX.md) (The Registry)
@@ -38,6 +38,7 @@ description: "The Persistent Short-Term Memory store for the AI Agent. This file
 - **Strategy:** **"Strict Separation"** -> JSON is Metadata. Text is Body. No regex parsing.
 - **Critical Learning:** **"The Isomorphic Paradox"** - You cannot generate structural rhymes from a single project. You need a **"Master Notebook"** (Level 2) containing all JSONs to find the patterns.
 - **Critical Learning:** **"The Scroll Depth Trust"** - 2026 SEO (E-E-A-T) demands "Firsthand Experience." The "Isomorphic Card" is our primary Trust Signal.
+- **Critical Learning:** **"The Vite Proxy Bottleneck"** - Do not use inline dynamic imports (`await import('node:fs')`) inside of proxy request (`GET`) handlers. Burst loads of 50+ images will slam the Node event loop, causing Vue/Astro dev servers to unilaterally drop the TCP connection (`net::ERR_CONNECTION_REFUSED`) without logging standard 500 errors.
 - **Conflict:** `d-command` has existing body text that conflicts with `_intelligence.md`. Needs manual titration.
 - **Source of Truth:** `src/content/docs/project/ROADMAP_ACTIVE.md`
 - **Critical Learning:** **"The Access Dossier"** is DEAD. Do not restore the slide-out drawer.

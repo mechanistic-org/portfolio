@@ -202,11 +202,28 @@ const { defaultValue, syncKey, class: className, ...rest } = Astro.props;
 		private handleClick = (trigger: HTMLElement, index: number): void => {
 			const value = trigger.getAttribute("data-value");
 			if (value) {
-				this.showTab(value);
-				this.currentTabIndex = index;
-				this.setTabIndex();
-				trigger.focus();
-				this.dispatchSyncEvent(value);
+				const isActive = trigger.getAttribute("data-state") === "active";
+				if (isActive) {
+					// Toggle off
+					trigger.setAttribute("data-state", "inactive");
+					trigger.setAttribute("aria-selected", "false");
+					const content = this.valueToContentMap.get(value);
+					if (content) {
+						content.setAttribute("data-state", "inactive");
+						content.hidden = true;
+					}
+					this.currentTabIndex = index; // Keep focus reachable
+					this.setTabIndex();
+					trigger.focus();
+					// Optional: clear sync if using sync
+					if (this.syncKey) this.dispatchSyncEvent("");
+				} else {
+					this.showTab(value);
+					this.currentTabIndex = index;
+					this.setTabIndex();
+					trigger.focus();
+					this.dispatchSyncEvent(value);
+				}
 			}
 		};
 

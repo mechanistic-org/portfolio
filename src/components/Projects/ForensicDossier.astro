@@ -43,7 +43,7 @@ const defaultTab = "";
 
 {
 	hasData && (
-		<section class="relative z-60 mt-24">
+		<section class="relative z-60 mt-64">
 			<Tabs
 				defaultValue={defaultTab}
 				class="grid w-full grid-cols-1 gap-8 md:grid-cols-[250px_1fr]"
@@ -53,32 +53,32 @@ const defaultTab = "";
 						value="cast"
 						class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
 					>
-						Team
-					</TabsTrigger>
-					<TabsTrigger
-						value="scars"
-						class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
-					>
-						War Stories
+						TEAM
 					</TabsTrigger>
 					<TabsTrigger
 						value="bom"
 						class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
 					>
-						Manifest
+						BOM
 					</TabsTrigger>
 					<TabsTrigger
 						value="timeline"
 						class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
 					>
-						Chronology
+						TIMELINE
+					</TabsTrigger>
+					<TabsTrigger
+						value="scars"
+						class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
+					>
+						SCARS
 					</TabsTrigger>
 					{forensic_data && Object.keys(forensic_data).length > 0 && (
 						<TabsTrigger
 							value="data"
 							class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
 						>
-							Data
+							DATA
 						</TabsTrigger>
 					)}
 				</TabsList>
@@ -88,13 +88,6 @@ const defaultTab = "";
 					class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
 				>
 					<DossierCast cast={cast || []} />
-				</TabsContent>
-
-				<TabsContent
-					value="scars"
-					class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
-				>
-					<DossierScars scars={scars || []} />
 				</TabsContent>
 
 				<TabsContent
@@ -109,6 +102,13 @@ const defaultTab = "";
 					class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
 				>
 					<DossierTimeline timeline={timeline || []} />
+				</TabsContent>
+
+				<TabsContent
+					value="scars"
+					class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
+				>
+					<DossierScars scars={scars || []} />
 				</TabsContent>
 
 				<TabsContent
