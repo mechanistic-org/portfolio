@@ -58,6 +58,10 @@ description: "The Persistent Short-Term Memory store for the AI Agent. This file
 - **Critical Learning:** **"The GitHub Blob Trap"** - Never feed an AI a GitHub `blob` link. It scrapes 300 lines of UI boilerplate instead of the actual data. Use `raw` links or explicitly hosted `.txt` endpoints like `llms.txt`.
 - **Critical Learning:** **"The Astro Agent Route"** - We do not need to build custom bot endpoints for Agent Profiles if they live in Astro Content Collections. They are already statically generated as clean HTML routes (e.g., `/docs/meta/agent_profile`), which are perfectly 100% scrapeable by AI.
 - **Critical Learning:** **"The Linkage Law"** - `llms.txt` MUST contain a hard, absolute URL to the `AGENT_PROFILE`. We cannot rely on the crawler "guessing" where our behavioral metadata lives.
+- **Critical Learning:** **"The WAF Slash Trap"** - Cloudflare URI Path matching evaluates strictly from the root slash (e.g., `/llms.txt`). A rule searching for `llms.txt` will silently fail.
+- **Critical Learning:** **"The HTML Breadcrumb"** - LLMs do not inherently know where `/llms.txt` lives. You must explicitly inject `<link rel="alternate" type="text/plain" href="/llms.txt" />` into the DOM (`BaseHead.astro`) to map the ingress point for headless scrapers.
+- **Critical Learning:** **"Semantic Projection (Hallucination)"** - If an LLM is fed highly-dense, structural vocabulary (e.g., "Moot Moat", "Markdown Bolus"), it will adopt the persona and hallucinate an audit based purely on context window logic, even if its actual web scraper is blocked by the edge network.
+- **Critical Learning:** **"The True AEO Evaluation"** - Never ask a chatbot to grade an architecture. To empirically test Agentic SEO, you must force a Zero-Context Retrieval (Perplexity Pro), passing no context except the URL/Entity name.
 - **Action Item:** Proceed to standard operational flow.
 
 * **Key Decision (Assets):** **"The White Logo Standard"** - `logo.png` is the canonical White Logo. `EN_logo_white_1024.png` does not exist in the current R2 stash.
