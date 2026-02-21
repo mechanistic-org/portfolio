@@ -26,15 +26,15 @@ description: "The Persistent Short-Term Memory store for the AI Agent. This file
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Maintaining Defensive Architecture Across Scripts.**
-- **Next Step:** Ensure no subsequent scripts bypass the Air Gap rules.
-- **Context:** **PIPELINE HARDENED.** The `/harvest_linkedin` and `/update_resume` pipelines now strictly obey Asset Sovereignty.
-- **Action Item:** Monitor `MINING_LOG.md` for "Pending" (⭕) vectors.
-- **Recent Win:** Sanitized unescaped MDX tags; Eliminated ghost duplicates in LinkedIn harvest; Re-established the prompt migration to `src/content/prompts/`.
+- **Active Task:** **Agentic Optimization (The "Trimain" Footprint).**
+- **Next Step:** Return to Forensic Analysis or New Deep Dives.
+- **Context:** **SEO PIPELINE SECURED.** `llms.txt` now points directly to the auto-generated `AGENT_PROFILE.md` route, ensuring 100% Agentic Consumption.
+- **Action Item:** Await User instruction for next major feature or narrative refinement.
+- **Recent Win:** Standardized the "Forensic Architect" narrative across all config files and PDF generators; Proven headless scraping accessibility.
 - **Active Roadmap:** [`src/content/docs/project/ROADMAP_ACTIVE.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/ROADMAP_ACTIVE.md) (The Horizon)
 - **Mining Log:** [`src/content/docs/project/MINING_LOG.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/MINING_LOG.md) (The Re-Hydration Tracker)
 - **Project Index:** [`src/content/prompts/PROJECT_INDEX.md`](file:///d:/GitHub/eriknorris/src/content/prompts/PROJECT_INDEX.md) (The Registry)
-- **Status:** **Refining (Level 2.5).** Deep Research vectors (Failure/Silence/Price/Legacy/Trophy) are now tracked.
+- **Status:** **Refining (Level 3 - Agentic Ready).** Bios and URLs are normalized for LLM ingestion.
 - **Strategy:** **"Strict Separation"** -> JSON is Metadata. Text is Body. No regex parsing.
 - **Critical Learning:** **"The Isomorphic Paradox"** - You cannot generate structural rhymes from a single project. You need a **"Master Notebook"** (Level 2) containing all JSONs to find the patterns.
 - **Critical Learning:** **"The Scroll Depth Trust"** - 2026 SEO (E-E-A-T) demands "Firsthand Experience." The "Isomorphic Card" is our primary Trust Signal.
@@ -55,7 +55,10 @@ description: "The Persistent Short-Term Memory store for the AI Agent. This file
 - **Critical Learning:** **"The MDX Digit Trap"** - `vite-plugin-mdx` crashes if `<` is followed by a number (e.g. `<10min`) because it parses it as an invalid JSX tag. **Fix:** Use `fix_mdx_syntax.py` to escape to `&lt;`.
 - **Critical Learning:** **"The Prompt Native Location"** - The root `prompts/` directory was deprecated and moved to `src/content/prompts/` to integrate with Astro collections. Scripts generating text artifacts must route here to prevent LLM amnesia.
 - **Critical Learning:** **"The Asset Sovereignty Clarification"** - Web Assets (PDFs, Images) belong under the Air Gap in `R2_STAGING`. Internal LLM prompts (`.txt` files) belong in the local repo (`src/content/prompts/`). Do not conflate the pipelines.
-- **Action Item:** Proceed to Visual Verification (Browser).
+- **Critical Learning:** **"The GitHub Blob Trap"** - Never feed an AI a GitHub `blob` link. It scrapes 300 lines of UI boilerplate instead of the actual data. Use `raw` links or explicitly hosted `.txt` endpoints like `llms.txt`.
+- **Critical Learning:** **"The Astro Agent Route"** - We do not need to build custom bot endpoints for Agent Profiles if they live in Astro Content Collections. They are already statically generated as clean HTML routes (e.g., `/docs/meta/agent_profile`), which are perfectly 100% scrapeable by AI.
+- **Critical Learning:** **"The Linkage Law"** - `llms.txt` MUST contain a hard, absolute URL to the `AGENT_PROFILE`. We cannot rely on the crawler "guessing" where our behavioral metadata lives.
+- **Action Item:** Proceed to standard operational flow.
 
 * **Key Decision (Assets):** **"The White Logo Standard"** - `logo.png` is the canonical White Logo. `EN_logo_white_1024.png` does not exist in the current R2 stash.
 * **Key Decision (UX):** **"The Local Preview Parity"** - Local Preview must match Production behavior BUT must serve assets from disk if Cloudflare context is missing (`src/pages/assets/[...path].ts` fallback).
