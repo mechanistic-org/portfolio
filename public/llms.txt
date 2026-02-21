@@ -1,11 +1,11 @@
 # Erik Norris (Technical Portfolio)
 
-> **Identity:** Senior Mechanical Engineer & Product Architect
-> **Core Value:** "Hyper-Functional Brutalism" - Engineering precision meets industrial design.
+> **Identity:** Principal Mechanical Architect
+> **Core Value:** "Forensic Systemizer" - I stabilize the entropy of product development: structure the chaos, index the decisions, ship the hardware.
 > **Location:** San Francisco Bay Area
 
 ## Technical Synopsis
-Erik Norris is a multidisciplinary engineer specializing in consumer electronics, thermal architecture, and electromechanical systems. He bridges the gap between Industrial Design (ID) and Mechanical Engineering (ME), ensuring that "the guts" of a product are as beautiful as the skin.
+Erik Norris is a Principal Mechanical Architect specializing in high-fidelity hardware and program rescue. He operates at the intersection of complex physical hardware lifecycles and strictly codified data structure, proving that disciplined systematic engineering controls the metal.
 
 ## Key Capabilities
 *   **Thermal Engineering:** Vapor chambers, passive cooling, CFD simulation (Ansys/Icepak).
