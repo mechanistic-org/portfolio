@@ -62,6 +62,7 @@ description: "The Persistent Short-Term Memory store for the AI Agent. This file
 - **Critical Learning:** **"The HTML Breadcrumb"** - LLMs do not inherently know where `/llms.txt` lives. You must explicitly inject `<link rel="alternate" type="text/plain" href="/llms.txt" />` into the DOM (`BaseHead.astro`) to map the ingress point for headless scrapers.
 - **Critical Learning:** **"Semantic Projection (Hallucination)"** - If an LLM is fed highly-dense, structural vocabulary (e.g., "Moot Moat", "Markdown Bolus"), it will adopt the persona and hallucinate an audit based purely on context window logic, even if its actual web scraper is blocked by the edge network.
 - **Critical Learning:** **"The True AEO Evaluation"** - Never ask a chatbot to grade an architecture. To empirically test Agentic SEO, you must force a Zero-Context Retrieval (Perplexity Pro), passing no context except the URL/Entity name.
+- **Critical Learning:** **"The NLI/CC Deferral"** - The migration from NLI (Natural Language Interface) to CC (Compiled Context Configurations inside `.txt`) is incredibly powerful but introduces significant operational overhead. Implementation is DEFERRED pending the formalization of an Antigravity Skill (`.agent/skills/context_compiler/`) and strict workflow definitions. NLI remains the stable operational baseline.
 - **Action Item:** Proceed to standard operational flow.
 
 * **Key Decision (Assets):** **"The White Logo Standard"** - `logo.png` is the canonical White Logo. `EN_logo_white_1024.png` does not exist in the current R2 stash.
