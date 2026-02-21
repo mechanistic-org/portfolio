@@ -170,7 +170,7 @@ sidebar:
 **Context:** "War Stories" felt like a tech-bro trope. "Scars" implies endurance, healing, and lessons learned.
 
 1.  **RENAME:** The schema key is `scars`. The UI label is "Scars".
-2.  **FALLBACK:** We support `war_stories` in JSON for legacy compatibility, but `hydrate_content.py` MUST transform it to `scars` in Frontmatter.
+2.  **FALLBACK:** We support `scars` in JSON for legacy compatibility, but `hydrate_content.py` MUST transform it to `scars` in Frontmatter.
 
 ---
 
@@ -243,7 +243,7 @@ sidebar:
 
 1.  **NO AMBIGUITY:** `z.any()` is **FORBIDDEN** in `src/content.config.ts`.
 2.  **FAIL LOUD:** The Schema must reject invalid data at _Build Time_.
-3.  **MIGRATION MANDATE:** Legacy fields like `war_stories` must be migrated to strict types (`scars`).
+3.  **MIGRATION MANDATE:** Legacy fields like `scars` must be migrated to strict types (`scars`).
 4.  **BANNED FIELDS:** Use `z.never()` to explicitly block zombie fields.
 
 ---

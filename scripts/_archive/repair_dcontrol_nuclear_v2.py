@@ -115,7 +115,7 @@ frontmatter = {
             "dcdCount": 109,
             "engineeringChangeOrders": ["Plasma_Treatment", "ALPS_Retrofit", "Gap_Protocol", "Monitor_Offshoring"]
         },
-        "war_stories": [
+        "scars": [
              {
                 "label": "The 'Blacksmithing' Protocol",
                 "value": "Manual Metal Bending",

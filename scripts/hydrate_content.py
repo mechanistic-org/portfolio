@@ -814,10 +814,10 @@ def hydrate_content(dry_run=False, force=False, target_slug=None, priority="sour
                  post.metadata["transcript"] = data["transcript"]
 
         # 2. Scars (formerly War Stories) - V2.1 Renaming
-        # Check 'scars' first, then 'war_stories' fallback
+        # Check 'scars' first, then 'scars' fallback
         scars_data = data.get("scars")
         if not scars_data:
-            scars_data = data.get("war_stories")
+            scars_data = data.get("scars")
 
         if scars_data:
             current_scars = post.metadata.get("scars") or []
@@ -830,13 +830,13 @@ def hydrate_content(dry_run=False, force=False, target_slug=None, priority="sour
                 post.metadata["scars"] = merged_scars
 
         # CLEANUP: Legacy Removal (Schema Compliance)
-        if "war_stories" in post.metadata:
-             del post.metadata["war_stories"]
-             changes.append("  - Cleaned up legacy 'war_stories' (Root)")
+        if "scars" in post.metadata:
+             del post.metadata["scars"]
+             changes.append("  - Cleaned up legacy 'scars' (Root)")
         
-        if "metrics" in post.metadata and "war_stories" in post.metadata["metrics"]:
-             del post.metadata["metrics"]["war_stories"]
-             changes.append("  - Cleaned up legacy 'metrics.war_stories'")
+        if "metrics" in post.metadata and "scars" in post.metadata["metrics"]:
+             del post.metadata["metrics"]["scars"]
+             changes.append("  - Cleaned up legacy 'metrics.scars'")
                  
         # 3. Isomorphics (Direct Injection)
         if "isomorphics" in data:
@@ -1330,9 +1330,9 @@ def reverse_hydrate_json(dry_run=False, target_slug=None):
             # Check for 'scars' in MDX
             scars = post.metadata.get("scars")
              
-            # Fallback check for legacy war_stories in metrics (should be gone, but safety)
+            # Fallback check for legacy scars in metrics (should be gone, but safety)
             if not scars and "metrics" in post.metadata:
-                scars = post.metadata["metrics"].get("war_stories")
+                scars = post.metadata["metrics"].get("scars")
             
             if scars:
                  # Clean up format (remove numbers/legacy)
@@ -1343,10 +1343,10 @@ def reverse_hydrate_json(dry_run=False, target_slug=None):
                          data["scars"] = clean_scars
                          changes.append(f"  - Backported {len(clean_scars)} Scars")
                           
-                     # Clean up legacy war_stories if present in JSON
-                     if "war_stories" in data:
-                         del data["war_stories"]
-                         changes.append(f"  - Removed legacy 'war_stories' from JSON")
+                     # Clean up legacy scars if present in JSON
+                     if "scars" in data:
+                         del data["scars"]
+                         changes.append(f"  - Removed legacy 'scars' from JSON")
 
             # 3. Forensic Metrics (Process/Financial/Governance)
             # Only backport if present in MDX (we might have just deleted them in MDX, so don't revive from dead MDX? 
@@ -1355,8 +1355,8 @@ def reverse_hydrate_json(dry_run=False, target_slug=None):
             # So if MDX doesn't have them, we do nothing.
             if "forensic_metrics" in post.metadata:
                 if data.get("metrics") != post.metadata["forensic_metrics"]:
-                     # Note: This might conflict with war_stories if both exist?
-                     # Ideally we want war_stories in metrics.war_stories, and forensic_metrics keys merged into metrics?
+                     # Note: This might conflict with scars if both exist?
+                     # Ideally we want scars in metrics.scars, and forensic_metrics keys merged into metrics?
                      # For now, let's just ensure the data exists.
                      # But wait, forensic_metrics keys are financial, process, governance (strings).
                      # JSON metrics keys are also financial, process, governance.
@@ -1415,7 +1415,7 @@ def reverse_hydrate_json(dry_run=False, target_slug=None):
 
 def reverse_hydrate_text(dry_run=False):
     """
-    Extracts 'forensic_metrics' and 'war_stories' from Project MDX files
+    Extracts 'forensic_metrics' and 'scars' from Project MDX files
     and updates RESUME_READY.txt and LINKEDIN_READY.txt.
     """
     resume_path = Path("public/assets/prompts/RESUME_READY.txt")
@@ -1435,16 +1435,16 @@ def reverse_hydrate_text(dry_run=False):
                 continue
             
             # Extract War Stories
-            war_stories = []
-            if "metrics" in post.metadata and "war_stories" in post.metadata["metrics"]:
-                stories = post.metadata["metrics"]["war_stories"]
+            scars = []
+            if "metrics" in post.metadata and "scars" in post.metadata["metrics"]:
+                stories = post.metadata["metrics"]["scars"]
                 for story in stories:
                     if isinstance(story, dict): # Handle object format
                         label = story.get('label')
                         # EXCLUSION LIST: Items to keep in Project MDX but HIDE from Resume/LinkedIn
                         if "Berry Creek" in label:
                             continue
-                        war_stories.append(f"- **{label}**: {story.get('description')}")
+                        scars.append(f"- **{label}**: {story.get('description')}")
             
             # Extract Scars (New Standard)
             if "scars" in post.metadata:
@@ -1453,7 +1453,7 @@ def reverse_hydrate_text(dry_run=False):
                     if isinstance(scar, dict):
                         label = scar.get('label')
                         if "Berry Creek" in label: continue
-                        war_stories.append(f"- **{label}**: {scar.get('description')}")
+                        scars.append(f"- **{label}**: {scar.get('description')}")
             
             # Extract Forensic Metrics
             forensics = []
@@ -1464,10 +1464,10 @@ def reverse_hydrate_text(dry_run=False):
                 if fm.get("technical"): forensics.append(f"- **Technical**: {fm['technical']}")
                 if fm.get("governance"): forensics.append(f"- **Governance**: {fm['governance']}")
 
-            if war_stories or forensics:
+            if scars or forensics:
                 project_data[project_slug] = {
                     "title": post.metadata.get("title", project_slug),
-                    "war_stories": war_stories,
+                    "scars": scars,
                     "forensics": forensics
                 }
                 
@@ -1480,7 +1480,7 @@ def reverse_hydrate_text(dry_run=False):
         new_resume_section += f"### {data['title']}\n"
         for item in data['forensics']:
             new_resume_section += item + "\n"
-        for item in data['war_stories']:
+        for item in data['scars']:
             new_resume_section += item + "\n"
         new_resume_section += "\n"
 
@@ -1510,7 +1510,7 @@ def reverse_hydrate_text(dry_run=False):
         new_linkedin_section += f"**{data['title']}**\n"
         for item in data['forensics']:
             new_linkedin_section += item + "\n"
-        for item in data['war_stories']:
+        for item in data['scars']:
             new_linkedin_section += item + "\n"
         new_linkedin_section += "\n"
 
@@ -1539,7 +1539,7 @@ def generate_project_index(dry_run=False):
     """
     Generates src/content/prompts/PROJECT_INDEX.md using a Tiered Strategy.
     
-    Tier 1 (Forensic): Projects with 'forensic_summary' or 'war_stories'. Full detail.
+    Tier 1 (Forensic): Projects with 'forensic_summary' or 'scars'. Full detail.
     Tier 2 (Ready State/On Deck): Projects with body text (intro) but no forensic struct.
     Tier 3 (Stub): Minimal metadata only.
     """

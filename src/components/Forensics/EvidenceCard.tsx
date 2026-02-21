@@ -16,7 +16,7 @@ interface Metric {
 
 export interface EvidenceCardProps {
 	id: string;
-	type: "war_story" | "financial" | "process" | "governance";
+	type: "scars" | "financial" | "process" | "governance";
 	headline: string;
 	context: string;
 	impact: string;
@@ -26,7 +26,7 @@ export interface EvidenceCardProps {
 }
 
 const iconMap: Record<string, any> = {
-	war_story: IconFlame,
+	scars: IconFlame,
 	financial: IconCash,
 	process: IconTool,
 	governance: IconAlertTriangle,

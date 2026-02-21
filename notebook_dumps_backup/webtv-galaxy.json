@@ -5,7 +5,7 @@
         "financial": "Managed $14k/mo burn rate on solo-consultant engineering services; mitigated cost of custom 4-day quick-turn fabrication cycles",
         "process": "Achieved 28.3 CFM system airflow in high-density chassis; Resolved 100% of EMI chassis ground failures via flange redesign",
         "governance": "Weekly 'Mechanical Hitlist' protocol tracking 30+ gating defects; Centralized FTP master database control",
-        "war_stories": [
+        "scars": [
             {
                 "description": "Requested a non-functional 'Dog Unit' immediately upon arrival to reverse-engineer failure points before looking at the spec sheet.",
                 "label": "The 'Dog Unit' Request",

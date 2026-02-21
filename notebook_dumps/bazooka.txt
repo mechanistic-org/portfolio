@@ -20,7 +20,7 @@
 		"intervention": "Identified 1 critical EMI noise source isolated directly to the Bazooka architecture during EVT2 [1]",
 		"result": "Logged 5 distinct mechanical defects in EVT2 chassis design, including warping, burrs, and inconsistent hook tension [1]"
 	},
-	"war_stories": [
+	"scars": [
 		{
 			"label": "The Seizure Crisis",
 			"value": "100% Failure Rate (14/14)",

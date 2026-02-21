@@ -5,7 +5,7 @@
         "financial": "Avoided custom 'scissors switch' tooling costs by forcing standard membrane matrix into 'Airboard' form factor. Billed ~$25k in June 2000 alone for rapid remediation.",
         "process": "Implemented 'Surgical CAD' surface reconstruction to align ID curvature with fixed PCB/membrane hard points.",
         "governance": "Direct Vendor-Engineering Loop (WebTV <> Mechanistic <> Silitek/Panasonic/Lite-On) bypassing standard component procurement delays.",
-        "war_stories": [
+        "scars": [
             {
                 "description": "Battled ID's 19.00mm spec against Vendor's 19.05mm standard. Proved cumulative error would crash keys into the bezel.",
                 "label": "The Pitch Fight",

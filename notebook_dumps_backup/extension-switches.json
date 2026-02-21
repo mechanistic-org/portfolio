@@ -2,7 +2,7 @@
     "id": "extension-switches",
     "forensic_summary": "TRIGGER: Catastrophic 100% failure rate (7/7 units) in EVT2 Thermal Stress testing (65\u00b0C/-20\u00b0C) manifesting as 'Plastic Cap Floating', compounded by a 0.3mm tooling depth mismatch causing 'Gap between Elvis cap and front housing' and 'Cheep sound' acoustic defects. INTERVENTION: The Architect mandated a 'Stop Ship' on PSA tape, forcing a transition to liquid structural glue. Concurrently directed a tooling modification to replace Gloss finish with 'VDI-15' to resolve paint delamination and added internal ribs to dampen acoustic hollowness (SAT-281). RESULT: Glued units passed Crush, Drop, and Environmental tests, securing the launch configuration.",
     "metrics": {
-        "war_stories": [
+        "scars": [
             {
                 "label": "Plastic Cap Floating",
                 "value": "Liquid Glue Intervention",

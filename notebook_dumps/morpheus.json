@@ -1,6 +1,6 @@
 {
     "id": "morpheus",
-    "war_stories": [
+    "scars": [
         {
             "description": "Diagnosed a 'Digital Crash' as physical failure. Assemblers were using excessive force to seat components, flexing the PCB and 'crushing' the traces (Mechanical Violence). Remedied by relieving interference points.",
             "label": "The Thumb of God",

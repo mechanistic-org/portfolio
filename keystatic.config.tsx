@@ -400,7 +400,7 @@ export default config({
 					}),
 
 					// War Stories (Rich)
-					war_stories: fields.array(
+					scars: fields.array(
 						fields.object({
 							label: fields.text({ label: "Label" }),
 							value: fields.text({ label: "Value" }),
@@ -427,7 +427,7 @@ export default config({
 				),
 
 				// Legacy War Stories (Top Level)
-				war_stories: fields.array(
+				scars: fields.array(
 					fields.object({
 						label: fields.text({ label: "Label" }),
 						value: fields.text({ label: "Value" }),

@@ -28,7 +28,7 @@ The "Machine Readability" failure identified in the Legacy Review is **NOT** a c
 
 _Target: `scripts/hydrate_content.py`_
 
-The script is designed to inject _new_ forensic schemas (`war_stories`, `events`), but it explicitly **skips** standard frontmatter fields.
+The script is designed to inject _new_ forensic schemas (`scars`, `events`), but it explicitly **skips** standard frontmatter fields.
 
 - **Evidence:** The script has handlers for `forensic_metrics`, `tags`, `reports`, etc., but **ZERO logic** to update `title` or `description` from the Source JSON.
 - **Consequence:** When you update `notebook_dumps/c24.json` with a killer description, it never reaches `c24.mdx`. The site continues to display the placeholder "Other project".

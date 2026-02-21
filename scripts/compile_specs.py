@@ -50,8 +50,8 @@ def parse_spec_file(slug):
             if "forensic_summary" in data:
                 print(f"   🔹 Found Bolus Narrative")
                 parsed_data["forensic_summary"] = data["forensic_summary"]
-            if "war_stories" in data:
-                parsed_data["scars"] = data["war_stories"]
+            if "scars" in data:
+                parsed_data["scars"] = data["scars"]
         except json.JSONDecodeError as e:
             print(f"   ❌ JSON Parse Error in block: {e}")
 

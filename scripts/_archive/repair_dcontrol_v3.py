@@ -7,17 +7,17 @@ with open(target_file, "r", encoding="utf-8") as f:
 
 lines = content.splitlines()
 new_lines = []
-in_war_stories = False
+in_scars = False
 
 for line in lines:
     stripline = line.strip()
     
-    if "war_stories:" in line:
-        in_war_stories = True
+    if "scars:" in line:
+        in_scars = True
     elif stripline.startswith("cogs:") or stripline.startswith("profitability:") or stripline.startswith("financial:") or stripline.startswith("___") or line.startswith("### "):
-        in_war_stories = False
+        in_scars = False
         
-    if in_war_stories:
+    if in_scars:
         # Force indentation for specific keys
         if stripline.startswith("- label:"):
             # Ensure 4 spaces

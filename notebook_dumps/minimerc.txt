@@ -33,7 +33,7 @@
 ## Scars
 ```json
 {
-  "war_stories": []
+  "scars": []
 }
 ```
 

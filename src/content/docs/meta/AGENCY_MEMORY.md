@@ -171,7 +171,7 @@ description: "The Persistent Short-Term Memory store for the AI Agent. This file
   - **Context:** Systemic YAML corruption (invisible chars using `src: ... - id:`) cannot be fixed reliably with Regex.
   - **Protocol:** Do not iterate. Write a script to _scrape_ the data (images/text) into a Python Dictionary and _dump_ a pristine new file.
   - **Artifact:** `repair_dcontrol_nuclear_v2.py`.
-  - `InvalidContentEntryDataError` is absolute. Unions (like `war_stories`) must match _exactly_.
+  - `InvalidContentEntryDataError` is absolute. Unions (like `scars`) must match _exactly_.
   - **Example:** `zeus` used `title/subtitle` instead of `label/value`. Immediate build failure.
   - **Fix:** Check `config.ts` first. Do not guess.
 - The "Nuclear Bisection" Protocol (Feb 2026):

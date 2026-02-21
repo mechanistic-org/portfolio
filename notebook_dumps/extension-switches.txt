@@ -20,7 +20,7 @@
 		"intervention": "Migration from PSA to structural acrylic glue; Correction of 0.1mm CAD geometry offset [1, 2]",
 		"result": "Recovered 100% yield in EVT2; Validated 10-year operational lifetime [1]"
 	},
-	"war_stories": [
+	"scars": [
 		{
 			"label": "The Floating Cap Crisis",
 			"value": "0% to 100% Yield",

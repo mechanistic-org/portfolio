@@ -2,7 +2,7 @@
     "id": "room-director",
     "forensic_summary": "TRIGGER: Catastrophic structural disintegration during Impact Testing where 7 of 7 Sativa units suffered 'Front housing and back cover separate', compounded by a 6/7 failure rate for 'Front housing corner coating peel off' during micro-drops. INTERVENTION: The Architect mandated a structural overhaul to a 'Full Circle Hinge' design, adding reinforcement ribs and removing chamfers to lock the housing. Concurrently enforced a 'VDI-15' finish change on the substrate to resolve paint adhesion delamination. RESULT: Modified mockups passed Drop, Crush, and Rapid Pull tests, securing the premium 'Room Director' configuration for DVT.",
     "metrics": {
-        "war_stories": [
+        "scars": [
             {
                 "label": "Structural Disintegration",
                 "value": "Full Circle Hinge",

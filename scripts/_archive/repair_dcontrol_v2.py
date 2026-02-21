@@ -9,36 +9,36 @@ with open(target_file, "r", encoding="utf-8") as f:
 content = re.sub(r"data: \{\} - id:", "data: {}\n    - id:", content)
 content = re.sub(r"(src: .*?) - id:", r"\1\n    - id:", content)
 
-# Fix 2: Split collapsed war_stories list
-# Pattern: war_stories: - label:
-content = re.sub(r"war_stories: - label:", "war_stories:\n    - label:", content)
+# Fix 2: Split collapsed scars list
+# Pattern: scars: - label:
+content = re.sub(r"scars: - label:", "scars:\n    - label:", content)
 
 # Pattern: description: "..." - label:
 # This separates items.
 # description ends with a quote usually.
 content = re.sub(r'(description: ".*?") - label:', r'\1\n    - label:', content)
 
-# Fix 3: Indent war_stories children to 6 spaces (they are currently 2 or 4 from previous script/state)
+# Fix 3: Indent scars children to 6 spaces (they are currently 2 or 4 from previous script/state)
 # The previous regex replacer indented "value:" to 4 spaces unconditionally.
-# "    value:" -> we want "      value:" inside war_stories context.
+# "    value:" -> we want "      value:" inside scars context.
 
 lines = content.splitlines()
 new_lines = []
-in_war_stories = False
+in_scars = False
 
 for line in lines:
     stripline = line.strip()
     
     # Check context. 
-    # Note: war_stories is inside "metrics", so indentation might be deeper.
-    # But usually "metrics:" is root, "  war_stories:" is 2 spaces.
+    # Note: scars is inside "metrics", so indentation might be deeper.
+    # But usually "metrics:" is root, "  scars:" is 2 spaces.
     
-    if "war_stories:" in line:
-        in_war_stories = True
+    if "scars:" in line:
+        in_scars = True
     elif stripline.startswith("cogs:") or stripline.startswith("profitability:") or stripline.startswith("financial:") or stripline.startswith("___") or line.startswith("### "):
-        in_war_stories = False
+        in_scars = False
         
-    if in_war_stories:
+    if in_scars:
         # If line starts with "value:" or "description:", indent to 6 spaces
         if line.startswith("    value:"):
             # It has 4 spaces. make it 6.

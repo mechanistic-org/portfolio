@@ -2,7 +2,7 @@
     "id": "wall-plates",
     "forensic_summary": "TRIGGER: Forensic tolerance analysis revealed a catastrophic '0mm!' clearance condition where the Waldo cover plate would collide with the high-voltage Bazooka module if 'biased down', risking live exposure. Simultaneously, the stamped steel chassis suffered 'pillowing' from aggressive square dimples, consuming Z-axis tolerance. INTERVENTION: The Architect mandated a 'Stackup Loop' review, reducing the perimeter Y-gap from 0.3mm to 0.2mm to mechanically constrain the plate. Directed a tooling change to 'minimize to round pip' to flatten the chassis and added 'local pads' for snap tuning. RESULT: Secured 'Zero to Zero' flushness without interference and standardized the aesthetic to Satin VDI 15.",
     "metrics": {
-        "war_stories": [
+        "scars": [
             {
                 "label": "Zero Clearance Kill",
                 "value": "0.3mm -> 0.2mm",

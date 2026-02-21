@@ -19,7 +19,7 @@
 		"intervention": "Complete mechanical subsystem redesign: Dual radial spring balance bars, solid motor mounts, and disc guide retrofit [1, 4]",
 		"result": "Eliminated 100% of 'dirty roller' slippage failures and recovered 100% of questioned carousel inventory [1]"
 	},
-	"war_stories": [
+	"scars": [
 		{
 			"label": "The Potato Chip Carousel",
 			"value": "3-4mm Warp",

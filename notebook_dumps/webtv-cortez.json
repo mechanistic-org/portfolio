@@ -19,7 +19,7 @@
         "result": "Delivered a manufacturable database that reconciled the 'Airboard' form factor with standard membrane switches, securing executive approval for the new model despite 'beating on extra CAD hours'.",
         "trigger": "Vendor analysis (Silitek/Panasonic) revealed the ID intent was mechanically impossible\u2014specifically, the rubber pad was 'too close to the edge' for PCB sealing and the key matrix pitch (19.05mm) clashed with the 2D layout. The initial hard model failed ergonomic validation (not level, too heavy)."
     },
-    "war_stories": [
+    "scars": [
         {
             "label": "The Flat Failure",
             "value": "0\u00b0 to 15\u00b0 Tilt",
@@ -323,7 +323,7 @@
         }
     ],
     "metrics": {
-        "war_stories": [
+        "scars": [
             {
                 "description": "Battled ID's 19.00mm spec against Vendor's 19.05mm standard. Proved cumulative error would crash keys into the bezel.",
                 "label": "The Pitch Fight",

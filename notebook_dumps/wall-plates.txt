@@ -20,7 +20,7 @@
 		"intervention": "Tolerance stackup analysis (RSS vs Worst Case) for snap locations [5]",
 		"result": "Crush Test passed 30kg load [6]"
 	},
-	"war_stories": [
+	"scars": [
 		{
 			"label": "The Glue Residue Crisis",
 			"value": "Cosmetic Yield Kill",

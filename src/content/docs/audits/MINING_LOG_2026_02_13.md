@@ -30,7 +30,7 @@ tags: ["mining", "forensics", "titration"]
 
 **[UPDATED] Scars Law Enforcement**
 
-- **Action:** Renamed `war_stories` frontmatter field to `scars` per V2.1 schema.
+- **Action:** Renamed `scars` frontmatter field to `scars` per V2.1 schema.
 - **Rationale:** Standardizing nomenclature for narrative hooks.
 
 ### `src/content/projects/320-slot-optical-carousel/`

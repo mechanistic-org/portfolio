@@ -5,7 +5,7 @@
         "financial": "Managed $10k+ rapid prototyping budget for high-pressure trade show build; negotiated short-run fab costs (e.g., $242.35/cover for zinc-plated revisions).",
         "process": "Reduced complex sheet metal fabrication cycle to 9 days; Standardized 100% of assembly hardware to 4-40 spec to eliminate line-down risks.",
         "governance": "Orchestrated parallel workstreams between sheet metal (E-M Solutions) and model shops (Sputnik) under a high-velocity 'War Room' cadence.",
-        "war_stories": [
+        "scars": [
             {
                 "description": "Mandated 'dead nuts' flatness specs for the chassis floor to ensure conductive coupling with the 12V supply heat spreader.",
                 "label": "The 'Dead Nuts' Flatness",

@@ -80,7 +80,7 @@ metrics:
     that we are using 4-40 hardware throughout?
   - No one likes my code name so we are calling it a 'double-high' Mercury... That
     bezel will be needed by 12/19.
-  war_stories:
+  scars:
   - description: Mandated 'dead nuts' flatness specs for the chassis floor to ensure
       conductive coupling with the 12V supply heat spreader.
     label: The 'Dead Nuts' Flatness
@@ -130,7 +130,7 @@ tools:
 - pro_engineer
 - autocad
 transcript: ''
-war_stories:
+scars:
 - description: Mandated 'dead nuts' flatness specs for the chassis floor to ensure
     conductive coupling with the 12V supply heat spreader.
   label: The 'Dead Nuts' Flatness

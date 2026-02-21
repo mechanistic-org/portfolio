@@ -170,7 +170,7 @@ replacements = [
     (r"^costOfGoodsSold: (.*)$", r"    costOfGoodsSold: \1"),
     (r"^dcdCount: (.*)$", r"    dcdCount: \1"),
     (r"^engineeringChangeOrders: (.*)$", r"    engineeringChangeOrders: \1"),
-    (r"^war_stories: (.*)$", r"  war_stories: \1"),
+    (r"^scars: (.*)$", r"  scars: \1"),
 ]
 
 # Write the processed lines

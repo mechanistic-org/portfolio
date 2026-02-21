@@ -51,13 +51,13 @@ def migrate_dumps():
                 if new_forensic:
                     data["forensic_metrics"] = new_forensic
 
-            # 2. metrics.war_stories -> war_stories (Root)
-            if "metrics" in data and "war_stories" in metrics:
-                ws = metrics["war_stories"]
+            # 2. metrics.scars -> scars (Root)
+            if "metrics" in data and "scars" in metrics:
+                ws = metrics["scars"]
                 if ws:
-                    data["war_stories"] = ws
-                    changes.append(f"Moved metrics.war_stories -> war_stories (Root)")
-                    del metrics["war_stories"]
+                    data["scars"] = ws
+                    changes.append(f"Moved metrics.scars -> scars (Root)")
+                    del metrics["scars"]
 
             # 3. Cleanup empty metrics object
             if "metrics" in data and not data["metrics"]:

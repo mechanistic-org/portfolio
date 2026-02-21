@@ -21,7 +21,7 @@
 		"intervention": "Erik Norris 'rigidified' sheet metal structure [7]; Implemented 'ratcheting compression strap' assembly method to force unit alignment [8]; Manual 'tweaking' of warped fader pans during assembly [9]",
 		"result": "Successful launch of D-Control (Buckley) and D-Command (Danko); TEC Award nomination [10]"
 	},
-	"war_stories": [
+	"scars": [
 		{
 			"label": "The Bowed Fader Pan",
 			"value": "50% Rejection Rate",

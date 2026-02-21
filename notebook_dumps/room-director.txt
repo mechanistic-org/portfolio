@@ -20,7 +20,7 @@
 		"intervention": "Erik Norris directive: 'please provide a detailed report of “Wet Hands” failures. For now, this test is still classified as “information only”. No need to hold for resolution' [4].",
 		"result": "Drop robustness B failed (Micro Drop/Drop Test), Mechanical strength A passed (Thermal Stress, Extreme Force) [7]."
 	},
-	"war_stories": [
+	"scars": [
 		{
 			"label": "The Wet Hands Crisis",
 			"value": "FAIL (Cosmetic/Functional)",

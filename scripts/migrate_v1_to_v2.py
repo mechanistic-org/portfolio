@@ -65,7 +65,7 @@ def migrate_project(slug):
     if post.get("scars"):
         output.append("## Scars")
         output.append("```json")
-        output.append(json.dumps({"war_stories": post["scars"]}, indent=2))
+        output.append(json.dumps({"scars": post["scars"]}, indent=2))
         output.append("```")
         output.append("")
 

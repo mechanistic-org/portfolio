@@ -5,7 +5,7 @@
         "financial": "Protected <$15k COGS target; Managed sheet metal budget at 20% of COGS ($561.46 CNC unit price)",
         "process": "Stabilized thermal profile from 75\u00b0C shutdown failure to 22.6\u00b0C rise; Processed 12,000+ thermal data points",
         "governance": "Solo Mechanical Lead managing ID/EE friction; Cross-functional 'War Room' coordination with VTech/Jetcrown",
-        "war_stories": [
+        "scars": [
             {
                 "description": "Sustained head injury from falling branch (22 stitches); managed IP conflict crisis from ER while on concussion protocol.",
                 "label": "The Berry Creek Incident",

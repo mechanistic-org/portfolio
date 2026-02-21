@@ -13,7 +13,7 @@
 		"intervention": "Tolerance stackup analysis (RSS vs Worst Case) for snap locations [5]",
 		"result": "Crush Test passed 30kg load [6]"
 	},
-	"war_stories": [
+	"scars": [
 		{
 			"description": "Eliminated 0mm interference risk by reducing perimeter gap, preventing high-voltage collision.",
 			"label": "Zero Clearance Kill",

@@ -16,7 +16,7 @@ metrics:
   process:
     dcdCount: 0
     engineeringChangeOrders: []
-  war_stories: []
+  scars: []
 """
 
 BLOCK_CYBERSPACE = """
@@ -27,7 +27,7 @@ cyberspace:
   stickies: []
 """
 
-BLOCK_WAR_STORIES = "war_stories: []"
+BLOCK_WAR_STORIES = "scars: []"
 
 def modernize_project(slug, path):
     try:
@@ -65,9 +65,9 @@ def modernize_project(slug, path):
             updates.append("cyberspace")
 
     # Check and Inject War Stories (Root)
-    if "war_stories:" not in frontmatter:
+    if "scars:" not in frontmatter:
         new_frontmatter += "\n" + BLOCK_WAR_STORIES
-        updates.append("war_stories")
+        updates.append("scars")
 
     # Reconstruct
     if updates:

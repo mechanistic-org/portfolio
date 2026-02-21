@@ -9,7 +9,7 @@ const ForensicWall: React.FC = () => {
 			...card,
 			projectId: project.projectId,
 			// Ensure type matches the union
-			type: card.type as "war_story" | "financial" | "process" | "governance",
+			type: card.type as "scars" | "financial" | "process" | "governance",
 		})),
 	);
 

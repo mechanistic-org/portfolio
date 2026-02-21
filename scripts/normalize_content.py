@@ -10,16 +10,16 @@ def migrate_file(filepath):
         changed = False
 
         # 1. Migrate War Stories -> Scars
-        if 'war_stories' in post.metadata:
-            print(f"Migrating war_stories -> scars in {filepath}")
-            post.metadata['scars'] = post.metadata.pop('war_stories')
+        if 'scars' in post.metadata:
+            print(f"Migrating scars -> scars in {filepath}")
+            post.metadata['scars'] = post.metadata.pop('scars')
             changed = True
 
         # 1.5 Migrate Metrics.War_Stories -> Scars (or remove if duplicate)
         if 'metrics' in post.metadata and isinstance(post.metadata['metrics'], dict):
-            if 'war_stories' in post.metadata['metrics']:
-                ws = post.metadata['metrics'].pop('war_stories')
-                print(f"Removed metrics.war_stories in {filepath}")
+            if 'scars' in post.metadata['metrics']:
+                ws = post.metadata['metrics'].pop('scars')
+                print(f"Removed metrics.scars in {filepath}")
                 changed = True
                 # Optional: Add to scars if not present? 
                 # Assuming duplicates or legacy garbage for now.

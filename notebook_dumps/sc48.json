@@ -13,7 +13,7 @@
 		"intervention": "Thermodynamic Re-architecture & Airflow Optimization.",
 		"result": "Stabilized Operating Temperature; Prevention of Scrap."
 	},
-	"war_stories": [
+	"scars": [
 		{
 			"label": "The Meltdown Mitigation",
 			"value": "75°C -> 22.6°C",

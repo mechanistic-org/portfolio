@@ -22,7 +22,7 @@
 		"intervention": "Identified and eliminated 0.005-0.020 inch tolerance stack-up error in fan tray assembly; Issued deviation for top cover lip interference",
 		"result": "Salvaged stalled 50-unit Pilot Build; enabled 300-unit Production ramp; Achieved FCC Class B compliance"
 	},
-	"war_stories": [
+	"scars": [
 		{
 			"label": "The PCB Cage Trap",
 			"value": "Assembly Blockage",

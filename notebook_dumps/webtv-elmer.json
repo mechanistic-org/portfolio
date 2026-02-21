@@ -13,7 +13,7 @@
 		"intervention": "Norris ('The Architect') rejected the 'Bastard Box' concept [10] and executed a custom chassis design removing perforation under the PCB for mass conduction [11]. He enforced a strict 4-40 UNC hardware standardization for the 'Zeus' revision [6].",
 		"result": "Delivery of 5 functional server enclosures and 12 nodes for Western Cable Show and CES 2001 on a compressed 9-day fabrication cycle with zero thermal failures [4], [5]."
 	},
-	"war_stories": [
+	"scars": [
 		{
 			"label": "The Dead Nuts Flat Fallacy",
 			"value": "Thermal Stabilization",

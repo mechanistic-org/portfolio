@@ -32,7 +32,7 @@ You are the **Forensic Engineering Analyst** for Erik Norris.
 		"intervention": "[The Intervention (Design/ECO)]",
 		"result": "[The Result (Yield/Savings)]"
 	},
-	"war_stories": [
+	"scars": [
 		{
 			"label": "[Failure/Success Name]",
 			"value": "[Short Metric/Outcome]",

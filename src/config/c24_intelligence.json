@@ -156,7 +156,7 @@
             ]
         }
     },
-    "war_stories_extraction": [
+    "scars_extraction": [
         {
             "title": "Side Cap Thermal Warping",
             "crisis": "Application of rubberized soft paint and subsequent oven curing caused the ABS side caps to twist and bow, resulting in parts that did not fit the chassis geometry.",

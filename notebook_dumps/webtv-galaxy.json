@@ -61,7 +61,7 @@
         "process": "Achieved 28.3 CFM system airflow in high-density chassis; Resolved 100% of EMI chassis ground failures via flange redesign",
         "governance": "Weekly 'Mechanical Hitlist' protocol tracking 30+ gating defects; Centralized FTP master database control"
     },
-    "war_stories": [
+    "scars": [
         {
             "description": "Requested a non-functional 'Dog Unit' immediately upon arrival to reverse-engineer failure points before looking at the spec sheet.",
             "label": "The 'Dog Unit' Request",
@@ -105,7 +105,7 @@
     ],
     "_schema_version": "v2.0",
     "metrics": {
-        "war_stories": [
+        "scars": [
             {
                 "label": "The 150-Watt Thermal Crisis",
                 "value": "28.3 CFM / 84\u00b0C Tj",

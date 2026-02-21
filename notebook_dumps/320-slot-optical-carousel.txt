@@ -20,7 +20,7 @@
 		"intervention": "Redesigned cooling (15C/25C), 'Ribs & Rads' tooling mods, and high-force spring compensation",
 		"result": "Stabilized yield despite 1.00mm-1.08mm rib variance and warpage"
 	},
-	"war_stories": [
+	"scars": [
 		{
 			"label": "The Tight Slot War",
 			"value": "200% Spring Force",

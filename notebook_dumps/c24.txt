@@ -23,7 +23,7 @@
 		"intervention": "Dual-Source Bridge Strategy (Mass Precision) and Vertical Hanging Fixture Protocol (ECO 12740) [6, 7]",
 		"result": "Salvaged Nov 2007 Launch; Delivered 500 units for Q4 FQA [1, 7]"
 	},
-	"war_stories": [
+	"scars": [
 		{
 			"label": "The Banana Defect",
 			"value": "2.50mm to <0.5mm",

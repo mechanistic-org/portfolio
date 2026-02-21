@@ -5,7 +5,7 @@
 		"cards": [
 			{
 				"id": "c24-card-01",
-				"type": "war_story",
+				"type": "scars",
 				"headline": "The 'Banana' Defect",
 				"context": "ABS side caps arrived with 2.50mm warpage due to paint cure heat. Pilot line down.",
 				"impact": "Engineered 'Vertical Hanging' process to leverage gravity during cure. Deviation <0.5mm.",
@@ -23,7 +23,7 @@
 			},
 			{
 				"id": "c24-card-03",
-				"type": "war_story",
+				"type": "scars",
 				"headline": "The 'No-Bid' Crisis",
 				"context": "Overseas vendor 'no-bidded' the complex top panel due to stud density. Schedule risk.",
 				"impact": "Executed rapid dual-source strategy with local vendor (Mass Precision) to bridge Pilot.",
@@ -32,7 +32,7 @@
 			},
 			{
 				"id": "c24-card-04",
-				"type": "war_story",
+				"type": "scars",
 				"headline": "Headphone Jack Fire Drill",
 				"context": "Legacy design required 2-hour teardown to replace a 4.8% failure rate part.",
 				"impact": "Redesigned chassis for 'trap door' serviceability. Repair time dropped to 10 mins.",
@@ -47,7 +47,7 @@
 		"cards": [
 			{
 				"id": "d-command-card-01",
-				"type": "war_story",
+				"type": "scars",
 				"headline": "The 'Ratchet Strap' Assembly",
 				"context": "Press-induced bowing in sheet metal required installers to use ratchet straps to align units.",
 				"impact": "Redesigned tie-plates with ovalized holes to allow float. Eliminated field rigging.",
@@ -56,7 +56,7 @@
 			},
 			{
 				"id": "d-command-card-02",
-				"type": "war_story",
+				"type": "scars",
 				"headline": "Sticky Button Crisis",
 				"context": "Hardware insertion deformed plastic, causing fader buttons to stick.",
 				"impact": "Invented 'Post-Hardware Flattening' op to compress bowing without retooling mold.",
@@ -74,7 +74,7 @@
 			},
 			{
 				"id": "d-command-card-04",
-				"type": "war_story",
+				"type": "scars",
 				"headline": "AC Withdraw Failure",
 				"context": "Unit failed UL safety test 48 hours before shipping. Line Start halted.",
 				"impact": "Engineered emergency EMI gasket retrofit (ECO 8114) to pass re-test.",
@@ -89,7 +89,7 @@
 		"cards": [
 			{
 				"id": "sc48-card-01",
-				"type": "war_story",
+				"type": "scars",
 				"headline": "The Meltdown Mitigation",
 				"context": "Embedded CPU hit 75°C shutdown temperature during FOH testing. Show-stopper.",
 				"impact": "Re-architected chassis from 3U to 4U with custom ducting. Temp rise dropped to 22.6°C.",
@@ -122,7 +122,7 @@
 		"cards": [
 			{
 				"id": "ksystem-card-01",
-				"type": "war_story",
+				"type": "scars",
 				"headline": "The 'Hammered' Lid",
 				"context": "Pilot lids arrived 3mm too wide due to weldment error. Line Down risk.",
 				"impact": "Field fix: Manually hammered lids to pass EMI. Root cause fix: Modified blanking tool.",
@@ -131,7 +131,7 @@
 			},
 			{
 				"id": "ksystem-card-02",
-				"type": "war_story",
+				"type": "scars",
 				"headline": "The 'Thumb of God' Fix",
 				"context": "Variable adhesive thickness caused 20°C CPU spikes. Hard hangs every 50 mins.",
 				"impact": "Switched to Phase Change Material (PCM) + 50psi clips. Delta dropped to 3°C.",
@@ -146,7 +146,7 @@
 		"cards": [
 			{
 				"id": "galaxy-card-01",
-				"type": "war_story",
+				"type": "scars",
 				"headline": "150W Thermal Crisis",
 				"context": "Desktop CPU + 3 Tuners in a set-top box. Smart Card reader hit 55°C (melting point).",
 				"impact": "Engineered 'Wind Tunnel' chassis with 28.3 CFM airflow. Stabilized CPU at 84°C.",
@@ -155,7 +155,7 @@
 			},
 			{
 				"id": "galaxy-card-02",
-				"type": "war_story",
+				"type": "scars",
 				"headline": "The 'Hook 29' Fix",
 				"context": "Drawn standoffs caused 'potato chip' warping in the stampings.",
 				"impact": "Redesigned chassis floor with 'Hook 29' ribs to stabilize the steel.",

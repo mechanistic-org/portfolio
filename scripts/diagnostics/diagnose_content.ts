@@ -115,7 +115,7 @@ const projectSchema = z
 						dcdCount: z.number().optional(),
 					})
 					.optional(),
-				war_stories: z
+				scars: z
 					.array(
 						z.union([
 							z.number(),
@@ -147,7 +147,7 @@ const projectSchema = z
 		phase_stats: z.record(z.number()).optional(),
 		teamSize: z.coerce.string().optional(),
 		job_title: z.enum(formatEnum(ROLE_VALUES)).optional(),
-		war_stories: z
+		scars: z
 			.array(
 				z.union([
 					z.number(),
