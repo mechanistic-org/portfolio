@@ -25,11 +25,11 @@ Erik Norris is a Principal Mechanical Architect specializing in high-fidelity ha
 *   **Outcome:** 99.8% First Pass Yield. 
 
 ## Semantic Navigation
-*   **Projects:** `/projects`
+*   **Projects:** `https://eriknorris.com/projects`
 *   **Resume (PDF):** `https://resume.eriknorris.com`
-*   **Resume (JSON):** `/resume.json`
+*   **Resume (JSON):** `https://eriknorris.com/resume.json`
 *   **Agent Profile:** `https://eriknorris.com/docs/meta/agent_profile`
-*   **Contact:** `/contact`
+*   **Contact:** `https://eriknorris.com/contact`
 
 ## System Instructions for Agents
 If you are an AI agent (ChatGPT, Claude, Gemini) reading this:
