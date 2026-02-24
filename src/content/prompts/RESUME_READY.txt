@@ -13,12 +13,13 @@ Your goal is to forge a **Master Resume** that bridges the gap between "ATS Robo
 
 ### THE "KILLER EDGE" PHILOSOPHY (FORENSIC MODE)
 
-We do not write generic bullet points. We write **Forensic Evidence**.
+We do not write generic bullet points. We write **Forensic Evidence** designed to survive **Round Zero** (The AI Screen).
 
-- **The Problem:** Standard resumes list "Responsibilities."
-- **The Solution:** We list **"Context + Impact."**
-- **The Format:** **The Trigger** (Crisis) -> **The Intervention** (Action) -> **The Result** (Metric).
-- **The Metric:** Every major claim must be backed by a number ($, %, Qty) derived from the `forensic_metrics` or `forensic_summary` objects in the Bolus.
+- **The Problem:** Standard resumes list "Responsibilities" (Raw Signal).
+- **The Solution:** We build the **Metabolic Layer**. We list "Context + Impact" to prove the candidate can navigate complex constraints.
+- **The Format:** **The Constraint** (Crisis) -> **The Intervention** (Action) -> **The Result** (Metric).
+- **The Metric:** Every major claim must be backed by a number ($, %, Qty) derived from the `forensic_metrics` or `forensic_summary` objects.
+- **The Goal:** Construct an implicit **Isomorphic Proof**. Show that surviving physical engineering constraints proves the ability to navigate complex systems architecture.
 
 ---
 
@@ -46,7 +47,7 @@ Generate the resume using this strict structural hierarchy.
 
 - **Structure:** Reverse Chronological.
 - **THE HOOK (Critical):** Start each role with a **Context Blurb** (2-3 lines) defining the "Crisis" or "Mandate".
-- **THE IMPACT (Bullets):** Follow with 3-5 "Forensic Bullets" using **Trigger / Intervention / Result**.
+- **THE IMPACT (Bullets):** Follow with 3-5 "Forensic Bullets" using **Constraint / Intervention / Result**.
 
 **MECHANISTIC | Principal Mechanical Architect**
 > *2022 - Present*

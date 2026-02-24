@@ -15,15 +15,15 @@ Trigger this workflow by running `/hydrate_project` or asking to "Titrate" or "H
 
 We use three distinct mining operations that result in three distinct artifacts. Do NOT attempt to merge these all manually.
 
-| Vector            | Output Artifact                      | Goal                     |
-| :---------------- | :----------------------------------- | :----------------------- |
-| **1. Narrative**  | `forensic_summary` (in `index.mdx`)  | The Story (War Stories). |
-| **2. Complexity** | `complexity_vector` (in `index.mdx`) | The Mass (BOM/Process).  |
-| **3. Entropy**    | `_entropy.json`                      | The Pulse (Event Log).   |
+| Vector            | Output Artifact                      | Goal                                     |
+| :---------------- | :----------------------------------- | :--------------------------------------- |
+| **1. Narrative**  | `forensic_summary` (in `index.mdx`)  | The Metabolic Layer (Isomorphic Proofs). |
+| **2. Complexity** | `complexity_vector` (in `index.mdx`) | The Mass (BOM/Process).                  |
+| **3. Entropy**    | `_entropy.json`                      | Data Stories (Event Log).                |
 
 ## Verification & Prerequisites
 
-Before executing, verify the user has run the prompts in NotebookLM and placed the raw text dumps into the correct locations:
+Before executing, verify the user has run the prompts in NotebookLM and placed the raw text dumps (the "Red Gold" - data won with blood/experience) into the correct locations:
 
 - `notebook_dumps/{slug}.txt` or `notebook_dumps/{slug}.md` for narratives.
 

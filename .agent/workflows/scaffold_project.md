@@ -13,7 +13,7 @@ Trigger this workflow by running `/scaffold_project` or asking to "Scaffold a ne
 
 2.  **Create Directory**: Create the folder `src/content/projects/{slug}`.
 
-3.  **Generate MDX**: Create `src/content/projects/{slug}/index.mdx` using the **Strict C24 Schema** below. Replace the `{placeholders}` with the inputs.
+3.  **Generate MDX**: Create `src/content/projects/{slug}/index.mdx` using the **Strict C24 Schema** below. This file serves as your **Career Master Matrix**. Replace the `{placeholders}` with the inputs.
 
     ```markdown
     ---
@@ -46,7 +46,7 @@ Trigger this workflow by running `/scaffold_project` or asking to "Scaffold a ne
       process:
         dcdCount: 0
         engineeringChangeOrders: []
-      war_stories: []
+      isomorphic_proofs: []
 
     # STATS
     phase_stats:
@@ -67,7 +67,7 @@ Trigger this workflow by running `/scaffold_project` or asking to "Scaffold a ne
     links: []
     skillData: []
     stats: {}
-    war_stories: []
+    isomorphic_proofs: []
     ---
 
     ## I. PROJECT SUMMARY
@@ -77,18 +77,20 @@ Trigger this workflow by running `/scaffold_project` or asking to "Scaffold a ne
     - **Objective:** [Goal]
     - **Core Achievement:** [Result]
 
-    ## II. THE CAST (Team & Stakeholders)
+    ## II. THE CAST (Stakeholders & Nodes)
 
     - **Name**: Role
 
-    ## III. CRITICAL INTERVENTIONS (STAR Stories)
+    ## III. METABOLIC LAYER (Isomorphic Proofs)
 
-    ### 1. The Challenge
+    _Isomorphic Proofs are enrichment: the secret sauce added to cement credibility, ownership, and trust by showing you've survived Round Zero and possess deep, cross-domain knowledge._
 
-    - **The Trigger:**
-    - **The Tension:**
-    - **The Intervention:**
-    - **The Result:**
+    ### 1. The Constraint (The Scar)
+
+    - **The Physical Constraint:** [Describe the hardware reality/constraint]
+    - **The Structural Property (sharedFailureMode):** [The invariant mechanism connecting both domains]
+    - **The Digital Analogue (Structural Rhyme):** [How this maps to a software/digital principle]
+    - **The Action/Result:** [How you navigated it]
     ```
 
 4.  **Enforce Asset Sovereignty**:

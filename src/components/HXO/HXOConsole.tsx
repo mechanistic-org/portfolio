@@ -345,25 +345,9 @@ function DefaultSummary({ projects }: { projects: ConsoleProject[] }) {
 			<div className="space-y-6">
 				<div className="objective">
 					<p className="text-sm leading-relaxed font-light text-zinc-300">
-						The archived ledger of Erik Norris, Principal Mechanical Architect. A sovereign engine
-						providing forensic access to over 30 years of high-fidelity hardware design.
-					</p>
-
-					<p className="mt-4 text-sm leading-relaxed font-light text-zinc-300">
-						You have accessed a headless, agentic data pipeline that compiles digital exhaust into
-						data stories. I built this sovereign infrastructure because I treat software intent with
-						the exact same forensic rigor I apply to physical hardware.
-					</p>
-
-					<p className="mt-4 text-sm leading-relaxed font-light text-zinc-300">
-						This console indexes mission-critical engineering artifacts: mechanical architecture,
-						consumer product design, and program rescue. I stabilize the entropy of product
-						development into a living, air-gapped ledger of product reality.
-					</p>
-
-					<p className="mt-4 text-sm leading-relaxed font-light text-zinc-300">
-						Operating at the intersection of deep engineering legacy and modern software agility, I
-						architect the hardware interface for the physical world.
+						Principal Mechanical Architect specializing in high-fidelity hardware and program
+						rescue. I stabilize the entropy of product development: structure the chaos, index the
+						decisions, ship the hardware.
 					</p>
 
 					<p className="mt-6 text-sm leading-relaxed font-light text-zinc-300">

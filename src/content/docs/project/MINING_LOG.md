@@ -9,7 +9,7 @@ sidebar:
 # ⛏️ Mining Campaign Log (Re-Hydration)
 
 **Status:** Normalizing all deep dive projects to ready state.
-**Goal:** Enrich all deep dive projects to ready state using the `/refine [slugname].txt` workflow. FUTURE SELF: This involves taking the raw "Deep Research" output (via `src/content/prompts/v2_mining/deep_research_prompt_v1.txt`), manually refining the `index.mdx` (injecting narrative, cast, BOM), and then running `npm run content:hydrate -- --reverse-json` to backport the "Gold" to the `notebook_dumps/` source.
+**Goal:** Enrich all deep dive projects to ready state using the `/refine [slugname].txt` workflow. FUTURE SELF: This involves taking the raw "Deep Research" output (via `src/content/prompts/mining/deep_research_prompt_v1.txt`), manually refining the `index.mdx` (injecting narrative, cast, BOM), and then running `npm run content:hydrate -- --reverse-json` to backport the "Gold" to the `notebook_dumps/` source.
 
 ## 🏁 Campaign Milestones (The Roadmap)
 

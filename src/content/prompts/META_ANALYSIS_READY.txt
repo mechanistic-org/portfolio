@@ -16,19 +16,16 @@ JSON only.
 **SCHEMA:**
 ```json
 {
-  "meta_insights": [
+  "isomorphic_proofs": [
     {
-      "theme": "[The Engineering Principle, e.g. Density Management]",
-      "mechanical_anchor": {
+      "constraintDomain": "Mechanical Architecture",
+      "sharedFailureMode": "[The invariant mechanism, e.g. Tolerance Stack-up / Build Fragility]",
+      "physical_anchor": {
         "project": "[Project Name]",
         "constraint": "[The Physical Limit, e.g. 150W in plastic]",
         "solution": "[The Mechanical Fix, e.g. Directed Airflow]"
       },
-      "software_anchor": {
-         "analogy": "[The Software Parallel]",
-         "application": "[How this applies to Antigravity/Agentic Workflows]"
-      },
-      "principle": "[The universal law, e.g. 'You must partition volatile systems.']"
+      "structuralRhyme": "[The explicit mapping to a software/digital analogue, e.g. Dependency Hell]"
     }
   ]
 }
