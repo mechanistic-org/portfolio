@@ -1,0 +1,58 @@
+﻿
+> eriknorris@5.0.0 prebuild
+> npm run audit:frontmatter
+
+
+> eriknorris@5.0.0 audit:frontmatter
+> node scripts/audit_frontmatter.cjs
+
+≡ƒ¢í∩╕Å  Shield 2: Auditing Frontmatter for Stability...
+Γ£à Frontmatter Integrity: 100%
+
+> eriknorris@5.0.0 build
+> node scripts/ci-prebuild.js && astro build
+
+-------------------------------------------------------
+≡ƒöº Pre-Build Environment Check
+-------------------------------------------------------
+≡ƒÆ╗ Environment: Local Development
+≡ƒ¢í∩╕Å  Preserving asset symlinks for local preview.
+-------------------------------------------------------
+[2m18:24:23[22m [34m[@astrojs/cloudflare][39m Enabling sessions with Cloudflare KV with the "SESSION" KV binding.
+[2m18:24:23[22m [34m[@astrojs/cloudflare][39m If you see the error "Invalid binding `SESSION`" in your build output, you need to add the binding to your wrangler config file.
+[2m18:24:24[22m [34m[content][39m Syncing content
+[2m18:24:24[22m [34m[content][39m Synced content
+[2m18:24:24[22m [34m[types][39m Generated [2m558ms[22m
+[2m18:24:24[22m [34m[build][39m output: [34m"server"[39m
+[2m18:24:24[22m [34m[build][39m mode: [34m"server"[39m
+[2m18:24:24[22m [34m[build][39m directory: [34mD:\GitHub\eriknorris\dist\[39m
+[2m18:24:24[22m [34m[build][39m adapter: [32m@astrojs/cloudflare[39m
+[2m18:24:24[22m [34m[build][39m Collecting build info...
+[2m18:24:24[22m [34m[build][39m [32mΓ£ô Completed in 622ms.[39m
+[2m18:24:24[22m [34m[build][39m Building server entrypoints...
+[33m[1m18:24:24[22m [WARN] [vite][39m [33m[plugin vite:esbuild] keystatic.config.tsx: [33mDuplicate key "scars" in object literal[33m
+428|  
+429|  				// Legacy War Stories (Top Level)
+430|  				scars: fields.array(
+   |      ^
+431|  					fields.object({
+432|  						label: fields.text({ label: "Label" }),
+[39m
+node.exe : [31m[1m18:24:27[22m [ERROR] [vite][39m [31mΓ£ù[39m 
+Build failed in 2.88s
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\erik\AppData\Roaming\n 
+...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([31m[1m18:24:...failed in 
+    2.88s:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Could not resolve "../../../styles/global.css" from 
+"src/pages/WIP/mo/dfmea/v12.astro"
+file: D:/GitHub/eriknorris/src/pages/WIP/mo/dfmea/v12.astro
+  [1mStack trace:[22m
+[2m    at getRollupError (file:///D:/GitHub/eriknorris/node_modules/roll
+up/dist/es/shared/parseAst.js:401:41)
+    at ModuleLoader.handleInvalidResolvedId (file:///D:/GitHub/eriknorris
+/node_modules/rollup/dist/es/shared/node-entry.js:21590:24)[22m

@@ -426,19 +426,6 @@ export default config({
 					},
 				),
 
-				// Legacy War Stories (Top Level)
-				scars: fields.array(
-					fields.object({
-						label: fields.text({ label: "Label" }),
-						value: fields.text({ label: "Value" }),
-						description: fields.text({ label: "Description", multiline: true }),
-					}),
-					{
-						label: "War Stories (Legacy Top-Level)",
-						itemLabel: (props) => props.fields.label.value || "Story",
-					},
-				),
-
 				forensic_metrics: fields.object(
 					{
 						financial: fields.text({ label: "Financial (Summary)", multiline: true }),

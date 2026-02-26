@@ -1,0 +1,133 @@
+{
+  "project": "Holy Grail PRD-2",
+  "dashboardVersion": "v7.0",
+  "strategicPivot": "The Denzel Protocol",
+  "nodes": [
+    {
+      "nodeId": "A",
+      "nodeName": "Material Substrate (TriACTIVE PU/PET)",
+      "failures": [
+        {
+          "failureMode": "Physical Transfer",
+          "description": "Soft film separates from rigid liner prematurely; folds in on itself.",
+          "severity": 8,
+          "occurrence": 9,
+          "detection": 8,
+          "rpn": 576,
+          "criticalBlocker": true,
+          "mitigation": "Redesign kinematics to manipulate film exclusively via rigid liner; delay peeling."
+        },
+        {
+          "failureMode": "Adhesive Open-Time",
+          "description": "Dry-install traps airborne dust and >4 air bubbles; delamination occurs.",
+          "severity": 8,
+          "occurrence": 9,
+          "detection": 7,
+          "rpn": 504,
+          "criticalBlocker": true,
+          "mitigation": "Integrate positive-pressure HEPA micro-environment and high-durometer rolling elastomer."
+        },
+        {
+          "failureMode": "Dimensional Distortion",
+          "description": "Film stretches, warps, or suffers tails/nubs exceeding +0.1mm tolerance.",
+          "severity": 7,
+          "occurrence": 8,
+          "detection": 6,
+          "rpn": 336,
+          "criticalBlocker": false,
+          "mitigation": "Implement active tension-control bed and low-friction slip sheets. Tune blade pressure via firmware."
+        }
+      ]
+    },
+    {
+      "nodeId": "B",
+      "nodeName": "Kinematic Hardware (15-inch Box)",
+      "failures": [
+        {
+          "failureMode": "Precision Mechanics",
+          "description": "Film applied off-center >0.5mm; blocks camera/speaker cutouts.",
+          "severity": 8,
+          "occurrence": 8,
+          "detection": 6,
+          "rpn": 384,
+          "criticalBlocker": true,
+          "mitigation": "Implement closed-loop optical registration via Denzel downward vision system."
+        },
+        {
+          "failureMode": "Laminar Wet-Out Stroke",
+          "description": "Linear carriage collides with internal enclosure boundaries before completing stroke.",
+          "severity": 8,
+          "occurrence": 8,
+          "detection": 4,
+          "rpn": 256,
+          "criticalBlocker": true,
+          "mitigation": "Abandon pure linear gantry. Implement articulated/rotational stages folding within the 15-inch Z/Y envelope."
+        }
+      ]
+    },
+    {
+      "nodeId": "C",
+      "nodeName": "Geometry Engine",
+      "failures": [
+        {
+          "failureMode": "Coordinate Mapping",
+          "description": "Toolpath coordinate frame drifts relative to actual device position.",
+          "severity": 8,
+          "occurrence": 6,
+          "detection": 7,
+          "rpn": 336,
+          "criticalBlocker": true,
+          "mitigation": "Continuous closed-loop optical fiducial tracking driven by the Denzel vision system."
+        },
+        {
+          "failureMode": "Template Parsing",
+          "description": "Algorithm attempts to cut isolated internal floating camera holes.",
+          "severity": 7,
+          "occurrence": 5,
+          "detection": 5,
+          "rpn": 175,
+          "criticalBlocker": false,
+          "mitigation": "Deploy cloud-level gatekeeper to convert all cutouts into edge-connected U-shapes."
+        }
+      ]
+    },
+    {
+      "nodeId": "D",
+      "nodeName": "Edge Environment",
+      "failures": [
+        {
+          "failureMode": "Zero-Dexterity Loading",
+          "description": "Frontline worker misloads device, causing collision or misalignment.",
+          "severity": 8,
+          "occurrence": 7,
+          "detection": 6,
+          "rpn": 336,
+          "criticalBlocker": true,
+          "mitigation": "Poka-Yoke 'Magic Slot' loading bay with self-centering V-blocks and keyed cartridges."
+        },
+        {
+          "failureMode": "Power-Free Abort",
+          "description": "Power fails mid-cycle; device trapped inside locked electromechanical clamps.",
+          "severity": 8,
+          "occurrence": 4,
+          "detection": 8,
+          "rpn": 256,
+          "criticalBlocker": true,
+          "mitigation": "Implement normally-open, spring-loaded mechanical clamps defaulting to an open fail-safe."
+        }
+      ]
+    }
+  ],
+  "strategicSequencing": {
+    "phase1": {
+      "title": "Hardware Lock & Data Flywheel (The Fortress)",
+      "strategy": "Accept 15-inch constraints. Execute F2 (Smart Films) via dynamic blade pressure.",
+      "moat": "Deploy Denzel Protocol in 'inert mode' to build proprietary vision dataset from manual AT&T worker inputs."
+    },
+    "phase2": {
+      "title": "Architecture Shift (The Drawbridge)",
+      "strategy": "Abandon 15-inch box, $5,000 cost cap, and 75dB limits. Execute F1 (Automation) and F3 (3D Geometry).",
+      "moat": "Transition to fully autonomous Class-2 freestanding floor kiosk monitored by specialized Service Network Professionals."
+    }
+  }
+}
