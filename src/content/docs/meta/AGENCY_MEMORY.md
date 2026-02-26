@@ -26,11 +26,11 @@ description: "The Persistent Short-Term Memory store for the AI Agent. This file
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **Fixing C24 Image Loading Bug & Asset Proxy Mechanics**
-- **Next Step:** Await project onboarding or additional forensic extraction.
-- **Context:** The Telemetry Drawer and C24 images are now loading properly without 404s or connection refusals.
-- **Action Item:** Return control to the User.
-- **Recent Win:** Identified and eliminated a massive Node Event Loop block inside `src/pages/assets/[...path].ts` that caused Vite dev server to crash (`ERR_CONNECTION_REFUSED`) under burst loads (like C24's 50-image gallery).
+- **Active Task:** **MCP Integration (NotebookLM Extraction Engine)**
+- **Next Step:** Expand `mcp_echo.py` to connect NotebookLM and access 29 agentic skills.
+- **Context:** V19 DFMEA Dashboard (Mobile Outfitters) is fully deployed. The prototype Zod-Echo MCP server handshake is validated.
+- **Action Item:** Move MCP orchestration to its proper home (`eriknorris.com`) and focus on automated extraction pipelines tomorrow AM.
+- **Recent Win:** Restored V11 Content to the V19 DFMEA Dashboard, fixed Keystatic duplicates, orchestrated the Zod-Echo prototype server, and proved the MCP tool-calling execution loop.
 - **Active Roadmap:** [`src/content/docs/project/ROADMAP_ACTIVE.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/ROADMAP_ACTIVE.md) (The Horizon)
 - **Mining Log:** [`src/content/docs/project/MINING_LOG.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/MINING_LOG.md) (The Re-Hydration Tracker)
 - **Project Index:** [`src/content/prompts/PROJECT_INDEX.md`](file:///d:/GitHub/eriknorris/src/content/prompts/PROJECT_INDEX.md) (The Registry)
@@ -108,6 +108,10 @@ description: "The Persistent Short-Term Memory store for the AI Agent. This file
 * **Key Decision (Viz-Audio):** **"The SonicHeartbeat Standard"** - Idle = Pulse (Cycle), Active = Full EQ. Icon = Speaker (not Headphone).
 * **Key Decision (SEO):** **"The Answer Engine Verification"** - We are AEO Ready. JSON-LD for Projects is the structural key for Knowledge Graph entity recognition.
 * **Key Decision (Aesthetics):** **"The Iambic Cadence"** - Artificial strobing is rejected. Active visualizations must tune to "Human Breath" rhythms (~0.8s, EaseInOut) to align with the "Forensic/Organic" voice.
+
+- **Critical Learning (MCP Pipeline):** **"Extraction over Hydration"** - While automated hydration is a valid use case for MCP, the primary objective for linking NotebookLM to MCP is **Automated Extraction** (gaining access to 29 Agentic Skills).
+- **Critical Learning (Architecture):** **"The MCP Consumer Law"** - `eriknorris.com` is the major consumer/user of the MCP server, not external template directories (like `AG-MCP_working`). Future orchestration prompts and extraction logic must be localized to the primary portfolio.
+- **Critical Learning (Architecture):** **"The Prompt Conflation Trap"** - Never mix system orchestration prompts with prospect/project data (e.g., `NLM_Prospect_Meeting_Prompts.md`). Keep architecture and data strictly separated to avoid context poisoning.
 
 * **Key Decision (Assets):** **"The Fake SVG Pivot"** - The `EN_logo_1200` series are technically SVG wrappers around high-res rendered PNGs (`d:\portfolio\...\ _fake-SVGS____`). We accepted this as the **Source of Truth** (Sovereign) because the logo is natively 3D and has no perfect 2D vector equivalent. Do NOT try to replace them with wireframes.
 

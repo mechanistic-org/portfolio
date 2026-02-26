@@ -259,3 +259,13 @@ These vectors are explicitly mined using `deep_research_prompt_v1.txt`:
 - **[PROTOCOL] AEO Telemetry:** Established the "True Evaluation" protocol: testing infrastructure requires Zero-Context Retrieval (Perplexity Pro), Google Knowledge Graph validation (Rich Results), and headless CLI probing (`curl`).
 - **[STRATEGY] Scheduled CC Burst:** Mapped the future state of the ecosystem: NLI will be maintained until the legacy project portfolio reaches a ready-state baseline, after which 'Compiled Context' (XML) will run in automated, scripted bursts yielding a mathematically pure knowledge graph.
 - **[STATUS] Ecosystem:** **STABLE**. Safely tested and deployed "The Architect Narrative" to production via Cloudflare Pages.
+
+## 📝 Session Log: 2026-02-25 (MCP & Orchestration Engine)
+
+**Objective:** V19 Dashboard deployment, establish MCP integration foundation (Zod Echo Server), and clarify NotebookLM extraction boundaries.
+
+- **[TECH] Dashboard Deployment:** V19 DFMEA Dashboard successfully pushed to `eriknorris.com/WIP/mo/dfmea/dashboard`. Restored all truncated logic from V11. Fixed Keystatic schema duplicates blocking production builds.
+- **[TECH] MCP Architecture:** Scaffolded `mcp_echo.py` test server. Validated the `verify_frontmatter_schema` tool loop via IDE.
+- **[META] Project Trajectory:** MCP integration continues as an active project. Primary goals: connect to NotebookLM and access 29 skills. Focus is heavily on **Automated Extraction** over automated hydration.
+- **[CRITICAL] Prompt Conflation:** `NLM_Prospect_Meeting_Prompts.md` was identified as a conflation. It contains project-specific data, not system orchestration prompts.
+- **[CRITICAL] Server Placement:** `D:\projects\AG-MCP_working\NLM_MCP_Orchestration_Prompts.md` is an example use case but lives in the wrong place. The primary consumer for MCP tools and workflows is `eriknorris.com`.
