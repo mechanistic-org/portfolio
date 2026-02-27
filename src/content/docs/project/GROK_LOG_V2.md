@@ -326,3 +326,23 @@ sidebar:
 1.  **NO DYNAMIC IMPORTS IN LOOPS:** Do not execute `await import("node:fs")` or similar Node API imports inside high-frequency endpoints or loops.
 2.  **THE SINGLETON CACHE:** If you must use dynamic imports to prevent Worker bundling errors (e.g. `node:fs` leaking to Cloudflare), cache them at the module level (e.g. `let devFs: any = null;`).
 3.  **THE EVENT LOOP:** A burst of 50 simultaneous dynamic imports blocks the Node Event Loop, forcing the server to silently drop connections without throwing standard 500 errors.
+
+---
+
+## ⚡ XXVIII. The Law of the Edge Runtime Trap (Node Isolation)
+
+**Context:** Cloudflare's V8 Edge Runtime strictly limits Node.js core modules (`fs`, `path`) and native binaries (like `sharp`). The Architect must decouple the "Glass" (Astro Edge UI) from the "Orchestrator" (MCP/Node Backend).
+
+1.  **EDGE GLASS:** Host the fast, lightweight UI on the Edge (Cloudflare Pages).
+2.  **HEAVY ORCHESTRATION:** Isolate all heavy Agentic/MCP orchestration on a dedicated Node.js backend container or environment.
+3.  **NO SHARP ON EDGE:** Ensure `imageService: "compile"` is passed into the `cloudflare()` adapter configuration to prevent the environment from attempting to pull in `sharp`.
+
+---
+
+## 🛑 XXIX. The Law of Layered Complexity (V22 DFMEA Philosophy)
+
+**Context:** Evolving the DFMEA Dashboard from V21 to V22 while retaining the established core.
+
+1.  **NO STRIPPING COMPLEXITY:** The dashboard's evolution must never strip down core complexity.
+2.  **ADDITIVE LAYERS:** Iterations add layers (Governance Engine, Organizational DFMEA, Validation Backfill, and Telemetry Flywheel) onto the established V21 baseline structure.
+3.  **ACTIVE GOVERNANCE:** The goal is transitioning from a "passive physics post-mortem tool" into an "active behavioral governance constraint system."

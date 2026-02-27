@@ -147,6 +147,18 @@ These scripts drive the "Forensic Data Factory."
   2.  **Escape Upstream:** Change `&lt;0.5mm` to `\<0.5mm` in the `.txt` file.
   3.  **Re-Hydrate:** Run the script to propagate the fix safely.
 
+### 🔴 "The EEXIST Directory Trap" (Static Prerender)
+
+- **Symptom:** Astro build throws `EEXIST: file already exists, mkdir 'dist/<route>'` during the static prerendering phase.
+- **Cause:** A raw binary or static file in the `public/` directory shares the exact same name as your destination Astro route folder (e.g., a file named `public/dfmea` colliding with `src/pages/dfmea/index.astro`).
+- **Fix:** Remove or rename the colliding string in the `public` folder so it doesn't block the static HTML generator from creating the route directory.
+
+### 🔴 "The Build Log Mask" (PowerShell Exception)
+
+- **Symptom:** Fatal `npm run build` errors manifest as unreadable, truncated, or masked PowerShell exceptions (`NativeCommandError`).
+- **Cause:** PowerShell corrupts massive `stderr` streams typical in JavaScript bundlers.
+- **Fix:** Bypass PowerShell's `stderr` parsing by executing the build via CMD and piping output entirely to a text file: `cmd.exe /c "npm run build > build_log_cmd.txt 2>&1"`.
+
 ### 🔴 "Hook Violation" White Screen
 
 - **Symptom:** Page renders white or component fails silently. Console says `Rendered fewer hooks than expected`.
@@ -510,5 +522,19 @@ To prevent "Stacking Wars", we vertically partition the Z-space into strict flig
 ### 🔴 "ResViz Stale Closure" (React/D3)
 
 - **Symptom:** `CRITICAL: Active Node NOT FOUND`.
-- **Cause:** `useMemo` or `useEffect` missing dependencies (e.g., `[rawNodes]`), causing the D3 simulation to reference an old array pointer.
 - **Fix:** Audit dependency arrays strictly.
+
+### 🔴 "Domain Routing & SEO Governance" (The 301 Law)
+
+- **Context:** Deciding how to route ecosystem satellites (`mechanistic`, `moreplay`) to the central identity.
+- **Protocol:** Always use server-side `Astro.redirect("https://eriknorris.com", 301)` for domain funnels instead of visual doorway/splash pages. This consolidates entity authority (link juice), provides a frictionless UX, and actively avoids Google "Soft 404" indexing penalties.
+
+### 🔴 "Favicon Sovereignty" (Ecosystem Satellites)
+
+- **Context:** Managing favicons for secondary domains without complex `.ico` generators.
+- **Protocol:** Place raw generated PNGs (e.g., `moreplay-favicon.png`) in the `public/` directory and explicitly define `<link rel="icon" type="image/png" href="/your-image.png" />` in the layout's `<head>`.
+
+### 🔴 "UI Parameterization" (Version Control)
+
+- **Context:** Hardcoded version strings (e.g., "v21", "v22") scattered across React/Astro layouts.
+- **Protocol:** Never hardcode version strings. Always retrieve `data.dashboardVersion` dynamically from the JSON schema payload to ensure centralized, data-driven truth.

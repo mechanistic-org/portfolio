@@ -269,3 +269,12 @@ These vectors are explicitly mined using `deep_research_prompt_v1.txt`:
 - **[META] Project Trajectory:** MCP integration continues as an active project. Primary goals: connect to NotebookLM and access 29 skills. Focus is heavily on **Automated Extraction** over automated hydration.
 - **[CRITICAL] Prompt Conflation:** `NLM_Prospect_Meeting_Prompts.md` was identified as a conflation. It contains project-specific data, not system orchestration prompts.
 - **[CRITICAL] Server Placement:** `D:\projects\AG-MCP_working\NLM_MCP_Orchestration_Prompts.md` is an example use case but lives in the wrong place. The primary consumer for MCP tools and workflows is `eriknorris.com`.
+
+## 📝 Session Log: 2026-02-27 (V22 DFMEA & Domain Routing)
+
+**Objective:** Deploy ecosystem satellites (`mechanistic`, `moreplay`) with custom favicons and parameterize the V22 DFMEA Dashboard.
+
+- **[TECH] Dashboard V22 Refactor:** `DashboardLayoutV22.tsx` successfully refactored to restore the complex V21 spatial layout while embedding V22 systemic capabilities.
+- **[TECH] Version Parameterization:** Escaped hardcoded version strings ("V21") to pull dynamically from JSON schema `data.dashboardVersion`.
+- **[TECH] Boundary Routing:** `mechanistic` and `moreplay` projects successfully deployed to the Edge with proper 301 redirects to `eriknorris.com`.
+- **[ASSET] Favicon Injection:** Bypassed standard `.ico` generators by dropping raw PNGs into `public/` and explicitly linking them in `index.astro` and `BaseHead.astro`.

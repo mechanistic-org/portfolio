@@ -26,11 +26,10 @@ description: "The Persistent Short-Term Memory store for the AI Agent. This file
 
 ## 📍 Current Focus State (The "Cursor")
 
-- **Active Task:** **MCP Integration (NotebookLM Extraction Engine)**
-- **Next Step:** Expand `mcp_echo.py` to connect NotebookLM and access 29 agentic skills.
-- **Context:** V19 DFMEA Dashboard (Mobile Outfitters) is fully deployed. The prototype Zod-Echo MCP server handshake is validated.
-- **Action Item:** Move MCP orchestration to its proper home (`eriknorris.com`) and focus on automated extraction pipelines tomorrow AM.
-- **Recent Win:** Restored V11 Content to the V19 DFMEA Dashboard, fixed Keystatic duplicates, orchestrated the Zod-Echo prototype server, and proved the MCP tool-calling execution loop.
+- **Active Task:** **Founder Presentation Orchestration**
+- **Next Step:** Proceed with generating "Forensic Bolus" prompts and NotebookLM Orchestration collateral for the upcoming Founder Presentation.
+- **Context:** The scaffolded Mechanical tier (`mechanistic`, `moreplay`, `mootmoat`) are safely integrated onto the Cloudflare Edge. All V22 Dashboard UI mapping, Asset path resolution, and Domain redirects are fully resolved and deployed.
+- **Recent Win:** Deployed both new repositories directly to Cloudflare Pages with custom favicons and active 301 server-side routing to `eriknorris.com`. Dashboard Layout V22 parameterized and live.
 - **Active Roadmap:** [`src/content/docs/project/ROADMAP_ACTIVE.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/ROADMAP_ACTIVE.md) (The Horizon)
 - **Mining Log:** [`src/content/docs/project/MINING_LOG.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/MINING_LOG.md) (The Re-Hydration Tracker)
 - **Project Index:** [`src/content/prompts/PROJECT_INDEX.md`](file:///d:/GitHub/eriknorris/src/content/prompts/PROJECT_INDEX.md) (The Registry)
