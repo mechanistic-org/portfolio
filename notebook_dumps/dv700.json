@@ -1,9 +1,0 @@
-{
-    "id": "dv700",
-    "forensic_summary": {
-        "trigger": "High field failure rates for M700/DV700 vaults due to 'disc unreadable' errors, jammed discs, and 'line down' production stops caused by cosmetic cover defects.",
-        "intervention": "Erik Norris led a multi-threaded investigation, redesigning the pinch roller assembly (solid motor mounts, extended gears), implementing new inner disc guides to prevent scratching, and revising cosmetic inspection standards to unblock production.",
-        "result": "Identification of root causes (e.g., abrasive dust, missing e-clips, 'potato chipped' carousels) and release of corrective tooling/parts to stabilize the fleet."
-    },
-    "_schema_version": "v2.0"
-}

@@ -1,8 +1,0 @@
-{
-    "id": "avegant-glyph",
-    "forensic_summary": {
-        "trigger": "Catastrophic yield collapse in Mass Production. Total RTY (Rolling Throughput Yield) plummeted to 35.40% in Week 10. The optical engine was sieged by 'impurities' (dust/particles), specifically 91 units (41%) failing for DMD dust.",
-        "intervention": "Implementation of a rigorous 'Cleanroom' protocol and specific optical inspection stations (O4/O7). Engineers were forced to manually 'wipe DMD clean' under 20x magnification microscopes. A 'Blue dot' defect required investigating the diffuser injection molding process.",
-        "result": "Yield recovery was slow and painful. By Week 16, Cleanroom RTY crawled to 70.97%, but total yield remained volatile, hitting 0.00% in Weeks 15 and 29."
-    }
-}

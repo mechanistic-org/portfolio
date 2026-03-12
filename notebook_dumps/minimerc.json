@@ -1,9 +1,0 @@
-{
-    "id": "minimerc",
-    "forensic_summary": {
-        "trigger": "Urgent need for a 'Mercury Low Cost' (MLC) unit requiring significant mechanical compaction and thermal/EMI resolution. -> The",
-        "intervention": "Redesigned HDD mounting bracket to reduce depth to 265mm and resolved complex vent/EMI shielding issues in the Pro/E database. -> The",
-        "result": "Database ready for release and final prototype photos delivered, despite exceeding initial time estimates (58 hours logged)."
-    },
-    "_schema_version": "v2.0"
-}

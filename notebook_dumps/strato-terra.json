@@ -1,9 +1,0 @@
-{
-    "id": "strato-terra",
-    "forensic_summary": {
-        "trigger": "Legacy Data (Migration)",
-        "intervention": "Legacy Data (Migration)",
-        "result": "Scaffold: The Terra movie server, designing for high-density HDD storage and 24/7 reliability."
-    },
-    "_schema_version": "v2.0"
-}
