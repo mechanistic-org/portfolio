@@ -1,0 +1,142 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "complexity_vector": {
+    "part_count_growth": [
+      {
+        "count": 10,
+        "date": "2014-10",
+        "phase": "Concept / Proto 1"
+      },
+      {
+        "count": 25,
+        "date": "2015-03",
+        "phase": "Proto 2 / EVT"
+      },
+      {
+        "count": 2000,
+        "date": "2015-04",
+        "phase": "MP (Mass Production)"
+      },
+      {
+        "count": 5000,
+        "date": "2016",
+        "phase": "MP (Year 2 Forecast)"
+      },
+      {
+        "count": 7000,
+        "date": "2017",
+        "phase": "MP (Year 3 Forecast)"
+      }
+    ],
+    "process_density": [
+      {
+        "complexity_score": 8,
+        "material": "PC-ABS / Silicone",
+        "part_name": "MECH ASSY, HDD Rail",
+        "steps": [
+          "Double Shot Molding",
+          "Assembly with Elastomer",
+          "Vibration Damping Integration"
+        ]
+      },
+      {
+        "complexity_score": 7,
+        "material": "Sheet Metal (Pre-plate/Alloy)",
+        "part_name": "MECH ASSY, CHASSIS, Metal Base",
+        "steps": [
+          "Laser/Punch",
+          "Form (Press Brake)",
+          "Hardware Insertion (PEMs)",
+          "Riveting (multiple types)",
+          "Paint (Dupont LM564 Silver Satin)"
+        ]
+      },
+      {
+        "complexity_score": 9,
+        "material": "SABIC CYCOLOY 6250",
+        "part_name": "Faceplate / Bezel Frame",
+        "steps": [
+          "Injection Molding",
+          "Paint (Dupont LM564 / Cardinal)",
+          "Texture (MT11002)",
+          "Heat Staking",
+          "Pad Printing (potential)"
+        ]
+      }
+    ],
+    "supply_chain_nodes": [
+      {
+        "location": "San Jose, CA",
+        "role": "Sheet Metal Proto",
+        "vendor": "Mass Precision"
+      },
+      {
+        "location": "Taiwan",
+        "role": "Plastics Injection Molding",
+        "vendor": "Yomura"
+      },
+      {
+        "location": "Milpitas, CA",
+        "role": "FATP (NPI Build)",
+        "vendor": "Hunter Technologies"
+      },
+      {
+        "location": "Guadalajara, Mexico",
+        "role": "Legacy FATP / Sheet Metal",
+        "vendor": "Sanmina"
+      }
+    ],
+    "tooling_chain": [
+      {
+        "cost_impact": "High ($37,500)",
+        "lead_time_weeks": 6.5,
+        "tool_name": "HDD Rail Mold (Double Shot)",
+        "type": "Hard Tooling",
+        "vendor": "Yomura (Taiwan)"
+      },
+      {
+        "cost_impact": "High ($24,500)",
+        "lead_time_weeks": 5,
+        "tool_name": "Frame Bezel Mold",
+        "type": "Hard Tooling",
+        "vendor": "Yomura (Taiwan)"
+      },
+      {
+        "cost_impact": "Medium ($25,800)",
+        "lead_time_weeks": 5,
+        "tool_name": "Faceplate Carrier Mold",
+        "type": "Hard Tooling",
+        "vendor": "Yomura (Taiwan)"
+      },
+      {
+        "cost_impact": "Low",
+        "lead_time_weeks": 2,
+        "tool_name": "Chassis Forming Tools",
+        "type": "Soft Tooling",
+        "vendor": "Mass Precision / AFT"
+      }
+    ]
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [],
+  "phase_stats": {
+    "Design": 0,
+    "Engineering": 0,
+    "Production": 0,
+    "Strategy": 0
+  },
+  "slug": "sundance",
+  "tier": 3
+}

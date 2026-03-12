@@ -1,0 +1,29 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "label": "Market Entry",
+      "value": "TBD"
+    },
+    "governance": {
+      "dcos": 0,
+      "ecos": []
+    },
+    "process": {
+      "label": "Development",
+      "value": "Linear"
+    }
+  },
+  "forensic_summary": {
+    "intervention": "Engineered the FOH Rack and Sidecar chassis, designing custom shock-mounts and thermal solutions for 110F+ environments.",
+    "result": "Successfully launched the Venue D-Show system, which became the industry standard for touring acts (e.g., U2, Rush).",
+    "trigger": "Digidesign's strategic entry into the Live Sound market, requiring robust structural engineering for touring rigs."
+  },
+  "toolchain": [
+    "Pro/ENGINEER"
+  ],
+  "hxo_ready": true,
+  "hydration_status": "full",
+  "slug": "venue-live-sound",
+  "tier": 1
+}

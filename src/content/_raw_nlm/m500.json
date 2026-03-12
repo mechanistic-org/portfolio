@@ -1,0 +1,29 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://kaleidescape.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 40,
+    "Engineering": 13.7,
+    "Production": 12.7,
+    "Strategy": 4.5
+  },
+  "slug": "m500",
+  "tier": 3
+}

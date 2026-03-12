@@ -1,0 +1,29 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://avid.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 67.3,
+    "Engineering": 23,
+    "Production": 21.4,
+    "Strategy": 7.7
+  },
+  "slug": "rack-003",
+  "tier": 3
+}

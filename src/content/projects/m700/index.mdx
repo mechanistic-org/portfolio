@@ -1,90 +1,6 @@
 ---
-bom:
-  - label: Pinch Roller Spring
-    value: Dual radial spring balance bar [13]
-  - label: Roller Shaft
-    value: Reinforced/Thicker Shaft with Pillow Block Extension [4]
-  - label: Tinnerman Clip
-    value: C4893-017 (Stud Receiver) [14]
-cast:
-  - name: Erik Norris
-    org: Kaleidescape [3]
-    role: Lead Mechanical Engineer / The Architect
-  - name: Nathan Forster
-    org: Kaleidescape [15]
-    role: Hardware Systems Engineer
-  - name: Somboun Thavy
-    org: Kaleidescape [16]
-    role: Technician / Run-In Test
 category: module_subsystem
 client: []
-complexity_vector:
-  part_count_growth:
-    - count: 1
-      date: 2008-07
-      phase: Concept / Soft Tooling
-    - count: 20
-      date: 2009-03
-      phase: EVT (Eng Validation)
-    - count: 3364
-      date: 2014-02
-      phase: MP (Mass Production)
-  process_density:
-    - complexity_score: 9
-      material: PG-22 / PG-33 Plastic
-      part_name: Carousel (320 Slot)
-      steps:
-        - Injection Molding (Yomura)
-        - Texture MT-11020 Application
-        - Cooling/Fixture Setting (Critical for Warp Control)
-        - Inspection (Gate/Ejector Pin)
-    - complexity_score: 8
-      material: Rubber Sleeve / Steel Shaft
-      part_name: Pinch Roller Assembly
-      steps:
-        - Molding
-        - Coating Application (Friction enhancement)
-        - Shaft Insertion
-        - Spring Tensioning (Dual Radial Balance Bar)
-        - Run-In Testing (Torque/Slip)
-    - complexity_score: 6
-      material: Sheet Metal
-      part_name: Base Chassis
-      steps:
-        - Stamping (Hard Tooling)
-        - Forming (Mole-hills)
-        - PEM Insertion (Clinch Nuts)
-        - Painting
-        - Riveting
-  supply_chain_nodes:
-    - location: Guadalajara, Mexico
-      role: FATP (Final Assembly)
-      vendor: Sanmina
-    - location: Taipei, Taiwan
-      role: Plastics Injection (Carousel)
-      vendor: Yomura
-    - location: China
-      role: Sheet Metal Fab
-      vendor: Mass
-    - location: Waterloo, ON
-      role: Engineering / FA Lab
-      vendor: Kaleidescape
-  tooling_chain:
-    - cost_impact: High
-      lead_time_weeks: 8
-      tool_name: Carousel Mold
-      type: Hard Tooling (Injection)
-      vendor: Yomura (Taiwan)
-    - cost_impact: Med (ROI @ 1500 units)
-      lead_time_weeks: 12
-      tool_name: Chassis Progressive Die
-      type: Hard Tooling (Staged)
-      vendor: Mass / China
-    - cost_impact: Low
-      lead_time_weeks: 4
-      tool_name: Roller Shaft Extrusion/Turn
-      type: Soft Tooling -> Hard
-      vendor: RubberTek
 cyberspace:
   enable: true
   layout: linear
@@ -95,15 +11,15 @@ cyberspace:
         layout: masonry
         scattered: true
       deck:
-        - body:
-            Static electricity and sensor blindness caused discs to disappear inside
-            the vault.
-          subtitle: ""
+        - body: >-
+            Static electricity and sensor blindness caused discs to disappear
+            inside the vault.
+          subtitle: ''
           title: The Crisis
-        - body:
-            Redesigned the pinch roller assembly with solid mounts and double-strength
-            springs.
-          subtitle: ""
+        - body: >-
+            Redesigned the pinch roller assembly with solid mounts and
+            double-strength springs.
+          subtitle: ''
           title: The Fix
       featuredIndices: []
       id: 01_vanishing_discs
@@ -116,101 +32,37 @@ cyberspace:
         scattered: true
       deck:
         - body: EMI gaskets deformed into the slot path.
-          subtitle: ""
+          subtitle: ''
           title: The Issue
-        - body: Dealers had to use a specific shim (butter knife) to clear the obstruction.
-          subtitle: ""
+        - body: >-
+            Dealers had to use a specific shim (butter knife) to clear the
+            obstruction.
+          subtitle: ''
           title: The Workaround
       featuredIndices: []
       id: 02_butter_knife
       title: Butter Knife
       type: gallery
-date: 2010-08-01 00:00:00+00:00
+date: 2010-08-01T00:00:00.000Z
 description: KVAULT-M700 Disc Vault
 documents: []
 draft: false
 duration: Active
 employer: kaleidescape
-endDate: 2011-07-01 00:00:00+00:00
-forensic_metrics:
-  financial: $24 per unit savings on chassis costs via hard tooling transition [1]
-  governance: Weekly Reliability Investigation / High-touch 'Run-In' test cycle [2]
-  process:
-    Analyzed 3,000,000+ disc injection cycles to isolate 10% failure threshold
-    [1]
-forensic_summary:
-  intervention:
-    "Complete mechanical subsystem redesign: Dual radial spring balance
-    bars, solid motor mounts, and disc guide retrofit [1, 4]"
-  result:
-    Eliminated 100% of 'dirty roller' slippage failures and recovered 100% of
-    questioned carousel inventory [1]
-  trigger:
-    Catastrophic field failures (disc jams, scratching, 'unreadable' media)
-    due to tolerance drift [3]
+endDate: 2011-07-01T00:00:00.000Z
 gallery: []
-hxo_ready: false
-hydration_status: executive
 industry: consumer_electronics
-isomorphics:
-  - hardware_point:
-      Surface coatings (chemical friction) failed under environmental
-      stress (dust); Mechanical force (springs/geometry) proved robust [4, 5]
-    label: Friction vs. Force
-    principle:
-      Mechanical determinism supercedes material coefficient reliance in dirty
-      environments.
-    software_point: Firmware retry logic vs. physical sensor state truth [4]
-links:
-  - url: https://kaleidescape.com
-  - name: "Deep Dive: 320-Slot Carousel"
-    url: /projects/320-slot-optical-carousel
-metrics:
-  financial:
-    costOfGoodsSold: []
-    margins: []
-    toolingActual: 0
-    toolingBudget: 0
-  process:
-    engineeringChangeOrders: []
-  quotes:
-    - Disc vanished into thin air from slot 1 [7]
-    - Potato chipped about 3-4 mm which doesn’t seem too bad... but they were worse
-      than the top ones. [4]
-    - I'll start on the first one ASAP tomorrow. I don't want to impede to normal flow
-      of repairs... [20]
-phase_stats:
-  Design: 147
-  Engineering: 50.1
-  Production: 46.8
-  Strategy: 16.7
 presentation_mode: deep_dive
 production: production
 productionScale: one_off
-scars:
-  - description:
-      Identified 'potato chipped' warping in 200-series carousel slots; developed
-      inspection criteria to validate inventory rather than scrap it [1, 4]
-    label: The Potato Chip Carousel
-    value: 3-4mm Warp
-  - description:
-      Discovered coated rollers had high initial grip but failed rapidly
-      with dust; reverted to mechanical force solution (stronger springs) over surface
-      friction [5, 6]
-    label: The Dirty Roller Friction Drop
-    value: 4x Force Degradation
-  - description:
-      Root caused 'Disc vanished into thin air' log errors to sensor misalignment
-      and 'wringing' effect between static-charged discs [7, 8]
-    label: The Vanishing Disc
-    value: Log Error 1410140
-slug: m700
-tags: [Mechanism, Yield, Process, Leadership]
+tags:
+  - Mechanism
+  - Yield
+  - Leadership
 theme: hyperspace
-tier: 3
 title: M700 Vesta Vault Recovery
 tools: []
-teamSize: 4 (Erik Norris, Nathan Forster, Rob Wudrick, Somboun Thavy)
+teamSize: '4 (Erik Norris, Nathan Forster, Rob Wudrick, Somboun Thavy)'
 ---
 
 M700 / Vesta Project Forensic Report

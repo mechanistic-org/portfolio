@@ -1,161 +1,31 @@
 ---
-audio_url: /assets/wall-plates/wall-plates-briefing.m4a
-bom:
-- label: Waldo 1-4
-  value: Wall Plate Gang Configurations [10]
-- label: ASSY, CHASSIS
-  value: Black, Sativa [11]
-- label: Die Cast Chassis
-  value: ADC12 Alloy [12]
-cast:
-- name: Erik Norris
-  org: NOON
-  role: The Architect
-- name: Ricky Lin
-  org: NOON/Vendor [14]
-  role: Mechanical Engineer
-- name: Yvonne Lai
-  org: NOON/Vendor [14]
-  role: Mechanical Engineer
-- name: Eddie Liang
-  org: NOON/Vendor [15]
-  role: Mechanical Engineer
 category: consumer_electronics
-complexity_vector:
-  part_count_growth:
-  - count: 0
-    date: 2016-09
-    phase: Concept
-  - count: 0
-    date: 2017-02
-    phase: EVT1 (Eng Validation)
-  - count: 288
-    date: 2017-04
-    phase: EVT2 (Design Validation)
-  - count: 0
-    date: 2017-06
-    phase: PVT (Prod Validation)
-  - count: 0
-    date: 2017-08
-    phase: MP (Mass Production)
-  process_density:
-  - complexity_score: 8
-    material: Polycarbonate (PC) / Pantone PQ-11-4800TCX
-    part_name: Waldo Wall Plate (Cover)
-    steps:
-    - Injection Molding (Custom Tool)
-    - In-Mold Decorating (Rear Logo)
-    - Matte UV Coating (Satin VDI 15)
-    - 'Protective Film Application (Crit: Glue Residue)'
-  - complexity_score: 6
-    material: Steel
-    part_name: Waldo Chassis
-    steps:
-    - Stamping (Custom Die)
-    - Deburring (Burr removal)
-    - Black Zinc Plating
-    - Laser Etch (Graphics Relocation)
-  supply_chain_nodes:
-  - location: China (Inferred)
-    role: CM / Integrator
-    vendor: FIH
-  - location: Global
-    role: Adhesive Supplier
-    vendor: 3M (Transition 467 -> 300LSE)
-  tooling_chain:
-  - cost_impact: High
-    lead_time_weeks: 0
-    tool_name: Cover Plate Injection Mold
-    type: Hard Tooling
-    vendor: FIH (Foxconn)
-  - cost_impact: Med
-    lead_time_weeks: 0
-    tool_name: Chassis Stamping Die
-    type: Hard Tooling
-    vendor: FIH (Foxconn)
 cyberspace:
   enable: true
   layout: linear
   stickies: []
-date: 2016-12-12
+date: 2016-12-12T00:00:00.000Z
 draft: false
 employer: noon
-endDate: 2017-08-31
-forensic_metrics:
-  financial: Scrap rate tracking across 4 shipments [1]
-  governance: Sprint EVT1 Validation to EVT2 Dev [3]
-  process: 10,800 Polishing hours vs 9,000 CNC hours [2]
-forensic_summary:
-  intervention: Tolerance stackup analysis (RSS vs Worst Case) for snap locations
-    [5]
-  result: Crush Test passed 30kg load [6]
-  trigger: Protective film floated up (Waldo), glue remain on the surface [4]
+endDate: 2017-08-31T00:00:00.000Z
 gallery: []
-hxo_ready: true
-hydration_status: full
 industry: consumer_electronics
-isomorphics:
-- hardware_point: Snap location tolerance stackup (RSS 0.48mm) [9]
-  label: Interference
-  principle: Defined Interface Contracts
-  software_point: API endpoint strict typing
 listed: true
-metrics:
-  financial:
-    margins:
-    - Compressed chassis tooling lead times to 6 weeks for EVT1
-  governance:
-    dcdCount: 0
-    ecos:
-    - 'Tooling Redline: Square Dimples'
-  interventions:
-    count: 5
-    label: Critical Saves
-    value: 5
-  process:
-    yield:
-    - Tightened injection molding tolerances to +/- 0.05mm
-  quotes:
-  - Snaps will always go through holes [5]
-  - Protective film floated up(Elvis), glue remain on the surface [4]
-  - Sprint EVT1 Validation and EVT2 Dev [3]
-phase_stats:
-  Design: 20
-  Engineering: 50
-  Production: 30
-  Strategy: 0
 presentation_mode: flagship
 primary_home: mech
 productionScale: series
-scars:
-- description: Protective film adhesive failure left residue on cosmetic surfaces,
-    requiring manual visual inspection intervention [4, 7].
-  label: The Glue Residue Crisis
-  value: Cosmetic Yield Kill
-- description: White and Black labels failed adhesion tests (W1-W3, B1-B2) requiring
-    immediate process revision [8].
-  label: Label Adhesion Failure
-  value: 5/5 FAIL
-- description: Worst Case (WC) tolerance analysis of 0.64mm ensured snaps 'always
-    go through holes' despite chassis variations [5].
-  label: Snap Fit Tolerance
-  value: 0.64mm WC
-slug: wall-plates
-tags: [Process, Yield, Cost_Down, Crisis, Materials]
+tags:
+  - Yield
+  - Cost_Down
+  - Crisis
 targets:
-- main
-- mech
-teamSize: 7 (Erik Norris, Ricky Lin, Yvonne Lai, Eddie Liang, Alvin, Kelvin, Benson)
+  - main
+  - mech
+teamSize: >-
+  7 (Erik Norris, Ricky Lin, Yvonne Lai, Eddie Liang, Alvin, Kelvin, Benson)
   [13-15]
 theme: hyperspace
-tier: 1
 title: Wall Plate (Waldo)
-toolchain:
-- Creo (CAD Modeling)
-- Excel (Tolerance Stackup Analysis)
-- 'JIRA (Issue Tracking: WAL-10, WAL-15, WAL-22, WAL-23)'
-- FIH (Manufacturing Vendor)
-- Memtech (Injection Molding)
 ---
 
 Waldo Wall Plates and Chassis Forensic Report

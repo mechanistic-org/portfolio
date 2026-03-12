@@ -1,269 +1,112 @@
 ---
-bom:
-- label: 501-1092-00
-  value: BASE, Chassis - Orpheus [11]
-- label: 501-1106-00
-  value: Drive Cage, Inner, 2.5 inch Drives [16]
-- label: 323-1102-00
-  value: 'Custom #2-56 Stud [17]'
-- label: 520-1066-00
-  value: Cover [18]
-- label: 327-1008-00
-  value: EMI Gasket, Kontron Mobo [11]
-cast:
-- name: Erik Norris
-  org: Kaleidescape
-  role: The Architect / Senior Mechanical Design Engineer
-- name: Michael Clader
-  org: Kaleidescape
-  role: Director, Manufacturing Engineering
-- name: Jonathan Burke
-  org: Argyle Design
-  role: Industrial Design / Mechanical
-- name: Cristina Soto
-  org: Sanmina-SCI
-  role: Program Manager
-- name: Weddy Wang
-  org: Steman Co., Ltd.
-  role: Vendor (Plastics)
 category: home_entertainment
 client: []
-complexity_vector:
-  part_count_growth:
-  - count: 15
-    date: 2008-05
-    phase: Proto 1 (Mass Precision)
-  - count: 50
-    date: 2009-02
-    phase: Pilot (Sanmina)
-  - count: 300
-    date: 2009-03
-    phase: Production Run 1
-  - count: 400
-    date: 2009-04
-    phase: Production Run 2
-  - count: 800000
-    date: 2009-FY
-    phase: Target Annual Volume
-  process_density:
-  - complexity_score: 9
-    material: G30 Steel / CRS
-    part_name: 501-1092-00 Chassis Base
-    steps:
-    - Turret Punching
-    - Forming (Dimples/Flanges)
-    - 'Deburring (Failure Point: Flash Remnants)'
-    - PEM Insertion (Clinch Nuts)
-    - 'Masking (Complex: Vinyl vs. Hard Fixture)'
-    - Painting (Zero Overspray / Joined Paint)
-    - EMI Gasket Application
-  - complexity_score: 8
-    material: G30 Steel (Reverted from CRS)
-    part_name: 520-1066-00 Top Cover
-    steps:
-    - Blanking
-    - Forming (Side Flanges)
-    - Spot Welding (Lip Bracket)
-    - Grinding/Filling (Cosmetic Class A)
-    - Painting
-    - Masking (Critical Cosmetic Reveal)
-  - complexity_score: 7
-    material: Polycarbonate (White/Grey)
-    part_name: 502-1107-00 Front Bezel (Glow)
-    steps:
-    - Injection Molding
-    - Heat Staking (IR Window)
-    - Polishing (High Gloss)
-    - Internal Paint Masking (Failed/Rejected)
-    - Manual Marker Rework (Pilot)
-  supply_chain_nodes:
-  - location: San Jose, CA
-    role: Sheet Metal Fabricator (Proto)
-    vendor: Mass Precision
-  - location: Guadalajara, Mexico
-    role: Sheet Metal / Assembly (Prod)
-    vendor: Sanmina Plant 4
-  - location: Taipei, Taiwan
-    role: Injection Molding
-    vendor: Steman (Weddy Wang)
-  - location: Waterloo, ON
-    role: Electrical Engineering / QA
-    vendor: Kaleidescape Canada
-  - location: Sunnyvale, CA
-    role: Mechanical / Operations
-    vendor: Kaleidescape HQ
-  tooling_chain:
-  - cost_impact: High (Reduced Opex from $3.63 to $1.60/unit)
-    lead_time_weeks: 2
-    tool_name: Hard Paint Fixture (Base)
-    type: Hard Tooling
-    vendor: Sanmina Plant 4
-  - cost_impact: High (Rib removal would scrap tool)
-    lead_time_weeks: 8
-    tool_name: Front Bezel Injection Mold
-    type: Hard Tooling
-    vendor: Steman (Weddy Wang)
-  - cost_impact: Low
-    lead_time_weeks: 1
-    tool_name: Chassis Punch/Form
-    type: Soft Tooling (Turret)
-    vendor: Mass Precision (Proto) / Sanmina (Prod)
 cyberspace:
   enable: true
   layout: linear
   stickies:
-  - data:
-      columns: 3
-      images:
-      - alt: DSC05318
-        aspectRatio: 1.5
-        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05318.jpg
-      - alt: DSC05377
-        aspectRatio: 1.5
-        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05377.jpg
-      - alt: DSC05380
-        aspectRatio: 1.5
-        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05380.jpg
-      - alt: DSC05381
-        aspectRatio: 1.5
-        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05381.jpg
-      - alt: DSC05382
-        aspectRatio: 1.5
-        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05382.jpg
-      - alt: DSC05387
-        aspectRatio: 1.5
-        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05387.jpg
-      - alt: DSC05404
-        aspectRatio: 1.5
-        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05404.jpg
-      - alt: DSC05405
-        aspectRatio: 1.5
-        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05405.jpg
-      - alt: DSC05406
-        aspectRatio: 1.5
-        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05406.jpg
-      - alt: DSC05407
-        aspectRatio: 1.5
-        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05407.jpg
-      - alt: DSC05408
-        aspectRatio: 1.5
-        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05408.jpg
-      - alt: DSC05409
-        aspectRatio: 1.5
-        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05409.jpg
-      - alt: DSC05410
-        aspectRatio: 1.5
-        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05410.jpg
-      - alt: DSC05453
-        aspectRatio: 1.5
-        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05453.jpg
-      layout: masonry
-      scattered: true
-    deck:
-    - body: Sanmina Plant 4 delivered pilot build lids (PN 520-1066-00) that were
-        3mm too wide due to a weldment error.
-      subtitle: ''
-      title: The Crisis
-    - body: We physically hammered them with wooden blocks to pass EMI testing.
-      subtitle: ''
-      title: The Fix
-    featuredIndices: []
-    id: 01_hammered_lid
-    title: Hammered Lid
-    type: gallery
-  - data:
-      columns: 3
-      images: []
-      layout: masonry
-      scattered: true
-    deck:
-    - body: Thermal adhesive variations caused 20°C temperature spikes in the CPU.
-      subtitle: ''
-      title: The Crisis
-    - body: Switched to Phase Change Material (PCM) and heavy spring-loaded clips
-        (50psi) to guarantee contact.
-      subtitle: ''
-      title: The Fix
-    featuredIndices: []
-    id: 02_thumb_of_god
-    title: Thumb Of God
-    type: gallery
-date: 2008-06-11 00:00:00+00:00
+    - data:
+        columns: 3
+        images:
+          - alt: DSC05318
+            aspectRatio: 1.5
+            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05318.jpg
+          - alt: DSC05377
+            aspectRatio: 1.5
+            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05377.jpg
+          - alt: DSC05380
+            aspectRatio: 1.5
+            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05380.jpg
+          - alt: DSC05381
+            aspectRatio: 1.5
+            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05381.jpg
+          - alt: DSC05382
+            aspectRatio: 1.5
+            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05382.jpg
+          - alt: DSC05387
+            aspectRatio: 1.5
+            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05387.jpg
+          - alt: DSC05404
+            aspectRatio: 1.5
+            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05404.jpg
+          - alt: DSC05405
+            aspectRatio: 1.5
+            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05405.jpg
+          - alt: DSC05406
+            aspectRatio: 1.5
+            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05406.jpg
+          - alt: DSC05407
+            aspectRatio: 1.5
+            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05407.jpg
+          - alt: DSC05408
+            aspectRatio: 1.5
+            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05408.jpg
+          - alt: DSC05409
+            aspectRatio: 1.5
+            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05409.jpg
+          - alt: DSC05410
+            aspectRatio: 1.5
+            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05410.jpg
+          - alt: DSC05453
+            aspectRatio: 1.5
+            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05453.jpg
+        layout: masonry
+        scattered: true
+      deck:
+        - body: >-
+            Sanmina Plant 4 delivered pilot build lids (PN 520-1066-00) that
+            were 3mm too wide due to a weldment error.
+          subtitle: ''
+          title: The Crisis
+        - body: We physically hammered them with wooden blocks to pass EMI testing.
+          subtitle: ''
+          title: The Fix
+      featuredIndices: []
+      id: 01_hammered_lid
+      title: Hammered Lid
+      type: gallery
+    - data:
+        columns: 3
+        images: []
+        layout: masonry
+        scattered: true
+      deck:
+        - body: >-
+            Thermal adhesive variations caused 20°C temperature spikes in the
+            CPU.
+          subtitle: ''
+          title: The Crisis
+        - body: >-
+            Switched to Phase Change Material (PCM) and heavy spring-loaded
+            clips (50psi) to guarantee contact.
+          subtitle: ''
+          title: The Fix
+      featuredIndices: []
+      id: 02_thumb_of_god
+      title: Thumb Of God
+      type: gallery
+date: 2008-06-11T00:00:00.000Z
 description: KSYSTEM-120 Mini System
 documents: []
 draft: false
 employer: kaleidescape
-endDate: 2009-03-31 00:00:00+00:00
-forensic_metrics:
-  financial: Negotiated CPU thermal solution unit price down from $9.63 to $9.25 [1]
-  governance: Weekly Mechanical / ID Meeting (Norris, Burke, Lane, Wudrick) [3]
-  process: Masking throughput increased from 3 pcs/hr to 20 pcs/hr via process refinement
-    [2]
-forensic_summary:
-  intervention: Identified and eliminated 0.005-0.020 inch tolerance stack-up error
-    in fan tray assembly [1]; Issued deviation for top cover lip interference [5]
-  result: Salvaged stalled 50-unit Pilot Build; enabled 300-unit Production ramp [4];
-    Achieved FCC Class B compliance [1]
-  trigger: 'Three concurrent ''stop-ship'' interference crises: The Hammered Lid,
-    The Thumb of God, and The Glow Debacle [4]'
+endDate: 2009-03-31T00:00:00.000Z
 gallery: []
-hxo_ready: true
-hydration_status: full
 industry: consumer_electronics
-isomorphics:
-- hardware_point: Fan tray assembly tolerance error (0.005-0.020) preventing lid closure
-    [1]
-  label: Tolerance Stack-up
-  principle: The Law of Cumulative Error
-  software_point: KEAOS error code database lack of granularity for manufacturing
-    diagnostics [10]
-links:
-- name: Kaleidescape Website
-  url: https://kaleidescape.com
-metrics:
-  quotes:
-  - 'Preliminary report: When the inner and outer sheetmetal cages are riveted together,
-    it is not possible to assemble drive plane PCB. [6]'
-  - Note the lower left PCB dimple crashes with the DVD. [7]
-  - Erik gave a deviation to PL4 to send the 50 pcs with this lip as is, but in the
-    time to integrated to the Ksystem it does not let the HDD cartridge pull easy.
-    [5]
-phase_stats:
-  Design: 30
-  Engineering: 50
-  Production: 20
-  Strategy: 0
 presentation_mode: deep_dive
 production: production
 productionScale: series
-scars:
-- description: Inner and outer sheetmetal cages were riveted together, making it impossible
-    to assemble the drive plane PCB [6]
-  label: The PCB Cage Trap
-  value: Assembly Blockage
-- description: Lower left PCB dimple crashed with the DVD drive during fit check [7]
-  label: The PCB Crash
-  value: Interference
-- description: Dim LED spots tracked with component placement; required resistor value
-    adjustments to compensate for plastic bend [8], [9]
-  label: The Glow Debacle
-  value: Quality Crisis
-slug: ksystem-120
-tags: [Mechanism, Cost_Down, Process, Crisis, Yield, Leadership, Architecture]
+tags:
+  - Mechanism
+  - Cost_Down
+  - Crisis
+  - Yield
+  - Leadership
 theme: hyperspace
-tier: 1
 title: KSYSTEM-120
-toolchain:
-- Windchill
-- Pro/Engineer (Creo)
-- Arena
-- Mass Precision (Vendor)
-- Sanmina (Vendor)
-- Prompt Precision (Vendor)
 tools:
-- pro_engineer
-transcript: ''
-teamSize: 6 (Norris, Clader, Burke, Wudrick, Lane, Forster)
+  - pro_engineer
+teamSize: '6 (Norris, Clader, Burke, Wudrick, Lane, Forster)'
 ---
 
 KSYSTEM-120 / Orpheus Forensic Report

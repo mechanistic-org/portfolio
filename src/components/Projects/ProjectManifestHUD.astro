@@ -1,11 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
-import SonicHeartbeat from "@components/Audio/SonicHeartbeat";
 import TeamPipChart from "@components/DataViz/TeamPipChart";
 import ComplexityViz from "@components/DataViz/ComplexityViz.astro";
 import ForensicSeismograph from "@components/DataViz/ForensicSeismograph";
 import ForensicTooltip from "@components/DLS/ForensicTooltip.astro";
-import TeamDrawer from "@components/Scrolly/TeamDrawer";
 import { CATEGORIES } from "@/config/taxonomy";
 
 interface Props {
@@ -32,11 +30,7 @@ const {
 const dateVal = data.date || new Date();
 const isoDate = new Date(dateVal).toISOString().split("T")[0];
 
-const showMetrics =
-	(presentation_mode === "deep_dive" || presentation_mode === "flagship") && metrics;
-
-// DEBUG OVERRIDE
-// const showMetrics = true;
+// Metrics have moved to DeepDataHUD (Stage 2)
 
 // Duration Logic
 let displayDuration = data.duration;
@@ -134,9 +128,8 @@ if (!displayDuration && data.date) {
 				)
 			}
 
-			{/* 0. TEAM SIZE (Pip Chart or Text) */}{
-				!showMetrics && (
-					<div class="cursor-crosshair border-r border-white/10 px-4 py-2">
+			{/* 0. TEAM SIZE (Pip Chart or Text) */}
+			<div class="cursor-crosshair border-r border-white/10 px-4 py-2">
 						{(() => {
 							// Parse "INT 37 / EXT 21" logic
 							const teamStr = data.teamSize || "";
@@ -148,6 +141,8 @@ if (!displayDuration && data.date) {
 							const extCount = extMatch ? parseInt(extMatch[1]) : 0;
 							const coreCount = coreMatch ? parseInt(coreMatch[1]) : 0;
 
+							const hasCast = Array.isArray(data.cast) && data.cast.length > 0;
+
 							if (intCount > 0 || extCount > 0) {
 								return (
 									<TeamPipChart
@@ -157,12 +152,37 @@ if (!displayDuration && data.date) {
 										core={coreCount}
 									/>
 								);
-							} else {
-								// Fallback
+							} else if (hasCast) {
+								// NEW TINYVIZ: Overlapping Nodes Array
 								return (
-									<div class="flex h-full flex-col justify-center">
+									<div class="flex h-full items-center gap-3">
+										<div class="flex flex-col justify-center">
+											<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Cast</div>
+											<div class="font-mono text-xs font-bold text-white whitespace-nowrap">
+												{data.cast.length} Nodes
+											</div>
+										</div>
+										<div class="flex items-center -space-x-1.5">
+											{data.cast.slice(0, 5).map((member: any, i: number) => (
+												<div 
+													class={`h-4 w-4 rounded-full border border-black/80 ${i === 0 ? "bg-[#2E5CFF]" : "bg-neutral-500"} opacity-90 transition-transform hover:scale-150 hover:z-10`} 
+													title={`${member.name} - ${member.role}`} 
+												/>
+											))}
+											{data.cast.length > 5 && (
+												<div class="flex h-4 w-4 items-center justify-center rounded-full border border-black/50 bg-neutral-800 text-[6px] font-bold text-white">
+													+
+												</div>
+											)}
+										</div>
+									</div>
+								);
+							} else {
+								// Fallback - With strict max-width constraints to prevent vertical squishing
+								return (
+									<div class="flex h-full flex-col justify-center max-w-[120px] md:max-w-[160px]">
 										<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Team</div>
-										<div class="font-mono text-xs font-bold text-white">
+										<div class="font-mono text-xs font-bold text-white truncate" title={data.teamSize || "Core Team"}>
 											{data.teamSize || "Core Team"}
 										</div>
 									</div>
@@ -170,8 +190,7 @@ if (!displayDuration && data.date) {
 							}
 						})()}
 					</div>
-				)
-			}
+			</div>
 
 			{/* ... (Metrics code omitted for brevity but preserved in file) ... */}
 
@@ -257,14 +276,4 @@ if (!displayDuration && data.date) {
 		</div>
 	</div>
 
-	<div slot="right" class="hidden items-center gap-6 md:flex">
-		{/* SONIC HEARTBEAT (Singularity Audit) */}
-		<div class="ml-4 flex items-center gap-4 border-l border-white/10 pl-4">
-			<SonicHeartbeat client:only="react" audioUrl={data.audio_url} />
-		</div>
-	</div>
 </UniversalHUD>
-
-{/* METRICS DRAWER MIGRATED TO TELEMETRY CONSOLE */}
-
-<TeamDrawer client:only="react" team={data.cast} warStories={data.scars} title={data.title} />

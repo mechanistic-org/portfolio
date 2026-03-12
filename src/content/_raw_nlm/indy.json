@@ -1,0 +1,29 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://sgi.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 134.6,
+    "Engineering": 45.9,
+    "Production": 42.8,
+    "Strategy": 15.3
+  },
+  "slug": "indy",
+  "tier": 3
+}

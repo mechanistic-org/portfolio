@@ -150,14 +150,37 @@ const ThemeComponents: Record<string, any> = {
 // Select Component (with fallback)
 const SelectedTheme = ThemeComponents[theme] || Hyperspace;
 
+// === SIDECAR INJECTION (The Brain) ===
+let sidecarData: any = {};
+const sidecarFiles = import.meta.glob("/src/content/projects/**/data.json", { eager: true });
+
+if (entry) {
+	try {
+		const expectedSuffix = `/src/content/projects/${entry.id}/data.json`;
+		const matchingKey = Object.keys(sidecarFiles).find(
+			(key) => key.endsWith(expectedSuffix) || key === expectedSuffix,
+		);
+
+		if (matchingKey) {
+			const fileModule: any = sidecarFiles[matchingKey];
+			sidecarData = fileModule.default || fileModule;
+			console.log(`[SIDECAR] Loaded exhaustive data for ${entry.id}`);
+		}
+	} catch (e) {
+		console.warn(`[SIDECAR] Failed to load sidecar for ${entry.id}`, e);
+	}
+}
+
 // Construct valid entry for both real and placeholder
-// We clone data to avoid mutating the readonly content collection object if needed
+// We merge sidecarData into data so the UI components don't know the difference.
+const finalData = { ...data, ...sidecarData };
+
 const finalEntry = entry
-	? { ...entry, data: data }
+	? { ...entry, data: finalData }
 	: {
 			id: placeholderData.id,
 			collection: "projects",
-			data: data,
+			data: finalData,
 			slug: placeholderData.id.toLowerCase().replace(/ /g, "-"),
 		};
 

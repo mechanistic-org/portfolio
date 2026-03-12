@@ -1,139 +1,18 @@
 ---
-bom:
-  - label: Carousel
-    value: PG-22 & PG-33 / HIPS + ABS
-  - label: Pinch Roller Assembly
-    value: Custom Spring / Hard Mount Spacers
-cast:
-  - name: Erik Norris
-    org: Kaleidescape
-    role: Lead Mechanical / The Architect
-  - name: Weddy Wang
-    org: Steman/YungChing
-    role: Vendor Lead
-  - name: Michael Clader
-    org: Kaleidescape
-    role: Dir. MFG Engineering
 category: module_subsystem
 client: []
-complexity_vector:
-  part_count_growth:
-    - count: 1
-      date: 2011-01
-      phase: T1 Trial (Mold Bring-up)
-    - count: 1
-      date: 2011-03
-      phase: T4 (Process Stabilization)
-    - count: 1
-      date: 2011-04
-      phase: MP (Mass Production)
-    - count: 4
-      date: 2014-09
-      phase: Yield Remediation (Hard Mounts)
-    - count: 3
-      date: 2014-10
-      phase: Spring Force Redesign
-  process_density:
-    - complexity_score: 9
-      material: PA-757 ABS
-      part_name: Carousel Chassis (502-1164-00)
-      steps:
-        - Injection Molding (High Pressure)
-        - Differential Cooling (15°C Outer / 25°C Core)
-        - Texture (MT-11020)
-        - Polishing (Cavity Side)
-        - Metrology Inspection (Rib Thickness)
-    - complexity_score: 7
-      material: Mixed
-      part_name: Pinch Roller Assembly
-      steps:
-        - Shaft Machining
-        - Spring Winding (200% Force Increase)
-        - Hard Mount Spacer Installation
-        - Grease Application
-        - Alignment Calibration
-  supply_chain_nodes:
-    - location: Taipei, Taiwan
-      role: Injection Molding
-      vendor: YungChing
-    - location: Taipei, Taiwan
-      role: Rubber/Silicone
-      vendor: Kingley Rubber
-    - location: Guadalajara, Mexico
-      role: FATP / QA Inspection
-      vendor: Sanmina
-  tooling_chain:
-    - cost_impact: $2,500 (Ribs & Rads Mod)
-      lead_time_weeks: 12
-      tool_name: Carousel Main Mold
-      type: Hard Tooling (Steel)
-      vendor: YungChing
-    - cost_impact: Low
-      lead_time_weeks: 1
-      tool_name: Cooling Fixture
-      type: Process Tooling
-      vendor: YungChing
-    - cost_impact: Low
-      lead_time_weeks: 2
-      tool_name: Roller Spring
-      type: Soft Tooling
-      vendor: McMaster/Custom
 duration: 2011-2014
 employer: kaleidescape
-forensic_metrics:
-  financial: $2500 tooling mod investment (Ribs & Rads)
-  governance: Weekly Pulse / T-Shot Inspection Reports
-  process: 7-Stage Tooling Iteration (T1-T7)
-forensic_summary:
-  intervention:
-    Redesigned cooling (15C/25C), 'Ribs & Rads' tooling mods, and high-force
-    spring compensation
-  result: Stabilized yield despite 1.00mm-1.08mm rib variance and warpage
-  trigger: T1 'Massive Flash' Crisis (2011) & 'Tight Slot' Field Failures (2014)
-hxo_ready: true
-hydration_status: partial
 industry: consumer_electronics
-isomorphics:
-  - hardware_point: Variable slot width (1.00mm-1.08mm) causing load failures
-    label: Friction
-    principle: Mechanical compliance must exceed manufacturing variance
-    software_point: VaultManager 'Shimmy' logic to break stiction
-links:
-  - name: Parent Project
-    url: /projects/m700
-metrics:
-  financial:
-    toolingActual: 2500
-    toolingBudget: 2500
-  quotes:
-    - "Erik is designing: Solid mounts for motor plate... Gear with extended neck...
-      Various inner disk guide versions... Three versions of the spring."
-    - Erik - please provide disposition for these carrousels.
-    - Time for experimentation is over if we want to keep the schedule.
 presentation_mode: deep_dive
 production: production
 productionScale: series
-scars:
-  - description:
-      Overpowered friction from warped slots (1.37mm vs 1.5mm) by doubling
-      roller spring pressure and hard-mounting drive shafts to eliminate deflection.
-    label: The Tight Slot War
-    value: 200% Spring Force
-  - description:
-      Battled thermal shrinkage where parts were 385.90mm vs 386.65mm spec;
-      fixed via cycle time increases and cooling re-architecture.
-    label: The Oven Test
-    value: T1-T7 Iteration
-slug: 320-slot-optical-carousel
-tags: [Mechanism, Yield, Crisis, Process, Materials]
+tags:
+  - Mechanism
+  - Yield
+  - Crisis
 teamSize: 1 (The Architect)
-tier: 2
 title: 320-Slot Carousel
-toolchain:
-  - Creo (CAD)
-  - Moldflow
-  - YungChing (Molder)
-  - Sanmina (CM)
 ---
 
 320-Slot Optical Carousel Forensic Report

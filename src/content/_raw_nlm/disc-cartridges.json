@@ -1,0 +1,29 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://kaleidescape.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 80.5,
+    "Engineering": 27.4,
+    "Production": 25.6,
+    "Strategy": 9.2
+  },
+  "slug": "disc-cartridges",
+  "tier": 3
+}

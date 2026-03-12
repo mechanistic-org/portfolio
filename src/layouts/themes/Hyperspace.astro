@@ -16,7 +16,7 @@ const useDossier = presentation_mode === "deep_dive";
 // Backwards compatibility/Renaming
 const scrolly = cyberspace;
 
-import TelemetryConsole from "@components/Projects/TelemetryConsole.astro";
+import DeepDataHUD from "@components/Projects/DeepDataHUD.astro";
 import DeepDiveRenderer from "@components/DeepDive/DeepDiveRenderer.astro"; // IMPL
 // NEW COMPONENT IMPORTS
 // import ConspiracyBoard from "@components/Projects/ConspiracyBoard";
@@ -102,16 +102,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 		)
 	}
 
-	{/* THE ATC TELEMETRY CONSOLE (Replaces Inline Dossier) */}
-	{
-		useDossier && (
-			<TelemetryConsole
-				entry={entry}
-				nextProject={nextProject}
-				prevProject={prevProject}
-			/>
-		)
-	}
+	{/* TELEMETRY CONSOLE REMOVED - REPLACED BY DEEP DATA HUD BELOW */}
 
 	<!-- MAIN ENGINE -->
 	<main class="relative z-10 bg-transparent">
@@ -185,8 +176,9 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 		)
 	}
 
-	<!-- MDX CONTENT SLOT (Visible in All Modes) -->
-	{/* "Ready State" / Forensic Report Body Text */}
+	<!-- THE MALLEABLE FORENSIC PAYLOAD (Stage 2 HUD) -->
+	{useDossier && <DeepDataHUD entry={entry} />}
+
 	<!-- MDX CONTENT SLOT (Visible in All Modes) -->
 	{/* "Ready State" / Forensic Report Body Text */}
 	<section class="relative z-10 bg-transparent pb-32">

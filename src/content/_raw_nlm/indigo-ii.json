@@ -1,0 +1,29 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://sgi.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 241.6,
+    "Engineering": 82.3,
+    "Production": 76.9,
+    "Strategy": 27.4
+  },
+  "slug": "indigo-ii",
+  "tier": 3
+}

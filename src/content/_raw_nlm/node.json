@@ -1,0 +1,29 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://microsoft.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 13.6,
+    "Engineering": 4.6,
+    "Production": 4.3,
+    "Strategy": 1.5
+  },
+  "slug": "node",
+  "tier": 3
+}

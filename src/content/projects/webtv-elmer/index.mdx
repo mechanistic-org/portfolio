@@ -1,198 +1,28 @@
 ---
-audio_url: /assets/webtv-elmer/webtv-elmer-briefing.m4a
-bom:
-- label: Zeus Top Cover
-  value: Zinc Plated Sheet Metal [3]
-- label: Zeus Base
-  value: Zinc Plated Sheet Metal [3]
-- label: Fan Bracket
-  value: Custom Sheet Metal [13]
-- label: Fans
-  value: Delta 60mm 12V [14]
-- label: Standoffs
-  value: Keystone 8405 / 8714 / 2202 [15]
-cast:
-- name: Erik Norris
-  org: Mechanistic
-  role: Lead Mechanical Engineer (The Architect)
-- name: Leslie Leland
-  org: WebTV
-  role: Product Manager
-- name: Mark Carbone
-  org: WebTV
-  role: Program Manager (Thermal Lead)
-- name: Hedley Davis
-  org: WebTV
-  role: Engineering Lead
-- name: Shelly Evans
-  org: E-M Solutions
-  role: NPI Manager
-- name: Val Kasvin
-  org: Sputnik Models
-  role: Model Maker
 category: home_entertainment
-complexity_vector:
-  part_count_growth:
-  - count: 0
-    date: 2000-10
-    phase: Concept (Bastard Box)
-  - count: 1
-    date: 2000-11
-    phase: Proto (Elmer - Mixed HW)
-  - count: 5
-    date: 2000-12
-    phase: Show Critical (Zeus - 4-40 UNC)
-  - count: 12
-    date: 2001-01
-    phase: Node Deployment (Pluto/Titan)
-  process_density:
-  - complexity_score: 9
-    material: Cold Rolled Steel (CRS)
-    part_name: Zeus Chassis Bottom
-    steps:
-    - Laser Cut (Soft Tool)
-    - CNC Brake Form
-    - 'Thermal Mod: Perforation Deletion (Heat Spreader Zone)'
-    - 'Thermal Mod: High-Density Perf (PSU Zone)'
-    - Zinc Plating
-    - ThermaPad Application
-  - complexity_score: 7
-    material: Aluminum
-    part_name: Card Bracket Rev. 1
-    steps:
-    - Custom Design
-    - Fabrication
-    - PCI Riser Integration
-    - Ethernet Card Grafting
-  supply_chain_nodes:
-  - location: Fremont/Bay Area, CA
-    role: Sheet Metal / Plating
-    vendor: E-M Solutions
-  - location: San Francisco, CA
-    role: Model Shop / Finishing
-    vendor: Sputnik Models
-  - location: Internal
-    role: PCB / PCI Grafting
-    vendor: WebTV Engineering (Atlas Room)
-  tooling_chain:
-  - cost_impact: High
-    lead_time_weeks: 1.3
-    tool_name: Chassis Fabrication (Laser/Brake)
-    type: Soft Tooling
-    vendor: E-M Solutions
-  - cost_impact: High
-    lead_time_weeks: 1
-    tool_name: Bezel Machining & Finishing
-    type: Soft Tooling (CNC)
-    vendor: Sputnik Models
 cyberspace:
   layout: linear
-date: 2000-09-15
+date: 2000-09-15T00:00:00.000Z
 documents: []
 draft: false
 duration: 3 Months
 employer: mechanistic
-endDate: 2001-01-06
-forensic_metrics:
-  financial: Managed $10k+ rapid prototyping budget for high-pressure trade show build
-    [1], [2]; Negotiated short-run fab costs (e.g., $164.95/cover) [3].
-  governance: Orchestrated parallel workstreams between sheet metal (E-M Solutions)
-    and model shops (Sputnik) under a high-velocity 'War Room' cadence [7].
-  process: Reduced complex sheet metal fabrication cycle to 9 days [4], [5]; Standardized
-    100% of assembly hardware to 4-40 spec to eliminate line-down risks [6].
-forensic_summary:
-  intervention: Norris ('The Architect') rejected the 'Bastard Box' concept [10] and
-    executed a custom chassis design removing perforation under the PCB for mass conduction
-    [11]. He enforced a strict 4-40 UNC hardware standardization for the 'Zeus' revision
-    [6].
-  result: Delivery of 5 functional server enclosures and 12 nodes for Western Cable
-    Show and CES 2001 on a compressed 9-day fabrication cycle with zero thermal failures
-    [4], [5].
-  trigger: The 'Elmer' main board relied on an aluminum heat spreader requiring a
-    'dead nuts flat' chassis for thermal conduction, a tolerance impossibility for
-    sheet metal [8], [9]. Simultaneously, a 'screw-up' on the prototype build mixed
-    metric and SAE hardware [6].
+endDate: 2001-01-06T00:00:00.000Z
 gallery: []
-hxo_ready: true
-hydration_status: full
 industry: consumer_electronics
-isomorphics:
-- hardware_point: Mixed metric/SAE fasteners cause assembly friction and cross-threading.
-  label: Standardization
-  principle: Reducing component entropy increases system yield.
-  software_point: Inconsistent dependency versions cause build failures ('Dependency
-    Hell').
-links: []
 listed: true
-metrics:
-  cogs:
-    label: Fab Cycle
-    value: 9 Days
-  financial:
-    costOfGoodsSold: []
-    margins: []
-    toolingActual: 10000
-    toolingBudget: 10000
-  governance:
-    dcos: 5
-    ecos:
-    - 4-40_Standardization
-  interventions:
-    count: 3
-    label: Crisis Recoveries
-  process:
-    engineeringChangeOrders:
-    - Heat_Spreader_Flatness
-    - Hardware_Std
-    - DXF_Collision_Check
-  profitability:
-    label: Quote Target
-    value: 120hrs
-  quotes:
-  - If the chassis bottom was dead nuts flat, I'd say keep the holes. But since it's
-    likely not exceedingly flat, I feel that we need the entire area under the bar.
-    [19]
-  - There was a screw-up on Elmer and I want to confirm for Zeus... can you confirm
-    that we are using 4-40 hardware throughout? [20]
-  - No one likes my code name so we are calling it a 'double-high' Mercury... That
-    bezel will be needed by 12/19. [21]
-notebook_url: https://notebooklm.google.com/notebook/5fb69a8b-1ce6-4861-be36-46429138a43d?authuser=1
-phase_stats:
-  Design: 60
-  Engineering: 30
-  Production: 10
 presentation_mode: flagship
 production: prototype
 productionScale: one_off
-scars:
-- description: Removed perforation under heat spreader to maximize conductive mass,
-    rejecting the impossible flatness requirement [8], [11].
-  label: The Dead Nuts Flat Fallacy
-  value: Thermal Stabilization
-- description: Purged mixed metric/SAE hardware, standardizing to 4-40 UNC to prevent
-    assembly line stoppages [8], [6].
-  label: The Hardware Screw-Up
-  value: 100% Assembly Yield
-- description: Killed the ill-defined 'Bastard Box' concept to focus resources on
-    refining the Elmer/Zeus chassis for the hard deadline [12], [10].
-  label: The Bastard Box Pivot
-  value: Schedule Rescue
-slug: webtv-elmer
-tags: [Process, Crisis, Yield, Leadership]
+tags:
+  - Crisis
+  - Yield
+  - Leadership
 theme: hyperspace
-tier: 1
 title: Elmer / Zeus (HomeNet)
-toolchain:
-- Pro/ENGINEER (Solid Modeling)
-- AutoCAD (DXF I/O Layouts)
-- E-M Solutions (Sheet Metal/Plating)
-- Sputnik Models (Machining/Finishing/Bezels)
-- Keystone (Hardware)
-- TACgraphics (Labels)
 tools:
-- pro_engineer
-- autocad
-transcript: ''
+  - pro_engineer
+  - autocad
 teamSize: INT 6
 ---
 

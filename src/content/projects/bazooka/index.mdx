@@ -1,307 +1,179 @@
 ---
-audio_url: /assets/bazooka/bazooka-briefing.m4a
-bom:
-- label: Housing, Front, Bazooka
-  value: PC - SABIC LEXAN 940 (Black) [9]
-- label: Mylar, Red, Bazooka
-  value: 041-00009 [10]
-- label: Grey Ink Overlay
-  value: Ink on Black Lexan 8B35 Film [11]
-- label: Housing, Grey 1
-  value: Tampo on ADC12 Aluminum [12]
-cast:
-- name: Erik Norris
-  org: The Noon Company [9]
-  role: The Architect / Lead Mechanical
-- name: Sunny Yuan
-  org: FIH [13]
-  role: Verification Engineer
-- name: Kelvin
-  org: FIH [14]
-  role: DVT Monitor
-- name: Nick
-  org: Locoroll [15]
-  role: Mechanical Engineer
 category: consumer_electronics
-complexity_vector:
-  part_count_growth:
-  - count: 35
-    date: 2016-09
-    phase: Concept (P1)
-  - count: 188
-    date: 2016-11
-    phase: EVT (EVT1)
-  - count: 570
-    date: 2017-01
-    phase: EVT2
-  - count: 921
-    date: 2017-04
-    phase: DVT (Design Validation)
-  - count: 2000
-    date: 2017-06
-    phase: PVT (Prod Validation)
-  process_density:
-  - complexity_score: 8
-    material: ADC12 Aluminum Alloy
-    part_name: 'Front Housing '
-    steps:
-    - Die Casting
-    - CNC Machining
-    - Anodize (Satin)
-    - Laser Etch (Markings)
-  - complexity_score: 6
-    material: SPCC Steel
-    part_name: 'Mounting Chassis '
-    steps:
-    - CNC Punch Press
-    - Stamping (Forming Dimples)
-    - Black Zinc Plating
-    - Heat Treatment (Proposed)
-  supply_chain_nodes:
-  - location: Campbell, CA
-    role: Engineering HQ
-    vendor: The Noon Company
-  - location: Taipei, Taiwan
-    role: Reliability Testing / IQC
-    vendor: FIH
-  - location: Shenzhen/Dongguan (implied)
-    role: Power Supply / Integration
-    vendor: Bel Fuse
-  - location: China
-    role: Metal Stamping
-    vendor: Tongda
-  tooling_chain:
-  - cost_impact: High
-    lead_time_weeks: 8
-    tool_name: Housing, Front Die Cast
-    type: Hard Tooling
-    vendor: Bel (via Tier 2)
-  - cost_impact: Med
-    lead_time_weeks: 4
-    tool_name: Chassis Stamping Die
-    type: Soft Tooling (CNC Punch) -> Hard Tooling
-    vendor: Tongda
-  - cost_impact: Med
-    lead_time_weeks: 6
-    tool_name: 'Rear Housing Mold '
-    type: Hard Tooling (Injection)
-    vendor: Memtech
 cyberspace:
   enable: true
   layout: linear
   stickies:
-  - data:
-      columns: 3
-      images:
-      - alt: IMG_20170419_135338
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135338-xl.webp
-      - alt: IMG_20170419_135557
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135557-xl.webp
-      - alt: IMG_20170419_135649
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135649-xl.webp
-      - alt: IMG_20170419_135715
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135715-xl.webp
-      - alt: IMG_20170419_135859
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135859-xl.webp
-      layout: masonry
-      scattered: true
-    deck: []
-    featuredIndices: []
-    id: 03_base_click_testing_1
-    title: Base Click Testing 1
-    type: gallery
-  - data:
-      columns: 3
-      images:
-      - alt: IMG_20170420_172124
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_pull_testing_1/IMG_20170420_172124-xl.webp
-      - alt: IMG_20170420_172208
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_pull_testing_1/IMG_20170420_172208-xl.webp
-      - alt: IMG_20170420_172350
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_pull_testing_1/IMG_20170420_172350-xl.webp
-      layout: masonry
-      scattered: true
-    deck: []
-    featuredIndices: []
-    id: 03_base_pull_testing_1
-    title: Base Pull Testing 1
-    type: gallery
-  - data:
-      columns: 3
-      images:
-      - alt: IMG_20170419_140610
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_side_pull_testing/IMG_20170419_140610-xl.webp
-      - alt: IMG_20170420_173140
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173140-xl.webp
-      - alt: IMG_20170420_173144
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173144-xl.webp
-      - alt: IMG_20170420_173202
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173202-xl.webp
-      - alt: IMG_20170420_173231
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173231-xl.webp
-      layout: masonry
-      scattered: true
-    deck: []
-    featuredIndices: []
-    id: 03_base_side_pull_testing
-    title: Base Side Pull Testing
-    type: gallery
-  - data:
-      columns: 3
-      images:
-      - alt: IMG_20170830_103733
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103733-xl.webp
-      - alt: IMG_20170830_103738
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103738-xl.webp
-      - alt: IMG_20170830_103757
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103757-xl.webp
-      - alt: IMG_20170830_103909
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103909-xl.webp
-      - alt: IMG_20170830_103936
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103936-xl.webp
-      layout: masonry
-      scattered: true
-    deck: []
-    featuredIndices: []
-    id: 03_base_test_btn_1
-    title: Base Test Btn 1
-    type: gallery
-  - data:
-      columns: 3
-      images:
-      - alt: IMG_20170904_151956
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_151956-xl.webp
-      - alt: IMG_20170904_155245
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155245-xl.webp
-      - alt: IMG_20170904_155252
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155252-xl.webp
-      - alt: IMG_20170904_155257
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155257-xl.webp
-      - alt: IMG_20170904_155320
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155320-xl.webp
-      - alt: IMG_20170928_153842-2
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_test_btn_2/IMG_20170928_153842-2-xl.webp
-      - alt: IMG_20170928_153842
-        aspectRatio: 1.5
-        src: /assets/bazooka/bubbles/03_base_test_btn_2/IMG_20170928_153842-xl.webp
-      layout: masonry
-      scattered: true
-    deck: []
-    featuredIndices: []
-    id: 03_base_test_btn_2
-    title: Base Test Btn 2
-    type: gallery
-date: 2016-06-28
+    - data:
+        columns: 3
+        images:
+          - alt: IMG_20170419_135338
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135338-xl.webp
+          - alt: IMG_20170419_135557
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135557-xl.webp
+          - alt: IMG_20170419_135649
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135649-xl.webp
+          - alt: IMG_20170419_135715
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135715-xl.webp
+          - alt: IMG_20170419_135859
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_click_testing_1/IMG_20170419_135859-xl.webp
+        layout: masonry
+        scattered: true
+      deck: []
+      featuredIndices: []
+      id: 03_base_click_testing_1
+      title: Base Click Testing 1
+      type: gallery
+    - data:
+        columns: 3
+        images:
+          - alt: IMG_20170420_172124
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_pull_testing_1/IMG_20170420_172124-xl.webp
+          - alt: IMG_20170420_172208
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_pull_testing_1/IMG_20170420_172208-xl.webp
+          - alt: IMG_20170420_172350
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_pull_testing_1/IMG_20170420_172350-xl.webp
+        layout: masonry
+        scattered: true
+      deck: []
+      featuredIndices: []
+      id: 03_base_pull_testing_1
+      title: Base Pull Testing 1
+      type: gallery
+    - data:
+        columns: 3
+        images:
+          - alt: IMG_20170419_140610
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_side_pull_testing/IMG_20170419_140610-xl.webp
+          - alt: IMG_20170420_173140
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173140-xl.webp
+          - alt: IMG_20170420_173144
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173144-xl.webp
+          - alt: IMG_20170420_173202
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173202-xl.webp
+          - alt: IMG_20170420_173231
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_side_pull_testing/IMG_20170420_173231-xl.webp
+        layout: masonry
+        scattered: true
+      deck: []
+      featuredIndices: []
+      id: 03_base_side_pull_testing
+      title: Base Side Pull Testing
+      type: gallery
+    - data:
+        columns: 3
+        images:
+          - alt: IMG_20170830_103733
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103733-xl.webp
+          - alt: IMG_20170830_103738
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103738-xl.webp
+          - alt: IMG_20170830_103757
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103757-xl.webp
+          - alt: IMG_20170830_103909
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103909-xl.webp
+          - alt: IMG_20170830_103936
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_test_btn_1/IMG_20170830_103936-xl.webp
+        layout: masonry
+        scattered: true
+      deck: []
+      featuredIndices: []
+      id: 03_base_test_btn_1
+      title: Base Test Btn 1
+      type: gallery
+    - data:
+        columns: 3
+        images:
+          - alt: IMG_20170904_151956
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_151956-xl.webp
+          - alt: IMG_20170904_155245
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155245-xl.webp
+          - alt: IMG_20170904_155252
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155252-xl.webp
+          - alt: IMG_20170904_155257
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155257-xl.webp
+          - alt: IMG_20170904_155320
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_test_btn_2/IMG_20170904_155320-xl.webp
+          - alt: IMG_20170928_153842-2
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_test_btn_2/IMG_20170928_153842-2-xl.webp
+          - alt: IMG_20170928_153842
+            aspectRatio: 1.5
+            src: >-
+              /assets/bazooka/bubbles/03_base_test_btn_2/IMG_20170928_153842-xl.webp
+        layout: masonry
+        scattered: true
+      deck: []
+      featuredIndices: []
+      id: 03_base_test_btn_2
+      title: Base Test Btn 2
+      type: gallery
+date: 2016-06-28T00:00:00.000Z
 draft: false
 employer: noon
-endDate: 2017-08-31
-forensic_metrics:
-  financial: Scheduled 1,500 unit production run for July 2017 ramp [1]
-  governance: EVT1 Validation and EVT2 Dev concurrent sprints [2]
-  process: Rejected 10-Year lifecycle requirement during EVT2 due to lack of initial
-    mandate [1]
-forensic_summary:
-  intervention: Identified 1 critical EMI noise source isolated directly to the Bazooka
-    architecture during EVT2 [1]
-  result: Logged 5 distinct mechanical defects in EVT2 chassis design, including warping,
-    burrs, and inconsistent hook tension [1]
-  trigger: Failed 100% of dust ingress removal tests (14/14 units seized in chassis)
-    [1]
+endDate: 2017-08-31T00:00:00.000Z
 gallery: []
-hxo_ready: true
-hydration_status: full
 industry: consumer_electronics
-isomorphics:
-- hardware_point: 14/14 units seized in chassis due to dust ingress/tolerance stackup
-    [1]
-  label: Interference Fit
-  principle: Law of Friction and Clearance (Tribology)
-  software_point: Deadlock in thread synchronization (Resource Starvation)
 listed: true
-metrics:
-  financial:
-    costOfGoodsSold: []
-    margins:
-    - Managed high-voltage 850W architecture validation within JDM structure
-    toolingActual: 0
-    toolingBudget: 0
-  governance:
-    dcdCount: 27
-    dcos: 0
-    ecos:
-    - Resolved 27 critical defects through Gate 2 reviews
-  interventions:
-    count: 5
-    label: Critical Saves
-    value: 5
-  process:
-    engineeringChangeOrders:
-    - Scaled production fleet from 35 P1 to 921 DVT validation units
-  quotes:
-  - Failed 100% of dust ingress removal tests (14/14 units seized in chassis) [1].
-  - Rejected 10-Year lifecycle requirement during EVT2 due to lack of initial architectural
-    mandate [1].
-  - DUT can't easy remove from Bazooka- 7/7[Sativa],- 7/7[Elvis] [3].
-phase_stats:
-  Design: 30
-  Engineering: 50
-  Production: 20
-  Strategy: 0
 presentation_mode: deep_dive
 primary_home: mech
 productionScale: series
-scars:
-- description: DUT (Device Under Test) cannot be easily removed from Bazooka chassis
-    during dust testing, resulting in total mechanism seizure [3, 4].
-  label: The Seizure Crisis
-  value: 100% Failure Rate (14/14)
-- description: Critical EMI noise source isolated directly to the Bazooka architecture
-    during EVT2 validation [1].
-  label: EMI Noise Source
-  value: 1 Critical Source
-- description: Worst-case thermal testing deferred to EVT2 because v0.005 SW could
-    not drive LCM to necessary conditions [5].
-  label: Thermal Deferral
-  value: 45.3℃ Limit
-slug: bazooka
-tags: [Mechanism, Crisis, Yield, Architecture, Materials]
+tags:
+  - Mechanism
+  - Crisis
+  - Yield
 targets:
-- main
-- mech
+  - main
+  - mech
 teamSize: 1 (The Architect - Erik Norris)
 theme: hyperspace
-tier: 1
 title: Bazooka (Base Station)
-toolchain:
-- Creo (CAD Modeling)
-- 'JIRA (Issue Tracking: BAZ-45, BAZ-81, BAZ-96, SAT-60)'
-- Bel Power Solutions (JDM Vendor - High Voltage)
-- FIH (Foxconn International Holdings - System Integrator)
-- 'Excel (Tolerance Stackup: Bazooka-Waldo_Cover_Retention.xlsx)'
 ---
 
 Bazooka Forensic Report

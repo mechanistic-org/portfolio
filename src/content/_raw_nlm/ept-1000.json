@@ -1,0 +1,30 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "forensic_summary": {
+    "trigger": "Arrhythmia pathways require precise thermal ablation.",
+    "intervention": "Manufactured RF Catheters with zero-tolerance QC.",
+    "result": "Provided curative treatment for WPW Syndrome."
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [],
+  "phase_stats": {
+    "Design": 388.1,
+    "Engineering": 132.3,
+    "Production": 123.5,
+    "Strategy": 44.1
+  },
+  "slug": "ept-1000",
+  "tier": 3
+}

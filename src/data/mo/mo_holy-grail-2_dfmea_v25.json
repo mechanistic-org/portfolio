@@ -1,0 +1,179 @@
+{
+	"project": "Holy Grail PRD-2",
+	"dashboardVersion": "v25.0",
+	"strategicPivot": "The Denzel Protocol",
+	"nodes": [
+		{
+			"nodeId": "A",
+			"nodeName": "Material Substrate (TriACTIVE PU/PET)",
+			"failures": [
+				{
+					"failureMode": "Physical Transfer",
+					"description": "Soft film separates from rigid liner prematurely; folds in on itself.",
+					"severity": 8,
+					"occurrence": 9,
+					"detection": 8,
+					"rpn": 576,
+					"criticalBlocker": true,
+					"mitigation": "Redesign kinematics to manipulate film exclusively via rigid liner; delay peeling."
+				},
+				{
+					"failureMode": "Adhesive Open-Time",
+					"description": "Dry-install traps airborne dust and >4 air bubbles; delamination occurs.",
+					"severity": 8,
+					"occurrence": 9,
+					"detection": 7,
+					"rpn": 504,
+					"criticalBlocker": true,
+					"mitigation": "Integrate positive-pressure HEPA micro-environment and high-durometer rolling elastomer."
+				},
+				{
+					"failureMode": "Dimensional Distortion",
+					"description": "Film stretches, warps, or suffers tails/nubs exceeding +0.1mm tolerance.",
+					"severity": 7,
+					"occurrence": 8,
+					"detection": 6,
+					"rpn": 336,
+					"criticalBlocker": false,
+					"mitigation": "Implement active tension-control bed and low-friction slip sheets. Tune blade pressure via firmware."
+				}
+			]
+		},
+		{
+			"nodeId": "B",
+			"nodeName": "Kinematic Hardware (15-inch Box)",
+			"failures": [
+				{
+					"failureMode": "Precision Mechanics",
+					"description": "Film applied off-center >0.5mm; blocks camera/speaker cutouts.",
+					"severity": 8,
+					"occurrence": 8,
+					"detection": 6,
+					"rpn": 384,
+					"criticalBlocker": true,
+					"mitigation": "Implement closed-loop optical registration via Denzel downward vision system."
+				},
+				{
+					"failureMode": "Laminar Wet-Out Stroke",
+					"description": "Linear carriage collides with internal enclosure boundaries before completing stroke.",
+					"severity": 8,
+					"occurrence": 8,
+					"detection": 4,
+					"rpn": 256,
+					"criticalBlocker": true,
+					"mitigation": "Abandon pure linear gantry. Implement articulated/rotational stages folding within the 15-inch Z/Y envelope."
+				}
+			]
+		},
+		{
+			"nodeId": "C",
+			"nodeName": "Geometry Engine & Parsing",
+			"failures": [
+				{
+					"failureMode": "Calibration Decay & Drift",
+					"description": "Toolpath coordinate frame drifts due to stepper vibration and high-flux lighting.",
+					"severity": 10,
+					"occurrence": 7,
+					"detection": 5,
+					"rpn": 350,
+					"costImpact": "$500,000 Redesign & 12 mo. Runway Loss",
+					"criticalBlocker": true,
+					"mitigation": "Continuous closed-loop optical fiducial tracking driven by the Denzel vision system."
+				},
+				{
+					"failureMode": "Template Parsing",
+					"description": "Algorithm attempts to cut isolated internal floating camera holes.",
+					"severity": 8,
+					"occurrence": 6,
+					"detection": 4,
+					"rpn": 192,
+					"costImpact": "Phase 1 Gridlock",
+					"criticalBlocker": true,
+					"mitigation": "Deploy cloud-level gatekeeper to convert all cutouts into edge-connected U-shapes."
+				}
+			]
+		},
+		{
+			"nodeId": "D",
+			"nodeName": "Retail Edge Environment",
+			"failures": [
+				{
+					"failureMode": "Zero-Dexterity Mishandling",
+					"description": "Frontline worker misloads device or unmanaged elite agencies lack kinematic API.",
+					"severity": 10,
+					"occurrence": 8,
+					"detection": 6,
+					"rpn": 480,
+					"costImpact": "$282K/Qtr Unthrottled Burn Rate",
+					"criticalBlocker": true,
+					"mitigation": "Poka-Yoke 'Magic Slot' loading bay, establishing a 2-5 year Defensible Moat."
+				},
+				{
+					"failureMode": "Power-Free Abort & Emissions",
+					"description": "Power grid fluctuation traps phone, or 75dB noise limits are violated.",
+					"severity": 9,
+					"occurrence": 5,
+					"detection": 8,
+					"rpn": 360,
+					"costImpact": "Retail Ejection & Liability",
+					"criticalBlocker": true,
+					"mitigation": "Normally-open fail-safe clamps and acoustic baffling to guarantee zero-friction scaling."
+				}
+			]
+		}
+	],
+	"strategicSequencing": {
+		"phase1": {
+			"title": "Hardware Lock & Data Flywheel (The Fortress)",
+			"strategy": "Execution is violently compressed to these defined nodes. Ambiguity is zero. Proceed with F2 validation. Validation of F1/F3 dependencies is a trap and is hereby terminated.",
+			"moat": "Campaign Denzel in vivo data flywheel. Guarantees compounding geometric accuracy and establishes a mathematically certain data advantage."
+		},
+		"phase2": {
+			"title": "Architecture Shift (The Drawbridge)",
+			"strategy": "Abandon 15-inch box, $5,000 cost cap, and 75dB limits. Execute F1 (Automation) and F3 (3D Geometry).",
+			"moat": "Transition to fully autonomous Class-2 freestanding floor kiosk monitored by specialized Service Network Professionals."
+		}
+	},
+	"executiveValueMatrix": {
+		"totalROI": "$716,100+ per quarter",
+		"vectors": [
+			{
+				"vector": "The 100 Snowflakes Problem (CM Transition)",
+				"saved": "$500,000+",
+				"bonus": "$50,000",
+				"description": "Preventing ground-up redesign by providing rigorous backfill of specifications."
+			},
+			{
+				"vector": "The Generalist Trap (Internal Resource Packaging)",
+				"saved": "$150,000+",
+				"bonus": "$20,000",
+				"description": "Defining macro-architecture so internal generalist can execute without hiring Senior Robotics Engineer."
+			},
+			{
+				"vector": "Throttling Elite Agency Burn",
+				"saved": "$66,100 / Qtr",
+				"retainer": "$87,500 / Qtr",
+				"description": "Acting as ECN API; defines physics logic, reducing junior agency horsepower by 80%."
+			},
+			{
+				"vector": "The Validation Dependency Trap (Phase 1 Lock)",
+				"saved": "6 - 9 Months Runway",
+				"bonus": "$35,000",
+				"description": "Enforcing the Drawbridge Protocol to focus on F2 Smart Films and flat screens."
+			},
+			{
+				"vector": "RTOS Governance & Gatekeeper",
+				"saved": "2-5 Year Defensible Moat",
+				"bonus": "$30,000",
+				"description": "Preventing open-source vibration drift; securing closed-loop tracking."
+			},
+			{
+				"vector": "Pre-Compliance Validation Waterfall",
+				"saved": "Multi-Month Rel. Delay",
+				"bonus": "$15,000",
+				"description": "Standalone fixtures trigger 12-month IP priority clock."
+			}
+		],
+		"advisoryEquity": "0.25% - 0.5% Advisory Equity for Zero-Regret IP Acceleration"
+	}
+}

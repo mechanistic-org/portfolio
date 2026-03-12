@@ -1,111 +1,7 @@
 ---
 additionalSkills: []
-category: Uncategorized
+category: consumer_electronics
 client: []
-complexity_vector:
-  part_count_growth:
-    - count: 450
-      date: 2020-06
-      note:
-        Initial transition from mobile platform to modular makeline architecture
-        [1].
-      phase: Concept (Ono Food Truck Pivot)
-    - count: 1200
-      date: 2022-04
-      note: Integration of 70+ actuators and 500+ dynamic ingredient capabilities [2].
-      phase: EVT (Chipotle Pilot)
-    - count: 1850
-      date: 2023-10
-      note:
-        Refinement of 'Two-Lines-in-One' architecture; addition of proprietary dispensers
-        [3][4].
-      phase: DVT (Cultivate Center Test)
-    - count: 2400
-      date: 2024-09
-      note: Deployment of cleaning-optimized 'push-to-unlock' sub-assemblies [5][6].
-      phase: PVT (Restaurant Integration)
-    - count: 3100
-      date: 2026-01
-      note:
-        Full BOM explosion for national rollout targeting 40 installs by Q4 2026
-        [7][8].
-      phase: MP (Re:Build Scale)
-  process_density:
-    - complexity_score: 8
-      material: Polycarbonate / FR4 / Aluminum
-      part_name: Backsplash Makelight Interface
-      source_ref: makeline.pdf [9], 1381-QLS6AFKW.pdf [10]
-      steps:
-        - PCB SMT Assembly (EtherCAT RS485 Bridge 10244R1)
-        - LED Array Integration (1381-QLS6AFKW)
-        - Wire Harnessing (Discrete to Integrated)
-        - Optical Diffusion Layer Bonding
-        - IP65 Sealing (Silicone Gasket)
-    - complexity_score: 9
-      material: Zinc Die Cast / Aluminum
-      part_name: Beckhoff C6030 IPC Chassis (The Brain)
-      source_ref: Automated Makeline... [11], c6030en_ipc.pdf [12]
-      steps:
-        - High-Pressure Die Casting
-        - CNC Precision Milling (Heatsink Fins)
-        - Anodization (Surface Hardening)
-        - Core Isolation Configuration (TwinCAT)
-        - Thermal Interface Material Application
-    - complexity_score: 7
-      material: Aluminum / Tempered Glass
-      part_name: CP3924 Multi-Touch HMI Display
-      source_ref: CP3924-0000 HMI.pdf [13][14]
-      steps:
-        - Billet Aluminum Machining
-        - Glass Substrate Bonding
-        - Capacitive Sensor Lamination
-        - IP65 Weatherproofing
-        - DVI/USB Extension Integration
-    - complexity_score: 8
-      material: Food-Grade Polymer (NSF 51)
-      part_name: Intelligent Dispenser Module
-      source_ref: Architectural Review [15][16]
-      steps:
-        - Injection Molding
-        - Ultrasonic Welding
-        - Actuator Integration
-        - De-agglomeration Tool Installation
-        - NSF-169 Certification Testing
-  supply_chain_nodes:
-    - location: Verl, Germany
-      role: Industrial Control Systems (IPC/IO)
-      vendor: Beckhoff Automation [20]
-    - location: San Jose, CA
-      role: R&D / Prototype Assembly
-      vendor: Hyphen Technologies [1]
-    - location: Nationwide, USA
-      role: Contract Manufacturing / Scale
-      vendor: Re:Build Manufacturing [7]
-    - location: Nationwide, USA
-      role: Field Service / Maintenance
-      vendor: Ricoh USA [21]
-    - location: Spokane Valley, WA
-      role: Display Module Sourcing
-      vendor: Crystalfontz America [22]
-  tooling_chain:
-    - cost_impact: High
-      lead_time_weeks: 12
-      notes: Critical for NSF hygiene compliance and ±2% dispensing precision [17][18].
-      tool_name: Dispenser Housing Injection Mold
-      type: Hard Tooling
-      vendor: Re:Build Manufacturing [7]
-    - cost_impact: Medium
-      lead_time_weeks: 2
-      notes: Allows for modular cabinet sizing (28in to 43in) [19].
-      tool_name: Chassis Sheet Metal Brake/Laser
-      type: Soft Tooling
-      vendor: Domestic Fabrication Partners
-    - cost_impact: Low
-      lead_time_weeks: 1
-      notes: Custom PCBA 10244R1 to reduce wiring nest [9].
-      tool_name: EtherCAT Bridge PCB Stencil
-      type: Soft Tooling
-      vendor: Hyphen Internal/PCB Fab
 cyberspace:
   layout: linear
   narrative: []
@@ -138,59 +34,19 @@ cyberspace:
       id: 01_misc
       title: Misc
       type: gallery
-date: 2026-01-01
+date: 2026-01-01T00:00:00.000Z
 documents: []
 draft: true
 duration: 5.5 Years
-employer: Hyphen
-forensic_metrics:
-  financial: Secured $25M in Series B funding
-  governance: TwinCAT Core Isolation
-  process: 15-minute cleaning cycle via 'push-to-unlock'
-forensic_summary:
-  intervention: Signal Distribution Architecture (EtherCAT Motherboard)
-  result: Operational Density Achieved (350 meals/hr)
-  trigger: Volumetric Impossible State (70+ actuators in kitchen footprint)
+employer: mechanistic
 gallery: []
 heroImage: /assets/backsplash/hero.webp
-hxo_ready: true
-industry: Tech
-links: []
-metrics:
-  cogs:
-    value: Unknown
-  financial:
-    costOfGoodsSold: []
-    margins: []
-    quotes: []
-    toolingActual: 0
-    toolingBudget: 0
-  governance:
-    dcos: 0
-    ecos: []
-  interventions:
-    count: 0
-    label: Yield Interventions
-  process:
-    dcdCount: 0
-    engineeringChangeOrders: []
-    yield: []
-  production: {}
-  profitability: {}
-  quality: {}
-  time_to_market: {}
-phase_stats:
-  Design: 0
-  Engineering: 0
-  Production: 0
-  Strategy: 0
+industry: consumer_electronics
 presentation_mode: deep_dive
 production: production
 skillData: []
-slug: backsplash
-stats: {}
-statusLabel: In Progress
-tags: [Mechanism, Architecture, Automation]
+tags:
+  - Mechanism
 theme: hyperspace
 title: Backsplash / Infrastructure Slot
 toolIcons: []

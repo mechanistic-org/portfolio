@@ -1,0 +1,29 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://avid.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 134.2,
+    "Engineering": 45.8,
+    "Production": 42.7,
+    "Strategy": 15.2
+  },
+  "slug": "pro-control-jr",
+  "tier": 3
+}

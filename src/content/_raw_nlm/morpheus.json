@@ -1,0 +1,85 @@
+{
+  "cast": [
+    {
+      "name": "Erik Norris",
+      "org": "Mechanistic",
+      "role": "Principal Mechanical Architect"
+    },
+    {
+      "name": "Chip",
+      "org": "Orpheus Project",
+      "role": "Lead"
+    },
+    {
+      "name": "Jenim",
+      "org": "Orpheus Project",
+      "role": "Firmware Lead"
+    }
+  ],
+  "scars": [
+    {
+      "description": "Diagnosed a 'Digital Crash' as physical failure. Assemblers were using excessive force to seat components, flexing the PCB and 'crushing' the traces (Mechanical Violence). Remedied by relieving interference points.",
+      "label": "The Thumb of God",
+      "value": "Mechanical Violence"
+    },
+    {
+      "description": "Managed a logistics empire of 400 unique SKUs. Salvaged a 50-unit pilot build and a 300-unit production run that were destined for the scrap heap.",
+      "label": "The Logistics Empire",
+      "value": "400 SKUs"
+    },
+    {
+      "description": "The IR lens was too tall (0.60 vs 0.36 clearance). Instead of cutting a new mold ($/Time), I modified the doorframe tool to remove interference, preserving the schedule and budget.",
+      "label": "0-to-1 Tooling Save",
+      "value": "IR Lens Hack"
+    },
+    {
+      "description": "Dialed fans to the 7-8V sweet spot, reducing acoustic intensity by 30%. Turned an industrial machine into a whisper-quiet office device.",
+      "label": "Acoustic Silence",
+      "value": "31dBA to 23dBA"
+    }
+  ],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "quotes": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "governance": {
+      "dcos": 0,
+      "ecos": [
+        "Lens_Clearance_Mod"
+      ]
+    },
+    "process": {
+      "engineeringChangeOrders": [
+        "Tooling Mod (Doorframe)",
+        "K-Disc Alignment"
+      ],
+      "yieldCrisis": "100% Scrap Rate (Avoided)"
+    },
+    "quotes": [
+      "Jenim could not talk to Chip. That's the error. Right on the screen. A total crash loop.",
+      "It wasn't the silicon at all. Eric Norris pins it on the thumb of God.",
+      "If you don't respect the actual physics of assembly, the thumb of God is going to find your project and is going to crush it."
+    ]
+  },
+  "toolchain": [],
+  "forensic_metrics": {
+    "quotes": []
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [],
+  "phase_stats": {
+    "Design": 0,
+    "Engineering": 100,
+    "Production": 0,
+    "Strategy": 0
+  },
+  "phases": {},
+  "slug": "morpheus",
+  "stats": {},
+  "tier": 3
+}

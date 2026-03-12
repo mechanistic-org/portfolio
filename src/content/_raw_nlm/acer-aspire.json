@@ -1,0 +1,48 @@
+{
+  "cast": [],
+  "scars": [],
+  "metrics": {
+    "cogs": {},
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "quotes": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "governance": {
+      "ecos": []
+    },
+    "interventions": {},
+    "process": {
+      "engineeringChangeOrders": []
+    },
+    "profitability": {},
+    "quotes": [],
+    "time_to_market": {}
+  },
+  "toolchain": [
+    "pro_engineer"
+  ],
+  "forensic_metrics": {
+    "quotes": []
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "name": "frogdesign Website",
+      "url": "https://frog.co"
+    }
+  ],
+  "phase_stats": {
+    "Design": 39.6,
+    "Engineering": 13.5,
+    "Production": 12.6,
+    "Strategy": 4.5
+  },
+  "phases": {},
+  "slug": "acer-aspire",
+  "stats": {},
+  "tier": 3
+}

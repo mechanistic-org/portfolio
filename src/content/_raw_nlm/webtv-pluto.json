@@ -1,0 +1,60 @@
+{
+  "scars": [],
+  "metrics": {
+    "cogs": {
+      "label": "Ship Date",
+      "value": "Dec 27"
+    },
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "governance": {
+      "dcos": 0,
+      "ecos": [
+        "Christmas_Sprint",
+        "BOM_Recovery"
+      ]
+    },
+    "interventions": {
+      "count": 3,
+      "label": "Vendors Managed"
+    },
+    "process": {
+      "engineeringChangeOrders": [
+        "Christmas_Build"
+      ]
+    },
+    "profitability": {
+      "label": "Deadline Hit",
+      "value": "CES"
+    }
+  },
+  "forensic_summary": {
+    "intervention": "Completed Pro/E files for Zeus enclosure for rapid fab at EMS, managed bezel machining at Sputnik, and 'babysat' hardware procurement. -> The",
+    "result": "Successful build completed over Christmas weekend; units shipped out on Dec 27th for the show.",
+    "trigger": "Hard deadline for CES (Jan 3) with PCBs arriving late Nov/early Dec and wrong hardware ordered, creating an 'impossible load' over the holidays. -> The"
+  },
+  "toolchain": [
+    "Pro/ENGINEER",
+    "Agile (BOM Management)"
+  ],
+  "forensic_metrics": {
+    "financial": "N/A (Critical Trade Show Deliverable)",
+    "process": "Simultaneous coordination of PCB fab, sheet metal (EMS), and machining (Sputnik)",
+    "technical": "Completed Pro/E database for Zeus/Pluto enclosures in rapid sprint"
+  },
+  "hxo_ready": true,
+  "hydration_status": "full",
+  "links": [],
+  "phase_stats": {
+    "Design": 10,
+    "Engineering": 90,
+    "Production": 0,
+    "Strategy": 0
+  },
+  "slug": "webtv-pluto",
+  "tier": 1
+}

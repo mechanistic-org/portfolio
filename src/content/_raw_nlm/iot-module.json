@@ -1,0 +1,29 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://synapse.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 40.5,
+    "Engineering": 13.8,
+    "Production": 12.9,
+    "Strategy": 4.6
+  },
+  "slug": "iot-module",
+  "tier": 3
+}

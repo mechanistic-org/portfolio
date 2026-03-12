@@ -1,0 +1,50 @@
+{
+  "cast": [],
+  "scars": [],
+  "metrics": {
+    "cogs": {},
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "quotes": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "governance": {
+      "ecos": []
+    },
+    "interventions": {},
+    "process": {
+      "engineeringChangeOrders": []
+    },
+    "profitability": {},
+    "quotes": [],
+    "time_to_market": {}
+  },
+  "toolchain": [],
+  "forensic_metrics": {
+    "quotes": []
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "name": "Microsoft Website",
+      "url": "https://microsoft.com"
+    },
+    {
+      "name": "UltimateTV Website",
+      "url": "https://microsoft.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 40,
+    "Engineering": 13.7,
+    "Production": 12.7,
+    "Strategy": 4.5
+  },
+  "phases": {},
+  "slug": "xbox",
+  "stats": {},
+  "tier": 3
+}

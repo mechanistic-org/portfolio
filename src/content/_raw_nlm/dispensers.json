@@ -1,0 +1,147 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "complexity_vector": {
+    "part_count_growth": [
+      {
+        "count": 150,
+        "date": "2019-10",
+        "phase": "Concept (Ono Food Co. Truck)"
+      },
+      {
+        "count": 450,
+        "date": "2021-08",
+        "phase": "EVT (Hyphen Pivot / Alpha)"
+      },
+      {
+        "count": 850,
+        "date": "2023-06",
+        "phase": "DVT (Cultivate Center Lab)"
+      },
+      {
+        "count": 1200,
+        "date": "2024-09",
+        "phase": "PVT (Corona del Mar Pilot)"
+      },
+      {
+        "count": 1450,
+        "date": "2025-01",
+        "phase": "MP (Re:Build Mfg Ramp)"
+      }
+    ],
+    "process_density": [
+      {
+        "complexity_score": 8,
+        "material": "Polycarbonate / SS 304",
+        "part_name": "Type B Dispenser Chute (Guacamole/Paste)",
+        "steps": [
+          "Injection Molding (Food Contact)",
+          "Ultrasonic Welding",
+          "Actuator Integration (Push-to-Unlock)",
+          "Sensor Embed (IR/Optical)",
+          "Surface Polishing (Anti-Adhesion)",
+          "NSF-169 Validation"
+        ]
+      },
+      {
+        "complexity_score": 9,
+        "material": "Food-Grade Silicone / Acetal",
+        "part_name": "Type C Flexible Agitator Assembly",
+        "steps": [
+          "Overmolding",
+          "Precision Machining (Shaft)",
+          "Torque Calibration (Auto-Tune)",
+          "Fatigue Testing (Non-Newtonian Fluids)",
+          "HACCP Compliance Check"
+        ]
+      },
+      {
+        "complexity_score": 7,
+        "material": "FR-4 PCB",
+        "part_name": "EtherCAT Signal Distribution Board",
+        "steps": [
+          "SMT Assembly",
+          "EJ Module Insertion (TwinSAFE)",
+          "Conformal Coating (IP65 protection)",
+          "Firmware Flash (TwinCAT 3)",
+          "Core Isolation Partitioning"
+        ]
+      }
+    ],
+    "supply_chain_nodes": [
+      {
+        "location": "Verl, Germany",
+        "role": "Controls/IPC (C6030, EtherCAT)",
+        "vendor": "Beckhoff Automation"
+      },
+      {
+        "location": "San Jose, CA",
+        "role": "R&D / Firmware / Assembly",
+        "vendor": "Hyphen HQ"
+      },
+      {
+        "location": "Framingham, MA",
+        "role": "Contract Manufacturing / Scale",
+        "vendor": "Re:Build Manufacturing"
+      },
+      {
+        "location": "Brunswick, OH",
+        "role": "Fasteners / Clips",
+        "vendor": "ARaymond / Tinnerman"
+      },
+      {
+        "location": "Exton, PA",
+        "role": "Field Service Network",
+        "vendor": "Ricoh USA"
+      }
+    ],
+    "tooling_chain": [
+      {
+        "cost_impact": "Low",
+        "lead_time_weeks": 1,
+        "tool_name": "Rapid Prototype Dispenser Housings",
+        "type": "Soft Tooling (SLA Printing)",
+        "vendor": "Formlabs (In-house)"
+      },
+      {
+        "cost_impact": "High",
+        "lead_time_weeks": 16,
+        "tool_name": "Dispenser Chassis Injection Molds",
+        "type": "Hard Tooling (Steel Molds)",
+        "vendor": "Re:Build Manufacturing"
+      },
+      {
+        "cost_impact": "Med",
+        "lead_time_weeks": 8,
+        "tool_name": "Worm Gear Hobbing",
+        "type": "Hard Tooling (Machining)",
+        "vendor": "KHK Gears"
+      }
+    ]
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://hyphen.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 117,
+    "Engineering": 39.9,
+    "Production": 37.2,
+    "Strategy": 13.3
+  },
+  "slug": "dispensers",
+  "tier": 1
+}

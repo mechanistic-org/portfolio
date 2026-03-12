@@ -1,89 +1,6 @@
 ---
 category: module_subsystem
 client: []
-complexity_vector:
-  part_count_growth:
-    - count: 0
-      date: 2020-06
-      phase: Concept (Ono Food Truck Pivot)
-    - count: 70
-      date: 2022-07
-      description:
-        70+ Actuators per unit, initial dispenser calibration for 'adversary
-        ingredients'
-      phase: EVT (Lab Testing - Irvine)
-    - count: 350
-      date: 2023-10
-      description: "Throughput validation: 350 meals/hour, 99% accuracy"
-      phase: DVT (Design Validation)
-    - count: 500
-      date: 2024-09
-      description: Live deployment with 500+ ingredient compatibility testing
-      phase: PVT (Pilot - Corona del Mar)
-    - count: 7000
-      date: 2026-01
-      description: Targeted deployment to 7,000 North American locations
-      phase: MP (Mass Production Goal)
-  process_density:
-    - complexity_score: 8
-      material: Aluminum 6061
-      part_name: "TILT_ARM_DRIVEN_1 (PN: 10037)"
-      source_ref: BOM_TILT_RAMP [1]
-      steps:
-        - CNC Machining
-        - Boring (Bearing Fit)
-        - Magnet Press-Fit (N52 1/4 x 1/8)
-        - Dowel Pin Insertion (6x14 Stainless)
-        - Set Screw Assembly (M5x0.8 Serrated)
-    - complexity_score: 9
-      material: Stainless Steel 316
-      part_name: "WORM_GEAR_HOUSING (PN: 10019)"
-      source_ref: BOM_TILT_RAMP [1]
-      steps:
-        - Casting/Machining
-        - Shim Stacking (0.1mm - 0.5mm precision)
-        - Oil Seal Installation (8x16x6)
-        - Bearing Press (608-2Z)
-        - Gasket Sealing
-    - complexity_score: 10
-      material: FR4 / Mixed Logic
-      part_name: Dispenser Control PCBA
-      source_ref: makeline.pdf [2]
-      steps:
-        - SMT Assembly
-        - EtherCAT Bridge Integration
-        - TwinSAFE I/O Module Mounting
-        - Firmware Flash (TwinCAT 3)
-        - Thermal Stress Test
-  supply_chain_nodes:
-    - location: San Jose, CA
-      role: Engineering HQ / R&D
-      vendor: Hyphen Technologies
-    - location: Framingham, MA (HQ)
-      role: Contract Manufacturer
-      vendor: Re:Build Manufacturing
-    - location: Exton, PA (HQ)
-      role: Field Service / MRO
-      vendor: Ricoh USA
-    - location: Irvine, CA
-      role: Validation Lab
-      vendor: Chipotle Cultivate Center
-    - location: Newport Beach, CA (Corona del Mar)
-      role: Live Pilot Site
-      vendor: "Chipotle Store #3050"
-  tooling_chain:
-    - cost_impact: High
-      lead_time_weeks: 12
-      notes: Proprietary de-agglomeration geometry for sticky ingredients (carnitas/rice).
-      tool_name: Intelligent Dispenser Array
-      type: Hard Tooling / Injection Mold & Machined SS
-      vendor: Re:Build Manufacturing
-    - cost_impact: Med
-      lead_time_weeks: 4
-      notes: Industrial hardened, IP65 rated interface.
-      tool_name: Beckhoff C6030 IPC Enclosure
-      type: Soft Tooling / Sheet Metal Fold
-      vendor: Beckhoff Automation / Hyphen
 cyberspace:
   enable: true
   layout: linear
@@ -91,97 +8,32 @@ cyberspace:
     - align: center
       data: null
       id: intro
-      text: <strong>YEAR:</strong> 2021<br/><strong>ROLE:</strong> Hyphen
+      text: '<strong>YEAR:</strong> 2021<br/><strong>ROLE:</strong> Hyphen'
       title: Makeline
       type: media
     - align: center
       id: details
-      text:
-        This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong>
-        Other
+      text: >-
+        This record has been upgraded to the Hyperspace
+        Protocol.<br/><br/><strong>Group:</strong> Other
       title: PROJECT DATA
       type: void
-date: 2021-05-01 00:00:00+00:00
+date: 2021-05-01T00:00:00.000Z
 documents: []
 draft: false
 duration: 1.3 Years
 employer: hyphen
-endDate: 2022-08-24 00:00:00+00:00
-forensic_metrics:
-  financial: Reduced MTTR from Hours to Minutes via Hot-Swap Modules.
-  process: "Parallel Workstreams: Chassis vs Payload (The Decoupling Strategy)"
-  technical: Orchestrated 350+ Actuators in IP69K Washdown Environment
-forensic_summary:
-  intervention:
-    Architected the mechanical system for the world's first automated
-    Makeline. Shifted from component design to 'System Architecture,' treating the
-    assembly as a physical network topology. Intervened to decouple the 'Payload Modules'
-    (Dispensers) from the 'Chassis,' allowing parallel development and scaling. Built
-    the 'Iron Bird' integration rig to validate 48V/CAN bus loads before steel fabrication.
-  result:
-    Established a modular architecture enabling parallel development and successfully
-    validated the system via the 'Iron Bird' rig.
-  trigger: Legacy Data (Migration) - System integration of the IP69K variety.
+endDate: 2022-08-24T00:00:00.000Z
 gallery: []
-hxo_ready: true
-hydration_status: full
 industry: consumer_electronics
-links:
-  - name: Hyphen Website
-    url: https://hyphen.com
-metrics:
-  cogs:
-    value: Unknown
-  financial:
-    costOfGoodsSold: []
-    margins: []
-    quotes: []
-    toolingActual: 0
-    toolingBudget: 0
-  governance:
-    dcos: 0
-    ecos: []
-  interventions:
-    count: 0
-    label: Yield Interventions
-  process:
-    dcdCount: 0
-    engineeringChangeOrders: []
-    yield: []
-  production: {}
-  profitability: {}
-  quality: {}
-  time_to_market: {}
-phase_stats:
-  Design: 211.2
-  Engineering: 72
-  Production: 67.2
-  Strategy: 24
 presentation_mode: deep_dive
 production: production
 productionScale: one_off
-scars:
-  - description:
-      Defined the specific IP69K strategy (Gasket compression, Breathers)
-      to ensure waterproof sealing in a washdown environment.
-    label: The Sealing Logic
-    value: IP69K
-  - description:
-      Moved the 'Hours to Minutes' stat from text into the metrics structure,
-      focusing on rapid module replacement.
-    label: The MTTR Metric
-    value: C24
-slug: makeline
-tags: [Mechanism, Automation, Yield, Architecture]
+tags:
+  - Mechanism
+  - Yield
 theme: hyperspace
-tier: 1
 title: Makeline
-toolchain:
-  - Onshape (Cloud CAD)
-  - Iron Bird (System Integration Rig)
-  - Stainless Sheet Metal (Sanitary)
-  - 350+ Actuator Orchestration
-  - IP69K Waterproofing
 tools:
   - onshape
 teamSize: Unknown

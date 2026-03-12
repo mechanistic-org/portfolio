@@ -1,284 +1,130 @@
 ---
-audio_url: /assets/webtv-cortez/webtv-cortez-briefing.m4a
-bom:
-- label: Housing
-  value: Injection Molded ABS (Target 0.6kg)
-- label: Key Matrix
-  value: Silitek SK-7510 (Modified 19.05mm)
-- label: Grip Areas
-  value: Co-molded Santoprene
-cast:
-- name: Erik Norris (Lincicum)
-  org: Mechanistic
-  role: Product Designer / Surface Architect
-- name: Leslie Leland
-  org: WebTV
-  role: Product Manager
-- name: Jeff Jones
-  org: PSDA
-  role: Industrial Design
-- name: Val Kasvin
-  org: Sputnik Models
-  role: Model Maker
 category: input_device
-complexity_vector:
-  part_count_growth:
-  - count: 0
-    date: 2000-04
-    phase: Concept (RFQ/Spec)
-  - count: 92
-    date: 2000-06
-    phase: Proto (Hard Model Review)
-  - count: 92
-    date: 2000-06
-    phase: DVT (File Release)
-  - count: 92
-    date: 2000-11
-    phase: PVT (Working Samples)
-  - count: 92
-    date: 2001-01
-    phase: MP (Mass Production)
-  process_density:
-  - complexity_score: 9
-    material: Ren Shape / Injection Molded ABS
-    part_name: Top Housing (Bezel)
-    steps:
-    - Pro/E Organic Surfacing (Lofting)
-    - IR Tilt Geometry Enforcement (3-15 deg)
-    - CNC Machining (Soft Tool)
-    - Primer/Sanding
-    - Paint (Silver/Sparkle)
-    - Pad Print (Legends)
-  - complexity_score: 8
-    material: ABS / Elastomer
-    part_name: Key Matrix (SK-7510 Modified)
-    steps:
-    - Standard Matrix Integration
-    - Custom Tooling (Enter/Shift Keys)
-    - Membrane Assembly
-    - PCB Integration
-    - Elastomeric Keypad Addition (Nav Cluster)
-  supply_chain_nodes:
-  - location: Taipei, Taiwan
-    role: ODM / Key Matrix Fab
-    vendor: Silitek
-  - location: San Francisco, USA
-    role: Rapid Prototyping / Finishing
-    vendor: Sputnik Models
-  - location: Milpitas, USA
-    role: Reference Design / Data Source
-    vendor: Panasonic
-  tooling_chain:
-  - cost_impact: High ($30,000 NRE)
-    lead_time_weeks: 4
-    tool_name: Custom Keycap Molds (Enter/Shift)
-    type: Hard Tooling
-    vendor: Silitek
-  - cost_impact: Medium ($2,000+)
-    lead_time_weeks: 1
-    tool_name: Housing Master Patterns
-    type: Soft Tooling (CNC Ren)
-    vendor: Sputnik Models
 cyberspace:
   layout: linear
   stickies:
-  - data:
-      columns: 3
-      images:
-      - alt: back
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/01_early_id/back.jpg
-      - alt: bot
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/01_early_id/bot.jpg
-      - alt: front
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/01_early_id/front.jpg
-      - alt: l_eye
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/01_early_id/l_eye.jpg
-      - alt: l_eye_30
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/01_early_id/l_eye_30.jpg
-      - alt: lefteye
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/01_early_id/lefteye.jpg
-      - alt: lefteyetop
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/01_early_id/lefteyetop.jpg
-      - alt: right
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/01_early_id/right.jpg
-      - alt: righteye
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/01_early_id/righteye.jpg
-      - alt: righteyetop
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/01_early_id/righteyetop.jpg
-      - alt: top
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/01_early_id/top.jpg
-      layout: masonry
-      scattered: true
-    deck: []
-    featuredIndices: []
-    id: 01_early_id
-    title: Early Id
-    type: gallery
-  - data:
-      columns: 3
-      images:
-      - alt: cortez3
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/03_functional_model/cortez3.jpg
-      - alt: Keyboard right detail
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/03_functional_model/Keyboard right detail.jpg
-      - alt: UltimateTV_Keyboard-and-Remote_1_
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/03_functional_model/UltimateTV_Keyboard-and-Remote_1_.png
-      - alt: UltimateTV_Keyboard-and-Remote_2
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/03_functional_model/UltimateTV_Keyboard-and-Remote_2.png
-      layout: masonry
-      scattered: true
-    deck: []
-    featuredIndices: []
-    id: 03_functional_model
-    title: Functional Model
-    type: gallery
-  - data:
-      columns: 3
-      images:
-      - alt: cap1x1 (1)
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/04_keycaps/cap1x1 (1).png
-      - alt: cap1x1 (2)
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/04_keycaps/cap1x1 (2).png
-      - alt: cap1x1
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/04_keycaps/cap1x1.png
-      - alt: keylegend
-        aspectRatio: 1.5
-        src: /assets/webtv-cortez/bubbles/04_keycaps/keylegend.png
-      layout: masonry
-      scattered: true
-    deck: []
-    featuredIndices: []
-    id: 04_keycaps
-    title: Keycaps
-    type: gallery
-  - align: right
-    data:
-      cameraOrbit: 45deg 55deg 2.5m
-      fieldOfView: 30deg
-      modelSrc: /assets/webtv-cortez/3d/cortez_master.glb
-    deck: []
-    featuredIndices: []
-    id: 3d_model
-    title: Interactive Model
-    type: model
-date: 2000-04-01
+    - data:
+        columns: 3
+        images:
+          - alt: back
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/01_early_id/back.jpg
+          - alt: bot
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/01_early_id/bot.jpg
+          - alt: front
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/01_early_id/front.jpg
+          - alt: l_eye
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/01_early_id/l_eye.jpg
+          - alt: l_eye_30
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/01_early_id/l_eye_30.jpg
+          - alt: lefteye
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/01_early_id/lefteye.jpg
+          - alt: lefteyetop
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/01_early_id/lefteyetop.jpg
+          - alt: right
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/01_early_id/right.jpg
+          - alt: righteye
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/01_early_id/righteye.jpg
+          - alt: righteyetop
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/01_early_id/righteyetop.jpg
+          - alt: top
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/01_early_id/top.jpg
+        layout: masonry
+        scattered: true
+      deck: []
+      featuredIndices: []
+      id: 01_early_id
+      title: Early Id
+      type: gallery
+    - data:
+        columns: 3
+        images:
+          - alt: cortez3
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/03_functional_model/cortez3.jpg
+          - alt: Keyboard right detail
+            aspectRatio: 1.5
+            src: >-
+              /assets/webtv-cortez/bubbles/03_functional_model/Keyboard right
+              detail.jpg
+          - alt: UltimateTV_Keyboard-and-Remote_1_
+            aspectRatio: 1.5
+            src: >-
+              /assets/webtv-cortez/bubbles/03_functional_model/UltimateTV_Keyboard-and-Remote_1_.png
+          - alt: UltimateTV_Keyboard-and-Remote_2
+            aspectRatio: 1.5
+            src: >-
+              /assets/webtv-cortez/bubbles/03_functional_model/UltimateTV_Keyboard-and-Remote_2.png
+        layout: masonry
+        scattered: true
+      deck: []
+      featuredIndices: []
+      id: 03_functional_model
+      title: Functional Model
+      type: gallery
+    - data:
+        columns: 3
+        images:
+          - alt: cap1x1 (1)
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/04_keycaps/cap1x1 (1).png
+          - alt: cap1x1 (2)
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/04_keycaps/cap1x1 (2).png
+          - alt: cap1x1
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/04_keycaps/cap1x1.png
+          - alt: keylegend
+            aspectRatio: 1.5
+            src: /assets/webtv-cortez/bubbles/04_keycaps/keylegend.png
+        layout: masonry
+        scattered: true
+      deck: []
+      featuredIndices: []
+      id: 04_keycaps
+      title: Keycaps
+      type: gallery
+    - align: right
+      data:
+        cameraOrbit: 45deg 55deg 2.5m
+        fieldOfView: 30deg
+        modelSrc: /assets/webtv-cortez/3d/cortez_master.glb
+      deck: []
+      featuredIndices: []
+      id: 3d_model
+      title: Interactive Model
+      type: model
+date: 2000-04-01T00:00:00.000Z
 documents: []
 draft: false
 duration: 1.8 Years
 employer: mechanistic
-endDate: 2002-02-01
-forensic_metrics:
-  financial: Billed $24,900 in June 2000 for accelerated surface development rescue
-    [1, 2]
-  governance: 'High-frequency iteration: Weekly status reports paired with bi-weekly
-    invoicing and immediate CAD restructuring post-review [1]'
-  process: Compressed 12-week surfacing cycle into 6-week sprint from broken wireframe
-    to manufacturing release [3]
-forensic_summary:
-  intervention: Norris (as Lincicum) executed a high-intensity 'Surgical CAD' sprint
-    (100+ hours in &lt;2 weeks) to re-loft the top surfaces, enforce a 7-11 degree IR
-    tilt, and modify grip curvature while constraining internal geometry to standard
-    low-cost key matrices.
-  result: Delivered a manufacturable database that reconciled the 'Airboard' form
-    factor with standard membrane switches, securing executive approval for the new
-    model despite 'beating on extra CAD hours'.
-  trigger: Vendor analysis (Silitek/Panasonic) revealed the ID intent was mechanically
-    impossible—specifically, the rubber pad was 'too close to the edge' for PCB sealing
-    and the key matrix pitch (19.05mm) clashed with the 2D layout. The initial hard
-    model failed ergonomic validation (not level, too heavy).
+endDate: 2002-02-01T00:00:00.000Z
 gallery: []
 heroImage: /assets/webtv-cortez/webtv-cortez-hero-01-xl.webp
-hxo_ready: true
-hydration_status: full
 industry: consumer_electronics
-isomorphics:
-- hardware_point: 0.05mm pitch error x 15 keys = 0.75mm misalignment (Bezel Interference)
-  label: Tolerance Accumulation
-  principle: Law of Propagated Error
-  software_point: Floating point error accumulation in render loops causing texture
-    tearing
-links: []
 listed: true
-metrics:
-  cogs:
-    label: COGS
-    value: N/A
-  financial:
-    costOfGoodsSold: []
-    margins: []
-    toolingActual: 30000
-    toolingBudget: 30000
-  governance:
-    dcos: 0
-    ecos:
-    - 0.05mm_Pitch_Fix
-    - 43-Hour_CAD_Sprint
-  interventions:
-    count: 3
-    label: Critical Interventions
-  process:
-    engineeringChangeOrders:
-    - Key_Deletion_Mod
-    - Pitch_Correction
-    yieldCrisis: null
-  profitability:
-    label: Concept-to-Proto
-    value: 6 Weeks
-  quotes:
-  - Top surface entirely flat. Can you add curvature overall? [6]
-  - The 3D file I received from Panasonic does not have much information. It is a
-    wire frame file and does not show navigation keys. [4, 12]
-  - Silitek's SK-7500 and SK-7510 has 19.05 mm pitch... We can design a keyboard in
-    smaller pitch, ex. 19mm. [7]
-notebook_url: https://notebooklm.google.com/notebook/0e4b3124-6d3a-4835-8f2c-672d26b25989?authuser=1
 presentation_mode: deep_dive
 production: prototype
 productionScale: one_off
-scars:
-- description: Initial hard model rejected for lacking curvature and IR tilt; required
-    total surface reconstruction in 28 hours [6].
-  label: The Flat Failure
-  value: 0° to 15° Tilt
-- description: ID specified 19mm pitch vs Silitek standard 19.05mm; accumulation across
-    85 keys threatened bezel alignment/yield [7, 10, 11].
-  label: The Matrix War
-  value: 0.05mm Pitch Delta
-- description: Vendor provided useless IGES wireframes derived from Catia; forced
-    blind reconstruction of navigation surfaces [4, 12].
-  label: Panasonic Data Void
-  value: Wireframe vs Surface
-slug: webtv-cortez
-tags: [Crisis, Yield, Process, Materials]
+tags:
+  - Crisis
+  - Yield
 theme: hyperspace
-tier: 1
 title: Cortez
-toolchain:
-- Pro/ENGINEER (Surface Modeling, Mechanical Detail)
-- AutoCAD (DXF Data Exchange with Vendors)
-- 'Vendors: Silitek (Key Matrix), Panasonic (RF/Mechanical Review), Sputnik Models
-  (Hard Modeling), Lite-On'
 tools:
-- pro_engineer
-- autocad
-transcript: ''
+  - pro_engineer
+  - autocad
 teamSize: INT 4
 ---
 

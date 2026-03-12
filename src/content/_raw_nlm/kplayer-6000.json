@@ -1,0 +1,142 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "complexity_vector": {
+    "part_count_growth": [
+      {
+        "count": 0,
+        "date": "2007-05",
+        "phase": "Concept"
+      },
+      {
+        "count": 8,
+        "date": "2008-02",
+        "phase": "Proto 1 (First Prototype)"
+      },
+      {
+        "count": 15,
+        "date": "2008-03",
+        "phase": "Preview (Design Validation)"
+      },
+      {
+        "count": 150,
+        "date": "2008-06",
+        "phase": "Launch Ramp (Finished Goods)"
+      }
+    ],
+    "process_density": [
+      {
+        "complexity_score": 9,
+        "material": "Plastic / Silicone / Metal Springs",
+        "part_name": "Front Bezel Assembly (Drive Door)",
+        "steps": [
+          "Injection Molding (Weddy)",
+          "Texturing/Painting",
+          "Silicone Button Assembly",
+          "Spring Installation (Torsion)",
+          "Hinge Pin Insertion",
+          "Interference Fit Check (Zero Clearance)"
+        ]
+      },
+      {
+        "complexity_score": 6,
+        "material": "Sheet Metal",
+        "part_name": "Air Dam Bracket (501-1101-00)",
+        "steps": [
+          "Stamping",
+          "Forming (Closed Hem)",
+          "Captive Washer Screw Insertion",
+          "Cable Routing Relief Cutout",
+          "Assembly with Drive Bracket (501-1082)"
+        ]
+      },
+      {
+        "complexity_score": 5,
+        "material": "Steel",
+        "part_name": "Main Chassis (1U)",
+        "steps": [
+          "Hard Tooling Punch",
+          "Forming",
+          "Powder Coat",
+          "Screen Printing",
+          "Riveting (PEM Hardware)"
+        ]
+      }
+    ],
+    "supply_chain_nodes": [
+      {
+        "location": "Taiwan",
+        "role": "Hard Tooling / Chassis Fab",
+        "vendor": "Weddy"
+      },
+      {
+        "location": "Waterloo, Canada",
+        "role": "PCB Proto Assembly",
+        "vendor": "Proworks"
+      },
+      {
+        "location": "Milpitas, CA",
+        "role": "PCB/System Assembly (MP)",
+        "vendor": "Sanmina"
+      },
+      {
+        "location": "Unknown",
+        "role": "Motherboard Vendor",
+        "vendor": "Kontron"
+      },
+      {
+        "location": "Unknown",
+        "role": "Video Processor",
+        "vendor": "Sigma Designs"
+      }
+    ],
+    "tooling_chain": [
+      {
+        "cost_impact": "Low ($27.92/unit vs $84.62 soft)",
+        "lead_time_weeks": 10,
+        "tool_name": "Chassis & Bezel Hard Tooling",
+        "type": "Hard Tooling",
+        "vendor": "Weddy"
+      },
+      {
+        "cost_impact": "High (Delay Risk)",
+        "lead_time_weeks": 2,
+        "tool_name": "Front Bezel Mold Modification",
+        "type": "Hard Tooling Modification",
+        "vendor": "Weddy"
+      },
+      {
+        "cost_impact": "Med",
+        "lead_time_weeks": 4,
+        "tool_name": "PCB Assembly Fixtures",
+        "type": "Soft Tooling",
+        "vendor": "Proworks / Sanmina"
+      }
+    ]
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://kaleidescape.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 134.6,
+    "Engineering": 45.9,
+    "Production": 42.8,
+    "Strategy": 15.3
+  },
+  "slug": "kplayer-6000",
+  "tier": 3
+}

@@ -18,15 +18,19 @@ def cloudflare_request(method, url, api_token, data=None):
     try:
         with urllib.request.urlopen(req) as response:
             if response.status == 204: # No Content
-                return None
+                return True
             return json.load(response)
     except urllib.error.HTTPError as e:
-        print(f"❌ HTTP Error {e.code}: {e.reason}")
+        error_body = ""
         try:
             error_body = e.read().decode()
-            print(f"   Body: {error_body}")
         except:
             pass
+        if "8000034" in error_body or "active production deployment" in error_body:
+            # Safely ignore the active production deployment error
+            return False
+        print(f"❌ HTTP Error {e.code}: {e.reason}")
+        print(f"   Body: {error_body}")
         sys.exit(1)
     except Exception as e:
         print(f"❌ Error: {e}")
@@ -63,22 +67,31 @@ def main():
         deployments = resp["result"]
         print(f"⚠️  Found {len(deployments)} deployments. Deleting...")
         
+        deleted_any = False
         for dep in deployments:
             dep_id = dep["id"]
-            if dep.get('environment') == 'production' and dep.get('aliases') and not args.delete_project:
-                 # Safety: Don't delete active production if we aren't nuking the whole project?
-                 # Actually, the goal IS to nuke the whole project.
-                 pass
 
             print(f"   🗑️  Deleting {dep_id}...", end="", flush=True)
             delete_url = f"{base_url}/deployments/{dep_id}"
             
             # Using force=true might be needed? Docs don't specify force for deployments.
-            cloudflare_request("DELETE", delete_url, api_token)
-            print(" Done.")
+            deleted = cloudflare_request("DELETE", delete_url, api_token)
+            if deleted is True:
+                deleted_any = True
+                print(" Done.")
+            elif deleted is False:
+                print(" Skipped (Active Prod).")
+            else:
+                # Fallback if DELETE returns a JSON payload instead of 204
+                deleted_any = True
+                print(" Done.")
             
             # Rate limit protection (1200/5min usually, but let's be safe)
             time.sleep(0.5) 
+            
+        if not deleted_any:
+            print("⚠️  No deployments could be deleted in this batch. Exiting loop.")
+            break
             
     # 2. Delete Project
     if args.delete_project:

@@ -1,0 +1,175 @@
+{
+  "scars": [],
+  "metrics": {
+    "cogs": {
+      "value": "$450.00"
+    },
+    "financial": {
+      "costOfGoodsSold": [
+        "$450.00"
+      ],
+      "margins": [],
+      "quotes": [],
+      "toolingActual": 21516,
+      "toolingBudget": 25000
+    },
+    "governance": {
+      "dcos": 1,
+      "ecos": [
+        "ECO-21-102"
+      ]
+    },
+    "interventions": {
+      "count": 3,
+      "label": "Yield Interventions"
+    },
+    "process": {
+      "engineeringChangeOrders": [],
+      "yield": []
+    },
+    "production": {},
+    "profitability": {},
+    "quality": {},
+    "time_to_market": {}
+  },
+  "complexity_vector": {
+    "part_count_growth": [
+      {
+        "count": 1,
+        "date": "2020-08",
+        "note": "Single Hopper/Auger prototyping via Formlabs 3L (1-3 iterations/day)",
+        "phase": "Concept (R&D Iteration)"
+      },
+      {
+        "count": 24,
+        "date": "2021-03",
+        "note": "Initial sub-assembly integration; reliance on 3D printed Rigid 10K resin for metal replacement",
+        "phase": "EVT (Eng Validation)"
+      },
+      {
+        "count": 58,
+        "date": "2021-06",
+        "note": "Structured BOM (Rev A/B); transition to CNC/Wire EDM for gears and shafts",
+        "phase": "DVT (Design Validation)"
+      },
+      {
+        "count": 70,
+        "date": "2021-12",
+        "note": "Integration of 70+ actuators and functional safety I/O modules",
+        "phase": "PVT (Prod Validation)"
+      },
+      {
+        "count": 70,
+        "date": "2022-05",
+        "note": "Stabilized BOM with specialized dispensers (Types B-F) for 500+ ingredients",
+        "phase": "MP (Mass Production)"
+      }
+    ],
+    "process_density": [
+      {
+        "complexity_score": 9,
+        "material": "Acetal (Delrin) / Stainless Steel 316 (Wire Wrapped)",
+        "part_name": "Helix / Auger (P/N 123-00038)",
+        "steps": [
+          "SLA Rapid Prototype (Clear Resin/Rigid 10K)",
+          "Functional Flow Testing",
+          "CNC Machining (DVT)",
+          "Casting (Mass Production)",
+          "Surface Finishing (Food Safe)"
+        ]
+      },
+      {
+        "complexity_score": 7,
+        "material": "Stainless Steel 416",
+        "part_name": "Gear, Pinion (P/N 123-00049)",
+        "steps": [
+          "Raw Stock Procurement",
+          "Wire EDM",
+          "Passivation",
+          "Inspection (Tolerance +/- 0.05mm)"
+        ]
+      },
+      {
+        "complexity_score": 6,
+        "material": "STERALLOY 2380",
+        "part_name": "Sleeve Alignment Guide (P/N 123-00055)",
+        "steps": [
+          "Master Pattern Generation (SLA)",
+          "Silicone Mold Creation",
+          "Urethane Casting",
+          "Post-Cure Machining"
+        ]
+      }
+    ],
+    "supply_chain_nodes": [
+      {
+        "location": "Zhongshan, China",
+        "role": "CNC / Rapid Prototyping",
+        "vendor": "SunPe"
+      },
+      {
+        "location": "Dongguan, China",
+        "role": "Mold / CNC",
+        "vendor": "JunYiMould"
+      },
+      {
+        "location": "Anaheim, CA, USA",
+        "role": "Motor Actuation",
+        "vendor": "Anaheim Automation"
+      },
+      {
+        "location": "Elmhurst, IL, USA",
+        "role": "COTS Hardware",
+        "vendor": "McMaster-Carr"
+      },
+      {
+        "location": "Newark, NJ, USA",
+        "role": "Sensors (Optical/Drop)",
+        "vendor": "Panasonic / DigiKey"
+      },
+      {
+        "location": "San Jose, CA, USA",
+        "role": "FATP (Final Assembly)",
+        "vendor": "Hyphen / Re:Build Manufacturing"
+      }
+    ],
+    "tooling_chain": [
+      {
+        "cost_impact": "High ($3,044 Master + Mold)",
+        "lead_time_weeks": 3,
+        "tool_name": "Enclosure Solid Mold (P/N 123-00047)",
+        "type": "Hard Tooling (Cast)",
+        "vendor": "ProtoTech / Hyphen Internal"
+      },
+      {
+        "cost_impact": "Medium",
+        "lead_time_weeks": 2,
+        "tool_name": "Helix Drive Shaft (P/N 123-00039)",
+        "type": "Soft Tooling (CNC)",
+        "vendor": "SunPe"
+      },
+      {
+        "cost_impact": "Low (High Iteration Velocity)",
+        "lead_time_weeks": 0.5,
+        "tool_name": "Hopper/Chute Geometry",
+        "type": "Soft Tooling (Additive - SLA)",
+        "vendor": "Internal (Formlabs Fleet)"
+      }
+    ]
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://hyphen.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 46.6,
+    "Engineering": 15.9,
+    "Production": 14.8,
+    "Strategy": 5.3
+  },
+  "slug": "portion-cup",
+  "tier": 3
+}

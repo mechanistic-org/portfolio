@@ -1,0 +1,38 @@
+{
+  "cast": [],
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "quotes": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "governance": {
+      "dcos": 0,
+      "ecos": []
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    },
+    "quotes": []
+  },
+  "toolchain": [],
+  "forensic_metrics": {
+    "quotes": []
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [],
+  "phase_stats": {
+    "Design": 0,
+    "Engineering": 0,
+    "Production": 0,
+    "Strategy": 0
+  },
+  "phases": {},
+  "slug": "odie",
+  "stats": {},
+  "tier": 3
+}

@@ -1,0 +1,71 @@
+{
+  "scars": [],
+  "metrics": {
+    "cogs": {
+      "label": "Reduced Depth",
+      "value": "265mm"
+    },
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "governance": {
+      "dcos": 0,
+      "ecos": [
+        "Depth_Redux",
+        "Hitlist_Fixes"
+      ]
+    },
+    "interventions": {
+      "count": 1,
+      "label": "HDD Redesigns"
+    },
+    "process": {
+      "engineeringChangeOrders": [
+        "HDD_Bracket"
+      ]
+    },
+    "profitability": {
+      "label": "Scope Logged",
+      "value": "58hrs"
+    }
+  },
+  "forensic_summary": {
+    "intervention": "Redesigned HDD mounting bracket to reduce depth to 265mm and resolved complex vent/EMI shielding issues in the Pro/E database.",
+    "result": "Database ready for release and final prototype photos delivered, despite exceeding initial time estimates (58 hours logged).",
+    "trigger": "Urgent need for a 'Mercury Low Cost' (MLC) unit requiring significant mechanical compaction and thermal/EMI resolution."
+  },
+  "toolchain": [
+    "Pro/ENGINEER"
+  ],
+  "complexity_vector": {
+    "legacy_metrics": [
+      {
+        "label": "Timeframe",
+        "value": "58 hours"
+      }
+    ],
+    "part_count_growth": [],
+    "process_density": [],
+    "supply_chain_nodes": [],
+    "tooling_chain": []
+  },
+  "forensic_metrics": {
+    "financial": "Hard savings via reduced system depth (to 265mm)",
+    "process": "Rapid incorporation of multiple engineering 'hitlists' and bug fixes",
+    "technical": "Redesigned HDD mounting bracket for thermal/EMI resolution"
+  },
+  "hxo_ready": true,
+  "hydration_status": "full",
+  "links": [],
+  "phase_stats": {
+    "Design": 20,
+    "Engineering": 80,
+    "Production": 0,
+    "Strategy": 0
+  },
+  "slug": "minimerc",
+  "tier": 1
+}

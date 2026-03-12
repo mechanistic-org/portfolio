@@ -1,0 +1,74 @@
+{
+  "bom": [],
+  "cast": [],
+  "scars": [],
+  "metrics": {
+    "quotes": [],
+    "financial": {
+      "toolingBudget": 0,
+      "toolingActual": 0,
+      "costOfGoodsSold": [],
+      "margins": [],
+      "quotes": []
+    },
+    "process": {
+      "engineeringChangeOrders": [],
+      "yield": []
+    },
+    "governance": {
+      "ecos": [
+        "PROTOCOL_OMEGA",
+        "DIRECTIVE_PRIME"
+      ],
+      "dcos": 0
+    },
+    "interventions": {
+      "count": 1,
+      "label": "Critical Path"
+    },
+    "profitability": {
+      "value": "INFINITE",
+      "label": "Potential Upside"
+    },
+    "cogs": {
+      "value": "UNDEFINED",
+      "label": "Acquisition Cost"
+    },
+    "time_to_market": {}
+  },
+  "forensic_summary": {
+    "trigger": "Career evolution requires a unified synthesis of Mechanical Engineering, Software Architecture, and Design Systems.",
+    "intervention": "Constructed a 'Dream Job' simulation to visualize the ideal role convergence.",
+    "result": "A hyper-reality artifact demonstrating full-stack capability from kernel to injection mold."
+  },
+  "toolchain": [],
+  "complexity_vector": {
+    "part_count_growth": [],
+    "process_density": [],
+    "tooling_chain": [],
+    "supply_chain_nodes": [],
+    "legacy_metrics": []
+  },
+  "quotes": [],
+  "realm": "simulation",
+  "forensic_metrics": {
+    "quotes": []
+  },
+  "isomorphics": [],
+  "events": [],
+  "reports": [],
+  "stats": {},
+  "phase_stats": {
+    "Strategy": 275.9,
+    "Design": 2427.5,
+    "Engineering": 827.5,
+    "Production": 772.4
+  },
+  "phases": {},
+  "visuals_to_find": [],
+  "links": [],
+  "slug": "dreamjob",
+  "hydration_status": "executive",
+  "tier": 3,
+  "hxo_ready": false
+}

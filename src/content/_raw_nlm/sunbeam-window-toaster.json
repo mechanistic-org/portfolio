@@ -1,0 +1,28 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://frog.co"
+    }
+  ],
+  "slug": "sunbeam-window-toaster",
+  "stats": {
+    "metal": 97,
+    "pcb": 59,
+    "plastic": 24
+  },
+  "tier": 3
+}

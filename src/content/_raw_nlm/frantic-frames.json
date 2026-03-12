@@ -1,0 +1,25 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [],
+  "phase_stats": {
+    "Design": 147,
+    "Engineering": 50.1,
+    "Production": 46.8,
+    "Strategy": 16.7
+  },
+  "slug": "frantic-frames",
+  "tier": 3
+}

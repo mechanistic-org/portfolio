@@ -1,0 +1,736 @@
+{
+  "bom": [
+    {
+      "label": "CHASSIS, Metal Base - Macduff (501-1197-00)",
+      "value": "Sheetmetal"
+    },
+    {
+      "label": "BRACKET, HDD / GROUND STRAP - Macduff (501-1198-00)",
+      "value": "Sheetmetal"
+    },
+    {
+      "label": "SHIELD, EMI, Top Chassis Cover - Macduff (501-1199-00)",
+      "value": "Sheetmetal"
+    },
+    {
+      "label": "COVER STIFFENER, Top - Macduff (501-1200-00)",
+      "value": "Sheetmetal"
+    },
+    {
+      "label": "COVER STIFFENER, Left - Macduff (501-1201-00)",
+      "value": "Sheetmetal"
+    },
+    {
+      "label": "COVER STIFFENER, Right - Macduff (501-1202-00)",
+      "value": "Sheetmetal"
+    },
+    {
+      "label": "SHIELD, Front / BRACKET, TEAC BD - Macduff (501-1203-00)",
+      "value": "Sheetmetal"
+    },
+    {
+      "label": "BRACKET, Front Retainer - Macduff (501-0030-00)",
+      "value": "Sheetmetal"
+    },
+    {
+      "label": "COVER, Top Chassis, Plastic - Macduff (502-1192-00)",
+      "value": "IM Plastic (DuPont Silver LM564)"
+    },
+    {
+      "label": "FRAME, Plastic, Front Bezel - Macduff (502-1193-00)",
+      "value": "IM Plastic"
+    },
+    {
+      "label": "FRAME, Plastic Internal / BRACKET, UT-Tech BD - Macduff (502-1191-00)",
+      "value": "IM Plastic"
+    },
+    {
+      "label": "BUTTON TREE / BUTTON CAPS, Power/Import/Eject - Macduff (502-1194-00)",
+      "value": "IM Plastic"
+    },
+    {
+      "label": "BUTTON CAP / LIGHTPIPE, Power - Macduff (502-1195-00)",
+      "value": "IM Plastic"
+    },
+    {
+      "label": "BUTTON CAP / LIGHTPIPE, Import - Macduff (502-1196-00)",
+      "value": "IM Plastic"
+    },
+    {
+      "label": "BUTTON CAP / LIGHTPIPE, Eject - Macduff (502-1197-00)",
+      "value": "IM Plastic"
+    },
+    {
+      "label": "LENS, IR - Macduff (502-1198-00)",
+      "value": "IM Plastic"
+    },
+    {
+      "label": "FACE PLATE, Front Bezel - Macduff (502-1199-00)",
+      "value": "IM Plastic (Nissha)"
+    },
+    {
+      "label": "BRACKET, Fan - Macduff (502-1201-00)",
+      "value": "IM Plastic"
+    },
+    {
+      "label": "FOOT, Rubber, 12.7 x 3.6, Black (3M SJ5012) (323-1198-00)",
+      "value": "Rubber"
+    },
+    {
+      "label": "FAN MOUNTS, 25mm Fan, Black (330-1079-00)",
+      "value": "Rubber/Silicone"
+    },
+    {
+      "label": "GROMMET, Vibration dampening (EAR G-411-1) (330-1030-00)",
+      "value": "Rubber"
+    },
+    {
+      "label": "GROMMET, Vibration dampening (EAR G-414-2) (330-1080-00)",
+      "value": "Rubber"
+    },
+    {
+      "label": "Main Board (Modified KPLAYER M500/M300) (N/A)",
+      "value": "PCB Assembly"
+    },
+    {
+      "label": "PCB Assy, Glow Board (N/A)",
+      "value": "PCB Assembly"
+    },
+    {
+      "label": "CABLE ASSY, AC Input - Players (602-1000)",
+      "value": "Cable Assembly"
+    },
+    {
+      "label": "CABLE Assy, Serial Port to 2x5, 3 inch (602-1049-00)",
+      "value": "Cable Assembly"
+    },
+    {
+      "label": "FFC Cables (N/A)",
+      "value": "Cable"
+    },
+    {
+      "label": "Fan Subassembly (N/A)",
+      "value": "Electromechanical"
+    },
+    {
+      "label": "Power Supply Subassembly (External DC) (N/A)",
+      "value": "Electromechanical"
+    },
+    {
+      "label": "Hard Drive Subassembly (N/A)",
+      "value": "Electromechanical"
+    },
+    {
+      "label": "BD (Optical) Drive Subassembly (N/A)",
+      "value": "Electromechanical"
+    },
+    {
+      "label": "FELT, Curtain, Disc Slot - Macduff (327-1032-00)",
+      "value": "Diecut Felt"
+    },
+    {
+      "label": "FILM, Backing, Disc Curtain - Macduff (351-1088-00)",
+      "value": "Diecut Film"
+    },
+    {
+      "label": "GASKET, Light Blocking, Buttons - Macduff (327-1033-00)",
+      "value": "Diecut Gasket"
+    },
+    {
+      "label": "GASKET, Light Blocking, Jewel - Macduff (327-1034-00)",
+      "value": "Diecut Gasket"
+    },
+    {
+      "label": "LABEL, Rear IO - Macduff (351-1087-00)",
+      "value": "Diecut Label"
+    },
+    {
+      "label": "SCREW, M3 x 10, Phil, PH, EXT SEMS, ZP (323-1199-00)",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREW, Fan, M4.9 x 1.6 x 12mm (323-1195-00)",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREW, 6-32 x .25, Phil PH ET, ZP (323-1004)",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREW, M3 x 6mm, Phil PH ET, ZP (323-1009-00)",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREW, M3 x 6mm, Phil PH, INT SEMS, ZP (323-1161-00)",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREW, M3 x 12mm, Phil PH, INT SEMS, ZP (323-1196-00)",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREW, 4-24 x .25, Plasti-Fast, Phil PH, BO (323-1119-00)",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREW, M3 x 6mm, Phil PH, BO (323-1035)",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREW, M3 x 8mm, Phil PH, EXT SEMS, ZP (323-1197-00)",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREW,",
+      "value": "Fastener"
+    },
+    {
+      "label": "BALL STUD, .187D, 6-32 x .187, ZP (323-1001)",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREW, Self-tapping, Type B",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREW, 6-32 x .3125, Phil FH, BO (323-1005)",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREW, 6-32 x .187, Phil PH, BO (323-1007)",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREWLOCK, 4-40 x .312, BO (323-1010)",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREW, M3 x 8mm, PH, Flathead (323-1206-00)",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREW, 2-28 x 1/4\\\", Plastite, Flathead (323-1203-00)",
+      "value": "Fastener"
+    },
+    {
+      "label": "SCREW, 6-32 x .5, Shoulder, Phil TH, ZP (323-1095-00)",
+      "value": "Fastener"
+    }
+  ],
+  "cast": [
+    {
+      "name": "Erik Norris",
+      "org": "Hardware Engineering",
+      "role": "Senior Mechanical Design Engineer / Principal Architect"
+    },
+    {
+      "name": "Richard Lane",
+      "org": "Hardware Engineering",
+      "role": "Vice President, Hardware Engineering"
+    },
+    {
+      "name": "Nathan Forster",
+      "org": "Hardware Engineering",
+      "role": "Hardware Systems Engineer"
+    },
+    {
+      "name": "Rob Wudrick",
+      "org": "Hardware Engineering",
+      "role": "Hardware Program Manager"
+    },
+    {
+      "name": "Greg Curry",
+      "org": "Hardware Engineering",
+      "role": "Senior Hardware Engineer"
+    },
+    {
+      "name": "Andrzej Kocan",
+      "org": "Hardware Engineering",
+      "role": "Senior Hardware Engineer"
+    },
+    {
+      "name": "Orion Bruckman",
+      "org": "Hardware Engineering",
+      "role": "Senior Hardware Engineer"
+    },
+    {
+      "name": "Adrian Fung",
+      "org": "Hardware Engineering",
+      "role": "Senior Hardware Engineer"
+    },
+    {
+      "name": "Vince Di Lello",
+      "org": "Hardware Engineering",
+      "role": "Senior CAD Designer"
+    },
+    {
+      "name": "Mark McKenzie",
+      "org": "Hardware Engineering",
+      "role": "Engineering Management / Lead"
+    },
+    {
+      "name": "Jonathan Loh",
+      "org": "Hardware Engineering",
+      "role": "Hardware Engineering Team"
+    },
+    {
+      "name": "Sonya Wach",
+      "org": "Hardware Co-ops",
+      "role": "Hardware Co-op"
+    },
+    {
+      "name": "Matthew Frazer",
+      "org": "Hardware Co-ops",
+      "role": "Hardware Co-op"
+    },
+    {
+      "name": "Isaiah Erb",
+      "org": "Hardware Co-ops",
+      "role": "Hardware Co-op"
+    },
+    {
+      "name": "Swapnil Patel",
+      "org": "Hardware Co-ops",
+      "role": "Hardware Co-op"
+    },
+    {
+      "name": "Joshua Mardling",
+      "org": "Hardware Co-ops",
+      "role": "Hardware Co-op"
+    },
+    {
+      "name": "Michael Kobb",
+      "org": "Software and UX",
+      "role": "Director, User Experience"
+    },
+    {
+      "name": "James Kleist",
+      "org": "Software and UX",
+      "role": "Director, Engineering Services"
+    },
+    {
+      "name": "Kevin Hui",
+      "org": "Software and UX",
+      "role": "Software Engineering / Escalations"
+    },
+    {
+      "name": "Lisa White",
+      "org": "Software and UX",
+      "role": "Software Engineering / Escalations"
+    },
+    {
+      "name": "Tyler Hause",
+      "org": "Software and UX",
+      "role": "Software Engineering / Escalations"
+    },
+    {
+      "name": "Anton Markov",
+      "org": "Software and UX",
+      "role": "Software Engineering / Escalations"
+    },
+    {
+      "name": "Craig McKinley",
+      "org": "Software and UX",
+      "role": "Software Engineering Management"
+    },
+    {
+      "name": "Chris Zamara",
+      "org": "Software and UX",
+      "role": "Software Engineering"
+    },
+    {
+      "name": "Paul Runstedler",
+      "org": "Software and UX",
+      "role": "Software Engineering"
+    },
+    {
+      "name": "John Lio",
+      "org": "Manufacturing and Operations",
+      "role": "Vice President, Manufacturing Operations"
+    },
+    {
+      "name": "Kevin Smyth",
+      "org": "Manufacturing and Operations",
+      "role": "Vice President of Manufacturing"
+    },
+    {
+      "name": "Michael Clader",
+      "org": "Manufacturing and Operations",
+      "role": "Director, Manufacturing Engineering"
+    },
+    {
+      "name": "Amiee Rooney",
+      "org": "Manufacturing and Operations",
+      "role": "Manager, Supply Chain Operations"
+    },
+    {
+      "name": "Sandra Twist",
+      "org": "Manufacturing and Operations",
+      "role": "Supply Chain / Purchasing"
+    },
+    {
+      "name": "Nancy Kucharik",
+      "org": "Manufacturing and Operations",
+      "role": "Senior Manager, Logistics, Customs and Inventory"
+    },
+    {
+      "name": "Somboun Thavy",
+      "org": "Manufacturing and Operations",
+      "role": "Manufacturing / Service Technician"
+    },
+    {
+      "name": "Seng Saechao",
+      "org": "Manufacturing and Operations",
+      "role": "Manufacturing"
+    },
+    {
+      "name": "Cheena Srinivasan",
+      "org": "Executive and Marketing",
+      "role": "Founder & CEO"
+    },
+    {
+      "name": "Michael Malcolm",
+      "org": "Executive and Marketing",
+      "role": "Chairman and Founder"
+    },
+    {
+      "name": "Pratish Shah",
+      "org": "Executive and Marketing",
+      "role": "Director of Product Marketing (Early Phase)"
+    },
+    {
+      "name": "Tom Geisler",
+      "org": "Executive and Marketing",
+      "role": "Executive Team"
+    },
+    {
+      "name": "Angelika Stalman",
+      "org": "Executive and Marketing",
+      "role": "Marketing"
+    },
+    {
+      "name": "Tim Wheelock",
+      "org": "Support and Sales",
+      "role": "Technical Support Engineer"
+    },
+    {
+      "name": "David Johansson",
+      "org": "Support and Sales",
+      "role": "Technical Support Engineer"
+    },
+    {
+      "name": "Rusty Johnson",
+      "org": "Support and Sales",
+      "role": "Technical Support Engineer"
+    },
+    {
+      "name": "Andy Tripp",
+      "org": "Support and Sales",
+      "role": "Support / Escalations"
+    },
+    {
+      "name": "Cheryl Walsh",
+      "org": "Support and Sales",
+      "role": "Support"
+    },
+    {
+      "name": "Brian Criswell",
+      "org": "Support and Sales",
+      "role": "Support / Service"
+    },
+    {
+      "name": "Luke O'Brien",
+      "org": "Support and Sales",
+      "role": "Brand Ambassador / Technical Operations"
+    },
+    {
+      "name": "William Tse",
+      "org": "Support and Sales",
+      "role": "Account Manager (UK)"
+    },
+    {
+      "name": "Matthew Delaney",
+      "org": "Support and Sales",
+      "role": "Regional Sales Manager (UK & Ireland)"
+    },
+    {
+      "name": "Eric Larsen",
+      "org": "Support and Sales",
+      "role": "Sales"
+    },
+    {
+      "name": "Matthew Manjos",
+      "org": "IT",
+      "role": "Manager, IT Operations"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "2012-02-01",
+      "description": "Design firms (Astro Studios, NewDealDesign, Smart Design, etc.) submit proposals for 'MacDuff' (Cinema One) with a target price of $1500-$2500 and 20k annual volume.",
+      "title": "MacDuff Program Kickoff Proposals"
+    },
+    {
+      "date": "2012-09-13",
+      "description": "Whipsaw presents Phase 2 Industrial Design updates for Kaleidescape Macduff, refining concepts like 'Grid', 'Rake', 'Fractal', 'Bow', 'Arch', 'Slice', 'Tile', and 'Crease'.",
+      "title": "Phase 2 ID Updates"
+    },
+    {
+      "date": "2012-12-18",
+      "description": "Erik Norris coordinates with Vowin Prototype regarding the status of parts for the upcoming CES show, expressing concern about timing.",
+      "title": "CES Prototype Coordination"
+    },
+    {
+      "date": "2013-07-23",
+      "description": "Cinema One (Model K0503-0100), codenamed Macduff, is officially launched.",
+      "title": "Product Launch"
+    },
+    {
+      "date": "2014-03-27",
+      "description": "Erik Norris is notified that Cinema One won a Red Dot Award; plans for a press release and blog post by Mark Henninger (AVS Forum) are discussed.",
+      "title": "Red Dot Award Notification"
+    },
+    {
+      "date": "2014-04-01",
+      "description": "Erik Norris coordinates the release of 'beefed-up' HDD bracket (REV 6) and new cover prototypes to resolve hard drive screw interference issues.",
+      "title": "Sheetmetal Revision (HDD Bracket)"
+    },
+    {
+      "date": "2014-04-29",
+      "description": "Erik Norris requests a purchase order for quick-turn prototype springs (330-1050-03) from Scandic to support ongoing development.",
+      "title": "Spring Prototype Procurement"
+    },
+    {
+      "date": "2014-05-02",
+      "description": "Erik Norris presents preliminary concepts for a '1U Macduff' variant, discussing slot placement and dimensions with the hardware team.",
+      "title": "1U Macduff Concept Review"
+    },
+    {
+      "date": "2014-05-20",
+      "description": "Erik Norris loads Macduff files into Arena for production release, confirming they are ready for the MacDuff BOM update.",
+      "title": "Production File Release"
+    },
+    {
+      "date": "2014-05-27",
+      "description": "Erik Norris works with vendors (Roger Lee, Grat Wu) to obtain cover assembly quotes for the Macduff chassis.",
+      "title": "Cover Assembly Quote"
+    },
+    {
+      "date": "2014-06-17",
+      "description": "Erik Norris releases updated mechanical assembly instructions and modifies the disc slot design to prevent 'edge-catch' issues.",
+      "title": "Disc Slot Modification"
+    },
+    {
+      "date": "2014-07-10",
+      "description": "Erik Norris releases the 'Cosmetic and Graphic Spec Rev 3' (CMF) document for Macduff.",
+      "title": "CMF Document Release"
+    },
+    {
+      "date": "2014-10-09",
+      "description": "Erik Norris defines and agrees upon a detailed inspection plan for Top Covers (502-1192-00) to address cosmetic yield issues causing a production line-down.",
+      "title": "Top Cover Inspection Protocol"
+    },
+    {
+      "date": "2014-10-13",
+      "description": "Erik Norris circulates specific visual inspection criteria to Supply Chain and Manufacturing teams to manage the top cover quality crisis.",
+      "title": "Detailed Inspection Criteria Release"
+    },
+    {
+      "date": "2014-10-16",
+      "description": "Erik Norris investigates 'ESCALATION-705' regarding recurring disc ejection problems, analyzing photos and samples to determine root cause.",
+      "title": "Disc Ejection Escalation"
+    },
+    {
+      "date": "2014-11-05",
+      "description": "Erik Norris prepares the 'Macduff plastic RFQ' for release.",
+      "title": "Plastic RFQ Preparation"
+    },
+    {
+      "date": "2014-12-16",
+      "description": "Erik Norris is cc'd on critical stock status updates from Yomura regarding cosmetic concessions for Macduff top covers to solve the line-down problem.",
+      "title": "Vendor Concession Management"
+    },
+    {
+      "date": "2015-02-20",
+      "description": "Erik Norris circulates a modified version of the chassis (520-1213-00) and requests a meeting to discuss changes.",
+      "title": "Chassis Modification Proposal"
+    }
+  ],
+  "scars": [
+    {
+      "description": "Issued pragmatic deviation allowing cosmetic flow marks &lt;25mm to unblock shipping while protecting the 100% failure lots.",
+      "label": "The 'Tactical' Deviation",
+      "value": "25x20mm Limit"
+    },
+    {
+      "description": "Diagnosed a 'Software Fatal Error' on the Gennum VXP chip as physical interference: the drive cage was shearing off Resistor R332.",
+      "label": "The Gennum Crash Loop",
+      "value": "R332 Resistor"
+    }
+  ],
+  "metrics": {
+    "financial": {
+      "quotes": [
+        "Recovered 366 critical top covers via emergency air freight in a single shipment to break the line-down deadlock."
+      ],
+      "toolingActual": 2800
+    },
+    "governance": {
+      "dcdCount": 4,
+      "ecos": [
+        "REV 7 (Cover Assembly)",
+        "REV 6 (HDD Bracket)"
+      ]
+    },
+    "process": {
+      "engineeringChangeOrders": [
+        "REV 7 (Cover Assembly)",
+        "REV 6 (HDD Bracket)"
+      ]
+    },
+    "production": {
+      "label": "Monthly Rate",
+      "value": "350+ Units"
+    },
+    "quality": {
+      "label": "Yield Recovery",
+      "value": "65% Salvaged"
+    }
+  },
+  "toolchain": [
+    "Pro/Engineer Wildfire 4.0",
+    "Arena PLM",
+    "Agile (ECO Management)",
+    "Vendors: Yomura (Plastics/Painting)",
+    "Vendors: Sanmina-GDL (Assembly)",
+    "Vendors: Mass Precision (Metal)"
+  ],
+  "complexity_vector": {
+    "part_count_growth": [
+      {
+        "count": 25,
+        "date": "2013-11",
+        "note": "Quote QTYs 5, 10, 25 for stiffeners and shields [1]",
+        "phase": "Proto / EVT"
+      },
+      {
+        "count": 425,
+        "date": "2014-10",
+        "note": "Screening stock for cosmetic deviations due to yield collapse [2]",
+        "phase": "Production Ramp (Crisis)"
+      },
+      {
+        "count": 1249,
+        "date": "2014-12",
+        "note": "Sanmina Open PO quantity vs Yomura stock of 932 [3]",
+        "phase": "MP (Mass Production)"
+      }
+    ],
+    "process_density": [
+      {
+        "complexity_score": 9,
+        "material": "Plastic (DuPont Silver LM564)",
+        "notes": "Yield 29% at peak crisis. Flow marks and scratches required manual rework intervention [2][4]",
+        "part_name": "Top Cover (502-1192-00)",
+        "steps": [
+          "Injection Molding",
+          "Painting (Metallic Silver)",
+          "Pad Printing (Logo)",
+          "100% Inspection (Sort)",
+          "Rework (Manual Polishing)",
+          "Air Freight (Emergency)"
+        ]
+      },
+      {
+        "complexity_score": 5,
+        "material": "Steel",
+        "notes": "Painting cost alone $16.00 per unit. Color change from black to brown noted [5][6]",
+        "part_name": "Metal Base (520-1197-00)",
+        "steps": [
+          "Stamping/Forming",
+          "Powder Coat (Brown)",
+          "Assembly (Stiffeners)",
+          "Inspection"
+        ]
+      },
+      {
+        "complexity_score": 8,
+        "material": "Plastic / IMD",
+        "notes": "Requires 500+ meters of foil and 2500 MOQ agreement with Nissha [7]",
+        "part_name": "Front Panel Insert",
+        "steps": [
+          "IMD (In-Mold Decoration)",
+          "Foil Application",
+          "Molding"
+        ]
+      }
+    ],
+    "supply_chain_nodes": [
+      {
+        "location": "New Taipei City, Taiwan",
+        "role": "Plastics / Painting / Assembly",
+        "vendor": "Yomura Technologies Inc [12]"
+      },
+      {
+        "location": "Guadalajara, Mexico",
+        "role": "FATP (Final Assembly, Test, Pack)",
+        "vendor": "Sanmina-GDL [2]"
+      },
+      {
+        "location": "San Jose, CA (Implied)",
+        "role": "Metal Fabrication",
+        "vendor": "MASS Precision Inc [13]"
+      },
+      {
+        "location": "Global/Japan",
+        "role": "IMD / Foil",
+        "vendor": "Nissha [7]"
+      }
+    ],
+    "tooling_chain": [
+      {
+        "cost_impact": "High",
+        "lead_time_weeks": 8,
+        "notes": "Flow mark issues required potential tool modification [8]",
+        "tool_name": "Top Cover Mold",
+        "type": "Hard Tooling",
+        "vendor": "Yomura"
+      },
+      {
+        "cost_impact": "$7,500",
+        "notes": "Approved Oct 2014 [9]",
+        "tool_name": "Lens Tool",
+        "type": "Hard Tooling",
+        "vendor": "Unknown"
+      },
+      {
+        "cost_impact": "$13,300 - $22,000",
+        "notes": "High tooling cost for chassis extrusion options [10]",
+        "tool_name": "Extrusion Die",
+        "type": "Hard Tooling",
+        "vendor": "Taber / Kinret"
+      },
+      {
+        "cost_impact": "$1,500",
+        "notes": "Unexpected tooling charge [11]",
+        "tool_name": "Spring Tooling",
+        "type": "Hard Tooling",
+        "vendor": "Scandic Springs"
+      }
+    ]
+  },
+  "forensic_metrics": {
+    "financial": "Authorized $2,800 in rapid-turn tooling modifications",
+    "governance": "Forensic vendor management (Amiee Rooney / Yomura)",
+    "process": "Recovered 366 critical top covers via Air Freight; Validated 400 cycles for Pinch Roller"
+  },
+  "isomorphics": [
+    {
+      "hardware_point": "A 'Line Down' crisis was triggered when production halted because top covers were rejected for cosmetic flow marks on the underside of the chassis. Implemented the 'Ugly Bottom' strategy, forensically reclassifying the non-visible bottom surfaces from Class A to Class C to immediately recover 60-70% of the inventory and save the production run.",
+      "label": "Yield Rate",
+      "principle": "Never halt a functional core engine for a non-visible cosmetic defect.",
+      "software_point": "Build Success Rate / Uptime — In software CI/CD pipelines, do not let non-critical warnings (Class C aesthetic bugs) block deployment of a functionally sound backend (Class A). Implement graceful degradation to maintain uptime."
+    }
+  ],
+  "slug": "cinema-one"
+}

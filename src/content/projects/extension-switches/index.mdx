@@ -1,201 +1,55 @@
 ---
-audio_url: /assets/extension-switches/extension-switches-briefing.m4a
-bom:
-- label: Front Housing
-  value: PC+ABS CX7240U-8T9A1580 [7]
-- label: Adhesive (Failed)
-  value: Nitto 57120W [2]
-- label: Color Chip
-  value: SABIC EXL9330 [8]
-cast:
-- name: Erik Norris
-  org: Locoroll
-  role: The Architect
-- name: Nick
-  org: Locoroll
-  role: Mechanical Lead
-- name: Kelvin
-  org: FIH
-  role: MPM
 category: consumer_electronics
-complexity_vector:
-  part_count_growth:
-  - count: 19
-    date: 2016-09
-    phase: P1 (Proto)
-  - count: 169
-    date: 2016-11
-    phase: EVT1 (Eng Validation)
-  - count: 466
-    date: 2017-01
-    phase: EVT2 (Design Freeze)
-  - count: 772
-    date: 2017-04
-    phase: DVT (Design Validation)
-  - count: 4000
-    date: 2017-06
-    phase: PVT (Prod Validation)
-  process_density:
-  - complexity_score: 13
-    material: ADC12 Aluminum Alloy
-    part_name: Metal Color Chip
-    steps:
-    - Die Cast
-    - De-Gate
-    - De-flash
-    - Drilling
-    - Tapping
-    - CNC
-    - Polishing
-    - Wash & Dry
-    - Sand Blast
-    - Paint
-    - Laser Trim
-    - Laser Mark
-    - Pad Print
-  - complexity_score: 4
-    material: PC SABIC EXL 9330
-    part_name: Front Housing
-    steps:
-    - Injection Molding
-    - Heat Staking
-    - UV Coating (10% Matte)
-    - Adhesive Application (Migrated to Glue)
-  supply_chain_nodes:
-  - location: China
-    role: FATP
-    vendor: FIH (Foxconn)
-  - location: China
-    role: Plastics/Molding
-    vendor: Memtech
-  - location: China
-    role: Battery
-    vendor: McNair
-  - location: Global
-    role: MCU
-    vendor: STMicroelectronics
-  - location: Global
-    role: eMMC
-    vendor: Micron
-  tooling_chain:
-  - cost_impact: High (Retooling required for 0.1mm geometry offset)
-    lead_time_weeks: 8
-    tool_name: Front Housing Mold (Elvis)
-    type: Hard Tooling
-    vendor: Memtech
-  - cost_impact: Med
-    lead_time_weeks: 6
-    tool_name: Die Cast Mold (Color Chip)
-    type: Hard Tooling
-    vendor: Best / Tongda
 cyberspace:
   enable: true
   layout: linear
   stickies:
-  - data:
-      columns: 3
-      images:
-      - alt: IMG_20170420_171537
-        aspectRatio: 1.5
-        src: /assets/extension-switches/bubbles/03_click_testing/IMG_20170420_171537-xl.webp
-      - alt: IMG_20170420_171607
-        aspectRatio: 1.5
-        src: /assets/extension-switches/bubbles/03_click_testing/IMG_20170420_171607-xl.webp
-      - alt: IMG_20170420_171705
-        aspectRatio: 1.5
-        src: /assets/extension-switches/bubbles/03_click_testing/IMG_20170420_171705-xl.webp
-      - alt: IMG_20170420_171744
-        aspectRatio: 1.5
-        src: /assets/extension-switches/bubbles/03_click_testing/IMG_20170420_171744-xl.webp
-      layout: masonry
-      scattered: true
-    deck: []
-    featuredIndices: []
-    id: 03_click_testing
-    title: Click Testing
-    type: gallery
-date: 2016-12-12
+    - data:
+        columns: 3
+        images:
+          - alt: IMG_20170420_171537
+            aspectRatio: 1.5
+            src: >-
+              /assets/extension-switches/bubbles/03_click_testing/IMG_20170420_171537-xl.webp
+          - alt: IMG_20170420_171607
+            aspectRatio: 1.5
+            src: >-
+              /assets/extension-switches/bubbles/03_click_testing/IMG_20170420_171607-xl.webp
+          - alt: IMG_20170420_171705
+            aspectRatio: 1.5
+            src: >-
+              /assets/extension-switches/bubbles/03_click_testing/IMG_20170420_171705-xl.webp
+          - alt: IMG_20170420_171744
+            aspectRatio: 1.5
+            src: >-
+              /assets/extension-switches/bubbles/03_click_testing/IMG_20170420_171744-xl.webp
+        layout: masonry
+        scattered: true
+      deck: []
+      featuredIndices: []
+      id: 03_click_testing
+      title: Click Testing
+      type: gallery
+date: 2016-12-12T00:00:00.000Z
 draft: false
 employer: noon
-endDate: 2018-08-01
-forensic_metrics:
-  financial: Recovered 100% yield in EVT2 [1]
-  governance: Weekly Pulse / Line Down [3]
-  process: Eliminated 7/7 'floating cap' failures [2]
-forensic_summary:
-  intervention: Migration from PSA to structural acrylic glue; Correction of 0.1mm
-    CAD geometry offset [1, 2]
-  result: Recovered 100% yield in EVT2; Validated 10-year operational lifetime [1]
-  trigger: Plastic cap Floating failure (7/7 units) exposed through physical handling
-    due to 0.1mm CAD mismatch [2, 4]
+endDate: 2018-08-01T00:00:00.000Z
 gallery: []
-hxo_ready: true
-hydration_status: full
 industry: consumer_electronics
-isomorphics:
-- hardware_point: 0.1mm geometry offset causes 100% assembly failure [2]
-  label: Yield
-  principle: Microscopic deviations in constraint boundaries trigger macroscopic system
-    failure
-  software_point: SW v0.005 unable to drive LCM for worst-case thermal test [6]
 listed: true
-metrics:
-  financial:
-    margins:
-    - Target Gross Margin $49/$59 on $79 MSRP (Elvis Gen 2)
-    - 'Tooling modification cost: USD$3,000 for VDI-15 texture change'
-  governance:
-    dcdCount: 0
-    ecos:
-    - Stop Ship on PSA tape
-  interventions:
-    count: 5
-    label: Critical Saves
-    value: 5
-  process:
-    yield:
-    - Recovered 100% of EVT2 units from 'Plastic Cap Floating' (7/7 failure) via liquid
-      glue intervention
-  quotes:
-  - '[Erik Norris] please provide a detailed report of “Wet Hands” failures. For now,
-    this test is still classified as “information only”. No need to hold for resolution
-    – OK to proceed with FAIL result. [9]'
-  - Recovered 100% yield in EVT2 by isolating and correcting a microscopic 0.1mm CAD
-    geometry offset [1]
-  - This product at kick-off and architecture stage was not informed a 10-year life
-    long. [10]
-phase_stats:
-  Design: 20
-  Engineering: 40
-  Production: 40
-  Strategy: 0
 presentation_mode: deep_dive
 primary_home: mech
 productionScale: series
-scars:
-- description: 0.1mm CAD mismatch caused 100% failure rate (7/7); solved by switching
-    from PSA to structural acrylic glue [1, 2]
-  label: The Floating Cap Crisis
-  value: 0% to 100% Yield
-- description: Switch noise resolved by studying grease types and adding dry lubricant
-    [5]
-  label: The Cheep Sound
-  value: Acoustic Fix
-slug: extension-switches
-tags: [Crisis, Mechanism, Process, Materials, Leadership]
+tags:
+  - Crisis
+  - Mechanism
+  - Leadership
 targets:
-- main
-- mech
+  - main
+  - mech
 teamSize: '1'
 theme: hyperspace
-tier: 1
 title: Extension Switch (Elvis)
-toolchain:
-- Arena PLM (Part Number 432-00007)
-- 'JIRA (Issue Tracking: SAT-149, SAT-238, SAT-281)'
-- FIH (Foxconn International Holdings - Manufacturing)
-- Memtech (Injection Molding/Tooling)
-- 'SABIC (Resin: EXL 9330 / CX7240U)'
 ---
 
 Elvis Extension Switch Forensic Report

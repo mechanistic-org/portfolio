@@ -1,63 +1,6 @@
 ---
 category: enterprise_hardware
 client: []
-complexity_vector:
-  part_count_growth:
-    - count: 100
-      date: "2014-10-06"
-      note: Reworking 100pcs urgent due to paint shortage/defects [1]
-      phase: Protocol/Rework (Macduff Covers)
-    - count: 425
-      date: "2014-10-08"
-      note:
-        Yield 29% (123 accepted / 302 rejected) due to scratches/paint defects [2],
-        [3]
-      phase: Inspection/Sorting
-    - count: 366
-      date: "2015-02-13"
-      note: Shipped via Air Freight to 'Hunter' (Destination/Vendor) [4]
-      phase: Shipment to Hunter
-  process_density:
-    - complexity_score: 9
-      material: Plastic
-      part_name: Cover, Top Chassis (Macduff)
-      part_number: 502-1192-00
-      steps:
-        - Molding (Yomura)
-        - Painting (Shortage noted [5])
-        - Rework (Flow mark elimination [6])
-        - "Cosmetic Inspection (High fallout: Scratches/Paint [3])"
-        - Sorting/Recovery [7]
-        - Air Freight to Hunter [4]
-      yield_warning: Initial yield 29% at Sanmina inspection [2]
-    - complexity_score: 4
-      material: Storage Media
-      part_name: HGST 4TB Drive
-      part_number: HDN724040ALE640
-      steps:
-        - SMART Tests [8]
-        - Head Load/Unload Tests [8]
-        - Voltage Ripple Tests [8]
-  supply_chain_nodes:
-    - location: Taipei, Taiwan
-      role: Plastic Molding/Painting
-      vendor: Yomura Technologies [10]
-    - location: Guadalajara, Mexico
-      role: FATP / Inspection
-      vendor: Sanmina Plant 4 [11], [2]
-    - location: "[Destination]"
-      role: Project/Assembly Location
-      vendor: Hunter [12], [4]
-  tooling_chain:
-    - cost_impact: High (40% Down Payment Req) [9]
-      status: PO Issued Oct 2014 [9]
-      tool_name: Sundance Tooling (502-1225-00)
-      type: Hard Tooling (NRE)
-      vendor: Yomura (Taiwan)
-    - status: Modification for flow-mark elimination [6]
-      tool_name: Macduff Cover Mold (502-1192-00)
-      type: Hard Tooling
-      vendor: Yomura (Taiwan)
 cyberspace:
   enable: true
   layout: linear
@@ -65,64 +8,33 @@ cyberspace:
     - align: center
       data: null
       id: intro
-      text: <strong>YEAR:</strong> 2014<br/><strong>ROLE:</strong> Kaleidescape
+      text: '<strong>YEAR:</strong> 2014<br/><strong>ROLE:</strong> Kaleidescape'
       title: KSERVER-1500 'Hunter'
       type: media
     - align: center
       id: details
-      text:
-        This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong>
-        Other
+      text: >-
+        This record has been upgraded to the Hyperspace
+        Protocol.<br/><br/><strong>Group:</strong> Other
       title: PROJECT DATA
       type: void
-date: 2014-03-14 00:00:00+00:00
+date: 2014-03-14T00:00:00.000Z
 description: KSERVER-1500 1U Server ('Hunter' Refresh)
 documents: []
 draft: false
 duration: 11 Months
 employer: kaleidescape
-endDate: 2014-08-01 00:00:00+00:00
+endDate: 2014-08-01T00:00:00.000Z
 gallery: []
-hxo_ready: false
-hydration_status: hydrated
 industry: consumer_electronics
-links:
-  - url: https://kaleidescape.com
-metrics:
-  financial:
-    costOfGoodsSold: []
-    margins: []
-    toolingActual: 0
-    toolingBudget: 0
-  process:
-    engineeringChangeOrders: []
-phase_stats:
-  Design: 40.5
-  Engineering: 13.8
-  Production: 12.9
-  Strategy: 4.6
 presentation_mode: deep_dive
 production: production
 productionScale: one_off
-scars:
-  - description:
-      "The Intervention: Initiated the '1U Server Refresh'. Power - Sourced
-      and qualified the Sparkle SPI300F4BB. Storage - Pivoted to HGST Deskstar NAS drives.
-      Compute - Investigated Atom Baytrail and Celeron options."
-    label: The Trigger (Crisis)
-    value:
-      The 1U Server motherboard chipset and processor were scheduled to go EOL
-      in June 2014, threatening the continuity of the Premiere line.
-slug: kserver-1500
-tags: [Materials, Process, Crisis]
+tags:
+  - Crisis
 theme: hyperspace
-tier: 3
 title: KSERVER-1500 'Hunter'
 tools: []
-visual_candidates:
-  - 502-1192-00 deviation pics for review [13]
-  - YOMURA Quotation Sundance 141015.pdf [14]
-  - PROPOSED REV RUN ORPHEUS (300pzs).xls [15]
 teamSize: INT 10
 ---
 

@@ -15,12 +15,44 @@ const CURRENT_FILENAME = `Erik_Norris_Resume_Current.pdf`;
 const ARCHIVE_PATH = path.join(ARCHIVE_DIR, ARCHIVE_FILENAME);
 const CURRENT_PATH = path.join(OUTPUT_DIR, CURRENT_FILENAME);
 
+const { spawn } = require("child_process");
+
 async function generatePDF() {
-	console.log(`🌍 Connecting to Resume Source: ${RESUME_URL}`);
+	console.log(`🚀 Spinning up Headless Astro Server...`);
 
 	// Ensure directories exist
 	if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 	if (!fs.existsSync(ARCHIVE_DIR)) fs.mkdirSync(ARCHIVE_DIR, { recursive: true });
+
+	// Spawn the local dev server
+	const serverProcess = spawn("npm", ["run", "dev", "--", "--port", "4321"], {
+		cwd: path.resolve(__dirname, ".."),
+		shell: process.platform === "win32",
+	});
+
+	let serverReady = false;
+
+	serverProcess.stdout.on("data", (data) => {
+		if (data.toString().includes("Local")) serverReady = true;
+	});
+
+	// Wait up to 30 seconds for server
+	for (let i = 0; i < 30; i++) {
+		if (serverReady) break;
+		await new Promise((r) => setTimeout(r, 1000));
+	}
+
+	if (!serverReady) {
+		console.error("❌ Headless server failed to start within the timeout.");
+		if (process.platform === "win32") {
+			spawn("taskkill", ["/pid", serverProcess.pid, "/f", "/t"]);
+		} else {
+			serverProcess.kill();
+		}
+		process.exit(1);
+	}
+
+	console.log(`🌍 Connecting to Resume Source: ${RESUME_URL}`);
 
 	let browser;
 	try {
@@ -32,7 +64,7 @@ async function generatePDF() {
 		const page = await browser.newPage();
 
 		// Navigate
-		await page.goto(RESUME_URL, { waitUntil: "networkidle0" });
+		await page.goto(RESUME_URL, { waitUntil: "networkidle2" });
 
 		// Generate PDF
 		console.log(`🚀 Printing PDF to: ${CURRENT_PATH}`);
@@ -56,11 +88,15 @@ async function generatePDF() {
 		console.log(`📦 Archived Copy Saved: ${ARCHIVE_PATH}`);
 	} catch (error) {
 		console.error("❌ PDF Generation Failed:", error);
-		console.error('   (Ensure "npm run dev" is running on port 4321)');
-		if (browser) await browser.close();
-		process.exit(1);
 	} finally {
 		if (browser) await browser.close();
+		// Kill the headless server
+		console.log("🛑 Tearing down Headless Astro Server...");
+		if (process.platform === "win32") {
+			spawn("taskkill", ["/pid", serverProcess.pid, "/f", "/t"]);
+		} else {
+			serverProcess.kill();
+		}
 	}
 }
 

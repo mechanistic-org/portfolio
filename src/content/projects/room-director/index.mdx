@@ -1,194 +1,32 @@
 ---
-audio_url: /assets/room-director/room-director-briefing.m4a
-bom:
-- label: ASSY,ME,SATIVA
-  value: 740-00007 rev 02 [11]
-- label: PLASTIC,FRONT,HOUSING
-  value: 432-00023 rev 01 [11]
-- label: OLED GASKET
-  value: 437-00001 rev 01 [11]
-- label: SHIELDING,COVER,RF
-  value: 430-00002 rev 01 [11]
-cast:
-- name: Erik Norris
-  org: Locoroll / Noon Home
-  role: Principal Architect / Lead ME
-- name: Ricky Lin
-  org: FIH / Vendor
-  role: Engineer
-- name: Yvonne Lai
-  org: FIH / Vendor
-  role: Engineer
-- name: John Gilmore
-  org: Noon Home
-  role: Management
 category: consumer_electronics
-complexity_vector:
-  part_count_growth:
-  - count: 12
-    date: 2016-06
-    phase: Concept
-  - count: 35
-    date: 2017-01
-    phase: EVT (Eng Validation)
-  - count: 48
-    date: 2017-04
-    phase: DVT (Design Validation)
-  - count: 52
-    date: 2017-07
-    phase: PVT (Prod Validation)
-  - count: 55
-    date: 2017-09
-    phase: MP (Mass Production)
-  process_density:
-  - complexity_score: 9
-    material: Corning 2320 Glass (Ionized)
-    part_name: Sativa Cover Glass (Lens)
-    steps:
-    - CNC Cutting
-    - Ion Exchange (Chemical Strengthening)
-    - Mirror Polishing
-    - Oleophobic Coating Application
-    - Back Painting (Black Mask)
-    - UV Curing
-  - complexity_score: 6
-    material: Steel
-    part_name: Waldo Mounting Chassis
-    steps:
-    - Progressive Die Stamping
-    - Folding/Forming
-    - Black Zinc Plating
-    - Laser Etching (Graphics)
-    - Heat Treatment (Proposed for stiffness)
-  - complexity_score: 7
-    material: PC (SABIC EXL 9330)
-    part_name: Sativa Front Housing
-    steps:
-    - Injection Molding
-    - Insert Molding (Threaded Inserts)
-    - Painting (Satin VDI 15)
-    - Matte UV Coating (10%)
-  supply_chain_nodes:
-  - location: Shenzhen, China
-    role: FATP (Final Assembly)
-    vendor: FIH (Foxconn)
-  - location: China
-    role: Plastics/Housing Fab
-    vendor: Memtech
-  - location: China
-    role: Glass Fabrication
-    vendor: Biel
-  - location: China
-    role: Battery Cell
-    vendor: McNair
-  tooling_chain:
-  - cost_impact: High
-    lead_time_weeks: 8
-    tool_name: Sativa Front Housing Mold
-    type: Hard Tooling (Injection)
-    vendor: Memtech
-  - cost_impact: Med
-    lead_time_weeks: 6
-    tool_name: Waldo Chassis Progressive Die
-    type: Hard Tooling (Stamping)
-    vendor: FIH / Sub-tier
-  - cost_impact: Low
-    lead_time_weeks: 2
-    tool_name: OLED Gasket Die
-    type: Soft Tooling (Die Cut)
-    vendor: Yuhui (裕暉)
 cyberspace:
   enable: true
   layout: linear
   stickies: []
-date: 2016-09-01
+date: 2016-09-01T00:00:00.000Z
 draft: false
 employer: noon
-endDate: 2017-06-01
-forensic_metrics:
-  financial: Savings implied by 'Saving_The_SC48_From_Overheating_And_Scrap' and 'Saving_WebTV_Servers'
-    transcripts.
-  governance: Solo Mandate / RIF (Reduction In Force) event [2, 3].
-  process: 'Sprint tracking: EVT1 Validation / EVT2 Dev cycles [1].'
-forensic_summary:
-  intervention: 'Erik Norris directive: ''please provide a detailed report of “Wet
-    Hands” failures. For now, this test is still classified as “information only”.
-    No need to hold for resolution'' [4].'
-  result: Drop robustness B failed (Micro Drop/Drop Test), Mechanical strength A passed
-    (Thermal Stress, Extreme Force) [7].
-  trigger: Wet Hands / Chemical Resistance Failures (Artificial sweat, Nail polish
-    remover) [4-6].
+endDate: 2017-06-01T00:00:00.000Z
 gallery: []
-hxo_ready: true
-hydration_status: full
 industry: consumer_electronics
-isomorphics:
-- hardware_point: Single Architect (Erik Norris) carrying entire mechanical load across
-    multiple programs (Sativa, Elvis, Waldo).
-  label: Solo Mandate
-  principle: Single Point of Failure / Bus Factor 1.
-  software_point: Monolithic kernel maintained by a single developer.
 listed: true
-metrics:
-  financial:
-    margins:
-    - Managed High-Fidelity OLED integration costs via JDM partnership (FIH/Biel/AUO)
-  governance:
-    dcdCount: 27
-    ecos:
-    - Directed $3,000 tooling budget for VDI-15 intervention
-    - ECN 20170126 (Full Circle Hinge)
-  interventions:
-    count: 5
-    label: Critical Saves
-    value: 5
-  process:
-    yield:
-    - Resolved 100% failure rate (7/7) in Impact Test 'Front housing and back cover
-      separate'
-  quotes:
-  - '[Erik Norris] please provide a detailed report of “Wet Hands” failures. For now,
-    this test is still classified as “information only”. [4]'
-  - Included in the RIF announced today are Annie and Johnny. [2]
-  - One Millimeter Can Kill Your Hardware [13]
-phase_stats:
-  Design: 20
-  Engineering: 50
-  Production: 30
-  Strategy: 0
 presentation_mode: flagship
 primary_home: mech
 productionScale: series
-scars:
-- description: Artificial sweat and chemical agents caused gloss surface changes and
-    roughness on Sativa/Elvis units during EVT2 [6, 8].
-  label: The Wet Hands Crisis
-  value: FAIL (Cosmetic/Functional)
-- description: Protective film glue remained on the surface of Waldo units, causing
-    cosmetic rejection [9, 10].
-  label: Protective Film Debacle
-  value: Yield Impact
-- description: Sativa units failed Micro Drop and standard Drop Tests during reliability
-    validation [7].
-  label: Drop Test Failure
-  value: EVT2 Failure
-slug: room-director
-tags: [Mechanism, Crisis, Yield, Leadership, Process]
+tags:
+  - Mechanism
+  - Crisis
+  - Yield
+  - Leadership
 targets:
-- main
-- mech
-teamSize: 8+ (Erik Norris, Ricky Lin, Yvonne Lai, Eddie Liang, Potter Kao, Alvin,
+  - main
+  - mech
+teamSize: >-
+  8+ (Erik Norris, Ricky Lin, Yvonne Lai, Eddie Liang, Potter Kao, Alvin,
   Kelvin, Benson)
 theme: hyperspace
-tier: 1
 title: Room Director (Sativa)
-toolchain:
-- Arena (PLM/BOM Management)
-- 'JIRA (Issue Tracking: SAT-XX)'
-- FIH (Manufacturing/Assembly)
-- Memtech (Injection Molding/Plastics)
-- Biel (Glass Vendor)
-- AUO (OLED Display)
 ---
 
 Room Director [Codename: Sativa] Forensic Report

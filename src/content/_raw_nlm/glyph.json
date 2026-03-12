@@ -1,0 +1,29 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://avegant.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 281.2,
+    "Engineering": 95.8,
+    "Production": 89.5,
+    "Strategy": 31.9
+  },
+  "slug": "glyph",
+  "tier": 3
+}

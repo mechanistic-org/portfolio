@@ -1,0 +1,56 @@
+{
+  "cast": [
+    {
+      "name": "Erik Norris",
+      "org": "Kaleidescape",
+      "role": "Lead Mechanical Engineer / The Architect"
+    },
+    {
+      "name": "Nathan Forster",
+      "org": "Kaleidescape",
+      "role": "Hardware Systems Engineer"
+    },
+    {
+      "name": "Somboun Thavy",
+      "org": "Kaleidescape",
+      "role": "Engineering Technician"
+    },
+    {
+      "name": "Rob Wudrick",
+      "org": "Kaleidescape",
+      "role": "HW Program Manager"
+    },
+    {
+      "name": "John Lio",
+      "org": "Kaleidescape",
+      "role": "VP Manufacturing Operations"
+    },
+    {
+      "name": "Grat Wu",
+      "org": "Yomura Technologies",
+      "role": "Vendor Contact"
+    }
+  ],
+  "forensic_summary": {
+    "intervention": "Erik Norris led a multi-threaded investigation, redesigning the pinch roller assembly (solid motor mounts, extended gears), implementing new inner disc guides to prevent scratching, and revising cosmetic inspection standards to unblock production.",
+    "result": "Identification of root causes (e.g., abrasive dust, missing e-clips, 'potato chipped' carousels) and release of corrective tooling/parts to stabilize the fleet.",
+    "trigger": "High field failure rates for M700/DV700 vaults due to 'disc unreadable' errors, jammed discs, and 'line down' production stops caused by cosmetic cover defects."
+  },
+  "toolchain": [
+    "Windchill (PDM)",
+    "Arena (BOM/Change Mgmt)",
+    "Sanmina (Manufacturing - Guadalajara)",
+    "Mass Precision (Sheet metal)",
+    "Yomura (Plastics/Tooling - Taiwan)",
+    "Scandic (Springs)"
+  ],
+  "forensic_metrics": {
+    "financial": "Saved $6/unit by fixing screw vibration; debated $4/unit for coated rollers",
+    "governance": "Weekly Reliability Investigation meetings; 100% incoming RMA inspection",
+    "process": "Recovered ~60% yield from rejected cover stock via revised inspection criteria"
+  },
+  "hxo_ready": true,
+  "hydration_status": "full",
+  "slug": "dv700",
+  "tier": 1
+}

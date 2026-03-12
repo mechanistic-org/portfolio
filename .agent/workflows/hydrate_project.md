@@ -29,23 +29,17 @@ Before executing, verify the user has run the prompts in NotebookLM and placed t
 
 ## Execution Steps
 
-1.  **Complexity Vector** (If provided):
-    - Paste the JSON into the `index.mdx` frontmatter under `complexity_vector`.
-
-2.  **Entropy Vector** (If provided):
-    - Paste the JSON array into `src/content/projects/{slug}/_entropy.json`. Do NOT paste 50+ events into `index.mdx`.
-
-3.  **Narrative Vector** (The Body):
-    - **CRITICAL**: Do NOT manually edit or "titrate" the body text for Tier 1/2 projects.
+1.  **Run Hydration Pipeline**:
+    - **CRITICAL**: Do NOT manually edit or "titrate" the body text or JSON metadata for Tier 1/2 projects.
     - Run the pipeline script: `python scripts/hydrate_content.py --slug {slug} --force`
-    - This script uses `smart_merge_lists` to inject the narrative while preserving your manual backported edits.
+    - This script automatically parses the NotebookLM dumps to extract and inject the Narrative (Body), Complexity Vector (Frontmatter), and Entropy Vector (`_entropy.json`), using `smart_merge_lists` to preserve manual edits.
 
-4.  **Verification**:
+2.  **Verification**:
     - Run `npm run dev` to confirm the local preview works.
     - Does `index.mdx` contain the full "Forensic Report" header?
     - Are there any 404 errors? (If yes, follow the Virtual Bridge rules in the `asset_sovereignty` skill).
 
-5.  **Log the Win**:
+3.  **Log the Win**:
     - Open `src/content/docs/project/MINING_LOG.md`.
     - Update the status for the project to 🟢 (Ready State).
     - **DO NOT** update `AGENCY_MEMORY.md` with this status (See the Sovereign Ledger rule in the `conversation_miner` skill).

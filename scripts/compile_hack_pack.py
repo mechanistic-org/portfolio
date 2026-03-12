@@ -57,17 +57,23 @@ def main():
     print("--- Starting Hack Pack Compilation (Decoupled Mode) ---")
     
     # Compile Podcast (NEEDS Protocol for Phonetics)
-    compile_prompt("notebook-podcast", "PODCAST_READY.txt", inject_protocol=True)
+    compile_prompt("notebook-podcast", "PODCAST_NLM-INPUT.txt", inject_protocol=True)
     
     # Compile Resume (Text Only - NO Protocol)
     # Rationale: Resume generation is text-based; phonetic rules are noise that cause leakage.
-    compile_prompt("notebook-resume", "RESUME_READY.txt", inject_protocol=False)
+    compile_prompt("notebook-resume", "RESUME_NLM-INPUT.txt", inject_protocol=False)
     
     # Compile Bolus (JSON Only - NO Protocol)
-    compile_prompt("notebook-bolus", "BOLUS_READY.txt", inject_protocol=False)
+    compile_prompt("notebook-bolus", "BOLUS_NLM-INPUT.txt", inject_protocol=False)
 
     # Compile Report (Markdown Report - NO Protocol)
-    compile_prompt("notebook-report", "REPORT_READY.txt", inject_protocol=False)
+    compile_prompt("notebook-report", "REPORT_NLM-INPUT.txt", inject_protocol=False)
+
+    # Compile Sidecar Components (JSON & MD - NO Protocol)
+    compile_prompt("notebook-team", "TEAM_NLM-INPUT.txt", inject_protocol=False)
+    compile_prompt("notebook-bom", "BOM_NLM-INPUT.txt", inject_protocol=False)
+    compile_prompt("notebook-timeline", "TIMELINE_NLM-INPUT.txt", inject_protocol=False)
+    compile_prompt("notebook-vignettes", "VIGNETTES_NLM-INPUT.txt", inject_protocol=False)
 
     print("--- Compilation Complete. Files ready in public/assets/prompts ---")
 

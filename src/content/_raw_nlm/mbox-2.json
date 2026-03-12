@@ -1,0 +1,29 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://avid.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 26.8,
+    "Engineering": 9.1,
+    "Production": 8.5,
+    "Strategy": 3
+  },
+  "slug": "mbox-2",
+  "tier": 3
+}

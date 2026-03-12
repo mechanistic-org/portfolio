@@ -1,0 +1,252 @@
+{
+  "bom": [
+    {
+      "label": "Fader Motor Assembly",
+      "value": "915010917 [16]"
+    },
+    {
+      "label": "Fader Pan Rail",
+      "value": "942011688 [17]"
+    },
+    {
+      "label": "PCII Main Foot Plate",
+      "value": "942011678-00 [18]"
+    },
+    {
+      "label": "Plastic Texture",
+      "value": "Mold-Tech MT-11020 [19]"
+    },
+    {
+      "label": "Powder Coat",
+      "value": "Metallic Silver / Pantone Cool Gray 6 U [20, 21]"
+    }
+  ],
+  "cast": [
+    {
+      "name": "Erik Norris",
+      "org": "Digidesign",
+      "role": "Lead Mechanical Engineer / The Architect"
+    },
+    {
+      "name": "Neal Breitbarth",
+      "org": "Digidesign",
+      "role": "Mechanical Engineering Manager"
+    },
+    {
+      "name": "Marc Schuman",
+      "org": "Digidesign",
+      "role": "Hardware Engineering"
+    },
+    {
+      "name": "Ed Stegall",
+      "org": "Mass Precision",
+      "role": "Vendor Point of Contact"
+    },
+    {
+      "name": "Vicky Moreno",
+      "org": "Digidesign",
+      "role": "Field Service / QA"
+    }
+  ],
+  "scars": [
+    {
+      "description": "PEM hardware insertion stretched sheet metal, causing an 'arch' or 'bow' from front to back, requiring manual bending to fix [9].",
+      "label": "The Bowed Fader Pan",
+      "value": "50% Rejection Rate"
+    },
+    {
+      "description": "Plastic end caps cracking due to interference with screw heads and torque stress; resolved by ECO to increase hole diameters [11-13].",
+      "label": "The Cracked End Cap",
+      "value": "Field Failures"
+    },
+    {
+      "description": "Discovery that PCBs were manufactured with V-2 material (flammable) instead of V-0, described as 'a virtual tinderbox' relative to spec [14].",
+      "label": "The V-2 Tinderbox",
+      "value": "Safety Crisis"
+    }
+  ],
+  "metrics": {
+    "cogs": {
+      "label": "Stand BOM",
+      "value": "$1,293"
+    },
+    "financial": {
+      "costOfGoodsSold": [
+        "$1,293 (Stand Only)",
+        "$50-$100 Saved (Monitor Offshoring)"
+      ],
+      "margins": [],
+      "quotes": [
+        "The official solution for warped fader plates? Tell the line to manually bend sheet metal against a table... That is blacksmithing.",
+        "Vegas Mode hits 61°C on the heat sink. That's hot enough to degrade components... but it shipped."
+      ],
+      "toolingActual": 234865,
+      "toolingBudget": 250000
+    },
+    "governance": {
+      "dcos": 109,
+      "ecos": [
+        "ECO-ADH-001 (Plasma)",
+        "ECO-13080 (Gap)",
+        "ECO-ALPS-001"
+      ]
+    },
+    "interventions": {
+      "count": 5,
+      "label": "Crisis Recoveries"
+    },
+    "process": {
+      "engineeringChangeOrders": [
+        "Plasma_Treatment",
+        "ALPS_Retrofit",
+        "Gap_Protocol",
+        "Monitor_Offshoring"
+      ]
+    },
+    "profitability": {
+      "label": "CPUs Salvaged",
+      "value": "8,000+"
+    },
+    "quotes": [
+      "I'm squeezing a 2-month DFM and manufacturing process optimization campaign to help out on Buckley into 2.5 weeks... working at home on assembly jigs for fader packs right now... \\<click\\>\\<drone\\>\\<click\\> [4]",
+      "I am ready, willing and able to implement. I just need resolution. There are time/cost constraints mandating judgment calls that are way above my head. [25]",
+      "The difference between an acceptable unit and failing unit is actually smaller than is advertised. I think this is due to the multiplying effect on tolerance error due to the length and width of each unit. [6]"
+    ]
+  },
+  "forensic_summary": {
+    "trigger": "The 'Tolerance Stack-up' Crisis. The physics of modularity collided with manufacturing reality when we attempted to scale the console to 80 faders (10 feet wide). The standard sheet metal tolerances (+/- 0.005\") accumulated across the 5 independent chassis units, creating a 'Gap Failure' where the mounting holes for the 'Tie Plates' were misaligned by over 0.100\", making assembly impossible.",
+    "intervention": "I executed a 'Brute Force' assembly protocol. I compressed a 2-month DFM campaign into 2.5 weeks, designing custom 'assembly jigs' at my home to avoid corporate tooling latency. I institutionalized the 'Ratcheting Strap' method—literally using a heavy-duty cargo strap to physically compress the independent steel chassis together, nullifying the tolerance stack-up before torque-ing the locking plates.",
+    "result": "This manual intervention salvaged the flagship launch, allowing us to ship the massive 80-fader configurations that defined the new 'ICON' industry standard. This product line effectively killed the large-format analog console market for film post-production."
+  },
+  "toolchain": [
+    "Pro/ENGINEER (3D CAD)",
+    "Pro/INTRALINK (Data Management)",
+    "SAP (ERP)",
+    "ASK (BOM Management)",
+    "Vendor: Mass Precision (Sheet Metal)",
+    "Vendor: PPI (Structural Foam/Plastics)",
+    "Vendor: Alexandria (Extrusions)"
+  ],
+  "complexity_vector": {
+    "part_count_growth": [
+      {
+        "count": 450,
+        "date": "2003-01",
+        "phase": "Concept (ProControl Legacy)"
+      },
+      {
+        "count": 850,
+        "date": "2003-10",
+        "phase": "EVT (Buckley Proto)"
+      },
+      {
+        "count": 1200,
+        "date": "2004-02",
+        "phase": "DVT (Modular Scale-up)"
+      },
+      {
+        "count": 2100,
+        "date": "2004-05",
+        "phase": "PVT (Pre-Production)"
+      },
+      {
+        "count": 2500,
+        "date": "2004-06",
+        "phase": "MP (32-80 Fader Configs)"
+      }
+    ],
+    "process_density": [
+      {
+        "complexity_score": 9,
+        "material": "Sheet Metal (Steel)",
+        "part_name": "Fader Pan Assembly (Buckley)",
+        "steps": [
+          "Turret Punch / Laser Cut",
+          "Brake Forming",
+          "PEM Hardware Insertion (Source of 'Bowing')",
+          "Masking",
+          "Powder Coat (Metallic Silver)",
+          "Manual Rectification ('Tweaking' on table edge)",
+          "Alignment via Ratcheting Compression Strap"
+        ]
+      },
+      {
+        "complexity_score": 8,
+        "material": "Structural Foam / Plastic",
+        "part_name": "Side End Cap (Left/Right)",
+        "steps": [
+          "Injection Molding",
+          "Bonding (2-piece assembly)",
+          "Painting (Color Match Critical)",
+          "Drilling (ECO for hole enlargement)",
+          "Installation (High torque sensitivity)"
+        ]
+      }
+    ],
+    "supply_chain_nodes": [
+      {
+        "location": "San Jose, CA",
+        "role": "Sheet Metal Fabrication",
+        "vendor": "Mass Precision"
+      },
+      {
+        "location": "Unknown (Domestic)",
+        "role": "Plastic Molding",
+        "vendor": "PPI Plastics"
+      },
+      {
+        "location": "Fremont, CA / Korea",
+        "role": "PCB Fabrication (V-0 Compliance Issues)",
+        "vendor": "RB / Raymond"
+      },
+      {
+        "location": "Daly City, CA",
+        "role": "Final Assembly / QA",
+        "vendor": "Digidesign Mfg"
+      }
+    ],
+    "tooling_chain": [
+      {
+        "cost_impact": "High (Warping/Cracking Issues)",
+        "lead_time_weeks": 12,
+        "tool_name": "End Cap Molds",
+        "type": "Hard Tooling (Structural Foam)",
+        "vendor": "PPI Plastics"
+      },
+      {
+        "cost_impact": "Med",
+        "lead_time_weeks": 4,
+        "tool_name": "Stand Leg Extrusion Dies",
+        "type": "Hard Tooling (Aluminum Extrusion)",
+        "vendor": "Anaheim Extrusion"
+      },
+      {
+        "cost_impact": "High (Volume Dependent)",
+        "lead_time_weeks": 2,
+        "tool_name": "Chassis Sheet Metal",
+        "type": "Soft Tooling (Turret/Brake)",
+        "vendor": "Mass Precision"
+      }
+    ]
+  },
+  "audio_url": "/assets/d-control/d-control-briefing.m4a",
+  "forensic_metrics": {
+    "financial": "Cost delta analysis of external vs internal monitor ($50-$100 impact) [1]; Evaluation of ALPS faders ($15) vs Penny & Giles for cost reduction/retrofit [2, 3]",
+    "governance": "Cross-functional 'Digi-Buckley' meetings; Sustaining D-Control issues email group created for production assembly feedback [5]",
+    "process": "Compressed 2-month DFM and manufacturing optimization campaign into 2.5 weeks [4]"
+  },
+  "hxo_ready": true,
+  "hydration_status": "full",
+  "isomorphics": [
+    {
+      "hardware_point": "Multiplying effect on tolerance error due to length/width of multiple unit assemblies (Main + Fader) [6]",
+      "label": "Tolerance Stack-up",
+      "principle": "Modular System Integration Laws",
+      "software_point": "Firmware updates required to support different fader orientations (ALPS vs P&G) [15]"
+    }
+  ],
+  "notebook_url": "https://notebooklm.google.com/notebook/c32aee36-9b19-43ec-9450-c8ed3bc6e86b?authuser=1",
+  "slug": "d-control",
+  "tier": 1,
+  "transcript": ""
+}

@@ -1,0 +1,29 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://kaleidescape.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 120.1,
+    "Engineering": 40.9,
+    "Production": 38.2,
+    "Strategy": 13.6
+  },
+  "slug": "kvault-10",
+  "tier": 3
+}

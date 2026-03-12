@@ -20,16 +20,15 @@ If the user asks to "update the resume to reflect new LinkedIn data", follow the
 4. **Action:** Synthesize the new LinkedIn data into tight, brutalist, "Hard Ore" bullets (focusing on metrics, temperature, force, failure rates). Use the `multi_replace_file_content` tool to safely inject the new bullets into `src/config/resume_master.ts`.
 5. **DO NOT GUESS IMAGINARY DATA.** Only transfer facts present in the LinkedIn sources or MDX files. Let the user review the proposed `resume_master.ts` changes if there is ambiguity.
 
-### Phase 2: PDF Generation (Local Server Required)
+### Phase 2: PDF Generation (Headless)
 
-The PDF generation script requires the local Vite development server to be running on port `4321`.
+The PDF generation script now spins up its own isolated headless server to capture the resume safely.
 
 // turbo
 
-1. Test if the server is running by attempting the generation script:
+1. Trigger the headless generation script:
    `node scripts/generate_resume_pdf.cjs`
-2. If the terminal throws an error (e.g. "ERR_CONNECTION_REFUSED"), inform the user: _"Please run `npm run dev` in a separate terminal so I can print the PDF."_
-3. Wait for the user to confirm the dev server is running, then re-run the `node` command.
+2. The script will automatically start an isolated dev server, wait for it to be ready, print the PDF, and safely terminate the server process.
 
 _Note: The script outputs exclusively to `public/assets/resume/Erik_Norris_Resume_Current.pdf`._
 

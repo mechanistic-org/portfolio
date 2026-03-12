@@ -1,418 +1,181 @@
 ---
 additionalSkills: []
-audio_url: /assets/sc48/sc48-briefing.m4a
-bom:
-- label: Thermal Test Log
-  value: SC48_lux_thermal-testing.pdf
-- label: Console FOH
-  value: Capali
-- label: 9420-58317-00
-  value: 4U RAKE BACK I-BEAM (Folded Steel)
-- label: 9420-58856-00
-  value: FAN DUCT 1 (Die-Cut LDPE)
-- label: 986LCD-M
-  value: Kontron Mini-ITX Embedded Motherboard
-- label: 9100-58341-00
-  value: LUX CONSOLE TOP LEVEL ASSY
-cast:
-- name: Erik Norris
-  org: Digidesign
-  role: Lead Mechanical Engineer / The Architect
-- name: Neal Breitbarth
-  org: Digidesign
-  role: Engineering Management
-- name: Thomas Oiwa
-  org: Digidesign
-  role: Drafting/Design
-- name: Roger Lau
-  org: Jetcrown/VTech
-  role: Vendor Liaison
 category: enterprise_hardware
 client: []
-complexity_vector:
-  part_count_growth:
-  - count: 0
-    date: 2006-11
-    phase: Concept
-  - count: 5
-    date: 2007-02
-    phase: EVT (Eng Validation)
-  - count: 43
-    date: 2007-05
-    phase: DVT (Design Validation)
-  - count: 43
-    date: 2007-06
-    phase: PVT (Prod Validation)
-  - count: 43
-    date: 2008-01
-    phase: MP (Mass Production)
-  process_density:
-  - complexity_score: 9
-    material: Folded Steel
-    part_name: 4U Rake Back I-Beam (P/N 9420-58317-00)
-    steps:
-    - Laser Cut
-    - CNC Folding (Origami Geometry)
-    - Stress Relief
-    - Zinc Plating
-    - Riveting (PEM Insertion)
-  - complexity_score: 8
-    material: ABS/PC Injection
-    part_name: Side Cap / Bolster (P/N 9440-58842-00)
-    steps:
-    - Family Mold Injection
-    - Cooling Fixture
-    - Mold-Tech Texture (MT-11020)
-    - Painting (Class A)
-    - Masking
-  - complexity_score: 5
-    material: LDPE (Milky White)
-    part_name: Fan Duct (P/N 9420-58856-00)
-    steps:
-    - Die Cut
-    - Score
-    - Manual Fold/Form
-    - Installation (MacGyver Fit)
-  supply_chain_nodes:
-  - location: San Jose, USA
-    role: Soft Tooling / Prototyping
-    vendor: Mass Precision
-  - location: Dongguan, China
-    role: FATP (Final Assembly)
-    vendor: VTech / Kwanasia
-  - location: Dongguan, China
-    role: Plastics Injection
-    vendor: Jetcrown
-  - location: USA/Global
-    role: Embedded Motherboard
-    vendor: Kontron
-  - location: USA
-    role: Power Supply Unit
-    vendor: Skynet
-  tooling_chain:
-  - cost_impact: High ($30,000)
-    lead_time_weeks: 6
-    tool_name: Side Cap Family Mold
-    type: Hard Tooling (Injection)
-    vendor: Jetcrown
-  - cost_impact: Low ($561.46 unit cost)
-    lead_time_weeks: 2
-    tool_name: Chassis Sheet Metal (CNC)
-    type: Soft Tooling
-    vendor: Mass Precision / VTech
-  - cost_impact: High ($30,000)
-    lead_time_weeks: 8
-    tool_name: Front Bolster Mold
-    type: Hard Tooling (Injection)
-    vendor: Jetcrown
 cyberspace:
   layout: linear
   stickies:
-  - data:
-      columns: 3
-      images:
-      - alt: 9420-58318-00
-        aspectRatio: 1.5
-        src: /assets/sc48/bubbles/01_brain_transplant/9420-58318-00.jpg
-      layout: masonry
-      scattered: true
-    deck:
-    - body: '**The Constraint:**
+    - data:
+        columns: 3
+        images:
+          - alt: 9420-58318-00
+            aspectRatio: 1.5
+            src: /assets/sc48/bubbles/01_brain_transplant/9420-58318-00.jpg
+        layout: masonry
+        scattered: true
+      deck:
+        - body: >-
+            **The Constraint:**
 
-        Incorporating a standard ATX motherboard into a proprietary DSP host environment.
-
-
-        **The Solution:**
-
-        Creating a secure, vibration-isolated "Engine Bay" for the Kontron 986LCD-M.
+            Incorporating a standard ATX motherboard into a proprietary DSP host
+            environment.
 
 
-        - **IO Shield:** Designed a custom IO shield (P/N 9420-58318-00) to bridge
-        the gap between commercial connectors and the industrial chassis.
+            **The Solution:**
 
-        - **Shock Mounting:** Implemented a suspended tray design to protect the BGA
-        components from low-frequency touring rumble (Truck rumble).
-
-        - **Cable Routing:** Defined strict "Keep Out" zones for cabling to prevent
-        airflow blockage.'
-      subtitle: ''
-      title: Motherboard Integration
-    featuredIndices: []
-    id: 01_brain_transplant
-    title: Brain Transplant
-    type: gallery
-  - data:
-      columns: 3
-      images:
-      - alt: 9440-58842-00
-        aspectRatio: 1.5
-        src: /assets/sc48/bubbles/02_cosmetic_shell/9440-58842-00.jpg
-      - alt: 9440-58843-00
-        aspectRatio: 1.5
-        src: /assets/sc48/bubbles/02_cosmetic_shell/9440-58843-00.jpg
-      layout: masonry
-      scattered: true
-    deck:
-    - body: '**The Goal:**
-
-        Make a stamped steel box look like a premium $20k console.
+            Creating a secure, vibration-isolated "Engine Bay" for the Kontron
+            986LCD-M.
 
 
-        **The Solution:**
+            - **IO Shield:** Designed a custom IO shield (P/N 9420-58318-00) to
+            bridge the gap between commercial connectors and the industrial
+            chassis.
 
-        A multi-piece ABS plastic trim kit that "wrapped" the industrial core.
+            - **Shock Mounting:** Implemented a suspended tray design to protect
+            the BGA components from low-frequency touring rumble (Truck rumble).
 
+            - **Cable Routing:** Defined strict "Keep Out" zones for cabling to
+            prevent airflow blockage.
+          subtitle: ''
+          title: Motherboard Integration
+      featuredIndices: []
+      id: 01_brain_transplant
+      title: Brain Transplant
+      type: gallery
+    - data:
+        columns: 3
+        images:
+          - alt: 9440-58842-00
+            aspectRatio: 1.5
+            src: /assets/sc48/bubbles/02_cosmetic_shell/9440-58842-00.jpg
+          - alt: 9440-58843-00
+            aspectRatio: 1.5
+            src: /assets/sc48/bubbles/02_cosmetic_shell/9440-58843-00.jpg
+        layout: masonry
+        scattered: true
+      deck:
+        - body: >-
+            **The Goal:**
 
-        - **Fader Bank:** The fader bezel (P/N 9440-58842-00) provided a smooth, ergonomic
-        resting surface for the engineer''s hands.
-
-        - **Master Section:** The center section (P/N 9440-58843-00) unified the screen
-        and master faders.
-
-        - **Texture:** Utilized Mold-Tech MT-11010 (Fine Texture) to match the powder-coated
-        steel, creating a "Seamless" visual transition between plastic and metal.'
-      subtitle: ''
-      title: Industrial Design
-    featuredIndices: []
-    id: 02_cosmetic_shell
-    title: Cosmetic Shell
-    type: gallery
-  - data:
-      columns: 3
-      images:
-      - alt: 9440-58856-00
-        aspectRatio: 1.5
-        src: /assets/sc48/bubbles/03_meltdown_mitigation/9440-58856-00.jpg
-      layout: masonry
-      scattered: true
-    deck:
-    - body: '**The Constraint:**
-
-        Condensing a 1000W system into a unibody chassis without external cooling
-        towers.
-
-
-        **The Solution:**
-
-        I utilized the **chassis itself** as the heatsink. By coupling the PSU and
-        CPU thermal loads directly to the heavy-gauge steel frame, we dissipated heat
-        via conduction rather than relying solely on convection.
+            Make a stamped steel box look like a premium $20k console.
 
 
-        - **CFD Analysis:** Validated airflow paths to ensure zero "dead zones" around
-        the DSP cards.
+            **The Solution:**
 
-        - **Fan Duct:** Designed a custom injection-molded duct (P/N 9440-58856-00)
-        to channel high-velocity air directly over the heatsinks while maintaining
-        acoustic silence (&lt;35dBA).'
-      subtitle: ''
-      title: Thermal Architecture
-    featuredIndices: []
-    id: 03_meltdown_mitigation
-    title: Meltdown Mitigation
-    type: gallery
-  - data:
-      columns: 3
-      images: []
-      layout: masonry
-      scattered: true
-    deck:
-    - body: '**The Challenge:**
-
-        Standard "Box and Lid" construction would be too heavy and expensive for the
-        target BOM.
+            A multi-piece ABS plastic trim kit that "wrapped" the industrial
+            core.
 
 
-        **The Solution:**
+            - **Fader Bank:** The fader bezel (P/N 9440-58842-00) provided a
+            smooth, ergonomic resting surface for the engineer's hands.
 
-        I implemented a **Sheet Metal Monocoque** design ("The Origami Spine").
+            - **Master Section:** The center section (P/N 9440-58843-00) unified
+            the screen and master faders.
+
+            - **Texture:** Utilized Mold-Tech MT-11010 (Fine Texture) to match
+            the powder-coated steel, creating a "Seamless" visual transition
+            between plastic and metal.
+          subtitle: ''
+          title: Industrial Design
+      featuredIndices: []
+      id: 02_cosmetic_shell
+      title: Cosmetic Shell
+      type: gallery
+    - data:
+        columns: 3
+        images:
+          - alt: 9440-58856-00
+            aspectRatio: 1.5
+            src: /assets/sc48/bubbles/03_meltdown_mitigation/9440-58856-00.jpg
+        layout: masonry
+        scattered: true
+      deck:
+        - body: >-
+            **The Constraint:**
+
+            Condensing a 1000W system into a unibody chassis without external
+            cooling towers.
 
 
-        - **Jetcrown Stamping:** moved from low-volume CNC bending to high-volume
-        progressive die stamping.
+            **The Solution:**
 
-        - **Dimensional Integrity:** The folded steel created a rigid spine that eliminated
-        the need for a separate internal frame, reducing part count by 40%.
+            I utilized the **chassis itself** as the heatsink. By coupling the
+            PSU and CPU thermal loads directly to the heavy-gauge steel frame,
+            we dissipated heat via conduction rather than relying solely on
+            convection.
 
-        - **Interlock:** The structure featured self-aligning tabs that allowed the
-        PCB trays to "snap" into place before fastening, drastically reducing assembly
-        time.'
-      subtitle: ''
-      title: Structural Monocoque
-    featuredIndices: []
-    id: 04_origami_spine
-    title: Origami Spine
-    type: gallery
-date: 2007-01-01
-description: The "Embedded Live Sound" console that solved a 75°C thermal shutdown
-  via 4U chassis redesign.
+
+            - **CFD Analysis:** Validated airflow paths to ensure zero "dead
+            zones" around the DSP cards.
+
+            - **Fan Duct:** Designed a custom injection-molded duct (P/N
+            9440-58856-00) to channel high-velocity air directly over the
+            heatsinks while maintaining acoustic silence (&lt;35dBA).
+          subtitle: ''
+          title: Thermal Architecture
+      featuredIndices: []
+      id: 03_meltdown_mitigation
+      title: Meltdown Mitigation
+      type: gallery
+    - data:
+        columns: 3
+        images: []
+        layout: masonry
+        scattered: true
+      deck:
+        - body: >-
+            **The Challenge:**
+
+            Standard "Box and Lid" construction would be too heavy and expensive
+            for the target BOM.
+
+
+            **The Solution:**
+
+            I implemented a **Sheet Metal Monocoque** design ("The Origami
+            Spine").
+
+
+            - **Jetcrown Stamping:** moved from low-volume CNC bending to
+            high-volume progressive die stamping.
+
+            - **Dimensional Integrity:** The folded steel created a rigid spine
+            that eliminated the need for a separate internal frame, reducing
+            part count by 40%.
+
+            - **Interlock:** The structure featured self-aligning tabs that
+            allowed the PCB trays to "snap" into place before fastening,
+            drastically reducing assembly time.
+          subtitle: ''
+          title: Structural Monocoque
+      featuredIndices: []
+      id: 04_origami_spine
+      title: Origami Spine
+      type: gallery
+date: 2007-01-01T00:00:00.000Z
+description: >-
+  The "Embedded Live Sound" console that solved a 75°C thermal shutdown via 4U
+  chassis redesign.
 documents: []
 draft: false
 duration: 1.3 Years
 employer: digidesign
-endDate: 2008-01-01
-forensic_metrics:
-  financial: Scrap Avoidance [Saving_The_SC48_From_Overheating_And_Scrap]
-  governance: Engineering/Compliance Handoff
-  process: Thermal Chamber Validation
-forensic_summary:
-  intervention: I executed a comprehensive 16-configuration 'Design of Experiments'
-    thermal matrix to empirically define the Safe Operating Area (SOA) for the embedded
-    architecture. I identified that the 3U form factor was non-viable due to high
-    impedance. I engineered a transition to a 4U 'Lung' chassis and implemented 'MacGyver'
-    flow guidance hardware (Die-Cut LDPE fan ducts) to physically channel high-velocity
-    air directly over the CPU, bypassing the thermal blockage.
-  result: The 4U side-intake architecture stabilized the internal temperature rise
-    on the critical Left side (CPU) to 22.6°C, providing 13.8°C of thermal headroom
-    over the failed config. This permanently eliminated the shutdown risk while maintaining
-    the flagship 'rack-less' aesthetic.
-  trigger: 'During pre-production ''capali FOH'' stress testing, the embedded CPU
-    (Kontron 986LCD-M) breached the critical 75°C threshold. The system logs captured
-    the catastrophic event: ''CPU temperature is 75C, system shutdowned''. The ''rack-less''
-    mandate forced high-density components into a sealed environment where Industrial
-    Design imposed a strict ''Cooling done from the sides'' limitation, creating a
-    lethal heat trap.'
+endDate: 2008-01-01T00:00:00.000Z
 gallery: []
 heroImage: /assets/sc48/SC48-hero-01-xl.webp
-hxo_ready: true
-hydration_status: full
 industry: pro_audio
-isomorphics:
-- hardware_point: Airflow/Geometry optimization to mitigate heat buildup.
-  label: Thermodynamics
-  principle: Heat Dissipation & Thermal Management.
-  software_point: Thermal throttling and shutdown logic triggers.
-- hardware_point: High-density embedded PC components in a sealed 3U chassis triggered
-    a catastrophic 75°C 'Kill Event' system shutdown during stress tests. Expanded
-    chassis volume to 4U, engineered an 'Origami Spine' for structural support, and
-    utilized custom LDPE fan ducts to force high-velocity 12V air directly into the
-    thermal core.
-  label: Dissipating Heat
-  principle: High-density processing requires directed flow architecture to prevent
-    system suffocation.
-  software_point: Managing Token Density / Complexity — When LLM context windows become
-    oversaturated (thermal trap), deploy structured context expansion (4U volume)
-    and specialized routing agents (fan ducts) to direct computational focus precisely
-    where needed.
-links: []
-metrics:
-  cogs:
-    label: CNC Unit Price
-    value: $561.46
-  financial:
-    costOfGoodsSold:
-    - $561.46 (CNC Chassis Strategy)
-    margins: []
-    toolingActual: 36000
-    toolingBudget: 85000
-  governance:
-    dcos: 18
-    ecos:
-    - THERMAL_CRISIS
-    - SYSTEM_SHUTDOWN
-  interventions:
-    count: 18
-    label: Thermal Configs
-  process:
-    engineeringChangeOrders:
-    - 3U_to_4U_Pivot
-    - L_Plenum_Add
-  profitability:
-    label: CPU Temp Rise
-    value: 13.8°C
-  quotes:
-  - CPU temperature is 75C, system shutdowned
-  - Saving The SC48 From Overheating And Scrap
-  - Capali FOH in Temperature Chamber
-  - There will be no extrusions
-  - Cooling done from the sides
-notebook_url: https://notebooklm.google.com/notebook/c783f4a0-8b0d-4770-8e1d-c31e1239306d?authuser=1
-phase_stats:
-  Design: 0
-  Engineering: 0
-  Production: 0
-  Strategy: 0
 presentation_mode: deep_dive
 production: concept
 productionScale: limited
-scars:
-- description: Engineered 3-fan side-intake ducting system (P/N 9420-58856-00) to
-    cool embedded Kontron PC in a sealed shell.
-  label: The Meltdown Mitigation
-  value: 75°C -> 22.6°C
-- description: Replaced structural aluminum extrusions with a complex folded steel
-    '4U Rake Back I-Beam' (P/N 9420-58317-00) to meet cost targets.
-  label: The Origami Spine
-  value: 20% of COGS
-- description: System reached critical thermal threshold causing immediate shutdown
-    during environmental stress testing.
-  label: The Oven Test
-  value: 75°C Shutdown
-- description: Extensive logging of Ambient vs. CPU/DSP/PSU temperatures to validate
-    thermal solution.
-  label: Capaldi FOH
-  value: Thermal Validation
-- description: Forced to limit display brightness to prevent burnout due to shared
-    component dependency with 'Curtis' project.
-  label: The Varitronix Deadlock
-  value: 40% Brightness Cap
-- description: Sustained head injury from falling branch (22 stitches); managed IP
-    conflict crisis from ER while on concussion protocol.
-  label: The Berry Creek Incident
-  value: Concussion / IP Conflicts
-- description: Enforced 'Solder = LED' vs 'Person = LEED' spelling rule to prevent
-    toxic manufacturing errors.
-  label: The 'Lead vs Lead' Mandate
-  value: Zero Draft Comms
-- description: Accepted high unit cost to avoid $50k hard tooling risk during validation.
-  label: CNC First Strategy
-  value: $561.46 Unit Cost
-- description: Rejected glue fix for popping inserts; recalculated tolerance to .170
-    +0.00/-0.012 for mechanical interference fit.
-  label: The PMS Insert Crisis
-  value: Tolerance Stack
-- description: Engineered ovalized 'wiggle room' tie plates to prevent connector smash
-    during blind assembly.
-  label: The 'Blind Mate' Alignment
-  value: The Floating Tray
-- description: Forced vendor to enlarge spacer holes to seat LED collars deeper, eliminating
-    light bleed.
-  label: The LED Bleed
-  value: Pixel Perfect Gate
-- description: Discovered the ID model and Mechanical chassis were 1.6 inches apart
-    in length three weeks before tooling release.
-  label: The 'Ghost Dimension'
-  value: 1.6 Inch Delta
-- description: Identified a 50% yield loss on Fader Plates due to 'Over-Constraint'.
-    Reduced 12 screw points to 6, restoring yield to 100%.
-  label: The Yield Flip
-  value: 50% -> 100%
-- description: Modified PSU mounting brackets to replace rubber feet, using the chassis
-    itself as a heatsink to prevent 75°C shutdown.
-  label: The PSU Heatsink Hack
-  value: Density Matching
 skillData: []
-slug: sc48
 tags:
-- Crisis
-- Process
-- Architecture
-- Yield
+  - Crisis
+  - Yield
 teamSize: INT 4
 theme: hyperspace
-tier: 1
 title: SC48
-toolchain:
-- Pro/ENGINEER Wildfire
-- Thermal Chamber (Dataplogging)
-- SAP (BOM Mgmt)
-- VTech (Turnkey)
-- Mass Precision (Sheet Metal)
-- Jetcrown (Plastics)
-- Skynet (PSU)
 tools:
-- pro_engineer
-transcript: ''
+  - pro_engineer
 ---
 
 tell me about Erik Norris' Design Of Experiments and validation of thermal system performance and design on Lux

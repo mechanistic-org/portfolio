@@ -1,0 +1,29 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://avid.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 66,
+    "Engineering": 22.5,
+    "Production": 21,
+    "Strategy": 7.5
+  },
+  "slug": "d-show",
+  "tier": 3
+}

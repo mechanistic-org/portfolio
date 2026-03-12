@@ -1,106 +1,9 @@
 ---
 additionalSkills: []
-audio_url: /assets/webtv-galaxy/webtv-galaxy-briefing.m4a
-bom:
-  - label: CPU
-    value: AMD K7 (150W System TDP)
-  - label: Cooling
-    value: Delta 2700 RPM Fan / Custom Extruded Heatsink
-  - label: Storage
-    value: Dual Quantum Fireball lct20 HDDs
-  - label: Chassis
-    value: CRS with Zinc Plating (0.91mm)
-cast:
-  - name: Erik Norris
-    org: Mechanistic
-    role: Principal Mechanical Architect
-  - name: Roy Askeland
-    org: WebTV / Microsoft
-    role: Engineering Manager
-  - name: Frank Salinas
-    org: WebTV / Microsoft
-    role: Hardware Systems Engineer
-  - name: Shelly Evans
-    org: E-M Solutions
-    role: NPI Manager
-  - name: Avijit Goswami
-    org: Applied Thermal Technologies
-    role: Thermal Consultant
 category: home_entertainment
 client:
   - microsoft
   - webtv
-complexity_vector:
-  part_count_growth:
-    - count: 15
-      date: 2000-09
-      phase: Concept (ID Proposal)
-    - count: 85
-      date: 2001-04
-      phase: EVT (Thermal/Layout)
-    - count: 210
-      date: 2001-07
-      phase: DVT (DEV 2.1 Build)
-    - count: 0
-      date: 2002-01
-      phase: PVT (Cancelled/Xbox Pivot)
-  process_density:
-    - complexity_score: 9
-      material: 0.91mm CRS (Cold Rolled Steel)
-      part_name: Chassis Base Pan
-      steps:
-        - Progressive Die Stamping
-        - Hook 29 Stress Relief Forming
-        - Structural Rib Embossing (Warpage Mitigation)
-        - Drawn Standoff Creation
-        - Zinc/Tin Plating
-    - complexity_score: 8
-      material: 1.0mm SPTE (Tin-Plated Steel)
-      part_name: CPU Puck Shield (Top)
-      steps:
-        - CNC Turret Punch (12.5mm Hex Array)
-        - Forming (Continuous EMI Flanges)
-        - In-Situ Sub-Assembly Integration
-    - complexity_score: 6
-      material: Extruded Aluminum
-      part_name: Heatsink Assembly
-      steps:
-        - Custom Profile Extrusion (50x60x30mm)
-        - Cross-Cut Sawing
-        - Face Machining
-        - Phase Change Interface Application
-  supply_chain_nodes:
-    - location: Sunnyvale, CA
-      role: Mechanical Architecture
-      vendor: Mechanistic
-    - location: Fremont, CA
-      role: Rapid Fabrication
-      vendor: E-M Solutions
-    - location: Santa Clara, CA
-      role: Thermal CFD Analysis
-      vendor: Applied Thermal Technologies
-    - location: Singapore
-      role: Tooling Feasibility
-      vendor: NT Vision
-    - location: Mountain View, CA
-      role: Program HQ
-      vendor: WebTV / Microsoft
-  tooling_chain:
-    - cost_impact: High
-      lead_time_weeks: 12
-      tool_name: Base Chassis Progressive Die
-      type: Hard Tooling
-      vendor: D&D Manufacturing / NT Vision (Singapore)
-    - cost_impact: High ($134.42 per fan bracket)
-      lead_time_weeks: 0.8
-      tool_name: Quick-Turn Prototype Line
-      type: Soft Tooling (Laser/Brake)
-      vendor: E-M Solutions (Fremont)
-    - cost_impact: High ($2,500 per unit)
-      lead_time_weeks: 2
-      tool_name: Front Bezel CNC
-      type: Soft Tooling (Machined)
-      vendor: Sputnik Models
 cyberspace:
   layout: linear
   stickies:
@@ -125,7 +28,9 @@ cyberspace:
         images:
           - alt: galaxy_HDD Copy 1 (1)
             aspectRatio: 1.5
-            src: /assets/webtv-galaxy/bubbles/03_architecture/galaxy_HDD Copy 1 (1).png
+            src: >-
+              /assets/webtv-galaxy/bubbles/03_architecture/galaxy_HDD Copy 1
+              (1).png
           - alt: galaxy_HDD Copy 1
             aspectRatio: 1.5
             src: /assets/webtv-galaxy/bubbles/03_architecture/galaxy_HDD Copy 1.png
@@ -209,165 +114,31 @@ cyberspace:
       id: 03_thermal
       title: Thermal
       type: gallery
-date: 2001-03-05
-description:
-  The "Missing Link" between WebTV and Xbox. A 150W thermal crisis that
-  forced the evolution of the living room console.
+date: 2001-03-05T00:00:00.000Z
+description: >-
+  The "Missing Link" between WebTV and Xbox. A 150W thermal crisis that forced
+  the evolution of the living room console.
 documents: []
 draft: false
 duration: 1.5 Years
 employer: mechanistic
-endDate: 2002-03-18
-forensic_metrics:
-  financial:
-    Managed $14k/mo burn rate on solo-consultant engineering services; mitigated
-    cost of custom 4-day quick-turn fabrication cycles
-  governance:
-    Weekly 'Mechanical Hitlist' protocol tracking 30+ gating defects; Centralized
-    FTP master database control
-  process:
-    Achieved 28.3 CFM system airflow in high-density chassis; Resolved 100%
-    of EMI chassis ground failures via flange redesign
-forensic_summary:
-  intervention:
-    Engineered a 300mm chassis extension with a directed airflow tunnel
-    (28.3 CFM) and modular 'CPU Puck' sub-assembly.
-  result:
-    Stabilized CPU junction temperature at 84.0°C and Smart Card ambient &lt;55.0°C;
-    assets pivoted to Xbox division upon program cancellation.
-  trigger:
-    Integration of desktop-class AMD K7 architecture (150W TDP) into a consumer
-    set-top box form factor.
+endDate: 2002-03-18T00:00:00.000Z
 gallery: []
 heroImage: /assets/webtv-galaxy/webtv-galaxy-hero-01-xl.webp
-hxo_ready: true
-hydration_status: full
 industry: consumer_electronics
-isomorphics:
-  - hardware_point:
-      Dissipating 150W within a consumer acoustic envelope required redefining
-      the physical volume.
-    label: Density
-    principle: Thermodynamics dictates architecture; form must follow heat flux.
-    software_point: Refactoring code monoliths to run on constrained hardware resources.
-links: []
-metrics:
-  cogs:
-    label: Invoice (MiniMerc)
-    value: $4,500.00
-  financial:
-    costOfGoodsSold: []
-    margins: []
-    royaltySaved: Zero Mods (FCC Class A)
-    toolingActual: 1200
-    toolingBudget: 15000
-  governance:
-    dcos: 0
-    ecos:
-      - THERMAL_CRISIS
-      - 150W_TDP
-      - FCC_CLASS_A
-  interventions:
-    count: 3
-    label: Redesign Sprints
-  process:
-    engineeringChangeOrders:
-      - 50-Hour Proto Sprint
-      - 26-Hour Rev Turn
-      - 50-Hour Proto Sprint
-      - 26-Hour Rev Turn
-      - Trash BPS Layout
-  profitability:
-    label: Thermal Load
-    value: 150W
-  quotes:
-    - The only concern is the Smart Card location. It probably need to be moved closer
-      to the inlet vent.
-    - Our concern would be warping of the base in the stamping process due to the quantity
-      and placement of the standoff's
-    - Microsoft, has (surprise) chosen the PC in general and the gaming console platform
-      specifically rather than the 'cable TV box'.
-notebook_url: https://notebooklm.google.com/notebook/a743c4b4-0aaf-446f-b18c-13f23b38065e?authuser=1
-phase_stats:
-  Design: 20
-  Engineering: 80
-  Production: 0
-  Strategy: 0
 presentation_mode: deep_dive
 production: prototype
 productionScale: one_off
-quotes:
-  - The only concern is the Smart Card location. It probably need to be moved closer
-    to the inlet vent.
-  - Microsoft, has (surprise) chosen the PC in general and the gaming console platform
-    specifically rather than the 'cable TV box'.
-  - Galaxy is a next generation DSS Satellite product... This product will be WebTV’s
-    new technology showcase.
-scars:
-  - description:
-      Requested a non-functional 'Dog Unit' immediately upon arrival to reverse-engineer
-      failure points before looking at the spec sheet.
-    label: The 'Dog Unit' Request
-    value: First Principles
-  - description:
-      Halted a redesign loop by demanding a 'Dog Unit' teardown, proving
-      field failures were due to contamination, not design.
-    label: The 'First Principles' Defense
-    value: Teardown Authority
-  - description:
-      Identified a 150W 'God Box' prototype flaw where the Smart Card reader
-      hit 55\xB0C (melting point), forcing a chassis redesign.
-    label: The 'God Box' Thermal Tax
-    value: 55\xB0C Credit Card
-  - description:
-      Redesigned the Hard Drive Bracket to act as a structural air dam, forcing
-      28.3 CFM over the drives to prevent thermal shutdown.
-    label: The 'Wind Tunnel' Pivot
-    value: Structure as Duct
-  - description:
-      Redesigned the base chassis with 'Hook 29' strengthening ribs after
-      drawn standoffs caused 'potato chip' warping.
-    label: The 'Hook 29' Fix
-    value: Stamping Yield
-  - description:
-      Tracked down 'Linda the Repair Tech' to verify field failure rates
-      on the LED Spacers, avoiding an unnecessary $15k tooling redesign.
-    label: The Meter Investigation
-    value: Human Intelligence
-  - description:
-      Held the line on cosmetic 'short shots' and sink marks, risking a schedule
-      slip to prevent shipping a flawed flagship product.
-    label: The 'Short Shot' Stand
-    value: Quality Gate
-  - description:
-      The product didn't ship, but the DNA survived. The wind tunnel architecture
-      and thermal learnings were directly absorbed by the Xbox team. We built the one
-      that broke to teach them how to build the one that didn't.
-    label: Reincarnation
-    value: Xbox Thermal DNA
 skillData: []
-slug: webtv-galaxy
-tags: [Architecture, Crisis, Process, Leadership, Yield]
+tags:
+  - Crisis
+  - Leadership
+  - Yield
 theme: hyperspace
-tier: 1
-timeline: []
 title: WebTV Galaxy
-toolchain:
-  - Pro/ENGINEER (Master Assembly)
-  - AutoCAD (Legacy 2D)
-  - Applied Thermal Technologies (CFD)
-  - E-M Solutions (Sheet Metal Fab)
-  - Sputnik Models (Hard Models)
-  - D&D Manufacturing (Stamping Feasibility)
 tools:
   - pro_engineer
   - thermal_simulation
-transcript: ""
-visuals_to_find:
-  - model-iso.jpg (CFD Thermal Simulation)
-  - tempxz.jpg (Heat Map)
-  - Base_Proto_Deviations.jpg (QA Redlines)
-  - Galaxy Mechanical Design Hitlist 7-27.doc
 teamSize: INT 5
 ---
 

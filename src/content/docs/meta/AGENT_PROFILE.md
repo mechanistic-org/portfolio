@@ -129,6 +129,12 @@ description: "Archived legacy document."
 - **Discipline:** Force yourself to build a "Honda" (Reliable, Standard, JPEGs, Simple Lists).
 - _Evidence:_ Law XV (The Honda Standard).
 
+**The "Sanitization Mandate" (Brand Authority):**
+
+- **Trigger:** Internal codenames (Vulcan, Bazooka, Waldo) bleeding into executive-facing data matrices.
+- **Correction:** Nuke the codenames. Enforce strict universal prefixes (e.g., `MOHO-REL-000`).
+- **Protocol:** The Executive Control Node (ECN) shapes the language, not the Contract Manufacturer. Foxconn's codenames are friction. Scrub them from the API of Physics.
+
 **The "Archivist Impulse":**
 
 - **Trigger:** You see unused code/assets.
@@ -172,6 +178,30 @@ description: "Archived legacy document."
 
 - **Observation:** LLMs frequently lose track of architectural shifts mid-session (e.g., forgetting that `prompts/` was moved to `src/content/prompts/`).
 - **Correction:** Strict scripting paths and guardrails are not paranoia; they are necessary. The Agent will attempt to blindly recreate legacy folders if not rigidly constrained.
+
+**The "Cold Start Ban" (Anti-Hallucination):**
+
+- **Trigger:** Initiating an audit or action in a brand new chat session with broad instructions (e.g., "Run the cascade audit").
+- **Correction:** The Agent defaults to deploying the browser to "look around" on port numbers it guesses, resulting in immediate failure.
+- **Protocol:** **BAN ON BROWSER HALLUCINATION.** If you do not explicitly know the exact file path or running port, you MUST execute file system tools (`list_dir`, `grep_search`) to locate the repository and read the source code or `MINING_LOG.md` first. Never use the browser to "guess" where the app lives.
+
+**The "Single Scroll" Guarantee (UI Standard):**
+
+- **Trigger:** Nested containers with internal scrollbars ("double scrollbars").
+- **Correction:** "I don't want double scroll bars on ANYTHING. EVER."
+- **Protocol:** Strip `overflow-y-auto` and `h-screen`/`h-full` limits from inner components (like lists or matrices). Defer to the master global document scroll to ensure a unified, friction-free UX.
+
+**The "True Alignment" Law (Typography):**
+
+- **Trigger:** Using letter-spacing (`tracking-[0.15em]`) to force top-and-bottom text lines to match widths.
+- **Correction:** "**NOT WITH KERNING.** Increase the font size until it is the same width as the text above it."
+- **Protocol:** Achieve visual block-width matches strictly through sub-pixel font size scaling (e.g., `14.5px`), never by mutating the typeface's native kerning logic.
+
+**The "Empirical Physics" Preference (Narrative Tone):**
+
+- **Observation:** The Agent leans into generic automotive metaphors ("head gasket leak," "fractured chassis") to explain failure.
+- **Correction:** The User actively rejects these for explicit DFMEA terminology.
+- **Protocol:** Map physical reality strictly. Speak of "intractable matrices of physics contradictions," "Special Snowflake Syndromes," and "empirically probing baseline physics." Do not rely on car metaphors for a precision hardware system.
 
 ## 4. COMMUNICATIONS PROTOCOL
 

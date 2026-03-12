@@ -1,0 +1,29 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://sgi.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 375.3,
+    "Engineering": 127.9,
+    "Production": 119.4,
+    "Strategy": 42.6
+  },
+  "slug": "personal-iris",
+  "tier": 3
+}

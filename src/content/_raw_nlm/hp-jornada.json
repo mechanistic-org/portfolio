@@ -1,0 +1,29 @@
+{
+  "scars": [],
+  "metrics": {
+    "financial": {
+      "costOfGoodsSold": [],
+      "margins": [],
+      "toolingActual": 0,
+      "toolingBudget": 0
+    },
+    "process": {
+      "engineeringChangeOrders": []
+    }
+  },
+  "hxo_ready": false,
+  "hydration_status": "executive",
+  "links": [
+    {
+      "url": "https://fitch.com"
+    }
+  ],
+  "phase_stats": {
+    "Design": 13.2,
+    "Engineering": 4.5,
+    "Production": 4.2,
+    "Strategy": 1.5
+  },
+  "slug": "hp-jornada",
+  "tier": 3
+}

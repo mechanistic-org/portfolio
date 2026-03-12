@@ -1,81 +1,6 @@
 ---
 category: home_entertainment
 client: []
-complexity_vector:
-  part_count_growth:
-    - count: 12
-      date: 2000-07
-      phase: Concept (Solteras Proposal)
-    - count: 45
-      date: 2000-08
-      phase: EVT (Square Diagnostic)
-    - count: 66
-      date: 2000-09
-      phase: DVT (Rev 8.0 BOM)
-    - count: 74
-      date: 2000-10
-      phase: PVT (Shinwoo Handoff)
-    - count: 78
-      date: 2001-01
-      phase: MP (Mass Production)
-  process_density:
-    - complexity_score: 9
-      material: ABS + Elastomer Overmold
-      notes:
-        "Critical thermal risk: Housing transformation during temp shock testing
-        required max wall thickness [1]."
-      part_name: Main Housing (Top/Bot)
-      steps:
-        - Injection Molding (Hard Tool)
-        - Slide Core Extraction (Jack Area)
-        - Soft-Touch Overmolding (Pantone 431C)
-        - Pad Printing (Motorola Batwing)
-        - Ultrasonic Weld Attempt (Failed)
-        - Screw Assembly (Manual)
-    - complexity_score: 8
-      material: FR4 4-Layer
-      notes: "High density: 61 line items including 0402 passives and TQFP-64 DSP [2]."
-      part_name: Main PCB Assembly
-      steps:
-        - SMT Pick & Place (0402 components)
-        - Reflow Soldering
-        - Hand Solder (Headphone Jack)
-        - Hand Solder (17-pin Connector Cable)
-        - Flash Firmware (PIC16F877)
-        - Function Test (Audio Loopback)
-  supply_chain_nodes:
-    - location: Freiburg, Germany
-      risk: 23-week lead time
-      role: DSP Silicon
-      vendor: Micronas (MAS3509A)
-    - location: Chandler, AZ
-      role: Microcontroller
-      vendor: Microchip (PIC16F877)
-    - location: Seoul, South Korea
-      role: FATP / Tooling
-      vendor: Shinwoo Audio
-    - location: Santa Clara, CA
-      risk: 16-week lead time
-      role: USB Controller
-      vendor: National Semi (USBN9603SLB)
-    - location: San Gabriel, CA
-      role: Design / Engineering
-      vendor: Solteras
-  tooling_chain:
-    - cost_impact: High
-      lead_time_weeks: 8
-      notes:
-        Rib 5 snap tooling violation required post-mold add; Slide cores mandatory
-        for MMI jack [3, 4].
-      tool_name: Housing Injection Mold
-      type: Hard Tooling (Steel)
-      vendor: Shinwoo Audio (Korea)
-    - cost_impact: Med
-      lead_time_weeks: 6
-      notes: Metal crimp vs. plastic interference fit debate [5].
-      tool_name: Clip Assembly Die
-      type: Hard Tooling
-      vendor: Shinwoo Audio
 cyberspace:
   enable: true
   layout: linear
@@ -83,48 +8,31 @@ cyberspace:
     - align: center
       data: null
       id: intro
-      text: <strong>YEAR:</strong> 2001<br/><strong>ROLE:</strong> Unknown
+      text: '<strong>YEAR:</strong> 2001<br/><strong>ROLE:</strong> Unknown'
       title: Motorola MP3
       type: media
     - align: center
       id: details
-      text:
-        This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong>
-        Consumer Electronics
+      text: >-
+        This record has been upgraded to the Hyperspace
+        Protocol.<br/><br/><strong>Group:</strong> Consumer Electronics
       title: PROJECT DATA
       type: void
-date: 2002-01-01 00:00:00+00:00
+date: 2002-01-01T00:00:00.000Z
 documents: []
 draft: false
 duration: 7 Months
 employer: mechanistic
-endDate: 2002-01-24 00:00:00+00:00
+endDate: 2002-01-24T00:00:00.000Z
 gallery: []
-hxo_ready: false
-hydration_status: executive
 industry: consumer_electronics
-links: []
-metrics:
-  financial:
-    costOfGoodsSold: []
-    margins: []
-    toolingActual: 0
-    toolingBudget: 0
-  process:
-    engineeringChangeOrders: []
-phase_stats:
-  Design: 0
-  Engineering: 0
-  Production: 0
-  Strategy: 0
 presentation_mode: deep_dive
 production: concept
 productionScale: one_off
-scars: []
-slug: motorola-mp3
-tags: [Thermal, Mechanism, Process]
+tags:
+  - Thermal
+  - Mechanism
 theme: hyperspace
-tier: 3
 title: Motorola MP3
 tools: []
 teamSize: INT 12
