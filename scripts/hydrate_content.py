@@ -16,7 +16,7 @@ if sys.platform == "win32":
     sys.stderr.reconfigure(encoding='utf-8')
 
 # --- Configuration ---
-SOURCE_DIR = Path("notebook_dumps")
+SOURCE_DIR = Path("src/content/_raw_nlm")
 TARGET_DIR = Path("src/content/projects")
 
 def check_git_status(force=False):
@@ -772,6 +772,14 @@ def hydrate_content(dry_run=False, force=False, target_slug=None, priority="sour
                 if post.metadata["forensic_metrics"].get(key) != val:
                     changes.append(f"  - Update 'forensic_metrics.{key}'")
                     post.metadata["forensic_metrics"][key] = val
+
+        # 1.2 Audio Briefing URL
+        # Auto-generate the standard path and update if missing or incorrect
+        expected_audio_url = f"/assets/{slug}/{slug}-briefing.m4a"
+        # Wait, the R2 assets are usually mounted to /assets/. Let's check existing c24.json. It says "/assets/c24/c24-briefing.m4a".
+        if post.metadata.get("audio_url") != expected_audio_url:
+             changes.append(f"  - Update 'audio_url' to standard '{expected_audio_url}'")
+             post.metadata["audio_url"] = expected_audio_url
 
         # 1.5 Forensic Context (BOM, Team, Cast)
         # These were previously ignored "Dark Data"
