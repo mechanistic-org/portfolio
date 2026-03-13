@@ -72,6 +72,7 @@ export const GET: APIRoute = async ({ params, locals }) => {
 			const fs = devFs.default || devFs;
 			const path = devPath.default || devPath;
 			const mime = devMime.default || devMime;
+			const { Readable } = await import("node:stream");
 
 			// DECODE: Handle spaces and special chars
 			let decodedPath = decodeURIComponent(assetPath);
@@ -99,10 +100,11 @@ export const GET: APIRoute = async ({ params, locals }) => {
 			}
 
 			const contentType = mime.lookup(filePath) || "application/octet-stream";
-			const stream = fs.createReadStream(filePath);
+			const nodeStream = fs.createReadStream(filePath);
+			// Convert Node stream to Web Stream to prevent Vite pipelining crashes
+			const webStream = Readable.toWeb(nodeStream);
 
-			// @ts-ignore
-			return new Response(stream, {
+			return new Response(webStream as unknown as ReadableStream, {
 				status: 200,
 				headers: {
 					"Content-Type": contentType,
