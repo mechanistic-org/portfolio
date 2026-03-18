@@ -3,7 +3,7 @@ title: "Colophon"
 description: "The machine behind the portfolio. Architecture, philosophy, and forensic protocols."
 slug: colophon
 sidebar:
-  group: Core
+  group: Meta
   order: 5
 ---
 

@@ -2,7 +2,7 @@
 title: "Gem Creation Guide"
 slug: gem_creation_guide
 sidebar:
-  group: Guides
+  group: Handbook
   order: 1
 description: "How to instantiate the Forensic Portfolio Architect Gem."
 ---

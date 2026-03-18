@@ -2,7 +2,7 @@
 title: Maintenance & Troubleshooting
 slug: maintenance
 sidebar:
-  group: Workflows
+  group: Handbook
   order: 99
 description: Documentation for Maintenance & Troubleshooting.
 ---

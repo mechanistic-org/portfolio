@@ -32,24 +32,29 @@ npm run dev
 >
 > **Fix:** Run `taskkill /F /IM node.exe` to kill all stray servers.
 
-## 2. The Refinery (Asset Sync)
+## 2. The Data & Asset Refinery
 
 We work in **Pure Hyperspace**. No CSVs. No Manual Content files.
 But we still need to sync assets and timeline data.
 
-**Command:**
+**Commands:**
 
-````powershell
 ```powershell
-python scripts/modernize_content.py
-````
+# Injects NotebookLM Bolus data and mines R2_MASTER for stickies
+npm run content:hydrate
 
-````
+# The "Heavy Lifter" for media (Images & Audio)
+npm run assets:process
+
+# Mass-updates legacy content to the latest C24 Schema
+npm run content:modernize
+```
 
 **Triggers (When to Run):**
 
-1.  **New Timeline Node:** You created a new Project in Keystatic.
-2.  **Asset Drop:** You added a new folder to `R2_MASTER`.
+1.  **New Timeline Node:** You created a new Project in Keystatic -> Run `content:hydrate`.
+2.  **Asset Drop:** You added a new folder to `R2_MASTER` -> Run `assets:process`.
+3.  **Schema Change:** You need to update all MDX files -> Run `content:modernize`.
 
 > [!TIP]
 > **The Pulse:** The script outputs build time statistics. Watch for `[SUCCESS]` in Green.
@@ -64,14 +69,9 @@ python scripts/modernize_content.py
 2.  **Sync:** Run the sync script to update Staging and Production.
 
 ```powershell
-python scripts/sync_r2.py
-````
-
-- **Prune (Mirror Mode):**
-  ```powershell
-  python scripts/sync_r2.py --prune
-  ```
-  _(Deletes remote files that do not exist locally. Use with caution.)_
+# Ensure R2_MASTER assets are processed and moved to R2_STAGING
+npm run assets:process
+```
 
 ## 4. Diagnostics ("Doctor")
 
@@ -83,10 +83,12 @@ If the system behaves erratically:
 Get-Process node, python -ErrorAction SilentlyContinue
 ```
 
-**2. Lint Code:**
+**2. Check Frontmatter & Schema:**
 
 ```powershell
-npm run lint
+npm run predev
+# or
+npm run audit:frontmatter
 ```
 
 **3. Test Build:**

@@ -2,7 +2,7 @@
 title: "The Forensic Registry"
 slug: forensic_registry
 sidebar:
-  group: Systems
+  group: System
   order: 1
 description: "Documentation of the 3-Tier Architecture for Forensic Intelligence."
 ---

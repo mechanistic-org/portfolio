@@ -3,7 +3,7 @@ title: "Stickie Protocol"
 description: "The official naming convention and darkroom workflow for Project Stickies (formerly Bubbles)."
 slug: "stickie_protocol"
 sidebar:
-  group: Workflows
+  group: Handbook
   order: 20
 ---
 

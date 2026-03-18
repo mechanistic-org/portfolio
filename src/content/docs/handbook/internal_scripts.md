@@ -3,7 +3,7 @@ title: "Internal Scripts Reference"
 description: "Documentation for internal maintenance scripts."
 slug: "internal_scripts"
 sidebar:
-  group: Workflows
+  group: Handbook
   order: 50
 ---
 
