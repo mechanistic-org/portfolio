@@ -2,7 +2,7 @@ import sys
 import subprocess
 import os
 
-uid = "2b5f7e6e-c4fc-48f8-b4b3-ea62624fe4aa"
+uid = "b8f893fe-234c-44ca-9d92-8fff6f82e53d"
 slug = "c24"
 cli = r"C:\Users\erik\AppData\Roaming\Python\Python314\Scripts\nlm.exe"
 

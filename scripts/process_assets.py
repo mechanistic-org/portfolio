@@ -28,14 +28,30 @@ except ImportError:
 SCRIPT_DIR = Path(__file__).resolve().parent
 # Repo Root (d:\GitHub\quantum)
 REPO_ROOT = SCRIPT_DIR.parent
-# Sibling Workspace (d:\GitHub\eriknorris-workspace)
-WORKSPACE_ROOT = REPO_ROOT.parent / "eriknorris-workspace"
+
+# --- ENVIRONMENT FALLBACK PATTERN ---
+try:
+    from dotenv import load_dotenv
+    # Allow injection of SWARM_ENV_PATH, defaulting to the global swarm config
+    master_env_path = Path(os.getenv("SWARM_ENV_PATH", "D:/Assets/.env.swarm"))
+    if master_env_path.exists():
+        load_dotenv(dotenv_path=master_env_path)
+    # Give precedence to local .env
+    local_env_path = REPO_ROOT / ".env"
+    if local_env_path.exists():
+        load_dotenv(dotenv_path=local_env_path, override=True)
+except ImportError:
+    print("Notice: 'python-dotenv' not found. Relying on system environment variables.")
+
+# Workspace Fallback Config
+env_workspace = os.getenv("ERIKNORRIS_WORKSPACE_ROOT")
+WORKSPACE_ROOT = Path(env_workspace) if env_workspace else (REPO_ROOT.parent / "eriknorris-workspace")
 MASTER_DIR = WORKSPACE_ROOT / "R2_MASTER"
 
-# Repo Sibling Path (Relative to this script)
-# Script is in d:\GitHub\eriknorris\scripts
-# We want d:\GitHub\eriknorris-assets\R2_STAGING
-STAGING_DIR = REPO_ROOT.parent / "eriknorris-assets" / "R2_STAGING"
+# Assets Fallback Config
+env_assets = os.getenv("ERIKNORRIS_ASSETS_ROOT")
+assets_root = Path(env_assets) if env_assets else (REPO_ROOT.parent / "eriknorris-assets")
+STAGING_DIR = assets_root / "R2_STAGING"
 
 # Breakpoints (Widths)
 BREAKPOINTS = {

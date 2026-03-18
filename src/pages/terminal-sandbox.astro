@@ -1,0 +1,119 @@
+---
+export const prerender = true;
+import Layout from "../layouts/BaseLayout.astro";
+import { getCareerAssembly } from "../utils/mapCareerAssembly";
+import HXOSwarmContainer from "../components/HXO/HXOSwarmContainer";
+import DashboardTerminalSkeleton from "../components/Terminal/DashboardTerminalSkeleton";
+import { currentSite, site } from "@config/site_config";
+
+// --- DATA FETCHING (Same logic as index.astro to get the Swarm map) ---
+const isUnderConstruction = currentSite !== "main";
+let swarmNodes: any[] = [];
+let assemblyLinks: any[] = [];
+let mappedProjects: any[] = []; // NEW
+
+if (!isUnderConstruction) {
+	const assembly = await getCareerAssembly();
+	swarmNodes = assembly.nodes
+		.filter((n) => n.type === "project")
+		.filter((n) => (n.data.targets || ["main"]).includes(currentSite))
+		.filter((n) => n.data.employer !== "erik_norris" && n.id !== "meta/philosophy")
+		.map((n) => {
+			const tier = n.data.tier || 3;
+			let presentation_mode = "standard";
+			if (n.data.employer === "erik_norris") presentation_mode = "flagship";
+			else if (tier === 2) presentation_mode = "deep_dive";
+
+			return {
+				id: n.id,
+				name: n.data.title,
+				group: n.data.employer === "erik_norris" ? "meta" : n.data.employer || "Private",
+				start_date: n.data.date ? new Date(n.data.date).toISOString() : new Date().toISOString(),
+				end_date: n.data.endDate ? new Date(n.data.endDate).toISOString() : new Date().toISOString(),
+				value: n.data.employer === "erik_norris" ? 60 : 20,
+				presentation_mode,
+				category: n.data.category,
+				type: "project",
+				skills: [...(n.data.tags || []), ...(n.data.skillData?.map((s: any) => s.name) || [])],
+			};
+		});
+
+	const visibleProjectIds = new Set(swarmNodes.map((n) => n.id));
+	const relevantLinks = assembly.links.filter((l) => visibleProjectIds.has(l.source as string));
+	const relevantSkillIds = new Set(relevantLinks.map((l) => l.target as string));
+	const skillNodes = assembly.nodes
+		.filter((n) => n.type === "skill" && relevantSkillIds.has(n.id))
+		.map((n) => ({
+			id: n.id,
+			name: n.data.name,
+			group: "skill",
+			start_date: new Date().toISOString(),
+			end_date: new Date().toISOString(),
+			value: 5,
+			presentation_mode: "hidden",
+			category: "skill",
+			type: "skill",
+			radius: 3,
+		}));
+
+	swarmNodes = [...swarmNodes, ...skillNodes];
+	assemblyLinks = relevantLinks.map((l) => ({ source: l.source, target: l.target, value: l.value }));
+
+	// NEW: Extract original node data to pass down to the Terminal Console
+	mappedProjects = assembly.nodes
+		.filter((n) => n.type === "project")
+		.filter((n) => (n.data.targets || ["main"]).includes(currentSite))
+		.filter((n) => n.data.employer !== "erik_norris" && n.id !== "meta/philosophy")
+		.map((n) => ({
+			id: n.id,
+			data: {
+				title: n.data.title,
+				date: n.data.date,
+				client: n.data.client || [],
+				audio_url: n.data.audio_url,
+				forensic_summary: n.data.forensic_summary || {},
+				metrics: n.data.metrics || {},
+				toolchain: n.data.toolchain || n.data.tags || [],
+				tier: n.data.tier,
+				category: n.data.category
+			}
+		}));
+}
+---
+
+<Layout
+	title={`TERMINAL SANDBOX | ${site.title}`}
+	description="Testing the new diagnostic terminal grid."
+	hideNavLogo={false}
+	starfield={true}
+>
+	<div class="hxo-prototype min-h-screen max-w-[100vw] overflow-hidden bg-transparent font-sans text-zinc-300 selection:bg-lime-900 selection:text-white">
+		
+		{/* The New Layout Framework */}
+		{/* Instead of 7/5 split, we test a 4/8 split to give the Terminal more room. */}
+		<main class="grid h-screen grid-cols-1 overflow-hidden lg:grid-cols-12">
+			
+			{/* ZONE 1: THE COMPRESSED SWARM */}
+			{/* Shrunk to 4 columns to make room for terminal */}
+			<div class="custom-scrollbar relative h-screen overflow-x-hidden overflow-y-auto border-r border-zinc-900 bg-transparent lg:col-span-4 transition-all duration-500 ease-in-out">
+				<div class="absolute top-20 left-6 z-50 text-xs tracking-widest text-lime-400">[ SWARM COMPRESSED ]</div>
+				{/* Rendering Swarm with reduced size setting if we wanted, but default container scaling should work */}
+				<HXOSwarmContainer client:only="react" nodes={swarmNodes} links={assemblyLinks} />
+			</div>
+
+			{/* ZONE 2: THE EXPANDED DIAGNOSTIC TERMINAL */}
+			{/* Grown to 8 columns and containing the new Terminal Layout */}
+			<div class="relative z-30 mt-16 flex h-[calc(100vh-4rem)] flex-col bg-transparent lg:col-span-8 transition-all duration-500 ease-in-out">
+				<DashboardTerminalSkeleton client:only="react" projects={mappedProjects} />
+			</div>
+
+		</main>
+	</div>
+</Layout>
+
+<style>
+	.custom-scrollbar::-webkit-scrollbar { width: 6px; }
+	.custom-scrollbar::-webkit-scrollbar-track { background: #111; }
+	.custom-scrollbar::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+	.custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #444; }
+</style>
