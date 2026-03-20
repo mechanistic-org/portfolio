@@ -1,7 +1,7 @@
 ---
 title: "Project Index"
 description: "Holistic Forensic Archive & Catalog"
-last_updated: "2026-03-12"
+last_updated: "2026-03-13"
 total_entries: 121
 ---
 
@@ -19,7 +19,11 @@ total_entries: 121
 ### C24 (`index`)
 **Detail Pod:** _[URL_PENDING]_
 
-> **Forensic Summary:** TRIGGER: The RoHS (Lead-Free) transition spawned a 'Crisis of Materiality.' The new compliance-grade plastics exhibited a catastrophic differential shrinkage rate compared to the legacy resins, causing the main console bucket (a massive single-shot part) to warp by 2.5mm. This rendered the unit unsellable and threatened to kill the product line 8 years into its lifecycle. INTERVENTION: With no budget for new hard tooling ($250k+), I engineered a 'Process-as-Architecture' solution. I implemented the 'Vertical Gravity Cure', a novel post-molding fixture strategy where parts were hung vertically while cooling through their glass-transition phase, allowing gravity to naturally nullify the internal stresses. RESULT: This zero-cost process intervention reduced the warpage from 2.5mm to <0.5mm, bringing the parts back into spec. The C|24 successfully launched as a RoHS-compliant unit without a single dollar spent on new steel tooling, extending its revenue lifespan by another 4 years.
+> **Forensic Summary:** TRIGGER: During the Pilot run, critical ABS cosmetic parts (Side Caps 9440-55165/166) arrived with catastrophic geometric distortion (up to 2.50mm bow and 2.27mm linear shrinkage). Forensic analysis traced the defect to the high-temperature cure cycle required for the 'Rubberized Soft Paint'. The vendor (Jetcrown) baked parts on flat racks ('Method C') without support, causing the plastic to hit its glass-transition temperature, sag, and lock into a 'banana' shape. INTERVENTION: The Architect rejected the vendor's standard process and engineered a directed Design of Experiments (DOE). He established 'Method A', a Vertical Hanging Fixture protocol, utilizing gravity to maintain straightness during the bake cycle, codified in ECO 12740. RESULT: Reduced flatness deviation to <0.50mm, salvaged 100% of the Pilot yield, and prevented a 'Line Down' scenario. 
+
+TRIGGER 2 (Supply Chain Fracture): Primary overseas vendor (Kwanta) issued a 'No-Bid' on the C|24 Top Panel mid-schedule. The design required a high density of welded standoffs (PEMs) which collided with their automated CNC stud-welding heads, resulting in an automation deadlock. -> INTERVENTION 2: The Architect executed a Dual-Source Bridge Strategy. He spun up domestic vendor Mass Precision for emergency manual prototyping to unblock the Pilot build, while simultaneously qualifying a manual offset-welding process at an alternate overseas vendor (Kenny). -> RESULT 2: Bypassed the supply chain blockage, decoupled revenue from long-lead automation tooling, and secured the November 2007 First Customer Ship (FCS) date for 500 units. 
+
+TRIGGER 3 (Serviceability Crisis): Customer Service data revealed a 4.8% field failure rate on the legacy headphone jack. The existing mechanical architecture buried this component behind the front bolster, requiring a 2-hour teardown to replace. -> INTERVENTION 3: The Architect executed an emergency 'Fire Drill' redesign of the Sheet Metal Headphone Bracket (9420-55126-00) and Plastic Front Bolster (9440-55167-00), creating a recessed 'trap door' geometry. -> RESULT 3: Transformed a complex Return-to-Factory repair into a Field Replaceable Unit (FRU) requiring the removal of only the bottom pan and a single nut, reducing MTTR (Mean Time To Repair) to <10 minutes.
 
 **Key Metrics:**
 - **Financial:** Eliminated ~$200/unit Focusrite Royalty; 51.80% Gross Margin [1, 2]

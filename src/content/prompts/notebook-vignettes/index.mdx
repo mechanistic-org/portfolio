@@ -3,8 +3,8 @@ title: "NotebookLM Vignettes"
 category: "compression"
 role: "Forensic Engineering Analyst"
 input_type: "Raw NLM Data"
-output_format: "Markdown"
-system_instructions: "Extract detailed scar vignettes into Markdown."
+output_format: "JSON"
+system_instructions: "Extract detailed scar vignettes into a JSON array."
 ---
 
 ### Forensic Data Extraction: Discrete Scar Vignettes
@@ -13,10 +13,16 @@ system_instructions: "Extract detailed scar vignettes into Markdown."
 
 **DISCOVERY HEURISTICS:** Exhaustively traverse the entire context and identify **ALL** "Discrete Scar Vignettes" detailing friction points, crises, or yield failures. Do not limit the return count; provide **EVERY** distinct incident.
 
-**OUTPUT FORMAT:** Provide pure Markdown text. Do NOT wrap in a root level JSON structure.
+**OUTPUT SCHEMA:** Provide a JSON object with a single "scars" key containing an array. Do NOT wrap in Markdown code blocks. Just output raw JSON.
 
-**For each vignette, output:**
-### [Vignette Name/Title]
-1.  **The Problem/Trigger:** [Detail the exact physics failure, tolerance stacking issue, or line-down event. Use precise engineering terminology.]
-2.  **The Engineering Intervention:** [How did Erik Norris or the team solve this? Detail the exact mechanical redesign, material swap, or ECO executed.]
-3.  **The Hard Numbers/Impact:** [Extract the exact data proving the resolution. What was the specific yield improvement or cost reduction?]
+```json
+{
+  "scars": [
+    {
+      "title": "[Vignette Name/Title]",
+      "description": "1. **The Problem/Trigger:** [Detail physics failure or line-down event.]\n2. **The Engineering Intervention:** [Detail the specific redesign or ECO.]\n3. **The Hard Numbers/Impact:** [Extract exact data proving resolution.]",
+      "type": "scars"
+    }
+  ]
+}
+```

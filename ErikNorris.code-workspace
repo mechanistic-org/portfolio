@@ -27,5 +27,6 @@
 			"**/dist": true,
 			"**/.astro": true,
 		},
+		"powershell.cwd": "Erik Norris (Repo)",
 	},
 }
