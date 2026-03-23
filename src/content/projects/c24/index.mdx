@@ -1,7 +1,6 @@
 ---
 additionalSkills: []
 audio_url: /assets/c24/c24-briefing.m4a
-bom:
 - label: PCB Assemblies
   value: '19'
 - label: Sheet Metal Parts
@@ -185,87 +184,6 @@ cast:
   role: Vendor Lead
 category: control_surface
 client: []
-complexity_vector:
-  part_count_growth:
-  - count: 1
-    date: 2005-06
-    phase: Concept (Legacy Teardown)
-  - count: 19
-    date: 2006-11
-    phase: Proto 1 (Architecture)
-  - count: 250
-    date: 2007-04
-    phase: Proto 2 (Integration)
-  - count: 450
-    date: 2007-06
-    phase: Pilot (Validation)
-  - count: 500
-    date: 2007-11
-    phase: MP (FCS)
-  process_density:
-  - complexity_score: 9
-    material: ABS Plastic
-    part_name: Side Cap (Left/Right)
-    part_number: 9440-55165/166
-    steps:
-    - Injection Molding (T1)
-    - Racking (Vertical Fixture Method A)
-    - Rubberized Soft Paint Application
-    - Heat Cure (Glass Transition Phase)
-    - Cooling (Gravity Stabilization)
-    - Dimensional Inspection
-  - complexity_score: 8
-    material: Steel (Sheet Metal)
-    part_name: Top Panel
-    part_number: 9420-55105
-    steps:
-    - CNC Punching
-    - Forming/Bending
-    - Stud Welding (High Density - Manual Override)
-    - Powder Coat (Cool Grey 2)
-    - Silkscreening (White)
-    - Manual Countersink (Recovery)
-  - complexity_score: 6
-    material: Sheet Metal
-    part_name: Headphone Bracket
-    part_number: 9420-55126
-    steps:
-    - Laser Cut
-    - Form
-    - PEM Insertion
-    - Trap Door Alignment (ECO 12993)
-  supply_chain_nodes:
-  - location: San Jose, USA
-    role: Bridge Sheet Metal (Pilot)
-    vendor: Mass Precision
-  - location: Dongguan, China
-    role: Plastics/Painting
-    vendor: Jetcrown
-  - location: Dongguan, China
-    role: FATP / Sheet Metal
-    vendor: VTech (Kenny)
-  - location: Menlo Park, USA
-    role: Hand-Pack / PSU Retrofit
-    vendor: Digidesign OPS
-  - location: Taipei, Taiwan
-    role: Power Supply Unit
-    vendor: Skynet
-  tooling_chain:
-  - cost_impact: High (Yield Rescue)
-    lead_time_weeks: 2
-    tool_name: Side Cap Paint Fixture (Method A)
-    type: Soft Tooling (Custom Rack)
-    vendor: Jetcrown
-  - cost_impact: Critical (No-Bid Failure)
-    lead_time_weeks: 8
-    tool_name: Top Panel Auto-Welder
-    type: Hard Tooling (CNC)
-    vendor: Kwanta/Kenny
-  - cost_impact: Med (Bridge Strategy)
-    lead_time_weeks: 1
-    tool_name: Manual Offset Welder
-    type: Soft Tooling (Bridge)
-    vendor: Mass Precision / Kenny
 cyberspace:
   enable: true
   layout: linear
@@ -856,45 +774,7 @@ draft: false
 duration: 2.3 Years
 employer: digidesign
 endDate: 2007-11-20 00:00:00+00:00
-teamRole: Mechanical & ID Lead
-forensic_metrics:
-  financial: Eliminated ~$200/unit Focusrite Royalty; 51.80% Gross Margin [1, 2]
-  governance: Weekly Pulse / War Room coordination [5]
-  process: Headphone MTTR reduced from 2hrs to &lt;10min [3]; Side Cap flatness deviation
-    &lt;0.50mm [4]
-forensic_summary:
-  intervention: The Architect rejected the vendor's standard process and engineered
-    a directed Design of Experiments (DOE). He established 'Method A', a Vertical
-    Hanging Fixture protocol, utilizing gravity to maintain straightness during the
-    bake cycle, codified in ECO 12740.
-  result: "Reduced flatness deviation to &lt;0.50mm, salvaged 100% of the Pilot yield,\
-    \ and prevented a 'Line Down' scenario. \n\nTRIGGER 2 (Supply Chain Fracture):\
-    \ Primary overseas vendor (Kwanta) issued a 'No-Bid' on the C|24 Top Panel mid-schedule.\
-    \ The design required a high density of welded standoffs (PEMs) which collided\
-    \ with their automated CNC stud-welding heads, resulting in an automation deadlock.\
-    \ -> INTERVENTION 2: The Architect executed a Dual-Source Bridge Strategy. He\
-    \ spun up domestic vendor Mass Precision for emergency manual prototyping to unblock\
-    \ the Pilot build, while simultaneously qualifying a manual offset-welding process\
-    \ at an alternate overseas vendor (Kenny). -> RESULT 2: Bypassed the supply chain\
-    \ blockage, decoupled revenue from long-lead automation tooling, and secured the\
-    \ November 2007 First Customer Ship (FCS) date for 500 units. \n\nTRIGGER 3 (Serviceability\
-    \ Crisis): Customer Service data revealed a 4.8% field failure rate on the legacy\
-    \ headphone jack. The existing mechanical architecture buried this component behind\
-    \ the front bolster, requiring a 2-hour teardown to replace. -> INTERVENTION 3:\
-    \ The Architect executed an emergency 'Fire Drill' redesign of the Sheet Metal\
-    \ Headphone Bracket (9420-55126-00) and Plastic Front Bolster (9440-55167-00),\
-    \ creating a recessed 'trap door' geometry. -> RESULT 3: Transformed a complex\
-    \ Return-to-Factory repair into a Field Replaceable Unit (FRU) requiring the removal\
-    \ of only the bottom pan and a single nut, reducing MTTR (Mean Time To Repair)\
-    \ to &lt;10 minutes."
-  trigger: During the Pilot run, critical ABS cosmetic parts (Side Caps 9440-55165/166)
-    arrived with catastrophic geometric distortion (up to 2.50mm bow and 2.27mm linear
-    shrinkage). Forensic analysis traced the defect to the high-temperature cure cycle
-    required for the 'Rubberized Soft Paint'. The vendor (Jetcrown) baked parts on
-    flat racks ('Method C') without support, causing the plastic to hit its glass-transition
-    temperature, sag, and lock into a 'banana' shape.
 heroImage: /assets/c24/c24-hero-01-xl.webp
-isomorphics:
 - hardware_point: Top Panel Standoff Spacing &lt; Auto-Welder Head Clearance [10]
   label: Density
   principle: Physical density constraints force manual process overrides [10]
@@ -903,24 +783,6 @@ isomorphics:
   label: Thermodynamics
   principle: Material phase change requires orientation-specific fixturing [4]
   software_point: N/A
-metrics:
-  quotes:
-  - I spent 8.5 hours on this yesterday and 8 today
-  - I came up with a way to get the meter PCBs inside the sheetmetal enclosure and
-    still accomplish the plastic part design I was after. So this meeting is unnecessary.
-  - Kwanta no-bidded top panel. This has been escalated with their board of directors
-    and is in review.
-  - The power connector should be a right angle pointing away from the back of the
-    unit.
-  - We worked outside of our normal process because our mechanical resource was working
-    at home due to injury. Because we were working outside of the IntraLink system,
-    there was an incongruent file revision
-  - Several of the boards manufacturing engineering had never seen a working prototype
-    of before we went to China to build what was originally supposed to be a pilot
-    build
-  - Mass confusion and miscommunication on documentation control – no defined process
-  - Realizing last minute that the rubberized paint may not work – despite questions/concerns
-    being raised by QA earlier on in the process
 presentation_mode: deep_dive
 skillData: []
 tags:
