@@ -2,8 +2,8 @@ import os
 import shutil
 import time
 
-SOURCE_DIR = r"D:\GitHub\eriknorris-assets\R2_STAGING\d-control\bubbles"
-TARGET_DIR = r"D:\GitHub\eriknorris\public\assets\r2\d-control\bubbles"
+SOURCE_DIR = r"D:\GitHub\portfolio-assets\R2_STAGING\d-control\bubbles"
+TARGET_DIR = r"D:\GitHub\portfolio\public\assets\r2\d-control\bubbles"
 
 def sync():
     print(f"🚀 Starting Robust Sync (D-Control)...")

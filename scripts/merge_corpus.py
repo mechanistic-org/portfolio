@@ -1,8 +1,8 @@
 import os
 
 # Define paths
-base_dir = r"D:\GitHub\eriknorris-workspace\podcasts"
-target_file = r"D:\GitHub\eriknorris\src\content\docs\meta\GOLDEN_DIALOGUE_CORPUS.md"
+base_dir = r"D:\GitHub\portfolio-workspace\podcasts"
+target_file = r"D:\GitHub\portfolio\src\content\docs\meta\GOLDEN_DIALOGUE_CORPUS.md"
 
 skeptic_file = os.path.join(base_dir, "skeptic_clips.md")
 physics_file = os.path.join(base_dir, "physics_ingenuity_clips.md")

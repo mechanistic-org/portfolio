@@ -3,8 +3,8 @@ import glob
 import re
 
 # --- CONFIGURATION ---
-TRANSCRIPT_DIR = r"D:\GitHub\eriknorris-workspace\podcasts"
-OUTPUT_FILE = r"D:\GitHub\eriknorris-workspace\podcasts\skeptic_clips.md"
+TRANSCRIPT_DIR = r"D:\GitHub\portfolio-workspace\podcasts"
+OUTPUT_FILE = r"D:\GitHub\portfolio-workspace\podcasts\skeptic_clips.md"
 
 # --- SKEPTIC HEURISTICS ---
 # Patterns that indicate a host is pushing back, questioning, or identifying a crisis.

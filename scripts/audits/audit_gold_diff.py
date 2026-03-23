@@ -3,9 +3,9 @@ import re
 import glob
 
 # --- CONFIGURATION ---
-TRANSCRIPT_DIR = r"D:\GitHub\eriknorris-workspace\podcasts"
-PROJECTS_DIR = r"d:\GitHub\eriknorris\src\content\projects"
-OUTPUT_REPORT = r"D:\GitHub\eriknorris-workspace\podcasts\gold_gap_report.md"
+TRANSCRIPT_DIR = r"D:\GitHub\portfolio-workspace\podcasts"
+PROJECTS_DIR = r"d:\GitHub\portfolio\src\content\projects"
+OUTPUT_REPORT = r"D:\GitHub\portfolio-workspace\podcasts\gold_gap_report.md"
 
 # --- ENTITY DICTIONARY (THE GOLD) ---
 # Terms we expect to see in the project files if they are mentioned in audio

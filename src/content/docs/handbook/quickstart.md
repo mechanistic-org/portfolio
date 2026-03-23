@@ -61,7 +61,7 @@ npm run content:modernize
 
 ## 3. Asset Management (The Vault)
 
-**Source of Truth:** `D:\GitHub\eriknorris-workspace\R2_MASTER`
+**Source of Truth:** `D:\GitHub\portfolio-workspace\R2_MASTER`
 
 **Workflow:**
 

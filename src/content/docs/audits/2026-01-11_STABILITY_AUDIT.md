@@ -41,7 +41,7 @@ We are currently **Post-Migration** on 3/4 major fronts.
 ### 🔹 Assets (Air Gap Enforced)
 
 - **Old State:** Local Copy
-- **New State:** R2 Sovereign Vault (`d:\GitHub\eriknorris-assets\R2_STAGING`)
+- **New State:** R2 Sovereign Vault (`d:\GitHub\portfolio-assets\R2_STAGING`)
 - **Stability:** **High.** Symlinks are holding. `process_images.py` is successfully bridging the gap.
 
 ### 🔹 CSS Engine (Beta Transition)

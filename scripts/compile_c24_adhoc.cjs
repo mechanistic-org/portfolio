@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = require('path');
 
-const DATA_PATH = 'D:/GitHub/eriknorris/src/content/projects/c24/data.json';
-const MDX_PATH = 'D:/GitHub/eriknorris/src/content/projects/c24/index.mdx';
-const RAW_DIR = 'D:/GitHub/eriknorris/src/content/_raw_nlm';
+const DATA_PATH = 'D:/GitHub/portfolio/src/content/projects/c24/data.json';
+const MDX_PATH = 'D:/GitHub/portfolio/src/content/projects/c24/index.mdx';
+const RAW_DIR = 'D:/GitHub/portfolio/src/content/_raw_nlm';
 
 const TEAM_FILE = path.join(RAW_DIR, 'c24_team.md');
 const TIMELINE_FILE = path.join(RAW_DIR, 'c24_development_timeline.md');

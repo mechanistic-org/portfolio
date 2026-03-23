@@ -2,7 +2,7 @@ import os
 import json
 
 # Define the Master Path
-MASTER_ROOT = r"D:\GitHub\eriknorris-workspace\R2_MASTER"
+MASTER_ROOT = r"D:\GitHub\portfolio-workspace\R2_MASTER"
 
 # Define the Bubble Scaffolding
 # Structure: { Slug: { FolderName: DeckContent } }

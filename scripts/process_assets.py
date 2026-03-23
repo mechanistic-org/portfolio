@@ -45,12 +45,12 @@ except ImportError:
 
 # Workspace Fallback Config
 env_workspace = os.getenv("ERIKNORRIS_WORKSPACE_ROOT")
-WORKSPACE_ROOT = Path(env_workspace) if env_workspace else (REPO_ROOT.parent / "eriknorris-workspace")
+WORKSPACE_ROOT = Path(env_workspace) if env_workspace else (REPO_ROOT.parent / "portfolio-workspace")
 MASTER_DIR = WORKSPACE_ROOT / "R2_MASTER"
 
 # Assets Fallback Config
 env_assets = os.getenv("ERIKNORRIS_ASSETS_ROOT")
-assets_root = Path(env_assets) if env_assets else (REPO_ROOT.parent / "eriknorris-assets")
+assets_root = Path(env_assets) if env_assets else (REPO_ROOT.parent / "portfolio-assets")
 STAGING_DIR = assets_root / "R2_STAGING"
 
 # Breakpoints (Widths)

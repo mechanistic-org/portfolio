@@ -117,5 +117,5 @@ The V31 "Holy Grail" dashboard utilizes a specialized, three-tier navigation arc
 
 ### 6.3 Asset Transfer & Recovery (Air Gap)
 
-- **Asset Sovereignty (Law I)**: All heavy media lives in a decoupled sibling repository (`ErikNorris-assets/R2_STAGING`).
+- **Asset Sovereignty (Law I)**: All heavy media lives in a decoupled sibling repository (`portfolio-assets/R2_STAGING`).
 - **Atomic Transfer**: Use `robocopy` or atomic sync tools for synchronization from the sovereign source to the local serve path.

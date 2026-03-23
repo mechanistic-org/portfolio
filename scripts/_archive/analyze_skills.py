@@ -4,7 +4,7 @@ import csv
 from collections import Counter
 
 # Content paths
-PROJECTS_DIR = 'd:/GitHub/eriknorris/src/content/projects'
+PROJECTS_DIR = 'd:/GitHub/portfolio/src/content/projects'
 LINKEDIN_SKILLS_CSV = 'd:/portfolio/portfolio_LinkedIn_working/Basic_LinkedInDataExport_01-13-2026.zip/Skills.csv'
 
 # Sets to hold data

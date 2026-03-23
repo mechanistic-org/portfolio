@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 
 # Source: The converted Excel files
-SOURCE_DIR = Path(r"D:\GitHub\eriknorris-workspace\schedules\converted")
+SOURCE_DIR = Path(r"D:\GitHub\portfolio-workspace\schedules\converted")
 
 def parse_snapshot_date(filename):
     # Matches patterns like "8-30-06", "10-12-06", "20140612"
@@ -100,7 +100,7 @@ def main():
         print(f"{s_date:<15} | {p_finish:<15} | {delta:<10}")
 
     # Save to CSV
-    csv_path = Path(r"D:\GitHub\eriknorris-workspace\schedules\curtis_slippage_report.csv")
+    csv_path = Path(r"D:\GitHub\portfolio-workspace\schedules\curtis_slippage_report.csv")
     results.to_csv(csv_path, index=False)
     print(f"\n💾 Saved Report: {csv_path}")
 

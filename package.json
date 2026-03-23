@@ -1,5 +1,5 @@
 {
-	"name": "eriknorris",
+	"name": "portfolio",
 	"type": "module",
 	"version": "5.0.0",
 	"scripts": {
@@ -8,10 +8,8 @@
 		"build": "node scripts/ci-prebuild.js && astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"audit:frontmatter": "node scripts/audit_frontmatter.cjs",
-		"check:hud": "node scripts/verify_deep_hud.cjs",
-		"predev": "npm run audit:frontmatter",
-		"prebuild": "npm run audit:frontmatter",
+		"audit:frontmatter": "node scripts/_archive/audit_frontmatter.cjs",
+		"check:hud": "node scripts/_archive/verify_deep_hud.cjs",
 		"content:hydrate": "python scripts/hydrate_content.py",
 		"content:modernize": "python scripts/modernize_content.py",
 		"assets:process": "python scripts/process_assets.py",

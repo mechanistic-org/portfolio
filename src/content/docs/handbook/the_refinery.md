@@ -21,7 +21,7 @@ The "Hybrid" era of CSVs and manual markdown files is over. We have moved to a *
     - **Storage:** `src/content/projects/*.mdx`
     - **Timeline:** Dynamic via Collections (Metadata).
 2.  **Assets (Media):** Managed via **R2_MASTER**.
-    - **Storage:** `D:\GitHub\eriknorris-workspace\R2_MASTER`
+    - **Storage:** `D:\GitHub\portfolio-workspace\R2_MASTER`
     - **Live:** `https://assets.eriknorris.com`
 3.  **Intelligence (The Fuel):** High-fidelity data for the **Assembly Engine**. (`src/content/projects/*/_intelligence.md`)
 
@@ -89,8 +89,8 @@ Keystatic is the **Single Source of Truth**. Use it to:
 
 | Zone           | Path                                       | Purpose                                               |
 | :------------- | :----------------------------------------- | :---------------------------------------------------- |
-| **User Space** | `D:\GitHub\eriknorris-workspace\R2_MASTER` | **YOUR WORKBENCH.** You add/delete/rename files here. |
-| **Staging**    | `D:\GitHub\eriknorris-assets\R2_STAGING`   | **THE MIRROR.** Automated sync target. DO NOT TOUCH.  |
+| **User Space** | `D:\GitHub\portfolio-workspace\R2_MASTER` | **YOUR WORKBENCH.** You add/delete/rename files here. |
+| **Staging**    | `D:\GitHub\portfolio-assets\R2_STAGING`   | **THE MIRROR.** Automated sync target. DO NOT TOUCH.  |
 | **The Cloud**  | `Cloudflare R2 Bucket`                     | **THE CDN.** Stores files for the world to see.       |
 
 ### The Workflow

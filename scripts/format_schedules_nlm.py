@@ -3,8 +3,8 @@ from pathlib import Path
 import sys
 
 # Configuration
-SOURCE_DIR = Path(r"D:\GitHub\eriknorris-workspace\schedules\converted")
-OUTPUT_BASE = Path(r"D:\GitHub\eriknorris-workspace\schedules")
+SOURCE_DIR = Path(r"D:\GitHub\portfolio-workspace\schedules\converted")
+OUTPUT_BASE = Path(r"D:\GitHub\portfolio-workspace\schedules")
 
 def format_date(d):
     try:

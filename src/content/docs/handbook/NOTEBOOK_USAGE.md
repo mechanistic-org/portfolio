@@ -17,10 +17,10 @@ NotebookLM is powerful but drifts easily. To keep it on track, we use "Prompt Ca
 
 | Vector            | Cartridge                                                                                             | Output Artifact     | Goal                                  |
 | :---------------- | :---------------------------------------------------------------------------------------------------- | :------------------ | :------------------------------------ |
-| **1. Narrative**  | [`REPORT_READY.txt`](file:///d:/GitHub/eriknorris/src/content/prompts/REPORT_READY.txt)               | `forensic_summary`  | The Story (War Stories).              |
-| **2. Complexity** | [`COMPLEXITY_READY.txt`](file:///d:/GitHub/eriknorris/src/content/prompts/COMPLEXITY_READY.txt)       | `complexity_vector` | The Mass (BOM/Process/Tooling).       |
-| **3. Entropy**    | [`SEISMOGRAPH_READY.txt`](file:///d:/GitHub/eriknorris/src/content/prompts/SEISMOGRAPH_READY.txt)     | `_entropy.json`     | The Pulse (Event Log).                |
-| **4. Meta**       | [`META_ANALYSIS_READY.txt`](file:///d:/GitHub/eriknorris/src/content/prompts/META_ANALYSIS_READY.txt) | `isomorphics`       | The Pattern (Cross-Project Analysis). |
+| **1. Narrative**  | [`REPORT_READY.txt`](file:///d:/GitHub/portfolio/src/content/prompts/REPORT_READY.txt)               | `forensic_summary`  | The Story (War Stories).              |
+| **2. Complexity** | [`COMPLEXITY_READY.txt`](file:///d:/GitHub/portfolio/src/content/prompts/COMPLEXITY_READY.txt)       | `complexity_vector` | The Mass (BOM/Process/Tooling).       |
+| **3. Entropy**    | [`SEISMOGRAPH_READY.txt`](file:///d:/GitHub/portfolio/src/content/prompts/SEISMOGRAPH_READY.txt)     | `_entropy.json`     | The Pulse (Event Log).                |
+| **4. Meta**       | [`META_ANALYSIS_READY.txt`](file:///d:/GitHub/portfolio/src/content/prompts/META_ANALYSIS_READY.txt) | `isomorphics`       | The Pattern (Cross-Project Analysis). |
 
 ---
 
@@ -53,7 +53,7 @@ NotebookLM is powerful but drifts easily. To keep it on track, we use "Prompt Ca
     - **Entropy:** `_entropy.json` (Sidecar).
     - **Narrative:** `index.mdx` (Body).
 2.  **Verify** in Local Preview (`npm run dev`).
-3.  **Log** completion in [`MINING_LOG.md`](file:///d:/GitHub/eriknorris/src/content/docs/project/MINING_LOG.md).
+3.  **Log** completion in [`MINING_LOG.md`](file:///d:/GitHub/portfolio/src/content/docs/project/MINING_LOG.md).
 
 ---
 
@@ -62,13 +62,13 @@ NotebookLM is powerful but drifts easily. To keep it on track, we use "Prompt Ca
 **The Split Brain Architecture:**
 
 1.  **Audio Overview (The Studio):**
-    - **Instruction:** [`PODCAST_READY.txt`](file:///d:/GitHub/eriknorris/src/content/prompts/PODCAST_READY.txt).
+    - **Instruction:** [`PODCAST_READY.txt`](file:///d:/GitHub/portfolio/src/content/prompts/PODCAST_READY.txt).
     - **Role:** The **Talent**. Two hosts (Skeptic vs. Strategist) debating the engineering merits.
-    - **Source of Truth:** [`GOLDEN_DIALOGUE_CORPUS.md`](file:///d:/GitHub/eriknorris/src/content/docs/meta/GOLDEN_DIALOGUE_CORPUS.md).
+    - **Source of Truth:** [`GOLDEN_DIALOGUE_CORPUS.md`](file:///d:/GitHub/portfolio/src/content/docs/meta/GOLDEN_DIALOGUE_CORPUS.md).
     - **Protocol:** You MUST upload `GOLDEN_DIALOGUE_CORPUS.md` as a source and **Select It**. This file acts as the "Style Anchor," forcing the model to use specific metaphors ("Red Gold", "Forensic Architect") instead of generic banter.
 
 2.  **Configure Chat (The Control Room):**
-    - **Instruction:** [`REPORT_READY.txt`](file:///d:/GitHub/eriknorris/src/content/prompts/REPORT_READY.txt).
+    - **Instruction:** [`REPORT_READY.txt`](file:///d:/GitHub/portfolio/src/content/prompts/REPORT_READY.txt).
     - **Role:** The **Fact Checker**.
     - **Why:** When the Audio Hosts make a claim (e.g., "He rejected 1,200 parts"), you use the Chat window to verify it. By setting the Chat to `REPORT_READY`, the bot becomes a Forensic Analyst, primed to validate specific data points against the uploaded specs.
 

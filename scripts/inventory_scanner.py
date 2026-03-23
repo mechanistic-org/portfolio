@@ -2,7 +2,7 @@ import os
 import ast
 import json
 
-SCRIPTS_DIR = r"d:\GitHub\eriknorris\scripts"
+SCRIPTS_DIR = r"d:\GitHub\portfolio\scripts"
 
 def get_py_docstring(filepath):
     try:

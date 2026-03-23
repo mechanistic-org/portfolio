@@ -2,8 +2,8 @@ import os
 import re
 
 # --- CONFIGURATION ---
-GAP_REPORT_PATH = r"D:\GitHub\eriknorris-workspace\podcasts\gold_gap_report.md"
-PROJECTS_DIR = r"d:\GitHub\eriknorris\src\content\projects"
+GAP_REPORT_PATH = r"D:\GitHub\portfolio-workspace\podcasts\gold_gap_report.md"
+PROJECTS_DIR = r"d:\GitHub\portfolio\src\content\projects"
 
 def parse_gap_report(report_path):
     """

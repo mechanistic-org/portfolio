@@ -4,7 +4,7 @@ const fs = require("fs");
 
 // Configuration
 const RESUME_URL = "http://localhost:4321/resume";
-const OUTPUT_DIR = path.resolve(__dirname, "../../eriknorris-assets/R2_STAGING/resume");
+const OUTPUT_DIR = path.resolve(__dirname, "../../portfolio-assets/R2_STAGING/resume");
 const ARCHIVE_DIR = path.join(OUTPUT_DIR, "archive");
 const TODAY = new Date().toISOString().split("T")[0];
 

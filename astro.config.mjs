@@ -177,7 +177,7 @@ export default defineConfig({
 		server: {
 			fs: {
 				// Allow serving files from the sibling 'quantum-assets' repo via Symlinks
-				allow: [".", "D:/GitHub/eriknorris-assets/R2_STAGING"],
+				allow: [".", "D:/GitHub/portfolio-assets/R2_STAGING"],
 			},
 			watch: {
 				// Use strict glob patterns with forward slashes for Windows compatibility

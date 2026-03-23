@@ -4,7 +4,7 @@ import json
 # Use the LOCAL copy we made
 # Use the REAL network path
 FILE_PATH = r"//morespace/projects/portfolio/digidesign/Lux Tests/Lux Thermal_11-14-07a.xls"
-OUTPUT_PATH = r"d:\GitHub\eriknorris\src\data\sc48_thermal_real.json"
+OUTPUT_PATH = r"d:\GitHub\portfolio\src\data\sc48_thermal_real.json"
 
 try:
     print(f"📂 Reading: {FILE_PATH}")

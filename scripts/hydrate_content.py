@@ -571,7 +571,7 @@ def hydrate_content(dry_run=False, force=False, target_slug=None, priority="sour
     # Script is in scripts/, so resolve up to repo root, then up to workspace
     script_dir = Path(__file__).resolve().parent
     repo_root = script_dir.parent
-    workspace_root = repo_root.parent / "eriknorris-workspace"
+    workspace_root = repo_root.parent / "portfolio-workspace"
     master_root = workspace_root / "R2_MASTER"
     
     # Public Base URL for assets

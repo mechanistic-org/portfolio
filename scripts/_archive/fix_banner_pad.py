@@ -2,8 +2,8 @@
 from PIL import Image, ImageOps
 
 def fix_banner_pad():
-    input_path = r"d:\GitHub\eriknorris\public\assets\branding\linkedin_banner_hybrid_v4_raw.png"
-    output_path = r"d:\GitHub\eriknorris\public\assets\branding\linkedin_banner_hybrid_padded.png"
+    input_path = r"d:\GitHub\portfolio\public\assets\branding\linkedin_banner_hybrid_v4_raw.png"
+    output_path = r"d:\GitHub\portfolio\public\assets\branding\linkedin_banner_hybrid_padded.png"
 
     img = Image.open(input_path)
     width, height = img.size # 1024x1024

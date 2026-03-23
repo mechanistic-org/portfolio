@@ -2,8 +2,8 @@
 from PIL import Image
 
 def fix_banner_balanced():
-    input_path = r"d:\GitHub\eriknorris\public\assets\branding\linkedin_banner_hybrid_v4_raw.png"
-    output_path = r"d:\GitHub\eriknorris\public\assets\branding\linkedin_banner_hybrid_v5_balanced.png"
+    input_path = r"d:\GitHub\portfolio\public\assets\branding\linkedin_banner_hybrid_v4_raw.png"
+    output_path = r"d:\GitHub\portfolio\public\assets\branding\linkedin_banner_hybrid_v5_balanced.png"
 
     img = Image.open(input_path)
     width, height = img.size # 1024x1024

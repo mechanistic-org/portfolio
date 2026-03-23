@@ -2,9 +2,9 @@ import os
 import json
 import re
 
-DATA_PATH = r"D:\GitHub\eriknorris\src\content\projects\c24\data.json"
-MDX_PATH = r"D:\GitHub\eriknorris\src\content\projects\c24\index.mdx"
-RAW_DIR = r"D:\GitHub\eriknorris\src\content\_raw_nlm"
+DATA_PATH = r"D:\GitHub\portfolio\src\content\projects\c24\data.json"
+MDX_PATH = r"D:\GitHub\portfolio\src\content\projects\c24\index.mdx"
+RAW_DIR = r"D:\GitHub\portfolio\src\content\_raw_nlm"
 
 TEAM_FILE = os.path.join(RAW_DIR, "c24_team.md")
 TIMELINE_FILE = os.path.join(RAW_DIR, "c24_development_timeline.md")

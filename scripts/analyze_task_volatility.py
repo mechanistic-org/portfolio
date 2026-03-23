@@ -5,8 +5,8 @@ from datetime import datetime
 import numpy as np
 
 # Configuration
-SOURCE_DIR = Path(r"D:\GitHub\eriknorris-workspace\schedules\converted")
-OUTPUT_CSV = Path(r"D:\GitHub\eriknorris-workspace\schedules\curtis_task_volatility.csv")
+SOURCE_DIR = Path(r"D:\GitHub\portfolio-workspace\schedules\converted")
+OUTPUT_CSV = Path(r"D:\GitHub\portfolio-workspace\schedules\curtis_task_volatility.csv")
 
 def parse_snapshot_date(filename):
     match = re.search(r"(\d{1,2})[-_](\d{1,2})[-_](\d{2})", filename)

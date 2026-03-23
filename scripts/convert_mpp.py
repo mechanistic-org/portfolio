@@ -7,7 +7,7 @@ import pandas as pd
 from pathlib import Path
 
 # Configuration
-BASE_DIR = Path(r"D:\GitHub\eriknorris-workspace\schedules")
+BASE_DIR = Path(r"D:\GitHub\portfolio-workspace\schedules")
 SOURCE_DIRS = [
     BASE_DIR / "kaleidescape",
     BASE_DIR / "digidesign",

@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
 
-const projectsDir = 'D:/GitHub/eriknorris/src/content/projects';
+const projectsDir = 'D:/GitHub/portfolio/src/content/projects';
 
 // The exact allowed taxonomy values from V31 specification
 const VALID_VALS = {

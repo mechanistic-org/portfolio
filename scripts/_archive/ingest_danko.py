@@ -2,7 +2,7 @@ import os
 import shutil
 
 SOURCE_DIR = r"d:\portfolio\portfolio_working\2004_08_Digidesign_D-Command"
-TARGET_BASE = r"d:\GitHub\eriknorris-workspace\R2_MASTER\d-command\bubbles"
+TARGET_BASE = r"d:\GitHub\portfolio-workspace\R2_MASTER\d-command\bubbles"
 
 # Map Source Patterns to Target Folders (Sticky IDs)
 MAPPING = {

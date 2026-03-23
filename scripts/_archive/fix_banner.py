@@ -3,8 +3,8 @@ from PIL import Image
 
 def fix_banner():
     # Paths
-    input_path = r"d:\GitHub\eriknorris\public\assets\branding\linkedin_banner_hybrid.png"
-    output_path = r"d:\GitHub\eriknorris\public\assets\branding\linkedin_banner_hybrid_final.png"
+    input_path = r"d:\GitHub\portfolio\public\assets\branding\linkedin_banner_hybrid.png"
+    output_path = r"d:\GitHub\portfolio\public\assets\branding\linkedin_banner_hybrid_final.png"
 
     # Load
     img = Image.open(input_path)

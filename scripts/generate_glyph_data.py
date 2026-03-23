@@ -3,7 +3,7 @@ import yaml
 import os
 
 # Paths
-mdx_path = r"d:\GitHub\eriknorris\src\content\projects\avegant-glyph\index.mdx"
+mdx_path = r"d:\GitHub\portfolio\src\content\projects\avegant-glyph\index.mdx"
 
 # Raw Data
 bom_data = {

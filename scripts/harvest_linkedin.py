@@ -4,10 +4,10 @@ import sys
 from pathlib import Path
 
 # --- CONFIGURATION ---
-PROJECTS_DIR = Path(r"d:\GitHub\eriknorris\src\content\projects")
-LINKEDIN_MASTER_PATH = Path(r"d:\GitHub\eriknorris\src\config\linkedin_master.ts")
+PROJECTS_DIR = Path(r"d:\GitHub\portfolio\src\content\projects")
+LINKEDIN_MASTER_PATH = Path(r"d:\GitHub\portfolio\src\config\linkedin_master.ts")
 # [STANDARDIZED] Output to native prompts directory in content
-OUTPUT_PATH = Path(r"d:\GitHub\eriknorris\src\content\prompts\LINKEDIN_READY.txt")
+OUTPUT_PATH = Path(r"d:\GitHub\portfolio\src\content\prompts\LINKEDIN_READY.txt")
 
 # --- MAPPING ---
 # Maps filesystem slugs to linkedin_master.ts Company Names

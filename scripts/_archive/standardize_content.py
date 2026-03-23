@@ -2,7 +2,7 @@ import os
 import frontmatter
 import re
 
-PROJECTS_DIR = 'd:/GitHub/eriknorris/src/content/projects'
+PROJECTS_DIR = 'd:/GitHub/portfolio/src/content/projects'
 
 # Normalization Maps
 TOOL_MAP = {

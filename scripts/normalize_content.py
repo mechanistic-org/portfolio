@@ -2,7 +2,7 @@ import os
 import re
 import frontmatter
 
-CONTENT_DIR = r"d:\GitHub\eriknorris\src\content\projects"
+CONTENT_DIR = r"d:\GitHub\portfolio\src\content\projects"
 
 def migrate_file(filepath):
     try:

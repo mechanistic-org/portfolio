@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
 
-const projectsDir = 'D:/GitHub/eriknorris/src/content/projects';
+const projectsDir = 'D:/GitHub/portfolio/src/content/projects';
 
 // STRICT WHITELIST: Only these exact keys are defined in keystatic.config.tsx
 // Any key found in an index.mdx that is NOT in this list will be aggressively moved to data.json.

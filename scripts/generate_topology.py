@@ -4,7 +4,7 @@ import collections
 from datetime import datetime
 
 CONNECTIONS_CSV = 'd:/portfolio/portfolio_LinkedIn_working/Basic_LinkedInDataExport_01-13-2026.zip/Connections.csv'
-OUTPUT_JSON = 'd:/GitHub/eriknorris/src/data/network_topology.json'
+OUTPUT_JSON = 'd:/GitHub/portfolio/src/data/network_topology.json'
 
 def clean_company(name):
     if not name: return "Unknown"

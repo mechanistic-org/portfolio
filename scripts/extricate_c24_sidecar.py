@@ -2,8 +2,8 @@ import os
 import json
 import yaml
 
-mdx_path = r"D:\GitHub\eriknorris\src\content\projects\c24\index.mdx"
-json_path = r"D:\GitHub\eriknorris\src\content\projects\c24\data.json"
+mdx_path = r"D:\GitHub\portfolio\src\content\projects\c24\index.mdx"
+json_path = r"D:\GitHub\portfolio\src\content\projects\c24\data.json"
 
 with open(mdx_path, "r", encoding="utf-8") as f:
     content = f.read()

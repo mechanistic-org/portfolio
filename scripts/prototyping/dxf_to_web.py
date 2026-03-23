@@ -66,6 +66,6 @@ if __name__ == "__main__":
     
     TEST_FILE = r"\\morespace\projects\portfolio\webtv_misc\cortez\to_jeff_6_20\id_review_6_20.dxf"
     # Output to local temp dir in repo
-    OUTPUT_DIR = r"d:\GitHub\eriknorris\scripts\prototyping\output"
+    OUTPUT_DIR = r"d:\GitHub\portfolio\scripts\prototyping\output"
     
     convert_dxf(TEST_FILE, OUTPUT_DIR)

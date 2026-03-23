@@ -7,7 +7,7 @@ export const prerender = false;
 const R2_STAGING_ROOT =
 	import.meta.env.PROD || process.env.NODE_ENV === "production"
 		? "" // Prod (Worker) uses root relative to binding (e.g. "branding/logo.png")
-		: "D:/GitHub/eriknorris-assets/R2_STAGING"; // Local Dev Code
+		: "D:/GitHub/portfolio-assets/R2_STAGING"; // Local Dev Code
 
 const DEBUG_MODE = true;
 
@@ -89,7 +89,7 @@ export const GET: APIRoute = async ({ params, locals }) => {
 			}
 
 			// RESOLVE ROOT: Ensure OS-correct slashes for the root
-			const stagingRoot = path.resolve("D:/GitHub/eriknorris-assets/R2_STAGING");
+			const stagingRoot = path.resolve("D:/GitHub/portfolio-assets/R2_STAGING");
 
 			// JOIN: Use path.join to correctly handle slashes on Windows
 			const filePath = path.join(stagingRoot, decodedPath);

@@ -24,7 +24,7 @@ _Synthesized from Agency Memory_
 2.  **The Sovereign Color Law:** `src/config/color_registry.ts` is the ONLY Source of Truth for Entity Coloring. `Colors.csv` retrieval is FORBIDDEN.
 3.  **The Module Naming Law:** Do not use `.json.ts` for standard TypeScript modules/arrays. Rename to `.ts` to prevent TS Server resolution confusion.
 4.  **The Resilience Law (Safe-by-Default D3):** Visualization components must implement defensive `get(key) || default_color` logic to prevent crashing the entire graph on a single missing key.
-5.  **The Air Gap Law:** `eriknorris-assets\R2_STAGING` is the ONLY Production Vault. `portfolio_working` is the ONLY Staging Input. `eriknorris-workspace\R2_MASTER` is DEAD (Legacy).
+5.  **The Air Gap Law:** `portfolio-assets\R2_STAGING` is the ONLY Production Vault. `portfolio_working` is the ONLY Staging Input. `portfolio-workspace\R2_MASTER` is DEAD (Legacy).
 
 ### The Stack
 
@@ -105,9 +105,9 @@ Set `theme: "hyperspace"` in the project frontmatter.
 
 ### Asset Air-Gap (Crucial)
 
-- **Local:** `public/assets/r2` is a **Symlink** to `../ErikNorris-assets/R2_STAGING`.
+- **Local:** `public/assets/r2` is a **Symlink** to `../portfolio-assets/R2_STAGING`.
 - **Production:** The built site replaces local paths with `https://assets.eriknorris.com/`.
-- **Rule:** NEVER commit heavy assets to `d:\GitHub\ErikNorris`.
+- **Rule:** NEVER commit heavy assets to `d:\GitHub\portfolio`.
 
 ---
 

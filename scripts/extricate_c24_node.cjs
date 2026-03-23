@@ -1,8 +1,8 @@
 const fs = require('fs');
 const matter = require('gray-matter');
 
-const targetFile = 'D:/GitHub/eriknorris/src/content/projects/c24/index.mdx';
-const sidecarFile = 'D:/GitHub/eriknorris/src/content/projects/c24/data.json';
+const targetFile = 'D:/GitHub/portfolio/src/content/projects/c24/index.mdx';
+const sidecarFile = 'D:/GitHub/portfolio/src/content/projects/c24/data.json';
 
 const content = fs.readFileSync(targetFile, 'utf8');
 const parsed = matter(content);

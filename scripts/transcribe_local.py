@@ -5,7 +5,7 @@ import argparse
 import warnings
 
 # --- CONFIGURATION ---
-SOURCE_DIR = r"D:\GitHub\eriknorris-workspace\podcasts"
+SOURCE_DIR = r"D:\GitHub\portfolio-workspace\podcasts"
 EXTENSIONS = (".wav", ".mp3", ".m4a")
 MODEL_SIZE = "turbo" # "large-v3" is too slow on CPU
 MINING_REPORT_PATH = os.path.join(SOURCE_DIR, "mining_report.md")

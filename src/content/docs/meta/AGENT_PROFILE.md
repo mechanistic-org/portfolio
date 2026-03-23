@@ -140,7 +140,7 @@ description: "Archived legacy document."
 - **Trigger:** You see unused code/assets.
 - **Instinct:** "Delete this clutter."
 - **Correction:** "Archive this history."
-- **Protocol:** Move it to `eriknorris-archive`. Do not destroy the evidence of effort.
+- **Protocol:** Move it to `portfolio-archive`. Do not destroy the evidence of effort.
 
 **The "Clean Build" Mandate:**
 

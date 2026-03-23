@@ -1,0 +1,28 @@
+name: Constraint Cage Validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validate-ai-schema:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Node Ecosystem
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Authenticate Physical Dependencies
+        run: npm ci
+
+      - name: Enforce Strict Zod Type Bounds (law_001 rule)
+        # This explicit stage acts as the active autonomous kill-switch.
+        # If the local Swarm hallucinates TS structure it is blocked outright.
+        run: npx tsc --noEmit
+
+      - name: Enforce React DOM Structural Integrity
+        run: npm run build
