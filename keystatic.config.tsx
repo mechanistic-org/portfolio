@@ -339,6 +339,36 @@ export default config({
 					},
 				),
 
+				// --------------------------------------------------------------------------
+				// 8b. Audio & Oracle Links (AEO Bridge)
+				// --------------------------------------------------------------------------
+				audio_url: fields.text({
+					label: "Audio URL",
+					description: "R2 path to audio file for SonicHeartbeat (e.g. /assets/r2/project/audio.mp3)",
+				}),
+				notebook_url: fields.text({
+					label: "Notebook URL",
+					description: "NotebookLM notebook URL for this project.",
+				}),
+				nlm_url: fields.text({
+					label: "NLM Oracle URL",
+					description: "NotebookLM Oracle (embed) link. Used by HXO console.",
+				}),
+				transcript: fields.text({
+					label: "Transcript",
+					multiline: true,
+					description: "Raw transcript content for AEO Audio Bridge.",
+				}),
+				realm: fields.select({
+					label: "Realm",
+					description: "Reality discriminator — is this a real or simulation project?",
+					options: [
+						{ label: "Reality", value: "reality" },
+						{ label: "Simulation", value: "simulation" },
+					],
+					defaultValue: "reality",
+				}),
+
 
 				// --------------------------------------------------------------------------
 				// 9. Cyberspace Engine (Scrollytelling)
