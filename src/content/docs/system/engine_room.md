@@ -12,6 +12,15 @@ description: "Documentation for The Engine Room: Architecture & Maintenance."
 > **Role:** The Engineer / The Mechanic
 > **Objective:** Keep the machine running, fix bugs, and deploy updates.
 
+## 0. Domain Identity & The Ideological Boundary
+
+It is crucial to separate the **physical proxy architecture** (the code, servers, and scripts detailed in this document) from the **ideological identity** of the domains it powers:
+
+- **The Machinery (The Proxy):** This repository is the Engine Room. It is the static site generator, the Cloudflare infrastructure, the markdown compilers, and the agentic scripts. It is the physical proxy that manifests the data.
+- **The Protocol (`MootMoat`):** MootMoat is the ideological core. It is the documentation of everything we do regarding digital identity and sovereignty. It is framed as an empowering DIY framework for technically capable people who build in the physical world (hardware, mechanical, manufacturing). 
+
+The Engine Room executes the code; MootMoat dictates the philosophy of self-hosted, sovereign professional identity.
+
 ## 1. System Architecture
 
 The EN-OS uses a **Pure Hyperspace** architecture (Dynamic Astro Collections) to maintain "Zero-Bloat" speed.
