@@ -8,7 +8,7 @@ import "@/styles/themes.css"; // The Trimain Theme Engine
 import BaseHead from "@layouts/BaseHead.astro";
 import Nav from "@components/Nav/Nav.astro";
 import Footer from "@components/Footer/Footer.astro";
-import CommandMenu from "@components/Search/CommandMenu";
+import PagefindSearch from "@components/Search/PagefindSearch.astro";
 
 // import CookieConsent from "@components/CookieConsent/CookieConsent.astro";
 // import CookieConsent from "@components/CookieConsent/CookieConsent.astro";
@@ -82,13 +82,13 @@ const {
 		<div class="relative z-10 flex min-h-lvh flex-col justify-between">
 			<div>
 				{!hideNav && <Nav hideLogo={hideNavLogo} />}
-				<main>
+				<main data-pagefind-body>
 					<slot />
 				</main>
 			</div>
 			{!overflowHidden && <Footer entropy={entropy} />}
 		</div>
-		<CommandMenu client:only="react" />
+		<PagefindSearch />
 
 		<script>
 			import siteData from "@config/siteData.json";

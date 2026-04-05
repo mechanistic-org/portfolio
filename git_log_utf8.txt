@@ -1,0 +1,37 @@
+commit 90b2dd776669a4d766cf4e769ccda151192f1220
+Author: eriknorris <155327355+eriknorris@users.noreply.github.com>
+Date:   Sun Jan 11 13:59:33 2026 -0800
+
+    docs: complete 'Operation Exodus' and document Antigravity API outage
+    
+    docs(roadmap): mark Identity Migration as [COMPLETED] and Commit Generator as [BLOCKED] due to platform outage.
+    docs(maintenance): add critical troubleshooting for "Stream Error" (Global Outage) and "Two Wallets" billing architecture.
+    docs(memory): update AGENCY_MEMORY.md with new "Billing Law" and current focus state.
+    feat(prompts): add CONVERSATION_MINER_PROMPT.md for session context preservation.
+    scripts(dx): update test_gemini_key.py to explicitly test GEMINI_MODEL from .env.
+
+D	scripts/scaffold_projects.py
+
+commit a710c3c06c9dd16308332fa4f48951842f4c213c
+Author: eriknorris <155327355+eriknorris@users.noreply.github.com>
+Date:   Thu Jan 8 13:12:08 2026 -0800
+
+    fix(build): resolve astro config, mdx syntax, and scaffolding errors
+
+M	scripts/scaffold_projects.py
+
+commit c87dbe9501631fcff4f22294d31a27dfb43f7cb3
+Author: eriknorris <155327355+eriknorris@users.noreply.github.com>
+Date:   Wed Jan 7 11:35:24 2026 -0800
+
+    Phase 5: Remove Legacy Polymer & Deploy
+
+M	scripts/scaffold_projects.py
+
+commit 9daad85c3682c60855acf7d6d51d200a43dc7eee
+Author: eriknorris <155327355+eriknorris@users.noreply.github.com>
+Date:   Sat Dec 13 20:02:06 2025 -0800
+
+    feat(colophon): baseline working chasing-en prototype
+
+A	scripts/scaffold_projects.py

@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
-		"build": "node scripts/ci-prebuild.js && astro build",
+		"build": "node scripts/ci-prebuild.js && astro build && npx -y pagefind --site dist",
 		"preview": "astro preview",
 		"astro": "astro",
 		"audit:frontmatter": "node scripts/_archive/audit_frontmatter.cjs",

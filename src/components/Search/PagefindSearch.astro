@@ -1,0 +1,128 @@
+---
+---
+
+<div id="pagefind-search-backdrop" class="fixed inset-0 z-[100] hidden items-start justify-center px-4 pt-[20vh]">
+	<div id="pagefind-search-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
+	
+	<div class="border-border bg-card relative w-full max-w-xl overflow-hidden rounded-xl border shadow-2xl duration-200">
+		<div class="p-4 overflow-y-auto max-h-[60vh]">
+			<div id="pagefind-search-container"></div>
+		</div>
+		
+		<div class="border-border bg-muted/50 text-muted-foreground flex justify-between border-t px-4 py-2 text-xs">
+			<span>
+				<kbd class="font-sans">↑↓</kbd> to navigate
+			</span>
+			<span>
+				<kbd class="font-sans">ESC</kbd> to close
+			</span>
+		</div>
+	</div>
+</div>
+
+<script is:inline>
+	document.addEventListener('DOMContentLoaded', () => {
+		let isLoaded = false;
+		let isOpen = false;
+		
+		const backdrop = document.getElementById("pagefind-search-backdrop");
+		const overlay = document.getElementById("pagefind-search-overlay");
+		const container = document.getElementById("pagefind-search-container");
+		
+		function openSearch() {
+			isOpen = true;
+			backdrop.classList.remove("hidden");
+			backdrop.classList.add("flex");
+			document.body.style.overflow = "hidden";
+			
+			if (!isLoaded) {
+				isLoaded = true;
+				// Dynamically load Pagefind UI CSS & JS
+				const link = document.createElement("link");
+				link.rel = "stylesheet";
+				link.href = "/pagefind/pagefind-ui.css";
+				document.head.appendChild(link);
+				
+				const script = document.createElement("script");
+				script.src = "/pagefind/pagefind-ui.js";
+				script.onload = () => {
+					new window.PagefindUI({ element: "#pagefind-search-container", showSubResults: true, bundlePath: "/pagefind/" });
+					// Automatically focus the input after initializing
+					setTimeout(() => {
+						const input = container.querySelector("input");
+						if (input) input.focus();
+					}, 100);
+				};
+				document.head.appendChild(script);
+			} else {
+				// Focus if already loaded
+				setTimeout(() => {
+					const input = container.querySelector("input");
+					if (input) input.focus();
+				}, 50);
+			}
+		}
+		
+		function closeSearch() {
+			isOpen = false;
+			backdrop.classList.add("hidden");
+			backdrop.classList.remove("flex");
+			document.body.style.overflow = "unset";
+		}
+		
+		// Event listeners
+		overlay.addEventListener("click", closeSearch);
+		
+		window.addEventListener("keydown", (e) => {
+			if ((e.metaKey || e.ctrlKey) && e.key === "e") {
+				e.preventDefault();
+				if (isOpen) closeSearch();
+				else openSearch();
+			}
+			if (e.key === "Escape" && isOpen) {
+				e.preventDefault();
+				closeSearch();
+			}
+		});
+		
+		window.addEventListener("open-command-menu", () => {
+			openSearch();
+		});
+	});
+</script>
+
+<style is:global>
+	/* Customizing Pagefind UI to match the theme */
+	:root {
+		--pagefind-ui-scale: 1;
+		--pagefind-ui-primary: #fff;
+		--pagefind-ui-text: #e2e8f0;
+		--pagefind-ui-background: transparent;
+		--pagefind-ui-border: #334155;
+		--pagefind-ui-tag: #1e293b;
+		--pagefind-ui-border-width: 1px;
+		--pagefind-ui-border-radius: 6px;
+		--pagefind-ui-image-border-radius: 6px;
+		--pagefind-ui-image-box-ratio: 3 / 2;
+		--pagefind-ui-font: inherit;
+	}
+	
+	.pagefind-ui__search-input {
+		background-color: transparent !important;
+		color: white !important;
+		border: 1px solid var(--pagefind-ui-border) !important;
+	}
+	
+	.pagefind-ui__result-title, .pagefind-ui__result-link {
+		color: white !important;
+		font-weight: 500;
+	}
+	
+	.pagefind-ui__result-excerpt {
+		color: #94a3b8 !important;
+	}
+	
+	.pagefind-ui__message {
+		color: #94a3b8 !important;
+	}
+</style>
