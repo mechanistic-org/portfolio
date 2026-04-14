@@ -10,11 +10,26 @@ The way you do anything is the way you do everything.
 
 I've spent forty years applying that logic to high-stakes physical systems - medical catheters, SGI workstations, the original Xbox, Digidesign audio consoles, Kaleidescape servers, the Avegant Glyph, automated food robots. Forty-plus commercial products. Precision mechanical design, thermal budgets, global manufacturing, regulatory compliance in environments where the physical world doesn't forgive mistakes. No git reset.
 
-In 2022 I returned to Mechanistic - the consultancy I founded in 1993 - and I brought a new set of tools with me. The same forensic methodology I apply to a thermal yield crisis or a supply chain collapse, I now apply to the architecture of intelligent systems. I build the infrastructure that runs the agents. I design the constraint structures that keep them from hallucinating actions. I treat agentic software the way I treat a tolerance stack: every degree of freedom accounted for, every failure mode fenced before assembly.
+In 2022 I returned to Mechanistic - the consultancy I founded in 1993 - and I brought a new set of tools with me. The same forensic methodology I apply to a thermal yield crisis or a supply chain collapse, I now apply to the architecture of intelligent systems. I build EN-OS - a locally-sovereign operating system for AI agents that runs on local hardware with no cloud dependency and no framework trust. I design the constraint structures that keep agents from hallucinating actions. I treat agentic software the way I treat a tolerance stack: every degree of freedom accounted for, every failure mode fenced before assembly.
 
 The work I want is program-level. Architectural mandate. IC with ownership over methods and tooling. Physical systems, digital systems, or the boundary where they meet. The operating system runs the same regardless of the domain.
 `,
 	experience: [
+		{
+			company: "MECHANISTIC",
+			role: "Principal | Sovereign Agent Infrastructure",
+			blurb: `
+In 2022 I returned to Mechanistic - the consultancy I founded in 1993 - and applied the same forensic methodology from physical systems work to the architecture of intelligent execution environments. The primary output is EN-OS: a locally-sovereign operating system for AI agents.
+
+The constraint problem in agent systems is not prompt quality - it is degree-of-freedom control. EN-OS solves this through Single-Threaded Action Masking: Python logic removes tool references from the LLM's context window at runtime, making destructive commands physically unreachable before the model evaluates them. The same instinct as rejecting a bad material at the gate rather than inspecting the finished assembly.
+
+Execution runs through NanoClaw - ephemeral Docker containers that enforce a hard separation between Intent mode (read-only planning) and Action mode (filesystem writes). Each invocation launches a container, executes, and exits. The ignition gate is a three-stage webhook daemon: regex subcommand ceiling to cap the injection surface, Gemini Flash semantic classifier for prompt injection detection, async container launch decoupled from the connection timeout. No persistent state survives across invocations.
+
+Context retrieval runs through mcp_enos_router - a ChromaDB vector store served over SSE/FastMCP by a PM2-managed daemon. Agents query the router; they do not scan directories. A 23MB master context file sits at the workspace root as a structural load test: any agent that reads it raw exhausts its context window. The router is the only legal path in.
+
+Operational scaffolding: sprint_board.py queries GitHub GraphQL for live project iteration state, replacing static sprint plans with real-time triage. The LinkedIn publishing pipeline runs on Git as state substrate - no OAuth connectors, no external session dependency. Agent skills follow the formal S=(C, π, T, R) tuple with machine-readable assertion sets that make the spec executable as a continuous self-eval.
+`,
+		},
 		{
 			company: "HYPHEN",
 			role: "Mechanical Engineer",
