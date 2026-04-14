@@ -12,7 +12,7 @@ export const resumeMaster = {
 		name: "ERIK NORRIS",
 		title: "Principal Mechanical Architect | Product / Robotics / Automation",
 		tagline:
-			"Principal Mechanical Architect specializing in high-fidelity hardware and program rescue. I stabilize the entropy of product development: structure the chaos, index the decisions, ship the hardware.",
+			"Structure the chaos · Index the decisions · Ship the hardware",
 		contact: {
 			location: "Redwood City, CA",
 			email: "erik@eriknorris.com",
@@ -26,7 +26,7 @@ export const resumeMaster = {
 	summary: {
 		// MODE E: The Abstract (Universal Bio)
 		executive:
-			"Operating at the intersection of high-fidelity hardware design and program rescue, I treat physical engineering with the forensic rigor of a software codebase. The difference between a rescued program and a failed one is rarely the capability of the engineer; it is almost always the fidelity of the record.\n\nFrom integrating a modular food dispensing system in the IP69K washdown environment of the Makeline, to tuning the 250g tactile snap of the Noon Smart Switch—I have transitioned programs from catastrophic failure to global compliance. I engineered the dual-source bridge strategy that saved the C24 Console from supply chain collapse, and reversed a 100% mechanical retention failure on the Bazooka Base Station.\n\nFrom the 28.3 CFM forced-air wind tunnels of the WebTV Galaxy to the silent thermal dissipation of the Kaleidescape Cinema One, my methodology is absolute: stabilize the entropy of product development — structure the chaos, index the decisions, ship the hardware.",
+			"I treat physical engineering with the forensic rigor of a software codebase. The difference between a rescued program and a failed one is rarely the capability of the engineer - it is almost always the fidelity of the record.\n\nFrom integrating a modular food dispensing system in the IP69K washdown environment of the Makeline, to tuning the 250g tactile snap of the Noon Smart Switch, I have transitioned programs from catastrophic failure to global compliance. I engineered the dual-source bridge strategy that saved the C24 Console from supply chain collapse, and reversed a 100% mechanical retention failure on the Bazooka Base Station.\n\nFrom the 28.3 CFM forced-air wind tunnels of the WebTV Galaxy to the silent thermal dissipation of the Kaleidescape Cinema One: forty-plus commercial products, no git reset. The same forensic methodology I apply to a thermal yield crisis, I now apply to intelligent systems architecture.",
 	},
 	competencies: {
 		engineering: [
@@ -64,9 +64,8 @@ export const resumeMaster = {
 			dates: "2022 - Present",
 			blurb: "Consultancy specializing in Sovereign Architecture & Crisis Recovery.",
 			bullets: [
-				"**Forensic Consultancy Operations:**",
-				"**Scope:** Acting as the **'Red Team'** for Tier-1 hardware startups, conducting pre-production audits to identify **'Showstopper' risks** in thermal management, tolerance analysis, and supply chain fragility.",
-				"**Methodology:** Deployed **'Sovereign Assembly'** principles to convert fragile, ID-heavy concepts into manufacturable, high-yield product architectures without diluting original design intent.",
+				"Conduct pre-production forensic audits for Tier-1 hardware startups - stress-testing thermal management, tolerance stack-up, and supply chain fragility before tooling commitment.",
+				"Apply **Sovereign Assembly** principles to convert ID-constrained concepts into manufacturable, high-yield architectures without diluting original design intent.",
 			],
 		},
 		{
@@ -76,12 +75,10 @@ export const resumeMaster = {
 			dates: "2021 - 2022",
 			blurb: "Lead architect for the 'Factory-in-a-Box' IP69K food robotics platform.",
 			bullets: [
-				"**The Trigger (Dispensers):** 'Material Diversity' failure. Non-Newtonian food ingredients (carnitas, rice) exhibited agglomeration and ricochet, defying standard industrial dosing logic.",
-				"**The Intervention:** Developed a Dispenser Taxonomy (Types A–F) utilizing 70+ actuators with dynamic 'auto-tuning' capability to decouple dispensing precision from fluid viscosity.",
-				"**The Result:** Reduced portion variance from the industry standard ±15% to **±2%**, cutting food waste by 98% while sustaining a 350-meal-per-hour throughput target.",
-				"**The Trigger (Drive Train):** Thermal expansion mismatch between Acetal internal gears and Aluminum enclosures caused binding risks under intense 350-meal/hour thermal loads.",
-				"**The Intervention:** Integrated rigid Sleeve Alignment Guides to enforce concentricity and fortified assemblies with Low-Clearance Retaining Rings to prevent axial helix migration.",
-				"**The Result:** Stabilized the drive train to achieve **99.9% order accuracy** and established a modular architecture enabling hot-swap maintenance (MTTR < 5 mins) during lunch rushes.",
+				"Diagnosed Non-Newtonian food ingredient failures (carnitas, rice - agglomeration and ricochet) defying standard industrial dosing logic; built Dispenser Taxonomy (Types A-F) with 70+ actuators and dynamic auto-tuning to decouple portion precision from fluid viscosity.",
+				"Reduced portion variance from the industry-standard ±15% to **±2%**, cutting food waste by 98% while sustaining 350-meal/hour throughput.",
+				"Resolved thermal expansion mismatch between Acetal internal gears and Aluminum enclosures by integrating Sleeve Alignment Guides for concentricity and Low-Clearance Retaining Rings to prevent axial helix migration.",
+				"Achieved **99.9% order accuracy** with a modular hot-swap architecture enabling MTTR under 5 minutes during peak service.",
 			],
 		},
 		{
@@ -91,13 +88,9 @@ export const resumeMaster = {
 			dates: "2016 - 2018",
 			blurb: "High-end smart home automation startup acquired by Alarm.com.",
 			bullets: [
-				"**The Architecture:** Lead Engineer for a modular **'Layered Lighting'** ecosystem (Noon) and a high-volume stealth consumables system (Locoroll), managing concurrent stacks.",
-				"**The Trigger (Locoroll):** EVT1 build faced a catastrophic 'Paperweight' functional failure where proprietary paper consumables jammed due to a **0.5mm variance** in the 'cutter-to-roller' handoff.",
-				"**The Intervention:** Architected the **'Floating Gimbal'** feed mechanism (LCR-Mech-Rev3), decoupling paper roll inertia from the cutter head to allow self-alignment during high-speed dispensing.",
-				"**The Result:** Achieved **99.8% dispense reliability** (up from <60% at EVT) during 50k-cycle life testing, securing the premium seamless aesthetic.",
-				"**The Trigger (Noon Director):** The 'Director' switch suffered dual failure modes: OLED display delamination at 45°C due to CTE mismatch, and a 'mushy' rotary interface (<150g tactile force).",
-				"**The Intervention:** Engineered a custom **'Flex-Mount' bracket** using a high-temperature PSA stack-up to absorb CTE differentials; redesigned rotary interface with a pre-loaded spring detent system.",
-				"**The Result:** Secured the **'Signature Click'** (250g tactile snap) required for the $500 price point and stabilized the display assembly to pass 85°C storage tests.",
+				"Led concurrent dual-stack programs: modular **Layered Lighting** ecosystem (Noon) and high-volume stealth consumables system (Locoroll).",
+				"Eliminated EVT1 paper jam failures (under 60% reliability at first build) in Locoroll by architecting the **Floating Gimbal** feed mechanism (LCR-Mech-Rev3), decoupling paper roll inertia from the cutter head to allow self-alignment during high-speed dispensing - achieving **99.8% dispense reliability** across 50k-cycle life testing.",
+				"Resolved dual failure modes in the Noon Director switch - OLED delamination at 45°C from CTE mismatch and rotary interface below 150g tactile threshold - via a Flex-Mount PSA bracket for CTE absorption and pre-loaded spring detent redesign, securing the **250g Signature Click** for the $500 price point and passing 85°C storage qualification.",
 			],
 		},
 		{
@@ -107,13 +100,9 @@ export const resumeMaster = {
 			dates: "2013 - 2015",
 			blurb: "Audiophile-grade movie servers and players.",
 			bullets: [
-				"**The Context:** Operated as the **Sole Mechanical Engineer** responsible for the entire product lifecycle—from NPI to sustaining—managing a complex global supply chain (Taiwan/Mexico/Canada).",
-				"**The Trigger:** The 'Vault' M700 disc changers experienced field failures due to 'Dirty Roller' friction drops and warped carousels.",
-				"**The Intervention:** Analyzed **3,000,000+ cycle events** to isolate the friction coefficient drop; redesigned the pinch roller assembly with dual radial spring balance bars.",
-				"**The Result:** Eliminated 100% of 'dirty roller' slippage failures and recovered questioned carousel inventory via new inspection criteria.",
-				"**The Trigger:** Chassis costs were threatening product margins.",
-				"**The Intervention:** Transitioned from soft tooling to staged hard tooling in China.",
-				"**The Result:** Negotiated **$24 per unit savings** on chassis costs.",
+				"Operated as Sole Mechanical Engineer for full product lifecycle - NPI through sustaining - across a global supply chain spanning Taiwan, Mexico, and Canada.",
+				"Eliminated 100% of M700 disc changer field failures by analyzing **3,000,000+ cycle events** to isolate friction coefficient drop, then redesigning the pinch roller assembly with dual radial spring balance bars; recovered questioned carousel inventory via new inspection criteria.",
+				"Negotiated **$24/unit savings** on chassis costs by transitioning from soft tooling to staged hard tooling in China.",
 			],
 		},
 		{
@@ -123,13 +112,9 @@ export const resumeMaster = {
 			dates: "2006 - 2012",
 			blurb: "Professional Audio Consoles: D-Control, D-Command, SC48.",
 			bullets: [
-				"**The Context:** Managing the 'Danko' and 'Lux' console programs under strict cost-down reuse mandates and a 'Solo Mandate' documentation load.",
-				"**The Trigger:** 'Vegas Mode' stress tests revealed the Fader Units were running hotter than Main Units (41°C internal temp).",
-				"**The Intervention:** Enforced strict cabling routing to unblock airflow paths and verified stability via 40-minute stress tests.",
-				"**The Result:** Achieved **80% confidence** in First Customer Ship (FCS) date despite a 50% rejection rate on initial vendor deliveries.",
-				"**The Trigger:** A 50% rejection rate on the first 42 Fader Pans due to sheet metal warping.",
-				"**The Intervention:** Instituted **100% manual inspection** of incoming sheet metal to filter warped units and negotiated a $5,000 expedite fee waiver with PPI Plastics.",
-				"**The Result:** Protected assembly yield and released **100% of mechanical documentation solo** (24+ unique parts) under a 2-week deadline.",
+				"Managed Danko and Lux console programs under strict cost-down reuse mandates, carrying full mechanical documentation responsibility solo across both programs.",
+				"Resolved Fader Unit thermal failure (41°C internal temp under Vegas Mode stress testing) by enforcing cabling routing to unblock airflow - achieving **80% FCS confidence** despite a 50% initial vendor rejection rate.",
+				"Protected assembly yield on first Fader Pan batch (50% sheet metal warping) by instituting **100% manual incoming inspection** and negotiating a $5,000 expedite fee waiver with PPI Plastics; released 24+ unique parts of mechanical documentation solo under a 2-week deadline.",
 			],
 		},
 		{
@@ -139,10 +124,8 @@ export const resumeMaster = {
 			dates: "1999 - 2002",
 			blurb: "Hardware division for UltimateTV and Xbox.",
 			bullets: [
-				"**The Context:** High-velocity mechanical design for satellite gateways and peripherals.",
-				"**The Trigger:** Critical vendor shutdown (E-M Solutions) threatened the prototype schedule.",
-				"**The Intervention:** Personally coordinated off-cycle 'quick turn' fabrication.",
-				"**The Result:** Delivered functional mechanical prototypes for executive review in **under 4 weeks**, meeting a 4-day delivery target.",
+				"Executed high-velocity mechanical design for satellite gateways and peripherals in the UltimateTV and Xbox hardware division.",
+				"Delivered functional prototypes for executive review in **under 4 weeks** after E-M Solutions vendor shutdown by personally coordinating off-cycle quick-turn fabrication.",
 			],
 		},
 	],

@@ -35,6 +35,9 @@ async function generatePDF() {
 	serverProcess.stdout.on("data", (data) => {
 		if (data.toString().includes("Local")) serverReady = true;
 	});
+	serverProcess.stderr.on("data", (data) => {
+		if (data.toString().includes("Local")) serverReady = true;
+	});
 
 	// Wait up to 30 seconds for server
 	for (let i = 0; i < 30; i++) {
@@ -63,24 +66,32 @@ async function generatePDF() {
 
 		const page = await browser.newPage();
 
-		// Navigate
-		await page.goto(RESUME_URL, { waitUntil: "networkidle2" });
+		// Emulate print media so Tailwind print: variants fire (strips starfield, dark bg, shadows)
+		await page.emulateMediaType("print");
 
-		// Generate PDF
-		console.log(`🚀 Printing PDF to: ${CURRENT_PATH}`);
+		// Navigate
+		await page.goto(RESUME_URL, { waitUntil: "domcontentloaded", timeout: 60000 });
+
+		// Generate PDF to a temp path first to avoid Windows file-lock errors
+		// if the current PDF is open in a viewer
+		const TEMP_PATH = CURRENT_PATH + ".tmp.pdf";
+		console.log(`🚀 Printing PDF...`);
 		await page.pdf({
-			path: CURRENT_PATH,
+			path: TEMP_PATH,
 			format: "Letter",
-			printBackground: true,
+			printBackground: false,
 			displayHeaderFooter: false,
 			margin: {
-				top: "0.4in", // Matches print CSS overrides roughly or lets CSS handle it
+				top: "0.4in",
 				bottom: "0.4in",
 				left: "0.4in",
 				right: "0.4in",
 			},
 		});
 
+		// Swap temp -> current (atomic on same drive)
+		if (fs.existsSync(CURRENT_PATH)) fs.unlinkSync(CURRENT_PATH);
+		fs.renameSync(TEMP_PATH, CURRENT_PATH);
 		console.log(`✅ Current Resume Updated: ${CURRENT_PATH}`);
 
 		// Archive
