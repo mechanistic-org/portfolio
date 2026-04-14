@@ -17,7 +17,7 @@ export const resumeMaster = {
 			location: "Redwood City, CA",
 			email: "erik@eriknorris.com",
 			linkedin: "linkedin.com/in/eriknorris",
-			github: "github.com/eriknorris", // Corrected based on standard username pattern, though user wrote 'eriknorris/eriknorris' I will assume username is enough or check. User wrote 'github.com/eriknorris/eriknorris' - this implies a repo. I'll stick to their text or standard profile. Let's use the profile 'github.com/eriknorris' as it's more standard for a contact. Wait, user specifically wrote 'eriknorris/eriknorris'. That might be this specific repo? I'll use exactly what they typed to be safe: 'github.com/eriknorris/eriknorris'
+			github: "github.com/eriknorris",
 			portfolio: "eriknorris.com",
 			resume: "resume.eriknorris.com",
 			phone: "650.302.5029",
