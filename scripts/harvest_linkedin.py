@@ -1,7 +1,15 @@
+import io
 import os
 import re
 import sys
 from pathlib import Path
+
+# Windows cp1252 terminals raise UnicodeEncodeError on emoji output.
+# Force UTF-8 at the stream level so this script runs without PYTHONIOENCODING=utf-8.
+if hasattr(sys.stdout, 'buffer'):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+if hasattr(sys.stderr, 'buffer'):
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 # --- CONFIGURATION ---
 PROJECTS_DIR = Path(r"d:\GitHub\portfolio\src\content\projects")
