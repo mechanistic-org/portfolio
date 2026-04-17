@@ -2,7 +2,7 @@ export const linkedinMaster = {
 	tagline:
 		"Principal, Mechanistic | HITL | DRI | Structure the chaos ↔ Index the decisions → validate → ship it.",
 	about: `
-My operating system was established early. I grew up on a remote British Columbia oyster farm at the end of a highway - the literal end of the road. The ocean doesn't grade on a curve. You learn what holds and what fails.
+My operating system was established early. I grew up on a remote British Columbia oyster farm at the end of Highway 101 - the literal end of the road. The ocean doesn't grade on a curve. You learn what holds and what fails.
 
 At twelve I wanted a motorcycle. My mother said over my dead body. I said what if I pay for it. Three months later I'd felled, bucked, split, and humped nineteen cords of wood to the end of our driveway at a hundred dollars a cord. The bike cost five hundred and fifty dollars. The lesson was free.
 
@@ -10,216 +10,210 @@ The way you do anything is the way you do everything.
 
 I've spent forty years applying that logic to high-stakes physical systems - medical catheters, SGI workstations, the original Xbox, Digidesign audio consoles, Kaleidescape servers, the Avegant Glyph, automated food robots. Forty-plus commercial products. Precision mechanical design, thermal budgets, global manufacturing, regulatory compliance in environments where the physical world doesn't forgive mistakes. No git reset.
 
-In 2022 I returned to Mechanistic - the consultancy I founded in 1993 - and I brought a new set of tools with me. The same forensic methodology I apply to a thermal yield crisis or a supply chain collapse, I now apply to the architecture of intelligent systems. I build EN-OS - a locally-sovereign operating system for AI agents that runs on local hardware with no cloud dependency and no framework trust. I design the constraint structures that keep agents from hallucinating actions. I treat agentic software the way I treat a tolerance stack: every degree of freedom accounted for, every failure mode fenced before assembly.
+The same forensic methodology I apply to a thermal yield crisis or a supply chain collapse, I now apply to the architecture of intelligent systems. I build EN-OS - a locally-sovereign operating system for AI agents that runs on local hardware with no cloud dependency and no framework trust. I design the constraint structures that keep agents from hallucinating actions. I treat agentic software the way I treat a tolerance stack: every degree of freedom accounted for, every failure mode fenced before assembly.
 
 The work I want is program-level. Architectural mandate. IC with ownership over methods and tooling. Physical systems, digital systems, or the boundary where they meet. The operating system runs the same regardless of the domain.
 `,
 	experience: [
 		{
 			company: "MECHANISTIC",
-			role: "Principal | Sovereign Agent Infrastructure",
+			role: "Principal | Systems Architecture + AI Augmentation",
 			blurb: `
-In 2022 I returned to Mechanistic - the consultancy I founded in 1993 - and applied the same forensic methodology from physical systems work to the architecture of intelligent execution environments. The primary output is EN-OS: a locally-sovereign operating system for AI agents.
+Architecture, systems design, and manufacturing process from concept through production - augmented by AI infrastructure built and operated in-house.
 
-The constraint problem in agent systems is not prompt quality - it is degree-of-freedom control. EN-OS solves this through Single-Threaded Action Masking: Python logic removes tool references from the LLM's context window at runtime, making destructive commands physically unreachable before the model evaluates them. The same instinct as rejecting a bad material at the gate rather than inspecting the finished assembly.
+· Systems Architecture: Mechanical systems design, DFM/DFA, tolerance stack analysis, manufacturing transfer, and supply chain management across consumer electronics, industrial robotics, and medical devices.
 
-Execution runs through NanoClaw - ephemeral Docker containers that enforce a hard separation between Intent mode (read-only planning) and Action mode (filesystem writes). Each invocation launches a container, executes, and exits. The ignition gate is a three-stage webhook daemon: regex subcommand ceiling to cap the injection surface, Gemini Flash semantic classifier for prompt injection detection, async container launch decoupled from the connection timeout. No persistent state survives across invocations.
+· AI Augmentation: Built and operate EN-OS - a locally-sovereign agent infrastructure. Constrained agents (tool masking, ephemeral containers, semantic classifiers) handle research, RCA synthesis, and decision documentation. They act on validated data - not guesses. The constraint methodology is identical to physical systems engineering: fence the failure modes before assembly.
 
-Context retrieval runs through mcp_enos_router - a ChromaDB vector store served over SSE/FastMCP by a PM2-managed daemon. Agents query the router; they do not scan directories. A 23MB master context file sits at the workspace root as a structural load test: any agent that reads it raw exhausts its context window. The router is the only legal path in.
+· Process Infrastructure: Live sprint state from GitHub GraphQL. Publishing pipelines on Git as state substrate - no OAuth, no external session dependency. Agent skills as formal S=(C, π, T, R) tuples with machine-readable assertion sets.
 
-Operational scaffolding: sprint_board.py queries GitHub GraphQL for live project iteration state, replacing static sprint plans with real-time triage. The LinkedIn publishing pipeline runs on Git as state substrate - no OAuth connectors, no external session dependency. Agent skills follow the formal S=(C, π, T, R) tuple with machine-readable assertion sets that make the spec executable as a continuous self-eval.
+If you need to push a hard program to the line and see around corners - that's the work I want.
 `,
 		},
 		{
 			company: "HYPHEN",
-			role: "Mechanical Engineer",
+			role: "Principal Systems Architect / Senior Mechanical Engineer",
 			blurb: `
-**Architect of the 'Augmented Makeline' (The Makeline).**
+Led mechanical design and systems architecture for the Augmented Makeline - a cobotic food assembly system for enterprise partners (Chipotle) built on a "Two-Lines-in-One" architecture: automated bowls beneath the counter, human operators above, simultaneously.
 
-I served as the lead mechanical architect for a "factory-in-a-box" capable of assembling 350 meals per hour with digital precision (±2g accuracy). This was not merely a food service appliance; it was a sovereign industrial engine operating within the chaotic, high-entropy environment of a commercial kitchen.
+· Throughput: Engineered sustained 350 meals/hour at >99% order accuracy - a 17x capacity lift over human-only lines.
 
-**The Challenge: IP69K Robotics.**
-Food robotics presents a unique hostility: the machinery must perform delicate, high-speed pick-and-place operations while surviving daily "wash-down" cycles with high-pressure, high-temperature caustic jets. My mandate was to hermetically seal a fleet of 350+ actuators without compromising serviceability.
+· Dispensing: Developed gravimetric dispenser library (Types A-F) with proprietary de-agglomeration logic to handle adversary ingredients (shredded proteins, sticky rice). Portion variance reduced from ±15% to ±2%; food waste cut by 98%.
 
-**Key Achievements:**
-▪️ **Architecture:** I designed the primary chassis and kinematic structures, integrating a 48V CAN-bus distributed control architecture that reduced cabling complexity by 40%. This allowed for a modular "blade" design where dispenser units could be hot-swapped in under 5 minutes (MTTR), critical for maintaining throughput during lunch rushes.
+· Controls: Replaced proprietary MCUs with Beckhoff C6030 IPCs running TwinCAT 3 + EtherCAT. Core isolation manages 70+ actuators at millisecond precision without interrupting IoT/HMI threads. TwinSAFE zone passivation reduced safety wiring by ~50%.
 
-▪️ **Sanitary Compliance:** I enforced strict NSF/ANSI sanitary design principles. Every surface was engineered to shed water; every joint was sealed against bacterial ingress. I replaced traditional fasteners with hygienic, crevice-free locking mechanisms and engineered custom IP69K dynamic seals for the actuator output shafts.
+· Zero-Plumb: Self-evaporating condensate and front-breathing HVAC eliminated floor drain trenching. Drop-in replacement within the standard 13.5-foot makeline footprint. Requires only a 20A / 220VAC connection.
 
-▪️ **Yield & Precision:** The system required handling diverse ingredients—from sticky rice to fragile leafy greens. I developed a library of end-effectors and hopper geometries verified through exhaustive rheological testing. The result was a dispensing accuracy of ±2g across 98% of ingredients, significantly reducing food waste compared to manual assembly.
+· Sanitation: Engineered 15-minute tool-less breakdown cycle (push-to-unlock hoppers) for NSF compliance and restaurant closing rhythms. MTTR under 5 minutes via hot-swap blade architecture.
 
-**The Reality:**
-This role was a lesson in "System Reliability." Building a robot that works once is easy; building a fleet that survives the "brutal reality" of a kitchen—where cleaning crews use fire hoses and ingredients change viscosity hourly—requires a forensic level of defensive engineering.
+· Thermal / Gear Train: Resolved axial helix migration from CTE mismatch (Acetal gears / Aluminum enclosures) with Sleeve Alignment Guides and Low-Clearance Retaining Rings.
+
+Co-inventor: "Modular System for Food Assembly" - Patent US20240164588A1.
 `,
 		},
 		{
 			company: "NOON HOME",
-			role: "Senior Mechanical Engineer",
+			role: "Principal Mechanical Architect / Head of Mechanical Engineering",
 			blurb: `
-**Systems Architect for the Noon Smart Lighting System.**
+Led mechanical architecture and engineering for Noon Home's multi-SKU smart home lighting ecosystem - concept through EVT and DVT validation across four hardware platforms.
 
-Noon was an exercise in "Invisible Engineering." The mandate was to replace standard light switches with a hyper-premium, glass-faced "Scene Controller" (The Director) that felt more like a piece of jewelry than a piece of hardware. I owned the mechanical architecture of the Room Director and the Extension Switch, driving them from early concept to mass production.
+· Director (Sativa): Integrated a 1.45-inch AMOLED touchscreen and ToF sensor array behind a monolithic curved glass Dead Front surface. Two active EVT1 failure modes: OLED delamination at 45°C from CTE mismatch (resolved with Flex-Mount PSA bracket) and rotary interface below the 150g tactile threshold required for a $500 price point (resolved with pre-loaded spring detent to recover 250g Signature Click and pass 85°C storage qual).
 
-**The Challenge: Thin-Wall Thermals & Tactility.**
-The Director packed an OLED display, a high-voltage dimmer, and Wi-Fi radios into a standard single-gang wall box. The thermal density was critical (15W heat load), and the industrial design called for a "dead-front" glass interface with no visible fasteners.
+· Waldo (Wall Plate): Architected a screwless multi-gang chassis system. Developed WC and RSS tolerance stack-up analyses to guarantee mechanical retention and 0.1mm gap reveal across mass EVT2 builds.
 
-**Key Achievements:**
-▪️ **The Floating Flexure:** I engineered a decoupled mounting architecture where the glass faceplate "floated" on a verified flexure stack. This isolated the fragile OLED and touch sensors from the immense torque applied during installation (electricians using power drills), resulting in zero installation-related screen cracks and maintaining a consistent 0.1mm gap reveal.
+· Elvis (Extension Switch): Recovered 100% EVT2 yield by diagnosing a 0.1mm CAD geometry mismatch. Pivoted assembly from PSA to structural adhesive and initiated steel tooling modifications to restore enclosure stability.
 
-▪️ **Haptic Synthesis:** We replaced the mechanical "click" with a piezo-driven haptic engine. I tuned the resonant frequency of the mounting structure to amplify the piezo output, creating a crisp, mechanical-feeling "click" on a solid glass surface. This required iterative modal analysis to eliminate parasitic buzzing and ensure the "feel" was uniform across the entire touch surface.
+· Bazooka (Dimmer Base): Redesigned geometry to eliminate installation-induced warping. Specified NyoGel 773A damping grease and dry lubricants to resolve spring contact noise across the product line.
 
-▪️ **Thermal Management:** I designed a custom die-cast aluminum heatsink that served as the primary structural spine. It maximized surface area within the constrained wall box volume, effectively dissipating the 15W load while maintaining a touch temperature below 40°C.
+· Compliance: UL 1472, UL 20, MIL-STD-1472G. Executed forensic waivers to maintain program velocity without scrapping questioned inventory.
 
-**The Reality:**
-Noon taught me the "Physics of Luxury." Premium consumer hardware is defined by what you *don't* see/feel: no rattles, no warped gaps, no hot spots. It requires an obsessively tight tolerance loop between the ID intent and the manufacturing reality.
+Acquired by Savant Systems.
+`,
+		},
+		{
+			company: "MECHANISTIC",
+			role: "Senior Mechanical Designer | 2018 – 2021",
+			blurb: `
+Product development consultancy serving micromobility, connected devices, and lighting clients from Redwood City, CA.
+
+· Bay Wheels (Lyft): Engineered an IoT module for the Bay Wheels eBike platform - system architecture through detailed part design in a ruggedized, outdoor deployment context.
+
+· eCargo Bike: System architecture through detailed part design for an electric cargo bike platform.
+
+· Connected Pet Scale: Engineering consultation and design support for a consumer IoT device.
+
+· LED Lighting System: Concept through production design and engineering support for a high-performance architectural LED system.
 `,
 		},
 		{
 			company: "AVEGANT",
-			role: "Senior Mechanical Engineer",
+			role: "Senior Mechanical Engineer | NPI / DFM / Mass Production",
 			blurb: `
-**Program Rescue: The Glyph Retinal Imaging Headset.**
+Led mechanical design, DFM, and MP implementation for the Avegant Glyph (Vulcan) - award-winning VRD head-mounted "personal theater" - from late-EVT through mass production and into next-gen platforms (Genesis, Roentgen).
 
-I was brought into Avegant as a "Firefighter" to salvage the Glyph program. The headset—a revolutionary device projecting images directly onto the retina using a micromirror array—was facing catastrophic thermal and structural failures midway through EVT.
+· CAD / NPI: 3D assemblies and 2D drawings across magnesium castings, injection-molded plastics, soft goods, and packaging. Delivered on a 234-day Tool Start → MP schedule.
 
-**The Challenge: The Magnesium Heat Sink.**
-The original design relied on active cooling that was too loud and inefficient. The core optics engine generated intense heat (equivalent to 150W/m² flux) directly against the user's temple. My mission was to silence the fans and cool the device without adding weight.
+· Optical Yield: Reversed yield collapse from 35.40% RTY (MP Week 10) to 77.87% by implementing Cleanroom protocol and O4/O7 DMD inspection stations - 10-week sprint.
 
-**Key Achievements:**
-▪️ **Thermal Architecture:** I executed a radical architectural pivot, converting the structural headband itself into a massive passive heat sink. I led the DFM for the thixomolded magnesium chassis, optimizing wall thickness and ribbing to conduct heat away from the optics engine and dissipate it across the entire headband surface area. This dropped skin-contact temperatures by 12°C and eliminated the need for high-RPM fans.
+· Headband: Resolved clamping force and fatigue failure (FMEA RPN 192) via ANSYS FEA + Central Composite Design. Selected 0.8mm 3/4 Hard CRSS at 1207 MPa / 7.5 N target. Physical destruction testing averaged 81,000 cycles vs. 51,073 FEA prediction (4.2% error) - 300% over the 25,000-cycle requirement.
 
-▪️ **Kinematic Precision:** The "Virtual Retina Display" required precise alignment of the two optical paths to the user's eyes. I engineered a ruggedized IPD (Interpupillary Distance) adjustment mechanism using a custom gear train. It withstood 1000+ cycles of adjustment and 1-meter drop tests while maintaining sub-pixel optical alignment (binocular fusion).
+· RCA / CAPA: Engineered custom PSA profile to resolve Inner Liner "flange fallout" after in-mold adhesion failed in the field. Drove T1 - T6 tooling revisions for cable kinking in telescoping ear cans (T6 failure rate: 40% at 250 cycles).
 
-▪️ **Yield Recovery:** I spent weeks on the line in China (Suzhou), diagnosing yield loss at the source. I implemented "Go/No-Go" fixture strategies for the magnesium casting to catch warpage before machining, raising the chassis yield from <60% to >95%.
+· Overseas: On-site at Intretech (Suzhou) to diagnose magnesium chassis warpage; Go/No-Go fixtures raised casting yield from <60% to >95%.
 
-**The Reality:**
-Avegant was a masterclass in "Thermodynamic Bartering." You cannot cheat physics; you can only trade mass, airflow, and surface area. My role was to negotiate that trade-off so the user never felt the heat of the engine running inches from their brain.
+Best of CES 2016.
 `,
 		},
 		{
 			company: "KALEIDESCAPE",
 			role: "Senior Mechanical Design Engineer",
 			blurb: `
-**Sole Mechanical Architect: M500, M300, Cinema One.**
+Sole Mechanical Engineer for the full Kaleidescape product family - 6 generations of premium home A/V hardware from initial concept through high-volume production and sustaining engineering. Global supply chain: Taiwan, Mexico, and Canada.
 
-Kaleidescape defines the "reference standard" for home cinema. As the Sole Mechanical Architect for the second-generation output (M-Class), I owned the physical reality of the product line—from the initial napkin sketch to the final assembly line in San Jose. My mandate was to maintain the brand's legendary build quality while dramatically reducing part count and assembly time.
+· M700 Disc Changer: Diagnosed a 100% field failure rate in a specific population. Analyzed 3,000,000+ cycle events to isolate the failure mode: friction coefficient drop in the pinch roller assembly over time. Redesigned with dual radial spring balance bars for consistent engagement force over the product lifecycle. Recovered questioned carousel inventory via revised inspection criteria - no scrap.
 
-**The Challenge: "Apple-Tier" Cosmetics at Volume.**
-The challenge wasn't just functionality; it was perfection. The chassis had to be flawless. I established a cosmetic standard so rigorous that leading sheet metal vendors initially refused to bid.
+· M500 Chassis: Stop-ship defect - resistors shearing off the PCB under handling load. Traced failure to sheet metal flexure when lifted by the corner, transmitting load directly into the PCBA. Designed a retrofit structural tray to decouple handling stress from the board. No inventory scrapped.
 
-**Key Achievements:**
-▪️ **The Cosmetic Standard:** When our primary vendor delivered a batch of 1,200 chassis with sub-standard anodization and grain consistency, I issued a "Line Down" stop-ship order. I personally inspected the inventory, rejected the lot, and forced the vendor to re-tool their finishing process. This established a new baseline for quality that defined the product's lifespan.
+· KSYSTEM-120 Manufacturing: Directed full manufacturing transfer to Sanmina in Guadalajara - on-site resolution of stop-ship issues, bilingual work instructions, Go/No-Go fixtures. Eliminated a 15% rework rate caused by a 0.005" fan tray tolerance stack-up by re-dimensioning the sheet metal.
 
-▪️ **Crisis Engineering ("Thumb of God"):** During the M500 pilot, we discovered catastrophic field failures where resistors were shearing off the PCB. I diagnosed the root cause: handling the heavy chassis by the corner caused the sheet metal to flex, driving the wall into the motherboard components. I engineered a retrofit structural tray and modified the chassis geometry to decouple external stress from the PCBA, solving the issue without scrapping inventory.
+· Supply Chain / Cost-Down: Negotiated $24/unit chassis savings transitioning from soft to staged hard tooling in China. Renegotiated heatsink extrusion pricing from $9.63 to $9.25 by redesigning the extrusion profile to reduce material content without changing thermal performance.
 
-▪️ **Design for Assembly (DFA):** I engineered the "MacDuff" chassis architecture, which consolidated three separate structural bracket assemblies into a single, folded sheet metal spine. This reduced the BOM count by 12 parts and slashed assembly time by 15 minutes per unit, directly improving gross margin.
-
-**The Reality:**
-Kaleidescape reinforced the "Dictatorship of Quality." When you are the sole architect, there is no committee to hide behind. Every gap, every screw, and every surface finish is a direct reflection of your intent.
-`,
-		},
-
-		{
-			company: "KALEIDESCAPE (ORPHEUS) - KSYSTEM-120",
-			role: "Senior Mechanical Design Engineer",
-			blurb: `
-**Bridging Legacy & Mass Production.**
-
-The KSYSTEM-120 was a pivotal transition product for Kaleidescape, moving from low-volume, high-cost server architecture to a more scalable manufacturing model. My role was to manage the manufacturing ramp and cost-down engineering (VA/VE) while maintaining the structural integrity of the high-density disk arrays.
-
-**Key Achievements:**
-▪️ **Tolerance Analysis:** I uncovered a subtle 0.005" tolerance stack-up error in the fan tray assembly that was preventing the lid from closing properly on the production line. By re-dimensioning the sheet metal variances, I eliminated a 15% rework rate at the contract manufacturer.
-
-▪️ **Vendor Management:** I directed the complete manufacturing transfer to Sanmina (Guadalajara), spending weeks on-site to resolve critical stop-ship issues. This involved creating bilingual work instructions and designing custom "Go/No-Go" fixtures for the assembly line.
-
-▪️ **Cost Reduction:** I negotiated the thermal solution pricing down from $9.63 to $9.25 per unit by redesigning the heatsink extrusion profile to use less material without compromising thermal performance, saving the company significant OPEX over the product lifecycle.
+Cinema One won CEPro Product of the Year.
 `,
 		},
 		{
 			company: "DIGIDESIGN (AVID)",
-			role: "Principal Mechanical Engineer | The 'Console Era'",
+			role: "Principal Mechanical Engineer | The Console Era",
 			blurb: `
-**Architect of the Digital Console Era (2004–2010).**
+Led mechanical architecture and manufacturing strategy for flagship Digidesign control surfaces and recording interfaces - 12+ products shipped including C|24, D-Command, SC48, ICON, 003, and the Mbox 2 family. Pro/ENGINEER + Windchill (Pro/INTRALINK) system administrator for the mechanical engineering department.
 
-For six years, I served as a Lead Mechanical Engineer and Systems Architect for Digidesign's live sound and studio divisions. I was responsible for defining the physical reality of the "Icon" and "Venue" product lines—the hardware that transitioned the music and broadcast industries from analog tape to digital Pro Tools workflows. My tenure covered the entire lifecycle of the company's most iconic flagships: **D-Control, D-Command, C|24, and SC48.**
+· C|24 RoHS Refresh: Full chassis re-architecture that eliminated ~$200/unit in legacy licensing royalties, achieved 51.80% Gross Margin despite rising raw material costs, and integrated 5.1 surround monitoring into a condensed 43-inch footprint.
 
-**The Mandate: "Industrial Art" at Scale.**
-Pro audio hardware is unique. It must possess the ruggedness of military gear (touring abuse), the aesthetic of luxury furniture (studio centerpieces), and the silence of an anechoic chamber. I owned the mechanical architecture for these systems, managing the collision of high-wattage computing (embedded Windows/DSP engines) with low-noise analog audio environments.
+· PCB Integration (Geometric Firewall): Established Data Control Drawings (DCDs) governing board outlines, keep-out zones, and connector placements. Managed integration of 19 distinct PCBs in the C|24 and 17 in the SC48 - 100% mechanical fit on initial physical builds.
 
-**Key Achievements:**
-▪️ **The Flagships (D-Control & D-Command):** I engineered the chassis and structural architecture for the Icon series. D-Control was a 7-foot modular behemoth; D-Command was its compact sibling. I solved critical yield crises (50% failure rates on structural foam) and managed the high-complexity interconnects (109 unique mechanical drawings for D-Command alone) to deliver these industry standards on schedule.
+· Yield / Warpage: Salvaged 100% of pilot cosmetic yield via a vertical hanging fixture that reduced ABS thermal warping from 2.50mm to <0.50mm without re-cutting tools. Redesigned C|24 headphone jack as a field-replaceable FRU "trap door" - MTTR from >2 hours to <10 minutes.
 
-▪️ **The Market Disruptor (SC48):** As the Architect of the SC48, I executed a ruthless "Design for Cost" strategy to deliver a fully integrated live sound console for <$15k COGS. I replaced expensive aluminum extrusions with a complex "folded steel" spine (The I-Beam) and engineered a custom 4U side-intake thermal solution to cool the embedded PC core, preventing 75°C shutdowns and saving the product line.
+· SC48 Thermal (Lux): CPU shutdown failure mode logged during pre-production stress testing (75°C threshold breached, "system shutdowned"). Executed a 16-configuration DOE matrix permuting chassis volume (3U vs 4U) and fan parameters (80mm vs 120mm, 5.6V – 12V) to empirically define the Safe Operating Area. Result: 4U layout with a 3-fan 80mm array at 12V, stabilizing internal temperature rise to 22.6°C - 13.8°C of headroom over the failed 3U configurations.
 
-▪️ **The Legacy Refresh (C|24):** I led the "Invisible" RoHS re-engineering of the best-selling C|24. Facing a "No-Bid" supply chain crisis and massive plastic warpage, I implemented novel process controls ("Vertical Gravity Cure") and bridged tooling gaps to keep the product legal and shipping to Europe without altering its iconic industrial design.
+· SC48 Cost-Down: Replaced structural aluminum extrusions with a custom folded steel "4U Rake Back I-Beam" spine, driving mechanical material costs to 20% of total COGS while absorbing the chassis height change forced by the thermal re-architecture - all under the <$15k COGS cap.
 
-**The Reality:**
-Digidesign was my "Master's Degree" in high-fidelity engineering. It taught me how to manage 1000+ part BOMs, how to negotiate with physics to cool silent computers, and how to build hardware that feels like it will last forever—because in a studio, it has to.
+· Compliance: D-Command secured UL/FCC Class A certification for injection-molded ABS enclosures using targeted shielding strategies.
+
+SC48 (Venue Mix Rack) won a TEC Award for Sound Reinforcement Console Technology.
 `,
 		},
 
 		{
-			company: "WEBTV (MICROSOFT) - GALAXY",
-			role: "Principal Mechanical Architect",
+			company: "MECHANISTIC",
+			role: "Senior Mechanical Designer | 1998 – 2003",
 			blurb: `
-**Architect of the WebTV Plus Receiver.**
+Product design consultancy based in San Jose, CA. Served Microsoft, WebTV, Motorola, Netscreen, and Hewlett Packard across the full product lifecycle - initial concept through high-volume manufacturing transfer.
 
-Galaxy was the first attempt to put a full PC architecture (AMD K7) into a fanless, consumer-friendly set-top box. It was a war against heat. As Principal Architect, I owned the thermal and structural definition of the product.
+Specialty: Class-A surface development for consumer electronics requiring tight gap, material, and finish standards in coordination with industrial designers.
 
-**Key Achievements:**
-▪️ **Thermal Architecture:** The system generated 150 Watts of heat in a confined plastic box. I engineered a "wind tunnel" chassis design that pulled 28.3 CFM of air through the system using a custom, silent blower, maintaining component operational temperatures without sounding like a jet engine.
+· Xbox / UltimateTV (Microsoft): Mechanical design on two of Microsoft's highest-profile consumer hardware programs.
 
-▪️ **Warpage Control (Hook 29):** The large, flat plastic chassis was prone to warping. I designed a specific interlocking feature ("Hook 29") along the parting line that forced the top and bottom case halves to align perfectly during assembly, resolving 100% of the cosmetic warpage defects.
+· WebTV Set-Top (Galaxy): Fitted a full AMD K7 PC architecture into a consumer plastic enclosure at 150W. Engineered a wind tunnel chassis pulling 28.3 CFM via a custom silent blower. Designed Hook 29 - a parting-line interlocking feature that eliminated 100% of cosmetic warpage defects.
 
-▪️ **Program Management:** I managed a monthly prototype budget of $14.2k, driving parallel deliverables for Galaxy, Mercury, and the early Xbox definition, ensuring that engineering intent was preserved through the chaotic "dot-com" rapid scaling phase.
+· WebTV Keyboard (Cortez): 43-hour CAD sprint to loft a 3-to-15 degree variable IR lens into an organic housing. Caught a 0.05mm key pitch discrepancy in the tooling database before steel was cut - cumulatively critical across full keyboard width.
+
+· WebTV Server (Elmer): 9 days CAD to operational hardware for CES 2001. 5 servers + 12 node units. Single fastener standard (4-40 UNC only) to enable any-person assembly on a 24-hour build window.
+
+· Motorola MP3 Player: Full chassis surface and engineering. CES 2002 Design honoree.
+
+· Additional programs: Netscreen-500, HP Jornada 430 PDA, SGI 540 Visual Workstation, DVDO Portable DVD Player, Echelon LonWorks network controllers.
 `,
 		},
 		{
-			company: "WEBTV (MICROSOFT) - CORTEZ",
-			role: "Product Designer",
+			company: "FROGDESIGN",
+			role: "Mechanical Designer | 1997 – 1999",
 			blurb: `
-**Mechanical Design: The WebTV Wireless Keyboard.**
+Global product design consultancy - industrial design, engineering, and brand services across a rapid-cadence client portfolio. Concept-to-CAD in days, not months. Delivered mechanical design from feasibility through tooling and pilot builds across medical devices, consumer electronics, and satellite systems.
 
-The Cortez keyboard was a lesson in accurate surfacing. The Industrial Design intent called for a complex, organic "wave" shape that had to function as a rigid mechanical housing.
+Specialty: Class-A surface development - translating industrial design intent into manufacturable geometries across injection molding and sheet metal.
 
-**Key Achievements:**
-▪️ **Surface Geometry:** To ensure the wireless keyboard worked from the couch, we needed a variable IR transmission angle. I executed a 43-hour CAD sprint to loft a complex 3-to-15 degree variable lens geometry into the organic housing, ensuring reliable signal connectivity regardless of how the user held the device.
+· KaVo X-Unit / Edeca Dental Systems: Mechanical design and manufacturing support for precision clinical dental equipment - ergonomics, surface quality, and regulatory compliance requirements.
 
-▪️ **Precision Tooling:** Tracking the vendor data revealed a critical error: the ID model used a 19mm key pitch, while the vendor tooling was built for 19.05mm. Over the width of the keyboard, this 0.05mm delta accumulated to a massive misalignment. I rectified the database and forced a tooling correction before steel was cut, analyzing the database "natives" to catch the error.
+· Vadem Clio: Mechanical design for a pioneering Windows CE convertible PDA. Complex hinge architecture and thin-wall injection molding.
 
-▪️ **Vendor Management:** I unified disparate data streams from Panasonic and Silitek to deliver a lightweight 0.6kg chassis that met the ergonomic weight targets while retaining structural rigidity.
+· Newscorp Satellite TV Receiver: Consumer electronics chassis engineering through global manufacturing ramp.
 `,
 		},
 		{
-			company: "WEBTV (MICROSOFT) - ELMER",
-			role: "Lead Mechanical Engineer",
+			company: "MECHANISTIC",
+			role: "Mechanical Designer | 1993 – 1997",
 			blurb: `
-**The '9-Day' Sprint: CES Demonstration Hardware.**
+Freelance product design consultancy based in La Honda, CA. Embedded with cross-functional teams at Function Engineering, SGI, and EP Technologies - providing mechanical design from concept through manufacturing support.
 
-For CES 2001, Microsoft needed functional server prototypes ("Elmer") to demonstrate the future of the connected home. We had 9 days to go from CAD to "Show Floor."
+Specialty: complex organic surface development in Pro/ENGINEER for consumer products.
 
-**Key Achievements:**
-▪️ **Rapid Fabrication:** I orchestrated parallel workstreams between E-M Solutions (Sheet Metal) and Sputnik (Model Shop). By splitting the build, we fabricated 5 servers and 12 node units in just over a week. I was on the shop floor, redlining drawings in real-time to keep the machines running.
+· SwitchBlade / Frantic Frames: Designed and engineered the mechanical architecture for two performance inline speed skate platforms, including a quick-release wheel frame swap mechanism.
 
-▪️ **Thermal Optimization:** To ensure the CPUs didn't fry on the show floor, I redesigned the chassis perforation patterns for maximum convection and implemented "ThermaPad" gap fillers to ensure "dead nuts" flatness between the heat spreaders and the chassis.
+· Sunbeam Toast Logic Window Toaster: High-volume consumer appliance engineering where the economic constraint is fractions of a penny per stamping.
 
-▪️ **Standardization:** To prevent assembly errors during the 24-hour build marathon, I enforced a strict "4-40 UNC only" hardware policy, banning all metric fasteners from the room. This prevented cross-threading and ensured that anyone with a screwdriver could help assemble the units.
+· Additional programs: Acer Aspire Accessory Telephone, Packard Bell Convertible Desktop/Tower PC, Fissler Smokeless BBQ, SCCA Solo components.
+`,
+		},
+		{
+			company: "SILICON GRAPHICS (SGI)",
+			role: "Mechanical Designer / Technician IV",
+			blurb: `
+Technical support and mechanical design for three engineering groups developing advanced workstations and visualization systems - Indy, Indigo, Indigo II, Iris File, and the Personal Iris family.
+
+· Thermal / Acoustic Analysis: Acoustic, airflow, and thermal analysis for the Personal Iris family. Configured data acquisition systems and environmental test setups in coordination with the Agency and Reliability groups.
+
+· Lab & Vendor Management: Managed the Product Design laboratory - capital equipment and supply procurement for prototype and pre-production builds. Primary engineering liaison for outside vendors coordinating prototype parts, models, and rework services.
+
+· Supply Chain Integration: Worked alongside supply managers, supplier quality engineers, and DFM engineers to deploy complex mechanical assemblies into a multi-level supply chain. Developed enclosure sub-assembly manufacturing plans with development teams and suppliers.
+
+· Color Standards: Co-developed corporate color and surface finish standards. Specified, purchased, and installed in-house photometric equipment (spectrophotometer) for on-site color measurement.
 `,
 		},
 		{
 			company: "EARLY CAREER",
 			role: "Foundational Roles",
 			blurb: `
-**The Foundation of High-Fidelity Design.**
-
-**Mechanistic (1993–1996):**
-As a freelance design engineer, I worked on the **SwitchBlade** inline speed skate, creating a mechanism that allowed skaters to swap wheel frames instantly. I also engineered the **Sunbeam Toast Logic**, a high-volume appliance where I learned the brutal economics of consumer goods—shaving fractions of a penny off localized stampings.
-
-**Silicon Graphics (SGI) (1989–1993):**
-The "University of SGI." I performed thermal and acoustic analysis for the **Indigo** and **Indy** workstations. This was the era of the purple box. I learned how to manage prototype supply chains for high-performance computing and how to design for serviceability in complex electromechanical assemblies.
-
-**EP Technologies (1986–1989):**
-My start was in **Class III Medical Devices**. I was a Production Supervisor for cardiac ablation catheters. The stakes were absolute: zero tolerance for failure. This role instilled the "Forensic Mindset" that defines my career—every process must be validated, every deviation documented, and every outcome traceable.
+EP Technologies (1986-1989): Production Supervisor for Class III cardiac ablation catheters. Zero tolerance for failure is not a phrase - it is an inspection regime. Every process validated, every deviation documented, every outcome traceable. This is where the forensic methodology started.
 `,
 		},
 	],
