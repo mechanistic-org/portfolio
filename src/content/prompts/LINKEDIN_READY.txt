@@ -1,17 +1,18 @@
 --- 𝗧𝗔𝗚𝗟𝗜𝗡𝗘 ---
-Principal Mechanical Architect specializing in high-fidelity hardware and program rescue. I stabilize the entropy of product development: structure the chaos, index the decisions, ship the hardware.
+Principal, Mechanistic | HITL | DRI | Structure the chaos ↔ Index the decisions → validate → ship it.
 
 --- 𝗔𝗕𝗢𝗨𝗧 ---
-Operating at the intersection of high-fidelity hardware design and program rescue, I treat physical engineering with the forensic rigor of a software codebase. The difference between a rescued program and a failed one is rarely the capability of the engineer; it is almost always the fidelity of the record.
+My operating system was established early. I grew up on a remote British Columbia oyster farm at the end of a highway - the literal end of the road. The ocean doesn't grade on a curve. You learn what holds and what fails.
 
-I architect the hardware interface for the physical world, document the product reality, and transform digital exhaust into stories. From napkin geometry to production tooling, from abstract mechanical concepts to validated physical constraints, my methodology is absolute:
+At twelve I wanted a motorcycle. My mother said over my dead body. I said what if I pay for it. Three months later I'd felled, bucked, split, and humped nineteen cords of wood to the end of our driveway at a hundred dollars a cord. The bike cost five hundred and fifty dollars. The lesson was free.
 
-Stabilize the entropy of product development — structure the chaos, index the decisions, ship the hardware.
+The way you do anything is the way you do everything.
 
-To capture this discipline, I built an operating system for professional identity. It is a custom, Git-versioned portfolio engine that forensically indexes mechanical architecture, consumer product design, and program rescue into a searchable record of reality.
+I've spent forty years applying that logic to high-stakes physical systems - medical catheters, SGI workstations, the original Xbox, Digidesign audio consoles, Kaleidescape servers, the Avegant Glyph, automated food robots. Forty-plus commercial products. Precision mechanical design, thermal budgets, global manufacturing, regulatory compliance in environments where the physical world doesn't forgive mistakes. No git reset.
 
-eriknorris.com
-github.com/eriknorris/eriknorris
+In 2022 I returned to Mechanistic - the consultancy I founded in 1993 - and I brought a new set of tools with me. The same forensic methodology I apply to a thermal yield crisis or a supply chain collapse, I now apply to the architecture of intelligent systems. I build the infrastructure that runs the agents. I design the constraint structures that keep them from hallucinating actions. I treat agentic software the way I treat a tolerance stack: every degree of freedom accounted for, every failure mode fenced before assembly.
+
+The work I want is program-level. Architectural mandate. IC with ownership over methods and tooling. Physical systems, digital systems, or the boundary where they meet. The operating system runs the same regardless of the domain.
 
 ========================================
 

@@ -4,29 +4,50 @@ category: "compression"
 role: "Forensic Engineering Analyst"
 input_type: "Raw NLM Data"
 output_format: "JSON"
-system_instructions: "Extract Bill of Materials (Parts) data into JSON."
+system_instructions: "Extract Bill of Materials, tooling, materials, and manufacturing complexity into strict JSON."
 ---
 
 ### Forensic Data Extraction: Parts & BOM JSON
 
-**CONTEXT:** You are the Forensic Engineering Analyst for Erik Norris. **Constraint:** Output JSON ONLY. No conversational text. Do not wrap the JSON in Markdown code blocks. Just output the raw JSON object.
+**CONTEXT:** You are the Forensic Engineering Analyst for Erik Norris. Output JSON ONLY. No conversational text. Do not wrap the JSON in Markdown code blocks.
 
 **DISCOVERY HEURISTICS:**
-1.  Extract **EVERY** specific Part Number, Material, Tooling Type, and Sub-assembly mentioned anywhere in the source documents. Leave no part behind.
-2.  Flag all parts involved in ECOs (Engineering Change Orders), physical failures, or cost-down initiatives.
-3.  Group the parts logically based on their assembly or subsystem.
+1. Extract every specific part number, material, tooling process, subassembly, vendor, and inspection datum mentioned in the source documents.
+2. Flag parts involved in ECOs, physical failures, cost-down initiatives, serviceability fixes, or yield crises.
+3. Group parts by subsystem when the source supports it.
+4. Preserve current-site projection fields (`label`, `value`) while adding richer canonical fields.
 
 **OUTPUT SCHEMA:**
 ```json
 {
+  "schema_version": "deep-dive.v0.1",
+  "slug": "[project-slug]",
   "bom": [
     {
-      "part_number": "[Part Number or N/A]",
-      "description": "[Highly specific engineering description of the Part/Material]",
-      "material": "[Extract exact material specifications, e.g., AL6061-T6, PC/ABS]",
-      "tooling": "[Extract exact tooling methods, e.g., Progressive Die, Class A Injection Mold]",
-      "vendor": "[Vendor if known]"
+      "label": "[Current-site display label]",
+      "value": "[Part number or short value]",
+      "part_number": "[Part number or null]",
+      "description": "[Specific engineering description]",
+      "subsystem": "[Subsystem or assembly]",
+      "material": "[Exact material specification or null]",
+      "tooling": "[Tooling/process method or null]",
+      "vendor": "[Vendor if known]",
+      "risk_flags": ["eco", "yield", "serviceability", "cost_down", "quality", "regulatory"],
+      "linked_crisis_ids": ["[crisis-id if known]"],
+      "source_refs": ["[Source filename]"],
+      "confidence": "high | medium | low"
     }
-  ]
+  ],
+  "complexity_vector": {
+    "part_count_growth": [],
+    "process_density": [],
+    "tooling_chain": [],
+    "supply_chain_nodes": []
+  },
+  "extraction_notes": {
+    "missing": [],
+    "ambiguous": [],
+    "do_not_claim": []
+  }
 }
 ```

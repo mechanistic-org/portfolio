@@ -12,7 +12,7 @@
 		"check:hud": "node scripts/_archive/verify_deep_hud.cjs",
 		"content:hydrate": "python scripts/hydrate_content.py",
 		"content:modernize": "python scripts/modernize_content.py",
-		"assets:process": "python scripts/process_assets.py",
+		"assets:process": "python ../global_agent/scripts/process_assets.py",
 		"test:visual": "npx tsx scripts/visual_smoke_test.ts"
 	},
 	"dependencies": {

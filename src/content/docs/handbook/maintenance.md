@@ -15,6 +15,7 @@ This document serves as the first line of defense for system issues, build failu
 
 These tasks are now automated via Slash Commands in the IDE.
 
+- **Runtime Rule:** Agent-critical scripts must use explicit interpreters. Use `D:\GitHub\global_agent\venv\Scripts\python.exe` for session-open/global-agent checks, and use the Codex bundled Python/Node under `C:\Users\erik\.cache\codex-runtimes\codex-primary-runtime\dependencies\` for sandboxed portfolio validation.
 - **New Project:** `/scaffold-project` (Generates strict C24 Schema).
 - **Deploy:** `/deploy-production` (Verify Build + Push to Main).
 - **New Project:** `/scaffold-project` (Generates strict C24 Schema).

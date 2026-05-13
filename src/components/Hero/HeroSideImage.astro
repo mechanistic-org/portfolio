@@ -1,12 +1,12 @@
 ---
 import siteData from "@config/siteData.json";
+import { getAssetUrl } from "@/utils/assets";
 
-const ASSET_DOMAIN = import.meta.env.PROD ? "https://assets.eriknorris.com" : "";
 // 1. YOUR 3D LOGO
-const MODEL_URL = `${ASSET_DOMAIN}/_site/EN_Logo_MatteCarbon.glb`;
+const MODEL_URL = getAssetUrl("/assets/_site/EN_Logo_MatteCarbon.glb");
 
 // 2. YOUR PNG POSTER (Transparency Support)
-const POSTER_URL = `${ASSET_DOMAIN}/_site/EN_Badge_wire_rusty_1200.png`;
+const POSTER_URL = getAssetUrl("/assets/_site/EN_Badge_wire_rusty_1200.png");
 import ScrambleText from "@components/Effects/ScrambleText";
 ---
 

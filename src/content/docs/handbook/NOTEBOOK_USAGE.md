@@ -1,82 +1,92 @@
 ---
-title: "NotebookLM Mining Guide (v2.0)"
+title: "NotebookLM Mining Guide"
 slug: "notebook-usage"
 sidebar:
   group: "Handbook"
   order: 22
 ---
 
-# 📓 NotebookLM Mining Guide (v2.0)
+# NotebookLM Mining Guide (v3.0)
 
-**Role:** The "Operator Manual" for the Three Vector Mining Campaign.
-**Tool:** Google NotebookLM (Experimental).
+**Role:** Operator manual for schema-first NotebookLM mining.
+**Tool:** Google NotebookLM.
 
-## Concept: "The Cartridge System"
+## Concept: The Cartridge System
 
-NotebookLM is powerful but drifts easily. To keep it on track, we use "Prompt Cartridges" (`_READY.txt` files) that reprogram its behavior for specific extraction tasks.
+NotebookLM is powerful but drifts easily. To keep it on track, use compiled prompt cartridges in `public/assets/prompts/`. Source prompts live in `src/content/prompts/` and are compiled with `scripts/compile_hack_pack.py`.
 
-| Vector            | Cartridge                                                                                             | Output Artifact     | Goal                                  |
-| :---------------- | :---------------------------------------------------------------------------------------------------- | :------------------ | :------------------------------------ |
-| **1. Narrative**  | [`REPORT_READY.txt`](file:///d:/GitHub/portfolio/src/content/prompts/REPORT_READY.txt)               | `forensic_summary`  | The Story (War Stories).              |
-| **2. Complexity** | [`COMPLEXITY_READY.txt`](file:///d:/GitHub/portfolio/src/content/prompts/COMPLEXITY_READY.txt)       | `complexity_vector` | The Mass (BOM/Process/Tooling).       |
-| **3. Entropy**    | [`SEISMOGRAPH_READY.txt`](file:///d:/GitHub/portfolio/src/content/prompts/SEISMOGRAPH_READY.txt)     | `_entropy.json`     | The Pulse (Event Log).                |
-| **4. Meta**       | [`META_ANALYSIS_READY.txt`](file:///d:/GitHub/portfolio/src/content/prompts/META_ANALYSIS_READY.txt) | `isomorphics`       | The Pattern (Cross-Project Analysis). |
-
----
+| Vector | Cartridge | Output Artifact | Goal |
+| :-- | :-- | :-- | :-- |
+| Consolidation | `BOLUS_NLM-INPUT.txt` | reviewed bolus candidate | Canonical schema pass |
+| Metrics | `METRICS_NLM-INPUT.txt` | `_metrics.json` candidate | Relative metrics and quantified results |
+| Narrative | `REPORT_NLM-INPUT.txt` | `_intelligence.md` candidate | Dense forensic report |
+| Crises | `VIGNETTES_NLM-INPUT.txt` | `_crises.md` / crisis JSON candidate | Scar ledger |
+| Cast | `TEAM_NLM-INPUT.txt` | `cast` candidate | People, roles, vendors |
+| Timeline | `TIMELINE_NLM-INPUT.txt` | `_entropy.json` / `timeline` candidate | Chronology and event pulses |
+| BOM | `BOM_NLM-INPUT.txt` | `bom` / `complexity_vector` candidate | Parts, materials, tooling |
+| Audio | `PODCAST_NLM-INPUT.txt` | audio briefing | Tribunal-style discussion from reviewed facts |
 
 ## Workflow: The Mining Loop
 
-### Phase 1: Setup (The Notebook)
+### Phase 1: Setup
 
-1.  Create a **New Notebook** for the Project (e.g., "C24 Analysis").
-2.  **Upload Sources:** PDFs, Emails, Specs. (Do not upload generic marketing fluff).
-3.  **Wait** for indexing to complete.
+1. Create a new notebook for the project or use the existing project notebook.
+2. Upload source material: PDFs, emails, CAD logs, inspection reports, ECOs, DCDs, photos, spreadsheets. Avoid generic marketing material unless it is explicitly needed for launch context.
+3. Record notebook ID, title, source count, source families, and known gaps in the local manifest or the relevant issue/doc.
+4. Wait for indexing to complete before running prompts.
 
-### Phase 2: Load Cartridge (System Instructions)
+### Phase 2: Load Cartridge
 
-1.  Open **Notebook Settings** (or "Customize Chat").
-2.  **Paste** the content of the desired `_READY.txt` file into the "System Instructions" box.
-3.  **Save.** The Notebook is now in that specific "Mode."
+1. Open Notebook Settings or Customize Chat.
+2. Paste the content of the desired compiled cartridge from `public/assets/prompts/`.
+3. Save. The Notebook is now in that extraction mode.
 
-> **Tip:** You cannot mix modes easily. It is often better to clear the chat context or toggle the System Instructions when switching vectors.
+Do not blend modes in a single run. Clear chat or switch instructions between vectors.
 
-### Phase 3: Extraction (The Chat)
+### Phase 3: Extraction
 
-1.  **Type the Trigger Phrase** (e.g., "Extract Complexity Vector").
-2.  The AI will output a **Structured JSON** or **Markdown** block.
-3.  **Copy** the output.
+1. Type a short trigger such as `Extract the schema payload for this project.`
+2. The AI should output strict JSON or Markdown, depending on the cartridge.
+3. Copy the output without repairing it inside NotebookLM.
 
-### Phase 4: Ingestion (The Code)
+### Phase 4: Local Ingestion
 
-1.  **Paste** the data into the repo:
-    - **Complexity:** `index.mdx` (Frontmatter).
-    - **Entropy:** `_entropy.json` (Sidecar).
-    - **Narrative:** `index.mdx` (Body).
-2.  **Verify** in Local Preview (`npm run dev`).
-3.  **Log** completion in [`MINING_LOG.md`](file:///d:/GitHub/portfolio/src/content/docs/project/MINING_LOG.md).
+1. Save raw output in `src/content/_raw_nlm/`.
+2. Normalize reviewed output into sidecars:
+   - Metrics/results/cast/timeline/toolchain: `src/content/projects/{slug}/_metrics.json`
+   - Crisis ledger: `src/content/projects/{slug}/_crises.md`
+   - Entropy stream: `src/content/projects/{slug}/_entropy.json`
+   - Narrative bolus: `src/content/projects/{slug}/_intelligence.md`
+3. Project validated fields into `index.mdx` only after sidecars are reviewed.
+4. Verify locally with schema/build checks before visual or Assembly work.
 
----
+## Remine/Refine Protocol
 
-## The Forensic Style Protocol (Feb 2026)
+1. Freeze the NotebookLM input set and record source count.
+2. Run one cartridge at a time.
+3. Diff raw output against existing raw output and sidecars.
+4. If the model drifts, refine the cartridge or add missing sources. Do not hand-edit hallucinations into "truth".
+5. Normalize only reviewed data into sidecars.
+6. Compile prompt cartridges after changing source prompts:
 
-**The Split Brain Architecture:**
+```powershell
+& 'C:\Users\erik\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe' scripts\compile_hack_pack.py
+```
 
-1.  **Audio Overview (The Studio):**
-    - **Instruction:** [`PODCAST_READY.txt`](file:///d:/GitHub/portfolio/src/content/prompts/PODCAST_READY.txt).
-    - **Role:** The **Talent**. Two hosts (Skeptic vs. Strategist) debating the engineering merits.
-    - **Source of Truth:** [`GOLDEN_DIALOGUE_CORPUS.md`](file:///d:/GitHub/portfolio/src/content/docs/meta/GOLDEN_DIALOGUE_CORPUS.md).
-    - **Protocol:** You MUST upload `GOLDEN_DIALOGUE_CORPUS.md` as a source and **Select It**. This file acts as the "Style Anchor," forcing the model to use specific metaphors ("Red Gold", "Forensic Architect") instead of generic banter.
+## Audio Overview
 
-2.  **Configure Chat (The Control Room):**
-    - **Instruction:** [`REPORT_READY.txt`](file:///d:/GitHub/portfolio/src/content/prompts/REPORT_READY.txt).
-    - **Role:** The **Fact Checker**.
-    - **Why:** When the Audio Hosts make a claim (e.g., "He rejected 1,200 parts"), you use the Chat window to verify it. By setting the Chat to `REPORT_READY`, the bot becomes a Forensic Analyst, primed to validate specific data points against the uploaded specs.
+The audio overview is downstream of reviewed data.
 
-## The "Meta-Analysis" (Endgame)
+- Instruction: `PODCAST_NLM-INPUT.txt`
+- Source of truth: reviewed bolus/report/metrics/crisis data
+- Rule: audio must not introduce new facts, new numbers, or new people
 
-**Trigger:** When **12+ Projects** are hydrated.
+When the Audio Hosts make a claim, use NotebookLM chat with the report or metrics cartridge to verify the claim against uploaded specs before shipping the audio.
 
-1.  Create a **"Master Notebook"**.
-2.  Upload the **JSON Outputs** from the previous steps (e.g., `c24.json`, `d-control.json`) as sources.
-3.  Load the `META_ANALYSIS_READY.txt` cartridge.
-4.  Run the analysis to find "Structural Rhymes" across the career.
+## Meta-Analysis
+
+When 12+ projects have reviewed `_metrics.json` and `_crises.md` sidecars:
+
+1. Create a master notebook.
+2. Upload the reviewed sidecars, not the raw NotebookLM transcripts.
+3. Run a separate cross-project analysis prompt to identify recurring structural patterns.
