@@ -153,7 +153,14 @@ export default function UnifiedDashboard({
 				{/* Consumes 8 cols */}
 				<div className="group relative overflow-hidden rounded-sm border border-neutral-800 bg-neutral-950 lg:col-span-8">
 					<div className="bg-primary/50 absolute top-0 left-0 h-1 w-full"></div>
-					<div className="relative z-10 flex h-full flex-col bg-[url('/assets/ui/grid-pattern.svg')] bg-cover p-8">
+					<div
+						className="relative z-10 flex h-full flex-col bg-neutral-950 p-8"
+						style={{
+							backgroundImage:
+								"linear-gradient(rgba(46,92,255,0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(46,92,255,0.22) 1px, transparent 1px), linear-gradient(rgba(46,92,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(46,92,255,0.1) 1px, transparent 1px)",
+							backgroundSize: "48px 48px, 48px 48px, 24px 24px, 24px 24px",
+						}}
+					>
 						<div className="mb-6 flex items-center justify-between border-b border-neutral-800 pb-4">
 							<h3 className="font-header text-xl font-bold tracking-widest text-white">
 								<span className="text-primary mr-2">///</span> GLOBAL SKILL ARCHITECTURE

@@ -71,7 +71,10 @@ const date = pubDate ? new Date(pubDate) : new Date();
 				}
 
 				{/* Overlay Grid */}
-				<div class="pointer-events-none absolute inset-0 bg-[url('/assets/grid.svg')] opacity-20">
+				<div
+					class="pointer-events-none absolute inset-0 opacity-20"
+					style="background-image: linear-gradient(rgba(255,255,255,0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.18) 1px, transparent 1px); background-size: 32px 32px;"
+				>
 				</div>
 			</div>
 
