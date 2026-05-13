@@ -1,4 +1,4 @@
-import type { DataEntryMap } from "astro:content";
+import type { CollectionKey } from "astro:content";
 import { getCollection } from "astro:content";
 import { getRelativeLocaleUrl } from "astro:i18n";
 
@@ -246,7 +246,7 @@ export async function getLocalizedPathname(
  */
 export async function generateRouteTranslations() {
 	// List of content collections to include
-	const collections = Object.keys(localizedCollections) as Array<keyof DataEntryMap>;
+	const collections = Object.keys(localizedCollections) as CollectionKey[];
 
 	// Initialize base translations with existing static translations
 	const dynamicRouteTranslations: Record<string, Record<string, string>> = Object.fromEntries(
