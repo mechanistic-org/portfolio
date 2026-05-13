@@ -222,6 +222,10 @@ export default config({
 					options: PRODUCTION_SCALE.map((s) => ({ label: s.label, value: s.value })),
 					defaultValue: PRODUCTION_SCALE[0].value,
 				}),
+				statusLabel: fields.text({
+					label: "Status Label",
+					description: "Optional display label for project status surfaces.",
+				}),
 
 				// --------------------------------------------------------------------------
 				// 4. Role & Employment
@@ -301,10 +305,24 @@ export default config({
 					label: "Additional Skills",
 					itemLabel: (props) => props.value,
 				}),
+				skillGraph: fields.text({
+					label: "Skill Graph",
+					description: "Optional serialized or referenced skill graph payload.",
+				}),
+				partGraph: fields.text({
+					label: "Part Graph",
+					description: "Optional serialized or referenced part graph payload.",
+				}),
 				// --------------------------------------------------------------------------
 				// 6. Deep Dive Data (Malleable Payload)
 				// --------------------------------------------------------------------------
 				// Highly bespoke forensic data (BOM, Scars, Metrics) has been detached from Keystatic.\n				// The Astro component <DeepDataHUD /> dynamically renders JSON from src/content/_raw_nlm/\n
+				stats: fields.object({
+					plastic: fields.number({ label: "Plastic Parts", defaultValue: 0 }),
+					metal: fields.number({ label: "Metal Parts", defaultValue: 0 }),
+					pcb: fields.number({ label: "PCB Count", defaultValue: 0 }),
+				}),
+
 				// --------------------------------------------------------------------------
 				// 8. Media & Links
 				// --------------------------------------------------------------------------
@@ -336,6 +354,16 @@ export default config({
 					{
 						label: "Documents",
 						itemLabel: (props) => props.fields.label.value,
+					},
+				),
+				links: fields.array(
+					fields.object({
+						name: fields.text({ label: "Name" }),
+						url: fields.text({ label: "URL" }),
+					}),
+					{
+						label: "Links",
+						itemLabel: (props) => props.fields.name.value || props.fields.url.value,
 					},
 				),
 

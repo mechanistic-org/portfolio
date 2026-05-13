@@ -8,7 +8,7 @@
 		"build": "node scripts/ci-prebuild.js && astro build && npx -y pagefind --site dist",
 		"preview": "astro preview",
 		"astro": "astro",
-		"audit:frontmatter": "node scripts/_archive/audit_frontmatter.cjs",
+		"audit:frontmatter": "node scripts/audits/validate_yaml_js.js",
 		"check:hud": "node scripts/_archive/verify_deep_hud.cjs",
 		"content:hydrate": "python scripts/hydrate_content.py",
 		"content:modernize": "python scripts/modernize_content.py",

@@ -1,74 +1,248 @@
 #!/usr/bin/env python3
 """
-check_schema_parity.py
+Top-level schema drift check for portfolio#61.
 
-Checks for schema drift between Zod (content.config.ts) and Keystatic (keystatic.config.tsx).
-Extracts field names and reports any fields present in Zod that are missing in Keystatic.
-Issue: portfolio#61
+This intentionally checks only the Projects collection's top-level fields.
+Nested object members are not Keystatic collection fields and should not be
+reported as drift.
 """
 
+from __future__ import annotations
+
+import argparse
 import re
 import sys
 from pathlib import Path
 
-# Fields that are explicitly allowed to exist in Zod but not Keystatic
-# We can expand this if we find intentional mismatches
-IGNORED_FIELDS = {
-    # e.g., 'forensic_data' (deprecated/never used in UI anymore)
-    'forensic_data'
+DETACHED_PROJECT_FIELDS = {
+    # Deprecated or sidecar-first deep-dive payloads. These are rendered by
+    # Astro and local sidecars, not edited directly in Keystatic.
+    "bom",
+    "complexity_vector",
+    "events",
+    "forensic_data",
+    "forensic_metrics",
+    "forensic_summary",
+    "isomorphics",
+    "metrics",
+    "phase_stats",
+    "scars",
+    "timeline",
 }
 
-def get_zod_fields(content_str: str) -> set:
-    fields = set()
-    matches = re.finditer(r'^\s*([a-zA-Z0-9_]+)\s*:\s*(?:z\.|z\n)', content_str, re.MULTILINE)
-    for m in matches:
-        fields.add(m.group(1))
-    
-    # Alternatively find fields where z is on the next line
-    matches_next_line = re.finditer(r'^\s*([a-zA-Z0-9_]+)\s*:\s*\n\s*z\.', content_str, re.MULTILINE)
-    for m in matches_next_line:
-        fields.add(m.group(1))
-        
-    return fields
 
-def get_keystatic_fields(content_str: str) -> set:
-    fields = set()
-    matches = re.finditer(r'^\s*([a-zA-Z0-9_]+)\s*:\s*fields\.', content_str, re.MULTILINE)
-    for m in matches:
-        fields.add(m.group(1))
-    return fields
+class ParseError(RuntimeError):
+    pass
 
-def main():
+
+def _find_balanced_body(source: str, open_index: int) -> str:
+    if open_index < 0 or source[open_index] != "{":
+        raise ParseError("balanced body search must start at an opening brace")
+
+    depth = 0
+    quote: str | None = None
+    in_line_comment = False
+    in_block_comment = False
+    escape = False
+
+    for index in range(open_index, len(source)):
+        char = source[index]
+        next_char = source[index + 1] if index + 1 < len(source) else ""
+
+        if in_line_comment:
+            if char in "\r\n":
+                in_line_comment = False
+            continue
+
+        if in_block_comment:
+            if char == "*" and next_char == "/":
+                in_block_comment = False
+            continue
+
+        if quote:
+            if escape:
+                escape = False
+            elif char == "\\":
+                escape = True
+            elif char == quote:
+                quote = None
+            continue
+
+        if char == "/" and next_char == "/":
+            in_line_comment = True
+            continue
+
+        if char == "/" and next_char == "*":
+            in_block_comment = True
+            continue
+
+        if char in ("'", '"', "`"):
+            quote = char
+            continue
+
+        if char == "{":
+            depth += 1
+            continue
+
+        if char == "}":
+            depth -= 1
+            if depth == 0:
+                return source[open_index + 1 : index]
+
+    raise ParseError("unterminated object body")
+
+
+def _extract_top_level_keys(object_body: str) -> set[str]:
+    keys: set[str] = set()
+    index = 0
+    depth = 0
+    quote: str | None = None
+    in_line_comment = False
+    in_block_comment = False
+    escape = False
+
+    while index < len(object_body):
+        char = object_body[index]
+        next_char = object_body[index + 1] if index + 1 < len(object_body) else ""
+
+        if in_line_comment:
+            if char in "\r\n":
+                in_line_comment = False
+            index += 1
+            continue
+
+        if in_block_comment:
+            if char == "*" and next_char == "/":
+                in_block_comment = False
+                index += 2
+                continue
+            index += 1
+            continue
+
+        if quote:
+            if escape:
+                escape = False
+            elif char == "\\":
+                escape = True
+            elif char == quote:
+                quote = None
+            index += 1
+            continue
+
+        if char == "/" and next_char == "/":
+            in_line_comment = True
+            index += 2
+            continue
+
+        if char == "/" and next_char == "*":
+            in_block_comment = True
+            index += 2
+            continue
+
+        if char in ("'", '"', "`"):
+            quote = char
+            index += 1
+            continue
+
+        if char in "{[(":
+            depth += 1
+            index += 1
+            continue
+
+        if char in "}])":
+            depth -= 1
+            index += 1
+            continue
+
+        if depth == 0 and (char.isalpha() or char == "_"):
+            match = re.match(r"[A-Za-z_][A-Za-z0-9_]*", object_body[index:])
+            if match:
+                name = match.group(0)
+                after_name = index + len(name)
+                if object_body[after_name:].lstrip().startswith(":"):
+                    keys.add(name)
+                    index = after_name
+                    continue
+
+        index += 1
+
+    return keys
+
+
+def _project_zod_body(source: str) -> str:
+    marker = "const projectsCollection"
+    start = source.find(marker)
+    if start == -1:
+        raise ParseError("could not find projectsCollection")
+
+    zod_call = source.find("z.object", start)
+    if zod_call == -1:
+        raise ParseError("could not find projectsCollection z.object")
+
+    open_brace = source.find("{", zod_call)
+    return _find_balanced_body(source, open_brace)
+
+
+def _project_keystatic_schema_body(source: str) -> str:
+    marker = "projects: collection"
+    start = source.find(marker)
+    if start == -1:
+        raise ParseError("could not find Keystatic projects collection")
+
+    collection_open = source.find("{", start)
+    collection_body = _find_balanced_body(source, collection_open)
+    schema_match = re.search(r"\bschema\s*:", collection_body)
+    if not schema_match:
+        raise ParseError("could not find Keystatic projects schema")
+
+    schema_open = collection_body.find("{", schema_match.end())
+    return _find_balanced_body(collection_body, schema_open)
+
+
+def get_project_zod_fields(source: str) -> set[str]:
+    return _extract_top_level_keys(_project_zod_body(source))
+
+
+def get_project_keystatic_fields(source: str) -> set[str]:
+    return _extract_top_level_keys(_project_keystatic_schema_body(source))
+
+
+def find_missing_fields(zod_source: str, keystatic_source: str) -> list[str]:
+    zod_fields = get_project_zod_fields(zod_source)
+    keystatic_fields = get_project_keystatic_fields(keystatic_source)
+    return sorted(zod_fields - keystatic_fields - DETACHED_PROJECT_FIELDS)
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Check Projects schema parity.")
+    parser.add_argument("--advisory", action="store_true", help="Report drift but exit 0.")
+    args = parser.parse_args()
+
     root = Path(__file__).resolve().parent.parent
     zod_path = root / "src" / "content.config.ts"
-    ks_path = root / "keystatic.config.tsx"
+    keystatic_path = root / "keystatic.config.tsx"
 
-    if not zod_path.exists() or not ks_path.exists():
-        print("❌ Error: Could not find schema files to compare.")
-        sys.exit(1)
+    try:
+        zod_source = zod_path.read_text(encoding="utf-8")
+        keystatic_source = keystatic_path.read_text(encoding="utf-8")
+        missing = find_missing_fields(zod_source, keystatic_source)
+    except OSError as error:
+        print(f"[schema-parity] ERROR: {error}", file=sys.stderr)
+        return 1
+    except ParseError as error:
+        print(f"[schema-parity] ERROR: {error}", file=sys.stderr)
+        return 1
 
-    zod_content = zod_path.read_text(encoding="utf-8")
-    ks_content = ks_path.read_text(encoding="utf-8")
-
-    zod_fields = get_zod_fields(zod_content)
-    ks_fields = get_keystatic_fields(ks_content)
-
-    zod_fields -= IGNORED_FIELDS
-
-    missing_in_keystatic = zod_fields - ks_fields
-
-    if missing_in_keystatic:
-        print("⚠️ SCHEMA DRIFT DETECTED: Zod fields missing in Keystatic")
-        print("    (Running in ADVISORY MODE: CI will not fail, but please sync eventually.)\n")
-        
-        for field in sorted(missing_in_keystatic):
+    if missing:
+        print("[schema-parity] Drift detected: Zod project fields missing in Keystatic")
+        for field in missing:
             print(f"  - {field}")
-        
-        print("\nFix: Add these fields to keystatic.config.tsx to unblock Keystatic.")
-        sys.exit(0) # Advisory only, do not block CI while schema stabilizes
-        
-    print("✅ Schema Parity OK (Zod → Keystatic)")
-    sys.exit(0)
+        print("\nAdd these top-level fields to keystatic.config.tsx or add an intentional exception.")
+        return 0 if args.advisory else 1
+
+    print("[schema-parity] OK: Projects Zod top-level fields match Keystatic")
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
