@@ -4,6 +4,7 @@ import json
 raw_dir = r"src\content\_raw_nlm"
 files = [
     "c24_bolus.json",
+    "c24_metrics.json",
     "c24_development_timeline.md",
     "c24_team.md",
     "c24_parts.md",

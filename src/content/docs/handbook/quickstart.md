@@ -11,6 +11,22 @@ description: Documentation for Quickstart (Cheat Sheet).
 > **Role:** Operator / Pilot
 > **Objective:** Maintain, Update, and Deploy the EN-OS.
 
+## Agent Runtime Resolution
+
+Human/operator terminal commands can use the short forms in this guide (`npm run ...`, `python ...`) when the local shell resolves them correctly. Agent-critical workflows should use explicit runtimes so Codex sandboxing does not depend on PATH, Windows shims, or user-level npm prefixes.
+
+```powershell
+# Global agent session-open scripts
+& D:\GitHub\global_agent\venv\Scripts\python.exe D:\GitHub\global_agent\scripts\sprint_board.py --current-iteration
+& D:\GitHub\global_agent\venv\Scripts\python.exe D:\GitHub\global_agent\scripts\diag.py
+
+# Codex-run portfolio checks
+& C:\Users\erik\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe scripts\compile_hack_pack.py
+& C:\Users\erik\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe node_modules\astro\astro.js sync
+```
+
+If a command fails only inside Codex, keep sandboxing on and swap the command to one of the explicit runtimes above. Escalate only for operations that genuinely need user-level access, auth, network, or installs.
+
 ## 1. Start Engine (Dev Server & CMS)
 
 Keystatic is essential for content management.

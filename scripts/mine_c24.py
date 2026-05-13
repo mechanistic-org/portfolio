@@ -22,31 +22,35 @@ def run_query(prompt_text, output_file):
 with open(r"public\assets\prompts\BOLUS_NLM-INPUT.txt", "r", encoding="utf-8") as f:
     run_query(f.read(), f"src\\content\\_raw_nlm\\{slug}_bolus.json")
 
-# 2. REPORT
+# 2. METRICS
+with open(r"public\assets\prompts\METRICS_NLM-INPUT.txt", "r", encoding="utf-8") as f:
+    run_query(f.read(), f"src\\content\\_raw_nlm\\{slug}_metrics.json")
+
+# 3. REPORT
 with open(r"public\assets\prompts\REPORT_NLM-INPUT.txt", "r", encoding="utf-8") as f:
     run_query(f.read(), f"src\\content\\_raw_nlm\\{slug}_report.md")
 
-# 3. VIGNETTES
+# 4. VIGNETTES
 with open(r"public\assets\prompts\VIGNETTES_NLM-INPUT.txt", "r", encoding="utf-8") as f:
     run_query(f.read(), f"src\\content\\_raw_nlm\\{slug}_vignettes.md")
 
-# 4. TEAM
+# 5. TEAM
 with open(r"public\assets\prompts\TEAM_NLM-INPUT.txt", "r", encoding="utf-8") as f:
     run_query(f.read(), f"src\\content\\_raw_nlm\\{slug}_team.md")
 
-# 5. BOM
+# 6. BOM
 with open(r"public\assets\prompts\BOM_NLM-INPUT.txt", "r", encoding="utf-8") as f:
     run_query(f.read(), f"src\\content\\_raw_nlm\\{slug}_parts.md")
 
-# 6. TIMELINE
+# 7. TIMELINE
 with open(r"public\assets\prompts\TIMELINE_NLM-INPUT.txt", "r", encoding="utf-8") as f:
     run_query(f.read(), f"src\\content\\_raw_nlm\\{slug}_development_timeline.md")
 
-# 7. Resume (added per hack pack compilation)
+# 8. Resume (added per hack pack compilation)
 with open(r"public\assets\prompts\RESUME_NLM-INPUT.txt", "r", encoding="utf-8") as f:
     run_query(f.read(), f"src\\content\\_raw_nlm\\{slug}_resume.md")
 
-# 8. AUDIO
+# 9. AUDIO
 print("Triggering PODCAST_NLM-INPUT Audio Generation...")
 with open(r"public\assets\prompts\PODCAST_NLM-INPUT.txt", "r", encoding="utf-8") as f:
     podcast_prompt = f.read()

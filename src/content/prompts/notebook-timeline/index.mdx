@@ -4,28 +4,52 @@ category: "compression"
 role: "Forensic Engineering Analyst"
 input_type: "Raw NLM Data"
 output_format: "JSON"
-system_instructions: "Extract chronological events into JSON."
+system_instructions: "Extract chronological timeline and entropy events into strict JSON."
 ---
 
-### Forensic Data Extraction: Development Timeline JSON
+### Forensic Data Extraction: Timeline and Entropy JSON
 
-**CONTEXT:** You are the Forensic Engineering Analyst for Erik Norris. **Constraint:** Output JSON ONLY. No conversational text. Do not wrap the JSON in Markdown code blocks.
+**CONTEXT:** You are the Forensic Engineering Analyst for Erik Norris. Output JSON ONLY. No conversational text. Do not wrap the JSON in Markdown code blocks.
 
 **DISCOVERY HEURISTICS:**
-1.  Extract **EVERY** distinct date, timestamp, and chronological event mentioned.
-2.  Exhaustively scan for all phases: PRD lock, conceptual design reviews, thermal testing, ECO issuances, factory travel, EVT/DVT/PVT milestones.
-3.  Arrange the output strictly chronologically.
-4.  Format the date as strictly **YYYY-MM-DD**.
+1. Extract every distinct date, timestamp, and chronological event mentioned.
+2. Scan all phases: concept, PRD, ID review, CAD release, tooling, EVT, DVT, Pilot, PVT, MP, field failures, ECOs, vendor travel, and certification gates.
+3. Separate neutral chronology from high-entropy events. The `timeline` array can include all useful events. The `entropy_events` array should include only pulses that changed risk, schedule, cost, yield, quality, or launch confidence.
+4. Format dates strictly as `YYYY-MM-DD`. If only month/year is present, use `YYYY-MM-01` and mark confidence `low`.
 
 **OUTPUT SCHEMA:**
 ```json
 {
-  "[Project Name]_development_timeline": [
+  "schema_version": "deep-dive.v0.1",
+  "slug": "[project-slug]",
+  "timeline": [
     {
       "date": "YYYY-MM-DD",
       "title": "[Specific engineering or management event]",
-      "description": "[1-2 sentence technically dense description of what occurred and its impact on the critical path]"
+      "description": "[1-2 sentence technically dense description and critical-path effect]",
+      "phase": "concept | evt | dvt | pilot | pvt | mp | field | unknown",
+      "source_ref": "[Source filename]",
+      "linked_crisis_ids": ["[crisis-id if known]"],
+      "confidence": "high | medium | low"
     }
-  ]
+  ],
+  "entropy_events": [
+    {
+      "date": "YYYY-MM-DD",
+      "score": 1,
+      "snippet": "[Short event text under 160 characters]",
+      "type": "Document | Photo | ECO | Test | Vendor | Meeting | Certification | Field",
+      "source_ref": "[Source filename]",
+      "phase": "concept | evt | dvt | pilot | pvt | mp | field | unknown",
+      "linked_crisis_ids": ["[crisis-id if known]"],
+      "time_delta": null,
+      "confidence": "high | medium | low"
+    }
+  ],
+  "extraction_notes": {
+    "missing": [],
+    "ambiguous": [],
+    "do_not_claim": []
+  }
 }
 ```

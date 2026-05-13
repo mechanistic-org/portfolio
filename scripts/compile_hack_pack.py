@@ -66,6 +66,9 @@ def main():
     # Compile Bolus (JSON Only - NO Protocol)
     compile_prompt("notebook-bolus", "BOLUS_NLM-INPUT.txt", inject_protocol=False)
 
+    # Compile Metrics (JSON Only - NO Protocol)
+    compile_prompt("notebook-metrics", "METRICS_NLM-INPUT.txt", inject_protocol=False)
+
     # Compile Report (Markdown Report - NO Protocol)
     compile_prompt("notebook-report", "REPORT_NLM-INPUT.txt", inject_protocol=False)
 
