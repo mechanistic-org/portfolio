@@ -13,7 +13,8 @@ export async function getStaticPaths() {
 	const allProjects = await getCollection("projects");
 	const projects = allProjects.filter((p) => {
 		const targets = p.data.targets || ["main"];
-		return targets.includes(currentSite);
+		// Drafts stay reachable in local dev for Keystatic preview, but never ship.
+		return targets.includes(currentSite) && (!p.data.draft || import.meta.env.DEV);
 	});
 
 	const multiverseData = await getMultiverseData();
@@ -101,14 +102,21 @@ if (entry) {
 	};
 }
 
-// Get all projects for navigation
+// Get all projects for navigation (same filter as getStaticPaths so
+// prev/next never points at a page that was not built)
 const allProjects = await getCollection("projects");
 
 // Sort by date descending (newest first)
-const sortedProjects = allProjects.sort(
-	(a, b) =>
-		new Date(b.data.date || new Date()).getTime() - new Date(a.data.date || new Date()).getTime(),
-);
+const sortedProjects = allProjects
+	.filter((p) => {
+		const targets = p.data.targets || ["main"];
+		return targets.includes(currentSite) && (!p.data.draft || import.meta.env.DEV);
+	})
+	.sort(
+		(a, b) =>
+			new Date(b.data.date || new Date()).getTime() -
+			new Date(a.data.date || new Date()).getTime(),
+	);
 
 // Navigation (Only works for real projects, placeholders get no nav for now)
 const currentIndex = sortedProjects.findIndex((p) => p.id === entry?.id);

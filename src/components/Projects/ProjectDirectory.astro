@@ -107,8 +107,12 @@ const { projects, sectors, categories, tools, clients } = Astro.props;
 							data-status={project.data.production}
 							data-date={new Date(project.data.date as any).getTime()}
 							data-client={JSON.stringify([
-								...(project.data.client || []),
-								...(project.data.employer ? [project.data.employer] : []),
+								...new Set(
+									[
+										...(project.data.client || []),
+										...(project.data.employer ? [project.data.employer] : []),
+									].filter(Boolean),
+								),
 							])}
 							data-image={project.data.heroImage}
 							data-title={project.data.title}
@@ -132,11 +136,13 @@ const { projects, sectors, categories, tools, clients } = Astro.props;
 							</td>
 							<td class="px-4 py-3 text-neutral-400">
 								{[
-									...(project.data.client || []),
-									...(project.data.employer ? [project.data.employer] : []),
-								]
-									.filter(Boolean)
-									.join(", ")}
+									...new Set(
+										[
+											...(project.data.client || []),
+											...(project.data.employer ? [project.data.employer] : []),
+										].filter(Boolean),
+									),
+								].join(", ")}
 							</td>
 							<td class="px-4 py-3 text-neutral-400">{project.data.industry}</td>
 							<td class="px-4 py-3 text-neutral-500">
@@ -185,7 +191,9 @@ const { projects, sectors, categories, tools, clients } = Astro.props;
 							if (img) {
 								previewImg.src = img;
 								if (title) previewTitle.innerText = title;
-								if (description && previewDescription) previewDescription.innerText = description;
+								// Always reset so a project without a description never
+								// shows the previous row's text in the preview window
+								if (previewDescription) previewDescription.innerText = description || "";
 
 								// Team Size
 								if (previewTeamSize) {

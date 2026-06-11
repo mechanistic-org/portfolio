@@ -21,8 +21,12 @@ const { projects } = Astro.props;
 				data-status={project.data.production}
 				data-date={new Date(project.data.date as any).getTime()}
 				data-client={JSON.stringify([
-					...(project.data.client || []),
-					...(project.data.employer ? [project.data.employer] : []),
+					...new Set(
+						[
+							...(project.data.client || []),
+							...(project.data.employer ? [project.data.employer] : []),
+						].filter(Boolean),
+					),
 				])}
 				data-image={project.data.heroImage}
 				data-title={project.data.title}
@@ -40,8 +44,10 @@ const { projects } = Astro.props;
 							loading="lazy"
 						/>
 					) : (
-						<div class="flex h-full w-full items-center justify-center text-neutral-800">
-							<span class="font-mono text-xs">NO SIGNAL</span>
+						<div class="flex h-full w-full items-center justify-center px-4 text-center">
+							<span class="font-mono text-xs tracking-widest text-neutral-600 uppercase">
+								{project.data.title}
+							</span>
 						</div>
 					)}
 					{/* Status Chip Overlay */}
@@ -80,9 +86,18 @@ const { projects } = Astro.props;
 
 					<div class="mt-4 border-t border-neutral-800 pt-3">
 						<div class="flex flex-wrap gap-2 text-xs text-neutral-500">
-							{(project.data.client || []).slice(0, 2).map((c) => (
-								<span>{c}</span>
-							))}
+							{[
+								...new Set(
+									[
+										...(project.data.client || []),
+										...(project.data.employer ? [project.data.employer] : []),
+									].filter(Boolean),
+								),
+							]
+								.slice(0, 2)
+								.map((c) => (
+									<span>{c}</span>
+								))}
 						</div>
 					</div>
 				</div>
