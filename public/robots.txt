@@ -17,3 +17,8 @@ User-agent: Applebot
 Allow: /
 
 Sitemap: https://eriknorris.com/sitemap-index.xml
+
+# Machine-readable surfaces for AI agents and answer engines
+# Agent brief:    https://eriknorris.com/llms.txt
+# Project index:  https://eriknorris.com/api/projects.json
+# Resume (JSON):  https://eriknorris.com/resume.json

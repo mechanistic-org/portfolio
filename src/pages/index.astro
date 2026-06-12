@@ -1,6 +1,7 @@
 ---
 export const prerender = true;
 import Layout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 import { getCareerAssembly } from "../utils/mapCareerAssembly";
 import HXOSwarmContainer from "../components/HXO/HXOSwarmContainer";
 import HXOConsole from "../components/HXO/HXOConsole";
@@ -13,6 +14,13 @@ const isUnderConstruction = currentSite !== "main";
 let swarmNodes: any[] = [];
 let consoleProjects: any[] = [];
 let assemblyLinks: any[] = [];
+
+// SERVER-RENDERED LEDGER (Phase 3 / #73 adjacent)
+// The swarm and console are client-only; crawlers, LLMs, and link
+// unfurlers see nothing without this. Real visible content, not cloaking.
+let ledgerStats = { projects: 0, employers: 0, span: "" };
+let featured: any[] = [];
+const FEATURED_IDS = ["c24", "m700", "avegant-glyph"];
 
 if (!isUnderConstruction) {
 	// 1. FETCH SOURCE OF TRUTH (The Assembly)
@@ -109,6 +117,24 @@ if (!isUnderConstruction) {
 			id: n.id,
 			data: n.data,
 		}));
+
+	// 4. SERVER-RENDERED LEDGER DATA
+	const allProjects = await getCollection("projects");
+	const live = allProjects.filter(({ data }) => {
+		const targets = data.targets || ["main"];
+		return targets.includes(currentSite) && !data.draft;
+	});
+	const years = live
+		.flatMap((p) => [p.data.date, p.data.endDate])
+		.filter(Boolean)
+		.map((d) => new Date(d as any).getFullYear())
+		.filter((y) => y > 1900);
+	ledgerStats = {
+		projects: live.length,
+		employers: new Set(live.map((p) => p.data.employer).filter(Boolean)).size,
+		span: years.length ? `${Math.min(...years)}–${Math.max(...years)}` : "",
+	};
+	featured = FEATURED_IDS.map((id) => live.find((p) => p.id === id)).filter(Boolean);
 }
 ---
 
@@ -140,6 +166,98 @@ if (!isUnderConstruction) {
 						<HXOConsole client:only="react" projects={consoleProjects} />
 					</div>
 				</main>
+
+				{/* THE LEDGER: server-rendered identity surface (crawlers, LLMs, no-JS) */}
+				<section
+					id="ledger"
+					aria-label="Career ledger"
+					class="relative z-20 border-t border-zinc-900 bg-black px-6 py-20 md:px-12"
+				>
+					<div class="mx-auto max-w-5xl">
+						<p class="font-mono text-xs tracking-[0.3em] text-zinc-600 uppercase">
+							/// The Ledger
+						</p>
+						<h1 class="mt-3 font-mono text-3xl font-bold tracking-tight text-white md:text-4xl">
+							Erik Norris — Principal Mechanical Architect
+						</h1>
+						<p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-400">
+							Thirty years of shipped hardware across SGI, Frog Design, WebTV/Microsoft,
+							Digidesign/Avid, Kaleidescape, Avegant, Noon, and Hyphen. I stabilize the entropy
+							of product development: structure the chaos, index the decisions, ship the
+							hardware.
+						</p>
+
+						{/* STATS */}
+						<dl class="mt-10 grid grid-cols-3 border border-zinc-900 font-mono">
+							<div class="border-r border-zinc-900 px-4 py-5 text-center">
+								<dt class="text-[10px] tracking-widest text-zinc-600 uppercase">
+									Indexed Projects
+								</dt>
+								<dd class="mt-1 text-2xl font-bold text-white">{ledgerStats.projects}</dd>
+							</div>
+							<div class="border-r border-zinc-900 px-4 py-5 text-center">
+								<dt class="text-[10px] tracking-widest text-zinc-600 uppercase">Employers</dt>
+								<dd class="mt-1 text-2xl font-bold text-white">{ledgerStats.employers}</dd>
+							</div>
+							<div class="px-4 py-5 text-center">
+								<dt class="text-[10px] tracking-widest text-zinc-600 uppercase">Span</dt>
+								<dd class="mt-1 text-2xl font-bold text-white">{ledgerStats.span}</dd>
+							</div>
+						</dl>
+
+						{/* FEATURED DEEP DIVES */}
+						{
+							featured.length > 0 && (
+								<div class="mt-12">
+									<h2 class="font-mono text-xs tracking-[0.3em] text-zinc-600 uppercase">
+										Featured Deep Dives
+									</h2>
+									<div class="mt-4 grid gap-px border border-zinc-900 bg-zinc-900 md:grid-cols-3">
+										{featured.map((p: any) => (
+											<a
+												href={`/projects/${p.id}/`}
+												class="group block bg-black p-5 transition-colors hover:bg-zinc-950"
+											>
+												<h3 class="group-hover:text-primary font-mono text-sm font-bold text-white transition-colors">
+													{p.data.title}
+												</h3>
+												<p class="mt-2 line-clamp-4 text-xs leading-relaxed text-zinc-500">
+													{p.data.description}
+												</p>
+												<span class="mt-3 inline-block font-mono text-[10px] tracking-widest text-zinc-600 uppercase group-hover:text-zinc-400">
+													Open dossier →
+												</span>
+											</a>
+										))}
+									</div>
+								</div>
+							)
+						}
+
+						{/* NAVIGATION + MACHINE SURFACES */}
+						<nav
+							aria-label="Primary destinations"
+							class="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-zinc-900 pt-6 font-mono text-xs tracking-widest uppercase"
+						>
+							<a href="/projects/" class="text-zinc-300 transition-colors hover:text-white">
+								Fleet View ({ledgerStats.projects})
+							</a>
+							<a href="/resume/" class="text-zinc-300 transition-colors hover:text-white">
+								Résumé
+							</a>
+							<a
+								href="mailto:erik@mechanistic.com"
+								class="text-zinc-300 transition-colors hover:text-white"
+							>
+								Contact
+							</a>
+							<span class="text-zinc-700">
+								Agents: <a href="/llms.txt" class="hover:text-zinc-400">llms.txt</a> ·{" "}
+								<a href="/api/projects.json" class="hover:text-zinc-400">projects.json</a>
+							</span>
+						</nav>
+					</div>
+				</section>
 			</div>
 		</Layout>
 	)
