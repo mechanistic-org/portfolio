@@ -757,13 +757,25 @@ cyberspace:
     title: Interactive Model
     type: model
 date: 2005-08-12 00:00:00+00:00
+description: "Mechanical engineering lead for Digidesign's C|24 control surface: a ground-up RoHS re-architecture that killed a ~$200/unit royalty, held a 51.8% gross margin through a supply-chain collapse, and shipped 500 units for Q4 2007 revenue."
 documents: []
 draft: false
 duration: 2.3 Years
 employer: digidesign
 endDate: 2007-11-20 00:00:00+00:00
+forensic_metrics:
+  financial: "~$200/unit royalty eliminated; 51.80% gross margin held against 20% steel inflation; $9,995 MSRP maintained."
+  process: "Pilot cosmetic yield salvaged 100% (2.50 mm warp corrected to below 0.50 mm); headphone-jack MTTR cut from over 2 hours to under 10 minutes."
+  governance: "13 major ECOs in 6 months; 50+ Data Control Drawings enforced; 100% mechanical fit on first build of 19 PCB assemblies."
+forensic_summary:
+  trigger: "Pilot-build collapse on multiple fronts: ABS side caps warped up to 2.50 mm in the paint-cure cycle, the primary vendor no-bid the most complex panel, and the PSU failed certification — all against a hard Q4 2007 revenue date."
+  intervention: "Engineered a vertical-hang cure fixture (ECO 12740), ran a dual-source manual-welding bridge, enforced a 50+ DCD geometric firewall across 19 PCBs, and hand-packed 100 units to bypass the certification block."
+  result: "100% Pilot cosmetic yield recovered, 100% first-build mechanical fit, 500 units shipped for Q4 2007 at a 51.80% gross margin."
 heroImage: /assets/c24/c24-hero-01-xl.webp
+industry: pro_audio
 presentation_mode: deep_dive
+production: production
+productionScale: series
 skillData: []
 tags:
 - Thermal
@@ -773,138 +785,100 @@ tags:
 - Leadership
 - Yield
 teamSize: 21
+slug: c24
 theme: hyperspace
-title: C24
+title: C|24
 toolIcons: []
 tools:
 - pro_engineer
 ---
 # C|24 (Curtis) Forensic Report
 
-## I. PROJECT SUMMARY
-*   **Role:** Mechanical Engineering Lead / Industrial Design Lead [1, 2].
-*   **Mandate:** Execute a total platform modernization ("RoHS/Refresh") of the legacy Control|24 console to eliminate a ~$200/unit Focusrite licensing royalty, integrate 5.1 surround monitoring, decrease the form factor width to 43", and maintain a $9,995 MSRP [1, 3-5].
-*   **Core Achievement:** Delivered 500 units for Q4 2007 Financial Quality Assurance (FQA)/Revenue recognition despite a dual-front supply chain collapse and thermal yield crisis during Pilot [3, 6, 7].
+## I. Project Summary
 
-## II. THE ANATOMY OF FAILURE (Heuristic Analysis)
+- **Role:** Mechanical Engineering Lead / Industrial Design Lead.
+- **Mandate:** Execute a total platform modernization ("RoHS/Refresh") of the legacy Control|24 console: eliminate a ~$200/unit licensing royalty by moving to 16 in-house pre-amps, integrate 5.1 surround monitoring, cut the form factor to 43 inches, and hold the $9,995 MSRP under the new EU compliance regime.
+- **Core Achievement:** Delivered 500 units for Q4 2007 FQA/revenue recognition despite a dual-front supply chain collapse, a thermal yield crisis during Pilot, and regulatory certification bottlenecks.
 
-*   **Mechanical/Physics Crises:**
-*   **The "Banana Defect" (Thermal Warping):** ABS plastic Side Caps (P/N 9440-55165/166) arrived with up to 2.50mm flatness deviation (bowing/twisting) [8-10]. The high-temperature bake cycle required for cosmetic "Rubberized Soft Paint" caused the plastic to hit its glass-transition phase ($T_g$) [9, 11, 12]. Unsupported on flat racks, gravity induced linear shrinkage of ~1.04mm to 2.27mm and permanent deformation [9, 11, 12].
-*   **EMI/Thermal "Rake" Failure:** The initial 4U chassis stacked the Power Supply Unit (PSU) under Analog-to-Digital Converters (ADCs), causing catastrophic electromagnetic interference (EMI) noise [13-15]. A subsequent 3U crossflow configuration failed thermal qualification with air filters installed [15, 16].
-*   **Automation Deadlock (Density vs. Tooling):** The Top Panel required an extreme density of welded standoffs (PEM studs) [17-19]. Automated CNC welding heads physically collided with adjacent studs, rendering the part unmanufacturable via standard automation [17, 18].
-*   **Component Geometric Collisions:** Initial PCB layouts placed MicPre 8 I/O power connectors vertically, causing a physical crash with the chassis bottom pan [20]. SubMix I/O headers were placed in electrically optimal but humanly unreachable zones, preventing assembly [20].
-*   **Legacy Component Obsolescence:** The legacy jog wheel was replaced with a Bourns EM14 14mm encoder, which arrived as raw samples with six exposed 0.42mm wire leads [21, 22]. Manual soldering of these leads presented high bridging and cold solder joint risks [22].
-*   **Complex Surface Export Failure:** Side "Gill" geometries featured lumpy transitions and complex curves that caused CAD file export failures to manufacturing vendors [23, 24].
-
-*   **Quality/Supply Chain:**
-*   **The "No-Bid" Shock:** Primary overseas vendor Kwanta/VTech formally "no-bidded" the complex Top Panel (9420-55105) mid-schedule due to the CNC welding deadlock, threatening a line-down scenario [19, 25-27].
-*   **The "Kenny" Catastrophe:** VTech's secondary metal vendor "Kenny" produced panels with severe cosmetic defects, including visible ripples, dents, and "dental white" silkscreening that washed out interface text against the grey chassis [15, 28-30].
-*   **PSU Quality Failures:** The external Skynet PSU failed EMC prescans and suffered three catastrophic load failures at 230V/50Hz [15, 30, 31]. Tooling delays created a stockpile of stranded units [15, 30].
-*   **Domestic Prototyping Errors:** Emergency bridge production at Mass Precision yielded top panels missing countersinks, requiring manual machine re-work post-fabrication [32, 33].
-
-*   **The Interventions:**
-*   **Gravity-Driven Racking (ECO 12740):** Rejected vendor "Method C" and engineered "Method A", a Vertical Hanging Fixture protocol [10, 34, 35]. Suspended parts vertically during the paint cure, utilizing gravity to maintain straightness during the glass-transition phase [10, 35].
-*   **Dual-Source Bridge Strategy:** Contracted Silicon Valley domestic vendor Mass Precision for rapid-turn manual offset welding to fabricate "freebies for a fit check" [26, 33, 36]. Paralleled this by authorizing a manual offset-welding process at the overseas vendor to bridge the schedule until automation retooled [26, 37, 38].
-*   **The 3U Rake Pivot:** Redesigned the chassis to a 3U alignment with modified PSUs utilizing metal connectors and shielded cables, neutralizing EMI while passing thermal specifications [14, 15].
-*   **The "Trap Door" FRU Protocol (ECO 12993):** Executed a unilateral emergency redesign of the Headphone Bracket (9420-55126-00) and Front Bolster (9440-55167-00) [39-41]. Recessed geometry allowed bottom-pan access, converting a 2-hour teardown into a simple Field Replaceable Unit repair [41-43].
-*   **Pre-Terminated Harness Enforcement:** Rejected the raw wire lead configuration for the Bourns encoder and enforced a specification for a pre-terminated harness, converting delicate manual soldering into a plug-and-play assembly [22].
-*   **Surface Re-Modeling:** Rebuilt Side Cap and Gill surface geometries manually over 16.5 hours and exported data in custom "bite-size chunks" to bypass vendor CAD limitations [24, 44].
-*   **Regulatory De-Coupling & Hand-Pack:** Negotiated a Simultaneous Certification Protocol with UL to test the console surface without the finalized PSU [31]. Orchestrated a hand-pack operation at the Menlo Park facility to manually apply UL stickers for the first 100 units [15, 30, 31].
-
-## III. GOVERNANCE & RHYTHM
-
-*   **The Pulse:** The project was managed under a constant "At Risk/Replan" status, slipping from an initial Q1 2007 target to November 2007 [45-47]. Management required high-frequency "War Room" coordination tracking granular completion percentages [45, 48]. The mechanical architecture was a solo mandate; Erik Norris unilaterally managed the integration of 19 distinct PCB assemblies and 15 sheet metal parts within extreme geometric constraints [49-51]. Implemented a strict First Article Inspection (FAI) regimen to reject sub-standard vendor finishes [48].
-*   **The Artifacts:**
-*   **Data Control Drawing (DCD) Protocol:** Established as a unilateral "Geometric Firewall" [52, 53]. PCB layouts were strictly rejected if they violated Pro/Engineer 3D keep-out zones. The MicPre 8 I/O DCD required 12 revisions to lock geometry [20, 54].
-*   **General Modeling Guide:** Authored to enforce data integrity across the engineering team during a Pro/Intralink 8.0 server migration [54].
-*   **ECO 12740:** Released large plastic tooling modifications and dictated the thermal fixture process change [34, 45].
-*   **ECO 12263:** Urgent "release all" order for sheet metal parts and artwork to salvage schedule [45, 55].
-*   **ECO 13707:** Re-dimensioned drawings and added strict tolerances to clarify inspection criteria against supplier incompetence [46, 47].
-
-## IV. QUANTIFIED IMPACT (The Numbers)
-
-*   **Eliminated** ~$200/unit Focusrite licensing royalty by re-architecting the chassis for internal pre-amps [3, 56].
-*   **Secured** 51.80% Gross Margin despite a 20% annual rise in raw steel costs and dual-sourcing premiums [57-59].
-*   **Salvaged** 100% of Pilot cosmetic plastic yield by correcting a 2.50mm thermal warp deviation to &lt;0.50mm [10, 57, 60].
-*   **Reduced** Headphone Jack Mean Time To Repair (MTTR) from 2+ hours to &lt;10 minutes via trap-door redesign [42, 57, 61].
-*   **Delivered** 500 console units for Q4 2007 revenue recognition under severe "Line Down" supply constraints [3, 7, 57].
-*   **Achieved** 100% mechanical fit on the first physical build of 19 PCBs, decoupling mechanical timelines from electrical iteration [48, 62].
-*   **Maintained** $9,995 Manufacturer's Suggested Retail Price target globally by absorbing bridge tooling as a project expense rather than permanent COGS [58, 59, 63].
-*   **Processed** 100 units through a manual Menlo Park "hand-pack" operation to bypass delayed Skynet power supply UL certifications [15, 31].
-
-## V. VISUAL EVIDENCE
-
-*   `944055165-166-00 baking fixture chg.pdf` (Photographic evidence of warped ABS parts via Method C vs. successful vertical hanging via Method A) [64-66].
-*   `before_and_after_rubber_paint.pdf` (Forensic spreadsheet proving 2.27mm linear shrinkage caused by thermal paint cycling) [64, 67, 68].
-*   `DCD_9150-55200-00_REV_12.pdf` (MicPre 8 I/O geometric contract proving collision keep-out complexity) [54, 64].
-*   `China Sheet Metal.pdf` (Photographic evidence of metal ripples, dents, and warped silkscreen from secondary vendor Kenny) [67, 69, 70].
-*   `fit-check-01.jpg` / `C24_first-shot_gap-check.pdf` (Gap analysis photography documenting plastic shrinkage interference against sheet metal) [64, 67, 70].
-*   `gill_dim.pdf` (Finalized dimensions for complex side Gill curves modeled to fix vendor export failures) [24, 44].
-*   `bourns_em14.pdf` (Integration specification sheet for the substitute Jog Wheel encoder) [67, 71].
-*   `ECO_12263.pdf` (Official sheet metal release documentation establishing production transition) [54, 72, 73].
-
-
-
-
-
-# C|24 [Curtis] Forensic Report
-
-## I. PROJECT SUMMARY
-
-- **Role:** Lead Mechanical Engineer / Industrial Design Lead / Product Architect [1, 2].
-- **Mandate:** Execute a "RoHS/Refresh" of the legacy Control|24 console. Objectives: Eliminate a ~$200/unit Focusrite licensing royalty, integrate 5.1 surround monitoring, and maintain a $9,995 MSRP while achieving regulatory compliance [1, 3, 4].
-- **Core Achievement:** Delivered 500 units for Q4 2007 FQA/Revenue recognition despite a "No-Bid" supply chain crisis, catastrophic thermal yield failures during the Pilot build, and severe regulatory certification bottlenecks [1-4].
-
-## II. THE ANATOMY OF FAILURE (Heuristic Analysis)
+## II. The Anatomy of Failure
 
 ### 1. Thermal Crisis: The "Banana" Defect
-- **The Trigger (Crisis):** During the Pilot build, the primary ABS Side Caps (P/N 9440-55165/166) arrived with catastrophic geometric distortion. Parts exhibited severe 2.50mm "Banana" warping and up to 2.27mm of linear shrinkage. The defect was traced to the high-temperature "Rubberized Soft Paint" cure cycle where the vendor (Jetcrown) baked parts on flat racks without support ("Method C"), causing the ABS to sag and lock into deformed shapes [5-8].
-- **The Intervention (Fix):** The Architect rejected the vendor's standard process and engineered "Method A", a custom Vertical Hanging Fixture protocol. Codified via ECO 12740, this directed Design of Experiments (DOE) utilized gravity to maintain part straightness along the vertical axis during the plastic's glass-transition phase [6, 7, 9, 10].
-- **The Result (Impact):** Reduced flatness deviation from 2.50mm to &lt;0.50mm, salvaging 100% of the Pilot cosmetic yield and ensuring the unit met the strict "Spectral Master" aesthetic standard without requiring expensive new tooling [6, 7, 11].
 
-### 2. Quality & Supply Chain Crisis: The Top Panel "No-Bid" Shock
-- **The Trigger (Crisis):** Mid-schedule, the primary overseas contract manufacturer (Kwanta/VTech) issued a formal "No-Bid" on the console's highly complex Top Panel (P/N 9420-55105). The design required an extreme density of welded standoffs (PEM studs), which Kwanta's automated stud-welding equipment could not physically access, threatening a complete "Line Down" scenario [12-15].
-- **The Intervention (Fix):** Executed a Dual-Source Bridge Strategy. The Architect engaged a domestic vendor, Mass Precision, to fabricate emergency manual prototypes using a "manual offset welder" to bypass geometric constraints. Simultaneously, he negotiated and qualified a manual offset-welding process at the overseas secondary vendor (Kenny) [16-19].
-- **The Result (Impact):** Bypassed the blocked supply chain link, unblocked the Pilot build, and smoothly transitioned production from domestic manual parts to overseas automated lines, protecting the November 20, 2007 First Customer Ship (FCS) date [20, 21].
+- **Trigger:** During Pilot, the primary ABS Side Caps (P/N 9440-55165/166) arrived with catastrophic geometric distortion: up to 2.50 mm of "banana" warping and 2.27 mm of linear shrinkage. The defect traced to the high-temperature "Rubberized Soft Paint" cure cycle — the vendor baked the long, heavy parts flat on wire racks ("Method C"), letting gravity sag the plastic through its glass-transition phase.
+- **Intervention:** Rejected the vendor's support-block proposal ("Method B") and ran a comparative study instead. Engineered "Method A" — a Vertical Hanging Fixture that suspends parts during cure so gravity straightens them during cool-down. Codified the process via ECO 12740 as a permanent manufacturing specification for large ABS parts.
+- **Result:** Reduced flatness deviation from 2.50 mm to below 0.50 mm, salvaging 100% of Pilot cosmetic yield with no new tooling spend.
 
-### 3. Solo Mandate Crisis: The Headphone Jack Fire Drill
-- **The Trigger (Crisis):** Just prior to final release, manufacturing and service data revealed the legacy headphone jack possessed a 4.8% field failure rate. The original flush-mount aesthetic design buried the high-wear jack behind the front bolster, creating a serviceability nightmare that required a 2-hour chassis teardown for a simple repair [14, 22-24].
-- **The Intervention (Fix):** Executed an emergency redesign despite being past the "Tooling Control Off" milestone. Modified the Sheet Metal Headphone Bracket (9420-55126-00) and Plastic Front Bolster (9440-55167-00) to create a recessed "trap door" clearance geometry [23, 25, 26].
-- **The Result (Impact):** Converted a "Return-to-Factory" liability into a Field Replaceable Unit (FRU), drastically reducing Mean Time To Repair (MTTR) from >2 hours to &lt;10 minutes via bottom-access removal of a single nut [23, 27, 28].
+### 2. Supply Chain Crisis: The Top Panel "No-Bid" Shock
 
-### 4. Solo Mandate Crisis: The Geometric Firewall
-- **The Trigger (Crisis):** The integration of 19 distinct PCB assemblies into a low-profile chassis was plagued by "wild west" file swapping. Electrical layout designers were independently shifting mounting holes and vertical components to optimize routing, virtually guaranteeing catastrophic downstream sheet metal collisions (e.g., the MicPre 8 I/O vertical power connectors crashing into the bottom pan) [29-32].
-- **The Intervention (Fix):** Authored and enforced the Data Control Drawing (DCD) Protocol. Over 50+ unique DCDs were issued as binding "Geometric Contracts" that defined rigid PCB outlines, 0.130" mounting holes, and Z-height Keep-Out zones. Submitted DXF layouts were overlaid against the 3D Master Assembly and unilaterally rejected if a 0.5mm variance existed [33-37].
-- **The Result (Impact):** Achieved 100% mechanical fit on the first physical build of the Pilot units, effectively decoupling the mechanical tooling schedule from electrical layout iterations [38-41].
+- **Trigger:** Mid-schedule, the primary overseas vendor (Kwanta/VTech) formally no-bid the console's most complex part — the Top Panel (P/N 9420-55105). Its extreme density of welded standoffs physically blocked the vendor's automated CNC welding heads, threatening a line-down scenario.
+- **Intervention:** Executed a dual-source bridge strategy: engaged domestic vendor Mass Precision for rapid-turn manual offset-welded prototypes (reworking missing countersinks by hand to keep the line moving) while qualifying a manual offset-welding process at the overseas secondary vendor to bridge the schedule until automation retooled.
+- **Result:** Unblocked the Pilot build and transitioned cleanly from domestic manual parts to overseas automated lines, protecting the November 20, 2007 First Customer Ship date.
 
-## III. GOVERNANCE & RHYTHM
+### 3. Architecture Crisis: The EMI/Thermal "Rake"
 
-- **The Pulse:** Project managed through relentless "Replan" status updates via weekly "War Room" coordination. Governance relied on high-frequency vendor intervention across Silicon Valley and Guangdong, alongside the strict enforcement of the Data Control Drawing (DCD) Protocol to lock electrical layouts against rigid mechanical reality [37, 42, 43].
+- **Trigger:** The initial 4U chassis stacked the power supply directly under the A/D converters, producing catastrophic EMI noise; the follow-up 3U crossflow layout then failed thermal qualification with air filters installed.
+- **Intervention:** Redesigned the chassis around a revised 3U alignment with modified PSUs, metal connectors, and shielded cables.
+- **Result:** Neutralized the EMI path while passing thermal qualification — the packaging architecture that shipped.
+
+### 4. Serviceability Crisis: The Headphone Jack Fire Drill
+
+- **Trigger:** Just before final release, service data showed the legacy headphone jack carried a 4.8% field failure rate — and the flush-mount design buried it behind the front bolster, making a simple repair a 2-hour chassis teardown.
+- **Intervention:** Executed an emergency redesign past the "Tooling Control Off" milestone: modified the Headphone Bracket (9420-55126-00) and Front Bolster (9440-55167-00) to create a recessed "trap door" clearance geometry (ECO 12993).
+- **Result:** Converted a return-to-factory liability into a Field Replaceable Unit — Mean Time To Repair cut from over 2 hours to under 10 minutes via a single nut accessible from the bottom pan.
+
+### 5. Integration Crisis: The Geometric Firewall
+
+- **Trigger:** Integrating 19 distinct PCB assemblies into a low-profile chassis was being undermined by "wild west" file swapping — layout designers independently moving mounting holes and vertical components, guaranteeing downstream collisions. The MicPre 8 I/O vertical power connectors crashed into the bottom pan; SubMix headers landed in zones factory workers could not reach.
+- **Intervention:** Authored and enforced the Data Control Drawing (DCD) Protocol: 50+ binding geometric contracts defining PCB outlines, 0.130" mounting holes, and Z-height keep-out zones. Submitted layouts were overlaid against the 3D master assembly and rejected on a 0.5 mm variance. The MicPre 8 DCD alone ran to Rev 12.
+- **Result:** 100% mechanical fit on the first physical build, decoupling the mechanical tooling schedule from electrical layout iteration.
+
+### 6. Regulatory Crisis: The Stranded PSU
+
+- **Trigger:** The external Skynet power supply failed EMC prescans and suffered three catastrophic load failures at 230V/50Hz; tooling delays then stranded finished consoles waiting on UL certification.
+- **Intervention:** Negotiated a simultaneous-certification protocol with UL to test the console surface without the finalized PSU, and orchestrated a hand-pack operation at the Menlo Park facility to manually apply UL labels to the first 100 units.
+- **Result:** Protected the First Customer Ship date and Q4 revenue without regulatory exposure.
+
+### 7. Component & Geometry Battles
+
+- **Bourns EM14 jog wheel:** The cost-down 14 mm encoder arrived as raw samples with six exposed 0.42 mm wire leads — a soldering-defect factory. Enforced a pre-terminated harness specification (plug-and-play assembly) and engineered a custom surround with tolerance analysis that preserved the premium "scrub" feel of a $10k console on commodity parts (integration bracket via ECO 13082).
+- **The "Gill" surfaces:** The signature side gills' complex curves broke vendor CAD imports. Rebuilt the Class-A transitions manually in Pro/Engineer (16.5 hours) and exported geometry in bite-sized STEP chunks the toolmaker could digest — a modeling failure turned seamless assembly.
+- **The "Kenny" cosmetics war:** The secondary metal vendor shipped panels with ripples, dents, and "dental white" silkscreen that washed out against the grey chassis. Enforced a First Article Inspection regimen, forced ink recalibration to true Bright White, and documented bend-line defects photo-by-photo until the vendor upgraded its tooling.
+
+## III. Governance & Rhythm
+
+- **The Pulse:** Managed under a constant "At Risk/Replan" status from an initial Q1 2007 target to the November 2007 ship, with weekly War Room coordination across Silicon Valley and Guangdong. The mechanical architecture was a solo mandate: one engineer integrating 19 PCB assemblies and 15 sheet metal parts inside extreme geometric constraints.
 - **The Artifacts:**
-- **ECO 12740:** Standardized the Vertical Hanging Fixture process to resolve ABS thermal warping [6, 9].
-- **ECO 12263:** Urgent "release all" order for sheet metal and artwork [42, 43].
-- **ECO 12993:** Headphone jack "trap door" serviceability redesign [25, 26].
-- **ECO 13082:** Bourns Jog Wheel integration bracket (P/N 9420-56156-00) [44, 45].
-- **DCD_9150-55200-00_REV_12:** Geometric constraint contract for the MicPre 8 PCB, which underwent 12 revisions to ensure 3D spatial fit [33, 42, 46].
+  - **DCD Protocol** — the geometric firewall; 50+ binding drawings, MicPre 8 at Rev 12.
+  - **General Modeling Guide** — authored to hold data integrity through the Pro/Intralink 8.0 server migration.
+  - **ECO 12740** — vertical-hang cure fixture, released as a permanent process specification.
+  - **ECO 12263** — urgent "release all" of sheet metal and artwork to salvage the schedule.
+  - **ECO 12993** — headphone-jack trap-door serviceability redesign.
+  - **ECO 13082** — Bourns jog wheel integration bracket (P/N 9420-56156-00).
+  - **ECO 13707** — re-dimensioned drawings with hardened tolerances to lock inspection criteria.
 
-## IV. LINKEDIN ARTIFACTS (The Numbers)
+## IV. Quantified Impact
 
-- **Delivered** 500 units for Q4 2007 FQA and revenue recognition despite a binary "Line Down" supply chain crisis [1, 3].
-- **Eliminated** ~$200/unit in legacy licensing royalty payments by re-architecting the chassis to accommodate 16 internal pre-amps [1, 47].
-- **Secured** a 51.80% Gross Margin on a $9,995 MSRP professional console despite a 20% annual rise in raw steel costs [47, 48].
-- **Salvaged** 100% of the Pilot cosmetic yield by engineering a Vertical Hanging Fixture that reduced ABS thermal warping from 2.50mm to &lt;0.50mm [6, 47].
-- **Reduced** Headphone Jack Mean Time To Repair (MTTR) from >2 hours to &lt;10 minutes via an emergency "trap door" field-replaceable unit (FRU) redesign [23, 47].
-- **Executed** a 100-unit manual retrofit, orchestrating a Menlo Park "hand-pack" operation to bypass delayed UL certifications and protect the First Customer Ship (FCS) date [49, 50].
-- **Directed** the flawless mechanical integration of 19 complex PCB assemblies and 15 sheet metal chassis components across international vendors [34, 50, 51].
-- **Managed** 13 major Engineering Change Orders (ECOs) within a highly compressed 6-month window to realign production tooling with design reality [52].
-- **Enforced** a strict geometric firewall by generating 50+ Data Control Drawings (DCDs), achieving 100% mechanical fit on the first physical build [37, 38, 41].
-- **Resolved** a catastrophic 2.27mm linear shrinkage variance in injection-molded plastics by diagnosing paint-cure thermal stress via remote telemetry [6, 7].
+- **Delivered** 500 units for Q4 2007 FQA and revenue recognition through a binary line-down supply crisis.
+- **Eliminated** the ~$200/unit licensing royalty by re-architecting the chassis around 16 in-house pre-amps.
+- **Secured** a 51.80% gross margin on a $9,995 MSRP despite a 20% annual rise in raw steel costs.
+- **Held** the $9,995 MSRP globally by absorbing bridge tooling as a project expense rather than permanent COGS.
+- **Salvaged** 100% of Pilot cosmetic yield by correcting 2.50 mm thermal warp to below 0.50 mm.
+- **Cut** headphone-jack MTTR from over 2 hours to under 10 minutes with the trap-door FRU redesign.
+- **Achieved** 100% mechanical fit on the first physical build of all 19 PCB assemblies.
+- **Enforced** the geometric firewall with 50+ Data Control Drawings.
+- **Managed** 13 major ECOs inside a compressed 6-month window to realign production tooling with design reality.
+- **Processed** 100 units through the Menlo Park hand-pack to bypass the stranded-PSU certification block.
 
-## V. VISUAL EVIDENCE
+## V. Source Trail
 
-- `944055165-166-00 baking fixture chg.pdf` (Photographic evidence of warped ABS parts vs. the successful Vertical Hanging Fixture) [53, 54].
-- `before_and_after_rubber_paint.pdf` (Inspection data logs proving the 2.27mm linear shrinkage) [53, 54].
-- `China Sheet Metal.pdf` (Photographic evidence of ripples and dents in rejected vendor panels) [53].
-- `C24_plastic_fit-misc.pdf` (Fit-check interference and PEM insert pull-out failure documentation) [53, 55].
-- `DCD_9150-55200-00_REV_12.pdf` (The MicPre 8 I/O geometric control drawing showing complex collision constraints) [46, 54].
-- `ECO_12263.pdf` (Sheet metal release documentation authorizing urgent production) [53].
+The claims above rest on the project's primary evidence archive — engineering change orders, data control drawings, vendor inspection reports, and build photography — compiled through the NotebookLM forensic registry:
+
+- `944055165-166-00 baking fixture chg.pdf` — warped ABS parts on flat racks vs. the vertical hanging fixture.
+- `before_and_after_rubber_paint.pdf` — inspection logs proving 2.27 mm paint-cure shrinkage.
+- `DCD_9150-55200-00_REV_12.pdf` — the MicPre 8 geometric contract at its twelfth revision.
+- `China Sheet Metal.pdf` — photographic record of rejected vendor panels (ripples, dents, washed-out silkscreen).
+- `C24_plastic_fit-misc.pdf` — fit-check interference and PEM insert pull-out failures.
+- `fit-check-01.jpg` / `C24_first-shot_gap-check.pdf` — gap analysis of plastic shrinkage against sheet metal.
+- `gill_dim.pdf` — finalized dimensions for the rebuilt side-gill surfaces.
+- `bourns_em14.pdf` — integration specification for the replacement jog wheel encoder.
+- `ECO_12263.pdf` — the urgent sheet metal release that put production back on schedule.

@@ -1,6 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
-
 interface Props {
 	mode?: "stealth" | "standard" | "fleet" | "tactical" | "archive" | "projects";
 	class?: string;
@@ -48,12 +46,9 @@ const { mode = "standard", class: className, hideLogo = false } = Astro.props;
 	<div class="flex items-center gap-4 justify-self-end">
 		<slot name="right" />
 
-		<!-- Standard Mobile Toggle (Fallback) -->
-		<slot name="mobile-toggle">
-			<button id="mobile-menu-trigger" class="text-neutral-400 hover:text-white md:hidden">
-				<Icon name="tabler:menu-2" class="h-6 w-6" />
-			</button>
-		</slot>
+		<!-- Mobile toggle: only rendered when a page provides a working one.
+		     No default fallback — an inert menu button is worse than none (contract §E). -->
+		<slot name="mobile-toggle" />
 	</div>
 
 	<!-- DEFAULT SLOT (For Drawers / Overlays) -->
@@ -64,20 +59,16 @@ const { mode = "standard", class: className, hideLogo = false } = Astro.props;
 	const hud = document.getElementById("universal-hud");
 
 	// Scroll Logic: Reactive Canopy
-	// 0-20px: Transparent (Stealth)
-	// >20px: Black Glass (Readable)
+	// Standard: transparent 0-20px, black glass beyond (readable).
+	// Stealth: transparent over the intro/hero (0-200px, matching the intro
+	// fade distance), glass beyond — so the HUD never floats transparent
+	// over long-form body text (contract §E).
 	const updateHud = () => {
 		if (!hud) return;
 
-		// Stealth Mode: Always transparent, no glass
-		if (hud.dataset.mode === "stealth") {
-			hud.classList.remove("bg-black/80", "backdrop-blur-md", "border-white/10");
-			hud.classList.add("border-white/0");
-			return;
-		}
-
 		const y = window.scrollY;
-		const isScrolled = y > 20;
+		const threshold = hud.dataset.mode === "stealth" ? 200 : 20;
+		const isScrolled = y > threshold;
 
 		if (isScrolled) {
 			hud.classList.add("bg-black/80", "backdrop-blur-md", "border-white/10");
