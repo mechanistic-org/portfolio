@@ -1,6 +1,10 @@
 import siteData from "@config/siteData.json";
 import workHistory from "@config/work_history.json";
 
+// Static endpoint: without this the route is dropped from the production
+// static build and llms.txt points at a 404.
+export const prerender = true;
+
 export async function GET() {
 	const resume = {
 		basics: {

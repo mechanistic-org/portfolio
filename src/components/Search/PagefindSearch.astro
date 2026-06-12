@@ -21,58 +21,80 @@
 </div>
 
 <script is:inline>
-	document.addEventListener('DOMContentLoaded', () => {
-		let isLoaded = false;
+	// View-transition safe: listeners are bound once to window/document and
+	// re-query the DOM on every call, because Astro's ClientRouter swaps the
+	// body (stale element refs) without re-running inline scripts.
+	(function () {
+		if (window.__pagefindSearchInit) return;
+		window.__pagefindSearchInit = true;
+
 		let isOpen = false;
-		
-		const backdrop = document.getElementById("pagefind-search-backdrop");
-		const overlay = document.getElementById("pagefind-search-overlay");
-		const container = document.getElementById("pagefind-search-container");
-		
-		function openSearch() {
-			isOpen = true;
-			backdrop.classList.remove("hidden");
-			backdrop.classList.add("flex");
-			document.body.style.overflow = "hidden";
-			
-			if (!isLoaded) {
-				isLoaded = true;
-				// Dynamically load Pagefind UI CSS & JS
+		let assetsLoaded = false;
+
+		function focusInput() {
+			setTimeout(() => {
+				const input = document.querySelector("#pagefind-search-container input");
+				if (input) input.focus();
+			}, 100);
+		}
+
+		function mountUI() {
+			const container = document.getElementById("pagefind-search-container");
+			if (!container) return;
+			// After a view transition the container is a fresh empty node, so
+			// the UI must be re-instantiated.
+			if (container.childElementCount > 0) {
+				focusInput();
+				return;
+			}
+			if (window.PagefindUI) {
+				new window.PagefindUI({
+					element: "#pagefind-search-container",
+					showSubResults: true,
+					bundlePath: "/pagefind/",
+				});
+				focusInput();
+				return;
+			}
+			if (!assetsLoaded) {
+				assetsLoaded = true;
 				const link = document.createElement("link");
 				link.rel = "stylesheet";
 				link.href = "/pagefind/pagefind-ui.css";
 				document.head.appendChild(link);
-				
+
 				const script = document.createElement("script");
 				script.src = "/pagefind/pagefind-ui.js";
-				script.onload = () => {
-					new window.PagefindUI({ element: "#pagefind-search-container", showSubResults: true, bundlePath: "/pagefind/" });
-					// Automatically focus the input after initializing
-					setTimeout(() => {
-						const input = container.querySelector("input");
-						if (input) input.focus();
-					}, 100);
-				};
+				script.onload = mountUI;
 				document.head.appendChild(script);
-			} else {
-				// Focus if already loaded
-				setTimeout(() => {
-					const input = container.querySelector("input");
-					if (input) input.focus();
-				}, 50);
 			}
 		}
-		
+
+		function openSearch() {
+			const backdrop = document.getElementById("pagefind-search-backdrop");
+			if (!backdrop) return;
+			isOpen = true;
+			backdrop.classList.remove("hidden");
+			backdrop.classList.add("flex");
+			document.body.style.overflow = "hidden";
+			mountUI();
+		}
+
 		function closeSearch() {
+			const backdrop = document.getElementById("pagefind-search-backdrop");
 			isOpen = false;
-			backdrop.classList.add("hidden");
-			backdrop.classList.remove("flex");
+			if (backdrop) {
+				backdrop.classList.add("hidden");
+				backdrop.classList.remove("flex");
+			}
 			document.body.style.overflow = "unset";
 		}
-		
-		// Event listeners
-		overlay.addEventListener("click", closeSearch);
-		
+
+		// Delegated so it survives body swaps
+		document.addEventListener("click", (e) => {
+			if (e.target && e.target.id === "pagefind-search-overlay") closeSearch();
+		});
+
 		window.addEventListener("keydown", (e) => {
 			if ((e.metaKey || e.ctrlKey) && e.key === "e") {
 				e.preventDefault();
@@ -84,11 +106,15 @@
 				closeSearch();
 			}
 		});
-		
-		window.addEventListener("open-command-menu", () => {
-			openSearch();
+
+		window.addEventListener("open-command-menu", openSearch);
+
+		// New body arrives closed; clear any scroll lock from the old one
+		document.addEventListener("astro:after-swap", () => {
+			isOpen = false;
+			document.body.style.overflow = "unset";
 		});
-	});
+	})();
 </script>
 
 <style is:global>
