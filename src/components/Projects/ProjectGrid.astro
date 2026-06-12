@@ -32,7 +32,7 @@ const { projects } = Astro.props;
 				data-title={project.data.title}
 				data-description={project.data.description}
 				data-category={project.data.category}
-				onclick={`window.location.href='/projects/${project.data.slug}/'`}
+				onclick={`window.location.href='/projects/${project.id}/'`}
 			>
 				{/* Image Section */}
 				<div class="aspect-video w-full overflow-hidden bg-neutral-950">

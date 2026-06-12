@@ -20,25 +20,25 @@ interface Props {
 
 const { cast, bom, timeline, scars, forensic_data } = Astro.props;
 
-console.log(
-	"FORENSIC DOSSIER DEBUG - Cast:",
-	cast?.length,
-	"BOM:",
-	bom?.length,
-	"Scars:",
-	scars?.length,
-);
+// Tabs only render when they have data; the dossier opens on the first
+// available one instead of an empty state (contract §C, issue #68).
+const hasCast = !!cast && cast.length > 0;
+const hasBom = !!bom && bom.length > 0;
+const hasTimeline = Array.isArray(timeline) && timeline.length > 0;
+const hasScars = !!scars && scars.length > 0;
+const hasForensicData = !!forensic_data && Object.keys(forensic_data).length > 0;
 
-const hasData =
-	(cast && cast.length > 0) ||
-	(bom && bom.length > 0) ||
-	(scars && scars.length > 0) ||
-	timeline !== undefined ||
-	(forensic_data && Object.keys(forensic_data).length > 0);
+const hasData = hasCast || hasBom || hasTimeline || hasScars || hasForensicData;
 
-const defaultTab = "";
-
-// console.log("ForensicDossier Debug:", { ... });
+const defaultTab = hasCast
+	? "cast"
+	: hasBom
+		? "bom"
+		: hasTimeline
+			? "timeline"
+			: hasScars
+				? "scars"
+				: "data";
 ---
 
 {
@@ -49,31 +49,39 @@ const defaultTab = "";
 				class="grid w-full grid-cols-1 gap-8 md:grid-cols-[250px_1fr]"
 			>
 				<TabsList class="flex h-fit w-full flex-col items-stretch justify-start space-y-1 rounded-none bg-transparent p-0">
-					<TabsTrigger
-						value="cast"
-						class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
-					>
-						TEAM
-					</TabsTrigger>
-					<TabsTrigger
-						value="bom"
-						class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
-					>
-						BOM
-					</TabsTrigger>
-					<TabsTrigger
-						value="timeline"
-						class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
-					>
-						TIMELINE
-					</TabsTrigger>
-					<TabsTrigger
-						value="scars"
-						class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
-					>
-						SCARS
-					</TabsTrigger>
-					{forensic_data && Object.keys(forensic_data).length > 0 && (
+					{hasCast && (
+						<TabsTrigger
+							value="cast"
+							class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
+						>
+							TEAM
+						</TabsTrigger>
+					)}
+					{hasBom && (
+						<TabsTrigger
+							value="bom"
+							class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
+						>
+							BOM
+						</TabsTrigger>
+					)}
+					{hasTimeline && (
+						<TabsTrigger
+							value="timeline"
+							class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
+						>
+							TIMELINE
+						</TabsTrigger>
+					)}
+					{hasScars && (
+						<TabsTrigger
+							value="scars"
+							class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
+						>
+							SCARS
+						</TabsTrigger>
+					)}
+					{hasForensicData && (
 						<TabsTrigger
 							value="data"
 							class="data-[state=active]:bg-primary/10 data-[state=active]:text-primary hover:text-foreground flex w-full justify-start rounded-md border-transparent px-4 py-2 font-mono text-xs font-bold tracking-wider uppercase transition-colors hover:bg-white/5 data-[state=active]:shadow-none"
@@ -83,40 +91,50 @@ const defaultTab = "";
 					)}
 				</TabsList>
 
-				<TabsContent
-					value="cast"
-					class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
-				>
-					<DossierCast cast={cast || []} />
-				</TabsContent>
+				{hasCast && (
+					<TabsContent
+						value="cast"
+						class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
+					>
+						<DossierCast cast={cast || []} />
+					</TabsContent>
+				)}
 
-				<TabsContent
-					value="bom"
-					class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
-				>
-					<DossierBom bom={bom || []} />
-				</TabsContent>
+				{hasBom && (
+					<TabsContent
+						value="bom"
+						class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
+					>
+						<DossierBom bom={bom || []} />
+					</TabsContent>
+				)}
 
-				<TabsContent
-					value="timeline"
-					class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
-				>
-					<DossierTimeline timeline={timeline || []} />
-				</TabsContent>
+				{hasTimeline && (
+					<TabsContent
+						value="timeline"
+						class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
+					>
+						<DossierTimeline timeline={timeline || []} />
+					</TabsContent>
+				)}
 
-				<TabsContent
-					value="scars"
-					class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
-				>
-					<DossierScars scars={scars || []} />
-				</TabsContent>
+				{hasScars && (
+					<TabsContent
+						value="scars"
+						class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
+					>
+						<DossierScars scars={scars || []} />
+					</TabsContent>
+				)}
 
-				<TabsContent
-					value="data"
-					class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
-				>
-					<DossierData data={forensic_data || {}} />
-				</TabsContent>
+				{hasForensicData && (
+					<TabsContent
+						value="data"
+						class="animate-in fade-in slide-in-from-right-4 duration-500 md:col-start-2"
+					>
+						<DossierData data={forensic_data || {}} />
+					</TabsContent>
+				)}
 			</Tabs>
 		</section>
 	)

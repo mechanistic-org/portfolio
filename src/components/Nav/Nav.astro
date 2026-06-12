@@ -2,6 +2,7 @@
 // Universal Capsule Nav (Hyperspace Standard)
 import { Icon } from "astro-icon/components";
 import navData from "../../config/navData"; // Adjusted import to relative path
+import siteData from "@config/siteData.json";
 // import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
 import MobileNav from "@components/Nav/MobileNav/MobileNav.astro";
 import UniversalHUD from "@components/Nav/UniversalHUD.astro"; // NEW wrapper
@@ -130,7 +131,7 @@ const { hideLogo } = Astro.props;
 				<Icon name="tabler:brand-linkedin" class="h-5 w-5" />
 			</a>
 			<a
-				href="mailto:erik@example.com"
+				href={`mailto:${siteData.author.email}`}
 				class="hover:text-primary transition-colors hover:scale-110"
 			>
 				<Icon name="tabler:mail" class="h-5 w-5" />

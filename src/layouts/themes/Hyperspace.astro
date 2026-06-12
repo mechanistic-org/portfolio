@@ -86,7 +86,7 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 	</div>
 
 	<!-- HUD -->
-	<ScrollyHud steps={stickies.map((s: any) => ({ id: s.id, label: s.label }))} />
+	<ScrollyHud steps={stickies.map((s: any) => ({ id: s.id, label: s.label || s.title || s.id }))} />
 
 	<!-- TOP HUD (Project Info) - Always Visible (Stealth Mode) -->
 	{

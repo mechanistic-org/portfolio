@@ -3,7 +3,8 @@ import { Image } from "astro:assets";
 import { getAssetUrl } from "@/utils/assets";
 
 const { project } = Astro.props;
-const { data, slug } = project;
+// Astro 5 content entries expose `id` (which the detail route builds from), not `slug`
+const { data, id } = project;
 // Ensure we use 'tools' instead of 'technologies' which does not exist in schema
 const { title, description, tools = [], heroImage: image } = data;
 
@@ -13,7 +14,7 @@ const heroImage = typeof image === "string" ? getAssetUrl(image) : null;
 ---
 
 <a
-	href={`/projects/${slug}/`}
+	href={`/projects/${id}/`}
 	class="group hover:border-primary/50 block h-full overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/50 transition-all hover:bg-neutral-900"
 >
 	<div class="aspect-video w-full overflow-hidden">
