@@ -8,8 +8,8 @@ const OUTPUT_DIR = path.resolve(__dirname, "../../portfolio-assets/R2_STAGING/re
 const ARCHIVE_DIR = path.join(OUTPUT_DIR, "archive");
 const TODAY = new Date().toISOString().split("T")[0];
 
-// File Naming: Lazy Option
-const ARCHIVE_FILENAME = `Erik_Norris_Sr_Staff_Forensic_Architect_${TODAY}.pdf`;
+// Archive name stays title-agnostic so job-title changes never touch this script
+const ARCHIVE_FILENAME = `Erik_Norris_Resume_${TODAY}.pdf`;
 const CURRENT_FILENAME = `Erik_Norris_Resume_Current.pdf`;
 
 const ARCHIVE_PATH = path.join(ARCHIVE_DIR, ARCHIVE_FILENAME);
