@@ -27,8 +27,8 @@ const heroImage = typeof image === "string" ? getAssetUrl(image) : null;
 					class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
 				/>
 			) : (
-				<div class="flex h-full w-full items-center justify-center bg-neutral-950 text-neutral-800">
-					<span class="font-mono text-xs">NO SIGNAL</span>
+				<div class="flex h-full w-full items-center justify-center bg-neutral-950 px-4 text-center">
+					<span class="font-mono text-xs tracking-widest text-neutral-600 uppercase">{title}</span>
 				</div>
 			)
 		}
