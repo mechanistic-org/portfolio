@@ -816,9 +816,9 @@ tools:
 
 ### 3. Architecture Crisis: The EMI/Thermal "Rake"
 
-- **Trigger:** The initial 4U chassis stacked the power supply directly under the A/D converters, producing catastrophic EMI noise; the follow-up 3U crossflow layout then failed thermal qualification with air filters installed.
-- **Intervention:** Redesigned the chassis around a revised 3U alignment with modified PSUs, metal connectors, and shielded cables.
-- **Result:** Neutralized the EMI path while passing thermal qualification — the packaging architecture that shipped.
+- **Trigger:** The initial 4U chassis stacked the internal power supply directly under the A/D converters, producing catastrophic EMI noise — and the console carried a non-negotiable acoustic constraint. It sits at the engineer's listening position, so the Product Design Document mandated a **fanless** shipping product. The easy thermal answer was off the table.
+- **Intervention:** I validated active-cooling fallbacks against the rake layouts before committing to silence. A four-fan crossflow array (4× 80 mm, 12 V) passed on an open bench but **failed thermal qualification once the dust filter and plastic side caps were installed** — the sealed enclosure trapped its own heat. A three-fan front-to-back arrangement (3× 80 mm at 12 V, or 8.5 V for quieter running, reusing the legacy 4U mounting footprint) met spec as a fallback, pending acoustic sign-off with Sheldon. The shipping answer was to remove the heat source instead: re-architect to the revised 3U alignment and move the power supply out of the chassis into the external Skynet brick, with modified PSUs, metal connectors, and shielded cables to break the EMI path.
+- **Result:** A silent, **fanless** console that holds its 10–35 °C internal window and passes thermal qualification — the architecture that shipped, with the validated fan configurations left on the bench as insurance.
 
 ### 4. Serviceability Crisis: The Headphone Jack Fire Drill
 
@@ -888,6 +888,8 @@ That inheritance *is* my mandate, restated from the outside. The moves the page 
 ### 3. What the Market Valued — and What It Did Not
 
 Strip away the spec sheet and the thing buyers kept returning to was the **tactile real estate**: 24 touch-sensitive motorized faders in front of you, not 8 banked and paged. For a dense session that physical channel count is the entire argument, and the secondary research reads it as the C|24's most durable value driver ⚠ *needs Erik's sign-off*. That tracks with why I fought the fader-panel tolerances so hard through Pilot — the faders *were* the product.
+
+One feature in particular punched above its price and kept showing up in the affection: the **"Etch-a-Sketch" surround pan** — two rotary encoders driving X/Y placement across a 5.1 field, so an engineer could spot a sound by feel instead of buying a separate joystick module. I built that one, so I'll vouch for it directly; that it aged into part of the unit's folklore is the market telling me which details landed.
 
 I will record the honest knocks too, because a portfolio that lists only wins is not forensic. The external analysis surfaces three recurring criticisms: the 16 onboard preamps were heard as clean but neutral, short of the harmonic character of high-end outboard ⚠ *needs Erik's sign-off*; the DB25 analog I/O loom was a real and often-unbudgeted add-on cost ⚠ *needs Erik's sign-off*; and the all-metal chassis that gave the unit its pro feel also made it heavy to move ⚠ *needs Erik's sign-off*. The weight I will own outright — that mass was a deliberate choice, the same powder-coated steel I spent the project defending against ripple and warp. The preamp and cabling critiques are market perception I would want to confirm before publishing.
 
