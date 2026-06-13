@@ -8,6 +8,9 @@ cast:
 - name: Neal Breitbarth
   org: Digidesign / Avid
   role: Mechanical/ID Lead
+- name: Sheldon Radford
+  org: Digidesign / Avid
+  role: Control Surface / Industrial Design
 - name: Robin Parnaby
   org: Digidesign / Avid
   role: Hardware Engineering Lead
@@ -234,7 +237,7 @@ cyberspace:
       layout: masonry
       scattered: true
     deck:
-    - body: '**Timeline:** 2006 – 2007
+    - body: '**Timeline:** 2005 – 2007
 
         **Objective:** Engineer the successor to the best-selling Control|24, improving
         margins and manufacturability while meeting strict new environmental standards.
@@ -314,7 +317,7 @@ cyberspace:
 
         **By The Numbers:**
 
-        *   **40+ Custom Parts:** 15 Sheet Metal, 25+ Injection Molded.
+        *   **100+ Unique Components:** ~15 Sheet Metal, 25+ Injection-Molded, 19 PCBs, plus cables and hardware.
 
         *   **19 PCBs:** Managed 3D constraints for all 19 boards.
 
@@ -784,7 +787,7 @@ tags:
 - Mechanism
 - Leadership
 - Yield
-teamSize: 21
+teamSize: 58
 slug: c24
 theme: hyperspace
 title: C|24
@@ -802,7 +805,7 @@ tools:
 
 ## II. The Product That Shipped
 
-The refresh wasn't only crisis triage — it reshaped the product. Against the 43-inch width target I stripped the console down: out went the numeric keypad, the F6–F10 function keys, the eight-button edit section, and four display buttons, on a bet that soft keys and screen-based entry could carry the load. The single-row, four-character readouts became three large 55×2-character LCD scribble strips — which nearly broke us, because supporting limited katakana characters ran the 2407 DSPs out of flash memory, a firmware crisis hiding behind a cosmetic upgrade. The meter bridge carried 24 Pro Tools track meters on 14-segment LED ladders (nine green, four amber, one red clip), and the workflow reached for ICON-class features: plug-in flip mode on the touch-sensitive faders, the full automation suite (write/touch/latch/read/trim), and a deep diagnostics layer — Vegas mode, the fader step/cycle/group/touch/recalibrate battery, ethernet loopback, and transport-aware auto-talkback.
+The refresh wasn't only crisis triage — it reshaped the product. Against the 43-inch width target I stripped the console down: out went the numeric keypad, the F6–F10 function keys, the eight-button edit section, and four display buttons, on a bet that soft keys and screen-based entry could carry the load. The single-row, four-character readouts became three large 55×2-character Varitronix LCD scribble strips, specified with the ID team (Sheldon Radford) — down to a custom character-ROM set, worked out with Stan Cotey and David Anthony, to carry Japanese katakana. That last requirement nearly broke us: the katakana ROM ran the 2407 DSPs out of flash memory, a firmware crisis hiding behind a cosmetic upgrade. The meter bridge carried 24 Pro Tools track meters on 14-segment LED ladders (nine green, four amber, one red clip), and the workflow reached for ICON-class features: plug-in flip mode on the touch-sensitive faders, the full automation suite (write/touch/latch/read/trim), and a deep diagnostics layer — Vegas mode, the fader step/cycle/group/touch/recalibrate battery, ethernet loopback, and transport-aware auto-talkback.
 
 ## III. The Anatomy of Failure
 
@@ -822,7 +825,7 @@ The refresh wasn't only crisis triage — it reshaped the product. Against the 4
 ### 3. Architecture Crisis: The EMI/Thermal "Rake"
 
 - **Trigger:** The initial 4U chassis stacked the internal power supply directly under the A/D converters, producing catastrophic EMI noise — and the console carried a non-negotiable acoustic constraint. It sits at the engineer's listening position, so the Product Design Document mandated a **fanless** shipping product. The easy thermal answer was off the table.
-- **Intervention:** I validated active-cooling fallbacks against the rake layouts before committing to silence. A four-fan crossflow array (4× 80 mm, 12 V) passed on an open bench but **failed thermal qualification once the dust filter and plastic side caps were installed** — the sealed enclosure trapped its own heat. A three-fan front-to-back arrangement (3× 80 mm at 12 V, or 8.5 V for quieter running, reusing the legacy 4U mounting footprint) met spec as a fallback, pending acoustic sign-off with Sheldon. The shipping answer was to remove the heat source instead: re-architect to the revised 3U alignment and move the power supply out of the chassis into the external Skynet brick, with modified PSUs, metal connectors, and shielded cables to break the EMI path.
+- **Intervention:** I validated active-cooling fallbacks against the rake layouts before committing to silence. A four-fan crossflow array (4× 80 mm, 12 V) passed on an open bench but **failed thermal qualification once the dust filter and plastic side caps were installed** — the sealed enclosure trapped its own heat. A three-fan front-to-back arrangement (3× 80 mm at 12 V, or 8.5 V for quieter running, reusing the legacy 4U mounting footprint) met spec as a fallback, pending final acoustic verification. The shipping answer was to remove the heat source instead: re-architect to the revised 3U alignment and move the power supply out of the chassis into the external Skynet brick, with modified PSUs, metal connectors, and shielded cables to break the EMI path.
 - **Result:** A silent, **fanless** console that holds its 10–35 °C internal window and passes thermal qualification — the architecture that shipped, with the validated fan configurations left on the bench as insurance.
 
 ### 4. Serviceability Crisis: The Headphone Jack Fire Drill
@@ -854,7 +857,7 @@ The refresh wasn't only crisis triage — it reshaped the product. Against the 4
 
 ## IV. Governance & Rhythm
 
-- **The Pulse:** Managed under a constant "At Risk/Replan" status from an initial Q1 2007 target to the November 2007 ship, with weekly War Room coordination across Silicon Valley and Guangdong. The mechanical architecture was a solo mandate: one engineer integrating 19 PCB assemblies and 15 sheet metal parts inside extreme geometric constraints.
+- **The Pulse:** Managed under a constant "At Risk/Replan" status from an initial Q1 2007 target to the November 2007 ship, with weekly War Room coordination across Silicon Valley and Guangdong. The mechanical architecture was a solo mandate: one engineer integrating 100+ unique components — 19 PCB assemblies, 15 sheet-metal parts, 25+ molded parts, plus cables and hardware — inside extreme geometric constraints.
 - **The Method:** I don't redesign what isn't failing. On the meter assembly I traced the field history through the repair bench (via Ed Bangert) and found the LED spacers had a zero replacement record — so I kept the legacy design and spent the tooling budget where parts were actually breaking. Same instinct at kickoff: I asked for a nonfunctional "dog unit" — a dead sample — to tear down before I drew a line.
 - **The Artifacts:**
   - **DCD Protocol** — the geometric firewall; 50+ binding drawings, MicPre 8 at Rev 12.
