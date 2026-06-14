@@ -1,0 +1,186 @@
+---
+/**
+ * Kitchen Sink — the VERIFICATION harness (distinct from /design-system).
+ * /design-system = curated showcase + colophon (one canonical instance each).
+ * THIS = exhaustive primitive × state/variant matrix for catching regressions:
+ * empty / partial / overflow / tier / single-vs-many. Lower polish, higher coverage.
+ * Flip the theme toggle to verify light AND dark. Run before any propagation.
+ */
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ThemeControl from "@components/primitives/ThemeControl.astro";
+import MediaHeader from "@components/primitives/MediaHeader.astro";
+import Hatnote from "@components/primitives/Hatnote.astro";
+import Collapse from "@components/primitives/Collapse.astro";
+import Tabs from "@components/primitives/Tabs.astro";
+import Infobox from "@components/primitives/Infobox.astro";
+import HudMetrics from "@components/primitives/HudMetrics.astro";
+import ScarTimeline from "@components/primitives/ScarTimeline.astro";
+import ForensicSummary from "@components/primitives/ForensicSummary.astro";
+import Cast from "@components/primitives/Cast.astro";
+import Figure from "@components/primitives/Figure.astro";
+import MultiImage from "@components/primitives/MultiImage.astro";
+import Montage from "@components/primitives/Montage.astro";
+import Gallery from "@components/primitives/Gallery.astro";
+import Pullquote from "@components/primitives/Pullquote.astro";
+import References from "@components/primitives/References.astro";
+import Toc from "@components/primitives/Toc.astro";
+import Navbox from "@components/primitives/Navbox.astro";
+
+export const prerender = true;
+
+const hero = "/assets/c24/c24-hero-01-xl.webp";
+const img = (n: number) => `/assets/r2/c24/bubbles/01_origin_story/c24-prototype-0${n}-xl.webp`;
+const imgs = (n: number) => Array.from({ length: n }, (_, i) => ({ src: img((i % 6) + 1), alt: `proto-${i + 1}` }));
+
+const scarsFull: any[] = [
+	{ label: "Thermal — banana defect", severity: "critical", phase: "pilot", value: "2.50 → <0.50 mm", trigger: "Side caps warped in the cure.", intervention: "Vertical-hang fixture (ECO 12740).", result: "<0.50 mm; 100% yield." },
+	{ label: "Architecture — EMI rake", severity: "critical", phase: "design", value: "fanless", trigger: "PSU under the A/D = EMI.", intervention: "External PSU.", result: "Silent fanless ship." },
+	{ label: "Serviceability — jack", severity: "major", phase: "fcs", value: "2 h → <10 min", trigger: "4.8% field failure.", intervention: "Trap-door geometry.", result: "MTTR < 10 min." },
+	{ label: "Minor cosmetic nit", severity: "minor", phase: "fcs", value: "—", trigger: "Silkscreen drift.", intervention: "Ink recalibration.", result: "True white." },
+];
+const longVal = "A deliberately very long value string to check truncation / wrapping behavior inside the infobox cell at narrow widths without breaking the layout.";
+---
+
+<BaseLayout type="general" title="Kitchen Sink" description="Primitive verification harness.">
+	<article class="mx-auto mt-24 mb-24 w-full max-w-[1100px] px-4 sm:px-6 lg:px-8">
+		<header class="border-border mb-8 flex items-end justify-between gap-6 border-b pb-6">
+			<div>
+				<h1 class="h1 mb-2">Kitchen Sink</h1>
+				<p class="text-muted-foreground max-w-2xl text-sm">
+					Verification harness — every primitive across empty / partial / overflow / tier states.
+					<strong>Flip the theme toggle</strong> to check light and dark. Distinct from the curated
+					<a href="/design-system" class="text-primary underline">/design-system</a>.
+				</p>
+			</div>
+			<ThemeControl />
+		</header>
+
+		<section class="ks">
+			<h2>Collapse</h2>
+			<div class="ks-grid">
+				<div><span class="ks-l">open</span><Collapse title="Open" open={true}><p class="text-sm">Body visible.</p></Collapse></div>
+				<div><span class="ks-l">closed</span><Collapse title="Closed" open={false}><p class="text-sm">Hidden until toggled.</p></Collapse></div>
+				<div><span class="ks-l">danger + count</span><Collapse title="Failures" count={3} tone="danger" open={true}><p class="text-sm">Red tone.</p></Collapse></div>
+				<div><span class="ks-l">scroll (long)</span><Collapse title="Long" open={true} scroll={true}>{Array.from({length:20},(_,i)=><p class="text-sm">Line {i+1}</p>)}</Collapse></div>
+			</div>
+		</section>
+
+		<section class="ks">
+			<h2>Tabs</h2>
+			<div class="ks-grid">
+				<div><span class="ks-l">4 tabs</span><Tabs><div data-tab="One"><p class="text-sm">1</p></div><div data-tab="Two"><p class="text-sm">2</p></div><div data-tab="Three"><p class="text-sm">3</p></div><div data-tab="Four"><p class="text-sm">4</p></div></Tabs></div>
+				<div><span class="ks-l">1 panel (no tablist)</span><Tabs><div data-tab="Solo"><p class="text-sm">Single panel renders without a tablist.</p></div></Tabs></div>
+			</div>
+		</section>
+
+		<section class="ks">
+			<h2>HudMetrics</h2>
+			<div class="ks-grid">
+				<div><span class="ks-l">full (3)</span><HudMetrics metrics={{ financial: "Royalty killed.", process: "Yield salvaged.", governance: "13 ECOs." }} open={true} /></div>
+				<div><span class="ks-l">partial (1)</span><HudMetrics metrics={{ financial: "Only financial present." }} open={true} /></div>
+				<div><span class="ks-l">empty → nothing</span><HudMetrics metrics={{}} open={true} /></div>
+			</div>
+		</section>
+
+		<section class="ks">
+			<h2>ScarTimeline</h2>
+			<div class="ks-grid">
+				<div><span class="ks-l">full (open) — click expands (no anchors here)</span><ScarTimeline scars={scarsFull} open={true} /></div>
+				<div><span class="ks-l">single</span><ScarTimeline scars={[scarsFull[0]]} open={true} /></div>
+				<div><span class="ks-l">empty → nothing</span><ScarTimeline scars={[]} open={true} /></div>
+			</div>
+		</section>
+
+		<section class="ks">
+			<h2>ForensicSummary · Infobox</h2>
+			<div class="ks-grid">
+				<div><span class="ks-l">summary full</span><ForensicSummary summary={{ trigger: "T.", intervention: "I.", result: "R." }} /></div>
+				<div><span class="ks-l">summary partial</span><ForensicSummary summary={{ trigger: "Only a trigger." }} /></div>
+				<div><span class="ks-l">infobox + long value</span><div class="border-border bg-card/40 rounded-md border p-3"><Infobox facts={[["Role","Lead"],["Note",longVal]]} /></div></div>
+			</div>
+		</section>
+
+		<section class="ks">
+			<h2>MediaHeader</h2>
+			<span class="ks-l">full</span>
+			<div class="border-border mb-4 rounded-lg border p-4"><MediaHeader title="C|24" meta={["Digidesign","2005–2007"]} tags={["Thermal","Crisis"]} heroImage={hero} description="Full header." audioUrl="#" photoCount={58} videoCount={1} /></div>
+			<span class="ks-l">minimal (title only)</span>
+			<div class="border-border rounded-lg border p-4"><MediaHeader title="Bare Minimum" /></div>
+		</section>
+
+		<section class="ks">
+			<h2>Cast</h2>
+			<div class="ks-grid">
+				<div><span class="ks-l">internal + external</span><Cast cast={[{name:"Neal Breitbarth",role:"Mech/ID Lead",org:"Digidesign / Avid"},{name:"Robin Parnaby",role:"HW Lead",org:"Digidesign / Avid"},{name:"Henry Lee",role:"Vendor",org:"VTech / Kenny"}]} /></div>
+				<div><span class="ks-l">empty → nothing</span><Cast cast={[]} /></div>
+			</div>
+		</section>
+
+		<section class="ks">
+			<h2>Media</h2>
+			<span class="ks-l">Figure (caption+credit)</span>
+			<Figure src={hero} alt="hero" caption="With caption." credit="Digidesign" />
+			<span class="ks-l">Figure (no caption)</span>
+			<Figure src={img(2)} alt="no caption" />
+			<span class="ks-l">MultiImage (2 / 4)</span>
+			<MultiImage images={imgs(2)} caption="Two." />
+			<MultiImage images={imgs(4)} caption="Four." />
+			<span class="ks-l">Montage (3 / 8)</span>
+			<Montage images={imgs(3)} caption="Three." />
+			<Montage images={imgs(8)} caption="Eight." />
+			<span class="ks-l">Gallery (3-col / 1 image / long caption)</span>
+			<Gallery title="Three col" images={imgs(6)} columns={3} />
+			<Gallery title="Single" images={imgs(1)} columns={3} />
+		</section>
+
+		<section class="ks">
+			<h2>Wires</h2>
+			<div class="ks-grid">
+				<div><span class="ks-l">Pullquote (cite)</span><Pullquote cite="§I">The physical consensus of 58 stakeholders.</Pullquote></div>
+				<div><span class="ks-l">Pullquote (no cite)</span><Pullquote>No attribution.</Pullquote></div>
+				<div><span class="ks-l">References</span><References references={[{text:"A ref",href:"#"},{text:"No link"}]} /></div>
+				<div><span class="ks-l">References empty → nothing</span><References references={[]} /></div>
+				<div><span class="ks-l">Toc</span><Toc headings={[{depth:2,slug:"a",text:"Alpha"},{depth:2,slug:"b",text:"Beta"}]} /></div>
+				<div><span class="ks-l">Toc empty → nothing</span><Toc headings={[]} /></div>
+				<div><span class="ks-l">Hatnote</span><Hatnote>A scope / disambiguation note.</Hatnote></div>
+				<div><span class="ks-l">ThemeControl</span><ThemeControl /></div>
+			</div>
+			<span class="ks-l">Navbox (both / prev-only / next-only / neither → nothing)</span>
+			<Navbox prev={{href:"#",title:"Prev"}} next={{href:"#",title:"Next"}} />
+			<Navbox prev={{href:"#",title:"Prev only"}} next={null} />
+			<Navbox prev={null} next={{href:"#",title:"Next only"}} />
+			<Navbox prev={null} next={null} />
+		</section>
+	</article>
+</BaseLayout>
+
+<style>
+	.ks {
+		border-top: 0.5px solid var(--border);
+		padding-top: 1.5rem;
+		margin-top: 1.5rem;
+	}
+	.ks > h2 {
+		font-family: var(--font-mono);
+		font-size: 12px;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--primary);
+		margin-bottom: 1rem;
+	}
+	.ks-grid {
+		display: grid;
+		gap: 1.25rem;
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+		align-items: start;
+	}
+	.ks-l {
+		display: block;
+		font-family: var(--font-mono);
+		font-size: 10px;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--muted-foreground);
+		margin: 0.75rem 0 0.4rem;
+	}
+</style>
