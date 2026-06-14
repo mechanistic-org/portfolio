@@ -23,6 +23,7 @@ DETACHED_PROJECT_FIELDS = {
     "forensic_data",
     "forensic_metrics",
     "forensic_summary",
+    "hatnote",
     "isomorphics",
     "metrics",
     "phase_stats",
