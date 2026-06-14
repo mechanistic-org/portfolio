@@ -1,0 +1,55 @@
+---
+/**
+ * HudScars — the failure-scar widget. Scars are the central forensic theme and live
+ * in the left HUD rail (resolved design). Each scar is an interactive Trigger→…→Result
+ * disclosure. Count badge in the header; body scroll-caps past 4 so the rail stays sane.
+ */
+import Collapse from "./Collapse.astro";
+
+interface Props {
+	scars: { label: string; value?: string; description: string }[];
+	open?: boolean;
+}
+const { scars = [], open = true } = Astro.props;
+---
+
+{
+	scars.length > 0 && (
+		<Collapse
+			title="Failure Scars"
+			count={scars.length}
+			open={open}
+			tone="danger"
+			scroll={scars.length > 4}
+		>
+			<ul class="space-y-2">
+				{scars.map((s) => (
+					<li>
+						<details class="group/scar border-border/60 bg-card/30 rounded border">
+							<summary class="flex cursor-pointer list-none items-start gap-2 px-2.5 py-2 [&::-webkit-details-marker]:hidden">
+								<span class="bg-error mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full" />
+								<span class="text-foreground text-[13px] leading-snug font-medium">{s.label}</span>
+								<svg
+									class="text-muted-foreground mt-0.5 ml-auto h-3.5 w-3.5 shrink-0 transition-transform duration-200 group-open/scar:rotate-180"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									aria-hidden="true"
+								>
+									<path d="m6 9 6 6 6-6" />
+								</svg>
+							</summary>
+							<div class="border-border/60 space-y-1.5 border-t px-2.5 py-2">
+								{s.value && <div class="text-error font-mono text-[11px] font-bold">{s.value}</div>}
+								<p class="text-muted-foreground text-[12px] leading-relaxed">{s.description}</p>
+							</div>
+						</details>
+					</li>
+				))}
+			</ul>
+		</Collapse>
+	)
+}

@@ -1,122 +1,203 @@
 ---
 /**
- * ProjectArticle — a Wikipedia-MoS-spirit base layout (SPIKE).
- * Holy-grail 3-col: left TOC · center article · right stacked infobox.
- * The infobox surfaces the key facts AND the forensic metrics (stacked) that the
- * HUD/dossier currently bury. Scrollytelling/galleries become optional accents, not the base.
- * Consumes the same structured project data the generator produces.
+ * ProjectArticle v2 — the IMDb-title-page + Wikipedia-MoS flagship reader.
+ *
+ *   MediaHeader (poster · title · meta · chips · media strip)
+ *   ── 3-column body ──────────────────────────────────────────
+ *   LEFT  = forensic HUD (key facts · metrics · scars · BOM)   [hybrid: collapsible
+ *           widget cards, tabs inside the large ones; scars live here]
+ *   CENTER= the article (lead + sections) + cast
+ *   RIGHT = contents · media · references
+ *
+ * Assembled entirely from the primitive library so 100+ pages share one taxonomy.
+ * Fed by entry.data (today hand-authored mdx; tomorrow the canon generator).
  */
 import BaseLayout from "@layouts/BaseLayout.astro";
-import DossierCast from "@components/Dossier/DossierCast.astro";
+import MediaHeader from "@components/primitives/MediaHeader.astro";
+import HudRail from "@components/primitives/HudRail.astro";
+import Collapse from "@components/primitives/Collapse.astro";
+import Infobox from "@components/primitives/Infobox.astro";
+import HudMetrics from "@components/primitives/HudMetrics.astro";
+import HudScars from "@components/primitives/HudScars.astro";
+import References from "@components/primitives/References.astro";
+import ThemeControl from "@components/primitives/ThemeControl.astro";
+import Cast from "@components/primitives/Cast.astro";
 
+interface Props {
+	entry: { data: Record<string, any> };
+	Content: any;
+	headings?: { depth: number; slug: string; text: string }[];
+}
 const { entry, Content, headings = [] } = Astro.props;
 const d = entry.data;
 
+const pretty = (s?: string) =>
+	s ? String(s).replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) : undefined;
 const yr = (x: any) => (x ? new Date(x).getFullYear() : null);
 const period = [yr(d.date), yr(d.endDate)].filter(Boolean).join("–") || d.duration;
 
-// Infobox — stacked: conventional metadata, then forensic metrics.
-const facts = ([
-  ["Role", d.job_title || "Mechanical Eng. / ID Lead"],
-  ["Employer", d.employer],
-  ["Period", period],
-  ["Team", d.teamSize],
-  ["Industry", d.industry],
-  ["Tools", (d.tools || []).join(", ")],
-  ["Production", d.production],
-] as [string, any][]).filter(([, v]) => v);
+// Recursively collect any { src, alt } images stashed in the legacy cyberspace data.
+function collectImages(node: any, out: { src: string; alt?: string }[] = []) {
+	if (!node) return out;
+	if (Array.isArray(node)) {
+		node.forEach((n) => collectImages(n, out));
+		return out;
+	}
+	if (typeof node === "object") {
+		if (Array.isArray(node.images)) {
+			node.images.forEach((im: any) => im?.src && out.push({ src: im.src, alt: im.alt }));
+		}
+		Object.values(node).forEach((v) => collectImages(v, out));
+	}
+	return out;
+}
+const images = collectImages(d.cyberspace);
 
-const fm = d.forensic_metrics || {};
-const metrics = ([
-  ["Financial", fm.financial],
-  ["Process", fm.process],
-  ["Governance", fm.governance],
-] as [string, any][]).filter(([, v]) => v);
+const meta = [
+	pretty(d.employer),
+	period,
+	pretty(d.industry),
+	d.teamSize ? `${d.teamSize} stakeholders` : undefined,
+];
 
-const toc = headings.filter((h: any) => h.depth === 2);
+const facts: [string, unknown][] = (
+	[
+		["Role", d.job_title || "Mechanical / ID Lead"],
+		["Employer", pretty(d.employer)],
+		["Period", period],
+		["Team", d.teamSize],
+		["Industry", pretty(d.industry)],
+		["Production", pretty(d.production)],
+		["Tools", (d.tools || []).map(pretty).join(", ")],
+	] as [string, unknown][]
+).filter(([, v]) => v);
+
+const scars = d.scars?.filter((s: any) => s && typeof s === "object") ?? [];
+const bom = d.bom ?? [];
+
+const toc = headings.filter((h) => h.depth === 2);
+
+const references = [
+	d.audio_url && { text: "Audio briefing (NotebookLM overview)", href: d.audio_url },
+	d.nlm_url && { text: "NotebookLM source notebook", href: d.nlm_url },
+	d.notebook_url && { text: "Project notebook", href: d.notebook_url },
+].filter(Boolean) as { text: string; href?: string }[];
 ---
 
-<BaseLayout type="general" title={d.title} description={d.description} image={d.heroImage}>
-  <article class="site-container mt-24 mb-24">
-    <header class="border-border mb-8 border-b pb-6">
-      <h1 class="h1 mb-3">{d.title}</h1>
-      <p class="text-muted-foreground max-w-3xl text-lg md:text-xl">{d.description}</p>
-    </header>
+<BaseLayout type="project" title={d.title} description={d.description} image={d.heroImage}>
+	<article class="site-container mt-24 mb-24">
+		<div class="mb-4 flex items-center justify-end">
+			<ThemeControl />
+		</div>
 
-    <div class="lg:grid lg:grid-cols-[190px_minmax(0,1fr)_330px] lg:gap-10">
-      {/* LEFT — table of contents */}
-      <nav class="hidden lg:block">
-        <div class="sticky top-24">
-          <div class="text-muted-foreground mb-3 font-mono text-[10px] tracking-widest uppercase">
-            Contents
-          </div>
-          <ul class="space-y-2 text-sm">
-            {toc.map((h: any) => (
-              <li>
-                <a href={`#${h.slug}`} class="text-muted-foreground hover:text-foreground transition-colors">
-                  {h.text}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
+		<MediaHeader
+			title={d.title}
+			meta={meta}
+			tags={d.tags || []}
+			heroImage={d.heroImage}
+			description={d.description}
+			audioUrl={d.audio_url}
+			photoCount={images.length || undefined}
+		/>
 
-      {/* CENTER — the article */}
-      <main class="min-w-0">
-        <div class="markdown-content max-w-3xl">
-          <Content />
-        </div>
-        {d.cast && d.cast.length > 0 && (
-          <section class="mt-16">
-            <h2 class="h2 mb-6">Cast</h2>
-            <DossierCast cast={d.cast} />
-          </section>
-        )}
-      </main>
+		<div class="lg:grid lg:grid-cols-[300px_minmax(0,1fr)_280px] lg:gap-10">
+			{/* LEFT — forensic HUD */}
+			<HudRail>
+				<Collapse title="Key Facts">
+					<Infobox facts={facts} />
+				</Collapse>
+				<HudMetrics metrics={d.forensic_metrics || {}} />
+				<HudScars scars={scars} />
+				{
+					bom.length > 0 && (
+						<Collapse title="Bill of Materials" count={bom.length} open={false}>
+							<ul class="space-y-1.5">
+								{bom.map((b: any) => (
+									<li class="flex items-baseline justify-between gap-3 text-sm">
+										<span class="text-muted-foreground">{b.label}</span>
+										{b.value && <span class="text-foreground font-mono text-xs">{b.value}</span>}
+									</li>
+								))}
+							</ul>
+						</Collapse>
+					)
+				}
+			</HudRail>
 
-      {/* RIGHT — infobox (stacked: facts, then forensic metrics) */}
-      <aside class="mt-10 lg:mt-0">
-        <div class="border-border bg-card/30 sticky top-24 overflow-hidden rounded-lg border">
-          {d.heroImage && (
-            <img src={d.heroImage} alt={d.title} class="aspect-[3/2] w-full object-cover" />
-          )}
-          <div class="p-4">
-            <div class="text-primary mb-3 font-mono text-xs font-bold tracking-widest uppercase">
-              {d.title}
-            </div>
-            <table class="w-full text-sm">
-              <tbody>
-                {facts.map(([k, v]) => (
-                  <tr class="border-border/50 border-t">
-                    <th class="text-muted-foreground w-24 py-2 pr-3 text-left align-top font-mono text-[10px] font-medium tracking-widest uppercase">
-                      {k}
-                    </th>
-                    <td class="text-foreground py-2">{v}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          {metrics.length > 0 && (
-            <div class="border-border border-t bg-black/20 p-4">
-              <div class="text-primary mb-3 font-mono text-[10px] font-bold tracking-widest uppercase">
-                Forensic Metrics
-              </div>
-              <dl class="space-y-3">
-                {metrics.map(([k, v]) => (
-                  <div>
-                    <dt class="text-muted-foreground font-mono text-[10px] tracking-widest uppercase">
-                      {k}
-                    </dt>
-                    <dd class="text-foreground mt-1 text-sm leading-relaxed">{v}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          )}
-        </div>
-      </aside>
-    </div>
-  </article>
+			{/* CENTER — the article */}
+			<main class="min-w-0">
+				<div class="markdown-content max-w-3xl">
+					<Content />
+				</div>
+				{
+					d.cast && d.cast.length > 0 && (
+						<section class="mt-16">
+							<h2 class="h2 mb-6">Cast &amp; Credits</h2>
+							<Cast cast={d.cast} />
+						</section>
+					)
+				}
+			</main>
+
+			{/* RIGHT — contents · media · references */}
+			<aside class="mt-12 space-y-10 lg:mt-0">
+				<div class="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:space-y-10 lg:overflow-y-auto">
+					{
+						toc.length > 0 && (
+							<nav>
+								<div class="text-muted-foreground mb-3 font-mono text-[10px] font-bold tracking-widest uppercase">
+									Contents
+								</div>
+								<ul class="space-y-2 text-sm">
+									{toc.map((h) => (
+										<li>
+											<a
+												href={`#${h.slug}`}
+												class="text-muted-foreground hover:text-foreground transition-colors"
+											>
+												{h.text}
+											</a>
+										</li>
+									))}
+								</ul>
+							</nav>
+						)
+					}
+
+					{
+						images.length > 0 && (
+							<div>
+								<div class="text-muted-foreground mb-3 font-mono text-[10px] font-bold tracking-widest uppercase">
+									Media · {images.length}
+								</div>
+								<div class="grid grid-cols-2 gap-2">
+									{images.slice(0, 6).map((im) => (
+										<img
+											src={im.src}
+											alt={im.alt || ""}
+											loading="lazy"
+											class="border-border aspect-square w-full rounded border object-cover"
+										/>
+									))}
+								</div>
+							</div>
+						)
+					}
+
+					{
+						d.audio_url && (
+							<div>
+								<div class="text-muted-foreground mb-3 font-mono text-[10px] font-bold tracking-widest uppercase">
+									Briefing
+								</div>
+								<audio controls preload="none" src={d.audio_url} class="w-full" />
+							</div>
+						)
+					}
+
+					<References references={references} />
+				</div>
+			</aside>
+		</div>
+	</article>
 </BaseLayout>

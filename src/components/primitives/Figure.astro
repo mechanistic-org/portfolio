@@ -1,0 +1,32 @@
+---
+/**
+ * Figure — a single captioned image (Wikipedia "thumb"/Figure). The caption is the
+ * forensic discipline: every photo is accounted for. Photos are the evidence — we
+ * invert Wikipedia's "minimize images" prior but keep the captioning rigor.
+ */
+interface Props {
+	src: string;
+	alt: string;
+	caption?: string;
+	credit?: string;
+	class?: string;
+}
+const { src, alt, caption, credit, class: className = "" } = Astro.props;
+---
+
+<figure class:list={["my-6", className]}>
+	<img
+		src={src}
+		alt={alt}
+		loading="lazy"
+		class="border-border w-full rounded-lg border object-cover"
+	/>
+	{
+		(caption || credit) && (
+			<figcaption class="text-muted-foreground mt-2 text-xs leading-relaxed">
+				{caption}
+				{credit && <span class="text-muted-foreground/60"> · {credit}</span>}
+			</figcaption>
+		)
+	}
+</figure>

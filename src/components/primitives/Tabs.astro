@@ -1,0 +1,64 @@
+---
+/**
+ * Tabs — tabbed control primitive (Wikipedia "tab"/switcher family).
+ * Progressive enhancement: author panels as `<div data-tab="Label">…</div>` children;
+ * the web component builds the tablist from their data-tab labels. With JS off, all
+ * panels render stacked. Used INSIDE large HUD widgets per the hybrid model.
+ */
+interface Props {
+	class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+
+<mos-tabs class:list={["block", className]}>
+	<slot />
+</mos-tabs>
+
+<script>
+	class MosTabs extends HTMLElement {
+		private tabs: HTMLButtonElement[] = [];
+		private panels: HTMLElement[] = [];
+
+		connectedCallback() {
+			this.panels = Array.from(this.querySelectorAll<HTMLElement>(":scope > [data-tab]"));
+			if (this.panels.length < 2) return; // a single panel needs no tablist
+
+			const tablist = document.createElement("div");
+			tablist.setAttribute("role", "tablist");
+			tablist.className = "mb-3 flex flex-wrap gap-1 border-b border-border";
+
+			this.panels.forEach((panel, i) => {
+				const label = panel.getAttribute("data-tab") || `Tab ${i + 1}`;
+				const btn = document.createElement("button");
+				btn.type = "button";
+				btn.textContent = label;
+				btn.setAttribute("role", "tab");
+				btn.className =
+					"-mb-px border-b-2 border-transparent px-2.5 py-1.5 font-mono text-[11px] tracking-wider uppercase text-muted-foreground transition-colors hover:text-foreground";
+				btn.addEventListener("click", () => this.select(i));
+				tablist.appendChild(btn);
+				panel.setAttribute("role", "tabpanel");
+			});
+
+			this.prepend(tablist);
+			this.tabs = Array.from(tablist.children) as HTMLButtonElement[];
+			this.select(0);
+		}
+
+		private select(idx: number) {
+			this.panels.forEach((p, i) => {
+				p.hidden = i !== idx;
+			});
+			this.tabs.forEach((t, i) => {
+				const on = i === idx;
+				t.setAttribute("aria-selected", String(on));
+				t.classList.toggle("border-primary", on);
+				t.classList.toggle("text-foreground", on);
+				t.classList.toggle("text-muted-foreground", !on);
+			});
+		}
+	}
+
+	if (!customElements.get("mos-tabs")) customElements.define("mos-tabs", MosTabs);
+</script>

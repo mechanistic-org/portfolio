@@ -1,0 +1,26 @@
+---
+/**
+ * Infobox — the conventional key-facts table (Wikipedia "Infobox"). Lives as a
+ * Collapse widget in the HUD rail alongside the forensic instruments. Stacked
+ * label/value rows; the metadata the old HUD/dossier buried.
+ */
+interface Props {
+	facts: [string, unknown][];
+}
+const { facts } = Astro.props;
+---
+
+<table class="w-full text-sm">
+	<tbody>
+		{
+			facts.map(([k, v]) => (
+				<tr class="border-border/50 border-t first:border-t-0">
+					<th class="text-muted-foreground w-24 py-1.5 pr-3 text-left align-top font-mono text-[10px] font-medium tracking-widest uppercase">
+						{k}
+					</th>
+					<td class="text-foreground py-1.5">{v}</td>
+				</tr>
+			))
+		}
+	</tbody>
+</table>

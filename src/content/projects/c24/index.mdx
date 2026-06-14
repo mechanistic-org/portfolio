@@ -770,6 +770,34 @@ forensic_metrics:
   financial: "~$200/unit royalty eliminated; 51.80% gross margin held against 20% steel inflation; $9,995 MSRP maintained."
   process: "Pilot cosmetic yield salvaged 100% (2.50 mm warp corrected to below 0.50 mm); headphone-jack MTTR cut from over 2 hours to under 10 minutes."
   governance: "13 major ECOs in 6 months; 50+ Data Control Drawings enforced; 100% mechanical fit on first build of 19 PCB assemblies."
+scars:
+- label: 'Thermal — the "banana" defect'
+  value: '2.50 mm warp → <0.50 mm'
+  description: 'ABS side caps (P/N 9440-55165/166) warped up to 2.50 mm in the high-temp soft-paint cure cycle. A vertical-hang cure fixture (ECO 12740) straightened them during cool-down, recovering 100% pilot cosmetic yield with no new tooling spend.'
+- label: 'Supply chain — top-panel no-bid'
+  value: 'FCS Nov 20 2007 held'
+  description: 'The primary overseas vendor no-bid the most complex welded panel (P/N 9420-55105) — its dense standoffs blocked the automated CNC welder. A dual-source manual-weld bridge with Mass Precision kept the line moving while automation retooled.'
+- label: 'Architecture — the EMI / thermal "rake"'
+  value: 'fanless ship'
+  description: 'The PSU stacked under the A/D converters produced catastrophic EMI against a non-negotiable fanless acoustic mandate. I validated fan fallbacks, then removed the heat source entirely — the PSU moved to an external Skynet brick with shielded cables.'
+- label: 'Firmware — the katakana ROM'
+  value: '2407 DSP flash exhausted'
+  description: 'A custom character-ROM for Japanese katakana on the new Varitronix scribble strips ran the 2407 DSPs out of flash memory — a firmware crisis hiding behind a cosmetic LCD upgrade.'
+- label: 'Serviceability — headphone-jack MTTR'
+  value: '2 h+ → <10 min'
+  description: 'Field replacement of the headphone jack originally took over two hours; a design change cut mean-time-to-repair to under ten minutes.'
+- label: 'The human cost — a ruptured Achilles'
+  value: 'weld files sent from hotel wifi'
+  description: 'Mid-fabrication I fully ruptured my Achilles tendon. The night I got back from the hospital I sent the top-panel weld-stud files over hotel wifi so the build would not stall while I was off my feet.'
+bom:
+- label: Unique components
+  value: '100+'
+- label: PCB assemblies
+  value: '19'
+- label: Sheet-metal parts
+  value: '~15'
+- label: Injection-molded parts
+  value: '25+'
 forensic_summary:
   trigger: "Pilot-build collapse on multiple fronts: ABS side caps warped up to 2.50 mm in the paint-cure cycle, the primary vendor no-bid the most complex panel, and the PSU failed certification — all against a hard Q4 2007 revenue date."
   intervention: "Engineered a vertical-hang cure fixture (ECO 12740), ran a dual-source manual-welding bridge, enforced a 50+ DCD geometric firewall across 19 PCBs, and hand-packed 100 units to bypass the certification block."

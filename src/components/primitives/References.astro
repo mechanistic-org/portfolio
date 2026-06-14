@@ -1,0 +1,36 @@
+---
+/**
+ * References — numbered citation list (Wikipedia "Reflist"). Sits at the foot of the
+ * right rail or the article. Honors the provenance discipline: NLM-derived claims are
+ * cited like any other source, never presented as bare fact.
+ */
+interface Props {
+	references?: { text: string; href?: string }[];
+	label?: string;
+}
+const { references = [], label = "References" } = Astro.props;
+---
+
+{
+	references.length > 0 && (
+		<section class="mt-10">
+			<h2 class="text-muted-foreground mb-3 font-mono text-[10px] font-bold tracking-widest uppercase">
+				{label}
+			</h2>
+			<ol class="text-muted-foreground space-y-1.5 text-xs">
+				{references.map((r, i) => (
+					<li class="flex gap-2">
+						<span class="text-muted-foreground/60 font-mono">{i + 1}.</span>
+						{r.href ? (
+							<a href={r.href} class="hover:text-foreground underline-offset-2 hover:underline">
+								{r.text}
+							</a>
+						) : (
+							<span>{r.text}</span>
+						)}
+					</li>
+				))}
+			</ol>
+		</section>
+	)
+}

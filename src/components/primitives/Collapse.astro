@@ -1,0 +1,62 @@
+---
+/**
+ * Collapse — the foundational HUD widget card (Wikipedia "Collapse"/NavFrame family).
+ * Native <details> so it works without JS. Styled summary with mono label, optional
+ * count badge, and a rotating chevron. `tone="danger"` for scar/critical widgets.
+ * The frame for the resolved HYBRID HUD model: collapsible cards, tabs live inside.
+ */
+interface Props {
+	title: string;
+	count?: string | number;
+	open?: boolean;
+	tone?: "default" | "danger";
+	/** bound the body height and scroll when content is long (e.g. 10+ scars) */
+	scroll?: boolean;
+	class?: string;
+}
+const { title, count, open = true, tone = "default", scroll = false, class: className = "" } = Astro.props;
+const danger = tone === "danger";
+---
+
+<details
+	open={open}
+	class:list={["group border-border bg-card/40 overflow-hidden rounded-md border", className]}
+>
+	<summary
+		class="hover:bg-muted/40 flex cursor-pointer list-none items-center gap-2 px-3 py-2 transition-colors select-none [&::-webkit-details-marker]:hidden"
+	>
+		<span
+			class:list={[
+				"font-mono text-[11px] font-bold tracking-widest uppercase",
+				danger ? "text-error" : "text-foreground",
+			]}>{title}</span
+		>
+		{
+			count != null && (
+				<span
+					class:list={[
+						"rounded px-1.5 py-0.5 font-mono text-[10px] font-bold tracking-wider",
+						danger ? "bg-error/10 text-error" : "bg-muted text-muted-foreground",
+					]}
+				>
+					{count}
+				</span>
+			)
+		}
+		<svg
+			class="text-muted-foreground ml-auto h-4 w-4 shrink-0 transition-transform duration-200 group-open:rotate-180"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			aria-hidden="true"
+		>
+			<path d="m6 9 6 6 6-6"></path>
+		</svg>
+	</summary>
+	<div class:list={["border-border/60 border-t px-3 py-3", scroll && "max-h-80 overflow-y-auto"]}>
+		<slot />
+	</div>
+</details>

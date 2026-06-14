@@ -1,0 +1,118 @@
+---
+/**
+ * Cast — the interactive credits widget (Wikipedia "Cast"/credits family, IMDb-styled).
+ * Scales to 40+ people: deduped, grouped by org into collapsible groups (first open).
+ * Each member surfaces a LinkedIn card on hover/focus — using an explicit `linkedin`
+ * URL when canon provides one, else a name+company people-search fallback.
+ */
+interface Member {
+	name: string;
+	role: string;
+	org: string;
+	linkedin?: string;
+}
+interface Props {
+	cast: Member[];
+	openFirst?: boolean;
+}
+const { cast = [], openFirst = true } = Astro.props;
+
+const clean = (n: string) =>
+	(n || "")
+		.replace(/\s*\(.*?\)\s*/g, " ")
+		.replace(/\s+/g, " ")
+		.trim();
+const initials = (n: string) =>
+	clean(n)
+		.split(" ")
+		.slice(0, 2)
+		.map((w) => w[0]?.toUpperCase() ?? "")
+		.join("");
+const company = (org: string) => (org || "").split(/[\/,]/)[0].trim();
+const linkedinHref = (m: Member) =>
+	m.linkedin ||
+	`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(
+		[clean(m.name), company(m.org)].filter(Boolean).join(" "),
+	)}`;
+
+// Dedupe exact (name|role|org) tuples — pure noise — then group by org, first-seen order.
+const seen = new Set<string>();
+const groupsMap = new Map<string, Member[]>();
+for (const m of cast) {
+	if (!m?.name) continue;
+	const key = `${m.name}|${m.role}|${m.org}`;
+	if (seen.has(key)) continue;
+	seen.add(key);
+	const org = m.org || "Other";
+	if (!groupsMap.has(org)) groupsMap.set(org, []);
+	groupsMap.get(org)!.push(m);
+}
+const groups = [...groupsMap.entries()];
+---
+
+<div class="space-y-3">
+	{
+		groups.map(([org, members], gi) => (
+			<details open={openFirst && gi === 0} class="group/grp border-border bg-card/30 rounded-md border">
+				<summary class="hover:bg-muted/40 flex cursor-pointer list-none items-center gap-2 px-3 py-2 transition-colors select-none [&::-webkit-details-marker]:hidden">
+					<span class="text-foreground font-mono text-[11px] font-bold tracking-widest uppercase">
+						{org}
+					</span>
+					<span class="bg-muted text-muted-foreground rounded px-1.5 py-0.5 font-mono text-[10px] font-bold tracking-wider">
+						{members.length}
+					</span>
+					<svg
+						class="text-muted-foreground ml-auto h-4 w-4 shrink-0 transition-transform duration-200 group-open/grp:rotate-180"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<path d="m6 9 6 6 6-6" />
+					</svg>
+				</summary>
+				<div class="border-border/60 grid grid-cols-1 gap-2 border-t p-3 sm:grid-cols-2 lg:grid-cols-3">
+					{members.map((m) => (
+						<div class="group/m relative">
+							<div
+								tabindex="0"
+								class="border-border/60 bg-card/40 hover:border-primary/40 focus-visible:border-primary flex items-center gap-3 rounded-md border p-2.5 outline-none transition-colors"
+							>
+								<span class="bg-muted text-foreground flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-mono text-xs font-bold">
+									{initials(m.name)}
+								</span>
+								<span class="min-w-0">
+									<span class="text-foreground block truncate text-sm font-medium">{clean(m.name)}</span>
+									<span class="text-muted-foreground block truncate text-xs">{m.role}</span>
+								</span>
+							</div>
+							<div class="absolute top-full left-0 z-20 hidden w-64 max-w-[80vw] pt-1 group-hover/m:block group-focus-within/m:block">
+								<div class="border-border bg-popover rounded-md border p-3 shadow-lg">
+									<div class="text-foreground text-sm font-bold">{clean(m.name)}</div>
+									<div class="text-muted-foreground mt-0.5 text-xs">{m.role}</div>
+									<div class="text-muted-foreground/70 mt-0.5 font-mono text-[10px] tracking-wide uppercase">
+										{m.org}
+									</div>
+									<a
+										href={linkedinHref(m)}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="text-primary hover:bg-primary/10 mt-2 inline-flex items-center gap-1.5 rounded px-2 py-1 text-xs font-medium transition-colors"
+									>
+										<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+											<path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17V9.99H6V17h2.34zM7.17 8.96a1.36 1.36 0 1 0 0-2.72 1.36 1.36 0 0 0 0 2.72zM18 17v-3.84c0-2.05-1.1-3-2.55-3-1.17 0-1.7.64-1.99 1.09V9.99h-2.34V17h2.34v-3.91c0-.21.02-.41.08-.56.16-.41.54-.84 1.17-.84.82 0 1.15.63 1.15 1.55V17H18z" />
+										</svg>
+										View on LinkedIn
+									</a>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			</details>
+		))
+	}
+</div>

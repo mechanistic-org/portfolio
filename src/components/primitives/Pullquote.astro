@@ -1,0 +1,23 @@
+---
+/**
+ * Pullquote — an editorial blockquote lifted from the article (Wikipedia "Quote box").
+ * Accent rule on the left, larger italic body. `cite` for attribution.
+ */
+interface Props {
+	cite?: string;
+}
+const { cite } = Astro.props;
+---
+
+<figure class="border-primary my-8 border-l-2 pl-5">
+	<blockquote class="text-foreground text-lg leading-relaxed italic md:text-xl">
+		<slot />
+	</blockquote>
+	{
+		cite && (
+			<figcaption class="text-muted-foreground mt-2 font-mono text-xs tracking-wide">
+				— {cite}
+			</figcaption>
+		)
+	}
+</figure>

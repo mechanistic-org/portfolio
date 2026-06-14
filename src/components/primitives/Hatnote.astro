@@ -1,0 +1,19 @@
+---
+/**
+ * Hatnote — the italic note above a section (Wikipedia "Hatnote"). For scope notes,
+ * cross-references, and ⚠ provenance flags ("needs sign-off") set off from the body.
+ */
+interface Props {
+	class?: string;
+}
+const { class: className = "" } = Astro.props;
+---
+
+<div
+	class:list={[
+		"text-muted-foreground border-border/60 mb-4 border-b pb-2 text-sm italic",
+		className,
+	]}
+>
+	<slot />
+</div>

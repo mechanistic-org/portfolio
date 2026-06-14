@@ -1,0 +1,38 @@
+---
+/**
+ * HudMetrics — forensic metrics widget. Demonstrates the HYBRID model: a Collapse
+ * card whose body is a Tabs control (Financial / Process / Governance / Technical).
+ * Each metric is interactive — its prose lives behind its tab.
+ */
+import Collapse from "./Collapse.astro";
+import Tabs from "./Tabs.astro";
+
+interface Props {
+	metrics: { financial?: string; process?: string; governance?: string; technical?: string };
+	open?: boolean;
+}
+const { metrics, open = true } = Astro.props;
+
+const panels = (
+	[
+		["Financial", metrics.financial],
+		["Process", metrics.process],
+		["Governance", metrics.governance],
+		["Technical", metrics.technical],
+	] as [string, string | undefined][]
+).filter(([, v]) => v);
+---
+
+{
+	panels.length > 0 && (
+		<Collapse title="Forensic Metrics" open={open}>
+			<Tabs>
+				{panels.map(([label, v]) => (
+					<div data-tab={label}>
+						<p class="text-foreground text-sm leading-relaxed">{v}</p>
+					</div>
+				))}
+			</Tabs>
+		</Collapse>
+	)
+}

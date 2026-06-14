@@ -64,6 +64,14 @@
 		max-width: 100vw;
 	}
 
+	/* Paint the page surface in BOTH modes. Previously only html.dark set a
+	 * background-color, so light mode fell through to a transparent (dark) canvas.
+	 * html.dark below still overrides with the dark token values. */
+	html {
+		background-color: var(--background);
+		color: var(--foreground);
+	}
+
 	html.dark {
 		/* starwind dark theme config */
 		--background: var(--color-base-900);

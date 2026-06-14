@@ -1,0 +1,32 @@
+---
+/**
+ * HudRail — the left forensic instrument column. Stacks HUD widgets (Collapse cards).
+ * Sticky on desktop with an internal scroll cap so a tall rail (10+ scars) stays
+ * pinned and usable instead of clipping. Scars live HERE per the resolved design.
+ */
+interface Props {
+	label?: string;
+	sticky?: boolean;
+	class?: string;
+}
+const { label = "Forensic HUD", sticky = true, class: className = "" } = Astro.props;
+---
+
+<aside class:list={[className]}>
+	<div
+		class:list={[
+			sticky && "lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto lg:pr-1",
+		]}
+	>
+		{
+			label && (
+				<div class="text-muted-foreground mb-3 font-mono text-[10px] font-bold tracking-widest uppercase">
+					{label}
+				</div>
+			)
+		}
+		<div class="space-y-3">
+			<slot />
+		</div>
+	</div>
+</aside>

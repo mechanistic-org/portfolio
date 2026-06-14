@@ -5,7 +5,9 @@ const fs = require("fs");
 // Configuration
 const RESUME_URL = "http://localhost:4321/resume";
 const OUTPUT_DIR = path.resolve(__dirname, "../../portfolio-assets/R2_STAGING/resume");
-const ARCHIVE_DIR = path.join(OUTPUT_DIR, "archive");
+// Archives are local-only. R2_STAGING syncs publicly with guessable URLs, and old
+// dated resumes carry stale personal info - they must never land in staging.
+const ARCHIVE_DIR = path.resolve(__dirname, "../../portfolio-assets/resume_archive_local");
 const TODAY = new Date().toISOString().split("T")[0];
 
 // Archive name stays title-agnostic so job-title changes never touch this script
@@ -99,6 +101,7 @@ async function generatePDF() {
 		console.log(`📦 Archived Copy Saved: ${ARCHIVE_PATH}`);
 	} catch (error) {
 		console.error("❌ PDF Generation Failed:", error);
+		process.exitCode = 1;
 	} finally {
 		if (browser) await browser.close();
 		// Kill the headless server

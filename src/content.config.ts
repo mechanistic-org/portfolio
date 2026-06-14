@@ -321,6 +321,7 @@ const projectsCollection = defineCollection({
 						name: z.string(),
 						role: z.string(),
 						org: z.string(),
+						linkedin: z.string().optional(), // explicit profile URL; falls back to a name+company search
 					}),
 				)
 				.optional(),
