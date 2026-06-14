@@ -1,0 +1,55 @@
+---
+/**
+ * Gallery — a sectioned, captioned grid of forensic figures (Wikipedia "Gallery").
+ * Photos ARE the evidence here, so we invert Wikipedia's "minimize images" prior —
+ * but keep the captioning discipline: every image is accounted for. CSS multi-column
+ * masonry (no JS); captions humanize the asset alt until canon supplies real ones.
+ */
+interface Img {
+	src: string;
+	alt?: string;
+	aspectRatio?: number;
+	caption?: string;
+}
+interface Props {
+	title?: string;
+	images: Img[];
+	columns?: number;
+	caption?: string;
+}
+const { title, images = [], columns = 3, caption } = Astro.props;
+
+const humanize = (s?: string) => {
+	const t = (s || "").replace(/[-_]+/g, " ").trim();
+	return t ? t.charAt(0).toUpperCase() + t.slice(1) : "";
+};
+const colClass = columns >= 3 ? "sm:columns-2 lg:columns-3" : columns === 2 ? "sm:columns-2" : "";
+---
+
+{
+	images.length > 0 && (
+		<section class="my-8">
+			{title && (
+				<h3 class="text-muted-foreground mb-1 font-mono text-[11px] font-bold tracking-widest uppercase">
+					{title} <span class="text-muted-foreground/60">· {images.length}</span>
+				</h3>
+			)}
+			{caption && <p class="text-muted-foreground mb-3 text-sm leading-relaxed">{caption}</p>}
+			<div class:list={["gap-3", colClass]}>
+				{images.map((im) => (
+					<figure class="mb-3 break-inside-avoid">
+						<img
+							src={im.src}
+							alt={im.alt || ""}
+							loading="lazy"
+							class="border-border w-full rounded-lg border object-cover"
+						/>
+						<figcaption class="text-muted-foreground mt-1.5 text-[11px] leading-snug">
+							{im.caption || humanize(im.alt)}
+						</figcaption>
+					</figure>
+				))}
+			</div>
+		</section>
+	)
+}

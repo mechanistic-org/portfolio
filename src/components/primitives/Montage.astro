@@ -1,0 +1,34 @@
+---
+/**
+ * Montage — a tight framed mosaic of images under one caption (Wikipedia
+ * "Photo montage"/infobox montage). For a composite hero or a contact-sheet
+ * strip that reads as a single unit.
+ */
+interface Img {
+	src: string;
+	alt?: string;
+}
+interface Props {
+	images: Img[];
+	caption?: string;
+	columns?: number;
+}
+const { images = [], caption, columns = 4 } = Astro.props;
+const imgs = images.slice(0, columns * 2);
+const colClass = columns >= 4 ? "grid-cols-2 sm:grid-cols-4" : "grid-cols-2 sm:grid-cols-3";
+---
+
+{
+	imgs.length > 0 && (
+		<figure class="my-6">
+			<div class:list={["border-border grid gap-1 overflow-hidden rounded-lg border", colClass]}>
+				{imgs.map((im) => (
+					<img src={im.src} alt={im.alt || ""} loading="lazy" class="aspect-square w-full object-cover" />
+				))}
+			</div>
+			{caption && (
+				<figcaption class="text-muted-foreground mt-2 text-xs leading-relaxed">{caption}</figcaption>
+			)}
+		</figure>
+	)
+}

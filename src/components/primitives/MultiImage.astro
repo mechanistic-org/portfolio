@@ -1,0 +1,36 @@
+---
+/**
+ * MultiImage — 2–4 images side by side under one shared caption (Wikipedia
+ * "Multiple image"). For before/after pairs and method comparisons where the
+ * figures only make sense read together.
+ */
+interface Img {
+	src: string;
+	alt?: string;
+}
+interface Props {
+	images: Img[];
+	caption?: string;
+}
+const { images = [], caption } = Astro.props;
+---
+
+{
+	images.length > 0 && (
+		<figure class="my-6">
+			<div class="flex flex-col gap-2 sm:flex-row">
+				{images.map((im) => (
+					<img
+						src={im.src}
+						alt={im.alt || ""}
+						loading="lazy"
+						class="border-border w-full flex-1 rounded-lg border object-cover"
+					/>
+				))}
+			</div>
+			{caption && (
+				<figcaption class="text-muted-foreground mt-2 text-xs leading-relaxed">{caption}</figcaption>
+			)}
+		</figure>
+	)
+}

@@ -22,6 +22,7 @@ import HudScars from "@components/primitives/HudScars.astro";
 import References from "@components/primitives/References.astro";
 import ThemeControl from "@components/primitives/ThemeControl.astro";
 import Cast from "@components/primitives/Cast.astro";
+import Gallery from "@components/primitives/Gallery.astro";
 
 interface Props {
 	entry: { data: Record<string, any> };
@@ -52,6 +53,11 @@ function collectImages(node: any, out: { src: string; alt?: string }[] = []) {
 	return out;
 }
 const images = collectImages(d.cyberspace);
+
+// Sectioned galleries (the forensic evidence) live under cyberspace.stickies.
+const galleries = (d.cyberspace?.stickies || []).filter(
+	(s: any) => s?.type === "gallery" && s?.data?.images?.length,
+);
 
 const meta = [
 	pretty(d.employer),
@@ -129,6 +135,18 @@ const references = [
 				<div class="markdown-content max-w-3xl">
 					<Content />
 				</div>
+				{
+					galleries.length > 0 && (
+						<section class="mt-16">
+							<h2 class="h2 mb-6">Visual Evidence</h2>
+							<div class="space-y-10">
+								{galleries.map((g: any) => (
+									<Gallery title={g.title} images={g.data.images} columns={g.data.columns} />
+								))}
+							</div>
+						</section>
+					)
+				}
 				{
 					d.cast && d.cast.length > 0 && (
 						<section class="mt-16">
