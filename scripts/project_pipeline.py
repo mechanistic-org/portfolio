@@ -15,7 +15,7 @@ Non-destructive: never writes the live src/content/projects/<slug>/index.mdx.
 import os, sys, json
 import yaml
 
-SLUG = "c24"
+SLUG = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("-") else "c24"
 CANON_DIR  = r"H:\workspace\canon\entities\projects\%s" % SLUG
 CANON_REC  = os.path.join(CANON_DIR, "%s.md" % SLUG)
 SITE_DIR   = r"D:\GitHub\portfolio\src\content\projects\%s" % SLUG
@@ -181,12 +181,27 @@ def appended_sections(body):
     return out
 
 
+# ---------------------------------------------------------------- tiering
+def compute_tier(data):
+    """Collapse the (up to 4) tier signals into one flagship|lite classification.
+    In practice only presentation_mode is populated across the corpus, but tier,
+    hxo_ready and hydration_status are honored if a record carries them."""
+    pm = (data.get("presentation_mode") or "").lower()
+    flagship = (
+        pm in ("deep_dive", "flagship")
+        or data.get("tier") == 1
+        or data.get("hxo_ready") is True
+        or (data.get("hydration_status") or "").lower() == "full"
+    )
+    return "flagship" if flagship else "lite"
+
+
 # ---------------------------------------------------------------- extract
 def extract():
     data, body = read_mdx(SITE_MDX)
     rec = {"title": data.get("title"), "slug": data.get("slug", SLUG),
            "created": "2026-06-13", "updated": "2026-06-13", "type": "entity",
-           "tier": "flagship" if data.get("presentation_mode") == "deep_dive" else "lite",
+           "tier": compute_tier(data),
            "sensitivity": "public", "confidence": "high", "sources": []}
     dossier_fields = {f for f, _, _ in DOSSIER}
     for k, v in data.items():

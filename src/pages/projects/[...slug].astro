@@ -7,6 +7,7 @@ export const prerender = true;
 
 // THEME REGISTRY
 import Hyperspace from "@layouts/themes/Hyperspace.astro";
+import ProjectArticle from "@layouts/themes/ProjectArticle.astro";
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
@@ -146,6 +147,11 @@ else {
 
 // Map string to Component
 const ThemeComponents: Record<string, any> = {
+	// The Wikipedia-MoS + IMDb-title reader (opt-in via `theme: article`). Consumes the
+	// same finalEntry (frontmatter + merged data.json sidecar) the other themes get.
+	article: ProjectArticle,
+	wikipedia: ProjectArticle,
+	imdb: ProjectArticle,
 	datasheet: Hyperspace, // Re-route legacy datasheet to Hyperspace
 	hyperspace: Hyperspace,
 	command: Hyperspace, // Archived -> Hyperspace

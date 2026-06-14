@@ -59,6 +59,15 @@ const galleries = (d.cyberspace?.stickies || []).filter(
 	(s: any) => s?.type === "gallery" && s?.data?.images?.length,
 );
 
+// Two-tier rendering — same collapse rule the generator uses (compute_tier).
+// flagship = everything expanded + full galleries; lite = collapsed HUD, no gallery wall.
+const isFlagship =
+	["deep_dive", "flagship"].includes((d.presentation_mode || "").toLowerCase()) ||
+	d.tier === 1 ||
+	d.hxo_ready === true ||
+	(d.hydration_status || "").toLowerCase() === "full";
+const lite = !isFlagship;
+
 const meta = [
 	pretty(d.employer),
 	period,
@@ -109,11 +118,11 @@ const references = [
 		<div class="lg:grid lg:grid-cols-[300px_minmax(0,1fr)_280px] lg:gap-10">
 			{/* LEFT — forensic HUD */}
 			<HudRail>
-				<Collapse title="Key Facts">
+				<Collapse title="Key Facts" open={true}>
 					<Infobox facts={facts} />
 				</Collapse>
-				<HudMetrics metrics={d.forensic_metrics || {}} />
-				<HudScars scars={scars} />
+				<HudMetrics metrics={d.forensic_metrics || {}} open={!lite} />
+				<HudScars scars={scars} open={!lite} />
 				{
 					bom.length > 0 && (
 						<Collapse title="Bill of Materials" count={bom.length} open={false}>
@@ -136,7 +145,7 @@ const references = [
 					<Content />
 				</div>
 				{
-					galleries.length > 0 && (
+					!lite && galleries.length > 0 && (
 						<section class="mt-16">
 							<h2 class="h2 mb-6">Visual Evidence</h2>
 							<div class="space-y-10">
