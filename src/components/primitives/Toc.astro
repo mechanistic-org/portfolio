@@ -1,0 +1,39 @@
+---
+/**
+ * Toc — table of contents (Wikipedia "TOC"). Lists the article's level-2 headings
+ * as in-page anchors. Extracted from ProjectArticle so it's a reusable primitive.
+ */
+interface Heading {
+	depth: number;
+	slug: string;
+	text: string;
+}
+interface Props {
+	headings: Heading[];
+	label?: string;
+}
+const { headings = [], label = "Contents" } = Astro.props;
+const toc = headings.filter((h) => h.depth === 2);
+---
+
+{
+	toc.length > 0 && (
+		<nav>
+			<div class="text-muted-foreground mb-3 font-mono text-[10px] font-bold tracking-widest uppercase">
+				{label}
+			</div>
+			<ul class="space-y-2 text-sm">
+				{toc.map((h) => (
+					<li>
+						<a
+							href={`#${h.slug}`}
+							class="text-muted-foreground hover:text-foreground transition-colors"
+						>
+							{h.text}
+						</a>
+					</li>
+				))}
+			</ul>
+		</nav>
+	)
+}

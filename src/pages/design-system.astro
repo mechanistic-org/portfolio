@@ -1,0 +1,280 @@
+---
+/**
+ * Design System — the kitchen-sink reference exemplar (#109 / #101).
+ * The canonical reference standard for every primitive + token: a verification
+ * surface, a living style-guide, and a colophon asset. Modeled on the archived
+ * component-lab (verification suite) + about/elements (token sheet). Organized by
+ * the Brick / Chip / Wire vernacular: Foundations → Bricks → Instruments → Wires.
+ */
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ThemeControl from "@components/primitives/ThemeControl.astro";
+import MediaHeader from "@components/primitives/MediaHeader.astro";
+import Hatnote from "@components/primitives/Hatnote.astro";
+import Collapse from "@components/primitives/Collapse.astro";
+import Tabs from "@components/primitives/Tabs.astro";
+import Infobox from "@components/primitives/Infobox.astro";
+import HudMetrics from "@components/primitives/HudMetrics.astro";
+import ScarTimeline from "@components/primitives/ScarTimeline.astro";
+import ForensicSummary from "@components/primitives/ForensicSummary.astro";
+import Cast from "@components/primitives/Cast.astro";
+import Figure from "@components/primitives/Figure.astro";
+import MultiImage from "@components/primitives/MultiImage.astro";
+import Montage from "@components/primitives/Montage.astro";
+import Gallery from "@components/primitives/Gallery.astro";
+import Pullquote from "@components/primitives/Pullquote.astro";
+import References from "@components/primitives/References.astro";
+import Toc from "@components/primitives/Toc.astro";
+import Navbox from "@components/primitives/Navbox.astro";
+
+export const prerender = true;
+
+const hero = "/assets/c24/c24-hero-01-xl.webp";
+const img = (n: number) => `/assets/r2/c24/bubbles/01_origin_story/c24-prototype-0${n}-xl.webp`;
+const sampleImages = [1, 2, 3, 4, 5, 6].map((n) => ({ src: img(n), alt: `c24-prototype-0${n}` }));
+
+const facts: [string, unknown][] = [
+	["Role", "Mechanical / ID Lead"],
+	["Employer", "Digidesign"],
+	["Period", "2005–2007"],
+	["Team", "58"],
+];
+const metrics = {
+	financial: "~$200/unit royalty eliminated; 51.8% gross margin held vs 20% steel inflation.",
+	process: "Pilot cosmetic yield 100% salvaged (2.50 mm → <0.50 mm).",
+	governance: "13 major ECOs in 6 months; 50+ Data Control Drawings.",
+};
+const scars = [
+	{ label: 'Thermal — the "banana" defect', severity: "critical", phase: "pilot", value: "2.50 → <0.50 mm", trigger: "Side caps warped 2.50 mm in the paint cure.", intervention: "Vertical-hang cure fixture (ECO 12740).", result: "<0.50 mm; 100% pilot yield." },
+	{ label: "Architecture — EMI / thermal rake", severity: "critical", phase: "design", value: "fanless ship", trigger: "PSU under the A/D = EMI vs a fanless mandate.", intervention: "Removed the heat source; external PSU.", result: "Silent fanless console." },
+	{ label: "Serviceability — headphone jack", severity: "major", phase: "fcs", value: "2 h → <10 min", trigger: "4.8% field failure, 2-hour teardown.", intervention: "Recessed trap-door geometry.", result: "MTTR under 10 minutes." },
+];
+const summary = {
+	trigger: "Pilot-build collapse on multiple fronts against a hard Q4 2007 revenue date.",
+	intervention: "Cure fixture, dual-source weld bridge, a 50+ DCD geometric firewall, and a hand-pack bypass.",
+	result: "100% pilot yield, 100% first-build fit, 500 units shipped at a 51.8% gross margin.",
+};
+const cast = [
+	{ name: "Neal Breitbarth", role: "Mechanical/ID Lead", org: "Digidesign / Avid" },
+	{ name: "Robin Parnaby", role: "Hardware Engineering Lead", org: "Digidesign / Avid" },
+	{ name: "Franco Piccininni", role: "PCB Design", org: "Digidesign / Avid" },
+	{ name: "Henry Lee", role: "Vendor Contact", org: "VTech / Kenny" },
+];
+const refs = [
+	{ text: "Audio briefing (NotebookLM overview)", href: "#" },
+	{ text: "Comparative Economic report", href: "#" },
+];
+const tocHeadings = [
+	{ depth: 2, slug: "foundations", text: "Foundations" },
+	{ depth: 2, slug: "bricks", text: "Bricks" },
+	{ depth: 2, slug: "instruments", text: "Instruments" },
+	{ depth: 2, slug: "wires", text: "Wires" },
+];
+const colorTokens: [string, string][] = [
+	["primary", "--primary"],
+	["error", "--error"],
+	["warning", "--warning"],
+	["info", "--info"],
+	["success", "--success"],
+	["foreground", "--foreground"],
+	["muted-foreground", "--muted-foreground"],
+	["card", "--card"],
+	["accent", "--accent"],
+	["border", "--border"],
+];
+---
+
+<BaseLayout type="general" title="Design System" description="The primitive reference standard for eriknorris.com.">
+	<article class="mx-auto mt-24 mb-24 w-full max-w-[1100px] px-4 sm:px-6 lg:px-8">
+		<header class="border-border mb-10 flex items-end justify-between gap-6 border-b pb-6">
+			<div>
+				<h1 class="h1 mb-2">Design System</h1>
+				<p class="text-muted-foreground max-w-2xl">
+					The reference standard for every primitive and token — a verification surface, a living
+					style-guide, and a colophon asset. Pages are assembled from these <em>Bricks</em>,
+					<em>Chips</em>, and <em>Wires</em>; nothing is a snowflake.
+				</p>
+			</div>
+			<ThemeControl />
+		</header>
+
+		{/* ───────────── Foundations ───────────── */}
+		<h2 id="foundations" class="h2 mb-6">Foundations</h2>
+
+		<div class="mb-12 space-y-8">
+			<section>
+				<div class="ds-label">Typography</div>
+				<div class="border-border space-y-2 rounded-lg border p-5">
+					<div class="h1">Barlow Condensed — h1</div>
+					<div class="h2">Barlow Condensed — h2</div>
+					<div class="h3">Barlow Condensed — h3</div>
+					<p class="text-foreground max-w-2xl">
+						Body copy is Barlow at a capped measure for readability. The forensic register stays
+						active-voice and data-first.
+					</p>
+					<p class="text-muted-foreground font-mono text-xs tracking-widest uppercase">
+						Share Tech Mono — labels · metrics · eyebrows
+					</p>
+				</div>
+			</section>
+
+			<section>
+				<div class="ds-label">Color tokens</div>
+				<div class="grid grid-cols-2 gap-3 sm:grid-cols-5">
+					{
+						colorTokens.map(([name, v]) => (
+							<div class="border-border overflow-hidden rounded-lg border">
+								<div class="h-12 w-full" style={`background: var(${v})`} />
+								<div class="p-2">
+									<div class="text-foreground text-xs font-medium">{name}</div>
+									<div class="text-muted-foreground font-mono text-[10px]">{v}</div>
+								</div>
+							</div>
+						))
+					}
+				</div>
+			</section>
+		</div>
+
+		{/* ───────────── Page chrome ───────────── */}
+		<h2 class="h2 mb-6">Page chrome</h2>
+		<div class="mb-12 space-y-8">
+			<section>
+				<div class="ds-label">MediaHeader · IMDb title block</div>
+				<div class="border-border rounded-lg border p-5">
+					<MediaHeader
+						title="C|24"
+						meta={["Digidesign", "2005–2007", "Pro Audio", "58 stakeholders"]}
+						tags={["Thermal", "Crisis", "Cost-down"]}
+						heroImage={hero}
+						description="A ground-up RoHS re-architecture that killed a ~$200/unit royalty and shipped under fire."
+						audioUrl="#"
+						photoCount={58}
+						videoCount={1}
+					/>
+				</div>
+			</section>
+			<section>
+				<div class="ds-label">Hatnote · scope / disambiguation</div>
+				<Hatnote>
+					Forensic case study of the Digidesign C|24 ("Curtis") — the RoHS-era successor to the
+					Control|24.
+				</Hatnote>
+			</section>
+		</div>
+
+		{/* ───────────── Bricks ───────────── */}
+		<h2 id="bricks" class="h2 mb-6">Bricks <span class="text-muted-foreground text-base">— containers &amp; blocks</span></h2>
+		<div class="mb-12 grid gap-8 md:grid-cols-2">
+			<section>
+				<div class="ds-label">Collapse · NavFrame</div>
+				<Collapse title="Forensic Metrics" open={true}>
+					<p class="text-foreground text-sm">A collapsible widget card — the HUD frame.</p>
+				</Collapse>
+			</section>
+			<section>
+				<div class="ds-label">Tabs · switcher (inside a Collapse = the hybrid HUD)</div>
+				<Collapse title="Metrics" open={true}>
+					<Tabs>
+						<div data-tab="Financial"><p class="text-foreground text-sm">{metrics.financial}</p></div>
+						<div data-tab="Process"><p class="text-foreground text-sm">{metrics.process}</p></div>
+						<div data-tab="Governance"><p class="text-foreground text-sm">{metrics.governance}</p></div>
+					</Tabs>
+				</Collapse>
+			</section>
+			<section>
+				<div class="ds-label">Infobox · key facts</div>
+				<div class="border-border bg-card/40 rounded-md border p-3"><Infobox facts={facts} /></div>
+			</section>
+			<section>
+				<div class="ds-label">ForensicSummary · lead / abstract</div>
+				<ForensicSummary summary={summary} />
+			</section>
+		</div>
+
+		{/* ───────────── Instruments ───────────── */}
+		<h2 id="instruments" class="h2 mb-6">Instruments <span class="text-muted-foreground text-base">— the HUD</span></h2>
+		<div class="mb-12 grid gap-8 md:grid-cols-2">
+			<section>
+				<div class="ds-label">HudMetrics · hybrid collapse + tabs</div>
+				<HudMetrics metrics={metrics} open={true} />
+			</section>
+			<section>
+				<div class="ds-label">ScarTimeline · severity heat-timeline (#78)</div>
+				<ScarTimeline scars={scars as any} open={true} />
+				<p class="text-muted-foreground mt-2 text-xs">
+					No matching article anchors here, so a click expands in place — the lite/no-prose fallback.
+				</p>
+			</section>
+		</div>
+
+		{/* ───────────── People ───────────── */}
+		<h2 class="h2 mb-6">People</h2>
+		<section class="mb-12">
+			<div class="ds-label">Cast · team credits (grouped by discipline, LinkedIn per member)</div>
+			<Cast cast={cast} />
+		</section>
+
+		{/* ───────────── Media ───────────── */}
+		<h2 class="h2 mb-6">Media <span class="text-muted-foreground text-base">— photos are the evidence</span></h2>
+		<div class="mb-12 space-y-8">
+			<section>
+				<div class="ds-label">Figure · single captioned image</div>
+				<Figure src={hero} alt="C|24 console" caption="The shipped C|24 control surface." credit="Digidesign" />
+			</section>
+			<section>
+				<div class="ds-label">MultiImage · side-by-side under one caption</div>
+				<MultiImage images={sampleImages.slice(0, 2)} caption="Two early prototype studies." />
+			</section>
+			<section>
+				<div class="ds-label">Montage · framed mosaic</div>
+				<Montage images={sampleImages} caption="Prototype contact sheet." />
+			</section>
+			<section>
+				<div class="ds-label">Gallery · sectioned captioned masonry</div>
+				<Gallery title="Origin Story" images={sampleImages} columns={3} />
+			</section>
+		</div>
+
+		{/* ───────────── Wires ───────────── */}
+		<h2 id="wires" class="h2 mb-6">Wires <span class="text-muted-foreground text-base">— connective apparatus</span></h2>
+		<div class="mb-12 grid gap-8 md:grid-cols-2">
+			<section>
+				<div class="ds-label">Pullquote · editorial blockquote</div>
+				<Pullquote cite="Forensic Report, §I">
+					Mechanical engineering is not just CAD; it is the physical consensus of 58 stakeholders.
+				</Pullquote>
+			</section>
+			<section>
+				<div class="ds-label">References · numbered citations</div>
+				<References references={refs} />
+			</section>
+			<section>
+				<div class="ds-label">Toc · table of contents</div>
+				<Toc headings={tocHeadings} />
+			</section>
+			<section>
+				<div class="ds-label">ThemeControl · light / dark / system</div>
+				<ThemeControl />
+			</section>
+		</div>
+
+		<section>
+			<div class="ds-label">Navbox · prev / next</div>
+			<Navbox
+				prev={{ href: "#", title: "Previous Project" }}
+				next={{ href: "#", title: "Next Project" }}
+			/>
+		</section>
+	</article>
+</BaseLayout>
+
+<style>
+	.ds-label {
+		font-family: var(--font-mono);
+		font-size: 11px;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--muted-foreground);
+		margin-bottom: 0.6rem;
+	}
+</style>

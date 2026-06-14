@@ -1,0 +1,52 @@
+---
+/**
+ * Navbox — bottom prev/next navigation between project pages (Wikipedia "Navbox"
+ * footer family). Fed the router's prev/next entries.
+ */
+interface NavItem {
+	href: string;
+	title: string;
+}
+interface Props {
+	prev?: NavItem | null;
+	next?: NavItem | null;
+}
+const { prev, next } = Astro.props;
+---
+
+{
+	(prev || next) && (
+		<nav class="border-border mt-16 grid grid-cols-2 gap-4 border-t pt-6">
+			<div>
+				{prev && (
+					<a
+						href={prev.href}
+						class="group border-border hover:border-primary/40 block rounded-lg border p-4 transition-colors"
+					>
+						<span class="text-muted-foreground font-mono text-[10px] tracking-widest uppercase">
+							← Previous
+						</span>
+						<span class="text-foreground group-hover:text-primary mt-1 block text-sm font-medium transition-colors">
+							{prev.title}
+						</span>
+					</a>
+				)}
+			</div>
+			<div>
+				{next && (
+					<a
+						href={next.href}
+						class="group border-border hover:border-primary/40 block rounded-lg border p-4 text-right transition-colors"
+					>
+						<span class="text-muted-foreground font-mono text-[10px] tracking-widest uppercase">
+							Next →
+						</span>
+						<span class="text-foreground group-hover:text-primary mt-1 block text-sm font-medium transition-colors">
+							{next.title}
+						</span>
+					</a>
+				)}
+			</div>
+		</nav>
+	)
+}

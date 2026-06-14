@@ -83,6 +83,13 @@
 			box-shadow 0.15s ease;
 	}
 
+	/* Gallery evidence spotlight — a scar marker/row lights its evidence figures. */
+	.scar-evidence-hot {
+		box-shadow: 0 0 0 3px var(--primary);
+		outline: none;
+		transition: box-shadow 0.15s ease;
+	}
+
 	html.dark {
 		/* starwind dark theme config */
 		--background: var(--color-base-900);

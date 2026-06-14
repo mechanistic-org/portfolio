@@ -344,10 +344,14 @@ const projectsCollection = defineCollection({
 							trigger: z.string().optional(),
 							intervention: z.string().optional(),
 							result: z.string().optional(),
+							evidence: z.array(z.string()).optional(), // gallery image alts this scar spotlights
 						}),
 					]),
 				)
 				.optional(),
+
+			// Disambiguation / scope note (Wikipedia hatnote)
+			hatnote: z.string().optional(),
 
 			// Trust Signals (Isomorphic Narrative)
 			isomorphics: z

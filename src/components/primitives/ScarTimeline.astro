@@ -20,6 +20,7 @@ interface Scar {
 	intervention?: string;
 	result?: string;
 	description?: string;
+	evidence?: string[];
 }
 interface Props {
 	scars: Scar[];
@@ -90,6 +91,7 @@ const list = [...placed].sort((a, b) => order.indexOf(phaseOf(a.s)) - order.inde
 							type="button"
 							class:list={["mk", `mk-${sev}`]}
 							data-scar={id}
+							data-evidence={(s.evidence || []).join("|")}
 							style={`left:${x}%`}
 							title={s.label}
 							aria-label={s.label}
@@ -101,7 +103,7 @@ const list = [...placed].sort((a, b) => order.indexOf(phaseOf(a.s)) - order.inde
 				<ul class="space-y-1.5">
 					{list.map(({ s, id, sev }) => (
 						<li>
-							<button type="button" class="srow" data-scar={id}>
+							<button type="button" class="srow" data-scar={id} data-evidence={(s.evidence || []).join("|")}>
 								<span class:list={["dot", `dot-${sev}`]} />
 								<span class="lbl">{s.label}</span>
 								{s.value && <span class="chip">{s.value}</span>}
@@ -262,12 +264,29 @@ const list = [...placed].sort((a, b) => order.indexOf(phaseOf(a.s)) - order.inde
 				const h = heading(id);
 				if (h) h.classList.toggle("scar-cross-hot", on);
 			};
+			const evidenceOf = (el: HTMLElement) =>
+				(el.getAttribute("data-evidence") || "").split("|").filter(Boolean);
+			const setEvidence = (alts: string[], on: boolean) =>
+				alts.forEach((a) =>
+					document
+						.querySelectorAll('img[alt="' + a + '"]')
+						.forEach((img) => img.classList.toggle("scar-evidence-hot", on)),
+				);
 			root.querySelectorAll<HTMLElement>("[data-scar]").forEach((el) => {
 				const id = el.getAttribute("data-scar")!;
-				el.addEventListener("mouseenter", () => setHot(id, true));
-				el.addEventListener("mouseleave", () => setHot(id, false));
-				el.addEventListener("focus", () => setHot(id, true));
-				el.addEventListener("blur", () => setHot(id, false));
+				const ev = evidenceOf(el);
+				const enter = () => {
+					setHot(id, true);
+					setEvidence(ev, true);
+				};
+				const leave = () => {
+					setHot(id, false);
+					setEvidence(ev, false);
+				};
+				el.addEventListener("mouseenter", enter);
+				el.addEventListener("mouseleave", leave);
+				el.addEventListener("focus", enter);
+				el.addEventListener("blur", leave);
 				el.addEventListener("click", () => {
 					const h = heading(id);
 					if (h) {

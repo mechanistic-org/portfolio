@@ -24,13 +24,18 @@ import References from "@components/primitives/References.astro";
 import ThemeControl from "@components/primitives/ThemeControl.astro";
 import Cast from "@components/primitives/Cast.astro";
 import Gallery from "@components/primitives/Gallery.astro";
+import Toc from "@components/primitives/Toc.astro";
+import Navbox from "@components/primitives/Navbox.astro";
+import Hatnote from "@components/primitives/Hatnote.astro";
 
 interface Props {
 	entry: { data: Record<string, any> };
 	Content: any;
 	headings?: { depth: number; slug: string; text: string }[];
+	nextProject?: any;
+	prevProject?: any;
 }
-const { entry, Content, headings = [] } = Astro.props;
+const { entry, Content, headings = [], nextProject, prevProject } = Astro.props;
 const d = entry.data;
 
 const pretty = (s?: string) =>
@@ -91,13 +96,18 @@ const facts: [string, unknown][] = (
 const scars = d.scars?.filter((s: any) => s && typeof s === "object") ?? [];
 const bom = d.bom ?? [];
 
-const toc = headings.filter((h) => h.depth === 2);
-
 const references = [
 	d.audio_url && { text: "Audio briefing (NotebookLM overview)", href: d.audio_url },
 	d.nlm_url && { text: "NotebookLM source notebook", href: d.nlm_url },
 	d.notebook_url && { text: "Project notebook", href: d.notebook_url },
 ].filter(Boolean) as { text: string; href?: string }[];
+
+const navPrev = prevProject
+	? { href: `/projects/${prevProject.id}`, title: prevProject.data?.title }
+	: null;
+const navNext = nextProject
+	? { href: `/projects/${nextProject.id}`, title: nextProject.data?.title }
+	: null;
 ---
 
 <BaseLayout type="project" title={d.title} description={d.description} image={d.heroImage}>
@@ -142,6 +152,7 @@ const references = [
 
 			{/* CENTER — the article */}
 			<main class="min-w-0">
+				{d.hatnote && <Hatnote>{d.hatnote}</Hatnote>}
 				{d.forensic_summary && <ForensicSummary summary={d.forensic_summary} />}
 				<div class="markdown-content max-w-3xl">
 					<Content />
@@ -171,27 +182,7 @@ const references = [
 			{/* RIGHT — contents · media · references */}
 			<aside class="mt-12 space-y-10 lg:mt-0">
 				<div class="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:space-y-10 lg:overflow-y-auto">
-					{
-						toc.length > 0 && (
-							<nav>
-								<div class="text-muted-foreground mb-3 font-mono text-[10px] font-bold tracking-widest uppercase">
-									Contents
-								</div>
-								<ul class="space-y-2 text-sm">
-									{toc.map((h) => (
-										<li>
-											<a
-												href={`#${h.slug}`}
-												class="text-muted-foreground hover:text-foreground transition-colors"
-											>
-												{h.text}
-											</a>
-										</li>
-									))}
-								</ul>
-							</nav>
-						)
-					}
+					<Toc headings={headings} />
 
 					{
 						images.length > 0 && (
@@ -228,5 +219,6 @@ const references = [
 				</div>
 			</aside>
 		</div>
+		<Navbox prev={navPrev} next={navNext} />
 	</article>
 </BaseLayout>
