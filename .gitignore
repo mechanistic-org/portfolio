@@ -32,3 +32,11 @@ public/assets/r2/
 scripts/bin/
 ffmpeg_temp/
 public/assets/
+
+# session WIP / preview scratch (do not ship)
+scripts/_roundtrip_out/
+src/pages/spike/
+
+# Claude Code: keep the preview config, ignore local settings
+.claude/*
+!.claude/launch.json
