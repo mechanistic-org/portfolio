@@ -16,7 +16,7 @@ const yr = (x: any) => (x ? new Date(x).getFullYear() : null);
 const period = [yr(d.date), yr(d.endDate)].filter(Boolean).join("–") || d.duration;
 
 // Infobox — stacked: conventional metadata, then forensic metrics.
-const facts: [string, any][] = [
+const facts = ([
   ["Role", d.job_title || "Mechanical Eng. / ID Lead"],
   ["Employer", d.employer],
   ["Period", period],
@@ -24,14 +24,14 @@ const facts: [string, any][] = [
   ["Industry", d.industry],
   ["Tools", (d.tools || []).join(", ")],
   ["Production", d.production],
-].filter(([, v]) => v);
+] as [string, any][]).filter(([, v]) => v);
 
 const fm = d.forensic_metrics || {};
-const metrics: [string, any][] = [
+const metrics = ([
   ["Financial", fm.financial],
   ["Process", fm.process],
   ["Governance", fm.governance],
-].filter(([, v]) => v);
+] as [string, any][]).filter(([, v]) => v);
 
 const toc = headings.filter((h: any) => h.depth === 2);
 ---
