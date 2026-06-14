@@ -335,8 +335,15 @@ const projectsCollection = defineCollection({
 						z.number(), // Legacy Ref Support
 						z.object({
 							label: z.string(),
-							value: z.string(),
-							description: z.string(),
+							value: z.string().optional(),
+							description: z.string().optional(),
+							// V8 scar-instrument fields (the heat-timeline)
+							severity: z.enum(["critical", "major", "minor"]).optional(),
+							phase: z.string().optional(), // timeline band: concept|design|pilot|fcs
+							anchor: z.string().optional(), // heading id to scroll/cross-highlight (omit if no prose)
+							trigger: z.string().optional(),
+							intervention: z.string().optional(),
+							result: z.string().optional(),
 						}),
 					]),
 				)

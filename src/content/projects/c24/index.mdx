@@ -771,24 +771,69 @@ forensic_metrics:
   process: "Pilot cosmetic yield salvaged 100% (2.50 mm warp corrected to below 0.50 mm); headphone-jack MTTR cut from over 2 hours to under 10 minutes."
   governance: "13 major ECOs in 6 months; 50+ Data Control Drawings enforced; 100% mechanical fit on first build of 19 PCB assemblies."
 scars:
-- label: 'Thermal — the "banana" defect'
-  value: '2.50 mm warp → <0.50 mm'
-  description: 'ABS side caps (P/N 9440-55165/166) warped up to 2.50 mm in the high-temp soft-paint cure cycle. A vertical-hang cure fixture (ECO 12740) straightened them during cool-down, recovering 100% pilot cosmetic yield with no new tooling spend.'
-- label: 'Supply chain — top-panel no-bid'
-  value: 'FCS Nov 20 2007 held'
-  description: 'The primary overseas vendor no-bid the most complex welded panel (P/N 9420-55105) — its dense standoffs blocked the automated CNC welder. A dual-source manual-weld bridge with Mass Precision kept the line moving while automation retooled.'
 - label: 'Architecture — the EMI / thermal "rake"'
+  severity: critical
+  phase: design
+  anchor: 3-architecture-crisis-the-emithermal-rake
   value: 'fanless ship'
-  description: 'The PSU stacked under the A/D converters produced catastrophic EMI against a non-negotiable fanless acoustic mandate. I validated fan fallbacks, then removed the heat source entirely — the PSU moved to an external Skynet brick with shielded cables.'
+  trigger: 'The 4U chassis stacked the PSU directly under the A/D converters, producing catastrophic EMI — against a non-negotiable fanless mandate, since the console sits at the engineer''s listening position.'
+  intervention: 'Validated active-cooling fallbacks (a 4x 80 mm array failed once sealed; a 3x 80 mm arrangement met spec), then removed the heat source instead: re-architected to 3U and moved the PSU to an external Skynet brick with shielded cables.'
+  result: 'A silent, fanless console holding its 10–35 °C window and passing thermal qualification — the validated fan configs left on the bench as insurance.'
+- label: 'Integration — the geometric firewall'
+  severity: major
+  phase: design
+  anchor: 5-integration-crisis-the-geometric-firewall
+  value: '100% fit, first build'
+  trigger: '19 PCB assemblies into a low-profile chassis, undermined by "wild west" file-swapping — MicPre 8 connectors crashed into the bottom pan; SubMix headers landed where workers could not reach.'
+  intervention: 'Authored and enforced the Data Control Drawing protocol: 50+ binding geometric contracts overlaid against the 3D master and rejected on a 0.5 mm variance (the MicPre 8 DCD alone hit Rev 12).'
+  result: '100% mechanical fit on the first physical build, decoupling mechanical tooling from electrical layout iteration.'
+- label: 'Component & geometry battles'
+  severity: major
+  phase: design
+  anchor: 7-component--geometry-battles
+  value: 'premium feel, commodity cost'
+  trigger: 'A running war across commodity parts and Class-A surfaces: the Bourns EM14 jog wheel''s six exposed 0.42 mm leads, "gill" curves breaking vendor CAD, "Kenny" cosmetic ripples and dull silkscreen, and dust behind the meter lens.'
+  intervention: 'Pre-terminated harness spec + custom surround (ECO 13082); rebuilt the Class-A gills in Pro/Engineer (16.5 h) and exported STEP in digestible chunks; First Article Inspection + ink recalibration; an adhesive foam seal instead of a mold retool; a ±0.05 mm tolerance fix (ECO 13526).'
+  result: 'Preserved the premium "scrub" feel of a $10k console on commodity parts, and killed cosmetic defects without touching the schedule.'
 - label: 'Firmware — the katakana ROM'
-  value: '2407 DSP flash exhausted'
-  description: 'A custom character-ROM for Japanese katakana on the new Varitronix scribble strips ran the 2407 DSPs out of flash memory — a firmware crisis hiding behind a cosmetic LCD upgrade.'
-- label: 'Serviceability — headphone-jack MTTR'
+  severity: major
+  phase: design
+  value: '2407 flash exhausted'
+  trigger: 'A custom character-ROM for Japanese katakana on the new Varitronix scribble strips ran the 2407 DSPs out of flash memory.'
+  intervention: 'Reworked the character set and memory map with Stan Cotey and David Anthony.'
+  result: 'Shipped — a firmware crisis hiding behind a cosmetic LCD upgrade. (Documented in §II, not a standalone crisis section.)'
+- label: 'Thermal — the "banana" defect'
+  severity: critical
+  phase: pilot
+  anchor: 1-thermal-crisis-the-banana-defect
+  value: '2.50 → <0.50 mm'
+  trigger: 'Pilot ABS side caps (P/N 9440-55165/166) warped up to 2.50 mm in the high-temp "Rubberized Soft Paint" cure — baked flat on wire racks, gravity sagged them through glass transition.'
+  intervention: 'Rejected the vendor support-block proposal; engineered "Method A," a vertical-hang cure fixture, codified as ECO 12740.'
+  result: 'Flatness 2.50 mm → below 0.50 mm; 100% pilot cosmetic yield salvaged with no new tooling spend.'
+- label: 'Supply chain — the top-panel "no-bid"'
+  severity: critical
+  phase: pilot
+  anchor: 2-supply-chain-crisis-the-top-panel-no-bid-shock
+  value: 'FCS Nov 20 2007 held'
+  trigger: 'Mid-schedule the primary overseas vendor (Kwanta/VTech) no-bid the most complex part — the Top Panel (P/N 9420-55105) — whose dense welded standoffs blocked the automated CNC welder.'
+  intervention: 'Ran a dual-source bridge: Mass Precision manual offset-weld prototypes to keep the line moving while qualifying manual welding overseas until automation retooled.'
+  result: 'Unblocked Pilot and protected the November 20, 2007 First Customer Ship. (Human cost: a fully ruptured Achilles mid-fab — weld-stud files sent from hotel wifi so the build would not stall.)'
+- label: 'Serviceability — the headphone-jack fire drill'
+  severity: major
+  phase: fcs
+  anchor: 4-serviceability-crisis-the-headphone-jack-fire-drill
   value: '2 h+ → <10 min'
-  description: 'Field replacement of the headphone jack originally took over two hours; a design change cut mean-time-to-repair to under ten minutes.'
-- label: 'The human cost — a ruptured Achilles'
-  value: 'weld files sent from hotel wifi'
-  description: 'Mid-fabrication I fully ruptured my Achilles tendon. The night I got back from the hospital I sent the top-panel weld-stud files over hotel wifi so the build would not stall while I was off my feet.'
+  trigger: 'A 4.8% field-failure rate on the headphone jack, buried behind the front bolster — a simple repair meant a 2-hour chassis teardown.'
+  intervention: 'Emergency redesign past Tooling-Control-Off: a recessed "trap door" geometry (Headphone Bracket + Front Bolster, ECO 12993); won the cosmetics pushback on the 4.8% number.'
+  result: 'Turned a return-to-factory liability into a Field Replaceable Unit — MTTR from over 2 hours to under 10 minutes via a single bottom-pan nut.'
+- label: 'Regulatory — the stranded PSU'
+  severity: critical
+  phase: fcs
+  anchor: 6-regulatory-crisis-the-stranded-psu
+  value: '500 units shipped'
+  trigger: 'The external Skynet PSU failed EMC prescans and suffered three catastrophic load failures at 230V/50Hz; tooling delays then stranded finished consoles awaiting UL certification.'
+  intervention: 'Negotiated a simultaneous-certification protocol with UL to test the console surface without the final PSU, and ran a hand-pack operation at Menlo Park to label the first 100 units.'
+  result: 'Protected the First Customer Ship date and Q4 revenue with no regulatory exposure.'
 bom:
 - label: Unique components
   value: '100+'

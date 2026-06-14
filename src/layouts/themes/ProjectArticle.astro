@@ -18,7 +18,7 @@ import HudRail from "@components/primitives/HudRail.astro";
 import Collapse from "@components/primitives/Collapse.astro";
 import Infobox from "@components/primitives/Infobox.astro";
 import HudMetrics from "@components/primitives/HudMetrics.astro";
-import HudScars from "@components/primitives/HudScars.astro";
+import ScarTimeline from "@components/primitives/ScarTimeline.astro";
 import References from "@components/primitives/References.astro";
 import ThemeControl from "@components/primitives/ThemeControl.astro";
 import Cast from "@components/primitives/Cast.astro";
@@ -122,7 +122,7 @@ const references = [
 					<Infobox facts={facts} />
 				</Collapse>
 				<HudMetrics metrics={d.forensic_metrics || {}} open={!lite} />
-				<HudScars scars={scars} open={!lite} />
+				<ScarTimeline scars={scars} open={!lite} />
 				{
 					bom.length > 0 && (
 						<Collapse title="Bill of Materials" count={bom.length} open={false}>

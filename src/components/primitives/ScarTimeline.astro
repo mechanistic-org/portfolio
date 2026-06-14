@@ -1,0 +1,286 @@
+---
+/**
+ * ScarTimeline — the failure-scar instrument (absorbs the #78 "scars heat-timeline").
+ * A chronological heat-timeline (severity → color/size along the project schedule)
+ * over an index list. The instrument is AUTHORITATIVE & self-contained: each scar
+ * carries severity/phase/T-I-R. Article linking is progressive enhancement via an
+ * optional per-scar `anchor` — present → click scrolls + cross-highlights the prose;
+ * absent (or lite, with no prose) → click expands the scar in place. Self-contained
+ * (deliberately NOT coupled to the semi-broken homepage swarm).
+ */
+import Collapse from "./Collapse.astro";
+
+interface Scar {
+	label: string;
+	severity?: "critical" | "major" | "minor";
+	phase?: string;
+	anchor?: string;
+	value?: string;
+	trigger?: string;
+	intervention?: string;
+	result?: string;
+	description?: string;
+}
+interface Props {
+	scars: Scar[];
+	open?: boolean;
+}
+const { scars = [], open = true } = Astro.props;
+
+const slug = (s: string) =>
+	s
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, "-")
+		.replace(/(^-|-$)/g, "");
+
+// Timeline bands (x% ranges) per phase, in chronological order.
+const BANDS: Record<string, [number, number]> = {
+	concept: [3, 20],
+	design: [24, 48],
+	pilot: [54, 76],
+	fcs: [82, 97],
+};
+const SEGMENTS = [
+	["concept", "2005 · concept"],
+	["design", "2006 · design"],
+	["pilot", "2007 · pilot"],
+	["fcs", "→ FCS"],
+];
+
+const phaseOf = (s: Scar) => (s.phase && BANDS[s.phase] ? s.phase : "design");
+const byPhase: Record<string, Scar[]> = {};
+for (const s of scars) (byPhase[phaseOf(s)] ||= []).push(s);
+
+const placed = scars.map((s) => {
+	const p = phaseOf(s);
+	const grp = byPhase[p];
+	const i = grp.indexOf(s);
+	const [lo, hi] = BANDS[p];
+	const x = grp.length === 1 ? (lo + hi) / 2 : lo + ((hi - lo) * i) / (grp.length - 1);
+	return { s, id: s.anchor || slug(s.label), x, sev: s.severity || "major" };
+});
+// chronological order for the list
+const order = ["concept", "design", "pilot", "fcs"];
+const list = [...placed].sort((a, b) => order.indexOf(phaseOf(a.s)) - order.indexOf(phaseOf(b.s)));
+---
+
+{
+	scars.length > 0 && (
+		<Collapse title="Failure Scars" count={scars.length} open={open} tone="danger">
+			<scar-timeline>
+				{/* heat-timeline */}
+				<div class="border-border/60 bg-card/40 relative mb-3 h-14 overflow-hidden rounded">
+					<div class="absolute inset-0 flex">
+						{SEGMENTS.map(([key, lbl], idx) => (
+							<div
+								class:list={[
+									"flex items-start px-1.5 py-1 font-mono text-[8px] tracking-wider uppercase",
+									idx < SEGMENTS.length - 1 && "border-border/50 border-r border-dashed",
+								]}
+								style={`flex:0 0 ${[22, 28, 28, 22][idx]}%`}
+								data-band={key}
+							>
+								<span class="text-muted-foreground/70">{lbl}</span>
+							</div>
+						))}
+					</div>
+					<div class="bg-border/70 absolute inset-x-0 top-1/2 h-px" />
+					{placed.map(({ s, id, x, sev }) => (
+						<button
+							type="button"
+							class:list={["mk", `mk-${sev}`]}
+							data-scar={id}
+							style={`left:${x}%`}
+							title={s.label}
+							aria-label={s.label}
+						/>
+					))}
+				</div>
+
+				{/* index */}
+				<ul class="space-y-1.5">
+					{list.map(({ s, id, sev }) => (
+						<li>
+							<button type="button" class="srow" data-scar={id}>
+								<span class:list={["dot", `dot-${sev}`]} />
+								<span class="lbl">{s.label}</span>
+								{s.value && <span class="chip">{s.value}</span>}
+								{s.anchor && (
+									<svg class="jump" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+										<path d="M12 5v14M5 12l7 7 7-7" />
+									</svg>
+								)}
+								<div class="sdetail">
+									{s.trigger && (
+										<p>
+											<b>T</b>
+											{s.trigger}
+										</p>
+									)}
+									{s.intervention && (
+										<p>
+											<b>I</b>
+											{s.intervention}
+										</p>
+									)}
+									{s.result && (
+										<p>
+											<b>R</b>
+											{s.result}
+										</p>
+									)}
+									{!s.trigger && s.description && <p>{s.description}</p>}
+								</div>
+							</button>
+						</li>
+					))}
+				</ul>
+			</scar-timeline>
+		</Collapse>
+	)
+}
+
+<style>
+	.mk {
+		position: absolute;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		border-radius: 9999px;
+		cursor: pointer;
+		padding: 0;
+		border: none;
+		transition:
+			box-shadow 0.12s ease,
+			transform 0.12s ease;
+	}
+	.mk-critical {
+		width: 14px;
+		height: 14px;
+		background: var(--error);
+	}
+	.mk-major {
+		width: 11px;
+		height: 11px;
+		background: var(--warning);
+	}
+	.mk-minor {
+		width: 9px;
+		height: 9px;
+		background: var(--muted-foreground);
+	}
+	.mk.hot {
+		box-shadow: 0 0 0 4px var(--accent);
+		transform: translate(-50%, -50%) scale(1.3);
+		z-index: 2;
+	}
+	.srow {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 8px;
+		width: 100%;
+		text-align: left;
+		padding: 6px 8px;
+		border: 0.5px solid var(--border);
+		border-radius: var(--radius-md, 0.375rem);
+		background: color-mix(in oklab, var(--card) 40%, transparent);
+		cursor: pointer;
+		transition: background-color 0.12s ease;
+	}
+	.srow.hot {
+		background: var(--accent);
+		border-color: var(--accent);
+	}
+	.dot {
+		width: 9px;
+		height: 9px;
+		border-radius: 9999px;
+		flex-shrink: 0;
+	}
+	.dot-critical {
+		background: var(--error);
+	}
+	.dot-major {
+		background: var(--warning);
+	}
+	.dot-minor {
+		background: var(--muted-foreground);
+	}
+	.lbl {
+		flex: 1;
+		min-width: 0;
+		font-size: 12.5px;
+		color: var(--foreground);
+	}
+	.chip {
+		font-family: var(--font-mono);
+		font-size: 10px;
+		color: var(--muted-foreground);
+		background: var(--muted);
+		padding: 1px 6px;
+		border-radius: 4px;
+	}
+	.jump {
+		width: 13px;
+		height: 13px;
+		color: var(--muted-foreground);
+		flex-shrink: 0;
+	}
+	.sdetail {
+		display: none;
+		flex-basis: 100%;
+		margin-top: 4px;
+		padding-top: 5px;
+		border-top: 0.5px solid var(--border);
+	}
+	.srow.open .sdetail {
+		display: block;
+	}
+	.sdetail p {
+		font-size: 11.5px;
+		line-height: 1.55;
+		color: var(--muted-foreground);
+		margin: 0 0 5px;
+	}
+	.sdetail b {
+		color: var(--error);
+		font-family: var(--font-mono);
+		font-weight: 700;
+		margin-right: 5px;
+	}
+</style>
+
+<script>
+	class ScarTimeline extends HTMLElement {
+		connectedCallback() {
+			const root = this;
+			const nodes = (id: string) =>
+				root.querySelectorAll<HTMLElement>('[data-scar="' + CSS.escape(id) + '"]');
+			const heading = (id: string) => document.getElementById(id);
+			const setHot = (id: string, on: boolean) => {
+				nodes(id).forEach((e) => e.classList.toggle("hot", on));
+				const h = heading(id);
+				if (h) h.classList.toggle("scar-cross-hot", on);
+			};
+			root.querySelectorAll<HTMLElement>("[data-scar]").forEach((el) => {
+				const id = el.getAttribute("data-scar")!;
+				el.addEventListener("mouseenter", () => setHot(id, true));
+				el.addEventListener("mouseleave", () => setHot(id, false));
+				el.addEventListener("focus", () => setHot(id, true));
+				el.addEventListener("blur", () => setHot(id, false));
+				el.addEventListener("click", () => {
+					const h = heading(id);
+					if (h) {
+						h.scrollIntoView({ behavior: "smooth", block: "start" });
+						h.classList.add("scar-cross-hot");
+						setTimeout(() => h.classList.remove("scar-cross-hot"), 1300);
+					} else {
+						const row = root.querySelector('.srow[data-scar="' + CSS.escape(id) + '"]');
+						if (row) row.classList.toggle("open");
+					}
+				});
+			});
+		}
+	}
+	if (!customElements.get("scar-timeline")) customElements.define("scar-timeline", ScarTimeline);
+</script>

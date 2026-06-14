@@ -72,6 +72,17 @@
 		color: var(--foreground);
 	}
 
+	/* Scar instrument ↔ article cross-highlight (ScarTimeline). Applied by JS to the
+	 * target heading when its scar marker/row is hovered or clicked. */
+	.scar-cross-hot {
+		background-color: var(--accent);
+		border-radius: 0.25rem;
+		box-shadow: 0 0 0 6px var(--accent);
+		transition:
+			background-color 0.15s ease,
+			box-shadow 0.15s ease;
+	}
+
 	html.dark {
 		/* starwind dark theme config */
 		--background: var(--color-base-900);
