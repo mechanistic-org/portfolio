@@ -1,0 +1,122 @@
+---
+/**
+ * ProjectArticle — a Wikipedia-MoS-spirit base layout (SPIKE).
+ * Holy-grail 3-col: left TOC · center article · right stacked infobox.
+ * The infobox surfaces the key facts AND the forensic metrics (stacked) that the
+ * HUD/dossier currently bury. Scrollytelling/galleries become optional accents, not the base.
+ * Consumes the same structured project data the generator produces.
+ */
+import BaseLayout from "@layouts/BaseLayout.astro";
+import DossierCast from "@components/Dossier/DossierCast.astro";
+
+const { entry, Content, headings = [] } = Astro.props;
+const d = entry.data;
+
+const yr = (x: any) => (x ? new Date(x).getFullYear() : null);
+const period = [yr(d.date), yr(d.endDate)].filter(Boolean).join("–") || d.duration;
+
+// Infobox — stacked: conventional metadata, then forensic metrics.
+const facts: [string, any][] = [
+  ["Role", d.job_title || "Mechanical Eng. / ID Lead"],
+  ["Employer", d.employer],
+  ["Period", period],
+  ["Team", d.teamSize],
+  ["Industry", d.industry],
+  ["Tools", (d.tools || []).join(", ")],
+  ["Production", d.production],
+].filter(([, v]) => v);
+
+const fm = d.forensic_metrics || {};
+const metrics: [string, any][] = [
+  ["Financial", fm.financial],
+  ["Process", fm.process],
+  ["Governance", fm.governance],
+].filter(([, v]) => v);
+
+const toc = headings.filter((h: any) => h.depth === 2);
+---
+
+<BaseLayout type="general" title={d.title} description={d.description} image={d.heroImage}>
+  <article class="site-container mt-24 mb-24">
+    <header class="border-border mb-8 border-b pb-6">
+      <h1 class="h1 mb-3">{d.title}</h1>
+      <p class="text-muted-foreground max-w-3xl text-lg md:text-xl">{d.description}</p>
+    </header>
+
+    <div class="lg:grid lg:grid-cols-[190px_minmax(0,1fr)_330px] lg:gap-10">
+      {/* LEFT — table of contents */}
+      <nav class="hidden lg:block">
+        <div class="sticky top-24">
+          <div class="text-muted-foreground mb-3 font-mono text-[10px] tracking-widest uppercase">
+            Contents
+          </div>
+          <ul class="space-y-2 text-sm">
+            {toc.map((h: any) => (
+              <li>
+                <a href={`#${h.slug}`} class="text-muted-foreground hover:text-foreground transition-colors">
+                  {h.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </nav>
+
+      {/* CENTER — the article */}
+      <main class="min-w-0">
+        <div class="markdown-content max-w-3xl">
+          <Content />
+        </div>
+        {d.cast && d.cast.length > 0 && (
+          <section class="mt-16">
+            <h2 class="h2 mb-6">Cast</h2>
+            <DossierCast cast={d.cast} />
+          </section>
+        )}
+      </main>
+
+      {/* RIGHT — infobox (stacked: facts, then forensic metrics) */}
+      <aside class="mt-10 lg:mt-0">
+        <div class="border-border bg-card/30 sticky top-24 overflow-hidden rounded-lg border">
+          {d.heroImage && (
+            <img src={d.heroImage} alt={d.title} class="aspect-[3/2] w-full object-cover" />
+          )}
+          <div class="p-4">
+            <div class="text-primary mb-3 font-mono text-xs font-bold tracking-widest uppercase">
+              {d.title}
+            </div>
+            <table class="w-full text-sm">
+              <tbody>
+                {facts.map(([k, v]) => (
+                  <tr class="border-border/50 border-t">
+                    <th class="text-muted-foreground w-24 py-2 pr-3 text-left align-top font-mono text-[10px] font-medium tracking-widest uppercase">
+                      {k}
+                    </th>
+                    <td class="text-foreground py-2">{v}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {metrics.length > 0 && (
+            <div class="border-border border-t bg-black/20 p-4">
+              <div class="text-primary mb-3 font-mono text-[10px] font-bold tracking-widest uppercase">
+                Forensic Metrics
+              </div>
+              <dl class="space-y-3">
+                {metrics.map(([k, v]) => (
+                  <div>
+                    <dt class="text-muted-foreground font-mono text-[10px] tracking-widest uppercase">
+                      {k}
+                    </dt>
+                    <dd class="text-foreground mt-1 text-sm leading-relaxed">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          )}
+        </div>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
