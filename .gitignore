@@ -40,3 +40,6 @@ src/pages/spike/
 # Claude Code: keep the preview config, ignore local settings
 .claude/*
 !.claude/launch.json
+# Python bytecode cache
+__pycache__/
+*.pyc
