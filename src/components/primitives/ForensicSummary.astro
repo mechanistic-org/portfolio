@@ -1,0 +1,39 @@
+---
+/**
+ * ForensicSummary — the project-level Trigger → Intervention → Result spine
+ * (Wikipedia "lead"/abstract, IMDb synopsis). The single highest-altitude
+ * distillation of the whole dossier; was populated in canon but rendered nowhere.
+ * Audited against the body + scars before surfacing (Doctrine 3).
+ */
+interface Props {
+	summary: { trigger?: string; intervention?: string; result?: string };
+}
+const { summary } = Astro.props;
+const rows = (
+	[
+		["Trigger", summary.trigger, "text-error"],
+		["Intervention", summary.intervention, "text-foreground"],
+		["Result", summary.result, "text-primary"],
+	] as [string, string | undefined, string][]
+).filter(([, v]) => v);
+---
+
+{
+	rows.length > 0 && (
+		<section class="border-border bg-card/30 mb-10 rounded-lg border p-5">
+			<div class="text-muted-foreground mb-4 font-mono text-[10px] font-bold tracking-widest uppercase">
+				Forensic Summary
+			</div>
+			<div class="grid gap-5 sm:grid-cols-3">
+				{rows.map(([k, v, tone], i) => (
+					<div class:list={[i > 0 && "sm:border-border/60 sm:border-l sm:pl-5"]}>
+						<div class:list={["mb-1.5 font-mono text-[11px] font-bold tracking-widest uppercase", tone]}>
+							{k}
+						</div>
+						<p class="text-muted-foreground text-sm leading-relaxed">{v}</p>
+					</div>
+				))}
+			</div>
+		</section>
+	)
+}

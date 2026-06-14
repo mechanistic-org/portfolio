@@ -19,6 +19,7 @@ import Collapse from "@components/primitives/Collapse.astro";
 import Infobox from "@components/primitives/Infobox.astro";
 import HudMetrics from "@components/primitives/HudMetrics.astro";
 import ScarTimeline from "@components/primitives/ScarTimeline.astro";
+import ForensicSummary from "@components/primitives/ForensicSummary.astro";
 import References from "@components/primitives/References.astro";
 import ThemeControl from "@components/primitives/ThemeControl.astro";
 import Cast from "@components/primitives/Cast.astro";
@@ -100,7 +101,7 @@ const references = [
 ---
 
 <BaseLayout type="project" title={d.title} description={d.description} image={d.heroImage}>
-	<article class="site-container mt-24 mb-24">
+	<article class="mx-auto mt-24 mb-24 w-full max-w-[1680px] px-4 sm:px-6 lg:px-8">
 		<div class="mb-4 flex items-center justify-end">
 			<ThemeControl />
 		</div>
@@ -115,7 +116,7 @@ const references = [
 			photoCount={images.length || undefined}
 		/>
 
-		<div class="lg:grid lg:grid-cols-[300px_minmax(0,1fr)_280px] lg:gap-10">
+		<div class="lg:grid lg:grid-cols-[260px_minmax(0,1fr)_300px] lg:gap-8 xl:gap-12">
 			{/* LEFT — forensic HUD */}
 			<HudRail>
 				<Collapse title="Key Facts" open={true}>
@@ -141,6 +142,7 @@ const references = [
 
 			{/* CENTER — the article */}
 			<main class="min-w-0">
+				{d.forensic_summary && <ForensicSummary summary={d.forensic_summary} />}
 				<div class="markdown-content max-w-3xl">
 					<Content />
 				</div>

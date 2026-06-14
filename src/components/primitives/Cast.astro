@@ -1,9 +1,11 @@
 ---
 /**
- * Cast — the interactive credits widget (Wikipedia "Cast"/credits family, IMDb-styled).
- * Scales to 40+ people: deduped, grouped by org into collapsible groups (first open).
- * Each member surfaces a LinkedIn card on hover/focus — using an explicit `linkedin`
- * URL when canon provides one, else a name+company people-search fallback.
+ * Cast — the team-acknowledgment credits (Wikipedia "Cast"/credits; IMDb-styled).
+ * v2: excludes the portfolio owner (it's his site), groups INTERNAL staff by
+ * DISCIPLINE (inferred from org/role — a first pass to review), and lists EXTERNAL
+ * vendors/partners separately. The only "current" signal is a LinkedIn link when
+ * available (canon `linkedin`), else a name+company people-search fallback;
+ * minimum shown is name + role. Clean roster, not the old card array.
  */
 interface Member {
 	name: string;
@@ -13,21 +15,16 @@ interface Member {
 }
 interface Props {
 	cast: Member[];
-	openFirst?: boolean;
+	/** owner name to omit (own portfolio) */
+	omit?: string;
 }
-const { cast = [], openFirst = true } = Astro.props;
+const { cast = [], omit = "Erik Norris" } = Astro.props;
 
 const clean = (n: string) =>
 	(n || "")
 		.replace(/\s*\(.*?\)\s*/g, " ")
 		.replace(/\s+/g, " ")
 		.trim();
-const initials = (n: string) =>
-	clean(n)
-		.split(" ")
-		.slice(0, 2)
-		.map((w) => w[0]?.toUpperCase() ?? "")
-		.join("");
 const company = (org: string) => (org || "").split(/[\/,]/)[0].trim();
 const linkedinHref = (m: Member) =>
 	m.linkedin ||
@@ -35,84 +32,133 @@ const linkedinHref = (m: Member) =>
 		[clean(m.name), company(m.org)].filter(Boolean).join(" "),
 	)}`;
 
-// Dedupe exact (name|role|org) tuples — pure noise — then group by org, first-seen order.
+const EXTERNAL = /vtech|kenny|jetcrown|mass precision/i;
+// org/role → discipline (most specific first). First pass; Erik to review/edit into canon.
+const DISC: [RegExp, string][] = [
+	[/industrial design|mechanical|\bid\b/i, "Mechanical & Industrial Design"],
+	[/pcb/i, "PCB Design"],
+	[/hardware/i, "Hardware Engineering"],
+	[/firmware|software/i, "Firmware & Software"],
+	[/manufactur/i, "Manufacturing Operations"],
+	[/test|quality|\bqa\b/i, "Test & Quality Assurance"],
+	[/buyer|planner|purchas/i, "Purchasing"],
+	[/program|product manager|product management/i, "Program & Product Management"],
+	[/marketing/i, "Product Marketing"],
+	[/technical pub|documentation|tech pub/i, "Technical Publications"],
+	[/customer service|support/i, "Customer Service"],
+];
+const ORDER = [
+	"Mechanical & Industrial Design",
+	"Hardware Engineering",
+	"PCB Design",
+	"Firmware & Software",
+	"Manufacturing Operations",
+	"Test & Quality Assurance",
+	"Purchasing",
+	"Program & Product Management",
+	"Product Marketing",
+	"Technical Publications",
+	"Customer Service",
+	"Other",
+];
+const disciplineOf = (m: Member) => {
+	const hay = `${m.org} ${m.role}`;
+	for (const [re, label] of DISC) if (re.test(hay)) return label;
+	return "Other";
+};
+
+// dedupe, drop owner, partition internal/external, group
 const seen = new Set<string>();
-const groupsMap = new Map<string, Member[]>();
+const internal = new Map<string, Member[]>();
+const external = new Map<string, Member[]>();
 for (const m of cast) {
 	if (!m?.name) continue;
+	if (clean(m.name).toLowerCase() === omit.toLowerCase()) continue;
 	const key = `${m.name}|${m.role}|${m.org}`;
 	if (seen.has(key)) continue;
 	seen.add(key);
-	const org = m.org || "Other";
-	if (!groupsMap.has(org)) groupsMap.set(org, []);
-	groupsMap.get(org)!.push(m);
+	if (EXTERNAL.test(m.org || "")) {
+		const g = company(m.org) || "Vendors";
+		(external.get(g) || external.set(g, []).get(g)!).push(m);
+	} else {
+		const d = disciplineOf(m);
+		(internal.get(d) || internal.set(d, []).get(d)!).push(m);
+	}
 }
-const groups = [...groupsMap.entries()];
+const internalGroups = ORDER.filter((d) => internal.has(d)).map((d) => [d, internal.get(d)!] as const);
+const externalGroups = [...external.entries()];
+const total = [...seen].length;
 ---
 
-<div class="space-y-3">
+<div class="space-y-7">
 	{
-		groups.map(([org, members], gi) => (
-			<details open={openFirst && gi === 0} class="group/grp border-border bg-card/30 rounded-md border">
-				<summary class="hover:bg-muted/40 flex cursor-pointer list-none items-center gap-2 px-3 py-2 transition-colors select-none [&::-webkit-details-marker]:hidden">
-					<span class="text-foreground font-mono text-[11px] font-bold tracking-widest uppercase">
-						{org}
-					</span>
-					<span class="bg-muted text-muted-foreground rounded px-1.5 py-0.5 font-mono text-[10px] font-bold tracking-wider">
-						{members.length}
-					</span>
-					<svg
-						class="text-muted-foreground ml-auto h-4 w-4 shrink-0 transition-transform duration-200 group-open/grp:rotate-180"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						aria-hidden="true"
-					>
-						<path d="m6 9 6 6 6-6" />
-					</svg>
-				</summary>
-				<div class="border-border/60 grid grid-cols-1 gap-2 border-t p-3 sm:grid-cols-2 lg:grid-cols-3">
+		internalGroups.map(([label, members]) => (
+			<div>
+				<h3 class="text-primary mb-2.5 font-mono text-[11px] font-bold tracking-widest uppercase">
+					{label} <span class="text-muted-foreground/50">· {members.length}</span>
+				</h3>
+				<div class="grid gap-x-8 sm:grid-cols-2 xl:grid-cols-3">
 					{members.map((m) => (
-						<div class="group/m relative">
-							<div
-								tabindex="0"
-								class="border-border/60 bg-card/40 hover:border-primary/40 focus-visible:border-primary flex items-center gap-3 rounded-md border p-2.5 outline-none transition-colors"
-							>
-								<span class="bg-muted text-foreground flex h-9 w-9 shrink-0 items-center justify-center rounded-full font-mono text-xs font-bold">
-									{initials(m.name)}
-								</span>
-								<span class="min-w-0">
-									<span class="text-foreground block truncate text-sm font-medium">{clean(m.name)}</span>
-									<span class="text-muted-foreground block truncate text-xs">{m.role}</span>
-								</span>
+						<div class="group/m border-border/40 flex items-baseline justify-between gap-3 border-b py-1.5">
+							<div class="min-w-0">
+								<span class="text-foreground text-sm font-medium">{clean(m.name)}</span>
+								<span class="text-muted-foreground ml-2 text-xs">{m.role}</span>
 							</div>
-							<div class="absolute top-full left-0 z-20 hidden w-64 max-w-[80vw] pt-1 group-hover/m:block group-focus-within/m:block">
-								<div class="border-border bg-popover rounded-md border p-3 shadow-lg">
-									<div class="text-foreground text-sm font-bold">{clean(m.name)}</div>
-									<div class="text-muted-foreground mt-0.5 text-xs">{m.role}</div>
-									<div class="text-muted-foreground/70 mt-0.5 font-mono text-[10px] tracking-wide uppercase">
-										{m.org}
+							<a
+								href={linkedinHref(m)}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="text-muted-foreground/30 hover:text-primary shrink-0 transition-colors"
+								aria-label={`${clean(m.name)} on LinkedIn`}
+							>
+								<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+									<path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17V9.99H6V17h2.34zM7.17 8.96a1.36 1.36 0 1 0 0-2.72 1.36 1.36 0 0 0 0 2.72zM18 17v-3.84c0-2.05-1.1-3-2.55-3-1.17 0-1.7.64-1.99 1.09V9.99h-2.34V17h2.34v-3.91c0-.21.02-.41.08-.56.16-.41.54-.84 1.17-.84.82 0 1.15.63 1.15 1.55V17H18z" />
+								</svg>
+							</a>
+						</div>
+					))}
+				</div>
+			</div>
+		))
+	}
+
+	{
+		externalGroups.length > 0 && (
+			<div class="border-border/60 border-t pt-6">
+				<div class="text-muted-foreground mb-4 font-mono text-[10px] font-bold tracking-widest uppercase">
+					External · Vendors & Partners
+				</div>
+				<div class="space-y-5">
+					{externalGroups.map(([label, members]) => (
+						<div>
+							<h3 class="text-foreground mb-2 font-mono text-[11px] font-bold tracking-wider uppercase">
+								{label} <span class="text-muted-foreground/50">· {members.length}</span>
+							</h3>
+							<div class="grid gap-x-8 sm:grid-cols-2 xl:grid-cols-3">
+								{members.map((m) => (
+									<div class="group/m border-border/40 flex items-baseline justify-between gap-3 border-b py-1.5">
+										<div class="min-w-0">
+											<span class="text-foreground text-sm font-medium">{clean(m.name)}</span>
+											<span class="text-muted-foreground ml-2 text-xs">{m.role}</span>
+										</div>
+										<a
+											href={linkedinHref(m)}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="text-muted-foreground/30 hover:text-primary shrink-0 transition-colors"
+											aria-label={`${clean(m.name)} on LinkedIn`}
+										>
+											<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+												<path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17V9.99H6V17h2.34zM7.17 8.96a1.36 1.36 0 1 0 0-2.72 1.36 1.36 0 0 0 0 2.72zM18 17v-3.84c0-2.05-1.1-3-2.55-3-1.17 0-1.7.64-1.99 1.09V9.99h-2.34V17h2.34v-3.91c0-.21.02-.41.08-.56.16-.41.54-.84 1.17-.84.82 0 1.15.63 1.15 1.55V17H18z" />
+											</svg>
+										</a>
 									</div>
-									<a
-										href={linkedinHref(m)}
-										target="_blank"
-										rel="noopener noreferrer"
-										class="text-primary hover:bg-primary/10 mt-2 inline-flex items-center gap-1.5 rounded px-2 py-1 text-xs font-medium transition-colors"
-									>
-										<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-											<path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17V9.99H6V17h2.34zM7.17 8.96a1.36 1.36 0 1 0 0-2.72 1.36 1.36 0 0 0 0 2.72zM18 17v-3.84c0-2.05-1.1-3-2.55-3-1.17 0-1.7.64-1.99 1.09V9.99h-2.34V17h2.34v-3.91c0-.21.02-.41.08-.56.16-.41.54-.84 1.17-.84.82 0 1.15.63 1.15 1.55V17H18z" />
-										</svg>
-										View on LinkedIn
-									</a>
-								</div>
+								))}
 							</div>
 						</div>
 					))}
 				</div>
-			</details>
-		))
+			</div>
+		)
 	}
 </div>
