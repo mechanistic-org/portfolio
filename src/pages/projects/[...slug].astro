@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 	const allProjects = await getCollection("projects");
 	const projects = allProjects.filter((p) => {
 		const targets = p.data.targets || ["main"];
-		// Drafts stay reachable in local dev for Keystatic preview, but never ship.
+		// Drafts stay reachable in local dev, but never ship.
 		return targets.includes(currentSite) && (!p.data.draft || import.meta.env.DEV);
 	});
 
@@ -165,25 +165,11 @@ const ThemeComponents: Record<string, any> = {
 const SelectedTheme = ThemeComponents[theme] || Hyperspace;
 
 // === SIDECAR INJECTION (The Brain) ===
-let sidecarData: any = {};
-const sidecarFiles = import.meta.glob("/src/content/projects/**/data.json", { eager: true });
-
-if (entry) {
-	try {
-		const expectedSuffix = `/src/content/projects/${entry.id}/data.json`;
-		const matchingKey = Object.keys(sidecarFiles).find(
-			(key) => key.endsWith(expectedSuffix) || key === expectedSuffix,
-		);
-
-		if (matchingKey) {
-			const fileModule: any = sidecarFiles[matchingKey];
-			sidecarData = fileModule.default || fileModule;
-			console.log(`[SIDECAR] Loaded exhaustive data for ${entry.id}`);
-		}
-	} catch (e) {
-		console.warn(`[SIDECAR] Failed to load sidecar for ${entry.id}`, e);
-	}
-}
+// DISABLED 2026-06-15 (#69 schema hardening). The unguarded `data.json` glob merged sidecar
+// data into `finalData` WITHOUT Zod validation - a silent injection vector (the "Orphan Trap").
+// No `data.json` files exist today, so this is a no-op removal. Reinstate ONLY behind a frozen
+// sidecar contract + validator (K6 / #109). See canon/queries/portfolio-schema-postmortem.md.
+const sidecarData: any = {};
 
 // Construct valid entry for both real and placeholder
 // We merge sidecarData into data so the UI components don't know the difference.

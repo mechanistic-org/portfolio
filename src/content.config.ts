@@ -121,7 +121,20 @@ const projectsCollection = defineCollection({
 			partGraph: z.string().optional(),
 
 			// V4 Scrolly Engine
-			cyberspace: z.any().optional(),
+			// #69 hardening: was z.any() (zero validation, the next meltdown vector). Typed to the
+			// known top-level shape with .passthrough() so heterogeneous sticky internals are
+			// preserved (not silently stripped); `stickies` stays z.any()[] so the Hyperspace /
+			// ProjectArticle consumers keep `any` access. Full per-sticky type is a #69 follow-up.
+			cyberspace: z
+				.object({
+					enable: z.boolean().optional(),
+					layout: z.string().optional(),
+					narrative: z.array(z.any()).optional(),
+					stickies: z.array(z.any()).optional(),
+				})
+				.passthrough()
+				.nullable()
+				.optional(),
 
 			// HUD Intelligence (V4.2 Upgrade)
 			metrics: z
