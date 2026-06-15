@@ -1,0 +1,53 @@
+---
+import DocsLayout from "@/components/Docs/DocsLayout.astro";
+export const prerender = true;
+
+// Review surface for the auto-extracted System Journal (the miner's `docs`
+// channel writes candidates into src/content/docs/_inbox/). These are NOT
+// curated documentation — they are candidates to review, cull, and promote.
+const globNotes = import.meta.glob("../../content/docs/_inbox/*.{md,mdx}", { eager: true });
+const notes = Object.values(globNotes)
+	.map((file: any) => {
+		const data = file.frontmatter || {};
+		const rel = (file.file.split("/content/docs/")[1] || file.file).replace(/\.(mdx|md)$/, "");
+		const dateMatch = rel.match(/(\d{4}-\d{2}-\d{2})/);
+		return {
+			slug: rel,
+			title: data.title || rel,
+			description: data.description || "",
+			date: dateMatch ? dateMatch[1] : "",
+		};
+	})
+	.sort((a, b) => b.date.localeCompare(a.date) || a.slug.localeCompare(b.slug));
+
+const doc = {
+	data: {
+		title: "System Journal",
+		description:
+			"Auto-extracted systemic notes from the EN-OS conversation miner. Candidates for review and curation.",
+	},
+};
+---
+
+<DocsLayout doc={doc as any}>
+	<p class="text-neutral-400">
+		<strong>{notes.length}</strong> notes auto-extracted by the conversation miner's
+		<code>docs</code> channel — durable architecture, protocol, and convention changes. These are
+		<em>candidates</em>, not curated docs: review them, cull the outdated, promote the durable into
+		the maintained handbook.
+	</p>
+
+	<ul class="mt-8 list-none space-y-5 pl-0">
+		{
+			notes.map((n) => (
+				<li class="border-l border-neutral-800 pl-4">
+					<a href={`/docs/${n.slug}`} class="font-medium no-underline hover:underline">
+						{n.title}
+					</a>
+					<div class="mt-1 font-mono text-xs text-neutral-500">{n.date}</div>
+					{n.description && <p class="mt-1 text-sm text-neutral-400">{n.description}</p>}
+				</li>
+			))
+		}
+	</ul>
+</DocsLayout>
