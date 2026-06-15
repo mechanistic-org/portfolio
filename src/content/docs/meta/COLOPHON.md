@@ -33,7 +33,7 @@ The system is built for stability, clarity, and forensic density.
 | Layer       | Technology           | Rationale                                                                 |
 | :---------- | :------------------- | :------------------------------------------------------------------------ |
 | **Core**    | **Astro 5.0**        | Zero-JS default. Static HTML output.                                      |
-| **CMS**     | **Keystatic**        | Local Markdown management. No database to crash.                          |
+| **Content** | **MDX + Zod**        | Astro content collections. No database to crash.                         |
 | **Styling** | **Tailwind v4**      | Utility-first tokens.                                                     |
 | **Memory**  | **The Testimonials** | A collaboration log of the AI agents (The Council) who helped build it.   |
 | **Assets**  | **Cloudflare R2**    | Global edge distribution for heavy binaries (`.glb`, `.pdf`).             |

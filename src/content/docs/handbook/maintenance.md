@@ -202,17 +202,16 @@ These scripts are the engine of the "Forensic Data Factory."
   - Renames `deck` -> `legacy_deck`.
 
 - **Symptom:** `Error: Field validation failed: teamSize: Must be a string`
-- **Cause:** Keystatic/Zod schema expects a String, but a Number was provided in the markdown frontmatter.
+- **Cause:** The Zod schema expects a String, but a Number was provided in the markdown frontmatter.
 - **Fix:** Quote the value in the `.mdx` file: `teamSize: 6` -> `teamSize: "6"`.
 
 ### The Orphan Trap (Data Stripping)
 
-- **Symptom:** Python Hydration script runs successfully (`✅ Updated: 1`), but the data (`toolchain`, `forensic_summary`) does not appear in the Build or CMS.
-- **Cause:** **Schema Collision.** The field exists in the MDX file, but Astro's Zod Schema (`content.config.ts`) is in strict mode and silently strips undefined fields. If you open it in Keystatic, it will likely DELETE the field upon save because it's missing from `keystatic.config.tsx`.
-- **Fix:** **The Parity Law:**
+- **Symptom:** Python Hydration script runs successfully (`✅ Updated: 1`), but the data (`toolchain`, `forensic_summary`) does not appear in the Build.
+- **Cause:** **Schema Collision.** The field exists in the MDX file, but Astro's Zod Schema (`content.config.ts`) is in strict mode and silently strips fields it does not define.
+- **Fix:** **The Schema Law:**
   1.  Define field in `src/content.config.ts` (Build Safety).
-  2.  Define field in `keystatic.config.tsx` (CMS Safety).
-  3.  Inject field via `hydrate_content.py` (Automation).
+  2.  Inject field via `hydrate_content.py` (Automation).
 
 ### The "Ghost Folder" 404 (Static Assets)
 

@@ -19,7 +19,6 @@ last_updated: 2026-01-18
 - **DCD:** "D-C-D"
 - **ECO:** "E-See-Oh"
 - **NPM:** "N-P-M"
-- **Keystatic:** "Key-static"
 - **Astro:** "As-tro"
 - **Regenerate:** "Refresh"
 

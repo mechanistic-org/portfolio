@@ -1,31 +1,30 @@
 # Portfolio — eriknorris.com
 
 Headless agentic pipeline that compiles 30 years of engineering "Red Gold" (raw
-PDFs, CAD, notebooks) into a static "living portfolio." Astro SSG + Keystatic CMS,
+PDFs, CAD, notebooks) into a static "living portfolio." Astro SSG,
 TypeScript core, Python automation, deployed to Cloudflare Pages. Full prose in
 [README.md](README.md); design system in [DESIGN.md](DESIGN.md).
 
 This file is the front door. Read it (and the specific files a task names) instead
 of grazing the tree — see **Context policy** below.
 
-## ⚠️ Load-bearing footgun: dual-mode output
+## ⚠️ Output is `static` everywhere — keep it that way
 
-`astro.config.mjs` sets `output: isProduction ? "static" : "server"` keyed on
-`CF_PAGES`. This is deliberate — do **not** "simplify" it:
+`astro.config.mjs` sets `output: "static"` unconditionally. Do **not** switch any
+environment to `server`: that bundles the whole site into one `_worker.js`, hits
+Cloudflare's 10,000-module limit, and crashes the build. Dev and prod run the same
+static output.
 
-- **Production (Cloudflare) MUST be `static`.** `server` bundles the whole site
-  into one `_worker.js`, hits Cloudflare's 10,000-module limit, and crashes the build.
-- **Local dev MUST be `server`.** Keystatic needs the `/api/keystatic` SSR routes.
-
-> Keystatic is a **dev-only CMS over the MDX** — disabled in production (static), retirement
-> is on the roadmap. Don't treat it as the source of truth or invest in extending it;
-> content truth is migrating to the canon vault (see **Content model**).
+> Content source of truth is `src/content.config.ts` (Astro collections + Zod over the
+> MDX). Keystatic — the old dev-only CMS that was the sole reason dev ran in `server`
+> mode — was fully removed (#104); content truth is migrating to the canon vault (see
+> **Content model**).
 
 ## Commands
 
 | Task | Command |
 |---|---|
-| Dev server (server mode, Keystatic at `/keystatic`, `/admin` redirects there) | `npm run dev` (port 4321) |
+| Dev server (static output, port 4321) | `npm run dev` |
 | Production build | `npm run build` (`ci-prebuild.js` → `astro build` → Pagefind index) |
 | Preview built site | `npm run preview` |
 | Validate frontmatter | `npm run audit:frontmatter` |

@@ -9,15 +9,16 @@ description: 'Documentation for The Refinery: Asset & Content Sovereignty.'
 # The Refinery: Asset & Content Sovereignty
 
 > **Role:** The Archivist / The Data God
-> **Objective:** Manage the definitive source of truth for Content (Keystatic) and Assets (R2_MASTER).
+> **Objective:** Manage the definitive source of truth for Content (`src/content.config.ts` over MDX) and Assets (R2_MASTER).
 
 ## 1. The Pure Hyperspace Architecture
 
-The "Hybrid" era of CSVs and manual markdown files is over. We have moved to a **Pure Hyperspace** model.
+The "Hybrid" era of CSVs and manual markdown sidecars is over. We have moved to a **Pure Hyperspace** model.
 
 ### The Two Pillars
 
-1.  **Content (Text/Data):** Managed via **Keystatic** (`/keystatic`).
+1.  **Content (Text/Data):** Authored as MDX, validated by Zod.
+    - **Schema (source of truth):** `src/content.config.ts` (Astro content collections).
     - **Storage:** `src/content/projects/*.mdx`
     - **Timeline:** Dynamic via Collections (Metadata).
 2.  **Assets (Media):** Managed via **R2_MASTER**.
@@ -33,7 +34,7 @@ The "Hybrid" era of CSVs and manual markdown files is over. We have moved to a *
 
 - **Role:** The Cognitive Layer.
 - **Target:** `src/content/projects/[slug]/_intelligence.md`
-- **Visibility:** Visualized in the **Exploded View** (Assembly), ignored by the static CMS.
+- **Visibility:** Visualized in the **Exploded View** (Assembly); not part of the project collection schema.
 
 ### Hunting Protocol ("Feeding the Assembly")
 
@@ -60,27 +61,27 @@ _The strategic reasoning._
 ```
 
 ---
-## 3. Content Protocol (Keystatic)
+## 3. Content Protocol (MDX + Zod)
 
-**WE DO NOT EDIT MARKDOWN FILES MANUALLY.**
-_(Exception: Architects debugging format issues)_
+Content lives in version-controlled MDX. The **single source of truth is the Zod schema**
+in `src/content.config.ts` — it defines and validates every field. `astro check` / the build
+will fail loudly on drift, which is the guardrail that replaced the old CMS.
 
-### Access the CMS
+> **Note:** Keystatic (a dev-only CMS that briefly sat over the MDX) was fully retired in #104.
+> There is no `/keystatic` board, and dev/prod both run `output: "static"`.
 
-1.  **Start Dev Server:** `npm run dev`
-2.  **Open Board:** `http://localhost:4321/keystatic`
+### How to edit content
 
-### The "Sovereign Manifest"
-
-Keystatic is the **Single Source of Truth**. Use it to:
-
-- Create new Projects.
-- Edit "Briefs" (The 1-pager summary).
-- Manage Project Metadata (Dates, Status, Tech Stack).
-- Curate the Gallery (Drag & Drop sorting).
+1.  **Start Dev Server:** `npm run dev` (port 4321).
+2.  **Edit the MDX directly** under `src/content/projects/<slug>/index.mdx`.
+3.  **Mind the pipeline.** Forensic fields (`forensic_summary`, `scars`, `metrics`, `cast`,
+    `timeline`, …) are **injected by `hydrate_content.py`** — don't hand-author what the
+    pipeline owns. Top-level metadata (dates, status, tech stack, gallery order) is safe to
+    edit by hand.
+4.  **Validate:** `npm run astro check` confirms the file still satisfies the schema.
 
 ---
-## 3. Asset Protocol (The Air Gap)
+## 4. Asset Protocol (The Air Gap)
 
 **Rule #1:** NEVER commit heavy assets (JPG, PNG, GLB, MP4) to the Git Repo.
 **Rule #2:** You ONLY edit `R2_MASTER`.
@@ -100,13 +101,13 @@ Keystatic is the **Single Source of Truth**. Use it to:
 3.  **Sync:** Run the sync script to push Master changes to the World.
 
 ---
-## 4. The Smelter (`scripts/modernize_content.py`)
+## 5. The Smelter (`scripts/modernize_content.py`)
 
-Even with Keystatic, the **Smelter** script remains vital for **Schema Compliance**.
+The **Smelter** script keeps every MDX file in **Schema Compliance** with `content.config.ts`.
 
 **When to run it:**
 
-- After adding a new Project in Keystatic.
+- After adding a new project MDX file.
 - When the C24 Schema is updated and files need mass-patching.
 
 **What it does:**
@@ -120,14 +121,15 @@ python scripts/modernize_content.py
 ```
 
 ---
-## 5. Troubleshooting
+## 6. Troubleshooting
 
 ### "My image isn't showing up!"
 
 1.  Did you put it in `R2_MASTER`?
 2.  Did you run the **Sync**?
 
-### "Keystatic crashed!"
+### "A content collection / schema error on build!"
 
-- **Fix:** Check your terminal. Likely a JSON syntax error in a recent edit.
-- **Nuclear Option:** Delete `.astro` folder and run `npx astro sync`.
+- **Fix:** Read the `astro check` output — it names the file and the field that violates
+  `src/content.config.ts`. Correct the frontmatter (or run the Smelter) to match the schema.
+- **Nuclear Option:** Delete the `.astro` folder and run `npx astro sync`.

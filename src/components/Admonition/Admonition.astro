@@ -1,9 +1,43 @@
 ---
-const { title = "Note", type = "info" } = Astro.props;
+type Variant = "info" | "tip" | "caution" | "danger";
+
+interface Props {
+	variant?: Variant;
+	/** @deprecated legacy prop name — use `variant` */
+	type?: Variant;
+	/** optional heading override; defaults to the variant label */
+	title?: string;
+}
+
+// Full static class strings per variant so Tailwind's scanner emits them all.
+// Do NOT build these dynamically (e.g. `border-${color}-500`) — they would be purged.
+const VARIANTS: Record<Variant, { border: string; bg: string; title: string; label: string }> = {
+	info: { border: "border-blue-500", bg: "bg-blue-900/20", title: "text-blue-400", label: "Note" },
+	tip: {
+		border: "border-emerald-500",
+		bg: "bg-emerald-900/20",
+		title: "text-emerald-400",
+		label: "Tip",
+	},
+	caution: {
+		border: "border-amber-500",
+		bg: "bg-amber-900/20",
+		title: "text-amber-400",
+		label: "Caution",
+	},
+	danger: { border: "border-red-500", bg: "bg-red-900/20", title: "text-red-400", label: "Warning" },
+};
+
+const { variant, type, title } = Astro.props;
+// `type` is the legacy prop name; `variant` wins. Guard against unknown values at runtime.
+const requested = variant ?? type ?? "info";
+const key: Variant = requested in VARIANTS ? requested : "info";
+const v = VARIANTS[key];
+const heading = title ?? v.label;
 ---
 
-<div class={`admonition admonition-${type} my-4 border-l-4 border-blue-500 bg-blue-900/20 p-4`}>
-	<div class="mb-2 font-bold text-blue-400">{title}</div>
+<div class={`admonition admonition-${key} my-4 border-l-4 ${v.border} ${v.bg} p-4`}>
+	<div class={`mb-2 font-bold ${v.title}`}>{heading}</div>
 	<div class="text-neutral-300">
 		<slot />
 	</div>
