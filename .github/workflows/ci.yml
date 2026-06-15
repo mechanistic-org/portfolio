@@ -31,9 +31,6 @@ jobs:
       - name: 🛡️ Audit Frontmatter (Shield 2)
         run: npm run audit:frontmatter
 
-      - name: 🛡️ Keystatic ↔ Zod Schema Parity
-        run: python scripts/check_schema_parity.py
-
       - name: 🛡️ Check Astro Config
         run: npm run astro check
 

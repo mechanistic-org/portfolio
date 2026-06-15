@@ -9,8 +9,7 @@ node_modules
 .netlify
 netlify 
 
-# Ignore MDX files as Keystatic expects a specific JSX component structure
-# IF using Keystatic, I recommend uncommenting the below line so you don't accidentally format things incorrectly
+# Optionally skip formatting MDX (JSX-in-Markdown can be fragile under Prettier):
 # **/*.mdx
 
 # Ignore tours

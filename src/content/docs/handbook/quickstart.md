@@ -27,9 +27,9 @@ Human/operator terminal commands can use the short forms in this guide (`npm run
 
 If a command fails only inside Codex, keep sandboxing on and swap the command to one of the explicit runtimes above. Escalate only for operations that genuinely need user-level access, auth, network, or installs.
 
-## 1. Start Engine (Dev Server & CMS)
+## 1. Start Engine (Dev Server)
 
-Keystatic is essential for content management.
+The dev server renders content and assets locally at full fidelity.
 
 **Command:**
 
@@ -40,7 +40,7 @@ npm run dev
 **Telemetry:**
 
 - **Local:** `http://localhost:4321`
-- **Admin (CMS):** `http://localhost:4321/keystatic` _(Edit Content Here)_
+- **Content:** edit MDX directly under `src/content/projects/<slug>/index.mdx`
 - **Network:** `http://192.168.x.x:4321`
 
 > [!WARNING]
@@ -68,7 +68,7 @@ npm run content:modernize
 
 **Triggers (When to Run):**
 
-1.  **New Timeline Node:** You created a new Project in Keystatic -> Run `content:hydrate`.
+1.  **New Timeline Node:** You created a new project MDX file -> Run `content:hydrate`.
 2.  **Asset Drop:** You added a new folder to `R2_MASTER` -> Run `assets:process`.
 3.  **Schema Change:** You need to update all MDX files -> Run `content:modernize`.
 

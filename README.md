@@ -15,7 +15,7 @@ Operating at the intersection of deep engineering legacy and modern software agi
 ### 🔧 The Stack
 
 - **Engine:** Astro (Static Site Generation)
-- **CMS:** Keystatic (Local Admin)
+- **Content:** MDX + Zod schema (Astro Content Collections)
 - **Language:** TypeScript (Core), Python (Automation)
 - **Deployment:** Cloudflare Pages (Edge Network)
 - **Asset Storage:** Cloudflare R2 (Object Storage)

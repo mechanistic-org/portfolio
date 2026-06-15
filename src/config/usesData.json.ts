@@ -21,7 +21,6 @@ const usesData: usesItem[] = [
 			"TypeScript - enhances javascript",
 			"Astro - high speed framework",
 			"Tailwind CSS - better CSS",
-			"Keystatic CMS - git based content management system",
 		],
 	},
 	{
