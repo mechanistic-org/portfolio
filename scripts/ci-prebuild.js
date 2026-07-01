@@ -4,6 +4,7 @@ import path from 'path';
 // Define the path to the problematic symlink
 // We use process.cwd() to ensure we are relative to the project root
 const symlinkPath = path.join(process.cwd(), 'public', 'assets', 'r2');
+const astroConfigPath = path.join(process.cwd(), 'astro.config.mjs');
 
 // Check if we are running in a CI environment (Cloudflare sets CF_PAGES=1)
 // We also check for generic CI, just in case.
@@ -12,6 +13,23 @@ const isCI = process.env.CF_PAGES === '1' || process.env.CI === 'true';
 console.log('-------------------------------------------------------');
 console.log('🔧 Pre-Build Environment Check');
 console.log('-------------------------------------------------------');
+
+try {
+    const astroConfig = fs.readFileSync(astroConfigPath, 'utf8');
+    if (/output\s*:\s*['"]server['"]/.test(astroConfig)) {
+        console.error('ERROR: astro.config.mjs must keep output: "static".');
+        console.error('Server output bundles this site into one Worker and can hit the Cloudflare 10,000-module limit.');
+        process.exit(1);
+    }
+    if (!/output\s*:\s*['"]static['"]/.test(astroConfig)) {
+        console.error('ERROR: Could not verify output: "static" in astro.config.mjs.');
+        process.exit(1);
+    }
+    console.log('Astro output verified: static.');
+} catch (error) {
+    console.error(`ERROR: Could not read astro.config.mjs: ${error.message}`);
+    process.exit(1);
+}
 
 if (isCI) {
     console.log('🌍 Environment: CI / Cloudflare (Detected)');
