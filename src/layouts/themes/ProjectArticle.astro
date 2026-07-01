@@ -85,10 +85,11 @@ const facts: [string, unknown][] = (
 	[
 		["Role", d.job_title || "Mechanical / ID Lead"],
 		["Employer", pretty(d.employer)],
+		["Client", (d.client || []).map(pretty).join(", ")],
 		["Period", period],
 		["Team", d.teamSize],
 		["Industry", pretty(d.industry)],
-		["Production", pretty(d.production)],
+		["Production", [pretty(d.production), pretty(d.productionScale)].filter(Boolean).join(" · ")],
 		["Tools", (d.tools || []).map(pretty).join(", ")],
 	] as [string, unknown][]
 ).filter(([, v]) => v);
