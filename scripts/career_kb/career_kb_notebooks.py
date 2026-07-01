@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate the NotebookLM migration queue and reconcile coverage.
 
-Outputs `career-kb/index/notebooks.yaml`: one entry per project slug that has
+Outputs `canon/census/notebooks.yaml`: one entry per project slug that has
 at least one mapped NotebookLM, recording the source notebook title(s), whether
 a synced registry doc already exists, whether raw cartridge outputs already
 exist locally, whether the slug matches a live project record, and a derived
@@ -144,10 +144,10 @@ def reconcile(entries: list[dict[str, Any]]) -> dict[str, Any]:
 
 
 def write_yaml(entries: list[dict[str, Any]], summary: dict[str, Any]) -> Path:
-    common.CAREER_KB_INDEX.mkdir(parents=True, exist_ok=True)
-    out = common.CAREER_KB_INDEX / "notebooks.yaml"
+    common.CANON_CENSUS.mkdir(parents=True, exist_ok=True)
+    out = common.CANON_CENSUS / "notebooks.yaml"
     doc = {
-        "schema_version": "career-kb.notebooks.v0.1",
+        "schema_version": "canon.notebooks.v0.1",
         "generated_by": "scripts/career_kb/career_kb_notebooks.py",
         "source_of_truth": str(common.NOTEBOOKLM_SYNC),
         "reconciliation": summary,
@@ -163,7 +163,7 @@ def write_yaml(entries: list[dict[str, Any]], summary: dict[str, Any]) -> Path:
 def main() -> int:
     parser = argparse.ArgumentParser(description="NotebookLM migration queue + coverage.")
     parser.add_argument("--write", action="store_true",
-                        help="Write career-kb/index/notebooks.yaml.")
+                        help="Write canon/census/notebooks.yaml.")
     parser.add_argument("--format", choices=("text", "json"), default="text")
     args = parser.parse_args()
 

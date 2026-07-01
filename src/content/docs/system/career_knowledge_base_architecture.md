@@ -6,7 +6,14 @@ slug: "career-knowledge-base-architecture"
 
 # Career Knowledge Base Architecture
 
-**Status:** Candidate v0.1  
+> **Disposition (2026-07-01): SUPERSEDED — rejected as architecture.** The canon vault
+> (`H:\workspace\canon`) is the single source of truth for career knowledge; this proposal's
+> separate KB root would have created a second authority (see the Epic W8 doctrines and
+> `canon/queries/career-kb-proposal-disposition.md`). Retained for the record: the verified
+> state inventory below, the audit script (`scripts/audits/career_kb_inventory.py`), and the
+> NLM extractor suite (`scripts/career_kb/`), which now writes its index beside the canon census.
+
+**Status:** Superseded (was Candidate v0.1)  
 **Audit script:** `scripts/audits/career_kb_inventory.py`  
 **Audit command:** `python scripts/audits/career_kb_inventory.py --format md --out tmp/career-kb-inventory.md`
 

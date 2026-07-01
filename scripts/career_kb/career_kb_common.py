@@ -45,9 +45,12 @@ PROJECTS_DIR = PORTFOLIO_ROOT / "src" / "content" / "projects"
 REGISTRY_NLM_DIR = GLOBAL_AGENT_ROOT / "registry" / "notebooklm"
 NOTEBOOKLM_SYNC = GLOBAL_AGENT_ROOT / "scripts" / "notebooklm_sync.py"
 
-# Workspace-level KB root (kept out of the Astro source tree, beside R2_MASTER).
-CAREER_KB_ROOT = GITHUB_ROOT / "portfolio-workspace" / "career-kb"
-CAREER_KB_INDEX = CAREER_KB_ROOT / "index"
+# The canon vault is the single source of truth for career knowledge
+# (canon/queries/career-kb-proposal-disposition.md — the separate career-kb
+# workspace root was rejected as a duplicate authority). Index artifacts from
+# these tools land beside the census board.
+CANON_ROOT = Path("H:/workspace/canon")
+CANON_CENSUS = CANON_ROOT / "census"
 
 
 # --- Cartridge contract ----------------------------------------------------
