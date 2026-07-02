@@ -121,14 +121,10 @@ export async function getCareerAssembly(
 		});
 
 		// C. FABRICATE FASTENERS (SKILLS)
-		// Extract from 'skillData' (Typed) and 'tags' (Loose)
+		// Extract from 'tags' (Loose) — 'skillData' removed in contract v2 (#109 K7, 100% empty corpus-wide)
 
 		const skills = new Set<string>();
 
-		// From SkillData (High Fidelity)
-		project.data.skillData?.forEach((s) => skills.add(s.name));
-
-		// From Tags (Low Fidelity)
 		project.data.tags?.forEach((t) => skills.add(t));
 
 		// Create Links

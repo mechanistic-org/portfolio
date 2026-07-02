@@ -33,7 +33,6 @@ const projects = rawProjects
 		];
 		return (
 			!data.draft &&
-			data.statusLabel !== "NO_DATA" &&
 			(data as any).impact !== "NO_DATA" &&
 			!hiddenIds.includes(data.slug || (data as any).id || id)
 		);
