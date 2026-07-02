@@ -25,7 +25,7 @@ pnpm-debug.log*
 .wrangler/
 
 # Local R2 Staging (Do not commit)
-R2_STAGING/
+R2_MIRROR/
 data_source/mined_assets/
 r2_backup_excluded/
 public/assets/r2/

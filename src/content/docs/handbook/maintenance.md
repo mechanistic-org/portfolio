@@ -55,7 +55,7 @@ These scripts are the engine of the "Forensic Data Factory."
     - **Audio:**
       - **Source:** `R2_MASTER/[slug]/[filename].wav`
       - **Naming:** `[slug]-briefing.wav` (Standard) or `[slug]-deep_dive.wav`
-      - **Output:** `R2_STAGING/[slug]/[filename].mp3` (192kbps)
+      - **Output:** `R2_MIRROR/[slug]/[filename].mp3` (192kbps)
       - **Global Audio:** Use `identity` slug (e.g., `R2_MASTER/identity/identity-overview.wav`).
     - **Usage:**
       - `npm run assets:process` (Process specific slugs in R2_MASTER).
@@ -282,10 +282,10 @@ These scripts are the engine of the "Forensic Data Factory."
 - **Source of Truth:** `src/config/resume_master.ts` (Structured Content).
 - **Generation (Headless):** `node scripts/generate_resume_pdf.cjs` (from the repo root). Spawns a headless Astro dev server on port 4321 and prints `/resume` via Puppeteer with print-media emulation. Replaces the old interactive Browser Print -> Save-to-PDF flow.
   - **Trap:** The script exits 0 even when printing fails inside its try/catch. Verify the output PDF's mtime on the filesystem; stdout success lines prove nothing.
-- **Output (R2_STAGING, not `public/`):**
-  - **Current:** `D:\GitHub\portfolio-assets\R2_STAGING\resume\Erik_Norris_Resume_Current.pdf`
-  - **Archive:** `D:\GitHub\portfolio-assets\R2_STAGING\resume\archive\Erik_Norris_Resume_[YYYY-MM-DD].pdf`
-- **Deploy:** `venv/Scripts/python.exe scripts/sync_r2.py --target portfolio` (from `D:\GitHub\global_agent`). Additive sync of `R2_STAGING` -> R2 bucket `assets-eriknorris-com`. Size-matched files are skipped; nothing is pruned. Require `Errors: 0` in the printed summary (the exit code lies); if the fresh PDF shows as Skipped, re-run with `--force`.
+- **Output (R2_MIRROR, not `public/`):**
+  - **Current:** `D:\GitHub\portfolio-assets\R2_MIRROR\resume\Erik_Norris_Resume_Current.pdf`
+  - **Archive:** `D:\GitHub\portfolio-assets\R2_MIRROR\resume\archive\Erik_Norris_Resume_[YYYY-MM-DD].pdf`
+- **Deploy:** `venv/Scripts/python.exe scripts/sync_r2.py --target portfolio` (from `D:\GitHub\global_agent`). Additive sync of `R2_MIRROR` -> R2 bucket `assets-eriknorris-com`. Size-matched files are skipped; nothing is pruned. Require `Errors: 0` in the printed summary (the exit code lies); if the fresh PDF shows as Skipped, re-run with `--force`.
   - **Retired:** `scripts/fix_resume_r2.py` (now in `scripts/_archive/`). Do not use it.
 - **Live URL:** [`https://assets.eriknorris.com/resume/Erik_Norris_Resume_Current.pdf`](https://assets.eriknorris.com/resume/Erik_Norris_Resume_Current.pdf). Verify with `curl -sI`: require HTTP 200 and a `Content-Length` equal to the staging file's byte size.
 - **Legacy Vanity URL (`resume.eriknorris.com`):** 302s to the HTML page `https://eriknorris.com/resume` (verified 2026-06-12), NOT to a PDF. Never use it to verify a deploy — checking the redirect instead of the asset is how a stale live PDF went unnoticed for ~3 months.

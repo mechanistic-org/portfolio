@@ -21,8 +21,8 @@ These scripts are essential for the daily build and content workflows.
 | Script                 | description                                                   | Usage                      |
 | :--------------------- | :------------------------------------------------------------ | :------------------------- |
 | `hydrate_content.py`   | Syncs content from JSON dumps & Mines R2_MASTER for stickies. | `npm run content:hydrate`  |
-| `process_assets.py`    | Optimises and moves assets from `R2_MASTER` to `R2_STAGING`.  | `npm run assets:process`   |
-| `sync_r2.py`           | Syncs `R2_STAGING` to Cloudflare R2 bucket.                   | `npm run sync:assets`      |
+| `process_assets.py`    | Optimises and moves assets from `R2_MASTER` to `R2_MIRROR`.  | `npm run assets:process`   |
+| `sync_r2.py`           | Syncs `R2_MIRROR` to Cloudflare R2 bucket.                   | `npm run sync:assets`      |
 | `generate_content.py`  | Generates placeholder/stub content for new projects.          | `npm run content:generate` |
 | `ci-prebuild.js`       | Pre-build hook.                                               | CI                         |
 | `setup_workspace.py`   | Workspace setup.                                              | Setup                      |

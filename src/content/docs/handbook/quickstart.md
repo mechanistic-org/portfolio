@@ -85,7 +85,7 @@ npm run content:modernize
 2.  **Sync:** Run the sync script to update Staging and Production.
 
 ```powershell
-# Ensure R2_MASTER assets are processed and moved to R2_STAGING
+# Ensure R2_MASTER assets are processed and moved to R2_MIRROR
 npm run assets:process
 ```
 

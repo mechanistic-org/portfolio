@@ -4,8 +4,8 @@ const fs = require("fs");
 
 // Configuration
 const RESUME_URL = "http://localhost:4321/resume";
-const OUTPUT_DIR = path.resolve(__dirname, "../../portfolio-assets/R2_STAGING/resume");
-// Archives are local-only. R2_STAGING syncs publicly with guessable URLs, and old
+const OUTPUT_DIR = path.resolve(__dirname, "../../portfolio-assets/R2_MIRROR/resume");
+// Archives are local-only. R2_MIRROR syncs publicly with guessable URLs, and old
 // dated resumes carry stale personal info - they must never land in staging.
 const ARCHIVE_DIR = path.resolve(__dirname, "../../portfolio-assets/resume_archive_local");
 const TODAY = new Date().toISOString().split("T")[0];

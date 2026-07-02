@@ -8,7 +8,7 @@ state of:
 - Astro project records in src/content/projects
 - Raw NotebookLM extracts in src/content/_raw_nlm
 - Synced NotebookLM registry docs in global_agent/registry/notebooklm
-- Curated asset folders in R2_MASTER and R2_STAGING
+- Curated asset folders in R2_MASTER and R2_MIRROR
 - Legacy local archive roots
 
 Usage:
@@ -41,7 +41,7 @@ class Roots:
     raw_nlm: Path
     projects: Path
     r2_master: Path
-    r2_staging: Path
+    R2_MIRROR: Path
     legacy_archive: Path
     morespace_archive: Path
     notebook_registry: Path
@@ -54,7 +54,7 @@ def default_roots(repo: Path) -> Roots:
         raw_nlm=repo / "src" / "content" / "_raw_nlm",
         projects=repo / "src" / "content" / "projects",
         r2_master=github_root / "portfolio-workspace" / "R2_MASTER",
-        r2_staging=github_root / "portfolio-assets" / "R2_STAGING",
+        R2_MIRROR=github_root / "portfolio-assets" / "R2_MIRROR",
         legacy_archive=Path(r"D:\portfolio\portfolio_working"),
         morespace_archive=Path(r"\\morespace\projects\portfolio"),
         notebook_registry=github_root / "global_agent" / "registry" / "notebooklm",
@@ -195,7 +195,7 @@ def summarize(roots: Roots) -> dict[str, Any]:
     raw_stems = set(raw["unique_stems"])
     registry_slugs = set(registry["slugs"])
     master_dirs = set(top_level_dirs(roots.r2_master))
-    staging_dirs = set(top_level_dirs(roots.r2_staging))
+    staging_dirs = set(top_level_dirs(roots.R2_MIRROR))
 
     sidecar_counts: Counter[str] = Counter()
     for project in projects:
@@ -213,7 +213,7 @@ def summarize(roots: Roots) -> dict[str, Any]:
         "projects": str(roots.projects),
         "raw_nlm": str(roots.raw_nlm),
         "r2_master": str(roots.r2_master),
-        "r2_staging": str(roots.r2_staging),
+        "R2_MIRROR": str(roots.R2_MIRROR),
         "legacy_archive": str(roots.legacy_archive),
         "morespace_archive": str(roots.morespace_archive),
         "notebook_registry": str(roots.notebook_registry),
@@ -238,8 +238,8 @@ def summarize(roots: Roots) -> dict[str, Any]:
             "notebook_registry_slugs_matching_projects": len(registry_slugs & project_slugs),
             "r2_master_dir_count": len(master_dirs),
             "r2_master_dirs_matching_projects": len(master_dirs & project_slugs),
-            "r2_staging_dir_count": len(staging_dirs),
-            "r2_staging_dirs_matching_projects": len(staging_dirs & project_slugs),
+            "R2_MIRROR_dir_count": len(staging_dirs),
+            "R2_MIRROR_dirs_matching_projects": len(staging_dirs & project_slugs),
             "page_notebook_link_count": sum(1 for p in projects if p["has_notebook_link_in_page"]),
             "audio_url_count": sum(1 for p in projects if p["has_audio_url"]),
             "weak_public_project_count": len(weak_public),
@@ -256,9 +256,9 @@ def summarize(roots: Roots) -> dict[str, Any]:
         "notebook_registry": registry,
         "assets": {
             "r2_master_not_in_projects": sorted(master_dirs - project_slugs),
-            "r2_staging_not_in_projects": sorted(staging_dirs - project_slugs),
+            "R2_MIRROR_not_in_projects": sorted(staging_dirs - project_slugs),
             "projects_without_r2_master": sorted(project_slugs - master_dirs),
-            "projects_without_r2_staging": sorted(project_slugs - staging_dirs),
+            "projects_without_R2_MIRROR": sorted(project_slugs - staging_dirs),
         },
         "deep_candidates": deep_candidates,
         "weak_public_projects": sorted(weak_public, key=lambda p: (p["description_len"], p["body_len"], p["slug"])),
@@ -287,7 +287,7 @@ def render_md(data: dict[str, Any]) -> str:
             f"- Raw NotebookLM records with notebook links: {s['raw_nlm_notebook_link_count']}.",
             f"- Synced NotebookLM registry: {s['notebook_registry_doc_count']} docs, {s['notebook_registry_unique_slug_count']} unique slugs, {s['notebook_registry_slugs_matching_projects']} matching project slugs.",
             f"- R2_MASTER: {s['r2_master_dir_count']} dirs, {s['r2_master_dirs_matching_projects']} matching project slugs.",
-            f"- R2_STAGING: {s['r2_staging_dir_count']} dirs, {s['r2_staging_dirs_matching_projects']} matching project slugs.",
+            f"- R2_MIRROR: {s['R2_MIRROR_dir_count']} dirs, {s['R2_MIRROR_dirs_matching_projects']} matching project slugs.",
             f"- Page frontmatter notebook links: {s['page_notebook_link_count']}.",
             f"- Audio URLs: {s['audio_url_count']}.",
             f"- Weak public records by body or description threshold: {s['weak_public_project_count']}.",
@@ -313,7 +313,7 @@ def render_md(data: dict[str, Any]) -> str:
         ("Projects without raw NLM", data["raw_nlm"]["projects_without_raw_nlm"]),
         ("Raw NLM stems not in projects", data["raw_nlm"]["stems_not_in_projects"]),
         ("Projects without R2_MASTER", data["assets"]["projects_without_r2_master"]),
-        ("Projects without R2_STAGING", data["assets"]["projects_without_r2_staging"]),
+        ("Projects without R2_MIRROR", data["assets"]["projects_without_R2_MIRROR"]),
     ]
     for title, values in gap_sets:
         sample = ", ".join(f"`{v}`" for v in values[:30])

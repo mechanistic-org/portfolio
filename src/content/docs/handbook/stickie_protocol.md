@@ -23,7 +23,7 @@ Failure to optimize assets results in 404s, slow loads, and "Structure Rot."
 ## Workflow
 
 1.  **Add Content:** Place manual `deck.md` (for text) and raw images (for gallery) in `R2_MASTER/{slug}/bubbles/`.
-    - Do NOT bypass this by writing directly to `R2_STAGING`.
+    - Do NOT bypass this by writing directly to `R2_MIRROR`.
     - Do NOT edit `src/content/projects/{slug}.mdx` manually for gallery content.
 
 2.  **The Darkroom (Optimization):**
@@ -31,8 +31,8 @@ Failure to optimize assets results in 404s, slow loads, and "Structure Rot."
     - **What it does:**
       - Recursively scans `bubbles/` folders.
       - Optimizes images (Resizes -> WebP/AVIF).
-      - Mirrors the structure to `R2_STAGING`.
-    - **Verification:** Check `R2_STAGING/{slug}/bubbles` for `.webp` versions.
+      - Mirrors the structure to `R2_MIRROR`.
+    - **Verification:** Check `R2_MIRROR/{slug}/bubbles` for `.webp` versions.
 
 3.  **The Compiler (Ingestion):**
     - Run: `python scripts/hydrate_content.py` (The Hydrator)
