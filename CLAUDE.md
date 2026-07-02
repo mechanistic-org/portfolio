@@ -35,20 +35,22 @@ static output.
 
 Collections defined in [src/content.config.ts](src/content.config.ts):
 
-- **`projects`** — `.mdx` in `src/content/projects/`. Deep forensic schema
-  (`forensic_summary`, `complexity_vector`, `scars`, `metrics`, `cast`, `timeline`…).
+- **`projects`** — `.mdx` in `src/content/projects/`. Contract v2 schema
+  (`PROJECT_SCHEMA_VERSION` in content.config.ts; frozen 2026-07-02, portfolio#120).
   Taxonomy enums live in `src/config/taxonomy`. The `theme` field routes rendering
-  (e.g. `ProjectArticle`). Forensic fields are **injected by `hydrate_content.py`** —
-  don't hand-author what the pipeline owns.
+  (e.g. `ProjectArticle`). **Generated pages are a read-only render target** — the canon
+  generator (`scripts/project_pipeline.py --write-live`) is the only writer; the truth
+  lives in the canon vault (`H:\workspace\canon\entities\projects\<slug>\<slug>.md`).
+  `hydrate_content.py` was retired 2026-07-02 (it destructively rewrote frontmatter).
 - **`docs`** — `src/content/docs/` (incl. `_inbox`, intelligence boluses).
 - **`otherPages`** — `src/data/otherPages/`.
 
-Other content dirs: `_raw_nlm` (NotebookLM raw), `_agency_memory`, `colophon`, `prompts`.
+Other content dirs: `_raw_nlm` (NotebookLM raw; being absorbed into canon per-slug),
+`_agency_memory`, `colophon`, `prompts`.
 
-ETL: `Raw PDF → NotebookLM bolus (_intelligence.md) → Astro collection → static HTML`.
-Python scripts in `scripts/` (`hydrate_content.py`, `modernize_content.py`,
-`project_pipeline.py`, …). Confirm the correct venv before running a Python script —
-bare `python` may resolve to the wrong environment.
+ETL (canon-first, portfolio#121): `raw archives → canon vault (extraction + curation) →
+project_pipeline.py → read-only site MDX → static HTML`. Confirm the correct venv before
+running a Python script — bare `python` may resolve to the wrong environment.
 
 ## Asset sovereignty
 

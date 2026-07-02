@@ -11,9 +11,11 @@ Code reads from `CLAUDE.md`. There is one source of truth: `CLAUDE.md`.
 - Astro output stays `static` everywhere. Do not switch dev, preview, or deploy
   to `server`; Cloudflare Pages can hit the 10,000-module limit when the site is
   bundled into one Worker.
-- Content truth is Astro collections and Zod in `src/content.config.ts`.
-  Forensic fields are injected by `scripts/hydrate_content.py`, not invented by
-  hand during page edits.
+- Content truth lives in the canon vault (`H:\workspace\canon`); the site schema is
+  Astro collections + Zod in `src/content.config.ts` (contract v2). Generated project
+  pages are a read-only render target written by `scripts/project_pipeline.py
+  --write-live` — never hand-edit them, and never resurrect the retired
+  `hydrate_content.py` pattern of scripts rewriting frontmatter.
 - Images and 3D assets live in Cloudflare R2 at `assets.eriknorris.com`. Do not
   commit local asset dumps to Git.
 - For local source/corpus recall, prefer the configured global context/router
