@@ -83,7 +83,7 @@ const projectsCollection = defineCollection({
 			// frontmatter. The sidecar glob stays disabled until a sidecar validator
 			// exists ([...slug].astro, disabled 2026-06-15).
 
-			// Forensic Architecture (injected by hydrate_content.py)
+			// Forensic Architecture (written by the canon generator, scripts/project_pipeline.py)
 			toolchain: z.array(z.string()).optional(),
 
 			// V2.0 SCHEMA (Feb 2026) - STRICT OBJECT

@@ -16,6 +16,7 @@ import os, sys, json
 import yaml
 
 SLUG = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("-") else "c24"
+WRITE_LIVE = "--write-live" in sys.argv  # generate-only, targets the live site dir
 CANON_DIR  = r"H:\workspace\canon\entities\projects\%s" % SLUG
 CANON_REC  = os.path.join(CANON_DIR, "%s.md" % SLUG)
 SITE_DIR   = r"D:\GitHub\portfolio\src\content\projects\%s" % SLUG
@@ -26,8 +27,10 @@ OUT_DIR    = r"D:\GitHub\portfolio\scripts\_roundtrip_out\%s" % SLUG
 # --- Field ownership ---
 # Dossier fields -> prose-first markdown tables (the DossierCast/Scars/Bom/Timeline consumers).
 DOSSIER = [  # (frontmatter field, ## heading, ordered columns)
+    # Contract v2 (2026-07-02, WP4): `scars` removed from the dossier tables — the V8
+    # scar-instrument fields (severity/phase/anchor/T-I-R/evidence) don't survive a
+    # 3-column table round-trip. Scars ride frontmatter, canon and site alike.
     ("cast",     "Cast",     ["name", "role", "org"]),
-    ("scars",    "Scars",    ["label", "value", "description"]),
     ("bom",      "BOM",      ["label", "value"]),
     ("timeline", "Timeline", ["date", "title", "description"]),
 ]
@@ -245,26 +248,31 @@ def generate():
 
     site_fm = {k: v for k, v in rec.items()
                if k not in CANON_ONLY and k not in DATA_JSON_FIELDS and k not in ("timeline",)}
+    # Contract v2 (2026-07-02, WP4): dossier arrays + cyberspace ride site FRONTMATTER —
+    # they are contract fields the components read directly, and the data.json sidecar
+    # glob is disabled pending a sidecar validator. data.json carries only
+    # DATA_JSON_FIELDS (nested metrics / complexity_vector) when a record has them.
     data_json = {k: rec[k] for k in DATA_JSON_FIELDS if k in rec}
-    # dossier tables -> structured arrays
     for field, heading, cols in DOSSIER:
-        if heading in sections:
-            data_json[field] = parse_table(sections[heading], cols)
-    # galleries -> cyberspace
+        if heading in sections and field != "timeline":  # timeline is canon-only (removed from contract)
+            site_fm[field] = parse_table(sections[heading], cols)
     if GALLERY_HEADING in sections:
-        data_json["cyberspace"] = parse_galleries(sections[GALLERY_HEADING])
+        site_fm["cyberspace"] = parse_galleries(sections[GALLERY_HEADING])
     # entropy
     entropy = rec.get("entropy")
 
-    os.makedirs(OUT_DIR, exist_ok=True)
-    with open(os.path.join(OUT_DIR, "index.mdx"), "w", encoding="utf-8") as f:
+    out_dir = SITE_DIR if WRITE_LIVE else OUT_DIR
+    os.makedirs(out_dir, exist_ok=True)
+    with open(os.path.join(out_dir, "index.mdx"), "w", encoding="utf-8") as f:
         f.write("---\n"); f.write(dump_yaml(site_fm)); f.write("---\n"); f.write(site_body)
-    with open(os.path.join(OUT_DIR, "data.json"), "w", encoding="utf-8") as f:
-        json.dump(data_json, f, indent=2, ensure_ascii=False, sort_keys=True, default=str)
+    if data_json:
+        with open(os.path.join(out_dir, "data.json"), "w", encoding="utf-8") as f:
+            json.dump(data_json, f, indent=2, ensure_ascii=False, sort_keys=True, default=str)
     if entropy is not None:
-        with open(os.path.join(OUT_DIR, "_entropy.json"), "w", encoding="utf-8") as f:
+        with open(os.path.join(out_dir, "_entropy.json"), "w", encoding="utf-8") as f:
             json.dump(entropy, f, indent=2, ensure_ascii=False, sort_keys=True, default=str)
-    print(f"[generate] -> index.mdx ({len(site_fm)} fm keys) + data.json (keys: {sorted(data_json)})")
+    extra = f" + data.json (keys: {sorted(data_json)})" if data_json else ""
+    print(f"[generate] -> {out_dir}\\index.mdx ({len(site_fm)} fm keys){extra}")
     return site_fm, data_json, site_body
 
 
@@ -276,8 +284,8 @@ def _norm(o):
 def verify():
     orig_fm, orig_body = read_mdx(SITE_MDX)
     gen_fm, gen_body = read_mdx(os.path.join(OUT_DIR, "index.mdx"))
-    with open(os.path.join(OUT_DIR, "data.json"), encoding="utf-8") as f:
-        data_json = json.load(f)
+    data_path = os.path.join(OUT_DIR, "data.json")
+    data_json = json.load(open(data_path, encoding="utf-8")) if os.path.exists(data_path) else {}
     reconstructed = {**gen_fm, **data_json}
     missing, changed = [], []
     for k, v in orig_fm.items():
@@ -312,6 +320,12 @@ def idempotency():
 
 
 if __name__ == "__main__":
+    if WRITE_LIVE:
+        # Live write: canon record is authoritative — NO extract (extract overwrites the
+        # curated canon record from the site; that direction only runs in validation mode).
+        generate()
+        print("\n=== WRITE-LIVE ===  canon record -> live site MDX (validation mode proves losslessness)")
+        sys.exit(0)
     extract(); generate()
     v = verify(); i = idempotency()
     print(f"\n=== SUMMARY ===  lossless={v}  idempotent={i}")
