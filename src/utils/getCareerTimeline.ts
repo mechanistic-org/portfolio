@@ -31,7 +31,7 @@ export async function getCareerTimeline(): Promise<TimelineItem[]> {
 			cardDetailedText: p.data.description || "",
 			responsibilities: [], // We could try to extract these from body if we wanted to get fancy later
 			keyProjects: [],
-			techStack: p.data.tools.concat(p.data.skillData.map((s) => s.name)).concat(p.data.tags),
+			techStack: p.data.tools.concat(p.data.tags),
 		};
 	});
 

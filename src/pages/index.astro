@@ -67,7 +67,7 @@ if (!isUnderConstruction) {
 				category: n.data.category,
 				type: "project", // Explicit Type
 				// NEW: Pass explicit skills for Ghost Connections
-				skills: [...(n.data.tags || []), ...(n.data.skillData?.map((s: any) => s.name) || [])],
+				skills: [...(n.data.tags || [])],
 			};
 		});
 
