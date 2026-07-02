@@ -48,8 +48,8 @@ Every page passes the gates in order. A gate failure stops promotion; do not pat
 - [ ] Deep Data HUD opens on the first tab that has data; tabs without data do not render.
 
 ### D. Assets, provenance & source trail
-- [ ] Every referenced asset (hero, gallery, audio, 3D) returns 200 locally (served from `R2_STAGING` via `/assets/...`) and in production (R2).
-- [ ] Assets entered the page only via the pipeline: raw archive → `R2_MASTER` (curation) → `R2_STAGING` (processed) → R2. Never point page content at `D:\portfolio` or `\\morespace` directly.
+- [ ] Every referenced asset (hero, gallery, audio, 3D) returns 200 locally (served from `R2_MIRROR` via `/assets/...`) and in production (R2).
+- [ ] Assets entered the page only via the pipeline: raw archive → `R2_MASTER` (curation) → `R2_MIRROR` (processed) → R2. Never point page content at `D:\portfolio` or `\\morespace` directly.
 - [ ] Asset paths use `/assets/r2/{slug}/...` or `/assets/{slug}/...` (both tolerated until #67 canonicalizes; new hydration emits `/assets/r2/`).
 - [ ] A visible **source trail** exists on the page: the evidence artifacts (ECOs, DCDs, inspection reports, photos) are named so a reader can see what the claims rest on.
 - [ ] `audio_url` / `notebook_url` / `nlm_url` set when the artifact exists.

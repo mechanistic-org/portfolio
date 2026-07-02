@@ -53,8 +53,12 @@ bare `python` may resolve to the wrong environment.
 ## Asset sovereignty
 
 Assets (images, 3D models) live in **Cloudflare R2** (`assets.eriknorris.com`) —
-**never commit them to Git.** Local staging is symlinked at
-`D:/GitHub/portfolio-assets/R2_STAGING`; `public/assets/**` is watch-ignored.
+**never commit them to Git.** Curation happens in the canon vault
+(`H:\workspace\canon\entities\projects\<slug>\assets\` — the human zone); the darkroom
+derives the local machine-only bucket mirror at `D:/GitHub/portfolio-assets/R2_MIRROR`
+(renamed from `R2_STAGING` 2026-07-02; no human edits, regenerable), which `sync_r2.py`
+uploads. There is no symlink: dev serves assets via `src/pages/assets/[...path].ts`;
+`public/assets/**` is watch-ignored.
 
 ## Deploy
 

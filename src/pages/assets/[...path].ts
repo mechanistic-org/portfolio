@@ -4,10 +4,10 @@ export const prerender = false;
 
 // R2 Logic configuration
 // [VIRTUAL BRIDGE]: Point directly to external drive to avoid Watcher/Vite memory leaks
-const R2_STAGING_ROOT =
+const R2_MIRROR_ROOT =
 	import.meta.env.PROD || process.env.NODE_ENV === "production"
 		? "" // Prod (Worker) uses root relative to binding (e.g. "branding/logo.png")
-		: "D:/GitHub/portfolio-assets/R2_STAGING"; // Local Dev Code
+		: "D:/GitHub/portfolio-assets/R2_MIRROR"; // Local Dev Code
 
 const DEBUG_MODE = true;
 
@@ -36,7 +36,7 @@ export const GET: APIRoute = async ({ params, locals }) => {
 
 		try {
 			// FIX: Do not use path.join in Cloudflare Worker (Node API missing)
-			// R2_STAGING_ROOT is "" in Prod, so we just use the assetPath directly.
+			// R2_MIRROR_ROOT is "" in Prod, so we just use the assetPath directly.
 			const object = await R2.get(assetPath);
 
 			if (!object) {
@@ -89,7 +89,7 @@ export const GET: APIRoute = async ({ params, locals }) => {
 			}
 
 			// RESOLVE ROOT: Ensure OS-correct slashes for the root
-			const stagingRoot = path.resolve("D:/GitHub/portfolio-assets/R2_STAGING");
+			const stagingRoot = path.resolve("D:/GitHub/portfolio-assets/R2_MIRROR");
 
 			// JOIN: Use path.join to correctly handle slashes on Windows
 			const filePath = path.join(stagingRoot, decodedPath);

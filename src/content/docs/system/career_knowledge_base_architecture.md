@@ -31,7 +31,7 @@ The first read-only inventory found:
 - `D:\portfolio\portfolio_working` exists and is the broad local project archive.
 - `\\morespace\projects\portfolio` exists and is another broad local archive root.
 - `D:\GitHub\portfolio-workspace\R2_MASTER` exists and contains curated asset folders.
-- `D:\GitHub\portfolio-assets\R2_STAGING` exists and contains processed asset folders.
+- `D:\GitHub\portfolio-assets\R2_MIRROR` exists and contains processed asset folders.
 - `D:\GitHub\global_agent\registry\notebooklm` exists and contains synced NotebookLM summaries and source lists.
 - The site has 120 project records, with 111 published and 9 draft or unlisted.
 - Current `presentation_mode` yields 33 deep-like published records and 78 lite-like published records.
@@ -39,7 +39,7 @@ The first read-only inventory found:
 - Raw NotebookLM JSON includes only 5 notebook links today.
 - The synced NotebookLM registry contains 46 docs, 28 unique slugs, and 22 slugs that match current project records.
 - `R2_MASTER` contains 97 top-level folders, 91 matching project slugs.
-- `R2_STAGING` contains 102 top-level folders, 91 matching project slugs.
+- `R2_MIRROR` contains 102 top-level folders, 91 matching project slugs.
 - Page frontmatter currently has 0 NotebookLM links, although some raw NLM files contain them.
 - Only 1 project currently has `_intelligence.md`, and only 1 has `_entropy.json`.
 - `_metrics.json`, `_crises.md`, and `data.json` are not broadly present.
@@ -97,7 +97,7 @@ Rules:
 
 - Do not copy raw binary archives into the KB.
 - Store local source references, content hashes where cheap, and extraction notes.
-- Keep R2 assets in `R2_MASTER` and `R2_STAGING`.
+- Keep R2 assets in `R2_MASTER` and `R2_MIRROR`.
 - Keep public render projection in `D:\GitHub\portfolio\src\content\projects\{slug}`.
 - Keep NotebookLM extracts under the project source pack as imported evidence-adjacent artifacts.
 - Push accepted summaries and claim ledgers into the EN-OS registry/router only after review.
@@ -124,7 +124,7 @@ owner_repo: "D:\\GitHub\\portfolio"
 site_project_path: "D:\\GitHub\\portfolio\\src\\content\\projects\\c24"
 asset_paths:
   r2_master: "D:\\GitHub\\portfolio-workspace\\R2_MASTER\\c24"
-  r2_staging: "D:\\GitHub\\portfolio-assets\\R2_STAGING\\c24"
+  R2_MIRROR: "D:\\GitHub\\portfolio-assets\\R2_MIRROR\\c24"
 source_roots:
   - "D:\\portfolio\\portfolio_working"
   - "\\\\morespace\\projects\\portfolio"
@@ -323,7 +323,7 @@ Next improvements:
 - Current page frontmatter has no NotebookLM links projected.
 - Sidecar coverage is almost absent except C24.
 - `data.json` sidecar merge is disabled, so sidecar-first projection needs validator work before rich sidecars can feed every page.
-- Asset coverage is strong but incomplete. 29 project slugs do not match `R2_MASTER` or `R2_STAGING` folders today.
+- Asset coverage is strong but incomplete. 29 project slugs do not match `R2_MASTER` or `R2_MIRROR` folders today.
 
 ## Clarifying questions
 

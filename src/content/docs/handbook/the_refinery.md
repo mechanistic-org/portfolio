@@ -91,7 +91,7 @@ will fail loudly on drift, which is the guardrail that replaced the old CMS.
 | Zone           | Path                                       | Purpose                                               |
 | :------------- | :----------------------------------------- | :---------------------------------------------------- |
 | **User Space** | `D:\GitHub\portfolio-workspace\R2_MASTER` | **YOUR WORKBENCH.** You add/delete/rename files here. |
-| **Staging**    | `D:\GitHub\portfolio-assets\R2_STAGING`   | **THE MIRROR.** Automated sync target. DO NOT TOUCH.  |
+| **Staging**    | `D:\GitHub\portfolio-assets\R2_MIRROR`   | **THE MIRROR.** Automated sync target. DO NOT TOUCH.  |
 | **The Cloud**  | `Cloudflare R2 Bucket`                     | **THE CDN.** Stores files for the world to see.       |
 
 ### The Workflow

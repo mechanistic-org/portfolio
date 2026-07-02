@@ -160,11 +160,11 @@ export default defineConfig({
 		server: {
 			fs: {
 				// Allow serving files from the sibling 'quantum-assets' repo via Symlinks
-				allow: [".", "D:/GitHub/portfolio-assets/R2_STAGING"],
+				allow: [".", "D:/GitHub/portfolio-assets/R2_MIRROR"],
 			},
 			watch: {
 				// Use strict glob patterns with forward slashes for Windows compatibility
-				ignored: ["**/public/assets/**", "**/public/assets", "**/R2_STAGING/**"],
+				ignored: ["**/public/assets/**", "**/public/assets", "**/R2_MIRROR/**"],
 			},
 		},
 		ssr: {

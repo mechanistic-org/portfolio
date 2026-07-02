@@ -63,7 +63,7 @@ To prevent "Gaslighting" and "Silent Data Loss," the platform implements seven d
 3. **Shield 3: The Canary (HUD Smoke Test)**: The `verify_deep_hud.cjs` script verifies critical UI markers (e.g., "Governance" text in C24) in the final build.
 4. **Shield 4: Atomic Edits**: A directive to prioritize `replace_file_content` (patching) over full file overwrites (`write_to_file`) to prevent "Context Clobbering."
 5. **Shield 5: The Jig (Integrity Audit)**: `npm run audit:frontmatter` bulk-scans for "Crash Failures" and "Quality Warnings."
-6. **Shield 6: The Air Gap**: Verified by `verify_asset_links.ts`. Ensures the link between `public/assets/r2` and the sovereign vault (R2_STAGING) is active.
+6. **Shield 6: The Air Gap**: Verified by `verify_asset_links.ts`. Ensures the link between `public/assets/r2` and the sovereign vault (R2_MIRROR) is active.
 7. **Shield 7: Law of Visual Sanitation (Law XV)**: Sanitize dirty data (like `skill-` prefixes) upstream at the `map()` level rather than relying on CSS masks or display logic. Always verify component imports via `.astro` page files before debugging.
 
 ## 4. Session Onboarding Protocol

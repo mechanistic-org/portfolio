@@ -33,7 +33,7 @@ _Synthesized from Agency Memory_
 2.  **The Sovereign Color Law:** `src/config/color_registry.ts` is the ONLY Source of Truth for Entity Coloring. `Colors.csv` retrieval is FORBIDDEN.
 3.  **The Module Naming Law:** Do not use `.json.ts` for standard TypeScript modules/arrays. Rename to `.ts` to prevent TS Server resolution confusion.
 4.  **The Resilience Law (Safe-by-Default D3):** Visualization components must implement defensive `get(key) || default_color` logic to prevent crashing the entire graph on a single missing key.
-5.  **The Air Gap Law:** `portfolio-assets\R2_STAGING` is the ONLY Production Vault. `portfolio_working` is the ONLY Staging Input. `portfolio-workspace\R2_MASTER` is DEAD (Legacy).
+5.  **The Air Gap Law:** `portfolio-assets\R2_MIRROR` is the ONLY Production Vault. `portfolio_working` is the ONLY Staging Input. `portfolio-workspace\R2_MASTER` is DEAD (Legacy).
 
 ### The Stack
 
@@ -114,7 +114,7 @@ Set `theme: "hyperspace"` in the project frontmatter.
 
 ### Asset Air-Gap (Crucial)
 
-- **Local:** `public/assets/r2` is a **Symlink** to `../portfolio-assets/R2_STAGING`.
+- **Local:** `public/assets/r2` is a **Symlink** to `../portfolio-assets/R2_MIRROR`.
 - **Production:** The built site replaces local paths with `https://assets.eriknorris.com/`.
 - **Rule:** NEVER commit heavy assets to `d:\GitHub\portfolio`.
 
@@ -163,7 +163,7 @@ taskkill /F /IM node.exe
 
 **Symptom:** Images missing in Production.
 **Cause:** "Physical Asset Law" violation. You referenced a local path (`/assets/`) that only exists on your laptop.
-**Fix:** Ensure the Ingestion Script ran and verified the asset exists in the `R2_STAGING` bucket.
+**Fix:** Ensure the Ingestion Script ran and verified the asset exists in the `R2_MIRROR` bucket.
 
 ### Build Crash (Heap OOM)
 
@@ -207,6 +207,6 @@ The timeline includes a **"Dreamjob" Node (2025-2040)**.
 Located in `scripts/`:
 
 - `scaffold_projects.py`: The Main Engine. Merges Multiverse + MDX.
-- `sync_r2.py`: Uploads `R2_STAGING` to Cloudflare.
+- `sync_r2.py`: Uploads `R2_MIRROR` to Cloudflare.
 - `process_images.py`: The Darkroom. Optimizes images.
 - `doctor.py` (Planned): Automated diagnostics.
