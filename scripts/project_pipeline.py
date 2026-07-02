@@ -30,7 +30,7 @@ DOSSIER = [  # (frontmatter field, ## heading, ordered columns)
     # Contract v2 (2026-07-02, WP4): `scars` removed from the dossier tables — the V8
     # scar-instrument fields (severity/phase/anchor/T-I-R/evidence) don't survive a
     # 3-column table round-trip. Scars ride frontmatter, canon and site alike.
-    ("cast",     "Cast",     ["name", "role", "org"]),
+    ("cast",     "Cast",     ["name", "role", "org", "roster"]),
     ("bom",      "BOM",      ["label", "value"]),
     ("timeline", "Timeline", ["date", "title", "description"]),
 ]
