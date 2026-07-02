@@ -38,8 +38,18 @@ GALLERY_HEADING = "Galleries"
 # is designed but unbuilt — C24 uses forensic_metrics strings, not the nested object.
 DATA_JSON_FIELDS = ["metrics", "complexity_vector"]
 ENTROPY_FIELDS   = ["timeline_events", "events"]
-CANON_ONLY = ["created", "updated", "type", "tier", "sensitivity", "confidence", "sources", "entropy"]
-DROP_FIELDS = ["isomorphics", "stats", "phase_stats", "forensic_data", "hydration_status", "hxo_ready"]
+# Contract v2 (2026-07-01, #109 K7): `tier` moved out of CANON_ONLY — it is now a
+# site frontmatter field (flagship|lite) the generator emits from compute_tier.
+CANON_ONLY = ["created", "updated", "type", "sensitivity", "confidence", "sources", "entropy"]
+# Contract v2 kill list (canon/queries/k2-stranded-data-decision-sheet.md).
+# `isomorphics` REMOVED from DROP_FIELDS — operator lean-in ruling 2026-07-01:
+# it round-trips canon -> site like scars.
+DROP_FIELDS = [
+    "stats", "phase_stats", "forensic_data", "hydration_status", "hxo_ready",
+    "skillData", "gallery", "documents", "links", "additionalSkills",
+    "skillGraph", "partGraph", "statusLabel", "transcript",
+    "notebook_url", "nlm_url", "asset_bucket",
+]
 
 # Markdown section names the generator appends to the record body (in this order).
 APPENDED = [GALLERY_HEADING] + [h for _, h, _ in DOSSIER]
