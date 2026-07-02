@@ -128,6 +128,9 @@ const projectsCollection = defineCollection({
 						role: z.string(),
 						org: z.string(),
 						linkedin: z.string().optional(), // explicit profile URL; falls back to a name+company search
+						// merged-roster discriminator (operator ruling 2026-07-02):
+						// key = direct contacts; stakeholder = the wider program roster
+						roster: z.enum(["key", "stakeholder"]).optional(),
 					}),
 				)
 				.optional(),
