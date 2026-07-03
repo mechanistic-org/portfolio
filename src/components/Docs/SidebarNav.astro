@@ -23,21 +23,23 @@ const allDocs = docsCollection.map((entry) => {
 	};
 });
 
-// Group docs by section (top-level folder)
+// Canonicalize section names to display form ("reference" -> "Reference",
+// "getting-started" -> "Getting Started") so lowercase folder names and
+// display-cased frontmatter groups bucket into the same section.
+const canonicalSection = (raw: string) =>
+	raw
+		.split("-")
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.join(" ");
+
+// Group docs by section: frontmatter group override if available, otherwise
+// the top-level folder ("Documentation" for root files)
 const docsBySection = allDocs.reduce(
 	(acc, doc) => {
-		// Use frontmatter group override if available
-		if (doc.data.sidebar?.group) {
-			const group = doc.data.sidebar.group;
-			if (!acc[group]) acc[group] = [];
-			acc[group].push(doc);
-			return acc;
-		}
-
 		const slugParts = doc.slug.split("/");
-		// If it's a root file (no slashes), group under "documentation"
-		// If it's in a folder, group by that folder name
-		const section = slugParts.length > 1 ? slugParts[0] : "documentation";
+		const rawSection =
+			doc.data.sidebar?.group ?? (slugParts.length > 1 ? slugParts[0] : "documentation");
+		const section = canonicalSection(rawSection);
 
 		if (!acc[section]) {
 			acc[section] = [];
@@ -48,8 +50,7 @@ const docsBySection = allDocs.reduce(
 	{} as Record<string, typeof allDocs>,
 );
 
-// Sort sections (custom order or alphabetical)
-// Put "documentation" first, then others
+// Sort sections (custom order first, then alphabetical) — canonical names
 const sectionOrder = [
 	"Handbook",
 	"System Manual",
@@ -58,31 +59,13 @@ const sectionOrder = [
 	"Reference",
 	"Prompts",
 	"Audits",
-	"getting-started",
-	"guides",
-	"reference",
-	"other",
+	"Getting Started",
+	"Guides",
+	"Other",
 ];
 const sections = Object.keys(docsBySection).sort((a, b) => {
-	// Normalize to lowercase for case-insensitive sort if not in explicit list?
-	// But sectionOrder is explicit.
-	// Let's handle both cases in the comparator if needed, or just list them.
-	// The keys in docsBySection are either folder names (lowercase) or Frontmatter Groups (Capitalized).
-	// "design" folder -> key "design". "Audits" folder -> key "audits".
-	// "System Manual" -> key "System Manual" (Frontmatter).
-
-	// Let's normalize comparison.
-	const normalize = (s: string) => {
-		const map: Record<string, string> = {
-			design: "Design",
-			audits: "Audits",
-			reference: "Reference",
-		};
-		return map[s] || s;
-	};
-
-	const indexA = sectionOrder.indexOf(normalize(a));
-	const indexB = sectionOrder.indexOf(normalize(b));
+	const indexA = sectionOrder.indexOf(a);
+	const indexB = sectionOrder.indexOf(b);
 
 	if (indexA !== -1 && indexB !== -1) return indexA - indexB;
 	if (indexA !== -1) return -1;
@@ -103,17 +86,6 @@ sections.forEach((section) => {
 		return titleA.localeCompare(titleB);
 	});
 });
-
-// Helper to format section title
-const formatSectionTitle = (slug: string) => {
-	// Special case for 'documentation' to ensure it looks nice
-	if (slug === "documentation") return "Documentation";
-
-	return slug
-		.split("-")
-		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-		.join(" ");
-};
 ---
 
 <nav class="sidebar-nav space-y-4">
@@ -121,7 +93,7 @@ const formatSectionTitle = (slug: string) => {
 		sections.map((section) => (
 			<details class="sidebar-section group" open>
 				<summary class="mb-2 flex cursor-pointer list-none items-center justify-between px-4 font-sans text-sm font-bold tracking-wide text-neutral-500 uppercase select-none hover:text-neutral-300 [&::-webkit-details-marker]:hidden">
-					{formatSectionTitle(section)}
+					{section}
 					<span class="transition-transform duration-200 group-open:rotate-90">›</span>
 				</summary>
 				<ul class="ml-2 space-y-1 border-l border-neutral-800 pl-2 transition-all duration-300 ease-in-out">
