@@ -182,7 +182,9 @@ const projectsCollection = defineCollection({
 
 			// Tiering (contract v2): binary, pipeline-computed (compute_tier).
 			// Replaces hydration_status / numeric tier / hxo_ready.
-			tier: z.enum(["flagship", "lite"]).optional(),
+			// 2026-07-03 amendment (#120 trail): value renamed flagship -> deep_dive;
+			// "flagship" now means only the featured-subset concept, never a tier.
+			tier: z.enum(["deep_dive", "lite"]).optional(),
 
 			// Visibility
 			listed: z.boolean().default(true),

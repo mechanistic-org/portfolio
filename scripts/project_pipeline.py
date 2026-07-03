@@ -42,7 +42,9 @@ GALLERY_HEADING = "Galleries"
 DATA_JSON_FIELDS = ["metrics", "complexity_vector"]
 ENTROPY_FIELDS   = ["timeline_events", "events"]
 # Contract v2 (2026-07-01, #109 K7): `tier` moved out of CANON_ONLY — it is now a
-# site frontmatter field (flagship|lite) the generator emits from compute_tier.
+# site frontmatter field (deep_dive|lite) the generator emits from compute_tier.
+# 2026-07-03 amendment: enum value renamed flagship -> deep_dive ("flagship" now
+# means only the featured subset concept, never a tier); legacy spelling still read.
 CANON_ONLY = ["created", "updated", "type", "sensitivity", "confidence", "sources", "entropy"]
 # Contract v2 kill list (canon/queries/k2-stranded-data-decision-sheet.md).
 # `isomorphics` REMOVED from DROP_FIELDS — operator lean-in ruling 2026-07-01:
@@ -196,17 +198,19 @@ def appended_sections(body):
 
 # ---------------------------------------------------------------- tiering
 def compute_tier(data):
-    """Collapse the (up to 4) tier signals into one flagship|lite classification.
-    In practice only presentation_mode is populated across the corpus, but tier,
+    """Collapse the (up to 5) tier signals into one deep_dive|lite classification.
+    In practice only presentation_mode is populated across the corpus, but tier
+    (string enum, incl. its legacy "flagship" spelling, or legacy numeric 1),
     hxo_ready and hydration_status are honored if a record carries them."""
     pm = (data.get("presentation_mode") or "").lower()
-    flagship = (
+    deep = (
         pm in ("deep_dive", "flagship")
+        or str(data.get("tier") or "").lower() in ("deep_dive", "flagship")
         or data.get("tier") == 1
         or data.get("hxo_ready") is True
         or (data.get("hydration_status") or "").lower() == "full"
     )
-    return "flagship" if flagship else "lite"
+    return "deep_dive" if deep else "lite"
 
 
 # ---------------------------------------------------------------- extract
@@ -233,7 +237,8 @@ def extract():
             record_body += "\n\n## %s\n\n%s\n" % (heading, render_table(data[field], cols))
     os.makedirs(CANON_DIR, exist_ok=True)
     with open(CANON_REC, "w", encoding="utf-8") as f:
-        f.write("---\n"); f.write(dump_yaml(rec)); f.write("---\n"); f.write(record_body)
+        f.write("---\n"); f.write(dump_yaml(rec)); f.write("---\n")
+        f.write(record_body if record_body.endswith("\n") else record_body + "\n")
     present = [h for f, h, _ in DOSSIER if data.get(f)] + (["Galleries"] if data.get("cyberspace") else [])
     print(f"[extract]  canon record -> {CANON_REC}  ({len(rec)} fm keys; prose sections: {present})")
     return rec, record_body
@@ -264,7 +269,9 @@ def generate():
     out_dir = SITE_DIR if WRITE_LIVE else OUT_DIR
     os.makedirs(out_dir, exist_ok=True)
     with open(os.path.join(out_dir, "index.mdx"), "w", encoding="utf-8") as f:
-        f.write("---\n"); f.write(dump_yaml(site_fm)); f.write("---\n"); f.write(site_body)
+        f.write("---\n"); f.write(dump_yaml(site_fm)); f.write("---\n")
+        # Final-newline-terminated so Prettier/format hooks don't dirty generated pages.
+        f.write(site_body if site_body.endswith("\n") else site_body + "\n")
     if data_json:
         with open(os.path.join(out_dir, "data.json"), "w", encoding="utf-8") as f:
             json.dump(data_json, f, indent=2, ensure_ascii=False, sort_keys=True, default=str)
@@ -295,7 +302,9 @@ def verify():
             missing.append(k)
         elif _norm(reconstructed[k]) != _norm(v):
             changed.append(k)
-    body_ok = (gen_body == orig_body)
+    # Trailing-newline tolerant: format hooks (Prettier) add a final newline to
+    # committed pages; that is formatting, not content loss (minimerc false FAIL).
+    body_ok = (gen_body.rstrip("\n") == orig_body.rstrip("\n"))
     print("\n=== VERIFY (lossless round-trip) ===")
     print(f"  original fm keys {len(orig_fm)} -> lean {len(gen_fm)} + data.json {sorted(data_json)}")
     print(f"  MISSING after merge : {missing or 'none'}")
