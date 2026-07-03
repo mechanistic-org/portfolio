@@ -17,7 +17,6 @@ const { projects } = Astro.props;
 				data-tool={JSON.stringify(project.data.tools)}
 				data-tool-icons={JSON.stringify((project.data as any).toolIcons || [])}
 				data-team-size={(project.data as any).teamSize}
-				data-part-graph={project.data.partGraph}
 				data-status={project.data.production}
 				data-date={new Date(project.data.date as any).getTime()}
 				data-client={JSON.stringify([
