@@ -62,7 +62,6 @@ const sectionOrder = [
 	"guides",
 	"reference",
 	"other",
-	"_inbox", // auto-extracted System Journal — keep last
 ];
 const sections = Object.keys(docsBySection).sort((a, b) => {
 	// Normalize to lowercase for case-insensitive sort if not in explicit list?
@@ -109,7 +108,6 @@ sections.forEach((section) => {
 const formatSectionTitle = (slug: string) => {
 	// Special case for 'documentation' to ensure it looks nice
 	if (slug === "documentation") return "Documentation";
-	if (slug === "_inbox") return "System Journal";
 
 	return slug
 		.split("-")
@@ -121,25 +119,18 @@ const formatSectionTitle = (slug: string) => {
 <nav class="sidebar-nav space-y-4">
 	{
 		sections.map((section) => (
-			<details class="sidebar-section group" open={section !== "_inbox"}>
+			<details class="sidebar-section group" open>
 				<summary class="mb-2 flex cursor-pointer list-none items-center justify-between px-4 font-sans text-sm font-bold tracking-wide text-neutral-500 uppercase select-none hover:text-neutral-300 [&::-webkit-details-marker]:hidden">
 					{formatSectionTitle(section)}
 					<span class="transition-transform duration-200 group-open:rotate-90">›</span>
 				</summary>
 				<ul class="ml-2 space-y-1 border-l border-neutral-800 pl-2 transition-all duration-300 ease-in-out">
-					{section === "_inbox" ? (
+					{docsBySection[section].map((doc) => (
 						<SidebarLink
-							link="/docs/journal"
-							text={`Browse all ${docsBySection[section].length} entries →`}
+							link={`/docs/${doc.slug}`}
+							text={doc.data.sidebar?.label || doc.data.title}
 						/>
-					) : (
-						docsBySection[section].map((doc) => (
-							<SidebarLink
-								link={`/docs/${doc.slug}`}
-								text={doc.data.sidebar?.label || doc.data.title}
-							/>
-						))
-					)}
+					))}
 				</ul>
 			</details>
 		))

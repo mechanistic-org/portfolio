@@ -191,7 +191,9 @@ const projectsCollection = defineCollection({
 
 // 5. DOCS
 const docsCollection = defineCollection({
-	loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/docs" }),
+	// _inbox retired 2026-07-02: the miner's review queue lives in the Obsidian
+	// vault (H:\workspace\03_Colophon\_inbox); nothing unreviewed publishes.
+	loader: glob({ pattern: ["**/*.{md,mdx}", "!_inbox/**"], base: "./src/content/docs" }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string().optional(),
