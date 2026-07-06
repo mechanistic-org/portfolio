@@ -4,24 +4,22 @@ Technical profile and deployment protocols for the `mechanistic` repository with
 
 ## 1. Core Technical Stack
 
-- **Framework**: Astro 5.x (Hybrid/SSG)
+- **Framework**: Astro 5.x — `output: "static"` (SSG) via the `@astrojs/cloudflare` adapter.
 - **Runtime**: Node.js (ESM - `type: module`)
-- **Package Management**:
-  - **Development**: `npm` (Local CLI)
-  - **Production/CI**: `pnpm` (Configured in `netlify.toml`)
-- **CMS Integration**: Keystatic (`@keystatic/astro`) for content collection management.
-- **Frontend Core**: React 18 (`@astrojs/react`), Tailwind CSS 4.x.
-- **Visualizations**: D3.js, ReactFlow, Lucide React (for high-density forensic iconography).
+- **Package Management**: `npm` (`package-lock.json`) for both local development and CI.
+- **Content**: MDX collections (`@astrojs/mdx`) validated by Zod in `src/content.config.ts`. Keystatic — the dev-only CMS that briefly sat over the MDX — was fully retired (#104); content truth is migrating to the canon vault.
+- **Frontend Core**: React 19 (`@astrojs/react`), Tailwind CSS 4.x (`@tailwindcss/vite`).
+- **Visualizations**: D3.js (`d3`, `d3-sankey`), Three.js via React Three Fiber (`@react-three/fiber` + `drei`), Framer Motion, Tabler icons (for high-density forensic iconography).
 
 ## 2. Infrastructure & Deployment Architecture (Cloudflare Pages)
 
-While the repository contains legacy `netlify.toml` and `@astrojs/netlify` adapters, the primary production environment is **Cloudflare Pages**.
+The primary (and only) production environment is **Cloudflare Pages**. The earlier Netlify path has been fully removed — `netlify.toml` and the `@astrojs/netlify` adapter are gone; Cloudflare configuration lives in `wrangler.toml`.
 
 - **Deployment Model**: Git-integrated CD (Continuous Deployment).
 - **Trigger**: Pushes to the `main` branch.
-- **Build Command**: `pnpm build` (configured in Cloudflare Dashboard).
+- **Build Command**: `node scripts/ci-prebuild.js && astro build && npx pagefind --site dist` (from `package.json`; the prebuild step clears a CI-only symlink — Cloudflare sets `CF_PAGES=1`).
 - **Output Directory**: `dist`.
-- **Legacy Artifacts**: Keep `netlify.toml` and Netlify adapters for redundancy/compatibility during transition, but all production traffic routes through Cloudflare.
+- **Search**: Static full-text index built by Pagefind over `dist` as the final build step.
 
 ## 3. Operational Protocols & Deployment Workflow
 
@@ -33,8 +31,7 @@ Deployment is governed by a standardized automation workflow (`.agent/workflows/
 4.  **Verification**: Manual validation of the production URL after ~120 seconds.
 
 - **Build Stabilization**:
-  - Observed warnings when using `npm`: `Unknown project config "auto-install-peers"`.
-  - Deployment strategy prefers `pnpm` in CI environment to ensure deterministic dependency resolution.
-- **Performance**: Leveraging Astro's island architecture to minimize client-side JS while maintaining interactive D3/ReactFlow forensic consoles.
+  - CI runs on Cloudflare Pages (`CF_PAGES=1`); `scripts/ci-prebuild.js` removes a problematic symlink before `astro build` so dependency resolution stays deterministic.
+- **Performance**: Leveraging Astro's island architecture to minimize client-side JS while maintaining the interactive D3 / Three.js forensic consoles.
 - **Persona Alignment**: Dashboard UI and narratives are synchronized with the **"Cheerful Mentor"** persona, ensuring technical diagnostic clinicality (ECU Dashboard) while maintaining strategic transparency.
 - **Cross-Repo Consistency**: Deployment protocols are mirrored from the `eriknorris` ecosystem to ensure operational homogeneity for the Principal Architect.
