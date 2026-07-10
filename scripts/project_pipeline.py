@@ -113,7 +113,9 @@ def render_galleries(cyber):
         params = dict(st)
         params.pop("deck", None)
         params.pop("title", None)   # authoritative in the ### heading, not the comment
-        if isinstance(params.get("data"), dict) and "images" in params["data"]:
+        # Empty images lists stay in the sticky JSON (an absent **Images:** block
+        # can't distinguish `images: []` from no key, so parse can't restore it).
+        if isinstance(params.get("data"), dict) and params["data"].get("images"):
             imgs = params["data"]["images"]
             params["data"] = {k: v for k, v in params["data"].items() if k != "images"}
         out.append("<!-- sticky %s -->" % json.dumps(params, sort_keys=True))
