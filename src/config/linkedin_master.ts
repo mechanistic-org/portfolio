@@ -95,7 +95,7 @@ Led mechanical design, DFM, and MP implementation for the Avegant Glyph (Vulcan)
 
 · Optical Yield: Reversed yield collapse from 35.40% RTY (MP Week 10) to 77.87% by implementing Cleanroom protocol and O4/O7 DMD inspection stations - 10-week sprint.
 
-· Headband: Resolved clamping force and fatigue failure (FMEA RPN 192) via ANSYS FEA + Central Composite Design. Selected 0.8mm 3/4 Hard CRSS at 1207 MPa / 7.5 N target. Physical destruction testing averaged 81,000 cycles vs. 51,073 FEA prediction (4.2% error) - 300% over the 25,000-cycle requirement.
+· Headband: Resolved clamping force and fatigue failure via measured spring-rate characterization (wire diameter and liner durometer variants), second-source spring qualification, and headband lifecycle validation into MP.
 
 · RCA / CAPA: Engineered custom PSA profile to resolve Inner Liner "flange fallout" after in-mold adhesion failed in the field. Drove T1 - T6 tooling revisions for cable kinking in telescoping ear cans (T6 failure rate: 40% at 250 cycles).
 
