@@ -64,15 +64,6 @@
 				"tags": ["#ProcessEngineering", "#Manufacturing"]
 			},
 			{
-				"id": "d-command-card-03",
-				"type": "financial",
-				"headline": "End Cap Fracture",
-				"context": "Stress fracturing on side caps dropped yield to <40%.",
-				"impact": "Executed ECO 6310 to resize bosses. Restored yield for FCS.",
-				"metric": { "label": "Yield Recovery", "value": "40% -> 100%" },
-				"tags": ["#YieldImprovement", "#Plastics"]
-			},
-			{
 				"id": "d-command-card-04",
 				"type": "scars",
 				"headline": "AC Withdraw Failure",
