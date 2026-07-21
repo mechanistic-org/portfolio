@@ -77,7 +77,7 @@
 				"type": "scars",
 				"headline": "AC Withdraw Failure",
 				"context": "Unit failed UL safety test 48 hours before shipping. Line Start halted.",
-				"impact": "Engineered emergency EMI gasket retrofit (ECO 8114) to pass re-test.",
+				"impact": "Re-specified the AC harness bleeder (1 MOhm -> 750 kOhm) to drain the mains pins in time. NOA to FCS in nine days.",
 				"metric": { "label": "Launch Delay", "value": "Avoided" },
 				"tags": ["#Compliance", "#CrisisManagement"]
 			}
@@ -93,7 +93,7 @@
 				"headline": "The Meltdown Mitigation",
 				"context": "Embedded CPU hit 75°C shutdown temperature during FOH testing. Show-stopper.",
 				"impact": "Re-architected chassis from 3U to 4U with custom ducting. Temp rise dropped to 22.6°C.",
-				"metric": { "label": "Temp Rise", "value": "75°C -> 22.6°C" },
+				"metric": { "label": "Air Rise (R69)", "value": "76.9°C -> 22.6°C" },
 				"tags": ["#ThermalDesign", "#CrisisManagement"]
 			},
 			{
@@ -110,7 +110,7 @@
 				"type": "financial",
 				"headline": "No Extrusions",
 				"context": "Target COGS <$15k required eliminating expensive aluminum extrusions.",
-				"impact": "Designed 'Origami Spine' from folded steel to match structural rigidity at 20% cost.",
+				"impact": "Designed 'Origami Spine' from folded steel to match extrusion rigidity. Shipped on CNC folding -- stamping dies never committed.",
 				"metric": { "label": "COGS Target", "value": "Hit (<$15k)" },
 				"tags": ["#CostReduction", "#SheetMetal"]
 			}

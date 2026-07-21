@@ -1,188 +1,156 @@
 ---
-additionalSkills: []
+title: SC48
+slug: sc48
+tier: deep_dive
 category: enterprise_hardware
 client: []
-cyberspace:
-  layout: linear
-  stickies:
-    - data:
-        columns: 3
-        images:
-          - alt: 9420-58318-00
-            aspectRatio: 1.5
-            src: /assets/sc48/bubbles/01_brain_transplant/9420-58318-00.jpg
-        layout: masonry
-        scattered: true
-      deck:
-        - body: >-
-            **The Constraint:**
-
-            Incorporating a standard ATX motherboard into a proprietary DSP host
-            environment.
-
-
-            **The Solution:**
-
-            Creating a secure, vibration-isolated "Engine Bay" for the Kontron
-            986LCD-M.
-
-
-            - **IO Shield:** Designed a custom IO shield (P/N 9420-58318-00) to
-            bridge the gap between commercial connectors and the industrial
-            chassis.
-
-            - **Shock Mounting:** Implemented a suspended tray design to protect
-            the BGA components from low-frequency touring rumble (Truck rumble).
-
-            - **Cable Routing:** Defined strict "Keep Out" zones for cabling to
-            prevent airflow blockage.
-          subtitle: ''
-          title: Motherboard Integration
-      featuredIndices: []
-      id: 01_brain_transplant
-      title: Brain Transplant
-      type: gallery
-    - data:
-        columns: 3
-        images:
-          - alt: 9440-58842-00
-            aspectRatio: 1.5
-            src: /assets/sc48/bubbles/02_cosmetic_shell/9440-58842-00.jpg
-          - alt: 9440-58843-00
-            aspectRatio: 1.5
-            src: /assets/sc48/bubbles/02_cosmetic_shell/9440-58843-00.jpg
-        layout: masonry
-        scattered: true
-      deck:
-        - body: >-
-            **The Goal:**
-
-            Make a stamped steel box look like a premium $20k console.
-
-
-            **The Solution:**
-
-            A multi-piece ABS plastic trim kit that "wrapped" the industrial
-            core.
-
-
-            - **Fader Bank:** The fader bezel (P/N 9440-58842-00) provided a
-            smooth, ergonomic resting surface for the engineer's hands.
-
-            - **Master Section:** The center section (P/N 9440-58843-00) unified
-            the screen and master faders.
-
-            - **Texture:** Utilized Mold-Tech MT-11010 (Fine Texture) to match
-            the powder-coated steel, creating a "Seamless" visual transition
-            between plastic and metal.
-          subtitle: ''
-          title: Industrial Design
-      featuredIndices: []
-      id: 02_cosmetic_shell
-      title: Cosmetic Shell
-      type: gallery
-    - data:
-        columns: 3
-        images:
-          - alt: 9440-58856-00
-            aspectRatio: 1.5
-            src: /assets/sc48/bubbles/03_meltdown_mitigation/9440-58856-00.jpg
-        layout: masonry
-        scattered: true
-      deck:
-        - body: >-
-            **The Constraint:**
-
-            Condensing a 1000W system into a unibody chassis without external
-            cooling towers.
-
-
-            **The Solution:**
-
-            I utilized the **chassis itself** as the heatsink. By coupling the
-            PSU and CPU thermal loads directly to the heavy-gauge steel frame,
-            we dissipated heat via conduction rather than relying solely on
-            convection.
-
-
-            - **CFD Analysis:** Validated airflow paths to ensure zero "dead
-            zones" around the DSP cards.
-
-            - **Fan Duct:** Designed a custom injection-molded duct (P/N
-            9440-58856-00) to channel high-velocity air directly over the
-            heatsinks while maintaining acoustic silence (&lt;35dBA).
-          subtitle: ''
-          title: Thermal Architecture
-      featuredIndices: []
-      id: 03_meltdown_mitigation
-      title: Meltdown Mitigation
-      type: gallery
-    - data:
-        columns: 3
-        images: []
-        layout: masonry
-        scattered: true
-      deck:
-        - body: >-
-            **The Challenge:**
-
-            Standard "Box and Lid" construction would be too heavy and expensive
-            for the target BOM.
-
-
-            **The Solution:**
-
-            I implemented a **Sheet Metal Monocoque** design ("The Origami
-            Spine").
-
-
-            - **Jetcrown Stamping:** moved from low-volume CNC bending to
-            high-volume progressive die stamping.
-
-            - **Dimensional Integrity:** The folded steel created a rigid spine
-            that eliminated the need for a separate internal frame, reducing
-            part count by 40%.
-
-            - **Interlock:** The structure featured self-aligning tabs that
-            allowed the PCB trays to "snap" into place before fastening,
-            drastically reducing assembly time.
-          subtitle: ''
-          title: Structural Monocoque
-      featuredIndices: []
-      id: 04_origami_spine
-      title: Origami Spine
-      type: gallery
-date: 2007-01-01T00:00:00.000Z
-description: "The 'Embedded Live Sound' console (Lux/Capaldi): a 16-configuration thermal DOE that killed a 75°C show-stopping shutdown via 3U-to-4U re-architecture, with a folded-steel 'Origami Spine' replacing banned aluminum extrusions to hold mechanicals at 20% of COGS."
-documents: []
+date: 2007-01-01 00:00:00+00:00
+description: 'The ''Embedded Live Sound'' console (Lux/Capaldi): a 17-configuration thermal DOE that killed a 75°C show-stopping shutdown via 3U-to-4U re-architecture, with a folded-steel ''Origami Spine'' replacing banned aluminum extrusions under a sub-$15,000 COGS cap.'
 draft: false
 duration: 1.3 Years
 employer: digidesign
-endDate: 2008-01-01T00:00:00.000Z
+endDate: 2008-01-01 00:00:00+00:00
 forensic_metrics:
-  financial: "Mechanical materials held to 20.33% of COGS ($561.46/unit) under a sub-$15,000 system target; ~$36,000 duplicate tooling avoided via family molds; extrusion cost penalty (6.8% of COGS on Profile) eliminated."
-  process: "16-configuration thermal DOE; internal temperature rise stabilized at 22.6°C with 13.8°C headroom over failed 3U configurations."
-  governance: "26 released sheet-metal fabrication drawings; 17 PCB Design Control Documents; CNC-first tooling hedge before committing stamping dies."
+  financial: Sheet-metal piece-part total held to $561.46/unit at CNC-first pricing ($521.46 across 38 line items + $40 contingency, Lux CoGs Rev 6), tracking Profile's 20.33% sheet-metal benchmark; full mechanicals $682.75/unit under a sub-$15,000 COGS cap; ~$36,000 duplicate tooling avoided via family molds; Profile's extrusion penalty ($121.70/unit, 6.8% of its control-surface rollup) eliminated.
+  process: 17-configuration thermal DOE; left-zone internal air rise (R69 sensor) stabilized at 22.6°C with roughly 13.8°C of headroom over the failed 3U configurations.
+  governance: 26 released sheet-metal fabrication drawings; 17 PCB Design Control Documents; CNC-first tooling hedge — production shipped on CNC folding, stamping dies never committed.
 forensic_summary:
-  trigger: "During Capaldi FOH stress testing the embedded CPU breached 75°C and the system shut down — a show-stopping failure baked into the 3U rack-less chassis and its side-only cooling mandate."
-  intervention: "Ran a 16-configuration Design of Experiments across chassis volume and fan velocity, re-architected to a 4U chassis with a 12V three-fan array and LDPE flow ducting, and engineered a folded-steel I-beam spine to replace banned aluminum extrusions."
-  result: "Internal temperature rise stabilized at 22.6°C with 13.8°C of headroom; mechanical materials held to 20.33% of COGS; the console shipped."
-gallery: []
+  trigger: During Capaldi FOH stress testing (April 2007) the embedded CPU breached 75°C and the system shut down — a show-stopping failure baked into the 3U rack-less chassis and its side-only cooling mandate.
+  intervention: Ran a 17-configuration Design of Experiments across chassis volume and fan velocity, re-architected to a 4U chassis with a 12V three-fan array and LDPE flow ducting, and engineered a folded-steel I-beam spine to replace banned aluminum extrusions.
+  result: Left-zone internal air rise stabilized at 22.6°C with roughly 13.8°C of headroom; sheet metal held to $561.46 a unit at CNC-first pricing; the console shipped.
 heroImage: /assets/sc48/SC48-hero-01-xl.webp
 industry: pro_audio
 presentation_mode: deep_dive
 production: production
 productionScale: series
-skillData: []
-slug: sc48
 tags:
-  - Crisis
-  - Yield
+- Crisis
+- Yield
 teamSize: INT 4
 theme: hyperspace
-title: SC48
 tools:
-  - pro_engineer
+- pro_engineer
+cyberspace:
+  layout: linear
+  stickies:
+  - data:
+      columns: 3
+      layout: masonry
+      scattered: true
+      images:
+      - alt: 9420-58318-00
+        src: /assets/sc48/bubbles/01_brain_transplant/9420-58318-00.jpg
+        aspectRatio: 1.5
+    featuredIndices: []
+    id: 01_brain_transplant
+    type: gallery
+    title: Brain Transplant
+    deck:
+    - body: '**The Constraint:**
+
+        Incorporating a standard ATX motherboard into a proprietary DSP host environment.
+
+
+        **The Solution:**
+
+        Creating a secure, vibration-isolated "Engine Bay" for the Kontron 986LCD-M.
+
+
+        - **4U Back Panel / PCI Bracket:** The structural anchor (P/N 9420-58318-00) bridging the commercial connector field and the industrial chassis.
+
+        - **Shock Mounting:** Implemented a suspended tray design to protect the BGA components from low-frequency touring rumble (Truck rumble).
+
+        - **Cable Routing:** Defined strict "Keep Out" zones for cabling to prevent airflow blockage.'
+      subtitle: ''
+      title: Motherboard Integration
+  - data:
+      columns: 3
+      layout: masonry
+      scattered: true
+      images:
+      - alt: 9440-58842-00
+        src: /assets/sc48/bubbles/02_cosmetic_shell/9440-58842-00.jpg
+        aspectRatio: 1.5
+      - alt: 9440-58843-00
+        src: /assets/sc48/bubbles/02_cosmetic_shell/9440-58843-00.jpg
+        aspectRatio: 1.5
+    featuredIndices: []
+    id: 02_cosmetic_shell
+    type: gallery
+    title: Cosmetic Shell
+    deck:
+    - body: '**The Goal:**
+
+        Make a stamped steel box look like a premium $20k console.
+
+
+        **The Solution:**
+
+        A multi-piece ABS plastic trim kit that "wrapped" the industrial core.
+
+
+        - **Side Caps:** The left/right side caps (P/N 9440-58842-00), shot from a single family tool base — one mold billed at $36,000, its mirror twin free.
+
+        - **Front Bolster:** The front bolster (P/N 9440-58843-00) gave the engineer''s hands their resting surface — a dedicated $31,000 mold alongside the side caps'' shared tool.
+
+        - **Texture:** Mold-Tech MT-11020 light texture ("TEXTURE PAINT TO MATCH MOLDTECH MT-11020") matched to the powder-coated steel, creating a "Seamless" visual transition between plastic and metal.'
+      subtitle: ''
+      title: Industrial Design
+  - data:
+      columns: 3
+      layout: masonry
+      scattered: true
+      images:
+      - alt: 9440-58856-00
+        src: /assets/sc48/bubbles/03_meltdown_mitigation/9440-58856-00.jpg
+        aspectRatio: 1.5
+    featuredIndices: []
+    id: 03_meltdown_mitigation
+    type: gallery
+    title: Meltdown Mitigation
+    deck:
+    - body: '**The Constraint:**
+
+        Condensing the embedded system''s full heat load into a unibody chassis without external cooling towers.
+
+
+        **The Solution:**
+
+        I utilized the **chassis itself** as the heatsink. By coupling the PSU and CPU thermal loads directly to the heavy-gauge steel frame, we dissipated heat via conduction rather than relying solely on convection.
+
+
+        - **CFD Analysis:** CFdesign 8.0 models validated airflow paths to ensure zero "dead zones" around the DSP cards.
+
+        - **Fan Duct:** A die-cut, scored-and-folded LDPE duct (P/N 9420-58856-00) channels high-velocity air directly over the heatsinks — improvised under a sheet-metal part number because the fix could not wait for plastic tooling.'
+      subtitle: ''
+      title: Thermal Architecture
+  - data:
+      columns: 3
+      images: []
+      layout: masonry
+      scattered: true
+    featuredIndices: []
+    id: 04_origami_spine
+    type: gallery
+    title: Origami Spine
+    deck:
+    - body: '**The Challenge:**
+
+        Standard "Box and Lid" construction would be too heavy and expensive for the target BOM.
+
+
+        **The Solution:**
+
+        I implemented a **Sheet Metal Monocoque** design ("The Origami Spine").
+
+
+        - **CNC-First Ship:** Production ran on CNC folding end to end — the progressive stamping dies were priced, hedged, and never committed.
+
+        - **Dimensional Integrity:** The folded steel created a rigid spine that eliminated the need for a separate internal frame.
+
+        - **Interlock:** The structure featured self-aligning tabs that allowed the PCB trays to "snap" into place before fastening, drastically reducing assembly time.'
+      subtitle: ''
+      title: Structural Monocoque
 ---
 
 # SC48 (Lux / Capaldi) Forensic Report
@@ -190,48 +158,50 @@ tools:
 ## I. Project Summary
 
 - **Role:** Lead Mechanical Engineer / Industrial Designer.
-- **Mandate:** Architect the "Embedded Live Sound" console — a DSP engine and host PC (Kontron 986LCD-M Mini-ITX) integrated into a touring-grade chassis under a strict sub-$15,000 COGS cap, with no rack and no visible PC.
-- **Core Achievement:** Eliminated a 100% show-stopping thermal shutdown through a 16-configuration Design of Experiments and a 3U-to-4U re-architecture, while a folded-steel structure replaced banned aluminum extrusions and held mechanical materials to 20.33% of COGS.
+- **Mandate:** Architect the "Embedded Live Sound" console — a DSP engine and host PC (Kontron 986LCD-M Mini-ITX running Windows XP Embedded, the VENUE platform's OS) integrated into a touring-grade chassis under a strict sub-$15,000 COGS cap, with no rack and no visible PC. The program descended from the VENUE D-Show platform (internal codename "Lynyrd"; SC48 ran as "Lynyrd Mini" alongside its Lux/Capaldi names), reusing proven D-Show DSP hardware — two Mix Engines, ADC16, and DAC16 boards — around the custom control surface.
+- **Core Achievement:** Eliminated a 100% show-stopping thermal shutdown through a 17-configuration Design of Experiments and a 3U-to-4U re-architecture, while a folded-steel structure replaced banned aluminum extrusions and held the sheet-metal piece-part total to $561.46 a unit at CNC-first pricing.
 
 ## II. The Anatomy of Failure
 
 ### 1. Thermal Crisis: The 75°C Kill Event
 
-- **Trigger:** During "Capaldi FOH" temperature-chamber stress testing, the embedded CPU breached 75°C and the BIOS protection tripped — the telemetry recorded the verbatim failure: "CPU temperature is 75C, system shutdowned." Root cause: the rack-less 3U chassis and a strict "cooling from the sides only" industrial-design mandate created a heat trap. The Kontron board's own specification demands a 0–60°C ambient envelope; the dense cabling and PCB stack generated impedance the fans could not overcome. In a live-sound environment this failure mode means silence mid-performance.
-- **Intervention:** Executed a 16-configuration Design of Experiments matrix to empirically map the safe operating area: chassis volume (3U vs. 4U) against fan velocity (5.6V, 7V, 8.5V, 12V; 80 mm vs. 120 mm arrays). Retrofitted flow-guidance hardware — injection-molded fan ducts (P/N 9420-58856-00), die-cut LDPE "CPU shields" walling off dead-air zones, a sheet-metal fan plenum (P/N 9420-58496-00) equalizing side-intake pressure — plus a PSU bracket modification that coupled the supply's heat into the chassis steel and a harness re-route that cleared the intake vectors.
-- **Result:** The data proved 3U thermally non-viable. The winning configuration — 4U chassis, three 80 mm fans hard-wired at 12V — stabilized the critical left-side internal temperature rise at 22.6°C, roughly 13.8°C of headroom over the failed configurations. Dropping to 8.5V eroded the margin to 24.3°C; 12V was not a preference, it was the requirement.
+- **Trigger:** During "Capaldi FOH" temperature-chamber stress testing on 2007-04-19, the embedded CPU breached 75°C and the system hard-shut down — the telemetry recorded the verbatim failure: "CPU temperature is 75C, system shutdowned." (No BIOS-setpoint document survives; the 75°C threshold is established by the observed event itself.) Root cause: the rack-less 3U chassis and a strict "cooling from the sides only" industrial-design mandate created a heat trap. The Kontron board's own specification demands a 0–60°C ambient envelope with forced cooling; the dense cabling and PCB stack generated impedance the fans could not overcome. In a live-sound environment this failure mode means silence mid-performance.
+- **Intervention:** Executed a 17-configuration Design of Experiments matrix to empirically map the safe operating area: chassis volume (3U vs. 4U) against fan velocity (5.6V, 7V, 8.5V, 9V, 12V; 80 mm and 120 mm arrays, including mixed 120/80 rows), with rake vs. no-rake as a tooled axis — the 4U Rake Back I-Beam (9420-58317-00) against the 3U/4U No-Rake Top Panel (9420-58654-00). Retrofitted flow-guidance hardware — die-cut, scored, and formed LDPE fan ducts (P/N 9420-58856-00: a sheet-metal prefix on an improvised plastic part, the forensic marker of a fix that moved faster than plastic tooling could be justified), die-cut LDPE "CPU shields" walling off dead-air zones, a sheet-metal fan plenum (P/N 9420-58496-00) equalizing side-intake pressure — plus a PSU bracket modification that coupled the supply's heat into the chassis steel and a harness re-route that cleared the intake vectors.
+- **Result:** The data proved 3U thermally non-viable — failed 3U configurations ran as hot as a 76.9°C rise at the same left R69 sensor, and air filters alone cost 1–2°C. The winning configuration — 4U chassis, three 80 mm fans hard-wired at 12V — stabilized the critical left-zone internal air rise (R69 sensor) at 22.6°C, roughly 13.8°C of headroom over the failed configurations. Dropping to 8.5V eroded the margin to 24.3°C; 12V was not a preference, it was the requirement. The bitter footnote: the abandoned 3U rake had tested EMI-superior — "much better than 4U" per the June 2007 test log — so 3U won on electromagnetics and died on heat.
 
 ### 2. Structural Crisis: The No-Extrusion Mandate
 
-- **Trigger:** The thermal fix demanded a taller 4U chassis, which normally requires aluminum extrusions for touring rigidity — and management had issued a binary directive for the budget: "There will be no extrusions." On the flagship Profile console, extrusions alone had consumed 6.8% of COGS.
-- **Intervention:** Engineered the "4U Rake Back I-Beam" (P/N 9420-58317-00) — the Origami Spine. A complex series of precise bends in standard flat steel created a hollow I-beam profile that mimics the moment of inertia of a solid extrusion, spanning the console's width without sagging. Validated under a CNC-first strategy: prototype runs on CNC folding before committing capital to progressive stamping dies, with the top-level assembly (9100-58341-00) tracked against both CNC-MOQ and hard-tooled pricing.
-- **Result:** Total mechanical materials (sheet metal + plastics) locked at 20.33% of COGS — $561.46 per unit — supporting the sub-$15,000 system target with touring-grade rigidity and zero extrusions.
+- **Trigger:** The thermal fix demanded a taller 4U chassis, which normally requires aluminum extrusions for touring rigidity — and management had issued a binary directive for the budget: "There will be no extrusions." On the flagship Profile console, extrusions alone had consumed $121.70 a unit — 6.8% of its control-surface rollup.
+- **Intervention:** Engineered the "4U Rake Back I-Beam" (P/N 9420-58317-00) — the Origami Spine. A complex series of precise bends in standard flat steel created a hollow I-beam profile that mimics the moment of inertia of a solid extrusion, spanning the console's width without sagging. Validated under a CNC-first strategy: prototype runs on CNC folding before committing capital to progressive stamping dies, with the top-level assembly (9100-58341-00) tracked against both CNC-MOQ and hard-tooled pricing. Production ultimately shipped on CNC folding — the stamping dies were never committed.
+- **Result:** The sheet-metal piece-part total locked at $561.46 per unit at CNC-first pricing — $521.46 across 38 line items plus a $40.00 contingency (Lux CoGs Rev 6) — tracking the 20.33% sheet-metal benchmark inherited from the Profile control-surface rollup ($366.29 of $1,801.29). Full mechanicals, with plastics ($75.82), cooling ($20.00), and fasteners ($25.47) included, ran $682.75 per unit — supporting the sub-$15,000 COGS cap with touring-grade rigidity and zero extrusions.
 
 ### 3. Integration Crisis: The Brain Transplant
 
 - **Trigger:** A consumer Mini-ITX motherboard cannot survive touring: its connectors are rated for low cycle counts, a tripped cable can rip a port off the PCB, and an exposed PC backplane destroys the pro-audio appliance illusion.
-- **Intervention:** Buried the motherboard deep in the chassis on a custom PCI bracket (P/N 9420-58318-00) and bridged it to the exterior with umbilical extension harnesses — DVI, USB, and Ethernet runs terminating in ruggedized panel-mount connectors on dedicated steel I/O plates (IO Left 9420-58326-00, IO Right 9420-58327-00). Insertion loads transfer to heavy-gauge steel, never to solder joints.
+- **Intervention:** Buried the motherboard deep in the chassis on the 4U Back Panel / PCI bracket (P/N 9420-58318-00) and bridged it to the exterior with umbilical extension harnesses — DVI, USB, and Ethernet runs terminating in ruggedized panel-mount connectors on dedicated steel I/O plates (IO Left 9420-58326-00, IO Right 9420-58327-00, with a perforated rear IO plate 9420-58328-00). Insertion loads transfer to 1.5 mm steel, never to solder joints.
 - **Result:** Zero mechanical I/O failures in touring stress tests, a field-replaceable "engine block" motherboard, and a unified console I/O wall indistinguishable from the flagship family look.
 
 ### 4. Cost Crisis: The Family Mold Arbitrage
 
 - **Trigger:** An entry-level console that had to carry flagship Profile aesthetics — Class-A curved plastics on a budget that could not absorb duplicate tooling.
-- **Intervention:** Directed a family-mold strategy at the vendor: left and right side caps (P/N 9440-58842-00) shot from a single tool base. The BOM records the receipts — Left Side Cap tooling $36,000, Right Side Cap tooling $0.00. Mold-Tech fine texture matched the plastics to the powder-coated steel for a seamless transition.
+- **Intervention:** Directed a family-mold strategy at the plastics vendor (Jetcrown, Dongguan): left and right side caps (P/N 9440-58842-00) shot from a single tool base. The tooling ledger records the receipts — Left Side Cap $36,000, Right Side Cap $0.00 — while the Front Bolster (9440-58843-00, $31,000) and Top ($28,000) ran dedicated molds. Mold-Tech MT-11020 light texture matched the plastics to the powder-coated steel for a seamless transition.
 - **Result:** Roughly $36,000 in duplicate NRE avoided, leaving budget headroom for the steel spine, and "Profile-level" cosmetics delivered at Lux-level capital.
 
 ## III. Governance & Rhythm
 
 - **The Pulse:** War-room cadence. The DOE data forced a fundamental mid-project re-architecture from 3U to 4U, and the CNC-first hedge kept tooling capital off the table until the thermal solution was proven.
-- **The Artifacts:** 26 released sheet-metal fabrication drawings authored solo (SC48_REV-1_shtmtl-parts.pdf); 17 PCB Design Control Documents freezing board outlines, mounting holes, and keep-outs before layout — from the 537 × 368 mm Main Left control surface (9150-58331-00) down to L-shaped video interface boards threading internal obstructions; the thermal test log; the COGS rollup.
+- **The Team:** Neal Breitbarth (Mechanical Manager), Marc Schuman (Hardware/EE lead — thermal-matrix partner, drove the display negotiation), Stan Cotey (Product Marketing — the Profile aesthetic bar), Terri Merrell (Senior Buyer/Planner), Mary Carnero and Mary O'Callaghan (KMS/Quality).
+- **The Orbit:** Mass Precision (domestic sheet-metal prototypes — Fidel Saucedo, Ed Stegall), VTech (production sheet metal and turnkey contract manufacture; final cost validation quote 2008-02-15), Jetcrown of Dongguan (plastics tooling and molding — Ruby Li), Kwanasia (offshore PCA and production support — Roger Lau liaison), PPI / Pre-Production Plastics (domestic molding samples), Kontron (the 986LCD-M). The display: a Varitronix panel carried over from the Command-8, with offshore pricing explored on combined Capaldi/Buckley/Danko volume.
+- **The Artifacts:** 26 released sheet-metal fabrication drawings authored solo (SC48_REV-1_shtmtl-parts.pdf); 17 PCB Design Control Documents freezing board outlines, mounting holes, and keep-outs before layout — spanning the PCI Extender (58330), the 537 × 368 mm Main Left control surface (9150-58331-00), Select Button (58332), Main Right (58333, carrying the Flex Channel section), Power/Reset (58334), Video (58335), the Select/Logic sets (58336–58339, 58374–58377), the Main IO assembly (58340) and fab (58418), and the PCI MOBO card (59049) — with the D-Show reuse boards sitting outside the count; the thermal test log; the COGS rollup.
 
 ## IV. Quantified Impact
 
 - **Eliminated** a 100% show-stopping thermal failure mode by identifying the 75°C CPU shutdown threshold through forensic log analysis.
-- **Stabilized** internal temperature rise at 22.6°C — 13.8°C of headroom — via the 4U side-intake architecture.
-- **Executed** a 16-configuration Design of Experiments isolating chassis volume and fan-velocity variables.
-- **Held** mechanical material cost to 20.33% of COGS ($561.46/unit) under the sub-$15,000 system target.
+- **Stabilized** the left-zone internal air rise at 22.6°C — roughly 13.8°C of headroom over the failed configurations — via the 4U side-intake architecture.
+- **Executed** a 17-configuration Design of Experiments isolating chassis volume, fan-velocity, and rake variables.
+- **Held** the sheet-metal piece-part total to $561.46/unit at CNC-first pricing ($682.75 full mechanicals) under the sub-$15,000 COGS cap.
 - **Avoided** ~$36,000 in duplicate tooling through the family-mold strategy.
-- **Eliminated** the extrusion cost penalty that had consumed 6.8% of COGS on the Profile console.
+- **Eliminated** the extrusion cost penalty that had consumed $121.70 a unit — 6.8% of the control-surface rollup — on the Profile console.
 - **Authored** 26 sheet-metal fabrication drawings and 17 PCB Design Control Documents as a solo mechanical mandate.
 - **Integrated** a full Mini-ITX embedded PC into a touring-grade chassis with zero motherboard I/O failures in stress testing.
 
@@ -239,11 +209,17 @@ tools:
 
 The claims above rest on the project's primary evidence archive — thermal test logs, fabrication drawings, and COGS rollups — compiled through the NotebookLM forensic registry:
 
-- `SC48_lux_thermal-testing.pdf` — the smoking gun: thermal-runaway logs including the verbatim shutdown event (log row 275) and the 22.6°C stabilization data.
-- `SC48_REV-1_shtmtl-parts.pdf` — the 26 released sheet-metal fabrication drawings.
-- `BOM_GoGs_etc.pdf` — COGS rollup; family-mold line items ($36,000 / $0.00) and the $561.46 mechanical unit cost.
+- `SC48_lux_thermal-testing.pdf` — the smoking gun: thermal-runaway logs including the verbatim shutdown event (log row 275), the 17-configuration DOE table, and the 22.6°C / 76.9°C rise data at the R69 sensors.
+- `SC48_REV-1_shtmtl-parts.pdf` — the 26 released sheet-metal fabrication drawings (Sheet 4: the 4U Rake Back I-Beam); 16 drawings carry the DOE RELEASE title-block date 10/22/07.
+- `Lux_CoGs_REV_6.xls` — the sheet-metal piece-part rollup: $521.46 across 38 line items + $40.00 contingency = $561.46/unit; full mechanicals $682.75.
+- `CAPALDI_COGs_analysis.xls` — the inherited Profile benchmark ratios (sheet metal $366.29 / $1,801.29 = 20.33%; extrusions $121.70 = 6.8%).
+- `BOM_GoGs_etc.pdf` — COGS rollup; plastics tooling ledger ($36,000 / $0.00 side caps; $31,000 Front Bolster; $28,000 Top).
+- `20080215_LUX_SHTMTL_QUOTE.pdf` — VTech's final sheet-metal cost validation, 2008-02-15 (the program's closing financial artifact).
+- `SC48_PCB_DCDs.pdf` — the 17 PCB Design Control Documents.
+- `KTD-00691-J 986LCD-M Family User Manual.pdf` — the Kontron envelope: 0–60°C ambient, forced-cooling condition, ±7°C sensor precision.
 - `9420-58317-00` — fabrication drawing, 4U Rake Back I-Beam (the Origami Spine).
-- `9420-58856-00` — fan duct used in the thermal fix.
-- `9420-58318-00` — custom PCI bracket for the motherboard mount.
-- `9420-58326-00` / `9420-58327-00` — IO Left / IO Right panel-mount bracket drawings.
+- `9420-58654-00` — 3U/4U No-Rake Top Panel (the DOE's no-rake axis hardware).
+- `9420-58856-00` — die-cut LDPE fan duct used in the thermal fix (BOM row: "die-cut, scored, formed LDPE sheet milky white").
+- `9420-58318-00` — "4U BACK PANEL" per the title block; the PCI bracket/frame carrying the motherboard mount.
+- `9420-58326-00` / `9420-58327-00` — IO Left / IO Right panel-mount bracket drawings (1.5 mm steel); `9420-58328-00` — perforated rear IO plate; `9420-58494-00` — PS cover.
 - `9100-58341-00` — Lux console top-level assembly.
