@@ -1,8 +1,9 @@
+import argparse
 import os
 import glob
 import re
 
-# --- CONFIGURATION ---
+# --- CONFIGURATION (defaults; override with --dirs / --out) ---
 TRANSCRIPT_DIR = r"D:\GitHub\portfolio-workspace\podcasts"
 OUTPUT_FILE = r"D:\GitHub\portfolio-workspace\podcasts\skeptic_clips.md"
 
@@ -36,8 +37,11 @@ SKEPTIC_TRIGGERS = [
 
 CONTEXT_WINDOW = 4  # Lines before and after to capture the full banter
 
-def load_transcripts():
-    return glob.glob(os.path.join(TRANSCRIPT_DIR, "*.transcript.txt"))
+def load_transcripts(dirs):
+    files = []
+    for d in dirs:
+        files += glob.glob(os.path.join(d, "*.transcript.txt"))
+    return files
 
 def extract_chunks(file_path):
     with open(file_path, "r", encoding="utf-8") as f:
@@ -77,10 +81,16 @@ def extract_chunks(file_path):
     return chunks
 
 def main():
-    files = load_transcripts()
+    ap = argparse.ArgumentParser(description="Mine podcast transcripts for skeptic/red-team clips")
+    ap.add_argument("--dirs", nargs="*", default=[TRANSCRIPT_DIR],
+                    help="transcript directories to sweep (default: the podcasts dir)")
+    ap.add_argument("--out", default=OUTPUT_FILE, help="output clips file")
+    args = ap.parse_args()
+
+    files = load_transcripts(args.dirs)
     print(f"🕵️  Scanning {len(files)} transcripts for Skepticism...")
-    
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as out:
+
+    with open(args.out, "w", encoding="utf-8") as out:
         out.write("# Skeptic & Red Team Clips\n\n")
         out.write("> Auto-mined based on skepticism heuristics.\n\n")
         
@@ -112,7 +122,7 @@ def main():
                 out.write("---\n\n")
     
     print(f"✅ Found {total_clips} potential skeptic clips.")
-    print(f"📄 Report written to: {OUTPUT_FILE}")
+    print(f"📄 Report written to: {args.out}")
 
 if __name__ == "__main__":
     main()
