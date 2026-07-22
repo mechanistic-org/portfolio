@@ -37,6 +37,25 @@ SKEPTIC_TRIGGERS = [
 
 CONTEXT_WINDOW = 4  # Lines before and after to capture the full banter
 
+# Whisper hallucination collapse shows up as mixed-script garbage
+# (CJK/Hangul/Cyrillic/Hebrew) or degenerate repetition loops.
+GARBAGE_CHARS = re.compile(r"[Ѐ-ӿ֐-׿一-鿿가-힯]")
+MAX_LINE_REPEATS = 3
+
+def is_garbage(chunk_lines):
+    text = "\n".join(chunk_lines)
+    if GARBAGE_CHARS.search(text):
+        return True
+    prefixes = {}
+    for line in chunk_lines:
+        # Degenerate loops repeat with small mutations, so count shared
+        # line prefixes rather than identical lines.
+        p = line[:8]
+        prefixes[p] = prefixes.get(p, 0) + 1
+        if prefixes[p] > MAX_LINE_REPEATS:
+            return True
+    return False
+
 def load_transcripts(dirs):
     files = []
     for d in dirs:
@@ -59,25 +78,27 @@ def extract_chunks(file_path):
         lines = content.split('\n')
     
     chunks = []
-    
+    next_allowed = 0  # suppress sliding-window near-duplicates
+
     for i, line in enumerate(lines):
+        if i < next_allowed:
+            continue
         line_lower = line.lower()
-        
+
         # Check for triggers
         for trigger in SKEPTIC_TRIGGERS:
             if re.search(trigger, line_lower):
                 # We found a trigger. Let's grab context.
                 start = max(0, i - CONTEXT_WINDOW)
                 end = min(len(lines), i + CONTEXT_WINDOW + 1)
-                
-                chunk = lines[start:end]
-                # Join and clean
-                chunk_text = "\n".join([c.strip() for c in chunk if c.strip()])
-                
-                if chunk_text:
-                    chunks.append((trigger, chunk_text))
+
+                chunk_lines = [c.strip() for c in lines[start:end] if c.strip()]
+
+                if chunk_lines and not is_garbage(chunk_lines):
+                    chunks.append((trigger, "\n".join(chunk_lines)))
+                    next_allowed = i + CONTEXT_WINDOW + 1
                 break # Only match once per line to avoid dupes
-                
+
     return chunks
 
 def main():

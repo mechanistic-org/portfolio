@@ -1,8 +1,9 @@
+import argparse
 import os
 import re
 import glob
 
-# --- CONFIGURATION ---
+# --- CONFIGURATION (defaults; override with --dirs / --projects / --out) ---
 TRANSCRIPT_DIR = r"D:\GitHub\portfolio-workspace\podcasts"
 PROJECTS_DIR = r"d:\GitHub\portfolio\src\content\projects"
 OUTPUT_REPORT = r"D:\GitHub\portfolio-workspace\podcasts\gold_gap_report.md"
@@ -29,14 +30,14 @@ ENTITIES = {
     ]
 }
 
-def load_project_content(project_slug):
+def load_project_content(project_slug, projects_dir):
     """
     Loads text content of a project from src/content/projects/[slug]/index.mdx
     """
-    path = os.path.join(PROJECTS_DIR, project_slug, "index.mdx")
+    path = os.path.join(projects_dir, project_slug, "index.mdx")
     if not os.path.exists(path):
         # Try finding any md/mdx in the folder
-        files = glob.glob(os.path.join(PROJECTS_DIR, project_slug, "*.md*"))
+        files = glob.glob(os.path.join(projects_dir, project_slug, "*.md*"))
         if files:
             path = files[0]
         else:
@@ -89,9 +90,20 @@ def scan_text_for_entities(text):
     return found
 
 def main():
+    ap = argparse.ArgumentParser(
+        description="Diff audio-transcript entities against project markdown"
+    )
+    ap.add_argument("--dirs", nargs="*", default=[TRANSCRIPT_DIR],
+                    help="transcript directories to sweep (default: the podcasts dir)")
+    ap.add_argument("--projects", default=PROJECTS_DIR, help="projects content dir")
+    ap.add_argument("--out", default=OUTPUT_REPORT, help="output report file")
+    args = ap.parse_args()
+
     print("🔍 Starting Gold Diff Audit...")
-    
-    transcripts = glob.glob(os.path.join(TRANSCRIPT_DIR, "*.transcript.txt"))
+
+    transcripts = []
+    for d in args.dirs:
+        transcripts += glob.glob(os.path.join(d, "*.transcript.txt"))
     print(f"📂 Found {len(transcripts)} transcripts.")
     
     report_lines = ["# Gold Gap Report: Missing Documentation\n"]
@@ -111,7 +123,7 @@ def main():
         except Exception:
             continue
             
-        project_text = load_project_content(project_slug)
+        project_text = load_project_content(project_slug, args.projects)
         if not project_text:
             print(f"⚠️  Project not found for transcript: {filename} -> {project_slug}")
             continue
@@ -138,10 +150,10 @@ def main():
                 report_lines.append(f"- **Missing {cat}:** {', '.join(terms)}")
             report_lines.append("\n" + "-"*40 + "\n")
             
-    with open(OUTPUT_REPORT, "w", encoding="utf-8") as f:
+    with open(args.out, "w", encoding="utf-8") as f:
         f.write("\n".join(report_lines))
-        
-    print(f"✅ Gap Report Generated: {OUTPUT_REPORT}")
+
+    print(f"✅ Gap Report Generated: {args.out}")
 
 if __name__ == "__main__":
     main()
