@@ -37,9 +37,16 @@ public/assets/
 scripts/_roundtrip_out/
 src/pages/spike/
 
-# Claude Code: keep the preview config, ignore local settings
+# Claude Code: keep the preview config + the shared hooks, ignore local settings.
+# settings.json carries the session-capture hooks (global_agent#321) and the
+# astro output:"static" guard - both must be TRACKED or a worktree session
+# inherits neither (a worktree materializes tracked files only), and a
+# settings.json pointing at an unmaterialized guard script would block every
+# edit. settings.local.json stays ignored: that one is per-machine.
 .claude/*
 !.claude/launch.json
+!.claude/settings.json
+!.claude/hooks/
 # Python bytecode cache
 __pycache__/
 *.pyc

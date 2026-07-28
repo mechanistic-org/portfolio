@@ -1,0 +1,59 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "D:\\GitHub\\global_agent\\venv\\Scripts\\python.exe",
+            "args": ["D:\\GitHub\\portfolio\\.claude\\hooks\\guard_static_output.py"],
+            "timeout": 15,
+            "statusMessage": "Guarding astro.config output:static"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "D:\\GitHub\\global_agent\\venv\\Scripts\\python.exe",
+            "args": ["D:\\GitHub\\global_agent\\scripts\\hooks\\claude_session_start.py"],
+            "timeout": 60,
+            "async": true,
+            "statusMessage": "Logging session open (#223)"
+          },
+          {
+            "type": "command",
+            "command": "D:\\GitHub\\global_agent\\venv\\Scripts\\python.exe",
+            "args": ["D:\\GitHub\\global_agent\\scripts\\session_lane.py", "claim", "--hook"],
+            "timeout": 15,
+            "statusMessage": "Claiming session lane (#252)"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "D:\\GitHub\\global_agent\\venv\\Scripts\\python.exe",
+            "args": ["D:\\GitHub\\global_agent\\scripts\\hooks\\claude_session_end.py"],
+            "timeout": 120,
+            "statusMessage": "Queueing mine + usage telemetry (#223/#208)"
+          },
+          {
+            "type": "command",
+            "command": "D:\\GitHub\\global_agent\\venv\\Scripts\\python.exe",
+            "args": ["D:\\GitHub\\global_agent\\scripts\\session_lane.py", "release", "--hook"],
+            "timeout": 15,
+            "statusMessage": "Releasing session lane (#252)"
+          }
+        ]
+      }
+    ]
+  }
+}
