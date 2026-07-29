@@ -1,0 +1,659 @@
+---
+/**
+ * /about — the biographical front door.
+ *
+ * global_agent#90 (Biographical Synthesis & Venn Diagram Asset Generation),
+ * rendering the four-domain constraint model ruled in global_agent#91 as a
+ * navigable field rather than a static asset.
+ *
+ * Placement ruled 2026-07-28: this page, not the homepage. The homepage
+ * ResVizSwarm clusters the same projects by TIME and is left untouched — same
+ * collection, different question.
+ *
+ * Biography prose below is the PUBLIC projection of
+ * registry/global_agent/intelligence/2026-03-28_biography_master.md. Engineering
+ * content only: family names, addresses, dates of birth, relationships, and
+ * medical history stay in the private registry.
+ */
+import { getCollection } from "astro:content";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ConstraintField, { type FieldNode } from "@components/DataViz/ConstraintField";
+import { deriveDomains, blendDomainColors, DOMAINS, INTERSECTIONS } from "@config/domains";
+import { BIO_NODES } from "@config/bio_nodes";
+import { currentSite, SITE_CONFIG } from "@config/site_config";
+
+export const prerender = true;
+
+const HIDDEN_IDS = ["classified", "classified-alpha", "classified-bravo", "electronic-battery-lock"];
+
+const rawProjects = await getCollection("projects");
+
+// Same universe the rest of the site shows — trimain filter, no drafts, no
+// data-less or classified entries.
+const projects = rawProjects
+	.filter(({ data }) => (data.targets || ["main"]).includes(currentSite))
+	.filter(({ data, id }) => {
+		return (
+			!data.draft &&
+			(data as any).impact !== "NO_DATA" &&
+			!HIDDEN_IDS.includes(data.slug || id)
+		);
+	});
+
+// Derive domain membership, aggregating failures so an unmapped taxonomy value
+// reports every offender at once instead of one per rebuild.
+const derivationFailures: string[] = [];
+
+const projectNodes: FieldNode[] = projects.flatMap((p) => {
+	const slug = p.data.slug || p.id;
+	let domains;
+	try {
+		domains = deriveDomains({
+			slug,
+			employer: p.data.employer,
+			category: p.data.category,
+			tags: p.data.tags,
+		});
+	} catch (err) {
+		derivationFailures.push((err as Error).message);
+		return [];
+	}
+
+	// Mass from duration, matching the homepage swarm's convention.
+	const start = p.data.date ? new Date(p.data.date) : null;
+	const end = p.data.endDate ? new Date(p.data.endDate) : new Date();
+	const years =
+		start && !Number.isNaN(start.getTime())
+			? Math.max(0.5, (end.getTime() - start.getTime()) / (1000 * 3600 * 24 * 365))
+			: 1;
+
+	// primary_home is the canonical owner of a project (already load-bearing for
+	// SEO canonicals in Seo.astro). When it names a property other than the one
+	// being built, the node routes off-site. Today that is 4 of 120 entries — the
+	// mechanism is here so it lights up as the field gets authored, not faked.
+	const home = p.data.primary_home ?? "main";
+	const external = home !== currentSite;
+	const href = external
+		? `https://${SITE_CONFIG[home].domain}/projects/${slug}`
+		: `/projects/${slug}`;
+
+	return [
+		{
+			id: slug,
+			name: p.data.title,
+			kind: "project" as const,
+			domains,
+			value: Math.min(60, 8 + years * 6),
+			color: blendDomainColors(domains),
+			href,
+			external,
+			blurb: p.data.description,
+			employer: p.data.employer,
+			year: start && !Number.isNaN(start.getTime()) ? start.getFullYear() : undefined,
+		},
+	];
+});
+
+if (derivationFailures.length > 0) {
+	throw new Error(
+		`[/about] ${derivationFailures.length} project(s) resolved to zero constraint domains:\n` +
+			derivationFailures.map((m) => `  - ${m}`).join("\n"),
+	);
+}
+
+// Biographical nodes carry the domains the projects collection cannot reach —
+// Motion & Fault above all, which renders empty from projects alone.
+const bioNodes: FieldNode[] = BIO_NODES.map((b) => ({
+	id: b.id,
+	name: b.name,
+	kind: "bio" as const,
+	domains: [...b.domains],
+	value: b.value,
+	color: blendDomainColors([...b.domains]),
+	href: b.href,
+	blurb: b.blurb,
+	year: b.startYear,
+}));
+
+const fieldNodes: FieldNode[] = [...projectNodes, ...bioNodes];
+---
+
+<BaseLayout
+	title="About"
+	description="Four decades of constraint work, mapped as four overlapping domains and the intersections where they meet."
+>
+	<article class="about-page">
+		<header class="about-hero">
+			<p class="about-eyebrow">A Life in Constraint</p>
+			<h1>Not four careers. One operating system, applied to different physics.</h1>
+			<p class="about-lede">
+				Constraint identified. Resources inventoried. Solution designed. Work executed. The
+				method was established on marine engines at the end of a highway and has not changed
+				since — only the materials have. Below, the work arranged by the physics it
+				governs rather than the year it happened.
+			</p>
+		</header>
+
+		<section class="about-field" aria-labelledby="field-heading">
+			<h2 id="field-heading" class="sr-only">The constraint field</h2>
+			{/* client:load, not client:visible. The island renders with
+			    `display: contents`, so its bounding box is 0x0 and the
+			    IntersectionObserver behind client:visible never fires — the field
+			    stayed on its unsettled seed positions and every click was dead.
+			    This is the page's primary navigation surface; it hydrates eagerly. */}
+			<ConstraintField client:load nodes={fieldNodes} />
+		</section>
+
+		<section class="about-intersections" aria-labelledby="intersections-heading">
+			<h2 id="intersections-heading">The Intersections</h2>
+			<p class="about-section-lede">
+				The domains are not adjacent specialisms. They overlap, and the overlaps are where
+				the argument lives.
+			</p>
+			<dl>
+				{
+					INTERSECTIONS.map((node) => (
+						<div class="about-intersection">
+							<dt>
+								<span class="about-intersection-key">{node.id}</span>
+								{node.label}
+							</dt>
+							<dd>
+								<p>{node.blurb}</p>
+								<p class="about-intersection-members">
+									{node.domains
+										.map((id) => DOMAINS.find((d) => d.id === id)?.label)
+										.join("  ∩  ")}
+								</p>
+							</dd>
+						</div>
+					))
+				}
+			</dl>
+		</section>
+
+		<section class="about-bio" aria-labelledby="bio-heading">
+			<h2 id="bio-heading">The Long Version</h2>
+
+			<p>
+				The formal education arrived by correspondence, at the end of Highway 101 on the
+				British Columbia coast, in service of a shellfish cooperative. He burned through it
+				as fast as he could. The real curriculum was outboard motors and tugboat engines and
+				bilge pumps and cable suspension winches, and the particular patience required by
+				living systems that do not care about your schedule. The ocean is an unforgiving,
+				consistent, and honest teacher about consequences, in a way that classrooms rarely
+				are.
+			</p>
+
+			<p>
+				At twelve he wanted a motorcycle. He was told he could have one when he could pay
+				for it. Three months later he had felled, bucked, split, and loaded nineteen cords
+				of wood at a hundred dollars a cord, which covered the ferry, the bike, tires,
+				tune-up parts, and a filter. It was never a story about a motorcycle. It was the
+				operating system establishing its core parameters.
+			</p>
+
+			<p>
+				When the cooperative failed he moved south with nowhere particular to go, worked a
+				service station, and enrolled at De Anza College — twenty-two units a quarter, an
+				Associate's Degree in Automotive Engine Performance, the Outstanding Academic
+				Achievement Certificate, an Elks National Foundation Vocational Grant. When the
+				schedule required it, he slept in the library. The library was warm and had books.
+			</p>
+
+			<p>
+				The first job in technology came in 1985, building a cardiac ablation system —
+				treating irregular heartbeat through minimally invasive catheters. He started as an
+				electronics technician doing assembly, rework, and component-level troubleshooting,
+				and was promoted to Electronics Production Supervisor at nineteen. The work was
+				small enough to hold in your hands and precise enough to kill a patient if you got
+				it wrong. Simultaneously he managed an automotive shop doing computer-engine
+				feedback diagnostics. The same epistemology applied to combustion that was being
+				applied to catheters. He was not building a career. He was developing a method.
+			</p>
+
+			<p>
+				In 1989 he joined Silicon Graphics, moving from technician to junior mechanical
+				designer inside a year, learning Pro/ENGINEER and Flotherm and building thermal and
+				mechanical solutions for workstations that consumed power the way race engines
+				consume fuel. Five products from concept to production — the Personal Iris, the
+				Indigo, the Indigo II, the Indy — machines a generation of engineers and scientists
+				and artists used to do their best work.
+			</p>
+
+			<p>
+				He founded Mechanistic in 1993. The name was deliberate: the world as systems, as
+				mechanisms, as structures with knowable properties operating according to
+				discoverable rules. Over the following decade he took twenty-two commercial
+				products from start to finish — inline speed skates, a logic-window toaster, a
+				telephone, the Microsoft Xbox, a handheld, an MP3 player, a security appliance, a
+				dental x-ray system. Products people held and used and sometimes loved without
+				knowing his name. That is the nature of the work. The maker disappears into the
+				made thing.
+			</p>
+
+			<p>
+				He also owned and operated a repair shop specialising in late-model driveability and
+				racing setups, and raced SCCA SoloII competitively. A consultancy, a shop, a race
+				season, and a product schedule, all running at once. The parallel processing was
+				never a strategy. It was constitutional.
+			</p>
+
+			<p>
+				In 2003 he moved to professional audio — the physical architecture of the tools that
+				make the tools: control surfaces and interfaces used to record a great deal of the
+				music of the last thirty years. He was also administrator of the CAD dataservers,
+				already wrestling with persistent, auditable, durable professional data two decades
+				before he had language for the problem.
+			</p>
+
+			<p>
+				From 2008 he was the sole mechanical engineer for six generations of high-end
+				audiovisual servers and players, for people who care about the difference between
+				experiencing something and merely consuming it. Around 2010 he discovered
+				photography — landscape, macro, portrait, studio, and a portable photobooth he
+				engineered himself. The same eye that tracked tolerance stacks and thermal budgets,
+				turned toward light and time. He was riding roughly ten thousand miles a year.
+			</p>
+
+			<p>
+				Then a wearable video headset projecting images directly onto the retina through
+				beam-splitting optics — engineering the precise boundary between the physical world
+				and human perception. Then a connected light switch and its regulatory compliance
+				program. Then automated foodservice makelines: robots making burritos to the
+				tolerance precision of aerospace assembly, because a burrito is a constraint problem
+				if you care about consistency at scale, and the physical world does not forgive.
+			</p>
+
+			<p>
+				He returned to Mechanistic in 2022, four decades of constraint environments having
+				accumulated into something past technical expertise — a forensic epistemology
+				applied across engines, catheters, workstations, optics, food robots, musical
+				instruments, bicycles, photographs, and bodies. He had also noticed that the
+				automated systems now ranking people like him had been built by software people who
+				had never held a thermal resistance budget or managed an injection molding tolerance
+				stack. Their ontologies had no vocabulary for the work. Not failing a screen. Never
+				screened at all. He called it Round Zero, and built an open standard for agentic
+				professional identity to end it.
+			</p>
+
+			<p>
+				Around the same time he answered a different question: how do you give an AI agent
+				durable memory that survives sessions, restarts, and complete environment teardowns?
+				The answer was git — not as a workaround but as the natural substrate, because every
+				property required was already there. Agents boot cold, read an issue, execute one
+				task, post a comment, and die.
+			</p>
+
+			<p class="about-closer">
+				The container burns. The commit survives.
+			</p>
+		</section>
+	</article>
+</BaseLayout>
+
+<style is:global>
+	/* ---- page shell ---- */
+	.about-page {
+		max-width: 78rem;
+		margin: 0 auto;
+		padding: 4rem 1.5rem 6rem;
+	}
+
+	.about-hero {
+		max-width: 46rem;
+		margin-bottom: 3.5rem;
+	}
+	.about-eyebrow {
+		font-size: 0.75rem;
+		letter-spacing: 0.22em;
+		text-transform: uppercase;
+		color: #00c2ff;
+		margin-bottom: 1rem;
+	}
+	.about-hero h1 {
+		font-size: clamp(1.9rem, 4.2vw, 3.1rem);
+		line-height: 1.1;
+		margin-bottom: 1.25rem;
+		text-wrap: balance;
+	}
+	.about-lede {
+		font-size: 1.05rem;
+		line-height: 1.7;
+		color: #9ca3af;
+	}
+
+	.about-field {
+		margin-bottom: 4.5rem;
+	}
+
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	/* ---- the field ---- */
+	.constraint-field {
+		--cf-line: rgba(255, 255, 255, 0.14);
+	}
+	.constraint-field .cf-stage {
+		position: relative;
+		display: none;
+	}
+	.constraint-field .cf-stage svg {
+		display: block;
+		width: 100%;
+		height: auto;
+		overflow: visible;
+	}
+
+	.constraint-field .cf-domain-label {
+		font-size: 17px;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		opacity: 0.85;
+		pointer-events: none;
+	}
+	.constraint-field .cf-intersection {
+		pointer-events: none;
+	}
+	.constraint-field .cf-intersection circle {
+		fill: rgba(3, 3, 3, 0.82);
+		stroke: rgba(255, 255, 255, 0.4);
+		stroke-width: 1;
+	}
+	.constraint-field .cf-intersection text {
+		font-size: 13px;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		fill: #ffffff;
+	}
+
+	.constraint-field .cf-node {
+		cursor: pointer;
+		stroke: rgba(255, 255, 255, 0.18);
+		stroke-width: 1;
+		transition:
+			opacity 200ms ease,
+			stroke 160ms ease,
+			stroke-width 160ms ease;
+	}
+	.constraint-field .cf-node--inert {
+		fill-opacity: 0.42;
+		stroke-dasharray: 2 2;
+	}
+	.constraint-field .cf-node.is-hovered,
+	.constraint-field .cf-node:focus-visible {
+		stroke: #ffffff;
+		stroke-width: 2.5;
+		outline: none;
+	}
+	.constraint-field .cf-node.is-dimmed {
+		opacity: 0.12;
+		pointer-events: none;
+	}
+
+	.constraint-field .cf-readout {
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
+		min-height: 2.75rem;
+		padding-top: 0.75rem;
+		border-top: 1px solid var(--cf-line);
+		font-size: 0.8rem;
+	}
+	.constraint-field .cf-readout-name {
+		color: #e5e7eb;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+	}
+	.constraint-field .cf-readout-meta {
+		color: #6b7280;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		font-size: 0.7rem;
+	}
+
+	/* ---- legend ---- */
+	.constraint-field .cf-legend {
+		list-style: none;
+		margin: 2rem 0 0;
+		padding: 0;
+		display: grid;
+		gap: 0.5rem;
+		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+	}
+	.constraint-field .cf-legend-btn {
+		width: 100%;
+		display: flex;
+		align-items: flex-start;
+		gap: 0.7rem;
+		padding: 0.7rem 0.85rem;
+		background: rgba(255, 255, 255, 0.02);
+		border: 1px solid var(--cf-line);
+		border-radius: 3px;
+		text-align: left;
+		cursor: pointer;
+		transition:
+			background 160ms ease,
+			border-color 160ms ease;
+	}
+	.constraint-field .cf-legend-btn:hover,
+	.constraint-field .cf-legend-btn.is-active {
+		background: rgba(255, 255, 255, 0.05);
+		border-color: var(--cf-domain);
+	}
+	.constraint-field .cf-legend-dot {
+		width: 0.6rem;
+		height: 0.6rem;
+		margin-top: 0.3rem;
+		border-radius: 50%;
+		background: var(--cf-domain);
+		flex: none;
+	}
+	.constraint-field .cf-legend-text {
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
+		flex: 1;
+	}
+	.constraint-field .cf-legend-text strong {
+		font-size: 0.82rem;
+		color: #e5e7eb;
+	}
+	.constraint-field .cf-legend-text em {
+		font-style: normal;
+		font-size: 0.7rem;
+		color: #6b7280;
+		letter-spacing: 0.04em;
+	}
+	.constraint-field .cf-legend-count {
+		font-size: 0.72rem;
+		color: #6b7280;
+		font-variant-numeric: tabular-nums;
+	}
+
+	/* ---- mobile list ---- */
+	.constraint-field .cf-list {
+		display: grid;
+		gap: 2rem;
+		margin-top: 2rem;
+	}
+	.constraint-field .cf-list-group h3 {
+		font-size: 0.95rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		margin-bottom: 0.2rem;
+	}
+	.constraint-field .cf-list-sub {
+		font-size: 0.72rem;
+		color: #6b7280;
+		margin-bottom: 0.75rem;
+	}
+	.constraint-field .cf-list-group ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		gap: 0.35rem;
+	}
+	.constraint-field .cf-list-group a,
+	.constraint-field .cf-list-group button {
+		font-size: 0.86rem;
+		color: #cbd5e1;
+		text-align: left;
+		background: none;
+		border: none;
+		padding: 0;
+		cursor: pointer;
+		text-decoration: none;
+	}
+	.constraint-field .cf-list-group a:hover,
+	.constraint-field .cf-list-group button:hover {
+		color: #00c2ff;
+	}
+
+	/* ---- detail panel ---- */
+	.constraint-field .cf-panel {
+		position: fixed;
+		right: 1rem;
+		bottom: 1rem;
+		z-index: 60;
+		width: min(24rem, calc(100vw - 2rem));
+		padding: 1.25rem 1.4rem;
+		background: rgba(3, 3, 3, 0.94);
+		border: 1px solid var(--cf-line);
+		border-radius: 4px;
+		backdrop-filter: blur(8px);
+	}
+	.constraint-field .cf-panel h3 {
+		font-size: 1rem;
+		margin-bottom: 0.35rem;
+		padding-right: 1.5rem;
+	}
+	.constraint-field .cf-panel-domains {
+		font-size: 0.68rem;
+		text-transform: uppercase;
+		letter-spacing: 0.09em;
+		color: #6b7280;
+		margin-bottom: 0.7rem;
+	}
+	.constraint-field .cf-panel-blurb {
+		font-size: 0.85rem;
+		line-height: 1.6;
+		color: #9ca3af;
+	}
+	.constraint-field .cf-panel-link {
+		display: inline-block;
+		margin-top: 0.85rem;
+		font-size: 0.78rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: #00c2ff;
+	}
+	.constraint-field .cf-panel-close {
+		position: absolute;
+		top: 0.55rem;
+		right: 0.7rem;
+		background: none;
+		border: none;
+		color: #6b7280;
+		font-size: 1.3rem;
+		line-height: 1;
+		cursor: pointer;
+	}
+	.constraint-field .cf-panel-close:hover {
+		color: #e5e7eb;
+	}
+
+	@media (min-width: 768px) {
+		.constraint-field .cf-stage {
+			display: block;
+		}
+		.constraint-field .cf-list {
+			display: none;
+		}
+	}
+
+	/* ---- intersections ---- */
+	.about-intersections {
+		margin-bottom: 4.5rem;
+	}
+	.about-intersections h2,
+	.about-bio h2 {
+		font-size: 0.8rem;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: #6b7280;
+		padding-bottom: 0.75rem;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+		margin-bottom: 1.5rem;
+	}
+	.about-section-lede {
+		max-width: 42rem;
+		color: #9ca3af;
+		margin-bottom: 2rem;
+	}
+	.about-intersections dl {
+		display: grid;
+		gap: 1.75rem;
+		grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+	}
+	.about-intersection dt {
+		display: flex;
+		align-items: baseline;
+		gap: 0.6rem;
+		font-size: 1.02rem;
+		color: #e5e7eb;
+		margin-bottom: 0.5rem;
+	}
+	.about-intersection-key {
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		color: #2e5cff;
+		border: 1px solid rgba(46, 92, 255, 0.45);
+		border-radius: 2px;
+		padding: 0.1rem 0.35rem;
+	}
+	.about-intersection dd {
+		margin: 0;
+	}
+	.about-intersection dd p {
+		font-size: 0.88rem;
+		line-height: 1.65;
+		color: #9ca3af;
+	}
+	.about-intersection-members {
+		margin-top: 0.6rem;
+		font-size: 0.68rem !important;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		color: #4b5563 !important;
+	}
+
+	/* ---- biography ---- */
+	.about-bio {
+		max-width: 44rem;
+	}
+	.about-bio p {
+		font-size: 1rem;
+		line-height: 1.8;
+		color: #cbd5e1;
+		margin-bottom: 1.5rem;
+	}
+	.about-closer {
+		font-size: 1.15rem !important;
+		color: #e5e7eb !important;
+		letter-spacing: 0.02em;
+		padding-top: 0.75rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+	}
+</style>
