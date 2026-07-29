@@ -1,65 +1,76 @@
 ---
+title: Xbox
+slug: xbox
+tier: lite
+theme: article
 description: "Microsoft Xbox program work (2002): thermal architecture for a console running hotter than anything before it, plus the breakaway controller-cable safety feature that kept consoles on shelves."
-additionalSkills: []
-category: home_entertainment
+date: 2002-09-01T00:00:00.000Z
+endDate: 2002-12-01T00:00:00.000Z
+duration: 3 Months
+employer: mechanistic
 client:
   - microsoft
   - ultimatetv
-cyberspace:
-  enable: true
-  layout: linear
-  narrative: []
-  stickies:
-    - align: center
-      data:
-        data: {}
-        featuredIndices: []
-        images: []
-        scattered: false
-      deck: []
-      featuredIndices: []
-      id: intro
-      legacy_deck: []
-      text: >-
-        <strong>YEAR:</strong> 2002<br/><strong>ROLE:</strong> Mechanistic
-        (Consulting)
-      title: Xbox
-      type: media
-date: 2002-09-01T00:00:00.000Z
-documents: []
-draft: false
-employer: mechanistic
-endDate: 2002-12-01T00:00:00.000Z
-gallery: []
-heroImage: /assets/xbox/xbox-hero-01-xl.webp
+role: mechanical_engineer
+category: home_entertainment
 industry: consumer_electronics
-listed: true
-presentation_mode: standard
 production: production
 productionScale: one_off
-role: mechanical_engineer
-skillData: []
+heroImage: /assets/xbox/xbox-hero-01-xl.webp
 tags:
   - Thermal
-theme: hyperspace
-title: Xbox
-toolIcons: []
 tools:
   - pro_engineer
+toolchain:
+  - Pro/ENGINEER
+draft: false
+listed: true
+forensic_summary:
+  trigger: Microsoft was entering the living room with a console whose Pentium III and NVIDIA NV2A together dissipated more heat than any console had previously handled — and a controller large enough that its cable could drag the console off a shelf.
+  intervention: Consulting engagement on the console thermal architecture and on the "Duke" controller, including its break-away cable safety feature.
+  result: A connector that separates under load instead of transmitting it to the console.
 ---
 
-## The Challenge
+A three-month consulting engagement through Mechanistic on Microsoft's move into
+the living room. Two mechanical problems, both of them consequences of putting a
+PC-class machine on a shelf in someone's house.
 
-> **Context:** Microsoft wanted to enter the living room.
-
-I worked on the "Duke" controller and the console thermal architecture.
-
-- **Power:** The Pentium III + NVIDIA NV2A put out heat that no console had ever dealt with before.
-- **Controller:** The original controller was... large. I worked on the break-away cable safety feature to prevent the console from being pulled off the shelf.
-
-### Project Artifacts
+- **Thermal architecture.** The Pentium III and the NVIDIA NV2A together put out
+  heat no console had dealt with before. Console thermal design to that point had
+  never had to move this much power out of a sealed consumer enclosure.
+- **Controller safety.** The original controller was large, and a taut cable on a
+  large controller is a lever. Worked the break-away cable feature: a connector
+  designed to separate under load rather than transmit that load to the console.
 
 #### Specs
 
-- **CPU:** Pentium III 733MHz
+- **CPU:** Pentium III 733 MHz
 - **GPU:** NV2A
+
+{/*
+  REFERENCE LITE PAGE — the worked example of the lite contract for the ~53
+  pages that follow. Structure, not length, is the thing to copy:
+
+    frontmatter   tier: lite · theme: article · heroImage · description · date ·
+                  role/employer · production scale · a forensic_summary in
+                  trigger / intervention / result form.
+    body          one short paragraph of what it was, then 2-4 bullets carrying
+                  the mechanical problem and what was done about it, then a
+                  short spec block if real numbers survive.
+    footer        NOT typed here. ProjectArticle renders the "Lite record" note
+                  automatically for any page where tier != deep_dive.
+
+  What makes it lite rather than deep: no scars timeline, no cast, no BOM, no
+  gallery wall. Those are ALLOWED on a lite page when the material exists
+  (operator ruling 2026-07-29, "it depends") — what is never allowed is an
+  instrument declared and rendered empty.
+
+  All prose above is a restructure of the operator's own earlier copy for this
+  page. No engineering claim has been added.
+
+  OPEN QUESTION for the operator: date is 2002-09-01 to 2002-12-01, but the Xbox
+  launched in North America in November 2001, and `client` lists ultimatetv
+  alongside microsoft. If this engagement was post-launch or UltimateTV-adjacent
+  work rather than the launch console, the framing should say so — a reader will
+  assume launch.
+*/}

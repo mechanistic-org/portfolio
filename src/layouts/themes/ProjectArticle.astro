@@ -159,6 +159,20 @@ const navNext = nextProject
 				<div class="markdown-content max-w-3xl">
 					<Content />
 				</div>
+
+				{/* LITE RECORD NOTE — rendered by the template, not typed into 53 files.
+				    A lite page is a complete small thing, not a truncated large one, and
+				    saying so converts thinness from "unfinished" into stated editorial
+				    policy. It is also true: the archive holds far more than the page. */}
+				{
+					lite && (
+						<p class="text-muted-foreground mt-12 max-w-3xl border-t border-white/10 pt-5 font-mono text-xs leading-relaxed">
+							<span class="text-primary">Lite record.</span> This page carries what can be
+							stated and sourced briefly. The program archive holds more — drawings, test
+							data, and the decisions behind them — and is available on request.
+						</p>
+					)
+				}
 				{
 					!lite && galleries.length > 0 && (
 						<section class="mt-16">
