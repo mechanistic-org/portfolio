@@ -113,30 +113,26 @@ export default defineConfig({
 		mdx(),
 		react(),
 		sitemap({
+			// Surfaces that exist for the operator, the build, or agents - not for a
+			// reader arriving from search. Keep this list in sync with the
+			// X-Robots-Tag rules in public/_headers: dropping a URL from the sitemap
+			// does not stop it being indexed, it only stops it being advertised.
+			// NOTE: /colophon/ is excluded only until the "how I work" rewrite lands;
+			// it currently documents a retired pipeline step.
 			filter: (page) => {
-				const isDilute =
-					page.includes("/colophon/") ||
-					page.includes("/docs/") ||
-					page.includes("/raw/") ||
-					page.includes("/archive/") ||
-					page.includes("/resume/"); // Exclude alternate resume views, main resume is typically /about/bio or similar?
-				// Actually list shows https://eriknorris.com/resume/ exists. Keep that one?
-				// User said "orphaned/unused".
-				// Let's be strict on docs/colophon/raw/archive first.
-				// If page is exactly resume/, keep it?
-				// content: https://eriknorris.com/resume/
-				// content: https://eriknorris.com/resume/pdf/
-				// Let's filter sub-resumes.
-				if (
-					page.includes("/colophon/") ||
-					page.includes("/docs/") ||
-					page.includes("/raw/") ||
-					page.includes("/archive/")
-				) {
-					return false;
-				}
-				// Filter resume sub-pages but keep the main one?
-				// The URL is https://eriknorris.com/resume/
+				const EXCLUDED = [
+					"/colophon/",
+					"/docs/",
+					"/raw/",
+					"/archive/",
+					"/meta/",
+					"/api/",
+					"/kitchen-sink",
+					"/design-system",
+					"/assembly",
+				];
+				if (EXCLUDED.some((segment) => page.includes(segment))) return false;
+				// Keep the canonical resume; drop any alternate view still in the tree.
 				if (page.includes("/resume/") && page !== "https://eriknorris.com/resume/") {
 					return false;
 				}

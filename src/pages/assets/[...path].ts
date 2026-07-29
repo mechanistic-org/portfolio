@@ -16,8 +16,15 @@ let devFs: any = null;
 let devPath: any = null;
 let devMime: any = null;
 
+// Some content (notably the c24 canon record) addresses assets as
+// `/assets/r2/<slug>/…`, but `sync_r2.py` mirrors R2_MIRROR verbatim, so the
+// bucket has no `r2/` top-level key. This normalization used to exist only in
+// the DEV branch below, which is why those images resolved locally and 404'd in
+// production. Normalize once, up front, for every environment.
+const stripR2Prefix = (p: string) => p.replace(/^\/?r2\//, "");
+
 export const GET: APIRoute = async ({ params, locals }) => {
-	const assetPath = params.path;
+	const assetPath = params.path && stripR2Prefix(params.path);
 
 	if (!assetPath) {
 		return new Response("Not Found", { status: 404 });
@@ -78,15 +85,8 @@ export const GET: APIRoute = async ({ params, locals }) => {
 			let decodedPath = decodeURIComponent(assetPath);
 
 			// NORMALIZE SLASHES: Ensure consistent forward slashes for checking
-			const checkPath = decodedPath.replace(/\\/g, "/");
-
-			// [DEV FIX] Strip 'r2/' prefix if present
-			if (checkPath.startsWith("r2/")) {
-				decodedPath = checkPath.substring(3);
-			} else if (checkPath.startsWith("/r2/")) {
-				// Handle potential leading slash
-				decodedPath = checkPath.substring(4);
-			}
+			// (the 'r2/' prefix is already stripped for every environment above)
+			decodedPath = decodedPath.replace(/\\/g, "/");
 
 			// RESOLVE ROOT: Ensure OS-correct slashes for the root
 			const stagingRoot = path.resolve("D:/GitHub/portfolio-assets/R2_MIRROR");

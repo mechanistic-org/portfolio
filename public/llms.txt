@@ -30,7 +30,7 @@ Erik Norris is a Principal Mechanical Architect specializing in high-fidelity ha
 ### 3. Avegant Glyph "Vulcan" (Personal Theater Wearable, 2015-17)
 *   **Role:** Lead Mechanical Architect / Product Design Lead
 *   **Challenge:** Integrate head-mounted display optics into high-fidelity headphones with consumer-grade fit and durability.
-*   **Outcome:** Headband fatigue life engineered to 76,500 cycles - 300% over specification.
+*   **Outcome:** Cleanroom optical yield recovered from 35.40% to 77.87%; headband stabilized at 7.5 N clamp force on 0.8 mm hard-rolled stainless via Central Composite Design FEA and carried through lifecycle validation into mass production.
 *   **Source:** https://eriknorris.com/projects/avegant-glyph/
 
 ## Semantic Navigation

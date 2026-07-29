@@ -11,6 +11,11 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+# scratch logs at the repo root kept getting committed and served (build-log.txt,
+# debug_log.txt, nlm_status.txt, public/sanity.log). Nothing ships a log.
+/*.log
+/*log*.txt
+public/**/*.log
 
 # environment variables
 .env

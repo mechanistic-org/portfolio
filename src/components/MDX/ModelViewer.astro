@@ -11,27 +11,30 @@ interface Props {
 // import logo from "@assets/branding/EN_logo_white_1024.png";
 const logo = { src: "/assets/branding/logo.png" };
 const DEFAULT_POSTER = logo.src;
-const NEIL_ARMSTRONG_GLB = "https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb";
-const MOON_ENV = "https://modelviewer.dev/shared-assets/environments/moon_1k.hdr";
 
 import { getAssetUrl } from "../../utils/assets";
 
 const {
-	src = NEIL_ARMSTRONG_GLB,
-	alt = "Neil Armstrong",
+	src,
+	alt = "",
 	poster = DEFAULT_POSTER,
 	environmentImage,
 	cameraOrbit = "0deg 75deg 105%",
 	autoRotate = false,
 } = Astro.props;
 
-const finalSrc = getAssetUrl(src);
+// No model, no viewer. This component previously defaulted to Google's
+// NeilArmstrong.glb demo asset, which shipped a stock spacesuit to 21 project
+// pages as though it were portfolio content. A missing `src` now renders
+// nothing rather than something misleading.
+const finalSrc = src ? getAssetUrl(src) : null;
 const finalPoster = getAssetUrl(poster);
-
-const isFallback = src === NEIL_ARMSTRONG_GLB;
-const finalEnv = environmentImage || (isFallback ? MOON_ENV : "neutral");
+const finalEnv = environmentImage || "neutral";
 const uid = "mv-" + Math.random().toString(36).substr(2, 9);
 ---
+
+{
+	finalSrc && (
 
 <div
 	class="relative my-12 h-[500px] w-full overflow-hidden rounded-xl border border-neutral-800 bg-neutral-900/50"
@@ -73,6 +76,8 @@ const uid = "mv-" + Math.random().toString(36).substr(2, 9);
 		<div slot="poster" class="absolute inset-0 flex items-center justify-center"></div>
 	</model-viewer>
 </div>
+	)
+}
 
 <script define:vars={{ uid, autoRotate, cameraOrbit }}>
 	const viewer = document.querySelector(`#${uid}`);

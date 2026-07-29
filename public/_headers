@@ -1,0 +1,36 @@
+# Cloudflare Pages header rules.
+#
+# Operator-facing surfaces. These are useful to keep deployed (they are how the
+# site is inspected and how agents read it) but they are not for a reader
+# arriving from search, and several of them read as internal process noise on a
+# hiring portfolio. Excluding them from the sitemap only stops them being
+# advertised - X-Robots-Tag is what actually keeps them out of an index.
+#
+# Keep in sync with the sitemap filter in astro.config.mjs.
+
+/meta/*
+  X-Robots-Tag: noindex, nofollow
+
+/docs/*
+  X-Robots-Tag: noindex, nofollow
+
+/api/*
+  X-Robots-Tag: noindex, nofollow
+
+/kitchen-sink
+  X-Robots-Tag: noindex, nofollow
+
+/kitchen-sink/*
+  X-Robots-Tag: noindex, nofollow
+
+/design-system
+  X-Robots-Tag: noindex, nofollow
+
+/design-system/*
+  X-Robots-Tag: noindex, nofollow
+
+/assembly
+  X-Robots-Tag: noindex, nofollow
+
+/assembly/*
+  X-Robots-Tag: noindex, nofollow
