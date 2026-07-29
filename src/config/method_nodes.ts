@@ -245,6 +245,17 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		practice: "diagnosis",
 	},
 	{
+		id: "anthropometry",
+		name: "Human-engineering standards & anthropometric fit",
+		domains: ["sensory", "matter_heat"],
+		value: 8,
+		blurb:
+			"Sized the Glyph headband, IPD range and nosepiece against military human-engineering criteria (MIL-STD-1472F, MIL-STD-1787C) and aircrew anthropometry — Bitragion-Coronal Arc, Nasal Root to Wall, Menton Projection. The forensic audit also records what that cost: 1960s US aviator surveys assume a long, narrow Western head profile, so short-and-wide profiles fit poorly. Uneven weight distribution and nosepiece discomfort across a large share of the global market, traceable to the data source rather than to the geometry.",
+		evidence: "avegant-glyph",
+		href: "/projects/avegant-glyph/",
+		practice: "design",
+	},
+	{
 		id: "regulatory",
 		name: "Regulatory & compliance (UL · FCC · EMI)",
 		domains: ["sensory", "data_ai"],
@@ -292,7 +303,14 @@ export const COMPETENCY_COVERAGE: Record<string, string | null> = {
 	"PLM Architecture (Agile / Arena / Windchill)": "change-control",
 	"Thermal Simulation (CFD)": "thermal-architecture",
 	"UL 1472 / UL 20 / FCC": "regulatory",
-	"MIL-STD-1472G": null, // NO corpus evidence. Do not add a node without one.
+	// Evidence located 2026-07-29 (operator). NOTE the revision letter: the Glyph
+	// project documentation references MIL-STD-1472**F** (plus MIL-STD-1787C),
+	// not G. This key still reads "G" because it must match resume_master.ts
+	// verbatim or the drift check fires — the résumé's own G/F attribution is an
+	// open question, since resume_master.ts:102 and linkedin_master.ts:68 both
+	// attribute 1472G to NOON, a different program whose documentation has not
+	// been checked. Do not blanket-replace G with F.
+	"MIL-STD-1472G": "anthropometry",
 	"Class III Medical Standards": null, // cardiac-ablation work (1985) is on /about; no project page cites it
 	"Class-A Surfacing": "human-factors",
 };
