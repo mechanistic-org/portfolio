@@ -19,11 +19,14 @@ This site is the system of record. EN-OS is the machine that builds it.
 
 EN-OS is a local agentic stack — a personal operating system for forensic memory. The pipeline runs in one direction:
 
-1. **The Archive.** Raw evidence — scans, CAD, email corpora, test logs — curated into a staged asset vault.
-2. **The Interrogation.** Project archives loaded into NotebookLM notebooks (174 and counting) and forensically interrogated: _what failed, what was done, what did it yield._
-3. **The Registry.** Extracted intelligence lands in a versioned forensic registry — synced summaries, mined session artifacts, a semantic database behind an MCP router.
-4. **The Hydration.** Scripts write the intelligence into Zod-validated frontmatter. Schema, not vibes: every claim a field, every field typed.
-5. **The Site.** Astro compiles the registry into static pages — plus machine-readable surfaces (`llms.txt`, `/api/projects.json`, `resume.json`) so the next reader doesn't have to be human.
+1. **The Locker.** Raw evidence — scans, CAD, email corpora, test logs — extracted into an immutable, content-hashed archive. 152 program vaults. Nothing downstream may contradict it, and nothing may edit it.
+2. **The Interrogation.** Program archives are read against themselves: _what failed, what was done, what did it yield._ Machine assistance does the conversions — OCR, transcription, cataloguing, dedup. It does not do the interpretation.
+3. **The Canon.** One curated record per project, in Markdown, in its own git repository. Each record names the locker directory its claims trace to. This is the source of truth — not the website, not the résumé.
+4. **The Generator.** A single writer projects canon into the site's content files, and proves it every run: a field-by-field diff canon → site → canon, plus a double-generate hash comparison. Non-lossless or non-idempotent exits non-zero. The site is a **read-only render target**; nothing edits a published page by hand.
+5. **The Gate.** Nothing publishes below its tier's bar. Machine placeholders, leaked markup, demo assets posing as evidence and unsourced deep dives fail the build outright. Incompleteness is reported as a burn-down rather than hidden.
+6. **The Site.** Astro compiles to static HTML — plus machine-readable surfaces (`llms.txt`, `/api/projects.json`, `resume.json`) so the next reader doesn't have to be human.
+
+The direction matters more than the tooling. Truth flows one way, and the thing a visitor reads is the last link in the chain, never the first.
 
 ## Four Generations of Memory
 
@@ -57,10 +60,11 @@ Honesty clause: the machine misfired, publicly.
 
 | Metric | Value |
 | :--- | :--- |
-| NotebookLM notebooks interrogated | 174 |
-| Project records in the collection | 122 (111 published) |
-| Descriptions hydrated in a single registry pass | 97 |
-| Deep-dive cohort under contract | 22 pages |
+| Program vaults in the immutable locker | 152 |
+| Project records in the collection | 120 (87 published) |
+| Curated canon records | 30 |
+| Deep-dive cohort under contract | 42 (15 published) |
+| Published pages meeting their tier bar | 14 — the rest are a tracked burn-down, not a secret |
 | Memory generations survived | 4 |
 | Machine-readable surfaces | `llms.txt` · `projects.json` · `resume.json` |
 

@@ -4,11 +4,11 @@
 
 **[eriknorris.com](https://eriknorris.com)**
 
-> **"I built this sovereign infrastructure because I treat software intent with the exact same forensic rigor I apply to physical hardware."**
+Thirty years of shipped hardware across SGI, Frog Design, WebTV/Microsoft, Digidesign/Avid, Kaleidescape, Avegant, Noon and Hyphen — workstations, pro-audio consoles, set-top boxes, a head-mounted display, and a cobotic food-assembly platform.
 
-This repository is a headless, agentic data pipeline that compiles **digital exhaust into data stories**. It is a "living portfolio" engine that forensically titrates 30 years of engineering "Red Gold" (raw project data, CAD, PDFs) into a high-performance static identity.
+This repository builds the record of it. Every published claim traces to an artifact: an ECO number, a drawing revision, an inspection report with a measurement on it. Where it does not, the page says so and downgrades the claim.
 
-Operating at the intersection of deep engineering legacy and modern software agility, I architect the hardware interface for the physical world.
+The pipeline below is the instrument that recovered that evidence from thirty years of paper and drives. It is not the product. Start with [the C|24 teardown](https://eriknorris.com/projects/c24/).
 
 ---
 
@@ -25,11 +25,14 @@ Operating at the intersection of deep engineering legacy and modern software agi
 
 This project follows the **"Law of Asset Sovereignty"**:
 
-1.  **Intelligence First:** Content is mined from unstructured data (PDFs, Engineering Notebooks) using **NotebookLM**, then crystallized into Markdown Boluses (`_intelligence.md`).
-2.  **ETL Pipeline:** We run a sophisticated Extraction, Transformation, and Load pipeline: `Raw PDF` -> `NotebookLM Bolus` -> `Dynamic Astro Collection` -> `Static HTML`.
-3.  **Air Gapped:** Assets (images, 3D models) are stored separately in an R2 bucket (`assets.eriknorris.com`), never checked into Git.
-4.  **Agentic Layer:** The `.agent` directory contains autonomous skills (`/scaffold-project`, `/deploy-production`) that manage the codebase.
-5.  **Zero Runtime:** The site is pre-compiled into static HTML for maximum speed and security.
+1.  **Immutable locker.** Raw evidence is extracted into a content-hashed archive of 152 program vaults. Nothing edits it; everything downstream cites it.
+2.  **Canon is the source of truth.** One curated Markdown record per project, in its own git repo, each naming the locker directory its claims trace to. Not the website, not the résumé.
+3.  **Single writer, proven every run.** `scripts/project_pipeline.py` projects canon into site content and verifies it: a field-by-field diff canon → site → canon plus a double-generate hash check. Non-lossless or non-idempotent exits non-zero. **Site content is a read-only render target** — no hand-editing published pages.
+4.  **Publish gate.** `npm run build` refuses to ship machine placeholders, leaked markup, demo assets posing as evidence, or an unsourced deep dive. Incompleteness is reported as a burn-down rather than concealed.
+5.  **Asset sovereignty.** Images and 3D models live in Cloudflare R2 (`assets.eriknorris.com`), never in Git.
+6.  **Zero runtime.** Pre-compiled to static HTML. `output: "static"` is guarded at agent-time and build-time.
+
+> Superseded 2026-07: an earlier NotebookLM → `_intelligence.md` bolus → hydration flow. `hydrate_content.py` was deleted for destructively rewriting curated frontmatter; NotebookLM is now one input among several, not the system of record.
 
 ### 🚀 Quick Start (Local Dev)
 
