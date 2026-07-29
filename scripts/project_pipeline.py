@@ -9,20 +9,50 @@ in the canon record as RELATABLE markdown (dossier tables + a ## Galleries
 section), and the generator partitions it back into the lean index.mdx + the
 dormant data.json / _entropy.json sidecar hooks.
 
-Modes (all run by default): extract -> generate -> verify (lossless) -> idempotency.
-Non-destructive: never writes the live src/content/projects/<slug>/index.mdx.
+Modes:
+  (default)      generate -> verify (lossless) -> idempotency.   READ-ONLY.
+  --extract      site MDX -> canon record FIRST. Bootstrap only. Writes canon.
+  --write-live   canon record -> the live site MDX. Writes the site.
+
+Directions and what each one may write:
+
+  canon record  --generate-->  scratch (default) or live site (--write-live)
+  site MDX      --extract-->   canon record                    (--extract only)
+
+`extract` used to run on the bare invocation, because this began as the C24
+spike when no canon records existed and the only way to get one was to derive
+it from the site. That default became destructive the moment records started
+being hand-curated: `generate` deliberately drops CANON_ONLY fields on the way
+to the site (correct - provenance is canon's, not the page's), so `extract`
+then read a file that structurally cannot contain them and wrote the empty
+literals back over canon. Both halves individually correct; composed, they
+deleted provenance. Measured damage before the 2026-07-29 fix: 32 records with
+`sources: []`, 28 sharing one fabricated `created` date, and all 30 forced to
+`sensitivity: public` - the publish gate, defaulted open by a script.
+
+The old docstring claimed "non-destructive" because it never wrote the live
+index.mdx. It was defending the render target and overwriting the source of
+truth. The protection pointed backwards.
 """
 import os, sys, json
+from datetime import date
 import yaml
 
 SLUG = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith("-") else "c24"
 WRITE_LIVE = "--write-live" in sys.argv  # generate-only, targets the live site dir
-CANON_DIR  = r"H:\workspace\canon\entities\projects\%s" % SLUG
+DO_EXTRACT = "--extract" in sys.argv     # opt-in: the ONLY mode that writes canon
+
+# Repo paths derive from this file, not a hardcoded absolute. The old constants
+# pointed at D:\GitHub\portfolio, so a run from a git worktree silently read and
+# wrote the MAIN checkout instead of the tree the operator was working in.
+REPO_ROOT  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+CANON_ROOT = os.environ.get("CANON_ROOT", r"H:\workspace\canon")
+CANON_DIR  = os.path.join(CANON_ROOT, "entities", "projects", SLUG)
 CANON_REC  = os.path.join(CANON_DIR, "%s.md" % SLUG)
-SITE_DIR   = r"D:\GitHub\portfolio\src\content\projects\%s" % SLUG
+SITE_DIR   = os.path.join(REPO_ROOT, "src", "content", "projects", SLUG)
 SITE_MDX   = os.path.join(SITE_DIR, "index.mdx")
 SITE_ENTROPY = os.path.join(SITE_DIR, "_entropy.json")
-OUT_DIR    = r"D:\GitHub\portfolio\scripts\_roundtrip_out\%s" % SLUG
+OUT_DIR    = os.path.join(REPO_ROOT, "scripts", "_roundtrip_out", SLUG)
 
 # --- Field ownership ---
 # Dossier fields -> prose-first markdown tables (the DossierCast/Scars/Bom/Timeline consumers).
@@ -91,18 +121,35 @@ def render_table(rows, cols):
 
 
 def parse_table(md, cols):
-    rows, started = [], False
-    header = [c.title() for c in cols]
+    """Parse a dossier table using the columns the table ACTUALLY declares.
+
+    Previously this required an exact prefix match against the full column
+    contract, so adding a column to DOSSIER silently broke every record written
+    before it: the header no longer matched, `started` stayed False, and the
+    field parsed as an empty list. Reading the table's own header instead makes
+    a column addition additive — old records keep round-tripping, and the new
+    column simply arrives empty until something writes it.
+
+    Empty cells are omitted rather than emitted as "", so an absent optional
+    field falls through to its schema default instead of failing enum
+    validation on an empty string.
+    """
+    known = {c.title(): c for c in cols}
+    rows, actual = [], None
     for line in md.splitlines():
         if not line.strip().startswith("|"):
             continue
         cells = [c.strip().replace("\\|", "|") for c in line.strip().strip("|").split("|")]
-        if cells[:len(cols)] == header:
-            started = True; continue
+        if actual is None:
+            # A header row is one whose every cell names a column we know about.
+            # No data row can satisfy that, so it is a safe discriminator.
+            if cells and all(c in known for c in cells):
+                actual = [known[c] for c in cells]
+            continue
         if set("".join(cells)) <= set("-: "):
             continue
-        if started:
-            rows.append({c: cells[i] for i, c in enumerate(cols)})
+        rows.append({c: cells[i] for i, c in enumerate(actual)
+                     if i < len(cells) and cells[i] != ""})
     return rows
 
 
@@ -222,10 +269,37 @@ def compute_tier(data):
 # ---------------------------------------------------------------- extract
 def extract():
     data, body = read_mdx(SITE_MDX)
-    rec = {"title": data.get("title"), "slug": data.get("slug", SLUG),
-           "created": "2026-06-13", "updated": "2026-06-13", "type": "entity",
-           "tier": compute_tier(data),
-           "sensitivity": "public", "confidence": "high", "sources": []}
+
+    # MERGE, don't clobber. Everything in CANON_ONLY is owned by the canon record
+    # and is deliberately absent from the site MDX (generate() drops it). Reading
+    # its absence as truth is what destroyed provenance on 32 records. When a
+    # record already exists, its values win; the literals below only ever seed a
+    # brand-new record.
+    prior = {}
+    if os.path.exists(CANON_REC):
+        prior, _ = read_mdx(CANON_REC)
+
+    rec = {"title": data.get("title"), "slug": data.get("slug", SLUG)}
+
+    # `created` is never invented. Preserve it, or leave it out and say so.
+    if prior.get("created"):
+        rec["created"] = prior["created"]
+    else:
+        print(f"[extract]  WARNING: no prior `created` for {SLUG} — omitted, set it by hand")
+    rec["updated"] = date.today().isoformat()
+    rec["type"] = prior.get("type", "entity")
+    rec["tier"] = compute_tier(data)
+    # The publish gate. canon/SCHEMA.md: `public | sanitized | confidential |
+    # unset`, DEFAULT UNSET. This used to be hardcoded "public", which marked
+    # every record publishable without anyone deciding. A new record starts
+    # closed and stays closed until curation opens it.
+    rec["sensitivity"] = prior.get("sensitivity", "unset")
+    if prior.get("confidence"):
+        rec["confidence"] = prior["confidence"]
+    rec["sources"] = prior.get("sources", [])
+    if not rec["sources"]:
+        print(f"[extract]  WARNING: {SLUG} has no `sources` — every claim should cite a locker item")
+
     dossier_fields = {f for f, _, _ in DOSSIER}
     for k, v in data.items():
         if k in DROP_FIELDS or k in dossier_fields or k == "cyberspace":
@@ -234,6 +308,10 @@ def extract():
     if os.path.exists(SITE_ENTROPY):
         with open(SITE_ENTROPY, encoding="utf-8") as f:
             rec["entropy"] = json.load(f)
+    elif prior.get("entropy") is not None:
+        # entropy is CANON_ONLY too: no sidecar on the site is not evidence of
+        # absence in canon.
+        rec["entropy"] = prior["entropy"]
     # build record body: prose + ## Galleries + dossier tables
     record_body = body.rstrip("\n")
     if isinstance(data.get("cyberspace"), dict):
@@ -335,13 +413,26 @@ def idempotency():
 
 
 if __name__ == "__main__":
+    if WRITE_LIVE and DO_EXTRACT:
+        sys.exit("[pipeline] --write-live and --extract are opposite directions; pick one")
+
     if WRITE_LIVE:
-        # Live write: canon record is authoritative — NO extract (extract overwrites the
-        # curated canon record from the site; that direction only runs in validation mode).
+        # Live write: canon record is authoritative — never extract here.
         generate()
         print("\n=== WRITE-LIVE ===  canon record -> live site MDX (validation mode proves losslessness)")
         sys.exit(0)
-    extract(); generate()
+
+    if DO_EXTRACT:
+        # The ONLY canon-writing path, and it must be asked for by name.
+        # Bootstrap a slug that has no record yet; on an existing record it now
+        # merges CANON_ONLY rather than overwriting it.
+        extract()
+
+    # Default is READ-ONLY: generate to the scratch dir and prove the canon
+    # record still reproduces the published page. Without --extract this is a
+    # genuine drift check (canon -> site vs. what is actually committed), which
+    # is what "validation" should have meant all along.
+    generate()
     v = verify(); i = idempotency()
     print(f"\n=== SUMMARY ===  lossless={v}  idempotent={i}")
     sys.exit(0 if (v and i) else 1)
