@@ -18,8 +18,8 @@
  *
  *   WARN  (exit 0)  — completeness against the tier bar. Reported as a
  *                     burn-down, NOT build-breaking. Hard-failing completeness
- *                     today would break the build on 69 of 86 published pages
- *                     and amount to cutting the corpus to ~17, which the
+ *                     today would break the build on 73 of 87 published pages
+ *                     and amount to cutting the corpus to ~14, which the
  *                     operator explicitly ruled against (roster is 42 deep /
  *                     54 lite / 25 cut).
  *
@@ -37,10 +37,17 @@
  *             instrument that renders empty. Thin does not discredit;
  *             filler and empty frames do.
  *
- *   deep_dive lite bar, plus >= 1200 body words and >= 6 image references.
+ *   deep_dive lite bar, plus >= 1200 body words, >= 6 image references, and at
+ *             least one cited locker item in its canon record (portfolio#142).
+ *             Provenance is what makes "every published claim cites a locker
+ *             item" verifiable rather than asserted. The canon vault lives
+ *             outside this repo, so when it is unreachable (CI) that one check
+ *             degrades to skipped rather than failing the build.
  *
- * Run: node scripts/audits/validate_tier_gate.mjs [--strict]
- *   --strict promotes WARN to ERROR. Use it once the burn-down reaches zero.
+ * Run: node scripts/audits/validate_tier_gate.mjs [--strict] [--verbose]
+ *   --strict  promotes WARN to ERROR. Use it once the burn-down reaches zero.
+ *   --verbose lists every below-bar page instead of the burn-down summary.
+ *   CANON_ROOT overrides the vault location.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -71,6 +78,70 @@ const warns = [];
 function wordCount(body) {
 	return body.trim().split(/\s+/).filter(Boolean).length;
 }
+
+/**
+ * Count `sources` entries in the slug's canon record.
+ *
+ * The canon vault is outside this repo and is not present in CI, so a missing
+ * vault must not fail the build — it degrades to "unknown" and the check is
+ * skipped. Returns: entry count, 0 for an empty list, or null when there is no
+ * record. Undefined when the vault itself is unreachable.
+ */
+const CANON_ROOT = process.env.CANON_ROOT || "H:\\workspace\\canon";
+const CANON_AVAILABLE = fs.existsSync(path.join(CANON_ROOT, "entities", "projects"));
+
+function sourcesForSlug(slug) {
+	if (!CANON_AVAILABLE) return undefined;
+	const rec = path.join(CANON_ROOT, "entities", "projects", slug, `${slug}.md`);
+	if (!fs.existsSync(rec)) return null;
+	try {
+		const { data } = matter(fs.readFileSync(rec, "utf8"));
+		return Array.isArray(data.sources) ? data.sources.length : 0;
+	} catch {
+		return 0;
+	}
+}
+
+/**
+ * Identity consistency: the résumé, the LinkedIn experience section and the
+ * /how-i-work pillar must carry the same basic facts (operator ruling
+ * 2026-07-29). `resume_master.ts` is the source of truth for the claim set;
+ * `method_nodes.ts` must account for every competency in it — mapped to a node,
+ * or explicitly null with a reason. An unaccounted competency is drift.
+ *
+ * Parsed as text rather than imported: these are TypeScript modules and this is
+ * a plain node script that runs before the Astro build.
+ */
+function competencyDrift() {
+	const rmPath = path.resolve("src/config/resume_master.ts");
+	const mnPath = path.resolve("src/config/method_nodes.ts");
+	if (!fs.existsSync(rmPath) || !fs.existsSync(mnPath)) return [];
+
+	const rm = fs.readFileSync(rmPath, "utf8");
+	const block = rm.match(/competencies:\s*\{([\s\S]*?)\n\t\},/);
+	if (!block) return [];
+	const claimed = [...block[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]);
+
+	const mn = fs.readFileSync(mnPath, "utf8");
+	const cov = mn.match(/COMPETENCY_COVERAGE[^{]*\{([\s\S]*?)\n\};/);
+	if (!cov) return ["method_nodes.ts has no COMPETENCY_COVERAGE map"];
+	const accounted = new Set([...cov[1].matchAll(/"([^"]+)":/g)].map((m) => m[1]));
+
+	// Every node id referenced by the map must actually exist.
+	const nodeIds = new Set([...mn.matchAll(/\n\t\tid:\s*"([^"]+)"/g)].map((m) => m[1]));
+	const referenced = [...cov[1].matchAll(/:\s*"([^"]+)"/g)].map((m) => m[1]);
+
+	const out = [];
+	for (const c of claimed) {
+		if (!accounted.has(c)) out.push(`resume competency not accounted for in COMPETENCY_COVERAGE: "${c}"`);
+	}
+	for (const id of referenced) {
+		if (!nodeIds.has(id)) out.push(`COMPETENCY_COVERAGE points at a non-existent node id: "${id}"`);
+	}
+	return out;
+}
+
+for (const why of competencyDrift()) errors.push({ rel: "src/config/method_nodes.ts", why });
 
 const rows = [];
 for (const dir of fs.readdirSync(PROJECTS, { withFileTypes: true })) {
@@ -119,6 +190,15 @@ for (const dir of fs.readdirSync(PROJECTS, { withFileTypes: true })) {
 		if (tier === "deep_dive") {
 			if (words < 1200) missing.push(`deep_dive body>=1200 (has ${words})`);
 			if (imgs < 6) missing.push(`deep_dive images>=6 (has ${imgs})`);
+			// PROVENANCE (portfolio#142). `sources` is CANON_ONLY, so it is stripped
+			// on the way to the site and cannot be read here — the citation lives in
+			// the canon record. Checking it is what makes "every published claim
+			// cites a locker item" verifiable rather than asserted, which is the
+			// site's entire thesis. Without this check the field is bookkeeping
+			// theater and should be deleted instead.
+			const cited = sourcesForSlug(dir.name);
+			if (cited === null) missing.push("no canon record (deep_dive)");
+			else if (cited === 0) missing.push("canon sources[] empty (deep_dive)");
 		}
 
 		rows.push({ slug: dir.name, tier, words, imgs, hero: !!fm.heroImage, missing });
@@ -132,6 +212,7 @@ console.log("-------------------------------------------------------");
 console.log("Tier publish gate");
 console.log("-------------------------------------------------------");
 console.log(`published pages     : ${rows.length}`);
+console.log(`canon vault         : ${CANON_AVAILABLE ? CANON_ROOT : "unavailable - provenance check skipped"}`);
 console.log(`meeting their bar   : ${pass.length}`);
 console.log(`below bar (burn-down): ${rows.length - pass.length}`);
 const byTier = (t) => rows.filter((r) => r.tier === t);

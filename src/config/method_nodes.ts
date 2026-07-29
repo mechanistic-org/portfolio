@@ -195,7 +195,107 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		href: "/colophon/",
 		practice: "governance",
 	},
+
+	// ── Added 2026-07-29 on the consistency ruling: the résumé, the LinkedIn
+	//    experience section and these pages carry the same basic facts. These five
+	//    are résumé competencies that had no node, because the first pass was built
+	//    bottom-up from citable stories instead of top-down from the claim set.
+	{
+		id: "haptics",
+		name: "Haptic & kinematic tuning",
+		domains: ["sensory", "motion_fault"],
+		value: 7,
+		blurb:
+			"Preserved the premium 'scrub' feel of a $10,000 console on commodity parts — a Bourns EM14 jog wheel with six exposed 0.42 mm leads got a pre-terminated harness spec and a custom surround (ECO 13082) rather than a cost-up.",
+		evidence: "c24",
+		href: "/projects/c24/",
+		practice: "design",
+	},
+	{
+		id: "dfa",
+		name: "DFM / DFA for automated assembly",
+		domains: ["matter_heat", "motion_fault"],
+		value: 8,
+		blurb:
+			"The C|24 top panel (P/N 9420-55105) packed welded standoffs so densely that the vendor's automated CNC welding heads physically could not reach them — a design decision that stopped a production line. Read the process before drawing the part.",
+		evidence: "c24",
+		href: "/projects/c24/",
+		practice: "production",
+	},
+	{
+		id: "life-test",
+		name: "Accelerated life & destruction testing",
+		domains: ["motion_fault", "matter_heat"],
+		value: 8,
+		blurb:
+			"Glyph's eyepiece arms carried a 3,000-cycle requirement and got worse as tooling matured: 10% seizure at T1 (500 cycles), then 40% — two of five units — failing at just 250 cycles in T6, on the eve of ramp. Root cause was internal cable wear, found because the test ran every tool revision.",
+		evidence: "avegant-glyph",
+		href: "/projects/avegant-glyph/",
+		practice: "diagnosis",
+	},
+	{
+		id: "fea",
+		name: "FEA-correlated validation",
+		domains: ["matter_heat", "data_ai"],
+		value: 7,
+		blurb:
+			"Optimized the Glyph headband through a Central Composite Design FEA study and correlated it against ANSYS stress-life binders and physical spring-rate characterization — simulation used to bound a real part, not to decorate a review.",
+		evidence: "avegant-glyph",
+		href: "/projects/avegant-glyph/",
+		practice: "diagnosis",
+	},
+	{
+		id: "regulatory",
+		name: "Regulatory & compliance (UL · FCC · EMI)",
+		domains: ["sensory", "data_ai"],
+		value: 7,
+		blurb:
+			"Glyph failed Class B EMI months before ramp; the radiating path was traced to HDMI and remediated through to FCC / IC / CMIIT certification. On the C|24 a PSU certification block was bridged by hand-packing 100 units so the ship date held.",
+		evidence: "avegant-glyph",
+		href: "/projects/avegant-glyph/",
+		practice: "governance",
+	},
 ] as const;
+
+/**
+ * Reconciliation against `resumeMaster.competencies` — the identity source of truth.
+ *
+ * Operator ruling 2026-07-29: the résumé, the LinkedIn experience section and
+ * these pages must carry the same basic facts. The first pass violated that by
+ * accident — it was assembled BOTTOM-UP from stories the corpus could cite,
+ * rather than TOP-DOWN from the claim set. The omissions therefore clustered
+ * exactly where the *curated corpus* is thin, not where the career is thin.
+ *
+ * This map exists so that gap is visible instead of silent. Every competency
+ * resolves to a node, to a node that already covers it, or to an explicit
+ * `null` with a reason. A competency with no entry is drift, and the tier gate
+ * fails the build on it (scripts/audits/validate_tier_gate.mjs).
+ */
+export const COMPETENCY_COVERAGE: Record<string, string | null> = {
+	// engineering
+	"Robotic Mechanism & Actuator Design": "mechanism-actuation",
+	"Tolerance / Alignment / Load Paths": "tolerance-integration",
+	"Wear & Failure-Mode Analysis (RCA)": "root-cause",
+	"GD&T · Stack-Ups (WC / RSS)": "tolerance-integration",
+	"DOE Test-Method Design": "doe",
+	"FEA-Correlated Validation (ANSYS)": "fea",
+	"Haptic & Kinematic Tuning": "haptics",
+	// manufacturing
+	"DFM / DFA for Automated Assembly": "dfa",
+	"High-Volume NPI (Tool Start → MP)": "tooling",
+	"Injection Molding · Die Casting · Sheet Metal": "process-forensics",
+	"Accelerated Life / Destruction Testing": "life-test",
+	"Yield Recovery & CAPA": "yield-recovery",
+	"CM Management (Suzhou · Guadalajara · Taipei)": "supply-chain",
+	// tools & regulatory
+	"Onshape, Creo, Solidworks": null, // a toolchain, not a capability — résumé only
+	"PLM Architecture (Agile / Arena / Windchill)": "change-control",
+	"Thermal Simulation (CFD)": "thermal-architecture",
+	"UL 1472 / UL 20 / FCC": "regulatory",
+	"MIL-STD-1472G": null, // NO corpus evidence. Do not add a node without one.
+	"Class III Medical Standards": null, // cardiac-ablation work (1985) is on /about; no project page cites it
+	"Class-A Surfacing": "human-factors",
+};
 
 export const PRACTICES = [
 	{
