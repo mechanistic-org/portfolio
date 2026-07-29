@@ -38,7 +38,10 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 <BaseLayout
 	title={title}
 	description={description}
-	hideNav={true}
+	{/* Nav restored. hideNav={true} cost every project page its only way out —
+	    109 of 112 project routes use this theme, so the corpus was a set of
+	    dead ends with no path to About, the resume, or contact. */}
+	hideNav={false}
 	type="project"
 	projectFrontmatter={entry.data}
 	entropy={entropy}

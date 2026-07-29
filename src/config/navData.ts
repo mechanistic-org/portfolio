@@ -11,11 +11,29 @@ export interface navDropdownItem {
 
 export type navItem = navLinkItem | navDropdownItem;
 
+// Projects and About were removed here during the HXO consolidation, which left
+// the site with a single nav link and stranded /about entirely (no inbound links
+// from anywhere). Every page needs a way out and a way to the ask.
 const navConfig: navItem[] = [
-	// Removed Projects/About for HXO Consolidation
+	{
+		text: "Work",
+		href: "/projects/",
+	},
+	{
+		text: "About",
+		href: "/about/",
+	},
+	{
+		text: "How I Work",
+		href: "/how-i-work/",
+	},
 	{
 		text: "Résumé",
 		href: "/resume/",
+	},
+	{
+		text: "Contact",
+		href: "/contact/",
 	},
 ];
 

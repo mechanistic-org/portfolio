@@ -154,9 +154,42 @@ if (!isUnderConstruction) {
 					{/* Enabled overflow-y-auto to allow scrolling the long timeline */}
 					<div class="custom-scrollbar relative h-screen overflow-x-hidden overflow-y-auto border-r border-zinc-900 bg-transparent lg:col-span-7 xl:col-span-8">
 						<HXOSwarmContainer client:only="react" nodes={swarmNodes} links={assemblyLinks} />
-						{/* Overlay Title - Pushed down to clear fixed Nav */}
-						<div class="pointer-events-none absolute top-4 left-6 z-50">
-							{/* WIGGLE LOGO REMOVED: Using standard Nav Logo per user request */}
+						{/* IDENTITY OVERLAY — server-rendered, above the fold.
+						    The swarm and console are both client:only islands, so without
+						    this the first viewport was an unlabelled particle animation and
+						    the only <h1> sat a full screen down in the Ledger. This states
+						    who and what before anything hydrates, costs no layout, and
+						    leaves the swarm exactly as designed. */}
+						<div class="pointer-events-none absolute top-16 left-6 z-50 max-w-md md:top-20 md:left-10">
+							<h1
+								class="font-mono text-xl leading-tight font-bold tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] md:text-2xl"
+							>
+								Erik Norris
+								<span class="mt-1 block text-primary text-sm tracking-[0.18em] uppercase md:text-base">
+									Principal Mechanical Architect
+								</span>
+							</h1>
+							<p
+								class="mt-3 max-w-sm text-sm leading-relaxed text-zinc-300 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]"
+							>
+								Thirty years of shipped hardware — SGI, WebTV/Microsoft, Digidesign/Avid,
+								Kaleidescape, Avegant. I structure the chaos, index the decisions, and ship
+								the hardware.
+							</p>
+							<div class="pointer-events-auto mt-4 flex flex-wrap items-center gap-3">
+								<a
+									href="/projects/c24/"
+									class="bg-primary rounded-full px-4 py-2 font-mono text-xs font-bold tracking-wider text-black uppercase transition-colors hover:bg-white"
+								>
+									See the C|24 teardown →
+								</a>
+								<a
+									href="/resume/"
+									class="rounded-full border border-white/20 px-4 py-2 font-mono text-xs tracking-wider text-white uppercase backdrop-blur transition-colors hover:bg-white/10"
+								>
+									Résumé
+								</a>
+							</div>
 						</div>
 					</div>
 
@@ -177,9 +210,10 @@ if (!isUnderConstruction) {
 						<p class="font-mono text-xs tracking-[0.3em] text-zinc-600 uppercase">
 							/// The Ledger
 						</p>
-						<h1 class="mt-3 font-mono text-3xl font-bold tracking-tight text-white md:text-4xl">
+						{/* h2, not h1 — the page's single h1 is the identity overlay above the fold. */}
+						<h2 class="mt-3 font-mono text-3xl font-bold tracking-tight text-white md:text-4xl">
 							Erik Norris — Principal Mechanical Architect
-						</h1>
+						</h2>
 						<p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-400">
 							Thirty years of shipped hardware across SGI, Frog Design, WebTV/Microsoft,
 							Digidesign/Avid, Kaleidescape, Avegant, Noon, and Hyphen. I stabilize the entropy
@@ -246,7 +280,7 @@ if (!isUnderConstruction) {
 								Résumé
 							</a>
 							<a
-								href="mailto:erik@mechanistic.com"
+								href="mailto:erik@eriknorris.com"
 								class="text-zinc-300 transition-colors hover:text-white"
 							>
 								Contact

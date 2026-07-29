@@ -3,22 +3,34 @@
  * Cast — the team-acknowledgment credits (Wikipedia "Cast"/credits; IMDb-styled).
  * v2: excludes the portfolio owner (it's his site), groups INTERNAL staff by
  * DISCIPLINE (inferred from org/role — a first pass to review), and lists EXTERNAL
- * vendors/partners separately. The only "current" signal is a LinkedIn link when
- * available (canon `linkedin`), else a name+company people-search fallback;
- * minimum shown is name + role. Clean roster, not the old card array.
+ * vendors/partners separately. A LinkedIn link renders ONLY for a member whose
+ * canon record carries `consent: approved` AND an explicit `linkedin` URL; the
+ * old name+company people-search fallback was removed 2026-07-29 because it
+ * fabricated a link for every un-consented person on the roster.
+ * Minimum shown is name + role. Clean roster, not the old card array.
  */
 interface Member {
 	name: string;
 	role: string;
 	org: string;
 	linkedin?: string;
+	/** Consent gate — see the cast schema in src/content.config.ts. */
+	consent?: "unset" | "approved" | "declined";
 }
 interface Props {
 	cast: Member[];
 	/** owner name to omit (own portfolio) */
 	omit?: string;
 }
-const { cast = [], omit = "Erik Norris" } = Astro.props;
+const { cast: rawCast = [], omit = "Erik Norris" } = Astro.props;
+
+// CONSENT GATE (operator ruling 2026-07-29).
+// Previously every un-linked member was rendered as a link to a LinkedIn
+// people-search for their name + company. That silently associated ~57 real
+// people with this site's claims without any of them being asked. Linking now
+// requires an explicit `approved`, and `declined` removes the entry outright.
+const cast = rawCast.filter((m) => m.consent !== "declined");
+const mayLink = (m: Member) => m.consent === "approved";
 
 const clean = (n: string) =>
 	(n || "")
@@ -26,11 +38,9 @@ const clean = (n: string) =>
 		.replace(/\s+/g, " ")
 		.trim();
 const company = (org: string) => (org || "").split(/[\/,]/)[0].trim();
-const linkedinHref = (m: Member) =>
-	m.linkedin ||
-	`https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(
-		[clean(m.name), company(m.org)].filter(Boolean).join(" "),
-	)}`;
+// Only an explicit, operator-curated URL. The old name+company people-search
+// fallback fabricated a link for anyone without one.
+const linkedinHref = (m: Member) => m.linkedin;
 
 const EXTERNAL = /vtech|kenny|jetcrown|mass precision/i;
 // org/role → discipline (most specific first). First pass; Erik to review/edit into canon.
@@ -104,6 +114,7 @@ const total = [...seen].length;
 								<span class="text-foreground text-sm font-medium">{clean(m.name)}</span>
 								<span class="text-muted-foreground ml-2 text-xs">{m.role}</span>
 							</div>
+							{mayLink(m) && linkedinHref(m) && (
 							<a
 								href={linkedinHref(m)}
 								target="_blank"
@@ -115,6 +126,7 @@ const total = [...seen].length;
 									<path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17V9.99H6V17h2.34zM7.17 8.96a1.36 1.36 0 1 0 0-2.72 1.36 1.36 0 0 0 0 2.72zM18 17v-3.84c0-2.05-1.1-3-2.55-3-1.17 0-1.7.64-1.99 1.09V9.99h-2.34V17h2.34v-3.91c0-.21.02-.41.08-.56.16-.41.54-.84 1.17-.84.82 0 1.15.63 1.15 1.55V17H18z" />
 								</svg>
 							</a>
+							)}
 						</div>
 					))}
 				</div>
@@ -141,6 +153,7 @@ const total = [...seen].length;
 											<span class="text-foreground text-sm font-medium">{clean(m.name)}</span>
 											<span class="text-muted-foreground ml-2 text-xs">{m.role}</span>
 										</div>
+										{mayLink(m) && linkedinHref(m) && (
 										<a
 											href={linkedinHref(m)}
 											target="_blank"
@@ -152,6 +165,7 @@ const total = [...seen].length;
 												<path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17V9.99H6V17h2.34zM7.17 8.96a1.36 1.36 0 1 0 0-2.72 1.36 1.36 0 0 0 0 2.72zM18 17v-3.84c0-2.05-1.1-3-2.55-3-1.17 0-1.7.64-1.99 1.09V9.99h-2.34V17h2.34v-3.91c0-.21.02-.41.08-.56.16-.41.54-.84 1.17-.84.82 0 1.15.63 1.15 1.55V17H18z" />
 											</svg>
 										</a>
+										)}
 									</div>
 								))}
 							</div>

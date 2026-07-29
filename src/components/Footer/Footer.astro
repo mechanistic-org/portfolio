@@ -1,16 +1,122 @@
 ---
-// components
+/**
+ * Site footer.
+ *
+ * Was a `fixed bottom-0` bar rendering a single copyright string, which meant
+ * 159 pages had no exit and no ask. BaseLayout already lays this out as the
+ * last child of a `min-h-lvh flex-col justify-between` column, so the fixed
+ * positioning was fighting the layout rather than serving it — it is now static
+ * and carries real navigation.
+ */
+import { Icon } from "astro-icon/components";
+import { resumeMaster } from "@config/resume_master";
+
+interface Props {
+	entropy?: any;
+}
+
+// Accepted for call-site compatibility; the footer does not render telemetry.
+const { entropy: _entropy } = Astro.props as Props;
 
 const today = new Date();
+const { email, linkedin, github } = resumeMaster.header.contact;
+
+const SECTIONS = [
+	{
+		label: "Work",
+		links: [
+			{ text: "All projects", href: "/projects/" },
+			{ text: "C|24 teardown", href: "/projects/c24/" },
+			{ text: "SC48", href: "/projects/sc48/" },
+			{ text: "Avegant Glyph", href: "/projects/avegant-glyph/" },
+		],
+	},
+	{
+		label: "Erik",
+		links: [
+			{ text: "About", href: "/about/" },
+			{ text: "How I work", href: "/how-i-work/" },
+			{ text: "Résumé", href: "/resume/" },
+			{ text: "Colophon", href: "/colophon/" },
+		],
+	},
+];
 ---
 
-<footer class="fixed bottom-0 left-0 z-50 w-full">
-	<div
-		class="site-container flex h-8 items-center justify-center text-[10px] font-bold tracking-wider text-neutral-500 uppercase md:text-xs"
-	>
-		{/* Center: Copyright */}
-		<div class="flex items-center gap-4">
-			<span>&copy; ERIK NORRIS 1993-{today.getFullYear()}</span>
+<footer class="border-t border-white/10 bg-black/40">
+	<div class="site-container py-12">
+		<div class="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
+			{/* Identity + the ask */}
+			<div>
+				<p class="font-mono text-xs tracking-[0.2em] text-neutral-500 uppercase">Erik Norris</p>
+				<p class="mt-2 max-w-xs text-sm leading-relaxed text-neutral-400">
+					Principal Mechanical Architect. Thirty years of shipped hardware, documented at ECO
+					resolution — including the parts that went wrong.
+				</p>
+				<a
+					href="/contact/"
+					class="text-primary mt-4 inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase transition-opacity hover:opacity-70"
+				>
+					Get in touch <span aria-hidden="true">→</span>
+				</a>
+			</div>
+
+			{
+				SECTIONS.map((section) => (
+					<nav aria-label={section.label}>
+						<p class="font-mono text-[10px] tracking-[0.2em] text-neutral-600 uppercase">
+							{section.label}
+						</p>
+						<ul class="mt-3 space-y-2">
+							{section.links.map((link) => (
+								<li>
+									<a
+										href={link.href}
+										class="text-sm text-neutral-400 transition-colors hover:text-white"
+									>
+										{link.text}
+									</a>
+								</li>
+							))}
+						</ul>
+					</nav>
+				))
+			}
+		</div>
+
+		<div
+			class="mt-10 flex flex-col-reverse items-start justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center"
+		>
+			<p class="font-mono text-[10px] tracking-wider text-neutral-600 uppercase">
+				&copy; Erik Norris 1993&ndash;{today.getFullYear()}
+			</p>
+			<div class="flex items-center gap-4 text-neutral-500">
+				<a
+					href={`mailto:${email}`}
+					aria-label="Email Erik Norris"
+					class="hover:text-primary transition-colors"
+				>
+					<Icon name="tabler:mail" class="h-5 w-5" />
+				</a>
+				<a
+					href={`https://${linkedin}`}
+					target="_blank"
+					rel="noopener"
+					aria-label="LinkedIn"
+					class="hover:text-primary transition-colors"
+				>
+					<Icon name="tabler:brand-linkedin" class="h-5 w-5" />
+				</a>
+				<a
+					href={`https://${github}`}
+					target="_blank"
+					rel="noopener"
+					aria-label="GitHub"
+					class="hover:text-primary transition-colors"
+				>
+					<Icon name="tabler:brand-github" class="h-5 w-5" />
+				</a>
+			</div>
 		</div>
 	</div>
 </footer>

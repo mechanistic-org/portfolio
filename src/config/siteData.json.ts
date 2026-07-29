@@ -80,14 +80,17 @@ const siteData: SiteDataProps = {
 		{
 			// you should always at least have an email
 			platform: "email",
-			link: "mailto:erik@mechanistic.com",
+			link: "mailto:erik@eriknorris.com",
 		},
 	],
 
 	// Your information for blog post purposes
 	author: {
 		name: "Erik Norris",
-		email: "erik@mechanistic.com",
+		// Single contact address across the site. resume_master.ts is the identity
+		// source of truth; this matches it. Two addresses were in circulation
+		// (erik@mechanistic.com in the nav, erik@eriknorris.com on the resume).
+		email: "erik@eriknorris.com",
 		// twitter: "BowTiedWebReapr",
 	},
 

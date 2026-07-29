@@ -1,0 +1,296 @@
+---
+/**
+ * /contact — the ask.
+ *
+ * This route was linked from the nav and the footer for months while returning
+ * 404. Every other page on the site now terminates here.
+ *
+ * Deliberately dual-track (operator ruling 2026-07-29): one identity, two doors
+ * — employment and engagement. No form: a form needs a backend, a spam surface
+ * and a "thanks, we'll be in touch" lie. A visible address is more honest and
+ * converts better with the audience this site is for.
+ */
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { Icon } from "astro-icon/components";
+import { resumeMaster } from "@config/resume_master";
+
+export const prerender = true;
+
+const { email, linkedin, github, location } = resumeMaster.header.contact;
+
+const TRACKS = [
+	{
+		key: "employment",
+		label: "Hiring",
+		heading: "For a role",
+		body: "Principal / Staff mechanical engineering — mechanism and actuated-system design, enclosure and thermal architecture, NPI through high-volume production. I take subsystems from whiteboard through DVT into mass production, and I go to the factory floor when the yield data demands it.",
+		cta: "Start with the résumé",
+		href: "/resume/",
+	},
+	{
+		key: "engagement",
+		label: "Engagement",
+		heading: "For a program",
+		body: "Pre-production forensic audits and program rescue: tolerance stack-up, thermal margin, supply-chain fragility and yield recovery, stress-tested before tooling commitment. Independent, scoped, and documented well enough that your team owns the result after I leave.",
+		cta: "See a teardown",
+		href: "/projects/c24/",
+	},
+];
+
+const CHANNELS = [
+	{ icon: "tabler:mail", label: "Email", value: email, href: `mailto:${email}` },
+	{ icon: "tabler:brand-linkedin", label: "LinkedIn", value: linkedin, href: `https://${linkedin}` },
+	{ icon: "tabler:brand-github", label: "GitHub", value: github, href: `https://${github}` },
+];
+---
+
+<BaseLayout
+	title="Contact"
+	description="Erik Norris — Principal Mechanical Architect. Available for principal-level mechanical engineering roles and for forensic audit and program-rescue engagements."
+>
+	<article class="contact-page site-container">
+		<header class="contact-hero">
+			<p class="contact-eyebrow">/// Contact</p>
+			<h1>Tell me what's breaking.</h1>
+			<p class="contact-lede">
+				Thirty years of shipped hardware across SGI, Frog Design, WebTV/Microsoft,
+				Digidesign/Avid, Kaleidescape, Avegant, Noon and Hyphen. I read every message
+				myself and answer within two business days.
+			</p>
+		</header>
+
+		<section class="contact-primary" aria-label="Direct contact">
+			<a class="contact-email" href={`mailto:${email}`}>
+				<Icon name="tabler:mail" class="contact-email-icon" />
+				<span>{email}</span>
+			</a>
+			<p class="contact-meta">
+				{location} · open to remote, hybrid and on-site · will travel to the factory
+			</p>
+		</section>
+
+		<section class="contact-tracks" aria-label="Ways to work together">
+			{
+				TRACKS.map((track) => (
+					<div class="contact-track">
+						<p class="contact-track-label">{track.label}</p>
+						<h2>{track.heading}</h2>
+						<p>{track.body}</p>
+						<a class="contact-track-cta" href={track.href}>
+							{track.cta} <span aria-hidden="true">→</span>
+						</a>
+					</div>
+				))
+			}
+		</section>
+
+		<section class="contact-channels" aria-label="Other channels">
+			{
+				CHANNELS.map((channel) => (
+					<a
+						class="contact-channel"
+						href={channel.href}
+						target={channel.href.startsWith("mailto:") ? "_self" : "_blank"}
+						rel={channel.href.startsWith("mailto:") ? undefined : "noopener"}
+					>
+						<Icon name={channel.icon} class="contact-channel-icon" />
+						<span class="contact-channel-label">{channel.label}</span>
+						<span class="contact-channel-value">{channel.value}</span>
+					</a>
+				))
+			}
+		</section>
+	</article>
+</BaseLayout>
+
+<style>
+	.contact-page {
+		padding-block: clamp(4rem, 12vh, 8rem) 6rem;
+		display: flex;
+		flex-direction: column;
+		gap: clamp(3rem, 8vh, 5rem);
+	}
+
+	.contact-eyebrow {
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--color-primary-500);
+		margin-bottom: 1rem;
+	}
+
+	.contact-hero h1 {
+		font-family: var(--font-header);
+		font-size: clamp(2.5rem, 7vw, 4.5rem);
+		line-height: 1.02;
+		text-transform: uppercase;
+		margin-bottom: 1.25rem;
+	}
+
+	.contact-lede {
+		max-width: 58ch;
+		font-size: clamp(1rem, 1.4vw, 1.125rem);
+		line-height: 1.65;
+		color: var(--color-base-400, #9ca3af);
+	}
+
+	.contact-email {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.75rem;
+		font-family: var(--font-mono);
+		font-size: clamp(1.125rem, 3vw, 1.875rem);
+		letter-spacing: -0.01em;
+		text-decoration: none;
+		color: inherit;
+		border-bottom: 2px solid var(--color-primary-500);
+		padding-bottom: 0.35rem;
+		transition:
+			color 0.2s ease,
+			gap 0.2s ease;
+	}
+
+	.contact-email:hover,
+	.contact-email:focus-visible {
+		color: var(--color-primary-500);
+		gap: 1rem;
+	}
+
+	.contact-email-icon {
+		width: 1.1em;
+		height: 1.1em;
+		flex: none;
+	}
+
+	.contact-meta {
+		margin-top: 1.25rem;
+		font-family: var(--font-mono);
+		font-size: 0.8125rem;
+		letter-spacing: 0.04em;
+		color: var(--color-base-500, #6b7280);
+	}
+
+	.contact-tracks {
+		display: grid;
+		gap: 2rem;
+		grid-template-columns: 1fr;
+	}
+
+	@media (min-width: 768px) {
+		.contact-tracks {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 2.5rem;
+		}
+	}
+
+	.contact-track {
+		border-top: 1px solid rgb(255 255 255 / 0.12);
+		padding-top: 1.5rem;
+	}
+
+	.contact-track-label {
+		font-family: var(--font-mono);
+		font-size: 0.6875rem;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--color-primary-500);
+		margin-bottom: 0.75rem;
+	}
+
+	.contact-track h2 {
+		font-family: var(--font-header);
+		font-size: clamp(1.5rem, 3vw, 2rem);
+		text-transform: uppercase;
+		margin-bottom: 0.85rem;
+	}
+
+	.contact-track p {
+		font-size: 0.9375rem;
+		line-height: 1.7;
+		color: var(--color-base-400, #9ca3af);
+		margin-bottom: 1.25rem;
+	}
+
+	.contact-track-cta {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-family: var(--font-mono);
+		font-size: 0.8125rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		text-decoration: none;
+		color: var(--color-primary-500);
+		transition: gap 0.2s ease;
+	}
+
+	.contact-track-cta:hover,
+	.contact-track-cta:focus-visible {
+		gap: 0.9rem;
+	}
+
+	.contact-channels {
+		display: grid;
+		gap: 1px;
+		background: rgb(255 255 255 / 0.1);
+		border: 1px solid rgb(255 255 255 / 0.1);
+		border-radius: var(--radius, 0.5rem);
+		overflow: hidden;
+		grid-template-columns: 1fr;
+	}
+
+	@media (min-width: 640px) {
+		.contact-channels {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	.contact-channel {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		padding: 1.1rem 1.25rem;
+		background: var(--color-base-950, #0a0a0a);
+		text-decoration: none;
+		color: inherit;
+		transition: background 0.2s ease;
+	}
+
+	.contact-channel:hover,
+	.contact-channel:focus-visible {
+		background: rgb(255 255 255 / 0.05);
+	}
+
+	.contact-channel-icon {
+		width: 1.15rem;
+		height: 1.15rem;
+		flex: none;
+		color: var(--color-primary-500);
+	}
+
+	.contact-channel-label {
+		font-family: var(--font-mono);
+		font-size: 0.6875rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-base-500, #6b7280);
+	}
+
+	.contact-channel-value {
+		font-family: var(--font-mono);
+		font-size: 0.8125rem;
+		margin-left: auto;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.contact-email,
+		.contact-track-cta,
+		.contact-channel {
+			transition: none;
+		}
+	}
+</style>

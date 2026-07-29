@@ -130,8 +130,13 @@ const { projects, sectors, categories, tools, clients } = Astro.props;
 									)}
 								</div>
 							</td>
+							{/* Real anchor, not just the row's onclick. The row handler alone left
+							    all 111 projects unreachable by keyboard, middle-click and crawlers —
+							    the built corpus contained zero <a href> elements. */}
 							<td class="text-foreground group-hover:text-primary px-4 py-3 font-bold transition-colors">
-								{project.data.title}
+								<a href={`/projects/${project.id}/`} class="hover:underline">
+									{project.data.title}
+								</a>
 							</td>
 							<td class="px-4 py-3 text-neutral-400">
 								{[

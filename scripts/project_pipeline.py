@@ -30,7 +30,11 @@ DOSSIER = [  # (frontmatter field, ## heading, ordered columns)
     # Contract v2 (2026-07-02, WP4): `scars` removed from the dossier tables — the V8
     # scar-instrument fields (severity/phase/anchor/T-I-R/evidence) don't survive a
     # 3-column table round-trip. Scars ride frontmatter, canon and site alike.
-    ("cast",     "Cast",     ["name", "role", "org", "roster"]),
+    # `linkedin` and `consent` added 2026-07-29: both were absent from the column
+    # list, so a curated profile URL did not survive a canon->site->canon trip.
+    # `consent` is the publish gate for linking a named colleague (see the cast
+    # schema in src/content.config.ts) and MUST round-trip losslessly.
+    ("cast",     "Cast",     ["name", "role", "org", "roster", "linkedin", "consent"]),
     ("bom",      "BOM",      ["label", "value"]),
     ("timeline", "Timeline", ["date", "title", "description"]),
 ]

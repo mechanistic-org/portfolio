@@ -77,8 +77,16 @@ const { projects } = Astro.props;
 								{project.data.industry}
 							</span>
 						</div>
+						{/* Stretched anchor: the card's onclick alone gave no keyboard focus, no
+						    middle-click and nothing for a crawler to follow. The card wrapper is
+						    already `relative`, so ::after covers it. */}
 						<h3 class="group-hover:text-primary text-lg font-bold text-white transition-colors">
-							{project.data.title}
+							<a
+								href={`/projects/${project.id}/`}
+								class="after:absolute after:inset-0 after:z-10 after:content-['']"
+							>
+								{project.data.title}
+							</a>
 						</h3>
 						<p class="mt-2 line-clamp-2 text-sm text-neutral-400">{project.data.description}</p>
 					</div>
