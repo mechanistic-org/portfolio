@@ -25,9 +25,10 @@ static output.
 | Task | Command |
 |---|---|
 | Dev server (static output, port 4321) | `npm run dev` |
-| Production build | `npm run build` (`ci-prebuild.js` → `astro build` → Pagefind index) |
+| Production build | `npm run build` (`ci-prebuild.js` → tier gate → `astro build` → Pagefind) |
 | Preview built site | `npm run preview` |
 | Validate frontmatter | `npm run audit:frontmatter` |
+| Tier publish gate | `npm run audit:tier` (`:verbose` per page · `:strict` fails on burn-down) |
 | Visual smoke test | `npm run test:visual` |
 | Lint / format | `eslint` (flat config) · Prettier (tabs; astro + tailwind plugins) |
 
@@ -47,6 +48,32 @@ Collections defined in [src/content.config.ts](src/content.config.ts):
 
 Other content dirs: `_raw_nlm` (NotebookLM raw; being absorbed into canon per-slug),
 `_agency_memory`, `colophon`, `prompts`.
+
+### Tier publish gate (`scripts/audits/validate_tier_gate.mjs`, in `npm run build`)
+
+Roster is **42 deep dive / 54 lite / 25 cut** over 121 records. Because the
+deep-dive conveyor runs for months with the site live, a visitor lands on a
+*random* page — so the floor decides the outcome, not the ceiling. The gate holds
+the floor by architecture rather than by remembering.
+
+- **`draft: true` is exempt from completeness.** That is the whole point of the
+  flag: the corpus can sit in any state while only the published subset meets bar.
+- **ERROR (fails the build)** — correctness, not thinness: machine placeholders,
+  leaked `:::` directive fences, demo assets posing as portfolio content
+  (`NeilArmstrong.glb`), the rickroll, `teamSize: Unknown`, `duration: Active`,
+  TBD/FIXME. All are currently at zero; this is a regression fence.
+- **WARN (reported, not fatal)** — completeness against tier bar. Hard-failing
+  this today would break the build on 72 of 87 published pages and amount to
+  cutting the corpus to ~15, which the operator ruled against. Run
+  `npm run audit:tier` for the burn-down; flip to `--strict` once it reaches zero.
+
+**Bars.** *lite* — hero image, description, date, role-or-employer, ≥60 body words.
+*deep_dive* — that plus ≥1200 body words and ≥6 image refs.
+
+A lite page is a **complete small thing**, not a truncated large one. Scars, cast
+and galleries are *allowed* on a lite page (operator ruling 2026-07-29 — "it
+depends"). What is never allowed is an instrument declared and rendered empty:
+thin does not discredit, filler and empty frames do.
 
 ETL (canon-first, portfolio#121): `raw archives → canon vault (extraction + curation) →
 project_pipeline.py → read-only site MDX → static HTML`. Confirm the correct venv before
