@@ -223,6 +223,11 @@ if (entry) {
 }
 
 // INJECT GENERIC SCROLLY STRUCTURE IF MISSING (For Legacy MDX upgrades)
+// The second injected sticky ("PROJECT DATA" / "This record has been upgraded to
+// the Hyperspace Protocol." / "Group: <industry>") was removed 2026-07-29. It
+// carried no information, printed an internal build message to visitors on ~96
+// pages, and rendered "Group: Other" wherever industry was unset. A page with
+// nothing to say should say nothing.
 if (
 	theme === "hyperspace" &&
 	(!finalEntry.data.cyberspace || !finalEntry.data.cyberspace.stickies)
@@ -240,13 +245,6 @@ if (
 				data: {
 					src: finalEntry.data.heroImage,
 				},
-			},
-			{
-				id: "details",
-				title: "PROJECT DATA",
-				text: `This record has been upgraded to the Hyperspace Protocol.<br/><br/><strong>Group:</strong> ${finalEntry.data.industry || "N/A"}`,
-				align: "center",
-				type: "void",
 			},
 		],
 	};

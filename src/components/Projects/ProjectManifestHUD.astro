@@ -34,9 +34,13 @@ const isoDate = new Date(dateVal).toISOString().split("T")[0];
 
 // Duration Logic
 let displayDuration = data.duration;
-if (!displayDuration && data.date) {
+// Only derive a duration when the project actually has an end date. The old
+// fallback used `new Date()` as the end, so a 1992 project reported a duration
+// running to today - the same class of defect as `duration: Active` sitting in
+// the frontmatter of 77 finished projects. No end date, no duration claim.
+if (!displayDuration && data.date && data.endDate) {
 	const start = new Date(data.date);
-	const end = data.endDate ? new Date(data.endDate) : new Date();
+	const end = new Date(data.endDate);
 
 	// Simple diff
 	const diffTime = Math.abs(end.getTime() - start.getTime());
@@ -182,8 +186,8 @@ if (!displayDuration && data.date) {
 								return (
 									<div class="flex h-full flex-col justify-center max-w-[120px] md:max-w-[160px]">
 										<div class="text-[9px] tracking-widest text-neutral-500 uppercase">Team</div>
-										<div class="font-mono text-xs font-bold text-white truncate" title={data.teamSize || "Core Team"}>
-											{data.teamSize || "Core Team"}
+										<div class="font-mono text-xs font-bold text-white truncate" title={data.teamSize}>
+											{data.teamSize}
 										</div>
 									</div>
 								);
