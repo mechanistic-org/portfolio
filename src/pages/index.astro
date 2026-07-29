@@ -6,6 +6,7 @@ import { getCareerAssembly } from "../utils/mapCareerAssembly";
 import HXOSwarmContainer from "../components/HXO/HXOSwarmContainer";
 import HXOConsole from "../components/HXO/HXOConsole";
 import { currentSite, site } from "@config/site_config";
+import { resumeMaster } from "@config/resume_master";
 import UnderConstruction from "../components/UnderConstruction.astro";
 
 const isUnderConstruction = currentSite !== "main";
@@ -124,15 +125,25 @@ if (!isUnderConstruction) {
 		const targets = data.targets || ["main"];
 		return targets.includes(currentSite) && !data.draft;
 	});
-	const years = live
-		.flatMap((p) => [p.data.date, p.data.endDate])
-		.filter(Boolean)
-		.map((d) => new Date(d as any).getFullYear())
+	// SPAN comes from resume_master, NOT from published project dates.
+	//
+	// It used to be min/max over `live` project years, which made a fact about
+	// Erik's career an artefact of which pages happened to be published. Drafting
+	// the 25 ratified cuts moved the newest published project from 2025 to 2021,
+	// so the homepage would have advertised a four-year gap that does not exist.
+	// A career span is not a function of the corpus.
+	const roleYears = resumeMaster.experience
+		.flatMap((r) => r.dates.match(/\d{4}/g) || [])
+		.map(Number)
 		.filter((y) => y > 1900);
+	const ongoing = resumeMaster.experience.some((r) => /present/i.test(r.dates));
+	const spanStart = roleYears.length ? Math.min(...roleYears) : null;
+	const spanEnd = ongoing ? "Present" : roleYears.length ? String(Math.max(...roleYears)) : "";
+
 	ledgerStats = {
 		projects: live.length,
 		employers: new Set(live.map((p) => p.data.employer).filter(Boolean)).size,
-		span: years.length ? `${Math.min(...years)}–${Math.max(...years)}` : "",
+		span: spanStart ? `${spanStart}–${spanEnd}` : "",
 	};
 	featured = FEATURED_IDS.map((id) => live.find((p) => p.id === id)).filter(Boolean);
 }
