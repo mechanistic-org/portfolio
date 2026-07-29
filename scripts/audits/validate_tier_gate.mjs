@@ -96,9 +96,19 @@ function sourcesForSlug(slug) {
 	if (!fs.existsSync(rec)) return null;
 	try {
 		const { data } = matter(fs.readFileSync(rec, "utf8"));
-		return Array.isArray(data.sources) ? data.sources.length : 0;
+		// The VAULT is the checkable claim: does this page trace to a real locker
+		// directory with hashed material in it? `sources` is a separate, curated
+		// citation list and is reported but not required — an attempt to derive it
+		// from the vault produced a 564-entry directory listing on c24 and
+		// destroyed 16 real citations. Inventory is not provenance.
+		const vault = typeof data.vault === "string" ? data.vault : null;
+		if (!vault) return { vault: null, items: 0, cited: (data.sources || []).length };
+		const dir = path.join(CANON_ROOT, "raw", "_archive_extracts", vault);
+		if (!fs.existsSync(dir)) return { vault, items: -1, cited: (data.sources || []).length };
+		const count = fs.readdirSync(dir).length;
+		return { vault, items: count, cited: (data.sources || []).length };
 	} catch {
-		return 0;
+		return { vault: null, items: 0, cited: 0 };
 	}
 }
 
@@ -196,9 +206,13 @@ for (const dir of fs.readdirSync(PROJECTS, { withFileTypes: true })) {
 			// cites a locker item" verifiable rather than asserted, which is the
 			// site's entire thesis. Without this check the field is bookkeeping
 			// theater and should be deleted instead.
-			const cited = sourcesForSlug(dir.name);
-			if (cited === null) missing.push("no canon record (deep_dive)");
-			else if (cited === 0) missing.push("canon sources[] empty (deep_dive)");
+			const prov = sourcesForSlug(dir.name);
+			if (prov === null) missing.push("no canon record (deep_dive)");
+			else if (prov !== undefined) {
+				if (!prov.vault) missing.push("canon record declares no vault (deep_dive)");
+				else if (prov.items === -1) missing.push(`declared vault missing from locker: ${prov.vault}`);
+				else if (prov.items === 0) missing.push(`declared vault is empty: ${prov.vault}`);
+			}
 		}
 
 		rows.push({ slug: dir.name, tier, words, imgs, hero: !!fm.heroImage, missing });

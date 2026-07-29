@@ -79,7 +79,38 @@ ENTROPY_FIELDS   = ["timeline_events", "events"]
 # site frontmatter field (deep_dive|lite) the generator emits from compute_tier.
 # 2026-07-03 amendment: enum value renamed flagship -> deep_dive ("flagship" now
 # means only the featured subset concept, never a tier); legacy spelling still read.
-CANON_ONLY = ["created", "updated", "type", "sensitivity", "confidence", "sources", "entropy"]
+CANON_ONLY = ["created", "updated", "type", "sensitivity", "confidence", "sources", "entropy", "vault"]
+
+# Provenance (portfolio#142). TWO fields, deliberately not one:
+#
+#   vault:   the record's locker directory under raw/_archive_extracts/.
+#            One declared string. Machine-checkable, cheap for every record, and
+#            what the tier gate verifies.
+#   sources: CURATED citations — the specific documents a page's claims rest on.
+#            Hand-picked, never derived, never overwritten by the generator.
+#
+# An earlier pass tried to DERIVE sources from the vault. Measured result on c24:
+# 564 entries where 16 curated ones existed, because the vault is the full
+# extraction (554 files). A directory listing is INVENTORY, not provenance — it
+# proves material exists, not that a claim rests on it. The curated 16 were the
+# whole value, and deriving destroyed them. So: vault answers "does this page
+# trace to a real locker?" and sources answers "which documents back this
+# claim?" Conflating them loses the second question.
+LOCKER_ROOT = os.path.join(CANON_ROOT, "raw", "_archive_extracts")
+
+
+def vault_status(vault):
+    """(exists, item_count) for a declared vault. (None, 0) when undeclared."""
+    if not vault:
+        return None, 0
+    d = os.path.join(LOCKER_ROOT, vault)
+    if not os.path.isdir(d):
+        return False, 0
+    n = sum(1 for x in os.listdir(d) if os.path.isfile(os.path.join(d, x)))
+    nlm = os.path.join(LOCKER_ROOT, "_notebooklm", vault)
+    if os.path.isdir(nlm):
+        n += sum(1 for x in os.listdir(nlm) if os.path.isfile(os.path.join(nlm, x)))
+    return True, n
 # Contract v2 kill list (canon/queries/k2-stranded-data-decision-sheet.md).
 # `isomorphics` REMOVED from DROP_FIELDS — operator lean-in ruling 2026-07-01:
 # it round-trips canon -> site like scars.
@@ -289,16 +320,34 @@ def extract():
     rec["updated"] = date.today().isoformat()
     rec["type"] = prior.get("type", "entity")
     rec["tier"] = compute_tier(data)
-    # The publish gate. canon/SCHEMA.md: `public | sanitized | confidential |
-    # unset`, DEFAULT UNSET. This used to be hardcoded "public", which marked
-    # every record publishable without anyone deciding. A new record starts
-    # closed and stays closed until curation opens it.
-    rec["sensitivity"] = prior.get("sensitivity", "unset")
-    if prior.get("confidence"):
-        rec["confidence"] = prior["confidence"]
+    # `sensitivity` and `confidence` are NO LONGER entity-record fields
+    # (portfolio#143, ruled 2026-07-29). Neither was ever wired: both are
+    # CANON_ONLY so generate() strips them, and no site code reads either. The
+    # clearance question is answered one level down, per artifact, by
+    # tools/census_crawl.py — which is the altitude the doctrine specifies. Page
+    # visibility is the site MDX `draft:` flag, which is real and in the build.
+    #
+    # They are not re-seeded here, and they are not carried forward from a prior
+    # record: the field is retired, so preserving it would keep the ambiguity
+    # alive. Extract used to hardcode `sensitivity: "public"` on every run, which
+    # marked all 30 records publishable without anyone deciding.
+    # Provenance (portfolio#142). Both fields are canon-owned and PRESERVED, never
+    # regenerated: `sources` is a curated citation list and deriving it from the
+    # vault produced a 564-entry directory listing that destroyed 16 real citations.
+    if prior.get("vault"):
+        rec["vault"] = prior["vault"]
     rec["sources"] = prior.get("sources", [])
-    if not rec["sources"]:
-        print(f"[extract]  WARNING: {SLUG} has no `sources` — every claim should cite a locker item")
+
+    exists, count = vault_status(rec.get("vault"))
+    if exists is None:
+        print(f"[extract]  WARNING: {SLUG} declares no `vault`. Add "
+              f"`vault: <dir>` (a name under raw/_archive_extracts/) so the page's "
+              f"provenance is machine-checkable.")
+    elif exists is False:
+        print(f"[extract]  WARNING: declared vault not found in the locker: {rec['vault']}")
+    else:
+        print(f"[extract]  vault: {rec['vault']} ({count} locker items) · "
+              f"sources: {len(rec['sources'])} curated citation(s)")
 
     dossier_fields = {f for f, _, _ in DOSSIER}
     for k, v in data.items():
