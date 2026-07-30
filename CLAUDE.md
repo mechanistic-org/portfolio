@@ -25,7 +25,8 @@ static output.
 | Task | Command |
 |---|---|
 | Dev server (static output, port 4321) | `npm run dev` |
-| Production build | `npm run build` (`ci-prebuild.js` → tier gate → `astro build` → Pagefind) |
+| Project CI parity / pre-push validation | `npm run check:ci` (frontmatter audit → `astro check`) |
+| Production build | `npm run build` (`ci-prebuild.js` → `check:ci` → tier gate → `astro build` → Pagefind) |
 | Preview built site | `npm run preview` |
 | Validate frontmatter | `npm run audit:frontmatter` |
 | Tier publish gate | `npm run audit:tier` (`:verbose` per page · `:strict` fails on burn-down) |

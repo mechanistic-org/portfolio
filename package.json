@@ -5,7 +5,8 @@
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
-		"build": "node scripts/ci-prebuild.js && node scripts/audits/validate_tier_gate.mjs && astro build && npx -y pagefind --site dist",
+		"build": "node scripts/ci-prebuild.js && npm run check:ci && node scripts/audits/validate_tier_gate.mjs && astro build && npx -y pagefind --site dist",
+		"check:ci": "npm run audit:frontmatter && npm run astro check",
 		"preview": "astro preview",
 		"astro": "astro",
 		"audit:frontmatter": "node scripts/audits/validate_yaml_js.js",
