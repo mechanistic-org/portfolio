@@ -417,8 +417,28 @@ def generate():
 
 
 # ---------------------------------------------------------------- verify
+def _drop_empty(o):
+    """Recursively drop empty lists/dicts so `images: []` compares equal to absent.
+
+    The site MDX is inconsistent about this: pages written by different
+    generations of tooling variously carry `data: {columns, layout}` and
+    `data: {columns, layout, images: []}`. Both mean "gallery with no images",
+    and no generator shape can match both — emitting the empty list fixes three
+    slugs and breaks fourteen; omitting it does the reverse.
+
+    So the fix belongs in the COMPARISON, not the data. This normalizes shape
+    only. A field going populated -> empty still reports CHANGED, because the
+    other side still has content; only absent-vs-empty is treated as equal.
+    """
+    if isinstance(o, dict):
+        return {k: _drop_empty(v) for k, v in o.items() if v not in ([], {}, None)}
+    if isinstance(o, list):
+        return [_drop_empty(v) for v in o]
+    return o
+
+
 def _norm(o):
-    return json.loads(json.dumps(o, default=str, sort_keys=True))
+    return _drop_empty(json.loads(json.dumps(o, default=str, sort_keys=True)))
 
 
 def verify():
