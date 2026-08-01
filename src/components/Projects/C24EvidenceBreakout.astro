@@ -1,0 +1,231 @@
+---
+import Gallery from "@components/primitives/Gallery.astro";
+
+interface GalleryImage {
+	src: string;
+	alt?: string;
+	caption?: string;
+}
+
+interface GalleryData {
+	columns?: number;
+	images?: GalleryImage[];
+}
+
+interface GalleryEntry {
+	id: string;
+	title?: string;
+	data: GalleryData;
+}
+
+interface Props {
+	galleries: GalleryEntry[];
+	heroImage?: string;
+}
+
+const { galleries = [], heroImage } = Astro.props;
+const allImages = galleries.flatMap((gallery) => gallery.data.images || []);
+
+const featured = [
+	{
+		alt: "C24 control surface",
+		label: "The system",
+		detail: "43 inches of controls, reduced to one integrated architecture.",
+		href: "#ii-the-product-that-shipped",
+		className: "evidence-composition__system",
+		image: heroImage ? { src: heroImage, alt: "C24 control surface" } : undefined,
+	},
+	{
+		alt: "step-03-method-a-fix",
+		label: "The intervention",
+		detail: "A process fixture turns gravity from failure mode into corrective force.",
+		href: "#1-thermal-crisis-the-banana-defect",
+		className: "evidence-composition__intervention",
+		image: undefined,
+	},
+	{
+		alt: "DCD_9150-55200-00_REV_12_Page_1_REV-block",
+		label: "The control record",
+		detail: "Revision discipline becomes the geometric contract for nineteen boards.",
+		href: "#5-integration-crisis-the-geometric-firewall",
+		className: "evidence-composition__record",
+		image: undefined,
+	},
+]
+	.map((item) => ({
+		...item,
+		image: item.image || allImages.find((image) => image.alt === item.alt),
+	}))
+	.filter((item) => item.image);
+---
+
+<section id="visual-evidence" class="evidence-breakout" aria-labelledby="visual-evidence-title">
+	<header class="evidence-breakout__header">
+		<div>
+			<p class="evidence-breakout__eyebrow">
+				Breakout composition · system → intervention → record
+			</p>
+			<h2 id="visual-evidence-title">Visual Evidence</h2>
+		</div>
+		<p>
+			The article establishes the argument. This field opens the archive: product form, physical
+			failure, and the drawings that controlled the recovery at their own scale.
+		</p>
+	</header>
+
+	<div class="evidence-composition" data-pagefind-ignore>
+		{
+			featured.map((item) => (
+				<a class:list={["evidence-composition__figure", item.className]} href={item.href}>
+					<img src={item.image?.src} alt={item.image?.alt || ""} loading="lazy" decoding="async" />
+					<span class="evidence-composition__caption">
+						<strong>{item.label}</strong>
+						<small>{item.detail}</small>
+					</span>
+				</a>
+			))
+		}
+	</div>
+
+	<div class="evidence-breakout__galleries">
+		{
+			galleries.map((gallery) => (
+				<Gallery
+					title={gallery.title}
+					images={gallery.data.images || []}
+					columns={gallery.data.columns}
+				/>
+			))
+		}
+	</div>
+</section>
+
+<style>
+	.evidence-breakout {
+		margin-top: 6rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--border);
+		scroll-margin-top: 6rem;
+	}
+
+	.evidence-breakout__header {
+		display: grid;
+		gap: 1rem;
+		align-items: end;
+		margin-bottom: 1.5rem;
+	}
+
+	.evidence-breakout__eyebrow {
+		margin: 0 0 0.45rem;
+		color: var(--primary);
+		font-family: var(--font-mono);
+		font-size: 0.65rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.evidence-breakout__header h2 {
+		margin: 0;
+		font-family: var(--font-header);
+		font-size: clamp(2.2rem, 5vw, 5.4rem);
+		font-weight: 800;
+		letter-spacing: -0.02em;
+		line-height: 0.9;
+		text-transform: uppercase;
+	}
+
+	.evidence-breakout__header > p {
+		max-width: 42rem;
+		margin: 0;
+		color: var(--muted-foreground);
+		font-size: 0.9rem;
+		line-height: 1.55;
+	}
+
+	.evidence-composition {
+		display: grid;
+		gap: 0.75rem;
+	}
+
+	.evidence-composition__figure {
+		position: relative;
+		display: block;
+		min-height: 16rem;
+		overflow: hidden;
+		border: 1px solid var(--border);
+		border-radius: 0.9rem;
+		background: var(--card);
+	}
+
+	.evidence-composition__figure::after {
+		position: absolute;
+		inset: 38% 0 0;
+		background: linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.82));
+		content: "";
+		pointer-events: none;
+	}
+
+	.evidence-composition__figure img {
+		width: 100%;
+		height: 100%;
+		min-height: inherit;
+		object-fit: cover;
+	}
+
+	.evidence-composition__caption {
+		position: absolute;
+		z-index: 1;
+		right: 1rem;
+		bottom: 1rem;
+		left: 1rem;
+		display: grid;
+		gap: 0.2rem;
+		color: white;
+	}
+
+	.evidence-composition__caption strong {
+		font-family: var(--font-header);
+		font-size: clamp(1.25rem, 2.5vw, 2.2rem);
+		line-height: 1;
+		text-transform: uppercase;
+	}
+
+	.evidence-composition__caption small {
+		max-width: 28rem;
+		color: rgb(255 255 255 / 0.78);
+		font-size: 0.7rem;
+		line-height: 1.4;
+	}
+
+	.evidence-breakout__galleries {
+		display: grid;
+		gap: 2.5rem;
+		margin-top: 4rem;
+	}
+
+	@media (min-width: 768px) {
+		.evidence-breakout__header {
+			grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr);
+		}
+
+		.evidence-composition {
+			grid-template-columns: repeat(12, minmax(0, 1fr));
+			grid-template-rows: repeat(2, minmax(13rem, 1fr));
+		}
+
+		.evidence-composition__system {
+			grid-row: 1 / span 2;
+			grid-column: 1 / span 7;
+		}
+
+		.evidence-composition__intervention,
+		.evidence-composition__record {
+			grid-column: 8 / span 5;
+		}
+
+		.evidence-composition__figure {
+			min-height: 0;
+		}
+	}
+</style>

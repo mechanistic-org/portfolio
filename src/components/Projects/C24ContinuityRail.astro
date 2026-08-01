@@ -1,0 +1,606 @@
+---
+import Toc from "@components/primitives/Toc.astro";
+import type { C24MetricKey, C24RailScene } from "@config/c24RailScenes";
+
+interface Heading {
+	depth: number;
+	slug: string;
+	text: string;
+}
+
+interface GalleryImage {
+	src: string;
+	alt?: string;
+	caption?: string;
+}
+
+interface Gallery {
+	id: string;
+	title?: string;
+	data?: { images?: GalleryImage[] };
+}
+
+interface Props {
+	side: "left" | "right";
+	scenes: C24RailScene[];
+	headings: Heading[];
+	scars: Record<string, any>[];
+	metrics: Partial<Record<C24MetricKey, string>>;
+	bom: { label?: string; value?: string }[];
+	facts: [string, unknown][];
+	galleries: Gallery[];
+	references: { text: string; href?: string }[];
+	audioUrl?: string;
+}
+
+const { side, scenes, headings, scars, metrics, bom, facts, galleries, references, audioUrl } =
+	Astro.props;
+
+const metricLabels: Record<C24MetricKey, string> = {
+	financial: "Financial",
+	process: "Process",
+	governance: "Governance",
+};
+
+const galleryById = new Map(galleries.map((gallery) => [gallery.id, gallery]));
+const firmwareScar = scars.find((scar) => !scar.anchor);
+const contextFacts = facts.filter(([label]) =>
+	["Role", "Period", "Team", "Production"].includes(label),
+);
+const galleryImageCount = galleries.reduce(
+	(total, gallery) => total + (gallery.data?.images?.length || 0),
+	0,
+);
+
+const humanize = (value?: string) =>
+	(value || "").replace(/[-_]+/g, " ").replace(/\b\w/g, (character) => character.toUpperCase());
+
+function mediaFor(scene: C24RailScene) {
+	return scene.media.flatMap((selection) => {
+		const gallery = galleryById.get(selection.galleryId);
+		const byAlt = new Map((gallery?.data?.images || []).map((image) => [image.alt, image]));
+		return selection.imageAlts
+			.map((alt) => {
+				const image = byAlt.get(alt);
+				return image ? { ...image, galleryTitle: gallery?.title } : null;
+			})
+			.filter(Boolean) as (GalleryImage & { galleryTitle?: string })[];
+	});
+}
+---
+
+{
+	side === "left" ? (
+		<aside
+			class="c24-rail c24-rail--left"
+			aria-label="C24 contextual evidence"
+			data-pagefind-ignore
+		>
+			<div class="rail__sticky" data-c24-rail-sticky>
+				<div class="rail__masthead">
+					<span>Context rail</span>
+					<span class="rail__prototype">C24 · R1</span>
+				</div>
+
+				<div class="rail__scenes">
+					{scenes.map((scene) => {
+						const scarLeft = scene.left.kind === "scar" ? scene.left : undefined;
+						const activeScar = scarLeft
+							? scarLeft.unanchored
+								? firmwareScar
+								: scars.find((scar) => scar.anchor === scarLeft.anchor)
+							: undefined;
+
+						return (
+							<section
+								class="rail__scene"
+								data-c24-rail-scene={scene.id}
+								data-c24-parent={scene.parentId}
+							>
+								<a class="rail__eyebrow" href={`#${scene.id}`}>
+									{scene.eyebrow}
+								</a>
+								<h2 class="rail__title">{scene.title}</h2>
+
+								{scene.left.kind === "metrics" && (
+									<dl class="rail__metric-list">
+										{scene.left.keys.map(
+											(key) =>
+												metrics[key] && (
+													<div class="rail__metric">
+														<dt>{metricLabels[key]}</dt>
+														<dd>{metrics[key]}</dd>
+													</div>
+												),
+										)}
+									</dl>
+								)}
+
+								{scene.left.kind === "product" && (
+									<>
+										{firmwareScar && (
+											<div class="rail__scar rail__scar--compact">
+												<div class="rail__scar-head">
+													<span>{firmwareScar.label}</span>
+													<strong>{firmwareScar.value}</strong>
+												</div>
+												<p>{firmwareScar.result}</p>
+											</div>
+										)}
+										<dl class="rail__bom">
+											{bom.map((item) => (
+												<div>
+													<dt>{item.label}</dt>
+													<dd>{item.value}</dd>
+												</div>
+											))}
+										</dl>
+									</>
+								)}
+
+								{scene.left.kind === "scar-index" && (
+									<ol class="rail__scar-index">
+										{scars.map((scar, index) => (
+											<li>
+												<a href={`#${scar.anchor || "ii-the-product-that-shipped"}`}>
+													<span>{String(index + 1).padStart(2, "0")}</span>
+													<strong>{scar.label}</strong>
+													<em data-severity={scar.severity}>{scar.value}</em>
+												</a>
+											</li>
+										))}
+									</ol>
+								)}
+
+								{scene.left.kind === "scar" && activeScar && (
+									<div class="rail__scar">
+										<div class="rail__scar-head">
+											<span data-severity={activeScar.severity}>{activeScar.severity}</span>
+											<strong>{activeScar.value}</strong>
+										</div>
+										<p class="rail__scar-label">{activeScar.label}</p>
+										<dl>
+											<div>
+												<dt>Trigger</dt>
+												<dd>{activeScar.trigger}</dd>
+											</div>
+											<div>
+												<dt>Result</dt>
+												<dd>{activeScar.result}</dd>
+											</div>
+										</dl>
+									</div>
+								)}
+
+								{scene.left.kind === "context" && (
+									<dl class="rail__facts">
+										{contextFacts.map(([label, value]) => (
+											<div>
+												<dt>{label}</dt>
+												<dd>{String(value)}</dd>
+											</div>
+										))}
+									</dl>
+								)}
+
+								{scene.left.kind === "sources" && (
+									<div class="rail__source-counts">
+										<div>
+											<strong>{galleries.length}</strong>
+											<span>evidence galleries</span>
+										</div>
+										<div>
+											<strong>{galleryImageCount}</strong>
+											<span>archival images</span>
+										</div>
+										<div>
+											<strong>{references.length}</strong>
+											<span>external records</span>
+										</div>
+									</div>
+								)}
+							</section>
+						);
+					})}
+				</div>
+			</div>
+		</aside>
+	) : (
+		<aside class="c24-rail c24-rail--right" aria-label="C24 section media" data-pagefind-ignore>
+			<div class="rail__sticky" data-c24-rail-sticky>
+				<div class="rail__toc" data-c24-toc>
+					<Toc headings={headings} label="Article route" />
+				</div>
+
+				<div class="rail__scenes rail__scenes--media">
+					{scenes.map((scene) => {
+						const media = mediaFor(scene);
+						const isSources = scene.left.kind === "sources";
+						return (
+							<section
+								class="rail__scene rail__media-scene"
+								data-c24-rail-scene={scene.id}
+								data-c24-parent={scene.parentId}
+							>
+								<div class="rail__media-head">
+									<span>{scene.eyebrow}</span>
+									<strong>{scene.mediaLabel}</strong>
+								</div>
+
+								{media.length > 0 && (
+									<div
+										class:list={[
+											"rail__media-grid",
+											media.length === 1 && "rail__media-grid--single",
+										]}
+									>
+										{media.map((image) => (
+											<figure>
+												<a href={image.src} aria-label={`Open ${humanize(image.alt)} at full size`}>
+													<img
+														src={image.src}
+														alt={humanize(image.alt)}
+														loading="lazy"
+														decoding="async"
+													/>
+												</a>
+												<figcaption>{image.galleryTitle}</figcaption>
+											</figure>
+										))}
+									</div>
+								)}
+
+								{isSources && (
+									<div class="rail__source-links">
+										{audioUrl && (
+											<a href={audioUrl}>
+												<span>Audio briefing</span>
+												<strong>Listen ↗</strong>
+											</a>
+										)}
+										{references.map((reference) => (
+											<a href={reference.href}>
+												<span>{reference.text}</span>
+												<strong>Open ↗</strong>
+											</a>
+										))}
+									</div>
+								)}
+							</section>
+						);
+					})}
+				</div>
+			</div>
+		</aside>
+	)
+}
+
+<style>
+	.c24-rail {
+		display: none;
+		min-width: 0;
+	}
+
+	.rail__masthead {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.75rem;
+		margin-bottom: 0.75rem;
+		color: var(--muted-foreground);
+		font-family: var(--font-mono);
+		font-size: 0.625rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.rail__prototype {
+		color: var(--primary);
+	}
+
+	.rail__scenes {
+		display: grid;
+		gap: 1rem;
+	}
+
+	.rail__scene {
+		padding: 0.9rem;
+		border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+		border-radius: 0.75rem;
+		background: color-mix(in srgb, var(--card) 88%, transparent);
+		box-shadow: 0 16px 48px rgb(0 0 0 / 0.08);
+	}
+
+	.rail__eyebrow {
+		display: inline-block;
+		margin-bottom: 0.25rem;
+		color: var(--primary);
+		font-family: var(--font-mono);
+		font-size: 0.625rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.rail__title {
+		margin: 0 0 0.85rem;
+		font-size: 1rem;
+		font-weight: 700;
+		line-height: 1.15;
+	}
+
+	.rail__metric-list,
+	.rail__scar dl {
+		display: grid;
+		gap: 0.7rem;
+	}
+
+	.rail__metric,
+	.rail__scar dl > div {
+		padding-left: 0.65rem;
+		border-left: 2px solid color-mix(in srgb, var(--primary) 55%, transparent);
+	}
+
+	.rail__metric dt,
+	.rail__scar dt,
+	.rail__facts dt,
+	.rail__bom dt {
+		margin-bottom: 0.15rem;
+		color: var(--muted-foreground);
+		font-family: var(--font-mono);
+		font-size: 0.59rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.rail__metric dd,
+	.rail__scar dd {
+		font-size: 0.72rem;
+		line-height: 1.45;
+	}
+
+	.rail__scar {
+		display: grid;
+		gap: 0.7rem;
+	}
+
+	.rail__scar--compact {
+		margin-bottom: 0.85rem;
+		padding-bottom: 0.85rem;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.rail__scar--compact p,
+	.rail__scar-label {
+		margin: 0;
+		font-size: 0.72rem;
+		line-height: 1.45;
+	}
+
+	.rail__scar-label {
+		font-weight: 650;
+	}
+
+	.rail__scar-head {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 0.6rem;
+		font-family: var(--font-mono);
+		font-size: 0.61rem;
+		text-transform: uppercase;
+	}
+
+	.rail__scar-head span {
+		color: var(--muted-foreground);
+	}
+
+	.rail__scar-head span[data-severity="critical"] {
+		color: var(--destructive);
+	}
+
+	.rail__scar-head strong {
+		color: var(--foreground);
+		text-align: right;
+	}
+
+	.rail__scar-index {
+		display: grid;
+		gap: 0.15rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.rail__scar-index a {
+		display: grid;
+		grid-template-columns: 1.4rem minmax(0, 1fr);
+		gap: 0.1rem 0.35rem;
+		padding: 0.35rem 0;
+		border-bottom: 1px solid color-mix(in srgb, var(--border) 62%, transparent);
+		font-size: 0.67rem;
+		line-height: 1.25;
+	}
+
+	.rail__scar-index span {
+		color: var(--primary);
+		font-family: var(--font-mono);
+	}
+
+	.rail__scar-index strong {
+		font-weight: 600;
+	}
+
+	.rail__scar-index em {
+		grid-column: 2;
+		color: var(--muted-foreground);
+		font-family: var(--font-mono);
+		font-size: 0.59rem;
+		font-style: normal;
+	}
+
+	.rail__bom,
+	.rail__facts {
+		display: grid;
+		gap: 0.45rem;
+	}
+
+	.rail__bom > div,
+	.rail__facts > div {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 0.5rem;
+		align-items: baseline;
+	}
+
+	.rail__bom dd,
+	.rail__facts dd {
+		max-width: 8.5rem;
+		margin: 0;
+		font-family: var(--font-mono);
+		font-size: 0.62rem;
+		line-height: 1.35;
+		text-align: right;
+	}
+
+	.rail__source-counts {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 0.45rem;
+	}
+
+	.rail__source-counts > div {
+		display: grid;
+		gap: 0.2rem;
+	}
+
+	.rail__source-counts strong {
+		color: var(--primary);
+		font-family: var(--font-mono);
+		font-size: 1.15rem;
+	}
+
+	.rail__source-counts span {
+		color: var(--muted-foreground);
+		font-size: 0.61rem;
+		line-height: 1.2;
+	}
+
+	.rail__toc {
+		margin-bottom: 1.25rem;
+		padding-bottom: 1rem;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.rail__media-scene {
+		padding: 0;
+		border: 0;
+		background: transparent;
+		box-shadow: none;
+	}
+
+	.rail__media-head {
+		display: grid;
+		gap: 0.2rem;
+		margin-bottom: 0.7rem;
+	}
+
+	.rail__media-head span {
+		color: var(--primary);
+		font-family: var(--font-mono);
+		font-size: 0.6rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.rail__media-head strong {
+		font-size: 0.78rem;
+		line-height: 1.35;
+	}
+
+	.rail__media-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.5rem;
+	}
+
+	.rail__media-grid--single {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.rail__media-grid figure {
+		min-width: 0;
+		margin: 0;
+	}
+
+	.rail__media-grid a {
+		display: block;
+	}
+
+	.rail__media-grid img {
+		width: 100%;
+		aspect-ratio: 4 / 3;
+		border: 1px solid var(--border);
+		border-radius: 0.55rem;
+		object-fit: cover;
+		transition:
+			border-color 160ms ease,
+			transform 160ms ease;
+	}
+
+	.rail__media-grid a:hover img,
+	.rail__media-grid a:focus-visible img {
+		border-color: var(--primary);
+		transform: translateY(-2px);
+	}
+
+	.rail__media-grid figcaption {
+		margin-top: 0.25rem;
+		overflow: hidden;
+		color: var(--muted-foreground);
+		font-family: var(--font-mono);
+		font-size: 0.56rem;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	.rail__source-links {
+		display: grid;
+		gap: 0.45rem;
+		margin-top: 0.8rem;
+	}
+
+	.rail__source-links a {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 0.75rem;
+		padding-top: 0.45rem;
+		border-top: 1px solid var(--border);
+		font-size: 0.64rem;
+		line-height: 1.3;
+	}
+
+	.rail__source-links strong {
+		flex: none;
+		color: var(--primary);
+		font-family: var(--font-mono);
+		font-size: 0.57rem;
+		text-transform: uppercase;
+	}
+
+	@media (min-width: 1024px) {
+		.c24-rail {
+			display: block;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.rail__media-grid img {
+			transition: none;
+		}
+	}
+</style>

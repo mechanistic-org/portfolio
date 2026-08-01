@@ -27,6 +27,10 @@ import Gallery from "@components/primitives/Gallery.astro";
 import Toc from "@components/primitives/Toc.astro";
 import Navbox from "@components/primitives/Navbox.astro";
 import Hatnote from "@components/primitives/Hatnote.astro";
+import C24ContinuityRail from "@components/Projects/C24ContinuityRail.astro";
+import C24EvidenceBreakout from "@components/Projects/C24EvidenceBreakout.astro";
+import C24RailCoordinator from "@components/Projects/C24RailCoordinator.astro";
+import { c24RailScenes } from "@config/c24RailScenes";
 
 interface Props {
 	entry: { data: Record<string, any> };
@@ -39,7 +43,11 @@ const { entry, Content, headings = [], nextProject, prevProject } = Astro.props;
 const d = entry.data;
 
 const pretty = (s?: string) =>
-	s ? String(s).replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) : undefined;
+	s
+		? String(s)
+				.replace(/_/g, " ")
+				.replace(/\b\w/g, (c) => c.toUpperCase())
+		: undefined;
 const yr = (x: any) => (x ? new Date(x).getFullYear() : null);
 const period = [yr(d.date), yr(d.endDate)].filter(Boolean).join("–") || d.duration;
 
@@ -74,6 +82,11 @@ const isDeepDive =
 	d.tier === "deep_dive" ||
 	["deep_dive", "flagship"].includes((d.presentation_mode || "").toLowerCase());
 const lite = !isDeepDive;
+const useC24ContinuityRails = d.slug === "c24" && !lite;
+const articleHeadingIds = new Set(headings.map((heading) => heading.slug));
+const activeC24RailScenes = useC24ContinuityRails
+	? c24RailScenes.filter((scene) => articleHeadingIds.has(scene.id))
+	: [];
 
 const meta = [
 	pretty(d.employer),
@@ -128,113 +141,152 @@ const navNext = nextProject
 			photoCount={images.length || undefined}
 		/>
 
-		<div class="lg:grid lg:grid-cols-[260px_minmax(0,1fr)_300px] lg:gap-8 xl:gap-12">
-			{/* LEFT — forensic HUD */}
-			<HudRail>
-				<Collapse title="Key Facts" open={true}>
-					<Infobox facts={facts} />
-				</Collapse>
-				<HudMetrics metrics={d.forensic_metrics || {}} open={!lite} />
-				<ScarTimeline scars={scars} open={!lite} />
+		<C24RailCoordinator enabled={useC24ContinuityRails}>
+			<div class="lg:grid lg:grid-cols-[260px_minmax(0,1fr)_300px] lg:gap-8 xl:gap-12">
+				{/* LEFT — forensic HUD */}
 				{
-					bom.length > 0 && (
-						<Collapse title="Bill of Materials" count={bom.length} open={false}>
-							<ul class="space-y-1.5">
-								{bom.map((b: any) => (
-									<li class="flex items-baseline justify-between gap-3 text-sm">
-										<span class="text-muted-foreground">{b.label}</span>
-										{b.value && <span class="text-foreground font-mono text-xs">{b.value}</span>}
-									</li>
-								))}
-							</ul>
-						</Collapse>
+					useC24ContinuityRails ? (
+						<C24ContinuityRail
+							side="left"
+							scenes={activeC24RailScenes}
+							headings={headings}
+							scars={scars}
+							metrics={d.forensic_metrics || {}}
+							bom={bom}
+							facts={facts}
+							galleries={galleries}
+							references={references}
+							audioUrl={d.audio_url}
+						/>
+					) : (
+						<HudRail>
+							<Collapse title="Key Facts" open={true}>
+								<Infobox facts={facts} />
+							</Collapse>
+							<HudMetrics metrics={d.forensic_metrics || {}} open={!lite} />
+							<ScarTimeline scars={scars} open={!lite} />
+							{bom.length > 0 && (
+								<Collapse title="Bill of Materials" count={bom.length} open={false}>
+									<ul class="space-y-1.5">
+										{bom.map((b: any) => (
+											<li class="flex items-baseline justify-between gap-3 text-sm">
+												<span class="text-muted-foreground">{b.label}</span>
+												{b.value && (
+													<span class="text-foreground font-mono text-xs">{b.value}</span>
+												)}
+											</li>
+										))}
+									</ul>
+								</Collapse>
+							)}
+						</HudRail>
 					)
 				}
-			</HudRail>
 
-			{/* CENTER — the article */}
-			<main class="min-w-0">
-				{d.hatnote && <Hatnote>{d.hatnote}</Hatnote>}
-				{d.forensic_summary && <ForensicSummary summary={d.forensic_summary} />}
-				<div class="markdown-content max-w-3xl">
-					<Content />
-				</div>
+				{/* CENTER — the article */}
+				<main class="min-w-0">
+					{d.hatnote && <Hatnote>{d.hatnote}</Hatnote>}
+					{d.forensic_summary && <ForensicSummary summary={d.forensic_summary} />}
+					<div class="markdown-content max-w-3xl">
+						<Content />
+					</div>
 
-				{/* LITE RECORD NOTE — rendered by the template, not typed into 53 files.
+					{
+						/* LITE RECORD NOTE — rendered by the template, not typed into 53 files.
 				    A lite page is a complete small thing, not a truncated large one, and
 				    saying so converts thinness from "unfinished" into stated editorial
-				    policy. It is also true: the archive holds far more than the page. */}
-				{
-					lite && (
-						<p class="text-muted-foreground mt-12 max-w-3xl border-t border-white/10 pt-5 font-mono text-xs leading-relaxed">
-							<span class="text-primary">Lite record.</span> This page carries what can be
-							stated and sourced briefly. The program archive holds more — drawings, test
-							data, and the decisions behind them — and is available on request.
-						</p>
-					)
-				}
-				{
-					!lite && galleries.length > 0 && (
-						<section class="mt-16">
-							<h2 class="h2 mb-6">Visual Evidence</h2>
-							<div class="space-y-10">
-								{galleries.map((g: any) => (
-									<Gallery title={g.title} images={g.data.images} columns={g.data.columns} />
-								))}
-							</div>
-						</section>
-					)
-				}
-				{
-					d.cast && d.cast.length > 0 && (
-						<section class="mt-16">
-							<h2 class="h2 mb-6">Cast &amp; Credits</h2>
-							<Cast cast={d.cast} />
-						</section>
-					)
-				}
-			</main>
-
-			{/* RIGHT — contents · media · references */}
-			<aside class="mt-12 space-y-10 lg:mt-0">
-				<div class="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:space-y-10 lg:overflow-y-auto">
-					<Toc headings={headings} />
-
+				    policy. It is also true: the archive holds far more than the page. */
+					}
 					{
-						images.length > 0 && (
-							<div>
-								<div class="text-muted-foreground mb-3 font-mono text-[10px] font-bold tracking-widest uppercase">
-									Media · {images.length}
-								</div>
-								<div class="grid grid-cols-2 gap-2">
-									{images.slice(0, 6).map((im) => (
-										<img
-											src={im.src}
-											alt={im.alt || ""}
-											loading="lazy"
-											class="border-border aspect-square w-full rounded border object-cover"
-										/>
+						lite && (
+							<p class="text-muted-foreground mt-12 max-w-3xl border-t border-white/10 pt-5 font-mono text-xs leading-relaxed">
+								<span class="text-primary">Lite record.</span> This page carries what can be stated
+								and sourced briefly. The program archive holds more — drawings, test data, and the
+								decisions behind them — and is available on request.
+							</p>
+						)
+					}
+					{
+						!lite && !useC24ContinuityRails && galleries.length > 0 && (
+							<section class="mt-16">
+								<h2 class="h2 mb-6">Visual Evidence</h2>
+								<div class="space-y-10">
+									{galleries.map((g: any) => (
+										<Gallery title={g.title} images={g.data.images} columns={g.data.columns} />
 									))}
 								</div>
-							</div>
+							</section>
 						)
 					}
-
 					{
-						d.audio_url && (
-							<div>
-								<div class="text-muted-foreground mb-3 font-mono text-[10px] font-bold tracking-widest uppercase">
-									Briefing
-								</div>
-								<audio controls preload="none" src={d.audio_url} class="w-full" />
-							</div>
+						d.cast && d.cast.length > 0 && (
+							<section class="mt-16">
+								<h2 class="h2 mb-6">Cast &amp; Credits</h2>
+								<Cast cast={d.cast} />
+							</section>
 						)
 					}
+				</main>
 
-					<References references={references} />
-				</div>
-			</aside>
-		</div>
+				{/* RIGHT — contents · media · references */}
+				{
+					useC24ContinuityRails ? (
+						<C24ContinuityRail
+							side="right"
+							scenes={activeC24RailScenes}
+							headings={headings}
+							scars={scars}
+							metrics={d.forensic_metrics || {}}
+							bom={bom}
+							facts={facts}
+							galleries={galleries}
+							references={references}
+							audioUrl={d.audio_url}
+						/>
+					) : (
+						<aside class="mt-12 space-y-10 lg:mt-0">
+							<div class="lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:space-y-10 lg:overflow-y-auto">
+								<Toc headings={headings} />
+
+								{images.length > 0 && (
+									<div>
+										<div class="text-muted-foreground mb-3 font-mono text-[10px] font-bold tracking-widest uppercase">
+											Media · {images.length}
+										</div>
+										<div class="grid grid-cols-2 gap-2">
+											{images.slice(0, 6).map((im) => (
+												<img
+													src={im.src}
+													alt={im.alt || ""}
+													loading="lazy"
+													class="border-border aspect-square w-full rounded border object-cover"
+												/>
+											))}
+										</div>
+									</div>
+								)}
+
+								{d.audio_url && (
+									<div>
+										<div class="text-muted-foreground mb-3 font-mono text-[10px] font-bold tracking-widest uppercase">
+											Briefing
+										</div>
+										<audio controls preload="none" src={d.audio_url} class="w-full" />
+									</div>
+								)}
+
+								<References references={references} />
+							</div>
+						</aside>
+					)
+				}
+			</div>
+		</C24RailCoordinator>
+		{
+			useC24ContinuityRails && galleries.length > 0 && (
+				<C24EvidenceBreakout galleries={galleries} heroImage={d.heroImage} />
+			)
+		}
 		<Navbox prev={navPrev} next={navNext} />
 	</article>
 </BaseLayout>
