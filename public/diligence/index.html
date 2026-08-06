@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Opportunity Diligence · Erik Norris</title>
+<meta name="description" content="Before committing to a program, the opportunity gets the same treatment as a design: framed, measured against primary sources, modeled with stated assumptions, and gated. This is the procedure.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://eriknorris.com/diligence/">
+<meta property="og:title" content="Opportunity Diligence · Erik Norris">
+<meta property="og:description" content="Evidence tiers, primary-source passes, models with stated assumptions, and gated decisions. The procedure behind the decisions.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://eriknorris.com/diligence/">
+<style>
+  :root { color-scheme:light;
+    --plane:#f4f6f8; --surface:#fbfcfd; --ink:#16202b; --ink-2:#4c5866; --muted:#8a94a0;
+    --grid:#e3e7ec; --axis:#c3cad2; --ring:rgba(22,32,43,.10); --chipbg:rgba(22,32,43,.045);
+    --rec:#2a78d6; --clm:#eb6834; --live:rgba(42,120,214,.08); }
+  @media (prefers-color-scheme:dark){ :root{ color-scheme:dark;
+    --plane:#101419; --surface:#1a1f26; --ink:#e7ecf2; --ink-2:#b8c2cc; --muted:#8a94a0;
+    --grid:#2a313a; --axis:#39424d; --ring:rgba(255,255,255,.10); --chipbg:rgba(231,236,242,.06);
+    --rec:#3987e5; --clm:#d95926; --live:rgba(57,135,229,.12); } }
+
+  * { box-sizing:border-box; }
+  body { background:var(--plane); color:var(--ink); margin:0;
+         font:15.5px/1.6 "Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif; }
+  .page { max-width:760px; margin:0 auto; padding:48px 22px 80px; }
+  .eyebrow { font:600 11px/1.2 "Cascadia Code",Consolas,ui-monospace,monospace;
+             letter-spacing:.10em; text-transform:uppercase; color:var(--muted); }
+  h1 { font:650 34px/1.12 "Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;
+       letter-spacing:-.012em; margin:.25em 0 .3em; text-wrap:balance; }
+  h2 { font:650 19px/1.25 "Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;
+       margin:38px 0 8px; letter-spacing:-.005em; }
+  p { color:var(--ink-2); margin:.55em 0; max-width:68ch; }
+  p.lede { color:var(--ink); font-size:17px; max-width:62ch; }
+
+  .tier { display:inline-flex; align-items:center; gap:6px;
+          font:600 11px/1 "Cascadia Code",Consolas,ui-monospace,monospace; letter-spacing:.06em;
+          padding:4px 8px; border-radius:4px; background:var(--chipbg); color:var(--ink-2); }
+  .tier i { width:8px; height:8px; border-radius:2px; display:inline-block; }
+  .tier.primary i{ background:var(--rec); }
+  .tier.reported i{ background:#1baf7a; }
+  .tier.claimed i{ background:var(--clm); }
+  .tier.modeled i{ background:transparent; border:1.5px dashed var(--muted); border-radius:50%; }
+  .tiers { display:grid; gap:10px; margin:14px 0; }
+  .tierrow { background:var(--surface); border:1px solid var(--ring); border-radius:6px;
+             padding:12px 16px; display:grid; grid-template-columns:110px 1fr; gap:14px; align-items:start; }
+  .tierrow p { margin:0; font-size:14px; }
+  @media (max-width:560px){ .tierrow{ grid-template-columns:1fr; gap:6px; } }
+
+  ol.proc { counter-reset:step; list-style:none; padding:0; margin:14px 0; display:grid; gap:10px; }
+  ol.proc li { background:var(--surface); border:1px solid var(--ring); border-radius:6px;
+               padding:14px 16px 14px 58px; position:relative; color:var(--ink-2); font-size:14.5px; }
+  ol.proc li b { color:var(--ink); display:block; margin-bottom:2px; font-size:15px; }
+  ol.proc li::before { counter-increment:step; content:counter(step);
+    position:absolute; left:16px; top:14px; width:26px; height:26px; border-radius:50%;
+    background:var(--live); border:1px solid var(--ring); color:var(--rec);
+    font:650 13px/26px "Segoe UI Variable Display","Segoe UI",system-ui,sans-serif; text-align:center; }
+
+  figure { margin:16px 0 6px; background:var(--surface); border:1px solid var(--ring); border-radius:8px;
+           padding:16px 18px 12px; }
+  figcaption { font-weight:640; font-size:14px; margin-bottom:10px; color:var(--ink); }
+  svg text { font:12px "Segoe UI",system-ui,sans-serif; fill:var(--ink-2); }
+  svg text.val { fill:var(--ink); font-weight:600; font-variant-numeric:tabular-nums; }
+  .fignote { font-size:12.5px; color:var(--muted); margin-top:8px; }
+
+  .case { background:var(--surface); border:1px solid var(--ring); border-left:3px solid var(--rec);
+          border-radius:0 8px 8px 0; padding:16px 20px; margin:14px 0; }
+  .case p { margin:.4em 0; }
+
+  ul.outputs { color:var(--ink-2); padding-left:20px; } ul.outputs li{ margin:6px 0; }
+  .contact { margin-top:44px; padding-top:18px; border-top:1px solid var(--axis);
+             font-size:14px; color:var(--ink-2); }
+  .contact a { color:var(--rec); text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="eyebrow">Erik Norris · method</div>
+  <h1>Opportunity diligence</h1>
+  <p class="lede">Before I commit to a program, the opportunity gets the same treatment as a design:
+     framed, measured against primary sources, modeled with stated assumptions, and gated.
+     This page is the procedure. It exists because the measurement keeps changing the decision.</p>
+
+  <h2>Why</h2>
+  <p>Job descriptions, pitch decks, and press releases are marketing surfaces. The record lives
+     somewhere else: federal award ledgers, regulatory filings, corporate registrations, archived
+     job boards, posted compensation bands, disclosure data. The distance between the surface and
+     the record is measurable. Sometimes it is small, and the surface can be trusted. Sometimes it
+     runs ten or twenty to one, and that number is the finding.</p>
+
+  <h2>Evidence tiers</h2>
+  <p>Every figure in a diligence file carries exactly one tag. The discipline is the product:
+     nothing tagged CLAIMED or MODELED ever gets repeated as fact, by me or by the file.</p>
+  <div class="tiers">
+    <div class="tierrow"><span class="tier primary"><i></i>PRIMARY</span>
+      <p>A government or corporate record I queried directly: award databases, securities filings,
+         state registrations, archived pages. The strongest tier and the one worth the extra hour.</p></div>
+    <div class="tierrow"><span class="tier reported"><i></i>REPORTED</span>
+      <p>Journalism or private-market data, carried with its outlet and date. Credible, checkable,
+         and occasionally wrong: a live re-read of a cited article is cheap and has caught
+         misattributions in my own files.</p></div>
+    <div class="tierrow"><span class="tier claimed"><i></i>CLAIMED</span>
+      <p>A company statement with no independent verification. Proof that the claim exists,
+         never proof of its substance. Carried at face value in no model, ever.</p></div>
+    <div class="tierrow"><span class="tier modeled"><i></i>MODELED</span>
+      <p>My own arithmetic from bounded inputs, with every assumption stated and intervals instead
+         of points. Judgment, labeled as judgment.</p></div>
+  </div>
+
+  <h2>The procedure</h2>
+  <ol class="proc">
+    <li><b>Frame the decision.</b> What is actually being decided, whose call it is, and what
+        evidence would change it. Written first, so the research serves a question instead of
+        wandering.</li>
+    <li><b>Sweep the reporting.</b> Both directions: the favorable coverage and the skeptical
+        record, each with dates. Conflicts between sources get kept, not resolved by preference.</li>
+    <li><b>Hit the primary sources.</b> The claims-versus-record pass: every load-bearing number
+        the counterparty publishes, measured against the strongest ledger that exists. This step
+        is where decisions actually change.</li>
+    <li><b>Model what is unknowable.</b> Burn, runway, compensation, scenarios. Stated
+        assumptions, ranges not points, and a written list of what would falsify each estimate.</li>
+    <li><b>Gate the next actions.</b> Cheapest questions first. Nothing binds, and nothing
+        personal moves, until the gate ahead of it passes.</li>
+    <li><b>Write the decision record.</b> The ruling, the reasons, the evidence trail, and the
+        falsifiers, dated. Future decisions inherit the file instead of the fog.</li>
+  </ol>
+
+  <h2>The chart language</h2>
+  <figure>
+    <figcaption>One grammar, everywhere: solid is verified, hollow is unverified</figcaption>
+    <svg viewBox="0 0 700 118" style="width:100%;height:auto" role="img"
+         aria-label="Demonstration bars: a verified record value, a claimed value several times larger, and a dashed outline for authorized but unverified figures">
+      <path d="M8,20 L119,20 Q123,20 123,24 L123,32 Q123,36 119,36 L8,36 Z" fill="var(--rec)"/>
+      <text class="val" x="131" y="32">record, verified against a ledger</text>
+      <path d="M8,48 L511,48 Q515,48 515,52 L515,60 Q515,64 511,64 L8,64 Z" fill="var(--clm)"/>
+      <text class="val" x="523" y="60">claimed</text>
+      <rect x="8" y="76" width="330" height="16" rx="4" fill="none" stroke="var(--rec)"
+            stroke-width="1.5" stroke-dasharray="5 3"/>
+      <text class="val" x="346" y="88">authorized, funding unverified</text>
+      <line x1="8" y1="100" x2="692" y2="100" stroke="var(--axis)" stroke-width="1"/>
+    </svg>
+    <div class="fignote">Every bar is labeled with its value and tier. Palettes are validated for
+      colorblind separation in light and dark themes before anything ships. The gap between the
+      solid bar and the rest is the analysis.</div>
+  </figure>
+
+  <h2>The founding case</h2>
+  <div class="case">
+    <p>The method's first full run: a confidential leadership search at a robotics company,
+       August 2026. One evening, three parallel analysis lanes, cross-checked with zero factual
+       conflicts.</p>
+    <p>The passes: sixteen months of archived job boards, the complete federal prime-award ledger,
+       securities and state filings, compensation receipts from public disclosure data, and a
+       recruiter-channel profile. Headline numbers ran four to twenty times ahead of the
+       primary-source record. The capital base resolved to an interval, not a number. The
+       compensation figure that mattered turned out to be labeled, in small print, an estimate.</p>
+    <p>The decision closed the same day, in writing, with the reasons and the falsifiers attached.
+       The full case file stays private. The method does not.</p>
+  </div>
+
+  <h2>What a run produces</h2>
+  <ul class="outputs">
+    <li>A decision dossier: the frame, the evidence, the gates, and the dated ruling.</li>
+    <li>A claims-versus-record analysis with every figure tiered and sourced.</li>
+    <li>Financial state and scenario models with stated assumptions and falsifiers.</li>
+    <li>A one-page visual instrument for the decision itself.</li>
+  </ul>
+  <p>The same procedure runs on vendors, partners, acquisitions, and programs. The artifact leads;
+     ask about the method after you have read one.</p>
+
+  <div class="contact">
+    <a href="mailto:erik@mechanistic.com">erik@mechanistic.com</a> ·
+    <a href="https://eriknorris.com">eriknorris.com</a> ·
+    hiring me? start with <a href="/yes-shape/">the yes-shape</a>
+  </div>
+</div>
+</body>
+</html>
