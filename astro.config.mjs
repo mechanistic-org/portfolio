@@ -113,6 +113,12 @@ export default defineConfig({
 		mdx(),
 		react(),
 		sitemap({
+			// Static public/ pages are not Astro routes, so they never reach the
+			// filter below and must be advertised explicitly.
+			customPages: [
+				"https://eriknorris.com/diligence/",
+				"https://eriknorris.com/yes-shape/",
+			],
 			// Surfaces that exist for the operator, the build, or agents - not for a
 			// reader arriving from search. Keep this list in sync with the
 			// X-Robots-Tag rules in public/_headers: dropping a URL from the sitemap
