@@ -40,6 +40,8 @@ const { enabled = false } = Astro.props;
 
 		private handleModeChange = () => this.configure();
 
+		// Post-load updates are rAF-gated and can stall in embedded/headless panes that
+		// do not composite; that is an intentional tradeoff for real visible-tab browsers.
 		private scheduleUpdate = () => {
 			cancelAnimationFrame(this.resizeFrame);
 			this.resizeFrame = requestAnimationFrame(() => this.updateActiveScene());

@@ -94,7 +94,10 @@ const {
 			import siteData from "@config/siteData.json";
 			import MOS from "motion-on-scroll";
 
-			if (siteData.useAnimations === true) {
+			if (
+				siteData.useAnimations === true &&
+				!window.matchMedia("(prefers-reduced-motion: reduce)").matches
+			) {
 				MOS.init({
 					once: true,
 					duration: 0.75,

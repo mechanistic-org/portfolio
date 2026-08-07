@@ -43,6 +43,21 @@ const metricLabels: Record<C24MetricKey, string> = {
 };
 
 const galleryById = new Map(galleries.map((gallery) => [gallery.id, gallery]));
+if (side === "right") {
+	for (const scene of scenes) {
+		for (const selection of scene.media) {
+			const gallery = galleryById.get(selection.galleryId);
+			const availableAlts = new Set((gallery?.data?.images || []).map((image) => image.alt));
+			for (const imageAlt of selection.imageAlts) {
+				if (!availableAlts.has(imageAlt)) {
+					console.warn(
+						`[C24ContinuityRail] Missing configured imageAlt "${imageAlt}" in gallery "${selection.galleryId}" for scene "${scene.id}".`,
+					);
+				}
+			}
+		}
+	}
+}
 const firmwareScar = scars.find((scar) => !scar.anchor);
 const contextFacts = facts.filter(([label]) =>
 	["Role", "Period", "Team", "Production"].includes(label),
@@ -100,7 +115,7 @@ function mediaFor(scene: C24RailScene) {
 								<a class="rail__eyebrow" href={`#${scene.id}`}>
 									{scene.eyebrow}
 								</a>
-								<h2 class="rail__title">{scene.title}</h2>
+								<p class="rail__title">{scene.title}</p>
 
 								{scene.left.kind === "metrics" && (
 									<dl class="rail__metric-list">
@@ -216,6 +231,7 @@ function mediaFor(scene: C24RailScene) {
 					{scenes.map((scene) => {
 						const media = mediaFor(scene);
 						const isSources = scene.left.kind === "sources";
+						const showPortalStub = scene.title === "Governance & Rhythm";
 						return (
 							<section
 								class="rail__scene rail__media-scene"
@@ -224,7 +240,7 @@ function mediaFor(scene: C24RailScene) {
 							>
 								<div class="rail__media-head">
 									<span>{scene.eyebrow}</span>
-									<strong>{scene.mediaLabel}</strong>
+									<p class="rail__title">{scene.mediaLabel}</p>
 								</div>
 
 								{media.length > 0 && (
@@ -247,6 +263,30 @@ function mediaFor(scene: C24RailScene) {
 												<figcaption>{image.galleryTitle}</figcaption>
 											</figure>
 										))}
+									</div>
+								)}
+
+								{showPortalStub && (
+									<div
+										class="rail__portal-study"
+										role="group"
+										aria-label="Inert portal stub treatment comparison"
+										data-prototype-furniture
+									>
+										<div class="rail__portal-stub rail__portal-stub--ink">
+											<svg viewBox="0 0 28 28" aria-hidden="true">
+												<path d="M14.8 3.8c5.7.5 9.9 4.2 9.6 9.7-.3 5.7-4.7 10.2-10.6 10.6C8.2 24.4 3.7 20.3 3.6 14.8 3.5 9.1 8 4.4 14.8 3.8Z" />
+												<path d="M9.2 15.7c1.7-3.4 5.7-5.1 9.6-3.4M17.1 8.8l2 3.5-3.8 1.4" />
+											</svg>
+											<span>Portal stub</span>
+										</div>
+										<div class="rail__portal-stub rail__portal-stub--ghost">
+											<svg viewBox="0 0 28 28" aria-hidden="true">
+												<path d="M14.8 3.8c5.7.5 9.9 4.2 9.6 9.7-.3 5.7-4.7 10.2-10.6 10.6C8.2 24.4 3.7 20.3 3.6 14.8 3.5 9.1 8 4.4 14.8 3.8Z" />
+												<path d="M9.2 15.7c1.7-3.4 5.7-5.1 9.6-3.4M17.1 8.8l2 3.5-3.8 1.4" />
+											</svg>
+											<span>Portal stub</span>
+										</div>
 									</div>
 								)}
 
@@ -516,9 +556,54 @@ function mediaFor(scene: C24RailScene) {
 		text-transform: uppercase;
 	}
 
-	.rail__media-head strong {
+	.rail__media-head .rail__title {
+		margin: 0;
 		font-size: 0.78rem;
 		line-height: 1.35;
+	}
+
+	.rail__portal-study {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.45rem;
+		margin-top: 0.8rem;
+	}
+
+	.rail__portal-stub {
+		display: flex;
+		min-width: 0;
+		align-items: center;
+		gap: 0.35rem;
+		padding: 0.4rem 0.45rem;
+		border: 1px solid var(--border);
+		border-radius: 0.55rem;
+		font-family: var(--font-mono);
+		font-size: 0.55rem;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		line-height: 1.2;
+		text-transform: uppercase;
+	}
+
+	.rail__portal-stub svg {
+		width: 1.35rem;
+		flex: none;
+		fill: none;
+		stroke: currentColor;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke-width: 1.6;
+	}
+
+	.rail__portal-stub--ink {
+		border-color: color-mix(in srgb, var(--primary) 48%, var(--border));
+		background: color-mix(in srgb, var(--primary) 11%, transparent);
+		color: var(--primary);
+	}
+
+	.rail__portal-stub--ghost {
+		border-style: dashed;
+		color: var(--muted-foreground);
 	}
 
 	.rail__media-grid {

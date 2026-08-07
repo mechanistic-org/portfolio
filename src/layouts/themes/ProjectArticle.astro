@@ -82,11 +82,12 @@ const isDeepDive =
 	d.tier === "deep_dive" ||
 	["deep_dive", "flagship"].includes((d.presentation_mode || "").toLowerCase());
 const lite = !isDeepDive;
-const useC24ContinuityRails = d.slug === "c24" && !lite;
+const wantsC24ContinuityRails = d.slug === "c24" && !lite;
 const articleHeadingIds = new Set(headings.map((heading) => heading.slug));
-const activeC24RailScenes = useC24ContinuityRails
+const activeC24RailScenes = wantsC24ContinuityRails
 	? c24RailScenes.filter((scene) => articleHeadingIds.has(scene.id))
 	: [];
+const useC24ContinuityRails = wantsC24ContinuityRails && activeC24RailScenes.length > 0;
 
 const meta = [
 	pretty(d.employer),
