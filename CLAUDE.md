@@ -20,6 +20,16 @@ static output.
 > mode — was fully removed (#104); content truth is migrating to the canon vault (see
 > **Content model**).
 
+**Security tripwire, not law (2026-08-06; expires at Astro >= 6):** the Dependabot
+triage dismissed 26 alerts (8 astro XSS/SSRF advisories patched only in Astro 6/7,
+the miniflare/undici dev-tooling nest, the adapter's /_image SSRF, esbuild's dev
+server) on the rationale "affected code paths never execute in static output." That
+rationale is conditional on this section staying true, not an argument against ever
+changing it. If a future change enables SSR, server islands, or any request-time
+rendering: re-evaluate the dismissed alerts first and take the Astro 6 + Cloudflare
+adapter major as part of the same move, because on Astro 5 those paths go live
+unpatched. Once the stack is on Astro >= 6, delete this note.
+
 ## Commands
 
 | Task | Command |
