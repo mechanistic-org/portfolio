@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Operator's Manual · Erik Norris</title>
+<meta name="description" content="The index for working with Erik Norris: the instruments, the interfaces, and the operating norms. Human-readable and machine-readable.">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://eriknorris.com/manual/">
+<meta property="og:title" content="The Operator's Manual · Erik Norris">
+<meta property="og:description" content="The index for working with me: instruments, interfaces, and operating norms.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://eriknorris.com/manual/">
+<style>
+  :root { color-scheme:light;
+    --plane:#f4f6f8; --surface:#fbfcfd; --ink:#16202b; --ink-2:#4c5866; --muted:#8a94a0;
+    --grid:#e3e7ec; --axis:#c3cad2; --ring:rgba(22,32,43,.10); --chipbg:rgba(22,32,43,.045);
+    --acc:#2a78d6; --live:rgba(42,120,214,.08); }
+  @media (prefers-color-scheme:dark){ :root{ color-scheme:dark;
+    --plane:#101419; --surface:#1a1f26; --ink:#e7ecf2; --ink-2:#b8c2cc; --muted:#8a94a0;
+    --grid:#2a313a; --axis:#39424d; --ring:rgba(255,255,255,.10); --chipbg:rgba(231,236,242,.06);
+    --acc:#3987e5; --live:rgba(57,135,229,.12); } }
+
+  * { box-sizing:border-box; }
+  body { background:var(--plane); color:var(--ink); margin:0;
+         font:15.5px/1.6 "Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif; }
+  .page { max-width:760px; margin:0 auto; padding:48px 22px 80px; }
+  .eyebrow { font:600 11px/1.2 "Cascadia Code",Consolas,ui-monospace,monospace;
+             letter-spacing:.10em; text-transform:uppercase; color:var(--muted); }
+  h1 { font:650 34px/1.12 "Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;
+       letter-spacing:-.012em; margin:.25em 0 .3em; text-wrap:balance; }
+  h2 { font:650 19px/1.25 "Segoe UI Variable Display","Segoe UI",system-ui,sans-serif;
+       margin:38px 0 10px; letter-spacing:-.005em; }
+  p { color:var(--ink-2); margin:.55em 0; max-width:66ch; }
+  p.lede { color:var(--ink); font-size:17px; max-width:62ch; }
+
+  .doors { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:12px; margin:16px 0; }
+  .doors a { display:block; background:var(--surface); border:1px solid var(--ring); border-radius:8px;
+             padding:14px 18px; text-decoration:none; color:var(--ink); }
+  .doors a:hover { border-color:var(--acc); }
+  .doors b { font:640 15.5px/1.3 "Segoe UI Variable Display","Segoe UI",system-ui,sans-serif; }
+  .doors span { display:block; font-size:13.5px; color:var(--ink-2); margin-top:4px; }
+
+  .norm { background:var(--surface); border:1px solid var(--ring); border-left:3px solid var(--acc);
+          border-radius:6px; padding:12px 16px; margin:0 0 10px; }
+  .norm b { color:var(--ink); font-size:14.5px; }
+  .norm p { margin:3px 0 0; font-size:13.5px; }
+  table.chan { border-collapse:collapse; width:100%; font-size:13.5px; margin:10px 0 4px; }
+  table.chan td { padding:7px 10px; border-bottom:1px solid var(--grid); color:var(--ink-2); }
+  table.chan td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+
+  .machine { background:var(--surface); border:1px solid var(--ring); border-radius:8px; padding:14px 18px;
+             font:13px "Cascadia Code",Consolas,ui-monospace,monospace; color:var(--ink-2); }
+  .machine a { color:var(--acc); text-decoration:none; }
+
+  .stamp { font-size:12.5px; color:var(--muted); margin-top:10px; }
+  .contact { margin-top:44px; padding-top:18px; border-top:1px solid var(--axis);
+             font-size:14px; color:var(--ink-2); }
+  .contact a { color:var(--acc); text-decoration:none; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="eyebrow">Erik Norris · index</div>
+  <h1>The operator's manual</h1>
+  <p class="lede">Machines ship with manuals. People mostly don't. This is the index for working
+     with me: the instruments, the interfaces, and the operating norms, human-readable and
+     machine-readable.</p>
+
+  <h2>The instruments</h2>
+  <div class="doors">
+    <a href="/yes-shape/"><b>The yes-shape</b>
+      <span>For recruiters and hiring teams: the seat I take, the lines I hold, exactly what to send.</span></a>
+    <a href="/diligence/"><b>Opportunity diligence</b>
+      <span>How I decide: evidence tiers, primary-source passes, models, gates, decision records.</span></a>
+    <a href="/how-i-work/"><b>How I work</b>
+      <span>The method pillar: operational capability paired directly with project evidence.</span></a>
+    <a href="/about/"><b>About</b>
+      <span>Who I am and where the judgment comes from.</span></a>
+    <a href="/resume/"><b>Resume</b>
+      <span>The record, in standard form.</span></a>
+    <a href="/projects/"><b>Projects</b>
+      <span>The evidence: shipped hardware, forensics, and the work itself.</span></a>
+  </div>
+
+  <h2>Operating norms</h2>
+  <p>Distilled from the working record, not aspirations. The full manual is being authored in
+     the open; these are the load-bearing rules that already govern how I run.</p>
+
+  <div class="norm"><b>Channels match the stakes.</b>
+    <table class="chan">
+      <tr><td>Quick question, small decision</td><td>chat</td></tr>
+      <tr><td>Real decision</td><td>a written decision record, always</td></tr>
+      <tr><td>Detailed discussion</td><td>a meeting, with the material sent ahead</td></tr>
+      <tr><td>Off hours</td><td>call or text</td></tr>
+      <tr><td>Emergency</td><td>call</td></tr>
+      <tr><td>Ad hoc drop-in</td><td>ping first</td></tr>
+    </table></div>
+  <div class="norm"><b>Direct, and evidence-governed.</b>
+    <p>I say what the evidence says, and I yield to evidence, not to pressure. If a question is
+       framed wrong, I will say so before answering inside the frame.</p></div>
+  <div class="norm"><b>Decisions get sized before they get ceremony.</b>
+    <p>Reversible calls get made and noted, not queued for permission. Destructive,
+       outward-facing, or hard-to-reverse calls get asked about first. Every ruling that matters
+       gets written down with its reasons.</p></div>
+  <div class="norm"><b>Uncertainty gets flagged, never papered.</b>
+    <p>Extrapolation is labeled as extrapolation. Gaps do not get filled with confident-sounding
+       inference. Claimed and modeled numbers never get repeated as fact.</p></div>
+  <div class="norm"><b>Fix the process, not the symptom.</b>
+    <p>When a defined process throws an error, the process gets stopped and repaired, not worked
+       around. An alarm from an instrument is a signal about a misconfiguration, never a thing to
+       silence for a green board.</p></div>
+  <div class="norm"><b>Feedback lands when it carries the why.</b>
+    <p>Bring the observation and the reasoning behind it, and I will take it straight, no
+       softening required. I am genuinely willing to be wrong; it just takes evidence rather
+       than friction.</p></div>
+
+  <h2>Machine surfaces</h2>
+  <div class="machine">
+    <a href="/llms.txt">/llms.txt</a> · agent brief<br>
+    <a href="/resume.json">/resume.json</a> · resume, structured<br>
+    <a href="/api/projects.json">/api/projects.json</a> · project index<br>
+    the same interface, for agents
+  </div>
+
+  <p class="stamp">Norms seeded 2026-08-06 from the working record. Sections still being
+     authored: conditions, hours, what I need from a team, known failure modes and their tells.</p>
+
+  <div class="contact">
+    <a href="mailto:erik@mechanistic.com">erik@mechanistic.com</a> ·
+    <a href="https://eriknorris.com">eriknorris.com</a>
+  </div>
+</div>
+</body>
+</html>

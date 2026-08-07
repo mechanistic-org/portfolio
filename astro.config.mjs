@@ -118,6 +118,7 @@ export default defineConfig({
 			customPages: [
 				"https://eriknorris.com/diligence/",
 				"https://eriknorris.com/yes-shape/",
+				"https://eriknorris.com/manual/",
 			],
 			// Surfaces that exist for the operator, the build, or agents - not for a
 			// reader arriving from search. Keep this list in sync with the
