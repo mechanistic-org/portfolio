@@ -16,7 +16,7 @@
 		"check:hud": "node scripts/_archive/verify_deep_hud.cjs",
 		"content:modernize": "python scripts/modernize_content.py",
 		"assets:process": "python ../global_agent/scripts/process_assets.py",
-		"test:visual": "npx tsx scripts/visual_smoke_test.ts"
+		"test:visual": "node scripts/probes/homepage_contract.mjs"
 	},
 	"dependencies": {
 		"@astro-community/astro-embed-youtube": "^0.5.9",

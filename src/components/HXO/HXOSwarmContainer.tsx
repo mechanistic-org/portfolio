@@ -1,12 +1,12 @@
 import { useStore } from "@nanostores/react";
 import ResVizSwarm from "../DataViz/ResVizSwarm";
 import {
-	selectedProject,
-	hoveredProject,
-	selectProject,
-	setHover,
-	clearSelection,
+	focusId,
 	isInsideConsole,
+	pin,
+	pinnedId,
+	setPreview,
+	unpin,
 } from "../../stores/hxoStore";
 
 interface HXOSwarmContainerProps {
@@ -15,33 +15,19 @@ interface HXOSwarmContainerProps {
 }
 
 export default function HXOSwarmContainer({ nodes, links }: HXOSwarmContainerProps) {
-	// Subscribe to store state
-	const currentHover = useStore(hoveredProject);
-	const currentSelection = useStore(selectedProject);
+	const currentFocusId = useStore(focusId);
+	const currentPinnedId = useStore(pinnedId);
 	const consoleActive = useStore(isInsideConsole);
 
-	// Handle events from the Swarm
-
-	// Bridge Hover events?
-	// ResVizSwarm doesn't explicitly emit "onHover" in its props interface yet,
-	// but it has `onNodeSelect` which is called on mouseover in the current implementation (Line 320 of ResVizSwarm).
-	// "If onNodeSelect, onNodeSelect(d)" is called on mouseover.
-	// So `onNodeSelect` acts as a "Preview" trigger.
-
-	// We need to differentiate Hover (Preview) vs Click (Lock).
-	// ResVizSwarm needs an update to support `onNodeClick` vs `onNodeHover`.
-	// For now, let's map `onNodeSelect` to `setHover` (Transient)
-	// And we might need to modify ResVizSwarm to support explicit clicks if we want locking.
-
 	return (
-		<div className="h-full w-full">
+		<div className="h-full w-full" onMouseLeave={() => setPreview(null, "swarm")}>
 			<ResVizSwarm
 				nodes={nodes}
 				links={links}
-				externalHoverId={currentHover || currentSelection || undefined}
-				selectedId={currentSelection}
-				onNodeSelect={(node) => setHover(node ? node.id : null)}
-				onNodeClick={(node) => selectProject(node ? node.id : "")}
+				externalHoverId={currentFocusId ?? undefined}
+				selectedId={currentPinnedId}
+				onNodeSelect={(node) => setPreview(node?.id ?? null, "swarm")}
+				onNodeClick={(node) => (node ? pin(node.id) : unpin())}
 				shouldStart={true}
 				isConsoleHovered={consoleActive}
 			/>

@@ -38,7 +38,7 @@ if (!isUnderConstruction) {
 		// FIX: Remove "Meta" nodes (Bio/Philosophy) as requested by user
 		.filter((n) => n.data.employer !== "erik_norris" && n.id !== "meta/philosophy")
 		.map((n) => {
-			const tier = n.data.tier || 3;
+			const tier = n.data.tier;
 			let presentation_mode = "standard";
 
 			// Tier 1 logic
@@ -49,7 +49,7 @@ if (!isUnderConstruction) {
 			if (n.data.employer === "erik_norris") {
 				presentation_mode = "flagship";
 				// We might want a "meta" mode in the future, but for now Flagship gives the glow.
-			} else if (tier === 2) {
+			} else if (tier === "deep_dive") {
 				presentation_mode = "deep_dive"; // Keep Deep Dive for styling, but radius is calculated
 			}
 
