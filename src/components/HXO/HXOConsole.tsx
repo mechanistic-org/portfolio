@@ -2,37 +2,40 @@ import React, { useEffect, useRef } from "react";
 import TextShimmer from "../Effects/TextShimmer";
 
 import { useStore } from "@nanostores/react";
-import { selectedProject, hoveredProject, setHover, setConsoleHover } from "../../stores/hxoStore";
+import {
+	focusId,
+	pin,
+	pinnedId,
+	previewId,
+	setConsoleHover,
+	setPreview,
+	unpin,
+	viewerId,
+} from "../../stores/hxoStore";
 import SonicHeartbeat from "../Audio/SonicHeartbeat";
 
-// const DEFAULT_COLOR = "#666666";
-
-// Define the shape of the Project Node passed from Assembly
-// This wraps the Astro Content entry data
 interface ConsoleProject {
 	id: string;
 	data: {
 		title: string;
-		date?: string | Date; // Date object or string
+		date?: string | Date;
 		client?: string[];
 		audio_url?: string;
 		forensic_summary?: {
 			trigger?: string;
 			intervention?: string;
 			result?: string;
-			// Legacy fallback
 			objective?: string;
 			friction?: string;
 			method?: string;
 		};
 		metrics?: Record<string, any>;
 		toolchain?: string[];
-		tier?: number;
+		tier?: "deep_dive" | "lite" | string;
 		category?: string;
 	};
 }
 
-// --- ERROR BOUNDARY (Safety Protocol) ---
 class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean }> {
 	constructor(props: { children: React.ReactNode }) {
 		super(props);
@@ -54,6 +57,7 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { has
 					<div className="mb-4 font-mono text-xl font-bold text-red-500">SYSTEM FAILURE</div>
 					<div className="font-mono text-xs text-zinc-500">Forensic Console Render Crash</div>
 					<button
+						type="button"
 						onClick={() => this.setState({ hasError: false })}
 						className="mt-6 border border-red-900/50 px-4 py-2 font-mono text-xs text-red-400 hover:bg-red-900/20"
 					>
@@ -71,41 +75,76 @@ interface HXOConsoleProps {
 	projects: ConsoleProject[];
 }
 
+const TIER_RANK: Record<string, number> = { deep_dive: 0, lite: 1 };
+
+function sortableDate(value: string | Date | undefined) {
+	if (!value) return null;
+	const timestamp = new Date(value).getTime();
+	return Number.isFinite(timestamp) ? timestamp : null;
+}
+
+function isEditableTarget(target: EventTarget | null) {
+	if (!(target instanceof HTMLElement)) return false;
+	return (
+		target.isContentEditable ||
+		["INPUT", "SELECT", "TEXTAREA"].includes(target.tagName) ||
+		Boolean(target.closest('[contenteditable="true"]'))
+	);
+}
+
 export default function HXOConsole({ projects }: HXOConsoleProps) {
-	const selectedId = useStore(selectedProject);
-	const hoveredId = useStore(hoveredProject);
+	const currentPinnedId = useStore(pinnedId);
+	const currentFocusId = useStore(focusId);
+	const currentViewerId = useStore(viewerId);
+	const activeProject = projects.find((project) => project.id === currentViewerId);
 
-	// Derived state
-	const activeId = hoveredId || selectedId;
+	const ledgerProjects = projects
+		.map((project, originalIndex) => ({ project, originalIndex }))
+		.sort((a, b) => {
+			const tierA = TIER_RANK[a.project.data.tier ?? ""] ?? 2;
+			const tierB = TIER_RANK[b.project.data.tier ?? ""] ?? 2;
+			if (tierA !== tierB) return tierA - tierB;
 
-	const viewportProject = projects.find((p) => p.id === activeId);
-	// No fallback default - show Summary if nothing active
-	const activeProject = viewportProject;
+			const dateA = sortableDate(a.project.data.date);
+			const dateB = sortableDate(b.project.data.date);
+			if (dateA === null && dateB !== null) return 1;
+			if (dateA !== null && dateB === null) return -1;
+			if (dateA !== null && dateB !== null && dateA !== dateB) return dateB - dateA;
+			return a.originalIndex - b.originalIndex;
+		})
+		.map(({ project }) => project);
 
-	// Sort for Ledger (Tier 1 -> Date)
-	const ledgerProjects = [...projects].sort((a, b) => {
-		const tierA = a.data.tier || 3;
-		const tierB = b.data.tier || 3;
-		if (tierA !== tierB) return tierA - tierB;
-		const dateA = new Date(a.data.date || 0).getTime();
-		const dateB = new Date(b.data.date || 0).getTime();
-		return dateB - dateA;
-	});
-
-	// Auto-scroll Ledger to active item
 	const ledgerRef = useRef<HTMLDivElement>(null);
-	const isinteractingWithLedger = useRef(false);
+	const isInteractingWithLedger = useRef(false);
 
-	// [FIX] Restored Auto-Scroll with Jitter Protection
-	// Only scroll if the user is NOT physically interacting with the list (i.e. Swarm-driven)
 	useEffect(() => {
-		if (activeId && ledgerRef.current && !isinteractingWithLedger.current) {
-			const row = ledgerRef.current.querySelector(`[data-id="${activeId}"]`);
-			if (row) {
-				row.scrollIntoView({ behavior: "smooth", block: "center" });
+		const handleEscape = (event: KeyboardEvent) => {
+			if (event.key !== "Escape" || isEditableTarget(event.target)) return;
+			if (previewId.get()) {
+				setPreview(null);
+			} else if (pinnedId.get()) {
+				unpin();
 			}
-		}
-	}, [activeId]);
+		};
+
+		window.addEventListener("keydown", handleEscape);
+		return () => window.removeEventListener("keydown", handleEscape);
+	}, []);
+
+	useEffect(() => {
+		const ledger = ledgerRef.current;
+		if (!currentFocusId || !ledger || isInteractingWithLedger.current) return;
+
+		const row = Array.from(ledger.querySelectorAll<HTMLElement>("[data-row-id]")).find(
+			(element) => element.dataset.rowId === currentFocusId,
+		);
+		if (!row) return;
+
+		ledger.scrollTo({
+			top: row.offsetTop - (ledger.clientHeight - row.offsetHeight) / 2,
+			behavior: "smooth",
+		});
+	}, [currentFocusId]);
 
 	return (
 		<ErrorBoundary>
@@ -114,64 +153,88 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 				onMouseEnter={() => setConsoleHover(true)}
 				onMouseLeave={() => setConsoleHover(false)}
 			>
-				{/* 1. VIEWPORT (The Sovereign Card) - DYNAMIC HEIGHT (Auto-Expand/Collapse) */}
-				<div className="custom-scrollbar max-h-[70%] shrink-0 overflow-y-auto border-b border-zinc-800 bg-zinc-900/10 p-6 transition-all duration-300 ease-in-out">
-					{/* Show Active View ONLY if there is an active project AND we are not just previewing the HOVER word */}
-					{activeProject && !activeProject.id.startsWith("demo_") ? (
-						<ActiveSovereignView project={activeProject} />
-					) : (
-						<DefaultSummary projects={projects} />
-					)}
+				<div
+					data-viewer-id={activeProject?.id ?? "orientation"}
+					className="custom-scrollbar h-[70%] shrink-0 overflow-y-auto border-b border-zinc-800 bg-zinc-900/10 p-6"
+				>
+					{activeProject ? <ActiveSovereignView project={activeProject} /> : <DefaultSummary />}
 				</div>
 
-				{/* 2. LEDGER (The List) */}
 				<div className="flex flex-1 flex-col overflow-hidden">
-					{/* Header Removed as Requested */}
 					<div
 						ref={ledgerRef}
 						className="custom-scrollbar flex-1 overflow-y-auto p-2 pb-24"
 						onMouseEnter={() => {
-							isinteractingWithLedger.current = true;
+							isInteractingWithLedger.current = true;
 						}}
 						onMouseLeave={() => {
-							isinteractingWithLedger.current = false;
+							isInteractingWithLedger.current = false;
+						}}
+						onFocusCapture={() => {
+							isInteractingWithLedger.current = true;
+						}}
+						onBlurCapture={(event) => {
+							if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+								isInteractingWithLedger.current = false;
+							}
 						}}
 					>
-						{ledgerProjects.map((p) => {
-							const isSelected = p.id === selectedId;
-							const isHovered = p.id === hoveredId;
-							const isActive = isSelected || isHovered;
+						<ul className="m-0 list-none p-0">
+							{ledgerProjects.map((project) => {
+								const isPinned = project.id === currentPinnedId;
+								const isFocused = project.id === currentFocusId;
+								const rawDate = project.data.date ? String(project.data.date) : "";
 
-							return (
-								<div
-									key={p.id}
-									data-id={p.id}
-									onClick={() => (window.location.href = `/projects/${p.id}`)}
-									onMouseEnter={() => setHover(p.id)}
-									onMouseLeave={() => setHover(null)}
-									className={`group flex cursor-pointer items-center gap-4 border-b border-zinc-800/50 p-3 transition-colors duration-100 ${
-										isActive
-											? "bg-zinc-800/80 text-white shadow-[inset_3px_0_0_#84cc16]"
-											: "opacity-60 hover:bg-zinc-900/50 hover:opacity-100"
-									} `}
-								>
-									<span
-										className={`pointer-events-none w-10 shrink-0 font-mono text-xs ${isActive ? "text-lime-400" : "text-zinc-600"}`}
+								return (
+									<li
+										key={project.id}
+										data-row-id={project.id}
+										className={`group flex items-stretch border-b border-zinc-800/50 transition-colors duration-100 ${
+											isFocused
+												? "bg-zinc-800/80 text-white shadow-[inset_3px_0_0_#84cc16]"
+												: "opacity-60 hover:bg-zinc-900/50 hover:opacity-100 focus-within:opacity-100"
+										}`}
 									>
-										{p.data.date ? new Date(p.data.date).getFullYear() : "####"}
-									</span>
-									<h3
-										className={`pointer-events-none flex-1 truncate text-sm font-medium ${isActive ? "text-white" : "text-zinc-300"}`}
-									>
-										{p.data.title}
-									</h3>
-									{/* Tier Indicator */}
-									{p.data.tier === 1 && (
-										<span className="pointer-events-none h-1.5 w-1.5 shrink-0 rounded-full bg-lime-500/50" />
-									)}
-								</div>
-							);
-						})}
+										<button
+											type="button"
+											aria-pressed={isPinned}
+											data-id={project.id}
+											data-pinned={isPinned}
+											data-focused={isFocused}
+											data-tier={project.data.tier ?? ""}
+											data-date={rawDate}
+											onClick={() => pin(project.id)}
+											onMouseEnter={() => setPreview(project.id, "index-hover")}
+											onMouseLeave={() => setPreview(null, "index-hover")}
+											onFocus={() => setPreview(project.id, "index-focus")}
+											onBlur={() => setPreview(null, "index-focus")}
+											className="flex min-w-0 flex-1 cursor-pointer items-center gap-4 p-3 text-left focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-lime-400"
+										>
+											<span
+												className={`pointer-events-none w-10 shrink-0 font-mono text-xs ${isFocused ? "text-lime-400" : "text-zinc-600"}`}
+											>
+												{project.data.date ? new Date(project.data.date).getFullYear() : "####"}
+											</span>
+											<span
+												className={`pointer-events-none min-w-0 flex-1 truncate text-sm font-medium ${isFocused ? "text-white" : "text-zinc-300"}`}
+											>
+												{project.data.title}
+											</span>
+											{project.data.tier === "deep_dive" && (
+												<span className="pointer-events-none h-1.5 w-1.5 shrink-0 rounded-full bg-lime-500/50" />
+											)}
+										</button>
+										<a
+											href={`/projects/${project.id}/`}
+											aria-label={`Open ${project.data.title}`}
+											className="flex shrink-0 items-center px-3 font-mono text-[10px] tracking-wider text-zinc-500 uppercase transition-colors hover:text-lime-400 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-lime-400"
+										>
+											Open →
+										</a>
+									</li>
+								);
+							})}
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -179,9 +242,6 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 	);
 }
 
-// --- SUB-COMPONENT: Audio Player ---
-
-// --- SUB-COMPONENT: React Port of SovereignNode ---
 function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 	if (!project || !project.data) return <div className="p-4 text-red-500">CORRUPT DATA</div>;
 
@@ -201,7 +261,6 @@ function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 				</div>
 				<h2 className="font-display mb-4 text-3xl font-bold text-white">{title}</h2>
 
-				{/* Audio Player (Functional) */}
 				{audio_url && (
 					<div className="mb-6 flex items-center justify-between rounded-lg border border-zinc-800 bg-zinc-900/50 p-3">
 						<div className="flex-1">
@@ -215,9 +274,7 @@ function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 				)}
 			</header>
 
-			{/* Forensic Grid (Condensed for Viewport) */}
 			<div className="space-y-6">
-				{/* V2 SCHEMA: Result (Outcome) */}
 				{forensic_summary?.result && (
 					<div className="objective">
 						<h3 className="mb-2 font-mono text-xs tracking-widest text-zinc-500 uppercase">
@@ -229,7 +286,6 @@ function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 					</div>
 				)}
 
-				{/* V1 LEGACY: Objective */}
 				{forensic_summary?.objective && !forensic_summary?.result && (
 					<div className="objective">
 						<h3 className="mb-2 font-mono text-xs tracking-widest text-zinc-500 uppercase">
@@ -241,7 +297,6 @@ function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 					</div>
 				)}
 
-				{/* V2 SCHEMA: Trigger & Intervention */}
 				{(forensic_summary?.trigger || forensic_summary?.intervention) && (
 					<div className="rounded border border-zinc-800 bg-zinc-900/30 p-4 text-sm">
 						{forensic_summary.trigger && (
@@ -261,7 +316,6 @@ function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 					</div>
 				)}
 
-				{/* V1 LEGACY: Friction & Method */}
 				{!forensic_summary?.trigger && (forensic_summary?.friction || forensic_summary?.method) && (
 					<div className="rounded border border-zinc-800 bg-zinc-900/30 p-4 text-sm">
 						{forensic_summary.friction && (
@@ -279,25 +333,23 @@ function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 					</div>
 				)}
 
-				{/* Toolchain Pills */}
 				{toolchain && (
 					<div className="flex flex-wrap gap-2 pt-2">
-						{toolchain.slice(0, 5).map((t) => (
+						{toolchain.slice(0, 5).map((tool) => (
 							<span
-								key={t}
+								key={tool}
 								className="rounded border border-zinc-800 bg-zinc-900 px-2 py-1 text-[10px] tracking-wider text-zinc-500 uppercase"
 							>
-								{t}
+								{tool}
 							</span>
 						))}
 					</div>
 				)}
 			</div>
 
-			{/* CTA */}
 			<div className="mt-8 border-t border-zinc-900 pt-4">
 				<a
-					href={`/projects/${project.id}`}
+					href={`/projects/${project.id}/`}
 					className="flex items-center gap-2 font-mono text-xs tracking-widest text-lime-400 uppercase transition-colors hover:text-white"
 				>
 					Open Full Dossier →
@@ -307,61 +359,32 @@ function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 	);
 }
 
-// --- SUB-COMPONENT: Default Summary (Index Card) ---
-function DefaultSummary({ projects }: { projects: ConsoleProject[] }) {
-	const [isHoveringDemo, setIsHoveringDemo] = React.useState(false);
-
-	const handleMouseEnter = () => {
-		// Pick random ENRICHED project (Has forensic summary) to demonstrate swarm interaction
-		const enrichedProjects = projects.filter(
-			(p) =>
-				p.data.forensic_summary &&
-				(p.data.forensic_summary.result ||
-					p.data.forensic_summary.objective ||
-					p.data.forensic_summary.trigger),
-		);
-
-		if (enrichedProjects.length > 0) {
-			const randomProject = enrichedProjects[Math.floor(Math.random() * enrichedProjects.length)];
-			setHover(randomProject.id); // Triggers Swarm Highlight
-			setIsHoveringDemo(true);
-		}
-	};
-
-	const handleMouseLeave = () => {
-		setHover(null); // Clears Swarm Highlight
-		setIsHoveringDemo(false);
-	};
-
+function DefaultSummary() {
 	return (
 		<article className="hxo-node animate-in fade-in flex h-full flex-col justify-center duration-500">
 			<header className="mb-6">
-				{/* Removed "INDEX" Header as requested */}
 				<h2 className="font-display mb-4 text-3xl font-bold text-white">
 					(Product Reality) <TextShimmer className="font-bold">EN</TextShimmer>gine
 				</h2>
 			</header>
 
 			<div className="space-y-6">
-				<div className="objective">
-					<p className="text-sm leading-relaxed font-light text-zinc-300">
-						Principal Mechanical Architect specializing in high-fidelity hardware and program
-						rescue. I stabilize the entropy of product development: structure the chaos, index the
-						decisions, ship the hardware.
-					</p>
-
-					<p className="mt-6 text-sm leading-relaxed font-light text-zinc-300">
-						<span
-							className="cursor-help font-mono text-lime-400 transition-colors hover:text-white"
-							onMouseEnter={handleMouseEnter}
-							onMouseLeave={handleMouseLeave}
-							title="Demonstrates swarm interaction"
-						>
-							HOVER
-						</span>{" "}
-						for preview.
-					</p>
-				</div>
+				<p className="text-sm leading-relaxed font-light text-zinc-300">
+					Principal Mechanical Architect specializing in high-fidelity hardware and program rescue. I
+					stabilize the entropy of product development: structure the chaos, index the decisions, ship
+					the hardware.
+				</p>
+				<nav aria-label="Portfolio orientation" className="flex flex-wrap gap-x-5 gap-y-3 font-mono text-xs tracking-wider uppercase">
+					<a href="/projects/c24/" className="text-lime-400 transition-colors hover:text-white">
+						C|24 dossier →
+					</a>
+					<a href="/resume/" className="text-zinc-400 transition-colors hover:text-white">
+						Résumé →
+					</a>
+					<a href="/projects/" className="text-zinc-400 transition-colors hover:text-white">
+						All Work →
+					</a>
+				</nav>
 			</div>
 		</article>
 	);

@@ -469,6 +469,7 @@ export default function ResVizSwarm({
 			.join("g")
 			.attr("class", "node-group pointer-events-auto")
 			.attr("id", (d: any) => "node-" + d.id)
+			.attr("data-id", (d: any) => d.id)
 			.attr("transform", (d: any) => `translate(${d.x},${d.y})`)
 			.attr("cursor", "pointer");
 
@@ -478,12 +479,6 @@ export default function ResVizSwarm({
 			.append("circle")
 			.attr("r", (d: any) => d.radius)
 			.attr("cursor", "pointer")
-			.on("click", (event, d) => {
-				if (d.presentation_mode === "hidden") return;
-				console.log("[ResVizSwarm] Circle Clicked:", d.id);
-				event.stopPropagation();
-				window.location.href = `/projects/${toSlug(d.id)}`;
-			})
 			.attr("fill", (d: any) => {
 				if (d.presentation_mode === "hidden") return "#475569";
 				return getColor(d);
@@ -503,12 +498,6 @@ export default function ResVizSwarm({
 			)
 			.attr("opacity", (d: any) => (d.presentation_mode === "hidden" ? 0 : 0.9))
 			.style("pointer-events", (d: any) => (d.presentation_mode === "hidden" ? "none" : "auto"));
-
-		const toSlug = (id: string) =>
-			id
-				.toLowerCase()
-				.replace(/\s+/g, "-")
-				.replace(/[^\w-]/g, "");
 
 		const applyDefaultStyle = (selection: any, d: any) => {
 			// This is now redundant with updateVisuals(null) but kept for mouseout completeness if needed?
