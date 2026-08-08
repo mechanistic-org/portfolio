@@ -59,8 +59,9 @@ if (side === "right") {
 	}
 }
 const firmwareScar = scars.find((scar) => !scar.anchor);
+const persistentFacts = facts.filter(([label]) => ["Role", "Period"].includes(label));
 const contextFacts = facts.filter(([label]) =>
-	["Role", "Period", "Team", "Production"].includes(label),
+	["Team", "Production"].includes(label),
 );
 const galleryImageCount = galleries.reduce(
 	(total, gallery) => total + (gallery.data?.images?.length || 0),
@@ -96,6 +97,24 @@ function mediaFor(scene: C24RailScene) {
 					<span>Context rail</span>
 					<span class="rail__prototype">C24 · R1</span>
 				</div>
+
+				{
+					persistentFacts.length > 0 && (
+						<section class="rail__key-facts" aria-labelledby="c24-key-facts-title">
+							<p id="c24-key-facts-title" class="rail__key-facts-title">
+								Key Facts
+							</p>
+							<dl>
+								{persistentFacts.map(([label, value]) => (
+									<div>
+										<dt>{label}</dt>
+										<dd>{String(value)}</dd>
+									</div>
+								))}
+							</dl>
+						</section>
+					)
+				}
 
 				<div class="rail__scenes">
 					{scenes.map((scene) => {
@@ -337,6 +356,57 @@ function mediaFor(scene: C24RailScene) {
 
 	.rail__prototype {
 		color: var(--primary);
+	}
+
+	.rail__key-facts {
+		margin-bottom: 0.75rem;
+		padding: 0.65rem 0.75rem;
+		border-top: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+		border-bottom: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+		background: color-mix(in srgb, var(--card) 72%, transparent);
+	}
+
+	.rail__key-facts-title {
+		margin: 0 0 0.45rem;
+		color: var(--primary);
+		font-family: var(--font-mono);
+		font-size: 0.56rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.rail__key-facts dl {
+		display: grid;
+		gap: 0.35rem;
+		margin: 0;
+	}
+
+	.rail__key-facts dl > div {
+		display: grid;
+		grid-template-columns: 3.1rem minmax(0, 1fr);
+		gap: 0.5rem;
+		align-items: baseline;
+	}
+
+	.rail__key-facts dt,
+	.rail__key-facts dd {
+		margin: 0;
+	}
+
+	.rail__key-facts dt {
+		color: var(--muted-foreground);
+		font-family: var(--font-mono);
+		font-size: 0.54rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+	}
+
+	.rail__key-facts dd {
+		color: var(--foreground);
+		font-size: 0.66rem;
+		line-height: 1.35;
 	}
 
 	.rail__scenes {
