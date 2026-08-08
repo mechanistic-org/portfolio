@@ -60,6 +60,7 @@ const { enabled = false } = Astro.props;
 			this.panels.forEach((panel) => {
 				panel.removeAttribute("data-active");
 				panel.removeAttribute("aria-hidden");
+				panel.removeAttribute("inert");
 			});
 
 			if (!this.mediaQuery?.matches || this.panels.length === 0) return;
@@ -95,6 +96,7 @@ const { enabled = false } = Astro.props;
 				const isActive = panel.dataset.c24RailScene === activeId;
 				panel.toggleAttribute("data-active", isActive);
 				panel.setAttribute("aria-hidden", String(!isActive));
+				panel.toggleAttribute("inert", !isActive);
 				if (isActive) activeParent = panel.dataset.c24Parent || activeId;
 			});
 
@@ -122,12 +124,22 @@ const { enabled = false } = Astro.props;
 			top: 6rem;
 		}
 
+		[data-c24-rails][data-c24-enhanced] .rail__scenes {
+			grid-template-areas: "rail-scene";
+			gap: 0;
+		}
+
 		[data-c24-rails][data-c24-enhanced] [data-c24-rail-scene] {
-			display: none;
+			grid-area: rail-scene;
+			display: block;
+			visibility: hidden;
+			pointer-events: none;
 		}
 
 		[data-c24-rails][data-c24-enhanced] [data-c24-rail-scene][data-active] {
-			display: block;
+			z-index: 1;
+			visibility: visible;
+			pointer-events: auto;
 			animation: c24-rail-enter 180ms ease-out both;
 		}
 	}
