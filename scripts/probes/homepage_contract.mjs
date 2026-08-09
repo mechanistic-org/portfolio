@@ -1,7 +1,9 @@
 import { spawn, spawnSync } from "node:child_process";
+import { mkdir, writeFile } from "node:fs/promises";
 import net from "node:net";
 import path from "node:path";
 import process from "node:process";
+import { pathToFileURL } from "node:url";
 import puppeteer from "puppeteer";
 
 const HOST = "127.0.0.1";
@@ -10,7 +12,10 @@ const BASE_URL = `http://${HOST}:${PORT}/`;
 const READY_TIMEOUT_MS = 90_000;
 const PAGE_TIMEOUT_MS = 45_000;
 const SETTLE_MS = 1_200;
-const EXPECTED_ASSERTIONS = 7;
+const EXPECTED_ASSERTIONS = 13;
+const HARNESS_CACHE_DIR = path.join(process.cwd(), "node_modules", ".cache", "hxo-contract");
+const ARTIFACT_DIR = path.join(HARNESS_CACHE_DIR, "artifacts");
+const ASTRO_HARNESS_CONFIG = path.join(HARNESS_CACHE_DIR, "astro.config.mjs");
 
 const delay = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
@@ -41,7 +46,25 @@ function isPortOccupied() {
 	});
 }
 
-function startAstroServer() {
+async function prepareAstroHarnessConfig() {
+	await mkdir(HARNESS_CACHE_DIR, { recursive: true });
+	const baseConfigUrl = pathToFileURL(path.join(process.cwd(), "astro.config.mjs")).href;
+	await writeFile(
+		ASTRO_HARNESS_CONFIG,
+		[
+			`import baseConfig from ${JSON.stringify(baseConfigUrl)};`,
+			"export default {",
+			"\t...baseConfig,",
+			"\tdevToolbar: { ...(baseConfig.devToolbar ?? {}), enabled: false },",
+			"};",
+			"",
+		].join("\n"),
+		"utf8",
+	);
+	return path.relative(process.cwd(), ASTRO_HARNESS_CONFIG);
+}
+
+function startAstroServer(configPath) {
 	const isWindows = process.platform === "win32";
 	const npmCommand = isWindows ? process.execPath : "npm";
 	const npmArguments = isWindows
@@ -55,24 +78,33 @@ function startAstroServer() {
 				"--port",
 				String(PORT),
 				"--strictPort",
+				"--config",
+				configPath,
 			]
-		: ["run", "dev", "--", "--host", HOST, "--port", String(PORT), "--strictPort"];
-	const child = spawn(
-		npmCommand,
-		npmArguments,
-		{
-			cwd: process.cwd(),
-			env: {
-				...process.env,
-				ASTRO_TELEMETRY_DISABLED: "1",
-				BROWSER: "none",
-				XDG_CONFIG_HOME: path.join(process.cwd(), "node_modules", ".cache", "hxo-contract"),
-			},
-			stdio: ["ignore", "pipe", "pipe"],
-			windowsHide: true,
-			detached: process.platform !== "win32",
+		: [
+				"run",
+				"dev",
+				"--",
+				"--host",
+				HOST,
+				"--port",
+				String(PORT),
+				"--strictPort",
+				"--config",
+				configPath,
+			];
+	const child = spawn(npmCommand, npmArguments, {
+		cwd: process.cwd(),
+		env: {
+			...process.env,
+			ASTRO_TELEMETRY_DISABLED: "1",
+			BROWSER: "none",
+			XDG_CONFIG_HOME: HARNESS_CACHE_DIR,
 		},
-	);
+		stdio: ["ignore", "pipe", "pipe"],
+		windowsHide: true,
+		detached: process.platform !== "win32",
+	});
 
 	let output = "";
 	const capture = (chunk) => {
@@ -131,10 +163,7 @@ async function stopAstroServer(child) {
 		}
 	}
 
-	await Promise.race([
-		new Promise((resolve) => child.once("exit", resolve)),
-		delay(5_000),
-	]);
+	await Promise.race([new Promise((resolve) => child.once("exit", resolve)), delay(5_000)]);
 }
 
 function requireValue(value, message) {
@@ -172,7 +201,10 @@ async function navigate(page, problems) {
 async function getContractIds(page, minimum = 1) {
 	const ids = await page.evaluate(() => {
 		const nodeIds = new Set(
-			Array.from(document.querySelectorAll("g.node-group[data-id]"), (element) => element.dataset.id),
+			Array.from(
+				document.querySelectorAll("g.node-group[data-id]"),
+				(element) => element.dataset.id,
+			),
 		);
 		return Array.from(document.querySelectorAll("button[data-id]"))
 			.map((element) => element.dataset.id)
@@ -258,9 +290,145 @@ async function approachNodeFromRight(page, id) {
 	}
 }
 
+async function waitForFontsAndSwarmReady(page) {
+	await page.evaluate(() => document.fonts.ready);
+	await page.waitForSelector('[data-swarm-ready="true"]', { timeout: PAGE_TIMEOUT_MS });
+}
+
+async function getSwarmNodeSnapshot(page) {
+	return page.evaluate(() =>
+		Array.from(document.querySelectorAll("g.node-group[data-id]"))
+			.map((group) => {
+				const circle = group.querySelector("circle");
+				if (!circle) return null;
+				const rect = circle.getBoundingClientRect();
+				return {
+					id: group.dataset.id,
+					x: rect.left + rect.width / 2,
+					y: rect.top + rect.height / 2,
+					radius: Number(circle.getAttribute("r")),
+				};
+			})
+			.filter(Boolean)
+			.sort((left, right) => left.id.localeCompare(right.id)),
+	);
+}
+
+async function setSwarmMotion(page, desiredState) {
+	const selector = "button[data-swarm-motion-control]";
+	await page.waitForSelector(selector, { timeout: PAGE_TIMEOUT_MS });
+	let currentState = await page.$eval(selector, (button) => button.dataset.motionState);
+	if (currentState !== desiredState) {
+		await page.click(selector);
+		await page.waitForFunction(
+			(state, controlSelector) =>
+				document.querySelector(controlSelector)?.getAttribute("data-motion-state") === state,
+			{ timeout: 5_000 },
+			desiredState,
+			selector,
+		);
+		currentState = await page.$eval(selector, (button) => button.dataset.motionState);
+	}
+	if (currentState !== desiredState) {
+		throw new Error(`Swarm motion control remained ${currentState}; expected ${desiredState}`);
+	}
+}
+
+async function getDirectionalTargets(page) {
+	return page.evaluate(() => {
+		const groups = Array.from(document.querySelectorAll("g.node-group[data-id]"));
+		const nodes = groups
+			.map((group) => {
+				const circle = group.querySelector("circle");
+				const svg = group.ownerSVGElement;
+				if (!circle || !svg || !group.dataset.id) return null;
+				const circleRect = circle.getBoundingClientRect();
+				const svgRect = svg.getBoundingClientRect();
+				return {
+					id: group.dataset.id,
+					x: circleRect.left + circleRect.width / 2,
+					y: circleRect.top + circleRect.height / 2,
+					radius: circleRect.width / 2,
+					svg: svgRect,
+				};
+			})
+			.filter(Boolean)
+			.sort((left, right) => left.id.localeCompare(right.id));
+
+		const schedules = [
+			"left",
+			"right",
+			"top",
+			"bottom",
+			"left",
+			"right",
+			"top",
+			"bottom",
+			"left",
+			"right",
+		];
+		const vectors = {
+			left: [-1, 0],
+			right: [1, 0],
+			top: [0, -1],
+			bottom: [0, 1],
+		};
+		const selected = [];
+		const used = new Set();
+
+		for (const direction of schedules) {
+			const [dx, dy] = vectors[direction];
+			const candidate = nodes.find((node) => {
+				if (used.has(node.id)) return false;
+				const distance = node.radius * 1.15;
+				const start = { x: node.x + dx * distance, y: node.y + dy * distance };
+				const insideSvg =
+					start.x > node.svg.left + 2 &&
+					start.x < node.svg.right - 2 &&
+					start.y > node.svg.top + 2 &&
+					start.y < node.svg.bottom - 2;
+				if (!insideSvg) return false;
+				return nodes.every((other) => {
+					if (other.id === node.id) return true;
+					return Math.hypot(start.x - other.x, start.y - other.y) > other.radius;
+				});
+			});
+			if (!candidate) return { selected, missingDirection: direction };
+			used.add(candidate.id);
+			selected.push({ id: candidate.id, direction });
+		}
+
+		return { selected, missingDirection: null };
+	});
+}
+
+async function approachNodeFromDirection(page, id, direction) {
+	await moveOutsideSwarm(page);
+	const vector = {
+		left: [-1, 0],
+		right: [1, 0],
+		top: [0, -1],
+		bottom: [0, 1],
+	}[direction];
+	if (!vector) throw new Error(`Unknown approach direction: ${direction}`);
+
+	let geometry = requireValue(await getNodeGeometry(page, id), `Node ${id} has no live geometry`);
+	await page.mouse.move(
+		geometry.x + vector[0] * geometry.radius * 1.15,
+		geometry.y + vector[1] * geometry.radius * 1.15,
+	);
+	await delay(60);
+	geometry = requireValue(await getNodeGeometry(page, id), `Node ${id} disappeared during aim`);
+	await page.mouse.move(geometry.x, geometry.y);
+	await delay(120);
+}
+
 async function clickNode(page, id) {
 	for (let attempt = 0; attempt < 3; attempt += 1) {
-		const geometry = requireValue(await getNodeGeometry(page, id), `Node ${id} has no live geometry`);
+		const geometry = requireValue(
+			await getNodeGeometry(page, id),
+			`Node ${id} has no live geometry`,
+		);
 		await page.mouse.click(geometry.x, geometry.y);
 		try {
 			await page.waitForFunction(
@@ -323,12 +491,15 @@ async function assertionPinPersists(page, problems) {
 async function assertionNoDocumentScroll(page, problems) {
 	await navigate(page, problems);
 	const before = await page.evaluate(() => window.scrollY);
-	const svg = requireValue(await page.evaluate(() => {
-		const element = document.querySelector("g.node-group[data-id]")?.ownerSVGElement;
-		if (!element) return null;
-		const rect = element.getBoundingClientRect();
-		return { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
-	}), "Swarm SVG is missing");
+	const svg = requireValue(
+		await page.evaluate(() => {
+			const element = document.querySelector("g.node-group[data-id]")?.ownerSVGElement;
+			if (!element) return null;
+			const rect = element.getBoundingClientRect();
+			return { left: rect.left, top: rect.top, width: rect.width, height: rect.height };
+		}),
+		"Swarm SVG is missing",
+	);
 
 	for (let step = 0; step < 15; step += 1) {
 		const x = svg.left + 20 + ((svg.width - 40) * step) / 14;
@@ -353,16 +524,18 @@ async function assertionNoDocumentScroll(page, problems) {
 	}
 
 	const after = await page.evaluate(() => window.scrollY);
-	if (after !== before) throw new Error(`Preview changed document scrollY from ${before} to ${after}`);
+	if (after !== before)
+		throw new Error(`Preview changed document scrollY from ${before} to ${after}`);
 	assertNoPageProblems(problems);
 }
 
 async function assertionNoLayoutFeedback(page, problems) {
 	await navigate(page, problems);
 	const ids = await page.evaluate(() =>
-		Array.from(document.querySelectorAll("button[data-id]"), (element) => element.dataset.id).filter(
-			Boolean,
-		),
+		Array.from(
+			document.querySelectorAll("button[data-id]"),
+			(element) => element.dataset.id,
+		).filter(Boolean),
 	);
 	if (ids.length < 6) throw new Error(`Expected at least 6 index rows; found ${ids.length}`);
 	const hoverIds = await page.evaluate(() =>
@@ -391,11 +564,12 @@ async function assertionNoLayoutFeedback(page, problems) {
 		await page.mouse.move(center.x, center.y);
 		await delay(350);
 		observedTops.push(
-			await page.evaluate((measurementId) =>
-				Array.from(document.querySelectorAll("button[data-id]"))
-					.find((element) => element.dataset.id === measurementId)
-					?.getBoundingClientRect().top,
-			ids[3],
+			await page.evaluate(
+				(measurementId) =>
+					Array.from(document.querySelectorAll("button[data-id]"))
+						.find((element) => element.dataset.id === measurementId)
+						?.getBoundingClientRect().top,
+				ids[3],
 			),
 		);
 	}
@@ -433,10 +607,9 @@ async function assertionStickyViewerAndEscape(page, problems) {
 	await moveOutsideSwarm(page);
 	await page.keyboard.press("Escape");
 	try {
-		await page.waitForFunction(
-			() => document.querySelector('[data-viewer-id="orientation"]'),
-			{ timeout: 5_000 },
-		);
+		await page.waitForFunction(() => document.querySelector('[data-viewer-id="orientation"]'), {
+			timeout: 5_000,
+		});
 	} catch {
 		const state = await page.evaluate(() => ({
 			viewerId: document.querySelector("[data-viewer-id]")?.getAttribute("data-viewer-id"),
@@ -451,9 +624,7 @@ async function assertionStickyViewerAndEscape(page, problems) {
 			const button = Array.from(document.querySelectorAll("button[data-id]")).find((element) => {
 				const rect = element.getBoundingClientRect();
 				return (
-					element.dataset.id !== excludedId &&
-					rect.top >= 0 &&
-					rect.bottom <= window.innerHeight
+					element.dataset.id !== excludedId && rect.top >= 0 && rect.bottom <= window.innerHeight
 				);
 			});
 			if (!button) return null;
@@ -470,9 +641,8 @@ async function assertionStickyViewerAndEscape(page, problems) {
 	await page.mouse.move(indexSource.x, indexSource.y);
 	await delay(100);
 	await moveOutsideSwarm(page);
-	const focusedViewerId = await page.$eval(
-		"[data-viewer-id]",
-		(element) => element.getAttribute("data-viewer-id"),
+	const focusedViewerId = await page.$eval("[data-viewer-id]", (element) =>
+		element.getAttribute("data-viewer-id"),
 	);
 	if (focusedViewerId !== indexSource.id) {
 		throw new Error("Mouse leave cleared a still-focused index preview");
@@ -480,9 +650,8 @@ async function assertionStickyViewerAndEscape(page, problems) {
 
 	await approachNodeFromRight(page, targetId);
 	await moveOutsideSwarm(page);
-	const restoredViewerId = await page.$eval(
-		"[data-viewer-id]",
-		(element) => element.getAttribute("data-viewer-id"),
+	const restoredViewerId = await page.$eval("[data-viewer-id]", (element) =>
+		element.getAttribute("data-viewer-id"),
 	);
 	if (restoredViewerId !== indexSource.id) {
 		throw new Error("Swarm leave erased the active index-focus preview");
@@ -518,7 +687,8 @@ async function assertionIndexOrder(page, problems) {
 				sawInvalidDate = true;
 				continue;
 			}
-			if (sawInvalidDate) throw new Error(`Dated row ${row.id} follows an invalid date in tier ${tier}`);
+			if (sawInvalidDate)
+				throw new Error(`Dated row ${row.id} follows an invalid date in tier ${tier}`);
 			if (timestamp > previousDate) throw new Error(`Dates increase at ${row.id} in tier ${tier}`);
 			previousDate = timestamp;
 		}
@@ -604,6 +774,277 @@ async function assertionAimIntegrity(page, problems) {
 	assertNoPageProblems(problems);
 }
 
+async function assertionLabelVisibility(page, problems) {
+	await navigate(page, problems);
+	await waitForFontsAndSwarmReady(page);
+	await setSwarmMotion(page, "paused");
+	const targetPlan = await getDirectionalTargets(page);
+	const target = requireValue(
+		targetPlan.selected[0],
+		`No clearance-checked label target is available: ${JSON.stringify(targetPlan)}`,
+	);
+	const targetId = target.id;
+	await approachNodeFromDirection(page, targetId, target.direction);
+	await page.waitForFunction(
+		(projectId) => {
+			const label = document.getElementById(`label-${projectId}`);
+			if (!label) return false;
+			const rect = label.getBoundingClientRect();
+			return Number(getComputedStyle(label).opacity) > 0 && rect.width > 0 && rect.height > 0;
+		},
+		{ timeout: 5_000 },
+		targetId,
+	);
+
+	const evidence = requireValue(
+		await page.evaluate((projectId) => {
+			const group = document.querySelector(`g.node-group[data-id="${CSS.escape(projectId)}"]`);
+			const circle = group?.querySelector("circle");
+			const svg = group?.ownerSVGElement;
+			const label = document.getElementById(`label-${projectId}`);
+			const nodeLayer = svg?.querySelector(":scope > g.nodes");
+			const labelLayer = svg?.querySelector(":scope > g.labels") || label?.parentElement;
+			if (!circle || !svg || !label || !nodeLayer || !labelLayer) return null;
+
+			const labelRect = label.getBoundingClientRect();
+			const circleRect = circle.getBoundingClientRect();
+			const children = Array.from(svg.children);
+			const padding = 16;
+			const left = Math.max(0, Math.min(labelRect.left, circleRect.left) - padding);
+			const top = Math.max(0, Math.min(labelRect.top, circleRect.top) - padding);
+			const right = Math.min(
+				window.innerWidth,
+				Math.max(labelRect.right, circleRect.right) + padding,
+			);
+			const bottom = Math.min(
+				window.innerHeight,
+				Math.max(labelRect.bottom, circleRect.bottom) + padding,
+			);
+			const persistent = Array.from(
+				svg.querySelectorAll('text.label[data-persistent-label="true"]'),
+			).map((element) => {
+				const rect = element.getBoundingClientRect();
+				return {
+					id: element.id,
+					opacity: Number(getComputedStyle(element).opacity),
+					width: rect.width,
+					height: rect.height,
+				};
+			});
+
+			return {
+				labelLayerIndex: children.indexOf(labelLayer),
+				nodeLayerIndex: children.indexOf(nodeLayer),
+				labelOpacity: Number(getComputedStyle(label).opacity),
+				labelRect: {
+					left: labelRect.left,
+					top: labelRect.top,
+					right: labelRect.right,
+					bottom: labelRect.bottom,
+					width: labelRect.width,
+					height: labelRect.height,
+				},
+				clip: { x: left, y: top, width: right - left, height: bottom - top },
+				persistent,
+			};
+		}, targetId),
+		`Focused label evidence is unavailable for ${targetId}`,
+	);
+
+	await mkdir(ARTIFACT_DIR, { recursive: true });
+	await page.screenshot({
+		path: path.join(ARTIFACT_DIR, `assertion-08-label-${targetId}.png`),
+		clip: evidence.clip,
+	});
+
+	if (evidence.labelLayerIndex <= evidence.nodeLayerIndex) {
+		throw new Error("Label layer does not follow the node layer in SVG paint order");
+	}
+	if (
+		evidence.labelOpacity <= 0 ||
+		evidence.labelRect.width <= 0 ||
+		evidence.labelRect.height <= 0
+	) {
+		throw new Error(`Focused label ${targetId} is not visibly rendered`);
+	}
+	const { clip, labelRect } = evidence;
+	if (
+		labelRect.left < clip.x ||
+		labelRect.top < clip.y ||
+		labelRect.right > clip.x + clip.width ||
+		labelRect.bottom > clip.y + clip.height
+	) {
+		throw new Error(`Focused label ${targetId} falls outside its diagnostic screenshot clip`);
+	}
+	const hiddenPersistent = evidence.persistent.filter(
+		(label) => label.opacity <= 0 || label.width <= 0 || label.height <= 0,
+	);
+	if (hiddenPersistent.length > 0) {
+		throw new Error(
+			`Persistent labels are hidden: ${hiddenPersistent.map((label) => label.id).join(", ")}`,
+		);
+	}
+	assertNoPageProblems(problems);
+}
+
+async function assertionNoStaleDim(page, problems) {
+	await navigate(page, problems);
+	const ids = await getContractIds(page);
+	const targetId = ids.includes("c24") ? "c24" : ids[0];
+	await approachNodeFromRight(page, targetId);
+	await page.waitForFunction(
+		(projectId) =>
+			document
+				.querySelector(`button[data-id="${CSS.escape(projectId)}"]`)
+				?.getAttribute("data-focused") === "true",
+		{ timeout: 5_000 },
+		targetId,
+	);
+	await moveOutsideSwarm(page);
+	await delay(500);
+
+	const state = await page.evaluate(() => ({
+		nodes: Array.from(document.querySelectorAll("g.node-group[data-id] circle")).map((circle) => ({
+			id: circle.parentElement?.getAttribute("data-id"),
+			opacity: Number(getComputedStyle(circle).opacity),
+		})),
+		unexpectedLabels: Array.from(document.querySelectorAll("text.label"))
+			.filter(
+				(label) =>
+					label.getAttribute("data-persistent-label") !== "true" &&
+					Number(getComputedStyle(label).opacity) > 0,
+			)
+			.map((label) => label.id),
+	}));
+	const staleNodes = state.nodes.filter((node) => Math.abs(node.opacity - 0.9) > 0.001);
+	if (staleNodes.length > 0) {
+		throw new Error(
+			`Nodes did not return to rest opacity: ${JSON.stringify(staleNodes.slice(0, 8))}`,
+		);
+	}
+	if (state.unexpectedLabels.length > 0) {
+		throw new Error(`Non-persistent labels remained visible: ${state.unexpectedLabels.join(", ")}`);
+	}
+	assertNoPageProblems(problems);
+}
+
+async function assertionRadiusClamp(page, problems) {
+	await navigate(page, problems);
+	const flagship = await page.evaluate(() => {
+		const explicit = document.querySelector('g.node-group[data-presentation-mode="flagship"]');
+		const fallback = Array.from(document.querySelectorAll("g.node-group[data-id]")).find(
+			(group) => group.querySelector("circle")?.getAttribute("stroke-width") === "4",
+		);
+		const group = explicit || fallback;
+		if (!group) return null;
+		const circle = group.querySelector("circle");
+		if (!circle) return null;
+		const rect = circle.getBoundingClientRect();
+		return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+	});
+	if (flagship) {
+		await page.mouse.move(flagship.x, flagship.y);
+		await delay(250);
+	}
+
+	const radii = await page.evaluate(() =>
+		Array.from(document.querySelectorAll("g.node-group[data-id] circle")).map((circle) => ({
+			id: circle.parentElement?.getAttribute("data-id"),
+			radius: Number(circle.getAttribute("r")),
+		})),
+	);
+	if (radii.length === 0) throw new Error("No rendered project circles found");
+	const invalid = radii.filter(
+		(node) => !Number.isFinite(node.radius) || node.radius < 15 || node.radius > 55,
+	);
+	if (invalid.length > 0) {
+		throw new Error(`Rendered radii escaped [15,55]: ${JSON.stringify(invalid.slice(0, 12))}`);
+	}
+	assertNoPageProblems(problems);
+}
+
+async function assertionNoRelationshipLines(page, problems) {
+	await navigate(page, problems);
+	const lineCount = await page.$$eval("g.links line", (lines) => lines.length);
+	if (lineCount !== 0)
+		throw new Error(`Relationship layer still renders ${lineCount} line elements`);
+	assertNoPageProblems(problems);
+}
+
+async function assertionReducedMotion(page, problems) {
+	await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
+	try {
+		await navigate(page, problems);
+		await waitForFontsAndSwarmReady(page);
+		const control = await page.$eval("button[data-swarm-motion-control]", (button) => ({
+			state: button.getAttribute("data-motion-state"),
+			name: button.getAttribute("aria-label") || button.textContent?.trim() || "",
+		}));
+		if (control.state !== "paused" || !/resume/i.test(control.name)) {
+			throw new Error(
+				`Reduced motion did not expose paused/Resume state: ${JSON.stringify(control)}`,
+			);
+		}
+
+		const initial = await getSwarmNodeSnapshot(page);
+		await delay(3_000);
+		const delayed = await getSwarmNodeSnapshot(page);
+		if (JSON.stringify(delayed) !== JSON.stringify(initial)) {
+			throw new Error(
+				"Reduced-motion node geometry changed during the three-second stability window",
+			);
+		}
+
+		await setSwarmMotion(page, "running");
+		await delay(600);
+		await setSwarmMotion(page, "paused");
+		const paused = await getSwarmNodeSnapshot(page);
+		await delay(3_000);
+		const pausedDelayed = await getSwarmNodeSnapshot(page);
+		if (JSON.stringify(pausedDelayed) !== JSON.stringify(paused)) {
+			throw new Error("Pause did not return the resumed swarm to a static field");
+		}
+		assertNoPageProblems(problems);
+	} finally {
+		await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "no-preference" }]);
+	}
+}
+
+async function assertionDirectionalAimIntegrity(page, problems) {
+	await navigate(page, problems);
+	await waitForFontsAndSwarmReady(page);
+	await setSwarmMotion(page, "paused");
+	const targetPlan = await getDirectionalTargets(page);
+	if (targetPlan.missingDirection || targetPlan.selected.length !== 10) {
+		throw new Error(`Could not select 10 direction-neutral targets: ${JSON.stringify(targetPlan)}`);
+	}
+	const directionCounts = targetPlan.selected.reduce((counts, target) => {
+		counts[target.direction] = (counts[target.direction] || 0) + 1;
+		return counts;
+	}, {});
+	for (const direction of ["left", "right", "top", "bottom"]) {
+		if ((directionCounts[direction] || 0) < 2) {
+			throw new Error(`Direction ${direction} has fewer than two deterministic targets`);
+		}
+	}
+
+	let successes = 0;
+	for (const target of targetPlan.selected) {
+		await approachNodeFromDirection(page, target.id, target.direction);
+		const activeId = await page.evaluate(() =>
+			document.querySelector('button[data-id][data-focused="true"]')?.getAttribute("data-id"),
+		);
+		if (activeId !== target.id) {
+			throw new Error(
+				`Approached ${target.id} from ${target.direction}, but active project was ${activeId || "none"}`,
+			);
+		}
+		successes += 1;
+	}
+	if (successes !== 10) throw new Error(`Direction-neutral aim succeeded ${successes}/10 times`);
+	assertNoPageProblems(problems);
+}
+
 const assertionSpecs = [
 	["Pin persists and viewer CTA is reachable", assertionPinPersists],
 	["Preview never scrolls the document", assertionNoDocumentScroll],
@@ -612,10 +1053,16 @@ const assertionSpecs = [
 	["Index tiers and dates are ordered", assertionIndexOrder],
 	["Every index row has a native Open anchor", assertionRealAnchors],
 	["Deterministic 10-node aim integrity", assertionAimIntegrity],
+	["Focused and flagship labels paint visibly above nodes", assertionLabelVisibility],
+	["Hover-out restores rest visuals without stale dim", assertionNoStaleDim],
+	["Every rendered project radius stays within [15,55]", assertionRadiusClamp],
+	["Relationship lines are absent from the rendered swarm", assertionNoRelationshipLines],
+	["Reduced-motion and Pause produce a static field", assertionReducedMotion],
+	["Direction-neutral aim integrity succeeds 10/10", assertionDirectionalAimIntegrity],
 ];
 
 function printResults(results) {
-	console.log("\nP0A homepage interaction contract");
+	console.log("\nP0B homepage visualization integrity contract");
 	for (const [index, result] of results.entries()) {
 		const status = result.passed ? "PASS" : "FAIL";
 		console.log(`${String(index + 1).padStart(2, "0")} ${status}  ${result.name}`);
@@ -635,7 +1082,7 @@ try {
 		throw new Error(`Refusing to run: ${HOST}:${PORT} is already occupied`);
 	}
 
-	server = startAstroServer();
+	server = startAstroServer(await prepareAstroHarnessConfig());
 	await waitForHttpReady(server);
 	browser = await puppeteer.launch({ headless: true });
 	const page = await browser.newPage();
@@ -671,6 +1118,10 @@ if (fatalError) {
 	if (server?.getOutput?.()) console.error(`\nAstro output:\n${server.getOutput()}`);
 }
 
-if (fatalError || results.length !== EXPECTED_ASSERTIONS || results.some((result) => !result.passed)) {
+if (
+	fatalError ||
+	results.length !== EXPECTED_ASSERTIONS ||
+	results.some((result) => !result.passed)
+) {
 	process.exitCode = 1;
 }
