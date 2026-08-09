@@ -1,75 +1,62 @@
 ---
 title: "EN-OS"
 slug: "en-os"
-subtitle: "The System That Built This Site"
+subtitle: "How the Public Engineering Record Is Built"
 icon: "cpu"
 color: "green"
 order: 0
 ---
 
-## The Problem of Paper
+## What This Site Is
 
-> **Context:** Thirty years of shipped hardware leaves a paper trail no résumé can hold: engineering change orders, data control drawings, faxed tooling markups, thermal-chamber logs, first-article inspection reports, vendor ultimatums, war-room minutes.
+eriknorris.com is the public view of my engineering record. It is a portfolio, but not a stack of case studies assembled from memory. The project pages are rendered from a larger body of source material: notebooks, CAD, engineering change orders, test reports, photographs, correspondence, and program documents.
 
-The evidence existed. It sat in boxes, drives, and a 23-megabyte text file. A career's worth of provenance — and no system of record.
+The portfolio is also one of the projects. Its design, source model, generators, validation, and failure history are part of the work being shown.
 
-This site is the system of record. EN-OS is the machine that builds it.
+## Source
 
-## The Operating System
+The raw evidence lives outside the website in a content-hashed archive. Files can be converted, transcribed, catalogued, and deduplicated, but the archive itself is not silently rewritten to make a cleaner story.
 
-EN-OS is a local agentic stack — a personal operating system for forensic memory. The pipeline runs in one direction:
+That boundary matters. A polished page is useful only if its claims can still be traced to the work that produced them.
 
-1. **The Locker.** Raw evidence — scans, CAD, email corpora, test logs — extracted into an immutable, content-hashed archive. 152 program vaults. Nothing downstream may contradict it, and nothing may edit it.
-2. **The Interrogation.** Program archives are read against themselves: _what failed, what was done, what did it yield._ Machine assistance does the conversions — OCR, transcription, cataloguing, dedup. It does not do the interpretation.
-3. **The Canon.** One curated record per project, in Markdown, in its own git repository. Each record names the locker directory its claims trace to. This is the source of truth — not the website, not the résumé.
-4. **The Generator.** A single writer projects canon into the site's content files, and proves it every run: a field-by-field diff canon → site → canon, plus a double-generate hash comparison. Non-lossless or non-idempotent exits non-zero. The site is a **read-only render target**; nothing edits a published page by hand.
-5. **The Gate.** Nothing publishes below its tier's bar. Machine placeholders, leaked markup, demo assets posing as evidence and unsourced deep dives fail the build outright. Incompleteness is reported as a burn-down rather than hidden.
-6. **The Site.** Astro compiles to static HTML — plus machine-readable surfaces (`llms.txt`, `/api/projects.json`, `resume.json`) so the next reader doesn't have to be human.
+## Canon
 
-The direction matters more than the tooling. Truth flows one way, and the thing a visitor reads is the last link in the chain, never the first.
+Each project is curated into a canonical Markdown record. Canon is the source of truth for project knowledge. The site, résumé, and other public surfaces are projections from it.
 
-## Four Generations of Memory
+Machine assistance helps retrieve and organize evidence. Interpretation remains mine. Confidential material stays behind its publication gate; public claims must be supportable without exposing client information.
 
-The memory layer was not designed; it evolved, leaving fossils:
+## Build
 
-| Generation | Mechanism | Fate |
-| :--- | :--- | :--- |
-| 1 | **The Monolith** — one 23 MB master-context file | Retired. Reading it whole could kill an agent's entire session. |
-| 2 | **Agency Sync** — IDE knowledge folders mirrored into the repo | Demoted to a secondary read surface. |
-| 3 | **Sidecars** — per-project `_intelligence` and `_entropy` files | Valid architecture, sparsely deployed. |
-| 4 | **The Semantic Registry** — ChromaDB behind an MCP router | Current canon. Memory you can query instead of swallow. |
+A generator projects canon into the portfolio content files. The build checks that the projection is lossless and repeatable:
 
-## The Crew
+1. Canon is transformed into the site's project schema.
+2. A round-trip comparison checks that required fields and claims survive the transformation.
+3. A second generation checks that the same source produces the same output.
+4. The site build rejects known leakage patterns, unresolved placeholders, and schema failures.
 
-The system runs a staffed newsroom of non-humans: cascade swarms that pass a draft through five voices (narrative designer through chief storyteller) before it ships; an eight-persona deep-tech panel for harder targets; session miners that convert every working transcript into registry artifacts; watchdogs that redeploy the router when its source drifts.
+The website is a read-only render target. A project page should not become a second, hand-maintained source of truth.
 
-## The Dump Incident
+## Public Render
 
-Honesty clause: the machine misfired, publicly.
+Astro compiles the record into static HTML for people and into machine-readable surfaces for software. The page remains the primary public artifact. Other views can help a reader navigate the collection, but they do not replace the project record.
 
-- **Trigger:** The interrogation transcripts themselves — mining prompts, system-prompt blocks, dangling "Tell me more about…" suggestions — leaked onto live project pages as body text. Visitors could read the puppet strings. At peak, seventeen of twenty-two flagship-tier pages carried raw chat dump.
-- **Intervention:** A written contract — the Perfect Deep Dive Page Contract — defining what a finished page owes its reader: one authored narrative in trigger/intervention/result grammar, a visible source trail naming the evidence, schema-complete frontmatter, zero unresolved citations. Then a normalization campaign against it.
-- **Result:** One batch alone removed 2,683 lines of transcript and replaced them with 329 lines of authored forensics. The contract is now the gate every page passes before it counts.
+The authored article template carries a provenance note back to this explanation. That note does not prove every claim by itself. It states where authority lives and how the public page was produced.
 
-<Admonition variant="tip">
-	The failure mode and its correction are both in the git history. A forensic
-	archive that hid its own defects would be a contradiction in terms.
-</Admonition>
+## What Failed
 
-## The Numbers
+Earlier versions of the pipeline allowed raw interrogation material to reach public project pages. Prompts, transcript fragments, and unfinished analysis appeared where authored narrative belonged.
 
-| Metric | Value |
-| :--- | :--- |
-| Program vaults in the immutable locker | 152 |
-| Project records in the collection | 120 (87 published) |
-| Curated canon records | 30 |
-| Deep-dive cohort under contract | 42 (15 published) |
-| Published pages meeting their tier bar | 14 — the rest are a tracked burn-down, not a secret |
-| Memory generations survived | 4 |
-| Machine-readable surfaces | `llms.txt` · `projects.json` · `resume.json` |
+The correction was structural:
 
-## The Point
+- source evidence and authored prose were separated;
+- a finished-page contract defined what a public project record must contain;
+- leakage and placeholder checks became build failures;
+- normalization was run against the collection rather than hiding the affected pages.
 
-This is not a website with AI features. It is the same discipline that shipped the hardware, pointed at the career itself: a DCD protocol for memory. Define the interface, validate against it, reject drift, keep the source trail.
+The git history retains both the defect and the correction. A system built around provenance should preserve its own failure record.
 
-Structure the chaos. Index the decisions. Ship the hardware.
+## Why Build It
+
+A long engineering career does not fit cleanly into a résumé, and a résumé cannot carry the evidence behind its claims. This system keeps the underlying record durable, makes selected work legible, and lets the public surface evolve without becoming the authority.
+
+That is eriknorris.com: a public engineering record, a portfolio, and a working example of how I build systems around real constraints.

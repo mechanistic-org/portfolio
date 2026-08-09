@@ -155,7 +155,7 @@ if (!isUnderConstruction) {
 	) : (
 		<Layout
 			title={site.title}
-			description="Principal Mechanical Architect specializing in high-fidelity hardware and program rescue. I stabilize the entropy of product development: structure the chaos, index the decisions, ship the hardware."
+			description="Erik Norris is an engineer who builds products and systems that have to work, across physical products, manufacturing, software, AI, and field delivery."
 			hideNavLogo={false}
 			starfield={true}
 		>
@@ -165,29 +165,22 @@ if (!isUnderConstruction) {
 					{/* Enabled overflow-y-auto to allow scrolling the long timeline */}
 					<div class="custom-scrollbar relative h-screen overflow-x-hidden overflow-y-auto border-r border-zinc-900 bg-transparent lg:col-span-7 xl:col-span-8">
 						<HXOSwarmContainer client:only="react" nodes={swarmNodes} links={assemblyLinks} />
-						{/* IDENTITY OVERLAY — server-rendered, above the fold.
+						{/* IDENTITY OVERLAY - server-rendered, above the fold.
 						    The swarm and console are both client:only islands, so without
 						    this the first viewport was an unlabelled particle animation and
 						    the only <h1> sat a full screen down in the Ledger. This states
 						    who and what before anything hydrates, costs no layout, and
 						    leaves the swarm exactly as designed. */}
-						<div
-							class="pointer-events-none absolute top-16 right-6 left-6 z-50 max-w-md md:top-20 md:right-auto md:left-10"
-						>
-							<h1
-								class="font-mono text-xl leading-tight font-bold tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] md:text-2xl"
-							>
+						<div class="pointer-events-none absolute top-16 right-6 left-6 z-50 max-w-md md:top-20 md:right-auto md:left-10">
+							<h1 class="font-mono text-xl leading-tight font-bold tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] md:text-2xl">
 								Erik Norris
-								<span class="mt-1 block text-primary text-sm tracking-[0.18em] uppercase md:text-base">
-									Principal Mechanical Architect
+								<span class="text-primary mt-1 block text-sm tracking-[0.18em] uppercase md:text-base">
+									Engineer
 								</span>
 							</h1>
-							<p
-								class="mt-3 max-w-sm text-sm leading-relaxed text-zinc-300 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]"
-							>
-								Thirty years of shipped hardware — SGI, WebTV/Microsoft, Digidesign/Avid,
-								Kaleidescape, Avegant. I structure the chaos, index the decisions, and ship
-								the hardware.
+							<p class="mt-3 max-w-sm text-sm leading-relaxed text-zinc-300 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+								I build products and systems that have to work. The record here spans physical
+								products, manufacturing, software, AI, and the machinery around the work.
 							</p>
 							<div class="pointer-events-auto mt-4 flex flex-wrap items-center gap-3">
 								<a
@@ -220,18 +213,16 @@ if (!isUnderConstruction) {
 					class="relative z-20 border-t border-zinc-900 bg-black px-6 py-20 md:px-12"
 				>
 					<div class="mx-auto max-w-5xl">
-						<p class="font-mono text-xs tracking-[0.3em] text-zinc-600 uppercase">
-							/// The Ledger
-						</p>
-						{/* h2, not h1 — the page's single h1 is the identity overlay above the fold. */}
+						<p class="font-mono text-xs tracking-[0.3em] text-zinc-600 uppercase">/// The Ledger</p>
+						{/* h2, not h1 - the page's single h1 is the identity overlay above the fold. */}
 						<h2 class="mt-3 font-mono text-3xl font-bold tracking-tight text-white md:text-4xl">
-							Erik Norris — Principal Mechanical Architect
+							A public engineering record
 						</h2>
 						<p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-400">
-							Thirty years of shipped hardware across SGI, Frog Design, WebTV/Microsoft,
-							Digidesign/Avid, Kaleidescape, Avegant, Noon, and Hyphen. I stabilize the entropy
-							of product development: structure the chaos, index the decisions, ship the
-							hardware.
+							This is the public view of my engineering record: the products, programs, failures,
+							recoveries, and systems behind the work. It is built from original notebooks, CAD,
+							test reports, photographs, and program documents, curated into one canonical record
+							per project. The portfolio is one of the projects.
 						</p>
 
 						{/* STATS */}
@@ -253,33 +244,31 @@ if (!isUnderConstruction) {
 						</dl>
 
 						{/* FEATURED DEEP DIVES */}
-						{
-							featured.length > 0 && (
-								<div class="mt-12">
-									<h2 class="font-mono text-xs tracking-[0.3em] text-zinc-600 uppercase">
-										Featured Deep Dives
-									</h2>
-									<div class="mt-4 grid gap-px border border-zinc-900 bg-zinc-900 md:grid-cols-3">
-										{featured.map((p: any) => (
-											<a
-												href={`/projects/${p.id}/`}
-												class="group block bg-black p-5 transition-colors hover:bg-zinc-950"
-											>
-												<h3 class="group-hover:text-primary font-mono text-sm font-bold text-white transition-colors">
-													{p.data.title}
-												</h3>
-												<p class="mt-2 line-clamp-4 text-xs leading-relaxed text-zinc-500">
-													{p.data.description}
-												</p>
-												<span class="mt-3 inline-block font-mono text-[10px] tracking-widest text-zinc-600 uppercase group-hover:text-zinc-400">
-													Open dossier →
-												</span>
-											</a>
-										))}
-									</div>
+						{featured.length > 0 && (
+							<div class="mt-12">
+								<h2 class="font-mono text-xs tracking-[0.3em] text-zinc-600 uppercase">
+									Featured Deep Dives
+								</h2>
+								<div class="mt-4 grid gap-px border border-zinc-900 bg-zinc-900 md:grid-cols-3">
+									{featured.map((p: any) => (
+										<a
+											href={`/projects/${p.id}/`}
+											class="group block bg-black p-5 transition-colors hover:bg-zinc-950"
+										>
+											<h3 class="group-hover:text-primary font-mono text-sm font-bold text-white transition-colors">
+												{p.data.title}
+											</h3>
+											<p class="mt-2 line-clamp-4 text-xs leading-relaxed text-zinc-500">
+												{p.data.description}
+											</p>
+											<span class="mt-3 inline-block font-mono text-[10px] tracking-widest text-zinc-600 uppercase group-hover:text-zinc-400">
+												Open dossier →
+											</span>
+										</a>
+									))}
 								</div>
-							)
-						}
+							</div>
+						)}
 
 						{/* NAVIGATION + MACHINE SURFACES */}
 						<nav
@@ -299,8 +288,14 @@ if (!isUnderConstruction) {
 								Contact
 							</a>
 							<span class="text-zinc-700">
-								Agents: <a href="/llms.txt" class="hover:text-zinc-400">llms.txt</a> ·{" "}
-								<a href="/api/projects.json" class="hover:text-zinc-400">projects.json</a>
+								Agents:{" "}
+								<a href="/llms.txt" class="hover:text-zinc-400">
+									llms.txt
+								</a>{" "}
+								·{" "}
+								<a href="/api/projects.json" class="hover:text-zinc-400">
+									projects.json
+								</a>
 							</span>
 						</nav>
 					</div>
