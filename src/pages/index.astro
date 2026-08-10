@@ -159,11 +159,11 @@ if (!isUnderConstruction) {
 			hideNavLogo={false}
 			starfield={true}
 		>
-			<div class="hxo-prototype min-h-screen max-w-[100vw] overflow-hidden bg-transparent font-sans text-zinc-300 selection:bg-lime-900 selection:text-white">
-				<main class="grid h-screen grid-cols-1 overflow-hidden lg:grid-cols-12">
+			<div class="hxo-prototype min-h-screen max-w-[100vw] overflow-x-clip bg-transparent font-sans text-zinc-300 selection:bg-lime-900 selection:text-white">
+				<main class="grid grid-cols-1 lg:h-screen lg:grid-cols-12 lg:overflow-hidden">
 					{/* LEFT: THE SWARM (Navigation / Map) */}
-					{/* Enabled overflow-y-auto to allow scrolling the long timeline */}
-					<div class="custom-scrollbar relative h-screen overflow-x-hidden overflow-y-auto border-r border-zinc-900 bg-transparent lg:col-span-7 xl:col-span-8">
+					{/* The hydrated swarm may grow below lg; without JavaScript this remains one hero stage. */}
+					<div class="hxo-swarm-stage custom-scrollbar relative min-h-svh border-r border-zinc-900 bg-transparent lg:col-span-7 lg:h-screen lg:overflow-x-hidden lg:overflow-y-auto xl:col-span-8">
 						<HXOSwarmContainer client:only="react" nodes={swarmNodes} links={assemblyLinks} />
 						{/* IDENTITY OVERLAY - server-rendered, above the fold.
 						    The swarm and console are both client:only islands, so without
@@ -201,7 +201,7 @@ if (!isUnderConstruction) {
 
 					{/* RIGHT: THE CONSOLE (Details / Index) */}
 					{/* Must start below the 5rem Nav and fill the rest without overflow */}
-					<div class="relative z-30 mt-16 flex h-[calc(100vh-4rem)] flex-col bg-transparent lg:col-span-5 xl:col-span-4">
+					<div class="hxo-console-stage relative z-30 flex flex-col bg-transparent lg:col-span-5 lg:mt-16 lg:h-[calc(100vh-4rem)] xl:col-span-4">
 						<HXOConsole client:only="react" projects={consoleProjects} />
 					</div>
 				</main>
@@ -319,5 +319,23 @@ if (!isUnderConstruction) {
 	}
 	.custom-scrollbar::-webkit-scrollbar-thumb:hover {
 		background: #444;
+	}
+</style>
+
+<style is:global>
+	/* Client-only islands have no rendered div without JavaScript. This makes the
+	   responsive stages tall only after hydration, keeping no-JS at one hero stage
+	   followed directly by the Ledger. */
+	@media (max-width: 1023px) {
+		.hxo-swarm-stage > astro-island:has(> div) {
+			display: block;
+			width: 100%;
+		}
+
+		.hxo-console-stage > astro-island:has(> div) {
+			display: block;
+			height: max(48rem, calc(100svh - 4rem));
+			width: 100%;
+		}
 	}
 </style>
