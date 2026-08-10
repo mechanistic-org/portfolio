@@ -1,9 +1,11 @@
 import { atom, computed } from "nanostores";
 
 export type HxoMode = "explore" | "tour";
+export type HxoLens = "time" | "employer" | "category";
 export type PreviewSource = "default" | "index-focus" | "index-hover" | "swarm";
 
 export const mode = atom<HxoMode>("explore");
+export const lens = atom<HxoLens>("time");
 export const previewId = atom<string | null>(null);
 export const pinnedId = atom<string | null>(null);
 export const lastPreviewId = atom<string | null>(null);
@@ -50,6 +52,10 @@ export function pin(id: string) {
 export function unpin() {
 	pinnedId.set(null);
 	lastPreviewId.set(null);
+}
+
+export function setLens(nextLens: HxoLens) {
+	lens.set(nextLens);
 }
 
 // Console Interaction Shield

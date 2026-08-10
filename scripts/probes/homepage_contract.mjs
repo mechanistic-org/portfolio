@@ -12,7 +12,7 @@ const BASE_URL = `http://${HOST}:${PORT}/`;
 const READY_TIMEOUT_MS = 90_000;
 const PAGE_TIMEOUT_MS = 45_000;
 const SETTLE_MS = 1_200;
-const EXPECTED_ASSERTIONS = 17;
+const EXPECTED_ASSERTIONS = 21;
 const EXPECTED_PROJECT_COUNT = 87;
 const VIEWPORTS = [
 	{ name: "desktop", width: 1440, height: 1000 },
@@ -200,6 +200,7 @@ async function navigate(page, problems) {
 		throw new Error(`Homepage navigation returned HTTP ${response?.status() ?? "no response"}`);
 	}
 	await page.waitForSelector("body", { timeout: PAGE_TIMEOUT_MS });
+	await page.waitForSelector('[data-hxo-hydrated="true"]', { timeout: PAGE_TIMEOUT_MS });
 	await delay(SETTLE_MS);
 	assertNoPageProblems(problems);
 }
@@ -1497,13 +1498,24 @@ async function assertionNoJavaScript(page, problems) {
 				const heroLinks = Array.from(document.querySelectorAll(".hxo-swarm-stage a[href]")).map(
 					(anchor) => new URL(anchor.href).pathname,
 				);
+				const rowButtons = Array.from(document.querySelectorAll("button[data-id]"));
+				const rowAnchors = rowButtons
+					.map((button) => button.parentElement?.querySelector(":scope > a[href^='/projects/']"))
+					.filter(Boolean);
+				const lensButtons = Array.from(document.querySelectorAll("button[data-lens-control]"));
 				return {
 					h1: document.querySelector("h1")?.textContent?.trim() || "",
 					heroLinks,
 					ledger: Boolean(document.querySelector("#ledger")),
-					interactiveIslandControls: document.querySelectorAll(
-						"button[data-id], [data-swarm-motion-control], [data-viewer-id]",
-					).length,
+					rowCount: rowButtons.length,
+					rowAnchorCount: rowAnchors.length,
+					uniqueProjectDestinations: new Set(
+						rowAnchors.map((anchor) => new URL(anchor.href).pathname),
+					).size,
+					disabledRowCount: rowButtons.filter((button) => button.disabled).length,
+					lensCount: lensButtons.length,
+					disabledLensCount: lensButtons.filter((button) => button.disabled).length,
+					swarmControls: document.querySelectorAll("[data-swarm-motion-control]").length,
 					main: bounds(".hxo-prototype > main"),
 					swarm: bounds(".hxo-swarm-stage"),
 					console: bounds(".hxo-console-stage"),
@@ -1520,9 +1532,23 @@ async function assertionNoJavaScript(page, problems) {
 				throw new Error(`${viewport.name}: no-JS hero destinations are incomplete`);
 			}
 			if (!state.ledger) throw new Error(`${viewport.name}: no-JS Ledger is missing`);
-			if (state.interactiveIslandControls !== 0) {
+			if (
+				state.rowCount !== EXPECTED_PROJECT_COUNT ||
+				state.rowAnchorCount !== EXPECTED_PROJECT_COUNT ||
+				state.uniqueProjectDestinations !== EXPECTED_PROJECT_COUNT
+			) {
 				throw new Error(
-					`${viewport.name}: no-JS rendered ${state.interactiveIslandControls} island controls`,
+					`${viewport.name}: prerendered index is incomplete: ${JSON.stringify(state)}`,
+				);
+			}
+			if (
+				state.disabledRowCount !== EXPECTED_PROJECT_COUNT ||
+				state.lensCount !== 3 ||
+				state.disabledLensCount !== 3 ||
+				state.swarmControls !== 0
+			) {
+				throw new Error(
+					`${viewport.name}: no-JS control fallback is unsafe: ${JSON.stringify(state)}`,
 				);
 			}
 			if (state.horizontalOverflow !== 0) {
@@ -1540,13 +1566,23 @@ async function assertionNoJavaScript(page, problems) {
 				state.ledgerBounds,
 				`${viewport.name}: no-JS Ledger bounds are missing`,
 			);
-			if (Math.abs(ledger.top - main.bottom) > 1 || main.height > viewport.height + 1) {
+			if (Math.abs(ledger.top - main.bottom) > 1) {
 				throw new Error(
-					`${viewport.name}: no-JS inserted empty space between the hero and Ledger: ${JSON.stringify({ main, ledger })}`,
+					`${viewport.name}: no-JS inserted empty space before the Ledger: ${JSON.stringify({ main, ledger })}`,
 				);
 			}
-			if (viewport.width < 1024 && consoleStage.height > 1) {
-				throw new Error(`${viewport.name}: no-JS console row is ${consoleStage.height}px tall`);
+			if (consoleStage.height < 1) {
+				throw new Error(`${viewport.name}: no-JS prerendered console has no height`);
+			}
+			if (viewport.width < 1024 && consoleStage.top < swarm.bottom - 1) {
+				throw new Error(
+					`${viewport.name}: no-JS console does not follow the hero in flow: ${JSON.stringify({ swarm, consoleStage })}`,
+				);
+			}
+			if (consoleStage.bottom > ledger.top + 1) {
+				throw new Error(
+					`${viewport.name}: no-JS console overlaps the Ledger: ${JSON.stringify({ consoleStage, ledger })}`,
+				);
 			}
 			if (swarm.height < viewport.height - 1 || swarm.height > viewport.height + 1) {
 				throw new Error(
@@ -1554,7 +1590,7 @@ async function assertionNoJavaScript(page, problems) {
 				);
 			}
 			details.push(
-				`${viewport.width}x${viewport.height} HTTP ${response.status()}, hero -> Ledger gap 0px`,
+				`${viewport.width}x${viewport.height} HTTP ${response.status()}, ${state.rowAnchorCount} prerendered anchors`,
 			);
 		}
 		assertNoPageProblems(problems);
@@ -1562,6 +1598,332 @@ async function assertionNoJavaScript(page, problems) {
 		await page.setJavaScriptEnabled(true);
 		await page.setViewport({ ...VIEWPORTS[0], deviceScaleFactor: 1 });
 	}
+	return details.join(" | ");
+}
+
+async function setLensProjection(page, lens) {
+	const selector = `button[data-lens-control="${lens}"]`;
+	await page.waitForSelector(`${selector}:not([disabled])`, { timeout: PAGE_TIMEOUT_MS });
+	await page.click(selector);
+	await page.waitForFunction(
+		(requestedLens) => {
+			const consoleRoot = document.querySelector("[data-current-lens]");
+			const swarmRoot = document.querySelector("[data-swarm-lens]");
+			return (
+				consoleRoot?.getAttribute("data-current-lens") === requestedLens &&
+				swarmRoot?.getAttribute("data-swarm-lens") === requestedLens &&
+				swarmRoot?.getAttribute("data-swarm-ready") === "true"
+			);
+		},
+		{ timeout: PAGE_TIMEOUT_MS },
+		lens,
+	);
+	await delay(250);
+}
+
+async function assertionLensProjections(page, problems) {
+	await navigate(page, problems);
+	await waitForFontsAndSwarmReady(page);
+	await setSwarmMotion(page, "paused");
+
+	const captureProjection = () =>
+		page.evaluate(() => ({
+			lens: document.querySelector("[data-current-lens]")?.getAttribute("data-current-lens"),
+			circles: Array.from(document.querySelectorAll("g.node-group[data-id]"))
+				.map((group) => {
+					const circle = group.querySelector("circle");
+					const rect = circle?.getBoundingClientRect();
+					return circle && rect
+						? {
+								id: group.dataset.id,
+								employer: group.dataset.employer,
+								group: group.dataset.lensGroup,
+								fill: circle.getAttribute("fill"),
+								x: rect.left + rect.width / 2,
+								y: rect.top + rect.height / 2,
+							}
+						: null;
+				})
+				.filter(Boolean)
+				.sort((left, right) => left.id.localeCompare(right.id)),
+			labels: Array.from(document.querySelectorAll("[data-lens-group-label]")).map((label) => ({
+				id: label.getAttribute("data-lens-group-label"),
+				count: Number(label.getAttribute("data-group-count")),
+			})),
+			sections: Array.from(document.querySelectorAll("[data-lens-section]")).map((section) => ({
+				id: section.getAttribute("data-lens-section"),
+				count: Number(section.getAttribute("data-section-count")),
+			})),
+			rowSectionsValid: Array.from(document.querySelectorAll("button[data-id]")).every(
+				(button) =>
+					button.closest("[data-lens-section]")?.getAttribute("data-lens-section") ===
+					button.getAttribute("data-lens-group"),
+			),
+			anchorCount: document.querySelectorAll("button[data-id] + a[href^='/projects/']").length,
+		}));
+
+	const projections = [];
+	for (const requestedLens of ["time", "employer", "category"]) {
+		await setLensProjection(page, requestedLens);
+		const projection = await captureProjection();
+		if (projection.lens !== requestedLens) {
+			throw new Error(`${requestedLens}: console projection remained ${projection.lens}`);
+		}
+		if (
+			projection.circles.length !== EXPECTED_PROJECT_COUNT ||
+			projection.anchorCount !== EXPECTED_PROJECT_COUNT
+		) {
+			throw new Error(
+				`${requestedLens}: projection lost nodes or anchors: ${JSON.stringify({ circles: projection.circles.length, anchors: projection.anchorCount })}`,
+			);
+		}
+		if (projection.labels.reduce((sum, group) => sum + group.count, 0) !== EXPECTED_PROJECT_COUNT) {
+			throw new Error(`${requestedLens}: swarm group-label counts do not sum to 87`);
+		}
+		if (
+			projection.sections.reduce((sum, section) => sum + section.count, 0) !==
+			EXPECTED_PROJECT_COUNT
+		) {
+			throw new Error(`${requestedLens}: index section counts do not sum to 87`);
+		}
+		if (requestedLens !== "time") {
+			const labels = [...projection.labels.map(({ id }) => id)].sort();
+			const sections = [...projection.sections.map(({ id }) => id)].sort();
+			if (JSON.stringify(labels) !== JSON.stringify(sections) || !projection.rowSectionsValid) {
+				throw new Error(
+					`${requestedLens}: swarm labels and index sections disagree: ${JSON.stringify({ labels, sections, rowSectionsValid: projection.rowSectionsValid })}`,
+				);
+			}
+		}
+		projections.push(projection);
+	}
+
+	const baselineFills = new Map(
+		projections[0].circles.map((circle) => [circle.id, `${circle.employer}:${circle.fill}`]),
+	);
+	for (const projection of projections.slice(1)) {
+		const changedFill = projection.circles.find(
+			(circle) => baselineFills.get(circle.id) !== `${circle.employer}:${circle.fill}`,
+		);
+		if (changedFill)
+			throw new Error(`${projection.lens}: employer color changed for ${changedFill.id}`);
+	}
+
+	for (let index = 1; index < projections.length; index += 1) {
+		const previous = new Map(projections[index - 1].circles.map((circle) => [circle.id, circle]));
+		const moved = projections[index].circles.filter((circle) => {
+			const before = previous.get(circle.id);
+			return before && Math.hypot(circle.x - before.x, circle.y - before.y) > 4;
+		}).length;
+		if (moved < Math.floor(EXPECTED_PROJECT_COUNT / 3)) {
+			throw new Error(`${projections[index].lens}: only ${moved} nodes changed projection`);
+		}
+	}
+
+	assertNoPageProblems(problems);
+	return projections
+		.map((projection) => `${projection.lens} ${projection.labels.length} groups`)
+		.join(" | ");
+}
+
+async function assertionPinnedLensCohort(page, problems) {
+	await navigate(page, problems);
+	await waitForFontsAndSwarmReady(page);
+	await setSwarmMotion(page, "paused");
+	await setLensProjection(page, "employer");
+
+	const target = await page.evaluate(() => {
+		const groups = Array.from(document.querySelectorAll("g.node-group[data-id]")).reduce(
+			(map, group) => {
+				const key = group.getAttribute("data-lens-group") || "";
+				const ids = map.get(key) ?? [];
+				if (group.dataset.id) ids.push(group.dataset.id);
+				map.set(key, ids);
+				return map;
+			},
+			new Map(),
+		);
+		return [...groups.entries()].find(([, ids]) => ids.length > 1)?.[1]?.[0] ?? null;
+	});
+	if (!target) throw new Error("No employer cohort with at least two projects exists");
+
+	await page.evaluate((id) => {
+		const button = Array.from(document.querySelectorAll("button[data-id]")).find(
+			(element) => element.dataset.id === id,
+		);
+		button?.click();
+	}, target);
+	await page.waitForFunction(
+		(id) =>
+			document.querySelector(`button[data-id="${id}"]`)?.getAttribute("data-pinned") === "true",
+		{ timeout: 5_000 },
+		target,
+	);
+
+	await setLensProjection(page, "category");
+	await setLensProjection(page, "employer");
+	const pinnedState = await page.evaluate(
+		(id) => ({
+			pinned: document.querySelector(`button[data-id="${id}"]`)?.getAttribute("data-pinned"),
+			viewer: document.querySelector("[data-viewer-id]")?.getAttribute("data-viewer-id"),
+		}),
+		target,
+	);
+	if (pinnedState.pinned !== "true" || pinnedState.viewer !== target) {
+		throw new Error(`Pin did not survive lens switches: ${JSON.stringify(pinnedState)}`);
+	}
+
+	const ghost = await page.evaluate((id) => {
+		const targetGroup = document
+			.querySelector(`g.node-group[data-id="${id}"]`)
+			?.getAttribute("data-lens-group");
+		const values = Array.from(document.querySelectorAll("g.node-group[data-id]")).map((group) => ({
+			id: group.dataset.id,
+			group: group.getAttribute("data-lens-group"),
+			opacity: Number(group.querySelector("circle")?.style.opacity),
+		}));
+		return {
+			target: values.find((value) => value.id === id),
+			cohort: values.find((value) => value.id !== id && value.group === targetGroup),
+			unrelated: values.find((value) => value.group !== targetGroup),
+		};
+	}, target);
+	if (
+		!ghost.target ||
+		ghost.target.opacity < 0.99 ||
+		!ghost.cohort ||
+		ghost.cohort.opacity < 0.45 ||
+		ghost.cohort.opacity > 0.55 ||
+		!ghost.unrelated ||
+		ghost.unrelated.opacity > 0.1
+	) {
+		throw new Error(`Cohort ghost contract failed: ${JSON.stringify(ghost)}`);
+	}
+
+	await page.keyboard.press("Escape");
+	await page.waitForFunction(() => !document.querySelector('button[data-id][data-pinned="true"]'), {
+		timeout: 5_000,
+	});
+	const restOpacities = await page.$$eval("g.node-group[data-id] circle", (circles) =>
+		circles.map((circle) => Number(circle.style.opacity)),
+	);
+	if (restOpacities.some((opacity) => Math.abs(opacity - 0.9) > 0.001)) {
+		throw new Error("Unpin did not restore the complete swarm to rest opacity");
+	}
+	assertNoPageProblems(problems);
+	return `${target} stayed pinned; cohort and rest states verified`;
+}
+
+async function assertionUrlState(page, problems) {
+	await navigate(page, problems);
+	const ids = await getContractIds(page, 2);
+	const target = ids[0];
+	const previewTarget = ids[1];
+	await page.goto(`${BASE_URL}#lens=category&pin=${encodeURIComponent(target)}`, {
+		waitUntil: "networkidle0",
+		timeout: PAGE_TIMEOUT_MS,
+	});
+	await page.waitForSelector('[data-hxo-hydrated="true"]', { timeout: PAGE_TIMEOUT_MS });
+	await waitForFontsAndSwarmReady(page);
+	await page.waitForFunction(
+		(id) =>
+			document.querySelector("[data-current-lens]")?.getAttribute("data-current-lens") ===
+				"category" &&
+			document.querySelector(`button[data-id="${id}"]`)?.getAttribute("data-pinned") === "true",
+		{ timeout: PAGE_TIMEOUT_MS },
+		target,
+	);
+	const restored = await page.evaluate(() => ({
+		hash: window.location.hash,
+		scrollY: window.scrollY,
+		viewer: document.querySelector("[data-viewer-id]")?.getAttribute("data-viewer-id"),
+	}));
+	if (
+		restored.hash !== `#lens=category&pin=${encodeURIComponent(target)}` ||
+		restored.scrollY !== 0 ||
+		restored.viewer !== target
+	) {
+		throw new Error(`Valid URL state did not restore cleanly: ${JSON.stringify(restored)}`);
+	}
+
+	const hashBeforePreview = restored.hash;
+	await page.evaluate((id) => {
+		const button = Array.from(document.querySelectorAll("button[data-id]")).find(
+			(element) => element.dataset.id === id,
+		);
+		button?.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
+	}, previewTarget);
+	await delay(200);
+	const hashAfterPreview = await page.evaluate(() => window.location.hash);
+	if (hashAfterPreview !== hashBeforePreview) {
+		throw new Error("Hover/focus preview mutated persistent URL state");
+	}
+
+	await page.goto(`${BASE_URL}#lens=bogus&pin=does-not-exist`, {
+		waitUntil: "networkidle0",
+		timeout: PAGE_TIMEOUT_MS,
+	});
+	await page.waitForSelector('[data-hxo-hydrated="true"]', { timeout: PAGE_TIMEOUT_MS });
+	await page.waitForFunction(
+		() =>
+			document.querySelector("[data-current-lens]")?.getAttribute("data-current-lens") === "time" &&
+			!document.querySelector('button[data-id][data-pinned="true"]'),
+		{ timeout: PAGE_TIMEOUT_MS },
+	);
+	await delay(200);
+	const invalid = await page.evaluate(() => ({
+		hash: window.location.hash,
+		scrollY: window.scrollY,
+	}));
+	if (invalid.hash !== "" || invalid.scrollY !== 0) {
+		throw new Error(`Invalid URL state did not fail closed: ${JSON.stringify(invalid)}`);
+	}
+	assertNoPageProblems(problems);
+	return `category/${target} restored; invalid state failed closed`;
+}
+
+async function assertionStaticLensSwitches(page, problems) {
+	const details = [];
+	await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
+	try {
+		await navigate(page, problems);
+		await waitForFontsAndSwarmReady(page);
+		for (const requestedLens of ["employer", "category"]) {
+			await setLensProjection(page, requestedLens);
+			const initial = await getSwarmNodeSnapshot(page);
+			await delay(2_000);
+			const delayed = await getSwarmNodeSnapshot(page);
+			const control = await page.$eval("button[data-swarm-motion-control]", (button) => ({
+				state: button.getAttribute("data-motion-state"),
+				name: button.getAttribute("aria-label") || "",
+			}));
+			if (
+				JSON.stringify(initial) !== JSON.stringify(delayed) ||
+				control.state !== "paused" ||
+				!/resume/i.test(control.name)
+			) {
+				throw new Error(
+					`${requestedLens}: reduced-motion lens switch was not static: ${JSON.stringify(control)}`,
+				);
+			}
+			details.push(`reduced ${requestedLens} static`);
+		}
+	} finally {
+		await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "no-preference" }]);
+	}
+
+	await navigate(page, problems);
+	await waitForFontsAndSwarmReady(page);
+	await setSwarmMotion(page, "paused");
+	await setLensProjection(page, "employer");
+	const paused = await getSwarmNodeSnapshot(page);
+	await delay(2_000);
+	const pausedDelayed = await getSwarmNodeSnapshot(page);
+	if (JSON.stringify(paused) !== JSON.stringify(pausedDelayed)) {
+		throw new Error("Explicit Pause restarted during an employer lens switch");
+	}
+	details.push("explicit Pause static");
+	assertNoPageProblems(problems);
 	return details.join(" | ");
 }
 
@@ -1585,11 +1947,21 @@ const assertionSpecs = [
 	],
 	["Reduced-motion containment is static at three viewports", assertionResponsiveReducedMotion],
 	["Mobile native keyboard traversal preserves the Escape ladder", assertionMobileNativeKeyboard],
-	["No-JavaScript keeps one hero stage followed by the Ledger", assertionNoJavaScript],
+	["No-JavaScript exposes the prerendered project index", assertionNoJavaScript],
+	[
+		"Time, Employer, and Category projections stay complete and color-stable",
+		assertionLensProjections,
+	],
+	[
+		"Pin survives lens switches and cohort ghost returns cleanly to rest",
+		assertionPinnedLensCohort,
+	],
+	["URL lens and pin state restores and fails closed", assertionUrlState],
+	["Reduced motion and Pause stay static across lens switches", assertionStaticLensSwitches],
 ];
 
 function printResults(results) {
-	console.log("\nP0C homepage responsive and accessibility contract");
+	console.log("\nP1 homepage exploration contract");
 	for (const [index, result] of results.entries()) {
 		const status = result.passed ? "PASS" : "FAIL";
 		console.log(`${String(index + 1).padStart(2, "0")} ${status}  ${result.name}`);
