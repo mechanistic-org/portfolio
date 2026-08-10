@@ -12,8 +12,15 @@ const BASE_URL = `http://${HOST}:${PORT}/`;
 const READY_TIMEOUT_MS = 90_000;
 const PAGE_TIMEOUT_MS = 45_000;
 const SETTLE_MS = 1_200;
-const EXPECTED_ASSERTIONS = 21;
+const EXPECTED_ASSERTIONS = 27;
 const EXPECTED_PROJECT_COUNT = 87;
+const EXPECTED_TOUR = [
+	{ id: "field", projectId: "c24", lens: "time" },
+	{ id: "cohorts", projectId: "sc48", lens: "employer" },
+	{ id: "intervention", projectId: "m700", lens: "employer" },
+	{ id: "problems", projectId: "avegant-glyph", lens: "category" },
+	{ id: "continue", projectId: "xbox", lens: "time" },
+];
 const VIEWPORTS = [
 	{ name: "desktop", width: 1440, height: 1000 },
 	{ name: "tablet", width: 768, height: 1024 },
@@ -1927,6 +1934,465 @@ async function assertionStaticLensSwitches(page, problems) {
 	return details.join(" | ");
 }
 
+function canonicalTourHash(step) {
+	return `#lens=${step.lens}&pin=${encodeURIComponent(step.projectId)}&tour=${step.id}`;
+}
+
+async function getTourState(page) {
+	return page.evaluate(() => {
+		const root = document.querySelector("[data-current-mode]");
+		const panel = document.querySelector("[data-tour-panel]");
+		const pinned = Array.from(document.querySelectorAll("button[data-id]")).find(
+			(button) => button.getAttribute("data-pinned") === "true",
+		);
+		const bounds = (element) => {
+			if (!element) return null;
+			const rect = element.getBoundingClientRect();
+			return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
+		};
+		return {
+			mode: root?.getAttribute("data-current-mode") ?? null,
+			lens: root?.getAttribute("data-current-lens") ?? null,
+			step: panel?.getAttribute("data-tour-step") ?? null,
+			index: panel ? Number(panel.getAttribute("data-tour-index")) : null,
+			count: panel ? Number(panel.getAttribute("data-tour-count")) : null,
+			narration: panel?.textContent?.replace(/\s+/g, " ").trim() ?? "",
+			pinned: pinned?.dataset.id ?? null,
+			viewer: document.querySelector("[data-viewer-id]")?.getAttribute("data-viewer-id") ?? null,
+			hash: window.location.hash,
+			scrollY: window.scrollY,
+			horizontalOverflow: Math.max(
+				0,
+				document.documentElement.scrollWidth - document.documentElement.clientWidth,
+			),
+			entryBounds: bounds(document.querySelector('button[data-tour-control="start"]')),
+			panelBounds: bounds(panel),
+			previousBounds: bounds(panel?.querySelector('button[data-tour-control="previous"]')),
+			nextBounds: bounds(panel?.querySelector('button[data-tour-control="next"]')),
+			exitBounds: bounds(panel?.querySelector('button[data-tour-control="exit"]')),
+			previousDisabled:
+				panel?.querySelector('button[data-tour-control="previous"]')?.disabled ?? null,
+			nextDisabled: panel?.querySelector('button[data-tour-control="next"]')?.disabled ?? null,
+		};
+	});
+}
+
+async function waitForTourStep(page, step) {
+	await page.waitForFunction(
+		(expected) => {
+			const root = document.querySelector("[data-current-mode]");
+			const panel = document.querySelector("[data-tour-panel]");
+			const pinned = document.querySelector(`button[data-id="${expected.projectId}"]`);
+			return (
+				root?.getAttribute("data-current-mode") === "tour" &&
+				root?.getAttribute("data-current-lens") === expected.lens &&
+				panel?.getAttribute("data-tour-step") === expected.id &&
+				pinned?.getAttribute("data-pinned") === "true" &&
+				document.querySelector("[data-viewer-id]")?.getAttribute("data-viewer-id") ===
+					expected.projectId &&
+				window.location.hash ===
+					`#lens=${expected.lens}&pin=${encodeURIComponent(expected.projectId)}&tour=${expected.id}`
+			);
+		},
+		{ timeout: PAGE_TIMEOUT_MS },
+		step,
+	);
+}
+
+async function startTour(page) {
+	await page.waitForSelector('button[data-tour-control="start"]:not([disabled])', {
+		timeout: PAGE_TIMEOUT_MS,
+	});
+	await page.click('button[data-tour-control="start"]');
+	await waitForTourStep(page, EXPECTED_TOUR[0]);
+}
+
+async function clickTourControl(page, control, expectedStep) {
+	await page.click(`button[data-tour-control="${control}"]`);
+	await waitForTourStep(page, expectedStep);
+}
+
+async function assertionTourEntry(page, problems) {
+	await navigate(page, problems);
+	await waitForFontsAndSwarmReady(page);
+	const entry = await page.evaluate(() => {
+		const buttons = Array.from(document.querySelectorAll('button[data-tour-control="start"]'));
+		const button = buttons[0];
+		const configuredProjects = ["c24", "sc48", "m700", "avegant-glyph", "xbox"];
+		return {
+			count: buttons.length,
+			chapterCount: Number(button?.getAttribute("data-tour-count")),
+			disabled: button?.disabled ?? true,
+			mode: document.querySelector("[data-current-mode]")?.getAttribute("data-current-mode"),
+			panel: Boolean(document.querySelector("[data-tour-panel]")),
+			validProjects: configuredProjects.every((id) =>
+				Array.from(document.querySelectorAll("button[data-id]")).some(
+					(candidate) => candidate.dataset.id === id,
+				),
+			),
+		};
+	});
+	if (
+		entry.count !== 1 ||
+		entry.chapterCount !== EXPECTED_TOUR.length ||
+		entry.disabled ||
+		entry.mode !== "explore" ||
+		entry.panel ||
+		!entry.validProjects
+	) {
+		throw new Error(`Tour entry/configuration is invalid: ${JSON.stringify(entry)}`);
+	}
+
+	await startTour(page);
+	const state = await getTourState(page);
+	if (
+		state.step !== EXPECTED_TOUR[0].id ||
+		state.index !== 0 ||
+		state.count !== EXPECTED_TOUR.length ||
+		state.pinned !== EXPECTED_TOUR[0].projectId ||
+		state.viewer !== EXPECTED_TOUR[0].projectId ||
+		state.hash !== canonicalTourHash(EXPECTED_TOUR[0]) ||
+		state.scrollY !== 0 ||
+		state.narration.length < 60 ||
+		state.previousDisabled !== true ||
+		state.nextDisabled !== false
+	) {
+		throw new Error(`Tour did not start on chapter 1: ${JSON.stringify(state)}`);
+	}
+	assertNoPageProblems(problems);
+	return `${entry.chapterCount} valid chapters; ${state.step}/${state.pinned} started`;
+}
+
+async function assertionTourSequence(page, problems) {
+	await navigate(page, problems);
+	await waitForFontsAndSwarmReady(page);
+	await setSwarmMotion(page, "paused");
+	await startTour(page);
+
+	const forward = [EXPECTED_TOUR[0].id];
+	for (let index = 1; index < EXPECTED_TOUR.length; index += 1) {
+		await clickTourControl(page, "next", EXPECTED_TOUR[index]);
+		const state = await getTourState(page);
+		if (
+			state.index !== index ||
+			state.count !== EXPECTED_TOUR.length ||
+			state.hash !== canonicalTourHash(EXPECTED_TOUR[index]) ||
+			state.scrollY !== 0
+		) {
+			throw new Error(`Forward tour sequence failed at ${index}: ${JSON.stringify(state)}`);
+		}
+		forward.push(state.step);
+	}
+
+	const held = await getTourState(page);
+	await delay(3_000);
+	const heldLater = await getTourState(page);
+	if (
+		held.step !== EXPECTED_TOUR.at(-1).id ||
+		held.nextDisabled !== true ||
+		JSON.stringify(held) !== JSON.stringify(heldLater)
+	) {
+		throw new Error(`Tour auto-advanced or changed at the final chapter`);
+	}
+
+	const backward = [];
+	for (let index = EXPECTED_TOUR.length - 2; index >= 0; index -= 1) {
+		await clickTourControl(page, "previous", EXPECTED_TOUR[index]);
+		backward.push((await getTourState(page)).step);
+	}
+	const first = await getTourState(page);
+	if (first.previousDisabled !== true) {
+		throw new Error("Previous was not disabled at the first chapter");
+	}
+	assertNoPageProblems(problems);
+	return `forward ${forward.join("→")} | backward ${backward.join("→")} | no autoplay`;
+}
+
+async function assertionTourUrlState(page, problems) {
+	const restored = [];
+	for (const step of EXPECTED_TOUR) {
+		await page.goto(`${BASE_URL}${canonicalTourHash(step)}`, {
+			waitUntil: "networkidle0",
+			timeout: PAGE_TIMEOUT_MS,
+		});
+		await page.waitForSelector('[data-hxo-hydrated="true"]', { timeout: PAGE_TIMEOUT_MS });
+		await waitForTourStep(page, step);
+		const state = await getTourState(page);
+		if (state.scrollY !== 0 || state.narration.length < 60) {
+			throw new Error(`${step.id}: tour deep link restored incompletely: ${JSON.stringify(state)}`);
+		}
+		restored.push(step.id);
+	}
+
+	await page.goto(`${BASE_URL}#lens=category&pin=c24`, {
+		waitUntil: "networkidle0",
+		timeout: PAGE_TIMEOUT_MS,
+	});
+	await page.waitForSelector('[data-hxo-hydrated="true"]', { timeout: PAGE_TIMEOUT_MS });
+	await page.waitForFunction(
+		() =>
+			document.querySelector("[data-current-mode]")?.getAttribute("data-current-mode") ===
+				"explore" &&
+			document.querySelector("[data-current-lens]")?.getAttribute("data-current-lens") ===
+				"category" &&
+			document.querySelector('button[data-id="c24"]')?.getAttribute("data-pinned") === "true" &&
+			!document.querySelector("[data-tour-panel]"),
+		{ timeout: PAGE_TIMEOUT_MS },
+	);
+	const p1State = await getTourState(page);
+	if (p1State.hash !== "#lens=category&pin=c24" || p1State.scrollY !== 0) {
+		throw new Error(`P1-only URL compatibility regressed: ${JSON.stringify(p1State)}`);
+	}
+
+	await page.goto(`${BASE_URL}#lens=category&pin=c24&tour=unknown`, {
+		waitUntil: "networkidle0",
+		timeout: PAGE_TIMEOUT_MS,
+	});
+	await page.waitForSelector('[data-hxo-hydrated="true"]', { timeout: PAGE_TIMEOUT_MS });
+	await page.waitForFunction(
+		() =>
+			document.querySelector("[data-current-mode]")?.getAttribute("data-current-mode") ===
+				"explore" &&
+			document.querySelector("[data-current-lens]")?.getAttribute("data-current-lens") === "time" &&
+			!document.querySelector('button[data-id][data-pinned="true"]') &&
+			window.location.hash === "",
+		{ timeout: PAGE_TIMEOUT_MS },
+	);
+	const invalid = await getTourState(page);
+	if (invalid.scrollY !== 0 || invalid.step !== null) {
+		throw new Error(`Invalid tour state did not fail closed: ${JSON.stringify(invalid)}`);
+	}
+	assertNoPageProblems(problems);
+	return `${restored.join(", ")} restored; P1 compatible; invalid failed closed`;
+}
+
+async function assertionTourExitAndOverrides(page, problems) {
+	await navigate(page, problems);
+	await waitForFontsAndSwarmReady(page);
+	await startTour(page);
+	await clickTourControl(page, "next", EXPECTED_TOUR[1]);
+	await page.click('button[data-tour-control="exit"]');
+	await page.waitForFunction(
+		(projectId) =>
+			document.querySelector("[data-current-mode]")?.getAttribute("data-current-mode") ===
+				"explore" &&
+			document.querySelector(`button[data-id="${projectId}"]`)?.getAttribute("data-pinned") ===
+				"true" &&
+			!document.querySelector("[data-tour-panel]"),
+		{ timeout: PAGE_TIMEOUT_MS },
+		EXPECTED_TOUR[1].projectId,
+	);
+	const exited = await getTourState(page);
+	if (exited.hash !== "#lens=employer&pin=sc48") {
+		throw new Error(`Exit did not retain the last pin: ${JSON.stringify(exited)}`);
+	}
+
+	await startTour(page);
+	await page.evaluate(() => {
+		const button = Array.from(document.querySelectorAll("button[data-id]")).find(
+			(candidate) => candidate.dataset.id === "m700",
+		);
+		button?.click();
+	});
+	await page.waitForFunction(
+		() =>
+			document.querySelector("[data-current-mode]")?.getAttribute("data-current-mode") ===
+				"explore" &&
+			document.querySelector('button[data-id="m700"]')?.getAttribute("data-pinned") === "true" &&
+			!document.querySelector("[data-tour-panel]"),
+		{ timeout: PAGE_TIMEOUT_MS },
+	);
+	const overridden = await getTourState(page);
+	if (overridden.hash.includes("tour=")) {
+		throw new Error(`Manual pin did not exit tour provenance: ${JSON.stringify(overridden)}`);
+	}
+
+	await navigate(page, problems);
+	await waitForFontsAndSwarmReady(page);
+	await startTour(page);
+	await page.evaluate(() => {
+		const button = Array.from(document.querySelectorAll("button[data-id]")).find(
+			(candidate) => candidate.dataset.id === "sc48",
+		);
+		button?.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
+	});
+	await page.waitForFunction(
+		() => document.querySelector("[data-viewer-id]")?.getAttribute("data-viewer-id") === "sc48",
+		{ timeout: 5_000 },
+	);
+	const hashDuringPreview = await page.evaluate(() => window.location.hash);
+	if (hashDuringPreview !== canonicalTourHash(EXPECTED_TOUR[0])) {
+		throw new Error("Transient tour preview mutated the chapter URL");
+	}
+
+	await page.keyboard.press("Escape");
+	await page.waitForFunction(
+		() =>
+			document.querySelector("[data-viewer-id]")?.getAttribute("data-viewer-id") === "c24" &&
+			document.querySelector("[data-current-mode]")?.getAttribute("data-current-mode") === "tour",
+		{ timeout: 5_000 },
+	);
+	await page.keyboard.press("Escape");
+	await page.waitForFunction(
+		() =>
+			document.querySelector("[data-current-mode]")?.getAttribute("data-current-mode") ===
+				"explore" &&
+			document.querySelector('button[data-id="c24"]')?.getAttribute("data-pinned") === "true" &&
+			!document.querySelector("[data-tour-panel]"),
+		{ timeout: 5_000 },
+	);
+	await page.keyboard.press("Escape");
+	await page.waitForFunction(
+		() =>
+			!document.querySelector('button[data-id][data-pinned="true"]') &&
+			document.querySelector('[data-viewer-id="orientation"]') &&
+			window.location.hash === "",
+		{ timeout: 5_000 },
+	);
+	assertNoPageProblems(problems);
+	return `Exit retained ${exited.pinned}; manual pin exited; preview→tour→pin Escape ladder passed`;
+}
+
+async function assertionTourResponsiveKeyboardNoJs(page, problems) {
+	const responsive = [];
+	try {
+		for (const viewport of VIEWPORTS) {
+			await page.setViewport({ ...viewport, deviceScaleFactor: 1 });
+			await navigate(page, problems);
+			await waitForFontsAndSwarmReady(page);
+			await startTour(page);
+			await page.focus('button[data-tour-control="next"]');
+			const scrollBefore = await page.evaluate(() => window.scrollY);
+			await page.keyboard.press("Enter");
+			await waitForTourStep(page, EXPECTED_TOUR[1]);
+			const state = await getTourState(page);
+			const bounds = [
+				state.entryBounds,
+				state.panelBounds,
+				state.previousBounds,
+				state.nextBounds,
+				state.exitBounds,
+			].filter(Boolean);
+			if (
+				state.horizontalOverflow !== 0 ||
+				Math.abs(state.scrollY - scrollBefore) > 1 ||
+				bounds.some((rect) => rect.left < -1 || rect.right > viewport.width + 1)
+			) {
+				throw new Error(
+					`${viewport.name}: responsive tour containment failed: ${JSON.stringify({ scrollBefore, state })}`,
+				);
+			}
+			responsive.push(`${viewport.width}x${viewport.height}`);
+		}
+
+		const mobile = VIEWPORTS.find((viewport) => viewport.name === "mobile");
+		await page.setViewport({ ...mobile, deviceScaleFactor: 1 });
+		await navigate(page, problems);
+		await waitForFontsAndSwarmReady(page);
+		await page.focus('button[data-tour-control="start"]');
+		await page.keyboard.press("Enter");
+		await waitForTourStep(page, EXPECTED_TOUR[0]);
+		for (let index = 1; index < EXPECTED_TOUR.length; index += 1) {
+			await page.focus('button[data-tour-control="next"]');
+			const scrollBefore = await page.evaluate(() => window.scrollY);
+			await page.keyboard.press("Enter");
+			await waitForTourStep(page, EXPECTED_TOUR[index]);
+			const scrollAfter = await page.evaluate(() => window.scrollY);
+			if (Math.abs(scrollAfter - scrollBefore) > 1) {
+				throw new Error(`Mobile keyboard chapter ${index + 1} scrolled the document`);
+			}
+		}
+		await page.focus('button[data-tour-control="exit"]');
+		await page.keyboard.press("Enter");
+		await page.waitForFunction(
+			() =>
+				document.querySelector("[data-current-mode]")?.getAttribute("data-current-mode") ===
+				"explore",
+			{ timeout: 5_000 },
+		);
+
+		await page.setJavaScriptEnabled(false);
+		const noJs = [];
+		for (const viewport of VIEWPORTS) {
+			await page.setViewport({ ...viewport, deviceScaleFactor: 1 });
+			await page.goto(BASE_URL, { waitUntil: "networkidle0", timeout: PAGE_TIMEOUT_MS });
+			await page.waitForSelector("body", { timeout: PAGE_TIMEOUT_MS });
+			const state = await page.evaluate(() => {
+				const tourButtons = Array.from(
+					document.querySelectorAll('button[data-tour-control="start"]'),
+				);
+				return {
+					tourCount: tourButtons.length,
+					disabledTourCount: tourButtons.filter((button) => button.disabled).length,
+					panelCount: document.querySelectorAll("[data-tour-panel]").length,
+					anchorCount: document.querySelectorAll("button[data-id] + a[href^='/projects/']").length,
+					horizontalOverflow: Math.max(
+						0,
+						document.documentElement.scrollWidth - document.documentElement.clientWidth,
+					),
+				};
+			});
+			if (
+				state.tourCount !== 1 ||
+				state.disabledTourCount !== 1 ||
+				state.panelCount !== 0 ||
+				state.anchorCount !== EXPECTED_PROJECT_COUNT ||
+				state.horizontalOverflow !== 0
+			) {
+				throw new Error(`${viewport.name}: no-JS tour fallback failed: ${JSON.stringify(state)}`);
+			}
+			noJs.push(`${viewport.width}x${viewport.height}`);
+		}
+		assertNoPageProblems(problems);
+		return `${responsive.join("/")} contained; mobile keyboard 5/5; no-JS ${noJs.join("/")}`;
+	} finally {
+		await page.setJavaScriptEnabled(true);
+		await page.setViewport({ ...VIEWPORTS[0], deviceScaleFactor: 1 });
+	}
+}
+
+async function assertTourStaticAcrossSteps(page, label) {
+	await startTour(page);
+	for (let index = 0; index < EXPECTED_TOUR.length; index += 1) {
+		if (index > 0) await clickTourControl(page, "next", EXPECTED_TOUR[index]);
+		await delay(250);
+		const initial = await getSwarmNodeSnapshot(page);
+		await delay(1_000);
+		const delayed = await getSwarmNodeSnapshot(page);
+		const control = await page.$eval("button[data-swarm-motion-control]", (button) => ({
+			state: button.getAttribute("data-motion-state"),
+			name: button.getAttribute("aria-label") || "",
+		}));
+		if (
+			JSON.stringify(initial) !== JSON.stringify(delayed) ||
+			control.state !== "paused" ||
+			!/resume/i.test(control.name)
+		) {
+			throw new Error(
+				`${label}/${EXPECTED_TOUR[index].id}: tour transition was not static: ${JSON.stringify(control)}`,
+			);
+		}
+	}
+}
+
+async function assertionTourStaticMotion(page, problems) {
+	await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
+	try {
+		await navigate(page, problems);
+		await waitForFontsAndSwarmReady(page);
+		await assertTourStaticAcrossSteps(page, "reduced");
+	} finally {
+		await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "no-preference" }]);
+	}
+
+	await navigate(page, problems);
+	await waitForFontsAndSwarmReady(page);
+	await setSwarmMotion(page, "paused");
+	await assertTourStaticAcrossSteps(page, "paused");
+	assertNoPageProblems(problems);
+	return "reduced 5/5 static | explicit Pause 5/5 static";
+}
+
 const assertionSpecs = [
 	["Pin persists and viewer CTA is reachable", assertionPinPersists],
 	["Preview never scrolls the document", assertionNoDocumentScroll],
@@ -1958,10 +2424,19 @@ const assertionSpecs = [
 	],
 	["URL lens and pin state restores and fails closed", assertionUrlState],
 	["Reduced motion and Pause stay static across lens switches", assertionStaticLensSwitches],
+	["Tour entry starts five valid ordered chapters", assertionTourEntry],
+	["Tour sequence is manual, ordered, and reversible", assertionTourSequence],
+	["Tour chapter URLs restore and fail closed", assertionTourUrlState],
+	[
+		"Tour exit, manual override, and Escape ladder preserve provenance",
+		assertionTourExitAndOverrides,
+	],
+	["Tour keyboard, responsive, and no-JS contracts hold", assertionTourResponsiveKeyboardNoJs],
+	["Reduced motion and Pause stay static across tour transitions", assertionTourStaticMotion],
 ];
 
 function printResults(results) {
-	console.log("\nP1 homepage exploration contract");
+	console.log("\nP2A homepage guided-tour contract");
 	for (const [index, result] of results.entries()) {
 		const status = result.passed ? "PASS" : "FAIL";
 		console.log(`${String(index + 1).padStart(2, "0")} ${status}  ${result.name}`);

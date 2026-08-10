@@ -1,11 +1,14 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import TextShimmer from "../Effects/TextShimmer";
 
 import { useStore } from "@nanostores/react";
 import {
+	exitTour,
 	focusId,
 	lens,
+	mode,
 	pin,
+	pinTourStep,
 	pinnedId,
 	previewId,
 	setConsoleHover,
@@ -15,6 +18,7 @@ import {
 	viewerId,
 	type HxoLens,
 } from "../../stores/hxoStore";
+import { HXO_TOUR_STEPS, type HxoTourStep } from "../../config/hxoTour";
 import SonicHeartbeat from "../Audio/SonicHeartbeat";
 
 interface ConsoleProject {
@@ -135,9 +139,37 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 	const currentFocusId = useStore(focusId);
 	const currentViewerId = useStore(viewerId);
 	const currentLens = useStore(lens);
+	const currentMode = useStore(mode);
 	const [isHydrated, setIsHydrated] = useState(false);
 	const [urlStateReady, setUrlStateReady] = useState(false);
 	const activeProject = projects.find((project) => project.id === currentViewerId);
+	const tourSteps = useMemo<readonly HxoTourStep[]>(() => {
+		const projectIds = new Set(projects.map((project) => project.id));
+		const stepIds = new Set(HXO_TOUR_STEPS.map((step) => step.id));
+		const tourProjectIds = new Set(HXO_TOUR_STEPS.map((step) => step.projectId));
+		return stepIds.size === HXO_TOUR_STEPS.length &&
+			tourProjectIds.size === HXO_TOUR_STEPS.length &&
+			HXO_TOUR_STEPS.every((step) => projectIds.has(step.projectId))
+			? HXO_TOUR_STEPS
+			: [];
+	}, [projects]);
+	const currentTourIndex =
+		currentMode === "tour" ? tourSteps.findIndex((step) => step.projectId === currentPinnedId) : -1;
+	const currentTourStep = currentTourIndex >= 0 ? tourSteps[currentTourIndex] : null;
+
+	const activateTourStep = useCallback(
+		(index: number) => {
+			const step = tourSteps[index];
+			if (!step) {
+				exitTour();
+				return;
+			}
+			setPreview(null);
+			setLens(step.lens);
+			pinTourStep(step.projectId);
+		},
+		[tourSteps],
+	);
 
 	const ledgerProjects = useMemo(() => sortProjects(projects), [projects]);
 	const ledgerSections = useMemo(() => {
@@ -178,11 +210,26 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 		const projectIds = new Set(projects.map((project) => project.id));
 		const applyUrlState = () => {
 			const params = new URLSearchParams(window.location.hash.replace(/^#/, ""));
-			const hasManagedState = params.has("lens") || params.has("pin");
+			const hasManagedState = params.has("lens") || params.has("pin") || params.has("tour");
 			managedHashRef.current = hasManagedState;
 			if (hasManagedState) {
 				const requestedLens = params.get("lens") as HxoLens | null;
-				setLens(requestedLens && VALID_LENSES.has(requestedLens) ? requestedLens : "time");
+				const validLens = requestedLens && VALID_LENSES.has(requestedLens) ? requestedLens : null;
+				const requestedTour = params.get("tour");
+				const tourStep = requestedTour ? tourSteps.find((step) => step.id === requestedTour) : null;
+				if (requestedTour) {
+					if (tourStep) {
+						setLens(validLens ?? tourStep.lens);
+						pinTourStep(tourStep.projectId);
+					} else {
+						setLens("time");
+						unpin();
+					}
+					setUrlStateReady(true);
+					return;
+				}
+
+				setLens(validLens ?? "time");
 				const requestedPin = params.get("pin");
 				if (requestedPin && projectIds.has(requestedPin)) pin(requestedPin);
 				else unpin();
@@ -193,35 +240,49 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 		applyUrlState();
 		window.addEventListener("hashchange", applyUrlState);
 		return () => window.removeEventListener("hashchange", applyUrlState);
-	}, [projects]);
+	}, [projects, tourSteps]);
 
 	useEffect(() => {
 		if (!urlStateReady) return;
 		const hasState = currentLens !== "time" || Boolean(currentPinnedId);
-		if (!hasState && !managedHashRef.current) return;
+		const hasTour = currentMode === "tour" && Boolean(currentTourStep);
+		if (!hasState && !hasTour && !managedHashRef.current) return;
 
 		const params = new URLSearchParams();
-		if (hasState) params.set("lens", currentLens);
+		if (hasState || hasTour) params.set("lens", currentLens);
 		if (currentPinnedId) params.set("pin", currentPinnedId);
+		if (hasTour && currentTourStep) params.set("tour", currentTourStep.id);
 		const nextHash = params.size > 0 ? `#${params.toString()}` : "";
 		const nextUrl = `${window.location.pathname}${window.location.search}${nextHash}`;
 		window.history.replaceState(window.history.state, "", nextUrl);
 		managedHashRef.current = params.size > 0;
-	}, [currentLens, currentPinnedId, urlStateReady]);
+	}, [currentLens, currentMode, currentPinnedId, currentTourStep, urlStateReady]);
 
 	useEffect(() => {
-		const handleEscape = (event: KeyboardEvent) => {
-			if (event.key !== "Escape" || isEditableTarget(event.target)) return;
-			if (previewId.get()) {
-				setPreview(null);
-			} else if (pinnedId.get()) {
-				unpin();
+		if (currentMode === "tour" && currentTourIndex < 0) exitTour();
+	}, [currentMode, currentTourIndex]);
+
+	useEffect(() => {
+		const handleKeyboard = (event: KeyboardEvent) => {
+			if (isEditableTarget(event.target)) return;
+			if (event.key === "Escape") {
+				if (previewId.get()) setPreview(null);
+				else if (mode.get() === "tour") exitTour();
+				else if (pinnedId.get()) unpin();
+				return;
 			}
+
+			if (mode.get() !== "tour" || !["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+			const index = tourSteps.findIndex((step) => step.projectId === pinnedId.get());
+			const nextIndex = index + (event.key === "ArrowRight" ? 1 : -1);
+			if (!tourSteps[nextIndex]) return;
+			event.preventDefault();
+			activateTourStep(nextIndex);
 		};
 
-		window.addEventListener("keydown", handleEscape);
-		return () => window.removeEventListener("keydown", handleEscape);
-	}, []);
+		window.addEventListener("keydown", handleKeyboard);
+		return () => window.removeEventListener("keydown", handleKeyboard);
+	}, [activateTourStep, tourSteps]);
 
 	useEffect(() => {
 		const ledger = ledgerRef.current;
@@ -243,13 +304,14 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 			<div
 				className="flex h-full flex-col border-l border-zinc-900 bg-transparent"
 				data-current-lens={currentLens}
+				data-current-mode={currentMode}
 				data-hxo-hydrated={isHydrated ? "true" : "false"}
 				onMouseEnter={() => setConsoleHover(true)}
 				onMouseLeave={() => setConsoleHover(false)}
 			>
 				<nav
 					aria-label="Career map lenses"
-					className="sticky top-16 z-20 flex shrink-0 items-center gap-1 border-b border-zinc-800 bg-black/90 px-3 py-2 font-mono backdrop-blur"
+					className="sticky top-16 z-20 flex shrink-0 flex-wrap items-center gap-1 border-b border-zinc-800 bg-black/90 px-3 py-2 font-mono backdrop-blur"
 					data-lens-bar
 				>
 					<span className="mr-2 text-[9px] tracking-[0.2em] text-zinc-600 uppercase">View</span>
@@ -273,11 +335,37 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 							</button>
 						);
 					})}
+					<button
+						type="button"
+						data-tour-control="start"
+						data-tour-count={tourSteps.length}
+						aria-pressed={currentMode === "tour"}
+						disabled={!isHydrated || tourSteps.length !== HXO_TOUR_STEPS.length}
+						onClick={() => activateTourStep(0)}
+						className={`ml-auto rounded-sm border px-2.5 py-1 text-[10px] tracking-wider uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-400 disabled:cursor-default ${
+							currentMode === "tour"
+								? "border-cyan-500/60 bg-cyan-500/10 text-cyan-300"
+								: "border-zinc-700 text-zinc-400 hover:border-cyan-600 hover:text-cyan-300 disabled:hover:border-zinc-700 disabled:hover:text-zinc-400"
+						}`}
+					>
+						{currentMode === "tour" ? "Restart tour" : "Tour"}
+					</button>
 				</nav>
+
+				{currentTourStep && (
+					<TourChapter
+						step={currentTourStep}
+						index={currentTourIndex}
+						count={tourSteps.length}
+						onPrevious={() => activateTourStep(currentTourIndex - 1)}
+						onNext={() => activateTourStep(currentTourIndex + 1)}
+						onExit={exitTour}
+					/>
+				)}
 
 				<div
 					data-viewer-id={activeProject?.id ?? "orientation"}
-					className="custom-scrollbar h-[62%] shrink-0 overflow-y-auto border-b border-zinc-800 bg-zinc-900/10 p-6"
+					className={`custom-scrollbar shrink-0 overflow-y-auto border-b border-zinc-800 bg-zinc-900/10 p-6 ${currentTourStep ? "h-[48%] pt-[5.5rem] lg:pt-6" : "h-[62%]"}`}
 				>
 					{activeProject ? <ActiveSovereignView project={activeProject} /> : <DefaultSummary />}
 				</div>
@@ -376,6 +464,80 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 				</div>
 			</div>
 		</ErrorBoundary>
+	);
+}
+
+function TourChapter({
+	step,
+	index,
+	count,
+	onPrevious,
+	onNext,
+	onExit,
+}: {
+	step: HxoTourStep;
+	index: number;
+	count: number;
+	onPrevious: () => void;
+	onNext: () => void;
+	onExit: () => void;
+}) {
+	return (
+		<section
+			aria-label={`Guided tour chapter ${index + 1} of ${count}`}
+			aria-live="polite"
+			className="sticky top-[6.5625rem] z-10 shrink-0 border-b border-cyan-900/50 bg-black/95 px-4 py-3 shadow-lg backdrop-blur lg:static"
+			data-tour-panel
+			data-tour-step={step.id}
+			data-tour-index={index}
+			data-tour-count={count}
+		>
+			<div className="flex items-start justify-between gap-4">
+				<div className="min-w-0">
+					<p className="font-mono text-[9px] tracking-[0.2em] text-cyan-500 uppercase">
+						Guided tour · {index + 1}/{count}
+					</p>
+					<h2 className="mt-1 text-sm font-semibold text-white">{step.title}</h2>
+					<p className="mt-1 max-w-2xl text-xs leading-relaxed text-zinc-400">{step.narration}</p>
+				</div>
+				<button
+					type="button"
+					data-tour-control="exit"
+					onClick={onExit}
+					className="shrink-0 rounded-sm border border-zinc-700 px-2.5 py-1.5 font-mono text-[9px] tracking-wider text-zinc-400 uppercase hover:border-zinc-500 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
+				>
+					Exit
+				</button>
+			</div>
+			<div className="mt-3 flex items-center gap-2 font-mono">
+				<button
+					type="button"
+					data-tour-control="previous"
+					disabled={index === 0}
+					onClick={onPrevious}
+					className="rounded-sm border border-zinc-700 px-3 py-1.5 text-[9px] tracking-wider text-zinc-300 uppercase hover:border-cyan-600 hover:text-cyan-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400 disabled:cursor-default disabled:opacity-30 disabled:hover:border-zinc-700 disabled:hover:text-zinc-300"
+				>
+					← Previous
+				</button>
+				<div className="flex gap-1" aria-hidden="true">
+					{Array.from({ length: count }, (_, dotIndex) => (
+						<span
+							key={dotIndex}
+							className={`h-1 w-4 rounded-full ${dotIndex === index ? "bg-cyan-400" : "bg-zinc-800"}`}
+						/>
+					))}
+				</div>
+				<button
+					type="button"
+					data-tour-control="next"
+					disabled={index === count - 1}
+					onClick={onNext}
+					className="rounded-sm border border-zinc-700 px-3 py-1.5 text-[9px] tracking-wider text-zinc-300 uppercase hover:border-cyan-600 hover:text-cyan-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400 disabled:cursor-default disabled:opacity-30 disabled:hover:border-zinc-700 disabled:hover:text-zinc-300"
+				>
+					Next →
+				</button>
+			</div>
+		</section>
 	);
 }
 
