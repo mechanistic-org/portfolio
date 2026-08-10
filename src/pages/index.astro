@@ -14,11 +14,10 @@ const isUnderConstruction = currentSite !== "main";
 // Initialize empty
 let swarmNodes: any[] = [];
 let consoleProjects: any[] = [];
-let assemblyLinks: any[] = [];
 
 // SERVER-RENDERED LEDGER (Phase 3 / #73 adjacent)
-// The swarm and console are client-only; crawlers, LLMs, and link
-// unfurlers see nothing without this. Real visible content, not cloaking.
+// The swarm is client-only while the console now prerenders project links.
+// The Ledger remains the broader semantic/crawlable project surface below.
 let ledgerStats = { projects: 0, employers: 0, span: "" };
 let featured: any[] = [];
 const FEATURED_IDS = ["c24", "m700", "avegant-glyph"];
@@ -26,98 +25,53 @@ const FEATURED_IDS = ["c24", "m700", "avegant-glyph"];
 if (!isUnderConstruction) {
 	// 1. FETCH SOURCE OF TRUTH (The Assembly)
 	const assembly = await getCareerAssembly();
+	const visibleProjectNodes = assembly.nodes
+		.filter((n) => n.type === "project")
+		.filter((n) => {
+			const targets = n.data.targets || ["main"];
+			return targets.includes(currentSite);
+		})
+		.filter((n) => n.data.employer !== "erik_norris" && n.id !== "meta/philosophy");
 
 	// 2. ADAPTER: Transform for Swarm (MultiverseNode)
-	swarmNodes = assembly.nodes
-		.filter((n) => n.type === "project")
-		// TRIMAIN FILTER (The Fuel Filter)
-		.filter((n) => {
-			const targets = n.data.targets || ["main"];
-			return targets.includes(currentSite);
-		})
-		// FIX: Remove "Meta" nodes (Bio/Philosophy) as requested by user
-		.filter((n) => n.data.employer !== "erik_norris" && n.id !== "meta/philosophy")
-		.map((n) => {
-			const tier = n.data.tier;
-			let presentation_mode = "standard";
+	swarmNodes = visibleProjectNodes.map((n) => {
+		const tier = n.data.tier;
+		let presentation_mode = "standard";
 
-			// Tier 1 logic
-			// FIX: Do not force Tier 1 to Flagship (45px). Let physics determine size by duration.
-			// if (tier === 1) presentation_mode = "flagship";
+		// Tier 1 logic
+		// FIX: Do not force Tier 1 to Flagship (45px). Let physics determine size by duration.
+		// if (tier === 1) presentation_mode = "flagship";
 
-			// Meta-Node Override (Bio/Philosophy)
-			if (n.data.employer === "erik_norris") {
-				presentation_mode = "flagship";
-				// We might want a "meta" mode in the future, but for now Flagship gives the glow.
-			} else if (tier === "deep_dive") {
-				presentation_mode = "deep_dive"; // Keep Deep Dive for styling, but radius is calculated
-			}
+		// Meta-Node Override (Bio/Philosophy)
+		if (n.data.employer === "erik_norris") {
+			presentation_mode = "flagship";
+			// We might want a "meta" mode in the future, but for now Flagship gives the glow.
+		} else if (tier === "deep_dive") {
+			presentation_mode = "deep_dive"; // Keep Deep Dive for styling, but radius is calculated
+		}
 
-			return {
-				id: n.id,
-				name: n.data.title,
-				group: n.data.employer === "erik_norris" ? "meta" : n.data.employer || "Private", // Custom Group for Color
-				start_date: n.data.date ? new Date(n.data.date).toISOString() : new Date().toISOString(),
-				// FIX: Bake "Now" at build time to prevent Hydration Mismatch (Server vs Client time drift)
-				end_date: n.data.endDate
-					? new Date(n.data.endDate).toISOString()
-					: new Date().toISOString(),
-				value: n.data.employer === "erik_norris" ? 60 : 20, // Bigger Mass for Bio
-				presentation_mode,
-				// Pass-throughs
-				category: n.data.category,
-				type: "project", // Explicit Type
-				// NEW: Pass explicit skills for Ghost Connections
-				skills: [...(n.data.tags || [])],
-			};
-		});
-
-	// 2.1 INJECT SKILLS (Hidden Assembly)
-	// Filter links to only those connected to visible projects
-	const visibleProjectIds = new Set(swarmNodes.map((n) => n.id));
-	const relevantLinks = assembly.links.filter((l) => visibleProjectIds.has(l.source as string));
-
-	// Filter skills to only those connected to visible projects
-	const relevantSkillIds = new Set(relevantLinks.map((l) => l.target as string));
-	const skillNodes = assembly.nodes
-		.filter((n) => n.type === "skill" && relevantSkillIds.has(n.id))
-		.map((n) => ({
+		return {
 			id: n.id,
-			name: n.data.name,
-			group: "skill",
-			start_date: new Date().toISOString(), // Skills are timeless, effectively
-			end_date: new Date().toISOString(),
-			value: 5,
-			presentation_mode: "hidden", // New mode for ResVizSwarm
-			category: "skill",
-			type: "skill",
-			radius: 3, // Tiny
-		}));
-
-	// Merge
-	swarmNodes = [...swarmNodes, ...skillNodes];
-	// We need to pass links too, but HXOSwarmContainer needs an update.
-	// Storing links in a variable to pass down.
-	assemblyLinks = relevantLinks.map((l) => ({
-		source: l.source,
-		target: l.target,
-		value: l.value,
-	}));
+			name: n.data.title,
+			group: n.data.employer === "erik_norris" ? "meta" : n.data.employer || "Private", // Custom Group for Color
+			start_date: n.data.date ? new Date(n.data.date).toISOString() : new Date().toISOString(),
+			// FIX: Bake "Now" at build time to prevent Hydration Mismatch (Server vs Client time drift)
+			end_date: n.data.endDate ? new Date(n.data.endDate).toISOString() : new Date().toISOString(),
+			value: n.data.employer === "erik_norris" ? 60 : 20, // Bigger Mass for Bio
+			presentation_mode,
+			// Pass-throughs
+			category: n.data.category,
+			type: "project", // Explicit Type
+			// NEW: Pass explicit skills for Ghost Connections
+			skills: [...(n.data.tags || [])],
+		};
+	});
 
 	// 3. ADAPTER: Transform for Console (ConsoleProject)
-	consoleProjects = assembly.nodes
-		.filter((n) => n.type === "project")
-		// TRIMAIN FILTER (The Fuel Filter)
-		.filter((n) => {
-			const targets = n.data.targets || ["main"];
-			return targets.includes(currentSite);
-		})
-		// FIX: Remove "Meta" nodes from Ledger too
-		.filter((n) => n.data.employer !== "erik_norris" && n.id !== "meta/philosophy")
-		.map((n) => ({
-			id: n.id,
-			data: n.data,
-		}));
+	consoleProjects = visibleProjectNodes.map((n) => ({
+		id: n.id,
+		data: n.data,
+	}));
 
 	// 4. SERVER-RENDERED LEDGER DATA
 	const allProjects = await getCollection("projects");
@@ -164,11 +118,11 @@ if (!isUnderConstruction) {
 					{/* LEFT: THE SWARM (Navigation / Map) */}
 					{/* The hydrated swarm may grow below lg; without JavaScript this remains one hero stage. */}
 					<div class="hxo-swarm-stage custom-scrollbar relative min-h-svh border-r border-zinc-900 bg-transparent lg:col-span-7 lg:h-screen lg:overflow-x-hidden lg:overflow-y-auto xl:col-span-8">
-						<HXOSwarmContainer client:only="react" nodes={swarmNodes} links={assemblyLinks} />
+						<HXOSwarmContainer client:only="react" nodes={swarmNodes} />
 						{/* IDENTITY OVERLAY - server-rendered, above the fold.
-						    The swarm and console are both client:only islands, so without
-						    this the first viewport was an unlabelled particle animation and
-						    the only <h1> sat a full screen down in the Ledger. This states
+						    The swarm remains client-only while the console is prerendered.
+						    This keeps identity explicit before hydration and prevents the
+						    only <h1> from sitting a full screen down in the Ledger. It states
 						    who and what before anything hydrates, costs no layout, and
 						    leaves the swarm exactly as designed. */}
 						<div class="pointer-events-none absolute top-16 right-6 left-6 z-50 max-w-md md:top-20 md:right-auto md:left-10">
@@ -202,7 +156,7 @@ if (!isUnderConstruction) {
 					{/* RIGHT: THE CONSOLE (Details / Index) */}
 					{/* Must start below the 5rem Nav and fill the rest without overflow */}
 					<div class="hxo-console-stage relative z-30 flex flex-col bg-transparent lg:col-span-5 lg:mt-16 lg:h-[calc(100vh-4rem)] xl:col-span-4">
-						<HXOConsole client:only="react" projects={consoleProjects} />
+						<HXOConsole client:load projects={consoleProjects} />
 					</div>
 				</main>
 
@@ -323,19 +277,22 @@ if (!isUnderConstruction) {
 </style>
 
 <style is:global>
-	/* Client-only islands have no rendered div without JavaScript. This makes the
-	   responsive stages tall only after hydration, keeping no-JS at one hero stage
-	   followed directly by the Ledger. */
+	.hxo-console-stage > astro-island {
+		display: block;
+		height: 100%;
+		width: 100%;
+	}
+
+	/* The swarm remains client-only. The console is prerendered so its native
+	   project anchors remain available without JavaScript. */
 	@media (max-width: 1023px) {
 		.hxo-swarm-stage > astro-island:has(> div) {
 			display: block;
 			width: 100%;
 		}
 
-		.hxo-console-stage > astro-island:has(> div) {
-			display: block;
+		.hxo-console-stage > astro-island {
 			height: max(48rem, calc(100svh - 4rem));
-			width: 100%;
 		}
 	}
 </style>

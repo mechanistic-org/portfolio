@@ -1,16 +1,19 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import TextShimmer from "../Effects/TextShimmer";
 
 import { useStore } from "@nanostores/react";
 import {
 	focusId,
+	lens,
 	pin,
 	pinnedId,
 	previewId,
 	setConsoleHover,
+	setLens,
 	setPreview,
 	unpin,
 	viewerId,
+	type HxoLens,
 } from "../../stores/hxoStore";
 import SonicHeartbeat from "../Audio/SonicHeartbeat";
 
@@ -32,6 +35,7 @@ interface ConsoleProject {
 		metrics?: Record<string, any>;
 		toolchain?: string[];
 		tier?: "deep_dive" | "lite" | string;
+		employer?: string;
 		category?: string;
 	};
 }
@@ -76,6 +80,12 @@ interface HXOConsoleProps {
 }
 
 const TIER_RANK: Record<string, number> = { deep_dive: 0, lite: 1 };
+const LENSES: Array<{ id: HxoLens; label: string }> = [
+	{ id: "time", label: "Time" },
+	{ id: "employer", label: "Employer" },
+	{ id: "category", label: "Category" },
+];
+const VALID_LENSES = new Set<HxoLens>(LENSES.map(({ id }) => id));
 
 function sortableDate(value: string | Date | undefined) {
 	if (!value) return null;
@@ -92,13 +102,18 @@ function isEditableTarget(target: EventTarget | null) {
 	);
 }
 
-export default function HXOConsole({ projects }: HXOConsoleProps) {
-	const currentPinnedId = useStore(pinnedId);
-	const currentFocusId = useStore(focusId);
-	const currentViewerId = useStore(viewerId);
-	const activeProject = projects.find((project) => project.id === currentViewerId);
+function formatGroupLabel(value: string) {
+	return value.replace(/[_-]+/g, " ").replace(/\b\w/g, (character) => character.toUpperCase());
+}
 
-	const ledgerProjects = projects
+function getProjectLensGroup(project: ConsoleProject, currentLens: HxoLens) {
+	if (currentLens === "employer") return project.data.employer || "unassigned";
+	if (currentLens === "category") return project.data.category || "uncategorized";
+	return "timeline";
+}
+
+function sortProjects(projects: ConsoleProject[]) {
+	return projects
 		.map((project, originalIndex) => ({ project, originalIndex }))
 		.sort((a, b) => {
 			const tierA = TIER_RANK[a.project.data.tier ?? ""] ?? 2;
@@ -113,9 +128,86 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 			return a.originalIndex - b.originalIndex;
 		})
 		.map(({ project }) => project);
+}
+
+export default function HXOConsole({ projects }: HXOConsoleProps) {
+	const currentPinnedId = useStore(pinnedId);
+	const currentFocusId = useStore(focusId);
+	const currentViewerId = useStore(viewerId);
+	const currentLens = useStore(lens);
+	const [isHydrated, setIsHydrated] = useState(false);
+	const [urlStateReady, setUrlStateReady] = useState(false);
+	const activeProject = projects.find((project) => project.id === currentViewerId);
+
+	const ledgerProjects = useMemo(() => sortProjects(projects), [projects]);
+	const ledgerSections = useMemo(() => {
+		if (currentLens === "time") {
+			return [{ id: "timeline", label: "Timeline", projects: ledgerProjects }];
+		}
+
+		const groups = new Map<string, ConsoleProject[]>();
+		for (const project of ledgerProjects) {
+			const group = getProjectLensGroup(project, currentLens);
+			const entries = groups.get(group) ?? [];
+			entries.push(project);
+			groups.set(group, entries);
+		}
+
+		return [...groups.entries()]
+			.map(([id, groupedProjects]) => ({
+				id,
+				label: formatGroupLabel(id),
+				projects: groupedProjects,
+			}))
+			.sort((a, b) => {
+				if (a.id === "uncategorized" || a.id === "unassigned") return 1;
+				if (b.id === "uncategorized" || b.id === "unassigned") return -1;
+				return a.label.localeCompare(b.label);
+			});
+	}, [currentLens, ledgerProjects]);
 
 	const ledgerRef = useRef<HTMLDivElement>(null);
 	const isInteractingWithLedger = useRef(false);
+	const managedHashRef = useRef(false);
+
+	useEffect(() => {
+		setIsHydrated(true);
+	}, []);
+
+	useEffect(() => {
+		const projectIds = new Set(projects.map((project) => project.id));
+		const applyUrlState = () => {
+			const params = new URLSearchParams(window.location.hash.replace(/^#/, ""));
+			const hasManagedState = params.has("lens") || params.has("pin");
+			managedHashRef.current = hasManagedState;
+			if (hasManagedState) {
+				const requestedLens = params.get("lens") as HxoLens | null;
+				setLens(requestedLens && VALID_LENSES.has(requestedLens) ? requestedLens : "time");
+				const requestedPin = params.get("pin");
+				if (requestedPin && projectIds.has(requestedPin)) pin(requestedPin);
+				else unpin();
+			}
+			setUrlStateReady(true);
+		};
+
+		applyUrlState();
+		window.addEventListener("hashchange", applyUrlState);
+		return () => window.removeEventListener("hashchange", applyUrlState);
+	}, [projects]);
+
+	useEffect(() => {
+		if (!urlStateReady) return;
+		const hasState = currentLens !== "time" || Boolean(currentPinnedId);
+		if (!hasState && !managedHashRef.current) return;
+
+		const params = new URLSearchParams();
+		if (hasState) params.set("lens", currentLens);
+		if (currentPinnedId) params.set("pin", currentPinnedId);
+		const nextHash = params.size > 0 ? `#${params.toString()}` : "";
+		const nextUrl = `${window.location.pathname}${window.location.search}${nextHash}`;
+		window.history.replaceState(window.history.state, "", nextUrl);
+		managedHashRef.current = params.size > 0;
+	}, [currentLens, currentPinnedId, urlStateReady]);
 
 	useEffect(() => {
 		const handleEscape = (event: KeyboardEvent) => {
@@ -150,12 +242,42 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 		<ErrorBoundary>
 			<div
 				className="flex h-full flex-col border-l border-zinc-900 bg-transparent"
+				data-current-lens={currentLens}
+				data-hxo-hydrated={isHydrated ? "true" : "false"}
 				onMouseEnter={() => setConsoleHover(true)}
 				onMouseLeave={() => setConsoleHover(false)}
 			>
+				<nav
+					aria-label="Career map lenses"
+					className="sticky top-16 z-20 flex shrink-0 items-center gap-1 border-b border-zinc-800 bg-black/90 px-3 py-2 font-mono backdrop-blur"
+					data-lens-bar
+				>
+					<span className="mr-2 text-[9px] tracking-[0.2em] text-zinc-600 uppercase">View</span>
+					{LENSES.map(({ id, label }) => {
+						const active = id === currentLens;
+						return (
+							<button
+								key={id}
+								type="button"
+								data-lens-control={id}
+								aria-pressed={active}
+								disabled={!isHydrated}
+								onClick={() => setLens(id)}
+								className={`rounded-sm border px-2.5 py-1 text-[10px] tracking-wider uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-400 disabled:cursor-default ${
+									active
+										? "border-lime-500/60 bg-lime-500/10 text-lime-300"
+										: "border-zinc-800 text-zinc-500 hover:border-zinc-600 hover:text-zinc-300 disabled:hover:border-zinc-800 disabled:hover:text-zinc-500"
+								}`}
+							>
+								{label}
+							</button>
+						);
+					})}
+				</nav>
+
 				<div
 					data-viewer-id={activeProject?.id ?? "orientation"}
-					className="custom-scrollbar h-[70%] shrink-0 overflow-y-auto border-b border-zinc-800 bg-zinc-900/10 p-6"
+					className="custom-scrollbar h-[62%] shrink-0 overflow-y-auto border-b border-zinc-800 bg-zinc-900/10 p-6"
 				>
 					{activeProject ? <ActiveSovereignView project={activeProject} /> : <DefaultSummary />}
 				</div>
@@ -179,62 +301,77 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 							}
 						}}
 					>
-						<ul className="m-0 list-none p-0">
-							{ledgerProjects.map((project) => {
-								const isPinned = project.id === currentPinnedId;
-								const isFocused = project.id === currentFocusId;
-								const rawDate = project.data.date ? String(project.data.date) : "";
+						{ledgerSections.map((section) => (
+							<section
+								key={section.id}
+								data-lens-section={section.id}
+								data-section-count={section.projects.length}
+							>
+								<h3 className="sticky top-0 z-10 flex items-center justify-between border-y border-zinc-800 bg-black/95 px-3 py-1.5 font-mono text-[9px] tracking-[0.18em] text-zinc-500 uppercase backdrop-blur">
+									<span>{section.label}</span>
+									<span>{section.projects.length}</span>
+								</h3>
+								<ul className="m-0 list-none p-0">
+									{section.projects.map((project) => {
+										const isPinned = project.id === currentPinnedId;
+										const isFocused = project.id === currentFocusId;
+										const rawDate = project.data.date ? String(project.data.date) : "";
+										const lensGroup = getProjectLensGroup(project, currentLens);
 
-								return (
-									<li
-										key={project.id}
-										data-row-id={project.id}
-										className={`group flex items-stretch border-b border-zinc-800/50 transition-colors duration-100 ${
-											isFocused
-												? "bg-zinc-800/80 text-white shadow-[inset_3px_0_0_#84cc16]"
-												: "opacity-60 hover:bg-zinc-900/50 hover:opacity-100 focus-within:opacity-100"
-										}`}
-									>
-										<button
-											type="button"
-											aria-pressed={isPinned}
-											data-id={project.id}
-											data-pinned={isPinned}
-											data-focused={isFocused}
-											data-tier={project.data.tier ?? ""}
-											data-date={rawDate}
-											onClick={() => pin(project.id)}
-											onMouseEnter={() => setPreview(project.id, "index-hover")}
-											onMouseLeave={() => setPreview(null, "index-hover")}
-											onFocus={() => setPreview(project.id, "index-focus")}
-											onBlur={() => setPreview(null, "index-focus")}
-											className="flex min-w-0 flex-1 cursor-pointer items-center gap-4 p-3 text-left focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-lime-400"
-										>
-											<span
-												className={`pointer-events-none w-10 shrink-0 font-mono text-xs ${isFocused ? "text-lime-400" : "text-zinc-600"}`}
+										return (
+											<li
+												key={project.id}
+												data-row-id={project.id}
+												className={`group flex items-stretch border-b border-zinc-800/50 transition-colors duration-100 ${
+													isFocused
+														? "bg-zinc-800/80 text-white shadow-[inset_3px_0_0_#84cc16]"
+														: "opacity-60 focus-within:opacity-100 hover:bg-zinc-900/50 hover:opacity-100"
+												}`}
 											>
-												{project.data.date ? new Date(project.data.date).getFullYear() : "####"}
-											</span>
-											<span
-												className={`pointer-events-none min-w-0 flex-1 truncate text-sm font-medium ${isFocused ? "text-white" : "text-zinc-300"}`}
-											>
-												{project.data.title}
-											</span>
-											{project.data.tier === "deep_dive" && (
-												<span className="pointer-events-none h-1.5 w-1.5 shrink-0 rounded-full bg-lime-500/50" />
-											)}
-										</button>
-										<a
-											href={`/projects/${project.id}/`}
-											aria-label={`Open ${project.data.title}`}
-											className="flex shrink-0 items-center px-3 font-mono text-[10px] tracking-wider text-zinc-500 uppercase transition-colors hover:text-lime-400 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-lime-400"
-										>
-											Open →
-										</a>
-									</li>
-								);
-							})}
-						</ul>
+												<button
+													type="button"
+													aria-pressed={isPinned}
+													data-id={project.id}
+													data-pinned={isPinned}
+													data-focused={isFocused}
+													data-tier={project.data.tier ?? ""}
+													data-date={rawDate}
+													data-lens-group={lensGroup}
+													disabled={!isHydrated}
+													onClick={() => pin(project.id)}
+													onMouseEnter={() => setPreview(project.id, "index-hover")}
+													onMouseLeave={() => setPreview(null, "index-hover")}
+													onFocus={() => setPreview(project.id, "index-focus")}
+													onBlur={() => setPreview(null, "index-focus")}
+													className="flex min-w-0 flex-1 cursor-pointer items-center gap-4 p-3 text-left focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-lime-400 disabled:cursor-default"
+												>
+													<span
+														className={`pointer-events-none w-10 shrink-0 font-mono text-xs ${isFocused ? "text-lime-400" : "text-zinc-600"}`}
+													>
+														{project.data.date ? new Date(project.data.date).getFullYear() : "####"}
+													</span>
+													<span
+														className={`pointer-events-none min-w-0 flex-1 truncate text-sm font-medium ${isFocused ? "text-white" : "text-zinc-300"}`}
+													>
+														{project.data.title}
+													</span>
+													{project.data.tier === "deep_dive" && (
+														<span className="pointer-events-none h-1.5 w-1.5 shrink-0 rounded-full bg-lime-500/50" />
+													)}
+												</button>
+												<a
+													href={`/projects/${project.id}/`}
+													aria-label={`Open ${project.data.title}`}
+													className="flex shrink-0 items-center px-3 font-mono text-[10px] tracking-wider text-zinc-500 uppercase transition-colors hover:text-lime-400 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-lime-400"
+												>
+													Open →
+												</a>
+											</li>
+										);
+									})}
+								</ul>
+							</section>
+						))}
 					</div>
 				</div>
 			</div>
@@ -370,11 +507,14 @@ function DefaultSummary() {
 
 			<div className="space-y-6">
 				<p className="text-sm leading-relaxed font-light text-zinc-300">
-					Principal Mechanical Architect specializing in high-fidelity hardware and program rescue. I
-					stabilize the entropy of product development: structure the chaos, index the decisions, ship
-					the hardware.
+					Principal Mechanical Architect specializing in high-fidelity hardware and program rescue.
+					I stabilize the entropy of product development: structure the chaos, index the decisions,
+					ship the hardware.
 				</p>
-				<nav aria-label="Portfolio orientation" className="flex flex-wrap gap-x-5 gap-y-3 font-mono text-xs tracking-wider uppercase">
+				<nav
+					aria-label="Portfolio orientation"
+					className="flex flex-wrap gap-x-5 gap-y-3 font-mono text-xs tracking-wider uppercase"
+				>
 					<a href="/projects/c24/" className="text-lime-400 transition-colors hover:text-white">
 						C|24 dossier →
 					</a>

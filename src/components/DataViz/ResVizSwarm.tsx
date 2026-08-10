@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import * as d3 from "d3";
 import type { MultiverseNode } from "@/types/MultiverseTypes";
 import { getEntityColor } from "../../config/color_registry";
+import type { HxoLens } from "../../stores/hxoStore";
 
 interface NodeData extends d3.SimulationNodeDatum {
 	id: string;
@@ -21,7 +22,7 @@ interface NodeData extends d3.SimulationNodeDatum {
 
 interface ResVizSwarmProps {
 	nodes: MultiverseNode[];
-	links?: any[];
+	lens: HxoLens;
 	onNodeSelect?: (node: NodeData | null) => void;
 	onNodeClick?: (node: NodeData | null) => void;
 	externalHoverId?: string;
@@ -36,6 +37,18 @@ const REST_OPACITY = 0.9;
 const RESPONSIVE_TOP_GUTTER = 240;
 const RESPONSIVE_BOTTOM_GUTTER = 80;
 const RESPONSIVE_NODE_GAP = 6;
+const GROUP_LABEL_OFFSET = 36;
+
+interface LensGroupDescriptor {
+	id: string;
+	label: string;
+	count: number;
+	x: number;
+	y: number;
+	labelX: number;
+	labelY: number;
+	anchor: "start" | "middle";
+}
 
 function clamp(value: number, minimum: number, maximum: number) {
 	return Math.min(maximum, Math.max(minimum, value));
@@ -84,8 +97,82 @@ function getResponsivePacking(nodes: NodeData[], width: number) {
 	};
 }
 
+function formatGroupLabel(value: string) {
+	return value.replace(/[_-]+/g, " ").replace(/\b\w/g, (character) => character.toUpperCase());
+}
+
+function getTimeBucket(node: NodeData) {
+	const year = node.date.getFullYear();
+	const start = Math.floor(year / 5) * 5;
+	return `${start}–${start + 4}`;
+}
+
+function getLensGroup(node: NodeData, lens: HxoLens) {
+	if (lens === "employer") return node.group || "unassigned";
+	if (lens === "category") return node.category || "uncategorized";
+	return getTimeBucket(node);
+}
+
+function getLensGroups(
+	nodes: NodeData[],
+	lens: HxoLens,
+	width: number,
+	height: number,
+	timeScale: d3.ScaleTime<number, number>,
+): LensGroupDescriptor[] {
+	const grouped = d3.group(nodes, (node) => getLensGroup(node, lens));
+	const entries = [...grouped.entries()];
+	if (lens === "time") {
+		return entries
+			.map(([id, groupedNodes]) => {
+				const y = d3.mean(groupedNodes, (node) => timeScale(node.date)) ?? height / 2;
+				return {
+					id,
+					label: id,
+					count: groupedNodes.length,
+					x: width / 2,
+					y,
+					labelX: 16,
+					labelY: y,
+					anchor: "start" as const,
+				};
+			})
+			.sort((a, b) => b.id.localeCompare(a.id));
+	}
+
+	entries.sort(([left], [right]) => {
+		if (left === "uncategorized" || left === "unassigned") return 1;
+		if (right === "uncategorized" || right === "unassigned") return -1;
+		return formatGroupLabel(left).localeCompare(formatGroupLabel(right));
+	});
+	const columns = Math.max(1, Math.min(entries.length, width < 560 ? 2 : width < 900 ? 3 : 4));
+	const rows = Math.ceil(entries.length / columns);
+	const top = Math.min(RESPONSIVE_TOP_GUTTER, height * 0.28);
+	const usableHeight = Math.max(1, height - top - RESPONSIVE_BOTTOM_GUTTER);
+	const cellWidth = width / columns;
+	const cellHeight = usableHeight / rows;
+
+	return entries.map(([id, groupedNodes], index) => {
+		const column = index % columns;
+		const row = Math.floor(index / columns);
+		const x = cellWidth * (column + 0.5);
+		const y = top + cellHeight * (row + 0.5);
+		return {
+			id,
+			label: formatGroupLabel(id),
+			count: groupedNodes.length,
+			x,
+			y,
+			labelX: x,
+			labelY: Math.max(18, y - Math.min(GROUP_LABEL_OFFSET, cellHeight * 0.35)),
+			anchor: "middle" as const,
+		};
+	});
+}
+
 export default function ResVizSwarm({
 	nodes: rawNodes,
+	lens,
 	onNodeSelect,
 	onNodeClick,
 	externalHoverId,
@@ -195,7 +282,16 @@ export default function ResVizSwarm({
 			.scaleTime()
 			.domain([new Date(), minDate])
 			.range([RESPONSIVE_TOP_GUTTER, height - RESPONSIVE_BOTTOM_GUTTER]);
+		const lensGroups = getLensGroups(nodes, lens, width, height, timeScale);
+		const lensGroupById = new Map<string, LensGroupDescriptor>(
+			lensGroups.map((group) => [group.id, group]),
+		);
 		const getColor = (node: NodeData) => getEntityColor(node.group, "EMPLOYER");
+		const getGroupCenter = (node: NodeData) =>
+			lensGroupById.get(getLensGroup(node, lens)) ?? {
+				x: width / 2,
+				y: height / 2,
+			};
 
 		if (prefersReducedMotion) {
 			nodes.forEach((node) => {
@@ -220,8 +316,20 @@ export default function ResVizSwarm({
 			.forceSimulation<NodeData>(nodes)
 			.alphaDecay(0.001)
 			.velocityDecay(0.3)
-			.force("x", d3.forceX(width / 2).strength(0.02))
-			.force("y", d3.forceY<NodeData>((node) => timeScale(node.date)).strength(0.1))
+			.force(
+				"x",
+				d3
+					.forceX<NodeData>((node) => (lens === "time" ? width / 2 : getGroupCenter(node).x))
+					.strength(lens === "time" ? 0.02 : 0.13),
+			)
+			.force(
+				"y",
+				d3
+					.forceY<NodeData>((node) =>
+						lens === "time" ? timeScale(node.date) : getGroupCenter(node).y,
+					)
+					.strength(lens === "time" ? 0.1 : 0.13),
+			)
 			.force("collide", d3.forceCollide<NodeData>((node) => node.radius + 2).strength(0.8))
 			.force("charge", d3.forceManyBody<NodeData>().strength(-15));
 		simulationRef.current = simulation;
@@ -239,7 +347,27 @@ export default function ResVizSwarm({
 		// Keep the layer order explicit even while the relationship layer is intentionally empty.
 		svg.append("g").attr("class", "links");
 		const nodeLayer = svg.append("g").attr("class", "nodes");
+		const lensLabelLayer = svg.append("g").attr("class", "lens-labels pointer-events-none");
 		const labelLayer = svg.append("g").attr("class", "labels");
+
+		lensLabelLayer
+			.selectAll<SVGTextElement, LensGroupDescriptor>("text.lens-label")
+			.data(lensGroups, (group) => group.id)
+			.join("text")
+			.attr("class", "lens-label font-mono uppercase")
+			.attr("data-lens-group-label", (group) => group.id)
+			.attr("data-group-count", (group) => group.count)
+			.attr("x", (group) => group.labelX)
+			.attr("y", (group) => group.labelY)
+			.attr("text-anchor", (group) => group.anchor)
+			.style("font-size", lens === "time" ? "9px" : "10px")
+			.style("letter-spacing", "0.12em")
+			.style("fill", "rgba(212,212,216,0.78)")
+			.style("stroke", "rgba(0,0,0,0.9)")
+			.style("stroke-width", "3px")
+			.style("paint-order", "stroke")
+			.style("pointer-events", "none")
+			.text((group) => `${group.label} · ${group.count}`);
 
 		const nodeGroup = nodeLayer
 			.selectAll<SVGGElement, NodeData>("g.node-group")
@@ -248,6 +376,8 @@ export default function ResVizSwarm({
 			.attr("class", "node-group pointer-events-auto")
 			.attr("id", (node) => `node-${node.id}`)
 			.attr("data-id", (node) => node.id)
+			.attr("data-employer", (node) => node.group)
+			.attr("data-lens-group", (node) => getLensGroup(node, lens))
 			.attr("data-presentation-mode", (node) => node.presentation_mode || "")
 			.attr("cursor", "pointer");
 
@@ -290,6 +420,8 @@ export default function ResVizSwarm({
 
 		const updateVisuals = (requestedFocusId: string | null) => {
 			const focusId = nodes.some((node) => node.id === requestedFocusId) ? requestedFocusId : null;
+			const focusNode = nodes.find((node) => node.id === focusId);
+			const focusGroup = focusNode ? getLensGroup(focusNode, lens) : null;
 
 			nodeGroup.each(function (node) {
 				const circle = d3.select<SVGGElement, NodeData>(this).select<SVGCircleElement>("circle");
@@ -300,11 +432,12 @@ export default function ResVizSwarm({
 				}
 
 				const isTarget = node.id === focusId;
+				const isCohort = focusGroup !== null && getLensGroup(node, lens) === focusGroup;
 				circle
 					.attr("stroke", isTarget ? "#ffffff" : "rgba(255,255,255,0.1)")
 					.attr("stroke-width", isTarget ? 4 : 1)
 					.attr("filter", isTarget ? "drop-shadow(0 0 15px rgba(255,255,255,0.8))" : null)
-					.style("opacity", isTarget ? 1 : 0.1);
+					.style("opacity", isTarget ? 1 : isCohort ? 0.5 : 0.08);
 			});
 
 			label.style("opacity", (node) =>
@@ -398,7 +531,7 @@ export default function ResVizSwarm({
 
 		let observer: IntersectionObserver | null = null;
 		let launchTimer: ReturnType<typeof setTimeout> | null = null;
-		if (prefersReducedMotion) {
+		if (prefersReducedMotion || pausedRef.current) {
 			pausedRef.current = true;
 			simulation.stop();
 			simulation.alpha(1).tick(300);
@@ -432,7 +565,7 @@ export default function ResVizSwarm({
 			visualUpdaterRef.current = () => undefined;
 			renderPositionsRef.current = () => undefined;
 		};
-	}, [nodes, dimensions, prefersReducedMotion, responsivePacking]);
+	}, [nodes, dimensions, lens, prefersReducedMotion, responsivePacking]);
 
 	return (
 		<div
@@ -444,6 +577,7 @@ export default function ResVizSwarm({
 				} as CSSProperties
 			}
 			data-swarm-ready={isReady ? "true" : "false"}
+			data-swarm-lens={lens}
 		>
 			<svg ref={svgRef} className="block h-full w-full" />
 			<button
