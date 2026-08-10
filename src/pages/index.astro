@@ -1,7 +1,6 @@
 ---
 export const prerender = true;
 import Layout from "../layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
 import { getCareerAssembly } from "../utils/mapCareerAssembly";
 import HXOSwarmContainer from "../components/HXO/HXOSwarmContainer";
 import HXOConsole from "../components/HXO/HXOConsole";
@@ -15,12 +14,9 @@ const isUnderConstruction = currentSite !== "main";
 let swarmNodes: any[] = [];
 let consoleProjects: any[] = [];
 
-// SERVER-RENDERED LEDGER (Phase 3 / #73 adjacent)
-// The swarm is client-only while the console now prerenders project links.
-// The Ledger remains the broader semantic/crawlable project surface below.
-let ledgerStats = { projects: 0, employers: 0, span: "" };
-let featured: any[] = [];
-const FEATURED_IDS = ["c24", "m700", "avegant-glyph"];
+// SERVER-RENDERED RECORD BAND
+// Counts stay coupled to the same visible roster supplied to both HXO surfaces.
+let recordStats = { projects: 0, employers: 0, span: "" };
 
 if (!isUnderConstruction) {
 	// 1. FETCH SOURCE OF TRUTH (The Assembly)
@@ -73,12 +69,7 @@ if (!isUnderConstruction) {
 		data: n.data,
 	}));
 
-	// 4. SERVER-RENDERED LEDGER DATA
-	const allProjects = await getCollection("projects");
-	const live = allProjects.filter(({ data }) => {
-		const targets = data.targets || ["main"];
-		return targets.includes(currentSite) && !data.draft;
-	});
+	// 4. SERVER-RENDERED RECORD DATA
 	// SPAN comes from resume_master, NOT from published project dates.
 	//
 	// It used to be min/max over `live` project years, which made a fact about
@@ -94,12 +85,11 @@ if (!isUnderConstruction) {
 	const spanStart = roleYears.length ? Math.min(...roleYears) : null;
 	const spanEnd = ongoing ? "Present" : roleYears.length ? String(Math.max(...roleYears)) : "";
 
-	ledgerStats = {
-		projects: live.length,
-		employers: new Set(live.map((p) => p.data.employer).filter(Boolean)).size,
+	recordStats = {
+		projects: visibleProjectNodes.length,
+		employers: new Set(visibleProjectNodes.map((node) => node.data.employer).filter(Boolean)).size,
 		span: spanStart ? `${spanStart}–${spanEnd}` : "",
 	};
-	featured = FEATURED_IDS.map((id) => live.find((p) => p.id === id)).filter(Boolean);
 }
 ---
 
@@ -122,7 +112,7 @@ if (!isUnderConstruction) {
 						{/* IDENTITY OVERLAY - server-rendered, above the fold.
 						    The swarm remains client-only while the console is prerendered.
 						    This keeps identity explicit before hydration and prevents the
-						    only <h1> from sitting a full screen down in the Ledger. It states
+						    only <h1> from sitting a full screen below the instrument. It states
 						    who and what before anything hydrates, costs no layout, and
 						    leaves the swarm exactly as designed. */}
 						<div class="pointer-events-none absolute top-16 right-6 left-6 z-50 max-w-md md:top-20 md:right-auto md:left-10">
@@ -160,97 +150,54 @@ if (!isUnderConstruction) {
 					</div>
 				</main>
 
-				{/* THE LEDGER: server-rendered identity surface (crawlers, LLMs, no-JS) */}
+				{/* Compact server-rendered epilogue; the HXO trio and global footer own discovery. */}
 				<section
-					id="ledger"
-					aria-label="Career ledger"
-					class="relative z-20 border-t border-zinc-900 bg-black px-6 py-20 md:px-12"
+					id="record-band"
+					aria-labelledby="record-band-heading"
+					class="relative z-20 border-t border-zinc-900 bg-black px-6 py-8 md:px-12 md:py-10"
 				>
 					<div class="mx-auto max-w-5xl">
-						<p class="font-mono text-xs tracking-[0.3em] text-zinc-600 uppercase">/// The Ledger</p>
-						{/* h2, not h1 - the page's single h1 is the identity overlay above the fold. */}
-						<h2 class="mt-3 font-mono text-3xl font-bold tracking-tight text-white md:text-4xl">
-							A public engineering record
-						</h2>
-						<p class="mt-5 max-w-3xl text-base leading-relaxed text-zinc-400">
-							This is the public view of my engineering record: the products, programs, failures,
-							recoveries, and systems behind the work. It is built from original notebooks, CAD,
-							test reports, photographs, and program documents, curated into one canonical record
-							per project. The portfolio is one of the projects.
-						</p>
-
-						{/* STATS */}
-						<dl class="mt-10 grid grid-cols-3 border border-zinc-900 font-mono">
-							<div class="border-r border-zinc-900 px-4 py-5 text-center">
-								<dt class="text-[10px] tracking-widest text-zinc-600 uppercase">
-									Indexed Projects
-								</dt>
-								<dd class="mt-1 text-2xl font-bold text-white">{ledgerStats.projects}</dd>
-							</div>
-							<div class="border-r border-zinc-900 px-4 py-5 text-center">
-								<dt class="text-[10px] tracking-widest text-zinc-600 uppercase">Employers</dt>
-								<dd class="mt-1 text-2xl font-bold text-white">{ledgerStats.employers}</dd>
-							</div>
-							<div class="px-4 py-5 text-center">
-								<dt class="text-[10px] tracking-widest text-zinc-600 uppercase">Span</dt>
-								<dd class="mt-1 text-2xl font-bold text-white">{ledgerStats.span}</dd>
-							</div>
-						</dl>
-
-						{/* FEATURED DEEP DIVES */}
-						{featured.length > 0 && (
-							<div class="mt-12">
-								<h2 class="font-mono text-xs tracking-[0.3em] text-zinc-600 uppercase">
-									Featured Deep Dives
-								</h2>
-								<div class="mt-4 grid gap-px border border-zinc-900 bg-zinc-900 md:grid-cols-3">
-									{featured.map((p: any) => (
-										<a
-											href={`/projects/${p.id}/`}
-											class="group block bg-black p-5 transition-colors hover:bg-zinc-950"
-										>
-											<h3 class="group-hover:text-primary font-mono text-sm font-bold text-white transition-colors">
-												{p.data.title}
-											</h3>
-											<p class="mt-2 line-clamp-4 text-xs leading-relaxed text-zinc-500">
-												{p.data.description}
-											</p>
-											<span class="mt-3 inline-block font-mono text-[10px] tracking-widest text-zinc-600 uppercase group-hover:text-zinc-400">
-												Open dossier →
-											</span>
-										</a>
-									))}
-								</div>
-							</div>
-						)}
-
-						{/* NAVIGATION + MACHINE SURFACES */}
-						<nav
-							aria-label="Primary destinations"
-							class="mt-12 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-zinc-900 pt-6 font-mono text-xs tracking-widest uppercase"
-						>
-							<a href="/projects/" class="text-zinc-300 transition-colors hover:text-white">
-								Fleet View ({ledgerStats.projects})
-							</a>
-							<a href="/resume/" class="text-zinc-300 transition-colors hover:text-white">
-								Résumé
-							</a>
-							<a
-								href="mailto:erik@eriknorris.com"
-								class="text-zinc-300 transition-colors hover:text-white"
+						<div class="grid gap-6 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:items-end">
+							{/* h2, not h1 - the identity overlay remains the page's single h1. */}
+							<h2
+								id="record-band-heading"
+								class="font-mono text-sm font-semibold tracking-[0.16em] text-zinc-300 uppercase"
 							>
-								Contact
+								Public engineering record
+							</h2>
+							<dl class="grid grid-cols-3 border border-zinc-900 font-mono">
+								<div class="border-r border-zinc-900 px-3 py-4 text-center">
+									<dt class="text-[10px] leading-tight tracking-widest text-zinc-600 uppercase">
+										Indexed projects
+									</dt>
+									<dd class="mt-1 text-xl font-bold text-white">{recordStats.projects}</dd>
+								</div>
+								<div class="border-r border-zinc-900 px-3 py-4 text-center">
+									<dt class="text-[10px] leading-tight tracking-widest text-zinc-600 uppercase">
+										Employers
+									</dt>
+									<dd class="mt-1 text-xl font-bold text-white">{recordStats.employers}</dd>
+								</div>
+								<div class="px-3 py-4 text-center">
+									<dt class="text-[10px] leading-tight tracking-widest text-zinc-600 uppercase">
+										Span
+									</dt>
+									<dd class="mt-1 text-xl font-bold text-white">{recordStats.span}</dd>
+								</div>
+							</dl>
+						</div>
+
+						<nav
+							aria-label="Machine-readable"
+							class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-zinc-900 pt-5 font-mono text-[10px] tracking-widest uppercase"
+						>
+							<span class="text-zinc-600">Machine-readable</span>
+							<a href="/llms.txt" class="text-zinc-300 transition-colors hover:text-white">
+								llms.txt
 							</a>
-							<span class="text-zinc-700">
-								Agents:{" "}
-								<a href="/llms.txt" class="hover:text-zinc-400">
-									llms.txt
-								</a>{" "}
-								·{" "}
-								<a href="/api/projects.json" class="hover:text-zinc-400">
-									projects.json
-								</a>
-							</span>
+							<a href="/api/projects.json" class="text-zinc-300 transition-colors hover:text-white">
+								projects.json
+							</a>
 						</nav>
 					</div>
 				</section>

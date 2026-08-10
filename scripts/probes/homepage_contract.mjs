@@ -12,7 +12,7 @@ const BASE_URL = `http://${HOST}:${PORT}/`;
 const READY_TIMEOUT_MS = 90_000;
 const PAGE_TIMEOUT_MS = 45_000;
 const SETTLE_MS = 1_200;
-const EXPECTED_ASSERTIONS = 27;
+const EXPECTED_ASSERTIONS = 29;
 const EXPECTED_PROJECT_COUNT = 87;
 const EXPECTED_TOUR = [
 	{ id: "field", projectId: "c24", lens: "time" },
@@ -1275,7 +1275,7 @@ async function assertionResponsiveFlowAndContainment(page, problems) {
 				return {
 					swarm: toBounds(document.querySelector(".hxo-swarm-stage")),
 					console: toBounds(document.querySelector(".hxo-console-stage")),
-					ledger: toBounds(document.querySelector("#ledger")),
+					recordBand: toBounds(document.querySelector("#record-band")),
 					mainOverflowY: main ? getComputedStyle(main).overflowY : null,
 				};
 			});
@@ -1284,7 +1284,10 @@ async function assertionResponsiveFlowAndContainment(page, problems) {
 				layout.console,
 				`${viewport.name}: console stage is missing`,
 			);
-			const ledger = requireValue(layout.ledger, `${viewport.name}: Ledger is missing`);
+			const recordBand = requireValue(
+				layout.recordBand,
+				`${viewport.name}: record band is missing`,
+			);
 
 			if (viewport.width >= 1024) {
 				if (consoleStage.left < swarm.right - 1 || consoleStage.top >= swarm.bottom) {
@@ -1304,8 +1307,8 @@ async function assertionResponsiveFlowAndContainment(page, problems) {
 						`${viewport.name}: hydrated console has only ${consoleStage.height}px height`,
 					);
 				}
-				if (consoleStage.bottom > ledger.top + 1) {
-					throw new Error(`${viewport.name}: console overlaps the Ledger`);
+				if (consoleStage.bottom > recordBand.top + 1) {
+					throw new Error(`${viewport.name}: console overlaps the record band`);
 				}
 
 				await page.evaluate(() => window.scrollTo(0, 0));
@@ -1513,7 +1516,7 @@ async function assertionNoJavaScript(page, problems) {
 				return {
 					h1: document.querySelector("h1")?.textContent?.trim() || "",
 					heroLinks,
-					ledger: Boolean(document.querySelector("#ledger")),
+					recordBand: Boolean(document.querySelector("#record-band")),
 					rowCount: rowButtons.length,
 					rowAnchorCount: rowAnchors.length,
 					uniqueProjectDestinations: new Set(
@@ -1526,7 +1529,7 @@ async function assertionNoJavaScript(page, problems) {
 					main: bounds(".hxo-prototype > main"),
 					swarm: bounds(".hxo-swarm-stage"),
 					console: bounds(".hxo-console-stage"),
-					ledgerBounds: bounds("#ledger"),
+					recordBandBounds: bounds("#record-band"),
 					horizontalOverflow: Math.max(
 						0,
 						document.documentElement.scrollWidth - document.documentElement.clientWidth,
@@ -1538,7 +1541,7 @@ async function assertionNoJavaScript(page, problems) {
 			if (!state.heroLinks.includes("/projects/c24/") || !state.heroLinks.includes("/resume/")) {
 				throw new Error(`${viewport.name}: no-JS hero destinations are incomplete`);
 			}
-			if (!state.ledger) throw new Error(`${viewport.name}: no-JS Ledger is missing`);
+			if (!state.recordBand) throw new Error(`${viewport.name}: no-JS record band is missing`);
 			if (
 				state.rowCount !== EXPECTED_PROJECT_COUNT ||
 				state.rowAnchorCount !== EXPECTED_PROJECT_COUNT ||
@@ -1569,13 +1572,13 @@ async function assertionNoJavaScript(page, problems) {
 				state.console,
 				`${viewport.name}: no-JS console stage is missing`,
 			);
-			const ledger = requireValue(
-				state.ledgerBounds,
-				`${viewport.name}: no-JS Ledger bounds are missing`,
+			const recordBand = requireValue(
+				state.recordBandBounds,
+				`${viewport.name}: no-JS record band bounds are missing`,
 			);
-			if (Math.abs(ledger.top - main.bottom) > 1) {
+			if (Math.abs(recordBand.top - main.bottom) > 1) {
 				throw new Error(
-					`${viewport.name}: no-JS inserted empty space before the Ledger: ${JSON.stringify({ main, ledger })}`,
+					`${viewport.name}: no-JS inserted empty space before the record band: ${JSON.stringify({ main, recordBand })}`,
 				);
 			}
 			if (consoleStage.height < 1) {
@@ -1586,9 +1589,9 @@ async function assertionNoJavaScript(page, problems) {
 					`${viewport.name}: no-JS console does not follow the hero in flow: ${JSON.stringify({ swarm, consoleStage })}`,
 				);
 			}
-			if (consoleStage.bottom > ledger.top + 1) {
+			if (consoleStage.bottom > recordBand.top + 1) {
 				throw new Error(
-					`${viewport.name}: no-JS console overlaps the Ledger: ${JSON.stringify({ consoleStage, ledger })}`,
+					`${viewport.name}: no-JS console overlaps the record band: ${JSON.stringify({ consoleStage, recordBand })}`,
 				);
 			}
 			if (swarm.height < viewport.height - 1 || swarm.height > viewport.height + 1) {
@@ -2393,6 +2396,294 @@ async function assertionTourStaticMotion(page, problems) {
 	return "reduced 5/5 static | explicit Pause 5/5 static";
 }
 
+async function getRecordLayoutSnapshot(page) {
+	return page.evaluate(() => {
+		const toBounds = (element) => {
+			if (!element) return null;
+			const rect = element.getBoundingClientRect();
+			return {
+				left: rect.left,
+				top: rect.top,
+				right: rect.right,
+				bottom: rect.bottom,
+				width: rect.width,
+				height: rect.height,
+			};
+		};
+		const main = document.querySelector(".hxo-prototype > main");
+		const recordBand = document.querySelector("#record-band");
+		const footer = document.querySelector("footer");
+		const projectPaths = Array.from(
+			document.querySelectorAll("button[data-id] + a[href^='/projects/']"),
+			(anchor) => new URL(anchor.href).pathname,
+		);
+		const bandAnchors = recordBand ? Array.from(recordBand.querySelectorAll("a[href]")) : [];
+		const bandAnchorPaths = bandAnchors.map((anchor) => new URL(anchor.href).pathname).sort();
+		const visibleBandAnchorCount = bandAnchors.filter((anchor) => {
+			const rect = anchor.getBoundingClientRect();
+			const style = getComputedStyle(anchor);
+			return (
+				rect.width > 0 &&
+				rect.height > 0 &&
+				style.display !== "none" &&
+				style.visibility !== "hidden"
+			);
+		}).length;
+		const follows = (before, after) =>
+			Boolean(
+				before && after && before.compareDocumentPosition(after) & Node.DOCUMENT_POSITION_FOLLOWING,
+			);
+
+		return {
+			main: toBounds(main),
+			recordBand: toBounds(recordBand),
+			footer: toBounds(footer),
+			domOrder: follows(main, recordBand) && follows(recordBand, footer),
+			projectAnchorCount: projectPaths.length,
+			uniqueProjectAnchorCount: new Set(projectPaths).size,
+			bandAnchorPaths,
+			visibleBandAnchorCount,
+			horizontalOverflow: Math.max(
+				0,
+				document.documentElement.scrollWidth - document.documentElement.clientWidth,
+			),
+			bandOverflowX: recordBand
+				? Math.max(0, recordBand.scrollWidth - recordBand.clientWidth)
+				: null,
+			bandOverflowY: recordBand
+				? Math.max(0, recordBand.scrollHeight - recordBand.clientHeight)
+				: null,
+		};
+	});
+}
+
+function assertRecordLayoutSnapshot(snapshot, viewport, mode) {
+	const label = `${viewport.width}x${viewport.height} ${mode}`;
+	const main = requireValue(snapshot.main, `${label}: HXO main is missing`);
+	const recordBand = requireValue(snapshot.recordBand, `${label}: record band is missing`);
+	const footer = requireValue(snapshot.footer, `${label}: footer is missing`);
+	const heightCap = viewport.width <= 390 ? 360 : 280;
+
+	if (!snapshot.domOrder) {
+		throw new Error(`${label}: DOM order is not main → record band → footer`);
+	}
+	if (main.bottom > recordBand.top + 1 || recordBand.bottom > footer.top + 1) {
+		throw new Error(
+			`${label}: main, record band, or footer overlaps: ${JSON.stringify({ main, recordBand, footer })}`,
+		);
+	}
+	if (recordBand.height > heightCap + 1) {
+		throw new Error(`${label}: record band is ${recordBand.height}px tall; cap is ${heightCap}px`);
+	}
+	if (snapshot.horizontalOverflow !== 0) {
+		throw new Error(
+			`${label}: document overflows horizontally by ${snapshot.horizontalOverflow}px`,
+		);
+	}
+	if (snapshot.bandOverflowX > 1 || snapshot.bandOverflowY > 1) {
+		throw new Error(
+			`${label}: record band requires nested scrolling: ${JSON.stringify({ x: snapshot.bandOverflowX, y: snapshot.bandOverflowY })}`,
+		);
+	}
+	if (
+		snapshot.projectAnchorCount !== EXPECTED_PROJECT_COUNT ||
+		snapshot.uniqueProjectAnchorCount !== EXPECTED_PROJECT_COUNT
+	) {
+		throw new Error(
+			`${label}: expected ${EXPECTED_PROJECT_COUNT} unique native project anchors; found ${snapshot.projectAnchorCount}/${snapshot.uniqueProjectAnchorCount}`,
+		);
+	}
+	if (
+		JSON.stringify(snapshot.bandAnchorPaths) !==
+			JSON.stringify(["/api/projects.json", "/llms.txt"]) ||
+		snapshot.visibleBandAnchorCount !== 2
+	) {
+		throw new Error(
+			`${label}: machine links are incomplete or hidden: ${JSON.stringify({ paths: snapshot.bandAnchorPaths, visible: snapshot.visibleBandAnchorCount })}`,
+		);
+	}
+}
+
+async function assertionRecordBandPrerendered(page, problems) {
+	await page.setJavaScriptEnabled(false);
+	try {
+		const response = await page.goto(BASE_URL, {
+			waitUntil: "networkidle0",
+			timeout: PAGE_TIMEOUT_MS,
+		});
+		if (!response || response.status() < 200 || response.status() >= 300) {
+			throw new Error(`Record-band prerender returned HTTP ${response?.status() ?? "none"}`);
+		}
+		await page.waitForSelector("body", { timeout: PAGE_TIMEOUT_MS });
+		const state = await page.evaluate(() => {
+			const bands = Array.from(document.querySelectorAll("#record-band"));
+			const band = bands[0];
+			const definitions = band
+				? Object.fromEntries(
+						Array.from(band.querySelectorAll("dt"), (term) => [
+							term.textContent?.replace(/\s+/g, " ").trim() || "",
+							term.nextElementSibling?.textContent?.replace(/\s+/g, " ").trim() || "",
+						]),
+					)
+				: {};
+			const anchorPaths = band
+				? Array.from(
+						band.querySelectorAll("a[href]"),
+						(anchor) => new URL(anchor.href).pathname,
+					).sort()
+				: [];
+			const normalizedPageText = document.body.textContent?.replace(/\s+/g, " ").trim() || "";
+			return {
+				bandCount: bands.length,
+				headingCount: band?.querySelectorAll("h2").length ?? 0,
+				heading: band?.querySelector("h2")?.textContent?.replace(/\s+/g, " ").trim() || "",
+				bandH1Count: band?.querySelectorAll("h1").length ?? 0,
+				pageH1Count: document.querySelectorAll("h1").length,
+				definitions,
+				anchorPaths,
+				machineNavCount: band?.querySelectorAll('nav[aria-label="Machine-readable"]').length ?? 0,
+				projectDetailAnchors: band?.querySelectorAll("a[href^='/projects/']").length ?? 0,
+				legacyLedgerCount: document.querySelectorAll("#ledger").length,
+				legacyText: [
+					"/// The Ledger",
+					"Featured Deep Dives",
+					"This is the public view of my engineering record",
+					"Open dossier",
+					"Fleet View",
+				].filter((phrase) => normalizedPageText.includes(phrase)),
+			};
+		});
+
+		if (
+			state.bandCount !== 1 ||
+			state.headingCount !== 1 ||
+			state.heading !== "Public engineering record" ||
+			state.bandH1Count !== 0 ||
+			state.pageH1Count !== 1
+		) {
+			throw new Error(`Record-band semantic structure is invalid: ${JSON.stringify(state)}`);
+		}
+		const expectedDefinitions = {
+			"Indexed projects": String(EXPECTED_PROJECT_COUNT),
+			Employers: "8",
+			Span: "1986–Present",
+		};
+		if (JSON.stringify(state.definitions) !== JSON.stringify(expectedDefinitions)) {
+			throw new Error(`Record-band facts are incorrect: ${JSON.stringify(state.definitions)}`);
+		}
+		if (
+			JSON.stringify(state.anchorPaths) !== JSON.stringify(["/api/projects.json", "/llms.txt"]) ||
+			state.machineNavCount !== 1 ||
+			state.projectDetailAnchors !== 0
+		) {
+			throw new Error(`Record-band anchor contract failed: ${JSON.stringify(state)}`);
+		}
+		if (state.legacyLedgerCount !== 0 || state.legacyText.length > 0) {
+			throw new Error(`Legacy Ledger content remains: ${JSON.stringify(state)}`);
+		}
+		assertNoPageProblems(problems);
+		return `${EXPECTED_PROJECT_COUNT} projects, 8 employers, 1986–Present; machine links exact; legacy content absent`;
+	} finally {
+		await page.setJavaScriptEnabled(true);
+	}
+}
+
+async function assertionRecordBandLayoutsAndState(page, problems) {
+	const details = [];
+	try {
+		for (const viewport of VIEWPORTS) {
+			await page.setViewport({ ...viewport, deviceScaleFactor: 1 });
+			await navigate(page, problems);
+			await waitForFontsAndSwarmReady(page);
+			await page.evaluate(() => window.scrollTo(0, 0));
+			const baselineScroll = await page.evaluate(() => window.scrollY);
+
+			const lensClicked = await page.evaluate(() => {
+				const button = document.querySelector('button[data-lens-control="employer"]');
+				if (!(button instanceof HTMLButtonElement) || button.disabled) return false;
+				button.click();
+				return true;
+			});
+			if (!lensClicked) throw new Error(`${viewport.name}: Employer lens control is unavailable`);
+			await page.waitForFunction(
+				() =>
+					document.querySelector("[data-current-lens]")?.getAttribute("data-current-lens") ===
+					"employer",
+				{ timeout: PAGE_TIMEOUT_MS },
+			);
+			const afterLens = await page.evaluate(() => window.scrollY);
+
+			const pinClicked = await page.evaluate(() => {
+				const button = document.querySelector('button[data-id="c24"]');
+				if (!(button instanceof HTMLButtonElement) || button.disabled) return false;
+				button.click();
+				return true;
+			});
+			if (!pinClicked) throw new Error(`${viewport.name}: c24 pin control is unavailable`);
+			await page.waitForFunction(
+				() =>
+					document.querySelector('button[data-id="c24"]')?.getAttribute("data-pinned") === "true",
+				{ timeout: PAGE_TIMEOUT_MS },
+			);
+			const afterPin = await page.evaluate(() => window.scrollY);
+
+			const tourClicked = await page.evaluate(() => {
+				const button = document.querySelector('button[data-tour-control="start"]');
+				if (!(button instanceof HTMLButtonElement) || button.disabled) return false;
+				button.click();
+				return true;
+			});
+			if (!tourClicked) throw new Error(`${viewport.name}: tour entry control is unavailable`);
+			await waitForTourStep(page, EXPECTED_TOUR[0]);
+			const afterTourStart = await page.evaluate(() => window.scrollY);
+
+			const nextClicked = await page.evaluate(() => {
+				const button = document.querySelector('button[data-tour-control="next"]');
+				if (!(button instanceof HTMLButtonElement) || button.disabled) return false;
+				button.click();
+				return true;
+			});
+			if (!nextClicked) throw new Error(`${viewport.name}: tour next control is unavailable`);
+			await waitForTourStep(page, EXPECTED_TOUR[1]);
+			const afterTourNext = await page.evaluate(() => window.scrollY);
+
+			const scrollStates = { baselineScroll, afterLens, afterPin, afterTourStart, afterTourNext };
+			if (Object.values(scrollStates).some((value) => Math.abs(value - baselineScroll) > 1)) {
+				throw new Error(
+					`${viewport.name}: lens, pin, or tour state scrolled the document: ${JSON.stringify(scrollStates)}`,
+				);
+			}
+
+			const hydrated = await getRecordLayoutSnapshot(page);
+			assertRecordLayoutSnapshot(hydrated, viewport, "hydrated");
+			details.push(`${viewport.width}x${viewport.height} hydrated ${hydrated.recordBand.height}px`);
+
+			await page.setJavaScriptEnabled(false);
+			const response = await page.goto(BASE_URL, {
+				waitUntil: "networkidle0",
+				timeout: PAGE_TIMEOUT_MS,
+			});
+			if (!response || response.status() < 200 || response.status() >= 300) {
+				throw new Error(
+					`${viewport.name}: record-band no-JS response was HTTP ${response?.status() ?? "none"}`,
+				);
+			}
+			await page.waitForSelector("body", { timeout: PAGE_TIMEOUT_MS });
+			const noJavaScript = await getRecordLayoutSnapshot(page);
+			assertRecordLayoutSnapshot(noJavaScript, viewport, "no-JS");
+			details.push(
+				`${viewport.width}x${viewport.height} no-JS ${noJavaScript.recordBand.height}px`,
+			);
+			await page.setJavaScriptEnabled(true);
+			assertNoPageProblems(problems);
+		}
+	} finally {
+		await page.setJavaScriptEnabled(true);
+		await page.setViewport({ ...VIEWPORTS[0], deviceScaleFactor: 1 });
+	}
+	return `${details.join(" | ")} | lens/pin/tour scroll invariant`;
+}
+
 const assertionSpecs = [
 	["Pin persists and viewer CTA is reachable", assertionPinPersists],
 	["Preview never scrolls the document", assertionNoDocumentScroll],
@@ -2433,10 +2724,18 @@ const assertionSpecs = [
 	],
 	["Tour keyboard, responsive, and no-JS contracts hold", assertionTourResponsiveKeyboardNoJs],
 	["Reduced motion and Pause stay static across tour transitions", assertionTourStaticMotion],
+	[
+		"Prerendered record band exposes only the bounded public record",
+		assertionRecordBandPrerendered,
+	],
+	[
+		"Record-band layouts and state changes preserve the complete homepage",
+		assertionRecordBandLayoutsAndState,
+	],
 ];
 
 function printResults(results) {
-	console.log("\nP2A homepage guided-tour contract");
+	console.log("\nP2B homepage record-band contract");
 	for (const [index, result] of results.entries()) {
 		const status = result.passed ? "PASS" : "FAIL";
 		console.log(`${String(index + 1).padStart(2, "0")} ${status}  ${result.name}`);
