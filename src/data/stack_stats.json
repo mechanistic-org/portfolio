@@ -1,0 +1,102 @@
+{
+	"as_of": "2026-08-10",
+	"method": "Measured 2026-08-10 from the repositories, logs, scheduler, and issue tracker by the stack's own tooling, then independently re-derived before publication. Snapshot, not estimate. Full provenance (exact command per number) is kept in the operator registry.",
+	"engine": {
+		"commits": 1103,
+		"first_commit": "2026-03-12",
+		"span_months": 5,
+		"commits_last_30_days": 718,
+		"tracked_files": 6381,
+		"loc_text": 379206,
+		"loc_by_type": { "markdown": 117450, "python": 82524, "json": 81241 },
+		"python_scripts": 192,
+		"python_files": 216,
+		"test_files": 54,
+		"skills": 36,
+		"slash_command_shims": 12,
+		"scheduled_tasks": 12,
+		"supervised_services": 2,
+		"mcp_servers_active": 3,
+		"session_hooks": 6,
+		"db_migrations": 9
+	},
+	"record": {
+		"vault_md_files": 32962,
+		"canon_md_files": 29125,
+		"canon_project_entities": 30,
+		"canon_entity_words": 237813,
+		"registry_docs": 5327,
+		"registry_words": 805164,
+		"mined_notes": 3321,
+		"r2_assets": 2751,
+		"r2_assets_gb": 2.0,
+		"vault_by_dir": [
+			{ "label": "Canon", "value": 29125 },
+			{ "label": "Inbox", "value": 1870 },
+			{ "label": "Archive", "value": 1783 },
+			{ "label": "Ops + projects + rest", "value": 184 }
+		]
+	},
+	"flow": {
+		"sessions": 1084,
+		"assistant_turns": 73537,
+		"since": "2026-04-29",
+		"tokens_total": 14608498315,
+		"tokens_cache_read": 13899085803,
+		"tokens_cache_creation": 597775490,
+		"tokens_output": 103824987,
+		"tokens_input_noncache": 7812035,
+		"monthly_output_tokens": [
+			{ "label": "APR", "values": [82257] },
+			{ "label": "MAY", "values": [641990] },
+			{ "label": "JUN", "values": [22970263] },
+			{ "label": "JUL", "values": [65242853] },
+			{ "label": "AUG*", "values": [14887624] }
+		],
+		"mine_drain_runs": 675,
+		"sessions_mined_window": 273,
+		"issues_core_total": 412,
+		"issues_core_closed": 382,
+		"issues_core_open": 30,
+		"issues_site_total": 119,
+		"issues_site_closed": 99,
+		"issues_org_total": 580,
+		"monthly_issues_core": [
+			{ "label": "MAR", "values": [96, 64] },
+			{ "label": "APR", "values": [116, 78] },
+			{ "label": "MAY", "values": [0, 0] },
+			{ "label": "JUN", "values": [16, 13] },
+			{ "label": "JUL", "values": [166, 210] },
+			{ "label": "AUG*", "values": [18, 17] }
+		]
+	},
+	"local": {
+		"models": 17,
+		"models_gb": 160.6,
+		"qwen3_14b_tps_warm": 31.2,
+		"gpu": "NVIDIA RTX 4000 Ada, 20 GB",
+		"chromadb_telemetry_docs": 5043
+	},
+	"site": {
+		"commits": 645,
+		"first_commit": "2024-12-23",
+		"tracked_files": 920,
+		"loc_total_measured": 52560,
+		"loc_by_lang": [
+			{ "label": "Astro", "value": 18304 },
+			{ "label": "MDX", "value": 11841 },
+			{ "label": "Python", "value": 10217 },
+			{ "label": "TypeScript", "value": 6128 },
+			{ "label": "TSX", "value": 6070 }
+		],
+		"project_records": 121,
+		"published_words": 81161,
+		"roster": [
+			{ "label": "Deep dive", "value": 42 },
+			{ "label": "Lite", "value": 54 },
+			{ "label": "Cut (unpublished)", "value": 25 }
+		],
+		"colophon_entries": 7,
+		"docs_files": 45
+	}
+}

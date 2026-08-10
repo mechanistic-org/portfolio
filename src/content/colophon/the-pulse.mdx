@@ -1,46 +1,133 @@
 ---
 title: "The Pulse"
-subtitle: "Self-Aware Build Stats"
+slug: "the-pulse"
+subtitle: "The Stack, Measured"
+description: "Every number measured, none estimated: the system that builds this site, quantified."
 icon: "activity"
 color: "green"
 order: 1
 ---
 
-## The Challenge
-> **Context:** Static sites often feel "dead" or "frozen in time."
+import stats from "../../data/stack_stats.json";
+import StatGrid from "../../components/Stats/StatGrid.astro";
+import StatTile from "../../components/Stats/StatTile.astro";
+import HBars from "../../components/Stats/HBars.astro";
+import Columns from "../../components/Stats/Columns.astro";
 
-We wanted to expose the "Machine" behind the portfolio. As engineers, we care about efficiency. If the build pipeline is fast, we should brag about it. If it's slow, we should know about it.
+export const fmt = (n) => n.toLocaleString("en-US");
+export const B = (n) => (n / 1e9).toFixed(1) + "B";
+export const M = (n) => (n / 1e6).toFixed(1) + "M";
 
-## Engineering Approach
-We instrumented the ingestion pipeline to be self-aware. The build script (`ingest_data.py`) captures its own execution time and injects it into the frontend.
+Every number on this page was measured on {stats.as_of} by the stack's own tooling: git, the
+scheduler, the logs, the issue tracker. Each figure was then re-derived by an independent second
+pass before publication. Nothing here is an estimate. The figures are a dated snapshot, and the
+exact command behind every one of them is kept in the operator registry.
 
-```python
-# ingest_data.py
-if __name__ == "__main__":
-    start_time = time.time()
-    
-    # ... heavy lifting (image processing, CSV parsing) ...
-    process_colors()
-    process_projects()
+<StatGrid cols={3}>
+	<StatTile label="Engine commits" value={fmt(stats.engine.commits)} sub={`core repo, in ${stats.engine.span_months} months`} />
+	<StatTile label="Agent sessions" value={fmt(stats.flow.sessions)} sub={`${fmt(stats.flow.assistant_turns)} assistant turns`} />
+	<StatTile label="Tokens through the stack" value={B(stats.flow.tokens_total)} sub={`${B(stats.flow.tokens_cache_read)} cache reads, ${M(stats.flow.tokens_output)} generated`} />
+	<StatTile label="Issues closed" value={fmt(stats.flow.issues_core_closed)} sub={`of ${fmt(stats.flow.issues_core_total)} on the core repo`} />
+	<StatTile label="Mined notes" value={fmt(stats.record.mined_notes)} sub={`from ${fmt(stats.flow.mine_drain_runs)} autonomous drain runs`} />
+	<StatTile label="Local models" value={String(stats.local.models)} unit="models" sub={`${stats.local.models_gb} GB on disk, inference that stays local`} />
+</StatGrid>
 
-    end_time = time.time()
-    duration = end_time - start_time
-    
-    # Write to JSON for the frontend to consume
-    with open(os.path.join(OUTPUT_DATA_DIR, "build.json"), "w") as f:
-        json.dump({
-            "duration": f"{duration:.2f}s", 
-            "timestamp": datetime.now().isoformat()
-        }, f, indent=2)
-```
+## Source: the record
 
-### The "Zero-Runtime" Architecture
-This value isn't calculated in the browser. It's calculated **during the build**.
-1.  **Python** runs the timer.
-2.  **JSON** stores the result.
-3.  **Astro** imports the JSON at build time.
-4.  **HTML** receives the static string "0.42s".
+The site renders from a record, not from memory. The record is a Markdown vault of
+{fmt(stats.record.vault_md_files)} files, {fmt(stats.record.canon_md_files)} of them canon
+extracts under a published schema, curated into {stats.record.canon_project_entities} project
+entities carrying {fmt(stats.record.canon_entity_words)} words of canonical truth. The operator
+registry adds {fmt(stats.record.registry_docs)} documents and {fmt(stats.record.registry_words)}
+words of decisions, session logs, and mined findings. Assets live in an object store:
+{fmt(stats.record.r2_assets)} files, about {stats.record.r2_assets_gb} GB.
 
-## Impact
-*   **Transparency:** It proves the "Zero-Runtime" philosophy. We don't hide our performance.
-*   **Aesthetic:** It adds a "heartbeat" to the footer (`SYSTEM ONLINE: 0.42s`), reinforcing the idea that this is a living, engineered system.
+<HBars
+	title="The vault, by shelf"
+	rows={stats.record.vault_by_dir}
+	unit="markdown files"
+/>
+
+## Process: the machine
+
+The pipeline is {stats.engine.python_scripts} Python scripts, {stats.engine.test_files} of them
+tests, organized behind {stats.engine.skills} skills, {stats.engine.scheduled_tasks} scheduled
+tasks, two supervised services, {stats.engine.mcp_servers_active} MCP servers, and
+{stats.engine.session_hooks} session hooks. The point of the inventory is not size. It is that
+every piece is versioned, and the whole machine can be rebuilt from the repository.
+
+The stack commits its own work. Of the {fmt(stats.engine.commits_last_30_days)} commits on the
+core repo in the last thirty days, most were landed by an hourly task that drains the
+session-mining queue: {fmt(stats.flow.mine_drain_runs)} completed runs so far, and
+{fmt(stats.record.mined_notes)} mined notes now sitting in the registry. Nobody remembers to
+persist a decision. The scheduler does.
+
+<Columns
+	title="Issue flow, core repo"
+	series={["Opened", "Closed"]}
+	colors={["#5c85ff", "#0d9488"]}
+	points={stats.flow.monthly_issues_core}
+	unit="issues per month, 2026"
+/>
+
+Work moves through an issue tracker like any other engineering org: {fmt(stats.flow.issues_core_total)}
+issues on the core repo, {fmt(stats.flow.issues_core_closed)} closed, {stats.flow.issues_core_open}
+open. May is zero because May belonged to other repos in the org. August is ten days old at
+measurement, which is also why it wears an asterisk.
+
+<Columns
+	title="Generated tokens, by month"
+	series={["Output tokens"]}
+	points={stats.flow.monthly_output_tokens}
+	unit="tokens generated per month"
+	compact
+/>
+
+Since late April the primary agent surface has processed {B(stats.flow.tokens_total)} tokens. The
+honest decomposition: {B(stats.flow.tokens_cache_read)} of those were cache reads, which is the
+price of giving agents long memories, and {M(stats.flow.tokens_output)} were actually generated.
+Not all inference leaves the building, either: {stats.local.models} models totalling
+{stats.local.models_gb} GB sit on local disk, and session transcripts are mined by a local 14B
+model at about {Math.round(stats.local.qwen3_14b_tps_warm)} tokens per second on a 20 GB RTX 4000
+Ada, instead of being shipped to a cloud model.
+
+## Site: the render
+
+This website is the smallest layer of the system: {fmt(stats.site.commits)} commits since
+December 2024, {fmt(stats.site.tracked_files)} tracked files, {fmt(stats.site.loc_total_measured)}
+lines across the five languages that build it. The output is {stats.site.project_records} project
+records and {fmt(stats.site.published_words)} published words, every page checked against a
+published bar at build time.
+
+<HBars
+	title="Site source, by language"
+	rows={stats.site.loc_by_lang}
+	unit="lines, tracked files"
+/>
+
+<HBars
+	title="Project roster, by tier"
+	rows={stats.site.roster}
+	unit="project records"
+/>
+
+{stats.site.roster[0].value} records carry full teardowns: mechanism, constraints, decisions,
+scars. {stats.site.roster[1].value} are deliberately small, a complete record at reduced depth.
+{stats.site.roster[2].value} were cut and stay unpublished. The floor is held to the same bar as
+the ceiling, by a build gate rather than by memory.
+
+## How these numbers are made
+
+- Every figure came from a command, not a recollection: git for commits and line counts, the
+  GitHub API for issue flow, the Windows scheduler for tasks, the drain log for mining runs, the
+  transcript archive for tokens. A second, independent pass re-derived each headline number
+  before this page shipped.
+- Commit counts include the machine's own commits. That is disclosed because it is the design,
+  not an inflation.
+- Token totals cover the primary agent surface only. Other surfaces would add to the total, not
+  subtract from it.
+- This is a dated snapshot ({stats.as_of}). The corpus moves daily; the page states its date
+  instead of pretending to be live.
+
+The machine that produces these numbers is documented in [EN-OS](/colophon/en-os), and the
+pipeline that renders this page from the record is the same one being measured.
