@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import * as d3 from "d3";
 import type { MultiverseNode } from "@/types/MultiverseTypes";
 import { getEntityColor } from "../../config/color_registry";
@@ -33,6 +33,9 @@ const MIN_RADIUS = 15;
 const MAX_RADIUS = 55;
 const FLAGSHIP_RADIUS = 45;
 const REST_OPACITY = 0.9;
+const RESPONSIVE_TOP_GUTTER = 240;
+const RESPONSIVE_BOTTOM_GUTTER = 80;
+const RESPONSIVE_NODE_GAP = 6;
 
 function clamp(value: number, minimum: number, maximum: number) {
 	return Math.min(maximum, Math.max(minimum, value));
@@ -49,6 +52,36 @@ function getProjectRadius(node: MultiverseNode, now: Date) {
 			: 0;
 	const radius = Math.sqrt(durationDays) * 1.5;
 	return clamp(Number.isFinite(radius) ? radius : MIN_RADIUS, MIN_RADIUS, MAX_RADIUS);
+}
+
+function getResponsivePacking(nodes: NodeData[], width: number) {
+	const safeWidth = Math.max(width, MAX_RADIUS * 2 + RESPONSIVE_NODE_GAP * 2);
+	const sideGutter = Math.min(20, Math.max(8, safeWidth * 0.025));
+	const positions = new Map<string, { x: number; y: number }>();
+	let cursorX = sideGutter;
+	let rowTop = RESPONSIVE_TOP_GUTTER;
+	let rowHeight = 0;
+
+	for (const node of nodes) {
+		const diameter = node.radius * 2;
+		if (cursorX > sideGutter && cursorX + diameter > safeWidth - sideGutter) {
+			rowTop += rowHeight + RESPONSIVE_NODE_GAP;
+			cursorX = sideGutter;
+			rowHeight = 0;
+		}
+
+		positions.set(node.id, {
+			x: cursorX + node.radius,
+			y: rowTop + node.radius,
+		});
+		cursorX += diameter + RESPONSIVE_NODE_GAP;
+		rowHeight = Math.max(rowHeight, diameter);
+	}
+
+	return {
+		positions,
+		requiredHeight: Math.ceil(rowTop + rowHeight + RESPONSIVE_BOTTOM_GUTTER),
+	};
 }
 
 export default function ResVizSwarm({
@@ -105,6 +138,10 @@ export default function ResVizSwarm({
 				};
 			}) as NodeData[];
 	}, [rawNodes]);
+	const responsivePacking = useMemo(
+		() => getResponsivePacking(nodes, dimensions.width),
+		[nodes, dimensions.width],
+	);
 
 	useEffect(() => {
 		const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -157,26 +194,22 @@ export default function ResVizSwarm({
 		const timeScale = d3
 			.scaleTime()
 			.domain([new Date(), minDate])
-			.range([200, height - 150]);
+			.range([RESPONSIVE_TOP_GUTTER, height - RESPONSIVE_BOTTOM_GUTTER]);
 		const getColor = (node: NodeData) => getEntityColor(node.group, "EMPLOYER");
 
 		if (prefersReducedMotion) {
-			const columns = Math.max(1, Math.ceil(Math.sqrt(nodes.length)));
-			const columnGap = Math.max(70, width / (columns + 1));
-			const rowGap = Math.max(70, (height - 220) / (columns + 1));
-			nodes.forEach((node, index) => {
-				const column = index % columns;
-				const row = Math.floor(index / columns);
-				node.x = Math.min(width - 60, 60 + column * columnGap);
-				node.y = Math.min(height - 60, 160 + row * rowGap);
+			nodes.forEach((node) => {
+				const position = responsivePacking.positions.get(node.id);
+				node.x = position?.x ?? width / 2;
+				node.y = position?.y ?? height / 2;
 				node.vx = 0;
 				node.vy = 0;
 			});
 		} else {
 			nodes.forEach((node) => {
 				if (!Number.isFinite(node.x) || !Number.isFinite(node.y) || node.y === 2000) {
-					node.x = width / 2 + (Math.random() - 0.5) * 200;
-					node.y = height + 50 + Math.random() * 100;
+					node.x = clamp(width / 2 + (Math.random() - 0.5) * 200, node.radius, width - node.radius);
+					node.y = height - node.radius;
 					node.vx = (Math.random() - 0.5) * 10;
 					node.vy = -50 - Math.random() * 50;
 				}
@@ -280,7 +313,15 @@ export default function ResVizSwarm({
 		};
 		visualUpdaterRef.current = updateVisuals;
 
+		const constrainNodes = () => {
+			for (const node of nodes) {
+				node.x = clamp(node.x ?? width / 2, node.radius, width - node.radius);
+				node.y = clamp(node.y ?? height / 2, node.radius, height - node.radius);
+			}
+		};
+
 		const renderPositions = () => {
+			constrainNodes();
 			nodeGroup.attr("transform", (node) => `translate(${node.x},${node.y})`);
 			label.attr("x", (node) => node.x ?? 0).attr("y", (node) => node.y ?? 0);
 		};
@@ -329,14 +370,14 @@ export default function ResVizSwarm({
 		let readyDeclared = false;
 		const declareReadyWhenVisible = () => {
 			if (readyDeclared) return;
-			const visibleCount = nodes.filter(
+			const containedCount = nodes.filter(
 				(node) =>
-					(node.x ?? -Infinity) + node.radius >= 0 &&
-					(node.x ?? Infinity) - node.radius <= width &&
-					(node.y ?? -Infinity) + node.radius >= 0 &&
-					(node.y ?? Infinity) - node.radius <= height,
+					(node.x ?? -Infinity) - node.radius >= 0 &&
+					(node.x ?? Infinity) + node.radius <= width &&
+					(node.y ?? -Infinity) - node.radius >= 0 &&
+					(node.y ?? Infinity) + node.radius <= height,
 			).length;
-			if (visibleCount >= Math.min(10, nodes.length)) {
+			if (containedCount === nodes.length) {
 				readyDeclared = true;
 				setIsReady(true);
 			}
@@ -391,12 +432,17 @@ export default function ResVizSwarm({
 			visualUpdaterRef.current = () => undefined;
 			renderPositionsRef.current = () => undefined;
 		};
-	}, [nodes, dimensions, prefersReducedMotion]);
+	}, [nodes, dimensions, prefersReducedMotion, responsivePacking]);
 
 	return (
 		<div
 			ref={containerRef}
-			className="relative h-full w-full overflow-hidden bg-transparent"
+			className="relative h-[max(100svh,var(--swarm-responsive-height))] w-full overflow-hidden bg-transparent lg:h-full"
+			style={
+				{
+					"--swarm-responsive-height": `${responsivePacking.requiredHeight}px`,
+				} as CSSProperties
+			}
 			data-swarm-ready={isReady ? "true" : "false"}
 		>
 			<svg ref={svgRef} className="block h-full w-full" />

@@ -12,7 +12,13 @@ const BASE_URL = `http://${HOST}:${PORT}/`;
 const READY_TIMEOUT_MS = 90_000;
 const PAGE_TIMEOUT_MS = 45_000;
 const SETTLE_MS = 1_200;
-const EXPECTED_ASSERTIONS = 13;
+const EXPECTED_ASSERTIONS = 17;
+const EXPECTED_PROJECT_COUNT = 87;
+const VIEWPORTS = [
+	{ name: "desktop", width: 1440, height: 1000 },
+	{ name: "tablet", width: 768, height: 1024 },
+	{ name: "mobile", width: 390, height: 844 },
+];
 const HARNESS_CACHE_DIR = path.join(process.cwd(), "node_modules", ".cache", "hxo-contract");
 const ARTIFACT_DIR = path.join(HARNESS_CACHE_DIR, "artifacts");
 const ASTRO_HARNESS_CONFIG = path.join(HARNESS_CACHE_DIR, "astro.config.mjs");
@@ -314,6 +320,77 @@ async function getSwarmNodeSnapshot(page) {
 	);
 }
 
+async function getContainmentSnapshot(page) {
+	return page.evaluate(() => {
+		const svg = document.querySelector("g.node-group[data-id]")?.ownerSVGElement;
+		if (!svg) return null;
+		const svgRect = svg.getBoundingClientRect();
+		const tolerance = 0.5;
+		const nodes = Array.from(document.querySelectorAll("g.node-group[data-id]"))
+			.map((group) => {
+				const circle = group.querySelector("circle");
+				if (!circle) return null;
+				const rect = circle.getBoundingClientRect();
+				const contained =
+					rect.left >= svgRect.left - tolerance &&
+					rect.right <= svgRect.right + tolerance &&
+					rect.top >= svgRect.top - tolerance &&
+					rect.bottom <= svgRect.bottom + tolerance;
+				const intersects =
+					rect.right > svgRect.left &&
+					rect.left < svgRect.right &&
+					rect.bottom > svgRect.top &&
+					rect.top < svgRect.bottom;
+				return {
+					id: group.dataset.id,
+					contained,
+					intersects,
+					bounds: {
+						left: Math.round(rect.left * 10) / 10,
+						top: Math.round(rect.top * 10) / 10,
+						right: Math.round(rect.right * 10) / 10,
+						bottom: Math.round(rect.bottom * 10) / 10,
+					},
+				};
+			})
+			.filter(Boolean);
+		return {
+			total: nodes.length,
+			contained: nodes.filter((node) => node.contained).length,
+			clipped: nodes.filter((node) => !node.contained && node.intersects).length,
+			offCanvas: nodes.filter((node) => !node.intersects).length,
+			failures: nodes.filter((node) => !node.contained).slice(0, 8),
+			svg: {
+				width: Math.round(svgRect.width),
+				height: Math.round(svgRect.height),
+			},
+			horizontalOverflow: Math.max(
+				0,
+				document.documentElement.scrollWidth - document.documentElement.clientWidth,
+			),
+		};
+	});
+}
+
+function assertFullContainment(snapshot, label) {
+	const value = requireValue(snapshot, `${label}: swarm containment snapshot is unavailable`);
+	if (value.total !== EXPECTED_PROJECT_COUNT) {
+		throw new Error(`${label}: expected ${EXPECTED_PROJECT_COUNT} circles; found ${value.total}`);
+	}
+	if (value.contained !== EXPECTED_PROJECT_COUNT || value.clipped !== 0 || value.offCanvas !== 0) {
+		throw new Error(
+			`${label}: containment ${value.contained}/${value.total}, ${value.clipped} clipped, ${value.offCanvas} off-canvas; failures=${JSON.stringify(value.failures)}`,
+		);
+	}
+	if (value.horizontalOverflow !== 0) {
+		throw new Error(`${label}: document overflows horizontally by ${value.horizontalOverflow}px`);
+	}
+}
+
+function formatContainment(label, snapshot) {
+	return `${label} ${snapshot.contained}/${snapshot.total} contained, ${snapshot.clipped} clipped, ${snapshot.offCanvas} off (${snapshot.svg.width}x${snapshot.svg.height} SVG)`;
+}
+
 async function setSwarmMotion(page, desiredState) {
 	const selector = "button[data-swarm-motion-control]";
 	await page.waitForSelector(selector, { timeout: PAGE_TIMEOUT_MS });
@@ -336,6 +413,12 @@ async function setSwarmMotion(page, desiredState) {
 
 async function getDirectionalTargets(page) {
 	return page.evaluate(() => {
+		const describeElement = (element) =>
+			element
+				? `${element.tagName.toLowerCase()}${element.id ? `#${element.id}` : ""}${
+						element.classList.length ? `.${Array.from(element.classList).join(".")}` : ""
+					}`
+				: null;
 		const groups = Array.from(document.querySelectorAll("g.node-group[data-id]"));
 		const nodes = groups
 			.map((group) => {
@@ -346,10 +429,12 @@ async function getDirectionalTargets(page) {
 				const svgRect = svg.getBoundingClientRect();
 				return {
 					id: group.dataset.id,
+					group,
+					svgElement: svg,
 					x: circleRect.left + circleRect.width / 2,
 					y: circleRect.top + circleRect.height / 2,
 					radius: circleRect.width / 2,
-					svg: svgRect,
+					svgBounds: svgRect,
 				};
 			})
 			.filter(Boolean)
@@ -378,28 +463,132 @@ async function getDirectionalTargets(page) {
 
 		for (const direction of schedules) {
 			const [dx, dy] = vectors[direction];
-			const candidate = nodes.find((node) => {
-				if (used.has(node.id)) return false;
+			const candidates = nodes.map((node) => {
 				const distance = node.radius * 1.15;
 				const start = { x: node.x + dx * distance, y: node.y + dy * distance };
+				const centerHit = document.elementFromPoint(node.x, node.y);
+				const startHit = document.elementFromPoint(start.x, start.y);
+				const occluders = nodes
+					.filter(
+						(other) =>
+							other.id !== node.id &&
+							Math.hypot(start.x - other.x, start.y - other.y) <= other.radius,
+					)
+					.map((other) => other.id);
 				const insideSvg =
-					start.x > node.svg.left + 2 &&
-					start.x < node.svg.right - 2 &&
-					start.y > node.svg.top + 2 &&
-					start.y < node.svg.bottom - 2;
-				if (!insideSvg) return false;
-				return nodes.every((other) => {
-					if (other.id === node.id) return true;
-					return Math.hypot(start.x - other.x, start.y - other.y) > other.radius;
-				});
+					start.x > node.svgBounds.left + 2 &&
+					start.x < node.svgBounds.right - 2 &&
+					start.y > node.svgBounds.top + 2 &&
+					start.y < node.svgBounds.bottom - 2;
+				return {
+					node,
+					start,
+					insideSvg,
+					centerReachable: Boolean(centerHit && node.group.contains(centerHit)),
+					startReachable: Boolean(
+						startHit && node.svgElement.contains(startHit) && occluders.length === 0,
+					),
+					centerHit: describeElement(centerHit),
+					startHit: describeElement(startHit),
+					occluders,
+				};
 			});
-			if (!candidate) return { selected, missingDirection: direction };
-			used.add(candidate.id);
-			selected.push({ id: candidate.id, direction });
+			const candidate = candidates.find(({ node, centerReachable, startReachable, insideSvg }) => {
+				if (used.has(node.id)) return false;
+				if (!insideSvg) return false;
+				return centerReachable && startReachable;
+			});
+			if (!candidate) {
+				return {
+					selected,
+					missingDirection: direction,
+					diagnostics: candidates.slice(0, 12).map((entry) => ({
+						id: entry.node.id,
+						direction,
+						geometry: {
+							x: Math.round(entry.node.x * 10) / 10,
+							y: Math.round(entry.node.y * 10) / 10,
+							radius: Math.round(entry.node.radius * 10) / 10,
+						},
+						insideSvg: entry.insideSvg,
+						centerReachable: entry.centerReachable,
+						startReachable: entry.startReachable,
+						centerHit: entry.centerHit,
+						startHit: entry.startHit,
+						occluders: entry.occluders,
+					})),
+				};
+			}
+			used.add(candidate.node.id);
+			selected.push({ id: candidate.node.id, direction });
 		}
 
-		return { selected, missingDirection: null };
+		return { selected, missingDirection: null, diagnostics: [] };
 	});
+}
+
+async function getPhysicalAimDiagnostics(page, id, direction) {
+	return page.evaluate(
+		(projectId, approachDirection) => {
+			const describeElement = (element) =>
+				element
+					? `${element.tagName.toLowerCase()}${element.id ? `#${element.id}` : ""}${
+							element.classList.length ? `.${Array.from(element.classList).join(".")}` : ""
+						}`
+					: null;
+			const vectors = {
+				left: [-1, 0],
+				right: [1, 0],
+				top: [0, -1],
+				bottom: [0, 1],
+			};
+			const vector = vectors[approachDirection];
+			const group = Array.from(document.querySelectorAll("g.node-group[data-id]")).find(
+				(element) => element.dataset.id === projectId,
+			);
+			const circle = group?.querySelector("circle");
+			const svg = group?.ownerSVGElement;
+			if (!vector || !group || !circle || !svg) return null;
+			const circleRect = circle.getBoundingClientRect();
+			const svgRect = svg.getBoundingClientRect();
+			const geometry = {
+				x: circleRect.left + circleRect.width / 2,
+				y: circleRect.top + circleRect.height / 2,
+				radius: circleRect.width / 2,
+			};
+			const start = {
+				x: geometry.x + vector[0] * geometry.radius * 1.15,
+				y: geometry.y + vector[1] * geometry.radius * 1.15,
+			};
+			const centerStack = document.elementsFromPoint(geometry.x, geometry.y).slice(0, 6);
+			const startStack = document.elementsFromPoint(start.x, start.y).slice(0, 6);
+			return {
+				id: projectId,
+				direction: approachDirection,
+				geometry: {
+					x: Math.round(geometry.x * 10) / 10,
+					y: Math.round(geometry.y * 10) / 10,
+					radius: Math.round(geometry.radius * 10) / 10,
+				},
+				svg: {
+					left: Math.round(svgRect.left * 10) / 10,
+					top: Math.round(svgRect.top * 10) / 10,
+					right: Math.round(svgRect.right * 10) / 10,
+					bottom: Math.round(svgRect.bottom * 10) / 10,
+				},
+				start: {
+					x: Math.round(start.x * 10) / 10,
+					y: Math.round(start.y * 10) / 10,
+				},
+				centerReachable: Boolean(centerStack[0] && group.contains(centerStack[0])),
+				startReachable: Boolean(startStack[0] && svg.contains(startStack[0])),
+				centerStack: centerStack.map(describeElement),
+				startStack: startStack.map(describeElement),
+			};
+		},
+		id,
+		direction,
+	);
 }
 
 async function approachNodeFromDirection(page, id, direction) {
@@ -411,6 +600,13 @@ async function approachNodeFromDirection(page, id, direction) {
 		bottom: [0, 1],
 	}[direction];
 	if (!vector) throw new Error(`Unknown approach direction: ${direction}`);
+	const preflight = requireValue(
+		await getPhysicalAimDiagnostics(page, id, direction),
+		`No physical hit-test diagnostics are available for ${id} from ${direction}`,
+	);
+	if (!preflight.centerReachable || !preflight.startReachable) {
+		throw new Error(`Physical aim preflight failed: ${JSON.stringify(preflight)}`);
+	}
 
 	let geometry = requireValue(await getNodeGeometry(page, id), `Node ${id} has no live geometry`);
 	await page.mouse.move(
@@ -1035,14 +1231,338 @@ async function assertionDirectionalAimIntegrity(page, problems) {
 			document.querySelector('button[data-id][data-focused="true"]')?.getAttribute("data-id"),
 		);
 		if (activeId !== target.id) {
+			const diagnostics = await getPhysicalAimDiagnostics(page, target.id, target.direction);
 			throw new Error(
-				`Approached ${target.id} from ${target.direction}, but active project was ${activeId || "none"}`,
+				`Approached ${target.id} from ${target.direction}, but active project was ${activeId || "none"}; diagnostics=${JSON.stringify(diagnostics)}`,
 			);
 		}
 		successes += 1;
 	}
 	if (successes !== 10) throw new Error(`Direction-neutral aim succeeded ${successes}/10 times`);
 	assertNoPageProblems(problems);
+}
+
+async function assertionResponsiveFlowAndContainment(page, problems) {
+	const details = [];
+	try {
+		for (const viewport of VIEWPORTS) {
+			await page.setViewport({ ...viewport, deviceScaleFactor: 1 });
+			await navigate(page, problems);
+			await waitForFontsAndSwarmReady(page);
+
+			const layout = await page.evaluate(() => {
+				const toBounds = (element) => {
+					if (!element) return null;
+					const rect = element.getBoundingClientRect();
+					return {
+						left: rect.left,
+						top: rect.top,
+						right: rect.right,
+						bottom: rect.bottom,
+						width: rect.width,
+						height: rect.height,
+					};
+				};
+				const main = document.querySelector(".hxo-prototype > main");
+				return {
+					swarm: toBounds(document.querySelector(".hxo-swarm-stage")),
+					console: toBounds(document.querySelector(".hxo-console-stage")),
+					ledger: toBounds(document.querySelector("#ledger")),
+					mainOverflowY: main ? getComputedStyle(main).overflowY : null,
+				};
+			});
+			const swarm = requireValue(layout.swarm, `${viewport.name}: swarm stage is missing`);
+			const consoleStage = requireValue(
+				layout.console,
+				`${viewport.name}: console stage is missing`,
+			);
+			const ledger = requireValue(layout.ledger, `${viewport.name}: Ledger is missing`);
+
+			if (viewport.width >= 1024) {
+				if (consoleStage.left < swarm.right - 1 || consoleStage.top >= swarm.bottom) {
+					throw new Error(
+						`${viewport.name}: desktop swarm and console are not preserved as side-by-side columns`,
+					);
+				}
+			} else {
+				if (layout.mainOverflowY === "hidden") {
+					throw new Error(`${viewport.name}: responsive main still hides vertical overflow`);
+				}
+				if (consoleStage.top < swarm.bottom - 1) {
+					throw new Error(`${viewport.name}: console does not follow the swarm in document flow`);
+				}
+				if (consoleStage.height < Math.min(768, viewport.height - 64)) {
+					throw new Error(
+						`${viewport.name}: hydrated console has only ${consoleStage.height}px height`,
+					);
+				}
+				if (consoleStage.bottom > ledger.top + 1) {
+					throw new Error(`${viewport.name}: console overlaps the Ledger`);
+				}
+
+				await page.evaluate(() => window.scrollTo(0, 0));
+				await page.mouse.move(Math.floor(viewport.width / 2), Math.floor(viewport.height / 2));
+				let exposed = false;
+				for (let attempt = 0; attempt < 20; attempt += 1) {
+					await page.mouse.wheel({ deltaY: Math.max(320, Math.floor(viewport.height * 0.7)) });
+					await delay(45);
+					exposed = await page.evaluate(() => {
+						const rect = document.querySelector(".hxo-console-stage")?.getBoundingClientRect();
+						return Boolean(
+							rect && rect.top < window.innerHeight && rect.bottom > 0 && window.scrollY > 0,
+						);
+					});
+					if (exposed) break;
+				}
+				if (!exposed) {
+					throw new Error(`${viewport.name}: ordinary wheel scrolling never exposed the console`);
+				}
+			}
+
+			const ready = await getContainmentSnapshot(page);
+			assertFullContainment(ready, `${viewport.width}x${viewport.height} ready`);
+			await setSwarmMotion(page, "running");
+			await delay(3_000);
+			const moved = await getContainmentSnapshot(page);
+			assertFullContainment(moved, `${viewport.width}x${viewport.height} motion +3s`);
+			details.push(
+				formatContainment(`${viewport.width}x${viewport.height} ready`, ready),
+				formatContainment(`${viewport.width}x${viewport.height} motion +3s`, moved),
+			);
+			assertNoPageProblems(problems);
+		}
+	} finally {
+		await page.setViewport({ ...VIEWPORTS[0], deviceScaleFactor: 1 });
+	}
+	return details.join(" | ");
+}
+
+async function assertionResponsiveReducedMotion(page, problems) {
+	const details = [];
+	await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
+	try {
+		for (const viewport of VIEWPORTS) {
+			await page.setViewport({ ...viewport, deviceScaleFactor: 1 });
+			await navigate(page, problems);
+			await waitForFontsAndSwarmReady(page);
+			await delay(250);
+			const control = await page.$eval("button[data-swarm-motion-control]", (button) => ({
+				state: button.getAttribute("data-motion-state"),
+				name: button.getAttribute("aria-label") || button.textContent?.trim() || "",
+			}));
+			if (control.state !== "paused" || !/resume/i.test(control.name)) {
+				throw new Error(
+					`${viewport.name}: reduced motion did not expose paused/Resume state: ${JSON.stringify(control)}`,
+				);
+			}
+
+			const ready = await getContainmentSnapshot(page);
+			assertFullContainment(ready, `${viewport.width}x${viewport.height} reduced ready`);
+			const initialGeometry = await getSwarmNodeSnapshot(page);
+			await delay(3_000);
+			const delayedGeometry = await getSwarmNodeSnapshot(page);
+			if (JSON.stringify(delayedGeometry) !== JSON.stringify(initialGeometry)) {
+				throw new Error(
+					`${viewport.name}: reduced-motion geometry changed during the three-second window`,
+				);
+			}
+			const delayed = await getContainmentSnapshot(page);
+			assertFullContainment(delayed, `${viewport.width}x${viewport.height} reduced +3s`);
+			details.push(
+				formatContainment(`${viewport.width}x${viewport.height} reduced ready`, ready),
+				formatContainment(`${viewport.width}x${viewport.height} reduced +3s`, delayed),
+			);
+			assertNoPageProblems(problems);
+		}
+	} finally {
+		await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "no-preference" }]);
+		await page.setViewport({ ...VIEWPORTS[0], deviceScaleFactor: 1 });
+	}
+	return details.join(" | ");
+}
+
+async function assertionMobileNativeKeyboard(page, problems) {
+	const viewport = VIEWPORTS.find((candidate) => candidate.name === "mobile");
+	try {
+		await page.setViewport({ ...viewport, deviceScaleFactor: 1 });
+		await navigate(page, problems);
+		await waitForFontsAndSwarmReady(page);
+		let target = null;
+		let tabCount = 0;
+		for (; tabCount < 200; tabCount += 1) {
+			await page.keyboard.press("Tab");
+			target = await page.evaluate(() => {
+				const active = document.activeElement;
+				if (!(active instanceof HTMLButtonElement) || !active.matches("button[data-id]"))
+					return null;
+				const rect = active.getBoundingClientRect();
+				return {
+					id: active.dataset.id,
+					focusVisible: active.matches(":focus-visible"),
+					visible: rect.top >= 0 && rect.bottom <= window.innerHeight,
+					outlineWidth: Number.parseFloat(getComputedStyle(active).outlineWidth),
+				};
+			});
+			if (target) break;
+		}
+		const focused = requireValue(target, "Native Tab traversal did not reach a project button");
+		if (!focused.focusVisible || !focused.visible || focused.outlineWidth <= 0) {
+			throw new Error(
+				`First project button lacks visible keyboard focus: ${JSON.stringify(focused)}`,
+			);
+		}
+
+		await page.keyboard.press("Enter");
+		await page.waitForFunction(
+			(projectId) =>
+				document
+					.querySelector(`button[data-id="${CSS.escape(projectId)}"]`)
+					?.getAttribute("data-pinned") === "true",
+			{ timeout: 5_000 },
+			focused.id,
+		);
+		await page.keyboard.press("Escape");
+		await delay(100);
+		const firstEscape = await page.evaluate(
+			(projectId) => ({
+				pinned: document
+					.querySelector(`button[data-id="${CSS.escape(projectId)}"]`)
+					?.getAttribute("data-pinned"),
+				viewer: document.querySelector("[data-viewer-id]")?.getAttribute("data-viewer-id"),
+			}),
+			focused.id,
+		);
+		if (firstEscape.pinned !== "true" || firstEscape.viewer !== focused.id) {
+			throw new Error(`First Escape did not preserve the pin: ${JSON.stringify(firstEscape)}`);
+		}
+
+		await page.keyboard.press("Escape");
+		await page.waitForFunction(
+			() =>
+				document.querySelector('[data-viewer-id="orientation"]') &&
+				!document.querySelector('button[data-pinned="true"]'),
+			{ timeout: 5_000 },
+		);
+		await page.keyboard.press("Space");
+		await page.waitForFunction(
+			(projectId) =>
+				document
+					.querySelector(`button[data-id="${CSS.escape(projectId)}"]`)
+					?.getAttribute("data-pinned") === "true",
+			{ timeout: 5_000 },
+			focused.id,
+		);
+		await page.keyboard.press("Tab");
+		const anchor = await page.evaluate((projectId) => {
+			const active = document.activeElement;
+			return active instanceof HTMLAnchorElement
+				? { href: new URL(active.href).pathname, label: active.getAttribute("aria-label") }
+				: null;
+		}, focused.id);
+		if (!anchor || anchor.href !== `/projects/${focused.id}/`) {
+			throw new Error(
+				`Next Tab did not reach the matching native Open anchor: ${JSON.stringify(anchor)}`,
+			);
+		}
+		assertNoPageProblems(problems);
+		return `390x844 reached ${focused.id} in ${tabCount + 1} native Tabs; Enter/Escape/Escape/Space/Tab passed`;
+	} finally {
+		await page.setViewport({ ...VIEWPORTS[0], deviceScaleFactor: 1 });
+	}
+}
+
+async function assertionNoJavaScript(page, problems) {
+	const details = [];
+	await page.setJavaScriptEnabled(false);
+	try {
+		for (const viewport of VIEWPORTS) {
+			await page.setViewport({ ...viewport, deviceScaleFactor: 1 });
+			const response = await page.goto(BASE_URL, {
+				waitUntil: "networkidle0",
+				timeout: PAGE_TIMEOUT_MS,
+			});
+			if (!response || response.status() < 200 || response.status() >= 300) {
+				throw new Error(
+					`${viewport.name}: no-JS response was HTTP ${response?.status() ?? "none"}`,
+				);
+			}
+			await page.waitForSelector("body", { timeout: PAGE_TIMEOUT_MS });
+			const state = await page.evaluate(() => {
+				const bounds = (selector) => {
+					const element = document.querySelector(selector);
+					if (!element) return null;
+					const rect = element.getBoundingClientRect();
+					return { top: rect.top, bottom: rect.bottom, width: rect.width, height: rect.height };
+				};
+				const heroLinks = Array.from(document.querySelectorAll(".hxo-swarm-stage a[href]")).map(
+					(anchor) => new URL(anchor.href).pathname,
+				);
+				return {
+					h1: document.querySelector("h1")?.textContent?.trim() || "",
+					heroLinks,
+					ledger: Boolean(document.querySelector("#ledger")),
+					interactiveIslandControls: document.querySelectorAll(
+						"button[data-id], [data-swarm-motion-control], [data-viewer-id]",
+					).length,
+					main: bounds(".hxo-prototype > main"),
+					swarm: bounds(".hxo-swarm-stage"),
+					console: bounds(".hxo-console-stage"),
+					ledgerBounds: bounds("#ledger"),
+					horizontalOverflow: Math.max(
+						0,
+						document.documentElement.scrollWidth - document.documentElement.clientWidth,
+					),
+				};
+			});
+			if (!state.h1.includes("Erik Norris"))
+				throw new Error(`${viewport.name}: no-JS H1 is missing`);
+			if (!state.heroLinks.includes("/projects/c24/") || !state.heroLinks.includes("/resume/")) {
+				throw new Error(`${viewport.name}: no-JS hero destinations are incomplete`);
+			}
+			if (!state.ledger) throw new Error(`${viewport.name}: no-JS Ledger is missing`);
+			if (state.interactiveIslandControls !== 0) {
+				throw new Error(
+					`${viewport.name}: no-JS rendered ${state.interactiveIslandControls} island controls`,
+				);
+			}
+			if (state.horizontalOverflow !== 0) {
+				throw new Error(
+					`${viewport.name}: no-JS overflows horizontally by ${state.horizontalOverflow}px`,
+				);
+			}
+			const main = requireValue(state.main, `${viewport.name}: no-JS main is missing`);
+			const swarm = requireValue(state.swarm, `${viewport.name}: no-JS hero stage is missing`);
+			const consoleStage = requireValue(
+				state.console,
+				`${viewport.name}: no-JS console stage is missing`,
+			);
+			const ledger = requireValue(
+				state.ledgerBounds,
+				`${viewport.name}: no-JS Ledger bounds are missing`,
+			);
+			if (Math.abs(ledger.top - main.bottom) > 1 || main.height > viewport.height + 1) {
+				throw new Error(
+					`${viewport.name}: no-JS inserted empty space between the hero and Ledger: ${JSON.stringify({ main, ledger })}`,
+				);
+			}
+			if (viewport.width < 1024 && consoleStage.height > 1) {
+				throw new Error(`${viewport.name}: no-JS console row is ${consoleStage.height}px tall`);
+			}
+			if (swarm.height < viewport.height - 1 || swarm.height > viewport.height + 1) {
+				throw new Error(
+					`${viewport.name}: no-JS hero is ${swarm.height}px instead of one viewport`,
+				);
+			}
+			details.push(
+				`${viewport.width}x${viewport.height} HTTP ${response.status()}, hero -> Ledger gap 0px`,
+			);
+		}
+		assertNoPageProblems(problems);
+	} finally {
+		await page.setJavaScriptEnabled(true);
+		await page.setViewport({ ...VIEWPORTS[0], deviceScaleFactor: 1 });
+	}
+	return details.join(" | ");
 }
 
 const assertionSpecs = [
@@ -1059,13 +1579,21 @@ const assertionSpecs = [
 	["Relationship lines are absent from the rendered swarm", assertionNoRelationshipLines],
 	["Reduced-motion and Pause produce a static field", assertionReducedMotion],
 	["Direction-neutral aim integrity succeeds 10/10", assertionDirectionalAimIntegrity],
+	[
+		"Responsive flow and motion containment hold at three viewports",
+		assertionResponsiveFlowAndContainment,
+	],
+	["Reduced-motion containment is static at three viewports", assertionResponsiveReducedMotion],
+	["Mobile native keyboard traversal preserves the Escape ladder", assertionMobileNativeKeyboard],
+	["No-JavaScript keeps one hero stage followed by the Ledger", assertionNoJavaScript],
 ];
 
 function printResults(results) {
-	console.log("\nP0B homepage visualization integrity contract");
+	console.log("\nP0C homepage responsive and accessibility contract");
 	for (const [index, result] of results.entries()) {
 		const status = result.passed ? "PASS" : "FAIL";
 		console.log(`${String(index + 1).padStart(2, "0")} ${status}  ${result.name}`);
+		if (result.details) console.log(`         ${result.details}`);
 		if (!result.passed) console.log(`         ${result.error}`);
 	}
 	const passed = results.filter((result) => result.passed).length;
@@ -1091,8 +1619,8 @@ try {
 
 	for (const [name, assertion] of assertionSpecs) {
 		try {
-			await assertion(page, pageProblems);
-			results.push({ name, passed: true });
+			const details = await assertion(page, pageProblems);
+			results.push({ name, passed: true, details });
 		} catch (error) {
 			results.push({ name, passed: false, error: error.message });
 		}
