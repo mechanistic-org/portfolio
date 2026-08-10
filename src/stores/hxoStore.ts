@@ -46,12 +46,23 @@ export function setPreview(id: string | null, source?: PreviewSource) {
 }
 
 export function pin(id: string) {
+	mode.set("explore");
 	pinnedId.set(id);
 }
 
 export function unpin() {
+	mode.set("explore");
 	pinnedId.set(null);
 	lastPreviewId.set(null);
+}
+
+export function pinTourStep(id: string) {
+	mode.set("tour");
+	pinnedId.set(id);
+}
+
+export function exitTour() {
+	mode.set("explore");
 }
 
 export function setLens(nextLens: HxoLens) {
