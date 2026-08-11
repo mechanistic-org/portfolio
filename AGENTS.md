@@ -11,7 +11,8 @@ Code reads from `CLAUDE.md`. There is one source of truth: `CLAUDE.md`.
 - Astro output stays `static` everywhere. Do not switch dev, preview, or deploy
   to `server`; Cloudflare Pages can hit the 10,000-module limit when the site is
   bundled into one Worker.
-- Content truth lives in the canon vault (`H:\workspace\canon`); the site schema is
+- Content truth lives in the curated canon repo (`D:\GitHub\portfolio-canon`);
+  local evidence resolves through `D:\GitHub\portfolio-evidence`; the site schema is
   Astro collections + Zod in `src/content.config.ts` (contract v2). Generated project
   pages are a read-only render target written by `scripts/project_pipeline.py
   --write-live` — never hand-edit them, and never resurrect the retired

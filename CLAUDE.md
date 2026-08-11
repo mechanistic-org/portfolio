@@ -17,7 +17,7 @@ static output.
 
 > Content source of truth is `src/content.config.ts` (Astro collections + Zod over the
 > MDX). Keystatic — the old dev-only CMS that was the sole reason dev ran in `server`
-> mode — was fully removed (#104); content truth is migrating to the canon vault (see
+> mode — was fully removed (#104); content truth is migrating to the curated canon repo (see
 > **Content model**).
 
 **Security tripwire, not law (2026-08-06; expires at Astro >= 6):** the Dependabot
@@ -52,7 +52,7 @@ Collections defined in [src/content.config.ts](src/content.config.ts):
   Taxonomy enums live in `src/config/taxonomy`. The `theme` field routes rendering
   (e.g. `ProjectArticle`). **Generated pages are a read-only render target** — the canon
   generator (`scripts/project_pipeline.py --write-live`) is the only writer; the truth
-  lives in the canon vault (`H:\workspace\canon\entities\projects\<slug>\<slug>.md`).
+  lives in `D:\GitHub\portfolio-canon\entities\projects\<slug>\<slug>.md`.
   `hydrate_content.py` was retired 2026-07-02 (it destructively rewrote frontmatter).
 - **`docs`** — `src/content/docs/` (incl. `_inbox`, intelligence boluses).
 - **`otherPages`** — `src/data/otherPages/`.
@@ -93,8 +93,8 @@ running a Python script — bare `python` may resolve to the wrong environment.
 ## Asset sovereignty
 
 Assets (images, 3D models) live in **Cloudflare R2** (`assets.eriknorris.com`) —
-**never commit them to Git.** Curation happens in the canon vault
-(`H:\workspace\canon\entities\projects\<slug>\assets\` — the human zone); the darkroom
+**never commit them to Git.** Curation happens in the local evidence store
+(`D:\GitHub\portfolio-evidence\assets\<slug>\` — the human zone); the darkroom
 derives the local machine-only bucket mirror at `D:/GitHub/portfolio-assets/R2_MIRROR`
 (renamed from `R2_STAGING` 2026-07-02; no human edits, regenerable), which `sync_r2.py`
 uploads. There is no symlink: dev serves assets via `src/pages/assets/[...path].ts`;

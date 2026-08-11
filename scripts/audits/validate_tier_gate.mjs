@@ -38,17 +38,18 @@
  *             filler and empty frames do.
  *
  *   deep_dive lite bar, plus >= 1200 body words, >= 6 image references, and at
- *             least one cited locker item in its canon record (portfolio#142).
- *             Provenance is what makes "every published claim cites a locker
- *             item" verifiable rather than asserted. The canon vault lives
- *             outside this repo, so when it is unreachable (CI) that one check
- *             degrades to skipped rather than failing the build.
+ *             least one locally resolved evidence ID in its canon record
+ *             (portfolio#142). Provenance is what makes "every published claim
+ *             cites evidence" verifiable rather than asserted. Canon and the
+ *             evidence store live outside this repo, so when either is
+ *             unreachable (CI) that check degrades to skipped.
  *
  * Run: node scripts/audits/validate_tier_gate.mjs [--strict] [--verbose]
  *   --strict  promotes WARN to ERROR. Use it once the burn-down reaches zero.
  *   --verbose lists every below-bar page instead of the burn-down summary.
- *   CANON_ROOT overrides the vault location.
+ *   CANON_ROOT, EVIDENCE_ROOT, and EVIDENCE_REGISTRY override local locations.
  */
+import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
@@ -80,15 +81,50 @@ function wordCount(body) {
 }
 
 /**
- * Count `sources` entries in the slug's canon record.
+ * Count and resolve `sources` entries in the slug's canon record.
  *
- * The canon vault is outside this repo and is not present in CI, so a missing
- * vault must not fail the build — it degrades to "unknown" and the check is
- * skipped. Returns: entry count, 0 for an empty list, or null when there is no
- * record. Undefined when the vault itself is unreachable.
+ * Canon and evidence are outside this repo and may not be present in CI, so an
+ * unavailable local store degrades to "unknown" and the check is skipped.
+ * When both are present, every opaque ID must resolve to a contained file whose
+ * SHA-256 matches the local registry.
  */
-const CANON_ROOT = process.env.CANON_ROOT || "H:\\workspace\\canon";
+const CANON_ROOT = process.env.CANON_ROOT || "D:\\GitHub\\portfolio-canon";
+const EVIDENCE_ROOT = process.env.EVIDENCE_ROOT || "D:\\GitHub\\portfolio-evidence";
+const EVIDENCE_REGISTRY = process.env.EVIDENCE_REGISTRY
+	|| path.join(EVIDENCE_ROOT, "registry", "evidence.jsonl");
 const CANON_AVAILABLE = fs.existsSync(path.join(CANON_ROOT, "entities", "projects"));
+const EVIDENCE_AVAILABLE = fs.existsSync(EVIDENCE_ROOT) && fs.existsSync(EVIDENCE_REGISTRY);
+
+function loadEvidenceRegistry() {
+	if (!EVIDENCE_AVAILABLE) return undefined;
+	try {
+		const registry = new Map();
+		const root = path.resolve(EVIDENCE_ROOT);
+		for (const [index, line] of fs.readFileSync(EVIDENCE_REGISTRY, "utf8").split(/\r?\n/).entries()) {
+			if (!line.trim()) continue;
+			const row = JSON.parse(line);
+			const keys = Object.keys(row).sort().join(",");
+			if (keys !== "id,path,sha256") throw new Error(`line ${index + 1} has invalid keys`);
+			if (registry.has(row.id)) throw new Error(`duplicate evidence id: ${row.id}`);
+			const evidencePath = path.resolve(root, ...String(row.path).split("/"));
+			if (evidencePath !== root && !evidencePath.startsWith(root + path.sep)) {
+				throw new Error(`evidence path escapes root: ${row.id}`);
+			}
+			if (!fs.existsSync(evidencePath) || !fs.statSync(evidencePath).isFile()) {
+				throw new Error(`evidence file missing: ${row.id}`);
+			}
+			const actual = crypto.createHash("sha256").update(fs.readFileSync(evidencePath)).digest("hex");
+			if (actual !== row.sha256) throw new Error(`evidence hash mismatch: ${row.id}`);
+			registry.set(row.id, row);
+		}
+		return registry;
+	} catch (error) {
+		errors.push({ rel: EVIDENCE_REGISTRY, why: `invalid local evidence registry: ${error.message}` });
+		return null;
+	}
+}
+
+const EVIDENCE = loadEvidenceRegistry();
 
 function sourcesForSlug(slug) {
 	if (!CANON_AVAILABLE) return undefined;
@@ -96,19 +132,21 @@ function sourcesForSlug(slug) {
 	if (!fs.existsSync(rec)) return null;
 	try {
 		const { data } = matter(fs.readFileSync(rec, "utf8"));
-		// The VAULT is the checkable claim: does this page trace to a real locker
-		// directory with hashed material in it? `sources` is a separate, curated
-		// citation list and is reported but not required — an attempt to derive it
-		// from the vault produced a 564-entry directory listing on c24 and
-		// destroyed 16 real citations. Inventory is not provenance.
-		const vault = typeof data.vault === "string" ? data.vault : null;
-		if (!vault) return { vault: null, items: 0, cited: (data.sources || []).length };
-		const dir = path.join(CANON_ROOT, "raw", "_archive_extracts", vault);
-		if (!fs.existsSync(dir)) return { vault, items: -1, cited: (data.sources || []).length };
-		const count = fs.readdirSync(dir).length;
-		return { vault, items: count, cited: (data.sources || []).length };
+		const sources = Array.isArray(data.sources) ? data.sources : [];
+		const unresolved = [];
+		if (EVIDENCE instanceof Map) {
+			for (const source of sources) {
+				if (typeof source !== "string" || !source.startsWith("evidence:")) {
+					unresolved.push(String(source));
+					continue;
+				}
+				const id = source.slice("evidence:".length);
+				if (!EVIDENCE.has(id)) unresolved.push(id);
+			}
+		}
+		return { cited: sources.length, unresolved, resolutionSkipped: EVIDENCE === undefined };
 	} catch {
-		return { vault: null, items: 0, cited: 0 };
+		return { cited: 0, unresolved: ["unparseable canon record"], resolutionSkipped: false };
 	}
 }
 
@@ -202,16 +240,16 @@ for (const dir of fs.readdirSync(PROJECTS, { withFileTypes: true })) {
 			if (imgs < 6) missing.push(`deep_dive images>=6 (has ${imgs})`);
 			// PROVENANCE (portfolio#142). `sources` is CANON_ONLY, so it is stripped
 			// on the way to the site and cannot be read here — the citation lives in
-			// the canon record. Checking it is what makes "every published claim
-			// cites a locker item" verifiable rather than asserted, which is the
-			// site's entire thesis. Without this check the field is bookkeeping
-			// theater and should be deleted instead.
+			// the canon record. Locally resolving its opaque ID and hash is what makes
+			// the provenance verifiable without putting evidence paths or payloads in
+			// Git.
 			const prov = sourcesForSlug(dir.name);
 			if (prov === null) missing.push("no canon record (deep_dive)");
 			else if (prov !== undefined) {
-				if (!prov.vault) missing.push("canon record declares no vault (deep_dive)");
-				else if (prov.items === -1) missing.push(`declared vault missing from locker: ${prov.vault}`);
-				else if (prov.items === 0) missing.push(`declared vault is empty: ${prov.vault}`);
+				if (prov.cited === 0) missing.push("canon record cites no evidence (deep_dive)");
+				else if (!prov.resolutionSkipped && prov.unresolved.length) {
+					missing.push(`unresolved canon evidence: ${prov.unresolved.join(", ")}`);
+				}
 			}
 		}
 
@@ -226,7 +264,8 @@ console.log("-------------------------------------------------------");
 console.log("Tier publish gate");
 console.log("-------------------------------------------------------");
 console.log(`published pages     : ${rows.length}`);
-console.log(`canon vault         : ${CANON_AVAILABLE ? CANON_ROOT : "unavailable - provenance check skipped"}`);
+console.log(`curated canon       : ${CANON_AVAILABLE ? CANON_ROOT : "unavailable - provenance check skipped"}`);
+console.log(`local evidence      : ${EVIDENCE_AVAILABLE ? EVIDENCE_ROOT : "unavailable - hash resolution skipped"}`);
 console.log(`meeting their bar   : ${pass.length}`);
 console.log(`below bar (burn-down): ${rows.length - pass.length}`);
 const byTier = (t) => rows.filter((r) => r.tier === t);

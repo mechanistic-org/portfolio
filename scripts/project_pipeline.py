@@ -34,7 +34,7 @@ The old docstring claimed "non-destructive" because it never wrote the live
 index.mdx. It was defending the render target and overwriting the source of
 truth. The protection pointed backwards.
 """
-import os, sys, json
+import hashlib, os, sys, json
 from datetime import date
 import yaml
 
@@ -46,7 +46,11 @@ DO_EXTRACT = "--extract" in sys.argv     # opt-in: the ONLY mode that writes can
 # pointed at D:\GitHub\portfolio, so a run from a git worktree silently read and
 # wrote the MAIN checkout instead of the tree the operator was working in.
 REPO_ROOT  = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CANON_ROOT = os.environ.get("CANON_ROOT", r"H:\workspace\canon")
+CANON_ROOT = os.environ.get("CANON_ROOT", r"D:\GitHub\portfolio-canon")
+EVIDENCE_ROOT = os.environ.get("EVIDENCE_ROOT", r"D:\GitHub\portfolio-evidence")
+EVIDENCE_REGISTRY = os.environ.get(
+    "EVIDENCE_REGISTRY", os.path.join(EVIDENCE_ROOT, "registry", "evidence.jsonl")
+)
 CANON_DIR  = os.path.join(CANON_ROOT, "entities", "projects", SLUG)
 CANON_REC  = os.path.join(CANON_DIR, "%s.md" % SLUG)
 SITE_DIR   = os.path.join(REPO_ROOT, "src", "content", "projects", SLUG)
@@ -83,7 +87,7 @@ CANON_ONLY = ["created", "updated", "type", "sensitivity", "confidence", "source
 
 # Provenance (portfolio#142). TWO fields, deliberately not one:
 #
-#   vault:   the record's locker directory under raw/_archive_extracts/.
+#   vault:   the record's collection under the local evidence root.
 #            One declared string. Machine-checkable, cheap for every record, and
 #            what the tier gate verifies.
 #   sources: CURATED citations — the specific documents a page's claims rest on.
@@ -96,7 +100,7 @@ CANON_ONLY = ["created", "updated", "type", "sensitivity", "confidence", "source
 # whole value, and deriving destroyed them. So: vault answers "does this page
 # trace to a real locker?" and sources answers "which documents back this
 # claim?" Conflating them loses the second question.
-LOCKER_ROOT = os.path.join(CANON_ROOT, "raw", "_archive_extracts")
+LOCKER_ROOT = os.path.join(EVIDENCE_ROOT, "raw", "_archive_extracts")
 
 
 def vault_status(vault):
@@ -111,6 +115,39 @@ def vault_status(vault):
     if os.path.isdir(nlm):
         n += sum(1 for x in os.listdir(nlm) if os.path.isfile(os.path.join(nlm, x)))
     return True, n
+
+
+def validate_sources(sources):
+    """Resolve curated evidence IDs locally without exposing paths to canon Git."""
+    if not isinstance(sources, list):
+        raise ValueError("canon `sources` must be a list")
+    registry = {}
+    with open(EVIDENCE_REGISTRY, encoding="utf-8") as handle:
+        for line_number, line in enumerate(handle, 1):
+            if not line.strip():
+                continue
+            row = json.loads(line)
+            if set(row) != {"id", "path", "sha256"}:
+                raise ValueError(f"evidence registry line {line_number} has invalid keys")
+            if row["id"] in registry:
+                raise ValueError(f"duplicate evidence id: {row['id']}")
+            registry[row["id"]] = row
+    root = os.path.realpath(EVIDENCE_ROOT)
+    for source in sources:
+        if not isinstance(source, str) or not source.startswith("evidence:"):
+            raise ValueError(f"canon source is not an opaque evidence id: {source!r}")
+        evidence_id = source.removeprefix("evidence:")
+        row = registry.get(evidence_id)
+        if row is None:
+            raise ValueError(f"canon source is absent from local registry: {evidence_id}")
+        path = os.path.realpath(os.path.join(root, *row["path"].split("/")))
+        if os.path.commonpath([root, path]) != root or not os.path.isfile(path):
+            raise ValueError(f"evidence id does not resolve inside the evidence root: {evidence_id}")
+        with open(path, "rb") as handle:
+            actual = hashlib.sha256(handle.read()).hexdigest()
+        if actual != row["sha256"]:
+            raise ValueError(f"evidence hash mismatch: {evidence_id}")
+    print(f"[evidence] resolved {len(sources)} curated source id(s)")
 # Contract v2 kill list (canon/queries/k2-stranded-data-decision-sheet.md).
 # `isomorphics` REMOVED from DROP_FIELDS — operator lean-in ruling 2026-07-01:
 # it round-trips canon -> site like scars.
@@ -341,10 +378,10 @@ def extract():
     exists, count = vault_status(rec.get("vault"))
     if exists is None:
         print(f"[extract]  WARNING: {SLUG} declares no `vault`. Add "
-              f"`vault: <dir>` (a name under raw/_archive_extracts/) so the page's "
+              f"`vault: <dir>` (a collection in the local evidence store) so the page's "
               f"provenance is machine-checkable.")
     elif exists is False:
-        print(f"[extract]  WARNING: declared vault not found in the locker: {rec['vault']}")
+        print(f"[extract]  WARNING: declared vault not found in the evidence store: {rec['vault']}")
     else:
         print(f"[extract]  vault: {rec['vault']} ({count} locker items) · "
               f"sources: {len(rec['sources'])} curated citation(s)")
@@ -380,6 +417,7 @@ def extract():
 # ---------------------------------------------------------------- generate
 def generate():
     rec, record_body = read_mdx(CANON_REC)
+    validate_sources(rec.get("sources", []))
     cut = first_appended_index(record_body)
     site_body = record_body if cut == -1 else record_body[:cut]
     sections = appended_sections(record_body)

@@ -6,12 +6,13 @@ slug: "career-knowledge-base-architecture"
 
 # Career Knowledge Base Architecture
 
-> **Disposition (2026-07-01): SUPERSEDED — rejected as architecture.** The canon vault
-> (`H:\workspace\canon`) is the single source of truth for career knowledge; this proposal's
-> separate KB root would have created a second authority (see the Epic W8 doctrines and
-> `canon/queries/career-kb-proposal-disposition.md`). Retained for the record: the verified
-> state inventory below, the audit script (`scripts/audits/career_kb_inventory.py`), and the
-> NLM extractor suite (`scripts/career_kb/`), which now writes its index beside the canon census.
+> **Disposition (2026-07-01, updated 2026-08-10): SUPERSEDED — rejected as architecture.**
+> `D:\GitHub\portfolio-canon` is the authority for reviewed career claims, while
+> `D:\GitHub\portfolio-evidence` holds source material and the local opaque-ID registry.
+> This proposal's separate KB root would have created a duplicate authority. Retained for
+> the record: the state inventory below, the audit script
+> (`scripts/audits/career_kb_inventory.py`), and the NLM extractor suite
+> (`scripts/career_kb/`), which writes its small index beside the canon census.
 
 **Status:** Superseded (was Candidate v0.1)  
 **Audit script:** `scripts/audits/career_kb_inventory.py`  
@@ -29,7 +30,8 @@ The first read-only inventory found:
 
 - `D:\GitHub\portfolio` exists and contains the live Astro site.
 - `D:\portfolio\portfolio_working` exists and is the broad local project archive.
-- `\\morespace\projects\portfolio` exists and is another broad local archive root.
+- `D:\GitHub\portfolio-canon` contains reviewed records and claim ledgers.
+- `D:\GitHub\portfolio-evidence` contains local source material and its path/hash registry.
 - `D:\GitHub\portfolio-workspace\R2_MASTER` exists and contains curated asset folders.
 - `D:\GitHub\portfolio-assets\R2_MIRROR` exists and contains processed asset folders.
 - `D:\GitHub\global_agent\registry\notebooklm` exists and contains synced NotebookLM summaries and source lists.
@@ -126,8 +128,8 @@ asset_paths:
   r2_master: "D:\\GitHub\\portfolio-workspace\\R2_MASTER\\c24"
   R2_MIRROR: "D:\\GitHub\\portfolio-assets\\R2_MIRROR\\c24"
 source_roots:
+  - "D:\\GitHub\\portfolio-evidence\\raw"
   - "D:\\portfolio\\portfolio_working"
-  - "\\\\morespace\\projects\\portfolio"
 notebooklm:
   notebooks: []
   registry_docs: []

@@ -45,11 +45,10 @@ PROJECTS_DIR = PORTFOLIO_ROOT / "src" / "content" / "projects"
 REGISTRY_NLM_DIR = GLOBAL_AGENT_ROOT / "registry" / "notebooklm"
 NOTEBOOKLM_SYNC = GLOBAL_AGENT_ROOT / "scripts" / "notebooklm_sync.py"
 
-# The canon vault is the single source of truth for career knowledge
-# (canon/queries/career-kb-proposal-disposition.md — the separate career-kb
-# workspace root was rejected as a duplicate authority). Index artifacts from
-# these tools land beside the census board.
-CANON_ROOT = Path("H:/workspace/canon")
+# The curated canon repo is the single source of reviewed career claims. Raw
+# source material stays in the sibling non-Git evidence store; this tool writes
+# only its small index artifact beside the canon census board.
+CANON_ROOT = GITHUB_ROOT / "portfolio-canon"
 CANON_CENSUS = CANON_ROOT / "census"
 
 
