@@ -60,12 +60,9 @@ def convert_dxf(dxf_path, output_dir):
     plt.close(fig)
 
 if __name__ == "__main__":
-    # Hardcoded test path from user request
-    # \\morespace\projects\portfolio\webtv_misc\cortez\to_jeff_6_20\id_review_6_20.dxf
-    # Mapped to: //morespace/projects/portfolio/webtv_misc/cortez/to_jeff_6_20/id_review_6_20.dxf
-    
-    TEST_FILE = r"\\morespace\projects\portfolio\webtv_misc\cortez\to_jeff_6_20\id_review_6_20.dxf"
-    # Output to local temp dir in repo
-    OUTPUT_DIR = r"d:\GitHub\portfolio\scripts\prototyping\output"
-    
-    convert_dxf(TEST_FILE, OUTPUT_DIR)
+    if len(sys.argv) < 2:
+        raise SystemExit("Usage: python dxf_to_web.py <local-evidence.dxf> [output-dir]")
+
+    source = sys.argv[1]
+    output = sys.argv[2] if len(sys.argv) > 2 else Path(__file__).parent / "output"
+    convert_dxf(source, output)

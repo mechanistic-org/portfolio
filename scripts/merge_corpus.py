@@ -4,13 +4,13 @@ import hashlib
 import os
 
 # --- CONFIGURATION (defaults; override with --skeptic / --physics / --out) ---
-# Corpus home ruled 2026-07-21: canon vault, NOT the site tree (the docs
-# collection publishes to the live site). Versioned by the canon repo plus the
-# provenance block written into the header.
+# Corpus home is the local evidence store, NOT canon Git or the site tree.
+# This is evidence-adjacent calibration material, not publishing authority.
 BASE_DIR = r"D:\GitHub\portfolio-workspace\podcasts"
 SKEPTIC_FILE = os.path.join(BASE_DIR, "skeptic_clips.md")
 PHYSICS_FILE = os.path.join(BASE_DIR, "physics_ingenuity_clips.md")
-TARGET_FILE = r"H:\workspace\canon\_calibration\GOLDEN_DIALOGUE_CORPUS.md"
+EVIDENCE_ROOT = os.environ.get("EVIDENCE_ROOT", r"D:\GitHub\portfolio-evidence")
+TARGET_FILE = os.path.join(EVIDENCE_ROOT, "calibration", "GOLDEN_DIALOGUE_CORPUS.md")
 VERSION_TAG = "v5"
 
 HEADER_TEMPLATE = """# Golden Dialogue Corpus (The Frankenstein Primer)

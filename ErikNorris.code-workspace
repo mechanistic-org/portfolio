@@ -17,8 +17,12 @@
 			"path": "D:/portfolio",
 		},
 		{
-			"name": "Portfolio (Network Raw)",
-			"path": "//morespace/projects/portfolio",
+			"name": "Portfolio Canon",
+			"path": "../portfolio-canon",
+		},
+		{
+			"name": "Portfolio Evidence",
+			"path": "../portfolio-evidence",
 		},
 	],
 	"settings": {

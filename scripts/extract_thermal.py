@@ -1,12 +1,15 @@
 import pandas as pd
 import json
+import os
 
-# Use the LOCAL copy we made
-# Use the REAL network path
-FILE_PATH = r"//morespace/projects/portfolio/digidesign/Lux Tests/Lux Thermal_11-14-07a.xls"
+# One-off source files are supplied explicitly; this script has no archive/NAS
+# default. Point the variable at a file in the local evidence store when needed.
+FILE_PATH = os.environ.get("PORTFOLIO_THERMAL_SOURCE")
 OUTPUT_PATH = r"d:\GitHub\portfolio\src\data\sc48_thermal_real.json"
 
 try:
+    if not FILE_PATH:
+        raise ValueError("Set PORTFOLIO_THERMAL_SOURCE to the local evidence file")
     print(f"📂 Reading: {FILE_PATH}")
     xls = pd.ExcelFile(FILE_PATH)
     

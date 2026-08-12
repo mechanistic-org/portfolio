@@ -9,7 +9,7 @@ state of:
 - Raw NotebookLM extracts in src/content/_raw_nlm
 - Synced NotebookLM registry docs in global_agent/registry/notebooklm
 - Curated asset folders in R2_MASTER and R2_MIRROR
-- Legacy local archive roots
+- Curated canon, local evidence, and legacy local archive roots
 
 Usage:
     python scripts/audits/career_kb_inventory.py
@@ -43,7 +43,8 @@ class Roots:
     r2_master: Path
     R2_MIRROR: Path
     legacy_archive: Path
-    morespace_archive: Path
+    curated_canon: Path
+    local_evidence: Path
     notebook_registry: Path
 
 
@@ -56,7 +57,8 @@ def default_roots(repo: Path) -> Roots:
         r2_master=github_root / "portfolio-workspace" / "R2_MASTER",
         R2_MIRROR=github_root / "portfolio-assets" / "R2_MIRROR",
         legacy_archive=Path(r"D:\portfolio\portfolio_working"),
-        morespace_archive=Path(r"\\morespace\projects\portfolio"),
+        curated_canon=github_root / "portfolio-canon",
+        local_evidence=github_root / "portfolio-evidence",
         notebook_registry=github_root / "global_agent" / "registry" / "notebooklm",
     )
 
@@ -215,7 +217,8 @@ def summarize(roots: Roots) -> dict[str, Any]:
         "r2_master": str(roots.r2_master),
         "R2_MIRROR": str(roots.R2_MIRROR),
         "legacy_archive": str(roots.legacy_archive),
-        "morespace_archive": str(roots.morespace_archive),
+        "curated_canon": str(roots.curated_canon),
+        "local_evidence": str(roots.local_evidence),
         "notebook_registry": str(roots.notebook_registry),
     }
     roots_exists = {name: path_exists_safe(Path(path)) for name, path in roots_status.items()}
