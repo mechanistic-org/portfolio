@@ -20,6 +20,7 @@ const definitionFields = [
 	"method_summary",
 	"source_class",
 ];
+const issueFlowDefinitionFields = [...definitionFields, "inclusions", "exclusions"];
 
 after(() => {
 	for (const directory of temporaryDirectories) {
@@ -102,7 +103,11 @@ function collectPublicNarrative(definitions, snapshot) {
 		snapshot.public_wording.summary,
 		...definitions.groups.flatMap((group) => [
 			group.label,
-			...group.metrics.flatMap((metric) => definitionFields.map((field) => metric[field])),
+			...group.metrics.flatMap((metric) =>
+				(group.id === "issue-flow" ? issueFlowDefinitionFields : definitionFields).map(
+					(field) => metric[field],
+				),
+			),
 		]),
 	];
 }
@@ -363,7 +368,7 @@ for (const failureCase of [
 		name: "an altered approved value with a reproduced receipt",
 		error: /effective_state=proposal; approval binding values_sha256 does not match/u,
 		mutate(fixtureRoot) {
-			replaceMeasuredValue(fixtureRoot, "issue-flow.created-count", 19);
+			replaceMeasuredValue(fixtureRoot, "change-traceability.trunk-commits", 133);
 		},
 	},
 	{
@@ -381,10 +386,8 @@ for (const failureCase of [
 		name: "an altered approved as_of date",
 		error: /effective_state=proposal; approval binding as_of does not match/u,
 		mutate(fixtureRoot) {
-			mutateFixtureJson(fixtureRoot, "canon/snapshot.json", (snapshot) => {
-				snapshot.as_of = "2026-08-25";
-				snapshot.measurement_window.start = "2026-05-28";
-				snapshot.measurement_window.end = "2026-08-25";
+			mutateFixtureJson(fixtureRoot, "canon/approval.json", (approval) => {
+				approval.binding.as_of = "2026-08-25";
 			});
 		},
 	},

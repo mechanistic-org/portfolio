@@ -15,19 +15,19 @@
 	},
 	"values": {
 		"issue-flow.created-count": {
-			"value": 18,
+			"value": 5,
 			"receipt_ref": "rct_f97b4275c4644cb78ce8e40f5e608a1e"
 		},
 		"issue-flow.cohort-closure-percentage": {
-			"value": 77.8,
+			"value": 60,
 			"receipt_ref": "rct_f97b4275c4644cb78ce8e40f5e608a1e"
 		},
 		"issue-flow.median-close-time": {
-			"value": 4.5,
+			"value": 4,
 			"receipt_ref": "rct_f97b4275c4644cb78ce8e40f5e608a1e"
 		},
 		"issue-flow.net-backlog-change": {
-			"value": -6,
+			"value": 2,
 			"receipt_ref": "rct_f97b4275c4644cb78ce8e40f5e608a1e"
 		},
 		"change-traceability.trunk-commits": {

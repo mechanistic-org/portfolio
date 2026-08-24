@@ -45,14 +45,14 @@ function projectFixture() {
 	return fs.readFileSync(outputPath);
 }
 
-test("an approved snapshot projects deterministically without crossing the custody boundary", () => {
+test("a controlled 90-day issue-flow cohort projects deterministically without crossing the custody boundary", () => {
 	const firstProjection = projectFixture();
 	const secondProjection = projectFixture();
 
 	assert.deepEqual(firstProjection, secondProjection);
 	assert.equal(
 		createHash("sha256").update(firstProjection).digest("hex"),
-		"706197db8232e93af108b65ab517431db0bb1f10f3b2a4ef23b250811fc30a2a",
+		"c36d60e7a7fa183464b5303759558ba66ce2681055e5b220e89a7e1f46db9398",
 	);
 
 	const publicSnapshot = JSON.parse(firstProjection.toString("utf8"));
@@ -78,6 +78,26 @@ test("an approved snapshot projects deterministically without crossing the custo
 			["durable-record-coverage.session-coverage-percentage"],
 		],
 	);
+	const issueFlow = publicSnapshot.groups.find((group) => group.id === "issue-flow");
+	assert.deepEqual(
+		issueFlow.metrics.map((metric) => metric.value),
+		[5, 60, 4, 2],
+	);
+	for (const metric of issueFlow.metrics) {
+		for (const field of [
+			"id",
+			"unit",
+			"numerator",
+			"denominator",
+			"inclusions",
+			"exclusions",
+			"method_summary",
+			"source_class",
+		]) {
+			assert.equal(typeof metric[field], "string", `${metric.id}.${field}`);
+			assert.notEqual(metric[field].length, 0, `${metric.id}.${field}`);
+		}
+	}
 	for (const group of publicSnapshot.groups) {
 		for (const metric of group.metrics) {
 			assert.deepEqual(metric.measurement_window, {
@@ -104,6 +124,13 @@ test("an approved snapshot projects deterministically without crossing the custo
 		"private trunk traceability query",
 		"private scoped-session coverage query",
 		"D:\\\\private\\\\receipts",
+		"issue-flow-v1",
+		"created_at",
+		"closed_at",
+		"open_backlog",
+		"window_start",
+		"window_end",
+		"2026-05-26T12:00:00Z",
 	]) {
 		assert.equal(publicText.includes(privateMarker), false);
 	}

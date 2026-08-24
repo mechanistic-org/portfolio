@@ -12,7 +12,9 @@
 					"definition": "Issues created during the shared measurement window.",
 					"numerator": "Issues created from window start through window end, inclusive.",
 					"denominator": "The shared 90-day measurement window.",
-					"method_summary": "Count issue creation timestamps inside the window.",
+					"inclusions": "Issues whose creation timestamp falls inside the inclusive 90-day window.",
+					"exclusions": "Issues created before the window start or after the window end.",
+					"method_summary": "Filter issue creation timestamps to the inclusive window, then count the cohort.",
 					"source_class": "issue-tracker"
 				},
 				{
@@ -22,7 +24,9 @@
 					"definition": "Share of the created cohort closed by the measurement date.",
 					"numerator": "Created-cohort issues closed by as_of.",
 					"denominator": "All issues created during the window.",
-					"method_summary": "Divide closed cohort members by all created cohort members.",
+					"inclusions": "Created-cohort members with a closure timestamp on or before as_of.",
+					"exclusions": "Issues outside the created cohort and cohort members closing after as_of.",
+					"method_summary": "Divide closed cohort members by all created cohort members and round to one decimal percentage point.",
 					"source_class": "issue-tracker"
 				},
 				{
@@ -30,9 +34,11 @@
 					"label": "Median close time",
 					"unit": "days",
 					"definition": "Median elapsed time from creation to closure for closed cohort members.",
-					"numerator": "Elapsed calendar days for each closed cohort member.",
+					"numerator": "Elapsed 24-hour days for each closed cohort member.",
 					"denominator": "Closed members of the created cohort.",
-					"method_summary": "Take the median of creation-to-closure durations.",
+					"inclusions": "Created-cohort members closed on or before as_of.",
+					"exclusions": "Open cohort members, post-as_of closures, and issues outside the created cohort.",
+					"method_summary": "Filter to closed cohort members, divide each elapsed UTC duration by 24 hours, then take the median.",
 					"source_class": "issue-tracker"
 				},
 				{
@@ -42,6 +48,8 @@
 					"definition": "Difference between open backlog at window end and window start.",
 					"numerator": "Open issues at window end minus open issues at window start.",
 					"denominator": "The shared 90-day measurement window.",
+					"inclusions": "Open issue counts sampled at both boundaries of the shared window.",
+					"exclusions": "Backlog observations outside the shared window boundaries.",
 					"method_summary": "Subtract the opening backlog count from the closing backlog count.",
 					"source_class": "issue-tracker"
 				}
