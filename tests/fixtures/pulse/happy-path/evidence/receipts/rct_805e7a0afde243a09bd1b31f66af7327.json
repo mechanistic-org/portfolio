@@ -1,0 +1,9 @@
+{
+	"receipt_id": "rct_805e7a0afde243a09bd1b31f66af7327",
+	"exact_command": "private scoped-session coverage query",
+	"raw_output": {
+		"durable_record_coverage": 96.2
+	},
+	"private_source_identity": "mechanistic-org/private-source",
+	"local_path": "D:\\private\\receipts\\durable-record-coverage.json"
+}

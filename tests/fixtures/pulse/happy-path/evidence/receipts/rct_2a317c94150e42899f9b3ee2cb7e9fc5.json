@@ -1,0 +1,12 @@
+{
+	"receipt_id": "rct_2a317c94150e42899f9b3ee2cb7e9fc5",
+	"exact_command": "private trunk traceability query",
+	"raw_output": {
+		"trunk_commits": 132,
+		"scheduled_maintenance_commits": 24,
+		"issue_reference_coverage": 91.7,
+		"distinct_issues": 38
+	},
+	"private_source_identity": "mechanistic-org/private-source",
+	"local_path": "D:\\private\\receipts\\change-traceability.json"
+}
