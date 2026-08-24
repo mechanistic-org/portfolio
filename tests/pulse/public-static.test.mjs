@@ -103,9 +103,12 @@ test("an invalid public projection fails the release validator wired before Astr
 		const buildCommand = JSON.parse(
 			fs.readFileSync(path.join(repositoryRoot, "package.json"), "utf8"),
 		).scripts.build;
+		const validatorIndex = buildCommand.indexOf("scripts/pulse/validate_public_projection.mjs");
+		const astroIndex = buildCommand.indexOf("astro build");
+		assert.notEqual(validatorIndex, -1, "the production build must invoke the validator");
+		assert.notEqual(astroIndex, -1, "the production build must invoke Astro");
 		assert.ok(
-			buildCommand.indexOf("scripts/pulse/validate_public_projection.mjs") <
-				buildCommand.indexOf("astro build"),
+			validatorIndex < astroIndex,
 			"the public projection validator must run before Astro in the production build",
 		);
 	} finally {
