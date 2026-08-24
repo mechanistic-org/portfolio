@@ -213,6 +213,11 @@ for (const privacyCase of [
 		error: /local drive path/u,
 	},
 	{
+		name: "UUID session identifier",
+		summary: "Run ID: 62e2a82c-5ecd-443c-8dc6-bfa304b77351 produced the aggregate.",
+		error: /session identifier/u,
+	},
+	{
 		name: "private issue content",
 		summary: "Private issue: the source ticket describes the underlying customer work.",
 		error: /private issue content/u,
@@ -223,8 +228,18 @@ for (const privacyCase of [
 		error: /private repository identity/u,
 	},
 	{
+		name: "unmarked private repository identity",
+		summary: "Source: https://github.com/example-org/quiet-source/issues/12",
+		error: /private repository identity/u,
+	},
+	{
 		name: "customer attribution",
 		summary: "Customer: Example Robotics contributed to the measured operating window.",
+		error: /customer attribution/u,
+	},
+	{
+		name: "implicit customer attribution",
+		summary: "Built for Example Robotics during the measured operating window.",
 		error: /customer attribution/u,
 	},
 	{
@@ -235,6 +250,11 @@ for (const privacyCase of [
 	{
 		name: "person-level daily activity",
 		summary: "Erik closed five issues on 2026-08-24 during the measured window.",
+		error: /person-level or daily activity/u,
+	},
+	{
+		name: "punctuated person-level daily activity",
+		summary: "Erik completed five issues, 2026-08-24.",
 		error: /person-level or daily activity/u,
 	},
 ]) {
@@ -314,7 +334,7 @@ for (const failureCase of [
 	},
 	{
 		name: "an altered approved definition",
-		error: /approval binding definitions_sha256 does not match/u,
+		error: /effective_state=proposal; approval binding definitions_sha256 does not match/u,
 		mutate(fixtureRoot) {
 			mutateFixtureJson(fixtureRoot, "canon/definitions.json", (definitions) => {
 				definitions.groups[0].metrics[0].definition =
@@ -325,14 +345,14 @@ for (const failureCase of [
 	},
 	{
 		name: "an altered approved value with a reproduced receipt",
-		error: /approval binding values_sha256 does not match/u,
+		error: /effective_state=proposal; approval binding values_sha256 does not match/u,
 		mutate(fixtureRoot) {
 			replaceMeasuredValue(fixtureRoot, "issue-flow.created-count", 19);
 		},
 	},
 	{
 		name: "altered approved public wording",
-		error: /approval binding public_wording_sha256 does not match/u,
+		error: /effective_state=proposal; approval binding public_wording_sha256 does not match/u,
 		mutate(fixtureRoot) {
 			mutateFixtureJson(fixtureRoot, "canon/snapshot.json", (snapshot) => {
 				snapshot.public_wording.summary =
@@ -343,7 +363,7 @@ for (const failureCase of [
 	},
 	{
 		name: "an altered approved as_of date",
-		error: /approval binding as_of does not match/u,
+		error: /effective_state=proposal; approval binding as_of does not match/u,
 		mutate(fixtureRoot) {
 			mutateFixtureJson(fixtureRoot, "canon/snapshot.json", (snapshot) => {
 				snapshot.as_of = "2026-08-25";
@@ -354,7 +374,7 @@ for (const failureCase of [
 	},
 	{
 		name: "an altered approved projection hash",
-		error: /approval binding public_projection_sha256 does not match/u,
+		error: /effective_state=proposal; approval binding public_projection_sha256 does not match/u,
 		mutate(fixtureRoot) {
 			mutateFixtureJson(fixtureRoot, "canon/approval.json", (approval) => {
 				approval.binding.public_projection_sha256 = "0".repeat(64);

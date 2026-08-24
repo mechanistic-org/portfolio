@@ -67,7 +67,8 @@ const PRIVATE_PUBLIC_TEXT_PATTERNS = [
 	{ pattern: /\b[a-zA-Z]:[\\/]/u, description: "a local drive path" },
 	{ pattern: /(?:^|\s)\\\\/u, description: "a UNC path" },
 	{
-		pattern: /\b[a-z0-9_.-]+#\d+\b/iu,
+		pattern:
+			/\b(?:[a-z0-9_.-]+#\d+|[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})\b/iu,
 		description: "a session identifier",
 	},
 	{
@@ -83,11 +84,16 @@ const PRIVATE_PUBLIC_TEXT_PATTERNS = [
 		description: "private issue content",
 	},
 	{
-		pattern: /\bhttps:\/\/github\.com\/[^/\s]+\/(?:private|internal)[^/\s]*(?:\/issues\/\d+)?\b/iu,
+		pattern: /\bhttps:\/\/github\.com\/[^/\s]+\/[^/\s]+(?:\/issues\/\d+)?\b/iu,
 		description: "a private repository identity",
 	},
 	{
 		pattern: /\bcustomer(?:\s+(?:name|identity|attribution))?\s*[:=]/iu,
+		description: "customer attribution",
+	},
+	{
+		pattern:
+			/\b(?:[Bb]uilt|[Mm]ade|[Dd]elivered|[Dd]eveloped|[Ww]orked|[Pp]roduced)\s+(?:for|with)\s+\p{Lu}[\p{L}\p{N}&.'-]*/u,
 		description: "customer attribution",
 	},
 	{
@@ -96,7 +102,7 @@ const PRIVATE_PUBLIC_TEXT_PATTERNS = [
 	},
 	{
 		pattern:
-			/\b(?:created|closed|committed|worked|logged|ran|published)\b[^.\n]{0,80}\bon\s+\d{4}-\d{2}-\d{2}\b/iu,
+			/\b(?:created|closed|committed|completed|worked|logged|ran|published)\b[^.\n]{0,80}(?:\bon\s+|,\s*)\d{4}-\d{2}-\d{2}\b/iu,
 		description: "person-level or daily activity",
 	},
 	{
@@ -108,6 +114,10 @@ const PUBLIC_URL = /\bhttps:\/\/[^\s<>"']+/giu;
 
 function fail(message) {
 	throw new Error(`[snapshot-contract] ${message}`);
+}
+
+function failProposal(message) {
+	throw new Error(`[snapshot-contract] effective_state=proposal; ${message}`);
 }
 
 function parseArguments(argv) {
@@ -613,7 +623,7 @@ function validateApproval(approval, definitions, snapshot, publicBytes) {
 
 	for (const [bindingName, expectedValue] of Object.entries(expectedBindings)) {
 		if (approval.binding[bindingName] !== expectedValue) {
-			fail(
+			failProposal(
 				`approval binding ${bindingName} does not match the approved content: expected ${expectedValue}, received ${approval.binding[bindingName]}`,
 			);
 		}
