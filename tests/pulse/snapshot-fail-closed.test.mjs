@@ -104,7 +104,7 @@ function collectPublicNarrative(definitions, snapshot) {
 		...definitions.groups.flatMap((group) => [
 			group.label,
 			...group.metrics.flatMap((metric) =>
-				(["issue-flow", "change-traceability"].includes(group.id)
+				(["issue-flow", "change-traceability", "durable-record-coverage"].includes(group.id)
 					? scopedDefinitionFields
 					: definitionFields
 				).map((field) => metric[field]),
@@ -216,6 +216,28 @@ function mutateIssueFlowReceipt(fixtureRoot, mutate) {
 	writeJson(manifestPath, manifest);
 }
 
+function mutateDurableRecordReceipt(
+	fixtureRoot,
+	mutatePrimary,
+	mutateReproduction = mutatePrimary,
+) {
+	const snapshot = readJson(path.join(fixtureRoot, "canon", "snapshot.json"));
+	const receiptId =
+		snapshot.values["durable-record-coverage.session-coverage-percentage"].receipt_ref;
+	const receiptPath = path.join(fixtureRoot, "evidence", "receipts", `${receiptId}.json`);
+	const receipt = readJson(receiptPath);
+	mutatePrimary(receipt.primary.raw_output);
+	mutateReproduction(receipt.independent_reproduction.raw_output);
+	writeJson(receiptPath, receipt);
+
+	const manifestPath = path.join(fixtureRoot, "evidence", "manifest.json");
+	const manifest = readJson(manifestPath);
+	const manifestEntry = manifest.receipts.find((entry) => entry.id === receiptId);
+	manifestEntry.sha256 = sha256(fs.readFileSync(receiptPath));
+	manifestEntry.independent_reproduction.result_sha256 = canonicalHash(receipt.primary.raw_output);
+	writeJson(manifestPath, manifest);
+}
+
 function replaceChangeTraceabilityReceiptWithPrecomputedMetrics(fixtureRoot) {
 	const snapshot = readJson(path.join(fixtureRoot, "canon", "snapshot.json"));
 	const metricId = "change-traceability.trunk-commits";
@@ -308,6 +330,16 @@ for (const privacyCase of [
 		error: /session identifier/u,
 	},
 	{
+		name: "opaque scoped-session identifier",
+		summary: "Coverage source ssn_00000000000000000000000000000001 produced the aggregate.",
+		error: /opaque session identifier/u,
+	},
+	{
+		name: "opaque durable-record identifier",
+		summary: "Coverage source rec_00000000000000000000000000000001 produced the aggregate.",
+		error: /opaque durable-record identifier/u,
+	},
+	{
 		name: "private issue content",
 		summary: "Private issue: the source ticket describes the underlying customer work.",
 		error: /private issue content/u,
@@ -389,6 +421,53 @@ test("precomputed change metrics fail closed instead of bypassing controlled cha
 
 	assert.notEqual(result.status, 0);
 	assert.match(result.stderr, /change-traceability receipts must use controlled change evidence/u);
+	assert.deepEqual(fs.readFileSync(outputPath), approvedBytes);
+});
+
+test("precomputed durable coverage fails closed instead of substituting a raw artifact result", () => {
+	const { fixtureRoot, outputPath } = createCandidateWorkspace();
+	const approvedBytes = fs.readFileSync(outputPath);
+	mutateDurableRecordReceipt(fixtureRoot, (rawOutput) => {
+		for (const key of Object.keys(rawOutput)) delete rawOutput[key];
+		rawOutput["durable-record-coverage.session-coverage-percentage"] = 75;
+	});
+
+	const result = runProjector(fixtureRoot, outputPath);
+
+	assert.notEqual(result.status, 0);
+	assert.match(result.stderr, /must use controlled session evidence/u);
+	assert.deepEqual(fs.readFileSync(outputPath), approvedBytes);
+});
+
+test("an independently unreproduced scoped-session denominator fails the complete snapshot atomically", () => {
+	const { fixtureRoot, outputPath } = createCandidateWorkspace();
+	const approvedBytes = fs.readFileSync(outputPath);
+	mutateDurableRecordReceipt(
+		fixtureRoot,
+		() => {},
+		(rawOutput) => {
+			rawOutput.scoped_sessions.splice(0, 1);
+		},
+	);
+
+	const result = runProjector(fixtureRoot, outputPath);
+
+	assert.notEqual(result.status, 0);
+	assert.match(result.stderr, /scoped-session denominator is not independently reproducible/u);
+	assert.deepEqual(fs.readFileSync(outputPath), approvedBytes);
+});
+
+test("a durable record cannot cover a scoped session before that session begins", () => {
+	const { fixtureRoot, outputPath } = createCandidateWorkspace();
+	const approvedBytes = fs.readFileSync(outputPath);
+	mutateDurableRecordReceipt(fixtureRoot, (rawOutput) => {
+		rawOutput.durable_records[0].recorded_at = "2026-05-27T07:59:59Z";
+	});
+
+	const result = runProjector(fixtureRoot, outputPath);
+
+	assert.notEqual(result.status, 0);
+	assert.match(result.stderr, /recorded_at cannot precede its scoped session/u);
 	assert.deepEqual(fs.readFileSync(outputPath), approvedBytes);
 });
 

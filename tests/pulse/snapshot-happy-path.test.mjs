@@ -52,7 +52,7 @@ test("a controlled 90-day issue-flow cohort projects deterministically without c
 	assert.deepEqual(firstProjection, secondProjection);
 	assert.equal(
 		createHash("sha256").update(firstProjection).digest("hex"),
-		"5059dd115a7c032361f2ec1a6fb9157d4031884d8d807e5b1d6dea90d1ef53f7",
+		"312e5240e96309c0ac64d23b68fa879e2cdf65f5e725807d40999647647a7b89",
 	);
 
 	const publicSnapshot = JSON.parse(firstProjection.toString("utf8"));
@@ -175,6 +175,44 @@ test("controlled change evidence projects the complete traceability group withou
 		'"valid_issue_ids"',
 		"cmt_00000000000000000000000000000001",
 		"iss_00000000000000000000000000000001",
+	]) {
+		assert.equal(publicText.includes(privateMarker), false);
+	}
+});
+
+test("controlled durable records project unique scoped-session coverage without artifact inflation", () => {
+	const publicBytes = projectFixture();
+	const publicSnapshot = JSON.parse(publicBytes.toString("utf8"));
+	const durableRecordCoverage = publicSnapshot.groups.find(
+		(group) => group.id === "durable-record-coverage",
+	);
+	const [sessionCoverage] = durableRecordCoverage.metrics;
+
+	assert.equal(sessionCoverage.value, 75);
+	for (const field of [
+		"id",
+		"unit",
+		"numerator",
+		"denominator",
+		"inclusions",
+		"exclusions",
+		"method_summary",
+		"source_class",
+	]) {
+		assert.equal(typeof sessionCoverage[field], "string", `${sessionCoverage.id}.${field}`);
+		assert.notEqual(sessionCoverage[field].length, 0, `${sessionCoverage.id}.${field}`);
+	}
+
+	const publicText = publicBytes.toString("utf8");
+	for (const privateMarker of [
+		"durable-record-coverage-v1",
+		'"session_id"',
+		'"record_id"',
+		'"started_at"',
+		'"recorded_at"',
+		'"record_type"',
+		"ssn_00000000000000000000000000000001",
+		"rec_00000000000000000000000000000001",
 	]) {
 		assert.equal(publicText.includes(privateMarker), false);
 	}

@@ -120,6 +120,8 @@
 					"definition": "Share of scoped sessions producing at least one durable decision or finding record.",
 					"numerator": "Scoped sessions with one or more durable records, counted once per session.",
 					"denominator": "All reproducible scoped sessions during the window.",
+					"inclusions": "Opaque scoped-session records starting inside the inclusive 90-day window and their in-window durable decision or finding records.",
+					"exclusions": "Sessions outside the shared window, records outside the shared window, records for unscoped sessions, and duplicate records from the same scoped session after its first qualifying record.",
 					"method_summary": "Deduplicate durable records by scoped session before calculating coverage.",
 					"source_class": "session-registry"
 				}

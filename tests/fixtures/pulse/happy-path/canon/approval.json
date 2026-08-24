@@ -6,14 +6,14 @@
 		"status": "approved",
 		"reviewed_by": "eriknorris",
 		"reviewed_on": "2026-08-24",
-		"public_narrative_sha256": "cf41018517212ea39388fd5e95f57f3bd9b6fa5b8919c06aed639f234e6d317e",
+		"public_narrative_sha256": "8e0e73070bb7a4688844f4c8888220eed9105ddc262de74e8d565610e6cf3619",
 		"approved_public_source_urls": []
 	},
 	"binding": {
-		"definitions_sha256": "12bdbaa13b471009b5b8f6e42f0d0c9d4b74f063c0f6f24efbbd5664df67f668",
-		"values_sha256": "a87a763a0c838a257d5b9205645f41f3d2980e29bb5e7d88b66a1348329edd42",
+		"definitions_sha256": "6c0550cac5f6a377719cac3f88743ccc9e88cc714f7696e97b4f52015f227c0e",
+		"values_sha256": "f94e0722ddd5dd75d2a8d3e4d8bbc69f40a61a6365863100f0255965904656c1",
 		"public_wording_sha256": "bd6de0ba938f01f955a0115145c2767d8cf8c9661738206cfcf248759a224d98",
 		"as_of": "2026-08-24",
-		"public_projection_sha256": "5059dd115a7c032361f2ec1a6fb9157d4031884d8d807e5b1d6dea90d1ef53f7"
+		"public_projection_sha256": "312e5240e96309c0ac64d23b68fa879e2cdf65f5e725807d40999647647a7b89"
 	}
 }
