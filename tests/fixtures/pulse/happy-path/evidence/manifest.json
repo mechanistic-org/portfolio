@@ -13,10 +13,10 @@
 		{
 			"id": "rct_2a317c94150e42899f9b3ee2cb7e9fc5",
 			"file": "rct_2a317c94150e42899f9b3ee2cb7e9fc5.json",
-			"sha256": "cc9b69ea0af3c89bab3ee35a3ec1d1f9fa1a129b6e97e90e4cc97752740d335c",
+			"sha256": "0bf86e581defca7f8bc59ccc1b67e40b12af67ca6b28a010fc6f51f70ce21efb",
 			"independent_reproduction": {
 				"status": "matched",
-				"result_sha256": "016cfd44c85111ea68ec80ff0f5d145a08a2e7ec18ea650eb8a61999508db9a7"
+				"result_sha256": "55833805579067e2293e8c8880ca8c72baa60c409677f55388346eeef2f4e47e"
 			}
 		},
 		{

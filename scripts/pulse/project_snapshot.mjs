@@ -35,11 +35,12 @@ const REQUIRED_DEFINITION_FIELDS = [
 	"method_summary",
 	"source_class",
 ];
-const REQUIRED_ISSUE_FLOW_DEFINITION_FIELDS = [
+const REQUIRED_SCOPED_DEFINITION_FIELDS = [
 	...REQUIRED_DEFINITION_FIELDS,
 	"inclusions",
 	"exclusions",
 ];
+const GROUPS_WITH_INCLUSION_EXCLUSION = new Set(["issue-flow", "change-traceability"]);
 const REQUIRED_ARGUMENTS = [
 	"definitions",
 	"snapshot",
@@ -50,6 +51,7 @@ const REQUIRED_ARGUMENTS = [
 ];
 const OPAQUE_RECEIPT_ID = /^rct_[a-f0-9]{32}$/u;
 const OPAQUE_ISSUE_ID = /^iss_[a-f0-9]{32}$/u;
+const OPAQUE_COMMIT_ID = /^cmt_[a-f0-9]{32}$/u;
 const SHA256 = /^[a-f0-9]{64}$/u;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/u;
 const ISO_TIMESTAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/u;
@@ -219,8 +221,8 @@ function canonicalHash(value) {
 }
 
 function definitionFieldsForGroup(groupId) {
-	return groupId === "issue-flow"
-		? REQUIRED_ISSUE_FLOW_DEFINITION_FIELDS
+	return GROUPS_WITH_INCLUSION_EXCLUSION.has(groupId)
+		? REQUIRED_SCOPED_DEFINITION_FIELDS
 		: REQUIRED_DEFINITION_FIELDS;
 }
 
@@ -274,11 +276,19 @@ function validateDefinitions(definitions) {
 	return metricIds;
 }
 
-function inclusiveWindowDays(start, end) {
-	const startDate = Date.parse(`${start}T00:00:00Z`);
-	const endDate = Date.parse(`${end}T00:00:00Z`);
-	if (!Number.isFinite(startDate) || !Number.isFinite(endDate)) return Number.NaN;
-	return (endDate - startDate) / 86_400_000 + 1;
+function requireIsoCalendarDate(value, label) {
+	if (typeof value !== "string" || !ISO_DATE.test(value)) {
+		fail(`${label} must be YYYY-MM-DD`);
+	}
+	const timestamp = Date.parse(`${value}T00:00:00Z`);
+	if (!Number.isFinite(timestamp) || new Date(timestamp).toISOString().slice(0, 10) !== value) {
+		fail(`${label} must be a real ISO calendar date`);
+	}
+	return timestamp;
+}
+
+function inclusiveWindowDays(startInclusive, endInclusive) {
+	return (endInclusive - startInclusive) / 86_400_000 + 1;
 }
 
 function validateSnapshot(snapshot, metricIds) {
@@ -298,7 +308,7 @@ function validateSnapshot(snapshot, metricIds) {
 	);
 	if (snapshot.schema_version !== 1) fail("snapshot.schema_version must be 1");
 	requireString(snapshot.snapshot_id, "snapshot.snapshot_id");
-	if (!ISO_DATE.test(snapshot.as_of)) fail("snapshot.as_of must be YYYY-MM-DD");
+	requireIsoCalendarDate(snapshot.as_of, "snapshot.as_of");
 	if (snapshot.refresh_state !== "independently-reproduced") {
 		fail("snapshot.refresh_state must be independently-reproduced");
 	}
@@ -312,13 +322,12 @@ function validateSnapshot(snapshot, metricIds) {
 		"snapshot.measurement_window",
 	);
 	const { start, end, days } = snapshot.measurement_window;
-	if (!ISO_DATE.test(start) || !ISO_DATE.test(end)) {
-		fail("measurement window dates must be YYYY-MM-DD");
-	}
+	const startInclusive = requireIsoCalendarDate(start, "snapshot.measurement_window.start");
+	const endInclusive = requireIsoCalendarDate(end, "snapshot.measurement_window.end");
 	if (!Number.isInteger(days) || days < 30) {
 		fail("public operational windows shorter than 30 days are forbidden");
 	}
-	if (days !== 90 || inclusiveWindowDays(start, end) !== 90) {
+	if (days !== 90 || inclusiveWindowDays(startInclusive, endInclusive) !== 90) {
 		fail("all headline groups must share one inclusive 90-day window");
 	}
 	if (snapshot.as_of !== end) {
@@ -383,6 +392,20 @@ function requireNonnegativeInteger(value, label) {
 	return value;
 }
 
+function requireMatchingMeasurementWindow(measurementWindow, label, snapshotWindow) {
+	requireExactKeys(measurementWindow, ["start", "end"], label);
+	const { start, end } = measurementWindow;
+	const startInclusive = requireIsoCalendarDate(start, `${label}.start`);
+	const endInclusive = requireIsoCalendarDate(end, `${label}.end`);
+	if (start !== snapshotWindow.start || end !== snapshotWindow.end) {
+		fail(`${label} must match the snapshot measurement window`);
+	}
+	return {
+		startInclusive,
+		endExclusive: endInclusive + 86_400_000,
+	};
+}
+
 function median(values) {
 	const ordered = [...values].sort((left, right) => left - right);
 	const midpoint = Math.floor(ordered.length / 2);
@@ -394,12 +417,11 @@ function median(values) {
 function calculateIssueFlowMetrics(rawOutput, label, snapshotWindow) {
 	requireExactKeys(rawOutput, ["kind", "measurement_window", "issues", "open_backlog"], label);
 	if (rawOutput.kind !== "issue-flow-v1") fail(`${label}.kind must be issue-flow-v1`);
-
-	requireExactKeys(rawOutput.measurement_window, ["start", "end"], `${label}.measurement_window`);
-	const { start, end } = rawOutput.measurement_window;
-	if (start !== snapshotWindow.start || end !== snapshotWindow.end) {
-		fail(`${label}.measurement_window must match the snapshot measurement window`);
-	}
+	const { startInclusive, endExclusive } = requireMatchingMeasurementWindow(
+		rawOutput.measurement_window,
+		`${label}.measurement_window`,
+		snapshotWindow,
+	);
 
 	if (!Array.isArray(rawOutput.issues)) fail(`${label}.issues must be an array`);
 	const issueIds = new Set();
@@ -421,14 +443,12 @@ function calculateIssueFlowMetrics(rawOutput, label, snapshotWindow) {
 		return { createdAt, closedAt };
 	});
 
-	const startBoundary = Date.parse(`${start}T00:00:00Z`);
-	const endBoundary = Date.parse(`${end}T00:00:00Z`) + 86_400_000;
 	const createdCohort = issues.filter(
-		(issue) => issue.createdAt >= startBoundary && issue.createdAt < endBoundary,
+		(issue) => issue.createdAt >= startInclusive && issue.createdAt < endExclusive,
 	);
 	if (createdCohort.length === 0) fail(`${label} created cohort cannot be empty`);
 	const closedCohort = createdCohort.filter(
-		(issue) => issue.closedAt !== null && issue.closedAt < endBoundary,
+		(issue) => issue.closedAt !== null && issue.closedAt < endExclusive,
 	);
 	if (closedCohort.length === 0) fail(`${label} closed cohort cannot be empty`);
 
@@ -454,15 +474,116 @@ function calculateIssueFlowMetrics(rawOutput, label, snapshotWindow) {
 	};
 }
 
+function calculateChangeTraceabilityMetrics(rawOutput, label, snapshotWindow) {
+	requireExactKeys(rawOutput, ["kind", "measurement_window", "valid_issue_ids", "commits"], label);
+	if (rawOutput.kind !== "change-traceability-v1") {
+		fail(`${label}.kind must be change-traceability-v1`);
+	}
+
+	const { startInclusive, endExclusive } = requireMatchingMeasurementWindow(
+		rawOutput.measurement_window,
+		`${label}.measurement_window`,
+		snapshotWindow,
+	);
+
+	if (!Array.isArray(rawOutput.valid_issue_ids)) {
+		fail(`${label}.valid_issue_ids must be an array`);
+	}
+	const validIssueIds = new Set();
+	for (const [issueIndex, issueId] of rawOutput.valid_issue_ids.entries()) {
+		if (!OPAQUE_ISSUE_ID.test(issueId)) {
+			fail(`${label}.valid_issue_ids[${issueIndex}] must be an opaque issue identity`);
+		}
+		if (validIssueIds.has(issueId)) {
+			fail(`${label}.valid_issue_ids contains duplicate issue identity ${issueId}`);
+		}
+		validIssueIds.add(issueId);
+	}
+
+	if (!Array.isArray(rawOutput.commits)) fail(`${label}.commits must be an array`);
+	const commitIds = new Set();
+	const commits = rawOutput.commits.map((commit, commitIndex) => {
+		const commitLabel = `${label}.commits[${commitIndex}]`;
+		requireExactKeys(
+			commit,
+			["commit_id", "committed_at", "classification", "issue_references"],
+			commitLabel,
+		);
+		const commitId = requireString(commit.commit_id, `${commitLabel}.commit_id`);
+		if (!OPAQUE_COMMIT_ID.test(commitId)) {
+			fail(`${commitLabel}.commit_id must be an opaque commit identity`);
+		}
+		if (commitIds.has(commitId)) fail(`${label} contains duplicate commit identity ${commitId}`);
+		commitIds.add(commitId);
+
+		const committedAt = requireIsoTimestamp(commit.committed_at, `${commitLabel}.committed_at`);
+		if (!new Set(["scheduled-maintenance", "non-maintenance"]).has(commit.classification)) {
+			fail(`${commitLabel}.classification must be scheduled-maintenance or non-maintenance`);
+		}
+		if (!Array.isArray(commit.issue_references)) {
+			fail(`${commitLabel}.issue_references must be an array`);
+		}
+		const issueReferences = new Set();
+		for (const [referenceIndex, issueId] of commit.issue_references.entries()) {
+			if (!OPAQUE_ISSUE_ID.test(issueId)) {
+				fail(`${commitLabel}.issue_references[${referenceIndex}] must be an opaque issue identity`);
+			}
+			if (issueReferences.has(issueId)) {
+				fail(`${commitLabel}.issue_references contains duplicate issue identity ${issueId}`);
+			}
+			issueReferences.add(issueId);
+		}
+
+		return { committedAt, classification: commit.classification, issueReferences };
+	});
+
+	const trunkCommits = commits.filter(
+		(commit) => commit.committedAt >= startInclusive && commit.committedAt < endExclusive,
+	);
+	if (trunkCommits.length === 0) fail(`${label} in-window trunk commit set cannot be empty`);
+	const scheduledMaintenanceCommits = trunkCommits.filter(
+		(commit) => commit.classification === "scheduled-maintenance",
+	);
+	const nonMaintenanceCommits = trunkCommits.filter(
+		(commit) => commit.classification === "non-maintenance",
+	);
+	if (nonMaintenanceCommits.length === 0) {
+		fail(`${label} non-maintenance denominator cannot be empty`);
+	}
+	const coveredCommits = nonMaintenanceCommits.filter((commit) =>
+		[...commit.issueReferences].some((issueId) => validIssueIds.has(issueId)),
+	);
+	const representedIssues = new Set(
+		coveredCommits.flatMap((commit) =>
+			[...commit.issueReferences].filter((issueId) => validIssueIds.has(issueId)),
+		),
+	);
+
+	return {
+		"change-traceability.trunk-commits": trunkCommits.length,
+		"change-traceability.scheduled-maintenance-commits": scheduledMaintenanceCommits.length,
+		"change-traceability.issue-reference-coverage":
+			Math.round((coveredCommits.length / nonMaintenanceCommits.length) * 1000) / 10,
+		"change-traceability.distinct-issues": representedIssues.size,
+	};
+}
+
 function metricValuesFromReceiptOutput(rawOutput, label, snapshotWindow) {
 	requireRecord(rawOutput, label);
 	if (Object.hasOwn(rawOutput, "kind")) {
 		if (rawOutput.kind === "issue-flow-v1") {
 			return calculateIssueFlowMetrics(rawOutput, label, snapshotWindow);
 		}
+		if (rawOutput.kind === "change-traceability-v1") {
+			return calculateChangeTraceabilityMetrics(rawOutput, label, snapshotWindow);
+		}
 		fail(`${label}.kind is not supported`);
 	}
-	return validateMetricValueMap(rawOutput, label);
+	const metricValues = validateMetricValueMap(rawOutput, label);
+	if (Object.keys(metricValues).some((metricId) => metricId.startsWith("change-traceability."))) {
+		fail(`${label} change-traceability receipts must use controlled change evidence`);
+	}
+	return metricValues;
 }
 
 function validatePrivateReceipt(privateReceipt, receiptId, label, snapshotWindow) {

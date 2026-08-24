@@ -52,7 +52,7 @@ test("a controlled 90-day issue-flow cohort projects deterministically without c
 	assert.deepEqual(firstProjection, secondProjection);
 	assert.equal(
 		createHash("sha256").update(firstProjection).digest("hex"),
-		"6a7c7530ddfe7e1769896faf78e87d613b70104e8a0d62ea37994fa92d2c81ff",
+		"5059dd115a7c032361f2ec1a6fb9157d4031884d8d807e5b1d6dea90d1ef53f7",
 	);
 
 	const publicSnapshot = JSON.parse(firstProjection.toString("utf8"));
@@ -133,6 +133,48 @@ test("a controlled 90-day issue-flow cohort projects deterministically without c
 		"window_start",
 		"window_end",
 		"2026-05-26T12:00:00Z",
+	]) {
+		assert.equal(publicText.includes(privateMarker), false);
+	}
+});
+
+test("controlled change evidence projects the complete traceability group without presenting commit volume as throughput", () => {
+	const publicBytes = projectFixture();
+	const publicSnapshot = JSON.parse(publicBytes.toString("utf8"));
+	const changeTraceability = publicSnapshot.groups.find(
+		(group) => group.id === "change-traceability",
+	);
+
+	assert.deepEqual(
+		changeTraceability.metrics.map((metric) => metric.value),
+		[7, 2, 80, 3],
+	);
+	for (const metric of changeTraceability.metrics) {
+		for (const field of [
+			"id",
+			"unit",
+			"numerator",
+			"denominator",
+			"inclusions",
+			"exclusions",
+			"method_summary",
+			"source_class",
+		]) {
+			assert.equal(typeof metric[field], "string", `${metric.id}.${field}`);
+			assert.notEqual(metric[field].length, 0, `${metric.id}.${field}`);
+		}
+	}
+
+	const publicText = publicBytes.toString("utf8");
+	for (const privateMarker of [
+		"change-traceability-v1",
+		'"commit_id"',
+		'"committed_at"',
+		'"classification"',
+		'"issue_references"',
+		'"valid_issue_ids"',
+		"cmt_00000000000000000000000000000001",
+		"iss_00000000000000000000000000000001",
 	]) {
 		assert.equal(publicText.includes(privateMarker), false);
 	}
