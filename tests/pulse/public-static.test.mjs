@@ -21,17 +21,41 @@ function occurrences(haystack, needle) {
 	return haystack.split(needle).length - 1;
 }
 
+function runProjectionValidation(projectionPath) {
+	return spawnSync(
+		process.execPath,
+		[
+			path.join(repositoryRoot, "scripts", "pulse", "validate_public_projection.mjs"),
+			projectionPath,
+		],
+		{ cwd: repositoryRoot, encoding: "utf8" },
+	);
+}
+
 test("the approved controlled projection is complete in static HTML without client JavaScript", () => {
 	const build = runProductionBuild();
 	assert.equal(build.status, 0, `${build.stdout}\n${build.stderr}`);
 
 	const html = fs.readFileSync(pulseHtmlPath, "utf8");
+	const projection = JSON.parse(
+		fs.readFileSync(
+			path.join(repositoryRoot, "src", "data", "pulse", "public-snapshot.json"),
+			"utf8",
+		),
+	);
 
 	assert.equal(occurrences(html, "data-pulse-proof-group"), 3);
 	assert.equal(occurrences(html, "data-pulse-metric"), 9);
 	assert.equal(occurrences(html, "data-pulse-definition"), 9);
 	assert.equal(occurrences(html, "data-pulse-method"), 9);
 	assert.equal(occurrences(html, "data-pulse-inventory-item"), 4);
+	for (const group of projection.groups) {
+		const approvedPurpose = group.metrics.map((metric) => metric.definition).join(" ");
+		assert.ok(
+			html.includes(approvedPurpose),
+			`${group.id} explanation is not derived from approval-bound projection definitions`,
+		);
+	}
 
 	for (const requiredText of [
 		"Controlled example projection - not production evidence.",
@@ -82,14 +106,7 @@ test("an invalid public projection fails the release validator wired before Astr
 		invalidProjection.groups.pop();
 		fs.writeFileSync(invalidPath, `${JSON.stringify(invalidProjection, null, "\t")}\n`);
 
-		const validation = spawnSync(
-			process.execPath,
-			[
-				path.join(repositoryRoot, "scripts", "pulse", "validate_public_projection.mjs"),
-				invalidPath,
-			],
-			{ cwd: repositoryRoot, encoding: "utf8" },
-		);
+		const validation = runProjectionValidation(invalidPath);
 		assert.notEqual(
 			validation.status,
 			0,
@@ -111,6 +128,35 @@ test("an invalid public projection fails the release validator wired before Astr
 			validatorIndex < astroIndex,
 			"the public projection validator must run before Astro in the production build",
 		);
+	} finally {
+		fs.rmSync(workspace, { force: true, recursive: true });
+	}
+});
+
+test("the release validator rejects the projector's private source markers", () => {
+	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-public-privacy-"));
+	try {
+		const sourcePath = path.join(repositoryRoot, "src", "data", "pulse", "public-snapshot.json");
+		const sourceProjection = JSON.parse(fs.readFileSync(sourcePath, "utf8"));
+		const privateMarkers = [
+			"Session portfolio#174 supplied this value.",
+			"Session 019cf111-7abc-7def-8abc-0123456789ab supplied this value.",
+			"See https://github.com/mechanistic-org/internal-ops/issues/5.",
+			"customer: Acme",
+			"Contains confidential-work attribution.",
+			"A person created the record on 2026-08-24.",
+		];
+
+		for (const [index, marker] of privateMarkers.entries()) {
+			const invalidProjection = structuredClone(sourceProjection);
+			invalidProjection.public_wording.summary = marker;
+			const invalidPath = path.join(workspace, `private-${index}.json`);
+			fs.writeFileSync(invalidPath, `${JSON.stringify(invalidProjection, null, "\t")}\n`);
+
+			const validation = runProjectionValidation(invalidPath);
+			assert.notEqual(validation.status, 0, `release validator accepted: ${marker}`);
+			assert.match(`${validation.stdout}\n${validation.stderr}`, /\[public-projection\]/u);
+		}
 	} finally {
 		fs.rmSync(workspace, { force: true, recursive: true });
 	}

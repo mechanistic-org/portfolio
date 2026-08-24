@@ -2,6 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
 
+import { assertPublicProjectionPrivacy } from "./public_projection_privacy.mjs";
+
 const REQUIRED_GROUPS = [
 	[
 		"issue-flow",
@@ -49,33 +51,6 @@ const METRIC_KEYS = [
 	"source_class",
 	"unit",
 	"value",
-];
-const PRIVATE_KEYS = new Set([
-	"command",
-	"exact_command",
-	"raw_output",
-	"private_source_identity",
-	"local_path",
-	"person",
-	"person_id",
-	"customer",
-	"customer_id",
-	"transcript",
-	"prompt",
-	"session_id",
-	"private_repository",
-	"issue_id",
-	"confidential",
-]);
-const PRIVATE_TEXT = [
-	/\b[a-zA-Z]:[\\/]/u,
-	/(?:^|\s)\\\\/u,
-	/\bssn_[a-f0-9]{32}\b/iu,
-	/\brec_[a-f0-9]{32}\b/iu,
-	/\btranscripts?\b/iu,
-	/\bprompts?\b/iu,
-	/\bprivate\s+(?:issue|ticket)\b/iu,
-	/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/iu,
 ];
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/u;
 const RECEIPT_ID = /^rct_[a-f0-9]{32}$/u;
@@ -125,23 +100,6 @@ function validateWindow(window, label) {
 
 function windowsMatch(left, right) {
 	return left.days === right.days && left.start === right.start && left.end === right.end;
-}
-
-function assertPrivacySafe(value, label = "public projection") {
-	if (Array.isArray(value)) {
-		value.forEach((child, index) => assertPrivacySafe(child, `${label}[${index}]`));
-		return;
-	}
-	if (isRecord(value)) {
-		for (const [key, child] of Object.entries(value)) {
-			if (PRIVATE_KEYS.has(key)) fail(`${label} contains private field ${key}`);
-			assertPrivacySafe(child, `${label}.${key}`);
-		}
-		return;
-	}
-	if (typeof value === "string" && PRIVATE_TEXT.some((pattern) => pattern.test(value))) {
-		fail(`${label} contains private source material`);
-	}
 }
 
 export function validatePublicProjection(projection) {
@@ -213,7 +171,7 @@ export function validatePublicProjection(projection) {
 		}
 	}
 
-	assertPrivacySafe(projection);
+	assertPublicProjectionPrivacy(projection, fail);
 	return projection;
 }
 

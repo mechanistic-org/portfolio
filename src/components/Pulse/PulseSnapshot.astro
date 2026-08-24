@@ -41,15 +41,6 @@ interface Props {
 
 const { snapshot, controlledExample = false } = Astro.props;
 
-const groupPurpose: Record<string, string> = {
-	"issue-flow":
-		"Shows whether a bounded cohort is moving through the issue system instead of hiding behind lifetime totals.",
-	"change-traceability":
-		"Shows how trunk changes map to governed work after scheduled maintenance is separated from the denominator.",
-	"durable-record-coverage":
-		"Shows whether decisions and findings survive their sessions without multiple records inflating the result.",
-};
-
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
 	day: "numeric",
 	month: "long",
@@ -123,7 +114,9 @@ function formatValue(metric: PulseMetric) {
 					<header>
 						<p class="pulse-group-index">PROOF {String(groupIndex + 1).padStart(2, "0")}</p>
 						<h3>{group.label}</h3>
-						<p>{groupPurpose[group.id]}</p>
+						<p data-pulse-group-purpose>
+							{group.metrics.map((metric) => metric.definition).join(" ")}
+						</p>
 					</header>
 
 					<div class="pulse-metrics">
