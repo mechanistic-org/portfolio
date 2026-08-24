@@ -276,11 +276,19 @@ function validateDefinitions(definitions) {
 	return metricIds;
 }
 
-function inclusiveWindowDays(start, end) {
-	const startDate = Date.parse(`${start}T00:00:00Z`);
-	const endDate = Date.parse(`${end}T00:00:00Z`);
-	if (!Number.isFinite(startDate) || !Number.isFinite(endDate)) return Number.NaN;
-	return (endDate - startDate) / 86_400_000 + 1;
+function requireIsoCalendarDate(value, label) {
+	if (typeof value !== "string" || !ISO_DATE.test(value)) {
+		fail(`${label} must be YYYY-MM-DD`);
+	}
+	const timestamp = Date.parse(`${value}T00:00:00Z`);
+	if (!Number.isFinite(timestamp) || new Date(timestamp).toISOString().slice(0, 10) !== value) {
+		fail(`${label} must be a real ISO calendar date`);
+	}
+	return timestamp;
+}
+
+function inclusiveWindowDays(startInclusive, endInclusive) {
+	return (endInclusive - startInclusive) / 86_400_000 + 1;
 }
 
 function validateSnapshot(snapshot, metricIds) {
@@ -300,7 +308,7 @@ function validateSnapshot(snapshot, metricIds) {
 	);
 	if (snapshot.schema_version !== 1) fail("snapshot.schema_version must be 1");
 	requireString(snapshot.snapshot_id, "snapshot.snapshot_id");
-	if (!ISO_DATE.test(snapshot.as_of)) fail("snapshot.as_of must be YYYY-MM-DD");
+	requireIsoCalendarDate(snapshot.as_of, "snapshot.as_of");
 	if (snapshot.refresh_state !== "independently-reproduced") {
 		fail("snapshot.refresh_state must be independently-reproduced");
 	}
@@ -314,13 +322,12 @@ function validateSnapshot(snapshot, metricIds) {
 		"snapshot.measurement_window",
 	);
 	const { start, end, days } = snapshot.measurement_window;
-	if (!ISO_DATE.test(start) || !ISO_DATE.test(end)) {
-		fail("measurement window dates must be YYYY-MM-DD");
-	}
+	const startInclusive = requireIsoCalendarDate(start, "snapshot.measurement_window.start");
+	const endInclusive = requireIsoCalendarDate(end, "snapshot.measurement_window.end");
 	if (!Number.isInteger(days) || days < 30) {
 		fail("public operational windows shorter than 30 days are forbidden");
 	}
-	if (days !== 90 || inclusiveWindowDays(start, end) !== 90) {
+	if (days !== 90 || inclusiveWindowDays(startInclusive, endInclusive) !== 90) {
 		fail("all headline groups must share one inclusive 90-day window");
 	}
 	if (snapshot.as_of !== end) {
@@ -388,12 +395,14 @@ function requireNonnegativeInteger(value, label) {
 function requireMatchingMeasurementWindow(measurementWindow, label, snapshotWindow) {
 	requireExactKeys(measurementWindow, ["start", "end"], label);
 	const { start, end } = measurementWindow;
+	const startInclusive = requireIsoCalendarDate(start, `${label}.start`);
+	const endInclusive = requireIsoCalendarDate(end, `${label}.end`);
 	if (start !== snapshotWindow.start || end !== snapshotWindow.end) {
 		fail(`${label} must match the snapshot measurement window`);
 	}
 	return {
-		startInclusive: Date.parse(`${start}T00:00:00Z`),
-		endExclusive: Date.parse(`${end}T00:00:00Z`) + 86_400_000,
+		startInclusive,
+		endExclusive: endInclusive + 86_400_000,
 	};
 }
 

@@ -460,6 +460,17 @@ for (const failureCase of [
 		},
 	},
 	{
+		name: "an impossible normalized measurement date",
+		error: /snapshot\.measurement_window\.start must be a real ISO calendar date/u,
+		mutate(fixtureRoot) {
+			mutateFixtureJson(fixtureRoot, "canon/snapshot.json", (snapshot) => {
+				snapshot.measurement_window.start = "2026-02-30";
+				snapshot.measurement_window.end = "2026-05-30";
+				snapshot.as_of = "2026-05-30";
+			});
+		},
+	},
+	{
 		name: "a missing headline group",
 		error: /headline groups must be exactly/u,
 		mutate(fixtureRoot) {
