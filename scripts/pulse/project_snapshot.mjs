@@ -385,6 +385,18 @@ function requireNonnegativeInteger(value, label) {
 	return value;
 }
 
+function requireMatchingMeasurementWindow(measurementWindow, label, snapshotWindow) {
+	requireExactKeys(measurementWindow, ["start", "end"], label);
+	const { start, end } = measurementWindow;
+	if (start !== snapshotWindow.start || end !== snapshotWindow.end) {
+		fail(`${label} must match the snapshot measurement window`);
+	}
+	return {
+		startInclusive: Date.parse(`${start}T00:00:00Z`),
+		endExclusive: Date.parse(`${end}T00:00:00Z`) + 86_400_000,
+	};
+}
+
 function median(values) {
 	const ordered = [...values].sort((left, right) => left - right);
 	const midpoint = Math.floor(ordered.length / 2);
@@ -396,12 +408,11 @@ function median(values) {
 function calculateIssueFlowMetrics(rawOutput, label, snapshotWindow) {
 	requireExactKeys(rawOutput, ["kind", "measurement_window", "issues", "open_backlog"], label);
 	if (rawOutput.kind !== "issue-flow-v1") fail(`${label}.kind must be issue-flow-v1`);
-
-	requireExactKeys(rawOutput.measurement_window, ["start", "end"], `${label}.measurement_window`);
-	const { start, end } = rawOutput.measurement_window;
-	if (start !== snapshotWindow.start || end !== snapshotWindow.end) {
-		fail(`${label}.measurement_window must match the snapshot measurement window`);
-	}
+	const { startInclusive, endExclusive } = requireMatchingMeasurementWindow(
+		rawOutput.measurement_window,
+		`${label}.measurement_window`,
+		snapshotWindow,
+	);
 
 	if (!Array.isArray(rawOutput.issues)) fail(`${label}.issues must be an array`);
 	const issueIds = new Set();
@@ -423,14 +434,12 @@ function calculateIssueFlowMetrics(rawOutput, label, snapshotWindow) {
 		return { createdAt, closedAt };
 	});
 
-	const startBoundary = Date.parse(`${start}T00:00:00Z`);
-	const endBoundary = Date.parse(`${end}T00:00:00Z`) + 86_400_000;
 	const createdCohort = issues.filter(
-		(issue) => issue.createdAt >= startBoundary && issue.createdAt < endBoundary,
+		(issue) => issue.createdAt >= startInclusive && issue.createdAt < endExclusive,
 	);
 	if (createdCohort.length === 0) fail(`${label} created cohort cannot be empty`);
 	const closedCohort = createdCohort.filter(
-		(issue) => issue.closedAt !== null && issue.closedAt < endBoundary,
+		(issue) => issue.closedAt !== null && issue.closedAt < endExclusive,
 	);
 	if (closedCohort.length === 0) fail(`${label} closed cohort cannot be empty`);
 
@@ -462,11 +471,11 @@ function calculateChangeTraceabilityMetrics(rawOutput, label, snapshotWindow) {
 		fail(`${label}.kind must be change-traceability-v1`);
 	}
 
-	requireExactKeys(rawOutput.measurement_window, ["start", "end"], `${label}.measurement_window`);
-	const { start, end } = rawOutput.measurement_window;
-	if (start !== snapshotWindow.start || end !== snapshotWindow.end) {
-		fail(`${label}.measurement_window must match the snapshot measurement window`);
-	}
+	const { startInclusive, endExclusive } = requireMatchingMeasurementWindow(
+		rawOutput.measurement_window,
+		`${label}.measurement_window`,
+		snapshotWindow,
+	);
 
 	if (!Array.isArray(rawOutput.valid_issue_ids)) {
 		fail(`${label}.valid_issue_ids must be an array`);
@@ -519,10 +528,8 @@ function calculateChangeTraceabilityMetrics(rawOutput, label, snapshotWindow) {
 		return { committedAt, classification: commit.classification, issueReferences };
 	});
 
-	const startBoundary = Date.parse(`${start}T00:00:00Z`);
-	const endBoundary = Date.parse(`${end}T00:00:00Z`) + 86_400_000;
 	const trunkCommits = commits.filter(
-		(commit) => commit.committedAt >= startBoundary && commit.committedAt < endBoundary,
+		(commit) => commit.committedAt >= startInclusive && commit.committedAt < endExclusive,
 	);
 	if (trunkCommits.length === 0) fail(`${label} in-window trunk commit set cannot be empty`);
 	const scheduledMaintenanceCommits = trunkCommits.filter(
