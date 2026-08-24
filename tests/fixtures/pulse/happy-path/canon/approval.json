@@ -2,6 +2,13 @@
 	"status": "approved",
 	"approved_by": "eriknorris",
 	"approved_on": "2026-08-24",
+	"privacy_review": {
+		"status": "approved",
+		"reviewed_by": "eriknorris",
+		"reviewed_on": "2026-08-24",
+		"public_narrative_sha256": "ded20a0731173251806f865329f6a8a41f1220e20f0878a99a928b9f498148d9",
+		"approved_public_source_urls": []
+	},
 	"binding": {
 		"definitions_sha256": "642c51dae5f51e95ea2d623be2e0cf7dd9be388f0fc1deb93725fa1d39d069de",
 		"values_sha256": "f0b738589a77bcc143e23a803c08ba4b0522c544cf56b33d41bf11a72afe71ef",

@@ -67,19 +67,11 @@ const PRIVATE_PUBLIC_TEXT_PATTERNS = [
 	{ pattern: /^[a-zA-Z]:[\\/]/u, description: "a local drive path" },
 	{ pattern: /^\\\\/u, description: "a UNC path" },
 	{
-		pattern: /\b(?:github\.com|gitlab\.com)\/[\w.-]+\/[\w.-]+\b/iu,
-		description: "a repository identity",
-	},
-	{
-		pattern:
-			/\b(?:private[- ]?(?:issue|repo|repository)|customer[- ]?attribution|client[- ]?attribution|confidential[- ]?work|transcript|prompt|session[_ -]?id)\b/iu,
-		description: "a private source category",
-	},
-	{
 		pattern: /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/iu,
 		description: "an email identity",
 	},
 ];
+const PUBLIC_URL = /\bhttps:\/\/[^\s<>"']+/giu;
 
 function fail(message) {
 	throw new Error(`[snapshot-contract] ${message}`);
@@ -448,6 +440,29 @@ function assertPrivacySafe(value, label = "public projection") {
 	}
 }
 
+function collectPublicNarrative(definitions, snapshot) {
+	return [
+		snapshot.public_wording.title,
+		snapshot.public_wording.summary,
+		...definitions.groups.flatMap((group) => [
+			group.label,
+			...group.metrics.flatMap((metric) =>
+				REQUIRED_DEFINITION_FIELDS.map((field) => metric[field]),
+			),
+		]),
+	];
+}
+
+function collectPublicSourceUrls(narrative) {
+	return [
+		...new Set(
+			narrative.flatMap((text) =>
+				[...(text.match(PUBLIC_URL) ?? [])].map((url) => url.replace(/[),.;!?]+$/u, "")),
+			),
+		),
+	].sort();
+}
+
 function buildPublicProjection(definitions, snapshot, verifiedReceipts) {
 	const publicProjection = {
 		schema_version: 1,
@@ -479,13 +494,69 @@ function buildPublicProjection(definitions, snapshot, verifiedReceipts) {
 }
 
 function validateApproval(approval, definitions, snapshot, publicBytes) {
-	requireExactKeys(approval, ["status", "approved_by", "approved_on", "binding"], "approval");
+	requireExactKeys(
+		approval,
+		["status", "approved_by", "approved_on", "privacy_review", "binding"],
+		"approval",
+	);
 	if (approval.status !== "approved") fail("approval.status must be approved");
 	if (approval.approved_by !== "eriknorris") {
 		fail("approval.approved_by must be eriknorris");
 	}
 	if (!ISO_DATE.test(approval.approved_on)) {
 		fail("approval.approved_on must be YYYY-MM-DD");
+	}
+
+	requireExactKeys(
+		approval.privacy_review,
+		[
+			"status",
+			"reviewed_by",
+			"reviewed_on",
+			"public_narrative_sha256",
+			"approved_public_source_urls",
+		],
+		"approval.privacy_review",
+	);
+	if (approval.privacy_review.status !== "approved") {
+		fail("approval.privacy_review.status must be approved");
+	}
+	if (approval.privacy_review.reviewed_by !== "eriknorris") {
+		fail("approval.privacy_review.reviewed_by must be eriknorris");
+	}
+	if (!ISO_DATE.test(approval.privacy_review.reviewed_on)) {
+		fail("approval.privacy_review.reviewed_on must be YYYY-MM-DD");
+	}
+	if (!SHA256.test(approval.privacy_review.public_narrative_sha256)) {
+		fail("approval.privacy_review.public_narrative_sha256 must be a full SHA-256");
+	}
+	if (!Array.isArray(approval.privacy_review.approved_public_source_urls)) {
+		fail("approval.privacy_review.approved_public_source_urls must be an array");
+	}
+
+	const publicNarrative = collectPublicNarrative(definitions, snapshot);
+	const expectedNarrativeHash = canonicalHash(publicNarrative);
+	if (approval.privacy_review.public_narrative_sha256 !== expectedNarrativeHash) {
+		fail(
+			`privacy review does not match the exact public narrative: expected ${expectedNarrativeHash}, received ${approval.privacy_review.public_narrative_sha256}`,
+		);
+	}
+	const approvedPublicSourceUrls = approval.privacy_review.approved_public_source_urls;
+	for (const [urlIndex, url] of approvedPublicSourceUrls.entries()) {
+		requireString(url, `approval.privacy_review.approved_public_source_urls[${urlIndex}]`);
+		try {
+			if (new URL(url).protocol !== "https:")
+				fail(`approved public source URL must use HTTPS: ${url}`);
+		} catch (error) {
+			if (error.message.startsWith("[snapshot-contract]")) throw error;
+			fail(`approved public source URL is invalid: ${url}`);
+		}
+	}
+	const expectedPublicSourceUrls = collectPublicSourceUrls(publicNarrative);
+	if (JSON.stringify(approvedPublicSourceUrls) !== JSON.stringify(expectedPublicSourceUrls)) {
+		fail(
+			`approved public source URLs must exactly match the public narrative: expected ${expectedPublicSourceUrls.join(", ") || "none"}`,
+		);
 	}
 
 	requireExactKeys(
