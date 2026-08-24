@@ -32,6 +32,31 @@ function runProjectionValidation(projectionPath) {
 	);
 }
 
+test("the Pulse component consumes the semantic design tokens without local palette copies", () => {
+	const component = fs.readFileSync(
+		path.join(repositoryRoot, "src", "components", "Pulse", "PulseSnapshot.astro"),
+		"utf8",
+	);
+
+	for (const token of [
+		"var(--background)",
+		"var(--foreground)",
+		"var(--card)",
+		"var(--border)",
+		"var(--primary)",
+		"var(--info)",
+		"var(--warning)",
+		"var(--muted-foreground)",
+	]) {
+		assert.ok(component.includes(token), `Pulse component does not consume ${token}`);
+	}
+	assert.equal(
+		/#[0-9a-f]{3,8}\b/iu.test(component),
+		false,
+		"Pulse component copies palette hex values",
+	);
+});
+
 test("the approved controlled projection is complete in static HTML without client JavaScript", () => {
 	const build = runProductionBuild();
 	assert.equal(build.status, 0, `${build.stdout}\n${build.stderr}`);
@@ -157,6 +182,26 @@ test("the release validator rejects the projector's private source markers", () 
 			assert.notEqual(validation.status, 0, `release validator accepted: ${marker}`);
 			assert.match(`${validation.stdout}\n${validation.stderr}`, /\[public-projection\]/u);
 		}
+	} finally {
+		fs.rmSync(workspace, { force: true, recursive: true });
+	}
+});
+
+test("the release validator rejects extra fields inside a metric measurement window", () => {
+	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-public-window-"));
+	try {
+		const sourcePath = path.join(repositoryRoot, "src", "data", "pulse", "public-snapshot.json");
+		const invalidProjection = JSON.parse(fs.readFileSync(sourcePath, "utf8"));
+		invalidProjection.groups[0].metrics[0].measurement_window.unapproved = true;
+		const invalidPath = path.join(workspace, "extra-window-field.json");
+		fs.writeFileSync(invalidPath, `${JSON.stringify(invalidProjection, null, "\t")}\n`);
+
+		const validation = runProjectionValidation(invalidPath);
+		assert.notEqual(validation.status, 0, "release validator accepted an extra window field");
+		assert.match(
+			`${validation.stdout}\n${validation.stderr}`,
+			/measurement_window fields must exactly match the public schema/u,
+		);
 	} finally {
 		fs.rmSync(workspace, { force: true, recursive: true });
 	}

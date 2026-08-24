@@ -156,6 +156,7 @@ export function validatePublicProjection(projection) {
 			}
 			if (!Number.isFinite(metric.value)) fail(`${metric.id}.value must be a finite number`);
 			if (metric.as_of !== projection.as_of) fail(`${metric.id}.as_of must match snapshot as_of`);
+			validateWindow(metric.measurement_window, `${metric.id}.measurement_window`);
 			if (!windowsMatch(metric.measurement_window, projection.measurement_window)) {
 				fail(`${metric.id}.measurement_window must match the snapshot window`);
 			}

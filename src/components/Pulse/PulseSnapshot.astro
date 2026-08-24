@@ -166,18 +166,13 @@ function formatValue(metric: PulseMetric) {
 
 <style>
 	.pulse-snapshot {
-		--pulse-border: rgba(255, 255, 255, 0.1);
-		--pulse-info: #00c2ff;
-		--pulse-muted: #9ca3af;
-		--pulse-primary: #2e5cff;
-		--pulse-surface: #1f2937;
-		background: #030303;
-		color: #e5e7eb;
+		background: var(--background);
+		color: var(--foreground);
 	}
 
 	.pulse-control-note {
-		border: 1px solid #f59e0b;
-		color: #f59e0b;
+		border: 1px solid var(--warning);
+		color: var(--warning);
 		font-family: var(--font-mono);
 		font-size: 0.75rem;
 		font-weight: 700;
@@ -188,14 +183,14 @@ function formatValue(metric: PulseMetric) {
 	}
 
 	.pulse-heading {
-		border-bottom: 1px solid var(--pulse-border);
+		border-bottom: 1px solid var(--border);
 		padding-bottom: 1.5rem;
 	}
 
 	.pulse-heading h2,
 	.pulse-group h3,
 	.pulse-inventory h3 {
-		color: #e5e7eb;
+		color: var(--foreground);
 		font-family: var(--font-header);
 		line-height: 1.1;
 		margin: 0;
@@ -208,7 +203,7 @@ function formatValue(metric: PulseMetric) {
 	.pulse-heading > p:last-child,
 	.pulse-group header > p:last-child,
 	.pulse-inventory > p {
-		color: var(--pulse-muted);
+		color: var(--muted-foreground);
 		font-size: 0.85rem;
 		line-height: 1.6;
 		margin: 0.75rem 0 0;
@@ -216,7 +211,7 @@ function formatValue(metric: PulseMetric) {
 
 	.pulse-kicker,
 	.pulse-group-index {
-		color: var(--pulse-info);
+		color: var(--info);
 		font-family: var(--font-mono);
 		font-size: 0.68rem;
 		font-weight: 700;
@@ -232,9 +227,9 @@ function formatValue(metric: PulseMetric) {
 	}
 
 	.pulse-boundary div {
-		background: var(--pulse-surface);
-		border-bottom: 1px solid var(--pulse-border);
-		border-right: 1px solid var(--pulse-border);
+		background: var(--card);
+		border-bottom: 1px solid var(--border);
+		border-right: 1px solid var(--border);
 		padding: 1rem;
 	}
 
@@ -242,7 +237,7 @@ function formatValue(metric: PulseMetric) {
 	.pulse-reading > p:first-child,
 	.pulse-metric span,
 	.pulse-source {
-		color: var(--pulse-muted);
+		color: var(--muted-foreground);
 		font-family: var(--font-mono);
 		font-size: 0.64rem;
 		font-weight: 700;
@@ -251,7 +246,7 @@ function formatValue(metric: PulseMetric) {
 	}
 
 	.pulse-boundary dd {
-		color: var(--pulse-primary);
+		color: var(--primary);
 		font-family: var(--font-mono);
 		font-size: 0.78rem;
 		font-weight: 700;
@@ -266,12 +261,12 @@ function formatValue(metric: PulseMetric) {
 	}
 
 	.pulse-group {
-		border: 1px solid var(--pulse-border);
-		background: var(--pulse-surface);
+		border: 1px solid var(--border);
+		background: var(--card);
 	}
 
 	.pulse-group > header {
-		border-bottom: 1px solid var(--pulse-border);
+		border-bottom: 1px solid var(--border);
 		padding: 1.25rem;
 	}
 
@@ -285,17 +280,17 @@ function formatValue(metric: PulseMetric) {
 	}
 
 	.pulse-metric {
-		border-bottom: 1px solid var(--pulse-border);
-		border-right: 1px solid var(--pulse-border);
+		border-bottom: 1px solid var(--border);
+		border-right: 1px solid var(--border);
 		padding: 1.1rem;
 	}
 
 	.pulse-metric:hover {
-		border-color: var(--pulse-info);
+		border-color: var(--info);
 	}
 
 	.pulse-reading {
-		border-bottom: 1px solid var(--pulse-border);
+		border-bottom: 1px solid var(--border);
 		margin-bottom: 1rem;
 		padding-bottom: 0.85rem;
 	}
@@ -312,14 +307,14 @@ function formatValue(metric: PulseMetric) {
 	}
 
 	.pulse-reading strong {
-		color: var(--pulse-primary);
+		color: var(--primary);
 		font-family: var(--font-mono);
 		font-size: 1.75rem;
 		line-height: 1;
 	}
 
 	.pulse-metric > p:not(.pulse-source) {
-		color: #c5c5c5;
+		color: var(--foreground);
 		font-size: 0.72rem;
 		line-height: 1.55;
 		margin: 0.7rem 0 0;
@@ -331,13 +326,13 @@ function formatValue(metric: PulseMetric) {
 	}
 
 	.pulse-source {
-		border-top: 1px solid var(--pulse-border);
+		border-top: 1px solid var(--border);
 		margin: 0.85rem 0 0;
 		padding-top: 0.65rem;
 	}
 
 	.pulse-inventory {
-		border: 1px solid var(--pulse-border);
+		border: 1px solid var(--border);
 		margin-top: 2.5rem;
 		padding: 1.25rem;
 	}
@@ -352,8 +347,8 @@ function formatValue(metric: PulseMetric) {
 	}
 
 	.pulse-inventory li {
-		border: 1px solid var(--pulse-border);
-		color: var(--pulse-muted);
+		border: 1px solid var(--border);
+		color: var(--muted-foreground);
 		font-size: 0.7rem;
 		padding: 0.8rem;
 		text-transform: uppercase;
