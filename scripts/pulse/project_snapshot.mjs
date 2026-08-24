@@ -49,6 +49,7 @@ const REQUIRED_ARGUMENTS = [
 	"output",
 ];
 const OPAQUE_RECEIPT_ID = /^rct_[a-f0-9]{32}$/u;
+const OPAQUE_ISSUE_ID = /^iss_[a-f0-9]{32}$/u;
 const SHA256 = /^[a-f0-9]{64}$/u;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/u;
 const ISO_TIMESTAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/u;
@@ -67,6 +68,7 @@ const PRIVATE_PUBLIC_KEYS = new Set([
 	"prompt",
 	"session_id",
 	"private_repository",
+	"issue_id",
 	"confidential",
 ]);
 const PRIVATE_PUBLIC_TEXT_PATTERNS = [
@@ -361,10 +363,17 @@ function validateMetricValueMap(rawOutput, label) {
 
 function requireIsoTimestamp(value, label) {
 	requireString(value, label);
-	if (!ISO_TIMESTAMP.test(value) || !Number.isFinite(Date.parse(value))) {
+	const parsedTimestamp = Date.parse(value);
+	const normalizedInput =
+		value.endsWith("Z") && !value.includes(".") ? value.replace(/Z$/u, ".000Z") : value;
+	if (
+		!ISO_TIMESTAMP.test(value) ||
+		!Number.isFinite(parsedTimestamp) ||
+		new Date(parsedTimestamp).toISOString() !== normalizedInput
+	) {
 		fail(`${label} must be an ISO-8601 UTC timestamp`);
 	}
-	return Date.parse(value);
+	return parsedTimestamp;
 }
 
 function requireNonnegativeInteger(value, label) {
@@ -393,9 +402,16 @@ function calculateIssueFlowMetrics(rawOutput, label, snapshotWindow) {
 	}
 
 	if (!Array.isArray(rawOutput.issues)) fail(`${label}.issues must be an array`);
+	const issueIds = new Set();
 	const issues = rawOutput.issues.map((issue, index) => {
 		const issueLabel = `${label}.issues[${index}]`;
-		requireExactKeys(issue, ["created_at", "closed_at"], issueLabel);
+		requireExactKeys(issue, ["issue_id", "created_at", "closed_at"], issueLabel);
+		const issueId = requireString(issue.issue_id, `${issueLabel}.issue_id`);
+		if (!OPAQUE_ISSUE_ID.test(issueId)) {
+			fail(`${issueLabel}.issue_id must be an opaque issue identity`);
+		}
+		if (issueIds.has(issueId)) fail(`${label} contains duplicate issue identity ${issueId}`);
+		issueIds.add(issueId);
 		const createdAt = requireIsoTimestamp(issue.created_at, `${issueLabel}.created_at`);
 		let closedAt = null;
 		if (issue.closed_at !== null) {

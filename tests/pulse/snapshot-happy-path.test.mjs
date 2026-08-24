@@ -52,7 +52,7 @@ test("a controlled 90-day issue-flow cohort projects deterministically without c
 	assert.deepEqual(firstProjection, secondProjection);
 	assert.equal(
 		createHash("sha256").update(firstProjection).digest("hex"),
-		"c36d60e7a7fa183464b5303759558ba66ce2681055e5b220e89a7e1f46db9398",
+		"6a7c7530ddfe7e1769896faf78e87d613b70104e8a0d62ea37994fa92d2c81ff",
 	);
 
 	const publicSnapshot = JSON.parse(firstProjection.toString("utf8"));
@@ -125,6 +125,8 @@ test("a controlled 90-day issue-flow cohort projects deterministically without c
 		"private scoped-session coverage query",
 		"D:\\\\private\\\\receipts",
 		"issue-flow-v1",
+		"issue_id",
+		"iss_00000000000000000000000000000001",
 		"created_at",
 		"closed_at",
 		"open_backlog",
