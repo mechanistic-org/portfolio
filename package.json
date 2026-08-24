@@ -13,7 +13,7 @@
 		"audit:tier": "node scripts/audits/validate_tier_gate.mjs",
 		"audit:tier:verbose": "node scripts/audits/validate_tier_gate.mjs --verbose",
 		"audit:tier:strict": "node scripts/audits/validate_tier_gate.mjs --strict",
-		"test:snapshot": "node --test tests/pulse/snapshot-happy-path.test.mjs",
+		"test:snapshot": "node --test tests/pulse/*.test.mjs",
 		"check:hud": "node scripts/_archive/verify_deep_hud.cjs",
 		"content:modernize": "python scripts/modernize_content.py",
 		"assets:process": "python ../global_agent/scripts/process_assets.py",

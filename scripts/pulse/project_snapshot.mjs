@@ -64,8 +64,41 @@ const PRIVATE_PUBLIC_KEYS = new Set([
 	"confidential",
 ]);
 const PRIVATE_PUBLIC_TEXT_PATTERNS = [
-	{ pattern: /^[a-zA-Z]:[\\/]/u, description: "a local drive path" },
-	{ pattern: /^\\\\/u, description: "a UNC path" },
+	{ pattern: /\b[a-zA-Z]:[\\/]/u, description: "a local drive path" },
+	{ pattern: /(?:^|\s)\\\\/u, description: "a UNC path" },
+	{
+		pattern: /\b[a-z0-9_.-]+#\d+\b/iu,
+		description: "a session identifier",
+	},
+	{
+		pattern: /\btranscripts?\b/iu,
+		description: "transcript material",
+	},
+	{
+		pattern: /\bprompts?\b/iu,
+		description: "prompt material",
+	},
+	{
+		pattern: /\bprivate\s+(?:issue|ticket)\b/iu,
+		description: "private issue content",
+	},
+	{
+		pattern: /\bhttps:\/\/github\.com\/[^/\s]+\/(?:private|internal)[^/\s]*(?:\/issues\/\d+)?\b/iu,
+		description: "a private repository identity",
+	},
+	{
+		pattern: /\bcustomer(?:\s+(?:name|identity|attribution))?\s*[:=]/iu,
+		description: "customer attribution",
+	},
+	{
+		pattern: /\bconfidential(?:[-\s]+work)?\b/iu,
+		description: "a confidential-work signal",
+	},
+	{
+		pattern:
+			/\b(?:created|closed|committed|worked|logged|ran|published)\b[^.\n]{0,80}\bon\s+\d{4}-\d{2}-\d{2}\b/iu,
+		description: "person-level or daily activity",
+	},
 	{
 		pattern: /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/iu,
 		description: "an email identity",
