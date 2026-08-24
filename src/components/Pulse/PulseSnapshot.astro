@@ -1,0 +1,356 @@
+---
+interface MeasurementWindow {
+	start: string;
+	end: string;
+	days: number;
+}
+
+interface PulseMetric {
+	id: string;
+	label: string;
+	unit: string;
+	value: number;
+	definition: string;
+	method_summary: string;
+	source_class: string;
+	refresh_state: string;
+}
+
+interface PulseGroup {
+	id: string;
+	label: string;
+	metrics: PulseMetric[];
+}
+
+interface PulseSnapshot {
+	as_of: string;
+	lifecycle_state: string;
+	measurement_window: MeasurementWindow;
+	public_wording: {
+		title: string;
+		summary: string;
+	};
+	verification_state: string;
+	groups: PulseGroup[];
+}
+
+interface Props {
+	snapshot: PulseSnapshot;
+	controlledExample?: boolean;
+}
+
+const { snapshot, controlledExample = false } = Astro.props;
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+	day: "numeric",
+	month: "long",
+	timeZone: "UTC",
+	year: "numeric",
+});
+const numberFormatter = new Intl.NumberFormat("en-US", { maximumFractionDigits: 1 });
+
+function formatDate(value: string) {
+	return dateFormatter.format(new Date(`${value}T00:00:00Z`));
+}
+
+function formatState(value: string) {
+	return value.replaceAll("-", " ");
+}
+
+function formatValue(metric: PulseMetric) {
+	const value = numberFormatter.format(metric.value);
+	if (metric.unit === "percent") return `${value}%`;
+	return value;
+}
+---
+
+<section class="pulse-snapshot not-content" data-pulse-snapshot>
+	{
+		controlledExample && (
+			<p class="pulse-control-note" data-pulse-controlled-example>
+				Controlled example projection - not production evidence.
+			</p>
+		)
+	}
+
+	<header class="pulse-heading">
+		<p class="pulse-kicker">Approved static projection</p>
+		<h2>{snapshot.public_wording.title}</h2>
+		<p>{snapshot.public_wording.summary}</p>
+	</header>
+
+	<dl class="pulse-boundary" aria-label="Snapshot boundary">
+		<div>
+			<dt>Measurement window</dt>
+			<dd>
+				{formatDate(snapshot.measurement_window.start)} - {
+					formatDate(snapshot.measurement_window.end)
+				}
+				({snapshot.measurement_window.days} days)
+			</dd>
+		</div>
+		<div>
+			<dt>As of</dt>
+			<dd>{formatDate(snapshot.as_of)}</dd>
+		</div>
+		<div>
+			<dt>Refresh state</dt>
+			<dd>{formatState(snapshot.verification_state)}</dd>
+		</div>
+		<div>
+			<dt>Lifecycle state</dt>
+			<dd>{formatState(snapshot.lifecycle_state)}</dd>
+		</div>
+		<div>
+			<dt>Verification state</dt>
+			<dd>{formatState(snapshot.verification_state)}</dd>
+		</div>
+	</dl>
+
+	<div class="pulse-groups">
+		{
+			snapshot.groups.map((group, groupIndex) => (
+				<section class="pulse-group" data-pulse-proof-group={group.id}>
+					<header>
+						<p class="pulse-group-index">PROOF {String(groupIndex + 1).padStart(2, "0")}</p>
+						<h3>{group.label}</h3>
+						<p data-pulse-group-purpose>
+							{group.metrics.map((metric) => metric.definition).join(" ")}
+						</p>
+					</header>
+
+					<div class="pulse-metrics">
+						{group.metrics.map((metric) => (
+							<article class="pulse-metric" data-pulse-metric={metric.id}>
+								<div class="pulse-reading">
+									<p>{metric.label}</p>
+									<p>
+										<strong>{formatValue(metric)}</strong>
+										<span>{metric.unit}</span>
+									</p>
+								</div>
+								<p data-pulse-definition>
+									<span>Definition</span>
+									{metric.definition}
+								</p>
+								<p data-pulse-method>
+									<span>Method</span>
+									{metric.method_summary}
+								</p>
+								<p class="pulse-source">
+									{formatState(metric.source_class)} / {formatState(metric.refresh_state)}
+								</p>
+							</article>
+						))}
+					</div>
+				</section>
+			))
+		}
+	</div>
+
+	<aside class="pulse-inventory" aria-labelledby="pulse-inventory-title">
+		<p class="pulse-kicker">Supporting inventory</p>
+		<h3 id="pulse-inventory-title">System context, not headline proof</h3>
+		<p>
+			These governed surfaces make the measurement process inspectable. Their size is not a quality
+			score and is deliberately excluded from the proof groups.
+		</p>
+		<ul>
+			<li data-pulse-inventory-item>Versioned scripts</li>
+			<li data-pulse-inventory-item>Executable checks</li>
+			<li data-pulse-inventory-item>Registered skills</li>
+			<li data-pulse-inventory-item>Supervised services</li>
+		</ul>
+	</aside>
+</section>
+
+<style>
+	.pulse-snapshot {
+		background: var(--background);
+		color: var(--foreground);
+	}
+
+	.pulse-control-note {
+		border: 1px solid var(--warning);
+		color: var(--warning);
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		margin: 0 0 1.5rem;
+		padding: 0.75rem 1rem;
+		text-transform: uppercase;
+	}
+
+	.pulse-heading {
+		border-bottom: 1px solid var(--border);
+		padding-bottom: 1.5rem;
+	}
+
+	.pulse-heading h2,
+	.pulse-group h3,
+	.pulse-inventory h3 {
+		color: var(--foreground);
+		font-family: var(--font-header);
+		line-height: 1.1;
+		margin: 0;
+	}
+
+	.pulse-heading h2 {
+		font-size: clamp(1.5rem, 4vw, 2.5rem);
+	}
+
+	.pulse-heading > p:last-child,
+	.pulse-group header > p:last-child,
+	.pulse-inventory > p {
+		color: var(--muted-foreground);
+		font-size: 0.85rem;
+		line-height: 1.6;
+		margin: 0.75rem 0 0;
+	}
+
+	.pulse-kicker,
+	.pulse-group-index {
+		color: var(--info);
+		font-family: var(--font-mono);
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		margin: 0 0 0.65rem;
+		text-transform: uppercase;
+	}
+
+	.pulse-boundary {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+		margin: 0;
+	}
+
+	.pulse-boundary div {
+		background: var(--card);
+		border-bottom: 1px solid var(--border);
+		border-right: 1px solid var(--border);
+		padding: 1rem;
+	}
+
+	.pulse-boundary dt,
+	.pulse-reading > p:first-child,
+	.pulse-metric span,
+	.pulse-source {
+		color: var(--muted-foreground);
+		font-family: var(--font-mono);
+		font-size: 0.64rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.pulse-boundary dd {
+		color: var(--primary);
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		font-weight: 700;
+		line-height: 1.5;
+		margin: 0.4rem 0 0;
+	}
+
+	.pulse-groups {
+		display: grid;
+		gap: 2rem;
+		margin-top: 2.5rem;
+	}
+
+	.pulse-group {
+		border: 1px solid var(--border);
+		background: var(--card);
+	}
+
+	.pulse-group > header {
+		border-bottom: 1px solid var(--border);
+		padding: 1.25rem;
+	}
+
+	.pulse-group h3 {
+		font-size: 1.25rem;
+	}
+
+	.pulse-metrics {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+	}
+
+	.pulse-metric {
+		border-bottom: 1px solid var(--border);
+		border-right: 1px solid var(--border);
+		padding: 1.1rem;
+	}
+
+	.pulse-metric:hover {
+		border-color: var(--info);
+	}
+
+	.pulse-reading {
+		border-bottom: 1px solid var(--border);
+		margin-bottom: 1rem;
+		padding-bottom: 0.85rem;
+	}
+
+	.pulse-reading p {
+		margin: 0;
+	}
+
+	.pulse-reading p:last-child {
+		align-items: baseline;
+		display: flex;
+		gap: 0.5rem;
+		margin-top: 0.3rem;
+	}
+
+	.pulse-reading strong {
+		color: var(--primary);
+		font-family: var(--font-mono);
+		font-size: 1.75rem;
+		line-height: 1;
+	}
+
+	.pulse-metric > p:not(.pulse-source) {
+		color: var(--foreground);
+		font-size: 0.72rem;
+		line-height: 1.55;
+		margin: 0.7rem 0 0;
+	}
+
+	.pulse-metric > p span {
+		display: block;
+		margin-bottom: 0.2rem;
+	}
+
+	.pulse-source {
+		border-top: 1px solid var(--border);
+		margin: 0.85rem 0 0;
+		padding-top: 0.65rem;
+	}
+
+	.pulse-inventory {
+		border: 1px solid var(--border);
+		margin-top: 2.5rem;
+		padding: 1.25rem;
+	}
+
+	.pulse-inventory ul {
+		display: grid;
+		gap: 0;
+		grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+		list-style: none;
+		margin: 1.25rem 0 0;
+		padding: 0;
+	}
+
+	.pulse-inventory li {
+		border: 1px solid var(--border);
+		color: var(--muted-foreground);
+		font-size: 0.7rem;
+		padding: 0.8rem;
+		text-transform: uppercase;
+	}
+</style>
