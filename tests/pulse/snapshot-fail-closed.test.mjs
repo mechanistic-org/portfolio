@@ -218,6 +218,11 @@ for (const privacyCase of [
 		error: /session identifier/u,
 	},
 	{
+		name: "UUIDv7 session identifier",
+		summary: "Run ID: 019524c4-6b7e-7a10-8d4a-a8b4c1769910 produced the aggregate.",
+		error: /session identifier/u,
+	},
+	{
 		name: "private issue content",
 		summary: "Private issue: the source ticket describes the underlying customer work.",
 		error: /private issue content/u,
@@ -225,11 +230,6 @@ for (const privacyCase of [
 	{
 		name: "private repository identity",
 		summary: "Source: https://github.com/mechanistic-org/private-source/issues/12",
-		error: /private repository identity/u,
-	},
-	{
-		name: "unmarked private repository identity",
-		summary: "Source: https://github.com/example-org/quiet-source/issues/12",
 		error: /private repository identity/u,
 	},
 	{
@@ -275,6 +275,22 @@ for (const privacyCase of [
 		assert.deepEqual(fs.readFileSync(outputPath), approvedBytes);
 	});
 }
+
+test("a manually approved public GitHub primary source remains publishable", () => {
+	const { fixtureRoot, outputPath } = createCandidateWorkspace();
+	const baselineProjection = JSON.parse(fs.readFileSync(outputPath, "utf8"));
+	const snapshotPath = path.join(fixtureRoot, "canon", "snapshot.json");
+	const snapshot = readJson(snapshotPath);
+	snapshot.public_wording.summary =
+		"Public method source: https://github.com/nodejs/node/blob/main/doc/api/crypto.md";
+	writeJson(snapshotPath, snapshot);
+	rebindPublicWording(fixtureRoot, baselineProjection);
+
+	const result = runProjector(fixtureRoot, outputPath);
+
+	assert.equal(result.status, 0, result.stderr);
+	assert.match(fs.readFileSync(outputPath, "utf8"), /github\.com\/nodejs\/node/u);
+});
 
 for (const failureCase of [
 	{

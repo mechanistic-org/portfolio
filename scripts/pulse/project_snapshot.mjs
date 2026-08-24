@@ -68,7 +68,7 @@ const PRIVATE_PUBLIC_TEXT_PATTERNS = [
 	{ pattern: /(?:^|\s)\\\\/u, description: "a UNC path" },
 	{
 		pattern:
-			/\b(?:[a-z0-9_.-]+#\d+|[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})\b/iu,
+			/\b(?:[a-z0-9_.-]+#\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12})\b/iu,
 		description: "a session identifier",
 	},
 	{
@@ -84,7 +84,12 @@ const PRIVATE_PUBLIC_TEXT_PATTERNS = [
 		description: "private issue content",
 	},
 	{
-		pattern: /\bhttps:\/\/github\.com\/[^/\s]+\/[^/\s]+(?:\/issues\/\d+)?\b/iu,
+		pattern:
+			/\bhttps:\/\/github\.com\/[^/\s]+\/[^/\s]*(?:private|internal|confidential)[^/\s]*(?:\/[^\s]*)?/iu,
+		description: "a private repository identity",
+	},
+	{
+		pattern: /\b(?:private|internal|confidential)\s+(?:source\s+)?repositor(?:y|ies)\b/iu,
 		description: "a private repository identity",
 	},
 	{
