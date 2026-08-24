@@ -98,8 +98,8 @@
 			"label": "Durable record coverage",
 			"metrics": [
 				{
-					"id": "durable-record-coverage.scoped-sessions",
-					"label": "Scoped sessions recorded",
+					"id": "durable-record-coverage.session-coverage-percentage",
+					"label": "Session coverage",
 					"unit": "percent",
 					"definition": "Share of scoped sessions producing at least one durable decision or finding record.",
 					"numerator": "Scoped sessions with one or more durable records, counted once per session.",

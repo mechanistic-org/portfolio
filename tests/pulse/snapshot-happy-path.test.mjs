@@ -52,13 +52,31 @@ test("an approved snapshot projects deterministically without crossing the custo
 	assert.deepEqual(firstProjection, secondProjection);
 	assert.equal(
 		createHash("sha256").update(firstProjection).digest("hex"),
-		"a17edab20b31abda43e3123b3405e3267bbb40f983ca3cf5fa297d5998ae229d",
+		"706197db8232e93af108b65ab517431db0bb1f10f3b2a4ef23b250811fc30a2a",
 	);
 
 	const publicSnapshot = JSON.parse(firstProjection.toString("utf8"));
 	assert.deepEqual(
 		publicSnapshot.groups.map((group) => group.id),
 		["issue-flow", "change-traceability", "durable-record-coverage"],
+	);
+	assert.deepEqual(
+		publicSnapshot.groups.map((group) => group.metrics.map((metric) => metric.id)),
+		[
+			[
+				"issue-flow.created-count",
+				"issue-flow.cohort-closure-percentage",
+				"issue-flow.median-close-time",
+				"issue-flow.net-backlog-change",
+			],
+			[
+				"change-traceability.trunk-commits",
+				"change-traceability.scheduled-maintenance-commits",
+				"change-traceability.issue-reference-coverage",
+				"change-traceability.distinct-issues",
+			],
+			["durable-record-coverage.session-coverage-percentage"],
+		],
 	);
 	for (const group of publicSnapshot.groups) {
 		for (const metric of group.metrics) {
@@ -80,7 +98,11 @@ test("an approved snapshot projects deterministically without crossing the custo
 		"raw_output",
 		"private_source_identity",
 		"local_path",
+		"reproduced_by",
 		"mechanistic-org/private-source",
+		"private issue cohort query",
+		"private trunk traceability query",
+		"private scoped-session coverage query",
 		"D:\\\\private\\\\receipts",
 	]) {
 		assert.equal(publicText.includes(privateMarker), false);

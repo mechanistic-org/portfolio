@@ -4,6 +4,27 @@ import path from "node:path";
 import process from "node:process";
 
 const REQUIRED_GROUP_IDS = ["issue-flow", "change-traceability", "durable-record-coverage"];
+const REQUIRED_METRIC_IDS_BY_GROUP = new Map([
+	[
+		"issue-flow",
+		[
+			"issue-flow.created-count",
+			"issue-flow.cohort-closure-percentage",
+			"issue-flow.median-close-time",
+			"issue-flow.net-backlog-change",
+		],
+	],
+	[
+		"change-traceability",
+		[
+			"change-traceability.trunk-commits",
+			"change-traceability.scheduled-maintenance-commits",
+			"change-traceability.issue-reference-coverage",
+			"change-traceability.distinct-issues",
+		],
+	],
+	["durable-record-coverage", ["durable-record-coverage.session-coverage-percentage"]],
+]);
 const REQUIRED_DEFINITION_FIELDS = [
 	"id",
 	"label",
@@ -25,6 +46,7 @@ const REQUIRED_ARGUMENTS = [
 const OPAQUE_RECEIPT_ID = /^rct_[a-f0-9]{32}$/u;
 const SHA256 = /^[a-f0-9]{64}$/u;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/u;
+const PUBLIC_SOURCE_CLASSES = new Set(["issue-tracker", "version-control", "session-registry"]);
 const PRIVATE_PUBLIC_KEYS = new Set([
 	"command",
 	"exact_command",
@@ -41,6 +63,23 @@ const PRIVATE_PUBLIC_KEYS = new Set([
 	"private_repository",
 	"confidential",
 ]);
+const PRIVATE_PUBLIC_TEXT_PATTERNS = [
+	{ pattern: /^[a-zA-Z]:[\\/]/u, description: "a local drive path" },
+	{ pattern: /^\\\\/u, description: "a UNC path" },
+	{
+		pattern: /\b(?:github\.com|gitlab\.com)\/[\w.-]+\/[\w.-]+\b/iu,
+		description: "a repository identity",
+	},
+	{
+		pattern:
+			/\b(?:private[- ]?(?:issue|repo|repository)|customer[- ]?attribution|client[- ]?attribution|confidential[- ]?work|transcript|prompt|session[_ -]?id)\b/iu,
+		description: "a private source category",
+	},
+	{
+		pattern: /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/iu,
+		description: "an email identity",
+	},
+];
 
 function fail(message) {
 	throw new Error(`[snapshot-contract] ${message}`);
@@ -154,12 +193,20 @@ function validateDefinitions(definitions) {
 		if (!Array.isArray(group.metrics) || group.metrics.length === 0) {
 			fail(`group ${group.id} must contain at least one metric`);
 		}
+		const requiredMetricIds = REQUIRED_METRIC_IDS_BY_GROUP.get(group.id);
+		const groupMetricIds = group.metrics.map((metric) => metric?.id);
+		if (JSON.stringify(groupMetricIds) !== JSON.stringify(requiredMetricIds)) {
+			fail(`group ${group.id} metrics must be exactly ${requiredMetricIds.join(", ")}`);
+		}
 
 		for (const [metricIndex, metric] of group.metrics.entries()) {
 			const metricLabel = `definitions.groups[${groupIndex}].metrics[${metricIndex}]`;
 			requireExactKeys(metric, REQUIRED_DEFINITION_FIELDS, metricLabel);
 			for (const field of REQUIRED_DEFINITION_FIELDS) {
 				requireString(metric[field], `${metricLabel}.${field}`);
+			}
+			if (!PUBLIC_SOURCE_CLASSES.has(metric.source_class)) {
+				fail(`metric ${metric.id}.source_class is not an approved public class`);
 			}
 			if (!metric.id.startsWith(`${group.id}.`)) {
 				fail(`metric ${metric.id} must belong to group ${group.id}`);
@@ -246,7 +293,71 @@ function validateSnapshot(snapshot, metricIds) {
 	}
 }
 
-function validateReceipts(manifest, receiptsDirectory, receiptReferences) {
+function validateReceiptOutput(rawOutput, label) {
+	requireRecord(rawOutput, label);
+	const entries = Object.entries(rawOutput);
+	if (entries.length === 0) fail(`${label} must contain reproduced metric values`);
+	for (const [metricId, value] of entries) {
+		requireString(metricId, `${label} metric id`);
+		if (typeof value !== "number" || !Number.isFinite(value)) {
+			fail(`${label}.${metricId} must be a finite number`);
+		}
+	}
+}
+
+function validatePrivateReceipt(privateReceipt, receiptId, label) {
+	requireExactKeys(privateReceipt, ["receipt_id", "primary", "independent_reproduction"], label);
+	if (privateReceipt.receipt_id !== receiptId) {
+		fail(`${label} id does not match the manifest`);
+	}
+
+	requireExactKeys(
+		privateReceipt.primary,
+		["exact_command", "raw_output", "private_source_identity", "local_path"],
+		`${label}.primary`,
+	);
+	requireString(privateReceipt.primary.exact_command, `${label}.primary.exact_command`);
+	requireString(
+		privateReceipt.primary.private_source_identity,
+		`${label}.primary.private_source_identity`,
+	);
+	const localPath = requireString(privateReceipt.primary.local_path, `${label}.primary.local_path`);
+	if (!/^(?:[a-zA-Z]:[\\/]|\/)/u.test(localPath)) {
+		fail(`${label}.primary.local_path must be an absolute private path`);
+	}
+	validateReceiptOutput(privateReceipt.primary.raw_output, `${label}.primary.raw_output`);
+
+	requireExactKeys(
+		privateReceipt.independent_reproduction,
+		["exact_command", "raw_output", "reproduced_by"],
+		`${label}.independent_reproduction`,
+	);
+	requireString(
+		privateReceipt.independent_reproduction.exact_command,
+		`${label}.independent_reproduction.exact_command`,
+	);
+	requireString(
+		privateReceipt.independent_reproduction.reproduced_by,
+		`${label}.independent_reproduction.reproduced_by`,
+	);
+	validateReceiptOutput(
+		privateReceipt.independent_reproduction.raw_output,
+		`${label}.independent_reproduction.raw_output`,
+	);
+
+	const primaryResultHash = canonicalHash(privateReceipt.primary.raw_output);
+	const reproductionResultHash = canonicalHash(privateReceipt.independent_reproduction.raw_output);
+	if (primaryResultHash !== reproductionResultHash) {
+		fail(`${label} independent reproduction does not match the primary raw output`);
+	}
+
+	return {
+		rawOutput: privateReceipt.primary.raw_output,
+		resultSha256: primaryResultHash,
+	};
+}
+
+function validateReceipts(manifest, receiptsDirectory, snapshotValues) {
 	requireExactKeys(manifest, ["schema_version", "receipts"], "receipt manifest");
 	if (manifest.schema_version !== 1) fail("receipt manifest schema_version must be 1");
 	if (!Array.isArray(manifest.receipts)) fail("receipt manifest receipts must be an array");
@@ -263,14 +374,14 @@ function validateReceipts(manifest, receiptsDirectory, receiptReferences) {
 		if (!SHA256.test(receipt.sha256)) fail(`${label}.sha256 must be a full SHA-256`);
 		requireExactKeys(
 			receipt.independent_reproduction,
-			["status", "sha256"],
+			["status", "result_sha256"],
 			`${label}.independent_reproduction`,
 		);
 		if (receipt.independent_reproduction.status !== "matched") {
 			fail(`${label} was not independently reproduced`);
 		}
-		if (receipt.independent_reproduction.sha256 !== receipt.sha256) {
-			fail(`${label} independent reproduction hash does not match`);
+		if (!SHA256.test(receipt.independent_reproduction.result_sha256)) {
+			fail(`${label} independent reproduction result must have a full SHA-256`);
 		}
 
 		const receiptPath = path.resolve(absoluteReceiptsDirectory, receipt.file);
@@ -281,20 +392,34 @@ function validateReceipts(manifest, receiptsDirectory, receiptReferences) {
 		if (sha256(privateReceipt.bytes) !== receipt.sha256) {
 			fail(`${label} full-file hash does not match its private receipt`);
 		}
-		requireRecord(privateReceipt.value, `private receipt ${receipt.id}`);
-		if (privateReceipt.value.receipt_id !== receipt.id) {
-			fail(`${label} id does not match the private receipt payload`);
+		const validatedReceipt = validatePrivateReceipt(
+			privateReceipt.value,
+			receipt.id,
+			`private receipt ${receipt.id}`,
+		);
+		if (validatedReceipt.resultSha256 !== receipt.independent_reproduction.result_sha256) {
+			fail(`${label} reproduced result hash does not match the private receipt`);
 		}
 
 		verifiedReceipts.set(receipt.id, {
-			id: receipt.id,
-			sha256: receipt.sha256,
+			publicReference: {
+				id: receipt.id,
+				sha256: receipt.sha256,
+			},
+			rawOutput: validatedReceipt.rawOutput,
 		});
 	}
 
-	for (const receiptReference of receiptReferences) {
-		if (!verifiedReceipts.has(receiptReference)) {
-			fail(`receipt reference ${receiptReference} is unresolved`);
+	for (const [metricId, measuredValue] of Object.entries(snapshotValues)) {
+		const verifiedReceipt = verifiedReceipts.get(measuredValue.receipt_ref);
+		if (!verifiedReceipt) {
+			fail(`receipt reference ${measuredValue.receipt_ref} is unresolved`);
+		}
+		if (
+			!Object.hasOwn(verifiedReceipt.rawOutput, metricId) ||
+			verifiedReceipt.rawOutput[metricId] !== measuredValue.value
+		) {
+			fail(`receipt ${measuredValue.receipt_ref} does not reproduce ${metricId}`);
 		}
 	}
 
@@ -307,8 +432,12 @@ function assertPrivacySafe(value, label = "public projection") {
 		return;
 	}
 	if (!isRecord(value)) {
-		if (typeof value === "string" && (/^[a-zA-Z]:[\\/]/u.test(value) || /^\\\\/u.test(value))) {
-			fail(`${label} contains a local path`);
+		if (typeof value === "string") {
+			for (const privatePattern of PRIVATE_PUBLIC_TEXT_PATTERNS) {
+				if (privatePattern.pattern.test(value)) {
+					fail(`${label} contains ${privatePattern.description}`);
+				}
+			}
 		}
 		return;
 	}
@@ -339,7 +468,7 @@ function buildPublicProjection(definitions, snapshot, verifiedReceipts) {
 					as_of: snapshot.as_of,
 					measurement_window: snapshot.measurement_window,
 					refresh_state: snapshot.refresh_state,
-					receipt: verifiedReceipts.get(measuredValue.receipt_ref),
+					receipt: verifiedReceipts.get(measuredValue.receipt_ref).publicReference,
 				};
 			}),
 		})),
@@ -415,13 +544,10 @@ function main() {
 
 	const metricIds = validateDefinitions(definitions);
 	validateSnapshot(snapshot, metricIds);
-	const receiptReferences = new Set(
-		Object.values(snapshot.values).map((metric) => metric.receipt_ref),
-	);
 	const verifiedReceipts = validateReceipts(
 		receiptManifest,
 		argumentsByName["receipts-dir"],
-		receiptReferences,
+		snapshot.values,
 	);
 	const publicProjection = buildPublicProjection(definitions, snapshot, verifiedReceipts);
 	const publicBytes = Buffer.from(stableJson(publicProjection), "utf8");
