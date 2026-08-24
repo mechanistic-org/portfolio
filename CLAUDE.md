@@ -123,3 +123,20 @@ Scoped retrieval rule (supersedes a blanket "never scan directories"):
 - Platform: Windows / PowerShell (`$null`, `$env:VAR`, backtick continuation).
 - GitHub ops via the `gh` CLI.
 - Single-operator project: absolute local paths in tooling are expected, not a smell.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and specifications are tracked in GitHub Issues using the `gh` CLI. See
+`docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+The published engineering skills use their default five-label vocabulary. See
+`docs/agents/triage-labels.md`.
+
+### Domain docs
+
+This is a single-context repository: domain language lives in root `CONTEXT.md`,
+with consequential decisions under `docs/adr/`. See `docs/agents/domain.md`.
