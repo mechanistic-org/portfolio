@@ -35,6 +35,11 @@ const REQUIRED_DEFINITION_FIELDS = [
 	"method_summary",
 	"source_class",
 ];
+const REQUIRED_ISSUE_FLOW_DEFINITION_FIELDS = [
+	...REQUIRED_DEFINITION_FIELDS,
+	"inclusions",
+	"exclusions",
+];
 const REQUIRED_ARGUMENTS = [
 	"definitions",
 	"snapshot",
@@ -44,8 +49,10 @@ const REQUIRED_ARGUMENTS = [
 	"output",
 ];
 const OPAQUE_RECEIPT_ID = /^rct_[a-f0-9]{32}$/u;
+const OPAQUE_ISSUE_ID = /^iss_[a-f0-9]{32}$/u;
 const SHA256 = /^[a-f0-9]{64}$/u;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/u;
+const ISO_TIMESTAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/u;
 const PUBLIC_SOURCE_CLASSES = new Set(["issue-tracker", "version-control", "session-registry"]);
 const PRIVATE_PUBLIC_KEYS = new Set([
 	"command",
@@ -61,6 +68,7 @@ const PRIVATE_PUBLIC_KEYS = new Set([
 	"prompt",
 	"session_id",
 	"private_repository",
+	"issue_id",
 	"confidential",
 ]);
 const PRIVATE_PUBLIC_TEXT_PATTERNS = [
@@ -210,6 +218,12 @@ function canonicalHash(value) {
 	return sha256(stableJson(value));
 }
 
+function definitionFieldsForGroup(groupId) {
+	return groupId === "issue-flow"
+		? REQUIRED_ISSUE_FLOW_DEFINITION_FIELDS
+		: REQUIRED_DEFINITION_FIELDS;
+}
+
 function validateDefinitions(definitions) {
 	requireRecord(definitions, "definitions");
 	if (definitions.schema_version !== 1) {
@@ -241,8 +255,9 @@ function validateDefinitions(definitions) {
 
 		for (const [metricIndex, metric] of group.metrics.entries()) {
 			const metricLabel = `definitions.groups[${groupIndex}].metrics[${metricIndex}]`;
-			requireExactKeys(metric, REQUIRED_DEFINITION_FIELDS, metricLabel);
-			for (const field of REQUIRED_DEFINITION_FIELDS) {
+			const requiredDefinitionFields = definitionFieldsForGroup(group.id);
+			requireExactKeys(metric, requiredDefinitionFields, metricLabel);
+			for (const field of requiredDefinitionFields) {
 				requireString(metric[field], `${metricLabel}.${field}`);
 			}
 			if (!PUBLIC_SOURCE_CLASSES.has(metric.source_class)) {
@@ -333,7 +348,7 @@ function validateSnapshot(snapshot, metricIds) {
 	}
 }
 
-function validateReceiptOutput(rawOutput, label) {
+function validateMetricValueMap(rawOutput, label) {
 	requireRecord(rawOutput, label);
 	const entries = Object.entries(rawOutput);
 	if (entries.length === 0) fail(`${label} must contain reproduced metric values`);
@@ -343,9 +358,114 @@ function validateReceiptOutput(rawOutput, label) {
 			fail(`${label}.${metricId} must be a finite number`);
 		}
 	}
+	return rawOutput;
 }
 
-function validatePrivateReceipt(privateReceipt, receiptId, label) {
+function requireIsoTimestamp(value, label) {
+	requireString(value, label);
+	const parsedTimestamp = Date.parse(value);
+	const normalizedInput =
+		value.endsWith("Z") && !value.includes(".") ? value.replace(/Z$/u, ".000Z") : value;
+	if (
+		!ISO_TIMESTAMP.test(value) ||
+		!Number.isFinite(parsedTimestamp) ||
+		new Date(parsedTimestamp).toISOString() !== normalizedInput
+	) {
+		fail(`${label} must be an ISO-8601 UTC timestamp`);
+	}
+	return parsedTimestamp;
+}
+
+function requireNonnegativeInteger(value, label) {
+	if (!Number.isInteger(value) || value < 0) {
+		fail(`${label} must be a non-negative integer`);
+	}
+	return value;
+}
+
+function median(values) {
+	const ordered = [...values].sort((left, right) => left - right);
+	const midpoint = Math.floor(ordered.length / 2);
+	return ordered.length % 2 === 1
+		? ordered[midpoint]
+		: (ordered[midpoint - 1] + ordered[midpoint]) / 2;
+}
+
+function calculateIssueFlowMetrics(rawOutput, label, snapshotWindow) {
+	requireExactKeys(rawOutput, ["kind", "measurement_window", "issues", "open_backlog"], label);
+	if (rawOutput.kind !== "issue-flow-v1") fail(`${label}.kind must be issue-flow-v1`);
+
+	requireExactKeys(rawOutput.measurement_window, ["start", "end"], `${label}.measurement_window`);
+	const { start, end } = rawOutput.measurement_window;
+	if (start !== snapshotWindow.start || end !== snapshotWindow.end) {
+		fail(`${label}.measurement_window must match the snapshot measurement window`);
+	}
+
+	if (!Array.isArray(rawOutput.issues)) fail(`${label}.issues must be an array`);
+	const issueIds = new Set();
+	const issues = rawOutput.issues.map((issue, index) => {
+		const issueLabel = `${label}.issues[${index}]`;
+		requireExactKeys(issue, ["issue_id", "created_at", "closed_at"], issueLabel);
+		const issueId = requireString(issue.issue_id, `${issueLabel}.issue_id`);
+		if (!OPAQUE_ISSUE_ID.test(issueId)) {
+			fail(`${issueLabel}.issue_id must be an opaque issue identity`);
+		}
+		if (issueIds.has(issueId)) fail(`${label} contains duplicate issue identity ${issueId}`);
+		issueIds.add(issueId);
+		const createdAt = requireIsoTimestamp(issue.created_at, `${issueLabel}.created_at`);
+		let closedAt = null;
+		if (issue.closed_at !== null) {
+			closedAt = requireIsoTimestamp(issue.closed_at, `${issueLabel}.closed_at`);
+			if (closedAt < createdAt) fail(`${issueLabel}.closed_at cannot precede created_at`);
+		}
+		return { createdAt, closedAt };
+	});
+
+	const startBoundary = Date.parse(`${start}T00:00:00Z`);
+	const endBoundary = Date.parse(`${end}T00:00:00Z`) + 86_400_000;
+	const createdCohort = issues.filter(
+		(issue) => issue.createdAt >= startBoundary && issue.createdAt < endBoundary,
+	);
+	if (createdCohort.length === 0) fail(`${label} created cohort cannot be empty`);
+	const closedCohort = createdCohort.filter(
+		(issue) => issue.closedAt !== null && issue.closedAt < endBoundary,
+	);
+	if (closedCohort.length === 0) fail(`${label} closed cohort cannot be empty`);
+
+	requireExactKeys(rawOutput.open_backlog, ["window_start", "window_end"], `${label}.open_backlog`);
+	const openingBacklog = requireNonnegativeInteger(
+		rawOutput.open_backlog.window_start,
+		`${label}.open_backlog.window_start`,
+	);
+	const closingBacklog = requireNonnegativeInteger(
+		rawOutput.open_backlog.window_end,
+		`${label}.open_backlog.window_end`,
+	);
+	const closeDurations = closedCohort.map(
+		(issue) => (issue.closedAt - issue.createdAt) / 86_400_000,
+	);
+
+	return {
+		"issue-flow.created-count": createdCohort.length,
+		"issue-flow.cohort-closure-percentage":
+			Math.round((closedCohort.length / createdCohort.length) * 1000) / 10,
+		"issue-flow.median-close-time": median(closeDurations),
+		"issue-flow.net-backlog-change": closingBacklog - openingBacklog,
+	};
+}
+
+function metricValuesFromReceiptOutput(rawOutput, label, snapshotWindow) {
+	requireRecord(rawOutput, label);
+	if (Object.hasOwn(rawOutput, "kind")) {
+		if (rawOutput.kind === "issue-flow-v1") {
+			return calculateIssueFlowMetrics(rawOutput, label, snapshotWindow);
+		}
+		fail(`${label}.kind is not supported`);
+	}
+	return validateMetricValueMap(rawOutput, label);
+}
+
+function validatePrivateReceipt(privateReceipt, receiptId, label, snapshotWindow) {
 	requireExactKeys(privateReceipt, ["receipt_id", "primary", "independent_reproduction"], label);
 	if (privateReceipt.receipt_id !== receiptId) {
 		fail(`${label} id does not match the manifest`);
@@ -365,7 +485,11 @@ function validatePrivateReceipt(privateReceipt, receiptId, label) {
 	if (!/^(?:[a-zA-Z]:[\\/]|\/)/u.test(localPath)) {
 		fail(`${label}.primary.local_path must be an absolute private path`);
 	}
-	validateReceiptOutput(privateReceipt.primary.raw_output, `${label}.primary.raw_output`);
+	const primaryMetricValues = metricValuesFromReceiptOutput(
+		privateReceipt.primary.raw_output,
+		`${label}.primary.raw_output`,
+		snapshotWindow,
+	);
 
 	requireExactKeys(
 		privateReceipt.independent_reproduction,
@@ -380,9 +504,10 @@ function validatePrivateReceipt(privateReceipt, receiptId, label) {
 		privateReceipt.independent_reproduction.reproduced_by,
 		`${label}.independent_reproduction.reproduced_by`,
 	);
-	validateReceiptOutput(
+	const reproductionMetricValues = metricValuesFromReceiptOutput(
 		privateReceipt.independent_reproduction.raw_output,
 		`${label}.independent_reproduction.raw_output`,
+		snapshotWindow,
 	);
 
 	const primaryResultHash = canonicalHash(privateReceipt.primary.raw_output);
@@ -390,14 +515,17 @@ function validatePrivateReceipt(privateReceipt, receiptId, label) {
 	if (primaryResultHash !== reproductionResultHash) {
 		fail(`${label} independent reproduction does not match the primary raw output`);
 	}
+	if (canonicalHash(primaryMetricValues) !== canonicalHash(reproductionMetricValues)) {
+		fail(`${label} independent reproduction does not reproduce the derived metric values`);
+	}
 
 	return {
-		rawOutput: privateReceipt.primary.raw_output,
+		metricValues: primaryMetricValues,
 		resultSha256: primaryResultHash,
 	};
 }
 
-function validateReceipts(manifest, receiptsDirectory, snapshotValues) {
+function validateReceipts(manifest, receiptsDirectory, snapshotValues, snapshotWindow) {
 	requireExactKeys(manifest, ["schema_version", "receipts"], "receipt manifest");
 	if (manifest.schema_version !== 1) fail("receipt manifest schema_version must be 1");
 	if (!Array.isArray(manifest.receipts)) fail("receipt manifest receipts must be an array");
@@ -436,6 +564,7 @@ function validateReceipts(manifest, receiptsDirectory, snapshotValues) {
 			privateReceipt.value,
 			receipt.id,
 			`private receipt ${receipt.id}`,
+			snapshotWindow,
 		);
 		if (validatedReceipt.resultSha256 !== receipt.independent_reproduction.result_sha256) {
 			fail(`${label} reproduced result hash does not match the private receipt`);
@@ -446,7 +575,7 @@ function validateReceipts(manifest, receiptsDirectory, snapshotValues) {
 				id: receipt.id,
 				sha256: receipt.sha256,
 			},
-			rawOutput: validatedReceipt.rawOutput,
+			metricValues: validatedReceipt.metricValues,
 		});
 	}
 
@@ -456,8 +585,8 @@ function validateReceipts(manifest, receiptsDirectory, snapshotValues) {
 			fail(`receipt reference ${measuredValue.receipt_ref} is unresolved`);
 		}
 		if (
-			!Object.hasOwn(verifiedReceipt.rawOutput, metricId) ||
-			verifiedReceipt.rawOutput[metricId] !== measuredValue.value
+			!Object.hasOwn(verifiedReceipt.metricValues, metricId) ||
+			verifiedReceipt.metricValues[metricId] !== measuredValue.value
 		) {
 			fail(`receipt ${measuredValue.receipt_ref} does not reproduce ${metricId}`);
 		}
@@ -495,7 +624,7 @@ function collectPublicNarrative(definitions, snapshot) {
 		...definitions.groups.flatMap((group) => [
 			group.label,
 			...group.metrics.flatMap((metric) =>
-				REQUIRED_DEFINITION_FIELDS.map((field) => metric[field]),
+				definitionFieldsForGroup(group.id).map((field) => metric[field]),
 			),
 		]),
 	];
@@ -667,6 +796,7 @@ function main() {
 		receiptManifest,
 		argumentsByName["receipts-dir"],
 		snapshot.values,
+		snapshot.measurement_window,
 	);
 	const publicProjection = buildPublicProjection(definitions, snapshot, verifiedReceipts);
 	const publicBytes = Buffer.from(stableJson(publicProjection), "utf8");

@@ -20,6 +20,7 @@ const definitionFields = [
 	"method_summary",
 	"source_class",
 ];
+const issueFlowDefinitionFields = [...definitionFields, "inclusions", "exclusions"];
 
 after(() => {
 	for (const directory of temporaryDirectories) {
@@ -102,7 +103,11 @@ function collectPublicNarrative(definitions, snapshot) {
 		snapshot.public_wording.summary,
 		...definitions.groups.flatMap((group) => [
 			group.label,
-			...group.metrics.flatMap((metric) => definitionFields.map((field) => metric[field])),
+			...group.metrics.flatMap((metric) =>
+				(group.id === "issue-flow" ? issueFlowDefinitionFields : definitionFields).map(
+					(field) => metric[field],
+				),
+			),
 		]),
 	];
 }
@@ -176,6 +181,29 @@ function replaceMeasuredValue(fixtureRoot, metricId, nextValue) {
 	manifestEntry.sha256 = sha256(fs.readFileSync(receiptPath));
 	manifestEntry.independent_reproduction.result_sha256 = canonicalHash(receipt.primary.raw_output);
 	writeJson(manifestPath, manifest);
+}
+
+function mutateIssueFlowReceipt(fixtureRoot, mutate) {
+	const snapshot = readJson(path.join(fixtureRoot, "canon", "snapshot.json"));
+	const receiptId = snapshot.values["issue-flow.created-count"].receipt_ref;
+	const receiptPath = path.join(fixtureRoot, "evidence", "receipts", `${receiptId}.json`);
+	const receipt = readJson(receiptPath);
+	mutate(receipt.primary.raw_output);
+	mutate(receipt.independent_reproduction.raw_output);
+	writeJson(receiptPath, receipt);
+
+	const manifestPath = path.join(fixtureRoot, "evidence", "manifest.json");
+	const manifest = readJson(manifestPath);
+	const manifestEntry = manifest.receipts.find((entry) => entry.id === receiptId);
+	manifestEntry.sha256 = sha256(fs.readFileSync(receiptPath));
+	manifestEntry.independent_reproduction.result_sha256 = canonicalHash(receipt.primary.raw_output);
+	writeJson(manifestPath, manifest);
+}
+
+function addOpaqueIssueIdentities(rawOutput) {
+	for (const [index, issue] of rawOutput.issues.entries()) {
+		issue.issue_id = `iss_${index.toString(16).padStart(32, "0")}`;
+	}
 }
 
 test("a bound session identifier leak fails closed without replacing the approved projection", () => {
@@ -292,6 +320,35 @@ test("a manually approved public GitHub primary source remains publishable", () 
 	assert.match(fs.readFileSync(outputPath, "utf8"), /github\.com\/nodejs\/node/u);
 });
 
+test("a duplicate opaque issue identity fails closed without replacing the approved projection", () => {
+	const { fixtureRoot, outputPath } = createCandidateWorkspace();
+	const approvedBytes = fs.readFileSync(outputPath);
+	mutateIssueFlowReceipt(fixtureRoot, (rawOutput) => {
+		addOpaqueIssueIdentities(rawOutput);
+		rawOutput.issues[1].issue_id = rawOutput.issues[0].issue_id;
+	});
+
+	const result = runProjector(fixtureRoot, outputPath);
+
+	assert.notEqual(result.status, 0);
+	assert.match(result.stderr, /duplicate issue identity/u);
+	assert.deepEqual(fs.readFileSync(outputPath), approvedBytes);
+});
+
+test("an impossible issue timestamp fails closed without replacing the approved projection", () => {
+	const { fixtureRoot, outputPath } = createCandidateWorkspace();
+	const approvedBytes = fs.readFileSync(outputPath);
+	mutateIssueFlowReceipt(fixtureRoot, (rawOutput) => {
+		rawOutput.issues[1].created_at = "2026-02-31T00:00:00Z";
+	});
+
+	const result = runProjector(fixtureRoot, outputPath);
+
+	assert.notEqual(result.status, 0);
+	assert.match(result.stderr, /ISO-8601 UTC timestamp/u);
+	assert.deepEqual(fs.readFileSync(outputPath), approvedBytes);
+});
+
 for (const failureCase of [
 	{
 		name: "a missing receipt",
@@ -363,7 +420,7 @@ for (const failureCase of [
 		name: "an altered approved value with a reproduced receipt",
 		error: /effective_state=proposal; approval binding values_sha256 does not match/u,
 		mutate(fixtureRoot) {
-			replaceMeasuredValue(fixtureRoot, "issue-flow.created-count", 19);
+			replaceMeasuredValue(fixtureRoot, "change-traceability.trunk-commits", 133);
 		},
 	},
 	{
@@ -381,10 +438,8 @@ for (const failureCase of [
 		name: "an altered approved as_of date",
 		error: /effective_state=proposal; approval binding as_of does not match/u,
 		mutate(fixtureRoot) {
-			mutateFixtureJson(fixtureRoot, "canon/snapshot.json", (snapshot) => {
-				snapshot.as_of = "2026-08-25";
-				snapshot.measurement_window.start = "2026-05-28";
-				snapshot.measurement_window.end = "2026-08-25";
+			mutateFixtureJson(fixtureRoot, "canon/approval.json", (approval) => {
+				approval.binding.as_of = "2026-08-25";
 			});
 		},
 	},

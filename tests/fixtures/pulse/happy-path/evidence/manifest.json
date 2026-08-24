@@ -4,10 +4,10 @@
 		{
 			"id": "rct_f97b4275c4644cb78ce8e40f5e608a1e",
 			"file": "rct_f97b4275c4644cb78ce8e40f5e608a1e.json",
-			"sha256": "6e1b498c048f2536e2afd7ff42743ff8b37062b2fb7cf13fe4ef7b40420fb2a1",
+			"sha256": "2dd79a44489cf309d7c4f67ff9c9e40c4830d2a6ca54bbae106eefdc2555d0da",
 			"independent_reproduction": {
 				"status": "matched",
-				"result_sha256": "873c276022f8b96b25589eced44a4fe0446eceaed3b5ac849a55167917ab7218"
+				"result_sha256": "927e60ff41274fb13424513768a0dc5cd8b2e8860035b10993c93323ffe9a8c7"
 			}
 		},
 		{
