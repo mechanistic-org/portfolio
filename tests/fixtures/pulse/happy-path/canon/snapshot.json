@@ -1,0 +1,54 @@
+{
+	"schema_version": 1,
+	"snapshot_id": "pulse-fixture-2026-08-24",
+	"as_of": "2026-08-24",
+	"measurement_window": {
+		"start": "2026-05-27",
+		"end": "2026-08-24",
+		"days": 90
+	},
+	"refresh_state": "independently-reproduced",
+	"lifecycle_state": "active",
+	"public_wording": {
+		"title": "A dated view of operating discipline",
+		"summary": "Three proof groups share one 90-day window and one verification boundary."
+	},
+	"values": {
+		"issue-flow.created-count": {
+			"value": 18,
+			"receipt_ref": "rct_f97b4275c4644cb78ce8e40f5e608a1e"
+		},
+		"issue-flow.cohort-closure-percentage": {
+			"value": 77.8,
+			"receipt_ref": "rct_f97b4275c4644cb78ce8e40f5e608a1e"
+		},
+		"issue-flow.median-close-time": {
+			"value": 4.5,
+			"receipt_ref": "rct_f97b4275c4644cb78ce8e40f5e608a1e"
+		},
+		"issue-flow.net-backlog-change": {
+			"value": -6,
+			"receipt_ref": "rct_f97b4275c4644cb78ce8e40f5e608a1e"
+		},
+		"change-traceability.trunk-commits": {
+			"value": 132,
+			"receipt_ref": "rct_2a317c94150e42899f9b3ee2cb7e9fc5"
+		},
+		"change-traceability.scheduled-maintenance-commits": {
+			"value": 24,
+			"receipt_ref": "rct_2a317c94150e42899f9b3ee2cb7e9fc5"
+		},
+		"change-traceability.issue-reference-coverage": {
+			"value": 91.7,
+			"receipt_ref": "rct_2a317c94150e42899f9b3ee2cb7e9fc5"
+		},
+		"change-traceability.distinct-issues": {
+			"value": 38,
+			"receipt_ref": "rct_2a317c94150e42899f9b3ee2cb7e9fc5"
+		},
+		"durable-record-coverage.session-coverage-percentage": {
+			"value": 96.2,
+			"receipt_ref": "rct_805e7a0afde243a09bd1b31f66af7327"
+		}
+	}
+}

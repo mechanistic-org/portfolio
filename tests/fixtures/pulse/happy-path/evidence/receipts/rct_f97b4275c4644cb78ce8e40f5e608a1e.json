@@ -1,0 +1,24 @@
+{
+	"receipt_id": "rct_f97b4275c4644cb78ce8e40f5e608a1e",
+	"primary": {
+		"exact_command": "private issue cohort query",
+		"raw_output": {
+			"issue-flow.created-count": 18,
+			"issue-flow.cohort-closure-percentage": 77.8,
+			"issue-flow.median-close-time": 4.5,
+			"issue-flow.net-backlog-change": -6
+		},
+		"private_source_identity": "mechanistic-org/private-source",
+		"local_path": "D:\\private\\receipts\\issue-flow.json"
+	},
+	"independent_reproduction": {
+		"exact_command": "private issue cohort query rerun",
+		"raw_output": {
+			"issue-flow.created-count": 18,
+			"issue-flow.cohort-closure-percentage": 77.8,
+			"issue-flow.median-close-time": 4.5,
+			"issue-flow.net-backlog-change": -6
+		},
+		"reproduced_by": "fixture-independent-reproducer"
+	}
+}

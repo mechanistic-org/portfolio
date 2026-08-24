@@ -1,0 +1,18 @@
+{
+	"receipt_id": "rct_805e7a0afde243a09bd1b31f66af7327",
+	"primary": {
+		"exact_command": "private scoped-session coverage query",
+		"raw_output": {
+			"durable-record-coverage.session-coverage-percentage": 96.2
+		},
+		"private_source_identity": "mechanistic-org/private-source",
+		"local_path": "D:\\private\\receipts\\durable-record-coverage.json"
+	},
+	"independent_reproduction": {
+		"exact_command": "private scoped-session coverage query rerun",
+		"raw_output": {
+			"durable-record-coverage.session-coverage-percentage": 96.2
+		},
+		"reproduced_by": "fixture-independent-reproducer"
+	}
+}

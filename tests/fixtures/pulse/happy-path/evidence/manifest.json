@@ -1,0 +1,32 @@
+{
+	"schema_version": 1,
+	"receipts": [
+		{
+			"id": "rct_f97b4275c4644cb78ce8e40f5e608a1e",
+			"file": "rct_f97b4275c4644cb78ce8e40f5e608a1e.json",
+			"sha256": "6e1b498c048f2536e2afd7ff42743ff8b37062b2fb7cf13fe4ef7b40420fb2a1",
+			"independent_reproduction": {
+				"status": "matched",
+				"result_sha256": "873c276022f8b96b25589eced44a4fe0446eceaed3b5ac849a55167917ab7218"
+			}
+		},
+		{
+			"id": "rct_2a317c94150e42899f9b3ee2cb7e9fc5",
+			"file": "rct_2a317c94150e42899f9b3ee2cb7e9fc5.json",
+			"sha256": "cc9b69ea0af3c89bab3ee35a3ec1d1f9fa1a129b6e97e90e4cc97752740d335c",
+			"independent_reproduction": {
+				"status": "matched",
+				"result_sha256": "016cfd44c85111ea68ec80ff0f5d145a08a2e7ec18ea650eb8a61999508db9a7"
+			}
+		},
+		{
+			"id": "rct_805e7a0afde243a09bd1b31f66af7327",
+			"file": "rct_805e7a0afde243a09bd1b31f66af7327.json",
+			"sha256": "80a9b5a14228a0d60e5196a2ccd82ccf44b5e6a4b4c619394f1231f8ed21dde3",
+			"independent_reproduction": {
+				"status": "matched",
+				"result_sha256": "4426343c04270962c85773cef237f4f3faca1a7c1bd56c27cb8d39a2156d3375"
+			}
+		}
+	]
+}
