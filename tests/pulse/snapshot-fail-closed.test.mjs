@@ -330,6 +330,16 @@ for (const privacyCase of [
 		error: /session identifier/u,
 	},
 	{
+		name: "opaque scoped-session identifier",
+		summary: "Coverage source ssn_00000000000000000000000000000001 produced the aggregate.",
+		error: /opaque session identifier/u,
+	},
+	{
+		name: "opaque durable-record identifier",
+		summary: "Coverage source rec_00000000000000000000000000000001 produced the aggregate.",
+		error: /opaque durable-record identifier/u,
+	},
+	{
 		name: "private issue content",
 		summary: "Private issue: the source ticket describes the underlying customer work.",
 		error: /private issue content/u,

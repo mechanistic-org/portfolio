@@ -88,6 +88,14 @@ const PRIVATE_PUBLIC_TEXT_PATTERNS = [
 		description: "a session identifier",
 	},
 	{
+		pattern: /\bssn_[a-f0-9]{32}\b/iu,
+		description: "an opaque session identifier",
+	},
+	{
+		pattern: /\brec_[a-f0-9]{32}\b/iu,
+		description: "an opaque durable-record identifier",
+	},
+	{
 		pattern: /\btranscripts?\b/iu,
 		description: "transcript material",
 	},
@@ -574,7 +582,7 @@ function calculateChangeTraceabilityMetrics(rawOutput, label, snapshotWindow) {
 	};
 }
 
-function calculateDurableRecordCoverageMetrics(rawOutput, label, snapshotWindow) {
+function calculateDurableRecordCoverageResult(rawOutput, label, snapshotWindow) {
 	requireExactKeys(
 		rawOutput,
 		["kind", "measurement_window", "scoped_sessions", "durable_records"],
@@ -663,34 +671,31 @@ function calculateDurableRecordCoverageMetrics(rawOutput, label, snapshotWindow)
 	}
 
 	return {
-		"durable-record-coverage.session-coverage-percentage":
-			Math.round((coveredSessionIds.size / denominatorSessionIds.size) * 1000) / 10,
+		metricValues: {
+			"durable-record-coverage.session-coverage-percentage":
+				Math.round((coveredSessionIds.size / denominatorSessionIds.size) * 1000) / 10,
+		},
+		durableRecordDenominatorIdentity: [...denominatorSessionIds].sort(),
 	};
 }
 
-function durableRecordDenominatorIdentity(rawOutput, snapshotWindow) {
-	const startInclusive = Date.parse(`${snapshotWindow.start}T00:00:00Z`);
-	const endExclusive = Date.parse(`${snapshotWindow.end}T00:00:00Z`) + 86_400_000;
-	return rawOutput.scoped_sessions
-		.filter((session) => {
-			const startedAt = Date.parse(session.started_at);
-			return startedAt >= startInclusive && startedAt < endExclusive;
-		})
-		.map((session) => session.session_id)
-		.sort();
-}
-
-function metricValuesFromReceiptOutput(rawOutput, label, snapshotWindow) {
+function metricResultFromReceiptOutput(rawOutput, label, snapshotWindow) {
 	requireRecord(rawOutput, label);
 	if (Object.hasOwn(rawOutput, "kind")) {
 		if (rawOutput.kind === "issue-flow-v1") {
-			return calculateIssueFlowMetrics(rawOutput, label, snapshotWindow);
+			return {
+				metricValues: calculateIssueFlowMetrics(rawOutput, label, snapshotWindow),
+				durableRecordDenominatorIdentity: null,
+			};
 		}
 		if (rawOutput.kind === "change-traceability-v1") {
-			return calculateChangeTraceabilityMetrics(rawOutput, label, snapshotWindow);
+			return {
+				metricValues: calculateChangeTraceabilityMetrics(rawOutput, label, snapshotWindow),
+				durableRecordDenominatorIdentity: null,
+			};
 		}
 		if (rawOutput.kind === "durable-record-coverage-v1") {
-			return calculateDurableRecordCoverageMetrics(rawOutput, label, snapshotWindow);
+			return calculateDurableRecordCoverageResult(rawOutput, label, snapshotWindow);
 		}
 		fail(`${label}.kind is not supported`);
 	}
@@ -703,7 +708,10 @@ function metricValuesFromReceiptOutput(rawOutput, label, snapshotWindow) {
 	) {
 		fail(`${label} durable-record-coverage receipts must use controlled session evidence`);
 	}
-	return metricValues;
+	return {
+		metricValues,
+		durableRecordDenominatorIdentity: null,
+	};
 }
 
 function validatePrivateReceipt(privateReceipt, receiptId, label, snapshotWindow) {
@@ -726,7 +734,7 @@ function validatePrivateReceipt(privateReceipt, receiptId, label, snapshotWindow
 	if (!/^(?:[a-zA-Z]:[\\/]|\/)/u.test(localPath)) {
 		fail(`${label}.primary.local_path must be an absolute private path`);
 	}
-	const primaryMetricValues = metricValuesFromReceiptOutput(
+	const primaryMetricResult = metricResultFromReceiptOutput(
 		privateReceipt.primary.raw_output,
 		`${label}.primary.raw_output`,
 		snapshotWindow,
@@ -745,23 +753,16 @@ function validatePrivateReceipt(privateReceipt, receiptId, label, snapshotWindow
 		privateReceipt.independent_reproduction.reproduced_by,
 		`${label}.independent_reproduction.reproduced_by`,
 	);
-	const reproductionMetricValues = metricValuesFromReceiptOutput(
+	const reproductionMetricResult = metricResultFromReceiptOutput(
 		privateReceipt.independent_reproduction.raw_output,
 		`${label}.independent_reproduction.raw_output`,
 		snapshotWindow,
 	);
 	if (
-		privateReceipt.primary.raw_output.kind === "durable-record-coverage-v1" &&
-		privateReceipt.independent_reproduction.raw_output.kind === "durable-record-coverage-v1" &&
-		canonicalHash(
-			durableRecordDenominatorIdentity(privateReceipt.primary.raw_output, snapshotWindow),
-		) !==
-			canonicalHash(
-				durableRecordDenominatorIdentity(
-					privateReceipt.independent_reproduction.raw_output,
-					snapshotWindow,
-				),
-			)
+		primaryMetricResult.durableRecordDenominatorIdentity !== null &&
+		reproductionMetricResult.durableRecordDenominatorIdentity !== null &&
+		canonicalHash(primaryMetricResult.durableRecordDenominatorIdentity) !==
+			canonicalHash(reproductionMetricResult.durableRecordDenominatorIdentity)
 	) {
 		fail(`${label} scoped-session denominator is not independently reproducible`);
 	}
@@ -771,12 +772,15 @@ function validatePrivateReceipt(privateReceipt, receiptId, label, snapshotWindow
 	if (primaryResultHash !== reproductionResultHash) {
 		fail(`${label} independent reproduction does not match the primary raw output`);
 	}
-	if (canonicalHash(primaryMetricValues) !== canonicalHash(reproductionMetricValues)) {
+	if (
+		canonicalHash(primaryMetricResult.metricValues) !==
+		canonicalHash(reproductionMetricResult.metricValues)
+	) {
 		fail(`${label} independent reproduction does not reproduce the derived metric values`);
 	}
 
 	return {
-		metricValues: primaryMetricValues,
+		metricValues: primaryMetricResult.metricValues,
 		resultSha256: primaryResultHash,
 	};
 }
