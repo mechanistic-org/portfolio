@@ -40,7 +40,11 @@ const REQUIRED_SCOPED_DEFINITION_FIELDS = [
 	"inclusions",
 	"exclusions",
 ];
-const GROUPS_WITH_INCLUSION_EXCLUSION = new Set(["issue-flow", "change-traceability"]);
+const GROUPS_WITH_INCLUSION_EXCLUSION = new Set([
+	"issue-flow",
+	"change-traceability",
+	"durable-record-coverage",
+]);
 const REQUIRED_ARGUMENTS = [
 	"definitions",
 	"snapshot",
@@ -52,6 +56,8 @@ const REQUIRED_ARGUMENTS = [
 const OPAQUE_RECEIPT_ID = /^rct_[a-f0-9]{32}$/u;
 const OPAQUE_ISSUE_ID = /^iss_[a-f0-9]{32}$/u;
 const OPAQUE_COMMIT_ID = /^cmt_[a-f0-9]{32}$/u;
+const OPAQUE_SESSION_ID = /^ssn_[a-f0-9]{32}$/u;
+const OPAQUE_RECORD_ID = /^rec_[a-f0-9]{32}$/u;
 const SHA256 = /^[a-f0-9]{64}$/u;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/u;
 const ISO_TIMESTAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/u;
@@ -568,6 +574,112 @@ function calculateChangeTraceabilityMetrics(rawOutput, label, snapshotWindow) {
 	};
 }
 
+function calculateDurableRecordCoverageMetrics(rawOutput, label, snapshotWindow) {
+	requireExactKeys(
+		rawOutput,
+		["kind", "measurement_window", "scoped_sessions", "durable_records"],
+		label,
+	);
+	if (rawOutput.kind !== "durable-record-coverage-v1") {
+		fail(`${label}.kind must be durable-record-coverage-v1`);
+	}
+
+	const { startInclusive, endExclusive } = requireMatchingMeasurementWindow(
+		rawOutput.measurement_window,
+		`${label}.measurement_window`,
+		snapshotWindow,
+	);
+
+	if (!Array.isArray(rawOutput.scoped_sessions)) {
+		fail(`${label}.scoped_sessions must be an array`);
+	}
+	const scopedSessions = new Map();
+	for (const [sessionIndex, session] of rawOutput.scoped_sessions.entries()) {
+		const sessionLabel = `${label}.scoped_sessions[${sessionIndex}]`;
+		requireExactKeys(session, ["session_id", "started_at"], sessionLabel);
+		const sessionId = requireString(session.session_id, `${sessionLabel}.session_id`);
+		if (!OPAQUE_SESSION_ID.test(sessionId)) {
+			fail(`${sessionLabel}.session_id must be an opaque session identity`);
+		}
+		if (scopedSessions.has(sessionId)) {
+			fail(`${label}.scoped_sessions contains duplicate session identity ${sessionId}`);
+		}
+		scopedSessions.set(
+			sessionId,
+			requireIsoTimestamp(session.started_at, `${sessionLabel}.started_at`),
+		);
+	}
+
+	const denominatorSessionIds = new Set(
+		[...scopedSessions]
+			.filter(([, startedAt]) => startedAt >= startInclusive && startedAt < endExclusive)
+			.map(([sessionId]) => sessionId),
+	);
+	if (denominatorSessionIds.size === 0) {
+		fail(`${label} reproducible scoped-session denominator cannot be empty`);
+	}
+
+	if (!Array.isArray(rawOutput.durable_records)) {
+		fail(`${label}.durable_records must be an array`);
+	}
+	const recordIds = new Set();
+	const coveredSessionIds = new Set();
+	for (const [recordIndex, record] of rawOutput.durable_records.entries()) {
+		const recordLabel = `${label}.durable_records[${recordIndex}]`;
+		requireExactKeys(
+			record,
+			["record_id", "session_id", "recorded_at", "record_type"],
+			recordLabel,
+		);
+		const recordId = requireString(record.record_id, `${recordLabel}.record_id`);
+		if (!OPAQUE_RECORD_ID.test(recordId)) {
+			fail(`${recordLabel}.record_id must be an opaque durable-record identity`);
+		}
+		if (recordIds.has(recordId)) {
+			fail(`${label}.durable_records contains duplicate record identity ${recordId}`);
+		}
+		recordIds.add(recordId);
+
+		const sessionId = requireString(record.session_id, `${recordLabel}.session_id`);
+		if (!OPAQUE_SESSION_ID.test(sessionId)) {
+			fail(`${recordLabel}.session_id must be an opaque session identity`);
+		}
+		const recordedAt = requireIsoTimestamp(record.recorded_at, `${recordLabel}.recorded_at`);
+		if (!new Set(["decision", "finding"]).has(record.record_type)) {
+			fail(`${recordLabel}.record_type must be decision or finding`);
+		}
+		const sessionStartedAt = scopedSessions.get(sessionId);
+		if (sessionStartedAt !== undefined && recordedAt < sessionStartedAt) {
+			fail(`${recordLabel}.recorded_at cannot precede its scoped session`);
+		}
+
+		if (
+			denominatorSessionIds.has(sessionId) &&
+			recordedAt >= startInclusive &&
+			recordedAt < endExclusive
+		) {
+			coveredSessionIds.add(sessionId);
+		}
+	}
+
+	return {
+		"durable-record-coverage.session-coverage-percentage":
+			Math.round((coveredSessionIds.size / denominatorSessionIds.size) * 1000) / 10,
+	};
+}
+
+function durableRecordDenominatorIdentity(rawOutput, snapshotWindow) {
+	const startInclusive = Date.parse(`${snapshotWindow.start}T00:00:00Z`);
+	const endExclusive = Date.parse(`${snapshotWindow.end}T00:00:00Z`) + 86_400_000;
+	return rawOutput.scoped_sessions
+		.filter((session) => {
+			const startedAt = Date.parse(session.started_at);
+			return startedAt >= startInclusive && startedAt < endExclusive;
+		})
+		.map((session) => session.session_id)
+		.sort();
+}
+
 function metricValuesFromReceiptOutput(rawOutput, label, snapshotWindow) {
 	requireRecord(rawOutput, label);
 	if (Object.hasOwn(rawOutput, "kind")) {
@@ -577,11 +689,19 @@ function metricValuesFromReceiptOutput(rawOutput, label, snapshotWindow) {
 		if (rawOutput.kind === "change-traceability-v1") {
 			return calculateChangeTraceabilityMetrics(rawOutput, label, snapshotWindow);
 		}
+		if (rawOutput.kind === "durable-record-coverage-v1") {
+			return calculateDurableRecordCoverageMetrics(rawOutput, label, snapshotWindow);
+		}
 		fail(`${label}.kind is not supported`);
 	}
 	const metricValues = validateMetricValueMap(rawOutput, label);
 	if (Object.keys(metricValues).some((metricId) => metricId.startsWith("change-traceability."))) {
 		fail(`${label} change-traceability receipts must use controlled change evidence`);
+	}
+	if (
+		Object.keys(metricValues).some((metricId) => metricId.startsWith("durable-record-coverage."))
+	) {
+		fail(`${label} durable-record-coverage receipts must use controlled session evidence`);
 	}
 	return metricValues;
 }
@@ -630,6 +750,21 @@ function validatePrivateReceipt(privateReceipt, receiptId, label, snapshotWindow
 		`${label}.independent_reproduction.raw_output`,
 		snapshotWindow,
 	);
+	if (
+		privateReceipt.primary.raw_output.kind === "durable-record-coverage-v1" &&
+		privateReceipt.independent_reproduction.raw_output.kind === "durable-record-coverage-v1" &&
+		canonicalHash(
+			durableRecordDenominatorIdentity(privateReceipt.primary.raw_output, snapshotWindow),
+		) !==
+			canonicalHash(
+				durableRecordDenominatorIdentity(
+					privateReceipt.independent_reproduction.raw_output,
+					snapshotWindow,
+				),
+			)
+	) {
+		fail(`${label} scoped-session denominator is not independently reproducible`);
+	}
 
 	const primaryResultHash = canonicalHash(privateReceipt.primary.raw_output);
 	const reproductionResultHash = canonicalHash(privateReceipt.independent_reproduction.raw_output);

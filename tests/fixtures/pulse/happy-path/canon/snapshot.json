@@ -47,7 +47,7 @@
 			"receipt_ref": "rct_2a317c94150e42899f9b3ee2cb7e9fc5"
 		},
 		"durable-record-coverage.session-coverage-percentage": {
-			"value": 96.2,
+			"value": 75,
 			"receipt_ref": "rct_805e7a0afde243a09bd1b31f66af7327"
 		}
 	}
