@@ -123,6 +123,10 @@ function validateWindow(window, label) {
 	if (inclusiveDays !== window.days) fail(`${label} must span 90 inclusive calendar days`);
 }
 
+function windowsMatch(left, right) {
+	return left.days === right.days && left.start === right.start && left.end === right.end;
+}
+
 function assertPrivacySafe(value, label = "public projection") {
 	if (Array.isArray(value)) {
 		value.forEach((child, index) => assertPrivacySafe(child, `${label}[${index}]`));
@@ -194,9 +198,7 @@ export function validatePublicProjection(projection) {
 			}
 			if (!Number.isFinite(metric.value)) fail(`${metric.id}.value must be a finite number`);
 			if (metric.as_of !== projection.as_of) fail(`${metric.id}.as_of must match snapshot as_of`);
-			if (
-				JSON.stringify(metric.measurement_window) !== JSON.stringify(projection.measurement_window)
-			) {
+			if (!windowsMatch(metric.measurement_window, projection.measurement_window)) {
 				fail(`${metric.id}.measurement_window must match the snapshot window`);
 			}
 			if (metric.refresh_state !== projection.verification_state) {
@@ -216,9 +218,7 @@ export function validatePublicProjection(projection) {
 }
 
 const projectionPath = path.resolve(
-	process.env.PULSE_PUBLIC_PROJECTION_PATH ??
-		process.argv[2] ??
-		path.join("src", "data", "pulse", "public-snapshot.json"),
+	process.argv[2] ?? path.join("src", "data", "pulse", "public-snapshot.json"),
 );
 
 try {

@@ -8,11 +8,11 @@ import { test } from "node:test";
 const repositoryRoot = path.resolve(import.meta.dirname, "../..");
 const pulseHtmlPath = path.join(repositoryRoot, "dist", "colophon", "the-pulse", "index.html");
 
-function runProductionBuild(environment = {}) {
+function runProductionBuild() {
 	return spawnSync("npm run build", {
 		cwd: repositoryRoot,
 		encoding: "utf8",
-		env: { ...process.env, ASTRO_TELEMETRY_DISABLED: "1", ...environment },
+		env: { ...process.env, ASTRO_TELEMETRY_DISABLED: "1" },
 		shell: true,
 	});
 }
@@ -73,7 +73,7 @@ test("the approved controlled projection is complete in static HTML without clie
 	}
 });
 
-test("an invalid public projection fails through the normal production build", () => {
+test("an invalid public projection fails the release validator wired before Astro", () => {
 	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-public-gate-"));
 	try {
 		const sourcePath = path.join(repositoryRoot, "src", "data", "pulse", "public-snapshot.json");
@@ -82,11 +82,31 @@ test("an invalid public projection fails through the normal production build", (
 		invalidProjection.groups.pop();
 		fs.writeFileSync(invalidPath, `${JSON.stringify(invalidProjection, null, "\t")}\n`);
 
-		const build = runProductionBuild({ PULSE_PUBLIC_PROJECTION_PATH: invalidPath });
-		assert.notEqual(build.status, 0, "the release path accepted an incomplete projection");
+		const validation = spawnSync(
+			process.execPath,
+			[
+				path.join(repositoryRoot, "scripts", "pulse", "validate_public_projection.mjs"),
+				invalidPath,
+			],
+			{ cwd: repositoryRoot, encoding: "utf8" },
+		);
+		assert.notEqual(
+			validation.status,
+			0,
+			"the release validator accepted an incomplete projection",
+		);
 		assert.match(
-			`${build.stdout}\n${build.stderr}`,
+			`${validation.stdout}\n${validation.stderr}`,
 			/\[public-projection\] groups must exactly match the three headline proof groups/u,
+		);
+
+		const buildCommand = JSON.parse(
+			fs.readFileSync(path.join(repositoryRoot, "package.json"), "utf8"),
+		).scripts.build;
+		assert.ok(
+			buildCommand.indexOf("scripts/pulse/validate_public_projection.mjs") <
+				buildCommand.indexOf("astro build"),
+			"the public projection validator must run before Astro in the production build",
 		);
 	} finally {
 		fs.rmSync(workspace, { force: true, recursive: true });

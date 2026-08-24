@@ -174,16 +174,18 @@ function formatValue(metric: PulseMetric) {
 <style>
 	.pulse-snapshot {
 		--pulse-border: rgba(255, 255, 255, 0.1);
+		--pulse-info: #00c2ff;
 		--pulse-muted: #9ca3af;
-		--pulse-surface: #0a0a0a;
-		background: #000;
-		color: #e0e0e0;
-		font-family: "JetBrains Mono Variable", "JetBrains Mono", monospace;
+		--pulse-primary: #2e5cff;
+		--pulse-surface: #1f2937;
+		background: #030303;
+		color: #e5e7eb;
 	}
 
 	.pulse-control-note {
-		border: 1px solid #ff6600;
-		color: #ffb380;
+		border: 1px solid #f59e0b;
+		color: #f59e0b;
+		font-family: var(--font-mono);
 		font-size: 0.75rem;
 		font-weight: 700;
 		letter-spacing: 0.08em;
@@ -200,8 +202,8 @@ function formatValue(metric: PulseMetric) {
 	.pulse-heading h2,
 	.pulse-group h3,
 	.pulse-inventory h3 {
-		color: #e0e0e0;
-		font-family: inherit;
+		color: #e5e7eb;
+		font-family: var(--font-header);
 		line-height: 1.1;
 		margin: 0;
 	}
@@ -221,7 +223,8 @@ function formatValue(metric: PulseMetric) {
 
 	.pulse-kicker,
 	.pulse-group-index {
-		color: #00ffff;
+		color: var(--pulse-info);
+		font-family: var(--font-mono);
 		font-size: 0.68rem;
 		font-weight: 700;
 		letter-spacing: 0.14em;
@@ -247,6 +250,7 @@ function formatValue(metric: PulseMetric) {
 	.pulse-metric span,
 	.pulse-source {
 		color: var(--pulse-muted);
+		font-family: var(--font-mono);
 		font-size: 0.64rem;
 		font-weight: 700;
 		letter-spacing: 0.1em;
@@ -254,7 +258,8 @@ function formatValue(metric: PulseMetric) {
 	}
 
 	.pulse-boundary dd {
-		color: #00ff00;
+		color: var(--pulse-primary);
+		font-family: var(--font-mono);
 		font-size: 0.78rem;
 		font-weight: 700;
 		line-height: 1.5;
@@ -293,7 +298,7 @@ function formatValue(metric: PulseMetric) {
 	}
 
 	.pulse-metric:hover {
-		border-color: #00ffff;
+		border-color: var(--pulse-info);
 	}
 
 	.pulse-reading {
@@ -314,7 +319,8 @@ function formatValue(metric: PulseMetric) {
 	}
 
 	.pulse-reading strong {
-		color: #00ff00;
+		color: var(--pulse-primary);
+		font-family: var(--font-mono);
 		font-size: 1.75rem;
 		line-height: 1;
 	}
