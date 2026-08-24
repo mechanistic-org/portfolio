@@ -20,7 +20,7 @@ const definitionFields = [
 	"method_summary",
 	"source_class",
 ];
-const issueFlowDefinitionFields = [...definitionFields, "inclusions", "exclusions"];
+const scopedDefinitionFields = [...definitionFields, "inclusions", "exclusions"];
 
 after(() => {
 	for (const directory of temporaryDirectories) {
@@ -104,9 +104,10 @@ function collectPublicNarrative(definitions, snapshot) {
 		...definitions.groups.flatMap((group) => [
 			group.label,
 			...group.metrics.flatMap((metric) =>
-				(group.id === "issue-flow" ? issueFlowDefinitionFields : definitionFields).map(
-					(field) => metric[field],
-				),
+				(["issue-flow", "change-traceability"].includes(group.id)
+					? scopedDefinitionFields
+					: definitionFields
+				).map((field) => metric[field]),
 			),
 		]),
 	];
@@ -172,8 +173,23 @@ function replaceMeasuredValue(fixtureRoot, metricId, nextValue) {
 
 	const receiptPath = path.join(fixtureRoot, "evidence", "receipts", `${receiptId}.json`);
 	const receipt = readJson(receiptPath);
-	receipt.primary.raw_output[metricId] = nextValue;
-	receipt.independent_reproduction.raw_output[metricId] = nextValue;
+	if (receipt.primary.raw_output.kind === "change-traceability-v1") {
+		assert.equal(metricId, "change-traceability.trunk-commits");
+		assert.equal(nextValue, 8);
+		const addedCommit = {
+			commit_id: "cmt_0000000000000000000000000000000a",
+			committed_at: "2026-08-10T12:00:00Z",
+			classification: "non-maintenance",
+			issue_references: [],
+		};
+		receipt.primary.raw_output.commits.push(addedCommit);
+		receipt.independent_reproduction.raw_output.commits.push(structuredClone(addedCommit));
+		snapshot.values["change-traceability.issue-reference-coverage"].value = 66.7;
+	} else {
+		receipt.primary.raw_output[metricId] = nextValue;
+		receipt.independent_reproduction.raw_output[metricId] = nextValue;
+	}
+	writeJson(snapshotPath, snapshot);
 	writeJson(receiptPath, receipt);
 
 	const manifest = readJson(manifestPath);
@@ -198,6 +214,47 @@ function mutateIssueFlowReceipt(fixtureRoot, mutate) {
 	manifestEntry.sha256 = sha256(fs.readFileSync(receiptPath));
 	manifestEntry.independent_reproduction.result_sha256 = canonicalHash(receipt.primary.raw_output);
 	writeJson(manifestPath, manifest);
+}
+
+function replaceChangeTraceabilityReceiptWithPrecomputedMetrics(fixtureRoot) {
+	const snapshot = readJson(path.join(fixtureRoot, "canon", "snapshot.json"));
+	const metricId = "change-traceability.trunk-commits";
+	const receiptId = snapshot.values[metricId].receipt_ref;
+	const precomputedMetrics = Object.fromEntries(
+		Object.entries(snapshot.values)
+			.filter(([candidateMetricId]) => candidateMetricId.startsWith("change-traceability."))
+			.map(([candidateMetricId, measuredValue]) => [candidateMetricId, measuredValue.value]),
+	);
+	const receiptPath = path.join(fixtureRoot, "evidence", "receipts", `${receiptId}.json`);
+	const receipt = readJson(receiptPath);
+	receipt.primary.raw_output = precomputedMetrics;
+	receipt.independent_reproduction.raw_output = structuredClone(precomputedMetrics);
+	writeJson(receiptPath, receipt);
+
+	const receiptSha256 = sha256(fs.readFileSync(receiptPath));
+	const manifestPath = path.join(fixtureRoot, "evidence", "manifest.json");
+	const manifest = readJson(manifestPath);
+	const manifestEntry = manifest.receipts.find((entry) => entry.id === receiptId);
+	manifestEntry.sha256 = receiptSha256;
+	manifestEntry.independent_reproduction.result_sha256 = canonicalHash(precomputedMetrics);
+	writeJson(manifestPath, manifest);
+
+	return { receiptId, receiptSha256 };
+}
+
+function rebindReceiptHash(fixtureRoot, baselineProjection, receiptId, receiptSha256) {
+	const candidateProjection = structuredClone(baselineProjection);
+	for (const group of candidateProjection.groups) {
+		for (const metric of group.metrics) {
+			if (metric.receipt.id === receiptId) metric.receipt.sha256 = receiptSha256;
+		}
+	}
+	const approvalPath = path.join(fixtureRoot, "canon", "approval.json");
+	const approval = readJson(approvalPath);
+	approval.binding.public_projection_sha256 = sha256(
+		Buffer.from(stableJson(candidateProjection), "utf8"),
+	);
+	writeJson(approvalPath, approval);
 }
 
 function addOpaqueIssueIdentities(rawOutput) {
@@ -320,6 +377,21 @@ test("a manually approved public GitHub primary source remains publishable", () 
 	assert.match(fs.readFileSync(outputPath, "utf8"), /github\.com\/nodejs\/node/u);
 });
 
+test("precomputed change metrics fail closed instead of bypassing controlled change evidence", () => {
+	const { fixtureRoot, outputPath } = createCandidateWorkspace();
+	const approvedBytes = fs.readFileSync(outputPath);
+	const baselineProjection = JSON.parse(approvedBytes.toString("utf8"));
+	const { receiptId, receiptSha256 } =
+		replaceChangeTraceabilityReceiptWithPrecomputedMetrics(fixtureRoot);
+	rebindReceiptHash(fixtureRoot, baselineProjection, receiptId, receiptSha256);
+
+	const result = runProjector(fixtureRoot, outputPath);
+
+	assert.notEqual(result.status, 0);
+	assert.match(result.stderr, /change-traceability receipts must use controlled change evidence/u);
+	assert.deepEqual(fs.readFileSync(outputPath), approvedBytes);
+});
+
 test("a duplicate opaque issue identity fails closed without replacing the approved projection", () => {
 	const { fixtureRoot, outputPath } = createCandidateWorkspace();
 	const approvedBytes = fs.readFileSync(outputPath);
@@ -420,7 +492,7 @@ for (const failureCase of [
 		name: "an altered approved value with a reproduced receipt",
 		error: /effective_state=proposal; approval binding values_sha256 does not match/u,
 		mutate(fixtureRoot) {
-			replaceMeasuredValue(fixtureRoot, "change-traceability.trunk-commits", 133);
+			replaceMeasuredValue(fixtureRoot, "change-traceability.trunk-commits", 8);
 		},
 	},
 	{

@@ -66,6 +66,8 @@
 					"definition": "Commits reaching trunk during the shared measurement window.",
 					"numerator": "Commits reachable from trunk with commit dates inside the window.",
 					"denominator": "The shared 90-day measurement window.",
+					"inclusions": "Opaque trunk commit records whose commit timestamp falls inside the inclusive 90-day window.",
+					"exclusions": "Commits outside the window and changes not recorded on trunk.",
 					"method_summary": "Count first-parent and merged commits reachable from trunk in-window.",
 					"source_class": "version-control"
 				},
@@ -76,6 +78,8 @@
 					"definition": "Trunk commits produced by explicitly scheduled maintenance.",
 					"numerator": "In-window trunk commits classified as scheduled maintenance.",
 					"denominator": "All in-window trunk commits.",
+					"inclusions": "In-window trunk commits carrying the controlled scheduled-maintenance classification.",
+					"exclusions": "Non-maintenance commits and all commits outside the shared window.",
 					"method_summary": "Classify governed maintenance identities before traceability coverage.",
 					"source_class": "version-control"
 				},
@@ -86,6 +90,8 @@
 					"definition": "Non-maintenance trunk commits carrying a valid issue reference.",
 					"numerator": "Non-maintenance trunk commits with a valid issue reference.",
 					"denominator": "All non-maintenance trunk commits in the window.",
+					"inclusions": "In-window non-maintenance trunk commits referencing at least one independently validated opaque issue identity.",
+					"exclusions": "Scheduled-maintenance commits, outside-window commits, missing references, and references absent from the validated issue set.",
 					"method_summary": "Validate referenced issues after removing scheduled maintenance commits.",
 					"source_class": "version-control"
 				},
@@ -96,6 +102,8 @@
 					"definition": "Unique valid issues referenced by non-maintenance trunk commits.",
 					"numerator": "Unique valid issue identities represented by in-window commits.",
 					"denominator": "Non-maintenance trunk commits with valid issue references.",
+					"inclusions": "Distinct validated opaque issue identities referenced by covered non-maintenance commits in the shared window.",
+					"exclusions": "Duplicate references, invalid references, maintenance-only references, and outside-window references.",
 					"method_summary": "Deduplicate valid issue references across covered commits.",
 					"source_class": "version-control"
 				}

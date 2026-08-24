@@ -31,19 +31,19 @@
 			"receipt_ref": "rct_f97b4275c4644cb78ce8e40f5e608a1e"
 		},
 		"change-traceability.trunk-commits": {
-			"value": 132,
+			"value": 7,
 			"receipt_ref": "rct_2a317c94150e42899f9b3ee2cb7e9fc5"
 		},
 		"change-traceability.scheduled-maintenance-commits": {
-			"value": 24,
+			"value": 2,
 			"receipt_ref": "rct_2a317c94150e42899f9b3ee2cb7e9fc5"
 		},
 		"change-traceability.issue-reference-coverage": {
-			"value": 91.7,
+			"value": 80,
 			"receipt_ref": "rct_2a317c94150e42899f9b3ee2cb7e9fc5"
 		},
 		"change-traceability.distinct-issues": {
-			"value": 38,
+			"value": 3,
 			"receipt_ref": "rct_2a317c94150e42899f9b3ee2cb7e9fc5"
 		},
 		"durable-record-coverage.session-coverage-percentage": {
