@@ -8,12 +8,13 @@ color: "green"
 order: 1
 ---
 
-import snapshot from "../../data/pulse/public-snapshot.json";
-import history from "../../data/pulse/public-history.json";
 import PulseSnapshot from "../../components/Pulse/PulseSnapshot.astro";
+import {
+	loadPublicHistory,
+	selectCurrentPublicSnapshot,
+} from "../../../scripts/pulse/public_history_source.mjs";
 
-<PulseSnapshot
-	snapshot={history.current_snapshot_id === null ? null : snapshot}
-	history={history}
-	controlledExample
-/>
+export const history = loadPublicHistory();
+export const currentSnapshot = selectCurrentPublicSnapshot(history);
+
+<PulseSnapshot snapshot={currentSnapshot} history={history} controlledExample />

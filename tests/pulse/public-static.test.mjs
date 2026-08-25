@@ -5,26 +5,34 @@ import os from "node:os";
 import path from "node:path";
 import { test } from "node:test";
 
+import { PUBLIC_HISTORY_PATH_ENV } from "../../scripts/pulse/public_history_source.mjs";
+
 const repositoryRoot = path.resolve(import.meta.dirname, "../..");
 const pulseHtmlPath = path.join(repositoryRoot, "dist", "colophon", "the-pulse", "index.html");
 
-function runProductionBuild() {
+function productionBuildEnvironment(environment = {}) {
+	const inherited = { ...process.env };
+	delete inherited[PUBLIC_HISTORY_PATH_ENV];
+	return { ...inherited, ...environment, ASTRO_TELEMETRY_DISABLED: "1" };
+}
+
+function runProductionBuild(environment = {}) {
 	return spawnSync("npm run build", {
 		cwd: repositoryRoot,
 		encoding: "utf8",
-		env: { ...process.env, ASTRO_TELEMETRY_DISABLED: "1" },
+		env: productionBuildEnvironment(environment),
 		shell: true,
 	});
 }
 
 function runProductionBuildWithHistory(history) {
-	const historyPath = path.join(repositoryRoot, "src", "data", "pulse", "public-history.json");
-	const original = fs.readFileSync(historyPath);
+	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-static-history-"));
+	const historyPath = path.join(workspace, "public-history.json");
 	try {
 		fs.writeFileSync(historyPath, `${JSON.stringify(history, null, "\t")}\n`);
-		return runProductionBuild();
+		return runProductionBuild({ [PUBLIC_HISTORY_PATH_ENV]: historyPath });
 	} finally {
-		fs.writeFileSync(historyPath, original);
+		fs.rmSync(workspace, { force: true, recursive: true });
 	}
 }
 
@@ -50,6 +58,23 @@ function runHistoryValidation(historyPath) {
 		{ cwd: repositoryRoot, encoding: "utf8" },
 	);
 }
+
+test("default static builds ignore an ambient alternate history path", () => {
+	const previous = process.env[PUBLIC_HISTORY_PATH_ENV];
+	try {
+		process.env[PUBLIC_HISTORY_PATH_ENV] = path.join(os.tmpdir(), "ambient-public-history.json");
+		assert.equal(Object.hasOwn(productionBuildEnvironment(), PUBLIC_HISTORY_PATH_ENV), false);
+		assert.equal(
+			productionBuildEnvironment({ [PUBLIC_HISTORY_PATH_ENV]: "explicit-history.json" })[
+				PUBLIC_HISTORY_PATH_ENV
+			],
+			"explicit-history.json",
+		);
+	} finally {
+		if (previous === undefined) delete process.env[PUBLIC_HISTORY_PATH_ENV];
+		else process.env[PUBLIC_HISTORY_PATH_ENV] = previous;
+	}
+});
 
 test("the Pulse component consumes the semantic design tokens without local palette copies", () => {
 	const component = fs.readFileSync(
@@ -227,12 +252,15 @@ test("the history gate rejects an approval-time active marker inside an archived
 });
 
 test("an archived-only history validates and renders without implying a current snapshot", () => {
-	const history = JSON.parse(
-		fs.readFileSync(
-			path.join(repositoryRoot, "src", "data", "pulse", "public-history.json"),
-			"utf8",
-		),
+	const committedHistoryPath = path.join(
+		repositoryRoot,
+		"src",
+		"data",
+		"pulse",
+		"public-history.json",
 	);
+	const committedHistoryMtime = fs.statSync(committedHistoryPath, { bigint: true }).mtimeNs;
+	const history = JSON.parse(fs.readFileSync(committedHistoryPath, "utf8"));
 	const archivedOnly = {
 		...history,
 		current_snapshot_id: null,
@@ -247,6 +275,11 @@ test("an archived-only history validates and renders without implying a current 
 
 		const build = runProductionBuildWithHistory(archivedOnly);
 		assert.equal(build.status, 0, `${build.stdout}\n${build.stderr}`);
+		assert.equal(
+			fs.statSync(committedHistoryPath, { bigint: true }).mtimeNs,
+			committedHistoryMtime,
+			"an alternate static render must not mutate the committed public history source",
+		);
 		const html = fs.readFileSync(pulseHtmlPath, "utf8");
 		assert.ok(html.includes("No current approved snapshot"));
 		assert.ok(html.includes("No evidence is presented as current or live."));

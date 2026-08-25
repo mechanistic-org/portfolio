@@ -1,2 +1,3 @@
 # Receipt fixture hashes cover complete file bytes, so checkout newlines are contractual.
 tests/fixtures/pulse/happy-path/evidence/receipts/*.json text eol=lf
+tests/fixtures/pulse/lifecycle-history/packages/*/evidence/receipts/*.json text eol=lf
