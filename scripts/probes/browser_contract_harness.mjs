@@ -167,11 +167,24 @@ export function assertNoPageProblems(problems) {
 	if (problems.length > 0) throw new Error(problems.join(" | "));
 }
 
+function printResults(title, results, expectedAssertions) {
+	console.log(`\n${title}`);
+	for (const [index, result] of results.entries()) {
+		const status = result.passed ? "PASS" : "FAIL";
+		console.log(`${String(index + 1).padStart(2, "0")} ${status}  ${result.name}`);
+		if (result.details) console.log(`         ${result.details}`);
+		if (!result.passed) console.log(`         ${result.error}`);
+	}
+	const passed = results.filter((result) => result.passed).length;
+	console.log(`\n${passed}/${expectedAssertions} assertions passed`);
+}
+
 export async function runBrowserContract({
 	assertionSpecs,
 	cacheDirectory,
+	expectedAssertions,
 	initialViewport = VIEWPORTS[0],
-	printResults,
+	title,
 }) {
 	let server = null;
 	let browser = null;
@@ -207,14 +220,15 @@ export async function runBrowserContract({
 			fatalError ??= new Error(`Astro cleanup failed: ${error.message}`);
 		}
 	}
-	if (results.length > 0) printResults(results);
+	if (results.length > 0) printResults(title, results, expectedAssertions);
 	if (fatalError) {
 		console.error(`\nHARNESS ERROR: ${fatalError.message}`);
 		if (server?.getOutput?.()) console.error(`\nAstro output:\n${server.getOutput()}`);
 	}
 	return !(
 		fatalError ||
-		results.length !== assertionSpecs.length ||
+		assertionSpecs.length !== expectedAssertions ||
+		results.length !== expectedAssertions ||
 		results.some((result) => !result.passed)
 	);
 }

@@ -268,23 +268,12 @@ const assertionSpecs = [
 	["The Pulse is contained and legible at all supported viewports", assertionResponsiveContainment],
 ];
 
-function printResults(results) {
-	console.log("\nPulse public behavior contract");
-	for (const [index, result] of results.entries()) {
-		const status = result.passed ? "PASS" : "FAIL";
-		console.log(`${String(index + 1).padStart(2, "0")} ${status}  ${result.name}`);
-		if (result.details) console.log(`         ${result.details}`);
-		if (!result.passed) console.log(`         ${result.error}`);
-	}
-	const passed = results.filter((result) => result.passed).length;
-	console.log(`\n${passed}/${EXPECTED_ASSERTIONS} assertions passed`);
-}
-
 const passed = await runBrowserContract({
 	assertionSpecs,
 	cacheDirectory: HARNESS_CACHE_DIR,
+	expectedAssertions: EXPECTED_ASSERTIONS,
 	initialViewport: VIEWPORTS[0],
-	printResults,
+	title: "Pulse public behavior contract",
 });
 if (!passed) {
 	process.exitCode = 1;
