@@ -5,11 +5,14 @@ import os from "node:os";
 import path from "node:path";
 import { test } from "node:test";
 
-import { PUBLIC_HISTORY_PATH_ENV } from "../../scripts/pulse/public_history_source.mjs";
+import {
+	loadPulseRenderModel,
+	PUBLIC_HISTORY_PATH_ENV,
+	PUBLIC_PROPOSAL_PATH_ENV,
+} from "../../scripts/pulse/public_history_source.mjs";
 
 const repositoryRoot = path.resolve(import.meta.dirname, "../..");
 const pulseHtmlPath = path.join(repositoryRoot, "dist", "colophon", "the-pulse", "index.html");
-const PUBLIC_PROPOSAL_PATH_ENV = "PULSE_PROPOSAL_PATH";
 
 function productionBuildEnvironment(environment = {}) {
 	const inherited = { ...process.env };
@@ -43,7 +46,11 @@ function runProductionBuildWithProposal(projection) {
 	const proposalPath = path.join(workspace, "proposal.json");
 	try {
 		fs.writeFileSync(proposalPath, `${JSON.stringify(projection, null, "\t")}\n`);
-		return runProductionBuild({ [PUBLIC_PROPOSAL_PATH_ENV]: proposalPath });
+		return runProductionBuild({
+			CI: "false",
+			CF_PAGES: "false",
+			[PUBLIC_PROPOSAL_PATH_ENV]: proposalPath,
+		});
 	} finally {
 		fs.rmSync(workspace, { force: true, recursive: true });
 	}
@@ -110,6 +117,22 @@ test("default static builds ignore an ambient alternate history path", () => {
 	} finally {
 		if (previous === undefined) delete process.env[PUBLIC_HISTORY_PATH_ENV];
 		else process.env[PUBLIC_HISTORY_PATH_ENV] = previous;
+	}
+});
+
+test("deployment builds fail closed when an unapproved proposal path is present", () => {
+	for (const deploymentEnvironment of [{ CI: "true" }, { CF_PAGES: "1" }]) {
+		assert.throws(
+			() =>
+				loadPulseRenderModel(
+					{ current_snapshot_id: null, snapshots: [] },
+					{
+						...deploymentEnvironment,
+						[PUBLIC_PROPOSAL_PATH_ENV]: path.join(os.tmpdir(), "unapproved-proposal.json"),
+					},
+				),
+			/deployment build cannot render PULSE_PROPOSAL_PATH/u,
+		);
 	}
 });
 

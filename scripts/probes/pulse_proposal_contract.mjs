@@ -151,6 +151,8 @@ async function assertionResponsiveContainment(page, problems) {
 }
 
 const previousProposalPath = process.env[PROPOSAL_PATH_ENV];
+const previousCi = process.env.CI;
+const previousCloudflarePages = process.env.CF_PAGES;
 const workspace = previousProposalPath
 	? null
 	: fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-browser-proposal-"));
@@ -161,6 +163,8 @@ try {
 		fs.writeFileSync(proposalPath, `${JSON.stringify(proposalFixture(), null, "\t")}\n`);
 		process.env[PROPOSAL_PATH_ENV] = proposalPath;
 	}
+	delete process.env.CI;
+	delete process.env.CF_PAGES;
 	passed = await runBrowserContract({
 		assertionSpecs: [
 			[
@@ -183,6 +187,10 @@ try {
 		delete process.env[PROPOSAL_PATH_ENV];
 		fs.rmSync(workspace, { force: true, recursive: true });
 	}
+	if (previousCi === undefined) delete process.env.CI;
+	else process.env.CI = previousCi;
+	if (previousCloudflarePages === undefined) delete process.env.CF_PAGES;
+	else process.env.CF_PAGES = previousCloudflarePages;
 }
 
 if (!passed) process.exitCode = 1;
