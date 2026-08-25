@@ -49,17 +49,37 @@ const byPractice = PRACTICES.map((practice) => ({
 			<p class="method-eyebrow">/// How I Work</p>
 			<h1>A competency list proves nothing. Here is the same claim with receipts attached.</h1>
 			<p class="method-lede">
-				Every capability below carries one instance from the work — a part number, a measured
-				delta, a decision and what it cost — and links to the page that documents it. Where a
-				number cannot be pinned to an artifact, it is not on this page. Arranged by the physics
-				each practice governs, the same four domains used to arrange the work itself.
+				Every capability below carries one instance from the work — a part number, a measured delta,
+				a decision and what it cost — and links to the page that documents it. Where a number cannot
+				be pinned to an artifact, it is not on this page. Arranged by the physics each practice
+				governs, the same four domains used to arrange the work itself.
 			</p>
 		</header>
 
+		<aside
+			class="method-pulse site-container"
+			data-pulse-entry
+			aria-labelledby="method-pulse-title"
+		>
+			<div>
+				<p class="method-pulse-kicker">/// Operating discipline, measured</p>
+				<h2 id="method-pulse-title">The Pulse</h2>
+				<p>
+					A dated record of issue flow, change traceability, and durable practice - with
+					definitions, methods, and evidence lifecycle visible.
+				</p>
+			</div>
+			<a href="/colophon/the-pulse/">
+				Open the static record <span aria-hidden="true">→</span>
+			</a>
+		</aside>
+
 		<section class="method-field" aria-labelledby="method-field-heading">
 			<h2 id="method-field-heading" class="sr-only">The method field</h2>
-			{/* client:load for the same reason as /about — the island renders with
-			    `display: contents`, so client:visible never fires. */}
+			{
+				/* client:load for the same reason as /about — the island renders with
+			    `display: contents`, so client:visible never fires. */
+			}
 			<ConstraintField client:load nodes={fieldNodes} />
 			<p class="method-field-caption site-container">
 				{METHOD_NODES.length} practices · hover to identify · click to open the evidence
@@ -111,18 +131,20 @@ const byPractice = PRACTICES.map((practice) => ({
 			<h2>The part that is not on the résumé</h2>
 			<p>
 				The record is the deliverable. A fix that lives in someone's memory is a fix that gets
-				re-discovered by the next team at full price — so the vertical-hang cure fixture became
-				an ECO, the geometric contracts became a released drawing set, and the honest
-				compromise on clamp force got written down as a compromise. That habit is why there is
-				thirty years of this to show at all.
+				re-discovered by the next team at full price — so the vertical-hang cure fixture became an
+				ECO, the geometric contracts became a released drawing set, and the honest compromise on
+				clamp force got written down as a compromise. That habit is why there is thirty years of
+				this to show at all.
 			</p>
 			<p>
 				The same discipline now runs the infrastructure behind this site: raw program archives
-				compiled into one sourced record, projected to these pages as a read-only render
-				target so a page cannot drift from its evidence. That machinery is documented in the
+				compiled into one sourced record, projected to these pages as a read-only render target so a
+				page cannot drift from its evidence. That machinery is documented in the
 				<a href="/colophon/">colophon</a>. It is the instrument, not the product.
 			</p>
-			<a class="method-cta" href="/contact/">Tell me what's breaking <span aria-hidden="true">→</span></a>
+			<a class="method-cta" href="/contact/"
+				>Tell me what's breaking <span aria-hidden="true">→</span></a
+			>
 		</section>
 	</article>
 </BaseLayout>
@@ -158,6 +180,62 @@ const byPractice = PRACTICES.map((practice) => ({
 		font-size: clamp(1rem, 1.4vw, 1.125rem);
 		line-height: 1.7;
 		color: var(--color-base-400, #9ca3af);
+	}
+
+	.method-pulse {
+		align-items: end;
+		background: var(--card);
+		border: 1px solid var(--border);
+		display: grid;
+		gap: 1.5rem;
+		grid-template-columns: minmax(0, 1fr);
+		padding-block: 1.25rem;
+	}
+
+	.method-pulse-kicker {
+		color: var(--info);
+		font-family: var(--font-mono);
+		font-size: 0.6875rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		margin: 0 0 0.5rem;
+		text-transform: uppercase;
+	}
+
+	.method-pulse h2 {
+		font-family: var(--font-header);
+		font-size: clamp(1.5rem, 3vw, 2.25rem);
+		line-height: 1;
+		margin: 0;
+		text-transform: uppercase;
+	}
+
+	.method-pulse div > p:last-child {
+		color: var(--muted-foreground);
+		font-size: 0.875rem;
+		line-height: 1.6;
+		margin: 0.75rem 0 0;
+		max-width: 60ch;
+	}
+
+	.method-pulse > a {
+		color: var(--primary);
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.method-pulse > a:hover,
+	.method-pulse > a:focus-visible {
+		color: var(--info);
+	}
+
+	@media (min-width: 768px) {
+		.method-pulse {
+			grid-template-columns: minmax(0, 1fr) auto;
+		}
 	}
 
 	.method-field-caption {
