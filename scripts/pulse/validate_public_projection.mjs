@@ -53,6 +53,17 @@ const METRIC_KEYS = [
 	"unit",
 	"value",
 ];
+const UNAVAILABLE_GROUP_KEYS = [
+	"eligibility_rule",
+	"evidence_start",
+	"id",
+	"label",
+	"metrics",
+	"reason",
+	"receipt",
+	"value",
+	"verification_state",
+];
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/u;
 const RECEIPT_ID = /^rct_[a-f0-9]{32}$/u;
 const SHA256 = /^[a-f0-9]{64}$/u;
@@ -129,8 +140,27 @@ export function validatePublicProjection(projection) {
 
 	for (const [groupIndex, [groupId, expectedMetricIds]] of REQUIRED_GROUPS.entries()) {
 		const group = projection.groups[groupIndex];
-		requireExactKeys(group, ["id", "label", "metrics"], `groups[${groupIndex}]`);
+		const isUnavailable = group?.verification_state === "not_measurable";
+		if (isUnavailable && groupId !== "durable-record-coverage") {
+			fail("only durable-record-coverage may be not_measurable");
+		}
+		requireExactKeys(
+			group,
+			isUnavailable ? UNAVAILABLE_GROUP_KEYS : ["id", "label", "metrics"],
+			`groups[${groupIndex}]`,
+		);
 		requireText(group.label, `${groupId}.label`);
+		if (isUnavailable) {
+			if (group.value !== null) fail(`${groupId}.value must be null when not_measurable`);
+			requireText(group.reason, `${groupId}.reason`);
+			if (group.evidence_start !== null) {
+				requireCalendarDate(group.evidence_start, `${groupId}.evidence_start`);
+			}
+			requireText(group.eligibility_rule, `${groupId}.eligibility_rule`);
+			requireExactKeys(group.receipt, ["id", "sha256"], `${groupId}.receipt`);
+			if (!RECEIPT_ID.test(group.receipt.id)) fail(`${groupId}.receipt.id must be opaque`);
+			if (!SHA256.test(group.receipt.sha256)) fail(`${groupId}.receipt.sha256 must be a hash`);
+		}
 		if (!Array.isArray(group.metrics)) fail(`${groupId}.metrics must be an array`);
 		if (
 			JSON.stringify(group.metrics.map((metric) => metric?.id)) !==
@@ -155,14 +185,19 @@ export function validatePublicProjection(projection) {
 			]) {
 				requireText(metric[field], `${metric.id}.${field}`);
 			}
-			if (!Number.isFinite(metric.value)) fail(`${metric.id}.value must be a finite number`);
+			if (isUnavailable) {
+				if (metric.value !== null) fail(`${metric.id}.value must be null when not_measurable`);
+			} else if (!Number.isFinite(metric.value)) {
+				fail(`${metric.id}.value must be a finite number`);
+			}
 			if (metric.as_of !== projection.as_of) fail(`${metric.id}.as_of must match snapshot as_of`);
 			validateWindow(metric.measurement_window, `${metric.id}.measurement_window`);
 			if (!windowsMatch(metric.measurement_window, projection.measurement_window)) {
 				fail(`${metric.id}.measurement_window must match the snapshot window`);
 			}
-			if (metric.refresh_state !== projection.verification_state) {
-				fail(`${metric.id}.refresh_state must match verification_state`);
+			const expectedRefreshState = isUnavailable ? "not_measurable" : projection.verification_state;
+			if (metric.refresh_state !== expectedRefreshState) {
+				fail(`${metric.id}.refresh_state must match ${expectedRefreshState}`);
 			}
 			if (!SOURCE_CLASSES.has(metric.source_class)) {
 				fail(`${metric.id}.source_class is not public`);
@@ -170,6 +205,12 @@ export function validatePublicProjection(projection) {
 			requireExactKeys(metric.receipt, ["id", "sha256"], `${metric.id}.receipt`);
 			if (!RECEIPT_ID.test(metric.receipt.id)) fail(`${metric.id}.receipt.id must be opaque`);
 			if (!SHA256.test(metric.receipt.sha256)) fail(`${metric.id}.receipt.sha256 must be a hash`);
+			if (
+				isUnavailable &&
+				(metric.receipt.id !== group.receipt.id || metric.receipt.sha256 !== group.receipt.sha256)
+			) {
+				fail(`${metric.id}.receipt must match the unavailable group readiness receipt`);
+			}
 		}
 	}
 

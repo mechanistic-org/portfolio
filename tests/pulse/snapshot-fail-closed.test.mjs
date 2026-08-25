@@ -66,6 +66,8 @@ function projectorArguments(fixtureRoot, outputPath) {
 		path.join(fixtureRoot, "canon", "definitions.json"),
 		"--snapshot",
 		path.join(fixtureRoot, "canon", "snapshot.json"),
+		"--narrative",
+		path.join(fixtureRoot, "canon", "narrative.json"),
 		"--approval",
 		path.join(fixtureRoot, "canon", "approval.json"),
 		"--receipt-manifest",
@@ -97,10 +99,10 @@ function createCandidateWorkspace() {
 	return { fixtureRoot, outputPath };
 }
 
-function collectPublicNarrative(definitions, snapshot) {
+function collectPublicNarrative(definitions, narrative) {
 	return [
-		snapshot.public_wording.title,
-		snapshot.public_wording.summary,
+		narrative.title,
+		narrative.summary,
 		...definitions.groups.flatMap((group) => [
 			group.label,
 			...group.metrics.flatMap((metric) =>
@@ -127,12 +129,12 @@ function collectPublicSourceUrls(publicNarrative) {
 
 function rebindPrivacyReview(fixtureRoot) {
 	const definitionsPath = path.join(fixtureRoot, "canon", "definitions.json");
-	const snapshotPath = path.join(fixtureRoot, "canon", "snapshot.json");
+	const narrativePath = path.join(fixtureRoot, "canon", "narrative.json");
 	const approvalPath = path.join(fixtureRoot, "canon", "approval.json");
 	const definitions = readJson(definitionsPath);
-	const snapshot = readJson(snapshotPath);
+	const narrative = readJson(narrativePath);
 	const approval = readJson(approvalPath);
-	const publicNarrative = collectPublicNarrative(definitions, snapshot);
+	const publicNarrative = collectPublicNarrative(definitions, narrative);
 
 	approval.privacy_review.public_narrative_sha256 = canonicalHash(publicNarrative);
 	approval.privacy_review.approved_public_source_urls = collectPublicSourceUrls(publicNarrative);
@@ -141,17 +143,17 @@ function rebindPrivacyReview(fixtureRoot) {
 
 function rebindPublicWording(fixtureRoot, baselineProjection) {
 	rebindPrivacyReview(fixtureRoot);
-	const snapshotPath = path.join(fixtureRoot, "canon", "snapshot.json");
+	const narrativePath = path.join(fixtureRoot, "canon", "narrative.json");
 	const approvalPath = path.join(fixtureRoot, "canon", "approval.json");
-	const snapshot = readJson(snapshotPath);
+	const narrative = readJson(narrativePath);
 	const approval = readJson(approvalPath);
 	const candidateProjection = {
 		...baselineProjection,
-		public_wording: snapshot.public_wording,
+		public_wording: narrative,
 	};
 	const publicBytes = Buffer.from(stableJson(candidateProjection), "utf8");
 
-	approval.binding.public_wording_sha256 = canonicalHash(snapshot.public_wording);
+	approval.binding.public_wording_sha256 = canonicalHash(narrative);
 	approval.binding.public_projection_sha256 = sha256(publicBytes);
 	writeJson(approvalPath, approval);
 }
@@ -289,11 +291,11 @@ test("a bound session identifier leak fails closed without replacing the approve
 	const { fixtureRoot, outputPath } = createCandidateWorkspace();
 	const approvedBytes = fs.readFileSync(outputPath);
 	const baselineProjection = JSON.parse(approvedBytes.toString("utf8"));
-	const snapshotPath = path.join(fixtureRoot, "canon", "snapshot.json");
-	const snapshot = readJson(snapshotPath);
-	snapshot.public_wording.summary =
+	const narrativePath = path.join(fixtureRoot, "canon", "narrative.json");
+	const narrative = readJson(narrativePath);
+	narrative.summary =
 		"Scoped session portfolio#170 produced three proof groups in one private run.";
-	writeJson(snapshotPath, snapshot);
+	writeJson(narrativePath, narrative);
 	rebindPublicWording(fixtureRoot, baselineProjection);
 
 	const result = runProjector(fixtureRoot, outputPath);
@@ -379,10 +381,10 @@ for (const privacyCase of [
 		const { fixtureRoot, outputPath } = createCandidateWorkspace();
 		const approvedBytes = fs.readFileSync(outputPath);
 		const baselineProjection = JSON.parse(approvedBytes.toString("utf8"));
-		const snapshotPath = path.join(fixtureRoot, "canon", "snapshot.json");
-		const snapshot = readJson(snapshotPath);
-		snapshot.public_wording.summary = privacyCase.summary;
-		writeJson(snapshotPath, snapshot);
+		const narrativePath = path.join(fixtureRoot, "canon", "narrative.json");
+		const narrative = readJson(narrativePath);
+		narrative.summary = privacyCase.summary;
+		writeJson(narrativePath, narrative);
 		rebindPublicWording(fixtureRoot, baselineProjection);
 
 		const result = runProjector(fixtureRoot, outputPath);
@@ -396,11 +398,11 @@ for (const privacyCase of [
 test("a manually approved public GitHub primary source remains publishable", () => {
 	const { fixtureRoot, outputPath } = createCandidateWorkspace();
 	const baselineProjection = JSON.parse(fs.readFileSync(outputPath, "utf8"));
-	const snapshotPath = path.join(fixtureRoot, "canon", "snapshot.json");
-	const snapshot = readJson(snapshotPath);
-	snapshot.public_wording.summary =
+	const narrativePath = path.join(fixtureRoot, "canon", "narrative.json");
+	const narrative = readJson(narrativePath);
+	narrative.summary =
 		"Public method source: https://github.com/nodejs/node/blob/main/doc/api/crypto.md";
-	writeJson(snapshotPath, snapshot);
+	writeJson(narrativePath, narrative);
 	rebindPublicWording(fixtureRoot, baselineProjection);
 
 	const result = runProjector(fixtureRoot, outputPath);
@@ -589,8 +591,8 @@ for (const failureCase of [
 		name: "altered approved public wording",
 		error: /effective_state=proposal; approval binding public_wording_sha256 does not match/u,
 		mutate(fixtureRoot) {
-			mutateFixtureJson(fixtureRoot, "canon/snapshot.json", (snapshot) => {
-				snapshot.public_wording.summary =
+			mutateFixtureJson(fixtureRoot, "canon/narrative.json", (narrative) => {
+				narrative.summary =
 					"Three proof groups now use different approved public wording.";
 			});
 			rebindPrivacyReview(fixtureRoot);

@@ -46,7 +46,7 @@ function writeJson(filePath, value) {
 	fs.writeFileSync(filePath, stableJson(value));
 }
 
-function buildApprovedProjection(definitions, snapshot, manifest) {
+function buildApprovedProjection(definitions, snapshot, narrative, manifest) {
 	const receipts = new Map(
 		manifest.receipts.map((receipt) => [receipt.id, { id: receipt.id, sha256: receipt.sha256 }]),
 	);
@@ -57,7 +57,7 @@ function buildApprovedProjection(definitions, snapshot, manifest) {
 		measurement_window: snapshot.measurement_window,
 		lifecycle_state: snapshot.lifecycle_state,
 		verification_state: snapshot.refresh_state,
-		public_wording: snapshot.public_wording,
+		public_wording: narrative,
 		groups: definitions.groups.map((group) => ({
 			id: group.id,
 			label: group.label,
@@ -82,6 +82,7 @@ function makeDistinctApprovedPackage(source, destination, options) {
 	const approvalPath = path.join(destination, "canon", "approval.json");
 	const definitions = readJson(path.join(destination, "canon", "definitions.json"));
 	const snapshot = readJson(snapshotPath);
+	const narrative = readJson(path.join(destination, "canon", "narrative.json"));
 	const approval = readJson(approvalPath);
 	const manifestPath = path.join(destination, "evidence", "manifest.json");
 	const manifest = readJson(manifestPath);
@@ -110,10 +111,10 @@ function makeDistinctApprovedPackage(source, destination, options) {
 	approval.approved_on = options.approved_on;
 	approval.binding.definitions_sha256 = sha256(stableJson(definitions));
 	approval.binding.values_sha256 = sha256(stableJson(snapshot.values));
-	approval.binding.public_wording_sha256 = sha256(stableJson(snapshot.public_wording));
+	approval.binding.public_wording_sha256 = sha256(stableJson(narrative));
 	approval.binding.as_of = snapshot.as_of;
 	approval.binding.public_projection_sha256 = sha256(
-		stableJson(buildApprovedProjection(definitions, snapshot, manifest)),
+		stableJson(buildApprovedProjection(definitions, snapshot, narrative, manifest)),
 	);
 	writeJson(snapshotPath, snapshot);
 	writeJson(manifestPath, manifest);

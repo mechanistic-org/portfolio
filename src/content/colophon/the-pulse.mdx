@@ -10,11 +10,16 @@ order: 1
 
 import PulseSnapshot from "../../components/Pulse/PulseSnapshot.astro";
 import {
+	loadPulseRenderModel,
 	loadPublicHistory,
-	selectCurrentPublicSnapshot,
 } from "../../../scripts/pulse/public_history_source.mjs";
 
 export const history = loadPublicHistory();
-export const currentSnapshot = selectCurrentPublicSnapshot(history);
+export const pulseRenderModel = loadPulseRenderModel(history);
 
-<PulseSnapshot snapshot={currentSnapshot} history={history} controlledExample />
+<PulseSnapshot
+	snapshot={pulseRenderModel.snapshot}
+	history={history}
+	presentationState={pulseRenderModel.presentation_state}
+	controlledExample
+/>

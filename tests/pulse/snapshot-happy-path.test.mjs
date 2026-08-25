@@ -30,6 +30,8 @@ function projectFixture() {
 			path.join(fixtureRoot, "canon", "definitions.json"),
 			"--snapshot",
 			path.join(fixtureRoot, "canon", "snapshot.json"),
+			"--narrative",
+			path.join(fixtureRoot, "canon", "narrative.json"),
 			"--approval",
 			path.join(fixtureRoot, "canon", "approval.json"),
 			"--receipt-manifest",

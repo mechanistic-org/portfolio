@@ -5,7 +5,11 @@ import os from "node:os";
 import path from "node:path";
 import { test } from "node:test";
 
-import { PUBLIC_HISTORY_PATH_ENV } from "../../scripts/pulse/public_history_source.mjs";
+import {
+	loadPulseRenderModel,
+	PUBLIC_HISTORY_PATH_ENV,
+	PUBLIC_PROPOSAL_PATH_ENV,
+} from "../../scripts/pulse/public_history_source.mjs";
 
 const repositoryRoot = path.resolve(import.meta.dirname, "../..");
 const pulseHtmlPath = path.join(repositoryRoot, "dist", "colophon", "the-pulse", "index.html");
@@ -13,6 +17,7 @@ const pulseHtmlPath = path.join(repositoryRoot, "dist", "colophon", "the-pulse",
 function productionBuildEnvironment(environment = {}) {
 	const inherited = { ...process.env };
 	delete inherited[PUBLIC_HISTORY_PATH_ENV];
+	delete inherited[PUBLIC_PROPOSAL_PATH_ENV];
 	return { ...inherited, ...environment, ASTRO_TELEMETRY_DISABLED: "1" };
 }
 
@@ -36,8 +41,47 @@ function runProductionBuildWithHistory(history) {
 	}
 }
 
+function runProductionBuildWithProposal(projection) {
+	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-static-proposal-"));
+	const proposalPath = path.join(workspace, "proposal.json");
+	try {
+		fs.writeFileSync(proposalPath, `${JSON.stringify(projection, null, "\t")}\n`);
+		return runProductionBuild({
+			CI: "false",
+			CF_PAGES: "false",
+			[PUBLIC_PROPOSAL_PATH_ENV]: proposalPath,
+		});
+	} finally {
+		fs.rmSync(workspace, { force: true, recursive: true });
+	}
+}
+
 function occurrences(haystack, needle) {
 	return haystack.split(needle).length - 1;
+}
+
+function unavailableProposalProjection(sourceProjection) {
+	const proposal = structuredClone(sourceProjection);
+	const durableGroup = proposal.groups[2];
+	Object.assign(durableGroup, {
+		verification_state: "not_measurable",
+		value: null,
+		reason:
+			"A native scoped-session denominator cannot be reproduced for the complete 90-day window.",
+		evidence_start: "2026-08-22",
+		eligibility_rule:
+			"Numeric coverage becomes eligible after both the native scoped-session denominator and its durable decision/finding joins are reproducible for every day in a complete 90-day window.",
+		receipt: {
+			id: "rct_11111111111111111111111111111111",
+			sha256: "1".repeat(64),
+		},
+	});
+	Object.assign(durableGroup.metrics[0], {
+		value: null,
+		refresh_state: "not_measurable",
+		receipt: durableGroup.receipt,
+	});
+	return proposal;
 }
 
 function runProjectionValidation(projectionPath) {
@@ -73,6 +117,22 @@ test("default static builds ignore an ambient alternate history path", () => {
 	} finally {
 		if (previous === undefined) delete process.env[PUBLIC_HISTORY_PATH_ENV];
 		else process.env[PUBLIC_HISTORY_PATH_ENV] = previous;
+	}
+});
+
+test("deployment builds fail closed when an unapproved proposal path is present", () => {
+	for (const deploymentEnvironment of [{ CI: "true" }, { CF_PAGES: "1" }]) {
+		assert.throws(
+			() =>
+				loadPulseRenderModel(
+					{ current_snapshot_id: null, snapshots: [] },
+					{
+						...deploymentEnvironment,
+						[PUBLIC_PROPOSAL_PATH_ENV]: path.join(os.tmpdir(), "unapproved-proposal.json"),
+					},
+				),
+			/deployment build cannot render PULSE_PROPOSAL_PATH/u,
+		);
 	}
 });
 
@@ -163,6 +223,83 @@ test("the approved controlled projection is complete in static HTML without clie
 		"local_path",
 	]) {
 		assert.equal(html.includes(excludedText), false, `static Pulse HTML leaked: ${excludedText}`);
+	}
+});
+
+test("an unavailable proposal renders three honest static groups without a durable number", () => {
+	const publishedSnapshotPath = path.join(
+		repositoryRoot,
+		"src",
+		"data",
+		"pulse",
+		"public-snapshot.json",
+	);
+	const publishedHistoryPath = path.join(
+		repositoryRoot,
+		"src",
+		"data",
+		"pulse",
+		"public-history.json",
+	);
+	const publishedBefore = [
+		fs.readFileSync(publishedSnapshotPath),
+		fs.readFileSync(publishedHistoryPath),
+	];
+	const proposal = unavailableProposalProjection(JSON.parse(publishedBefore[0].toString("utf8")));
+	const durableGroup = proposal.groups[2];
+
+	const build = runProductionBuildWithProposal(proposal);
+	assert.equal(build.status, 0, `${build.stdout}\n${build.stderr}`);
+	const html = fs.readFileSync(pulseHtmlPath, "utf8");
+
+	assert.equal(occurrences(html, "data-pulse-proof-group"), 3);
+	assert.ok(html.includes("Unapproved snapshot proposal"));
+	assert.ok(html.includes('data-pulse-proof-group="durable-record-coverage"'));
+	assert.ok(html.includes('data-pulse-unavailable="not_measurable"'));
+	assert.ok(html.includes("Not measurable"));
+	assert.ok(html.includes(durableGroup.reason));
+	assert.ok(html.includes("Evidence starts August 22, 2026"));
+	assert.ok(html.includes(durableGroup.eligibility_rule));
+	const durableGroupStart = html.indexOf('data-pulse-proof-group="durable-record-coverage"');
+	const durableGroupHtml = html.slice(
+		durableGroupStart,
+		html.indexOf("</section>", durableGroupStart),
+	);
+	assert.equal(durableGroupHtml.includes("<strong>"), false);
+	assert.equal(html.includes("Approved static projection"), false);
+	assert.deepEqual(fs.readFileSync(publishedSnapshotPath), publishedBefore[0]);
+	assert.deepEqual(fs.readFileSync(publishedHistoryPath), publishedBefore[1]);
+});
+
+test("the release validator accepts only the complete unavailable-group public contract", () => {
+	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-unavailable-gate-"));
+	try {
+		const sourceProjection = JSON.parse(
+			fs.readFileSync(
+				path.join(repositoryRoot, "src", "data", "pulse", "public-snapshot.json"),
+				"utf8",
+			),
+		);
+		const unavailableProjection = unavailableProposalProjection(sourceProjection);
+		const projectionPath = path.join(workspace, "unavailable-proposal.json");
+		fs.writeFileSync(projectionPath, `${JSON.stringify(unavailableProjection, null, "\t")}\n`);
+
+		const validation = runProjectionValidation(projectionPath);
+		assert.equal(validation.status, 0, `${validation.stdout}\n${validation.stderr}`);
+
+		for (const invalid of [
+			{ mutate: (group) => delete group.reason, label: "missing reason" },
+			{ mutate: (group) => delete group.eligibility_rule, label: "missing eligibility rule" },
+			{ mutate: (group) => (group.value = 1), label: "numeric shortcut" },
+		]) {
+			const candidate = unavailableProposalProjection(sourceProjection);
+			invalid.mutate(candidate.groups[2]);
+			fs.writeFileSync(projectionPath, `${JSON.stringify(candidate, null, "\t")}\n`);
+			const rejected = runProjectionValidation(projectionPath);
+			assert.notEqual(rejected.status, 0, `validator accepted ${invalid.label}`);
+		}
+	} finally {
+		fs.rmSync(workspace, { force: true, recursive: true });
 	}
 });
 

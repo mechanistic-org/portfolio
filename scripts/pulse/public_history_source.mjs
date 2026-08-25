@@ -3,6 +3,9 @@ import path from "node:path";
 import process from "node:process";
 
 export const PUBLIC_HISTORY_PATH_ENV = "PULSE_PUBLIC_HISTORY_PATH";
+export const PUBLIC_PROPOSAL_PATH_ENV = "PULSE_PROPOSAL_PATH";
+
+const DEPLOYMENT_BUILD_SIGNALS = ["CI", "CF_PAGES"];
 
 const defaultPublicHistoryPath = path.join("src", "data", "pulse", "public-history.json");
 
@@ -27,5 +30,27 @@ export function selectCurrentPublicSnapshot(history) {
 	return {
 		...currentRecord.snapshot,
 		lifecycle_state: currentRecord.lifecycle.state,
+	};
+}
+
+export function loadPulseRenderModel(history, environment = process.env) {
+	const proposalPath = environment[PUBLIC_PROPOSAL_PATH_ENV];
+	if (!proposalPath) {
+		return {
+			presentation_state: "approved",
+			snapshot: selectCurrentPublicSnapshot(history),
+		};
+	}
+	const deploymentSignal = DEPLOYMENT_BUILD_SIGNALS.find((name) =>
+		new Set(["1", "true"]).has(String(environment[name] ?? "").toLowerCase()),
+	);
+	if (deploymentSignal) {
+		throw new Error(
+			`[public-history] deployment build cannot render ${PUBLIC_PROPOSAL_PATH_ENV}; ${deploymentSignal} is active`,
+		);
+	}
+	return {
+		presentation_state: "proposal",
+		snapshot: JSON.parse(fs.readFileSync(path.resolve(proposalPath), "utf8")),
 	};
 }

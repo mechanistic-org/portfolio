@@ -50,6 +50,7 @@ const GROUPS_WITH_INCLUSION_EXCLUSION = new Set([
 const REQUIRED_ARGUMENTS = [
 	"definitions",
 	"snapshot",
+	"narrative",
 	"approval",
 	"receipt-manifest",
 	"receipts-dir",
@@ -63,6 +64,7 @@ const OPAQUE_RECORD_ID = /^rec_[a-f0-9]{32}$/u;
 const SHA256 = /^[a-f0-9]{64}$/u;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/u;
 const ISO_TIMESTAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/u;
+const DURABLE_RECORD_COVERAGE_METRIC_ID = "durable-record-coverage.session-coverage-percentage";
 const PUBLIC_SOURCE_CLASSES = new Set(["issue-tracker", "version-control", "session-registry"]);
 const PUBLIC_URL = /\bhttps:\/\/[^\s<>"']+/giu;
 const PUBLIC_PULSE_DATA_DIRECTORY = path.resolve(import.meta.dirname, "../../src/data/pulse");
@@ -231,21 +233,24 @@ function inclusiveWindowDays(startInclusive, endInclusive) {
 	return (endInclusive - startInclusive) / 86_400_000 + 1;
 }
 
-function validateSnapshot(snapshot, metricIds) {
-	requireExactKeys(
-		snapshot,
-		[
-			"schema_version",
-			"snapshot_id",
-			"as_of",
-			"measurement_window",
-			"refresh_state",
-			"lifecycle_state",
-			"public_wording",
-			"values",
-		],
-		"snapshot",
-	);
+function validatePublicWording(publicWording) {
+	requireExactKeys(publicWording, ["title", "summary"], "public_wording");
+	requireString(publicWording.title, "public_wording.title");
+	requireString(publicWording.summary, "public_wording.summary");
+	return publicWording;
+}
+
+function validateSnapshot(snapshot, metricIds, publicWording) {
+	const snapshotKeys = [
+		"schema_version",
+		"snapshot_id",
+		"as_of",
+		"measurement_window",
+		"refresh_state",
+		"lifecycle_state",
+		"values",
+	];
+	requireExactKeys(snapshot, snapshotKeys, "snapshot");
 	if (snapshot.schema_version !== 1) fail("snapshot.schema_version must be 1");
 	requireString(snapshot.snapshot_id, "snapshot.snapshot_id");
 	requireIsoCalendarDate(snapshot.as_of, "snapshot.as_of");
@@ -274,9 +279,7 @@ function validateSnapshot(snapshot, metricIds) {
 		fail("snapshot.as_of must match the measurement window end date");
 	}
 
-	requireExactKeys(snapshot.public_wording, ["title", "summary"], "public_wording");
-	requireString(snapshot.public_wording.title, "public_wording.title");
-	requireString(snapshot.public_wording.summary, "public_wording.summary");
+	validatePublicWording(publicWording);
 
 	requireRecord(snapshot.values, "snapshot.values");
 	const valueIds = Object.keys(snapshot.values).sort();
@@ -287,9 +290,35 @@ function validateSnapshot(snapshot, metricIds) {
 
 	for (const metricId of definitionIds) {
 		const measuredValue = snapshot.values[metricId];
-		requireExactKeys(measuredValue, ["value", "receipt_ref"], `value ${metricId}`);
-		if (typeof measuredValue.value !== "number" || !Number.isFinite(measuredValue.value)) {
-			fail(`value ${metricId}.value must be a finite number`);
+		if (measuredValue?.value === null) {
+			if (metricId !== DURABLE_RECORD_COVERAGE_METRIC_ID) {
+				fail(`only ${DURABLE_RECORD_COVERAGE_METRIC_ID} may be not_measurable`);
+			}
+			requireExactKeys(
+				measuredValue,
+				[
+					"value",
+					"verification_state",
+					"reason",
+					"evidence_start",
+					"eligibility_rule",
+					"receipt_ref",
+				],
+				`value ${metricId}`,
+			);
+			if (measuredValue.verification_state !== "not_measurable") {
+				fail(`value ${metricId}.verification_state must be not_measurable`);
+			}
+			requireString(measuredValue.reason, `value ${metricId}.reason`);
+			if (measuredValue.evidence_start !== null) {
+				requireIsoCalendarDate(measuredValue.evidence_start, `value ${metricId}.evidence_start`);
+			}
+			requireString(measuredValue.eligibility_rule, `value ${metricId}.eligibility_rule`);
+		} else {
+			requireExactKeys(measuredValue, ["value", "receipt_ref"], `value ${metricId}`);
+			if (typeof measuredValue.value !== "number" || !Number.isFinite(measuredValue.value)) {
+				fail(`value ${metricId}.value must be a finite number`);
+			}
 		}
 		if (!OPAQUE_RECEIPT_ID.test(measuredValue.receipt_ref)) {
 			fail(`value ${metricId}.receipt_ref must be an opaque receipt identifier`);
@@ -598,10 +627,152 @@ function calculateDurableRecordCoverageResult(rawOutput, label, snapshotWindow) 
 
 	return {
 		metricValues: {
-			"durable-record-coverage.session-coverage-percentage":
+			[DURABLE_RECORD_COVERAGE_METRIC_ID]:
 				Math.round((coveredSessionIds.size / denominatorSessionIds.size) * 1000) / 10,
 		},
 		durableRecordDenominatorIdentity: [...denominatorSessionIds].sort(),
+		unavailableValues: {},
+	};
+}
+
+function optionalIsoCalendarDate(value, label) {
+	if (value === null) return null;
+	requireIsoCalendarDate(value, label);
+	return value;
+}
+
+function calculateDurableRecordReadinessResult(rawOutput, label, snapshotWindow) {
+	requireExactKeys(
+		rawOutput,
+		[
+			"kind",
+			"measurement_window",
+			"verification_state",
+			"reason",
+			"evidence_start",
+			"eligibility_rule",
+			"denominator_checks",
+		],
+		label,
+	);
+	if (rawOutput.kind !== "durable-record-readiness-v1") {
+		fail(`${label}.kind must be durable-record-readiness-v1`);
+	}
+	requireMatchingMeasurementWindow(
+		rawOutput.measurement_window,
+		`${label}.measurement_window`,
+		snapshotWindow,
+	);
+	if (rawOutput.verification_state !== "not_measurable") {
+		fail(`${label}.verification_state must be not_measurable`);
+	}
+	requireString(rawOutput.reason, `${label}.reason`);
+	optionalIsoCalendarDate(rawOutput.evidence_start, `${label}.evidence_start`);
+	requireString(rawOutput.eligibility_rule, `${label}.eligibility_rule`);
+	if (!Array.isArray(rawOutput.denominator_checks) || rawOutput.denominator_checks.length === 0) {
+		fail(`${label}.denominator_checks must be a non-empty array`);
+	}
+
+	let hasIncompleteWindow = false;
+	let hasUnstableSessionIdentity = false;
+	const observedSources = new Set();
+	for (const [checkIndex, check] of rawOutput.denominator_checks.entries()) {
+		const checkLabel = `${label}.denominator_checks[${checkIndex}]`;
+		requireExactKeys(
+			check,
+			["source", "evidence_start", "complete_window", "stable_session_identity", "observations"],
+			checkLabel,
+		);
+		if (
+			!new Set(["typed-session-lifecycle", "durable-decision-finding-records"]).has(check.source)
+		) {
+			fail(`${checkLabel}.source is not a controlled denominator source`);
+		}
+		if (observedSources.has(check.source)) fail(`${label} repeats source ${check.source}`);
+		observedSources.add(check.source);
+		optionalIsoCalendarDate(check.evidence_start, `${checkLabel}.evidence_start`);
+		if (typeof check.complete_window !== "boolean") {
+			fail(`${checkLabel}.complete_window must be boolean`);
+		}
+		if (typeof check.stable_session_identity !== "boolean") {
+			fail(`${checkLabel}.stable_session_identity must be boolean`);
+		}
+		hasIncompleteWindow ||= !check.complete_window;
+		hasUnstableSessionIdentity ||= !check.stable_session_identity;
+
+		if (check.source === "typed-session-lifecycle") {
+			requireExactKeys(
+				check.observations,
+				["row_count", "unique_session_ids", "first_event_at", "last_event_at"],
+				`${checkLabel}.observations`,
+			);
+			const rowCount = requireNonnegativeInteger(
+				check.observations.row_count,
+				`${checkLabel}.observations.row_count`,
+			);
+			const uniqueSessionIds = requireNonnegativeInteger(
+				check.observations.unique_session_ids,
+				`${checkLabel}.observations.unique_session_ids`,
+			);
+			requireIsoTimestamp(
+				check.observations.first_event_at,
+				`${checkLabel}.observations.first_event_at`,
+			);
+			requireIsoTimestamp(
+				check.observations.last_event_at,
+				`${checkLabel}.observations.last_event_at`,
+			);
+			if (rowCount === 0 || uniqueSessionIds === 0 || uniqueSessionIds > rowCount) {
+				fail(`${checkLabel}.observations does not establish complete lifecycle identities`);
+			}
+			if (
+				check.evidence_start !== check.observations.first_event_at.slice(0, 10) ||
+				rawOutput.evidence_start !== check.evidence_start
+			) {
+				fail(`${checkLabel} does not bind the public evidence-start date`);
+			}
+		} else {
+			requireExactKeys(
+				check.observations,
+				[
+					"complete_identity_sessions",
+					"complete_with_capture_document",
+					"complete_with_produced_touch",
+					"surrogate_sessions",
+					"surrogate_with_capture_document",
+				],
+				`${checkLabel}.observations`,
+			);
+			for (const [field, value] of Object.entries(check.observations)) {
+				requireNonnegativeInteger(value, `${checkLabel}.observations.${field}`);
+			}
+			if (
+				check.observations.complete_identity_sessions === 0 ||
+				check.observations.complete_with_capture_document !== 0 ||
+				check.observations.complete_with_produced_touch !== 0 ||
+				check.observations.surrogate_sessions === 0 ||
+				check.observations.surrogate_with_capture_document !== check.observations.surrogate_sessions
+			) {
+				fail(`${checkLabel}.observations does not establish the native identity join gap`);
+			}
+		}
+	}
+	if (observedSources.size !== 2 || !hasIncompleteWindow || !hasUnstableSessionIdentity) {
+		fail(`${label} does not prove the scoped-session denominator gap`);
+	}
+
+	return {
+		metricValues: {},
+		durableRecordDenominatorIdentity: null,
+		unavailableValues: {
+			[DURABLE_RECORD_COVERAGE_METRIC_ID]: {
+				value: null,
+				verification_state: rawOutput.verification_state,
+				reason: rawOutput.reason,
+				evidence_start: rawOutput.evidence_start,
+				eligibility_rule: rawOutput.eligibility_rule,
+			},
+		},
 	};
 }
 
@@ -612,16 +783,21 @@ function metricResultFromReceiptOutput(rawOutput, label, snapshotWindow) {
 			return {
 				metricValues: calculateIssueFlowMetrics(rawOutput, label, snapshotWindow),
 				durableRecordDenominatorIdentity: null,
+				unavailableValues: {},
 			};
 		}
 		if (rawOutput.kind === "change-traceability-v1") {
 			return {
 				metricValues: calculateChangeTraceabilityMetrics(rawOutput, label, snapshotWindow),
 				durableRecordDenominatorIdentity: null,
+				unavailableValues: {},
 			};
 		}
 		if (rawOutput.kind === "durable-record-coverage-v1") {
 			return calculateDurableRecordCoverageResult(rawOutput, label, snapshotWindow);
+		}
+		if (rawOutput.kind === "durable-record-readiness-v1") {
+			return calculateDurableRecordReadinessResult(rawOutput, label, snapshotWindow);
 		}
 		fail(`${label}.kind is not supported`);
 	}
@@ -637,6 +813,7 @@ function metricResultFromReceiptOutput(rawOutput, label, snapshotWindow) {
 	return {
 		metricValues,
 		durableRecordDenominatorIdentity: null,
+		unavailableValues: {},
 	};
 }
 
@@ -704,10 +881,17 @@ function validatePrivateReceipt(privateReceipt, receiptId, label, snapshotWindow
 	) {
 		fail(`${label} independent reproduction does not reproduce the derived metric values`);
 	}
+	if (
+		canonicalHash(primaryMetricResult.unavailableValues) !==
+		canonicalHash(reproductionMetricResult.unavailableValues)
+	) {
+		fail(`${label} independent reproduction does not reproduce the readiness assertion`);
+	}
 
 	return {
 		metricValues: primaryMetricResult.metricValues,
 		resultSha256: primaryResultHash,
+		unavailableValues: primaryMetricResult.unavailableValues,
 	};
 }
 
@@ -762,6 +946,7 @@ function validateReceipts(manifest, receiptsDirectory, snapshotValues, snapshotW
 				sha256: receipt.sha256,
 			},
 			metricValues: validatedReceipt.metricValues,
+			unavailableValues: validatedReceipt.unavailableValues,
 		});
 	}
 
@@ -770,7 +955,17 @@ function validateReceipts(manifest, receiptsDirectory, snapshotValues, snapshotW
 		if (!verifiedReceipt) {
 			fail(`receipt reference ${measuredValue.receipt_ref} is unresolved`);
 		}
-		if (
+		if (measuredValue.value === null) {
+			const expectedUnavailable = { ...measuredValue };
+			delete expectedUnavailable.receipt_ref;
+			if (
+				!Object.hasOwn(verifiedReceipt.unavailableValues, metricId) ||
+				canonicalHash(verifiedReceipt.unavailableValues[metricId]) !==
+					canonicalHash(expectedUnavailable)
+			) {
+				fail(`receipt ${measuredValue.receipt_ref} does not reproduce ${metricId} readiness`);
+			}
+		} else if (
 			!Object.hasOwn(verifiedReceipt.metricValues, metricId) ||
 			verifiedReceipt.metricValues[metricId] !== measuredValue.value
 		) {
@@ -781,10 +976,10 @@ function validateReceipts(manifest, receiptsDirectory, snapshotValues, snapshotW
 	return verifiedReceipts;
 }
 
-function collectPublicNarrative(definitions, snapshot) {
+function collectPublicNarrative(definitions, publicWording) {
 	return [
-		snapshot.public_wording.title,
-		snapshot.public_wording.summary,
+		publicWording.title,
+		publicWording.summary,
 		...definitions.groups.flatMap((group) => [
 			group.label,
 			...group.metrics.flatMap((metric) =>
@@ -804,7 +999,7 @@ function collectPublicSourceUrls(narrative) {
 	].sort();
 }
 
-function buildPublicProjection(definitions, snapshot, verifiedReceipts) {
+function buildPublicProjection(definitions, snapshot, publicWording, verifiedReceipts) {
 	const publicProjection = {
 		schema_version: 1,
 		snapshot_id: snapshot.snapshot_id,
@@ -812,29 +1007,48 @@ function buildPublicProjection(definitions, snapshot, verifiedReceipts) {
 		measurement_window: snapshot.measurement_window,
 		lifecycle_state: snapshot.lifecycle_state,
 		verification_state: snapshot.refresh_state,
-		public_wording: snapshot.public_wording,
-		groups: definitions.groups.map((group) => ({
-			id: group.id,
-			label: group.label,
-			metrics: group.metrics.map((definition) => {
-				const measuredValue = snapshot.values[definition.id];
-				return {
-					...definition,
-					value: measuredValue.value,
-					as_of: snapshot.as_of,
-					measurement_window: snapshot.measurement_window,
-					refresh_state: snapshot.refresh_state,
-					receipt: verifiedReceipts.get(measuredValue.receipt_ref).publicReference,
-				};
-			}),
-		})),
+		public_wording: publicWording,
+		groups: definitions.groups.map((group) => {
+			const publicGroup = {
+				id: group.id,
+				label: group.label,
+				metrics: group.metrics.map((definition) => {
+					const measuredValue = snapshot.values[definition.id];
+					return {
+						...definition,
+						value: measuredValue.value,
+						as_of: snapshot.as_of,
+						measurement_window: snapshot.measurement_window,
+						refresh_state:
+							measuredValue.value === null
+								? measuredValue.verification_state
+								: snapshot.refresh_state,
+						receipt: verifiedReceipts.get(measuredValue.receipt_ref).publicReference,
+					};
+				}),
+			};
+			const unavailableValue = group.metrics
+				.map((definition) => snapshot.values[definition.id])
+				.find((measuredValue) => measuredValue.value === null);
+			if (unavailableValue) {
+				Object.assign(publicGroup, {
+					verification_state: unavailableValue.verification_state,
+					value: null,
+					reason: unavailableValue.reason,
+					evidence_start: unavailableValue.evidence_start,
+					eligibility_rule: unavailableValue.eligibility_rule,
+					receipt: verifiedReceipts.get(unavailableValue.receipt_ref).publicReference,
+				});
+			}
+			return publicGroup;
+		}),
 	};
 
 	assertPublicProjectionPrivacy(publicProjection, fail);
 	return publicProjection;
 }
 
-function validateReleaseDecision(approval, definitions, snapshot, publicBytes) {
+function validateReleaseDecision(approval, definitions, snapshot, publicWording, publicBytes) {
 	requireExactKeys(
 		approval,
 		["status", "approved_by", "approved_on", "privacy_review", "binding"],
@@ -899,7 +1113,7 @@ function validateReleaseDecision(approval, definitions, snapshot, publicBytes) {
 		fail("approval.privacy_review.approved_public_source_urls must be an array");
 	}
 
-	const publicNarrative = collectPublicNarrative(definitions, snapshot);
+	const publicNarrative = collectPublicNarrative(definitions, publicWording);
 	const expectedNarrativeHash = canonicalHash(publicNarrative);
 	if (approval.privacy_review.public_narrative_sha256 !== expectedNarrativeHash) {
 		fail(
@@ -940,7 +1154,7 @@ function validateReleaseDecision(approval, definitions, snapshot, publicBytes) {
 	const expectedBindings = {
 		definitions_sha256: canonicalHash(definitions),
 		values_sha256: canonicalHash(snapshot.values),
-		public_wording_sha256: canonicalHash(snapshot.public_wording),
+		public_wording_sha256: canonicalHash(publicWording),
 		as_of: snapshot.as_of,
 		public_projection_sha256: sha256(publicBytes),
 	};
@@ -987,6 +1201,7 @@ function main() {
 	const argumentsByName = parseArguments(process.argv.slice(2));
 	const definitions = readJson(argumentsByName.definitions, "canon definitions").value;
 	const snapshot = readJson(argumentsByName.snapshot, "canon snapshot").value;
+	const publicWording = readJson(argumentsByName.narrative, "canon narrative").value;
 	const approval = readJson(argumentsByName.approval, "canon approval").value;
 	const receiptManifest = readJson(
 		argumentsByName["receipt-manifest"],
@@ -994,16 +1209,21 @@ function main() {
 	).value;
 
 	const metricIds = validateDefinitions(definitions);
-	validateSnapshot(snapshot, metricIds);
+	validateSnapshot(snapshot, metricIds, publicWording);
 	const verifiedReceipts = validateReceipts(
 		receiptManifest,
 		argumentsByName["receipts-dir"],
 		snapshot.values,
 		snapshot.measurement_window,
 	);
-	const publicProjection = buildPublicProjection(definitions, snapshot, verifiedReceipts);
+	const publicProjection = buildPublicProjection(
+		definitions,
+		snapshot,
+		publicWording,
+		verifiedReceipts,
+	);
 	const publicBytes = Buffer.from(stableJson(publicProjection), "utf8");
-	validateReleaseDecision(approval, definitions, snapshot, publicBytes);
+	validateReleaseDecision(approval, definitions, snapshot, publicWording, publicBytes);
 	validateOutputDestination(argumentsByName.output, approval.status);
 	writeAtomically(argumentsByName.output, publicBytes);
 
