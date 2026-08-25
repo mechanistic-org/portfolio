@@ -21,13 +21,13 @@
 					"method_summary": "Filter issue creation timestamps to the inclusive window, then count the cohort.",
 					"numerator": "Issues created from window start through window end, inclusive.",
 					"receipt": {
-						"id": "rct_f97b4275c4644cb78ce8e40f5e608a1e",
-						"sha256": "2dd79a44489cf309d7c4f67ff9c9e40c4830d2a6ca54bbae106eefdc2555d0da"
+						"id": "rct_b32cbba0dec147658faef988e0bcb70a",
+						"sha256": "0f4224eda6e8fedbec0f3fa67c1787c7e7da89c52822e4d15ebbfd13155d8c25"
 					},
 					"refresh_state": "independently-reproduced",
 					"source_class": "issue-tracker",
 					"unit": "issues",
-					"value": 5
+					"value": 221
 				},
 				{
 					"as_of": "2026-08-24",
@@ -45,13 +45,13 @@
 					"method_summary": "Divide closed cohort members by all created cohort members and round to one decimal percentage point.",
 					"numerator": "Created-cohort issues closed by as_of.",
 					"receipt": {
-						"id": "rct_f97b4275c4644cb78ce8e40f5e608a1e",
-						"sha256": "2dd79a44489cf309d7c4f67ff9c9e40c4830d2a6ca54bbae106eefdc2555d0da"
+						"id": "rct_b32cbba0dec147658faef988e0bcb70a",
+						"sha256": "0f4224eda6e8fedbec0f3fa67c1787c7e7da89c52822e4d15ebbfd13155d8c25"
 					},
 					"refresh_state": "independently-reproduced",
 					"source_class": "issue-tracker",
 					"unit": "percent",
-					"value": 60
+					"value": 83.3
 				},
 				{
 					"as_of": "2026-08-24",
@@ -69,13 +69,13 @@
 					"method_summary": "Filter to closed cohort members, divide each elapsed UTC duration by 24 hours, then take the median.",
 					"numerator": "Elapsed 24-hour days for each closed cohort member.",
 					"receipt": {
-						"id": "rct_f97b4275c4644cb78ce8e40f5e608a1e",
-						"sha256": "2dd79a44489cf309d7c4f67ff9c9e40c4830d2a6ca54bbae106eefdc2555d0da"
+						"id": "rct_b32cbba0dec147658faef988e0bcb70a",
+						"sha256": "0f4224eda6e8fedbec0f3fa67c1787c7e7da89c52822e4d15ebbfd13155d8c25"
 					},
 					"refresh_state": "independently-reproduced",
 					"source_class": "issue-tracker",
 					"unit": "days",
-					"value": 4
+					"value": 0.6784201388888889
 				},
 				{
 					"as_of": "2026-08-24",
@@ -93,13 +93,13 @@
 					"method_summary": "Subtract the opening backlog count from the closing backlog count.",
 					"numerator": "Open issues at window end minus open issues at window start.",
 					"receipt": {
-						"id": "rct_f97b4275c4644cb78ce8e40f5e608a1e",
-						"sha256": "2dd79a44489cf309d7c4f67ff9c9e40c4830d2a6ca54bbae106eefdc2555d0da"
+						"id": "rct_b32cbba0dec147658faef988e0bcb70a",
+						"sha256": "0f4224eda6e8fedbec0f3fa67c1787c7e7da89c52822e4d15ebbfd13155d8c25"
 					},
 					"refresh_state": "independently-reproduced",
 					"source_class": "issue-tracker",
 					"unit": "issues",
-					"value": 2
+					"value": -30
 				}
 			]
 		},
@@ -123,13 +123,13 @@
 					"method_summary": "Count first-parent and merged commits reachable from trunk in-window.",
 					"numerator": "Commits reachable from trunk with commit dates inside the window.",
 					"receipt": {
-						"id": "rct_2a317c94150e42899f9b3ee2cb7e9fc5",
-						"sha256": "0bf86e581defca7f8bc59ccc1b67e40b12af67ca6b28a010fc6f51f70ce21efb"
+						"id": "rct_f4cdc4dd3d24429d96690441d997e5e8",
+						"sha256": "3138a6abc9fb77540d0d56c3645fb4aee90170a275bc0f1c2be35349e9bf5c7d"
 					},
 					"refresh_state": "independently-reproduced",
 					"source_class": "version-control",
 					"unit": "commits",
-					"value": 7
+					"value": 998
 				},
 				{
 					"as_of": "2026-08-24",
@@ -147,13 +147,13 @@
 					"method_summary": "Classify governed maintenance identities before traceability coverage.",
 					"numerator": "In-window trunk commits classified as scheduled maintenance.",
 					"receipt": {
-						"id": "rct_2a317c94150e42899f9b3ee2cb7e9fc5",
-						"sha256": "0bf86e581defca7f8bc59ccc1b67e40b12af67ca6b28a010fc6f51f70ce21efb"
+						"id": "rct_f4cdc4dd3d24429d96690441d997e5e8",
+						"sha256": "3138a6abc9fb77540d0d56c3645fb4aee90170a275bc0f1c2be35349e9bf5c7d"
 					},
 					"refresh_state": "independently-reproduced",
 					"source_class": "version-control",
 					"unit": "commits",
-					"value": 2
+					"value": 257
 				},
 				{
 					"as_of": "2026-08-24",
@@ -171,13 +171,13 @@
 					"method_summary": "Validate referenced issues after removing scheduled maintenance commits.",
 					"numerator": "Non-maintenance trunk commits with a valid issue reference.",
 					"receipt": {
-						"id": "rct_2a317c94150e42899f9b3ee2cb7e9fc5",
-						"sha256": "0bf86e581defca7f8bc59ccc1b67e40b12af67ca6b28a010fc6f51f70ce21efb"
+						"id": "rct_f4cdc4dd3d24429d96690441d997e5e8",
+						"sha256": "3138a6abc9fb77540d0d56c3645fb4aee90170a275bc0f1c2be35349e9bf5c7d"
 					},
 					"refresh_state": "independently-reproduced",
 					"source_class": "version-control",
 					"unit": "percent",
-					"value": 80
+					"value": 75.8
 				},
 				{
 					"as_of": "2026-08-24",
@@ -195,17 +195,19 @@
 					"method_summary": "Deduplicate valid issue references across covered commits.",
 					"numerator": "Unique valid issue identities represented by in-window commits.",
 					"receipt": {
-						"id": "rct_2a317c94150e42899f9b3ee2cb7e9fc5",
-						"sha256": "0bf86e581defca7f8bc59ccc1b67e40b12af67ca6b28a010fc6f51f70ce21efb"
+						"id": "rct_f4cdc4dd3d24429d96690441d997e5e8",
+						"sha256": "3138a6abc9fb77540d0d56c3645fb4aee90170a275bc0f1c2be35349e9bf5c7d"
 					},
 					"refresh_state": "independently-reproduced",
 					"source_class": "version-control",
 					"unit": "issues",
-					"value": 3
+					"value": 244
 				}
 			]
 		},
 		{
+			"eligibility_rule": "Numeric coverage becomes eligible after both the native scoped-session denominator and its durable decision/finding joins are reproducible for every day in a complete 90-day window.",
+			"evidence_start": "2026-08-22",
 			"id": "durable-record-coverage",
 			"label": "Durable record coverage",
 			"metrics": [
@@ -225,15 +227,22 @@
 					"method_summary": "Deduplicate durable records by scoped session before calculating coverage.",
 					"numerator": "Scoped sessions with one or more durable records, counted once per session.",
 					"receipt": {
-						"id": "rct_805e7a0afde243a09bd1b31f66af7327",
-						"sha256": "fe94ddd2e6befe38b71c8731e08d6ae53806ded2dc734d5407d060cdad42c06a"
+						"id": "rct_3f751e24ef6f4cfd98fddb7109c28249",
+						"sha256": "0304b2b2b0f585feadfc766ef9bffb8f7e713a1f1f4d0f0ff325b8ba1c06cb76"
 					},
-					"refresh_state": "independently-reproduced",
+					"refresh_state": "not_measurable",
 					"source_class": "session-registry",
 					"unit": "percent",
-					"value": 75
+					"value": null
 				}
-			]
+			],
+			"reason": "A native scoped-session denominator cannot be reproduced for the complete 90-day window.",
+			"receipt": {
+				"id": "rct_3f751e24ef6f4cfd98fddb7109c28249",
+				"sha256": "0304b2b2b0f585feadfc766ef9bffb8f7e713a1f1f4d0f0ff325b8ba1c06cb76"
+			},
+			"value": null,
+			"verification_state": "not_measurable"
 		}
 	],
 	"lifecycle_state": "active",
@@ -243,10 +252,10 @@
 		"start": "2026-05-27"
 	},
 	"public_wording": {
-		"summary": "Three proof groups share one 90-day window and one verification boundary.",
-		"title": "A dated view of operating discipline"
+		"summary": "Issue flow and change traceability are independently reproduced across one 90-day window. Durable record coverage remains explicitly not measurable until its native session denominator and record joins are reproducible.",
+		"title": "Operating discipline, measured over one window"
 	},
 	"schema_version": 1,
-	"snapshot_id": "pulse-fixture-2026-08-24",
+	"snapshot_id": "pulse-2026-08-24-03",
 	"verification_state": "independently-reproduced"
 }

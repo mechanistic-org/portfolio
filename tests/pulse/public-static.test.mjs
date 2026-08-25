@@ -311,14 +311,16 @@ test("archived and withdrawn snapshots remain distinct, static, and linked to th
 	assert.ok(html.includes("Snapshot history"));
 	assert.ok(html.includes('data-pulse-history-state="archived"'));
 	assert.ok(html.includes('data-pulse-history-state="withdrawn"'));
-	assert.equal(occurrences(html, "data-pulse-history-metric"), 18);
+	assert.equal(occurrences(html, "data-pulse-history-metric"), 27);
 	assert.ok(html.includes("Archived because this approved snapshot is more than 90 days old."));
 	assert.ok(html.includes("It remains valid historical evidence and is not current or live."));
 	assert.ok(html.includes("Withdrawn because its provenance became invalid."));
 	assert.ok(html.includes("It is inactive and cannot serve as the current snapshot."));
 	assert.ok(html.includes("View the approved correction"));
 	assert.ok(html.includes('href="/colophon/the-pulse/#pulse-snapshot-pulse-fixture-2026-08-24"'));
+	assert.ok(html.includes('href="/colophon/the-pulse/#pulse-snapshot-pulse-2026-08-24-03"'));
 	assert.ok(html.includes('id="pulse-snapshot-pulse-fixture-2026-08-24"'));
+	assert.ok(html.includes('id="pulse-snapshot-pulse-2026-08-24-03"'));
 
 	for (const privateText of [
 		"package_dir",

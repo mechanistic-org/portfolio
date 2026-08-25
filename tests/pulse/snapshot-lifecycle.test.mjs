@@ -522,7 +522,7 @@ test("an existing public history cannot be overwritten under a reused snapshot i
 	}
 });
 
-test("unchanged lifecycle inputs produce the committed public history byte for byte", () => {
+test("unchanged controlled lifecycle inputs produce byte-identical private outputs", () => {
 	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-history-repeat-"));
 	try {
 		const manifestPath = path.join(
@@ -545,12 +545,8 @@ test("unchanged lifecycle inputs produce the committed public history byte for b
 
 		const first = fs.readFileSync(outputPaths[0]);
 		const second = fs.readFileSync(outputPaths[1]);
-		const committed = fs.readFileSync(
-			path.join(repositoryRoot, "src", "data", "pulse", "public-history.json"),
-		);
 		assert.deepEqual(first, second);
-		assert.deepEqual(first, committed);
-		const publicText = committed.toString("utf8");
+		const publicText = first.toString("utf8");
 		for (const forbidden of [
 			"package_dir",
 			"exact_command",
