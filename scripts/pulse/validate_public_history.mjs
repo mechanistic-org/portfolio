@@ -73,6 +73,11 @@ function collectReceiptIds(record) {
 }
 
 function validateApproval(record) {
+	if (Object.hasOwn(record.snapshot, "lifecycle_state")) {
+		fail(
+			`${record.snapshot.snapshot_id} historical snapshot exposes an approval-time active marker as a current implication`,
+		);
+	}
 	requireExactKeys(
 		record.approval,
 		["approved_by", "approved_on", "public_projection_sha256"],

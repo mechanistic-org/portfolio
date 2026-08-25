@@ -191,6 +191,30 @@ test("the production gate rejects lifecycle history that revives an archived sna
 	}
 });
 
+test("the history gate rejects an approval-time active marker inside an archived record", () => {
+	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-stale-active-"));
+	try {
+		const history = JSON.parse(
+			fs.readFileSync(
+				path.join(repositoryRoot, "src", "data", "pulse", "public-history.json"),
+				"utf8",
+			),
+		);
+		history.snapshots[0].snapshot.lifecycle_state = "active";
+		const invalidPath = path.join(workspace, "stale-active.json");
+		fs.writeFileSync(invalidPath, `${JSON.stringify(history, null, "\t")}\n`);
+
+		const validation = runHistoryValidation(invalidPath);
+		assert.notEqual(validation.status, 0, "history validator exposed a stale active marker");
+		assert.match(
+			`${validation.stdout}\n${validation.stderr}`,
+			/\[public-history\].*(?:active marker|current implication)/u,
+		);
+	} finally {
+		fs.rmSync(workspace, { force: true, recursive: true });
+	}
+});
+
 test("an invalid public projection fails the release validator wired before Astro", () => {
 	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-public-gate-"));
 	try {
