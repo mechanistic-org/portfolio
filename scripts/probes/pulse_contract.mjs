@@ -126,31 +126,46 @@ async function assertionLifecycleTreatments(page, problems) {
 					record.querySelector(".pulse-correction-link a")?.getAttribute("href") ?? null,
 			}),
 		);
-		const correctionHref = records.find((record) => record.state === "withdrawn")?.correctionHref;
-		const correctionTargetId = correctionHref
-			? new URL(correctionHref, location.href).hash.slice(1)
-			: null;
 		return {
 			records,
-			correctionTargetExists: Boolean(
-				correctionTargetId && document.getElementById(correctionTargetId),
-			),
+			correctionTargetsExist: records
+				.filter((record) => record.state === "withdrawn")
+				.map((record) => {
+					const correctionTargetId = record.correctionHref
+						? new URL(record.correctionHref, location.href).hash.slice(1)
+						: null;
+					return Boolean(correctionTargetId && document.getElementById(correctionTargetId));
+				}),
 		};
 	});
 	assert.deepEqual(
 		lifecycle.records.map((record) => record.state),
-		["archived", "withdrawn"],
+		["archived", "withdrawn", "withdrawn"],
 		"historical lifecycle states changed",
 	);
-	const [archived, withdrawn] = lifecycle.records;
-	assert.notEqual(archived.borderColor, withdrawn.borderColor, "lifecycle states look identical");
+	const [archived, withdrawnFixture, withdrawnTracer] = lifecycle.records;
+	assert.notEqual(
+		archived.borderColor,
+		withdrawnFixture.borderColor,
+		"lifecycle states look identical",
+	);
 	assert.match(archived.notice, /valid historical evidence and is not current or live/u);
-	assert.match(withdrawn.notice, /inactive and cannot serve as the current snapshot/u);
+	for (const withdrawn of [withdrawnFixture, withdrawnTracer]) {
+		assert.match(withdrawn.notice, /inactive and cannot serve as the current snapshot/u);
+	}
 	assert.equal(
-		withdrawn.correctionHref,
+		withdrawnFixture.correctionHref,
 		"/colophon/the-pulse/#pulse-snapshot-pulse-fixture-2026-08-24",
 	);
-	assert.equal(lifecycle.correctionTargetExists, true, "withdrawn correction target is missing");
+	assert.equal(
+		withdrawnTracer.correctionHref,
+		"/colophon/the-pulse/#pulse-snapshot-pulse-2026-08-24-03",
+	);
+	assert.deepEqual(
+		lifecycle.correctionTargetsExist,
+		[true, true],
+		"a withdrawn correction target is missing",
+	);
 	assertNoPageProblems(problems);
 	return "archived valid/not-live; withdrawn inactive; correction reaches replacement";
 }
