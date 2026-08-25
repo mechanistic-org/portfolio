@@ -10,11 +10,17 @@ import { PUBLIC_HISTORY_PATH_ENV } from "../../scripts/pulse/public_history_sour
 const repositoryRoot = path.resolve(import.meta.dirname, "../..");
 const pulseHtmlPath = path.join(repositoryRoot, "dist", "colophon", "the-pulse", "index.html");
 
+function productionBuildEnvironment(environment = {}) {
+	const inherited = { ...process.env };
+	delete inherited[PUBLIC_HISTORY_PATH_ENV];
+	return { ...inherited, ...environment, ASTRO_TELEMETRY_DISABLED: "1" };
+}
+
 function runProductionBuild(environment = {}) {
 	return spawnSync("npm run build", {
 		cwd: repositoryRoot,
 		encoding: "utf8",
-		env: { ...process.env, ...environment, ASTRO_TELEMETRY_DISABLED: "1" },
+		env: productionBuildEnvironment(environment),
 		shell: true,
 	});
 }
@@ -52,6 +58,23 @@ function runHistoryValidation(historyPath) {
 		{ cwd: repositoryRoot, encoding: "utf8" },
 	);
 }
+
+test("default static builds ignore an ambient alternate history path", () => {
+	const previous = process.env[PUBLIC_HISTORY_PATH_ENV];
+	try {
+		process.env[PUBLIC_HISTORY_PATH_ENV] = path.join(os.tmpdir(), "ambient-public-history.json");
+		assert.equal(Object.hasOwn(productionBuildEnvironment(), PUBLIC_HISTORY_PATH_ENV), false);
+		assert.equal(
+			productionBuildEnvironment({ [PUBLIC_HISTORY_PATH_ENV]: "explicit-history.json" })[
+				PUBLIC_HISTORY_PATH_ENV
+			],
+			"explicit-history.json",
+		);
+	} finally {
+		if (previous === undefined) delete process.env[PUBLIC_HISTORY_PATH_ENV];
+		else process.env[PUBLIC_HISTORY_PATH_ENV] = previous;
+	}
+});
 
 test("the Pulse component consumes the semantic design tokens without local palette copies", () => {
 	const component = fs.readFileSync(
