@@ -121,7 +121,7 @@ function runUnavailableProposal() {
 			"A native scoped-session denominator cannot be reproduced for the complete 90-day window.",
 		evidence_start: "2026-08-22",
 		eligibility_rule:
-			"Numeric coverage becomes eligible after the native scoped-session identity is reproducible for every day in a complete 90-day window.",
+			"Numeric coverage becomes eligible after both the native scoped-session denominator and its durable decision/finding joins are reproducible for every day in a complete 90-day window.",
 		receipt_ref: receiptId,
 	};
 	const readinessResult = {
@@ -140,12 +140,25 @@ function runUnavailableProposal() {
 				evidence_start: "2026-08-22",
 				complete_window: false,
 				stable_session_identity: true,
+				observations: {
+					row_count: 8,
+					unique_session_ids: 8,
+					first_event_at: "2026-08-22T04:19:41.621Z",
+					last_event_at: "2026-08-24T14:57:00.576Z",
+				},
 			},
 			{
 				source: "durable-decision-finding-records",
-				evidence_start: null,
-				complete_window: true,
+				evidence_start: "2026-07-04",
+				complete_window: false,
 				stable_session_identity: false,
+				observations: {
+					complete_identity_sessions: 29,
+					complete_with_capture_document: 0,
+					complete_with_produced_touch: 0,
+					surrogate_sessions: 207,
+					surrogate_with_capture_document: 207,
+				},
 			},
 		],
 	};
@@ -272,6 +285,8 @@ test("an unavailable durable group remains explicit without publishing a numeric
 			false,
 		);
 		assert.equal(durableGroup.evidence_start, "2026-08-22");
+		assert.match(durableGroup.eligibility_rule, /native scoped-session denominator/u);
+		assert.match(durableGroup.eligibility_rule, /durable decision\/finding joins/u);
 		assert.match(durableGroup.eligibility_rule, /complete 90-day window/u);
 	} finally {
 		attempt.cleanup();

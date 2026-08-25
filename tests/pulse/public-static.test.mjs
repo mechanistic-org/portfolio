@@ -63,7 +63,7 @@ function unavailableProposalProjection(sourceProjection) {
 			"A native scoped-session denominator cannot be reproduced for the complete 90-day window.",
 		evidence_start: "2026-08-22",
 		eligibility_rule:
-			"Numeric coverage becomes eligible after the native scoped-session identity is reproducible for every day in a complete 90-day window.",
+			"Numeric coverage becomes eligible after both the native scoped-session denominator and its durable decision/finding joins are reproducible for every day in a complete 90-day window.",
 		receipt: {
 			id: "rct_11111111111111111111111111111111",
 			sha256: "1".repeat(64),

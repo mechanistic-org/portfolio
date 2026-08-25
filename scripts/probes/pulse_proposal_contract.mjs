@@ -34,7 +34,7 @@ function proposalFixture() {
 			"A native scoped-session denominator cannot be reproduced for the complete 90-day window.",
 		evidence_start: "2026-08-22",
 		eligibility_rule:
-			"Numeric coverage becomes eligible after the native scoped-session identity is reproducible for every day in a complete 90-day window.",
+			"Numeric coverage becomes eligible after both the native scoped-session denominator and its durable decision/finding joins are reproducible for every day in a complete 90-day window.",
 		receipt: {
 			id: "rct_11111111111111111111111111111111",
 			sha256: "1".repeat(64),
@@ -100,6 +100,8 @@ async function assertionProposalContract(page, problems) {
 	assert.equal(durableGroup.numericReadings, 0);
 	assert.match(durableGroup.text, /Not measurable/u);
 	assert.match(durableGroup.text, /Evidence starts August 22, 2026/u);
+	assert.match(durableGroup.text, /native scoped-session denominator/u);
+	assert.match(durableGroup.text, /durable decision\/finding joins/u);
 	assert.match(durableGroup.text, /complete 90-day window/u);
 	assertNoPageProblems(problems);
 	return "3 groups; durable value unavailable; proposal state explicit";

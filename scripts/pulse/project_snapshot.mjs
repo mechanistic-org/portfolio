@@ -673,14 +673,21 @@ function calculateDurableRecordReadinessResult(rawOutput, label, snapshotWindow)
 
 	let hasIncompleteWindow = false;
 	let hasUnstableSessionIdentity = false;
+	const observedSources = new Set();
 	for (const [checkIndex, check] of rawOutput.denominator_checks.entries()) {
 		const checkLabel = `${label}.denominator_checks[${checkIndex}]`;
 		requireExactKeys(
 			check,
-			["source", "evidence_start", "complete_window", "stable_session_identity"],
+			["source", "evidence_start", "complete_window", "stable_session_identity", "observations"],
 			checkLabel,
 		);
-		requireString(check.source, `${checkLabel}.source`);
+		if (
+			!new Set(["typed-session-lifecycle", "durable-decision-finding-records"]).has(check.source)
+		) {
+			fail(`${checkLabel}.source is not a controlled denominator source`);
+		}
+		if (observedSources.has(check.source)) fail(`${label} repeats source ${check.source}`);
+		observedSources.add(check.source);
 		optionalIsoCalendarDate(check.evidence_start, `${checkLabel}.evidence_start`);
 		if (typeof check.complete_window !== "boolean") {
 			fail(`${checkLabel}.complete_window must be boolean`);
@@ -690,8 +697,65 @@ function calculateDurableRecordReadinessResult(rawOutput, label, snapshotWindow)
 		}
 		hasIncompleteWindow ||= !check.complete_window;
 		hasUnstableSessionIdentity ||= !check.stable_session_identity;
+
+		if (check.source === "typed-session-lifecycle") {
+			requireExactKeys(
+				check.observations,
+				["row_count", "unique_session_ids", "first_event_at", "last_event_at"],
+				`${checkLabel}.observations`,
+			);
+			const rowCount = requireNonnegativeInteger(
+				check.observations.row_count,
+				`${checkLabel}.observations.row_count`,
+			);
+			const uniqueSessionIds = requireNonnegativeInteger(
+				check.observations.unique_session_ids,
+				`${checkLabel}.observations.unique_session_ids`,
+			);
+			requireIsoTimestamp(
+				check.observations.first_event_at,
+				`${checkLabel}.observations.first_event_at`,
+			);
+			requireIsoTimestamp(
+				check.observations.last_event_at,
+				`${checkLabel}.observations.last_event_at`,
+			);
+			if (rowCount === 0 || uniqueSessionIds === 0 || uniqueSessionIds > rowCount) {
+				fail(`${checkLabel}.observations does not establish complete lifecycle identities`);
+			}
+			if (
+				check.evidence_start !== check.observations.first_event_at.slice(0, 10) ||
+				rawOutput.evidence_start !== check.evidence_start
+			) {
+				fail(`${checkLabel} does not bind the public evidence-start date`);
+			}
+		} else {
+			requireExactKeys(
+				check.observations,
+				[
+					"complete_identity_sessions",
+					"complete_with_capture_document",
+					"complete_with_produced_touch",
+					"surrogate_sessions",
+					"surrogate_with_capture_document",
+				],
+				`${checkLabel}.observations`,
+			);
+			for (const [field, value] of Object.entries(check.observations)) {
+				requireNonnegativeInteger(value, `${checkLabel}.observations.${field}`);
+			}
+			if (
+				check.observations.complete_identity_sessions === 0 ||
+				check.observations.complete_with_capture_document !== 0 ||
+				check.observations.complete_with_produced_touch !== 0 ||
+				check.observations.surrogate_sessions === 0 ||
+				check.observations.surrogate_with_capture_document !== check.observations.surrogate_sessions
+			) {
+				fail(`${checkLabel}.observations does not establish the native identity join gap`);
+			}
+		}
 	}
-	if (!hasIncompleteWindow || !hasUnstableSessionIdentity) {
+	if (observedSources.size !== 2 || !hasIncompleteWindow || !hasUnstableSessionIdentity) {
 		fail(`${label} does not prove the scoped-session denominator gap`);
 	}
 
