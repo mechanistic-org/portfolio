@@ -14,6 +14,7 @@
 		"audit:tier:verbose": "node scripts/audits/validate_tier_gate.mjs --verbose",
 		"audit:tier:strict": "node scripts/audits/validate_tier_gate.mjs --strict",
 		"test:snapshot": "node --test tests/pulse/*.test.mjs",
+		"test:pulse-browser": "node scripts/probes/pulse_contract.mjs",
 		"check:hud": "node scripts/_archive/verify_deep_hud.cjs",
 		"content:modernize": "python scripts/modernize_content.py",
 		"assets:process": "python ../global_agent/scripts/process_assets.py",
