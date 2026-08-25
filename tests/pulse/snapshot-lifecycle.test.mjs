@@ -8,6 +8,12 @@ import { test } from "node:test";
 
 const repositoryRoot = path.resolve(import.meta.dirname, "../..");
 const projectorPath = path.join(repositoryRoot, "scripts", "pulse", "project_snapshot_history.mjs");
+const publicHistoryValidatorPath = path.join(
+	repositoryRoot,
+	"scripts",
+	"pulse",
+	"validate_public_history.mjs",
+);
 const approvedPackage = path.join(repositoryRoot, "tests", "fixtures", "pulse", "happy-path");
 
 function isRecord(value) {
@@ -125,6 +131,13 @@ function projectHistory(workspace, manifest) {
 		{ cwd: repositoryRoot, encoding: "utf8" },
 	);
 	return { result, outputPath };
+}
+
+function runPublicHistoryValidation(historyPath) {
+	return spawnSync(process.execPath, [publicHistoryValidatorPath, historyPath], {
+		cwd: repositoryRoot,
+		encoding: "utf8",
+	});
 }
 
 test("an approved snapshot archives only after 90 calendar days without changing its evidence", () => {
@@ -273,6 +286,169 @@ test("a withdrawn snapshot retains its values and links to a separately receipte
 			[...withdrawnReceipts].some((receiptId) => replacementReceipts.has(receiptId)),
 			false,
 		);
+	} finally {
+		fs.rmSync(workspace, { force: true, recursive: true });
+	}
+});
+
+test("a correction link survives when its replacement is later withdrawn and corrected again", () => {
+	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-correction-chain-"));
+	try {
+		const ids = {
+			first: "pulse-fixture-withdrawn-first",
+			second: "pulse-fixture-withdrawn-second",
+			current: "pulse-fixture-correction-current",
+		};
+		const packages = [
+			makeDistinctApprovedPackage(approvedPackage, path.join(workspace, "first"), {
+				snapshot_id: ids.first,
+				approved_on: "2026-08-24",
+				receipt_ids: [
+					"rct_50000000000000000000000000000001",
+					"rct_50000000000000000000000000000002",
+					"rct_50000000000000000000000000000003",
+				],
+			}),
+			makeDistinctApprovedPackage(approvedPackage, path.join(workspace, "second"), {
+				snapshot_id: ids.second,
+				approved_on: "2026-08-25",
+				receipt_ids: [
+					"rct_60000000000000000000000000000001",
+					"rct_60000000000000000000000000000002",
+					"rct_60000000000000000000000000000003",
+				],
+			}),
+			makeDistinctApprovedPackage(approvedPackage, path.join(workspace, "current"), {
+				snapshot_id: ids.current,
+				approved_on: "2026-08-26",
+				receipt_ids: [
+					"rct_70000000000000000000000000000001",
+					"rct_70000000000000000000000000000002",
+					"rct_70000000000000000000000000000003",
+				],
+			}),
+		];
+		const projection = projectHistory(workspace, {
+			schema_version: 1,
+			evaluated_on: "2026-08-26",
+			current_snapshot_id: ids.current,
+			snapshots: [
+				{
+					package_dir: packages[0],
+					withdrawal: {
+						reason: "provenance-invalid",
+						withdrawn_on: "2026-08-24",
+						replacement_snapshot_id: ids.second,
+						correction_href: `/colophon/the-pulse/#pulse-snapshot-${ids.second}`,
+					},
+				},
+				{
+					package_dir: packages[1],
+					withdrawal: {
+						reason: "incorrect",
+						withdrawn_on: "2026-08-25",
+						replacement_snapshot_id: ids.current,
+						correction_href: `/colophon/the-pulse/#pulse-snapshot-${ids.current}`,
+					},
+				},
+				{ package_dir: packages[2], withdrawal: null },
+			],
+		});
+		assert.equal(
+			projection.result.status,
+			0,
+			`${projection.result.stdout}\n${projection.result.stderr}`,
+		);
+		const history = readJson(projection.outputPath);
+		assert.deepEqual(
+			history.snapshots.map((record) => record.lifecycle.state),
+			["withdrawn", "withdrawn", "active"],
+		);
+		assert.equal(history.snapshots[0].lifecycle.correction.replacement_snapshot_id, ids.second);
+		assert.equal(history.snapshots[1].lifecycle.correction.replacement_snapshot_id, ids.current);
+
+		const validation = runPublicHistoryValidation(projection.outputPath);
+		assert.equal(validation.status, 0, `${validation.stdout}\n${validation.stderr}`);
+	} finally {
+		fs.rmSync(workspace, { force: true, recursive: true });
+	}
+});
+
+test("a correction link survives when its replacement later archives", () => {
+	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-archived-correction-"));
+	try {
+		const fixtureDirectory = path.join(
+			repositoryRoot,
+			"tests",
+			"fixtures",
+			"pulse",
+			"lifecycle-history",
+		);
+		const manifest = readJson(path.join(fixtureDirectory, "history-manifest.json"));
+		manifest.evaluated_on = "2026-11-23";
+		manifest.current_snapshot_id = null;
+		for (const entry of manifest.snapshots) {
+			entry.package_dir = path.resolve(fixtureDirectory, entry.package_dir);
+		}
+
+		const projection = projectHistory(workspace, manifest);
+		assert.equal(
+			projection.result.status,
+			0,
+			`${projection.result.stdout}\n${projection.result.stderr}`,
+		);
+		const history = readJson(projection.outputPath);
+		const withdrawn = history.snapshots.find((record) => record.lifecycle.state === "withdrawn");
+		const replacement = history.snapshots.find(
+			(record) =>
+				record.snapshot.snapshot_id === withdrawn.lifecycle.correction.replacement_snapshot_id,
+		);
+		assert.equal(replacement.lifecycle.state, "archived");
+		assert.equal(replacement.lifecycle.validity, "valid");
+		const validation = runPublicHistoryValidation(projection.outputPath);
+		assert.equal(validation.status, 0, `${validation.stdout}\n${validation.stderr}`);
+	} finally {
+		fs.rmSync(workspace, { force: true, recursive: true });
+	}
+});
+
+test("an existing public history cannot be overwritten under a reused snapshot identity", () => {
+	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-append-only-"));
+	try {
+		const baseline = projectHistory(workspace, {
+			schema_version: 1,
+			evaluated_on: "2026-08-24",
+			current_snapshot_id: "pulse-fixture-2026-08-24",
+			snapshots: [{ package_dir: approvedPackage, withdrawal: null }],
+		});
+		assert.equal(baseline.result.status, 0, `${baseline.result.stdout}\n${baseline.result.stderr}`);
+		const previousBytes = fs.readFileSync(baseline.outputPath);
+
+		const replacementPackage = makeDistinctApprovedPackage(
+			approvedPackage,
+			path.join(workspace, "reused-identity"),
+			{
+				snapshot_id: "pulse-fixture-2026-08-24",
+				approved_on: "2026-08-25",
+				receipt_ids: [
+					"rct_80000000000000000000000000000001",
+					"rct_80000000000000000000000000000002",
+					"rct_80000000000000000000000000000003",
+				],
+			},
+		);
+		const overwrite = projectHistory(workspace, {
+			schema_version: 1,
+			evaluated_on: "2026-08-25",
+			current_snapshot_id: "pulse-fixture-2026-08-24",
+			snapshots: [{ package_dir: replacementPackage, withdrawal: null }],
+		});
+		assert.notEqual(overwrite.result.status, 0, "projector silently replaced prior evidence");
+		assert.match(
+			`${overwrite.result.stdout}\n${overwrite.result.stderr}`,
+			/\[snapshot-history\].*(?:append-only|immutable|reused snapshot identity)/u,
+		);
+		assert.deepEqual(fs.readFileSync(baseline.outputPath), previousBytes);
 	} finally {
 		fs.rmSync(workspace, { force: true, recursive: true });
 	}

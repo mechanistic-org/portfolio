@@ -4,19 +4,21 @@ import path from "node:path";
 import process from "node:process";
 
 import { assertPublicProjectionPrivacy } from "./public_projection_privacy.mjs";
+import {
+	addCalendarDays,
+	collectReceiptIds,
+	DAY_MS,
+	isRecord,
+	stableJson,
+} from "./snapshot_history_mechanics.mjs";
 import { validatePublicProjection } from "./validate_public_projection.mjs";
 
-const DAY_MS = 86_400_000;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/u;
 const SHA256 = /^[a-f0-9]{64}$/u;
 const WITHDRAWAL_REASONS = new Set(["incorrect", "provenance-invalid"]);
 
 function fail(message) {
 	throw new Error(`[public-history] ${message}`);
-}
-
-function isRecord(value) {
-	return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
 function requireExactKeys(value, keys, label) {
@@ -42,34 +44,8 @@ function calendarTimestamp(value, label) {
 	return timestamp;
 }
 
-function stableValue(value) {
-	if (Array.isArray(value)) return value.map(stableValue);
-	if (!isRecord(value)) return value;
-	return Object.fromEntries(
-		Object.keys(value)
-			.sort()
-			.map((key) => [key, stableValue(value[key])]),
-	);
-}
-
-function stableJson(value) {
-	return `${JSON.stringify(stableValue(value), null, "\t")}\n`;
-}
-
 function sha256(value) {
 	return createHash("sha256").update(value).digest("hex");
-}
-
-function addCalendarDays(value, days) {
-	return new Date(calendarTimestamp(value, "snapshot.as_of") + days * DAY_MS)
-		.toISOString()
-		.slice(0, 10);
-}
-
-function collectReceiptIds(record) {
-	return new Set(
-		record.snapshot.groups.flatMap((group) => group.metrics.map((metric) => metric.receipt.id)),
-	);
 }
 
 function validateApproval(record) {
@@ -175,7 +151,9 @@ export function validatePublicHistory(history) {
 	);
 	if (history.schema_version !== 1) fail("schema_version must be 1");
 	calendarTimestamp(history.evaluated_on, "evaluated_on");
-	requireText(history.current_snapshot_id, "current_snapshot_id");
+	if (history.current_snapshot_id !== null) {
+		requireText(history.current_snapshot_id, "current_snapshot_id");
+	}
 	if (!Array.isArray(history.snapshots) || history.snapshots.length === 0) {
 		fail("snapshots must be a non-empty array");
 	}
@@ -190,7 +168,11 @@ export function validatePublicHistory(history) {
 	);
 	if (recordsById.size !== history.snapshots.length) fail("snapshot_id values must be unique");
 	const currentRecords = history.snapshots.filter((record) => record.lifecycle.is_current);
-	if (
+	if (history.current_snapshot_id === null) {
+		if (currentRecords.length !== 0) {
+			fail("a null current_snapshot_id cannot retain a current snapshot");
+		}
+	} else if (
 		currentRecords.length !== 1 ||
 		currentRecords[0].snapshot.snapshot_id !== history.current_snapshot_id
 	) {
@@ -201,8 +183,8 @@ export function validatePublicHistory(history) {
 		if (record.lifecycle.state !== "withdrawn") continue;
 		const replacementId = record.lifecycle.correction.replacement_snapshot_id;
 		const replacement = recordsById.get(replacementId);
-		if (!replacement || replacement.lifecycle.state !== "active") {
-			fail(`${record.snapshot.snapshot_id} correction must identify the active replacement`);
+		if (!replacement) {
+			fail(`${record.snapshot.snapshot_id} correction must identify its replacement`);
 		}
 		if (replacement.approval.approved_on < record.lifecycle.effective_on) {
 			fail(`${replacementId} correction approval must be new`);
@@ -215,6 +197,17 @@ export function validatePublicHistory(history) {
 		const withdrawnReceipts = collectReceiptIds(record);
 		if ([...collectReceiptIds(replacement)].some((id) => withdrawnReceipts.has(id))) {
 			fail(`${replacementId} correction must use new private receipts`);
+		}
+
+		const visited = new Set([record.snapshot.snapshot_id]);
+		let correction = replacement;
+		while (correction.lifecycle.state === "withdrawn") {
+			if (visited.has(correction.snapshot.snapshot_id)) {
+				fail(`${record.snapshot.snapshot_id} correction chain contains a cycle`);
+			}
+			visited.add(correction.snapshot.snapshot_id);
+			correction = recordsById.get(correction.lifecycle.correction.replacement_snapshot_id);
+			if (!correction) fail(`${record.snapshot.snapshot_id} correction chain is unresolved`);
 		}
 	}
 

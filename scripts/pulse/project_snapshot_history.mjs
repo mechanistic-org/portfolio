@@ -5,8 +5,14 @@ import path from "node:path";
 import process from "node:process";
 
 import { assertPublicProjectionPrivacy } from "./public_projection_privacy.mjs";
+import {
+	addCalendarDays,
+	collectReceiptIds,
+	DAY_MS,
+	isRecord,
+	stableJson,
+} from "./snapshot_history_mechanics.mjs";
 
-const DAY_MS = 86_400_000;
 const REQUIRED_ARGUMENTS = ["manifest", "output"];
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/u;
 const SNAPSHOT_ID = /^[a-z0-9][a-z0-9-]{2,127}$/u;
@@ -14,10 +20,6 @@ const WITHDRAWAL_REASONS = new Set(["incorrect", "provenance-invalid"]);
 
 function fail(message) {
 	throw new Error(`[snapshot-history] ${message}`);
-}
-
-function isRecord(value) {
-	return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 
 function requireExactKeys(value, keys, label) {
@@ -55,20 +57,6 @@ function parseArguments(argv) {
 		if (!parsed[argument]) fail(`Missing required argument --${argument}`);
 	}
 	return parsed;
-}
-
-function stableValue(value) {
-	if (Array.isArray(value)) return value.map(stableValue);
-	if (!isRecord(value)) return value;
-	return Object.fromEntries(
-		Object.keys(value)
-			.sort()
-			.map((key) => [key, stableValue(value[key])]),
-	);
-}
-
-function stableJson(value) {
-	return `${JSON.stringify(stableValue(value), null, "\t")}\n`;
 }
 
 function readJson(filePath, label) {
@@ -115,11 +103,6 @@ function projectApprovedPackage(packageDirectory, workspace) {
 		approval: readJson(path.join(packageDirectory, "canon", "approval.json"), "approval"),
 		projection: readJson(outputPath, "projected snapshot"),
 	};
-}
-
-function addCalendarDays(value, days) {
-	const timestamp = requireCalendarDate(value, "snapshot.as_of") + days * DAY_MS;
-	return new Date(timestamp).toISOString().slice(0, 10);
 }
 
 function validateWithdrawal(withdrawal, projection, evaluatedOn) {
@@ -203,12 +186,6 @@ function buildLifecycleRecord(
 	};
 }
 
-function collectReceiptIds(record) {
-	return new Set(
-		record.snapshot.groups.flatMap((group) => group.metrics.map((metric) => metric.receipt.id)),
-	);
-}
-
 function validateCorrections(records) {
 	const recordsById = new Map(records.map((record) => [record.snapshot.snapshot_id, record]));
 	if (recordsById.size !== records.length) fail("snapshot_id values must be unique in one history");
@@ -219,9 +196,6 @@ function validateCorrections(records) {
 		const replacement = recordsById.get(replacementId);
 		if (!replacement) {
 			fail(`withdrawn snapshot ${record.snapshot.snapshot_id} replacement is missing`);
-		}
-		if (replacement.lifecycle.state === "withdrawn") {
-			fail(`withdrawn snapshot ${record.snapshot.snapshot_id} replacement is also withdrawn`);
 		}
 		if (replacement.approval.approved_on < record.lifecycle.effective_on) {
 			fail(`replacement ${replacementId} must have a new approval on or after withdrawal`);
@@ -235,6 +209,19 @@ function validateCorrections(records) {
 		const replacementReceiptIds = collectReceiptIds(replacement);
 		if ([...withdrawnReceiptIds].some((receiptId) => replacementReceiptIds.has(receiptId))) {
 			fail(`replacement ${replacementId} must use new private receipts`);
+		}
+
+		const visited = new Set([record.snapshot.snapshot_id]);
+		let correction = replacement;
+		while (correction.lifecycle.state === "withdrawn") {
+			if (visited.has(correction.snapshot.snapshot_id)) {
+				fail(`withdrawn snapshot ${record.snapshot.snapshot_id} correction chain contains a cycle`);
+			}
+			visited.add(correction.snapshot.snapshot_id);
+			correction = recordsById.get(correction.lifecycle.correction.replacement_snapshot_id);
+			if (!correction) {
+				fail(`withdrawn snapshot ${record.snapshot.snapshot_id} correction chain is unresolved`);
+			}
 		}
 	}
 }
@@ -250,6 +237,47 @@ function writeAtomically(outputPath, bytes) {
 		fs.renameSync(temporaryPath, outputPath);
 	} finally {
 		if (fs.existsSync(temporaryPath)) fs.rmSync(temporaryPath, { force: true });
+	}
+}
+
+function enforceAppendOnlyHistory(outputPath, nextHistory) {
+	if (!fs.existsSync(outputPath)) return;
+	const previousHistory = readJson(outputPath, "existing public history");
+	if (!Array.isArray(previousHistory.snapshots)) {
+		fail("existing public history is not a valid append-only snapshot collection");
+	}
+	const nextById = new Map(
+		nextHistory.snapshots.map((record) => [record.snapshot.snapshot_id, record]),
+	);
+	const allowedTransitions = new Map([
+		["active", new Set(["active", "archived", "withdrawn"])],
+		["archived", new Set(["archived", "withdrawn"])],
+		["withdrawn", new Set(["withdrawn"])],
+	]);
+
+	for (const previous of previousHistory.snapshots) {
+		const snapshotId = previous?.snapshot?.snapshot_id;
+		const next = nextById.get(snapshotId);
+		if (!next) fail(`append-only history cannot remove snapshot ${snapshotId}`);
+		if (
+			stableJson(previous.snapshot) !== stableJson(next.snapshot) ||
+			stableJson(previous.approval) !== stableJson(next.approval)
+		) {
+			fail(
+				`append-only history rejects reused snapshot identity ${snapshotId} with altered evidence`,
+			);
+		}
+		if (!allowedTransitions.get(previous.lifecycle.state)?.has(next.lifecycle.state)) {
+			fail(
+				`append-only history rejects lifecycle reversal ${previous.lifecycle.state} -> ${next.lifecycle.state} for ${snapshotId}`,
+			);
+		}
+		if (
+			previous.lifecycle.state === "withdrawn" &&
+			stableJson(previous.lifecycle) !== stableJson(next.lifecycle)
+		) {
+			fail(`append-only history cannot rewrite withdrawal record ${snapshotId}`);
+		}
 	}
 }
 
@@ -285,10 +313,11 @@ function main() {
 		});
 		validateCorrections(snapshots);
 		const current = snapshots.filter((entry) => entry.lifecycle.is_current);
-		if (manifest.current_snapshot_id === null && current.length !== 0) {
-			fail("a null current_snapshot_id cannot select a current snapshot");
+		const active = snapshots.filter((entry) => entry.lifecycle.state === "active");
+		if (manifest.current_snapshot_id === null && (current.length !== 0 || active.length !== 0)) {
+			fail("a null current_snapshot_id requires every valid snapshot to be archived");
 		}
-		if (manifest.current_snapshot_id !== null && current.length !== 1) {
+		if (manifest.current_snapshot_id !== null && (current.length !== 1 || active.length !== 1)) {
 			fail("current_snapshot_id must select exactly one non-archived snapshot");
 		}
 
@@ -299,6 +328,7 @@ function main() {
 			snapshots,
 		};
 		assertPublicProjectionPrivacy(output, fail);
+		enforceAppendOnlyHistory(argumentsByName.output, output);
 		writeAtomically(argumentsByName.output, Buffer.from(stableJson(output), "utf8"));
 	} finally {
 		fs.rmSync(workspace, { force: true, recursive: true });

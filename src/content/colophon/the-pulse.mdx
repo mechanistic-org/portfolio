@@ -12,4 +12,8 @@ import snapshot from "../../data/pulse/public-snapshot.json";
 import history from "../../data/pulse/public-history.json";
 import PulseSnapshot from "../../components/Pulse/PulseSnapshot.astro";
 
-<PulseSnapshot snapshot={snapshot} history={history} controlledExample />
+<PulseSnapshot
+	snapshot={history.current_snapshot_id === null ? null : snapshot}
+	history={history}
+	controlledExample
+/>

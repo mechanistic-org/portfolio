@@ -17,6 +17,17 @@ function runProductionBuild() {
 	});
 }
 
+function runProductionBuildWithHistory(history) {
+	const historyPath = path.join(repositoryRoot, "src", "data", "pulse", "public-history.json");
+	const original = fs.readFileSync(historyPath);
+	try {
+		fs.writeFileSync(historyPath, `${JSON.stringify(history, null, "\t")}\n`);
+		return runProductionBuild();
+	} finally {
+		fs.writeFileSync(historyPath, original);
+	}
+}
+
 function occurrences(haystack, needle) {
 	return haystack.split(needle).length - 1;
 }
@@ -210,6 +221,37 @@ test("the history gate rejects an approval-time active marker inside an archived
 			`${validation.stdout}\n${validation.stderr}`,
 			/\[public-history\].*(?:active marker|current implication)/u,
 		);
+	} finally {
+		fs.rmSync(workspace, { force: true, recursive: true });
+	}
+});
+
+test("an archived-only history validates and renders without implying a current snapshot", () => {
+	const history = JSON.parse(
+		fs.readFileSync(
+			path.join(repositoryRoot, "src", "data", "pulse", "public-history.json"),
+			"utf8",
+		),
+	);
+	const archivedOnly = {
+		...history,
+		current_snapshot_id: null,
+		snapshots: history.snapshots.filter((record) => record.lifecycle.state === "archived"),
+	};
+	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-archived-only-"));
+	try {
+		const historyPath = path.join(workspace, "archived-only.json");
+		fs.writeFileSync(historyPath, `${JSON.stringify(archivedOnly, null, "\t")}\n`);
+		const validation = runHistoryValidation(historyPath);
+		assert.equal(validation.status, 0, `${validation.stdout}\n${validation.stderr}`);
+
+		const build = runProductionBuildWithHistory(archivedOnly);
+		assert.equal(build.status, 0, `${build.stdout}\n${build.stderr}`);
+		const html = fs.readFileSync(pulseHtmlPath, "utf8");
+		assert.ok(html.includes("No current approved snapshot"));
+		assert.ok(html.includes("No evidence is presented as current or live."));
+		assert.ok(html.includes('data-pulse-history-state="archived"'));
+		assert.equal(html.includes("data-pulse-snapshot"), false);
 	} finally {
 		fs.rmSync(workspace, { force: true, recursive: true });
 	}

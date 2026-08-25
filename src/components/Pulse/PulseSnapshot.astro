@@ -58,19 +58,22 @@ interface PulseHistoryRecord {
 }
 
 interface PulseHistory {
-	current_snapshot_id: string;
+	current_snapshot_id: string | null;
 	evaluated_on: string;
 	snapshots: PulseHistoryRecord[];
 }
 
 interface Props {
-	snapshot: PulseSnapshot;
+	snapshot: PulseSnapshot | null;
 	history: PulseHistory;
 	controlledExample?: boolean;
 }
 
 const { snapshot, history, controlledExample = false } = Astro.props;
-if (history.current_snapshot_id !== snapshot.snapshot_id) {
+if (
+	(history.current_snapshot_id === null && snapshot !== null) ||
+	(history.current_snapshot_id !== null && snapshot?.snapshot_id !== history.current_snapshot_id)
+) {
 	throw new Error("Pulse history current_snapshot_id must match the rendered active snapshot");
 }
 const historicalSnapshots = history.snapshots.filter(
@@ -112,9 +115,10 @@ function historyNotice(record: PulseHistoryRecord) {
 ---
 
 <section
-	id={`pulse-snapshot-${snapshot.snapshot_id}`}
+	id={snapshot ? `pulse-snapshot-${snapshot.snapshot_id}` : undefined}
 	class="pulse-snapshot not-content"
-	data-pulse-snapshot
+	data-pulse-snapshot={snapshot ? true : undefined}
+	data-pulse-history-root
 >
 	{
 		controlledExample && (
@@ -124,80 +128,94 @@ function historyNotice(record: PulseHistoryRecord) {
 		)
 	}
 
-	<header class="pulse-heading">
-		<p class="pulse-kicker">Approved static projection</p>
-		<h2>{snapshot.public_wording.title}</h2>
-		<p>{snapshot.public_wording.summary}</p>
-	</header>
+	{
+		snapshot ? (
+			<header class="pulse-heading">
+				<p class="pulse-kicker">Approved static projection</p>
+				<h2>{snapshot.public_wording.title}</h2>
+				<p>{snapshot.public_wording.summary}</p>
+			</header>
+		) : (
+			<header class="pulse-heading pulse-no-current" data-pulse-no-current>
+				<p class="pulse-kicker">Archived evidence only</p>
+				<h2>No current approved snapshot</h2>
+				<p>No evidence is presented as current or live. Valid archived history remains below.</p>
+			</header>
+		)
+	}
 
-	<dl class="pulse-boundary" aria-label="Snapshot boundary">
-		<div>
-			<dt>Measurement window</dt>
-			<dd>
-				{formatDate(snapshot.measurement_window.start)} - {
-					formatDate(snapshot.measurement_window.end)
-				}
-				({snapshot.measurement_window.days} days)
-			</dd>
-		</div>
-		<div>
-			<dt>As of</dt>
-			<dd>{formatDate(snapshot.as_of)}</dd>
-		</div>
-		<div>
-			<dt>Refresh state</dt>
-			<dd>{formatState(snapshot.verification_state)}</dd>
-		</div>
-		<div>
-			<dt>Lifecycle state</dt>
-			<dd>{formatState(snapshot.lifecycle_state)}</dd>
-		</div>
-		<div>
-			<dt>Verification state</dt>
-			<dd>{formatState(snapshot.verification_state)}</dd>
-		</div>
-	</dl>
+	{
+		snapshot && (
+			<dl class="pulse-boundary" aria-label="Snapshot boundary">
+				<div>
+					<dt>Measurement window</dt>
+					<dd>
+						{formatDate(snapshot.measurement_window.start)} -{" "}
+						{formatDate(snapshot.measurement_window.end)}({snapshot.measurement_window.days} days)
+					</dd>
+				</div>
+				<div>
+					<dt>As of</dt>
+					<dd>{formatDate(snapshot.as_of)}</dd>
+				</div>
+				<div>
+					<dt>Refresh state</dt>
+					<dd>{formatState(snapshot.verification_state)}</dd>
+				</div>
+				<div>
+					<dt>Lifecycle state</dt>
+					<dd>{formatState(snapshot.lifecycle_state)}</dd>
+				</div>
+				<div>
+					<dt>Verification state</dt>
+					<dd>{formatState(snapshot.verification_state)}</dd>
+				</div>
+			</dl>
+		)
+	}
 
-	<div class="pulse-groups">
-		{
-			snapshot.groups.map((group, groupIndex) => (
-				<section class="pulse-group" data-pulse-proof-group={group.id}>
-					<header>
-						<p class="pulse-group-index">PROOF {String(groupIndex + 1).padStart(2, "0")}</p>
-						<h3>{group.label}</h3>
-						<p data-pulse-group-purpose>
-							{group.metrics.map((metric) => metric.definition).join(" ")}
-						</p>
-					</header>
+	{
+		snapshot && (
+			<div class="pulse-groups">
+				{snapshot.groups.map((group, groupIndex) => (
+					<section class="pulse-group" data-pulse-proof-group={group.id}>
+						<header>
+							<p class="pulse-group-index">PROOF {String(groupIndex + 1).padStart(2, "0")}</p>
+							<h3>{group.label}</h3>
+							<p data-pulse-group-purpose>
+								{group.metrics.map((metric) => metric.definition).join(" ")}
+							</p>
+						</header>
 
-					<div class="pulse-metrics">
-						{group.metrics.map((metric) => (
-							<article class="pulse-metric" data-pulse-metric={metric.id}>
-								<div class="pulse-reading">
-									<p>{metric.label}</p>
-									<p>
-										<strong>{formatValue(metric)}</strong>
-										<span>{metric.unit}</span>
+						<div class="pulse-metrics">
+							{group.metrics.map((metric) => (
+								<article class="pulse-metric" data-pulse-metric={metric.id}>
+									<div class="pulse-reading">
+										<p>{metric.label}</p>
+										<p>
+											<strong>{formatValue(metric)}</strong>
+											<span>{metric.unit}</span>
+										</p>
+									</div>
+									<p data-pulse-definition>
+										<span>Definition</span>
+										{metric.definition}
 									</p>
-								</div>
-								<p data-pulse-definition>
-									<span>Definition</span>
-									{metric.definition}
-								</p>
-								<p data-pulse-method>
-									<span>Method</span>
-									{metric.method_summary}
-								</p>
-								<p class="pulse-source">
-									{formatState(metric.source_class)} / {formatState(metric.refresh_state)}
-								</p>
-							</article>
-						))}
-					</div>
-				</section>
-			))
-		}
-	</div>
+									<p data-pulse-method>
+										<span>Method</span>
+										{metric.method_summary}
+									</p>
+									<p class="pulse-source">
+										{formatState(metric.source_class)} / {formatState(metric.refresh_state)}
+									</p>
+								</article>
+							))}
+						</div>
+					</section>
+				))}
+			</div>
+		)
+	}
 
 	<section class="pulse-history" aria-labelledby="pulse-history-title" data-pulse-history>
 		<header class="pulse-history-heading">
