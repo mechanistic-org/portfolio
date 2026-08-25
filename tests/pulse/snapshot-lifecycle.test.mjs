@@ -140,6 +140,44 @@ function runPublicHistoryValidation(historyPath) {
 	});
 }
 
+test("lifecycle receipt fixtures preserve their full-file hashes through Git checkout", () => {
+	const fixtureDirectory = path.join(
+		repositoryRoot,
+		"tests",
+		"fixtures",
+		"pulse",
+		"lifecycle-history",
+	);
+	const historyManifest = readJson(path.join(fixtureDirectory, "history-manifest.json"));
+	const receiptEntries = historyManifest.snapshots.flatMap((snapshotEntry) => {
+		const packageDirectory = path.resolve(fixtureDirectory, snapshotEntry.package_dir);
+		const receiptManifest = readJson(path.join(packageDirectory, "evidence", "manifest.json"));
+		return receiptManifest.receipts.map((receipt) => ({
+			...receipt,
+			path: path.join(packageDirectory, "evidence", "receipts", receipt.file),
+		}));
+	});
+	const repositoryRelativePaths = receiptEntries.map((receipt) =>
+		path.relative(repositoryRoot, receipt.path).split(path.sep).join("/"),
+	);
+	const attributes = spawnSync("git", ["check-attr", "eol", "--", ...repositoryRelativePaths], {
+		cwd: repositoryRoot,
+		encoding: "utf8",
+	});
+	assert.equal(attributes.status, 0, attributes.stderr);
+	const attributeLines = attributes.stdout.trim().split(/\r?\n/u);
+	assert.equal(attributeLines.length, receiptEntries.length);
+	for (const line of attributeLines) {
+		assert.match(line, /: eol: lf$/u, `receipt checkout bytes are not protected: ${line}`);
+	}
+
+	for (const receipt of receiptEntries) {
+		const receiptBytes = fs.readFileSync(receipt.path);
+		assert.equal(receiptBytes.includes(Buffer.from("\r\n")), false, receipt.path);
+		assert.equal(sha256(receiptBytes), receipt.sha256, receipt.path);
+	}
+});
+
 test("an approved snapshot archives only after 90 calendar days without changing its evidence", () => {
 	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-lifecycle-"));
 	try {

@@ -1,9 +1,8 @@
 import { createHash } from "node:crypto";
-import fs from "node:fs";
-import path from "node:path";
 import process from "node:process";
 
 import { assertPublicProjectionPrivacy } from "./public_projection_privacy.mjs";
+import { loadPublicHistory, resolvePublicHistoryPath } from "./public_history_source.mjs";
 import {
 	addCalendarDays,
 	collectReceiptIds,
@@ -215,12 +214,10 @@ export function validatePublicHistory(history) {
 	return history;
 }
 
-const historyPath = path.resolve(
-	process.argv[2] ?? path.join("src", "data", "pulse", "public-history.json"),
-);
+const historyPath = resolvePublicHistoryPath(process.argv[2]);
 
 try {
-	const history = JSON.parse(fs.readFileSync(historyPath, "utf8"));
+	const history = loadPublicHistory(historyPath);
 	validatePublicHistory(history);
 	console.log(`[public-history] valid lifecycle history: ${history.snapshots.length} snapshots`);
 } catch (error) {
