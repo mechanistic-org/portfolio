@@ -178,6 +178,35 @@ test("lifecycle receipt fixtures preserve their full-file hashes through Git che
 	}
 });
 
+test("committed Pulse public projections preserve byte-bound LF checkout bytes", () => {
+	const publicProjectionPaths = [
+		path.join(repositoryRoot, "src", "data", "pulse", "public-snapshot.json"),
+		path.join(repositoryRoot, "src", "data", "pulse", "public-history.json"),
+	];
+	const repositoryRelativePaths = publicProjectionPaths.map((projectionPath) =>
+		path.relative(repositoryRoot, projectionPath).split(path.sep).join("/"),
+	);
+	const attributes = spawnSync("git", ["check-attr", "eol", "--", ...repositoryRelativePaths], {
+		cwd: repositoryRoot,
+		encoding: "utf8",
+	});
+	assert.equal(attributes.status, 0, attributes.stderr);
+	const attributeLines = attributes.stdout.trim().split(/\r?\n/u);
+	assert.equal(attributeLines.length, publicProjectionPaths.length);
+	for (const line of attributeLines) {
+		assert.match(
+			line,
+			/: eol: lf$/u,
+			`public projection checkout bytes are not protected: ${line}`,
+		);
+	}
+
+	for (const projectionPath of publicProjectionPaths) {
+		const projectionBytes = fs.readFileSync(projectionPath);
+		assert.equal(projectionBytes.includes(Buffer.from("\r\n")), false, projectionPath);
+	}
+});
+
 test("an approved snapshot archives only after 90 calendar days without changing its evidence", () => {
 	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-lifecycle-"));
 	try {

@@ -1,3 +1,6 @@
 # Receipt fixture hashes cover complete file bytes, so checkout newlines are contractual.
 tests/fixtures/pulse/happy-path/evidence/receipts/*.json text eol=lf
 tests/fixtures/pulse/lifecycle-history/packages/*/evidence/receipts/*.json text eol=lf
+
+# Committed Pulse public projections are compared byte-for-byte with deterministic LF output.
+src/data/pulse/public-*.json text eol=lf
