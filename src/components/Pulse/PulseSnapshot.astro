@@ -9,7 +9,7 @@ interface PulseMetric {
 	id: string;
 	label: string;
 	unit: string;
-	value: number;
+	value: number | null;
 	definition: string;
 	method_summary: string;
 	source_class: string;
@@ -20,6 +20,11 @@ interface PulseGroup {
 	id: string;
 	label: string;
 	metrics: PulseMetric[];
+	verification_state?: "not_measurable";
+	value?: null;
+	reason?: string;
+	evidence_start?: string | null;
+	eligibility_rule?: string;
 }
 
 interface PulseSnapshot {
@@ -67,12 +72,19 @@ interface Props {
 	snapshot: PulseSnapshot | null;
 	history: PulseHistory;
 	controlledExample?: boolean;
+	presentationState?: "approved" | "proposal";
 }
 
-const { snapshot, history, controlledExample = false } = Astro.props;
+const {
+	snapshot,
+	history,
+	controlledExample = false,
+	presentationState = "approved",
+} = Astro.props;
 if (
-	(history.current_snapshot_id === null && snapshot !== null) ||
-	(history.current_snapshot_id !== null && snapshot?.snapshot_id !== history.current_snapshot_id)
+	presentationState === "approved" &&
+	((history.current_snapshot_id === null && snapshot !== null) ||
+		(history.current_snapshot_id !== null && snapshot?.snapshot_id !== history.current_snapshot_id))
 ) {
 	throw new Error("Pulse history current_snapshot_id must match the rendered active snapshot");
 }
@@ -97,9 +109,14 @@ function formatState(value: string) {
 }
 
 function formatValue(metric: PulseMetric) {
+	if (metric.value === null) return null;
 	const value = numberFormatter.format(metric.value);
 	if (metric.unit === "percent") return `${value}%`;
 	return value;
+}
+
+function formatEvidenceStart(value: string | null | undefined) {
+	return value ? `Evidence starts ${formatDate(value)}` : "Evidence start is not yet proven";
 }
 
 function historyNotice(record: PulseHistoryRecord) {
@@ -131,7 +148,11 @@ function historyNotice(record: PulseHistoryRecord) {
 	{
 		snapshot ? (
 			<header class="pulse-heading">
-				<p class="pulse-kicker">Approved static projection</p>
+				<p class="pulse-kicker">
+					{presentationState === "proposal"
+						? "Unapproved snapshot proposal"
+						: "Approved static projection"}
+				</p>
 				<h2>{snapshot.public_wording.title}</h2>
 				<p>{snapshot.public_wording.summary}</p>
 			</header>
@@ -164,7 +185,9 @@ function historyNotice(record: PulseHistoryRecord) {
 				</div>
 				<div>
 					<dt>Lifecycle state</dt>
-					<dd>{formatState(snapshot.lifecycle_state)}</dd>
+					<dd>
+						{presentationState === "proposal" ? "proposal" : formatState(snapshot.lifecycle_state)}
+					</dd>
 				</div>
 				<div>
 					<dt>Verification state</dt>
@@ -178,7 +201,11 @@ function historyNotice(record: PulseHistoryRecord) {
 		snapshot && (
 			<div class="pulse-groups">
 				{snapshot.groups.map((group, groupIndex) => (
-					<section class="pulse-group" data-pulse-proof-group={group.id}>
+					<section
+						class="pulse-group"
+						data-pulse-proof-group={group.id}
+						data-pulse-unavailable={group.verification_state}
+					>
 						<header>
 							<p class="pulse-group-index">PROOF {String(groupIndex + 1).padStart(2, "0")}</p>
 							<h3>{group.label}</h3>
@@ -187,15 +214,36 @@ function historyNotice(record: PulseHistoryRecord) {
 							</p>
 						</header>
 
+						{group.verification_state === "not_measurable" && (
+							<div class="pulse-unavailable">
+								<p class="pulse-unavailable-state">Not measurable</p>
+								<p>{group.reason}</p>
+								<dl>
+									<div>
+										<dt>Evidence boundary</dt>
+										<dd>{formatEvidenceStart(group.evidence_start)}</dd>
+									</div>
+									<div>
+										<dt>Numeric eligibility</dt>
+										<dd>{group.eligibility_rule}</dd>
+									</div>
+								</dl>
+							</div>
+						)}
+
 						<div class="pulse-metrics">
 							{group.metrics.map((metric) => (
 								<article class="pulse-metric" data-pulse-metric={metric.id}>
 									<div class="pulse-reading">
 										<p>{metric.label}</p>
-										<p>
-											<strong>{formatValue(metric)}</strong>
-											<span>{metric.unit}</span>
-										</p>
+										{metric.value === null ? (
+											<p class="pulse-unavailable-reading">No numeric value</p>
+										) : (
+											<p>
+												<strong>{formatValue(metric)}</strong>
+												<span>{metric.unit}</span>
+											</p>
+										)}
 									</div>
 									<p data-pulse-definition>
 										<span>Definition</span>
@@ -433,6 +481,56 @@ function historyNotice(record: PulseHistoryRecord) {
 	.pulse-metrics {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+	}
+
+	.pulse-unavailable {
+		border-bottom: 1px solid var(--border);
+		padding: 1.1rem;
+	}
+
+	.pulse-unavailable > p {
+		color: var(--muted-foreground);
+		font-size: 0.75rem;
+		line-height: 1.55;
+		margin: 0.5rem 0 0;
+	}
+
+	.pulse-unavailable .pulse-unavailable-state,
+	.pulse-unavailable-reading {
+		color: var(--info);
+		font-family: var(--font-mono);
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	.pulse-unavailable dl {
+		display: grid;
+		gap: 0;
+		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+		margin: 1rem 0 0;
+	}
+
+	.pulse-unavailable dl div {
+		border: 1px solid var(--border);
+		padding: 0.8rem;
+	}
+
+	.pulse-unavailable dt,
+	.pulse-unavailable dd {
+		font-family: var(--font-mono);
+		font-size: 0.68rem;
+		line-height: 1.5;
+		margin: 0;
+	}
+
+	.pulse-unavailable dt {
+		color: var(--muted-foreground);
+		text-transform: uppercase;
+	}
+
+	.pulse-unavailable dd {
+		color: var(--foreground);
+		margin-top: 0.35rem;
 	}
 
 	.pulse-metric {
