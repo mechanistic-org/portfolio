@@ -1,0 +1,131 @@
+{
+	"schema_version": 1,
+	"groups": [
+		{
+			"id": "issue-flow",
+			"label": "Issue flow",
+			"metrics": [
+				{
+					"id": "issue-flow.created-count",
+					"label": "Created cohort",
+					"unit": "issues",
+					"definition": "Issues created during the shared measurement window.",
+					"numerator": "Issues created from window start through window end, inclusive.",
+					"denominator": "The shared 90-day measurement window.",
+					"inclusions": "Issues whose creation timestamp falls inside the inclusive 90-day window.",
+					"exclusions": "Issues created before the window start or after the window end.",
+					"method_summary": "Filter issue creation timestamps to the inclusive window, then count the cohort.",
+					"source_class": "issue-tracker"
+				},
+				{
+					"id": "issue-flow.cohort-closure-percentage",
+					"label": "Cohort closure",
+					"unit": "percent",
+					"definition": "Share of the created cohort closed by the measurement date.",
+					"numerator": "Created-cohort issues closed by as_of.",
+					"denominator": "All issues created during the window.",
+					"inclusions": "Created-cohort members with a closure timestamp on or before as_of.",
+					"exclusions": "Issues outside the created cohort and cohort members closing after as_of.",
+					"method_summary": "Divide closed cohort members by all created cohort members and round to one decimal percentage point.",
+					"source_class": "issue-tracker"
+				},
+				{
+					"id": "issue-flow.median-close-time",
+					"label": "Median close time",
+					"unit": "days",
+					"definition": "Median elapsed time from creation to closure for closed cohort members.",
+					"numerator": "Elapsed 24-hour days for each closed cohort member.",
+					"denominator": "Closed members of the created cohort.",
+					"inclusions": "Created-cohort members closed on or before as_of.",
+					"exclusions": "Open cohort members, post-as_of closures, and issues outside the created cohort.",
+					"method_summary": "Filter to closed cohort members, divide each elapsed UTC duration by 24 hours, then take the median.",
+					"source_class": "issue-tracker"
+				},
+				{
+					"id": "issue-flow.net-backlog-change",
+					"label": "Net backlog change",
+					"unit": "issues",
+					"definition": "Difference between open backlog at window end and window start.",
+					"numerator": "Open issues at window end minus open issues at window start.",
+					"denominator": "The shared 90-day measurement window.",
+					"inclusions": "Open issue counts sampled at both boundaries of the shared window.",
+					"exclusions": "Backlog observations outside the shared window boundaries.",
+					"method_summary": "Subtract the opening backlog count from the closing backlog count.",
+					"source_class": "issue-tracker"
+				}
+			]
+		},
+		{
+			"id": "change-traceability",
+			"label": "Change traceability",
+			"metrics": [
+				{
+					"id": "change-traceability.trunk-commits",
+					"label": "Trunk commits",
+					"unit": "commits",
+					"definition": "Commits reaching trunk during the shared measurement window.",
+					"numerator": "Commits reachable from trunk with commit dates inside the window.",
+					"denominator": "The shared 90-day measurement window.",
+					"inclusions": "Opaque trunk commit records whose commit timestamp falls inside the inclusive 90-day window.",
+					"exclusions": "Commits outside the window and changes not recorded on trunk.",
+					"method_summary": "Count first-parent and merged commits reachable from trunk in-window.",
+					"source_class": "version-control"
+				},
+				{
+					"id": "change-traceability.scheduled-maintenance-commits",
+					"label": "Scheduled maintenance",
+					"unit": "commits",
+					"definition": "Trunk commits produced by explicitly scheduled maintenance.",
+					"numerator": "In-window trunk commits classified as scheduled maintenance.",
+					"denominator": "All in-window trunk commits.",
+					"inclusions": "In-window trunk commits carrying the controlled scheduled-maintenance classification.",
+					"exclusions": "Non-maintenance commits and all commits outside the shared window.",
+					"method_summary": "Classify governed maintenance identities before traceability coverage.",
+					"source_class": "version-control"
+				},
+				{
+					"id": "change-traceability.issue-reference-coverage",
+					"label": "Issue-reference coverage",
+					"unit": "percent",
+					"definition": "Non-maintenance trunk commits carrying a valid issue reference.",
+					"numerator": "Non-maintenance trunk commits with a valid issue reference.",
+					"denominator": "All non-maintenance trunk commits in the window.",
+					"inclusions": "In-window non-maintenance trunk commits referencing at least one independently validated opaque issue identity.",
+					"exclusions": "Scheduled-maintenance commits, outside-window commits, missing references, and references absent from the validated issue set.",
+					"method_summary": "Validate referenced issues after removing scheduled maintenance commits.",
+					"source_class": "version-control"
+				},
+				{
+					"id": "change-traceability.distinct-issues",
+					"label": "Distinct issues represented",
+					"unit": "issues",
+					"definition": "Unique valid issues referenced by non-maintenance trunk commits.",
+					"numerator": "Unique valid issue identities represented by in-window commits.",
+					"denominator": "Non-maintenance trunk commits with valid issue references.",
+					"inclusions": "Distinct validated opaque issue identities referenced by covered non-maintenance commits in the shared window.",
+					"exclusions": "Duplicate references, invalid references, maintenance-only references, and outside-window references.",
+					"method_summary": "Deduplicate valid issue references across covered commits.",
+					"source_class": "version-control"
+				}
+			]
+		},
+		{
+			"id": "durable-record-coverage",
+			"label": "Durable record coverage",
+			"metrics": [
+				{
+					"id": "durable-record-coverage.session-coverage-percentage",
+					"label": "Session coverage",
+					"unit": "percent",
+					"definition": "Share of scoped sessions producing at least one durable decision or finding record.",
+					"numerator": "Scoped sessions with one or more durable records, counted once per session.",
+					"denominator": "All reproducible scoped sessions during the window.",
+					"inclusions": "Opaque scoped-session records starting inside the inclusive 90-day window and their in-window durable decision or finding records.",
+					"exclusions": "Sessions outside the shared window, records outside the shared window, records for unscoped sessions, and duplicate records from the same scoped session after its first qualifying record.",
+					"method_summary": "Deduplicate durable records by scoped session before calculating coverage.",
+					"source_class": "session-registry"
+				}
+			]
+		}
+	]
+}

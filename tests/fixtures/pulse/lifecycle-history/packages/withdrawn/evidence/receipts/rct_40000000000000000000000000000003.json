@@ -1,0 +1,134 @@
+{
+	"independent_reproduction": {
+		"exact_command": "private scoped-session coverage query rerun",
+		"raw_output": {
+			"durable_records": [
+				{
+					"record_id": "rec_00000000000000000000000000000001",
+					"record_type": "decision",
+					"recorded_at": "2026-05-27T08:15:00Z",
+					"session_id": "ssn_00000000000000000000000000000001"
+				},
+				{
+					"record_id": "rec_00000000000000000000000000000002",
+					"record_type": "finding",
+					"recorded_at": "2026-05-27T08:30:00Z",
+					"session_id": "ssn_00000000000000000000000000000001"
+				},
+				{
+					"record_id": "rec_00000000000000000000000000000003",
+					"record_type": "decision",
+					"recorded_at": "2026-06-14T12:30:00Z",
+					"session_id": "ssn_00000000000000000000000000000002"
+				},
+				{
+					"record_id": "rec_00000000000000000000000000000004",
+					"record_type": "finding",
+					"recorded_at": "2026-07-09T16:30:00Z",
+					"session_id": "ssn_00000000000000000000000000000003"
+				},
+				{
+					"record_id": "rec_00000000000000000000000000000005",
+					"record_type": "decision",
+					"recorded_at": "2026-05-26T23:59:59Z",
+					"session_id": "ssn_00000000000000000000000000000005"
+				}
+			],
+			"kind": "durable-record-coverage-v1",
+			"measurement_window": {
+				"end": "2026-08-24",
+				"start": "2026-05-27"
+			},
+			"scoped_sessions": [
+				{
+					"session_id": "ssn_00000000000000000000000000000001",
+					"started_at": "2026-05-27T08:00:00Z"
+				},
+				{
+					"session_id": "ssn_00000000000000000000000000000002",
+					"started_at": "2026-06-14T12:00:00Z"
+				},
+				{
+					"session_id": "ssn_00000000000000000000000000000003",
+					"started_at": "2026-07-09T16:00:00Z"
+				},
+				{
+					"session_id": "ssn_00000000000000000000000000000004",
+					"started_at": "2026-08-24T23:59:59Z"
+				},
+				{
+					"session_id": "ssn_00000000000000000000000000000005",
+					"started_at": "2026-05-26T23:59:59Z"
+				}
+			]
+		},
+		"reproduced_by": "fixture-independent-reproducer"
+	},
+	"primary": {
+		"exact_command": "private scoped-session coverage query",
+		"local_path": "D:\\private\\receipts\\durable-record-coverage.json",
+		"private_source_identity": "mechanistic-org/private-source",
+		"raw_output": {
+			"durable_records": [
+				{
+					"record_id": "rec_00000000000000000000000000000001",
+					"record_type": "decision",
+					"recorded_at": "2026-05-27T08:15:00Z",
+					"session_id": "ssn_00000000000000000000000000000001"
+				},
+				{
+					"record_id": "rec_00000000000000000000000000000002",
+					"record_type": "finding",
+					"recorded_at": "2026-05-27T08:30:00Z",
+					"session_id": "ssn_00000000000000000000000000000001"
+				},
+				{
+					"record_id": "rec_00000000000000000000000000000003",
+					"record_type": "decision",
+					"recorded_at": "2026-06-14T12:30:00Z",
+					"session_id": "ssn_00000000000000000000000000000002"
+				},
+				{
+					"record_id": "rec_00000000000000000000000000000004",
+					"record_type": "finding",
+					"recorded_at": "2026-07-09T16:30:00Z",
+					"session_id": "ssn_00000000000000000000000000000003"
+				},
+				{
+					"record_id": "rec_00000000000000000000000000000005",
+					"record_type": "decision",
+					"recorded_at": "2026-05-26T23:59:59Z",
+					"session_id": "ssn_00000000000000000000000000000005"
+				}
+			],
+			"kind": "durable-record-coverage-v1",
+			"measurement_window": {
+				"end": "2026-08-24",
+				"start": "2026-05-27"
+			},
+			"scoped_sessions": [
+				{
+					"session_id": "ssn_00000000000000000000000000000001",
+					"started_at": "2026-05-27T08:00:00Z"
+				},
+				{
+					"session_id": "ssn_00000000000000000000000000000002",
+					"started_at": "2026-06-14T12:00:00Z"
+				},
+				{
+					"session_id": "ssn_00000000000000000000000000000003",
+					"started_at": "2026-07-09T16:00:00Z"
+				},
+				{
+					"session_id": "ssn_00000000000000000000000000000004",
+					"started_at": "2026-08-24T23:59:59Z"
+				},
+				{
+					"session_id": "ssn_00000000000000000000000000000005",
+					"started_at": "2026-05-26T23:59:59Z"
+				}
+			]
+		}
+	},
+	"receipt_id": "rct_40000000000000000000000000000003"
+}

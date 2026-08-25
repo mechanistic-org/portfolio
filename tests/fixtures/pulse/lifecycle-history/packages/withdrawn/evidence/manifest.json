@@ -1,0 +1,32 @@
+{
+	"receipts": [
+		{
+			"file": "rct_40000000000000000000000000000001.json",
+			"id": "rct_40000000000000000000000000000001",
+			"independent_reproduction": {
+				"result_sha256": "927e60ff41274fb13424513768a0dc5cd8b2e8860035b10993c93323ffe9a8c7",
+				"status": "matched"
+			},
+			"sha256": "d364cb05d5d7a4e42f92b1e26e86f3838938a79b0d3a20e1e1d6a36165eb2ed9"
+		},
+		{
+			"file": "rct_40000000000000000000000000000002.json",
+			"id": "rct_40000000000000000000000000000002",
+			"independent_reproduction": {
+				"result_sha256": "55833805579067e2293e8c8880ca8c72baa60c409677f55388346eeef2f4e47e",
+				"status": "matched"
+			},
+			"sha256": "c2ae44c2663e0ba75e334bca84c915ffeb565d4395fa327ea2d6af3d7e1896e6"
+		},
+		{
+			"file": "rct_40000000000000000000000000000003.json",
+			"id": "rct_40000000000000000000000000000003",
+			"independent_reproduction": {
+				"result_sha256": "648362ba6d51094ef2c04e4d9cf097e4fb1840e07b307951c66ef6effa32fa7f",
+				"status": "matched"
+			},
+			"sha256": "4d10bd71b034c540233fd1581a8756508935d726ee1f04e2e12832ecb43bc602"
+		}
+	],
+	"schema_version": 1
+}

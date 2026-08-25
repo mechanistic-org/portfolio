@@ -1,0 +1,32 @@
+{
+	"receipts": [
+		{
+			"file": "rct_30000000000000000000000000000001.json",
+			"id": "rct_30000000000000000000000000000001",
+			"independent_reproduction": {
+				"result_sha256": "565d2400fe9ebca89bf30eb2baad476a5891c40b6d7d54c9d9fc24191edae285",
+				"status": "matched"
+			},
+			"sha256": "2135acd7ef579cec75e0199c68620f20689cec1daaa21f03cbff47095851e601"
+		},
+		{
+			"file": "rct_30000000000000000000000000000002.json",
+			"id": "rct_30000000000000000000000000000002",
+			"independent_reproduction": {
+				"result_sha256": "709c055a24ea3e3cda34702c6a6362bc16e9aec817261bd34a74349175eb99c6",
+				"status": "matched"
+			},
+			"sha256": "965e9319307219b298ccdb0cc7340c26c7d4f46726298602b82b60dbac5b60d3"
+		},
+		{
+			"file": "rct_30000000000000000000000000000003.json",
+			"id": "rct_30000000000000000000000000000003",
+			"independent_reproduction": {
+				"result_sha256": "65632f515fe3814d874072a74687457c9ebf8719b8a20dd1a47d1ac92f4dab83",
+				"status": "matched"
+			},
+			"sha256": "ac1ebed655348fc31c0a46c3b1873bc2a63f44d8e23e08f4f977d741ba2ee6a8"
+		}
+	],
+	"schema_version": 1
+}

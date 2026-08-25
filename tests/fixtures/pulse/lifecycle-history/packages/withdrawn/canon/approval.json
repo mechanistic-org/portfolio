@@ -1,0 +1,19 @@
+{
+	"approved_by": "eriknorris",
+	"approved_on": "2026-08-24",
+	"binding": {
+		"as_of": "2026-08-24",
+		"definitions_sha256": "6c0550cac5f6a377719cac3f88743ccc9e88cc714f7696e97b4f52015f227c0e",
+		"public_projection_sha256": "8bbc5cde180cd7d1a86aead6da041d17aa7e52aefb89a612ea50b33be305c44f",
+		"public_wording_sha256": "bd6de0ba938f01f955a0115145c2767d8cf8c9661738206cfcf248759a224d98",
+		"values_sha256": "4f30d1969cb2c009494fe64cfd8cf0c422722319a348d0b0a2e3ab4909eb1754"
+	},
+	"privacy_review": {
+		"approved_public_source_urls": [],
+		"public_narrative_sha256": "8e0e73070bb7a4688844f4c8888220eed9105ddc262de74e8d565610e6cf3619",
+		"reviewed_by": "eriknorris",
+		"reviewed_on": "2026-08-24",
+		"status": "approved"
+	},
+	"status": "approved"
+}

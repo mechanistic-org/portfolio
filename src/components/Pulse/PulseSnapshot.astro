@@ -23,6 +23,7 @@ interface PulseGroup {
 }
 
 interface PulseSnapshot {
+	snapshot_id: string;
 	as_of: string;
 	lifecycle_state: string;
 	measurement_window: MeasurementWindow;
@@ -34,12 +35,50 @@ interface PulseSnapshot {
 	groups: PulseGroup[];
 }
 
+interface PulseHistoricalSnapshot extends Omit<PulseSnapshot, "lifecycle_state"> {}
+
+interface PulseHistoryRecord {
+	snapshot: PulseHistoricalSnapshot;
+	lifecycle: {
+		state: "active" | "archived" | "withdrawn";
+		is_current: boolean;
+		validity: "valid" | "invalid";
+		effective_on: string;
+		correction: null | {
+			reason: "incorrect" | "provenance-invalid";
+			replacement_snapshot_id: string;
+			href: string;
+		};
+	};
+	approval: {
+		approved_by: string;
+		approved_on: string;
+		public_projection_sha256: string;
+	};
+}
+
+interface PulseHistory {
+	current_snapshot_id: string | null;
+	evaluated_on: string;
+	snapshots: PulseHistoryRecord[];
+}
+
 interface Props {
-	snapshot: PulseSnapshot;
+	snapshot: PulseSnapshot | null;
+	history: PulseHistory;
 	controlledExample?: boolean;
 }
 
-const { snapshot, controlledExample = false } = Astro.props;
+const { snapshot, history, controlledExample = false } = Astro.props;
+if (
+	(history.current_snapshot_id === null && snapshot !== null) ||
+	(history.current_snapshot_id !== null && snapshot?.snapshot_id !== history.current_snapshot_id)
+) {
+	throw new Error("Pulse history current_snapshot_id must match the rendered active snapshot");
+}
+const historicalSnapshots = history.snapshots.filter(
+	(record) => record.lifecycle.state !== "active",
+);
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
 	day: "numeric",
@@ -62,9 +101,25 @@ function formatValue(metric: PulseMetric) {
 	if (metric.unit === "percent") return `${value}%`;
 	return value;
 }
+
+function historyNotice(record: PulseHistoryRecord) {
+	if (record.lifecycle.state === "archived") {
+		return "Archived because this approved snapshot is more than 90 days old. It remains valid historical evidence and is not current or live.";
+	}
+	const cause =
+		record.lifecycle.correction?.reason === "provenance-invalid"
+			? "provenance became invalid"
+			: "values were incorrect";
+	return `Withdrawn because its ${cause}. It is inactive and cannot serve as the current snapshot.`;
+}
 ---
 
-<section class="pulse-snapshot not-content" data-pulse-snapshot>
+<section
+	id={snapshot ? `pulse-snapshot-${snapshot.snapshot_id}` : undefined}
+	class="pulse-snapshot not-content"
+	data-pulse-snapshot={snapshot ? true : undefined}
+	data-pulse-history-root
+>
 	{
 		controlledExample && (
 			<p class="pulse-control-note" data-pulse-controlled-example>
@@ -73,80 +128,178 @@ function formatValue(metric: PulseMetric) {
 		)
 	}
 
-	<header class="pulse-heading">
-		<p class="pulse-kicker">Approved static projection</p>
-		<h2>{snapshot.public_wording.title}</h2>
-		<p>{snapshot.public_wording.summary}</p>
-	</header>
+	{
+		snapshot ? (
+			<header class="pulse-heading">
+				<p class="pulse-kicker">Approved static projection</p>
+				<h2>{snapshot.public_wording.title}</h2>
+				<p>{snapshot.public_wording.summary}</p>
+			</header>
+		) : (
+			<header class="pulse-heading pulse-no-current" data-pulse-no-current>
+				<p class="pulse-kicker">Archived evidence only</p>
+				<h2>No current approved snapshot</h2>
+				<p>No evidence is presented as current or live. Valid archived history remains below.</p>
+			</header>
+		)
+	}
 
-	<dl class="pulse-boundary" aria-label="Snapshot boundary">
-		<div>
-			<dt>Measurement window</dt>
-			<dd>
-				{formatDate(snapshot.measurement_window.start)} - {
-					formatDate(snapshot.measurement_window.end)
-				}
-				({snapshot.measurement_window.days} days)
-			</dd>
-		</div>
-		<div>
-			<dt>As of</dt>
-			<dd>{formatDate(snapshot.as_of)}</dd>
-		</div>
-		<div>
-			<dt>Refresh state</dt>
-			<dd>{formatState(snapshot.verification_state)}</dd>
-		</div>
-		<div>
-			<dt>Lifecycle state</dt>
-			<dd>{formatState(snapshot.lifecycle_state)}</dd>
-		</div>
-		<div>
-			<dt>Verification state</dt>
-			<dd>{formatState(snapshot.verification_state)}</dd>
-		</div>
-	</dl>
+	{
+		snapshot && (
+			<dl class="pulse-boundary" aria-label="Snapshot boundary">
+				<div>
+					<dt>Measurement window</dt>
+					<dd>
+						{formatDate(snapshot.measurement_window.start)} -{" "}
+						{formatDate(snapshot.measurement_window.end)}({snapshot.measurement_window.days} days)
+					</dd>
+				</div>
+				<div>
+					<dt>As of</dt>
+					<dd>{formatDate(snapshot.as_of)}</dd>
+				</div>
+				<div>
+					<dt>Refresh state</dt>
+					<dd>{formatState(snapshot.verification_state)}</dd>
+				</div>
+				<div>
+					<dt>Lifecycle state</dt>
+					<dd>{formatState(snapshot.lifecycle_state)}</dd>
+				</div>
+				<div>
+					<dt>Verification state</dt>
+					<dd>{formatState(snapshot.verification_state)}</dd>
+				</div>
+			</dl>
+		)
+	}
 
-	<div class="pulse-groups">
-		{
-			snapshot.groups.map((group, groupIndex) => (
-				<section class="pulse-group" data-pulse-proof-group={group.id}>
-					<header>
-						<p class="pulse-group-index">PROOF {String(groupIndex + 1).padStart(2, "0")}</p>
-						<h3>{group.label}</h3>
-						<p data-pulse-group-purpose>
-							{group.metrics.map((metric) => metric.definition).join(" ")}
-						</p>
-					</header>
+	{
+		snapshot && (
+			<div class="pulse-groups">
+				{snapshot.groups.map((group, groupIndex) => (
+					<section class="pulse-group" data-pulse-proof-group={group.id}>
+						<header>
+							<p class="pulse-group-index">PROOF {String(groupIndex + 1).padStart(2, "0")}</p>
+							<h3>{group.label}</h3>
+							<p data-pulse-group-purpose>
+								{group.metrics.map((metric) => metric.definition).join(" ")}
+							</p>
+						</header>
 
-					<div class="pulse-metrics">
-						{group.metrics.map((metric) => (
-							<article class="pulse-metric" data-pulse-metric={metric.id}>
-								<div class="pulse-reading">
-									<p>{metric.label}</p>
-									<p>
-										<strong>{formatValue(metric)}</strong>
-										<span>{metric.unit}</span>
+						<div class="pulse-metrics">
+							{group.metrics.map((metric) => (
+								<article class="pulse-metric" data-pulse-metric={metric.id}>
+									<div class="pulse-reading">
+										<p>{metric.label}</p>
+										<p>
+											<strong>{formatValue(metric)}</strong>
+											<span>{metric.unit}</span>
+										</p>
+									</div>
+									<p data-pulse-definition>
+										<span>Definition</span>
+										{metric.definition}
 									</p>
+									<p data-pulse-method>
+										<span>Method</span>
+										{metric.method_summary}
+									</p>
+									<p class="pulse-source">
+										{formatState(metric.source_class)} / {formatState(metric.refresh_state)}
+									</p>
+								</article>
+							))}
+						</div>
+					</section>
+				))}
+			</div>
+		)
+	}
+
+	<section class="pulse-history" aria-labelledby="pulse-history-title" data-pulse-history>
+		<header class="pulse-history-heading">
+			<p class="pulse-kicker">Evidence lifecycle</p>
+			<h3 id="pulse-history-title">Snapshot history</h3>
+			<p>
+				Prior values remain visible as immutable evidence. Age archives a valid record; evidence
+				failure withdraws it and names its separately approved correction.
+			</p>
+		</header>
+
+		<div class="pulse-history-records">
+			{
+				historicalSnapshots.map((record) => (
+					<article
+						id={`pulse-snapshot-${record.snapshot.snapshot_id}`}
+						class="pulse-history-record"
+						data-pulse-history-state={record.lifecycle.state}
+					>
+						<header>
+							<p class="pulse-history-state">{record.lifecycle.state}</p>
+							<h4>{record.snapshot.public_wording.title}</h4>
+							<p>{record.snapshot.public_wording.summary}</p>
+						</header>
+
+						<p class="pulse-history-notice">{historyNotice(record)}</p>
+
+						<dl
+							class="pulse-history-boundary"
+							aria-label={`${record.lifecycle.state} snapshot boundary`}
+						>
+							<div>
+								<dt>Measurement window</dt>
+								<dd>
+									{formatDate(record.snapshot.measurement_window.start)} -{" "}
+									{formatDate(record.snapshot.measurement_window.end)}
+								</dd>
+							</div>
+							<div>
+								<dt>As of</dt>
+								<dd>{formatDate(record.snapshot.as_of)}</dd>
+							</div>
+							<div>
+								<dt>Approval</dt>
+								<dd>
+									{record.approval.approved_by} / {formatDate(record.approval.approved_on)}
+								</dd>
+							</div>
+							<div>
+								<dt>Validity</dt>
+								<dd>{record.lifecycle.validity}</dd>
+							</div>
+						</dl>
+
+						{record.lifecycle.correction && (
+							<p class="pulse-correction-link">
+								<a href={record.lifecycle.correction.href}>View the approved correction</a>
+							</p>
+						)}
+
+						<div class="pulse-history-groups">
+							{record.snapshot.groups.map((group) => (
+								<div class="pulse-history-group">
+									<h5>{group.label}</h5>
+									<div class="pulse-history-metrics">
+										{group.metrics.map((metric) => (
+											<div class="pulse-history-metric" data-pulse-history-metric={metric.id}>
+												<p>
+													<strong>{formatValue(metric)}</strong> {metric.unit}
+												</p>
+												<p>{metric.label}</p>
+												<p>{metric.definition}</p>
+												<p>{metric.method_summary}</p>
+											</div>
+										))}
+									</div>
 								</div>
-								<p data-pulse-definition>
-									<span>Definition</span>
-									{metric.definition}
-								</p>
-								<p data-pulse-method>
-									<span>Method</span>
-									{metric.method_summary}
-								</p>
-								<p class="pulse-source">
-									{formatState(metric.source_class)} / {formatState(metric.refresh_state)}
-								</p>
-							</article>
-						))}
-					</div>
-				</section>
-			))
-		}
-	</div>
+							))}
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</section>
 
 	<aside class="pulse-inventory" aria-labelledby="pulse-inventory-title">
 		<p class="pulse-kicker">Supporting inventory</p>
@@ -189,6 +342,9 @@ function formatValue(metric: PulseMetric) {
 
 	.pulse-heading h2,
 	.pulse-group h3,
+	.pulse-history h3,
+	.pulse-history h4,
+	.pulse-history h5,
 	.pulse-inventory h3 {
 		color: var(--foreground);
 		font-family: var(--font-header);
@@ -335,6 +491,141 @@ function formatValue(metric: PulseMetric) {
 		border: 1px solid var(--border);
 		margin-top: 2.5rem;
 		padding: 1.25rem;
+	}
+
+	.pulse-history {
+		border-top: 1px solid var(--border);
+		margin-top: 2.5rem;
+		padding-top: 2.5rem;
+	}
+
+	.pulse-history-heading > p:last-child {
+		color: var(--muted-foreground);
+		font-size: 0.85rem;
+		line-height: 1.6;
+		margin: 0.75rem 0 0;
+	}
+
+	.pulse-history-records {
+		display: grid;
+		gap: 2rem;
+		margin-top: 1.5rem;
+	}
+
+	.pulse-history-record {
+		background: var(--card);
+		border: 1px solid var(--border);
+	}
+
+	.pulse-history-record[data-pulse-history-state="archived"] {
+		border-color: var(--info);
+	}
+
+	.pulse-history-record[data-pulse-history-state="withdrawn"] {
+		border-color: var(--warning);
+	}
+
+	.pulse-history-record > header,
+	.pulse-history-notice,
+	.pulse-correction-link {
+		border-bottom: 1px solid var(--border);
+		margin: 0;
+		padding: 1rem;
+	}
+
+	.pulse-history-record > header > p:last-child,
+	.pulse-history-notice {
+		color: var(--muted-foreground);
+		font-size: 0.75rem;
+		line-height: 1.55;
+	}
+
+	.pulse-history-state {
+		font-family: var(--font-mono);
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		margin: 0 0 0.5rem;
+		text-transform: uppercase;
+	}
+
+	[data-pulse-history-state="archived"] .pulse-history-state {
+		color: var(--info);
+	}
+
+	[data-pulse-history-state="withdrawn"] .pulse-history-state {
+		color: var(--warning);
+	}
+
+	.pulse-history-boundary {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+		margin: 0;
+	}
+
+	.pulse-history-boundary div {
+		border-bottom: 1px solid var(--border);
+		border-right: 1px solid var(--border);
+		padding: 0.8rem;
+	}
+
+	.pulse-history-boundary dt,
+	.pulse-history-boundary dd {
+		font-family: var(--font-mono);
+		font-size: 0.65rem;
+		margin: 0;
+	}
+
+	.pulse-history-boundary dt {
+		color: var(--muted-foreground);
+		text-transform: uppercase;
+	}
+
+	.pulse-history-boundary dd {
+		color: var(--foreground);
+		margin-top: 0.35rem;
+	}
+
+	.pulse-correction-link a {
+		color: var(--warning);
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	.pulse-history-group {
+		border-bottom: 1px solid var(--border);
+	}
+
+	.pulse-history-group h5 {
+		border-bottom: 1px solid var(--border);
+		font-size: 0.85rem;
+		padding: 0.8rem;
+	}
+
+	.pulse-history-metrics {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+	}
+
+	.pulse-history-metric {
+		border-right: 1px solid var(--border);
+		padding: 0.8rem;
+	}
+
+	.pulse-history-metric p {
+		color: var(--muted-foreground);
+		font-size: 0.65rem;
+		line-height: 1.45;
+		margin: 0.4rem 0 0;
+	}
+
+	.pulse-history-metric p:first-child {
+		color: var(--foreground);
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		margin: 0;
 	}
 
 	.pulse-inventory ul {
