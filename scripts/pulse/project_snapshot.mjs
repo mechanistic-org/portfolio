@@ -65,6 +65,7 @@ const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/u;
 const ISO_TIMESTAMP = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/u;
 const PUBLIC_SOURCE_CLASSES = new Set(["issue-tracker", "version-control", "session-registry"]);
 const PUBLIC_URL = /\bhttps:\/\/[^\s<>"']+/giu;
+const PUBLIC_PULSE_DATA_DIRECTORY = path.resolve(import.meta.dirname, "../../src/data/pulse");
 
 function fail(message) {
 	throw new Error(`[snapshot-contract] ${message}`);
@@ -833,7 +834,7 @@ function buildPublicProjection(definitions, snapshot, verifiedReceipts) {
 	return publicProjection;
 }
 
-function validateApproval(approval, definitions, snapshot, publicBytes) {
+function validateReleaseDecision(approval, definitions, snapshot, publicBytes) {
 	requireExactKeys(
 		approval,
 		["status", "approved_by", "approved_on", "privacy_review", "binding"],
@@ -921,8 +922,7 @@ function validateApproval(approval, definitions, snapshot, publicBytes) {
 		failProposal("public source URLs require explicit privacy approval");
 	}
 	if (JSON.stringify(approvedPublicSourceUrls) !== JSON.stringify(expectedPublicSourceUrls)) {
-		const message =
-			`approved public source URLs must exactly match the public narrative: expected ${expectedPublicSourceUrls.join(", ") || "none"}`;
+		const message = `approved public source URLs must exactly match the public narrative: expected ${expectedPublicSourceUrls.join(", ") || "none"}`;
 		isProposal ? failProposal(message) : fail(message);
 	}
 
@@ -970,6 +970,19 @@ function writeAtomically(outputPath, bytes) {
 	}
 }
 
+function validateOutputDestination(outputPath, releaseState) {
+	if (releaseState !== "proposal") return;
+	const relativePath = path.relative(PUBLIC_PULSE_DATA_DIRECTORY, outputPath);
+	const targetsPublicPulseData =
+		relativePath === "" ||
+		(relativePath !== ".." &&
+			!relativePath.startsWith(`..${path.sep}`) &&
+			!path.isAbsolute(relativePath));
+	if (targetsPublicPulseData) {
+		failProposal("output must not target the public Pulse data directory");
+	}
+}
+
 function main() {
 	const argumentsByName = parseArguments(process.argv.slice(2));
 	const definitions = readJson(argumentsByName.definitions, "canon definitions").value;
@@ -990,7 +1003,8 @@ function main() {
 	);
 	const publicProjection = buildPublicProjection(definitions, snapshot, verifiedReceipts);
 	const publicBytes = Buffer.from(stableJson(publicProjection), "utf8");
-	validateApproval(approval, definitions, snapshot, publicBytes);
+	validateReleaseDecision(approval, definitions, snapshot, publicBytes);
+	validateOutputDestination(argumentsByName.output, approval.status);
 	writeAtomically(argumentsByName.output, publicBytes);
 
 	console.log(

@@ -17,7 +17,7 @@ function stableJson(value) {
 	return `${JSON.stringify(value, null, "\t")}\n`;
 }
 
-function proposalApproval(overrides = {}) {
+function proposalApprovalRecord(overrides = {}) {
 	const approved = JSON.parse(
 		fs.readFileSync(path.join(fixtureRoot, "canon", "approval.json"), "utf8"),
 	);
@@ -36,10 +36,10 @@ function proposalApproval(overrides = {}) {
 	};
 }
 
-function runProposal(approval) {
+function runProposal(approval, requestedOutputPath = null) {
 	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-proposal-"));
 	const approvalPath = path.join(workspace, "approval.json");
-	const outputPath = path.join(workspace, "candidate.json");
+	const outputPath = requestedOutputPath ?? path.join(workspace, "candidate.json");
 	fs.writeFileSync(approvalPath, stableJson(approval));
 	const publishedBefore = publishedPaths.map((publishedPath) => fs.readFileSync(publishedPath));
 
@@ -72,17 +72,21 @@ function runProposal(approval) {
 }
 
 test("an unapproved proposal validates and writes only deterministic candidate bytes", () => {
-	const first = runProposal(proposalApproval());
-	const second = runProposal(proposalApproval());
+	const first = runProposal(proposalApprovalRecord());
+	const second = runProposal(proposalApprovalRecord());
 	try {
 		assert.equal(first.result.status, 0, `${first.result.stdout}\n${first.result.stderr}`);
 		assert.equal(second.result.status, 0, `${second.result.stdout}\n${second.result.stderr}`);
 		assert.match(first.result.stdout, /effective_state=proposal/u);
 		assert.deepEqual(fs.readFileSync(first.outputPath), fs.readFileSync(second.outputPath));
 		assert.equal(
-			fs.readFileSync(first.outputPath).equals(
-				fs.readFileSync(path.join(repositoryRoot, "src", "data", "pulse", "public-snapshot.json")),
-			),
+			fs
+				.readFileSync(first.outputPath)
+				.equals(
+					fs.readFileSync(
+						path.join(repositoryRoot, "src", "data", "pulse", "public-snapshot.json"),
+					),
+				),
 			true,
 			"the reviewed proposal candidate must be the exact projection later eligible for approval",
 		);
@@ -105,15 +109,18 @@ test("a proposal fails closed when approval authority is present", () => {
 		{ approved_on: "2026-08-24" },
 		{
 			privacy_review: {
-				...proposalApproval().privacy_review,
+				...proposalApprovalRecord().privacy_review,
 				reviewed_by: "eriknorris",
 			},
 		},
 	]) {
-		const attempt = runProposal(proposalApproval(invalidAuthority));
+		const attempt = runProposal(proposalApprovalRecord(invalidAuthority));
 		try {
 			assert.notEqual(attempt.result.status, 0, "proposal accepted an approval authority field");
-			assert.match(`${attempt.result.stdout}\n${attempt.result.stderr}`, /effective_state=proposal/u);
+			assert.match(
+				`${attempt.result.stdout}\n${attempt.result.stderr}`,
+				/effective_state=proposal/u,
+			);
 			assert.equal(fs.existsSync(attempt.outputPath), false);
 		} finally {
 			attempt.cleanup();
@@ -122,7 +129,7 @@ test("a proposal fails closed when approval authority is present", () => {
 });
 
 test("a proposal fails closed when its candidate binding no longer matches", () => {
-	const invalid = proposalApproval();
+	const invalid = proposalApprovalRecord();
 	invalid.binding.public_projection_sha256 = "0".repeat(64);
 	const attempt = runProposal(invalid);
 	try {
@@ -134,5 +141,22 @@ test("a proposal fails closed when its candidate binding no longer matches", () 
 		assert.equal(fs.existsSync(attempt.outputPath), false);
 	} finally {
 		attempt.cleanup();
+	}
+});
+
+test("a proposal cannot target the repository's published Pulse data", () => {
+	for (const publishedPath of publishedPaths) {
+		const publishedBefore = fs.readFileSync(publishedPath);
+		const attempt = runProposal(proposalApprovalRecord(), publishedPath);
+		try {
+			assert.notEqual(attempt.result.status, 0, "proposal accepted a publication destination");
+			assert.match(
+				`${attempt.result.stdout}\n${attempt.result.stderr}`,
+				/effective_state=proposal; output must not target the public Pulse data directory/u,
+			);
+			assert.deepEqual(fs.readFileSync(publishedPath), publishedBefore);
+		} finally {
+			attempt.cleanup();
+		}
 	}
 });
