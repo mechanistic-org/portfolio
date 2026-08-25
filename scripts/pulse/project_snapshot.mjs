@@ -50,6 +50,7 @@ const GROUPS_WITH_INCLUSION_EXCLUSION = new Set([
 const REQUIRED_ARGUMENTS = [
 	"definitions",
 	"snapshot",
+	"narrative",
 	"approval",
 	"receipt-manifest",
 	"receipts-dir",
@@ -239,7 +240,7 @@ function validatePublicWording(publicWording) {
 	return publicWording;
 }
 
-function validateSnapshot(snapshot, metricIds, separateNarrative = null) {
+function validateSnapshot(snapshot, metricIds, publicWording) {
 	const snapshotKeys = [
 		"schema_version",
 		"snapshot_id",
@@ -249,7 +250,6 @@ function validateSnapshot(snapshot, metricIds, separateNarrative = null) {
 		"lifecycle_state",
 		"values",
 	];
-	if (separateNarrative === null) snapshotKeys.push("public_wording");
 	requireExactKeys(snapshot, snapshotKeys, "snapshot");
 	if (snapshot.schema_version !== 1) fail("snapshot.schema_version must be 1");
 	requireString(snapshot.snapshot_id, "snapshot.snapshot_id");
@@ -279,7 +279,7 @@ function validateSnapshot(snapshot, metricIds, separateNarrative = null) {
 		fail("snapshot.as_of must match the measurement window end date");
 	}
 
-	validatePublicWording(separateNarrative ?? snapshot.public_wording);
+	validatePublicWording(publicWording);
 
 	requireRecord(snapshot.values, "snapshot.values");
 	const valueIds = Object.keys(snapshot.values).sort();
@@ -1201,9 +1201,7 @@ function main() {
 	const argumentsByName = parseArguments(process.argv.slice(2));
 	const definitions = readJson(argumentsByName.definitions, "canon definitions").value;
 	const snapshot = readJson(argumentsByName.snapshot, "canon snapshot").value;
-	const publicWording = argumentsByName.narrative
-		? readJson(argumentsByName.narrative, "canon narrative").value
-		: snapshot.public_wording;
+	const publicWording = readJson(argumentsByName.narrative, "canon narrative").value;
 	const approval = readJson(argumentsByName.approval, "canon approval").value;
 	const receiptManifest = readJson(
 		argumentsByName["receipt-manifest"],
@@ -1211,7 +1209,7 @@ function main() {
 	).value;
 
 	const metricIds = validateDefinitions(definitions);
-	validateSnapshot(snapshot, metricIds, argumentsByName.narrative ? publicWording : null);
+	validateSnapshot(snapshot, metricIds, publicWording);
 	const verifiedReceipts = validateReceipts(
 		receiptManifest,
 		argumentsByName["receipts-dir"],

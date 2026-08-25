@@ -57,30 +57,39 @@ function proposalApprovalRecord(overrides = {}) {
 	};
 }
 
-function runProposal(approval, requestedOutputPath = null) {
+function runProposal(approval, requestedOutputPath = null, { includeNarrative = true } = {}) {
 	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-proposal-"));
 	const approvalPath = path.join(workspace, "approval.json");
 	const outputPath = requestedOutputPath ?? path.join(workspace, "candidate.json");
 	fs.writeFileSync(approvalPath, stableJson(approval));
 	const publishedBefore = publishedPaths.map((publishedPath) => fs.readFileSync(publishedPath));
 
+	const argumentsList = [
+		projectorPath,
+		"--definitions",
+		path.join(fixtureRoot, "canon", "definitions.json"),
+		"--snapshot",
+		path.join(fixtureRoot, "canon", "snapshot.json"),
+	];
+	if (includeNarrative) {
+		argumentsList.push(
+			"--narrative",
+			path.join(fixtureRoot, "canon", "narrative.json"),
+		);
+	}
+	argumentsList.push(
+		"--approval",
+		approvalPath,
+		"--receipt-manifest",
+		path.join(fixtureRoot, "evidence", "manifest.json"),
+		"--receipts-dir",
+		path.join(fixtureRoot, "evidence", "receipts"),
+		"--output",
+		outputPath,
+	);
 	const result = spawnSync(
 		process.execPath,
-		[
-			projectorPath,
-			"--definitions",
-			path.join(fixtureRoot, "canon", "definitions.json"),
-			"--snapshot",
-			path.join(fixtureRoot, "canon", "snapshot.json"),
-			"--approval",
-			approvalPath,
-			"--receipt-manifest",
-			path.join(fixtureRoot, "evidence", "manifest.json"),
-			"--receipts-dir",
-			path.join(fixtureRoot, "evidence", "receipts"),
-			"--output",
-			outputPath,
-		],
+		argumentsList,
 		{ cwd: repositoryRoot, encoding: "utf8" },
 	);
 
@@ -103,8 +112,9 @@ function runUnavailableProposal() {
 	const snapshot = JSON.parse(
 		fs.readFileSync(path.join(fixtureRoot, "canon", "snapshot.json"), "utf8"),
 	);
-	const narrative = structuredClone(snapshot.public_wording);
-	delete snapshot.public_wording;
+	const narrative = JSON.parse(
+		fs.readFileSync(path.join(fixtureRoot, "canon", "narrative.json"), "utf8"),
+	);
 	const approvedProjection = JSON.parse(
 		fs.readFileSync(
 			path.join(repositoryRoot, "src", "data", "pulse", "public-snapshot.json"),
@@ -296,6 +306,66 @@ test("an unavailable durable group remains explicit without publishing a numeric
 		assert.match(durableGroup.eligibility_rule, /complete 90-day window/u);
 	} finally {
 		attempt.cleanup();
+	}
+});
+
+test("projection requires separate narrative custody and rejects embedded wording", () => {
+	const omitted = runProposal(proposalApprovalRecord(), null, { includeNarrative: false });
+	try {
+		assert.notEqual(omitted.result.status, 0, "projection accepted an omitted --narrative");
+		assert.match(
+			`${omitted.result.stdout}\n${omitted.result.stderr}`,
+			/Missing required argument --narrative/u,
+		);
+	} finally {
+		omitted.cleanup();
+	}
+
+	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-embedded-wording-"));
+	try {
+		const fixtureSnapshot = JSON.parse(
+			fs.readFileSync(path.join(fixtureRoot, "canon", "snapshot.json"), "utf8"),
+		);
+		const narrative = JSON.parse(
+			fs.readFileSync(path.join(fixtureRoot, "canon", "narrative.json"), "utf8"),
+		);
+		const snapshotPath = path.join(workspace, "snapshot.json");
+		const narrativePath = path.join(workspace, "narrative.json");
+		const outputPath = path.join(workspace, "candidate.json");
+		fs.writeFileSync(
+			snapshotPath,
+			stableJson({ ...fixtureSnapshot, public_wording: narrative }),
+		);
+		fs.writeFileSync(narrativePath, stableJson(narrative));
+		const embedded = spawnSync(
+			process.execPath,
+			[
+				projectorPath,
+				"--definitions",
+				path.join(fixtureRoot, "canon", "definitions.json"),
+				"--snapshot",
+				snapshotPath,
+				"--narrative",
+				narrativePath,
+				"--approval",
+				path.join(fixtureRoot, "canon", "approval.json"),
+				"--receipt-manifest",
+				path.join(fixtureRoot, "evidence", "manifest.json"),
+				"--receipts-dir",
+				path.join(fixtureRoot, "evidence", "receipts"),
+				"--output",
+				outputPath,
+			],
+			{ cwd: repositoryRoot, encoding: "utf8" },
+		);
+		assert.notEqual(embedded.status, 0, "projection accepted snapshot.public_wording");
+		assert.match(
+			`${embedded.stdout}\n${embedded.stderr}`,
+			/snapshot keys must be exactly/u,
+		);
+		assert.equal(fs.existsSync(outputPath), false);
+	} finally {
+		fs.rmSync(workspace, { force: true, recursive: true });
 	}
 });
 

@@ -85,6 +85,8 @@ function projectApprovedPackage(packageDirectory, workspace) {
 			path.join(packageDirectory, "canon", "definitions.json"),
 			"--snapshot",
 			path.join(packageDirectory, "canon", "snapshot.json"),
+			"--narrative",
+			path.join(packageDirectory, "canon", "narrative.json"),
 			"--approval",
 			path.join(packageDirectory, "canon", "approval.json"),
 			"--receipt-manifest",
