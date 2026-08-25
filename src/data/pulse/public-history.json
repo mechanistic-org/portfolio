@@ -1,5 +1,5 @@
 {
-	"current_snapshot_id": "pulse-fixture-2026-08-24",
+	"current_snapshot_id": "pulse-2026-08-24-03",
 	"evaluated_on": "2026-08-25",
 	"schema_version": 1,
 	"snapshots": [
@@ -544,11 +544,15 @@
 				"public_projection_sha256": "312e5240e96309c0ac64d23b68fa879e2cdf65f5e725807d40999647647a7b89"
 			},
 			"lifecycle": {
-				"correction": null,
-				"effective_on": "2026-08-24",
-				"is_current": true,
-				"state": "active",
-				"validity": "valid"
+				"correction": {
+					"href": "/colophon/the-pulse/#pulse-snapshot-pulse-2026-08-24-03",
+					"reason": "provenance-invalid",
+					"replacement_snapshot_id": "pulse-2026-08-24-03"
+				},
+				"effective_on": "2026-08-25",
+				"is_current": false,
+				"state": "withdrawn",
+				"validity": "invalid"
 			},
 			"snapshot": {
 				"as_of": "2026-08-24",
@@ -799,6 +803,280 @@
 				},
 				"schema_version": 1,
 				"snapshot_id": "pulse-fixture-2026-08-24",
+				"verification_state": "independently-reproduced"
+			}
+		},
+		{
+			"approval": {
+				"approved_by": "eriknorris",
+				"approved_on": "2026-08-25",
+				"public_projection_sha256": "744a8683c726d704b5309fca6828e1707a708339e53abb134015d90900b9d893"
+			},
+			"lifecycle": {
+				"correction": null,
+				"effective_on": "2026-08-25",
+				"is_current": true,
+				"state": "active",
+				"validity": "valid"
+			},
+			"snapshot": {
+				"as_of": "2026-08-24",
+				"groups": [
+					{
+						"id": "issue-flow",
+						"label": "Issue flow",
+						"metrics": [
+							{
+								"as_of": "2026-08-24",
+								"definition": "Issues created during the shared measurement window.",
+								"denominator": "The shared 90-day measurement window.",
+								"exclusions": "Issues created before the window start or after the window end.",
+								"id": "issue-flow.created-count",
+								"inclusions": "Issues whose creation timestamp falls inside the inclusive 90-day window.",
+								"label": "Created cohort",
+								"measurement_window": {
+									"days": 90,
+									"end": "2026-08-24",
+									"start": "2026-05-27"
+								},
+								"method_summary": "Filter issue creation timestamps to the inclusive window, then count the cohort.",
+								"numerator": "Issues created from window start through window end, inclusive.",
+								"receipt": {
+									"id": "rct_b32cbba0dec147658faef988e0bcb70a",
+									"sha256": "0f4224eda6e8fedbec0f3fa67c1787c7e7da89c52822e4d15ebbfd13155d8c25"
+								},
+								"refresh_state": "independently-reproduced",
+								"source_class": "issue-tracker",
+								"unit": "issues",
+								"value": 221
+							},
+							{
+								"as_of": "2026-08-24",
+								"definition": "Share of the created cohort closed by the measurement date.",
+								"denominator": "All issues created during the window.",
+								"exclusions": "Issues outside the created cohort and cohort members closing after as_of.",
+								"id": "issue-flow.cohort-closure-percentage",
+								"inclusions": "Created-cohort members with a closure timestamp on or before as_of.",
+								"label": "Cohort closure",
+								"measurement_window": {
+									"days": 90,
+									"end": "2026-08-24",
+									"start": "2026-05-27"
+								},
+								"method_summary": "Divide closed cohort members by all created cohort members and round to one decimal percentage point.",
+								"numerator": "Created-cohort issues closed by as_of.",
+								"receipt": {
+									"id": "rct_b32cbba0dec147658faef988e0bcb70a",
+									"sha256": "0f4224eda6e8fedbec0f3fa67c1787c7e7da89c52822e4d15ebbfd13155d8c25"
+								},
+								"refresh_state": "independently-reproduced",
+								"source_class": "issue-tracker",
+								"unit": "percent",
+								"value": 83.3
+							},
+							{
+								"as_of": "2026-08-24",
+								"definition": "Median elapsed time from creation to closure for closed cohort members.",
+								"denominator": "Closed members of the created cohort.",
+								"exclusions": "Open cohort members, post-as_of closures, and issues outside the created cohort.",
+								"id": "issue-flow.median-close-time",
+								"inclusions": "Created-cohort members closed on or before as_of.",
+								"label": "Median close time",
+								"measurement_window": {
+									"days": 90,
+									"end": "2026-08-24",
+									"start": "2026-05-27"
+								},
+								"method_summary": "Filter to closed cohort members, divide each elapsed UTC duration by 24 hours, then take the median.",
+								"numerator": "Elapsed 24-hour days for each closed cohort member.",
+								"receipt": {
+									"id": "rct_b32cbba0dec147658faef988e0bcb70a",
+									"sha256": "0f4224eda6e8fedbec0f3fa67c1787c7e7da89c52822e4d15ebbfd13155d8c25"
+								},
+								"refresh_state": "independently-reproduced",
+								"source_class": "issue-tracker",
+								"unit": "days",
+								"value": 0.6784201388888889
+							},
+							{
+								"as_of": "2026-08-24",
+								"definition": "Difference between open backlog at window end and window start.",
+								"denominator": "The shared 90-day measurement window.",
+								"exclusions": "Backlog observations outside the shared window boundaries.",
+								"id": "issue-flow.net-backlog-change",
+								"inclusions": "Open issue counts sampled at both boundaries of the shared window.",
+								"label": "Net backlog change",
+								"measurement_window": {
+									"days": 90,
+									"end": "2026-08-24",
+									"start": "2026-05-27"
+								},
+								"method_summary": "Subtract the opening backlog count from the closing backlog count.",
+								"numerator": "Open issues at window end minus open issues at window start.",
+								"receipt": {
+									"id": "rct_b32cbba0dec147658faef988e0bcb70a",
+									"sha256": "0f4224eda6e8fedbec0f3fa67c1787c7e7da89c52822e4d15ebbfd13155d8c25"
+								},
+								"refresh_state": "independently-reproduced",
+								"source_class": "issue-tracker",
+								"unit": "issues",
+								"value": -30
+							}
+						]
+					},
+					{
+						"id": "change-traceability",
+						"label": "Change traceability",
+						"metrics": [
+							{
+								"as_of": "2026-08-24",
+								"definition": "Commits reaching trunk during the shared measurement window.",
+								"denominator": "The shared 90-day measurement window.",
+								"exclusions": "Commits outside the window and changes not recorded on trunk.",
+								"id": "change-traceability.trunk-commits",
+								"inclusions": "Opaque trunk commit records whose commit timestamp falls inside the inclusive 90-day window.",
+								"label": "Trunk commits",
+								"measurement_window": {
+									"days": 90,
+									"end": "2026-08-24",
+									"start": "2026-05-27"
+								},
+								"method_summary": "Count first-parent and merged commits reachable from trunk in-window.",
+								"numerator": "Commits reachable from trunk with commit dates inside the window.",
+								"receipt": {
+									"id": "rct_f4cdc4dd3d24429d96690441d997e5e8",
+									"sha256": "3138a6abc9fb77540d0d56c3645fb4aee90170a275bc0f1c2be35349e9bf5c7d"
+								},
+								"refresh_state": "independently-reproduced",
+								"source_class": "version-control",
+								"unit": "commits",
+								"value": 998
+							},
+							{
+								"as_of": "2026-08-24",
+								"definition": "Trunk commits produced by explicitly scheduled maintenance.",
+								"denominator": "All in-window trunk commits.",
+								"exclusions": "Non-maintenance commits and all commits outside the shared window.",
+								"id": "change-traceability.scheduled-maintenance-commits",
+								"inclusions": "In-window trunk commits carrying the controlled scheduled-maintenance classification.",
+								"label": "Scheduled maintenance",
+								"measurement_window": {
+									"days": 90,
+									"end": "2026-08-24",
+									"start": "2026-05-27"
+								},
+								"method_summary": "Classify governed maintenance identities before traceability coverage.",
+								"numerator": "In-window trunk commits classified as scheduled maintenance.",
+								"receipt": {
+									"id": "rct_f4cdc4dd3d24429d96690441d997e5e8",
+									"sha256": "3138a6abc9fb77540d0d56c3645fb4aee90170a275bc0f1c2be35349e9bf5c7d"
+								},
+								"refresh_state": "independently-reproduced",
+								"source_class": "version-control",
+								"unit": "commits",
+								"value": 257
+							},
+							{
+								"as_of": "2026-08-24",
+								"definition": "Non-maintenance trunk commits carrying a valid issue reference.",
+								"denominator": "All non-maintenance trunk commits in the window.",
+								"exclusions": "Scheduled-maintenance commits, outside-window commits, missing references, and references absent from the validated issue set.",
+								"id": "change-traceability.issue-reference-coverage",
+								"inclusions": "In-window non-maintenance trunk commits referencing at least one independently validated opaque issue identity.",
+								"label": "Issue-reference coverage",
+								"measurement_window": {
+									"days": 90,
+									"end": "2026-08-24",
+									"start": "2026-05-27"
+								},
+								"method_summary": "Validate referenced issues after removing scheduled maintenance commits.",
+								"numerator": "Non-maintenance trunk commits with a valid issue reference.",
+								"receipt": {
+									"id": "rct_f4cdc4dd3d24429d96690441d997e5e8",
+									"sha256": "3138a6abc9fb77540d0d56c3645fb4aee90170a275bc0f1c2be35349e9bf5c7d"
+								},
+								"refresh_state": "independently-reproduced",
+								"source_class": "version-control",
+								"unit": "percent",
+								"value": 75.8
+							},
+							{
+								"as_of": "2026-08-24",
+								"definition": "Unique valid issues referenced by non-maintenance trunk commits.",
+								"denominator": "Non-maintenance trunk commits with valid issue references.",
+								"exclusions": "Duplicate references, invalid references, maintenance-only references, and outside-window references.",
+								"id": "change-traceability.distinct-issues",
+								"inclusions": "Distinct validated opaque issue identities referenced by covered non-maintenance commits in the shared window.",
+								"label": "Distinct issues represented",
+								"measurement_window": {
+									"days": 90,
+									"end": "2026-08-24",
+									"start": "2026-05-27"
+								},
+								"method_summary": "Deduplicate valid issue references across covered commits.",
+								"numerator": "Unique valid issue identities represented by in-window commits.",
+								"receipt": {
+									"id": "rct_f4cdc4dd3d24429d96690441d997e5e8",
+									"sha256": "3138a6abc9fb77540d0d56c3645fb4aee90170a275bc0f1c2be35349e9bf5c7d"
+								},
+								"refresh_state": "independently-reproduced",
+								"source_class": "version-control",
+								"unit": "issues",
+								"value": 244
+							}
+						]
+					},
+					{
+						"eligibility_rule": "Numeric coverage becomes eligible after both the native scoped-session denominator and its durable decision/finding joins are reproducible for every day in a complete 90-day window.",
+						"evidence_start": "2026-08-22",
+						"id": "durable-record-coverage",
+						"label": "Durable record coverage",
+						"metrics": [
+							{
+								"as_of": "2026-08-24",
+								"definition": "Share of scoped sessions producing at least one durable decision or finding record.",
+								"denominator": "All reproducible scoped sessions during the window.",
+								"exclusions": "Sessions outside the shared window, records outside the shared window, records for unscoped sessions, and duplicate records from the same scoped session after its first qualifying record.",
+								"id": "durable-record-coverage.session-coverage-percentage",
+								"inclusions": "Opaque scoped-session records starting inside the inclusive 90-day window and their in-window durable decision or finding records.",
+								"label": "Session coverage",
+								"measurement_window": {
+									"days": 90,
+									"end": "2026-08-24",
+									"start": "2026-05-27"
+								},
+								"method_summary": "Deduplicate durable records by scoped session before calculating coverage.",
+								"numerator": "Scoped sessions with one or more durable records, counted once per session.",
+								"receipt": {
+									"id": "rct_3f751e24ef6f4cfd98fddb7109c28249",
+									"sha256": "0304b2b2b0f585feadfc766ef9bffb8f7e713a1f1f4d0f0ff325b8ba1c06cb76"
+								},
+								"refresh_state": "not_measurable",
+								"source_class": "session-registry",
+								"unit": "percent",
+								"value": null
+							}
+						],
+						"reason": "A native scoped-session denominator cannot be reproduced for the complete 90-day window.",
+						"receipt": {
+							"id": "rct_3f751e24ef6f4cfd98fddb7109c28249",
+							"sha256": "0304b2b2b0f585feadfc766ef9bffb8f7e713a1f1f4d0f0ff325b8ba1c06cb76"
+						},
+						"value": null,
+						"verification_state": "not_measurable"
+					}
+				],
+				"measurement_window": {
+					"days": 90,
+					"end": "2026-08-24",
+					"start": "2026-05-27"
+				},
+				"public_wording": {
+					"summary": "Issue flow and change traceability are independently reproduced across one 90-day window. Durable record coverage remains explicitly not measurable until its native session denominator and record joins are reproducible.",
+					"title": "Operating discipline, measured over one window"
+				},
+				"schema_version": 1,
+				"snapshot_id": "pulse-2026-08-24-03",
 				"verification_state": "independently-reproduced"
 			}
 		}

@@ -38,6 +38,36 @@ function fileHash(bytes) {
 	return createHash("sha256").update(bytes).digest("hex");
 }
 
+function buildControlledFixtureProjection(definitions, snapshot, narrative, manifest) {
+	const receipts = new Map(
+		manifest.receipts.map((receipt) => [receipt.id, { id: receipt.id, sha256: receipt.sha256 }]),
+	);
+	return {
+		schema_version: 1,
+		snapshot_id: snapshot.snapshot_id,
+		as_of: snapshot.as_of,
+		measurement_window: snapshot.measurement_window,
+		lifecycle_state: snapshot.lifecycle_state,
+		verification_state: snapshot.refresh_state,
+		public_wording: narrative,
+		groups: definitions.groups.map((group) => ({
+			id: group.id,
+			label: group.label,
+			metrics: group.metrics.map((definition) => {
+				const measuredValue = snapshot.values[definition.id];
+				return {
+					...definition,
+					value: measuredValue.value,
+					as_of: snapshot.as_of,
+					measurement_window: snapshot.measurement_window,
+					refresh_state: snapshot.refresh_state,
+					receipt: receipts.get(measuredValue.receipt_ref),
+				};
+			}),
+		})),
+	};
+}
+
 function proposalApprovalRecord(overrides = {}) {
 	const approved = JSON.parse(
 		fs.readFileSync(path.join(fixtureRoot, "canon", "approval.json"), "utf8"),
@@ -72,10 +102,7 @@ function runProposal(approval, requestedOutputPath = null, { includeNarrative = 
 		path.join(fixtureRoot, "canon", "snapshot.json"),
 	];
 	if (includeNarrative) {
-		argumentsList.push(
-			"--narrative",
-			path.join(fixtureRoot, "canon", "narrative.json"),
-		);
+		argumentsList.push("--narrative", path.join(fixtureRoot, "canon", "narrative.json"));
 	}
 	argumentsList.push(
 		"--approval",
@@ -87,11 +114,10 @@ function runProposal(approval, requestedOutputPath = null, { includeNarrative = 
 		"--output",
 		outputPath,
 	);
-	const result = spawnSync(
-		process.execPath,
-		argumentsList,
-		{ cwd: repositoryRoot, encoding: "utf8" },
-	);
+	const result = spawnSync(process.execPath, argumentsList, {
+		cwd: repositoryRoot,
+		encoding: "utf8",
+	});
 
 	return {
 		cleanup: () => fs.rmSync(workspace, { force: true, recursive: true }),
@@ -115,14 +141,14 @@ function runUnavailableProposal() {
 	const narrative = JSON.parse(
 		fs.readFileSync(path.join(fixtureRoot, "canon", "narrative.json"), "utf8"),
 	);
-	const approvedProjection = JSON.parse(
-		fs.readFileSync(
-			path.join(repositoryRoot, "src", "data", "pulse", "public-snapshot.json"),
-			"utf8",
-		),
-	);
 	const manifest = JSON.parse(
 		fs.readFileSync(path.join(fixtureRoot, "evidence", "manifest.json"), "utf8"),
+	);
+	const approvedProjection = buildControlledFixtureProjection(
+		definitions,
+		snapshot,
+		narrative,
+		manifest,
 	);
 
 	const receiptId = "rct_11111111111111111111111111111111";
@@ -332,10 +358,7 @@ test("projection requires separate narrative custody and rejects embedded wordin
 		const snapshotPath = path.join(workspace, "snapshot.json");
 		const narrativePath = path.join(workspace, "narrative.json");
 		const outputPath = path.join(workspace, "candidate.json");
-		fs.writeFileSync(
-			snapshotPath,
-			stableJson({ ...fixtureSnapshot, public_wording: narrative }),
-		);
+		fs.writeFileSync(snapshotPath, stableJson({ ...fixtureSnapshot, public_wording: narrative }));
 		fs.writeFileSync(narrativePath, stableJson(narrative));
 		const embedded = spawnSync(
 			process.execPath,
@@ -359,10 +382,7 @@ test("projection requires separate narrative custody and rejects embedded wordin
 			{ cwd: repositoryRoot, encoding: "utf8" },
 		);
 		assert.notEqual(embedded.status, 0, "projection accepted snapshot.public_wording");
-		assert.match(
-			`${embedded.stdout}\n${embedded.stderr}`,
-			/snapshot keys must be exactly/u,
-		);
+		assert.match(`${embedded.stdout}\n${embedded.stderr}`, /snapshot keys must be exactly/u);
 		assert.equal(fs.existsSync(outputPath), false);
 	} finally {
 		fs.rmSync(workspace, { force: true, recursive: true });
@@ -377,16 +397,13 @@ test("an unapproved proposal validates and writes only deterministic candidate b
 		assert.equal(second.result.status, 0, `${second.result.stdout}\n${second.result.stderr}`);
 		assert.match(first.result.stdout, /effective_state=proposal/u);
 		assert.deepEqual(fs.readFileSync(first.outputPath), fs.readFileSync(second.outputPath));
+		const controlledApproval = JSON.parse(
+			fs.readFileSync(path.join(fixtureRoot, "canon", "approval.json"), "utf8"),
+		);
 		assert.equal(
-			fs
-				.readFileSync(first.outputPath)
-				.equals(
-					fs.readFileSync(
-						path.join(repositoryRoot, "src", "data", "pulse", "public-snapshot.json"),
-					),
-				),
-			true,
-			"the reviewed proposal candidate must be the exact projection later eligible for approval",
+			fileHash(fs.readFileSync(first.outputPath)),
+			controlledApproval.binding.public_projection_sha256,
+			"the controlled proposal must match its independently bound approval hash",
 		);
 		for (const [index, publishedPath] of publishedPaths.entries()) {
 			assert.deepEqual(
