@@ -150,13 +150,17 @@ async function assertionResponsiveContainment(page, problems) {
 	return `${checked.join(" / ")} contained and legible`;
 }
 
-const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-browser-proposal-"));
-const proposalPath = path.join(workspace, "proposal.json");
 const previousProposalPath = process.env[PROPOSAL_PATH_ENV];
+const workspace = previousProposalPath
+	? null
+	: fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-browser-proposal-"));
+const proposalPath = previousProposalPath ?? path.join(workspace, "proposal.json");
 let passed = false;
 try {
-	fs.writeFileSync(proposalPath, `${JSON.stringify(proposalFixture(), null, "\t")}\n`);
-	process.env[PROPOSAL_PATH_ENV] = proposalPath;
+	if (workspace) {
+		fs.writeFileSync(proposalPath, `${JSON.stringify(proposalFixture(), null, "\t")}\n`);
+		process.env[PROPOSAL_PATH_ENV] = proposalPath;
+	}
 	passed = await runBrowserContract({
 		assertionSpecs: [
 			[
@@ -175,9 +179,10 @@ try {
 		title: "Pulse proposal public behavior contract",
 	});
 } finally {
-	if (previousProposalPath === undefined) delete process.env[PROPOSAL_PATH_ENV];
-	else process.env[PROPOSAL_PATH_ENV] = previousProposalPath;
-	fs.rmSync(workspace, { force: true, recursive: true });
+	if (workspace) {
+		delete process.env[PROPOSAL_PATH_ENV];
+		fs.rmSync(workspace, { force: true, recursive: true });
+	}
 }
 
 if (!passed) process.exitCode = 1;
