@@ -9,6 +9,7 @@ order: 1
 ---
 
 import snapshot from "../../data/pulse/public-snapshot.json";
+import history from "../../data/pulse/public-history.json";
 import PulseSnapshot from "../../components/Pulse/PulseSnapshot.astro";
 
-<PulseSnapshot snapshot={snapshot} controlledExample />
+<PulseSnapshot snapshot={snapshot} history={history} controlledExample />

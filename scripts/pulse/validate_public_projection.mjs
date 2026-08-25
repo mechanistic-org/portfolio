@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import process from "node:process";
+import { pathToFileURL } from "node:url";
 
 import { assertPublicProjectionPrivacy } from "./public_projection_privacy.mjs";
 
@@ -176,15 +177,17 @@ export function validatePublicProjection(projection) {
 	return projection;
 }
 
-const projectionPath = path.resolve(
-	process.argv[2] ?? path.join("src", "data", "pulse", "public-snapshot.json"),
-);
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+	const projectionPath = path.resolve(
+		process.argv[2] ?? path.join("src", "data", "pulse", "public-snapshot.json"),
+	);
 
-try {
-	const projection = JSON.parse(fs.readFileSync(projectionPath, "utf8"));
-	validatePublicProjection(projection);
-	console.log(`[public-projection] valid active snapshot: ${projection.snapshot_id}`);
-} catch (error) {
-	console.error(error instanceof Error ? error.message : String(error));
-	process.exitCode = 1;
+	try {
+		const projection = JSON.parse(fs.readFileSync(projectionPath, "utf8"));
+		validatePublicProjection(projection);
+		console.log(`[public-projection] valid active snapshot: ${projection.snapshot_id}`);
+	} catch (error) {
+		console.error(error instanceof Error ? error.message : String(error));
+		process.exitCode = 1;
+	}
 }

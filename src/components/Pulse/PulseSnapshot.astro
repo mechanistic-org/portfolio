@@ -23,6 +23,7 @@ interface PulseGroup {
 }
 
 interface PulseSnapshot {
+	snapshot_id: string;
 	as_of: string;
 	lifecycle_state: string;
 	measurement_window: MeasurementWindow;
@@ -34,12 +35,47 @@ interface PulseSnapshot {
 	groups: PulseGroup[];
 }
 
+interface PulseHistoricalSnapshot extends Omit<PulseSnapshot, "lifecycle_state"> {}
+
+interface PulseHistoryRecord {
+	snapshot: PulseHistoricalSnapshot;
+	lifecycle: {
+		state: "active" | "archived" | "withdrawn";
+		is_current: boolean;
+		validity: "valid" | "invalid";
+		effective_on: string;
+		correction: null | {
+			reason: "incorrect" | "provenance-invalid";
+			replacement_snapshot_id: string;
+			href: string;
+		};
+	};
+	approval: {
+		approved_by: string;
+		approved_on: string;
+		public_projection_sha256: string;
+	};
+}
+
+interface PulseHistory {
+	current_snapshot_id: string;
+	evaluated_on: string;
+	snapshots: PulseHistoryRecord[];
+}
+
 interface Props {
 	snapshot: PulseSnapshot;
+	history: PulseHistory;
 	controlledExample?: boolean;
 }
 
-const { snapshot, controlledExample = false } = Astro.props;
+const { snapshot, history, controlledExample = false } = Astro.props;
+if (history.current_snapshot_id !== snapshot.snapshot_id) {
+	throw new Error("Pulse history current_snapshot_id must match the rendered active snapshot");
+}
+const historicalSnapshots = history.snapshots.filter(
+	(record) => record.lifecycle.state !== "active",
+);
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
 	day: "numeric",
@@ -62,9 +98,24 @@ function formatValue(metric: PulseMetric) {
 	if (metric.unit === "percent") return `${value}%`;
 	return value;
 }
+
+function historyNotice(record: PulseHistoryRecord) {
+	if (record.lifecycle.state === "archived") {
+		return "Archived because this approved snapshot is more than 90 days old. It remains valid historical evidence and is not current or live.";
+	}
+	const cause =
+		record.lifecycle.correction?.reason === "provenance-invalid"
+			? "provenance became invalid"
+			: "values were incorrect";
+	return `Withdrawn because its ${cause}. It is inactive and cannot serve as the current snapshot.`;
+}
 ---
 
-<section class="pulse-snapshot not-content" data-pulse-snapshot>
+<section
+	id={`pulse-snapshot-${snapshot.snapshot_id}`}
+	class="pulse-snapshot not-content"
+	data-pulse-snapshot
+>
 	{
 		controlledExample && (
 			<p class="pulse-control-note" data-pulse-controlled-example>
@@ -148,6 +199,90 @@ function formatValue(metric: PulseMetric) {
 		}
 	</div>
 
+	<section class="pulse-history" aria-labelledby="pulse-history-title" data-pulse-history>
+		<header class="pulse-history-heading">
+			<p class="pulse-kicker">Evidence lifecycle</p>
+			<h3 id="pulse-history-title">Snapshot history</h3>
+			<p>
+				Prior values remain visible as immutable evidence. Age archives a valid record; evidence
+				failure withdraws it and names its separately approved correction.
+			</p>
+		</header>
+
+		<div class="pulse-history-records">
+			{
+				historicalSnapshots.map((record) => (
+					<article
+						id={`pulse-snapshot-${record.snapshot.snapshot_id}`}
+						class="pulse-history-record"
+						data-pulse-history-state={record.lifecycle.state}
+					>
+						<header>
+							<p class="pulse-history-state">{record.lifecycle.state}</p>
+							<h4>{record.snapshot.public_wording.title}</h4>
+							<p>{record.snapshot.public_wording.summary}</p>
+						</header>
+
+						<p class="pulse-history-notice">{historyNotice(record)}</p>
+
+						<dl
+							class="pulse-history-boundary"
+							aria-label={`${record.lifecycle.state} snapshot boundary`}
+						>
+							<div>
+								<dt>Measurement window</dt>
+								<dd>
+									{formatDate(record.snapshot.measurement_window.start)} -{" "}
+									{formatDate(record.snapshot.measurement_window.end)}
+								</dd>
+							</div>
+							<div>
+								<dt>As of</dt>
+								<dd>{formatDate(record.snapshot.as_of)}</dd>
+							</div>
+							<div>
+								<dt>Approval</dt>
+								<dd>
+									{record.approval.approved_by} / {formatDate(record.approval.approved_on)}
+								</dd>
+							</div>
+							<div>
+								<dt>Validity</dt>
+								<dd>{record.lifecycle.validity}</dd>
+							</div>
+						</dl>
+
+						{record.lifecycle.correction && (
+							<p class="pulse-correction-link">
+								<a href={record.lifecycle.correction.href}>View the approved correction</a>
+							</p>
+						)}
+
+						<div class="pulse-history-groups">
+							{record.snapshot.groups.map((group) => (
+								<div class="pulse-history-group">
+									<h5>{group.label}</h5>
+									<div class="pulse-history-metrics">
+										{group.metrics.map((metric) => (
+											<div class="pulse-history-metric" data-pulse-history-metric={metric.id}>
+												<p>
+													<strong>{formatValue(metric)}</strong> {metric.unit}
+												</p>
+												<p>{metric.label}</p>
+												<p>{metric.definition}</p>
+												<p>{metric.method_summary}</p>
+											</div>
+										))}
+									</div>
+								</div>
+							))}
+						</div>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
 	<aside class="pulse-inventory" aria-labelledby="pulse-inventory-title">
 		<p class="pulse-kicker">Supporting inventory</p>
 		<h3 id="pulse-inventory-title">System context, not headline proof</h3>
@@ -189,6 +324,9 @@ function formatValue(metric: PulseMetric) {
 
 	.pulse-heading h2,
 	.pulse-group h3,
+	.pulse-history h3,
+	.pulse-history h4,
+	.pulse-history h5,
 	.pulse-inventory h3 {
 		color: var(--foreground);
 		font-family: var(--font-header);
@@ -335,6 +473,141 @@ function formatValue(metric: PulseMetric) {
 		border: 1px solid var(--border);
 		margin-top: 2.5rem;
 		padding: 1.25rem;
+	}
+
+	.pulse-history {
+		border-top: 1px solid var(--border);
+		margin-top: 2.5rem;
+		padding-top: 2.5rem;
+	}
+
+	.pulse-history-heading > p:last-child {
+		color: var(--muted-foreground);
+		font-size: 0.85rem;
+		line-height: 1.6;
+		margin: 0.75rem 0 0;
+	}
+
+	.pulse-history-records {
+		display: grid;
+		gap: 2rem;
+		margin-top: 1.5rem;
+	}
+
+	.pulse-history-record {
+		background: var(--card);
+		border: 1px solid var(--border);
+	}
+
+	.pulse-history-record[data-pulse-history-state="archived"] {
+		border-color: var(--info);
+	}
+
+	.pulse-history-record[data-pulse-history-state="withdrawn"] {
+		border-color: var(--warning);
+	}
+
+	.pulse-history-record > header,
+	.pulse-history-notice,
+	.pulse-correction-link {
+		border-bottom: 1px solid var(--border);
+		margin: 0;
+		padding: 1rem;
+	}
+
+	.pulse-history-record > header > p:last-child,
+	.pulse-history-notice {
+		color: var(--muted-foreground);
+		font-size: 0.75rem;
+		line-height: 1.55;
+	}
+
+	.pulse-history-state {
+		font-family: var(--font-mono);
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		margin: 0 0 0.5rem;
+		text-transform: uppercase;
+	}
+
+	[data-pulse-history-state="archived"] .pulse-history-state {
+		color: var(--info);
+	}
+
+	[data-pulse-history-state="withdrawn"] .pulse-history-state {
+		color: var(--warning);
+	}
+
+	.pulse-history-boundary {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+		margin: 0;
+	}
+
+	.pulse-history-boundary div {
+		border-bottom: 1px solid var(--border);
+		border-right: 1px solid var(--border);
+		padding: 0.8rem;
+	}
+
+	.pulse-history-boundary dt,
+	.pulse-history-boundary dd {
+		font-family: var(--font-mono);
+		font-size: 0.65rem;
+		margin: 0;
+	}
+
+	.pulse-history-boundary dt {
+		color: var(--muted-foreground);
+		text-transform: uppercase;
+	}
+
+	.pulse-history-boundary dd {
+		color: var(--foreground);
+		margin-top: 0.35rem;
+	}
+
+	.pulse-correction-link a {
+		color: var(--warning);
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	.pulse-history-group {
+		border-bottom: 1px solid var(--border);
+	}
+
+	.pulse-history-group h5 {
+		border-bottom: 1px solid var(--border);
+		font-size: 0.85rem;
+		padding: 0.8rem;
+	}
+
+	.pulse-history-metrics {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+	}
+
+	.pulse-history-metric {
+		border-right: 1px solid var(--border);
+		padding: 0.8rem;
+	}
+
+	.pulse-history-metric p {
+		color: var(--muted-foreground);
+		font-size: 0.65rem;
+		line-height: 1.45;
+		margin: 0.4rem 0 0;
+	}
+
+	.pulse-history-metric p:first-child {
+		color: var(--foreground);
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		margin: 0;
 	}
 
 	.pulse-inventory ul {

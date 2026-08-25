@@ -1,0 +1,54 @@
+{
+	"as_of": "2026-08-24",
+	"lifecycle_state": "active",
+	"measurement_window": {
+		"days": 90,
+		"end": "2026-08-24",
+		"start": "2026-05-27"
+	},
+	"public_wording": {
+		"summary": "Three proof groups share one 90-day window and one verification boundary.",
+		"title": "A dated view of operating discipline"
+	},
+	"refresh_state": "independently-reproduced",
+	"schema_version": 1,
+	"snapshot_id": "pulse-fixture-withdrawn-2026-08-24",
+	"values": {
+		"change-traceability.distinct-issues": {
+			"receipt_ref": "rct_40000000000000000000000000000002",
+			"value": 3
+		},
+		"change-traceability.issue-reference-coverage": {
+			"receipt_ref": "rct_40000000000000000000000000000002",
+			"value": 80
+		},
+		"change-traceability.scheduled-maintenance-commits": {
+			"receipt_ref": "rct_40000000000000000000000000000002",
+			"value": 2
+		},
+		"change-traceability.trunk-commits": {
+			"receipt_ref": "rct_40000000000000000000000000000002",
+			"value": 7
+		},
+		"durable-record-coverage.session-coverage-percentage": {
+			"receipt_ref": "rct_40000000000000000000000000000003",
+			"value": 75
+		},
+		"issue-flow.cohort-closure-percentage": {
+			"receipt_ref": "rct_40000000000000000000000000000001",
+			"value": 60
+		},
+		"issue-flow.created-count": {
+			"receipt_ref": "rct_40000000000000000000000000000001",
+			"value": 5
+		},
+		"issue-flow.median-close-time": {
+			"receipt_ref": "rct_40000000000000000000000000000001",
+			"value": 4
+		},
+		"issue-flow.net-backlog-change": {
+			"receipt_ref": "rct_40000000000000000000000000000001",
+			"value": 2
+		}
+	}
+}

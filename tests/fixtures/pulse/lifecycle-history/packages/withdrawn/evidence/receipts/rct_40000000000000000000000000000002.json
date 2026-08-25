@@ -1,0 +1,178 @@
+{
+	"independent_reproduction": {
+		"exact_command": "private trunk traceability query rerun",
+		"raw_output": {
+			"commits": [
+				{
+					"classification": "non-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000001",
+					"committed_at": "2026-05-26T23:59:59Z",
+					"issue_references": [
+						"iss_00000000000000000000000000000001"
+					]
+				},
+				{
+					"classification": "scheduled-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000002",
+					"committed_at": "2026-05-27T00:00:00Z",
+					"issue_references": []
+				},
+				{
+					"classification": "non-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000003",
+					"committed_at": "2026-06-01T12:00:00Z",
+					"issue_references": [
+						"iss_00000000000000000000000000000001"
+					]
+				},
+				{
+					"classification": "non-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000004",
+					"committed_at": "2026-06-15T12:00:00Z",
+					"issue_references": [
+						"iss_00000000000000000000000000000001",
+						"iss_00000000000000000000000000000002"
+					]
+				},
+				{
+					"classification": "scheduled-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000005",
+					"committed_at": "2026-07-01T12:00:00Z",
+					"issue_references": []
+				},
+				{
+					"classification": "non-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000006",
+					"committed_at": "2026-07-15T12:00:00Z",
+					"issue_references": [
+						"iss_00000000000000000000000000000003"
+					]
+				},
+				{
+					"classification": "non-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000007",
+					"committed_at": "2026-08-01T12:00:00Z",
+					"issue_references": [
+						"iss_00000000000000000000000000000009"
+					]
+				},
+				{
+					"classification": "non-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000008",
+					"committed_at": "2026-08-24T23:59:59Z",
+					"issue_references": [
+						"iss_00000000000000000000000000000002"
+					]
+				},
+				{
+					"classification": "non-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000009",
+					"committed_at": "2026-08-25T00:00:00Z",
+					"issue_references": [
+						"iss_00000000000000000000000000000003"
+					]
+				}
+			],
+			"kind": "change-traceability-v1",
+			"measurement_window": {
+				"end": "2026-08-24",
+				"start": "2026-05-27"
+			},
+			"valid_issue_ids": [
+				"iss_00000000000000000000000000000001",
+				"iss_00000000000000000000000000000002",
+				"iss_00000000000000000000000000000003"
+			]
+		},
+		"reproduced_by": "fixture-independent-reproducer"
+	},
+	"primary": {
+		"exact_command": "private trunk traceability query",
+		"local_path": "D:\\private\\receipts\\change-traceability.json",
+		"private_source_identity": "mechanistic-org/private-source",
+		"raw_output": {
+			"commits": [
+				{
+					"classification": "non-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000001",
+					"committed_at": "2026-05-26T23:59:59Z",
+					"issue_references": [
+						"iss_00000000000000000000000000000001"
+					]
+				},
+				{
+					"classification": "scheduled-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000002",
+					"committed_at": "2026-05-27T00:00:00Z",
+					"issue_references": []
+				},
+				{
+					"classification": "non-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000003",
+					"committed_at": "2026-06-01T12:00:00Z",
+					"issue_references": [
+						"iss_00000000000000000000000000000001"
+					]
+				},
+				{
+					"classification": "non-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000004",
+					"committed_at": "2026-06-15T12:00:00Z",
+					"issue_references": [
+						"iss_00000000000000000000000000000001",
+						"iss_00000000000000000000000000000002"
+					]
+				},
+				{
+					"classification": "scheduled-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000005",
+					"committed_at": "2026-07-01T12:00:00Z",
+					"issue_references": []
+				},
+				{
+					"classification": "non-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000006",
+					"committed_at": "2026-07-15T12:00:00Z",
+					"issue_references": [
+						"iss_00000000000000000000000000000003"
+					]
+				},
+				{
+					"classification": "non-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000007",
+					"committed_at": "2026-08-01T12:00:00Z",
+					"issue_references": [
+						"iss_00000000000000000000000000000009"
+					]
+				},
+				{
+					"classification": "non-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000008",
+					"committed_at": "2026-08-24T23:59:59Z",
+					"issue_references": [
+						"iss_00000000000000000000000000000002"
+					]
+				},
+				{
+					"classification": "non-maintenance",
+					"commit_id": "cmt_00000000000000000000000000000009",
+					"committed_at": "2026-08-25T00:00:00Z",
+					"issue_references": [
+						"iss_00000000000000000000000000000003"
+					]
+				}
+			],
+			"kind": "change-traceability-v1",
+			"measurement_window": {
+				"end": "2026-08-24",
+				"start": "2026-05-27"
+			},
+			"valid_issue_ids": [
+				"iss_00000000000000000000000000000001",
+				"iss_00000000000000000000000000000002",
+				"iss_00000000000000000000000000000003"
+			]
+		}
+	},
+	"receipt_id": "rct_40000000000000000000000000000002"
+}

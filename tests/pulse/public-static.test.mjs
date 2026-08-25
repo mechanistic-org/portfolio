@@ -32,6 +32,14 @@ function runProjectionValidation(projectionPath) {
 	);
 }
 
+function runHistoryValidation(historyPath) {
+	return spawnSync(
+		process.execPath,
+		[path.join(repositoryRoot, "scripts", "pulse", "validate_public_history.mjs"), historyPath],
+		{ cwd: repositoryRoot, encoding: "utf8" },
+	);
+}
+
 test("the Pulse component consumes the semantic design tokens without local palette copies", () => {
 	const component = fs.readFileSync(
 		path.join(repositoryRoot, "src", "components", "Pulse", "PulseSnapshot.astro"),
@@ -119,6 +127,67 @@ test("the approved controlled projection is complete in static HTML without clie
 		"local_path",
 	]) {
 		assert.equal(html.includes(excludedText), false, `static Pulse HTML leaked: ${excludedText}`);
+	}
+});
+
+test("archived and withdrawn snapshots remain distinct, static, and linked to the correction", () => {
+	const build = runProductionBuild();
+	assert.equal(build.status, 0, `${build.stdout}\n${build.stderr}`);
+
+	const html = fs.readFileSync(pulseHtmlPath, "utf8");
+	assert.ok(html.includes("Snapshot history"));
+	assert.ok(html.includes('data-pulse-history-state="archived"'));
+	assert.ok(html.includes('data-pulse-history-state="withdrawn"'));
+	assert.equal(occurrences(html, "data-pulse-history-metric"), 18);
+	assert.ok(html.includes("Archived because this approved snapshot is more than 90 days old."));
+	assert.ok(html.includes("It remains valid historical evidence and is not current or live."));
+	assert.ok(html.includes("Withdrawn because its provenance became invalid."));
+	assert.ok(html.includes("It is inactive and cannot serve as the current snapshot."));
+	assert.ok(html.includes("View the approved correction"));
+	assert.ok(html.includes('href="/colophon/the-pulse/#pulse-snapshot-pulse-fixture-2026-08-24"'));
+	assert.ok(html.includes('id="pulse-snapshot-pulse-fixture-2026-08-24"'));
+
+	for (const privateText of [
+		"package_dir",
+		"exact_command",
+		"raw_output",
+		"private_source_identity",
+		"local_path",
+	]) {
+		assert.equal(html.includes(privateText), false, `static history leaked: ${privateText}`);
+	}
+});
+
+test("the production gate rejects lifecycle history that revives an archived snapshot", () => {
+	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-history-gate-"));
+	try {
+		const history = JSON.parse(
+			fs.readFileSync(
+				path.join(repositoryRoot, "src", "data", "pulse", "public-history.json"),
+				"utf8",
+			),
+		);
+		history.snapshots[0].lifecycle.state = "active";
+		history.snapshots[0].lifecycle.is_current = true;
+		const invalidPath = path.join(workspace, "revived-history.json");
+		fs.writeFileSync(invalidPath, `${JSON.stringify(history, null, "\t")}\n`);
+
+		const validation = runHistoryValidation(invalidPath);
+		assert.notEqual(validation.status, 0, "history validator revived archived evidence");
+		assert.match(
+			`${validation.stdout}\n${validation.stderr}`,
+			/\[public-history\].*(?:current|archived|90 days)/u,
+		);
+
+		const buildCommand = JSON.parse(
+			fs.readFileSync(path.join(repositoryRoot, "package.json"), "utf8"),
+		).scripts.build;
+		const historyValidatorIndex = buildCommand.indexOf("scripts/pulse/validate_public_history.mjs");
+		const astroIndex = buildCommand.indexOf("astro build");
+		assert.notEqual(historyValidatorIndex, -1, "the build must validate public snapshot history");
+		assert.ok(historyValidatorIndex < astroIndex, "history validation must run before Astro");
+	} finally {
+		fs.rmSync(workspace, { force: true, recursive: true });
 	}
 });
 

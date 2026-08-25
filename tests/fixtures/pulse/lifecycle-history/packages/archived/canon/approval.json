@@ -1,0 +1,19 @@
+{
+	"approved_by": "eriknorris",
+	"approved_on": "2026-05-26",
+	"binding": {
+		"as_of": "2026-05-26",
+		"definitions_sha256": "6c0550cac5f6a377719cac3f88743ccc9e88cc714f7696e97b4f52015f227c0e",
+		"public_projection_sha256": "55b301827f37fb5a560d3d1f5ed218a7f9687758930d590802f2849583d7d9e0",
+		"public_wording_sha256": "bd6de0ba938f01f955a0115145c2767d8cf8c9661738206cfcf248759a224d98",
+		"values_sha256": "6423c6de5c1a748d2a3e43c4049652c6abab366fc6adda66731381e31f246207"
+	},
+	"privacy_review": {
+		"approved_public_source_urls": [],
+		"public_narrative_sha256": "8e0e73070bb7a4688844f4c8888220eed9105ddc262de74e8d565610e6cf3619",
+		"reviewed_by": "eriknorris",
+		"reviewed_on": "2026-05-26",
+		"status": "approved"
+	},
+	"status": "approved"
+}
