@@ -839,12 +839,24 @@ function validateApproval(approval, definitions, snapshot, publicBytes) {
 		["status", "approved_by", "approved_on", "privacy_review", "binding"],
 		"approval",
 	);
-	if (approval.status !== "approved") fail("approval.status must be approved");
-	if (approval.approved_by !== "eriknorris") {
-		fail("approval.approved_by must be eriknorris");
+	if (!new Set(["approved", "proposal"]).has(approval.status)) {
+		fail("approval.status must be approved or proposal");
 	}
-	if (!ISO_DATE.test(approval.approved_on)) {
-		fail("approval.approved_on must be YYYY-MM-DD");
+	const isProposal = approval.status === "proposal";
+	if (isProposal) {
+		if (approval.approved_by !== null) {
+			failProposal("approval.approved_by must be null");
+		}
+		if (approval.approved_on !== null) {
+			failProposal("approval.approved_on must be null");
+		}
+	} else {
+		if (approval.approved_by !== "eriknorris") {
+			fail("approval.approved_by must be eriknorris");
+		}
+		if (!ISO_DATE.test(approval.approved_on)) {
+			fail("approval.approved_on must be YYYY-MM-DD");
+		}
 	}
 
 	requireExactKeys(
@@ -858,14 +870,26 @@ function validateApproval(approval, definitions, snapshot, publicBytes) {
 		],
 		"approval.privacy_review",
 	);
-	if (approval.privacy_review.status !== "approved") {
-		fail("approval.privacy_review.status must be approved");
-	}
-	if (approval.privacy_review.reviewed_by !== "eriknorris") {
-		fail("approval.privacy_review.reviewed_by must be eriknorris");
-	}
-	if (!ISO_DATE.test(approval.privacy_review.reviewed_on)) {
-		fail("approval.privacy_review.reviewed_on must be YYYY-MM-DD");
+	if (isProposal) {
+		if (approval.privacy_review.status !== "proposal") {
+			failProposal("approval.privacy_review.status must be proposal");
+		}
+		if (approval.privacy_review.reviewed_by !== null) {
+			failProposal("approval.privacy_review.reviewed_by must be null");
+		}
+		if (approval.privacy_review.reviewed_on !== null) {
+			failProposal("approval.privacy_review.reviewed_on must be null");
+		}
+	} else {
+		if (approval.privacy_review.status !== "approved") {
+			fail("approval.privacy_review.status must be approved");
+		}
+		if (approval.privacy_review.reviewed_by !== "eriknorris") {
+			fail("approval.privacy_review.reviewed_by must be eriknorris");
+		}
+		if (!ISO_DATE.test(approval.privacy_review.reviewed_on)) {
+			fail("approval.privacy_review.reviewed_on must be YYYY-MM-DD");
+		}
 	}
 	if (!SHA256.test(approval.privacy_review.public_narrative_sha256)) {
 		fail("approval.privacy_review.public_narrative_sha256 must be a full SHA-256");
@@ -893,10 +917,13 @@ function validateApproval(approval, definitions, snapshot, publicBytes) {
 		}
 	}
 	const expectedPublicSourceUrls = collectPublicSourceUrls(publicNarrative);
+	if (isProposal && expectedPublicSourceUrls.length > 0) {
+		failProposal("public source URLs require explicit privacy approval");
+	}
 	if (JSON.stringify(approvedPublicSourceUrls) !== JSON.stringify(expectedPublicSourceUrls)) {
-		fail(
-			`approved public source URLs must exactly match the public narrative: expected ${expectedPublicSourceUrls.join(", ") || "none"}`,
-		);
+		const message =
+			`approved public source URLs must exactly match the public narrative: expected ${expectedPublicSourceUrls.join(", ") || "none"}`;
+		isProposal ? failProposal(message) : fail(message);
 	}
 
 	requireExactKeys(
@@ -967,7 +994,7 @@ function main() {
 	writeAtomically(argumentsByName.output, publicBytes);
 
 	console.log(
-		`[snapshot-contract] projected ${metricIds.size} metrics in ${REQUIRED_GROUP_IDS.length} groups; sha256=${sha256(publicBytes)}`,
+		`[snapshot-contract] effective_state=${approval.status}; projected ${metricIds.size} metrics in ${REQUIRED_GROUP_IDS.length} groups; sha256=${sha256(publicBytes)}`,
 	);
 }
 
