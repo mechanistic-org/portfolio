@@ -103,6 +103,8 @@ function runUnavailableProposal() {
 	const snapshot = JSON.parse(
 		fs.readFileSync(path.join(fixtureRoot, "canon", "snapshot.json"), "utf8"),
 	);
+	const narrative = structuredClone(snapshot.public_wording);
+	delete snapshot.public_wording;
 	const approvedProjection = JSON.parse(
 		fs.readFileSync(
 			path.join(repositoryRoot, "src", "data", "pulse", "public-snapshot.json"),
@@ -222,7 +224,7 @@ function runUnavailableProposal() {
 		binding: {
 			definitions_sha256: canonicalHash(definitions),
 			values_sha256: canonicalHash(snapshot.values),
-			public_wording_sha256: canonicalHash(snapshot.public_wording),
+			public_wording_sha256: canonicalHash(narrative),
 			as_of: snapshot.as_of,
 			public_projection_sha256: fileHash(Buffer.from(stableJson(stableValue(expectedProjection)))),
 		},
@@ -232,12 +234,14 @@ function runUnavailableProposal() {
 		approval: path.join(workspace, "approval.json"),
 		definitions: path.join(workspace, "definitions.json"),
 		manifest: path.join(workspace, "manifest.json"),
+		narrative: path.join(workspace, "narrative.json"),
 		output: path.join(workspace, "candidate.json"),
 		snapshot: path.join(workspace, "snapshot.json"),
 	};
 	fs.writeFileSync(paths.approval, stableJson(approval));
 	fs.writeFileSync(paths.definitions, stableJson(definitions));
 	fs.writeFileSync(paths.manifest, stableJson(manifest));
+	fs.writeFileSync(paths.narrative, stableJson(narrative));
 	fs.writeFileSync(paths.snapshot, stableJson(snapshot));
 
 	const result = spawnSync(
@@ -248,6 +252,8 @@ function runUnavailableProposal() {
 			paths.definitions,
 			"--snapshot",
 			paths.snapshot,
+			"--narrative",
+			paths.narrative,
 			"--approval",
 			paths.approval,
 			"--receipt-manifest",

@@ -232,21 +232,25 @@ function inclusiveWindowDays(startInclusive, endInclusive) {
 	return (endInclusive - startInclusive) / 86_400_000 + 1;
 }
 
-function validateSnapshot(snapshot, metricIds) {
-	requireExactKeys(
-		snapshot,
-		[
-			"schema_version",
-			"snapshot_id",
-			"as_of",
-			"measurement_window",
-			"refresh_state",
-			"lifecycle_state",
-			"public_wording",
-			"values",
-		],
-		"snapshot",
-	);
+function validatePublicWording(publicWording) {
+	requireExactKeys(publicWording, ["title", "summary"], "public_wording");
+	requireString(publicWording.title, "public_wording.title");
+	requireString(publicWording.summary, "public_wording.summary");
+	return publicWording;
+}
+
+function validateSnapshot(snapshot, metricIds, separateNarrative = null) {
+	const snapshotKeys = [
+		"schema_version",
+		"snapshot_id",
+		"as_of",
+		"measurement_window",
+		"refresh_state",
+		"lifecycle_state",
+		"values",
+	];
+	if (separateNarrative === null) snapshotKeys.push("public_wording");
+	requireExactKeys(snapshot, snapshotKeys, "snapshot");
 	if (snapshot.schema_version !== 1) fail("snapshot.schema_version must be 1");
 	requireString(snapshot.snapshot_id, "snapshot.snapshot_id");
 	requireIsoCalendarDate(snapshot.as_of, "snapshot.as_of");
@@ -275,9 +279,7 @@ function validateSnapshot(snapshot, metricIds) {
 		fail("snapshot.as_of must match the measurement window end date");
 	}
 
-	requireExactKeys(snapshot.public_wording, ["title", "summary"], "public_wording");
-	requireString(snapshot.public_wording.title, "public_wording.title");
-	requireString(snapshot.public_wording.summary, "public_wording.summary");
+	validatePublicWording(separateNarrative ?? snapshot.public_wording);
 
 	requireRecord(snapshot.values, "snapshot.values");
 	const valueIds = Object.keys(snapshot.values).sort();
@@ -974,10 +976,10 @@ function validateReceipts(manifest, receiptsDirectory, snapshotValues, snapshotW
 	return verifiedReceipts;
 }
 
-function collectPublicNarrative(definitions, snapshot) {
+function collectPublicNarrative(definitions, publicWording) {
 	return [
-		snapshot.public_wording.title,
-		snapshot.public_wording.summary,
+		publicWording.title,
+		publicWording.summary,
 		...definitions.groups.flatMap((group) => [
 			group.label,
 			...group.metrics.flatMap((metric) =>
@@ -997,7 +999,7 @@ function collectPublicSourceUrls(narrative) {
 	].sort();
 }
 
-function buildPublicProjection(definitions, snapshot, verifiedReceipts) {
+function buildPublicProjection(definitions, snapshot, publicWording, verifiedReceipts) {
 	const publicProjection = {
 		schema_version: 1,
 		snapshot_id: snapshot.snapshot_id,
@@ -1005,7 +1007,7 @@ function buildPublicProjection(definitions, snapshot, verifiedReceipts) {
 		measurement_window: snapshot.measurement_window,
 		lifecycle_state: snapshot.lifecycle_state,
 		verification_state: snapshot.refresh_state,
-		public_wording: snapshot.public_wording,
+		public_wording: publicWording,
 		groups: definitions.groups.map((group) => {
 			const publicGroup = {
 				id: group.id,
@@ -1046,7 +1048,7 @@ function buildPublicProjection(definitions, snapshot, verifiedReceipts) {
 	return publicProjection;
 }
 
-function validateReleaseDecision(approval, definitions, snapshot, publicBytes) {
+function validateReleaseDecision(approval, definitions, snapshot, publicWording, publicBytes) {
 	requireExactKeys(
 		approval,
 		["status", "approved_by", "approved_on", "privacy_review", "binding"],
@@ -1111,7 +1113,7 @@ function validateReleaseDecision(approval, definitions, snapshot, publicBytes) {
 		fail("approval.privacy_review.approved_public_source_urls must be an array");
 	}
 
-	const publicNarrative = collectPublicNarrative(definitions, snapshot);
+	const publicNarrative = collectPublicNarrative(definitions, publicWording);
 	const expectedNarrativeHash = canonicalHash(publicNarrative);
 	if (approval.privacy_review.public_narrative_sha256 !== expectedNarrativeHash) {
 		fail(
@@ -1152,7 +1154,7 @@ function validateReleaseDecision(approval, definitions, snapshot, publicBytes) {
 	const expectedBindings = {
 		definitions_sha256: canonicalHash(definitions),
 		values_sha256: canonicalHash(snapshot.values),
-		public_wording_sha256: canonicalHash(snapshot.public_wording),
+		public_wording_sha256: canonicalHash(publicWording),
 		as_of: snapshot.as_of,
 		public_projection_sha256: sha256(publicBytes),
 	};
@@ -1199,6 +1201,9 @@ function main() {
 	const argumentsByName = parseArguments(process.argv.slice(2));
 	const definitions = readJson(argumentsByName.definitions, "canon definitions").value;
 	const snapshot = readJson(argumentsByName.snapshot, "canon snapshot").value;
+	const publicWording = argumentsByName.narrative
+		? readJson(argumentsByName.narrative, "canon narrative").value
+		: snapshot.public_wording;
 	const approval = readJson(argumentsByName.approval, "canon approval").value;
 	const receiptManifest = readJson(
 		argumentsByName["receipt-manifest"],
@@ -1206,16 +1211,21 @@ function main() {
 	).value;
 
 	const metricIds = validateDefinitions(definitions);
-	validateSnapshot(snapshot, metricIds);
+	validateSnapshot(snapshot, metricIds, argumentsByName.narrative ? publicWording : null);
 	const verifiedReceipts = validateReceipts(
 		receiptManifest,
 		argumentsByName["receipts-dir"],
 		snapshot.values,
 		snapshot.measurement_window,
 	);
-	const publicProjection = buildPublicProjection(definitions, snapshot, verifiedReceipts);
+	const publicProjection = buildPublicProjection(
+		definitions,
+		snapshot,
+		publicWording,
+		verifiedReceipts,
+	);
 	const publicBytes = Buffer.from(stableJson(publicProjection), "utf8");
-	validateReleaseDecision(approval, definitions, snapshot, publicBytes);
+	validateReleaseDecision(approval, definitions, snapshot, publicWording, publicBytes);
 	validateOutputDestination(argumentsByName.output, approval.status);
 	writeAtomically(argumentsByName.output, publicBytes);
 
