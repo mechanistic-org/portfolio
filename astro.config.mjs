@@ -60,9 +60,6 @@ const __dirname = path.dirname(__filename);
 // https://astro.build/config
 export default defineConfig({
 	output: "static",
-	redirects: {
-		"/projects/zeus": "/projects/webtv-elmer",
-	},
 	// Cloudflare Adapter handles the edge image service / Worker generation.
 	adapter: cloudflare({
 		imageService: "compile",
