@@ -2,36 +2,35 @@
 title: Backsplash / Infrastructure Slot
 slug: backsplash
 tier: deep_dive
-category: consumer_electronics
+category: module_subsystem
 client: []
 date: 2021-08-25 00:00:00+00:00
-description: 'The Hyphen makeline''s ''PC Case'' (2021-22): a factory-grade control cabinet compressed into a six-inch kitchen backsplash — custom EtherCAT backplane boards cutting control volume 50%, IP69K washdown cooling, and the dead-front Makelight interface closing the human QA loop.'
+description: The Hyphen Backsplash control and display enclosure, developed around a brushed-stainless body, tinted polycarbonate interface, display PCB, and documented EtherCAT-RS485 bridge board.
 draft: false
-duration: 5.5 Years
 employer: hyphen
 forensic_metrics:
-  financial: Control hardware volume cut ~50% via the EJ-module PCB backplane; module-swap field service replacing wire-by-wire troubleshooting inside the 15-minute MTTR window.
-  process: 99% of discrete signal wiring eliminated; 70+ actuator signals consolidated onto a daisy-chained 10244R1 backplane array; IP65 enclosure with IP69K washdown-rated cooling.
-  governance: TwinCAT core isolation making data-stall-blocks-motion structurally impossible; dimensional control drawings governing the display interface.
+  process: Candidate specifications include an approximately 85%-opaque polycarbonate screen, a 256x64 display, an LED-grid lighted bezel, and an IP69K fan family rated from 10.24 to 14.48 CFM.
+  governance: The August 25, 2021 display PCB dimensional-control drawing bounds the documented mechanical-interface contribution; electrical, controls, software, and Makeline outcomes remain cross-functional.
 forensic_summary:
-  trigger: Seventy actuators' worth of industrial control had to fit in six inches of splash guard, survive washdown, stay NSF-cool, and keep human finish work synchronized at 350 meals per hour.
-  intervention: Engineered the backsplash as a computer chassis — a custom EtherCAT backplane with plug-in I/O modules replacing the wiring nest, washdown-rated directed cooling, and a dead-front OLED/Makelight interface nudging the crew.
-  result: A 50% smaller control system that cleans like an appliance, services like a server rack, and closes the cobotic quality loop.
-heroImage: /assets/backsplash/hero.webp
-industry: consumer_electronics
-production: production
-productionScale: one_off
+  trigger: The Makeline required a front-side enclosure and interface that could package display and control hardware while remaining compatible with food-service access and cleaning constraints.
+  intervention: Developed the brushed-stainless and tinted-polycarbonate enclosure intent, the display PCB mechanical-control drawing, the lighted-bezel interface, and the physical package around the documented 10244R1 bridge board.
+  result: The surviving record establishes a detailed development and prototype candidate, but does not establish the legacy wiring, volume, protection-rating, sanitation, throughput, accuracy, or production outcomes.
+heroImage: /assets/backsplash/backsplash-hero-01-xl.webp
+industry: automation
+job_title: mechanical_engineer
+production: prototype
 tags:
 - Mechanism
 theme: hyperspace
 toolIcons: []
 tools: []
-teamSize: INT 70
+teamSize: Cross-functional
 cyberspace:
   layout: linear
   narrative: []
   stickies:
-  - data:
+  - caption: Build photographs show the developing enclosure, interface, and internal hardware. They support physical context but do not independently establish wiring-reduction, protection-rating, thermal, throughput, or production claims.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -61,61 +60,59 @@ cyberspace:
     deck: []
 ---
 
-# Backsplash / Infrastructure Slot Forensic Report
+# Backsplash / Infrastructure Slot
 
-## I. Project Summary
+## Project summary
 
-- **Role:** Senior Mechanical Engineer — the control enclosure and human interface of the Hyphen augmented makeline.
-- **Mandate:** Compress a factory-grade industrial control cabinet into the volumetric footprint of a kitchen splash guard — roughly six inches deep — while surviving commercial washdown and closing the quality loop between the autonomous line below and the human crew above.
-- **Core Achievement:** The "PC Case" architecture: a custom PCB backplane that replaced the industrial wiring nest entirely, cutting control hardware volume 50% and turning a backsplash into the makeline's motherboard.
+- **Role boundary:** Mechanical-engineering contribution to the Backsplash enclosure and display interface. The August 25, 2021 display PCB dimensional-control drawing is directly attributed to Erik Norris. Electrical design, PCB implementation, controls, software, industrial design, certification, and Makeline-level performance remained cross-functional responsibilities.
+- **Mandate:** Package a front-side control and display interface within the Makeline's infrastructure region while supporting food-service access, service, and cleaning intent.
+- **Evidence-bounded result:** The archive preserves enclosure specifications, a display PCB control drawing, bridge-board and build imagery, component references, and broader patent context. It does not establish the former system-wide wiring, volume, washdown-certification, sanitation, throughput, or accuracy outcomes.
 
-## II. The Anatomy of Failure
+## Enclosure and interface specification
 
-### 1. The Volumetric Impossible State
+The Backsplash ID packet specifies a number 4 brushed stainless-steel main body, with the brush direction controlled along vertical or horizontal planes. Its screen concept uses tinted dark-gray polycarbonate at approximately 85% opacity, no bezel, a small candidate radius around 2 mm, and a thickness left unresolved pending the electronics package.
 
-- **Trigger:** Seventy-plus actuators, power supplies, safety I/O, and cloud-connected control had to live inside a drop-in appliance — and standard industrial electrical cabinets are massive. Early prototypes with traditional wired I/O slices produced an unmanageable wiring nest that choked airflow and made the 15-minute field-service window impossible.
-- **Intervention:** Treated the backsplash as a computer chassis, not sheet metal: a custom signal-distribution PCB accepting Beckhoff EJ-series plug-in modules directly (no hand-wired terminations), with the EtherCAT-RS485 bridge boards (10244R1) deployed as a daisy-chained array — dual IN/OUT ports, on-the-fly frame processing through the EtherCAT slave controller, motor-chain headers distributing both data and 24 V power. A hinged stainless cover gives technicians full under-the-hood access, server-rack style.
-- **Result:** Control hardware volume cut ~50%, discrete wiring harnesses eliminated for 99% of signal distribution, and module swaps in minutes instead of wire-by-wire troubleshooting.
+The display intent calls for an NHD 3.12-inch 256x64 module, a polycarbonate light diffuser, and an LED grid behind a lighted bezel. That evidence supports the physical interface concept. It does not establish the legacy Makelight narrative that assigned empty-hopper sensing, operator nudges, or a closed human quality loop to this subsystem.
 
-### 2. Heat in a Six-Inch Slot
+## Display mechanical control
 
-- **Trigger:** Sealed stainless cavity, kitchen-ambient heat outside, electronics dissipation inside, NSF temperature compliance mandatory — and the enclosure must survive high-pressure, high-temperature washdown.
-- **Intervention:** A three-tier strategy: IP69K-rated San Ace fans (washdown-survivable, up to 18.5 CFM) on a directed intake/exhaust path mapped in the patent; 94–95% efficient PULS power supplies selected so only a few watts ever become waste heat; and the wiring-nest elimination doubling as an aerodynamic win — flat PCB distribution leaves the slim cavity an unobstructed air tunnel, thermally decoupled from the hot-food wells below.
-- **Result:** A thermally independent electronics zone holding NSF-compliant temperatures inside the most hostile six inches of a commercial kitchen.
+The `DISPLAY_PCB` dimensional-control drawing is dated August 25, 2021 and identifies Erik Norris as the drafter. It requires deburring and edge control, post-finish dimensions, ASME Y14.5 interpretation, cleanliness, defined untoleranced hole control, and use of the 3D model for complete product definition.
 
-### 3. The Makelight: Closing the Cobotic Loop
+This is the strongest surviving role artifact for Backsplash. It establishes a bounded mechanical-interface contribution without transferring electrical or controls ownership to the drafter.
 
-- **Trigger:** The two-lines-in-one architecture leaves humans doing the high-variance finish work — and human error at 350 meals per hour breaks the system's 99% accuracy promise. Text-heavy monitors don't survive a lunch rush.
-- **Intervention:** Built the backsplash into the optical nervous system: 256×64 OLED modules behind an 85%-opaque "dead front" polycarbonate (invisible when off), ringed by the Makelight — an LED grid behind a diffuser that visually nudges staff at the exact hopper location when an ingredient runs low or a manual step is due, synchronized with the gram-level inventory sensing below.
-- **Result:** The empty-hopper failure state closed, manual finish work synchronized to automated precision, and cognitive load converted into glanceable light.
+## Control and build context
 
-### 4. The Guacamole Trap
+The board packet identifies an `EtherCAT RS485 Bridge PCBA 10244R1`, and the Backsplash photo packets preserve the enclosure's internal build context. Those artifacts establish board identity and physical integration evidence. They do not establish the former claims that a particular array controlled more than 70 actuators, removed 99% of discrete wiring, or reduced control volume by 50%.
 
-- **Trigger:** Standard HMI panels and cabinets carry raised bezels, exposed screws, and vents — organic-debris traps that violate NSF radius rules and blow the cleaning labor budget.
-- **Intervention:** The "dead front" monolith: a sealed IP65 face with no external mechanical interfaces, no bezels, no exposed fasteners — designed so daily sanitation requires zero disassembly.
-- **Result:** The backsplash cleans like an appliance surface in the system-wide 15-minute cycle, while the electronics behind it never see a sponge.
+The patent describes a broader operator-accessible infrastructure slot that can route services, accept cooling modules, and expose windows for cleaning or module replacement. It is system design context and a set of claimed variations, not proof that every described feature appeared in this Backsplash build.
 
-## III. Governance & Rhythm
+## Environmental and cooling boundary
 
-- **The Pulse:** A single Beckhoff industrial PC with TwinCAT core isolation segregating real-time motion from IoT data — making the "Friday night breakdown" (data load stalling actuation) structurally impossible — under the CulinaryOS / ServeOS software stack.
-- **The Artifacts:** The display PCB dimensional control drawing (August 2021); the backsplash industrial-design specification (dead-front tint, lighted-bezel construction); the 10244R1 board photography; the patent's infrastructure-slot airflow figures.
+The candidate 04028VA fan-family datasheet specifies IP69K component protection and three 24 V variants rated at 10.24, 12.36, and 14.48 CFM in free air. It does not show which variant, if any, was installed. The record also does not contain an enclosure IP65 test, an assembled thermal validation, or NSF temperature results, so none is claimed.
 
-## IV. Quantified Impact
+Likewise, power-supply and other component datasheets describe candidate parts. Their efficiency and environmental ratings cannot be promoted into achieved subsystem performance without an as-built configuration and test record.
 
-- **Cut** control hardware volume ~50% via the EJ-module PCB backplane.
-- **Eliminated** discrete wiring for 99% of signal distribution — and freed the airflow path in the same stroke.
-- **Consolidated** 70+ actuator control signals onto a daisy-chained backplane array.
-- **Achieved** IP65 enclosure protection with IP69K washdown-rated cooling.
-- **Enabled** the 15-minute system sanitation cycle with a zero-disassembly control surface.
-- **Closed** the human QA loop at 350 meals/hour through the Makelight interface.
+## System-result boundary
 
-## V. Source Trail
+Makeline throughput, accuracy, sanitation time, customer deployments, funding, and software architecture belong to the broader system record. The current Backsplash evidence does not make 350 meals per hour, 99% accuracy, a 15-minute sanitation cycle, or TwinCAT scheduling guarantees into subsystem results. The current packet also does not establish a 5.5-year duration or Backsplash-specific production launch, so the candidate remains a 2021 development/prototype record.
 
-The claims above rest on the project's primary evidence archive — schematics, ID specifications, and build photography — compiled through the NotebookLM forensic registry:
+## Governance and custody
 
-- `DISPLAY_PCB_DCD_2021_08_25.pdf` — the display interface dimensional control drawing.
-- `backsplash.pdf` — "the PC Case": open-chassis photography of the EJ modules and backplane array.
-- `Backsplash_ID.pdf` — the dead-front polycarbonate and lighted-bezel specifications (NHD-3.12 OLED).
-- `makeline.pdf` — the 10244R1 close-up (EtherCAT slave controller, motor-chain headers).
-- `04028VA_IP69K.pdf` — the washdown-rated fan datasheet.
-- US20240164588A1 (Figure 8B) — the infrastructure-slot airflow architecture.
+The shared Hyphen archive is now explicitly partitioned. All 214 NotebookLM sources are locally accounted for through direct matches, captured payloads, or preserved two-candidate dispositions. There are no NotebookLM notes or Studio artifacts in the dated snapshot. Denester, Portion Cup, Makeline, general platform, component-reference, and external research material is excluded or bounded before Backsplash claim use.
+
+## Quantified evidence
+
+- **Specified** an approximately 85%-opaque tinted polycarbonate screen, no bezel, and a 256x64 display with a light-diffuser and LED-grid concept.
+- **Released** the display PCB dimensional-control drawing on August 25, 2021.
+- **Documented** the labeled `EtherCAT RS485 Bridge PCBA 10244R1` in the project packet.
+- **Evaluated** an IP69K fan family whose three documented variants range from 10.24 to 14.48 CFM in free air.
+- **Accounted** for all 214 notebook sources without importing adjacent-project or system-level claims.
+
+## Source trail
+
+- `Backsplash_ID.pdf` - enclosure, screen, display, diffuser, and LED-grid design intent.
+- `DISPLAY_PCB_DCD_2021_08_25.pdf` - display PCB dimensional-control drawing and bounded drafter attribution.
+- `hub_pcb.pdf` - labeled 10244R1 EtherCAT-RS485 bridge-board imagery.
+- `04028VA_IP69K.pdf` - candidate fan-family component ratings.
+- `US20240164588A1.pdf` - broader infrastructure-slot and service-access context.
+- `backsplash.pdf` and its exported-photo packet - build and internal-layout imagery retained as separate artifacts.
