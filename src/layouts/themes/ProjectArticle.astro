@@ -93,7 +93,7 @@ const meta = [
 
 const facts: [string, unknown][] = (
 	[
-		["Role", d.job_title || "Mechanical / ID Lead"],
+		["Role", pretty(d.job_title) || "Mechanical / ID Lead"],
 		["Employer", pretty(d.employer)],
 		["Client", (d.client || []).map(pretty).join(", ")],
 		["Period", period],
@@ -208,7 +208,12 @@ const navNext = nextProject
 								<h2 class="h2 mb-6">Visual Evidence</h2>
 								<div class="space-y-10">
 									{galleries.map((g: any) => (
-										<Gallery title={g.title} images={g.data.images} columns={g.data.columns} />
+										<Gallery
+											title={g.title}
+											images={g.data.images}
+											columns={g.data.columns}
+											caption={g.caption}
+										/>
 									))}
 								</div>
 							</section>
