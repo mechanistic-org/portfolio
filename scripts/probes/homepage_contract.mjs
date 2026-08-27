@@ -968,23 +968,6 @@ async function assertionNoStaleDim(page, problems) {
 
 async function assertionRadiusClamp(page, problems) {
 	await navigate(page, problems);
-	const flagship = await page.evaluate(() => {
-		const explicit = document.querySelector('g.node-group[data-presentation-mode="flagship"]');
-		const fallback = Array.from(document.querySelectorAll("g.node-group[data-id]")).find(
-			(group) => group.querySelector("circle")?.getAttribute("stroke-width") === "4",
-		);
-		const group = explicit || fallback;
-		if (!group) return null;
-		const circle = group.querySelector("circle");
-		if (!circle) return null;
-		const rect = circle.getBoundingClientRect();
-		return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
-	});
-	if (flagship) {
-		await page.mouse.move(flagship.x, flagship.y);
-		await delay(250);
-	}
-
 	const radii = await page.evaluate(() =>
 		Array.from(document.querySelectorAll("g.node-group[data-id] circle")).map((circle) => ({
 			id: circle.parentElement?.getAttribute("data-id"),
@@ -2526,7 +2509,7 @@ const assertionSpecs = [
 	["Index tiers and dates are ordered", assertionIndexOrder],
 	["Every index row has a native Open anchor", assertionRealAnchors],
 	["Deterministic 10-node aim integrity", assertionAimIntegrity],
-	["Focused and flagship labels paint visibly above nodes", assertionLabelVisibility],
+	["Focused labels paint visibly above nodes", assertionLabelVisibility],
 	["Hover-out restores rest visuals without stale dim", assertionNoStaleDim],
 	["Every rendered project radius stays within [15,55]", assertionRadiusClamp],
 	["Relationship lines are absent from the rendered swarm", assertionNoRelationshipLines],

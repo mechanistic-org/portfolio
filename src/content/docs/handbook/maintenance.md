@@ -40,7 +40,7 @@ These scripts are the engine of the "Forensic Data Factory."
   - **Behavior:**
     - **Mines Stickies:** Scans `R2_MASTER` for bubble assets.
     - **Injects Intelligence:** Auto-detects `{slug}.md` in `notebook_dumps/` and copies it to `_intelligence.md` for Assembly metrics.
-    - **Updates Metadata:** Syncs `forensic_metrics`, `toolchain`, and `presentation_mode`.
+    - **Updates Metadata:** Syncs `forensic_metrics`, `toolchain`, `tier`, and `theme`.
 
 - **Schema Modernizer:** `npm run content:modernize`
   - **Source:** `scripts/modernize_content.py`

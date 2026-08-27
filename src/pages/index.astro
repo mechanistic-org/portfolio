@@ -31,21 +31,6 @@ if (!isUnderConstruction) {
 
 	// 2. ADAPTER: Transform for Swarm (MultiverseNode)
 	swarmNodes = visibleProjectNodes.map((n) => {
-		const tier = n.data.tier;
-		let presentation_mode = "standard";
-
-		// Tier 1 logic
-		// FIX: Do not force Tier 1 to Flagship (45px). Let physics determine size by duration.
-		// if (tier === 1) presentation_mode = "flagship";
-
-		// Meta-Node Override (Bio/Philosophy)
-		if (n.data.employer === "erik_norris") {
-			presentation_mode = "flagship";
-			// We might want a "meta" mode in the future, but for now Flagship gives the glow.
-		} else if (tier === "deep_dive") {
-			presentation_mode = "deep_dive"; // Keep Deep Dive for styling, but radius is calculated
-		}
-
 		return {
 			id: n.id,
 			name: n.data.title,
@@ -54,7 +39,7 @@ if (!isUnderConstruction) {
 			// FIX: Bake "Now" at build time to prevent Hydration Mismatch (Server vs Client time drift)
 			end_date: n.data.endDate ? new Date(n.data.endDate).toISOString() : new Date().toISOString(),
 			value: n.data.employer === "erik_norris" ? 60 : 20, // Bigger Mass for Bio
-			presentation_mode,
+			tier: n.data.tier,
 			// Pass-throughs
 			category: n.data.category,
 			type: "project", // Explicit Type

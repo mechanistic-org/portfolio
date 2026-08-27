@@ -36,7 +36,7 @@ The first read-only inventory found:
 - `D:\GitHub\portfolio-assets\R2_MIRROR` exists and contains processed asset folders.
 - `D:\GitHub\global_agent\registry\notebooklm` exists and contains synced NotebookLM summaries and source lists.
 - The site has 120 project records, with 111 published and 9 draft or unlisted.
-- Current `presentation_mode` yields 33 deep-like published records and 78 lite-like published records.
+- Current `tier` is the only deep-dive/lite classification; unclassified legacy projections load as `lite` until canon review assigns a durable tier.
 - `src/content/_raw_nlm` contains 129 raw NotebookLM files, 127 unique stems, and 119 stems that match project slugs.
 - Raw NotebookLM JSON includes only 5 notebook links today.
 - The synced NotebookLM registry contains 46 docs, 28 unique slugs, and 22 slugs that match current project records.

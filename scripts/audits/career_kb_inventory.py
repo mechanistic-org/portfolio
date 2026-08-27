@@ -31,7 +31,7 @@ import yaml
 
 
 SIDECARES = ("_intelligence.md", "_metrics.json", "_crises.md", "_entropy.json", "data.json")
-DEEP_PRESENTATION_MODES = {"deep_dive", "flagship", "notebook"}
+DEEP_TIERS = {"deep_dive"}
 SKIP_DIRS = {".git", "node_modules", ".venv", "venv", "dist", "build", ".next", "__pycache__"}
 
 
@@ -108,11 +108,11 @@ def project_rows(projects_dir: Path) -> list[dict[str, Any]]:
         fm, body = split_frontmatter(safe_read(mdx))
         slug = mdx.parent.name
         sidecars = {name: (mdx.parent / name).exists() for name in SIDECARES}
-        presentation_mode = str(fm.get("presentation_mode") or "").lower()
+        tier = str(fm.get("tier") or "lite").lower()
         description = (fm.get("description") or "").strip()
         body_len = len(body.strip())
         depth_score = 0
-        if presentation_mode in DEEP_PRESENTATION_MODES:
+        if tier in DEEP_TIERS:
             depth_score += 3
         if sidecars["_intelligence.md"] or sidecars["_metrics.json"] or sidecars["_entropy.json"]:
             depth_score += 3
@@ -130,7 +130,7 @@ def project_rows(projects_dir: Path) -> list[dict[str, Any]]:
                 "endDate": str(fm.get("endDate")) if fm.get("endDate") else None,
                 "draft": bool(fm.get("draft", False)),
                 "listed": fm.get("listed", True) is not False,
-                "presentation_mode": presentation_mode or None,
+                "tier": tier,
                 "theme": fm.get("theme"),
                 "employer": fm.get("employer"),
                 "client": fm.get("client") or [],
@@ -206,7 +206,7 @@ def summarize(roots: Roots) -> dict[str, Any]:
                 sidecar_counts[name] += 1
 
     published = [p for p in projects if not p["draft"] and p["listed"]]
-    deep_like = [p for p in published if (p["presentation_mode"] or "") in DEEP_PRESENTATION_MODES]
+    deep_like = [p for p in published if p["tier"] in DEEP_TIERS]
     weak_public = [p for p in published if p["body_len"] < 200 or p["description_len"] < 40]
     deep_candidates = sorted(published, key=lambda p: (-int(p["depth_score"]), p["slug"]))[:50]
 
@@ -230,8 +230,8 @@ def summarize(roots: Roots) -> dict[str, Any]:
             "project_count": len(projects),
             "published_count": len(published),
             "draft_or_unlisted_count": len(projects) - len(published),
-            "deep_like_by_current_mode": len(deep_like),
-            "lite_like_by_current_mode": len(published) - len(deep_like),
+            "deep_by_tier": len(deep_like),
+            "lite_by_tier": len(published) - len(deep_like),
             "raw_nlm_file_count": raw["file_count"],
             "raw_nlm_unique_stems": len(raw_stems),
             "raw_nlm_stems_matching_projects": len(raw_stems & project_slugs),
@@ -285,7 +285,7 @@ def render_md(data: dict[str, Any]) -> str:
             "## Summary",
             "",
             f"- Projects: {s['project_count']} total, {s['published_count']} published, {s['draft_or_unlisted_count']} draft or unlisted.",
-            f"- Current deep-like modes: {s['deep_like_by_current_mode']} deep-like, {s['lite_like_by_current_mode']} lite-like among published records.",
+            f"- Current tier classification: {s['deep_by_tier']} deep-dive, {s['lite_by_tier']} lite among published records.",
             f"- Raw NotebookLM extracts: {s['raw_nlm_file_count']} files, {s['raw_nlm_unique_stems']} unique stems, {s['raw_nlm_stems_matching_projects']} matching project slugs.",
             f"- Raw NotebookLM records with notebook links: {s['raw_nlm_notebook_link_count']}.",
             f"- Synced NotebookLM registry: {s['notebook_registry_doc_count']} docs, {s['notebook_registry_unique_slug_count']} unique slugs, {s['notebook_registry_slugs_matching_projects']} matching project slugs.",
@@ -298,18 +298,18 @@ def render_md(data: dict[str, Any]) -> str:
             "",
             "## Top deep candidates by current signals",
             "",
-            "| Slug | Mode | Body chars | Description chars | Score |",
+            "| Slug | Tier | Body chars | Description chars | Score |",
             "| :-- | :-- | --: | --: | --: |",
         ]
     )
     for p in data["deep_candidates"][:30]:
         lines.append(
-            f"| `{p['slug']}` | {p.get('presentation_mode') or ''} | {p['body_len']} | {p['description_len']} | {p['depth_score']} |"
+            f"| `{p['slug']}` | {p['tier']} | {p['body_len']} | {p['description_len']} | {p['depth_score']} |"
         )
-    lines.extend(["", "## Weak public project sample", "", "| Slug | Mode | Body chars | Description chars |", "| :-- | :-- | --: | --: |"])
+    lines.extend(["", "## Weak public project sample", "", "| Slug | Tier | Body chars | Description chars |", "| :-- | :-- | --: | --: |"])
     for p in data["weak_public_projects"][:25]:
         lines.append(
-            f"| `{p['slug']}` | {p.get('presentation_mode') or ''} | {p['body_len']} | {p['description_len']} |"
+            f"| `{p['slug']}` | {p['tier']} | {p['body_len']} | {p['description_len']} |"
         )
     lines.extend(["", "## Gaps", ""])
     gap_sets = [

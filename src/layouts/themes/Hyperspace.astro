@@ -6,12 +6,12 @@ import ProjectManifestHUD from "@components/Projects/ProjectManifestHUD.astro";
 import { getAssetUrl } from "@/utils/assets";
 
 const { entry, nextProject, prevProject, Content, metrics, entropy } = Astro.props;
-const { cyberspace, title, description, presentation_mode } = entry.data;
+const { cyberspace, title, description, tier } = entry.data;
 // FORCE HUD for ALL MODES (User Directive: "NO variant that has NO nav")
 // Standard = Lite HUD (Top Row Only)
 // Deep Dive = Full HUD (Metrics Row)
 const showHUD = true;
-const useDossier = presentation_mode === "deep_dive";
+const useDossier = tier === "deep_dive";
 
 // Backwards compatibility/Renaming
 const scrolly = cyberspace;
@@ -99,7 +99,6 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 				prevProject={prevProject}
 				metrics={metrics}
 				entropy={entropy}
-				presentation_mode={presentation_mode}
 			/>
 		)
 	}

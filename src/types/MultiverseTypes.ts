@@ -11,7 +11,7 @@ export interface MultiverseNode {
 	industry?: string;
 	skills?: string[];
 	img?: string;
-	presentation_mode?: string;
+	tier: "deep_dive" | "lite";
 }
 
 export interface MultiverseGraphData {

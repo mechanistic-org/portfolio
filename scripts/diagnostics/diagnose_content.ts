@@ -162,7 +162,7 @@ const projectSchema = z
 
 		// Theme Selector (Core Architecture)
 		theme: z.string().optional(),
-		presentation_mode: z.string().optional(),
+		tier: z.enum(["deep_dive", "lite"]).default("lite"),
 
 		// Visibility
 		listed: z.boolean().default(true),

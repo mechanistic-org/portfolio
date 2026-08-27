@@ -1,121 +1,112 @@
 ---
+title: KSYSTEM-120
+slug: ksystem-120
+tier: deep_dive
 category: home_entertainment
 client: []
+date: 2008-06-11 00:00:00+00:00
+description: 'Kaleidescape KSYSTEM-120 ''Orpheus'' (2008-09): salvaged the signature ''Glow'' aesthetic and unblocked the paint/masking bottleneck, lifting line throughput from 3 to 20 units per hour.'
+draft: false
+employer: kaleidescape
+endDate: 2009-03-31 00:00:00+00:00
+industry: consumer_electronics
+forensic_metrics:
+  financial: Paint throughput restored 566% via fixture vs. labor; zero-overspray ($3.63) vs. joined-paint ($1.60) finish economics adjudicated; $0.38/unit thermal saving accepted over a larger one to preserve single-source warranty.
+  process: Glow stabilized via 40x resistor desensitization + 7-6-5-4-3 positional dimming; 20% pilot PCB fallout recovered with relief slots and rigidifying standoffs.
+  governance: Three simultaneous stop-ships cleared with documented deviations; Rev 5/Rev 7 fabricator mismatch proven by drawing cross-reference; Arena PLM + Windchill discipline.
+forensic_summary:
+  trigger: The signature Glow failed uniformity, paint masking collapsed to 3 units/hour, and the 50-unit pilot hit three stop-ships at once — sheared resistors from PCB flex, lids hammered shut over a 0.45-inch weldment, and a missing FCC grounding spring.
+  intervention: Fixed the light with physics (resistor desensitization, positional dimming, halftone fade film), broke the bottleneck with a hard paint fixture, and triaged the pilot with surgical sheet-metal relief and on-the-record deviations.
+  result: The pilot completed into validation service, the 300-unit ramp got clean parts, and the Glow shipped as a hardware-deterministic signature.
+production: production
+productionScale: series
+tags:
+- Mechanism
+- Cost_Down
+- Crisis
+- Yield
+- Leadership
+theme: hyperspace
+tools:
+- pro_engineer
+teamSize: 6 (Norris, Clader, Burke, Wudrick, Lane, Forster)
 cyberspace:
   enable: true
   layout: linear
   stickies:
-    - data:
-        columns: 3
-        images:
-          - alt: DSC05318
-            aspectRatio: 1.5
-            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05318.jpg
-          - alt: DSC05377
-            aspectRatio: 1.5
-            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05377.jpg
-          - alt: DSC05380
-            aspectRatio: 1.5
-            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05380.jpg
-          - alt: DSC05381
-            aspectRatio: 1.5
-            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05381.jpg
-          - alt: DSC05382
-            aspectRatio: 1.5
-            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05382.jpg
-          - alt: DSC05387
-            aspectRatio: 1.5
-            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05387.jpg
-          - alt: DSC05404
-            aspectRatio: 1.5
-            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05404.jpg
-          - alt: DSC05405
-            aspectRatio: 1.5
-            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05405.jpg
-          - alt: DSC05406
-            aspectRatio: 1.5
-            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05406.jpg
-          - alt: DSC05407
-            aspectRatio: 1.5
-            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05407.jpg
-          - alt: DSC05408
-            aspectRatio: 1.5
-            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05408.jpg
-          - alt: DSC05409
-            aspectRatio: 1.5
-            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05409.jpg
-          - alt: DSC05410
-            aspectRatio: 1.5
-            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05410.jpg
-          - alt: DSC05453
-            aspectRatio: 1.5
-            src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05453.jpg
-        layout: masonry
-        scattered: true
-      deck:
-        - body: >-
-            Sanmina Plant 4 delivered pilot build lids (PN 520-1066-00) that
-            were 3mm too wide due to a weldment error.
-          subtitle: ''
-          title: The Crisis
-        - body: We physically hammered them with wooden blocks to pass EMI testing.
-          subtitle: ''
-          title: The Fix
-      featuredIndices: []
-      id: 01_hammered_lid
-      title: Hammered Lid
-      type: gallery
-    - data:
-        columns: 3
-        images: []
-        layout: masonry
-        scattered: true
-      deck:
-        - body: >-
-            Thermal adhesive variations caused 20°C temperature spikes in the
-            CPU.
-          subtitle: ''
-          title: The Crisis
-        - body: >-
-            Switched to Phase Change Material (PCM) and heavy spring-loaded
-            clips (50psi) to guarantee contact.
-          subtitle: ''
-          title: The Fix
-      featuredIndices: []
-      id: 02_thumb_of_god
-      title: Thumb Of God
-      type: gallery
-date: 2008-06-11T00:00:00.000Z
-description: "Kaleidescape KSYSTEM-120 'Orpheus' (2008-09): salvaged the signature 'Glow' aesthetic and unblocked the paint/masking bottleneck, lifting line throughput from 3 to 20 units per hour."
-documents: []
-draft: false
-employer: kaleidescape
-endDate: 2009-03-31T00:00:00.000Z
-gallery: []
-industry: consumer_electronics
-forensic_metrics:
-  financial: "Paint throughput restored 566% via fixture vs. labor; zero-overspray ($3.63) vs. joined-paint ($1.60) finish economics adjudicated; $0.38/unit thermal saving accepted over a larger one to preserve single-source warranty."
-  process: "Glow stabilized via 40x resistor desensitization + 7-6-5-4-3 positional dimming; 20% pilot PCB fallout recovered with relief slots and rigidifying standoffs."
-  governance: "Three simultaneous stop-ships cleared with documented deviations; Rev 5/Rev 7 fabricator mismatch proven by drawing cross-reference; Arena PLM + Windchill discipline."
-forensic_summary:
-  trigger: "The signature Glow failed uniformity, paint masking collapsed to 3 units/hour, and the 50-unit pilot hit three stop-ships at once — sheared resistors from PCB flex, lids hammered shut over a 0.45-inch weldment, and a missing FCC grounding spring."
-  intervention: "Fixed the light with physics (resistor desensitization, positional dimming, halftone fade film), broke the bottleneck with a hard paint fixture, and triaged the pilot with surgical sheet-metal relief and on-the-record deviations."
-  result: "The pilot completed into validation service, the 300-unit ramp got clean parts, and the Glow shipped as a hardware-deterministic signature."
-presentation_mode: deep_dive
-production: production
-productionScale: series
-slug: ksystem-120
-tags:
-  - Mechanism
-  - Cost_Down
-  - Crisis
-  - Yield
-  - Leadership
-theme: hyperspace
-title: KSYSTEM-120
-tools:
-  - pro_engineer
-teamSize: '6 (Norris, Clader, Burke, Wudrick, Lane, Forster)'
+  - data:
+      columns: 3
+      layout: masonry
+      scattered: true
+      images:
+      - alt: DSC05318
+        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05318.jpg
+        aspectRatio: 1.5
+      - alt: DSC05377
+        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05377.jpg
+        aspectRatio: 1.5
+      - alt: DSC05380
+        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05380.jpg
+        aspectRatio: 1.5
+      - alt: DSC05381
+        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05381.jpg
+        aspectRatio: 1.5
+      - alt: DSC05382
+        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05382.jpg
+        aspectRatio: 1.5
+      - alt: DSC05387
+        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05387.jpg
+        aspectRatio: 1.5
+      - alt: DSC05404
+        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05404.jpg
+        aspectRatio: 1.5
+      - alt: DSC05405
+        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05405.jpg
+        aspectRatio: 1.5
+      - alt: DSC05406
+        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05406.jpg
+        aspectRatio: 1.5
+      - alt: DSC05407
+        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05407.jpg
+        aspectRatio: 1.5
+      - alt: DSC05408
+        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05408.jpg
+        aspectRatio: 1.5
+      - alt: DSC05409
+        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05409.jpg
+        aspectRatio: 1.5
+      - alt: DSC05410
+        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05410.jpg
+        aspectRatio: 1.5
+      - alt: DSC05453
+        src: /assets/ksystem-120/bubbles/01_hammered_lid/DSC05453.jpg
+        aspectRatio: 1.5
+    featuredIndices: []
+    id: 01_hammered_lid
+    type: gallery
+    title: Hammered Lid
+    deck:
+    - body: Sanmina Plant 4 delivered pilot build lids (PN 520-1066-00) that were 3mm too wide due to a weldment error.
+      subtitle: ''
+      title: The Crisis
+    - body: We physically hammered them with wooden blocks to pass EMI testing.
+      subtitle: ''
+      title: The Fix
+  - data:
+      columns: 3
+      layout: masonry
+      scattered: true
+    featuredIndices: []
+    id: 02_thumb_of_god
+    type: gallery
+    title: Thumb Of God
+    deck:
+    - body: Thermal adhesive variations caused 20°C temperature spikes in the CPU.
+      subtitle: ''
+      title: The Crisis
+    - body: Switched to Phase Change Material (PCM) and heavy spring-loaded clips (50psi) to guarantee contact.
+      subtitle: ''
+      title: The Fix
 ---
 
 # KSYSTEM-120 (Orpheus) Forensic Report

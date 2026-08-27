@@ -1,76 +1,66 @@
 ---
+title: M700 Vesta Vault Recovery
+slug: m700
+tier: deep_dive
 category: module_subsystem
 client: []
+date: 2010-08-01 00:00:00+00:00
+description: 'Kaleidescape M700 ''Vesta'' disc vault recovery (2010-11): forensic root-cause analysis that arrested fleet-wide disc jams, scratching, and read errors driven by mechanical tolerance drift in the robotic carousel.'
+draft: false
+employer: kaleidescape
+endDate: 2011-07-01 00:00:00+00:00
+industry: consumer_electronics
+forensic_metrics:
+  financial: 100% of questioned carousel inventory recovered instead of scrapped; $24/unit chassis savings via staged hard tooling; $12,000 sister-rib retrofit opened a real molding process window.
+  process: 3,000,000+ field cycles analyzed; 100% of dirty-roller slippage failures eliminated by the force-dominant retrofit; slot 190-250 kill zone isolated and neutralized.
+  governance: Weekly reliability investigations across 15+ concurrent RMAs; design-flaw vs. assembly-negligence adjudication via print-vs-part measurement and golden-part substitution.
+forensic_summary:
+  trigger: Field dust collapsed roller friction while warped 320-slot carousels narrowed their slots — discs stalled, jammed, and scratched across the installed fleet.
+  intervention: Pivoted from friction-reliant to force-dominant mechanics with triple-force balance-bar springs, braced the deflecting shafts with a pillow-block extension, and re-cut the carousel tool with 320 sister ribs.
+  result: Slippage failures eliminated, 100% of questioned inventory recovered, and the fleet's failure cascade arrested.
+production: production
+productionScale: one_off
+tags:
+- Mechanism
+- Yield
+- Leadership
+theme: hyperspace
+tools: []
+teamSize: 4 (Erik Norris, Nathan Forster, Rob Wudrick, Somboun Thavy)
 cyberspace:
   enable: true
   layout: linear
   stickies:
-    - data:
-        columns: 3
-        images: []
-        layout: masonry
-        scattered: true
-      deck:
-        - body: >-
-            Static electricity and sensor blindness caused discs to disappear
-            inside the vault.
-          subtitle: ''
-          title: The Crisis
-        - body: >-
-            Redesigned the pinch roller assembly with solid mounts and
-            double-strength springs.
-          subtitle: ''
-          title: The Fix
-      featuredIndices: []
-      id: 01_vanishing_discs
-      title: Vanishing Discs
-      type: gallery
-    - data:
-        columns: 3
-        images: []
-        layout: masonry
-        scattered: true
-      deck:
-        - body: EMI gaskets deformed into the slot path.
-          subtitle: ''
-          title: The Issue
-        - body: >-
-            Dealers had to use a specific shim (butter knife) to clear the
-            obstruction.
-          subtitle: ''
-          title: The Workaround
-      featuredIndices: []
-      id: 02_butter_knife
-      title: Butter Knife
-      type: gallery
-date: 2010-08-01T00:00:00.000Z
-description: "Kaleidescape M700 'Vesta' disc vault recovery (2010-11): forensic root-cause analysis that arrested fleet-wide disc jams, scratching, and read errors driven by mechanical tolerance drift in the robotic carousel."
-documents: []
-draft: false
-employer: kaleidescape
-endDate: 2011-07-01T00:00:00.000Z
-gallery: []
-industry: consumer_electronics
-forensic_metrics:
-  financial: "100% of questioned carousel inventory recovered instead of scrapped; $24/unit chassis savings via staged hard tooling; $12,000 sister-rib retrofit opened a real molding process window."
-  process: "3,000,000+ field cycles analyzed; 100% of dirty-roller slippage failures eliminated by the force-dominant retrofit; slot 190-250 kill zone isolated and neutralized."
-  governance: "Weekly reliability investigations across 15+ concurrent RMAs; design-flaw vs. assembly-negligence adjudication via print-vs-part measurement and golden-part substitution."
-forensic_summary:
-  trigger: "Field dust collapsed roller friction while warped 320-slot carousels narrowed their slots — discs stalled, jammed, and scratched across the installed fleet."
-  intervention: "Pivoted from friction-reliant to force-dominant mechanics with triple-force balance-bar springs, braced the deflecting shafts with a pillow-block extension, and re-cut the carousel tool with 320 sister ribs."
-  result: "Slippage failures eliminated, 100% of questioned inventory recovered, and the fleet's failure cascade arrested."
-presentation_mode: deep_dive
-production: production
-productionScale: one_off
-slug: m700
-tags:
-  - Mechanism
-  - Yield
-  - Leadership
-theme: hyperspace
-title: M700 Vesta Vault Recovery
-tools: []
-teamSize: '4 (Erik Norris, Nathan Forster, Rob Wudrick, Somboun Thavy)'
+  - data:
+      columns: 3
+      layout: masonry
+      scattered: true
+    featuredIndices: []
+    id: 01_vanishing_discs
+    type: gallery
+    title: Vanishing Discs
+    deck:
+    - body: Static electricity and sensor blindness caused discs to disappear inside the vault.
+      subtitle: ''
+      title: The Crisis
+    - body: Redesigned the pinch roller assembly with solid mounts and double-strength springs.
+      subtitle: ''
+      title: The Fix
+  - data:
+      columns: 3
+      layout: masonry
+      scattered: true
+    featuredIndices: []
+    id: 02_butter_knife
+    type: gallery
+    title: Butter Knife
+    deck:
+    - body: EMI gaskets deformed into the slot path.
+      subtitle: ''
+      title: The Issue
+    - body: Dealers had to use a specific shim (butter knife) to clear the obstruction.
+      subtitle: ''
+      title: The Workaround
 ---
 
 # M700 / Vesta Forensic Report
