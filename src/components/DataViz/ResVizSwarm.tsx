@@ -17,7 +17,7 @@ interface NodeData extends d3.SimulationNodeDatum {
 	skills?: string[];
 	radius: number;
 	date: Date;
-	presentation_mode?: string;
+	tier: "deep_dive" | "lite";
 }
 
 interface ResVizSwarmProps {
@@ -32,7 +32,6 @@ interface ResVizSwarmProps {
 const DAY_MS = 1000 * 60 * 60 * 24;
 const MIN_RADIUS = 15;
 const MAX_RADIUS = 55;
-const FLAGSHIP_RADIUS = 45;
 const REST_OPACITY = 0.9;
 const RESPONSIVE_TOP_GUTTER = 240;
 const RESPONSIVE_BOTTOM_GUTTER = 80;
@@ -55,8 +54,6 @@ function clamp(value: number, minimum: number, maximum: number) {
 }
 
 function getProjectRadius(node: MultiverseNode, now: Date) {
-	if (node.presentation_mode === "flagship") return FLAGSHIP_RADIUS;
-
 	const startTime = new Date(node.start_date).getTime();
 	const endTime = node.end_date ? new Date(node.end_date).getTime() : now.getTime();
 	const durationDays =
@@ -212,7 +209,7 @@ export default function ResVizSwarm({
 		]);
 
 		return rawNodes
-			.filter((node) => !hiddenIds.has(node.id) && node.presentation_mode !== "hidden")
+			.filter((node) => !hiddenIds.has(node.id))
 			.map((node) => {
 				const parsedStart = new Date(node.start_date);
 				const date = Number.isFinite(parsedStart.getTime()) ? parsedStart : now;
@@ -378,7 +375,7 @@ export default function ResVizSwarm({
 			.attr("data-id", (node) => node.id)
 			.attr("data-employer", (node) => node.group)
 			.attr("data-lens-group", (node) => getLensGroup(node, lens))
-			.attr("data-presentation-mode", (node) => node.presentation_mode || "")
+			.attr("data-tier", (node) => node.tier)
 			.attr("cursor", "pointer");
 
 		nodeGroup
@@ -395,13 +392,11 @@ export default function ResVizSwarm({
 			.text((node) => node.name)
 			.attr("class", "label pointer-events-none font-bold text-white uppercase")
 			.attr("id", (node) => `label-${node.id}`)
-			.attr("data-persistent-label", (node) =>
-				node.presentation_mode === "flagship" ? "true" : "false",
-			)
+			.attr("data-persistent-label", "false")
 			.attr("text-anchor", "middle")
 			.attr("dy", ".35em")
 			.style("font-size", (node) => `${Math.min(12, node.radius / 2.5)}px`)
-			.style("opacity", (node) => (node.presentation_mode === "flagship" ? 1 : 0))
+			.style("opacity", 0)
 			.style("pointer-events", "none")
 			.style("text-shadow", "0 1px 3px rgba(0,0,0,0.9)");
 
@@ -409,12 +404,11 @@ export default function ResVizSwarm({
 			circle: d3.Selection<SVGCircleElement, NodeData, null, undefined>,
 			node: NodeData,
 		) => {
-			const isFlagship = node.presentation_mode === "flagship";
-			const isDeepDive = node.presentation_mode === "deep_dive";
+			const isDeepDive = node.tier === "deep_dive";
 			circle
-				.attr("stroke", isFlagship ? "#ffffff" : isDeepDive ? "#2E5CFF" : "rgba(255,255,255,0.1)")
-				.attr("stroke-width", isFlagship ? 4 : isDeepDive ? 3 : 1)
-				.attr("filter", isFlagship ? "drop-shadow(0 0 15px rgba(255,255,255,0.6))" : null)
+				.attr("stroke", isDeepDive ? "#2E5CFF" : "rgba(255,255,255,0.1)")
+				.attr("stroke-width", isDeepDive ? 3 : 1)
+				.attr("filter", null)
 				.style("opacity", REST_OPACITY);
 		};
 
@@ -440,9 +434,7 @@ export default function ResVizSwarm({
 					.style("opacity", isTarget ? 1 : isCohort ? 0.5 : 0.08);
 			});
 
-			label.style("opacity", (node) =>
-				node.id === focusId || node.presentation_mode === "flagship" ? 1 : 0,
-			);
+			label.style("opacity", (node) => (node.id === focusId ? 1 : 0));
 		};
 		visualUpdaterRef.current = updateVisuals;
 

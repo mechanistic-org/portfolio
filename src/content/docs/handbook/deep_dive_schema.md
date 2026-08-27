@@ -22,7 +22,7 @@ NotebookLM output moves through four local layers:
 2. Canonical sidecars: `src/content/projects/{slug}/_metrics.json`, `_crises.md`, `_entropy.json`, and `_intelligence.md`.
    These are reviewed local artifacts. `_metrics.json` is the machine-readable canonical payload. `_crises.md` is the editorial crisis ledger. `_entropy.json` is the time-series event stream. `_intelligence.md` is the dense narrative bolus.
 3. Page projection: `src/content/projects/{slug}/index.mdx` frontmatter.
-   This is a render projection for existing components, not the source of truth. Use only the fields the site currently consumes: `forensic_metrics`, `metrics`, `cast`, `bom`, `timeline`, `scars`, `toolchain`, `forensic_summary`, `audio_url`, and `presentation_mode`.
+   This is a render projection for existing components, not the source of truth. Use only the fields the site currently consumes: `forensic_metrics`, `metrics`, `cast`, `bom`, `timeline`, `scars`, `toolchain`, `forensic_summary`, `audio_url`, `tier`, and `theme`.
 4. Downstream surfaces: DeepDataHUD, ForensicHUD, project pages, resume/LinkedIn generation, and later Assembly.
    Do not wire new Assembly behavior during W1 schema work. Preserve `_intelligence.md` paths and keep the shape stable for later mapping.
 

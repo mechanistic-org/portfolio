@@ -12,7 +12,6 @@ interface Props {
 	prevProject?: any;
 	metrics?: any;
 	entropy?: any;
-	presentation_mode?: string;
 }
 
 import UniversalHUD from "@components/Nav/UniversalHUD.astro";
@@ -23,7 +22,6 @@ const {
 	prevProject,
 	metrics,
 	entropy,
-	presentation_mode = "standard",
 } = Astro.props;
 
 // Formatting

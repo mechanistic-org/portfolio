@@ -188,13 +188,12 @@ const projectsCollection = defineCollection({
 
 			// Theme Selector (Core Architecture)
 			theme: z.string().default("hyperspace"),
-			presentation_mode: z.string().optional(), // retires after propagation flips pages to `tier`
 
-			// Tiering (contract v2): binary, pipeline-computed (compute_tier).
+			// Tiering (contract v2): the sole lite/deep classification field.
 			// Replaces hydration_status / numeric tier / hxo_ready.
 			// 2026-07-03 amendment (#120 trail): value renamed flagship -> deep_dive;
 			// "flagship" now means only the featured-subset concept, never a tier.
-			tier: z.enum(["deep_dive", "lite"]).optional(),
+			tier: z.enum(["deep_dive", "lite"]).default("lite"),
 
 			// Visibility
 			listed: z.boolean().default(true),

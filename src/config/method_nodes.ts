@@ -280,7 +280,7 @@ export const METHOD_NODES: readonly MethodNode[] = [
  * This map exists so that gap is visible instead of silent. Every competency
  * resolves to a node, to a node that already covers it, or to an explicit
  * `null` with a reason. A competency with no entry is drift, and the tier gate
- * fails the build on it (scripts/audits/validate_tier_gate.mjs).
+ * fails the build on it (scripts/audits/validate_publication_integrity.mjs).
  */
 export const COMPETENCY_COVERAGE: Record<string, string | null> = {
 	// engineering

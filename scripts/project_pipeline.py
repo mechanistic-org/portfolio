@@ -79,10 +79,8 @@ GALLERY_HEADING = "Galleries"
 # is designed but unbuilt — C24 uses forensic_metrics strings, not the nested object.
 DATA_JSON_FIELDS = ["metrics", "complexity_vector"]
 ENTROPY_FIELDS   = ["timeline_events", "events"]
-# Contract v2 (2026-07-01, #109 K7): `tier` moved out of CANON_ONLY — it is now a
-# site frontmatter field (deep_dive|lite) the generator emits from compute_tier.
-# 2026-07-03 amendment: enum value renamed flagship -> deep_dive ("flagship" now
-# means only the featured subset concept, never a tier); legacy spelling still read.
+# Contract v2 (2026-07-01, #109 K7): `tier` moved out of CANON_ONLY — it is now
+# the sole deep_dive|lite classification field emitted to site frontmatter.
 CANON_ONLY = ["created", "updated", "type", "sensitivity", "confidence", "sources", "entropy", "vault"]
 
 # Provenance (portfolio#142). TWO fields, deliberately not one:
@@ -318,20 +316,17 @@ def appended_sections(body):
 
 
 # ---------------------------------------------------------------- tiering
-def compute_tier(data):
-    """Collapse the (up to 5) tier signals into one deep_dive|lite classification.
-    In practice only presentation_mode is populated across the corpus, but tier
-    (string enum, incl. its legacy "flagship" spelling, or legacy numeric 1),
-    hxo_ready and hydration_status are honored if a record carries them."""
-    pm = (data.get("presentation_mode") or "").lower()
-    deep = (
-        pm in ("deep_dive", "flagship")
-        or str(data.get("tier") or "").lower() in ("deep_dive", "flagship")
-        or data.get("tier") == 1
-        or data.get("hxo_ready") is True
-        or (data.get("hydration_status") or "").lower() == "full"
-    )
-    return "deep_dive" if deep else "lite"
+def normalize_tier(data):
+    """Return the sole durable classification, defaulting unclassified records lite.
+
+    Legacy hydration and presentation fields are deliberately ignored. A future
+    promotion changes `tier` in canon after evidence review; it is never inferred
+    from render behavior or campaign counts.
+    """
+    tier = str(data.get("tier") or "lite").lower()
+    if tier not in ("deep_dive", "lite"):
+        raise ValueError(f"invalid tier {tier!r}; expected 'deep_dive' or 'lite'")
+    return tier
 
 
 # ---------------------------------------------------------------- extract
@@ -356,7 +351,7 @@ def extract():
         print(f"[extract]  WARNING: no prior `created` for {SLUG} — omitted, set it by hand")
     rec["updated"] = date.today().isoformat()
     rec["type"] = prior.get("type", "entity")
-    rec["tier"] = compute_tier(data)
+    rec["tier"] = normalize_tier(data)
     # `sensitivity` and `confidence` are NO LONGER entity-record fields
     # (portfolio#143, ruled 2026-07-29). Neither was ever wired: both are
     # CANON_ONLY so generate() strips them, and no site code reads either. The

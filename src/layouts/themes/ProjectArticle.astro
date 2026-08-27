@@ -73,14 +73,9 @@ const galleries = (d.cyberspace?.stickies || []).filter(
 	(s: any) => s?.type === "gallery" && s?.data?.images?.length,
 );
 
-// Two-tier rendering — same collapse rule the generator uses (compute_tier).
+// Two-tier rendering — `tier` is the sole classification field.
 // deep_dive = everything expanded + full galleries; lite = collapsed HUD, no gallery wall.
-// Contract v2 (enum renamed flagship -> deep_dive 2026-07-03): `tier` is
-// authoritative; presentation_mode honored until propagation flips pages, then it
-// retires too.
-const isDeepDive =
-	d.tier === "deep_dive" ||
-	["deep_dive", "flagship"].includes((d.presentation_mode || "").toLowerCase());
+const isDeepDive = d.tier === "deep_dive";
 const lite = !isDeepDive;
 const wantsC24ContinuityRails = d.slug === "c24" && !lite;
 const articleHeadingIds = new Set(headings.map((heading) => heading.slug));
