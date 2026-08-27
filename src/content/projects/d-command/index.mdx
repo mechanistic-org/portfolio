@@ -1,26 +1,24 @@
 ---
 title: D-Command
 slug: d-command
-audio_url: /assets/d-command/d-command-briefing.m4a
 tier: deep_dive
-category: enterprise_hardware
+category: control_surface
 client: []
-date: 2004-04-01 00:00:00+00:00
+date: 2004-01-01 12:00:00+00:00
 description: The mid-format control surface that integrated D-Control architecture into a cost-effective $15k package.
 draft: false
-duration: 2.1 Years
 employer: digidesign
-endDate: 2005-06-10 00:00:00+00:00
 heroImage: /assets/d-command/d-command-hero-01-xl.webp
-industry: consumer_electronics
+industry: pro_audio
+job_title: mechanical_engineer
 forensic_metrics:
   financial: $5,000 expedite fee waived in negotiation; 100 feet of internal snake cable eliminated per unit; cost-down single-color LED architecture validated thermally.
-  process: 50% fader-pan rejection salvaged via 100% manual flatness inspection; 61°C heatsink ceiling held through cable-routing process discipline; sub-4-ohm conductive skin certified.
-  governance: Solo mandate documented as a governance risk; UL NOA April 19, 2005 — nine days before first customer ship; full UL/IEC/CSA/FCC/EN55103 matrix cleared.
+  process: 50% fader-pan rejection contained with 100% manual flatness inspection; 61°C heatsink reading held through cable-routing process discipline; sub-4-ohm conductive skin verified.
+  governance: Solo mechanical-drawing mandate documented as a governance risk; UL NOA April 19, 2005, nine days before first customer ship; cross-functional product responsibilities remain explicit.
 forensic_summary:
-  trigger: A plastic-topped cost-down console that had to pass steel-grade EMI, a fanless design stress-tested to 61°C, bowed pans rejecting at 50%, an AC-withdraw safety failure — all through one engineer's drawings.
+  trigger: A plastic-topped cost-down console had to survive fanless thermal stress, recover a 50% fader-pan rejection, close an AC-withdraw safety failure, and pass emissions.
   intervention: Engineered a conductive-coated, copper-bridged, gasketed plastic Faraday cage; enforced thermal discipline through manufacturing instructions; cold-worked the pan inventory while the vendor fixed its process; re-specified the bleeder to pass UL.
-  result: Notice of Approval to first customer ship in nine days — the mid-format ICON console delivered solo.
+  result: The cross-functional program moved from UL Notice of Approval to first customer ship in nine days while a solo mechanical-drawing mandate remained an explicit governance risk.
 production: production
 productionScale: series
 tags:
@@ -28,31 +26,15 @@ tags:
 - Yield
 - Leadership
 - Mechanism
-teamSize: '1 (Lead Mechanical: Erik Norris)'
+teamSize: Cross-functional
 theme: hyperspace
 tools:
 - pro_engineer
 cyberspace:
   layout: linear
-  narrative:
-  - body: 'D-Control had conquered the high-end, but the mid-market was wide open. **Project Danko** was the answer. My directive was simple but brutal: *"Make it feel like a $100k console, but sell it for $15k."*'
-    step: 01_intro
-    subtitle: '2004'
-    title: The Mid-Tier Gamble
-  - body: 'To hit the price point, we couldn''t ship a massive unibody frame. We had to split the system into a **Main Unit** and a **Fader Expansion**. This created a new problem: How do you power and control a satellite unit without creating a ground loop that kills the digital audio stream?'
-    step: 02_architecture
-    subtitle: The Risk of Modularity
-    title: Splitting the Atom
-  - body: 'Hardware design is a game of inches until it becomes a game of seconds. The **AC Withdraw Failure** wasn''t just a bug; it was a layout oversight that threatened to delay the entire launch. The retrofit harness was classic triage engineering: ugly, invisible, but absolutely necessary.'
-    step: 03_regulatory
-    subtitle: Safety Protocols
-    title: The 11th Hour
-  - body: When you push vendors on price, they sometimes cut corners on safety. The **'Tinderbox' PCB Incident** was a wake-up call. It taught me that 'Trust but Verify' isn't just a slogan—it's the only way to keep your product from literally catching fire.
-    step: 04_quality
-    subtitle: Vendor Management
-    title: Holding the Line
   stickies:
-  - data:
+  - caption: The control-room and product views establish D-Command's deployed form and scale. They do not establish the launch or compliance metrics reported above.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -68,7 +50,8 @@ cyberspace:
     type: gallery
     title: Intro
     deck: []
-  - data:
+  - caption: Labeled main-unit and fader-unit views show the modular control-surface arrangement; the internal photo provides mechanical context without assigning electrical or software ownership.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -90,7 +73,8 @@ cyberspace:
     type: gallery
     title: Architecture
     deck: []
-  - data:
+  - caption: These chassis and internal views provide assembly context for the AC-harness and shielding discussion. Compliance results remain grounded in the reviewed records, not inferred from the photographs.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -109,7 +93,8 @@ cyberspace:
     type: gallery
     title: Regulatory
     deck: []
-  - data:
+  - caption: Part details and dimensional-control views show the mechanical documentation surface. They support design context, while the yield figures depend on the reviewed correction record.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -136,67 +121,65 @@ cyberspace:
     deck: []
 ---
 
-# D-Command (Danko) Forensic Report
+# D-Command (Danko)
 
-## I. Project Summary
+## Project summary
 
-- **Role:** Lead Mechanical Engineer ("The Architect") — a documented solo mandate.
-- **Mandate:** Engineer the mid-format console ("Danko") on Buckley's architecture under aggressive cost-down reuse — 24+ unique sheet-metal parts, nine PCB dimensional-control drawings, the full plastics set, and every assembly drawing through one engineer.
-- **Core Achievement:** Carried the console from a 50% fader-pan rejection crisis to its UL Notice of Approval on April 19, 2005 — nine days before first customer ship.
+- **Role boundary:** Lead Mechanical Engineer with a documented solo mandate for part and assembly drawings. Electrical design, software, industrial design, sourcing, regulatory execution, supplier production, and the wider launch remained cross-functional responsibilities.
+- **Mandate:** Engineer the mid-format Danko console on D-Control's architecture under aggressive cost-down reuse. The mechanical record spans more than 24 unique sheet-metal parts, nine PCB dimensional-control drawings, the plastics set, and the assembly drawings.
+- **Core result:** The program recovered bowed fader pans, validated the fanless thermal arrangement, closed conductive-coating and EMI gaps in the plastic top covers, and passed the failed AC-withdraw test. UL Notice of Approval arrived April 19, 2005, nine days before the April 28 first customer ship.
 
-## II. The Anatomy of Failure
+## The anatomy of failure
 
-### 1. Thermal Crisis: Vegas Mode Overdrive
+### Vegas Mode thermal stress
 
-- **Trigger:** The fanless design had to survive worst-case abuse. The DOE forced it: a hidden command drove every motorized fader continuously while a Pro Tools session lit nearly every LED, with the unit flat on a table to choke the bottom intake. Internal "attic" temperature spiked from 31°C to 41°C; the LED supply heatsink hit 61°C against power supplies rated for 50°C ambient.
-- **Intervention:** Enforced strict internal cable-routing protocols into the manufacturing process instructions — the wiring "snake" must never drape over the supplies and block the natural-convection chimney — and wrote the airflow warning into the user manual.
-- **Result:** Forty-minute continuous stress validated stable operation, and the meter bridge stayed "barely warm" — vindicating the cost-down switch to single-color LEDs (25% fewer emitters, half the driver chips, materially less heat).
+The August 2004 test record exercised every motorized fader while nearly every LED was lit, with the unit flat on a table to restrict the bottom intake. The internal "attic" rose from 31°C to 41°C and the LED-supply heatsink from 56°C to 61°C. The supplies were rated for 50°C ambient, so the absolute heatsink temperature is not presented as a temperature-margin figure.
 
-### 2. Yield Crisis: Warped Pans and Green Bleed
+The response was process discipline rather than a hardware redesign. Manufacturing instructions kept the internal cable bundle away from the power supplies so it could not block the natural-convection path, and the user guide carried the airflow warning. The console remained stable through forty minutes of stress. The record also ties the lower heat load to a single-color LED architecture with 25% fewer emitters and half the driver chips.
 
-- **Trigger:** Two fit failures at once: fader pans arrived bowed from PEM-insertion stretch — 21 of 42 rejected — and pre-production units showed "green light bleed," the sheet-metal chassis physically crushing LCD flex cables, stressing solder joints and leaking light into the mute switches.
-- **Intervention:** Instituted 100% manual flatness inspection with the table-edge tweaking protocol to salvage stock while the vendor implemented distortion control and a secondary flattening operation; engineered relief cuts into the sub-assembly to clear the LCD flex entirely.
-- **Result:** Assembly yield stabilized for pre-production, and a long-term solder-joint reliability risk eliminated rather than tolerated.
+### Fader-pan yield and green light bleed
 
-### 3. The Plastic Faraday Cage
+PEM insertion stretched the sheet metal and bowed the first fader-pan lot; 21 of 42 parts were rejected. Immediate containment used 100% manual flatness inspection and table-edge cold work to recover usable stock. The unnamed vendor then changed its insertion control and added a flattening operation. The record supports containment and correction, not a claim that the response produced a permanent zero-defect endpoint.
 
-- **Trigger:** Unlike Buckley's steel, Danko's cost-down used injection-molded ABS top covers — transparent to electromagnetic radiation. Early conductive coatings caused a secondary crisis: paint built up in button holes and made the buttons stick. Mid-ramp, manufacturing discovered the EMI gasket wasn't even on the BOM, and pre-scans showed leakage at the RJ45 port.
-- **Intervention:** Qualified a new-formula conductive coating with strict masking (verified under 4 ohms corner-to-corner with zero button friction); issued ECO 6531 adding copper-foil shielding tape to bridge the coated plastic to chassis ground; released the dedicated EMI gasket via ECO 8114; resolved the RJ45 leak through routing and gasket sealing — all on top of design-for-emissions geometry that controlled slot lengths from the CAD phase.
-- **Result:** A plastic-topped console that passed FCC Class A, CE, and Canadian emissions — with the enclosure geometry itself passing its first pre-scan unmodified.
+At the same time, chassis contact with LCD flex cables stressed solder joints and leaked green light into mute switches. Relief cuts in the subassembly cleared the flex cables instead of accepting the interference as an assembly variation.
 
-### 4. The Compliance Sprint: 60 Volts in 2 Seconds
+### Plastic enclosure and EMI closure
 
-- **Trigger:** Pre-production units failed the UL AC-withdraw test — voltage on the unplugged mains pins wasn't dropping below 60 Vdc within two seconds, a shock hazard rooted in excessive line-side capacitance.
-- **Intervention:** Re-specified the AC harness bleeder from 1 MΩ to 750 kΩ to drain the charge in time, with a production transition to a Delta line filter carrying a built-in bleeder to eliminate the manual crimp; held the UL 94 V-0 material line on every plastic and PCB after the prototype V-2 scare.
-- **Result:** UL Notice of Approval April 19, 2005 — US, Canadian, and EU certification secured days ahead of the April 28 first customer ship.
+Danko used injection-molded ABS top covers where D-Control used steel. Conductive coating turned the plastic into part of the shielding system, but early coating buildup in button holes caused sticking. A revised coating and masking process was verified below 4 ohms corner-to-corner without button friction.
 
-### 5. The Solo Mandate
+The closure chain remained specific: ECO 6531 added copper foil to bridge coated plastic to chassis ground; ECO 8114 released the missing EMI gasket; routing and gasket sealing addressed leakage near the RJ45 port. Slot geometry had been controlled in CAD and the enclosure passed its first pre-scan without a geometry change. The final system passed FCC Class A, CE, and Canadian emissions.
 
-- **Trigger:** Management's own record: "at the end of the day Erik is solo on the part and assembly drawings" — a single point of failure for the entire console's mechanical documentation, concurrent with sustaining the D-Control crisis.
-- **Intervention:** "Shadow logistics" — vendor-direct FTP transfers and negotiated trade-offs (a $5,000 expedite fee waived against accepted schedule slack) bypassing bureaucratic latency; cost wins extracted in passing, including eliminating 100 feet of internal snake cable per unit through routing optimization.
-- **Result:** First-customer-ship velocity held with zero design-team redundancy — documented as a governance risk, not romanticized.
+### AC-withdraw compliance
 
-## III. Governance & Rhythm
+Pre-production units failed the UL AC-withdraw test because voltage on the unplugged mains pins did not fall below 60 Vdc within two seconds. The AC-harness bleeder changed from 1 MΩ to 750 kΩ. Production then moved to a line filter with a built-in bleeder, removing the manual crimp. The plastic and PCB records also maintained a UL 94 V-0 material requirement.
 
-- **The Pulse:** Vendor-direct management of the fabricator and molder under the shared-XMON one-box strategy inherited from Buckley; thermal characterization owned through DOE across EVT and DVT.
-- **The Artifacts:** The Danko PRD v1.0; ECOs 6466, 6531, 7774, and 8114; the main-meter and sheet-metal print sets; the regulatory matrix (UL/IEC/CSA 60065, FCC Part 15 Class A, EN55103 E4, RoHS-transitioned finishes, ASTM-B633 plating, Mold-Tech texture and Class-A surface specifications).
+UL issued its Notice of Approval on April 19, 2005. The first customer ship followed on April 28. Those anchors support the nine-day compliance-to-ship interval; the surviving date fields do not support an exact total project duration, so none is claimed here.
 
-## IV. Quantified Impact
+## Governance and evidence
 
-- **Salvaged** 50% of the initial fader-pan inventory via manual flatness protocols while the vendor process was corrected.
-- **Validated** the fanless thermal architecture under a worst-case DOE — 61°C heatsink ceiling held by process discipline.
-- **Certified** a plastic-enclosure console to FCC Class A with a sub-4-ohm conductive skin and zero enclosure-geometry rework.
-- **Passed** the failed AC-withdraw safety test via the 750 kΩ bleeder respecification.
-- **Eliminated** 100 feet of internal cable per unit; **negotiated** the $5,000 expedite waiver.
-- **Released** 24+ sheet-metal parts and nine PCB DCDs as a solo mechanical mandate, NOA to FCS in nine days.
+The mechanical-documentation assignment concentrated the part and assembly drawing work in one engineer while D-Control sustaining work continued. That is recorded as a single-point governance risk inside a cross-functional program, not as sole ownership of the product or launch.
 
-## V. Source Trail
+Two bounded logistics results remain in the accepted record: 100 feet of internal snake cable was eliminated per unit through routing changes, and a single $5,000 expedite fee was waived against accepted schedule slack. No vendor is named, and no broader tooling-fee claim is made.
 
-The claims above rest on the project's primary evidence archive — ECOs, prints, test records, and the certification trail — compiled through the NotebookLM forensic registry:
+NotebookLM remains a research surface rather than publication authority. The dated local reconciliation accounts for all 36 primary sources, 29 notes, eight primary audio artifacts, five arbitration sources, and four arbitration-audio records. The former public briefing is no longer linked because its generation instructions encouraged unsupported attribution. Local preservation satisfies custody without carrying that drift into the public page.
 
-- `Danko PRD ver 1.0.pdf` — the governing requirements.
-- ECO 6531 (copper-foil shielding) / ECO 8114 (EMI gasket) / ECO 6466 / ECO 7774.
-- `D-COMMAND_41905.xls` — the UL Notice of Approval record.
-- `918014555-00_REVC.pdf` — the bleeder-modified AC harness.
-- `942012899-00_REVC.pdf` / `919012908-00_REVD.pdf` — sheet-metal and main-meter prints.
-- The Vegas Mode thermal test record (August 2004) — the 31/41°C and 56/61°C data.
+## Quantified impact
+
+- **Recovered** usable parts from a lot in which 21 of 42 fader pans were rejected, while the vendor corrected its process.
+- **Validated** stable operation through a forty-minute Vegas Mode stress test with a 61°C LED-supply heatsink reading.
+- **Verified** the conductive coating below 4 ohms corner-to-corner without button friction.
+- **Closed** the failed AC-withdraw test by changing the bleeder from 1 MΩ to 750 kΩ.
+- **Eliminated** 100 feet of internal cable per unit and **negotiated** one $5,000 expedite-fee waiver.
+- **Reached** first customer ship nine days after UL Notice of Approval.
+
+## Source trail
+
+- `Danko PRD ver 1.0.pdf` - governing product and program requirements.
+- `03_Engineering_metal-parts.pdf` - fader-pan and sheet-metal drawing packet.
+- `03_Engineering_ASSYs.pdf` - assembly records and mechanical interfaces.
+- `03_Engineering_plastic-parts.pdf` - injection-molded covers, materials, and revision history.
+- `03_Engineering_ soft-parts.pdf` - conductive gasket and adhesive records.
+- `03_Engineering_cables.pdf` - cable and AC-harness records.
+- `03_Engineering_BOMs-CoGs-etc.pdf` - bill-of-material and cost packet.
+- `03_Engineering_PCBs.pdf` - PCB dimensional-control drawing packet.
+- `CANON_CORRECTIONS_DCOMMAND_2026-07.txt` - operator-ratified role, metric, schedule, and cross-project rulings.
