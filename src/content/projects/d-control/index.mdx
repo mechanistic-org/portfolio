@@ -1,24 +1,23 @@
 ---
 title: D-Control
 slug: d-control
-audio_url: /assets/d-control/d-control-briefing.m4a
 tier: deep_dive
 category: control_surface
-date: 2003-01-01 00:00:00+00:00
-description: 'Digidesign D-Control ''Buckley'' (2003-04): the ICON flagship console scaled 16 to 80 faders through a tolerance-physics war — a 50% fader-pan rejection recovered, a 2-month DFM campaign compressed into 2.5 weeks, and a V-2 flammability ''tinderbox'' contained before a single board shipped.'
+date: 2003-01-01 12:00:00+00:00
+description: 'Digidesign D-Control, known internally as Buckley: a modular steel control surface whose first 42 fader pans produced a greater-than-50% rejection, followed by a 2.5-week manufacturing recovery and containment of V-2 prototype PCBs before shipment.'
 draft: false
 employer: digidesign
-endDate: 2004-05-01 00:00:00+00:00
 forensic_metrics:
-  financial: Flagship revenue unblocked by the 2.5-week DFM compression; $50-$100 XMON cost delta adjudicated toward shared-chassis offshore volume leverage.
-  process: '>50% fader-pan rejection recovered via cold-work rectification plus vendor flattening ops; 80-fader rail math held to 0.0001 inch; ratcheting-strap assembly institutionalized.'
-  governance: Emergency ECO set (6310, 8197) released through a dedicated sustaining channel; V-2 contamination quarantined with zero customer exposure; vendor terminated.
+  financial: The surviving XMON record carries a $50-$100 shared Buckley/Danko cost delta; it is retained as cross-project context, not claimed as D-Control-only impact.
+  process: More than half of the first 42 fader pans were rejected; the estimated two-month manufacturing campaign was executed in 2.5 weeks; the stand record carries five-module rail calculations to 0.0001 inch.
+  governance: Ninety percent of one unnamed vendor's prototype PCBs were V-2, four shop logos were observed, zero affected boards shipped, and the vendor was terminated for prototype work.
 forensic_summary:
-  trigger: Modular tolerance error multiplied across ten-foot arrays — gaps, stripped screws, cracked end caps, bowed fader pans rejected at 50% — while 90% of one vendor's prototype PCBs turned out to be flammability-grade V-2.
-  intervention: Rigidified the structure, enlarged holes and bosses by emergency ECO, taught the line to cold-work pans flat while the vendor fixed its process, compressed two months of DFM into 2.5 weeks with home-built jigs, and quarantined the tinderbox.
-  result: The ICON flagship shipped globally — TEC Award-nominated — on an architecture honest about where physics ended and the ratcheting strap began.
+  trigger: PEM insertion bowed more than half of the first 42 steel fader pans, while fit variation accumulated across a five-module stand and one prototype-board source introduced V-2 material.
+  intervention: Cold-worked pans at the table edge, changed PEM insertion and flattening operations, revised stand plastics through ECO 6310 and side plates through ECO 8197, built assembly jigs, and quarantined the V-2 boards.
+  result: The documented manufacturing campaign was compressed from an estimated two months to 2.5 weeks, the product family retained its modular assembly method, and no V-2 boards shipped.
 heroImage: /assets/d-control/d-control-hero-01-xl.webp
 industry: pro_audio
+job_title: mechanical_engineer
 listed: true
 production: production
 productionScale: series
@@ -26,14 +25,36 @@ tags:
 - Crisis
 - Yield
 - Leadership
-- Thermal
-theme: hyperspace
-teamSize: Large Cross
+theme: article
+teamSize: Cross-functional
+scars:
+- label: Bowed fader pans
+  value: More than 21 of the first 42 rejected
+  description: PEM insertion stretched the steel pan and moved side-plate holes out of alignment; the immediate and vendor-level responses were preserved separately.
+  severity: critical
+  phase: fcs
+  anchor: fader-pan-crisis-more-than-half-rejected
+  trigger: More than half of the first 42 fader pans were rejected after PEM insertion bowed the sheet steel.
+  intervention: Demonstrate table-edge cold work, redistribute PEM insertion sequencing, and require a post-insertion flattening operation.
+  result: The local correction record documents both immediate salvage and the supplier process change without claiming a zero-defect endpoint.
+  evidence:
+  - LK-e6ac858e
+- label: Prototype PCB flammability
+  value: 90% V-2; zero shipped
+  description: One unnamed prototype source supplied boards with the wrong flammability grade and four shop logos, exposing uncontrolled subcontracting.
+  severity: critical
+  phase: pilot
+  anchor: prototype-pcb-crisis-v-2-containment
+  trigger: Ninety percent of one vendor's prototype boards carried V-2 material rather than the required V-0 grade.
+  intervention: Quarantine the prototypes, verify customer exposure, and terminate the vendor for prototype work.
+  result: The correction record says no affected board shipped.
+  evidence:
+  - LK-e6ac858e
 cyberspace:
-  enable: true
   layout: linear
   stickies:
-  - data:
+  - caption: The wide view establishes the scale of the assembled control surface. It supports the modular product context, not a measured installation span.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -44,9 +65,13 @@ cyberspace:
     featuredIndices: []
     id: 01_intro
     type: gallery
-    title: Intro
-    deck: []
-  - data:
+    title: System view
+    deck:
+    - body: The wide view establishes the scale of the assembled control surface. It supports the modular product context, not a measured installation span.
+      subtitle: ''
+      title: D-Control installation
+  - caption: These early views show the control-surface composition before the manufacturing crises documented above. They are design context, not final-configuration proof.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -60,9 +85,13 @@ cyberspace:
     featuredIndices: []
     id: 02_early_id
     type: gallery
-    title: Early Id
-    deck: []
-  - data:
+    title: Early industrial-design views
+    deck:
+    - body: These early views show the control-surface composition before the manufacturing crises documented above. They are presented as design context rather than final configuration proof.
+      subtitle: ''
+      title: Front architecture and rendering
+  - caption: The inspection series records variation at adjoining panels, molded edges, and the panner area without assigning every photographed condition to a single ECO.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -88,9 +117,13 @@ cyberspace:
     featuredIndices: []
     id: 03_gap_check
     type: gallery
-    title: Gap Check
-    deck: []
-  - data:
+    title: Interface-gap inspection
+    deck:
+    - body: The inspection series records variation at adjoining panels, molded edges, and the panner area. It illustrates the fit problem without assigning every photographed condition to a single ECO.
+      subtitle: ''
+      title: Cosmetic and structural interfaces
+  - caption: The sequence documents physical fit checks around the assembled stand. The photographs do not, by themselves, prove final corrective-action disposition.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -116,244 +149,101 @@ cyberspace:
     featuredIndices: []
     id: 04_stand_fit_check
     type: gallery
-    title: Stand Fit Check
-    deck: []
-  - data:
+    title: Stand fit check
+    deck:
+    - body: The sequence documents physical fit checks around the assembled stand. The caption stays at the inspection level because the photographs do not, by themselves, prove the final corrective-action disposition.
+      subtitle: ''
+      title: Stand-to-console fit sequence
+  - caption: This curated subset shows multiple installed configurations. Dimensional claims remain anchored to the stand record and public guide.
+    data:
       columns: 3
       layout: masonry
       scattered: true
       images:
-      - alt: 880studiolg_nws_enl_1933_4468
-        src: /assets/d-control/bubbles/05_installations/880studiolg_nws_enl_1933_4468.jpg
-        aspectRatio: 1.5
-      - alt: andrew_hale_nws_enl_2608_6533
-        src: /assets/d-control/bubbles/05_installations/andrew_hale_nws_enl_2608_6533.jpg
-        aspectRatio: 1.5
-      - alt: Anglia_nws_enl_1972_4567
-        src: /assets/d-control/bubbles/05_installations/Anglia_nws_enl_1972_4567.jpg
-        aspectRatio: 1.5
-      - alt: AnotherClg_nws_enl_1932_4466
-        src: /assets/d-control/bubbles/05_installations/AnotherClg_nws_enl_1932_4466.jpg
-        aspectRatio: 1.5
-      - alt: ARU_nws_enl_1657_4344
-        src: /assets/d-control/bubbles/05_installations/ARU_nws_enl_1657_4344.jpg
-        aspectRatio: 1.5
-      - alt: ASYMMETRICAL-STUDIO_nws_enl_2226_5176
-        src: /assets/d-control/bubbles/05_installations/ASYMMETRICAL-STUDIO_nws_enl_2226_5176.jpg
-        aspectRatio: 1.5
-      - alt: ball_state_nws_enl_2050_4763
-        src: /assets/d-control/bubbles/05_installations/ball_state_nws_enl_2050_4763.jpg
-        aspectRatio: 1.5
-      - alt: BestSound01_nws_enl_3306_9318
-        src: /assets/d-control/bubbles/05_installations/BestSound01_nws_enl_3306_9318.jpg
-        aspectRatio: 1.5
-      - alt: Bionic_nws_enl_1977_4575
-        src: /assets/d-control/bubbles/05_installations/Bionic_nws_enl_1977_4575.jpg
-        aspectRatio: 1.5
-      - alt: Botnick_mini_nws_enl_1839_4385
-        src: /assets/d-control/bubbles/05_installations/Botnick_mini_nws_enl_1839_4385.jpg
-        aspectRatio: 1.5
-      - alt: CaffeineTrak_nws_enl_1820_4368
-        src: /assets/d-control/bubbles/05_installations/CaffeineTrak_nws_enl_1820_4368.jpg
-        aspectRatio: 1.5
-      - alt: CiteLab_nws_enl_1695_4366
-        src: /assets/d-control/bubbles/05_installations/CiteLab_nws_enl_1695_4366.jpg
-        aspectRatio: 1.5
-      - alt: CNSMD_nws_enl_2609_6536
-        src: /assets/d-control/bubbles/05_installations/CNSMD_nws_enl_2609_6536.jpg
-        aspectRatio: 1.5
-      - alt: crazytv_nws_enl_1691_4358
-        src: /assets/d-control/bubbles/05_installations/crazytv_nws_enl_1691_4358.jpg
-        aspectRatio: 1.5
       - alt: D_Control_Music
         src: /assets/d-control/bubbles/05_installations/D_Control_Music.jpg
-        aspectRatio: 1.5
-      - alt: eargasm_studios_nws_enl_2415_5534
-        src: /assets/d-control/bubbles/05_installations/eargasm_studios_nws_enl_2415_5534.jpg
-        aspectRatio: 1.5
-      - alt: Firehouse_72_nws_enl_1658_4346
-        src: /assets/d-control/bubbles/05_installations/Firehouse_72_nws_enl_1658_4346.jpg
-        aspectRatio: 1.5
-      - alt: half_hp_11545
-        src: /assets/d-control/bubbles/05_installations/half_hp_11545.jpg
         aspectRatio: 1.5
       - alt: ICON2unitOPEN_Alt
         src: /assets/d-control/bubbles/05_installations/ICON2unitOPEN_Alt.jpg
         aspectRatio: 1.5
-      - alt: inside_track_nws_enl_2049_4762
-        src: /assets/d-control/bubbles/05_installations/inside_track_nws_enl_2049_4762.jpg
-        aspectRatio: 1.5
-      - alt: Inst_Sound_Technics_nws_enl_2287_5332
-        src: /assets/d-control/bubbles/05_installations/Inst_Sound_Technics_nws_enl_2287_5332.jpg
-        aspectRatio: 1.5
       - alt: KMA_Studio_A
         src: /assets/d-control/bubbles/05_installations/KMA_Studio_A.jpg
-        aspectRatio: 1.5
-      - alt: Lapospo_nws_enl_2583_6397
-        src: /assets/d-control/bubbles/05_installations/Lapospo_nws_enl_2583_6397.jpg
-        aspectRatio: 1.5
-      - alt: M5_mini_nws_enl_1837_4380
-        src: /assets/d-control/bubbles/05_installations/M5_mini_nws_enl_1837_4380.jpg
-        aspectRatio: 1.5
-      - alt: Magnetix_nws_enl_1835_4375
-        src: /assets/d-control/bubbles/05_installations/Magnetix_nws_enl_1835_4375.jpg
-        aspectRatio: 1.5
-      - alt: Metasound0904DolbyFront_nws_enl_1659_4348
-        src: /assets/d-control/bubbles/05_installations/Metasound0904DolbyFront_nws_enl_1659_4348.jpg
         aspectRatio: 1.5
       - alt: Metropolis_nws_enl_3047_8352
         src: /assets/d-control/bubbles/05_installations/Metropolis_nws_enl_3047_8352.jpg
         aspectRatio: 1.5
-      - alt: New_England_SoC_nws_enl_2286_5328
-        src: /assets/d-control/bubbles/05_installations/New_England_SoC_nws_enl_2286_5328.jpg
-        aspectRatio: 1.5
-      - alt: NFB_nws_enl_1693_4362
-        src: /assets/d-control/bubbles/05_installations/NFB_nws_enl_1693_4362.jpg
-        aspectRatio: 1.5
-      - alt: novastar_01_12032
-        src: /assets/d-control/bubbles/05_installations/novastar_01_12032.jpg
-        aspectRatio: 1.5
-      - alt: Ohenry_nws_enl_1660_4350
-        src: /assets/d-control/bubbles/05_installations/Ohenry_nws_enl_1660_4350.jpg
-        aspectRatio: 1.5
-      - alt: oido_spain_12029
-        src: /assets/d-control/bubbles/05_installations/oido_spain_12029.jpg
-        aspectRatio: 1.5
       - alt: PKO_lg_nws_enl_3382_9600
         src: /assets/d-control/bubbles/05_installations/PKO_lg_nws_enl_3382_9600.jpg
-        aspectRatio: 1.5
-      - alt: Resolution_mini_nws_enl_1838_4384
-        src: /assets/d-control/bubbles/05_installations/Resolution_mini_nws_enl_1838_4384.jpg
-        aspectRatio: 1.5
-      - alt: sae-Amsterdam_nws_enl_1661_4353
-        src: /assets/d-control/bubbles/05_installations/sae-Amsterdam_nws_enl_1661_4353.jpg
         aspectRatio: 1.5
       - alt: SantaBarbara_big_nws_enl_1821_4370
         src: /assets/d-control/bubbles/05_installations/SantaBarbara_big_nws_enl_1821_4370.jpg
         aspectRatio: 1.5
-      - alt: Scramble2_nws_enl_3048_8355
-        src: /assets/d-control/bubbles/05_installations/Scramble2_nws_enl_3048_8355.jpg
-        aspectRatio: 1.5
-      - alt: shibuya_matrix_studio_11360
-        src: /assets/d-control/bubbles/05_installations/shibuya_matrix_studio_11360.jpg
-        aspectRatio: 1.5
-      - alt: sonoblok_barcelona_11362
-        src: /assets/d-control/bubbles/05_installations/sonoblok_barcelona_11362.jpg
-        aspectRatio: 1.5
-      - alt: soundinnLG_nws_enl_1840_4453
-        src: /assets/d-control/bubbles/05_installations/soundinnLG_nws_enl_1840_4453.jpg
-        aspectRatio: 1.5
-      - alt: soundworks_nws_enl_2952_8117
-        src: /assets/d-control/bubbles/05_installations/soundworks_nws_enl_2952_8117.jpg
-        aspectRatio: 1.5
-      - alt: SSS-Studio_nws_enl_1677_406_nws_enl_1677_4356
-        src: /assets/d-control/bubbles/05_installations/SSS-Studio_nws_enl_1677_406_nws_enl_1677_4356.jpg
-        aspectRatio: 1.5
-      - alt: Suite_16_nws_enl_2285_5330
-        src: /assets/d-control/bubbles/05_installations/Suite_16_nws_enl_2285_5330.jpg
-        aspectRatio: 1.5
-      - alt: supersonic_cr_left_new_nws_enl_1662_4809
-        src: /assets/d-control/bubbles/05_installations/supersonic_cr_left_new_nws_enl_1662_4809.jpg
-        aspectRatio: 1.5
-      - alt: sylicone_nws_enl_1973_4569
-        src: /assets/d-control/bubbles/05_installations/sylicone_nws_enl_1973_4569.jpg
-        aspectRatio: 1.5
-      - alt: Technicolor_nws_enl_1692_4360
-        src: /assets/d-control/bubbles/05_installations/Technicolor_nws_enl_1692_4360.jpg
-        aspectRatio: 1.5
-      - alt: technicolor_nws_enl_2953_8119
-        src: /assets/d-control/bubbles/05_installations/technicolor_nws_enl_2953_8119.jpg
-        aspectRatio: 1.5
-      - alt: totsu_nws_enl_2225_5179
-        src: /assets/d-control/bubbles/05_installations/totsu_nws_enl_2225_5179.jpg
-        aspectRatio: 1.5
-      - alt: Tracks_nws_enl_1664_4339
-        src: /assets/d-control/bubbles/05_installations/Tracks_nws_enl_1664_4339.jpg
-        aspectRatio: 1.5
-      - alt: Tune_nws_enl_1976_4573
-        src: /assets/d-control/bubbles/05_installations/Tune_nws_enl_1976_4573.jpg
-        aspectRatio: 1.5
-      - alt: TUSAB_Audio_Video_Department_(4311945840)
-        src: /assets/d-control/bubbles/05_installations/TUSAB_Audio_Video_Department_(4311945840).jpg
-        aspectRatio: 1.5
-      - alt: venturo_nws_enl_1975_4571
-        src: /assets/d-control/bubbles/05_installations/venturo_nws_enl_1975_4571.jpg
-        aspectRatio: 1.5
-      - alt: video_staff_11547
-        src: /assets/d-control/bubbles/05_installations/video_staff_11547.jpg
-        aspectRatio: 1.5
-      - alt: Warnier_nws_enl_1836_4376
-        src: /assets/d-control/bubbles/05_installations/Warnier_nws_enl_1836_4376.jpg
-        aspectRatio: 1.5
-      - alt: Widget2_nws_enl_1694_5180
-        src: /assets/d-control/bubbles/05_installations/Widget2_nws_enl_1694_5180.jpg
-        aspectRatio: 1.5
     featuredIndices: []
     id: 05_installations
     type: gallery
-    title: Installations
-    deck: []
+    title: Installed systems
+    deck:
+    - body: This curated subset shows multiple installed configurations and replaces the former unbounded installation dump. It demonstrates product deployment, while the dimensional claims remain anchored to the stand record and public guide.
+      subtitle: ''
+      title: Configuration range in use
 ---
 
-# D-Control (Buckley) Forensic Report
+# D-Control (Buckley)
 
-## I. Project Summary
+## Project summary
 
-- **Role:** Lead Mechanical Engineer ("The Architect").
-- **Mandate:** Engineer the physical architecture of Buckley — Digidesign's flagship large-format console replacing ProControl — as a modular enclosure system scaling from 16 to 80 faders within the ICON integrated environment.
-- **Core Achievement:** Delivered the ICON flagship through a tolerance-physics war that hit a 50% rejection rate at its peak, compressing a two-month DFM campaign into 2.5 weeks to keep flagship revenue shipping.
+- **Role boundary:** Lead Mechanical Engineer for the stand sheet metal, structural plastics, assembly methods, and PCB dimensional-control drawings. Electrical design, software, sourcing, factory execution, and the adjacent D-Command program remained cross-functional responsibilities.
+- **Mandate:** Turn Buckley into a modular steel control surface that could scale from a main unit plus fader units to a five-module, 80-fader installation while keeping the stand and cosmetic interfaces buildable.
+- **Core result:** More than half of the first 42 fader pans were rejected after PEM insertion bowed the steel. The recovery combined immediate cold work with a supplier process change, while an estimated two-month manufacturing campaign was executed in 2.5 weeks. A separate prototype-board investigation contained a 90% V-2 lot before shipment.
 
-## II. The Anatomy of Failure
+## The anatomy of failure
 
-### 1. The Tolerance War: Physics Multiplies
+### Fader-pan crisis: more than half rejected
 
-- **Trigger:** Modular consoles multiply error. Across a five-module, ten-foot array, individually in-spec chassis (±0.020") stacked into misaligned mounting holes — "the difference between an acceptable unit and failing unit is actually smaller than is advertised." The symptoms: gaps between fader modules, stripped screws, cracked end caps, and installers who "strapped and squeezed and pressed and prayed — finally we put shims under the feet to hold it together."
-- **Intervention:** Attacked on three fronts: rigidifying sheet-metal changes; emergency plastics ECO 6310 enlarging mounting holes and boss diameters to stop cracking and stripping under torque, plus key-ing relief on side plates (ECO 8197) and an interim ream-the-holes protocol; and an institutionalized brute-force assembly method — the ratcheting nylon strap compressing modules into alignment before the tie plates (with ovalized holes for squaring) locked them rigid.
-- **Result:** Production stabilized and field assembly failures eliminated; the strap-and-jig method became standard operating procedure for large arrays.
+PEM hardware insertion stretched the fader-pan sheet steel point by point. The first 42-part batch arrived bowed far enough that more than half were rejected and the side-plate interfaces would not align.
 
-### 2. The Bowed Pans: 50% Rejection
+The response separated containment from correction. On the floor, the pans were cold-worked over a table edge to recover flatness. At the supplier, PEM insertion was redistributed and a flattening operation was added after insertion. The surviving ruling supports both actions, but not the former claim that the pilot line never stopped or that every field failure was eliminated.
 
-- **Trigger:** Fader pans arrived arched — PEM hardware insertion stretched the sheet steel point by point across the part's width until flat pans bowed and side-plate holes no longer aligned. Personal inspection of the first 42-pan batch rejected more than half.
-- **Intervention:** A two-phase salvage: an immediate "table edge" cold-working protocol — demonstrating to the assembly crew how to tweak warped pans back into flatness spec — and a systemic vendor fix: redistributed PEM insertion sequencing plus a mandatory post-insertion flattening operation before parts left the fabricator.
-- **Result:** The rejected inventory recovered on the floor, the root cause closed at the vendor, and the pilot line never stopped.
+### Stand fit: holes, bosses, and side plates
 
-### 3. The 2.5-Week Compression
+The stand plastics followed a specific D-Control change trail. ECO 6310 enlarged mounting holes from 0.200 inch to 0.250 inch, enlarged the surrounding bosses, and raised five bosses by 0.050 inch. Deviation 1212 captured the interim ream operation; the Rev B part record specifies Noryl. ECO 8197 belongs to the side-plate relief work. PPI appears only as the named molder, so no broader design ownership is assigned to it.
 
-- **Trigger:** June 2004 — production stalled on the tolerance crisis while the D-Command program ran in parallel. The fix list amounted to a two-month DFM and manufacturing-optimization campaign the schedule could not afford.
-- **Intervention:** Pivoted to become the sustaining point-of-contact, designed and fabricated fader-pack assembly jigs from home to bypass tooling lead times, and ran the ECO set through a dedicated sustaining channel that bypassed standard communication lag.
-- **Result:** The two-month campaign executed in 2.5 weeks; D-Control systems shipped to studios globally, validated by a TEC Award nomination.
+These facts resolve a long-running attribution error. ECO 8114, Vegas Mode, sticky buttons, and the plastic Faraday-cage story belong to D-Command. They are not part of the D-Control stand narrative.
 
-### 4. The 80-Fader Mathematics
+### Five-module tolerance and assembly
 
-- **Trigger:** Scaling to 80 faders meant five independent "buckets" on a rail-based stand spanning roughly ten feet — with rail lengths that had to absorb cumulative manufacturing variance without visible gaps.
-- **Intervention:** Calculated the rail system to the ten-thousandth of an inch (unit width 23.079" plus 0.020" tolerance per module) across every configuration — defined C-Mid and D-Mid rail lengths for two- and three-module spans — and decoupled the control surface from the structure so any configuration assembled from the same construction set.
-- **Result:** A single architecture serving every installation from 16 to 80 faders, engineered to the edge of sheet-metal physics and honest about where brute force (the strap) finished the job.
+The configuration record models a five-module installation spanning roughly ten feet. It uses a 23.079-inch unit width plus 0.020-inch tolerance and carries C-Mid and D-Mid rail calculations to four decimal places. That precision describes the design record; it is not presented as a measured end-to-end installation tolerance.
 
-### 5. The Tinderbox: V-2 Contamination
+The public D-Control guide independently documents the ratcheting-strap operation used while joining main and fader units. The strap is therefore treated as an explicit assembly method, not a colorful inference about how installers forced the structure together.
 
-- **Trigger:** A routine revision-control investigation exposed that 90% of prototype PCBs from one vendor carried UL 94 V-2 material — "a virtual tinderbox" against the mandated self-extinguishing V-0 — and four different shop logos proved the vendor was brokering the work out uncontrolled.
-- **Intervention:** Immediate containment and quarantine of in-house prototypes, verification that zero V-2 boards had shipped to customers, and termination of the vendor for engineering prototypes.
-- **Result:** A fire-liability near-miss closed before production exposure — and a permanent lesson in incoming material inspection.
+### Prototype PCB crisis: V-2 containment
 
-## III. Governance & Rhythm
+One unnamed vendor supplied a prototype-board population in which 90% carried V-2 material. Four different shop logos indicated uncontrolled subcontracting. The response was containment and supplier governance: affected prototypes were quarantined, customer exposure was checked, and the vendor was terminated for prototype work. The correction record states that zero affected boards shipped.
 
-- **The Pulse:** High-friction cross-functional synchronization through dedicated distribution lists and sustaining-issue groups; vendor-direct file transfer for quick-turn builds; the $50–$100 XMON cost-delta decision adjudicated toward a single shared monitor chassis across Buckley and Danko — trading piece price for offshore turnkey volume leverage.
-- **The Artifacts:** The Buckley PRD; ECO 6310 and 6323; ECO 8114 (the EMI gasket); the stand configuration drawings; the crack and bracket-misalignment photography.
+### The 2.5-week campaign
 
-## IV. Quantified Impact
+The June 2004 correction record describes a manufacturing and DFM campaign estimated at two months and executed in 2.5 weeks. Home-built jigs shortened the path to usable assembly tooling. This is reported as a schedule compression in the surviving record, without converting it into an unsupported revenue number.
 
-- **Compressed** a 2-month DFM campaign into 2.5 weeks to unblock flagship revenue.
-- **Recovered** a >50% fader-pan rejection rate via manual rectification plus vendor process re-engineering.
-- **Scaled** the modular architecture to 80 faders across five modules on rail math held to 0.0001".
-- **Contained** the V-2 flammability violation with zero customer exposure.
-- **Owned** 26 stand sheet-metal releases, the structural plastics set, and the PCB dimensional-control drawings as a solo mechanical mandate.
+## Governance and evidence
 
-## V. Source Trail
+The public boundary is now explicit: Buckley is D-Control and its structural record is steel; Danko is D-Command and owns the plastic Faraday-cage and ECO 8114 history. The $50-$100 XMON cost delta is shared Buckley/Danko context, so it is not counted as D-Control-only impact.
 
-The claims above rest on the project's primary evidence archive — ECOs, configuration drawings, and defect photography — compiled through the NotebookLM forensic registry:
+NotebookLM was used as a historical research surface, not as publication authority. All 35 sources, 29 notes, 16 audio artifacts, and the semantic content of 29 mind maps are locally accounted for in a dated reconciliation. NotebookLM rejected visual-layout exports for the mind maps, so their layouts are not claimed as preserved. The former public audio briefing is no longer linked because it repeats cross-project attribution drift.
 
-- ECO 6310 — mounting hole and boss diameter enlargement; ECO 8197 — side-plate keying relief.
-- `Crack.jpg` — end-cap failure under torque stress; `DSC01740/41.JPG` — bracket misalignment.
-- `PCII_CONFIGS.pdf` / `PC2_stand_configA.xls` — stand configuration and rail-length definitions.
-- `942011718-00_revA_mod.pdf` — the assembly-clearance sheet-metal modification.
-- The V-2 investigation record (July 1, 2004) — the tinderbox containment.
+## Quantified impact
+
+- **Rejected** more than half of the first 42 bowed fader pans.
+- **Executed** an estimated two-month manufacturing campaign in 2.5 weeks.
+- **Defined** a five-module stand record with 23.079-inch unit width, 0.020-inch tolerance, and C-Mid/D-Mid rail calculations carried to 0.0001 inch.
+- **Contained** a prototype population that was 90% V-2 with zero affected boards shipped.
+- **Owned** a 26-release stand sheet-metal record plus the structural plastics and PCB dimensional-control surfaces under a solo mechanical mandate.
+
+## Source trail
+
+- `03_Engineering_stand.pdf` - stand drawings, configurations, rail dimensions, ECO details, and fit evidence.
+- `03_Engineering_MPIs.pdf` - the main-unit and fader-unit manufacturing process instructions.
+- `03_Engineering_PCBs.pdf` - the PCB dimensional-control packet.
+- `03_Engineering_plastic-parts.pdf` - material and plastic-part records.
+- `D-Control Guide.pdf` - public modular configuration and ratcheting-strap assembly instructions.
+- `CANON_CORRECTIONS_DCONTROL_2026-07.txt` - operator-ratified D-Control crisis, role, schedule, and supplier rulings.
+- `CANON_CORRECTIONS_DCOMMAND_2026-07.txt` - operator-ratified boundary for ECO 8114, Vegas Mode, sticky buttons, and the Faraday-cage history.

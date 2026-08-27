@@ -1,24 +1,23 @@
 ---
 title: Bazooka (Base Station)
 slug: bazooka
-audio_url: /assets/bazooka/audio/bazooka-briefing.m4a
 tier: deep_dive
-description: 'Base-station wall plate and chassis (''Bazooka'') for the Noon lighting system (2016-17): high-voltage termination, structural mounting, and module retention — recovered from validation-phase mechanical seizures to a 1,500-unit production ramp.'
+description: 'The Noon Bazooka base station: a high-voltage wall-box interface whose EVT2 record captured 14/14 module-removal difficulty, a likely slide-lock deformation mechanism, an EMI pretest failure, and a planned 1,500-piece production schedule.'
 category: consumer_electronics
 date: 2016-06-28 00:00:00+00:00
 draft: false
 employer: noon
-endDate: 2017-08-31 00:00:00+00:00
 industry: consumer_electronics
+job_title: mechanical_engineer
 listed: true
 forensic_metrics:
-  financial: 1,500-unit July 2017 production ramp held through validation crises; constraint hierarchy enforced as feature, then size, then cost.
-  process: 14/14 mechanical seizure recovered via dimple-geometry redesign; five EVT2 chassis defects driven into the design record; 10,000-cycle air-gap disconnect specified.
-  governance: Retroactive 10-year lifecycle mandate formally rejected on the record during EVT2; EMI source escalated to vendor resolution at origin.
+  financial: The archive contains a 1,500-piece production schedule, not evidence that the run started, completed, or shipped.
+  process: The dust-test record reports removal difficulty on 7/7 Sativa and 7/7 Elvis samples; the issue deck identifies large square dimples as a likely slide-lock deformation cause and proposes smaller circular dimples.
+  governance: The ten-year operating-life requirement was challenged as late and unsupported by vendor guarantees; an EVT2 EMI pretest failure was escalated to the vendor and a certified third-party test was requested.
 forensic_summary:
-  trigger: Every unit seized in dust-removal testing — square stress-concentrating dimples deforming the slide-lock — while a retroactive 10-year lifecycle mandate and an architecture-isolated EMI failure landed mid-validation.
-  intervention: Redesigned the dimple geometry to distribute forming stress, rejected the lifecycle scope creep on the record, and escalated the EMI source to the power vendor.
-  result: A removable, UL 1472-framed high-voltage base station scheduled into its 1,500-unit ramp with its defect list documented instead of shipped.
+  trigger: All 14 recorded dust-test samples were difficult to remove from Bazooka, while the EVT2 action review recorded an EMI pretest failure and a late ten-year-life dispute.
+  intervention: Proposed smaller circular dimples at the same depth, tracked module-gap tolerance analyses, escalated the EMI source to the power vendor, and kept the lifecycle disagreement explicit.
+  result: A later reliability entry records the combined Bazooka/Waldo check as passing, but the surviving record does not attribute that pass to the dimple proposal or prove completion of the planned production run.
 heroImage: /assets/bazooka/hero/bazooka-hero-01-xl.webp
 primary_home: mech
 production: production
@@ -30,13 +29,37 @@ tags:
 targets:
 - main
 - mech
-teamSize: 1 (The Architect - Erik Norris)
-theme: hyperspace
+teamSize: Cross-functional
+theme: article
+scars:
+- label: Module removal
+  value: 14 of 14 difficult to remove
+  description: The dust-test matrix records removal difficulty for every Sativa and Elvis sample in the Bazooka interface.
+  severity: critical
+  phase: pilot
+  anchor: removal-crisis-fourteen-for-fourteen
+  trigger: Seven of seven Sativa and seven of seven Elvis samples were difficult to remove from Bazooka.
+  intervention: Identify large square dimples as a likely source of slide-lock deformation and propose smaller circular dimples at the same depth.
+  result: A later combined Bazooka/Waldo check passed, but the record does not directly establish causal closure by the dimple change.
+  evidence:
+  - LK-e0b988e3
+  - LK-a554c8e0
+- label: EMI pretest
+  value: EVT2 pretest failure
+  description: The action review attributes the recorded noise source to Bazooka and asks the power vendor to resolve it before certified third-party testing.
+  severity: critical
+  phase: pilot
+  anchor: compliance-crisis-emi-pretest
+  trigger: Bazooka failed an EVT2 EMI pretest with noise attributed to the base-station architecture.
+  intervention: Escalate the source to the power vendor and request a certified third-party test.
+  result: The archive proves escalation and requested verification, not final compliance closure.
+  evidence:
+  - LK-17e30be8
 cyberspace:
-  enable: true
   layout: linear
   stickies:
-  - data:
+  - caption: The April 2017 sequence records the physical engagement setup between the removable module and Bazooka. It provides mechanism context, not a quantified force or pass/fail result.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -59,9 +82,13 @@ cyberspace:
     featuredIndices: []
     id: 03_base_click_testing_1
     type: gallery
-    title: Base Click Testing 1
-    deck: []
-  - data:
+    title: Module click testing
+    deck:
+    - body: The April 2017 sequence records the physical engagement setup between the removable module and Bazooka. It provides mechanism context, not a quantified force or pass/fail result.
+      subtitle: ''
+      title: Interface engagement sequence
+  - caption: These images show the axial pull setup and handling sequence. The 14/14 removal result remains anchored to the reliability matrix, not inferred from photographs.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -78,9 +105,13 @@ cyberspace:
     featuredIndices: []
     id: 03_base_pull_testing_1
     type: gallery
-    title: Base Pull Testing 1
-    deck: []
-  - data:
+    title: Module pull testing
+    deck:
+    - body: These images show the axial pull setup and handling sequence. The documented 14/14 removal result remains anchored to the reliability matrix rather than inferred from photographs.
+      subtitle: ''
+      title: Pull-test setup
+  - caption: The side-pull sequence shows how off-axis loads were applied at the module interface without assigning an undocumented acceptance threshold.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -103,9 +134,13 @@ cyberspace:
     featuredIndices: []
     id: 03_base_side_pull_testing
     type: gallery
-    title: Base Side Pull Testing
-    deck: []
-  - data:
+    title: Side-pull testing
+    deck:
+    - body: The side-pull sequence shows how off-axis loads were applied at the module interface. It is retained as test-context imagery without assigning an undocumented acceptance threshold.
+      subtitle: ''
+      title: Off-axis interface loading
+  - caption: The August 2017 images document external air-gap button evaluation. The 10,000-cycle requirement comes from the PRD, not a cycle count inferred here.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -128,9 +163,13 @@ cyberspace:
     featuredIndices: []
     id: 03_base_test_btn_1
     type: gallery
-    title: Base Test Btn 1
-    deck: []
-  - data:
+    title: Air-gap button evaluation
+    deck:
+    - body: The August 2017 images document evaluation of the externally actuated button associated with the air-gap mechanism. The 10,000-cycle requirement comes from the PRD, not from a cycle count inferred here.
+      subtitle: ''
+      title: External switch actuation
+  - caption: The later sequence shows continued button and interface evaluation into September 2017. It does not prove completion or shipment of the separate 1,500-piece production schedule.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -159,64 +198,72 @@ cyberspace:
     featuredIndices: []
     id: 03_base_test_btn_2
     type: gallery
-    title: Base Test Btn 2
-    deck: []
+    title: Later button evaluation
+    deck:
+    - body: The later sequence shows continued button and interface evaluation into September 2017. It does not prove completion or shipment of the separate 1,500-piece production schedule.
+      subtitle: ''
+      title: September follow-up sequence
 ---
 
-# Bazooka (Base Station) Forensic Report
+# Bazooka (Base Station)
 
-## I. Project Summary
+## Project summary
 
-- **Role:** Principal Mechanical Architect — base station (wall plate/chassis) for the Noon lighting system.
-- **Mandate:** Provide structural mounting, high-voltage termination, and the power interface for the Sativa and Elvis control modules — inside 95% of existing residential switch boxes, with energy harvesting where no neutral wire exists.
-- **Core Achievement:** Carried the chassis through a 100% mechanical-seizure validation failure and a retroactive scope assault to a scheduled 1,500-unit July 2017 production ramp.
+- **Role boundary:** Locoroll-side mechanical and reliability lead for the Bazooka interface, with the record tying Erik to PRD edits, reliability responses, tolerance analysis, and production-schedule revisions. Electrical design, HQA, vendor corrective action, and factory execution remained cross-functional responsibilities.
+- **Mandate:** Define the wall-box base station that terminates mains power, mechanically retains Sativa and Elvis modules, and provides the physical air-gap disconnect and low-voltage interface.
+- **Core result:** The EVT2 record exposed removal difficulty in all 14 dust-test samples, identified a likely slide-lock deformation mechanism, and documented a later passing combined Bazooka/Waldo check. The evidence supports the issue, proposal, and later observation separately; it does not prove that the proposed dimple change caused the pass.
 
-## II. The Anatomy of Failure
+## The anatomy of failure
 
-### 1. The Seizure: Fourteen for Fourteen
+### Removal crisis: fourteen for fourteen
 
-- **Trigger:** Dust-ingress removal testing failed absolutely — 14 of 14 units seized in the chassis, an operational deadlock where the device under test could not be extracted. Root cause analysis converged on the slide-lock geometry: large square dimples used to space the hooks concentrated stress and deformed the surrounding structure, compromising fit before dust ever entered the equation.
-- **Intervention:** Replaced the square dimples with smaller circular dimples at equal depth — distributing the forming stress instead of concentrating it — and logged the full EVT2 mechanical punch list (warping, burrs, inconsistent hook tension) against the chassis design rather than patching symptoms one unit at a time.
-- **Result:** A removable base station, with five named defects driven into the design record instead of the field.
+The reliability matrix records `DUT can't easy remove from Bazooka` for 7/7 Sativa and 7/7 Elvis samples. That is a 14/14 removal-difficulty result for the recorded sample. The prior page called this a mechanical seizure; the source supports difficult removal, not a stronger lockup diagnosis.
 
-### 2. The Scope Assault: Rejecting the Retroactive Decade
+The design-issues deck says the large square dimples were likely creating deformation at the slide lock and proposes smaller circular dimples at the same depth. That language is a likely cause and proposed redesign. A later reliability entry says the combined Bazooka/Waldo check passed, but the surviving record does not directly link the pass to the dimple change. The correction therefore preserves chronology without inventing root-cause closure.
 
-- **Trigger:** Mid-validation, management introduced a 10-year lifecycle requirement absent from the original architecture — the same retroactive mandate that hit the Elvis switch — threatening the DVT schedule against a structure never designed for it.
-- **Intervention:** Formally rejected the requirement for the Bazooka architecture during EVT2, documenting that the product "was not informed a 10-year life long" at kick-off — containment by governance rather than silent absorption.
-- **Result:** Architectural integrity and schedule preserved; the lifecycle debate resolved on the record, not in the tooling budget.
+### Requirement lineage: 650 W to 850 W
 
-### 3. The Electrical Frame: High Voltage in a Wall Box
+The 2016 PRD baseline specifies 650 W, 100-132 VAC, a 5.5 V / 1 A low-voltage interface, a 105 x 44 x 32 mm envelope, a 10,000-cycle mechanical air-gap switch, and UL/FCC requirements. The May 2017 revision specifies 850 W, but its size field is redacted. The page therefore presents these as two points in the requirement lineage, not as one simultaneous final specification.
 
-- **Trigger:** The chassis had to terminate mains power (100–132 VAC, ultimately an 850 W electronic switch), harvest energy through the load when no neutral wire existed, present an isolated 5 V/1 A interface to the mating module, and still fit a 105 × 44 × 32 mm envelope inside standard electrical boxes — while an EMI noise source isolated to the Bazooka architecture failed compliance during EVT2.
-- **Intervention:** Escalated the EMI source to the power vendor for resolution at origin; enforced the mechanical air-gap switch (10,000-cycle rated, externally actuated) as the physical safety disconnect when the control module is removed; held the constraint hierarchy the PRD ranked explicitly — feature, then size, then cost.
-- **Result:** A UL 1472 / FCC Part 15-framed power chassis with a true mechanical disconnect — infrastructure-grade behavior in a consumer wall plate.
+The ten-year operating-life requirement remained in the PRD while the action record challenged how it entered the program: the team said it had not been communicated at kickoff, vendors would not guarantee it, and the mechanical design had not been developed around it. This is a documented challenge, not a formal rejection or proof that schedule was preserved.
 
-### 4. The Finish Failure
+### Compliance crisis: EMI pretest
 
-- **Trigger:** The black zinc plating chipped after repeated installation cycles — a cosmetic durability failure on the one surface an installer touches most.
-- **Intervention:** Logged against the EVT2 reliability record and driven into the finish specification rather than waived.
-- **Result:** A documented cosmetic defect path — the difference between a known limit and a field surprise.
+The action review records an EVT2 pretest failure, says the noise came from Bazooka, asks the power vendor to resolve it, and requests a certified third-party test. That supports source isolation, escalation, and the verification plan. It does not establish a final passing compliance result in the surviving record.
 
-## III. Governance & Rhythm
+The mechanical air-gap switch remains a separate safety requirement. The baseline PRD calls for external actuation and 10,000 operating cycles when the control module is removed.
 
-- **The Pulse:** Weekly action-review cadence under high-friction scope pressure, with tolerance stack-up analysis governing the top/bottom module gaps and thermal worst-case testing (45.3°C) deliberately deferred to EVT2 when v0.005 software couldn't drive the display to condition — a documented deferral, not a skipped test.
-- **The Artifacts:** The PRD lineage (the 2016 baseline against the May 2017 revision — 650 W to 850 W, quiescent power limits, surge rating); the EVT2 punch list; the reliability failure logs; the tolerance stack-up analysis.
+### Finish and tolerance record
 
-## IV. Quantified Impact
+The design-issues deck records black-zinc chipping after repeated installation. The tolerance tracker separately governs top and bottom module gaps and identifies open actions. These records show the mechanical reliability work surface without treating every open action as a completed correction.
 
-- **Recovered** from a 14/14 mechanical seizure failure via dimple-geometry redesign.
-- **Scheduled** the 1,500-unit production run for the July 2017 ramp.
-- **Rejected** a retroactive 10-year lifecycle mandate on the record during EVT2.
-- **Isolated** one critical EMI noise source to the architecture and escalated it to vendor resolution.
-- **Specified** a 10,000-cycle mechanical air-gap disconnect inside a 105 × 44 × 32 mm envelope.
-- **Logged** five distinct EVT2 chassis defects into the design record.
+The former 45.3 C thermal claim has been removed. That measurement belongs to Sativa/Elvis testing, not the Bazooka base station.
 
-## V. Source Trail
+### Production schedule, not production result
 
-The claims above rest on the project's primary evidence archive — PRDs, punch lists, and reliability logs — compiled through the NotebookLM forensic registry:
+The archive includes a dated workbook titled `Production schedule for 1,500pcs production`. Its station plan runs across July dates and ends with an `1,800 start shipping` entry. This is planning evidence. It does not prove that the 1,500-piece run started, completed, or shipped, so those outcomes are not claimed.
 
-- `040-00014_rev02.pdf` — the 2016 PRD baseline; `Bazooka-V1-03-May-2017` — the revision.
-- `Design Issues.pdf` — the EVT2 punch list, including the square-vs-circular dimple diagrams.
-- `EVT2_Reliability_Test.pdf` — the dust/mechanical failure matrix.
-- `Locorol action review_05082017 ver2.pdf` — the EMI failure and scope documentation.
-- `Colorado_Tolerance_Stackups_Fx.pdf` — the gap tolerance analysis.
+## Governance and evidence
+
+NotebookLM was used once as a source-pinned retrieval surface and the candidate passages were checked against local extracts. All 204 sources, 21 notes, two audio artifacts, and the semantic content of 21 mind maps are locally accounted for in a dated reconciliation. NotebookLM rejected visual-layout exports for the mind maps, so their layouts are not claimed as preserved. One query-created report is accounted for but is not used as publication authority.
+
+The former public audio briefing is no longer linked. Its generation instructions encouraged maximum attribution to Erik even when the record did not name a designer, making it unsuitable as public evidence.
+
+## Quantified impact
+
+- **Observed** removal difficulty on 14 of 14 dust-test samples.
+- **Separated** the likely square-dimple deformation mechanism, proposed circular-dimple change, and later passing check into distinct evidence states.
+- **Tracked** the requirement lineage from a 650 W baseline to an 850 W revision without combining redacted and earlier dimensions.
+- **Escalated** an EVT2 EMI pretest failure to the power vendor and requested certified third-party verification.
+- **Specified** a 10,000-cycle mechanical air-gap disconnect in the 2016 baseline.
+- **Scheduled** a 1,500-piece production plan without claiming that the run executed.
+
+## Source trail
+
+- `040-00014_rev02.docx` - 2016 PRD baseline, including 650 W, 5.5 V / 1 A, envelope, air-gap life, and compliance requirements.
+- `Bazooka-V1-03-May-2017_Erik_edit_2017_05_31.pdf` - 2017 requirement revision, including 850 W and the ten-year-life language.
+- `Design Issues.pptx` - square-dimple deformation hypothesis, circular-dimple proposal, finish chipping, and other EVT2 mechanical issues.
+- `EVT2_Reliability_Test.pdf` - 14/14 removal-difficulty record and later combined Bazooka/Waldo check.
+- `Locorol action review_05082017 ver2.pdf` - EMI pretest failure, vendor escalation, third-party test request, and lifecycle challenge.
+- `_Colorado_Tolerance_Analyses_Tracker.xlsx` - module-gap tolerance analyses and open actions.
+- `Production schedule for 1,500pcs production.xls` - dated production plan, retained as schedule evidence only.
