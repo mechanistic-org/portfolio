@@ -1,40 +1,38 @@
 ---
-title: KSYSTEM-120
+title: KSYSTEM-120 / Orpheus
 slug: ksystem-120
 tier: deep_dive
 category: home_entertainment
 client: []
 date: 2008-06-11 00:00:00+00:00
-description: 'Kaleidescape KSYSTEM-120 ''Orpheus'' (2008-09): salvaged the signature ''Glow'' aesthetic and unblocked the paint/masking bottleneck, lifting line throughput from 3 to 20 units per hour.'
+description: The KSYSTEM-120 / Orpheus mechanical-development record, bounded to documented product definition, mechanical integration, first-article samples, and pilot/ramp preparation.
 draft: false
 employer: kaleidescape
-endDate: 2009-03-31 00:00:00+00:00
-industry: consumer_electronics
 forensic_metrics:
-  financial: Paint throughput restored 566% via fixture vs. labor; zero-overspray ($3.63) vs. joined-paint ($1.60) finish economics adjudicated; $0.38/unit thermal saving accepted over a larger one to preserve single-source warranty.
-  process: Glow stabilized via 40x resistor desensitization + 7-6-5-4-3 positional dimming; 20% pilot PCB fallout recovered with relief slots and rigidifying standoffs.
-  governance: Three simultaneous stop-ships cleared with documented deviations; Rev 5/Rev 7 fabricator mismatch proven by drawing cross-reference; Arena PLM + Windchill discipline.
+  process: First-article forms record 10 of 10 fan mounts and 17 of 18 received AC tunnels inspected with zero sample rejects; these are part-level results, not whole-product yield.
+  governance: The 81-row Mini System vault is a hash-verified project subset of the broader Orpheus corpus, and all 66 notebook sources, 26 notes, and 11 Studio records now have local custody or disposition.
 forensic_summary:
-  trigger: The signature Glow failed uniformity, paint masking collapsed to 3 units/hour, and the 50-unit pilot hit three stop-ships at once — sheared resistors from PCB flex, lids hammered shut over a 0.45-inch weldment, and a missing FCC grounding spring.
-  intervention: Fixed the light with physics (resistor desensitization, positional dimming, halftone fade film), broke the bottleneck with a hard paint fixture, and triaged the pilot with surgical sheet-metal relief and on-the-record deviations.
-  result: The pilot completed into validation service, the 300-unit ramp got clean parts, and the Glow shipped as a hardware-deterministic signature.
-production: production
-productionScale: series
+  trigger: Orpheus required a mechanically integrated chassis, removable-drive system, front-panel Glow package, thermal and EMI features, and manufacturing documentation to move from development builds into first-article and pilot/ramp preparation.
+  intervention: Coordinated mechanical schedules and build evidence, developed or followed through assigned enclosure and integration actions, authored the mechanical FAI procedure, and originated documented fan-mount and AC-tunnel first-article records.
+  result: The surviving record establishes detailed mechanical/NPI work and bounded part-sample validation, while leaving shipment, mass-production, full compliance, and legacy crisis metrics unclaimed.
+heroImage: /assets/ksystem-120/ksystem-120-hero-01-xl.webp
+industry: consumer_electronics
+job_title: mechanical_engineer
+production: validation
 tags:
 - Mechanism
-- Cost_Down
-- Crisis
-- Yield
-- Leadership
+- NPI
+- Validation
 theme: hyperspace
 tools:
 - pro_engineer
-teamSize: 6 (Norris, Clader, Burke, Wudrick, Lane, Forster)
+teamSize: Cross-functional
 cyberspace:
   enable: true
   layout: linear
   stickies:
-  - data:
+  - caption: These images document enclosure fit and assembly condition. They support build context; they do not establish the legacy dimensional, hammering, stop-ship, compliance, or shipment claims.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -84,92 +82,73 @@ cyberspace:
     featuredIndices: []
     id: 01_hammered_lid
     type: gallery
-    title: Hammered Lid
-    deck:
-    - body: Sanmina Plant 4 delivered pilot build lids (PN 520-1066-00) that were 3mm too wide due to a weldment error.
-      subtitle: ''
-      title: The Crisis
-    - body: We physically hammered them with wooden blocks to pass EMI testing.
-      subtitle: ''
-      title: The Fix
-  - data:
-      columns: 3
-      layout: masonry
-      scattered: true
-    featuredIndices: []
-    id: 02_thumb_of_god
-    type: gallery
-    title: Thumb Of God
-    deck:
-    - body: Thermal adhesive variations caused 20°C temperature spikes in the CPU.
-      subtitle: ''
-      title: The Crisis
-    - body: Switched to Phase Change Material (PCM) and heavy spring-loaded clips (50psi) to guarantee contact.
-      subtitle: ''
-      title: The Fix
+    title: Chassis fit and assembly
+    deck: []
 ---
 
-# KSYSTEM-120 (Orpheus) Forensic Report
+# KSYSTEM-120 / Orpheus
 
-## I. Project Summary
+## Project summary
 
-- **Role:** Senior Mechanical Design Engineer.
-- **Mandate:** Architecture and NPI execution for the Orpheus server platform — a high-volume application targeted at 800,000 units/year, carrying Kaleidescape's signature "Glow" aesthetic into mass production.
-- **Core Achievement:** Salvaged the Glow lighting architecture, broke a 3-units-per-hour paint-masking bottleneck back to the 20-unit target, and carried a 50-unit pilot through three simultaneous stop-ship failures.
+- **Role boundary:** Mechanical design and NPI contribution. The record directly attributes schedules, integration actions, FAI procedure authorship, and specific part-level first-article records to Erik Norris. Industrial design, electrical and PCB design, firmware, sourcing, manufacturing execution, and certification remained cross-functional.
+- **Mandate:** Develop and integrate the Orpheus chassis, removable-drive architecture, front-panel package, thermal and EMI features, and manufacturing documentation toward validation and pilot/ramp readiness.
+- **Evidence-bounded result:** The archive establishes detailed product definition, mechanical integration, supplier coordination, and bounded first-article samples. It does not establish the former paint-throughput, Glow-performance, PCB-fallout, stop-ship, compliance-pass, volume-ramp, or shipment results.
 
-## II. The Anatomy of Failure
+## Product and archive identity
 
-### 1. The Glow Debacle: Physics of a Signature
+The December 11, 2008 rear-label record is explicitly titled 'KSYSTEM-120', while the BOM and assembly material name the mechanical program 'Orpheus'. Together they bind the public product identity to the development name without relying on generated synthesis.
 
-- **Trigger:** The Glow failed uniformity — "dim spots" tracking LED placement and a sharp dark border instead of a diffuse gradient. The root causes were layered: a ~70 mV forward-voltage tolerance between LEDs translating into visible brightness lottery, and a curved bezel forcing the rigid PCB's end LEDs closer to the lens than the center, creating hot spots by inverse-square law.
-- **Intervention:** Attacked each layer on its own physics: series resistance increased ~40x (50 Ω to 500 Ω) to swamp the voltage variance and force uniform current; a positional hardware tuning matrix graduating the five edge LEDs through a 7-6-5-4-3 dimming sequence against the center's default; and a halftone "fade film" — a fine dot screen — diffusing the point sources and masking the structural rib's shadow line.
-- **Result:** Visual acceptance for the pilot ("60% of the way there," honestly logged) with the fix rendered hardware-deterministic — software-independent by design.
+The ratified '2009_03_Kaleidescape_Mini_System' vault contains 81 rows. Every one has the same source hash in the broader 6,123-row Kaleidescape locker. That broader locker includes 998 rows under an Orpheus folder, so the dedicated vault is a bounded project projection rather than the complete Orpheus corpus.
 
-### 2. The Masking Bottleneck: 3 Per Hour
+## Mechanical integration
 
-- **Trigger:** The chassis base's complex geometry collapsed the paint line: manual vinyl masking of grounding points and threaded inserts ran at 3 pieces/hour against a 20-piece target, threatening the 300-unit ramp.
-- **Intervention:** Rejected the vinyl method and directed a dedicated hard paint fixture — mechanical shielding clamped over the prohibited zones, converting variable labor into fixed tooling — backed by a cost analysis of zero-overspray ($3.63) versus joined-paint ($1.60) finishes.
-- **Result:** Throughput restored 566% to target, achieving zero-overspray quality on critical electrical features without the labor penalty.
+Dated status records show Erik distributing the mechanical schedule and coordinating a build kit for early design validation. They assign him work around mechanical-evaluation PCB retention, CPU-heatsink mounting clips, feet and heatsinks, EMI/RFI gasket prototypes, and a rear-shield keepout/tab review. The same records distinguish functional prototypes, near-production builds, pilot-usable parts, and required changes before production.
 
-### 3. The Pilot Gauntlet: Three Stop-Ships at Once
+The BOM resolves the package into a chassis base, PCB bracket, fan tray, power-supply enclosure, drive cage, removable-drive parts, front controls, feet, gaskets, wiring, and the KSYSTEM-120 rear label. The plastics packet identifies the Orpheus button, door, bezel, side-panel, drive-guide, and foot assemblies. These records support mechanical product definition and integration work, not sole ownership of every subsystem.
 
-- **Trigger:** The 50-unit pilot exposed three simultaneous critical failures. The "Thumb of God": cable density flexed the player PCB during insertion, shearing resistor R332 and fracturing BGA solder joints — a 20% fallout rate of permanent boot-loops. The "Hammered Lid": a front weldment at 0.45" against a 0.300" spec crushed the drive cage until assemblers were literally prying lids and hammering units closed, fracturing spot welds. And the late-released FCC grounding spring interfered with the older-revision drive cages, leaving the build regulatory non-compliant.
-- **Intervention:** Surgical sheet-metal relief slots and a four-hole rigidifying standoff pattern killed the PCB flex; a documented deviation let the pilot ship with the lid interference while corrected parts were expedited for the ramp; and the interfering springs were drilled out of the first 50 HDD assemblies — accepting, on the record, that those units would never retail.
-- **Result:** The pilot completed and was redeployed where it belonged: internal validation, safety/EMI engineering, marketing photography, and beta field trials — while the 300-unit ramp got clean parts.
+## Glow evidence boundary
 
-### 4. The Compliance Build: Closing the Faraday Cage
+The archive contains a dedicated Orpheus Glow-tuning presentation. Its extracted text identifies tuning resistor values and documents the PCB as constrained by the frame and inner panel. That is enough to retain Glow tuning as a design activity.
 
-- **Trigger:** Early EMI scans failed on chassis mating — lid-to-base gaps opened by chassis flex, insufficient PSU case grounding — while safety certification flagged the front USB port labeling and a PSU insulator that missed CSA overlap requirements on the wire side.
-- **Intervention:** Moved earth ground from the PSU case to a dedicated fan-tray mounting hole, sealed the top lip with conductive foam and copper gaskets, engineered drive-cartridge shielding and blanking plates, implemented the least-objectionable USB label inside the bezel recess, and fixed the insulator overlap — plus urgent PSU/fan arrangement drawings to support the vendor's own certification.
-- **Result:** Mechanical compliance engineered rather than negotiated — the Faraday cage closed, the safety findings cleared, the 31 dB acoustic target pursued through fan-cage isolation tuning.
+The current authoritative extract does not preserve the legacy 50-to-500-ohm change, 40x desensitization, 7-6-5-4-3 positional matrix, 60% visual-acceptance statement, or a shipped hardware-deterministic result. Those numbers and outcomes therefore remain outside the candidate.
 
-### 5. The Revision Mismatch
+## First article and manufacturing state
 
-- **Trigger:** A lid that wouldn't latch traced not to design but to configuration management: the fabricator built the chassis base at Rev 7 and the fan tray at Rev 5, stacking 0.005–0.020" of built-in interference.
-- **Intervention:** Cross-referenced the fabrication drawings against the physical parts to prove the mismatch, bent the interfering return clear as field triage, and tightened revision control with the vendor.
-- **Result:** A stop-ship bypassed in hours and a process lesson recorded: version control failures wear mechanical disguises.
+The mechanical FAI procedure lists Erik Norris as author of its draft and initial peer-review release. In the Orpheus sample records, Erik is named as originator for:
 
-## III. Governance & Rhythm
+- fan mounts: 10 received, 10 inspected, 0 rejected;
+- AC-tunnel parts: 18 received, 17 inspected, 0 rejected.
 
-- **The Pulse:** High-frequency "Glow Powwows" and "Megalon Powwows" across engineering, ID, and operations; Arena PLM for BOMs, Windchill for CAD, 8-day-ARO machined heatsink prototypes for thermal validation ahead of hard tooling — and cost discipline down to a $0.38/unit thermal-package saving accepted over a larger one to preserve single-source warranty coverage on the motherboard vendor.
-- **The Artifacts:** The 300-piece proposed rev-run worksheet; the Rev 11 base presentation; the first-draft mechanical schedule; the pilot deviation records.
+Those are bounded part-sample facts. They do not prove whole-product yield, production qualification, or regulatory compliance.
 
-## IV. Quantified Impact
+The supplier NPI packet contains a 50-piece first-lot ramp row while mass production remains a later state in the tracker. This supports pilot/ramp preparation and the 'validation' lifecycle classification. It does not establish a completed 300-unit ramp, series production, an 800,000-unit annual application, or shipment.
 
-- **Increased** paint-masking throughput 566% (3 to 20 pieces/hour) via fixture development.
-- **Stabilized** the Glow signature through a 40x resistor desensitization and positional dimming matrix.
-- **Recovered** a 20% pilot PCB fallout via relief slots and rigidifying standoffs.
-- **Salvaged** the 50-unit pilot through three simultaneous stop-ship conditions with documented deviations.
-- **Engineered** FCC/CSA mechanical compliance: grounding pivot, gasketed lid, shielding, insulator fix.
-- **Managed** mechanical architecture against an 800,000 unit/year application target.
+## Compliance and outcome boundary
 
-## V. Source Trail
+EMI gaskets, grounding, shielding, and related prototype actions appear throughout the BOM and mechanical status records. Component datasheets and later adjacent-product launch material also contain compliance language. No curated KSYSTEM-120 whole-product test report establishes an Erik-owned FCC, CSA, acoustic, or thermal pass, so none is claimed.
 
-The claims above rest on the project's primary evidence archive — build photography, rev-run worksheets, and powwow records — compiled through the NotebookLM forensic registry:
+Likewise, the local primary record does not substantiate the legacy 3-to-20-unit paint-masking result, 566% throughput increase, 20% PCB-fallout recovery, three simultaneous stop-ships, hammered-lid shipment, drilled-out grounding springs, Rev 5/Rev 7 mismatch, or $0.38-per-unit thermal decision.
 
-- `PROPOSED REV RUN ORPHEUS (300pzs).xls` — the production ramp worksheet.
-- `501-1092-00_REV_11 PRESENTATION.ppt` — the chassis base revision record.
-- `Orpheus Mechanical schedule -- first draft.pdf` — the NPI schedule.
-- `image001.jpg` / `Wud_18_straight_on_final.jpg` — Glow failure and fix verification photography.
-- `DSCF3842.JPG` — fastener evidence; `orph_drive_1.jpg` — drive rail validation.
-- `2MJ-15~1.PDF` — the "will this fit" interference check.
+## Cross-program partition
+
+All eleven transformed spreadsheet sources were resolved or placed in explicit payload-only lineage. Ares, Atlas, Megalon, Vesta, Mercury, and the Mercury rack-kit 'shelf_mini-sched' are excluded. The Cinema One launch packet is also excluded from outcome claims because this record does not explicitly establish that product-lineage mapping.
+
+All 66 notebook sources are locally accounted for through archive matches, preserved payloads, or an explicit multi-candidate disposition. All 26 notes and all 11 Studio records are preserved locally or in metadata; nine of nine audio artifacts are downloaded. Notes, generated reports, audio, the data table, and flashcards remain research leads rather than public claim authority.
+
+## Quantified evidence
+
+- **Bounded** the project vault to 81 hash-verified rows within the broader Orpheus corpus.
+- **Accounted** for 66 sources, 26 notes, and 11 Studio records without cloud mutation.
+- **Authored** the mechanical FAI procedure's draft and initial peer-review release.
+- **Recorded** zero rejected samples among 10 inspected fan mounts and 17 inspected AC tunnels.
+- **Distinguished** a 50-piece first-lot ramp plan from still-later mass-production status.
+
+## Source trail
+
+- '03_Engineering_BOM-CoGs-etc.pdf' - Orpheus/KSYSTEM-120 BOM, assembly, revision, and interface identity.
+- '03_Engineering_FAIs.pdf' - mechanical FAI procedure, originator attribution, and bounded sample results.
+- '03_Engineering_glow-tuning.pdf' - Glow tuning and mechanical-constraint context.
+- '03_Engineering_metal-parts.pdf' - sheet-metal, supplier NPI, first-lot, and mass-production-state records.
+- '03_Engineering_plastic-parts.pdf' - Orpheus plastic assemblies, partitioned from adjacent Mercury content.
+- '03_Engineering_status.pdf' - dated mechanical status, action, schedule, and role evidence.
+- '03_Engineering_artwork.pdf' - explicit KSYSTEM-120 rear-label layout.
