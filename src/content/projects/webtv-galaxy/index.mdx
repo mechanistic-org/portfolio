@@ -6,37 +6,37 @@ category: home_entertainment
 client:
 - microsoft
 - webtv
-date: 2001-03-05 00:00:00+00:00
-description: The "Missing Link" between WebTV and Xbox. A 150W thermal crisis that forced the evolution of the living room console.
+date: 2001-01-01 12:00:00+00:00
+description: A planned WebTV HomeNet gateway with three tuners and dual-drive DVR storage, developed through modeled 150 W thermal and detailed DEV assembly constraints.
 draft: false
-duration: 1.5 Years
 employer: mechanistic
-endDate: 2002-03-18 00:00:00+00:00
 forensic_metrics:
-  financial: $14,200/month solo-consultant burn rate across three concurrent programs; 4-day quick-turn fabrication cycles through a vendor's company-wide shutdown.
-  process: 150 W dissipated at 45°C ambient via a 300 mm directed airflow tunnel (28.3 CFM); CPU held at 84.0°C, drives at 52.8°C; base-pan stamping yield rescued via Hook 29 stress relief.
-  governance: Weekly Mechanical Design Hitlist killed 30+ gating defects per prototype cycle; centralized FTP master replaced '14 different ways' of file transfer.
+  financial: One April 20, 2001 invoice documents $14,200 for 142 hours of Galaxy support from March 7 through April 20.
+  process: A 150 W, 45°C ambient simulation reported 28.3 CFM, 84.0°C CPU junction, 52.8°C hard-drive case temperature, and 55.0°C air near the smart-card reader.
+  governance: An independent mechanical-design and Pro/ENGINEER assignment operated under WebTV direction inside a cross-functional product-development program.
 forensic_summary:
-  trigger: 'Desktop-class silicon in a set-top box: a 150 W load spiking the CPU to 84.0°C, cooking the Smart Card reader at 55.0°C, warping the stamped base pan, and deadlocking the pre-assembled CPU module against the chassis air partition.'
-  intervention: Expanded the chassis to a 300 mm directed airflow tunnel with hexagonal EMI venting, migrated the Smart Card reader upstream, adopted Hook 29 stress-relief forms for the base, and decomposed the CPU puck into an in-situ clam-shell with continuous EMI flanges.
-  result: Every engineering hurdle cleared — the program died by strategy, not physics, consolidating into Microsoft's Xbox group in January 2002 and carrying its 150 W lessons with it.
+  trigger: A planned triple-tuner, dual-drive HomeNet gateway combined a dense architecture with a 150 W thermal model and unresolved DEV assembly and shielding issues.
+  intervention: Developed the mechanical layout and Pro/ENGINEER documentation, evaluated the 300 mm airflow model, and drove CPU assembly, EMI-flange, chassis-stiffness, and component-placement actions through the hitlist.
+  result: The surviving record establishes a detailed prototype and DEV candidate, but does not establish shipment, cancellation, production validation, or a causal transfer into Xbox.
 heroImage: /assets/webtv-galaxy/webtv-galaxy-hero-01-xl.webp
 industry: consumer_electronics
+job_title: mechanical_engineer
 production: prototype
 productionScale: one_off
 tags:
 - Crisis
 - Leadership
-- Yield
+- Mechanism
 theme: hyperspace
 tools:
 - pro_engineer
 - thermal_simulation
-teamSize: INT 5
+teamSize: Cross-functional
 cyberspace:
   layout: linear
   stickies:
-  - data:
+  - caption: Early industrial-design views establish the planned set-top-box form. They do not establish mechanical authorship, shipment, or program outcome.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -52,7 +52,8 @@ cyberspace:
     type: gallery
     title: Early Id
     deck: []
-  - data:
+  - caption: Dual-drive packaging views provide architecture context for the planned DVR function; the performance and thermal claims remain grounded in the reviewed records.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -68,7 +69,8 @@ cyberspace:
     type: gallery
     title: Architecture
     deck: []
-  - data:
+  - caption: CPU subsystem views show the packaging context behind the in-parts assembly direction. They do not prove completed EMI containment.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -87,7 +89,8 @@ cyberspace:
     type: gallery
     title: Cpu
     deck: []
-  - data:
+  - caption: Drive-bracket views illustrate the dual-storage package evaluated by the thermal model; they are not production-validation evidence.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -103,7 +106,8 @@ cyberspace:
     type: gallery
     title: Hdd
     deck: []
-  - data:
+  - caption: Base and forming images show open manufacturability questions. The former Hook 29 yield-rescue story is not inferred from these images.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -122,7 +126,8 @@ cyberspace:
     type: gallery
     title: Metal
     deck: []
-  - data:
+  - caption: Thermal-model views accompany the documented simulation inputs and results. They are analytical artifacts, not measured production performance.
+    data:
       columns: 3
       layout: masonry
       scattered: true
@@ -143,68 +148,58 @@ cyberspace:
     deck: []
 ---
 
-# WebTV Galaxy Forensic Report
+# WebTV Galaxy
 
-## I. Project Summary
+## Project summary
 
-- **Role:** Principal Mechanical Architect / Proprietor (Mechanistic), operating as the project's entire external mechanical engineering department.
-- **Mandate:** Architect the physical form of the "Galaxy" Home Network Gateway — desktop-class computing (an AMD K7 "Thunderbird," a triple satellite-tuner array, dual hard drives) inside a consumer set-top-box envelope.
-- **Core Achievement:** Dissipated a 150 W thermal load at 45°C ambient inside a sealed EMI enclosure, cleared every mechanical yield blocker — and handed Microsoft a thermal live-fire education that fed directly into the Xbox program when the strategy pivoted.
+- **Role boundary:** Independent mechanical-design consultant responsible for mechanical design and Pro/ENGINEER documentation under WebTV direction. Industrial design, thermal analysis, electronics, fabrication, program management, and the wider product outcome remained cross-functional responsibilities.
+- **Mandate:** Develop the mechanical package for the planned Galaxy Home Network gateway, whose requirements included three satellite tuners, dual hard drives for DVR storage, HDTV output, and picture-in-picture operation.
+- **Evidence-bounded result:** The record documents a detailed prototype and DEV candidate with an evaluated thermal model and an active mechanical hitlist. It does not establish shipment, cancellation, production validation, or a causal transfer into Xbox.
 
-## II. The Anatomy of Failure
+## Thermal model
 
-### 1. Thermal Crisis: The 150 W Wall
+The April 23, 2001 consultant record reports a simulation run at 150 W total power, 45°C ambient, and 300 mm enclosure depth. With the modeled fan at 2700 RPM and 28.3 CFM, it reported an 84.0°C CPU junction, an 89.3°C Nemo device temperature, a 52.8°C hard-drive case temperature, and 55.0°C air near the smart-card reader.
 
-- **Trigger:** The architecture aggregated a 150 W total power load in a sealed EMI cage — a density legacy "Mercury" chassis could not survive. CFD simulation (Applied Thermal Technologies) showed CPU junction temperatures spiking to 84.0°C and a stagnant "dead zone" cooking the Smart Card reader at 55.0°C — the absolute limit before the user's media warps.
-- **Intervention:** Expanded the chassis depth to 300 mm purely to create a directed airflow tunnel: intake washing the dual hard drives first, a drive bracket doubling as a structural air partition to kill recirculation, a 50×60×30 mm extruded heatsink on the K7, and a Delta fan at 2700 RPM driving 28.3 CFM. The Smart Card reader migrated upstream to the inlet. Round vents gave way to a 12.5 mm hexagonal pattern — maximum open area within the Faraday cage's wavelength threshold.
-- **Result:** CPU stabilized at 84.0°C, hard drives at 52.8°C — survival, but brinkmanship: the budget Fireball drives ran at 96% of their 55°C rating, and the cooling cost 37 dB of acoustic floor in a living-room product. The physics held; the silence didn't.
+Those values are simulation inputs and results, not measured production performance. The Fireball lct20 datasheet lists a 55°C operating maximum, which makes the modeled 52.8°C drive case temperature a narrow analytical comparison rather than proof of production margin. The fan's 37 dB value is a component specification, not a measured system acoustic floor. Moving the smart-card reader closer to the inlet remained a recommendation in the reviewed record; no later closure record proves the move was completed.
 
-### 2. Yield Crisis: The Warping Base
+## CPU assembly and EMI direction
 
-- **Trigger:** The 0.91 mm cold-rolled steel base pan specified dense "drawn standoffs" for motherboard mounting. The stamping stress accumulated instead of dissipating, and the bases warped and twisted on ejection — fatal for automated PCB assembly. Fabricator D&D Manufacturing rejected the design outright.
-- **Intervention:** Adopted the vendor's "Hook 29" lanced-form detail in place of drawn standoffs — cutting and bridging the steel breaks the sheet's surface tension and relieves the stress — and added embossed stiffening ribs to restore rigidity under the 150 W stack's component mass.
-- **Result:** Flat bases at production stamping rates, traded against small lanced openings in the chassis floor — an accepted exposure documented with the vendor.
+The July 27 DEV hitlist records CPU fasteners near a fixed partition and states that the CPU subsystem could not be dropped into the main assembly as a preassembled unit. Its required direction was an assembly built in parts. The same packet calls for EMI flanges all around and a better seal.
 
-### 3. Assembly Crisis: The Impossible Puck
+That evidence supports an assembly and shielding direction, not a verified endpoint. The page therefore does not claim completed 360-degree containment or a passed emissions result.
 
-- **Trigger:** The CPU subsystem was conceived as a sealed, pre-assembled "puck" that dropped into the chassis as one unit. During the DEV build it deadlocked: fastener locations collided with the fixed air partition, and the module physically could not be installed.
-- **Intervention:** Decomposed the puck into a clam-shell built in-situ — bottom shield first, then PCB and the heatsink stack, then the heavy-gauge top cover locking the assembly. Replaced the original grounding tabs with continuous EMI flanges for true 360-degree contact with the board's grounding ring.
-- **Result:** A buildable, serviceable module with verified Faraday containment — recovered without moving the air partition the thermal solution depended on.
+## Chassis and manufacturability
 
-### 4. Governance Crisis: Fourteen Ways to Lose a File
+The surviving metal-parts packet proposes standoffs instead of dome forms, while the hitlist says base stiffening still required review and records other geometry as unresolved. It does not contain the former public story that named "Hook 29" forms, established a warped-base rescue, or proved flat parts at production stamping rates. Those claims have been retired rather than inferred from incomplete manufacturing discussion.
 
-- **Trigger:** The distributed team (WebTV, Mechanistic, the fabricator, the ID firm) was exchanging engineering data "14 different ways," leaving the database unmanageable — while the sheet-metal vendor, E-M Solutions, hit a company-wide shutdown that threatened the prototype schedule.
-- **Intervention:** Enforced a centralized FTP hub as the single source of truth for the Pro/E master assembly, ran a weekly "Mechanical Design Hitlist" that tracked and killed blocking defects by name, and coordinated 4-day quick-turn fabrication cycles directly with the vendor's NPI manager to bypass the paralysis.
-- **Result:** 30+ gating defects resolved per prototype cycle, five-plus functional prototype releases across the program family, schedule preserved through a vendor collapse.
+## Governance and evidence
 
-### 5. The Termination: Strategy, Not Physics
+The proposal defines Mechanistic as an independent contractor providing product-development and technical-consulting support, with a specific scope for mechanical design and Pro/ENGINEER documentation. It also places that work under WebTV direction and describes industrial design as a separate input. The dated hitlist distributes actions across a broader program team, reinforcing a cross-functional role boundary.
 
-- **Trigger:** The engineering hurdles were cleared — and then Microsoft chose the console. By early 2002 the verdict was on paper: the gaming platform, not the cable-TV box, would carry the living-room strategy, and the company would not subsidize gateway hardware the way cable operators did.
-- **Intervention:** On January 24, 2002 the UltimateTV mechanical effort consolidated into Microsoft's eHome group — the Xbox hardware division. A brief "Mercury LC / MiniMerc" cost-down zombie phase was abandoned. By March 18, 2002 the Mechanistic invoicing had switched explicitly to "xbox redesign work": EMI liner simplification, a bridge-type DVD/HDD carrier, stamping-yield cost reductions on the top cover.
-- **Result:** Galaxy never shipped — but its 150 W lessons (directed tunnels, dense-chassis EMI venting, storage thermal margins) were immediately weaponized inside the same building, on the console that did.
+One April 20, 2001 invoice documents 142 hours of Galaxy support from March 7 through April 20 at $100 per hour, for a total of $14,200. It is one bounded invoice, not evidence of a recurring monthly burn rate or an allocation across three programs.
 
-## III. Governance & Rhythm
+NotebookLM remains a research surface rather than publication authority. The dated local reconciliation accounts for all 35 sources, 34 notes, and 23 Studio audio artifacts. Ten audio records contain attribution-biased instructions, and none is used as claim authority. The reconstruction explicitly unions the 91-row declared `webtv_galaxy` archive with the 27-row dedicated `2001_WebTV_Receiver_galaxy` archive; neither silently supersedes the other.
 
-- **The Pulse:** A solo-consultant "mercenary rhythm" — weekly hitlists, Thursday design reviews, daily master-assembly synchronization against board-layout changes, at a $14,200/month engineering burn rate spanning Galaxy, Mercury, and Xbox deliverables.
-- **The Artifacts:** The Galaxy Mechanical Design Hitlist (a living punch list: "SPDIF connector location wrong," "chassis ground contact," "thermal partition"); the CFD simulation reports validating the 150 W strategy; the Pro/E master assembly (GALAXY.ASM) under FTP version control; the mechanical BOM co-developed with WebTV release engineering into the Agile system.
+## Program outcome and Xbox boundary
 
-## IV. Quantified Impact
+The reviewed Galaxy packet does not establish that the product shipped, that every hurdle closed, why the program ended, or an exact end date. It also does not document a technical handoff that made Galaxy the missing link to Xbox, saved Xbox, or transferred Galaxy's thermal architecture into that program. The records show company and planning adjacency. Adjacency is not causation, and later Xbox redesign work belongs to its own evidence scope.
 
-- **Dissipated** a 150 W total thermal load at 45°C ambient inside a sealed EMI enclosure.
-- **Held** CPU junction temperature to 84.0°C and hard-drive case temperature to 52.8°C via a 28.3 CFM directed airflow tunnel.
-- **Rescued** base-pan stamping yield by replacing drawn standoffs with stress-relieving Hook 29 forms plus structural ribs.
-- **Resolved** 30+ critical gating defects per prototype cycle through hitlist engineering audits.
-- **Coordinated** 4-day quick-turn fabrication through a vendor's company-wide shutdown.
-- **Managed** a $14,200/month engineering burn rate as a solo consultant across three concurrent programs.
-- **Released** mechanical design for five-plus functional prototypes before the strategic termination.
+## Quantified evidence
 
-## V. Source Trail
+- **Modeled** a 150 W total load at 45°C ambient in a 300 mm enclosure.
+- **Reported** 28.3 CFM, 84.0°C CPU junction, 52.8°C hard-drive case temperature, and 55.0°C air near the smart-card reader in that simulation.
+- **Documented** a DEV assembly direction that built the CPU subsystem in parts around a fixed partition.
+- **Tracked** all-around EMI-flange, seal, chassis-stiffness, and component-placement actions without converting them into unrecorded closures.
+- **Invoiced** $14,200 for 142 Galaxy support hours in one bounded March 7 to April 20 period.
 
-The claims above rest on the project's primary evidence archive — CFD reports, QA redlines, hitlists, and invoices — compiled through the NotebookLM forensic registry:
+## Source trail
 
-- `model-iso.jpg` / `tempxz.jpg` / `velxz.jpg` — CFD thermal simulation maps of the 150 W load distribution.
-- `Galaxy Mechanical Design Hitlist 7-27.doc` — the defect-tracking governance artifact.
-- `Base_Proto_Deviations.jpg` — QA redlines of the manufacturing defects, including the warping base.
-- `cpu_06_26_01.zip` — the Pro/E master assembly of the CPU puck.
-- Maxtor/Quantum Fireball lct20 datasheet — the 55°C drive rating behind the 2.2°C thermal margin.
-- `xbo_wni_001.xls` — the March 18, 2002 invoice documenting the pivot to Xbox redesign work.
+- `galaxy_proposal_04_5_01` - independent-contractor scope, mechanical-design mandate, and planned product architecture.
+- `03_Engineering_thermal` - April 2001 thermal consultant record and modeled values.
+- `03_Engineering_status` - dated mechanical hitlists, assignments, and unresolved DEV actions.
+- `03_Engineering_metal-parts` - chassis and base manufacturing discussion.
+- `03_Engineering_CPU` - CPU subsystem mechanical packet.
+- `03_Engineering_architecture` - system requirements and mechanical architecture.
+- `03_Engineering_HDDs` - dual-drive packaging packet.
+- `fireball_lct20_datasheet` - hard-drive operating-temperature specification.
+- `Galaxy_Invoices` - April 20, 2001 Galaxy support invoice.
