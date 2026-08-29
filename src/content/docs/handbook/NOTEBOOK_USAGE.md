@@ -8,6 +8,13 @@ sidebar:
 
 # NotebookLM Mining Guide (v3.0)
 
+> **Status: Superseded historical reference. Do not follow the sidecar workflow
+> below.** Current authority and custody rules live in
+> `D:\GitHub\portfolio-canon\NOTEBOOKLM_MIGRATION_SOP.md` and
+> `D:\GitHub\portfolio-canon\DEEP_DIVE_SOP.md`. NotebookLM output is not canon;
+> reviewed claims enter `portfolio-canon`, local supporting material enters
+> `portfolio-evidence`, and site MDX is generated rather than hand-edited.
+
 **Role:** Operator manual for schema-first NotebookLM mining.
 **Tool:** Google NotebookLM.
 

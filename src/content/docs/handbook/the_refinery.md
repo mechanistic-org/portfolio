@@ -8,6 +8,13 @@ description: 'Documentation for The Refinery: Asset & Content Sovereignty.'
 ---
 # The Refinery: Asset & Content Sovereignty
 
+> **Status: Superseded historical reference. Do not follow the procedures below.**
+> Current authority is the repository `CLAUDE.md`, `D:\GitHub\portfolio-canon\README.md`,
+> `D:\GitHub\portfolio-canon\DEEP_DIVE_SOP.md`, and
+> `D:\GitHub\portfolio-canon\SLUG_MIGRATION_SOP.md`. Canon is the publishing
+> authority, `portfolio-evidence` is local custody, `project_pipeline.py` is the
+> only project-page writer, and generated site MDX is read-only.
+
 > **Role:** The Archivist / The Data God
 > **Objective:** Manage the definitive source of truth for Content (`src/content.config.ts` over MDX) and Assets (R2_MASTER).
 
