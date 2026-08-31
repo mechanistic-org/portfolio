@@ -8,6 +8,9 @@
 #
 # Keep in sync with the sitemap filter in astro.config.mjs.
 
+/_astro/*
+  Cache-Control: public, must-revalidate, max-age=14400
+
 /meta/*
   X-Robots-Tag: noindex, nofollow
 
