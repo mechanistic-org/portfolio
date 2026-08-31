@@ -20,6 +20,11 @@ import {
 } from "../../stores/hxoStore";
 import { HXO_TOUR_STEPS, type HxoTourStep } from "../../config/hxoTour";
 import SonicHeartbeat from "../Audio/SonicHeartbeat";
+import {
+	deriveFocusedConstellation,
+	type FocusedConstellation,
+	type ProjectRelationship,
+} from "../../utils/deriveFocusedConstellation";
 
 interface ConsoleProject {
 	id: string;
@@ -81,6 +86,7 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { has
 
 interface HXOConsoleProps {
 	projects: ConsoleProject[];
+	relationships: ProjectRelationship[];
 }
 
 const TIER_RANK: Record<string, number> = { deep_dive: 0, lite: 1 };
@@ -134,7 +140,7 @@ function sortProjects(projects: ConsoleProject[]) {
 		.map(({ project }) => project);
 }
 
-export default function HXOConsole({ projects }: HXOConsoleProps) {
+export default function HXOConsole({ projects, relationships }: HXOConsoleProps) {
 	const currentPinnedId = useStore(pinnedId);
 	const currentFocusId = useStore(focusId);
 	const currentViewerId = useStore(viewerId);
@@ -143,6 +149,19 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 	const [isHydrated, setIsHydrated] = useState(false);
 	const [urlStateReady, setUrlStateReady] = useState(false);
 	const activeProject = projects.find((project) => project.id === currentViewerId);
+	const projectById = useMemo(
+		() => new Map(projects.map((project) => [project.id, project])),
+		[projects],
+	);
+	const focusedConstellation = useMemo(
+		() =>
+			deriveFocusedConstellation({
+				relationships,
+				projectIds: projectById.keys(),
+				focusId: currentFocusId,
+			}),
+		[currentFocusId, projectById, relationships],
+	);
 	const tourSteps = useMemo<readonly HxoTourStep[]>(() => {
 		const projectIds = new Set(projects.map((project) => project.id));
 		const stepIds = new Set(HXO_TOUR_STEPS.map((step) => step.id));
@@ -367,7 +386,17 @@ export default function HXOConsole({ projects }: HXOConsoleProps) {
 					data-viewer-id={activeProject?.id ?? "orientation"}
 					className={`custom-scrollbar shrink-0 overflow-y-auto border-b border-zinc-800 bg-zinc-900/10 p-6 ${currentTourStep ? "h-[48%] pt-[5.5rem] lg:pt-6" : "h-[62%]"}`}
 				>
-					{activeProject ? <ActiveSovereignView project={activeProject} /> : <DefaultSummary />}
+					{activeProject ? (
+						<ActiveSovereignView
+							project={activeProject}
+							projectById={projectById}
+							constellation={
+								focusedConstellation.focusId === activeProject.id ? focusedConstellation : null
+							}
+						/>
+					) : (
+						<DefaultSummary />
+					)}
 				</div>
 
 				<div className="flex flex-1 flex-col overflow-hidden">
@@ -541,7 +570,19 @@ function TourChapter({
 	);
 }
 
-function ActiveSovereignView({ project }: { project: ConsoleProject }) {
+function formatRelationshipKind(kind: ProjectRelationship["kind"]) {
+	return kind.replaceAll("_", " ");
+}
+
+function ActiveSovereignView({
+	project,
+	projectById,
+	constellation,
+}: {
+	project: ConsoleProject;
+	projectById: Map<string, ConsoleProject>;
+	constellation: FocusedConstellation | null;
+}) {
 	if (!project || !project.data) return <div className="p-4 text-red-500">CORRUPT DATA</div>;
 
 	const { title, date, client, forensic_summary, audio_url, toolchain } = project.data;
@@ -644,15 +685,75 @@ function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 						))}
 					</div>
 				)}
-			</div>
 
-			<div className="mt-8 border-t border-zinc-900 pt-4">
-				<a
-					href={`/projects/${project.id}/`}
-					className="flex items-center gap-2 font-mono text-xs tracking-widest text-lime-400 uppercase transition-colors hover:text-white"
-				>
-					Open Full Dossier →
-				</a>
+				<div className="mt-8 border-t border-zinc-900 pt-4">
+					<a
+						href={`/projects/${project.id}/`}
+						className="flex items-center gap-2 font-mono text-xs tracking-widest text-lime-400 uppercase transition-colors hover:text-white"
+					>
+						Open Full Dossier →
+					</a>
+				</div>
+
+				{constellation && (
+					<section
+						aria-labelledby={`focused-constellation-${project.id}`}
+						className="border-t border-cyan-950/80 pt-4"
+						data-relationship-list
+						data-focus-id={project.id}
+						data-relationship-count={constellation.relationships.length}
+					>
+						<div className="mb-3 flex items-center justify-between gap-3">
+							<h3
+								id={`focused-constellation-${project.id}`}
+								className="font-mono text-xs tracking-[0.16em] text-cyan-400 uppercase"
+							>
+								Focused constellation
+							</h3>
+							<span className="font-mono text-[10px] text-zinc-600">
+								{constellation.relationships.length} verified
+							</span>
+						</div>
+						{constellation.relationships.length > 0 ? (
+							<ul className="m-0 space-y-3 p-0">
+								{constellation.relationships.map((relationship) => {
+									const relatedProject = projectById.get(relationship.relatedProjectId);
+									const sourceTitle =
+										projectById.get(relationship.source)?.data.title ?? relationship.source;
+									const targetTitle =
+										projectById.get(relationship.target)?.data.title ?? relationship.target;
+									return (
+										<li
+											key={relationship.edge_key}
+											className="list-none rounded border border-cyan-950/80 bg-cyan-950/10 p-3"
+											data-edge-key={relationship.edge_key}
+											data-kind={relationship.kind}
+											data-related-project-id={relationship.relatedProjectId}
+										>
+											<p className="font-mono text-[9px] tracking-[0.14em] text-cyan-500 uppercase">
+												{formatRelationshipKind(relationship.kind)} · {sourceTitle} → {targetTitle}
+											</p>
+											<p className="mt-1.5 text-xs leading-relaxed text-zinc-300" data-public-claim>
+												{relationship.public_claim}
+											</p>
+											<a
+												href={`/projects/${relationship.relatedProjectId}/`}
+												className="mt-2 inline-flex font-mono text-[10px] tracking-wider text-cyan-300 uppercase transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
+												data-related-project-link
+											>
+												Open {relatedProject?.data.title ?? relationship.relatedProjectId} →
+											</a>
+										</li>
+									);
+								})}
+							</ul>
+						) : (
+							<p className="text-xs leading-relaxed text-zinc-500" data-no-verified-relationships>
+								No verified direct relationships recorded.
+							</p>
+						)}
+					</section>
+				)}
 			</div>
 		</article>
 	);

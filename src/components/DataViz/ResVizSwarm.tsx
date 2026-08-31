@@ -3,6 +3,11 @@ import * as d3 from "d3";
 import type { MultiverseNode } from "@/types/MultiverseTypes";
 import { getEntityColor } from "../../config/color_registry";
 import type { HxoLens } from "../../stores/hxoStore";
+import {
+	deriveFocusedConstellation,
+	type FocusedProjectRelationship,
+	type ProjectRelationship,
+} from "../../utils/deriveFocusedConstellation";
 
 interface NodeData extends d3.SimulationNodeDatum {
 	id: string;
@@ -22,6 +27,7 @@ interface NodeData extends d3.SimulationNodeDatum {
 
 interface ResVizSwarmProps {
 	nodes: MultiverseNode[];
+	relationships: ProjectRelationship[];
 	lens: HxoLens;
 	onNodeSelect?: (node: NodeData | null) => void;
 	onNodeClick?: (node: NodeData | null) => void;
@@ -37,6 +43,15 @@ const RESPONSIVE_TOP_GUTTER = 240;
 const RESPONSIVE_BOTTOM_GUTTER = 80;
 const RESPONSIVE_NODE_GAP = 6;
 const GROUP_LABEL_OFFSET = 36;
+
+function relationshipDash(kind: ProjectRelationship["kind"]) {
+	if (kind === "successor_of") return "8 4";
+	if (kind === "derived_from") return "5 4";
+	if (kind === "variant_of") return "2 4";
+	if (kind === "shares_platform_with") return "10 3 2 3";
+	if (kind === "method_transfer_from") return "1 4";
+	return null;
+}
 
 interface LensGroupDescriptor {
 	id: string;
@@ -169,6 +184,7 @@ function getLensGroups(
 
 export default function ResVizSwarm({
 	nodes: rawNodes,
+	relationships,
 	lens,
 	onNodeSelect,
 	onNodeClick,
@@ -341,8 +357,8 @@ export default function ResVizSwarm({
 		feMerge.append("feMergeNode").attr("in", "coloredBlur");
 		feMerge.append("feMergeNode").attr("in", "SourceGraphic");
 
-		// Keep the layer order explicit even while the relationship layer is intentionally empty.
-		svg.append("g").attr("class", "links");
+		// Relationship paths stay behind nodes; semantics live in the console.
+		const linkLayer = svg.append("g").attr("class", "links").attr("aria-hidden", "true");
 		const nodeLayer = svg.append("g").attr("class", "nodes");
 		const lensLabelLayer = svg.append("g").attr("class", "lens-labels pointer-events-none");
 		const labelLayer = svg.append("g").attr("class", "labels");
@@ -412,10 +428,64 @@ export default function ResVizSwarm({
 				.style("opacity", REST_OPACITY);
 		};
 
+		const nodeById = new Map(nodes.map((node) => [node.id, node]));
+		const renderRelationshipPositions = () => {
+			linkLayer
+				.selectAll<SVGPathElement, FocusedProjectRelationship>("path.relationship-link")
+				.attr("d", (relationship) => {
+					const source = nodeById.get(relationship.source);
+					const target = nodeById.get(relationship.target);
+					if (!source || !target) return null;
+					const sourceX = source.x ?? width / 2;
+					const sourceY = source.y ?? height / 2;
+					const targetX = target.x ?? width / 2;
+					const targetY = target.y ?? height / 2;
+					const dx = targetX - sourceX;
+					const dy = targetY - sourceY;
+					const distance = Math.max(1, Math.hypot(dx, dy));
+					const bend = Math.min(72, Math.max(20, distance * 0.14));
+					const direction = relationship.edge_key.length % 2 === 0 ? 1 : -1;
+					const controlX = (sourceX + targetX) / 2 + (-dy / distance) * bend * direction;
+					const controlY = (sourceY + targetY) / 2 + (dx / distance) * bend * direction;
+					return `M${sourceX},${sourceY} Q${controlX},${controlY} ${targetX},${targetY}`;
+				});
+		};
+
 		const updateVisuals = (requestedFocusId: string | null) => {
 			const focusId = nodes.some((node) => node.id === requestedFocusId) ? requestedFocusId : null;
 			const focusNode = nodes.find((node) => node.id === focusId);
 			const focusGroup = focusNode ? getLensGroup(focusNode, lens) : null;
+			const constellation = deriveFocusedConstellation({
+				relationships,
+				projectIds: nodeById.keys(),
+				focusId,
+			});
+			const relatedIds = new Set(
+				constellation.relationships.map((relationship) => relationship.relatedProjectId),
+			);
+
+			linkLayer
+				.selectAll<SVGPathElement, FocusedProjectRelationship>("path.relationship-link")
+				.data(constellation.relationships, (relationship) => relationship.edge_key)
+				.join(
+					(enter) =>
+						enter
+							.append("path")
+							.attr("class", "relationship-link pointer-events-none")
+							.attr("fill", "none")
+							.attr("vector-effect", "non-scaling-stroke")
+							.attr("stroke", "rgba(34,211,238,0.78)")
+							.attr("stroke-width", 2)
+							.style("filter", "drop-shadow(0 0 4px rgba(34,211,238,0.35))"),
+					(update) => update,
+					(exit) => exit.remove(),
+				)
+				.attr("data-edge-key", (relationship) => relationship.edge_key)
+				.attr("data-source", (relationship) => relationship.source)
+				.attr("data-target", (relationship) => relationship.target)
+				.attr("data-kind", (relationship) => relationship.kind)
+				.attr("stroke-dasharray", (relationship) => relationshipDash(relationship.kind));
+			renderRelationshipPositions();
 
 			nodeGroup.each(function (node) {
 				const circle = d3.select<SVGGElement, NodeData>(this).select<SVGCircleElement>("circle");
@@ -426,12 +496,16 @@ export default function ResVizSwarm({
 				}
 
 				const isTarget = node.id === focusId;
+				const isRelated = relatedIds.has(node.id);
 				const isCohort = focusGroup !== null && getLensGroup(node, lens) === focusGroup;
 				circle
-					.attr("stroke", isTarget ? "#ffffff" : "rgba(255,255,255,0.1)")
-					.attr("stroke-width", isTarget ? 4 : 1)
+					.attr(
+						"stroke",
+						isTarget ? "#ffffff" : isRelated ? "rgba(34,211,238,0.9)" : "rgba(255,255,255,0.1)",
+					)
+					.attr("stroke-width", isTarget ? 4 : isRelated ? 2 : 1)
 					.attr("filter", isTarget ? "drop-shadow(0 0 15px rgba(255,255,255,0.8))" : null)
-					.style("opacity", isTarget ? 1 : isCohort ? 0.5 : 0.08);
+					.style("opacity", isTarget ? 1 : isRelated ? 0.78 : isCohort ? 0.5 : 0.08);
 			});
 
 			label.style("opacity", (node) => (node.id === focusId ? 1 : 0));
@@ -449,6 +523,7 @@ export default function ResVizSwarm({
 			constrainNodes();
 			nodeGroup.attr("transform", (node) => `translate(${node.x},${node.y})`);
 			label.attr("x", (node) => node.x ?? 0).attr("y", (node) => node.y ?? 0);
+			renderRelationshipPositions();
 		};
 		renderPositionsRef.current = renderPositions;
 
@@ -557,7 +632,7 @@ export default function ResVizSwarm({
 			visualUpdaterRef.current = () => undefined;
 			renderPositionsRef.current = () => undefined;
 		};
-	}, [nodes, dimensions, lens, prefersReducedMotion, responsivePacking]);
+	}, [nodes, relationships, dimensions, lens, prefersReducedMotion, responsivePacking]);
 
 	return (
 		<div

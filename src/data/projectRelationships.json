@@ -1,0 +1,111 @@
+{
+  "schema_version": 2,
+  "portfolio_roster_sha256": "8d3bd549606061dc4f5271011020feb2fff9c1d3d9685f389b804f22fc0f0386",
+  "relationships": [
+    {
+      "edge_key": "backsplash::component_of::makeline",
+      "source": "backsplash",
+      "target": "makeline",
+      "kind": "component_of",
+      "public_claim": "The backsplash display was an integrated infrastructure component of Hyphen's makeline."
+    },
+    {
+      "edge_key": "digi-003::variant_of::rack-003",
+      "source": "digi-003",
+      "target": "rack-003",
+      "kind": "variant_of",
+      "public_claim": "Digi 003 and Digi 003 Rack were sibling interface variants, with the rack model omitting the control surface."
+    },
+    {
+      "edge_key": "disc-cartridges::component_of::ksystem-120",
+      "source": "disc-cartridges",
+      "target": "ksystem-120",
+      "kind": "component_of",
+      "public_claim": "Disk cartridges provided the expandable storage modules inside the KSYSTEM-120 Mini System."
+    },
+    {
+      "edge_key": "dispensers::component_of::makeline",
+      "source": "dispensers",
+      "target": "makeline",
+      "kind": "component_of",
+      "public_claim": "Hyphen's dispenser set was configured as part of each automated makeline."
+    },
+    {
+      "edge_key": "m300::shares_platform_with::m500",
+      "source": "m300",
+      "target": "m500",
+      "kind": "shares_platform_with",
+      "public_claim": "M300 and M500 were sibling players on Kaleidescape's named M-Class platform."
+    },
+    {
+      "edge_key": "mbox-2-mini::derived_from::mbox-2",
+      "source": "mbox-2-mini",
+      "target": "mbox-2",
+      "kind": "derived_from",
+      "public_claim": "Mbox 2 Mini adapted the standard Mbox 2 into a smaller, reduced-feature USB Pro Tools interface."
+    },
+    {
+      "edge_key": "mbox-2-pro::derived_from::mbox-2",
+      "source": "mbox-2-pro",
+      "target": "mbox-2",
+      "kind": "derived_from",
+      "public_claim": "Mbox 2 Pro adapted the Mbox 2 design around FireWire, higher sample rates, and expanded I/O."
+    },
+    {
+      "edge_key": "mbox-2::successor_of::mbox",
+      "source": "mbox-2",
+      "target": "mbox",
+      "kind": "successor_of",
+      "public_claim": "Mbox 2 succeeded the original Mbox, retaining its portable Pro Tools interface role while adding new I/O and controls."
+    },
+    {
+      "edge_key": "portion-cup::component_of::makeline",
+      "source": "portion-cup",
+      "target": "makeline",
+      "kind": "component_of",
+      "public_claim": "The portion-cup fill module was one of the configurable modules in Hyphen's makeline."
+    },
+    {
+      "edge_key": "rack-003::successor_of::rack-002",
+      "source": "rack-003",
+      "target": "rack-002",
+      "kind": "successor_of",
+      "public_claim": "Digi 003 Rack replaced Digi 002 Rack while retaining the rackmount Pro Tools LE interface role."
+    },
+    {
+      "edge_key": "remote::component_of::ksystem-120",
+      "source": "remote",
+      "target": "ksystem-120",
+      "kind": "component_of",
+      "public_claim": "The Kaleidescape remote was included as an input component of the KSYSTEM-120 Mini System."
+    },
+    {
+      "edge_key": "webtv-cortez::component_of::webtv-galaxy",
+      "source": "webtv-cortez",
+      "target": "webtv-galaxy",
+      "kind": "component_of",
+      "public_claim": "Cortez was specified as a wireless input device for the WebTV Galaxy gateway."
+    },
+    {
+      "edge_key": "webtv-galaxy::derived_from::webtv-mercury",
+      "source": "webtv-galaxy",
+      "target": "webtv-mercury",
+      "kind": "derived_from",
+      "public_claim": "WebTV Galaxy's gateway enclosure was specified as a design evolution related to Mercury."
+    },
+    {
+      "edge_key": "webtv-galaxy::shares_platform_with::xbox",
+      "source": "webtv-galaxy",
+      "target": "xbox",
+      "kind": "shares_platform_with",
+      "public_claim": "WebTV Galaxy and Xbox were both specified as devices on the named HomeNet platform."
+    },
+    {
+      "edge_key": "webtv-titan::component_of::webtv-galaxy",
+      "source": "webtv-titan",
+      "target": "webtv-galaxy",
+      "kind": "component_of",
+      "public_claim": "Titan was specified as a portal-node component of the WebTV Galaxy HomeNet system."
+    }
+  ]
+}
