@@ -12,8 +12,8 @@ import {
 
 const PAGE_TIMEOUT_MS = 45_000;
 const SETTLE_MS = 1_200;
-const EXPECTED_ASSERTIONS = 29;
-const EXPECTED_PROJECT_COUNT = 87;
+const EXPECTED_ASSERTIONS = 33;
+const EXPECTED_PROJECT_COUNT = 85;
 const EXPECTED_TOUR = [
 	{ id: "field", projectId: "c24", lens: "time" },
 	{ id: "cohorts", projectId: "sc48", lens: "employer" },
@@ -986,10 +986,383 @@ async function assertionRadiusClamp(page, problems) {
 
 async function assertionNoRelationshipLines(page, problems) {
 	await navigate(page, problems);
-	const lineCount = await page.$$eval("g.links line", (lines) => lines.length);
+	const lineCount = await page.$$eval("g.links [data-edge-key]", (lines) => lines.length);
 	if (lineCount !== 0)
 		throw new Error(`Relationship layer still renders ${lineCount} line elements`);
 	assertNoPageProblems(problems);
+}
+
+async function assertionFocusedRelationshipEdges(page, problems) {
+	await navigate(page, problems);
+	await waitForFontsAndSwarmReady(page);
+	await setSwarmMotion(page, "paused");
+	const focusId = "makeline";
+	const expectedEdgeKeys = [
+		"backsplash::component_of::makeline",
+		"dispensers::component_of::makeline",
+		"portion-cup::component_of::makeline",
+	];
+
+	const readEdges = () =>
+		page.$$eval("g.links [data-edge-key]", (edges) =>
+			edges
+				.map((edge) => ({
+					key: edge.getAttribute("data-edge-key"),
+					source: edge.getAttribute("data-source"),
+					target: edge.getAttribute("data-target"),
+					kind: edge.getAttribute("data-kind"),
+				}))
+				.sort((left, right) => left.key.localeCompare(right.key)),
+		);
+	const expectFocusedEdges = async (label) => {
+		await page.waitForFunction(
+			(expectedCount) =>
+				document.querySelectorAll("g.links [data-edge-key]").length === expectedCount,
+			{ timeout: 5_000 },
+			expectedEdgeKeys.length,
+		);
+		const edges = await readEdges();
+		if (JSON.stringify(edges.map(({ key }) => key)) !== JSON.stringify(expectedEdgeKeys)) {
+			throw new Error(`${label}: focused edge set drifted: ${JSON.stringify(edges)}`);
+		}
+		if (
+			edges.some(
+				(edge) =>
+					!edge.key ||
+					edge.kind !== "component_of" ||
+					(edge.source !== focusId && edge.target !== focusId),
+			)
+		) {
+			throw new Error(
+				`${label}: non-incident or malformed edge rendered: ${JSON.stringify(edges)}`,
+			);
+		}
+	};
+
+	await page.evaluate((projectId) => {
+		const button = document.querySelector(`button[data-id="${CSS.escape(projectId)}"]`);
+		button?.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
+	}, focusId);
+	await expectFocusedEdges("preview");
+
+	await page.evaluate((projectId) => {
+		const button = document.querySelector(`button[data-id="${CSS.escape(projectId)}"]`);
+		button?.dispatchEvent(new MouseEvent("mouseout", { bubbles: true }));
+	}, focusId);
+	await page.waitForFunction(
+		() => document.querySelectorAll("g.links [data-edge-key]").length === 0,
+		{ timeout: 5_000 },
+	);
+
+	await page.evaluate((projectId) => {
+		const button = document.querySelector(`button[data-id="${CSS.escape(projectId)}"]`);
+		button?.click();
+	}, focusId);
+	await expectFocusedEdges("pin");
+	await page.keyboard.press("Escape");
+	await page.waitForFunction(
+		() => document.querySelectorAll("g.links [data-edge-key]").length === 0,
+		{ timeout: 5_000 },
+	);
+
+	assertNoPageProblems(problems);
+	return `${focusId} preview/pin rendered ${expectedEdgeKeys.length} exact incident edges and cleared to zero`;
+}
+
+async function assertionSemanticRelationshipList(page, problems) {
+	await navigate(page, problems);
+	const focusId = "makeline";
+	const expected = [
+		{
+			key: "backsplash::component_of::makeline",
+			related: "backsplash",
+			claim:
+				"The backsplash display was an integrated infrastructure component of Hyphen's makeline.",
+		},
+		{
+			key: "dispensers::component_of::makeline",
+			related: "dispensers",
+			claim: "Hyphen's dispenser set was configured as part of each automated makeline.",
+		},
+		{
+			key: "portion-cup::component_of::makeline",
+			related: "portion-cup",
+			claim:
+				"The portion-cup fill module was one of the configurable modules in Hyphen's makeline.",
+		},
+	];
+
+	await page.evaluate((projectId) => {
+		const button = document.querySelector(`button[data-id="${CSS.escape(projectId)}"]`);
+		button?.click();
+	}, focusId);
+	await page.waitForSelector(`[data-relationship-list][data-focus-id="${focusId}"]`, {
+		timeout: 5_000,
+	});
+	const state = await page.evaluate(() => ({
+		visibleEdges: Array.from(document.querySelectorAll("g.links [data-edge-key]"))
+			.map((edge) => edge.getAttribute("data-edge-key"))
+			.sort(),
+		items: Array.from(document.querySelectorAll("[data-relationship-list] [data-edge-key]"))
+			.map((item) => {
+				const anchor = item.querySelector("a[data-related-project-link]");
+				return {
+					key: item.getAttribute("data-edge-key"),
+					kind: item.getAttribute("data-kind"),
+					related: item.getAttribute("data-related-project-id"),
+					claim: item.querySelector("[data-public-claim]")?.textContent?.trim(),
+					href: anchor ? new URL(anchor.href).pathname : null,
+					keyboardReachable: anchor instanceof HTMLElement && anchor.tabIndex >= 0,
+				};
+			})
+			.sort((left, right) => left.key.localeCompare(right.key)),
+	}));
+
+	if (JSON.stringify(state.visibleEdges) !== JSON.stringify(expected.map(({ key }) => key))) {
+		throw new Error(`Semantic list test lost visual parity: ${JSON.stringify(state.visibleEdges)}`);
+	}
+	for (const [index, item] of state.items.entries()) {
+		const specification = expected[index];
+		if (
+			!specification ||
+			item.key !== specification.key ||
+			item.kind !== "component_of" ||
+			item.related !== specification.related ||
+			item.claim !== specification.claim ||
+			item.href !== `/projects/${specification.related}/` ||
+			!item.keyboardReachable
+		) {
+			throw new Error(
+				`Semantic relationship item drifted: ${JSON.stringify({ item, specification })}`,
+			);
+		}
+	}
+	if (state.items.length !== expected.length) {
+		throw new Error(
+			`Expected ${expected.length} semantic relationships; found ${state.items.length}`,
+		);
+	}
+
+	assertNoPageProblems(problems);
+	return `${focusId} exposed ${state.items.length} approved claims with native related-project anchors`;
+}
+
+async function assertionCompleteRelationshipProjection(page, problems) {
+	await navigate(page, problems);
+	await waitForFontsAndSwarmReady(page);
+	await setSwarmMotion(page, "paused");
+	const expected = [
+		["backsplash::component_of::makeline", "backsplash", "makeline", "component_of"],
+		["digi-003::variant_of::rack-003", "digi-003", "rack-003", "variant_of"],
+		[
+			"disc-cartridges::component_of::ksystem-120",
+			"disc-cartridges",
+			"ksystem-120",
+			"component_of",
+		],
+		["dispensers::component_of::makeline", "dispensers", "makeline", "component_of"],
+		["m300::shares_platform_with::m500", "m300", "m500", "shares_platform_with"],
+		["mbox-2-mini::derived_from::mbox-2", "mbox-2-mini", "mbox-2", "derived_from"],
+		["mbox-2-pro::derived_from::mbox-2", "mbox-2-pro", "mbox-2", "derived_from"],
+		["mbox-2::successor_of::mbox", "mbox-2", "mbox", "successor_of"],
+		["portion-cup::component_of::makeline", "portion-cup", "makeline", "component_of"],
+		["rack-003::successor_of::rack-002", "rack-003", "rack-002", "successor_of"],
+		["remote::component_of::ksystem-120", "remote", "ksystem-120", "component_of"],
+		["webtv-cortez::component_of::webtv-galaxy", "webtv-cortez", "webtv-galaxy", "component_of"],
+		["webtv-galaxy::derived_from::webtv-mercury", "webtv-galaxy", "webtv-mercury", "derived_from"],
+		["webtv-galaxy::shares_platform_with::xbox", "webtv-galaxy", "xbox", "shares_platform_with"],
+		["webtv-titan::component_of::webtv-galaxy", "webtv-titan", "webtv-galaxy", "component_of"],
+	].map(([key, source, target, kind]) => ({ key, source, target, kind }));
+	const focusIds = [...new Set(expected.flatMap(({ source, target }) => [source, target]))];
+	const observed = new Map();
+
+	for (const focusId of focusIds) {
+		await page.evaluate((projectId) => {
+			const button = document.querySelector(`button[data-id="${CSS.escape(projectId)}"]`);
+			button?.click();
+		}, focusId);
+		await page.waitForFunction(
+			(projectId) =>
+				document
+					.querySelector(`button[data-id="${CSS.escape(projectId)}"]`)
+					?.getAttribute("data-focused") === "true",
+			{ timeout: 5_000 },
+			focusId,
+		);
+		await delay(60);
+		const edges = await page.$$eval("g.links [data-edge-key]", (elements) =>
+			elements.map((edge) => ({
+				key: edge.getAttribute("data-edge-key"),
+				source: edge.getAttribute("data-source"),
+				target: edge.getAttribute("data-target"),
+				kind: edge.getAttribute("data-kind"),
+			})),
+		);
+		if (edges.some(({ source, target }) => source !== focusId && target !== focusId)) {
+			throw new Error(`${focusId}: rendered a non-incident relationship: ${JSON.stringify(edges)}`);
+		}
+		for (const edge of edges) observed.set(edge.key, edge);
+	}
+
+	const actual = [...observed.values()].sort((left, right) => left.key.localeCompare(right.key));
+	if (JSON.stringify(actual) !== JSON.stringify(expected)) {
+		throw new Error(
+			`Focused relationship union does not equal the approved projection: ${JSON.stringify({ actual, expected })}`,
+		);
+	}
+	await page.keyboard.press("Escape");
+	await page.waitForFunction(
+		() => document.querySelectorAll("g.links [data-edge-key]").length === 0,
+		{ timeout: 5_000 },
+	);
+
+	assertNoPageProblems(problems);
+	return `${actual.length} approved edges recovered exactly from ${focusIds.length} focused endpoints`;
+}
+
+async function assertionRelationshipIntegrationRails(page, problems) {
+	const details = [];
+	const tourEdgeKey = "webtv-galaxy::shares_platform_with::xbox";
+	await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
+	try {
+		await navigate(page, problems);
+		await waitForFontsAndSwarmReady(page);
+		await startTour(page);
+		for (let index = 1; index < EXPECTED_TOUR.length; index += 1) {
+			await clickTourControl(page, "next", EXPECTED_TOUR[index]);
+		}
+		await page.waitForSelector(`g.links [data-edge-key="${tourEdgeKey}"]`, { timeout: 5_000 });
+		const first = await page.evaluate((edgeKey) => {
+			const edge = document.querySelector(`g.links [data-edge-key="${CSS.escape(edgeKey)}"]`);
+			return {
+				hash: window.location.hash,
+				scrollY: window.scrollY,
+				path: edge?.getAttribute("d"),
+				visibleCount: document.querySelectorAll("g.links [data-edge-key]").length,
+				semanticCount: document.querySelectorAll("[data-relationship-list] [data-edge-key]").length,
+				motion: document
+					.querySelector("[data-swarm-motion-control]")
+					?.getAttribute("data-motion-state"),
+			};
+		}, tourEdgeKey);
+		await delay(1_200);
+		const delayedPath = await page.$eval(`g.links [data-edge-key="${tourEdgeKey}"]`, (edge) =>
+			edge.getAttribute("d"),
+		);
+		if (
+			first.hash !== canonicalTourHash(EXPECTED_TOUR.at(-1)) ||
+			first.scrollY !== 0 ||
+			first.visibleCount !== 1 ||
+			first.semanticCount !== 1 ||
+			first.motion !== "paused" ||
+			!first.path ||
+			first.path !== delayedPath
+		) {
+			throw new Error(
+				`Relationship-aware Tour state drifted: ${JSON.stringify({ first, delayedPath })}`,
+			);
+		}
+
+		await page.click('button[data-tour-control="exit"]');
+		await page.waitForFunction(
+			(edgeKey) =>
+				document.querySelector("[data-current-mode]")?.getAttribute("data-current-mode") ===
+					"explore" &&
+				window.location.hash === "#lens=time&pin=xbox" &&
+				document.querySelectorAll(`g.links [data-edge-key="${CSS.escape(edgeKey)}"]`).length === 1,
+			{ timeout: 5_000 },
+			tourEdgeKey,
+		);
+		await page.keyboard.press("Escape");
+		await page.waitForFunction(
+			() =>
+				window.location.hash === "" &&
+				document.querySelectorAll("g.links [data-edge-key]").length === 0,
+			{ timeout: 5_000 },
+		);
+		details.push("Tour/xbox URL and reduced-motion geometry static");
+		assertNoPageProblems(problems);
+	} finally {
+		await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "no-preference" }]);
+	}
+
+	for (const viewport of VIEWPORTS) {
+		await page.setViewport({ ...viewport, deviceScaleFactor: 1 });
+		await navigate(page, problems);
+		await waitForFontsAndSwarmReady(page);
+		await setSwarmMotion(page, "paused");
+		await page.evaluate(() => window.scrollTo(0, 0));
+		await delay(60);
+		const scrollBeforeFocus = await page.evaluate(() => window.scrollY);
+		await page.evaluate(() => document.querySelector('button[data-id="makeline"]')?.click());
+		await page.waitForFunction(
+			() =>
+				document.querySelectorAll("g.links [data-edge-key]").length === 3 &&
+				document.querySelectorAll("[data-relationship-list] [data-edge-key]").length === 3,
+			{ timeout: 5_000 },
+		);
+		const state = await page.evaluate(() => {
+			const list = document.querySelector("[data-relationship-list]");
+			return {
+				scrollY: window.scrollY,
+				horizontalOverflow: Math.max(0, document.documentElement.scrollWidth - window.innerWidth),
+				listOverflow: list ? Math.max(0, list.scrollWidth - list.clientWidth) : null,
+				paths: document.querySelectorAll("g.links [data-edge-key]").length,
+				claims: document.querySelectorAll("[data-relationship-list] [data-public-claim]").length,
+			};
+		});
+		if (
+			state.scrollY !== scrollBeforeFocus ||
+			state.horizontalOverflow !== 0 ||
+			state.listOverflow !== 0 ||
+			state.paths !== 3 ||
+			state.claims !== 3
+		) {
+			throw new Error(
+				`${viewport.name}: focused constellation containment failed: ${JSON.stringify(state)}`,
+			);
+		}
+		details.push(`${viewport.width}x${viewport.height} focused and contained`);
+		assertNoPageProblems(problems);
+	}
+
+	await page.setJavaScriptEnabled(false);
+	try {
+		for (const viewport of VIEWPORTS) {
+			await page.setViewport({ ...viewport, deviceScaleFactor: 1 });
+			const response = await page.goto(BASE_URL, {
+				waitUntil: "networkidle0",
+				timeout: PAGE_TIMEOUT_MS,
+			});
+			if (!response || response.status() < 200 || response.status() >= 300) {
+				throw new Error(
+					`${viewport.name}: no-JS relationship fallback returned ${response?.status()}`,
+				);
+			}
+			const state = await page.evaluate(() => ({
+				paths: document.querySelectorAll("g.links [data-edge-key]").length,
+				lists: document.querySelectorAll("[data-relationship-list]").length,
+				anchors: document.querySelectorAll("button[data-id] + a[href^='/projects/']").length,
+				horizontalOverflow: Math.max(0, document.documentElement.scrollWidth - window.innerWidth),
+			}));
+			if (
+				state.paths !== 0 ||
+				state.lists !== 0 ||
+				state.anchors !== EXPECTED_PROJECT_COUNT ||
+				state.horizontalOverflow !== 0
+			) {
+				throw new Error(
+					`${viewport.name}: no-JS relationship fallback failed: ${JSON.stringify(state)}`,
+				);
+			}
+		}
+		details.push("no-JS relationship UI absent with 85 native anchors");
+	} finally {
+		await page.setJavaScriptEnabled(true);
+		await page.setViewport({ ...VIEWPORTS[0], deviceScaleFactor: 1 });
+	}
+
+	return details.join(" | ");
 }
 
 async function assertionReducedMotion(page, problems) {
@@ -1505,13 +1878,17 @@ async function assertionLensProjections(page, problems) {
 			);
 		}
 		if (projection.labels.reduce((sum, group) => sum + group.count, 0) !== EXPECTED_PROJECT_COUNT) {
-			throw new Error(`${requestedLens}: swarm group-label counts do not sum to 87`);
+			throw new Error(
+				`${requestedLens}: swarm group-label counts do not sum to ${EXPECTED_PROJECT_COUNT}`,
+			);
 		}
 		if (
 			projection.sections.reduce((sum, section) => sum + section.count, 0) !==
 			EXPECTED_PROJECT_COUNT
 		) {
-			throw new Error(`${requestedLens}: index section counts do not sum to 87`);
+			throw new Error(
+				`${requestedLens}: index section counts do not sum to ${EXPECTED_PROJECT_COUNT}`,
+			);
 		}
 		if (requestedLens !== "time") {
 			const labels = [...projection.labels.map(({ id }) => id)].sort();
@@ -2512,7 +2889,23 @@ const assertionSpecs = [
 	["Focused labels paint visibly above nodes", assertionLabelVisibility],
 	["Hover-out restores rest visuals without stale dim", assertionNoStaleDim],
 	["Every rendered project radius stays within [15,55]", assertionRadiusClamp],
-	["Relationship lines are absent from the rendered swarm", assertionNoRelationshipLines],
+	["Relationship lines are absent from the resting swarm", assertionNoRelationshipLines],
+	[
+		"Focused preview and pin render only approved incident relationships",
+		assertionFocusedRelationshipEdges,
+	],
+	[
+		"Focused relationships have readable claims and native related-project anchors",
+		assertionSemanticRelationshipList,
+	],
+	[
+		"The union of focused constellations equals the complete approved projection",
+		assertionCompleteRelationshipProjection,
+	],
+	[
+		"Focused constellations preserve Tour, URL, motion, responsive, and no-JS rails",
+		assertionRelationshipIntegrationRails,
+	],
 	["Reduced-motion and Pause produce a static field", assertionReducedMotion],
 	["Direction-neutral aim integrity succeeds 10/10", assertionDirectionalAimIntegrity],
 	[
@@ -2556,7 +2949,7 @@ const passed = await runBrowserContract({
 	cacheDirectory: HARNESS_CACHE_DIR,
 	expectedAssertions: EXPECTED_ASSERTIONS,
 	initialViewport: VIEWPORTS[0],
-	title: "P2B homepage record-band contract",
+	title: "P3B homepage focused-constellation contract",
 });
 if (!passed) {
 	process.exitCode = 1;

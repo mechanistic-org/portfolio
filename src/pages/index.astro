@@ -7,12 +7,18 @@ import HXOConsole from "../components/HXO/HXOConsole";
 import { currentSite, site } from "@config/site_config";
 import { resumeMaster } from "@config/resume_master";
 import UnderConstruction from "../components/UnderConstruction.astro";
+import relationshipProjection from "../data/projectRelationships.json";
+import {
+	deriveFocusedConstellation,
+	type ProjectRelationship,
+} from "../utils/deriveFocusedConstellation";
 
 const isUnderConstruction = currentSite !== "main";
 
 // Initialize empty
 let swarmNodes: any[] = [];
 let consoleProjects: any[] = [];
+let projectRelationships: ProjectRelationship[] = [];
 
 // SERVER-RENDERED RECORD BAND
 // Counts stay coupled to the same visible roster supplied to both HXO surfaces.
@@ -53,6 +59,13 @@ if (!isUnderConstruction) {
 		id: n.id,
 		data: n.data,
 	}));
+	projectRelationships = relationshipProjection.relationships as unknown as ProjectRelationship[];
+	// Build-time fail-closed validation. The same pure module derives client focus state.
+	deriveFocusedConstellation({
+		relationships: projectRelationships,
+		projectIds: visibleProjectNodes.map((node) => node.id),
+		focusId: null,
+	});
 
 	// 4. SERVER-RENDERED RECORD DATA
 	// SPAN comes from resume_master, NOT from published project dates.
@@ -93,7 +106,11 @@ if (!isUnderConstruction) {
 					{/* LEFT: THE SWARM (Navigation / Map) */}
 					{/* The hydrated swarm may grow below lg; without JavaScript this remains one hero stage. */}
 					<div class="hxo-swarm-stage custom-scrollbar relative min-h-svh border-r border-zinc-900 bg-transparent lg:col-span-7 lg:h-screen lg:overflow-x-hidden lg:overflow-y-auto xl:col-span-8">
-						<HXOSwarmContainer client:only="react" nodes={swarmNodes} />
+						<HXOSwarmContainer
+							client:only="react"
+							nodes={swarmNodes}
+							relationships={projectRelationships}
+						/>
 						{/* IDENTITY OVERLAY - server-rendered, above the fold.
 						    The swarm remains client-only while the console is prerendered.
 						    This keeps identity explicit before hydration and prevents the
@@ -131,7 +148,11 @@ if (!isUnderConstruction) {
 					{/* RIGHT: THE CONSOLE (Details / Index) */}
 					{/* Must start below the 5rem Nav and fill the rest without overflow */}
 					<div class="hxo-console-stage relative z-30 flex flex-col bg-transparent lg:col-span-5 lg:mt-16 lg:h-[calc(100vh-4rem)] xl:col-span-4">
-						<HXOConsole client:load projects={consoleProjects} />
+						<HXOConsole
+							client:load
+							projects={consoleProjects}
+							relationships={projectRelationships}
+						/>
 					</div>
 				</main>
 
