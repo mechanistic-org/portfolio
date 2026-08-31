@@ -4,3 +4,6 @@ tests/fixtures/pulse/lifecycle-history/packages/*/evidence/receipts/*.json text 
 
 # Committed Pulse public projections are compared byte-for-byte with deterministic LF output.
 src/data/pulse/public-*.json text eol=lf
+
+# The canon relationship projection is also verified byte-for-byte.
+src/data/projectRelationships.json text eol=lf
