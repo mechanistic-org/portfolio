@@ -1,6 +1,8 @@
 ---
 // Universal Capsule Nav (Hyperspace Standard)
 import { Icon } from "astro-icon/components";
+import { pdfConfiguration } from "../../config/resume_projection.ts";
+const resumePDF = pdfConfiguration();
 import navData from "../../config/navData"; // Adjusted import to relative path
 import siteData from "@config/siteData.json";
 // import ThemeToggle from "@components/ThemeToggle/ThemeToggle.astro";
@@ -30,29 +32,14 @@ const { hideLogo } = Astro.props;
 	>
 		{
 			currentPath.replace(/\/$/, "") === "/resume" ? (
-				/* RESUME MODE: SHOW PRINT BUTTON */
-				<button
-					id="nav-print-btn"
-					class="group flex cursor-pointer items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs font-bold tracking-wider text-white uppercase transition-all hover:bg-white/10"
+				<a
+					id="nav-download-pdf"
+					class="resume-download"
+					href={resumePDF.url}
+					type="application/pdf"
 				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="14"
-						height="14"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						class="text-neutral-400 group-hover:text-white"
-					>
-						<path d="M6 9V2h12v7" />
-						<path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-						<path d="M6 14h12v8H6z" />
-					</svg>
-					<span>Save as PDF</span>
-				</button>
+					Download PDF
+				</a>
 			) : (
 				/* STANDARD MODE: SHOW NAV LINKS */
 				navData.map((item) => {
@@ -142,7 +129,20 @@ const { hideLogo } = Astro.props;
 
 	<!-- Mobile Toggle Slot Override -->
 	<div slot="mobile-toggle" class="md:hidden">
-		<MobileNav />
+		{
+			currentPath.replace(/\/$/, "") === "/resume" ? (
+				<a
+					id="mobile-download-pdf"
+					class="resume-download"
+					href={resumePDF.url}
+					type="application/pdf"
+				>
+					Download PDF
+				</a>
+			) : (
+				<MobileNav />
+			)
+		}
 	</div>
 </UniversalHUD>
 
@@ -158,10 +158,32 @@ const { hideLogo } = Astro.props;
 			// @ts-ignore
 			window.dispatchEvent(new CustomEvent("open-command-menu"));
 		});
-
-		const printBtn = document.getElementById("nav-print-btn");
-		printBtn?.addEventListener("click", () => {
-			window.print();
-		});
 	});
 </script>
+
+<style>
+	.resume-download {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		padding: 0.5rem 1rem;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 0;
+		background: #0a0a0a;
+		color: #e0e0e0;
+		font:
+			700 12px "JetBrains Mono",
+			monospace;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		white-space: nowrap;
+	}
+	.resume-download:hover {
+		border-color: #ff6600;
+		color: #ff6600;
+	}
+	.resume-download:focus-visible {
+		outline: 2px solid #00ffff;
+		outline-offset: 3px;
+	}
+</style>

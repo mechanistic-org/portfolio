@@ -1,5 +1,5 @@
 import siteData from "@config/siteData.json.ts";
-import workHistory from "@config/work_history.json";
+import { personSchema } from "../config/resume_projection.ts";
 
 interface GeneralProps {
 	type: "general";
@@ -26,7 +26,7 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 		"@type": "WebSite",
 		"@id": `${import.meta.env.SITE}#website`,
 		url: import.meta.env.SITE,
-		name: "Erik Norris - Forensic Architecture Ledger",
+		name: siteData.name,
 		publisher: {
 			"@id": `${import.meta.env.SITE}#identity`,
 		},
@@ -80,29 +80,7 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 				"@type": "ProfilePage",
 				dateCreated: new Date().toISOString(),
 				dateModified: new Date().toISOString(),
-				mainEntity: {
-					"@type": "Person",
-					"@id": `${import.meta.env.SITE}#identity`,
-					name: siteData.author.name,
-					jobTitle: "Principal Mechanical Architect",
-					disambiguatingDescription:
-						"Principal Mechanical Engineer and Systems Architect specializing in consumer electronics and forensic architecture. Not the actor or physician.",
-					description: siteData.description,
-					image: `${import.meta.env.SITE}${siteData.defaultImage.src}`,
-					url: import.meta.env.SITE,
-					sameAs: siteData.sameAs,
-					knowsAbout: siteData.skills,
-					alumniOf: workHistory.map((job) => ({
-						"@type": "OrganizationRole",
-						alumniOf: {
-							"@type": "Organization",
-							name: job.company,
-						},
-						roleName: job.title,
-						startDate: job.start.split("/").pop(), // Extract Year
-						endDate: job.end === "Present" ? undefined : job.end.split("/").pop(),
-					})),
-				},
+				mainEntity: personSchema(),
 			});
 		}
 	}
@@ -145,7 +123,7 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 	return schemaPayload
 		.map(
 			(schema) => `<script type="application/ld+json">
-${JSON.stringify(schema, null, 2)}
+${JSON.stringify(schema, null, 2).replace(/</g, "\\u003c")}
 </script>`,
 		)
 		.join("\n");

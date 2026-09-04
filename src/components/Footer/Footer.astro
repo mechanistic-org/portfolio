@@ -48,10 +48,11 @@ const SECTIONS = [
 		<div class="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
 			{/* Identity + the ask */}
 			<div>
-				<p class="font-mono text-xs tracking-[0.2em] text-neutral-500 uppercase">Erik Norris</p>
+				<p class="font-mono text-xs tracking-[0.2em] text-neutral-500 uppercase">
+					{resumeMaster.header.name}
+				</p>
 				<p class="mt-2 max-w-xs text-sm leading-relaxed text-neutral-400">
-					Principal Mechanical Architect. Thirty years of shipped hardware, documented at ECO
-					resolution - including the parts that went wrong.
+					{resumeMaster.header.title}. {resumeMaster.header.tagline}.
 				</p>
 				<a
 					href="/contact/"
@@ -88,12 +89,13 @@ const SECTIONS = [
 			class="mt-10 flex flex-col-reverse items-start justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center"
 		>
 			<p class="font-mono text-[10px] tracking-wider text-neutral-600 uppercase">
-				&copy; Erik Norris 1993&ndash;{today.getFullYear()}
+				&copy; {resumeMaster.header.name}
+				{today.getFullYear()}
 			</p>
 			<div class="flex items-center gap-4 text-neutral-500">
 				<a
 					href={`mailto:${email}`}
-					aria-label="Email Erik Norris"
+					aria-label={`Email ${resumeMaster.header.name}`}
 					class="hover:text-primary transition-colors"
 				>
 					<Icon name="tabler:mail" class="h-5 w-5" />

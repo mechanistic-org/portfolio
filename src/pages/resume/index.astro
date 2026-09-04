@@ -1,10 +1,12 @@
 ---
 import { resumeMaster } from "../../config/resume_master";
 
+import { resumeExperience } from "../../config/resume_projection.ts";
 export const prerender = true;
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const { header, summary, competencies, experience, education, recognition } = resumeMaster;
+const { header, summary, competencies, education, recognition } = resumeMaster;
+const experience = resumeExperience(resumeMaster);
 
 // Helper to process markdown-style bolding in bullets
 function processMarkdown(text: string) {
@@ -16,7 +18,7 @@ function processMarkdown(text: string) {
 }
 ---
 
-<BaseLayout title="Resume | Erik Norris" description="Master Resume" starfield={true}>
+<BaseLayout title={`Resume | ${header.name}`} description="Master Resume" starfield={true}>
 	<!-- 
     PRINT LAYOUT CONTAINER 
     - Forced white background
@@ -26,7 +28,7 @@ function processMarkdown(text: string) {
 	<div
 		class="min-h-screen w-full bg-[#f2f2f2] p-12 pt-24 md:p-24 md:pt-24 dark:bg-transparent print:bg-white print:p-0"
 	>
-		<!-- Print Button Moved to Nav -->
+		<!-- Canonical PDF download is in the navigation. -->
 
 		<div
 			class="mx-auto max-w-[216mm] bg-white p-[12mm] shadow-2xl dark:bg-neutral-900 print:max-w-none print:shadow-none"

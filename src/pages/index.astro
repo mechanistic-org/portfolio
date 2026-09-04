@@ -4,7 +4,8 @@ import Layout from "../layouts/BaseLayout.astro";
 import { getCareerAssembly } from "../utils/mapCareerAssembly";
 import HXOSwarmContainer from "../components/HXO/HXOSwarmContainer";
 import HXOConsole from "../components/HXO/HXOConsole";
-import { currentSite, site } from "@config/site_config";
+import { currentSite } from "@config/site_config";
+import siteData from "@config/siteData.json";
 import { resumeMaster } from "@config/resume_master";
 import UnderConstruction from "../components/UnderConstruction.astro";
 import relationshipProjection from "../data/projectRelationships.json";
@@ -75,11 +76,14 @@ if (!isUnderConstruction) {
 	// the 25 ratified cuts moved the newest published project from 2025 to 2021,
 	// so the homepage would have advertised a four-year gap that does not exist.
 	// A career span is not a function of the corpus.
-	const roleYears = resumeMaster.experience
-		.flatMap((r) => r.dates.match(/\d{4}/g) || [])
-		.map(Number)
-		.filter((y) => y > 1900);
-	const ongoing = resumeMaster.experience.some((r) => /present/i.test(r.dates));
+	const roleYears = resumeMaster.career
+		.flatMap((role) =>
+			role.period.precision === "year" ? [role.period.start, role.period.end].filter(Boolean) : [],
+		)
+		.map(Number);
+	const ongoing = resumeMaster.career.some(
+		(role) => role.period.precision === "year" && role.period.end === null,
+	);
 	const spanStart = roleYears.length ? Math.min(...roleYears) : null;
 	const spanEnd = ongoing ? "Present" : roleYears.length ? String(Math.max(...roleYears)) : "";
 
@@ -96,8 +100,8 @@ if (!isUnderConstruction) {
 		<UnderConstruction />
 	) : (
 		<Layout
-			title={site.title}
-			description="Erik Norris is an engineer who builds products and systems that have to work, across physical products, manufacturing, software, AI, and field delivery."
+			title={siteData.title}
+			description={siteData.description}
 			hideNavLogo={false}
 			starfield={true}
 		>

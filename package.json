@@ -23,7 +23,11 @@
 		"check:hud": "node scripts/_archive/verify_deep_hud.cjs",
 		"content:modernize": "python scripts/modernize_content.py",
 		"assets:process": "python ../global_agent/scripts/process_assets.py",
-		"test:visual": "node scripts/probes/homepage_contract.mjs"
+		"test:visual": "node scripts/probes/homepage_contract.mjs",
+		"export:linkedin": "node scripts/export_linkedin.mjs",
+		"prepare:resume-pdf": "node scripts/generate_resume_pdf.cjs",
+		"test:resume": "node --test tests/resume/*.test.mjs",
+		"test:resume-browser": "node tests/resume/browser.mjs"
 	},
 	"dependencies": {
 		"@astro-community/astro-embed-youtube": "^0.5.9",

@@ -1,164 +1,36 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
-import { getCareerTimeline } from "../../utils/getCareerTimeline";
-
-// Read and Parse Resume Data from Projects Collection
-const items = await getCareerTimeline();
-
-const pageTitle = "Erik Norris | Resume";
-
+import { pdfConfiguration } from "../../config/resume_projection.ts";
+const { url } = pdfConfiguration();
 export const prerender = true;
 ---
 
-<BaseLayout title={pageTitle} description="Professional Resume of Erik Norris">
-	<!-- Print Styles -->
-	<style is:inline>
-		@media print {
-			@page {
-				margin: 0.5in;
-			}
-			body {
-				background: white;
-				color: black;
-			}
-			nav,
-			footer,
-			.no-print {
-				display: none !important;
-			}
-			.print-container {
-				width: 100% !important;
-				max-width: none !important;
-				margin: 0 !important;
-				padding: 0 !important;
-				box-shadow: none !important;
-				background: white !important;
-			}
-			.page-break {
-				page-break-before: always;
-			}
-			a {
-				text-decoration: none;
-				color: black;
-			}
-		}
-	</style>
-
-	<div class="flex min-h-screen flex-col items-center bg-neutral-900 py-12">
-		<!-- Controls -->
-		<div class="no-print mb-8 flex gap-4">
-			<button
-				onclick="window.print()"
-				class="bg-primary-600 hover:bg-primary-500 flex items-center gap-2 rounded-full px-6 py-2 font-bold text-white shadow-lg transition-transform hover:scale-105"
-			>
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					width="20"
-					height="20"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-					><path d="M6 9V2h12v7"></path><path
-						d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
-					></path><path d="M6 14h12v8H6z"></path></svg
-				>
-				Download / Print PDF
-			</button>
-			<a
-				href="/history"
-				class="rounded-full bg-neutral-800 px-6 py-2 font-bold text-neutral-300 transition-colors hover:bg-neutral-700"
-			>
-				View Interactive Timeline
-			</a>
-		</div>
-
-		<!-- Resume Paper -->
-		<div
-			class="print-container min-h-[11in] w-[8.5in] rounded-sm bg-white p-[0.75in] text-neutral-900 shadow-2xl"
-		>
-			<!-- Header -->
-			<header class="border-primary-500 mb-6 border-b-2 pb-6">
-				<div class="flex items-end justify-between">
-					<div>
-						<h1 class="text-4xl font-bold tracking-tight text-neutral-900 uppercase">
-							Erik Norris
-						</h1>
-						<p class="text-primary-600 mt-1 text-xl font-medium">
-							Product Architect & Senior Mechanical Engineer
-						</p>
-					</div>
-					<div class="text-right font-mono text-sm text-neutral-600">
-						<p>San Francisco Bay Area</p>
-						<p>resume.eriknorris.com</p>
-						<p>linkedin.com/in/eriknorris</p>
-					</div>
-				</div>
-			</header>
-
-			<!-- Professional Experience -->
-			<section>
-				<h2
-					class="mb-4 border-b border-neutral-200 pb-1 text-lg font-bold tracking-widest text-neutral-400 uppercase"
-				>
-					Professional Experience
-				</h2>
-
-				<div class="flex flex-col gap-6">
-					{
-						items.map((item) => (
-							<article class="break-inside-avoid">
-								<div class="mb-1 flex items-baseline justify-between">
-									<h3 class="text-lg font-bold text-neutral-900">{item.cardTitle}</h3>
-									<span class="font-mono text-sm whitespace-nowrap text-neutral-500">
-										{item.title}
-									</span>
-								</div>
-
-								<div class="text-primary-700 mb-2 text-sm font-medium">{item.cardSubtitle}</div>
-
-								{item.responsibilities.length > 0 && (
-									<ul class="mb-2 ml-4 list-outside list-disc space-y-1 text-sm text-neutral-700">
-										{item.responsibilities.map((r) => (
-											<li>{r}</li>
-										))}
-									</ul>
-								)}
-
-								{item.keyProjects.length > 0 && (
-									<div class="mt-2 border-l-2 border-neutral-100 pl-4">
-										<p class="mb-1 text-xs font-bold text-neutral-400 uppercase">Key Projects</p>
-										<ul class="space-y-1 text-sm text-neutral-600">
-											{item.keyProjects.map((p) => (
-												<li>{p}</li>
-											))}
-										</ul>
-									</div>
-								)}
-							</article>
-						))
-					}
-				</div>
-			</section>
-
-			<!-- Skills (Aggregated from Tech Stack) -->
-			<section class="mt-8 break-inside-avoid">
-				<h2
-					class="mb-4 border-b border-neutral-200 pb-1 text-lg font-bold tracking-widest text-neutral-400 uppercase"
-				>
-					Skills & Tools
-				</h2>
-				<div class="tex-sm leading-relaxed text-neutral-700">
-					{/* Unique set of skills */}
-					{
-						Array.from(new Set(items.flatMap((i) => i.techStack || [])))
-							.sort()
-							.join(" • ")
-					}
-				</div>
-			</section>
-		</div>
-	</div>
-</BaseLayout>
+<!doctype html>
+<html lang="en">
+	<head
+		><meta charset="utf-8" /><meta name="viewport" content="width=device-width" /><meta
+			http-equiv="refresh"
+			content={`0;url=${url}`}
+		/><link rel="canonical" href={url} /><title>Download PDF</title></head
+	>
+	<body
+		><main>
+			<h1>Resume PDF</h1><p><a href={url}>Download PDF</a></p><p>
+				<a href="/resume/">Read the resume online</a>
+			</p>
+		</main></body>
+</html>
+<style>
+	body {
+		background: #000;
+		color: #e0e0e0;
+		font-family: "JetBrains Mono", monospace;
+		padding: 2rem;
+	}
+	a {
+		color: #ff6600;
+	}
+	a:focus-visible {
+		outline: 2px solid #00ffff;
+		outline-offset: 4px;
+	}
+</style>

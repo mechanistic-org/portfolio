@@ -1,19 +1,27 @@
-export interface ResumeRole {
+export type CareerPeriod =
+	| { precision: "year"; start: string; end: string | null }
+	| { precision: "unknown"; start: null; end: null };
+export interface CareerRole {
+	id: string;
 	company: string;
-	title: string;
-	location: string;
-	dates: string;
-	blurb: string; // The "Context" hook
-	bullets: string[]; // The "Impact" bullets
+	canonicalTitle: string;
+	location?: string;
+	period: CareerPeriod;
+	channels: { resumeTitle: string | null; linkedinTitle: string; linkedinCompany: string };
+	evidence: { source: string; review: string; note: string };
+}
+export interface ResumePresentation {
+	id: string;
+	roleIds: string[];
+	group?: { company: string; title: string; location: string; period: CareerPeriod };
+	blurb: string;
+	bullets: string[];
 }
 
-// Promoted to master 2026-06-12 from the OpenAI Robotics application build (operator-approved).
-// Carries corrected employment dates (per 2021 reference resume), Savant acquirer, and the
-// disavowed Locoroll bullet removed. Provenance:
-// global_agent/registry/applications/2026-06-12_openai-robotics-mechanical-design-engineer/
+// Factual authority. See docs/agents/resume-authority.md for evidence and review boundaries.
 export const resumeMaster = {
 	header: {
-		name: "ERIK NORRIS",
+		name: "Erik Norris",
 		title: "Mechanical Engineering Lead | Complex Physical Systems · Prototype → Production",
 		tagline: "Structure the chaos · Index the decisions · Ship the hardware",
 		contact: {
@@ -59,10 +67,8 @@ export const resumeMaster = {
 	},
 	experience: [
 		{
-			company: "MECHANISTIC",
-			title: "Principal Mechanical Architect",
-			location: "Silicon Valley",
-			dates: "2022 - Present",
+			id: "mechanistic-2022",
+			roleIds: ["mechanistic-2022"],
 			blurb:
 				"Consultancy: systems architecture, crisis recovery, and AI-augmented engineering operations.",
 			bullets: [
@@ -71,10 +77,8 @@ export const resumeMaster = {
 			],
 		},
 		{
-			company: "HYPHEN",
-			title: "Staff Mechanical Engineer → Principal Systems Architect",
-			location: "San Jose, CA",
-			dates: "2021 - 2022",
+			id: "hyphen-2021",
+			roleIds: ["hyphen-2021"],
 			blurb:
 				"Lead mechanical architect, Augmented Makeline - cobotic food-assembly robotics developed for enterprise restaurant deployment. Co-inventor, US20240164588A1.",
 			bullets: [
@@ -84,20 +88,16 @@ export const resumeMaster = {
 			],
 		},
 		{
-			company: "MECHANISTIC",
-			title: "Senior Mechanical Designer",
-			location: "Redwood City, CA",
-			dates: "2018 - 2021",
+			id: "mechanistic-2018",
+			roleIds: ["mechanistic-2018"],
 			blurb: "Product-development consultancy: micromobility, connected devices, lighting.",
 			bullets: [
 				"Engineered a ruggedized IoT module for **Lyft's Bay Wheels eBike** fleet - system architecture through detailed part design for outdoor deployment - plus an eCargo-bike platform, concept through detail design.",
 			],
 		},
 		{
-			company: "NOON HOME",
-			title: "Head of Mechanical Engineering",
-			location: "Cupertino, CA",
-			dates: "2017 - 2018",
+			id: "noon-2017",
+			roleIds: ["noon-2017"],
 			blurb:
 				"Multi-SKU smart-home lighting ecosystem - four hardware platforms, concept through EVT/DVT. UL 1472 / UL 20 / MIL-STD-1472G. Acquired by Savant Systems.",
 			bullets: [
@@ -107,10 +107,8 @@ export const resumeMaster = {
 			],
 		},
 		{
-			company: "AVEGANT",
-			title: "Senior Mechanical Engineer - NPI / DFM / MP",
-			location: "Belmont, CA",
-			dates: "2015 - 2017",
+			id: "avegant-2015",
+			roleIds: ["avegant-2015"],
 			blurb:
 				"Avegant Glyph - award-winning VRD head-mounted display, late-EVT through mass production. Best of CES 2016.",
 			bullets: [
@@ -121,10 +119,8 @@ export const resumeMaster = {
 			],
 		},
 		{
-			company: "KALEIDESCAPE",
-			title: "Senior Mechanical Design Engineer",
-			location: "Sunnyvale, CA",
-			dates: "2008 - 2015",
+			id: "kaleidescape-2008",
+			roleIds: ["kaleidescape-2008"],
 			blurb:
 				"Mechanical design, NPI, supplier coordination, and sustaining across a family of premium home-cinema hardware.",
 			bullets: [
@@ -134,10 +130,8 @@ export const resumeMaster = {
 			],
 		},
 		{
-			company: "DIGIDESIGN (AVID)",
-			title: "Lead Mechanical Engineer",
-			location: "Daly City, CA",
-			dates: "2003 - 2008",
+			id: "digidesign-2003",
+			roleIds: ["digidesign-2003"],
 			blurb:
 				"Flagship audio control surfaces - C|24, D-Command, SC48, ICON, 003; 12+ products shipped.",
 			bullets: [
@@ -146,15 +140,29 @@ export const resumeMaster = {
 			],
 		},
 		{
-			company: "EARLIER WORK",
-			title: "Consumer · Medical · Workstation Hardware",
-			location: "Bay Area, CA",
-			dates: "1986 - 2003",
+			id: "earlier-work",
+			roleIds: [
+				"mechanistic-1998",
+				"frogdesign-1997",
+				"mechanistic-1993",
+				"sgi",
+				"ep-technologies-1986",
+			],
+			group: {
+				company: "EARLIER WORK",
+				title: "Consumer · Medical · Workstation Hardware",
+				location: "Bay Area, CA",
+				period: {
+					precision: "year",
+					start: "1986",
+					end: "2003",
+				},
+			},
 			blurb:
 				"WebTV / Microsoft (Xbox, UltimateTV; Galaxy set-top: 150W in consumer plastics via a 28.3 CFM wind-tunnel chassis) · frogdesign (KaVo dental systems, Newscorp satellite, Vadem Clio convertible PDA) · SGI (workstation thermal-acoustic analysis) · EP Technologies (Class III cardiac-ablation catheter production - where the forensic methodology started).",
 			bullets: [],
 		},
-	],
+	] as ResumePresentation[],
 	education: [
 		{
 			school: "De Anza College",
@@ -169,4 +177,281 @@ export const resumeMaster = {
 		"Kaleidescape Cinema One: CEPro Product of the Year",
 		"Motorola MP3 Player: CES 2002 Design Honoree",
 	],
+	pdf: {
+		url: "https://assets.eriknorris.com/resume/Erik_Norris_Resume_Current.pdf",
+		filename: "Erik_Norris_Resume_Current.pdf",
+	},
+	career: [
+		{
+			id: "mechanistic-2022",
+			company: "MECHANISTIC",
+			canonicalTitle: "Principal Mechanical Architect",
+			location: "Silicon Valley",
+			period: {
+				precision: "year",
+				start: "2022",
+				end: null,
+			},
+			channels: {
+				resumeTitle: "Principal Mechanical Architect",
+				linkedinTitle: "Principal | Systems Architecture + AI Augmentation",
+				linkedinCompany: "MECHANISTIC",
+			},
+			evidence: {
+				source:
+					"https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+				review:
+					"https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+				note: "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim.",
+			},
+		},
+		{
+			id: "hyphen-2021",
+			company: "HYPHEN",
+			canonicalTitle: "Staff Mechanical Engineer → Principal Systems Architect",
+			location: "San Jose, CA",
+			period: {
+				precision: "year",
+				start: "2021",
+				end: "2022",
+			},
+			channels: {
+				resumeTitle: "Staff Mechanical Engineer → Principal Systems Architect",
+				linkedinTitle: "Principal Systems Architect / Senior Mechanical Engineer",
+				linkedinCompany: "HYPHEN",
+			},
+			evidence: {
+				source:
+					"https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+				review:
+					"https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+				note: "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim.",
+			},
+		},
+		{
+			id: "mechanistic-2018",
+			company: "MECHANISTIC",
+			canonicalTitle: "Senior Mechanical Designer",
+			location: "Redwood City, CA",
+			period: {
+				precision: "year",
+				start: "2018",
+				end: "2021",
+			},
+			channels: {
+				resumeTitle: "Senior Mechanical Designer",
+				linkedinTitle: "Senior Mechanical Designer | 2018 – 2021",
+				linkedinCompany: "MECHANISTIC",
+			},
+			evidence: {
+				source:
+					"https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+				review:
+					"https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+				note: "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim.",
+			},
+		},
+		{
+			id: "noon-2017",
+			company: "NOON HOME",
+			canonicalTitle: "Head of Mechanical Engineering",
+			location: "Cupertino, CA",
+			period: {
+				precision: "year",
+				start: "2017",
+				end: "2018",
+			},
+			channels: {
+				resumeTitle: "Head of Mechanical Engineering",
+				linkedinTitle: "Principal Mechanical Architect / Head of Mechanical Engineering",
+				linkedinCompany: "NOON HOME",
+			},
+			evidence: {
+				source:
+					"https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+				review:
+					"https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+				note: "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim.",
+			},
+		},
+		{
+			id: "avegant-2015",
+			company: "AVEGANT",
+			canonicalTitle: "Senior Mechanical Engineer - NPI / DFM / MP",
+			location: "Belmont, CA",
+			period: {
+				precision: "year",
+				start: "2015",
+				end: "2017",
+			},
+			channels: {
+				resumeTitle: "Senior Mechanical Engineer - NPI / DFM / MP",
+				linkedinTitle: "Senior Mechanical Engineer | NPI / DFM / Mass Production",
+				linkedinCompany: "AVEGANT",
+			},
+			evidence: {
+				source:
+					"https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+				review:
+					"https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+				note: "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim.",
+			},
+		},
+		{
+			id: "kaleidescape-2008",
+			company: "KALEIDESCAPE",
+			canonicalTitle: "Senior Mechanical Design Engineer",
+			location: "Sunnyvale, CA",
+			period: {
+				precision: "year",
+				start: "2008",
+				end: "2015",
+			},
+			channels: {
+				resumeTitle: "Senior Mechanical Design Engineer",
+				linkedinTitle: "Senior Mechanical Design Engineer",
+				linkedinCompany: "KALEIDESCAPE",
+			},
+			evidence: {
+				source:
+					"https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+				review:
+					"https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+				note: "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim.",
+			},
+		},
+		{
+			id: "digidesign-2003",
+			company: "DIGIDESIGN (AVID)",
+			canonicalTitle: "Lead Mechanical Engineer",
+			location: "Daly City, CA",
+			period: {
+				precision: "year",
+				start: "2003",
+				end: "2008",
+			},
+			channels: {
+				resumeTitle: "Lead Mechanical Engineer",
+				linkedinTitle: "Lead Mechanical Engineer | The Console Era",
+				linkedinCompany: "DIGIDESIGN (AVID)",
+			},
+			evidence: {
+				source:
+					"https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+				review:
+					"https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+				note: "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim.",
+			},
+		},
+		{
+			id: "mechanistic-1998",
+			company: "MECHANISTIC",
+			canonicalTitle: "Senior Mechanical Designer",
+			period: {
+				precision: "year",
+				start: "1998",
+				end: "2003",
+			},
+			channels: {
+				resumeTitle: null,
+				linkedinTitle: "Senior Mechanical Designer | 1998 – 2003",
+				linkedinCompany: "MECHANISTIC",
+			},
+			evidence: {
+				source:
+					"https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+				review:
+					"https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+				note: "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim.",
+			},
+		},
+		{
+			id: "frogdesign-1997",
+			company: "FROGDESIGN",
+			canonicalTitle: "Mechanical Designer",
+			period: {
+				precision: "year",
+				start: "1997",
+				end: "1999",
+			},
+			channels: {
+				resumeTitle: null,
+				linkedinTitle: "Mechanical Designer | 1997 – 1999",
+				linkedinCompany: "FROGDESIGN",
+			},
+			evidence: {
+				source:
+					"https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+				review:
+					"https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+				note: "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim.",
+			},
+		},
+		{
+			id: "mechanistic-1993",
+			company: "MECHANISTIC",
+			canonicalTitle: "Mechanical Designer",
+			period: {
+				precision: "year",
+				start: "1993",
+				end: "1997",
+			},
+			channels: {
+				resumeTitle: null,
+				linkedinTitle: "Mechanical Designer | 1993 – 1997",
+				linkedinCompany: "MECHANISTIC",
+			},
+			evidence: {
+				source:
+					"https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+				review:
+					"https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+				note: "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim.",
+			},
+		},
+		{
+			id: "sgi",
+			company: "SILICON GRAPHICS (SGI)",
+			canonicalTitle: "Mechanical Designer / Technician IV",
+			period: {
+				precision: "unknown",
+				start: null,
+				end: null,
+			},
+			channels: {
+				resumeTitle: null,
+				linkedinTitle: "Mechanical Designer / Technician IV",
+				linkedinCompany: "SILICON GRAPHICS (SGI)",
+			},
+			evidence: {
+				source:
+					"https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+				review:
+					"https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+				note: "Accepted LinkedIn entry supplies no employment dates; do not infer dates from legacy work_history.json.",
+			},
+		},
+		{
+			id: "ep-technologies-1986",
+			company: "EP Technologies",
+			canonicalTitle: "Production Supervisor",
+			period: {
+				precision: "year",
+				start: "1986",
+				end: "1989",
+			},
+			channels: {
+				resumeTitle: null,
+				linkedinTitle: "Foundational Roles",
+				linkedinCompany: "EARLY CAREER",
+			},
+			evidence: {
+				source:
+					"https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+				review:
+					"https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+				note: "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim.",
+			},
+		},
+	] as CareerRole[],
 };
