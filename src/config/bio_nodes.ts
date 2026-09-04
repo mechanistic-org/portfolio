@@ -135,6 +135,7 @@ export const BIO_NODES: readonly BioNode[] = [
 	{
 		id: "bio/mootmoat",
 		name: "MootMoat",
+		href: "https://mootmoat.com/",
 		domains: ["data_ai"],
 		startYear: 2022,
 		value: 30,
