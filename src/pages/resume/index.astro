@@ -31,7 +31,7 @@ function processMarkdown(text: string) {
 		<!-- Canonical PDF download is in the navigation. -->
 
 		<div
-			class="mx-auto max-w-[216mm] bg-white p-[12mm] shadow-2xl dark:bg-neutral-900 print:max-w-none print:shadow-none"
+			class="mx-auto max-w-[216mm] bg-white p-[12mm] shadow-2xl dark:bg-neutral-900 print:max-w-none print:px-[4mm] print:py-0 print:shadow-none"
 		>
 			<!-- HEADER -->
 			<header
@@ -215,6 +215,9 @@ function processMarkdown(text: string) {
 		header h2,
 		header p {
 			white-space: normal;
+		}
+		header h2 {
+			text-wrap: balance;
 		}
 		/* Hide standard site nav/footer if they exist in BaseLayout */
 		:global(nav),
