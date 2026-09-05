@@ -1,0 +1,298 @@
+---
+import { getEntityColor } from "@config/color_registry";
+import type { RibbonModel } from "@utils/contextRibbon";
+
+interface Props {
+	model: RibbonModel;
+}
+const { model } = Astro.props;
+const chartHeight = model.laneCount * 28 + 44;
+const current = model.projects.find((project) => project.current)!;
+---
+
+<nav
+	class="context-ribbon"
+	aria-label="Career context"
+	data-context-ribbon
+	data-source="getCareerAssembly"
+	data-current={current.slug}
+>
+	<div class="ribbon-heading">
+		<div>
+			<span class="ribbon-kicker">Career context</span><h2>{current.title} in the timeline</h2>
+		</div>
+		<p>{model.startYear}–{model.endYear}<span>Selected nearby projects</span></p>
+	</div>
+	<div class="ribbon-chart" aria-hidden="true">
+		<svg viewBox={`0 0 960 ${chartHeight}`} role="presentation">
+			{
+				model.years.map((year) => (
+					<g>
+						<line x1={year.x} x2={year.x} y1="22" y2={chartHeight - 10} class="year-line" />
+						<text x={year.x} y="13" class="year-label">
+							{year.label}
+						</text>
+					</g>
+				))
+			}
+			{
+				model.projects.map((project, index) => (
+					<a
+						href={`/projects/${project.slug}`}
+						tabindex="-1"
+						class:list={["chart-project", { "is-current": project.current }]}
+						data-project={project.slug}
+						style={`--ribbon-identity:${getEntityColor(project.employer, "EMPLOYER")}`}
+					>
+						<title>
+							{project.title}: {project.period}
+							{project.current ? " · Current project" : ""}
+						</title>
+						{project.width > 0 && (
+							<rect
+								x={project.x}
+								y={31 + project.lane * 28}
+								width={project.width}
+								height="8"
+								class="project-duration"
+							/>
+						)}
+						<rect
+							x={project.x - 9}
+							y={26 + project.lane * 28}
+							width="18"
+							height="18"
+							class="project-mark"
+						/>
+						<text x={project.x} y={39 + project.lane * 28} class="project-number">
+							{index + 1}
+						</text>
+					</a>
+				))
+			}
+		</svg>
+	</div>
+	<ol class="ribbon-projects">
+		{
+			model.projects.map((project, index) => (
+				<li>
+					<a
+						href={`/projects/${project.slug}`}
+						aria-current={project.current ? "page" : undefined}
+						data-project={project.slug}
+						style={`--ribbon-identity:${getEntityColor(project.employer, "EMPLOYER")}`}
+					>
+						<span class="project-index" aria-hidden="true">
+							{index + 1}
+						</span>
+						<span class="project-label">
+							{project.title}
+							<span class="project-period">{project.period}</span>
+						</span>
+						{project.current && <span class="current-label">You are here</span>}
+						{!project.current && (
+							<span class="project-arrow" aria-hidden="true">
+								↗
+							</span>
+						)}
+					</a>
+				</li>
+			))
+		}
+	</ol>
+	<p class="ribbon-note">
+		{model.neighborCount} of {model.availableNeighbors} nearby projects · Bars show recorded spans; squares
+		mark starts.
+	</p>
+</nav>
+
+<style>
+	.context-ribbon {
+		margin: 0 0 2rem;
+		border: 1px solid var(--border);
+		background: var(--card);
+		color: var(--foreground);
+		padding: 1rem 1.25rem 0.8rem;
+	}
+	.ribbon-heading {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+	.ribbon-kicker {
+		color: var(--muted-foreground);
+		font: 500 0.68rem var(--font-mono);
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+	h2 {
+		margin: 0.15rem 0 0;
+		font: 600 1.25rem var(--font-header);
+	}
+	.ribbon-heading p {
+		margin: 0;
+		text-align: right;
+		font: 0.85rem var(--font-mono);
+	}
+	.ribbon-heading p span {
+		display: block;
+		color: var(--muted-foreground);
+		font: 0.7rem var(--font-sans);
+	}
+	.ribbon-chart {
+		margin: 0.75rem 0;
+	}
+	svg {
+		display: block;
+		width: 100%;
+		max-height: 170px;
+		overflow: visible;
+	}
+	.year-line {
+		stroke: var(--border);
+		stroke-width: 1;
+		stroke-dasharray: 2 4;
+	}
+	.year-label {
+		fill: var(--muted-foreground);
+		font: 11px var(--font-mono);
+		text-anchor: middle;
+	}
+	.project-duration {
+		fill: var(--ribbon-identity);
+		opacity: 0.45;
+	}
+	.project-mark {
+		fill: var(--card);
+		stroke: var(--muted-foreground);
+		stroke-width: 1;
+	}
+	.project-number {
+		fill: var(--foreground);
+		font: 11px var(--font-mono);
+		text-anchor: middle;
+	}
+	.chart-project:hover .project-mark {
+		stroke: var(--foreground);
+		stroke-width: 2;
+	}
+	.is-current .project-mark {
+		fill: var(--primary);
+		stroke: var(--primary);
+	}
+	.is-current .project-number {
+		fill: var(--primary-foreground);
+	}
+	.is-current .project-duration {
+		fill: var(--primary);
+		opacity: 1;
+	}
+	.ribbon-projects {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.ribbon-projects li {
+		min-width: 0;
+	}
+	.ribbon-projects a {
+		display: flex;
+		align-items: center;
+		gap: 0.55rem;
+		min-height: 44px;
+		padding: 0.4rem 0.65rem;
+		border: 1px solid var(--border);
+		color: var(--foreground);
+		text-decoration: none;
+	}
+	.ribbon-projects a:hover,
+	.ribbon-projects a:focus-visible {
+		border-color: var(--foreground);
+		background: var(--muted);
+		outline: 2px solid var(--foreground);
+		outline-offset: 2px;
+	}
+	.ribbon-projects a[aria-current] {
+		border-color: var(--primary);
+		background: color-mix(in srgb, var(--primary) 9%, var(--card));
+	}
+	.project-index {
+		display: grid;
+		place-items: center;
+		width: 1.15rem;
+		height: 1.15rem;
+		flex-shrink: 0;
+		border-left: 3px solid var(--ribbon-identity);
+		font: 0.7rem var(--font-mono);
+	}
+	.project-label {
+		font-size: 0.8rem;
+		line-height: 1.25;
+		overflow-wrap: anywhere;
+	}
+	.project-period {
+		display: block;
+		color: var(--muted-foreground);
+		font: 0.65rem var(--font-mono);
+	}
+	.current-label {
+		color: var(--foreground);
+		font: 0.6rem var(--font-mono);
+		text-transform: uppercase;
+	}
+	.project-arrow {
+		color: var(--muted-foreground);
+	}
+	.ribbon-note {
+		margin: 0.65rem 0 0;
+		color: var(--muted-foreground);
+		font-size: 0.68rem;
+	}
+	@media (max-width: 640px) {
+		.context-ribbon {
+			padding: 0.8rem;
+		}
+		.ribbon-heading {
+			align-items: flex-start;
+		}
+		.ribbon-heading p {
+			font-size: 0.7rem;
+		}
+		.ribbon-heading p span {
+			max-width: 7rem;
+			font-size: 0.65rem;
+		}
+		h2 {
+			font-size: 1.1rem;
+		}
+		.ribbon-chart {
+			display: none;
+		}
+		.ribbon-projects {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			margin-top: 0.8rem;
+		}
+		.ribbon-projects a {
+			height: 100%;
+			padding: 0.45rem;
+			gap: 0.3rem;
+		}
+		.ribbon-projects li:has([aria-current]) {
+			grid-column: 1 / -1;
+		}
+		.current-label {
+			margin-left: auto;
+		}
+		.project-arrow {
+			margin-left: auto;
+		}
+		.ribbon-note {
+			font-size: 0.65rem;
+		}
+	}
+</style>

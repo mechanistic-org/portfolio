@@ -30,6 +30,9 @@ import Hatnote from "@components/primitives/Hatnote.astro";
 import C24ContinuityRail from "@components/Projects/C24ContinuityRail.astro";
 import C24EvidenceBreakout from "@components/Projects/C24EvidenceBreakout.astro";
 import C24RailCoordinator from "@components/Projects/C24RailCoordinator.astro";
+import ContextRibbon from "@components/primitives/ContextRibbon.astro";
+import { getCareerAssembly } from "@utils/mapCareerAssembly";
+import { buildContextRibbon } from "@utils/contextRibbon";
 import { c24RailScenes } from "@config/c24RailScenes";
 
 interface Props {
@@ -38,9 +41,21 @@ interface Props {
 	headings?: { depth: number; slug: string; text: string }[];
 	nextProject?: any;
 	prevProject?: any;
+	showContextRibbon?: boolean;
 }
-const { entry, Content, headings = [], nextProject, prevProject } = Astro.props;
+const {
+	entry,
+	Content,
+	headings = [],
+	nextProject,
+	prevProject,
+	showContextRibbon = false,
+} = Astro.props;
 const d = entry.data;
+const contextRibbon =
+	showContextRibbon && d.slug === "c24"
+		? buildContextRibbon((await getCareerAssembly()).nodes, "c24")
+		: null;
 
 const pretty = (s?: string) =>
 	s
@@ -136,6 +151,8 @@ const navNext = nextProject
 			audioUrl={d.audio_url}
 			photoCount={images.length || undefined}
 		/>
+
+		{contextRibbon && <ContextRibbon model={contextRibbon} />}
 
 		<C24RailCoordinator enabled={useC24ContinuityRails}>
 			<div class="lg:grid lg:grid-cols-[260px_minmax(0,1fr)_300px] lg:gap-8 xl:gap-12">

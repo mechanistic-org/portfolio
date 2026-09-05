@@ -115,8 +115,7 @@ const sortedProjects = allProjects
 	})
 	.sort(
 		(a, b) =>
-			new Date(b.data.date || new Date()).getTime() -
-			new Date(a.data.date || new Date()).getTime(),
+			new Date(b.data.date || new Date()).getTime() - new Date(a.data.date || new Date()).getTime(),
 	);
 
 // Navigation (Only works for real projects, placeholders get no nav for now)
@@ -261,4 +260,5 @@ console.log(`[ROUTER] Project: ${finalEntry.id} -> Theme: ${theme}`);
 	headings={headings}
 	metrics={finalEntry.data.metrics}
 	entropy={entropyData}
+	showContextRibbon={finalEntry.data.slug === "c24"}
 />
