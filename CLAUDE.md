@@ -2,8 +2,8 @@
 
 Headless agentic pipeline that compiles 30 years of engineering "Red Gold" (raw
 PDFs, CAD, notebooks) into a static "living portfolio." Astro SSG,
-TypeScript core, Python automation, deployed to Cloudflare Pages. Full prose in
-[README.md](README.md); design system in [DESIGN.md](DESIGN.md).
+TypeScript core, Python automation, deployed with Cloudflare Workers Static
+Assets. Full prose in [README.md](README.md); design system in [DESIGN.md](DESIGN.md).
 
 This file is the front door. Read it (and the specific files a task names) instead
 of grazing the tree — see **Context policy** below.
@@ -36,7 +36,10 @@ unpatched. Once the stack is on Astro >= 6, delete this note.
 |---|---|
 | Dev server (static output, port 4321) | `npm run dev` |
 | Project CI parity / pre-push validation | `npm run check:ci` (frontmatter audit → `astro check`) |
-| Production build | `npm run build` (`ci-prebuild.js` → `check:ci` → publication integrity → readiness report → `astro build` → Pagefind) |
+| Static site build | `npm run build` (public projection/history checks → project checks → publication integrity/readiness → Astro → Pagefind) |
+| Production Worker candidate | `npm run build:worker` (runs the static build with the required `CF_PAGES=1` compatibility signal) |
+| Worker candidate verification | `npm run check:worker` (generated-runtime assertions and both Wrangler dry-run configurations) |
+| Authorized production release | `npm run deploy:production -- --message "<ticket> source <commit>"` (deploys the prepared build; does not rebuild) |
 | Preview built site | `npm run preview` |
 | Validate frontmatter | `npm run audit:frontmatter` |
 | Publication integrity | `npm run audit:integrity` (invalid public state + local evidence identity/hash) |
@@ -98,7 +101,19 @@ uploads. There is no symlink: dev serves assets via `src/pages/assets/[...path].
 
 ## Deploy
 
-Cloudflare Pages (edge), config in `wrangler.toml`. Production sets `CF_PAGES=1`.
+Production uses Workers Static Assets on Worker `eriknorris`, configured by
+`wrangler.production.jsonc`. Astro output stays `static`; the generated Worker
+handles the explicitly configured runtime routes and the `PROJECTS` R2 binding.
+`CF_PAGES=1` is a retained build-compatibility signal, not the hosting provider.
+
+Before preparing a production release, rolling back an application version, or
+changing runtime/routing/bindings/hosting, read
+[Deployment and rollback](README.md#deployment-and-rollback) for the selected
+manual release contract and applicable verification tier.
+
+Both Wrangler configs name the same Worker. `deploy:worker` is not isolated
+staging. Production authorization applies to the reviewed source and prepared
+build; the npm scripts themselves do not enforce an approval gate.
 
 ## Context policy (why this file exists)
 
