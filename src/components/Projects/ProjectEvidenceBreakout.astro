@@ -15,83 +15,65 @@ interface GalleryData {
 interface GalleryEntry {
 	id: string;
 	title?: string;
+	caption?: string;
 	data: GalleryData;
 }
 
 interface Props {
 	galleries: GalleryEntry[];
-	heroImage?: string;
+	featured?: {
+		href: string;
+		className: string;
+		label: string;
+		detail: string;
+		image: GalleryImage;
+	}[];
+	breakout?: { eyebrow: string; description: string };
 }
 
-const { galleries = [], heroImage } = Astro.props;
-const allImages = galleries.flatMap((gallery) => gallery.data.images || []);
-
-const featured = [
-	{
-		alt: "C24 control surface",
-		label: "The system",
-		detail: "43 inches of controls, reduced to one integrated architecture.",
-		href: "#ii-the-product-that-shipped",
-		className: "evidence-composition__system",
-		image: heroImage ? { src: heroImage, alt: "C24 control surface" } : undefined,
-	},
-	{
-		alt: "step-03-method-a-fix",
-		label: "The intervention",
-		detail: "A process fixture turns gravity from failure mode into corrective force.",
-		href: "#1-thermal-crisis-the-banana-defect",
-		className: "evidence-composition__intervention",
-		image: undefined,
-	},
-	{
-		alt: "DCD_9150-55200-00_REV_12_Page_1_REV-block",
-		label: "The control record",
-		detail: "Revision discipline becomes the geometric contract for nineteen boards.",
-		href: "#5-integration-crisis-the-geometric-firewall",
-		className: "evidence-composition__record",
-		image: undefined,
-	},
-]
-	.map((item) => ({
-		...item,
-		image: item.image || allImages.find((image) => image.alt === item.alt),
-	}))
-	.filter((item) => item.image);
+const { galleries = [], featured = [], breakout } = Astro.props;
 ---
 
 <section id="visual-evidence" class="evidence-breakout" aria-labelledby="visual-evidence-title">
 	<header class="evidence-breakout__header">
 		<div>
 			<p class="evidence-breakout__eyebrow">
-				Breakout composition · system → intervention → record
+				{breakout?.eyebrow || "Project archive"}
 			</p>
 			<h2 id="visual-evidence-title">Visual Evidence</h2>
 		</div>
 		<p>
-			The article establishes the argument. This field opens the archive: product form, physical
-			failure, and the drawings that controlled the recovery at their own scale.
+			{breakout?.description || "Selected galleries from the project record."}
 		</p>
 	</header>
 
-	<div class="evidence-composition" data-pagefind-ignore>
-		{
-			featured.map((item) => (
-				<a class:list={["evidence-composition__figure", item.className]} href={item.href}>
-					<img src={item.image?.src} alt={item.image?.alt || ""} loading="lazy" decoding="async" />
-					<span class="evidence-composition__caption">
-						<strong>{item.label}</strong>
-						<small>{item.detail}</small>
-					</span>
-				</a>
-			))
-		}
-	</div>
+	{
+		featured.length > 0 && (
+			<div class="evidence-composition" data-pagefind-ignore>
+				{featured.map((item) => (
+					<a class:list={["evidence-composition__figure", item.className]} href={item.href}>
+						<img
+							src={item.image?.src}
+							alt={item.image?.alt || ""}
+							loading="lazy"
+							decoding="async"
+						/>
+						<span class="evidence-composition__caption">
+							<strong>{item.label}</strong>
+							<small>{item.detail}</small>
+						</span>
+					</a>
+				))}
+			</div>
+		)
+	}
 
 	<div class="evidence-breakout__galleries">
 		{
 			galleries.map((gallery) => (
 				<Gallery
 					title={gallery.title}
+					caption={gallery.caption}
 					images={gallery.data.images || []}
 					columns={gallery.data.columns}
 				/>

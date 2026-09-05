@@ -14,7 +14,7 @@ const current = model.projects.find((project) => project.current)!;
 	class="context-ribbon"
 	aria-label="Career context"
 	data-context-ribbon
-	data-source="getCareerAssembly"
+	data-source="routeEligibleProjects"
 	data-current={current.slug}
 >
 	<div class="ribbon-heading">
@@ -101,12 +101,17 @@ const current = model.projects.find((project) => project.current)!;
 		}
 	</ol>
 	<p class="ribbon-note">
-		{model.neighborCount} of {model.availableNeighbors} nearby projects · Bars show recorded spans; squares
-		mark starts.
+		{model.neighborCount} of {model.availableNeighbors} nearby projects
+		<span class="chart-key"> · Bars show recorded spans; squares mark starts.</span>
 	</p>
 </nav>
 
 <style>
+	@media (max-width: 639px) {
+		.chart-key {
+			display: none;
+		}
+	}
 	.context-ribbon {
 		margin: 0 0 2rem;
 		border: 1px solid var(--border);

@@ -85,6 +85,8 @@ export function buildContextRibbon(
 				Math.abs(a.start - current.start) - Math.abs(b.start - current.start) || compareSlug(a, b),
 		)
 		.slice(0, 6);
+	// A solitary current marker adds no navigable career context.
+	if (selected.length === 0) return null;
 	// Chart units leave room for focus rings and year labels at either edge.
 	const position = (date: number) =>
 		24 +

@@ -29,7 +29,9 @@ const generatedNodes = await Promise.all(
 	})),
 );
 const expectedModel = buildContextRibbon(
-	generatedNodes.filter((n) => n.data.draft !== true),
+	generatedNodes.filter(
+		(n) => n.data.draft !== true && (n.data.targets ?? ["main"]).includes("main"),
+	),
 	"c24",
 );
 const node = (id, date, endDate) => ({ id, type: "project", data: { title: id, date, endDate } });
@@ -97,7 +99,9 @@ async function destination(page, href) {
 		{ timeout: PAGE_TIMEOUT_MS },
 		href,
 	);
-	await page.waitForSelector("[data-context-ribbon]", { hidden: true, timeout: PAGE_TIMEOUT_MS });
+	await page.waitForSelector(`[data-project-article="${href.split("/").at(-1)}"]`, {
+		timeout: PAGE_TIMEOUT_MS,
+	});
 }
 
 const specs = [
@@ -106,7 +110,7 @@ const specs = [
 		async (page, problems) => {
 			await c24(page, problems);
 			const expected = expectedModel;
-			assert.ok(expected, "live generated assembly must resolve C24");
+			assert.ok(expected, "live route-eligible generated records must resolve C24");
 			const actual = await page.$$eval(".ribbon-projects a", (links) =>
 				links.map((a) => ({
 					slug: a.dataset.project,
@@ -134,7 +138,7 @@ const specs = [
 				0,
 			);
 			assert.ok(await page.$("article main"), "canonical article remains mounted");
-			return `${actual.length} links match generated assembly; no island or script`;
+			return `${actual.length} links match route-eligible generated records; no island or script`;
 		},
 	],
 	[
@@ -168,11 +172,11 @@ const specs = [
 			await destination(page, href);
 			assert.equal(new URL(page.url()).pathname.replace(/\/$/u, ""), href);
 			assert.equal(
-				await page.$("[data-context-ribbon]"),
-				null,
-				"non-C24 pages must not render the prototype",
+				await page.$eval("[data-context-ribbon]", (el) => el.dataset.current),
+				href.split("/").at(-1),
+				"trial neighbor must highlight its own canonical route ID",
 			);
-			return `keyboard Enter navigates to ${href}; no ribbon on neighbor`;
+			return `keyboard Enter navigates to ${href}; neighbor highlights itself`;
 		},
 	],
 	[
@@ -305,7 +309,7 @@ process.exitCode = (await runBrowserContract({
 	assertionSpecs: specs,
 	cacheDirectory,
 	expectedAssertions: specs.length,
-	title: "Context ribbon contract (#137)",
+	title: "Context ribbon regression (#137 / #222)",
 }))
 	? 0
 	: 1;

@@ -1,6 +1,6 @@
 ---
 import Toc from "@components/primitives/Toc.astro";
-import type { C24MetricKey, C24RailScene } from "@config/c24RailScenes";
+import type { MetricKey, ResolvedScene } from "@utils/projectPresentation";
 
 interface Heading {
 	depth: number;
@@ -22,10 +22,11 @@ interface Gallery {
 
 interface Props {
 	side: "left" | "right";
-	scenes: C24RailScene[];
+	projectTitle: string;
+	scenes: ResolvedScene[];
 	headings: Heading[];
 	scars: Record<string, any>[];
-	metrics: Partial<Record<C24MetricKey, string>>;
+	metrics: Partial<Record<MetricKey, string>>;
 	bom: { label?: string; value?: string }[];
 	facts: [string, unknown][];
 	galleries: Gallery[];
@@ -33,36 +34,29 @@ interface Props {
 	audioUrl?: string;
 }
 
-const { side, scenes, headings, scars, metrics, bom, facts, galleries, references, audioUrl } =
-	Astro.props;
+const {
+	side,
+	projectTitle,
+	scenes,
+	headings,
+	scars,
+	metrics,
+	bom,
+	facts,
+	galleries,
+	references,
+	audioUrl,
+} = Astro.props;
 
-const metricLabels: Record<C24MetricKey, string> = {
+const metricLabels: Record<MetricKey, string> = {
 	financial: "Financial",
 	process: "Process",
 	governance: "Governance",
 };
 
-const galleryById = new Map(galleries.map((gallery) => [gallery.id, gallery]));
-if (side === "right") {
-	for (const scene of scenes) {
-		for (const selection of scene.media) {
-			const gallery = galleryById.get(selection.galleryId);
-			const availableAlts = new Set((gallery?.data?.images || []).map((image) => image.alt));
-			for (const imageAlt of selection.imageAlts) {
-				if (!availableAlts.has(imageAlt)) {
-					console.warn(
-						`[C24ContinuityRail] Missing configured imageAlt "${imageAlt}" in gallery "${selection.galleryId}" for scene "${scene.id}".`,
-					);
-				}
-			}
-		}
-	}
-}
 const firmwareScar = scars.find((scar) => !scar.anchor);
 const persistentFacts = facts.filter(([label]) => ["Role", "Period"].includes(label));
-const contextFacts = facts.filter(([label]) =>
-	["Team", "Production"].includes(label),
-);
+const contextFacts = facts.filter(([label]) => ["Team", "Production"].includes(label));
 const galleryImageCount = galleries.reduce(
 	(total, gallery) => total + (gallery.data?.images?.length || 0),
 	0,
@@ -70,264 +64,264 @@ const galleryImageCount = galleries.reduce(
 
 const humanize = (value?: string) =>
 	(value || "").replace(/[-_]+/g, " ").replace(/\b\w/g, (character) => character.toUpperCase());
-
-function mediaFor(scene: C24RailScene) {
-	return scene.media.flatMap((selection) => {
-		const gallery = galleryById.get(selection.galleryId);
-		const byAlt = new Map((gallery?.data?.images || []).map((image) => [image.alt, image]));
-		return selection.imageAlts
-			.map((alt) => {
-				const image = byAlt.get(alt);
-				return image ? { ...image, galleryTitle: gallery?.title } : null;
-			})
-			.filter(Boolean) as (GalleryImage & { galleryTitle?: string })[];
-	});
-}
 ---
 
 {
 	side === "left" ? (
 		<aside
-			class="c24-rail c24-rail--left"
-			aria-label="C24 contextual evidence"
+			class="project-rail project-rail--left"
+			aria-label={`${projectTitle} contextual evidence`}
 			data-pagefind-ignore
 		>
-			<div class="rail__sticky" data-c24-rail-sticky>
+			<div class="rail__sticky" data-project-rail-sticky>
 				<div class="rail__masthead">
 					<span>Context rail</span>
-					<span class="rail__prototype">C24 · R1</span>
+					<span class="rail__prototype">{projectTitle}</span>
 				</div>
 
-				{
-					persistentFacts.length > 0 && (
-						<section class="rail__key-facts" aria-labelledby="c24-key-facts-title">
-							<p id="c24-key-facts-title" class="rail__key-facts-title">
-								Key Facts
-							</p>
-							<dl>
-								{persistentFacts.map(([label, value]) => (
-									<div>
-										<dt>{label}</dt>
-										<dd>{String(value)}</dd>
-									</div>
-								))}
-							</dl>
-						</section>
-					)
-				}
+				{persistentFacts.length > 0 && (
+					<section class="rail__key-facts" aria-labelledby="project-key-facts-title">
+						<p id="project-key-facts-title" class="rail__key-facts-title">
+							Key Facts
+						</p>
+						<dl>
+							{persistentFacts.map(([label, value]) => (
+								<div>
+									<dt>{label}</dt>
+									<dd>{String(value)}</dd>
+								</div>
+							))}
+						</dl>
+					</section>
+				)}
 
 				<div class="rail__scenes">
-					{scenes.map((scene) => {
-						const scarLeft = scene.left.kind === "scar" ? scene.left : undefined;
-						const activeScar = scarLeft
-							? scarLeft.unanchored
-								? firmwareScar
-								: scars.find((scar) => scar.anchor === scarLeft.anchor)
-							: undefined;
+					{scenes
+						.filter((scene) => scene.showLeft)
+						.map((scene) => {
+							const scarLeft = scene.left.kind === "scar" ? scene.left : undefined;
+							const activeScar = scarLeft
+								? scarLeft.unanchored
+									? firmwareScar
+									: scars.find((scar) => scar.anchor === scarLeft.anchor)
+								: undefined;
 
-						return (
-							<section
-								class="rail__scene"
-								data-c24-rail-scene={scene.id}
-								data-c24-parent={scene.parentId}
-							>
-								<a class="rail__eyebrow" href={`#${scene.id}`}>
-									{scene.eyebrow}
-								</a>
-								<p class="rail__title">{scene.title}</p>
+							return (
+								<section
+									class="rail__scene"
+									data-project-rail-scene={scene.id}
+									data-project-parent={scene.parentId}
+								>
+									<a class="rail__eyebrow" href={`#${scene.id}`}>
+										{scene.eyebrow}
+									</a>
+									<p class="rail__title">{scene.title}</p>
 
-								{scene.left.kind === "metrics" && (
-									<dl class="rail__metric-list">
-										{scene.left.keys.map(
-											(key) =>
-												metrics[key] && (
-													<div class="rail__metric">
-														<dt>{metricLabels[key]}</dt>
-														<dd>{metrics[key]}</dd>
+									{scene.left.kind === "metrics" && (
+										<dl class="rail__metric-list">
+											{scene.left.keys.map(
+												(key) =>
+													metrics[key] && (
+														<div class="rail__metric">
+															<dt>{metricLabels[key]}</dt>
+															<dd>{metrics[key]}</dd>
+														</div>
+													),
+											)}
+										</dl>
+									)}
+
+									{scene.left.kind === "product" && (
+										<>
+											{firmwareScar && (
+												<div class="rail__scar rail__scar--compact">
+													<div class="rail__scar-head">
+														<span>{firmwareScar.label}</span>
+														<strong>{firmwareScar.value}</strong>
 													</div>
-												),
-										)}
-									</dl>
-								)}
-
-								{scene.left.kind === "product" && (
-									<>
-										{firmwareScar && (
-											<div class="rail__scar rail__scar--compact">
-												<div class="rail__scar-head">
-													<span>{firmwareScar.label}</span>
-													<strong>{firmwareScar.value}</strong>
+													<p>{firmwareScar.result}</p>
 												</div>
-												<p>{firmwareScar.result}</p>
+											)}
+											<dl class="rail__bom">
+												{bom.map((item) => (
+													<div>
+														<dt>{item.label}</dt>
+														<dd>{item.value}</dd>
+													</div>
+												))}
+											</dl>
+										</>
+									)}
+
+									{scene.left.kind === "scar-index" && (
+										<ol class="rail__scar-index">
+											{scars.map((scar, index) => (
+												<li>
+													<a
+														href={`#${scar.anchor || scenes.find((item) => item.left.kind === "product")?.id || scene.id}`}
+													>
+														<span>{String(index + 1).padStart(2, "0")}</span>
+														<strong>{scar.label}</strong>
+														<em data-severity={scar.severity}>{scar.value}</em>
+													</a>
+												</li>
+											))}
+										</ol>
+									)}
+
+									{scene.left.kind === "scar" && activeScar && (
+										<div class="rail__scar">
+											<div class="rail__scar-head">
+												<span data-severity={activeScar.severity}>{activeScar.severity}</span>
+												<strong>{activeScar.value}</strong>
 											</div>
-										)}
-										<dl class="rail__bom">
-											{bom.map((item) => (
+											<p class="rail__scar-label">{activeScar.label}</p>
+											<dl>
 												<div>
-													<dt>{item.label}</dt>
-													<dd>{item.value}</dd>
+													<dt>Trigger</dt>
+													<dd>{activeScar.trigger}</dd>
+												</div>
+												<div>
+													<dt>Result</dt>
+													<dd>{activeScar.result}</dd>
+												</div>
+											</dl>
+										</div>
+									)}
+
+									{scene.left.kind === "context" && (
+										<dl class="rail__facts">
+											{contextFacts.map(([label, value]) => (
+												<div>
+													<dt>{label}</dt>
+													<dd>{String(value)}</dd>
 												</div>
 											))}
 										</dl>
-									</>
-								)}
+									)}
 
-								{scene.left.kind === "scar-index" && (
-									<ol class="rail__scar-index">
-										{scars.map((scar, index) => (
-											<li>
-												<a href={`#${scar.anchor || "ii-the-product-that-shipped"}`}>
-													<span>{String(index + 1).padStart(2, "0")}</span>
-													<strong>{scar.label}</strong>
-													<em data-severity={scar.severity}>{scar.value}</em>
-												</a>
-											</li>
-										))}
-									</ol>
-								)}
-
-								{scene.left.kind === "scar" && activeScar && (
-									<div class="rail__scar">
-										<div class="rail__scar-head">
-											<span data-severity={activeScar.severity}>{activeScar.severity}</span>
-											<strong>{activeScar.value}</strong>
-										</div>
-										<p class="rail__scar-label">{activeScar.label}</p>
-										<dl>
+									{scene.left.kind === "sources" && (
+										<div class="rail__source-counts">
 											<div>
-												<dt>Trigger</dt>
-												<dd>{activeScar.trigger}</dd>
+												<strong>{galleries.length}</strong>
+												<span>evidence galleries</span>
 											</div>
 											<div>
-												<dt>Result</dt>
-												<dd>{activeScar.result}</dd>
+												<strong>{galleryImageCount}</strong>
+												<span>archival images</span>
 											</div>
-										</dl>
-									</div>
-								)}
-
-								{scene.left.kind === "context" && (
-									<dl class="rail__facts">
-										{contextFacts.map(([label, value]) => (
 											<div>
-												<dt>{label}</dt>
-												<dd>{String(value)}</dd>
+												<strong>{references.length}</strong>
+												<span>external records</span>
 											</div>
-										))}
-									</dl>
-								)}
-
-								{scene.left.kind === "sources" && (
-									<div class="rail__source-counts">
-										<div>
-											<strong>{galleries.length}</strong>
-											<span>evidence galleries</span>
 										</div>
-										<div>
-											<strong>{galleryImageCount}</strong>
-											<span>archival images</span>
-										</div>
-										<div>
-											<strong>{references.length}</strong>
-											<span>external records</span>
-										</div>
-									</div>
-								)}
-							</section>
-						);
-					})}
+									)}
+								</section>
+							);
+						})}
 				</div>
 			</div>
 		</aside>
 	) : (
-		<aside class="c24-rail c24-rail--right" aria-label="C24 section media" data-pagefind-ignore>
-			<div class="rail__sticky" data-c24-rail-sticky>
-				<div class="rail__toc" data-c24-toc>
+		<aside
+			class="project-rail project-rail--right"
+			aria-label={`${projectTitle} section media`}
+			data-pagefind-ignore
+		>
+			<div class="rail__sticky" data-project-rail-sticky>
+				<div class="rail__toc" data-project-toc>
 					<Toc headings={headings} label="Article route" />
 				</div>
 
 				<div class="rail__scenes rail__scenes--media">
-					{scenes.map((scene) => {
-						const media = mediaFor(scene);
-						const isSources = scene.left.kind === "sources";
-						const showPortalStub = scene.title === "Governance & Rhythm";
-						return (
-							<section
-								class="rail__scene rail__media-scene"
-								data-c24-rail-scene={scene.id}
-								data-c24-parent={scene.parentId}
-							>
-								<div class="rail__media-head">
-									<span>{scene.eyebrow}</span>
-									<p class="rail__title">{scene.mediaLabel}</p>
-								</div>
+					{scenes
+						.filter((scene) => scene.showRight)
+						.map((scene) => {
+							const media = scene.media;
+							const isSources = scene.left.kind === "sources";
+							const showPortalStub = scene.portalStudy === true;
+							return (
+								<section
+									class="rail__scene rail__media-scene"
+									data-project-rail-scene={scene.id}
+									data-project-parent={scene.parentId}
+								>
+									<div class="rail__media-head">
+										<span>{scene.eyebrow}</span>
+										<p class="rail__title">{scene.mediaLabel}</p>
+									</div>
 
-								{media.length > 0 && (
-									<div
-										class:list={[
-											"rail__media-grid",
-											media.length === 1 && "rail__media-grid--single",
-										]}
-									>
-										{media.map((image) => (
-											<figure>
-												<a href={image.src} aria-label={`Open ${humanize(image.alt)} at full size`}>
-													<img
-														src={image.src}
-														alt={humanize(image.alt)}
-														loading="lazy"
-														decoding="async"
-													/>
+									{media.length > 0 && (
+										<div
+											class:list={[
+												"rail__media-grid",
+												media.length === 1 && "rail__media-grid--single",
+											]}
+										>
+											{media.map((image) => (
+												<figure>
+													<a
+														href={image.src}
+														aria-label={`Open ${humanize(image.alt)} at full size`}
+													>
+														<img
+															src={image.src}
+															alt={image.alt || ""}
+															loading="lazy"
+															decoding="async"
+														/>
+													</a>
+													<figcaption>
+														{image.caption || image.galleryCaption || image.galleryTitle}
+													</figcaption>
+												</figure>
+											))}
+										</div>
+									)}
+
+									{showPortalStub && (
+										<div
+											class="rail__portal-study"
+											role="group"
+											aria-label="Inert portal stub treatment comparison"
+											data-prototype-furniture
+										>
+											<div class="rail__portal-stub rail__portal-stub--ink">
+												<svg viewBox="0 0 28 28" aria-hidden="true">
+													<path d="M14.8 3.8c5.7.5 9.9 4.2 9.6 9.7-.3 5.7-4.7 10.2-10.6 10.6C8.2 24.4 3.7 20.3 3.6 14.8 3.5 9.1 8 4.4 14.8 3.8Z" />
+													<path d="M9.2 15.7c1.7-3.4 5.7-5.1 9.6-3.4M17.1 8.8l2 3.5-3.8 1.4" />
+												</svg>
+												<span>Portal stub</span>
+											</div>
+											<div class="rail__portal-stub rail__portal-stub--ghost">
+												<svg viewBox="0 0 28 28" aria-hidden="true">
+													<path d="M14.8 3.8c5.7.5 9.9 4.2 9.6 9.7-.3 5.7-4.7 10.2-10.6 10.6C8.2 24.4 3.7 20.3 3.6 14.8 3.5 9.1 8 4.4 14.8 3.8Z" />
+													<path d="M9.2 15.7c1.7-3.4 5.7-5.1 9.6-3.4M17.1 8.8l2 3.5-3.8 1.4" />
+												</svg>
+												<span>Portal stub</span>
+											</div>
+										</div>
+									)}
+
+									{isSources && (
+										<div class="rail__source-links">
+											{audioUrl && (
+												<a href={audioUrl}>
+													<span>Audio briefing</span>
+													<strong>Listen ↗</strong>
 												</a>
-												<figcaption>{image.galleryTitle}</figcaption>
-											</figure>
-										))}
-									</div>
-								)}
-
-								{showPortalStub && (
-									<div
-										class="rail__portal-study"
-										role="group"
-										aria-label="Inert portal stub treatment comparison"
-										data-prototype-furniture
-									>
-										<div class="rail__portal-stub rail__portal-stub--ink">
-											<svg viewBox="0 0 28 28" aria-hidden="true">
-												<path d="M14.8 3.8c5.7.5 9.9 4.2 9.6 9.7-.3 5.7-4.7 10.2-10.6 10.6C8.2 24.4 3.7 20.3 3.6 14.8 3.5 9.1 8 4.4 14.8 3.8Z" />
-												<path d="M9.2 15.7c1.7-3.4 5.7-5.1 9.6-3.4M17.1 8.8l2 3.5-3.8 1.4" />
-											</svg>
-											<span>Portal stub</span>
+											)}
+											{references.map((reference) => (
+												<a href={reference.href}>
+													<span>{reference.text}</span>
+													<strong>Open ↗</strong>
+												</a>
+											))}
 										</div>
-										<div class="rail__portal-stub rail__portal-stub--ghost">
-											<svg viewBox="0 0 28 28" aria-hidden="true">
-												<path d="M14.8 3.8c5.7.5 9.9 4.2 9.6 9.7-.3 5.7-4.7 10.2-10.6 10.6C8.2 24.4 3.7 20.3 3.6 14.8 3.5 9.1 8 4.4 14.8 3.8Z" />
-												<path d="M9.2 15.7c1.7-3.4 5.7-5.1 9.6-3.4M17.1 8.8l2 3.5-3.8 1.4" />
-											</svg>
-											<span>Portal stub</span>
-										</div>
-									</div>
-								)}
-
-								{isSources && (
-									<div class="rail__source-links">
-										{audioUrl && (
-											<a href={audioUrl}>
-												<span>Audio briefing</span>
-												<strong>Listen ↗</strong>
-											</a>
-										)}
-										{references.map((reference) => (
-											<a href={reference.href}>
-												<span>{reference.text}</span>
-												<strong>Open ↗</strong>
-											</a>
-										))}
-									</div>
-								)}
-							</section>
-						);
-					})}
+									)}
+								</section>
+							);
+						})}
 				</div>
 			</div>
 		</aside>
@@ -335,7 +329,7 @@ function mediaFor(scene: C24RailScene) {
 }
 
 <style>
-	.c24-rail {
+	.project-rail {
 		display: none;
 		min-width: 0;
 	}
@@ -748,7 +742,7 @@ function mediaFor(scene: C24RailScene) {
 	}
 
 	@media (min-width: 1024px) {
-		.c24-rail {
+		.project-rail {
 			display: block;
 		}
 	}

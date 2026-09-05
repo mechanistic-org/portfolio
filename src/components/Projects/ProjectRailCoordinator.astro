@@ -1,17 +1,21 @@
 ---
 interface Props {
 	enabled?: boolean;
+	anchors?: string[];
 }
 
-const { enabled = false } = Astro.props;
+const { enabled = false, anchors = [] } = Astro.props;
 ---
 
-<c24-rail-coordinator data-c24-rails={enabled ? "" : undefined}>
+<project-rail-coordinator
+	data-project-rails={enabled ? "" : undefined}
+	data-rail-anchors={JSON.stringify(anchors)}
+>
 	<slot />
-</c24-rail-coordinator>
+</project-rail-coordinator>
 
 <script>
-	class C24RailCoordinator extends HTMLElement {
+	class ProjectRailCoordinator extends HTMLElement {
 		private mediaQuery?: MediaQueryList;
 		private observer?: IntersectionObserver;
 		private headings: HTMLElement[] = [];
@@ -19,7 +23,7 @@ const { enabled = false } = Astro.props;
 		private resizeFrame = 0;
 
 		connectedCallback() {
-			if (!this.hasAttribute("data-c24-rails")) return;
+			if (!this.hasAttribute("data-project-rails")) return;
 
 			this.mediaQuery = window.matchMedia("(min-width: 1024px)");
 			this.mediaQuery.addEventListener("change", this.handleModeChange);
@@ -54,9 +58,9 @@ const { enabled = false } = Astro.props;
 
 		private configure() {
 			this.disconnectObserver();
-			this.removeAttribute("data-c24-enhanced");
+			this.removeAttribute("data-project-enhanced");
 
-			this.panels = Array.from(this.querySelectorAll<HTMLElement>("[data-c24-rail-scene]"));
+			this.panels = Array.from(this.querySelectorAll<HTMLElement>("[data-project-rail-scene]"));
 			this.panels.forEach((panel) => {
 				panel.removeAttribute("data-active");
 				panel.removeAttribute("aria-hidden");
@@ -65,14 +69,14 @@ const { enabled = false } = Astro.props;
 
 			if (!this.mediaQuery?.matches || this.panels.length === 0) return;
 
-			const sceneIds = new Set(this.panels.map((panel) => panel.dataset.c24RailScene));
+			const sceneIds = new Set<string>(JSON.parse(this.dataset.railAnchors || "[]"));
 			this.headings = Array.from(
 				this.querySelectorAll<HTMLElement>(".markdown-content h2[id], .markdown-content h3[id]"),
 			).filter((heading) => sceneIds.has(heading.id));
 
 			if (this.headings.length === 0) return;
 
-			this.setAttribute("data-c24-enhanced", "");
+			this.setAttribute("data-project-enhanced", "");
 			this.updateActiveScene();
 			this.observer = new IntersectionObserver(this.scheduleUpdate, {
 				rootMargin: "-27% 0px -72% 0px",
@@ -82,7 +86,7 @@ const { enabled = false } = Astro.props;
 		}
 
 		private updateActiveScene() {
-			if (!this.hasAttribute("data-c24-enhanced") || this.headings.length === 0) return;
+			if (!this.hasAttribute("data-project-enhanced") || this.headings.length === 0) return;
 
 			const activationLine = window.innerHeight * 0.28;
 			let activeId = this.headings[0].id;
@@ -93,67 +97,69 @@ const { enabled = false } = Astro.props;
 
 			let activeParent = activeId;
 			this.panels.forEach((panel) => {
-				const isActive = panel.dataset.c24RailScene === activeId;
+				const isActive = panel.dataset.projectRailScene === activeId;
 				panel.toggleAttribute("data-active", isActive);
 				panel.setAttribute("aria-hidden", String(!isActive));
 				panel.toggleAttribute("inert", !isActive);
-				if (isActive) activeParent = panel.dataset.c24Parent || activeId;
+				if (isActive) activeParent = panel.dataset.projectParent || activeId;
 			});
 
-			this.querySelectorAll<HTMLAnchorElement>("[data-c24-toc] a[href^='#']").forEach((link) => {
-				const isCurrent = link.getAttribute("href") === `#${activeParent}`;
-				if (isCurrent) link.setAttribute("aria-current", "location");
-				else link.removeAttribute("aria-current");
-			});
+			this.querySelectorAll<HTMLAnchorElement>("[data-project-toc] a[href^='#']").forEach(
+				(link) => {
+					const isCurrent = link.getAttribute("href") === `#${activeParent}`;
+					if (isCurrent) link.setAttribute("aria-current", "location");
+					else link.removeAttribute("aria-current");
+				},
+			);
 		}
 	}
 
-	if (!customElements.get("c24-rail-coordinator")) {
-		customElements.define("c24-rail-coordinator", C24RailCoordinator);
+	if (!customElements.get("project-rail-coordinator")) {
+		customElements.define("project-rail-coordinator", ProjectRailCoordinator);
 	}
 </script>
 
 <style is:global>
-	c24-rail-coordinator {
+	project-rail-coordinator {
 		display: block;
 	}
 
 	@media (min-width: 1024px) {
-		[data-c24-rails][data-c24-enhanced] [data-c24-rail-sticky] {
+		[data-project-rails][data-project-enhanced] [data-project-rail-sticky] {
 			position: sticky;
 			top: 6rem;
 		}
 
-		[data-c24-rails][data-c24-enhanced] .rail__scenes {
+		[data-project-rails][data-project-enhanced] .rail__scenes {
 			grid-template-areas: "rail-scene";
 			gap: 0;
 		}
 
-		[data-c24-rails][data-c24-enhanced] [data-c24-rail-scene] {
+		[data-project-rails][data-project-enhanced] [data-project-rail-scene] {
 			grid-area: rail-scene;
 			display: block;
 			visibility: hidden;
 			pointer-events: none;
 		}
 
-		[data-c24-rails][data-c24-enhanced] [data-c24-rail-scene][data-active] {
+		[data-project-rails][data-project-enhanced] [data-project-rail-scene][data-active] {
 			z-index: 1;
 			visibility: visible;
 			pointer-events: auto;
-			animation: c24-rail-enter 180ms ease-out both;
+			animation: project-rail-enter 180ms ease-out both;
 		}
 	}
 
-	[data-c24-toc] a[aria-current="location"] {
+	[data-project-toc] a[aria-current="location"] {
 		color: var(--color-foreground);
 	}
 
-	[data-c24-toc] a[aria-current="location"]::before {
+	[data-project-toc] a[aria-current="location"]::before {
 		color: var(--color-primary);
 		content: "→ ";
 	}
 
-	@keyframes c24-rail-enter {
+	@keyframes project-rail-enter {
 		from {
 			opacity: 0;
 			transform: translateY(4px);
@@ -165,7 +171,10 @@ const { enabled = false } = Astro.props;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		[data-c24-rails][data-c24-enhanced] [data-c24-rail-scene][data-active] {
+		[data-project-toc] a {
+			transition: none;
+		}
+		[data-project-rails][data-project-enhanced] [data-project-rail-scene][data-active] {
 			animation: none;
 		}
 	}

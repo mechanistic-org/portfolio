@@ -2,6 +2,9 @@
 import { getCollection, render } from "astro:content";
 import { getMultiverseData } from "@/utils/getMultiverseData";
 import { currentSite } from "@config/site_config";
+import { routeEligibleProjects, careerRecords } from "@utils/projectRoster";
+import { trialPresentation, careerIdentityAliases } from "@config/projectArticleTrial";
+import { buildContextRibbon } from "@utils/contextRibbon";
 
 export const prerender = true;
 
@@ -12,17 +15,17 @@ import ProjectArticle from "@layouts/themes/ProjectArticle.astro";
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
 	const allProjects = await getCollection("projects");
-	const projects = allProjects.filter((p) => {
-		const targets = p.data.targets || ["main"];
-		// Drafts stay reachable in local dev, but never ship.
-		return targets.includes(currentSite) && (!p.data.draft || import.meta.env.DEV);
-	});
+	const projects = routeEligibleProjects(allProjects, currentSite, import.meta.env.DEV);
+	const careerNodes = careerRecords(
+		routeEligibleProjects(allProjects, currentSite),
+		careerIdentityAliases,
+	);
 
 	const multiverseData = await getMultiverseData();
 
 	const paths: any[] = projects.map((entry) => ({
 		params: { slug: entry.id },
-		props: { entry, placeholderData: null },
+		props: { entry, placeholderData: null, careerNodes },
 	}));
 
 	// Auto-generate placeholders for missing Graph Nodes
@@ -51,9 +54,10 @@ export async function getStaticPaths() {
 interface Props {
 	entry: any | null; // Typed as any to avoid parser issues
 	placeholderData: any;
+	careerNodes?: ReturnType<typeof careerRecords>;
 }
 
-const { entry, placeholderData } = Astro.props;
+const { entry, placeholderData, careerNodes = [] } = Astro.props;
 let Content: any = () => null;
 let headings: any[] = [];
 let data: any;
@@ -108,15 +112,10 @@ if (entry) {
 const allProjects = await getCollection("projects");
 
 // Sort by date descending (newest first)
-const sortedProjects = allProjects
-	.filter((p) => {
-		const targets = p.data.targets || ["main"];
-		return targets.includes(currentSite) && (!p.data.draft || import.meta.env.DEV);
-	})
-	.sort(
-		(a, b) =>
-			new Date(b.data.date || new Date()).getTime() - new Date(a.data.date || new Date()).getTime(),
-	);
+const sortedProjects = routeEligibleProjects(allProjects, currentSite, import.meta.env.DEV).sort(
+	(a, b) =>
+		new Date(b.data.date || new Date()).getTime() - new Date(a.data.date || new Date()).getTime(),
+);
 
 // Navigation (Only works for real projects, placeholders get no nav for now)
 const currentIndex = sortedProjects.findIndex((p) => p.id === entry?.id);
@@ -161,7 +160,13 @@ const ThemeComponents: Record<string, any> = {
 };
 
 // Select Component (with fallback)
-const SelectedTheme = ThemeComponents[theme] || Hyperspace;
+// #222 is a presentation-only main-site trial. Canon/generated theme values stay intact.
+const presentation =
+	currentSite === "main" && entry?.data.tier === "deep_dive"
+		? trialPresentation(entry.id)
+		: undefined;
+const SelectedTheme = presentation ? ProjectArticle : ThemeComponents[theme] || Hyperspace;
+const contextRibbon = presentation ? buildContextRibbon(careerNodes, entry.id) : null;
 
 // === SIDECAR INJECTION (The Brain) ===
 // DISABLED 2026-06-15 (#69 schema hardening). The unguarded `data.json` glob merged sidecar
@@ -260,5 +265,6 @@ console.log(`[ROUTER] Project: ${finalEntry.id} -> Theme: ${theme}`);
 	headings={headings}
 	metrics={finalEntry.data.metrics}
 	entropy={entropyData}
-	showContextRibbon={finalEntry.data.slug === "c24"}
+	presentation={presentation}
+	contextRibbon={contextRibbon}
 />

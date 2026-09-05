@@ -27,21 +27,21 @@ import Gallery from "@components/primitives/Gallery.astro";
 import Toc from "@components/primitives/Toc.astro";
 import Navbox from "@components/primitives/Navbox.astro";
 import Hatnote from "@components/primitives/Hatnote.astro";
-import C24ContinuityRail from "@components/Projects/C24ContinuityRail.astro";
-import C24EvidenceBreakout from "@components/Projects/C24EvidenceBreakout.astro";
-import C24RailCoordinator from "@components/Projects/C24RailCoordinator.astro";
+import ProjectContinuityRail from "@components/Projects/ProjectContinuityRail.astro";
+import ProjectEvidenceBreakout from "@components/Projects/ProjectEvidenceBreakout.astro";
+import ProjectRailCoordinator from "@components/Projects/ProjectRailCoordinator.astro";
 import ContextRibbon from "@components/primitives/ContextRibbon.astro";
-import { getCareerAssembly } from "@utils/mapCareerAssembly";
-import { buildContextRibbon } from "@utils/contextRibbon";
-import { c24RailScenes } from "@config/c24RailScenes";
+import type { RibbonModel } from "@utils/contextRibbon";
+import { resolveProjectPresentation, type ProjectPresentation } from "@utils/projectPresentation";
 
 interface Props {
-	entry: { data: Record<string, any> };
+	entry: { id: string; data: Record<string, any> };
 	Content: any;
 	headings?: { depth: number; slug: string; text: string }[];
 	nextProject?: any;
 	prevProject?: any;
-	showContextRibbon?: boolean;
+	contextRibbon?: RibbonModel | null;
+	presentation?: ProjectPresentation;
 }
 const {
 	entry,
@@ -49,13 +49,10 @@ const {
 	headings = [],
 	nextProject,
 	prevProject,
-	showContextRibbon = false,
+	contextRibbon = null,
+	presentation,
 } = Astro.props;
 const d = entry.data;
-const contextRibbon =
-	showContextRibbon && d.slug === "c24"
-		? buildContextRibbon((await getCareerAssembly()).nodes, "c24")
-		: null;
 
 const pretty = (s?: string) =>
 	s
@@ -63,7 +60,12 @@ const pretty = (s?: string) =>
 				.replace(/_/g, " ")
 				.replace(/\b\w/g, (c) => c.toUpperCase())
 		: undefined;
-const yr = (x: any) => (x ? new Date(x).getFullYear() : null);
+const yr = (x: any) => {
+	if (!x) return null;
+	const date = new Date(x);
+	// Normalize the trial's recorded years without changing non-trial presentations.
+	return presentation ? date.getUTCFullYear() : date.getFullYear();
+};
 const period = [yr(d.date), yr(d.endDate)].filter(Boolean).join("–") || d.duration;
 
 // Recursively collect any { src, alt } images stashed in the legacy cyberspace data.
@@ -92,12 +94,12 @@ const galleries = (d.cyberspace?.stickies || []).filter(
 // deep_dive = everything expanded + full galleries; lite = collapsed HUD, no gallery wall.
 const isDeepDive = d.tier === "deep_dive";
 const lite = !isDeepDive;
-const wantsC24ContinuityRails = d.slug === "c24" && !lite;
-const articleHeadingIds = new Set(headings.map((heading) => heading.slug));
-const activeC24RailScenes = wantsC24ContinuityRails
-	? c24RailScenes.filter((scene) => articleHeadingIds.has(scene.id))
-	: [];
-const useC24ContinuityRails = wantsC24ContinuityRails && activeC24RailScenes.length > 0;
+const resolved =
+	presentation && !lite
+		? resolveProjectPresentation(presentation, { ...d, title: d.title }, headings, galleries)
+		: undefined;
+const activeRailScenes = resolved?.scenes ?? [];
+const useContinuityRails = !!resolved;
 
 const meta = [
 	pretty(d.employer),
@@ -137,7 +139,11 @@ const navNext = nextProject
 ---
 
 <BaseLayout type="project" title={d.title} description={d.description} image={d.heroImage}>
-	<article class="mx-auto mt-24 mb-24 w-full max-w-[1680px] px-4 sm:px-6 lg:px-8">
+	<article
+		data-project-article={entry.id}
+		data-trial={resolved ? "" : undefined}
+		class="mx-auto mt-24 mb-24 w-full max-w-[1680px] px-4 sm:px-6 lg:px-8"
+	>
 		<div class="mb-4 flex items-center justify-end">
 			<ThemeControl />
 		</div>
@@ -154,14 +160,15 @@ const navNext = nextProject
 
 		{contextRibbon && <ContextRibbon model={contextRibbon} />}
 
-		<C24RailCoordinator enabled={useC24ContinuityRails}>
+		<ProjectRailCoordinator enabled={useContinuityRails} anchors={resolved?.anchors}>
 			<div class="lg:grid lg:grid-cols-[260px_minmax(0,1fr)_300px] lg:gap-8 xl:gap-12">
 				{/* LEFT — forensic HUD */}
 				{
-					useC24ContinuityRails ? (
-						<C24ContinuityRail
+					useContinuityRails ? (
+						<ProjectContinuityRail
 							side="left"
-							scenes={activeC24RailScenes}
+							projectTitle={d.title}
+							scenes={activeRailScenes}
 							headings={headings}
 							scars={scars}
 							metrics={d.forensic_metrics || {}}
@@ -220,7 +227,7 @@ const navNext = nextProject
 						)
 					}
 					{
-						!lite && !useC24ContinuityRails && galleries.length > 0 && (
+						!lite && !useContinuityRails && galleries.length > 0 && (
 							<section class="mt-16">
 								<h2 class="h2 mb-6">Visual Evidence</h2>
 								<div class="space-y-10">
@@ -248,10 +255,11 @@ const navNext = nextProject
 
 				{/* RIGHT — contents · media · references */}
 				{
-					useC24ContinuityRails ? (
-						<C24ContinuityRail
+					useContinuityRails ? (
+						<ProjectContinuityRail
 							side="right"
-							scenes={activeC24RailScenes}
+							projectTitle={d.title}
+							scenes={activeRailScenes}
 							headings={headings}
 							scars={scars}
 							metrics={d.forensic_metrics || {}}
@@ -299,10 +307,14 @@ const navNext = nextProject
 					)
 				}
 			</div>
-		</C24RailCoordinator>
+		</ProjectRailCoordinator>
 		{
-			useC24ContinuityRails && galleries.length > 0 && (
-				<C24EvidenceBreakout galleries={galleries} heroImage={d.heroImage} />
+			useContinuityRails && galleries.length > 0 && (
+				<ProjectEvidenceBreakout
+					galleries={galleries}
+					featured={resolved?.featured}
+					breakout={resolved?.breakout}
+				/>
 			)
 		}
 		<p
