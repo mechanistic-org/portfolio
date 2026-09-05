@@ -207,6 +207,15 @@ function processMarkdown(text: string) {
 		body {
 			background: white;
 		}
+		header {
+			display: grid;
+			grid-template-columns: minmax(0, 1fr) max-content;
+			column-gap: 1.5rem;
+		}
+		header h2,
+		header p {
+			white-space: normal;
+		}
 		/* Hide standard site nav/footer if they exist in BaseLayout */
 		:global(nav),
 		:global(footer:not(.resume-footer)) {
