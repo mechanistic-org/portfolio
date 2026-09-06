@@ -25,6 +25,11 @@ assert.equal(
 	chronology.events.find((event) => event.id === "first-customer-ship").date,
 	"2007-11-07",
 );
+const noBid = chronology.events.find((event) => event.id === "top-panel-no-bid");
+assert.equal(noBid.date, "2007-03-07");
+assert.equal(noBid.date_basis, "document-date");
+assert.match(noBid.verification_note, /reporting checkpoint, not a claimed occurrence date/u);
+assert.ok(!chronologyBytes.toString("utf8").includes("11/15/2006"));
 assert.ok(!chronologyBytes.toString("utf8").match(/[A-Z]:[\\/]|portfolio_working/u));
 
 if (process.env.CANON_ROOT) {

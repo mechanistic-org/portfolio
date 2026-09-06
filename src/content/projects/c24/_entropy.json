@@ -56,19 +56,19 @@
     "type": "Document"
   },
   {
-    "date": "2006-11-15",
-    "score": 9,
-    "snippet": "CRITICAL: Primary vendor Kwanta 'No-Bid' the Top Panel due to standoff density.",
-    "source_ref": "Curtis.11.15.06.pdf",
-    "time_delta": 23,
-    "type": "Document"
-  },
-  {
     "date": "2006-12-04",
     "score": 7,
     "snippet": "Authorized Mass Precision to use offset welder for emergency manual sheet metal bridge.",
     "source_ref": "RE_ CURTIS COMMAND24 REV CONFIRMATION PLEASE.msg",
-    "time_delta": 19,
+    "time_delta": 42,
+    "type": "Document"
+  },
+  {
+    "date": "2007-03-07",
+    "score": 9,
+    "snippet": "CRITICAL: The status report records that Kwanta no-bid the Top Panel and that Operations and Manufacturing were seeking a resolution.",
+    "source_ref": "Curtis.3.7.07.pdf",
+    "time_delta": 93,
     "type": "Document"
   },
   {

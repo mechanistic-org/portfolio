@@ -178,6 +178,26 @@ def chronology_bytes(sources):
     if re.search(rb"(?i)(?:[A-Z]:[\\/]|portfolio_working|raw[\\/])", payload):
         raise ValueError("canon chronology contains a local evidence locator")
     return payload
+
+
+def sync_optional_sidecar(target, payload):
+    """Make one generated sidecar exactly match an optional canon artifact."""
+    if payload is None:
+        if os.path.exists(target):
+            os.remove(target)
+        return
+    with open(target, "wb") as handle:
+        handle.write(payload)
+
+
+def optional_sidecar_matches_authority(source, target):
+    """Require identical bytes when canon exists and absence when it does not."""
+    if not os.path.exists(source):
+        return not os.path.exists(target)
+    if not os.path.exists(target):
+        return False
+    with open(source, "rb") as source_handle, open(target, "rb") as target_handle:
+        return source_handle.read() == target_handle.read()
 # Contract v2 kill list (canon/queries/k2-stranded-data-decision-sheet.md).
 # `isomorphics` REMOVED from DROP_FIELDS — operator lean-in ruling 2026-07-01:
 # it round-trips canon -> site like scars.
@@ -477,9 +497,7 @@ def generate():
     if entropy is not None:
         with open(os.path.join(out_dir, "_entropy.json"), "w", encoding="utf-8") as f:
             json.dump(entropy, f, indent=2, ensure_ascii=False, sort_keys=True, default=str)
-    if chronology is not None:
-        with open(os.path.join(out_dir, "_chronology.json"), "wb") as f:
-            f.write(chronology)
+    sync_optional_sidecar(os.path.join(out_dir, "_chronology.json"), chronology)
     extra = f" + data.json (keys: {sorted(data_json)})" if data_json else ""
     print(f"[generate] -> {out_dir}\\index.mdx ({len(site_fm)} fm keys){extra}")
     return site_fm, data_json, site_body
@@ -527,19 +545,9 @@ def verify():
     # Trailing-newline tolerant: format hooks (Prettier) add a final newline to
     # committed pages; that is formatting, not content loss (minimerc false FAIL).
     body_ok = (gen_body.rstrip("\n") == orig_body.rstrip("\n"))
-    chronology_ok = True
-    live_chronology_ok = True
-    if os.path.exists(CANON_CHRONOLOGY):
-        generated_chronology = os.path.join(OUT_DIR, "_chronology.json")
-        canonical_bytes = open(CANON_CHRONOLOGY, "rb").read()
-        chronology_ok = (
-            os.path.exists(generated_chronology)
-            and canonical_bytes == open(generated_chronology, "rb").read()
-        )
-        live_chronology_ok = (
-            os.path.exists(SITE_CHRONOLOGY)
-            and canonical_bytes == open(SITE_CHRONOLOGY, "rb").read()
-        )
+    generated_chronology = os.path.join(OUT_DIR, "_chronology.json")
+    chronology_ok = optional_sidecar_matches_authority(CANON_CHRONOLOGY, generated_chronology)
+    live_chronology_ok = optional_sidecar_matches_authority(CANON_CHRONOLOGY, SITE_CHRONOLOGY)
     print("\n=== VERIFY (lossless round-trip) ===")
     print(f"  original fm keys {len(orig_fm)} -> lean {len(gen_fm)} + data.json {sorted(data_json)}")
     print(f"  MISSING after merge : {missing or 'none'}")
