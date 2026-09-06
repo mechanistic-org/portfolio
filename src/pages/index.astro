@@ -1,4 +1,6 @@
 ---
+import verbalMap from "@/data/homepage-verbal-map.json";
+import { HXO_TOUR_STEPS } from "@/config/hxoTour";
 export const prerender = true;
 import Layout from "../layouts/BaseLayout.astro";
 import { getCareerAssembly } from "../utils/mapCareerAssembly";
@@ -196,6 +198,55 @@ if (!isUnderConstruction) {
 								</div>
 							</dl>
 						</div>
+
+						<div
+							id="verbal-map"
+							class="mt-8 grid gap-x-10 gap-y-7 border-t border-zinc-900 pt-8 md:grid-cols-2"
+						>
+							{verbalMap.map((block) => (
+								<div>
+									<h3 class="mb-2 text-lg font-semibold text-zinc-200">{block.title}</h3>
+									<p class="max-w-prose text-sm leading-relaxed text-zinc-400">{block.copy}</p>
+								</div>
+							))}
+						</div>
+						<nav
+							aria-label="Explore the record"
+							class="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm text-zinc-300"
+						>
+							<a
+								data-astro-reload
+								href={
+									"/#lens=" +
+									HXO_TOUR_STEPS[0].lens +
+									"&pin=" +
+									encodeURIComponent(HXO_TOUR_STEPS[0].projectId) +
+									"&tour=" +
+									HXO_TOUR_STEPS[0].id
+								}
+								class="underline decoration-zinc-600 underline-offset-4 hover:text-white"
+							>
+								Tour
+							</a>
+							<a
+								href="/how-i-work/"
+								class="underline decoration-zinc-600 underline-offset-4 hover:text-white"
+							>
+								How I Work
+							</a>
+							<a
+								href="/colophon/"
+								class="underline decoration-zinc-600 underline-offset-4 hover:text-white"
+							>
+								Colophon
+							</a>
+							<a
+								href="/colophon/#build-log"
+								class="underline decoration-zinc-600 underline-offset-4 hover:text-white"
+							>
+								Build Log
+							</a>
+						</nav>
 
 						<nav
 							aria-label="Machine-readable"

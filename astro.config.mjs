@@ -124,11 +124,22 @@ export default defineConfig({
 			// reader arriving from search. Keep this list in sync with the
 			// X-Robots-Tag rules in public/_headers: dropping a URL from the sitemap
 			// does not stop it being indexed, it only stops it being advertised.
-			// NOTE: /colophon/ is excluded only until the "how I work" rewrite lands;
-			// it currently documents a retired pipeline step.
+			// #423 publishes the reviewed Wave 1 and current EN-OS explanation.
+			// Other historical colophon routes retain their prior sitemap exclusion.
 			filter: (page) => {
+				const pathname = new URL(page).pathname.replace(/\/$/, "");
+				if (
+					pathname.startsWith("/colophon/") &&
+					![
+						"/colophon/en-os",
+						"/colophon/reversible-editorial-queue",
+						"/colophon/work-survives-a-session",
+						"/colophon/missing-evidence",
+						"/colophon/shipped-means-reachable",
+					].includes(pathname)
+				)
+					return false;
 				const EXCLUDED = [
-					"/colophon/",
 					"/docs/",
 					"/raw/",
 					"/archive/",

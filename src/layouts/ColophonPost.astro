@@ -20,8 +20,8 @@ interface Props {
 const { frontmatter } = Astro.props;
 const { title, description, pubDate, updatedDate, heroImage, tags } = frontmatter;
 
-// Default date if missing
-const date = pubDate ? new Date(pubDate) : new Date();
+// An absent publication date carries no invented date.
+const date = pubDate ? new Date(pubDate) : null;
 ---
 
 <BaseLayout title={title} description={description || ""} type="project">
@@ -46,14 +46,21 @@ const date = pubDate ? new Date(pubDate) : new Date();
 			<div
 				class="mx-auto mt-8 flex w-fit items-center justify-center gap-6 border-t border-b border-neutral-800 px-8 py-4 font-mono text-sm text-neutral-500"
 			>
-				<div class="flex items-center gap-2">
-					<span class="text-primary">DATE:</span>
-					<time datetime={date.toISOString()}
-						>{
-							date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
-						}</time
-					>
-				</div>
+				{
+					date && (
+						<div class="flex items-center gap-2">
+							<span class="text-primary">DATE:</span>
+							<time datetime={date.toISOString()}>
+								{date.toLocaleDateString("en-US", {
+									month: "long",
+									day: "numeric",
+									year: "numeric",
+									timeZone: "UTC",
+								})}
+							</time>
+						</div>
+					)
+				}
 				{
 					tags && (
 						<div class="flex items-center gap-2">

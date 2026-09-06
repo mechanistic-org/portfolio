@@ -1,0 +1,18 @@
+[
+	{
+		"title": "What you're looking at",
+		"copy": "This is a map of my engineering work. In the Time view, position shows when a project happened; color identifies the employer. Open a project to follow its constraints, decisions, and supporting evidence."
+	},
+	{
+		"title": "How I built this",
+		"copy": "I built this record from project archives, design decisions, test reports, and shipped outcomes. Claims are checked against source material before they become public copy."
+	},
+	{
+		"title": "The tools behind it",
+		"copy": "I keep the source record separately from the site. Reviewed material becomes public pages through repeatable builds and checks, so the presentation can change without losing the underlying evidence."
+	},
+	{
+		"title": "Where to go next",
+		"copy": "Start with the Tour for a short path through the work, open a project for the full record, or read How I Work for the method behind the interventions."
+	}
+]

@@ -2631,6 +2631,8 @@ async function getRecordLayoutSnapshot(page) {
 		return {
 			main: toBounds(main),
 			recordBand: toBounds(recordBand),
+			verbalMap: toBounds(document.querySelector("#verbal-map")),
+			exploreNav: toBounds(document.querySelector('nav[aria-label="Explore the record"]')),
 			footer: toBounds(footer),
 			domOrder: follows(main, recordBand) && follows(recordBand, footer),
 			projectAnchorCount: projectPaths.length,
@@ -2656,7 +2658,10 @@ function assertRecordLayoutSnapshot(snapshot, viewport, mode) {
 	const main = requireValue(snapshot.main, `${label}: HXO main is missing`);
 	const recordBand = requireValue(snapshot.recordBand, `${label}: record band is missing`);
 	const footer = requireValue(snapshot.footer, `${label}: footer is missing`);
-	const heightCap = viewport.width <= 390 ? 360 : 280;
+	const verbalMap = requireValue(snapshot.verbalMap, label + ": approved verbal map is missing");
+	const exploreNav = requireValue(snapshot.exploreNav, label + ": record navigation is missing");
+	// Preserve the compact statistics-band budget around the approved #423 addition.
+	const heightCap = (viewport.width <= 390 ? 360 : 280) + verbalMap.height + exploreNav.height + 56;
 
 	if (!snapshot.domOrder) {
 		throw new Error(`${label}: DOM order is not main → record band → footer`);
@@ -2689,8 +2694,15 @@ function assertRecordLayoutSnapshot(snapshot, viewport, mode) {
 	}
 	if (
 		JSON.stringify(snapshot.bandAnchorPaths) !==
-			JSON.stringify(["/api/projects.json", "/llms.txt"]) ||
-		snapshot.visibleBandAnchorCount !== 2
+			JSON.stringify([
+				"/",
+				"/api/projects.json",
+				"/colophon/",
+				"/colophon/",
+				"/how-i-work/",
+				"/llms.txt",
+			]) ||
+		snapshot.visibleBandAnchorCount !== 6
 	) {
 		throw new Error(
 			`${label}: machine links are incomplete or hidden: ${JSON.stringify({ paths: snapshot.bandAnchorPaths, visible: snapshot.visibleBandAnchorCount })}`,
@@ -2766,7 +2778,15 @@ async function assertionRecordBandPrerendered(page, problems) {
 			throw new Error(`Record-band facts are incorrect: ${JSON.stringify(state.definitions)}`);
 		}
 		if (
-			JSON.stringify(state.anchorPaths) !== JSON.stringify(["/api/projects.json", "/llms.txt"]) ||
+			JSON.stringify(state.anchorPaths) !==
+				JSON.stringify([
+					"/",
+					"/api/projects.json",
+					"/colophon/",
+					"/colophon/",
+					"/how-i-work/",
+					"/llms.txt",
+				]) ||
 			state.machineNavCount !== 1 ||
 			state.projectDetailAnchors !== 0
 		) {
@@ -2944,10 +2964,11 @@ const assertionSpecs = [
 	],
 ];
 
+const recordBandOnly = process.argv.includes("--record-band-only");
 const passed = await runBrowserContract({
-	assertionSpecs,
+	assertionSpecs: recordBandOnly ? assertionSpecs.slice(-2) : assertionSpecs,
 	cacheDirectory: HARNESS_CACHE_DIR,
-	expectedAssertions: EXPECTED_ASSERTIONS,
+	expectedAssertions: recordBandOnly ? 2 : EXPECTED_ASSERTIONS,
 	initialViewport: VIEWPORTS[0],
 	title: "P3B homepage focused-constellation contract",
 });

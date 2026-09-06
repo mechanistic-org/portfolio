@@ -10,7 +10,7 @@ import UniversalHUD from "@components/Nav/UniversalHUD.astro";
 
 // Workaround for empty collection issue: manually load files via glob
 const globFeatures = import.meta.glob("../../content/colophon/*.mdx", { eager: true });
-const features = Object.values(globFeatures)
+const entries = Object.values(globFeatures)
 	.map((file: any) => {
 		const data = file.frontmatter || {};
 		// Extract slug from filename if not in frontmatter
@@ -18,12 +18,20 @@ const features = Object.values(globFeatures)
 		return {
 			id: file.file,
 			slug: data.slug || filename,
-			description: data.description || data.subtitle || "",
+			description: data.description || data.subtitle || data.summary || "",
 			...data,
 			Content: file.Content || file.default,
 		};
 	})
 	.sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
+
+const features = entries.filter((entry: any) => entry.entryType !== "build-log");
+const buildLog = entries
+	.filter((entry: any) => entry.entryType === "build-log")
+	.sort(
+		(a: any, b: any) =>
+			String(b.pubDate).localeCompare(String(a.pubDate)) || a.slug.localeCompare(b.slug),
+	);
 
 // Add System Documentation manually
 features.unshift({
@@ -33,20 +41,18 @@ features.unshift({
 	description: "Internal operating procedures, architecture diagrams, and style guides.",
 	icon: "book",
 	color: "blue",
-	heroImage: "/assets/placeholders/tech-1.jpg", // Placeholder or reuse
 });
 
 const tools = [
 	"VS Code",
 	"GitHub",
-	"Cloudflare Pages",
+	"Cloudflare Workers",
 	"Cloudflare R2",
 	"Python",
 	"Astro v5",
 	"React",
 	"Tailwind CSS v4",
 	"Recharts",
-	"Gemini 1.5 Pro",
 ];
 const marqueeTools = [...tools, ...tools, ...tools];
 ---
@@ -89,8 +95,8 @@ const marqueeTools = [...tools, ...tools, ...tools];
 				The Meta-Portfolio
 			</h1>
 			<p class="mx-auto mb-12 max-w-2xl text-lg text-neutral-400">
-				This site documents itself. Every major feature—from the AR Viewer to the Ingestion
-				Pipeline—is treated as an engineering project worthy of a case study.
+				This site documents itself. Every major feature - from the AR Viewer to the Ingestion
+				Pipeline - is treated as an engineering project worthy of a case study.
 			</p>
 
 			{/* Tech Stack Marquee */}
@@ -142,18 +148,49 @@ const marqueeTools = [...tools, ...tools, ...tools];
 				{/* Live System Stats (Removed per User Request) */}
 
 				{/* System Documentation Grid (Moved from Bottom) */}
-				<div class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+				<div
+					id="colophon-features"
+					class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+				>
 					{features.map((post) => <ColophonCard post={post} />)}
 				</div>
-
-				{/* System Registry Placeholder (Waiting for Component) */}
-				<div
-					class="rounded-lg border border-dashed border-neutral-800 p-6 font-mono text-sm text-neutral-500"
-				>
-					System Registry Loaded: 3 Neural Nodes (Air Gap, Brutalism, AI). <br />
-					[Awaiting Visualization Component]
-				</div>
 			</div>
+
+			<section id="build-log" aria-labelledby="build-log-heading" class="mb-24 text-left">
+				<h2
+					id="build-log-heading"
+					class="mb-8 text-3xl font-bold tracking-tight text-white md:text-4xl"
+				>
+					Build Log
+				</h2>
+				<ol class="divide-y divide-neutral-800 border-y border-neutral-800">
+					{
+						buildLog.map((post: any) => (
+							<li class="grid gap-4 py-8 md:grid-cols-[9rem_minmax(0,1fr)] md:gap-8">
+								<time datetime={post.pubDate} class="font-mono text-sm text-neutral-400">
+									{new Date(post.pubDate + "T12:00:00Z").toLocaleDateString("en-US", {
+										month: "short",
+										day: "numeric",
+										year: "numeric",
+										timeZone: "UTC",
+									})}
+								</time>
+								<div>
+									<h3 class="mb-3 text-2xl font-semibold text-white">
+										<a
+											class="hover:text-primary focus-visible:outline-primary transition-colors focus-visible:outline-2 focus-visible:outline-offset-4"
+											href={"/colophon/" + post.slug + "/"}
+										>
+											{post.title}
+										</a>
+									</h3>
+									<p class="max-w-2xl text-base leading-relaxed text-neutral-400">{post.summary}</p>
+								</div>
+							</li>
+						))
+					}
+				</ol>
+			</section>
 
 			{/* Meta-Testimonial Wall */}
 			<div class="mb-24 text-left">

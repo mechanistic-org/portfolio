@@ -1,0 +1,141 @@
+{
+  "schema_version": "colophon-423-publication.v1",
+  "ticket": "global_agent#423",
+  "approved_manifest_sha256": "2d432c196109280fb8d0c859ce62e63b999136c227ee50307a013190558faaf9",
+  "applied_source_commit": "9dc12243793246a786ad81a5e6387d432fb0f0e9",
+  "approval": "Operator approved exact E copy on 2026-09-05; C channel definitions reserved for successor #424.",
+  "application_receipt": "https://github.com/mechanistic-org/global_agent/issues/458#issuecomment-5555688357",
+  "stories": [
+    {
+      "id": "W1",
+      "title": "A reversible queue earns an editorial decision",
+      "slug": "reversible-editorial-queue",
+      "surface": "Build Log",
+      "record_ids": [
+        "d19ad9f73d518301"
+      ],
+      "copy": "An automated curation system can reduce a pile without pretending to make the editorial judgment. On August 12, 2026, it moved 1,820 records into a traceable archive, drafted nine merges, and reduced the queue from 1,885 to 65. The remaining act was human: decide which evidence deserved a public story.",
+      "sources": [
+        "https://github.com/mechanistic-org/global_agent/issues/421#issuecomment-5269263267",
+        "https://github.com/mechanistic-org/global_agent/blob/9dc12243793246a786ad81a5e6387d432fb0f0e9/registry/global_agent/2026-08-12_421_curate_v2_executor_select_routing.md",
+        "https://github.com/mechanistic-org/global_agent/blob/9dc12243793246a786ad81a5e6387d432fb0f0e9/scripts/curate_self_docs.py"
+      ]
+    },
+    {
+      "id": "W2",
+      "title": "Work survives a change of session",
+      "slug": "work-survives-a-session",
+      "surface": "Feature card",
+      "record_ids": [
+        "8d07ab52ea0b60f3"
+      ],
+      "copy": "In a bounded Kandev Desktop v0.90.0 pilot, a real task resumed with its scope, worktree, and reviewed artifact intact, then the accepted work merged. Adoption remained conditional on a governed adapter and explicit human approval. Autonomous second-agent review was not demonstrated.",
+      "sources": [
+        "https://github.com/mechanistic-org/global_agent/blob/9dc12243793246a786ad81a5e6387d432fb0f0e9/registry/global_agent/2026-08-20_issue_437_kandev_desktop_project5_pilot_receipt.md",
+        "https://github.com/mechanistic-org/global_agent/pull/439"
+      ]
+    },
+    {
+      "id": "W3",
+      "title": "Missing evidence should stay missing",
+      "slug": "missing-evidence",
+      "surface": "Feature card",
+      "record_ids": [
+        "8c12e424bf969e72"
+      ],
+      "copy": "The portfolio remediation removed fabricated fallback content and added checks against regression. Unsupported details were omitted instead of replaced with plausible prose. The record became more credible by showing the limits of its evidence.",
+      "sources": [
+        "https://github.com/mechanistic-org/global_agent/blob/9dc12243793246a786ad81a5e6387d432fb0f0e9/registry/workspace/projects_portfolio_credibility_sweep.md",
+        "https://github.com/mechanistic-org/portfolio/issues/143"
+      ]
+    },
+    {
+      "id": "W4",
+      "title": "Shipped means reachable from origin/main",
+      "slug": "shipped-means-reachable",
+      "surface": "Build Log",
+      "record_ids": [
+        "b8ab1ee2f972d254",
+        "6ef3ba0a56ff1a01",
+        "65964fce2359c566"
+      ],
+      "copy": "Accepted mutable work must be reachable from origin/main; read-only work needs no commit ceremony. Advisory lane warnings, isolated worktrees, and reachability and push-parity checks each cover a different failure mode, making completion observable.",
+      "sources": [
+        "https://github.com/mechanistic-org/global_agent/blob/9dc12243793246a786ad81a5e6387d432fb0f0e9/AGENT_CONTEXT.md",
+        "https://github.com/mechanistic-org/global_agent/blob/9dc12243793246a786ad81a5e6387d432fb0f0e9/scripts/session_lane.py",
+        "https://github.com/mechanistic-org/global_agent/blob/9dc12243793246a786ad81a5e6387d432fb0f0e9/scripts/session_close_guard.py",
+        "https://github.com/mechanistic-org/global_agent/blob/9dc12243793246a786ad81a5e6387d432fb0f0e9/scripts/worktree.py"
+      ]
+    }
+  ],
+  "homepage": [
+    {
+      "title": "What you're looking at",
+      "copy": "This is a map of my engineering work. In the Time view, position shows when a project happened; color identifies the employer. Open a project to follow its constraints, decisions, and supporting evidence."
+    },
+    {
+      "title": "How I built this",
+      "copy": "I built this record from project archives, design decisions, test reports, and shipped outcomes. Claims are checked against source material before they become public copy."
+    },
+    {
+      "title": "The tools behind it",
+      "copy": "I keep the source record separately from the site. Reviewed material becomes public pages through repeatable builds and checks, so the presentation can change without losing the underlying evidence."
+    },
+    {
+      "title": "Where to go next",
+      "copy": "Start with the Tour for a short path through the work, open a project for the full record, or read How I Work for the method behind the interventions."
+    }
+  ],
+  "source_verification": [
+    {
+      "record_id": "d19ad9f73d518301",
+      "raw_sha256": "c1c2085c8bbf166b86850eab280ea1137fc7c1d246959da63c3b371a796460ad",
+      "content_hash": "1ff947e4465575639e921e93463d718bcad487d7e6bedd834b0ee9d7cf87d0ad",
+      "application_key": "2d432c196109280fb8d0c859ce62e63b999136c227ee50307a013190558faaf9:d19ad9f73d518301",
+      "wave_1_story": "W1",
+      "outcome": "seed_retained"
+    },
+    {
+      "record_id": "8d07ab52ea0b60f3",
+      "raw_sha256": "7777e669215056977995c8ab90411ef0b1a30ca0e9045cb64fd9ea3c183f86f6",
+      "content_hash": "5b5886782d0fe0660bbe587ac5c94c21de06e57186746c5d645e927f1e4a1284",
+      "application_key": "2d432c196109280fb8d0c859ce62e63b999136c227ee50307a013190558faaf9:8d07ab52ea0b60f3",
+      "wave_1_story": "W2",
+      "outcome": "seed_rewritten"
+    },
+    {
+      "record_id": "8c12e424bf969e72",
+      "raw_sha256": "04e553828d3cc582efd86949c2d3cedd1af977668ca4e15f3a0537e75606a5cc",
+      "content_hash": "bc710224a7ddc5111864265f098b4094c62a12f894f795bf7cfb96ba2b26a4f9",
+      "application_key": "2d432c196109280fb8d0c859ce62e63b999136c227ee50307a013190558faaf9:8c12e424bf969e72",
+      "wave_1_story": "W3",
+      "outcome": "seed_rewritten"
+    },
+    {
+      "record_id": "b8ab1ee2f972d254",
+      "raw_sha256": "30b12376649643be2eaea9d742dfd0627588836080571c64e62d286ae9cbf8c6",
+      "content_hash": "cd02a3a5f4945d3f6cd40dfab097d1233f337ad789528f182f89a05d1ae3ac59",
+      "application_key": "2d432c196109280fb8d0c859ce62e63b999136c227ee50307a013190558faaf9:b8ab1ee2f972d254",
+      "wave_1_story": "W4",
+      "outcome": "seed_retained"
+    },
+    {
+      "record_id": "6ef3ba0a56ff1a01",
+      "raw_sha256": "1b799760b4216b6c9c6c07bcac52eb6da14ac5d8aeb61c11c74f46bf3dbb8ee4",
+      "content_hash": "2653ede5585adae2ce3f7116bc73c40443e67208e8f66441b60183f55f908e44",
+      "application_key": "2d432c196109280fb8d0c859ce62e63b999136c227ee50307a013190558faaf9:6ef3ba0a56ff1a01",
+      "wave_1_story": "W4",
+      "outcome": "seed_rewritten"
+    },
+    {
+      "record_id": "65964fce2359c566",
+      "raw_sha256": "04401d6ee39504fdb12a3e7aa2a7ebb6cc67737387fecc0673ff94608e7c402b",
+      "content_hash": "943f47507fe514005ae8bd5e27a5f5af66ebd691e451294d515cbe5daea0941e",
+      "application_key": "2d432c196109280fb8d0c859ce62e63b999136c227ee50307a013190558faaf9:65964fce2359c566",
+      "wave_1_story": "W4",
+      "outcome": "seed_rewritten"
+    }
+  ],
+  "drift": [],
+  "approval_evidence": "https://github.com/mechanistic-org/global_agent/issues/423#issuecomment-5555901972"
+}
