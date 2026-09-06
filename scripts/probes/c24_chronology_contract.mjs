@@ -11,6 +11,7 @@ import {
 const sidecarPath = "src/content/projects/c24/_chronology.json";
 const chronologyBytes = await readFile(sidecarPath);
 const articleText = await readFile("src/content/projects/c24/index.mdx", "utf8");
+const entropy = JSON.parse(await readFile("src/content/projects/c24/_entropy.json", "utf8"));
 const chronology = JSON.parse(chronologyBytes);
 const prominent = chronology.events.filter((event) => event.prominence === "prominent");
 const dcd = chronology.clusters.find((cluster) => cluster.id === "dcd-release-sequence");
@@ -34,6 +35,15 @@ assert.ok(!chronologyBytes.toString("utf8").includes("11/15/2006"));
 assert.match(articleText, /earliest located primary checkpoint is the March 7, 2007 status report/u);
 assert.ok(!articleText.match(/11\/15\/2006|Curtis\.11\.15\.06/u));
 assert.ok(!chronologyBytes.toString("utf8").match(/[A-Z]:[\\/]|portfolio_working/u));
+assert.deepEqual(
+	entropy.slice(6, 10).map(({ date, time_delta: timeDelta }) => [date, timeDelta]),
+	[
+		["2006-10-23", 32],
+		["2006-12-04", 42],
+		["2007-03-07", 93],
+		["2007-04-25", 49],
+	],
+);
 
 if (process.env.CANON_ROOT) {
 	const canonBytes = await readFile(
