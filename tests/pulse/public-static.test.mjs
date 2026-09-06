@@ -172,12 +172,50 @@ test("the approved controlled projection is complete in static HTML without clie
 			"utf8",
 		),
 	);
+	const stackStats = JSON.parse(
+		fs.readFileSync(path.join(repositoryRoot, "src", "data", "stack_stats.json"), "utf8"),
+	);
+	const colophonPipeline = stackStats.colophon_pipeline;
 
 	assert.equal(occurrences(html, "data-pulse-proof-group"), 3);
 	assert.equal(occurrences(html, "data-pulse-metric"), 9);
 	assert.equal(occurrences(html, "data-pulse-definition"), 9);
 	assert.equal(occurrences(html, "data-pulse-method"), 9);
 	assert.equal(occurrences(html, "data-pulse-inventory-item"), 4);
+	assert.equal(occurrences(html, "data-pulse-colophon-pipeline"), 1);
+	assert.deepEqual(Object.keys(colophonPipeline).sort(), [
+		"as_of",
+		"entries_promoted",
+		"interpretation",
+		"last_curated_at",
+		"queue",
+	]);
+	assert.deepEqual(Object.keys(colophonPipeline.queue).sort(), ["colophon", "docs", "total"]);
+	assert.deepEqual(colophonPipeline.queue, { total: 308, colophon: 267, docs: 41 });
+	assert.equal(colophonPipeline.entries_promoted, 6);
+	assert.equal(colophonPipeline.last_curated_at, "2026-09-05");
+	assert.equal(colophonPipeline.as_of, "2026-09-06");
+	assert.match(colophonPipeline.interpretation, /do not measure editorial quality/iu);
+	assert.doesNotMatch(
+		JSON.stringify(colophonPipeline),
+		/(?:[a-z]:\\|ledger|packet|shortlist|sha256|source_path)/iu,
+	);
+	for (const requiredText of [
+		"Editorial pipeline",
+		"Colophon curation",
+		"Queue depth",
+		"308",
+		"267 colophon / 41 docs",
+		"Entries promoted",
+		"September 5, 2026",
+		"September 6, 2026",
+		colophonPipeline.interpretation,
+	]) {
+		assert.ok(
+			html.includes(requiredText),
+			`Pulse omits colophon pipeline evidence: ${requiredText}`,
+		);
+	}
 	for (const group of projection.groups) {
 		const approvedPurpose = group.metrics.map((metric) => metric.definition).join(" ");
 		assert.ok(

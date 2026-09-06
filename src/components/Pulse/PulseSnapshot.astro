@@ -1,4 +1,6 @@
 ---
+import stackStats from "../../data/stack_stats.json";
+
 interface MeasurementWindow {
 	start: string;
 	end: string;
@@ -81,6 +83,7 @@ const {
 	controlledExample = false,
 	presentationState = "approved",
 } = Astro.props;
+const colophonPipeline = stackStats.colophon_pipeline;
 if (
 	presentationState === "approved" &&
 	((history.current_snapshot_id === null && snapshot !== null) ||
@@ -362,6 +365,41 @@ function historyNotice(record: PulseHistoryRecord) {
 			<li data-pulse-inventory-item>Registered skills</li>
 			<li data-pulse-inventory-item>Supervised services</li>
 		</ul>
+
+		<section class="pulse-pipeline" data-pulse-colophon-pipeline>
+			<header>
+				<p class="pulse-kicker">Editorial pipeline</p>
+				<h4>Colophon curation</h4>
+				<p>{colophonPipeline.interpretation}</p>
+			</header>
+			<dl>
+				<div>
+					<dt>Queue depth</dt>
+					<dd>
+						<strong>{colophonPipeline.queue.total}</strong>
+						<span>entries</span>
+						<small>
+							{colophonPipeline.queue.colophon} colophon / {colophonPipeline.queue.docs} docs
+						</small>
+					</dd>
+				</div>
+				<div>
+					<dt>Last curated</dt>
+					<dd>{formatDate(colophonPipeline.last_curated_at)}</dd>
+				</div>
+				<div>
+					<dt>Entries promoted</dt>
+					<dd>
+						<strong>{colophonPipeline.entries_promoted}</strong>
+						<span>entries</span>
+					</dd>
+				</div>
+				<div>
+					<dt>As of</dt>
+					<dd>{formatDate(colophonPipeline.as_of)}</dd>
+				</div>
+			</dl>
+		</section>
 	</aside>
 </section>
 
@@ -741,5 +779,76 @@ function historyNotice(record: PulseHistoryRecord) {
 		font-size: 0.7rem;
 		padding: 0.8rem;
 		text-transform: uppercase;
+	}
+
+	.pulse-pipeline {
+		border-top: 1px solid var(--border);
+		margin-top: 1.25rem;
+		padding-top: 1.25rem;
+	}
+
+	.pulse-pipeline header h4 {
+		color: var(--foreground);
+		font-family: var(--font-header);
+		font-size: 1rem;
+		line-height: 1.1;
+		margin: 0;
+	}
+
+	.pulse-pipeline header > p:last-child {
+		color: var(--muted-foreground);
+		font-size: 0.72rem;
+		line-height: 1.55;
+		margin: 0.65rem 0 0;
+	}
+
+	.pulse-pipeline dl {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+		margin: 1rem 0 0;
+	}
+
+	.pulse-pipeline dl > div {
+		border: 1px solid var(--border);
+		padding: 0.8rem;
+	}
+
+	.pulse-pipeline dt,
+	.pulse-pipeline dd {
+		font-family: var(--font-mono);
+		margin: 0;
+	}
+
+	.pulse-pipeline dt,
+	.pulse-pipeline dd span,
+	.pulse-pipeline dd small {
+		color: var(--muted-foreground);
+		font-size: 0.64rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.pulse-pipeline dd {
+		color: var(--primary);
+		font-size: 0.78rem;
+		font-weight: 700;
+		line-height: 1.5;
+		margin-top: 0.4rem;
+	}
+
+	.pulse-pipeline dd strong {
+		font-size: 1.2rem;
+	}
+
+	.pulse-pipeline dd span {
+		margin-left: 0.35rem;
+	}
+
+	.pulse-pipeline dd small {
+		display: block;
+		font-weight: 400;
+		line-height: 1.5;
+		margin-top: 0.3rem;
 	}
 </style>
