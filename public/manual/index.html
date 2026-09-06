@@ -34,7 +34,7 @@
   p { color:var(--ink-2); margin:.55em 0; max-width:66ch; }
   p.lede { color:var(--ink); font-size:17px; max-width:62ch; }
 
-  .doors { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:12px; margin:16px 0; }
+  .doors { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr)); gap:12px; margin:16px 0; }
   .doors a { display:block; background:var(--surface); border:1px solid var(--ring); border-radius:8px;
              padding:14px 18px; text-decoration:none; color:var(--ink); }
   .doors a:hover { border-color:var(--acc); }
@@ -48,6 +48,11 @@
   table.chan { border-collapse:collapse; width:100%; font-size:13.5px; margin:10px 0 4px; }
   table.chan td { padding:7px 10px; border-bottom:1px solid var(--grid); color:var(--ink-2); }
   table.chan td:first-child { color:var(--ink); font-weight:600; white-space:nowrap; }
+  @media (max-width:480px) {
+    table.chan { table-layout:fixed; }
+    table.chan td { overflow-wrap:break-word; }
+    table.chan td:first-child { width:45%; white-space:normal; }
+  }
 
   .machine { background:var(--surface); border:1px solid var(--ring); border-radius:8px; padding:14px 18px;
              font:13px "Cascadia Code",Consolas,ui-monospace,monospace; color:var(--ink-2); }
@@ -84,8 +89,8 @@
   </div>
 
   <h2>Operating norms</h2>
-  <p>Distilled from the working record, not aspirations. The full manual is being authored in
-     the open; these are the load-bearing rules that already govern how I run.</p>
+  <p>Distilled from the working record, not aspirations. These are the load-bearing rules that
+     already govern how I run.</p>
 
   <div class="norm"><b>Channels match the stakes.</b>
     <table class="chan">
@@ -115,6 +120,34 @@
        softening required. I am genuinely willing to be wrong; it just takes evidence rather
        than friction.</p></div>
 
+  <h2>Working conditions and hours</h2>
+  <p>Normal working hours are the default. I prefer remote work and a quiet place to concentrate;
+     open-plan offices do not suit me.</p>
+  <p>During builds and bring-up, I'll be in the office, lab, or shop with the hardware. Once we're
+     through that phase, I prefer to return to focused remote work. Travel is selective; extended
+     onsite stays are no longer my default way to solve a problem.</p>
+  <p>I can get deeply absorbed in build or discovery work and continue into evenings or weekends.</p>
+
+  <h2>What I need from a team</h2>
+  <p>Give me a clear mandate, the resources to carry it out, and authority that matches the
+     accountability. I ask engineers what they want to own, divide the work, and take
+     responsibility for integration. People get room and backup.</p>
+
+  <h2>How I learn</h2>
+  <p>I learn by working through the actual problem and understanding why something behaves as it
+     does. If I don't understand, I'll say so. A better explanation or a quicker route to the truth
+     gets my attention.</p>
+
+  <h2>Focus and interruptions</h2>
+  <p>When I'm locked in, switching context is difficult. Ping first, include the context, and say
+     what needs a decision. If it's an emergency, call. New evidence or a clear reason to change
+     direction helps me switch.</p>
+
+  <h2>Feedback and disagreement</h2>
+  <p>Be direct. Bring the observation and the reasoning behind it. I want commitments and
+     disagreements made explicit, with a path toward resolving them. If you show me a better
+     answer, I'll change direction and put my effort into it. The best idea wins.</p>
+
   <h2>Machine surfaces</h2>
   <div class="machine">
     <a href="/llms.txt">/llms.txt</a> · agent brief<br>
@@ -123,8 +156,7 @@
     the same interface, for agents
   </div>
 
-  <p class="stamp">Norms seeded 2026-08-06 from the working record. Sections still being
-     authored: conditions, hours, what I need from a team, known failure modes and their tells.</p>
+  <p class="stamp">Manual updated 2026-09-05 with reviewed working expectations.</p>
 
   <div class="contact">
     <a href="mailto:erik@mechanistic.com">erik@mechanistic.com</a> ·
