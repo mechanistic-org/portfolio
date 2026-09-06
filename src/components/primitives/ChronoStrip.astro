@@ -1,0 +1,517 @@
+---
+interface ChronologyEvent {
+	id: string;
+	date: string;
+	end_date?: string;
+	title: string;
+	summary: string;
+	phase: string;
+	category: string;
+	prominence: "prominent" | "detail" | "cluster-detail";
+	source_ids: string[];
+	cluster_id?: string;
+	anchor?: string;
+}
+interface ChronologyPhase {
+	id: string;
+	label: string;
+	start: string;
+	end: string;
+}
+interface ChronologyCluster {
+	id: string;
+	label: string;
+	summary: string;
+	event_ids: string[];
+	verified_identifier_count?: number;
+}
+interface Chronology {
+	title: string;
+	start: string;
+	end: string;
+	phases: ChronologyPhase[];
+	events: ChronologyEvent[];
+	clusters: ChronologyCluster[];
+}
+interface Props {
+	chronology: Chronology;
+}
+const { chronology } = Astro.props;
+const prominent = chronology.events.filter((event) => event.prominence === "prominent");
+const eventById = new Map(chronology.events.map((event) => [event.id, event]));
+const at = (value: string) => Date.parse(`${value}T00:00:00Z`);
+const start = at(chronology.start);
+const span = Math.max(1, at(chronology.end) - start);
+const x = (value: string) => 2 + ((at(value) - start) / span) * 96;
+const width = (phase: ChronologyPhase) =>
+	((at(phase.end) - at(phase.start) + 86400000) / span) * 100;
+const displayDate = (event: ChronologyEvent) => {
+	const first = new Intl.DateTimeFormat("en-US", {
+		year: "numeric",
+		month: "short",
+		day: "numeric",
+		timeZone: "UTC",
+	}).format(new Date(`${event.date}T00:00:00Z`));
+	if (!event.end_date) return first;
+	const last = new Intl.DateTimeFormat("en-US", {
+		month: "short",
+		day: "numeric",
+		timeZone: "UTC",
+	}).format(new Date(`${event.end_date}T00:00:00Z`));
+	return `${first} – ${last}`;
+};
+---
+
+<section
+	class="chronology"
+	aria-labelledby="chronology-heading"
+	data-chronology={chronology.events.length}
+>
+	<header>
+		<div>
+			<span class="kicker">Verified chronology</span>
+			<h2 id="chronology-heading">{chronology.title}</h2>
+		</div>
+		<p>
+			{chronology.start.slice(0, 4)}–{chronology.end.slice(0, 4)}<span
+				>{prominent.length} decisive beats</span
+			>
+		</p>
+	</header>
+
+	<chrono-strip>
+		<div class="plot" aria-label={`${prominent.length} prominent project milestones`}>
+			<div class="phase-band" aria-hidden="true">
+				{
+					chronology.phases.map((phase) => (
+						<span style={`flex-basis:${width(phase)}%`} title={phase.label}>
+							{width(phase) < 8 ? `${phase.label.slice(0, 4)}.` : phase.label}
+						</span>
+					))
+				}
+			</div>
+			<div class="track" aria-hidden="true"></div>
+			{
+				prominent.map((event, index) => (
+					<button
+						type="button"
+						class="marker"
+						style={`left:${x(event.date)}%`}
+						data-chrono-event={event.id}
+						data-category={event.category}
+						data-source-count={event.source_ids.length}
+						aria-label={`${displayDate(event)}: ${event.title}`}
+						aria-pressed="false"
+						tabindex={index === 0 ? 0 : -1}
+					>
+						<span>{index + 1}</span>
+					</button>
+				))
+			}
+		</div>
+
+		<ol class="beats">
+			{
+				prominent.map((event, index) => (
+					<li>
+						<button
+							type="button"
+							class="beat"
+							data-chrono-event={event.id}
+							data-source-count={event.source_ids.length}
+							aria-pressed="false"
+						>
+							<span class="beat-number">{String(index + 1).padStart(2, "0")}</span>
+							<span class="beat-copy">
+								<time datetime={event.date}>{displayDate(event)}</time>
+								<strong>{event.title}</strong>
+								<span>{event.summary}</span>
+								<small>
+									{`${event.source_ids.length} verified ${event.source_ids.length === 1 ? "source" : "sources"}`}
+								</small>
+							</span>
+						</button>
+						{event.anchor && (
+							<a class="article-link" href={`#${event.anchor}`}>
+								Read the project section ↓
+							</a>
+						)}
+					</li>
+				))
+			}
+		</ol>
+
+		{
+			chronology.clusters.map((cluster) => (
+				<details class="cluster" data-chronology-cluster={cluster.id}>
+					<summary>
+						<span>{cluster.label}</span>
+						<small>
+							{cluster.event_ids.length} checkpoints
+							{cluster.verified_identifier_count
+								? ` · ${cluster.verified_identifier_count} identifiers`
+								: ""}
+						</small>
+					</summary>
+					<p>{cluster.summary}</p>
+					<ol>
+						{cluster.event_ids
+							.map((id) => eventById.get(id))
+							.filter(Boolean)
+							.map((event) => (
+								<li data-chrono-event={event!.id} data-source-count={event!.source_ids.length}>
+									<time datetime={event!.date}>{displayDate(event!)}</time>
+									<strong>{event!.title}</strong>
+									<span>{event!.summary}</span>
+								</li>
+							))}
+					</ol>
+				</details>
+			))
+		}
+
+		<details class="full-index">
+			<summary>Complete dated index <small>{chronology.events.length} events</small></summary>
+			<ol>
+				{
+					chronology.events.map((event) => (
+						<li data-chrono-event={event.id} data-source-count={event.source_ids.length}>
+							<time datetime={event.date}>{displayDate(event)}</time>
+							<strong>{event.title}</strong>
+							<span>{event.summary}</span>
+						</li>
+					))
+				}
+			</ol>
+		</details>
+	</chrono-strip>
+</section>
+
+<style>
+	.chronology {
+		margin: 0 0 2rem;
+		border: 1px solid var(--border);
+		background: var(--card);
+		color: var(--foreground);
+		padding: 1rem 1.25rem;
+	}
+	header {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 1rem;
+	}
+	.kicker {
+		color: var(--primary);
+		font: 500 0.68rem var(--font-mono);
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+	h2 {
+		margin: 0.15rem 0 0;
+		font: 600 1.35rem var(--font-header);
+	}
+	header p {
+		margin: 0;
+		text-align: right;
+		font: 0.85rem var(--font-mono);
+	}
+	header p span {
+		display: block;
+		color: var(--muted-foreground);
+		font: 0.7rem var(--font-sans);
+	}
+	.plot {
+		position: relative;
+		height: 6.5rem;
+		overflow: hidden;
+		border: 1px solid var(--border);
+		background: color-mix(in srgb, var(--muted) 45%, transparent);
+	}
+	.phase-band {
+		position: absolute;
+		inset: 0;
+		display: flex;
+	}
+	.phase-band span {
+		min-width: 0;
+		padding: 0.5rem 0.4rem;
+		border-right: 1px dashed var(--border);
+		color: var(--muted-foreground);
+		font: 0.6rem var(--font-mono);
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		overflow: hidden;
+	}
+	.track {
+		position: absolute;
+		left: 2%;
+		right: 2%;
+		top: 65%;
+		height: 1px;
+		background: var(--border);
+	}
+	.marker {
+		--marker: var(--primary);
+		position: absolute;
+		top: 65%;
+		display: grid;
+		place-items: center;
+		width: 2rem;
+		height: 2rem;
+		padding: 0;
+		transform: translate(-50%, -50%);
+		border: 2px solid var(--marker);
+		border-radius: 50%;
+		background: var(--card);
+		color: var(--foreground);
+		cursor: pointer;
+		font: 0.68rem var(--font-mono);
+		transition:
+			transform 0.15s ease,
+			background-color 0.15s ease,
+			box-shadow 0.15s ease;
+	}
+	.marker[data-category="manufacturing"],
+	.marker[data-category="recovery"] {
+		--marker: var(--warning);
+	}
+	.marker[data-category="serviceability"] {
+		--marker: var(--error);
+	}
+	.marker[data-category="governance"],
+	.marker[data-category="delivery"] {
+		--marker: var(--foreground);
+	}
+	.marker:hover,
+	.marker:focus-visible,
+	.marker.is-hot {
+		z-index: 2;
+		transform: translate(-50%, -50%) scale(1.14);
+		background: var(--marker);
+		color: var(--card);
+		box-shadow: 0 0 0 4px color-mix(in srgb, var(--marker) 28%, transparent);
+		outline: none;
+	}
+	.beats {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 0.55rem;
+		margin: 0.75rem 0 0;
+		padding: 0;
+		list-style: none;
+	}
+	.beats li {
+		min-width: 0;
+	}
+	.beat {
+		display: flex;
+		gap: 0.6rem;
+		width: 100%;
+		min-height: 100%;
+		padding: 0.7rem;
+		border: 1px solid var(--border);
+		background: color-mix(in srgb, var(--card) 88%, var(--muted));
+		color: var(--foreground);
+		text-align: left;
+		cursor: pointer;
+		transition:
+			border-color 0.15s ease,
+			background-color 0.15s ease;
+	}
+	.beat:hover,
+	.beat:focus-visible,
+	.beat.is-hot {
+		border-color: var(--primary);
+		background: color-mix(in srgb, var(--primary) 9%, var(--card));
+		outline: 2px solid transparent;
+	}
+	.beat-number {
+		flex: 0 0 auto;
+		color: var(--primary);
+		font: 0.72rem var(--font-mono);
+	}
+	.beat-copy {
+		display: flex;
+		min-width: 0;
+		flex-direction: column;
+	}
+	.beat time,
+	.cluster time,
+	.full-index time {
+		color: var(--muted-foreground);
+		font: 0.65rem var(--font-mono);
+	}
+	.beat strong,
+	.cluster strong,
+	.full-index strong {
+		margin: 0.15rem 0;
+		font: 600 0.9rem var(--font-header);
+	}
+	.beat-copy > span {
+		color: var(--muted-foreground);
+		font-size: 0.72rem;
+		line-height: 1.4;
+	}
+	.beat small {
+		margin-top: 0.4rem;
+		color: var(--muted-foreground);
+		font: 0.6rem var(--font-mono);
+	}
+	.article-link {
+		display: inline-block;
+		margin: 0.3rem 0.7rem 0;
+		color: var(--primary);
+		font: 0.65rem var(--font-mono);
+		text-decoration: none;
+	}
+	.article-link:hover,
+	.article-link:focus-visible {
+		text-decoration: underline;
+		outline: 2px solid var(--foreground);
+		outline-offset: 2px;
+	}
+	.cluster,
+	.full-index {
+		margin-top: 0.75rem;
+		border: 1px solid var(--border);
+	}
+	.cluster summary,
+	.full-index summary {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.75rem;
+		cursor: pointer;
+		font: 600 0.88rem var(--font-header);
+	}
+	.cluster summary small,
+	.full-index summary small {
+		color: var(--muted-foreground);
+		font: 0.65rem var(--font-mono);
+	}
+	.cluster > p {
+		margin: 0;
+		padding: 0 0.75rem 0.65rem;
+		color: var(--muted-foreground);
+		font-size: 0.75rem;
+	}
+	.cluster ol,
+	.full-index ol {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1px;
+		margin: 0;
+		padding: 1px;
+		background: var(--border);
+		list-style: none;
+	}
+	.cluster li,
+	.full-index li {
+		display: flex;
+		min-width: 0;
+		flex-direction: column;
+		padding: 0.65rem 0.75rem;
+		background: var(--card);
+	}
+	.cluster li > span,
+	.full-index li > span {
+		color: var(--muted-foreground);
+		font-size: 0.72rem;
+		line-height: 1.4;
+	}
+	.cluster li.is-hot,
+	.full-index li.is-hot {
+		background: color-mix(in srgb, var(--primary) 9%, var(--card));
+	}
+	@media (max-width: 820px) {
+		.beats {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+		.phase-band span {
+			font-size: 0.5rem;
+		}
+	}
+	@media (max-width: 520px) {
+		.chronology {
+			padding: 0.8rem;
+		}
+		header {
+			align-items: flex-start;
+		}
+		header p span {
+			display: none;
+		}
+		.plot {
+			height: 5.5rem;
+		}
+		.phase-band {
+			display: none;
+		}
+		.marker {
+			width: 1.75rem;
+			height: 1.75rem;
+			font-size: 0.6rem;
+		}
+		.beats,
+		.cluster ol,
+		.full-index ol {
+			grid-template-columns: 1fr;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.marker,
+		.beat {
+			transition: none;
+		}
+	}
+</style>
+
+<script>
+	class ChronoStrip extends HTMLElement {
+		connectedCallback() {
+			const markers = [...this.querySelectorAll<HTMLButtonElement>(".marker")];
+			let pinned: string | null = null;
+			const nodes = (id: string) =>
+				this.querySelectorAll<HTMLElement>(`[data-chrono-event="${CSS.escape(id)}"]`);
+			const paint = (id: string | null) => {
+				this.querySelectorAll<HTMLElement>("[data-chrono-event]").forEach((node) =>
+					node.classList.remove("is-hot"),
+				);
+				this.querySelectorAll<HTMLButtonElement>("button[aria-pressed]").forEach((node) =>
+					node.setAttribute("aria-pressed", String(node.dataset.chronoEvent === pinned)),
+				);
+				if (id) nodes(id).forEach((node) => node.classList.add("is-hot"));
+			};
+			this.querySelectorAll<HTMLElement>("[data-chrono-event]").forEach((node) => {
+				const id = node.dataset.chronoEvent!;
+				node.addEventListener("mouseenter", () => paint(id));
+				node.addEventListener("mouseleave", () => paint(pinned));
+				node.addEventListener("focus", () => paint(id));
+				node.addEventListener("blur", () => paint(pinned));
+				if (node instanceof HTMLButtonElement)
+					node.addEventListener("click", () => {
+						pinned = pinned === id ? null : id;
+						paint(pinned);
+					});
+			});
+			markers.forEach((marker, index) =>
+				marker.addEventListener("keydown", (event) => {
+					let next = index;
+					if (event.key === "ArrowRight" || event.key === "ArrowDown")
+						next = (index + 1) % markers.length;
+					else if (event.key === "ArrowLeft" || event.key === "ArrowUp")
+						next = (index - 1 + markers.length) % markers.length;
+					else if (event.key === "Home") next = 0;
+					else if (event.key === "End") next = markers.length - 1;
+					else return;
+					event.preventDefault();
+					markers.forEach((item, itemIndex) => (item.tabIndex = itemIndex === next ? 0 : -1));
+					markers[next].focus();
+				}),
+			);
+		}
+	}
+	if (!customElements.get("chrono-strip")) customElements.define("chrono-strip", ChronoStrip);
+</script>
