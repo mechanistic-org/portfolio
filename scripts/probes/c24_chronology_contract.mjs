@@ -26,6 +26,44 @@ assert.ok(chronology.events.every((event) => event.source_ids.length > 0));
 assert.ok(
 	entropy.every((event) => typeof event.source_ref === "string" && event.source_ref.length > 0),
 );
+assert.deepEqual(
+	entropy
+		.filter((event) => event.chronology_event_id)
+		.map(({ date, chronology_event_id: eventId, chronology_date_field: dateField = "date" }) => [
+			date,
+			eventId,
+			dateField,
+		]),
+	[
+		["2005-06-02", "kickoff-teardown", "date"],
+		["2005-07-14", "architecture-strategy-lock", "date"],
+		["2006-03-15", "dcd-system-priority", "date"],
+		["2006-12-04", "domestic-fabrication-bridge", "date"],
+		["2007-03-07", "top-panel-no-bid", "date"],
+		["2007-04-25", "headphone-jack-redesign", "date"],
+		["2007-10-03", "schedule-recovery", "date"],
+		["2007-10-24", "schedule-recovery", "end_date"],
+	],
+);
+const phaseOneEntropy = entropy.find((event) => event.date === "2006-10-23");
+assert.equal(phaseOneEntropy.source_ref, "Curtis Phase 1 Exit.ppt");
+assert.match(phaseOneEntropy.snippet, /deck dated October 23/u);
+const vendorRunEntropy = entropy.find((event) => event.date === "2007-06-12");
+assert.equal(
+	vendorRunEntropy.source_ref,
+	"07_09_07_Digidesgin C24 pilot run inspection report 20070705.xls",
+);
+assert.match(vendorRunEntropy.snippet, /nine-unit C24 run started June 12/u);
+assert.ok(!vendorRunEntropy.snippet.match(/formal 15-unit|Aug 9-22/u));
+assert.match(
+	entropy.find((event) => event.date === "2007-08-15").snippet,
+	/August 15 status report scheduled RTM for August 16 and Pilot for August 22/u,
+);
+assert.match(
+	entropy.find((event) => event.date === "2007-10-03").snippet,
+	/status report marked FCS At Risk; its cover listed October 29 as the current plan/u,
+);
+assert.ok(!entropy.some((event) => event.snippet.match(/Production start targeted for 9\/28/u)));
 assert.equal(
 	chronology.events.find((event) => event.id === "first-customer-ship").date,
 	"2007-11-07",

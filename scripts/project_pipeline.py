@@ -196,24 +196,52 @@ def validate_entropy(entropy, chronology_payload):
         source_ref = event.get("source_ref")
         if not isinstance(source_ref, str) or not source_ref.strip():
             raise ValueError(f"entropy event {index} needs source_ref")
+        chronology_event_id = event.get("chronology_event_id")
+        if chronology_event_id is not None and (
+            not isinstance(chronology_event_id, str) or not chronology_event_id.strip()
+        ):
+            raise ValueError(f"entropy event {index} has invalid chronology_event_id")
+        chronology_date_field = event.get("chronology_date_field")
+        if chronology_date_field is not None and chronology_date_field != "end_date":
+            raise ValueError(
+                f"entropy event {index} chronology_date_field must be end_date"
+            )
+        if chronology_date_field is not None and chronology_event_id is None:
+            raise ValueError(
+                f"entropy event {index} chronology_date_field needs chronology_event_id"
+            )
 
     if chronology_payload is None:
+        if any(event.get("chronology_event_id") is not None for event in events):
+            raise ValueError("linked entropy event needs chronology")
         return
     chronology = json.loads(chronology_payload.decode("utf-8"))
-    chronology_dates = {
-        event["id"]: event.get("date")
-        for event in chronology["events"]
-        if isinstance(event.get("id"), str) and event["id"]
-    }
-    for event in events:
+    chronology_events = {}
+    for event in chronology["events"]:
         identity = event.get("id")
-        if identity not in chronology_dates:
+        if not isinstance(identity, str) or not identity:
             continue
-        if event.get("date") != chronology_dates[identity]:
+        if identity in chronology_events:
+            raise ValueError(f"duplicate chronology event id: {identity!r}")
+        chronology_events[identity] = event
+    for event in events:
+        identity = event.get("chronology_event_id")
+        if identity is None:
+            continue
+        chronology_event = chronology_events.get(identity)
+        if chronology_event is None:
+            raise ValueError(f"unknown chronology event id: {identity!r}")
+        date_field = event.get("chronology_date_field", "date")
+        chronology_date = chronology_event.get(date_field)
+        if not isinstance(chronology_date, str) or not chronology_date:
+            raise ValueError(
+                f"chronology event {identity!r} needs {date_field} for entropy link"
+            )
+        if event.get("date") != chronology_date:
             raise ValueError(
                 "entropy/chronology date divergence for "
-                f"{identity!r}: entropy={event.get('date')!r}, "
-                f"chronology={chronology_dates[identity]!r}"
+                f"{identity!r} ({date_field}): entropy={event.get('date')!r}, "
+                f"chronology={chronology_date!r}"
             )
 
 

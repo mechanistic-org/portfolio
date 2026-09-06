@@ -1,5 +1,6 @@
 [
   {
+    "chronology_event_id": "kickoff-teardown",
     "date": "2005-06-02",
     "score": 2,
     "snippet": "Initiated project by requesting legacy Control 24 unit to 'take apart and study'.",
@@ -8,6 +9,7 @@
     "type": "Document"
   },
   {
+    "chronology_event_id": "architecture-strategy-lock",
     "date": "2005-07-14",
     "score": 4,
     "snippet": "Initial surface design drawn and PRD written; sent to mechanical for COGS estimate.",
@@ -32,6 +34,7 @@
     "type": "Document"
   },
   {
+    "chronology_event_id": "dcd-system-priority",
     "date": "2006-03-15",
     "score": 4,
     "snippet": "Cancelled construction review to prioritize release of Data Control Drawings (DCDs).",
@@ -50,12 +53,13 @@
   {
     "date": "2006-10-23",
     "score": 6,
-    "snippet": "Phase 1 Exit Review completed.",
-    "source_ref": "Curtis Phase 1 Exit.pdf",
+    "snippet": "Phase 1 Exit Review deck dated October 23; its schedule page lists Phase 1 exit for October 23.",
+    "source_ref": "Curtis Phase 1 Exit.ppt",
     "time_delta": 32,
     "type": "Document"
   },
   {
+    "chronology_event_id": "domestic-fabrication-bridge",
     "date": "2006-12-04",
     "score": 7,
     "snippet": "Authorized Mass Precision to use offset welder for emergency manual sheet metal bridge.",
@@ -64,6 +68,7 @@
     "type": "Document"
   },
   {
+    "chronology_event_id": "top-panel-no-bid",
     "date": "2007-03-07",
     "score": 9,
     "snippet": "CRITICAL: The status report records that Kwanta no-bid the Top Panel and that Operations and Manufacturing were seeking a resolution.",
@@ -72,6 +77,7 @@
     "type": "Document"
   },
   {
+    "chronology_event_id": "headphone-jack-redesign",
     "date": "2007-04-25",
     "score": 9,
     "snippet": "CRITICAL: Headphone jack 'Fire Drill'. 4.8% failure rate forces late-stage redesign.",
@@ -90,8 +96,8 @@
   {
     "date": "2007-06-12",
     "score": 6,
-    "snippet": "Proto 3 run started (contemporaneously logged as 'Pilot Run'; the formal 15-unit Pilot ran Aug 9-22).",
-    "source_ref": "07_09_07_Digidesgin C24 pilot run inspection report 20070705.pdf",
+    "snippet": "Vendor inspection record: a nine-unit C24 run started June 12; four units shipped June 30 and five were listed for July 4 shipment.",
+    "source_ref": "07_09_07_Digidesgin C24 pilot run inspection report 20070705.xls",
     "time_delta": 47,
     "type": "Document"
   },
@@ -130,20 +136,23 @@
   {
     "date": "2007-08-15",
     "score": 5,
-    "snippet": "Status Report: RTM complete 8/16; Pilot scheduled 8/22.",
+    "snippet": "The August 15 status report scheduled RTM for August 16 and Pilot for August 22.",
     "source_ref": "Curtis.8.15.07.pdf",
     "time_delta": 30,
     "type": "Document"
   },
   {
+    "chronology_event_id": "schedule-recovery",
     "date": "2007-10-03",
     "score": 7,
-    "snippet": "Project Status: 'At Risk'. Production start targeted for 9/28 missed.",
+    "snippet": "The October 3 status report marked FCS At Risk; its cover listed October 29 as the current plan.",
     "source_ref": "Curtis.10.3.07.pdf",
     "time_delta": 49,
     "type": "Document"
   },
   {
+    "chronology_date_field": "end_date",
+    "chronology_event_id": "schedule-recovery",
     "date": "2007-10-24",
     "score": 6,
     "snippet": "Project Status recovered: 'On Schedule'. FCS set for 11/7.",
