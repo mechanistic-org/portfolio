@@ -1,17 +1,20 @@
-# Shared project article trial
+# Shared project article rollout
 
-The authorized #222 population is `c24`, `d-command`, `sundance`, `room-director`, and
-`webtv-elmer` on the main site. These are existing deep dives with reviewed original
-NotebookLM migration records. The current rollout order is this trial, the remaining
-mined/reviewed deep dives, then remaining deep dives. Expanding membership is a separate
-operator decision.
+The operator-accepted #222 trial is `c24`, `d-command`, `sundance`, `room-director`, and
+`webtv-elmer` on the main site. The authorized #223 rollout adds `sc48`, `d-control`,
+`bazooka`, `webtv-galaxy`, `webtv-cortez`, `backsplash`, `ksystem-120`, and `wall-plates`.
+These thirteen existing deep dives have reviewed original NotebookLM migration records.
+The first five retain their accepted presentation; visual tweaks remain deferred. Expansion
+beyond these thirteen is a separate operator decision, as the remaining records become ready.
 
 ## Ownership and extension
 
 `src/config/projectArticleTrial.ts` owns the presentation configuration and its exact
 allowlist. Shared Astro components own layout and behavior. Canon owns the content;
-generated MDX remains a read-only projection. The trial overrides D-Command's renderer
-at the route boundary without changing its canonical `theme` or its generated page.
+generated MDX remains a read-only projection. Membership overrides the renderer at the
+route boundary without changing canonical `theme` values or generated pages, including
+D-Command, WebTV Galaxy, WebTV Cortez, Backsplash, and KSystem-120. The existing `Trial`
+module/API names are retained so this bounded rollout requires no unrelated renaming.
 
 To configure an approved page:
 
@@ -25,6 +28,15 @@ To configure an approved page:
    narrative sequence. Preserve gallery captions and the limits they place on evidence.
 4. Add featured evidence only when an existing reviewed presentation supports it. Empty
    instruments and media panels are omitted. Pages without galleries remain complete.
+5. Where reviewed image limitations live only in legacy gallery cards, explicitly list
+   those gallery IDs in `galleryCaptionsFromDeck`. Their existing card bodies become the
+   fallback caption for both the rail and full gallery. Existing captions take precedence;
+   unresolved IDs or missing card bodies fail validation. SC48 uses this for its three
+   nonempty galleries. Other configurations retain their original captions.
+6. List existing model sticky IDs in `models` when the old renderer exposes a curated
+   model. The shared article preserves its source, camera settings, and caption. Cortez
+   retains its model behind a native disclosure; the installed viewer loads on demand,
+   without automatic rotation. With JavaScript disabled, the model file remains linked.
 
 `resolveProjectPresentation` rejects unresolved section keys, missing or ambiguous
 media references, and duplicate scene keys during rendering, including production builds.
@@ -63,9 +75,13 @@ node scripts/probes/project_article_trial_contract.mjs --built
 
 The browser contracts each own a temporary server on port 4321 and must run serially.
 Screenshots are local ignored outputs under `node_modules/.cache/`. Coverage includes all
-five pages, non-trial controls, themes, four viewport widths, reference integrity, keyboard
-and no-JS navigation, reduced motion, deterministic geometry, and navigation lifecycle.
+thirteen pages, non-rollout controls (Avegant Glyph, KPlayer-6000, and M500), themes, four
+viewport widths, reference integrity, keyboard and no-JS navigation, reduced motion,
+deterministic geometry, and navigation lifecycle. The eight added pages also load their
+32 selected rail images, and SC48's gallery-card context is checked in the rendered page.
+Cortez's existing model is loaded and checked at mobile width, with its caption and
+no-JavaScript file link preserved. No new model asset or viewer dependency is introduced.
 
-Sources: portfolio#137, portfolio#222, the canon deep-dive migration dashboard and SOP,
+Sources: portfolio#137, portfolio#222, portfolio#223, the canon deep-dive migration dashboard and SOP,
 and the existing generated project records. This is presentation validation, not a new
 mining or content-acceptance claim.

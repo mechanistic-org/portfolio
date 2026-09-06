@@ -10,6 +10,7 @@ import {
 	PAGE_TIMEOUT_MS,
 	runBrowserContract,
 	assertNoPageProblems,
+	createPageProblemCollector,
 } from "./browser_contract_harness.mjs";
 
 async function load(file) {
@@ -47,11 +48,19 @@ const byId = new Map(records.map((record) => [record.id, record]));
 const galleries = (data) =>
 	(data.cyberspace?.stickies ?? []).filter((g) => g.type === "gallery" && g.data?.images?.length);
 assert.deepEqual([...trialSlugs].sort(), [
+	"backsplash",
+	"bazooka",
 	"c24",
 	"d-command",
+	"d-control",
+	"ksystem-120",
 	"room-director",
+	"sc48",
 	"sundance",
+	"wall-plates",
+	"webtv-cortez",
 	"webtv-elmer",
+	"webtv-galaxy",
 ]);
 const models = new Map();
 for (const record of roster) {
@@ -74,7 +83,28 @@ for (const slug of trialSlugs) {
 	const record = byId.get(slug);
 	assert.equal(record.data.tier, "deep_dive");
 	const config = projectArticleTrial[slug];
-	resolveProjectPresentation(config, record.data, record.headings, galleries(record.data));
+	const resolved = resolveProjectPresentation(
+		config,
+		record.data,
+		record.headings,
+		galleries(record.data),
+	);
+	for (const id of config.galleryCaptionsFromDeck ?? []) {
+		const source = galleries(record.data).find((g) => g.id === id);
+		const caption =
+			source.caption ||
+			source.deck
+				.map((card) => card.body)
+				.filter(Boolean)
+				.join("\n\n");
+		assert.equal(resolved.galleries.find((g) => g.id === id).caption, caption);
+		for (const scene of resolved.scenes)
+			for (const image of scene.media.filter((image) =>
+				source.data.images.some((i) => i.src === image.src),
+			))
+				assert.equal(image.galleryCaption, caption);
+	}
+	if (!config.galleryCaptionsFromDeck) assert.deepEqual(resolved.galleries, galleries(record.data));
 	const relabeled = structuredClone(galleries(record.data));
 	for (const gallery of relabeled)
 		for (const image of gallery.data.images) image.alt = "Revised accessible copy";
@@ -99,6 +129,39 @@ for (const slug of trialSlugs) {
 			/Media key/,
 		);
 	}
+	if (config.galleryCaptionsFromDeck) {
+		const invalidCaption = structuredClone(config);
+		invalidCaption.galleryCaptionsFromDeck.push("missing-gallery");
+		assert.throws(
+			() =>
+				resolveProjectPresentation(
+					invalidCaption,
+					record.data,
+					record.headings,
+					galleries(record.data),
+				),
+			/Gallery caption source/,
+		);
+	}
+	if (config.models) {
+		for (const model of resolved.models) {
+			const source = record.data.cyberspace.stickies.find((item) => item.id === model.id);
+			assert.equal(model.src, source.data.modelSrc);
+			assert.equal(model.caption, source.caption);
+		}
+		const invalidModel = structuredClone(config);
+		invalidModel.models.push("missing-model");
+		assert.throws(
+			() =>
+				resolveProjectPresentation(
+					invalidModel,
+					record.data,
+					record.headings,
+					galleries(record.data),
+				),
+			/Model key/,
+		);
+	}
 }
 const fixture = [
 	{ id: "default", data: {} },
@@ -117,7 +180,7 @@ assert.deepEqual(
 assert.equal(models.get("ept-1000"), null, "isolated project suppresses unhelpful ribbon");
 assert.equal(models.get("d-command").projects.find((p) => p.current).end, null);
 console.log(
-	`PASS data/configuration: ${roster.length} route-eligible records; five project configurations; broken references fail; alt edits preserve identity`,
+	`PASS data/configuration: ${roster.length} route-eligible records; ${trialSlugs.length} project configurations; broken references fail; alt edits preserve identity; gallery context preserved`,
 );
 if (process.argv.includes("--built")) {
 	const emitted = [];
@@ -130,7 +193,7 @@ if (process.argv.includes("--built")) {
 		if (hasTrial) emitted.push(slug);
 	}
 	assert.deepEqual(emitted.sort(), [...trialSlugs].sort());
-	console.log("PASS static output: exactly five trial articles and career ribbons");
+	console.log("PASS static output: exactly thirteen approved articles and career ribbons");
 	process.exit(0);
 }
 if (process.argv.includes("--data-only")) process.exit(0);
@@ -165,7 +228,19 @@ const specs = trialSlugs.map((slug) => [
 				nodes.map((n) => ({ slug: n.id, depth: Number(n.tagName[1]), text: n.textContent })),
 		);
 		const record = byId.get(slug);
-		resolveProjectPresentation(config, record.data, domHeadings, galleries(record.data));
+		const resolved = resolveProjectPresentation(
+			config,
+			record.data,
+			domHeadings,
+			galleries(record.data),
+		);
+		for (const id of config.galleryCaptionsFromDeck ?? []) {
+			const caption = resolved.galleries.find((g) => g.id === id).caption;
+			assert.ok(
+				await page.$eval("#visual-evidence", (el, text) => el.textContent.includes(text), caption),
+				`${slug}: omitted gallery context`,
+			);
+		}
 		const references = await page.$$eval(
 			"project-rail-coordinator a[href^='#'], .evidence-composition a[href^='#']",
 			(links) => links.map((a) => a.getAttribute("href").slice(1)),
@@ -179,6 +254,25 @@ const specs = trialSlugs.map((slug) => [
 			panels.every((p) => p.querySelector("img, .rail__source-links a")),
 		);
 		assert.ok(nonempty, "empty media panel");
+		if (!["c24", "d-command", "sundance", "room-director", "webtv-elmer"].includes(slug)) {
+			// Browser load state covers broken sources without forcing full-resolution
+			// decode() buffers for archival drawings that render at thumbnail size.
+			await page.$$eval(".project-rail--right img", (images) =>
+				images.forEach((image) => {
+					image.loading = "eager";
+				}),
+			);
+			await page.waitForFunction(() =>
+				[...document.querySelectorAll(".project-rail--right img")].every((image) => image.complete),
+			);
+			const mediaResults = await page.$$eval(".project-rail--right img", (images) =>
+				images.map((image) => ({ src: image.getAttribute("src"), loaded: image.naturalWidth > 0 })),
+			);
+			assert.ok(
+				mediaResults.every((image) => image.loaded),
+				`${slug}: failed selected media ${JSON.stringify(mediaResults.filter((image) => !image.loaded))}`,
+			);
+		}
 		if (!galleries(record.data).length) assert.equal(await page.$("#visual-evidence"), null);
 		const palettes = [];
 		for (const theme of ["light", "dark"]) {
@@ -225,32 +319,79 @@ const specs = trialSlugs.map((slug) => [
 			0,
 		);
 		await page.screenshot({ path: path.join(cacheDirectory, `${slug}-active-rails.png`) });
+		assert.equal(
+			await page.$$eval("[data-project-model]", (nodes) => nodes.length),
+			resolved.models.length,
+		);
+		for (const model of resolved.models) {
+			assert.ok(
+				await page.$eval(
+					"[data-project-model]",
+					(el, text) => el.textContent.includes(text),
+					model.caption,
+				),
+			);
+			assert.equal(await page.$eval("[data-model-frame]", (el) => el.hidden), true);
+			await page.click("[data-model-disclosure] summary");
+			await page.waitForFunction(() => document.querySelector("model-viewer")?.loaded, {
+				timeout: PAGE_TIMEOUT_MS,
+			});
+			assert.equal(await page.$eval("model-viewer", (el) => el.hasAttribute("auto-rotate")), false);
+			assert.equal(await page.$eval("model-viewer", (el) => el.getAttribute("src")), model.src);
+			await page.setViewport({ width: 320, height: 844 });
+			assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
+			await page.$eval("[data-project-model]", (el) => el.scrollIntoView({ block: "start" }));
+			await page.screenshot({ path: path.join(cacheDirectory, `${slug}-model-mobile.png`) });
+			await page.click("[data-model-disclosure] summary");
+			await page.setViewport({ width: 1440, height: 1000 });
+		}
 		const link = await page.$(".ribbon-projects a:not([aria-current])");
 		await page.keyboard.press("Tab");
 		await link.focus();
 		assert.notEqual(await link.evaluate((a) => getComputedStyle(a).outlineStyle), "none");
 		const href = await link.evaluate((a) => a.getAttribute("href"));
-		await page.keyboard.press("Enter");
+		await Promise.all([
+			page.waitForNavigation({ waitUntil: "networkidle0" }),
+			page.keyboard.press("Enter"),
+		]);
 		await page.waitForFunction(
 			(expected) => location.pathname.replace(/\/$/, "") === expected,
 			{},
 			href,
 		);
 		await page.emulateMediaFeatures([]);
-		await page.setJavaScriptEnabled(false);
-		await page.setViewport({ width: 390, height: 844 });
-		await visit(page, slug);
-		assert.equal(await page.$("[data-project-enhanced]"), null);
-		assert.equal(
-			await page.$$eval("[data-project-rail-scene][inert]", (panels) => panels.length),
-			0,
-		);
-		assert.ok(await page.$(".markdown-content"));
-		const nativeLink = await page.$(".ribbon-projects a:not([aria-current])");
-		const nativeHref = await nativeLink.evaluate((a) => a.getAttribute("href"));
-		await Promise.all([page.waitForNavigation({ waitUntil: "networkidle0" }), nativeLink.click()]);
-		assert.equal(new URL(page.url()).pathname.replace(/\/$/, ""), nativeHref);
-		await page.setJavaScriptEnabled(true);
+		// Disable scripts before the first navigation in a separate page; toggling a
+		// live Astro document can cancel deferred imports and create false page errors.
+		const noJsPage = await page.browser().newPage();
+		const noJsProblems = createPageProblemCollector(noJsPage);
+		try {
+			await noJsPage.setJavaScriptEnabled(false);
+			await noJsPage.setViewport({ width: 390, height: 844 });
+			await visit(noJsPage, slug);
+			assert.equal(await noJsPage.$("[data-project-enhanced]"), null);
+			assert.equal(
+				await noJsPage.$$eval("[data-project-rail-scene][inert]", (panels) => panels.length),
+				0,
+			);
+			assert.ok(await noJsPage.$(".markdown-content"));
+			for (const model of resolved.models) {
+				assert.equal(
+					await noJsPage.$eval("[data-project-model] a", (el) => el.getAttribute("href")),
+					model.src,
+				);
+				assert.equal(await noJsPage.$eval("[data-model-frame]", (el) => el.hidden), true);
+			}
+			const nativeLink = await noJsPage.$(".ribbon-projects a:not([aria-current])");
+			const nativeHref = await nativeLink.evaluate((a) => a.getAttribute("href"));
+			await Promise.all([
+				noJsPage.waitForNavigation({ waitUntil: "networkidle0" }),
+				nativeLink.click(),
+			]);
+			assert.equal(new URL(noJsPage.url()).pathname.replace(/\/$/, ""), nativeHref);
+			assertNoPageProblems(noJsProblems);
+		} finally {
+			await noJsPage.close();
+		}
 		assertNoPageProblems(problems);
 		return "source parity, resolved references, theme contrast, four widths, active rails, keyboard and no-JS navigation";
 	},
@@ -258,7 +399,7 @@ const specs = trialSlugs.map((slug) => [
 specs.push([
 	"Trial boundaries and client navigation lifecycle",
 	async (page) => {
-		for (const slug of ["sc48", "wall-plates", "webtv-galaxy"]) {
+		for (const slug of ["avegant-glyph", "kplayer-6000", "m500"]) {
 			const response = await page.goto(`${BASE_URL}/projects/${slug}`, {
 				waitUntil: "networkidle0",
 			});
@@ -275,14 +416,14 @@ specs.push([
 		await page.goBack({ waitUntil: "networkidle0" });
 		await page.waitForSelector('[data-project-article="c24"] [data-project-enhanced]');
 		assert.equal(await page.$$eval("project-rail-coordinator", (nodes) => nodes.length), 1);
-		return "three non-trial controls unchanged; deterministic C24; trial-to-trial and back navigation reconnect rails";
+		return "three non-rollout controls unchanged; deterministic C24; approved-page and back navigation reconnect rails";
 	},
 ]);
 process.exitCode = (await runBrowserContract({
 	assertionSpecs: specs,
 	cacheDirectory,
 	expectedAssertions: specs.length,
-	title: "Five-page deep-dive trial (#222)",
+	title: "Thirteen reviewed deep dives (#222 / #223)",
 }))
 	? 0
 	: 1;

@@ -29,6 +29,7 @@ import Navbox from "@components/primitives/Navbox.astro";
 import Hatnote from "@components/primitives/Hatnote.astro";
 import ProjectContinuityRail from "@components/Projects/ProjectContinuityRail.astro";
 import ProjectEvidenceBreakout from "@components/Projects/ProjectEvidenceBreakout.astro";
+import ProjectModelEvidence from "@components/Projects/ProjectModelEvidence.astro";
 import ProjectRailCoordinator from "@components/Projects/ProjectRailCoordinator.astro";
 import ContextRibbon from "@components/primitives/ContextRibbon.astro";
 import type { RibbonModel } from "@utils/contextRibbon";
@@ -311,12 +312,13 @@ const navNext = nextProject
 		{
 			useContinuityRails && galleries.length > 0 && (
 				<ProjectEvidenceBreakout
-					galleries={galleries}
+					galleries={resolved?.galleries ?? galleries}
 					featured={resolved?.featured}
 					breakout={resolved?.breakout}
 				/>
 			)
 		}
+		{resolved && resolved.models.length > 0 && <ProjectModelEvidence models={resolved.models} />}
 		<p
 			class="border-border text-muted-foreground mt-12 border-t pt-6 font-mono text-xs leading-relaxed"
 		>

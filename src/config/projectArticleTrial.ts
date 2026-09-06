@@ -1,6 +1,6 @@
 import type { ProjectPresentation } from "../utils/projectPresentation";
 
-/** #222: fixed trial roster; content remains canon-owned. Keys survive copy/alt edits. */
+/** #222 approved five-page trial plus #223 reviewed eight-page rollout; content stays canon-owned. */
 export const projectArticleTrial = {
 	c24: {
 		sections: {
@@ -627,6 +627,882 @@ export const projectArticleTrial = {
 				eyebrow: "Project context",
 				left: {
 					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "boundaries",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "impact",
+				eyebrow: "Project context",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: [],
+			},
+			{
+				key: "sources",
+				eyebrow: "Sources",
+				left: {
+					kind: "sources",
+				},
+				media: [],
+			},
+		],
+	},
+	sc48: {
+		sections: {
+			summary: "project-summary",
+			failures: "the-anatomy-of-failure",
+			thermal: "thermal-crisis-the-75c-kill-event",
+			structure: "structural-crisis-the-no-extrusion-mandate",
+			computer: "embedded-computer-integration",
+			tooling: "cosmetic-shell-and-tooling",
+			governance: "governance-and-evidence",
+			impact: "quantified-impact",
+			sources: "source-trail",
+		},
+		media: {
+			"computer-frame": {
+				galleryId: "01_brain_transplant",
+				src: "/assets/sc48/01-brain-transplant/9420-58318-00.jpg",
+			},
+			"side-cover": {
+				galleryId: "02_cosmetic_shell",
+				src: "/assets/sc48/02-cosmetic-shell/9440-58842-00.jpg",
+			},
+			"front-bolster": {
+				galleryId: "02_cosmetic_shell",
+				src: "/assets/sc48/02-cosmetic-shell/9440-58843-00.jpg",
+			},
+			"fan-duct": {
+				galleryId: "03_meltdown_mitigation",
+				src: "/assets/sc48/03-meltdown-mitigation/9440-58856-00.jpg",
+			},
+		},
+		galleryCaptionsFromDeck: ["01_brain_transplant", "02_cosmetic_shell", "03_meltdown_mitigation"],
+		scenes: [
+			{
+				key: "summary",
+				eyebrow: "Orientation",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: [],
+			},
+			{
+				key: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "scar-index",
+				},
+				media: [],
+			},
+			{
+				key: "thermal",
+				parent: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "scar",
+					section: "thermal",
+				},
+				media: ["fan-duct"],
+			},
+			{
+				key: "structure",
+				parent: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "scar",
+					section: "structure",
+				},
+				media: [],
+			},
+			{
+				key: "computer",
+				parent: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: ["computer-frame"],
+			},
+			{
+				key: "tooling",
+				parent: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: ["side-cover", "front-bolster"],
+			},
+			{
+				key: "governance",
+				eyebrow: "Project context",
+				left: {
+					kind: "metrics",
+					keys: ["governance"],
+				},
+				media: [],
+			},
+			{
+				key: "impact",
+				eyebrow: "Project context",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: [],
+			},
+			{
+				key: "sources",
+				eyebrow: "Sources",
+				left: {
+					kind: "sources",
+				},
+				media: [],
+			},
+		],
+	},
+	"d-control": {
+		sections: {
+			summary: "project-summary",
+			failures: "the-anatomy-of-failure",
+			"fader-pan": "fader-pan-crisis-more-than-half-rejected",
+			stand: "stand-fit-holes-bosses-and-side-plates",
+			assembly: "five-module-tolerance-and-assembly",
+			pcb: "prototype-pcb-crisis-v-2-containment",
+			campaign: "the-25-week-campaign",
+			governance: "governance-and-evidence",
+			impact: "quantified-impact",
+			sources: "source-trail",
+		},
+		media: {
+			"system-view": {
+				galleryId: "01_intro",
+				src: "/assets/d-control/bubbles/01_intro/full_big.jpg",
+			},
+			"stand-fit-front": {
+				galleryId: "04_stand_fit_check",
+				src: "/assets/d-control/bubbles/04_stand_fit_check/Picture 037.jpg",
+			},
+			"stand-fit-detail": {
+				galleryId: "04_stand_fit_check",
+				src: "/assets/d-control/bubbles/04_stand_fit_check/Picture 038.jpg",
+			},
+			"panel-gap": {
+				galleryId: "03_gap_check",
+				src: "/assets/d-control/bubbles/03_gap_check/gap differences.jpg",
+			},
+			"molded-interface": {
+				galleryId: "03_gap_check",
+				src: "/assets/d-control/bubbles/03_gap_check/moulding error.jpg",
+			},
+			"installed-system": {
+				galleryId: "05_installations",
+				src: "/assets/d-control/bubbles/05_installations/D_Control_Music.jpg",
+			},
+		},
+		scenes: [
+			{
+				key: "summary",
+				eyebrow: "Orientation",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: ["system-view"],
+			},
+			{
+				key: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "scar-index",
+				},
+				media: [],
+			},
+			{
+				key: "fader-pan",
+				parent: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "scar",
+					section: "fader-pan",
+				},
+				media: [],
+			},
+			{
+				key: "stand",
+				parent: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: ["stand-fit-front", "stand-fit-detail"],
+			},
+			{
+				key: "assembly",
+				parent: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: ["panel-gap", "molded-interface"],
+			},
+			{
+				key: "pcb",
+				parent: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "scar",
+					section: "pcb",
+				},
+				media: [],
+			},
+			{
+				key: "campaign",
+				parent: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "governance",
+				eyebrow: "Project context",
+				left: {
+					kind: "metrics",
+					keys: ["governance"],
+				},
+				media: [],
+			},
+			{
+				key: "impact",
+				eyebrow: "Project context",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: ["installed-system"],
+			},
+			{
+				key: "sources",
+				eyebrow: "Sources",
+				left: {
+					kind: "sources",
+				},
+				media: [],
+			},
+		],
+	},
+	bazooka: {
+		sections: {
+			summary: "project-summary",
+			failures: "the-anatomy-of-failure",
+			removal: "removal-crisis-fourteen-for-fourteen",
+			requirements: "requirement-lineage-650-w-to-850-w",
+			emi: "compliance-crisis-emi-pretest",
+			finish: "finish-and-tolerance-record",
+			production: "production-schedule-not-production-result",
+			governance: "governance-and-evidence",
+			impact: "quantified-impact",
+			sources: "source-trail",
+		},
+		media: {
+			"click-setup": {
+				galleryId: "03_base_click_testing_1",
+				src: "/assets/bazooka/03-base-click-testing-1/IMG_20170419_135338-lg.webp",
+			},
+			"pull-setup": {
+				galleryId: "03_base_pull_testing_1",
+				src: "/assets/bazooka/03-base-pull-testing-1/IMG_20170420_172124-lg.webp",
+			},
+			"pull-handling": {
+				galleryId: "03_base_pull_testing_1",
+				src: "/assets/bazooka/03-base-pull-testing-1/IMG_20170420_172208-lg.webp",
+			},
+			"button-front": {
+				galleryId: "03_base_test_btn_1",
+				src: "/assets/bazooka/03-base-test-btn-1/IMG_20170830_103733-xl.webp",
+			},
+			"button-detail": {
+				galleryId: "03_base_test_btn_1",
+				src: "/assets/bazooka/03-base-test-btn-1/IMG_20170830_103738-xl.webp",
+			},
+			"later-evaluation": {
+				galleryId: "03_base_test_btn_2",
+				src: "/assets/bazooka/03-base-test-btn-2/IMG_20170904_151956-xl.webp",
+			},
+		},
+		scenes: [
+			{
+				key: "summary",
+				eyebrow: "Orientation",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: ["click-setup"],
+			},
+			{
+				key: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "scar-index",
+				},
+				media: [],
+			},
+			{
+				key: "removal",
+				parent: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "scar",
+					section: "removal",
+				},
+				media: ["pull-setup", "pull-handling"],
+			},
+			{
+				key: "requirements",
+				parent: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: ["button-front", "button-detail"],
+			},
+			{
+				key: "emi",
+				parent: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "scar",
+					section: "emi",
+				},
+				media: [],
+			},
+			{
+				key: "finish",
+				parent: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "production",
+				parent: "failures",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: ["later-evaluation"],
+			},
+			{
+				key: "governance",
+				eyebrow: "Project context",
+				left: {
+					kind: "metrics",
+					keys: ["governance"],
+				},
+				media: [],
+			},
+			{
+				key: "impact",
+				eyebrow: "Project context",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: [],
+			},
+			{
+				key: "sources",
+				eyebrow: "Sources",
+				left: {
+					kind: "sources",
+				},
+				media: [],
+			},
+		],
+	},
+	"webtv-galaxy": {
+		sections: {
+			summary: "project-summary",
+			thermal: "thermal-model",
+			cpu: "cpu-assembly-and-emi-direction",
+			chassis: "chassis-and-manufacturability",
+			governance: "governance-and-evidence",
+			boundaries: "program-outcome-and-xbox-boundary",
+			impact: "quantified-evidence",
+			sources: "source-trail",
+		},
+		media: {
+			"planned-form": {
+				galleryId: "01_early_id",
+				src: "/assets/webtv-galaxy/bubbles/01_early_id/galaxy3.jpg",
+			},
+			"thermal-model": {
+				galleryId: "03_thermal",
+				src: "/assets/webtv-galaxy/bubbles/03_thermal/model-iso.jpg",
+			},
+			"temperature-model": {
+				galleryId: "03_thermal",
+				src: "/assets/webtv-galaxy/bubbles/03_thermal/tempxz.jpg",
+			},
+			"cpu-assembly": {
+				galleryId: "03_cpu",
+				src: "/assets/webtv-galaxy/bubbles/03_cpu/Assembly 1.png",
+			},
+			"cpu-package": {
+				galleryId: "03_cpu",
+				src: "/assets/webtv-galaxy/bubbles/03_cpu/galaxy_CPU.png",
+			},
+			"base-deviations": {
+				galleryId: "03_metal",
+				src: "/assets/webtv-galaxy/bubbles/03_metal/Base_Proto_Deviations.jpg",
+			},
+			"forming-detail": {
+				galleryId: "03_metal",
+				src: "/assets/webtv-galaxy/bubbles/03_metal/DIMPLE_FORM.png",
+			},
+		},
+		scenes: [
+			{
+				key: "summary",
+				eyebrow: "Orientation",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: ["planned-form"],
+			},
+			{
+				key: "thermal",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: ["thermal-model", "temperature-model"],
+			},
+			{
+				key: "cpu",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: ["cpu-assembly", "cpu-package"],
+			},
+			{
+				key: "chassis",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: ["base-deviations", "forming-detail"],
+			},
+			{
+				key: "governance",
+				eyebrow: "Project context",
+				left: {
+					kind: "metrics",
+					keys: ["governance"],
+				},
+				media: [],
+			},
+			{
+				key: "boundaries",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "impact",
+				eyebrow: "Project context",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: [],
+			},
+			{
+				key: "sources",
+				eyebrow: "Sources",
+				left: {
+					kind: "sources",
+				},
+				media: [],
+			},
+		],
+	},
+	"webtv-cortez": {
+		models: ["3d_model"],
+		sections: {
+			summary: "project-summary",
+			surfaces: "surface-development",
+			keys: "key-layout-and-tooling-estimate",
+			schedule: "schedule-and-billing",
+			governance: "governance-and-evidence",
+			boundaries: "outcome-and-project-boundary",
+			impact: "quantified-evidence",
+			sources: "source-trail",
+		},
+		media: {
+			"functional-model": {
+				galleryId: "03_functional_model",
+				src: "/assets/webtv-cortez/bubbles/03_functional_model/cortez3.jpg",
+			},
+			"rear-surface": {
+				galleryId: "01_early_id",
+				src: "/assets/webtv-cortez/bubbles/01_early_id/back.jpg",
+			},
+			"front-surface": {
+				galleryId: "01_early_id",
+				src: "/assets/webtv-cortez/bubbles/01_early_id/front.jpg",
+			},
+			keycap: {
+				galleryId: "04_keycaps",
+				src: "/assets/webtv-cortez/bubbles/04_keycaps/cap1x1.png",
+			},
+			"key-legend": {
+				galleryId: "04_keycaps",
+				src: "/assets/webtv-cortez/bubbles/04_keycaps/keylegend.png",
+			},
+		},
+		scenes: [
+			{
+				key: "summary",
+				eyebrow: "Orientation",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: ["functional-model"],
+			},
+			{
+				key: "surfaces",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: ["rear-surface", "front-surface"],
+			},
+			{
+				key: "keys",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: ["keycap", "key-legend"],
+			},
+			{
+				key: "schedule",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "governance",
+				eyebrow: "Project context",
+				left: {
+					kind: "metrics",
+					keys: ["governance"],
+				},
+				media: [],
+			},
+			{
+				key: "boundaries",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "impact",
+				eyebrow: "Project context",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: [],
+			},
+			{
+				key: "sources",
+				eyebrow: "Sources",
+				left: {
+					kind: "sources",
+				},
+				media: [],
+			},
+		],
+	},
+	backsplash: {
+		sections: {
+			summary: "project-summary",
+			enclosure: "enclosure-and-interface-specification",
+			display: "display-mechanical-control",
+			build: "control-and-build-context",
+			environment: "environmental-and-cooling-boundary",
+			boundaries: "system-result-boundary",
+			governance: "governance-and-custody",
+			impact: "quantified-evidence",
+			sources: "source-trail",
+		},
+		media: {
+			"build-context": {
+				galleryId: "01_misc",
+				src: "/assets/backsplash/bubbles/01_misc/IMG_0237_60.png",
+			},
+			"internal-hardware": {
+				galleryId: "01_misc",
+				src: "/assets/backsplash/bubbles/01_misc/PXL_20211028_190650248_60.png",
+			},
+		},
+		scenes: [
+			{
+				key: "summary",
+				eyebrow: "Orientation",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: [],
+			},
+			{
+				key: "enclosure",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "display",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "build",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: ["build-context", "internal-hardware"],
+			},
+			{
+				key: "environment",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "boundaries",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "governance",
+				eyebrow: "Project context",
+				left: {
+					kind: "metrics",
+					keys: ["governance"],
+				},
+				media: [],
+			},
+			{
+				key: "impact",
+				eyebrow: "Project context",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: [],
+			},
+			{
+				key: "sources",
+				eyebrow: "Sources",
+				left: {
+					kind: "sources",
+				},
+				media: [],
+			},
+		],
+	},
+	"ksystem-120": {
+		sections: {
+			summary: "project-summary",
+			identity: "product-and-archive-identity",
+			integration: "mechanical-integration",
+			glow: "glow-evidence-boundary",
+			manufacturing: "first-article-and-manufacturing-state",
+			boundaries: "compliance-and-outcome-boundary",
+			partition: "cross-program-partition",
+			impact: "quantified-evidence",
+			sources: "source-trail",
+		},
+		media: {
+			"chassis-fit": {
+				galleryId: "01_hammered_lid",
+				src: "/assets/ksystem-120/bubbles/01_hammered_lid/DSC05318.jpg",
+			},
+			"assembly-detail": {
+				galleryId: "01_hammered_lid",
+				src: "/assets/ksystem-120/bubbles/01_hammered_lid/DSC05377.jpg",
+			},
+		},
+		scenes: [
+			{
+				key: "summary",
+				eyebrow: "Orientation",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: [],
+			},
+			{
+				key: "identity",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "integration",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: ["chassis-fit", "assembly-detail"],
+			},
+			{
+				key: "glow",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "manufacturing",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "boundaries",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "partition",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "impact",
+				eyebrow: "Project context",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: [],
+			},
+			{
+				key: "sources",
+				eyebrow: "Sources",
+				left: {
+					kind: "sources",
+				},
+				media: [],
+			},
+		],
+	},
+	"wall-plates": {
+		sections: {
+			summary: "project-summary",
+			interfaces: "the-visible-surface-hid-three-interfaces",
+			perimeter: "perimeter-clearance-was-positive-with-limits",
+			engagement: "clearance-is-not-engagement",
+			retention: "the-inner-interface-was-a-second-system",
+			boundaries: "authorship-and-evidence-boundaries",
+			impact: "quantified-impact",
+			sources: "source-trail",
+		},
+		media: {},
+		scenes: [
+			{
+				key: "summary",
+				eyebrow: "Orientation",
+				left: {
+					kind: "metrics",
+					keys: ["financial", "process", "governance"],
+				},
+				media: [],
+			},
+			{
+				key: "interfaces",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "perimeter",
+				eyebrow: "Project context",
+				left: {
+					kind: "none",
+				},
+				media: [],
+			},
+			{
+				key: "engagement",
+				eyebrow: "Project context",
+				left: {
+					kind: "scar",
+					section: "engagement",
+				},
+				media: [],
+			},
+			{
+				key: "retention",
+				eyebrow: "Project context",
+				left: {
+					kind: "scar",
+					section: "retention",
 				},
 				media: [],
 			},

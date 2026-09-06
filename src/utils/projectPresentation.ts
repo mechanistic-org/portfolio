@@ -13,6 +13,7 @@ export interface Gallery {
 	id: string;
 	title?: string;
 	caption?: string;
+	deck?: { body?: string }[];
 	data: { images?: GalleryImage[]; columns?: number };
 }
 export type MetricKey = "financial" | "process" | "governance";
@@ -33,6 +34,10 @@ export interface SceneSpec {
 export interface ProjectPresentation {
 	sections: Record<string, string>;
 	media: Record<string, { galleryId: string; src: string }>;
+	/** Reuse reviewed gallery-card copy where the older record has no caption. */
+	galleryCaptionsFromDeck?: string[];
+	/** Existing model sticky IDs to preserve when changing the article renderer. */
+	models?: string[];
 	scenes: SceneSpec[];
 	featured?: {
 		media?: string;
@@ -65,6 +70,15 @@ export interface PresentationData {
 	audio_url?: string;
 	nlm_url?: string;
 	notebook_url?: string;
+	cyberspace?: {
+		stickies?: {
+			id: string;
+			type?: string;
+			title?: string;
+			caption?: string;
+			data?: { modelSrc?: string; cameraOrbit?: string; fieldOfView?: string };
+		}[];
+	};
 }
 
 export function resolveProjectPresentation(
@@ -84,9 +98,28 @@ export function resolveProjectPresentation(
 		return value;
 	};
 	Object.keys(config.sections).forEach(anchor);
+	const captionIds = new Set(config.galleryCaptionsFromDeck ?? []);
+	for (const id of captionIds) {
+		const gallery = galleries.find((g) => g.id === id);
+		if (!gallery?.deck?.some((card) => card.body?.trim()))
+			fail(`Gallery caption source ${id} has no card body`);
+	}
+	const presentationGalleries = galleries.map((gallery) =>
+		captionIds.has(gallery.id)
+			? {
+					...gallery,
+					caption:
+						gallery.caption ||
+						gallery
+							.deck!.map((card) => card.body)
+							.filter(Boolean)
+							.join("\n\n"),
+				}
+			: gallery,
+	);
 	const media = new Map(
 		Object.entries(config.media).map(([key, ref]) => {
-			const gallery = galleries.find((g) => g.id === ref.galleryId);
+			const gallery = presentationGalleries.find((g) => g.id === ref.galleryId);
 			const matches = gallery?.data.images?.filter((image) => image.src === ref.src) ?? [];
 			if (matches.length !== 1)
 				return fail(`Media key ${key} must resolve exactly once in ${ref.galleryId}: ${ref.src}`);
@@ -145,5 +178,27 @@ export function resolveProjectPresentation(
 				: fail("Configured hero image is missing")
 			: image(item.media ?? ""),
 	}));
-	return { scenes, featured, anchors: scenes.map((s) => s.id), breakout: config.breakout };
+	const models = (config.models ?? []).map((id) => {
+		const matches =
+			data.cyberspace?.stickies?.filter((item) => item.id === id && item.type === "model") ?? [];
+		const model = matches[0];
+		if (matches.length !== 1 || !model?.data?.modelSrc)
+			return fail(`Model key ${id} must resolve exactly once with a source`);
+		return {
+			id,
+			title: model.title || "Interactive model",
+			caption: model.caption,
+			src: model.data.modelSrc,
+			cameraOrbit: model.data.cameraOrbit,
+			fieldOfView: model.data.fieldOfView,
+		};
+	});
+	return {
+		scenes,
+		featured,
+		anchors: scenes.map((s) => s.id),
+		breakout: config.breakout,
+		galleries: presentationGalleries,
+		models,
+	};
 }
