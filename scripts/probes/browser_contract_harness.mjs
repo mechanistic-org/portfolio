@@ -41,7 +41,7 @@ function isPortOccupied() {
 	});
 }
 
-async function prepareAstroHarnessConfig(cacheDirectory) {
+async function prepareAstroHarnessConfig(cacheDirectory, disableAdapter) {
 	await mkdir(cacheDirectory, { recursive: true });
 	const configPath = path.join(cacheDirectory, "astro.config.mjs");
 	const baseConfigUrl = pathToFileURL(path.join(process.cwd(), "astro.config.mjs")).href;
@@ -51,6 +51,8 @@ async function prepareAstroHarnessConfig(cacheDirectory) {
 			`import baseConfig from ${JSON.stringify(baseConfigUrl)};`,
 			"export default {",
 			"\t...baseConfig,",
+			...(disableAdapter ? ["\tadapter: undefined,"] : []),
+			`\tvite: { ...(baseConfig.vite ?? {}), cacheDir: ${JSON.stringify(path.join(cacheDirectory, "vite"))} },`,
 			"\tdevToolbar: { ...(baseConfig.devToolbar ?? {}), enabled: false },",
 			"};",
 			"",
@@ -184,6 +186,7 @@ export async function runBrowserContract({
 	cacheDirectory,
 	expectedAssertions,
 	initialViewport = VIEWPORTS[0],
+	disableAdapter = false,
 	title,
 }) {
 	let server = null;
@@ -192,7 +195,10 @@ export async function runBrowserContract({
 	const results = [];
 	try {
 		if (await isPortOccupied()) throw new Error(`Refusing to run: ${HOST}:${PORT} is occupied`);
-		server = startAstroServer(await prepareAstroHarnessConfig(cacheDirectory), cacheDirectory);
+		server = startAstroServer(
+			await prepareAstroHarnessConfig(cacheDirectory, disableAdapter),
+			cacheDirectory,
+		);
 		await waitForHttpReady(server);
 		browser = await puppeteer.launch({ headless: true });
 		const page = await browser.newPage();

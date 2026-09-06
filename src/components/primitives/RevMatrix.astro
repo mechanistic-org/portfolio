@@ -1,0 +1,529 @@
+---
+interface RevisionMark {
+	rev: string;
+	date: string;
+	date_basis: "drawing-revision-table" | "eco-document";
+	source_ids: string[];
+	factual_note?: string;
+	scar_anchor?: string;
+}
+
+interface RevisionPart {
+	part: string;
+	label: string;
+	related_scar_anchor?: string;
+	revs: RevisionMark[];
+}
+
+interface RevisionMatrix {
+	schema_version: "1.0";
+	project: string;
+	title: string;
+	context: string;
+	parts: RevisionPart[];
+}
+
+interface Props {
+	revisions: RevisionMatrix;
+}
+
+const { revisions } = Astro.props;
+const marks = revisions.parts.flatMap((part) => part.revs);
+const at = (value: string) => Date.parse(`${value}T00:00:00Z`);
+const orderedDates = marks.map((mark) => mark.date).sort((a, b) => a.localeCompare(b));
+const startDate = orderedDates[0];
+const endDate = orderedDates[orderedDates.length - 1];
+const start = at(startDate);
+const end = at(endDate);
+const span = Math.max(1, end - start);
+const left = 210;
+const right = 970;
+const position = (value: string) => left + ((at(value) - start) / span) * (right - left);
+const dateLabel = new Intl.DateTimeFormat("en-US", {
+	year: "numeric",
+	month: "short",
+	day: "numeric",
+	timeZone: "UTC",
+});
+const labelDate = (value: string) => dateLabel.format(new Date(`${value}T00:00:00Z`));
+const yearTicks = [...new Set(marks.map((mark) => mark.date.slice(0, 4)))].map((year) => ({
+	year,
+	x: Math.max(left, Math.min(right, position(`${year}-01-01`))),
+}));
+const rowY = (index: number) => 54 + index * 86;
+const stagger = (index: number, count: number) => (count > 5 ? [-9, 0, 9][index % 3] : 0);
+---
+
+<rev-matrix tabindex="-1">
+	<section
+		class="revision-matrix"
+		aria-labelledby="revision-matrix-heading"
+		data-revision-matrix={revisions.parts.length}
+		data-revision-marks={marks.length}
+	>
+		<header>
+			<div>
+				<span class="kicker">Documented revisions</span>
+				<h2 id="revision-matrix-heading">{revisions.title}</h2>
+				<p>{revisions.context}</p>
+			</div>
+			<div
+				class="readout"
+				aria-label={`${revisions.parts.length} parts and ${marks.length} dated revision marks`}
+			>
+				<strong>{marks.length}</strong>
+				<span>{revisions.parts.length} parts</span>
+			</div>
+		</header>
+
+		<div class="plot-wrap">
+			<svg
+				class="plot"
+				viewBox={`0 0 1000 ${revisions.parts.length * 86 + 40}`}
+				role="img"
+				aria-labelledby="revision-matrix-svg-title revision-matrix-svg-desc"
+			>
+				<title id="revision-matrix-svg-title">Part revision dates on one shared time axis</title>
+				<desc id="revision-matrix-svg-desc">
+					{revisions.parts.length} part rows with {marks.length} marks from {labelDate(startDate)} to
+					{labelDate(endDate)}. Drawing-table dates use cyan squares; ECO-document dates use amber
+					diamonds.
+				</desc>
+				<g class="axis" aria-hidden="true">
+					<line x1={left} x2={right} y1="18" y2="18"></line>
+					{
+						yearTicks.map((tick) => (
+							<g transform={`translate(${tick.x} 0)`}>
+								<line y1="12" y2={revisions.parts.length * 86 + 10} />
+								<text y="10">{tick.year}</text>
+							</g>
+						))
+					}
+				</g>
+				{
+					revisions.parts.map((part, partIndex) => {
+						const y = rowY(partIndex);
+						return (
+							<g class="part-row" data-revision-part={part.part}>
+								<text class="part-number" x="0" y={y - 7}>
+									{part.part}
+								</text>
+								{part.related_scar_anchor ? (
+									<a
+										class="part-link"
+										href={`#${part.related_scar_anchor}`}
+										data-scar={part.related_scar_anchor}
+									>
+										<text x="0" y={y + 12}>
+											{part.label}
+										</text>
+									</a>
+								) : (
+									<text class="part-label" x="0" y={y + 12}>
+										{part.label}
+									</text>
+								)}
+								<line class="lifeline" x1={left} x2={right} y1={y} y2={y} />
+								{part.revs.map((mark, markIndex) => {
+									const x = position(mark.date);
+									const markY = y + stagger(markIndex, part.revs.length);
+									const shape = mark.date_basis === "eco-document" ? "eco" : "drawing";
+									const content = (
+										<g
+											class:list={["revision-mark", shape]}
+											data-revision-mark={`${part.part}:${mark.rev}`}
+											tabindex={mark.scar_anchor ? undefined : "0"}
+											role="img"
+											aria-label={`${part.label}, revision ${mark.rev}, ${labelDate(mark.date)}, ${mark.date_basis.replaceAll("-", " ")}`}
+											transform={`translate(${x} ${markY})`}
+										>
+											<circle class="hit-target" r="12" />
+											{shape === "eco" ? (
+												<rect
+													class="mark"
+													x="-5"
+													y="-5"
+													width="10"
+													height="10"
+													transform="rotate(45)"
+												/>
+											) : (
+												<rect class="mark" x="-5" y="-5" width="10" height="10" />
+											)}
+											<text class="rev-label" y="-10">
+												{mark.rev}
+											</text>
+											<title>
+												Revision {mark.rev}, {mark.date}.{" "}
+												{mark.factual_note ?? mark.date_basis.replaceAll("-", " ")}. Sources:{" "}
+												{mark.source_ids.join(", ")}
+											</title>
+										</g>
+									);
+									return mark.scar_anchor ? (
+										<a
+											href={`#${mark.scar_anchor}`}
+											data-scar={mark.scar_anchor}
+											aria-label={`${part.label}, revision ${mark.rev}, ${labelDate(mark.date)}. Go to related scar.`}
+										>
+											{content}
+										</a>
+									) : (
+										content
+									);
+								})}
+							</g>
+						);
+					})
+				}
+			</svg>
+		</div>
+
+		<div class="legend" aria-label="Date basis legend">
+			<span><i class="drawing-key"></i> Drawing revision table</span>
+			<span><i class="eco-key"></i> ECO document date</span>
+		</div>
+
+		<div class="table-wrap">
+			<table>
+				<caption>Revision dates and sources</caption>
+				<thead
+					><tr
+						><th>Part</th><th>Revision</th><th>Date</th><th>Date basis</th><th>Record note</th><th
+							>Sources</th
+						></tr
+					></thead
+				>
+				<tbody>
+					{
+						revisions.parts.flatMap((part) =>
+							part.revs.map((mark) => (
+								<tr
+									data-revision-table-mark={`${part.part}:${mark.rev}`}
+									data-scar={mark.scar_anchor}
+								>
+									<td>
+										<>
+											<strong>{part.part}</strong>
+											<span>{part.label}</span>
+										</>
+									</td>
+									<td>{mark.rev}</td>
+									<td>
+										<time datetime={mark.date}>{mark.date}</time>
+									</td>
+									<td>{mark.date_basis.replaceAll("-", " ")}</td>
+									<td>{mark.factual_note ?? "Documented revision mark."}</td>
+									<td>{mark.source_ids.join(", ")}</td>
+								</tr>
+							)),
+						)
+					}
+				</tbody>
+			</table>
+		</div>
+	</section>
+</rev-matrix>
+
+<style>
+	.revision-matrix {
+		margin: 1rem 0 2rem;
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		border-radius: 0;
+		background: #0a0a0a;
+		color: #e0e0e0;
+		overflow: clip;
+	}
+	header {
+		display: flex;
+		justify-content: space-between;
+		gap: 2rem;
+		padding: 1.25rem;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	}
+	.kicker,
+	.readout,
+	.legend,
+	table {
+		font-family: var(--font-mono, "JetBrains Mono", monospace);
+	}
+	.kicker {
+		display: block;
+		margin-bottom: 0.35rem;
+		color: #00ffff;
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+	h2 {
+		margin: 0;
+		scroll-margin-top: 6rem;
+		font: 700 clamp(1.35rem, 3vw, 2rem)/1 var(--font-mono, "JetBrains Mono", monospace);
+		text-transform: uppercase;
+	}
+	header p {
+		max-width: 52rem;
+		margin: 0.65rem 0 0;
+		color: rgba(224, 224, 224, 0.72);
+		font-size: 0.82rem;
+		line-height: 1.55;
+	}
+	.readout {
+		flex: 0 0 auto;
+		min-width: 7rem;
+		padding-left: 1rem;
+		border-left: 1px solid rgba(255, 255, 255, 0.1);
+		text-align: right;
+	}
+	.readout strong {
+		display: block;
+		color: #00ffff;
+		font-size: 1.45rem;
+	}
+	.readout span {
+		color: rgba(224, 224, 224, 0.55);
+		font-size: 0.66rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+	.plot-wrap {
+		width: 100%;
+		overflow-x: auto;
+		padding: 0.65rem 1rem 0;
+	}
+	.plot {
+		display: block;
+		width: max(100%, 1000px);
+		max-width: none;
+		font-family: var(--font-mono, "JetBrains Mono", monospace);
+	}
+	.axis line {
+		stroke: rgba(255, 255, 255, 0.12);
+		stroke-width: 1;
+	}
+	.axis text {
+		fill: rgba(224, 224, 224, 0.48);
+		font-size: 11px;
+	}
+	.part-number {
+		fill: #e0e0e0;
+		font-size: 12px;
+		font-weight: 700;
+	}
+	.part-label,
+	.part-link text {
+		fill: rgba(224, 224, 224, 0.65);
+		font-size: 10px;
+	}
+	.part-link:hover text,
+	.part-link:focus-visible text,
+	.part-link.hot text {
+		fill: #00ffff;
+		text-decoration: underline;
+	}
+	.lifeline {
+		stroke: rgba(255, 255, 255, 0.22);
+		stroke-width: 2;
+	}
+	.hit-target {
+		fill: transparent;
+		stroke: transparent;
+	}
+	.revision-mark {
+		outline: none;
+		cursor: default;
+	}
+	a .revision-mark {
+		cursor: pointer;
+	}
+	.revision-mark .mark {
+		fill: #0a0a0a;
+		stroke: #00ffff;
+		stroke-width: 2;
+	}
+	.revision-mark.eco .mark {
+		stroke: #ff6600;
+	}
+	.rev-label {
+		fill: #e0e0e0;
+		font-size: 10px;
+		font-weight: 700;
+		text-anchor: middle;
+	}
+	.revision-mark:hover .hit-target,
+	.revision-mark:focus-visible .hit-target,
+	.revision-mark.is-hot .hit-target {
+		stroke: currentColor;
+		stroke-width: 2;
+	}
+	.revision-mark:hover .mark,
+	.revision-mark:focus-visible .mark,
+	.revision-mark.is-hot .mark {
+		fill: currentColor;
+	}
+	a:hover .revision-mark .hit-target,
+	a:focus-visible .revision-mark .hit-target,
+	a.hot .revision-mark .hit-target {
+		stroke: currentColor;
+		stroke-width: 2;
+	}
+	a:hover .revision-mark .mark,
+	a:focus-visible .revision-mark .mark,
+	a.hot .revision-mark .mark {
+		fill: currentColor;
+	}
+	.revision-mark.drawing {
+		color: #00ffff;
+	}
+	.revision-mark.eco {
+		color: #ff6600;
+	}
+	.legend {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.25rem;
+		padding: 0.55rem 1rem 0.8rem;
+		color: rgba(224, 224, 224, 0.65);
+		font-size: 0.66rem;
+	}
+	.legend i {
+		display: inline-block;
+		width: 9px;
+		height: 9px;
+		margin-right: 0.4rem;
+		border: 2px solid;
+		vertical-align: -1px;
+	}
+	.drawing-key {
+		border-color: #00ffff !important;
+	}
+	.eco-key {
+		border-color: #ff6600 !important;
+		transform: rotate(45deg);
+	}
+	.table-wrap {
+		overflow-x: auto;
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+	}
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 0.68rem;
+		line-height: 1.45;
+	}
+	caption {
+		padding: 0.7rem 1rem;
+		color: rgba(224, 224, 224, 0.58);
+		text-align: left;
+	}
+	th,
+	td {
+		padding: 0.6rem 0.75rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.08);
+		text-align: left;
+		vertical-align: top;
+	}
+	th {
+		color: rgba(224, 224, 224, 0.52);
+		font-size: 0.6rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+	td:nth-child(2),
+	td:nth-child(3) {
+		color: #00ffff;
+		white-space: nowrap;
+	}
+	td:last-child {
+		color: rgba(224, 224, 224, 0.62);
+		white-space: nowrap;
+	}
+	td span {
+		display: block;
+		color: rgba(224, 224, 224, 0.58);
+		font-size: 0.62rem;
+	}
+	tr.hot,
+	tr:focus-within {
+		background: #111111;
+		outline: 1px solid #00ffff;
+		outline-offset: -1px;
+	}
+	@media (max-width: 700px) {
+		header {
+			flex-direction: column;
+			gap: 1rem;
+			padding: 0.9rem;
+		}
+		.readout {
+			padding-left: 0;
+			border-left: 0;
+			text-align: left;
+		}
+		.plot-wrap {
+			padding-right: 0.35rem;
+			padding-left: 0.35rem;
+		}
+		.part-label {
+			display: none;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::before,
+		*::after {
+			scroll-behavior: auto !important;
+			transition: none !important;
+			animation: none !important;
+		}
+	}
+</style>
+
+<script>
+	class RevisionMatrixElement extends HTMLElement {
+		connectedCallback() {
+			const targets = [...this.querySelectorAll<HTMLElement>("[data-scar]")].filter(
+				(node) => node.dataset.scar,
+			);
+			const hovered = new Set<HTMLElement>();
+			const focused = new Set<HTMLElement>();
+			const paint = (id: string, on: boolean) => {
+				document
+					.querySelectorAll<HTMLElement>(`[data-scar="${CSS.escape(id)}"]`)
+					.forEach((node) => {
+						node.classList.toggle("hot", on);
+						node.classList.toggle("is-hot", on);
+					});
+				const heading = document.getElementById(id);
+				if (heading) heading.classList.toggle("scar-cross-hot", on);
+			};
+			const update = (id: string) =>
+				paint(
+					id,
+					[...hovered, ...focused].some((node) => node.dataset.scar === id),
+				);
+			targets.forEach((target) => {
+				const id = target.dataset.scar!;
+				target.addEventListener("mouseenter", () => {
+					hovered.add(target);
+					update(id);
+				});
+				target.addEventListener("mouseleave", () => {
+					hovered.delete(target);
+					update(id);
+				});
+				target.addEventListener("focus", () => {
+					focused.add(target);
+					update(id);
+				});
+				target.addEventListener("blur", () => {
+					focused.delete(target);
+					update(id);
+				});
+			});
+		}
+	}
+	if (!customElements.get("rev-matrix")) customElements.define("rev-matrix", RevisionMatrixElement);
+</script>

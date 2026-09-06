@@ -58,6 +58,8 @@ SITE_MDX   = os.path.join(SITE_DIR, "index.mdx")
 SITE_ENTROPY = os.path.join(SITE_DIR, "_entropy.json")
 CANON_CHRONOLOGY = os.path.join(CANON_DIR, "_chronology.json")
 SITE_CHRONOLOGY = os.path.join(SITE_DIR, "_chronology.json")
+CANON_REVISIONS = os.path.join(CANON_DIR, "_revisions.json")
+SITE_REVISIONS = os.path.join(SITE_DIR, "_revisions.json")
 OUT_DIR    = os.path.join(REPO_ROOT, "scripts", "_roundtrip_out", SLUG)
 
 # --- Field ownership ---
@@ -177,6 +179,91 @@ def chronology_bytes(sources):
         raise ValueError("canon chronology uses an undeclared evidence id")
     if re.search(rb"(?i)(?:[A-Z]:[\\/]|portfolio_working|raw[\\/])", payload):
         raise ValueError("canon chronology contains a local evidence locator")
+    return payload
+
+
+def revisions_bytes(sources, scars):
+    """Validate the public revision-matrix boundary and return canonical bytes."""
+    if not os.path.exists(CANON_REVISIONS):
+        return None
+    with open(CANON_REVISIONS, "rb") as handle:
+        payload = handle.read()
+    revisions = json.loads(payload.decode("utf-8"))
+    if not isinstance(revisions, dict) or set(revisions) != {
+        "schema_version", "project", "title", "context", "parts"
+    }:
+        raise ValueError("canon revisions has an invalid top-level contract")
+    if revisions["schema_version"] != "1.0" or revisions["project"] != SLUG:
+        raise ValueError("canon revisions schema/project mismatch")
+    if not isinstance(revisions["title"], str) or not revisions["title"].strip():
+        raise ValueError("canon revisions needs a title")
+    if not isinstance(revisions["context"], str) or not revisions["context"].strip():
+        raise ValueError("canon revisions needs context")
+    if not isinstance(revisions["parts"], list) or not revisions["parts"]:
+        raise ValueError("canon revisions needs parts")
+
+    declared = {source.removeprefix("evidence:") for source in sources}
+    valid_scars = {
+        scar.get("anchor") for scar in scars
+        if isinstance(scar, dict) and isinstance(scar.get("anchor"), str)
+    }
+    seen_parts = set()
+    seen_pairs = set()
+    part_keys = {"part", "label", "revs"}
+    optional_part_keys = {"related_scar_anchor"}
+    rev_keys = {"rev", "date", "date_basis", "source_ids"}
+    optional_rev_keys = {"factual_note", "scar_anchor"}
+    iso_date = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+    for part in revisions["parts"]:
+        if not isinstance(part, dict) or not part_keys <= set(part) or not set(part) <= part_keys | optional_part_keys:
+            raise ValueError("canon revisions part has an invalid contract")
+        part_id = part.get("part")
+        if not isinstance(part_id, str) or not part_id.strip() or part_id in seen_parts:
+            raise ValueError(f"canon revisions part is invalid or duplicated: {part_id!r}")
+        seen_parts.add(part_id)
+        if not isinstance(part.get("label"), str) or not part["label"].strip():
+            raise ValueError(f"canon revisions part {part_id!r} needs a label")
+        related_scar = part.get("related_scar_anchor")
+        if related_scar is not None and related_scar not in valid_scars:
+            raise ValueError(f"canon revisions part {part_id!r} has an unknown scar anchor")
+        revs = part.get("revs")
+        if not isinstance(revs, list) or not revs:
+            raise ValueError(f"canon revisions part {part_id!r} needs revs")
+        prior_date = None
+        for revision in revs:
+            if not isinstance(revision, dict) or not rev_keys <= set(revision) or not set(revision) <= rev_keys | optional_rev_keys:
+                raise ValueError("canon revisions mark has an invalid contract")
+            rev = revision.get("rev")
+            if not isinstance(rev, str) or not rev.strip() or (part_id, rev) in seen_pairs:
+                raise ValueError(f"canon revisions part/rev is invalid or duplicated: {(part_id, rev)!r}")
+            seen_pairs.add((part_id, rev))
+            date_value = revision.get("date")
+            if not isinstance(date_value, str) or not iso_date.fullmatch(date_value):
+                raise ValueError(f"canon revisions mark has an invalid ISO date: {date_value!r}")
+            try:
+                date.fromisoformat(date_value)
+            except ValueError as exc:
+                raise ValueError(f"canon revisions mark has an invalid ISO date: {date_value!r}") from exc
+            if prior_date is not None and date_value < prior_date:
+                raise ValueError(f"canon revisions dates are not sorted for part {part_id!r}")
+            prior_date = date_value
+            if revision.get("date_basis") not in {"drawing-revision-table", "eco-document"}:
+                raise ValueError("canon revisions mark has an invalid date_basis")
+            source_ids = revision.get("source_ids")
+            if (not isinstance(source_ids, list) or not source_ids or
+                    any(not isinstance(item, str) or not item.strip() for item in source_ids)):
+                raise ValueError("canon revisions mark needs non-empty source_ids")
+            if not set(source_ids) <= declared:
+                raise ValueError("canon revisions uses an undeclared evidence id")
+            factual_note = revision.get("factual_note")
+            if factual_note is not None and (not isinstance(factual_note, str) or not factual_note.strip()):
+                raise ValueError("canon revisions factual_note must be non-empty")
+            scar_anchor = revision.get("scar_anchor")
+            if scar_anchor is not None and scar_anchor not in valid_scars:
+                raise ValueError("canon revisions mark has an unknown scar anchor")
+    if re.search(rb"(?i)(?:[A-Z]:[\\/]|portfolio_working|raw[\\/])", payload):
+        raise ValueError("canon revisions contains a private evidence locator")
     return payload
 
 
@@ -532,6 +619,7 @@ def generate():
     rec, record_body = read_mdx(CANON_REC)
     validate_sources(rec.get("sources", []))
     chronology = chronology_bytes(rec.get("sources", []))
+    revisions = revisions_bytes(rec.get("sources", []), rec.get("scars", []))
     cut = first_appended_index(record_body)
     site_body = record_body if cut == -1 else record_body[:cut]
     sections = appended_sections(record_body)
@@ -565,6 +653,7 @@ def generate():
         with open(os.path.join(out_dir, "_entropy.json"), "w", encoding="utf-8") as f:
             json.dump(entropy, f, indent=2, ensure_ascii=False, sort_keys=True, default=str)
     sync_optional_sidecar(os.path.join(out_dir, "_chronology.json"), chronology)
+    sync_optional_sidecar(os.path.join(out_dir, "_revisions.json"), revisions)
     extra = f" + data.json (keys: {sorted(data_json)})" if data_json else ""
     print(f"[generate] -> {out_dir}\\index.mdx ({len(site_fm)} fm keys){extra}")
     return site_fm, data_json, site_body
@@ -615,6 +704,9 @@ def verify():
     generated_chronology = os.path.join(OUT_DIR, "_chronology.json")
     chronology_ok = optional_sidecar_matches_authority(CANON_CHRONOLOGY, generated_chronology)
     live_chronology_ok = optional_sidecar_matches_authority(CANON_CHRONOLOGY, SITE_CHRONOLOGY)
+    generated_revisions = os.path.join(OUT_DIR, "_revisions.json")
+    revisions_ok = optional_sidecar_matches_authority(CANON_REVISIONS, generated_revisions)
+    live_revisions_ok = optional_sidecar_matches_authority(CANON_REVISIONS, SITE_REVISIONS)
     print("\n=== VERIFY (lossless round-trip) ===")
     print(f"  original fm keys {len(orig_fm)} -> lean {len(gen_fm)} + data.json {sorted(data_json)}")
     print(f"  MISSING after merge : {missing or 'none'}")
@@ -622,7 +714,10 @@ def verify():
     print(f"  body identical      : {body_ok}")
     print(f"  chronology identical: {chronology_ok}")
     print(f"  live sidecar parity  : {live_chronology_ok}")
-    ok = not missing and not changed and body_ok and chronology_ok and live_chronology_ok
+    print(f"  revisions identical : {revisions_ok}")
+    print(f"  live revisions parity: {live_revisions_ok}")
+    ok = (not missing and not changed and body_ok and chronology_ok and
+          live_chronology_ok and revisions_ok and live_revisions_ok)
     print(f"  RESULT              : {'PASS (lossless)' if ok else 'FAIL'}")
     return ok
 

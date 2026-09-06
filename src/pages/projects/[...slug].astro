@@ -256,6 +256,34 @@ if (entry) {
 	}
 }
 
+// === VERIFIED REVISION MATRIX SIDECAR ===
+// Canon-owned and copied byte-for-byte by project_pipeline.py. Invalid sidecars
+// fail the static build rather than disappearing behind a permissive adapter.
+let revisionsData: any = null;
+const revisionFiles = import.meta.glob("/src/content/projects/**/_revisions.json", {
+	eager: true,
+});
+
+if (entry) {
+	const expectedSuffix = `/src/content/projects/${entry.id}/_revisions.json`;
+	const matchingKey = Object.keys(revisionFiles).find(
+		(key) => key.endsWith(expectedSuffix) || key === expectedSuffix,
+	);
+	if (matchingKey) {
+		const fileModule: any = revisionFiles[matchingKey];
+		const rawData = fileModule.default || fileModule;
+		if (
+			rawData?.schema_version !== "1.0" ||
+			rawData?.project !== entry.id ||
+			!Array.isArray(rawData.parts) ||
+			rawData.parts.length === 0
+		) {
+			throw new Error(`[REVISIONS] Invalid verified sidecar for ${entry.id}`);
+		}
+		revisionsData = rawData;
+	}
+}
+
 // INJECT GENERIC SCROLLY STRUCTURE IF MISSING (For Legacy MDX upgrades)
 // The second injected sticky ("PROJECT DATA" / "This record has been upgraded to
 // the Hyperspace Protocol." / "Group: <industry>") was removed 2026-07-29. It
@@ -298,4 +326,5 @@ console.log(`[ROUTER] Project: ${finalEntry.id} -> Theme: ${theme}`);
 	presentation={presentation}
 	contextRibbon={contextRibbon}
 	chronology={chronologyData}
+	revisions={revisionsData}
 />
