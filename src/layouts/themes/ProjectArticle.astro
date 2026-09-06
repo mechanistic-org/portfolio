@@ -32,6 +32,7 @@ import ProjectEvidenceBreakout from "@components/Projects/ProjectEvidenceBreakou
 import ProjectModelEvidence from "@components/Projects/ProjectModelEvidence.astro";
 import ProjectRailCoordinator from "@components/Projects/ProjectRailCoordinator.astro";
 import ContextRibbon from "@components/primitives/ContextRibbon.astro";
+import ChronoStrip from "@components/primitives/ChronoStrip.astro";
 import type { RibbonModel } from "@utils/contextRibbon";
 import { resolveProjectPresentation, type ProjectPresentation } from "@utils/projectPresentation";
 
@@ -43,6 +44,7 @@ interface Props {
 	prevProject?: any;
 	contextRibbon?: RibbonModel | null;
 	presentation?: ProjectPresentation;
+	chronology?: any;
 }
 const {
 	entry,
@@ -52,6 +54,7 @@ const {
 	prevProject,
 	contextRibbon = null,
 	presentation,
+	chronology = null,
 } = Astro.props;
 const d = entry.data;
 
@@ -160,6 +163,7 @@ const navNext = nextProject
 		/>
 
 		{contextRibbon && <ContextRibbon model={contextRibbon} />}
+		{chronology && <ChronoStrip chronology={chronology} />}
 
 		<ProjectRailCoordinator enabled={useContinuityRails} anchors={resolved?.anchors}>
 			<div class="lg:grid lg:grid-cols-[260px_minmax(0,1fr)_300px] lg:gap-8 xl:gap-12">

@@ -34,7 +34,7 @@ The old docstring claimed "non-destructive" because it never wrote the live
 index.mdx. It was defending the render target and overwriting the source of
 truth. The protection pointed backwards.
 """
-import hashlib, os, sys, json
+import hashlib, os, sys, json, re
 from datetime import date
 import yaml
 
@@ -56,6 +56,8 @@ CANON_REC  = os.path.join(CANON_DIR, "%s.md" % SLUG)
 SITE_DIR   = os.path.join(REPO_ROOT, "src", "content", "projects", SLUG)
 SITE_MDX   = os.path.join(SITE_DIR, "index.mdx")
 SITE_ENTROPY = os.path.join(SITE_DIR, "_entropy.json")
+CANON_CHRONOLOGY = os.path.join(CANON_DIR, "_chronology.json")
+SITE_CHRONOLOGY = os.path.join(SITE_DIR, "_chronology.json")
 OUT_DIR    = os.path.join(REPO_ROOT, "scripts", "_roundtrip_out", SLUG)
 
 # --- Field ownership ---
@@ -146,6 +148,36 @@ def validate_sources(sources):
         if actual != row["sha256"]:
             raise ValueError(f"evidence hash mismatch: {evidence_id}")
     print(f"[evidence] resolved {len(sources)} curated source id(s)")
+
+
+def chronology_bytes(sources):
+    """Validate the public sidecar boundary and return the canonical bytes."""
+    if not os.path.exists(CANON_CHRONOLOGY):
+        return None
+    with open(CANON_CHRONOLOGY, "rb") as handle:
+        payload = handle.read()
+    chronology = json.loads(payload.decode("utf-8"))
+    required = {"schema_version", "project", "title", "start", "end", "phases",
+                "events", "clusters", "verification"}
+    if not isinstance(chronology, dict) or not required <= set(chronology):
+        raise ValueError("canon chronology has an invalid top-level contract")
+    if chronology["schema_version"] != "1.0" or chronology["project"] != SLUG:
+        raise ValueError("canon chronology schema/project mismatch")
+    if not isinstance(chronology["events"], list) or not chronology["events"]:
+        raise ValueError("canon chronology needs events")
+    if any(not isinstance(event, dict) for event in chronology["events"]):
+        raise ValueError("canon chronology event must be an object")
+    if any(not isinstance(event.get("source_ids"), list) or not event["source_ids"]
+           for event in chronology["events"]):
+        raise ValueError("canon chronology event needs source_ids")
+    declared = {source.removeprefix("evidence:") for source in sources}
+    chronology_ids = {evidence_id for event in chronology["events"]
+                      for evidence_id in event["source_ids"]}
+    if not chronology_ids <= declared:
+        raise ValueError("canon chronology uses an undeclared evidence id")
+    if re.search(rb"(?i)(?:[A-Z]:[\\/]|portfolio_working|raw[\\/])", payload):
+        raise ValueError("canon chronology contains a local evidence locator")
+    return payload
 # Contract v2 kill list (canon/queries/k2-stranded-data-decision-sheet.md).
 # `isomorphics` REMOVED from DROP_FIELDS — operator lean-in ruling 2026-07-01:
 # it round-trips canon -> site like scars.
@@ -413,6 +445,7 @@ def extract():
 def generate():
     rec, record_body = read_mdx(CANON_REC)
     validate_sources(rec.get("sources", []))
+    chronology = chronology_bytes(rec.get("sources", []))
     cut = first_appended_index(record_body)
     site_body = record_body if cut == -1 else record_body[:cut]
     sections = appended_sections(record_body)
@@ -444,6 +477,9 @@ def generate():
     if entropy is not None:
         with open(os.path.join(out_dir, "_entropy.json"), "w", encoding="utf-8") as f:
             json.dump(entropy, f, indent=2, ensure_ascii=False, sort_keys=True, default=str)
+    if chronology is not None:
+        with open(os.path.join(out_dir, "_chronology.json"), "wb") as f:
+            f.write(chronology)
     extra = f" + data.json (keys: {sorted(data_json)})" if data_json else ""
     print(f"[generate] -> {out_dir}\\index.mdx ({len(site_fm)} fm keys){extra}")
     return site_fm, data_json, site_body
@@ -491,12 +527,27 @@ def verify():
     # Trailing-newline tolerant: format hooks (Prettier) add a final newline to
     # committed pages; that is formatting, not content loss (minimerc false FAIL).
     body_ok = (gen_body.rstrip("\n") == orig_body.rstrip("\n"))
+    chronology_ok = True
+    live_chronology_ok = True
+    if os.path.exists(CANON_CHRONOLOGY):
+        generated_chronology = os.path.join(OUT_DIR, "_chronology.json")
+        canonical_bytes = open(CANON_CHRONOLOGY, "rb").read()
+        chronology_ok = (
+            os.path.exists(generated_chronology)
+            and canonical_bytes == open(generated_chronology, "rb").read()
+        )
+        live_chronology_ok = (
+            os.path.exists(SITE_CHRONOLOGY)
+            and canonical_bytes == open(SITE_CHRONOLOGY, "rb").read()
+        )
     print("\n=== VERIFY (lossless round-trip) ===")
     print(f"  original fm keys {len(orig_fm)} -> lean {len(gen_fm)} + data.json {sorted(data_json)}")
     print(f"  MISSING after merge : {missing or 'none'}")
     print(f"  CHANGED after merge : {changed or 'none'}")
     print(f"  body identical      : {body_ok}")
-    ok = not missing and not changed and body_ok
+    print(f"  chronology identical: {chronology_ok}")
+    print(f"  live sidecar parity  : {live_chronology_ok}")
+    ok = not missing and not changed and body_ok and chronology_ok and live_chronology_ok
     print(f"  RESULT              : {'PASS (lossless)' if ok else 'FAIL'}")
     return ok
 

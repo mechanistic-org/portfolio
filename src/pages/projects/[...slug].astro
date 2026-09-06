@@ -226,6 +226,36 @@ if (entry) {
 	}
 }
 
+// === VERIFIED CHRONOLOGY SIDECAR ===
+// `_chronology.json` is canon-owned, schema-validated, and copied byte-for-byte by
+// project_pipeline.py. Keep this explicit contract separate from the disabled generic
+// data.json merge above.
+let chronologyData: any = null;
+const chronologyFiles = import.meta.glob("/src/content/projects/**/_chronology.json", {
+	eager: true,
+});
+
+if (entry) {
+	const expectedSuffix = `/src/content/projects/${entry.id}/_chronology.json`;
+	const matchingKey = Object.keys(chronologyFiles).find(
+		(key) => key.endsWith(expectedSuffix) || key === expectedSuffix,
+	);
+	if (matchingKey) {
+		const fileModule: any = chronologyFiles[matchingKey];
+		const rawData = fileModule.default || fileModule;
+		if (
+			rawData?.schema_version !== "1.0" ||
+			rawData?.project !== entry.id ||
+			!Array.isArray(rawData.events) ||
+			!Array.isArray(rawData.phases) ||
+			!Array.isArray(rawData.clusters)
+		) {
+			throw new Error(`[CHRONOLOGY] Invalid verified sidecar for ${entry.id}`);
+		}
+		chronologyData = rawData;
+	}
+}
+
 // INJECT GENERIC SCROLLY STRUCTURE IF MISSING (For Legacy MDX upgrades)
 // The second injected sticky ("PROJECT DATA" / "This record has been upgraded to
 // the Hyperspace Protocol." / "Group: <industry>") was removed 2026-07-29. It
@@ -267,4 +297,5 @@ console.log(`[ROUTER] Project: ${finalEntry.id} -> Theme: ${theme}`);
 	entropy={entropyData}
 	presentation={presentation}
 	contextRibbon={contextRibbon}
+	chronology={chronologyData}
 />
