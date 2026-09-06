@@ -10,6 +10,7 @@ import {
 
 const sidecarPath = "src/content/projects/c24/_chronology.json";
 const chronologyBytes = await readFile(sidecarPath);
+const articleText = await readFile("src/content/projects/c24/index.mdx", "utf8");
 const chronology = JSON.parse(chronologyBytes);
 const prominent = chronology.events.filter((event) => event.prominence === "prominent");
 const dcd = chronology.clusters.find((cluster) => cluster.id === "dcd-release-sequence");
@@ -30,6 +31,8 @@ assert.equal(noBid.date, "2007-03-07");
 assert.equal(noBid.date_basis, "document-date");
 assert.match(noBid.verification_note, /reporting checkpoint, not a claimed occurrence date/u);
 assert.ok(!chronologyBytes.toString("utf8").includes("11/15/2006"));
+assert.match(articleText, /earliest located primary checkpoint is the March 7, 2007 status report/u);
+assert.ok(!articleText.match(/11\/15\/2006|Curtis\.11\.15\.06/u));
 assert.ok(!chronologyBytes.toString("utf8").match(/[A-Z]:[\\/]|portfolio_working/u));
 
 if (process.env.CANON_ROOT) {
