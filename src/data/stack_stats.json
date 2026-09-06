@@ -2,7 +2,7 @@
 	"as_of": "2026-08-10",
 	"method": "Measured 2026-08-10 from the repositories, logs, scheduler, and issue tracker by the stack's own tooling, then independently re-derived before publication. Snapshot, not estimate. Full provenance (exact command per number) is kept in the operator registry.",
 	"colophon_pipeline": {
-		"as_of": "2026-09-06",
+		"as_of": "2026-09-05",
 		"queue": {
 			"total": 308,
 			"colophon": 267,

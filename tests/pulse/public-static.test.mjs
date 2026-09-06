@@ -194,8 +194,10 @@ test("the approved controlled projection is complete in static HTML without clie
 	assert.deepEqual(colophonPipeline.queue, { total: 308, colophon: 267, docs: 41 });
 	assert.equal(colophonPipeline.entries_promoted, 6);
 	assert.equal(colophonPipeline.last_curated_at, "2026-09-05");
-	assert.equal(colophonPipeline.as_of, "2026-09-06");
+	assert.equal(colophonPipeline.as_of, "2026-09-05");
 	assert.match(colophonPipeline.interpretation, /do not measure editorial quality/iu);
+	assert.match(html, /<dt[^>]*>Last curated<\/dt>\s*<dd[^>]*>September 5, 2026<\/dd>/u);
+	assert.match(html, /<dt[^>]*>As of<\/dt>\s*<dd[^>]*>September 5, 2026<\/dd>/u);
 	assert.doesNotMatch(
 		JSON.stringify(colophonPipeline),
 		/(?:[a-z]:\\|ledger|packet|shortlist|sha256|source_path)/iu,
@@ -208,7 +210,6 @@ test("the approved controlled projection is complete in static HTML without clie
 		"267 colophon / 41 docs",
 		"Entries promoted",
 		"September 5, 2026",
-		"September 6, 2026",
 		colophonPipeline.interpretation,
 	]) {
 		assert.ok(
