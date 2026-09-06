@@ -13,41 +13,41 @@ export const HXO_TOUR_STEPS = [
 		id: "field",
 		projectId: "c24",
 		lens: "time",
-		title: "Read the field",
+		title: "Make geometry a contract",
 		narration:
-			"The default view is a career timeline. Position carries time; color stays tied to employer.",
+			"C|24 had to fit 19 PCB assemblies inside a low-profile console. I authored more than 50 Data Control Drawings to hold the interfaces steady while electrical and mechanical design evolved. The first physical build achieved full mechanical fit.",
 	},
 	{
 		id: "cohorts",
 		projectId: "sc48",
 		lens: "employer",
-		title: "See repeated systems work",
+		title: "Test the whole architecture",
 		narration:
-			"Employer reframes the same project record into cohorts without changing its semantic color.",
+			"For SC48, I had to solve thermal, packaging, and cost constraints together. We tested 17 configurations, moved the enclosure from 3U to 4U, and used a folded-steel spine to meet the no-extrusion constraint.",
 	},
 	{
 		id: "intervention",
 		projectId: "m700",
 		lens: "employer",
-		title: "Keep the intervention reachable",
+		title: "Follow the next constraint",
 		narration:
-			"A pin keeps this dossier reachable while you move between the map, index, and controls.",
+			"On M700, dirty rollers caused disc slippage. Increasing spring force improved tolerance to contamination, then exposed shaft deflection. A reliability fix had to account for both contact force and the structure carrying it.",
 	},
 	{
 		id: "problems",
 		projectId: "avegant-glyph",
 		lens: "category",
-		title: "Reframe by problem",
+		title: "Make fit measurable",
 		narration:
-			"Category gathers related product problems while the index and swarm remain synchronized.",
+			"For Glyph, comfort depended on interacting parts and different head sizes. We measured clamp force across head widths, telescope positions, spring thicknesses, and liner materials, turning fit into variables we could compare.",
 	},
 	{
 		id: "continue",
 		projectId: "xbox",
 		lens: "time",
-		title: "Continue from here",
+		title: "Improve what is already shipping",
 		narration:
-			"The tour ends with this dossier pinned. Open it, change lenses, or resume scanning from here.",
+			"Xbox was already in high-volume manufacture when Mechanistic joined. We explored redesigns within the existing architecture, and selected mechanical and EMI fixes moved into production. The task was to improve a working product within the constraints already committed.",
 	},
 ] as const satisfies readonly HxoTourStep[];
 
