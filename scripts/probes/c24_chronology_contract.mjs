@@ -23,6 +23,9 @@ assert.equal(chronology.verification.prominent_event_count, 8);
 assert.equal(dcd.event_ids.length, 7);
 assert.equal(dcd.verified_identifier_count, 18);
 assert.ok(chronology.events.every((event) => event.source_ids.length > 0));
+assert.ok(
+	entropy.every((event) => typeof event.source_ref === "string" && event.source_ref.length > 0),
+);
 assert.equal(
 	chronology.events.find((event) => event.id === "first-customer-ship").date,
 	"2007-11-07",
@@ -32,7 +35,10 @@ assert.equal(noBid.date, "2007-03-07");
 assert.equal(noBid.date_basis, "document-date");
 assert.match(noBid.verification_note, /reporting checkpoint, not a claimed occurrence date/u);
 assert.ok(!chronologyBytes.toString("utf8").includes("11/15/2006"));
-assert.match(articleText, /earliest located primary checkpoint is the March 7, 2007 status report/u);
+assert.match(
+	articleText,
+	/earliest located primary checkpoint is the March 7, 2007 status report/u,
+);
 assert.ok(!articleText.match(/11\/15\/2006|Curtis\.11\.15\.06/u));
 assert.ok(!chronologyBytes.toString("utf8").match(/[A-Z]:[\\/]|portfolio_working/u));
 assert.deepEqual(
@@ -68,7 +74,24 @@ const specs = [
 			});
 			assert.equal(response.status(), 200);
 			await page.waitForSelector("[data-chronology='25']");
+			await page.waitForSelector("[data-entropy='21']");
 			await page.waitForFunction(() => Boolean(customElements.get("chrono-strip")));
+			assert.equal(
+				await page.$eval("[data-entropy] h2", (node) => node.textContent),
+				"Project entropy",
+			);
+			assert.match(
+				await page.$eval("[data-entropy] header p", (node) => node.textContent || ""),
+				/derived|scored signal/iu,
+			);
+			assert.equal(
+				await page.$$eval("[data-chronology] [data-entropy]", (nodes) => nodes.length),
+				0,
+			);
+			assert.equal(
+				await page.$$eval("[data-entropy] [data-chronology]", (nodes) => nodes.length),
+				0,
+			);
 			assert.equal(await page.$$eval(".marker", (nodes) => nodes.length), 8);
 			assert.equal(await page.$$eval(".beats .beat", (nodes) => nodes.length), 8);
 			assert.equal(

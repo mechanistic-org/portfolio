@@ -180,6 +180,43 @@ def chronology_bytes(sources):
     return payload
 
 
+def validate_entropy(entropy, chronology_payload):
+    """Validate entropy provenance and guard shared chronology identities."""
+    if entropy is None:
+        return
+    if isinstance(entropy, list):
+        events = entropy
+    elif isinstance(entropy, dict) and isinstance(entropy.get("events"), list):
+        events = entropy["events"]
+    else:
+        raise ValueError("entropy must be an event array or an object with events")
+    if any(not isinstance(event, dict) for event in events):
+        raise ValueError("entropy event must be an object")
+    for index, event in enumerate(events):
+        source_ref = event.get("source_ref")
+        if not isinstance(source_ref, str) or not source_ref.strip():
+            raise ValueError(f"entropy event {index} needs source_ref")
+
+    if chronology_payload is None:
+        return
+    chronology = json.loads(chronology_payload.decode("utf-8"))
+    chronology_dates = {
+        event["id"]: event.get("date")
+        for event in chronology["events"]
+        if isinstance(event.get("id"), str) and event["id"]
+    }
+    for event in events:
+        identity = event.get("id")
+        if identity not in chronology_dates:
+            continue
+        if event.get("date") != chronology_dates[identity]:
+            raise ValueError(
+                "entropy/chronology date divergence for "
+                f"{identity!r}: entropy={event.get('date')!r}, "
+                f"chronology={chronology_dates[identity]!r}"
+            )
+
+
 def sync_optional_sidecar(target, payload):
     """Make one generated sidecar exactly match an optional canon artifact."""
     if payload is None:
@@ -445,6 +482,7 @@ def extract():
         # entropy is CANON_ONLY too: no sidecar on the site is not evidence of
         # absence in canon.
         rec["entropy"] = prior["entropy"]
+    validate_entropy(rec.get("entropy"), chronology_bytes(rec.get("sources", [])))
     # build record body: prose + ## Galleries + dossier tables
     record_body = body.rstrip("\n")
     if isinstance(data.get("cyberspace"), dict):
@@ -484,6 +522,7 @@ def generate():
         site_fm["cyberspace"] = parse_galleries(sections[GALLERY_HEADING])
     # entropy
     entropy = rec.get("entropy")
+    validate_entropy(entropy, chronology)
 
     out_dir = SITE_DIR if WRITE_LIVE else OUT_DIR
     os.makedirs(out_dir, exist_ok=True)
