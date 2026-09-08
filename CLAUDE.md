@@ -15,10 +15,9 @@ environment to `server`: that bundles the whole site into one `_worker.js`, hits
 Cloudflare's 10,000-module limit, and crashes the build. Dev and prod run the same
 static output.
 
-> Content source of truth is `src/content.config.ts` (Astro collections + Zod over the
-> MDX). Keystatic — the old dev-only CMS that was the sole reason dev ran in `server`
-> mode — was fully removed (#104); content truth is migrating to the curated canon repo (see
-> **Content model**).
+> Content truth lives in `D:\GitHub\portfolio-canon`; `src/content.config.ts`
+> defines the site's projection schema. Generated project MDX is a render target
+> (see **Content model**). Keystatic was removed under #104.
 
 **Security tripwire, not law (2026-08-06; expires at Astro >= 6):** the Dependabot
 triage dismissed 26 alerts (8 astro XSS/SSRF advisories patched only in Astro 6/7,
@@ -48,6 +47,14 @@ unpatched. Once the stack is on Astro >= 6, delete this note.
 | Lint / format | `eslint` (flat config) · Prettier (tabs; astro + tailwind plugins) |
 
 ## Content model
+
+For project research, packet preparation, composition or source closure, read
+`D:\GitHub\portfolio-canon\DEEP_DIVE_SOP.md` and
+`D:\GitHub\portfolio-canon\NOTEBOOKLM_MIGRATION_SOP.md` before selecting a method.
+For campaign pickup, cold-read [portfolio#229](https://github.com/mechanistic-org/portfolio/issues/229)
+and follow its linked current execution contract and exact review gates.
+The SOPs own research and receipt semantics; historical prompt/sidecar guides
+are provenance, not alternate operating instructions.
 
 Collections defined in [src/content.config.ts](src/content.config.ts):
 

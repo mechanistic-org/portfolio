@@ -4,121 +4,45 @@ slug: quickstart
 sidebar:
   group: Handbook
   order: 0
-description: Documentation for Quickstart (Cheat Sheet).
+description: Current portfolio authority and operational entry points.
 ---
-# ⚡ Quickstart: Daily Operations
 
-> **Role:** Operator / Pilot
-> **Objective:** Maintain, Update, and Deploy the EN-OS.
+# Quickstart: Daily Operations
 
-## Agent Runtime Resolution
+The repository's `CLAUDE.md` is the operational front door. It owns the current
+commands, runtime guidance, content pipeline and asset locations.
 
-Human/operator terminal commands can use the short forms in this guide (`npm run ...`, `python ...`) when the local shell resolves them correctly. Agent-critical workflows should use explicit runtimes so Codex sandboxing does not depend on PATH, Windows shims, or user-level npm prefixes.
+## Research and campaign pickup
 
-```powershell
-# Global agent session-open scripts
-& D:\GitHub\global_agent\venv\Scripts\python.exe D:\GitHub\global_agent\scripts\sprint_board.py --current-iteration
-& D:\GitHub\global_agent\venv\Scripts\python.exe D:\GitHub\global_agent\scripts\diag.py
+For portfolio research, packet preparation or composition, read
+`D:\GitHub\portfolio-canon\DEEP_DIVE_SOP.md`. For source capture, reuse and
+closure, also read `D:\GitHub\portfolio-canon\NOTEBOOKLM_MIGRATION_SOP.md`.
+Start campaign continuation from
+[portfolio#229](https://github.com/mechanistic-org/portfolio/issues/229) and
+its live selected contract. The controller records current work; the SOPs
+define how to perform it.
 
-# Codex-run portfolio checks
-& C:\Users\erik\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe scripts\compile_hack_pack.py
-& C:\Users\erik\.cache\codex-runtimes\codex-primary-runtime\dependencies\node\bin\node.exe node_modules\astro\astro.js sync
-```
+Focused prompts and structured outputs can support research under those
+contracts. Historical prompt cartridges and the old sidecar guide are retained
+provenance. They do not replace primary-source review or the current pipeline.
 
-If a command fails only inside Codex, keep sandboxing on and swap the command to one of the explicit runtimes above. Escalate only for operations that genuinely need user-level access, auth, network, or installs.
+## Content and assets
 
-## 1. Start Engine (Dev Server)
+Curated claims live in `D:\GitHub\portfolio-canon`. Supporting evidence and
+human-selected assets live in `D:\GitHub\portfolio-evidence`. Generated project
+MDX is written by the authorized `scripts/project_pipeline.py` flow and is a
+read-only render target.
 
-The dev server renders content and assets locally at full fidelity.
+Use `CLAUDE.md` for current validation and asset-processing commands. Run only
+the checks and writes required by the selected task.
 
-**Command:**
+## Development and release
 
-```powershell
-npm run dev
-```
+Use `npm run dev` for the local site and the checks listed in `CLAUDE.md` for
+the relevant change. For release preparation or rollback, read
+`README.md#deployment-and-rollback` and follow the exact publication contract.
+Pushing a content change is not itself an instruction to deploy.
 
-**Telemetry:**
-
-- **Local:** `http://localhost:4321`
-- **Content:** edit MDX directly under `src/content/projects/<slug>/index.mdx`
-- **Network:** `http://192.168.x.x:4321`
-
-> [!WARNING]
-> **Ghost Port Anomaly:** If you see old code or behavior, check for zombie processes.
->
-> **Fix:** Run `taskkill /F /IM node.exe` to kill all stray servers.
-
-## 2. The Data & Asset Refinery
-
-We work in **Pure Hyperspace**. No CSVs. No Manual Content files.
-But we still need to sync assets and timeline data.
-
-**Commands:**
-
-```powershell
-# Injects NotebookLM Bolus data and mines R2_MASTER for stickies
-npm run content:hydrate
-
-# The "Heavy Lifter" for media (Images & Audio)
-npm run assets:process
-
-# Mass-updates legacy content to the latest C24 Schema
-npm run content:modernize
-```
-
-**Triggers (When to Run):**
-
-1.  **New Timeline Node:** You created a new project MDX file -> Run `content:hydrate`.
-2.  **Asset Drop:** You added a new folder to `R2_MASTER` -> Run `assets:process`.
-3.  **Schema Change:** You need to update all MDX files -> Run `content:modernize`.
-
-> [!TIP]
-> **The Pulse:** The script outputs build time statistics. Watch for `[SUCCESS]` in Green.
-
-## 3. Asset Management (The Vault)
-
-**Source of Truth:** `D:\GitHub\portfolio-workspace\R2_MASTER`
-
-**Workflow:**
-
-1.  **Edit:** Place images in `R2_MASTER/{slug}/bubbles/...`
-2.  **Sync:** Run the sync script to update Staging and Production.
-
-```powershell
-# Ensure R2_MASTER assets are processed and moved to R2_MIRROR
-npm run assets:process
-```
-
-## 4. Diagnostics ("Doctor")
-
-If the system behaves erratically:
-
-**1. Verify Ports:**
-
-```powershell
-Get-Process node, python -ErrorAction SilentlyContinue
-```
-
-**2. Check Frontmatter & Schema:**
-
-```powershell
-npm run predev
-# or
-npm run audit:frontmatter
-```
-
-**3. Test Build:**
-
-```powershell
-npm run build
-```
-
-_(Pre-flight check before pushing. Catch TypeErrors here.)_
-
-## 5. Deployment
-
-**Protocol:** Git-Triggered (CD).
-
-1.  **Commit:** `git commit -m "feat: upgrade warp drive"`
-2.  **Push:** `git push`
-3.  **Monitor:** Check Cloudflare Pages dashboard for build status.
+The historical hydration, bulk modernization, direct-MDX-editing and
+Git-triggered Pages instructions formerly on this page were superseded.
+Their history remains in Git.

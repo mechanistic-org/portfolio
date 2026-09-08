@@ -9,7 +9,13 @@ description: Documentation for Maintenance & Troubleshooting.
 
 # System Maintenance & Troubleshooting
 
-This document serves as the first line of defense for system issues, build failures, and pipeline errors.
+> **Status: Historical reference.** The operational commands and source paths
+> below describe the retired sidecar pipeline and are not current instructions.
+> Use the repository's `CLAUDE.md` for current commands and ownership,
+> `README.md#deployment-and-rollback` for release work, and
+> `D:\GitHub\portfolio-canon\DEEP_DIVE_SOP.md` plus
+> `D:\GitHub\portfolio-canon\NOTEBOOKLM_MIGRATION_SOP.md` for research and custody.
+> Retained prompt/compiler material does not authorize a publication path.
 
 ## Operational Workflows (Agentic)
 
