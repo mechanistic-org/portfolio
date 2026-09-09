@@ -94,6 +94,8 @@ function collectImages(node: any, out: { src: string; alt?: string }[] = []) {
 	return out;
 }
 const images = collectImages(d.cyberspace);
+// KPLAYER-300's reviewed selection must be fully visible in its media rail.
+const railImages = d.slug === "kplayer-300" ? images : images.slice(0, 6);
 
 // Sectioned galleries (the forensic evidence) live under cyberspace.stickies.
 const galleries = (d.cyberspace?.stickies || []).filter(
@@ -293,7 +295,7 @@ const navNext = nextProject
 											Media · {images.length}
 										</div>
 										<div class="grid grid-cols-2 gap-2">
-											{images.slice(0, 6).map((im) => (
+											{railImages.map((im) => (
 												<img
 													src={im.src}
 													alt={im.alt || ""}

@@ -4,7 +4,7 @@ slug: kplayer-300
 tier: deep_dive
 description: 'Whole-product design and engineering of Kaleidescape’s compact Mercury player: enclosure, shielding, illumination, electronics placement, cooling and installation.'
 draft: false
-heroImage: /assets/kplayer-300/reviewed-design/kplayer-300-context-01-xl.webp
+heroImage: /assets/kplayer-300/product-and-installation/kplayer-300-detail-02-xl.webp
 employer: kaleidescape
 client: []
 job_title: project_lead
@@ -40,22 +40,58 @@ cyberspace:
         src: /assets/kplayer-300/reviewed-design/kplayer-300-exploded-01-xl.webp
     title: Mechanical architecture
     deck: []
-  - id: kplayer-installation
+  - id: kplayer-bezel
     type: gallery
     data:
       columns: 1
       layout: masonry
       images:
-      - alt: Rack-shelf configuration with paired players, power supplies and cable routing.
-        caption: Rack-shelf configuration with paired players, power supplies and cable routing.
-        src: /assets/kplayer-300/reviewed-design/kplayer-300-context-01-xl.webp
-      - alt: Two-player shelf layout with one of the power-supply configurations evaluated during development.
-        caption: Two-player shelf layout with one of the power-supply configurations evaluated during development.
-        src: /assets/kplayer-300/reviewed-design/kplayer-300-context-02-xl.webp
-      - alt: Alternate power-supply arrangement in the two-player shelf.
-        caption: Alternate power-supply arrangement in the two-player shelf.
-        src: /assets/kplayer-300/reviewed-design/kplayer-300-context-03-xl.webp
-    title: Shelf and power-supply layouts
+      - alt: Front bezel and blue illumination.
+        caption: Front bezel and blue illumination.
+        src: /assets/kplayer-300/product-and-installation/kplayer-300-detail-01-xl.webp
+    title: Bezel illumination
+    deck: []
+  - id: kplayer-product
+    type: gallery
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - alt: M300, front three-quarter view.
+        caption: M300, front three-quarter view.
+        src: /assets/kplayer-300/product-and-installation/kplayer-300-detail-02-xl.webp
+      - alt: M300, rear connections and enclosure.
+        caption: M300, rear connections and enclosure.
+        src: /assets/kplayer-300/product-and-installation/kplayer-300-detail-03-xl.webp
+    title: M300 product views
+    deck: []
+  - id: kplayer-installation
+    type: gallery
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - alt: Player mounted behind a display.
+        caption: Player mounted behind a display.
+        src: /assets/kplayer-300/product-and-installation/kplayer-300-context-05-xl.webp
+      - alt: Two players side by side in a rack shelf.
+        caption: Two players side by side in a rack shelf.
+        src: /assets/kplayer-300/product-and-installation/kplayer-300-context-06-xl.webp
+      - alt: Stacked rack shelves with players and a blanking panel.
+        caption: Stacked rack shelves with players and a blanking panel.
+        src: /assets/kplayer-300/product-and-installation/kplayer-300-context-07-xl.webp
+    title: Mounting and rack installation
+    deck: []
+  - id: kplayer-system
+    type: gallery
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - alt: The compact player within a Kaleidescape system.
+        caption: The compact player within a Kaleidescape system.
+        src: /assets/kplayer-300/product-and-installation/kplayer-300-context-04-md.webp
+    title: System context
     deck: []
 ---
 
@@ -79,7 +115,7 @@ I tuned the glow board’s LED spacing and offset to meet Kaleidescape’s stric
 
 ## Power supplies and the rear-shield interface
 
-Initial power-supply problems forced us to evaluate several types, with different bodies, connections and cable routes to accommodate in the shelf. The CAD layouts below show some of those packaging alternatives. {/* ^[evidence:EV-342c421dc439] */}
+Initial power-supply problems forced us to evaluate several types, with different bodies, connections and cable routes to accommodate in the shelf. {/* ^[evidence:EV-342c421dc439] */}
 
 During EMI testing in June 2008, Greg Curry and Adrian reported a LAN-conducted emissions pass after isolating the Ethernet connector from the metal rear plate. Gabe Cohn supplied revised shield CAD, and I compared the old and new geometry as the clearance requirement moved into the mechanical design. The reported pass applied to the configuration under test. {/* ^[evidence:EV-adcd0de2686d] */}
 
