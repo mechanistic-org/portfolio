@@ -2,136 +2,123 @@
 title: Avegant Glyph
 slug: avegant-glyph
 tier: deep_dive
-description: 'Lead mechanical architect for the Avegant Glyph ''personal theater'' (2015-17): head-mounted display optics fused into high-fidelity headphones, with the headband carried through fatigue characterization and lifecycle validation into mass production.'
-category: wearable_ar
-client: []
-date: 2015-06-01 00:00:00+00:00
+description: 'Mechanical development of Glyph''s wearer interfaces: headband springs and liners, earpads, moving cable routes and supplier-built hardware.'
 draft: false
-forensic_metrics:
-  financial: $59,500-$76,500 in tooling-recovery interventions; 712 optical units scrapped on dead-pixel evidence; vendor ecosystem spanning three continents.
-  process: Cleanroom yield recovered 35.40% to 77.87%; headband validated through lifecycle testing; 23,113 DMDs processed, 4,513 graded A+.
-  governance: Weekly ME updates against a numbered issue tracker; 234-day tool-to-production plan absorbed an eight-month compliance and reliability slip.
-forensic_summary:
-  trigger: 'A first-of-its-kind head-worn theater met manufacturing reality: optical yield collapsed to 35% under particle contamination, the clamping force trilemma pitted retention against acoustic seal against pain, telescoping arms regressed to 40% seizure at T6, and Class B EMI failed months before ramp.'
-  intervention: Imposed cleanroom optical stations with 20x inspection, optimized the headband via Central Composite Design FEA to 7.5 N on 0.8 mm hard-rolled stainless, funded steel-level tooling recovery, and remediated the radiating HDMI path to certification.
-  result: 'The Glyph shipped: lifecycle-validated headband, 78% recovered yield, FCC/IC/CMIIT certification, and a personal theater that survived its own death march.'
-duration: 1.8 Years
+heroImage: /assets/avegant-glyph/product-and-fit/avegant-glyph-context-01-sm.webp
 employer: avegant
-endDate: 2017-03-01 00:00:00+00:00
+client: []
+job_title: mechanical_engineer
+category: wearable_ar
 industry: consumer_electronics
-listed: true
-primary_home: main
-production: production
-productionScale: series
-role: mechanical_engineer
 tags:
-- Leadership
-targets:
-- main
-teamSize: INT 77
-theme: hyperspace
-toolIcons: []
-tools:
-- solidworks
+- mechanical
+- mechanism
+- dfm
+- npi
+tools: []
+theme: article
+forensic_summary:
+  trigger: Fit and stable adjustment depended on the interaction of the headband, liner, earcups and moving cable.
+  intervention: Developed spring/liner comparisons and earpad prototypes; coordinated cable routing, abrasion changes and supplier validation.
+  result: Prototype activity and mechanical ECO releases are documented alongside specific test results and validation still underway.
 cyberspace:
   enable: true
   layout: linear
   narrative: []
   stickies:
-  - align: center
+  - id: glyph-g1
+    type: gallery
     data:
-      data: {}
-      featuredIndices: []
-      images: []
-      scattered: false
-    featuredIndices: []
-    id: intro
-    legacy_deck: []
-    text: <strong>YEAR:</strong> 2015<br/><strong>ROLE:</strong> Avegant
-    type: void
-    title: Avegant Glyph
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/avegant-glyph/product-and-fit/avegant-glyph-context-01-sm.webp
+        alt: Glyph in display position, with the band across the eyes and the earcups over the ears.
+        caption: Glyph in display position, with the band across the eyes and the earcups over the ears.
+    title: Glyph in use
     deck: []
-  - align: center
+  - id: glyph-g3
+    type: gallery
     data:
-      data: {}
-      featuredIndices: []
-      images: []
-      scattered: false
-    featuredIndices: []
-    id: details
-    legacy_deck: []
-    text: A forensic analysis of the Avegant Glyph (Vulcan) engineering failure, strictly correlating post-launch user complaints ("Voice of the Customer") with pre-production engineering logs ("Voice of the Process").
-    type: void
-    title: THE ANATOMY OF FAILURE
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/avegant-glyph/product-and-fit/avegant-glyph-detail-02-sm.webp
+        alt: Glyph with the band raised, exposing the two eyepieces beneath it.
+        caption: Glyph with the band raised, exposing the two eyepieces beneath it.
+    title: The convertible headset
+    deck: []
+  - id: glyph-g2
+    type: gallery
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/avegant-glyph/product-and-fit/avegant-glyph-assembly-03-sm.webp
+        alt: An open headband assembly with padded earcups and a blue cable routed along the band.
+        caption: An open headband assembly with padded earcups and a blue cable routed along the band.
+    title: Inside the headband
+    deck: []
+  - id: glyph-g4
+    type: gallery
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/avegant-glyph/product-and-fit/avegant-glyph-context-04-sm.webp
+        alt: Glyph Founder's Edition packaging, showing the headset and its two eyepieces.
+        caption: Glyph Founder's Edition packaging, showing the headset and its two eyepieces.
+    title: Product packaging
     deck: []
 ---
 
-# Avegant Glyph (Vulcan) Forensic Report
+## One wearable, two ways to use it
 
-## I. Project Summary
+Glyph combined headphones and a personal display in one wearable. With the band lowered across the eyes, the earcups, nosepiece and optical adjustments had to work together to keep the display in position. Raising the band returned the product to headphone use. Fit and adjustment stability were central mechanical requirements. {/* ^[evidence:LK-9dd7bce4] */}
 
-- **Role:** Lead Mechanical Architect / Product Design Lead.
-- **Mandate:** Engineer and manufacture the Glyph (codename Vulcan) — a category-defining "personal theater" integrating head-mounted retinal display optics into high-fidelity headphones.
-- **Core Achievement:** Carried a first-of-its-kind wearable through mass production: a headband carried through clamp-force characterization and lifecycle validation, a contamination-sieged optical line dragged from 35% to 78% yield, and a 234-day tooling-to-production gauntlet survived.
+My work on first-generation Glyph covered the interfaces between the wearer, headband, earcups and moving internal cable. It included spring and liner development, audio-cavity and earpad prototypes, cable routing and abrasion work, supplier coordination and validation. Button and arm actuation effort, headstrap changes and liner adhesives were also part of my mechanical remit. {/* ^[evidence:LK-8423f611] */}
 
-## II. The Anatomy of Failure
+## Developing the liner, spring and earpad together
 
-### 1. The Particle War: Optics vs. Dust
+Beta feedback described tightness, pressure from the top padding, nosepiece difficulties and repeated adjustment. Those observations gave the fit work a practical starting point: a wearable could hold position and still be uncomfortable, or feel acceptable in one configuration and need adjustment in another. {/* ^[evidence:LK-f23c37a9] */}
 
-- **Trigger:** Mass production yield collapsed — rolling throughput hit 35.40% in week 10, with 91 units failing for DMD dust and 78 for folding-mirror dust in a single reporting period. The RMA registry told the same story: of 291 returned units analyzed, particles accounted for 131 — 60% of confirmed failures.
-- **Intervention:** Imposed a cleanroom protocol with dedicated optical inspection stations: DMDs examined and hand-wiped under 20x magnification at station O4, eight distinct optical test fixtures including folding-mirror alignment (0.2° detection) and a color-balance station writing RGB calibration to EEPROM, and a "blue dot" investigation tracing diffuser defects back to the injection-molding process.
-- **Result:** Cleanroom yield climbed to 77.87% over a ten-week sprint; 23,113 DMD units processed with 4,513 graded A+ for production; 94.3% of one station's defects confirmed as impurity contamination and systematically attacked. The line stabilized — slowly, expensively, and honestly.
+The liner had to follow the band as it opened and returned without puckering or allowing its flange to escape. PMP's January 2016 proposal combined a flexible carrier, rubber skin and foam, with edge bonding and clips. Those were proposed construction choices intended to control the liner through movement; the proposal did not establish a final production selection. {/* ^[evidence:LK-84aec27f] ^[evidence:LK-ef906adf] */}
 
-### 2. The Clamping Trilemma: Physics vs. Flesh
+The January development plan connected that construction work to experiments and supplier feedback. It assigned me the experimental and test plan, Misha the 3D work, Jill and me assembly and testing, and Chris and me analysis. The planned feedback loop carried the results into revised geometry, Voke's manufacturing review and engineering changes. {/* ^[evidence:LK-ef906adf] */}
 
-- **Trigger:** A head-worn theater is a zero-sum fight between retention (the heavy optical engine slides down), acoustic seal (leaks kill bass), and pain (research put 10.5 N at "tight" and 20 N at "severe headache"). The early Cyclops prototype hit 7.5 N where 22 N was wanted — testers reported it "slid down AND hurt ears."
-- **Intervention:** Worked the clamp-force window against band geometry and material, then confronted production variance: spring-diameter testing showed small heads at 2.85–3.55 N and large heads at 20–25.3 N — past the headache threshold — while a liner durometer change added 4.5 N by itself.
-- **Result:** The structure held through lifecycle testing, but biology won the variance war: final tuning capped clamp force for comfort and compensated the acoustic leak electronically with a +6 dB bass shelf. An honest compromise, documented as such.
+By April, four builds paired 1.2 mm and 1.4 mm springs with 65A and 75A liners, and their force curves had been measured. The 1.2 mm spring was judged insufficient in that comparison; the 1.4 mm spring appeared viable, with further structured testing planned on production-level units. In parallel, the in-house audio-cavity prints were complete, Steph's testing was underway and the earpad request for quotation had been sent. The prototype work connected physical fit to the earcup and cushion architecture. {/* ^[evidence:LK-8423f611] */}
 
-### 3. The Telescoping Arm: A Reliability Regression
+## Finding where the force comes from
 
-- **Trigger:** The eyepiece-adjustment arms had a 3,000-cycle requirement and got worse as tooling matured: 10% seizure at T1 (500 cycles), 10% at T3 (1,500 cycles), then 40% — two of five units — seizing at just 250 cycles in T6, on the eve of the production ramp. Root cause: internal cable wear and kinking in the sliding mechanism.
-- **Intervention:** Drove continuous nosepiece-carriage tooling revisions across T1–T6 to stop limit-stop overrides, with cable routing and wear marked as standing inspection points in the weekly tracker.
-- **Result:** The mechanism stabilized late — the documented price of routing high-density signal cable through a user-actuated sliding joint.
+The complete assembly supplied more than the spring's force alone. Jill's March measurements compared spring diameters, while April's deconstruction work compared complete units with configurations that removed liners, springs, optics or the faceplate. Separating those contributions made the assembled structure part of the experiment. It also meant that a measured force belonged to a particular assembly, width and telescope position. {/* ^[evidence:LK-d31e3194] ^[evidence:LK-8396db26] */}
 
-### 4. Dimensional Warfare: CAD vs. Steel
+Earpad grip used a different experiment. Pad materials were compared on an acrylic fixture using added load and slip distance. The test record warns that the fixture could produce more suction and contact area than a wearer's head. Those comparisons could inform material evaluation, but did not establish wearer comfort, retention in use or the production pad choice. {/* ^[evidence:LK-e37b51be] */}
 
-- **Trigger:** First-article inspections collided with molding reality: the 18-cavity nose-pad tool showed process-capability indices of zero on critical dimensions with 25% rejection in one cavity; the inner-arm FAI listed dimensions as "can't measure" and accepted warpage hoping assembly would spring the part true; the outer headband logged 16 discrepancies including a 32.00 mm spec measuring 26.5 mm.
-- **Intervention:** Funded the steel: tooling-recovery scenarios priced at $59,500–$76,500, with $20,000 of new core-side slides for the outer headband and $10,000 of inserts for the ear covers; draft reversals, gate relocations, and ejector-pad additions cut into the molds revision by revision. Where steel was too slow, controlled deviations and shims bridged the gap — documented, photographed, and bounded.
-- **Result:** A premium-finish wearable shipped from tooling that began statistically incapable — bought with capital, ECO discipline, and negotiated cosmetic standards.
+## Keeping the cable working as the arm moves
 
-### 5. The EMI Stumble: The Radiating Cable
+A cable inside a telescoping arm must accommodate repeated movement while avoiding kinks, rubbing and damage near its terminations. Glyph's cable work considered wrapping, local support, routing and strain relief as interacting design choices. The life-test procedure moved the arm back to its initial position and checked cable wear and kinking at staged intervals, with photographs and reassembly along the way. {/* ^[evidence:LK-8a61f0de] ^[evidence:LK-cac12e1e] */}
 
-- **Trigger:** Class B emissions testing at Intertek (March 2, 2016) failed with persistent peaks at 41, 44, 150, and 600 MHz — the HDMI cable assembly acting as the antenna, months before mass production.
-- **Intervention:** An on-site triage session burned through ferrite cores and foil-wrapped ear cans to isolate the leak, pointing remediation at the HDMI receiver's shielding and cabling; the Bluetooth radio inherited modular certification through its TI module, containing the regulatory exposure to the video path.
-- **Result:** The device certified — FCC ID 2AFYN-AG101, IC, and CMIIT identities secured — after physical shielding remediation of the high-speed video bus.
+The final March reports recorded both passing and failing cohorts under a 3,000-cycle procedure:
 
-## III. Governance & Rhythm
+| March report | Specimens | Detailed recorded result |
+| --- | --- | --- |
+| T1, March 5 | 1-10 | Specimen 9 could not return at 500 cycles. |
+| T2, March 5 | 11-20 | Wear and kink checks recorded OK through 3,000 cycles. |
+| T3, March 16 | 21-30 | Specimen 25 could not return after 1,500 cycles. |
+| T4, March 16 | 31-40 | Wear and kink checks recorded OK through 3,000 cycles. |
+| T5, March 16 | 41-45 | Wear and kink checks recorded OK through 3,000 cycles. |
+| T6, March 16 | 46-50 | Specimens 49 and 50 could not return at 250 cycles. |
 
-- **The Pulse:** A "manufacturing death march" governed by weekly ME updates and a numbered issue tracker, against a 234-day plan from tool start (March 2015) that slipped roughly eight months into a May 2016 ramp on the arm and diffuser blockers.
-- **The Gauntlet:** An exhaustive environmental program stood behind every material choice: 96-hour 80°C/95% RH bakes, −40°C/+85°C thermal shock, MIL-STD-810F salt fog on the aluminum button plates, UV aging, synthetic sweat at two pH levels, the household-chemical menu (wine, coffee, sunscreen, lipstick), ISO 10993-10 biocompatibility on the skin-contact materials — and the ear-pad slip test that crowned silicone netting (1,082 g) over suede (36 g).
-- **The Artifacts:** The Vulcan test command list; the cosmetic standards and inspection specification; weekly rolling yield reports; the T1–T6 main-cable test reports; the headband clamp-force comparison and ANSYS stress-life binders; the FAI report set; the NRE tooling-recovery ledger.
+{/* ^[evidence:LK-f48b5fa8] ^[evidence:LK-cac12e1e] ^[evidence:LK-5880200b] ^[evidence:LK-3a9bdfd6] ^[evidence:LK-7b955f67] ^[evidence:LK-56f35652] */}
 
-## IV. Quantified Impact
+These results belong to the dated specimens above. The reports also contain conflicting summary and comment fields, so they support a bounded account of the detailed tests, not a pooled failure rate. Later cable concepts reused the T labels and cannot inherit these passes. {/* ^[evidence:LK-cac12e1e] ^[evidence:LK-3a9bdfd6] ^[evidence:LK-7b955f67] ^[evidence:LK-8a61f0de] */}
 
-- **Engineered** the headband through spring-rate characterization, second-source spring qualification, and lifecycle validation into MP.
-- **Recovered** cleanroom rolling throughput yield from 35.40% to 77.87% during the particle war.
-- **Processed** 23,113 DMD units, grading 4,513 as A+ for production; scrapped 712 optical units on dead-pixel evidence.
-- **Stabilized** clamping force at 7.5 N against a documented trilemma of retention, acoustic seal, and pain.
-- **Survived** a 234-day tool-start-to-production schedule, absorbing an eight-month compliance and reliability slip.
-- **Directed** $59,500–$76,500 in tooling-recovery interventions across an 18-cavity-to-final-assembly vendor ecosystem spanning three continents.
-- **Closed** a Class B EMI failure four months before ramp via shielding remediation of the HDMI path.
+## Moving changes into hardware
 
-## V. Source Trail
+The April update recorded Fujikura's six-variant testing as complete with no winner and the splint approach rejected. It also recorded released mechanical changes to parts 425-0001 and 425-0006, and work with Amphenol on a tube or sleeve approach. I was the named owner for the cable-kinking, chassis-abrasion and second-source work. {/* ^[evidence:LK-8423f611] */}
 
-The claims above rest on the project's primary evidence archive — test reports, FAI logs, yield trackers, and compliance notes — compiled through the NotebookLM forensic registry:
+Abrasion work combined CNC chassis modifications, cable rework and a new routing scheme, with longer-term tooling and cable-design changes planned. Validation was underway on 20 headband-lifecycle units and 10 drop-test units. The separate Amphenol effort had 60 samples in production, with the validation protocol still to be defined internally and staged with Intretech. These were active validation tasks, not recorded qualification passes. {/* ^[evidence:LK-8423f611] */}
 
-- `Binder18.pdf` — ANSYS stress-life/strain-life simulation heatmaps and the clamp-force optimization.
-- `Headband_Clamp_Force_comparison` — the spring-diameter and durometer variance data.
-- `Vulcan main cable T1–T6 test reports` — the telescoping-arm reliability regression.
-- `Weekly Rolling yield rate` / `Avegant ME Weekly Update` — the particle-war yield record.
-- `Vulcan_RMA` — the 291-unit return analysis (131 particle failures).
-- `425-0069 / 425-0001 / 425-0003 FAI reports` — the dimensional-validation failure logs.
-- `NRE_estimate` — the tooling-recovery cost ledger.
-- `3-2-2016 Intertek EMI Testing notes` — the Class B failure session and remediation trail.
-- `Binder17.pdf` — cosmetic standards; `Binder24.pdf` — biocompatibility; `Binder26.pdf` — the project Gantt.
+The cable record continued into August. Fujikura Electronics (Thailand)'s revision 13 drawing, 850-0001-13 / FAW-1189F, records changes to branch length and protective wrapping. The drawing defines the revised cable and its requirements; it does not report a qualification result. {/* ^[evidence:LK-ab6febd6] */}
+
+My contribution connected the fit experiments, prototypes, supplier alternatives and released mechanical changes within the same product-development effort. The work had to account for the wearer, the movement of the mechanism and the way the hardware would be assembled. {/* ^[evidence:LK-8423f611] ^[evidence:LK-ef906adf] */}
