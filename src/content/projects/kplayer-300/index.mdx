@@ -1,64 +1,94 @@
 ---
-category: home_entertainment
+title: KPLAYER-300
+slug: kplayer-300
+tier: deep_dive
+description: 'Whole-product design and engineering of Kaleidescape’s compact Mercury player: enclosure, shielding, illumination, electronics placement, cooling and installation.'
+draft: false
+heroImage: /assets/kplayer-300/reviewed-design/kplayer-300-context-01-xl.webp
+employer: kaleidescape
 client: []
+job_title: project_lead
+category: home_entertainment
+industry: consumer_electronics
+production: production
+tags:
+- mechanical
+- electrical-pcb
+- design-graphics
+- dfm
+- npi
+tools:
+- cad
+theme: article
+forensic_summary:
+  trigger: A compact player had to accommodate rack-shelf and behind-display installation while meeting Kaleidescape’s visual identity.
+  intervention: Designed the enclosure, shielding, illumination, electronics placement, cooling and mounting systems; developed packaging through PSU, EMI and thermal iterations.
+  result: KPLAYER-300 entered production and evolved into M300 with largely retained physical design and a changed media-processing architecture.
 cyberspace:
   enable: true
   layout: linear
+  narrative: []
   stickies:
-    - align: center
-      data: null
-      id: intro
-      text: '<strong>YEAR:</strong> 2008<br/><strong>ROLE:</strong> Kaleidescape'
-      title: KPLAYER-300
-      type: media
-date: 2008-03-01T00:00:00.000Z
-description: "Kaleidescape KPLAYER-300 mini player (2008-09): the compact K-Class unit, including the fight to hold both conductive coating and cosmetic texture on its plastic housings."
-documents: []
-draft: false
-employer: kaleidescape
-endDate: 2009-01-01T00:00:00.000Z
-gallery: []
-industry: consumer_electronics
-presentation_mode: standard
-production: production
-productionScale: one_off
-tags: []
-theme: hyperspace
-title: KPLAYER-300
-tools: []
+  - id: kplayer-architecture
+    type: gallery
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - alt: KPLAYER-300/M300 mechanical architecture
+        caption: KPLAYER-300/M300 mechanical architecture
+        src: /assets/kplayer-300/reviewed-design/kplayer-300-exploded-01-xl.webp
+    title: Mechanical architecture
+    deck: []
+  - id: kplayer-installation
+    type: gallery
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - alt: Rack-shelf configuration with paired players, power supplies and cable routing.
+        caption: Rack-shelf configuration with paired players, power supplies and cable routing.
+        src: /assets/kplayer-300/reviewed-design/kplayer-300-context-01-xl.webp
+      - alt: Two-player shelf layout with one of the power-supply configurations evaluated during development.
+        caption: Two-player shelf layout with one of the power-supply configurations evaluated during development.
+        src: /assets/kplayer-300/reviewed-design/kplayer-300-context-02-xl.webp
+      - alt: Alternate power-supply arrangement in the two-player shelf.
+        caption: Alternate power-supply arrangement in the two-player shelf.
+        src: /assets/kplayer-300/reviewed-design/kplayer-300-context-03-xl.webp
+    title: Shelf and power-supply layouts
+    deck: []
 ---
 
-## The Challenge
+## Designing the complete player
 
-> **Context:** The "K-Class" generation (Pre-Blu-ray).
+I designed and engineered Kaleidescape’s KPLAYER-300, known internally as Mercury. The compact player had to work in a rack shelf and behind a display, which we expected to be one of its most common installations. {/* ^[evidence:EV-52c017a6e377] ^[evidence:EV-342c421dc439] */}
 
-These units defined the original Kaleidescape experience for DVD.
+My work spanned the enclosure surfacing and blinded vent pattern, the EMI liners and Acheson coating on the plastics, the bezel glow board, and the main PCB layout and placement. I also designed the custom feet, fans, cooling system and fan grommets. {/* ^[evidence:EV-342c421dc439] */}
 
-- **Region Free:** Engineered modified drive firmwares to handle global disc region coding.
-- **Upscaling:** One of the first high-end scalers to bring 480p DVD content up to 1080p/i.
+## Openings without exposing the interior
 
-### Forensic Engineering
+The enclosure used a blinded, labyrinth vent pattern. It gave the box ventilation openings while concealing the interior from view. The venting was part of the product’s appearance as well as its cooling layout. {/* ^[evidence:EV-52c017a6e377] ^[evidence:EV-342c421dc439] */}
 
-> **The "Chewed Edge" (Texture Crisis):**
-> The plastic housings (Steman/Weddy) required both conductive EMI plating and cosmetic paint. The double-coating filled the texture, making edges look "chewed."
->
-> - **The Fix:** We rejected the process instructions and forced the vendor to EDM the texture directly into the **hard tool steel**, rather than relying on paint texture. This ensured the finish survived the EMI coating process.
+## A continuous shield inside a plastic enclosure
 
-### Team Orbit
+The metallic liners and the coating worked together. The Acheson coating on the plastic parts tied the liners together into an integral Faraday-cage shield. {/* ^[evidence:EV-52c017a6e377] */}
 
-- **Engineering Lead:** Erik Norris
-- **Plastics:** Steman (Weddy Wang)
-- **PCB:** Mars Platform Team
-- **Program:** Rob Wudrick
+## Tuning the blue glow and isolating the fans
 
-### Success Metrics
+I tuned the glow board’s LED spacing and offset to meet Kaleidescape’s strict blue-glow visual identity. The fan mounts addressed a different aspect of the product experience: elastomeric grommets isolated the fans, reducing noise and improving noise, vibration and harshness. {/* ^[evidence:EV-52c017a6e377] ^[evidence:EV-342c421dc439] */}
 
-- **$6,000 Tooling:** Delivered the custom mounting bracket tooling at Steman on budget.
-- **$5,400 Avoidance:** Saved EMI shield tooling costs by validating prototype tooling for initial ramp.
+## Power supplies and the rear-shield interface
 
-### Project Artifacts
+Initial power-supply problems forced us to evaluate several types, with different bodies, connections and cable routes to accommodate in the shelf. The CAD layouts below show some of those packaging alternatives. {/* ^[evidence:EV-342c421dc439] */}
 
-#### Specs
+During EMI testing in June 2008, Greg Curry and Adrian reported a LAN-conducted emissions pass after isolating the Ethernet connector from the metal rear plate. Gabe Cohn supplied revised shield CAD, and I compared the old and new geometry as the clearance requirement moved into the mechanical design. The reported pass applied to the configuration under test. {/* ^[evidence:EV-adcd0de2686d] */}
 
-- **Media:** DVD
-- **Resolution:** 1080p Upscale
+## Testing the required installation
+
+The shelf configuration was part of the product requirement. In August 2008, Nathan Forster reported a Mercury thermal pass in a crowded rack, then reported no component-temperature difference between the shelf venting arrangements he tested. That result supported considering a simpler shelf; it did not make the player’s own case vents unnecessary. {/* ^[evidence:EV-342c421dc439] ^[evidence:EV-adcd0de2686d] */}
+
+The installation drawings also had to communicate the stack. After a dealer interpreted the height as accumulating with each shelf, Linus Wong asked for a stacked view and I supplied a revised drawing candidate. The review addressed clearance above the top shelf as well as individual dimensions. {/* ^[evidence:EV-f5d9a739ea7e] */}
+
+## From KPLAYER-300 to M300
+
+KPLAYER-300 quickly evolved into the M300 during production. The physical products were virtually identical; the processor architecture changed to support Blu-ray playback. The mechanical design carried forward as the media platform evolved. {/* ^[evidence:EV-342c421dc439] */}
