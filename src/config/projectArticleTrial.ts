@@ -1354,102 +1354,104 @@ export const projectArticleTrial = {
 	},
 	"ksystem-120": {
 		sections: {
-			summary: "project-summary",
-			identity: "product-and-archive-identity",
-			integration: "mechanical-integration",
-			glow: "glow-evidence-boundary",
-			manufacturing: "first-article-and-manufacturing-state",
-			boundaries: "compliance-and-outcome-boundary",
-			partition: "cross-program-partition",
-			impact: "quantified-evidence",
-			sources: "source-trail",
+			product: "a-complete-system-in-a-compact-enclosure",
+			builds: "making-physical-builds-useful",
+			fit: "closing-the-base-to-cover-fit",
+			glow: "the-glow-was-a-mechanical-and-optical-interface",
+			factory: "defining-the-factorys-acceptance-criteria",
+			outcome: "product-outcome",
+			sources: "source-notes",
 		},
 		media: {
-			"chassis-fit": {
-				galleryId: "01_hammered_lid",
+			"product-open": {
+				galleryId: "mechanical-evidence",
+				src: "/assets/ksystem-120/full-pass-244/product-open.webp",
+			},
+			"base-cover-stack": {
+				galleryId: "mechanical-evidence",
+				src: "/assets/ksystem-120/full-pass-244/base-cover-stack.webp",
+			},
+			"glow-comparison": {
+				galleryId: "mechanical-evidence",
+				src: "/assets/ksystem-120/full-pass-244/glow-comparison.webp",
+			},
+			"glow-section": {
+				galleryId: "mechanical-evidence",
+				src: "/assets/ksystem-120/full-pass-244/glow-section.webp",
+			},
+			"masked-panel": {
+				galleryId: "shop-process",
 				src: "/assets/ksystem-120/bubbles/01_hammered_lid/DSC05318.jpg",
 			},
-			"assembly-detail": {
-				galleryId: "01_hammered_lid",
-				src: "/assets/ksystem-120/bubbles/01_hammered_lid/DSC05377.jpg",
+			"panel-fixture": {
+				galleryId: "shop-process",
+				src: "/assets/ksystem-120/bubbles/01_hammered_lid/DSC05404.jpg",
 			},
 		},
 		scenes: [
 			{
-				key: "summary",
-				eyebrow: "Orientation",
+				key: "product",
+				eyebrow: "System architecture",
 				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
+					kind: "context",
 				},
-				media: [],
+				media: ["product-open"],
 			},
 			{
-				key: "identity",
-				eyebrow: "Project context",
+				key: "builds",
+				eyebrow: "Build and service interfaces",
 				left: {
 					kind: "none",
 				},
-				media: [],
+				media: ["product-open"],
 			},
 			{
-				key: "integration",
-				eyebrow: "Project context",
+				key: "fit",
+				eyebrow: "Tolerance decisions",
 				left: {
 					kind: "none",
 				},
-				media: ["chassis-fit", "assembly-detail"],
+				media: ["base-cover-stack"],
 			},
 			{
 				key: "glow",
-				eyebrow: "Project context",
+				eyebrow: "Optical packaging",
 				left: {
 					kind: "none",
 				},
-				media: [],
+				media: ["glow-comparison", "glow-section"],
 			},
 			{
-				key: "manufacturing",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "boundaries",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "partition",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "impact",
-				eyebrow: "Project context",
+				key: "factory",
+				eyebrow: "Inspection and process",
 				left: {
 					kind: "metrics",
-					keys: ["financial", "process", "governance"],
+					keys: ["process"],
 				},
-				media: [],
+				media: ["masked-panel", "panel-fixture"],
+			},
+			{
+				key: "outcome",
+				eyebrow: "Commercial product",
+				left: {
+					kind: "context",
+				},
+				media: ["product-open"],
 			},
 			{
 				key: "sources",
-				eyebrow: "Sources",
+				eyebrow: "Source record",
 				left: {
 					kind: "sources",
 				},
 				media: [],
 			},
 		],
+		breakout: {
+			eyebrow: "Orpheus engineering record",
+			description:
+				"The product, interface studies and selected shop views. Captions distinguish design review, visual comparison and manufacturing context.",
+		},
 	},
 	"wall-plates": {
 		sections: {
