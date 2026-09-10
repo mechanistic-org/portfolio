@@ -17,7 +17,7 @@ forensic_metrics:
 forensic_summary:
   trigger: Host computing, DSP and local I/O had to share a cost-constrained console with the control surface.
   intervention: Iterated enclosure and airflow options while coordinating board clearances, controls, plastics and fabrication packages.
-  result: Documented testing and interface releases carry the design through April 2008; the final internal production configuration remains outside this account.
+  result: The team chose 4U; SC48 passed EMI certification and shipped. I moved on once Arndt and manufacturing had it handled.
 heroImage: /assets/sc48/hero/sc48-hero-01-xl.webp
 industry: pro_audio
 production: production
@@ -37,7 +37,7 @@ scars:
   anchor: cooling-had-more-than-one-acceptance-condition
   trigger: The late-November 4U rake trial retained EM noise with the power supply under ADCs.
   intervention: Continue 3U front-to-back and hybrid trials; evaluate filters and side covers as part of the airflow arrangement.
-  result: Preliminary 3U thermal and EM reports improved; final acoustic verification and production configuration are not asserted.
+  result: After later 3U and hybrid trials, the team ultimately chose 4U. Erik recalls that SC48 passed EMI certification and shipped; exact final fan/filter and acoustic details remain unclaimed.
 cyberspace:
   enable: true
   layout: linear
@@ -127,7 +127,7 @@ cyberspace:
 
 # SC48: making an integrated console fit
 
-SC48 brought the host computer, audio processing and local I/O into a single live-sound console. My role was lead mechanical engineering and industrial design: the enclosure, thermal packaging, sheet-metal and plastic parts, and the mechanical interfaces between them. Electrical design, software, validation, sourcing and contract manufacturing were shared responsibilities.
+SC48 brought the host computer, audio processing and local I/O into a single live-sound console. I was brought in to work across the product's architecture, design, engineering and validation, and get it into manufacturing quickly. I led mechanical engineering and industrial design: the enclosure, thermal packaging, sheet-metal and plastic parts, and the mechanical interfaces between them. Electrical design, software, validation, sourcing and contract manufacturing were shared responsibilities. {/* ^[evidence:EV-7048bcc783b7] */}
 
 The difficult part was keeping those systems compatible as the product changed. More room for cooling could change electromagnetic behavior. A control-surface revision could move the board beneath it. A side cover could change the airflow enough to invalidate an otherwise workable test arrangement. The engineering record follows those interactions from early packaging studies through detailed interface and fabrication work. {/* ^[evidence:LK-179274e6] ^[evidence:LK-96661432] ^[evidence:LK-847f6299] */}
 
@@ -153,9 +153,11 @@ The recorded rise differs by 9.9°C and the absolute reading by 11.6°C. Ambient
 
 The later reports show why temperature alone could not settle the enclosure. A late-November 4U rake trial, using one 80 mm and one 120 mm fan, was reported thermally and acoustically acceptable. It still had significant electromagnetic noise, with the power supply under the analog-to-digital converters. That mixed-fan arrangement was distinct from the numerical comparison above. {/* ^[evidence:LK-4c45a3af] */}
 
-December testing returned to 3U. Four-fan crossflow worked without the filter and side cover but failed with them fitted. Front-to-back airflow with three internal 80 mm fans worked at both 12 V and 8.5 V, and preliminary EM behavior was better than the 4U arrangement. Acoustic verification was still due; a hybrid with a 3U back and 4U front was also being tested. These trials establish the trade space, not the final production configuration. {/* ^[evidence:LK-96661432] */}
+December testing returned to 3U. Four-fan crossflow worked without the filter and side cover but failed with them fitted. Front-to-back airflow with three internal 80 mm fans worked at both 12 V and 8.5 V, and preliminary EM behavior was better than the 4U arrangement. Acoustic verification was still due; a hybrid with a 3U back and 4U front was also being tested. These reports document the alternatives being tested before the final choice. {/* ^[evidence:LK-96661432] */}
 
 The duct record makes the physical work tangible. Die-cut, scored and formed LDPE parts guided air through the package; a later quote grouped three ducts, a filter and a gasket as a kit. The ducts, enclosure openings and cosmetic parts belonged in the same evaluation because they jointly defined the available airflow path. {/* ^[evidence:LK-d654ff71] ^[evidence:LK-e6fea936] */}
+
+We ultimately chose 4U because it worked. SC48 went on to pass EMI certification and ship. That is my recollection of the final outcome; the selected engineering records do not identify the exact shipped fan/filter revision or the final acoustic qualification. {/* ^[evidence:EV-7048bcc783b7] */}
 
 ## The control surface was a mechanical interface
 
@@ -187,10 +189,10 @@ The delivery work continued through corrected sheet-metal packages, quote compar
 
 The documented contribution spans enclosure and cooling studies, mechanical/electrical interface control, control-surface and plastic development, and fabrication definition. The clearest result is a connected engineering record: test arrangements informed packaging choices, physical constraints reached the board layouts, and changing controls and component interfaces were carried into successive drawings and supplier packages. {/* ^[evidence:LK-96661432] ^[evidence:LK-847f6299] ^[evidence:LK-e6fea936] */}
 
-SC48 became a commercial integrated VENUE console. Avid's later systems datasheet describes the local-I/O SC48 separately from SC48 Remote. That product context is distinct from the development record presented here, which does not establish the final chassis/fan/filter revision, final acoustic/EM qualification or the exact endpoint of my production support. [Avid VENUE systems datasheet](https://cdn-www.avid.com/-/media/avid/files/generic-products-pdf/systems_ds_a4_04_25_2013.pdf).
+SC48 became a commercial integrated VENUE console. Avid's later systems datasheet describes the local-I/O SC48 separately from SC48 Remote. My recollection adds the qualitative endpoint: the team chose 4U, passed EMI certification and shipped. Once Arndt and manufacturing had it handled, I moved on to other work at Digidesign. The exact handoff date and final supplier/process record remain unclaimed, along with the precise internal revisions, final acoustic results and specific EMI remedies. {/* ^[evidence:EV-7048bcc783b7] */} [Avid VENUE systems datasheet](https://cdn-www.avid.com/-/media/avid/files/generic-products-pdf/systems_ds_a4_04_25_2013.pdf).
 
 ## Source notes
 
-The account draws on the requirements and high-reuse planning package, thermal comparison tables, Lux weekly engineering reports, PCB DCD revisions, prototype sheet-metal drawings, cost models and component visual indexes. The weekly sequence follows the original archive filenames; later exports refreshed the documents' displayed date fields. Exact DCD revision dates come from the drawing itself.
+The account draws on the requirements and high-reuse planning package, thermal comparison tables, Lux weekly engineering reports, PCB DCD revisions, prototype sheet-metal drawings, cost models and component visual indexes. The weekly sequence follows the original archive filenames; later exports refreshed the documents' displayed date fields. Exact DCD revision dates come from the drawing itself. My later recollection supplies the product brief, final 4U choice, EMI-certification success, shipment and handoff to manufacturing at qualitative scope.
 
 The selected visuals distinguish early planning, a clearance annotation, a board-interface drawing and component renders. They explain the documented design work without presenting a reconstructed final production assembly.
