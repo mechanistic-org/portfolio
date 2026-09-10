@@ -2,90 +2,159 @@
 title: Sundance
 slug: sundance
 tier: deep_dive
-description: 'A four-drive, 2RU server turned a quoted 45-day two-material HDD rail into an isolation-mechanism problem: remove hard plastic contact and constrain every drive with four shoulder screws.'
+description: 'Mechanical design for a four-drive, 2RU server: making front service, vibration isolation, connector engagement and manufactured fit work in the same enclosure.'
 category: home_entertainment
 client: []
-date: 2014-01-01 00:00:00+00:00
+date: 2014-06-10 00:00:00+00:00
 draft: false
-duration: 1 Year
-employer: mechanistic
-endDate: 2015-01-01 00:00:00+00:00
+employer: kaleidescape
+endDate: 2015-03-05 00:00:00+00:00
+job_title: mechanical_engineer
 forensic_metrics:
-  financial: The HDD rail carried a quoted $37,500 tool, $15,000 40-percent down payment, $2.23 piece price, and 45-day tooling lead.
-  process: Four front-access drives were constrained by sixteen shoulder screws - four per drive - inside a proposed 17 x 3.438 x 10 inch enclosure.
-  governance: Public claims resolve to four curated primary records; requirements and quotes remain labeled as proposed or quoted intent.
+  process: Four front-access drives, eight rails and sixteen shoulder screws in the assembly definition.
+  governance: Snap/SATA retention and formed-part fit corrections entered production after tolerance analysis and validation.
 forensic_summary:
-  trigger: The front-access four-drive architecture required vibration isolation inside a 2RU enclosure, while the production-intent rail carried the longest quoted plastics-tool lead in the surviving comparison.
-  intervention: Change the HDD rail to fully enclose the drive in elastomer with no plastic contact points and return the mechanism to shoulder screws.
-  result: The assembly definition records sixteen shoulder screws, four per drive, and preserves the isolation decision without claiming an unsupported launch or field outcome.
+  trigger: Four removable drives had to share a shallow 2RU enclosure with cooling, isolation and reliable connector engagement.
+  intervention: Integrated the front-drive mechanism, revised the rail contact path and worked through the retention stack and supplier fit issues.
+  result: Both the snap/SATA retention and flange/rail-fit corrections were carried through tolerance analysis and validation into production.
 industry: consumer_electronics
-production: concept
-productionScale: one_off
+production: production
 tags:
 - Mechanism
 - Reliability
+- DFM
 teamSize: Cross-functional
 theme: article
 tools: []
 scars:
 - label: Hard-contact path
-  value: No plastic contact points
-  description: The task record changed the HDD rail to fully enclose each drive in elastomer and returned the assembly to shoulder screws.
+  value: Isolate the removable drive
+  description: The rail had to locate the drive without leaving a hard-plastic contact path into the enclosure.
   severity: major
   phase: design
-  anchor: the-rail-was-the-project
-  trigger: The production-intent rail had to combine tool-free access with drive isolation inside a shallow 2RU package.
-  intervention: Fully enclose the drive in elastomer and revert to shoulder screws.
-  result: The BOM records sixteen shoulder screws, four per drive; no unsupported acoustic or field-performance number is inferred.
+  anchor: isolation-changed-the-drive-constraint
+  trigger: Front serviceability and vibration isolation met at the same rail and fastener interfaces.
+  intervention: Full elastomer enclosure with no plastic contact points and a return to shoulder screws.
+  result: The assembly definition records four shoulder screws per drive. No acoustic improvement figure is claimed.
+cyberspace:
+  enable: true
+  layout: linear
+  stickies:
+  - id: product-family
+    type: gallery
+    title: The product family
+    caption: Kaleidescape product-family photograph selected from the project archive. Sundance was the shared program code name; this account focuses on the four-drive server mechanics within that program.
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/sundance/full-pass-245/encore-product-family.webp
+        alt: Three Kaleidescape enclosures, with two smaller units above a wider unit, in the product-family photograph selected by Erik Norris.
+        aspectRatio: 1
+    featuredIndices: []
+    deck: []
+  - id: service-layout
+    type: gallery
+    title: Front-service arrangement
+    caption: 'An explanatory schematic drawn from the requirements: four drives in two stacked rows, accessible while the server stays in the rack. It is not final industrial design or a dimensional drawing.'
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/sundance/full-pass-245/front-service-schematic.svg
+        alt: Requirements schematic of four front-access drive bays in two stacked rows behind a removable front. Author-created explanation; not a product photograph or final CAD geometry.
+        aspectRatio: 1.5625
+    featuredIndices: []
+    deck: []
+  - id: interface-analysis
+    type: gallery
+    title: The two ends of the retention loop
+    caption: Original embedded section views from the January 15, 2015 tolerance workbook. Analysis by T. DeArk, checked by C. Davis. These show the configuration under review, before the later validated production corrections.
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - alt: Front retention section showing the latch feature, adjacent sheet metal and fasteners. Original image from the January 15 tolerance workbook by T. DeArk, checked by C. Davis; the colors do not identify final materials or a released revision.
+        src: /assets/sundance/full-pass-245/front-retention.png
+        aspectRatio: 0.801980198019802
+      - alt: Connector section at the other end of the drive-retention stack. Original image from the same January 15 workbook; a geometry study, not evidence of the final connector wipe length.
+        src: /assets/sundance/full-pass-245/connector-section.png
+        aspectRatio: 1.3616600790513833
+    featuredIndices: []
+    deck: []
+heroImage: /assets/sundance/full-pass-245/encore-product-family.webp
 ---
 
-# Sundance: isolating four front-access drives in 2RU
+# Sundance
 
-## Project summary
+Sundance was our internal code name for the shared program behind Kaleidescape's Strato and Alto products. The commercial names were settled late, close to release. In Kaleidescape's [October 2015 Encore announcement](https://www.kaleidescape.com/news/EncoreLineAnnouncementPage/), Strato and Alto were the movie players and Terra was the movie server. This case study follows my mechanical work on the program's four-drive, two-rack-unit server and its front-drive mechanism.
 
-- **Role boundary:** Senior mechanical design engineering for the enclosure and front-drive mechanism. Industrial design, electrical design, firmware, validation, sourcing, and manufacturing remained cross-functional responsibilities.
-- **Mandate:** Translate a proposed four-drive server into a 17-inch-wide, 2RU, 10-inch-deep enclosure with user-accessible drives, two 60 mm fans, and a 15 CFM cooling target.
-- **Core result:** The HDD rail became an explicit isolation mechanism. The task record calls for full elastomer enclosure with no plastic contact points and a return to shoulder screws; the assembly BOM records sixteen shoulder screws, four per drive.
+The server brought four front-access hard drives into a shallow enclosure. The user needed to remove a drive while the server stayed in the rack. Inside, that same drive had to remain isolated from the enclosure, locate against its connector and latch securely behind a removable cosmetic front.
 
-## The rail was the project
+My contribution was senior mechanical design engineering for the enclosure and front-drive mechanism. I worked across the chassis, bezel, drive rails and supplier interfaces with Kaleidescape's hardware team and Function Engineering. Industrial design, electrical design, system testing and manufacturing remained shared responsibilities. The work developed through 2014 and early 2015, from the service-access concept into tooling, prototype fit and validated production corrections.
 
-The requirements proposal made front serviceability non-negotiable. All four 3.5-inch drives were to come out through the front without removing the server from a rack. The same proposal allowed only 3.438 inches of height and 10 inches of depth, while reserving space for a custom main board, two 60 mm fans, and the airflow needed around two stacked rows of drives.
+## A front that had to open
 
-That turned a seemingly small plastic part into a system boundary. The rail had to guide a removable drive, retain it, avoid transmitting spindle vibration into the enclosure, and coexist with the front bezel and airflow openings.
+The requirements proposal called for four 3.5-inch drives in two stacked rows, accessible without rack removal or enclosure disassembly. The proposed package was 17 inches wide, 3.438 inches high and 10 inches deep. It also needed room for a custom main board and two 60 mm fans. The 15 CFM airflow figure was a design target.
 
-## Tooling exposed the commitment
+The June system concept put the drive connectors on a mounting plate and considered both internal and external power supplies. By the July industrial-design review, the team had narrowed several front-access ideas, including hinged doors, to two preferred treatments with a detachable face. Finger scoops also served as air vents. The front was therefore part of the cooling path as well as the user's route to a failed drive.
 
-The surviving plastics comparison prices four tools. The HDD rail, P/N 520-1219-00, is the largest commitment in that sheet: $37,500 in tooling, a $15,000 40-percent down payment, a $2.23 quoted piece price, and a 45-day tooling lead. The other listed tools carry 30- or 35-day leads.
+Those relationships persisted into the detailed work. January tasks assigned me changes to the bezel's drive openings and perimeter air inlets, along with matching changes to the blanking plate and HDD frame. Function Engineering carried lead-in and retention-feature tasks. A useful front opening required the cosmetic surface, internal frame and drive mechanism to agree on where the drive could move.
 
-Those numbers are a quote, not evidence that the tool was ordered or that the product shipped. They still explain why the rail deserved design attention before release: a late isolation change would sit inside the longest quoted tool schedule in the comparison.
+## Isolation changed the drive constraint
 
-## From contact risk to a defined mechanism
+The HDD rail had several jobs: guide insertion, retain the drive, permit removal and limit the hard contact paths carrying vibration into the enclosure. Resolving one of those jobs could disturb another. A stiffer guide could improve location while undermining isolation; a looser interface could improve freedom of movement while reducing control at the latch and connector.
 
-The January task record is unusually direct. For the HDD rail it assigns Erik two changes: `modify to fully enclosed with elastomer (no plastic contact points)` and `revert to shoulder screws`. Nearby tasks coordinate the rail with the bezel opening, blanking plate, and HDD frame, showing that the mechanism was being resolved as part of the whole front-drive stack rather than as an isolated molding.
+The January task record assigned me two explicit changes: fully enclose the drive in elastomer with no plastic contact points, and return to shoulder screws. The assembly definition records eight rails and sixteen shoulder screws across four drives. The screw's shoulder provides a defined locating geometry instead of relying only on how far a threaded fastener is tightened.
 
-The assembly BOM closes the geometric intent into countable hardware. P/N 323-1210-00 is a 6-32 shoulder screw with a 5/32-inch-diameter, 3/16-inch-long shoulder. Quantity is sixteen, annotated `4 per drive`. The same BOM records two 60 mm fans and eight HDD rails across the four-drive assembly.
+This was a specific contact-and-constraint design, with the rail coordinated against the bezel opening, blanking plate and formed HDD frame. The record supports that mechanical account. It does not establish a measured acoustic improvement attributable to the rail change alone.
 
-The useful engineering story is therefore not a generic claim about damping. It is the conversion of an acoustic contact risk into a repeatable constraint system: elastomer around the drive, no direct plastic contact, and four shoulder screws locating each drive.
+## Retention and connection shared a tolerance loop
 
-## Evidence boundaries
+The January 15 tolerance review made the relationship between the front latch and the rear connector explicit. T. DeArk's analysis, checked by C. Davis, followed the stack from the interior bezel catch through the chassis and HDD cage to the SATA connector hard stop, then back through the drive screw location and the rail's snap feature.
 
-The requirements document calls itself a proposal, so its storage capacities, enclosure dimensions, and environmental targets are presented as design intent. The tooling sheet is treated as a quote. The task tracker and BOM establish assigned changes and assembly definition, but they do not establish final production yield, launch timing, acoustic test performance, or field reliability.
+The nominal gap was positive, but the combined limits allowed interference:
 
-Earlier prose claimed a 618-unit cosmetic inspection, 204 rejects, a 33.08% failure rate, rogue-rivet rework, a 2,000-unit ramp, and a two-week prototype-tooling result. No exact curated primary record supporting those claims was found in this pass, so they have been removed.
+| January review condition | Calculated minimum gap |
+| --- | ---: |
+| Nominal geometry | 0.50 mm |
+| Worst-case stack | -0.36 mm |
+| Root-sum-square stack | 0.12 mm |
 
-No Sundance image is selected in the active evidence store. A decorative gallery would add confidence without adding proof, so the visual instrument is not applicable for this pass.
+These are different calculations of the same review configuration. The positive RSS result was not a later fix. The workbook's conclusion called for a larger snap-to-bezel gap and a check of SATA wipe length to maintain connector continuity.
 
-## Quantified impact
+That distinction shaped the engineering work. Moving a latch until it could engage was only useful if the drive still reached its electrical connection. The corrective geometry had to satisfy both ends of the stack. The section views below show those interfaces in the configuration under review; they do not depict a verified final clearance.
 
-- **Packaged** four front-access 3.5-inch drives in a proposed 17 x 3.438 x 10 inch envelope.
-- **Resolved** the HDD rail around an explicit no-plastic-contact requirement.
-- **Defined** sixteen shoulder screws, four per drive, in the assembly BOM.
-- **Bounded** the production-intent rail against a quoted $37,500 tool, $2.23 piece price, and 45-day lead.
-- **Preserved** two 60 mm fans and a 15 CFM target as requirements, not measured performance.
+The subsequent snap/SATA correction was taken through tolerance analysis and validation into production. The worksheet above captures the earlier risk.
 
-## Source trail
+## Toolability and assembled fit
 
-- `Sundance ID MD PRD v1.docx` - proposed four-drive architecture, enclosure envelope, serviceability, fans, and environmental targets.
-- `tooling_PO_2014_10_16.xlsx` - comparative plastics-tooling quote and HDD-rail commercial figures.
-- `sundance_tasks_2015_01_19.xlsx` - assigned rail, bezel, blanking-plate, and frame changes.
-- `801-1046-00.xlsx` - assembly BOM, shoulder-screw specification and quantity, rail count, and fans.
+The rail also had to survive the molding process. The October plastics quote gave its tool a 45-day lead, compared with 30 or 35 days for the other listed tools. November supplier DFM comments addressed thin walls, ribs, draft and the junction between the two shots. February comments continued to address fill, deformation and warping. Those were consequential geometry and process decisions inside the functional part.
+
+The sheet-metal prototypes exposed a different part of the same interface problem. The February AFT inspection record described an inward-bent front flange preventing bezel hooks from engaging. It also reported drive insertion binding where formed shelves scraped the rail, even though the rail's checked width was within tolerance. Our observations did not agree on every sample condition, which made the actual mating features more useful than a blanket judgment that the chassis was good or bad.
+
+The follow-up sent to AFT separated specific forming, alignment and flange-relief changes from options still being discussed, including rivets, spot welds and fixture features. The part had to fit after forming and assembly, at the location where the drive actually traveled. Passing a nominal dimension elsewhere on the bend was insufficient.
+
+The flange/rail-fit correction, like the snap/SATA correction, was carried through tolerance analysis and validation into production. That result does not turn every supplier proposal in the review packet into an adopted change.
+
+## Making the prototype build assemble
+
+Cosmetic finish added another assembly variable. In February, Nathan Forster reported that assembling painted cast-plastic prototypes required more filing and scraping than Hunter could reasonably perform. He proposed proceeding with unpainted parts for the engineering build.
+
+I agreed, called Stratasys Direct and instructed Jason Prior to omit paint and graphics from the cast parts. Mark McKenzie supported the decision. On February 26, Jason confirmed that he had instructed his team to ship the available parts unpainted and without graphics.
+
+This selected a prototype build configuration focused on assembly and engineering evaluation. It was separate from the production forming and interface corrections. The correspondence records the supplier instruction and a planned build; it does not establish a measured yield or prove that every planned unit assembled successfully.
+
+## From detailed design into production
+
+The engineering result connected the front-service mechanism to the physical behavior of its mating parts. Both the snap/SATA and AFT flange/rail-fit corrections reached production following tolerance analysis and validation. Function Engineering's analysis and Kaleidescape's hardware and supplier work were part of that result, alongside my mechanical design contribution.
+
+By early March 2015, my work was moving into handoff. March 5 correspondence arranged the return of an external drive with CAD data on March 9. That is the documented handoff plan; it does not establish a complete transferred database or the date of final product shipment.
+
+## Source notes
+
+The architecture and mechanical assignments come from the requirements proposal, June and July design presentations, January task records and the assembly BOM. The retention calculation comes from the original January 15 workbook, authored by T. DeArk and checked by C. Davis. Supplier DFM and AFT review records establish the manufacturing iterations. Retained February and March correspondence records the prototype-finishing decision and scheduled handoff. My September 2026 recollection confirms that both interface corrections entered production after tolerance analysis and validation.
+
+My September 2026 recollection also identifies Sundance as the shared program code name and places the commercial naming late in development. The October 2015 product announcement establishes the public family names and roles.
+
+The hero is the product-family photograph I selected from the project archive. The gallery schematic explains the front-service requirements. The two original workbook diagrams show the earlier analysis configuration, with their authorship and limits preserved.
