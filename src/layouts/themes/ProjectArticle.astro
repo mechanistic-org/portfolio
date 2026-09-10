@@ -168,6 +168,7 @@ const navNext = nextProject
 			description={d.description}
 			audioUrl={d.audio_url}
 			photoCount={images.length || undefined}
+			mediaCountLabel={d.slug === "sundance" ? "images" : undefined}
 		/>
 
 		{contextRibbon && <ContextRibbon model={contextRibbon} />}
@@ -182,6 +183,7 @@ const navNext = nextProject
 					useContinuityRails ? (
 						<ProjectContinuityRail
 							side="left"
+							mediaCountLabel={d.slug === "sundance" ? "images" : undefined}
 							projectTitle={d.title}
 							scenes={activeRailScenes}
 							headings={headings}

@@ -12,6 +12,7 @@ interface Props {
 	description?: string;
 	audioUrl?: string;
 	photoCount?: number;
+	mediaCountLabel?: string;
 	videoCount?: number;
 }
 const {
@@ -22,6 +23,7 @@ const {
 	description,
 	audioUrl,
 	photoCount,
+	mediaCountLabel = "photos",
 	videoCount,
 } = Astro.props;
 const metaParts = meta.filter(Boolean);
@@ -83,7 +85,7 @@ const metaParts = meta.filter(Boolean);
 						</span>
 					)
 				}
-				{photoCount != null && <span>{photoCount} photos</span>}
+				{photoCount != null && <span>{photoCount} {mediaCountLabel}</span>}
 				{videoCount != null && <span>{videoCount} video{videoCount === 1 ? "" : "s"}</span>}
 			</div>
 		</div>

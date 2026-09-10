@@ -431,76 +431,29 @@ export const projectArticleTrial = {
 	},
 	sundance: {
 		sections: {
-			summary: "project-summary",
-			rail: "the-rail-was-the-project",
-			tooling: "tooling-exposed-the-commitment",
-			mechanism: "from-contact-risk-to-a-defined-mechanism",
-			boundaries: "evidence-boundaries",
-			impact: "quantified-impact",
-			sources: "source-trail",
+			front: "a-front-that-had-to-open",
+			isolation: "isolation-changed-the-drive-constraint",
+			retention: "retention-and-connection-shared-a-tolerance-loop",
+			fit: "toolability-and-assembled-fit",
+			prototype: "making-the-prototype-build-assemble",
+			outcome: "from-detailed-design-into-production",
+			sources: "source-notes",
 		},
-		media: {},
+		media: {
+			"service-layout": { galleryId: "service-layout", src: "/assets/sundance/full-pass-245/front-service-schematic.svg" },
+			"front-retention": { galleryId: "interface-analysis", src: "/assets/sundance/full-pass-245/front-retention.png" },
+			"connector-section": { galleryId: "interface-analysis", src: "/assets/sundance/full-pass-245/connector-section.png" },
+		},
 		scenes: [
-			{
-				key: "summary",
-				eyebrow: "Orientation",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "rail",
-				eyebrow: "Project context",
-				left: {
-					kind: "scar",
-					section: "rail",
-				},
-				media: [],
-			},
-			{
-				key: "tooling",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "mechanism",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "boundaries",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "impact",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "sources",
-				eyebrow: "Sources",
-				left: {
-					kind: "sources",
-				},
-				media: [],
-			},
+			{ key: "front", eyebrow: "System and service", left: { kind: "product" }, media: ["service-layout"], mediaLabel: "Requirements schematic" },
+			{ key: "isolation", eyebrow: "Contact and constraint", left: { kind: "scar", section: "isolation" }, media: [] },
+			{ key: "retention", eyebrow: "January review configuration", left: { kind: "none" }, media: ["front-retention", "connector-section"], mediaLabel: "Original analysis diagrams" },
+			{ key: "fit", eyebrow: "Supplier fit", left: { kind: "none" }, media: [] },
+			{ key: "prototype", eyebrow: "Build configuration", left: { kind: "none" }, media: [] },
+			{ key: "outcome", eyebrow: "Production disposition", left: { kind: "metrics", keys: ["process", "governance"] }, media: [] },
+			{ key: "sources", eyebrow: "Source context", left: { kind: "sources" }, media: [] },
 		],
+		breakout: { eyebrow: "Product context and interface analysis", description: "The selected product-family photograph, a requirements schematic and two original workbook diagrams, with their distinct roles and attribution retained." },
 	},
 	"room-director": {
 		sections: {
