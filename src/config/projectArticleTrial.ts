@@ -304,130 +304,31 @@ export const projectArticleTrial = {
 	},
 	"d-command": {
 		sections: {
-			summary: "project-summary",
-			failures: "the-anatomy-of-failure",
-			thermal: "vegas-mode-thermal-stress",
-			quality: "fader-pan-yield-and-green-light-bleed",
-			enclosure: "plastic-enclosure-and-emi-closure",
-			compliance: "ac-withdraw-compliance",
-			governance: "governance-and-evidence",
-			impact: "quantified-impact",
+			architecture: "a-compact-main-unit-with-room-to-expand",
+			reuse: "reuse-changed-the-machining-and-the-interfaces",
+			coating: "a-conductive-skin-that-still-let-the-buttons-move",
+			thermal: "testing-the-fanless-arrangement",
+			drawings: "drawings-were-an-integration-responsibility",
+			handoff: "compliance-and-the-production-handoff",
 			sources: "source-trail",
 		},
 		media: {
-			"summary-1": {
-				galleryId: "01_intro",
-				src: "/assets/d-command/bubbles/01_intro/Control room 3.JPG",
-			},
-			"summary-2": {
-				galleryId: "01_intro",
-				src: "/assets/d-command/bubbles/01_intro/D-CommandLarge.jpg",
-			},
-			"enclosure-1": {
-				galleryId: "02_architecture",
-				src: "/assets/d-command/bubbles/02_architecture/D-Command_fader_top.jpg",
-			},
-			"enclosure-2": {
-				galleryId: "02_architecture",
-				src: "/assets/d-command/bubbles/02_architecture/danko_fader_withlabels.png",
-			},
-			"compliance-1": {
-				galleryId: "03_regulatory",
-				src: "/assets/d-command/bubbles/03_regulatory/DSC03110.JPG",
-			},
-			"compliance-2": {
-				galleryId: "03_regulatory",
-				src: "/assets/d-command/bubbles/03_regulatory/DSC03112.JPG",
-			},
-			"quality-1": {
-				galleryId: "04_quality",
-				src: "/assets/d-command/bubbles/04_quality/DSC03122.JPG",
-			},
-			"quality-2": {
-				galleryId: "04_quality",
-				src: "/assets/d-command/bubbles/04_quality/DSC03123.JPG",
-			},
+			product: { galleryId: "product", src: "/assets/d-command/bubbles/01_intro/D-CommandLarge.jpg" },
+			layout: { galleryId: "layout", src: "/assets/d-command/bubbles/02_architecture/danko_main_withlabels.png" },
+			assembly: { galleryId: "assembly", src: "/assets/d-command/full-pass-248/main-unit-open.webp" },
+			masking: { galleryId: "masking", src: "/assets/d-command/full-pass-248/main-panel-masking.webp" },
 		},
 		scenes: [
-			{
-				key: "summary",
-				eyebrow: "Orientation",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: ["summary-1", "summary-2"],
-				mediaLabel: "Intro",
-			},
-			{
-				key: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "thermal",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "quality",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: ["quality-1", "quality-2"],
-				mediaLabel: "Quality",
-			},
-			{
-				key: "enclosure",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: ["enclosure-1", "enclosure-2"],
-				mediaLabel: "Architecture",
-			},
-			{
-				key: "compliance",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: ["compliance-1", "compliance-2"],
-				mediaLabel: "Regulatory",
-			},
-			{
-				key: "governance",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "impact",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "sources",
-				eyebrow: "Sources",
-				left: {
-					kind: "sources",
-				},
-				media: [],
-			},
+			{ key: "architecture", eyebrow: "System", left: { kind: "context" }, media: ["product", "assembly"] },
+			{ key: "reuse", eyebrow: "Interfaces", left: { kind: "none" }, media: ["layout"] },
+			{ key: "coating", eyebrow: "Conductive plastic", left: { kind: "scar", section: "coating" }, media: ["masking"] },
+			{ key: "thermal", eyebrow: "Airflow", left: { kind: "none" }, media: ["assembly"] },
+			{ key: "drawings", eyebrow: "Release definition", left: { kind: "context" }, media: ["assembly"] },
+			{ key: "handoff", eyebrow: "Production transfer", left: { kind: "metrics", keys: ["governance"] }, media: ["product"] },
+			{ key: "sources", eyebrow: "Evidence", left: { kind: "sources" }, media: [] },
 		],
+		featured: [],
+		breakout: { eyebrow: "D-Command architecture and interfaces", description: "The product configuration, early layout, main-unit assembly and retained masking detail. Captions identify each design stage and the limits of what the image establishes." },
 	},
 	sundance: {
 		sections: {
