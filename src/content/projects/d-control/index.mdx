@@ -3,18 +3,17 @@ title: D-Control
 slug: d-control
 tier: deep_dive
 category: control_surface
-date: 2003-01-01 12:00:00+00:00
-description: 'Digidesign D-Control, known internally as Buckley: a modular steel control surface whose first 42 fader pans produced a greater-than-50% rejection, followed by a 2.5-week manufacturing recovery and containment of V-2 prototype PCBs before shipment.'
+date: 2003-04-14 00:00:00+00:00
+description: Designing the stand and integrating a modular studio console through assembly development, manufacturing recovery and sustaining changes.
 draft: false
 employer: digidesign
 forensic_metrics:
-  financial: The surviving XMON record carries a $50-$100 shared Buckley/Danko cost delta; it is retained as cross-project context, not claimed as D-Control-only impact.
-  process: More than half of the first 42 fader pans were rejected; the estimated two-month manufacturing campaign was executed in 2.5 weeks; the stand record carries five-module rail calculations to 0.0001 inch.
-  governance: Ninety percent of one unnamed vendor's prototype PCBs were V-2, four shop logos were observed, zero affected boards shipped, and the vendor was terminated for prototype work.
+  process: An estimated two-month manufacturing and DFM campaign completed in 2.5 weeks, according to my retained account.
+  governance: 'Prototype PCB containment: 90% of one vendor’s prototype population was V-2; no affected boards shipped.'
 forensic_summary:
-  trigger: PEM insertion bowed more than half of the first 42 steel fader pans, while fit variation accumulated across a five-module stand and one prototype-board source introduced V-2 material.
-  intervention: Cold-worked pans at the table edge, changed PEM insertion and flattening operations, revised stand plastics through ECO 6310 and side plates through ECO 8197, built assembly jigs, and quarantined the V-2 boards.
-  result: The documented manufacturing campaign was compressed from an estimated two months to 2.5 weeks, the product family retained its modular assembly method, and no V-2 boards shipped.
+  trigger: A modular console needed a configurable stand, repeatable alignment and buildable interfaces across steel, extrusions, plastics and electronics.
+  intervention: Designed the stand, took over mechanical work early, developed assembly methods and led manufacturing recovery and sustaining changes.
+  result: D-Control shipped as a modular system; my documented work continues through side-plate changes and ECO 6310 sample approval in 2005.
 heroImage: /assets/d-control/d-control-hero-01-xl.webp
 industry: pro_audio
 job_title: mechanical_engineer
@@ -22,9 +21,9 @@ listed: true
 production: production
 productionScale: series
 tags:
-- Crisis
-- Yield
-- Leadership
+- mechanical
+- dfm
+- npi
 theme: article
 teamSize: Cross-functional
 scars:
@@ -33,7 +32,7 @@ scars:
   description: PEM insertion stretched the steel pan and moved side-plate holes out of alignment; the immediate and vendor-level responses were preserved separately.
   severity: critical
   phase: fcs
-  anchor: fader-pan-crisis-more-than-half-rejected
+  anchor: recovering-the-manufacturing-process
   trigger: More than half of the first 42 fader pans were rejected after PEM insertion bowed the sheet steel.
   intervention: Demonstrate table-edge cold work, redistribute PEM insertion sequencing, and require a post-insertion flattening operation.
   result: The local correction record documents both immediate salvage and the supplier process change without claiming a zero-defect endpoint.
@@ -44,206 +43,174 @@ scars:
   description: One unnamed prototype source supplied boards with the wrong flammability grade and four shop logos, exposing uncontrolled subcontracting.
   severity: critical
   phase: pilot
-  anchor: prototype-pcb-crisis-v-2-containment
+  anchor: prototype-board-containment
   trigger: Ninety percent of one vendor's prototype boards carried V-2 material rather than the required V-0 grade.
   intervention: Quarantine the prototypes, verify customer exposure, and terminate the vendor for prototype work.
   result: The correction record says no affected board shipped.
   evidence:
   - LK-e6ac858e
+endDate: 2005-08-01 00:00:00+00:00
+duration: 2003-2005 documented work
+tools:
+- pro_engineer
 cyberspace:
+  enable: true
   layout: linear
   stickies:
-  - caption: The wide view establishes the scale of the assembled control surface. It supports the modular product context, not a measured installation span.
-    data:
-      columns: 3
-      layout: masonry
-      scattered: true
-      images:
-      - alt: full_big
-        src: /assets/d-control/bubbles/01_intro/full_big.jpg
-        aspectRatio: 1.5
-    featuredIndices: []
-    id: 01_intro
+  - id: early
     type: gallery
-    title: System view
-    deck:
-    - body: The wide view establishes the scale of the assembled control surface. It supports the modular product context, not a measured installation span.
-      subtitle: ''
-      title: D-Control installation
-  - caption: These early views show the control-surface composition before the manufacturing crises documented above. They are design context, not final-configuration proof.
+    title: Early control-surface composition
+    caption: An early industrial-design rendering establishes the console and stand composition. It is design context, not a released configuration or sole-authorship claim.
     data:
-      columns: 3
+      columns: 1
       layout: masonry
-      scattered: true
       images:
-      - alt: PCll_Front
-        src: /assets/d-control/bubbles/02_early_id/PCll_Front.jpg
-        aspectRatio: 1.5
-      - alt: PCll_Rendering
-        src: /assets/d-control/bubbles/02_early_id/PCll_Rendering.jpg
-        aspectRatio: 1.5
+      - src: /assets/d-control/bubbles/02_early_id/PCll_Rendering.jpg
+        alt: Early oblique rendering of D-Control and its stand.
+        aspectRatio: 1.1666666666666667
     featuredIndices: []
-    id: 02_early_id
+    deck: []
+  - id: stand
     type: gallery
-    title: Early industrial-design views
-    deck:
-    - body: These early views show the control-surface composition before the manufacturing crises documented above. They are presented as design context rather than final configuration proof.
-      subtitle: ''
-      title: Front architecture and rendering
-  - caption: The inspection series records variation at adjoining panels, molded edges, and the panner area without assigning every photographed condition to a single ECO.
+    title: Modules on a configurable stand
+    caption: Exploded view from the stand packet, PDF page 77. A fader module is lifted above the rails; legs, foot plates and the rear crossbar remain visible. This is an assembly illustration, not a load-test result.
     data:
-      columns: 3
+      columns: 1
       layout: masonry
-      scattered: true
       images:
-      - alt: edge up
-        src: /assets/d-control/bubbles/03_gap_check/edge up.jpg
-        aspectRatio: 1.5
-      - alt: gap differences
-        src: /assets/d-control/bubbles/03_gap_check/gap differences.jpg
-        aspectRatio: 1.5
-      - alt: gaps 2
-        src: /assets/d-control/bubbles/03_gap_check/gaps 2.jpg
-        aspectRatio: 1.5
-      - alt: moulding error
-        src: /assets/d-control/bubbles/03_gap_check/moulding error.jpg
-        aspectRatio: 1.5
-      - alt: panners panel
-        src: /assets/d-control/bubbles/03_gap_check/panners panel.jpg
-        aspectRatio: 1.5
-      - alt: right side edge OK
-        src: /assets/d-control/bubbles/03_gap_check/right side edge OK.jpg
-        aspectRatio: 1.5
+      - src: /assets/d-control/full-pass-247/stand-and-module.webp
+        alt: Exploded drawing of a D-Control fader module above the stand rails, crossbar, legs and foot plates.
+        aspectRatio: 1.54539600772698
     featuredIndices: []
-    id: 03_gap_check
+    deck: []
+  - id: main
     type: gallery
-    title: Interface-gap inspection
-    deck:
-    - body: The inspection series records variation at adjoining panels, molded edges, and the panner area. It illustrates the fit problem without assigning every photographed condition to a single ECO.
-      subtitle: ''
-      title: Cosmetic and structural interfaces
-  - caption: The sequence documents physical fit checks around the assembled stand. The photographs do not, by themselves, prove final corrective-action disposition.
+    title: Inside the main unit
+    caption: Main-unit assembly drawing M910012268-00 Rev A, sheet 3 of 7 (MPI packet PDF page 7). The lifted upper panels expose supports and the lower assembly. Drawing callouts belong to this assembly sequence.
     data:
-      columns: 3
+      columns: 1
       layout: masonry
-      scattered: true
       images:
-      - alt: Picture 037
-        src: /assets/d-control/bubbles/04_stand_fit_check/Picture 037.jpg
-        aspectRatio: 1.5
-      - alt: Picture 038
-        src: /assets/d-control/bubbles/04_stand_fit_check/Picture 038.jpg
-        aspectRatio: 1.5
-      - alt: Picture 039
-        src: /assets/d-control/bubbles/04_stand_fit_check/Picture 039.jpg
-        aspectRatio: 1.5
-      - alt: Picture 040
-        src: /assets/d-control/bubbles/04_stand_fit_check/Picture 040.jpg
-        aspectRatio: 1.5
-      - alt: Picture 041
-        src: /assets/d-control/bubbles/04_stand_fit_check/Picture 041.jpg
-        aspectRatio: 1.5
-      - alt: Picture 042
-        src: /assets/d-control/bubbles/04_stand_fit_check/Picture 042.jpg
-        aspectRatio: 1.5
+      - src: /assets/d-control/full-pass-247/main-unit-assembly.webp
+        alt: Main-unit assembly drawing with upper control panels lifted above the pan, rails and internal supports.
+        aspectRatio: 1.54539600772698
     featuredIndices: []
-    id: 04_stand_fit_check
+    deck: []
+  - id: gaps
     type: gallery
-    title: Stand fit check
-    deck:
-    - body: The sequence documents physical fit checks around the assembled stand. The caption stays at the inspection level because the photographs do not, by themselves, prove the final corrective-action disposition.
-      subtitle: ''
-      title: Stand-to-console fit sequence
-  - caption: This curated subset shows multiple installed configurations. Dimensional claims remain anchored to the stand record and public guide.
+    title: Fit inspection across neighboring parts
+    caption: An inspection photograph records differing gaps where adjacent panels meet. It does not establish a root cause or a completed corrective-action disposition.
     data:
-      columns: 3
+      columns: 1
       layout: masonry
-      scattered: true
       images:
-      - alt: D_Control_Music
-        src: /assets/d-control/bubbles/05_installations/D_Control_Music.jpg
-        aspectRatio: 1.5
-      - alt: ICON2unitOPEN_Alt
-        src: /assets/d-control/bubbles/05_installations/ICON2unitOPEN_Alt.jpg
-        aspectRatio: 1.5
-      - alt: KMA_Studio_A
-        src: /assets/d-control/bubbles/05_installations/KMA_Studio_A.jpg
-        aspectRatio: 1.5
-      - alt: Metropolis_nws_enl_3047_8352
-        src: /assets/d-control/bubbles/05_installations/Metropolis_nws_enl_3047_8352.jpg
-        aspectRatio: 1.5
-      - alt: PKO_lg_nws_enl_3382_9600
-        src: /assets/d-control/bubbles/05_installations/PKO_lg_nws_enl_3382_9600.jpg
-        aspectRatio: 1.5
-      - alt: SantaBarbara_big_nws_enl_1821_4370
-        src: /assets/d-control/bubbles/05_installations/SantaBarbara_big_nws_enl_1821_4370.jpg
-        aspectRatio: 1.5
+      - src: /assets/d-control/bubbles/03_gap_check/gap differences.jpg
+        alt: Close-up comparing gaps where adjacent D-Control panels meet.
+        aspectRatio: 1.2144846796657383
     featuredIndices: []
-    id: 05_installations
+    deck: []
+  - id: molding
     type: gallery
-    title: Installed systems
-    deck:
-    - body: This curated subset shows multiple installed configurations and replaces the former unbounded installation dump. It demonstrates product deployment, while the dimensional claims remain anchored to the stand record and public guide.
-      subtitle: ''
-      title: Configuration range in use
+    title: The molded edge
+    caption: The original annotation identifies a molding error at the side interface. The image is retained as inspection evidence without assigning it to a particular ECO or claiming the photographed unit was corrected.
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/d-control/bubbles/03_gap_check/moulding error.jpg
+        alt: Annotated close-up of the molded edge at the console side interface.
+        aspectRatio: 1.3915211970074812
+    featuredIndices: []
+    deck: []
+  - id: fit
+    type: gallery
+    title: Stand-to-console fit check
+    caption: Physical fit-check photograph from the stand inspection sequence. It illustrates the interface under review, without identifying a final corrective-action release.
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/d-control/bubbles/04_stand_fit_check/Picture 037.jpg
+        alt: Physical inspection photograph of the D-Control stand and console interface.
+        aspectRatio: 1.3333333333333333
+    featuredIndices: []
+    deck: []
+  - id: installed
+    type: gallery
+    title: D-Control in use
+    caption: An installed D-Control configuration from the project archive. This supports the product’s deployment context; it does not measure yield, prove closure of every field issue or identify an 80-fader installation.
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/d-control/bubbles/05_installations/D_Control_Music.jpg
+        alt: D-Control installed in a studio control room.
+        aspectRatio: 1.408450704225352
+    featuredIndices: []
+    deck: []
 ---
 
-# D-Control (Buckley)
+# D-Control: making a modular console buildable
 
-## Project summary
+D-Control, known internally as Buckley, put a large Pro Tools control surface on a configurable stand. I designed the stand and took over Matt Cho's mechanical work early in the program. The responsibility grew into console integration, manufacturing recovery and sustaining changes. Matt's earlier work remains part of that history: the surviving 2002-2003 PCB interface drawings carry his authorship. Electrical design, software, industrial design, purchasing, quality and production were shared team responsibilities. {/* ^[evidence:EV-39ce32cd952d] ^[evidence:LK-4881fb2e] ^[evidence:EV-951ecdcc7a79] */}
 
-- **Role boundary:** Lead Mechanical Engineer for the stand sheet metal, structural plastics, assembly methods, and PCB dimensional-control drawings. Electrical design, software, sourcing, factory execution, and the adjacent D-Command program remained cross-functional responsibilities.
-- **Mandate:** Turn Buckley into a modular steel control surface that could scale from a main unit plus fader units to a five-module, 80-fader installation while keeping the stand and cosmetic interfaces buildable.
-- **Core result:** More than half of the first 42 fader pans were rejected after PEM insertion bowed the steel. The recovery combined immediate cold work with a supplier process change, while an estimated two-month manufacturing campaign was executed in 2.5 weeks. A separate prototype-board investigation contained a 90% V-2 lot before shipment.
+## One console, several configurations
 
-## The anatomy of failure
+The product combined a main unit with separate 16-channel fader modules. The D-Control guide describes expansion to 80 faders: five fader modules **plus the main unit**. Each main or fader unit had its own power connection. That modularity made the stand and the interfaces between neighboring units central engineering problems. A configuration had to work as an assembled structure, with the surface controls, meter bridges and cosmetic edges meeting correctly. {/* ^[evidence:LK-4ba922ee] */}
 
-### Fader-pan crisis: more than half rejected
+The main-unit assembly drawing shows the physical layers: a lower pan, side structure and rails, internal supports, and upper control-panel assemblies. PCB dimensional-control drawings located board outlines, mounting holes, controls and connectors within that package. They defined mechanical interfaces to the electronics; they were not circuit-design ownership. {/* ^[evidence:LK-c27b2b7d] ^[evidence:LK-4881fb2e] ^[evidence:EV-e03cb2a04d81] */}
 
-PEM hardware insertion stretched the fader-pan sheet steel point by point. The first 42-part batch arrived bowed far enough that more than half were rejected and the side-plate interfaces would not align.
+## The stand began with feature tradeoffs
 
-The response separated containment from correction. On the floor, the pans were cold-worked over a table edge to recover flatness. At the supplier, PEM insertion was redistributed and a flattening operation was added after insertion. The surviving ruling supports both actions, but not the former claim that the pilot line never stopped or that every field failure was eliminated.
+The 2003 correspondence follows the stand before the production problems. In April I extended the heel of the foot cover to support the rear steel foot when the shelf was loaded, departing from the earlier industrial-design cutout. By May, unresolved price points were holding up the stand and shelving work. The June feature review put construction choices in front of the team: a separate bolt-on heel, a thick flat foot with a formed saddle, two-piece legs, shelf fasteners and cable routing. {/* ^[evidence:EV-4994d9c09406] */}
 
-### Stand fit: holes, bosses, and side plates
+Those were interacting choices. A cable path inside the leg changed fabrication work; concealed shelf fasteners affected the shelf structure; the heel had to support the loaded arrangement while fitting the intended appearance. The June exchange records proposals and cost questions, rather than a single frozen design. The later stand packet carries those interfaces into part and assembly definitions. A July 6, 2004 drawing, for example, releases a stiffened main foot plate with a welded reinforcement under ECO 6325. {/* ^[evidence:EV-4994d9c09406] ^[evidence:LK-aff1c2ec] ^[evidence:EV-e03cb2a04d81] */}
 
-The stand plastics followed a specific D-Control change trail. ECO 6310 enlarged mounting holes from 0.200 inch to 0.250 inch, enlarged the surrounding bosses, and raised five bosses by 0.050 inch. Deviation 1212 captured the interim ream operation; the Rev B part record specifies Noryl. ECO 8197 belongs to the side-plate relief work. PPI appears only as the named molder, so no broader design ownership is assigned to it.
+Configuration work continued after the initial release. In August 2004, Tom Oiwa questioned the C-Mid and D-Mid crossbar lengths and the precision of their dimensions. I explained that the crossbars were intentionally shorter than the overall dimensions of the units they supported. The exchange is useful evidence of design intent and manufacturing review. Its four-decimal calculations do not establish a measured system tolerance. {/* ^[evidence:EV-4994d9c09406] */}
 
-These facts resolve a long-running attribution error. ECO 8114, Vegas Mode, sticky buttons, and the plastic Faraday-cage story belong to D-Command. They are not part of the D-Control stand narrative.
+## Geometry had to survive assembly
 
-### Five-module tolerance and assembly
+The manufacturing instructions make alignment part of the build sequence. Both main and fader assemblies started with screws loose enough for adjustment. Before installing the covers, the process called for flatness and squareness checks across the top, front and inside surfaces. Assemblers were to loosen, realign and recheck a unit that failed those checks. The main-unit instructions also controlled harness routing and delayed the cosmetic overlays until after burn-in. {/* ^[evidence:LK-c27b2b7d] ^[evidence:EV-e03cb2a04d81] */}
 
-The configuration record models a five-module installation spanning roughly ten feet. It uses a 23.079-inch unit width plus 0.020-inch tolerance and carries C-Mid and D-Mid rail calculations to four decimal places. That precision describes the design record; it is not presented as a measured end-to-end installation tolerance.
+The installation guide used the same principle at system scale. Alignment pins joined neighboring units while their attachments to the rails remained loose. A ratcheting nylon strap closed the stand legs; if necessary, it also brought the units together before the remaining fasteners were tightened. The guide explicitly kept the strap clear of switches and encoders. Adjustment was designed into the assembly method. {/* ^[evidence:LK-4ba922ee] */}
 
-The public D-Control guide independently documents the ratcheting-strap operation used while joining main and fader units. The strap is therefore treated as an explicit assembly method, not a colorful inference about how installers forced the structure together.
+Inspection then tested whether the parts and process delivered that intent. In July 2004, Tom collected gap data from ten main and ten fader units to help define an allowable manufacturing gap. The following discussions still called for squareness checks with units both separate and installed, before ordering further fixtures. The gap and stand photographs show the interfaces under review; they do not prove that every photographed condition was resolved by one change. {/* ^[evidence:EV-4994d9c09406] */}
 
-### Prototype PCB crisis: V-2 containment
+## Recovering the manufacturing process
 
-One unnamed vendor supplied a prototype-board population in which 90% carried V-2 material. Four different shop logos indicated uncontrolled subcontracting. The response was containment and supplier governance: affected prototypes were quarantined, customer exposure was checked, and the vendor was terminated for prototype work. The correction record states that zero affected boards shipped.
+The first 42 steel fader pans exposed a basic forming problem. PEM hardware insertion stretched the sheet locally and bowed the pans enough that more than half were rejected; the side-plate interfaces would not line up. My immediate response was to demonstrate cold work over a table edge to recover flatness. The supplier correction redistributed the insertion sequence and added flattening after insertion. Immediate salvage and the process change were separate parts of the recovery. {/* ^[evidence:LK-e6ac858e] */}
 
-### The 2.5-week campaign
+The June 2004 manufacturing and DFM campaign was estimated at two months; my retained account records completing it in 2.5 weeks, including home-built assembly jigs. The immediate recovery got usable parts and tooling into the process, while fit and production work continued afterward. {/* ^[evidence:LK-e6ac858e] */}
 
-The June 2004 correction record describes a manufacturing and DFM campaign estimated at two months and executed in 2.5 weeks. Home-built jigs shortened the path to usable assembly tooling. This is reported as a schedule compression in the surviving record, without converting it into an unsupported revenue number.
+### Prototype board containment
 
-## Governance and evidence
+A separate prototype-board investigation found V-2 material in 90% of one unnamed vendor's prototype population, where V-0 was required. Four shop logos exposed uncontrolled subcontracting. We quarantined the affected prototypes, checked customer exposure and terminated that vendor for prototype work. The retained correction record states that no affected boards shipped. This was a bounded containment result, separate from the pan and stand work. {/* ^[evidence:LK-e6ac858e] */}
 
-The public boundary is now explicit: Buckley is D-Control and its structural record is steel; Danko is D-Command and owns the plastic Faraday-cage and ECO 8114 history. The $50-$100 XMON cost delta is shared Buckley/Danko context, so it is not counted as D-Control-only impact.
+## Sustaining work after launch
 
-NotebookLM was used as a historical research surface, not as publication authority. All 35 sources, 29 notes, 16 audio artifacts, and the semantic content of 29 mind maps are locally accounted for in a dated reconciliation. NotebookLM rejected visual-layout exports for the mind maps, so their layouts are not claimed as preserved. The former public audio briefing is no longer linked because it repeats cross-project attribution drift.
+The engineering responsibility continued into installed systems and production changes. In June 2004 I volunteered as the mechanical group's point person for assembly and installation issues, working with installers, QA and manufacturing. The 2005 correspondence shows why that role still mattered: a successful part test did not automatically settle rework, documentation or release. {/* ^[evidence:EV-951ecdcc7a79] */}
 
-## Quantified impact
+For the replacement side plates, Brandon Cammack reported an aggressive manual test on February 15, 2005. He loaded and moved the side cap while driving the screw, damaging the cap while the fastening interface continued to hold. I approved the parts after that report. It was a useful abuse test, not a quantified qualification of every production unit. {/* ^[evidence:EV-951ecdcc7a79] */}
 
-- **Rejected** more than half of the first 42 bowed fader pans.
-- **Executed** an estimated two-month manufacturing campaign in 2.5 weeks.
-- **Defined** a five-module stand record with 23.079-inch unit width, 0.020-inch tolerance, and C-Mid/D-Mid rail calculations carried to 0.0001 inch.
-- **Contained** a prototype population that was 90% V-2 with zero affected boards shipped.
-- **Owned** a 26-release stand sheet-metal record plus the structural plastics and PCB dimensional-control surfaces under a solo mechanical mandate.
+Getting the change into manufacturing took further work. The team still needed second-operation drawings and an ECO; the supplier's first rework setup scrapped parts. By April, QA reported acceptable reworked parts. Tom initiated urgent ECO 8045 to replace the old side plates with my 9420-13080-01/-02 designs, and I delivered the drawings and models on April 15. Purchasing, QA, manufacturing and mechanical engineering each owned part of that transition. {/* ^[evidence:EV-951ecdcc7a79] */}
+
+The Swedish Television installation raised a different interface question. In April 2005 I reviewed the stand-flange condition and explained that the flange was intended to lie parallel to the underside of the unit. The concerning case was a flange sitting too high and preventing the pan from seating squarely on the rails. The selected correspondence establishes that diagnosis; it does not establish a completed replacement or inspection-gauge rollout. {/* ^[evidence:EV-951ecdcc7a79] */}
+
+The plastic changes had their own verification trail. ECO 6310 enlarged mounting holes from 0.200 to 0.250 inch, enlarged their bosses and raised five bosses by 0.050 inch. Deviation 1212 covered interim reaming; the Rev B part record specifies Noryl. On August 1, 2005, I confirmed that the T1 samples incorporated the ECO changes and sent the signed approval to PPI, the molder. That is a documented sample-approval endpoint, not proof that all field fit issues had disappeared. ECO 8197's side-plate relief remains a separate change. {/* ^[evidence:LK-aff1c2ec] ^[evidence:LK-e6ac858e] ^[evidence:EV-4994d9c09406] */}
+
+## What the record establishes
+
+| Period | Engineering work |
+| --- | --- |
+| 2002-2003 | Matt Cho's early interface drawings; my stand development and feature/cost reviews in 2003. |
+| Spring-summer 2004 | Stand release, assembly instructions, manufacturing recovery and installation feedback. |
+| Later 2004 | Configuration dimensions, crossbar review and continuing fit investigation. |
+| 2005 | Side-plate testing and release work, field-interface diagnosis and ECO 6310 T1 sample approval. |
+
+These are documented stages, not exact employment or responsibility-transfer dates. I designed the stand and took over Matt's work early; the precise handoff date remains unspecified. The selected record establishes involvement through August 2005 without making that my final D-Control deliverable. {/* ^[evidence:EV-39ce32cd952d] ^[evidence:EV-4994d9c09406] ^[evidence:EV-951ecdcc7a79] ^[evidence:LK-4881fb2e] */}
+
+D-Control shipped and appears in the installed-system archive. The engineering outcome was a modular product supported by detailed part definitions, an adjustable assembly sequence, containment when parts failed and continued production support. The stand, console and cosmetic interfaces had to work together in the factory and again when assembled at a customer's studio. {/* ^[evidence:LK-e6ac858e] ^[evidence:LK-4ba922ee] ^[evidence:EV-951ecdcc7a79] */}
 
 ## Source trail
 
-- `03_Engineering_stand.pdf` - stand drawings, configurations, rail dimensions, ECO details, and fit evidence.
-- `03_Engineering_MPIs.pdf` - the main-unit and fader-unit manufacturing process instructions.
-- `03_Engineering_PCBs.pdf` - the PCB dimensional-control packet.
-- `03_Engineering_plastic-parts.pdf` - material and plastic-part records.
-- `D-Control Guide.pdf` - public modular configuration and ratcheting-strap assembly instructions.
-- `CANON_CORRECTIONS_DCONTROL_2026-07.txt` - operator-ratified D-Control crisis, role, schedule, and supplier rulings.
-- `CANON_CORRECTIONS_DCOMMAND_2026-07.txt` - operator-ratified boundary for ECO 8114, Vegas Mode, sticky buttons, and the Faraday-cage history.
+The account draws on the stand and PCB drawing packets, the main/fader manufacturing instructions, the D-Control installation guide, contemporaneous 2003-2005 correspondence and my retained corrections and role clarification. Assembly illustrations, design renders, inspection photographs and installed-system photographs serve different purposes; their captions preserve those distinctions. {/* ^[evidence:LK-aff1c2ec] ^[evidence:LK-c27b2b7d] ^[evidence:LK-4881fb2e] ^[evidence:LK-4ba922ee] ^[evidence:EV-4994d9c09406] ^[evidence:EV-951ecdcc7a79] ^[evidence:EV-39ce32cd952d] */}
