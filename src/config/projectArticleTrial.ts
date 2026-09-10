@@ -613,118 +613,34 @@ export const projectArticleTrial = {
 	},
 	sc48: {
 		sections: {
-			summary: "project-summary",
-			failures: "the-anatomy-of-failure",
-			thermal: "thermal-crisis-the-75c-kill-event",
-			structure: "structural-crisis-the-no-extrusion-mandate",
-			computer: "embedded-computer-integration",
-			tooling: "cosmetic-shell-and-tooling",
-			governance: "governance-and-evidence",
-			impact: "quantified-impact",
-			sources: "source-trail",
+			architecture: "one-enclosure-a-high-reuse-architecture",
+			thermal: "cooling-had-more-than-one-acceptance-condition",
+			interfaces: "the-control-surface-was-a-mechanical-interface",
+			plastics: "controls-plastics-and-access-developed-together",
+			cost: "structure-and-the-cost-of-making-it",
+			outcome: "what-the-work-delivered",
+			sources: "source-notes",
 		},
 		media: {
-			"computer-frame": {
-				galleryId: "01_brain_transplant",
-				src: "/assets/sc48/01-brain-transplant/9420-58318-00.jpg",
-			},
-			"side-cover": {
-				galleryId: "02_cosmetic_shell",
-				src: "/assets/sc48/02-cosmetic-shell/9440-58842-00.jpg",
-			},
-			"front-bolster": {
-				galleryId: "02_cosmetic_shell",
-				src: "/assets/sc48/02-cosmetic-shell/9440-58843-00.jpg",
-			},
-			"fan-duct": {
-				galleryId: "03_meltdown_mitigation",
-				src: "/assets/sc48/03-meltdown-mitigation/9440-58856-00.jpg",
-			},
+			plan: { galleryId: "architecture", src: "/assets/sc48/full-pass-246/high-reuse-plan.webp" },
+			duct: { galleryId: "airflow", src: "/assets/sc48/03-meltdown-mitigation/9440-58856-00.jpg" },
+			keepout: { galleryId: "keepout", src: "/assets/sc48/full-pass-246/control-surface-keepout.webp" },
+			dcd: { galleryId: "dcd", src: "/assets/sc48/full-pass-246/main-left-interface.webp" },
+			frame: { galleryId: "frame", src: "/assets/sc48/01-brain-transplant/9420-58318-00.jpg" },
+			cover: { galleryId: "plastics", src: "/assets/sc48/02-cosmetic-shell/9440-58842-00.jpg" },
+			bolster: { galleryId: "plastics", src: "/assets/sc48/02-cosmetic-shell/9440-58843-00.jpg" },
 		},
-		galleryCaptionsFromDeck: ["01_brain_transplant", "02_cosmetic_shell", "03_meltdown_mitigation"],
 		scenes: [
-			{
-				key: "summary",
-				eyebrow: "Orientation",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "scar-index",
-				},
-				media: [],
-			},
-			{
-				key: "thermal",
-				parent: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "scar",
-					section: "thermal",
-				},
-				media: ["fan-duct"],
-			},
-			{
-				key: "structure",
-				parent: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "scar",
-					section: "structure",
-				},
-				media: [],
-			},
-			{
-				key: "computer",
-				parent: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: ["computer-frame"],
-			},
-			{
-				key: "tooling",
-				parent: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: ["side-cover", "front-bolster"],
-			},
-			{
-				key: "governance",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["governance"],
-				},
-				media: [],
-			},
-			{
-				key: "impact",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "sources",
-				eyebrow: "Sources",
-				left: {
-					kind: "sources",
-				},
-				media: [],
-			},
+			{ key: "architecture", eyebrow: "Early packaging plan", left: { kind: "context" }, media: ["plan"] },
+			{ key: "thermal", eyebrow: "Configuration trials", left: { kind: "scar", section: "thermal" }, media: ["duct"] },
+			{ key: "interfaces", eyebrow: "Mechanical and electrical interfaces", left: { kind: "metrics", keys: ["governance"] }, media: ["keepout", "dcd", "frame"] },
+			{ key: "plastics", eyebrow: "Controls and outer geometry", left: { kind: "none" }, media: ["cover", "bolster"] },
+			{ key: "cost", eyebrow: "Manufacturing definition", left: { kind: "metrics", keys: ["financial"] }, media: ["frame"] },
+			{ key: "outcome", eyebrow: "Documented contribution", left: { kind: "none" }, media: [] },
+			{ key: "sources", eyebrow: "Source context", left: { kind: "sources" }, media: [] },
 		],
+		featured: [],
+		breakout: { eyebrow: "SC48 design and integration", description: "The early architecture, airflow duct, clearance overlay, board interface and selected component renders. Captions distinguish planning, revisions and part identity." },
 	},
 	"d-control": {
 		sections: {

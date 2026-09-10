@@ -168,7 +168,7 @@ const navNext = nextProject
 			description={d.description}
 			audioUrl={d.audio_url}
 			photoCount={images.length || undefined}
-			mediaCountLabel={d.slug === "sundance" ? "images" : undefined}
+			mediaCountLabel={["sundance", "sc48"].includes(d.slug) ? "images" : undefined}
 		/>
 
 		{contextRibbon && <ContextRibbon model={contextRibbon} />}
@@ -183,7 +183,7 @@ const navNext = nextProject
 					useContinuityRails ? (
 						<ProjectContinuityRail
 							side="left"
-							mediaCountLabel={d.slug === "sundance" ? "images" : undefined}
+							mediaCountLabel={["sundance", "sc48"].includes(d.slug) ? "images" : undefined}
 							projectTitle={d.title}
 							scenes={activeRailScenes}
 							headings={headings}
@@ -348,9 +348,10 @@ const navNext = nextProject
 </BaseLayout>
 
 <style>
-	/* Keep the reviewed C24 and Orpheus article links below the fixed header. */
+	/* Keep these reviewed article links below the fixed header. */
 	[data-project-article="c24"] :global([id]),
-	[data-project-article="ksystem-120"] :global([id]) {
+	[data-project-article="ksystem-120"] :global([id]),
+	[data-project-article="sc48"] :global([id]) {
 		scroll-margin-top: 6rem;
 	}
 </style>

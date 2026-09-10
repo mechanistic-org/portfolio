@@ -4,184 +4,193 @@ slug: sc48
 tier: deep_dive
 category: enterprise_hardware
 client: []
-date: 2007-01-01 00:00:00+00:00
-description: 'The embedded live-sound console known internally as Lux/Capaldi: a 17-configuration thermal study drove a 3U-to-4U redesign, while a folded-steel structure met the explicit no-extrusion cost constraint.'
+date: 2007-02-28 00:00:00+00:00
+description: Integrating a live-sound console through chassis and airflow trials, electrical clearance, control-surface iteration and fabrication definition.
 draft: false
-duration: 1.3 Years
+duration: 2007-2008 documented design
 employer: digidesign
-endDate: 2008-01-01 00:00:00+00:00
+endDate: 2008-04-07 00:00:00+00:00
 forensic_metrics:
-  financial: Sheet-metal piece-part total modeled at $561.46 per unit ($521.46 subtotal plus $40 contingency); the Profile comparison carried $121.70 per unit in extrusions and a 20.33% sheet-metal share.
-  process: 17 documented thermal configurations; in the comparable 4U, three-80 mm-fan rows, moving from 8.5V to 12V reduced the left R69 rise from 61.3°C to 51.4°C and the absolute reading from 85.6°C to 74.0°C.
-  governance: The local record contains a 26-drawing sheet-metal release packet and a 17-document PCB design-control packet; the cost model kept CNC and hard-tool scenarios separate.
+  financial: $561.46 modeled sheet-metal piece-part cost, including $40 contingency; not achieved system COGS.
+  process: 17 thermal configurations; later 3U and hybrid trials also evaluated acoustic and electromagnetic behavior.
+  governance: Main-left PCB DCD revisions document artwork, connector and mounting-hole changes through April 7, 2008.
 forensic_summary:
-  trigger: A thermal log records a 75°C system shutdown while the product requirements and cost rollup constrained the console to integrated processing and side cooling.
-  intervention: Tested 17 chassis-and-fan configurations, moved the enclosure from 3U to 4U, ran three 80 mm fans at 12V, added formed LDPE airflow ducting, and used a folded-steel I-beam instead of aluminum extrusions.
-  result: The comparable 4U left R69 measurement fell by 9.9°C in rise and 11.6°C absolute at 12V versus 8.5V; the sheet-metal piece-part model closed at $561.46 per unit.
+  trigger: Host computing, DSP and local I/O had to share a cost-constrained console with the control surface.
+  intervention: Iterated enclosure and airflow options while coordinating board clearances, controls, plastics and fabrication packages.
+  result: Documented testing and interface releases carry the design through April 2008; the final internal production configuration remains outside this account.
 heroImage: /assets/sc48/hero/sc48-hero-01-xl.webp
 industry: pro_audio
 production: production
 productionScale: series
 tags:
-- Crisis
-- Yield
-teamSize: INT 4
+- Integration
+- Thermal
 theme: article
 tools:
 - pro_engineer
 scars:
-- label: Thermal shutdown
-  value: 75°C observed shutdown
-  description: A 17-configuration study exposed the 3U thermal constraint and quantified the 4U, three-fan response without converting ambient or margin columns into temperature-rise claims.
-  severity: critical
-  phase: design
-  anchor: thermal-crisis-the-75c-kill-event
-  trigger: The thermal log records "temperature is 75C, system shutdowned."
-  intervention: Move to a 4U chassis, test three 80 mm fans at 8.5V and 12V, and add formed LDPE flow guidance.
-  result: Left R69 rise changed from 61.3°C to 51.4°C; absolute temperature changed from 85.6°C to 74.0°C in the comparable rows.
-  evidence:
-  - 9440-58856-00
-- label: No-extrusion structure
-  value: $121.70 benchmark removed from the architecture
-  description: The cost record explicitly prohibited extrusions, so the taller enclosure used a folded-steel 4U rake-back I-beam and retained separate CNC and hard-tool cost scenarios.
+- label: Thermal and EM tradeoff
+  value: Several acceptance conditions
+  description: A thermally and acoustically acceptable 4U trial still had significant EM noise. Later work returned to 3U and hybrid arrangements.
   severity: major
   phase: design
-  anchor: structural-crisis-the-no-extrusion-mandate
-  trigger: The benchmark control-surface rollup carried $121.70 per unit in extrusions while the SC48 assumptions said there would be none.
-  intervention: Replace the extrusion-dependent chassis concept with a folded-steel I-beam and price the sheet-metal set under both CNC and hard-tool scenarios.
-  result: The CNC sheet-metal piece-part model closed at $561.46 per unit, including a $40 contingency.
+  anchor: cooling-had-more-than-one-acceptance-condition
+  trigger: The late-November 4U rake trial retained EM noise with the power supply under ADCs.
+  intervention: Continue 3U front-to-back and hybrid trials; evaluate filters and side covers as part of the airflow arrangement.
+  result: Preliminary 3U thermal and EM reports improved; final acoustic verification and production configuration are not asserted.
 cyberspace:
+  enable: true
   layout: linear
   stickies:
-  - data:
-      columns: 3
+  - id: architecture
+    type: gallery
+    title: The early high-reuse plan
+    caption: June 21, 2007 planning diagram. Existing processing and I/O blocks share a package with a Mini-ITX host, PCI extender, control-surface electronics and power distribution. The diagram precedes the final configuration.
+    data:
+      columns: 1
       layout: masonry
-      scattered: true
       images:
-      - alt: 9420-58318-00
-        src: /assets/sc48/01-brain-transplant/9420-58318-00.jpg
-        aspectRatio: 1.5
+      - src: /assets/sc48/full-pass-246/high-reuse-plan.webp
+        alt: Early SC48 block diagram connecting a Mini-ITX host and PCI extender with mix-engine, Hub48, audio I/O and control-surface blocks.
+        aspectRatio: 1.5454545454545454
     featuredIndices: []
-    id: 01_brain_transplant
+    deck: []
+  - id: airflow
     type: gallery
-    title: Embedded computer
-    deck:
-    - body: 'The render identifies P/N 9420-58318-00, the steel structure carrying the embedded-computer interface within the 4U enclosure. Its evidence value is geometric: it shows the bracket and panel relationship documented in the released drawing. No shock-isolation or field-failure claim is inferred from the image.'
-      subtitle: ''
-      title: 4U back panel and PCI frame
-  - data:
-      columns: 3
+    title: Formed airflow guidance
+    caption: 'Component render of the fan duct identified in the BOM as P/N 9420-58856-00: die-cut, scored and formed LDPE. The historical image filename uses 9440. The render shows the part geometry, not a measured airflow field or final fan arrangement.'
+    data:
+      columns: 1
       layout: masonry
-      scattered: true
       images:
-      - alt: 9440-58842-00
-        src: /assets/sc48/02-cosmetic-shell/9440-58842-00.jpg
-        aspectRatio: 1.5
-      - alt: 9440-58843-00
-        src: /assets/sc48/02-cosmetic-shell/9440-58843-00.jpg
-        aspectRatio: 1.5
+      - src: /assets/sc48/03-meltdown-mitigation/9440-58856-00.jpg
+        alt: Folded duct with flanges, mounting holes and shaped edge cutouts.
+        aspectRatio: 1.2941176470588236
     featuredIndices: []
-    id: 02_cosmetic_shell
+    deck: []
+  - id: keepout
     type: gallery
-    title: Cosmetic shell
-    deck:
-    - body: The selected renders show the right side cover, P/N 9440-58842-00, and front bolster, P/N 9440-58843-00. The tooling ledger assigns the shared side-cover tool cost to the left part, P/N 9440-58841-00, with no separate charge on the right; the front bolster has its own $30,000 entry.
-      subtitle: ''
-      title: Right side cover and front bolster
-  - data:
-      columns: 3
+    title: Clearance beneath the control surface
+    caption: January 2008 keepout overlay. The marked region explicitly excludes through-hole components. It is a design constraint on the illustrated layout, not evidence of an assembled collision.
+    data:
+      columns: 1
       layout: masonry
-      scattered: true
       images:
-      - alt: 9440-58856-00
-        src: /assets/sc48/03-meltdown-mitigation/9440-58856-00.jpg
-        aspectRatio: 1.5
+      - src: /assets/sc48/full-pass-246/control-surface-keepout.webp
+        alt: Control-surface artwork with a red shaded region and a no-through-hole-components callout.
+        aspectRatio: 1.2941176470588236
     featuredIndices: []
-    id: 03_meltdown_mitigation
+    deck: []
+  - id: dcd
     type: gallery
-    title: Thermal flow guidance
-    deck:
-    - body: The retained asset filename carries the legacy `9440` prefix; the BOM and part record identify the component as P/N 9420-58856-00. It is a die-cut, scored, and formed milky-white LDPE duct used to direct the side-fed airflow. The image supports that physical intervention, not the former unsupported CFD or chassis-as-heatsink claims.
-      subtitle: ''
-      title: Formed LDPE fan duct
-  - data:
-      columns: 3
+    title: Main-left board interface
+    caption: Plan-view crop from DCD-9150-58331-00 Rev 6, main-left Lux PCB. The source drawing is prepared and checked EN; its revision history runs through April 7, 2008. The view locates control and mounting interfaces; it is not a circuit schematic.
+    data:
+      columns: 1
       layout: masonry
-      scattered: true
+      images:
+      - src: /assets/sc48/full-pass-246/main-left-interface.webp
+        alt: Main-left board plan view showing control outlines and mounting features from the SC48 Design Control Document.
+        aspectRatio: 1.4889162561576355
     featuredIndices: []
-    id: 04_origami_spine
+    deck: []
+  - id: frame
     type: gallery
-    title: Folded-steel spine
-    deck:
-    - body: P/N 9420-58317-00 is the released folded-steel I-beam for the 4U rake-back architecture. The drawing and cost model support the no-extrusion structure and the separate CNC/hard-tool scenarios. They do not establish the former claims about snap-fit trays, assembly-time reduction, or whether production stamping dies were ultimately ordered, so those claims are omitted.
-      subtitle: ''
-      title: 4U rake-back I-beam
+    title: Compact PCI frame
+    caption: P/N 9420-58318-00 as represented in the component visual index and cost record. This compact folded frame differs from the full-width prototype back-panel drawing bearing the same part number. No exact assembly revision is inferred.
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/sc48/01-brain-transplant/9420-58318-00.jpg
+        alt: Compact folded PCI frame with a central opening, end walls and slotted tabs.
+        aspectRatio: 1.2941176470588236
+    featuredIndices: []
+    deck: []
+  - id: plastics
+    type: gallery
+    title: Right side cover and front bolster
+    caption: 'Component renders identified by the part ledger: right side cover 9440-58842-00 and front bolster 9440-58843-00. Blue is the render appearance; these views do not establish a production finish or the selected CD-drive revision.'
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - src: /assets/sc48/02-cosmetic-shell/9440-58842-00.jpg
+        alt: Right side-cover render, P/N 9440-58842-00, showing the long contoured edge and attachment openings.
+        aspectRatio: 1.2941176470588236
+      - src: /assets/sc48/02-cosmetic-shell/9440-58843-00.jpg
+        alt: Front-bolster render, P/N 9440-58843-00, showing the long crosspiece, end returns and underside features.
+        aspectRatio: 1.2941176470588236
+    featuredIndices: []
+    deck: []
 ---
 
-# SC48 (Lux / Capaldi)
+# SC48: making an integrated console fit
 
-## Project summary
+SC48 brought the host computer, audio processing and local I/O into a single live-sound console. My role was lead mechanical engineering and industrial design: the enclosure, thermal packaging, sheet-metal and plastic parts, and the mechanical interfaces between them. Electrical design, software, validation, sourcing and contract manufacturing were shared responsibilities.
 
-- **Role boundary:** Lead mechanical engineering and industrial design for the enclosure, thermal architecture, sheet-metal and plastic-part definition, and mechanical interfaces. Electrical design, software, validation, sourcing, and contract manufacturing remained cross-functional responsibilities.
-- **Mandate:** Package the host computer, DSP hardware, control surface, and I/O into one live-sound console under a sub-$15,000 COGS target. The requirements preferred all processing and I/O inside the console; the cost assumptions separately mandated side cooling and no extrusions.
-- **Core result:** A 17-configuration thermal study drove the enclosure from 3U to 4U. In the directly comparable 4U rows, three 80 mm fans at 12V reduced the left R69 temperature rise by 9.9°C and its absolute reading by 11.6°C versus 8.5V. A folded-steel I-beam provided the taller structure without adding the extrusion cost carried by the Profile benchmark.
+The difficult part was keeping those systems compatible as the product changed. More room for cooling could change electromagnetic behavior. A control-surface revision could move the board beneath it. A side cover could change the airflow enough to invalidate an otherwise workable test arrangement. The engineering record follows those interactions from early packaging studies through detailed interface and fabrication work. {/* ^[evidence:LK-179274e6] ^[evidence:LK-96661432] ^[evidence:LK-847f6299] */}
 
-## The anatomy of failure
+## One enclosure, a high-reuse architecture
 
-### Thermal crisis: the 75°C kill event
+The February 2007 requirements preferred all processing and I/O inside the console, with a separate rack allowed if integration proved impractical. The cost target was below $15,000 COGS. Mechanical assumptions added side cooling and no aluminum extrusions. These were design requirements and planning assumptions, not achieved production figures. {/* ^[evidence:LK-179274e6] ^[evidence:LK-d654ff71] */}
 
-The thermal record contains an explicit failure line: `temperature is 75C, system shutdowned.` The surviving log does not identify a BIOS setpoint beside that line, so 75°C is reported here as an observed shutdown, not a documented threshold specification.
+The June 21 high-reuse plan shows what had to fit: a Mini-ITX host, PCI extender, mix-engine boards, Hub48 and audio I/O, alongside the control-surface electronics and power distribution. Reuse reduced the amount of new electronics to develop, but it left a substantial physical integration problem. Board outlines, connector access, mounting and cooling all had to work inside the same package. The diagram is an early planning architecture; it does not identify the final host or every board that shipped. {/* ^[evidence:LK-f269d5c5] */}
 
-The constraint stack was unusually tight. Product requirements called for the host and I/O to be integrated into the console; the COGS assumptions said cooling would enter from the sides; and the Kontron 986LCD-M manual required forced cooling within a 0-60°C operating-ambient envelope. The console therefore had to move air across a dense internal assembly without a separate processing rack.
+## Cooling had more than one acceptance condition
 
-The engineering response was empirical. Seventeen logged configurations varied chassis height, fan size, fan voltage, and rake geometry. The resulting architecture moved from 3U to 4U, used three 80 mm fans at 12V, and added die-cut, scored, and formed LDPE ducts to guide airflow.
+The surviving thermal log includes a 75°C shutdown observation. The study compared 17 configurations across chassis height, rake, fan size and voltage, filters and side covers. The mechanical team was testing complete arrangements, not simply choosing a larger fan. {/* ^[evidence:LK-38a9bda1] ^[evidence:LK-33c08f0c] */}
 
-The corrected comparison is the pair of 4U, three-80 mm-fan rows. At 8.5V and 24.3°C ambient, the left R69 rise was 61.3°C and the absolute reading was 85.6°C. At 12V and 22.6°C ambient, the rise was 51.4°C and the absolute reading was 74.0°C. The intervention therefore changed the recorded rise by 9.9°C and the absolute reading by 11.6°C. Earlier prose incorrectly called 22.6°C an internal rise, treated a margin-table value as a rise, and derived unsupported headroom; those claims have been retired.
+One useful comparison is the pair of 4U configurations with three 80 mm fans. The measurement point below is **left R69**; ambient temperature, rise above ambient and absolute temperature are separate values.
 
-### Structural crisis: the no-extrusion mandate
+| Measurement | Fans at 8.5 V | Fans at 12 V |
+| --- | ---: | ---: |
+| Ambient | 24.3°C | 22.6°C |
+| Left R69 rise | 61.3°C | 51.4°C |
+| Left R69 absolute | 85.6°C | 74.0°C |
 
-The 4U thermal architecture needed a wider, taller load path just as the cost assumptions declared: `There will be no extrusions.` The inherited Profile comparison showed why. Extrusions accounted for $121.70 per unit, or 6.8% of that control-surface rollup.
+The recorded rise differs by 9.9°C and the absolute reading by 11.6°C. Ambient conditions also differed, so these are observed configuration comparisons, not a controlled proof that voltage alone caused the full change. The 75°C log entry is an observed shutdown, not an established BIOS threshold or a basis for claiming safety margin. {/* ^[evidence:LK-38a9bda1] */}
 
-The SC48 sheet-metal packet includes the 4U Rake Back I-Beam, P/N 9420-58317-00. Its folded section created the structural spine using fabricated steel. The cost workbook kept CNC and hard-tool options explicit rather than collapsing them into a single production claim.
+The later reports show why temperature alone could not settle the enclosure. A late-November 4U rake trial, using one 80 mm and one 120 mm fan, was reported thermally and acoustically acceptable. It still had significant electromagnetic noise, with the power supply under the analog-to-digital converters. That mixed-fan arrangement was distinct from the numerical comparison above. {/* ^[evidence:LK-4c45a3af] */}
 
-The CNC sheet-metal model totaled $521.46 across 38 line items plus a $40 contingency, for a $561.46 piece-part total. The Profile comparison is retained as a benchmark, not presented as SC48's total system cost: Profile sheet metal was $366.29 of $1,801.29, or 20.33%.
+December testing returned to 3U. Four-fan crossflow worked without the filter and side cover but failed with them fitted. Front-to-back airflow with three internal 80 mm fans worked at both 12 V and 8.5 V, and preliminary EM behavior was better than the 4U arrangement. Acoustic verification was still due; a hybrid with a 3U back and 4U front was also being tested. These trials establish the trade space, not the final production configuration. {/* ^[evidence:LK-96661432] */}
 
-### Embedded-computer integration
+The duct record makes the physical work tangible. Die-cut, scored and formed LDPE parts guided air through the package; a later quote grouped three ducts, a filter and a gasket as a kit. The ducts, enclosure openings and cosmetic parts belonged in the same evaluation because they jointly defined the available airflow path. {/* ^[evidence:LK-d654ff71] ^[evidence:LK-e6fea936] */}
 
-The Kontron motherboard sat behind a dedicated 4U back panel and PCI frame, P/N 9420-58318-00. Separate left and right I/O brackets, P/Ns 9420-58326-00 and 9420-58327-00, carried the mechanical interfaces at the enclosure boundary. The BOM independently identifies the internal Ethernet extension, P/N 9180-26139-00.
+## The control surface was a mechanical interface
 
-This record supports the physical architecture - a commercial embedded motherboard packaged behind console-specific steel and cable interfaces. It does not support the former claims of zero I/O failures, vibration isolation, or a field-replaceable engine block, so those statements have been removed.
+The surface layout controlled more than appearance. A January keepout overlay explicitly prohibited through-hole components in a region beneath the artwork. The annotation records a clearance constraint; it does not prove that an assembled unit had collided there. {/* ^[evidence:LK-c2323dde] */}
 
-### Cosmetic shell and tooling
+The interface drawings could not be finished independently of the product layout. In January, control-surface PCB DCD work was waiting for the final surface arrangement. By February, I was incorporating revised artwork into CAD, printing the layout at full scale for Product Marketing, and working through board outlines and connector placement with the electronics team. The mechanical definition had to keep the visible controls and the board beneath them aligned. {/* ^[evidence:LK-f3114028] ^[evidence:LK-e6fea936] */}
 
-The plastics ledger distinguishes three parts: left side cover 9440-58841-00, right side cover 9440-58842-00, and front bolster 9440-58843-00. It assigns $36,000 of tooling to the left side cover and no separate tooling charge to the right, supporting a shared-tool interpretation without claiming a second invoice was literally avoided. The front bolster carries a separate $30,000 tooling entry.
+The main-left Design Control Document, DCD-9150-58331-00, shows that progression directly. Its revision history runs from initial release on February 25 through artwork and layout alignment, a mounting-hole deletion and 10-pin connector move, then three mounting-hole moves on April 7, 2008. Those are specific physical interfaces under revision, not a count of circuit designs attributed to mechanical engineering. {/* ^[evidence:LK-847f6299] */}
 
-The selected visual set contains the right side cover and front bolster. The earlier page mislabeled 9440-58842-00 as both side caps and overstated unsupported texture and assembly details; the captions below now follow the part and cost records.
+The same coordination extended to suppliers. The initial PCI-extender DCD went to Portwell in December. The compact PCI-frame render shown below illustrates one part definition from the visual index and cost record; the earlier prototype drawing carrying the same part number depicts a different, full-width back panel. The image is captioned as the compact frame rather than used to reconstruct a final enclosure assembly. {/* ^[evidence:LK-892b6799] ^[evidence:LK-2b5acc03] ^[evidence:LK-d654ff71] ^[evidence:LK-36b055d6] */}
 
-## Governance and evidence
+## Controls, plastics and access developed together
 
-The local evidence contains two bounded release packets: 26 sheet-metal fabrication drawings and 17 PCB Design Control Documents. These quantify the documentation surface without assigning electrical ownership to the mechanical role. Named collaborators remain in private synthesis; the available primary record does not establish a sufficiently complete, consent-aware public cast, so the cast instrument is not applicable for this pass.
+The external parts were still being negotiated alongside the electronics. Three plastic approaches were developed for review; the selected direction used left and right side covers and a front bolster, without a rear trim piece. Subsequent work included the ACS encoder ring, the side-cover slot for a mouse tray, and the bolster's relationship to the CD drive. {/* ^[evidence:LK-b77006a3] ^[evidence:LK-70387c92] */}
 
-NotebookLM was used as a historical research surface, not as the publication authority. Its 30 sources, 67 notes, and 26 completed audio artifacts are preserved locally with a dated reconciliation. Public claims resolve to the curated evidence IDs in frontmatter. The previously selected public audio briefing is no longer linked because its transcript repeats the retired thermal figures and drifts into other product histories.
+The March reports distinguish alternatives from decisions. Full-size and slimline CD versions of the bolster were being prepared for SLA evaluation. Several ACS encoder versions followed. By late March, the third encoder design had been released for quotation and prototype work, and the slimline CD had been selected for further detailing. The pictured cover and bolster establish their component geometry; their render colors and shapes do not, by themselves, identify the final finish or CD revision. {/* ^[evidence:LK-70387c92] ^[evidence:LK-c5ba40c0] ^[evidence:LK-2c61a0cc] */}
 
-## Quantified impact
+## Structure and the cost of making it
 
-- **Observed** a hard shutdown at 75°C in the surviving thermal log.
-- **Tested** 17 thermal configurations across chassis and fan variables.
-- **Reduced** the comparable left R69 rise from 61.3°C to 51.4°C and the absolute reading from 85.6°C to 74.0°C by moving the three-fan 4U row from 8.5V to 12V.
-- **Modeled** the CNC sheet-metal piece-part total at $561.46 per unit, including a $40 contingency.
-- **Removed** the $121.70-per-unit extrusion category present in the Profile benchmark from the SC48 architecture.
-- **Released** a 26-drawing sheet-metal packet alongside a 17-document PCB design-control packet.
+The no-extrusion assumption directed the structural work toward fabricated sheet metal. The prototype 4U rake-back I-beam, P/N 9420-58317-00, shows a folded, perforated section with a 1.5 mm material note. Its October 2007 drawing is marked prototype, prepared by `pd` and checked by `en`. It supports the structural approach without assigning every drawing to one author or declaring that prototype to be the shipped chassis. {/* ^[evidence:LK-36b055d6] */}
 
-## Source trail
+The cost model kept CNC and hard-tool scenarios separate. One sheet-metal piece-part model totaled $521.46 plus $40 contingency, or $561.46 per unit. The $121.70 extrusion category belonged to the Profile benchmark. Removing extrusions from SC48's assumptions did not establish that amount as realized savings. {/* ^[evidence:LK-4648f58c] ^[evidence:LK-de32ae27] */}
 
-- `SC48_lux_thermal-testing.pdf` - 17-configuration matrix, rise and absolute-temperature tables, and the observed shutdown line.
-- `KTD-00691-J 986LCD-M Family User Manual.pdf` - 0-60°C forced-cooling operating envelope and ±7°C external-sensor precision.
-- `early-PRD-etc.pdf` - integrated-console, I/O, size, and sub-$15,000 COGS requirements.
-- `SC48_REV-1_shtmtl-parts.pdf` - the 26-drawing mechanical release packet, including the 4U rake-back I-beam and I/O brackets.
-- `SC48_PCB_DCDs.pdf` - the 17-document board-interface control packet.
-- `Lux_CoGs_REV_6.xls` - 38-line sheet-metal model, $521.46 subtotal, and $561.46 total with contingency.
-- `CAPALDI COGs analysis.xls` - Profile comparison: $121.70 extrusions and 20.33% sheet-metal share.
-- `BOM_GoGs_etc.pdf` - no-extrusion and side-cooling assumptions, fan-duct construction, plastics tooling, and Ethernet extension.
-- `20080215_LUX_SHTMTL_QUOTE.pdf` - final VTech sheet-metal quote in the preserved source set.
-- `SC48_plastic-parts-visual-index.pdf` - visual identification for selected plastic parts.
+Plastics had a separate tooling account: $36,000 assigned to the left side-cover tool, no separate right-side tooling charge, and $30,000 for the bolster. That allocation supports a shared side-cover tool interpretation. It does not establish a canceled invoice, final supplier selection or an achieved production cost. {/* ^[evidence:LK-d654ff71] */}
+
+The delivery work continued through corrected sheet-metal packages, quote comparisons and supplier feedback. February reporting records the corrected documentation package delivered for sourcing; March reporting records additional quotes and continued incorporation of sheet-metal feedback. Quotation, prototype release and production qualification remain different milestones. {/* ^[evidence:LK-e6fea936] ^[evidence:LK-2c61a0cc] */}
+
+## What the work delivered
+
+The documented contribution spans enclosure and cooling studies, mechanical/electrical interface control, control-surface and plastic development, and fabrication definition. The clearest result is a connected engineering record: test arrangements informed packaging choices, physical constraints reached the board layouts, and changing controls and component interfaces were carried into successive drawings and supplier packages. {/* ^[evidence:LK-96661432] ^[evidence:LK-847f6299] ^[evidence:LK-e6fea936] */}
+
+SC48 became a commercial integrated VENUE console. Avid's later systems datasheet describes the local-I/O SC48 separately from SC48 Remote. That product context is distinct from the development record presented here, which does not establish the final chassis/fan/filter revision, final acoustic/EM qualification or the exact endpoint of my production support. [Avid VENUE systems datasheet](https://cdn-www.avid.com/-/media/avid/files/generic-products-pdf/systems_ds_a4_04_25_2013.pdf).
+
+## Source notes
+
+The account draws on the requirements and high-reuse planning package, thermal comparison tables, Lux weekly engineering reports, PCB DCD revisions, prototype sheet-metal drawings, cost models and component visual indexes. The weekly sequence follows the original archive filenames; later exports refreshed the documents' displayed date fields. Exact DCD revision dates come from the drawing itself.
+
+The selected visuals distinguish early planning, a clearance annotation, a board-interface drawing and component renders. They explain the documented design work without presenting a reconstructed final production assembly.
