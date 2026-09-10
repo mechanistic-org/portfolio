@@ -168,7 +168,7 @@ const navNext = nextProject
 			description={d.description}
 			audioUrl={d.audio_url}
 			photoCount={images.length || undefined}
-			mediaCountLabel={["sundance", "sc48", "d-control"].includes(d.slug) ? "images" : undefined}
+			mediaCountLabel={["sundance", "sc48", "d-control", "d-command"].includes(d.slug) ? "images" : undefined}
 		/>
 
 		{contextRibbon && <ContextRibbon model={contextRibbon} />}
@@ -183,7 +183,7 @@ const navNext = nextProject
 					useContinuityRails ? (
 						<ProjectContinuityRail
 							side="left"
-							mediaCountLabel={["sundance", "sc48", "d-control"].includes(d.slug) ? "images" : undefined}
+							mediaCountLabel={["sundance", "sc48", "d-control", "d-command"].includes(d.slug) ? "images" : undefined}
 							projectTitle={d.title}
 							scenes={activeRailScenes}
 							headings={headings}
@@ -352,7 +352,8 @@ const navNext = nextProject
 	[data-project-article="c24"] :global([id]),
 	[data-project-article="ksystem-120"] :global([id]),
 	[data-project-article="sc48"] :global([id]),
-	[data-project-article="d-control"] :global([id]) {
+	[data-project-article="d-control"] :global([id]),
+	[data-project-article="d-command"] :global([id]) {
 		scroll-margin-top: 6rem;
 	}
 </style>

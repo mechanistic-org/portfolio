@@ -4,182 +4,164 @@ slug: d-command
 tier: deep_dive
 category: control_surface
 client: []
-date: 2004-01-01 12:00:00+00:00
-description: The mid-format control surface that integrated D-Control architecture into a cost-effective $15k package.
+date: 2004-04-14 00:00:00+00:00
+description: Adapting a studio-console architecture through component reuse, mechanical interfaces, coated panels and production transfer.
 draft: false
 employer: digidesign
 heroImage: /assets/d-command/d-command-hero-01-xl.webp
 industry: pro_audio
 job_title: mechanical_engineer
 forensic_metrics:
-  financial: $5,000 expedite fee waived in negotiation; 100 feet of internal snake cable eliminated per unit; cost-down single-color LED architecture validated thermally.
-  process: 50% fader-pan rejection contained with 100% manual flatness inspection; 61°C heatsink reading held through cable-routing process discipline; sub-4-ohm conductive skin verified.
-  governance: Solo mechanical-drawing mandate documented as a governance risk; UL NOA April 19, 2005, nine days before first customer ship; cross-functional product responsibilities remain explicit.
+  process: 'December 2004 panel samples: less than 4 ohms corner-to-corner, with no sticky buttons reported.'
+  governance: UL Notice of Approval April 19, 2005; first customer ship April 28. Post-ship mechanical work continued.
 forensic_summary:
-  trigger: A plastic-topped cost-down console had to survive fanless thermal stress, recover a 50% fader-pan rejection, close an AC-withdraw safety failure, and pass emissions.
-  intervention: Engineered a conductive-coated, copper-bridged, gasketed plastic Faraday cage; enforced thermal discipline through manufacturing instructions; cold-worked the pan inventory while the vendor fixed its process; re-specified the bleeder to pass UL.
-  result: The cross-functional program moved from UL Notice of Approval to first customer ship in nine days while a solo mechanical-drawing mandate remained an explicit governance risk.
+  trigger: Bring a larger console architecture into a compact main unit and fader module while reusing selected structure and electronics.
+  intervention: Define mechanical interfaces, adapt extrusion machining, develop coated plastic panels and carry part and assembly drawings into production.
+  result: D-Command shipped in April 2005, followed by a documented transfer of remaining improvements to manufacturing.
 production: production
 productionScale: series
 tags:
-- Crisis
-- Yield
-- Leadership
-- Mechanism
-teamSize: Cross-functional
-theme: hyperspace
+- mechanical
+- dfm
+- npi
+theme: article
 tools:
 - pro_engineer
+listed: true
+duration: 2004-2005 documented work
+scars:
+- label: Coating and button clearance
+  value: Below 4 ohms on reviewed samples
+  description: The conductive treatment needed electrical continuity without restricting button movement.
+  severity: major
+  phase: pilot
+  anchor: a-conductive-skin-that-still-let-the-buttons-move
+  trigger: Early conductive coating built up in button openings.
+  intervention: Revise the coating process and check electrical resistance and button movement on new panel samples.
+  result: December samples were approved for texturing after sub-4-ohm readings and no sticky buttons.
+  evidence:
+  - EV-b70eaf0a39b2
 cyberspace:
+  enable: true
   layout: linear
   stickies:
-  - caption: The control-room and product views establish D-Command's deployed form and scale. They do not establish the launch or compliance metrics reported above.
-    data:
-      columns: 3
-      layout: masonry
-      scattered: true
-      images:
-      - alt: Control room 3
-        src: /assets/d-command/bubbles/01_intro/Control room 3.JPG
-        aspectRatio: 1.5
-      - alt: D-CommandLarge
-        src: /assets/d-command/bubbles/01_intro/D-CommandLarge.jpg
-        aspectRatio: 1.5
-    featuredIndices: []
-    id: 01_intro
+  - id: product
     type: gallery
-    title: Intro
-    deck: []
-  - caption: Labeled main-unit and fader-unit views show the modular control-surface arrangement; the internal photo provides mechanical context without assigning electrical or software ownership.
+    title: The modular surface
+    caption: 'Top view of a 24-fader D-Command configuration: the 16-channel fader module sits beside the main unit and its eight channel strips. Product context, not a thermal or compliance test.'
     data:
-      columns: 3
+      columns: 1
       layout: masonry
-      scattered: true
       images:
-      - alt: D-Command_fader_top
-        src: /assets/d-command/bubbles/02_architecture/D-Command_fader_top.jpg
-        aspectRatio: 1.5
-      - alt: danko_fader_withlabels
-        src: /assets/d-command/bubbles/02_architecture/danko_fader_withlabels.png
-        aspectRatio: 1.5
-      - alt: danko_main_withlabels
-        src: /assets/d-command/bubbles/02_architecture/danko_main_withlabels.png
-        aspectRatio: 1.5
-      - alt: DSC03259
-        src: /assets/d-command/bubbles/02_architecture/DSC03259.jpg
-        aspectRatio: 1.5
+      - src: /assets/d-command/bubbles/01_intro/D-CommandLarge.jpg
+        alt: Top view of D-Command, showing the fader module on the left and main unit on the right.
+        aspectRatio: 1.8199233716475096
     featuredIndices: []
-    id: 02_architecture
-    type: gallery
-    title: Architecture
     deck: []
-  - caption: These chassis and internal views provide assembly context for the AC-harness and shielding discussion. Compliance results remain grounded in the reviewed records, not inferred from the photographs.
+  - id: layout
+    type: gallery
+    title: An early main-unit layout
+    caption: Annotated PC2 Jr main layout, Rev 6, dated October 3, 2003. The labels describe provisional assembly divisions; the visible placeholder part numbers are not released part identities.
     data:
-      columns: 3
+      columns: 1
       layout: masonry
-      scattered: true
       images:
-      - alt: DSC03110
-        src: /assets/d-command/bubbles/03_regulatory/DSC03110.JPG
-        aspectRatio: 1.5
-      - alt: DSC03112
-        src: /assets/d-command/bubbles/03_regulatory/DSC03112.JPG
-        aspectRatio: 1.5
-      - alt: DSC03113
-        src: /assets/d-command/bubbles/03_regulatory/DSC03113.JPG
-        aspectRatio: 1.5
+      - src: /assets/d-command/bubbles/02_architecture/danko_main_withlabels.png
+        alt: Early annotated main-unit layout with eight channel strips, processing controls and provisional assembly labels.
+        aspectRatio: 0.8363780778395552
     featuredIndices: []
-    id: 03_regulatory
-    type: gallery
-    title: Regulatory
     deck: []
-  - caption: Part details and dimensional-control views show the mechanical documentation surface. They support design context, while the yield figures depend on the reviewed correction record.
+  - id: assembly
+    type: gallery
+    title: Structure beneath the controls
+    caption: Crop from main-unit assembly drawing 9100-12900-00 Rev B, sheet 2 of 5. The lifted control assembly exposes the perforated pan, supporting rails and power supplies. Numbered callouts belong to the original drawing.
     data:
-      columns: 3
+      columns: 1
       layout: masonry
-      scattered: true
       images:
-      - alt: DSC03122
-        src: /assets/d-command/bubbles/04_quality/DSC03122.JPG
-        aspectRatio: 1.5
-      - alt: DSC03123
-        src: /assets/d-command/bubbles/04_quality/DSC03123.JPG
-        aspectRatio: 1.5
-      - alt: DSC03182
-        src: /assets/d-command/bubbles/04_quality/DSC03182.JPG
-        aspectRatio: 1.5
-      - alt: PCll_Jr_Rev6_Fader_Print
-        src: /assets/d-command/bubbles/04_quality/PCll_Jr_Rev6_Fader_Print.jpg
-        aspectRatio: 1.5
-      - alt: PCll_Jr_Rev6_Main_Print
-        src: /assets/d-command/bubbles/04_quality/PCll_Jr_Rev6_Main_Print.jpg
-        aspectRatio: 1.5
+      - src: /assets/d-command/full-pass-248/main-unit-open.webp
+        alt: Main-unit assembly drawing with channel-strip controls lifted above the pan and rails, and power supplies visible on the right.
+        aspectRatio: 1.75658419792498
     featuredIndices: []
-    id: 04_quality
-    type: gallery
-    title: Quality
     deck: []
+  - id: masking
+    type: gallery
+    title: The panel and its coating boundaries
+    caption: Retained masking-detail sheet for plastic main-bottom panel 9440-12920-00. It shows the panel underside, openings and masking boundaries. The Rev B history removes sheet 2; this view documents design history and is not the released work instruction.
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/d-command/full-pass-248/main-panel-masking.webp
+        alt: Historical drawing of the control-panel underside with openings, bosses and coating-mask callouts.
+        aspectRatio: 1.5449438202247192
+    featuredIndices: []
+    deck: []
+teamSize: Cross-functional
+endDate: 2005-05-13 00:00:00+00:00
 ---
 
-# D-Command (Danko)
+# D-Command: adapting a console architecture
 
-## Project summary
+D-Command, known internally as Danko, brought D-Control's control-surface architecture into a smaller console. My responsibility was lead mechanical engineering, including the part and assembly drawings, more than 24 unique sheet-metal parts and nine PCB dimensional-control drawings. Reuse reduced the amount of new hardware, but it left a substantial integration problem: inherited controls and boards had to meet new panels, a compact structure and a different manufacturing process. Electrical design, software, industrial design, sourcing, regulatory execution and production remained shared responsibilities. {/* ^[evidence:LK-7af43865] ^[evidence:EV-b70eaf0a39b2] */}
 
-- **Role boundary:** Lead Mechanical Engineer with a documented solo mandate for part and assembly drawings. Electrical design, software, industrial design, sourcing, regulatory execution, supplier production, and the wider launch remained cross-functional responsibilities.
-- **Mandate:** Engineer the mid-format Danko console on D-Control's architecture under aggressive cost-down reuse. The mechanical record spans more than 24 unique sheet-metal parts, nine PCB dimensional-control drawings, the plastics set, and the assembly drawings.
-- **Core result:** The program recovered bowed fader pans, validated the fanless thermal arrangement, closed conductive-coating and EMI gaps in the plastic top covers, and passed the failed AC-withdraw test. UL Notice of Approval arrived April 19, 2005, nine days before the April 28 first customer ship.
+## A compact main unit with room to expand
 
-## The anatomy of failure
+The main unit combined eight channel strips with transport, monitoring and dedicated processing controls. A separate 16-channel fader module made a 24-fader system. External analog monitoring connections went through XMON, a separate shared interface controlled from the console. That distinction matters to the mechanical account: packaging the D-Command controls and integrating their interfaces did not make the whole monitoring system my design. {/* ^[evidence:EV-914b078a3ebb] ^[evidence:EV-ac69fd5a210e] */}
 
-### Vegas Mode thermal stress
+The assembly drawings show the structure beneath the surface. Extruded rails and sheet-metal parts support the panel assemblies above a perforated pan. The main unit packages channel-strip hardware beside the larger control sections, with power supplies below. The boards, switches, knobs, panel openings and structural supports have to agree on where each interface sits. A PCB dimensional-control drawing defines that mechanical agreement; circuit and PCB-layout work remained with the electrical team. {/* ^[evidence:EV-914b078a3ebb] ^[evidence:EV-b70eaf0a39b2] */}
 
-The August 2004 test record exercised every motorized fader while nearly every LED was lit, with the unit flat on a table to restrict the bottom intake. The internal "attic" rose from 31°C to 41°C and the LED-supply heatsink from 56°C to 61°C. The supplies were rated for 50°C ambient, so the absolute heatsink temperature is not presented as a temperature-margin figure.
+## Reuse changed the machining and the interfaces
 
-The response was process discipline rather than a hardware redesign. Manufacturing instructions kept the internal cable bundle away from the power supplies so it could not block the natural-convection path, and the user guide carried the airflow warning. The console remained stable through forty minutes of stress. The record also ties the lower heat load to a single-color LED architecture with 25% fewer emitters and half the driver chips.
+In June 2004, I sent extrusion prototype definitions that retained existing D-Control rails unchanged and reused other extrusion blanks with different secondary machining. The November parts list and December assembly trees show the same approach at another level: new D-Command structure and electronics alongside selected inherited board assemblies. Reuse was a part-by-part decision, not a uniform reduction of the larger console. {/* ^[evidence:EV-b70eaf0a39b2] ^[evidence:EV-914b078a3ebb] */}
 
-### Fader-pan yield and green light bleed
+One useful tradeoff concerned the transport-switch board. In May, Marc Schuman recorded the team's decision to mount it from below instead of proceeding with the earlier arrangement and its additional molded cover. I participated with Neal Breitbarth, Gannon Kashiwa, Bob Gardyne and Marc. The change required a new dimensional-control drawing and PCB layout, but no electrical changes. Avoiding extra tooling was a reason for the decision; the correspondence does not turn the estimate into a measured program saving. {/* ^[evidence:EV-b70eaf0a39b2] */}
 
-PEM insertion stretched the sheet metal and bowed the first fader-pan lot; 21 of 42 parts were rejected. Immediate containment used 100% manual flatness inspection and table-edge cold work to recover usable stock. The unnamed vendor then changed its insertion control and added a flattening operation. The record supports containment and correction, not a claim that the response produced a permanent zero-defect endpoint.
+The inherited main-meter board offered a smaller example. Marc asked whether its unused lower extension could be removed for Danko without moving the mounting holes. I confirmed that there was no mechanical reason to keep it, and the team proceeded with the simpler outline. The mounting interface stayed stable while unneeded board area could be removed. {/* ^[evidence:EV-b70eaf0a39b2] */}
 
-At the same time, chassis contact with LCD flex cables stressed solder joints and leaked green light into mute switches. Relief cuts in the subassembly cleared the flex cables instead of accepting the interference as an assembly variation.
+The visible shape also received its own review. A September discussion preferred a smooth side-plastic treatment over a scaled version of Buckley's gills. Eli Manjarrez recorded the shared decision after meeting with Stan and me. The choice was one part of the team's industrial-design work. {/* ^[evidence:EV-b70eaf0a39b2] */}
 
-### Plastic enclosure and EMI closure
+## A conductive skin that still let the buttons move
 
-Danko used injection-molded ABS top covers where D-Control used steel. Conductive coating turned the plastic into part of the shielding system, but early coating buildup in button holes caused sticking. A revised coating and masking process was verified below 4 ohms corner-to-corner without button friction.
+D-Command's molded ABS control panels replaced steel top covers used on D-Control. The plastic needed conductive coating to participate in the enclosure's shielding, while its many openings still had to clear switches and other controls. The panel drawings connect those concerns: material requirements, openings, bosses, masking and appearance surfaces all belong to the same part. {/* ^[evidence:LK-7af43865] ^[evidence:EV-914b078a3ebb] */}
 
-The closure chain remained specific: ECO 6531 added copper foil to bridge coated plastic to chassis ground; ECO 8114 released the missing EMI gasket; routing and gasket sealing addressed leakage near the RJ45 port. Slot geometry had been controlled in CAD and the enclosure passed its first pre-scan without a geometry change. The final system passed FCC Class A, CE, and Canadian emissions.
+Early coating buildup interfered with button movement. In December 2004, I reported receiving the three panel types with a revised EMI-coating formula, measuring less than 4 ohms corner-to-corner and finding no sticky buttons. I approved those samples for texturing. This was a specific sample disposition, not a claim that every production panel was defect-free. {/* ^[evidence:EV-b70eaf0a39b2] */}
 
-### AC-withdraw compliance
+The coating was only one part of enclosure closure. ECO 6531 added copper foil to bridge the coated plastic to chassis ground; ECO 8114 addressed the missing EMI gasket. Routing and sealing also mattered near the RJ45 opening. The final system passed FCC Class A, CE and Canadian emissions. These were connected mechanical and electrical efforts, with the later gasket work still appearing in the post-ship cleanup list. {/* ^[evidence:LK-7af43865] ^[evidence:EV-b70eaf0a39b2] */}
 
-Pre-production units failed the UL AC-withdraw test because voltage on the unplugged mains pins did not fall below 60 Vdc within two seconds. The AC-harness bleeder changed from 1 MΩ to 750 kΩ. Production then moved to a line filter with a built-in bleeder, removing the manual crimp. The plastic and PCB records also maintained a UL 94 V-0 material requirement.
+## Testing the fanless arrangement
 
-UL issued its Notice of Approval on April 19, 2005. The first customer ship followed on April 28. Those anchors support the nine-day compliance-to-ship interval; the surviving date fields do not support an exact total project duration, so none is claimed here.
+Marc Schuman and Gannon Kashiwa ran the August 2004 thermal trial on the fader unit, which combined a smaller enclosure with greater dissipation than the main unit. The unit sat flat on a table, restricting the underside air entry. Marc estimated room temperature at 20-22°C. The record separates two operating conditions: {/* ^[evidence:EV-b70eaf0a39b2] */}
 
-## Governance and evidence
+| Test condition | Internal “attic” | LED-supply heatsink |
+| --- | --- | --- |
+| Continuous fader motion in Vegas Mode, after roughly 30-40 minutes | 31°C | 56°C |
+| Pro Tools operation with nearly all LEDs lit and the faders moving | 41°C | 61°C |
 
-The mechanical-documentation assignment concentrated the part and assembly drawing work in one engineer while D-Control sustaining work continued. That is recorded as a single-point governance risk inside a cross-functional program, not as sole ownership of the product or launch.
+Marc and Eli explicitly called the results preliminary. They were useful evidence about the arrangement, not a substitute for complete qualification. A heatsink reading also cannot be subtracted from the supply's ambient rating to produce a temperature margin. {/* ^[evidence:EV-b70eaf0a39b2] ^[evidence:LK-7af43865] */}
 
-Two bounded logistics results remain in the accepted record: 100 feet of internal snake cable was eliminated per unit through routing changes, and a single $5,000 expedite fee was waived against accepted schedule slack. No vendor is named, and no broader tooling-fee claim is made.
+The mechanical response preserved the natural-convection path. Manufacturing instructions kept the internal cable bundle away from the supplies, and the user guidance carried the airflow warning. The production method had to preserve the air space on which the fanless design depended. {/* ^[evidence:LK-7af43865] */}
 
-NotebookLM remains a research surface rather than publication authority. The dated local reconciliation accounts for all 36 primary sources, 29 notes, eight primary audio artifacts, five arbitration sources, and four arbitration-audio records. The former public briefing is no longer linked because its generation instructions encouraged unsupported attribution. Local preservation satisfies custody without carrying that drift into the public page.
+## Drawings were an integration responsibility
 
-## Quantified impact
+By January 2005, the main and fader assembly drawings were circulating for review. In February, Neal described me as working solo on the part and assembly drawings while other team members helped with BOM and SAP work. Reviewers still needed time for redlines and access to the correct revisions. Concentrated drawing ownership existed inside a cross-functional release process. {/* ^[evidence:EV-b70eaf0a39b2] */}
 
-- **Recovered** usable parts from a lot in which 21 of 42 fader pans were rejected, while the vendor corrected its process.
-- **Validated** stable operation through a forty-minute Vegas Mode stress test with a 61°C LED-supply heatsink reading.
-- **Verified** the conductive coating below 4 ohms corner-to-corner without button friction.
-- **Closed** the failed AC-withdraw test by changing the bleeder from 1 MΩ to 750 kΩ.
-- **Eliminated** 100 feet of internal cable per unit and **negotiated** one $5,000 expedite-fee waiver.
-- **Reached** first customer ship nine days after UL Notice of Approval.
+That responsibility linked the physical design to the build. The main-unit drawing carries the panel and board assemblies, rails, pan and supplies into one assembly definition. The plastic drawing carries changes through tooling, transport-switch webs and conductive treatment. A design change could require a corresponding drawing, BOM, board-interface or manufacturing update before the intended hardware reached the line. {/* ^[evidence:EV-914b078a3ebb] */}
+
+## Compliance and the production handoff
+
+The pre-production AC-withdrawal test found that unplugged mains-pin voltage did not fall below 60 Vdc within two seconds. Phong Do and Ken Lee worked with UL on the failure. The line-to-neutral bleeder changed from 1 MΩ to 750 kΩ; production later moved to a filter with an integral bleeder, removing the manual harness crimp. This was a regulatory and electrical correction that also affected the assembly process. {/* ^[evidence:EV-b70eaf0a39b2] ^[evidence:LK-7af43865] */}
+
+UL issued its Notice of Approval on April 19, 2005. First customer ship followed on April 28, nine days later. That launch did not end mechanical work. The May cleanup list still tracked gasket, label, rear-bracket, side-plate and fit changes, and distinguished identified ECOs from changes that had completed approval. {/* ^[evidence:EV-b70eaf0a39b2] ^[evidence:LK-7af43865] */}
+
+The same handoff separated remaining mechanical deliverables from further assembly improvements. Manufacturing would decide which of those improvements to pursue and implement, with me available as a consultant. The record establishes a transfer of responsibility, not that every suggestion was implemented or that May 13 was the exact end of my involvement. {/* ^[evidence:EV-b70eaf0a39b2] */}
+
+D-Command's mechanical work extended from adapting existing parts to defining new interfaces and carrying them into production. The useful result is visible in the assembled product, but also in the decisions beneath it: preserve a mounting pattern, change a secondary machining operation, control a coating boundary, protect an airflow path, and make the released drawings agree with the build.
 
 ## Source trail
 
-- `Danko PRD ver 1.0.pdf` - governing product and program requirements.
-- `03_Engineering_metal-parts.pdf` - fader-pan and sheet-metal drawing packet.
-- `03_Engineering_ASSYs.pdf` - assembly records and mechanical interfaces.
-- `03_Engineering_plastic-parts.pdf` - injection-molded covers, materials, and revision history.
-- `03_Engineering_ soft-parts.pdf` - conductive gasket and adhesive records.
-- `03_Engineering_cables.pdf` - cable and AC-harness records.
-- `03_Engineering_BOMs-CoGs-etc.pdf` - bill-of-material and cost packet.
-- `03_Engineering_PCBs.pdf` - PCB dimensional-control drawing packet.
-- `CANON_CORRECTIONS_DCOMMAND_2026-07.txt` - operator-ratified role, metric, schedule, and cross-project rulings.
+- Dated 2004-2005 correspondence: prototype definitions, shared interface decisions, thermal reports, drawing review, compliance and manufacturing handoff.
+- Original main and fader assembly drawings, November parts list and December-January assembly trees.
+- Plastic-panel drawing 9440-12920-00 and its retained masking sheet, read with the revision history.
+- Retained operator corrections for role boundaries, enclosure closure, thermal interpretation and the compliance-to-ship dates.
+- [Avid D-Command Guide, October 2011](https://resources.avid.com/SupportFiles/attach/Pro_Tools/10.0/ENGLISH/D-Command_Guide.pdf), for product configuration and the external XMON interface.
