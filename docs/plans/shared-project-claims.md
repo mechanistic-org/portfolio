@@ -1,9 +1,12 @@
 ---
-title: Shared project claims - proposed design and implementation plan
-status: implemented-candidate
+title: Shared project claims - implemented design and release record
+status: released
 recorded: 2026-09-10
 ticket: https://github.com/mechanistic-org/portfolio/issues/277
 sources:
+  - https://github.com/mechanistic-org/portfolio/issues/278
+  - https://github.com/mechanistic-org/portfolio/issues/278#issuecomment-5627050805
+  - https://github.com/mechanistic-org/portfolio/pull/280
   - https://github.com/mechanistic-org/portfolio/issues/277
   - https://eriknorris.com/how-i-work/
   - https://eriknorris.com/colophon/
@@ -30,10 +33,12 @@ canon. A public case study is one presentation of the record, not the database
 that the other presentations scrape.
 
 The operator subsequently directed implementation under [portfolio#278](https://github.com/mechanistic-org/portfolio/issues/278).
-The shared assertion package, consumers, drift checks, corrected site candidate
-and PDF preparation are implemented. [The operating contract](../agents/shared-claims.md)
-records the actual scope and commands. The candidate awaits exact page/PDF
-acceptance and publication; the earlier capture-only and P1-only stops are superseded.
+The shared assertion package, consumers, drift checks, corrected site and PDF
+were approved, merged and published on 2026-09-10 under portfolio#278.
+[The operating contract](../agents/shared-claims.md) records the actual scope
+and commands. Fourteen assertions now supply 29 references; all six changed
+pages, their evidence anchors and the published PDF passed live verification.
+The earlier capture-only and P1-only stops are superseded.
 The P1-P5 labels below remain design history, not separate GitHub tickets.
 
 ## Editorial context: the colophon satire
@@ -49,13 +54,13 @@ The earlier assessment must not turn this into a story about originally
 attempting to pass AI praise off as independent endorsement. Its present
 editorial effect and its original intention are distinct.
 
-Proposed disposition: retire the wall from the main colophon while preserving
+Accepted and shipped disposition: retire the wall from the main colophon while preserving
 the original material and its intent in Git history. A dated, clearly labeled
 historical outtake is an optional later editorial choice, not a required new
 page. Do not replace the wall with solemn AI testimonials or an apologetic
 disclaimer. Preserve the useful system architecture and build-log material.
-This disposition is separate from the claim-system implementation and remains
-a proposed change until the exact candidate is reviewed.
+The operator accepted this disposition with the exact claim/page/PDF candidate.
+Live verification confirmed that the main colophon no longer renders the wall.
 
 ## Problem and evidence boundaries
 
@@ -277,15 +282,18 @@ Retain the existing focused resume checks and publication integrity checks.
 Run the current repository-required type/build and affected browser/release
 checks when implementation changes runtime or presentation. The implementation requires the complete validation and exact candidate review described in the operating contract.
 
-## Current execution handoff
+## Released state
 
-Continue portfolio#278 against its live scope and current candidate receipt.
-The earlier P1-only planning handoff is superseded by the operator's direction
-to implement the solution. The code and migrated candidate now exist; do not
-restart the audit or replace execution with another proposal.
+The exact candidate was accepted in the [operator ruling](https://github.com/mechanistic-org/portfolio/issues/278#issuecomment-5627050805)
+and landed through [PR #280](https://github.com/mechanistic-org/portfolio/pull/280)
+with its paired private canon change. Approved source is
+`f5c6245b3651ba94c918b32921cb6005fe1fe655`; the frozen site artifact digest is
+`fae9518ffa64c97f175377c386e5fa973be0bc1bce1f852a5c090c30fb92d2a9`.
+The published PDF digest is
+`f10f2fa2fe261cbd91403b77ae7c4d744f17598ca70c067b2c807a338c5e7769`.
 
-Use the isolated site/canon worktrees named in the execution record, preserve
-the exact claim dispositions, verify the current candidate and operator
-ruling, then finish the authorized publication and normal closeout. A changed
-artifact needs a new exact review. Do not advance the independent #229 project
-campaign or edit its other active project account.
+All 43 claim/resume tests passed, along with project generation, Worker checks,
+29 live statements and anchors, 12 desktop/phone checks and three PDF delivery
+paths. The exact release and recovery identities are retained in the focal
+issue receipt. Future claim edits follow the operating contract above; this
+release does not advance the independent #229 project campaign.
