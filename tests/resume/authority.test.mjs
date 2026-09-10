@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { resumeMaster } from "../../src/config/resume_master.ts";
+import { claimFor } from "../../src/config/claim-presentations.ts";
 import {
 	resumeExperience,
 	jsonResume,
@@ -78,7 +79,7 @@ test("missing and duplicate canonical IDs fail instead of silently selecting an 
 });
 
 // Compare data through Node's TypeScript module loader, not regular-expression extraction.
-test("accepted #152 program-first prose and display mappings survive byte-for-byte", async () => {
+test("accepted #152 identity and LinkedIn survive; scoped achievements resolve through the shared claim projection", async () => {
 	const { execFileSync } = await import("node:child_process");
 	const { stripTypeScriptTypes } = await import("node:module");
 	const baseline = "1b2cd2f6eaba20544cef087d5e031f1e2dba8bac";
@@ -104,8 +105,15 @@ test("accepted #152 program-first prose and display mappings survive byte-for-by
 	});
 	resumeExperience().forEach((entry, index) => {
 		const old = oldResume.experience[index];
-		for (const key of ["company", "title", "location", "dates", "blurb", "bullets"])
+		for (const key of ["company", "title", "location", "dates"])
 			assert.deepEqual(entry[key], old[key]);
+		if (!["avegant-2015", "digidesign-2003"].includes(entry.id)) {
+			assert.deepEqual(entry.blurb, old.blurb);
+			assert.deepEqual(entry.bullets, old.bullets);
+		} else {
+			assert.deepEqual(entry.bullets, [0, 1, 2].map((slot) => claimFor(`resume:${entry.id}:${slot}`).text));
+			assert.doesNotMatch(entry.bullets.join(" "), /100% mechanical fit|40% seizure|35\.4%/);
+		}
 	});
 	assert.deepEqual(resumeMaster.summary, oldResume.summary);
 	assert.deepEqual(resumeMaster.competencies, oldResume.competencies);

@@ -1,6 +1,6 @@
 ---
 title: Shared project claims - proposed design and implementation plan
-status: proposed
+status: implemented-candidate
 recorded: 2026-09-10
 ticket: https://github.com/mechanistic-org/portfolio/issues/277
 sources:
@@ -29,11 +29,12 @@ achievements and colophon career cards should consume reviewed claims from
 canon. A public case study is one presentation of the record, not the database
 that the other presentations scrape.
 
-This is a captured proposal, not an adopted schema or implementation release.
-The operator authorized saving the revised design and implementation plan.
-That authorization does not approve new engineering claims, public wording,
-site changes, a ticket graph, or deployment. The implementation packages below
-are proposed units of work; their IDs are document-local, not GitHub issues.
+The operator subsequently directed implementation under [portfolio#278](https://github.com/mechanistic-org/portfolio/issues/278).
+The shared assertion package, consumers, drift checks, corrected site candidate
+and PDF preparation are implemented. [The operating contract](../agents/shared-claims.md)
+records the actual scope and commands. The candidate awaits exact page/PDF
+acceptance and publication; the earlier capture-only and P1-only stops are superseded.
+The P1-P5 labels below remain design history, not separate GitHub tickets.
 
 ## Editorial context: the colophon satire
 
@@ -274,30 +275,17 @@ Use consumer-facing contract tests for these failures. Final built-HTML tests
 check links and assembled output, not arbitrary-number extraction as truth.
 Retain the existing focused resume checks and publication integrity checks.
 Run the current repository-required type/build and affected browser/release
-checks when implementation changes runtime or presentation. This documentation
-capture requires document review and a clean exact-path diff, not a site build.
+checks when implementation changes runtime or presentation. The implementation requires the complete validation and exact candidate review described in the operating contract.
 
-## First-task handoff
+## Current execution handoff
 
-After separately authorizing P1 and giving it an execution ticket, use:
+Continue portfolio#278 against its live scope and current candidate receipt.
+The earlier P1-only planning handoff is superseded by the operator's direction
+to implement the solution. The code and migrated candidate now exist; do not
+restart the audit or replace execution with another proposal.
 
-> Execute only P1 from `docs/plans/shared-project-claims.md` in the portfolio
-> repository. Read its current version, the live focal ticket, current repo
-> instructions and the current canon SOPs. Use isolated planning/preview paths
-> named by that ticket. Inventory the actual claim occurrences in How I Work,
-> colophon career cards and resume project achievements against current C24,
-> SC48 and Glyph accepted records and exact rulings. Verify the current public
-> baseline; distinguish it from unapproved candidates. Produce one review
-> matrix and exact proposed replacement/hold wording, affected HTML/JSON/PDF
-> outputs, and the proposed retirement of the main colophon satire wall with
-> its original satirical intent preserved. Reuse existing research; route only
-> unresolved factual questions to the existing project records. Do not mutate
-> accepted canon, generated MDX, live copy, PDFs, deployment, or #229 selection;
-> do not start P2 or create child tickets. Finish the planning ticket's required
-> receipt and origin/main closeout, then stop at the concrete review packet.
-
-The P1 review decides exact public phrasing and any early editorial release.
-P2 resolves field names, per-project file layout, variant approval granularity
-and the exported package contract through the three real cases. Those are
-implementation decisions still to be made, not reasons to lose this proposal
-or repeat the original analysis.
+Use the isolated site/canon worktrees named in the execution record, preserve
+the exact claim dispositions, verify the current candidate and operator
+ruling, then finish the authorized publication and normal closeout. A changed
+artifact needs a new exact review. Do not advance the independent #229 project
+campaign or edit its other active project account.

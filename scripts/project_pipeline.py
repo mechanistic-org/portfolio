@@ -34,7 +34,7 @@ The old docstring claimed "non-destructive" because it never wrote the live
 index.mdx. It was defending the render target and overwriting the source of
 truth. The protection pointed backwards.
 """
-import hashlib, os, sys, json, re
+import hashlib, os, sys, json, re, subprocess, shutil
 from datetime import date
 import yaml
 
@@ -616,6 +616,11 @@ def extract():
 
 # ---------------------------------------------------------------- generate
 def generate():
+    # The Python pipeline and TS surfaces consume the same checked projection.
+    # Never write a project page while its shared assertion has drifted.
+    if os.path.exists(os.path.join(CANON_ROOT, "claims", "project-claims.json")):
+        claim_env = {**os.environ, "CANON_ROOT": CANON_ROOT, "EVIDENCE_ROOT": EVIDENCE_ROOT}
+        subprocess.run([shutil.which("node") or "node", os.path.join(REPO_ROOT, "scripts", "claims", "check.mjs")], env=claim_env, check=True)
     rec, record_body = read_mdx(CANON_REC)
     validate_sources(rec.get("sources", []))
     chronology = chronology_bytes(rec.get("sources", []))
