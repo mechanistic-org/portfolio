@@ -48,11 +48,15 @@ unpatched. Once the stack is on Astro >= 6, delete this note.
 
 ## Content model
 
-For project research, packet preparation, composition or source closure, read
+For project research, revisits, new sources or recollections, packet preparation,
+composition, source closure or handoff, read
 `D:\GitHub\portfolio-canon\DEEP_DIVE_SOP.md` and
 `D:\GitHub\portfolio-canon\NOTEBOOKLM_MIGRATION_SOP.md` before selecting a method.
 For campaign pickup, cold-read [portfolio#229](https://github.com/mechanistic-org/portfolio/issues/229)
 and follow its linked current execution contract and exact review gates.
+Resolve the selected project's `research_record` in the canon roster before
+asking about prior decisions; it links effective rulings, current source state,
+accepted candidates and carryovers. Follow exact references if search misses.
 The SOPs own research and receipt semantics; historical prompt/sidecar guides
 are provenance, not alternate operating instructions.
 
