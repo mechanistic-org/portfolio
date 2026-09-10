@@ -29,7 +29,7 @@ assert.match(revisions.context, /not ECO approval dates or manufacturing-release
 assert.match(revisions.context, /not an exhaustive history/u);
 assert.ok(!sidecarBytes.toString("utf8").match(/[A-Z]:[\\/]|portfolio_working|raw[\\/]/u));
 assert.equal(marks.filter((mark) => mark.scar_anchor).length, 1);
-assert.equal(marks.find((mark) => mark.rev === "B").scar_anchor, "7-component--geometry-battles");
+assert.equal(marks.find((mark) => mark.rev === "B").scar_anchor, "7-controls-and-molded-part-geometry");
 
 if (process.env.CANON_ROOT) {
 	const canonBytes = await readFile(
@@ -70,29 +70,29 @@ const specs = [
 				await page.$eval('[data-revision-mark="9420-56156-00:B"]', (node) =>
 					node.closest("a")?.getAttribute("data-scar"),
 				),
-				"7-component--geometry-battles",
+				"7-controls-and-molded-part-geometry",
 			);
 			await page.focus("rev-matrix");
 			await page.keyboard.press("Tab");
 			assert.equal(
 				await page.evaluate(() => document.activeElement?.getAttribute("href")),
-				"#5-integration-crisis-the-geometric-firewall",
+				"#5-board-to-mechanical-interfaces",
 			);
 			await page.hover('[data-revision-part="9150-55200-00"] .part-link');
 			assert.ok(
-				await page.$eval('[id="5-integration-crisis-the-geometric-firewall"]', (node) =>
+				await page.$eval('[id="5-board-to-mechanical-interfaces"]', (node) =>
 					node.classList.contains("scar-cross-hot"),
 				),
 			);
 			await page.mouse.move(1, 1);
 			assert.ok(
-				await page.$eval('[id="5-integration-crisis-the-geometric-firewall"]', (node) =>
+				await page.$eval('[id="5-board-to-mechanical-interfaces"]', (node) =>
 					node.classList.contains("scar-cross-hot"),
 				),
 			);
 			await page.focus("rev-matrix");
 			assert.equal(
-				await page.$eval('[id="5-integration-crisis-the-geometric-firewall"]', (node) =>
+				await page.$eval('[id="5-board-to-mechanical-interfaces"]', (node) =>
 					node.classList.contains("scar-cross-hot"),
 				),
 				false,
@@ -100,13 +100,13 @@ const specs = [
 			await page.hover('[data-revision-part="9150-55200-00"] .part-link');
 			await page.$eval('[data-revision-mark="9150-55200-00:1"]', (node) => node.focus());
 			assert.ok(
-				await page.$eval('[id="5-integration-crisis-the-geometric-firewall"]', (node) =>
+				await page.$eval('[id="5-board-to-mechanical-interfaces"]', (node) =>
 					node.classList.contains("scar-cross-hot"),
 				),
 			);
 			await page.mouse.move(1, 1);
 			assert.equal(
-				await page.$eval('[id="5-integration-crisis-the-geometric-firewall"]', (node) =>
+				await page.$eval('[id="5-board-to-mechanical-interfaces"]', (node) =>
 					node.classList.contains("scar-cross-hot"),
 				),
 				false,
@@ -116,13 +116,13 @@ const specs = [
 			await page.keyboard.press("Enter");
 			assert.equal(
 				await page.evaluate(() => location.hash),
-				"#5-integration-crisis-the-geometric-firewall",
+				"#5-board-to-mechanical-interfaces",
 			);
 			assert.equal(
 				await page.$eval('[data-revision-mark="9420-56156-00:B"]', (node) =>
 					node.closest("a")?.getAttribute("href"),
 				),
-				"#7-component--geometry-battles",
+				"#7-controls-and-molded-part-geometry",
 			);
 			for (const width of [1440, 768, 390, 320]) {
 				await page.setViewport({ width, height: 1000 });
@@ -183,7 +183,7 @@ const specs = [
 			await page.keyboard.press("Tab");
 			assert.equal(
 				await page.evaluate(() => document.activeElement?.getAttribute("href")),
-				"#5-integration-crisis-the-geometric-firewall",
+				"#5-board-to-mechanical-interfaces",
 			);
 			assert.ok(
 				await page.$eval('[data-revision-part="9150-55200-00"] .part-link', (node) => {
@@ -194,7 +194,7 @@ const specs = [
 			await page.keyboard.press("Enter");
 			assert.equal(
 				await page.evaluate(() => location.hash),
-				"#5-integration-crisis-the-geometric-firewall",
+				"#5-board-to-mechanical-interfaces",
 			);
 			assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
 			assertNoPageProblems(problems);

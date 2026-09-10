@@ -2,105 +2,93 @@
 title: C|24
 slug: c24
 tier: deep_dive
-audio_url: /assets/c24/c24-briefing.m4a
 category: control_surface
 client: []
 date: 2005-06-02 00:00:00+00:00
-description: 'Mechanical engineering lead for Digidesign''s C|24 control surface: a ground-up RoHS re-architecture that killed a ~$200/unit royalty, held a 51.8% gross margin through a supply-chain collapse, and shipped 500 units for Q4 2007 revenue.'
+description: 'Mechanical engineering and industrial-design ownership of Digidesign''s C|24: a low-profile console carried from surfaces and board interfaces through tooling, serviceability and production.'
 draft: false
 duration: 2.5 Years
 employer: digidesign
 endDate: 2007-11-07 00:00:00+00:00
 forensic_metrics:
-  financial: ~$200/unit royalty eliminated; 51.80% gross margin held against 20% steel inflation; $9,995 MSRP maintained.
-  process: Pilot cosmetic yield salvaged 100% (2.50 mm warp corrected to below 0.50 mm); headphone-jack MTTR cut from over 2 hours to under 10 minutes.
-  governance: 13 major ECOs in 6 months; 50+ Data Control Drawing releases enforced; 100% mechanical fit on first build of 19 PCB assemblies.
+  financial: Approximately $200 licensed-design royalty removed in the product brief; $9,995 product-master price at launch.
+  process: Documented vertical cure support; field-replaceable headphone jack; production inspection criteria revised against actual parts.
+  governance: 19 distinct PCBA designs in the June build register; 12 documented MicPre8 I/O drawing revisions; First Customer Ship November 7, 2007.
 scars:
-- label: Architecture — the EMI / thermal "rake"
+- label: Architecture - a quiet, low-profile console
   severity: critical
   phase: design
-  anchor: 3-architecture-crisis-the-emithermal-rake
-  value: fanless ship
-  trigger: The 4U chassis stacked the PSU directly under the A/D converters, producing catastrophic EMI — against a non-negotiable fanless mandate, since the console sits at the engineer's listening position.
-  intervention: 'Validated active-cooling fallbacks (a 4x 80 mm array failed once sealed; a 3x 80 mm arrangement met spec), then removed the heat source instead: re-architected to 3U and moved the PSU to an external Skynet brick with shielded cables.'
-  result: A silent, fanless console holding its 10–35 °C window and passing thermal qualification — the validated fan configs left on the bench as insurance.
-- label: Integration — the geometric firewall
+  anchor: 3-a-quiet-low-profile-console
+  value: external PSU
+  trigger: A lower-profile console with no fan at the listening position, while retaining the controls and audio functions of a full mixing surface.
+  intervention: Integrated the external-supply architecture, compact rear I/O and meter-board packaging with the exterior surface design.
+  result: A low-profile C24 with an external supply. The PDD specifies a 10-35 C operating environment.
+- label: Board-to-mechanical interfaces
   severity: major
   phase: design
-  anchor: 5-integration-crisis-the-geometric-firewall
-  value: 100% fit, first build
-  trigger: 19 PCB assemblies into a low-profile chassis, undermined by "wild west" file-swapping — MicPre 8 connectors crashed into the bottom pan; SubMix headers landed where workers could not reach.
-  intervention: 'Authored and enforced the Data Control Drawing protocol: 50+ binding geometric contracts overlaid against the 3D master and rejected on a 0.5 mm variance (the MicPre 8 DCD alone hit Rev 12).'
-  result: 100% mechanical fit on the first physical build, decoupling mechanical tooling from electrical layout iteration.
-- label: Component & geometry battles
+  anchor: 5-board-to-mechanical-interfaces
+  value: 19 PCBA designs
+  trigger: Nineteen distinct board assemblies had to align with controls, displays, fasteners and accessible cable routes.
+  intervention: Authored Data Control Drawings for the mechanical-electrical interfaces; the MicPre8 I/O drawing records twelve revisions.
+  result: Board outlines, holes and connector changes were controlled against the mechanical assembly during development.
+- label: Controls and molded-part geometry
   severity: major
   phase: design
-  anchor: 7-component--geometry-battles
-  value: premium feel, commodity cost
-  trigger: 'A running war across commodity parts and Class-A surfaces: the Bourns EM14 jog wheel''s six exposed 0.42 mm leads, "gill" curves breaking vendor CAD, "Kenny" cosmetic ripples and dull silkscreen, and dust behind the meter lens.'
-  intervention: Pre-terminated harness spec + custom surround (ECO 13082); rebuilt the Class-A gills in Pro/Engineer (16.5 h) and exported STEP in digestible chunks; First Article Inspection + ink recalibration; an adhesive foam seal instead of a mold retool; a ±0.05 mm tolerance fix (ECO 13526).
-  result: Preserved the premium "scrub" feel of a $10k console on commodity parts, and killed cosmetic defects without touching the schedule.
-- label: Firmware — the katakana ROM
-  severity: major
-  phase: design
-  value: 2407 flash exhausted
-  trigger: A custom character-ROM for Japanese katakana on the new Varitronix scribble strips ran the 2407 DSPs out of flash memory.
-  intervention: Reworked the character set and memory map with Stan Cotey and David Anthony.
-  result: Shipped — a firmware crisis hiding behind a cosmetic LCD upgrade. (Documented in §II, not a standalone crisis section.)
-- label: Thermal — the "banana" defect
+  anchor: 7-controls-and-molded-part-geometry
+  value: fit and manufacturability
+  trigger: The jog wheel, molded surfaces and meter-window interfaces needed to work with supplier processes and the adjacent geometry.
+  intervention: Designed the encoder support and surround; worked through molded-part fit and surface issues; relaxed an overly tight hole tolerance through ECO 13526.
+  result: Explicit drawing and inspection decisions for the parts the factory actually had to build.
+- label: Paint curing and side-cap fit
   severity: critical
   phase: pilot
-  anchor: 1-thermal-crisis-the-banana-defect
-  value: 2.50 → <0.50 mm
+  anchor: 1-paint-curing-and-side-cap-fit
+  value: vertical cure support
   evidence:
   - step-01-defect-gap
-  - step-02-method-c-failure
   - step-03-method-a-fix
   - step-04-validation-report
-  trigger: Proto 3 ABS side caps (P/N 9440-55165/166, June 2007 build) warped up to 2.50 mm in the high-temp "Rubberized Soft Paint" cure — baked flat on wire racks, gravity sagged them by heat-facilitated creep (below glass transition; the parts never glassed out).
-  intervention: Rejected the vendor support-block proposal; engineered "Method A," a vertical-hang cure fixture, codified as ECO 12740.
-  result: Flatness 2.50 mm → below 0.50 mm; 100% pilot cosmetic yield salvaged with no new tooling spend.
-- label: Supply chain — the top-panel "no-bid"
+  trigger: Long ABS side caps showed length and flatness problems through molding and paint curing.
+  intervention: Worked with Jetcrown on cure support and mating geometry. Its comparison documents vertical Method A alongside two unsuccessful support arrangements.
+  result: The comparison identifies vertical support as reducing deformation; later inspection criteria and deviations address acceptable production variation.
+- label: Recovering top-panel fabrication
   severity: critical
   phase: pilot
-  anchor: 2-supply-chain-crisis-the-top-panel-no-bid-shock
+  anchor: 2-recovering-top-panel-fabrication
   value: FCS Nov 7 2007 delivered
-  trigger: Mid-schedule the primary overseas CM (Kwanta) no-bid the most complex part — the Top Panel (P/N 9420-55105) — whose dense welded standoffs blocked the automated CNC welder.
-  intervention: 'Ran a dual-source bridge: Mass Precision manual offset-weld prototypes to keep the line moving while qualifying manual welding overseas until automation retooled.'
-  result: 'Unblocked Pilot and protected the delivered November 7, 2007 First Customer Ship. (Human cost: a fully ruptured Achilles mid-fab — weld-stud files sent from hotel wifi so the build would not stall.)'
-- label: Serviceability — the headphone-jack fire drill
+  trigger: Kwanta's top-panel no-bid was documented by March 7, 2007, with the panel's fabrication capability unresolved.
+  intervention: Supported Mass Precision manual offset-welded parts and the overseas manufacturing bridge while fabrication capability and cosmetic quality were resolved.
+  result: Mechanical parts progressed toward the November 7 delivery, with revision-control and supplier-quality lessons recorded after launch.
+- label: Field-replaceable headphone jack
   severity: major
   phase: fcs
-  anchor: 4-serviceability-crisis-the-headphone-jack-fire-drill
-  value: 2 h+ → <10 min
-  trigger: A 4.8% failure rate — benchmarked from Digi 002 service history on the identical high-wear jack, a projected 870-unit warranty liability — buried behind the front bolster; a simple repair meant a 2-hour chassis teardown.
-  intervention: 'Emergency redesign past Tooling-Control-Off: a recessed service geometry initiated April 25; the urgent July 12 change order is internally numbered ECO 12993 but archived under ECO_12996. The conflicting part fields are not used to infer affected parts.'
-  result: Turned a return-to-factory liability into a Field Replaceable Unit — MTTR from over 2 hours to under 10 minutes via a single bottom-pan nut.
-- label: Regulatory — the stranded PSU
+  anchor: 4-a-field-replaceable-headphone-jack
+  value: field-replaceable jack
+  trigger: The exposed plug and invasive replacement path prompted objections from Customer Service and Manufacturing.
+  intervention: After the first recessed mock-up was rejected, Erik, Arndt Hufenbach and Manufacturing continued pressing the issue; Erik designed the eventual field-replaceable unit.
+  result: Field replacement became part of the final design despite PM resistance.
+- label: Power-supply certification
   severity: critical
   phase: fcs
-  anchor: 6-regulatory-crisis-the-stranded-psu
-  value: 500 units shipped
-  trigger: The external Skynet PSU failed EMC prescans and suffered three catastrophic load failures at 230V/50Hz; tooling delays then stranded finished consoles awaiting UL certification.
-  intervention: Negotiated a simultaneous-certification protocol with UL to test the console surface without the final PSU, and ran a hand-pack operation at Menlo Park to label the first 100 units.
-  result: Protected the First Customer Ship date and Q4 revenue with no regulatory exposure.
+  anchor: 6-power-supply-certification
+  value: parallel certification
+  trigger: The external supply and its certification created a separate dependency for the console release.
+  intervention: Engineering worked with UL on parallel system/supply certification; the July plan called for the first hundred supplies to be hand-packed and labeled at Menlo Park.
+  result: The lessons-learned record credits parallel certification and records the Q4 FQA/revenue targets as achieved.
 forensic_summary:
-  trigger: 'Pilot-build collapse on multiple fronts: ABS side caps warped up to 2.50 mm in the paint-cure cycle, the primary vendor no-bid the most complex panel, and the PSU failed certification — all against a hard Q4 2007 revenue date.'
-  intervention: Engineered a vertical-hang cure fixture (ECO 12740), ran a dual-source manual-welding bridge, enforced a 50+ DCD geometric firewall across 19 PCBs, and hand-packed 100 units to bypass the certification block.
-  result: 100% Pilot cosmetic yield recovered, 100% first-build mechanical fit, 500 units shipped for Q4 2007 at a 51.80% gross margin.
+  trigger: Replace the Control|24 with a lower-profile, RoHS-compliant console while integrating the controls, audio functions and production processes.
+  intervention: 'Owned the mechanical implementation: surface development, board interfaces, molded and fabricated parts, serviceability, supplier build support and acceptance criteria.'
+  result: C24 reached First Customer Ship on November 7, 2007; the retrospective records Q4 FQA and revenue targets achieved alongside substantial launch-quality lessons.
 hatnote: Forensic engineering case study of the Digidesign C|24 ("Curtis") — the RoHS-era successor to the Control|24 console.
 heroImage: /assets/c24/c24-hero-01-xl.webp
 industry: pro_audio
 production: production
 productionScale: series
 tags:
-- Thermal
-- Crisis
-- Cost_Down
 - Mechanism
 - Leadership
-- Yield
-teamSize: 58
+- Thermal
+- Cost_Down
 theme: article
 toolIcons: []
 tools:
@@ -108,10 +96,6 @@ tools:
 cast:
 - name: Neal Breitbarth
   role: Mechanical/ID Lead
-  org: Digidesign / Avid
-  roster: key
-- name: Sheldon Radford
-  role: Control Surface / Industrial Design
   org: Digidesign / Avid
   roster: key
 - name: Robin Parnaby
@@ -162,10 +146,6 @@ cast:
   role: PCB Design
   org: Digidesign / Avid
   roster: key
-- name: Jose Perez
-  role: PCB Design
-  org: Digidesign / Avid
-  roster: key
 - name: Henry Lee
   role: Vendor Contact
   org: VTech / Kenny
@@ -198,83 +178,19 @@ cast:
   role: Industrial Design (Early Phase)
   org: Mechanical and Industrial Design
   roster: stakeholder
-- name: Lucian Tu
-  role: Industrial Design (Damage Control USA)
-  org: Mechanical and Industrial Design
-  roster: stakeholder
-- name: Bob Gardyne
-  role: Engineering Director
-  org: Hardware Engineering
-  roster: stakeholder
-- name: Doug Tornio
-  role: Manager, HW Eng Services
-  org: Hardware Engineering
-  roster: stakeholder
-- name: Erik Charp
-  role: Hardware Engineer
-  org: Hardware Engineering
-  roster: stakeholder
-- name: Rene Pulido
-  role: Hardware Engineer
-  org: Hardware Engineering
-  roster: stakeholder
 - name: Roger Lau
   role: Manufacturing Engineer
-  org: Manufacturing Operations
-  roster: stakeholder
-- name: John Purves
-  role: Manufacturing
-  org: Manufacturing Operations
-  roster: stakeholder
-- name: Rick Rasor
-  role: Operations
-  org: Manufacturing Operations
-  roster: stakeholder
-- name: Javier Villa
-  role: Manufacturing
   org: Manufacturing Operations
   roster: stakeholder
 - name: Lev Perrey
   role: Product Marketing Manager
   org: Product Marketing and Management
   roster: stakeholder
-- name: Benjamin Kasman
-  role: Marketing Program Manager
-  org: Product Marketing and Management
-  roster: stakeholder
-- name: David Gibbons
-  role: Marketing
-  org: Product Marketing and Management
-  roster: stakeholder
-- name: Gannon Kashiwa
-  role: Marketing
-  org: Product Marketing and Management
-  roster: stakeholder
-- name: Scott Wood
-  role: Marketing
-  org: Product Marketing and Management
-  roster: stakeholder
-- name: Danny Caccavo
-  role: Product Management
-  org: Product Marketing and Management
-  roster: stakeholder
 - name: Dena Goldberg
   role: Purchasing
   org: Purchasing
   roster: stakeholder
-- name: Angie Nueman
-  role: Purchasing
-  org: Purchasing
-  roster: stakeholder
-- name: Bryan ONeal
-  role: Purchasing
-  org: Purchasing
-  roster: stakeholder
 - name: Ethan Grossman
-  role: Firmware Engineer
-  org: Firmware and Software
-  roster: stakeholder
-- name: Marc Schuman
   role: Firmware Engineer
   org: Firmware and Software
   roster: stakeholder
@@ -284,10 +200,6 @@ cast:
   roster: stakeholder
 - name: Mari Matsuo
   role: Software ETS
-  org: Firmware and Software
-  roster: stakeholder
-- name: Sandeep
-  role: Software App Support
   org: Firmware and Software
   roster: stakeholder
 - name: Matt Peterson
@@ -304,10 +216,6 @@ cast:
   roster: stakeholder
 - name: Craig Presnell
   role: Quality Assurance
-  org: Test and Quality Assurance
-  roster: stakeholder
-- name: Thomas Oiwa
-  role: Test/Quality
   org: Test and Quality Assurance
   roster: stakeholder
 - name: Don Falcone
@@ -330,23 +238,17 @@ cast:
   role: Graphic overlay & LE-look aesthetic, early 2006
   org: NewDealDesign
   roster: stakeholder
-- name: Jeff Barnes
-  role: PCB Fabrication Contact
-  org: PalPilot
-  roster: stakeholder
 bom:
-- label: Unique components
-  value: 100+
-- label: PCB assemblies
+- label: Motorized faders
+  value: '24'
+- label: Mic preamps
+  value: '16'
+- label: Distinct PCBA designs in June build register
   value: '19'
-- label: Sheet-metal parts
-  value: ~15 (12 fab parts + 3 artwork films)
-- label: Injection-molded parts
-  value: 25+
-- label: Fasteners per console
-  value: 456× M3x6 alone
-- label: P/N prefix system
-  value: 9100 TLA · 9150 PCBA · 9190 mech sub-ASY · 9191 controls ASY · 9180/9192 cables · 9410 raw PCB · 9420 sheet metal · 9421 artwork film · 9440 molded plastic · 9470 LE-family shared · 9480 mold tooling
+- label: Maximum width in product requirements
+  value: 43 inches
+- label: Main mechanical systems
+  value: Fabricated chassis, molded exterior, meter bridge, fader and control interfaces, rear I/O and cable routing
 cyberspace:
   enable: true
   layout: linear
@@ -357,522 +259,157 @@ cyberspace:
       layout: masonry
       scattered: true
       images:
-      - alt: c24-prototype-01
+      - alt: Prototype console with the control-panel structure exposed before final exterior assembly.
         src: /assets/r2/c24/bubbles/01_origin_story/c24-prototype-01-xl.webp
-        aspectRatio: 1.5
-      - alt: c24-prototype-02
+        aspectRatio: 1.3333
+      - alt: Front corner of the prototype, showing the bolster interface and sheet-metal side structure.
         src: /assets/r2/c24/bubbles/01_origin_story/c24-prototype-02-xl.webp
-        aspectRatio: 1.5
-      - alt: c24-prototype-03
+        aspectRatio: 1.3333
+      - alt: Interior view of the metal enclosure and board mounting geometry.
         src: /assets/r2/c24/bubbles/01_origin_story/c24-prototype-03-xl.webp
-        aspectRatio: 1.5
-      - alt: c24-prototype-04
-        src: /assets/r2/c24/bubbles/01_origin_story/c24-prototype-04-xl.webp
-        aspectRatio: 1.5
-      - alt: c24-prototype-05
+        aspectRatio: 1.3333
+      - alt: Side structure before the molded side cap is fitted.
         src: /assets/r2/c24/bubbles/01_origin_story/c24-prototype-05-xl.webp
-        aspectRatio: 1.5
-      - alt: c24-prototype-06
+        aspectRatio: 1.3333
+      - alt: Prototype side cap fitted over the metal structure, showing the long side profile.
         src: /assets/r2/c24/bubbles/01_origin_story/c24-prototype-06-xl.webp
-        aspectRatio: 1.5
-      - alt: c24-prototype-07
-        src: /assets/r2/c24/bubbles/01_origin_story/c24-prototype-07-xl.webp
-        aspectRatio: 1.5
-      - alt: c24-prototype-08
-        src: /assets/r2/c24/bubbles/01_origin_story/c24-prototype-08-xl.webp
-        aspectRatio: 1.5
-      - alt: c24-prototype-09
-        src: /assets/r2/c24/bubbles/01_origin_story/c24-prototype-09-xl.webp
-        aspectRatio: 1.5
-      - alt: c24-prototype-10
-        src: /assets/r2/c24/bubbles/01_origin_story/c24-prototype-10-xl.webp
-        aspectRatio: 1.5
-      - alt: c24-prototype-11
+        aspectRatio: 1.3333
+      - alt: Meter-board and lens interfaces above the prototype control surface.
         src: /assets/r2/c24/bubbles/01_origin_story/c24-prototype-11-xl.webp
-        aspectRatio: 1.5
-      - alt: c24-prototype-12
-        src: /assets/r2/c24/bubbles/01_origin_story/c24-prototype-12-xl.webp
-        aspectRatio: 1.5
-      - alt: c24-prototype-13
+        aspectRatio: 1.3333
+      - alt: Open front-bolster end and its interface with the fader-panel structure.
         src: /assets/r2/c24/bubbles/01_origin_story/c24-prototype-13-xl.webp
-        aspectRatio: 1.5
-      - alt: c24-prototype-14
-        src: /assets/r2/c24/bubbles/01_origin_story/c24-prototype-14-xl.webp
-        aspectRatio: 1.5
-      - alt: c24-prototype-15
-        src: /assets/r2/c24/bubbles/01_origin_story/c24-prototype-15-xl.webp
-        aspectRatio: 1.5
-      - alt: c24-render-01
+        aspectRatio: 1.3333
+      - alt: Side-profile design rendering, showing the gill and the rise into the meter bridge.
         src: /assets/r2/c24/bubbles/01_origin_story/c24-render-01.png
-        aspectRatio: 1.5
-      - alt: c24-render-02
+        aspectRatio: 4.0282
+      - alt: Design rendering of the complete control surface and exterior part relationships.
         src: /assets/r2/c24/bubbles/01_origin_story/c24-render-02.png
-        aspectRatio: 1.5
+        aspectRatio: 2.2831
     featuredIndices: []
     id: 01_origin_story
     type: gallery
     title: Origin Story
-    deck:
-    - body: '**Timeline:** 2005 – 2007
-
-        **Objective:** Engineer the successor to the best-selling Control|24, improving margins and manufacturability while meeting strict new environmental standards.
-
-
-        ---
-
-
-        # The Origin Story'
-      subtitle: ''
-      title: Mechanical Engineering Lead
-    - body: 'When I took ownership of "Curtis" (C|24), I wasn''t tasked with a cosmetic refresh. This was a business-critical rescue mission driven by three hard constraints:
-
-        *   **The RoHS Deadline:** The legacy unit contained lead. My design had to be a ground-up re-architecture to meet strict EU compliance.
-
-        *   **The Royalty Kill:** We replaced the licensed preamps (~$200/unit) with an in-house design to recapture margin while holding the $9,995 price point.
-
-        *   **The "Low Profile" Shift:** moving from "studio furniture" to a sleek, sub-7mm aesthetic forced me to completely rethink how PCBs and thermals fit inside a significantly tighter chassis.
-
-
-        ---
-
-
-        # The Architect'
-      subtitle: ''
-      title: My Mandate
-    - body: 'As **ID & Mechanical Lead**, I served as the bridge between Aesthetic Vision, Electrical Constraints, and Mass Manufacturing reality.
-
-
-        **Key Responsibilities:**
-
-        *   **Packaging Architecture:** Fitting 16 preamps and a 5.1 monitor section into a chassis significantly smaller than its predecessor.
-
-        *   **Vendor Management:** Primary liaison for VTech/Jetcrown (Overseas) and Mass Precision (Domestic), approving First Articles.
-
-        *   **Cross-Functional Leadership:** Enforcing "keep-out" zones with PCB designers to prevent collisions.'
-      subtitle: ''
-      title: Technical Diplomacy
+    deck: []
   - data:
       columns: 3
       layout: masonry
       scattered: true
       images:
-      - alt: step-01-defect-gap
+      - alt: Paired side caps showing visible bow along their length.
         src: /assets/r2/c24/bubbles/02_side_cap_crisis/step-01-defect-gap.jpg
-        aspectRatio: 1.5
-      - alt: step-02-method-c-failure
-        src: /assets/r2/c24/bubbles/02_side_cap_crisis/step-02-method-c-failure.png
-        aspectRatio: 1.5
-      - alt: step-03-method-a-fix
-        src: /assets/r2/c24/bubbles/02_side_cap_crisis/step-03-method-a-fix.png
-        aspectRatio: 1.5
-      - alt: step-04-validation-report
-        src: /assets/r2/c24/bubbles/02_side_cap_crisis/step-04-validation-report.png
-        aspectRatio: 1.5
-      - alt: defect-bow-01
-        src: /assets/r2/c24/02-side-cap-crisis/defect-bow-01-xl.webp
-        aspectRatio: 3.7758
-      - alt: defect-bow-02
-        src: /assets/r2/c24/02-side-cap-crisis/defect-bow-02-md.webp
-        aspectRatio: 1.3333
-      - alt: defect-bow-03
-        src: /assets/r2/c24/02-side-cap-crisis/defect-bow-03-md.webp
         aspectRatio: 0.3492
-      - alt: dims-before-after-paint
-        src: /assets/r2/c24/02-side-cap-crisis/dims-before-after-paint-xl.webp
-        aspectRatio: 1.294
-      - alt: eco-12740
-        src: /assets/r2/c24/02-side-cap-crisis/eco-12740-xl.webp
-        aspectRatio: 1.294
-      - alt: hanging-fixture-01
-        src: /assets/r2/c24/02-side-cap-crisis/hanging-fixture-01-sm.webp
+      - alt: Unsupported horizontal cure arrangement documented in the supplier fixture comparison.
+        src: /assets/r2/c24/02-side-cap-crisis/defect-bow-01-xl.webp
+        aspectRatio: 3.7795
+      - alt: Vertical Method A cure-support arrangement in the supplier comparison.
+        src: /assets/r2/c24/bubbles/02_side_cap_crisis/step-03-method-a-fix.png
         aspectRatio: 0.6966
-      - alt: shrink-chart-cure-vs-spec
-        src: /assets/r2/c24/02-side-cap-crisis/shrink-chart-cure-vs-spec-lg.webp
-        aspectRatio: 1.3211
+      - alt: 'July 5 before-and-after-paint inspection table: length, distance outside tolerance and flatness are separate columns.'
+        src: /assets/r2/c24/bubbles/02_side_cap_crisis/step-04-validation-report.png
+        aspectRatio: 1.294
+      - alt: 'ECO 12740: Erik Norris originated the plastics production release; the form identifies mechanical changes to both side caps.'
+        src: /assets/r2/c24/02-side-cap-crisis/eco-12740-xl.webp
+        aspectRatio: 1.2947
     featuredIndices: []
     id: 02_side_cap_crisis
     type: gallery
     title: Side Cap Crisis
-    deck:
-    - body: '*   **Role:** Mechanical Engineering Lead
-
-        *   **Scope:** ID Implementation to Mass Production
-
-        *   **Budget:** ~$450k (Hard Tooling)
-
-
-        **By The Numbers:**
-
-        *   **100+ Unique Components:** ~15 Sheet Metal, 25+ Injection-Molded, 19 PCBs, plus cables and hardware.
-
-        *   **19 PCBs:** Managed 3D constraints for all 19 boards.
-
-        *   **Artwork:** Managed all silkscreen and rear panel graphics.
-
-
-        ---
-
-
-        # The Hub'
-      subtitle: ''
-      title: Total Ownership
-    - body: 'Mechanical Engineering is not just CAD; it is the physical consensus of **58** stakeholders. I served as the central hub integrating inputs from every corner of the company.
-
-
-        **By The Numbers:**
-
-        *   **37 Internal Touchpoints**
-
-        *   **21 External Partners**
-
-
-        ---
-
-
-        # Internal Orbit'
-      subtitle: ''
-      title: Collaboration Ecosystem
-    - body: '**Cross-Functional Synchronization:**
-
-        *   **Hardware (7):** Robin Parnaby (Lead), David Anthony (PSU), Greg Vieyra (PCB), Franco Piccininni (PCB)
-
-        *   **Manufacturing (5):** Kerwin Yuen (Pilot), Ed Bangert (Legacy), Ping Zhang (CAD), Roger Lau (VTech Ops)
-
-        *   **Product/Mktg (8):** Michael Moskowitz (PM), Greg Westall (Feat), Lev Perrey (Pkg), Stan Cotey (Layout)
-
-        *   **QA & Service (6):** Vicky Moreno (Svc), Al Siy (Cosmetics), Scott Bittle (QA), Rick Rasor (Ops)
-
-
-        ---
-
-
-        # Global Partners'
-      subtitle: ''
-      title: 37 Stakeholders
-    - body: 'Directly managed technical relationships to drive tooling, quality, and schedule.
-
-        *   **VTech / Kenny (China):** Managed transition from soft-tooling to hard-tooling. (Henry Lee, Ben Ho, Lucy Liu, Ivan Wong, C.H. Luo)
-
-        *   **Jetcrown (China):** Solved the paint-curing warp defect. (ZW, Warren Man, Jailin)
-
-        *   **Mass Precision (Domestic):** Directed rapid-turn prototypes for Pilot. (Ed Stegall, Fidel Saucedo)
-
-
-        ---
-
-
-        # The Crisis'
-      subtitle: ''
-      title: 21 Key Contacts
-    - body: '**The Problem: Paint-Induced Warping**
-
-        During Pilot, the side caps arrived with severe dimensional issues. Inspection reports showed the overall length was out of tolerance by up to **2.27mm (Shrinkage)** due to the "Rubberized Paint" cure cycle.
-
-
-        **The Root Cause:**
-
-        The vendor (Jetcrown) was placing these long, heavy ABS parts flat on wire racks ("Method C"). Gravity caused the softened plastic to sag and creep during the bake.
-
-
-        ---
-
-
-        # The Solution'
-      subtitle: ''
-      title: P/N 9440-55165
-    - body: '**The "Method A vs Method B" Showdown**
-
-        I didn''t just guess; I proved it. I rejected the vendor''s support-block proposal ("Method B") and designed a comparative study.
-
-
-        **The Verdict:**
-
-        My "vertical hanging" theory ("Method A") utilized gravity to straighten the part during cool-down, restoring the dimension to 756.50mm. I didn''t invent gravity; I invented the **process control** that harnessed it to save the schedule.'
-      subtitle: ''
-      title: Forensic DOE
+    deck: []
   - data:
       columns: 3
       layout: masonry
       scattered: true
       images:
-      - alt: 06_23_07_gill_dim_Jetcrown inspection report
+      - alt: Jetcrown dimensional inspection of the gill and side-cap geometry, with measured values marked on the views.
         src: /assets/r2/c24/bubbles/03_manufacturing_wins/06_23_07_gill_dim_Jetcrown inspection report.png
-        aspectRatio: 1.5
-      - alt: DCD_9150-55200-00_REV_12_Page_1
+        aspectRatio: 1.5455
+      - alt: 'MicPre8 I/O Data Control Drawing at revision 12: board geometry, mounting and connector relationships.'
         src: /assets/r2/c24/bubbles/03_manufacturing_wins/DCD_9150-55200-00_REV_12_Page_1.png
-        aspectRatio: 1.5
-      - alt: EQ-high
-        src: /assets/r2/c24/bubbles/03_manufacturing_wins/EQ-high.png
-        aspectRatio: 1.5
-      - alt: metal-bends
+        aspectRatio: 1.5455
+      - alt: Fabricated control-panel bend and adjacent artwork under cosmetic review.
         src: /assets/r2/c24/bubbles/03_manufacturing_wins/metal-bends.png
-        aspectRatio: 1.5
-      - alt: metal-bends_2
+        aspectRatio: 1.3333
+      - alt: Close-up of a panel bend beside the modifier-key artwork.
         src: /assets/r2/c24/bubbles/03_manufacturing_wins/metal-bends_2.png
-        aspectRatio: 1.5
-      - alt: ring-left
-        src: /assets/r2/c24/bubbles/03_manufacturing_wins/ring-left.png
-        aspectRatio: 1.5
+        aspectRatio: 1.3333
     featuredIndices: []
     id: 03_manufacturing_wins
     type: gallery
     title: Manufacturing Wins
-    deck:
-    - body: 'While Industrial Design set the vision, my role was to architect the physical reality. This required aggressive intervention in sheet metal fabrication, complex surfacing for the "Gills," and strict DFM governance over electrical layout to ensure assembly was possible.
-
-
-        ---
-
-
-        # Sheet Metal Rescue'
-      subtitle: ''
-      title: Physical Reality
-    - body: 'The C|24 chassis was a high-precision frame carrying dense welded PEM standoffs across its ~15 fabricated parts — 30–33 on the Top Panel alone, packed tightly enough to block the automated CNC welder.
-
-
-        **The Crisis:** Our overseas vendor (Kwanta) "no-bid" the complex Top/Bottom panels during Pilot, threatening the schedule.
-
-
-        **My Solution:** I executed a rapid dual-source strategy:
-
-        *   **Emergency Fabrication:** Engaged Mass Precision (Local) for manual prototypes to keep the line moving.
-
-        *   **The Quality War:** Rejected early lots with "ripples" on bend lines and enforced a tooling change to maintain the "Pro" aesthetic.
-
-
-        ---
-
-
-        # The ''Gill'''
-      subtitle: ''
-      title: The 'No-Bid' Crisis
-    - body: 'The Side Gill (P/N 9440-55175) was a signature ID element with complex "lumpy" curves that the vendor''s CAD failed to interpret, leaving unsightly gaps.
-
-
-        **My Execution:** I took direct ownership of the surfacing, manually rebuilding the transitions in Pro/Engineer. I exported geometry in "bite-sized" STEP chunks to ensure the vendor could process the tooling paths without data loss, turning a modeling nightmare into a seamless assembly.
-
-
-        ---
-
-
-        # PCB DFM'
-      subtitle: ''
-      title: Advanced Surfacing
-    - body: 'With zero room for error, I served as gatekeeper for 19 PCBs. My 3D analysis saved multiple board spins:
-
-        *   **MicPre Collision:** Caught a vertical connector crash; forced a move to Right-Angle.
-
-        *   **SubMix Ergonomics:** Moved ribbon headers to the edge so factory workers could actually reach them.
-
-        *   **Time Code Alignment:** Found LED displays floating 8.12 mm too high; forced a layout change to align them with the chassis window.'
-      subtitle: ''
-      title: Collision Prevention
+    deck: []
   - data:
       columns: 3
       layout: masonry
       scattered: true
       images:
-      - alt: 062307drag-and-short-shot-on-landr-endcappage1
+      - alt: 'Supplier-marked molding defects: drag and short-shot areas on the side-cap ribs.'
         src: /assets/r2/c24/bubbles/04_structural_components/062307drag-and-short-shot-on-landr-endcappage1.png
-        aspectRatio: 1.5
-      - alt: 062307drag-and-short-shot-on-landr-endcappage2
-        src: /assets/r2/c24/bubbles/04_structural_components/062307drag-and-short-shot-on-landr-endcappage2.png
-        aspectRatio: 1.5
-      - alt: 062307drag-and-short-shot-on-landr-endcappage3
-        src: /assets/r2/c24/bubbles/04_structural_components/062307drag-and-short-shot-on-landr-endcappage3.png
-        aspectRatio: 1.5
-      - alt: 062907curtis-build-issuesfrompingz
+        aspectRatio: 1.2941
+      - alt: June build issue list separating observed problems, causes and proposed or completed corrective actions.
         src: /assets/r2/c24/bubbles/04_structural_components/062907curtis-build-issuesfrompingz.png
-        aspectRatio: 1.5
-      - alt: 9420-56156-00
-        src: /assets/r2/c24/bubbles/04_structural_components/9420-56156-00.png
-        aspectRatio: 1.5
-      - alt: 9440-55174-00
-        src: /assets/r2/c24/bubbles/04_structural_components/9440-55174-00.png
-        aspectRatio: 1.5
-      - alt: bournsem14page3
+        aspectRatio: 1.1944
+      - alt: Bourns EM14 supplier dimensional drawing used for encoder integration.
         src: /assets/r2/c24/bubbles/04_structural_components/bournsem14page3.png
-        aspectRatio: 1.5
-      - alt: forensic-1-1
+        aspectRatio: 0.9111
+      - alt: July 16 fit-check photograph of the front-bolster and side-cap joint.
         src: /assets/r2/c24/bubbles/04_structural_components/forensic-1-1.jpg
-        aspectRatio: 1.5
-      - alt: forensic-1-2
-        src: /assets/r2/c24/bubbles/04_structural_components/forensic-1-2.jpg
-        aspectRatio: 1.5
-      - alt: forensic-1-3
-        src: /assets/r2/c24/bubbles/04_structural_components/forensic-1-3.jpg
-        aspectRatio: 1.5
-      - alt: forensic-1-4
-        src: /assets/r2/c24/bubbles/04_structural_components/forensic-1-4.jpg
-        aspectRatio: 1.5
-      - alt: forensic-1-5
+        aspectRatio: 1.3333
+      - alt: July 16 fit check at the meter-window structure and surrounding molded parts.
         src: /assets/r2/c24/bubbles/04_structural_components/forensic-1-5.jpg
-        aspectRatio: 1.5
-      - alt: forensic-1-6
-        src: /assets/r2/c24/bubbles/04_structural_components/forensic-1-6.jpg
-        aspectRatio: 1.5
-      - alt: forensic-2-1
-        src: /assets/r2/c24/bubbles/04_structural_components/forensic-2-1.jpg
-        aspectRatio: 1.5
-      - alt: forensic-2-2
-        src: /assets/r2/c24/bubbles/04_structural_components/forensic-2-2.jpg
-        aspectRatio: 1.5
-      - alt: forensic-2-3
-        src: /assets/r2/c24/bubbles/04_structural_components/forensic-2-3.jpg
-        aspectRatio: 1.5
-      - alt: forensic-2-4
-        src: /assets/r2/c24/bubbles/04_structural_components/forensic-2-4.jpg
-        aspectRatio: 1.5
-      - alt: forensic-2-5
-        src: /assets/r2/c24/bubbles/04_structural_components/forensic-2-5.jpg
-        aspectRatio: 1.5
-      - alt: forensic-2-6
-        src: /assets/r2/c24/bubbles/04_structural_components/forensic-2-6.jpg
-        aspectRatio: 1.5
+        aspectRatio: 1.3333
     featuredIndices: []
     id: 04_structural_components
     type: gallery
     title: Structural Components
-    deck:
-    - body: 'Cost analysis drove us to a smaller 14mm encoder (Bourns EM14) vs the expensive legacy part, but we couldn''t lose the premium "scrub" feel.
-
-
-        **My Solution:** I engineered a custom Jog Wheel Plastic Surround to adapt the smaller component. This required precise tolerance analysis to ensure the knob height was perfect and the "skirt" cleared the surround without rubbing, successfully mimicking a $10k console feel with commodity parts.
-
-
-        ---
-
-
-        # Smart Reuse'
-      subtitle: ''
-      title: Bourns EM14 Integration
-    - body: 'To save NRE (Non-Recurring Engineering) costs for the critical exterior plastics, I validated strategic component reuse:
-
-        *   **LED Lightpipes:** Validated legacy Control|24 lightpipes could fit the new chassis without modification, saving thousands in molds.
-
-        *   **Knob Strategy:** Reused "003 Factory" tooling but molded in specific "LE Dark Grey" and "White" resins to create a unified family look for free.
-
-
-        ---
-
-
-        # CMF Defense'
-      subtitle: ''
-      title: Tooling Budget Strategy
-    - body: 'I governed Color, Material, and Finish (CMF) with an iron fist:
-
-        *   **The ''Dental White'' Rejection:** Rejected yellowish silkscreen samples from China; forced ink recalibration to hit "Bright White."
-
-        *   **Fighting Ripples:** Documented bend-line dents on sheet metal photos to force the overseas vendor to upgrade their tooling.
-
-        *   **Texture Spec:** Enforced Mold-Tech low gloss (15) to ensure plastic parts absorbed light like the powder-coated metal.'
-      subtitle: ''
-      title: The 'Quality Cop'
+    deck: []
   - data:
       columns: 3
       layout: masonry
       scattered: true
       images:
-      - alt: 07_09_07_944055165-166-00 measure sketch map
+      - alt: Side-cap measurement sketch identifying where to check the gap.
         src: /assets/r2/c24/bubbles/05_paper_trail/07_09_07_944055165-166-00 measure sketch map.png
-        aspectRatio: 1.5
-      - alt: DCD_9150-55200-00_REV_12_Page_1_REV-block
+        aspectRatio: 3.0427
+      - alt: 'MicPre8 I/O revision table: twelve recorded revisions, with Erik Norris named against the changes.'
         src: /assets/r2/c24/bubbles/05_paper_trail/DCD_9150-55200-00_REV_12_Page_1_REV-block.png
-        aspectRatio: 1.5
-      - alt: ECO_12262_Page_1
+        aspectRatio: 2.0141
+      - alt: ECO 12262 cover sheet for the C24 small-plastics release.
         src: /assets/r2/c24/bubbles/05_paper_trail/ECO_12262_Page_1.png
-        aspectRatio: 1.5
-      - alt: ECO_12262_Page_2
-        src: /assets/r2/c24/bubbles/05_paper_trail/ECO_12262_Page_2.png
-        aspectRatio: 1.5
-      - alt: ECO_12263_Page_1
+        aspectRatio: 2.1731
+      - alt: ECO 12263 cover sheet for sheet-metal parts and artwork release.
         src: /assets/r2/c24/bubbles/05_paper_trail/ECO_12263_Page_1.png
-        aspectRatio: 1.5
-      - alt: ECO_12263_Page_2
+        aspectRatio: 1.9866
+      - alt: ECO 12263 detail sheet listing the released materials and revisions.
         src: /assets/r2/c24/bubbles/05_paper_trail/ECO_12263_Page_2.png
-        aspectRatio: 1.5
-      - alt: eco-12993
+        aspectRatio: 1.5404
+      - alt: ECO 12993 records the July headphone-jack mounting change.
         src: /assets/r2/c24/05-paper-trail/eco-12993-xl.webp
-        aspectRatio: 1.2934
+        aspectRatio: 1.2938
     featuredIndices: []
     id: 05_paper_trail
     type: gallery
     title: Paper Trail
-    deck:
-    - body: 'I didn''t just use the PDM system; I owned it.
-
-        *   **Infrastructure:** Led the critical migration to **Pro/Intralink 8.0 (Windchill)**, acting as the hands-on admin for file servers and database lockdowns.
-
-        *   **Gatekeeper:** Enforced strict check-in rules (blocking "wild west" renames) to preserve parent/child relationships during the chaotic RoHS conversion.
-
-
-        ---
-
-
-        # Tribal Knowledge'
-      subtitle: ''
-      title: The Backbone
-    - body: 'To combat the loss of tribal knowledge, I built and hosted an internal engineering website (*enorris-xp/digiME*) as the central truth repository.
-
-
-        **Standardization:** I authored the "Configuring Your Local Environment" guide, ensuring every engineer—from new hires to contractors—ran identical `config.pro` settings and mapkeys, eliminating database corruption caused by misconfigured clients.
-
-
-        ---
-
-
-        # The Specialist'
-      subtitle: ''
-      title: The 'DigiME' Intranet
-    - body: 'In a team of varying CAD levels, I served as the "Surfacing Specialist." When ID required complex geometry that others struggled to stabilize, I took ownership.
-
-
-        **"Everyone''s Surfaces":** I manually rebuilt lumpy transitions into Class-A surfaces for high-visibility parts (Side Caps, Gills) and provided daily mentorship to junior engineers on resolving workspace conflicts and circular references.
-
-
-        ---
-
-
-        # Governance'
-      subtitle: ''
-      title: Surfacing Mercenary
-    - body: '**The Protocol:** Validated strict Data Control Drawing (DCD) adherence, using Rev 12 of the MicPre board to force a connector change that prevented a mechanical crash.
-
-
-        **Change Management:** Formalized the "Vertical Hanging (Method A)" fix via **ECO 12740**, transforming a tribal fix into a permanent manufacturing specification for all future ABS parts.'
-      subtitle: ''
-      title: DCD & ECO Authority
+    deck: []
   - data:
       columns: 3
       layout: masonry
       scattered: true
       images:
-      - alt: c24-context-01
+      - alt: C24 installed in a studio desk.
         src: /assets/r2/c24/bubbles/06_press_resources/c24-context-01.jpg
-        aspectRatio: 1.5
-      - alt: c24-context-02
-        src: /assets/r2/c24/bubbles/06_press_resources/c24-context-02.jpg
-        aspectRatio: 1.5
-      - alt: c24-context-03
-        src: /assets/r2/c24/bubbles/06_press_resources/c24-context-03.jpg
-        aspectRatio: 1.5
-      - alt: c24-context-04
+        aspectRatio: 1.3333
+      - alt: Finished C24 control layout, showing the fader banks, displays and right-hand controls.
         src: /assets/r2/c24/bubbles/06_press_resources/c24-context-04.jpg
-        aspectRatio: 1.5
-      - alt: c24-context-05
-        src: /assets/r2/c24/bubbles/06_press_resources/c24-context-05.jpg
-        aspectRatio: 1.5
-      - alt: c24-render-07
+        aspectRatio: 1.5217
+      - alt: C24 user-guide cover, version 7.4.
         src: /assets/r2/c24/bubbles/06_press_resources/c24-render-07.png
-        aspectRatio: 1.5
+        aspectRatio: 0.8235
     featuredIndices: []
     id: 06_press_resources
     type: gallery
     title: Press Resources
-    deck:
-    - body: Link collection for C|24 resources.
-      subtitle: ''
-      title: Context & Links
+    deck: []
   - align: right
     data:
       cameraOrbit: 45deg 55deg 2.5m
@@ -884,162 +421,99 @@ cyberspace:
     title: Interactive Model
     deck: []
 ---
-# C|24 (Curtis) Forensic Report
+
+# C|24 (Curtis)
 
 ## I. Project Summary
 
-- **Role:** Mechanical Engineering Lead / Industrial Design Lead.
-- **Mandate:** Execute a total platform modernization ("RoHS/Refresh") of the legacy Control|24 console: eliminate a ~$200/unit licensing royalty by moving to 16 in-house pre-amps, integrate 5.1 surround monitoring, cut the form factor to 43 inches, and hold the $9,995 MSRP under the new EU compliance regime.
-- **Core Achievement:** Delivered 500 units for Q4 2007 FQA/revenue recognition despite a dual-front supply chain collapse, a thermal yield crisis during Pilot, and regulatory certification bottlenecks.
+I owned the mechanical engineering and industrial-design implementation of Digidesign's C|24, from the early surface and packaging work through tooling, build support and production release. The job was to turn a large, familiar control surface into a lower-profile product while preserving the feel and accessibility of a real mixing console.
+
+The business brief was specific: replace the Control|24 with a RoHS-compliant product, package sixteen Digidesign preamps in place of the licensed design, support 5.1 monitoring, and fit within a 43-inch maximum width. Removing the approximately $200 royalty was a program objective. My responsibility was the physical product that made those changes possible: surfaces, molded parts, fabricated chassis, board interfaces, controls, artwork and the instructions suppliers needed to build and inspect them.
 
 ## II. The Product That Shipped
 
-The refresh wasn't only crisis triage — it reshaped the product. Against the 43-inch width target I stripped the console down: out went the numeric keypad, the F6–F10 function keys, the eight-button edit section, and four display buttons, on a bet that soft keys and screen-based entry could carry the load. The single-row, four-character readouts became three large 55×2-character Varitronix LCD scribble strips, specified with the ID team (Sheldon Radford) — down to a custom character-ROM set, worked out with Stan Cotey and David Anthony, to carry Japanese katakana. That last requirement nearly broke us: the katakana ROM ran the 2407 DSPs out of flash memory, a firmware crisis hiding behind a cosmetic upgrade. The meter bridge carried 24 Pro Tools track meters on 14-segment LED ladders (nine green, four amber, one red clip), and the workflow reached for ICON-class features: plug-in flip mode on the touch-sensitive faders, the full automation suite (write/touch/latch/read/trim), and a deep diagnostics layer — Vegas mode, the fader step/cycle/group/touch/recalibrate battery, ethernet loopback, and transport-aware auto-talkback.
+The C|24 put twenty-four motorized faders, sixteen preamps, a stereo submixer and surround-monitor controls into one low-profile console. Most analog connections moved to DB25 connectors. Three two-row LCDs replaced the predecessor's short channel readouts, and the control layout consolidated functions that had occupied dedicated buttons. The product and hardware teams defined the feature set; I developed and integrated its physical implementation.
 
-## III. The Anatomy of Failure
+That integration reached below the visible surface. The March 2006 construction-review email records my solution for getting the meter boards inside the sheet-metal enclosure while preserving the plastic design I wanted. Once that packaging problem was resolved, I redirected the review time toward releasing the Data Control Drawings that the PCB designers needed. Surface development and electrical packaging advanced together.
 
-### 1. Thermal Crisis: The "Banana" Defect
+I also designed and built the new two-encoder surround-panning interface: an X/Y control that let an engineer position a sound across a 5.1 field by feel. The side caps, gills, meter windows, jog-wheel surround and front bolster gave that dense control layout a continuous exterior. Their appearance depended on the geometry and assembly underneath them.
 
-- **Trigger:** During the Proto 3 validation build (June 18 – July 2, 2007 — ten units, run compressed hard against the schedule), the primary ABS Side Caps (P/N 9440-55165/166) arrived with catastrophic geometric distortion: up to 2.50 mm of "banana" warping and 2.27 mm of linear shrinkage. (The formal 15-unit Pilot ran August 9–22 with the fixes proven in — contemporaneous documents label the June build "pilot run," but it was the Proto 3 validation build.) The defect traced to the high-temperature "Rubberized Soft Paint" cure cycle — the vendor baked the long, heavy parts flat on wire racks ("Method C"), letting gravity sag the plastic by heat-facilitated creep: the 60 °C+ bake sat well below the ABS glass transition (~105 °C), but hot, unsupported spans creep under their own weight. The parts never glassed out.
-- **Intervention:** Rejected the vendor's support-block proposal ("Method B") and ran a comparative study instead. Engineered "Method A" — a Vertical Hanging Fixture that suspends parts during cure so gravity straightens them during cool-down. Codified the process via ECO 12740 as a permanent manufacturing specification for large ABS parts.
-- **Result:** Reduced flatness deviation from 2.50 mm to below 0.50 mm, salvaging 100% of Pilot cosmetic yield with no new tooling spend.
+## III. Design and Production
 
-### 2. Supply Chain Crisis: The Top Panel "No-Bid" Shock
+### 1. Paint Curing and Side-Cap Fit
 
-- **Trigger:** Mid-schedule, the primary overseas CM (Kwanta) formally no-bid the console's most complex part — the Top Panel (P/N 9420-55105). Its extreme density of welded standoffs physically blocked the vendor's automated CNC welding heads, threatening a line-down scenario. The earliest located primary checkpoint is the March 7, 2007 status report, which records the no-bid and the active Operations/Manufacturing response; the April 4 report says the matter was then before Kwanta's board and documents the Mass Precision/Kenny bridge options. (Vendor structure, per the archives + operator rulings 2026-07-12: VTech Communications Ltd [CMS division, Dongguan] = the overarching CM for assembly and test; Kwanta = VTech's metal partner and the entity that no-bid; Kenny [Kenny Products] = a VTech subsidiary and the secondary metal vendor; KwanAsia [Macao] = early kitting and welding-capacity interface; Quanta = a distinct bidder per operator recollection, not distinguishable in the surviving records.)
-- **Intervention:** Executed a dual-source bridge strategy: engaged domestic vendor Mass Precision for rapid-turn manual offset-welded prototypes (reworking missing countersinks by hand to keep the line moving) while qualifying a manual offset-welding process at the overseas secondary vendor to bridge the schedule until automation retooled.
-- **Result:** Unblocked the Pilot build and transitioned cleanly from domestic manual parts to overseas automated lines, protecting the delivered November 7, 2007 First Customer Ship date.
-- **The human cost:** Mid-fabrication I fully ruptured my Achilles tendon — a complete break. The night I got back from the hospital I sent the top-panel weld-stud files over hotel wifi, so the fabrication didn't stall while I was off my feet.
+The long ABS side caps exposed the interaction between molding, paint curing and assembly fit. Jetcrown's comparison shows the original unsupported baking arrangement, an attempted three-support fixture that still allowed twisting, and Method A, which held the parts vertically to reduce deformation. I worked the problem through the supplier's process and the mating geometry.
 
-### 3. Architecture Crisis: The EMI/Thermal "Rake"
+The July 5 inspection table shows why the diagnosis mattered. One left-side-cap sample lost 1.04 mm in length through painting, from 755.28 to 754.24 mm, ending 2.27 mm below the lower drawing limit. The same inspection tracked flatness separately. Cure support could address deformation, while the part's final size and mating geometry still needed their own decisions.
 
-- **Trigger:** The initial 4U chassis stacked the internal power supply directly under the A/D converters, producing catastrophic EMI noise — and the console carried a non-negotiable acoustic constraint. It sits at the engineer's listening position, so the Product Design Document mandated a **fanless** shipping product. The easy thermal answer was off the table.
-- **Intervention:** I validated active-cooling fallbacks against the rake layouts before committing to silence. A four-fan crossflow array (4× 80 mm, 12 V) passed on an open bench but **failed thermal qualification once the dust filter and plastic side caps were installed** — the sealed enclosure trapped its own heat. A three-fan front-to-back arrangement (3× 80 mm at 12 V, or 8.5 V for quieter running, reusing the legacy 4U mounting footprint) met spec as a fallback, pending acoustic sign-off with Sheldon Radford — fan noise at the listening position was a call for the team's tuned ears (David Gibbons among them, reportedly a perfect-pitch singer). The shipping answer was to remove the heat source instead: re-architect to the revised 3U alignment and move the power supply out of the chassis into the external Skynet brick, with modified PSUs, metal connectors, and shielded cables to break the EMI path.
-- **Result:** A silent, **fanless** console that holds its 10–35 °C internal window and passes thermal qualification — the architecture that shipped, with the validated fan configurations left on the bench as insurance.
+I released the plastics for production through ECO 12740, including mechanical changes to both side caps. Supplier process work continued alongside the part revisions. Getting the plastics into production also required agreement on which dimensions controlled fit and which could be relaxed.
 
-### 4. Serviceability Crisis: The Headphone Jack Fire Drill
+### 2. Recovering Top-Panel Fabrication
 
-- **Trigger:** Just before final release (the escalation ran April 25–30, 2007, flagged by Kerwin Yuen and Arndt Hufenbach), service history on the Digi 002's identical high-wear jack showed a 4.8% field failure rate — a projected 870-unit warranty liability at C|24 volumes. The failure mode was mechanical: the plug protruded 2 inches from the bolster and got struck by chair armrests. And the flush-mount design buried the jack behind the front bolster — a simple repair meant a 2-hour teardown: bottom pan, front bolster assembly, and 5–6 channel faders out.
-- **Intervention:** Executed an emergency redesign past the "Tooling Control Off" milestone, developing a recessed service geometry from the April 25 escalation. The urgent July 12 change order is internally numbered ECO 12993 but archived under `ECO_12996`; its part-level fields conflict with the email record, so the chronology preserves the mounting-change claim without inferring affected part numbers.
-- **Result:** Converted a return-to-factory liability into a Field Replaceable Unit — Mean Time To Repair cut from over 2 hours to under 10 minutes via a single nut accessible from the bottom pan.
-- **The fight:** Marketing and product (Matt Cho, David Gibbons, Greg Westall) pushed back — the foam mock-up of the recess broke the console's clean line — and Robin Parnaby counter-proposed chassis-mounting the connector. I argued it on the 4.8% number: at that failure rate the jack was not a cosmetic decision, it was a warranty liability. The data won.
+The main panel combined large fabricated surfaces with densely placed welded hardware. By March 7, 2007, the status report recorded Kwanta's no-bid and an active Operations and Manufacturing response. The April report identified Mass Precision and Kenny as bridge options within the VTech manufacturing program.
 
-### 5. Integration Crisis: The Geometric Firewall
+I worked with Mass Precision on manual offset-welded parts and supported the overseas fabrication path while welding capability and panel quality were being resolved. The geometry still had to work at the factory: access for the welding head, placement of the studs, countersinks, bend quality and the cosmetic surface all belonged to the same part.
 
-- **Trigger:** Integrating 19 distinct PCB assemblies into a low-profile chassis was being undermined by "wild west" file swapping — layout designers independently moving mounting holes and vertical components, guaranteeing downstream collisions. The MicPre 8 I/O vertical power connectors crashed into the bottom pan; SubMix headers landed in zones factory workers could not reach.
-- **Intervention:** Authored and enforced the Data Control Drawing (DCD) Protocol: 50+ binding geometric contracts defining PCB outlines, 0.130" mounting holes, and Z-height keep-out zones. Submitted layouts were overlaid against the 3D master assembly and rejected on a 0.5 mm variance. The MicPre 8 DCD alone ran to Rev 12. The interception log ran deeper than the headline collisions: a mounting hole overlapping an active solder pad on the Select C board (9150-55149, caught in the layout DXF), a 50-pin header placed 180° rotated on Auto A (9150-55156) that would have made ribbon connection impossible, and a library footprint on Encoder B (9150-55153) that didn't match the real Bourns EM14 pinout — fixed at DCD Rev 2. The 0.130" mounting-hole standard itself replaced a wild-west 0.122"–0.140" drill spread, unified for consistent PEM-stud fit.
-- **Result:** 100% mechanical fit on the first physical build, decoupling the mechanical tooling schedule from electrical layout iteration.
+I fully ruptured my Achilles during this period. After returning from the hospital, I sent the weld-stud files from the hotel so fabrication could continue. The work progressed, but the later lessons-learned report also records the cost of working outside the normal file-control system: an incongruent revision reached the manufacturer.
 
-### 6. Regulatory Crisis: The Stranded PSU
+### 3. A Quiet, Low-Profile Console
 
-- **Trigger:** The external Skynet power supply failed EMC prescans and suffered three catastrophic load failures at 230V/50Hz; tooling delays then stranded finished consoles waiting on UL certification.
-- **Intervention:** Negotiated a simultaneous-certification protocol with UL to test the console surface without the finalized PSU, and orchestrated a hand-pack operation at the Menlo Park facility to manually apply UL labels to the first 100 units.
-- **Result:** Protected the First Customer Ship date and Q4 revenue without regulatory exposure.
-- **The paper:** The formal agency gate read "C24 system UL testing to start after successful completion of Skynet PSU UL" — the simultaneous protocol broke that linear dependency and bought roughly four weeks: the console surface was fully tested by June 2007, while the PSU's final UL approval didn't land until August 31, 2007 (Skynet CE certification followed September 26). The console shipped carrying UL, CE, and FCC marks.
+The C|24 requirements explicitly prohibited a fan because the console sits at the mix engineer's listening position. They also specified an external power supply, replacing the Control|24's internal supply. Moving power conversion outside the console and consolidating the rear-panel connections helped make the lower-profile enclosure possible.
 
-### 7. Component & Geometry Battles
+The specified operating environment was 10–35 °C. Cooling and packaging had to work within that requirement while keeping the listening position quiet.
 
-- **Bourns EM14 jog wheel:** The cost-down 14 mm encoder arrived as raw samples with six exposed 0.42 mm wire leads — a soldering-defect factory. Enforced a pre-terminated harness specification (plug-and-play assembly) and engineered a custom surround with tolerance analysis that preserved the premium "scrub" feel of a $10k console on commodity parts (integration bracket via ECO 13082).
-- **The "Gill" surfaces:** The signature side gills' complex curves broke vendor CAD imports. Rebuilt the Class-A transitions manually in Pro/Engineer (16.5 hours) and exported geometry in bite-sized STEP chunks the toolmaker could digest — a modeling failure turned seamless assembly.
-- **The "Kenny" cosmetics war:** The secondary metal vendor shipped panels with ripples, dents, and "dental white" silkscreen that washed out against the grey chassis. Enforced a First Article Inspection regimen, forced ink recalibration to true Bright White, and documented bend-line defects photo-by-photo until the vendor upgraded its tooling.
-- **Dust behind the meter lens:** The vendor proposed a multi-week mold retool to chase contamination trapped behind the meter window. I specified an adhesive-backed foam seal instead — killed the defect without touching the schedule.
-- **Tolerance & routing fixes:** Set the Bourns jog-wheel bracket mounting-hole tolerance to ±0.05 mm to settle a table wobble (ECO 13526), and pulled mounting hole MH5 off the SubMix board where it was fouling a critical trace route.
+### 4. A Field-Replaceable Headphone Jack
 
-## IV. Governance & Rhythm
+The proposed front jack location put the headphone plug where it could be struck, while the original assembly made replacement unnecessarily invasive. Arndt Hufenbach and Manufacturing pushed for service access, and I developed the mechanical response.
 
-- **The Pulse:** Managed under a constant "At Risk/Replan" status from an initial Q1 2007 target to the November 2007 ship, with weekly War Room coordination across Silicon Valley and Guangdong. The mechanical architecture was a solo mandate: one engineer integrating 100+ unique components — 19 PCB assemblies, 15 sheet-metal parts, 25+ molded parts, plus cables and hardware — inside extreme geometric constraints.
-- **The Method:** I don't redesign what isn't failing. On the meter assembly I traced the field history through the repair bench (via Ed Bangert) and found the LED spacers had a zero replacement record — so I kept the legacy design and spent the tooling budget where parts were actually breaking. Same instinct at kickoff: I asked for a nonfunctional "dog unit" — a dead sample — to tear down before I drew a line.
-- **The Artifacts:**
-  - **DCD Protocol** — the geometric firewall; 50+ binding drawing releases, MicPre 8 at Rev 12.
-  - **General Modeling Guide** — authored to hold data integrity through the Pro/Intralink 8.0 server migration.
-  - **ECO 12740** — vertical-hang cure fixture, released as a permanent process specification.
-  - **ECO 12263** — urgent "release all" of sheet metal and artwork to salvage the schedule.
-  - **ECO 12993** — headphone-jack trap-door serviceability redesign.
-  - **ECO 13082** — Bourns jog wheel integration bracket (P/N 9420-56156-00).
-  - **ECO 13707** — re-dimensioned drawings with hardened tolerances to lock inspection criteria (and deleted the front bolster's unused bosses).
-  - **ECO 13526** — jog-wheel bracket mounting holes given an explicit ±0.05 mm callout where no tolerance had been assigned: looser than the default sheet-tolerance table the vendor was failing parts against, tight enough to kill the table wobble.
-  - **The sustaining ledger** — ECO 12279 (TLA/BOM 9100-55144 release, enabled Pilot kitting), 12741 (fastener release — 456 M3x6 screws per console), 12954 (Skynet PSU formalized on the BOM + Kimdura serial labels), 13043 (U-clip substitution for China supply), 13092 (meter-lens flange 1.9 → 1.7 mm), 13105 (bolster boss wall-thickness + ribbing vs insert pull-out, Aug 2007), 13194 (bolster hex spacers), 13207 (misprinted-knob −04 variant), 13306 (meter-lens silkscreen), 13381 (unused weld studs removed from the fader panel — PCBA short-circuit risk).
+The first recessed-bolster mock-up did not settle the matter. In April, product management rejected it because different headphone-plug overmolds made the recess awkward to use. Several PMs remained strongly opposed to a replaceable jack. Arndt, Manufacturing and I continued pressing the issue, and I designed the field-replaceable unit that ultimately shipped.
 
-## V. Quantified Impact
+The July mounting-change form and the earlier rejected mock-up describe different stages of that work. The engineering lesson is the negotiation between access, protection, appearance and serviceability, carried through to a physical solution.
 
-- **Delivered** 500 units for Q4 2007 FQA and revenue recognition through a binary line-down supply crisis.
-- **Eliminated** the ~$200/unit licensing royalty by re-architecting the chassis around 16 in-house pre-amps.
-- **Secured** a 51.80% gross margin on a $9,995 MSRP despite a 20% annual rise in raw steel costs.
-- **Held** the $9,995 MSRP globally by absorbing bridge tooling as a project expense rather than permanent COGS.
-- **Salvaged** 100% of Pilot cosmetic yield by correcting 2.50 mm thermal warp to below 0.50 mm.
-- **Cut** headphone-jack MTTR from over 2 hours to under 10 minutes with the trap-door FRU redesign.
-- **Achieved** 100% mechanical fit on the first physical build of all 19 PCB assemblies.
-- **Enforced** the geometric firewall with 50+ Data Control Drawing releases.
-- **Managed** 13 major ECOs inside a compressed 6-month window to realign production tooling with design reality.
-- **Processed** 100 units through the Menlo Park hand-pack to bypass the stranded-PSU certification block.
-- **Reworked** 150 Rev C Monitor PCBs (9150-55199) by hand to kill a talkback audio-bleed defect. The verified delivery record places First Customer Ship on November 7, 2007; the earlier November 20 date was the Phase 1 plan, not the delivered milestone.
+### 5. Board-to-Mechanical Interfaces
+
+The June PCBA build register lists nineteen distinct board designs, with multiple instances of some assemblies in the console. They had to align with the faders, buttons, displays, mounting hardware and cable access inside one mechanical package.
+
+I used Data Control Drawings to make those interfaces explicit: board outlines, mounting holes, component locations and clearances that electrical layout had to respect. The MicPre8 I/O drawing reached revision 12. Its revision table records changes to mounting holes, headers, connector spacing and the board outline, with my name against the revisions. The point was to resolve those changes against the assembly while the design was still editable.
+
+The drawing releases gave PCB layout and mechanical tooling a common set of interfaces as both designs evolved.
+
+### 6. Power-Supply Certification
+
+The external supply created a separate release dependency. The July status report planned to hand-pack the first hundred supplies and apply UL labels at Menlo Park, while a later enclosure variant remained subject to thermal work.
+
+Engineering worked with UL to start system and supply certification in parallel. The post-project lessons identify that as a successful change to the NPI process. Mechanical release, hardware validation, certification and the final pack-out had to converge for shipment.
+
+### 7. Controls and Molded-Part Geometry
+
+The smaller Bourns EM14 encoder needed its own mechanical integration. I designed the jog-wheel support and surround so the component, knob and adjacent surface worked as an assembly. ECO 13082 records the bracket release. ECO 13526 later relaxes its mounting-hole tolerance to ±0.05 mm at the vendor's request, making the drawing compatible with the fabrication process.
+
+The gills required careful surface development and dimensional inspection against the side caps. The molded parts also brought short shots, drag, sinks, gate placement and interference around the faders. The June issue list separates completed corrections from open questions and temporary trim-to-fit measures. In sustaining work, I also supported foam sealing around the meter-lens area to address dust ingress.
+
+## IV. Production Acceptance and Release
+
+I carried the mechanical model through supplier files, drawing releases, inspection and assembly feedback. The record includes the plastics and artwork, the sheet-metal structure, small controls and light-management parts, and the changes needed after those pieces met on the line. The work extended into sustaining changes after First Customer Ship.
+
+Inspection criteria were part of that engineering responsibility. In November I originated deviation DEV00118 to remove noncritical dimensions and increase selected tolerances, with acceptance tied to named Jetcrown inspection reports. It covered side caps, the bolster, meter parts and gills. The decision preserved what controlled fit and function and made acceptable production variation explicit.
+
+The lessons-learned record is candid about the broader launch. It credits meeting Q4 FQA and revenue targets and getting costs below the Phase 1 target. It also records revision confusion, late board changes, cosmetic quality problems and inadequate spare-parts coverage. Mechanical control had to include the files, the supplier's understanding and the inspection decision, as well as the CAD.
+
+## V. Results
+
+- **Product mandate:** twenty-four faders, sixteen preamps and a 43-inch maximum width; removal of the approximately $200 licensed-design royalty.
+- **Mechanical integration:** nineteen distinct PCBA designs in the June build register; twelve documented revisions of the MicPre8 I/O drawing.
+- **Serviceability:** a field-replaceable headphone-jack assembly, developed despite resistance to changing the original design.
+- **Manufacturing:** a manual-fabrication bridge, documented cure-support alternatives and explicit acceptance criteria for production plastics.
+- **Delivery:** First Customer Ship on November 7, 2007. The project retrospective records that the Q4 FQA and revenue targets were achieved.
+
+The July financial plan estimated a 51.8% gross margin at an $8,995 suggested retail price. The later product-master approval set the price at $9,995.
 
 ## VI. Market Context & Legacy
 
-Everything above this line I can pin to an artifact — an ECO number, a DCD revision, an inspection report with a measurement on it. This section is the exception, and I flag that up front. It is the view from *outside* the bench: where the C|24 was positioned, the platform I inherited, what the market came to value, and how it aged after I had moved on. The external material here was originally compiled from a secondary deep-research pass; on 2026-07-12 every flagged claim was re-verified against primary sources — the period reviews (Sound on Sound, Mix, AudioTechnology), Avid's end-of-life records, the TEC Awards archive, vendor documentation — and corrected or cut where the record disagreed. What remains is either primary-sourced (see the secondary-source list at the end of this section) or explicitly my own testimony. None of it is load-bearing the way the engineering record is.
+The C|24 offered a substantial physical console below the ICON range: twenty-four faders, audio front-end functions and monitor control in one product. Kevin Becka's February 2008 field test connects the external power supply and DB25 conversion to the lower-profile design, and describes using the two-encoder surround panner. His review also records real tradeoffs, including LCD viewing angle and the loss of a dedicated numeric keypad. [Mix field test](https://www.mixonline.com/technology/field-test-digidesign-c24-workstation-controller-369458).
 
-### 1. The Position: An All-in-One Bet at $9,995
-
-The C|24 was never meant to be the cheapest control surface — it was meant to be the one that did everything in a single box. The $9,995 was the PRD target: the MSRP the cost structure was designed to hold, and the number I owned through the build. (Street, dealer, and configured-system pricing sat around and above it, so retrospective price figures vary — the MSRP target is the one to anchor on.) One chassis fused a 24-fader control surface, 16 mic pres, and a 5.1 monitor section, so a project or commercial studio could buy one unit instead of three. That integration *was* the product thesis, and it is the lens every market comparison runs through.
-
-Against the field, the C|24 sat in a deliberate slot: well below Digidesign's flagship ICON desks — the 8-fader D-Command main unit alone listed above the entire C|24 (£11,274 in Sound on Sound's 2006 ICON review), and a 32-fader D-Control system ran toward six figures — and above the entry-level tactile controllers. It debuted at AES New York in October 2007 and shipped that November; the trade press received it as the natural successor to the ubiquitous Control|24 — Mix called it "nothing short of great" — effectively the default console-style option for a mid-level Pro Tools room. Its nearest later reference points: the Avid S3 (on EUCON, Avid's high-speed Ethernet protocol — though note the C|24's own proprietary Ethernet protocol already carried 10-bit, 0.1 dB fader data; EUCON's edge over it was bandwidth and parameter depth, not the dramatic resolution gap it enjoys over MIDI surfaces), the SSL UF8 (2021 — whose Pro Tools integration still rides the old HUI protocol), and the ex-Euphonix Avid Artist Series at the entry tier of Avid's surface range. The protocol point matters for the legacy, and I return to it below.
-
-### 2. The Platform I Inherited
-
-I was not designing in a vacuum — I was re-architecting a platform with a specific inheritance. The original Control|24 (2001) was a Digidesign–Focusrite collaboration: Focusrite designed and manufactured the entirety of the hardware and supplied the 16 preamps (adapted from its Platinum range, marketed as Class A), while Digidesign owned the Pro Tools integration. Its dual-tier "stadium" chassis carried an internal switch-mode supply — a Skynet DGN-8200 — that ran hot enough to demand 105 °C-rated capacitors, and whose failure the repair community documents as "the most common issue with the Control 24." (The supplier continuity is worth savoring: the same Skynet whose internal supply defined the predecessor's failure mode built the external brick I moved the C|24's power into.)
-
-That inheritance *is* my mandate, restated from the outside. The moves the page documents — killing the licensed-preamp royalty by going to 16 in-house pre-amps, pulling the supply out to an external brick, and dropping to a low-profile single-tier chassis — are exactly the upgrades the period reviews called out: Mix opened on the low-profile design, praised the "external and well-vented power supply" against a predecessor supply that "failed more often than it should have," and noted the preamps were now Digidesign's own. That is the useful part of an outside check: the published record independently traces the same Focusrite-royalty exit and the same thermal-driven PSU relocation I executed on the bench.
-
-### 3. What the Market Valued — and What It Did Not
-
-Strip away the spec sheet and the thing buyers kept returning to was the **tactile real estate**: 24 touch-sensitive motorized faders in front of you, not 8 banked and paged. For a dense session that physical channel count is the entire argument — the enduring buyer consensus runs "if your session is 24 tracks then you see everything, without having to go to another page," and the community read is that most C|24 buyers were buying the surface, not the preamps or monitor section. That tracks with why I fought the fader-panel tolerances so hard through Pilot — the faders *were* the product.
-
-One feature in particular punched above its price and kept showing up in the affection: the **"Etch-a-Sketch" surround pan** — two rotary encoders driving X/Y placement across a 5.1 field, so an engineer could spot a sound by feel instead of buying a separate joystick module. I designed and built that one, and it was new on the C|24 — not carried over from the Control|24 — so I'll vouch for it directly; that it aged into part of the unit's folklore is the market telling me which details landed.
-
-I will record the honest knocks too, because a portfolio that lists only wins is not forensic — and the verification pass sharpened what the real knocks were. The 16 onboard preamps were heard exactly as designed: clean — Sound on Sound said the specs "spell C-L-E-A-N" while pointedly noting "there is no reason why you can't connect your boutique preamp as well"; users wanting harmonic color patched in outboard, the usual trade against characterful pres. The cabling cost was real: the analog I/O rides on 13 DB25 connectors, and SoS warned buyers to "make a generous allowance in your budget for cabling, or prepare for a marathon soldering session" — the breakout looms were a separate purchase. The reviews' remaining cons were the learning curve and the inability to lock tracks to channels. One piece of folklore the record refutes: the "too heavy to move" complaint belongs to the predecessor — the Control|24 specced 75 lbs, while Avid never published a C|24 weight at all and Sound on Sound called it "fairly compact." The steel I'll still own as a choice; the weight critique, it turns out, was never mine to carry.
-
-### 4. The Long Tail: How It Aged
-
-The decisions I locked in 2007 set the unit's shelf life, and two of them defined the legacy:
-
-- **Protocol, not metal, was the expiration date — and the metal won by a decade.** The C|24 spoke a proprietary Ethernet-based Pro Tools control layer. When Pro Tools 11 went 64-bit in 2013, Avid cut the drivers for the ProControl and the Control|24 — but not the C|24, which stayed officially supported through Pro Tools 12 and beyond while Avid steered the ecosystem toward the EUCON-based S-series. Avid's own lifecycle record: final sale December 31, 2017; end of all support December 31, 2022 — a fifteen-year run for hardware born in a compressed death-march, displaced in the end rather than worn out. On integrated hardware the software contract ages faster than the steel; here the steel got fifteen years out of the contract.
-- **It refused to die on the used market.** Resale figures in the secondary research disagree with each other, and I am deliberately **not** restating any of them as a number. The durable signal is qualitative and documented: Neyrinck's V-Control Pro added C|24 support in 2020, bridging the surface onto current Pro Tools and — for the first time in the product's life — other DAWs entirely (Logic, Cubase, Studio One) on modern macOS and Windows, Apple Silicon included. Owners keep units in service through custom-desk conversions, and sellers demonstrate condition with the board's built-in test modes — Reverb and eBay listings routinely include a video of the console running its "Vegas Mode" lamp-and-fader self-test (though the forum veterans' advice for actually vetting a unit is the static per-color LED and fader tests, where a dead segment can't hide in the blinking). People do not write drivers, or build furniture, for hardware nobody still runs.
-
-### 5. The Validation
-
-The strongest evidence that the platform landed is that it shows up in work that mattered. I hold these at arm's length — they are secondary, and the credit belongs to the records and the engineers who made them, not to me — but they are worth recording, now with the verification pass applied:
-
-- The lineage was recognized early: the predecessor Control|24 was a **2001 TEC Award nominee** for Small Format Console Technology (the Sony DMX-R100 took the win) — the hybrid "controller-plus-analog-front-end" concept the C|24 then refined was on the industry's shortlist from the start. (The original research claimed a win; the TEC archive says nominee, so nominee is what this page says.)
-- The C|24 became a working tool in rooms that mattered: producer **Nathan Chapman** recorded much of Taylor Swift's *Speak Now* at his Pain In The Art Studio in Nashville with a C|24 as his control surface — his own words in *Sound on Sound*, February 2011: "I work in Logic or Pro Tools and have a Digidesign C24 control surface." (An earlier draft placed the C|24 in Swift's personal studio; the source says Chapman's — precision matters more than the celebrity gloss.)
-- The trade press verdicts hold up verbatim: Mix's February 2008 Field Test (Kevin Becka) called the C|24 "nothing short of great" and — his phrase — "a surefire winner"; Sound on Sound (David Mellor, June 2008) closed with "For a Pro Tools user, buying a control surface is a matter of 'when' rather than 'if'. With the introduction of the C|24, 'now' could be the time!"
-
-The legacy line I would most want to put in my own words, rather than a research summary, is this: the C|24 was built well enough, and integrated tightly enough, that the market kept it working long after Digidesign stopped supporting it. The RoHS re-architecture, the in-house preamps, the low-profile chassis I salvaged through Pilot all shipped 500 units for Q4 2007 — and then kept running, in real studios, for the better part of two decades.
-
-### 6. Secondary sources (verified 2026-07-12)
-
-The claims in this section were checked against primary sources on 2026-07-12; the load-bearing ones:
-
-- *Sound on Sound*, June 2008 — C|24 review (David Mellor): soundonsound.com/reviews/digidesign-c24
-- *Mix*, Feb 2008 — C|24 Field Test (Kevin Becka; "nothing short of great," "surefire winner"): mixonline.com/technology/field-test-digidesign-c24-workstation-controller-369458
-- *Sound on Sound*, March 2001 — Digidesign/Focusrite Control|24 review: soundonsound.com/reviews/digidesignfocusrite-control-24
-- *Sound on Sound*, Aug 2006 — Digidesign ICON review (D-Control/D-Command pricing): soundonsound.com/reviews/digidesign-icon
-- *Sound on Sound*, Feb 2011 — "Secrets Of The Mix Engineers: Taylor Swift 'Speak Now'" (Paul Tingen; the Nathan Chapman C|24 quote): soundonsound.com/techniques/taylor-swift-speak-now
-- Avid Knowledge Base — End of Life dates (C|24: final sale 12/31/2017, end of support 12/31/2022): kb.avid.com/pkb/articles/en_US/faq/Avid-End-of-Life-Dates-Products-past-End-of-Support
-- Mix — TEC Awards archives (17th Annual nominees; cumulative winners list): mixonline.com/recording/tec-awards-nominees-372297 · mixonline.com/technology/former-tec-winners-380553
-- Neyrinck — V-Control Pro C|24 support: neyrinck.com/v-control-pro · docs.neyrinck.com/v-control-pro/c24
-- AudioTechnology — C24 review PDF (Control|24 "stadium" chassis, PSU externalization): audiotechnology.com/PDF/REVIEWS/AT65_DIGIDESIGN_C24.pdf
-- Euphonix AES 121st Convention paper 6957 (EuCon protocol; 32-bit values vs MIDI's 128 steps) · Avid S3 Guide v2024.10 (S3 on EUCON)
+The hardware had a long supported life. Avid lists final sale on December 31, 2017 and end of support on December 31, 2022. Neyrinck's current documentation describes third-party C|24 support through V-Control Pro, extending its software options beyond Avid's product cycle. [Avid lifecycle record](https://kb.avid.com/pkb/articles/en_US/faq/Avid-End-of-Life-Dates-Products-past-End-of-Support), [V-Control Pro documentation](https://docs.neyrinck.com/v-control-pro/c24/).
 
 ## VII. Source Trail
 
-The engineering claims in Sections I–V rest on the project's primary evidence archive — engineering change orders, data control drawings, vendor inspection reports, and build photography — compiled through the NotebookLM forensic registry (the Market Context & Legacy section above stands on secondary research and carries its own caveat):
-
-- `944055165-166-00 baking fixture chg.pdf` — warped ABS parts on flat racks vs. the vertical hanging fixture.
-- `before_and_after_rubber_paint.pdf` — inspection logs proving 2.27 mm paint-cure shrinkage.
-- `DCD_9150-55200-00_REV_12.pdf` — the MicPre 8 geometric contract at its twelfth revision.
-- `China Sheet Metal.pdf` — photographic record of rejected vendor panels (ripples, dents, washed-out silkscreen).
-- `C24_plastic_fit-misc.pdf` — fit-check interference and PEM insert pull-out failures.
-- `fit-check-01.jpg` / `C24_first-shot_gap-check.pdf` — gap analysis of plastic shrinkage against sheet metal.
-- `gill_dim.pdf` — finalized dimensions for the rebuilt side-gill surfaces.
-- `bourns_em14.pdf` — integration specification for the replacement jog wheel encoder.
-- `ECO_12263.pdf` — the urgent sheet metal release that put production back on schedule.
+The engineering account draws on the Curtis hardware PDD, the June PCBA build register, original project emails, drawing revision tables, vendor inspection and fixture records, ECOs, the November delivery schedule and the post-project lessons learned. The manufacturing photographs below show the actual parts and their interfaces. The economic figures retain the dates and assumptions of their source snapshots.

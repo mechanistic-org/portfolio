@@ -344,3 +344,10 @@ const navNext = nextProject
 		<Navbox prev={navPrev} next={navNext} />
 	</article>
 </BaseLayout>
+
+<style>
+	/* Keep C24's article, chronology and revision links below the fixed header. */
+	[data-project-article="c24"] :global([id]) {
+		scroll-margin-top: 6rem;
+	}
+</style>
