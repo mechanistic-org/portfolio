@@ -346,8 +346,9 @@ const navNext = nextProject
 </BaseLayout>
 
 <style>
-	/* Keep C24's article, chronology and revision links below the fixed header. */
-	[data-project-article="c24"] :global([id]) {
+	/* Keep the reviewed C24 and Orpheus article links below the fixed header. */
+	[data-project-article="c24"] :global([id]),
+	[data-project-article="ksystem-120"] :global([id]) {
 		scroll-margin-top: 6rem;
 	}
 </style>
