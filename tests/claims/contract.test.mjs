@@ -66,9 +66,18 @@ test("support changes identify downstream consumers; an evidence rename with ide
 		fs.writeFileSync(index,JSON.stringify({id:"LK-test",path:"renamed.md",sha256:digest("primary bytes")}));
 		verifyEvidence(r,root);
 		fs.writeFileSync(index,JSON.stringify({id:"LK-test",path:"renamed.md",sha256:digest("changed bytes")}));
+		const sibling=structuredClone(r.claims[0]);sibling.id="another-claim";r.claims.push(sibling);
+		r.consumers.push({...r.consumers[0],id:"another-claim",path:"colophon:shared-source"});
 		assert.throws(()=>verifyEvidence(r,root),/method:thermal[\s\S]*resume:audio/);
+		assert.throws(()=>verifyEvidence(r,root),/colophon:shared-source/);
 		assert.equal(affectedConsumers(r,["sc48-rise"]).length,2);
 	} finally { fs.rmSync(root,{recursive:true,force:true}); }
+});
+test("project traversal and duplicate consumer identity are rejected", () => {
+	const r=fixture();r.claims[0].project="../outside";r.claims[0].href="/projects/../outside/";
+	assert.throws(()=>projectPackage(r),/Invalid identity/);
+	const valid=fixture();valid.consumers.push(valid.consumers[0]);
+	assert.throws(()=>validateConsumers(valid,projectPackage(valid)),/Duplicate consumer/);
 });
 test("project assertion or anchor drift fails without invalidating unrelated page edits", () => {
 	const root=fs.mkdtempSync(path.join(os.tmpdir(),"claims-project-"));

@@ -20,7 +20,7 @@ export function projectPackage(registry, { release = false } = {}) {
 	const claims = registry.claims.map((record) => {
 		if (seen.has(record.id)) throw new Error(`Duplicate claim: ${record.id}`);
 		seen.add(record.id);
-		if (!/^[a-z0-9-]+$/.test(record.id) || !Number.isInteger(record.revision) || record.revision < 1)
+		if (!/^[a-z0-9-]+$/.test(record.id) || !/^[a-z0-9-]+$/.test(record.project) || !Number.isInteger(record.revision) || record.revision < 1)
 			throw new Error(`Invalid identity: ${record.id}`);
 		if (!record.href.startsWith(`/projects/${record.project}/`)) throw new Error(`Wrong project destination: ${record.id}`);
 		if (!record.attribution || !record.scope || !["observed", "proposed", "shipped"].includes(record.outcome)) throw new Error(`Incomplete assertion: ${record.id}`);
@@ -50,16 +50,19 @@ export function validateConsumers(registry, bundle) {
 export function verifyEvidence(registry, evidenceRoot) {
 	const index = fs.readFileSync(path.join(evidenceRoot, "registry/evidence.jsonl"), "utf8").trim().split(/\r?\n/).map(JSON.parse);
 	const byId = new Map(index.map((entry) => [entry.id.replace(/^evidence:/, ""), entry]));
-	const checked = new Set();
+	if (byId.size !== index.length) throw new Error("Duplicate evidence registry identity");
+	const checked = new Map();
 	for (const claim of registry.claims) for (const source of claim.sources) {
+		const impacted = registry.claims.filter((item) => item.sources.some((support) => support.id === source.id)).map((item) => item.id);
+		const affected = affectedConsumers(registry, impacted).join("\n");
 		const entry = byId.get(source.id.replace(/^evidence:/, ""));
-		if (!entry || entry.sha256 !== source.sha256) throw new Error(`Changed evidence: ${claim.id}/${source.id}\n${affectedConsumers(registry, [claim.id]).join("\n")}`);
+		if (!entry || entry.sha256 !== source.sha256) throw new Error(`Changed evidence: ${claim.id}/${source.id}\n${affected}`);
 		const file = path.resolve(evidenceRoot, entry.path);
 		if (!file.startsWith(path.resolve(evidenceRoot) + path.sep)) throw new Error("Evidence path escaped root");
-		if (!checked.has(file)) {
-			if (digest(fs.readFileSync(file)) !== entry.sha256) throw new Error(`Evidence bytes changed: ${claim.id}/${source.id}`);
-			checked.add(file);
-		}
+		const actualFile = fs.realpathSync(file);
+		if (!actualFile.startsWith(fs.realpathSync(evidenceRoot) + path.sep)) throw new Error("Evidence link escaped root");
+		if (!checked.has(actualFile)) checked.set(actualFile, digest(fs.readFileSync(actualFile)));
+		if (checked.get(actualFile) !== entry.sha256) throw new Error(`Evidence bytes changed: ${claim.id}/${source.id}\n${affected}`);
 	}
 }
 export function claimBlock(id, text) { return `{/* shared-claim:${id}:start */}\n${text}\n{/* shared-claim:${id}:end */}`; }
