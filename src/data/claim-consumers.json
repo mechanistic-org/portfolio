@@ -8,13 +8,6 @@
   },
   {
     "id": "c24-interfaces",
-    "path": "method:change-control",
-    "project": "c24",
-    "revision": 1,
-    "surface": "method"
-  },
-  {
-    "id": "c24-interfaces",
     "path": "resume:digidesign-2003:0",
     "project": "c24",
     "revision": 1,
@@ -37,13 +30,6 @@
   {
     "id": "c24-paint",
     "path": "method:process-forensics",
-    "project": "c24",
-    "revision": 1,
-    "surface": "method"
-  },
-  {
-    "id": "c24-paint",
-    "path": "method:root-cause",
     "project": "c24",
     "revision": 1,
     "surface": "method"
@@ -78,13 +64,6 @@
   },
   {
     "id": "c24-fabrication",
-    "path": "method:supply-chain",
-    "project": "c24",
-    "revision": 1,
-    "surface": "method"
-  },
-  {
-    "id": "c24-fabrication",
     "path": "method:dfa",
     "project": "c24",
     "revision": 1,
@@ -114,13 +93,6 @@
   {
     "id": "c24-acceptance",
     "path": "method:evidence",
-    "project": "c24",
-    "revision": 1,
-    "surface": "method"
-  },
-  {
-    "id": "c24-acceptance",
-    "path": "method:tooling",
     "project": "c24",
     "revision": 1,
     "surface": "method"

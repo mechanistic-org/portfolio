@@ -63,18 +63,8 @@ export const METHOD_NODES: readonly MethodNode[] = [
 
 	// ── Diagnosis ─────────────────────────────────────────────────────────────
 	{
-		id: "root-cause",
-		name: "Failure-mode analysis & root cause",
-		domains: ["motion_fault", "data_ai"],
-		value: 10,
-		blurb: claimFor("method:root-cause").text,
-		evidence: claimFor("method:root-cause").project,
-		href: claimFor("method:root-cause").href,
-		practice: "diagnosis",
-	},
-	{
 		id: "process-forensics",
-		name: "Process forensics",
+		name: "Failure analysis & process forensics",
 		domains: ["matter_heat", "motion_fault"],
 		value: 8,
 		blurb: claimFor("method:process-forensics").text,
@@ -95,16 +85,6 @@ export const METHOD_NODES: readonly MethodNode[] = [
 
 	// ── Production ────────────────────────────────────────────────────────────
 	{
-		id: "supply-chain",
-		name: "Supply chain & CM management",
-		domains: ["matter_heat", "data_ai"],
-		value: 9,
-		blurb: claimFor("method:supply-chain").text,
-		evidence: claimFor("method:supply-chain").project,
-		href: claimFor("method:supply-chain").href,
-		practice: "production",
-	},
-	{
 		id: "serviceability",
 		name: "Serviceability & field support",
 		domains: ["matter_heat", "sensory"],
@@ -114,31 +94,11 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		href: claimFor("method:serviceability").href,
 		practice: "production",
 	},
-	{
-		id: "tooling",
-		name: "Tooling & production acceptance",
-		domains: ["matter_heat"],
-		value: 7,
-		blurb: claimFor("method:tooling").text,
-		evidence: claimFor("method:tooling").project,
-		href: claimFor("method:tooling").href,
-		practice: "production",
-	},
 
 	// ── Governance ────────────────────────────────────────────────────────────
 	{
-		id: "change-control",
-		name: "Change control & PLM discipline",
-		domains: ["data_ai", "matter_heat"],
-		value: 8,
-		blurb: claimFor("method:change-control").text,
-		evidence: claimFor("method:change-control").project,
-		href: claimFor("method:change-control").href,
-		practice: "governance",
-	},
-	{
 		id: "evidence",
-		name: "Evidence discipline",
+		name: "Production acceptance & evidence",
 		domains: ["data_ai"],
 		value: 9,
 		blurb: claimFor("method:evidence").text,
@@ -222,21 +182,21 @@ export const COMPETENCY_COVERAGE: Record<string, string | null> = {
 	// engineering
 	"Robotic Mechanism & Actuator Design": "mechanism-actuation",
 	"Tolerance / Alignment / Load Paths": "tolerance-integration",
-	"Wear & Failure-Mode Analysis (RCA)": "root-cause",
+	"Wear & Failure-Mode Analysis (RCA)": "process-forensics",
 	"GD&T · Stack-Ups (WC / RSS)": "tolerance-integration",
 	"DOE Test-Method Design": "doe",
 	"FEA-Correlated Validation (ANSYS)": null, // Career competency retained; Glyph example awaits support.
 	"Haptic & Kinematic Tuning": "haptics",
 	// manufacturing
 	"DFM / DFA for Automated Assembly": "dfa",
-	"High-Volume NPI (Tool Start → MP)": "tooling",
+	"High-Volume NPI (Tool Start → MP)": "evidence",
 	"Injection Molding · Die Casting · Sheet Metal": "process-forensics",
 	"Accelerated Life / Destruction Testing": "life-test",
 	"Yield Recovery & CAPA": null, // Career competency retained; optical-yield example awaits reconciliation.
-	"CM Management (Suzhou · Guadalajara · Taipei)": "supply-chain",
+	"CM Management (Suzhou · Guadalajara · Taipei)": "dfa",
 	// tools & regulatory
 	"Onshape, Creo, Solidworks": null, // a toolchain, not a capability — résumé only
-	"PLM Architecture (Agile / Arena / Windchill)": "change-control",
+	"PLM Architecture (Agile / Arena / Windchill)": "tolerance-integration",
 	"Thermal Simulation (CFD)": "thermal-architecture",
 	"UL 1472 / UL 20 / FCC": "regulatory",
 	// Evidence located 2026-07-29 (operator). NOTE the revision letter: the Glyph

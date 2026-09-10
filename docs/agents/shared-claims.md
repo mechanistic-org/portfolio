@@ -52,7 +52,7 @@ through the shared package; the résumé summary is ordinary editorial copy.
 Accepted LinkedIn export text and its acceptance hashes are unchanged. Its
 historical wording is not silently re-approved by this migration.
 
-This first migration covers 14 assertions, 16 method examples, eight colophon
+This first migration covers 14 assertions, 12 method examples, eight colophon
 cards, six résumé bullets and three case-study blocks. One further method node
 describes the site's infrastructure. Existing Makeline/M700/NOON and earlier
 career text keeps its prior acceptance and remains outside this migration;
