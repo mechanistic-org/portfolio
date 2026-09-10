@@ -1,12 +1,19 @@
 # Resume authority and local candidates
 
-`resume_master.ts` owns identity/contact, summary, career facts, explicit date precision,
+`resume_master.ts` owns identity/contact, the accepted #152 channel baseline, career facts, explicit date precision,
 canonical and reviewed channel titles, competencies, education, recognition, and the
 canonical PDF URL. `resume_projection.ts` derives the compact HTML resume model,
 JSON Resume, site identity metadata, global Person JSON-LD, and PDF/download configuration.
 The homepage career span reads the canonical periods. Project content/evidence keeps its
 existing authority. `work_history.json` is a legacy timeline input, not a public identity
 or structured-resume authority; this migration does not rewrite its historical content.
+
+Under #278, the current résumé summary is editorial copy in the projection,
+and the scoped C24/Glyph/SC48 achievement bullets resolve from canon-owned
+[shared claims](shared-claims.md). The old project wording in the #152 baseline
+remains recoverable for the unchanged LinkedIn acceptance contract; it is not
+the current website/PDF achievement authority. Identity and all unaffected
+career entries retain their exact accepted values.
 
 `linkedin_master.ts` owns only channel wording: headline, About, and program-first blurbs
 referencing stable role IDs. Company names and positions never serve as join keys.
@@ -20,8 +27,9 @@ Requirements: [portfolio#219](https://github.com/mechanistic-org/portfolio/issue
 Accepted source: [1b2cd2f6](https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac).
 Acceptance: [#152 receipt](https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741).
 The execution cold-read verified 8 resume and 12 LinkedIn entries at that revision.
-Focused tests load that exact Git source as TypeScript modules and compare every accepted
-blurb, headline, About, channel company/title, and compact resume entry.
+Focused tests load that exact Git source as TypeScript modules and compare the
+accepted identity, LinkedIn wording and unaffected résumé entries. The six
+replaced achievement bullets are checked against the shared claim projection.
 
 All seven recent canonical titles come from the accepted resume. The different accepted
 LinkedIn labels remain explicit display mappings under each canonical role; they are not

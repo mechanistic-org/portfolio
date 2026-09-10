@@ -1,0 +1,247 @@
+{
+  "claims": [
+    {
+      "href": "/projects/c24/#shared-c24-interfaces",
+      "id": "c24-interfaces",
+      "project": "c24",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "case-study": {
+          "text": "I controlled C|24 board interfaces through Data Control Drawings. The June register lists 19 distinct PCBA designs; the MicPre8 I/O drawing records 12 revisions.",
+          "title": "Resolve interfaces before tooling"
+        },
+        "colophon": {
+          "text": "I controlled C|24 board interfaces through Data Control Drawings. The June register lists 19 distinct PCBA designs; the MicPre8 I/O drawing records 12 revisions.",
+          "title": "Resolve interfaces before tooling"
+        },
+        "method": {
+          "text": "I controlled C|24 board interfaces through Data Control Drawings. The June register lists 19 distinct PCBA designs; the MicPre8 I/O drawing records 12 revisions.",
+          "title": "Resolve interfaces before tooling"
+        },
+        "resume": {
+          "text": "I controlled C|24 board interfaces through Data Control Drawings. The June register lists 19 distinct PCBA designs; the MicPre8 I/O drawing records 12 revisions.",
+          "title": "Resolve interfaces before tooling"
+        }
+      }
+    },
+    {
+      "href": "/projects/c24/#shared-c24-paint",
+      "id": "c24-paint",
+      "project": "c24",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "colophon": {
+          "text": "One C|24 side-cap sample lost 1.04 mm in length through painting and ended 2.27 mm below its lower drawing limit. Flatness was measured separately; the cure-support comparison addressed deformation.",
+          "title": "Separate the measurement from the diagnosis"
+        },
+        "method": {
+          "text": "One C|24 side-cap sample lost 1.04 mm in length through painting and ended 2.27 mm below its lower drawing limit. Flatness was measured separately; the cure-support comparison addressed deformation.",
+          "title": "Separate the measurement from the diagnosis"
+        }
+      }
+    },
+    {
+      "href": "/projects/c24/#shared-c24-cure",
+      "id": "c24-cure",
+      "project": "c24",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "method": {
+          "text": "For C|24's long molded side caps, I worked with the supplier on cure support and mating geometry. Its comparison documents vertical Method A alongside two unsuccessful support arrangements.",
+          "title": "Test the production process"
+        }
+      }
+    },
+    {
+      "href": "/projects/c24/#shared-c24-architecture",
+      "id": "c24-architecture",
+      "project": "c24",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "colophon": {
+          "text": "C|24's requirements called for an external power supply and prohibited a fan at the listening position. Moving power conversion outside the console helped make the lower-profile enclosure possible.",
+          "title": "Start with the product constraint"
+        },
+        "method": {
+          "text": "C|24's requirements called for an external power supply and prohibited a fan at the listening position. Moving power conversion outside the console helped make the lower-profile enclosure possible.",
+          "title": "Start with the product constraint"
+        }
+      }
+    },
+    {
+      "href": "/projects/c24/#shared-c24-fabrication",
+      "id": "c24-fabrication",
+      "project": "c24",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "method": {
+          "text": "I worked with Mass Precision on manual offset-welded C|24 panels and supported the overseas fabrication path while welding capability and panel quality were resolved. Tool access and cosmetic quality belonged in the same manufacturing decision.",
+          "title": "Design for the supplier's process"
+        }
+      }
+    },
+    {
+      "href": "/projects/c24/#shared-c24-service",
+      "id": "c24-service",
+      "project": "c24",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "colophon": {
+          "text": "I designed the field-replaceable C|24 headphone-jack unit that shipped, with Arndt Hufenbach and Manufacturing pressing for service access. The earlier recessed mock-up had been rejected.",
+          "title": "Make the repair part of the design"
+        },
+        "method": {
+          "text": "I designed the field-replaceable C|24 headphone-jack unit that shipped, with Arndt Hufenbach and Manufacturing pressing for service access. The earlier recessed mock-up had been rejected.",
+          "title": "Make the repair part of the design"
+        },
+        "resume": {
+          "text": "I designed the field-replaceable C|24 headphone-jack unit that shipped, with Arndt Hufenbach and Manufacturing pressing for service access. The earlier recessed mock-up had been rejected.",
+          "title": "Make the repair part of the design"
+        }
+      }
+    },
+    {
+      "href": "/projects/c24/#shared-c24-acceptance",
+      "id": "c24-acceptance",
+      "project": "c24",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "method": {
+          "text": "I originated C|24 deviation DEV00118 to remove noncritical dimensions and increase selected tolerances against named inspection reports. Acceptance stayed tied to fit, function and the production parts.",
+          "title": "Define what the factory should accept"
+        }
+      }
+    },
+    {
+      "href": "/projects/c24/#shared-c24-controls",
+      "id": "c24-controls",
+      "project": "c24",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "method": {
+          "text": "I designed the C|24 jog-wheel support and surround around the Bourns EM14 encoder. The bracket release and later tolerance relaxation connected the control, adjacent geometry and supplier process.",
+          "title": "Carry the control into the assembly"
+        }
+      }
+    },
+    {
+      "href": "/projects/c24/#shared-c24-margin",
+      "id": "c24-margin",
+      "project": "c24",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "colophon": {
+          "text": "C|24's July financial plan estimated 51.8% gross margin at an $8995 suggested retail price.",
+          "title": "Keep the estimate with its assumptions"
+        }
+      }
+    },
+    {
+      "href": "/projects/avegant-glyph/#shared-glyph-fit",
+      "id": "glyph-fit",
+      "project": "avegant-glyph",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "colophon": {
+          "text": "Developed Glyph headband configurations pairing 1.2 mm and 1.4 mm springs with 65A and 75A liners. Measured force curves informed the next round of testing.",
+          "title": "Test the assembled wearable"
+        },
+        "method": {
+          "text": "Developed Glyph headband configurations pairing 1.2 mm and 1.4 mm springs with 65A and 75A liners. Measured force curves informed the next round of testing.",
+          "title": "Test the assembled wearable"
+        },
+        "resume": {
+          "text": "Developed Glyph headband configurations pairing 1.2 mm and 1.4 mm springs with 65A and 75A liners. Measured force curves informed the next round of testing.",
+          "title": "Test the assembled wearable"
+        }
+      }
+    },
+    {
+      "href": "/projects/avegant-glyph/#shared-glyph-cohorts",
+      "id": "glyph-cohorts",
+      "project": "avegant-glyph",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "case-study": {
+          "text": "Tracked Glyph telescope-arm tests by dated specimen cohort. In the March 16 T6 cohort, specimens 49 and 50 of the five tested could not return at 250 cycles. These are dated specimen results, not a production failure rate or a sequence of tooling revisions. The reports contain conflicting summary and comment fields. Later cable concepts reused the T labels and cannot inherit these passes.",
+          "title": "Keep failures with their test cohort"
+        },
+        "colophon": {
+          "text": "Tracked Glyph telescope-arm tests by dated specimen cohort. In the March 16 T6 cohort, specimens 49 and 50 of the five tested could not return at 250 cycles.",
+          "title": "Keep failures with their test cohort"
+        },
+        "method": {
+          "text": "Tracked Glyph telescope-arm tests by dated specimen cohort. In the March 16 T6 cohort, specimens 49 and 50 of the five tested could not return at 250 cycles.",
+          "title": "Keep failures with their test cohort"
+        },
+        "resume": {
+          "text": "Tracked Glyph telescope-arm tests by dated specimen cohort. In the March 16 T6 cohort, specimens 49 and 50 of the five tested could not return at 250 cycles.",
+          "title": "Keep failures with their test cohort"
+        }
+      }
+    },
+    {
+      "href": "/projects/avegant-glyph/#shared-glyph-changes",
+      "id": "glyph-changes",
+      "project": "avegant-glyph",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "method": {
+          "text": "I owned Glyph's cable-kinking, chassis-abrasion and second-source work, bringing mechanical and routing changes into lifecycle and drop testing. Validation was underway in the April record.",
+          "title": "Follow the cable through the moving assembly"
+        },
+        "resume": {
+          "text": "I owned Glyph's cable-kinking, chassis-abrasion and second-source work, bringing mechanical and routing changes into lifecycle and drop testing. Validation was underway in the April record.",
+          "title": "Follow the cable through the moving assembly"
+        }
+      }
+    },
+    {
+      "href": "/projects/sc48/#shared-sc48-thermal",
+      "id": "sc48-thermal",
+      "project": "sc48",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "case-study": {
+          "text": "Compared SC48 4U configurations with three 80 mm fans at 8.5 V and 12 V: left R69 rise differed by 9.9°C and absolute temperature by 11.6°C, with differing ambient conditions. This does not isolate voltage as the cause of the full change. The 75°C log entry is an observed shutdown, not an established BIOS threshold or a basis for claiming safety margin.",
+          "title": "Compare complete cooling configurations"
+        },
+        "colophon": {
+          "text": "Compared SC48 4U configurations with three 80 mm fans at 8.5 V and 12 V: left R69 rise differed by 9.9°C and absolute temperature by 11.6°C, with differing ambient conditions.",
+          "title": "Compare complete cooling configurations"
+        },
+        "resume": {
+          "text": "Compared SC48 4U configurations with three 80 mm fans at 8.5 V and 12 V: left R69 rise differed by 9.9°C and absolute temperature by 11.6°C, with differing ambient conditions.",
+          "title": "Compare complete cooling configurations"
+        }
+      }
+    },
+    {
+      "href": "/projects/sc48/#shared-sc48-outcome",
+      "id": "sc48-outcome",
+      "project": "sc48",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "method": {
+          "text": "SC48's cooling and enclosure work continued through competing configurations. I recall choosing 4U because it worked, passing EMI certification and shipping, with Arndt and Manufacturing carrying the work forward.",
+          "title": "Carry the tradeoff through release"
+        }
+      }
+    }
+  ],
+  "schema": 1
+}

@@ -18,7 +18,8 @@ export interface ResumePresentation {
 	bullets: string[];
 }
 
-// Factual authority. See docs/agents/resume-authority.md for evidence and review boundaries.
+// Career identity authority and preserved #152 channel baseline. Current project
+// achievements resolve in resume_projection.ts; see docs/agents/resume-authority.md.
 export const resumeMaster = {
 	header: {
 		name: "Erik Norris",

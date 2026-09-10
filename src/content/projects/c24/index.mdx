@@ -442,7 +442,11 @@ I also designed and built the new two-encoder surround-panning interface: an X/Y
 
 ### 1. Paint Curing and Side-Cap Fit
 
+<span id="shared-c24-cure"></span>
+
 The long ABS side caps exposed the interaction between molding, paint curing and assembly fit. Jetcrown's comparison shows the original unsupported baking arrangement, an attempted three-support fixture that still allowed twisting, and Method A, which held the parts vertically to reduce deformation. I worked the problem through the supplier's process and the mating geometry.
+
+<span id="shared-c24-paint"></span>
 
 The July 5 inspection table shows why the diagnosis mattered. One left-side-cap sample lost 1.04 mm in length through painting, from 755.28 to 754.24 mm, ending 2.27 mm below the lower drawing limit. The same inspection tracked flatness separately. Cure support could address deformation, while the part's final size and mating geometry still needed their own decisions.
 
@@ -452,11 +456,15 @@ I released the plastics for production through ECO 12740, including mechanical c
 
 The main panel combined large fabricated surfaces with densely placed welded hardware. By March 7, 2007, the status report recorded Kwanta's no-bid and an active Operations and Manufacturing response. The April report identified Mass Precision and Kenny as bridge options within the VTech manufacturing program.
 
+<span id="shared-c24-fabrication"></span>
+
 I worked with Mass Precision on manual offset-welded parts and supported the overseas fabrication path while welding capability and panel quality were being resolved. The geometry still had to work at the factory: access for the welding head, placement of the studs, countersinks, bend quality and the cosmetic surface all belonged to the same part.
 
 I fully ruptured my Achilles during this period. After returning from the hospital, I sent the weld-stud files from the hotel so fabrication could continue. The work progressed, but the later lessons-learned report also records the cost of working outside the normal file-control system: an incongruent revision reached the manufacturer.
 
 ### 3. A Quiet, Low-Profile Console
+
+<span id="shared-c24-architecture"></span>
 
 The C|24 requirements explicitly prohibited a fan because the console sits at the mix engineer's listening position. They also specified an external power supply, replacing the Control|24's internal supply. Moving power conversion outside the console and consolidating the rear-panel connections helped make the lower-profile enclosure possible.
 
@@ -466,13 +474,19 @@ The specified operating environment was 10–35 °C. Cooling and packaging had t
 
 The proposed front jack location put the headphone plug where it could be struck, while the original assembly made replacement unnecessarily invasive. Arndt Hufenbach and Manufacturing pushed for service access, and I developed the mechanical response.
 
+<span id="shared-c24-service"></span>
+
 The first recessed-bolster mock-up did not settle the matter. In April, product management rejected it because different headphone-plug overmolds made the recess awkward to use. Several PMs remained strongly opposed to a replaceable jack. Arndt, Manufacturing and I continued pressing the issue, and I designed the field-replaceable unit that ultimately shipped.
 
 The July mounting-change form and the earlier rejected mock-up describe different stages of that work. The engineering lesson is the negotiation between access, protection, appearance and serviceability, carried through to a physical solution.
 
 ### 5. Board-to-Mechanical Interfaces
 
-The June PCBA build register lists nineteen distinct board designs, with multiple instances of some assemblies in the console. They had to align with the faders, buttons, displays, mounting hardware and cable access inside one mechanical package.
+<span id="shared-c24-interfaces"></span>
+
+{/* shared-claim:c24-interfaces:start */}
+I controlled C|24 board interfaces through Data Control Drawings. The June register lists 19 distinct PCBA designs; the MicPre8 I/O drawing records 12 revisions.
+{/* shared-claim:c24-interfaces:end */}
 
 I used Data Control Drawings to make those interfaces explicit: board outlines, mounting holes, component locations and clearances that electrical layout had to respect. The MicPre8 I/O drawing reached revision 12. Its revision table records changes to mounting holes, headers, connector spacing and the board outline, with my name against the revisions. The point was to resolve those changes against the assembly while the design was still editable.
 
@@ -486,6 +500,8 @@ Engineering worked with UL to start system and supply certification in parallel.
 
 ### 7. Controls and Molded-Part Geometry
 
+<span id="shared-c24-controls"></span>
+
 The smaller Bourns EM14 encoder needed its own mechanical integration. I designed the jog-wheel support and surround so the component, knob and adjacent surface worked as an assembly. ECO 13082 records the bracket release. ECO 13526 later relaxes its mounting-hole tolerance to ±0.05 mm at the vendor's request, making the drawing compatible with the fabrication process.
 
 The gills required careful surface development and dimensional inspection against the side caps. The molded parts also brought short shots, drag, sinks, gate placement and interference around the faders. The June issue list separates completed corrections from open questions and temporary trim-to-fit measures. In sustaining work, I also supported foam sealing around the meter-lens area to address dust ingress.
@@ -493,6 +509,8 @@ The gills required careful surface development and dimensional inspection agains
 ## IV. Production Acceptance and Release
 
 I carried the mechanical model through supplier files, drawing releases, inspection and assembly feedback. The record includes the plastics and artwork, the sheet-metal structure, small controls and light-management parts, and the changes needed after those pieces met on the line. The work extended into sustaining changes after First Customer Ship.
+
+<span id="shared-c24-acceptance"></span>
 
 Inspection criteria were part of that engineering responsibility. In November I originated deviation DEV00118 to remove noncritical dimensions and increase selected tolerances, with acceptance tied to named Jetcrown inspection reports. It covered side caps, the bolster, meter parts and gills. The decision preserved what controlled fit and function and made acceptable production variation explicit.
 
@@ -505,6 +523,8 @@ The lessons-learned record is candid about the broader launch. It credits meetin
 - **Serviceability:** a field-replaceable headphone-jack assembly, developed despite resistance to changing the original design.
 - **Manufacturing:** a manual-fabrication bridge, documented cure-support alternatives and explicit acceptance criteria for production plastics.
 - **Delivery:** First Customer Ship on November 7, 2007. The project retrospective records that the Q4 FQA and revenue targets were achieved.
+
+<span id="shared-c24-margin"></span>
 
 The July financial plan estimated a 51.8% gross margin at an $8,995 suggested retail price. The later product-master approval set the price at $9,995.
 

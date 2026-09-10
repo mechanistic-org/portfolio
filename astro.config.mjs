@@ -59,6 +59,7 @@ const __dirname = path.dirname(__filename);
 
 // https://astro.build/config
 export default defineConfig({
+	cacheDir: "./.astro/cache",
 	output: "static",
 	// Cloudflare Adapter handles the edge image service / Worker generation.
 	adapter: cloudflare({
@@ -167,6 +168,8 @@ export default defineConfig({
 		// }),
 	],
 	vite: {
+		// Keep worktree caches local even when dependencies are shared by junction.
+		cacheDir: path.resolve(__dirname, ".astro/vite"),
 		plugins: [tailwindcss()],
 		optimizeDeps: {
 			include: ["axobject-query"],

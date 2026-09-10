@@ -1,22 +1,7 @@
+import { claimFor } from "./claim-presentations";
 import type { DomainId } from "./domains";
 
-/**
- * Capability nodes for /how-i-work.
- *
- * The organising idea: a competencies list is a set of unverifiable assertions.
- * Every node here instead carries ONE concrete instance from the corpus and a
- * link to the page that documents it. The claim and its evidence ship together
- * or the node does not exist.
- *
- * Domain membership reuses the same four-domain model as /about
- * (src/config/domains.ts), so the two pages are the same instrument asking
- * different questions: /about clusters WORK by physics, this clusters METHOD by
- * physics.
- *
- * SOURCING RULE (operator hard limit): every number below is transcribed from a
- * page in this repo, not inferred. `evidence` names the source slug. Anything
- * that cannot be pinned to a page does not get a number.
- */
+/** Capability examples resolve from canon-owned assertions. Layout and career coverage stay here. */
 export interface MethodNode {
 	id: string;
 	/** The capability, stated as a practice rather than a tool. */
@@ -40,10 +25,9 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		name: "Thermal & EMI architecture",
 		domains: ["matter_heat", "sensory"],
 		value: 9,
-		blurb:
-			"Validated active-cooling fallbacks on the C|24, then removed the heat source instead — re-architected 4U to 3U and moved the PSU to an external brick, shipping a silent fanless console that held its 10–35 °C window.",
-		evidence: "c24",
-		href: "/projects/c24/",
+		blurb: claimFor("method:thermal-architecture").text,
+		evidence: claimFor("method:thermal-architecture").project,
+		href: claimFor("method:thermal-architecture").href,
 		practice: "design",
 	},
 	{
@@ -51,10 +35,9 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		name: "Tolerance, stack-up & mechanical integration",
 		domains: ["matter_heat"],
 		value: 10,
-		blurb:
-			"Authored the Data Control Drawing protocol on the C|24: 50+ binding geometric contracts overlaid against the 3D master and rejected on 0.5 mm variance. 100% mechanical fit on the first physical build of 19 PCB assemblies.",
-		evidence: "c24",
-		href: "/projects/c24/",
+		blurb: claimFor("method:tolerance-integration").text,
+		evidence: claimFor("method:tolerance-integration").project,
+		href: claimFor("method:tolerance-integration").href,
 		practice: "design",
 	},
 	{
@@ -62,10 +45,9 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		name: "Mechanism & actuated-system design",
 		domains: ["motion_fault", "matter_heat"],
 		value: 9,
-		blurb:
-			"Lead mechanical architect on a cobotic food-assembly makeline coordinating 70+ actuators at ±2% portion precision and 350 meals per hour.",
-		evidence: "makeline",
-		href: "/projects/makeline/",
+		blurb: claimFor("method:mechanism-actuation").text,
+		evidence: claimFor("method:mechanism-actuation").project,
+		href: claimFor("method:mechanism-actuation").href,
 		practice: "design",
 	},
 	{
@@ -73,10 +55,9 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		name: "Human factors & class-A surfacing",
 		domains: ["sensory", "matter_heat"],
 		value: 7,
-		blurb:
-			"Characterised the Glyph headband against a documented trilemma of retention, acoustic seal and pain — settling at 7.5 N clamp force on 0.8 mm hard-rolled stainless, then compensating the acoustic leak electronically rather than pretending the compromise away.",
-		evidence: "avegant-glyph",
-		href: "/projects/avegant-glyph/",
+		blurb: claimFor("method:human-factors").text,
+		evidence: claimFor("method:human-factors").project,
+		href: claimFor("method:human-factors").href,
 		practice: "design",
 	},
 
@@ -86,10 +67,9 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		name: "Failure-mode analysis & root cause",
 		domains: ["motion_fault", "data_ai"],
 		value: 10,
-		blurb:
-			"Traced a 100% field-failure mode in a disc-changer mechanism through 3,000,000+ logged cycle events to a friction-coefficient drift.",
-		evidence: "m700",
-		href: "/projects/m700/",
+		blurb: claimFor("method:root-cause").text,
+		evidence: claimFor("method:root-cause").project,
+		href: claimFor("method:root-cause").href,
 		practice: "diagnosis",
 	},
 	{
@@ -97,10 +77,9 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		name: "Process forensics",
 		domains: ["matter_heat", "motion_fault"],
 		value: 8,
-		blurb:
-			"Traced 2.50 mm of ABS 'banana' warp to heat-facilitated creep in a paint-cure cycle — parts baked flat on wire racks, below glass transition, sagging under their own weight. Not a material problem. A fixturing problem.",
-		evidence: "c24",
-		href: "/projects/c24/",
+		blurb: claimFor("method:process-forensics").text,
+		evidence: claimFor("method:process-forensics").project,
+		href: claimFor("method:process-forensics").href,
 		practice: "diagnosis",
 	},
 	{
@@ -108,34 +87,21 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		name: "DOE & test-method design",
 		domains: ["motion_fault", "data_ai"],
 		value: 8,
-		blurb:
-			"Rejected the vendor's proposed fix and ran a comparative cure study instead — Method A vs B vs C — then codified the winner as a permanent manufacturing spec rather than a one-off rescue.",
-		evidence: "c24",
-		href: "/projects/c24/",
+		blurb: claimFor("method:doe").text,
+		evidence: claimFor("method:doe").project,
+		href: claimFor("method:doe").href,
 		practice: "diagnosis",
 	},
 
 	// ── Production ────────────────────────────────────────────────────────────
 	{
-		id: "yield-recovery",
-		name: "Yield recovery & CAPA",
-		domains: ["matter_heat", "motion_fault"],
-		value: 10,
-		blurb:
-			"Drove Glyph cleanroom optical yield from 35.40% to 77.87% under particle contamination, scrapping 712 optical units on dead-pixel evidence rather than shipping them.",
-		evidence: "avegant-glyph",
-		href: "/projects/avegant-glyph/",
-		practice: "production",
-	},
-	{
 		id: "supply-chain",
 		name: "Supply chain & CM management",
 		domains: ["matter_heat", "data_ai"],
 		value: 9,
-		blurb:
-			"When the overseas CM no-bid the C|24's most complex panel mid-schedule, ran a dual-source bridge — domestic manual offset-welding to hold the line while the overseas automated process qualified — and protected the ship date.",
-		evidence: "c24",
-		href: "/projects/c24/",
+		blurb: claimFor("method:supply-chain").text,
+		evidence: claimFor("method:supply-chain").project,
+		href: claimFor("method:supply-chain").href,
 		practice: "production",
 	},
 	{
@@ -143,21 +109,19 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		name: "Serviceability & field support",
 		domains: ["matter_heat", "sensory"],
 		value: 6,
-		blurb:
-			"Cut headphone-jack mean-time-to-repair on the C|24 from over two hours to under ten minutes, against a measured field failure rate.",
-		evidence: "c24",
-		href: "/projects/c24/",
+		blurb: claimFor("method:serviceability").text,
+		evidence: claimFor("method:serviceability").project,
+		href: claimFor("method:serviceability").href,
 		practice: "production",
 	},
 	{
 		id: "tooling",
-		name: "Tooling strategy & NRE recovery",
+		name: "Tooling & production acceptance",
 		domains: ["matter_heat"],
 		value: 7,
-		blurb:
-			"Directed $59,500–$76,500 of tooling-recovery intervention across a three-continent vendor ecosystem — core-side slides, insert work, draft reversals, gate relocations — and bridged with documented, bounded deviations where steel was too slow.",
-		evidence: "avegant-glyph",
-		href: "/projects/avegant-glyph/",
+		blurb: claimFor("method:tooling").text,
+		evidence: claimFor("method:tooling").project,
+		href: claimFor("method:tooling").href,
 		practice: "production",
 	},
 
@@ -167,10 +131,9 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		name: "Change control & PLM discipline",
 		domains: ["data_ai", "matter_heat"],
 		value: 8,
-		blurb:
-			"13 major ECOs in six months on the C|24, with 50+ Data Control Drawing releases enforced — the fixes written into the record as specifications, not remembered as heroics.",
-		evidence: "c24",
-		href: "/projects/c24/",
+		blurb: claimFor("method:change-control").text,
+		evidence: claimFor("method:change-control").project,
+		href: claimFor("method:change-control").href,
 		practice: "governance",
 	},
 	{
@@ -178,10 +141,9 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		name: "Evidence discipline",
 		domains: ["data_ai"],
 		value: 9,
-		blurb:
-			"Every claim on this site is pinned to an artifact — an ECO number, a DCD revision, an inspection report with a measurement on it. Where it is not, the page says so out loud and downgrades the claim.",
-		evidence: "c24",
-		href: "/projects/c24/#vi-the-epistemic-boundary",
+		blurb: claimFor("method:evidence").text,
+		evidence: claimFor("method:evidence").project,
+		href: claimFor("method:evidence").href,
 		practice: "governance",
 	},
 	{
@@ -190,7 +152,7 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		domains: ["data_ai", "motion_fault"],
 		value: 7,
 		blurb:
-			"Built and operate a local agent infrastructure that compiles thirty years of raw program files into a single sourced record — the same constraint method applied to software: fence the failure modes before assembly.",
+			"Built and operate a local agent infrastructure that compiles thirty years of raw program files into a single sourced record - the same constraint method applied to software: fence the failure modes before assembly.",
 		evidence: "colophon",
 		href: "/colophon/",
 		practice: "governance",
@@ -202,13 +164,12 @@ export const METHOD_NODES: readonly MethodNode[] = [
 	//    bottom-up from citable stories instead of top-down from the claim set.
 	{
 		id: "haptics",
-		name: "Haptic & kinematic tuning",
+		name: "Control integration & kinematics",
 		domains: ["sensory", "motion_fault"],
 		value: 7,
-		blurb:
-			"Preserved the premium 'scrub' feel of a $10,000 console on commodity parts — a Bourns EM14 jog wheel with six exposed 0.42 mm leads got a pre-terminated harness spec and a custom surround (ECO 13082) rather than a cost-up.",
-		evidence: "c24",
-		href: "/projects/c24/",
+		blurb: claimFor("method:haptics").text,
+		evidence: claimFor("method:haptics").project,
+		href: claimFor("method:haptics").href,
 		practice: "design",
 	},
 	{
@@ -216,10 +177,9 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		name: "DFM / DFA for automated assembly",
 		domains: ["matter_heat", "motion_fault"],
 		value: 8,
-		blurb:
-			"The C|24 top panel (P/N 9420-55105) packed welded standoffs so densely that the vendor's automated CNC welding heads physically could not reach them — a design decision that stopped a production line. Read the process before drawing the part.",
-		evidence: "c24",
-		href: "/projects/c24/",
+		blurb: claimFor("method:dfa").text,
+		evidence: claimFor("method:dfa").project,
+		href: claimFor("method:dfa").href,
 		practice: "production",
 	},
 	{
@@ -227,43 +187,19 @@ export const METHOD_NODES: readonly MethodNode[] = [
 		name: "Accelerated life & destruction testing",
 		domains: ["motion_fault", "matter_heat"],
 		value: 8,
-		blurb:
-			"Glyph's eyepiece arms carried a 3,000-cycle requirement and got worse as tooling matured: 10% seizure at T1 (500 cycles), then 40% — two of five units — failing at just 250 cycles in T6, on the eve of ramp. Root cause was internal cable wear, found because the test ran every tool revision.",
-		evidence: "avegant-glyph",
-		href: "/projects/avegant-glyph/",
+		blurb: claimFor("method:life-test").text,
+		evidence: claimFor("method:life-test").project,
+		href: claimFor("method:life-test").href,
 		practice: "diagnosis",
-	},
-	{
-		id: "fea",
-		name: "FEA-correlated validation",
-		domains: ["matter_heat", "data_ai"],
-		value: 7,
-		blurb:
-			"Optimized the Glyph headband through a Central Composite Design FEA study and correlated it against ANSYS stress-life binders and physical spring-rate characterization — simulation used to bound a real part, not to decorate a review.",
-		evidence: "avegant-glyph",
-		href: "/projects/avegant-glyph/",
-		practice: "diagnosis",
-	},
-	{
-		id: "anthropometry",
-		name: "Human-engineering standards & anthropometric fit",
-		domains: ["sensory", "matter_heat"],
-		value: 8,
-		blurb:
-			"Sized the Glyph headband, IPD range and nosepiece against military human-engineering criteria (MIL-STD-1472F, MIL-STD-1787C) and aircrew anthropometry — Bitragion-Coronal Arc, Nasal Root to Wall, Menton Projection. The forensic audit also records what that cost: 1960s US aviator surveys assume a long, narrow Western head profile, so short-and-wide profiles fit poorly. Uneven weight distribution and nosepiece discomfort across a large share of the global market, traceable to the data source rather than to the geometry.",
-		evidence: "avegant-glyph",
-		href: "/projects/avegant-glyph/",
-		practice: "design",
 	},
 	{
 		id: "regulatory",
 		name: "Regulatory & compliance (UL · FCC · EMI)",
 		domains: ["sensory", "data_ai"],
 		value: 7,
-		blurb:
-			"Glyph failed Class B EMI months before ramp; the radiating path was traced to HDMI and remediated through to FCC / IC / CMIIT certification. On the C|24 a PSU certification block was bridged by hand-packing 100 units so the ship date held.",
-		evidence: "avegant-glyph",
-		href: "/projects/avegant-glyph/",
+		blurb: claimFor("method:regulatory").text,
+		evidence: claimFor("method:regulatory").project,
+		href: claimFor("method:regulatory").href,
 		practice: "governance",
 	},
 ] as const;
@@ -289,14 +225,14 @@ export const COMPETENCY_COVERAGE: Record<string, string | null> = {
 	"Wear & Failure-Mode Analysis (RCA)": "root-cause",
 	"GD&T · Stack-Ups (WC / RSS)": "tolerance-integration",
 	"DOE Test-Method Design": "doe",
-	"FEA-Correlated Validation (ANSYS)": "fea",
+	"FEA-Correlated Validation (ANSYS)": null, // Career competency retained; Glyph example awaits support.
 	"Haptic & Kinematic Tuning": "haptics",
 	// manufacturing
 	"DFM / DFA for Automated Assembly": "dfa",
 	"High-Volume NPI (Tool Start → MP)": "tooling",
 	"Injection Molding · Die Casting · Sheet Metal": "process-forensics",
 	"Accelerated Life / Destruction Testing": "life-test",
-	"Yield Recovery & CAPA": "yield-recovery",
+	"Yield Recovery & CAPA": null, // Career competency retained; optical-yield example awaits reconciliation.
 	"CM Management (Suzhou · Guadalajara · Taipei)": "supply-chain",
 	// tools & regulatory
 	"Onshape, Creo, Solidworks": null, // a toolchain, not a capability — résumé only
@@ -310,7 +246,7 @@ export const COMPETENCY_COVERAGE: Record<string, string | null> = {
 	// open question, since resume_master.ts:102 and linkedin_master.ts:68 both
 	// attribute 1472G to NOON, a different program whose documentation has not
 	// been checked. Do not blanket-replace G with F.
-	"MIL-STD-1472G": "anthropometry",
+	"MIL-STD-1472G": null, // NOON attribution retained in career authority; do not substitute Glyph F.
 	"Class III Medical Standards": null, // cardiac-ablation work (1985) is on /about; no project page cites it
 	"Class-A Surfacing": "human-factors",
 };
@@ -334,6 +270,6 @@ export const PRACTICES = [
 	{
 		id: "governance" as const,
 		label: "Governance",
-		line: "If it is not in the record, it did not happen and it will happen again.",
+		line: "Make the next engineering decision easier to trace.",
 	},
 ];

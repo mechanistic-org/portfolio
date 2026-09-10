@@ -4,7 +4,6 @@ import Layout from "@layouts/BaseLayout.astro";
 export const prerender = true;
 import ColophonCard from "@components/ColophonCard.astro";
 import Marquee from "@components/Marquee/Marquee";
-import TestimonialWall from "@components/Testimonials/TestimonialWall";
 import ForensicWall from "@components/Forensics/ForensicWall";
 import UniversalHUD from "@components/Nav/UniversalHUD.astro";
 
@@ -192,24 +191,6 @@ const marqueeTools = [...tools, ...tools, ...tools];
 				</ol>
 			</section>
 
-			{/* Meta-Testimonial Wall */}
-			<div class="mb-24 text-left">
-				<div
-					class="border-primary/30 bg-primary/10 text-primary mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-xs tracking-widest uppercase"
-				>
-					System Logs
-				</div>
-				<h2 class="mb-8 text-3xl font-bold tracking-tight text-white md:text-4xl">
-					The Collaboration Log
-				</h2>
-				<p class="mb-12 max-w-2xl text-lg text-neutral-400">
-					A collection of system logs and meta-commentary from the AI agents that helped build this
-					site.
-				</p>
-			</div>
-			<div class="relative left-[calc(50%-50vw)] -mx-[calc(50vw-50%)] mb-24 w-screen">
-				<TestimonialWall client:load />
-			</div>
 		</div>
 	</section>
 </Layout>

@@ -1,11 +1,12 @@
 ---
 import { resumeMaster } from "../../config/resume_master";
 
-import { resumeExperience } from "../../config/resume_projection.ts";
+import { resumeExperience, resumeSummary } from "../../config/resume_projection.ts";
 export const prerender = true;
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const { header, summary, competencies, education, recognition } = resumeMaster;
+const { header, competencies, education, recognition } = resumeMaster;
+const summary = resumeSummary(resumeMaster);
 const experience = resumeExperience(resumeMaster);
 
 // Helper to process markdown-style bolding in bullets
@@ -31,6 +32,7 @@ function processMarkdown(text: string) {
 		<!-- Canonical PDF download is in the navigation. -->
 
 		<div
+			data-resume-document
 			class="mx-auto max-w-[216mm] bg-white p-[12mm] shadow-2xl dark:bg-neutral-900 print:max-w-none print:px-[4mm] print:py-0 print:shadow-none"
 		>
 			<!-- HEADER -->
@@ -124,7 +126,7 @@ function processMarkdown(text: string) {
 			</section>
 
 			<!-- EXPERIENCE -->
-			<section class="mb-6 print:break-before-page">
+			<section class="mb-6">
 				<h3
 					class="mb-4 border-b border-black/20 pb-1 font-sans text-sm font-bold tracking-wider text-black uppercase dark:border-white/20 dark:text-white"
 				>
@@ -200,6 +202,11 @@ function processMarkdown(text: string) {
 <style>
 	/* PRINT OVERRIDES */
 	@media print {
+		[data-resume-document],
+		[data-resume-document] :global(*) {
+			color: #111 !important;
+			text-shadow: none !important;
+		}
 		@page {
 			margin: 0.5in;
 			size: letter;

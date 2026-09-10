@@ -1,5 +1,6 @@
 import { resumeMaster } from "./resume_master.ts";
 import type { CareerPeriod, CareerRole } from "./resume_master.ts";
+import { claimFor } from "./claim-presentations.ts";
 export type ResumeAuthority = typeof resumeMaster;
 export const httpsUrl = (value: string) => (/^https:\/\//.test(value) ? value : `https://${value}`);
 export const plainText = (value: string) => value.replace(/\*\*(.*?)\*\*/g, "$1");
@@ -24,8 +25,17 @@ export function resumeExperience(authority = resumeMaster) {
 			location: roles[0].location ?? "",
 			period: roles[0].period,
 		};
-		return { ...entry, ...display, dates: formatPeriod(display.period) };
+		const claims = entry.id === "digidesign-2003" || entry.id === "avegant-2015";
+		const bullets = claims ? [0, 1, 2].map((index) => claimFor(`resume:${entry.id}:${index}`).text) : entry.bullets;
+		const blurb = entry.id === "avegant-2015"
+			? "Mechanical development of Glyph's headband, spring and liner interfaces, moving cable routes, and supplier-built hardware."
+			: entry.blurb;
+		return { ...entry, ...display, blurb, bullets, dates: formatPeriod(display.period) };
 	});
+}
+export function resumeSummary(authority = resumeMaster) {
+	if (authority.summary.executive !== resumeMaster.summary.executive) return authority.summary;
+	return { executive: "I lead hands-on mechanical and systems engineering for complex physical products, from ambiguous architecture through DVT, manufacturing transfer, and field recovery. I set the technical method, lead cross-functional decisions, and stay close to the hardware as it moves from prototype to production.\n\nMy work connects mechanism design, tolerance control, validation, supplier processes, and serviceability. The program accounts below show the decisions and measured results in their original scope. I now apply that same discipline to local-first AI-agent infrastructure for research and engineering operations." };
 }
 export function identityMetadata(authority = resumeMaster) {
 	const { header, competencies, career } = authority;
@@ -43,7 +53,7 @@ export function pdfConfiguration(authority = resumeMaster) {
 	return { url: authority.pdf.url, filename: authority.pdf.filename, sourcePath: "/resume/" };
 }
 export function jsonResume(authority = resumeMaster) {
-	const { header, summary, education, recognition, competencies } = authority;
+	const { header, education, recognition, competencies } = authority;
 	return {
 		$schema: "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
 		basics: {
@@ -52,7 +62,7 @@ export function jsonResume(authority = resumeMaster) {
 			email: header.contact.email,
 			phone: header.contact.phone,
 			url: httpsUrl(header.contact.portfolio),
-			summary: summary.executive,
+			summary: resumeSummary(authority).executive,
 			location: { address: header.contact.location },
 			profiles: ["linkedin", "github"].map((network) => ({
 				network,

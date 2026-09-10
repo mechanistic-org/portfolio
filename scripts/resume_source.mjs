@@ -7,6 +7,10 @@ import { pathToFileURL } from "node:url";
 export const SOURCE_INPUTS = [
 	"src/config/resume_master.ts",
 	"src/config/resume_projection.ts",
+	"src/config/claim-presentations.ts",
+	"src/lib/project-claims.mjs",
+	"src/data/project-claims.json",
+	"src/data/claim-consumers.json",
 	"src/config/siteData.json.ts",
 	"src/pages/resume/index.astro",
 	"src/pages/index.astro",
