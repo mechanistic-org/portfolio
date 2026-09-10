@@ -7,7 +7,7 @@
     {
       "part": "9150-55200-00",
       "label": "MicPre8 I/O assembly drawing",
-      "related_scar_anchor": "5-integration-crisis-the-geometric-firewall",
+      "related_scar_anchor": "5-board-to-mechanical-interfaces",
       "revs": [
         {"rev": "1", "date": "2006-04-21", "date_basis": "drawing-revision-table", "source_ids": ["LK-63a747ee"]},
         {"rev": "2", "date": "2006-05-03", "date_basis": "drawing-revision-table", "source_ids": ["LK-63a747ee"]},
@@ -26,7 +26,7 @@
     {
       "part": "9420-56156-00",
       "label": "Jog wheel sheet-metal fabrication",
-      "related_scar_anchor": "7-component--geometry-battles",
+      "related_scar_anchor": "7-controls-and-molded-part-geometry",
       "revs": [
         {
           "rev": "A",
@@ -41,7 +41,7 @@
           "date_basis": "eco-document",
           "source_ids": ["LK-371b448c", "LK-fa5c883a"],
           "factual_note": "ECO 13526 records a CHG action from A to B and shippable revision B; the mounting-hole tolerance changed to ±0.05 mm at the vendor's request.",
-          "scar_anchor": "7-component--geometry-battles"
+          "scar_anchor": "7-controls-and-molded-part-geometry"
         }
       ]
     }

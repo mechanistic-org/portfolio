@@ -6,16 +6,16 @@ export const projectArticleTrial = {
 		sections: {
 			summary: "i-project-summary",
 			product: "ii-the-product-that-shipped",
-			failures: "iii-the-anatomy-of-failure",
-			thermal: "1-thermal-crisis-the-banana-defect",
-			"supply-chain": "2-supply-chain-crisis-the-top-panel-no-bid-shock",
-			architecture: "3-architecture-crisis-the-emithermal-rake",
-			serviceability: "4-serviceability-crisis-the-headphone-jack-fire-drill",
-			integration: "5-integration-crisis-the-geometric-firewall",
-			regulatory: "6-regulatory-crisis-the-stranded-psu",
-			components: "7-component--geometry-battles",
-			governance: "iv-governance--rhythm",
-			impact: "v-quantified-impact",
+			failures: "iii-design-and-production",
+			thermal: "1-paint-curing-and-side-cap-fit",
+			"supply-chain": "2-recovering-top-panel-fabrication",
+			architecture: "3-a-quiet-low-profile-console",
+			serviceability: "4-a-field-replaceable-headphone-jack",
+			integration: "5-board-to-mechanical-interfaces",
+			regulatory: "6-power-supply-certification",
+			components: "7-controls-and-molded-part-geometry",
+			governance: "iv-production-acceptance-and-release",
+			impact: "v-results",
 			context: "vi-market-context--legacy",
 			sources: "vii-source-trail",
 		},
@@ -76,9 +76,9 @@ export const projectArticleTrial = {
 				galleryId: "04_structural_components",
 				src: "/assets/r2/c24/bubbles/04_structural_components/bournsem14page3.png",
 			},
-			"9440-55174-00": {
+			"forensic-1-1": {
 				galleryId: "04_structural_components",
-				src: "/assets/r2/c24/bubbles/04_structural_components/9440-55174-00.png",
+				src: "/assets/r2/c24/bubbles/04_structural_components/forensic-1-1.jpg",
 			},
 			ECO_12262_Page_1: {
 				galleryId: "05_paper_trail",
@@ -86,7 +86,7 @@ export const projectArticleTrial = {
 			},
 			"dims-before-after-paint": {
 				galleryId: "02_side_cap_crisis",
-				src: "/assets/r2/c24/02-side-cap-crisis/dims-before-after-paint-xl.webp",
+				src: "/assets/r2/c24/bubbles/02_side_cap_crisis/step-04-validation-report.png",
 			},
 			"c24-context-01": {
 				galleryId: "06_press_resources",
@@ -105,6 +105,7 @@ export const projectArticleTrial = {
 				src: "/assets/r2/c24/bubbles/05_paper_trail/ECO_12263_Page_2.png",
 			},
 		},
+		models: ["3d_model"],
 		scenes: [
 			{
 				key: "summary",
@@ -132,8 +133,8 @@ export const projectArticleTrial = {
 			{
 				key: "failures",
 				parent: "failures",
-				eyebrow: "Failure Map",
-				title: "The Anatomy of Failure",
+				eyebrow: "Engineering Decisions",
+				title: "Design and Production",
 				left: {
 					kind: "scar-index",
 				},
@@ -143,20 +144,20 @@ export const projectArticleTrial = {
 			{
 				key: "thermal",
 				parent: "failures",
-				eyebrow: "Scar 01",
-				title: "Thermal Crisis",
+				eyebrow: "Decision 01",
+				title: "Paint Curing and Side-Cap Fit",
 				left: {
 					kind: "scar",
 					section: "thermal",
 				},
 				media: ["step-01-defect-gap", "step-04-validation-report"],
-				mediaLabel: "Warp evidence and validation record",
+				mediaLabel: "Warp photograph and paint-process inspection table",
 			},
 			{
 				key: "supply-chain",
 				parent: "failures",
-				eyebrow: "Scar 02",
-				title: "Supply-Chain Crisis",
+				eyebrow: "Decision 02",
+				title: "Top-Panel Fabrication",
 				left: {
 					kind: "scar",
 					section: "supply-chain",
@@ -167,20 +168,20 @@ export const projectArticleTrial = {
 			{
 				key: "architecture",
 				parent: "failures",
-				eyebrow: "Scar 03",
-				title: "Architecture Crisis",
+				eyebrow: "Decision 03",
+				title: "Quiet, Low-Profile Architecture",
 				left: {
 					kind: "scar",
 					section: "architecture",
 				},
 				media: ["c24-render-01", "c24-render-02"],
-				mediaLabel: "System form after the architecture reset",
+				mediaLabel: "The low-profile system and external-supply architecture",
 			},
 			{
 				key: "serviceability",
 				parent: "failures",
-				eyebrow: "Scar 04",
-				title: "Serviceability Crisis",
+				eyebrow: "Decision 04",
+				title: "Field-Replaceable Headphone Jack",
 				left: {
 					kind: "scar",
 					section: "serviceability",
@@ -191,8 +192,8 @@ export const projectArticleTrial = {
 			{
 				key: "integration",
 				parent: "failures",
-				eyebrow: "Scar 05",
-				title: "Integration Crisis",
+				eyebrow: "Decision 05",
+				title: "Board-to-Mechanical Interfaces",
 				left: {
 					kind: "scar",
 					section: "integration",
@@ -203,32 +204,32 @@ export const projectArticleTrial = {
 			{
 				key: "regulatory",
 				parent: "failures",
-				eyebrow: "Scar 06",
-				title: "Regulatory Crisis",
+				eyebrow: "Decision 06",
+				title: "Power-Supply Certification",
 				left: {
 					kind: "scar",
 					section: "regulatory",
 				},
 				media: ["c24-render-02", "c24-prototype-03"],
-				mediaLabel: "Product context; certification imagery remains an archive gap",
+				mediaLabel: "The console and its mechanical enclosure",
 			},
 			{
 				key: "components",
 				parent: "failures",
-				eyebrow: "Scar 07",
-				title: "Component & Geometry Battles",
+				eyebrow: "Decision 07",
+				title: "Controls and Molded-Part Geometry",
 				left: {
 					kind: "scar",
 					section: "components",
 				},
-				media: ["bournsem14page3", "9440-55174-00"],
+				media: ["bournsem14page3", "forensic-1-1"],
 				mediaLabel: "Commodity components, custom geometry",
 			},
 			{
 				key: "governance",
 				parent: "governance",
 				eyebrow: "Control System",
-				title: "Governance & Rhythm",
+				title: "Production Acceptance and Release",
 				left: {
 					kind: "metrics",
 					keys: ["governance"],
@@ -241,13 +242,13 @@ export const projectArticleTrial = {
 				key: "impact",
 				parent: "impact",
 				eyebrow: "Outcomes",
-				title: "Quantified Impact",
+				title: "Results",
 				left: {
 					kind: "metrics",
 					keys: ["financial", "process", "governance"],
 				},
-				media: ["dims-before-after-paint", "step-04-validation-report"],
-				mediaLabel: "A measured correction, not a cosmetic anecdote",
+				media: ["step-04-validation-report"],
+				mediaLabel: "The original paint-process measurements",
 			},
 			{
 				key: "context",
@@ -277,28 +278,28 @@ export const projectArticleTrial = {
 				hero: true,
 				section: "product",
 				label: "The system",
-				detail: "43 inches of controls, reduced to one integrated architecture.",
+				detail: "Twenty-four faders and the audio front end in one low-profile console.",
 				layout: "system",
 			},
 			{
 				media: "step-03-method-a-fix",
 				section: "thermal",
 				label: "The intervention",
-				detail: "A process fixture turns gravity from failure mode into corrective force.",
+				detail: "Vertical support reduced side-cap deformation during paint curing.",
 				layout: "intervention",
 			},
 			{
 				media: "DCD_9150-55200-00_REV_12_Page_1_REV-block",
 				section: "integration",
 				label: "The control record",
-				detail: "Revision discipline becomes the geometric contract for nineteen boards.",
+				detail: "Twelve drawing revisions control the MicPre8 board interfaces.",
 				layout: "record",
 			},
 		],
 		breakout: {
 			eyebrow: "Breakout composition · system → intervention → record",
 			description:
-				"The article establishes the argument. This field opens the archive: product form, physical failure, and the drawings that controlled the recovery at their own scale.",
+				"Prototype assemblies, supplier process photographs and released drawings show how the console took shape.",
 		},
 	},
 	"d-command": {

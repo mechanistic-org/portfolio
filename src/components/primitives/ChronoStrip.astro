@@ -303,13 +303,15 @@ const displayDate = (event: ChronologyEvent) => {
 		list-style: none;
 	}
 	.beats li {
+		display: flex;
+		flex-direction: column;
 		min-width: 0;
 	}
 	.beat {
 		display: flex;
 		gap: 0.6rem;
 		width: 100%;
-		min-height: 100%;
+		flex: 1;
 		padding: 0.7rem;
 		border: 1px solid var(--border);
 		background: color-mix(in srgb, var(--card) 88%, var(--muted));

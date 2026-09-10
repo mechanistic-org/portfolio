@@ -75,7 +75,7 @@ assert.match(noBid.verification_note, /reporting checkpoint, not a claimed occur
 assert.ok(!chronologyBytes.toString("utf8").includes("11/15/2006"));
 assert.match(
 	articleText,
-	/earliest located primary checkpoint is the March 7, 2007 status report/u,
+	/By March 7, 2007, the status report recorded Kwanta's no-bid/u,
 );
 assert.ok(!articleText.match(/11\/15\/2006|Curtis\.11\.15\.06/u));
 assert.ok(!chronologyBytes.toString("utf8").match(/[A-Z]:[\\/]|portfolio_working/u));
