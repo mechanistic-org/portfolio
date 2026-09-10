@@ -643,137 +643,29 @@ export const projectArticleTrial = {
 		breakout: { eyebrow: "SC48 design and integration", description: "The early architecture, airflow duct, clearance overlay, board interface and selected component renders. Captions distinguish planning, revisions and part identity." },
 	},
 	"d-control": {
-		sections: {
-			summary: "project-summary",
-			failures: "the-anatomy-of-failure",
-			"fader-pan": "fader-pan-crisis-more-than-half-rejected",
-			stand: "stand-fit-holes-bosses-and-side-plates",
-			assembly: "five-module-tolerance-and-assembly",
-			pcb: "prototype-pcb-crisis-v-2-containment",
-			campaign: "the-25-week-campaign",
-			governance: "governance-and-evidence",
-			impact: "quantified-impact",
-			sources: "source-trail",
-		},
-		media: {
-			"system-view": {
-				galleryId: "01_intro",
-				src: "/assets/d-control/bubbles/01_intro/full_big.jpg",
-			},
-			"stand-fit-front": {
-				galleryId: "04_stand_fit_check",
-				src: "/assets/d-control/bubbles/04_stand_fit_check/Picture 037.jpg",
-			},
-			"stand-fit-detail": {
-				galleryId: "04_stand_fit_check",
-				src: "/assets/d-control/bubbles/04_stand_fit_check/Picture 038.jpg",
-			},
-			"panel-gap": {
-				galleryId: "03_gap_check",
-				src: "/assets/d-control/bubbles/03_gap_check/gap differences.jpg",
-			},
-			"molded-interface": {
-				galleryId: "03_gap_check",
-				src: "/assets/d-control/bubbles/03_gap_check/moulding error.jpg",
-			},
-			"installed-system": {
-				galleryId: "05_installations",
-				src: "/assets/d-control/bubbles/05_installations/D_Control_Music.jpg",
-			},
-		},
-		scenes: [
-			{
-				key: "summary",
-				eyebrow: "Orientation",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: ["system-view"],
-			},
-			{
-				key: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "scar-index",
-				},
-				media: [],
-			},
-			{
-				key: "fader-pan",
-				parent: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "scar",
-					section: "fader-pan",
-				},
-				media: [],
-			},
-			{
-				key: "stand",
-				parent: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: ["stand-fit-front", "stand-fit-detail"],
-			},
-			{
-				key: "assembly",
-				parent: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: ["panel-gap", "molded-interface"],
-			},
-			{
-				key: "pcb",
-				parent: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "scar",
-					section: "pcb",
-				},
-				media: [],
-			},
-			{
-				key: "campaign",
-				parent: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "governance",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["governance"],
-				},
-				media: [],
-			},
-			{
-				key: "impact",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: ["installed-system"],
-			},
-			{
-				key: "sources",
-				eyebrow: "Sources",
-				left: {
-					kind: "sources",
-				},
-				media: [],
-			},
-		],
-	},
+        sections: { architecture: "one-console-several-configurations", stand: "the-stand-began-with-feature-tradeoffs", assembly: "geometry-had-to-survive-assembly", recovery: "recovering-the-manufacturing-process", pcb: "prototype-board-containment", sustaining: "sustaining-work-after-launch", record: "what-the-record-establishes", sources: "source-trail" },
+        media: {
+            early: { galleryId: "early", src: "/assets/d-control/bubbles/02_early_id/PCll_Rendering.jpg" },
+            stand: { galleryId: "stand", src: "/assets/d-control/full-pass-247/stand-and-module.webp" },
+            main: { galleryId: "main", src: "/assets/d-control/full-pass-247/main-unit-assembly.webp" },
+            gaps: { galleryId: "gaps", src: "/assets/d-control/bubbles/03_gap_check/gap differences.jpg" },
+            molding: { galleryId: "molding", src: "/assets/d-control/bubbles/03_gap_check/moulding error.jpg" },
+            fit: { galleryId: "fit", src: "/assets/d-control/bubbles/04_stand_fit_check/Picture 037.jpg" },
+            installed: { galleryId: "installed", src: "/assets/d-control/bubbles/05_installations/D_Control_Music.jpg" },
+        },
+        scenes: [
+            { key: "architecture", eyebrow: "System", left: { kind: "context" }, media: ["main"] },
+            { key: "stand", eyebrow: "Design choices", left: { kind: "none" }, media: ["stand", "early"] },
+            { key: "assembly", eyebrow: "Alignment", left: { kind: "none" }, media: ["gaps", "fit"] },
+            { key: "recovery", eyebrow: "Manufacturing", left: { kind: "scar", section: "recovery" }, media: [] },
+            { key: "pcb", parent: "recovery", eyebrow: "Containment", left: { kind: "scar", section: "pcb" }, media: [] },
+            { key: "sustaining", eyebrow: "After launch", left: { kind: "none" }, media: ["molding", "fit"] },
+            { key: "record", eyebrow: "Documented work", left: { kind: "context" }, media: ["installed"] },
+            { key: "sources", eyebrow: "Evidence", left: { kind: "sources" }, media: [] },
+        ],
+        featured: [],
+        breakout: { eyebrow: "D-Control design and production", description: "Early composition, assembly drawings, fit inspection and an installed system. Each image is captioned for the condition or design stage it documents." },
+    },
 	bazooka: {
 		sections: {
 			summary: "project-summary",
