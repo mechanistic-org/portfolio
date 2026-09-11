@@ -2,106 +2,184 @@
 title: Wall Plate (Waldo)
 slug: wall-plates
 tier: deep_dive
-description: A screwless wall-plate stack had generous X/Y entry clearance but open Z-axis and module-retention risks - the tolerance analysis defined a decision surface, not a guarantee of flawless fit.
+description: A screwless wall plate whose perimeter, snaps and module retention had to work together through stamping, tolerance revisions and finish testing.
 category: consumer_electronics
 date: 2016-12-12 00:00:00+00:00
 draft: false
 employer: noon
-endDate: 2017-08-31 00:00:00+00:00
 forensic_metrics:
-  process: Worst-case X clearance was 0.9 mm per side, Y entry clearance 0.24 mm, minimum Y engagement 0.3 mm, and the Z stack ranged from -0.04 to 0.36 mm.
-  governance: The detailed workbooks credit Colin Davis as engineer; the page preserves that authorship boundary while situating the analyses inside the broader mechanical program.
-  financial: No defensible cost, production-volume, or yield result is present in the curated record for this pass.
+  process: 'April 17: centered snap overlap of 0.3 mm could be defeated by ±0.43 mm cover movement. Three coordinated geometry changes were proposed.'
+  governance: Colin Davis is the engineer named on the detailed calculation sheets. Supplier and test decisions retain their team attribution.
 forensic_summary:
-  trigger: A molded cover, stamped chassis, and retained lighting module had to assemble without visible gaps or unreliable snap engagement across production tolerances.
-  intervention: Model perimeter, entry, engagement, seating, and module-retention stacks separately under worst-case and RSS methods.
-  result: X and Y entry paths remained positive, while Z seating could cross zero and the Bazooka-retention gap could collapse to zero. Those open risks became explicit design decisions rather than hidden assumptions.
+  trigger: A molded screwless cover had to seat on a stamped chassis while also limiting the movement of a retained lighting module.
+  intervention: Separate entry, moving-cover engagement, Z seating and module retention; connect the stacks to stamped features and controlled mating surfaces.
+  result: Revised analysis exposed an engagement risk; a combined-system dust retest passed, while later Waldo hardness samples failed. Final production configuration remains unestablished.
 industry: consumer_electronics
 listed: true
 primary_home: mech
-productionScale: series
 tags:
-- Mechanism
-- Reliability
-- Yield
+- mechanical
+- dfm
+- reliability
 targets:
 - main
 - mech
 teamSize: Cross-functional
 theme: article
 scars:
-- label: Z-axis seating risk
-  value: -0.04 to 0.36 mm worst case
-  description: The snap stack could cross zero, so entry clearance did not guarantee that the cover would fully seat.
+- label: Cover movement defeats overlap
+  value: 0.3 mm overlap; ±0.43 mm movement
+  description: The April 17 revision adds cover translation to the centered snap calculation and identifies possible disengagement.
   severity: major
   phase: design
-  anchor: clearance-is-not-engagement
-  trigger: Positive X/Y clearance was being read as proof of the whole screwless interface.
-  intervention: Separate entry, engagement, and Z seating into independent stacks.
-  result: The analysis preserved an explicit warning that the snaps might not fully seat.
-- label: Module-retention gap
-  value: 0 to 0.54 mm worst case
-  description: The Bazooka-to-cover retention stack could close to zero at one extreme even though its nominal gap was 0.30 mm.
-  severity: major
-  phase: design
-  anchor: the-inner-interface-was-a-second-system
-  trigger: The wall plate had to retain the internal module as well as fit its own chassis.
-  intervention: Analyze the die-cast module, stamped chassis, and molded retaining rib as a separate chain.
-  result: The remaining retention margin became visible without being mislabeled as a completed validation result.
+  anchor: the-cover-could-enter-and-still-come-loose
+  trigger: Centered minimum overlap suggested the snaps would engage.
+  intervention: Include movement within the perimeter and propose slot, tip and gap changes together.
+  result: A previously hidden disengagement condition became an explicit geometry decision; final implementation remains unresolved.
+  evidence:
+  - LK-bfdad05d
+  - LK-23d0d1f1
+duration: 2016-2017 development
+job_title: mechanical_engineer
+heroImage: /assets/wall-plates/full-pass-251/cover-render.webp
+cyberspace:
+  enable: true
+  layout: linear
+  stickies:
+  - id: product
+    type: gallery
+    title: Cover and chassis
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - src: /assets/wall-plates/full-pass-251/cover-render.webp
+        alt: Oblique render of a white wall plate with two rectangular openings.
+        aspectRatio: 0.753
+        caption: Original two-gang Waldo cover render, Waldo_Chassis.pdf page 3. White margins trimmed. This explains the intended form; it is not a tested or shipped-unit photograph.
+      - src: /assets/wall-plates/full-pass-251/chassis-render.webp
+        alt: Oblique black chassis render with stamped openings and folded mounting features.
+        aspectRatio: 0.7665
+        caption: Original two-gang stamped chassis render, Waldo_Chassis.pdf page 1. White margins trimmed; the openings, hooks and folded edges show the cover and module interfaces.
+    featuredIndices: []
+    deck: []
+  - id: manufacture
+    type: gallery
+    title: Stamping and engagement
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - src: /assets/wall-plates/full-pass-251/hook-dfm.webp
+        alt: Annotated chassis hook with a proposed relief and the supplier response.
+        aspectRatio: 1.3333333333333333
+        caption: February 22, 2017 Tongda/Locoroll DFM exchange, page 3. The original overlay records the 4 mm cut proposal, request for a 2 mm minimum and supplier confirmation.
+      - src: /assets/wall-plates/full-pass-251/y-engagement.webp
+        alt: Snap section and moving-cover diagram with three proposed changes to slots, snap tips and perimeter gap.
+        aspectRatio: 1.6
+        caption: Function Engineering attachment report, April 17, 2017, page 6. Centered overlap and possible cover translation lead to three proposed changes. These are analysis and proposals, not final geometry certification.
+    featuredIndices: []
+    deck: []
+  - id: seating
+    type: gallery
+    title: Seating control
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - src: /assets/wall-plates/full-pass-251/z-seating.webp
+        alt: Snap cross-section with A, B and C dimensions and a local mating-pad proposal.
+        aspectRatio: 1.6
+        caption: The April 17 attachment report, page 7. The Z stack depends on an assumed tolerance for B; local pads and tighter control of A are proposed. Original annotations and attribution retained.
+    featuredIndices: []
+    deck: []
+  - id: testing
+    type: gallery
+    title: Surface tests and protective film
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - src: /assets/wall-plates/full-pass-251/evt2-hardness.webp
+        alt: Waldo samples one through three marked Pass, above a pencil-hardness test fixture.
+        aspectRatio: 1.3569131832797428
+        caption: April 13, 2017 EVT2 hardness report, binder page 214. Three Waldo samples pass the stated H-pencil check at 1 kgf. White margins trimmed; table and setup photograph retained.
+      - src: /assets/wall-plates/full-pass-251/dvt-hardness.webp
+        alt: Waldo samples one through three marked Fail, with the test fixture and a highlighted scratch.
+        aspectRatio: 0.7795566502463054
+        caption: June 28, 2017 DVT hardness report, binder page 186. Three different Waldo samples fail the stated H-pencil check at 1 kgf. The setup and scratch photograph accompany the result; the cause is not isolated.
+      - src: /assets/wall-plates/full-pass-251/protective-film.webp
+        alt: Two photographs of white wall plates showing bubbles under protective film.
+        aspectRatio: 2.3181818181818183
+        caption: Packaging_Test_Results_Review.pdf, page 28. Cropped to the two Waldo photographs and their original bubble-under-film labels. These observations do not establish a final film or adhesive fix.
+    featuredIndices: []
+    deck: []
 ---
 
-# Wall Plates: turning a clean exterior into a tolerance decision
+# Wall Plate: making the screwless surface hold together
 
-## Project summary
+## A clean face with a mechanical job
 
-- **Role boundary:** Mechanical product architecture and reliability oversight for the Waldo cover/chassis system and its interface to the retained module. The surviving detailed tolerance workbooks credit Colin Davis as engineer; this page does not attribute those calculations to Erik.
-- **Mandate:** Make a screwless molded cover fit a stamped multi-gang chassis, seat its snaps, hold the internal Bazooka module, and preserve a controlled exterior gap across manufacturing variation.
-- **Core result:** The analysis separated conditions that earlier prose collapsed. X and Y entry clearances remained positive, but minimum engagement was only 0.3 mm, Z seating could cross zero, and the module-retention gap could also collapse to zero.
+Waldo was the wall plate for NOON's lighting system: a molded cover over a stamped metal chassis, with no visible screws on the finished face. Behind that simple surface, the cover had to enter its openings, engage its snaps, seat against the chassis and help retain the Bazooka module. Each interface could work nominally while another failed at a tolerance extreme.
 
-## The visible surface hid three interfaces
+My role was mechanical product architecture and reliability oversight within the NOON program. The detailed tolerance sheets credit Colin Davis as engineer, and the supplier correspondence records decisions by the wider Locoroll, Function Engineering, FIH and Tongda teams. The account below follows that shared engineering work from stamping feedback through fit analysis and physical testing. {/* ^[evidence:LK-76323941] ^[evidence:LK-543e0fc1] */}
 
-A screwless wall plate looks like one cosmetic part. Mechanically it is at least three coupled systems: the perimeter gap between cover and chassis, the cover snaps entering and engaging stamped openings, and the internal module sitting behind a molded retaining rib.
+The [two-gang cover render](/assets/wall-plates/full-pass-251/cover-render.webp) shows the visible product. Its [stamped chassis](/assets/wall-plates/full-pass-251/chassis-render.webp) exposes the mechanism: openings, folded edges and hooks that locate the parts behind it. These are design renders; the later test photographs show physical samples. {/* ^[evidence:LK-1fc63762] */}
 
-Treating those systems as one `fit` question creates false confidence. A snap can pass through its opening and still fail to seat in Z. A cover can fit its chassis while the module behind it loses retention margin. The surviving workbooks are valuable because they keep those questions separate.
+## Making the chassis manufacturable
 
-## Perimeter clearance was positive, with limits
+The chassis was more than a backing plate. Its thin stamped features had to provide strength, permit assembly and give the mating parts controlled contact points. A February DFM exchange shows how a small manufacturing accommodation could affect that job.
 
-The detailed perimeter sheet uses a worst-case stack for the molded cover and stamped chassis. For the two-gang configuration it records a 0.48 mm nominal condition, 0.23 mm minimum, and 0.73 mm maximum. The workbook notes that a similar four-gang construction `should be OK`; that is an engineering expectation, not evidence that every gang count was verified.
+Tongda proposed cutting 4 mm from a hook. Locoroll asked whether 2 mm could be the minimum, and Tongda confirmed that 2 mm was workable. The [marked-up hook detail](/assets/wall-plates/full-pass-251/hook-dfm.webp) preserves the proposal and response together. Other comments addressed corner radii and cracking risks. The exchange establishes a negotiated stamping limit; it does not identify a single person as author of the complete chassis. {/* ^[evidence:LK-543e0fc1] */}
 
-This distinction replaces the legacy claim of guaranteed flawless alignment. The stack demonstrates a bounded two-gang clearance. It does not prove visual acceptance, production yield, or every larger configuration.
+The design-issues review broadened the work beyond that relief. It called out slide-lock and hook fit, plating chipped by repeated Bazooka installation, high folded edges, bowed cutouts that might affect the cover, and mounting-slot adjustment. A round pip was proposed in place of a pillowed square dimple. Those were distinct mechanical and finish issues with named team owners, rather than one universal fix for assembly. {/* ^[evidence:LK-6e256512] */}
 
-## Clearance is not engagement
+## The cover could enter and still come loose
 
-The snap workbook separates X, Y, and Z behavior. In X, the worst-case result retains 0.9 mm on each side. In Y, entry clearance remains 0.24 mm, leading to the narrow conclusion that the snaps can pass through the openings. But Y engagement falls to 0.3 mm per snap at the minimum condition.
+The April fit studies separated perimeter clearance from snap entry and retention. That distinction became decisive when the analysis allowed the cover to move relative to the chassis.
 
-Z is the sharper risk. Its worst-case range runs from -0.04 to 0.36 mm, and the workbook explicitly warns that the snaps may not fully engage or seat. The analysis therefore does not certify the mechanism. It tells the team where drawing tolerances or nominal geometry must absorb the remaining risk.
+The April 13 perimeter sheet uses a four-gang width with tolerances borrowed from the two-gang drawing. Its 0.48 mm nominal clearance spans 0.23 to 0.73 mm under worst case. The accompanying note makes the conclusion conditional on similar four-gang tolerance capability. This supports a clearance calculation, not a claim that every gang count had been validated. {/* ^[evidence:LK-70cf4b32] */}
 
-## The inner interface was a second system
+On April 14, the attachment report showed 0.3 mm minimum Y overlap with the cover centered and concluded that the snaps would engage. The April 17 revision added a consequential condition: the cover could translate by ±0.43 mm. That movement was enough for the snaps to disengage despite the positive centered overlap. {/* ^[evidence:LK-bfdad05d] ^[evidence:LK-23d0d1f1] */}
 
-The Bazooka-to-Waldo retention workbook analyzes the die-cast module, stamped chassis, and molded retaining rib as a separate stack. The nominal maximum-gap chain is 0.84 mm, with a 0.54 mm worst-case minimum. The minimum-gap chain is nominally 0.30 mm and can reach effectively zero under worst case.
+The revised [Y-engagement diagram](/assets/wall-plates/full-pass-251/y-engagement.webp) proposed three coordinated changes: move the chassis slots inward by 0.1 mm per side, lengthen each snap tip by 0.1 mm, and reduce the top and bottom perimeter gaps from 0.3 to 0.2 mm per side. The perimeter gap was therefore part of retention, as well as appearance. Restricting cover movement protected the overlap available to the snaps.
 
-That does not prove a retention failure. It proves that the lower bound has no worst-case gap margin. By exposing it separately, the program could decide whether to change the rib, the chassis slot, the module tooth, or the controlled tolerances instead of asking the cosmetic cover to absorb an invisible system problem.
+This is the central engineering lesson of Waldo's fit work: evaluating the parts only in their centered position can hide the failure created by the clearance that lets them assemble. The April 17 proposal addressed the moving system. The reviewed record does not establish which combination became the final production geometry. {/* ^[evidence:LK-23d0d1f1] */}
 
-## Authorship and evidence boundaries
+## Seating required its own controlled surfaces
 
-The calculation sheets name Colin Davis as engineer. Earlier prose claimed Erik personally architected the tolerance analysis; that attribution has been corrected. Erik's defensible boundary is the broader mechanical product architecture and reliability program in which these analyses informed decisions.
+Z seating presented a different problem. The April 13 snap sheet calculated a nominal 0.16 mm stack with a worst-case range of -0.04 to 0.36 mm and warned that the snaps might not fully engage or seat. One rib dimension was assumed because it was absent from the drawing. {/* ^[evidence:LK-76323941] */}
 
-The curated record does not support the former claims of a 40 kg rapid-pull validation, a 30 kg crush result, 288-unit allocation, adhesive-residue resolution, or guaranteed snap engagement. Adjacent Sativa/Elvis label and chemical reports are not reused as Waldo evidence.
+The April 17 [Z-seating study](/assets/wall-plates/full-pass-251/z-seating.webp) used a revised nominal stack of 0.14 mm and a range of -0.06 to 0.34 mm. At one end, a lead-in could leave the cover snug without complete seating. At the other, it could be loose. Only one of the three dimensions in that chain was controlled on the drawing.
 
-No curated Waldo image is selected in the active evidence store. The workbooks themselves are the explanatory instrument; a decorative gallery is not applicable for this pass.
+The proposed response was local: add mating pads that could be controlled and tuned, and tighten the existing ±0.1 mm tolerance on the controlled dimension. That connected the calculation to an inspectable physical feature. The two dated stacks describe different analysis states; averaging them or treating the later proposal as an implemented fix would erase the actual decision. {/* ^[evidence:LK-23d0d1f1] */}
 
-## Quantified impact
+## Retaining the module behind the plate
 
-- **Bounded** the two-gang perimeter at 0.23 to 0.73 mm under worst case.
-- **Preserved** 0.9 mm X clearance per side and 0.24 mm Y entry clearance.
-- **Exposed** a 0.3 mm minimum Y engagement condition.
-- **Identified** a Z seating range of -0.04 to 0.36 mm instead of declaring the snaps guaranteed.
-- **Separated** the Bazooka-retention chain, whose worst-case minimum gap reaches zero.
-- **Corrected** public authorship to credit the engineer named in the source workbook.
+Waldo also contributed to Bazooka retention. Ribs on the cover limited how far the module could slide back out of its chassis hooks. The April 17 retention study examined both directions of cover movement: biased down, the rib could just clear the module at a zero-gap extreme; biased up, the module could move 1.29 mm against approximately 2.5 mm nominal slide engagement. The report expected it to remain engaged, assuming that the module's Y stop was already defined. {/* ^[evidence:LK-5b4deab5] */}
+
+Reducing the cover's top and bottom gaps from about 0.3 to 0.2 mm was proposed here too. The same perimeter change could improve the snap-overlap condition and the module-retention chain. This made the interface between Waldo and Bazooka a system decision.
+
+Physical checks supplied a separate kind of evidence. The April 27 status sheet records difficult removal after dust testing for seven Sativa and seven Elvis units. It then says that a repeat check combining the device with Bazooka and Waldo passed. That is a recorded system retest, without evidence assigning the improvement to a particular dimple, slot or cover revision. The same sheet lists rapid pull as deferred; it does not substantiate the former 40 kg pull claim for Waldo. {/* ^[evidence:LK-7965a52c] */}
+
+## A white surface still had to survive handling
+
+Material, texture and coating choices continued alongside the mechanical work. The CMF sheet calls for an injection-molded white polycarbonate cover with a satin VDI 15 texture, matched to the Elvis main switch. Its internal revision is February 8, 2017, Version 15, despite the later version and date in its filename. It is a dated appearance specification, not proof of the final resin used in production. {/* ^[evidence:LK-ae09e755] */}
+
+The action review explicitly includes the Waldo faceplate in the agreement to remove UV coating for EVT2. It also warns that injection marks and weld lines remain visible. The Waldo schedule records a subsequent PC+ABS material lead-time problem and later chassis and faceplate green lights on April 28 and 29. The listed DVT tooling and delivery dates are schedules, not shipping receipts. {/* ^[evidence:LK-17e30be8] */}
+
+The physical surface results were mixed. The April 13 EVT2 pencil-hardness report lists three Waldo samples passing the H-pencil check under a 1 kgf load. The June 28 DVT report lists three Waldo samples failing the same stated hardness/load condition. The [EVT2 result](/assets/wall-plates/full-pass-251/evt2-hardness.webp) and [DVT result](/assets/wall-plates/full-pass-251/dvt-hardness.webp) retain their sample tables and photographs. They are separate sample sets; the records do not isolate a coating or resin change as the cause. {/* ^[evidence:LK-0c6de22e] ^[evidence:LK-7625cbc3] */}
+
+Packaging review also shows [bubbles under the protective film on Waldo covers](/assets/wall-plates/full-pass-251/protective-film.webp). This is evidence of a handling and presentation problem on recognizable wall plates. The reviewed pages do not establish a final film formulation, an adhesive-residue fix or a closed production-quality result. {/* ^[evidence:LK-7f447af0] */}
+
+## What this work established
+
+Waldo's engineering account is the progression from a clean exterior to controlled interfaces: negotiate stamped features, account for cover movement, define the surfaces that determine seating, and test the cosmetic part as a physical product. The April revision made an initially reassuring snap calculation more useful by exposing the condition under which engagement could be lost.
+
+The surviving record establishes those decisions and proposals, a combined-system dust retest, and distinct finish-test outcomes. It leaves the final as-built snap arrangement and complete production qualification unresolved. My contribution belongs within the mechanical architecture and reliability program; the calculations, supplier decisions and test reports retain their individual authorship and scope.
 
 ## Source trail
 
-- `Colorado_Tolerance_Analyses_Tracker.xlsx` - method, status, and consolidated perimeter/snap findings.
-- `170413_Waldo_Cover-Chassis_snaps.xlsx` - detailed X/Y/Z snap-entry, engagement, and seating stacks.
-- `170413_Waldo_Cover-Chassis_Perimeter.xlsx` - detailed two-gang perimeter stack and bounded four-gang note.
-- `Bazooka-Waldo_Cover_Retention.xlsx` - internal module-to-cover retention-gap analysis.
+- **Product and manufacture:** Waldo chassis/cover renders; February chassis DFM correspondence; design-issues review; the internally dated February CMF sheet.
+- **Fit and retention:** April 13 stack sheets and the April 14/17 Function Engineering attachment reports; April 17 Bazooka/Waldo retention report.
+- **Build and test:** Locoroll action review, April 27 reliability status, EVT2 and DVT hardness reports, and packaging-test review. Dates in the account follow the relevant report or action entry, rather than later PDF-export timestamps.
