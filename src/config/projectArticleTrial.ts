@@ -1158,87 +1158,134 @@ export const projectArticleTrial = {
 		},
 	},
 	"wall-plates": {
-		sections: {
-			summary: "project-summary",
-			interfaces: "the-visible-surface-hid-three-interfaces",
-			perimeter: "perimeter-clearance-was-positive-with-limits",
-			engagement: "clearance-is-not-engagement",
-			retention: "the-inner-interface-was-a-second-system",
-			boundaries: "authorship-and-evidence-boundaries",
-			impact: "quantified-impact",
-			sources: "source-trail",
-		},
-		media: {},
-		scenes: [
-			{
-				key: "summary",
-				eyebrow: "Orientation",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "interfaces",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "perimeter",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "engagement",
-				eyebrow: "Project context",
-				left: {
-					kind: "scar",
-					section: "engagement",
-				},
-				media: [],
-			},
-			{
-				key: "retention",
-				eyebrow: "Project context",
-				left: {
-					kind: "scar",
-					section: "retention",
-				},
-				media: [],
-			},
-			{
-				key: "boundaries",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "impact",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "sources",
-				eyebrow: "Sources",
-				left: {
-					kind: "sources",
-				},
-				media: [],
-			},
-		],
+	    "sections": {
+	        "architecture": "a-clean-face-with-a-mechanical-job",
+	        "manufacture": "making-the-chassis-manufacturable",
+	        "engagement": "the-cover-could-enter-and-still-come-loose",
+	        "seating": "seating-required-its-own-controlled-surfaces",
+	        "retention": "retaining-the-module-behind-the-plate",
+	        "finish": "a-white-surface-still-had-to-survive-handling",
+	        "outcome": "what-this-work-established",
+	        "sources": "source-trail"
+	    },
+	    "media": {
+	        "cover": {
+	            "galleryId": "product",
+	            "src": "/assets/wall-plates/full-pass-251/cover-render.webp"
+	        },
+	        "chassis": {
+	            "galleryId": "product",
+	            "src": "/assets/wall-plates/full-pass-251/chassis-render.webp"
+	        },
+	        "hook": {
+	            "galleryId": "manufacture",
+	            "src": "/assets/wall-plates/full-pass-251/hook-dfm.webp"
+	        },
+	        "y": {
+	            "galleryId": "manufacture",
+	            "src": "/assets/wall-plates/full-pass-251/y-engagement.webp"
+	        },
+	        "z": {
+	            "galleryId": "seating",
+	            "src": "/assets/wall-plates/full-pass-251/z-seating.webp"
+	        },
+	        "evt2": {
+	            "galleryId": "testing",
+	            "src": "/assets/wall-plates/full-pass-251/evt2-hardness.webp"
+	        },
+	        "dvt": {
+	            "galleryId": "testing",
+	            "src": "/assets/wall-plates/full-pass-251/dvt-hardness.webp"
+	        },
+	        "film": {
+	            "galleryId": "testing",
+	            "src": "/assets/wall-plates/full-pass-251/protective-film.webp"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "architecture",
+	            "eyebrow": "Product architecture",
+	            "left": {
+	                "kind": "context"
+	            },
+	            "media": [
+	                "chassis"
+	            ]
+	        },
+	        {
+	            "key": "manufacture",
+	            "eyebrow": "Stamping constraints",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "hook"
+	            ]
+	        },
+	        {
+	            "key": "engagement",
+	            "eyebrow": "Moving interfaces",
+	            "left": {
+	                "kind": "scar",
+	                "section": "engagement"
+	            },
+	            "media": [
+	                "y"
+	            ]
+	        },
+	        {
+	            "key": "seating",
+	            "eyebrow": "Drawing control",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "z"
+	            ]
+	        },
+	        {
+	            "key": "retention",
+	            "eyebrow": "System retention",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "finish",
+	            "eyebrow": "Appearance and test",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "evt2",
+	                "dvt",
+	                "film"
+	            ]
+	        },
+	        {
+	            "key": "outcome",
+	            "eyebrow": "Contribution",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "sources",
+	            "eyebrow": "Evidence",
+	            "left": {
+	                "kind": "sources"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "From form to physical samples",
+	        "description": "Original cover and chassis renders introduce the product. Supplier and fit diagrams explain the mechanical decisions; sample tables and photographs preserve the distinct finish-test results."
+	    }
 	},
 } satisfies Record<string, ProjectPresentation>;
 
