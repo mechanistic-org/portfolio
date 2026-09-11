@@ -2,106 +2,185 @@
 title: Room Director (Sativa)
 slug: room-director
 tier: deep_dive
-description: Two failed 1.3 m drop campaigns and a separate passed household-chemical campaign turned a premium wall controller into a disciplined reliability-diagnosis problem.
+description: 'Mechanical design of a glass-fronted wall controller: display clearance, retention, controlled bonding, supplier inspection and support through launch.'
 category: consumer_electronics
 date: 2016-09-01 00:00:00+00:00
 draft: false
 employer: noon
-endDate: 2017-06-01 00:00:00+00:00
 forensic_metrics:
-  process: EVT1 tested six Sativa and six Elvis samples; EVT2 tested six Sativa and seven Elvis samples. Both 1.3 m drop packets returned an overall failure.
-  governance: A separate chemical-resistance campaign covered fourteen Sativa and fourteen Elvis samples and reported a pass, so unlike test methods are not collapsed into one outcome.
-  financial: No defensible cost or production-yield metric is present in the curated record for this pass.
+  process: 'At least five hours clamped: the May assembly instructions define adhesive placement, module positioning and a held bond.'
+  governance: 'July 10 DVT drop check: two Sativa samples passed ten directions and function checks; final production qualification is not established.'
 forensic_summary:
-  trigger: A glass-fronted, touch-sensitive wall controller had to survive a phone-like 1.3 m face-and-corner drop protocol while maintaining premium cosmetics and function.
-  intervention: Use staged reliability packets and a mechanical/test issue tracker to separate glass, coating, retention, rattle, and functional failure modes instead of treating every symptom as one defect.
-  result: EVT1 and EVT2 both documented unresolved drop failures; the separate household-chemical campaign passed. The record supports diagnosis, not an invented all-clear.
+  trigger: Curved cover glass, touch sensing and an AMOLED display shared a compact enclosure with retention and cosmetic requirements.
+  intervention: Coordinate housing engagement and display clearance with controlled bonding, appearance references and supplier inspection definitions.
+  result: Support through the October 2017 launch and later Savant transition. NOON received a 2018 Red Dot award for the system, credited to its in-house design team.
 industry: consumer_electronics
 listed: true
 primary_home: mech
 productionScale: series
 tags:
-- Reliability
-- Crisis
-- Leadership
+- mechanical
+- dfm
+- npi
 targets:
 - main
 - mech
 teamSize: Cross-functional
 theme: article
 scars:
-- label: EVT1 drop failure
-  value: 12 samples, overall FAIL
-  description: Six Sativa and six Elvis units entered the 1.3 m face-and-corner protocol; the packet records glass, retention, rattle, and label-related failures.
-  severity: critical
+- label: DVT drop progression
+  value: Six-unit failure; later two-unit pass
+  description: The July 4 report lists rattle in all six Sativa samples and an LCM-crack observation in one. The smaller July 10 set passes.
+  severity: major
   phase: validation
-  anchor: one-protocol-many-failure-modes
-  trigger: The product had to withstand one drop on six faces and four corners over hardwood or ceramic.
-  intervention: Record cosmetic, mechanical, and functional observations by sample rather than reducing the campaign to a single symptom.
-  result: The EVT1 packet returned an overall failure and created a concrete defect surface for the next build.
-- label: EVT2 repeat failure
-  value: 13 samples, overall FAIL
-  description: The later packet again failed, with Sativa glass, coating, key, power, and functional observations still present.
-  severity: critical
-  phase: validation
-  anchor: the-second-packet-did-not-earn-a-victory-lap
-  trigger: EVT2 repeated the same 1.3 m protocol across six Sativa and seven Elvis samples.
-  intervention: Re-run the protocol and preserve sample-level outcomes rather than declaring closure from schedule progression.
-  result: The packet remained an overall failure; no final production-readiness claim is made.
+  anchor: what-the-complete-device-tests-demonstrated
+  trigger: The 1.3 m face-and-corner method continued to expose mechanical observations after EVT2.
+  intervention: Retain sample-level mechanical and function results, plus each report's sample size and stated criteria.
+  result: Two Sativa samples pass the July 10 check; a complete final-build qualification is not established.
+  evidence:
+  - LK-f644dabb
+  - LK-542e0313
+duration: Through launch and the Savant transition
+heroImage: /assets/room-director/full-pass-250/product-render.webp
+cyberspace:
+  enable: true
+  layout: linear
+  stickies:
+  - id: architecture
+    type: gallery
+    title: Product and touch-module assembly
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - src: /assets/room-director/full-pass-250/product-render.webp
+        alt: Front and rear product render of the curved glass Sativa wall controller.
+        aspectRatio: 1.0165
+        caption: Original NOON Sativa product render, front and rear views. The image explains the glass face and rear interface; it is not a photograph of a tested or shipped unit.
+      - src: /assets/room-director/full-pass-250/touch-assembly.webp
+        alt: Exploded glass and front-housing assembly beside the Sativa touch-panel placement fixture.
+        aspectRatio: 1.3333333333333333
+        caption: 'May 10, 2017 assembly instructions, page 20: the Sativa-specific touch-module placement step and fixture #15. The slide documents the assembly method.'
+    featuredIndices: []
+    deck: []
+  - id: housing
+    type: gallery
+    title: Engagement and display clearance
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - src: /assets/room-director/full-pass-250/hinge-change.webp
+        alt: Before-and-after hinge geometry with annotations for a full-circle hinge, removed chamfer and added rib.
+        aspectRatio: 1.3333333333333333
+        caption: 'February 14, 2017 Sativa/Elvis EVT2 change report, page 3: SAT-146 compares hinge geometry, chamfer removal and a strengthening rib. This is a shared-program engineering change, not a test result.'
+      - src: /assets/room-director/full-pass-250/display-clearance.webp
+        alt: Annotated front-housing views with a 0.50 millimeter change to clear the display.
+        aspectRatio: 1.3333333333333333
+        caption: 'The same February EVT2 report, page 6: a 0.50 mm front-housing change is explicitly called out to avoid AMOLED interference. The red highlights locate the changed regions.'
+    featuredIndices: []
+    deck: []
+  - id: bonding
+    type: gallery
+    title: Dispense, locate and hold
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - src: /assets/room-director/full-pass-250/glue-process.webp
+        alt: Glue-path diagram and dispensing fixture photograph from the assembly instructions.
+        aspectRatio: 1.3333333333333333
+        caption: 'May assembly instructions, page 18, updated May 8: fixture #1 and the FC1682b dispense path. The source marks this operation for all types in the Sativa/Elvis program.'
+      - src: /assets/room-director/full-pass-250/clamp-process.webp
+        alt: Front module and screw clamping fixture with a five-hour holding instruction.
+        aspectRatio: 1.3333333333333333
+        caption: 'May assembly instructions, page 21: screw the front housing and touch module into clamping fixture #2 and hold for at least five hours. The illustration defines the operation; it does not establish lot yield.'
+    featuredIndices: []
+    deck: []
+  - id: inspection
+    type: gallery
+    title: Appearance definition and physical testing
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - src: /assets/room-director/full-pass-250/glass-appearance.webp
+        alt: Front, curved side and back views identifying mirror-polished and black back-printed appearance surfaces.
+        aspectRatio: 2.5236593059936907
+        caption: Appearance views cropped from drawing 041-00004, revision 3, June 21, 2017, page 2. Erik Norris is identified on the drawing as author and approver. This specifies mirror polish and black back-print for a reference made from Sativa glass part 431-00004.
+      - src: /assets/room-director/full-pass-250/drop-fixture.webp
+        alt: Two photographs of a Sativa unit held in the drop-test fixture in opposite orientations.
+        aspectRatio: 3.0344827586206895
+        caption: 'Test-setup photographs cropped from Sativa #1 in the July 10, 2017 DVT drop report, binder page 161. The two orientations belong to the small passing test set discussed in the account.'
+    featuredIndices: []
+    deck: []
+job_title: mechanical_engineer
 ---
 
-# Room Director: what two failed drop campaigns actually taught
+# Room Director: making the glass interface buildable
 
-## Project summary
+## A glass surface with a mechanical job
 
-- **Role boundary:** Locoroll-side mechanical design and reliability leadership for the Room Director enclosure and its mechanical interfaces. Product management, industrial design, electrical design, firmware, test execution, and manufacturing were shared across the client and supplier teams.
-- **Mandate:** Develop a premium, touch-sensitive wall controller whose glass, coatings, housing, and internal retention could survive household exposure and a 1.3 m drop protocol.
-- **Core result:** Reliability work produced a useful diagnosis rather than a clean success story. EVT1 and EVT2 both failed the drop campaign; a separate household-chemical campaign passed. The distinction matters because it prevents one test result from being used to imply another.
+Room Director, known internally as Sativa, put a touch display behind a curved glass face on NOON's wall-mounted lighting controller. The apparent simplicity depended on a compact stack: cover glass and touch sensor, AMOLED display and flex circuits, molded front housing, and the rear enclosure and contacts. The front had to look continuous while leaving room for the display, sensors, bonding and mechanical retention.
 
-## The specification described a surface, not just a box
+My role was Locoroll-side mechanical design and reliability leadership for the enclosure and its interfaces. I worked across the product, industrial-design, electrical, firmware, test and manufacturing teams. FIH's assembly instructions, supplier drawings and test reports show the factory's part of that work; the engineering drawings identify individual authors where the record permits. Sativa shared development records with the Elvis extension switch, but its glass-and-display stack was a distinct mechanical problem.
 
-The draft reliability specification treats cosmetics as a functional requirement. It defines chemical exposures, abrasion methods, pass/fail criteria, and the expectation that household contact should not leave permanent staining or marring. That is the right frame for a wall controller: the glass and coating are not trim added after the mechanism. They are the primary human interface.
+The [May assembly instructions](/assets/room-director/full-pass-250/touch-assembly.webp) make that architecture visible. A Sativa-specific fixture places the touch module onto the front housing. Separate steps manage the OLED flex, gasket and internal connections. The glass could not be designed independently of the features and operations behind it. {/* ^[evidence:LK-069e42bb] ^[evidence:LK-fe9c8ace] */}
 
-But a requirement is not a result. The draft is retained here to show what the program intended to protect; validation packets determine what the hardware actually demonstrated.
+## Retaining the housing while clearing the display
 
-## One protocol, many failure modes
+The [February EVT2 hinge comparison](/assets/room-director/full-pass-250/hinge-change.webp) shows how small housing details carried different jobs. SAT-146 changes the snap hinge toward a full circular engagement, removes a chamfer and adds a strengthening rib. Another view adds paired features for restraint along the y-axis. These are changes to engagement and location, rather than a generic instruction to make the housing stronger.
 
-The EVT1 drop packet specifies a 1.3 m height, one drop on each of six faces and four corners, and hardwood or ceramic impact surfaces. It covers six Sativa and six Elvis samples and returns an overall failure. The observations are not one neat root cause: they include cracked Sativa cover glass and Elvis rattle, separation, and label problems.
+The same report calls out a separate [0.50 mm front-housing change](/assets/room-director/full-pass-250/display-clearance.webp) to avoid interference with the AMOLED. That detail is specific to packaging the display. Increasing engagement at a hinge and providing clearance around a fragile module have to coexist in the same compact enclosure. A feature that improves one interface can consume space needed by another.
 
-That spread is the engineering point. A drop event travels through a system. Glass fracture, coating damage, snap or adhesive separation, internal rattle, and loss of function can share an impact but require different corrective actions.
+The figures document the proposed EVT2 changes and their stated purposes. They do not, on their own, establish which change caused a later test outcome. The report also includes Elvis-only dimmer-key work, which is separate from the Sativa geometry shown here. {/* ^[evidence:LK-b792e126] */}
 
-The mechanical/test tracker preserves that decomposition. It records glass shatter, coating peel, front-substrate color, touch-panel lift, snap-hinge disassembly, rust, scratches, wear, and functional issues. The tracker is evidence of an active risk surface, not proof that every line closed.
+## Bonding required a controlled assembly process
 
-## The second packet did not earn a victory lap
+Touch-panel lift was tracked as SAT-114. By the May 8 action review, the team reported using glue between the touch panel and front housing in EVT2 for manufacturing stability. The entry records three samples passing a wood-floor drop check and three passing thermal shock, with FIH's Kelvin responsible for the item. Those were targeted checks of a particular correction.
 
-EVT2 repeated the 1.3 m protocol across six Sativa and seven Elvis samples. The packet again returns an overall failure. Sativa observations include cover-glass cracking and coating peel along with main-key, power, and functional failures; Elvis also retains a functional failure in the recorded set.
+The assembly instructions turn the bond into an operation: [dispense FC1682b along a defined path](/assets/room-director/full-pass-250/glue-process.webp), pre-fix the OLED flex, place the touch module with its fixture, then hold the front housing and module [in a screw clamping jig for at least five hours](/assets/room-director/full-pass-250/clamp-process.webp). The glue path, placement and clamped hold are all part of the assembly definition. Merely naming an adhesive would leave the process incomplete.
 
-Earlier prose turned progression through EVT and DVT into production readiness. That inference has been removed. A later build can be more informative without being successful. Here, the value of EVT2 is that it tested another hardware state under a comparable method and still exposed unresolved mechanisms.
+This is also why the targeted SAT-114 checks need to remain distinct from the complete-device drop campaigns. A bonded subassembly can pass its local check while another interface still rattles, cracks or loses function under a later test. {/* ^[evidence:LK-17e30be8] ^[evidence:LK-fe9c8ace] */}
 
-## Chemical resistance was a different result
+## Defining the surface and how to inspect it
 
-The EVT1 household-chemical report covers fourteen Sativa and fourteen Elvis samples. Its method applies a range of household agents, holds parts for four hours at 25 C and then 72 hours at 45 C, and checks function and external appearance every 24 hours. The report returns a pass, with the recorded observations at level zero.
+The glass needed an appearance reference as well as geometry. I am identified as the author and approver on the [041-00004 glass appearance specification](/assets/room-director/full-pass-250/glass-appearance.webp). Its June 21 revision defines mirror-polished glass with a black back-printed surface and references the Sativa glass part, 431-00004. The appearance specification and the physical part have different identities; keeping that distinction clear gives purchasing, manufacturing and inspection a common reference.
 
-That pass does not erase the drop failures, and the drop failures do not convert the chemical campaign into a failure. Keeping the two outcomes separate is more useful than forcing them into a single heroic arc: the surface system passed one bounded exposure campaign while the impact architecture remained open.
+The drawing separates free-state flatness from dimensions controlled in the constrained condition after surface treatment. It also distinguishes first-article inspection, incoming inspection and marked capability dimensions, with video measurement as the default unless a feature requires another method. These instructions describe how a supplier should establish conformance, not just the nominal shape it should reproduce.
 
-## Evidence boundaries
+A May supplier-drawing redline makes a related distinction: split the glass part drawing from the touch-panel assembly drawing, and avoid duplicating the part dimensions on the assembly. The working drawing-review notes similarly call for functional inspection and correspondence between first-article reports and tolerance stacks. The handoff needed usable part identities, revisions and measurement instructions alongside CAD. {/* ^[evidence:LK-fe072066] ^[evidence:LK-e0ef484c] ^[evidence:LK-cf742d12] */}
 
-The record supports mechanical and reliability leadership, but not sole ownership of the product or test organization. It also does not support the former claims of a wet-hands stop-ship override, a chemical-failure reclassification, 60-plus pull tests, a 20-plus custom-part count, production readiness, or complete failure closure. Those statements have been removed.
+The bronze finish also had its own reference. Drawing 041-00008, which likewise carries my authorship and approval, specifies metallic paint over the Sativa bronze PC/ABS reference and a VDI-15 texture. This is a different material-and-finish definition from the Elvis cap's matte-UV discussions in the shared tracker. {/* ^[evidence:LK-d0761c2f] */}
 
-No Room Director image is selected in the active evidence store. Without a curated photograph or figure tied to one of these mechanisms, the visual instrument is not applicable for this pass.
+## A shared label problem with several possible fixes
 
-## Quantified impact
+The Sativa/Elvis rear-label review shows another interface that was easy to underestimate. Corners around the serial-number notch lifted, concentrating the problem at a small geometric interruption in the label.
 
-- **Exercised** twelve samples in EVT1 and thirteen in EVT2 under the same 1.3 m face-and-corner drop method.
-- **Preserved** both overall failures rather than converting schedule progression into a pass.
-- **Separated** glass, coating, retention, rattle, and functional observations into distinct correction surfaces.
-- **Verified** a separate household-chemical pass across fourteen Sativa and fourteen Elvis samples.
-- **Retired** unsupported claims of stop-ship authority, production readiness, and complete resolution.
+The February discussion compares a stronger adhesive with changes to the notch, serial-number printing and label construction. FIH also discusses clamping and the practical constraints of producing the proposed labels. The report records one passed adhesive sample while two others were still under test. It is useful evidence of alternatives and supplier negotiation; the retained file does not establish a final validated label solution. {/* ^[evidence:LK-5349f8b4] ^[evidence:LK-958d2d0f] */}
+
+## What the complete-device tests demonstrated
+
+The main drop method used a 1.3 m height, six faces and four corners, over hardwood or ceramic. The January EVT1 packet covered six Sativa and six Elvis units and returned an overall failure. The April EVT2 packet covered six Sativa and seven Elvis units and also failed. Glass fracture, coating damage, retention, rattle and functional observations required separate follow-up; they were not interchangeable symptoms of one proven root cause.
+
+The later DVT records extend that history. In the July 4 report, all six listed Sativa samples have rattle observations, and Sativa #27 also has an LCM-crack observation. Their function-test rows pass, while the report's overall result is FAIL. The [July 10 fixture photographs](/assets/room-director/full-pass-250/drop-fixture.webp) show the physical setup. On that date, a smaller set of two Sativa and two Elvis samples returns PASS: both Sativa units record OK for the ten drop directions and pass the function check. The DVT cover sheets state safety-focused acceptance criteria.
+
+That smaller pass is a real result for the recorded samples. The available reports do not tie it to a complete as-built revision history or establish final qualification of every released unit. The record supports showing the progression, including its change in sample size, without assigning a causal victory to one housing or adhesive change. {/* ^[evidence:LK-06f48f7f] ^[evidence:LK-6e6a5752] ^[evidence:LK-f644dabb] ^[evidence:LK-542e0313] ^[evidence:LK-7625cbc3] */}
+
+A separate household-chemical campaign passed across fourteen Sativa and fourteen Elvis samples, using four hours at 25 C followed by 72 hours at 45 C and periodic appearance and function checks. That result establishes performance under its own exposure method. It neither resolves nor inherits the drop campaign's failures. {/* ^[evidence:LK-07947e21] */}
+
+## Engineering the interfaces through the handoff
+
+The work connected a premium glass surface to the details needed to build it: housing engagement, display clearance, adhesive placement, fixtures, appearance references and inspection definitions. The test record then made it possible to discuss those interfaces against observed hardware behavior.
+
+My involvement continued from my initial hiring through the company's dissolution and purchase by Savant. I was there with the team on launch day, ringing the gong. The contribution was mechanical design and reliability leadership within that shared effort, continuing beyond the individual test packets shown here. {/* ^[evidence:EV-1839de0e490c] */}
+
+NOON publicly launched the system on October 26, 2017, with Room Director available separately and in the starter kit. The system received a 2018 Red Dot Product Design award, credited to NOON's in-house design team. Those are product and team outcomes; the test samples above do not establish shipment quantities or a complete final-build qualification. [NOON launch announcement](https://www.globenewswire.com/news-release/2017/10/26/1154179/0/en/Noon-Home-Inc-Brings-Professional-Quality-Layered-Lighting-Directly-to-Consumers.html), [Red Dot project record](https://www.red-dot.org/project/noon-23465/).
+
+The later service history matters for a connected product. Savant's notice discontinued the standalone NOON app and cloud service on February 28, 2023, retaining local load control and support for systems integrated with Savant Pro. This describes the product's later service life, separate from my 2017 engineering and launch work. [Savant discontinuation notice](https://support.savant.com/noon/articles/en_US/Support_Article/Product-Discontinuation-Notice-NOON-Lighting-App/?c=Savant_Knowledge%3AIntegrations&fs=Search&l=en_US&pn=1).
 
 ## Source trail
 
-- `040-00020_REV_DRAFT1` - draft cosmetic and reliability requirements.
-- `LCR_EVT1_1.1_Drop_Test_20170110_F.xlsx` - EVT1 protocol, samples, observations, and overall result.
-- `LCR_EVT2_B_Test3_1.1_Drop_Test_20170418_F.xlsx` - EVT2 protocol, samples, observations, and overall result.
-- `Sativa-and-Elvis_MECHANICAL___TEST-related_issue-tracker_2017_02_26.xlsx` - mechanical and test issue taxonomy.
-- `LCR_EVT1_ 2.9_Chemical Resistance_20170126(P).xlsx` - household-chemical method and pass result.
+The selected figures come from the original Sativa product render, the February EVT2 engineering-change report, the May assembly instructions, the June glass appearance specification and the July DVT test binder. Captions identify drawings, instructions and physical test photographs separately. The account also uses the dated action review, label alternatives, supplier redlines and original reliability worksheets.
+
+NOON/Locoroll, FIH and the supplier engineering teams produced this shared record. Drawing authorship supports the specific contribution described above; it does not assign sole ownership of the product or independent test execution.

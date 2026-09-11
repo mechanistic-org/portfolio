@@ -76,7 +76,9 @@ const yr = (x: any) => {
 	// Normalize the trial's recorded years without changing non-trial presentations.
 	return presentation ? date.getUTCFullYear() : date.getFullYear();
 };
-const period = [yr(d.date), yr(d.endDate)].filter(Boolean).join("–") || d.duration;
+const period = d.slug === "room-director" && d.duration
+	? d.duration
+	: [yr(d.date), yr(d.endDate)].filter(Boolean).join("–") || d.duration;
 
 // Recursively collect any { src, alt } images stashed in the legacy cyberspace data.
 function collectImages(node: any, out: { src: string; alt?: string }[] = []) {
@@ -168,7 +170,7 @@ const navNext = nextProject
 			description={d.description}
 			audioUrl={d.audio_url}
 			photoCount={images.length || undefined}
-			mediaCountLabel={["sundance", "sc48", "d-control", "d-command"].includes(d.slug) ? "images" : undefined}
+			mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director"].includes(d.slug) ? "images" : undefined}
 		/>
 
 		{contextRibbon && <ContextRibbon model={contextRibbon} />}
@@ -183,7 +185,7 @@ const navNext = nextProject
 					useContinuityRails ? (
 						<ProjectContinuityRail
 							side="left"
-							mediaCountLabel={["sundance", "sc48", "d-control", "d-command"].includes(d.slug) ? "images" : undefined}
+							mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director"].includes(d.slug) ? "images" : undefined}
 							projectTitle={d.title}
 							scenes={activeRailScenes}
 							headings={headings}
@@ -354,7 +356,13 @@ const navNext = nextProject
 	[data-project-article="sc48"] :global([id]),
 	[data-project-article="d-control"] :global([id]),
 	[data-project-article="d-command"] :global([id]),
-	[data-project-article="bazooka"] :global([id]) {
+	[data-project-article="bazooka"] :global([id]),
+	[data-project-article="room-director"] :global([id]) {
 		scroll-margin-top: 6rem;
+	}
+	[data-project-article="room-director"] > :global(header img),
+	[data-project-article="room-director"] :global(.rail__media-grid img) {
+		object-fit: contain;
+		background: white;
 	}
 </style>
