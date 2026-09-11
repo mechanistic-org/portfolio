@@ -7,199 +7,170 @@ client:
 - microsoft
 - webtv
 date: 2001-01-01 12:00:00+00:00
-description: A planned WebTV HomeNet gateway with three tuners and dual-drive DVR storage, developed through modeled 150 W thermal and detailed DEV assembly constraints.
+description: A triple-tuner home-network gateway whose dual drives, CPU shield and chassis had to work together for airflow, assembly and prototype manufacture.
 draft: false
 employer: mechanistic
 forensic_metrics:
-  financial: One April 20, 2001 invoice documents $14,200 for 142 hours of Galaxy support from March 7 through April 20.
-  process: A 150 W, 45°C ambient simulation reported 28.3 CFM, 84.0°C CPU junction, 52.8°C hard-drive case temperature, and 55.0°C air near the smart-card reader.
-  governance: An independent mechanical-design and Pro/ENGINEER assignment operated under WebTV direction inside a cross-functional product-development program.
+  process: 'April 23, 2001 thermal model: 150 W total load, 45°C ambient, 300 mm enclosure depth and 28.3 CFM.'
+  governance: Mechanical design and Pro/ENGINEER under WebTV direction. Avijit Goswami supplied thermal analysis; Mike Hiett coordinated the EMS prototype effort.
 forensic_summary:
-  trigger: A planned triple-tuner, dual-drive HomeNet gateway combined a dense architecture with a 150 W thermal model and unresolved DEV assembly and shielding issues.
-  intervention: Developed the mechanical layout and Pro/ENGINEER documentation, evaluated the 300 mm airflow model, and drove CPU assembly, EMI-flange, chassis-stiffness, and component-placement actions through the hitlist.
-  result: The surviving record establishes a detailed prototype and DEV candidate, but does not establish shipment, cancellation, production validation, or a causal transfer into Xbox.
-heroImage: /assets/webtv-galaxy/webtv-galaxy-hero-01-xl.webp
+  trigger: Three tuners, dual drives and a shielded CPU subsystem shared a constrained HomeNet gateway enclosure.
+  intervention: Develop the chassis and mechanical documentation around airflow, mounting, assembly access and supplier feedback; iterate the package through prototype release.
+  result: Prototype files released June 28, 2001. CPU revisions continued in August; the September 17 status described Galaxy as nearly wrapped up with one more CPU assembly review requested.
+heroImage: /assets/webtv-galaxy/full-pass-252/architecture.webp
 industry: consumer_electronics
 job_title: mechanical_engineer
 production: prototype
-productionScale: one_off
 tags:
-- Crisis
-- Leadership
-- Mechanism
-theme: hyperspace
+- mechanical
+- dfm
+- thermal
+theme: article
 tools:
 - pro_engineer
-- thermal_simulation
 teamSize: Cross-functional
+duration: 2000-2001 development
+scars:
+- label: A subassembly that could not drop in
+  value: Assembly sequence became a constraint
+  description: The July 27 DEV review placed CPU fasteners too close to a fixed partition for a preassembled subsystem to drop into place.
+  severity: major
+  phase: design
+  anchor: the-cpu-package-had-to-be-assembled-in-place
+  trigger: A self-contained CPU enclosure combined shielding and directed airflow.
+  intervention: Review the fasteners and fixed partition together; the recorded direction was to build the subsystem in parts.
+  result: The assembly constraint became explicit alongside the remaining flange and seal actions.
+  evidence:
+  - LK-cd36e41e
+  - LK-1dfe9d11
 cyberspace:
+  enable: true
   layout: linear
   stickies:
-  - caption: Early industrial-design views establish the planned set-top-box form. They do not establish mechanical authorship, shipment, or program outcome.
-    data:
-      columns: 3
-      layout: masonry
-      scattered: true
-      images:
-      - alt: galaxy3
-        src: /assets/webtv-galaxy/bubbles/01_early_id/galaxy3.jpg
-        aspectRatio: 1.5
-      - alt: set top 2 prp2
-        src: /assets/webtv-galaxy/bubbles/01_early_id/set top 2 prp2.jpg
-        aspectRatio: 1.5
-    featuredIndices: []
-    id: 01_early_id
+  - id: architecture
     type: gallery
-    title: Early Id
+    title: Gateway form and architecture
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - src: /assets/webtv-galaxy/full-pass-252/architecture.webp
+        alt: Open chassis with dual hard drives, the CPU enclosure, rear electronics and folded partitions.
+        aspectRatio: 1.5540246555474981
+        caption: Galaxy architecture packet, page 2. The CAD view shows the packaging relationships in the development assembly. White margins trimmed; it is a design model.
+      - src: /assets/webtv-galaxy/full-pass-252/early-appearance.webp
+        alt: Silver UltimateTV-branded enclosure with a dark front window and central circular control.
+        aspectRatio: 2.6315789473684212
+        caption: Early industrial-design packet, page 1. This appearance view records the exterior direction; its exact revision relationship to the 2001 DEV chassis is unestablished.
+    featuredIndices: []
     deck: []
-  - caption: Dual-drive packaging views provide architecture context for the planned DVR function; the performance and thermal claims remain grounded in the reviewed records.
-    data:
-      columns: 3
-      layout: masonry
-      scattered: true
-      images:
-      - alt: galaxy_HDD Copy 1 (1)
-        src: /assets/webtv-galaxy/bubbles/03_architecture/galaxy_HDD Copy 1 (1).png
-        aspectRatio: 1.5
-      - alt: galaxy_HDD Copy 1
-        src: /assets/webtv-galaxy/bubbles/03_architecture/galaxy_HDD Copy 1.png
-        aspectRatio: 1.5
-    featuredIndices: []
-    id: 03_architecture
+  - id: thermal
     type: gallery
-    title: Architecture
+    title: The modeled airflow path
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - src: /assets/webtv-galaxy/full-pass-252/thermal-temperature.webp
+        alt: Temperature contour plot through the modeled Galaxy enclosure, retaining its original scale.
+        aspectRatio: 0.6035653650254669
+        caption: Thermal consultant packet, page 3, accompanying Avijit Goswami’s April 23, 2001 report. Original model contour and temperature scale retained. This is simulation evidence.
+      - src: /assets/webtv-galaxy/full-pass-252/thermal-velocity.webp
+        alt: Velocity vectors through the enclosure, retaining the original scale and component outlines.
+        aspectRatio: 0.5932415519399249
+        caption: Thermal consultant packet, page 4. Original velocity vectors show the modeled flow field. Read with the April 23 model assumptions, not as a measured prototype airflow map.
+    featuredIndices: []
     deck: []
-  - caption: CPU subsystem views show the packaging context behind the in-parts assembly direction. They do not prove completed EMI containment.
-    data:
-      columns: 3
-      layout: masonry
-      scattered: true
-      images:
-      - alt: Assembly 1
-        src: /assets/webtv-galaxy/bubbles/03_cpu/Assembly 1.png
-        aspectRatio: 1.5
-      - alt: galaxy_CPU (1)
-        src: /assets/webtv-galaxy/bubbles/03_cpu/galaxy_CPU (1).png
-        aspectRatio: 1.5
-      - alt: galaxy_CPU
-        src: /assets/webtv-galaxy/bubbles/03_cpu/galaxy_CPU.png
-        aspectRatio: 1.5
-    featuredIndices: []
-    id: 03_cpu
+  - id: cpu
     type: gallery
-    title: Cpu
+    title: CPU packaging and assembly
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - src: /assets/webtv-galaxy/full-pass-252/cpu-top.webp
+        alt: Fan mounted above a perforated CPU shield in the Galaxy CAD assembly.
+        aspectRatio: 1.372826786864134
+        caption: CPU packet, page 1. Fan, perforated top and mounting features show the combined cooling and shielding problem. The view does not identify a final vent revision.
+      - src: /assets/webtv-galaxy/full-pass-252/cpu-underside.webp
+        alt: Underside of the CPU enclosure showing the lower shield and its openings.
+        aspectRatio: 1.465869106263195
+        caption: 'CPU packet, page 3. The underside view complements the July DEV assembly issue: fasteners near the fixed partition required assembly in parts.'
+    featuredIndices: []
     deck: []
-  - caption: Drive-bracket views illustrate the dual-storage package evaluated by the thermal model; they are not production-validation evidence.
-    data:
-      columns: 3
-      layout: masonry
-      scattered: true
-      images:
-      - alt: galaxy_HDD (1)
-        src: /assets/webtv-galaxy/bubbles/03_hdd/galaxy_HDD (1).png
-        aspectRatio: 1.5
-      - alt: galaxy_HDD
-        src: /assets/webtv-galaxy/bubbles/03_hdd/galaxy_HDD.png
-        aspectRatio: 1.5
-    featuredIndices: []
-    id: 03_hdd
+  - id: manufacture
     type: gallery
-    title: Hdd
-    deck: []
-  - caption: Base and forming images show open manufacturability questions. The former Hook 29 yield-rescue story is not inferred from these images.
+    title: Prototype base revisions
     data:
-      columns: 3
+      columns: 2
       layout: masonry
-      scattered: true
       images:
-      - alt: Base_Proto_Deviations
-        src: /assets/webtv-galaxy/bubbles/03_metal/Base_Proto_Deviations.jpg
-        aspectRatio: 1.5
-      - alt: DIMPLE_FORM
-        src: /assets/webtv-galaxy/bubbles/03_metal/DIMPLE_FORM.png
-        aspectRatio: 1.5
-      - alt: galaxy_
-        src: /assets/webtv-galaxy/bubbles/03_metal/galaxy_.png
-        aspectRatio: 1.5
+      - src: /assets/webtv-galaxy/full-pass-252/base-prototype-deviations.webp
+        alt: Chassis base drawing with red standoff substitutions and green dome-height allowances.
+        aspectRatio: 1.3071895424836601
+        caption: Base_Proto_Deviations, metal-parts packet page 1; transmitted in the July 10, 2001 correspondence. Red notes propose 6 mm standoffs in place of selected domes; green notes allow 7 mm domes with corresponding panel-opening changes. Original annotations retained; these are prototype deviations.
     featuredIndices: []
-    id: 03_metal
-    type: gallery
-    title: Metal
-    deck: []
-  - caption: Thermal-model views accompany the documented simulation inputs and results. They are analytical artifacts, not measured production performance.
-    data:
-      columns: 3
-      layout: masonry
-      scattered: true
-      images:
-      - alt: model-iso
-        src: /assets/webtv-galaxy/bubbles/03_thermal/model-iso.jpg
-        aspectRatio: 1.5
-      - alt: tempxz
-        src: /assets/webtv-galaxy/bubbles/03_thermal/tempxz.jpg
-        aspectRatio: 1.5
-      - alt: velxz
-        src: /assets/webtv-galaxy/bubbles/03_thermal/velxz.jpg
-        aspectRatio: 1.5
-    featuredIndices: []
-    id: 03_thermal
-    type: gallery
-    title: Thermal
     deck: []
 ---
 
 # WebTV Galaxy
 
-## Project summary
+Galaxy brought the heat, storage and connectors of a small computer into a television gateway. WebTV's HomeNet plan called for three satellite tuners, two hard drives for DVR storage and HDTV output. Inside the enclosure, the mechanical problem was to make the drive mounts, CPU shield, partitions and rear electronics work as one package.
 
-- **Role boundary:** Independent mechanical-design consultant responsible for mechanical design and Pro/ENGINEER documentation under WebTV direction. Industrial design, thermal analysis, electronics, fabrication, program management, and the wider product outcome remained cross-functional responsibilities.
-- **Mandate:** Develop the mechanical package for the planned Galaxy Home Network gateway, whose requirements included three satellite tuners, dual hard drives for DVR storage, HDTV output, and picture-in-picture operation.
-- **Evidence-bounded result:** The record documents a detailed prototype and DEV candidate with an evaluated thermal model and an active mechanical hitlist. It does not establish shipment, cancellation, production validation, or a causal transfer into Xbox.
+I provided mechanical design and Pro/ENGINEER documentation through Mechanistic, working under WebTV's direction. The work moved through layout studies, supplier feedback, prototype files and detailed DEV revisions. Roy Askeland coordinated the assignment; Frank Salinas supplied hardware-system requirements and review, Avijit Goswami performed the thermal analysis, and Mike Hiett managed the prototype effort with EMS.
 
-## Thermal model
+## A gateway for a planned home network
 
-The April 23, 2001 consultant record reports a simulation run at 150 W total power, 45°C ambient, and 300 mm enclosure depth. With the modeled fan at 2700 RPM and 28.3 CFM, it reported an 84.0°C CPU junction, an 89.3°C Nemo device temperature, a 52.8°C hard-drive case temperature, and 55.0°C air near the smart-card reader.
+The September 2000 HomeNet material placed Galaxy at the center of a proposed network of entertainment devices. Early appearance studies explored an UltimateTV-branded enclosure with a broad front window and a central control. That exterior study and the later development chassis represent different parts of the record; the assembly views show the internal engineering more directly.
 
-Those values are simulation inputs and results, not measured production performance. The Fireball lct20 datasheet lists a 55°C operating maximum, which makes the modeled 52.8°C drive case temperature a narrow analytical comparison rather than proof of production margin. The fan's 37 dB value is a component specification, not a measured system acoustic floor. Moving the smart-card reader closer to the inlet remained a recommendation in the reviewed record; no later closure record proves the move was completed.
+By spring 2001, the package had to accommodate two drives, a main board, a separate CPU board and shield, tuner boards, a smart-card reader and a power supply. Rear-panel connectors tied the electronics to chassis openings. Board heights, cable exits and mounting details were still being resolved while the mechanical model developed.
 
-## CPU assembly and EMI direction
+The [open-chassis view](/assets/webtv-galaxy/full-pass-252/architecture.webp) makes the main relationship visible: storage and the CPU occupy the front of the package, with partitions separating them from the rear electronics and power supply. A change to one mounting detail could affect both assembly access and the route available to air.
 
-The July 27 DEV hitlist records CPU fasteners near a fixed partition and states that the CPU subsystem could not be dropped into the main assembly as a preassembled unit. Its required direction was an assembly built in parts. The same packet calls for EMI flanges all around and a better seal.
+## Heat set the route through the enclosure
 
-That evidence supports an assembly and shielding direction, not a verified endpoint. The page therefore does not claim completed 360-degree containment or a passed emissions result.
+Avijit Goswami's April 23, 2001 simulation evaluated a 150 W total load at 45°C ambient in an enclosure that had grown to 300 mm deep. Air entered across the hard-drive area and exhausted through the tuner, smart-card and power-supply regions. The CPU model included an extruded-fin heatsink, an intermediate aluminum spreader and an assumed grease or phase-change interface.
 
-## Chassis and manufacturability
+The model reported 28.3 CFM through the box, a 52.8°C drive case and 55.0°C air near the smart-card reader. Its CPU result was 84.0°C, labeled “junction/case” in the report. These are analytical results with specific component and airflow assumptions. The [temperature contour](/assets/webtv-galaxy/full-pass-252/thermal-temperature.webp) and [velocity plot](/assets/webtv-galaxy/full-pass-252/thermal-velocity.webp) preserve the original fields and scales.
 
-The surviving metal-parts packet proposes standoffs instead of dome forms, while the hitlist says base stiffening still required review and records other geometry as unresolved. It does not contain the former public story that named "Hook 29" forms, established a warped-base rescue, or proved flat parts at production stamping rates. Those claims have been retired rather than inferred from incomplete manufacturing discussion.
+The analyst singled out the smart-card location for further attention and recommended moving it closer to the inlet. That made component placement part of the cooling problem. The proposed location change remained a review action in the available record; the model alone did not establish the performance of a finished prototype.
 
-## Governance and evidence
+## Drive support and air partitioning needed different parts
 
-The proposal defines Mechanistic as an independent contractor providing product-development and technical-consulting support, with a specific scope for mechanical design and Pro/ENGINEER documentation. It also places that work under WebTV direction and describes industrial design as a separate input. The dated hitlist distributes actions across a broader program team, reinforcing a cross-functional role boundary.
+The May mechanical review considered making the hard-drive bracket serve as an air partition. The notes rejected that combined function over a 1 g concern and retained a separate partition to direct airflow. Mounting the drives and steering air therefore became distinct design jobs.
 
-One April 20, 2001 invoice documents 142 hours of Galaxy support from March 7 through April 20 at $100 per hour, for a total of $14,200. It is one bounded invoice, not evidence of a recurring monthly burn rate or an allocation across three programs.
+The same review addressed bracket attachment, formed stiffening, grommets and ferrules. It also compared a vertical, rear-access smart-card arrangement with a horizontal reader beneath the drives. The vertical option was recorded as the lower-cost, lower-complexity direction, with mechanical follow-up assigned to me.
 
-NotebookLM remains a research surface rather than publication authority. The dated local reconciliation accounts for all 35 sources, 34 notes, and 23 Studio audio artifacts. Ten audio records contain attribution-biased instructions, and none is used as claim authority. The reconstruction explicitly unions the 91-row declared `webtv_galaxy` archive with the 27-row dedicated `2001_WebTV_Receiver_galaxy` archive; neither silently supersedes the other.
+These choices connected the thermal layout to parts that could be mounted and serviced. They also left details to work through: the partition's clips and holes, its fit around adjacent hardware, and the routes for power and drive cables.
 
-## Program outcome and Xbox boundary
+## The CPU package had to be assembled in place
 
-The reviewed Galaxy packet does not establish that the product shipped, that every hurdle closed, why the program ended, or an exact end date. It also does not document a technical handoff that made Galaxy the missing link to Xbox, saved Xbox, or transferred Galaxy's thermal architecture into that program. The records show company and planning adjacency. Adjacency is not causation, and later Xbox redesign work belongs to its own evidence scope.
+The CPU enclosure combined directed airflow with EMI shielding. Its perforated top admitted air beneath the fan, while the lower shield and connection to the main board made the underside important too. The [top assembly](/assets/webtv-galaxy/full-pass-252/cpu-top.webp) and [underside view](/assets/webtv-galaxy/full-pass-252/cpu-underside.webp) show both sides of that problem.
 
-## Quantified evidence
+The July 27 DEV2.1 review exposed a practical constraint: CPU fasteners lay close to a fixed partition, so the subsystem could not be dropped into the chassis as a preassembled unit. The recorded direction was to build it in parts. The review also called for flanges around the enclosure and a better seal, leaving shielding details to resolve alongside assembly order.
 
-- **Modeled** a 150 W total load at 45°C ambient in a 300 mm enclosure.
-- **Reported** 28.3 CFM, 84.0°C CPU junction, 52.8°C hard-drive case temperature, and 55.0°C air near the smart-card reader in that simulation.
-- **Documented** a DEV assembly direction that built the CPU subsystem in parts around a fixed partition.
-- **Tracked** all-around EMI-flange, seal, chassis-stiffness, and component-placement actions without converting them into unrecorded closures.
-- **Invoiced** $14,200 for 142 Galaxy support hours in one bounded March 7 to April 20 period.
+Vent geometry continued to change. In August I sent a revised CPU top for review and then requested prototype pieces. A September hotlist still carried vent, fan-gasket and mounting changes. The records use different dimension conventions for the hexagonal openings, so they do not establish one final vent specification or a completed emissions result.
+
+## Tooling feedback changed the geometry under discussion
+
+WebTV asked NT Vision to assess the CPU shield early, while its internal requirements were still developing. The May exchange proposed embosses and ribs for stiffness, folded sides in place of the initial box form, and multiple blanking stages for the dense hexagonal hole pattern. Pauline Soh's response specified at least three blanking stations for the 174-hole pattern then under review. This was a tooling proposal, with final gauges and geometry still open.
+
+The chassis base raised a related forming question. In June, Chuck Pokonosky at D&D Manufacturing warned that the quantity and placement of drawn standoffs could warp the base. He proposed alternative standoff forms or strengthening ribs. Frank welcomed the rib discussion while flagging the exposure of internal areas that the alternative forms could create.
+
+The [prototype-deviation drawing](/assets/webtv-galaxy/full-pass-252/base-prototype-deviations.webp), transmitted in July, makes the consequences concrete. Selected domes were to be replaced with 6 mm standoffs; other dome locations were allowed 7 mm height with corresponding changes to panel openings. A local manufacturing accommodation could move the board and force an adjustment at the enclosure boundary. These proposals document the work toward a buildable package; they do not establish a production stamping yield.
+
+## From prototype files to the last recorded review
+
+My July 7 status reported that prototype files had been released on June 28, with Mike Hiett managing the EMS effort. Flexible-partition prototypes had arrived; PCB prototypes were still expected. The July DEV list then recorded concrete assembly and fit problems, including the CPU fasteners, power-supply installation, connector alignment and partition details.
+
+Revisions continued into August. On September 17 I described Galaxy as nearly wrapped up and asked to review the current CPU assembly once more. That is the clearest late status in the reviewed correspondence. It extends the story beyond the initial model and release package while leaving the final review outcome open.
+
+Galaxy's contribution was a mechanical development package carried through a coupled set of cooling, assembly and fabrication constraints. The record supports that work and its prototype milestones. Product shipment, full qualification and the eventual program decision remain unestablished here; later Xbox work has its own engineering history.
 
 ## Source trail
 
-- `galaxy_proposal_04_5_01` - independent-contractor scope, mechanical-design mandate, and planned product architecture.
-- `03_Engineering_thermal` - April 2001 thermal consultant record and modeled values.
-- `03_Engineering_status` - dated mechanical hitlists, assignments, and unresolved DEV actions.
-- `03_Engineering_metal-parts` - chassis and base manufacturing discussion.
-- `03_Engineering_CPU` - CPU subsystem mechanical packet.
-- `03_Engineering_architecture` - system requirements and mechanical architecture.
-- `03_Engineering_HDDs` - dual-drive packaging packet.
-- `fireball_lct20_datasheet` - hard-drive operating-temperature specification.
-- `Galaxy_Invoices` - April 20, 2001 Galaxy support invoice.
+- The April 2001 mechanical-design proposal and September 2000 HomeNet planning material establish the assignment and intended gateway.
+- The April 23 thermal report supplies the model assumptions, results and analyst recommendation.
+- May mechanical notes, the July 27 DEV review and the September hotlist record alternatives, assembly constraints and continuing revisions.
+- Original architecture, CPU and base-deviation figures show the parts under discussion.
+- Dated WebTV correspondence records supplier feedback, the June prototype-file release, August CPU revisions and September status.

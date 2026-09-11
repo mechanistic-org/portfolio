@@ -742,115 +742,122 @@ export const projectArticleTrial = {
 	    }
 	},
 	"webtv-galaxy": {
-		sections: {
-			summary: "project-summary",
-			thermal: "thermal-model",
-			cpu: "cpu-assembly-and-emi-direction",
-			chassis: "chassis-and-manufacturability",
-			governance: "governance-and-evidence",
-			boundaries: "program-outcome-and-xbox-boundary",
-			impact: "quantified-evidence",
-			sources: "source-trail",
-		},
-		media: {
-			"planned-form": {
-				galleryId: "01_early_id",
-				src: "/assets/webtv-galaxy/bubbles/01_early_id/galaxy3.jpg",
-			},
-			"thermal-model": {
-				galleryId: "03_thermal",
-				src: "/assets/webtv-galaxy/bubbles/03_thermal/model-iso.jpg",
-			},
-			"temperature-model": {
-				galleryId: "03_thermal",
-				src: "/assets/webtv-galaxy/bubbles/03_thermal/tempxz.jpg",
-			},
-			"cpu-assembly": {
-				galleryId: "03_cpu",
-				src: "/assets/webtv-galaxy/bubbles/03_cpu/Assembly 1.png",
-			},
-			"cpu-package": {
-				galleryId: "03_cpu",
-				src: "/assets/webtv-galaxy/bubbles/03_cpu/galaxy_CPU.png",
-			},
-			"base-deviations": {
-				galleryId: "03_metal",
-				src: "/assets/webtv-galaxy/bubbles/03_metal/Base_Proto_Deviations.jpg",
-			},
-			"forming-detail": {
-				galleryId: "03_metal",
-				src: "/assets/webtv-galaxy/bubbles/03_metal/DIMPLE_FORM.png",
-			},
-		},
-		scenes: [
-			{
-				key: "summary",
-				eyebrow: "Orientation",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: ["planned-form"],
-			},
-			{
-				key: "thermal",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: ["thermal-model", "temperature-model"],
-			},
-			{
-				key: "cpu",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: ["cpu-assembly", "cpu-package"],
-			},
-			{
-				key: "chassis",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: ["base-deviations", "forming-detail"],
-			},
-			{
-				key: "governance",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["governance"],
-				},
-				media: [],
-			},
-			{
-				key: "boundaries",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "impact",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "sources",
-				eyebrow: "Sources",
-				left: {
-					kind: "sources",
-				},
-				media: [],
-			},
-		],
+	    "sections": {
+	        "architecture": "a-gateway-for-a-planned-home-network",
+	        "thermal": "heat-set-the-route-through-the-enclosure",
+	        "partition": "drive-support-and-air-partitioning-needed-different-parts",
+	        "cpu": "the-cpu-package-had-to-be-assembled-in-place",
+	        "manufacture": "tooling-feedback-changed-the-geometry-under-discussion",
+	        "outcome": "from-prototype-files-to-the-last-recorded-review",
+	        "sources": "source-trail"
+	    },
+	    "media": {
+	        "architecture": {
+	            "galleryId": "architecture",
+	            "src": "/assets/webtv-galaxy/full-pass-252/architecture.webp"
+	        },
+	        "early-appearance": {
+	            "galleryId": "architecture",
+	            "src": "/assets/webtv-galaxy/full-pass-252/early-appearance.webp"
+	        },
+	        "thermal-temperature": {
+	            "galleryId": "thermal",
+	            "src": "/assets/webtv-galaxy/full-pass-252/thermal-temperature.webp"
+	        },
+	        "thermal-velocity": {
+	            "galleryId": "thermal",
+	            "src": "/assets/webtv-galaxy/full-pass-252/thermal-velocity.webp"
+	        },
+	        "cpu-top": {
+	            "galleryId": "cpu",
+	            "src": "/assets/webtv-galaxy/full-pass-252/cpu-top.webp"
+	        },
+	        "cpu-underside": {
+	            "galleryId": "cpu",
+	            "src": "/assets/webtv-galaxy/full-pass-252/cpu-underside.webp"
+	        },
+	        "base-prototype-deviations": {
+	            "galleryId": "manufacture",
+	            "src": "/assets/webtv-galaxy/full-pass-252/base-prototype-deviations.webp"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "architecture",
+	            "eyebrow": "System architecture",
+	            "left": {
+	                "kind": "context"
+	            },
+	            "media": [
+	                "architecture",
+	                "early-appearance"
+	            ]
+	        },
+	        {
+	            "key": "thermal",
+	            "eyebrow": "Thermal analysis",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "thermal-temperature",
+	                "thermal-velocity"
+	            ]
+	        },
+	        {
+	            "key": "partition",
+	            "eyebrow": "Separate functions",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "architecture"
+	            ]
+	        },
+	        {
+	            "key": "cpu",
+	            "eyebrow": "Assembly sequence",
+	            "left": {
+	                "kind": "scar",
+	                "section": "cpu"
+	            },
+	            "media": [
+	                "cpu-top",
+	                "cpu-underside"
+	            ]
+	        },
+	        {
+	            "key": "manufacture",
+	            "eyebrow": "Supplier feedback",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "base-prototype-deviations"
+	            ]
+	        },
+	        {
+	            "key": "outcome",
+	            "eyebrow": "Prototype milestones",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "sources",
+	            "eyebrow": "Evidence",
+	            "left": {
+	                "kind": "sources"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Inside the development package",
+	        "description": "The assembly views, thermal plots and annotated base drawing explain the mechanical decisions. An early appearance study preserves the exterior direction separately from the development chassis."
+	    }
 	},
 	"webtv-cortez": {
 		models: ["3d_model"],
