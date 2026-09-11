@@ -860,108 +860,117 @@ export const projectArticleTrial = {
 	    }
 	},
 	"webtv-cortez": {
-		models: ["3d_model"],
-		sections: {
-			summary: "project-summary",
-			surfaces: "surface-development",
-			keys: "key-layout-and-tooling-estimate",
-			schedule: "schedule-and-billing",
-			governance: "governance-and-evidence",
-			boundaries: "outcome-and-project-boundary",
-			impact: "quantified-evidence",
-			sources: "source-trail",
-		},
-		media: {
-			"functional-model": {
-				galleryId: "03_functional_model",
-				src: "/assets/webtv-cortez/bubbles/03_functional_model/cortez3.jpg",
-			},
-			"rear-surface": {
-				galleryId: "01_early_id",
-				src: "/assets/webtv-cortez/bubbles/01_early_id/back.jpg",
-			},
-			"front-surface": {
-				galleryId: "01_early_id",
-				src: "/assets/webtv-cortez/bubbles/01_early_id/front.jpg",
-			},
-			keycap: {
-				galleryId: "04_keycaps",
-				src: "/assets/webtv-cortez/bubbles/04_keycaps/cap1x1.png",
-			},
-			"key-legend": {
-				galleryId: "04_keycaps",
-				src: "/assets/webtv-cortez/bubbles/04_keycaps/keylegend.png",
-			},
-		},
-		scenes: [
-			{
-				key: "summary",
-				eyebrow: "Orientation",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: ["functional-model"],
-			},
-			{
-				key: "surfaces",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: ["rear-surface", "front-surface"],
-			},
-			{
-				key: "keys",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: ["keycap", "key-legend"],
-			},
-			{
-				key: "schedule",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "governance",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["governance"],
-				},
-				media: [],
-			},
-			{
-				key: "boundaries",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "impact",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "sources",
-				eyebrow: "Sources",
-				left: {
-					kind: "sources",
-				},
-				media: [],
-			},
-		],
+	    "sections": {
+	        "envelope": "a-rectangular-mechanism-inside-an-organic-shell",
+	        "keys": "choosing-the-keys-while-the-envelope-was-still-moving",
+	        "model": "a-working-model-to-check-the-design",
+	        "review": "the-first-review-changed-the-surfaces",
+	        "outcome": "prototype-release-and-the-later-data-exchange",
+	        "people": "people-and-responsibilities",
+	        "sources": "source-trail"
+	    },
+	    "media": {
+	        "working-layout": {
+	            "galleryId": "keys",
+	            "src": "/assets/webtv-cortez/full-pass-253/working-layout.webp"
+	        },
+	        "supplier-key-envelope": {
+	            "galleryId": "keys",
+	            "src": "/assets/webtv-cortez/full-pass-253/supplier-key-envelope.webp"
+	        },
+	        "keycap-section": {
+	            "galleryId": "keys",
+	            "src": "/assets/webtv-cortez/full-pass-253/keycap-section.webp"
+	        },
+	        "underside-surface": {
+	            "galleryId": "surfaces",
+	            "src": "/assets/webtv-cortez/full-pass-253/underside-surface.webp"
+	        },
+	        "grip-study": {
+	            "galleryId": "surfaces",
+	            "src": "/assets/webtv-cortez/full-pass-253/grip-study.webp"
+	        },
+	        "navigation-detail": {
+	            "galleryId": "prototype",
+	            "src": "/assets/webtv-cortez/full-pass-253/navigation-detail.webp"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "envelope",
+	            "eyebrow": "Surface development",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "underside-surface",
+	                "grip-study"
+	            ]
+	        },
+	        {
+	            "key": "keys",
+	            "eyebrow": "Supplier interfaces",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "working-layout",
+	                "supplier-key-envelope",
+	                "keycap-section"
+	            ]
+	        },
+	        {
+	            "key": "model",
+	            "eyebrow": "A working hard model",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "working-layout"
+	            ]
+	        },
+	        {
+	            "key": "review",
+	            "eyebrow": "Review and revision",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "underside-surface"
+	            ]
+	        },
+	        {
+	            "key": "outcome",
+	            "eyebrow": "Prototype and handoff",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "navigation-detail"
+	            ]
+	        },
+	        {
+	            "key": "people",
+	            "eyebrow": "Responsibilities",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "sources",
+	            "eyebrow": "Evidence",
+	            "left": {
+	                "kind": "sources"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "From the layout to the handgrip",
+	        "description": "The working drawing, supplier references and surface studies explain the package. The photograph records the interface without asserting a prototype revision."
+	    }
 	},
 	backsplash: {
 		sections: {
