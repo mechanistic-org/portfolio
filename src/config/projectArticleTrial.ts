@@ -568,136 +568,128 @@ export const projectArticleTrial = {
         breakout: { eyebrow: "D-Control design and production", description: "Early composition, assembly drawings, fit inspection and an installed system. Each image is captioned for the condition or design stage it documents." },
     },
 	bazooka: {
-		sections: {
-			summary: "project-summary",
-			failures: "the-anatomy-of-failure",
-			removal: "removal-crisis-fourteen-for-fourteen",
-			requirements: "requirement-lineage-650-w-to-850-w",
-			emi: "compliance-crisis-emi-pretest",
-			finish: "finish-and-tolerance-record",
-			production: "production-schedule-not-production-result",
-			governance: "governance-and-evidence",
-			impact: "quantified-impact",
-			sources: "source-trail",
-		},
-		media: {
-			"click-setup": {
-				galleryId: "03_base_click_testing_1",
-				src: "/assets/bazooka/03-base-click-testing-1/IMG_20170419_135338-lg.webp",
-			},
-			"pull-setup": {
-				galleryId: "03_base_pull_testing_1",
-				src: "/assets/bazooka/03-base-pull-testing-1/IMG_20170420_172124-lg.webp",
-			},
-			"pull-handling": {
-				galleryId: "03_base_pull_testing_1",
-				src: "/assets/bazooka/03-base-pull-testing-1/IMG_20170420_172208-lg.webp",
-			},
-			"button-front": {
-				galleryId: "03_base_test_btn_1",
-				src: "/assets/bazooka/03-base-test-btn-1/IMG_20170830_103733-xl.webp",
-			},
-			"button-detail": {
-				galleryId: "03_base_test_btn_1",
-				src: "/assets/bazooka/03-base-test-btn-1/IMG_20170830_103738-xl.webp",
-			},
-			"later-evaluation": {
-				galleryId: "03_base_test_btn_2",
-				src: "/assets/bazooka/03-base-test-btn-2/IMG_20170904_151956-xl.webp",
-			},
-		},
-		scenes: [
-			{
-				key: "summary",
-				eyebrow: "Orientation",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: ["click-setup"],
-			},
-			{
-				key: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "scar-index",
-				},
-				media: [],
-			},
-			{
-				key: "removal",
-				parent: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "scar",
-					section: "removal",
-				},
-				media: ["pull-setup", "pull-handling"],
-			},
-			{
-				key: "requirements",
-				parent: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: ["button-front", "button-detail"],
-			},
-			{
-				key: "emi",
-				parent: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "scar",
-					section: "emi",
-				},
-				media: [],
-			},
-			{
-				key: "finish",
-				parent: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "production",
-				parent: "failures",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: ["later-evaluation"],
-			},
-			{
-				key: "governance",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["governance"],
-				},
-				media: [],
-			},
-			{
-				key: "impact",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "sources",
-				eyebrow: "Sources",
-				left: {
-					kind: "sources",
-				},
-				media: [],
-			},
-		],
+	    "sections": {
+	        "architecture": "a-small-enclosure-with-several-jobs",
+	        "airgap": "giving-the-air-gap-mechanism-a-controlled-reference",
+	        "fit": "retention-without-an-over-constrained-fit",
+	        "testing": "testing-the-complete-interface",
+	        "handoff": "making-the-supplier-handoff-inspectable",
+	        "factory": "following-the-part-through-the-factory",
+	        "sources": "source-trail"
+	    },
+	    "media": {
+	        "airgap": {
+	            "galleryId": "airgap",
+	            "src": "/assets/bazooka/full-pass-249/airgap-guide.webp"
+	        },
+	        "springs": {
+	            "galleryId": "airgap",
+	            "src": "/assets/bazooka/03-base-test-btn-2/IMG_20170928_153842-2-xl.webp"
+	        },
+	        "tabs": {
+	            "galleryId": "fit",
+	            "src": "/assets/bazooka/full-pass-249/fit-tabs.webp"
+	        },
+	        "chamfer": {
+	            "galleryId": "fit",
+	            "src": "/assets/bazooka/full-pass-249/fit-chamfer.webp"
+	        },
+	        "click": {
+	            "galleryId": "qualification",
+	            "src": "/assets/bazooka/03-base-click-testing-1/IMG_20170419_135715-lg.webp"
+	        },
+	        "pull": {
+	            "galleryId": "qualification",
+	            "src": "/assets/bazooka/03-base-side-pull-testing/IMG_20170420_173231-xl.webp"
+	        },
+	        "tooling": {
+	            "galleryId": "factory",
+	            "src": "/assets/bazooka/03-base-test-btn-1/IMG_20170830_103733-xl.webp"
+	        },
+	        "samples": {
+	            "galleryId": "factory",
+	            "src": "/assets/bazooka/03-base-test-btn-2/IMG_20170904_151956-xl.webp"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "architecture",
+	            "eyebrow": "System",
+	            "left": {
+	                "kind": "context"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "airgap",
+	            "eyebrow": "Switch mechanism",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "airgap",
+	                "springs"
+	            ]
+	        },
+	        {
+	            "key": "fit",
+	            "eyebrow": "Locating and retaining",
+	            "left": {
+	                "kind": "metrics",
+	                "keys": [
+	                    "process"
+	                ]
+	            },
+	            "media": [
+	                "tabs",
+	                "chamfer"
+	            ]
+	        },
+	        {
+	            "key": "testing",
+	            "eyebrow": "Qualification",
+	            "left": {
+	                "kind": "scar",
+	                "section": "testing"
+	            },
+	            "media": [
+	                "click",
+	                "pull"
+	            ]
+	        },
+	        {
+	            "key": "handoff",
+	            "eyebrow": "Engineering data",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "factory",
+	            "eyebrow": "Manufacturing",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "tooling",
+	                "samples"
+	            ]
+	        },
+	        {
+	            "key": "sources",
+	            "eyebrow": "Evidence",
+	            "left": {
+	                "kind": "sources"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Mechanism, fit and factory work",
+	        "description": "The April proposal and attributed fit diagrams sit alongside dated test setups, tooling and samples. Each caption identifies the stage and what the image establishes."
+	    }
 	},
 	"webtv-galaxy": {
 		sections: {

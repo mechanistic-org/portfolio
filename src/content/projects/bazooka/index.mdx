@@ -2,30 +2,29 @@
 title: Bazooka (Base Station)
 slug: bazooka
 tier: deep_dive
-description: 'The Noon Bazooka base station: a high-voltage wall-box interface whose EVT2 record captured 14/14 module-removal difficulty, a likely slide-lock deformation mechanism, an EMI pretest failure, and a planned 1,500-piece production schedule.'
+description: 'Mechanical recovery of a wall-box lighting interface: air-gap switching, constrained fits, qualification and supplier handoff.'
 category: consumer_electronics
-date: 2016-06-28 00:00:00+00:00
+date: 2017-02-26 00:00:00+00:00
 draft: false
 employer: noon
 industry: consumer_electronics
 job_title: mechanical_engineer
 listed: true
 forensic_metrics:
-  financial: The archive contains a 1,500-piece production schedule, not evidence that the run started, completed, or shipped.
-  process: The dust-test record reports removal difficulty on 7/7 Sativa and 7/7 Elvis samples; the issue deck identifies large square dimples as a likely slide-lock deformation cause and proposes smaller circular dimples.
-  governance: The ten-year operating-life requirement was challenged as late and unsupported by vendor guarantees; an EVT2 EMI pretest failure was escalated to the vendor and a certified third-party test was requested.
+  process: 'Four-hook interface: define locating features, release redundant constraints and check the assembled fit.'
+  governance: Ten-year life was challenged through test and risk evidence; final qualification and shipment quantities remain unverified.
 forensic_summary:
-  trigger: All 14 recorded dust-test samples were difficult to remove from Bazooka, while the EVT2 action review recorded an EMI pretest failure and a late ten-year-life dispute.
-  intervention: Proposed smaller circular dimples at the same depth, tracked module-gap tolerance analyses, escalated the EMI source to the power vendor, and kept the lifecycle disagreement explicit.
-  result: A later reliability entry records the combined Bazooka/Waldo check as passing, but the surviving record does not attribute that pass to the dimple proposal or prove completion of the planned production run.
+  trigger: Inconsistent air-gap contact, sticking buttons and difficult module removal exposed coupled mechanical and electrical interfaces.
+  intervention: Develop the air-gap mechanism, investigate fit and retention, define test conditions and coordinate inspectable supplier data and capacity.
+  result: A documented recovery effort through 2017, including a later passing combined interface check; final mass-production quantities are not established.
 heroImage: /assets/bazooka/hero/bazooka-hero-01-xl.webp
 primary_home: mech
 production: production
 productionScale: series
 tags:
-- Mechanism
-- Crisis
-- Yield
+- mechanical
+- dfm
+- npi
 targets:
 - main
 - mech
@@ -34,236 +33,141 @@ theme: article
 scars:
 - label: Module removal
   value: 14 of 14 difficult to remove
-  description: The dust-test matrix records removal difficulty for every Sativa and Elvis sample in the Bazooka interface.
-  severity: critical
+  description: The EVT2 dust-test matrix recorded difficulty removing all seven Sativa and seven Elvis samples from the Bazooka interface.
+  severity: major
   phase: pilot
-  anchor: removal-crisis-fourteen-for-fourteen
-  trigger: Seven of seven Sativa and seven of seven Elvis samples were difficult to remove from Bazooka.
-  intervention: Identify large square dimples as a likely source of slide-lock deformation and propose smaller circular dimples at the same depth.
-  result: A later combined Bazooka/Waldo check passed, but the record does not directly establish causal closure by the dimple change.
+  anchor: testing-the-complete-interface
+  trigger: Dust testing exposed removal difficulty across the recorded samples.
+  intervention: Review dimple deformation, locating fits and the behavior of the complete module/base/chassis assembly.
+  result: A later combined Bazooka/Waldo check passed; the record does not establish the dimple proposal as its sole cause.
   evidence:
   - LK-e0b988e3
-  - LK-a554c8e0
-- label: EMI pretest
-  value: EVT2 pretest failure
-  description: The action review attributes the recorded noise source to Bazooka and asks the power vendor to resolve it before certified third-party testing.
-  severity: critical
-  phase: pilot
-  anchor: compliance-crisis-emi-pretest
-  trigger: Bazooka failed an EVT2 EMI pretest with noise attributed to the base-station architecture.
-  intervention: Escalate the source to the power vendor and request a certified third-party test.
-  result: The archive proves escalation and requested verification, not final compliance closure.
-  evidence:
-  - LK-17e30be8
+  - LK-6e256512
+duration: 2017 documented recovery work
 cyberspace:
+  enable: true
   layout: linear
   stickies:
-  - caption: The April 2017 sequence records the physical engagement setup between the removable module and Bazooka. It provides mechanism context, not a quantified force or pass/fail result.
-    data:
-      columns: 3
-      layout: masonry
-      scattered: true
-      images:
-      - alt: IMG_20170419_135338
-        src: /assets/bazooka/03-base-click-testing-1/IMG_20170419_135338-lg.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170419_135557
-        src: /assets/bazooka/03-base-click-testing-1/IMG_20170419_135557-lg.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170419_135649
-        src: /assets/bazooka/03-base-click-testing-1/IMG_20170419_135649-xl.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170419_135715
-        src: /assets/bazooka/03-base-click-testing-1/IMG_20170419_135715-lg.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170419_135859
-        src: /assets/bazooka/03-base-click-testing-1/IMG_20170419_135859-lg.webp
-        aspectRatio: 1.5
-    featuredIndices: []
-    id: 03_base_click_testing_1
+  - id: airgap
     type: gallery
-    title: Module click testing
-    deck:
-    - body: The April 2017 sequence records the physical engagement setup between the removable module and Bazooka. It provides mechanism context, not a quantified force or pass/fail result.
-      subtitle: ''
-      title: Interface engagement sequence
-  - caption: These images show the axial pull setup and handling sequence. The 14/14 removal result remains anchored to the reliability matrix, not inferred from photographs.
+    title: Air-gap concept and later spring work
     data:
-      columns: 3
+      columns: 2
       layout: masonry
-      scattered: true
       images:
-      - alt: IMG_20170420_172124
-        src: /assets/bazooka/03-base-pull-testing-1/IMG_20170420_172124-lg.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170420_172208
-        src: /assets/bazooka/03-base-pull-testing-1/IMG_20170420_172208-lg.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170420_172350
-        src: /assets/bazooka/03-base-pull-testing-1/IMG_20170420_172350-lg.webp
-        aspectRatio: 1.5
+      - src: /assets/bazooka/full-pass-249/airgap-guide.webp
+        alt: Concept cross-section showing a button and contactor guide mounted to a green PCB.
+        aspectRatio: 1.7777777777777777
+        caption: 'April 6, 2017 proposal, page 7: the return spring, guide and shorting components are grouped inside a guide fastened to the PCB. The slide records the proposed architecture, not an as-built release drawing.'
+      - src: /assets/bazooka/03-base-test-btn-2/IMG_20170928_153842-2-xl.webp
+        alt: Square black button parts with metal coil springs fitted inside, beside loose springs.
+        aspectRatio: 1.3333333333333333
+        caption: September 28, 2017 archive photograph of button components and formed coil springs. This documents a later physical arrangement; it does not establish the exact final released mechanism or a cycle-test result.
     featuredIndices: []
-    id: 03_base_pull_testing_1
+    deck: []
+  - id: fit
     type: gallery
-    title: Module pull testing
-    deck:
-    - body: These images show the axial pull setup and handling sequence. The documented 14/14 removal result remains anchored to the reliability matrix rather than inferred from photographs.
-      subtitle: ''
-      title: Pull-test setup
-  - caption: The side-pull sequence shows how off-axis loads were applied at the module interface without assigning an undocumented acceptance threshold.
+    title: Locating and retaining the assembly
     data:
-      columns: 3
+      columns: 2
       layout: masonry
-      scattered: true
       images:
-      - alt: IMG_20170419_140610
-        src: /assets/bazooka/03-base-side-pull-testing/IMG_20170419_140610-lg.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170420_173140
-        src: /assets/bazooka/03-base-side-pull-testing/IMG_20170420_173140-lg.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170420_173144
-        src: /assets/bazooka/03-base-side-pull-testing/IMG_20170420_173144-lg.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170420_173202
-        src: /assets/bazooka/03-base-side-pull-testing/IMG_20170420_173202-lg.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170420_173231
-        src: /assets/bazooka/03-base-side-pull-testing/IMG_20170420_173231-xl.webp
-        aspectRatio: 1.5
+      - src: /assets/bazooka/full-pass-249/fit-tabs.webp
+        alt: Bazooka and Waldo assembly diagram with four hook locations labeled A, B, C and D.
+        aspectRatio: 0.6149425287356322
+        caption: Diagram crop from Function Engineering’s April 18, 2017 Bazooka/Waldo fit analysis, page 3. A, B, C and D mark the four hook locations; the analysis identifies over-constraint when all four are equally tight.
+      - src: /assets/bazooka/full-pass-249/fit-chamfer.webp
+        alt: Section and paired geometry views showing the proposed removal of a chamfer at a hook interface.
+        aspectRatio: 0.7277777777777777
+        caption: Diagram crop from Function Engineering’s April 18 analysis, page 6. The section shows how the chamfer couples lateral position to tightness; the lower views compare existing geometry at left with a proposed flat bearing surface at right.
     featuredIndices: []
-    id: 03_base_side_pull_testing
+    deck: []
+  - id: qualification
     type: gallery
-    title: Side-pull testing
-    deck:
-    - body: The side-pull sequence shows how off-axis loads were applied at the module interface. It is retained as test-context imagery without assigning an undocumented acceptance threshold.
-      subtitle: ''
-      title: Off-axis interface loading
-  - caption: The August 2017 images document external air-gap button evaluation. The 10,000-cycle requirement comes from the PRD, not a cycle count inferred here.
+    title: Observing the physical interface
     data:
-      columns: 3
+      columns: 2
       layout: masonry
-      scattered: true
       images:
-      - alt: IMG_20170830_103733
-        src: /assets/bazooka/03-base-test-btn-1/IMG_20170830_103733-xl.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170830_103738
-        src: /assets/bazooka/03-base-test-btn-1/IMG_20170830_103738-xl.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170830_103757
-        src: /assets/bazooka/03-base-test-btn-1/IMG_20170830_103757-xl.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170830_103909
-        src: /assets/bazooka/03-base-test-btn-1/IMG_20170830_103909-lg.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170830_103936
-        src: /assets/bazooka/03-base-test-btn-1/IMG_20170830_103936-lg.webp
-        aspectRatio: 1.5
+      - src: /assets/bazooka/03-base-click-testing-1/IMG_20170419_135715-lg.webp
+        alt: Close view of an instrumented press above a control module mounted on a fixture.
+        aspectRatio: 0.7502930832356389
+        caption: 'April 19, 2017: the module/base interface in an instrumented engagement setup. The fixture makes contact and travel observable; no force threshold or pass result is inferred from the photograph.'
+      - src: /assets/bazooka/03-base-side-pull-testing/IMG_20170420_173231-xl.webp
+        alt: Engineers observing a cable-and-weight load setup beside a wire rack.
+        aspectRatio: 1.3333333333333333
+        caption: 'April 20, 2017: the team applies an off-axis load to the module interface using a cable and hanging weight. The image documents the setup, not a measured acceptance result or the identity of the people shown.'
     featuredIndices: []
-    id: 03_base_test_btn_1
+    deck: []
+  - id: factory
     type: gallery
-    title: Air-gap button evaluation
-    deck:
-    - body: The August 2017 images document evaluation of the externally actuated button associated with the air-gap mechanism. The 10,000-cycle requirement comes from the PRD, not from a cycle count inferred here.
-      subtitle: ''
-      title: External switch actuation
-  - caption: The later sequence shows continued button and interface evaluation into September 2017. It does not prove completion or shipment of the separate 1,500-piece production schedule.
+    title: Tooling and sample review
     data:
-      columns: 3
+      columns: 2
       layout: masonry
-      scattered: true
       images:
-      - alt: IMG_20170904_151956
-        src: /assets/bazooka/03-base-test-btn-2/IMG_20170904_151956-xl.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170904_155245
-        src: /assets/bazooka/03-base-test-btn-2/IMG_20170904_155245-lg.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170904_155252
-        src: /assets/bazooka/03-base-test-btn-2/IMG_20170904_155252-xl.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170904_155257
-        src: /assets/bazooka/03-base-test-btn-2/IMG_20170904_155257-lg.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170904_155320
-        src: /assets/bazooka/03-base-test-btn-2/IMG_20170904_155320-xl.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170928_153842-2
-        src: /assets/bazooka/03-base-test-btn-2/IMG_20170928_153842-2-xl.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170928_153842
-        src: /assets/bazooka/03-base-test-btn-2/IMG_20170928_153842-xl.webp
-        aspectRatio: 1.5
+      - src: /assets/bazooka/03-base-test-btn-1/IMG_20170830_103733-xl.webp
+        alt: Copper-colored electrode positioned above a metal tool insert on a machine table.
+        aspectRatio: 1.3333333333333333
+        caption: 'August 30, 2017: a tooling machine and electrode over the button-tool insert. This is manufacturing-process imagery from the archive’s button sequence, not a switch actuation or life test.'
+      - src: /assets/bazooka/03-base-test-btn-2/IMG_20170904_151956-xl.webp
+        alt: Base-station samples arranged on a workbench with bags of small components below.
+        aspectRatio: 1.3333333333333333
+        caption: 'September 4, 2017: a row of base-station samples with bagged button and spring components. The photograph documents parts available for review; it is not a count of production output.'
     featuredIndices: []
-    id: 03_base_test_btn_2
-    type: gallery
-    title: Later button evaluation
-    deck:
-    - body: The later sequence shows continued button and interface evaluation into September 2017. It does not prove completion or shipment of the separate 1,500-piece production schedule.
-      subtitle: ''
-      title: September follow-up sequence
+    deck: []
 ---
 
-# Bazooka (Base Station)
+# Bazooka: recovering the interface behind the switch
 
-## Project summary
+Bazooka was the wall-box base station behind Noon's removable lighting controls. It terminated mains wiring, carried the power electronics and provided the mechanical and electrical interface to the Sativa and Elvis control modules. Waldo supplied the surrounding chassis and faceplate. Those pieces met at one installation, but they had different engineering owners. {/* ^[evidence:LK-3eb39632] ^[evidence:LK-3ef02e28] */}
 
-- **Role boundary:** Locoroll-side mechanical and reliability lead for the Bazooka interface, with the record tying Erik to PRD edits, reliability responses, tolerance analysis, and production-schedule revisions. Electrical design, HQA, vendor corrective action, and factory execution remained cross-functional responsibilities.
-- **Mandate:** Define the wall-box base station that terminates mains power, mechanically retains Sativa and Elvis modules, and provides the physical air-gap disconnect and low-voltage interface.
-- **Core result:** The EVT2 record exposed removal difficulty in all 14 dust-test samples, identified a likely slide-lock deformation mechanism, and documented a later passing combined Bazooka/Waldo check. The evidence supports the issue, proposal, and later observation separately; it does not prove that the proposed dimple change caused the pass.
+I was brought into the program for mechanical recovery: establish focus, address the immediate failures and define useful short- and medium-term progress. My Bazooka responsibility was the Locoroll-side mechanical and reliability lead, spanning interface problems, requirements, test definitions and supplier handoff. Bel's electrical and detailed product engineering, Function Engineering's tolerance work, and FIH's controller and qualification work were part of the wider effort. {/* ^[evidence:EV-a49b84540e5c] ^[evidence:LK-17e30be8] ^[evidence:LK-288f1516] */}
 
-## The anatomy of failure
+## A small enclosure with several jobs
 
-### Removal crisis: fourteen for fourteen
+The base had to fit a crowded wall box, retain a removable control module, make its electrical connections and disconnect the line when the module was removed. The metal front housing, rear plastic enclosure, PCB, connector interfaces and external TEST button therefore could not be developed independently. Wire exit position and stiffness affected installation; mechanical travel affected switching; the mating metal surfaces also participated in the grounding connection. {/* ^[evidence:LK-3eb39632] ^[evidence:LK-bde96c9d] */}
 
-The reliability matrix records `DUT can't easy remove from Bazooka` for 7/7 Sativa and 7/7 Elvis samples. That is a 14/14 removal-difficulty result for the recorded sample. The prior page called this a mechanical seizure; the source supports difficult removal, not a stronger lockup diagnosis.
+The requirements were moving. A June 2016 baseline called for 650 W; the May 2017 PRD called for 850 W. The May document also specified a mechanical air-gap disconnect with at least 3 mm separation and a 10,000-cycle life requirement. These were design requirements to satisfy, rather than measured results of the recovery work. {/* ^[evidence:LK-4abbffe9] ^[evidence:LK-3eb39632] */}
 
-The design-issues deck says the large square dimples were likely creating deformation at the slide lock and proposes smaller circular dimples at the same depth. That language is a likely cause and proposed redesign. A later reliability entry says the combined Bazooka/Waldo check passed, but the surviving record does not directly link the pass to the dimple change. The correction therefore preserves chronology without inventing root-cause closure.
+## Giving the air-gap mechanism a controlled reference
 
-### Requirement lineage: 650 W to 850 W
+The February issue list records two connected problems: the air gap did not consistently make electrical contact, and TEST buttons could stick instead of returning. A request to restore the square TEST shape was already present at that stage. The problem extended beyond the visible button to the guiding surfaces, contacts, spring and board geometry behind it. {/* ^[evidence:LK-bde96c9d] */}
 
-The 2016 PRD baseline specifies 650 W, 100-132 VAC, a 5.5 V / 1 A low-voltage interface, a 105 x 44 x 32 mm envelope, a 10,000-cycle mechanical air-gap switch, and UL/FCC requirements. The May 2017 revision specifies 850 W, but its size field is redacted. The page therefore presents these as two points in the requirement lineage, not as one simultaneous final specification.
+The [April 6 redesign proposal](/assets/bazooka/full-pass-249/airgap-guide.webp) brought those functions together in a contactor guide fastened to the PCB. Plated contacts on the board would be bridged by a formed-metal shorting bar; the proposed bar's compliance accommodated variation in the contact stack. The guide contained the return spring, guided movement and shorting components. This gave the mechanism a common mechanical reference close to its electrical contacts. It also required changes to the board and rear housing, including relocated wire exits. {/* ^[evidence:LK-367860b1] */}
 
-The ten-year operating-life requirement remained in the PRD while the action record challenged how it entered the program: the team said it had not been communicated at kickoff, vendors would not guarantee it, and the mechanical design had not been developed around it. This is a documented challenge, not a formal rejection or proof that schedule was preserved.
+By May, the EVT2-to-DVT action review described a new air-gap design, removal of the large PCB hole and lower rear wire exits. July prototype quotations and the later tooling and spring photographs show that the physical details continued to evolve. The April illustration remains a concept-stage view; the surviving release trail does not establish that every detail in it reached the final assembly. {/* ^[evidence:LK-17e30be8] ^[evidence:LK-1ff8095a] ^[evidence:LK-ad7cb818] ^[evidence:LK-1670b4f9] */}
 
-### Compliance crisis: EMI pretest
+## Retention without an over-constrained fit
 
-The action review records an EVT2 pretest failure, says the noise came from Bazooka, asks the power vendor to resolve it, and requests a certified third-party test. That supports source isolation, escalation, and the verification plan. It does not establish a final passing compliance result in the surviving record.
+Bazooka's drop-and-slide connection to the Waldo chassis had to feel secure while still allowing assembly and removal. Function Engineering's [four-hook analysis](/assets/bazooka/full-pass-249/fit-tabs.webp) in April identified a basic constraint problem: making all four hook locations equally tight left no reliable choice of which features controlled X and Y position. Manufacturing variation could make different hooks compete to locate the same part. {/* ^[evidence:LK-288f1516] */}
 
-The mechanical air-gap switch remains a separate safety requirement. The baseline PRD calls for external actuation and 10,000 operating cycles when the control module is removed.
+The proposed remedy separated locating features from features that needed clearance. The [hook-section comparison](/assets/bazooka/full-pass-249/fit-chamfer.webp) found another coupling: movement in X changed how tightly the chamfer wedged the assembly in Z. A flat bearing surface with a separate lead-in would reduce that coupling. Function Engineering also checked cover position against the remaining hook engagement, treating retention as an assembly stack rather than a nominal gap on one drawing. These were attributed analyses and proposed geometry changes, not a universal clearance adjustment. {/* ^[evidence:LK-288f1516] ^[evidence:LK-5b4deab5] */}
 
-### Finish and tolerance record
+Grounding and finish added another constraint. BAZ-41 required conductivity between Bazooka and the chassis, while the design review flagged an excessively large laser-cleared area and wear at the mating edge. The interface needed controlled contact and controlled removal; an appearance or fit decision could affect both. {/* ^[evidence:LK-bde96c9d] ^[evidence:LK-6e256512] */}
 
-The design-issues deck records black-zinc chipping after repeated installation. The tolerance tracker separately governs top and bottom module gaps and identifies open actions. These records show the mechanical reliability work surface without treating every open action as a completed correction.
+## Testing the complete interface
 
-The former 45.3 C thermal claim has been removed. That measurement belongs to Sativa/Elvis testing, not the Bazooka base station.
+The EVT2 dust-test matrix recorded difficult removal for all seven Sativa and all seven Elvis samples at the Bazooka interface. The design review identified large square dimples as a likely source of surrounding deformation and proposed smaller circular dimples at the same depth. A later entry records a passing check with the control module, Bazooka and Waldo combined. The records establish those observations separately; they do not identify the dimple proposal as the sole cause of the later pass. {/* ^[evidence:LK-e0b988e3] ^[evidence:LK-6e256512] */}
 
-### Production schedule, not production result
+That distinction matches my recollection of the work: multiple dimples and assembly fits went through iterations, including reversals. Click, axial-pull and side-pull setups made different aspects of the interface observable. The useful question was whether the assembled system could engage, remain retained and be removed under its intended conditions, not simply whether one loose part met a nominal dimension. {/* ^[evidence:EV-a49b84540e5c] ^[evidence:LK-8069db28] */}
 
-The archive includes a dated workbook titled `Production schedule for 1,500pcs production`. Its station plan runs across July dates and ends with an `1,800 start shipping` entry. This is planning evidence. It does not prove that the 1,500-piece run started, completed, or shipped, so those outcomes are not claimed.
+I also worked on turning requirements into executable tests. Comparing the May PRD with my May 31 edit shows added methods, limits and durations for operating-temperature cycling, humidity, thermal shock, drop and vibration. Some fields remained open. Defining those conditions was a necessary engineering deliverable; it did not itself demonstrate a passing product. {/* ^[evidence:LK-f74a5e8f] ^[evidence:LK-3eb39632] */}
 
-## Governance and evidence
+The ten-year operating-life requirement became a point of dispute. I challenged it using test results, DFMEA and validation failures. The contemporary action review records the related concerns: it had not been communicated at kickoff, component vendors would not guarantee it, and the mechanical design had not been developed around that life. The recovered record supports the challenge, but not a formal deletion or a completed ten-year qualification. An EVT2 EMI pretest failure also remained a vendor action, with certified third-party testing requested. {/* ^[evidence:EV-a49b84540e5c] ^[evidence:LK-17e30be8] */}
 
-NotebookLM was used once as a source-pinned retrieval surface and the candidate passages were checked against local extracts. All 204 sources, 21 notes, two audio artifacts, and the semantic content of 21 mind maps are locally accounted for in a dated reconciliation. NotebookLM rejected visual-layout exports for the mind maps, so their layouts are not claimed as preserved. One query-created report is accounted for but is not used as publication authority.
+## Making the supplier handoff inspectable
 
-The former public audio briefing is no longer linked. Its generation instructions encouraged maximum attribution to Erik even when the record did not name a designer, making it unsuitable as public evidence.
+The June handoff work connected part identity to usable engineering data. The CAD naming guide required model filenames to match Arena item numbers, CAD assemblies to follow the BOM structure, and drawing titles to match Arena item names. The mechanical assembly tree connected the housing, PCB, interfaces, button and bracket rather than leaving those relationships implicit in a collection of supplier files. {/* ^[evidence:LK-7f565908] ^[evidence:LK-3ef02e28] */}
 
-## Quantified impact
+The associated redlines made inspection more explicit: metric dimensions, reference planes, numbered dimensions, designated incoming-inspection features and identified process-capability dimensions. Bel's detail drawings and Function Engineering's redlines retained their own authorship. My role included coordinating that data into a consistent Locoroll handoff. The June tracker still contains open entries, so it is a record of release work in progress rather than proof that every drawing was locked on one date. {/* ^[evidence:LK-ca7628b2] ^[evidence:LK-d05efe6a] ^[evidence:LK-f01cd3c6] ^[evidence:LK-56c08ae4] */}
 
-- **Observed** removal difficulty on 14 of 14 dust-test samples.
-- **Separated** the likely square-dimple deformation mechanism, proposed circular-dimple change, and later passing check into distinct evidence states.
-- **Tracked** the requirement lineage from a 650 W baseline to an 850 W revision without combining redacted and earlier dimensions.
-- **Escalated** an EVT2 EMI pretest failure to the power vendor and requested certified third-party verification.
-- **Specified** a 10,000-cycle mechanical air-gap disconnect in the 2016 baseline.
-- **Scheduled** a 1,500-piece production plan without claiming that the run executed.
+## Following the part through the factory
+
+By August 31, my proposed schedule for Best followed the metal front housing through casting, de-gating, de-flashing, drilling, tapping, CNC machining and finishing to final inspection. It exposed cycle times, working hours, staffing assumptions, carryover and the handoff between continuous work and batch operations. Colored cells identified limiting and non-limiting capacity. That made the schedule useful for discussing where parts would wait and which operation constrained the next batch. {/* ^[evidence:LK-370ddd4f] ^[evidence:LK-c23aa697] */}
+
+The August photographs show tooling work; September images show base-station samples, button sketches and return-spring arrangements. They place the mechanism work alongside the factory plan without turning proposed output into shipped units. The documented contribution is the recovery work itself: making interface failures observable, developing and checking changes, defining qualification conditions and coordinating the data and capacity needed to build the product. Final mass-production yield and shipment quantities remain outside the verified record. {/* ^[evidence:LK-370ddd4f] ^[evidence:EV-a49b84540e5c] */}
 
 ## Source trail
 
-- `040-00014_rev02.docx` - 2016 PRD baseline, including 650 W, 5.5 V / 1 A, envelope, air-gap life, and compliance requirements.
-- `Bazooka-V1-03-May-2017_Erik_edit_2017_05_31.pdf` - 2017 requirement revision, including 850 W and the ten-year-life language.
-- `Design Issues.pptx` - square-dimple deformation hypothesis, circular-dimple proposal, finish chipping, and other EVT2 mechanical issues.
-- `EVT2_Reliability_Test.pdf` - 14/14 removal-difficulty record and later combined Bazooka/Waldo check.
-- `Locorol action review_05082017 ver2.pdf` - EMI pretest failure, vendor escalation, third-party test request, and lifecycle challenge.
-- `_Colorado_Tolerance_Analyses_Tracker.xlsx` - module-gap tolerance analyses and open actions.
-- `Production schedule for 1,500pcs production.xls` - dated production plan, retained as schedule evidence only.
+The account draws on the February Bazooka issue tracker; the April air-gap proposal; Function Engineering's April fit and retention analyses; the May PRD and May 31 edit; EVT2 qualification records; June BOM, naming and drawing-review material; July prototype quotations; and the August 31 factory-capacity model. The photographs retain their dated sequence and design-stage captions. My recovery-role recollection is recorded separately from those contemporary documents. {/* ^[evidence:LK-bde96c9d] ^[evidence:LK-367860b1] ^[evidence:LK-288f1516] ^[evidence:LK-3eb39632] ^[evidence:LK-e0b988e3] ^[evidence:LK-7f565908] ^[evidence:LK-370ddd4f] ^[evidence:EV-a49b84540e5c] */}
