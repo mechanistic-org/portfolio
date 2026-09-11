@@ -1,25 +1,17 @@
 import React from "react";
-import EvidenceCard from "./EvidenceCard";
-import registry from "../../data/forensic_registry.json";
+import { claimCards } from "../../config/claim-presentations";
 
 const ForensicWall: React.FC = () => {
-	// Flatten the registry into a single list of cards
-	const allCards = registry.flatMap((project) =>
-		project.cards.map((card) => ({
-			...card,
-			projectId: project.projectId,
-			// Ensure type matches the union
-			type: card.type as "scars" | "financial" | "process" | "governance",
-		})),
-	);
-
 	return (
 		<div className="w-full">
 			<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-				{allCards.map((card) => (
-					<div key={card.id}>
-						<EvidenceCard {...card} />
-					</div>
+				{claimCards.map((card) => (
+					<article key={card.id} className="flex h-full flex-col border border-neutral-800 bg-neutral-950 p-6">
+						<p className="mb-3 font-mono text-xs tracking-widest text-neutral-400 uppercase">{card.projectId}</p>
+						<h3 className="mb-4 text-xl leading-tight font-semibold text-white">{card.headline}</h3>
+						<p className="mb-6 text-sm leading-relaxed text-neutral-300">{card.context}</p>
+						<a className="text-primary mt-auto font-mono text-xs underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4" href={card.href}>Read the project account →</a>
+					</article>
 				))}
 			</div>
 		</div>

@@ -1,0 +1,205 @@
+[
+  {
+    "id": "c24-interfaces",
+    "path": "method:tolerance-integration",
+    "project": "c24",
+    "revision": 1,
+    "surface": "method"
+  },
+  {
+    "id": "c24-interfaces",
+    "path": "resume:digidesign-2003:0",
+    "project": "c24",
+    "revision": 1,
+    "surface": "resume"
+  },
+  {
+    "id": "c24-interfaces",
+    "path": "colophon:c24-interfaces",
+    "project": "c24",
+    "revision": 1,
+    "surface": "colophon"
+  },
+  {
+    "id": "c24-interfaces",
+    "path": "projects/c24/index.mdx#c24-interfaces",
+    "project": "c24",
+    "revision": 1,
+    "surface": "case-study"
+  },
+  {
+    "id": "c24-paint",
+    "path": "method:process-forensics",
+    "project": "c24",
+    "revision": 1,
+    "surface": "method"
+  },
+  {
+    "id": "c24-paint",
+    "path": "colophon:c24-paint",
+    "project": "c24",
+    "revision": 1,
+    "surface": "colophon"
+  },
+  {
+    "id": "c24-cure",
+    "path": "method:doe",
+    "project": "c24",
+    "revision": 1,
+    "surface": "method"
+  },
+  {
+    "id": "c24-architecture",
+    "path": "method:thermal-architecture",
+    "project": "c24",
+    "revision": 1,
+    "surface": "method"
+  },
+  {
+    "id": "c24-architecture",
+    "path": "colophon:c24-architecture",
+    "project": "c24",
+    "revision": 1,
+    "surface": "colophon"
+  },
+  {
+    "id": "c24-fabrication",
+    "path": "method:dfa",
+    "project": "c24",
+    "revision": 1,
+    "surface": "method"
+  },
+  {
+    "id": "c24-service",
+    "path": "method:serviceability",
+    "project": "c24",
+    "revision": 1,
+    "surface": "method"
+  },
+  {
+    "id": "c24-service",
+    "path": "resume:digidesign-2003:2",
+    "project": "c24",
+    "revision": 1,
+    "surface": "resume"
+  },
+  {
+    "id": "c24-service",
+    "path": "colophon:c24-service",
+    "project": "c24",
+    "revision": 1,
+    "surface": "colophon"
+  },
+  {
+    "id": "c24-acceptance",
+    "path": "method:evidence",
+    "project": "c24",
+    "revision": 1,
+    "surface": "method"
+  },
+  {
+    "id": "c24-controls",
+    "path": "method:haptics",
+    "project": "c24",
+    "revision": 1,
+    "surface": "method"
+  },
+  {
+    "id": "c24-margin",
+    "path": "colophon:c24-margin",
+    "project": "c24",
+    "revision": 1,
+    "surface": "colophon"
+  },
+  {
+    "id": "glyph-fit",
+    "path": "method:human-factors",
+    "project": "avegant-glyph",
+    "revision": 1,
+    "surface": "method"
+  },
+  {
+    "id": "glyph-fit",
+    "path": "resume:avegant-2015:0",
+    "project": "avegant-glyph",
+    "revision": 1,
+    "surface": "resume"
+  },
+  {
+    "id": "glyph-fit",
+    "path": "colophon:glyph-fit",
+    "project": "avegant-glyph",
+    "revision": 1,
+    "surface": "colophon"
+  },
+  {
+    "id": "glyph-cohorts",
+    "path": "method:life-test",
+    "project": "avegant-glyph",
+    "revision": 1,
+    "surface": "method"
+  },
+  {
+    "id": "glyph-cohorts",
+    "path": "resume:avegant-2015:1",
+    "project": "avegant-glyph",
+    "revision": 1,
+    "surface": "resume"
+  },
+  {
+    "id": "glyph-cohorts",
+    "path": "colophon:glyph-cohorts",
+    "project": "avegant-glyph",
+    "revision": 1,
+    "surface": "colophon"
+  },
+  {
+    "id": "glyph-cohorts",
+    "path": "projects/avegant-glyph/index.mdx#glyph-cohorts",
+    "project": "avegant-glyph",
+    "revision": 1,
+    "surface": "case-study"
+  },
+  {
+    "id": "glyph-changes",
+    "path": "method:mechanism-actuation",
+    "project": "avegant-glyph",
+    "revision": 1,
+    "surface": "method"
+  },
+  {
+    "id": "glyph-changes",
+    "path": "resume:avegant-2015:2",
+    "project": "avegant-glyph",
+    "revision": 1,
+    "surface": "resume"
+  },
+  {
+    "id": "sc48-thermal",
+    "path": "resume:digidesign-2003:1",
+    "project": "sc48",
+    "revision": 1,
+    "surface": "resume"
+  },
+  {
+    "id": "sc48-thermal",
+    "path": "colophon:sc48-thermal",
+    "project": "sc48",
+    "revision": 1,
+    "surface": "colophon"
+  },
+  {
+    "id": "sc48-thermal",
+    "path": "projects/sc48/index.mdx#sc48-thermal",
+    "project": "sc48",
+    "revision": 1,
+    "surface": "case-study"
+  },
+  {
+    "id": "sc48-outcome",
+    "path": "method:regulatory",
+    "project": "sc48",
+    "revision": 1,
+    "surface": "method"
+  }
+]

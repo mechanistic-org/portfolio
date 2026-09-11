@@ -4,9 +4,7 @@ import Layout from "@layouts/BaseLayout.astro";
 export const prerender = true;
 import ColophonCard from "@components/ColophonCard.astro";
 import Marquee from "@components/Marquee/Marquee";
-import TestimonialWall from "@components/Testimonials/TestimonialWall";
 import ForensicWall from "@components/Forensics/ForensicWall";
-import UniversalHUD from "@components/Nav/UniversalHUD.astro";
 
 // Workaround for empty collection issue: manually load files via glob
 const globFeatures = import.meta.glob("../../content/colophon/*.mdx", { eager: true });
@@ -60,28 +58,7 @@ const marqueeTools = [...tools, ...tools, ...tools];
 <Layout
 	title="Colophon"
 	description="The Meta-Portfolio: Documenting the engineering behind the site."
-	hideNav={true}
 >
-	<UniversalHUD mode="stealth">
-		<!-- RIGHT: System Links -->
-		<div slot="right" class="hidden items-center gap-6 md:flex">
-			<a
-				href="/projects"
-				class="font-mono text-xs font-bold tracking-widest text-neutral-400 uppercase transition-colors hover:text-white"
-				>Work</a
-			>
-			<a
-				href="/about"
-				class="font-mono text-xs font-bold tracking-widest text-neutral-400 uppercase transition-colors hover:text-white"
-				>About</a
-			>
-			<a
-				href="/resume"
-				class="font-mono text-xs font-bold tracking-widest text-neutral-400 uppercase transition-colors hover:text-white"
-				>Resume</a
-			>
-		</div>
-	</UniversalHUD>
 
 	<section class="pt-32 pb-24">
 		<div class="site-container mb-24 text-center">
@@ -126,7 +103,7 @@ const marqueeTools = [...tools, ...tools, ...tools];
 					Mechanical Forensics
 				</h2>
 				<p class="mb-12 max-w-2xl text-lg text-neutral-400">
-					High-fidelity evidence extracted from the "Big 8" Deep Dive projects. The career canon.
+					Selected engineering decisions, linked to the project records behind them.
 				</p>
 				<ForensicWall client:load />
 			</div>
@@ -192,24 +169,6 @@ const marqueeTools = [...tools, ...tools, ...tools];
 				</ol>
 			</section>
 
-			{/* Meta-Testimonial Wall */}
-			<div class="mb-24 text-left">
-				<div
-					class="border-primary/30 bg-primary/10 text-primary mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-xs tracking-widest uppercase"
-				>
-					System Logs
-				</div>
-				<h2 class="mb-8 text-3xl font-bold tracking-tight text-white md:text-4xl">
-					The Collaboration Log
-				</h2>
-				<p class="mb-12 max-w-2xl text-lg text-neutral-400">
-					A collection of system logs and meta-commentary from the AI agents that helped build this
-					site.
-				</p>
-			</div>
-			<div class="relative left-[calc(50%-50vw)] -mx-[calc(50vw-50%)] mb-24 w-screen">
-				<TestimonialWall client:load />
-			</div>
 		</div>
 	</section>
 </Layout>

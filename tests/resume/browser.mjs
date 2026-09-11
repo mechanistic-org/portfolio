@@ -28,6 +28,7 @@ try {
 			timeout: 120000,
 		});
 		assert.equal(response.headers()["x-resume-source"], source.identity.nonce);
+		assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, `resume overflows ${name} viewport`);
 		const anchor = await page.$(selector);
 		assert.ok(anchor);
 		assert.ok(await anchor.isVisible());
