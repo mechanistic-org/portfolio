@@ -357,87 +357,137 @@ export const projectArticleTrial = {
 		breakout: { eyebrow: "Product context and interface analysis", description: "The selected product-family photograph, a requirements schematic and two original workbook diagrams, with their distinct roles and attribution retained." },
 	},
 	"room-director": {
-		sections: {
-			summary: "project-summary",
-			specification: "the-specification-described-a-surface-not-just-a-box",
-			evt1: "one-protocol-many-failure-modes",
-			evt2: "the-second-packet-did-not-earn-a-victory-lap",
-			chemical: "chemical-resistance-was-a-different-result",
-			boundaries: "evidence-boundaries",
-			impact: "quantified-impact",
-			sources: "source-trail",
-		},
-		media: {},
-		scenes: [
-			{
-				key: "summary",
-				eyebrow: "Orientation",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "specification",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "evt1",
-				eyebrow: "Project context",
-				left: {
-					kind: "scar",
-					section: "evt1",
-				},
-				media: [],
-			},
-			{
-				key: "evt2",
-				eyebrow: "Project context",
-				left: {
-					kind: "scar",
-					section: "evt2",
-				},
-				media: [],
-			},
-			{
-				key: "chemical",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "boundaries",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "impact",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "sources",
-				eyebrow: "Sources",
-				left: {
-					kind: "sources",
-				},
-				media: [],
-			},
-		],
+	    "sections": {
+	        "architecture": "a-glass-surface-with-a-mechanical-job",
+	        "housing": "retaining-the-housing-while-clearing-the-display",
+	        "bonding": "bonding-required-a-controlled-assembly-process",
+	        "inspection": "defining-the-surface-and-how-to-inspect-it",
+	        "label": "a-shared-label-problem-with-several-possible-fixes",
+	        "testing": "what-the-complete-device-tests-demonstrated",
+	        "outcome": "engineering-the-interfaces-through-the-handoff",
+	        "sources": "source-trail"
+	    },
+	    "media": {
+	        "product": {
+	            "galleryId": "architecture",
+	            "src": "/assets/room-director/full-pass-250/product-render.webp"
+	        },
+	        "assembly": {
+	            "galleryId": "architecture",
+	            "src": "/assets/room-director/full-pass-250/touch-assembly.webp"
+	        },
+	        "hinge": {
+	            "galleryId": "housing",
+	            "src": "/assets/room-director/full-pass-250/hinge-change.webp"
+	        },
+	        "clearance": {
+	            "galleryId": "housing",
+	            "src": "/assets/room-director/full-pass-250/display-clearance.webp"
+	        },
+	        "glue": {
+	            "galleryId": "bonding",
+	            "src": "/assets/room-director/full-pass-250/glue-process.webp"
+	        },
+	        "clamp": {
+	            "galleryId": "bonding",
+	            "src": "/assets/room-director/full-pass-250/clamp-process.webp"
+	        },
+	        "appearance": {
+	            "galleryId": "inspection",
+	            "src": "/assets/room-director/full-pass-250/glass-appearance.webp"
+	        },
+	        "drop": {
+	            "galleryId": "inspection",
+	            "src": "/assets/room-director/full-pass-250/drop-fixture.webp"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "architecture",
+	            "eyebrow": "Glass and display",
+	            "left": {
+	                "kind": "context"
+	            },
+	            "media": [
+	                "assembly"
+	            ]
+	        },
+	        {
+	            "key": "housing",
+	            "eyebrow": "Mechanical engagement",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "hinge",
+	                "clearance"
+	            ]
+	        },
+	        {
+	            "key": "bonding",
+	            "eyebrow": "Factory process",
+	            "left": {
+	                "kind": "metrics",
+	                "keys": [
+	                    "process"
+	                ]
+	            },
+	            "media": [
+	                "glue",
+	                "clamp"
+	            ]
+	        },
+	        {
+	            "key": "inspection",
+	            "eyebrow": "Supplier definition",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "appearance"
+	            ]
+	        },
+	        {
+	            "key": "label",
+	            "eyebrow": "Alternatives",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "testing",
+	            "eyebrow": "Reliability",
+	            "left": {
+	                "kind": "scar",
+	                "section": "testing"
+	            },
+	            "media": [
+	                "drop"
+	            ]
+	        },
+	        {
+	            "key": "outcome",
+	            "eyebrow": "Contribution",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "sources",
+	            "eyebrow": "Evidence",
+	            "left": {
+	                "kind": "sources"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Glass, assembly and test evidence",
+	        "description": "The product render introduces the form. Dated geometry, assembly and appearance figures explain how the interfaces were defined; the drop-fixture photographs show physical testing. Captions retain each source's stage and scope."
+	    }
 	},
 	"webtv-elmer": {
 		sections: {
