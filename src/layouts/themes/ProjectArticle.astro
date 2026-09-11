@@ -76,7 +76,7 @@ const yr = (x: any) => {
 	// Normalize the trial's recorded years without changing non-trial presentations.
 	return presentation ? date.getUTCFullYear() : date.getFullYear();
 };
-const period = ["room-director", "wall-plates"].includes(d.slug) && d.duration
+const period = ["room-director", "wall-plates", "webtv-galaxy"].includes(d.slug) && d.duration
 	? d.duration
 	: [yr(d.date), yr(d.endDate)].filter(Boolean).join("–") || d.duration;
 
@@ -170,7 +170,7 @@ const navNext = nextProject
 			description={d.description}
 			audioUrl={d.audio_url}
 			photoCount={images.length || undefined}
-			mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates"].includes(d.slug) ? "images" : undefined}
+			mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy"].includes(d.slug) ? "images" : undefined}
 		/>
 
 		{contextRibbon && <ContextRibbon model={contextRibbon} />}
@@ -185,7 +185,7 @@ const navNext = nextProject
 					useContinuityRails ? (
 						<ProjectContinuityRail
 							side="left"
-							mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates"].includes(d.slug) ? "images" : undefined}
+							mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy"].includes(d.slug) ? "images" : undefined}
 							projectTitle={d.title}
 							scenes={activeRailScenes}
 							headings={headings}
@@ -358,13 +358,16 @@ const navNext = nextProject
 	[data-project-article="d-command"] :global([id]),
 	[data-project-article="bazooka"] :global([id]),
 	[data-project-article="room-director"] :global([id]),
-	[data-project-article="wall-plates"] :global([id]) {
+	[data-project-article="wall-plates"] :global([id]),
+	[data-project-article="webtv-galaxy"] :global([id]) {
 		scroll-margin-top: 6rem;
 	}
 	[data-project-article="room-director"] > :global(header img),
 	[data-project-article="room-director"] :global(.rail__media-grid img),
 	[data-project-article="wall-plates"] > :global(header img),
-	[data-project-article="wall-plates"] :global(.rail__media-grid img) {
+	[data-project-article="wall-plates"] :global(.rail__media-grid img),
+	[data-project-article="webtv-galaxy"] > :global(header img),
+	[data-project-article="webtv-galaxy"] :global(.rail__media-grid img) {
 		object-fit: contain;
 		background: white;
 	}
