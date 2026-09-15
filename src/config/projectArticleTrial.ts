@@ -1360,6 +1360,127 @@ export const projectArticleTrial = {
 	        "description": "Original cover and chassis renders introduce the product. Supplier and fit diagrams explain the mechanical decisions; sample tables and photographs preserve the distinct finish-test results."
 	    }
 	},
+	"320-slot-optical-carousel": {
+	    "sections": {
+	        "geometry": "establishing-the-geometry",
+	        "molding": "turning-the-geometry-into-a-molding",
+	        "tooling": "revising-the-tool",
+	        "variation": "finding-the-variation-within-320-slots",
+	        "acceptance": "defining-rework-and-acceptance",
+	        "production": "supporting-the-part-in-production",
+	        "transport": "testing-the-disc-path-and-deciding-disposition"
+	    },
+	    "media": {
+	        "f01": {
+	            "galleryId": "full_pass_256_f01",
+	            "src": "/assets/320-slot-optical-carousel/full-pass-256/prototype-disc-slots.webp"
+	        },
+	        "f02": {
+	            "galleryId": "full_pass_256_f02",
+	            "src": "/assets/320-slot-optical-carousel/full-pass-256/removable-tool-section.webp"
+	        },
+	        "f03": {
+	            "galleryId": "full_pass_256_f03",
+	            "src": "/assets/320-slot-optical-carousel/full-pass-256/first-molding-trial.webp"
+	        },
+	        "f04": {
+	            "galleryId": "full_pass_256_f04",
+	            "src": "/assets/320-slot-optical-carousel/full-pass-256/ribs-and-radii-plan.webp"
+	        },
+	        "f05": {
+	            "galleryId": "full_pass_256_f05",
+	            "src": "/assets/320-slot-optical-carousel/full-pass-256/slot-205-measurement.webp"
+	        },
+	        "f06": {
+	            "galleryId": "full_pass_256_f06",
+	            "src": "/assets/320-slot-optical-carousel/full-pass-256/inventory-scan.webp"
+	        },
+	        "f07": {
+	            "galleryId": "full_pass_256_f07",
+	            "src": "/assets/320-slot-optical-carousel/full-pass-256/packaging-clearance.webp"
+	        },
+	        "f08": {
+	            "galleryId": "full_pass_256_f08",
+	            "src": "/assets/320-slot-optical-carousel/full-pass-256/warpage-inspection.webp"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "geometry",
+	            "eyebrow": "Breadboard geometry",
+	            "left": {
+	                "kind": "context"
+	            },
+	            "media": [
+	                "f01"
+	            ]
+	        },
+	        {
+	            "key": "molding",
+	            "eyebrow": "Trial samples",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "f02",
+	                "f03"
+	            ]
+	        },
+	        {
+	            "key": "tooling",
+	            "eyebrow": "Incremental tool changes",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "f04"
+	            ]
+	        },
+	        {
+	            "key": "variation",
+	            "eyebrow": "Local geometry and response",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "f05",
+	                "f06"
+	            ]
+	        },
+	        {
+	            "key": "acceptance",
+	            "eyebrow": "Inspection method",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "production",
+	            "eyebrow": "Packaging and warpage",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "f07",
+	                "f08"
+	            ]
+	        },
+	        {
+	            "key": "transport",
+	            "eyebrow": "Interface tests and production decisions",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Carousel geometry, tooling and production inspection",
+	        "description": "The prototype, tooling, slot measurements, packaging and warpage views follow the same eight-figure sequence as the engineering account."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
