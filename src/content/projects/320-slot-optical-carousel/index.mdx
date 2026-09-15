@@ -2,78 +2,187 @@
 title: 320-Slot Carousel
 slug: 320-slot-optical-carousel
 tier: deep_dive
-description: 'High-density 320-slot optical carousel for Kaleidescape''s disc vaults: stabilized injection-molding yield on a 386 mm precision part so robotic disc loading stayed accurate despite the thermal instability of large-diameter molding.'
+description: A 320-slot carousel for Kaleidescape's disc vaults, developed through breadboard geometry, molding trials, slot metrology and production support at the disc-handling interface.
 category: module_subsystem
 client: []
-date: 2011-01-20 00:00:00+00:00
-duration: 2011-2014
+date: '2010-08-23 00:00:00+00:00'
+duration: 2010 development through 2014 production support; 2015 tooling follow-up
 employer: kaleidescape
 forensic_metrics:
-  financial: $2,500 'Ribs & Rads' tooling intervention reversed a zero-yield T1; 2014 inventory salvaged without a tool rebuild.
-  process: Seven tooling trials to fill consistency in three months; tight-slot drift (0.86 to 1.00-1.08 mm ribs) isolated by gauge metrology and neutralized by hard-mount drive hardening.
-  governance: Per-shot T-shot inspection reports; Rev 11 ECN tolerance corrections; 1.40 mm gauge-block field screening protocol.
+  process: Four slot geometries evaluated in Function Engineering breadboards; later inspection required three test discs through all 320 slots.
+  governance: Documented trial reports, section-specific tooling proposals, drawing corrections and reject/quarantine instructions.
 forensic_summary:
-  trigger: T1 shots yielded zero — massive flash, brittle ribs snapping off in the cavity — and three years later the same part's dimensional drift began eating discs in the field.
-  intervention: Re-cut the steel with thicker ribs and escalated radii, fought blind-rib air traps across seven trials, then hardened the drive train with solid mounts and double-force springs to overpower the 2014 tight-slot arc.
-  result: A 386 mm precision molding stabilized for production twice — first at the tool, then in the field — without scrapping inventory.
+  trigger: Disc storage density coupled local slot geometry to mold filling, dimensional variation and alignment with the kicker and pinch rollers.
+  intervention: Develop and review molding changes, measure local slot variation, define rework and inspection, and coordinate part and disc-path changes.
+  result: Prototype disc handling was demonstrated, and many development changes reached production as DFM continued under compressed schedules. Production support established explicit inspection and disposition criteria. The reviewed record does not establish final fleet-wide reliability or the outcome of the 2015 replacement-tool quote.
 industry: consumer_electronics
 production: production
 productionScale: series
 tags:
-- Mechanism
-- Yield
-- Crisis
-teamSize: 1 (The Architect)
+- mechanical
+- prototyping
+- dfm
+teamSize: Cross-functional
+job_title: mechanical_engineer
+draft: false
+listed: true
+heroImage: /assets/320-slot-optical-carousel/full-pass-256/sla-carousel.webp
+theme: article
+cyberspace:
+  enable: true
+  layout: linear
+  stickies:
+  - id: full_pass_256_f01
+    type: gallery
+    title: Prototype disc constraint
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/320-slot-optical-carousel/full-pass-256/prototype-disc-slots.webp
+        alt: Edges of optical discs seated between the ribs of a red carousel prototype.
+        aspectRatio: 1.3333333333333333
+        caption: Close view of discs seated in the full SLA carousel. Function Engineering's prototype review identified the slot V-groove as necessary for disc constraint and kicker alignment.
+    featuredIndices: []
+    deck: []
+  - id: full_pass_256_f02
+    type: gallery
+    title: Carousel mold section
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/320-slot-optical-carousel/full-pass-256/removable-tool-section.webp
+        alt: Carousel mold cavity with a curved removable section placed beside it.
+        aspectRatio: 1.2658227848101267
+        caption: A removable section beside the carousel mold cavity. The later slot investigation treated individual tool sections as repairable geometry, rather than assuming every slot was equivalent.
+    featuredIndices: []
+    deck: []
+  - id: full_pass_256_f03
+    type: gallery
+    title: T1 molding trial
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/320-slot-optical-carousel/full-pass-256/first-molding-trial.webp
+        alt: Two black first-trial carousel moldings with excess material around their edges.
+        aspectRatio: 1.4701561065197428
+        caption: January 20, 2011 T1 samples with extensive flash. The development report attributes the flash to intentional over-pressure used to try to fill the tool; its next pages show broken ribs left in the cavity.
+    featuredIndices: []
+    deck: []
+  - id: full_pass_256_f04
+    type: gallery
+    title: Rib and radius changes
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/320-slot-optical-carousel/full-pass-256/ribs-and-radii-plan.webp
+        alt: Annotated CAD detail signed L. May showing an additional rib and larger blending radii.
+        aspectRatio: 1.329734219269103
+        caption: 'Loyd May''s January 27 geometry proposal, incorporated into the pre-T4 plan: add a third support rib and increase rib widths and blending radii. The quoted $2,500 was a preliminary estimate for this bounded modification package.'
+    featuredIndices: []
+    deck: []
+  - id: full_pass_256_f05
+    type: gallery
+    title: Local slot measurement
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/320-slot-optical-carousel/full-pass-256/slot-205-measurement.webp
+        alt: Caliper at slot 205 with the original report describing local rib-thickness and slot-width measurements.
+        aspectRatio: 1.5573929961089494
+        caption: The 2011 pilot investigation measured 1.37 mm just ahead of the V-groove at slot 205, against the 1.50 mm intent stated on this slide. The 0.86 mm rib figure is a measured comparison from other slots, not a nominal specification.
+    featuredIndices: []
+    deck: []
+  - id: full_pass_256_f06
+    type: gallery
+    title: Optical inventory scan
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/320-slot-optical-carousel/full-pass-256/inventory-scan.webp
+        alt: Bar chart of optical inventory-scan response around a carousel, with a cluster of elevated values highlighted.
+        aspectRatio: 1.456778889899909
+        caption: An optical inventory-scan trace for one sampled carousel localizes a cluster of poor slot responses. Higher values are labeled worse in the source. This is a scanning-system response, not a measurement of friction force.
+    featuredIndices: []
+    deck: []
+  - id: full_pass_256_f07
+    type: gallery
+    title: Packaging clearance
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/320-slot-optical-carousel/full-pass-256/packaging-clearance.webp
+        alt: Packaging change drawing comparing a 390 mm carousel, its undersized pocket and a larger proposed pocket.
+        aspectRatio: 1.4732965009208103
+        caption: The April 2014 packaging change requests a 402 mm pocket in place of an approximately 387 mm pocket around a 390 mm carousel. The intended clearance addresses packaging-induced stress; the diagram is a change instruction, not an after-test result.
+    featuredIndices: []
+    deck: []
+  - id: full_pass_256_f08
+    type: gallery
+    title: Warpage inspection
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/320-slot-optical-carousel/full-pass-256/warpage-inspection.webp
+        alt: Carousel warpage inspection diagram with two marked high points and instructions to reject deflection greater than 2 mm.
+        aspectRatio: 1.3333333333333333
+        caption: Revision 2 of the April 10, 2014 inspection procedure measures marked high points and rejects parts with either measurement above 2 mm. Rejected parts were to be quarantined; the later inventory correspondence includes an explicit scrap disposition.
+    featuredIndices: []
+    deck: []
 ---
 
-# 320-Slot Optical Carousel Forensic Report
+# 320-Slot Carousel
 
-## I. Project Summary
+A disc vault has to bring one disc out of a dense array, hand it to the transport, and return it without catching an edge. Kaleidescape's 320-slot carousel made that repeated interface part of one large molding. Slot shape, molded dimensions, carousel alignment and roller behavior all affected the same operation.
 
-- **Role:** Lead Mechanical Engineer ("The Architect").
-- **Mandate:** Engineer a high-density 320-slot optical storage mechanism for precision robotic loading inside a consumer-appliance footprint — against the inherent thermal instability of 386 mm diameter injection molding.
-- **Core Achievement:** Took the part from a zero-yield T1 catastrophe to stable production through a $2,500 targeted tooling intervention, then defeated a 2014 field-failure recurrence by mechanically overpowering the dimensional drift instead of scrapping the fleet's inventory.
+My work at Kaleidescape included tooling-change decisions, part definition, inspection and production support. The work crossed several teams: Function Engineering developed the early mechanical breadboards; Loyd May contributed the rib and radius changes used in the molding plan; manufacturing partners ran the trials; and Nathan Forster's later system tests helped distinguish slot problems from transport behavior.
 
-## II. The Anatomy of Failure
+## Establishing the geometry
 
-### 1. T1: The Zero-Yield Catastrophe
+The early program tested the mechanism before committing its geometry to a production tool. Function Engineering's August 2010 phase report records a breadboard platter with interchangeable pie wedges for four slot geometries, followed by a full SLA carousel. Its tests demonstrated repeatable disc handling at the breadboard level and explored alignment among the carousel, kicker and pinch rollers. Encoder/control confirmation and component life testing remained follow-on work.
 
-- **Trigger:** The January 2011 first shots failed totally. The molder forced fill with intentional over-pressure, blowing massive flash across the parting line; the brittle GPPS resin (PG-22) snapped ribs off in the cavity — processed within spec, it still behaved like glass; parts came out significantly undersized from thermal shrinkage. Yield: zero, with a tool-down to dig hardened debris out of the cavities.
-- **Intervention:** The "Ribs & Rads" plan — $2,500 and one week: a third rib added, rib thickness up to 1.5 mm, radii escalated (0.7 mm stress relief, 1.5 mm rib radii, 2.5 mm general) to kill the notch effect behind ejection stress-whitening, plus a material pivot from brittle GPPS to ductile ABS, and asymmetric cooling targets (15°C outer ring / 25°C core) to force dimensional compliance.
-- **Result:** By T4 the part filled consistently; broken ribs and structural white marks gone. Still fractionally undersized against spec — but structurally stable enough to advance to texture and polish.
+The slot's V-groove constrained the disc and aligned it with the kicker. The perimeter also acted as a large timing pulley, so belt engagement brought another tolerance problem: the long contact length accumulated pitch variation. Function's report called for slightly wider pulley grooves and considered omitting some teeth. Its selected belt and pulley combination provided an integral number of motor steps per disc slot. These were mechanical design decisions with consequences for indexing, packaging and manufacture, well before the later molding problems.
 
-### 2. The Air War: 320 Blind Ribs
+## Turning the geometry into a molding
 
-- **Trigger:** The radial fill pattern drove air into the blind tips of all 320 ribs. Compressed air blocked fill (short shots) or ignited under compression (diesel-effect burn marks) — defects that persisted from T1 into T6.
-- **Intervention:** Escalating venting warfare: an active vacuum proposal (O-ring-sealed parting line with cavity vacuum porting) when passive vents proved insufficient at T2; vents widened and deepened 100% (0.02 to 0.04 mm) by T4; vented core pins for stubborn blind spots; a further venting-ditch revision in November 2011.
-- **Result:** Progressive containment across the seven-trial campaign — an honest record that some physics (deep blind ribs at this diameter) is beaten by iteration, not by one clever fix.
+The January 2011 trials showed how far a working prototype was from an acceptable molded part. T1 produced extensive flash after intentional over-pressure was used to try to fill the tool, with broken ribs left in the cavity. The development report also recorded brittle material behavior, but explicitly left open whether incorrect processing contributed.
 
-### 3. The Tight Slot War (2014)
+T3 produced 46 ABS and 46 HIPS samples after moving the tool to a trial specialist. My report described an encouraging functional check in some slots while identifying ejector deformation, knit lines and dimensions still requiring inspection. It was progress, with further work plainly visible.
 
-- **Trigger:** Three years into production, field units began losing discs — "un-insertable" errors and discs left hanging from the front rollers, freezing vaults with blockage faults. Metrology localized the failure: in the slot 200–280 arc, rib thickness had drifted to 1.00–1.08 mm against an 0.86 mm nominal, choking slot width to 1.37 mm against 1.55 — an interference fit with the thickest discs. The compliant rubber-grommet drive mounts deflected away from the friction instead of overcoming it, and transit packaging was locking warp into the large parts before they ever reached assembly.
-- **Intervention:** Mechanical hardening over scrap: solid hard-mount spacers replacing the rubber grommets (zero shaft deflection, full torque to the disc), a redesigned inner disc guide backstopping the driven roller, and double-force springs — triple-force was tested and rejected because it inelastically relaxed the plastic. Upstream, the vendor's packaging was redesigned to relieve compressive stress, and a 1.40 mm gauge-block inspection protocol screened the tight arc with hard warpage limits.
-- **Result:** The lost-disc failure mode eliminated and existing inventory salvaged without a tool rebuild — the drive train now stronger than the defect.
+## Revising the tool
 
-## III. Governance & Rhythm
+The pre-T4 plan brought together Loyd May's additional support rib, increased rib widths and larger blending radii. We treated those as the first incremental changes; more extensive measures, including vacuum venting, remained alternatives to evaluate. The $2,500 and one-week figures were a preliminary quote for that modification package.
 
-- **The Pulse:** A brutal seven-stage tooling campaign (T1–T7) compressed into Jan–April 2011, every shot dissected in a T-shot inspection report — flash, voids, dimensions, burns — followed by the 2014 forensic field investigation that traced friction back to specific rib metrology.
-- **The Artifacts:** The chronological T-shot log; the slot-variance friction heatmaps; the pilot carousel rib measurements; the Rev 11 ECN correcting critical tolerance typos.
+By T4, the part was filling consistently, but the report still recorded undersize parts, air traps, short shots and flash. T5 showed no significant improvement; T6 still had undersize parts and air-entrapment marks. The April 19 timeline listed T7 as scheduled. Fill consistency was one useful result within an unfinished dimensional and process problem.
 
-## IV. Quantified Impact
+## Finding the variation within 320 slots
 
-- **Salvaged** a zero-yield T1 disaster with a $2,500 "Ribs & Rads" tooling modification.
-- **Stabilized** 320 micro-tolerance slots across a 386 mm thermally unstable molding.
-- **Eliminated** the lost-disc failure mode in the critical 200–280 arc via hard-mount drive hardening.
-- **Identified** the 0.86 → 1.00–1.08 mm rib-thickness drift as root cause through gauge metrology.
-- **Managed** seven tooling trials to fill consistency inside three months.
-- **Rejected** triple-force springs on evidence — inelastic relaxation of the plastic — settling on double force.
+A carousel could look complete while a particular arc behaved differently. The 2011 investigation combined physical measurements with optical inventory scans to locate troublesome slots. At slot 205, the report measured 1.37 mm just ahead of the V-groove, against its stated 1.50 mm intent. Local rib thickness and the disc's own edge geometry mattered to the available clearance.
 
-## V. Source Trail
+The scans localized poor responses, then the tooling investigation examined differences among sections. Re-burning or replacing individual sections was proposed. A later slot-120 request compared insert replacement with repair and re-burn work. These records preserve the distinction between a measured defect, a suspected tooling cause and a proposed repair.
 
-The claims above rest on the project's primary evidence archive — T-shot reports, metrology heatmaps, and tooling proposals — compiled through the NotebookLM forensic registry:
+## Defining rework and acceptance
 
-- `03_carousel.pdf` — the molding battle: broken-rib photos, T1 flash, vacuum-venting Proposal #5, T6 burn marks.
-- `502-1164-00_slot_problems_11_16_11.pdf` — metrology heatmaps of the tight-slot arc.
-- `Pilot Carousel Observations.pdf` — the rib-thickness measurements behind the friction root cause.
-- `Problem areas on the carousel to check for T6 run.pdf` — macro photography of slot-blocking flash.
-- Rev 11 ECN — the tolerance corrections.
+Temporary rework needed its own acceptance method. The October procedure described removing interfering material and cleaning the slots. The November inspection required three test discs to pass through every one of the 320 positions under their own weight. Damaged parts were rejected, and reworked slots had to be checked again. Drawing maintenance continued too: the January 2012 Rev 11 ECN corrected a minus-tolerance typo and gate numbering. The later tooling proposals also made gate identification useful to operators correlating controller output with physical gate drops.
+
+## Supporting the part in production
+
+Many of these changes reached production during a compressed sequence of programs, with design-for-manufacture work continuing on the fly.
+
+The production problem extended beyond the tool. The April 2014 packaging instruction enlarged the pocket around the carousel to relieve interference with the packing material. A separate warpage procedure established a flat reference, marked high points and a reject/quarantine limit. These gave receiving and production staff a repeatable way to judge parts.
+
+## Testing the disc path and deciding disposition
+
+The adjacent disc path was also under investigation. Nathan's April 17 tests combined a modified guide and upper bearing with stronger springs. Double force passed four run-in cycles in the reported tests, including dirty-roller and known rib-hit conditions. Triple force caused the spring itself to take a permanent set. My April 21 plan called for the guide/bearing changes and double-force springs, with solid bushings and a modified gear to be tested and implemented if necessary. The April 29 release discussion still called for testing the spring prototypes before their release.
+
+Part disposition remained a separate responsibility. In August, I explicitly directed failed parts to be scrapped. By January 2015, a replacement carousel tool was again under quotation review, with improved spacing consistency an objective. The reviewed records stop before that tool's final disposition.
+
+The engineering work was the connection among these decisions: proving a slot geometry, making it repeatably, measuring where it varied, testing the disc interface and giving production a defensible acceptance rule. The carousel was one component, but its performance depended on that entire chain.
+
