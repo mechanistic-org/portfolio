@@ -170,7 +170,7 @@ const navNext = nextProject
 			description={d.description}
 			audioUrl={d.audio_url}
 			photoCount={images.length || undefined}
-			mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer"].includes(d.slug) ? "images" : undefined}
+			mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash"].includes(d.slug) ? "images" : undefined}
 		/>
 
 		{contextRibbon && <ContextRibbon model={contextRibbon} />}
@@ -185,7 +185,7 @@ const navNext = nextProject
 					useContinuityRails ? (
 						<ProjectContinuityRail
 							side="left"
-							mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer"].includes(d.slug) ? "images" : undefined}
+							mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash"].includes(d.slug) ? "images" : undefined}
 							projectTitle={d.title}
 							scenes={activeRailScenes}
 							headings={headings}
@@ -330,6 +330,7 @@ const navNext = nextProject
 		{
 			useContinuityRails && galleries.length > 0 && (
 				<ProjectEvidenceBreakout
+			fullSizeLinks={d.slug === "backsplash"}
 					galleries={resolved?.galleries ?? galleries}
 					featured={resolved?.featured}
 					breakout={resolved?.breakout}
@@ -361,7 +362,8 @@ const navNext = nextProject
 	[data-project-article="wall-plates"] :global([id]),
 	[data-project-article="webtv-galaxy"] :global([id]),
 	[data-project-article="webtv-cortez"] :global([id]),
-	[data-project-article="webtv-elmer"] :global([id]) {
+	[data-project-article="webtv-elmer"] :global([id]),
+	[data-project-article="backsplash"] :global([id]) {
 		scroll-margin-top: 6rem;
 	}
 	[data-project-article="room-director"] > :global(header img),
@@ -373,7 +375,9 @@ const navNext = nextProject
 	[data-project-article="webtv-cortez"] > :global(header img),
 	[data-project-article="webtv-cortez"] :global(.rail__media-grid img),
 	[data-project-article="webtv-elmer"] > :global(header img),
-	[data-project-article="webtv-elmer"] :global(.rail__media-grid img) {
+	[data-project-article="webtv-elmer"] :global(.rail__media-grid img),
+	[data-project-article="backsplash"] > :global(header img),
+	[data-project-article="backsplash"] :global(.rail__media-grid img) {
 		object-fit: contain;
 		background: white;
 	}

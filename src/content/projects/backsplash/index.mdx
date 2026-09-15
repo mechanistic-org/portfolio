@@ -4,115 +4,133 @@ slug: backsplash
 tier: deep_dive
 category: module_subsystem
 client: []
-date: 2021-08-25 00:00:00+00:00
-description: The Hyphen Backsplash control and display enclosure, developed around a brushed-stainless body, tinted polycarbonate interface, display PCB, and documented EtherCAT-RS485 bridge board.
+date: '2021-08-25 00:00:00+00:00'
+description: Ownership and integration of Hyphen's Backsplash subsystem, packaging each cabinet's power supplies, controllers and communications with critical airflow and thermal-management requirements.
 draft: false
 employer: hyphen
-forensic_metrics:
-  process: Candidate specifications include an approximately 85%-opaque polycarbonate screen, a 256x64 display, an LED-grid lighted bezel, and an IP69K fan family rated from 10.24 to 14.48 CFM.
-  governance: The August 25, 2021 display PCB dimensional-control drawing bounds the documented mechanical-interface contribution; electrical, controls, software, and Makeline outcomes remain cross-functional.
 forensic_summary:
-  trigger: The Makeline required a front-side enclosure and interface that could package display and control hardware while remaining compatible with food-service access and cleaning constraints.
-  intervention: Developed the brushed-stainless and tinted-polycarbonate enclosure intent, the display PCB mechanical-control drawing, the lighted-bezel interface, and the physical package around the documented 10244R1 bridge board.
-  result: The surviving record establishes a detailed development and prototype candidate, but does not establish the legacy wiring, volume, protection-rating, sanitation, throughput, accuracy, or production outcomes.
+  trigger: Each Makeline cabinet needed Backsplash modules that combined power supplies, controllers, communications and the display interface, making airflow and thermal management critical.
+  intervention: I owned the entire Backsplash subsystem and its component integration into the Makeline, coordinating the equipment package and cabinet interfaces. Dated light-ring and display-PCB drawings document specific mechanical work within that responsibility.
+  result: Photographs document the assembled display arrays and internal hardware package. Quantified thermal performance, completed verification results and a Backsplash-specific production outcome remain unestablished in the reviewed material.
 heroImage: /assets/backsplash/backsplash-hero-01-xl.webp
 industry: automation
 job_title: mechanical_engineer
 production: prototype
 tags:
 - Mechanism
-theme: hyperspace
+theme: article
 toolIcons: []
 tools: []
 teamSize: Cross-functional
 cyberspace:
+  enable: true
   layout: linear
-  narrative: []
   stickies:
-  - caption: Build photographs show the developing enclosure, interface, and internal hardware. They support physical context but do not independently establish wiring-reduction, protection-rating, thermal, throughput, or production claims.
-    data:
-      columns: 3
-      layout: masonry
-      scattered: true
-      images:
-      - alt: IMG_0237_60
-        src: /assets/backsplash/bubbles/01_misc/IMG_0237_60.png
-        aspectRatio: 1.5
-      - alt: IMG_0238_60
-        src: /assets/backsplash/bubbles/01_misc/IMG_0238_60.png
-        aspectRatio: 1.5
-      - alt: PXL_20211028_190650248_60
-        src: /assets/backsplash/bubbles/01_misc/PXL_20211028_190650248_60.png
-        aspectRatio: 1.5
-      - alt: PXL_20211102_180108511_60
-        src: /assets/backsplash/bubbles/01_misc/PXL_20211102_180108511_60.png
-        aspectRatio: 1.5
-      - alt: PXL_20211102_190316482_60
-        src: /assets/backsplash/bubbles/01_misc/PXL_20211102_190316482_60.png
-        aspectRatio: 1.5
-      - alt: PXL_20211102_214847653_60
-        src: /assets/backsplash/bubbles/01_misc/PXL_20211102_214847653_60.png
-        aspectRatio: 1.5
-    featuredIndices: []
-    id: 01_misc
+  - id: full_pass_255_m05
     type: gallery
-    title: Misc
+    title: Inside the cabinet module
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/backsplash/bubbles/01_misc/IMG_0238_60.png
+        alt: An open enclosure with circuit boards, terminal blocks and red and gray cables.
+        aspectRatio: 1.3335170893054025
+        caption: 'Inside a Backsplash module: control boards, terminal rows and cabling occupy the cavity behind the displays. Erik''s subsystem account identifies the integration of power supplies, controllers and communications, with airflow and thermal management critical to the package.'
+    featuredIndices: []
+    deck: []
+  - id: full_pass_255_m01
+    type: gallery
+    title: Display array
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/backsplash/bubbles/01_misc/PXL_20211102_214847653_60.png
+        alt: Ten rectangular display windows in two rows within a dark front face, with blue illuminated surrounds.
+        aspectRatio: 1.3335170893054025
+        caption: The Backsplash face carries ten display windows in two rows, with illuminated surrounds. This photograph records the assembled interface.
+    featuredIndices: []
+    deck: []
+  - id: full_pass_255_m03
+    type: gallery
+    title: Rear mounting grid
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/backsplash/bubbles/01_misc/PXL_20211102_190316482_60.png
+        alt: Rear of a display panel with two rows of small boards connected by gray ribbon cables.
+        aspectRatio: 1.3335170893054025
+        caption: The rear of the display array shows the repeated board positions, mounting grid, and ribbon connections.
+    featuredIndices: []
+    deck: []
+  - id: full_pass_255_m02
+    type: gallery
+    title: Light-ring geometry
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/backsplash/full-pass-255/light-ring-detail.png
+        alt: Dimensioned front and edge views of a rectangular light ring with rounded corners.
+        aspectRatio: 2.1333333333333333
+        caption: 'Detail from the LIGHT_RING drawing: a 4 mm band and 1.75 mm and 1.05 mm thickness dimensions. Erik Norris is named on sheet 1, dated July 21, 2021. Dimensions are in millimeters.'
+    featuredIndices: []
+    deck: []
+  - id: full_pass_255_m04
+    type: gallery
+    title: Display board on the bench
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/backsplash/bubbles/01_misc/PXL_20211102_180108511_60.png
+        alt: A rectangular display board photographed beside a bench power supply.
+        aspectRatio: 1.3335170893054025
+        caption: A display-board bench setup beside a laboratory power supply, showing the board package and surrounding equipment.
+    featuredIndices: []
     deck: []
 ---
 
-# Backsplash / Infrastructure Slot
+# Backsplash: integrating the cabinet electronics
 
-## Project summary
+I owned the entire Backsplash subsystem and its component integration into Hyphen's Makeline. Each cabinet's power supplies, controllers and communications were housed in its Backsplash modules, alongside the display interface.
 
-- **Role boundary:** Mechanical-engineering contribution to the Backsplash enclosure and display interface. The August 25, 2021 display PCB dimensional-control drawing is directly attributed to Erik Norris. Electrical design, PCB implementation, controls, software, industrial design, certification, and Makeline-level performance remained cross-functional responsibilities.
-- **Mandate:** Package a front-side control and display interface within the Makeline's infrastructure region while supporting food-service access, service, and cleaning intent.
-- **Evidence-bounded result:** The archive preserves enclosure specifications, a display PCB control drawing, bridge-board and build imagery, component references, and broader patent context. It does not establish the former system-wide wiring, volume, washdown-certification, sanitation, throughput, or accuracy outcomes.
+## Power and controls in the cabinet
 
-## Enclosure and interface specification
+That concentration of equipment made airflow and thermal management critical. The Backsplash modules contained the brains for each cabinet, so their component integration required a complex coordination effort.
 
-The Backsplash ID packet specifies a number 4 brushed stainless-steel main body, with the brush direction controlled along vertical or horizontal planes. Its screen concept uses tinted dark-gray polycarbonate at approximately 85% opacity, no bezel, a small candidate radius around 2 mm, and a thickness left unresolved pending the electronics package.
+The open-enclosure photographs make the packaging problem visible: control boards, terminal rows and cable routing share the cavity behind the display array. These parts had to come together within the repeated enclosure system.
 
-The display intent calls for an NHD 3.12-inch 256x64 module, a polycarbonate light diffuser, and an LED grid behind a lighted bezel. That evidence supports the physical interface concept. It does not establish the legacy Makelight narrative that assigned empty-hopper sensing, operator nudges, or a closed human quality loop to this subsystem.
+## One display assembly across the modules
 
-## Display mechanical control
+The Backsplash task estimate identifies six module configurations and calls for a common display assembly. The enclosure work depended on several interfaces being defined together: LED selections from electrical engineering, display pitch and three-dimensional location from industrial design, and CAD and connection information for an additional small board.
 
-The `DISPLAY_PCB` dimensional-control drawing is dated August 25, 2021 and identifies Erik Norris as the drafter. It requires deburring and edge control, post-finish dimensions, ASME Y14.5 interpretation, cleanliness, defined untoleranced hole control, and use of the 3D model for complete product definition.
+## The mounting grid was an interface
 
-This is the strongest surviving role artifact for Backsplash. It establishes a bounded mechanical-interface contribution without transferring electrical or controls ownership to the drafter.
+The mounting grid located the displays and their board interfaces within that repeated geometry. The task plan called for checking whether the conductive-spring interface between the displays and PCB assemblies would deflect the grid, using spring and FR4 data and samples. Stiffness was an explicit development requirement.
 
-## Control and build context
+## Defining the optical and board geometry
 
-The board packet identifies an `EtherCAT RS485 Bridge PCBA 10244R1`, and the Backsplash photo packets preserve the enclosure's internal build context. Those artifacts establish board identity and physical integration evidence. They do not establish the former claims that a particular array controlled more than 70 actuators, removed 99% of discrete wiring, or reduced control volume by 50%.
+The industrial-design packet specifies a number 4 brushed stainless-steel body and a dark tinted polycarbonate front. Thickness depended on the electronics package, while corner-radius and material-variant notes remained tentative. The optical intent combined a compact display with a polycarbonate diffuser and an LED grid behind its illuminated surround.
 
-The patent describes a broader operator-accessible infrastructure slot that can route services, accept cooling modules, and expose windows for cleaning or module replacement. It is system design context and a set of claimed variations, not proof that every described feature appeared in this Backsplash build.
+The specified Newhaven NHD-3.12-25664UCW2 is a 256 x 64 OLED module. The ID packet calls it LCD, but the named component's datasheet identifies it as OLED. This terminology correction does not establish a technology change or identify every installed module.
 
-## Environmental and cooling boundary
+My LIGHT_RING drawing, dated July 21, 2021, defines the surround with a 4 mm band and 1.75 mm and 1.05 mm thickness dimensions. The ID packet's separate 10 mm diffuser-width note remains tentative. These are distinct design records, with a final optical stack still unestablished.
 
-The candidate 04028VA fan-family datasheet specifies IP69K component protection and three 24 V variants rated at 10.24, 12.36, and 14.48 CFM in free air. It does not show which variant, if any, was installed. The record also does not contain an enclosure IP65 test, an assembled thermal validation, or NSF temperature results, so none is claimed.
+My DISPLAY_PCB drawing, dated August 25, records edge, cleanliness, hole-control and model-based definition requirements. The drawings document mechanical work within my broader subsystem responsibility. The DISPLAY_PCB drawing's unfilled approval fields leave its formal release unestablished.
 
-Likewise, power-supply and other component datasheets describe candidate parts. Their efficiency and environmental ratings cannot be promoted into achieved subsystem performance without an as-built configuration and test record.
+## Sealing and access around the package
 
-## System-result boundary
+The task plan also addresses sealing between tray and chassis, a narrower front-frame RTV seal with a bezel or overlay, buttons on the end modules, rear power switches and a fastening mechanism. The rows apply to different module combinations. They connect the internal equipment package to the surrounding cabinet and its accessible surfaces.
 
-Makeline throughput, accuracy, sanitation time, customer deployments, funding, and software architecture belong to the broader system record. The current Backsplash evidence does not make 350 meals per hour, 99% accuracy, a 15-minute sanitation cycle, or TwinCAT scheduling guarantees into subsystem results. The current packet also does not establish a 5.5-year duration or Backsplash-specific production launch, so the candidate remains a 2021 development/prototype record.
+## The hardware record
 
-## Governance and custody
+The photographs document a row of Backsplash modules in the Makeline assembly, an open internal package, a repeated rear mounting grid with ribbon connections, and a front array with illuminated surrounds. The bench photograph adds a closer view of the display-board package.
 
-The shared Hyphen archive is now explicitly partitioned. All 214 NotebookLM sources are locally accounted for through direct matches, captured payloads, or preserved two-candidate dispositions. There are no NotebookLM notes or Studio artifacts in the dated snapshot. Denester, Portion Cup, Makeline, general platform, component-reference, and external research material is excluded or bounded before Backsplash claim use.
-
-## Quantified evidence
-
-- **Specified** an approximately 85%-opaque tinted polycarbonate screen, no bezel, and a 256x64 display with a light-diffuser and LED-grid concept.
-- **Released** the display PCB dimensional-control drawing on August 25, 2021.
-- **Documented** the labeled `EtherCAT RS485 Bridge PCBA 10244R1` in the project packet.
-- **Evaluated** an IP69K fan family whose three documented variants range from 10.24 to 14.48 CFM in free air.
-- **Accounted** for all 214 notebook sources without importing adjacent-project or system-level claims.
+The physical record shows assembled hardware. It leaves final front construction, completed stiffness and sealing checks, quantified thermal performance and a Backsplash-specific production outcome unresolved. The task estimate records planned work rather than confirming each row's implementation, and the subsystem-ownership account does not assign every circuit or firmware to me.
 
 ## Source trail
 
-- `Backsplash_ID.pdf` - enclosure, screen, display, diffuser, and LED-grid design intent.
-- `DISPLAY_PCB_DCD_2021_08_25.pdf` - display PCB dimensional-control drawing and bounded drafter attribution.
-- `hub_pcb.pdf` - labeled 10244R1 EtherCAT-RS485 bridge-board imagery.
-- `04028VA_IP69K.pdf` - candidate fan-family component ratings.
-- `US20240164588A1.pdf` - broader infrastructure-slot and service-access context.
-- `backsplash.pdf` and its exported-photo packet - build and internal-layout imagery retained as separate artifacts.
+The account combines my direct subsystem-ownership testimony with the Backsplash task estimate, industrial-design packet, named display datasheet, LIGHT_RING and DISPLAY_PCB mechanical drawings, and the two preserved assembly-photo packets.

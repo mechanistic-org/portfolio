@@ -21,6 +21,7 @@ interface GalleryEntry {
 
 interface Props {
 	galleries: GalleryEntry[];
+	fullSizeLinks?: boolean;
 	featured?: {
 		href: string;
 		className: string;
@@ -31,7 +32,7 @@ interface Props {
 	breakout?: { eyebrow: string; description: string };
 }
 
-const { galleries = [], featured = [], breakout } = Astro.props;
+const { galleries = [], featured = [], breakout, fullSizeLinks = false } = Astro.props;
 ---
 
 <section id="visual-evidence" class="evidence-breakout" aria-labelledby="visual-evidence-title">
@@ -76,6 +77,7 @@ const { galleries = [], featured = [], breakout } = Astro.props;
 					caption={gallery.caption}
 					images={gallery.data.images || []}
 					columns={gallery.data.columns}
+					fullSizeLinks={fullSizeLinks}
 				/>
 			))
 		}
