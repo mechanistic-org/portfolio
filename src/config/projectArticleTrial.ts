@@ -1024,104 +1024,110 @@ export const projectArticleTrial = {
 	    }
 	},
 	backsplash: {
-		sections: {
-			summary: "project-summary",
-			enclosure: "enclosure-and-interface-specification",
-			display: "display-mechanical-control",
-			build: "control-and-build-context",
-			environment: "environmental-and-cooling-boundary",
-			boundaries: "system-result-boundary",
-			governance: "governance-and-custody",
-			impact: "quantified-evidence",
-			sources: "source-trail",
-		},
-		media: {
-			"build-context": {
-				galleryId: "01_misc",
-				src: "/assets/backsplash/bubbles/01_misc/IMG_0237_60.png",
-			},
-			"internal-hardware": {
-				galleryId: "01_misc",
-				src: "/assets/backsplash/bubbles/01_misc/PXL_20211028_190650248_60.png",
-			},
-		},
-		scenes: [
-			{
-				key: "summary",
-				eyebrow: "Orientation",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "enclosure",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "display",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "build",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: ["build-context", "internal-hardware"],
-			},
-			{
-				key: "environment",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "boundaries",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "governance",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["governance"],
-				},
-				media: [],
-			},
-			{
-				key: "impact",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "sources",
-				eyebrow: "Sources",
-				left: {
-					kind: "sources",
-				},
-				media: [],
-			},
-		],
+	    "sections": {
+	        "packaging": "power-and-controls-in-the-cabinet",
+	        "display": "one-display-assembly-across-the-modules",
+	        "grid": "the-mounting-grid-was-an-interface",
+	        "geometry": "defining-the-optical-and-board-geometry",
+	        "access": "sealing-and-access-around-the-package",
+	        "hardware": "the-hardware-record",
+	        "sources": "source-trail"
+	    },
+	    "media": {
+	        "package": {
+	            "galleryId": "full_pass_255_m05",
+	            "src": "/assets/backsplash/bubbles/01_misc/IMG_0238_60.png"
+	        },
+	        "front": {
+	            "galleryId": "full_pass_255_m01",
+	            "src": "/assets/backsplash/bubbles/01_misc/PXL_20211102_214847653_60.png"
+	        },
+	        "grid": {
+	            "galleryId": "full_pass_255_m03",
+	            "src": "/assets/backsplash/bubbles/01_misc/PXL_20211102_190316482_60.png"
+	        },
+	        "ring": {
+	            "galleryId": "full_pass_255_m02",
+	            "src": "/assets/backsplash/full-pass-255/light-ring-detail.png"
+	        },
+	        "bench": {
+	            "galleryId": "full_pass_255_m04",
+	            "src": "/assets/backsplash/bubbles/01_misc/PXL_20211102_180108511_60.png"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "packaging",
+	            "eyebrow": "Cabinet integration",
+	            "left": {
+	                "kind": "context"
+	            },
+	            "media": [
+	                "package"
+	            ]
+	        },
+	        {
+	            "key": "display",
+	            "eyebrow": "Repeated interface",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "front"
+	            ]
+	        },
+	        {
+	            "key": "grid",
+	            "eyebrow": "Mechanical interface",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "grid"
+	            ]
+	        },
+	        {
+	            "key": "geometry",
+	            "eyebrow": "Drawing definition",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "ring"
+	            ]
+	        },
+	        {
+	            "key": "access",
+	            "eyebrow": "Enclosure interfaces",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "hardware",
+	            "eyebrow": "Physical assembly",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "bench"
+	            ]
+	        },
+	        {
+	            "key": "sources",
+	            "eyebrow": "Source context",
+	            "left": {
+	                "kind": "sources"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Cabinet electronics and mechanical interfaces",
+	        "description": "The retained interior, display-array, mounting-grid, light-ring and bench views connect the subsystem package to its mechanical details."
+	    }
 	},
 	"ksystem-120": {
 		sections: {

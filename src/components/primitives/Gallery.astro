@@ -16,8 +16,9 @@ interface Props {
 	images: Img[];
 	columns?: number;
 	caption?: string;
+	fullSizeLinks?: boolean;
 }
-const { title, images = [], columns = 3, caption } = Astro.props;
+const { title, images = [], columns = 3, caption, fullSizeLinks = false } = Astro.props;
 
 const humanize = (s?: string) => {
 	const t = (s || "").replace(/[-_]+/g, " ").trim();
@@ -38,12 +39,27 @@ const colClass = columns >= 3 ? "sm:columns-2 lg:columns-3" : columns === 2 ? "s
 			<div class:list={["gap-3", colClass]}>
 				{images.map((im) => (
 					<figure class="mb-3 break-inside-avoid">
-						<img
-							src={im.src}
-							alt={im.alt || ""}
-							loading="lazy"
-							class="border-border w-full rounded-lg border object-cover"
-						/>
+						{fullSizeLinks ? (
+							<a
+								href={im.src}
+								aria-label={`Open ${im.alt || "image"} at full size`}
+								class="block rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-current"
+							>
+								<img
+									src={im.src}
+									alt={im.alt || ""}
+									loading="lazy"
+									class="border-border w-full rounded-lg border object-cover"
+								/>
+							</a>
+						) : (
+							<img
+								src={im.src}
+								alt={im.alt || ""}
+								loading="lazy"
+								class="border-border w-full rounded-lg border object-cover"
+							/>
+						)}
 						<figcaption class="text-muted-foreground mt-1.5 text-[11px] leading-snug">
 							{im.caption || humanize(im.alt)}
 						</figcaption>
