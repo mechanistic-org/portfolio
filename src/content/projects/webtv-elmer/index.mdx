@@ -2,25 +2,22 @@
 title: Elmer / Zeus (HomeNet)
 slug: webtv-elmer
 tier: deep_dive
-description: 'A WebTV network-server prototype became a disciplined reference-enclosure conversion: retain the Elmer surfaces that still fit, remake the base for new I/O, and release the changed mechanical interfaces.'
+description: 'Mechanical development of WebTV HomeNet demonstrators: carry Elmer into Zeus through board and connector interfaces, annotated enclosure reviews, supplier release and prototype assembly support.'
 category: home_entertainment
 date: 2000-09-15 00:00:00+00:00
 draft: false
-duration: 3 Months
+duration: September-December 2000 development
 employer: mechanistic
-endDate: 2001-01-06 00:00:00+00:00
 forensic_metrics:
-  process: The contract planned 100 hours across specification review, product design, refinement, and prototype work; three preserved IGES exports for top, base, and fan bracket were generated on 19 November 2000 by user erik.
-  governance: WebTV owned product inputs and component definition; Mechanistic owned the contracted mechanical layout, enclosure changes, design review, prototype release, and vendor interface.
-  financial: The curated record supports planned hours but not the legacy budget, production-volume, or delivery-cycle numbers.
+  process: September-December 2000 correspondence links layout, bezel work, supplier release and receipt of five Zeus enclosure sets.
+  governance: Mechanistic handled mechanical design and supplier support; WebTV owned product/electrical inputs, with separate industrial-design, model-making and system-integration contributors.
 forensic_summary:
-  trigger: Different I/O and added electronics had to fit a new network server while WebTV wanted to retain the existing Elmer bezel and top cover where possible.
-  intervention: Treat the enclosure as a controlled conversion - map reuse, redesign the base and interfaces, model the changed parts, and release prototype geometry.
-  result: The local record preserves a component-by-component adaptation worksheet and same-day Pro/ENGINEER exports for the Elmer/Zeus top, Zeus base, and fan bracket, without inventing a production or field outcome.
+  trigger: Existing boards and additional cards had to fit successive HomeNet demonstration enclosures while useful Elmer design work carried into Zeus.
+  intervention: Develop the mechanical layout and Pro/ENGINEER geometry, resolve component and board interfaces, incorporate review instructions and release supplier files.
+  result: Revised top, base and fan-bracket files reached fabrication; five enclosure sets were received in December, with final standoff fit and system qualification still unestablished.
 industry: consumer_electronics
 listed: true
 production: prototype
-productionScale: one_off
 tags:
 - Architecture
 - Prototype
@@ -29,71 +26,149 @@ theme: article
 tools:
 - pro_engineer
 teamSize: Cross-functional
-scars:
-- label: Reference enclosure mismatch
-  value: Keep the top; remake the base
-  description: The proposal made reuse conditional and identified the changed I/O panel as the reason the base could not carry over unchanged.
-  severity: major
-  phase: design
-  anchor: reuse-was-a-constraint-not-a-shortcut
-  trigger: Zeus had to accept a different component and I/O definition inside an Elmer-derived enclosure.
-  intervention: Preserve the bezel assembly and top cover where possible while remaking the base and mechanical interfaces.
-  result: The adaptation worksheet and local CAD exports record the conversion without claiming unsupported schedule or field performance.
+client:
+- webtv
+job_title: mechanical_engineer
+heroImage: /assets/webtv-elmer/full-pass-254/perf-hero.webp
+cyberspace:
+  enable: true
+  layout: linear
+  stickies:
+  - id: reference
+    type: gallery
+    title: Reference parts and exceptions
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/webtv-elmer/full-pass-254/mercury-interface-worksheet.webp
+        alt: Mercury enclosure worksheet with a Spec? column, crossed-out unused assemblies and red custom-part descriptions.
+        aspectRatio: 3.1159420289855073
+        caption: The Mercury-based worksheet marks unused assemblies and custom parts while tracking component specifications. These rows define a reference and its exceptions, not a final Zeus bill of materials.
+      - src: /assets/webtv-elmer/full-pass-254/power-supply-exception.webp
+        alt: Worksheet continuation crossing out a nylon support because a different power supply does not require it.
+        aspectRatio: 7.446043165467626
+        caption: A continuation of the same worksheet excludes a support because a different power supply does not require it. This note prevents the earlier supply listing from being treated as proof of unchanged reuse.
+    featuredIndices: []
+    deck: []
+  - id: connector
+    type: gallery
+    title: The corrected I/O reference
+    data:
+      columns: 2
+      layout: masonry
+      images:
+      - src: /assets/webtv-elmer/full-pass-254/stacked-dsub.webp
+        alt: Supplier front view of a stacked 9-pin-over-25-pin D-sub connector.
+        aspectRatio: 1.356164383561644
+        caption: The 310-01022-100 supplier drawing shows the stacked 9-pin-over-25-pin D-sub. Keva Nelson supplied this corrected specification on November 8 after initially sending the single-connector reference.
+    featuredIndices: []
+    deck: []
+  - id: review
+    type: gallery
+    title: Perforation review on the actual layout
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/webtv-elmer/full-pass-254/perforation-review.webp
+        alt: Faxed Zeus layout with handwritten REMOVE PERF, ADD PERF, a hatched new-perforation legend and questions about placement.
+        aspectRatio: 1.2429906542056075
+        caption: The November 15 faxed layout, returned by Leslie Leland as Perf.jpg on November 16, marks proposed perforation changes. Her November 17 follow-up specifies removing openings under the main PCB and increasing them between the PCB and power supply. It records review instructions, with final geometry and thermal performance unestablished.
+    featuredIndices: []
+    deck: []
 ---
 
-# Elmer / Zeus: converting a reference enclosure without inheriting its assumptions
+# Elmer / Zeus: adapting the HomeNet demonstrator
 
-## Project summary
+Elmer and Zeus were demonstration enclosures for WebTV's HomeNet program. They brought existing boards, purchased cards and custom adapters together to demonstrate functions intended for a future home network. The mechanical task was to make that changing arrangement buildable, then carry useful Elmer work into Zeus while redefining the interfaces that had changed.
 
-- **Role boundary:** Contract mechanical design through Mechanistic: layout, enclosure changes, PCB retention, I/O-panel work, prototype release, and vendor interface. WebTV retained product definition, electrical design, component inputs, regulatory requirements, and program decisions.
-- **Mandate:** Complete a Galaxy Home Network Server mechanical design, codenamed Zeus, by adapting the existing Elmer enclosure around a different component and I/O set.
-- **Core result:** The record shows a deliberate keep/change/drop process rather than a blank-sheet enclosure. The proposal preserves Elmer's bezel and top where possible, remakes the base for new I/O, and the surviving artifacts record the resulting top, base, fan-bracket, thermal-interface, and connector decisions.
+Through Mechanistic, I developed the enclosure and bezel geometry in Pro/ENGINEER, coordinated component and board interfaces, and worked with the prototype and sheet-metal suppliers. WebTV supplied product requirements, electrical design and component inputs. Industrial design, model making and system assembly had their own contributors.
 
-## Reuse was a constraint, not a shortcut
+The opening image is a November 2000 review layout, with original handwritten perforation changes. It captures the practical work between a component arrangement and a part ready to fabricate. The [complete annotated layout](/assets/webtv-elmer/full-pass-254/perforation-review.webp) retains the review legend and questions.
 
-The November 2000 proposal states the architecture plainly: `Zeus will be based on the Elmer enclosure.` WebTV wanted to retain the bezel assembly and top cover unchanged if possible, but the I/O panel differed, so the base would have to be remade.
+## Establishing the interfaces
 
-That conditional phrase - `if possible` - is the useful part. Reference designs save time only when every retained interface is requalified against the new system. A top cover may still fit the outer envelope while the base, rear boundary, PCB support, power supply, airflow path, and service hardware all change underneath it.
+In September, I proposed that WebTV have PSDA or another industrial designer develop the bezel concept, while I concentrated on the component database, mechanical design and prototype coordination. My job was to implement the selected design in Pro/ENGINEER. The inputs I requested were concrete: PCB outlines, drive dimensions, fasteners, finish specifications and reference component geometry. I also asked which components ran hot, whether the board had been thermally evaluated and whether a fan was needed.
 
-The proposal turns that uncertainty into work packages. It allocates 20 planned hours to kick-off and specification review, 40 to product design, and 40 to refinement and prototype work. The listed tasks include modeling primary components in Pro/ENGINEER, retaining additional PCBs, updating the I/O panel, specifying PCB placement, designing an Ethernet adaptor card, releasing the CAD database, working directly with prototype vendors, fabricating a check model, and verifying design integrity.
+Leonard Bernal supplied an Elmer prototype DXF. On September 19, I reported a clean import and that I had given PSDA the outline dimensions. Getting usable information into the model was an early milestone; it still left finish, component and fabrication decisions to resolve.
 
-Those are planned hours and contracted deliverables. They are not proof of a 100-hour elapsed schedule or a fixed-price outcome.
+The [Mercury-based worksheet](/assets/webtv-elmer/full-pass-254/mercury-interface-worksheet.webp) shows this work at component level. It crosses out unused assemblies, identifies custom bezel and sheet-metal work, and includes a column labeled Spec?. A specification entry is not proof that the part was installed. Its power-supply row illustrates the distinction: the list includes a Mercury supply, while a [later row excludes a support because a different supply was being used](/assets/webtv-elmer/full-pass-254/power-supply-exception.webp). This was a reference inventory with exceptions, not a final Zeus bill of materials.
 
-## The mechanical worksheet became the interface map
+## Reworking the Elmer hardware
 
-The surviving `Portal Node Mech.xls` starts from a Mercury production enclosure and marks what would carry over. Some subassemblies are explicitly not used. The worksheet calls the bezel custom plastic and the chassis top and bottom custom sheet metal. It retains a 56 W power supply, a 45 GB drive, dampening grommets, fan isolation retainers, drive and top-cover foam, three CPU heat sinks, two thermal pads, and a custom aluminum heat spreader.
+By late October, the work had moved into bezel and enclosure revisions. The status correspondence assigns the Pro/ENGINEER bezel assembly to me and physical assembly and finishing to Val Kasvin at Sputnik Models. Export logs from October 26-27 preserve the bezel, glass, lens and foot geometry work under my user name.
 
-The I/O sheet then inventories the Elmer board boundary: RF modulator, RJ-11, USB, stacked S-video and RCA connectors, optical output, coax, smart-card connector, slide switch, and status LEDs. One coax specification is even marked uncertain. That note is small but important: the worksheet records an unresolved component identity instead of silently converting resemblance into equivalence.
+The team also considered a double-height combination of Elmer and Mercury. The October 25 update explicitly dropped that alternative in favor of the existing Elmer box. The correspondence records the decision without establishing a thermal or structural reason for it.
 
-Together, the two sheets are the real design instrument. They expose where a reference enclosure can be reused, where custom mechanics remain necessary, and where an electromechanical specification still needs confirmation.
+On October 31, WebTV reported five Elmer enclosures in review. I was preparing the modification list for the PCI card, reset switch and related interfaces. A larger repeater IR receiver and a new lens required bezel rework. The team planned viewing-angle and distance tests. The November 1 update records lens-fit work and my enclosure-modification handoff to Val, without reporting a completed optical test.
 
-## The artifacts verify authored geometry
+## Turning Elmer into Zeus
 
-Three preserved Pro/ENGINEER IGES logs were generated on 19 November 2000. One exports part `ELMER_TOP` into `zeus_top_11_19_00.igs`; another exports `ZEUS_BASE`; the third exports `FAN_BRACKET`. All three name `erik` as the user and record millimeter model space.
+Zeus brought another component arrangement into the same enclosure lineage. Leslie Leland's November 1 explanation distinguishes the demonstrator from the intended product: off-the-shelf hardware would simulate functions planned for future custom chips. Zeus was the server demonstrator, with Pluto identified separately as the node.
 
-These logs provide a narrow but strong authorship boundary: Erik generated the preserved top, base, and fan-bracket geometry. They do not prove how many enclosures were fabricated, which event received them, or how the hardware performed in service.
+The November 5 proposal made reuse conditional. WebTV wanted to preserve the Elmer bezel assembly and top cover where possible, while the different I/O required a remade base. The mechanical scope included component modeling, additional PCB retention, board placement, I/O changes, prototype release and direct vendor support. Its 100 planned hours describe the proposed work allocation, not measured elapsed effort.
 
-## Identity and evidence boundaries
+| Interface | What the record shows |
+| --- | --- |
+| Bezel | Retain the existing design where the new layout allowed it |
+| Top cover | Preserve its lineage, then add a hole and a zinc-plating drawing callout |
+| Base and rear I/O | Revise the part around the new board and connector arrangement |
+| Additional boards | Coordinate mounting holes, connector references and standoff requirements |
+| Fan bracket | Release a new bracket with the top and base files |
 
-Elmer and Zeus are treated here as one program lineage. The proposal says Zeus was based on Elmer, and the top-cover export itself crosses the names: part `ELMER_TOP` becomes a `zeus_top` file. The former standalone `zeus` page is therefore an alias, not a second accomplishment.
+The reuse objective did not leave every part unchanged. The later supplier correspondence makes that distinction explicit: the top had a minor change, the base had several changes and the fan bracket was new.
 
-The supporting WebTV email notebook is preserved locally, but its underlying email-archive custody remains unresolved. It informed search; it is not publication authority. Claims of a nine-day fabrication cycle, five server and twelve node deliveries, a $10,000 budget, zero thermal failures, 100-percent yield, universal 4-40 standardization, and trade-show operation have been removed because this pass did not find exact curated primary support.
+## Connector identity drove the rear boundary
 
-No Elmer/Zeus image is selected in the active evidence store. The component worksheet and source trail carry the explanatory burden; a decorative gallery is not applicable for this pass.
+One small correction shows why the I/O panel needed real component data. In November, I asked Keva Nelson to verify the Mercury connector specifications. Her initial reply supplied a single D-sub reference. The next day she corrected it to the stacked 310-01022-100.
 
-## Quantified impact
+The [verified supplier drawing](/assets/webtv-elmer/full-pass-254/stacked-dsub.webp) shows the dual-port 9-pin-over-25-pin arrangement. A superficially similar connector name would have left a different physical envelope at the enclosure boundary.
 
-- **Scoped** 100 planned hours across requirements, product design, refinement, and prototype work.
-- **Separated** retained Elmer surfaces from a remade base and changed I/O boundary.
-- **Mapped** enclosure, drive, power, thermal, fastening, and I/O decisions in one surviving worksheet.
-- **Preserved** three same-day Pro/ENGINEER exports naming Erik as the geometry author.
-- **Merged** the Zeus alias into the canonical Elmer/Zeus project identity.
-- **Retired** unsupported schedule, quantity, budget, yield, and field-performance claims.
+Board mounting required the same precision. Erturk Kocalar and Leonard needed the Ethernet card's mounting-hole locations and PCI pin A1 relative to the USB-adapter reference. The DC connector was still provisional near the intended sheet-metal release. I noted that jacks could be added in the lab if necessary; the surviving exchange does not establish whether that contingency was used.
+
+## Reviewing contact area and perforations
+
+The thermal discussion centered on a tradeoff in the chassis bottom. Mark Carbone questioned whether a perforated region would leave enough metal in contact with the aluminum heat-spreader bar, especially if the chassis was not flat. Leslie discussed the compliance of the thermal material and asked for more openings in the gap between the PCB and power supply. Roy Askeland cautioned against closing holes with the information available and clarified that Mercury used one gap pad per heat spreader.
+
+The [annotated layout](/assets/webtv-elmer/full-pass-254/perforation-review.webp) connects those comments to the actual drawing. It marks areas to remove and add perforations, retains questions about placement, and identifies the hatched regions as new perforations. The fax strip dates the underlying drawing to November 15. Leslie sent this exact image on November 16, saying the existing sinks and slugs would not require sheet-metal changes. Her November 17 follow-up states that she had asked me to remove perforations under the main PCB and increase them between the PCB and power supply.
+
+This is a documented review and revision instruction. The record does not establish a newly added second thermal pad, final fan direction or a passed thermal test. Those distinctions keep the drawing useful: it shows what the team was deciding without turning the markup into an as-built thermal report.
+
+## From geometry to fabricated parts
+
+Three November 19 export logs identify the top, base and fan bracket released from Pro/ENGINEER under my user name. The top export itself spans the program names: ELMER_TOP becomes a Zeus-top file.
+
+On November 20, Shelly Evans acknowledged receiving the files. The November 22 reply explains that the Zeus top added a hole and a zinc-plating callout. WebTV ordered five enclosure sets. On December 1, the supplier announced delivery of five tops, bases and fan brackets, then confirmed delivery. Erturk acknowledged receiving the enclosures in his December 4 reply.
+
+The supported endpoint is physical enclosure receipt and subsequent assembly support. Five received enclosure sets do not establish five operating systems. The correspondence also asks whether the parts were plated; the reviewed reply does not settle their delivered finish.
+
+## Assembly still had open details
+
+With the sheet metal received, Leslie circulated a preliminary Zeus BOM for a lab review. It combined the Mercury main and power-supply boards with adapter, PCI, Ethernet, drive and fan assemblies. Cable modifications, connector screws and inherited mounting references remained part of that review.
+
+On December 5, I confirmed that Zeus used 4-40 hardware throughout. Erturk's reply still called for shorter standoffs because some earlier ones were too long. The thread records the intended fastener standard and the remaining fit issue separately. It does not close the final standoff arrangement or establish an audited as-built standard.
+
+## People and responsibilities
+
+| Contributor | Responsibility evidenced here |
+| --- | --- |
+| Erik Norris / Mechanistic | Mechanical layout, Pro/ENGINEER bezel and enclosure geometry, interface definition, supplier release and assembly support |
+| Leslie Leland / WebTV | Requirements, product coordination, review instructions and supplier coordination |
+| PSDA | Industrial-design interface; received the early enclosure outline |
+| Leonard Bernal / WebTV | PCB outline and board-layout inputs |
+| Erturk Kocalar / WebTV | Board and system integration, enclosure receipt and assembly review |
+| Keva Nelson / WebTV | Component documentation and connector-specification correction |
+| Mark Carbone and Roy Askeland / WebTV | Heat-spreader, contact-area and thermal-interface review |
+| Val Kasvin / Sputnik Models | Physical model making, assembly, finishing and assigned rework |
+| Shelly Evans / supplier | Sheet-metal quotation, file acknowledgment and delivery coordination |
+
+Elmer and Zeus remain one project lineage here. The record shows a sustained mechanical contribution from supplied interfaces and selected industrial design to revised geometry, supplier handoff and received parts. Final standoff closure, thermal and IR qualification, and operation of complete systems remain unestablished in the reviewed material.
 
 ## Source trail
 
-- `zeus_proposal_11_5_00.doc` - contracted scope, responsibility split, planned hours, reuse constraint, and deliverables.
-- `Portal Node Mech.xls` - Mercury-to-Elmer/Zeus enclosure and I/O adaptation worksheet.
-- `elmer_top__out.log.1` - Elmer-top to Zeus-top IGES export by user `erik`.
-- `zeus_base__out.log.1` - Zeus-base IGES export by user `erik`.
-- `fan_bracket__out.log.1` - fan-bracket IGES export by user `erik`.
+- The November 5 Zeus proposal defines the reuse objective, mechanical scope, responsibility split and planned work.
+- The native Portal Node worksheet preserves its column labels, formatting and component exceptions.
+- September-December correspondence records the component, layout, prototype, thermal-review, fabrication and assembly sequence.
+- The exact Perf.jpg attachment links the handwritten review layout to Leslie's November 16 message.
+- Native export logs and the supplier's dated acknowledgment connect the top, base and fan-bracket geometry to fabrication.

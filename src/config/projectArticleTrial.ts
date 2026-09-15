@@ -490,78 +490,129 @@ export const projectArticleTrial = {
 	    }
 	},
 	"webtv-elmer": {
-		sections: {
-			summary: "project-summary",
-			reuse: "reuse-was-a-constraint-not-a-shortcut",
-			interfaces: "the-mechanical-worksheet-became-the-interface-map",
-			geometry: "the-artifacts-verify-authored-geometry",
-			boundaries: "identity-and-evidence-boundaries",
-			impact: "quantified-impact",
-			sources: "source-trail",
-		},
-		media: {},
-		scenes: [
-			{
-				key: "summary",
-				eyebrow: "Orientation",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "reuse",
-				eyebrow: "Project context",
-				left: {
-					kind: "scar",
-					section: "reuse",
-				},
-				media: [],
-			},
-			{
-				key: "interfaces",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "geometry",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "boundaries",
-				eyebrow: "Project context",
-				left: {
-					kind: "none",
-				},
-				media: [],
-			},
-			{
-				key: "impact",
-				eyebrow: "Project context",
-				left: {
-					kind: "metrics",
-					keys: ["financial", "process", "governance"],
-				},
-				media: [],
-			},
-			{
-				key: "sources",
-				eyebrow: "Sources",
-				left: {
-					kind: "sources",
-				},
-				media: [],
-			},
-		],
+	    "sections": {
+	        "interfaces": "establishing-the-interfaces",
+	        "elmer": "reworking-the-elmer-hardware",
+	        "zeus": "turning-elmer-into-zeus",
+	        "connector": "connector-identity-drove-the-rear-boundary",
+	        "perforations": "reviewing-contact-area-and-perforations",
+	        "fabrication": "from-geometry-to-fabricated-parts",
+	        "assembly": "assembly-still-had-open-details",
+	        "people": "people-and-responsibilities",
+	        "sources": "source-trail"
+	    },
+	    "media": {
+	        "worksheet": {
+	            "galleryId": "reference",
+	            "src": "/assets/webtv-elmer/full-pass-254/mercury-interface-worksheet.webp"
+	        },
+	        "exception": {
+	            "galleryId": "reference",
+	            "src": "/assets/webtv-elmer/full-pass-254/power-supply-exception.webp"
+	        },
+	        "connector": {
+	            "galleryId": "connector",
+	            "src": "/assets/webtv-elmer/full-pass-254/stacked-dsub.webp"
+	        },
+	        "review": {
+	            "galleryId": "review",
+	            "src": "/assets/webtv-elmer/full-pass-254/perforation-review.webp"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "interfaces",
+	            "eyebrow": "Component inputs",
+	            "left": {
+	                "kind": "metrics",
+	                "keys": [
+	                    "governance"
+	                ]
+	            },
+	            "media": [
+	                "worksheet",
+	                "exception"
+	            ]
+	        },
+	        {
+	            "key": "elmer",
+	            "eyebrow": "Prototype revisions",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "zeus",
+	            "eyebrow": "Enclosure conversion",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "connector",
+	            "eyebrow": "Connector definition",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "connector"
+	            ]
+	        },
+	        {
+	            "key": "perforations",
+	            "eyebrow": "Thermal review",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "review"
+	            ]
+	        },
+	        {
+	            "key": "fabrication",
+	            "eyebrow": "Supplier release and receipt",
+	            "left": {
+	                "kind": "metrics",
+	                "keys": [
+	                    "process"
+	                ]
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "assembly",
+	            "eyebrow": "Assembly support",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "people",
+	            "eyebrow": "Contribution boundaries",
+	            "left": {
+	                "kind": "context"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "sources",
+	            "eyebrow": "Source context",
+	            "left": {
+	                "kind": "sources"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Interfaces and enclosure review",
+	        "description": "The original component worksheet, corrected connector reference and annotated perforation layout show the mechanical decisions. Captions distinguish reference parts, review instructions and unverified outcomes."
+	    }
 	},
+
 	sc48: {
 		sections: {
 			architecture: "one-enclosure-a-high-reuse-architecture",
