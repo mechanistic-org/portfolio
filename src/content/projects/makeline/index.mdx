@@ -2,99 +2,138 @@
 title: Makeline
 slug: makeline
 tier: deep_dive
-description: 'Hyphen Augmented Makeline (2021-22): sub-counter automated bowl and salad assembly that decoupled digital order volume from the front line — 65% of the digital mix automated without touching the visible theater of food.'
-category: module_subsystem
+description: Mechanical concepts and interfaces for Hyphen’s modular food-assembly line, connecting food handling, bowl movement and service access beneath a conventional preparation surface.
+category: appliance
 client: []
-date: 2021-05-01 00:00:00+00:00
 draft: false
-duration: 1.3 Years
 employer: hyphen
-endDate: 2022-08-24 00:00:00+00:00
-industry: consumer_electronics
-forensic_metrics:
-  financial: Digital-line assembly labor cut 78%; food waste down 98% via portion control; $100M Cultivate Next validation; zero plumbing infrastructure required for deployment.
-  process: 350 meals/hour at 99% order accuracy and ±2% portions; 70+ actuators on EtherCAT at millisecond latency; 15-minute toolless sanitation breakdown.
-  governance: Full stage-gate from Cultivate Center lab to live restaurant deployment (September 2024); fabrication at Re:Build; field service via Ricoh's 15,000+ technicians.
-forensic_summary:
-  trigger: Digital order volume outran human assembly — adversary ingredients clumping at speed, ±15% portion bleed — but full automation fails burritos and aesthetics, and restaurant retrofits die on plumbing.
-  intervention: 'Built two lines in one: manual surface above, autonomous bowl track below, an elevator bridging them; drop-in cabinets with self-evaporating condensate; industrial Beckhoff/EtherCAT control immune to cloud hiccups.'
-  result: Seven times human throughput at gram-level precision, deployed live in a real restaurant with zero new infrastructure.
-production: production
-productionScale: one_off
+industry: automation
+job_title: mechanical_engineer
 tags:
-- Mechanism
-- Yield
-theme: hyperspace
-tools:
-- onshape
+- mechanical
+- system-integration
+- food-automation
+- prototyping
+theme: article
+heroImage: /assets/makeline/full-pass-265/makeline-row.jpg
 cyberspace:
   enable: true
   layout: linear
   stickies:
-  - align: center
-    data: null
-    id: intro
-    text: <strong>YEAR:</strong> 2021<br/><strong>ROLE:</strong> Hyphen
-    type: media
-    title: Makeline
+  - id: full_pass_265_d265-f01
+    type: gallery
+    title: An assembled Makeline
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/makeline/full-pass-265/makeline-row.jpg
+        alt: Front view of a long Makeline with stainless cabinets on casters, glass doors, an upper preparation surface and a control screen.
+        caption: An assembled Makeline in the development space. The upper preparation surface spans the cabinet line, with food modules and the assembly area visible through the doors.
+        aspectRatio: 1.3325930038867295
+    featuredIndices: []
+    deck: []
+  - id: full_pass_265_d265-f02
+    type: gallery
+    title: Separate food and service spaces
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/makeline/full-pass-265/module-cross-sections.jpg
+        alt: Patent figure 8A shows food modules and the bowl positioner in section; figure 8B shows the refrigeration module, electronics and airflow.
+        caption: Figures 8A and 8B from the modular food-assembly patent application show the food path, bowl positioner and service infrastructure. They describe the architecture and its interfaces.
+        aspectRatio: 0.7729166666666667
+    featuredIndices: []
+    deck: []
+  - id: full_pass_265_d265-f03
+    type: gallery
+    title: Plan the interfaces before the build
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/makeline/full-pass-265/integration-plan.jpg
+        alt: Whiteboard linking cabinet and subframe concepts, refrigeration and heat, packaging and published interface definitions.
+        caption: The development board connects cabinet and subframe concepts to interface definitions and a functional concept. Its month/day entries are targets; the photograph does not establish the year or completed milestones.
+        aspectRatio: 1.3333333333333333
+    featuredIndices: []
+    deck: []
+  - id: full_pass_265_d265-f04
+    type: gallery
+    title: Mechanical board interface
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/makeline/full-pass-265/motor-pcb-interface.jpg
+        alt: Dimensioned motor-PCB outline drawing with mounting holes, an instruction concerning 0.5 mm holes and Erik Norris in the title block.
+        caption: My mechanical outline drawing for MOTOR_PCB_V3, dated May 24, 2021. The sheet defines the board envelope and hole treatment at the mechanical interface.
+        aspectRatio: 1.2938005390835579
+    featuredIndices: []
+    deck: []
+  - id: full_pass_265_d265-f05
+    type: gallery
+    title: Controls at the hardware interface
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/makeline/full-pass-265/ethercat-bridge-board.jpg
+        alt: Photograph of a populated circuit board labeled HYPHEN EtherCAT RS485 Bridge PCBA 10244R1.
+        caption: A Hyphen EtherCAT-to-RS485 bridge board. The physical board records the custom hardware alongside the industrial controls listed in the electrical bill of materials.
+        aspectRatio: 1.3333333333333333
+    featuredIndices: []
+    deck: []
+  - id: full_pass_265_d265-f06
+    type: gallery
+    title: Plan validation across the line
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/makeline/full-pass-265/validation-plan.jpg
+        alt: Whiteboard listing validation concerns for the backsplash, chassis, denesting, lift, hopper or pan, positioning and system rate.
+        caption: The validation plan brings component performance together with system rate, reliability, safety and fault handling. NSF and UL appear as compliance objectives; this board is a plan, not a test report.
+        aspectRatio: 0.75
+    featuredIndices: []
     deck: []
 ---
 
-# Hyphen Augmented Makeline Forensic Report
+# Makeline
 
-## I. Project Summary
+Makeline combines two ways to assemble a meal in the same counter: a conventional preparation surface above and an automated ingredient-and-bowl path below. At Hyphen, the engineering problem was to fit food storage, dispensing, bowl movement and service access into a modular cabinet line.
 
-- **Role:** Principal Systems Architect — the automated digital assembly system ("Augmented Makeline").
-- **Mandate:** Decouple high-volume digital order production from the in-store "theatre of food": automate bowls and salads — 65% of the digital mix — without changing what the customer sees at the counter.
-- **Core Achievement:** 350 meals per hour at 99% order accuracy and ±2% portion precision — roughly seven times a human line's sustainable output — inside an existing restaurant footprint with zero new plumbing.
+My contribution included mechanical concept studies and board-interface drawings. The Makeline joined food-handling mechanisms with refrigeration, electrical controls and a cabinet structure, making the connections between those disciplines central to the work.
 
-## II. The Anatomy of Failure
+## Fit the food path and the service spaces
 
-### 1. The Rheological Crisis: Two Lines in One
+The modular-system design separates the ingredient modules, the bowl positioner and the thermal or electrical services. A bowl moves beneath the outlets while the preparation surface remains available above it. Standard module interfaces let the line be arranged around the required ingredients and available space.
 
-- **Trigger:** Manual lines couldn't run the "adversary ingredients" — shredded braised proteins, sticky cold rice, leafy greens — at digital-order velocity without clumping, cross-contamination, and a ±15% portion variance bleeding food cost. But full automation fails the other direction: burritos, tacos, and aesthetic finishing need human hands.
-- **Intervention:** Bifurcated by dexterity, not by ideology: a manual prep surface on top for the human crew, an autonomous conveyor track below building bowls through enclosed dispensing stations, and an entrée elevator lifting finished bowls up for human finishing touches. Ingredients release only when the target bowl is positionally verified.
-- **Result:** 65% of digital volume automated with the visible front-of-house untouched — assembly labor on the digital line cut 78%, one operator supervising what took four to five.
+That arrangement also makes access part of the architecture. The patent disclosure places service modules at the operator side and provides an opening into the assembly area. A removable tray beneath the positioner collects food debris. Food handling, motion and cleaning therefore have to share the cabinet without blocking one another.
 
-### 2. The Infrastructure Constraint: A Robot That Needs No Drain
+## Define the interfaces before the build
 
-- **Trigger:** Restaurant retrofits die on infrastructure: floor drains, plumbing, electrical service, and footprint are deal-breakers across thousands of existing stores.
-- **Intervention:** Engineered the system as a drop-in for the standard 13.5-foot makeline footprint — modular cabinet hierarchy (denest, hot/cold/ambient dispense, lift), self-evaporating condensate eliminating floor drains entirely, R290 refrigeration, and three thermal zones holding HACCP-compliant hot (125–180°F), cold, and ambient regimes per cabinet.
-- **Result:** Zero plumbing or drainage required for installation — the difference between a lab demo and a deployable fleet product.
+The development whiteboard connects cabinet and subsystem concepts to interface documentation, detailed CAD, quotations, parts and prototype assembly. It makes the dependencies visible: defining an individual mechanism is only part of the work; its envelope and connections have to be resolved before the line can come together.
 
-### 3. The Control Plane: Industrial, Not Hobbyist
+The drawings show distinct contributions to the system. Electrical layouts for the cold cabinets and denester backsplash are dated January 2021 and credited to Robert. Worm-gear housing and motor-mount drawings dated July 18, 2021 carry Andrew Mulia’s name.
 
-- **Trigger:** Seventy-plus actuators, gravimetric scales, and thermal zones coordinating against live order traffic — where a cloud hiccup or POS crash cannot be allowed to stall a physical conveyor.
-- **Intervention:** Replaced proprietary electronics with industrial-hardened Beckhoff IPCs running TwinCAT 3 with core isolation — real-time PLC, IoT gateway, and HMI partitioned on separate cores — EtherCAT for millisecond actuator latency, and TwinSAFE I/O cutting wiring bulk 50%. Above it, the recipe system pushes fully costed menu specifications to the fleet instantly: dispensers re-gate for new portions with zero training lag.
-- **Result:** Deterministic motion under non-deterministic restaurant chaos — a closed loop from digital order to gram-verified bowl.
+My motor-PCB mechanical drawings are dated May 24 and June 26, 2021; a display-PCB mechanical drawing is dated August 25. These sheets define board envelopes, holes and mounting interfaces so the mechanical packaging can accommodate the electronics.
 
-### 4. The Scale Path: From Lab to Live Fire
+## Connect the mechanical and electrical work
 
-- **Trigger:** Kitchen automation's graveyard is full of prototypes that never survived a real lunch rush or a real cleaning shift.
-- **Intervention:** Ran the stage-gate honestly: Cultivate Center lab stress-testing, industrial fabrication transferred to Re:Build Manufacturing, nationwide field service contracted through Ricoh's 15,000+ technician network, and toolless 15-minute breakdown designed for actual shift-change sanitation.
-- **Result:** First live restaurant deployment confirmed September 16, 2024 at Corona del Mar — bowls building under the counter while staff rolled burritos above it, backed by the $100M Cultivate Next validation.
+The electrical bill of materials ties the system together at a different level. It lists a Beckhoff industrial PC, operator panel and EtherCAT devices alongside sensors for bowls, positioners, lift and dispenser functions. A photographed Hyphen EtherCAT-to-RS485 bridge board records custom hardware at that interface.
 
-## III. Governance & Rhythm
+Controls engineering was a named part of that integration. Beckhoff’s May 2022 account features Hyphen controls engineer Bradley Hwang and co-founder and CTO Daniel Fukuba. It describes EtherCAT plug-in modules on custom signal-distribution boards, with TwinCAT control software running on an industrial PC. Bringing communication and power connections onto these boards supported compact, repeatable cabinet assembly.
 
-- **The Pulse:** Chipotle's stage-gate process from design bake through pilot; NSF-grade sanitary design discipline (coved internal radii, welded polished joints, no exposed threads in food zones, 15-minute toolless breakdown) governing every food-contact decision.
-- **The Artifacts:** The modular cabinet hierarchy specifications; the patent filings covering dispense, denest, and lift; the pilot-site record from Cultivate Center to the live deployment.
+## Plan validation across the line
 
-## IV. Quantified Impact
+The team separated demonstration goals from pilot goals. One board calls out repeatability, cleanability and sealing; the broader validation plan covers the backsplash, chassis thermal behavior, denesting, lift, hopper and pan functions, positioning and system rate. Reliability, safety, fault handling and installation or repair appear alongside the individual mechanisms.
 
-- **Scaled** throughput to 350 meals/hour against a human line's ~50.
-- **Automated** 65% of digital order volume without altering front-of-house operations.
-- **Held** ±2% portion precision and 99% order accuracy via gravimetric closed-loop control.
-- **Reduced** digital-line assembly labor 78%.
-- **Eliminated** plumbing and drainage requirements — drop-in deployment in a 13.5-foot footprint.
-- **Cut** control wiring bulk 50% with TwinSAFE I/O across 70+ EtherCAT-synchronized actuators.
-- **Reached** live restaurant deployment (September 2024) through the full stage-gate path.
+Photographs show the assembled cabinet line, including installed modules, drives and the shared preparation surface. The planning records describe what needed to be checked, but do not supply measured results for accuracy, endurance, sanitation time or production qualification.
 
-## V. Source Trail
+## Documented contribution
 
-The claims above rest on the project's primary evidence archive — patent filings, specifications, and pilot-site records — compiled through the NotebookLM forensic registry:
+The system-level contribution is also recorded in the modular food-assembly patent application published on May 23, 2024. I am named with Daniel Fukuba, Maneesh Jain, Mark Manfrey, John Vassa and Keegan Schoch. The application describes a shared architecture; it does not allocate every mechanism or subsystem to one person.
 
-- `makeline.pdf` — the top-down system layout.
-- Patent FIGURE 8A/8B — dispensing modules and condensate/compressor infrastructure.
-- The modular cabinet hierarchy specifications (denest / dispense / lift).
-- The Cultivate Center and Corona del Mar pilot records.
-- `HYPHEN-SPECSHEET.pdf` — certifications and performance data.
+This work connected mechanical concepts and board packaging with the modular cabinet architecture. The drawings, physical assemblies and validation plans show the interfaces that had to come together across the food path, service spaces and controls.

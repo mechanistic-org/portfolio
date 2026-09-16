@@ -2242,6 +2242,149 @@ export const projectArticleTrial = {
 	        "description": "Concept sheets, ingredient-present setups and separated parts show the dispenser interfaces at different stages of development."
 	    }
 	},
+	"makeline": {
+	    "sections": {
+	        "summary": "makeline",
+	        "architecture": "fit-the-food-path-and-the-service-spaces",
+	        "planning": "define-the-interfaces-before-the-build",
+	        "interfaces": "connect-the-mechanical-and-electrical-work",
+	        "validation": "plan-validation-across-the-line",
+	        "outcome": "documented-contribution"
+	    },
+	    "media": {
+	        "D265-F01": {
+	            "galleryId": "full_pass_265_d265-f01",
+	            "src": "/assets/makeline/full-pass-265/makeline-row.jpg"
+	        },
+	        "D265-F02": {
+	            "galleryId": "full_pass_265_d265-f02",
+	            "src": "/assets/makeline/full-pass-265/module-cross-sections.jpg"
+	        },
+	        "D265-F03": {
+	            "galleryId": "full_pass_265_d265-f03",
+	            "src": "/assets/makeline/full-pass-265/integration-plan.jpg"
+	        },
+	        "D265-F04": {
+	            "galleryId": "full_pass_265_d265-f04",
+	            "src": "/assets/makeline/full-pass-265/motor-pcb-interface.jpg"
+	        },
+	        "D265-F05": {
+	            "galleryId": "full_pass_265_d265-f05",
+	            "src": "/assets/makeline/full-pass-265/ethercat-bridge-board.jpg"
+	        },
+	        "D265-F06": {
+	            "galleryId": "full_pass_265_d265-f06",
+	            "src": "/assets/makeline/full-pass-265/validation-plan.jpg"
+	        }
+	    },
+	    "models": [],
+	    "scenes": [
+	        {
+	            "key": "summary",
+	            "parent": "summary",
+	            "eyebrow": "Hyphen",
+	            "title": "Makeline",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "D265-F01"
+	            ],
+	            "mediaLabel": "Makeline"
+	        },
+	        {
+	            "key": "architecture",
+	            "parent": "architecture",
+	            "eyebrow": "System development",
+	            "title": "Fit the food path and the service spaces",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "D265-F02"
+	            ],
+	            "mediaLabel": "Fit the food path and the service spaces"
+	        },
+	        {
+	            "key": "planning",
+	            "parent": "planning",
+	            "eyebrow": "System development",
+	            "title": "Define the interfaces before the build",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "D265-F03",
+	                "D265-F04"
+	            ],
+	            "mediaLabel": "Define the interfaces before the build"
+	        },
+	        {
+	            "key": "interfaces",
+	            "parent": "interfaces",
+	            "eyebrow": "System development",
+	            "title": "Connect the mechanical and electrical work",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "D265-F05"
+	            ],
+	            "mediaLabel": "Connect the mechanical and electrical work"
+	        },
+	        {
+	            "key": "validation",
+	            "parent": "validation",
+	            "eyebrow": "System development",
+	            "title": "Plan validation across the line",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "D265-F06"
+	            ],
+	            "mediaLabel": "Plan validation across the line"
+	        },
+	        {
+	            "key": "outcome",
+	            "parent": "outcome",
+	            "eyebrow": "System development",
+	            "title": "Documented contribution",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [],
+	            "mediaLabel": ""
+	        }
+	    ],
+	    "featured": [
+	        {
+	            "media": "D265-F01",
+	            "section": "summary",
+	            "label": "The assembled line",
+	            "detail": "An assembled cabinet row with a shared preparation surface.",
+	            "layout": "system"
+	        },
+	        {
+	            "media": "D265-F02",
+	            "section": "architecture",
+	            "label": "Food and service interfaces",
+	            "detail": "Architecture in the joint patent application.",
+	            "layout": "intervention"
+	        },
+	        {
+	            "media": "D265-F06",
+	            "section": "validation",
+	            "label": "System validation plan",
+	            "detail": "Reliability, safety and fault handling.",
+	            "layout": "record"
+	        }
+	    ],
+	    "breakout": {
+	        "eyebrow": "Food path, interfaces and validation",
+	        "description": "An assembled cabinet line, mechanical interface drawing, board and planning records connect the system architecture to its physical development."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
