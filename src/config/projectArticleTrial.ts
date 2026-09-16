@@ -2022,6 +2022,96 @@ export const projectArticleTrial = {
 	        "description": "Original brief drawings explain the proposed system, with baseline requirements, stretch choices and interfaces kept distinct from build and qualification outcomes."
 	    }
 	},
+	"extension-switches": {
+	    "sections": {
+	        "mechanism": "a-familiar-switch-with-a-coupled-mechanism",
+	        "bonding": "holding-the-cap-meant-controlling-the-process",
+	        "feel": "the-feel-depended-on-the-hidden-stack",
+	        "testing": "test-requirements-and-test-results-had-different-jobs",
+	        "definition": "turning-findings-into-inspectable-parts",
+	        "outcome": "what-the-work-established"
+	    },
+	    "media": {
+	        "E263-F01": {
+	            "galleryId": "full_pass_263_e263-f01",
+	            "src": "/assets/extension-switches/full-pass-263/cap-fixture.jpg"
+	        },
+	        "E263-F02": {
+	            "galleryId": "full_pass_263_e263-f02",
+	            "src": "/assets/extension-switches/full-pass-263/cap-placement.jpg"
+	        },
+	        "E263-F03": {
+	            "galleryId": "full_pass_263_e263-f03",
+	            "src": "/assets/extension-switches/full-pass-263/switch-test-rig.webp"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "mechanism",
+	            "parent": "mechanism",
+	            "eyebrow": "Coupled mechanism",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "bonding",
+	            "parent": "bonding",
+	            "eyebrow": "Cap bonding",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "E263-F01",
+	                "E263-F02"
+	            ]
+	        },
+	        {
+	            "key": "feel",
+	            "parent": "feel",
+	            "eyebrow": "Operating feel",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "testing",
+	            "parent": "testing",
+	            "eyebrow": "Reliability development",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "E263-F03"
+	            ]
+	        },
+	        {
+	            "key": "definition",
+	            "parent": "definition",
+	            "eyebrow": "Part and process definition",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "outcome",
+	            "parent": "outcome",
+	            "eyebrow": "Documented contribution",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Assembly and test views",
+	        "description": "The cap fixture, cap placement and switch test rig show the physical work behind the Extension Switch account."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
