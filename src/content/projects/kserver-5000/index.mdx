@@ -2,94 +2,143 @@
 title: KSERVER-5000
 slug: kserver-5000
 tier: deep_dive
-category: enterprise_hardware
+description: 'Mechanical sustaining for Kaleidescape''s 3U movie server: cooler alternatives, power-supply adapter documentation and production interpretation within an inherited fourteen-drive platform.'
+category: home_entertainment
 client: []
-date: 2008-06-01 00:00:00+00:00
-description: 'Kaleidescape KSERVER-5000 ''k2'' (2008-09): headless enterprise-grade storage engineered for bit-perfect movie preservation inside a residential acoustic and thermal envelope.'
-draft: false
-duration: 1.2 Years
+date: '2008-07-21 00:00:00+00:00'
+endDate: '2015-01-07 00:00:00+00:00'
+duration: Selected sustaining work, 2008-2015
 employer: kaleidescape
-endDate: 2009-03-01 00:00:00+00:00
 industry: consumer_electronics
-forensic_metrics:
-  financial: 11-year production run (2007-2018); grandfathered units inverted depreciation to $2,000-$3,800 on the secondary market; failed chassis sell for parts.
-  process: 72 TB across 14 hot-swap bays; 50 simultaneous DVD streams / 15 Blu-ray; zero data loss through single-drive failures via RAID-K; 86°F hard thermal ceiling on 40 CFM.
-  governance: 400-cycle run-in validation; the 1-minute power-down rule; field service codified into kits (SVC-KIT-0130) instead of tribal knowledge.
-forensic_summary:
-  trigger: Fourteen spinning drives generating enterprise heat in a living-room envelope — while DVD CCA litigation threatened to brick the product's core import-and-play function.
-  intervention: Engineered a 40 CFM forced-convection path with a ruthless 86°F intake ceiling, built RAID-K fault tolerance with hot-spare protection, and weathered the 2014 settlement's hard grandfather fork.
-  result: An 11-year production run, bulletproof field reputation, and the rare consumer hardware that appreciates — grandfathered units trading at $2,000-$3,800 a decade later.
 production: production
-productionScale: series
 tags:
-- Yield
-- Mechanism
-targets:
-- main
-teamSize: INT 20
-theme: hyperspace
-tools: []
+- mechanical
+- dfm
+job_title: mechanical_engineer
+draft: false
+listed: true
+heroImage: /assets/kserver-5000/full-pass-259/server-closed.webp
+theme: article
+forensic_metrics:
+  process: A manufacturing discrepancy distinguished fabrication alignment features from finished-part dimensions and mounting requirements.
+  governance: PSU adapter drawing revision and supplier clarification, with installation verification and document closure kept explicit.
+forensic_summary:
+  trigger: A mature fourteen-drive server needed component changes to remain compatible with its existing mechanical package and production documentation.
+  intervention: Review a CPU-cooler alternative, create the PSU adapter 3D model and reformatted drawing, and clarify the adapter's half-shears during a supplier discrepancy.
+  result: The record establishes the drawing revision and manufacturing clarification. Final adapter fit, document closure and shipment outcome remain unverified.
 cyberspace:
   enable: true
   layout: linear
   stickies:
-  - align: center
-    data: null
-    id: intro
-    text: <strong>YEAR:</strong> 2008<br/><strong>ROLE:</strong> Kaleidescape
-    type: media
-    title: KSERVER-5000
+  - id: full_pass_259_f01
+    type: gallery
+    title: Drive access
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/kserver-5000/full-pass-259/fourteen-drive-access.webp
+        alt: Open KSERVER-5000 front door below a row of fourteen disk cartridges.
+        caption: Front door lowered to expose fourteen disk cartridges. The chassis remains assembled during drive access.
+        aspectRatio: 1.3333333333333333
+    featuredIndices: []
+    deck: []
+  - id: full_pass_259_f02
+    type: gallery
+    title: Door linkage
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/kserver-5000/full-pass-259/door-hinge.webp
+        alt: Close view of the linkage joining the open front door to the server chassis.
+        caption: The linkage joining the front door to the chassis, beside the cartridge bank and perforated inner door.
+        aspectRatio: 1.3333333333333333
+    featuredIndices: []
+    deck: []
+  - id: full_pass_259_f04
+    type: gallery
+    title: Layered front panel
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/kserver-5000/full-pass-259/glow-section.webp
+        alt: Section drawing of the front panel with screen, glow PCB, inner panel and chassis labeled.
+        caption: Section through the layered front panel, with screen, glow PCB, inner panel and chassis identified. The drawing shows how the front face and internal parts relate.
+        aspectRatio: 0.8758620689655172
+    featuredIndices: []
+    deck: []
+  - id: full_pass_259_f03
+    type: gallery
+    title: Internal arrangement
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/kserver-5000/full-pass-259/internal-fan-layout.webp
+        alt: Archived CAD view of motherboard components and two groups of cooling fans.
+        caption: Archived assembly view showing the motherboard and two groups of chassis fans. It records the inherited internal arrangement; it is not a view of the proposed passive CPU cooler or a thermal test result.
+        aspectRatio: 1.2941176470588236
+    featuredIndices: []
+    deck: []
+  - id: full_pass_259_f05
+    type: gallery
+    title: PSU adapter fabrication
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/kserver-5000/full-pass-259/fabrication-half-shears.webp
+        alt: Adapter assembly drawing with a callout to align with half-shears and weld around the perimeter.
+        caption: The PSU adapter drawing calls for half-shears to align the pieces before welding around the perimeter. Erik's May 2014 clarification treated these as fabrication aids and separately requested verification of dimensions, PEM locations and installation fit.
+        aspectRatio: 1.1161616161616161
+    featuredIndices: []
     deck: []
 ---
 
-# KSERVER-5000 (k2) Forensic Report
+# KSERVER-5000: sustaining a dense storage platform
 
-## I. Project Summary
+Kaleidescape's KSERVER-5000 put fourteen disk cartridges behind a curved front door in a 3U movie server. Opening the door exposed the cartridges without removing the top cover. The product combined a recognizable domestic face with the cooling, access and manufacturing constraints of a densely packed storage chassis.
 
-- **Role:** Senior Mechanical Design Engineer / Architect.
-- **Mandate:** Engineer a headless enterprise-grade storage array for bit-for-bit preservation of massive optical media collections — inside a residential acoustic and thermal envelope, in a hostile copyright landscape.
-- **Core Achievement:** A 14-bay, 72 TB-capable 3U architecture that sustained an 11-year production run (2007–2018) and became the rare consumer electronic that appreciates on the secondary market.
+My documented contribution was mechanical sustaining: reviewing a cooler alternative, creating the 3D model and reformatted drawing for a replacement power-supply adapter, and helping manufacturing interpret that adapter's fabrication details. The work joined an existing platform. Rob Wudrick and Argyle's earlier engineering remained part of its design history.
 
-## II. The Anatomy of Failure
+## Fourteen drives behind the front door
 
-### 1. Thermal Crisis: Fourteen Drives in a Living Room
+The photographs show the package's two different faces. Closed, the broad front panel concealed the cartridge bank. Open, its perforated inner panel lowered below a row of fourteen vertical drives, carried by linkages at either side. The hinge detail makes the connection between the moving door and the chassis visible. An archived section drawing separates the screen, glow PCB, inner panel and chassis into distinct layers. These were service and assembly interfaces as well as elements of the product's appearance.
 
-- **Trigger:** Fourteen mechanical hard drives plus a high-current supply in 3U generates thermal density beyond residential AV tolerance — up to 921 BTU/hr — and dust occlusion on the intake grille produces a "suffocation event" that spikes drive temperatures toward array failure.
-- **Intervention:** Engineered an aggressive forced-convection path — 40 CFM minimum through dedicated 3-fan and 5-fan brackets across the drive cage — and capped the operational ceiling at a ruthless 86°F intake (versus 95°F allowed for player units) to protect the magnetic storage. Codified the survival regimen: intake vacuuming every four months, fan brackets replaced before bearing seizure, hard clearance limits front and rear.
-- **Result:** "Bulletproof" field reputation across the production life — conditional on the documented clean-or-die protocol, stated as such.
+This architecture was already established before my arrival at Kaleidescape. The base assembly's BOM names Rob Wudrick, while the drive cage, guides, hinge plates, inner door and fan-tray records carry Argyle ownership and 2006 dates. My work on later changes operated within that inherited arrangement. The selected examples here come from 2008, 2014 and early 2015.
 
-### 2. Legal Crisis: The Grandfather Fork
+## A cooler choice constrained by the schedule
 
-- **Trigger:** DVD CCA litigation threatened the product's core utility — import-and-play of CSS-protected DVDs — alleging the architecture violated the physical-presence requirement of the CSS license.
-- **Intervention:** The 2014 settlement forced a hard bifurcation by activation date: units activated before November 30, 2014 retained full disc-free import and playback; later units were restricted to cataloging with physical disc presence required — the constraint that drove the engineering of the robotic disc vaults. The Co-Star bridge later integrated these legacy servers with the modern 4K line, preserving their utility as the engine room for legacy collections.
-- **Result:** A finite "grandfathered" hardware class that inverts depreciation — legacy units commanding $2,000–$3,800 on the secondary market a decade after manufacture, with even failed chassis selling for parts.
+In July 2008, hardware engineer Nathan Forster had found a passive aluminum CPU heatsink with acceptable performance in his evaluation. Its sample was resting on the CPU under gravity. He asked me to create an internal extrusion drawing and a suitable attachment method; the surrounding case could not be reused because it obstructed airflow. I asked for the drawings so we could discuss the work.
 
-### 3. Reliability Architecture: Built for Read-Heavy Decades
+The remaining work extended beyond drawing an extrusion. It needed mounting design, prototypes, qualification and a production order. Richard Lane directed the team toward an off-the-shelf cooler: selecting a solution in August and implementing it in September left insufficient time for a custom extrusion. A proprietary design could be reconsidered after the available alternatives had been evaluated.
 
-- **Trigger:** Streaming dozens of simultaneous video zones from spinning media for years demands fault tolerance that standard RAID — with its rigid drive-matching — handles poorly in a field-serviced consumer context.
-- **Intervention:** RAID-K, a proprietary fault-tolerance scheme optimized for high-bitrate streaming with hot-spare protection and tolerance for mixed drives; a hot-swappable 14-bay cage; 400-cycle run-in stress testing to kill infant mortality in latches and loading mechanisms; and the mandatory "1-minute rule" — a 60-second power-down wait before drive extraction to prevent head crashes on spinning platters.
-- **Result:** Single-drive failures survived with zero data loss, 50 simultaneous DVD-quality streams (15 at Blu-ray quality) sustained, and libraries past 10,000 titles served from clustered arrays.
+The team continued with active-cooler evaluation. In August, Forster compared the server with the replacement CPU fan switched off and on using an external supply. Rob Wudrick and Andrzej Kocan also assessed the audible change. Their observations described the additional fan sound blending into the existing server noise. That test belonged to the active replacement cooler; the earlier passive extrusion remained a separate proposal.
 
-## III. Governance & Rhythm
+## Making the power-supply adapter explicit
 
-- **The Pulse:** High-friction NPI cycles gated by run-in validation; field-service discipline codified into kits and protocols rather than tribal knowledge.
-- **The Artifacts:** The SVC-KIT-0130 field-replacement kit for the known-failure-point power supply; the kOS BSD-derived operating system tuned for read-heavy streaming and RAID-K math; the proprietary disk cartridge lineage up to 6 TB.
+A later power-supply change required an adapter at the rear of the server. Drawing 501-1211-00 identifies it as the IEC320 filler for the Sparkle FSP650. Its revision history records Rob Wudrick's initial rough 2D drawing in February 2014, followed by my creation of the 3D model and reformatted print on March 6.
 
-## IV. Quantified Impact
+The assembly view describes how the sheet-metal pieces come together: align them with half-shears, then weld around the perimeter. A separate view calls for the PEM nuts. These details serve different purposes. The half-shears locate pieces during fabrication; the completed adapter still has to provide the correct dimensions and mounting locations.
 
-- **Scaled** to 72 TB across fourteen hot-swappable proprietary cartridges.
-- **Sustained** 50 simultaneous DVD-quality zones, 15 Blu-ray-quality bitstreams, from one 3U array.
-- **Maintained** an 11-year active production run (2007–2018) against industry obsolescence cycles.
-- **Survived** single-drive failures with zero data loss via RAID-K with hot-spare protection.
-- **Held** a 30°C hard thermal ceiling on a 40 CFM forced-convection budget.
-- **Outlived** its own depreciation curve — grandfathered units at $2,000–$3,800 on the secondary market.
+## Checking the requirement behind an apparent defect
 
-## V. Source Trail
+That distinction became consequential during incoming inspection in May 2014. Sanmina reported a batch of 100 adapters with two apparently missing holes. Manufacturing escalated the discrepancy as a risk to KSERVER-5000 production.
 
-The claims above rest on the project's primary evidence archive — service kits, thermal specifications, and the settlement record — compiled through the NotebookLM forensic registry:
+I explained that the 0.125-inch features were half-shears used for alignment during fabrication. They had no further function once fabrication was complete. My proposed disposition depended on the finished part's physical dimensions and PEM locations being correct, and I asked the team to install a part to confirm the fit.
 
-- SVC-KIT-0130 — the Sparkle FSP700PSASK-KS power-supply field-replacement kit (the primary aging failure point).
-- KDISK-6000-L — the proprietary cartridge at the 72 TB ceiling.
-- The thermal specification: 40 CFM, 86°F intake ceiling, clearance hard limits.
-- *DVD CCA v. Kaleidescape* settlement record — the November 30, 2014 grandfather line.
-- kOS documentation — the BSD-derived streaming kernel and RAID-K architecture.
+The clarification established what needed to be checked, but it did not complete the check. The power supply had not yet arrived, so Sanmina could not assemble the sample that day. Yamil Ramirez also requested an ECO or DCO update so future inspections would not reject the same condition. My later status reports and exchange with Wudrick still carried the documentation question, including whether the earlier adapter needed similar treatment. The retained record does not establish the final fit or shipment outcome.
+
+## Qualification remained a team effort
+
+The electrical qualification had its own evidence and ownership. On May 2, Andrzej Kocan reported that the server with the FSP650EGN-KS supply had passed radiated and conducted emissions pre-scan at Ultratech. That result supported the hardware team's PSU work; it did not answer the later mechanical installation question.
+
+Drive changes brought another set of constraints. Kocan's April evaluation distinguished the fourteen vertical drives in the 3U server from the smaller horizontal arrangement in the 1U product, and called for longer testing of the proposed drives. In December, Swapnil Patel's long-term test summary reported clean read/write stress logs alongside SMART errors seen through a separate monitoring system. The mixed observations required investigation rather than a blanket reliability claim.
+
+## Keeping drawings aligned with production
+
+The sustaining record also shows how an established supplier can hold details that the current CAD package has not absorbed. In January 2015, a drawing update effort found legacy redlines on server sheet metal. I reported no additional changes queued against the listed parts. Wudrick explained that the redlines predated me and were still absent from the current 3D drawings; Elton Armstrong subsequently reported the decision to keep the 1U and 3U metalwork with Prompt.
+
+The recurring engineering task was to make the design intent legible at the interface between model, drawing, supplier and assembled product. The PSU adapter provides the clearest example: a feature used to make the part had been interpreted as a requirement of the finished part. Resolving that interpretation required both a mechanical explanation and an explicit path to fit verification and document control.
