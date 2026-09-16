@@ -2,116 +2,109 @@
 title: Extension Switch (Elvis)
 slug: extension-switches
 tier: deep_dive
-description: 'Noon ''Elvis'' extension switch (2016-18): recovered 100% yield in EVT2 by isolating a microscopic 0.1 mm CAD geometry offset that threatened mass-production viability.'
+description: 'Mechanical development and reliability work for Noon’s Extension Switch: cap retention, controlled gluing, switch feel, molded-part review and test requirements.'
 category: consumer_electronics
-date: 2016-12-12 00:00:00+00:00
+date: '2017-03-03'
+endDate: '2017-07-12'
+duration: 2017 mechanical development and reliability
+job_title: mechanical_engineer
 draft: false
 employer: noon
-endDate: 2018-08-01 00:00:00+00:00
 industry: consumer_electronics
 listed: true
-forensic_metrics:
-  financial: Die-cast capacity scaled to 14,211 components/day for launch volume; 720-unit EVT2 build directed; yield crisis resolved without re-tooling.
-  process: 0% to 100% EVT2 yield via the 0.1 mm geometry fix and PSA-to-structural-glue migration; 110,000-cycle main-switch validation; 30 kg anthropometric crush standard passed.
-  governance: Weekly pulse with line-down management; named issue trackers; retroactive 10-year mandate absorbed through re-derived test plans.
-forensic_summary:
-  trigger: Seven of seven EVT units failed with floating caps — a 0.1 mm molded-vs-CAD geometry offset that no adhesive could bridge — while a 10-year lifetime requirement arrived after the architecture was already set.
-  intervention: Corrected the geometry at source, migrated to liquid structural acrylic glue that fills the tolerance void, and re-derived the entire validation plan from a decade-scale usage model.
-  result: 100% EVT2 yield, a validated 10-year service life, and a switch that survives a falling adult.
-primary_home: mech
-production: production
-productionScale: series
 tags:
-- Crisis
-- Mechanism
-- Leadership
-targets:
-- main
-- mech
-teamSize: '1'
-theme: hyperspace
+- mechanical
+- mechanism
+- dfm
+- npi
+- failure-analysis
+theme: article
+heroImage: /assets/extension-switches/full-pass-263/cap-fixture.jpg
 cyberspace:
   enable: true
   layout: linear
   stickies:
-  - data:
-      columns: 3
-      layout: masonry
-      scattered: true
-      images:
-      - alt: IMG_20170420_171537
-        src: /assets/extension-switches/bubbles/03_click_testing/IMG_20170420_171537-xl.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170420_171607
-        src: /assets/extension-switches/bubbles/03_click_testing/IMG_20170420_171607-xl.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170420_171705
-        src: /assets/extension-switches/bubbles/03_click_testing/IMG_20170420_171705-xl.webp
-        aspectRatio: 1.5
-      - alt: IMG_20170420_171744
-        src: /assets/extension-switches/bubbles/03_click_testing/IMG_20170420_171744-xl.webp
-        aspectRatio: 1.5
-    featuredIndices: []
-    id: 03_click_testing
+  - id: full_pass_263_e263-f01
     type: gallery
-    title: Click Testing
+    title: Front housing in the cap-assembly fixture
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/extension-switches/full-pass-263/cap-fixture.jpg
+        alt: A white Extension Switch front housing seated in a clear assembly fixture, showing the supporting and locating features.
+        caption: The Extension Switch front housing seated in a clear assembly fixture during the April 2017 cap-bonding work. The fixture holds the housing while the cap is fitted.
+        aspectRatio: 1.3331503841931942
+    featuredIndices: []
+    deck: []
+  - id: full_pass_263_e263-f02
+    type: gallery
+    title: Placing the cap
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/extension-switches/full-pass-263/cap-placement.jpg
+        alt: Hands placing a white plastic cap onto the front housing in the fixture.
+        caption: Placing the cap onto the front housing in the April 2017 glue-development fixture. The May assembly SOP separately specifies dispensing, cap placement and at least five hours of clamping.
+        aspectRatio: 1.3331503841931942
+    featuredIndices: []
+    deck: []
+  - id: full_pass_263_e263-f03
+    type: gallery
+    title: The switch test rig
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/extension-switches/full-pass-263/switch-test-rig.webp
+        alt: Several white switch assemblies beneath vertical actuators on a test rig.
+        caption: Switch assemblies beneath the actuators of a test rig in the archived April 20, 2017 photo sequence.
+        aspectRatio: 0.7502930832356389
+    featuredIndices: []
     deck: []
 ---
 
-# Elvis Extension Switch Forensic Report
+# Extension Switch (Elvis)
 
-## I. Project Summary
+Noon's Extension Switch gave each group of lights a familiar physical control while communicating with the Room Director to coordinate the room. A click switched an individual light on or off; the narrow dimmer control adjusted its brightness. The product's simplicity at the wall depended on a more involved mechanism behind the cap.
 
-- **Role:** Principal Mechanical Architect.
-- **Mandate:** Deliver the high-fidelity extension switch complementing the Room Director within the Noon lighting ecosystem — consumer-electronics finish, infrastructure-grade life.
-- **Core Achievement:** Recovered a 100% assembly failure to 100% EVT2 yield by isolating a 0.1 mm CAD geometry offset that chemistry could not fix, then validated the design for a retroactively imposed 10-year operational lifetime.
+My contribution was on the Locoroll mechanical-development and reliability side: reviewing molded parts and tooling, working through test requirements and following manufacturing issues with the suppliers. Colin Davis at Function Engineering authored the Elvis preload and housing-clearance analyses. FIH coordinated assembly processes and testing, while Memtech handled molding and tooling actions.
 
-## II. The Anatomy of Failure
+## A familiar switch with a coupled mechanism
 
-### 1. The Floating Cap: A 0.1 mm Phantom
+The front cap, dimmer key, front housing and rear housing had to move and assemble together without losing the clean exterior. The assembly record shows the dimmer key and cap joined to the front case, with the circuit board, flex, carrier and spring assemblies behind them. This made cap retention, operating feel and the visible gaps related engineering problems.
 
-- **Trigger:** Seven of seven EVT units failed with the plastic cap "floating" free under simple handling. The team first misdiagnosed it as weak chemistry and swapped to a stronger adhesive — which also failed, because strength is irrelevant when surfaces don't touch. Forensic metrology found the truth: the adhesive pocket was designed at 0.20 mm, molded at 0.30 mm, and the specified tape was 0.25 mm thick. The math doesn't bond: 0.30 minus 0.25 leaves air.
-- **Intervention:** Corrected the CAD geometry offset at the source and migrated from fixed-thickness pressure-sensitive adhesive to liquid-applied structural acrylic glue — which fills the tolerance void before curing, decoupling assembly yield from molding tolerance entirely.
-- **Result:** 100% yield in EVT2, with the bonded assembly passing the 30 kg crush test, 1.3 m drops, 60-cycle rapid pulls, and 168-hour heat/humidity stress that the tape never survived.
+## Holding the cap meant controlling the process
 
-### 2. The Retroactive Decade
+Cap separation appeared in ordinary handling in January 2017. The working issue record describes dirt collecting in the seam and parts separating easily. Increasing the tape area and selecting a stronger pressure-sensitive adhesive were early responses, but the revised tape still failed a March crush test.
 
-- **Trigger:** The 10-year operational lifetime requirement was not present at kick-off — it arrived after the architecture was set, against components whose vendors refused decade-long guarantees and a mechanical strategy designed to consumer-electronics norms.
-- **Intervention:** Re-derived the entire validation plan from a usage model (10 years × 365 days × actuations/day × safety factor): main switch targets inflated to 110,000 cycles, dimmer to 55,000, air-gap to the UL 1472-aligned count; environmental stress scaled from 168 toward 500 hours at 45°C/95% RH. The glue migration became the enabling factor — the old adhesive peeled under exactly the stress needed to prove longevity.
-- **Result:** The switch validated for a 10-year service life with zero planned maintenance, absorbing the vendor-guarantee gap through accelerated life testing.
+The investigation also found a geometry mismatch. The adhesive pocket differed by 0.1 mm from the intended geometry, which translated into an uneven visible gap. The working synopsis records a tooling correction and revised samples received around April 20. Bonding material and joint geometry therefore had to be evaluated together.
 
-### 3. Engineering for the Falling Human
+FIH then tested glued samples. The working synopsis records drop and crush passes while asking how the new fixtures would control and inspect the gap after gluing. The May action review keeps the Elvis cap issue under DVT monitoring and identifies Ellen at FIH with the assembly-process work. Moving from successful samples to a repeatable operation required dispensing, positioning and inspection controls.
 
-- **Trigger:** A wall switch must survive not just fingers but bodies. The crush requirement was derived from CDC anthropometric data: an average 89 kg U.S. male transferring roughly a third of body mass in a trip-and-fall — 30 kg onto the switch face.
-- **Intervention:** Built the protocol around simulated trauma: a 50 mm aluminum fixture faced with 2 mm of foam standing in for human contact, loaded at 20 mm/minute across three zones; a parallel 100 N extreme-force test walked a blunted 16 mm rod across a nine-point grid.
-- **Result:** Quantified, repeatable proof against the realistic worst case — with the observed failure modes (touch-panel float, LCD cracking) closed by the structural bond.
+By the May 10 assembly SOP, the cap operation specified FC1682 glue, a dispensing fixture, a separate cap-placement fixture and at least five hours in a clamping jig. The accompanying material data sheet identifies FC-1682 as a moisture-reactive polyurethane. The manufacturing change was more than replacing tape with a stronger bond: it added dispensing, positioning and clamping controls around the joint.
 
-### 4. The Cheep and the Blind Hand
+## The feel depended on the hidden stack
 
-- **Trigger:** Field-bound units developed an acoustic "cheep" — the spring contact surface scratching itself where dry lubricant was missing — and the tight control spacing risked accidental actuation in blind nighttime use.
-- **Intervention:** Locked dry lubricant into the assembly specification after a two-grease comparative study, and leaned on MIL-STD-1472G human-engineering criteria: minimum control separations and shape coding, giving the wide smooth paddle and the narrow raised dimmer key distinct signatures for the blind hand.
-- **Result:** A silent switch a user can operate by touch alone — ergonomics by standard, not by accident.
+A second problem sat behind the moving face. Colin Davis's tact-switch analysis followed the tolerance loop through the carrier, housings, shoulder screw, O-ring, circuit board and switch. Its conclusion warned that the preload could approach the actuation stroke and called for better understanding of insert control and O-ring compression. A separate analysis examined the clearance that allowed the front housing to tilt inside the rear housing.
 
-## III. Governance & Rhythm
+The supplier action list connects that sensitivity to real assembly variation. Tilted screw nuts caused a key-feel problem; Memtech was tuning its heat-staking support and planning checks of nut alignment. Elsewhere, a main-switch squeak was traced to scratched spring-contact surfaces on units missing dry lubricant. The recorded response combined further life cycling with an instruction to retain the lubricant and add a UV-lamp inspection station.
 
-- **The Pulse:** Weekly pulse with line-down management through EVT/DVT, issue trackers carrying named defects, and production planning down to die-casting and CNC shift schedules — capacity scaled to 14,211 die-cast components per day for launch volume.
-- **The Artifacts:** EVT1/EVT2 reliability test reports; the drop-test record; the floating-cap failure log; the action review documenting the retroactive 10-year scope gap.
+## Test requirements and test results had different jobs
 
-## IV. Quantified Impact
+The reliability program was also being revised during development. In the March discussion recorded in the action review, FIH said the initial architecture had not been established around a ten-year life requirement and raised component-guarantee and schedule concerns. My feedback was part of the subsequent test-plan discussion. Turning that requirement into tests was an engineering task of its own.
 
-- **Recovered** 0% to 100% EVT2 yield by isolating the 0.1 mm geometry offset after chemical fixes failed.
-- **Eliminated** 100% of floating-cap failures via the PSA-to-structural-glue migration.
-- **Validated** a 10-year operational lifetime: 110,000 main-switch cycles, 500-hour environmental scaling.
-- **Derived** the 30 kg crush standard from anthropometric fall data and passed it.
-- **Scaled** die-cast capacity to 14,211 units/day; **directed** the 720-unit EVT2 build.
+The July key-life report retained an overall failure even while recording functional and visual passes. Its tactile measurements were judged against separate criteria. Later DVT summaries recorded a suggested change to tactile thresholds and waiver remarks alongside passed tests, failures and continuing work. Test results and acceptance decisions had to be tracked separately.
 
-## V. Source Trail
+## Turning findings into inspectable parts
 
-The claims above rest on the project's primary evidence archive — reliability reports, metrology, and action reviews — compiled through the NotebookLM forensic registry:
+The exterior finish also needed concrete feedback. In my April 26 review of the dimmer-key steel polish, I documented uneven polish, stress marks and dents by mold cavity. The purpose was to turn a general cosmetic concern into defects a supplier could locate and correct in the tool.
 
-- `EVT1_Reliability_Test_Reports.pdf` / `EVT2_Reliability_Test_Reports.pdf` — the failure and recovery record.
-- `Plastic cap Floating-7/7 [Elvis]` — the 100% failure log.
-- `20170414_drop test.pdf` — drop validation.
-- `Locorol action review_05082017 ver2.pdf` — documentation of the retroactive 10-year mandate.
-- `Plastic_Cap_Elvis_LCR` — the cap assembly record.
-- `NOON_misc_2.pdf` — the MIL-STD-1472G human-engineering basis and damping-grease standards.
+The shared Sativa and Elvis materials work also kept alternatives open. A March proposal set out how to compare uncoated resin candidates with the existing coated material, using UV exposure, scratch testing and controlled photographic inspection before choosing a final material. It defined a selection process rather than recording a completed material change.
+
+That work also depended on usable specifications and release information. The March working notes track gaps in cosmetic criteria, gap specifications, appearance callouts and drawing formats, along with requests to the people responsible for them. This documentation work connected design review to the measurements and acceptance decisions needed during a build.
+
+## What the work established
+
+The result was a defined cap-bonding operation, targeted tooling feedback and clearer checks for assembly feel and appearance. My contribution connected mechanical review and reliability questions to supplier actions and inspectable requirements, tying the visible behavior of the switch to the joint, part or process that controlled it.
