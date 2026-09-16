@@ -2,58 +2,104 @@
 title: Morpheus
 slug: morpheus
 tier: deep_dive
-description: '''Morpheus'' pilot rescue (2008-09): traced a catastrophic 100% digital failure rate to mechanical violence — PCB flex during assembly — salvaging 350 units and stabilizing logistics across 400 unique SKUs.'
 category: home_entertainment
 client: []
-date: 2008-01-01 00:00:00+00:00
+date: '2008-10-17'
+endDate: '2009-01-23'
+duration: Late-2008 study and early-2009 continuation
+job_title: mechanical_engineer
+description: Mechanical architecture for a Kaleidescape Blu-ray system study, carrying reuse, board, drive and airflow decisions into the Hydra and Titan definitions.
 draft: false
-duration: 1 Year
-employer: mechanistic
-endDate: 2009-01-01 00:00:00+00:00
+employer: kaleidescape
 industry: consumer_electronics
 listed: true
-production: prototype
-productionScale: one_off
-role: mechanical_engineer
 tags:
-- Thermal
-theme: hyperspace
-toolIcons: []
-tools:
-- pro_engineer
-teamSize: INT 3
+- mechanical
+- storage-media
+- consumer-electronics
+theme: article
+heroImage: /assets/morpheus/full-pass-262/mechanical-exploded-view.png
 cyberspace:
   enable: true
   layout: linear
-  narrative: []
   stickies:
-  - align: center
+  - id: full_pass_262_m262-f01
+    type: gallery
+    title: Morpheus mechanical study
     data:
-      data: {}
-      featuredIndices: []
-      scattered: false
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/morpheus/full-pass-262/mechanical-exploded-view.png
+        alt: Exploded line drawing of the Morpheus mechanical study, showing the enclosure, boards, optical drive, four drive positions and two fans.
+        caption: Exploded arrangement from the November 2008 Morpheus mechanical brief. The drawing sets out a proposed integrated system around reused enclosure parts; it does not document a built or qualified unit.
+        aspectRatio: 1.0
     featuredIndices: []
-    id: intro
-    legacy_deck: []
-    text: <strong>YEAR:</strong> 2008<br/><strong>ROLE:</strong> Principal Architect
-    type: media
-    title: Morpheus (Orpheus)
+    deck: []
+  - id: full_pass_262_m262-f02
+    type: gallery
+    title: Reuse requirements
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/morpheus/full-pass-262/mechanical-requirements.png
+        alt: Front and rear views beside the Morpheus mechanical requirements, with baseline requirements and a slot-loading optical drive marked as a stretch.
+        caption: The Morpheus brief distinguishes baseline requirements from a stretch option. Reuse of KS-100 mechanics, Blu-ray capability and a locking HDMI connector were requirements; a slot-loading drive was still a stretch choice.
+        aspectRatio: 1.7126269956458635
+    featuredIndices: []
+    deck: []
+  - id: full_pass_262_m262-f03
+    type: gallery
+    title: Board and connector layout
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/morpheus/full-pass-262/board-interface-layout.png
+        alt: Top and edge views of the proposed Morpheus boards, rear connectors and inter-board connections.
+        caption: Board and connector arrangement in the Morpheus mechanical brief. The layout made the physical interfaces explicit while the team was still evaluating shared boards, connector positions and midplane options.
+        aspectRatio: 0.7992177314211213
+    featuredIndices: []
     deck: []
 ---
 
-### Morpheus (Orpheus) Forensic Report
+# Morpheus
 
-#### I. PROJECT SUMMARY
+Morpheus was a late-2008 mechanical study for an integrated Blu-ray system in Kaleidescape's Megalon program. The design brief called for maximum reuse of KS-100 mechanics while adding new optical-drive and connector requirements. It was an exercise in deciding where an existing product architecture could carry forward and where new hardware would force a change.
 
-- **Role:** Principal Mechanical Architect (Mechanistic)
-- **Mandate:** Rescue the "Orpheus" pilot build from a catastrophic 100% failure rate.
-- **Core Achievement:** Identified "Mechanical Violence" (PCB flexing during assembly) as the root cause of digital failure, salvaging 350 units and stabilizing the logistics of 400 unique SKUs.
+I developed the mechanical layouts and briefs with the hardware team. Adrian Fung coordinated the electronics architecture, Greg Curry developed connector and board requirements, Vince Di Lello handled PCB layout, and Nathan Forster developed thermal concepts. The November project-update agenda assigned mechanical architecture to me, thermals to Nathan, and the hardware architecture and schedule to Adrian.
 
-#### II. THE ANATOMY OF FAILURE (Heuristic Analysis)
+## Setting the reuse boundary
 
-- **The Trigger:** The "Orpheus" units were bricking immediately. Firmware lead (Jenim) suspected bad silicon.
-- **The Diagnosis:** Forensic analysis revealed the "Thumb of God"—assemblers were using excessive force to close the box due to tight tolerances, effectively crushing the PCB.
-- **The Fix:**
-  1.  **Mechanical Relief:** Relieved interference points to eliminate assembly stress.
-  2.  **Tooling Hack:** Modified the doorframe tool to clear the oversized IR lens (0.60" vs 0.36" gap) without scrapping the lens mold.
-  3.  **Acoustics:** Tuned thermal fans to 7-8V, dropping noise from 31dBA to 23dBA.
+The October meeting set a starting envelope of no more than two rack units unless the team made a deliberate decision to exceed it. That was a design constraint, not a measured production size. My assignments included a Morpheus layout snapshot and a mechanical schedule that connected prototype milestones to the larger program.
+
+The mechanical brief separated requirements from stretch ideas. It called for lower mechanical cost than the KS-100 and maximum reuse of the chassis, cover, front and side plastics, interface boards, buttons and feet. Blu-ray capability, a locking HDMI connector and a named power supply were baseline requirements. A slot-loading optical drive remained a stretch option. The distinction mattered because each new opening, board position or vent could reduce the value of reuse.
+
+The exploded drawing made that negotiation concrete: enclosure parts, an optical drive, the drive stack, two fans and the boards had to occupy one coordinated arrangement. These were development views used to review the proposed packaging, not evidence that the configuration had been built or qualified.
+
+## Making the interfaces work together
+
+Early architecture discussions explored a reduced-cable arrangement. The drive cage could connect through a drive plane and an expansion card standing vertically in a board connector. The team also considered similar connections for the optical drive and fan assembly, while the front illumination board's attachment remained undecided. The proposal joined mechanical support, electrical connection and assembly order at the same interfaces.
+
+Common electronics did not make the rear panel common automatically. By November, Greg's connector plan used a shared main board with different component populations and a separate board for serial control and extra audio zones. I checked the mechanical interpretation against the connector drawing and caught a reversed pair in its accompanying list. The drawing became the controlling reference for that correction.
+
+A proposed direct-sale version introduced another physical distinction: it would omit the extra audio zones. Richard Lane asked me to work out a rear-panel blanking plate for the unused connector openings. His follow-up explicitly extended the proposal to Atlas Orpheus as well. The two programs therefore appear in the same correspondence, but their hardware histories cannot be treated as interchangeable.
+
+## Sharing layouts with the thermal design
+
+Nathan's thermal work affected where boards, fans and baffles could go. A November intake-baffle concept separated the two fan intakes to reduce recirculation through a stopped fan. Its intended benefit was continued cooling during a fan failure. That remained a proposed design behavior, rather than a demonstrated reliability result.
+
+On December 1, I sent Nathan one-to-one top views of Morpheus and Pinata so he could arrange alternative baffles and fan configurations at the correct relative scale. His reply requested updated power-supply and board blocks, showing why a layout exchange needed to preserve the current component definitions as well as their outlines.
+
+The December midplane discussion exposed a limit to commonality. Different distances between the main board and front illumination made a single rigid board difficult to reuse. Nathan proposed a flexible connection. I was working on the midplane outlines and agreed that a flexible interconnect could make a shared arrangement possible, while flagging the low current capacity of the proposed ZIF connections. Mechanical flexibility did not remove the electrical power constraint.
+
+## What the study established
+
+The documented deliverables were a mechanical brief, review drawings, connector-fit work and packaging discussions shared with the electronics, thermal and manufacturing teams. The brief also listed the reliability and environmental work the product would need, including temperature, humidity, shock and vibration. Those requirements were still separate from qualification results.
+
+The work continued as the Megalon product definitions became more specific. The December 3 hardware meeting, recorded by Rob Wudrick in a December 11 message, named Hydra as the integrated Ksystem and Titan as its direct-sale variant. On December 10, Nathan described his preliminary thermal layout as being for "Morpheus or Titan or whatever" and then circulated a Hydra layout. The Morpheus study was carrying into those system definitions.
+
+That continuity still required changes to the physical arrangement. Nathan proposed reusing the entire drive cage, modifying the optical-drive bracket to let air flow underneath it, and adding an airflow-isolator baffle for the hard drives. The midplane and internal baffles depended on the actual spacing inside the enclosure, so he needed my 3D models to reach a final layout.
+
+The interface work continued into January. Vince checked Greg's connector recommendations against the Mars and Titan/Hydra platforms from a PCB perspective, while asking me to review mechanical fit and specify the Ethernet/USB connector's remaining position. Nathan's January 23 cabling update set aside the broad midplane approach for the moment and considered a more limited connection between the optical drive, power supply and main board. The contribution was a mechanical definition that the team could inspect and revise as the next designs took shape. The selected record does not establish the final qualification or shipment state of the November Morpheus arrangement.
