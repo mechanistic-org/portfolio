@@ -1565,6 +1565,95 @@ export const projectArticleTrial = {
 	        "description": "Product views and a source-based sequence diagram connect the finished enclosure to the location, clearance and spring-force decisions."
 	    }
 	},
+	"kserver-1500": {
+	    "sections": {
+	        "product": "a-server-built-around-removable-storage",
+	        "mechanical": "keeping-the-drawing-and-the-built-part-aligned",
+	        "power": "a-replacement-power-supply-is-a-system-decision",
+	        "compute": "choosing-the-next-motherboard",
+	        "storage": "qualifying-drives-in-the-enclosure",
+	        "outcome": "what-the-record-establishes"
+	    },
+	    "media": {
+	        "H258-F01": {
+	            "galleryId": "full_pass_258_h258-f01",
+	            "src": "/assets/kserver-1500/full-pass-258/server-closed.jpg"
+	        },
+	        "H258-F02": {
+	            "galleryId": "full_pass_258_h258-f02",
+	            "src": "/assets/kserver-1500/full-pass-258/server-cartridges.jpg"
+	        },
+	        "H258-F03": {
+	            "galleryId": "full_pass_258_h258-f03",
+	            "src": "/assets/kserver-1500/full-pass-258/disk-cartridge.jpg"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "product",
+	            "parent": "product",
+	            "eyebrow": "Product and service access",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "H258-F02"
+	            ]
+	        },
+	        {
+	            "key": "mechanical",
+	            "parent": "mechanical",
+	            "eyebrow": "Mechanical sustaining",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "power",
+	            "parent": "power",
+	            "eyebrow": "Power-supply evaluation",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "compute",
+	            "parent": "compute",
+	            "eyebrow": "Compute alternatives",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "storage",
+	            "parent": "storage",
+	            "eyebrow": "Storage qualification",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "H258-F03"
+	            ]
+	        },
+	        {
+	            "key": "outcome",
+	            "parent": "outcome",
+	            "eyebrow": "Documented outcomes",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Product form, removable storage and sustaining decisions",
+	        "description": "Archive product photographs show the enclosed server, its front-access storage and the removable disk cartridge."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);

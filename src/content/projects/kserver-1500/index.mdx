@@ -1,99 +1,114 @@
 ---
-title: KSERVER-1500 'Hunter'
+title: KSERVER-1500 1U Server
 slug: kserver-1500
 tier: deep_dive
 category: enterprise_hardware
 client: []
-date: 2014-03-14 00:00:00+00:00
-description: 'Kaleidescape KSERVER-1500 ''Hunter'' refresh (2014): supply-chain triage against a hard EOL cliff — four power supplies failed qualification before the fifth passed, consumer NAS drives earned an enterprise slot, and a 300-chipset Last Time Buy bridged the line to the next generation.'
-forensic_metrics:
-  financial: 300-chipset Last Time Buy secured Premiere-line revenue continuity; legacy chassis inventory preserved via bracket adaptation instead of re-tooling.
-  process: 4TB HGST Deskstar qualified after 60+ days of full-throttle stress with zero functional errors; 6TB variant rejected at 5-6°C over the 1U thermal limit; server heat output cut 24% across the drive transition.
-  governance: Weekly Hardware Team and NPI cadence; ECO-001442 and ECO-001466 releases; fastener-level deviations turned around in days.
-forensic_summary:
-  trigger: The 1U Server's motherboard, processor, and power supply all approached end-of-life at once — a line-down scenario for the Premiere line before next-generation revenue existed.
-  intervention: 'Ran parallel triage: qualified a replacement PSU after four candidate failures, stress-qualified consumer NAS drives into an enterprise slot, de-risked the compute transition past the eCos/UEFI wall, and executed a 300-chipset Last Time Buy.'
-  result: Production continuity held through the transition window; the Premiere line survived to hand off to Sundance/Terra.
+date: '2014-07-16'
+endDate: '2015-01-07'
+duration: 2014-2015 sustaining support
+job_title: mechanical_engineer
+description: 'Mechanical sustaining support for Kaleidescape’s KSERVER-1500: reconciling legacy hardware definition while the team evaluated replacement power, storage and compute for an aging 1U server.'
 draft: false
-duration: 11 Months
 employer: kaleidescape
-endDate: 2014-08-01 00:00:00+00:00
 industry: consumer_electronics
 production: production
-productionScale: series
 tags:
-- Crisis
-theme: hyperspace
-tools: []
-teamSize: INT 10
+- mechanical
+- storage-media
+- dfm
+- npi
+theme: article
+heroImage: /assets/kserver-1500/full-pass-258/server-closed.jpg
 cyberspace:
   enable: true
   layout: linear
   stickies:
-  - align: center
-    data: null
-    id: intro
-    text: <strong>YEAR:</strong> 2014<br/><strong>ROLE:</strong> Kaleidescape
-    type: media
-    title: KSERVER-1500 'Hunter'
+  - id: full_pass_258_h258-f01
+    type: gallery
+    title: Product exterior
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/kserver-1500/full-pass-258/server-closed.jpg
+        alt: Kaleidescape 1U server with a closed illuminated front cover.
+        aspectRatio: 1.8028169014084507
+        caption: KSERVER-1500 with its front cover in place, showing the low-profile enclosure and illuminated front panel.
+    featuredIndices: []
+    deck: []
+  - id: full_pass_258_h258-f02
+    type: gallery
+    title: Four front-access cartridges
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/kserver-1500/full-pass-258/server-cartridges.jpg
+        alt: Kaleidescape 1U server with four front disk cartridges, one partly withdrawn, and side trim removed.
+        aspectRatio: 1.7261219792865363
+        caption: The 1U server with its front cover and side trim removed, exposing four cartridge positions. One cartridge is partly withdrawn; the top lid remains in place.
+    featuredIndices: []
+    deck: []
+  - id: full_pass_258_h258-f03
+    type: gallery
+    title: Removable disk cartridge
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/kserver-1500/full-pass-258/disk-cartridge.jpg
+        alt: Low-profile Kaleidescape disk cartridge with a perforated metal housing and white front handle.
+        aspectRatio: 1.3333333333333333
+        caption: A low-profile disk cartridge from the KSERVER-1500 archive, showing the perforated housing and front pull handle.
+    featuredIndices: []
     deck: []
 ---
 
-# KSERVER-1500 "Hunter" Forensic Report
+# KSERVER-1500 1U Server
 
-## I. Project Summary
+Kaleidescape's KSERVER-1500 put a networked movie library into one rack unit. By 2014, sustaining that platform meant working around aging components while preserving the physical interfaces and manufacturing knowledge already in use. The work crossed mechanical definition, power-supply qualification, storage qualification and motherboard replacement planning.
 
-- **Role:** Senior Mechanical Design Engineer.
-- **Mandate:** Execute the 1U Server refresh ("Hunter") to extend the Premiere line's lifecycle against simultaneous end-of-life threats to the motherboard, processor, and power supply — without re-tooling the chassis.
-- **Core Achievement:** Stabilized the 1U/3U server supply chain through component qualification and a 300-chipset Last Time Buy, bridging the revenue gap until the next-generation Sundance/Terra platform launched.
+My part of that record sits in mechanical sustaining support. I supplied 3D data for the server, and Rob Wudrick brought me a specific mismatch between the lid's rack-ear alignment feature and the parts being built. Electrical and disk qualification belonged to the hardware team; purchasing and supplier-transition decisions involved manufacturing.
 
-## II. The Anatomy of Failure
+## A server built around removable storage
 
-### 1. Supply Crisis: The EOL Cliff
+The 1U enclosure held four front-access disk cartridges. Kaleidescape's RAID-K architecture allowed a failed cartridge to be replaced while the system continued operating. Storage and playback were separate jobs: the server delivered content over the network to Kaleidescape players elsewhere in the home.
 
-- **Trigger:** The legacy Commell motherboard and its processor were scheduled for end-of-life in June 2015, with legacy power-supply availability drying up first — a line-down scenario for the Premiere 1U Server before next-generation revenue existed to replace it.
-- **Intervention:** Initiated the 1U Server Refresh as parallel triage: qualify a replacement power supply, qualify lower-cost storage, evaluate replacement compute, and execute a Last Time Buy of 300 legacy chipsets to hold the line while engineering caught up.
-- **Result:** Production continuity secured through the transition window; the Premiere line survived to hand off to Sundance.
+That product arrangement imposed physical constraints on every replacement component. The cartridges shared a shallow enclosure with power, compute and cooling. The published installation guidance required clear space at both the front and rear. Keeping the outside form did not make a new internal component a drop-in replacement.
 
-### 2. The Power Supply Gauntlet
+## Keeping the drawing and the built part aligned
 
-- **Trigger:** Four candidates failed in sequence: the Sparkle FSP150-5G01 went EOL mid-evaluation; the Skynet SNP-TX12 arrived with a 20-pin connector against a 24-pin requirement and failed DC load testing on cross-regulation and 12V rail capacity; the SPI FSP150-50LM failed mechanical fit with a "touch fit" against the 1U chassis lid; the Aras ARP-2215's fan was too loud for a home-theater product.
-- **Intervention:** Qualified the Sparkle SPI300F4BB — quiet fan, clean lid clearance — and engineered the adaptation: a custom mounting bracket bridging the new supply to the legacy chassis rear panel, with the 1U chassis base redlined Rev C to Rev D, preserving the existing inventory of metalwork.
-- **Result:** A drop-in-adjacent power solution that let the team scrap the EOL supplies while consuming the verified chassis stock.
+In July 2014, Rob asked me to update the 3D model's rack-ear alignment detail to match the lid being produced. The model showed a joined extrusion; the production detail differed. He supplied redlined drawings and planned to capture the changes in the two-dimensional documentation for Sanmina. The immediate task was to make the product definition describe the hardware accurately.
 
-### 3. Storage Crisis: NAS Drives in an Enterprise Slot
+This was an existing design with a long manufacturing history. The same base and cover redline revisions appear in correspondence from September 2008, when Rob asked Gabe Cohn at Argyle Design to incorporate production changes. Those records distinguish maintaining the server from creating its original enclosure.
 
-- **Trigger:** Enterprise-class Ultrastar drives needed a lower-cost successor, but consumer NAS drives carry weaker rotational-vibration sensing — a real risk in a dense four-drive 1U chassis.
-- **Intervention:** Ran a multi-month qualification on the HGST 4TB Deskstar NAS: 60+ days of 100% throttle read/write stress (hundreds of millions of operations, zero functional errors), KEAOS thermal validation, voltage-ripple and acoustic testing (32.8 dBA idle), head load/unload and spin cycling, plus an explicit gap analysis against Ultrastar RV sensors. When the in-house monitoring flagged SMART anomalies, cross-verified with HGST's HiTest tool — drives healthy, warnings spurious.
-- **Result:** The 4TB Deskstar released to production (ECO-001442, September 2014), running 2-4°C cooler than the Ultrastar it replaced. The 6TB variant failed the same gauntlet — 5-6°C over the 1U thermal limit — and was rejected: the process worked in both directions.
+The difference mattered again during a January 2015 supplier review. Prompt Precision was building from redlines that were not incorporated in the 3D files. I confirmed that I had no additional changes queued against the parts. Rob explained that the old redlines predated my involvement and recommended keeping the metalwork at Prompt until the anticipated motherboard or power-supply changes. Elton Armstrong then confirmed Kevin Smyth's agreement to retain the supplier. Moving the work would also have required recovering its actual manufacturing definition.
 
-### 4. Compute Crisis: The UEFI Wall
+## A replacement power supply is a system decision
 
-- **Trigger:** The replacement-candidate Atom Baytrail platform hit three walls: the proprietary eCos operating system was incompatible with Baytrail's UEFI boot, standard Baytrail boards benchmarked slower than the legacy board they would replace, and few off-the-shelf boards carried the required four SATA ports.
-- **Intervention:** Pivoted the evaluation to Celeron-class parts with legacy boot for eCos compatibility, identified a four-SATA Aaeon variant, designed metal adapter brackets to slot new boards into the legacy chassis mounts — and let the 300-unit Last Time Buy absorb the schedule risk rather than forcing a premature commitment.
-- **Result:** A de-risked transition path with the production line never exposed to the software gamble.
+Andrzej Kocan's February 2015 reports show why power-supply selection remained an integration problem. An SPI FSP150-50LM sample had a touch-fit condition against the lid. An FSP150-5G01 candidate had gone end of life. A Skynet SNP-TX12 sample presented a 20-pin connector where the server needed 24 pins. Enclosed Aras and Sparkle samples differed in fan noise, with the Sparkle SPI300F4BB reported as quiet.
 
-## III. Governance & Rhythm
+Electrical testing added another constraint. The following week's report identified a cross-regulation problem with the Skynet sample and questioned whether its 12 V rail had enough current capacity. Noise was one of several qualification criteria still being worked through.
 
-- **The Pulse:** Critical-path management through weekly Hardware Team minutes and NPI meetings, down to fastener-level deviations — when the specified T4 Torx screw vanished from the vendor catalog, the T5 substitution was assessed, approved, and executed through the BOM in days.
-- **The Artifacts:** The Hunter Q3'14 vendor capabilities assessment; ECO-001466 (mechanical and PCB BOM updates); ECO-001442 (4TB drive production release); the chassis redline set (base, cover, drive cages).
+The team also considered using remaining chassis stock after a replacement supply was qualified. Its February meeting notes made that route conditional: a bracket would be needed to fit the new supply to the old chassis. The packaging work had to follow the selected electrical solution and the actual production inventory.
 
-## IV. Quantified Impact
+## Choosing the next motherboard
 
-- **Secured** production continuity with a 300-chipset Last Time Buy against a hard EOL deadline.
-- **Qualified** the Sparkle SPI300F4BB after four candidate failures spanning electrical, mechanical, and acoustic criteria.
-- **Released** the HGST 4TB Deskstar NAS to production after 60+ days of full-throttle stress with zero functional errors.
-- **Rejected** the 6TB variant on evidence — 5-6°C over the 1U thermal limit — proving the qualification gate was real.
-- **Reduced** maximum server heat output 24% (382 to 290 BTU/hr) through the drive-generation transition.
-- **Preserved** the legacy chassis inventory through bracket adaptation instead of re-tooling.
+The compute search depended on software compatibility, SATA connectivity and power consumption. January 2015 notes considered Baytrail and Celeron options, the availability of four SATA ports and eCos boot compatibility. Greg Curry favored Baytrail's low-power potential while the meeting notes preferred looking at Celeron to avoid eCos issues with the Baytrail UEFI shell. These were alternatives under evaluation.
 
-## V. Source Trail
+The same notes projected a June 2015 runout of 1U inventory. By February 2, the team recorded a commitment to 300 additional 1U chipsets. That was the planned schedule bridge while the replacement motherboard and power supply remained under evaluation.
 
-The claims above rest on the project's primary evidence archive — qualification logs, ECOs, and vendor assessments — compiled through the NotebookLM forensic registry:
+## Qualifying drives in the enclosure
 
-- `Hunter Overview Q3'14.pdf` — vendor capabilities assessment.
-- ECO-001466 — mechanical and PCB BOM updates for the refresh.
-- ECO-001442 — production release of the HGST 4TB Deskstar NAS (P/N 371-1041-00).
-- Chassis redlines — 1U base (501-1007 Rev C to D), cover, and drive-cage bracket set.
-- `PROPOSED REV RUN ORPHEUS (300pzs) 30-01.xls` — manufacturing context for the Last Time Buy.
-- `MEXICO macduff pricing_041414.xls` — cost analysis context.
+Storage qualification followed its own sequence. In April 2014, Andrzej reported successful testing of a 4TB HGST Deskstar drive in the 1U and 3U servers, including cumulative environmental and disk-stress testing with no recorded errors or retries. He also preserved the unresolved reliability tradeoff. The 1U held four drives horizontally; the 3U held as many as fourteen vertically, with a different exposure to rotational vibration. He proposed longer testing for the 3U rather than treating one result as universal.
+
+In his October 14 report for the previous week, Andrzej recorded release of the 4TB Deskstar NAS under ECO-001442. This was a separate qualification and release from the plain Deskstar tested earlier in the year.
+
+The next capacity step again met the enclosure's limits. In February 2015, Andrzej's review of Isaiah Erb's 6TB Deskstar NAS testing reported temperatures about 5–6 degrees Celsius too hot in the 1U server. The following week's report reviewed the thermal disk-stress results and again found the drive about 5 degrees Celsius too hot.
+
+## What the record establishes
+
+The engineering work was a set of connected decisions about an existing product: recover the built mechanical definition, retain a supplier that understood it, evaluate replacement components in the actual enclosure, and make schedule commitments while qualification continued. My documented mechanical involvement sits within that cross-functional effort.
+
+By the latest reports, the 4TB NAS drive was released and the team had agreed to keep legacy metalwork at Prompt. The replacement power supply and motherboard were still under evaluation. The final 1U refresh configuration and shipment outcome remain unresolved in the reviewed records.
