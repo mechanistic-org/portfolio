@@ -1,126 +1,170 @@
 ---
-title: M700 Vesta Vault Recovery
+title: M700 Disc Vault
 slug: m700
 tier: deep_dive
-category: module_subsystem
+category: home_entertainment
 client: []
-date: 2010-08-01 00:00:00+00:00
-description: 'Kaleidescape M700 ''Vesta'' disc vault recovery (2010-11): forensic root-cause analysis that arrested fleet-wide disc jams, scratching, and read errors driven by mechanical tolerance drift in the robotic carousel.'
+date: '2010-04-19'
+endDate: '2014-08-19'
+duration: 2010–2014 design and sustaining
+job_title: mechanical_engineer
+description: 'Mechanical design, production integration and reliability work for Kaleidescape’s 320-disc M700 vault: aligning the carousel, guides, rollers and optical drive through development, tooling and field investigation.'
 draft: false
 employer: kaleidescape
-endDate: 2011-07-01 00:00:00+00:00
 industry: consumer_electronics
-forensic_metrics:
-  financial: 100% of questioned carousel inventory recovered instead of scrapped; $24/unit chassis savings via staged hard tooling; $12,000 sister-rib retrofit opened a real molding process window.
-  process: 3,000,000+ field cycles analyzed; 100% of dirty-roller slippage failures eliminated by the force-dominant retrofit; slot 190-250 kill zone isolated and neutralized.
-  governance: Weekly reliability investigations across 15+ concurrent RMAs; design-flaw vs. assembly-negligence adjudication via print-vs-part measurement and golden-part substitution.
-forensic_summary:
-  trigger: Field dust collapsed roller friction while warped 320-slot carousels narrowed their slots — discs stalled, jammed, and scratched across the installed fleet.
-  intervention: Pivoted from friction-reliant to force-dominant mechanics with triple-force balance-bar springs, braced the deflecting shafts with a pillow-block extension, and re-cut the carousel tool with 320 sister ribs.
-  result: Slippage failures eliminated, 100% of questioned inventory recovered, and the fleet's failure cascade arrested.
 production: production
-productionScale: one_off
 tags:
-- Mechanism
-- Yield
-- Leadership
-theme: hyperspace
-tools: []
-teamSize: 4 (Erik Norris, Nathan Forster, Rob Wudrick, Somboun Thavy)
+- mechanical
+- storage-media
+- mechanism
+- dfm
+- npi
+theme: article
+heroImage: /assets/m700/full-pass-260/breadboard-system.jpg
 cyberspace:
   enable: true
   layout: linear
   stickies:
-  - data:
-      columns: 3
-      layout: masonry
-      scattered: true
-    featuredIndices: []
-    id: 01_vanishing_discs
+  - id: full_pass_260_m260-f01
     type: gallery
-    title: Vanishing Discs
-    deck:
-    - body: Static electricity and sensor blindness caused discs to disappear inside the vault.
-      subtitle: ''
-      title: The Crisis
-    - body: Redesigned the pinch roller assembly with solid mounts and double-strength springs.
-      subtitle: ''
-      title: The Fix
-  - data:
-      columns: 3
-      layout: masonry
-      scattered: true
+    title: Function Engineering breadboard
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/m700/full-pass-260/breadboard-system.jpg
+        alt: Development rendering of the Vesta breadboard with carousel, belt drive, kicker and pinch rollers.
+        caption: Function Engineering's August 2010 breadboard layout brings the carousel, kicker and pinch rollers into one transport system. This is a development rendering, not the final production unit.
+        aspectRatio: 1.7062314540059347
     featuredIndices: []
-    id: 02_butter_knife
+    deck: []
+  - id: full_pass_260_m260-f02
     type: gallery
-    title: Butter Knife
-    deck:
-    - body: EMI gaskets deformed into the slot path.
-      subtitle: ''
-      title: The Issue
-    - body: Dealers had to use a specific shim (butter knife) to clear the obstruction.
-      subtitle: ''
-      title: The Workaround
+    title: Full SLA carousel
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/m700/full-pass-260/sla-carousel.jpg
+        alt: Pink SLA carousel prototype with optical discs held in its slots.
+        caption: The full SLA carousel shown in Function Engineering’s August 2010 report. The prototype supported development of disc-slot geometry and handling before production molding.
+        aspectRatio: 1.3333333333333333
+    featuredIndices: []
+    deck: []
+  - id: full_pass_260_m260-f03
+    type: gallery
+    title: Prototype front bezel
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/m700/full-pass-260/prototype-bezel.jpg
+        alt: White front-bezel prototype with disc slot, three button holes and a display window.
+        caption: A front-bezel prototype from the M700 archive, with the disc opening, button positions and display window. It records product development rather than the final finish.
+        aspectRatio: 1.3333333333333333
+    featuredIndices: []
+    deck: []
+  - id: full_pass_260_m260-f05
+    type: gallery
+    title: Carousel inspection geometry
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/m700/full-pass-260/carousel-inspection.jpg
+        alt: Top view of carousel reference geometry with numbered gates and disc-slot positions.
+        caption: Reference carousel geometry from the April 10, 2014 warpage procedure. Inspectors marked high points on a flat surface and rejected and quarantined parts with measured deflection above 2 mm.
+        aspectRatio: 1.0
+    featuredIndices: []
+    deck: []
+  - id: full_pass_260_m260-f04
+    type: gallery
+    title: Roller support design
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/m700/full-pass-260/roller-support-design.jpg
+        alt: CAD rendering of the inner disc guide, roller shafts and motor gears.
+        caption: The archived 502-1160-01 inner-guide study shows added support around the driven roller shaft beside the motor gearing. The April 2014 work examined support and alignment alongside increased spring force; this rendering does not establish a shipped configuration.
+        aspectRatio: 1.2941176470588236
+    featuredIndices: []
+    deck: []
+  - id: full_pass_260_m260-f06
+    type: gallery
+    title: Roller detail
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/m700/full-pass-260/roller-detail.jpg
+        alt: Close-up of white pinch rollers and steel shafts, with visible fibers and residue around the shaft supports.
+        caption: Pinch rollers and shaft supports in an archive close-up. Fibers and residue are visible around the shafts; the image does not identify the cause or disposition of a particular return.
+        aspectRatio: 0.664
+    featuredIndices: []
+    deck: []
 ---
 
-# M700 / Vesta Forensic Report
+# M700 Disc Vault
 
-## I. Project Summary
+The M700 made a large physical disc collection behave like a digital library. Its carousel stored up to 320 Blu-ray discs, DVDs and CDs, imported them automatically, and retrieved a selected disc through the front slot. Launched in July 2011, the five-rack-unit product also contained an M-Class player. That integrated player distinguishes M700 from the separate DV700 vault.
 
-- **Role:** Lead Mechanical Engineer / "The Architect."
-- **Mandate:** Emergency stabilization of the M700/DV700 Disc Vault fleet — arrest catastrophic field failures (disc jams, scratching, "unreadable media") driven by mechanical tolerance drift under high-volume use.
-- **Core Achievement:** A forensic analysis of 3,000,000+ field cycle events isolated the failure physics, drove a complete mechanical-subsystem retrofit that eliminated slippage failures, and recovered 100% of the questioned carousel inventory without a scrap event.
+My work crossed the internal mechanical design, supplier and tooling reviews, product integration, and later reliability investigations. Function Engineering developed the early carousel, kicker and pinch-roller breadboards. Inside Kaleidescape, mechanical work had to meet the electronics, sensing and control work of the wider hardware team. The later sustaining effort included mechanisms shared with DV700, while the two products retained separate identities and return histories.
 
-## II. The Anatomy of Failure
+## Moving a disc through the machine
 
-### 1. The Friction Collapse: From Grip to Force
+A disc entered between a pair of pinch rollers, moved into a carousel slot, and later transferred to the optical drive. The carousel, kicker and rollers formed one transport system. The disc changed height as it left its slot, so the rollers needed controlled vertical travel as well as grip. Constraining a disc too early would make the rollers skid; leaving its path poorly guided would let it miss the next opening.
 
-- **Trigger:** The original drive design was friction-reliant: coated "grippy" rollers that tested at four times the push force of standard rubber — when chemically clean. In the field, gypsum construction dust and migrated grease collapsed the coefficient of friction until the coating performed no better than bare rubber, and discs stalled or ejected violently. "Roller Timeout" and "Disc Uninsertable" errors cascaded across the fleet.
-- **Intervention:** Pivoted the architecture from friction-reliant to force-dominant: if the friction coefficient can't be trusted, raise the normal force until it doesn't matter. Replaced the passive leaf springs with a Dual Radial Spring Balance Bar delivering up to triple the clamping force, with solid motor-plate mounts and an extended-neck gear to remove drivetrain flex.
-- **Result:** Validation units ejected discs flawlessly even with rollers deliberately fouled with grease — 100% of dirty-roller slippage failures eliminated.
+Function Engineering's August 2010 report records the alternatives tested on the breadboard. Four slot geometries were evaluated; a V-groove was needed to constrain and align the disc with the kicker. The team compared timing-belt arrangements and selected an off-the-shelf MXL combination that gave an integral number of motor steps per slot. The pinch-roller assembly demonstrated six millimeters of vertical travel, refined ingress and egress guides, and a gearmotor isolation scheme to reduce transmitted noise.
 
-### 2. Newton's Revenge: The Clockwise Bias
+Those results established feasibility in the breadboard. The report still called for component life testing, confirmation of sensing and positioning, complete-system handling tests, and development of the disc-retention cover. Reliable production required those separate pieces to work together.
 
-- **Trigger:** The stronger springs worked too well. The added clamping load bowed the steel roller shafts, breaking parallelism with the optical drive; ejected discs picked up a clockwise steering bias and crashed head-on into carousel slot ribs.
-- **Intervention:** Engineered a pillow-block extension into the redesigned inner disc guide — a rigid backstop filling the span where the shaft deflected — plus a hard-mounted ODD bracket replacing the rubber-grommet isolation that let the drive shift under load. The new guide also grew "wings" to peel apart static-clung DVD/Blu-ray pairs.
-- **Result:** Drive-roller axle deflection eliminated; straight-line trajectory restored under triple-force spring tension.
+## Turning the mechanism into a product
 
-### 3. The Potato Chip: 320 Slots of Molding Pathology
+The project schedule assigned me internal mechanical design and release, prototype evaluation, production-tooling release and first-article review. The work included the enclosure and mounting parts around Function Engineering's mechanisms, plus the physical interfaces to Kaleidescape's boards and sensors. Nathan Forster's assignments included the front illumination and interface electronics; the schedule kept firmware and motor-control electronics under their respective engineering owners.
 
-- **Trigger:** The 390 mm, 320-slot injection-molded carousel had no viable process window: pressure high enough to fill the thin ribs blew the parting line into massive flash; pressure low enough to prevent flash froze into short shots. Cooling stress — locked in by too-tight shipping trays — warped batches 3–4 mm out of plane ("the potato chip"), creating a tight-slot "kill zone" between slots 190 and 250 where the warp met the dirty rollers and discs stalled. Usage statistics correlated 126 failed injections to the warped sector.
-- **Intervention:** Audited the inventory box by box (the bottom three units of every stack of ten were consistently worst), set an evidence-based rejection threshold — over 3 mm fails, under 3 mm recoverable once the drive mechanics were strengthened — and directed the hard-tooling retrofit: 320 "sister ribs" re-cut into the steel as flow leaders (~$12,000, four weeks), 45 ejector pins converted to vents to kill the air burns, loosened packaging trays to stop logistics-induced warp, and 100% flat-table inspection at the vendor.
-- **Result:** 100% of the questioned carousel inventory recovered instead of scrapped; the force-dominant drive rendered the residual warp clinically irrelevant in the field.
+The details were coupled. My running design notes track removable inner guides for service access, operating clearance around the carousel, optical-drive brackets, common fasteners, wire routing and the position of the front sensor boards. They also record smaller assembly lessons. A 2011 inspection found fibers in the grease and changed the proposed applicator from cotton swabs to an acid brush. A seemingly minor process detail could put contamination beside a moving disc.
 
-### 4. The 41G Box: Packaging Compression Set
+Production preparation involved reviewing real parts, identifying revisions and coordinating release. The April 2011 punch list records my release instructions alongside supplier lead times, samples awaiting approval, and tooling questions. It was a working boundary between design intent, the parts available for a build, and what still needed correction.
 
-- **Trigger:** Dataloggers recorded a 41G impact from a standard 30-inch drop against a 50G non-operating limit for the drives — near-zero margin. Root cause: warehouse storage compressed the die-cut EPE foam ("compression set"), opening an air gap the unit accelerated through before slamming into dead foam.
-- **Intervention:** Switched to molded EPP foam with superior memory properties — accepting roughly $10,000 in hard tooling and a $1.74 per-unit cost increase on the strength of the shock data.
-- **Result:** Drop energy managed by deceleration instead of impact; the shipping-damage vector closed.
+## A carousel that had to fill, release and stay flat
 
-## III. Governance & Rhythm
+The large molded carousel combined hundreds of narrow disc slots with the belt and encoder interfaces around its perimeter. Its manufacturing problem was also a transport problem: irregular slot faces, flash or warpage could change the resistance encountered by a disc.
 
-- **The Pulse:** A weekly reliability-investigation rhythm with hands-on teardown — personally dissecting failed and RMA units alongside technicians, 15+ concurrent RMAs per week, separating design flaws from assembly negligence by method: measure every part against print, substitute known-good "golden" parts, and look for physically impossible artifacts. A missing E-clip inside a sealed chassis was never installed; a deformed spring proved the vendor bypassed the mandated go/no-go fixture; in-tolerance parts that still failed indicted the design's own stack-up logic.
-- **The Artifacts:** RMA investigation logs; the warpage inspection guide (Rev 2) with its measurement protocol; updated assembly SOPs specifying exact grease application points; the sheet-metal DFM ROI worksheet that justified $24-per-unit chassis savings via staged hard tooling.
+The January 2011 T2 review recorded a molding trial that produced no usable parts. Material stuck on both sides of the tool, and the operating window was too narrow. I recorded the review with Function Engineering and molding specialist Loyd May, including the next actions for the suppliers. The team considered feeder ribs, gate balance, cooling, venting and material behavior. Loyd recommended understanding venting and equalizing mold temperature before expecting a material change to solve the problem.
 
-## IV. Quantified Impact
+A later recommendation specified additional vents on 45 ejector pins. The October 2011 modification study also explored adding 320 sister ribs. These records show a sequence of proposed tooling interventions. They do not, by themselves, establish that every proposal was implemented or that one change resolved all later failures.
 
-- **Analyzed** 3,000,000+ disc injection cycles to isolate the failure threshold that justified the redesign.
-- **Eliminated** 100% of dirty-roller slippage failures via the force-dominant retrofit.
-- **Recovered** 100% of questioned carousel inventory by re-engineering tolerances around measured warp instead of scrapping.
-- **Isolated** the slot 190–250 kill zone responsible for the large majority of field failures.
-- **Directed** the sister-rib hard-tooling retrofit and 45-vent modification that opened a real molding process window.
-- **Closed** the packaging shock vector after a 41G reading against a 50G drive limit.
-- **Negotiated** $24 per unit in chassis savings through staged soft-to-hard tooling.
+Flatness remained a practical inspection issue in 2014. An April review of a box of ten carousels found the bottom three more warped and questioned whether tight packaging trays were loading the parts. I was assigned to relax the packaging fit. The April 10 revision of the inspection procedure made the disposition explicit: locate the high points on a flat surface, measure their deflection, and reject and quarantine parts exceeding two millimeters.
 
-## V. Source Trail
+The shared M700/DV700 carousel correspondence carried that inspection into supplier decisions. John Lio identified me as the engineer responsible for the carousel part and its disposition. On August 19, I instructed Sanmina to scrap the failed parts. The correspondence records that instruction and the supplier's acknowledgment; it does not record completion of the scrap work.
 
-The claims above rest on the project's primary evidence archive — RMA logs, inspection protocols, and forensic photography — compiled through the NotebookLM forensic registry:
+## More grip changed the alignment problem
 
-- `RMA_investigations_2014_03_13_PM.XLSX` — incoming failure tracking (missing E-clips, abrasive dust).
-- `502-1164-00_warpage-inspection.pptx` (Rev 2) — the potato-chip measurement protocol.
-- `Vesta_sheetmetal_DFM_ROI_worksheet` — the tooling investment justification.
-- `520-1160-00_REV_11.pdf` — the Tinnerman stud-receiver spec used to prove vendor non-compliance.
-- `DSC02290.jpg` — abrasive sheetrock dust embedded in the front disc guide.
-- `DSC02295.jpg` — missing roller-spring retaining clip from a field return.
-- `ESCALATION-588_1.jpg` — jammed discs verifying the blockage error codes.
-- T6 molding results — flash vs. short-shot photographic evidence.
+Field investigations exposed a tradeoff in the roller assembly. Contamination reduced traction; more spring force could improve tolerance to dirty rollers and tight carousel slots. But increasing the force also bent the roller shafts. The interface needed stiffness as well as clamping load.
+
+Nathan's March 2014 report describes two vaults in which discs ejected toward the clockwise side of the carousel and struck the slot rib. It connected that behavior to shaft bending and misalignment with the optical drive. My next work was to support the driven shaft through the inner guide and replace compliant motor-plate mounts with hard spacers. The April hardware review lists solid motor-plate mounts, an extended-neck gear, guide variants, a pillow-block extension and three spring versions among the designs I was preparing.
+
+The guide also had to separate discs that clung together. Nathan tested moving it closer to the disc; I flagged the small clearance and prepared SLA versions to test. These changes addressed different failure paths. More roller force alone did not resolve double-disc handling, sensor behavior or drive alignment.
+
+By April 29, I had loaded revised inner-guide and bearing files into the working revision in Arena. Fifty spring prototypes were on order. I called for testing and confirmation before loading the springs; Rob Wudrick proposed releasing the plastic parts independently and bringing the changes into the assembly bill of materials together.
+
+The disc-retention cover was another alignment interface. In May, John Lio circulated assembly instructions for both M700 and DV700: use the enlarged mounting holes with washers, leave the roller brackets in place, align the cover without loading the outer screws, and tighten the center and perimeter fasteners in sequence. The instruction addressed distortion introduced during assembly.
+
+Those shared M700/DV700 changes progressed beyond the April prototypes. In July, I loaded the spring file into Arena and said it could be released with the revised guide and bearing. My August 4 status report recorded preparation for engineering-change release and approval to purchase spring tooling. Assembly-instruction updates and further evaluation remained on the work list.
+
+## Testing what the complaint actually meant
+
+The investigation depended on separating a reported symptom from a reproduced mechanism. The roller test record documents returned assemblies installed in a known-good unit, followed by repeated front and rear transfers. Some long runs failed to reproduce the original complaint while still revealing disc scratching, alignment details or contamination. Passing one transfer test did not clear every physical issue.
+
+The shared test setup itself also needed scrutiny. I initially attributed rear-roller binding to the disc-retention cover. In February, I found that a longer screw I had installed in the lower sensor-board mount pushed the optical drive out of alignment. Replacing it with the correct shorter screw restored injection and ejection in that setup. I withdrew the cover diagnosis.
+
+Software and operating conditions mattered too. March correspondence describes reversed discs, matte labels that changed sensor behavior, insufficient roller run time during slippage, and drive-region settings among the paths being investigated. Those belonged to a shared hardware, firmware and service effort, with different failures requiring different responses.
+
+In March 2014, Mark McKenzie's field-data review gave the team a wider view: about three million inject operations across the vault population, excluding manufacturing. The analysis compared weekly changes for individual units and retained gaps left by missed collection periods in 2012. Mark also corrected his earlier interpretation of which failure category affected more units. The value lay in understanding the population and the failure definitions together.
+
+## What the work established
+
+M700 reached the market as a 320-disc vault with an integrated player. The later engineering record shows a sustained effort to make that transport more tolerant of real discs, contamination, variation and assembly. My contribution connected mechanical definition, suppliers, inspection and corrective designs to the wider team's continuing investigation.
+
+The work produced defined inspection rules, revised guide and bearing files, preparation for spring-change release, tooling purchase approval and a disposition instruction for failed carousels. Testing and assembly updates remained part of the continuing work. The selected records do not establish a completed fleet retrofit or a measured reduction in field failures.
