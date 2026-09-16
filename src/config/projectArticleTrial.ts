@@ -1654,6 +1654,101 @@ export const projectArticleTrial = {
 	        "description": "Archive product photographs show the enclosed server, its front-access storage and the removable disk cartridge."
 	    }
 	},
+	"kserver-5000": {
+	    "sections": {
+	        "package": "fourteen-drives-behind-the-front-door",
+	        "cooling": "a-cooler-choice-constrained-by-the-schedule",
+	        "adapter": "making-the-power-supply-adapter-explicit",
+	        "inspection": "checking-the-requirement-behind-an-apparent-defect",
+	        "validation": "qualification-remained-a-team-effort",
+	        "continuity": "keeping-drawings-aligned-with-production"
+	    },
+	    "media": {
+	        "f01": {
+	            "galleryId": "full_pass_259_f01",
+	            "src": "/assets/kserver-5000/full-pass-259/fourteen-drive-access.webp"
+	        },
+	        "f02": {
+	            "galleryId": "full_pass_259_f02",
+	            "src": "/assets/kserver-5000/full-pass-259/door-hinge.webp"
+	        },
+	        "f03": {
+	            "galleryId": "full_pass_259_f03",
+	            "src": "/assets/kserver-5000/full-pass-259/internal-fan-layout.webp"
+	        },
+	        "f04": {
+	            "galleryId": "full_pass_259_f04",
+	            "src": "/assets/kserver-5000/full-pass-259/glow-section.webp"
+	        },
+	        "f05": {
+	            "galleryId": "full_pass_259_f05",
+	            "src": "/assets/kserver-5000/full-pass-259/fabrication-half-shears.webp"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "package",
+	            "eyebrow": "Product package and inherited architecture",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "f01",
+	                "f02",
+	                "f04"
+	            ]
+	        },
+	        {
+	            "key": "cooling",
+	            "eyebrow": "Cooling alternatives and evaluation",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "f03"
+	            ]
+	        },
+	        {
+	            "key": "adapter",
+	            "eyebrow": "Model and fabrication drawing",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "f05"
+	            ]
+	        },
+	        {
+	            "key": "inspection",
+	            "eyebrow": "Manufacturing clarification and open verification",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "validation",
+	            "eyebrow": "Electrical and drive-test boundaries",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "continuity",
+	            "eyebrow": "Supplier and drawing continuity",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "A familiar face, a dense package and a fabrication detail",
+	        "description": "Product photographs, an inherited assembly view and two drawing details connect the server package to its service and manufacturing interfaces."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
