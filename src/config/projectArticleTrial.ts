@@ -1856,6 +1856,102 @@ export const projectArticleTrial = {
 	        "description": "Prototype, mechanism and inspection views explain the M700 account without claiming that a development rendering proves a shipped change."
 	    }
 	},
+	"dv700": {
+	    "sections": {
+	        "diagnosis": "separate-the-complaint-from-the-failure",
+	        "testing": "make-the-test-earn-its-conclusion",
+	        "force": "more-grip-changed-the-alignment-problem",
+	        "assembly": "keep-assembly-from-moving-the-disc-path",
+	        "production": "carry-the-correction-into-production-work",
+	        "outcome": "what-the-work-established"
+	    },
+	    "media": {
+	        "DV261-F01": {
+	            "galleryId": "full_pass_261_dv261-f01",
+	            "src": "/assets/dv700/full-pass-261/dv700-operation.jpg"
+	        },
+	        "DV261-F02": {
+	            "galleryId": "full_pass_261_dv261-f02",
+	            "src": "/assets/dv700/full-pass-261/roller-contamination.jpg"
+	        },
+	        "DV261-F03": {
+	            "galleryId": "full_pass_261_dv261-f03",
+	            "src": "/assets/dv700/full-pass-261/roller-support-study.jpg"
+	        },
+	        "DV261-F04": {
+	            "galleryId": "full_pass_261_dv261-f04",
+	            "src": "/assets/dv700/full-pass-261/carousel-inspection.jpg"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "diagnosis",
+	            "parent": "diagnosis",
+	            "eyebrow": "DV700 investigation",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "DV261-F01"
+	            ]
+	        },
+	        {
+	            "key": "testing",
+	            "parent": "testing",
+	            "eyebrow": "Test discipline",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "force",
+	            "parent": "force",
+	            "eyebrow": "Coupled mechanics",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "DV261-F02",
+	                "DV261-F03"
+	            ]
+	        },
+	        {
+	            "key": "assembly",
+	            "parent": "assembly",
+	            "eyebrow": "Inspection and assembly",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "DV261-F04"
+	            ]
+	        },
+	        {
+	            "key": "production",
+	            "parent": "production",
+	            "eyebrow": "Release preparation",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "outcome",
+	            "parent": "outcome",
+	            "eyebrow": "Documented results",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "A disc path is an assembly of interfaces",
+	        "description": "Product, contamination, corrective-design and inspection views support the DV700 sustaining account."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
