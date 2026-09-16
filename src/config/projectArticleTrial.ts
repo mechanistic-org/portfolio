@@ -1952,6 +1952,76 @@ export const projectArticleTrial = {
 	        "description": "Product, contamination, corrective-design and inspection views support the DV700 sustaining account."
 	    }
 	},
+	"morpheus": {
+	    "sections": {
+	        "reuse": "setting-the-reuse-boundary",
+	        "interfaces": "making-the-interfaces-work-together",
+	        "thermal": "sharing-layouts-with-the-thermal-design",
+	        "outcome": "what-the-study-established"
+	    },
+	    "media": {
+	        "M262-F01": {
+	            "galleryId": "full_pass_262_m262-f01",
+	            "src": "/assets/morpheus/full-pass-262/mechanical-exploded-view.png"
+	        },
+	        "M262-F02": {
+	            "galleryId": "full_pass_262_m262-f02",
+	            "src": "/assets/morpheus/full-pass-262/mechanical-requirements.png"
+	        },
+	        "M262-F03": {
+	            "galleryId": "full_pass_262_m262-f03",
+	            "src": "/assets/morpheus/full-pass-262/board-interface-layout.png"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "reuse",
+	            "parent": "reuse",
+	            "eyebrow": "Mechanical definition",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "M262-F01",
+	                "M262-F02"
+	            ]
+	        },
+	        {
+	            "key": "interfaces",
+	            "parent": "interfaces",
+	            "eyebrow": "Board and enclosure interfaces",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "M262-F03"
+	            ]
+	        },
+	        {
+	            "key": "thermal",
+	            "parent": "thermal",
+	            "eyebrow": "Thermal collaboration",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "outcome",
+	            "parent": "outcome",
+	            "eyebrow": "Documented development state",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Morpheus mechanical study",
+	        "description": "Original brief drawings explain the proposed system, with baseline requirements, stretch choices and interfaces kept distinct from build and qualification outcomes."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
