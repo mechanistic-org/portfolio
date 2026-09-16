@@ -76,7 +76,7 @@ const yr = (x: any) => {
 	// Normalize the trial's recorded years without changing non-trial presentations.
 	return presentation ? date.getUTCFullYear() : date.getFullYear();
 };
-const period = ["room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "320-slot-optical-carousel"].includes(d.slug) && d.duration
+const period = ["room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "320-slot-optical-carousel", "kplayer-6000"].includes(d.slug) && d.duration
 	? d.duration
 	: [yr(d.date), yr(d.endDate)].filter(Boolean).join("–") || d.duration;
 
@@ -170,7 +170,7 @@ const navNext = nextProject
 			description={d.description}
 			audioUrl={d.audio_url}
 			photoCount={images.length || undefined}
-			mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel"].includes(d.slug) ? "images" : undefined}
+			mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel", "kplayer-6000"].includes(d.slug) ? "images" : undefined}
 		/>
 
 		{contextRibbon && <ContextRibbon model={contextRibbon} />}
@@ -185,7 +185,7 @@ const navNext = nextProject
 					useContinuityRails ? (
 						<ProjectContinuityRail
 							side="left"
-							mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel"].includes(d.slug) ? "images" : undefined}
+							mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel", "kplayer-6000"].includes(d.slug) ? "images" : undefined}
 							projectTitle={d.title}
 							scenes={activeRailScenes}
 							headings={headings}
@@ -330,7 +330,7 @@ const navNext = nextProject
 		{
 			useContinuityRails && galleries.length > 0 && (
 				<ProjectEvidenceBreakout
-			fullSizeLinks={["backsplash", "320-slot-optical-carousel"].includes(d.slug)}
+			fullSizeLinks={["backsplash", "320-slot-optical-carousel", "kplayer-6000"].includes(d.slug)}
 					galleries={resolved?.galleries ?? galleries}
 					featured={resolved?.featured}
 					breakout={resolved?.breakout}
@@ -364,7 +364,8 @@ const navNext = nextProject
 	[data-project-article="webtv-cortez"] :global([id]),
 	[data-project-article="webtv-elmer"] :global([id]),
 	[data-project-article="backsplash"] :global([id]),
-	[data-project-article="320-slot-optical-carousel"] :global([id]) {
+	[data-project-article="320-slot-optical-carousel"] :global([id]),
+	[data-project-article="kplayer-6000"] :global([id]) {
 		scroll-margin-top: 6rem;
 	}
 	[data-project-article="room-director"] > :global(header img),
@@ -380,7 +381,9 @@ const navNext = nextProject
 	[data-project-article="backsplash"] > :global(header img),
 	[data-project-article="backsplash"] :global(.rail__media-grid img),
 	[data-project-article="320-slot-optical-carousel"] > :global(header img),
-	[data-project-article="320-slot-optical-carousel"] :global(.rail__media-grid img) {
+	[data-project-article="320-slot-optical-carousel"] :global(.rail__media-grid img),
+	[data-project-article="kplayer-6000"] > :global(header img),
+	[data-project-article="kplayer-6000"] :global(.rail__media-grid img) {
 		object-fit: contain;
 		background: white;
 	}

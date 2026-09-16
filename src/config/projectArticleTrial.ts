@@ -1481,6 +1481,90 @@ export const projectArticleTrial = {
 	        "description": "The prototype, tooling, slot measurements, packaging and warpage views follow the same eight-figure sequence as the engineering account."
 	    }
 	},
+	"kplayer-6000": {
+	    "sections": {
+	        "package": "a-new-player-inside-a-familiar-package",
+	        "door": "when-better-location-exposed-the-interference",
+	        "baffle": "the-air-dam-was-also-an-assembly-interface",
+	        "readiness": "checking-the-specifications-and-readiness",
+	        "support": "changes-continued-after-the-first-configuration",
+	        "legacy": "what-the-platform-made-reusable"
+	    },
+	    "media": {
+	        "f01": {
+	            "galleryId": "full_pass_257_f01",
+	            "src": "/assets/kplayer-6000/full-pass-257/rear-interfaces.webp"
+	        },
+	        "f02": {
+	            "galleryId": "full_pass_257_f02",
+	            "src": "/assets/kplayer-6000/full-pass-257/front-door.webp"
+	        },
+	        "f03": {
+	            "galleryId": "full_pass_257_f03",
+	            "src": "/assets/kplayer-6000/full-pass-257/door-diagnostic-sequence.svg"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "package",
+	            "eyebrow": "Product intent and envelope",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "f01"
+	            ]
+	        },
+	        {
+	            "key": "door",
+	            "eyebrow": "Hinge location and spring force",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "f02",
+	                "f03"
+	            ]
+	        },
+	        {
+	            "key": "baffle",
+	            "eyebrow": "Assembly and drawing revision",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "readiness",
+	            "eyebrow": "Specifications and manufacturing",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "support",
+	            "eyebrow": "Respin and customer integration",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "legacy",
+	            "eyebrow": "Reusable tooling",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Product interfaces and the door investigation",
+	        "description": "Product views and a source-based sequence diagram connect the finished enclosure to the location, clearance and spring-force decisions."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
