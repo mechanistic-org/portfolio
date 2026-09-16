@@ -1749,6 +1749,113 @@ export const projectArticleTrial = {
 	        "description": "Product photographs, an inherited assembly view and two drawing details connect the server package to its service and manufacturing interfaces."
 	    }
 	},
+	"m700": {
+	    "sections": {
+	        "transport": "moving-a-disc-through-the-machine",
+	        "integration": "turning-the-mechanism-into-a-product",
+	        "molding": "a-carousel-that-had-to-fill-release-and-stay-flat",
+	        "recovery": "more-grip-changed-the-alignment-problem",
+	        "testing": "testing-what-the-complaint-actually-meant",
+	        "outcome": "what-the-work-established"
+	    },
+	    "media": {
+	        "M260-F01": {
+	            "galleryId": "full_pass_260_m260-f01",
+	            "src": "/assets/m700/full-pass-260/breadboard-system.jpg"
+	        },
+	        "M260-F02": {
+	            "galleryId": "full_pass_260_m260-f02",
+	            "src": "/assets/m700/full-pass-260/sla-carousel.jpg"
+	        },
+	        "M260-F03": {
+	            "galleryId": "full_pass_260_m260-f03",
+	            "src": "/assets/m700/full-pass-260/prototype-bezel.jpg"
+	        },
+	        "M260-F04": {
+	            "galleryId": "full_pass_260_m260-f04",
+	            "src": "/assets/m700/full-pass-260/roller-support-design.jpg"
+	        },
+	        "M260-F05": {
+	            "galleryId": "full_pass_260_m260-f05",
+	            "src": "/assets/m700/full-pass-260/carousel-inspection.jpg"
+	        },
+	        "M260-F06": {
+	            "galleryId": "full_pass_260_m260-f06",
+	            "src": "/assets/m700/full-pass-260/roller-detail.jpg"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "transport",
+	            "parent": "transport",
+	            "eyebrow": "Transport architecture",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "M260-F01",
+	                "M260-F02"
+	            ]
+	        },
+	        {
+	            "key": "integration",
+	            "parent": "integration",
+	            "eyebrow": "Mechanical integration",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "M260-F03"
+	            ]
+	        },
+	        {
+	            "key": "molding",
+	            "parent": "molding",
+	            "eyebrow": "Molding and inspection",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "M260-F05"
+	            ]
+	        },
+	        {
+	            "key": "recovery",
+	            "parent": "recovery",
+	            "eyebrow": "Reliability development",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "M260-F04",
+	                "M260-F06"
+	            ]
+	        },
+	        {
+	            "key": "testing",
+	            "parent": "testing",
+	            "eyebrow": "Tests and attribution",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "outcome",
+	            "parent": "outcome",
+	            "eyebrow": "Documented state",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "From breadboard to continuing reliability work",
+	        "description": "Prototype, mechanism and inspection views explain the M700 account without claiming that a development rendering proves a shipped change."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
