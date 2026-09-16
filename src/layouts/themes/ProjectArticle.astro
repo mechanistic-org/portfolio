@@ -170,7 +170,7 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 			description={d.description}
 			audioUrl={d.audio_url}
 			photoCount={images.length || undefined}
-			mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches"].includes(d.slug) ? "images" : undefined}
+			mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches", "dispensers"].includes(d.slug) ? "images" : undefined}
 		/>
 
 		{contextRibbon && <ContextRibbon model={contextRibbon} />}
@@ -185,7 +185,7 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 					useContinuityRails ? (
 						<ProjectContinuityRail
 							side="left"
-							mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches"].includes(d.slug) ? "images" : undefined}
+							mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches", "dispensers"].includes(d.slug) ? "images" : undefined}
 							projectTitle={d.title}
 							scenes={activeRailScenes}
 							headings={headings}
@@ -330,7 +330,7 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 		{
 			useContinuityRails && galleries.length > 0 && (
 				<ProjectEvidenceBreakout
-			fullSizeLinks={["backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches"].includes(d.slug)}
+			fullSizeLinks={["backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches", "dispensers"].includes(d.slug)}
 					galleries={resolved?.galleries ?? galleries}
 					featured={resolved?.featured}
 					breakout={resolved?.breakout}
@@ -371,7 +371,8 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 	[data-project-article="m700"] :global([id]),
 	[data-project-article="dv700"] :global([id]),
 	[data-project-article="morpheus"] :global([id]),
-	[data-project-article="extension-switches"] :global([id]) {
+	[data-project-article="extension-switches"] :global([id]),
+	[data-project-article="dispensers"] :global([id]) {
 		scroll-margin-top: 6rem;
 	}
 	[data-project-article="room-director"] > :global(header img),
@@ -401,7 +402,9 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 	[data-project-article="morpheus"] > :global(header img),
 	[data-project-article="morpheus"] :global(.rail__media-grid img),
 	[data-project-article="extension-switches"] > :global(header img),
-	[data-project-article="extension-switches"] :global(.rail__media-grid img) {
+	[data-project-article="extension-switches"] :global(.rail__media-grid img),
+	[data-project-article="dispensers"] > :global(header img),
+	[data-project-article="dispensers"] :global(.rail__media-grid img) {
 		object-fit: contain;
 		background: white;
 	}
@@ -453,6 +456,22 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 		width: min(100%, 32rem);
 	}
 	[data-project-article="extension-switches"] :global(.evidence-breakout img) {
+		width: auto;
+		max-width: 100%;
+		height: auto;
+		max-height: 70vh;
+		margin-inline: auto;
+		object-fit: contain;
+	}
+
+	[data-project-article="dispensers"] :global(.evidence-breakout__galleries > section) {
+		width: min(100%, 48rem);
+		margin-inline: auto;
+	}
+	[data-project-article="dispensers"] :global(.evidence-breakout__galleries > section:has(img[src$="/beans-chute-test.jpg"])) {
+		width: min(100%, 32rem);
+	}
+	[data-project-article="dispensers"] :global(.evidence-breakout img) {
 		width: auto;
 		max-width: 100%;
 		height: auto;

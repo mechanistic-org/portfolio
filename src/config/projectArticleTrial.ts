@@ -2112,6 +2112,136 @@ export const projectArticleTrial = {
 	        "description": "The cap fixture, cap placement and switch test rig show the physical work behind the Extension Switch account."
 	    }
 	},
+	"dispensers": {
+	    "sections": {
+	        "summary": "ingredient-dispensers",
+	        "alternatives": "move-the-food-then-control-the-release",
+	        "tests": "make-the-path-visible",
+	        "cleaning": "design-for-removal-and-cleaning",
+	        "outcomes": "what-the-prototypes-establish"
+	    },
+	    "media": {
+	        "D264-F01": {
+	            "galleryId": "full_pass_264_d264-f01",
+	            "src": "/assets/dispensers/full-pass-264/six-chute-prototype.jpg"
+	        },
+	        "D264-F02": {
+	            "galleryId": "full_pass_264_d264-f02",
+	            "src": "/assets/dispensers/full-pass-264/mechanism-alternatives.jpg"
+	        },
+	        "D264-F03": {
+	            "galleryId": "full_pass_264_d264-f03",
+	            "src": "/assets/dispensers/full-pass-264/outlet-drive-options.jpg"
+	        },
+	        "D264-F04": {
+	            "galleryId": "full_pass_264_d264-f04",
+	            "src": "/assets/dispensers/full-pass-264/cheese-chute-test.jpg"
+	        },
+	        "D264-F05": {
+	            "galleryId": "full_pass_264_d264-f05",
+	            "src": "/assets/dispensers/full-pass-264/beans-chute-test.jpg"
+	        },
+	        "D264-F06": {
+	            "galleryId": "full_pass_264_d264-f06",
+	            "src": "/assets/dispensers/full-pass-264/removable-parts.jpg"
+	        }
+	    },
+	    "models": [],
+	    "scenes": [
+	        {
+	            "key": "summary",
+	            "parent": "summary",
+	            "eyebrow": "Hyphen",
+	            "title": "Ingredient Dispensers",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "D264-F01"
+	            ],
+	            "mediaLabel": "A physical six-chute prototype"
+	        },
+	        {
+	            "key": "alternatives",
+	            "parent": "alternatives",
+	            "eyebrow": "Mechanism studies",
+	            "title": "Move the food, then control the release",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "D264-F02",
+	                "D264-F03"
+	            ],
+	            "mediaLabel": "Concept choices and outlet drive options"
+	        },
+	        {
+	            "key": "tests",
+	            "parent": "tests",
+	            "eyebrow": "Physical prototypes",
+	            "title": "Make the path visible",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "D264-F04",
+	                "D264-F05"
+	            ],
+	            "mediaLabel": "Clear ingredient paths"
+	        },
+	        {
+	            "key": "cleaning",
+	            "parent": "cleaning",
+	            "eyebrow": "Service access",
+	            "title": "Design for removal and cleaning",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "D264-F06"
+	            ],
+	            "mediaLabel": "Separated food-contact parts"
+	        },
+	        {
+	            "key": "outcomes",
+	            "parent": "outcomes",
+	            "eyebrow": "Evidence and contribution",
+	            "title": "What the prototypes establish",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [],
+	            "mediaLabel": ""
+	        }
+	    ],
+	    "featured": [
+	        {
+	            "media": "D264-F01",
+	            "section": "summary",
+	            "label": "Six outlets, separate doors",
+	            "detail": "Physical prototype geometry.",
+	            "layout": "system"
+	        },
+	        {
+	            "media": "D264-F03",
+	            "section": "alternatives",
+	            "label": "Separate motion and release",
+	            "detail": "The drive alternatives under consideration.",
+	            "layout": "intervention"
+	        },
+	        {
+	            "media": "D264-F04",
+	            "section": "tests",
+	            "label": "See the food path",
+	            "detail": "A clear chute test setup.",
+	            "layout": "record"
+	        }
+	    ],
+	    "breakout": {
+	        "eyebrow": "Mechanisms and physical prototypes",
+	        "description": "Concept sheets, ingredient-present setups and separated parts show the dispenser interfaces at different stages of development."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
