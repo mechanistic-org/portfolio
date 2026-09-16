@@ -1,91 +1,131 @@
 ---
-title: Dispensers
+title: Ingredient Dispensers
 slug: dispensers
 tier: deep_dive
-description: 'Sub-counter automated dispensers for Hyphen''s augmented makeline (2021-22): part of the system that reached 350 meals/hour at 99%+ accuracy — a 17x capacity lift over human-only assembly lines.'
+description: 'Mechanical concepts and physical dispenser prototypes for Hyphen: exploring ingredient movement, controlled outlet release and access for cleaning.'
 category: module_subsystem
 client: []
-date: 2021-12-01 00:00:00+00:00
 draft: false
-duration: 2.8 Years
 employer: hyphen
-endDate: 2022-08-24 00:00:00+00:00
-industry: consumer_electronics
-forensic_metrics:
-  financial: Food waste cut 98% via portion-variance reduction; assembly labor reduced 78% across the makeline the array feeds.
-  process: ±2% portion accuracy vs. industry ±15%; 70+ actuators across six dispenser types; 15-minute toolless sanitation cycle.
-  governance: Beckhoff/TwinCAT deterministic control with core isolation; stage-gated from 2023 lab testing to 2024 live pilot.
-forensic_summary:
-  trigger: Five hundred ingredients with shifting physics — cold rice that clumps, pastes that drip forever, chips that shatter under augers — and a 70-actuator array that doubles as a pathogen vector if it can't be cleaned.
-  intervention: Engineered a six-type dispenser taxonomy matched to material physics, closed the loop with density sensing and gram-accurate scales, and designed sanitation into the geometry with push-to-unlock toolless disassembly.
-  result: ±2% portioning across 500+ ingredients at 350 meals per hour, with a 15-minute full sanitation cycle and an honest human-failover boundary.
-production: production
-productionScale: one_off
-tags: []
-theme: hyperspace
-tools: []
-teamSize: INT 15
+industry: automation
+job_title: mechanical_engineer
+tags:
+- mechanical
+- mechanism
+- prototyping
+- food-automation
+theme: article
+heroImage: /assets/dispensers/full-pass-264/six-chute-prototype.jpg
 cyberspace:
   enable: true
   layout: linear
   stickies:
-  - align: center
-    data: null
-    id: intro
-    text: <strong>YEAR:</strong> 2021<br/><strong>ROLE:</strong> Hyphen
-    type: media
-    title: Dispensers
+  - id: full_pass_264_d264-f01
+    type: gallery
+    title: Six-chute prototype
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/dispensers/full-pass-264/six-chute-prototype.jpg
+        alt: Underside of a tabletop prototype with six clear tapered chutes and six dark curved hinged outlet doors.
+        caption: A physical six-chute prototype viewed from below. Each outlet has its own curved hinged door; the photograph records the build, without a measured portioning result.
+        aspectRatio: 1.3340987370838118
+    featuredIndices: []
+    deck: []
+  - id: full_pass_264_d264-f02
+    type: gallery
+    title: Augers, lead screws and paddles
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/dispensers/full-pass-264/mechanism-alternatives.jpg
+        alt: Hand sketches labeled lead screw, auger and paddles, with a blue note bearing Erik’s name.
+        caption: Erik-labeled concept sheet comparing lead-screw, auger and paddle arrangements. The sketches record alternatives under consideration.
+        aspectRatio: 1.3340987370838118
+    featuredIndices: []
+    deck: []
+  - id: full_pass_264_d264-f03
+    type: gallery
+    title: Outlet drive options
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/dispensers/full-pass-264/outlet-drive-options.jpg
+        alt: Whiteboard showing separate auger and door drives, a door attached to an auger, and a loose Teflon piece.
+        caption: The project whiteboard compares separate auger and door drives with mechanically coupled alternatives. Bearing contact and slipping on the gear are recorded as concerns.
+        aspectRatio: 1.3335170893054025
+    featuredIndices: []
+    deck: []
+  - id: full_pass_264_d264-f04
+    type: gallery
+    title: Clear chute with shredded cheese
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/dispensers/full-pass-264/cheese-chute-test.jpg
+        alt: Side view of a transparent clamped chute holding shredded cheese over a collection pan.
+        caption: A clear chute test setup with shredded cheese. Articulated clamps hold the parts where food contact and the outlet path remain visible.
+        aspectRatio: 1.3340987370838118
+    featuredIndices: []
+    deck: []
+  - id: full_pass_264_d264-f05
+    type: gallery
+    title: Clear chute with beans
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/dispensers/full-pass-264/beans-chute-test.jpg
+        alt: Top view into a clear clamped chute containing black beans.
+        caption: Black beans in a separate clear chute setup. The photograph shows the ingredient and geometry; it does not provide a quantified dose or repeatability result.
+        aspectRatio: 0.75
+    featuredIndices: []
+    deck: []
+  - id: full_pass_264_d264-f06
+    type: gallery
+    title: Parts separated for cleaning
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/dispensers/full-pass-264/removable-parts.jpg
+        alt: Translucent containers and separate helical dispenser parts arranged in blue wash racks.
+        caption: Dispenser containers and helical parts separated in wash racks. Removal and access are visible; sanitation time and efficacy are not measured by the image.
+        aspectRatio: 1.3340987370838118
+    featuredIndices: []
     deck: []
 ---
 
-# Dispenser Array Forensic Report
+# Ingredient Dispensers
 
-## I. Project Summary
+Ingredient dispensers connect the food stored in a pan to the bowl being assembled below it. At Hyphen, that interface had to accommodate different food geometries while controlling where and when an ingredient left the container. The mechanical work covered ways to move food toward an outlet, open the outlet and give the discharged food a controlled path.
 
-- **Role:** Principal Systems Architect — the dispenser array of the Hyphen augmented makeline.
-- **Mandate:** Make 500+ unique food ingredients robotically dispensable — across every viscosity, density, and fragility class a restaurant menu can throw at a machine — at sub-second cadence and gram-level accuracy.
-- **Core Achievement:** A six-type dispenser taxonomy spanning 70+ actuators that cut portion variance from the industry's ±15% to ±2%, feeding 350 meals per hour at 99%+ order accuracy.
+My concept studies explored augers, cone augers, lead screws and paddles, including arrangements within a two-by-three cabinet footprint. Project photographs also record physical prototypes of the dispenser mechanisms.
 
-## II. The Anatomy of Failure
+## Move the food, then control the release
 
-### 1. The Clump Crisis: Food Is Not a Material Spec
+Moving the ingredient and controlling its release were separate design questions. One study compared a dedicated motor for the auger and another for the door with options that attached the outlet mechanism to the auger itself. A further sketch considered a loose Teflon piece at the end. Bearing contact and slipping on the gear were identified as concerns.
 
-- **Trigger:** Ingredients defy industrial dosing logic. Cold-held rice agglomerates into non-Newtonian clumps; braised meats congeal; early footage caught "ingredient ricochet" spraying cross-contamination inside the chassis. A dispenser tuned for fresh rice over-portions the same rice three hours colder.
-- **Intervention:** De-agglomeration as a control loop: density sensors detect when the hopper's contents have clumped and the actuators apply calibrated force to separate grains and fibers before release, while gram-accurate scales close the loop on every dispense — adjusting motor torque in real time as ingredient physics drift through the day.
-- **Result:** ±2% portion variance regardless of ingredient state, cutting food waste by 98% against the manual baseline.
+An auger geometry alone did not resolve the outlet. The concept sheets explored both the shape of the moving element and how it would meet the container. They record a search through possible mechanisms, rather than a claim that every concept became a production dispenser.
 
-### 2. The Taxonomy: Six Machines Instead of One Compromise
+## Make the path visible
 
-- **Trigger:** A universal dispenser is a universal failure — augers pulverize chips, gravity valves drip guacamole forever, pistons crush lettuce.
-- **Intervention:** Bifurcated the hardware into six types matched to material physics: adaptive metering for the generalist bulk (rice, beans, corn); an automatic chute that cleanly shears viscous pastes to kill the infinite drip; flexible agitators that disrupt braised-protein fibers without dispensing only juice; positive-displacement piston fill for exact liquid volumetrics independent of hopper level; a rotating paddle with trapdoor release that sweeps chips and leafy greens without compression; and a horizontal architecture that keeps heavy wet ingredients from compacting under their own weight. All in standard hotel pans — swap chicken for tofu in seconds, software recalibrates.
-- **Result:** Material agnosticism across 500+ ingredients on one hardware platform — and an honest boundary: the system explicitly surrenders fanned avocado and flaky salmon to human hands via the entrée elevator, using human dexterity as the failover for what robotics can't gently do.
+Transparent test pieces made the ingredient path visible. The archive shows black beans in one clamped chute and shredded cheese in another, with front and side views of the test arrangement. The parts were held on articulated clamps above collection pans, exposing the surfaces that contacted the food and the transition through the outlet.
 
-### 3. The Bio-Load: Sanitation by Design
+A tabletop build combined six tapered chutes with individual curved doors beneath the outlets. From above, the rectangular inlets fit a two-by-three arrangement; from below, the chutes converge toward the area where food would be collected. The separate outlet doors made the release interface accessible for inspection.
 
-- **Trigger:** Seventy-plus actuators in contact with organic matter is a cleaning nightmare and a pathogen vector — trapped ricochet residue rots where brushes can't reach.
-- **Intervention:** Push-to-unlock toolless disassembly on every food-contact component, all sized for standard commercial dishwashers — sanitation engineered into the geometry rather than bolted onto the procedure.
-- **Result:** A 15-minute full sanitization cycle, neutralizing the shift-change bottleneck that kills most kitchen automation in practice.
+The modular-system patent application, published in May 2024, described this kind of outlet in functional terms: a pivoting door covers the chute when closed, then its curved surface guides the ingredient as it opens. The disclosure includes a six-chute example with driven doors and also allows other chute counts. That description establishes the intended mechanism; it does not turn the prototype photographs into a qualification result.
 
-## III. Governance & Rhythm
+## Design for removal and cleaning
 
-- **The Pulse:** Deterministic control on a Beckhoff industrial PC with TwinCAT core isolation — real-time PLC, IoT gateway, and HMI partitioned so cloud latency can never stall an actuator — under a stage-gate path from Cultivate Center lab testing (2023) to live restaurant pilot (2024).
-- **The Artifacts:** The dispenser taxonomy matrix; the stage-gate logs; the toolless-maintenance ECO series; the patent figures documenting hopper, chute, and sensor architecture.
+Cleaning also required physical access to the food path. Photographs show the dispenser containers and helical parts separated in wash racks. Hyphen’s 2021 product sheet described removal without tools and components sized for a commercial dishwasher or three-compartment sink. The corresponding patent disclosure treats removal, cleaning and reloading as part of the module architecture.
 
-## IV. Quantified Impact
+## What the prototypes establish
 
-- **Reduced** portion variance from ±15% to ±2%, cutting food waste 98%.
-- **Engineered** the six-type taxonomy handling 500+ unique ingredients on one platform.
-- **Deployed** 70+ actuators within a standard kitchen footprint via the EtherCAT bus.
-- **Sustained** 350 meals/hour at 99%+ order accuracy in high-volume pilots.
-- **Achieved** the 15-minute full-sanitation cycle through toolless food-contact design.
-- **Bounded** automation honestly — human-finish failover for aesthetics robotics can't preserve.
+These records support an account of mechanism exploration and physical prototyping. They show alternatives, built parts and ingredient-present test setups, but do not provide a measured accuracy distribution, endurance result or a documented transfer of each concept into the released product. Those distinctions keep the prototype work separate from later company-wide performance claims.
 
-## V. Source Trail
-
-The claims above rest on the project's primary evidence archive — patent figures, taxonomy documentation, and engineering notes — compiled through the NotebookLM forensic registry:
-
-- `dispensers.pdf` — actuator and chute mechanics.
-- `makeline.pdf` — the top-down Type A–F array layout and handwritten auger-vs-paddle R&D notes.
-- Patent FIGURE 8A/8B — food dispensing modules and thermal infrastructure.
-- The Dispenser Taxonomy Matrix (Types A–F).
-- Stage-gate logs — Cultivate Center (2023) to live pilot (2024).
+I am named alongside Daniel Fukuba, Maneesh Jain, Mark Manfrey, John Vassa and Keegan Schoch in the May 23, 2024 publication of the modular food-assembly patent application. It records joint inventorship. The dispenser study belongs within that collaborative development, with its specific concept and prototype evidence preserved here.
