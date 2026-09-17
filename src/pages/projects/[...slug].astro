@@ -114,7 +114,7 @@ const allProjects = await getCollection("projects");
 // Sort by date descending (newest first)
 // These projects have no established project date; omit them from chronological navigation.
 const sortedProjects = routeEligibleProjects(allProjects, currentSite, import.meta.env.DEV)
-	.filter((project) => !["dispensers", "makeline", "portion-cup", "xbox"].includes(project.id) || Boolean(project.data.date))
+	.filter((project) => !["dispensers", "makeline", "portion-cup", "xbox", "fissler-bbq"].includes(project.id) || Boolean(project.data.date))
 	.sort(
 	(a, b) =>
 		new Date(b.data.date || new Date()).getTime() - new Date(a.data.date || new Date()).getTime(),
