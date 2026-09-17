@@ -2515,6 +2515,102 @@ export const projectArticleTrial = {
 	        "description": "CAD sections, an annotated board study and physical assembly show how the denesting mechanism and its interfaces fit together."
 	    }
 	},
+	"xbox": {
+	    "sections": {
+	        "summary": "project-summary",
+	        "liners": "emi-liners-and-assembly-interference",
+	        "bracket": "a-second-sprint-airflow-around-the-drive-support",
+	        "gpu": "gpu-active-cooling",
+	        "cad": "project-cad"
+	    },
+	    "media": {
+	        "d267-f01": {
+	            "galleryId": "xbox-project-cad",
+	            "src": "/assets/xbox/project-cad/xbox-render-01-xl.webp"
+	        },
+	        "d267-f02": {
+	            "galleryId": "xbox-project-cad",
+	            "src": "/assets/xbox/project-cad/xbox-render-02-xl.webp"
+	        },
+	        "d267-f03": {
+	            "galleryId": "xbox-project-cad",
+	            "src": "/assets/xbox/project-cad/xbox-render-03-xl.webp"
+	        },
+	        "d267-f04": {
+	            "galleryId": "xbox-project-cad",
+	            "src": "/assets/xbox/project-cad/xbox-render-04-xl.webp"
+	        },
+	        "d267-f05": {
+	            "galleryId": "xbox-project-cad",
+	            "src": "/assets/xbox/project-cad/xbox-render-05-xl.webp"
+	        }
+	    },
+	    "models": [],
+	    "scenes": [
+	        {
+	            "key": "summary",
+	            "parent": "summary",
+	            "eyebrow": "Context",
+	            "title": "Project summary",
+	            "left": {
+	                "kind": "context"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "liners",
+	            "parent": "liners",
+	            "eyebrow": "Shielding",
+	            "title": "EMI liners and assembly interference",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "bracket",
+	            "parent": "bracket",
+	            "eyebrow": "Design and review",
+	            "title": "A second sprint: airflow around the drive support",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "gpu",
+	            "parent": "gpu",
+	            "eyebrow": "Proposal and implementation",
+	            "title": "GPU active cooling",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "cad",
+	            "parent": "cad",
+	            "eyebrow": "Project evidence",
+	            "title": "Project CAD",
+	            "left": {
+	                "kind": "sources"
+	            },
+	            "media": [
+	                "d267-f01",
+	                "d267-f02",
+	                "d267-f03",
+	                "d267-f04",
+	                "d267-f05"
+	            ],
+	            "mediaLabel": "Xbox project CAD"
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Project CAD",
+	        "description": "Five selected project views, in their reviewed order."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
