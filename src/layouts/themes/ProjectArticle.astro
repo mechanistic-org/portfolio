@@ -170,7 +170,7 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 			description={d.description}
 			audioUrl={d.audio_url}
 			photoCount={images.length || undefined}
-			mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches", "dispensers", "makeline", "portion-cup", "xbox", "fissler-bbq", "kplayer-300"].includes(d.slug) ? "images" : undefined}
+			mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches", "dispensers", "makeline", "portion-cup", "xbox", "fissler-bbq", "kplayer-300", "motorola-mp3"].includes(d.slug) ? "images" : undefined}
 		/>
 
 		{contextRibbon && <ContextRibbon model={contextRibbon} />}
@@ -185,7 +185,7 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 					useContinuityRails ? (
 						<ProjectContinuityRail
 							side="left"
-							mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches", "dispensers", "makeline", "portion-cup", "xbox", "fissler-bbq", "kplayer-300"].includes(d.slug) ? "images" : undefined}
+							mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches", "dispensers", "makeline", "portion-cup", "xbox", "fissler-bbq", "kplayer-300", "motorola-mp3"].includes(d.slug) ? "images" : undefined}
 							projectTitle={d.title}
 							scenes={activeRailScenes}
 							headings={headings}
@@ -274,7 +274,7 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 
 				{/* RIGHT — contents · media · references */}
 				{
-					useContinuityRails && d.slug !== "kplayer-300" ? (
+					useContinuityRails && !["kplayer-300", "motorola-mp3"].includes(d.slug) ? (
 						<ProjectContinuityRail
 							side="right"
 							projectTitle={d.title}
@@ -330,7 +330,7 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 		{
 			useContinuityRails && galleries.length > 0 && (
 				<ProjectEvidenceBreakout
-			fullSizeLinks={["backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches", "dispensers", "makeline", "portion-cup", "xbox", "fissler-bbq", "kplayer-300"].includes(d.slug)}
+			fullSizeLinks={["backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches", "dispensers", "makeline", "portion-cup", "xbox", "fissler-bbq", "kplayer-300", "motorola-mp3"].includes(d.slug)}
 					galleries={resolved?.galleries ?? galleries}
 					featured={resolved?.featured}
 					breakout={resolved?.breakout}
@@ -377,7 +377,8 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 	[data-project-article="portion-cup"] :global([id]),
 	[data-project-article="xbox"] :global([id]),
 	[data-project-article="fissler-bbq"] :global([id]),
-	[data-project-article="kplayer-300"] :global([id]) {
+	[data-project-article="kplayer-300"] :global([id]),
+	[data-project-article="motorola-mp3"] :global([id]) {
 		scroll-margin-top: 6rem;
 	}
 	[data-project-article="room-director"] > :global(header img),
@@ -418,7 +419,9 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 	[data-project-article="fissler-bbq"] > :global(header img),
 	[data-project-article="fissler-bbq"] :global(.rail__media-grid img),
 	[data-project-article="kplayer-300"] > :global(header img),
-	[data-project-article="kplayer-300"] :global(.rail__media-grid img) {
+	[data-project-article="kplayer-300"] :global(.rail__media-grid img),
+	[data-project-article="motorola-mp3"] > :global(header img),
+	[data-project-article="motorola-mp3"] :global(.rail__media-grid img) {
 		object-fit: contain;
 		background: white;
 	}
@@ -536,7 +539,8 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 		width: min(100%, 48rem);
 		margin-inline: auto;
 	}
-	[data-project-article="kplayer-300"] :global(aside .grid img) {
+	[data-project-article="kplayer-300"] :global(aside .grid img),
+	[data-project-article="motorola-mp3"] :global(aside .grid img) {
 		object-fit: contain;
 	}
 </style>
