@@ -2728,6 +2728,150 @@ export const projectArticleTrial = {
 	        "description": "Three selected views of the Fissler BBQ concept."
 	    }
 	},
+	"kplayer-300": {
+	    "sections": {
+	        "designing-the-complete-player": "designing-the-complete-player",
+	        "openings-without-exposing-the-interior": "openings-without-exposing-the-interior",
+	        "a-continuous-shield-inside-a-plastic-enclosure": "a-continuous-shield-inside-a-plastic-enclosure",
+	        "tuning-the-blue-glow-and-isolating-the-fans": "tuning-the-blue-glow-and-isolating-the-fans",
+	        "reviewing-the-enclosure-as-a-system": "reviewing-the-enclosure-as-a-system",
+	        "power-supplies-and-the-rear-shield-interface": "power-supplies-and-the-rear-shield-interface",
+	        "changing-the-mounting-hardware": "changing-the-mounting-hardware",
+	        "testing-the-required-installation": "testing-the-required-installation",
+	        "from-kplayer-300-to-m300": "from-kplayer-300-to-m300"
+	    },
+	    "media": {
+	        "KP269-F01": {
+	            "galleryId": "kplayer-architecture",
+	            "src": "/assets/kplayer-300/reviewed-design/kplayer-300-exploded-01-xl.webp"
+	        },
+	        "KP269-F02": {
+	            "galleryId": "kplayer-bezel",
+	            "src": "/assets/kplayer-300/product-and-installation/kplayer-300-detail-01-xl.webp"
+	        },
+	        "KP269-F03": {
+	            "galleryId": "kplayer-product",
+	            "src": "/assets/kplayer-300/product-and-installation/kplayer-300-detail-02-xl.webp"
+	        },
+	        "KP269-F04": {
+	            "galleryId": "kplayer-product",
+	            "src": "/assets/kplayer-300/product-and-installation/kplayer-300-detail-03-xl.webp"
+	        },
+	        "KP269-F05": {
+	            "galleryId": "kplayer-installation",
+	            "src": "/assets/kplayer-300/product-and-installation/kplayer-300-context-05-xl.webp"
+	        },
+	        "KP269-F06": {
+	            "galleryId": "kplayer-installation",
+	            "src": "/assets/kplayer-300/product-and-installation/kplayer-300-context-06-xl.webp"
+	        },
+	        "KP269-F07": {
+	            "galleryId": "kplayer-installation",
+	            "src": "/assets/kplayer-300/product-and-installation/kplayer-300-context-07-xl.webp"
+	        },
+	        "KP269-F08": {
+	            "galleryId": "kplayer-system",
+	            "src": "/assets/kplayer-300/product-and-installation/kplayer-300-context-04-md.webp"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "designing-the-complete-player",
+	            "eyebrow": "Product development",
+	            "left": {
+	                "kind": "context"
+	            },
+	            "media": [
+	                "KP269-F03"
+	            ]
+	        },
+	        {
+	            "key": "openings-without-exposing-the-interior",
+	            "eyebrow": "Product development",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "KP269-F01"
+	            ]
+	        },
+	        {
+	            "key": "a-continuous-shield-inside-a-plastic-enclosure",
+	            "eyebrow": "Product development",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "KP269-F01"
+	            ]
+	        },
+	        {
+	            "key": "tuning-the-blue-glow-and-isolating-the-fans",
+	            "eyebrow": "Product development",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "KP269-F02"
+	            ]
+	        },
+	        {
+	            "key": "reviewing-the-enclosure-as-a-system",
+	            "eyebrow": "Product development",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "power-supplies-and-the-rear-shield-interface",
+	            "eyebrow": "Product development",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "KP269-F04"
+	            ]
+	        },
+	        {
+	            "key": "changing-the-mounting-hardware",
+	            "eyebrow": "Product development",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "KP269-F05"
+	            ]
+	        },
+	        {
+	            "key": "testing-the-required-installation",
+	            "eyebrow": "Product development",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "KP269-F06",
+	                "KP269-F07"
+	            ]
+	        },
+	        {
+	            "key": "from-kplayer-300-to-m300",
+	            "eyebrow": "Product development",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "KP269-F03",
+	                "KP269-F08"
+	            ]
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Project views",
+	        "description": "Mechanical architecture, product details and installation views."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
