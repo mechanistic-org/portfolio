@@ -2,100 +2,133 @@
 title: Portion Cup
 slug: portion-cup
 tier: deep_dive
-description: 'Hyphen portion-cup dispensing module (2021): plus-or-minus 2% portion accuracy across variable fluid viscosities — down from the industry''s 15% — with sub-second dispensing for automated digital orders.'
+description: A geared cup-denesting subsystem for Hyphen, developed from early concepts through cabinet design and initial validation before the product left the roadmap.
 category: module_subsystem
 client: []
-date: 2021-05-01 00:00:00+00:00
 draft: false
-duration: 4 Months
 employer: hyphen
-endDate: 2021-08-15 00:00:00+00:00
-industry: consumer_electronics
-forensic_metrics:
-  financial: Rev 1 prototype build validated at $18,472 for four units; iteration cycles compressed from two weeks to three days via an in-house nine-printer SLA fleet.
-  process: ±2% portion accuracy vs. the industry's ±15%; 350 meals/hour sustained at 99.9% order accuracy; dry-fire and ghost-dispense failure modes eliminated by closed-loop sensing.
-  governance: NSF/ANSI 169, UL 763, UL 508A certification frame; live HACCP thermal logging; toolless sanitation disassembly under 15 minutes.
-forensic_summary:
-  trigger: Automating sauce portioning meant polymer gears under steel torque, nested cups that resist clean separation, tilt arms fighting gravity, and silent failure modes in an unattended food cell.
-  intervention: Reinforced the drive train with cast alignment sleeves, engineered helix-driven single-cup separation with optical drop verification, specified a self-locking sub-4-degree worm drive for zero-energy holds, and layered Hall-effect stall detection over HACCP thermal logging.
-  result: ±2% accuracy across viscosities at 350 meals per hour with 99.9% order accuracy — portioning precision decoupled from fluid physics.
-production: production
-productionScale: mass
+industry: automation
 tags:
-- Mechanism
-theme: hyperspace
-tools: []
-teamSize: INT 8
+- mechanical
+- cup-denesting
+- prototyping
+- packaging
+theme: article
+heroImage: /assets/portion-cup/full-pass-266/four-channel-row.jpg
 cyberspace:
   enable: true
   layout: linear
   stickies:
-  - align: center
-    data: null
-    id: intro
-    text: <strong>YEAR:</strong> 2021<br/><strong>ROLE:</strong> Hyphen
-    type: media
-    title: Portion Cup
+  - id: full_pass_266_d266-f01
+    type: gallery
+    title: Four cup channels
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/portion-cup/full-pass-266/four-channel-row.jpg
+        alt: CAD view of four cup-denesting channels with orange guides, white helices, motors and closely packed circuit boards.
+        caption: A four-channel Portion Cup row in CAD. Each stack position has its own helix mechanism and motor, with board and sensor interfaces packed along the front.
+        aspectRatio: 2.0689655172413794
+    featuredIndices: []
+    deck: []
+  - id: full_pass_266_d266-f02
+    type: gallery
+    title: Separate the nested cups
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/portion-cup/full-pass-266/cup-rim-section.jpg
+        alt: Section view of nested cup rims supported beside helical separators above the drive enclosure.
+        caption: 'The section makes the denesting geometry visible: the helices meet the cup rims while the guides constrain the stack.'
+        aspectRatio: 0.8366666666666667
+    featuredIndices: []
+    deck: []
+  - id: full_pass_266_d266-f03
+    type: gallery
+    title: Synchronize the helices
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/portion-cup/full-pass-266/ring-gear-drive.jpg
+        alt: CAD cutaway showing an internal ring gear, motor-side gearing and three pinion locations around the cup opening.
+        caption: An internal ring gear connects the three helix-drive pinions around one cup opening, leaving the center clear for cup passage.
+        aspectRatio: 1.3333333333333333
+    featuredIndices: []
+    deck: []
+  - id: full_pass_266_d266-f04
+    type: gallery
+    title: Fit the boards and wiring
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/portion-cup/full-pass-266/board-packaging-study.jpg
+        alt: Annotated CAD sheet explores board placement on a four-channel row and asks about connector orientation, wire specification and service-loop space.
+        caption: A packaging study explores keeping the sensors inside the enclosure. Its notes flag the tighter inner board positions and request connector and cable details before resolving the fit.
+        aspectRatio: 1.776461880088823
+    featuredIndices: []
+    deck: []
+  - id: full_pass_266_d266-f05
+    type: gallery
+    title: Package the rows
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/portion-cup/full-pass-266/cabinet-layout.jpg
+        alt: Transparent cabinet CAD view containing four rows of four cup sleeves above a separate lower transfer region.
+        caption: The cabinet CAD layout arranges four rows of cup channels above the lower transfer area.
+        aspectRatio: 0.7966666666666666
+    featuredIndices: []
+    deck: []
+  - id: full_pass_266_d266-f06
+    type: gallery
+    title: Build the drive enclosure
+    data:
+      columns: 1
+      layout: grid
+      images:
+      - src: /assets/portion-cup/full-pass-266/drive-assembly.jpg
+        alt: A hand tool works beside bearings and pinions in a machined enclosure with multiple circular cup openings.
+        caption: Bearings and pinions are visible as a machined drive enclosure with multiple cup openings is assembled.
+        aspectRatio: 0.75
+    featuredIndices: []
     deck: []
 ---
 
-# Portion Cup Dispensing Module Forensic Report
+# Portion Cup
 
-## I. Project Summary
+Portion Cup was a cup-denesting module for Hyphen’s automated food-assembly line. Its task was to separate nested portion cups and send them into the receiving path below. The design brought cup guides, helices, drive trains and sensing interfaces together in repeating four-channel rows.
 
-- **Role:** Senior Mechanical Engineer (Project "Bender" sub-system).
-- **Mandate:** Automate the singulation and placement of portion cups for high-volume digital order fulfillment — eliminating order defects and cross-contamination at sub-second dispensing precision.
-- **Core Achievement:** ±2% portion accuracy across variable fluid viscosities against an industry standard of ±15%, sustained at 350 meals per hour with sensor-verified dispense integrity.
+I took the system from early denesting concepts through full cabinet-level subsystem design. My work included initial validation and the start of next-generation development. The surviving layouts and assembly photographs show the mechanical scope, from a single cup interface to the cabinet layout around the rows.
 
-## II. The Anatomy of Failure
+## Separate the nested cups
 
-### 1. Drive Train Crisis: Polymer Teeth Under Steel Torque
+The cup rim was the working interface. In section, the helices sit around the stack and meet successive rims at different heights. Their screw-shaped surfaces were intended to move a cup downward while supporting the cups above it.
 
-- **Trigger:** The 218-tooth internal gear was specified in Acetal (Delrin) for noise and self-lubrication — but the thermal load of 350 meals/hour against the aluminum enclosure created expansion-mismatch binding risk, and the torque required to drive viscous ingredients through the stainless helix shaft threatened to strip the polymer teeth under the steel pinion.
-- **Intervention:** Enforced concentricity with cast Steralloy sleeve alignment guides between the drive train and the acetal helix, locked axial migration with low-clearance retaining rings, and accelerated auger-geometry validation by prototyping in Rigid 10K resin to mimic metal stiffness before hard tooling.
-- **Result:** The reinforced module sustained the 350 meals/hour target at 99.9% order accuracy, decoupling portioning precision from fluid viscosity.
+Each cup position uses three helices linked through an internal ring gear and smaller pinions. The drive sits around the opening, leaving the middle clear for the cup. The bill of materials specifies acetal helices and ring gears, stainless shafts and pinions, and machined aluminum drive housings.
 
-### 2. The Singulation Event: One Cup, Every Time
+## Fit the interfaces around the stack
 
-- **Trigger:** Nested cups resist clean separation — release two and the order is wrong; release zero and the system "ghost dispenses" sauce into a void it believes is a cup.
-- **Intervention:** A helix-driven screw separation: rotating acetal helices engage the bottom cup's rim, forcing it down while supporting the cup above — a mechanical handoff that releases exactly one. Stainless rings and a stabilizing rod hold axial alignment through the separation event, and every drop is verified by an optical drop sensor with a second photoelectric sensor watching stack height.
-- **Result:** Closed-loop dispensing — the controller inhibits actuation on an empty stack instead of dry-firing, and inventory decrements only on a physically confirmed drop.
+Packaging the electronics meant working around the same stack geometry. An annotated layout study explores keeping the sensors inside the enclosure. It describes the outer board positions as potentially workable and the inner pair as more constrained, then asks for connector orientation, plugs and wire specifications so bend radius and service-loop space can be assessed.
 
-### 3. The Tilt Ramp: Holding Dinner Against Gravity
+The parts list separates a cup-drop sensor from a low-cup sensor, each with its own mounting parts. Their intended roles were to detect a cup passing through the outlet and a stack running low. Fitting these interfaces into the row was part of the packaging problem.
 
-- **Trigger:** The positioner arms that tilt bowls to receive ingredients face backdrive torque: a spur-gear drive would need continuous motor current to hold a loaded bowl at angle — overheating coils in normal use and dumping the meal on any power loss.
-- **Intervention:** Specified a self-locking worm-gear drive with a lead angle under 4°, where flank friction exceeds the gravity vector's tangent: a mechanical lock requiring zero holding power. Absorbed the worm's axial thrust with phosphor-bronze oil-embedded thrust washers, shielded ball bearings, machined retainers, and a 0.1–0.5 mm shim stack eliminating axial play.
-- **Result:** Zero-energy static hold — the bowl stays put through E-stops and outages, with the efficiency trade-off (45–55%) accepted as the price of fail-safe load holding.
+At cabinet scale, the CAD arrangement places four rows of cup sleeves over the lower transfer area. That layout connects storage and denesting to the receiving path. The ramp appears as a separate assembly in the planning record, with its own motors and structural parts.
 
-### 4. The Watchdog Layer: Detecting Silent Failures
+## Move from parts planning to assembly
 
-- **Trigger:** In an unattended food cell, the dangerous failures are the quiet ones — a stalled gear cooking a motor, a missing bowl catching dispensed food, an ingredient bin drifting into the pathogen danger zone.
-- **Intervention:** Layered sensing tied to the industrial controller: Hall-effect geartooth sensors with true-zero-speed capability flag stalls by correlating motor current against pulse trains; retro-reflective sensors confirm a vessel is present before any dispense; EtherCAT thermal inputs log hot (125–180°F) and cold zones to the millisecond for live HACCP compliance.
-- **Result:** Jam conditions stop the drive before gear stripping, void dispenses are physically impossible, and food-safety state is continuously audited rather than spot-checked.
+The Bender planning workbook identifies Ono as the client and carries a March 31, 2021 start entry and an April 19 delivery target. Its individual parts have mixed states: some drawings are released, sensor mounts have not started, and the helix has a radius change still awaiting release. The record captures several stages of development within the same assembly.
 
-## III. Governance & Rhythm
+The manufacturing plan combines machined shafts and housings, purchased-component selections for motors and bearings, and proposed casting for enclosure and alignment parts. It also records alternatives, including another rotary seal and a casting quotation for the helix. These choices show how the design was being translated into parts and processes.
 
-- **The Pulse:** High-velocity iteration on Onshape with a fleet of nine in-house SLA printers — auger and hopper geometry cycles compressed from two weeks to three days — backed by rapid-turn CNC and casting vendors.
-- **The Compliance Frame:** NSF/ANSI 169 (special-purpose food equipment), UL 763 and UL 508A, NSF 51 food-zone materials (316 stainless shafts, acetal wear parts), IP69K washdown targets, and toolless disassembly in under 15 minutes for sanitation.
-- **The Artifacts:** The expanded structured BOM (June 2021); the prototype buy list ($18,472 for four Rev 1 units); the published patent application documenting the chute, positioner, and sensor architecture.
+Physical photographs take the record beyond CAD: gears, bearings and shafts are laid out on a bench, and a machined multi-opening enclosure is being assembled. The bearing seats, retainers and small pinions make the assembly work visible.
 
-## IV. Quantified Impact
+## The roadmap decision
 
-- **Achieved** ±2% portion accuracy across variable viscosities — versus the industry's ±15%.
-- **Sustained** 350 meals per hour at 99.9% order accuracy.
-- **Compressed** prototype iteration from two weeks to three days via the in-house print fleet.
-- **Eliminated** dry-fire and ghost-dispense failure modes through dual-sensor closed-loop verification.
-- **Engineered** a zero-energy static hold on the tilt mechanism via self-locking worm geometry.
-- **Validated** the module within an NSF-169 / UL 763 / UL 508A certification frame.
+I carried out initial validation and began next-generation development. The reviewed material does not supply the measured test results needed to attach a cycle rate, an endurance figure or a completed qualification to that work.
 
-## V. Source Trail
-
-The claims above rest on the project's primary evidence archive — structured BOMs, datasheets, and patent figures — compiled through the NotebookLM forensic registry:
-
-- `BOM_PORTION_CUP_DISPENSER_structured_expanded_06_21_2021` — component hierarchy, materials, and sensor line items.
-- `Portion Cup Prototype Buy List - Master BOM` — the Rev 1 prototype cost basis.
-- `portion_cup.pdf` / `portion_cup_2.pdf` — exploded views of the gear train and helix engagement.
-- US20240164588A1 — the patent application covering chute, positioner arms, and sensing.
-- `SP17D020-20210710A` — the tilt-ramp prototype quotation (worm housing, driven arm).
-- `HYPHEN-SPECSHEET.pdf` — certifications and performance validation.
-- `04028VA_IP69K.pdf` — washdown-rated thermal management specs.
+The product was then removed from the roadmap because it was too complex. Clients decided to keep filling portion cups manually. The work reached cabinet-level subsystem design and initial validation, but that route to automating portion cups was not taken forward.

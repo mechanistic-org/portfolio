@@ -2385,6 +2385,136 @@ export const projectArticleTrial = {
 	        "description": "An assembled cabinet line, mechanical interface drawing, board and planning records connect the system architecture to its physical development."
 	    }
 	},
+	"portion-cup": {
+	    "sections": {
+	        "summary": "portion-cup",
+	        "denesting": "separate-the-nested-cups",
+	        "interfaces": "fit-the-interfaces-around-the-stack",
+	        "development": "move-from-parts-planning-to-assembly",
+	        "outcome": "the-roadmap-decision"
+	    },
+	    "media": {
+	        "D266-F01": {
+	            "galleryId": "full_pass_266_d266-f01",
+	            "src": "/assets/portion-cup/full-pass-266/four-channel-row.jpg"
+	        },
+	        "D266-F02": {
+	            "galleryId": "full_pass_266_d266-f02",
+	            "src": "/assets/portion-cup/full-pass-266/cup-rim-section.jpg"
+	        },
+	        "D266-F03": {
+	            "galleryId": "full_pass_266_d266-f03",
+	            "src": "/assets/portion-cup/full-pass-266/ring-gear-drive.jpg"
+	        },
+	        "D266-F04": {
+	            "galleryId": "full_pass_266_d266-f04",
+	            "src": "/assets/portion-cup/full-pass-266/board-packaging-study.jpg"
+	        },
+	        "D266-F05": {
+	            "galleryId": "full_pass_266_d266-f05",
+	            "src": "/assets/portion-cup/full-pass-266/cabinet-layout.jpg"
+	        },
+	        "D266-F06": {
+	            "galleryId": "full_pass_266_d266-f06",
+	            "src": "/assets/portion-cup/full-pass-266/drive-assembly.jpg"
+	        }
+	    },
+	    "models": [],
+	    "scenes": [
+	        {
+	            "key": "summary",
+	            "parent": "summary",
+	            "eyebrow": "Hyphen",
+	            "title": "Portion Cup",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "D266-F01"
+	            ],
+	            "mediaLabel": "Portion Cup"
+	        },
+	        {
+	            "key": "denesting",
+	            "parent": "denesting",
+	            "eyebrow": "Cup-denesting development",
+	            "title": "Separate the nested cups",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "D266-F02",
+	                "D266-F03"
+	            ],
+	            "mediaLabel": "Separate the nested cups"
+	        },
+	        {
+	            "key": "interfaces",
+	            "parent": "interfaces",
+	            "eyebrow": "Cup-denesting development",
+	            "title": "Fit the interfaces around the stack",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "D266-F04",
+	                "D266-F05"
+	            ],
+	            "mediaLabel": "Fit the interfaces around the stack"
+	        },
+	        {
+	            "key": "development",
+	            "parent": "development",
+	            "eyebrow": "Cup-denesting development",
+	            "title": "Move from parts planning to assembly",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "D266-F06"
+	            ],
+	            "mediaLabel": "Move from parts planning to assembly"
+	        },
+	        {
+	            "key": "outcome",
+	            "parent": "outcome",
+	            "eyebrow": "Cup-denesting development",
+	            "title": "The roadmap decision",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [],
+	            "mediaLabel": ""
+	        }
+	    ],
+	    "featured": [
+	        {
+	            "media": "D266-F01",
+	            "section": "summary",
+	            "label": "Four-channel row",
+	            "detail": "The denesting module in CAD.",
+	            "layout": "system"
+	        },
+	        {
+	            "media": "D266-F04",
+	            "section": "interfaces",
+	            "label": "Packaging tradeoffs",
+	            "detail": "Boards, connectors and wire space around the cup stacks.",
+	            "layout": "intervention"
+	        },
+	        {
+	            "media": "D266-F06",
+	            "section": "development",
+	            "label": "Physical assembly",
+	            "detail": "Machined enclosure, bearings and pinions.",
+	            "layout": "record"
+	        }
+	    ],
+	    "breakout": {
+	        "eyebrow": "Cup rims, drive and packaging",
+	        "description": "CAD sections, an annotated board study and physical assembly show how the denesting mechanism and its interfaces fit together."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
