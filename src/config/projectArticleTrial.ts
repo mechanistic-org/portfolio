@@ -2611,6 +2611,123 @@ export const projectArticleTrial = {
 	        "description": "Five selected project views, in their reviewed order."
 	    }
 	},
+	"fissler-bbq": {
+	    "sections": {
+	        "brief": "the-brief-and-my-role",
+	        "experiments": "making-the-brief-testable",
+	        "mechanism": "driving-the-cage-from-its-edge",
+	        "tests": "separating-heat-rotation-and-cooking",
+	        "results": "results-and-decisions",
+	        "ending": "where-my-involvement-ended",
+	        "gallery": "project-views"
+	    },
+	    "media": {
+	        "d268-f01": {
+	            "galleryId": "fissler-project-views",
+	            "src": "/assets/fissler-bbq/selected-general/fissler-context-01-xl.webp"
+	        },
+	        "d268-f02": {
+	            "galleryId": "fissler-project-views",
+	            "src": "/assets/fissler-bbq/selected-general/fissler-context-02-xl.webp"
+	        },
+	        "d268-f03": {
+	            "galleryId": "fissler-project-views",
+	            "src": "/assets/fissler-bbq/selected-general/fissler-context-03-xl.webp"
+	        }
+	    },
+	    "models": [],
+	    "scenes": [
+	        {
+	            "key": "brief",
+	            "parent": "brief",
+	            "eyebrow": "Context",
+	            "title": "The brief and my role",
+	            "left": {
+	                "kind": "context"
+	            },
+	            "media": [
+	                "d268-f02"
+	            ],
+	            "mediaLabel": "Upright project view"
+	        },
+	        {
+	            "key": "experiments",
+	            "parent": "experiments",
+	            "eyebrow": "Experiments",
+	            "title": "Making the brief testable",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "d268-f03"
+	            ],
+	            "mediaLabel": "Opened-flat configuration"
+	        },
+	        {
+	            "key": "mechanism",
+	            "parent": "mechanism",
+	            "eyebrow": "Mechanism",
+	            "title": "Driving the cage from its edge",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "d268-f01"
+	            ],
+	            "mediaLabel": "Exposed meat cage"
+	        },
+	        {
+	            "key": "tests",
+	            "parent": "tests",
+	            "eyebrow": "Test conditions",
+	            "title": "Separating heat, rotation and cooking",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "results",
+	            "parent": "results",
+	            "eyebrow": "Findings",
+	            "title": "Results and decisions",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "ending",
+	            "parent": "ending",
+	            "eyebrow": "Scope",
+	            "title": "Where my involvement ended",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "gallery",
+	            "parent": "gallery",
+	            "eyebrow": "Visual evidence",
+	            "title": "Project views",
+	            "left": {
+	                "kind": "sources"
+	            },
+	            "media": [
+	                "d268-f01",
+	                "d268-f02",
+	                "d268-f03"
+	            ],
+	            "mediaLabel": "Selected project views"
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Project views",
+	        "description": "Three selected views of the Fissler BBQ concept."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
