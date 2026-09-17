@@ -2957,6 +2957,89 @@ export const projectArticleTrial = {
 	        "description": "Product photograph, assembly geometry and annotated interface reviews."
 	    }
 	},
+	"avegant-glyph": {
+	    "sections": {
+	        "use": "one-wearable-two-ways-to-use-it",
+	        "liner": "developing-the-liner-spring-and-earpad-together",
+	        "force": "finding-where-the-force-comes-from",
+	        "headstrap": "keeping-headstrap-adjustments-stable",
+	        "cable": "keeping-the-cable-working-as-the-arm-moves",
+	        "hardware": "moving-changes-into-hardware"
+	    },
+	    "media": {
+	        "figure1": {
+	            "galleryId": "glyph-g1",
+	            "src": "/assets/avegant-glyph/product-and-fit/avegant-glyph-context-01-sm.webp"
+	        },
+	        "figure2": {
+	            "galleryId": "glyph-g3",
+	            "src": "/assets/avegant-glyph/product-and-fit/avegant-glyph-detail-02-sm.webp"
+	        },
+	        "figure3": {
+	            "galleryId": "glyph-g2",
+	            "src": "/assets/avegant-glyph/product-and-fit/avegant-glyph-assembly-03-sm.webp"
+	        },
+	        "figure4": {
+	            "galleryId": "glyph-g4",
+	            "src": "/assets/avegant-glyph/product-and-fit/avegant-glyph-context-04-sm.webp"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "use",
+	            "eyebrow": "Avegant Glyph",
+	            "left": {
+	                "kind": "context"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "liner",
+	            "eyebrow": "Avegant Glyph",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "force",
+	            "eyebrow": "Avegant Glyph",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "headstrap",
+	            "eyebrow": "Avegant Glyph",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "cable",
+	            "eyebrow": "Avegant Glyph",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        },
+	        {
+	            "key": "hardware",
+	            "eyebrow": "Avegant Glyph",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": []
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Product views",
+	        "description": "Display position, convertible headset, open headband and product packaging."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
