@@ -2872,6 +2872,91 @@ export const projectArticleTrial = {
 	        "description": "Mechanical architecture, product details and installation views."
 	    }
 	},
+	"motorola-mp3": {
+	    "sections": {
+	        "envelope": "a-phone-accessory-built-around-a-fixed-envelope",
+	        "surfaces": "from-surfaces-to-individual-parts",
+	        "interfaces": "making-the-interfaces-explicit",
+	        "manufacturing": "leaving-room-for-manufacturing-decisions",
+	        "handoff": "delivering-the-model-and-its-remaining-questions"
+	    },
+	    "media": {
+	        "figure1": {
+	            "galleryId": "motorola-i1",
+	            "src": "/assets/motorola-mp3/hero-alpha-20260909/motorola-mp3-hero-01-xl.webp"
+	        },
+	        "figure2": {
+	            "galleryId": "motorola-i2",
+	            "src": "/assets/motorola-mp3/engineering-20260909/motorola-mp3-assembly-01-xl.webp"
+	        },
+	        "figure3": {
+	            "galleryId": "motorola-i4-cord",
+	            "src": "/assets/motorola-mp3/engineering-20260909/motorola-mp3-cutaway-02-xl.webp"
+	        },
+	        "figure4": {
+	            "galleryId": "motorola-i4-buttons",
+	            "src": "/assets/motorola-mp3/engineering-20260909/motorola-mp3-cutaway-04-xl.webp"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "envelope",
+	            "eyebrow": "Motorola MP3",
+	            "left": {
+	                "kind": "context"
+	            },
+	            "media": [
+	                "figure1"
+	            ]
+	        },
+	        {
+	            "key": "surfaces",
+	            "eyebrow": "Motorola MP3",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "figure2"
+	            ]
+	        },
+	        {
+	            "key": "interfaces",
+	            "eyebrow": "Motorola MP3",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "figure4"
+	            ]
+	        },
+	        {
+	            "key": "manufacturing",
+	            "eyebrow": "Motorola MP3",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "figure3"
+	            ]
+	        },
+	        {
+	            "key": "handoff",
+	            "eyebrow": "Motorola MP3",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "figure2",
+	                "figure3"
+	            ]
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Project views",
+	        "description": "Product photograph, assembly geometry and annotated interface reviews."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
