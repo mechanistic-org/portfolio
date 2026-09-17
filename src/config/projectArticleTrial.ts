@@ -3040,6 +3040,135 @@ export const projectArticleTrial = {
 	        "description": "Display position, convertible headset, open headband and product packaging."
 	    }
 	},
+	"cinema-one": {
+	    "sections": {
+	        "scope": "sole-mechanical-responsibility",
+	        "planning": "packaging-and-prototype-planning",
+	        "enclosure": "building-the-enclosure",
+	        "tolerances": "closing-the-tolerance-loops",
+	        "iterations": "carrying-changes-through-the-parts",
+	        "appearance": "making-appearance-a-concrete-decision"
+	    },
+	    "media": {
+	        "c1": {
+	            "galleryId": "cinema-c1",
+	            "src": "/assets/cinema-one/review-20260909/cinema-one-hero-01-xl.webp"
+	        },
+	        "c2": {
+	            "galleryId": "cinema-c2",
+	            "src": "/assets/cinema-one/review-20260909/cinema-one-exploded-01-xl.webp"
+	        },
+	        "c3": {
+	            "galleryId": "cinema-c3",
+	            "src": "/assets/cinema-one/review-20260909/cinema-one-cutaway-01-xl.webp"
+	        },
+	        "c4": {
+	            "galleryId": "cinema-c4",
+	            "src": "/assets/cinema-one/review-20260909/cinema-one-detail-01-xl.webp"
+	        },
+	        "c5": {
+	            "galleryId": "cinema-c5",
+	            "src": "/assets/cinema-one/review-20260909/cinema-one-detail-02-xl.webp"
+	        }
+	    },
+	    "scenes": [
+	        {
+	            "key": "scope",
+	            "eyebrow": "Cinema One",
+	            "left": {
+	                "kind": "context"
+	            },
+	            "media": [
+	                "c1",
+	                "c2",
+	                "c3",
+	                "c4",
+	                "c5"
+	            ],
+	            "mediaLabel": "Cinema One visual evidence"
+	        },
+	        {
+	            "key": "planning",
+	            "eyebrow": "Cinema One",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "c1",
+	                "c2",
+	                "c3",
+	                "c4",
+	                "c5"
+	            ],
+	            "mediaLabel": "Cinema One visual evidence"
+	        },
+	        {
+	            "key": "enclosure",
+	            "eyebrow": "Cinema One",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "c1",
+	                "c2",
+	                "c3",
+	                "c4",
+	                "c5"
+	            ],
+	            "mediaLabel": "Cinema One visual evidence"
+	        },
+	        {
+	            "key": "tolerances",
+	            "eyebrow": "Cinema One",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "c1",
+	                "c2",
+	                "c3",
+	                "c4",
+	                "c5"
+	            ],
+	            "mediaLabel": "Cinema One visual evidence"
+	        },
+	        {
+	            "key": "iterations",
+	            "eyebrow": "Cinema One",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "c1",
+	                "c2",
+	                "c3",
+	                "c4",
+	                "c5"
+	            ],
+	            "mediaLabel": "Cinema One visual evidence"
+	        },
+	        {
+	            "key": "appearance",
+	            "eyebrow": "Cinema One",
+	            "left": {
+	                "kind": "none"
+	            },
+	            "media": [
+	                "c1",
+	                "c2",
+	                "c3",
+	                "c4",
+	                "c5"
+	            ],
+	            "mediaLabel": "Cinema One visual evidence"
+	        }
+	    ],
+	    "featured": [],
+	    "breakout": {
+	        "eyebrow": "Product and engineering views",
+	        "description": "Product enclosure, internal construction, tolerance analysis and manufacturing appearance reviews."
+	    }
+	},
 } satisfies Record<string, ProjectPresentation>;
 
 export const trialSlugs = Object.keys(projectArticleTrial);
