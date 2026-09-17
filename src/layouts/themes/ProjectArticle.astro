@@ -124,7 +124,7 @@ const meta = [
 
 const facts: [string, unknown][] = (
 	[
-		["Role", pretty(d.job_title) || "Mechanical / ID Lead"],
+		["Role", pretty(d.job_title) || (d.slug === "portion-cup" ? undefined : "Mechanical / ID Lead")],
 		["Employer", pretty(d.employer)],
 		["Client", (d.client || []).map(pretty).join(", ")],
 		["Period", period],
@@ -170,7 +170,7 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 			description={d.description}
 			audioUrl={d.audio_url}
 			photoCount={images.length || undefined}
-			mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches", "dispensers", "makeline"].includes(d.slug) ? "images" : undefined}
+			mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches", "dispensers", "makeline", "portion-cup"].includes(d.slug) ? "images" : undefined}
 		/>
 
 		{contextRibbon && <ContextRibbon model={contextRibbon} />}
@@ -185,7 +185,7 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 					useContinuityRails ? (
 						<ProjectContinuityRail
 							side="left"
-							mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches", "dispensers", "makeline"].includes(d.slug) ? "images" : undefined}
+							mediaCountLabel={["sundance", "sc48", "d-control", "d-command", "room-director", "wall-plates", "webtv-galaxy", "webtv-cortez", "webtv-elmer", "backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches", "dispensers", "makeline", "portion-cup"].includes(d.slug) ? "images" : undefined}
 							projectTitle={d.title}
 							scenes={activeRailScenes}
 							headings={headings}
@@ -330,7 +330,7 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 		{
 			useContinuityRails && galleries.length > 0 && (
 				<ProjectEvidenceBreakout
-			fullSizeLinks={["backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches", "dispensers", "makeline"].includes(d.slug)}
+			fullSizeLinks={["backsplash", "320-slot-optical-carousel", "kplayer-6000", "kserver-1500", "kserver-5000", "m700", "dv700", "morpheus", "extension-switches", "dispensers", "makeline", "portion-cup"].includes(d.slug)}
 					galleries={resolved?.galleries ?? galleries}
 					featured={resolved?.featured}
 					breakout={resolved?.breakout}
@@ -373,7 +373,8 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 	[data-project-article="morpheus"] :global([id]),
 	[data-project-article="extension-switches"] :global([id]),
 	[data-project-article="dispensers"] :global([id]),
-	[data-project-article="makeline"] :global([id]) {
+	[data-project-article="makeline"] :global([id]),
+	[data-project-article="portion-cup"] :global([id]) {
 		scroll-margin-top: 6rem;
 	}
 	[data-project-article="room-director"] > :global(header img),
@@ -407,7 +408,9 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 	[data-project-article="dispensers"] > :global(header img),
 	[data-project-article="dispensers"] :global(.rail__media-grid img),
 	[data-project-article="makeline"] > :global(header img),
-	[data-project-article="makeline"] :global(.rail__media-grid img) {
+	[data-project-article="makeline"] :global(.rail__media-grid img),
+	[data-project-article="portion-cup"] > :global(header img),
+	[data-project-article="portion-cup"] :global(.rail__media-grid img) {
 		object-fit: contain;
 		background: white;
 	}
@@ -492,6 +495,24 @@ const navNext = nextProject && !(d.slug === "extension-switches" && nextProject.
 		width: min(100%, 32rem);
 	}
 	[data-project-article="makeline"] :global(.evidence-breakout img) {
+		width: auto;
+		max-width: 100%;
+		height: auto;
+		max-height: 70vh;
+		margin-inline: auto;
+		object-fit: contain;
+	}
+
+	[data-project-article="portion-cup"] :global(.evidence-breakout__galleries > section) {
+		width: min(100%, 48rem);
+		margin-inline: auto;
+	}
+	[data-project-article="portion-cup"] :global(.evidence-breakout__galleries > section:has(img[src$="/cup-rim-section.jpg"])),
+	[data-project-article="portion-cup"] :global(.evidence-breakout__galleries > section:has(img[src$="/cabinet-layout.jpg"])),
+	[data-project-article="portion-cup"] :global(.evidence-breakout__galleries > section:has(img[src$="/drive-assembly.jpg"])) {
+		width: min(100%, 32rem);
+	}
+	[data-project-article="portion-cup"] :global(.evidence-breakout img) {
 		width: auto;
 		max-width: 100%;
 		height: auto;
