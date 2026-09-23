@@ -52,6 +52,7 @@ async function selected(page, id, phase = "selection") {
 				(el) => el.parentElement?.dataset.id,
 			),
 			swarmReady: document.querySelector("[data-swarm-ready]")?.dataset.swarmReady,
+			transition: document.documentElement.dataset.astroTransition,
 		}));
 		throw new Error(`${phase}: expected ${id}; ${JSON.stringify(state)}; ${error.message}`);
 	}
@@ -60,7 +61,9 @@ async function route(page, pathname) {
 	// Astro's ClientRouter can emit an early same-document history event.
 	// Wait for the requested destination and its rendered page, not that event.
 	await page.waitForFunction(
-		(expected) => location.pathname === expected,
+		(expected) =>
+			location.pathname === expected &&
+			!document.documentElement.hasAttribute("data-astro-transition"),
 		{ timeout: 45000 },
 		pathname,
 	);
