@@ -1,0 +1,172 @@
+.career-timeline {
+	color: var(--foreground, #e4e4e7);
+	padding: 1rem 1.25rem;
+	border-top: 1px solid var(--border, #27272a);
+	background: var(--card, transparent);
+	font-family: var(--font-sans, sans-serif);
+}
+.career-timeline-heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+}
+.career-timeline-heading h2 {
+	margin: 0;
+	font: 500 0.68rem var(--font-mono, monospace);
+	text-transform: uppercase;
+	letter-spacing: 0.14em;
+}
+.career-timeline-heading a {
+	font-size: 0.7rem;
+	color: var(--muted-foreground, #a1a1aa);
+}
+.career-overview {
+	margin: 0.6rem 0 0.75rem;
+}
+.career-overview-years {
+	display: flex;
+	justify-content: space-between;
+	font: 0.6rem var(--font-mono, monospace);
+	color: var(--muted-foreground, #a1a1aa);
+}
+.career-overview svg {
+	display: block;
+	width: 100%;
+	height: 42px;
+	overflow: visible;
+}
+.career-window {
+	fill: color-mix(in srgb, var(--foreground, white) 5%, transparent);
+	stroke: var(--muted-foreground, #71717a);
+	stroke-width: 1;
+}
+.career-overview a {
+	outline: none;
+}
+.career-overview a:hover rect,
+.career-overview a:focus-visible rect,
+.career-overview a[aria-current] rect {
+	stroke: var(--foreground, white);
+	stroke-width: 3;
+}
+.career-axis,
+.career-tracks a {
+	display: grid;
+	grid-template-columns: minmax(0, 42%) minmax(0, 58%);
+}
+.career-axis {
+	font: 0.6rem var(--font-mono, monospace);
+	color: var(--muted-foreground, #a1a1aa);
+	padding-bottom: 0.4rem;
+}
+.career-axis > div {
+	position: relative;
+	height: 0.8rem;
+}
+.career-axis > div > span {
+	position: absolute;
+	transform: translateX(-50%);
+}
+.career-tracks {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.career-tracks a {
+	align-items: center;
+	min-height: 32px;
+	text-decoration: none;
+	color: inherit;
+	border-top: 1px solid color-mix(in srgb, var(--foreground, white) 7%, transparent);
+}
+.career-tracks a:hover,
+.career-tracks a:focus-visible {
+	background: color-mix(in srgb, var(--foreground, white) 7%, transparent);
+	outline: 1px solid var(--muted-foreground, #a1a1aa);
+	outline-offset: 1px;
+}
+.career-tracks a[aria-current] {
+	background: color-mix(in srgb, var(--primary, #2e5cff) 12%, transparent);
+}
+.career-track-label {
+	font-size: 0.7rem;
+	line-height: 1.25;
+	padding: 0.25rem 0.5rem 0.25rem 0;
+}
+.career-track-label small {
+	display: block;
+	color: var(--muted-foreground, #a1a1aa);
+	font: 0.57rem var(--font-mono, monospace);
+}
+.career-tracks [data-period-basis="employment-period"] .career-span {
+	background: transparent;
+	border: 1px dashed var(--career-color);
+}
+.career-track {
+	position: relative;
+	height: 24px;
+	border-bottom: 1px solid color-mix(in srgb, var(--foreground, white) 9%, transparent);
+}
+.career-span {
+	position: absolute;
+	top: 9px;
+	height: 6px;
+	background: var(--career-color);
+	min-width: 1px;
+}
+.career-start {
+	position: absolute;
+	top: 7px;
+	width: 10px;
+	height: 10px;
+	transform: translateX(-50%);
+	background: var(--career-color);
+	border: 1px solid var(--muted-foreground, #a1a1aa);
+}
+.career-tracks a[aria-current] .career-start {
+	outline: 2px solid var(--foreground, white);
+	outline-offset: 2px;
+}
+.career-note,
+.career-empty {
+	margin: 0.6rem 0 0;
+	font-size: 0.65rem;
+	line-height: 1.5;
+	color: var(--muted-foreground, #a1a1aa);
+}
+.career-undated {
+	margin-top: 0.5rem;
+	font-size: 0.7rem;
+}
+.career-undated a {
+	display: block;
+	padding: 0.35rem 0;
+}
+.career-adjacent {
+	display: flex;
+	justify-content: space-between;
+	font: 0.65rem var(--font-mono, monospace);
+}
+.career-adjacent a {
+	display: flex;
+	align-items: center;
+	min-height: 32px;
+	padding: 0 0.3rem;
+}
+.career-adjacent a:focus-visible {
+	outline: 2px solid currentColor;
+}
+@media (min-width: 1024px) {
+	[data-project-article] .career-timeline {
+		max-width: 72rem;
+		margin: 0 auto 2rem;
+	}
+	[data-project-article] .career-tracks a {
+		min-height: 26px;
+	}
+	[data-project-article] .career-track-label small {
+		display: inline;
+		margin-left: 0.7rem;
+	}
+}

@@ -1,0 +1,693 @@
+{
+  "schemaVersion": 1,
+  "roles": [
+    {
+      "id": "mechanistic-2022",
+      "company": "MECHANISTIC",
+      "canonicalTitle": "Principal Mechanical Architect",
+      "location": "Silicon Valley",
+      "period": {
+        "precision": "year",
+        "start": "2022",
+        "end": null
+      },
+      "channels": {
+        "resumeTitle": "Principal Mechanical Architect",
+        "linkedinTitle": "Principal | Systems Architecture + AI Augmentation",
+        "linkedinCompany": "MECHANISTIC"
+      },
+      "evidence": {
+        "source": "https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+        "review": "https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+        "note": "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim."
+      }
+    },
+    {
+      "id": "hyphen-2021",
+      "company": "HYPHEN",
+      "canonicalTitle": "Staff Mechanical Engineer → Principal Systems Architect",
+      "location": "San Jose, CA",
+      "period": {
+        "precision": "year",
+        "start": "2021",
+        "end": "2022"
+      },
+      "channels": {
+        "resumeTitle": "Staff Mechanical Engineer → Principal Systems Architect",
+        "linkedinTitle": "Principal Systems Architect / Senior Mechanical Engineer",
+        "linkedinCompany": "HYPHEN"
+      },
+      "evidence": {
+        "source": "https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+        "review": "https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+        "note": "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim."
+      }
+    },
+    {
+      "id": "mechanistic-2018",
+      "company": "MECHANISTIC",
+      "canonicalTitle": "Senior Mechanical Designer",
+      "location": "Redwood City, CA",
+      "period": {
+        "precision": "year",
+        "start": "2018",
+        "end": "2021"
+      },
+      "channels": {
+        "resumeTitle": "Senior Mechanical Designer",
+        "linkedinTitle": "Senior Mechanical Designer | 2018 – 2021",
+        "linkedinCompany": "MECHANISTIC"
+      },
+      "evidence": {
+        "source": "https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+        "review": "https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+        "note": "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim."
+      }
+    },
+    {
+      "id": "noon-2017",
+      "company": "NOON HOME",
+      "canonicalTitle": "Head of Mechanical Engineering",
+      "location": "Cupertino, CA",
+      "period": {
+        "precision": "year",
+        "start": "2017",
+        "end": "2018"
+      },
+      "channels": {
+        "resumeTitle": "Head of Mechanical Engineering",
+        "linkedinTitle": "Principal Mechanical Architect / Head of Mechanical Engineering",
+        "linkedinCompany": "NOON HOME"
+      },
+      "evidence": {
+        "source": "https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+        "review": "https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+        "note": "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim."
+      }
+    },
+    {
+      "id": "avegant-2015",
+      "company": "AVEGANT",
+      "canonicalTitle": "Senior Mechanical Engineer - NPI / DFM / MP",
+      "location": "Belmont, CA",
+      "period": {
+        "precision": "year",
+        "start": "2015",
+        "end": "2017"
+      },
+      "channels": {
+        "resumeTitle": "Senior Mechanical Engineer - NPI / DFM / MP",
+        "linkedinTitle": "Senior Mechanical Engineer | NPI / DFM / Mass Production",
+        "linkedinCompany": "AVEGANT"
+      },
+      "evidence": {
+        "source": "https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+        "review": "https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+        "note": "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim."
+      }
+    },
+    {
+      "id": "kaleidescape-2008",
+      "company": "KALEIDESCAPE",
+      "canonicalTitle": "Senior Mechanical Design Engineer",
+      "location": "Sunnyvale, CA",
+      "period": {
+        "precision": "year",
+        "start": "2008",
+        "end": "2015"
+      },
+      "channels": {
+        "resumeTitle": "Senior Mechanical Design Engineer",
+        "linkedinTitle": "Senior Mechanical Design Engineer",
+        "linkedinCompany": "KALEIDESCAPE"
+      },
+      "evidence": {
+        "source": "https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+        "review": "https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+        "note": "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim."
+      }
+    },
+    {
+      "id": "digidesign-2003",
+      "company": "DIGIDESIGN (AVID)",
+      "canonicalTitle": "Lead Mechanical Engineer",
+      "location": "Daly City, CA",
+      "period": {
+        "precision": "year",
+        "start": "2003",
+        "end": "2008"
+      },
+      "channels": {
+        "resumeTitle": "Lead Mechanical Engineer",
+        "linkedinTitle": "Lead Mechanical Engineer | The Console Era",
+        "linkedinCompany": "DIGIDESIGN (AVID)"
+      },
+      "evidence": {
+        "source": "https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+        "review": "https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+        "note": "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim."
+      }
+    },
+    {
+      "id": "mechanistic-1998",
+      "company": "MECHANISTIC",
+      "canonicalTitle": "Senior Mechanical Designer",
+      "period": {
+        "precision": "year",
+        "start": "1998",
+        "end": "2003"
+      },
+      "channels": {
+        "resumeTitle": null,
+        "linkedinTitle": "Senior Mechanical Designer | 1998 – 2003",
+        "linkedinCompany": "MECHANISTIC"
+      },
+      "evidence": {
+        "source": "https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+        "review": "https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+        "note": "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim."
+      }
+    },
+    {
+      "id": "frogdesign-1997",
+      "company": "FROGDESIGN",
+      "canonicalTitle": "Mechanical Designer",
+      "period": {
+        "precision": "year",
+        "start": "1997",
+        "end": "1999"
+      },
+      "channels": {
+        "resumeTitle": null,
+        "linkedinTitle": "Mechanical Designer | 1997 – 1999",
+        "linkedinCompany": "FROGDESIGN"
+      },
+      "evidence": {
+        "source": "https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+        "review": "https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+        "note": "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim."
+      }
+    },
+    {
+      "id": "mechanistic-1993",
+      "company": "MECHANISTIC",
+      "canonicalTitle": "Mechanical Designer",
+      "period": {
+        "precision": "year",
+        "start": "1993",
+        "end": "1997"
+      },
+      "channels": {
+        "resumeTitle": null,
+        "linkedinTitle": "Mechanical Designer | 1993 – 1997",
+        "linkedinCompany": "MECHANISTIC"
+      },
+      "evidence": {
+        "source": "https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+        "review": "https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+        "note": "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim."
+      }
+    },
+    {
+      "id": "sgi",
+      "company": "SILICON GRAPHICS (SGI)",
+      "canonicalTitle": "Mechanical Designer / Technician IV",
+      "period": {
+        "precision": "unknown",
+        "start": null,
+        "end": null
+      },
+      "channels": {
+        "resumeTitle": null,
+        "linkedinTitle": "Mechanical Designer / Technician IV",
+        "linkedinCompany": "SILICON GRAPHICS (SGI)"
+      },
+      "evidence": {
+        "source": "https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+        "review": "https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+        "note": "Accepted LinkedIn entry supplies no employment dates; do not infer dates from legacy work_history.json."
+      }
+    },
+    {
+      "id": "ep-technologies-1986",
+      "company": "EP Technologies",
+      "canonicalTitle": "Production Supervisor",
+      "period": {
+        "precision": "year",
+        "start": "1986",
+        "end": "1989"
+      },
+      "channels": {
+        "resumeTitle": null,
+        "linkedinTitle": "Foundational Roles",
+        "linkedinCompany": "EARLY CAREER"
+      },
+      "evidence": {
+        "source": "https://github.com/mechanistic-org/portfolio/commit/1b2cd2f6eaba20544cef087d5e031f1e2dba8bac",
+        "review": "https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+        "note": "Accepted channel labels retained verbatim; display mappings are not a new seniority or employment claim."
+      }
+    }
+  ],
+  "projects": {
+    "320-slot-optical-carousel": {
+      "start": "2010-08-23T00:00:00.000Z",
+      "end": null,
+      "basis": "project-record"
+    },
+    "avegant-glyph": {
+      "start": "2015-01-01T00:00:00.000Z",
+      "end": "2016-01-01T00:00:00.000Z",
+      "basis": "documented-work"
+    },
+    "backsplash": {
+      "start": "2021-08-25T00:00:00.000Z",
+      "end": null,
+      "basis": "project-record"
+    },
+    "bazooka": {
+      "start": "2017-02-26T00:00:00.000Z",
+      "end": null,
+      "basis": "project-record"
+    },
+    "bfd": {
+      "start": null,
+      "end": null,
+      "basis": "unresolved"
+    },
+    "c24": {
+      "start": "2005-06-02T00:00:00.000Z",
+      "end": "2007-11-07T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "cinema-one": {
+      "start": "2012-10-09T00:00:00.000Z",
+      "end": "2014-10-16T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "d-command": {
+      "start": "2004-04-14T00:00:00.000Z",
+      "end": "2005-05-13T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "d-control": {
+      "start": "2003-04-14T00:00:00.000Z",
+      "end": "2005-08-01T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "digi-003": {
+      "start": "2007-05-01T00:00:00.000Z",
+      "end": null,
+      "basis": "project-record"
+    },
+    "dispensers": {
+      "start": "2021-01-01T00:00:00.000Z",
+      "end": "2022-01-01T00:00:00.000Z",
+      "basis": "employment-period",
+      "context": "HYPHEN period"
+    },
+    "dv700": {
+      "start": "2014-02-06T00:00:00.000Z",
+      "end": "2014-08-19T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "extension-switches": {
+      "start": "2017-03-03T00:00:00.000Z",
+      "end": "2017-07-12T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "fissler-bbq": {
+      "start": "1996-01-01T00:00:00.000Z",
+      "end": null,
+      "basis": "operator-recollection",
+      "approximate": true
+    },
+    "kplayer-300": {
+      "start": "2008-01-01T00:00:00.000Z",
+      "end": null,
+      "basis": "documented-work"
+    },
+    "kplayer-6000": {
+      "start": "2008-05-19T00:00:00.000Z",
+      "end": "2009-01-22T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "kserver-1500": {
+      "start": "2014-07-16T00:00:00.000Z",
+      "end": "2015-01-07T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "kserver-5000": {
+      "start": "2008-07-21T00:00:00.000Z",
+      "end": "2015-01-07T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "ksystem-120": {
+      "start": "2008-06-11T00:00:00.000Z",
+      "end": null,
+      "basis": "project-record"
+    },
+    "kvault-10": {
+      "start": "2010-12-13T00:00:00.000Z",
+      "end": null,
+      "basis": "project-record"
+    },
+    "m300": {
+      "start": "2010-05-01T00:00:00.000Z",
+      "end": null,
+      "basis": "project-record"
+    },
+    "m500": {
+      "start": "2010-05-01T00:00:00.000Z",
+      "end": null,
+      "basis": "project-record"
+    },
+    "m700": {
+      "start": "2010-04-19T00:00:00.000Z",
+      "end": "2014-08-19T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "makeline": {
+      "start": "2021-01-01T00:00:00.000Z",
+      "end": "2022-01-01T00:00:00.000Z",
+      "basis": "employment-period",
+      "context": "HYPHEN period"
+    },
+    "minimerc": {
+      "start": "2001-11-01T00:00:00.000Z",
+      "end": "2001-12-01T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "morpheus": {
+      "start": "2008-10-17T00:00:00.000Z",
+      "end": "2009-01-23T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "motorola-mp3": {
+      "start": "2000-07-27T00:00:00.000Z",
+      "end": null,
+      "basis": "project-record"
+    },
+    "mp6000-mp3-player": {
+      "start": null,
+      "end": null,
+      "basis": "unresolved"
+    },
+    "portion-cup": {
+      "start": "2021-01-01T00:00:00.000Z",
+      "end": "2022-01-01T00:00:00.000Z",
+      "basis": "employment-period",
+      "context": "HYPHEN period"
+    },
+    "profile": {
+      "start": "2005-06-01T00:00:00.000Z",
+      "end": null,
+      "basis": "project-record"
+    },
+    "room-director": {
+      "start": "2016-09-01T00:00:00.000Z",
+      "end": null,
+      "basis": "project-record"
+    },
+    "sc48": {
+      "start": "2007-02-28T00:00:00.000Z",
+      "end": "2008-04-07T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "sundance": {
+      "start": "2014-06-10T00:00:00.000Z",
+      "end": "2015-03-05T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "switches": {
+      "start": "2017-07-01T00:00:00.000Z",
+      "end": "2018-03-01T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "wall-plates": {
+      "start": "2016-12-12T00:00:00.000Z",
+      "end": null,
+      "basis": "project-record"
+    },
+    "webtv-cortez": {
+      "start": "2000-01-01T12:00:00.000Z",
+      "end": null,
+      "basis": "project-record"
+    },
+    "webtv-elmer": {
+      "start": "2000-09-15T00:00:00.000Z",
+      "end": null,
+      "basis": "project-record"
+    },
+    "webtv-galaxy": {
+      "start": "2001-01-01T12:00:00.000Z",
+      "end": null,
+      "basis": "project-record"
+    },
+    "xbox": {
+      "start": "2002-01-01T00:00:00.000Z",
+      "end": null,
+      "basis": "documented-work"
+    },
+    "zeus": {
+      "start": "2000-11-01T00:00:00.000Z",
+      "end": "2001-09-17T00:00:00.000Z",
+      "basis": "project-record"
+    },
+    "acer-aspire": {
+      "start": "1996-02-01T00:00:00.000Z",
+      "end": "1996-05-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "acer-subwoofer": {
+      "start": "1997-06-01T00:00:00.000Z",
+      "end": "1997-08-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "battery-lock": {
+      "start": "2019-01-01T00:00:00.000Z",
+      "end": "2019-04-15T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "bay-wheels": {
+      "start": "2018-11-01T00:00:00.000Z",
+      "end": "2019-05-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "d-show": {
+      "start": "2005-02-01T00:00:00.000Z",
+      "end": "2005-07-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "disc-cartridges": {
+      "start": "2010-06-01T00:00:00.000Z",
+      "end": "2010-12-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "dvdo-player": {
+      "start": "1998-03-01T00:00:00.000Z",
+      "end": "1998-05-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "ept-1000": {
+      "start": "1987-01-01T00:00:00.000Z",
+      "end": "1989-06-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "frantic-frames": {
+      "start": "1992-04-01T00:00:00.000Z",
+      "end": "1993-03-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "glyph-2": {
+      "start": "2015-10-17T00:00:00.000Z",
+      "end": "2017-03-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "hp-jornada": {
+      "start": "1998-06-01T00:00:00.000Z",
+      "end": "1998-07-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "iot-module": {
+      "start": "2018-11-01T00:00:00.000Z",
+      "end": "2019-02-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "jewel": {
+      "start": "2009-06-01T00:00:00.000Z",
+      "end": "2010-04-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "k-remote": {
+      "start": "2009-04-20T00:00:00.000Z",
+      "end": "2009-08-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "kavo-dental-unit-1": {
+      "start": "1997-07-01T00:00:00.000Z",
+      "end": "1997-10-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "kavo-dental-unit-2": {
+      "start": "1997-07-01T00:00:00.000Z",
+      "end": "1997-12-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "kplayer-2500": {
+      "start": "2008-03-02T00:00:00.000Z",
+      "end": "2008-12-02T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "kplayer-5000": {
+      "start": "2008-03-01T00:00:00.000Z",
+      "end": "2008-12-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "kserver-2500": {
+      "start": "2008-03-03T00:00:00.000Z",
+      "end": "2008-12-03T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "laptv": {
+      "start": "2000-04-01T00:00:00.000Z",
+      "end": "2000-06-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "mbox": {
+      "start": "2003-03-01T00:00:00.000Z",
+      "end": "2003-10-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "mbox-2": {
+      "start": "2005-09-01T00:00:00.000Z",
+      "end": "2005-11-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "mbox-2-micro": {
+      "start": "2007-10-01T00:00:00.000Z",
+      "end": "2008-04-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "mbox-2-mini": {
+      "start": "2007-02-01T00:00:00.000Z",
+      "end": "2007-05-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "mbox-2-pro": {
+      "start": "2006-06-01T00:00:00.000Z",
+      "end": "2006-11-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "media-nodes": {
+      "start": "2000-11-01T00:00:00.000Z",
+      "end": "2001-04-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "netscreen-500": {
+      "start": "2000-02-01T00:00:00.000Z",
+      "end": "2000-04-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "newscorp-stb": {
+      "start": "1997-02-01T00:00:00.000Z",
+      "end": "1997-10-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "node": {
+      "start": "2000-12-01T00:00:00.000Z",
+      "end": "2001-01-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "pb-convertible": {
+      "start": "1996-02-01T00:00:00.000Z",
+      "end": "1996-03-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "pet-scale": {
+      "start": "2019-02-01T00:00:00.000Z",
+      "end": "2019-03-15T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "pro-control-jr": {
+      "start": "2003-06-01T00:00:00.000Z",
+      "end": "2004-04-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "rack-002": {
+      "start": "2003-05-01T00:00:00.000Z",
+      "end": "2003-10-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "rack-003": {
+      "start": "2007-05-01T00:00:00.000Z",
+      "end": "2007-10-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "remote": {
+      "start": "2000-04-01T00:00:00.000Z",
+      "end": "2000-05-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "speed-reader": {
+      "start": "2008-05-01T00:00:00.000Z",
+      "end": "2009-02-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "strato": {
+      "start": "2014-06-01T00:00:00.000Z",
+      "end": "2015-02-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "strato-terra": {
+      "start": "2015-01-01T00:00:00.000Z",
+      "end": "2016-01-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "sunbeam-toaster": {
+      "start": "1995-01-01T00:00:00.000Z",
+      "end": "1995-03-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "sunbeam-window-toaster": {
+      "start": "1995-01-01T00:00:00.000Z",
+      "end": "1995-03-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "usb-box": {
+      "start": "2001-06-01T00:00:00.000Z",
+      "end": "2001-08-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "vadem-clio": {
+      "start": "1997-10-01T00:00:00.000Z",
+      "end": "1997-11-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "venue-live-sound": {
+      "start": "2005-01-01T00:00:00.000Z",
+      "end": "2006-01-01T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "webtv-mercury": {
+      "start": "2000-11-10T00:00:00.000Z",
+      "end": "2001-06-12T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "webtv-pluto": {
+      "start": "2000-12-01T00:00:00.000Z",
+      "end": "2001-01-03T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "webtv-titan": {
+      "start": "2000-11-01T00:00:00.000Z",
+      "end": "2000-11-27T00:00:00.000Z",
+      "basis": "published-record"
+    },
+    "weemote": {
+      "start": "2010-06-01T00:00:00.000Z",
+      "end": "2010-08-01T00:00:00.000Z",
+      "basis": "published-record"
+    }
+  }
+}

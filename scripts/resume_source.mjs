@@ -6,6 +6,7 @@ import { execFileSync } from "node:child_process";
 import { pathToFileURL } from "node:url";
 export const SOURCE_INPUTS = [
 	"src/config/resume_master.ts",
+	"src/data/careerChronology.json",
 	"src/config/resume_projection.ts",
 	"src/config/claim-presentations.ts",
 	"src/lib/project-claims.mjs",
