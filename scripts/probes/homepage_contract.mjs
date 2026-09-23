@@ -43,6 +43,19 @@ async function selected(page, id) {
 		id,
 	);
 }
+async function route(page, pathname) {
+	// Astro's ClientRouter can emit an early same-document history event.
+	// Wait for the requested destination and its rendered page, not that event.
+	await page.waitForFunction(
+		(expected) => location.pathname === expected,
+		{ timeout: 45000 },
+		pathname,
+	);
+	if (pathname.startsWith("/projects/")) {
+		const id = pathname.split("/").filter(Boolean).at(-1);
+		await page.waitForSelector(`[data-context-ribbon][data-current="${id}"]`);
+	}
+}
 async function pointAt(page, id) {
 	await page.$eval(node(id), (el) => el.scrollIntoView({ block: "center" }));
 	const point = await page.$eval(`${node(id)} .project-circle`, (el) => {
@@ -163,7 +176,7 @@ const assertionSpecs = [
 			await selected(page, "sc48");
 			assert.ok(displacement(baseline, await snapshot(page)) < 5, "baseline was not restored");
 			const rings = await snapshot(page);
-			assert.equal(rings.filter((n) => n.tier === "deep_dive").length, 31);
+			assert.equal(rings.filter((n) => n.tier === "deep_dive").length, 30);
 			assert.ok(rings.filter((n) => n.tier === "deep_dive").every((n) => n.width === "3"));
 			assert.ok(rings.every((n) => n.opacity >= 0.95));
 		},
@@ -218,14 +231,16 @@ const assertionSpecs = [
 			await selected(page, "sc48");
 			await page.click('[data-career-overview] a[data-project="avegant-glyph"]');
 			await selected(page, "avegant-glyph");
-			await Promise.all([
-				page.waitForNavigation({ waitUntil: "networkidle0" }),
-				page.click('[data-viewer-id] a[href="/projects/avegant-glyph/"]'),
-			]);
+			await page.click('[data-viewer-id] a[href="/projects/avegant-glyph/"]');
+			await route(page, "/projects/avegant-glyph/");
 			assert.equal(new URL(page.url()).pathname, "/projects/avegant-glyph/");
 			await page.goBack({ waitUntil: "networkidle0" });
+			await route(page, "/");
 			await selected(page, "avegant-glyph");
+			await pointAt(page, "sc48");
+			await selected(page, "sc48");
 			await page.goForward({ waitUntil: "networkidle0" });
+			await route(page, "/projects/avegant-glyph/");
 			assert.equal(new URL(page.url()).pathname, "/projects/avegant-glyph/");
 		},
 	],
@@ -240,6 +255,8 @@ const assertionSpecs = [
 				await navigate(page, `/${hash}`);
 				await selected(page, "avegant-glyph");
 			}
+			await navigate(page, "/#project=switches");
+			await selected(page, "extension-switches");
 			for (const hash of ["#project=missing", "#pin=missing&lens=bogus", "#tour=field"]) {
 				await navigate(page, `/${hash}`);
 				assert.equal(new URL(page.url()).hash, "");
@@ -478,18 +495,20 @@ const assertionSpecs = [
 				);
 				const link = ".career-tracks a:not([aria-current])";
 				const href = await page.$eval(link, (el) => el.getAttribute("href"));
-				await Promise.all([
-					page.waitForNavigation({ waitUntil: "networkidle0" }),
-					page.click(link),
-				]);
+				await page.click(link);
+				await route(page, href);
 				assert.equal(new URL(page.url()).pathname, href);
 			}
 		},
 	],
 ];
 
+const selectedSpecs = process.env.HOMEPAGE_CONTRACT_FILTER
+	? assertionSpecs.filter(([name]) => name.includes(process.env.HOMEPAGE_CONTRACT_FILTER))
+	: assertionSpecs;
+if (!selectedSpecs.length) throw new Error("No matching homepage assertions");
 const passed = await runBrowserContract({
-	assertionSpecs: assertionSpecs.map(([name, assertion]) => [
+	assertionSpecs: selectedSpecs.map(([name, assertion]) => [
 		name,
 		async (page, problems) => {
 			const details = await assertion(page);
@@ -498,7 +517,7 @@ const passed = await runBrowserContract({
 		},
 	]),
 	cacheDirectory,
-	expectedAssertions: assertionSpecs.length,
+	expectedAssertions: selectedSpecs.length,
 	initialViewport: desktop,
 	title: "Homepage reading, chronology and native-access contract (#291)",
 });

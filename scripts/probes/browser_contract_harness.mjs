@@ -196,6 +196,7 @@ export async function runBrowserContract({
 	let fatalError = null;
 	const results = [];
 	try {
+		await mkdir(cacheDirectory, { recursive: true });
 		if (!process.env.BROWSER_CONTRACT_URL) {
 			if (await isPortOccupied()) throw new Error(`Refusing to run: ${HOST}:${PORT} is occupied`);
 			server = startAstroServer(

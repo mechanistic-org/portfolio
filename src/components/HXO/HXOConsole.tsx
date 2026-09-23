@@ -92,8 +92,11 @@ function isEditableTarget(target: EventTarget | null) {
 }
 
 export default function HXOConsole({ projects, careerNodes, projectAliases }: HXOConsoleProps) {
-	const currentViewerId = useStore(viewerId);
+	const storedViewerId = useStore(viewerId);
 	const [isHydrated, setIsHydrated] = useState(false);
+	// ClientRouter retains module stores between pages. Match the prerendered
+	// orientation first, then restore the held subject from this entry's URL.
+	const currentViewerId = isHydrated ? storedViewerId : null;
 	const [urlStateReady, setUrlStateReady] = useState(false);
 	const activeProject = projects.find((project) => project.id === currentViewerId);
 	const projectById = useMemo(
@@ -105,6 +108,7 @@ export default function HXOConsole({ projects, careerNodes, projectAliases }: HX
 
 	useEffect(() => {
 		setIsHydrated(true);
+		setConsoleHover(false);
 		const restore = () => {
 			const params = new URLSearchParams(window.location.hash.slice(1));
 			if (
@@ -114,7 +118,7 @@ export default function HXOConsole({ projects, careerNodes, projectAliases }: HX
 				!params.has("tour")
 			) {
 				managedHash.current = !window.location.hash;
-				if (!window.location.hash) clearReading();
+				clearReading();
 				return;
 			}
 			managedHash.current = true;
@@ -139,6 +143,8 @@ export default function HXOConsole({ projects, careerNodes, projectAliases }: HX
 		return () => {
 			window.removeEventListener("hashchange", restore);
 			window.removeEventListener("popstate", restore);
+			setPreview(null);
+			setConsoleHover(false);
 		};
 	}, [projectById, projectAliases]);
 
