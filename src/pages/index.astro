@@ -1,37 +1,35 @@
 ---
-import verbalMap from "@/data/homepage-verbal-map.json";
-import { HXO_TOUR_STEPS } from "@/config/hxoTour";
 export const prerender = true;
 import Layout from "../layouts/BaseLayout.astro";
 import { getCareerAssembly } from "../utils/mapCareerAssembly";
 import HXOSwarmContainer from "../components/HXO/HXOSwarmContainer";
 import HXOConsole from "../components/HXO/HXOConsole";
+import { projectPeriod } from "../utils/projectDates";
+import { getCollection } from "astro:content";
+import { routeEligibleProjects, careerRecords } from "../utils/projectRoster";
+import { careerIdentityAliases } from "../config/projectArticleTrial";
 import { currentSite } from "@config/site_config";
 import siteData from "@config/siteData.json";
-import { resumeMaster } from "@config/resume_master";
 import UnderConstruction from "../components/UnderConstruction.astro";
-import relationshipProjection from "../data/projectRelationships.json";
-import {
-	deriveFocusedConstellation,
-	type ProjectRelationship,
-} from "../utils/deriveFocusedConstellation";
 
 const isUnderConstruction = currentSite !== "main";
 
 // Initialize empty
 let swarmNodes: any[] = [];
 let consoleProjects: any[] = [];
-let projectRelationships: ProjectRelationship[] = [];
 
-// SERVER-RENDERED RECORD BAND
-// Counts stay coupled to the same visible roster supplied to both HXO surfaces.
-let recordStats = { projects: 0, employers: 0, span: "" };
+const careerNodes = careerRecords(
+	routeEligibleProjects(await getCollection("projects"), currentSite),
+	careerIdentityAliases,
+);
+const careerIds = new Set(careerNodes.map((node) => node.id));
 
 if (!isUnderConstruction) {
 	// 1. FETCH SOURCE OF TRUTH (The Assembly)
 	const assembly = await getCareerAssembly();
 	const visibleProjectNodes = assembly.nodes
 		.filter((n) => n.type === "project")
+		.filter((n) => careerIds.has(n.id))
 		.filter((n) => {
 			const targets = n.data.targets || ["main"];
 			return targets.includes(currentSite);
@@ -40,13 +38,14 @@ if (!isUnderConstruction) {
 
 	// 2. ADAPTER: Transform for Swarm (MultiverseNode)
 	swarmNodes = visibleProjectNodes.map((n) => {
+		const period = projectPeriod(n.id, n.data);
 		return {
 			id: n.id,
 			name: n.data.title,
 			group: n.data.employer === "erik_norris" ? "meta" : n.data.employer || "Private", // Custom Group for Color
-			start_date: n.data.date ? new Date(n.data.date).toISOString() : new Date().toISOString(),
-			// FIX: Bake "Now" at build time to prevent Hydration Mismatch (Server vs Client time drift)
-			end_date: n.data.endDate ? new Date(n.data.endDate).toISOString() : new Date().toISOString(),
+			start_date: period.start ?? "",
+			end_date: period.end ?? "",
+			period_basis: period.basis,
 			value: n.data.employer === "erik_norris" ? 60 : 20, // Bigger Mass for Bio
 			tier: n.data.tier,
 			// Pass-throughs
@@ -62,38 +61,6 @@ if (!isUnderConstruction) {
 		id: n.id,
 		data: n.data,
 	}));
-	projectRelationships = relationshipProjection.relationships as unknown as ProjectRelationship[];
-	// Build-time fail-closed validation. The same pure module derives client focus state.
-	deriveFocusedConstellation({
-		relationships: projectRelationships,
-		projectIds: visibleProjectNodes.map((node) => node.id),
-		focusId: null,
-	});
-
-	// 4. SERVER-RENDERED RECORD DATA
-	// SPAN comes from resume_master, NOT from published project dates.
-	//
-	// It used to be min/max over `live` project years, which made a fact about
-	// Erik's career an artefact of which pages happened to be published. Drafting
-	// the 25 ratified cuts moved the newest published project from 2025 to 2021,
-	// so the homepage would have advertised a four-year gap that does not exist.
-	// A career span is not a function of the corpus.
-	const roleYears = resumeMaster.career
-		.flatMap((role) =>
-			role.period.precision === "year" ? [role.period.start, role.period.end].filter(Boolean) : [],
-		)
-		.map(Number);
-	const ongoing = resumeMaster.career.some(
-		(role) => role.period.precision === "year" && role.period.end === null,
-	);
-	const spanStart = roleYears.length ? Math.min(...roleYears) : null;
-	const spanEnd = ongoing ? "Present" : roleYears.length ? String(Math.max(...roleYears)) : "";
-
-	recordStats = {
-		projects: visibleProjectNodes.length,
-		employers: new Set(visibleProjectNodes.map((node) => node.data.employer).filter(Boolean)).size,
-		span: spanStart ? `${spanStart}–${spanEnd}` : "",
-	};
 }
 ---
 
@@ -107,161 +74,42 @@ if (!isUnderConstruction) {
 			hideNavLogo={false}
 			starfield={true}
 		>
-			<div class="hxo-prototype min-h-screen max-w-[100vw] overflow-x-clip bg-transparent font-sans text-zinc-300 selection:bg-lime-900 selection:text-white">
+			<div class="hxo-homepage min-h-screen max-w-[100vw] overflow-x-clip bg-transparent font-sans text-zinc-300 selection:bg-lime-900 selection:text-white">
+				<h1 class="sr-only">Erik Norris · Work</h1>
 				<main class="grid grid-cols-1 lg:h-screen lg:grid-cols-12 lg:overflow-hidden">
 					{/* LEFT: THE SWARM (Navigation / Map) */}
 					{/* The hydrated swarm may grow below lg; without JavaScript this remains one hero stage. */}
-					<div class="hxo-swarm-stage custom-scrollbar relative min-h-svh border-r border-zinc-900 bg-transparent lg:col-span-7 lg:h-screen lg:overflow-x-hidden lg:overflow-y-auto xl:col-span-8">
-						<HXOSwarmContainer
-							client:only="react"
-							nodes={swarmNodes}
-							relationships={projectRelationships}
-						/>
-						{/* IDENTITY OVERLAY - server-rendered, above the fold.
-						    The swarm remains client-only while the console is prerendered.
-						    This keeps identity explicit before hydration and prevents the
-						    only <h1> from sitting a full screen below the instrument. It states
-						    who and what before anything hydrates, costs no layout, and
-						    leaves the swarm exactly as designed. */}
-						<div class="pointer-events-none absolute top-16 right-6 left-6 z-50 max-w-md md:top-20 md:right-auto md:left-10">
-							<h1 class="font-mono text-xl leading-tight font-bold tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] md:text-2xl">
-								Erik Norris
-								<span class="text-primary mt-1 block text-sm tracking-[0.18em] uppercase md:text-base">
-									Engineer
-								</span>
-							</h1>
-							<p class="mt-3 max-w-sm text-sm leading-relaxed text-zinc-300 drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
-								I build products and systems that have to work. The record here spans physical
-								products, manufacturing, software, AI, and the machinery around the work.
-							</p>
-							<div class="pointer-events-auto mt-4 flex flex-wrap items-center gap-3">
-								<a
-									href="/projects/c24/"
-									class="bg-primary rounded-full px-4 py-2 font-mono text-xs font-bold tracking-wider text-black uppercase transition-colors hover:bg-white"
-								>
-									See the C|24 teardown →
-								</a>
-								<a
-									href="/resume/"
-									class="rounded-full border border-white/20 px-4 py-2 font-mono text-xs tracking-wider text-white uppercase backdrop-blur transition-colors hover:bg-white/10"
-								>
-									Résumé
+					<div
+						id="career-map"
+						class="hxo-swarm-stage custom-scrollbar relative min-h-svh border-r border-zinc-900 bg-transparent lg:col-span-7 lg:h-screen lg:overflow-x-hidden lg:overflow-y-auto"
+					>
+						<HXOSwarmContainer client:only="react" nodes={swarmNodes}>
+							<div
+								slot="fallback"
+								class="swarm-fallback flex min-h-svh flex-col justify-center gap-6 p-8"
+							>
+								<h2 class="font-display text-2xl text-white">Explore the engineering work</h2>
+								<p class="max-w-sm text-sm text-zinc-400">
+									Browse the complete project archive, or follow a project in the career timeline.
+								</p>
+								<a href="/projects/" class="text-lime-400 underline underline-offset-4">
+									Browse all projects →
 								</a>
 							</div>
-						</div>
+						</HXOSwarmContainer>
 					</div>
 
 					{/* RIGHT: THE CONSOLE (Details / Index) */}
 					{/* Must start below the 5rem Nav and fill the rest without overflow */}
-					<div class="hxo-console-stage relative z-30 flex flex-col bg-transparent lg:col-span-5 lg:mt-16 lg:h-[calc(100vh-4rem)] xl:col-span-4">
+					<div class="hxo-console-stage relative z-30 flex flex-col bg-transparent lg:col-span-5 lg:mt-16 lg:h-[calc(100vh-4rem)]">
 						<HXOConsole
 							client:load
 							projects={consoleProjects}
-							relationships={projectRelationships}
+							careerNodes={careerNodes}
+							projectAliases={careerIdentityAliases}
 						/>
 					</div>
 				</main>
-
-				{/* Compact server-rendered epilogue; the HXO trio and global footer own discovery. */}
-				<section
-					id="record-band"
-					aria-labelledby="record-band-heading"
-					class="relative z-20 border-t border-zinc-900 bg-black px-6 py-8 md:px-12 md:py-10"
-				>
-					<div class="mx-auto max-w-5xl">
-						<div class="grid gap-6 md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:items-end">
-							{/* h2, not h1 - the identity overlay remains the page's single h1. */}
-							<h2
-								id="record-band-heading"
-								class="font-mono text-sm font-semibold tracking-[0.16em] text-zinc-300 uppercase"
-							>
-								Public engineering record
-							</h2>
-							<dl class="grid grid-cols-3 border border-zinc-900 font-mono">
-								<div class="border-r border-zinc-900 px-3 py-4 text-center">
-									<dt class="text-[10px] leading-tight tracking-widest text-zinc-600 uppercase">
-										Indexed projects
-									</dt>
-									<dd class="mt-1 text-xl font-bold text-white">{recordStats.projects}</dd>
-								</div>
-								<div class="border-r border-zinc-900 px-3 py-4 text-center">
-									<dt class="text-[10px] leading-tight tracking-widest text-zinc-600 uppercase">
-										Employers
-									</dt>
-									<dd class="mt-1 text-xl font-bold text-white">{recordStats.employers}</dd>
-								</div>
-								<div class="px-3 py-4 text-center">
-									<dt class="text-[10px] leading-tight tracking-widest text-zinc-600 uppercase">
-										Span
-									</dt>
-									<dd class="mt-1 text-xl font-bold text-white">{recordStats.span}</dd>
-								</div>
-							</dl>
-						</div>
-
-						<div
-							id="verbal-map"
-							class="mt-8 grid gap-x-10 gap-y-7 border-t border-zinc-900 pt-8 md:grid-cols-2"
-						>
-							{verbalMap.map((block) => (
-								<div>
-									<h3 class="mb-2 text-lg font-semibold text-zinc-200">{block.title}</h3>
-									<p class="max-w-prose text-sm leading-relaxed text-zinc-400">{block.copy}</p>
-								</div>
-							))}
-						</div>
-						<nav
-							aria-label="Explore the record"
-							class="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm text-zinc-300"
-						>
-							<a
-								data-astro-reload
-								href={
-									"/#lens=" +
-									HXO_TOUR_STEPS[0].lens +
-									"&pin=" +
-									encodeURIComponent(HXO_TOUR_STEPS[0].projectId) +
-									"&tour=" +
-									HXO_TOUR_STEPS[0].id
-								}
-								class="underline decoration-zinc-600 underline-offset-4 hover:text-white"
-							>
-								Tour
-							</a>
-							<a
-								href="/how-i-work/"
-								class="underline decoration-zinc-600 underline-offset-4 hover:text-white"
-							>
-								How I Work
-							</a>
-							<a
-								href="/colophon/"
-								class="underline decoration-zinc-600 underline-offset-4 hover:text-white"
-							>
-								Colophon
-							</a>
-							<a
-								href="/colophon/#build-log"
-								class="underline decoration-zinc-600 underline-offset-4 hover:text-white"
-							>
-								Build Log
-							</a>
-						</nav>
-
-						<nav
-							aria-label="Machine-readable"
-							class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-zinc-900 pt-5 font-mono text-[10px] tracking-widest uppercase"
-						>
-							<span class="text-zinc-600">Machine-readable</span>
-							<a href="/llms.txt" class="text-zinc-300 transition-colors hover:text-white">
-								llms.txt
-							</a>
-							<a href="/api/projects.json" class="text-zinc-300 transition-colors hover:text-white">
-								projects.json
-							</a>
-						</nav>
-					</div>
-				</section>
 			</div>
 		</Layout>
 	)
@@ -285,6 +133,20 @@ if (!isUnderConstruction) {
 </style>
 
 <style is:global>
+	.hxo-homepage {
+		overflow-anchor: none;
+	}
+	.hxo-console-stage {
+		scroll-margin-top: 4rem;
+	}
+	.node-group:focus {
+		outline: none;
+	}
+	.node-group:focus-visible .focus-ring {
+		opacity: 1;
+		stroke: #e1e8f2;
+		stroke-width: 1.5px;
+	}
 	.hxo-console-stage > astro-island {
 		display: block;
 		height: 100%;

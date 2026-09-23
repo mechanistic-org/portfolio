@@ -1,8 +1,12 @@
 # Resume authority and local candidates
 
-`resume_master.ts` owns identity/contact, the accepted #152 channel baseline, career facts, explicit date precision,
-canonical and reviewed channel titles, competencies, education, recognition, and the
-canonical PDF URL. `resume_projection.ts` derives the compact HTML resume model,
+`portfolio-canon/career/chronology.json` owns shared role facts, date precision,
+channel titles and reviewed approximate/employment-period project placements.
+Exact project dates remain in canon project entities. `scripts/project_career.mjs`
+projects both into `careerChronology.json`, consumed by the shared career timeline
+and `resume_master.ts`. `resume_master.ts` owns identity/contact, the accepted #152
+channel configuration, competencies, education, recognition and the canonical PDF URL.
+`resume_projection.ts` derives the compact HTML resume model,
 JSON Resume, site identity metadata, global Person JSON-LD, and PDF/download configuration.
 The homepage career span reads the canonical periods. Project content/evidence keeps its
 existing authority. `work_history.json` is a legacy timeline input, not a public identity

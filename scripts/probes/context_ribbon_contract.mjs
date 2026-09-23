@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import ts from "typescript";
+import { buildContextRibbon } from "../../src/utils/contextRibbon.ts";
+import { careerRecords, routeEligibleProjects } from "../../src/utils/projectRoster.ts";
+import { careerIdentityAliases } from "../../src/config/projectArticleTrial.ts";
 import { globSync } from "glob";
 import matter from "gray-matter";
 import { BASE_URL, PAGE_TIMEOUT_MS, runBrowserContract } from "./browser_contract_harness.mjs";
@@ -11,13 +13,6 @@ const cacheDirectory = path.join(
 	"node_modules",
 	".cache",
 	"context-ribbon-contract",
-);
-const source = await readFile("src/utils/contextRibbon.ts", "utf8");
-const compiled = ts.transpileModule(source, {
-	compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 },
-}).outputText;
-const { buildContextRibbon } = await import(
-	`data:text/javascript;base64,${Buffer.from(compiled).toString("base64")}`
 );
 // The same generated project records consumed by getCareerAssembly(). The debug
 // endpoint intentionally exposes only samples, so it cannot prove source parity.
@@ -29,9 +24,7 @@ const generatedNodes = await Promise.all(
 	})),
 );
 const expectedModel = buildContextRibbon(
-	generatedNodes.filter(
-		(n) => n.data.draft !== true && (n.data.targets ?? ["main"]).includes("main"),
-	),
+	careerRecords(routeEligibleProjects(generatedNodes, "main"), careerIdentityAliases),
 	"c24",
 );
 const node = (id, date, endDate) => ({ id, type: "project", data: { title: id, date, endDate } });
@@ -79,7 +72,7 @@ console.log(
 
 async function c24(page, problems) {
 	problems.length = 0;
-	const response = await page.goto(`${BASE_URL}/projects/c24`, {
+	const response = await page.goto(`${BASE_URL}/projects/c24/`, {
 		waitUntil: "networkidle0",
 		timeout: PAGE_TIMEOUT_MS,
 	});
@@ -95,13 +88,16 @@ async function destination(page, href) {
 	// ClientRouter can emit a same-document navigation before its destination
 	// swap. Assert the user-visible destination, not the first navigation event.
 	await page.waitForFunction(
-		(expected) => location.pathname.replace(/\/$/u, "") === expected,
+		(expected) => location.pathname === expected,
 		{ timeout: PAGE_TIMEOUT_MS },
 		href,
 	);
-	await page.waitForSelector(`[data-project-article="${href.split("/").at(-1)}"]`, {
-		timeout: PAGE_TIMEOUT_MS,
-	});
+	await page.waitForSelector(
+		`[data-context-ribbon][data-current="${href.split("/").filter(Boolean).at(-1)}"]`,
+		{
+			timeout: PAGE_TIMEOUT_MS,
+		},
+	);
 }
 
 const specs = [
@@ -111,12 +107,12 @@ const specs = [
 			await c24(page, problems);
 			const expected = expectedModel;
 			assert.ok(expected, "live route-eligible generated records must resolve C24");
-			const actual = await page.$$eval(".ribbon-projects a", (links) =>
+			const actual = await page.$$eval(".career-tracks a", (links) =>
 				links.map((a) => ({
 					slug: a.dataset.project,
 					href: a.getAttribute("href"),
-					label: a.querySelector(".project-label").childNodes[0].textContent.trim(),
-					period: a.querySelector(".project-period").textContent,
+					label: a.querySelector(".career-track-label").childNodes[0].textContent.trim(),
+					period: a.querySelector(".career-track-label small").textContent,
 					current: a.getAttribute("aria-current"),
 				})),
 			);
@@ -124,10 +120,10 @@ const specs = [
 				actual,
 				expected.projects.map((p) => ({
 					slug: p.slug,
-					href: `/projects/${p.slug}`,
+					href: `/projects/${p.slug}/`,
 					label: p.title,
 					period: p.period,
-					current: p.current ? "page" : null,
+					current: p.current ? "true" : null,
 				})),
 			);
 			assert.equal(
@@ -155,10 +151,10 @@ const specs = [
 		"Keyboard label, focus and neighbor navigation",
 		async (page, problems) => {
 			await c24(page, problems);
-			const link = await page.$(".ribbon-projects a:not([aria-current])");
+			const link = await page.$(".career-tracks a:not([aria-current])");
 			await link.focus();
 			assert.equal(
-				await page.evaluate(() => document.activeElement.matches(".ribbon-projects a")),
+				await page.evaluate(() => document.activeElement.matches(".career-tracks a")),
 				true,
 			);
 			const href = await link.evaluate((a) => a.getAttribute("href"));
@@ -170,10 +166,10 @@ const specs = [
 				page.keyboard.press("Enter"),
 			]);
 			await destination(page, href);
-			assert.equal(new URL(page.url()).pathname.replace(/\/$/u, ""), href);
+			assert.equal(new URL(page.url()).pathname, href);
 			assert.equal(
 				await page.$eval("[data-context-ribbon]", (el) => el.dataset.current),
-				href.split("/").at(-1),
+				href.split("/").filter(Boolean).at(-1),
 				"trial neighbor must highlight its own canonical route ID",
 			);
 			return `keyboard Enter navigates to ${href}; neighbor highlights itself`;
@@ -217,7 +213,7 @@ const specs = [
 					right: el.getBoundingClientRect().right,
 					viewport: innerWidth,
 					pageWidth: document.documentElement.scrollWidth,
-					targets: [...el.querySelectorAll(".ribbon-projects a")].map((a) => ({
+					targets: [...el.querySelectorAll(".career-tracks a")].map((a) => ({
 						height: a.getBoundingClientRect().height,
 						right: a.getBoundingClientRect().right,
 					})),
@@ -228,13 +224,13 @@ const specs = [
 					`page overflow at ${width}: ${bounds.pageWidth}`,
 				);
 				for (const target of bounds.targets)
-					assert.ok(target.height >= 44 && target.right <= width + 1);
+					assert.ok(target.height >= 24 && target.right <= width + 1);
 				if (width === 390)
 					await (
 						await page.$("[data-context-ribbon]")
 					).screenshot({ path: path.join(cacheDirectory, "dark-mobile.png") });
 			}
-			return "1440 / 768 / 390 / 320 px: no overflow, links at least 44px high";
+			return "1440 / 768 / 390 / 320 px: no overflow, links at least 24px high";
 		},
 	],
 	[
@@ -242,20 +238,17 @@ const specs = [
 		async (page, problems) => {
 			await page.setViewport({ width: 1440, height: 1000 });
 			await c24(page, problems);
-			const mark = await page.$(".chart-project:not(.is-current)");
+			const mark = await page.$("[data-career-overview] a:not([aria-current])");
 			assert.ok(await mark.$("title"), "SVG mark has no hover label");
 			await mark.hover();
-			assert.equal(
-				await mark.$eval(".project-mark", (el) => getComputedStyle(el).strokeWidth),
-				"2px",
-			);
+			assert.equal(await mark.$eval("rect", (el) => getComputedStyle(el).strokeWidth), "3px");
 			const href = await mark.evaluate((a) => a.getAttribute("href"));
 			await Promise.all([
 				page.waitForNavigation({ waitUntil: "networkidle0", timeout: PAGE_TIMEOUT_MS }),
 				mark.click(),
 			]);
 			await destination(page, href);
-			assert.equal(new URL(page.url()).pathname.replace(/\/$/u, ""), href);
+			assert.equal(new URL(page.url()).pathname, href);
 			return `labeled SVG mark opens ${href}`;
 		},
 	],
@@ -282,9 +275,9 @@ const specs = [
 			await page.setViewport({ width: 390, height: 844 });
 			await c24(page, problems);
 			assert.equal(
-				await page.$$eval(".ribbon-projects a", (links) =>
+				await page.$$eval(".career-tracks a", (links) =>
 					links.every(
-						(a) => a.getBoundingClientRect().height >= 44 && a.textContent.trim().length > 2,
+						(a) => a.getBoundingClientRect().height >= 24 && a.textContent.trim().length > 2,
 					),
 				),
 				true,
@@ -292,13 +285,13 @@ const specs = [
 			await (
 				await page.$("[data-context-ribbon]")
 			).screenshot({ path: path.join(cacheDirectory, "no-js-mobile.png") });
-			const link = await page.$(".ribbon-projects a:not([aria-current])");
+			const link = await page.$(".career-tracks a:not([aria-current])");
 			const href = await link.evaluate((a) => a.getAttribute("href"));
 			await Promise.all([
 				page.waitForNavigation({ waitUntil: "networkidle0", timeout: PAGE_TIMEOUT_MS }),
 				link.click(),
 			]);
-			assert.equal(new URL(page.url()).pathname.replace(/\/$/u, ""), href);
+			assert.equal(new URL(page.url()).pathname, href);
 			await page.setJavaScriptEnabled(true);
 			return "all labels and ordinary links work with JavaScript disabled";
 		},

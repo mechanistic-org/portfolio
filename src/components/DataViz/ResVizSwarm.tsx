@@ -2,12 +2,8 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import * as d3 from "d3";
 import type { MultiverseNode } from "@/types/MultiverseTypes";
 import { getEntityColor } from "../../config/color_registry";
-import type { HxoLens } from "../../stores/hxoStore";
-import {
-	deriveFocusedConstellation,
-	type FocusedProjectRelationship,
-	type ProjectRelationship,
-} from "../../utils/deriveFocusedConstellation";
+import { careerMapGeometry, drawCareerBackdrop } from "./CareerMapBackdrop";
+import { employerPackingTargets, type Position } from "./EmployerPacking";
 
 interface NodeData extends d3.SimulationNodeDatum {
 	id: string;
@@ -21,56 +17,28 @@ interface NodeData extends d3.SimulationNodeDatum {
 	color?: string;
 	skills?: string[];
 	radius: number;
-	date: Date;
+	date: Date | null;
 	tier: "deep_dive" | "lite";
 }
 
 interface ResVizSwarmProps {
 	nodes: MultiverseNode[];
-	relationships: ProjectRelationship[];
-	lens: HxoLens;
 	onNodeSelect?: (node: NodeData | null) => void;
 	onNodeClick?: (node: NodeData | null) => void;
 	externalHoverId?: string;
-	isConsoleHovered?: boolean;
 }
 
 const DAY_MS = 1000 * 60 * 60 * 24;
 const MIN_RADIUS = 15;
 const MAX_RADIUS = 55;
-const REST_OPACITY = 0.9;
-const RESPONSIVE_TOP_GUTTER = 240;
-const RESPONSIVE_BOTTOM_GUTTER = 80;
-const RESPONSIVE_NODE_GAP = 6;
-const GROUP_LABEL_OFFSET = 36;
-
-function relationshipDash(kind: ProjectRelationship["kind"]) {
-	if (kind === "successor_of") return "8 4";
-	if (kind === "derived_from") return "5 4";
-	if (kind === "variant_of") return "2 4";
-	if (kind === "shares_platform_with") return "10 3 2 3";
-	if (kind === "method_transfer_from") return "1 4";
-	return null;
-}
-
-interface LensGroupDescriptor {
-	id: string;
-	label: string;
-	count: number;
-	x: number;
-	y: number;
-	labelX: number;
-	labelY: number;
-	anchor: "start" | "middle";
-}
-
+const REST_OPACITY = 0.95;
 function clamp(value: number, minimum: number, maximum: number) {
 	return Math.min(maximum, Math.max(minimum, value));
 }
 
-function getProjectRadius(node: MultiverseNode, now: Date) {
+function getProjectRadius(node: MultiverseNode) {
 	const startTime = new Date(node.start_date).getTime();
-	const endTime = node.end_date ? new Date(node.end_date).getTime() : now.getTime();
+	const endTime = node.end_date ? new Date(node.end_date).getTime() : startTime;
 	const durationDays =
 		Number.isFinite(startTime) && Number.isFinite(endTime)
 			? Math.max(0, (endTime - startTime) / DAY_MS)
@@ -79,117 +47,25 @@ function getProjectRadius(node: MultiverseNode, now: Date) {
 	return clamp(Number.isFinite(radius) ? radius : MIN_RADIUS, MIN_RADIUS, MAX_RADIUS);
 }
 
-function getResponsivePacking(nodes: NodeData[], width: number) {
-	const safeWidth = Math.max(width, MAX_RADIUS * 2 + RESPONSIVE_NODE_GAP * 2);
-	const sideGutter = Math.min(20, Math.max(8, safeWidth * 0.025));
-	const positions = new Map<string, { x: number; y: number }>();
-	let cursorX = sideGutter;
-	let rowTop = RESPONSIVE_TOP_GUTTER;
-	let rowHeight = 0;
-
+function getResponsiveHeight(nodes: NodeData[], width: number) {
+	// Allocate room for the busiest five-year interval, not only the average density.
+	const areas = new Map<number, number>();
 	for (const node of nodes) {
-		const diameter = node.radius * 2;
-		if (cursorX > sideGutter && cursorX + diameter > safeWidth - sideGutter) {
-			rowTop += rowHeight + RESPONSIVE_NODE_GAP;
-			cursorX = sideGutter;
-			rowHeight = 0;
-		}
-
-		positions.set(node.id, {
-			x: cursorX + node.radius,
-			y: rowTop + node.radius,
-		});
-		cursorX += diameter + RESPONSIVE_NODE_GAP;
-		rowHeight = Math.max(rowHeight, diameter);
+		if (!node.date) continue;
+		const epoch = Math.floor(node.date.getUTCFullYear() / 5) * 5;
+		areas.set(epoch, (areas.get(epoch) ?? 0) + Math.PI * (node.radius + 3) ** 2);
 	}
-
-	return {
-		positions,
-		requiredHeight: Math.ceil(rowTop + rowHeight + RESPONSIVE_BOTTOM_GUTTER),
-	};
-}
-
-function formatGroupLabel(value: string) {
-	return value.replace(/[_-]+/g, " ").replace(/\b\w/g, (character) => character.toUpperCase());
-}
-
-function getTimeBucket(node: NodeData) {
-	const year = node.date.getFullYear();
-	const start = Math.floor(year / 5) * 5;
-	return `${start}–${start + 4}`;
-}
-
-function getLensGroup(node: NodeData, lens: HxoLens) {
-	if (lens === "employer") return node.group || "unassigned";
-	if (lens === "category") return node.category || "uncategorized";
-	return getTimeBucket(node);
-}
-
-function getLensGroups(
-	nodes: NodeData[],
-	lens: HxoLens,
-	width: number,
-	height: number,
-	timeScale: d3.ScaleTime<number, number>,
-): LensGroupDescriptor[] {
-	const grouped = d3.group(nodes, (node) => getLensGroup(node, lens));
-	const entries = [...grouped.entries()];
-	if (lens === "time") {
-		return entries
-			.map(([id, groupedNodes]) => {
-				const y = d3.mean(groupedNodes, (node) => timeScale(node.date)) ?? height / 2;
-				return {
-					id,
-					label: id,
-					count: groupedNodes.length,
-					x: width / 2,
-					y,
-					labelX: 16,
-					labelY: y,
-					anchor: "start" as const,
-				};
-			})
-			.sort((a, b) => b.id.localeCompare(a.id));
-	}
-
-	entries.sort(([left], [right]) => {
-		if (left === "uncategorized" || left === "unassigned") return 1;
-		if (right === "uncategorized" || right === "unassigned") return -1;
-		return formatGroupLabel(left).localeCompare(formatGroupLabel(right));
-	});
-	const columns = Math.max(1, Math.min(entries.length, width < 560 ? 2 : width < 900 ? 3 : 4));
-	const rows = Math.ceil(entries.length / columns);
-	const top = Math.min(RESPONSIVE_TOP_GUTTER, height * 0.28);
-	const usableHeight = Math.max(1, height - top - RESPONSIVE_BOTTOM_GUTTER);
-	const cellWidth = width / columns;
-	const cellHeight = usableHeight / rows;
-
-	return entries.map(([id, groupedNodes], index) => {
-		const column = index % columns;
-		const row = Math.floor(index / columns);
-		const x = cellWidth * (column + 0.5);
-		const y = top + cellHeight * (row + 0.5);
-		return {
-			id,
-			label: formatGroupLabel(id),
-			count: groupedNodes.length,
-			x,
-			y,
-			labelX: x,
-			labelY: Math.max(18, y - Math.min(GROUP_LABEL_OFFSET, cellHeight * 0.35)),
-			anchor: "middle" as const,
-		};
-	});
+	const first = Math.min(...areas.keys(), 1985);
+	const span = new Date().getUTCFullYear() - first + 1;
+	const busiest = Math.max(...areas.values(), 0);
+	return Math.ceil(260 + ((busiest / Math.max(100, width) / 0.62) * span) / 5);
 }
 
 export default function ResVizSwarm({
 	nodes: rawNodes,
-	relationships,
-	lens,
 	onNodeSelect,
 	onNodeClick,
 	externalHoverId,
-	isConsoleHovered = false,
 }: ResVizSwarmProps) {
 	const svgRef = useRef<SVGSVGElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -200,8 +76,9 @@ export default function ResVizSwarm({
 	const acquiredNodeIdRef = useRef<string | null>(null);
 	const onNodeSelectRef = useRef(onNodeSelect);
 	const onNodeClickRef = useRef(onNodeClick);
-	const consoleHoveredRef = useRef(isConsoleHovered);
 	const pausedRef = useRef(false);
+	const resetPackingRef = useRef<() => void>(() => undefined);
+	const packingActiveRef = useRef(false);
 
 	const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 	const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -211,12 +88,10 @@ export default function ResVizSwarm({
 	pausedRef.current = isPaused;
 	onNodeSelectRef.current = onNodeSelect;
 	onNodeClickRef.current = onNodeClick;
-	consoleHoveredRef.current = isConsoleHovered;
 
 	const nodes = useMemo(() => {
 		if (!rawNodes) return [];
 
-		const now = new Date();
 		const hiddenIds = new Set([
 			"classified",
 			"classified-alpha",
@@ -228,20 +103,18 @@ export default function ResVizSwarm({
 			.filter((node) => !hiddenIds.has(node.id))
 			.map((node) => {
 				const parsedStart = new Date(node.start_date);
-				const date = Number.isFinite(parsedStart.getTime()) ? parsedStart : now;
+				const date = Number.isFinite(parsedStart.getTime()) ? parsedStart : null;
 				return {
 					...node,
-					radius: getProjectRadius(node, now),
+					radius: getProjectRadius(node) * (dimensions.width < 600 ? 0.68 : 1),
 					date,
 					x: 0,
 					y: 2000,
 				};
 			}) as NodeData[];
-	}, [rawNodes]);
-	const responsivePacking = useMemo(
-		() => getResponsivePacking(nodes, dimensions.width),
-		[nodes, dimensions.width],
-	);
+	}, [rawNodes, dimensions.width < 600]);
+	const mapWidth = Math.max(130, dimensions.width - (dimensions.width < 600 ? 176 : 238));
+	const responsiveHeight = useMemo(() => getResponsiveHeight(nodes, mapWidth), [nodes, mapWidth]);
 
 	useEffect(() => {
 		const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -276,13 +149,15 @@ export default function ResVizSwarm({
 		if (!simulation) return;
 
 		if (isPaused) {
+			resetPackingRef.current();
 			simulation.alphaTarget(0);
 			renderPositionsRef.current();
 			simulation.stop();
 			return;
 		}
 
-		simulation.alpha(Math.max(simulation.alpha(), 0.35)).alphaTarget(0).restart();
+		if (!packingActiveRef.current)
+			simulation.alpha(Math.max(simulation.alpha(), 0.35)).alphaTarget(0).restart();
 	}, [isPaused]);
 
 	useEffect(() => {
@@ -290,58 +165,31 @@ export default function ResVizSwarm({
 
 		setIsReady(false);
 		const { width, height } = dimensions;
-		const minDate = d3.min(nodes, (node) => node.date) || new Date(2000, 0, 1);
-		const timeScale = d3
-			.scaleTime()
-			.domain([new Date(), minDate])
-			.range([RESPONSIVE_TOP_GUTTER, height - RESPONSIVE_BOTTOM_GUTTER]);
-		const lensGroups = getLensGroups(nodes, lens, width, height, timeScale);
-		const lensGroupById = new Map<string, LensGroupDescriptor>(
-			lensGroups.map((group) => [group.id, group]),
-		);
+		const geometry = careerMapGeometry(width, height, nodes);
+		const { timeScale, plotLeft, plotRight } = geometry;
+		const centerX = (plotLeft + plotRight) / 2;
 		const getColor = (node: NodeData) => getEntityColor(node.group, "EMPLOYER");
-		const getGroupCenter = (node: NodeData) =>
-			lensGroupById.get(getLensGroup(node, lens)) ?? {
-				x: width / 2,
-				y: height / 2,
-			};
-
-		if (prefersReducedMotion) {
-			nodes.forEach((node) => {
-				const position = responsivePacking.positions.get(node.id);
-				node.x = position?.x ?? width / 2;
-				node.y = position?.y ?? height / 2;
-				node.vx = 0;
-				node.vy = 0;
-			});
-		} else {
-			nodes.forEach((node) => {
-				if (!Number.isFinite(node.x) || !Number.isFinite(node.y) || node.y === 2000) {
-					node.x = clamp(width / 2 + (Math.random() - 0.5) * 200, node.radius, width - node.radius);
-					node.y = height - node.radius;
-					node.vx = (Math.random() - 0.5) * 10;
-					node.vy = -50 - Math.random() * 50;
-				}
-			});
-		}
+		nodes.forEach((node, index) => {
+			node.x = clamp(
+				centerX + Math.sin(index * 2.4) * mapWidth * 0.3,
+				plotLeft + node.radius,
+				plotRight - node.radius,
+			);
+			node.y = node.date ? timeScale(node.date) : height - 70;
+			node.vx = 0;
+			node.vy = 0;
+		});
 
 		const simulation = d3
 			.forceSimulation<NodeData>(nodes)
 			.alphaDecay(0.001)
 			.velocityDecay(0.3)
-			.force(
-				"x",
-				d3
-					.forceX<NodeData>((node) => (lens === "time" ? width / 2 : getGroupCenter(node).x))
-					.strength(lens === "time" ? 0.02 : 0.13),
-			)
+			.force("x", d3.forceX<NodeData>(centerX).strength(0.025))
 			.force(
 				"y",
 				d3
-					.forceY<NodeData>((node) =>
-						lens === "time" ? timeScale(node.date) : getGroupCenter(node).y,
-					)
-					.strength(lens === "time" ? 0.1 : 0.13),
+					.forceY<NodeData>((node) => (node.date ? timeScale(node.date) : height - 70))
+					.strength(0.16),
 			)
 			.force("collide", d3.forceCollide<NodeData>((node) => node.radius + 2).strength(0.8))
 			.force("charge", d3.forceManyBody<NodeData>().strength(-15));
@@ -349,38 +197,13 @@ export default function ResVizSwarm({
 
 		const svg = d3.select(svgRef.current);
 		svg.selectAll("*").remove();
+		acquiredNodeIdRef.current = null;
+		packingActiveRef.current = false;
+		svg.attr("data-packing-state", "rest").attr("data-packing-role", null);
 
-		const defs = svg.append("defs");
-		const filter = defs.append("filter").attr("id", "glow").attr("filterUnits", "userSpaceOnUse");
-		filter.append("feGaussianBlur").attr("stdDeviation", "2.5").attr("result", "coloredBlur");
-		const feMerge = filter.append("feMerge");
-		feMerge.append("feMergeNode").attr("in", "coloredBlur");
-		feMerge.append("feMergeNode").attr("in", "SourceGraphic");
-
-		// Relationship paths stay behind nodes; semantics live in the console.
-		const linkLayer = svg.append("g").attr("class", "links").attr("aria-hidden", "true");
+		const backdrop = drawCareerBackdrop(svg, geometry, nodes);
 		const nodeLayer = svg.append("g").attr("class", "nodes");
-		const lensLabelLayer = svg.append("g").attr("class", "lens-labels pointer-events-none");
 		const labelLayer = svg.append("g").attr("class", "labels");
-
-		lensLabelLayer
-			.selectAll<SVGTextElement, LensGroupDescriptor>("text.lens-label")
-			.data(lensGroups, (group) => group.id)
-			.join("text")
-			.attr("class", "lens-label font-mono uppercase")
-			.attr("data-lens-group-label", (group) => group.id)
-			.attr("data-group-count", (group) => group.count)
-			.attr("x", (group) => group.labelX)
-			.attr("y", (group) => group.labelY)
-			.attr("text-anchor", (group) => group.anchor)
-			.style("font-size", lens === "time" ? "9px" : "10px")
-			.style("letter-spacing", "0.12em")
-			.style("fill", "rgba(212,212,216,0.78)")
-			.style("stroke", "rgba(0,0,0,0.9)")
-			.style("stroke-width", "3px")
-			.style("paint-order", "stroke")
-			.style("pointer-events", "none")
-			.text((group) => `${group.label} · ${group.count}`);
 
 		const nodeGroup = nodeLayer
 			.selectAll<SVGGElement, NodeData>("g.node-group")
@@ -389,17 +212,33 @@ export default function ResVizSwarm({
 			.attr("class", "node-group pointer-events-auto")
 			.attr("id", (node) => `node-${node.id}`)
 			.attr("data-id", (node) => node.id)
+			.attr("role", "button")
+			.attr("tabindex", 0)
+			.attr("aria-label", (node) => `Explore ${node.name}`)
 			.attr("data-employer", (node) => node.group)
-			.attr("data-lens-group", (node) => getLensGroup(node, lens))
+			.attr("data-lens-group", (node) =>
+				node.date ? `${Math.floor(node.date.getUTCFullYear() / 5) * 5}` : "Undated",
+			)
 			.attr("data-tier", (node) => node.tier)
 			.attr("cursor", "pointer");
 
 		nodeGroup
 			.append("circle")
+			.attr("class", "project-circle")
 			.attr("r", (node) => node.radius)
 			.attr("cursor", "pointer")
 			.attr("fill", getColor)
 			.style("opacity", REST_OPACITY);
+
+		// Selection is independent of the blue ring that identifies a deep dive.
+		nodeGroup
+			.append("circle")
+			.attr("class", "focus-ring")
+			.attr("r", (node) => node.radius + 4)
+			.attr("fill", "none")
+			.attr("stroke-width", 1.25)
+			.attr("opacity", 0)
+			.attr("pointer-events", "none");
 
 		const label = labelLayer
 			.selectAll<SVGTextElement, NodeData>("text.label")
@@ -407,6 +246,7 @@ export default function ResVizSwarm({
 			.join("text")
 			.text((node) => node.name)
 			.attr("class", "label pointer-events-none font-bold text-white uppercase")
+			.attr("fill", "white")
 			.attr("id", (node) => `label-${node.id}`)
 			.attr("data-persistent-label", "false")
 			.attr("text-anchor", "middle")
@@ -428,84 +268,23 @@ export default function ResVizSwarm({
 				.style("opacity", REST_OPACITY);
 		};
 
-		const nodeById = new Map(nodes.map((node) => [node.id, node]));
-		const renderRelationshipPositions = () => {
-			linkLayer
-				.selectAll<SVGPathElement, FocusedProjectRelationship>("path.relationship-link")
-				.attr("d", (relationship) => {
-					const source = nodeById.get(relationship.source);
-					const target = nodeById.get(relationship.target);
-					if (!source || !target) return null;
-					const sourceX = source.x ?? width / 2;
-					const sourceY = source.y ?? height / 2;
-					const targetX = target.x ?? width / 2;
-					const targetY = target.y ?? height / 2;
-					const dx = targetX - sourceX;
-					const dy = targetY - sourceY;
-					const distance = Math.max(1, Math.hypot(dx, dy));
-					const bend = Math.min(72, Math.max(20, distance * 0.14));
-					const direction = relationship.edge_key.length % 2 === 0 ? 1 : -1;
-					const controlX = (sourceX + targetX) / 2 + (-dy / distance) * bend * direction;
-					const controlY = (sourceY + targetY) / 2 + (dx / distance) * bend * direction;
-					return `M${sourceX},${sourceY} Q${controlX},${controlY} ${targetX},${targetY}`;
-				});
-		};
-
 		const updateVisuals = (requestedFocusId: string | null) => {
-			const focusId = nodes.some((node) => node.id === requestedFocusId) ? requestedFocusId : null;
-			const focusNode = nodes.find((node) => node.id === focusId);
-			const focusGroup = focusNode ? getLensGroup(focusNode, lens) : null;
-			const constellation = deriveFocusedConstellation({
-				relationships,
-				projectIds: nodeById.keys(),
-				focusId,
-			});
-			const relatedIds = new Set(
-				constellation.relationships.map((relationship) => relationship.relatedProjectId),
-			);
-
-			linkLayer
-				.selectAll<SVGPathElement, FocusedProjectRelationship>("path.relationship-link")
-				.data(constellation.relationships, (relationship) => relationship.edge_key)
-				.join(
-					(enter) =>
-						enter
-							.append("path")
-							.attr("class", "relationship-link pointer-events-none")
-							.attr("fill", "none")
-							.attr("vector-effect", "non-scaling-stroke")
-							.attr("stroke", "rgba(34,211,238,0.78)")
-							.attr("stroke-width", 2)
-							.style("filter", "drop-shadow(0 0 4px rgba(34,211,238,0.35))"),
-					(update) => update,
-					(exit) => exit.remove(),
-				)
-				.attr("data-edge-key", (relationship) => relationship.edge_key)
-				.attr("data-source", (relationship) => relationship.source)
-				.attr("data-target", (relationship) => relationship.target)
-				.attr("data-kind", (relationship) => relationship.kind)
-				.attr("stroke-dasharray", (relationship) => relationshipDash(relationship.kind));
-			renderRelationshipPositions();
+			const focusNode = nodes.find((node) => node.id === requestedFocusId) ?? null;
+			const focusId = focusNode?.id;
+			backdrop.update(focusNode);
 
 			nodeGroup.each(function (node) {
-				const circle = d3.select<SVGGElement, NodeData>(this).select<SVGCircleElement>("circle");
+				const group = d3.select<SVGGElement, NodeData>(this);
+				const circle = group.select<SVGCircleElement>("circle.project-circle");
 				circle.interrupt();
-				if (!focusId) {
-					applyRestCircleStyle(circle, node);
-					return;
-				}
+				applyRestCircleStyle(circle, node);
 
 				const isTarget = node.id === focusId;
-				const isRelated = relatedIds.has(node.id);
-				const isCohort = focusGroup !== null && getLensGroup(node, lens) === focusGroup;
-				circle
-					.attr(
-						"stroke",
-						isTarget ? "#ffffff" : isRelated ? "rgba(34,211,238,0.9)" : "rgba(255,255,255,0.1)",
-					)
-					.attr("stroke-width", isTarget ? 4 : isRelated ? 2 : 1)
-					.attr("filter", isTarget ? "drop-shadow(0 0 15px rgba(255,255,255,0.8))" : null)
-					.style("opacity", isTarget ? 1 : isRelated ? 0.78 : isCohort ? 0.5 : 0.08);
+				circle.style("opacity", isTarget ? 1 : REST_OPACITY);
+				group
+					.select<SVGCircleElement>("circle.focus-ring")
+					.attr("stroke", "rgba(225,232,242,0.7)")
+					.attr("opacity", isTarget ? 1 : 0);
 			});
 
 			label.style("opacity", (node) => (node.id === focusId ? 1 : 0));
@@ -514,8 +293,8 @@ export default function ResVizSwarm({
 
 		const constrainNodes = () => {
 			for (const node of nodes) {
-				node.x = clamp(node.x ?? width / 2, node.radius, width - node.radius);
-				node.y = clamp(node.y ?? height / 2, node.radius, height - node.radius);
+				node.x = clamp(node.x ?? centerX, plotLeft + node.radius + 4, plotRight - node.radius - 4);
+				node.y = clamp(node.y ?? height / 2, geometry.top + node.radius, height - node.radius - 40);
 			}
 		};
 
@@ -523,19 +302,101 @@ export default function ResVizSwarm({
 			constrainNodes();
 			nodeGroup.attr("transform", (node) => `translate(${node.x},${node.y})`);
 			label.attr("x", (node) => node.x ?? 0).attr("y", (node) => node.y ?? 0);
-			renderRelationshipPositions();
+			backdrop.position();
 		};
 		renderPositionsRef.current = renderPositions;
+
+		// Hover is temporary; the held reading subject is deliberately independent.
+		let baseline: Map<string, Position> | null = null;
+		let packingRole: string | null = null;
+		let packingTimer: d3.Timer | null = null;
+		let hoverTimer: ReturnType<typeof setTimeout> | null = null;
+		const snapshot = () => new Map(nodes.map((node) => [node.id, { x: node.x!, y: node.y! }]));
+		const moveTo = (target: Map<string, Position>, restoring: boolean, immediate = false) => {
+			packingTimer?.stop();
+			simulation.stop();
+			const from = snapshot();
+			const draw = (progress: number) => {
+				for (const node of nodes) {
+					const start = from.get(node.id)!;
+					const end = target.get(node.id)!;
+					node.x = start.x + (end.x - start.x) * progress;
+					node.y = start.y + (end.y - start.y) * progress;
+					node.vx = node.vy = 0;
+				}
+				renderPositions();
+			};
+			const finish = () => {
+				packingTimer?.stop();
+				packingTimer = null;
+				svg.attr("data-packing-state", restoring ? "rest" : "grouped");
+				if (restoring) {
+					baseline = null;
+					packingActiveRef.current = false;
+					if (!pausedRef.current && !prefersReducedMotion) simulation.alpha(0.12).restart();
+				}
+			};
+			if (immediate) {
+				draw(1);
+				finish();
+				return;
+			}
+			packingTimer = d3.timer((elapsed) => {
+				const progress = Math.min(1, elapsed / (restoring ? 480 : 620));
+				draw(d3.easeCubicInOut(progress));
+				if (progress === 1) finish();
+			});
+		};
+		const restorePacking = (immediate = false) => {
+			packingRole = null;
+			svg.attr("data-packing-role", null);
+			nodeGroup.attr("data-packing-member", null);
+			if (baseline) {
+				svg.attr("data-packing-state", "returning");
+				moveTo(baseline, true, immediate);
+			}
+		};
+		resetPackingRef.current = () => {
+			if (hoverTimer) clearTimeout(hoverTimer);
+			restorePacking(true);
+		};
+		const packHovered = (id: string | null) => {
+			const node = nodes.find((candidate) => candidate.id === id);
+			const period = node ? backdrop.periodFor(node) : undefined;
+			if (!node || !period || pausedRef.current || prefersReducedMotion) {
+				restorePacking();
+				return;
+			}
+			if (packingRole === period.id) return;
+			baseline ??= snapshot();
+			const packed = employerPackingTargets<NodeData>(
+				nodes,
+				baseline,
+				node,
+				period,
+				backdrop.periodFor,
+				geometry,
+			);
+			packingRole = period.id;
+			packingActiveRef.current = true;
+			svg.attr("data-packing-state", "grouping").attr("data-packing-role", period.id);
+			nodeGroup.attr("data-packing-member", (candidate) =>
+				String(packed.members.has(candidate.id)),
+			);
+			moveTo(packed.positions, false);
+		};
 
 		const reportCandidate = (nextId: string | null) => {
 			if (nextId === acquiredNodeIdRef.current) return;
 			acquiredNodeIdRef.current = nextId;
 			onNodeSelectRef.current?.(nodes.find((node) => node.id === nextId) ?? null);
+			if (hoverTimer) clearTimeout(hoverTimer);
+			hoverTimer = setTimeout(() => packHovered(nextId), nextId ? 180 : 100);
 		};
 
 		svg
-			.on("mousemove", (event) => {
-				if (consoleHoveredRef.current) return;
+			.on("pointermove", (event) => {
+				if (event.pointerType === "touch") return;
 				const [x, y] = d3.pointer(event);
 				let retainedNode = nodes.find((node) => node.id === acquiredNodeIdRef.current) ?? null;
 				if (retainedNode) {
@@ -559,13 +420,25 @@ export default function ResVizSwarm({
 				}
 				reportCandidate(nearestNode?.id ?? null);
 			})
-			.on("mouseleave", () => reportCandidate(null))
+			.on("pointerleave", () => reportCandidate(null))
 			.on("click", () => onNodeClickRef.current?.(null));
 
 		nodeGroup.on("click", (event, node) => {
 			event.stopPropagation();
 			onNodeClickRef.current?.(node);
 		});
+		nodeGroup
+			.on("focus", (event, node) => {
+				// A tap may focus the SVG button, but only keyboard focus groups it.
+				if ((event.currentTarget as Element).matches(":focus-visible")) reportCandidate(node.id);
+			})
+			.on("blur", () => reportCandidate(null))
+			.on("keydown", (event, node) => {
+				if (event.key !== "Enter" && event.key !== " ") return;
+				event.preventDefault();
+				event.stopPropagation();
+				onNodeClickRef.current?.(node);
+			});
 
 		let readyDeclared = false;
 		const declareReadyWhenVisible = () => {
@@ -612,7 +485,7 @@ export default function ResVizSwarm({
 					if (entries[0]?.isIntersecting) {
 						if (!pausedRef.current) {
 							launchTimer = setTimeout(() => {
-								if (!pausedRef.current) simulation.alpha(1).restart();
+								if (!pausedRef.current && !packingActiveRef.current) simulation.alpha(1).restart();
 							}, 500);
 						}
 					} else {
@@ -625,6 +498,9 @@ export default function ResVizSwarm({
 		}
 
 		return () => {
+			if (hoverTimer) clearTimeout(hoverTimer);
+			packingTimer?.stop();
+			resetPackingRef.current = () => undefined;
 			if (launchTimer) clearTimeout(launchTimer);
 			observer?.disconnect();
 			simulation.stop();
@@ -632,7 +508,7 @@ export default function ResVizSwarm({
 			visualUpdaterRef.current = () => undefined;
 			renderPositionsRef.current = () => undefined;
 		};
-	}, [nodes, relationships, dimensions, lens, prefersReducedMotion, responsivePacking]);
+	}, [nodes, dimensions, mapWidth, prefersReducedMotion]);
 
 	return (
 		<div
@@ -640,11 +516,11 @@ export default function ResVizSwarm({
 			className="relative h-[max(100svh,var(--swarm-responsive-height))] w-full overflow-hidden bg-transparent lg:h-full"
 			style={
 				{
-					"--swarm-responsive-height": `${responsivePacking.requiredHeight}px`,
+					"--swarm-responsive-height": `${responsiveHeight}px`,
 				} as CSSProperties
 			}
 			data-swarm-ready={isReady ? "true" : "false"}
-			data-swarm-lens={lens}
+			data-swarm-lens="time"
 		>
 			<svg ref={svgRef} className="block h-full w-full" />
 			<button

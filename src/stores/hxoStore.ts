@@ -1,35 +1,34 @@
 import { atom, computed } from "nanostores";
 
-export type HxoMode = "explore" | "tour";
+// Retained for the historical tour configuration; the homepage uses chronology.
 export type HxoLens = "time" | "employer" | "category";
-export type PreviewSource = "default" | "index-focus" | "index-hover" | "swarm";
+export type PreviewSource = "default" | "swarm";
 
-export const mode = atom<HxoMode>("explore");
-export const lens = atom<HxoLens>("time");
 export const previewId = atom<string | null>(null);
-export const pinnedId = atom<string | null>(null);
-export const lastPreviewId = atom<string | null>(null);
+export const readingId = atom<string | null>(null);
 
-export const focusId = computed(
-	[previewId, pinnedId],
-	(currentPreviewId, currentPinnedId) => currentPreviewId ?? currentPinnedId,
-);
+export const focusId = computed([readingId], (currentReadingId) => currentReadingId);
 
-export const viewerId = computed(
-	[previewId, pinnedId, lastPreviewId],
-	(currentPreviewId, currentPinnedId, currentLastPreviewId) =>
-		currentPreviewId ?? currentPinnedId ?? currentLastPreviewId,
-);
+export const viewerId = computed([readingId], (currentReadingId) => currentReadingId);
 
 const activePreviews = new Map<PreviewSource, { id: string; order: number }>();
 let previewOrder = 0;
+let acquisitionTimer: ReturnType<typeof setTimeout> | undefined;
+
+// Fast scans identify targets; a brief pause acquires a stable reading frame.
+// Leaving the map cancels an unfinished acquisition, never the held frame.
+export function acquire(id: string | null) {
+	if (acquisitionTimer) clearTimeout(acquisitionTimer);
+	readingId.set(id);
+}
 
 function syncPreview() {
 	const nextPreview = [...activePreviews.values()].sort((a, b) => b.order - a.order)[0]?.id ?? null;
 	if (previewId.get() === nextPreview) return;
 
 	previewId.set(nextPreview);
-	if (nextPreview) lastPreviewId.set(nextPreview);
+	if (acquisitionTimer) clearTimeout(acquisitionTimer);
+	if (nextPreview) acquisitionTimer = setTimeout(() => acquire(nextPreview), 160);
 }
 
 export function setPreview(id: string | null, source?: PreviewSource) {
@@ -45,33 +44,7 @@ export function setPreview(id: string | null, source?: PreviewSource) {
 	syncPreview();
 }
 
-export function pin(id: string) {
-	mode.set("explore");
-	pinnedId.set(id);
-}
-
-export function unpin() {
-	mode.set("explore");
-	pinnedId.set(null);
-	lastPreviewId.set(null);
-}
-
-export function pinTourStep(id: string) {
-	mode.set("tour");
-	pinnedId.set(id);
-}
-
-export function exitTour() {
-	mode.set("explore");
-}
-
-export function setLens(nextLens: HxoLens) {
-	lens.set(nextLens);
-}
-
-// Console Interaction Shield
-export const isInsideConsole = atom<boolean>(false);
-
-export function setConsoleHover(isInside: boolean) {
-	isInsideConsole.set(isInside);
+export function clearReading() {
+	setPreview(null);
+	readingId.set(null);
 }

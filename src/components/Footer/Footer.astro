@@ -23,19 +23,10 @@ const { email, linkedin, github } = resumeMaster.header.contact;
 
 const SECTIONS = [
 	{
-		label: "Work",
-		links: [
-			{ text: "All projects", href: "/projects/" },
-			{ text: "C|24 teardown", href: "/projects/c24/" },
-			{ text: "SC48", href: "/projects/sc48/" },
-			{ text: "Avegant Glyph", href: "/projects/avegant-glyph/" },
-		],
-	},
-	{
 		label: "Erik",
 		links: [
 			{ text: "About", href: "/about/" },
-			{ text: "How I work", href: "/how-i-work/" },
+			{ text: "Work", href: "/projects/" },
 			{ text: "Résumé", href: "/resume/" },
 			{ text: "Colophon", href: "/colophon/" },
 		],
@@ -45,7 +36,7 @@ const SECTIONS = [
 
 <footer class="border-t border-white/10 bg-black/40">
 	<div class="site-container py-12">
-		<div class="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
+		<div class="grid gap-10 md:grid-cols-[2fr_1fr]">
 			{/* Identity + the ask */}
 			<div>
 				<p class="font-mono text-xs tracking-[0.2em] text-neutral-500 uppercase">

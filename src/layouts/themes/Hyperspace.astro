@@ -5,7 +5,16 @@ import ScrollyHud from "@components/Scrolly/ScrollyHud.astro";
 import ProjectManifestHUD from "@components/Projects/ProjectManifestHUD.astro";
 import { getAssetUrl } from "@/utils/assets";
 
-const { entry, nextProject, prevProject, Content, metrics, entropy } = Astro.props;
+import ContextRibbon from "@components/primitives/ContextRibbon.astro";
+const {
+	entry,
+	nextProject,
+	prevProject,
+	Content,
+	metrics,
+	entropy,
+	contextNodes = [],
+} = Astro.props;
 const { cyberspace, title, description, tier } = entry.data;
 // FORCE HUD for ALL MODES (User Directive: "NO variant that has NO nav")
 // Standard = Lite HUD (Top Row Only)
@@ -35,9 +44,11 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 }));
 ---
 
-{/* Nav restored. hideNav={true} cost every project page its only way out.
+{
+	/* Nav restored. hideNav={true} cost every project page its only way out.
     109 of 112 project routes use this theme, so the corpus was a set of
-    dead ends with no path to About, the resume, or contact. */}
+    dead ends with no path to About, the resume, or contact. */
+}
 <BaseLayout
 	title={title}
 	description={description}
@@ -108,6 +119,13 @@ const swarmlings = Array.from({ length: 50 }).map((_, i) => ({
 	<!-- MAIN ENGINE -->
 	<main class="relative z-10 bg-transparent">
 		<DeepDiveRenderer stickies={stickies} useDossier={useDossier} />
+		{
+			contextNodes.length > 0 && (
+				<div class="site-container my-8">
+					<ContextRibbon nodes={contextNodes} currentId={entry.id} />
+				</div>
+			)
+		}
 	</main>
 
 	<!-- NARRATIVE SECTION -->

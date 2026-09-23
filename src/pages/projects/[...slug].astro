@@ -4,7 +4,6 @@ import { getMultiverseData } from "@/utils/getMultiverseData";
 import { currentSite } from "@config/site_config";
 import { routeEligibleProjects, careerRecords } from "@utils/projectRoster";
 import { trialPresentation, careerIdentityAliases } from "@config/projectArticleTrial";
-import { buildContextRibbon } from "@utils/contextRibbon";
 
 export const prerender = true;
 
@@ -114,11 +113,16 @@ const allProjects = await getCollection("projects");
 // Sort by date descending (newest first)
 // These projects have no established project date; omit them from chronological navigation.
 const sortedProjects = routeEligibleProjects(allProjects, currentSite, import.meta.env.DEV)
-	.filter((project) => !["dispensers", "makeline", "portion-cup", "xbox", "fissler-bbq", "kplayer-300"].includes(project.id) || Boolean(project.data.date))
+	.filter(
+		(project) =>
+			!["dispensers", "makeline", "portion-cup", "xbox", "fissler-bbq", "kplayer-300"].includes(
+				project.id,
+			) || Boolean(project.data.date),
+	)
 	.sort(
-	(a, b) =>
-		new Date(b.data.date || new Date()).getTime() - new Date(a.data.date || new Date()).getTime(),
-);
+		(a, b) =>
+			new Date(b.data.date || new Date()).getTime() - new Date(a.data.date || new Date()).getTime(),
+	);
 
 // Navigation (Only works for real projects, placeholders get no nav for now)
 const currentIndex = sortedProjects.findIndex((p) => p.id === entry?.id);
@@ -169,7 +173,7 @@ const presentation =
 		? trialPresentation(entry.id)
 		: undefined;
 const SelectedTheme = presentation ? ProjectArticle : ThemeComponents[theme] || Hyperspace;
-const contextRibbon = presentation ? buildContextRibbon(careerNodes, entry.id) : null;
+const contextNodes = currentSite === "main" && entry ? careerNodes : [];
 
 // === SIDECAR INJECTION (The Brain) ===
 // DISABLED 2026-06-15 (#69 schema hardening). The unguarded `data.json` glob merged sidecar
@@ -327,7 +331,7 @@ console.log(`[ROUTER] Project: ${finalEntry.id} -> Theme: ${theme}`);
 	metrics={finalEntry.data.metrics}
 	entropy={entropyData}
 	presentation={presentation}
-	contextRibbon={contextRibbon}
+	contextNodes={contextNodes}
 	chronology={chronologyData}
 	revisions={revisionsData}
 />

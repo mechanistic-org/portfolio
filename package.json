@@ -10,7 +10,7 @@
 		"check:worker": "node ./scripts/check-worker-build.mjs && wrangler deploy --dry-run && wrangler deploy --dry-run --config wrangler.production.jsonc",
 		"deploy:worker": "node scripts/claims/check.mjs --release && wrangler deploy",
 		"deploy:production": "node scripts/claims/check.mjs --release && wrangler deploy --config wrangler.production.jsonc",
-		"check:ci": "npm run check:claims && npm run audit:frontmatter && npm run astro check",
+		"check:ci": "npm run check:claims && npm run check:career && npm run audit:frontmatter && npm run astro check",
 		"check:claims": "node scripts/claims/check.mjs",
 		"test:claims": "node --test tests/claims/*.test.mjs",
 		"preview": "astro preview",
@@ -26,10 +26,12 @@
 		"content:modernize": "python scripts/modernize_content.py",
 		"assets:process": "python ../global_agent/scripts/process_assets.py",
 		"test:visual": "node scripts/probes/homepage_contract.mjs",
+		"test:hxo": "node --test tests/hxo/*.test.mjs",
 		"export:linkedin": "node scripts/export_linkedin.mjs",
 		"prepare:resume-pdf": "node scripts/generate_resume_pdf.cjs",
 		"test:resume": "node --test tests/resume/*.test.mjs",
-		"test:resume-browser": "node tests/resume/browser.mjs"
+		"test:resume-browser": "node tests/resume/browser.mjs",
+		"check:career": "node scripts/project_career.mjs --check"
 	},
 	"dependencies": {
 		"@astro-community/astro-embed-youtube": "^0.5.9",

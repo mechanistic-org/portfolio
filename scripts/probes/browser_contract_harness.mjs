@@ -7,8 +7,10 @@ import { pathToFileURL } from "node:url";
 import puppeteer from "puppeteer";
 
 export const HOST = "127.0.0.1";
-export const PORT = 4321;
-export const BASE_URL = `http://${HOST}:${PORT}`;
+export const PORT = Number(process.env.BROWSER_CONTRACT_PORT ?? 4321);
+// An explicit loopback URL can qualify an already prepared static build.
+export const BASE_URL = process.env.BROWSER_CONTRACT_URL ?? `http://${HOST}:${PORT}`;
+if (new URL(BASE_URL).hostname !== HOST) throw new Error("Browser contracts require loopback");
 export const PAGE_TIMEOUT_MS = 45_000;
 export const VIEWPORTS = [
 	{ name: "desktop", width: 1440, height: 1000 },
@@ -194,17 +196,21 @@ export async function runBrowserContract({
 	let fatalError = null;
 	const results = [];
 	try {
-		if (await isPortOccupied()) throw new Error(`Refusing to run: ${HOST}:${PORT} is occupied`);
-		server = startAstroServer(
-			await prepareAstroHarnessConfig(cacheDirectory, disableAdapter),
-			cacheDirectory,
-		);
-		await waitForHttpReady(server);
+		await mkdir(cacheDirectory, { recursive: true });
+		if (!process.env.BROWSER_CONTRACT_URL) {
+			if (await isPortOccupied()) throw new Error(`Refusing to run: ${HOST}:${PORT} is occupied`);
+			server = startAstroServer(
+				await prepareAstroHarnessConfig(cacheDirectory, disableAdapter),
+				cacheDirectory,
+			);
+			await waitForHttpReady(server);
+		}
 		browser = await puppeteer.launch({ headless: true });
 		const page = await browser.newPage();
 		await page.setViewport({ ...initialViewport, deviceScaleFactor: 1 });
 		const pageProblems = createPageProblemCollector(page);
 		for (const [name, assertion] of assertionSpecs) {
+			console.log(`Checking: ${name}`);
 			try {
 				const details = await assertion(page, pageProblems);
 				results.push({ name, passed: true, details });
@@ -227,6 +233,21 @@ export async function runBrowserContract({
 		}
 	}
 	if (results.length > 0) printResults(title, results, expectedAssertions);
+	await mkdir(cacheDirectory, { recursive: true });
+	await writeFile(
+		path.join(cacheDirectory, "results.json"),
+		JSON.stringify(
+			{
+				title,
+				url: BASE_URL,
+				observedAt: new Date().toISOString(),
+				results,
+				fatalError: fatalError?.message ?? null,
+			},
+			null,
+			2,
+		) + "\n",
+	);
 	if (fatalError) {
 		console.error(`\nHARNESS ERROR: ${fatalError.message}`);
 		if (server?.getOutput?.()) console.error(`\nAstro output:\n${server.getOutput()}`);

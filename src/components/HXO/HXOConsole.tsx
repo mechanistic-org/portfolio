@@ -1,35 +1,19 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import TextShimmer from "../Effects/TextShimmer";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import CareerTimeline from "../DataViz/CareerTimeline";
+import type { CareerNode } from "../../utils/contextRibbon";
+import { projectPeriod } from "../../utils/projectDates";
+import { getAssetUrl } from "../../utils/assets";
 
 import { useStore } from "@nanostores/react";
-import {
-	exitTour,
-	focusId,
-	lens,
-	mode,
-	pin,
-	pinTourStep,
-	pinnedId,
-	previewId,
-	setConsoleHover,
-	setLens,
-	setPreview,
-	unpin,
-	viewerId,
-	type HxoLens,
-} from "../../stores/hxoStore";
-import { HXO_TOUR_STEPS, type HxoTourStep } from "../../config/hxoTour";
+import { acquire, clearReading, setPreview, viewerId } from "../../stores/hxoStore";
 import SonicHeartbeat from "../Audio/SonicHeartbeat";
-import {
-	deriveFocusedConstellation,
-	type FocusedConstellation,
-	type ProjectRelationship,
-} from "../../utils/deriveFocusedConstellation";
 
 interface ConsoleProject {
 	id: string;
 	data: {
 		title: string;
+		heroImage?: string;
+		description?: string;
 		date?: string | Date;
 		client?: string[];
 		audio_url?: string;
@@ -67,14 +51,16 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { has
 		if (this.state.hasError) {
 			return (
 				<div className="flex h-full flex-col items-center justify-center border-l border-zinc-900 bg-black/90 p-8 text-center">
-					<div className="mb-4 font-mono text-xl font-bold text-red-500">SYSTEM FAILURE</div>
-					<div className="font-mono text-xs text-zinc-500">Forensic Console Render Crash</div>
+					<p className="mb-4 text-zinc-300">Project details could not load.</p>
+					<a href="/projects/" className="text-lime-400 underline">
+						Browse all projects →
+					</a>
 					<button
 						type="button"
 						onClick={() => this.setState({ hasError: false })}
 						className="mt-6 border border-red-900/50 px-4 py-2 font-mono text-xs text-red-400 hover:bg-red-900/20"
 					>
-						ATTEMPT REBOOT
+						Try again
 					</button>
 				</div>
 			);
@@ -85,22 +71,9 @@ class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { has
 }
 
 interface HXOConsoleProps {
+	careerNodes: CareerNode[];
 	projects: ConsoleProject[];
-	relationships: ProjectRelationship[];
-}
-
-const TIER_RANK: Record<string, number> = { deep_dive: 0, lite: 1 };
-const LENSES: Array<{ id: HxoLens; label: string }> = [
-	{ id: "time", label: "Time" },
-	{ id: "employer", label: "Employer" },
-	{ id: "category", label: "Category" },
-];
-const VALID_LENSES = new Set<HxoLens>(LENSES.map(({ id }) => id));
-
-function sortableDate(value: string | Date | undefined) {
-	if (!value) return null;
-	const timestamp = new Date(value).getTime();
-	return Number.isFinite(timestamp) ? timestamp : null;
+	projectAliases: Readonly<Record<string, string>>;
 }
 
 function isEditableTarget(target: EventTarget | null) {
@@ -112,487 +85,138 @@ function isEditableTarget(target: EventTarget | null) {
 	);
 }
 
-function formatGroupLabel(value: string) {
-	return value.replace(/[_-]+/g, " ").replace(/\b\w/g, (character) => character.toUpperCase());
-}
-
-function getProjectLensGroup(project: ConsoleProject, currentLens: HxoLens) {
-	if (currentLens === "employer") return project.data.employer || "unassigned";
-	if (currentLens === "category") return project.data.category || "uncategorized";
-	return "timeline";
-}
-
-function sortProjects(projects: ConsoleProject[]) {
-	return projects
-		.map((project, originalIndex) => ({ project, originalIndex }))
-		.sort((a, b) => {
-			const tierA = TIER_RANK[a.project.data.tier ?? ""] ?? 2;
-			const tierB = TIER_RANK[b.project.data.tier ?? ""] ?? 2;
-			if (tierA !== tierB) return tierA - tierB;
-
-			const dateA = sortableDate(a.project.data.date);
-			const dateB = sortableDate(b.project.data.date);
-			if (dateA === null && dateB !== null) return 1;
-			if (dateA !== null && dateB === null) return -1;
-			if (dateA !== null && dateB !== null && dateA !== dateB) return dateB - dateA;
-			return a.originalIndex - b.originalIndex;
-		})
-		.map(({ project }) => project);
-}
-
-export default function HXOConsole({ projects, relationships }: HXOConsoleProps) {
-	const currentPinnedId = useStore(pinnedId);
-	const currentFocusId = useStore(focusId);
-	const currentViewerId = useStore(viewerId);
-	const currentLens = useStore(lens);
-	const currentMode = useStore(mode);
+export default function HXOConsole({ projects, careerNodes, projectAliases }: HXOConsoleProps) {
+	const storedViewerId = useStore(viewerId);
 	const [isHydrated, setIsHydrated] = useState(false);
+	// ClientRouter retains module stores between pages. Match the prerendered
+	// orientation first, then restore the held subject from this entry's URL.
+	const currentViewerId = isHydrated ? storedViewerId : null;
 	const [urlStateReady, setUrlStateReady] = useState(false);
 	const activeProject = projects.find((project) => project.id === currentViewerId);
 	const projectById = useMemo(
 		() => new Map(projects.map((project) => [project.id, project])),
 		[projects],
 	);
-	const focusedConstellation = useMemo(
-		() =>
-			deriveFocusedConstellation({
-				relationships,
-				projectIds: projectById.keys(),
-				focusId: currentFocusId,
-			}),
-		[currentFocusId, projectById, relationships],
-	);
-	const tourSteps = useMemo<readonly HxoTourStep[]>(() => {
-		const projectIds = new Set(projects.map((project) => project.id));
-		const stepIds = new Set(HXO_TOUR_STEPS.map((step) => step.id));
-		const tourProjectIds = new Set(HXO_TOUR_STEPS.map((step) => step.projectId));
-		return stepIds.size === HXO_TOUR_STEPS.length &&
-			tourProjectIds.size === HXO_TOUR_STEPS.length &&
-			HXO_TOUR_STEPS.every((step) => projectIds.has(step.projectId))
-			? HXO_TOUR_STEPS
-			: [];
-	}, [projects]);
-	const currentTourIndex =
-		currentMode === "tour" ? tourSteps.findIndex((step) => step.projectId === currentPinnedId) : -1;
-	const currentTourStep = currentTourIndex >= 0 ? tourSteps[currentTourIndex] : null;
-
-	const activateTourStep = useCallback(
-		(index: number) => {
-			const step = tourSteps[index];
-			if (!step) {
-				exitTour();
-				return;
-			}
-			setPreview(null);
-			setLens(step.lens);
-			pinTourStep(step.projectId);
-		},
-		[tourSteps],
-	);
-
-	const ledgerProjects = useMemo(() => sortProjects(projects), [projects]);
-	const ledgerSections = useMemo(() => {
-		if (currentLens === "time") {
-			return [{ id: "timeline", label: "Timeline", projects: ledgerProjects }];
-		}
-
-		const groups = new Map<string, ConsoleProject[]>();
-		for (const project of ledgerProjects) {
-			const group = getProjectLensGroup(project, currentLens);
-			const entries = groups.get(group) ?? [];
-			entries.push(project);
-			groups.set(group, entries);
-		}
-
-		return [...groups.entries()]
-			.map(([id, groupedProjects]) => ({
-				id,
-				label: formatGroupLabel(id),
-				projects: groupedProjects,
-			}))
-			.sort((a, b) => {
-				if (a.id === "uncategorized" || a.id === "unassigned") return 1;
-				if (b.id === "uncategorized" || b.id === "unassigned") return -1;
-				return a.label.localeCompare(b.label);
-			});
-	}, [currentLens, ledgerProjects]);
-
-	const ledgerRef = useRef<HTMLDivElement>(null);
-	const isInteractingWithLedger = useRef(false);
-	const managedHashRef = useRef(false);
+	const viewerRef = useRef<HTMLDivElement>(null);
+	const managedHash = useRef(false);
 
 	useEffect(() => {
 		setIsHydrated(true);
-	}, []);
-
-	useEffect(() => {
-		const projectIds = new Set(projects.map((project) => project.id));
-		const applyUrlState = () => {
-			const params = new URLSearchParams(window.location.hash.replace(/^#/, ""));
-			const hasManagedState = params.has("lens") || params.has("pin") || params.has("tour");
-			managedHashRef.current = hasManagedState;
-			if (hasManagedState) {
-				const requestedLens = params.get("lens") as HxoLens | null;
-				const validLens = requestedLens && VALID_LENSES.has(requestedLens) ? requestedLens : null;
-				const requestedTour = params.get("tour");
-				const tourStep = requestedTour ? tourSteps.find((step) => step.id === requestedTour) : null;
-				if (requestedTour) {
-					if (tourStep) {
-						setLens(validLens ?? tourStep.lens);
-						pinTourStep(tourStep.projectId);
-					} else {
-						setLens("time");
-						unpin();
-					}
-					setUrlStateReady(true);
-					return;
-				}
-
-				setLens(validLens ?? "time");
-				const requestedPin = params.get("pin");
-				if (requestedPin && projectIds.has(requestedPin)) pin(requestedPin);
-				else unpin();
+		const restore = () => {
+			const params = new URLSearchParams(window.location.hash.slice(1));
+			if (
+				!params.has("lens") &&
+				!params.has("project") &&
+				!params.has("pin") &&
+				!params.has("tour")
+			) {
+				managedHash.current = !window.location.hash;
+				clearReading();
+				return;
 			}
-			setUrlStateReady(true);
+			managedHash.current = true;
+			// Old pin URLs select the same single reading subject; there is no saved reference.
+			const legacy = params.get("project") ?? params.get("pin");
+			const requested = legacy ? (projectAliases[legacy] ?? legacy) : null;
+			setPreview(null);
+			const selected = requested && projectById.has(requested) ? requested : null;
+			acquire(selected);
+			const canonical = new URLSearchParams();
+			if (selected) canonical.set("project", selected);
+			window.history.replaceState(
+				window.history.state,
+				"",
+				`${window.location.pathname}${window.location.search}${canonical.size ? `#${canonical}` : ""}`,
+			);
 		};
-
-		applyUrlState();
-		window.addEventListener("hashchange", applyUrlState);
-		return () => window.removeEventListener("hashchange", applyUrlState);
-	}, [projects, tourSteps]);
+		restore();
+		setUrlStateReady(true);
+		window.addEventListener("hashchange", restore);
+		window.addEventListener("popstate", restore);
+		return () => {
+			window.removeEventListener("hashchange", restore);
+			window.removeEventListener("popstate", restore);
+			setPreview(null);
+		};
+	}, [projectById, projectAliases]);
 
 	useEffect(() => {
 		if (!urlStateReady) return;
-		const hasState = currentLens !== "time" || Boolean(currentPinnedId);
-		const hasTour = currentMode === "tour" && Boolean(currentTourStep);
-		if (!hasState && !hasTour && !managedHashRef.current) return;
-
+		if (!managedHash.current && !currentViewerId) return;
+		managedHash.current = true;
 		const params = new URLSearchParams();
-		if (hasState || hasTour) params.set("lens", currentLens);
-		if (currentPinnedId) params.set("pin", currentPinnedId);
-		if (hasTour && currentTourStep) params.set("tour", currentTourStep.id);
-		const nextHash = params.size > 0 ? `#${params.toString()}` : "";
-		const nextUrl = `${window.location.pathname}${window.location.search}${nextHash}`;
-		window.history.replaceState(window.history.state, "", nextUrl);
-		managedHashRef.current = params.size > 0;
-	}, [currentLens, currentMode, currentPinnedId, currentTourStep, urlStateReady]);
-
-	useEffect(() => {
-		if (currentMode === "tour" && currentTourIndex < 0) exitTour();
-	}, [currentMode, currentTourIndex]);
+		if (currentViewerId) params.set("project", currentViewerId);
+		const hash = params.size ? `#${params}` : "";
+		window.history.replaceState(
+			window.history.state,
+			"",
+			`${window.location.pathname}${window.location.search}${hash}`,
+		);
+	}, [currentViewerId, urlStateReady]);
 
 	useEffect(() => {
 		const handleKeyboard = (event: KeyboardEvent) => {
-			if (isEditableTarget(event.target)) return;
-			if (event.key === "Escape") {
-				if (previewId.get()) setPreview(null);
-				else if (mode.get() === "tour") exitTour();
-				else if (pinnedId.get()) unpin();
-				return;
-			}
-
-			if (mode.get() !== "tour" || !["ArrowLeft", "ArrowRight"].includes(event.key)) return;
-			const index = tourSteps.findIndex((step) => step.projectId === pinnedId.get());
-			const nextIndex = index + (event.key === "ArrowRight" ? 1 : -1);
-			if (!tourSteps[nextIndex]) return;
-			event.preventDefault();
-			activateTourStep(nextIndex);
+			if (isEditableTarget(event.target) || event.key !== "Escape") return;
+			setPreview(null);
+			clearReading();
 		};
-
 		window.addEventListener("keydown", handleKeyboard);
 		return () => window.removeEventListener("keydown", handleKeyboard);
-	}, [activateTourStep, tourSteps]);
+	}, []);
 
 	useEffect(() => {
-		const ledger = ledgerRef.current;
-		if (!currentFocusId || !ledger || isInteractingWithLedger.current) return;
-
-		const row = Array.from(ledger.querySelectorAll<HTMLElement>("[data-row-id]")).find(
-			(element) => element.dataset.rowId === currentFocusId,
-		);
-		if (!row) return;
-
-		ledger.scrollTo({
-			top: row.offsetTop - (ledger.clientHeight - row.offsetHeight) / 2,
-			behavior: "smooth",
-		});
-	}, [currentFocusId]);
+		if (viewerRef.current) viewerRef.current.scrollTop = 0;
+	}, [currentViewerId]);
 
 	return (
 		<ErrorBoundary>
 			<div
-				className="flex h-full flex-col border-l border-zinc-900 bg-transparent"
-				data-current-lens={currentLens}
-				data-current-mode={currentMode}
+				className="flex h-full min-h-0 flex-col border-l border-zinc-900 bg-transparent"
+				data-current-lens="time"
 				data-hxo-hydrated={isHydrated ? "true" : "false"}
-				onMouseEnter={() => setConsoleHover(true)}
-				onMouseLeave={() => setConsoleHover(false)}
 			>
-				<nav
-					aria-label="Career map lenses"
-					className="sticky top-16 z-20 flex shrink-0 flex-wrap items-center gap-1 border-b border-zinc-800 bg-black/90 px-3 py-2 font-mono backdrop-blur"
-					data-lens-bar
+				<button
+					type="button"
+					onClick={() => document.getElementById("career-map")?.scrollIntoView({ block: "start" })}
+					className="border-b border-zinc-800 px-5 py-3 text-left font-mono text-xs text-zinc-400 lg:hidden"
 				>
-					<span className="mr-2 text-[9px] tracking-[0.2em] text-zinc-600 uppercase">View</span>
-					{LENSES.map(({ id, label }) => {
-						const active = id === currentLens;
-						return (
-							<button
-								key={id}
-								type="button"
-								data-lens-control={id}
-								aria-pressed={active}
-								disabled={!isHydrated}
-								onClick={() => setLens(id)}
-								className={`rounded-sm border px-2.5 py-1 text-[10px] tracking-wider uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-400 disabled:cursor-default ${
-									active
-										? "border-lime-500/60 bg-lime-500/10 text-lime-300"
-										: "border-zinc-800 text-zinc-500 hover:border-zinc-600 hover:text-zinc-300 disabled:hover:border-zinc-800 disabled:hover:text-zinc-500"
-								}`}
-							>
-								{label}
-							</button>
-						);
-					})}
-					<button
-						type="button"
-						data-tour-control="start"
-						data-tour-count={tourSteps.length}
-						aria-pressed={currentMode === "tour"}
-						disabled={!isHydrated || tourSteps.length !== HXO_TOUR_STEPS.length}
-						onClick={() => activateTourStep(0)}
-						className={`ml-auto rounded-sm border px-2.5 py-1 text-[10px] tracking-wider uppercase transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-400 disabled:cursor-default ${
-							currentMode === "tour"
-								? "border-cyan-500/60 bg-cyan-500/10 text-cyan-300"
-								: "border-zinc-700 text-zinc-400 hover:border-cyan-600 hover:text-cyan-300 disabled:hover:border-zinc-700 disabled:hover:text-zinc-400"
-						}`}
-					>
-						{currentMode === "tour" ? "Restart tour" : "Tour"}
-					</button>
-				</nav>
-
-				{currentTourStep && (
-					<TourChapter
-						step={currentTourStep}
-						index={currentTourIndex}
-						count={tourSteps.length}
-						onPrevious={() => activateTourStep(currentTourIndex - 1)}
-						onNext={() => activateTourStep(currentTourIndex + 1)}
-						onExit={exitTour}
-					/>
-				)}
+					← Back to map
+				</button>
 
 				<div
+					ref={viewerRef}
 					data-viewer-id={activeProject?.id ?? "orientation"}
-					className={`custom-scrollbar shrink-0 overflow-y-auto border-b border-zinc-800 bg-zinc-900/10 p-6 ${currentTourStep ? "h-[48%] pt-[5.5rem] lg:pt-6" : "h-[62%]"}`}
+					className="custom-scrollbar min-h-0 flex-[1_1_55%] overflow-y-auto bg-zinc-900/10 p-5"
 				>
-					{activeProject ? (
-						<ActiveSovereignView
-							project={activeProject}
-							projectById={projectById}
-							constellation={
-								focusedConstellation.focusId === activeProject.id ? focusedConstellation : null
-							}
-						/>
-					) : (
-						<DefaultSummary />
-					)}
+					{activeProject ? <ActiveSovereignView project={activeProject} /> : <DefaultSummary />}
 				</div>
 
-				<div className="flex flex-1 flex-col overflow-hidden">
-					<div
-						ref={ledgerRef}
-						className="custom-scrollbar flex-1 overflow-y-auto p-2 pb-24"
-						onMouseEnter={() => {
-							isInteractingWithLedger.current = true;
-						}}
-						onMouseLeave={() => {
-							isInteractingWithLedger.current = false;
-						}}
-						onFocusCapture={() => {
-							isInteractingWithLedger.current = true;
-						}}
-						onBlurCapture={(event) => {
-							if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-								isInteractingWithLedger.current = false;
-							}
-						}}
-					>
-						{ledgerSections.map((section) => (
-							<section
-								key={section.id}
-								data-lens-section={section.id}
-								data-section-count={section.projects.length}
-							>
-								<h3 className="sticky top-0 z-10 flex items-center justify-between border-y border-zinc-800 bg-black/95 px-3 py-1.5 font-mono text-[9px] tracking-[0.18em] text-zinc-500 uppercase backdrop-blur">
-									<span>{section.label}</span>
-									<span>{section.projects.length}</span>
-								</h3>
-								<ul className="m-0 list-none p-0">
-									{section.projects.map((project) => {
-										const isPinned = project.id === currentPinnedId;
-										const isFocused = project.id === currentFocusId;
-										const rawDate = project.data.date ? String(project.data.date) : "";
-										const lensGroup = getProjectLensGroup(project, currentLens);
-
-										return (
-											<li
-												key={project.id}
-												data-row-id={project.id}
-												className={`group flex items-stretch border-b border-zinc-800/50 transition-colors duration-100 ${
-													isFocused
-														? "bg-zinc-800/80 text-white shadow-[inset_3px_0_0_#84cc16]"
-														: "opacity-60 focus-within:opacity-100 hover:bg-zinc-900/50 hover:opacity-100"
-												}`}
-											>
-												<button
-													type="button"
-													aria-pressed={isPinned}
-													data-id={project.id}
-													data-pinned={isPinned}
-													data-focused={isFocused}
-													data-tier={project.data.tier ?? ""}
-													data-date={rawDate}
-													data-lens-group={lensGroup}
-													disabled={!isHydrated}
-													onClick={() => pin(project.id)}
-													onMouseEnter={() => setPreview(project.id, "index-hover")}
-													onMouseLeave={() => setPreview(null, "index-hover")}
-													onFocus={() => setPreview(project.id, "index-focus")}
-													onBlur={() => setPreview(null, "index-focus")}
-													className="flex min-w-0 flex-1 cursor-pointer items-center gap-4 p-3 text-left focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-lime-400 disabled:cursor-default"
-												>
-													<span
-														className={`pointer-events-none w-10 shrink-0 font-mono text-xs ${isFocused ? "text-lime-400" : "text-zinc-600"}`}
-													>
-														{project.data.date ? new Date(project.data.date).getFullYear() : "####"}
-													</span>
-													<span
-														className={`pointer-events-none min-w-0 flex-1 truncate text-sm font-medium ${isFocused ? "text-white" : "text-zinc-300"}`}
-													>
-														{project.data.title}
-													</span>
-													{project.data.tier === "deep_dive" && (
-														<span className="pointer-events-none h-1.5 w-1.5 shrink-0 rounded-full bg-lime-500/50" />
-													)}
-												</button>
-												<a
-													href={`/projects/${project.id}/`}
-													aria-label={`Open ${project.data.title}`}
-													className="flex shrink-0 items-center px-3 font-mono text-[10px] tracking-wider text-zinc-500 uppercase transition-colors hover:text-lime-400 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-lime-400"
-												>
-													Open →
-												</a>
-											</li>
-										);
-									})}
-								</ul>
-							</section>
-						))}
-					</div>
+				<div
+					className="custom-scrollbar min-h-0 flex-[1_1_45%] overflow-y-auto"
+					data-timeline-panel
+				>
+					<CareerTimeline nodes={careerNodes} currentId={currentViewerId} onSelect={acquire} />
 				</div>
 			</div>
 		</ErrorBoundary>
 	);
 }
 
-function TourChapter({
-	step,
-	index,
-	count,
-	onPrevious,
-	onNext,
-	onExit,
-}: {
-	step: HxoTourStep;
-	index: number;
-	count: number;
-	onPrevious: () => void;
-	onNext: () => void;
-	onExit: () => void;
-}) {
-	return (
-		<section
-			aria-label={`Guided tour chapter ${index + 1} of ${count}`}
-			aria-live="polite"
-			className="sticky top-[6.5625rem] z-10 shrink-0 border-b border-cyan-900/50 bg-black/95 px-4 py-3 shadow-lg backdrop-blur lg:static"
-			data-tour-panel
-			data-tour-step={step.id}
-			data-tour-index={index}
-			data-tour-count={count}
-		>
-			<div className="flex items-start justify-between gap-4">
-				<div className="min-w-0">
-					<p className="font-mono text-[9px] tracking-[0.2em] text-cyan-500 uppercase">
-						Guided tour · {index + 1}/{count}
-					</p>
-					<h2 className="mt-1 text-sm font-semibold text-white">{step.title}</h2>
-					<p className="mt-1 max-w-2xl text-xs leading-relaxed text-zinc-400">{step.narration}</p>
-				</div>
-				<button
-					type="button"
-					data-tour-control="exit"
-					onClick={onExit}
-					className="shrink-0 rounded-sm border border-zinc-700 px-2.5 py-1.5 font-mono text-[9px] tracking-wider text-zinc-400 uppercase hover:border-zinc-500 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
-				>
-					Exit
-				</button>
-			</div>
-			<div className="mt-3 flex items-center gap-2 font-mono">
-				<button
-					type="button"
-					data-tour-control="previous"
-					disabled={index === 0}
-					onClick={onPrevious}
-					className="rounded-sm border border-zinc-700 px-3 py-1.5 text-[9px] tracking-wider text-zinc-300 uppercase hover:border-cyan-600 hover:text-cyan-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400 disabled:cursor-default disabled:opacity-30 disabled:hover:border-zinc-700 disabled:hover:text-zinc-300"
-				>
-					← Previous
-				</button>
-				<div className="flex gap-1" aria-hidden="true">
-					{Array.from({ length: count }, (_, dotIndex) => (
-						<span
-							key={dotIndex}
-							className={`h-1 w-4 rounded-full ${dotIndex === index ? "bg-cyan-400" : "bg-zinc-800"}`}
-						/>
-					))}
-				</div>
-				<button
-					type="button"
-					data-tour-control="next"
-					disabled={index === count - 1}
-					onClick={onNext}
-					className="rounded-sm border border-zinc-700 px-3 py-1.5 text-[9px] tracking-wider text-zinc-300 uppercase hover:border-cyan-600 hover:text-cyan-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400 disabled:cursor-default disabled:opacity-30 disabled:hover:border-zinc-700 disabled:hover:text-zinc-300"
-				>
-					Next →
-				</button>
-			</div>
-		</section>
-	);
-}
-
-function formatRelationshipKind(kind: ProjectRelationship["kind"]) {
-	return kind.replaceAll("_", " ");
-}
-
-function ActiveSovereignView({
-	project,
-	projectById,
-	constellation,
-}: {
-	project: ConsoleProject;
-	projectById: Map<string, ConsoleProject>;
-	constellation: FocusedConstellation | null;
-}) {
+function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 	if (!project || !project.data) return <div className="p-4 text-red-500">CORRUPT DATA</div>;
 
-	const { title, date, client, forensic_summary, audio_url, toolchain } = project.data;
-	const year = date ? new Date(date).getFullYear() : "N/A";
+	const { title, client, forensic_summary, audio_url, toolchain, heroImage, description } =
+		project.data;
+	const chronology = projectPeriod(project.id, project.data);
 
 	return (
-		<article className="hxo-node animate-in fade-in slide-in-from-bottom-2 duration-300">
+		<article className="hxo-node">
 			<header className="mb-6">
 				<div className="mb-2 flex items-center gap-4">
-					<span className="font-mono text-sm tracking-widest text-lime-400">{year}</span>
+					<span className="font-mono text-sm tracking-widest text-lime-400">
+						{chronology.period}
+						{chronology.context ? ` · ${chronology.context}` : ""}
+					</span>
 					{client && client.length > 0 && (
 						<span className="font-mono text-xs tracking-wider text-zinc-500 uppercase">
 							Client: {client[0]}
@@ -614,6 +238,18 @@ function ActiveSovereignView({
 				)}
 			</header>
 
+			{heroImage && (
+				<a href={`/projects/${project.id}/`} className="mb-5 block">
+					<img
+						src={getAssetUrl(heroImage)}
+						alt={title}
+						className="max-h-56 w-full object-contain"
+					/>
+				</a>
+			)}
+			{description && !forensic_summary?.result && !forensic_summary?.objective && (
+				<p className="mb-5 text-sm leading-relaxed text-zinc-300">{description}</p>
+			)}
 			<div className="space-y-6">
 				{forensic_summary?.result && (
 					<div className="objective">
@@ -691,69 +327,9 @@ function ActiveSovereignView({
 						href={`/projects/${project.id}/`}
 						className="flex items-center gap-2 font-mono text-xs tracking-widest text-lime-400 uppercase transition-colors hover:text-white"
 					>
-						Open Full Dossier →
+						Open project →
 					</a>
 				</div>
-
-				{constellation && (
-					<section
-						aria-labelledby={`focused-constellation-${project.id}`}
-						className="border-t border-cyan-950/80 pt-4"
-						data-relationship-list
-						data-focus-id={project.id}
-						data-relationship-count={constellation.relationships.length}
-					>
-						<div className="mb-3 flex items-center justify-between gap-3">
-							<h3
-								id={`focused-constellation-${project.id}`}
-								className="font-mono text-xs tracking-[0.16em] text-cyan-400 uppercase"
-							>
-								Focused constellation
-							</h3>
-							<span className="font-mono text-[10px] text-zinc-600">
-								{constellation.relationships.length} verified
-							</span>
-						</div>
-						{constellation.relationships.length > 0 ? (
-							<ul className="m-0 space-y-3 p-0">
-								{constellation.relationships.map((relationship) => {
-									const relatedProject = projectById.get(relationship.relatedProjectId);
-									const sourceTitle =
-										projectById.get(relationship.source)?.data.title ?? relationship.source;
-									const targetTitle =
-										projectById.get(relationship.target)?.data.title ?? relationship.target;
-									return (
-										<li
-											key={relationship.edge_key}
-											className="list-none rounded border border-cyan-950/80 bg-cyan-950/10 p-3"
-											data-edge-key={relationship.edge_key}
-											data-kind={relationship.kind}
-											data-related-project-id={relationship.relatedProjectId}
-										>
-											<p className="font-mono text-[9px] tracking-[0.14em] text-cyan-500 uppercase">
-												{formatRelationshipKind(relationship.kind)} · {sourceTitle} → {targetTitle}
-											</p>
-											<p className="mt-1.5 text-xs leading-relaxed text-zinc-300" data-public-claim>
-												{relationship.public_claim}
-											</p>
-											<a
-												href={`/projects/${relationship.relatedProjectId}/`}
-												className="mt-2 inline-flex font-mono text-[10px] tracking-wider text-cyan-300 uppercase transition-colors hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-400"
-												data-related-project-link
-											>
-												Open {relatedProject?.data.title ?? relationship.relatedProjectId} →
-											</a>
-										</li>
-									);
-								})}
-							</ul>
-						) : (
-							<p className="text-xs leading-relaxed text-zinc-500" data-no-verified-relationships>
-								No verified direct relationships recorded.
-							</p>
-						)}
-					</section>
-				)}
 			</div>
 		</article>
 	);
@@ -762,17 +338,14 @@ function ActiveSovereignView({
 function DefaultSummary() {
 	return (
 		<article className="hxo-node animate-in fade-in flex h-full flex-col justify-center duration-500">
-			<header className="mb-6">
-				<h2 className="font-display mb-4 text-3xl font-bold text-white">
-					(Product Reality) <TextShimmer className="font-bold">EN</TextShimmer>gine
-				</h2>
-			</header>
-
 			<div className="space-y-6">
 				<p className="text-sm leading-relaxed font-light text-zinc-300">
 					Principal Mechanical Architect specializing in high-fidelity hardware and program rescue.
 					I stabilize the entropy of product development: structure the chaos, index the decisions,
 					ship the hardware.
+				</p>
+				<p className="font-mono text-xs text-zinc-500">
+					Pause over a project to explore. Its details stay open as you move across to read.
 				</p>
 				<nav
 					aria-label="Portfolio orientation"
