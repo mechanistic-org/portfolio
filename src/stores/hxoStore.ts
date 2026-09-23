@@ -48,10 +48,3 @@ export function clearReading() {
 	setPreview(null);
 	readingId.set(null);
 }
-
-// Console Interaction Shield
-export const isInsideConsole = atom<boolean>(false);
-
-export function setConsoleHover(isInside: boolean) {
-	isInsideConsole.set(isInside);
-}

@@ -1,6 +1,6 @@
 import { useStore } from "@nanostores/react";
 import ResVizSwarm from "../DataViz/ResVizSwarm";
-import { acquire, clearReading, focusId, isInsideConsole, setPreview } from "../../stores/hxoStore";
+import { acquire, clearReading, focusId, setPreview } from "../../stores/hxoStore";
 
 interface HXOSwarmContainerProps {
 	nodes: any[];
@@ -8,7 +8,6 @@ interface HXOSwarmContainerProps {
 
 export default function HXOSwarmContainer({ nodes }: HXOSwarmContainerProps) {
 	const currentFocusId = useStore(focusId);
-	const consoleActive = useStore(isInsideConsole);
 
 	return (
 		<div className="h-full w-full" onMouseLeave={() => setPreview(null, "swarm")}>
@@ -28,7 +27,6 @@ export default function HXOSwarmContainer({ nodes }: HXOSwarmContainerProps) {
 						);
 					}
 				}}
-				isConsoleHovered={consoleActive}
 			/>
 		</div>
 	);

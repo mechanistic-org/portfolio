@@ -5,13 +5,7 @@ import { projectPeriod } from "../../utils/projectDates";
 import { getAssetUrl } from "../../utils/assets";
 
 import { useStore } from "@nanostores/react";
-import {
-	acquire,
-	clearReading,
-	setConsoleHover,
-	setPreview,
-	viewerId,
-} from "../../stores/hxoStore";
+import { acquire, clearReading, setPreview, viewerId } from "../../stores/hxoStore";
 import SonicHeartbeat from "../Audio/SonicHeartbeat";
 
 interface ConsoleProject {
@@ -108,7 +102,6 @@ export default function HXOConsole({ projects, careerNodes, projectAliases }: HX
 
 	useEffect(() => {
 		setIsHydrated(true);
-		setConsoleHover(false);
 		const restore = () => {
 			const params = new URLSearchParams(window.location.hash.slice(1));
 			if (
@@ -144,7 +137,6 @@ export default function HXOConsole({ projects, careerNodes, projectAliases }: HX
 			window.removeEventListener("hashchange", restore);
 			window.removeEventListener("popstate", restore);
 			setPreview(null);
-			setConsoleHover(false);
 		};
 	}, [projectById, projectAliases]);
 
@@ -182,8 +174,6 @@ export default function HXOConsole({ projects, careerNodes, projectAliases }: HX
 				className="flex h-full min-h-0 flex-col border-l border-zinc-900 bg-transparent"
 				data-current-lens="time"
 				data-hxo-hydrated={isHydrated ? "true" : "false"}
-				onMouseEnter={() => setConsoleHover(true)}
-				onMouseLeave={() => setConsoleHover(false)}
 			>
 				<button
 					type="button"

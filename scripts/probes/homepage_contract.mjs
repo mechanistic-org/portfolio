@@ -30,18 +30,31 @@ async function navigate(page, suffix = "/") {
 async function focusNode(page, id) {
 	await page.$eval(node(id), (el) => el.focus());
 }
-async function selected(page, id) {
-	await page.waitForFunction(
-		(expected) =>
-			document.querySelector("[data-viewer-id]")?.dataset.viewerId === expected &&
-			document.querySelector("[data-context-ribbon]")?.dataset.current === expected &&
-			location.hash === `#project=${expected}` &&
-			document
-				.querySelector(`.node-group[data-id="${expected}"] .focus-ring`)
-				?.getAttribute("opacity") === "1",
-		{},
-		id,
-	);
+async function selected(page, id, phase = "selection") {
+	try {
+		await page.waitForFunction(
+			(expected) =>
+				document.querySelector("[data-viewer-id]")?.dataset.viewerId === expected &&
+				document.querySelector("[data-context-ribbon]")?.dataset.current === expected &&
+				location.hash === `#project=${expected}` &&
+				document
+					.querySelector(`.node-group[data-id="${expected}"] .focus-ring`)
+					?.getAttribute("opacity") === "1",
+			{},
+			id,
+		);
+	} catch (error) {
+		const state = await page.evaluate(() => ({
+			url: location.href,
+			viewer: document.querySelector("[data-viewer-id]")?.dataset.viewerId,
+			timeline: document.querySelector("[data-context-ribbon]")?.dataset.current,
+			focused: [...document.querySelectorAll('.focus-ring[opacity="1"]')].map(
+				(el) => el.parentElement?.dataset.id,
+			),
+			swarmReady: document.querySelector("[data-swarm-ready]")?.dataset.swarmReady,
+		}));
+		throw new Error(`${phase}: expected ${id}; ${JSON.stringify(state)}; ${error.message}`);
+	}
 }
 async function route(page, pathname) {
 	// Astro's ClientRouter can emit an early same-document history event.
@@ -230,15 +243,15 @@ const assertionSpecs = [
 			await navigate(page, "/#project=sc48");
 			await selected(page, "sc48");
 			await page.click('[data-career-overview] a[data-project="avegant-glyph"]');
-			await selected(page, "avegant-glyph");
+			await selected(page, "avegant-glyph", "timeline click");
 			await page.click('[data-viewer-id] a[href="/projects/avegant-glyph/"]');
 			await route(page, "/projects/avegant-glyph/");
 			assert.equal(new URL(page.url()).pathname, "/projects/avegant-glyph/");
 			await page.goBack({ waitUntil: "networkidle0" });
 			await route(page, "/");
-			await selected(page, "avegant-glyph");
+			await selected(page, "avegant-glyph", "Back restoration");
 			await pointAt(page, "sc48");
-			await selected(page, "sc48");
+			await selected(page, "sc48", "hover after Back");
 			await page.goForward({ waitUntil: "networkidle0" });
 			await route(page, "/projects/avegant-glyph/");
 			assert.equal(new URL(page.url()).pathname, "/projects/avegant-glyph/");

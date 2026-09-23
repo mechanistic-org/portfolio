@@ -26,7 +26,6 @@ interface ResVizSwarmProps {
 	onNodeSelect?: (node: NodeData | null) => void;
 	onNodeClick?: (node: NodeData | null) => void;
 	externalHoverId?: string;
-	isConsoleHovered?: boolean;
 }
 
 const DAY_MS = 1000 * 60 * 60 * 24;
@@ -67,7 +66,6 @@ export default function ResVizSwarm({
 	onNodeSelect,
 	onNodeClick,
 	externalHoverId,
-	isConsoleHovered = false,
 }: ResVizSwarmProps) {
 	const svgRef = useRef<SVGSVGElement>(null);
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -78,7 +76,6 @@ export default function ResVizSwarm({
 	const acquiredNodeIdRef = useRef<string | null>(null);
 	const onNodeSelectRef = useRef(onNodeSelect);
 	const onNodeClickRef = useRef(onNodeClick);
-	const consoleHoveredRef = useRef(isConsoleHovered);
 	const pausedRef = useRef(false);
 	const resetPackingRef = useRef<() => void>(() => undefined);
 	const packingActiveRef = useRef(false);
@@ -91,7 +88,6 @@ export default function ResVizSwarm({
 	pausedRef.current = isPaused;
 	onNodeSelectRef.current = onNodeSelect;
 	onNodeClickRef.current = onNodeClick;
-	consoleHoveredRef.current = isConsoleHovered;
 
 	const nodes = useMemo(() => {
 		if (!rawNodes) return [];
@@ -401,7 +397,6 @@ export default function ResVizSwarm({
 		svg
 			.on("pointermove", (event) => {
 				if (event.pointerType === "touch") return;
-				if (consoleHoveredRef.current) return;
 				const [x, y] = d3.pointer(event);
 				let retainedNode = nodes.find((node) => node.id === acquiredNodeIdRef.current) ?? null;
 				if (retainedNode) {
