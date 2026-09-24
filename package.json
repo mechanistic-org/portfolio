@@ -111,6 +111,9 @@
 		"wrangler": "^4.59.1"
 	},
 	"overrides": {
+		"@playform/compress": {
+			"svgo": "^4.1.0"
+		},
 		"sharp": "^0.35.4",
 		"three": "^0.182.0",
 		"ws": "^8.21.0"
