@@ -6,6 +6,10 @@ import { build } from "esbuild";
 import matter from "gray-matter";
 import GithubSlugger from "github-slugger";
 
+// Default: verify C24 publishes no viewer. After an explicitly approved local
+// opt-in (c24.models = ["3d_model"]), pass --interactive for the full viewer suite.
+const interactive = process.argv.includes("--interactive");
+
 // The historical #222/#223 all-article probe predates the authoring renderers.
 // Exercise this ticket's actual presentation seam without changing their contracts.
 async function load(file) {
@@ -35,7 +39,14 @@ for (const slug of ["c24", "d-command"]) {
 	const galleries = data.cyberspace.stickies.filter(
 		(item) => item.type === "gallery" && item.data?.images?.length,
 	);
-	const config = projectArticleTrial[slug];
+	const current = projectArticleTrial[slug];
+	assert.equal(
+		resolveProjectPresentation(current, data, headings, galleries).models.length,
+		slug === "c24" && interactive ? 1 : 0,
+	);
+	// Exercise the retained opt-in without enabling it in the published page.
+	const config = structuredClone(current);
+	if (slug === "c24") config.models = ["3d_model"];
 	const resolved = resolveProjectPresentation(config, data, headings, galleries);
 	assert.equal(resolved.models.length, slug === "c24" ? 1 : 0);
 	for (const model of resolved.models) {
@@ -59,11 +70,51 @@ for (const slug of ["c24", "d-command"]) {
 	}
 }
 console.log(
-	"PASS shared presentation: C24 source/title/caption preserved, explicit placement resolved; invalid references fail; D-Command has no model",
+	"PASS shared presentation: current selection verified; C24 opt-in preserves source/title/caption and placement; invalid references fail; D-Command has no model",
 );
 
 const base = process.env.BROWSER_CONTRACT_URL ?? "http://127.0.0.1:4336";
 assert.equal(new URL(base).hostname, "127.0.0.1", "Only qualify a local candidate");
+if (!interactive) {
+	const browser = await puppeteer.launch({ headless: true });
+	try {
+		const page = await browser.newPage();
+		const modelRequests = [];
+		page.on("request", (request) => {
+			if (/\.glb(?:\?|$)/i.test(request.url())) modelRequests.push(request.url());
+		});
+		for (const javascript of [true, false]) {
+			await page.setJavaScriptEnabled(javascript);
+			for (const slug of ["c24", "m500", "d-command", "cinema-one"]) {
+				const response = await page.goto(`${base}/projects/${slug}/`, {
+					waitUntil: "networkidle2",
+				});
+				assert.equal(response.status(), 200);
+				assert.equal(
+					await page.$('[data-project-model], model-viewer, a[href$=".glb"]'),
+					null,
+					`${slug}: no viewer or model file link (JavaScript ${javascript})`,
+				);
+				if (slug === "c24") {
+					assert.match(
+						await page.$eval(
+							"#iii-design-and-production",
+							(heading) => heading.previousElementSibling.textContent,
+						),
+						/geometry and assembly underneath/,
+					);
+				}
+			}
+		}
+		assert.deepEqual(modelRequests, []);
+		console.log(
+			"PASS C24 removal: no viewer, file link or GLB request; article order intact with/without JavaScript; three other project controls unchanged",
+		);
+	} finally {
+		await browser.close();
+	}
+	process.exit(0);
+}
 const output = new URL("../../node_modules/.cache/project-model/", import.meta.url);
 await mkdir(output, { recursive: true });
 const browser = await puppeteer.launch({ headless: true });

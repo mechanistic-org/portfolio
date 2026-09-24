@@ -105,7 +105,9 @@ export const projectArticleTrial = {
 				src: "/assets/r2/c24/bubbles/05_paper_trail/ECO_12263_Page_2.png",
 			},
 		},
-		models: ["3d_model"],
+		// Disabled by Erik after #336 review. Re-enable only with explicit approval:
+		// set models to ["3d_model"]; the placement/view preset below is retained.
+		models: [],
 		modelPlacement: {
 			"3d_model": {
 				before: "failures",
