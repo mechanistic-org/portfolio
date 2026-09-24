@@ -12,6 +12,7 @@ interface BaseProps {
 	title: string;
 	description: string;
 	noindex?: boolean;
+	socialImage?: { type: string; alt: string; width?: number; height?: number };
 }
 
 interface GeneralProps extends BaseProps {
@@ -30,6 +31,7 @@ const {
 	title,
 	description,
 	image,
+	socialImage,
 	noindex = false,
 } = Astro.props as GeneralProps | ProjectProps;
 
@@ -106,7 +108,8 @@ const imageUrl = new URL(imageSource, Astro.site || canonicalBase).toString();
 			description: description,
 			siteName: siteData.title,
 		},
-		image: {
+		// Explicit metadata is opt-in; other pages retain their existing output.
+		image: socialImage || {
 			type: "image/webp",
 			width: optimizedImage?.attributes.width || "1200",
 			height: optimizedImage?.attributes.height || "800",

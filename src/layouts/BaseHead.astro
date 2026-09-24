@@ -12,6 +12,7 @@ export interface Props {
 	title: string;
 	description: string;
 	image?: ImageMetadata | string;
+	socialImage?: { type: string; alt: string; width?: number; height?: number };
 	projectFrontmatter?: any; // For projects
 	noindex?: boolean;
 }
@@ -21,6 +22,7 @@ const {
 	title,
 	description,
 	image,
+	socialImage,
 	projectFrontmatter,
 	noindex = false,
 } = Astro.props as Props;
@@ -80,6 +82,7 @@ import JetBrainsMono from "@fontsource-variable/jetbrains-mono/files/jetbrains-m
 	title={title}
 	description={description}
 	image={image}
+	socialImage={socialImage}
 	projectFrontmatter={projectFrontmatter}
 	noindex={noindex}
 />

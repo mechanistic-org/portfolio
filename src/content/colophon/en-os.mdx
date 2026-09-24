@@ -2,6 +2,7 @@
 title: "EN-OS"
 slug: "en-os"
 subtitle: "How the Public Engineering Record Is Built"
+description: "Source material stays separate from the authored record. Human review establishes the account; repeatable generation and checks carry it into the public site. EN-OS explains that boundary, the earlier publication failures, and their correction."
 icon: "cpu"
 color: "green"
 order: 0
@@ -23,7 +24,7 @@ That boundary matters. A polished page is useful only if its claims can still be
 
 Each project is curated into a canonical Markdown record. Canon is the source of truth for project knowledge. The site, résumé, and other public surfaces are projections from it.
 
-Machine assistance helps retrieve and organize evidence. Interpretation remains mine. Confidential material stays behind its publication gate; public claims must be supportable without exposing client information.
+AI assists with retrieval, organization, proposed interpretations, and software construction. I am responsible for the accepted account, attribution, and decision to publish. Confidential material stays behind its publication gate; public claims must be supportable without exposing client information.
 
 ## Build
 
@@ -35,6 +36,8 @@ A generator projects canon into the portfolio content files. The build checks th
 4. The site build rejects known leakage patterns, unresolved placeholders, and schema failures.
 
 The website is a read-only render target. A project page should not become a second, hand-maintained source of truth.
+
+These checks enforce specified integrity and consistency rules. A file hash identifies an artifact; it does not establish what the artifact means. Neither a passing build nor a matching hash replaces review of the evidence.
 
 ## Public Render
 

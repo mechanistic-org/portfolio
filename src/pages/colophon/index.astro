@@ -1,46 +1,41 @@
 ---
 import Layout from "@layouts/BaseLayout.astro";
-
-export const prerender = true;
 import ColophonCard from "@components/ColophonCard.astro";
-import Marquee from "@components/Marquee/Marquee";
 import ForensicWall from "@components/Forensics/ForensicWall";
 
-// Workaround for empty collection issue: manually load files via glob
+export const prerender = true;
+
 const globFeatures = import.meta.glob("../../content/colophon/*.mdx", { eager: true });
 const entries = Object.values(globFeatures)
 	.map((file: any) => {
 		const data = file.frontmatter || {};
-		// Extract slug from filename if not in frontmatter
 		const filename = file.file.split("/").pop().replace(".mdx", "");
 		return {
-			id: file.file,
+			...data,
 			slug: data.slug || filename,
 			description: data.description || data.subtitle || data.summary || "",
-			...data,
-			Content: file.Content || file.default,
 		};
 	})
 	.sort((a: any, b: any) => (a.order || 0) - (b.order || 0));
 
-const features = entries.filter((entry: any) => entry.entryType !== "build-log");
+const decisionSlugs = ["en-os", "missing-evidence", "work-survives-a-session"];
+const decisions = decisionSlugs.map((slug) => entries.find((entry: any) => entry.slug === slug));
 const buildLog = entries
 	.filter((entry: any) => entry.entryType === "build-log")
 	.sort(
 		(a: any, b: any) =>
 			String(b.pubDate).localeCompare(String(a.pubDate)) || a.slug.localeCompare(b.slug),
 	);
-
-// Add System Documentation manually
-features.unshift({
-	id: "docs",
-	slug: "/docs/", // Absolute path to the docs section
-	title: "System Documentation",
-	description: "Internal operating procedures, architecture diagrams, and style guides.",
-	icon: "book",
-	color: "blue",
-});
-
+const construction = [
+	["Source", "Notebooks, CAD, test reports, photographs, and program documents."],
+	["Review", "Select what the evidence supports; retain its limits and attribution."],
+	["Canon", "Curate the accepted project account separately from the website."],
+	["Build", "Generate the site and check specified integrity and consistency rules."],
+	[
+		"Public account",
+		"Publish the reviewed record as static pages with links to permitted evidence.",
+	],
+];
 const tools = [
 	"VS Code",
 	"GitHub",
@@ -52,123 +47,314 @@ const tools = [
 	"Tailwind CSS v4",
 	"Recharts",
 ];
-const marqueeTools = [...tools, ...tools, ...tools];
 ---
 
 <Layout
-	title="Colophon"
-	description="The Meta-Portfolio: Documenting the engineering behind the site."
+	title="How this record is built | Colophon | Erik Norris"
+	description="How Erik Norris's public engineering record is constructed: source material, human review, repeatable builds, software decisions, and production credits."
+	socialImage={{ type: "image/png", alt: "Erik Norris EN monogram" }}
 >
-
-	<section class="pt-32 pb-24">
-		<div class="site-container mb-24 text-center">
-			<button
-				onclick="window.dispatchEvent(new CustomEvent('open-command-menu'))"
-				class="border-primary/30 bg-primary/10 text-primary hover:bg-primary/20 mb-6 inline-flex cursor-pointer items-center gap-2 rounded-full border px-3 py-1 font-mono text-xs tracking-widest uppercase transition-colors"
-			>
-				System Architecture
-			</button>
-			<h1 class="mb-8 text-5xl font-bold tracking-tight text-white md:text-7xl">
-				The Meta-Portfolio
-			</h1>
-			<p class="mx-auto mb-12 max-w-2xl text-lg text-neutral-400">
-				This site documents itself. Every major feature - from the AR Viewer to the Ingestion
-				Pipeline - is treated as an engineering project worthy of a case study.
+	<div class="colophon site-container">
+		<header class="colophon-opening">
+			<p class="eyebrow">Colophon</p>
+			<h1>How this record is built</h1>
+			<p class="opening-copy">
+				This site is an engineering project: turning a working archive into a public record that can
+				be checked. I keep source material separate from the pages, review what the evidence
+				supports, and use repeatable builds to publish it. This colophon explains the decisions
+				behind that system, including what failed and what changed.
 			</p>
+			<p class="responsibility">
+				AI assists with retrieval, organization, proposed interpretations, and software
+				construction. I am responsible for the accepted account, attribution, and decision to
+				publish.
+			</p>
+		</header>
 
-			{/* Tech Stack Marquee */}
-			<div
-				class="relative left-[calc(50%-50vw)] -mx-[calc(50vw-50%)] mb-16 w-screen border-y border-neutral-800 bg-neutral-900/30 py-6"
-			>
-				<Marquee
-					client:load
-					speed={1}
-					grayscale={true}
-					items={marqueeTools.map((tool) => ({
-						id: tool,
-						text: tool,
-						variant: "icon-text",
-					}))}
-				/>
+		<section aria-labelledby="construction-heading" class="colophon-section construction">
+			<h2 id="construction-heading" class="section-heading">From source to public account</h2>
+			<ol class="construction-steps">
+				{
+					construction.map(([title, copy], i) => (
+						<li>
+							<span class="step-number" aria-hidden="true">
+								{String(i + 1).padStart(2, "0")}
+							</span>
+							<h3>{title}</h3>
+							<p>{copy}</p>
+						</li>
+					))
+				}
+			</ol>
+			<p class="construction-limit">
+				A file hash establishes identity, not interpretation. A passing build checks specified
+				rules; it does not establish historical truth or replace review of the evidence.
+			</p>
+		</section>
+
+		<section id="colophon-features" aria-labelledby="decisions-heading" class="colophon-section">
+			<p class="eyebrow">Software &amp; construction</p>
+			<h2 id="decisions-heading" class="section-heading">Decisions behind the record</h2>
+			<div class="decision-grid">
+				{
+					decisions.map((post, i) => (
+						<ColophonCard post={post} class={i === 0 ? "construction-account" : undefined} />
+					))
+				}
 			</div>
+		</section>
 
-			{/* Stream A: Mechanical Forensics (Career) */}
-			<div class="mb-24 text-left">
-				<div
-					class="border-primary/30 bg-primary/10 text-primary mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-xs tracking-widest uppercase"
-				>
-					Stream A
-				</div>
-				<h2 class="mb-8 text-3xl font-bold tracking-tight text-white md:text-4xl">
-					Mechanical Forensics
-				</h2>
-				<p class="mb-12 max-w-2xl text-lg text-neutral-400">
-					Selected engineering decisions, linked to the project records behind them.
-				</p>
-				<ForensicWall client:load />
-			</div>
+		<section id="engineering-record" aria-labelledby="engineering-heading" class="colophon-section">
+			<p class="eyebrow">The engineering record</p>
+			<h2 id="engineering-heading" class="section-heading">Decisions in the hardware</h2>
+			<p class="section-intro">
+				Selected engineering decisions, linked to the project records behind them. Revision counts,
+				measurements, estimates, and outcomes retain their distinct meanings and qualifications.
+				<a href="/how-i-work/">How I Work</a> describes the wider practice.
+			</p>
+			<ForensicWall />
+		</section>
 
-			{/* Stream B: System Architecture (The Machine) */}
-			<div class="mb-24 text-left">
-				<div
-					class="mb-6 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 font-mono text-xs tracking-widest text-cyan-500 uppercase"
-				>
-					Stream B
-				</div>
-				<h2 class="mb-8 text-3xl font-bold tracking-tight text-white md:text-4xl">
-					System Architecture
-				</h2>
-				<p class="mb-8 max-w-2xl text-lg text-neutral-400">
-					The meta-narrative of building the portfolio itself. Treated as a living software product.
-				</p>
+		<section id="build-log" aria-labelledby="build-log-heading" class="colophon-section">
+			<h2 id="build-log-heading" class="section-heading">Build Log</h2>
+			<ol class="build-log-list">
+				{
+					buildLog.map((post: any) => (
+						<li>
+							<time datetime={post.pubDate}>
+								{new Date(post.pubDate + "T12:00:00Z").toLocaleDateString("en-US", {
+									month: "short",
+									day: "numeric",
+									year: "numeric",
+									timeZone: "UTC",
+								})}
+							</time>
+							<div>
+								<h3>
+									<a href={"/colophon/" + post.slug + "/"}>{post.title}</a>
+								</h3>
+								<p>{post.summary}</p>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+		</section>
 
-				{/* Live System Stats (Removed per User Request) */}
-
-				{/* System Documentation Grid (Moved from Bottom) */}
-				<div
-					id="colophon-features"
-					class="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
-				>
-					{features.map((post) => <ColophonCard post={post} />)}
-				</div>
-			</div>
-
-			<section id="build-log" aria-labelledby="build-log-heading" class="mb-24 text-left">
-				<h2
-					id="build-log-heading"
-					class="mb-8 text-3xl font-bold tracking-tight text-white md:text-4xl"
-				>
-					Build Log
-				</h2>
-				<ol class="divide-y divide-neutral-800 border-y border-neutral-800">
-					{
-						buildLog.map((post: any) => (
-							<li class="grid gap-4 py-8 md:grid-cols-[9rem_minmax(0,1fr)] md:gap-8">
-								<time datetime={post.pubDate} class="font-mono text-sm text-neutral-400">
-									{new Date(post.pubDate + "T12:00:00Z").toLocaleDateString("en-US", {
-										month: "short",
-										day: "numeric",
-										year: "numeric",
-										timeZone: "UTC",
-									})}
-								</time>
-								<div>
-									<h3 class="mb-3 text-2xl font-semibold text-white">
-										<a
-											class="hover:text-primary focus-visible:outline-primary transition-colors focus-visible:outline-2 focus-visible:outline-offset-4"
-											href={"/colophon/" + post.slug + "/"}
-										>
-											{post.title}
-										</a>
-									</h3>
-									<p class="max-w-2xl text-base leading-relaxed text-neutral-400">{post.summary}</p>
-								</div>
-							</li>
-						))
-					}
-				</ol>
-			</section>
-
-		</div>
-	</section>
+		<section
+			id="production-credits"
+			aria-labelledby="credits-heading"
+			class="colophon-section credits"
+		>
+			<h2 id="credits-heading" class="section-heading">Production credits</h2>
+			<ul>{tools.map((tool) => <li>{tool}</li>)}</ul>
+			<p class="reference-links">
+				Explore the <a href="/design-system/">Design system</a> and
+				<a href="/docs/">Technical documentation</a>.
+			</p>
+		</section>
+	</div>
 </Layout>
+
+<style>
+	.colophon {
+		padding-top: 8rem;
+		padding-bottom: 4rem;
+	}
+	.colophon-opening {
+		max-width: 52rem;
+		margin-bottom: 4rem;
+	}
+	.eyebrow {
+		color: var(--color-neutral-400);
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		margin-bottom: 1rem;
+	}
+	h1 {
+		max-width: 16ch;
+		color: white;
+		font-weight: 600;
+		font-size: clamp(3rem, 6vw, 5rem);
+		line-height: 1.02;
+		letter-spacing: -0.035em;
+		margin-bottom: 2rem;
+	}
+	.opening-copy {
+		color: var(--color-neutral-200);
+		font-size: 1.375rem;
+		line-height: 1.6;
+	}
+	.responsibility {
+		color: var(--color-neutral-400);
+		max-width: 70ch;
+		font-size: 1.0625rem;
+		line-height: 1.65;
+		margin-top: 1.5rem;
+	}
+	.colophon-section {
+		margin-bottom: 4.5rem;
+		scroll-margin-top: 6rem;
+	}
+	.section-heading {
+		color: white;
+		font-size: clamp(1.75rem, 3vw, 2.25rem);
+		line-height: 1.2;
+		font-weight: 600;
+		margin-bottom: 1.75rem;
+	}
+	.construction {
+		border-top: 1px solid var(--color-neutral-800);
+		padding-top: 2rem;
+	}
+	.construction-steps {
+		list-style: none;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		gap: 1.5rem;
+	}
+	.step-number {
+		display: block;
+		color: var(--color-neutral-500);
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
+		margin-bottom: 0.75rem;
+	}
+	.construction-steps h3 {
+		font-size: 1.125rem;
+		font-weight: 600;
+		color: white;
+		margin-bottom: 0.5rem;
+	}
+	.construction-steps p {
+		color: var(--color-neutral-400);
+		font-size: 1rem;
+		line-height: 1.5;
+	}
+	.construction-limit {
+		border-left: 2px solid var(--color-primary);
+		padding-left: 1rem;
+		color: var(--color-neutral-300);
+		max-width: 75ch;
+		margin-top: 2rem;
+		font-size: 1rem;
+		line-height: 1.65;
+	}
+	.decision-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		column-gap: 3rem;
+	}
+	.decision-grid :global(.construction-account) {
+		grid-column: 1 / -1;
+	}
+	.section-intro {
+		max-width: 70ch;
+		color: var(--color-neutral-400);
+		font-size: 1.125rem;
+		line-height: 1.65;
+		margin-bottom: 2rem;
+	}
+	a {
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+	a:hover {
+		text-decoration-color: var(--color-primary);
+	}
+	a:focus-visible {
+		outline: 2px solid var(--color-primary);
+		outline-offset: 6px;
+	}
+	.build-log-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.build-log-list li {
+		display: grid;
+		grid-template-columns: 9rem minmax(0, 1fr);
+		gap: 2rem;
+		padding: 2rem 0;
+		border-top: 1px solid var(--color-neutral-800);
+	}
+	.build-log-list time {
+		color: var(--color-neutral-400);
+		font-family: var(--font-mono);
+		font-size: 0.875rem;
+	}
+	.build-log-list h3 {
+		font-size: 1.5rem;
+		line-height: 1.3;
+		font-weight: 600;
+		color: white;
+		margin-bottom: 0.75rem;
+	}
+	.build-log-list p {
+		max-width: 68ch;
+		color: var(--color-neutral-300);
+		font-size: 1.0625rem;
+		line-height: 1.65;
+	}
+	.credits {
+		border-top: 1px solid var(--color-neutral-800);
+		padding-top: 2rem;
+	}
+	.credits ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem 2rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		font-family: var(--font-mono);
+		color: var(--color-neutral-400);
+		font-size: 0.875rem;
+	}
+	.reference-links {
+		margin-top: 1.5rem;
+		color: var(--color-neutral-400);
+		font-size: 1rem;
+		line-height: 1.65;
+	}
+	@media (max-width: 767px) {
+		.colophon {
+			padding-top: 7rem;
+		}
+		.colophon-opening {
+			margin-bottom: 3rem;
+		}
+		.opening-copy {
+			font-size: 1.1875rem;
+		}
+		.construction-steps {
+			grid-template-columns: 1fr;
+			gap: 1rem;
+		}
+		.construction-steps li {
+			display: grid;
+			grid-template-columns: 2rem 1fr;
+			column-gap: 0.5rem;
+		}
+		.step-number {
+			grid-row: 1 / 3;
+			margin-top: 0.2rem;
+		}
+		.construction-steps p {
+			grid-column: 2;
+		}
+		.decision-grid {
+			grid-template-columns: minmax(0, 1fr);
+		}
+		.colophon-section {
+			margin-bottom: 3.5rem;
+		}
+		.build-log-list li {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 0.75rem;
+		}
+	}
+</style>
