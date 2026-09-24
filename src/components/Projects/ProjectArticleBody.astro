@@ -1,0 +1,16 @@
+---
+interface Props {
+	beforeId: string;
+}
+const { beforeId } = Astro.props;
+// Both slots are already rendered Astro content. Split at a validated heading
+// during the static build, so placement and article order also work without JS.
+const article = await Astro.slots.render("default");
+const escapedId = beforeId.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const heading = new RegExp(`<h[23]\\b[^>]*\\bid="${escapedId}"[^>]*>`).exec(article);
+if (!heading) throw new Error(`Project model placement: heading ${beforeId} not found`);
+---
+
+<Fragment set:html={article.slice(0, heading.index)} />
+<slot name="model" />
+<Fragment set:html={article.slice(heading.index)} />
