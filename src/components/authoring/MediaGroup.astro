@@ -1,0 +1,149 @@
+---
+import { marked } from "marked";
+import { mediaUrl } from "./media-url";
+const { group } = Astro.props;
+const { items, id, title, summary } = group;
+const single = items.length === 1;
+const data = items.map((item: any) => ({
+	...item,
+	captionHtml: marked.parseInline(item.caption || item.alt || ""),
+}));
+---
+
+<section
+	class:list={["media-group", { "single-figure": single }]}
+	id={`media-${id}`}
+	data-gallery={id}
+	data-items={JSON.stringify(data)}
+	data-title={title || "Photograph"}
+	data-compare={JSON.stringify(group.compare || [0, 1])}
+>
+	{
+		title && (
+			<header class="group-heading">
+				<div>
+					<>
+						<span class="group-kicker">
+							{group.mode === "sequence"
+								? "Assembly sequence"
+								: single
+									? "In detail"
+									: "From the workbench"}
+						</span>
+						<h4>{title}</h4>
+					</>
+				</div>
+				{!single && <span class="group-total">{items.length} photographs</span>}
+			</header>
+		)
+	}
+	{summary && <p class="group-summary">{summary}</p>}
+	{
+		items[0].kind !== "video" && (
+			<div class="gallery-stage" hidden>
+				<button
+					type="button"
+					class="stage-open"
+					data-open-image="0"
+					aria-label={`Enlarge ${title || items[0].alt}`}
+				>
+					<img
+						src={mediaUrl(items[0], "display")}
+						alt={items[0].alt}
+						loading="lazy"
+						decoding="async"
+					/>
+					<span class="enlarge-cue">Enlarge ↗</span>
+				</button>
+				<div class="stage-caption">
+					<>
+						<span data-image-counter>01 / {String(items.length).padStart(2, "0")}</span>
+						<div data-image-caption set:html={data[0].captionHtml} />
+					</>
+				</div>
+			</div>
+		)
+	}
+	<div class="gallery-controls" hidden>
+		<div class="gallery-paging">
+			<button type="button" data-step="-1" aria-label={`Previous image in ${title}`}>←</button
+			><button type="button" data-step="1" aria-label={`Next image in ${title}`}>→</button><span
+				class="current-label"
+				aria-live="polite"></span>
+		</div>
+		<div>
+			<button type="button" data-mode="compare">Compare two</button><button
+				type="button"
+				data-mode="all"
+				aria-expanded="false">View all {items.length}</button
+			>
+		</div>
+	</div>
+	<div class="gallery-thumbs" hidden aria-label={`Choose a photograph in ${title}`}>
+		{
+			items.map((item: any, index: number) => (
+				<button
+					type="button"
+					data-select={index}
+					aria-label={`${index + 1}. ${item.alt}`}
+					aria-pressed={index === 0}
+				>
+					<>
+						<img src={mediaUrl(item, "thumbnail")} alt="" loading="lazy" decoding="async" />
+						<span>{String(index + 1).padStart(2, "0")}</span>
+					</>
+				</button>
+			))
+		}
+	</div>
+	<div class="comparison" hidden>
+		{
+			[0, 1].map((side) => (
+				<div class="comparison-side">
+					<>
+						<label>
+							View {side === 0 ? "A" : "B"}
+							<select
+								data-compare-side={side}
+								aria-label={`Comparison view ${side === 0 ? "A" : "B"}`}
+							>
+								{items.map((item: any, index: number) => (
+									<option value={index}>
+										{index + 1}. {item.alt}
+									</option>
+								))}
+							</select>
+						</label>
+						<button type="button" data-compare-open={side}>
+							<img alt="" loading="lazy" />
+						</button>
+						<p data-compare-caption={side} />
+					</>
+				</div>
+			))
+		}
+	</div>
+	<div class="gallery-grid">
+		{
+			items.map((item: any, index: number) => (
+				<figure>
+					{item.kind === "video" ? (
+						<video controls playsinline preload="metadata" aria-label={item.alt}>
+							<source src={item.src} type="video/mp4" />
+						</video>
+					) : (
+						<a href={mediaUrl(item, "original")} data-grid-open={index}>
+							<img
+								src={mediaUrl(item, "display", single ? 1600 : 720)}
+								alt={item.alt}
+								loading="lazy"
+								decoding="async"
+							/>
+						</a>
+					)}
+					<figcaption set:html={data[index].captionHtml} />
+				</figure>
+			))
+		}
+	</div>
+</section>

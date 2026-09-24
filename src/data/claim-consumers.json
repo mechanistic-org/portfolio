@@ -154,13 +154,6 @@
     "surface": "colophon"
   },
   {
-    "id": "glyph-cohorts",
-    "path": "projects/avegant-glyph/index.mdx#glyph-cohorts",
-    "project": "avegant-glyph",
-    "revision": 1,
-    "surface": "case-study"
-  },
-  {
     "id": "glyph-changes",
     "path": "method:mechanism-actuation",
     "project": "avegant-glyph",

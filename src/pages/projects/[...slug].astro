@@ -10,6 +10,8 @@ export const prerender = true;
 // THEME REGISTRY
 import Hyperspace from "@layouts/themes/Hyperspace.astro";
 import ProjectArticle from "@layouts/themes/ProjectArticle.astro";
+import AuthoringPage from "@components/authoring/AuthoringPage.astro";
+import { buildAuthoredProject } from "@utils/authoredProject.mjs";
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
@@ -57,14 +59,24 @@ interface Props {
 }
 
 const { entry, placeholderData, careerNodes = [] } = Astro.props;
+const authoringPage =
+	import.meta.env.DEV &&
+	process.env.PORTFOLIO_AUTHORING_PROJECT === "avegant-glyph" &&
+	entry?.id === "avegant-glyph"
+		? await (await import("../../../scripts/authoring/preview.mjs")).loadAuthoringProject()
+		: entry?.data.cyberspace?.layout === "authored"
+			? await buildAuthoredProject(entry)
+			: null;
 let Content: any = () => null;
 let headings: any[] = [];
 let data: any;
 
 if (entry) {
-	const rendered = await render(entry);
-	Content = rendered.Content;
-	headings = rendered.headings;
+	if (!authoringPage) {
+		const rendered = await render(entry);
+		Content = rendered.Content;
+		headings = rendered.headings;
+	}
 	data = entry.data;
 } else if (placeholderData) {
 	// Construct simulated entry data from JSON
@@ -322,16 +334,22 @@ if (
 console.log(`[ROUTER] Project: ${finalEntry.id} -> Theme: ${theme}`);
 ---
 
-<SelectedTheme
-	entry={finalEntry}
-	nextProject={nextProject}
-	prevProject={prevProject}
-	Content={Content}
-	headings={headings}
-	metrics={finalEntry.data.metrics}
-	entropy={entropyData}
-	presentation={presentation}
-	contextNodes={contextNodes}
-	chronology={chronologyData}
-	revisions={revisionsData}
-/>
+{
+	authoringPage ? (
+		<AuthoringPage page={authoringPage} />
+	) : (
+		<SelectedTheme
+			entry={finalEntry}
+			nextProject={nextProject}
+			prevProject={prevProject}
+			Content={Content}
+			headings={headings}
+			metrics={finalEntry.data.metrics}
+			entropy={entropyData}
+			presentation={presentation}
+			contextNodes={contextNodes}
+			chronology={chronologyData}
+			revisions={revisionsData}
+		/>
+	)
+}
