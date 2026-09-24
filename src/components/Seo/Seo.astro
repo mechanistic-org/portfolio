@@ -57,28 +57,21 @@ const canonicalUrl = new URL(Astro.url.pathname, canonicalBase);
 if (type === "project") {
 	const { projectFrontmatter } = Astro.props as ProjectProps;
 
-	if (image) {
-		// Optimizing hero image for Project Schema
-		if (typeof image === "string") {
-			// If string, we can't easily use getImage unless we import it.
-			// For now assume raw string is fine or handled by upstream logic.
-			// But existing code expects ImageMetadata for getImage usually.
-			// We'll skip optimization if it's a string path (common in this codebase)
-			// or assume generic logic.
-		} else {
-			optimizedImage = await getImage({
-				src: image,
-				format: "webp",
-				quality: "high",
-				width: 1200,
-			});
-		}
+	if (image && typeof image !== "string") {
+		optimizedImage = await getImage({
+			src: image,
+			format: "webp",
+			quality: "high",
+			width: 1200,
+		});
 	}
 
 	jsonLD = jsonLDGenerator({
 		type: "project",
 		projectFrontmatter: projectFrontmatter,
-		image: optimizedImage || { src: image } || siteData.defaultImage, // Fallback logic
+		image:
+			optimizedImage ||
+			(typeof image === "string" && image ? { src: image } : siteData.defaultImage),
 		canonicalUrl: canonicalUrl,
 	});
 }
@@ -90,17 +83,12 @@ else {
 	});
 }
 
-function trimEndSlash(str: string) {
-	if (str[str.length - 1] === "/") {
-		return str.slice(0, -1);
-	} else {
-		return str;
-	}
-}
-
-// put together the image URL
-const imageUrl =
-	trimEndSlash(Astro.site?.toString() || "") + (optimizedImage?.src || siteData.defaultImage.src);
+// Explicit public URLs stay absolute; local and optimized paths use the site origin.
+const imageSource =
+	optimizedImage?.src ||
+	(typeof image === "string" ? image : image?.src) ||
+	siteData.defaultImage.src;
+const imageUrl = new URL(imageSource, Astro.site || canonicalBase).toString();
 ---
 
 <SEO

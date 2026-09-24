@@ -173,10 +173,6 @@
       "revision": 1,
       "status": "active",
       "variants": {
-        "case-study": {
-          "text": "Tracked Glyph telescope-arm tests by dated specimen cohort. In the March 16 T6 cohort, specimens 49 and 50 of the five tested could not return at 250 cycles. These are dated specimen results, not a production failure rate or a sequence of tooling revisions. The reports contain conflicting summary and comment fields. Later cable concepts reused the T labels and cannot inherit these passes.",
-          "title": "Keep failures with their test cohort"
-        },
         "colophon": {
           "text": "Tracked Glyph telescope-arm tests by dated specimen cohort. In the March 16 T6 cohort, specimens 49 and 50 of the five tested could not return at 250 cycles.",
           "title": "Keep failures with their test cohort"

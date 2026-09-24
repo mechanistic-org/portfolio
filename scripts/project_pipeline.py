@@ -429,7 +429,7 @@ def render_galleries(cyber):
     meta = {k: v for k, v in cyber.items() if k != "stickies"}
     out.append("<!-- cyberspace %s -->" % json.dumps(meta, sort_keys=True))
     for st in cyber.get("stickies", []):
-        out.append(""); out.append("### %s" % st.get("title", ""))
+        out.append(""); out.append(("### %s" % st.get("title", "")).rstrip())
         imgs = None
         params = dict(st)
         params.pop("deck", None)
@@ -461,7 +461,7 @@ def parse_galleries(md):
         ln = lines[i]
         if ln.startswith("<!-- cyberspace "):
             cyber = json.loads(ln[len("<!-- cyberspace "):-len(" -->")])
-        elif ln.startswith("### "):
+        elif ln == "###" or ln.startswith("### "):
             cur = {"_imgs": [], "deck": [], "_title": ln[4:]}
             stickies.append(cur)
         elif ln.startswith("<!-- sticky ") and cur is not None:

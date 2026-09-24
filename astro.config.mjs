@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import { authoringPreview } from "./scripts/authoring/preview.mjs";
 
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
@@ -76,6 +77,7 @@ export default defineConfig({
 	},
 
 	integrations: [
+		authoringPreview(),
 		AutoImport({
 			imports: [
 				"@components/Cta/Newsletter.astro",
