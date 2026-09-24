@@ -7,69 +7,171 @@ interface Props {
 		src: string;
 		cameraOrbit?: string;
 		fieldOfView?: string;
+		orientation?: string;
 	}[];
 }
 const { models } = Astro.props;
 ---
 
 {
-	models.map((model) => (
-		<section class="model-evidence" data-project-model={model.id}>
-			<h2>{model.title}</h2>
-			{model.caption && <p>{model.caption}</p>}
-			<details data-model-disclosure>
-				<summary>Explore the 3D model</summary>
-				<div class="model-evidence__viewer" data-model-frame hidden>
-					<model-viewer
-						src={model.src}
-						alt={model.title}
-						camera-controls
-						touch-action="pan-y"
-						camera-orbit={model.cameraOrbit}
-						field-of-view={model.fieldOfView}
-						loading="lazy"
-					/>
-				</div>
-				<p data-model-status aria-live="polite" />
-				<a href={model.src}>Open model file ↗</a>
-			</details>
-		</section>
-	))
+	models
+		.filter((model) => model.src?.trim())
+		.map((model) => (
+			<section
+				class="model-evidence not-content"
+				id={`model-${model.id}`}
+				data-project-model={model.id}
+			>
+				<h3>{model.title}</h3>
+				{model.caption && <p>{model.caption}</p>}
+				<details data-model-disclosure data-model-source={model.src}>
+					<summary>Explore the 3D model</summary>
+					<template data-model-template>
+						<model-viewer
+							alt={model.title}
+							camera-controls
+							touch-action="pan-y"
+							camera-orbit={model.cameraOrbit}
+							field-of-view={model.fieldOfView}
+							orientation={model.orientation}
+							interaction-prompt="none"
+							loading="eager"
+						/>
+					</template>
+					<div class="model-evidence__viewer" data-model-frame hidden />
+					<p data-model-status role="status" />
+					<div class="model-evidence__controls" data-model-controls hidden>
+						<p>Drag or use arrow keys to rotate. Pinch to zoom. Scroll to keep reading.</p>
+						<button type="button" data-model-reset>
+							Reset view
+						</button>
+						<button type="button" data-model-close>
+							Close model
+						</button>
+					</div>
+					<button type="button" data-model-retry hidden>
+						Try again
+					</button>
+					<a href={model.src}>Open model file ↗</a>
+					<noscript>
+						<p>The interactive preview needs JavaScript. You can open the model file directly.</p>
+					</noscript>
+				</details>
+			</section>
+		))
 }
 
 <script>
+	import type { ModelViewerElement } from "@google/model-viewer";
+
 	function connectModels() {
 		for (const disclosure of document.querySelectorAll<HTMLDetailsElement>(
 			"[data-model-disclosure]",
 		)) {
 			if (disclosure.dataset.bound) continue;
 			disclosure.dataset.bound = "true";
-			disclosure.addEventListener("toggle", async () => {
-				if (!disclosure.open || disclosure.dataset.loaded) return;
-				const frame = disclosure.querySelector<HTMLElement>("[data-model-frame]")!;
-				const status = disclosure.querySelector<HTMLElement>("[data-model-status]")!;
+			const frame = disclosure.querySelector<HTMLElement>("[data-model-frame]")!;
+			const status = disclosure.querySelector<HTMLElement>("[data-model-status]")!;
+			const template = disclosure.querySelector<HTMLTemplateElement>("[data-model-template]")!;
+			const controls = disclosure.querySelector<HTMLElement>("[data-model-controls]")!;
+			const retry = disclosure.querySelector<HTMLButtonElement>("[data-model-retry]")!;
+			const summary = disclosure.querySelector("summary")!;
+			let state: "idle" | "loading" | "ready" | "error" = "idle";
+			let reloadRequired = false;
+			let attempts = 0;
+			let viewer: ModelViewerElement | undefined;
+			let timeout: ReturnType<typeof setTimeout>;
+			const fail = (reload = false) => {
+				clearTimeout(timeout);
+				state = "error";
+				reloadRequired = reload;
+				frame.hidden = true;
+				frame.replaceChildren();
+				controls.hidden = true;
+				frame.removeAttribute("aria-busy");
+				status.textContent = "The preview is unavailable. Try again or open the model file below.";
+				retry.textContent = reload ? "Reload page" : "Try again";
+				retry.hidden = false;
+			};
+			const load = async () => {
+				if (state === "loading" || state === "ready") return;
+				state = "loading";
+				retry.hidden = true;
 				status.textContent = "Loading model…";
 				try {
 					await import("@google/model-viewer");
-					const viewer = disclosure.querySelector("model-viewer")!;
+					if (!disclosure.isConnected) return;
+					viewer = template.content
+						.querySelector("model-viewer")!
+						.cloneNode(true) as ModelViewerElement;
+					const currentViewer = viewer;
+					const source = new URL(disclosure.dataset.modelSource!, location.href);
+					// Failed loads are cached by model-viewer. A retry needs a new cache key,
+					// while the direct file link retains the original source URL.
+					if (attempts++ > 0) {
+						source.searchParams.set("model-retry", String(Date.now()));
+					}
+					viewer.setAttribute("disable-tap", "");
+					// Wheel input continues the article; intentional pinch/keyboard zoom remains native.
+					viewer.addEventListener("wheel", (event) => event.stopPropagation(), {
+						capture: true,
+						passive: true,
+					});
 					viewer.addEventListener(
 						"load",
 						() => {
+							if (!frame.contains(currentViewer)) return;
+							clearTimeout(timeout);
+							state = "ready";
 							status.textContent = "";
+							frame.removeAttribute("aria-busy");
+							controls.hidden = false;
+							viewer?.jumpCameraToGoal();
 						},
 						{ once: true },
 					);
-					viewer.addEventListener(
-						"error",
-						() => {
-							status.textContent = "The preview is unavailable. The model file is linked below.";
-						},
-						{ once: true },
-					);
+					viewer.addEventListener("error", () => {
+						if (frame.contains(currentViewer)) fail();
+					});
 					frame.hidden = false;
-					disclosure.dataset.loaded = "true";
+					frame.setAttribute("aria-busy", "true");
+					frame.replaceChildren(viewer);
+					viewer.setAttribute(
+						"src",
+						attempts === 1 ? disclosure.dataset.modelSource! : source.href,
+					);
+					timeout = setTimeout(() => fail(), 60000);
 				} catch {
-					status.textContent = "The preview is unavailable. The model file is linked below.";
+					// A failed module evaluation may be cached for this document.
+					fail(true);
+				}
+			};
+			disclosure.addEventListener("toggle", () => {
+				if (disclosure.open && state === "idle") void load();
+			});
+			retry.addEventListener("click", () => {
+				if (reloadRequired) location.reload();
+				else {
+					summary.focus();
+					void load();
+				}
+			});
+			disclosure.querySelector("[data-model-reset]")!.addEventListener("click", () => {
+				if (!viewer) return;
+				viewer.cameraOrbit = viewer.getAttribute("camera-orbit") || "0deg 75deg 105%";
+				viewer.fieldOfView = viewer.getAttribute("field-of-view") || "auto";
+				viewer.cameraTarget = "auto auto auto";
+				viewer.jumpCameraToGoal();
+			});
+			const close = () => {
+				disclosure.open = false;
+				summary.focus();
+			};
+			disclosure.querySelector("[data-model-close]")!.addEventListener("click", close);
+			disclosure.addEventListener("keydown", (event) => {
+				if (event.key === "Escape" && disclosure.open) {
+					event.preventDefault();
+					close();
 				}
 			});
 		}
@@ -80,39 +182,62 @@ const { models } = Astro.props;
 
 <style>
 	.model-evidence {
-		margin-top: 3rem;
-		padding-top: 2rem;
-		border-top: 1px solid var(--border);
+		margin: 2rem 0;
+		padding: 1rem;
+		border: 1px solid var(--border);
+		border-radius: 0.5rem;
+		scroll-margin-top: 6rem;
 	}
-	.model-evidence h2 {
+	.model-evidence h3 {
+		margin: 0;
 		font-family: var(--font-header);
-		font-size: 2rem;
+		font-size: 1.4rem;
 	}
 	.model-evidence p {
 		color: var(--muted-foreground);
 		line-height: 1.55;
+		font-size: 0.875rem;
 	}
 	.model-evidence summary,
-	.model-evidence a {
-		display: block;
+	.model-evidence a,
+	.model-evidence button {
 		min-height: 44px;
 		padding: 0.75rem;
 		color: var(--primary);
 		cursor: pointer;
 	}
-	.model-evidence summary:focus-visible,
-	.model-evidence a:focus-visible {
+	.model-evidence summary {
+		display: list-item;
+		list-style: disclosure-closed inside;
+	}
+	.model-evidence details[open] summary {
+		list-style-type: disclosure-open;
+	}
+	.model-evidence a {
+		display: inline-block;
+	}
+	.model-evidence button {
+		border: 1px solid var(--border);
+		border-radius: 0.25rem;
+	}
+	.model-evidence :is(summary, a, button):focus-visible {
 		outline: 2px solid var(--primary);
 		outline-offset: 2px;
 	}
 	.model-evidence__viewer {
-		height: clamp(280px, 55vw, 500px);
+		height: clamp(280px, 40vw, 420px);
 		border: 1px solid var(--border);
 		background: var(--card);
+	}
+	.model-evidence__controls {
+		margin: 0.75rem 0;
 	}
 	model-viewer {
 		display: block;
 		width: 100%;
 		height: 100%;
+	}
+	[hidden] {
+		display: none !important;
 	}
 </style>

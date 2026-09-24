@@ -38,6 +38,8 @@ export interface ProjectPresentation {
 	galleryCaptionsFromDeck?: string[];
 	/** Existing model sticky IDs to preserve when changing the article renderer. */
 	models?: string[];
+	/** Explicit, per-model presentation only; never authors project copy. */
+	modelPlacement?: Record<string, { before: string; cameraOrbit?: string; orientation?: string }>;
 	scenes: SceneSpec[];
 	featured?: {
 		media?: string;
@@ -184,12 +186,15 @@ export function resolveProjectPresentation(
 		const model = matches[0];
 		if (matches.length !== 1 || !model?.data?.modelSrc)
 			return fail(`Model key ${id} must resolve exactly once with a source`);
+		const placement = config.modelPlacement?.[id];
 		return {
 			id,
 			title: model.title || "Interactive model",
 			caption: model.caption,
 			src: model.data.modelSrc,
-			cameraOrbit: model.data.cameraOrbit,
+			beforeId: placement ? anchor(placement.before) : undefined,
+			cameraOrbit: placement?.cameraOrbit ?? model.data.cameraOrbit,
+			orientation: placement?.orientation,
 			fieldOfView: model.data.fieldOfView,
 		};
 	});

@@ -106,6 +106,13 @@ export const projectArticleTrial = {
 			},
 		},
 		models: ["3d_model"],
+		modelPlacement: {
+			"3d_model": {
+				before: "failures",
+				cameraOrbit: "-30deg 60deg 105%",
+				orientation: "0deg -90deg 0deg",
+			},
+		},
 		scenes: [
 			{
 				key: "summary",
