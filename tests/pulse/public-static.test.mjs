@@ -1,64 +1,16 @@
+// #290 retired the public dashboard. Preserve record-integrity and privacy
+// checks here; browser/static-output retirement checks live in pulse_contract.mjs.
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { test } from "node:test";
-
 import {
 	loadPulseRenderModel,
-	PUBLIC_HISTORY_PATH_ENV,
 	PUBLIC_PROPOSAL_PATH_ENV,
 } from "../../scripts/pulse/public_history_source.mjs";
-
 const repositoryRoot = path.resolve(import.meta.dirname, "../..");
-const pulseHtmlPath = path.join(repositoryRoot, "dist", "colophon", "the-pulse", "index.html");
-
-function productionBuildEnvironment(environment = {}) {
-	const inherited = { ...process.env };
-	delete inherited[PUBLIC_HISTORY_PATH_ENV];
-	delete inherited[PUBLIC_PROPOSAL_PATH_ENV];
-	return { ...inherited, ...environment, ASTRO_TELEMETRY_DISABLED: "1" };
-}
-
-function runProductionBuild(environment = {}) {
-	return spawnSync("npm run build", {
-		cwd: repositoryRoot,
-		encoding: "utf8",
-		env: productionBuildEnvironment(environment),
-		shell: true,
-	});
-}
-
-function runProductionBuildWithHistory(history) {
-	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-static-history-"));
-	const historyPath = path.join(workspace, "public-history.json");
-	try {
-		fs.writeFileSync(historyPath, `${JSON.stringify(history, null, "\t")}\n`);
-		return runProductionBuild({ [PUBLIC_HISTORY_PATH_ENV]: historyPath });
-	} finally {
-		fs.rmSync(workspace, { force: true, recursive: true });
-	}
-}
-
-function runProductionBuildWithProposal(projection) {
-	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-static-proposal-"));
-	const proposalPath = path.join(workspace, "proposal.json");
-	try {
-		fs.writeFileSync(proposalPath, `${JSON.stringify(projection, null, "\t")}\n`);
-		return runProductionBuild({
-			CI: "false",
-			CF_PAGES: "false",
-			[PUBLIC_PROPOSAL_PATH_ENV]: proposalPath,
-		});
-	} finally {
-		fs.rmSync(workspace, { force: true, recursive: true });
-	}
-}
-
-function occurrences(haystack, needle) {
-	return haystack.split(needle).length - 1;
-}
 
 function unavailableProposalProjection(sourceProjection) {
 	const proposal = structuredClone(sourceProjection);
@@ -103,24 +55,7 @@ function runHistoryValidation(historyPath) {
 	);
 }
 
-test("default static builds ignore an ambient alternate history path", () => {
-	const previous = process.env[PUBLIC_HISTORY_PATH_ENV];
-	try {
-		process.env[PUBLIC_HISTORY_PATH_ENV] = path.join(os.tmpdir(), "ambient-public-history.json");
-		assert.equal(Object.hasOwn(productionBuildEnvironment(), PUBLIC_HISTORY_PATH_ENV), false);
-		assert.equal(
-			productionBuildEnvironment({ [PUBLIC_HISTORY_PATH_ENV]: "explicit-history.json" })[
-				PUBLIC_HISTORY_PATH_ENV
-			],
-			"explicit-history.json",
-		);
-	} finally {
-		if (previous === undefined) delete process.env[PUBLIC_HISTORY_PATH_ENV];
-		else process.env[PUBLIC_HISTORY_PATH_ENV] = previous;
-	}
-});
-
-test("deployment builds fail closed when an unapproved proposal path is present", () => {
+test("the retained loader rejects unapproved proposals in deployment environments", () => {
 	for (const deploymentEnvironment of [{ CI: "true" }, { CF_PAGES: "1" }]) {
 		assert.throws(
 			() =>
@@ -134,180 +69,6 @@ test("deployment builds fail closed when an unapproved proposal path is present"
 			/deployment build cannot render PULSE_PROPOSAL_PATH/u,
 		);
 	}
-});
-
-test("the Pulse component consumes the semantic design tokens without local palette copies", () => {
-	const component = fs.readFileSync(
-		path.join(repositoryRoot, "src", "components", "Pulse", "PulseSnapshot.astro"),
-		"utf8",
-	);
-
-	for (const token of [
-		"var(--background)",
-		"var(--foreground)",
-		"var(--card)",
-		"var(--border)",
-		"var(--primary)",
-		"var(--info)",
-		"var(--warning)",
-		"var(--muted-foreground)",
-	]) {
-		assert.ok(component.includes(token), `Pulse component does not consume ${token}`);
-	}
-	assert.equal(
-		/#[0-9a-f]{3,8}\b/iu.test(component),
-		false,
-		"Pulse component copies palette hex values",
-	);
-});
-
-test("the approved controlled projection is complete in static HTML without client JavaScript", () => {
-	const build = runProductionBuild();
-	assert.equal(build.status, 0, `${build.stdout}\n${build.stderr}`);
-
-	const html = fs.readFileSync(pulseHtmlPath, "utf8");
-	const projection = JSON.parse(
-		fs.readFileSync(
-			path.join(repositoryRoot, "src", "data", "pulse", "public-snapshot.json"),
-			"utf8",
-		),
-	);
-	const stackStats = JSON.parse(
-		fs.readFileSync(path.join(repositoryRoot, "src", "data", "stack_stats.json"), "utf8"),
-	);
-	const colophonPipeline = stackStats.colophon_pipeline;
-
-	assert.equal(occurrences(html, "data-pulse-proof-group"), 3);
-	assert.equal(occurrences(html, "data-pulse-metric"), 9);
-	assert.equal(occurrences(html, "data-pulse-definition"), 9);
-	assert.equal(occurrences(html, "data-pulse-method"), 9);
-	assert.equal(occurrences(html, "data-pulse-inventory-item"), 4);
-	assert.equal(occurrences(html, "data-pulse-colophon-pipeline"), 1);
-	assert.deepEqual(Object.keys(colophonPipeline).sort(), [
-		"as_of",
-		"entries_promoted",
-		"interpretation",
-		"last_curated_at",
-		"queue",
-	]);
-	assert.deepEqual(Object.keys(colophonPipeline.queue).sort(), ["colophon", "docs", "total"]);
-	assert.deepEqual(colophonPipeline.queue, { total: 308, colophon: 267, docs: 41 });
-	assert.equal(colophonPipeline.entries_promoted, 6);
-	assert.equal(colophonPipeline.last_curated_at, "2026-09-05");
-	assert.equal(colophonPipeline.as_of, "2026-09-05");
-	assert.match(colophonPipeline.interpretation, /do not measure editorial quality/iu);
-	assert.match(html, /<dt[^>]*>Last curated<\/dt>\s*<dd[^>]*>September 5, 2026<\/dd>/u);
-	assert.match(html, /<dt[^>]*>As of<\/dt>\s*<dd[^>]*>September 5, 2026<\/dd>/u);
-	assert.doesNotMatch(
-		JSON.stringify(colophonPipeline),
-		/(?:[a-z]:\\|ledger|packet|shortlist|sha256|source_path)/iu,
-	);
-	for (const requiredText of [
-		"Editorial pipeline",
-		"Colophon curation",
-		"Queue depth",
-		"308",
-		"267 colophon / 41 docs",
-		"Entries promoted",
-		"September 5, 2026",
-		colophonPipeline.interpretation,
-	]) {
-		assert.ok(
-			html.includes(requiredText),
-			`Pulse omits colophon pipeline evidence: ${requiredText}`,
-		);
-	}
-	for (const group of projection.groups) {
-		const approvedPurpose = group.metrics.map((metric) => metric.definition).join(" ");
-		assert.ok(
-			html.includes(approvedPurpose),
-			`${group.id} explanation is not derived from approval-bound projection definitions`,
-		);
-	}
-
-	for (const requiredText of [
-		"Controlled example projection - not production evidence.",
-		"Issue flow",
-		"Change traceability",
-		"Durable record coverage",
-		"May 27, 2026",
-		"August 24, 2026",
-		"90 days",
-		"active",
-		"independently reproduced",
-		"Created cohort",
-		"Cohort closure",
-		"Median close time",
-		"Net backlog change",
-		"Trunk commits",
-		"Scheduled maintenance",
-		"Issue-reference coverage",
-		"Distinct issues represented",
-		"Session coverage",
-		"Versioned scripts",
-		"Executable checks",
-		"Registered skills",
-		"Supervised services",
-	]) {
-		assert.ok(html.includes(requiredText), `static Pulse HTML is missing: ${requiredText}`);
-	}
-
-	for (const excludedText of [
-		"Tokens through the stack",
-		"Generated tokens, by month",
-		"Local models",
-		"raw_output",
-		"exact_command",
-		"private_source_identity",
-		"local_path",
-	]) {
-		assert.equal(html.includes(excludedText), false, `static Pulse HTML leaked: ${excludedText}`);
-	}
-});
-
-test("an unavailable proposal renders three honest static groups without a durable number", () => {
-	const publishedSnapshotPath = path.join(
-		repositoryRoot,
-		"src",
-		"data",
-		"pulse",
-		"public-snapshot.json",
-	);
-	const publishedHistoryPath = path.join(
-		repositoryRoot,
-		"src",
-		"data",
-		"pulse",
-		"public-history.json",
-	);
-	const publishedBefore = [
-		fs.readFileSync(publishedSnapshotPath),
-		fs.readFileSync(publishedHistoryPath),
-	];
-	const proposal = unavailableProposalProjection(JSON.parse(publishedBefore[0].toString("utf8")));
-	const durableGroup = proposal.groups[2];
-
-	const build = runProductionBuildWithProposal(proposal);
-	assert.equal(build.status, 0, `${build.stdout}\n${build.stderr}`);
-	const html = fs.readFileSync(pulseHtmlPath, "utf8");
-
-	assert.equal(occurrences(html, "data-pulse-proof-group"), 3);
-	assert.ok(html.includes("Unapproved snapshot proposal"));
-	assert.ok(html.includes('data-pulse-proof-group="durable-record-coverage"'));
-	assert.ok(html.includes('data-pulse-unavailable="not_measurable"'));
-	assert.ok(html.includes("Not measurable"));
-	assert.ok(html.includes(durableGroup.reason));
-	assert.ok(html.includes("Evidence starts August 22, 2026"));
-	assert.ok(html.includes(durableGroup.eligibility_rule));
-	const durableGroupStart = html.indexOf('data-pulse-proof-group="durable-record-coverage"');
-	const durableGroupHtml = html.slice(
-		durableGroupStart,
-		html.indexOf("</section>", durableGroupStart),
-	);
-	assert.equal(durableGroupHtml.includes("<strong>"), false);
-	assert.equal(html.includes("Approved static projection"), false);
-	assert.deepEqual(fs.readFileSync(publishedSnapshotPath), publishedBefore[0]);
-	assert.deepEqual(fs.readFileSync(publishedHistoryPath), publishedBefore[1]);
 });
 
 test("the release validator accepts only the complete unavailable-group public contract", () => {
@@ -342,37 +103,7 @@ test("the release validator accepts only the complete unavailable-group public c
 	}
 });
 
-test("archived and withdrawn snapshots remain distinct, static, and linked to the correction", () => {
-	const build = runProductionBuild();
-	assert.equal(build.status, 0, `${build.stdout}\n${build.stderr}`);
-
-	const html = fs.readFileSync(pulseHtmlPath, "utf8");
-	assert.ok(html.includes("Snapshot history"));
-	assert.ok(html.includes('data-pulse-history-state="archived"'));
-	assert.ok(html.includes('data-pulse-history-state="withdrawn"'));
-	assert.equal(occurrences(html, "data-pulse-history-metric"), 27);
-	assert.ok(html.includes("Archived because this approved snapshot is more than 90 days old."));
-	assert.ok(html.includes("It remains valid historical evidence and is not current or live."));
-	assert.ok(html.includes("Withdrawn because its provenance became invalid."));
-	assert.ok(html.includes("It is inactive and cannot serve as the current snapshot."));
-	assert.ok(html.includes("View the approved correction"));
-	assert.ok(html.includes('href="/colophon/the-pulse/#pulse-snapshot-pulse-fixture-2026-08-24"'));
-	assert.ok(html.includes('href="/colophon/the-pulse/#pulse-snapshot-pulse-2026-08-24-03"'));
-	assert.ok(html.includes('id="pulse-snapshot-pulse-fixture-2026-08-24"'));
-	assert.ok(html.includes('id="pulse-snapshot-pulse-2026-08-24-03"'));
-
-	for (const privateText of [
-		"package_dir",
-		"exact_command",
-		"raw_output",
-		"private_source_identity",
-		"local_path",
-	]) {
-		assert.equal(html.includes(privateText), false, `static history leaked: ${privateText}`);
-	}
-});
-
-test("the production gate rejects lifecycle history that revives an archived snapshot", () => {
+test("the retained history validator rejects lifecycle history that revives an archived snapshot", () => {
 	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-history-gate-"));
 	try {
 		const history = JSON.parse(
@@ -392,14 +123,6 @@ test("the production gate rejects lifecycle history that revives an archived sna
 			`${validation.stdout}\n${validation.stderr}`,
 			/\[public-history\].*(?:current|archived|90 days)/u,
 		);
-
-		const buildCommand = JSON.parse(
-			fs.readFileSync(path.join(repositoryRoot, "package.json"), "utf8"),
-		).scripts.build;
-		const historyValidatorIndex = buildCommand.indexOf("scripts/pulse/validate_public_history.mjs");
-		const astroIndex = buildCommand.indexOf("astro build");
-		assert.notEqual(historyValidatorIndex, -1, "the build must validate public snapshot history");
-		assert.ok(historyValidatorIndex < astroIndex, "history validation must run before Astro");
 	} finally {
 		fs.rmSync(workspace, { force: true, recursive: true });
 	}
@@ -429,7 +152,7 @@ test("the history gate rejects an approval-time active marker inside an archived
 	}
 });
 
-test("an archived-only history validates and renders without implying a current snapshot", () => {
+test("an archived-only history validates without mutating the retained record", () => {
 	const committedHistoryPath = path.join(
 		repositoryRoot,
 		"src",
@@ -451,24 +174,17 @@ test("an archived-only history validates and renders without implying a current 
 		const validation = runHistoryValidation(historyPath);
 		assert.equal(validation.status, 0, `${validation.stdout}\n${validation.stderr}`);
 
-		const build = runProductionBuildWithHistory(archivedOnly);
-		assert.equal(build.status, 0, `${build.stdout}\n${build.stderr}`);
 		assert.equal(
 			fs.statSync(committedHistoryPath, { bigint: true }).mtimeNs,
 			committedHistoryMtime,
-			"an alternate static render must not mutate the committed public history source",
+			"record validation must not mutate retained history",
 		);
-		const html = fs.readFileSync(pulseHtmlPath, "utf8");
-		assert.ok(html.includes("No current approved snapshot"));
-		assert.ok(html.includes("No evidence is presented as current or live."));
-		assert.ok(html.includes('data-pulse-history-state="archived"'));
-		assert.equal(html.includes("data-pulse-snapshot"), false);
 	} finally {
 		fs.rmSync(workspace, { force: true, recursive: true });
 	}
 });
 
-test("an invalid public projection fails the release validator wired before Astro", () => {
+test("an invalid retained projection still fails integrity validation", () => {
 	const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "portfolio-pulse-public-gate-"));
 	try {
 		const sourcePath = path.join(repositoryRoot, "src", "data", "pulse", "public-snapshot.json");
@@ -486,18 +202,6 @@ test("an invalid public projection fails the release validator wired before Astr
 		assert.match(
 			`${validation.stdout}\n${validation.stderr}`,
 			/\[public-projection\] groups must exactly match the three headline proof groups/u,
-		);
-
-		const buildCommand = JSON.parse(
-			fs.readFileSync(path.join(repositoryRoot, "package.json"), "utf8"),
-		).scripts.build;
-		const validatorIndex = buildCommand.indexOf("scripts/pulse/validate_public_projection.mjs");
-		const astroIndex = buildCommand.indexOf("astro build");
-		assert.notEqual(validatorIndex, -1, "the production build must invoke the validator");
-		assert.notEqual(astroIndex, -1, "the production build must invoke Astro");
-		assert.ok(
-			validatorIndex < astroIndex,
-			"the public projection validator must run before Astro in the production build",
 		);
 	} finally {
 		fs.rmSync(workspace, { force: true, recursive: true });
@@ -551,4 +255,22 @@ test("the release validator rejects extra fields inside a metric measurement win
 	} finally {
 		fs.rmSync(workspace, { force: true, recursive: true });
 	}
+});
+
+test("retired Pulse records remain explicitly checkable without blocking the site build", () => {
+	const scripts = JSON.parse(
+		fs.readFileSync(path.join(repositoryRoot, "package.json"), "utf8"),
+	).scripts;
+	assert.doesNotMatch(scripts.build, /scripts\/pulse\//);
+	assert.match(scripts["check:pulse-history"], /validate_public_projection/);
+	assert.match(scripts["check:pulse-history"], /validate_public_history/);
+	assert.equal(scripts["test:pulse-proposal-browser"], undefined);
+	assert.equal(
+		fs.existsSync(path.join(repositoryRoot, "src/content/colophon/the-pulse.mdx")),
+		false,
+	);
+	assert.equal(
+		fs.existsSync(path.join(repositoryRoot, "src/components/Pulse/PulseSnapshot.astro")),
+		false,
+	);
 });

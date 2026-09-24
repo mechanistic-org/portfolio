@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
-		"build": "node scripts/ci-prebuild.js && node scripts/pulse/validate_public_projection.mjs && node scripts/pulse/validate_public_history.mjs && npm run check:ci && npm run audit:integrity && npm run audit:readiness && astro build && node scripts/claims/built.mjs && npx -y pagefind --site dist",
+		"build": "node scripts/ci-prebuild.js && npm run check:ci && npm run audit:integrity && npm run audit:readiness && astro build && node scripts/claims/built.mjs && npx -y pagefind --site dist",
 		"build:worker": "node ./scripts/build-worker.mjs",
 		"check:worker": "node ./scripts/check-worker-build.mjs && wrangler deploy --dry-run && wrangler deploy --dry-run --config wrangler.production.jsonc",
 		"deploy:worker": "node scripts/claims/check.mjs --release && wrangler deploy",
@@ -21,7 +21,7 @@
 		"test:audits": "node --test tests/audits/*.test.mjs",
 		"test:snapshot": "node --test tests/pulse/*.test.mjs",
 		"test:pulse-browser": "node scripts/probes/pulse_contract.mjs",
-		"test:pulse-proposal-browser": "node scripts/probes/pulse_proposal_contract.mjs",
+		"check:pulse-history": "node scripts/pulse/validate_public_projection.mjs && node scripts/pulse/validate_public_history.mjs",
 		"check:hud": "node scripts/_archive/verify_deep_hud.cjs",
 		"content:modernize": "python scripts/modernize_content.py",
 		"assets:process": "python ../global_agent/scripts/process_assets.py",

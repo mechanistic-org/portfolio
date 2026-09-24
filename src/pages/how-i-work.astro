@@ -55,24 +55,6 @@ const byPractice = PRACTICES.map((practice) => ({
 			</p>
 		</header>
 
-		<aside
-			class="method-pulse site-container"
-			data-pulse-entry
-			aria-labelledby="method-pulse-title"
-		>
-			<div>
-				<p class="method-pulse-kicker">/// Operating discipline, measured</p>
-				<h2 id="method-pulse-title">The Pulse</h2>
-				<p>
-					A dated record of issue flow, change traceability, and durable practice - with
-					definitions, methods, and evidence lifecycle visible.
-				</p>
-			</div>
-			<a href="/colophon/the-pulse/">
-				Open the static record <span aria-hidden="true">→</span>
-			</a>
-		</aside>
-
 		<section class="method-field" aria-labelledby="method-field-heading">
 			<h2 id="method-field-heading" class="sr-only">The method field</h2>
 			{
@@ -175,62 +157,6 @@ const byPractice = PRACTICES.map((practice) => ({
 		font-size: clamp(1rem, 1.4vw, 1.125rem);
 		line-height: 1.7;
 		color: var(--color-base-400, #9ca3af);
-	}
-
-	.method-pulse {
-		align-items: end;
-		background: var(--card);
-		border: 1px solid var(--border);
-		display: grid;
-		gap: 1.5rem;
-		grid-template-columns: minmax(0, 1fr);
-		padding-block: 1.25rem;
-	}
-
-	.method-pulse-kicker {
-		color: var(--info);
-		font-family: var(--font-mono);
-		font-size: 0.6875rem;
-		font-weight: 700;
-		letter-spacing: 0.14em;
-		margin: 0 0 0.5rem;
-		text-transform: uppercase;
-	}
-
-	.method-pulse h2 {
-		font-family: var(--font-header);
-		font-size: clamp(1.5rem, 3vw, 2.25rem);
-		line-height: 1;
-		margin: 0;
-		text-transform: uppercase;
-	}
-
-	.method-pulse div > p:last-child {
-		color: var(--muted-foreground);
-		font-size: 0.875rem;
-		line-height: 1.6;
-		margin: 0.75rem 0 0;
-		max-width: 60ch;
-	}
-
-	.method-pulse > a {
-		color: var(--primary);
-		font-family: var(--font-mono);
-		font-size: 0.75rem;
-		font-weight: 700;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
-	}
-
-	.method-pulse > a:hover,
-	.method-pulse > a:focus-visible {
-		color: var(--info);
-	}
-
-	@media (min-width: 768px) {
-		.method-pulse {
-			grid-template-columns: minmax(0, 1fr) auto;
-		}
 	}
 
 	.method-field-caption {

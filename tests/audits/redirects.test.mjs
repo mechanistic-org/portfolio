@@ -21,3 +21,8 @@ test("the Zeus alias covers both the bare and trailing-slash routes", () => {
 test("Cloudflare redirect rules stay out of Astro's normalized route map", () => {
 	assert.doesNotMatch(astroConfig, /["']\/projects\/zeus\/?["']\s*:/);
 });
+
+test("both retired Pulse URLs permanently redirect to the Colophon", () => {
+	assert.ok(redirects.includes("/colophon/the-pulse /colophon/ 301"));
+	assert.ok(redirects.includes("/colophon/the-pulse/ /colophon/ 301"));
+});

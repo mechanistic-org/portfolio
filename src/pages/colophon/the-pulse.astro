@@ -1,0 +1,6 @@
+---
+// #290: the public Pulse dashboard is retired. Keep old links useful in local
+// preview and static hosts; public/_redirects supplies the deployed HTTP 301.
+export const prerender = true;
+return Astro.redirect("/colophon/", 301);
+---

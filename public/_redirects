@@ -3,3 +3,7 @@
 /projects/zeus/* /projects/webtv-elmer 301
 /projects/mp6000-mp3-player /projects/motorola-mp3/ 301
 /projects/mp6000-mp3-player/ /projects/motorola-mp3/ 301
+
+# Retired public Pulse dashboard (#290)
+/colophon/the-pulse /colophon/ 301
+/colophon/the-pulse/ /colophon/ 301
