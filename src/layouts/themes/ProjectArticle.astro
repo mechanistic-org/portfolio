@@ -14,6 +14,7 @@
  */
 import "@/styles/project-reading.css";
 import DevelopmentTimeline from "@components/Projects/DevelopmentTimeline.astro";
+import ProjectTimeline from "@components/Projects/ProjectTimeline.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import MediaHeader from "@components/primitives/MediaHeader.astro";
 import HudRail from "@components/primitives/HudRail.astro";
@@ -348,6 +349,7 @@ const navNext =
 				</div>
 				{/* CENTER — the article */}
 				<main class="min-w-0">
+					{chronology?.events?.length > 0 && <ProjectTimeline chronology={chronology} />}
 					{d.hatnote && <Hatnote>{d.hatnote}</Hatnote>}
 					{d.forensic_summary && <ForensicSummary summary={d.forensic_summary} />}
 					<div class:list={useInlineMedia ? "inline-composition" : "markdown-content max-w-3xl"}>
