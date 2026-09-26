@@ -509,6 +509,7 @@ const assertionSpecs = [
 					await page.$$eval("[data-career-overview] a, .career-undated a", (els) => els.length),
 					83,
 				);
+				await page.click(".career-neighborhood > summary");
 				const link = ".career-tracks a:not([aria-current])";
 				const href = await page.$eval(link, (el) => el.getAttribute("href"));
 				await page.click(link);

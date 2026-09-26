@@ -1,0 +1,199 @@
+---
+interface Props {
+	title: string;
+	meta?: string;
+}
+const { title, meta } = Astro.props;
+---
+
+<project-record>
+	<details class="project-record">
+		<summary>
+			<span>{title}</span>
+			{meta && <small>{meta}</small>}
+		</summary>
+		<div class="project-record__body"><slot /></div>
+	</details>
+	<dialog aria-label={title}>
+		<header><h2>{title}</h2><button type="button" data-close-record>Close ×</button></header>
+	</dialog>
+</project-record>
+
+<script>
+	class ProjectRecordElement extends HTMLElement {
+		connectedCallback() {
+			if (typeof HTMLDialogElement === "undefined") return;
+			if (this.dataset.ready) {
+				this.connectListeners?.();
+				return;
+			}
+			this.dataset.ready = "true";
+			const details = this.querySelector("details")!;
+			const summary = details.querySelector("summary")!;
+			const dialog = this.querySelector("dialog")!;
+			const body = this.querySelector(".project-record__body")!;
+			let returnToOpener = true;
+			let opener: HTMLElement = summary;
+			dialog.append(body);
+			summary.setAttribute("aria-haspopup", "dialog");
+			const open = (from?: HTMLElement) => {
+				if (from) opener = from;
+				returnToOpener = true;
+				if (!dialog.open) dialog.showModal();
+			};
+			summary.addEventListener("click", (event) => {
+				event.preventDefault();
+				open(summary);
+			});
+			dialog.querySelector("[data-close-record]")!.addEventListener("click", () => dialog.close());
+			dialog.addEventListener("close", () => {
+				if (returnToOpener) opener.focus({ preventScroll: true });
+			});
+			dialog.addEventListener("click", (event) => {
+				const link = (event.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
+				const target = link && document.getElementById(decodeURIComponent(link.hash.slice(1)));
+				if (target && !dialog.contains(target)) {
+					returnToOpener = false;
+					dialog.close();
+					target.setAttribute("tabindex", "-1");
+					target.focus({ preventScroll: true });
+				}
+			});
+			const followHash = () => {
+				const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+				if (target && body.contains(target)) {
+					open();
+					target.scrollIntoView({ block: "nearest" });
+				}
+			};
+			const followLink = (event: MouseEvent) => {
+				if (
+					event.defaultPrevented ||
+					event.button !== 0 ||
+					event.metaKey ||
+					event.ctrlKey ||
+					event.shiftKey ||
+					event.altKey
+				)
+					return;
+				const link = (event.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
+				const target = link && document.getElementById(decodeURIComponent(link.hash.slice(1)));
+				if (link && target && body.contains(target)) {
+					open(link);
+					if (link.hash === location.hash) target.scrollIntoView({ block: "nearest" });
+				}
+			};
+			this.connectListeners = () => {
+				window.addEventListener("hashchange", followHash);
+				// Observe native fragment activation before Astro's navigation delegate.
+				document.addEventListener("click", followLink, true);
+				followHash();
+			};
+			this.cleanup = () => {
+				window.removeEventListener("hashchange", followHash);
+				document.removeEventListener("click", followLink, true);
+			};
+			this.connectListeners();
+		}
+		private cleanup?: () => void;
+		private connectListeners?: () => void;
+		disconnectedCallback() {
+			this.cleanup?.();
+		}
+	}
+	if (!customElements.get("project-record"))
+		customElements.define("project-record", ProjectRecordElement);
+</script>
+
+<style>
+	project-record {
+		display: block;
+	}
+	/* With scripts disabled, native disclosures expand into the reading width. */
+	:global(:is(.project-sidebar, .article-contents):has(.project-record[open])) {
+		grid-column: 1 / -1;
+		position: static;
+		max-height: none;
+		overflow: visible;
+	}
+	:global(.project-body:has(.project-record[open]) > main),
+	:global(.authoring-layout:has(.project-record[open]) > .article-composition) {
+		grid-column: 1 / -1;
+	}
+	dialog {
+		margin: auto;
+		width: min(96vw, 100rem);
+		max-width: calc(100vw - 1rem);
+		max-height: 88dvh;
+		padding: clamp(0.75rem, 1.5vw, 1.25rem);
+		border: 1px solid var(--border);
+		border-radius: 0.5rem;
+		background: var(--background, #111);
+		color: var(--foreground);
+		overflow: auto;
+	}
+	dialog::backdrop {
+		background: rgb(0 0 0 / 0.75);
+	}
+	dialog header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+		padding-bottom: 1rem;
+	}
+	dialog h2 {
+		font-size: 1.25rem;
+		margin: 0;
+	}
+	dialog button {
+		min-height: 44px;
+		padding: 0.5rem 0.75rem;
+		cursor: pointer;
+	}
+	.project-record {
+		min-width: 0;
+		border-top: 1px solid var(--border);
+		color: var(--foreground);
+	}
+	summary {
+		padding: 0.5rem 0;
+		min-height: 44px;
+		font-size: 0.85rem;
+		line-height: 1.5;
+		cursor: pointer;
+	}
+	summary::marker {
+		color: var(--muted-foreground);
+	}
+	summary span {
+		margin-left: 0.35rem;
+	}
+	summary small {
+		display: block;
+		margin-left: 1.2rem;
+		color: var(--muted-foreground);
+		font: 0.65rem var(--font-mono);
+	}
+	summary:hover {
+		background: color-mix(in srgb, var(--foreground) 4%, transparent);
+	}
+	summary:focus-visible {
+		outline: 2px solid var(--primary);
+		outline-offset: -2px;
+	}
+	.project-record__body {
+		padding-block: 0.25rem 0.75rem;
+	}
+	.project-record__body > :global(.chronology),
+	.project-record__body > :global(.entropy),
+	.project-record__body > :global(rev-matrix) {
+		margin-bottom: 0;
+	}
+	@media (max-width: 520px) {
+		summary small {
+			display: block;
+			margin: 0.15rem 0 0 1.2rem;
+		}
+	}
+</style>

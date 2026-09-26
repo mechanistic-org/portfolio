@@ -1,65 +1,19 @@
 ---
-interface ChronologyEvent {
-	id: string;
-	date: string;
-	end_date?: string;
-	title: string;
-	summary: string;
-	phase: string;
-	category: string;
-	prominence: "prominent" | "detail" | "cluster-detail";
-	source_ids: string[];
-	cluster_id?: string;
-	anchor?: string;
-}
-interface ChronologyPhase {
-	id: string;
-	label: string;
-	start: string;
-	end: string;
-}
-interface ChronologyCluster {
-	id: string;
-	label: string;
-	summary: string;
-	event_ids: string[];
-	verified_identifier_count?: number;
-}
-interface Chronology {
-	title: string;
-	start: string;
-	end: string;
-	phases: ChronologyPhase[];
-	events: ChronologyEvent[];
-	clusters: ChronologyCluster[];
-}
+import { chronologyDate as displayDate, type Chronology } from "../../utils/projectChronology";
 interface Props {
 	chronology: Chronology;
 }
 const { chronology } = Astro.props;
 const prominent = chronology.events.filter((event) => event.prominence === "prominent");
+// Dense records remain an event index; never turn every dated row into a top-level marker.
+const highlights = prominent.length <= 12 ? prominent : [];
 const eventById = new Map(chronology.events.map((event) => [event.id, event]));
 const at = (value: string) => Date.parse(`${value}T00:00:00Z`);
 const start = at(chronology.start);
 const span = Math.max(1, at(chronology.end) - start);
 const x = (value: string) => 2 + ((at(value) - start) / span) * 96;
-const width = (phase: ChronologyPhase) =>
+const width = (phase: Chronology["phases"][number]) =>
 	((at(phase.end) - at(phase.start) + 86400000) / span) * 100;
-const displayDate = (event: ChronologyEvent) => {
-	const first = new Intl.DateTimeFormat("en-US", {
-		year: "numeric",
-		month: "short",
-		day: "numeric",
-		timeZone: "UTC",
-	}).format(new Date(`${event.date}T00:00:00Z`));
-	if (!event.end_date) return first;
-	const last = new Intl.DateTimeFormat("en-US", {
-		month: "short",
-		day: "numeric",
-		timeZone: "UTC",
-	}).format(new Date(`${event.end_date}T00:00:00Z`));
-	return `${first} – ${last}`;
-};
 ---
 
 <section
@@ -69,18 +23,22 @@ const displayDate = (event: ChronologyEvent) => {
 >
 	<header>
 		<div>
-			<span class="kicker">Verified chronology</span>
+			<span class="kicker">Development chronology</span>
 			<h2 id="chronology-heading">{chronology.title}</h2>
 		</div>
 		<p>
 			{chronology.start.slice(0, 4)}–{chronology.end.slice(0, 4)}<span
-				>{prominent.length} decisive beats</span
+				>{chronology.events.length} recorded events</span
 			>
 		</p>
 	</header>
 
 	<chrono-strip>
-		<div class="plot" aria-label={`${prominent.length} prominent project milestones`}>
+		<div
+			hidden={!highlights.length}
+			class="plot"
+			aria-label={`${prominent.length} highlighted project events`}
+		>
 			<div class="phase-band" aria-hidden="true">
 				{
 					chronology.phases.map((phase) => (
@@ -92,7 +50,7 @@ const displayDate = (event: ChronologyEvent) => {
 			</div>
 			<div class="track" aria-hidden="true"></div>
 			{
-				prominent.map((event, index) => (
+				highlights.map((event, index) => (
 					<button
 						type="button"
 						class="marker"
@@ -110,9 +68,9 @@ const displayDate = (event: ChronologyEvent) => {
 			}
 		</div>
 
-		<ol class="beats">
+		<ol class="beats" hidden={!highlights.length}>
 			{
-				prominent.map((event, index) => (
+				highlights.map((event, index) => (
 					<li>
 						<button
 							type="button"
@@ -123,17 +81,19 @@ const displayDate = (event: ChronologyEvent) => {
 						>
 							<span class="beat-number">{String(index + 1).padStart(2, "0")}</span>
 							<span class="beat-copy">
-								<time datetime={event.date}>{displayDate(event)}</time>
+								<time datetime={event.date_label ? undefined : event.date} title={event.date_basis}>
+									{displayDate(event)}
+								</time>
 								<strong>{event.title}</strong>
 								<span>{event.summary}</span>
 								<small>
-									{`${event.source_ids.length} verified ${event.source_ids.length === 1 ? "source" : "sources"}`}
+									{`${event.source_ids.length} ${event.source_ids.length === 1 ? "source" : "sources"}`}
 								</small>
 							</span>
 						</button>
 						{event.anchor && (
 							<a class="article-link" href={`#${event.anchor}`}>
-								Read the project section ↓
+								{event.link_label || "Read the project section"} ↓
 							</a>
 						)}
 					</li>
@@ -160,7 +120,12 @@ const displayDate = (event: ChronologyEvent) => {
 							.filter(Boolean)
 							.map((event) => (
 								<li data-chrono-event={event!.id} data-source-count={event!.source_ids.length}>
-									<time datetime={event!.date}>{displayDate(event!)}</time>
+									<time
+										datetime={event!.date_label ? undefined : event!.date}
+										title={event!.date_basis}
+									>
+										{displayDate(event!)}
+									</time>
 									<strong>{event!.title}</strong>
 									<span>{event!.summary}</span>
 								</li>
@@ -170,15 +135,20 @@ const displayDate = (event: ChronologyEvent) => {
 			))
 		}
 
-		<details class="full-index">
+		<details class="full-index" open={!highlights.length}>
 			<summary>Complete dated index <small>{chronology.events.length} events</small></summary>
 			<ol>
 				{
 					chronology.events.map((event) => (
 						<li data-chrono-event={event.id} data-source-count={event.source_ids.length}>
-							<time datetime={event.date}>{displayDate(event)}</time>
+							<time datetime={event.date_label ? undefined : event.date} title={event.date_basis}>
+								{displayDate(event)}
+							</time>
 							<strong>{event.title}</strong>
 							<span>{event.summary}</span>
+							{event.anchor && (
+								<a href={`#${event.anchor}`}>{event.link_label || "Read the project section"} ↓</a>
+							)}
 						</li>
 					))
 				}
@@ -188,6 +158,9 @@ const displayDate = (event: ChronologyEvent) => {
 </section>
 
 <style>
+	.chronology [hidden] {
+		display: none !important;
+	}
 	.chronology {
 		margin: 0 0 2rem;
 		border: 1px solid var(--border);
@@ -472,7 +445,10 @@ const displayDate = (event: ChronologyEvent) => {
 
 <script>
 	class ChronoStrip extends HTMLElement {
+		private initialized = false;
 		connectedCallback() {
+			if (this.initialized) return;
+			this.initialized = true;
 			const markers = [...this.querySelectorAll<HTMLButtonElement>(".marker")];
 			let pinned: string | null = null;
 			const nodes = (id: string) =>

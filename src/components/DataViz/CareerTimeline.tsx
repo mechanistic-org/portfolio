@@ -12,11 +12,13 @@ interface Props {
 	nodes: CareerNode[];
 	currentId?: string | null;
 	onSelect?: (id: string) => void;
+	compact?: boolean;
 }
 
 /** The same career projection and renderer serve the map, deep dives and lites.
  * Selection belongs to the caller. Native links remain usable without hydration. */
-export default function CareerTimeline({ nodes, currentId, onSelect }: Props) {
+export default function CareerTimeline({ nodes, currentId, onSelect, compact = false }: Props) {
+	const Neighborhood = compact ? "details" : "div";
 	const model = useMemo(() => buildContextRibbon(nodes, currentId ?? ""), [nodes, currentId]);
 	const dated = useMemo(
 		() =>
@@ -66,23 +68,36 @@ export default function CareerTimeline({ nodes, currentId, onSelect }: Props) {
 		) ?? [];
 	return (
 		<nav
-			className="career-timeline"
+			className={compact ? "career-timeline career-timeline--compact" : "career-timeline"}
 			aria-label="Career timeline"
 			data-context-ribbon
 			data-current={currentId ?? ""}
 			data-source="routeEligibleProjects"
 		>
 			<div className="career-timeline-heading">
-				<h2>Career timeline</h2>
+				{!compact && <h2>Career timeline</h2>}
 				<a href="/projects/">All work ↗</a>
 			</div>
 			{dated.length > 0 && (
 				<div className="career-overview">
+					{compact && current && (
+						<p
+							className="career-current"
+							style={{ "--current-x": `${x(current.start) / 9.6}%` } as CSSProperties}
+						>
+							{current.title} <span>{current.period}</span>
+						</p>
+					)}
 					<div className="career-overview-years">
 						<span>{startYear}</span>
 						<span>{ongoingRoles.length > 0 && endYear === currentYear ? "Present" : endYear}</span>
 					</div>
-					<svg viewBox="0 0 960 64" aria-label="Projects across the career" data-career-overview>
+					<svg
+						preserveAspectRatio={compact ? "none" : "xMidYMid meet"}
+						viewBox="0 0 960 64"
+						aria-label="Projects across the career"
+						data-career-overview
+					>
 						{model && (
 							<rect
 								className="career-window"
@@ -132,7 +147,15 @@ export default function CareerTimeline({ nodes, currentId, onSelect }: Props) {
 				</div>
 			)}
 			{model ? (
-				<>
+				<Neighborhood className={compact ? "career-neighborhood" : undefined}>
+					{compact && (
+						<summary>
+							Work from this period{" "}
+							<span>
+								{model.startYear}–{model.endYear}
+							</span>
+						</summary>
+					)}
 					<div className="career-axis">
 						<span>
 							{model.startYear}–{model.endYear}
@@ -182,7 +205,7 @@ export default function CareerTimeline({ nodes, currentId, onSelect }: Props) {
 						{model.neighborCount} of {model.availableNeighbors} nearby projects · Dated work; dashed
 						bars show employer periods.
 					</p>
-				</>
+				</Neighborhood>
 			) : (
 				<p className="career-empty">
 					{current

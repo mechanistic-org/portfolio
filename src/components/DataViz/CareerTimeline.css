@@ -170,3 +170,123 @@
 		margin-left: 0.7rem;
 	}
 }
+
+/* Same career data and marks, composed as a compact article navigator. */
+.career-timeline--compact {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+	column-gap: 1rem;
+	padding: 0.5rem 1rem;
+	position: relative;
+}
+.career-timeline--compact .career-timeline-heading {
+	grid-column: 3;
+	grid-row: 2;
+	justify-content: end;
+}
+.career-timeline--compact .career-overview {
+	grid-column: 1 / -1;
+	grid-row: 1;
+	position: relative;
+	margin: 0 3.5rem;
+	padding-top: 1.75rem;
+}
+.career-current {
+	position: absolute;
+	top: 0;
+	left: clamp(5rem, var(--current-x), calc(100% - 5rem));
+	transform: translateX(-50%);
+	margin: 0;
+	white-space: nowrap;
+	font-size: 0.8rem;
+	line-height: 1.5;
+}
+.career-current span {
+	margin-left: 0.5rem;
+	color: var(--muted-foreground);
+	font: 0.7rem var(--font-mono);
+}
+.career-timeline--compact .career-overview svg {
+	height: clamp(52px, 5.7vw, 80px);
+}
+.career-timeline--compact .career-overview-years {
+	position: absolute;
+	left: -3.5rem;
+	right: -3.5rem;
+	top: calc(50% + 0.875rem);
+	transform: translateY(-50%);
+	font-size: 0.65rem;
+	pointer-events: none;
+}
+.career-neighborhood {
+	grid-column: 1;
+	grid-row: 2;
+}
+.career-neighborhood summary {
+	min-height: 40px;
+	padding: 0.6rem 0;
+	cursor: pointer;
+	font-size: 0.75rem;
+}
+.career-neighborhood summary span {
+	margin-left: 0.4rem;
+	color: var(--muted-foreground);
+	font: 0.65rem var(--font-mono);
+}
+.career-neighborhood summary:focus-visible {
+	outline: 2px solid var(--foreground);
+	outline-offset: 2px;
+}
+.career-neighborhood[open] {
+	grid-column: 1 / -1;
+	grid-row: 3;
+}
+.career-timeline--compact .career-adjacent {
+	grid-column: 2;
+	grid-row: 2;
+	gap: 1.5rem;
+	justify-content: center;
+	align-self: start;
+}
+.career-timeline--compact .career-adjacent a {
+	min-height: 40px;
+}
+.career-timeline--compact .career-undated,
+.career-timeline--compact .career-empty {
+	grid-column: 1 / -1;
+}
+[data-project-article] .career-timeline--compact {
+	max-width: none;
+	margin: 0 0 1.75rem;
+}
+@media (max-width: 650px) {
+	.career-timeline--compact {
+		padding-inline: 0.25rem;
+		gap: 0 0.5rem;
+	}
+	.career-timeline--compact .career-overview {
+		margin-inline: 2.5rem;
+	}
+	.career-timeline--compact .career-overview-years {
+		left: -2.5rem;
+		right: -2.5rem;
+		font-size: 0.55rem;
+	}
+	.career-neighborhood {
+		grid-column: 1 / 3;
+		grid-row: 3;
+	}
+	.career-neighborhood[open] {
+		grid-column: 1 / -1;
+		grid-row: 4;
+	}
+	.career-neighborhood summary span {
+		display: none;
+	}
+	.career-timeline--compact .career-timeline-heading {
+		grid-row: 3;
+	}
+	.career-timeline--compact .career-adjacent {
+		grid-column: 1 / -1;
+	}
+}

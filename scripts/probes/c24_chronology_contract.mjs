@@ -73,10 +73,7 @@ assert.equal(noBid.date, "2007-03-07");
 assert.equal(noBid.date_basis, "document-date");
 assert.match(noBid.verification_note, /reporting checkpoint, not a claimed occurrence date/u);
 assert.ok(!chronologyBytes.toString("utf8").includes("11/15/2006"));
-assert.match(
-	articleText,
-	/By March 7, 2007, the status report recorded Kwanta's no-bid/u,
-);
+assert.match(articleText, /By March 7, 2007, the status report recorded Kwanta's no-bid/u);
 assert.ok(!articleText.match(/11\/15\/2006|Curtis\.11\.15\.06/u));
 assert.ok(!chronologyBytes.toString("utf8").match(/[A-Z]:[\\/]|portfolio_working/u));
 assert.deepEqual(
@@ -114,6 +111,20 @@ const specs = [
 			await page.waitForSelector("[data-chronology='25']");
 			await page.waitForSelector("[data-entropy='21']");
 			await page.waitForFunction(() => Boolean(customElements.get("chrono-strip")));
+			assert.equal(
+				await page.$$eval(".project-record[open]", (nodes) => nodes.length),
+				0,
+				"project records start compact",
+			);
+			await page.waitForFunction(() => Boolean(customElements.get("project-record")));
+			await page.click("project-record:has([data-chronology]) summary");
+			await page.waitForSelector("project-record dialog[open]");
+			assert.ok(
+				await page.$eval(
+					"project-record dialog[open]",
+					(node) => node.getBoundingClientRect().width > innerWidth * 0.9,
+				),
+			);
 			assert.equal(
 				await page.$eval("[data-entropy] h2", (node) => node.textContent),
 				"Project entropy",

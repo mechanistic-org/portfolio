@@ -1,5 +1,5 @@
 /* Local authoring surface. Content and assets remain in their canonical stores. */
-.authoring-page,
+:is(.authoring-page, [data-project-media]),
 .working-strip,
 .media-browser,
 .image-viewer {
@@ -15,7 +15,7 @@
 	text-align: left;
 }
 
-.authoring-page *,
+:is(.authoring-page, [data-project-media]) *,
 .working-strip *,
 .media-browser *,
 .image-viewer * {
@@ -40,18 +40,18 @@
 	pointer-events: none;
 }
 
-.authoring-page img.is-loading,
+:is(.authoring-page, [data-project-media]) img.is-loading,
 .image-viewer img.is-loading {
 	visibility: hidden;
 }
 
-.authoring-page [hidden],
+:is(.authoring-page, [data-project-media]) [hidden],
 .media-browser [hidden],
 .image-viewer [hidden] {
 	display: none !important;
 }
 
-.authoring-page :is(button, a, select, summary):focus-visible,
+:is(.authoring-page, [data-project-media]) :is(button, a, select, summary):focus-visible,
 .working-strip a:focus-visible,
 .media-browser :is(button, a):focus-visible,
 .image-viewer :is(button, a):focus-visible {
@@ -59,20 +59,20 @@
 	outline-offset: 4px;
 }
 
-.authoring-page :is(button, select),
+:is(.authoring-page, [data-project-media]) :is(button, select),
 .media-browser button,
 .image-viewer button {
 	font: inherit;
 	color: inherit;
 }
 
-.authoring-page button,
+:is(.authoring-page, [data-project-media]) button,
 .media-browser button,
 .image-viewer button {
 	cursor: pointer;
 }
 
-.authoring-page :is(p, li, figcaption),
+:is(.authoring-page, [data-project-media]) :is(p, li, figcaption),
 .viewer-caption,
 .browser-grid span {
 	overflow-wrap: anywhere;
@@ -120,7 +120,7 @@
 }
 
 .article-masthead {
-	padding: clamp(3.5rem, 7vw, 7rem) 0 3rem;
+	padding: clamp(2rem, 4vw, 3.5rem) 0 1.5rem;
 	border-bottom: 1px solid var(--authoring-line);
 }
 
@@ -129,8 +129,7 @@
 	margin-top: 4.5rem;
 }
 
-.masthead-meta,
-.masthead-bottom {
+.masthead-meta {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
@@ -156,49 +155,20 @@
 	margin: 0;
 	color: #f7f8fa;
 	font-family: "Barlow Condensed", "Impact", "Arial Narrow", sans-serif;
-	font-size: clamp(5.5rem, 11vw, 10.5rem);
+	font-size: var(--project-title-size);
 	font-weight: 600;
 	line-height: 0.9;
 	letter-spacing: -0.025em;
 }
 
-.article-masthead h1 > span {
+.masthead-subtitle {
 	display: block;
 	max-width: 24ch;
 	margin-top: 0.7rem;
-	font-size: clamp(2rem, 4.4vw, 4rem);
+	font-size: clamp(1.4rem, 2.4vw, 2rem);
 	font-weight: 400;
 	line-height: 1.1;
 	letter-spacing: -0.015em;
-}
-
-.masthead-bottom {
-	margin-top: 2.5rem;
-}
-
-.masthead-bottom > span:first-child {
-	color: var(--authoring-text);
-}
-
-.masthead-bottom button {
-	display: inline-flex;
-	align-items: center;
-	gap: 1rem;
-	min-height: 2.75rem;
-	padding: 0.4rem 0;
-	border: 0;
-	background: transparent;
-	color: var(--authoring-link);
-}
-
-.masthead-bottom button:hover {
-	text-decoration: underline;
-	text-underline-offset: 0.25em;
-}
-
-.masthead-bottom > span:last-child {
-	margin-left: auto;
-	font-variant-numeric: tabular-nums;
 }
 
 .authoring-layout {
@@ -206,7 +176,7 @@
 	grid-template-columns: var(--contents-width) minmax(0, 1fr);
 	align-items: start;
 	gap: var(--composition-gap);
-	padding-top: 3.5rem;
+	padding-top: 1rem;
 }
 
 .article-contents {
@@ -264,9 +234,11 @@
 	color: var(--authoring-link);
 }
 
-.article-contents > button {
+.article-contents > .browse-project-media {
 	min-height: 2.75rem;
-	margin-top: 1.5rem;
+	display: inline-flex;
+	align-items: center;
+	margin-top: 1rem;
 	padding: 0.5rem 0;
 	border: 0;
 	background: none;
@@ -387,7 +359,7 @@
 	margin-bottom: 1rem;
 }
 
-.group-heading h4 {
+.group-heading .group-title {
 	margin: 0.25rem 0 0;
 	color: #f2f4f7;
 	font-family: "Barlow Condensed", "Impact", "Arial Narrow", sans-serif;
@@ -961,7 +933,7 @@ body:has(.media-browser[open], .image-viewer[open]) {
 		font-size: 0.8125rem;
 	}
 
-	.article-contents > button {
+	.article-contents > .browse-project-media {
 		margin-top: 0.75rem;
 	}
 
@@ -992,17 +964,6 @@ body:has(.media-browser[open], .image-viewer[open]) {
 	.masthead-meta {
 		gap: 0.35rem 1rem;
 		font-size: 0.625rem;
-	}
-
-	.masthead-bottom {
-		gap: 0.5rem 1.25rem;
-		margin-top: 1.75rem;
-		font-size: 0.8125rem;
-	}
-
-	.masthead-bottom > span:last-child {
-		flex-basis: 100%;
-		margin-left: 0;
 	}
 
 	.article-contents nav {
@@ -1138,6 +1099,7 @@ body:has(.media-browser[open], .image-viewer[open]) {
 
 @media (prefers-reduced-motion: reduce) {
 	.authoring-page *,
+	[data-project-media] *,
 	.media-browser *,
 	.image-viewer * {
 		animation: none !important;
@@ -1145,7 +1107,8 @@ body:has(.media-browser[open], .image-viewer[open]) {
 		scroll-behavior: auto !important;
 	}
 
-	html:has(.authoring-page) {
+	html:has(.authoring-page),
+	html:has([data-project-media]) {
 		scroll-behavior: auto !important;
 	}
 }

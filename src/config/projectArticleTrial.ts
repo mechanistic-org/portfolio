@@ -108,6 +108,14 @@ export const projectArticleTrial = {
 		// Disabled by Erik after #336 review. Re-enable only with explicit approval:
 		// set models to ["3d_model"]; the placement/view preset below is retained.
 		models: [],
+		inlineGalleries: [
+			{ galleryId: "01_origin_story", before: "failures" },
+			{ galleryId: "02_side_cap_crisis", before: "supply-chain" },
+			{ galleryId: "03_manufacturing_wins", before: "architecture" },
+			{ galleryId: "04_structural_components", before: "governance" },
+			{ galleryId: "05_paper_trail", before: "impact" },
+			{ galleryId: "06_press_resources", before: "sources" },
+		],
 		modelPlacement: {
 			"3d_model": {
 				before: "failures",

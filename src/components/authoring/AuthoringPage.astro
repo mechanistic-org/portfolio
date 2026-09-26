@@ -1,14 +1,31 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import MediaGroup from "./MediaGroup.astro";
+import MediaExperience from "./MediaExperience.astro";
 import "@/styles/authoring-page.css";
-const { page } = Astro.props;
+import "@/styles/project-reading.css";
+import DevelopmentTimeline from "../Projects/DevelopmentTimeline.astro";
+import ProjectRecords from "../Projects/ProjectRecords.astro";
+import ProjectRecord from "../Projects/ProjectRecord.astro";
+import ContextRibbon from "../primitives/ContextRibbon.astro";
+const {
+	page,
+	chronology = null,
+	revisions = null,
+	contextNodes = [],
+	projectNavigation,
+} = Astro.props;
+const hasNarrativeTimeline = page.headings.some((h: any) => h.slug === "development-timeline");
+const hasAuthoredOverview = page.headings.some((h: any) => h.slug === "development-at-a-glance");
 const chapters = page.headings.filter((h: any) => h.depth === 2);
 const isPublic = page.public === true;
 const isGlyph = page.project === "avegant-glyph";
 const title = isGlyph ? "Glyph" : page.title;
 const subtitle = isGlyph ? "Getting it into production" : undefined;
 const projectLabel = isGlyph ? "Avegant Glyph" : page.title;
+const firstImageGroup = page.pieces.find(
+	(piece: any) => piece.group?.items[0]?.kind === "image",
+)?.group;
 ---
 
 <BaseLayout
@@ -19,6 +36,7 @@ const projectLabel = isGlyph ? "Avegant Glyph" : page.title;
 	image={page.image}
 	projectFrontmatter={page.frontmatter}
 	noindex={!isPublic}
+	projectNavigation={projectNavigation}
 >
 	{
 		!isPublic && (
@@ -37,30 +55,33 @@ const projectLabel = isGlyph ? "Avegant Glyph" : page.title;
 		class:list={["authoring-page", { "public-authored-page": isPublic }]}
 		data-authoring-project={page.project}
 		data-revision={page.revision}
+		data-project-title={projectLabel}
+		data-project-intro={page.description}
+		data-pagefind-meta="title[data-project-title], project[data-authoring-project], intro[data-project-intro]"
 	>
 		<header class="article-masthead">
-			<div class="masthead-meta">
-				{
-					isGlyph ? (
+			{
+				isGlyph && (
+					<div class="masthead-meta">
 						<>
-							<>
-								<span>Avegant</span>
-								<span>2015–2016</span>
-								<span>Mechanical engineering</span>
-							</>
+							<span>Avegant</span>
+							<span>2015–2016</span>
+							<span>Mechanical engineering</span>
 						</>
-					) : (
-						<span>{projectLabel}</span>
-					)
-				}
-			</div>
-			<h1>{title}{subtitle && <span>{subtitle}</span>}</h1>
-			<div class="masthead-bottom">
-				<span>By Erik Norris</span><button type="button" data-browse-media
-					>Explore the photographs <span>↗</span></button
-				><span>{page.imageCount} images · {page.videoCount} videos</span>
-			</div>
+					</div>
+				)
+			}
+			<h1>{title}</h1>
+			{subtitle && <p class="masthead-subtitle">{subtitle}</p>}
 		</header>
+		{
+			!hasAuthoredOverview && (
+				<DevelopmentTimeline
+					chronology={chronology}
+					detailHref={hasNarrativeTimeline ? "#development-timeline" : "#chronology-heading"}
+				/>
+			)
+		}
 		<div class="authoring-layout">
 			<aside class="article-contents">
 				<nav aria-label="On this page">
@@ -72,7 +93,25 @@ const projectLabel = isGlyph ? "Avegant Glyph" : page.title;
 							</a>
 						))
 					}
-				</nav><button type="button" data-browse-media>Browse the images ↗</button>
+				</nav>
+				{
+					page.imageCount > 0 && firstImageGroup && (
+						<a class="browse-project-media" href={`#media-${firstImageGroup.id}`} data-browse-media>
+							Browse {page.imageCount} images ↗
+						</a>
+					)
+				}
+				<ProjectRecords
+					chronology={hasNarrativeTimeline ? null : chronology}
+					revisions={revisions}
+				/>
+				{
+					contextNodes.length > 0 && (
+						<ProjectRecord title="Career context">
+							<ContextRibbon nodes={contextNodes} currentId={page.project} />
+						</ProjectRecord>
+					)
+				}
 			</aside>
 			<div class="article-composition">
 				{
@@ -108,45 +147,5 @@ const projectLabel = isGlyph ? "Avegant Glyph" : page.title;
 			</div>
 		</div>
 	</article>
-	<dialog class="media-browser" aria-labelledby="media-browser-title">
-		<header>
-			<div>
-				<span class="group-kicker">{projectLabel}</span><h2 id="media-browser-title">
-					Photographs from the work
-				</h2>
-			</div><button type="button" data-close-browser aria-label="Close image browser"
-				>Close ×</button
-			>
-		</header><div class="media-browser-groups"></div>
-	</dialog>
-	<dialog class="image-viewer" aria-labelledby="image-viewer-title">
-		<header>
-			<h2 id="image-viewer-title"></h2><div>
-				<button type="button" data-zoom aria-pressed="false">Zoom in</button><button
-					type="button"
-					data-close-viewer
-					aria-label="Close enlarged image">Close ×</button
-				>
-			</div>
-		</header><div class="viewer-image"><img alt="" /></div><footer>
-			<div class="viewer-paging">
-				<button type="button" data-viewer-step="-1" aria-label="Previous enlarged image">←</button
-				><span class="viewer-count" aria-live="polite"></span><button
-					type="button"
-					data-viewer-step="1"
-					aria-label="Next enlarged image">→</button
-				>
-			</div><div class="viewer-caption"></div><a
-				class="viewer-original"
-				href="#"
-				target="_blank"
-				rel="noopener">{isPublic ? "Full-size ↗" : "Original ↗"}</a
-			>
-		</footer>
-	</dialog>
-	<script>
-		import { initializeAuthoringPage } from "./page-client";
-		initializeAuthoringPage();
-		document.addEventListener("astro:page-load", initializeAuthoringPage);
-	</script>
+	<MediaExperience projectLabel={projectLabel} isPublic={isPublic} />
 </BaseLayout>

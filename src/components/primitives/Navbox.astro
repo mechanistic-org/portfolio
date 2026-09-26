@@ -1,8 +1,4 @@
 ---
-/**
- * Navbox — bottom prev/next navigation between project pages (Wikipedia "Navbox"
- * footer family). Fed the router's prev/next entries.
- */
 interface NavItem {
 	href: string;
 	title: string;
@@ -16,37 +12,74 @@ const { prev, next } = Astro.props;
 
 {
 	(prev || next) && (
-		<nav class="border-border mt-16 grid grid-cols-2 gap-4 border-t pt-6">
+		<nav class="project-navigation" aria-label="More projects">
 			<div>
 				{prev && (
-					<a
-						href={prev.href}
-						class="group border-border hover:border-primary/40 block rounded-lg border p-4 transition-colors"
-					>
-						<span class="text-muted-foreground font-mono text-[10px] tracking-widest uppercase">
-							← Previous
-						</span>
-						<span class="text-foreground group-hover:text-primary mt-1 block text-sm font-medium transition-colors">
-							{prev.title}
-						</span>
+					<a href={prev.href}>
+						<span>← Previous</span>
+						<strong>{prev.title}</strong>
 					</a>
 				)}
 			</div>
+			<a class="all-projects" href="/projects/">
+				All work
+			</a>
 			<div>
 				{next && (
-					<a
-						href={next.href}
-						class="group border-border hover:border-primary/40 block rounded-lg border p-4 text-right transition-colors"
-					>
-						<span class="text-muted-foreground font-mono text-[10px] tracking-widest uppercase">
-							Next →
-						</span>
-						<span class="text-foreground group-hover:text-primary mt-1 block text-sm font-medium transition-colors">
-							{next.title}
-						</span>
+					<a class="next-project" href={next.href}>
+						<span>Next →</span>
+						<strong>{next.title}</strong>
 					</a>
 				)}
 			</div>
 		</nav>
 	)
 }
+<style>
+	.project-navigation {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+		align-items: center;
+		gap: 1.5rem;
+		padding-block: 1rem;
+		border-bottom: 1px solid var(--border);
+	}
+	a {
+		display: inline-flex;
+		gap: 0.75rem;
+		align-items: baseline;
+		min-height: 44px;
+		padding-block: 0.75rem;
+		font-size: 0.875rem;
+	}
+	a:hover {
+		color: var(--primary);
+	}
+	a:focus-visible {
+		outline: 2px solid var(--primary);
+		outline-offset: 3px;
+	}
+	span,
+	.all-projects {
+		color: var(--muted-foreground);
+		font-size: 0.75rem;
+	}
+	strong {
+		font-weight: 500;
+	}
+	.project-navigation > div:last-child {
+		text-align: right;
+	}
+	@media (max-width: 600px) {
+		a {
+			flex-direction: column;
+			gap: 0.15rem;
+		}
+		.next-project {
+			align-items: end;
+		}
+		.project-navigation {
+			gap: 0.75rem;
+		}
+	}
+</style>
