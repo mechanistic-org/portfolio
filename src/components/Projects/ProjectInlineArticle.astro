@@ -1,0 +1,49 @@
+---
+import MediaGroup from "../authoring/MediaGroup.astro";
+import { splitInlineArticle } from "../../utils/inlineArticle";
+import type { Gallery } from "../../utils/projectPresentation";
+interface Props {
+	galleries: Gallery[];
+	placements: { galleryId: string; beforeId: string }[];
+}
+const { galleries, placements } = Astro.props;
+const ids = placements.map((p) => p.galleryId);
+if (new Set(ids).size !== ids.length || galleries.some((g) => !ids.includes(g.id)))
+	throw new Error("Inline media must place every gallery exactly once");
+const inserts = placements.map((placement) => {
+	const gallery = galleries.find((g) => g.id === placement.galleryId);
+	if (!gallery?.data.images?.length)
+		throw new Error(`Missing inline gallery ${placement.galleryId}`);
+	return {
+		beforeId: placement.beforeId,
+		group: {
+			id: gallery.id,
+			title: gallery.title,
+			summary: gallery.caption,
+			items: gallery.data.images.map((image) => ({
+				...image,
+				kind: "image",
+				alt: image.alt || gallery.title || "Project photograph",
+				// The curated public asset already exists; do not invent derivative URLs.
+				thumbnailSrc: image.src,
+				displaySrc: image.src,
+				zoomSrc: image.src,
+				originalSrc: image.src,
+			})),
+		},
+	};
+});
+const { pieces, tail } = splitInlineArticle(await Astro.slots.render("default"), inserts);
+---
+
+{
+	pieces.map(({ html, insert }) => (
+		<>
+			<>
+				<div class="markdown-content inline-prose" set:html={html} />
+				<MediaGroup group={insert.group} />
+			</>
+		</>
+	))
+}
+<div class="markdown-content inline-prose" set:html={tail} />

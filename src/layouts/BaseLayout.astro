@@ -27,6 +27,10 @@ interface Props {
 	socialImage?: { type: string; alt: string; width?: number; height?: number };
 	projectFrontmatter?: any;
 	entropy?: any;
+	projectNavigation?: {
+		prev?: { href: string; title: string } | null;
+		next?: { href: string; title: string } | null;
+	};
 	noindex?: boolean;
 	hideNav?: boolean;
 	overflowHidden?: boolean;
@@ -42,6 +46,7 @@ const {
 	socialImage,
 	projectFrontmatter,
 	entropy,
+	projectNavigation,
 	noindex = false,
 	hideNav = false,
 	overflowHidden = false,
@@ -89,7 +94,7 @@ const {
 					<slot />
 				</main>
 			</div>
-			{!overflowHidden && <Footer entropy={entropy} />}
+			{!overflowHidden && <Footer entropy={entropy} projectNavigation={projectNavigation} />}
 		</div>
 		<PagefindSearch />
 

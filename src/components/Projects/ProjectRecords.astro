@@ -1,0 +1,45 @@
+---
+import ProjectRecord from "./ProjectRecord.astro";
+import ChronoStrip from "../primitives/ChronoStrip.astro";
+import EntropySeismograph from "../primitives/EntropySeismograph.astro";
+import RevMatrix from "../primitives/RevMatrix.astro";
+const { chronology, entropy = [], revisions } = Astro.props;
+---
+
+{
+	(chronology || entropy.length || revisions) && (
+		<section class="project-records" aria-label="Project records">
+			<p>Project records</p>
+			{chronology && (
+				<ProjectRecord
+					title="Delivery chronology"
+					meta={`${chronology.events.length} dated events`}
+				>
+					<ChronoStrip chronology={chronology} />
+				</ProjectRecord>
+			)}
+			{entropy.length > 0 && (
+				<ProjectRecord title="Project entropy" meta={`${entropy.length} scored events`}>
+					<EntropySeismograph events={entropy} />
+				</ProjectRecord>
+			)}
+			{revisions && (
+				<ProjectRecord title="Part revisions" meta="Drawing and ECO dates">
+					<RevMatrix revisions={revisions} />
+				</ProjectRecord>
+			)}
+		</section>
+	)
+}
+<style>
+	.project-records {
+		margin-block: 1.5rem;
+	}
+	p {
+		font: 0.65rem var(--font-mono);
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		color: var(--muted-foreground);
+		margin-bottom: 0.5rem;
+	}
+</style>

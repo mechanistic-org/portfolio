@@ -472,7 +472,10 @@ const displayDate = (event: ChronologyEvent) => {
 
 <script>
 	class ChronoStrip extends HTMLElement {
+		private initialized = false;
 		connectedCallback() {
+			if (this.initialized) return;
+			this.initialized = true;
 			const markers = [...this.querySelectorAll<HTMLButtonElement>(".marker")];
 			let pinned: string | null = null;
 			const nodes = (id: string) =>

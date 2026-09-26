@@ -10,7 +10,9 @@ type Group = {
 	index: number;
 };
 export function initializeAuthoringPage() {
-	const article = document.querySelector<HTMLElement>("[data-authoring-project]");
+	const article = document.querySelector<HTMLElement>(
+		"[data-authoring-project], [data-project-media]",
+	);
 	if (!article || article.dataset.initialized) return;
 	article.dataset.initialized = "true";
 	const viewer = document.querySelector<HTMLDialogElement>(".image-viewer")!;
@@ -249,7 +251,9 @@ export function initializeAuthoringPage() {
 			if (notes) notes.open = true;
 		}),
 	);
-	const toc = article.querySelectorAll<HTMLAnchorElement>(".article-contents a");
+	const toc = article.querySelectorAll<HTMLAnchorElement>(
+		'.article-contents a, .project-contents a[href^="#"]',
+	);
 	const observer = new IntersectionObserver(
 		(entries) => {
 			entries.forEach((entry) => {
@@ -262,7 +266,7 @@ export function initializeAuthoringPage() {
 		{ rootMargin: "-10% 0px -65% 0px" },
 	);
 	article.querySelectorAll("h2[id]").forEach((heading) => observer.observe(heading));
-	const positionKey = `${article.dataset.authoringProject}-authoring-scroll`;
+	const positionKey = `${article.dataset.authoringProject || article.dataset.projectMedia}-authoring-scroll`;
 	window.addEventListener(
 		"pagehide",
 		() => sessionStorage.setItem(positionKey, String(window.scrollY)),

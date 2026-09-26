@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import MediaGroup from "./MediaGroup.astro";
+import MediaExperience from "./MediaExperience.astro";
 import "@/styles/authoring-page.css";
 const { page } = Astro.props;
 const chapters = page.headings.filter((h: any) => h.depth === 2);
@@ -108,45 +109,5 @@ const projectLabel = isGlyph ? "Avegant Glyph" : page.title;
 			</div>
 		</div>
 	</article>
-	<dialog class="media-browser" aria-labelledby="media-browser-title">
-		<header>
-			<div>
-				<span class="group-kicker">{projectLabel}</span><h2 id="media-browser-title">
-					Photographs from the work
-				</h2>
-			</div><button type="button" data-close-browser aria-label="Close image browser"
-				>Close ×</button
-			>
-		</header><div class="media-browser-groups"></div>
-	</dialog>
-	<dialog class="image-viewer" aria-labelledby="image-viewer-title">
-		<header>
-			<h2 id="image-viewer-title"></h2><div>
-				<button type="button" data-zoom aria-pressed="false">Zoom in</button><button
-					type="button"
-					data-close-viewer
-					aria-label="Close enlarged image">Close ×</button
-				>
-			</div>
-		</header><div class="viewer-image"><img alt="" /></div><footer>
-			<div class="viewer-paging">
-				<button type="button" data-viewer-step="-1" aria-label="Previous enlarged image">←</button
-				><span class="viewer-count" aria-live="polite"></span><button
-					type="button"
-					data-viewer-step="1"
-					aria-label="Next enlarged image">→</button
-				>
-			</div><div class="viewer-caption"></div><a
-				class="viewer-original"
-				href="#"
-				target="_blank"
-				rel="noopener">{isPublic ? "Full-size ↗" : "Original ↗"}</a
-			>
-		</footer>
-	</dialog>
-	<script>
-		import { initializeAuthoringPage } from "./page-client";
-		initializeAuthoringPage();
-		document.addEventListener("astro:page-load", initializeAuthoringPage);
-	</script>
+	<MediaExperience projectLabel={projectLabel} isPublic={isPublic} />
 </BaseLayout>

@@ -25,17 +25,16 @@ import ThemeControl from "@components/primitives/ThemeControl.astro";
 import Cast from "@components/primitives/Cast.astro";
 import Gallery from "@components/primitives/Gallery.astro";
 import Toc from "@components/primitives/Toc.astro";
-import Navbox from "@components/primitives/Navbox.astro";
+import ProjectInlineArticle from "@components/Projects/ProjectInlineArticle.astro";
+import MediaExperience from "@components/authoring/MediaExperience.astro";
 import Hatnote from "@components/primitives/Hatnote.astro";
 import ProjectContinuityRail from "@components/Projects/ProjectContinuityRail.astro";
 import ProjectEvidenceBreakout from "@components/Projects/ProjectEvidenceBreakout.astro";
 import ProjectModelEvidence from "@components/Projects/ProjectModelEvidence.astro";
 import ProjectArticleBody from "@components/Projects/ProjectArticleBody.astro";
 import ProjectRailCoordinator from "@components/Projects/ProjectRailCoordinator.astro";
+import ProjectRecords from "@components/Projects/ProjectRecords.astro";
 import ContextRibbon from "@components/primitives/ContextRibbon.astro";
-import ChronoStrip from "@components/primitives/ChronoStrip.astro";
-import EntropySeismograph from "@components/primitives/EntropySeismograph.astro";
-import RevMatrix from "@components/primitives/RevMatrix.astro";
 import type { CareerNode } from "@utils/contextRibbon";
 import { resolveProjectPresentation, type ProjectPresentation } from "@utils/projectPresentation";
 
@@ -129,7 +128,13 @@ const resolved =
 		? resolveProjectPresentation(presentation, { ...d, title: d.title }, headings, galleries)
 		: undefined;
 const activeRailScenes = resolved?.scenes ?? [];
-const useContinuityRails = !!resolved;
+const inlineGalleries =
+	presentation?.inlineGalleries?.map((placement) => ({
+		galleryId: placement.galleryId,
+		beforeId: presentation.sections[placement.before],
+	})) ?? [];
+const useInlineMedia = inlineGalleries.length > 0 && !lite;
+const useContinuityRails = !!resolved && !useInlineMedia;
 const inlineModels = resolved?.models.filter((model) => model.beforeId) ?? [];
 const trailingModels = resolved?.models.filter((model) => !model.beforeId) ?? [];
 // One explicitly reviewed insertion point; additional placements need their own review.
@@ -177,9 +182,16 @@ const navNext =
 		: null;
 ---
 
-<BaseLayout type="project" title={d.title} description={d.description} image={d.heroImage}>
+<BaseLayout
+	type="project"
+	title={d.title}
+	description={d.description}
+	image={d.heroImage}
+	projectNavigation={{ prev: navPrev, next: navNext }}
+>
 	<article
 		data-project-article={entry.id}
+		data-project-media={useInlineMedia ? entry.id : undefined}
 		data-trial={resolved ? "" : undefined}
 		class="mx-auto mt-24 mb-24 w-full max-w-[1680px] px-4 sm:px-6 lg:px-8"
 	>
@@ -229,97 +241,125 @@ const navNext =
 		/>
 
 		{contextNodes.length > 0 && <ContextRibbon nodes={contextNodes} currentId={entry.id} />}
-		{chronology && <ChronoStrip chronology={chronology} />}
-		{entropy.length > 0 && <EntropySeismograph events={entropy} />}
-		{revisions && <RevMatrix revisions={revisions} />}
 
 		<ProjectRailCoordinator enabled={useContinuityRails} anchors={resolved?.anchors}>
-			<div class="lg:grid lg:grid-cols-[260px_minmax(0,1fr)_300px] lg:gap-8 xl:gap-12">
-				{/* LEFT — forensic HUD */}
-				{
-					useContinuityRails ? (
-						<ProjectContinuityRail
-							side="left"
-							mediaCountLabel={
-								[
-									"sundance",
-									"sc48",
-									"d-control",
-									"d-command",
-									"room-director",
-									"wall-plates",
-									"webtv-galaxy",
-									"webtv-cortez",
-									"webtv-elmer",
-									"backsplash",
-									"320-slot-optical-carousel",
-									"kplayer-6000",
-									"kserver-1500",
-									"kserver-5000",
-									"m700",
-									"dv700",
-									"morpheus",
-									"extension-switches",
-									"dispensers",
-									"makeline",
-									"portion-cup",
-									"xbox",
-									"fissler-bbq",
-									"kplayer-300",
-									"motorola-mp3",
-									"avegant-glyph",
-									"cinema-one",
-								].includes(d.slug)
-									? "images"
-									: undefined
-							}
-							projectTitle={d.title}
-							scenes={activeRailScenes}
-							headings={headings}
-							scars={scars}
-							metrics={d.forensic_metrics || {}}
-							bom={bom}
-							facts={facts}
-							galleries={galleries}
-							references={references}
-							audioUrl={d.audio_url}
-						/>
-					) : (
-						<HudRail>
-							<Collapse title="Key Facts" open={true}>
-								<Infobox facts={facts} />
-							</Collapse>
-							<HudMetrics metrics={d.forensic_metrics || {}} open={!lite} />
-							<ScarTimeline scars={scars} open={!lite} />
-							{bom.length > 0 && (
-								<Collapse title="Bill of Materials" count={bom.length} open={false}>
-									<ul class="space-y-1.5">
-										{bom.map((b: any) => (
-											<li class="flex items-baseline justify-between gap-3 text-sm">
-												<span class="text-muted-foreground">{b.label}</span>
-												{b.value && (
-													<span class="text-foreground font-mono text-xs">{b.value}</span>
-												)}
-											</li>
-										))}
-									</ul>
+			<div
+				class:list={[
+					"project-body lg:grid lg:grid-cols-[260px_minmax(0,1fr)_300px] lg:gap-8 xl:gap-12",
+					{ "project-body--inline": useInlineMedia },
+				]}
+			>
+				<div class:list={["project-sidebar", { "project-sidebar--inline": useInlineMedia }]}>
+					{
+						useInlineMedia && (
+							<div class="project-contents">
+								<>
+									<Toc headings={headings} label="In this account" />
+									<a href="#cast-credits">Cast &amp; credits</a>
+									<button type="button" data-browse-media>
+										Browse all {images.length} photographs ↗
+									</button>
+								</>
+							</div>
+						)
+					}
+					<ProjectRecords chronology={chronology} entropy={entropy} revisions={revisions} />
+					{/* LEFT — forensic HUD */}
+					{
+						useInlineMedia ? null : useContinuityRails ? (
+							<ProjectContinuityRail
+								side="left"
+								mediaCountLabel={
+									[
+										"sundance",
+										"sc48",
+										"d-control",
+										"d-command",
+										"room-director",
+										"wall-plates",
+										"webtv-galaxy",
+										"webtv-cortez",
+										"webtv-elmer",
+										"backsplash",
+										"320-slot-optical-carousel",
+										"kplayer-6000",
+										"kserver-1500",
+										"kserver-5000",
+										"m700",
+										"dv700",
+										"morpheus",
+										"extension-switches",
+										"dispensers",
+										"makeline",
+										"portion-cup",
+										"xbox",
+										"fissler-bbq",
+										"kplayer-300",
+										"motorola-mp3",
+										"avegant-glyph",
+										"cinema-one",
+									].includes(d.slug)
+										? "images"
+										: undefined
+								}
+								projectTitle={d.title}
+								scenes={activeRailScenes}
+								headings={headings}
+								scars={scars}
+								metrics={d.forensic_metrics || {}}
+								bom={bom}
+								facts={facts}
+								galleries={galleries}
+								references={references}
+								audioUrl={d.audio_url}
+							/>
+						) : (
+							<HudRail>
+								<Collapse title="Key Facts" open={true}>
+									<Infobox facts={facts} />
 								</Collapse>
-							)}
-						</HudRail>
-					)
-				}
-
+								<HudMetrics metrics={d.forensic_metrics || {}} open={!lite} />
+								<ScarTimeline scars={scars} open={!lite} />
+								{bom.length > 0 && (
+									<Collapse title="Bill of Materials" count={bom.length} open={false}>
+										<ul class="space-y-1.5">
+											{bom.map((b: any) => (
+												<li class="flex items-baseline justify-between gap-3 text-sm">
+													<span class="text-muted-foreground">{b.label}</span>
+													{b.value && (
+														<span class="text-foreground font-mono text-xs">{b.value}</span>
+													)}
+												</li>
+											))}
+										</ul>
+									</Collapse>
+								)}
+							</HudRail>
+						)
+					}
+				</div>
 				{/* CENTER — the article */}
 				<main class="min-w-0">
 					{d.hatnote && <Hatnote>{d.hatnote}</Hatnote>}
 					{d.forensic_summary && <ForensicSummary summary={d.forensic_summary} />}
-					<div class="markdown-content max-w-3xl">
-						{inlineModels.length ? (
-							<ProjectArticleBody beforeId={inlineModels[0].beforeId!}>
+					<div class:list={useInlineMedia ? "inline-composition" : "markdown-content max-w-3xl"}>
+						{
+							useInlineMedia ? (
+								<ProjectInlineArticle
+									galleries={resolved?.galleries ?? galleries}
+									placements={inlineGalleries}
+								>
+									<Content />
+								</ProjectInlineArticle>
+							) : inlineModels.length ? (
+								<ProjectArticleBody beforeId={inlineModels[0].beforeId!}>
+									<Content />
+									<ProjectModelEvidence slot="model" models={inlineModels} />
+								</ProjectArticleBody>
+							) : (
 								<Content />
-								<ProjectModelEvidence slot="model" models={inlineModels} />
-							</ProjectArticleBody>
-						) : <Content />}
+							)
+						}
 					</div>
 
 					{
@@ -338,7 +378,7 @@ const navNext =
 						)
 					}
 					{
-						!lite && !useContinuityRails && galleries.length > 0 && (
+						!lite && !useInlineMedia && !useContinuityRails && galleries.length > 0 && (
 							<section class="mt-16">
 								<h2 class="h2 mb-6">Visual Evidence</h2>
 								<div class="space-y-10">
@@ -357,7 +397,9 @@ const navNext =
 					{
 						d.cast && d.cast.length > 0 && (
 							<section class="mt-16">
-								<h2 class="h2 mb-6">Cast &amp; Credits</h2>
+								<h2 id="cast-credits" class="h2 mb-6">
+									Cast &amp; Credits
+								</h2>
 								<Cast cast={d.cast} />
 							</section>
 						)
@@ -366,8 +408,8 @@ const navNext =
 
 				{/* RIGHT — contents · media · references */}
 				{
-					useContinuityRails &&
-					!["kplayer-300", "motorola-mp3", "avegant-glyph", "cinema-one"].includes(d.slug) ? (
+					useInlineMedia ? null : useContinuityRails &&
+					  !["kplayer-300", "motorola-mp3", "avegant-glyph", "cinema-one"].includes(d.slug) ? (
 						<ProjectContinuityRail
 							side="right"
 							projectTitle={d.title}
@@ -450,19 +492,66 @@ const navNext =
 			)
 		}
 		{trailingModels.length > 0 && <ProjectModelEvidence models={trailingModels} />}
-		<p
-			class="border-border text-muted-foreground mt-12 border-t pt-6 font-mono text-xs leading-relaxed"
-		>
-			This page is rendered from the canonical record for this project. The source and build system
-			are documented in <a class="text-primary hover:underline" href="/colophon/en-os/"
-				>the EN-OS colophon</a
-			>.
-		</p>
-		<Navbox prev={navPrev} next={navNext} />
 	</article>
+	{useInlineMedia && <MediaExperience projectLabel={d.title} />}
 </BaseLayout>
 
 <style>
+	.project-sidebar {
+		min-width: 0;
+	}
+	.project-sidebar--inline {
+		align-self: start;
+	}
+	.project-sidebar--inline :global(.project-contents) {
+		position: static;
+		width: auto;
+		max-height: none;
+		padding: 0;
+		border: 0;
+	}
+	.project-sidebar--inline :global(.project-contents a) {
+		display: block;
+		margin-block: 0.5rem;
+		font-size: 0.85rem;
+		color: var(--muted-foreground);
+	}
+	.project-sidebar--inline :global(.project-contents a.is-current) {
+		color: var(--primary);
+	}
+	.project-sidebar--inline :global(.project-contents > button) {
+		display: block;
+		min-height: 44px;
+		padding-block: 0.5rem;
+		font-size: 0.85rem;
+		text-align: left;
+		color: var(--primary);
+		cursor: pointer;
+	}
+	[data-project-media] :global(.inline-prose) {
+		max-width: 69ch;
+		font-size: 1.05rem;
+		line-height: 1.75;
+	}
+	[data-project-media] :global(.inline-composition .media-group) {
+		width: 100%;
+	}
+	@media (min-width: 1024px) {
+		.project-body--inline {
+			grid-template-columns: 220px minmax(0, 1fr);
+		}
+		.project-sidebar--inline {
+			position: sticky;
+			top: 6rem;
+			max-height: calc(100dvh - 7rem);
+			overflow-y: auto;
+		}
+	}
+	@media (max-width: 1023px) {
+		.project-sidebar--inline {
+			margin-block: 1.5rem 2rem;
+		}
+	}
 	/* Keep these reviewed article links below the fixed header. */
 	[data-project-article="c24"] :global([id]),
 	[data-project-article="ksystem-120"] :global([id]),
