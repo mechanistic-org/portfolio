@@ -189,6 +189,7 @@ const navNext =
 	title={d.title}
 	description={d.description}
 	image={d.heroImage}
+	projectFrontmatter={{ title: d.title, description: d.description, tags: d.tags }}
 	projectNavigation={{ prev: navPrev, next: navNext }}
 >
 	<article
