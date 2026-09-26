@@ -10,7 +10,9 @@ type Group = {
 	index: number;
 };
 export function initializeAuthoringPage() {
-	const article = document.querySelector<HTMLElement>("[data-authoring-project]");
+	const article = document.querySelector<HTMLElement>(
+		"[data-authoring-project], [data-project-media]",
+	);
 	if (!article || article.dataset.initialized) return;
 	article.dataset.initialized = "true";
 	const viewer = document.querySelector<HTMLDialogElement>(".image-viewer")!;
@@ -239,30 +241,91 @@ export function initializeAuthoringPage() {
 				grid.append(button);
 			});
 		});
-	document
-		.querySelectorAll("[data-browse-media]")
-		.forEach((button) => button.addEventListener("click", () => browser.showModal()));
+	let browserOpener: HTMLElement | null = null;
+	document.querySelectorAll("[data-browse-media]").forEach((button) =>
+		button.addEventListener("click", (event) => {
+			if (
+				event instanceof MouseEvent &&
+				(event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+			)
+				return;
+			event.preventDefault();
+			browserOpener = button as HTMLElement;
+			browser.showModal();
+		}),
+	);
 	browser.querySelector("[data-close-browser]")!.addEventListener("click", () => browser.close());
+	browser.addEventListener("close", () => browserOpener?.focus({ preventScroll: true }));
 	document.querySelectorAll<HTMLAnchorElement>("a[data-note]").forEach((link) =>
 		link.addEventListener("click", () => {
 			const notes = document.querySelector<HTMLDetailsElement>("#source-notes");
 			if (notes) notes.open = true;
 		}),
 	);
-	const toc = article.querySelectorAll<HTMLAnchorElement>(".article-contents a");
-	const observer = new IntersectionObserver(
-		(entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting)
-					toc.forEach((link) =>
-						link.classList.toggle("is-current", link.hash === "#" + entry.target.id),
-					);
-			});
-		},
-		{ rootMargin: "-10% 0px -65% 0px" },
+	const toc = article.querySelectorAll<HTMLAnchorElement>(
+		'.article-contents nav a[href^="#"], .project-contents nav a[href^="#"]',
 	);
-	article.querySelectorAll("h2[id]").forEach((heading) => observer.observe(heading));
-	const positionKey = `${article.dataset.authoringProject}-authoring-scroll`;
+	const sections = [...toc]
+		.map((link) => document.getElementById(decodeURIComponent(link.hash.slice(1))))
+		.filter((section): section is HTMLElement => !!section);
+	let frame = 0;
+	const updateLocation = () => {
+		frame = 0;
+		const current =
+			sections.filter((section) => section.getBoundingClientRect().top <= 150).at(-1) ??
+			sections[0];
+		toc.forEach((link) => {
+			const selected = link.hash === `#${current?.id}`;
+			link.classList.toggle("is-current", selected);
+			if (selected) link.setAttribute("aria-current", "location");
+			else link.removeAttribute("aria-current");
+		});
+	};
+	const scheduleLocation = () => {
+		if (!frame) frame = requestAnimationFrame(updateLocation);
+	};
+	window.addEventListener("scroll", scheduleLocation, { passive: true });
+	window.addEventListener("resize", scheduleLocation);
+	window.addEventListener("hashchange", scheduleLocation);
+	const resizeObserver = new ResizeObserver(scheduleLocation);
+	resizeObserver.observe(article);
+	scheduleLocation();
+	// Native fragments may land before the progressively enhanced galleries shrink.
+	// Align once after layout/fonts settle, unless the reader has already taken over.
+	let readerMoved = false;
+	const markReaderMoved = () => {
+		readerMoved = true;
+	};
+	const readerEvents = ["wheel", "touchstart", "keydown", "pointerdown"] as const;
+	readerEvents.forEach((type) => window.addEventListener(type, markReaderMoved, { passive: true }));
+	const restoreFragment = async () => {
+		await document.fonts.ready;
+		requestAnimationFrame(() => {
+			if (!readerMoved && location.hash) {
+				const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+				if (target && !target.closest("dialog"))
+					target.scrollIntoView({ block: "start", behavior: "instant" });
+			}
+			readerEvents.forEach((type) => window.removeEventListener(type, markReaderMoved));
+		});
+	};
+	if (document.readyState === "complete") void restoreFragment();
+	else window.addEventListener("load", restoreFragment, { once: true });
+	document.addEventListener(
+		"astro:before-swap",
+		() => {
+			window.removeEventListener("scroll", scheduleLocation);
+			window.removeEventListener("resize", scheduleLocation);
+			window.removeEventListener("hashchange", scheduleLocation);
+			resizeObserver.disconnect();
+			readerMoved = true;
+			window.removeEventListener("load", restoreFragment);
+			readerEvents.forEach((type) => window.removeEventListener(type, markReaderMoved));
+			cancelAnimationFrame(frame);
+		},
+		{ once: true },
+	);
+	const positionKey = `${article.dataset.authoringProject || article.dataset.projectMedia}-authoring-scroll`;
 	window.addEventListener(
 		"pagehide",
 		() => sessionStorage.setItem(positionKey, String(window.scrollY)),

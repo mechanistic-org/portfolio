@@ -8,15 +8,20 @@
  * positioning was fighting the layout rather than serving it — it is now static
  * and carries real navigation.
  */
+import Navbox from "../primitives/Navbox.astro";
 import { Icon } from "astro-icon/components";
 import { resumeMaster } from "@config/resume_master";
 
 interface Props {
 	entropy?: any;
+	projectNavigation?: {
+		prev?: { href: string; title: string } | null;
+		next?: { href: string; title: string } | null;
+	};
 }
 
 // Accepted for call-site compatibility; the footer does not render telemetry.
-const { entropy: _entropy } = Astro.props as Props;
+const { entropy: _entropy, projectNavigation } = Astro.props as Props;
 
 const today = new Date();
 const { email, linkedin, github } = resumeMaster.header.contact;
@@ -35,6 +40,13 @@ const SECTIONS = [
 ---
 
 <footer class="border-t border-white/10 bg-black/40">
+	{
+		projectNavigation && (
+			<div class="site-container">
+				<Navbox {...projectNavigation} />
+			</div>
+		)
+	}
 	<div class="site-container py-12">
 		<div class="grid gap-10 md:grid-cols-[2fr_1fr]">
 			{/* Identity + the ask */}

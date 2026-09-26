@@ -483,7 +483,10 @@ const stagger = (index: number, count: number) => (count > 5 ? [-9, 0, 9][index 
 
 <script>
 	class RevisionMatrixElement extends HTMLElement {
+		private initialized = false;
 		connectedCallback() {
+			if (this.initialized) return;
+			this.initialized = true;
 			const targets = [...this.querySelectorAll<HTMLElement>("[data-scar]")].filter(
 				(node) => node.dataset.scar,
 			);

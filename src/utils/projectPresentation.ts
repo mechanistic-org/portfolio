@@ -32,6 +32,8 @@ export interface SceneSpec {
 	portalStudy?: boolean;
 }
 export interface ProjectPresentation {
+	/** Place existing curated galleries within the article, before a section key. */
+	inlineGalleries?: { galleryId: string; before: string }[];
 	sections: Record<string, string>;
 	media: Record<string, { galleryId: string; src: string }>;
 	/** Reuse reviewed gallery-card copy where the older record has no caption. */
