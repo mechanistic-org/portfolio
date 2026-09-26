@@ -149,6 +149,10 @@ It can carry orientation, a short fact or a pointer to a full-size inline figure
 
 ## Remaining convergence work
 
+The [September 25 opening review](2026-09-25-project-opening-review.md) records
+subsequent implementation, current verification and the remaining landing gate.
+The list and checks below describe this September 24 checkpoint.
+
 - Extend common navigation to the authored reader (career context, project footer,
   supported cast) without forcing all project records into one content checklist.
 - Refine C24's gallery-level placements into smaller figure sequences where the
