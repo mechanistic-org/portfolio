@@ -1112,3 +1112,105 @@ body:has(.media-browser[open], .image-viewer[open]) {
 		scroll-behavior: auto !important;
 	}
 }
+
+/* Reviewed authored opening. Content and media remain owned by the account. */
+.project-opening-with-media {
+	display: grid;
+	grid-template-columns: minmax(0, 1.04fr) minmax(0, 1fr);
+	grid-template-areas: "heading visual" "product visual" "context visual";
+	column-gap: clamp(2rem, 4vw, 4rem);
+	row-gap: 1.1rem;
+	align-items: start;
+	padding: 2.1rem 0 2rem;
+}
+.project-opening-with-media .opening-heading {
+	grid-area: heading;
+}
+.project-opening-with-media .masthead-meta {
+	margin-bottom: 0.85rem;
+}
+.project-opening-with-media .masthead-subtitle {
+	margin-bottom: 0;
+}
+.project-opening-with-media .opening-product {
+	grid-area: product;
+	margin: 0;
+	max-width: 57ch;
+	font-size: 1.125rem;
+	line-height: 1.6;
+	color: var(--authoring-text);
+}
+.project-opening-with-media .opening-context {
+	grid-area: context;
+	max-width: 59ch;
+	font-size: 1.0625rem;
+	line-height: 1.65;
+	color: var(--authoring-text);
+}
+.project-opening-with-media .opening-context p {
+	margin: 0 0 1rem;
+}
+.project-opening-with-media .opening-context p:last-child {
+	margin-bottom: 0;
+}
+.project-opening-with-media .opening-inherited {
+	color: var(--authoring-muted);
+}
+.project-opening-with-media .opening-visual {
+	grid-area: visual;
+	min-width: 0;
+	align-self: center;
+}
+.project-opening-with-media .media-group {
+	margin: 0;
+}
+.project-opening-with-media .stage-open img,
+.project-opening-with-media .gallery-grid img {
+	height: auto;
+	width: 100%;
+	max-height: none;
+	object-fit: contain;
+}
+.project-opening-with-media .stage-caption {
+	grid-template-columns: 1fr;
+	gap: 0.35rem;
+	padding: 0.8rem 1rem;
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+.project-opening-with-media .stage-caption > span {
+	display: none;
+}
+.project-opening-with-media .gallery-grid figcaption {
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+@media (max-width: 58rem) {
+	.project-opening-with-media {
+		grid-template-columns: 1fr;
+		grid-template-areas: "heading" "product" "context" "visual";
+		row-gap: 1rem;
+		padding: 1.4rem 0 1.5rem;
+	}
+	.project-opening-with-media .opening-visual {
+		width: 100%;
+		max-width: 42rem;
+	}
+	.project-opening-with-media .opening-product,
+	.project-opening-with-media .opening-context {
+		font-size: 1rem;
+		line-height: 1.55;
+		max-width: none;
+	}
+	.project-opening-with-media .opening-context p {
+		margin-bottom: 0.75rem;
+	}
+	.project-opening-with-media .masthead-meta {
+		margin-bottom: 0.65rem;
+		gap: 0.5rem 1rem;
+	}
+	.project-opening-with-media .masthead-subtitle {
+		font-size: 1.35rem;
+		line-height: 1.15;
+	}
+}

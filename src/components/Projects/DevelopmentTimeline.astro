@@ -3,8 +3,9 @@ import { chronologyDate, chronologyPhases, type Chronology } from "../../utils/p
 interface Props {
 	chronology?: Chronology | null;
 	detailHref?: string;
+	narrativeHref?: string;
 }
-const { chronology, detailHref = "#chronology-heading" } = Astro.props;
+const { chronology, detailHref = "#chronology-heading", narrativeHref } = Astro.props;
 const phases = chronology ? chronologyPhases(chronology) : [];
 ---
 
@@ -21,6 +22,8 @@ const phases = chronology ? chronologyPhases(chronology) : [];
 					{chronology.start.slice(0, 4)}–{chronology.end.slice(0, 4)} · {chronology.events.length}{" "}
 					recorded events ↗
 				</a>
+			) : narrativeHref ? (
+				<a href={narrativeHref}>Read development timeline ↗</a>
 			) : (
 				<span>Timeline not available.</span>
 			)
