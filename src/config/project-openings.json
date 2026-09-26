@@ -1,0 +1,15 @@
+{
+	"avegant-glyph": {
+		"title": "Glyph",
+		"subtitle": "Getting it into production",
+		"meta": ["Avegant", "2015–2016", "Mechanical engineering"],
+		"selection": {
+			"paragraphSha256": "eb2e3f1a25507a76e06f2944e36ce53044cf0acd67599ee9e5f9c3a46c951177",
+			"splitBefore": [
+				"The look and feel and primary part breakdown",
+				"I took responsibility for the whole mechanical bill of materials"
+			],
+			"mediaGroupId": "figure-1"
+		}
+	}
+}

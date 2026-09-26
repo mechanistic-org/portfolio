@@ -1,0 +1,28 @@
+---
+interface Props {
+	title: string;
+	subtitle?: string;
+	meta?: string[];
+	withMedia?: boolean;
+}
+const { title, subtitle, meta = [], withMedia = false } = Astro.props;
+---
+
+<header class:list={["article-masthead", { "project-opening-with-media": withMedia }]}>
+	<div class="opening-heading">
+		{
+			meta.length > 0 && (
+				<div class="masthead-meta">
+					{meta.map((label) => (
+						<span>{label}</span>
+					))}
+				</div>
+			)
+		}
+		<h1>{title}</h1>
+		{subtitle && <p class="masthead-subtitle">{subtitle}</p>}
+	</div>
+	<slot name="product" />
+	<slot name="context" />
+	<slot name="media" />
+</header>
