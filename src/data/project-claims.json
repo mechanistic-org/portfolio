@@ -191,16 +191,16 @@
       "href": "/projects/avegant-glyph/#shared-glyph-changes",
       "id": "glyph-changes",
       "project": "avegant-glyph",
-      "revision": 1,
+      "revision": 2,
       "status": "active",
       "variants": {
         "method": {
-          "text": "I owned Glyph's cable-kinking, chassis-abrasion and second-source work, bringing mechanical and routing changes into lifecycle and drop testing. Validation was underway in the April record.",
-          "title": "Follow the cable through the moving assembly"
+          "text": "I worked with Intretech and cable suppliers on Glyph's cable pinching and abrasion. We revised routing, clearances and wrap construction, and defined lifecycle and drop tests for the changes.",
+          "title": "Work through moving-cable failures"
         },
         "resume": {
-          "text": "I owned Glyph's cable-kinking, chassis-abrasion and second-source work, bringing mechanical and routing changes into lifecycle and drop testing. Validation was underway in the April record.",
-          "title": "Follow the cable through the moving assembly"
+          "text": "I worked with Intretech and cable suppliers on Glyph's cable pinching and abrasion. We revised routing, clearances and wrap construction, and defined lifecycle and drop tests for the changes.",
+          "title": "Work through moving-cable failures"
         }
       }
     },
@@ -235,6 +235,57 @@
         "method": {
           "text": "SC48's cooling and enclosure work continued through competing configurations. I recall choosing 4U because it worked, passing EMI certification and shipping, with Arndt and Manufacturing carrying the work forward.",
           "title": "Carry the tradeoff through release"
+        }
+      }
+    },
+    {
+      "href": "/projects/avegant-glyph/#shared-glyph-production",
+      "id": "glyph-production",
+      "project": "avegant-glyph",
+      "revision": 2,
+      "status": "active",
+      "variants": {
+        "colophon": {
+          "text": "I took responsibility for Glyph's full mechanical bill of materials through tooling validation and production ramp, working with Intretech and component suppliers. Chris Westra, Misha Young and I worked through part fit, tooling corrections, finish requirements and readiness for the next build.",
+          "title": "Carry the mechanical BOM into production"
+        },
+        "resume": {
+          "text": "I took responsibility for Glyph's full mechanical bill of materials through tooling validation and production ramp, working with Intretech and component suppliers.",
+          "title": "Carry the mechanical BOM into production"
+        }
+      }
+    },
+    {
+      "href": "/projects/avegant-glyph/#shared-glyph-headstrap",
+      "id": "glyph-headstrap",
+      "project": "avegant-glyph",
+      "revision": 2,
+      "status": "active",
+      "variants": {
+        "colophon": {
+          "text": "I proposed, tested and brought Glyph's optional headstrap into production, with Radius developing concepts and mockups. It shifted most of the load from the nosepiece to the top of the head. The earcups still had to grip firmly enough for use without the strap, so ear pressure remained.",
+          "title": "Change how the wearable carries its weight"
+        },
+        "method": {
+          "text": "I proposed, tested and brought Glyph's optional headstrap into production, with Radius developing concepts and mockups. It shifted most of the load from the nosepiece to the top of the head. The earcups still had to grip firmly enough for use without the strap, so ear pressure remained.",
+          "title": "Change how the wearable carries its weight"
+        },
+        "resume": {
+          "text": "I proposed, tested and brought Glyph's optional headstrap into production, with Radius developing concepts and mockups. It shifted most of the load from the nosepiece to the top of the head.",
+          "title": "Change how the wearable carries its weight"
+        }
+      }
+    },
+    {
+      "href": "/projects/avegant-glyph/#shared-glyph-manufacturing",
+      "id": "glyph-manufacturing",
+      "project": "avegant-glyph",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "resume": {
+          "text": "I designed assembly and inspection fixtures and coating masks, and standardized drawing notes across Avegant's manufacturing processes.",
+          "title": "Design the fixtures and define the requirements"
         }
       }
     }

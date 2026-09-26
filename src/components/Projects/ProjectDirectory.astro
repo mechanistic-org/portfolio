@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry } from "astro:content";
+import { archivePresentation } from "../../utils/archivePresentation.ts";
 
 interface Props {
 	projects: CollectionEntry<"projects">[];
@@ -52,218 +53,249 @@ const { projects, sectors, categories, tools, clients } = Astro.props;
 			<thead>
 				<tr class="border-b border-neutral-800 text-neutral-500">
 					<th class="px-4 py-3 font-medium tracking-wider uppercase"> System </th>
-					<th
-						class="sort-header cursor-pointer px-4 py-3 font-medium tracking-wider uppercase transition-colors select-none hover:text-white"
-						data-col="project"
-					>
-						<div class="flex items-center gap-2">
-							Project <span class="sort-icon text-xs">↕</span>
-						</div>
-					</th>
-					<th
-						class="sort-header cursor-pointer px-4 py-3 font-medium tracking-wider uppercase transition-colors select-none hover:text-white"
-						data-col="client"
-					>
-						<div class="flex items-center gap-2">
-							Client <span class="sort-icon text-xs">↕</span>
-						</div>
-					</th>
-					<th
-						class="sort-header cursor-pointer px-4 py-3 font-medium tracking-wider uppercase transition-colors select-none hover:text-white"
-						data-col="sector"
-					>
-						<div class="flex items-center gap-2">
-							Collection <span class="sort-icon text-xs">↕</span>
-						</div>
-					</th>
-					<th
-						class="sort-header cursor-pointer px-4 py-3 font-medium tracking-wider uppercase transition-colors select-none hover:text-white"
-						data-col="year"
-					>
-						<div class="flex items-center gap-2">
-							Year <span class="sort-icon text-xs">↕</span>
-						</div>
-					</th>
-					<th
-						class="sort-header cursor-pointer px-4 py-3 font-medium tracking-wider uppercase transition-colors select-none hover:text-white"
-						data-col="status"
-					>
-						<div class="flex items-center gap-2">
-							Status <span class="sort-icon text-xs">↕</span>
-						</div>
-					</th>
+					{
+						(
+							[
+								["project", "Project"],
+								["client", "Client"],
+								["industry", "Industry"],
+								["year", "Year"],
+								["status", "Status"],
+							] as const
+						).map(([column, label]) => (
+							<th
+								scope="col"
+								aria-sort={column === "year" ? "descending" : "none"}
+								class="px-4 py-3 font-medium tracking-wider uppercase"
+							>
+								<button
+									type="button"
+									data-col={column}
+									class="sort-header flex items-center gap-2 py-1 text-left uppercase hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4"
+								>
+									{label}{" "}
+									<span aria-hidden="true" class="sort-icon text-xs">
+										{column === "year" ? "↓" : "↕"}
+									</span>
+								</button>
+							</th>
+						))
+					}
 				</tr>
 			</thead>
 			<tbody id="projects-table-body">
 				{
-					projects.map((project) => (
-						<tr
-							class="project-row project-item group hover:bg-primary/5 cursor-pointer border-b border-l-2 border-neutral-800/50 border-transparent transition-colors"
-							data-industry={project.data.industry}
-							data-tool={JSON.stringify(project.data.tools)}
-							data-tool-icons={JSON.stringify((project.data as any).toolIcons || [])}
-							data-team-size={(project.data as any).teamSize}
-							data-status={project.data.production}
-							data-date={new Date(project.data.date as any).getTime()}
-							data-client={JSON.stringify([
-								...new Set(
-									[
-										...(project.data.client || []),
-										...(project.data.employer ? [project.data.employer] : []),
-									].filter(Boolean),
-								),
-							])}
-							data-image={project.data.heroImage}
-							data-title={project.data.title}
-							data-description={project.data.description}
-							onclick={`window.location.href='/projects/${project.id}/'`}
-						>
-							<td class="px-4 py-3">
-								<div class="h-8 w-12 overflow-hidden rounded bg-neutral-800">
-									{project.data.heroImage && (
-										<img
-											src={project.data.heroImage}
-											alt={project.data.title}
-											class="h-full w-full object-cover opacity-80 transition-opacity group-hover:opacity-100"
-											loading="lazy"
-										/>
-									)}
-								</div>
-							</td>
-							{/* Real anchor, not just the row's onclick. The row handler alone left
-							    all 111 projects unreachable by keyboard, middle-click and crawlers —
-							    the built corpus contained zero <a href> elements. */}
-							<td class="text-foreground group-hover:text-primary px-4 py-3 font-bold transition-colors">
-								<a href={`/projects/${project.id}/`} class="hover:underline">
-									{project.data.title}
-								</a>
-							</td>
-							<td class="px-4 py-3 text-neutral-400">
-								{[
+					projects.map((project) => {
+						const presentation = archivePresentation(project);
+						return (
+							<tr
+								class="project-row project-item group hover:bg-primary/5 cursor-pointer border-b border-l-2 border-neutral-800/50 border-transparent transition-colors"
+								data-industry={project.data.industry}
+								data-tool={JSON.stringify(project.data.tools)}
+								data-tool-icons={JSON.stringify((project.data as any).toolIcons || [])}
+								data-team-size={(project.data as any).teamSize}
+								data-status={project.data.production}
+								data-date={presentation.sort.year ?? ""}
+								data-project-id={project.id}
+								data-sort={JSON.stringify(presentation.sort)}
+								data-period-basis={presentation.basis}
+								data-client={JSON.stringify([
 									...new Set(
 										[
 											...(project.data.client || []),
 											...(project.data.employer ? [project.data.employer] : []),
 										].filter(Boolean),
 									),
-								].join(", ")}
-							</td>
-							<td class="px-4 py-3 text-neutral-400">{project.data.industry}</td>
-							<td class="px-4 py-3 text-neutral-500">
-								{new Date(project.data.date as any).getFullYear()}
-							</td>
-							<td class="px-4 py-3">
-								<span
-									class:list={[
-										"inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium",
-										project.data.production === "Mass Production"
-											? "border-primary-500/20 bg-primary-500/10 text-primary-500"
-											: project.data.production === "Prototyping"
-												? "border-amber-500/20 bg-amber-500/10 text-amber-500"
-												: "border-neutral-700 bg-neutral-800 text-neutral-400",
-									]}
-								>
-									{project.data.production}
-								</span>
-							</td>
-						</tr>
-					))
+								])}
+								data-image={project.data.heroImage}
+								data-title={project.data.title}
+								data-description={project.data.description}
+								onclick={`window.location.href='/projects/${project.id}/'`}
+							>
+								<td class="px-4 py-3">
+									<div class="h-8 w-12 overflow-hidden rounded bg-neutral-800">
+										{project.data.heroImage && (
+											<img
+												src={project.data.heroImage}
+												alt={project.data.title}
+												class="h-full w-full object-cover opacity-80 transition-opacity group-hover:opacity-100"
+												loading="lazy"
+											/>
+										)}
+									</div>
+								</td>
+								{/* Real anchor, not just the row's onclick. The row handler alone left
+							    all 111 projects unreachable by keyboard, middle-click and crawlers —
+							    the built corpus contained zero <a href> elements. */}
+								<td class="text-foreground group-hover:text-primary px-4 py-3 font-bold transition-colors">
+									<a href={`/projects/${project.id}/`} class="hover:underline">
+										{project.data.title}
+									</a>
+								</td>
+								<td class="px-4 py-3 text-neutral-400">
+									{[
+										...new Set(
+											[
+												...(project.data.client || []),
+												...(project.data.employer ? [project.data.employer] : []),
+											].filter(Boolean),
+										),
+									].join(", ")}
+								</td>
+								<td class="px-4 py-3 text-neutral-400">{presentation.industry}</td>
+								<td class="px-4 py-3 text-neutral-500">
+									<span title={presentation.context}>{presentation.period}</span>
+								</td>
+								<td class="px-4 py-3">
+									<span
+										class:list={[
+											"inline-flex items-center rounded-full border px-2 py-0.5 text-xs font-medium",
+											project.data.production === "production"
+												? "border-primary-500/20 bg-primary-500/10 text-primary-500"
+												: project.data.production === "prototype"
+													? "border-amber-500/20 bg-amber-500/10 text-amber-500"
+													: "border-neutral-700 bg-neutral-800 text-neutral-400",
+										]}
+									>
+										{presentation.status}
+									</span>
+								</td>
+							</tr>
+						);
+					})
 				}
 			</tbody>
 
 			<script>
-				const rows = document.querySelectorAll(".project-row");
-				const preview = document.getElementById("project-preview");
-				const previewImg = document.getElementById("preview-image") as HTMLImageElement;
-				const previewTitle = document.getElementById("preview-title");
-				const previewDescription = document.getElementById("preview-description");
-				const previewTeamSize = document.getElementById("preview-team-size");
-				const previewIcons = document.getElementById("preview-icons");
+				import {
+					compareArchive,
+					type ArchiveColumn,
+					type ArchiveDirection,
+					type ArchiveSortValues,
+				} from "../../utils/archivePresentation.ts";
+				function initDirectory() {
+					const body = document.getElementById("projects-table-body");
+					if (!body || body.dataset.initialized) return;
+					body.dataset.initialized = "true";
+					let column: ArchiveColumn = "year";
+					let direction: ArchiveDirection = "descending";
+					const buttons = document.querySelectorAll<HTMLButtonElement>(".sort-header");
+					buttons.forEach((button) =>
+						button.addEventListener("click", () => {
+							const selected = button.dataset.col as ArchiveColumn;
+							direction =
+								selected === column && direction === "ascending" ? "descending" : "ascending";
+							column = selected;
+							const rows = [...body.querySelectorAll<HTMLTableRowElement>(".project-row")];
+							const values = (row: HTMLTableRowElement) =>
+								JSON.parse(row.dataset.sort!) as ArchiveSortValues;
+							rows.sort((a, b) => compareArchive(values(a), values(b), column, direction));
+							body.append(...rows);
+							buttons.forEach((control) => {
+								const active = control === button;
+								control.closest("th")?.setAttribute("aria-sort", active ? direction : "none");
+								control.querySelector(".sort-icon")!.textContent = active
+									? direction === "ascending"
+										? "↑"
+										: "↓"
+									: "↕";
+							});
+						}),
+					);
+					const rows = document.querySelectorAll(".project-row");
+					const preview = document.getElementById("project-preview");
+					const previewImg = document.getElementById("preview-image") as HTMLImageElement;
+					const previewTitle = document.getElementById("preview-title");
+					const previewDescription = document.getElementById("preview-description");
+					const previewTeamSize = document.getElementById("preview-team-size");
+					const previewIcons = document.getElementById("preview-icons");
 
-				if (preview && previewImg && previewTitle) {
-					rows.forEach((row) => {
-						row.addEventListener("mouseenter", () => {
-							row.classList.add("spotlight-active");
-							const img = row.getAttribute("data-image");
-							const title = row.getAttribute("data-title");
-							const description = row.getAttribute("data-description");
-							const teamSize = row.getAttribute("data-team-size");
-							const toolIcons = JSON.parse(row.getAttribute("data-tool-icons") || "[]");
+					if (preview && previewImg && previewTitle) {
+						rows.forEach((row) => {
+							row.addEventListener("mouseenter", () => {
+								row.classList.add("spotlight-active");
+								const img = row.getAttribute("data-image");
+								const title = row.getAttribute("data-title");
+								const description = row.getAttribute("data-description");
+								const teamSize = row.getAttribute("data-team-size");
+								const toolIcons = JSON.parse(row.getAttribute("data-tool-icons") || "[]");
 
-							if (img) {
-								previewImg.src = img;
-								if (title) previewTitle.innerText = title;
-								// Always reset so a project without a description never
-								// shows the previous row's text in the preview window
-								if (previewDescription) previewDescription.innerText = description || "";
+								if (img) {
+									previewImg.src = img;
+									if (title) previewTitle.innerText = title;
+									// Always reset so a project without a description never
+									// shows the previous row's text in the preview window
+									if (previewDescription) previewDescription.innerText = description || "";
 
-								// Team Size
-								if (previewTeamSize) {
-									if (teamSize && teamSize !== "Unknown") {
-										previewTeamSize.innerText = `👥 ${teamSize}`;
-										previewTeamSize.style.display = "block";
-									} else {
-										previewTeamSize.style.display = "none";
+									// Team Size
+									if (previewTeamSize) {
+										if (teamSize && teamSize !== "Unknown") {
+											previewTeamSize.innerText = `👥 ${teamSize}`;
+											previewTeamSize.style.display = "block";
+										} else {
+											previewTeamSize.style.display = "none";
+										}
 									}
+
+									// Icons
+									if (previewIcons) {
+										previewIcons.innerHTML = toolIcons
+											.slice(0, 5) // Limit to 5
+											.map(
+												(icon: string) =>
+													`<img src="https://cdn.simpleicons.org/${icon}/white" class="w-5 h-5 opacity-80" onerror="this.style.display='none'" />`,
+											)
+											.join("");
+									}
+
+									preview.classList.remove("opacity-0");
+									preview.classList.add("opacity-100");
 								}
+							});
 
-								// Icons
-								if (previewIcons) {
-									previewIcons.innerHTML = toolIcons
-										.slice(0, 5) // Limit to 5
-										.map(
-											(icon: string) =>
-												`<img src="https://cdn.simpleicons.org/${icon}/white" class="w-5 h-5 opacity-80" onerror="this.style.display='none'" />`,
-										)
-										.join("");
-								}
+							row.addEventListener("mousemove", (e) => {
+								const event = e as MouseEvent;
+								const rect = (row as HTMLElement).getBoundingClientRect();
+								const x = event.clientX - rect.left;
+								const y = event.clientY - rect.top;
 
-								preview.classList.remove("opacity-0");
-								preview.classList.add("opacity-100");
-							}
-						});
+								// Update CSS variables for the spotlight
+								(row as HTMLElement).style.setProperty("--x", `${x}px`);
+								(row as HTMLElement).style.setProperty("--y", `${y}px`);
 
-						row.addEventListener("mousemove", (e) => {
-							const event = e as MouseEvent;
-							const rect = (row as HTMLElement).getBoundingClientRect();
-							const x = event.clientX - rect.left;
-							const y = event.clientY - rect.top;
+								// Position preview relative to viewport
+								const clientX = event.clientX;
+								const clientY = event.clientY;
 
-							// Update CSS variables for the spotlight
-							(row as HTMLElement).style.setProperty("--x", `${x}px`);
-							(row as HTMLElement).style.setProperty("--y", `${y}px`);
+								// Offset to avoid cursor
+								preview.style.left = `${clientX + 20}px`;
+								preview.style.top = `${clientY + 20}px`;
+							});
 
-							// Position preview relative to viewport
-							const clientX = event.clientX;
-							const clientY = event.clientY;
-
-							// Offset to avoid cursor
-							preview.style.left = `${clientX + 20}px`;
-							preview.style.top = `${clientY + 20}px`;
-						});
-
-						row.addEventListener("mouseleave", () => {
-							row.classList.remove("spotlight-active");
-							preview.classList.remove("opacity-100");
-							preview.classList.add("opacity-0");
-							// Reset spotlight
-							(row as HTMLElement).style.removeProperty("--x");
-							(row as HTMLElement).style.removeProperty("--y");
-						});
-					});
-
-					// Safety cleanup: Remove spotlight from all rows when mouse leaves the table body
-					const tableBody = document.getElementById("projects-table-body");
-					if (tableBody) {
-						tableBody.addEventListener("mouseleave", () => {
-							rows.forEach((row) => {
+							row.addEventListener("mouseleave", () => {
 								row.classList.remove("spotlight-active");
+								preview.classList.remove("opacity-100");
+								preview.classList.add("opacity-0");
+								// Reset spotlight
 								(row as HTMLElement).style.removeProperty("--x");
 								(row as HTMLElement).style.removeProperty("--y");
 							});
 						});
+
+						// Safety cleanup: Remove spotlight from all rows when mouse leaves the table body
+						const tableBody = document.getElementById("projects-table-body");
+						if (tableBody) {
+							tableBody.addEventListener("mouseleave", () => {
+								rows.forEach((row) => {
+									row.classList.remove("spotlight-active");
+									(row as HTMLElement).style.removeProperty("--x");
+									(row as HTMLElement).style.removeProperty("--y");
+								});
+							});
+						}
 					}
 				}
+				document.addEventListener("astro:page-load", initDirectory);
 			</script>
 
 			<style>

@@ -28,7 +28,7 @@ export function resumeExperience(authority = resumeMaster) {
 		const claims = entry.id === "digidesign-2003" || entry.id === "avegant-2015";
 		const bullets = claims ? [0, 1, 2].map((index) => claimFor(`resume:${entry.id}:${index}`).text) : entry.bullets;
 		const blurb = entry.id === "avegant-2015"
-			? "Mechanical development of Glyph's headband, spring and liner interfaces, moving cable routes, and supplier-built hardware."
+			? "Mechanical engineering for the first-generation Glyph personal theater headset."
 			: entry.blurb;
 		return { ...entry, ...display, blurb, bullets, dates: formatPeriod(display.period) };
 	});
