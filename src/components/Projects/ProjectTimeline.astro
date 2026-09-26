@@ -39,7 +39,9 @@ const views = ["Visualization", "Reference"];
 				visualPhases.map((phase) => (
 					<a href={`#project-phase-${phase.id}`} data-timeline-phase={phase.id}>
 						{phase.label}
-						<small>{phase.events.length} events</small>
+						<small>
+							{phase.events.length} {phase.events.length === 1 ? "event" : "events"}
+						</small>
 					</a>
 				))
 			}

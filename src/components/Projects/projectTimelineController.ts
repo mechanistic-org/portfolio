@@ -104,6 +104,17 @@ export class ProjectTimelineElement extends HTMLElement {
 		const followHash = () => {
 			const target = fragmentTarget(location.hash);
 			if (target && reference.contains(target)) openReference(undefined, target);
+			else if (dialog.open) {
+				// History can leave the reference without clicking an article link.
+				// Restore the article immediately; keep the selected event for Forward.
+				returnFocus = false;
+				dialog.close();
+				releaseScroll();
+				this.dataset.view = "visualization";
+				const destination = target ?? this.closest<HTMLElement>("article") ?? this;
+				destination.tabIndex = -1;
+				destination.focus({ preventScroll: true });
+			}
 		};
 		dialog.append(reference);
 		this.querySelectorAll<HTMLElement>("[data-timeline-controls]").forEach((node) => {
@@ -187,6 +198,8 @@ export class ProjectTimelineElement extends HTMLElement {
 		dialog.addEventListener(
 			"close",
 			() => {
+				// A queued close from Back must not unlock a reference reopened by Forward.
+				if (dialog.open) return;
 				this.dataset.view = "visualization";
 				releaseScroll();
 				if (returnFocus && opener.isConnected) opener.focus({ preventScroll: true });
