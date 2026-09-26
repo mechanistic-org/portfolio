@@ -90,9 +90,11 @@ Exact r22 actual-route inheritance remains #323's post-merge generation/build
 check. The fixture is not a claim that #323 has inherited or accepted this source.
 
 Screenshots, under `D:/GitHub/portfolio-workspace/project-presentation-audit/`:
-`cinema-desktop.png`, `cinema-phone-opening.png`, `cinema-phone-phases.png`,
-`c24-desktop.png`, `c24-record-dialog.png`, `c24-nojs-record.png`,
-`glyph-desktop.png`, `glyph-phone.png`.
+`cinema-desktop.jpg`, `cinema-phone-opening.jpg`, `cinema-phone-phases.jpg`,
+`c24-desktop.jpg`, `c24-record-dialog.jpg`, `c24-nojs-record.jpg`,
+`glyph-desktop.jpg`, `glyph-phone.jpg`. The browser returns JPEG bytes; the
+extensions reflect that format. The settled Cinema desktop and C24 dialog
+captures were reopened from disk for inspection after saving.
 
 ## Review and remaining boundaries
 
