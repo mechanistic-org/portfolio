@@ -1,0 +1,171 @@
+---
+import { chronologyDate, type Chronology } from "../../utils/projectChronology";
+import { timelineEventAnchor, timelineOverview } from "../../utils/projectTimeline.mjs";
+import "../../styles/project-timeline.css";
+
+interface Props {
+	chronology: Chronology;
+	referenceHtml?: string | null;
+}
+const { chronology, referenceHtml = null } = Astro.props;
+const phases = timelineOverview(chronology);
+const visualPhases = phases.filter((phase) => phase.events.length);
+const byId = new Map(chronology.events.map((event) => [event.id, event]));
+const views = ["Visualization", "Reference"];
+---
+
+<project-timeline id="project-timeline" aria-label="Project timeline">
+	<header class="timeline-header">
+		<div><span class="timeline-kicker">Project timeline</span><h2>{chronology.title}</h2></div>
+		<div
+			class="timeline-view-controls"
+			role="group"
+			aria-label="Timeline view"
+			data-timeline-controls
+			hidden
+		>
+			{
+				views.map((view, index) => (
+					<button type="button" data-timeline-view={view.toLowerCase()} aria-pressed={index === 0}>
+						{view}
+					</button>
+				))
+			}
+		</div>
+	</header>
+	<div class="timeline-overview" data-timeline-visualization>
+		<nav class="timeline-phases" aria-label="Development phases">
+			{
+				visualPhases.map((phase) => (
+					<a href={`#project-phase-${phase.id}`} data-timeline-phase={phase.id}>
+						{phase.label}
+						<small>
+							{phase.events.length} {phase.events.length === 1 ? "event" : "events"}
+						</small>
+					</a>
+				))
+			}
+		</nav>
+		<div class="timeline-explorer">
+			<div class="timeline-phase-events">
+				{
+					visualPhases.map((phase) => (
+						<section
+							id={`project-phase-${phase.id}`}
+							data-timeline-phase-panel={phase.id}
+							aria-label={`${phase.label} events`}
+						>
+							<h3>{phase.label}</h3>
+							<ol>
+								{phase.events.map((event) => (
+									<li>
+										<a
+											href={`#${timelineEventAnchor(event.id)}`}
+											data-timeline-event={event.id}
+											data-event-phase={phase.id}
+										>
+											<time title={event.date_basis}>{chronologyDate(event)}</time>
+											<strong>{event.title}</strong>
+											<span aria-hidden="true">↗</span>
+										</a>
+									</li>
+								))}
+							</ol>
+						</section>
+					))
+				}
+				{!visualPhases.length && <p>The complete dated record is available in Reference.</p>}
+			</div>
+			<aside class="timeline-selected" aria-label="Selected event" data-timeline-selection>
+				<p class="timeline-selection-hint">
+					Select an event to read its context, or open the full reference.
+				</p>
+				<div data-timeline-selected-copy hidden></div>
+				<button type="button" data-timeline-view="reference" data-timeline-controls hidden
+					>Read in Reference ↗</button
+				>
+			</aside>
+		</div>
+	</div>
+	<section class="timeline-reference" data-timeline-reference>
+		{
+			referenceHtml ? (
+				<div class="timeline-authored-reference" set:html={referenceHtml} />
+			) : (
+				<>
+					<h2 id="chronology-heading">{chronology.title}</h2>
+					{chronology.clusters.map((cluster) => (
+						<section class="timeline-cluster" data-chronology-cluster={cluster.id}>
+							<h3>{cluster.label}</h3>
+							<p>{cluster.summary}</p>
+							<p>
+								{cluster.event_ids.length} checkpoints
+								{cluster.verified_identifier_count
+									? ` · ${cluster.verified_identifier_count} identifiers`
+									: ""}
+							</p>
+							<ul>
+								{cluster.event_ids.map((id) => {
+									const event = byId.get(id)!;
+									return (
+										<li>
+											<a href={`#${timelineEventAnchor(id)}`}>
+												{chronologyDate(event)} · {event.title}
+											</a>
+										</li>
+									);
+								})}
+							</ul>
+						</section>
+					))}
+					<ol class="timeline-reference-events">
+						{chronology.events.map((event) => (
+							<li
+								id={timelineEventAnchor(event.id)}
+								data-timeline-reference-event={event.id}
+								tabindex="0"
+							>
+								<time title={event.date_basis}>{chronologyDate(event)}</time>
+								<h3>{event.title}</h3>
+								<p>{event.summary}</p>
+								{event.verification_note && (
+									<p class="timeline-verification-note">{event.verification_note}</p>
+								)}
+								{event.anchor && (
+									<a href={`#${event.anchor}`}>
+										{event.link_label || "Read the project section"} ↓
+									</a>
+								)}
+							</li>
+						))}
+					</ol>
+				</>
+			)
+		}
+	</section>
+	<dialog aria-label={`${chronology.title}: Reference`}>
+		<header class="timeline-header">
+			<div><span class="timeline-kicker">Project timeline</span><h2>{chronology.title}</h2></div>
+			<div class="timeline-view-controls" role="group" aria-label="Timeline view">
+				{
+					views.map((view, index) => (
+						<button
+							type="button"
+							data-timeline-view={view.toLowerCase()}
+							aria-pressed={index === 1}
+						>
+							{view}
+						</button>
+					))
+				}
+			</div>
+			<button type="button" data-timeline-close>Close ×</button>
+		</header>
+	</dialog>
+</project-timeline>
+
+<script>
+	import { ProjectTimelineElement } from "./projectTimelineController";
+	if (!customElements.get("project-timeline"))
+		customElements.define("project-timeline", ProjectTimelineElement);
+</script>

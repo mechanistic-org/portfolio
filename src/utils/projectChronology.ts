@@ -4,6 +4,7 @@ export interface ChronologyEvent {
 	end_date?: string;
 	date_label?: string;
 	date_basis?: string;
+	verification_note?: string;
 	title: string;
 	summary: string;
 	phase: string;

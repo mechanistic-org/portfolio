@@ -1,23 +1,26 @@
 ---
 import ProjectRecord from "./ProjectRecord.astro";
-import ChronoStrip from "../primitives/ChronoStrip.astro";
 import EntropySeismograph from "../primitives/EntropySeismograph.astro";
 import RevMatrix from "../primitives/RevMatrix.astro";
-const { chronology, entropy = [], revisions } = Astro.props;
+const {
+	chronology,
+	timelineHref = chronology ? "#chronology-heading" : null,
+	entropy = [],
+	revisions,
+} = Astro.props;
 ---
 
 {
-	(chronology || entropy.length || revisions) && (
+	timelineHref && (
+		<a class="timeline-shortcut" href={timelineHref}>
+			Full timeline ↗
+		</a>
+	)
+}
+{
+	(entropy.length || revisions) && (
 		<section class="project-records" aria-label="Project records">
 			<p>Project records</p>
-			{chronology && (
-				<ProjectRecord
-					title="Delivery chronology"
-					meta={`${chronology.events.length} dated events`}
-				>
-					<ChronoStrip chronology={chronology} />
-				</ProjectRecord>
-			)}
 			{entropy.length > 0 && (
 				<ProjectRecord title="Project entropy" meta={`${entropy.length} scored events`}>
 					<EntropySeismograph events={entropy} />
@@ -32,6 +35,13 @@ const { chronology, entropy = [], revisions } = Astro.props;
 	)
 }
 <style>
+	.timeline-shortcut {
+		display: block;
+		padding-block: 0.65rem;
+		min-height: 44px;
+		color: var(--primary);
+		font-size: 0.85rem;
+	}
 	.project-records {
 		margin-block: 1.5rem;
 	}

@@ -1,0 +1,272 @@
+project-timeline {
+	display: block;
+	margin: 1.75rem 0 2.5rem;
+	padding: clamp(0.8rem, 2vw, 1.5rem);
+	border: 1px solid var(--border);
+	background: var(--card);
+	color: var(--foreground);
+	scroll-margin-top: 8rem;
+}
+project-timeline [hidden] {
+	display: none !important;
+}
+project-timeline .timeline-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	margin-bottom: 1.25rem;
+}
+project-timeline .timeline-kicker {
+	font: 0.68rem var(--font-mono);
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--muted-foreground);
+}
+project-timeline .timeline-header h2 {
+	font: 500 clamp(1.3rem, 2vw, 1.75rem) var(--font-header);
+	margin: 0.2rem 0 0;
+}
+project-timeline button {
+	min-height: 44px;
+	padding: 0.55rem 0.8rem;
+	border: 1px solid var(--border);
+	background: var(--card);
+	color: var(--foreground);
+	font: 0.85rem var(--font-sans);
+	cursor: pointer;
+}
+project-timeline button:hover {
+	border-color: var(--foreground);
+}
+project-timeline :is(button, a, [tabindex]):focus-visible {
+	outline: 2px solid var(--primary);
+	outline-offset: 3px;
+}
+project-timeline .timeline-view-controls {
+	display: flex;
+	flex-shrink: 0;
+}
+project-timeline .timeline-view-controls [aria-pressed="true"] {
+	background: var(--foreground);
+	color: var(--background);
+}
+project-timeline .timeline-phases {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	margin-bottom: 1rem;
+}
+project-timeline .timeline-phases a {
+	flex: 1 1 7rem;
+	min-height: 44px;
+	padding: 0.6rem 0.7rem;
+	border-top: 2px solid var(--border);
+	text-decoration: none;
+	font: 500 0.95rem var(--font-sans);
+	color: var(--foreground);
+}
+project-timeline .timeline-phases small {
+	display: block;
+	margin-top: 0.2rem;
+	font: 0.68rem var(--font-mono);
+	color: var(--muted-foreground);
+}
+project-timeline .timeline-phases [aria-current="true"] {
+	border-color: var(--primary);
+	background: color-mix(in srgb, var(--primary) 9%, transparent);
+}
+project-timeline .timeline-explorer {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	gap: 1.25rem;
+}
+project-timeline .timeline-phase-events {
+	min-width: 0;
+	border: 1px solid var(--border);
+}
+project-timeline[data-ready] .timeline-phase-events {
+	max-height: 23rem;
+	overflow-y: auto;
+}
+project-timeline .timeline-phase-events h3 {
+	font: 0.75rem var(--font-mono);
+	margin: 0;
+	padding: 0.65rem 0.8rem;
+	border-bottom: 1px solid var(--border);
+	color: var(--muted-foreground);
+}
+project-timeline .timeline-phase-events ol {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+project-timeline .timeline-phase-events li + li {
+	border-top: 1px solid var(--border);
+}
+project-timeline .timeline-phase-events a {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	gap: 0.15rem 0.6rem;
+	min-height: 44px;
+	padding: 0.7rem 0.8rem;
+	text-decoration: none;
+	color: var(--foreground);
+}
+project-timeline .timeline-phase-events time {
+	grid-column: 1;
+	font: 0.68rem var(--font-mono);
+	color: var(--muted-foreground);
+}
+project-timeline .timeline-phase-events strong {
+	grid-column: 1;
+	font: 500 1rem/1.25 var(--font-sans);
+}
+project-timeline .timeline-phase-events a > span {
+	grid-column: 2;
+	grid-row: 1 / 3;
+	align-self: center;
+	color: var(--muted-foreground);
+}
+project-timeline .timeline-phase-events a[aria-current="true"] {
+	box-shadow: inset 3px 0 var(--primary);
+	background: color-mix(in srgb, var(--primary) 9%, transparent);
+}
+project-timeline .timeline-selected {
+	min-width: 0;
+	padding: 0.5rem 0;
+}
+project-timeline .timeline-selected p {
+	margin: 0.6rem 0;
+	font: 1rem/1.65 var(--font-sans);
+}
+project-timeline .timeline-selection-hint {
+	color: var(--muted-foreground);
+}
+project-timeline .timeline-selected time {
+	font: 0.75rem var(--font-mono);
+	color: var(--muted-foreground);
+}
+project-timeline .timeline-selected h3 {
+	margin: 0.4rem 0;
+	font: 500 1.3rem var(--font-header);
+}
+project-timeline .timeline-selected button {
+	margin-top: 0.9rem;
+}
+project-timeline :is(.timeline-selected, .timeline-reference) a {
+	color: var(--primary);
+	text-decoration: underline;
+	text-underline-offset: 0.18em;
+}
+project-timeline .timeline-reference {
+	max-width: 78ch;
+	margin: 2rem auto 0;
+}
+project-timeline .timeline-reference h2 {
+	margin: 1rem 0;
+	font: 500 1.75rem var(--font-header);
+	scroll-margin-top: 9rem;
+}
+project-timeline .timeline-reference h3 {
+	margin: 0.35rem 0;
+	font: 500 1.35rem var(--font-header);
+}
+project-timeline .timeline-reference p {
+	font: 1.05rem/1.75 var(--font-sans);
+	margin: 0.6rem 0;
+}
+project-timeline .timeline-reference time {
+	font: 0.75rem var(--font-mono);
+	color: var(--muted-foreground);
+}
+project-timeline .timeline-reference-events,
+project-timeline .timeline-authored-reference > ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+project-timeline [data-timeline-reference-event] {
+	padding: 1rem;
+	border-bottom: 1px solid var(--border);
+	scroll-margin-top: 8rem;
+}
+project-timeline [data-timeline-reference-event][data-selected] {
+	box-shadow: inset 3px 0 var(--primary);
+	background: color-mix(in srgb, var(--primary) 7%, transparent);
+}
+project-timeline .timeline-verification-note {
+	color: var(--muted-foreground);
+}
+project-timeline .timeline-cluster {
+	margin: 1rem 0 1.5rem;
+	padding: 1rem;
+	border: 1px solid var(--border);
+}
+project-timeline .timeline-cluster ul {
+	padding-left: 1.2rem;
+}
+project-timeline .timeline-cluster li {
+	margin: 0.5rem 0;
+}
+project-timeline dialog {
+	margin: auto;
+	width: min(96vw, 100rem);
+	max-width: calc(100vw - 1rem);
+	max-height: 88dvh;
+	padding: clamp(0.75rem, 1.5vw, 1.25rem);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	background: var(--background);
+	color: var(--foreground);
+	overflow: auto;
+	overscroll-behavior: contain;
+}
+project-timeline dialog::backdrop {
+	background: rgb(0 0 0 / 0.75);
+}
+project-timeline dialog > .timeline-header {
+	position: sticky;
+	top: -1.25rem;
+	z-index: 1;
+	background: var(--background);
+	padding: 0.5rem 0 1rem;
+}
+project-timeline dialog .timeline-reference {
+	margin-top: 0;
+}
+@media (max-width: 700px) {
+	project-timeline .timeline-header {
+		flex-wrap: wrap;
+	}
+	project-timeline .timeline-explorer {
+		grid-template-columns: 1fr;
+		gap: 0.5rem;
+	}
+	project-timeline[data-ready] .timeline-phase-events {
+		max-height: 17rem;
+	}
+	project-timeline .timeline-phases a {
+		flex-basis: 5rem;
+	}
+	project-timeline dialog > .timeline-header {
+		top: -0.75rem;
+	}
+	project-timeline dialog .timeline-view-controls {
+		order: 3;
+		width: 100%;
+	}
+	project-timeline dialog .timeline-view-controls button {
+		flex: 1;
+	}
+	project-timeline dialog > .timeline-header > div:first-child {
+		max-width: calc(100% - 6rem);
+	}
+	project-timeline [data-timeline-reference-event] {
+		padding: 0.8rem 0.5rem;
+		scroll-margin-top: 11rem;
+	}
+	project-timeline .timeline-reference h2 {
+		scroll-margin-top: 11rem;
+	}
+}

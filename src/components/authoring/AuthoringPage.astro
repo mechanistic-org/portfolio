@@ -5,6 +5,8 @@ import MediaExperience from "./MediaExperience.astro";
 import ProjectOpening from "../Projects/ProjectOpening.astro";
 import projectOpenings from "../../config/project-openings.json";
 import { selectProjectOpening } from "../../utils/projectOpening.mjs";
+import { selectAuthoredTimeline } from "../../utils/projectTimeline.mjs";
+import ProjectTimeline from "../Projects/ProjectTimeline.astro";
 import "@/styles/authoring-page.css";
 import "@/styles/project-reading.css";
 import DevelopmentTimeline from "../Projects/DevelopmentTimeline.astro";
@@ -20,11 +22,14 @@ const {
 } = Astro.props;
 const hasNarrativeTimeline = page.headings.some((h: any) => h.slug === "development-timeline");
 const hasAuthoredOverview = page.headings.some((h: any) => h.slug === "development-at-a-glance");
-const chapters = page.headings.filter((h: any) => h.depth === 2);
 const isPublic = page.public === true;
 const isGlyph = page.project === "avegant-glyph";
 const presentation = projectOpenings[page.project as keyof typeof projectOpenings];
 const { opening, pieces } = selectProjectOpening(page.pieces, presentation?.selection);
+const timeline = selectAuthoredTimeline(pieces, chronology);
+const chapters = page.headings.filter(
+	(h: any) => h.depth === 2 && !(timeline.referenceHtml && h.slug === "development-timeline"),
+);
 const projectLabel = isGlyph ? "Avegant Glyph" : page.title;
 const firstImageGroup = page.pieces.find(
 	(piece: any) => piece.group?.items[0]?.kind === "image",
@@ -120,7 +125,8 @@ const firstImageGroup = page.pieces.find(
 					)
 				}
 				<ProjectRecords
-					chronology={hasNarrativeTimeline ? null : chronology}
+					chronology={chronology}
+					timelineHref={timeline.referenceId ? `#${timeline.referenceId}` : null}
 					revisions={revisions}
 				/>
 				{
@@ -133,8 +139,10 @@ const firstImageGroup = page.pieces.find(
 			</aside>
 			<div class="article-composition">
 				{
-					pieces.map((piece: any) =>
-						piece.group ? (
+					timeline.pieces.map((piece: any) =>
+						piece.timeline ? (
+							<ProjectTimeline chronology={chronology} referenceHtml={timeline.referenceHtml} />
+						) : piece.group ? (
 							<MediaGroup group={piece.group} />
 						) : (
 							<div class="article-prose" set:html={piece.html} />
