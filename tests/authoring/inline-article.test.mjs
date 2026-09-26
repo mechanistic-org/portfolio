@@ -1,6 +1,13 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { splitInlineArticle } from "../../src/utils/inlineArticle.ts";
+import { normalizeProjectBody, splitInlineArticle } from "../../src/utils/inlineArticle.ts";
+
+test("the generated body title keeps its text and deep link without a second identity heading", () => {
+	assert.equal(
+		normalizeProjectBody('<h1 id="curtis">C|24 <em>(Curtis)</em></h1><h2 id="one">One</h2>'),
+		'<p id="curtis" data-project-body-title>C|24 <em>(Curtis)</em></p><h2 id="one">One</h2>',
+	);
+});
 
 test("inline media preserves the exact article while ordering placements by heading", () => {
 	const html =

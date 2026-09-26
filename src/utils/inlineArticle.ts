@@ -16,3 +16,8 @@ export function splitInlineArticle<T extends { beforeId: string }>(html: string,
 	});
 	return { pieces, tail: html.slice(cursor) };
 }
+
+/** The page masthead owns H1; keep a generated body title as a readable alias. */
+export function normalizeProjectBody(html: string) {
+	return html.replace(/<h1\b([^>]*)>/g, "<p$1 data-project-body-title>").replace(/<\/h1>/g, "</p>");
+}

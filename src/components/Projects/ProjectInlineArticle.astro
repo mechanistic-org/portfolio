@@ -1,6 +1,6 @@
 ---
 import MediaGroup from "../authoring/MediaGroup.astro";
-import { splitInlineArticle } from "../../utils/inlineArticle";
+import { splitInlineArticle, normalizeProjectBody } from "../../utils/inlineArticle";
 import type { Gallery } from "../../utils/projectPresentation";
 interface Props {
 	galleries: Gallery[];
@@ -33,7 +33,10 @@ const inserts = placements.map((placement) => {
 		},
 	};
 });
-const { pieces, tail } = splitInlineArticle(await Astro.slots.render("default"), inserts);
+const { pieces, tail } = splitInlineArticle(
+	normalizeProjectBody(await Astro.slots.render("default")),
+	inserts,
+);
 ---
 
 {

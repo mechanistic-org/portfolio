@@ -1,0 +1,130 @@
+---
+import { chronologyDate, chronologyPhases, type Chronology } from "../../utils/projectChronology";
+interface Props {
+	chronology?: Chronology | null;
+	detailHref?: string;
+}
+const { chronology, detailHref = "#chronology-heading" } = Astro.props;
+const phases = chronology ? chronologyPhases(chronology) : [];
+---
+
+<section
+	class="development-overview"
+	aria-labelledby="project-development-heading"
+	data-development-overview
+>
+	<header>
+		<h2 id="project-development-heading">Project development</h2>
+		{
+			chronology ? (
+				<a href={detailHref}>
+					{chronology.start.slice(0, 4)}–{chronology.end.slice(0, 4)} · {chronology.events.length}{" "}
+					recorded events ↗
+				</a>
+			) : (
+				<span>Timeline not available.</span>
+			)
+		}
+	</header>
+	{
+		chronology && (
+			<ol style={`--phase-count:${Math.max(1, phases.length)}`}>
+				{phases.map((phase) => {
+					const linked = phase.events.find((event) => event.anchor) ?? phase.events[0];
+					return (
+						<li>
+							<a href={linked?.anchor ? `#${linked.anchor}` : detailHref}>
+								<strong>{phase.label}</strong>
+								{linked && (
+									<>
+										<span>{linked.title}</span>
+										<small>{chronologyDate(linked)}</small>
+									</>
+								)}
+							</a>
+						</li>
+					);
+				})}
+			</ol>
+		)
+	}
+</section>
+<style>
+	.development-overview {
+		margin-block: 1.5rem 2rem;
+		color: var(--foreground, #e5e7eb);
+	}
+	header {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 0.5rem 1rem;
+		margin-bottom: 0.8rem;
+	}
+	h2 {
+		margin: 0;
+		font: 500 0.8rem var(--font-mono);
+	}
+	header a,
+	header > span {
+		color: var(--muted-foreground, #a7adb8);
+		font-size: 0.8rem;
+	}
+	ol {
+		display: grid;
+		grid-template-columns: repeat(var(--phase-count), minmax(0, 1fr));
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+	li {
+		min-width: 0;
+		border-top: 2px solid var(--primary, #2e5cff);
+		border-right: 1px solid var(--border, #303640);
+	}
+	li:last-child {
+		border-right: 0;
+	}
+	li a {
+		display: flex;
+		flex-direction: column;
+		gap: 0.15rem;
+		min-height: 44px;
+		padding: 0.6rem 0.75rem 0.1rem 0;
+		margin-left: 0.75rem;
+		text-decoration: none;
+	}
+	li:first-child a {
+		margin-left: 0;
+	}
+	strong {
+		font-size: 0.8rem;
+		font-weight: 500;
+		overflow-wrap: anywhere;
+	}
+	li span,
+	li small {
+		color: var(--muted-foreground, #a7adb8);
+		font-size: 0.7rem;
+	}
+	a:hover {
+		color: var(--primary, #91afff);
+	}
+	a:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 4px;
+	}
+	@media (max-width: 600px) {
+		ol {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 0.75rem;
+		}
+		li {
+			border-right: 0;
+		}
+		li a {
+			margin-left: 0;
+		}
+	}
+</style>

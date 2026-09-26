@@ -1,0 +1,51 @@
+/* One project identity, section, detail and figure hierarchy across both readers. */
+:is([data-authoring-project], [data-project-article]) {
+	--project-title-size: clamp(3rem, 6vw, 5.5rem);
+	--project-section-size: clamp(1.8rem, 2.6vw, 2.5rem);
+	--project-detail-size: clamp(1.4rem, 2vw, 1.9rem);
+}
+:is(.article-masthead, [data-project-article] > header) h1 {
+	font-size: var(--project-title-size);
+	line-height: 1.02;
+	text-wrap: balance;
+	overflow-wrap: anywhere;
+}
+:is(.article-prose, [data-project-article] .markdown-content) h2 {
+	font-size: var(--project-section-size);
+	line-height: 1.15;
+}
+:is(.article-prose, [data-project-article] .markdown-content) h3 {
+	font-size: var(--project-detail-size);
+	line-height: 1.2;
+}
+[data-project-body-title] {
+	font-size: 0.9rem;
+	color: var(--muted-foreground);
+}
+/* Preserve the content owner's exact phases, dates and native links. No extraction
+   or inferred milestones: this styles the existing authored overview in place. */
+.article-prose #development-at-a-glance + ul {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 1rem 1.5rem;
+	padding: 0;
+	margin-block: 1.25rem;
+	list-style: none;
+	max-width: none;
+}
+.article-prose #development-at-a-glance + ul li {
+	margin: 0;
+	padding: 0.75rem 0 0;
+	border-top: 2px solid var(--authoring-blue);
+	font-size: 0.875rem;
+	line-height: 1.6;
+}
+.article-prose #development-at-a-glance + ul strong {
+	display: block;
+	margin-bottom: 0.4rem;
+}
+@media (max-width: 500px) {
+	.article-prose #development-at-a-glance + ul {
+		grid-template-columns: 1fr;
+	}
+}

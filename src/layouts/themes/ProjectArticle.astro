@@ -12,6 +12,8 @@
  * Assembled entirely from the primitive library so 100+ pages share one taxonomy.
  * Fed by entry.data (today hand-authored mdx; tomorrow the canon generator).
  */
+import "@/styles/project-reading.css";
+import DevelopmentTimeline from "@components/Projects/DevelopmentTimeline.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import MediaHeader from "@components/primitives/MediaHeader.astro";
 import HudRail from "@components/primitives/HudRail.astro";
@@ -206,7 +208,7 @@ const navNext =
 			heroImage={d.heroImage}
 			description={d.description}
 			audioUrl={d.audio_url}
-			photoCount={images.length || undefined}
+			photoCount={useInlineMedia ? undefined : images.length || undefined}
 			mediaCountLabel={[
 				"sundance",
 				"sc48",
@@ -241,6 +243,7 @@ const navNext =
 		/>
 
 		{contextNodes.length > 0 && <ContextRibbon nodes={contextNodes} currentId={entry.id} />}
+		<DevelopmentTimeline chronology={chronology} />
 
 		<ProjectRailCoordinator enabled={useContinuityRails} anchors={resolved?.anchors}>
 			<div
@@ -256,9 +259,13 @@ const navNext =
 								<>
 									<Toc headings={headings} label="In this account" />
 									<a href="#cast-credits">Cast &amp; credits</a>
-									<button type="button" data-browse-media>
-										Browse all {images.length} photographs ↗
-									</button>
+									<a
+										class="browse-project-media"
+										href={`#media-${galleries[0]?.id}`}
+										data-browse-media
+									>
+										Browse {new Set(images.map((image) => image.src)).size} images ↗
+									</a>
 								</>
 							</div>
 						)
@@ -357,7 +364,9 @@ const navNext =
 									<ProjectModelEvidence slot="model" models={inlineModels} />
 								</ProjectArticleBody>
 							) : (
-								<Content />
+								<ProjectArticleBody>
+									<Content />
+								</ProjectArticleBody>
 							)
 						}
 					</div>
@@ -519,7 +528,7 @@ const navNext =
 	.project-sidebar--inline :global(.project-contents a.is-current) {
 		color: var(--primary);
 	}
-	.project-sidebar--inline :global(.project-contents > button) {
+	.project-sidebar--inline :global(.project-contents > .browse-project-media) {
 		display: block;
 		min-height: 44px;
 		padding-block: 0.5rem;
