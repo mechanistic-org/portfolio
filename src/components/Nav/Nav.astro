@@ -21,7 +21,7 @@ const { hideLogo } = Astro.props;
 ---
 
 <UniversalHUD mode="standard" hideLogo={hideLogo}>
-	<!-- LEFT SLOT: Nothing extra, UniversalHUD handles Logo mapping to / -->
+	<span slot="left" class="sr-only">Home</span>
 	<!-- The HXO Application at / initializes fresh on load, serving as practical reset. -->
 
 	<!-- CENTER SLOT: The Capsule -->
@@ -90,6 +90,7 @@ const { hideLogo } = Astro.props;
 					<div class="mx-1 h-3 w-px bg-white/20" />
 					<button
 						id="global-search-trigger"
+						data-search-trigger
 						class="group flex h-7 w-7 items-center justify-center rounded-full text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
 						aria-label="Search"
 					>
@@ -105,6 +106,7 @@ const { hideLogo } = Astro.props;
 		<div class="hidden items-center gap-3 text-neutral-500 md:flex">
 			<a
 				href="https://github.com/eriknorris"
+				aria-label="GitHub"
 				target="_blank"
 				class="hover:text-primary transition-colors hover:scale-110"
 			>
@@ -112,6 +114,7 @@ const { hideLogo } = Astro.props;
 			</a>
 			<a
 				href="https://linkedin.com/in/eriknorris"
+				aria-label="LinkedIn"
 				target="_blank"
 				class="hover:text-primary transition-colors hover:scale-110"
 			>
@@ -119,6 +122,7 @@ const { hideLogo } = Astro.props;
 			</a>
 			<a
 				href={`mailto:${siteData.author.email}`}
+				aria-label="Email Erik Norris"
 				class="hover:text-primary transition-colors hover:scale-110"
 			>
 				<Icon name="tabler:mail" class="h-5 w-5" />
@@ -140,26 +144,41 @@ const { hideLogo } = Astro.props;
 					Download PDF
 				</a>
 			) : (
-				<MobileNav />
+				<div class="flex items-center gap-2">
+					<button
+						type="button"
+						id="mobile-search-trigger"
+						data-search-trigger
+						aria-label="Search"
+						class="flex h-10 w-10 items-center justify-center rounded-full text-neutral-300 hover:bg-white/10 focus-visible:outline-2"
+					>
+						<Icon name="tabler:search" class="h-5 w-5" />
+					</button>
+					<MobileNav />
+				</div>
 			)
 		}
 	</div>
 </UniversalHUD>
 
-<script>
-	/// <reference lib="dom" />
-	/* 
-	   ASTRO VIEW TRANSITIONS HANDLER 
-	   Re-attach listeners on navigation
-	*/
-	document.addEventListener("astro:page-load", () => {
-		const searchBtn = document.getElementById("global-search-trigger");
-		searchBtn?.addEventListener("click", () => {
-			// @ts-ignore
-			window.dispatchEvent(new CustomEvent("open-command-menu"));
-		});
-	});
-</script>
+<!-- Search clicks are delegated by PagefindSearch across Astro body swaps. -->
+{
+	currentPath.replace(/\/$/, "") !== "/resume" && (
+		<noscript>
+			<nav
+				aria-label="Site navigation"
+				class="flex flex-wrap justify-center gap-4 px-4 pt-24 md:hidden"
+			>
+				<a href="/">Home</a>
+				{navData
+					.flatMap((item) => ("dropdown" in item ? item.dropdown : [item]))
+					.map((item) => (
+						<a href={item.href}>{item.text}</a>
+					))}
+			</nav>
+		</noscript>
+	)
+}
 
 <style>
 	.resume-download {

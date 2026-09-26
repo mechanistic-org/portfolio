@@ -1,121 +1,266 @@
 ---
+
 ---
 
-<div id="pagefind-search-backdrop" class="fixed inset-0 z-[100] hidden items-start justify-center px-4 pt-[20vh]">
-	<div id="pagefind-search-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity"></div>
-	
-	<div class="border-border bg-card relative w-full max-w-xl overflow-hidden rounded-xl border shadow-2xl duration-200">
-		<div class="p-4 overflow-y-auto max-h-[60vh]">
-			<div id="pagefind-search-container"></div>
-		</div>
-		
-		<div class="border-border bg-muted/50 text-muted-foreground flex justify-between border-t px-4 py-2 text-xs">
-			<span>
-				<kbd class="font-sans">↑↓</kbd> to navigate
-			</span>
-			<span>
-				<kbd class="font-sans">ESC</kbd> to close
-			</span>
-		</div>
+<dialog
+	id="pagefind-search-dialog"
+	aria-labelledby="pagefind-search-title"
+	class="border-border bg-card w-[calc(100%-2rem)] max-w-xl overflow-hidden rounded-xl border p-0 text-white shadow-2xl"
+>
+	<div class="flex items-center justify-between border-b border-white/10 px-4 py-2">
+		<h2 id="pagefind-search-title" class="font-mono text-sm">Search</h2>
+		<button
+			type="button"
+			data-search-close
+			aria-label="Close search"
+			class="min-h-10 px-3 text-sm hover:bg-white/10 focus-visible:outline-2">Close</button
+		>
 	</div>
-</div>
+	<div class="max-h-[60vh] overflow-y-auto p-4">
+		<p data-search-status role="status" class="text-sm text-neutral-400"></p>
+		<div id="pagefind-search-container"></div>
+	</div>
+	<div
+		class="border-border bg-muted/50 text-muted-foreground flex justify-between border-t px-4 py-2 text-xs"
+	>
+		<span><kbd class="font-sans">Tab</kbd> to navigate</span>
+		<span><kbd class="font-sans">ESC</kbd> to close</span>
+	</div>
+</dialog>
 
 <script is:inline>
-	// View-transition safe: listeners are bound once to window/document and
-	// re-query the DOM on every call, because Astro's ClientRouter swaps the
-	// body (stale element refs) without re-running inline scripts.
-	(function () {
+	// One delegated controller survives ClientRouter swaps; each dialog owns its UI.
+	(() => {
 		if (window.__pagefindSearchInit) return;
 		window.__pagefindSearchInit = true;
+		let opener = null;
+		let lockedBody = null;
+		let previousOverflow = "";
+		let previousPriority = "";
+		let assets = null;
+		let mountedUI = null;
+		let mountedContainer = null;
+		const dialog = () => document.getElementById("pagefind-search-dialog");
 
-		let isOpen = false;
-		let assetsLoaded = false;
-
-		function focusInput() {
-			setTimeout(() => {
-				const input = document.querySelector("#pagefind-search-container input");
-				if (input) input.focus();
-			}, 100);
-		}
-
-		function mountUI() {
-			const container = document.getElementById("pagefind-search-container");
-			if (!container) return;
-			// After a view transition the container is a fresh empty node, so
-			// the UI must be re-instantiated.
-			if (container.childElementCount > 0) {
-				focusInput();
-				return;
-			}
-			if (window.PagefindUI) {
-				new window.PagefindUI({
-					element: "#pagefind-search-container",
-					showSubResults: true,
-					bundlePath: "/pagefind/",
-				});
-				focusInput();
-				return;
-			}
-			if (!assetsLoaded) {
-				assetsLoaded = true;
+		function loadAssets() {
+			if (!document.querySelector('link[href="/pagefind/pagefind-ui.css"]')) {
 				const link = document.createElement("link");
 				link.rel = "stylesheet";
 				link.href = "/pagefind/pagefind-ui.css";
-				document.head.appendChild(link);
+				document.head.append(link);
+			}
+			if (window.PagefindUI) return Promise.resolve();
+			if (!assets)
+				assets = new Promise((resolve, reject) => {
+					const script = document.createElement("script");
+					script.src = "/pagefind/pagefind-ui.js";
+					script.onload = resolve;
+					script.onerror = () => {
+						script.remove();
+						assets = null;
+						reject(new Error("Search unavailable"));
+					};
+					document.head.append(script);
+				});
+			return assets;
+		}
 
-				const script = document.createElement("script");
-				script.src = "/pagefind/pagefind-ui.js";
-				script.onload = mountUI;
-				document.head.appendChild(script);
+		async function mountUI(current) {
+			const status = current.querySelector("[data-search-status]");
+			status.textContent = "Loading search…";
+			try {
+				await loadAssets();
+				if (dialog() !== current || !current.open) return;
+				const container = current.querySelector("#pagefind-search-container");
+				if (mountedContainer !== container) {
+					mountedUI?.destroy?.();
+					mountedUI = new window.PagefindUI({
+						element: "#pagefind-search-container",
+						showSubResults: true,
+						bundlePath: "/pagefind/",
+					});
+					mountedContainer = container;
+				}
+				status.textContent = "";
+				requestAnimationFrame(() => {
+					if (dialog() === current && current.open) container.querySelector("input")?.focus();
+				});
+			} catch {
+				if (dialog() === current && current.open)
+					status.textContent = "Search could not load. Close and try again.";
 			}
 		}
 
-		function openSearch() {
-			const backdrop = document.getElementById("pagefind-search-backdrop");
-			if (!backdrop) return;
-			isOpen = true;
-			backdrop.classList.remove("hidden");
-			backdrop.classList.add("flex");
-			document.body.style.overflow = "hidden";
-			mountUI();
+		function openSearch(origin = document.activeElement) {
+			const current = dialog();
+			if (!current || current.open) return;
+			opener = origin instanceof HTMLElement ? origin : null;
+			lockedBody = document.body;
+			previousOverflow = lockedBody.style.getPropertyValue("overflow");
+			previousPriority = lockedBody.style.getPropertyPriority("overflow");
+			current.showModal();
+			lockedBody.style.setProperty("overflow", "hidden");
+			mountUI(current);
 		}
 
-		function closeSearch() {
-			const backdrop = document.getElementById("pagefind-search-backdrop");
-			isOpen = false;
-			if (backdrop) {
-				backdrop.classList.add("hidden");
-				backdrop.classList.remove("flex");
+		function closeSearch(restoreFocus = true) {
+			const current = dialog();
+			if (current?.open) current.close();
+			if (lockedBody) {
+				if (previousOverflow)
+					lockedBody.style.setProperty("overflow", previousOverflow, previousPriority);
+				else lockedBody.style.removeProperty("overflow");
 			}
-			document.body.style.overflow = "unset";
+			lockedBody = null;
+			const target = opener;
+			opener = null;
+			if (restoreFocus && target?.isConnected) target.focus({ preventScroll: true });
 		}
 
-		// Delegated so it survives body swaps
-		document.addEventListener("click", (e) => {
-			if (e.target && e.target.id === "pagefind-search-overlay") closeSearch();
-		});
+		// Same-document links do not swap bodies. Unlock before Astro or the browser
+		// follows the original anchor, including when its hash is already selected.
+		document.addEventListener(
+			"click",
+			(event) => {
+				const current = dialog();
+				const link =
+					event.target instanceof Element
+						? event.target.closest(".pagefind-ui__result-link[href]")
+						: null;
+				if (
+					!current?.open ||
+					!link ||
+					!current.contains(link) ||
+					event.defaultPrevented ||
+					event.button !== 0 ||
+					event.metaKey ||
+					event.ctrlKey ||
+					event.shiftKey ||
+					event.altKey ||
+					link.hasAttribute("download") ||
+					(link.target && link.target !== "_self")
+				)
+					return;
+				const destination = new URL(link.href, location.href);
+				const body = document.body;
+				const sameDocument =
+					destination.origin === location.origin &&
+					destination.pathname === location.pathname &&
+					destination.search === location.search;
+				closeSearch(false);
+				if (!sameDocument || !destination.hash) return;
+				requestAnimationFrame(() => {
+					if (document.body !== body || current.open || location.href !== destination.href) return;
+					let id;
+					try {
+						id = decodeURIComponent(destination.hash.slice(1));
+					} catch {
+						return;
+					}
+					const target = document.getElementById(id);
+					if (!(target instanceof HTMLElement)) return;
+					const tabindex = target.getAttribute("tabindex");
+					if (tabindex === null) target.setAttribute("tabindex", "-1");
+					target.focus({ preventScroll: true });
+					if (tabindex === null) {
+						const restore = () => {
+							if (target.getAttribute("tabindex") === "-1") target.removeAttribute("tabindex");
+						};
+						if (document.activeElement === target)
+							target.addEventListener("blur", restore, { once: true });
+						else restore();
+					}
+				});
+			},
+			true,
+		);
 
-		window.addEventListener("keydown", (e) => {
-			if ((e.metaKey || e.ctrlKey) && e.key === "e") {
-				e.preventDefault();
-				if (isOpen) closeSearch();
-				else openSearch();
+		document.addEventListener("click", (event) => {
+			const target = event.target instanceof Element ? event.target : null;
+			const trigger = target?.closest("[data-search-trigger]");
+			if (trigger) {
+				openSearch(trigger);
+				return;
 			}
-			if (e.key === "Escape" && isOpen) {
-				e.preventDefault();
+			const current = dialog();
+			if (!current?.open) return;
+			if (target?.closest("[data-search-close]")) {
 				closeSearch();
+				return;
+			}
+			if (target === current) {
+				const rect = current.getBoundingClientRect();
+				if (
+					event.clientX < rect.left ||
+					event.clientX > rect.right ||
+					event.clientY < rect.top ||
+					event.clientY > rect.bottom
+				)
+					closeSearch();
 			}
 		});
-
-		window.addEventListener("open-command-menu", openSearch);
-
-		// New body arrives closed; clear any scroll lock from the old one
-		document.addEventListener("astro:after-swap", () => {
-			isOpen = false;
-			document.body.style.overflow = "unset";
+		document.addEventListener(
+			"cancel",
+			(event) => {
+				if (event.target === dialog()) {
+					event.preventDefault();
+					closeSearch();
+				}
+			},
+			true,
+		);
+		document.addEventListener("keydown", (event) => {
+			const current = dialog();
+			if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "e") {
+				event.preventDefault();
+				if (current?.open) closeSearch();
+				else openSearch();
+				return;
+			}
+			if (!current?.open || event.key !== "Tab") return;
+			const focusable = [
+				...current.querySelectorAll("a[href], button, input, select, textarea, [tabindex]"),
+			].filter((el) => !el.disabled && el.tabIndex >= 0 && el.getClientRects().length);
+			const first = focusable[0],
+				last = focusable.at(-1);
+			if (!first) {
+				event.preventDefault();
+				return;
+			}
+			if (
+				event.shiftKey &&
+				(document.activeElement === first || !current.contains(document.activeElement))
+			) {
+				event.preventDefault();
+				last.focus();
+			} else if (
+				!event.shiftKey &&
+				(document.activeElement === last || !current.contains(document.activeElement))
+			) {
+				event.preventDefault();
+				first.focus();
+			}
+		});
+		window.addEventListener("open-command-menu", () => openSearch());
+		document.addEventListener("astro:before-swap", () => {
+			closeSearch(false);
+			mountedUI?.destroy?.();
+			mountedUI = null;
+			mountedContainer = null;
 		});
 	})();
 </script>
+
+<style>
+	dialog {
+		margin: 12vh auto 0;
+		max-height: 80vh;
+	}
+	dialog::backdrop {
+		background: rgb(0 0 0 / 0.65);
+		backdrop-filter: blur(4px);
+	}
+</style>
 
 <style is:global>
 	/* Customizing Pagefind UI to match the theme */
@@ -132,22 +277,23 @@
 		--pagefind-ui-image-box-ratio: 3 / 2;
 		--pagefind-ui-font: inherit;
 	}
-	
+
 	.pagefind-ui__search-input {
 		background-color: transparent !important;
 		color: white !important;
 		border: 1px solid var(--pagefind-ui-border) !important;
 	}
-	
-	.pagefind-ui__result-title, .pagefind-ui__result-link {
+
+	.pagefind-ui__result-title,
+	.pagefind-ui__result-link {
 		color: white !important;
 		font-weight: 500;
 	}
-	
+
 	.pagefind-ui__result-excerpt {
 		color: #94a3b8 !important;
 	}
-	
+
 	.pagefind-ui__message {
 		color: #94a3b8 !important;
 	}

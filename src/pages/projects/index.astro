@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import UniversalHUD from "@components/Nav/UniversalHUD.astro";
+import { archivePresentation, compareArchive } from "../../utils/archivePresentation.ts";
 import ProjectDirectory from "../../components/Projects/ProjectDirectory.astro";
 import ProjectGrid from "../../components/Projects/ProjectGrid.astro";
 import Assembly from "../../components/DataViz/Assembly";
@@ -48,7 +48,7 @@ const projects = rawProjects
 		}
 		return p;
 	})
-	.sort((a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime());
+	.sort((a, b) => compareArchive(archivePresentation(a).sort, archivePresentation(b).sort));
 
 const industries = [...new Set(projects.map((p) => p.data.industry).filter(Boolean))].sort();
 const categories = [
@@ -63,71 +63,55 @@ const allClients = projects.flatMap((p) => {
 const clients = [...new Set(allClients.filter(Boolean))].sort();
 ---
 
-<BaseLayout title="Work" description="Engineering Archive" starfield={true} hideNav={true}>
-	<!-- UNIVERSAL HUD: FLEET MODE ("HOTAS") -->
-	<UniversalHUD mode="stealth">
-		<!-- LEFT: Context -->
-		<div slot="left" class="flex items-center gap-2">
-			<span class="font-mono text-xs font-bold tracking-widest text-white/50">PROJECTS</span>
-			<span class="font-mono text-[10px] text-neutral-600">/// FLEET VIEW</span>
-		</div>
-
-		<!-- CENTER: The Controls (HOTAS) -->
-		<div slot="center" class="flex items-center gap-1 p-1">
-			<!-- View Toggles -->
-			<button
-				class="view-toggle flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 font-mono text-xs tracking-wider text-white uppercase transition-all duration-300"
-				data-view="list"
-			>
-				<Icon name="tabler:list" class="h-3.5 w-3.5" />
-				<span>Ref</span>
-			</button>
-			<button
-				class="view-toggle flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs tracking-wider text-neutral-400 uppercase transition-all duration-300 hover:bg-white/5 hover:text-white"
-				data-view="grid"
-			>
-				<Icon name="tabler:layout-grid" class="h-3.5 w-3.5" />
-				<span>Grid</span>
-			</button>
-			<button
-				class="view-toggle flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs tracking-wider text-neutral-400 uppercase transition-all duration-300 hover:bg-white/5 hover:text-white"
-				data-view="multiverse"
-			>
-				<Icon name="tabler:circles-relation" class="h-3.5 w-3.5" />
-				<span>Assembly</span>
-			</button>
-			<button
-				class="view-toggle flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs tracking-wider text-neutral-400 uppercase transition-all duration-300 hover:bg-white/5 hover:text-white"
-				data-view="timeline"
-			>
-				<Icon name="tabler:timeline" class="h-3.5 w-3.5" />
-				<span>Time</span>
-			</button>
-			<button
-				class="view-toggle flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs tracking-wider text-neutral-400 uppercase transition-all duration-300 hover:bg-white/5 hover:text-white"
-				data-view="radial"
-			>
-				<Icon name="tabler:chart-radar" class="h-3.5 w-3.5" />
-				<span>Radial</span>
-			</button>
-		</div>
-
-		<!-- RIGHT: System -->
-		<div slot="right" class="flex items-center gap-4">
-			<ThemeToggle />
-			<button
-				id="hud-search-trigger"
-				class="group flex items-center justify-center rounded-full p-2 text-neutral-400 transition-colors hover:bg-white/10 hover:text-white"
-				aria-label="Search"
-			>
-				<Icon name="tabler:search" class="h-4 w-4" />
-			</button>
-		</div>
-	</UniversalHUD>
-
-	<!-- FULL VIEWPORT DATA CONTAINER -->
-	<!-- Added pt-24 to account for Fixed HUD -->
+<BaseLayout title="Work" description="Engineering Archive" starfield={true}>
 	<div class="site-container-full min-h-screen px-4 pt-24 pb-24 md:px-8 md:pb-36">
+		<header class="mb-6 flex flex-wrap items-center justify-between gap-3">
+			<h1 class="font-mono text-lg font-bold tracking-widest uppercase">Projects</h1>
+			<ThemeToggle />
+			<div role="group" aria-label="Archive view" class="flex w-full flex-wrap items-center gap-1">
+				<!-- View Toggles -->
+				<button
+					class="view-toggle flex items-center gap-2 rounded-full bg-white/10 px-3 py-2 font-mono text-xs tracking-wider text-white uppercase transition-all duration-300"
+					data-view="list"
+					aria-pressed="true"
+				>
+					<Icon name="tabler:list" class="h-3.5 w-3.5" />
+					<span>Ref</span>
+				</button>
+				<button
+					class="view-toggle flex items-center gap-2 rounded-full px-3 py-2 font-mono text-xs tracking-wider text-neutral-400 uppercase transition-all duration-300 hover:bg-white/5 hover:text-white"
+					data-view="grid"
+					aria-pressed="false"
+				>
+					<Icon name="tabler:layout-grid" class="h-3.5 w-3.5" />
+					<span>Grid</span>
+				</button>
+				<button
+					class="view-toggle flex items-center gap-2 rounded-full px-3 py-2 font-mono text-xs tracking-wider text-neutral-400 uppercase transition-all duration-300 hover:bg-white/5 hover:text-white"
+					data-view="multiverse"
+					aria-pressed="false"
+				>
+					<Icon name="tabler:circles-relation" class="h-3.5 w-3.5" />
+					<span>Assembly</span>
+				</button>
+				<button
+					class="view-toggle flex items-center gap-2 rounded-full px-3 py-2 font-mono text-xs tracking-wider text-neutral-400 uppercase transition-all duration-300 hover:bg-white/5 hover:text-white"
+					data-view="timeline"
+					aria-pressed="false"
+				>
+					<Icon name="tabler:timeline" class="h-3.5 w-3.5" />
+					<span>Time</span>
+				</button>
+				<button
+					class="view-toggle flex items-center gap-2 rounded-full px-3 py-2 font-mono text-xs tracking-wider text-neutral-400 uppercase transition-all duration-300 hover:bg-white/5 hover:text-white"
+					data-view="radial"
+					aria-pressed="false"
+				>
+					<Icon name="tabler:chart-radar" class="h-3.5 w-3.5" />
+					<span>Radial</span>
+				</button>
+			</div>
+		</header>
 		<!-- VIEW: LIST (Default) -->
 		<div id="view-list" class="view-container animate-in fade-in w-full duration-500">
 			<ProjectDirectory
@@ -194,7 +178,7 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 
 		<script>
 			// VIEW SWITCHER LOGIC
-			// Upgraded to connect to UniversalHUD buttons
+			// Controls remain available beside the archive at every viewport.
 			document.addEventListener("astro:page-load", () => {
 				const toggles = document.querySelectorAll(".view-toggle");
 				const containers = document.querySelectorAll(".view-container");
@@ -206,10 +190,11 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 					});
 				});
 
-				function switchView(mode) {
+				function switchView(mode: string | null) {
 					// 1. Update Buttons
 					toggles.forEach((btn) => {
 						const isMatch = btn.getAttribute("data-view") === mode;
+						btn.setAttribute("aria-pressed", String(isMatch));
 						if (isMatch) {
 							// Active State
 							btn.classList.add("bg-white/10", "text-white");
@@ -231,12 +216,6 @@ const clients = [...new Set(allClients.filter(Boolean))].sort();
 						}
 					});
 				}
-
-				// Search Trigger Connect
-				const searchBtn = document.getElementById("hud-search-trigger");
-				searchBtn?.addEventListener("click", () => {
-					window.dispatchEvent(new CustomEvent("open-command-menu"));
-				});
 			});
 		</script>
 

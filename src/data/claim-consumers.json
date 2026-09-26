@@ -112,24 +112,24 @@
     "surface": "colophon"
   },
   {
-    "id": "glyph-fit",
+    "id": "glyph-headstrap",
     "path": "method:human-factors",
     "project": "avegant-glyph",
-    "revision": 1,
+    "revision": 2,
     "surface": "method"
   },
   {
-    "id": "glyph-fit",
+    "id": "glyph-production",
     "path": "resume:avegant-2015:0",
     "project": "avegant-glyph",
-    "revision": 1,
+    "revision": 2,
     "surface": "resume"
   },
   {
-    "id": "glyph-fit",
-    "path": "colophon:glyph-fit",
+    "id": "glyph-headstrap",
+    "path": "colophon:glyph-headstrap",
     "project": "avegant-glyph",
-    "revision": 1,
+    "revision": 2,
     "surface": "colophon"
   },
   {
@@ -140,31 +140,31 @@
     "surface": "method"
   },
   {
-    "id": "glyph-cohorts",
+    "id": "glyph-manufacturing",
     "path": "resume:avegant-2015:1",
     "project": "avegant-glyph",
     "revision": 1,
     "surface": "resume"
   },
   {
-    "id": "glyph-cohorts",
-    "path": "colophon:glyph-cohorts",
+    "id": "glyph-production",
+    "path": "colophon:glyph-production",
     "project": "avegant-glyph",
-    "revision": 1,
+    "revision": 2,
     "surface": "colophon"
   },
   {
     "id": "glyph-changes",
     "path": "method:mechanism-actuation",
     "project": "avegant-glyph",
-    "revision": 1,
+    "revision": 2,
     "surface": "method"
   },
   {
-    "id": "glyph-changes",
+    "id": "glyph-headstrap",
     "path": "resume:avegant-2015:2",
     "project": "avegant-glyph",
-    "revision": 1,
+    "revision": 2,
     "surface": "resume"
   },
   {
