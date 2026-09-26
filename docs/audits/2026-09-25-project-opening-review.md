@@ -116,6 +116,10 @@ parked/stopped material remain unchanged. C24's model stays disabled under #339.
 
 The concrete remaining landing gate is #340's requirement: "Obtain scoped review
 for meaningful page-composition changes." Software and independent agent review
-do not substitute for that operator review. The bounded PR can be inspected now;
-merge, source-landing reconciliation and Main Board completion wait for the gate.
+do not substitute for that operator review. The local diff and bounded PR body
+are prepared. Automatic approval review rejected remote push/PR creation because
+the local audit authorization did not explicitly authorize that publication.
+The destination is the public `mechanistic-org/portfolio` repository; no push
+or PR was created. Publication awaits explicit authorization, and merge,
+source-landing reconciliation and Main Board completion await composition review.
 No production deployment is authorized or performed.
