@@ -22,32 +22,38 @@ const { title, meta } = Astro.props;
 <script>
 	class ProjectRecordElement extends HTMLElement {
 		connectedCallback() {
-			if (this.dataset.ready || typeof HTMLDialogElement === "undefined") return;
+			if (typeof HTMLDialogElement === "undefined") return;
+			if (this.dataset.ready) {
+				this.connectListeners?.();
+				return;
+			}
 			this.dataset.ready = "true";
 			const details = this.querySelector("details")!;
 			const summary = details.querySelector("summary")!;
 			const dialog = this.querySelector("dialog")!;
 			const body = this.querySelector(".project-record__body")!;
-			let returnToSummary = true;
+			let returnToOpener = true;
+			let opener: HTMLElement = summary;
 			dialog.append(body);
 			summary.setAttribute("aria-haspopup", "dialog");
-			const open = () => {
-				returnToSummary = true;
+			const open = (from?: HTMLElement) => {
+				if (from) opener = from;
+				returnToOpener = true;
 				if (!dialog.open) dialog.showModal();
 			};
 			summary.addEventListener("click", (event) => {
 				event.preventDefault();
-				open();
+				open(summary);
 			});
 			dialog.querySelector("[data-close-record]")!.addEventListener("click", () => dialog.close());
 			dialog.addEventListener("close", () => {
-				if (returnToSummary) summary.focus({ preventScroll: true });
+				if (returnToOpener) opener.focus({ preventScroll: true });
 			});
 			dialog.addEventListener("click", (event) => {
 				const link = (event.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
 				const target = link && document.getElementById(decodeURIComponent(link.hash.slice(1)));
 				if (target && !dialog.contains(target)) {
-					returnToSummary = false;
+					returnToOpener = false;
 					dialog.close();
 					target.setAttribute("tabindex", "-1");
 					target.focus({ preventScroll: true });
@@ -60,11 +66,37 @@ const { title, meta } = Astro.props;
 					target.scrollIntoView({ block: "nearest" });
 				}
 			};
-			window.addEventListener("hashchange", followHash);
-			this.cleanup = () => window.removeEventListener("hashchange", followHash);
-			followHash();
+			const followLink = (event: MouseEvent) => {
+				if (
+					event.defaultPrevented ||
+					event.button !== 0 ||
+					event.metaKey ||
+					event.ctrlKey ||
+					event.shiftKey ||
+					event.altKey
+				)
+					return;
+				const link = (event.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
+				const target = link && document.getElementById(decodeURIComponent(link.hash.slice(1)));
+				if (link && target && body.contains(target)) {
+					open(link);
+					if (link.hash === location.hash) target.scrollIntoView({ block: "nearest" });
+				}
+			};
+			this.connectListeners = () => {
+				window.addEventListener("hashchange", followHash);
+				// Observe native fragment activation before Astro's navigation delegate.
+				document.addEventListener("click", followLink, true);
+				followHash();
+			};
+			this.cleanup = () => {
+				window.removeEventListener("hashchange", followHash);
+				document.removeEventListener("click", followLink, true);
+			};
+			this.connectListeners();
 		}
 		private cleanup?: () => void;
+		private connectListeners?: () => void;
 		disconnectedCallback() {
 			this.cleanup?.();
 		}
@@ -76,6 +108,17 @@ const { title, meta } = Astro.props;
 <style>
 	project-record {
 		display: block;
+	}
+	/* With scripts disabled, native disclosures expand into the reading width. */
+	:global(:is(.project-sidebar, .article-contents):has(.project-record[open])) {
+		grid-column: 1 / -1;
+		position: static;
+		max-height: none;
+		overflow: visible;
+	}
+	:global(.project-body:has(.project-record[open]) > main),
+	:global(.authoring-layout:has(.project-record[open]) > .article-composition) {
+		grid-column: 1 / -1;
 	}
 	dialog {
 		margin: auto;

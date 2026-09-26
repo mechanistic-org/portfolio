@@ -1099,6 +1099,7 @@ body:has(.media-browser[open], .image-viewer[open]) {
 
 @media (prefers-reduced-motion: reduce) {
 	.authoring-page *,
+	[data-project-media] *,
 	.media-browser *,
 	.image-viewer * {
 		animation: none !important;
@@ -1106,7 +1107,8 @@ body:has(.media-browser[open], .image-viewer[open]) {
 		scroll-behavior: auto !important;
 	}
 
-	html:has(.authoring-page) {
+	html:has(.authoring-page),
+	html:has([data-project-media]) {
 		scroll-behavior: auto !important;
 	}
 }
