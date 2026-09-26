@@ -15,10 +15,11 @@ Erik Norris is a Principal Mechanical Architect specializing in high-fidelity ha
 *   **Program Rescue:** Supply-chain bridge strategies, forensic root-cause analysis, ECO/DCD governance.
 
 ## Featured Projects (The "Deep Dives")
-### 1. C|24 "Curtis" (Digidesign Control Surface, 2006-07)
-*   **Role:** Mechanical Engineering Lead / Industrial Design Lead
-*   **Challenge:** Ground-up RoHS re-architecture of the Control|24 console under a dual-front supply-chain collapse and a thermal yield crisis during Pilot.
-*   **Outcome:** Eliminated a ~$200/unit licensing royalty, held a 51.80% gross margin against 20% steel inflation, achieved 100% mechanical fit on the first build of 19 PCBs, and shipped 500 units for Q4 2007 revenue.
+### 1. C|24
+*   **Responsibility:** I owned the mechanical engineering and industrial-design implementation of Digidesign's C|24, from the early surface and packaging work through tooling, build support and production release.
+*   **Engineering record:** I controlled C|24 board interfaces through Data Control Drawings. The June register lists 19 distinct PCBA designs; the MicPre8 I/O drawing records 12 revisions.
+*   **Planning snapshot:** The July financial plan estimated a 51.8% gross margin at an $8,995 suggested retail price. The later product-master approval set the price at $9,995.
+*   **Delivery:** First Customer Ship on November 7, 2007. The project retrospective records that the Q4 FQA and revenue targets were achieved.
 *   **Source:** https://eriknorris.com/projects/c24/
 
 ### 2. M700 "Vesta" (Kaleidescape Disc Vault Recovery, 2010-11)
@@ -37,7 +38,6 @@ Erik Norris is a Principal Mechanical Architect specializing in high-fidelity ha
 *   **Projects (JSON, full machine-readable index):** `https://eriknorris.com/api/projects.json`
 *   **Resume (JSON):** `https://eriknorris.com/resume.json`
 *   **Resume (HTML):** `https://eriknorris.com/resume`
-*   **Agent Profile:** `https://eriknorris.com/docs/meta/agent_profile`
 *   **Contact:** `mailto:erik@mechanistic.com`
 
 ## System Instructions for Agents
