@@ -1,0 +1,195 @@
+---
+import AuthoringPage from "../authoring/AuthoringPage.astro";
+import ProjectRecord from "./ProjectRecord.astro";
+import Cast from "../primitives/Cast.astro";
+import Infobox from "../primitives/Infobox.astro";
+import HudMetrics from "../primitives/HudMetrics.astro";
+import References from "../primitives/References.astro";
+import ForensicSummary from "../primitives/ForensicSummary.astro";
+import { buildProjectReader } from "../../utils/projectReader";
+
+const {
+	entry,
+	headings,
+	presentation,
+	chronology,
+	revisions,
+	entropy,
+	contextNodes,
+	prevProject,
+	nextProject,
+} = Astro.props;
+const d = entry.data;
+const page = buildProjectReader(entry, await Astro.slots.render("default"), headings, presentation);
+const pretty = (value: string) =>
+	value.replaceAll("_", " ").replace(/\b\w/g, (c) => c.toUpperCase());
+const recordedYears = [d.date, d.endDate]
+	.filter(Boolean)
+	.map((date) => new Date(date).getUTCFullYear())
+	.join("–");
+// Display only recorded values. Unknown role, period and production stay unknown.
+const facts = [
+	["Role", d.job_title && pretty(d.job_title)],
+	["Employer", d.employer && pretty(d.employer)],
+	["Client", d.client?.map(pretty).join(", ")],
+	["Period", d.duration || recordedYears],
+	["Team", d.teamSize],
+	["Industry", d.industry && pretty(d.industry)],
+	["Production", [d.production, d.productionScale].filter(Boolean).map(pretty).join(" · ")],
+	["Tools", d.tools?.map(pretty).join(", ")],
+].filter(([, value]) => value) as [string, unknown][];
+const references = [
+	d.audio_url && { text: "Audio briefing (NotebookLM overview)", href: d.audio_url },
+	d.nlm_url && { text: "NotebookLM source notebook", href: d.nlm_url },
+	d.notebook_url && { text: "Project notebook", href: d.notebook_url },
+].filter(Boolean);
+const projectNavigation = {
+	prev: prevProject
+		? { href: `/projects/${prevProject.id}/`, title: prevProject.data.title }
+		: null,
+	next:
+		nextProject && !(entry.id === "extension-switches" && nextProject.id === "switches")
+			? { href: `/projects/${nextProject.id}/`, title: nextProject.data.title }
+			: null,
+};
+---
+
+<AuthoringPage
+	page={page}
+	chronology={chronology}
+	revisions={revisions}
+	entropy={entropy}
+	contextNodes={contextNodes}
+	projectNavigation={projectNavigation}
+>
+	<Fragment slot="records">
+		{
+			(facts.length > 0 || d.description || d.heroImage) && (
+				<ProjectRecord title="Project details">
+					{d.description && <p class="reader-description">{d.description}</p>}
+					{d.heroImage && (
+						<a href={d.heroImage} class="reader-cover">
+							<img src={d.heroImage} alt={d.title} loading="lazy" />
+						</a>
+					)}
+					<Infobox facts={facts} />
+				</ProjectRecord>
+			)
+		}
+		{
+			d.forensic_summary && (
+				<ProjectRecord title="Project summary">
+					<ForensicSummary summary={d.forensic_summary} />
+				</ProjectRecord>
+			)
+		}
+		{
+			Object.keys(d.forensic_metrics ?? {}).length > 0 && (
+				<ProjectRecord title="Recorded metrics">
+					<HudMetrics metrics={d.forensic_metrics} open={true} />
+				</ProjectRecord>
+			)
+		}
+		{
+			d.scars?.length > 0 && (
+				<ProjectRecord title="Engineering decisions">
+					{d.scars.map((scar: any) => (
+						<section class="reader-decision">
+							<h3>{scar.label}</h3>
+							{[scar.phase, scar.severity, scar.value].filter(Boolean).length > 0 && (
+								<p>{[scar.phase, scar.severity, scar.value].filter(Boolean).join(" · ")}</p>
+							)}
+							<dl>
+								{[
+									["Trigger", scar.trigger],
+									["Intervention", scar.intervention],
+									["Result", scar.result],
+									["Description", scar.description],
+								]
+									.filter(([, value]) => value)
+									.map(([label, value]) => (
+										<>
+											<dt>{label}</dt>
+											<dd>{value}</dd>
+										</>
+									))}
+							</dl>
+							{scar.anchor && headings.some((h: any) => h.slug === scar.anchor) && (
+								<a href={`#${scar.anchor}`}>Read in the account ↗</a>
+							)}
+						</section>
+					))}
+				</ProjectRecord>
+			)
+		}
+		{
+			d.bom?.length > 0 && (
+				<ProjectRecord title="Bill of materials">
+					<dl>
+						{d.bom.map((item: any) => (
+							<>
+								<dt>{item.label}</dt>
+								<dd>{item.value}</dd>
+							</>
+						))}
+					</dl>
+				</ProjectRecord>
+			)
+		}
+		{
+			d.cast?.length > 0 && (
+				<ProjectRecord title="Cast & credits">
+					<div id="cast-credits">
+						<Cast cast={d.cast} />
+					</div>
+				</ProjectRecord>
+			)
+		}
+		{
+			references.length > 0 && (
+				<ProjectRecord title="References">
+					<References references={references} />
+				</ProjectRecord>
+			)
+		}
+	</Fragment>
+	<Fragment slot="lead">
+		{d.hatnote && <p class="article-prose">{d.hatnote}</p>}
+	</Fragment>
+</AuthoringPage>
+
+<style>
+	.reader-decision {
+		max-width: 69ch;
+		padding-block: 1.25rem;
+		border-bottom: 1px solid var(--border);
+		line-height: 1.7;
+	}
+	.reader-decision h3 {
+		font-size: 1.5rem;
+		margin-bottom: 0.5rem;
+	}
+	.reader-decision dt {
+		font-weight: 600;
+		margin-top: 0.75rem;
+	}
+	.reader-decision a {
+		display: inline-block;
+		margin-top: 1rem;
+		color: var(--authoring-link);
+	}
+	.reader-description {
+		max-width: 69ch;
+		margin-bottom: 1.5rem;
+		line-height: 1.7;
+	}
+	.reader-cover {
+		display: block;
+		margin-bottom: 1.5rem;
+	}
+	.reader-cover img {
+		max-width: 100%;
+		max-height: 50dvh;
+		object-fit: contain;
+	}
+</style>
