@@ -4,7 +4,6 @@ import ProjectRecord from "./ProjectRecord.astro";
 import Cast from "../primitives/Cast.astro";
 import Infobox from "../primitives/Infobox.astro";
 import HudMetrics from "../primitives/HudMetrics.astro";
-import ScarTimeline from "../primitives/ScarTimeline.astro";
 import References from "../primitives/References.astro";
 import ForensicSummary from "../primitives/ForensicSummary.astro";
 import { buildProjectReader } from "../../utils/projectReader";
@@ -94,7 +93,32 @@ const projectNavigation = {
 		{
 			d.scars?.length > 0 && (
 				<ProjectRecord title="Engineering decisions">
-					<ScarTimeline scars={d.scars} open={true} />
+					{d.scars.map((scar: any) => (
+						<section class="reader-decision">
+							<h3>{scar.label}</h3>
+							{[scar.phase, scar.severity, scar.value].filter(Boolean).length > 0 && (
+								<p>{[scar.phase, scar.severity, scar.value].filter(Boolean).join(" · ")}</p>
+							)}
+							<dl>
+								{[
+									["Trigger", scar.trigger],
+									["Intervention", scar.intervention],
+									["Result", scar.result],
+									["Description", scar.description],
+								]
+									.filter(([, value]) => value)
+									.map(([label, value]) => (
+										<>
+											<dt>{label}</dt>
+											<dd>{value}</dd>
+										</>
+									))}
+							</dl>
+							{scar.anchor && headings.some((h: any) => h.slug === scar.anchor) && (
+								<a href={`#${scar.anchor}`}>Read in the account ↗</a>
+							)}
+						</section>
+					))}
 				</ProjectRecord>
 			)
 		}
@@ -135,6 +159,25 @@ const projectNavigation = {
 </AuthoringPage>
 
 <style>
+	.reader-decision {
+		max-width: 69ch;
+		padding-block: 1.25rem;
+		border-bottom: 1px solid var(--border);
+		line-height: 1.7;
+	}
+	.reader-decision h3 {
+		font-size: 1.5rem;
+		margin-bottom: 0.5rem;
+	}
+	.reader-decision dt {
+		font-weight: 600;
+		margin-top: 0.75rem;
+	}
+	.reader-decision a {
+		display: inline-block;
+		margin-top: 1rem;
+		color: var(--authoring-link);
+	}
 	.reader-description {
 		max-width: 69ch;
 		margin-bottom: 1.5rem;
