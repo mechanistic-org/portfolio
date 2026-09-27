@@ -7,6 +7,7 @@ import projectOpenings from "../../config/project-openings.json";
 import { selectProjectOpening } from "../../utils/projectOpening.mjs";
 import { selectAuthoredTimeline } from "../../utils/projectTimeline.mjs";
 import ProjectTimeline from "../Projects/ProjectTimeline.astro";
+import ProjectModelEvidence from "../Projects/ProjectModelEvidence.astro";
 import "@/styles/authoring-page.css";
 import "@/styles/project-reading.css";
 import DevelopmentTimeline from "../Projects/DevelopmentTimeline.astro";
@@ -17,10 +18,13 @@ const {
 	page,
 	chronology = null,
 	revisions = null,
+	entropy = [],
 	contextNodes = [],
 	projectNavigation,
 } = Astro.props;
-const hasNarrativeTimeline = page.headings.some((h: any) => h.slug === "development-timeline");
+const narrativeTimeline = page.headings.find((h: any) =>
+	["development-timeline", "proposed-development-timeline"].includes(h.slug),
+);
 const hasAuthoredOverview = page.headings.some((h: any) => h.slug === "development-at-a-glance");
 const isPublic = page.public === true;
 const isGlyph = page.project === "avegant-glyph";
@@ -38,9 +42,8 @@ const firstImageGroup = page.pieces.find(
 
 <BaseLayout
 	type="project"
-	title={isPublic ? page.title : "Avegant Glyph: getting it into production"}
-	description={page.description ||
-		"Erik Norris on the mechanical development, tooling, validation and production ramp of Avegant Glyph."}
+	title={page.title}
+	description={page.description}
 	image={page.image}
 	projectFrontmatter={page.frontmatter}
 	noindex={!isPublic}
@@ -62,6 +65,7 @@ const firstImageGroup = page.pieces.find(
 	<article
 		class:list={["authoring-page", { "public-authored-page": isPublic }]}
 		data-authoring-project={page.project}
+		data-project-reader="shared"
 		data-revision={page.revision}
 		data-project-title={projectLabel}
 		data-project-intro={page.description}
@@ -97,11 +101,11 @@ const firstImageGroup = page.pieces.find(
 			</Fragment>
 		</ProjectOpening>
 		{
-			!hasAuthoredOverview && (chronology || hasNarrativeTimeline) && (
+			!hasAuthoredOverview && (chronology || narrativeTimeline) && (
 				<DevelopmentTimeline
 					chronology={chronology}
-					narrativeHref={hasNarrativeTimeline ? "#development-timeline" : undefined}
-					detailHref={hasNarrativeTimeline ? "#development-timeline" : "#chronology-heading"}
+					narrativeHref={narrativeTimeline ? `#${narrativeTimeline.slug}` : undefined}
+					detailHref={timeline.referenceId ? `#${timeline.referenceId}` : "#chronology-heading"}
 				/>
 			)
 		}
@@ -126,9 +130,15 @@ const firstImageGroup = page.pieces.find(
 				}
 				<ProjectRecords
 					chronology={chronology}
-					timelineHref={timeline.referenceId ? `#${timeline.referenceId}` : null}
+					timelineHref={timeline.referenceId
+						? `#${timeline.referenceId}`
+						: narrativeTimeline
+							? `#${narrativeTimeline.slug}`
+							: null}
 					revisions={revisions}
+					entropy={entropy}
 				/>
+				<slot name="records" />
 				{
 					contextNodes.length > 0 && (
 						<ProjectRecord title="Career context">
@@ -138,12 +148,15 @@ const firstImageGroup = page.pieces.find(
 				}
 			</aside>
 			<div class="article-composition">
+				<slot name="lead" />
 				{
 					timeline.pieces.map((piece: any) =>
 						piece.timeline ? (
 							<ProjectTimeline chronology={chronology} referenceHtml={timeline.referenceHtml} />
 						) : piece.group ? (
 							<MediaGroup group={piece.group} />
+						) : piece.model ? (
+							<ProjectModelEvidence models={[piece.model]} />
 						) : (
 							<div class="article-prose" set:html={piece.html} />
 						),

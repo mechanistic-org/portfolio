@@ -1,4 +1,7 @@
 /* One project identity, section, detail and figure hierarchy across both readers. */
+.authoring-page .timeline-shortcut {
+	color: var(--authoring-link);
+}
 :is([data-authoring-project], [data-project-article]) {
 	--project-title-size: clamp(3rem, 6vw, 5.5rem);
 	--project-section-size: clamp(1.8rem, 2.6vw, 2.5rem);
@@ -21,6 +24,33 @@
 [data-project-body-title] {
 	font-size: 0.9rem;
 	color: var(--muted-foreground);
+}
+/* Numerical source tables share the same readable treatment in every account. */
+.article-prose table {
+	display: block;
+	max-width: 100%;
+	overflow-x: auto;
+	border-collapse: collapse;
+	margin-block: 1.5rem;
+	font-size: 0.9em;
+	font-variant-numeric: tabular-nums;
+}
+.article-prose :is(th, td) {
+	padding: 0.65rem 0.9rem;
+	border-bottom: 1px solid var(--border);
+	text-align: left;
+	vertical-align: top;
+}
+.article-prose th {
+	color: var(--foreground);
+	font-weight: 600;
+}
+.article-prose :is(img, video) {
+	max-width: 100%;
+	height: auto;
+}
+.article-prose :is(pre, a) {
+	overflow-wrap: anywhere;
 }
 /* Preserve the content owner's exact phases, dates and native links. No extraction
    or inferred milestones: this styles the existing authored overview in place. */
