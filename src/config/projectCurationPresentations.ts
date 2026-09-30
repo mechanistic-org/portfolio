@@ -1718,5 +1718,2148 @@ export const projectCurationPresentations: Record<string, ProjectPresentation> =
       "eyebrow": "Project views",
       "description": "Mechanical architecture, product details and installation views."
     }
+  },
+  "makeline": {
+    "sections": {
+      "architecture": "fit-the-food-path-and-the-service-spaces",
+      "planning": "define-the-interfaces-before-the-build",
+      "interfaces": "connect-the-mechanical-and-electrical-work",
+      "validation": "plan-validation-across-the-line",
+      "outcome": "documented-contribution",
+      "curation-5": "proposed-development-timeline",
+      "curation-6": "undated-records"
+    },
+    "media": {
+      "D265-F01": {
+        "galleryId": "full_pass_265_d265-f01",
+        "src": "/assets/makeline/full-pass-265/makeline-row.jpg"
+      },
+      "D265-F02": {
+        "galleryId": "full_pass_265_d265-f02",
+        "src": "/assets/makeline/full-pass-265/module-cross-sections.jpg"
+      },
+      "D265-F03": {
+        "galleryId": "full_pass_265_d265-f03",
+        "src": "/assets/makeline/full-pass-265/integration-plan.jpg"
+      },
+      "D265-F04": {
+        "galleryId": "full_pass_265_d265-f04",
+        "src": "/assets/makeline/full-pass-265/motor-pcb-interface.jpg"
+      },
+      "D265-F05": {
+        "galleryId": "full_pass_265_d265-f05",
+        "src": "/assets/makeline/full-pass-265/ethercat-bridge-board.jpg"
+      },
+      "D265-F06": {
+        "galleryId": "full_pass_265_d265-f06",
+        "src": "/assets/makeline/full-pass-265/validation-plan.jpg"
+      }
+    },
+    "models": [],
+    "scenes": [
+      {
+        "key": "architecture",
+        "parent": "architecture",
+        "eyebrow": "System development",
+        "title": "Fit the food path and the service spaces",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "D265-F02"
+        ],
+        "mediaLabel": "Fit the food path and the service spaces"
+      },
+      {
+        "key": "planning",
+        "parent": "planning",
+        "eyebrow": "System development",
+        "title": "Define the interfaces before the build",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "D265-F03",
+          "D265-F04"
+        ],
+        "mediaLabel": "Define the interfaces before the build"
+      },
+      {
+        "key": "interfaces",
+        "parent": "interfaces",
+        "eyebrow": "System development",
+        "title": "Connect the mechanical and electrical work",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "D265-F05"
+        ],
+        "mediaLabel": "Connect the mechanical and electrical work"
+      },
+      {
+        "key": "validation",
+        "parent": "validation",
+        "eyebrow": "System development",
+        "title": "Plan validation across the line",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "D265-F06"
+        ],
+        "mediaLabel": "Plan validation across the line"
+      },
+      {
+        "key": "outcome",
+        "parent": "outcome",
+        "eyebrow": "System development",
+        "title": "Documented contribution",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": ""
+      },
+      {
+        "key": "curation-5",
+        "eyebrow": "Makeline",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Proposed development timeline"
+      },
+      {
+        "key": "curation-6",
+        "eyebrow": "Makeline",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Undated records"
+      }
+    ],
+    "featured": [
+      {
+        "media": "D265-F02",
+        "section": "architecture",
+        "label": "Food and service interfaces",
+        "detail": "Architecture in the joint patent application.",
+        "layout": "intervention"
+      },
+      {
+        "media": "D265-F06",
+        "section": "validation",
+        "label": "System validation plan",
+        "detail": "Reliability, safety and fault handling.",
+        "layout": "record"
+      }
+    ],
+    "breakout": {
+      "eyebrow": "Food path, interfaces and validation",
+      "description": "An assembled cabinet line, mechanical interface drawing, board and planning records connect the system architecture to its physical development."
+    }
+  },
+  "dispensers": {
+    "sections": {
+      "alternatives": "move-the-food-then-control-the-release",
+      "tests": "make-the-path-visible",
+      "cleaning": "design-for-removal-and-cleaning",
+      "outcomes": "what-the-prototypes-establish",
+      "curation-4": "proposed-development-timeline",
+      "curation-5": "additional-context"
+    },
+    "media": {
+      "D264-F01": {
+        "galleryId": "full_pass_264_d264-f01",
+        "src": "/assets/dispensers/full-pass-264/six-chute-prototype.jpg"
+      },
+      "D264-F02": {
+        "galleryId": "full_pass_264_d264-f02",
+        "src": "/assets/dispensers/full-pass-264/mechanism-alternatives.jpg"
+      },
+      "D264-F03": {
+        "galleryId": "full_pass_264_d264-f03",
+        "src": "/assets/dispensers/full-pass-264/outlet-drive-options.jpg"
+      },
+      "D264-F04": {
+        "galleryId": "full_pass_264_d264-f04",
+        "src": "/assets/dispensers/full-pass-264/cheese-chute-test.jpg"
+      },
+      "D264-F05": {
+        "galleryId": "full_pass_264_d264-f05",
+        "src": "/assets/dispensers/full-pass-264/beans-chute-test.jpg"
+      },
+      "D264-F06": {
+        "galleryId": "full_pass_264_d264-f06",
+        "src": "/assets/dispensers/full-pass-264/removable-parts.jpg"
+      }
+    },
+    "models": [],
+    "scenes": [
+      {
+        "key": "alternatives",
+        "parent": "alternatives",
+        "eyebrow": "Mechanism studies",
+        "title": "Move the food, then control the release",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "D264-F02",
+          "D264-F03"
+        ],
+        "mediaLabel": "Concept choices and outlet drive options"
+      },
+      {
+        "key": "tests",
+        "parent": "tests",
+        "eyebrow": "Physical prototypes",
+        "title": "Make the path visible",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "D264-F04",
+          "D264-F05"
+        ],
+        "mediaLabel": "Clear ingredient paths"
+      },
+      {
+        "key": "cleaning",
+        "parent": "cleaning",
+        "eyebrow": "Service access",
+        "title": "Design for removal and cleaning",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "D264-F06"
+        ],
+        "mediaLabel": "Separated food-contact parts"
+      },
+      {
+        "key": "outcomes",
+        "parent": "outcomes",
+        "eyebrow": "Evidence and contribution",
+        "title": "What the prototypes establish",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": ""
+      },
+      {
+        "key": "curation-4",
+        "eyebrow": "Ingredient Dispensers",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Proposed development timeline"
+      },
+      {
+        "key": "curation-5",
+        "eyebrow": "Ingredient Dispensers",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Additional context"
+      }
+    ],
+    "featured": [
+      {
+        "media": "D264-F03",
+        "section": "alternatives",
+        "label": "Separate motion and release",
+        "detail": "The drive alternatives under consideration.",
+        "layout": "intervention"
+      },
+      {
+        "media": "D264-F04",
+        "section": "tests",
+        "label": "See the food path",
+        "detail": "A clear chute test setup.",
+        "layout": "record"
+      }
+    ],
+    "breakout": {
+      "eyebrow": "Mechanisms and physical prototypes",
+      "description": "Concept sheets, ingredient-present setups and separated parts show the dispenser interfaces at different stages of development."
+    }
+  },
+  "backsplash": {
+    "sections": {
+      "packaging": "power-and-controls-in-the-cabinet",
+      "display": "one-display-assembly-across-the-modules",
+      "grid": "the-mounting-grid-was-an-interface",
+      "geometry": "defining-the-optical-and-board-geometry",
+      "access": "sealing-and-access-around-the-package",
+      "hardware": "the-hardware-record",
+      "sources": "source-trail",
+      "curation-7": "proposed-development-timeline",
+      "curation-8": "undated-records"
+    },
+    "media": {
+      "package": {
+        "galleryId": "full_pass_255_m05",
+        "src": "/assets/backsplash/bubbles/01_misc/IMG_0238_60.png"
+      },
+      "front": {
+        "galleryId": "full_pass_255_m01",
+        "src": "/assets/backsplash/bubbles/01_misc/PXL_20211102_214847653_60.png"
+      },
+      "grid": {
+        "galleryId": "full_pass_255_m03",
+        "src": "/assets/backsplash/bubbles/01_misc/PXL_20211102_190316482_60.png"
+      },
+      "ring": {
+        "galleryId": "full_pass_255_m02",
+        "src": "/assets/backsplash/full-pass-255/light-ring-detail.png"
+      },
+      "bench": {
+        "galleryId": "full_pass_255_m04",
+        "src": "/assets/backsplash/bubbles/01_misc/PXL_20211102_180108511_60.png"
+      }
+    },
+    "scenes": [
+      {
+        "key": "packaging",
+        "eyebrow": "Cabinet integration",
+        "left": {
+          "kind": "context"
+        },
+        "media": [
+          "package"
+        ]
+      },
+      {
+        "key": "display",
+        "eyebrow": "Repeated interface",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "front"
+        ]
+      },
+      {
+        "key": "grid",
+        "eyebrow": "Mechanical interface",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "grid"
+        ]
+      },
+      {
+        "key": "geometry",
+        "eyebrow": "Drawing definition",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "ring"
+        ]
+      },
+      {
+        "key": "access",
+        "eyebrow": "Enclosure interfaces",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "hardware",
+        "eyebrow": "Physical assembly",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "bench"
+        ]
+      },
+      {
+        "key": "sources",
+        "eyebrow": "Source context",
+        "left": {
+          "kind": "sources"
+        },
+        "media": []
+      },
+      {
+        "key": "curation-7",
+        "eyebrow": "Backsplash / Infrastructure Slot",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Proposed development timeline"
+      },
+      {
+        "key": "curation-8",
+        "eyebrow": "Backsplash / Infrastructure Slot",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Undated records"
+      }
+    ],
+    "featured": [],
+    "breakout": {
+      "eyebrow": "Cabinet electronics and mechanical interfaces",
+      "description": "The retained interior, display-array, mounting-grid, light-ring and bench views connect the subsystem package to its mechanical details."
+    }
+  },
+  "portion-cup": {
+    "sections": {
+      "denesting": "separate-the-nested-cups",
+      "interfaces": "fit-the-interfaces-around-the-stack",
+      "development": "move-from-parts-planning-to-assembly",
+      "outcome": "the-roadmap-decision",
+      "curation-4": "proposed-development-timeline",
+      "curation-5": "undated-records"
+    },
+    "media": {
+      "D266-F01": {
+        "galleryId": "full_pass_266_d266-f01",
+        "src": "/assets/portion-cup/full-pass-266/four-channel-row.jpg"
+      },
+      "D266-F02": {
+        "galleryId": "full_pass_266_d266-f02",
+        "src": "/assets/portion-cup/full-pass-266/cup-rim-section.jpg"
+      },
+      "D266-F03": {
+        "galleryId": "full_pass_266_d266-f03",
+        "src": "/assets/portion-cup/full-pass-266/ring-gear-drive.jpg"
+      },
+      "D266-F04": {
+        "galleryId": "full_pass_266_d266-f04",
+        "src": "/assets/portion-cup/full-pass-266/board-packaging-study.jpg"
+      },
+      "D266-F05": {
+        "galleryId": "full_pass_266_d266-f05",
+        "src": "/assets/portion-cup/full-pass-266/cabinet-layout.jpg"
+      },
+      "D266-F06": {
+        "galleryId": "full_pass_266_d266-f06",
+        "src": "/assets/portion-cup/full-pass-266/drive-assembly.jpg"
+      }
+    },
+    "models": [],
+    "scenes": [
+      {
+        "key": "denesting",
+        "parent": "denesting",
+        "eyebrow": "Cup-denesting development",
+        "title": "Separate the nested cups",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "D266-F02",
+          "D266-F03"
+        ],
+        "mediaLabel": "Separate the nested cups"
+      },
+      {
+        "key": "interfaces",
+        "parent": "interfaces",
+        "eyebrow": "Cup-denesting development",
+        "title": "Fit the interfaces around the stack",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "D266-F04",
+          "D266-F05"
+        ],
+        "mediaLabel": "Fit the interfaces around the stack"
+      },
+      {
+        "key": "development",
+        "parent": "development",
+        "eyebrow": "Cup-denesting development",
+        "title": "Move from parts planning to assembly",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "D266-F06"
+        ],
+        "mediaLabel": "Move from parts planning to assembly"
+      },
+      {
+        "key": "outcome",
+        "parent": "outcome",
+        "eyebrow": "Cup-denesting development",
+        "title": "The roadmap decision",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": ""
+      },
+      {
+        "key": "curation-4",
+        "eyebrow": "Portion Cup",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Proposed development timeline"
+      },
+      {
+        "key": "curation-5",
+        "eyebrow": "Portion Cup",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Undated records"
+      }
+    ],
+    "featured": [
+      {
+        "media": "D266-F04",
+        "section": "interfaces",
+        "label": "Packaging tradeoffs",
+        "detail": "Boards, connectors and wire space around the cup stacks.",
+        "layout": "intervention"
+      },
+      {
+        "media": "D266-F06",
+        "section": "development",
+        "label": "Physical assembly",
+        "detail": "Machined enclosure, bearings and pinions.",
+        "layout": "record"
+      }
+    ],
+    "breakout": {
+      "eyebrow": "Cup rims, drive and packaging",
+      "description": "CAD sections, an annotated board study and physical assembly show how the denesting mechanism and its interfaces fit together."
+    }
+  },
+  "webtv-galaxy": {
+    "sections": {
+      "architecture": "a-gateway-for-a-planned-home-network",
+      "thermal": "heat-set-the-route-through-the-enclosure",
+      "partition": "drive-support-and-air-partitioning-needed-different-parts",
+      "cpu": "the-cpu-package-had-to-be-assembled-in-place",
+      "manufacture": "tooling-feedback-changed-the-geometry-under-discussion",
+      "outcome": "from-prototype-files-to-the-last-recorded-review",
+      "sources": "source-trail",
+      "curation-7": "proposed-development-timeline"
+    },
+    "media": {
+      "architecture": {
+        "galleryId": "architecture",
+        "src": "/assets/webtv-galaxy/full-pass-252/architecture.webp"
+      },
+      "early-appearance": {
+        "galleryId": "architecture",
+        "src": "/assets/webtv-galaxy/full-pass-252/early-appearance.webp"
+      },
+      "thermal-temperature": {
+        "galleryId": "thermal",
+        "src": "/assets/webtv-galaxy/full-pass-252/thermal-temperature.webp"
+      },
+      "thermal-velocity": {
+        "galleryId": "thermal",
+        "src": "/assets/webtv-galaxy/full-pass-252/thermal-velocity.webp"
+      },
+      "cpu-top": {
+        "galleryId": "cpu",
+        "src": "/assets/webtv-galaxy/full-pass-252/cpu-top.webp"
+      },
+      "cpu-underside": {
+        "galleryId": "cpu",
+        "src": "/assets/webtv-galaxy/full-pass-252/cpu-underside.webp"
+      },
+      "base-prototype-deviations": {
+        "galleryId": "manufacture",
+        "src": "/assets/webtv-galaxy/full-pass-252/base-prototype-deviations.webp"
+      }
+    },
+    "scenes": [
+      {
+        "key": "architecture",
+        "eyebrow": "System architecture",
+        "left": {
+          "kind": "context"
+        },
+        "media": [
+          "architecture",
+          "early-appearance"
+        ]
+      },
+      {
+        "key": "thermal",
+        "eyebrow": "Thermal analysis",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "thermal-temperature",
+          "thermal-velocity"
+        ]
+      },
+      {
+        "key": "partition",
+        "eyebrow": "Separate functions",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "architecture"
+        ]
+      },
+      {
+        "key": "cpu",
+        "eyebrow": "Assembly sequence",
+        "left": {
+          "kind": "scar",
+          "section": "cpu"
+        },
+        "media": [
+          "cpu-top",
+          "cpu-underside"
+        ]
+      },
+      {
+        "key": "manufacture",
+        "eyebrow": "Supplier feedback",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "base-prototype-deviations"
+        ]
+      },
+      {
+        "key": "outcome",
+        "eyebrow": "Prototype milestones",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "sources",
+        "eyebrow": "Evidence",
+        "left": {
+          "kind": "sources"
+        },
+        "media": []
+      },
+      {
+        "key": "curation-7",
+        "eyebrow": "WebTV Galaxy",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Proposed development timeline"
+      }
+    ],
+    "featured": [],
+    "breakout": {
+      "eyebrow": "Inside the development package",
+      "description": "The assembly views, thermal plots and annotated base drawing explain the mechanical decisions. An early appearance study preserves the exterior direction separately from the development chassis."
+    }
+  },
+  "webtv-cortez": {
+    "sections": {
+      "envelope": "a-rectangular-mechanism-inside-an-organic-shell",
+      "keys": "choosing-the-keys-while-the-envelope-was-still-moving",
+      "model": "a-working-model-to-check-the-design",
+      "review": "the-first-review-changed-the-surfaces",
+      "outcome": "prototype-release-and-the-later-data-exchange",
+      "people": "people-and-responsibilities",
+      "sources": "source-trail",
+      "curation-7": "proposed-development-timeline"
+    },
+    "media": {
+      "working-layout": {
+        "galleryId": "keys",
+        "src": "/assets/webtv-cortez/full-pass-253/working-layout.webp"
+      },
+      "supplier-key-envelope": {
+        "galleryId": "keys",
+        "src": "/assets/webtv-cortez/full-pass-253/supplier-key-envelope.webp"
+      },
+      "keycap-section": {
+        "galleryId": "keys",
+        "src": "/assets/webtv-cortez/full-pass-253/keycap-section.webp"
+      },
+      "underside-surface": {
+        "galleryId": "surfaces",
+        "src": "/assets/webtv-cortez/full-pass-253/underside-surface.webp"
+      },
+      "grip-study": {
+        "galleryId": "surfaces",
+        "src": "/assets/webtv-cortez/full-pass-253/grip-study.webp"
+      },
+      "navigation-detail": {
+        "galleryId": "prototype",
+        "src": "/assets/webtv-cortez/full-pass-253/navigation-detail.webp"
+      }
+    },
+    "scenes": [
+      {
+        "key": "envelope",
+        "eyebrow": "Surface development",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "underside-surface",
+          "grip-study"
+        ]
+      },
+      {
+        "key": "keys",
+        "eyebrow": "Supplier interfaces",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "working-layout",
+          "supplier-key-envelope",
+          "keycap-section"
+        ]
+      },
+      {
+        "key": "model",
+        "eyebrow": "A working hard model",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "working-layout"
+        ]
+      },
+      {
+        "key": "review",
+        "eyebrow": "Review and revision",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "underside-surface"
+        ]
+      },
+      {
+        "key": "outcome",
+        "eyebrow": "Prototype and handoff",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "navigation-detail"
+        ]
+      },
+      {
+        "key": "people",
+        "eyebrow": "Responsibilities",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "sources",
+        "eyebrow": "Evidence",
+        "left": {
+          "kind": "sources"
+        },
+        "media": []
+      },
+      {
+        "key": "curation-7",
+        "eyebrow": "Cortez",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Proposed development timeline"
+      }
+    ],
+    "featured": [],
+    "breakout": {
+      "eyebrow": "From the layout to the handgrip",
+      "description": "The working drawing, supplier references and surface studies explain the package. The photograph records the interface without asserting a prototype revision."
+    }
+  },
+  "webtv-elmer": {
+    "sections": {
+      "interfaces": "establishing-the-interfaces",
+      "elmer": "reworking-the-elmer-hardware",
+      "zeus": "turning-elmer-into-zeus",
+      "connector": "connector-identity-drove-the-rear-boundary",
+      "perforations": "reviewing-contact-area-and-perforations",
+      "fabrication": "from-geometry-to-fabricated-parts",
+      "assembly": "assembly-still-had-open-details",
+      "people": "people-and-responsibilities",
+      "sources": "source-trail",
+      "curation-9": "proposed-development-timeline"
+    },
+    "media": {
+      "worksheet": {
+        "galleryId": "reference",
+        "src": "/assets/webtv-elmer/full-pass-254/mercury-interface-worksheet.webp"
+      },
+      "exception": {
+        "galleryId": "reference",
+        "src": "/assets/webtv-elmer/full-pass-254/power-supply-exception.webp"
+      },
+      "connector": {
+        "galleryId": "connector",
+        "src": "/assets/webtv-elmer/full-pass-254/stacked-dsub.webp"
+      },
+      "review": {
+        "galleryId": "review",
+        "src": "/assets/webtv-elmer/full-pass-254/perforation-review.webp"
+      }
+    },
+    "scenes": [
+      {
+        "key": "interfaces",
+        "eyebrow": "Component inputs",
+        "left": {
+          "kind": "metrics",
+          "keys": [
+            "governance"
+          ]
+        },
+        "media": [
+          "worksheet",
+          "exception"
+        ]
+      },
+      {
+        "key": "elmer",
+        "eyebrow": "Prototype revisions",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "zeus",
+        "eyebrow": "Enclosure conversion",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "connector",
+        "eyebrow": "Connector definition",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "connector"
+        ]
+      },
+      {
+        "key": "perforations",
+        "eyebrow": "Thermal review",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "review"
+        ]
+      },
+      {
+        "key": "fabrication",
+        "eyebrow": "Supplier release and receipt",
+        "left": {
+          "kind": "metrics",
+          "keys": [
+            "process"
+          ]
+        },
+        "media": []
+      },
+      {
+        "key": "assembly",
+        "eyebrow": "Assembly support",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "people",
+        "eyebrow": "Contribution boundaries",
+        "left": {
+          "kind": "context"
+        },
+        "media": []
+      },
+      {
+        "key": "sources",
+        "eyebrow": "Source context",
+        "left": {
+          "kind": "sources"
+        },
+        "media": []
+      },
+      {
+        "key": "curation-9",
+        "eyebrow": "Elmer / Zeus (HomeNet)",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Proposed development timeline"
+      }
+    ],
+    "featured": [],
+    "breakout": {
+      "eyebrow": "Interfaces and enclosure review",
+      "description": "The original component worksheet, corrected connector reference and annotated perforation layout show the mechanical decisions. Captions distinguish reference parts, review instructions and unverified outcomes."
+    }
+  },
+  "bazooka": {
+    "sections": {
+      "architecture": "a-small-enclosure-with-several-jobs",
+      "airgap": "giving-the-air-gap-mechanism-a-controlled-reference",
+      "fit": "retention-without-an-over-constrained-fit",
+      "testing": "testing-the-complete-interface",
+      "handoff": "making-the-supplier-handoff-inspectable",
+      "factory": "following-the-part-through-the-factory",
+      "sources": "source-trail",
+      "curation-7": "proposed-development-timeline",
+      "curation-8": "optional-additional-context"
+    },
+    "media": {
+      "airgap": {
+        "galleryId": "airgap",
+        "src": "/assets/bazooka/full-pass-249/airgap-guide.webp"
+      },
+      "springs": {
+        "galleryId": "airgap",
+        "src": "/assets/bazooka/03-base-test-btn-2/IMG_20170928_153842-2-xl.webp"
+      },
+      "tabs": {
+        "galleryId": "fit",
+        "src": "/assets/bazooka/full-pass-249/fit-tabs.webp"
+      },
+      "chamfer": {
+        "galleryId": "fit",
+        "src": "/assets/bazooka/full-pass-249/fit-chamfer.webp"
+      },
+      "click": {
+        "galleryId": "qualification",
+        "src": "/assets/bazooka/03-base-click-testing-1/IMG_20170419_135715-lg.webp"
+      },
+      "pull": {
+        "galleryId": "qualification",
+        "src": "/assets/bazooka/03-base-side-pull-testing/IMG_20170420_173231-xl.webp"
+      },
+      "tooling": {
+        "galleryId": "factory",
+        "src": "/assets/bazooka/03-base-test-btn-1/IMG_20170830_103733-xl.webp"
+      },
+      "samples": {
+        "galleryId": "factory",
+        "src": "/assets/bazooka/03-base-test-btn-2/IMG_20170904_151956-xl.webp"
+      }
+    },
+    "scenes": [
+      {
+        "key": "architecture",
+        "eyebrow": "System",
+        "left": {
+          "kind": "context"
+        },
+        "media": []
+      },
+      {
+        "key": "airgap",
+        "eyebrow": "Switch mechanism",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "airgap",
+          "springs"
+        ]
+      },
+      {
+        "key": "fit",
+        "eyebrow": "Locating and retaining",
+        "left": {
+          "kind": "metrics",
+          "keys": [
+            "process"
+          ]
+        },
+        "media": [
+          "tabs",
+          "chamfer"
+        ]
+      },
+      {
+        "key": "testing",
+        "eyebrow": "Qualification",
+        "left": {
+          "kind": "scar",
+          "section": "testing"
+        },
+        "media": [
+          "click",
+          "pull"
+        ]
+      },
+      {
+        "key": "handoff",
+        "eyebrow": "Engineering data",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "factory",
+        "eyebrow": "Manufacturing",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "tooling",
+          "samples"
+        ]
+      },
+      {
+        "key": "sources",
+        "eyebrow": "Evidence",
+        "left": {
+          "kind": "sources"
+        },
+        "media": []
+      },
+      {
+        "key": "curation-7",
+        "eyebrow": "Bazooka (Base Station)",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Proposed development timeline"
+      },
+      {
+        "key": "curation-8",
+        "eyebrow": "Bazooka (Base Station)",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Optional additional context"
+      }
+    ],
+    "featured": [],
+    "breakout": {
+      "eyebrow": "Mechanism, fit and factory work",
+      "description": "The April proposal and attributed fit diagrams sit alongside dated test setups, tooling and samples. Each caption identifies the stage and what the image establishes."
+    }
+  },
+  "room-director": {
+    "sections": {
+      "architecture": "a-glass-surface-with-a-mechanical-job",
+      "housing": "retaining-the-housing-while-clearing-the-display",
+      "bonding": "bonding-required-a-controlled-assembly-process",
+      "inspection": "defining-the-surface-and-how-to-inspect-it",
+      "label": "a-shared-label-problem-with-several-possible-fixes",
+      "testing": "what-the-complete-device-tests-demonstrated",
+      "outcome": "engineering-the-interfaces-through-the-handoff",
+      "sources": "source-trail",
+      "curation-8": "proposed-development-timeline",
+      "curation-9": "undated-records",
+      "curation-10": "optional-additional-context"
+    },
+    "media": {
+      "product": {
+        "galleryId": "architecture",
+        "src": "/assets/room-director/full-pass-250/product-render.webp"
+      },
+      "assembly": {
+        "galleryId": "architecture",
+        "src": "/assets/room-director/full-pass-250/touch-assembly.webp"
+      },
+      "hinge": {
+        "galleryId": "housing",
+        "src": "/assets/room-director/full-pass-250/hinge-change.webp"
+      },
+      "clearance": {
+        "galleryId": "housing",
+        "src": "/assets/room-director/full-pass-250/display-clearance.webp"
+      },
+      "glue": {
+        "galleryId": "bonding",
+        "src": "/assets/room-director/full-pass-250/glue-process.webp"
+      },
+      "clamp": {
+        "galleryId": "bonding",
+        "src": "/assets/room-director/full-pass-250/clamp-process.webp"
+      },
+      "appearance": {
+        "galleryId": "inspection",
+        "src": "/assets/room-director/full-pass-250/glass-appearance.webp"
+      },
+      "drop": {
+        "galleryId": "inspection",
+        "src": "/assets/room-director/full-pass-250/drop-fixture.webp"
+      }
+    },
+    "scenes": [
+      {
+        "key": "architecture",
+        "eyebrow": "Glass and display",
+        "left": {
+          "kind": "context"
+        },
+        "media": [
+          "assembly"
+        ]
+      },
+      {
+        "key": "housing",
+        "eyebrow": "Mechanical engagement",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "hinge",
+          "clearance"
+        ]
+      },
+      {
+        "key": "bonding",
+        "eyebrow": "Factory process",
+        "left": {
+          "kind": "metrics",
+          "keys": [
+            "process"
+          ]
+        },
+        "media": [
+          "glue",
+          "clamp"
+        ]
+      },
+      {
+        "key": "inspection",
+        "eyebrow": "Supplier definition",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "appearance"
+        ]
+      },
+      {
+        "key": "label",
+        "eyebrow": "Alternatives",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "testing",
+        "eyebrow": "Reliability",
+        "left": {
+          "kind": "scar",
+          "section": "testing"
+        },
+        "media": [
+          "drop"
+        ]
+      },
+      {
+        "key": "outcome",
+        "eyebrow": "Contribution",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "sources",
+        "eyebrow": "Evidence",
+        "left": {
+          "kind": "sources"
+        },
+        "media": []
+      },
+      {
+        "key": "curation-8",
+        "eyebrow": "Room Director (Sativa)",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Proposed development timeline"
+      },
+      {
+        "key": "curation-9",
+        "eyebrow": "Room Director (Sativa)",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Undated records"
+      },
+      {
+        "key": "curation-10",
+        "eyebrow": "Room Director (Sativa)",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Optional additional context"
+      }
+    ],
+    "featured": [],
+    "breakout": {
+      "eyebrow": "Glass, assembly and test evidence",
+      "description": "The product render introduces the form. Dated geometry, assembly and appearance figures explain how the interfaces were defined; the drop-fixture photographs show physical testing. Captions retain each source's stage and scope."
+    }
+  },
+  "wall-plates": {
+    "sections": {
+      "architecture": "a-clean-face-with-a-mechanical-job",
+      "manufacture": "making-the-chassis-manufacturable",
+      "engagement": "the-cover-could-enter-and-still-come-loose",
+      "seating": "seating-required-its-own-controlled-surfaces",
+      "retention": "retaining-the-module-behind-the-plate",
+      "finish": "a-white-surface-still-had-to-survive-handling",
+      "outcome": "what-this-work-established",
+      "sources": "source-trail",
+      "curation-8": "proposed-development-timeline",
+      "curation-9": "undated-records",
+      "curation-10": "optional-additional-context"
+    },
+    "media": {
+      "cover": {
+        "galleryId": "product",
+        "src": "/assets/wall-plates/full-pass-251/cover-render.webp"
+      },
+      "chassis": {
+        "galleryId": "product",
+        "src": "/assets/wall-plates/full-pass-251/chassis-render.webp"
+      },
+      "hook": {
+        "galleryId": "manufacture",
+        "src": "/assets/wall-plates/full-pass-251/hook-dfm.webp"
+      },
+      "y": {
+        "galleryId": "manufacture",
+        "src": "/assets/wall-plates/full-pass-251/y-engagement.webp"
+      },
+      "z": {
+        "galleryId": "seating",
+        "src": "/assets/wall-plates/full-pass-251/z-seating.webp"
+      },
+      "evt2": {
+        "galleryId": "testing",
+        "src": "/assets/wall-plates/full-pass-251/evt2-hardness.webp"
+      },
+      "dvt": {
+        "galleryId": "testing",
+        "src": "/assets/wall-plates/full-pass-251/dvt-hardness.webp"
+      },
+      "film": {
+        "galleryId": "testing",
+        "src": "/assets/wall-plates/full-pass-251/protective-film.webp"
+      }
+    },
+    "scenes": [
+      {
+        "key": "architecture",
+        "eyebrow": "Product architecture",
+        "left": {
+          "kind": "context"
+        },
+        "media": [
+          "chassis"
+        ]
+      },
+      {
+        "key": "manufacture",
+        "eyebrow": "Stamping constraints",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "hook"
+        ]
+      },
+      {
+        "key": "engagement",
+        "eyebrow": "Moving interfaces",
+        "left": {
+          "kind": "scar",
+          "section": "engagement"
+        },
+        "media": [
+          "y"
+        ]
+      },
+      {
+        "key": "seating",
+        "eyebrow": "Drawing control",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "z"
+        ]
+      },
+      {
+        "key": "retention",
+        "eyebrow": "System retention",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "finish",
+        "eyebrow": "Appearance and test",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "evt2",
+          "dvt",
+          "film"
+        ]
+      },
+      {
+        "key": "outcome",
+        "eyebrow": "Contribution",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "sources",
+        "eyebrow": "Evidence",
+        "left": {
+          "kind": "sources"
+        },
+        "media": []
+      },
+      {
+        "key": "curation-8",
+        "eyebrow": "Wall Plate (Waldo)",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Proposed development timeline"
+      },
+      {
+        "key": "curation-9",
+        "eyebrow": "Wall Plate (Waldo)",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Undated records"
+      },
+      {
+        "key": "curation-10",
+        "eyebrow": "Wall Plate (Waldo)",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Optional additional context"
+      }
+    ],
+    "featured": [],
+    "breakout": {
+      "eyebrow": "From form to physical samples",
+      "description": "Original cover and chassis renders introduce the product. Supplier and fit diagrams explain the mechanical decisions; sample tables and photographs preserve the distinct finish-test results."
+    }
+  },
+  "extension-switches": {
+    "sections": {
+      "mechanism": "a-familiar-switch-with-a-coupled-mechanism",
+      "bonding": "holding-the-cap-meant-controlling-the-process",
+      "feel": "the-feel-depended-on-the-hidden-stack",
+      "testing": "test-requirements-and-test-results-had-different-jobs",
+      "definition": "turning-findings-into-inspectable-parts",
+      "outcome": "what-the-work-established",
+      "curation-6": "proposed-development-timeline",
+      "curation-7": "undated-records",
+      "curation-8": "optional-additional-context"
+    },
+    "media": {
+      "E263-F01": {
+        "galleryId": "full_pass_263_e263-f01",
+        "src": "/assets/extension-switches/full-pass-263/cap-fixture.jpg"
+      },
+      "E263-F02": {
+        "galleryId": "full_pass_263_e263-f02",
+        "src": "/assets/extension-switches/full-pass-263/cap-placement.jpg"
+      },
+      "E263-F03": {
+        "galleryId": "full_pass_263_e263-f03",
+        "src": "/assets/extension-switches/full-pass-263/switch-test-rig.webp"
+      }
+    },
+    "scenes": [
+      {
+        "key": "mechanism",
+        "parent": "mechanism",
+        "eyebrow": "Coupled mechanism",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "bonding",
+        "parent": "bonding",
+        "eyebrow": "Cap bonding",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "E263-F01",
+          "E263-F02"
+        ]
+      },
+      {
+        "key": "feel",
+        "parent": "feel",
+        "eyebrow": "Operating feel",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "testing",
+        "parent": "testing",
+        "eyebrow": "Reliability development",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "E263-F03"
+        ]
+      },
+      {
+        "key": "definition",
+        "parent": "definition",
+        "eyebrow": "Part and process definition",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "outcome",
+        "parent": "outcome",
+        "eyebrow": "Documented contribution",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "curation-6",
+        "eyebrow": "Extension Switch (Elvis)",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Proposed development timeline"
+      },
+      {
+        "key": "curation-7",
+        "eyebrow": "Extension Switch (Elvis)",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Undated records"
+      },
+      {
+        "key": "curation-8",
+        "eyebrow": "Extension Switch (Elvis)",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Optional additional context"
+      }
+    ],
+    "featured": [],
+    "breakout": {
+      "eyebrow": "Assembly and test views",
+      "description": "The cap fixture, cap placement and switch test rig show the physical work behind the Extension Switch account."
+    }
+  },
+  "fissler-bbq": {
+    "sections": {
+      "brief": "the-brief-and-my-role",
+      "experiments": "making-the-brief-testable",
+      "mechanism": "driving-the-cage-from-its-edge",
+      "tests": "separating-heat-rotation-and-cooking",
+      "results": "results-and-decisions",
+      "ending": "where-my-involvement-ended",
+      "gallery": "project-views",
+      "curation-7": "proposed-development-timeline",
+      "curation-8": "undated-records"
+    },
+    "media": {
+      "d268-f01": {
+        "galleryId": "fissler-project-views",
+        "src": "/assets/fissler-bbq/selected-general/fissler-context-01-xl.webp"
+      },
+      "d268-f02": {
+        "galleryId": "fissler-project-views",
+        "src": "/assets/fissler-bbq/selected-general/fissler-context-02-xl.webp"
+      },
+      "d268-f03": {
+        "galleryId": "fissler-project-views",
+        "src": "/assets/fissler-bbq/selected-general/fissler-context-03-xl.webp"
+      }
+    },
+    "models": [],
+    "scenes": [
+      {
+        "key": "brief",
+        "parent": "brief",
+        "eyebrow": "Context",
+        "title": "The brief and my role",
+        "left": {
+          "kind": "context"
+        },
+        "media": [
+          "d268-f02"
+        ],
+        "mediaLabel": "Upright project view"
+      },
+      {
+        "key": "experiments",
+        "parent": "experiments",
+        "eyebrow": "Experiments",
+        "title": "Making the brief testable",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "d268-f03"
+        ],
+        "mediaLabel": "Opened-flat configuration"
+      },
+      {
+        "key": "mechanism",
+        "parent": "mechanism",
+        "eyebrow": "Mechanism",
+        "title": "Driving the cage from its edge",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "d268-f01"
+        ],
+        "mediaLabel": "Exposed meat cage"
+      },
+      {
+        "key": "tests",
+        "parent": "tests",
+        "eyebrow": "Test conditions",
+        "title": "Separating heat, rotation and cooking",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "results",
+        "parent": "results",
+        "eyebrow": "Findings",
+        "title": "Results and decisions",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "ending",
+        "parent": "ending",
+        "eyebrow": "Scope",
+        "title": "Where my involvement ended",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "gallery",
+        "parent": "gallery",
+        "eyebrow": "Visual evidence",
+        "title": "Project views",
+        "left": {
+          "kind": "sources"
+        },
+        "media": [
+          "d268-f01",
+          "d268-f02",
+          "d268-f03"
+        ],
+        "mediaLabel": "Selected project views"
+      },
+      {
+        "key": "curation-7",
+        "eyebrow": "Fissler BBQ",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Proposed development timeline"
+      },
+      {
+        "key": "curation-8",
+        "eyebrow": "Fissler BBQ",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Undated records"
+      }
+    ],
+    "featured": [],
+    "breakout": {
+      "eyebrow": "Project views",
+      "description": "Three selected views of the Fissler BBQ concept."
+    }
+  },
+  "xbox": {
+    "sections": {
+      "summary": "project-summary",
+      "liners": "emi-liners-and-assembly-interference",
+      "bracket": "a-second-sprint-airflow-around-the-drive-support",
+      "gpu": "gpu-active-cooling",
+      "cad": "project-cad",
+      "curation-5": "proposed-development-timeline"
+    },
+    "media": {
+      "d267-f01": {
+        "galleryId": "xbox-project-cad",
+        "src": "/assets/xbox/project-cad/xbox-render-01-xl.webp"
+      },
+      "d267-f02": {
+        "galleryId": "xbox-project-cad",
+        "src": "/assets/xbox/project-cad/xbox-render-02-xl.webp"
+      },
+      "d267-f03": {
+        "galleryId": "xbox-project-cad",
+        "src": "/assets/xbox/project-cad/xbox-render-03-xl.webp"
+      },
+      "d267-f04": {
+        "galleryId": "xbox-project-cad",
+        "src": "/assets/xbox/project-cad/xbox-render-04-xl.webp"
+      },
+      "d267-f05": {
+        "galleryId": "xbox-project-cad",
+        "src": "/assets/xbox/project-cad/xbox-render-05-xl.webp"
+      }
+    },
+    "models": [],
+    "scenes": [
+      {
+        "key": "summary",
+        "parent": "summary",
+        "eyebrow": "Context",
+        "title": "Project summary",
+        "left": {
+          "kind": "context"
+        },
+        "media": []
+      },
+      {
+        "key": "liners",
+        "parent": "liners",
+        "eyebrow": "Shielding",
+        "title": "EMI liners and assembly interference",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "bracket",
+        "parent": "bracket",
+        "eyebrow": "Design and review",
+        "title": "A second sprint: airflow around the drive support",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "gpu",
+        "parent": "gpu",
+        "eyebrow": "Proposal and implementation",
+        "title": "GPU active cooling",
+        "left": {
+          "kind": "none"
+        },
+        "media": []
+      },
+      {
+        "key": "cad",
+        "parent": "cad",
+        "eyebrow": "Project evidence",
+        "title": "Project CAD",
+        "left": {
+          "kind": "sources"
+        },
+        "media": [
+          "d267-f01",
+          "d267-f02",
+          "d267-f03",
+          "d267-f04",
+          "d267-f05"
+        ],
+        "mediaLabel": "Xbox project CAD"
+      },
+      {
+        "key": "curation-5",
+        "eyebrow": "Xbox",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Proposed development timeline"
+      }
+    ],
+    "featured": [],
+    "breakout": {
+      "eyebrow": "Project CAD",
+      "description": "Five selected project views, in their reviewed order."
+    }
+  },
+  "motorola-mp3": {
+    "sections": {
+      "envelope": "a-phone-accessory-built-around-a-fixed-envelope",
+      "surfaces": "from-surfaces-to-individual-parts",
+      "interfaces": "making-the-interfaces-explicit",
+      "manufacturing": "leaving-room-for-manufacturing-decisions",
+      "handoff": "delivering-the-model-and-its-remaining-questions",
+      "curation-5": "proposed-development-timeline"
+    },
+    "media": {
+      "figure1": {
+        "galleryId": "motorola-i1",
+        "src": "/assets/motorola-mp3/hero-alpha-20260909/motorola-mp3-hero-01-xl.webp"
+      },
+      "figure2": {
+        "galleryId": "motorola-i2",
+        "src": "/assets/motorola-mp3/engineering-20260909/motorola-mp3-assembly-01-xl.webp"
+      },
+      "figure3": {
+        "galleryId": "motorola-i4-cord",
+        "src": "/assets/motorola-mp3/engineering-20260909/motorola-mp3-cutaway-02-xl.webp"
+      },
+      "figure4": {
+        "galleryId": "motorola-i4-buttons",
+        "src": "/assets/motorola-mp3/engineering-20260909/motorola-mp3-cutaway-04-xl.webp"
+      }
+    },
+    "scenes": [
+      {
+        "key": "envelope",
+        "eyebrow": "Motorola MP3",
+        "left": {
+          "kind": "context"
+        },
+        "media": [
+          "figure1"
+        ]
+      },
+      {
+        "key": "surfaces",
+        "eyebrow": "Motorola MP3",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "figure2"
+        ]
+      },
+      {
+        "key": "interfaces",
+        "eyebrow": "Motorola MP3",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "figure4"
+        ]
+      },
+      {
+        "key": "manufacturing",
+        "eyebrow": "Motorola MP3",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "figure3"
+        ]
+      },
+      {
+        "key": "handoff",
+        "eyebrow": "Motorola MP3",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "figure2",
+          "figure3"
+        ]
+      },
+      {
+        "key": "curation-5",
+        "eyebrow": "Motorola MP3",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Proposed development timeline"
+      }
+    ],
+    "featured": [],
+    "breakout": {
+      "eyebrow": "Project views",
+      "description": "Product photograph, assembly geometry and annotated interface reviews."
+    }
+  },
+  "sc48": {
+    "sections": {
+      "0": "making-the-integrated-console-fit",
+      "1": "reuse-set-the-packaging-problem",
+      "2": "the-enclosure-was-also-part-of-the-experiment",
+      "3": "lower-profiles-and-different-airflow-paths",
+      "4": "airflow-became-a-set-of-parts",
+      "5": "surface-decisions-reached-the-boards",
+      "6": "plastics-access-and-manufacturing-definition",
+      "7": "the-contribution"
+    },
+    "media": {
+      "architecture-0": {
+        "galleryId": "architecture",
+        "src": "/assets/sc48/full-pass-246/high-reuse-plan.webp"
+      },
+      "review-assembly-0": {
+        "galleryId": "review-assembly",
+        "src": "/assets/sc48/curation-20260930-r2/archive-dsc03749-988147048da4.jpg"
+      },
+      "review-architecture-0": {
+        "galleryId": "review-architecture",
+        "src": "/assets/sc48/curation-20260930-r2/architecture-sequence-d089fd085122.svg"
+      },
+      "review-comparison-0": {
+        "galleryId": "review-comparison",
+        "src": "/assets/sc48/curation-20260930-r2/4u-summary-comparison-bf06d791d488.svg"
+      },
+      "review-crossflow-0": {
+        "galleryId": "review-crossflow",
+        "src": "/assets/sc48/curation-20260930-r2/trace-12-5-07c-9a82e920cecb.svg"
+      },
+      "review-hybrid-0": {
+        "galleryId": "review-hybrid",
+        "src": "/assets/sc48/curation-20260930-r2/trace-12-7-07b-9c6c6ad965cb.svg"
+      },
+      "airflow-0": {
+        "galleryId": "airflow",
+        "src": "/assets/sc48/03-meltdown-mitigation/9440-58856-00.jpg"
+      },
+      "keepout-0": {
+        "galleryId": "keepout",
+        "src": "/assets/sc48/full-pass-246/control-surface-keepout.webp"
+      },
+      "dcd-0": {
+        "galleryId": "dcd",
+        "src": "/assets/sc48/full-pass-246/main-left-interface.webp"
+      },
+      "frame-0": {
+        "galleryId": "frame",
+        "src": "/assets/sc48/01-brain-transplant/9420-58318-00.jpg"
+      },
+      "plastics-0": {
+        "galleryId": "plastics",
+        "src": "/assets/sc48/02-cosmetic-shell/9440-58842-00.jpg"
+      },
+      "plastics-1": {
+        "galleryId": "plastics",
+        "src": "/assets/sc48/02-cosmetic-shell/9440-58843-00.jpg"
+      },
+      "review-rear-layouts-0": {
+        "galleryId": "review-rear-layouts",
+        "src": "/assets/sc48/curation-20260930-r2/9100-58341-00-back-rev-4-3f53ff0f3915.jpg"
+      },
+      "review-rear-layouts-1": {
+        "galleryId": "review-rear-layouts",
+        "src": "/assets/sc48/curation-20260930-r2/9100-58341-00-zoom2-a272320dbf45.jpg"
+      },
+      "review-wire-guide-0": {
+        "galleryId": "review-wire-guide",
+        "src": "/assets/sc48/curation-20260930-r2/ps-wire-guide-b9f90de897fa.jpg"
+      },
+      "review-wire-guide-1": {
+        "galleryId": "review-wire-guide",
+        "src": "/assets/sc48/curation-20260930-r2/ps-wire-guide-seal-8d684ab4c598.jpg"
+      }
+    },
+    "scenes": [
+      {
+        "key": "0",
+        "eyebrow": "SC48",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Making the integrated console fit"
+      },
+      {
+        "key": "1",
+        "eyebrow": "SC48",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "architecture-0",
+          "review-assembly-0"
+        ],
+        "mediaLabel": "Reuse set the packaging problem"
+      },
+      {
+        "key": "2",
+        "eyebrow": "SC48",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "review-architecture-0",
+          "review-comparison-0"
+        ],
+        "mediaLabel": "The enclosure was also part of the experiment"
+      },
+      {
+        "key": "3",
+        "eyebrow": "SC48",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "review-crossflow-0",
+          "review-hybrid-0"
+        ],
+        "mediaLabel": "Lower profiles and different airflow paths"
+      },
+      {
+        "key": "4",
+        "eyebrow": "SC48",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "airflow-0",
+          "review-wire-guide-0",
+          "review-wire-guide-1"
+        ],
+        "mediaLabel": "Airflow became a set of parts"
+      },
+      {
+        "key": "5",
+        "eyebrow": "SC48",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "keepout-0",
+          "dcd-0",
+          "review-rear-layouts-0",
+          "review-rear-layouts-1"
+        ],
+        "mediaLabel": "Surface decisions reached the boards"
+      },
+      {
+        "key": "6",
+        "eyebrow": "SC48",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "frame-0",
+          "plastics-0",
+          "plastics-1"
+        ],
+        "mediaLabel": "Plastics, access and manufacturing definition"
+      },
+      {
+        "key": "7",
+        "eyebrow": "SC48",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "The contribution"
+      }
+    ],
+    "featured": []
+  },
+  "320-slot-optical-carousel": {
+    "sections": {
+      "0": "making-all-320-positions-work",
+      "1": "establish-the-path-before-committing-it-to-steel",
+      "2": "getting-material-through-the-geometry",
+      "3": "know-what-is-actually-in-the-tool",
+      "4": "inspect-the-function-at-every-position",
+      "5": "a-redesign-had-to-preserve-the-interfaces",
+      "6": "continue-at-the-system-and-production-support-level"
+    },
+    "media": {
+      "full_pass_256_f01-0": {
+        "galleryId": "full_pass_256_f01",
+        "src": "/assets/320-slot-optical-carousel/full-pass-256/prototype-disc-slots.webp"
+      },
+      "full_pass_256_f02-0": {
+        "galleryId": "full_pass_256_f02",
+        "src": "/assets/320-slot-optical-carousel/full-pass-256/removable-tool-section.webp"
+      },
+      "full_pass_256_f03-0": {
+        "galleryId": "full_pass_256_f03",
+        "src": "/assets/320-slot-optical-carousel/full-pass-256/first-molding-trial.webp"
+      },
+      "full_pass_256_f04-0": {
+        "galleryId": "full_pass_256_f04",
+        "src": "/assets/320-slot-optical-carousel/full-pass-256/ribs-and-radii-plan.webp"
+      },
+      "full_pass_256_f05-0": {
+        "galleryId": "full_pass_256_f05",
+        "src": "/assets/320-slot-optical-carousel/full-pass-256/slot-205-measurement.webp"
+      },
+      "full_pass_256_f06-0": {
+        "galleryId": "full_pass_256_f06",
+        "src": "/assets/320-slot-optical-carousel/full-pass-256/inventory-scan.webp"
+      },
+      "review-qc-profile-0": {
+        "galleryId": "review-qc-profile",
+        "src": "/assets/320-slot-optical-carousel/curation-20260930-r2/qc-slot-width-profiles-1cd0e25cb6a0.svg"
+      },
+      "full_pass_256_f07-0": {
+        "galleryId": "full_pass_256_f07",
+        "src": "/assets/320-slot-optical-carousel/full-pass-256/packaging-clearance.webp"
+      },
+      "full_pass_256_f08-0": {
+        "galleryId": "full_pass_256_f08",
+        "src": "/assets/320-slot-optical-carousel/full-pass-256/warpage-inspection.webp"
+      },
+      "review-qc-locations-0": {
+        "galleryId": "review-qc-locations",
+        "src": "/assets/320-slot-optical-carousel/curation-20260930-r2/qc-locations-7fd59b40adc9.png"
+      }
+    },
+    "scenes": [
+      {
+        "key": "0",
+        "eyebrow": "320-Slot Carousel",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Making all 320 positions work"
+      },
+      {
+        "key": "1",
+        "eyebrow": "320-Slot Carousel",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "full_pass_256_f01-0"
+        ],
+        "mediaLabel": "Establish the path before committing it to steel"
+      },
+      {
+        "key": "2",
+        "eyebrow": "320-Slot Carousel",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "full_pass_256_f02-0",
+          "full_pass_256_f03-0",
+          "full_pass_256_f04-0"
+        ],
+        "mediaLabel": "Getting material through the geometry"
+      },
+      {
+        "key": "3",
+        "eyebrow": "320-Slot Carousel",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "Know what is actually in the tool"
+      },
+      {
+        "key": "4",
+        "eyebrow": "320-Slot Carousel",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "full_pass_256_f05-0",
+          "full_pass_256_f06-0",
+          "review-qc-profile-0",
+          "review-qc-locations-0"
+        ],
+        "mediaLabel": "Inspect the function at every position"
+      },
+      {
+        "key": "5",
+        "eyebrow": "320-Slot Carousel",
+        "left": {
+          "kind": "none"
+        },
+        "media": [],
+        "mediaLabel": "A redesign had to preserve the interfaces"
+      },
+      {
+        "key": "6",
+        "eyebrow": "320-Slot Carousel",
+        "left": {
+          "kind": "none"
+        },
+        "media": [
+          "full_pass_256_f07-0",
+          "full_pass_256_f08-0"
+        ],
+        "mediaLabel": "Continue at the system and production-support level"
+      }
+    ],
+    "featured": []
   }
 };

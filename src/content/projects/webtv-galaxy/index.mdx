@@ -113,8 +113,6 @@ cyberspace:
     deck: []
 ---
 
-# WebTV Galaxy
-
 Galaxy brought the heat, storage and connectors of a small computer into a television gateway. WebTV's HomeNet plan called for three satellite tuners, two hard drives for DVR storage and HDTV output. Inside the enclosure, the mechanical problem was to make the drive mounts, CPU shield, partitions and rear electronics work as one package.
 
 I provided mechanical design and Pro/ENGINEER documentation through Mechanistic, working under WebTV's direction. The work moved through layout studies, supplier feedback, prototype files and detailed DEV revisions. Roy Askeland coordinated the assignment; Frank Salinas supplied hardware-system requirements and review, Avijit Goswami performed the thermal analysis, and Mike Hiett managed the prototype effort with EMS.
@@ -123,7 +121,11 @@ I provided mechanical design and Pro/ENGINEER documentation through Mechanistic,
 
 The September 2000 HomeNet material placed Galaxy at the center of a proposed network of entertainment devices. Early appearance studies explored an UltimateTV-branded enclosure with a broad front window and a central control. That exterior study and the later development chassis represent different parts of the record; the assembly views show the internal engineering more directly.
 
+The mechanical discussions were already taking shape in March 2001. Roy asked me to begin component-concept discussions on March 5. On March 13, I proposed reviewing Galaxy case-closure concepts, and Roy said he would bring more specific thermal constraints. The messages show how the assignment was being framed before the later simulation and detailed review records. They do not establish that the proposed meetings occurred.
+
 By spring 2001, the package had to accommodate two drives, a main board, a separate CPU board and shield, tuner boards, a smart-card reader and a power supply. Rear-panel connectors tied the electronics to chassis openings. Board heights, cable exits and mounting details were still being resolved while the mechanical model developed.
+
+The parts list was still a planning tool. In May, the hardware team distinguished newly assigned part numbers from the updated preliminary BOM and noted that hardware quantities were still being gathered before entry into Agile. The later reviewed sheets likewise retained tentative and to be determined entries. Those records explain interface definition; they are not a final as-built configuration.
 
 The [open-chassis view](/assets/webtv-galaxy/full-pass-252/architecture.webp) makes the main relationship visible: storage and the CPU occupy the front of the package, with partitions separating them from the rear electronics and power supply. A change to one mounting detail could affect both assembly access and the route available to air.
 
@@ -174,3 +176,31 @@ Galaxy's contribution was a mechanical development package carried through a cou
 - May mechanical notes, the July 27 DEV review and the September hotlist record alternatives, assembly constraints and continuing revisions.
 - Original architecture, CPU and base-deviation figures show the parts under discussion.
 - Dated WebTV correspondence records supplier feedback, the June prototype-file release, August CPU revisions and September status.
+
+## Proposed development timeline
+
+Dates describe the selected records; plans, photographed states, tests and outcomes retain their separate meanings.
+
+- **2000-09 - Home-network planning context.** WebTV planned a gateway within HomeNet, with nodes and input peripherals as separate devices. This planning record precedes the development chassis. Credit: WebTV planning.
+
+- **2001-03-05/2001-03-13 - Plan the opening mechanical reviews.** Roy asked Erik to begin Galaxy component-concept discussions. A week later, Erik proposed reviewing case-closure concepts while Roy said he would bring more specific thermal constraints. These messages establish planned reviews, not proof that the meetings occurred. Credit: Roy Askeland; Erik.
+
+- **2001-04-23 - Thermal model.** The 150 W, 45°C-ambient simulation linked component placement to airflow and called attention to the smart-card location. Its results are analytical, not prototype measurements. Credit: Avijit.
+
+- **2001-05 - Separate drive support from air partition.** The mechanical review kept a separate air partition after rejecting the drive bracket as the combined support and partition. Smart-card placement also remained a packaging decision. Credit: WebTV mechanical review; Erik mechanical follow-up.
+
+- **2001-05 - Review a manufacturable CPU shield.** NT Vision proposed stiffness features, folded sides and staged blanking for the perforated shield. These were supplier recommendations while internal requirements and gauges remained open. Credit: Pauline Soh / NT Vision; Frank Salinas review.
+
+- **2001-06-20 - Challenge the chassis forming plan.** D&D warned that the drawn standoff layout could warp the base and proposed alternate forms or ribs. Frank also identified the openings those alternatives could expose. Credit: Chuck Pokonosky / D&D; Frank Salinas.
+
+- **2001-06-28 - Prototype file release reported.** The July status reported prototype files released on June28, with Mike Hiett coordinating the EMS effort. File release does not establish a finished system. Credit: Erik status; Mike Hiett EMS coordination.
+
+- **2001-07-07 - Flexible partition received.** Flexible-partition prototypes were reported received while PCB prototypes were still expected. Credit: Erik report, supplier build separate.
+
+- **2001-07-10 - Base prototype deviations reviewed.** The prototype-base drawing recorded standoff substitutions and related opening changes, without a final inspection outcome. Credit: Supplier prototype and engineering review.
+
+- **2001-07-27 - CPU assembly access constrained.** Fasteners beside the fixed partition prevented dropping in a complete CPU module. The review directed assembly in parts and kept shielding details open. Credit: Shared mechanical review.
+
+- **2001-08-07 - Database and pending revisions.** Erik reported the current database and continued CPU-top revisions. The vent dimension conventions remain unresolved across the August and September records. Credit: Erik correspondence.
+
+- **2001-09-17 - Last recorded CPU review request.** Erik described the work as nearly wrapped up and requested another CPU-assembly review. The review result and program outcome remain unknown. Credit: Erik Norris, contemporary Lincicum.

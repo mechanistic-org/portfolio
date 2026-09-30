@@ -1,0 +1,251 @@
+{
+  "schema_version": "1.0",
+  "project": "kplayer-6000",
+  "title": "Development timeline",
+  "start": "2007-08",
+  "end": "2009-03",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2007-08",
+      "end": "2009-03"
+    }
+  ],
+  "events": [
+    {
+      "id": "R01",
+      "date": "2007-08",
+      "date_label": "August 2007",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Requirements define Apollo",
+      "summary": "DVD/CD import and playback with 1080p output in the established one-rack-unit product format. Limit: Product capabilities, not Erik electronic-design authorship.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ]
+    },
+    {
+      "id": "R06",
+      "date": "2008-05",
+      "date_label": "May 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Hinge-pin purchasing/design mismatch",
+      "summary": "The CAD specified a 0.750-inch pin while the BOM purchasing reference identified a 0.625-inch pin. Limit: Jon Cohn checked database; no claim Erik discovered it.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ]
+    },
+    {
+      "id": "R04",
+      "date": "2008-05-19",
+      "date_label": "May 19-20, 2008",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Baffle and revision investigation",
+      "summary": "The baffle investigation identified a high captive-washer screw, cable pinching and a proposed service-sequence change. An earlier baffle relief revision and conflicting revision labels raised questions about the drawing supplied to production. Limit: Approx1.5mm is reported discrepancy, not independently remeasured. Do not assert old drawing was proven root cause or final rework completed.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ],
+      "end_date": "2008-05-20"
+    },
+    {
+      "id": "R07",
+      "date": "2008-05-22",
+      "date_label": "May 22, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Longer pin and extra-turn experiment",
+      "summary": "The longer-pin assembly centered the door but bound consistently; an extra spring turn closed the test assembly. Limit: John Lio reports Michael Clader assembly; source does not name Erik as experimenter.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ]
+    },
+    {
+      "id": "R10",
+      "date": "2008-05-28",
+      "date_label": "May 28, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Specified spring order with testing planned",
+      "summary": "Clader recorded Erik concurrence on ordering 1,000 springs using 0.017-inch plated music wire and 4.5 turns, with prototype testing in parallel. Limit: Order request does not prove receipt, final installation or lifetime validation.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ]
+    },
+    {
+      "id": "R11",
+      "date": "2008-06-13",
+      "date_label": "June 13, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Readiness and manufacturing report",
+      "summary": "June 13 readiness reported required development/certifications complete, approximately 150 finished units and production at 50 per day. Limit: Not exact customer ship date, schedule adherence or total production.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ]
+    },
+    {
+      "id": "R03",
+      "date": "2008-06-19",
+      "date_label": "June 19, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "SATA prototype mechanical check",
+      "summary": "The June 19 prototype mechanical-check request moved fan connectors to accommodate SATA connectors. Limit: Attributed to Vincent DiLello/Argyle, not solely Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ]
+    },
+    {
+      "id": "R16",
+      "date": "2008-06-26",
+      "date_label": "June 26–July 3, 2008",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Move Apollo into sustaining and update the test fixture",
+      "summary": "transition decision and reported fixture changes; manufacturing-test coverage still under review. Credit: Michael Clader; hardware and manufacturing teams.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ],
+      "end_date": "2008-07-03"
+    },
+    {
+      "id": "R22",
+      "date": "2008-08-07",
+      "date_label": "August 7, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Report five SATA prototypes delivered",
+      "summary": "delivered prototype build; bring-up and drive qualification work remain open. Credit: Sandra Twist build coordination; Adrian Fung; Andrzej Kocan; hardware team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ]
+    },
+    {
+      "id": "R24",
+      "date": "2008-08",
+      "date_label": "August 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Installation drawing release",
+      "summary": "August installation drawings were released through the extranet; January 2009 customer work requested the complete Apollo CAD package from Argyle. Limit: No claim aviation hardware was qualified or shipped by Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ]
+    },
+    {
+      "id": "R37",
+      "date": "2008-09-11",
+      "date_label": "September 11, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Report TL9 SATA bring-up and component qualification complete",
+      "summary": "dated report covers DVD and 80 W supply; EMC work and separate TL10 builds still planned. Credit: Hardware team; Rob Wudrick recorder.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ]
+    },
+    {
+      "id": "R26",
+      "date": "2008-10",
+      "date_label": "October 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Electrical-team field support report",
+      "summary": "The October field report described two Q34 failures and a resistor change from 0 to 6.2 ohms at R291. Limit: Electrical-team action after launch; no claim of Erik PCB redesign.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ]
+    },
+    {
+      "id": "R28",
+      "date": "2008-10-29",
+      "date_label": "October 29, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Report TL10 PATA/SATA bring-up and remaining qualification",
+      "summary": "ten-unit bring-up report includes initial defects; safety, EMI and thermal work pending. Credit: Adrian Fung recorder; hardware team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ]
+    },
+    {
+      "id": "R44",
+      "date": "2008-12-11",
+      "date_label": "December 11, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Report Apollo SATA EMI certification complete",
+      "summary": "certification reported; chip revision and separate safety/thermal completion unspecified. Credit: Hardware team; Rob Wudrick recorder.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ]
+    },
+    {
+      "id": "R32",
+      "date": "2009-01",
+      "date_label": "January 2009",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Customer CAD request",
+      "summary": "August installation drawings were released through the extranet; January 2009 customer work requested the complete Apollo CAD package from Argyle. Limit: No claim aviation hardware was qualified or shipped by Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ]
+    },
+    {
+      "id": "R33",
+      "date": "2009-03",
+      "date_label": "March 2009",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Retrospective tooling comparison",
+      "summary": "A 2009 next-generation proposal compared a $27.92 hard-tooled Apollo chassis with an $84.62 soft-tooled predecessor chassis. Limit: Two configurations; not verified BOM-equivalent personal saving.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-38696a609fe8"
+      ]
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "scope": "Exact current reader wording, date labels, order, states and credit. Dates retain their displayed precision. Source-only material remains private; visualization is not claim approval or publication.",
+    "source_chronologies": [
+      "EV-38696a609fe8"
+    ]
+  }
+}

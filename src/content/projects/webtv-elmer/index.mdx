@@ -79,8 +79,6 @@ cyberspace:
     deck: []
 ---
 
-# Elmer / Zeus: adapting the HomeNet demonstrator
-
 Elmer and Zeus were demonstration enclosures for WebTV's HomeNet program. They brought existing boards, purchased cards and custom adapters together to demonstrate functions intended for a future home network. The mechanical task was to make that changing arrangement buildable, then carry useful Elmer work into Zeus while redefining the interfaces that had changed.
 
 Through Mechanistic, I developed the enclosure and bezel geometry in Pro/ENGINEER, coordinated component and board interfaces, and worked with the prototype and sheet-metal suppliers. WebTV supplied product requirements, electrical design and component inputs. Industrial design, model making and system assembly had their own contributors.
@@ -90,6 +88,8 @@ The opening image is a November 2000 review layout, with original handwritten pe
 ## Establishing the interfaces
 
 In September, I proposed that WebTV have PSDA or another industrial designer develop the bezel concept, while I concentrated on the component database, mechanical design and prototype coordination. My job was to implement the selected design in Pro/ENGINEER. The inputs I requested were concrete: PCB outlines, drive dimensions, fasteners, finish specifications and reference component geometry. I also asked which components ran hot, whether the board had been thermally evaluated and whether a fan was needed.
+
+The starting geometry also had to be recovered. Frank Salinas requested current Mercury sheet-metal files from Bermo; Ron Draeger explained that his files represented older part revisions. I wanted usable reference geometry to prepare quick-turn quotations. Ron later reported recreating the base and preparing an assembly with a dummy board for spacing. That supplier work remained distinct from my adaptation of the Elmer enclosure.
 
 Leonard Bernal supplied an Elmer prototype DXF. On September 19, I reported a clean import and that I had given PSDA the outline dimensions. Getting usable information into the model was an early milestone; it still left finish, component and fabrication decisions to resolve.
 
@@ -145,6 +145,8 @@ The supported endpoint is physical enclosure receipt and subsequent assembly sup
 
 ## Assembly still had open details
 
+Documentation had its own division of responsibility. The November 22 exchange separated a board-level BOM correction from the still-planned mechanical and system BOM. Leslie would assemble quantities and descriptions with me, Erturk offered component and standoff information, and Keva would assign sheet-metal part numbers and standardize and route the BOM in Agile. The board ECO was not a release of the entire mechanical assembly.
+
 With the sheet metal received, Leslie circulated a preliminary Zeus BOM for a lab review. It combined the Mercury main and power-supply boards with adapter, PCI, Ethernet, drive and fan assemblies. Cable modifications, connector screws and inherited mounting references remained part of that review.
 
 On December 5, I confirmed that Zeus used 4-40 hardware throughout. Erturk's reply still called for shorter standoffs because some earlier ones were too long. The thread records the intended fastener standard and the remaining fit issue separately. It does not close the final standoff arrangement or establish an audited as-built standard.
@@ -172,3 +174,31 @@ Elmer and Zeus remain one project lineage here. The record shows a sustained mec
 - September-December correspondence records the component, layout, prototype, thermal-review, fabrication and assembly sequence.
 - The exact Perf.jpg attachment links the handwritten review layout to Leslie's November 16 message.
 - Native export logs and the supplier's dated acknowledgment connect the top, base and fan-bracket geometry to fabrication.
+
+## Proposed development timeline
+
+Dates describe the selected records; plans, photographed states, tests and outcomes retain their separate meanings.
+
+- **2000-09-14/2000-09-26 - Recover Mercury reference geometry.** Frank sought current Mercury enclosure files. Ron Draeger explained the parts were out of revision, then reported recreating a base and preparing a reference assembly. Erik sought usable geometry for quick-turn quotation. Credit: Frank Salinas; Ron Draeger / Bermo; Erik quotation preparation.
+
+- **2000-09-19 - Interface import and ID handoff.** Erik reported a clean import of Leonard's outline and passed dimensions to PSDA. Usable interface data preceded hardware validation. Credit: Leonard DXF; Erik integration; PSDA ID.
+
+- **2000-10-25 - Double-height option dropped.** The team dropped the double-height Elmer/Mercury alternative in favor of the existing Elmer box; the reason was not recorded. Credit: Leslie correspondence.
+
+- **2000-10-31 - Five enclosures in review.** Five Elmer enclosures were in review while PCI, reset-switch and IR-lens changes were being organized. Credit: Leslie report; Erik mechanical changes.
+
+- **2000-11-05 - Zeus adaptation scoped.** The Zeus proposal aimed to retain useful Elmer work while adapting the base, I/O and internal mounting. Its 100 hours were planned effort. Credit: Mechanistic mechanical scope; WebTV program.
+
+- **2000-11-08 - Stacked connector corrected.** Keva corrected the connector reference to the stacked D-sub, defining the actual envelope needed at the rear panel. Credit: Keva correction; Erik request.
+
+- **2000-11-15/2000-11-17 - Perforation review episode.** The drawing and correspondence balanced heat-spreader contact with perforation placement. They record review instructions, not a thermal test pass. Credit: Leslie markup/transmission; Erik recipient; Roy/Mark thermal discussion.
+
+- **2000-11-19/2000-11-20 - Geometry export and supplier receipt.** Erik exported the top, base and fan bracket; the supplier acknowledged receipt. The files preserve the Elmer-to-Zeus part lineage. Credit: Erik export; supplier acknowledgement.
+
+- **2000-11-21/2000-11-22 - Separate board and mechanical BOM responsibilities.** The ECO addressed a board-BOM import error. Leslie planned a mechanical BOM session with Erik and Erturk; Keva required quantities, approved-vendor information and descriptions before standardizing and releasing that separate BOM. Credit: Keva Nelson; Leslie Leland; Erturk Kocalar; Erik mechanical inputs.
+
+- **2000-11-22 - Top change clarified.** The supplier correspondence distinguished the changed top, revised base and new bracket. A zinc-plating callout does not verify delivered finish. Credit: Engineering/supplier correspondence.
+
+- **2000-12-01/2000-12-04 - Enclosure delivery acknowledged.** The supplier confirmed delivery and Erturk acknowledged five enclosure sets. That receipt does not establish five operating systems. Credit: Supplier/Leslie coordination; Erturk receipt.
+
+- **2000-12-05 - Fastener standard and open fit.** Erik confirmed 4-40 hardware while Erturk still needed shorter standoffs. Final fit and system qualification remain unknown. Credit: Erik confirmation; Erturk fit issue.

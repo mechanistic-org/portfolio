@@ -1,0 +1,192 @@
+{
+  "schema_version": "1.0",
+  "project": "webtv-galaxy",
+  "title": "Development timeline",
+  "start": "2000-09",
+  "end": "2001-09-17",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2000-09",
+      "end": "2001-09-17"
+    }
+  ],
+  "events": [
+    {
+      "id": "GAL-01",
+      "date": "2000-09",
+      "date_label": "2000-09",
+      "title": "Home-network planning context",
+      "summary": "WebTV planned a gateway within HomeNet, with nodes and input peripherals as separate devices. This planning record precedes the development chassis. Credit: WebTV planning.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-13e29b2f51b4"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "GAL-R30-00",
+      "date": "2001-03-05",
+      "date_label": "2001-03-05/2001-03-13",
+      "title": "Plan the opening mechanical reviews",
+      "summary": "Roy asked Erik to begin Galaxy component-concept discussions. A week later, Erik proposed reviewing case-closure concepts while Roy said he would bring more specific thermal constraints. These messages establish planned reviews, not proof that the meetings occurred. Credit: Roy Askeland; Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-13e29b2f51b4"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology.",
+      "end_date": "2001-03-13"
+    },
+    {
+      "id": "GAL-02",
+      "date": "2001-04-23",
+      "date_label": "2001-04-23",
+      "title": "Thermal model",
+      "summary": "The 150 W, 45°C-ambient simulation linked component placement to airflow and called attention to the smart-card location. Its results are analytical, not prototype measurements. Credit: Avijit.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-13e29b2f51b4"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "GAL-R30-01",
+      "date": "2001-05",
+      "date_label": "2001-05",
+      "title": "Separate drive support from air partition",
+      "summary": "The mechanical review kept a separate air partition after rejecting the drive bracket as the combined support and partition. Smart-card placement also remained a packaging decision. Credit: WebTV mechanical review; Erik mechanical follow-up.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-13e29b2f51b4"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "GAL-R30-02",
+      "date": "2001-05",
+      "date_label": "2001-05",
+      "title": "Review a manufacturable CPU shield",
+      "summary": "NT Vision proposed stiffness features, folded sides and staged blanking for the perforated shield. These were supplier recommendations while internal requirements and gauges remained open. Credit: Pauline Soh / NT Vision; Frank Salinas review.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-13e29b2f51b4"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "GAL-R30-03",
+      "date": "2001-06-20",
+      "date_label": "2001-06-20",
+      "title": "Challenge the chassis forming plan",
+      "summary": "D&D warned that the drawn standoff layout could warp the base and proposed alternate forms or ribs. Frank also identified the openings those alternatives could expose. Credit: Chuck Pokonosky / D&D; Frank Salinas.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-13e29b2f51b4"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "GAL-03",
+      "date": "2001-06-28",
+      "date_label": "2001-06-28",
+      "title": "Prototype file release reported",
+      "summary": "The July status reported prototype files released on June28, with Mike Hiett coordinating the EMS effort. File release does not establish a finished system. Credit: Erik status; Mike Hiett EMS coordination.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-13e29b2f51b4"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "GAL-04",
+      "date": "2001-07-07",
+      "date_label": "2001-07-07",
+      "title": "Flexible partition received",
+      "summary": "Flexible-partition prototypes were reported received while PCB prototypes were still expected. Credit: Erik report, supplier build separate.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-13e29b2f51b4"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "GAL-05",
+      "date": "2001-07-10",
+      "date_label": "2001-07-10",
+      "title": "Base prototype deviations reviewed",
+      "summary": "The prototype-base drawing recorded standoff substitutions and related opening changes, without a final inspection outcome. Credit: Supplier prototype and engineering review.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-13e29b2f51b4"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "GAL-06",
+      "date": "2001-07-27",
+      "date_label": "2001-07-27",
+      "title": "CPU assembly access constrained",
+      "summary": "Fasteners beside the fixed partition prevented dropping in a complete CPU module. The review directed assembly in parts and kept shielding details open. Credit: Shared mechanical review.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-13e29b2f51b4"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "GAL-07",
+      "date": "2001-08-07",
+      "date_label": "2001-08-07",
+      "title": "Database and pending revisions",
+      "summary": "Erik reported the current database and continued CPU-top revisions. The vent dimension conventions remain unresolved across the August and September records. Credit: Erik correspondence.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-13e29b2f51b4"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "GAL-08",
+      "date": "2001-09-17",
+      "date_label": "2001-09-17",
+      "title": "Last recorded CPU review request",
+      "summary": "Erik described the work as nearly wrapped up and requested another CPU-assembly review. The review result and program outcome remain unknown. Credit: Erik Norris, contemporary Lincicum.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-13e29b2f51b4"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "source_chronology": "EV-13e29b2f51b4",
+    "scope": "Exact producer reader selection; richer material findings and omitted events retained in registered chronology. No new dates or claims inferred by rendering."
+  }
+}

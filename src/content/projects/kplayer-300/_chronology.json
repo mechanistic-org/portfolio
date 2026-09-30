@@ -1,0 +1,206 @@
+{
+  "schema_version": "1.0",
+  "project": "kplayer-300",
+  "title": "Development timeline",
+  "start": "2008-05",
+  "end": "2008-12",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2008-05",
+      "end": "2008-12"
+    },
+    {
+      "id": "undated",
+      "label": "Undated records",
+      "start": "",
+      "end": ""
+    }
+  ],
+  "events": [
+    {
+      "id": "T01",
+      "date": "2008-05",
+      "date_label": "May-June 2008",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Samples and interfaces",
+      "summary": "Coating trials, power-supply measurements and mechanical change sheets exposed fit and inspection issues around the compact enclosure.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-989f65c84fe3"
+      ],
+      "end_date": "2008-06"
+    },
+    {
+      "id": "NV02",
+      "date": "2008-06-12",
+      "date_label": "June 12, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Glow comparison",
+      "summary": "Sean Paul and Greg Curry compared the Mercury and Apollo illumination and recommended retaining the current resistor values and default setting.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-989f65c84fe3"
+      ]
+    },
+    {
+      "id": "T06",
+      "date": "2008-06",
+      "date_label": "June 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Rear-shield correction",
+      "summary": "Greg Curry and Adrian Fung reported a LAN emissions pass after isolating the Ethernet connector; Gabe supplied revised CAD and I compared the geometry.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-989f65c84fe3"
+      ]
+    },
+    {
+      "id": "T10",
+      "date": "2008-07-07",
+      "date_label": "July 7-10, 2008",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Plastics review and revisions",
+      "summary": "The team reviewed cosmetics, fit and shielding continuity. Subsequent instructions narrowed the base crush-rib change to the fan groove and refined resistance-test locations.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-989f65c84fe3"
+      ],
+      "end_date": "2008-07-10"
+    },
+    {
+      "id": "NV05",
+      "date": "2008-07-16",
+      "date_label": "July 16, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Test-program reporting",
+      "summary": "The NPI minutes reported CSA completion and reports received, while build tasks and evaluation of alternate power supplies continued.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-989f65c84fe3"
+      ]
+    },
+    {
+      "id": "T13",
+      "date": "2008-07",
+      "date_label": "July 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Supplier parts and build preparation",
+      "summary": "Softer feet needed molding changes. A received plastics lot was inspected and accepted while player builds, documentation and test reporting continued.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-989f65c84fe3"
+      ]
+    },
+    {
+      "id": "T14",
+      "date": "2008-07",
+      "date_label": "July-August 2008",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Mounting and shelf prototypes",
+      "summary": "I developed mounting alternatives and shelf prototypes with manufacturing colleagues; drawings changed sheet thickness, formed ribs and fasteners.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-989f65c84fe3"
+      ],
+      "end_date": "2008-08"
+    },
+    {
+      "id": "T19",
+      "date": "2008-08-11",
+      "date_label": "August 11-19, 2008",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Case and shelf vent studies",
+      "summary": "Greg circulated data on combined case modifications; Nathan prepared vent-alignment prototypes and later reported no component-temperature difference between the tested shelf arrangements.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-989f65c84fe3"
+      ],
+      "end_date": "2008-08-19"
+    },
+    {
+      "id": "T22",
+      "date": "2008-08-20",
+      "date_label": "August 20-22, 2008",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Shelf handling and release",
+      "summary": "The design review approved retention and stiffness changes, and Rob Wudrick reported the KSHELF-300 BOM release.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-989f65c84fe3"
+      ],
+      "end_date": "2008-08-22"
+    },
+    {
+      "id": "T23",
+      "date": "2008-08",
+      "date_label": "August-November 2008",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Installation communication",
+      "summary": "A stacked drawing clarified how the shelves related to one another and the clearance above the stack.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-989f65c84fe3"
+      ],
+      "end_date": "2008-11"
+    },
+    {
+      "id": "T25",
+      "date": "2008-10",
+      "date_label": "October-December 2008",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Configuration follow-through",
+      "summary": "Working plastic revisions and later mounting inquiries still required explicit release and mating-part references.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-989f65c84fe3"
+      ],
+      "end_date": "2008-12"
+    },
+    {
+      "id": "T28",
+      "date": "",
+      "date_label": "During production, date unresolved",
+      "date_basis": "Date not established; no calendar coordinate assigned.",
+      "title": "M300 continuity",
+      "summary": "The physical design continued into M300 as the media-processing architecture changed.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-989f65c84fe3"
+      ]
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "scope": "Exact current reader wording, date labels, order, states and credit. Dates retain their displayed precision. Source-only material remains private; visualization is not claim approval or publication.",
+    "source_chronologies": [
+      "EV-989f65c84fe3"
+    ]
+  }
+}

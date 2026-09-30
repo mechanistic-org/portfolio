@@ -1,0 +1,345 @@
+{
+  "schema_version": "1.0",
+  "project": "d-command",
+  "title": "Development timeline",
+  "start": "2003-08",
+  "end": "2006-06-12",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2003-08",
+      "end": "2005-05"
+    },
+    {
+      "id": "optional",
+      "label": "Optional additional context",
+      "start": "2005-05-26",
+      "end": "2006-06-12"
+    }
+  ],
+  "events": [
+    {
+      "id": "dc356-20030806",
+      "date": "2003-08-06",
+      "date_label": "August 6, 2003",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Define the boundary of PC Jr reuse",
+      "summary": "Design questions and model work in progress. Credit: Erik Norris; Neal Breitbarth.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    },
+    {
+      "id": "dc356-20030818",
+      "date": "2003-08-18",
+      "date_label": "August 18-21, 2003",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Send meter and fader-encoder dimensional definitions",
+      "summary": "Mechanical interface transmission, not circuit design. Credit: Erik Norris; Doug Tornio.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ],
+      "end_date": "2003-08-21"
+    },
+    {
+      "id": "dc356-20030826",
+      "date": "2003-08",
+      "date_label": "August-September 2003",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Debate expansion-unit interconnects",
+      "summary": "Competing technical, cost and expansion arguments; two communications boards became a costing assumption pending sign-off. Credit: Marc Schuman; Stan Cotey; Robin Parnaby; Eli Manjarrez; hardware team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ],
+      "end_date": "2003-09"
+    },
+    {
+      "id": "dc356-20030904",
+      "date": "2003-09-04",
+      "date_label": "September 4-5, 2003",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Prototype a mechanical assembly browser",
+      "summary": "Static/3D review tool with reported 3D performance limits and an individual-part workaround; no adoption measure. Credit: Erik Norris; feedback from Eli Manjarrez.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ],
+      "end_date": "2003-09-05"
+    },
+    {
+      "id": "dc356-20031003",
+      "date": "2003-10-03",
+      "date_label": "October 3, 2003",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Record PC2 Jr main and fader layouts",
+      "summary": "Rev 6 provisional assemblies; placeholder part identities. The drawings carry unexpanded N/B initials.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    },
+    {
+      "id": "dc356-20031024",
+      "date": "2003-10-24",
+      "date_label": "October 24-27, 2003",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Coordinate connector clearance",
+      "summary": "Plastic redesign and open board/reference decisions; final connector implementation unestablished. Credit: Erik Norris and the electrical team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ],
+      "end_date": "2003-10-27"
+    },
+    {
+      "id": "d-command-prep-01",
+      "date": "2004-05",
+      "date_label": "May 2004",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Choose bottom-mounted transport board",
+      "summary": "team decision Credit: Marc; Neal; Gannon; Bob; Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    },
+    {
+      "id": "d-command-prep-02",
+      "date": "2004-06",
+      "date_label": "June 2004",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Reuse rails and extrusion blanks",
+      "summary": "prototype definitions Credit: Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    },
+    {
+      "id": "d-command-prep-03",
+      "date": "2004-06",
+      "date_label": "June 2004",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Remove unused meter-board extension",
+      "summary": "clearance response Credit: Marc Schuman; Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    },
+    {
+      "id": "d-command-prep-04",
+      "date": "2004-08",
+      "date_label": "August 2004",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Run preliminary thermal trial",
+      "summary": "preliminary test Credit: Marc Schuman; Gannon Kashiwa.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    },
+    {
+      "id": "d-command-prep-05",
+      "date": "2004-09",
+      "date_label": "September 2004",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Select smooth side treatment",
+      "summary": "shared design choice Credit: Eli Manjarrez; Stan; Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    },
+    {
+      "id": "d-command-prep-06",
+      "date": "2004-12",
+      "date_label": "December 2004",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Accept coated samples for texturing",
+      "summary": "sample test/scoped approval Credit: Erik; supplier.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    },
+    {
+      "id": "d-command-prep-07",
+      "date": "2005-01",
+      "date_label": "January–February 2005",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Review part/assembly drawings",
+      "summary": "drawing review Credit: Erik; team BOM/SAP/redlines.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ],
+      "end_date": "2005-02"
+    },
+    {
+      "id": "d-command-prep-08",
+      "date": "2005-03",
+      "date_label": "Pre-production, March 2005",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Address AC-withdrawal failure",
+      "summary": "test failure/corrective path Credit: Phong Do; Ken Lee; UL.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    },
+    {
+      "id": "d-command-prep-09",
+      "date": "2005-04-19",
+      "date_label": "April 19, 2005",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "UL Notice of Approval",
+      "summary": "approval Credit: UL; compliance team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    },
+    {
+      "id": "d-command-prep-10",
+      "date": "2005-04-28",
+      "date_label": "April 28, 2005",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "First customer ship",
+      "summary": "product shipment milestone Credit: Cross-functional team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    },
+    {
+      "id": "d-command-prep-11",
+      "date": "2005-05",
+      "date_label": "May 2005",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Hand off continuing improvements",
+      "summary": "handoff with open work Credit: Manufacturing; Erik consulting support.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    },
+    {
+      "id": "dc356-screw-quotation",
+      "date": "2005-05-26",
+      "date_label": "2005-05-26",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Recorded context",
+      "summary": "quotation/review drawing date, not manufacture or closure Credit: Erik Norris prepared; EN revision approval initials.",
+      "phase": "optional",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    },
+    {
+      "id": "dc356-sidecap-marking",
+      "date": "2005-05-26",
+      "date_label": "May 26-June 2, 2005",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Change sidecap marking instructions",
+      "summary": "Draft followed by recorded ECO approvals and supplier transmission; exhaust-stock disposition, with actual receipt unestablished. Credit: Erik Norris; Terri Merrell; approval functions; supplier.",
+      "phase": "optional",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ],
+      "end_date": "2005-06-02"
+    },
+    {
+      "id": "dc356-engineering-test",
+      "date": "2005-07-06",
+      "date_label": "July 6, 2005",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Submit engineering-test parts for quotation",
+      "summary": "Proposed evaluation before possible production ECOs; supplier quoting begun, with build, test and adoption outcomes unestablished. Credit: Erik Norris; Neal Breitbarth; Terri Merrell; Mass Precision.",
+      "phase": "optional",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    },
+    {
+      "id": "dc356-pan-artwork",
+      "date": "2005-07-08",
+      "date_label": "July 8, 2005",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Clarify main-pan artwork and send the revised definition",
+      "summary": "Artwork-only clarification and exact transmission; supplier build outcome unestablished. Credit: Erik Norris; Fidel Saucedo; purchasing and document-control contributors.",
+      "phase": "optional",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    },
+    {
+      "id": "dc356-sustaining-2006",
+      "date": "2006-06-12",
+      "date_label": "2006-06-12",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Advise on a later meter-panel interference question",
+      "summary": "Ping Zhang reported larger standoffs contacting plastic shrouds; the retained message quotes my reply that I saw no problem using normal-wall 4-40 standoffs. Advice on a proposed change; implementation and continuous involvement remain unestablished.",
+      "phase": "optional",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-bda4137bcc85"
+      ]
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "scope": "Exact current reader wording, date labels, order, states and credit. Dates retain their displayed precision. Source-only material remains private; visualization is not claim approval or publication.",
+    "source_chronologies": [
+      "EV-bda4137bcc85"
+    ]
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "schema_version": "1.0",
+  "project": "kserver-1500",
+  "title": "Development timeline",
+  "start": "2008-09",
+  "end": "2015-02-23",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2008-09",
+      "end": "2015-02-23"
+    }
+  ],
+  "events": [
+    {
+      "id": "RC02",
+      "date": "2008-09",
+      "date_label": "September 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Earlier redlines establish inherited history",
+      "summary": "The 501-1007 Rev-D and 520-1033 Rev-B redlines were already attached in September 2008. Limit: Not new 2014/15 bracket work; Jan 2015 says changes predate Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-3b1eecf3fd9f"
+      ]
+    },
+    {
+      "id": "RC06",
+      "date": "2008-09-16",
+      "date_label": "September 16–17, 2008",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Scope a cartridge rear-bezel tooling change",
+      "summary": "Reported interference after the stamped-metal change prompts CAD, tooling and clearance questions. Credit: Andy Tripp observation; Michael Clader manufacturing direction; Erik mechanical scoping. Limit: Proposed reduction and tool repair are unverified; no completed redesign, tool purchase or closed field fix, and no merged backplane root cause.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-3b1eecf3fd9f"
+      ],
+      "end_date": "2008-09-17"
+    },
+    {
+      "id": "RC10",
+      "date": "2014-04",
+      "date_label": "April 2014",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Plain Deskstar testing reported",
+      "summary": "April 25 report describes successful cumulative 327-hour 4TB Deskstar testing in 1U/3U while reserving product suitability judgment. Limit: Plain Deskstar 0F14681 is distinct from later Deskstar NAS; no broader reliability guarantee.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-3b1eecf3fd9f"
+      ]
+    },
+    {
+      "id": "RC12",
+      "date": "2014-07-10",
+      "date_label": "July 10, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Look for inherited chassis CAD after Arena file corruption",
+      "summary": "Rob asks for Burke's 1U chassis files; Erik agrees to look. Limit: Requested retrieval is distinct from the later sent-model state and from repaired Arena files or completed redline incorporation.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-3b1eecf3fd9f"
+      ]
+    },
+    {
+      "id": "RC13",
+      "date": "2014-07-16",
+      "date_label": "July 16, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Lid/rack-ear model correction requested",
+      "summary": "On 2014-07-16 Rob asked Erik to reconcile the lid/rack-ear alignment detail in a 3D model with as-built hardware. Limit: Request and existing model supply are evidenced; completion and original feature authorship are not.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-3b1eecf3fd9f"
+      ]
+    },
+    {
+      "id": "RC15",
+      "date": "2014-10-14",
+      "date_label": "October 14, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "NAS drive release reported for prior week",
+      "summary": "October 14 report says HGST 4TB DeskstarNAS 371-1041-00 was released under ECO-001442. Limit: Report for week ending October 10; not September release proof, not Erik test ownership.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-3b1eecf3fd9f"
+      ]
+    },
+    {
+      "id": "KS15-05",
+      "date": "2014-12-22",
+      "date_label": "December 22, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Separate the WD drive alternatives",
+      "summary": "Meeting minutes record WD Red 4TB qualification complete for the 1U, approve buying WD Red 6TB drives for a four-drive 1U long-term test, and report Red Pro too hot for qualification. Limit: The 6TB WD Red test is planned; do not transfer the separate 3U no-shipment plan or long-term-test requirement to the 1U 4TB result, or merge WD with later HGST 6TB testing.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-afdbe7945c2d"
+      ]
+    },
+    {
+      "id": "RC19",
+      "date": "2015-01",
+      "date_label": "January 2015",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Legacy supplier retained",
+      "summary": "January 2015 team kept legacy server sheet metal at Prompt while the documentation and future redesign remained open. Limit: Kevin agreed; Rob recommended; Elton communicated; no sole-Erik supplier strategy.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-3b1eecf3fd9f"
+      ]
+    },
+    {
+      "id": "RC18",
+      "date": "2015-01",
+      "date_label": "January 2015",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Compute alternatives under evaluation",
+      "summary": "January 2015 notes weigh SATA count, power, eCos/UEFI compatibility; Nathan searches while Andrzej qualifies PSUs. Limit: No executed Celeron pivot or final selected board; Greg favors Baytrail for low power while notes prefer Celeron for compatibility. The metal adapter bracket belongs to the replacement PSU, not the motherboard. Compute section describes compatibility, connectivity and power consumption; no demonstrated motherboard physical-fit problem is asserted.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-3b1eecf3fd9f"
+      ]
+    },
+    {
+      "id": "KS15-06",
+      "date": "2015-01-05",
+      "date_label": "January 5, 2015",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Report WD Red 6TB qualification and prepare long-term testing",
+      "summary": "The meeting record says upgrade-drive qualification is complete, Andrzej and Isaiah are setting up reliability testing, and release is planned by the end of the week for the Extranet price list. Limit: Reported qualification is distinct from completed long-term testing, actual release or shipment; this is WD Red, not the later HGST 6TB thermal result.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-afdbe7945c2d"
+      ]
+    },
+    {
+      "id": "RC21",
+      "date": "2015-02-02",
+      "date_label": "February 2, 2015",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Additional chipset commitment",
+      "summary": "February 2 notes record commitment to 300 additional 1U chipsets; PSU replacement and reuse of old chassis remain conditional. Limit: Not receipt, completed build, shipment, revenue protection, or Erik purchasing execution.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-3b1eecf3fd9f"
+      ]
+    },
+    {
+      "id": "kserver-1500-304b60e2e1ab",
+      "date": "2015-02",
+      "date_label": "February 2015",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "PSU fit and connector candidates screened",
+      "summary": "Andrzej reported FSP150-50LM touch-fit, FSP150-5G01 EOL, Skynet connector mismatch and differing Aras/Sparkle fan noise. Limit: Quiet Sparkle fan is not completed system qualification. FSP150-5G01 was candidate EOL, not established incumbent.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-3b1eecf3fd9f"
+      ]
+    },
+    {
+      "id": "kserver-1500-7c456af2655b",
+      "date": "2015-02-17",
+      "date_label": "February 17 and 23, 2015",
+      "date_basis": "Separate dated reports, not a continuous test interval.",
+      "title": "6TB NAS thermal excess reported",
+      "summary": "February 17/23 reports identify 6TB Deskstar NAS thermal excess in 1U under Andrzej and Isaiah. Limit: Reported 5-6 C too hot; not formal final cancellation or fleet failure prevented. February 23 reports the later disk-stress result at about 5 C too hot; the article advances beyond the earlier planned test.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-3b1eecf3fd9f"
+      ],
+      "end_date": "2015-02-23"
+    },
+    {
+      "id": "RC24",
+      "date": "2015-02-23",
+      "date_label": "February 23, 2015",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "PSU electrical questions remain open",
+      "summary": "February 23 records Skynet cross-regulation issue and possibly insufficient 12 V rating while qualification remains incomplete. Limit: Retain possibly; no final rejection or successor release inferred.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-3b1eecf3fd9f"
+      ]
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "scope": "Exact current reader wording, date labels, order, states and credit. Dates retain their displayed precision. Source-only material remains private; visualization is not claim approval or publication.",
+    "source_chronologies": [
+      "EV-3b1eecf3fd9f",
+      "EV-afdbe7945c2d"
+    ]
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "project": "portion-cup",
+  "title": "Development timeline",
+  "start": "2021-03-31",
+  "end": "2021-06-04",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2021-03-31",
+      "end": "2021-06-04"
+    },
+    {
+      "id": "undated",
+      "label": "Undated records",
+      "start": "",
+      "end": ""
+    }
+  ],
+  "events": [
+    {
+      "id": "portion-cup-planning-start",
+      "date": "2021-03-31",
+      "date_label": "March 31, 2021",
+      "title": "Planning start entry",
+      "summary": "The Bender workbook records this start date for Ono; it does not establish employment or completed work. Credit: Project planning record.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-31dc02b5f5c8"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "portion-cup-delivery-target",
+      "date": "2021-04-19",
+      "date_label": "April 19, 2021",
+      "title": "Delivery target",
+      "summary": "The workbook carries a delivery target while component drawings remain in mixed states. Actual delivery is unestablished. Credit: Project planning record.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-31dc02b5f5c8"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "portion-cup-assembly",
+      "date": "2021-06-04",
+      "date_label": "June 4, 2021",
+      "title": "Mechanical assembly photographed",
+      "summary": "Gears, bearings, shafts and a machined multi-opening enclosure appear in assembly photographs. They do not establish a completed cabinet or qualification. Credit: Hyphen project photographs; builder unassigned.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-31dc02b5f5c8"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "portion-cup-scope",
+      "date": "",
+      "date_label": "Undated",
+      "title": "Concept through cabinet design",
+      "summary": "Erik developed the denesting system through cabinet-level design, including the repeating rows and geared helix mechanism. Credit: Erik Norris; direct scope testimony.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-31dc02b5f5c8"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "portion-cup-validation",
+      "date": "",
+      "date_label": "Undated",
+      "title": "Initial validation and next generation",
+      "summary": "Erik carried out initial validation and began the next generation. Measured rate, endurance and qualification results remain unestablished. Credit: Erik Norris; direct activity testimony.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-31dc02b5f5c8"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "portion-cup-roadmap",
+      "date": "",
+      "date_label": "Undated",
+      "title": "Removed from the roadmap",
+      "summary": "The system was judged too complex and clients chose manual cup filling. The decision date is unknown. Credit: Erik Norris’s account of the product decision.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-31dc02b5f5c8"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "source_chronology": "EV-31dc02b5f5c8",
+    "scope": "Exact producer reader selection; richer material findings and omitted events retained in registered chronology. No new dates or claims inferred by rendering."
+  }
+}

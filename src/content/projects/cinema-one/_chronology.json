@@ -1,0 +1,647 @@
+{
+  "schema_version": "1.0",
+  "project": "cinema-one",
+  "title": "Cinema One development timeline",
+  "start": "2012-01-09",
+  "end": "2014-11-14",
+  "phases": [
+    {
+      "id": "2012",
+      "label": "2012",
+      "start": "2012-01-09",
+      "end": "2012-12-31"
+    },
+    {
+      "id": "2013",
+      "label": "2013",
+      "start": "2013-01-01",
+      "end": "2013-12-31"
+    },
+    {
+      "id": "2014",
+      "label": "2014",
+      "start": "2014-01-01",
+      "end": "2014-11-14"
+    }
+  ],
+  "events": [
+    {
+      "id": "system-architecture",
+      "date": "2012-01-09",
+      "date_label": "January 2012",
+      "date_basis": "Version 3.1 date printed in the block diagram; context record, not an employment or project-start date.",
+      "title": "System architecture",
+      "summary": "The MacDuff block diagram set out the mainboard, optical drive, internal hard drive and front-panel controls.",
+      "phase": "2012",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-13c509b605b4"
+      ],
+      "anchor": "finding-room-for-the-parts",
+      "link_label": "Layout"
+    },
+    {
+      "id": "design-brief",
+      "date": "2012-04-13",
+      "date_label": "April 2012",
+      "date_basis": "041312 filename and April 13 archive folder; body is undated, so displayed at month precision.",
+      "title": "Packaging brief",
+      "summary": "The design brief called for a single fan, an external power supply and the drive, mainboard and hard drive arranged side by side.",
+      "phase": "2012",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-77c28468d530"
+      ],
+      "anchor": "finding-room-for-the-parts",
+      "link_label": "Layout"
+    },
+    {
+      "id": "whipsaw-initial-concepts",
+      "date": "2012-05-15",
+      "date_label": "May 15, 2012",
+      "date_basis": "Printed title page of Phase 1 deck, p1; layout/cooling pp4-10 and form concepts pp22-91. Options, not thermal validation or final selection.",
+      "title": "Whipsaw initial concepts",
+      "summary": "Whipsaw explored enclosure and front-panel concepts alongside component-layout and cooling constraints. The named form studies included Bow, Arch and Rake.",
+      "phase": "2012",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-768140086a78"
+      ],
+      "anchor": "designing-the-complete-mechanical-product",
+      "link_label": "Industrial design"
+    },
+    {
+      "id": "whipsaw-finalists",
+      "date": "2012-05-25",
+      "date_label": "May 25, 2012",
+      "date_basis": "Phase 1 Finalists title slide1; changes slide3; named finalists slides4,8,12. No final concept selection inferred.",
+      "title": "Finalists meet the mechanical layout",
+      "summary": "Whipsaw refined the Core, Offset and Bend concepts, revising dimensions to fit a new mechanical layout and updating the controls and surface treatments.",
+      "phase": "2012",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c9b1ab20ca84"
+      ],
+      "anchor": "finding-room-for-the-parts",
+      "link_label": "Layout"
+    },
+    {
+      "id": "facet-lighting-study",
+      "date": "2012-06-29",
+      "date_label": "June 2012",
+      "date_basis": "Camera EXIF June29 and same-date from_luke exchange package; direct testimony identifies Erik's study. File labels supply spacing. No shipped animation or calibrated brightness claim.",
+      "title": "Jewel lighting study",
+      "summary": "I tested individually addressable jewel facets and LED spacing behind the plastic. The June 29 photographs show the rig and the 4 mm and 10 mm study settings.",
+      "phase": "2012",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-313a1803a172",
+        "EV-3de7d63f8877"
+      ],
+      "anchor": "media-cinema-jewel-study",
+      "link_label": "Photographs"
+    },
+    {
+      "id": "whipsaw-construction-concepts",
+      "date": "2012-07-17",
+      "date_label": "July 17, 2012",
+      "date_basis": "Phase 2 title slide1; controls slides2-5 and manufacturing concepts slides6-18. Actual extrusion alternatives are not the final molded-cover process.",
+      "title": "Enclosure construction explored",
+      "summary": "Whipsaw compared full, end-cap and half-extrusion concepts, including ways to fit the chassis, shielding and decorated front. These were construction alternatives during design development.",
+      "phase": "2012",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-f7311cc69565"
+      ],
+      "anchor": "building-the-enclosure-from-the-inside-out",
+      "link_label": "Enclosure construction"
+    },
+    {
+      "id": "whipsaw-id-details",
+      "date": "2012-09-13",
+      "date_label": "September 13, 2012",
+      "date_basis": "Phase 2 ID Updates title p1, IR options pp3-5, window/icons pp6-16, rear graphics pp17-26.",
+      "title": "Front-panel and graphic refinements",
+      "summary": "Whipsaw developed the front-panel details, comparing infrared-window treatments and refining indicator icons and rear connector graphics.",
+      "phase": "2012",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-d615dd2b3c15"
+      ],
+      "anchor": "carrying-changes-through-the-parts",
+      "link_label": "Front details"
+    },
+    {
+      "id": "prototype-drawings",
+      "date": "2012-10-09",
+      "date_label": "October 9, 2012",
+      "date_basis": "Revision 1 rows in the original drawings, visually inspected.",
+      "title": "Prototype drawings",
+      "summary": "The cover assembly and IR-lens revision histories record releases for quotation and the first prototype.",
+      "phase": "2012",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "LK-36bc04f0",
+        "LK-c180c650"
+      ],
+      "anchor": "media-cinema-c2",
+      "link_label": "Cover assembly"
+    },
+    {
+      "id": "foil-optical-tradeoff",
+      "date": "2012-10-29",
+      "date_label": "October 29, 2012",
+      "date_basis": "Printed date on slide1; comparison of prototype variants, not final film recipe or selected production construction.",
+      "title": "Hidden icons versus illuminated brightness",
+      "summary": "Nissha compared film samples with and without openings in the metallic layer. Better concealment of unlit icons came at the expense of brightness when illuminated.",
+      "phase": "2012",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a5edd9db0ce5"
+      ],
+      "anchor": "building-the-dead-front-bezel",
+      "link_label": "Dead-front bezel"
+    },
+    {
+      "id": "jewel-graphic-registration",
+      "date": "2012-11-02",
+      "date_label": "November 2012",
+      "date_basis": "November2 filename of TO_NISSHA_2012_11_02.pdf; pages have no printed date. Displayed at month precision. Suggested clearance, not a verified production tolerance.",
+      "title": "Jewel and indicator registration",
+      "summary": "A markup to Nissha specified the placement of the jewel triangles and status icons, and proposed clearance between the colored triangles and black masking.",
+      "phase": "2012",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0d1da984d78d"
+      ],
+      "anchor": "building-the-dead-front-bezel",
+      "link_label": "Dead-front bezel"
+    },
+    {
+      "id": "printed-subchassis",
+      "date": "2012-11-08",
+      "date_label": "November 2012",
+      "date_basis": "November8 camera EXIF on IMG_0020-23; November8 prototype-photo package. Direct testimony identifies early printed subchassis. No final layout or print-process qualification inferred.",
+      "title": "Printed subchassis module",
+      "summary": "Early 3D-printed versions made the internal arrangement tangible, with the optical drive, hard drive and fan mounted in the plastic module.",
+      "phase": "2012",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-313a1803a172",
+        "EV-3de7d63f8877"
+      ],
+      "anchor": "media-cinema-subchassis",
+      "link_label": "Photographs"
+    },
+    {
+      "id": "jewel-mask-experiments",
+      "date": "2012-11-12",
+      "date_label": "November 2012",
+      "date_basis": "November12 filename/package; slides2-3. Proposal only. Converted automatic footer dates are not historical event dates.",
+      "title": "Controlled jewel-mask experiments",
+      "summary": "The next film experiments proposed changing only the black mask around the jewel, holding the other printed layers fixed to study the effect.",
+      "phase": "2012",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-117e69a532ef"
+      ],
+      "anchor": "building-the-dead-front-bezel",
+      "link_label": "Dead-front bezel"
+    },
+    {
+      "id": "printed-jewel-offset",
+      "date": "2012-12-10",
+      "date_label": "December 2012",
+      "date_basis": "December10 camera EXIF and CES-prototype package date the photographed sample. Production correction is direct testimony with no established correction date or exact spec identity.",
+      "title": "Jewel registration in an early bezel",
+      "summary": "The photographs show the illuminated pattern offset from the printed jewel. I later corrected this for production through tolerance and positional-control specifications.",
+      "phase": "2012",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-313a1803a172",
+        "EV-3de7d63f8877"
+      ],
+      "anchor": "media-cinema-registration",
+      "link_label": "Photographs"
+    },
+    {
+      "id": "first-mold-decoration-feedback",
+      "date": "2013-02-05",
+      "date_label": "February 2013",
+      "date_basis": "February5 package and native PPTX modified metadata; slides2/4. Sample observations and supplier response, not verified defect closure.",
+      "title": "Decoration samples and supplier response",
+      "summary": "A photographic review documented missing print, illuminated hot spots and peeling at the disc slot. Nissha proposed printing and foil-cleaning changes in response.",
+      "phase": "2013",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-d0a0252b9754"
+      ],
+      "anchor": "building-the-dead-front-bezel",
+      "link_label": "Dead-front bezel"
+    },
+    {
+      "id": "function-button-analysis",
+      "date": "2013-03-11",
+      "date_label": "March 2013",
+      "date_basis": "March 6/7 filenames of Y/Z workbooks and March 11 work-in-progress summary pp4-6; design calculations and recommendations, not a tooling or production outcome.",
+      "title": "Button-to-switch analysis",
+      "summary": "Function Engineering reviewed actuator clearance, vertical centering and PCB registration. They recommended an initial metal-safe gap that could be adjusted after the first molding trial for feel.",
+      "phase": "2013",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-3e9be2e699f8",
+        "EV-36c00bc881e7",
+        "EV-35cee3a360cf"
+      ],
+      "anchor": "carrying-changes-through-the-parts",
+      "link_label": "Button development"
+    },
+    {
+      "id": "function-tolerance-review",
+      "date": "2013-03-15",
+      "date_label": "March 15, 2013",
+      "date_basis": "Date of the Function work-in-progress tolerance report; design analysis.",
+      "title": "Front-fit tolerance review",
+      "summary": "Function Engineering examined the bezel, cover and disc-slot tolerance loops and proposed changes to the gaps, molded features and assembly location.",
+      "phase": "2013",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "LK-0f61ade9"
+      ],
+      "anchor": "making-the-front-fit",
+      "link_label": "Front-fit analysis"
+    },
+    {
+      "id": "personal-pilot",
+      "date": "2013-04-11",
+      "date_label": "April 2013",
+      "date_basis": "Camera EXIF dates the photos; user testimony identifies purpose/build role. Month-level event; April11 is sorting key, not asserted build start. Further direct testimony identifies HQ execution, assembly/workmanship documentation, inline QC and inspection criteria, and CM not yet online. No quantified saving or exact pilot completion date.",
+      "title": "My personal pilot build",
+      "summary": "At HQ, I combined the pilot build with assembly and workmanship documentation and inline QC and inspection criteria, while the contract manufacturer was not yet online. Photographs from April 11, 19 and 22 show the assembly stages.",
+      "phase": "2013",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-313a1803a172",
+        "EV-3de7d63f8877",
+        "EV-ce356086fbcb"
+      ],
+      "anchor": "media-cinema-pilot",
+      "link_label": "Photographs"
+    },
+    {
+      "id": "stiffener-bonding-photos",
+      "date": "2013-04-22",
+      "date_label": "April 22, 2013",
+      "date_basis": "Camera EXIF April22 on IMG_0227/28/31-35; some copies transmitted to Yomura April23. Capture and transmittal dates kept distinct. User identifies assembly preparation.",
+      "title": "Preparing the bonded cover",
+      "summary": "The photographs follow tape preparation, stiffener placement and the metal reinforcement fitted inside the plastic cover.",
+      "phase": "2013",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-313a1803a172",
+        "EV-3de7d63f8877"
+      ],
+      "anchor": "media-cinema-bonding",
+      "link_label": "Photographs"
+    },
+    {
+      "id": "molded-feature-changes",
+      "date": "2013-04-23",
+      "date_label": "April-May 2013",
+      "date_basis": "April 23 and May 2 change-list documents; specifications, not proof of completed tooling.",
+      "title": "Coordinated part changes",
+      "summary": "The change lists called for revisions to the cover shroud, slot rib, alignment features, screws and heat stakes across the mating parts.",
+      "phase": "2013",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "LK-02d7d7d5",
+        "LK-b3d05959"
+      ],
+      "anchor": "making-the-front-fit",
+      "link_label": "Front fit",
+      "end_date": "2013-05-02"
+    },
+    {
+      "id": "cover-production-drawing",
+      "date": "2013-05-14",
+      "date_label": "May 14, 2013",
+      "date_basis": "Revision 4 row of original cover drawing; drawing-release status.",
+      "title": "Cover drawing released to production",
+      "summary": "Revision 4 of the cover-assembly drawing records its production release, with the molded shell and internal metal stiffeners.",
+      "phase": "2013",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "LK-36bc04f0"
+      ],
+      "anchor": "media-cinema-c2",
+      "link_label": "Exploded assembly"
+    },
+    {
+      "id": "ir-bounce-rib-added",
+      "date": "2013-06-09",
+      "date_label": "June 9, 2013",
+      "date_basis": "Revision 7 and 8 rows of the original IR-lens drawing.",
+      "title": "IR-lens refinement",
+      "summary": "The lens drawing added an internal bounce rib and a texture callout. The August 7 revision subsequently relocated the rib.",
+      "phase": "2013",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "LK-c180c650"
+      ],
+      "anchor": "carrying-changes-through-the-parts",
+      "link_label": "Small-part development"
+    },
+    {
+      "id": "bezel-heat-stake-feedback",
+      "date": "2013-06-25",
+      "date_label": "June 25, 2013",
+      "date_basis": "Printed title slide1, sample review slides14-24. Observations and requested corrections, not universal production result.",
+      "title": "Bezel assembly sample review",
+      "summary": "Sample feedback identified interfering heat stakes, insufficient faceplate clamping and IR-lens retention problems, tying small assembly details to the fit of the front.",
+      "phase": "2013",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-74fcb4aa4834"
+      ],
+      "anchor": "making-the-front-fit",
+      "link_label": "Front fit"
+    },
+    {
+      "id": "combined-light-gasket-instructions",
+      "date": "2013-07-17",
+      "date_label": "July 17, 2013",
+      "date_basis": "Rev9 manual p66 revision-history entry. The combined gasket drawing already carries May6,2013; July17 dates the instruction change, not first design use or universal factory adoption.",
+      "title": "Combined light-seal assembly documented",
+      "summary": "The assembly-instruction revision recorded one foam gasket replacing two separate parts around the jewel and controls.",
+      "phase": "2013",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "LK-9b3723bf",
+        "EV-20f58955e9a1",
+        "EV-a1ee9a6d1cb1"
+      ],
+      "anchor": "building-the-dead-front-bezel",
+      "link_label": "Dead-front bezel"
+    },
+    {
+      "id": "cinema-one-introduction",
+      "date": "2013-07-23",
+      "date_label": "July 23, 2013",
+      "date_basis": "July 23, 2013 dateline in archived Kaleidescape press release; August 2014 print date is not the introduction.",
+      "title": "Cinema One introduced",
+      "summary": "Kaleidescape publicly introduced Cinema One. Mechanical and manufacturing support continued after the introduction.",
+      "phase": "2013",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "LK-8c67248d",
+        "EV-ed8287d7f11f"
+      ],
+      "anchor": "media-cinema-c1",
+      "link_label": "The product"
+    },
+    {
+      "id": "faceplate-hollow-boss-revision",
+      "date": "2013-08-06",
+      "date_label": "August 6, 2013",
+      "date_basis": "Sheet1 revision13 row; August7 is the later Arena package date. Drawing change does not establish tooling completion.",
+      "title": "Faceplate boss geometry revised",
+      "summary": "The faceplate drawing recorded a change to hollow-boss height at Yomura's request, following the summer assembly reviews.",
+      "phase": "2013",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-d249d068c281"
+      ],
+      "anchor": "carrying-changes-through-the-parts",
+      "link_label": "Part refinement"
+    },
+    {
+      "id": "trimmed-cover-sample",
+      "date": "2013-10-25",
+      "date_label": "October 25, 2013",
+      "date_basis": "October 25 annotation on page 17 of the 2013 sample-feedback dossier; sample report.",
+      "title": "Cover-edge sample",
+      "summary": "In the sample-feedback exchange, Yomura reported a CNC-milled sample while reviewing an unwanted chamfer on the cover edge.",
+      "phase": "2013",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "LK-4d1bf860"
+      ],
+      "anchor": "media-cinema-c4",
+      "link_label": "Annotated sample"
+    },
+    {
+      "id": "informal-overnight-load",
+      "date": "2014-01-13",
+      "date_label": "January 2014",
+      "date_basis": "IMG_0444 camera EXIF January13,2014 dates photograph. Direct testimony gives28plates totaling190lb, an informal standing-person proxy and approximately10hours with no visible deflection. Owner-reported plate total, not calibrated load; no measured deflection, creep, recovery or formal validation claim.",
+      "title": "An overnight load check",
+      "summary": "I loaded the enclosure with 190 lb of dumbbell plates as a rough stand-in for a technician or installer standing on it. After about ten hours overnight, I saw no visible deflection. This was an informal practical check.",
+      "phase": "2014",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-313a1803a172",
+        "EV-3de7d63f8877",
+        "EV-3a0a10314354"
+      ],
+      "anchor": "media-cinema-load",
+      "link_label": "Photographs"
+    },
+    {
+      "id": "red-dot-announcement",
+      "date": "2014-03-25",
+      "date_label": "March 25, 2014",
+      "date_basis": "March 25 dateline in original Kaleidescape press release p1; August print date is not the announcement date. Not a Best of the Best claim.",
+      "title": "Red Dot award announced",
+      "summary": "Kaleidescape announced Cinema One's 2014 Red Dot product design award, crediting its design collaboration with Whipsaw.",
+      "phase": "2014",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-d1fe6a264ee7"
+      ],
+      "anchor": "media-cinema-c1",
+      "link_label": "The product"
+    },
+    {
+      "id": "slot-bump-drawing-revision",
+      "date": "2014-04-29",
+      "date_label": "April 29, 2014",
+      "date_basis": "Sheet1 revision12 row in April29 Fineline original. July3 carrier is a distinct byte variant; no automatic geometric equivalence with June tests.",
+      "title": "Slot bump added to the frame drawing",
+      "summary": "The front-frame drawing recorded a slot-bump addition, placing that design change before the later sample tests and Arena file update.",
+      "phase": "2014",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-9e81ea75689d"
+      ],
+      "anchor": "making-the-front-fit",
+      "link_label": "Disc-slot development"
+    },
+    {
+      "id": "base-stiffener-file-update",
+      "date": "2014-05-19",
+      "date_label": "May 19, 2014",
+      "date_basis": "Original email Date header and new body; file/BOM update.",
+      "title": "Base and stiffener updates",
+      "summary": "I loaded revised metal-base and top-cover-stiffener files under working revisions and specified the corresponding fastener changes.",
+      "phase": "2014",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-569b6db7203e"
+      ],
+      "anchor": "building-the-enclosure-from-the-inside-out",
+      "link_label": "Enclosure construction"
+    },
+    {
+      "id": "assembly-instruction-update",
+      "date": "2014-06-09",
+      "date_label": "June 9, 2014",
+      "date_basis": "Original email Date header and instruction identity. This dates the file update, not the invention of the assembly method.",
+      "title": "Assembly instructions updated",
+      "summary": "I loaded Revision 9 of the assembly instructions. The document specifies shims, a fixture and a tightening sequence for positioning the cover and bezel.",
+      "phase": "2014",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a51fb299f03f",
+        "LK-9b3723bf"
+      ],
+      "anchor": "making-the-front-fit",
+      "link_label": "Assembly method"
+    },
+    {
+      "id": "modified-slot-tests",
+      "date": "2014-06-17",
+      "date_label": "June 17, 2014",
+      "date_basis": "Original email Date header and new test report; reported samples only.",
+      "title": "Modified slot tested",
+      "summary": "Nathan Forster reported successful sample tests with DVDs, Blu-rays, CDs and Dual Discs, with and without felt. Reviewing and scheduling the tooling modification remained the next step.",
+      "phase": "2014",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a81236239108"
+      ],
+      "anchor": "making-the-front-fit",
+      "link_label": "Disc-slot context"
+    },
+    {
+      "id": "slot-bump-file-update",
+      "date": "2014-07-03",
+      "date_label": "July 3, 2014",
+      "date_basis": "Original email Date header and new body. Later than the June test; exact geometric identity and factory roll-in not established.",
+      "title": "Front-frame revision",
+      "summary": "I loaded a slot-bump modification for the front-frame assembly into Arena under a working revision.",
+      "phase": "2014",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-14a2a8991264"
+      ],
+      "anchor": "making-the-front-fit",
+      "link_label": "Front fit"
+    },
+    {
+      "id": "replacement-ink-sample-review",
+      "date": "2014-09-24",
+      "date_label": "September 24, 2014",
+      "date_basis": "Original September24 email Date header and body; sample inspection, not production yield or release approval. Related notice attachment names Macduff faceplate/button cap but has a printed date later than its email carrier.",
+      "title": "New-ink foil samples reviewed",
+      "summary": "Nathan Forster reported appearance defects in front-panel and button foil samples, documented them with photographs and requested comparison data from Nissha.",
+      "phase": "2014",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-385f48eeea19",
+        "EV-bd8115a943e0"
+      ],
+      "anchor": "building-the-dead-front-bezel",
+      "link_label": "Dead-front bezel"
+    },
+    {
+      "id": "cosmetic-review",
+      "date": "2014-10-08",
+      "date_label": "October 8-16, 2014",
+      "date_basis": "Original October 8, 13 and 16 correspondence; document release and inspection, not product shipment or a yield result.",
+      "title": "Photographic appearance review",
+      "summary": "I cut covers to photograph the bend surface, circulated numbered examples for review and revised the appearance document. Colleagues approved releasing the document to the factory; further inspection followed.",
+      "phase": "2014",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-f8cf01c939d0",
+        "EV-181cc9638f36",
+        "EV-8d88339190f6"
+      ],
+      "anchor": "media-cinema-c5",
+      "link_label": "Surface photograph",
+      "end_date": "2014-10-16"
+    },
+    {
+      "id": "flow-mark-proposal",
+      "date": "2014-11-13",
+      "date_label": "November 13-14, 2014",
+      "date_basis": "Proposal quoted with differing time-zone dates in original reply carriers, plus November 14 acknowledgment. Proposal/instruction only; no confirmed tooling outcome.",
+      "title": "Further flow-mark work proposed",
+      "summary": "I proposed another cover modification and asked the supplier to inspect stock and new production against the revised cosmetic procedure.",
+      "phase": "2014",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-ddce2ac4bd01",
+        "EV-fba2c52de0aa"
+      ],
+      "anchor": "developing-the-finish",
+      "link_label": "Finish development",
+      "end_date": "2014-11-14"
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "reviewed_on": "2026-09-24",
+    "state": "working authoring proposal; no new operator acceptance",
+    "date_scope": "Dated records of architecture, design and support, not employment dates or a claim of complete program coverage.",
+    "image_scope": "Links point to the existing five figures or explanatory sections. New private asset candidates are not published.",
+    "limitations": [
+      "The April brief is displayed at month precision.",
+      "Drawing and file releases do not prove completed production implementation.",
+      "June 2014 sample testing and July file update form a sequence; exact causal/geometric linkage remains unverified.",
+      "November proposal and inspection instruction do not prove flow-mark elimination.",
+      "Existing cosmetic-document identity holds, threshold omissions and withheld material remain effective.",
+      "May and July industrial design decks show concepts and construction alternatives, not proof every option was built.",
+      "Whipsaw industrial design credit is corrected under EV-3bd4fdf90ebe; individual authorship of every surface is not inferred.",
+      "The 2014 award event dates the announcement, not the 2013 introduction.",
+      "Unlabeled cover-load data, inconsistent percentage baselines and cross-project paint/door claims are excluded.",
+      "Dead-front test-foil quotations, assembly-document revisions and sampled new-ink inspection remain separate from production spending, implementation and yield claims."
+    ]
+  }
+}

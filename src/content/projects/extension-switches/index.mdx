@@ -65,8 +65,6 @@ cyberspace:
     deck: []
 ---
 
-# Extension Switch (Elvis)
-
 Noon's Extension Switch gave each group of lights a familiar physical control while communicating with the Room Director to coordinate the room. A click switched an individual light on or off; the narrow dimmer control adjusted its brightness. The product's simplicity at the wall depended on a more involved mechanism behind the cap.
 
 My contribution was on the Locoroll mechanical-development and reliability side: reviewing molded parts and tooling, working through test requirements and following manufacturing issues with the suppliers. Colin Davis at Function Engineering authored the Elvis preload and housing-clearance analyses. FIH coordinated assembly processes and testing, while Memtech handled molding and tooling actions.
@@ -74,6 +72,8 @@ My contribution was on the Locoroll mechanical-development and reliability side:
 ## A familiar switch with a coupled mechanism
 
 The front cap, dimmer key, front housing and rear housing had to move and assemble together without losing the clean exterior. The assembly record shows the dimmer key and cap joined to the front case, with the circuit board, flex, carrier and spring assemblies behind them. This made cap retention, operating feel and the visible gaps related engineering problems.
+
+The early EVT2 change reports show that locating the cap and dimmer was a separate task from retaining the cap. The February report reduces positioning holes from 1.0 to 0.95 mm and moves the cap's alignment features closer to the dimmer, replacing two remote ribs with pins near the moving key. Those recorded changes address relative movement and alignment. They do not establish the cause of the later adhesive-pocket mismatch or demonstrate a final test outcome.
 
 ## Holding the cap meant controlling the process
 
@@ -85,6 +85,8 @@ FIH then tested glued samples. The working synopsis records drop and crush passe
 
 By the May 10 assembly SOP, the cap operation specified FC1682 glue, a dispensing fixture, a separate cap-placement fixture and at least five hours in a clamping jig. The accompanying material data sheet identifies FC-1682 as a moisture-reactive polyurethane. The manufacturing change was more than replacing tape with a stronger bond: it added dispensing, positioning and clamping controls around the joint.
 
+Earlier Elvis instructions describe a different operation: adhesive-sheet placement followed by a 0.4 MPa, 20-second press. The retained May instructions specify dispensing, positioning and prolonged clamping. The page dates document instruction states, not a proved factory rollout date.
+
 ## The feel depended on the hidden stack
 
 A second problem sat behind the moving face. Colin Davis's tact-switch analysis followed the tolerance loop through the carrier, housings, shoulder screw, O-ring, circuit board and switch. Its conclusion warned that the preload could approach the actuation stroke and called for better understanding of insert control and O-ring compression. A separate analysis examined the clearance that allowed the front housing to tilt inside the rear housing.
@@ -95,16 +97,49 @@ The supplier action list connects that sensitivity to real assembly variation. T
 
 The reliability program was also being revised during development. In the March discussion recorded in the action review, FIH said the initial architecture had not been established around a ten-year life requirement and raised component-guarantee and schedule concerns. My feedback was part of the subsequent test-plan discussion. Turning that requirement into tests was an engineering task of its own.
 
-The July key-life report retained an overall failure even while recording functional and visual passes. Its tactile measurements were judged against separate criteria. Later DVT summaries recorded a suggested change to tactile thresholds and waiver remarks alongside passed tests, failures and continuing work. Test results and acceptance decisions had to be tracked separately.
+The July key-life report retained an overall failure even while recording functional and visual passes. Its cover requires more than 15% tactile ratio after cycling, while the main-button tables carry a greater-than-7% label. The native DVT plans retain the greater-than-15% requirement; later issue notes attribute a proposed 10% initial and greater-than-7% final criterion to me. A later summary records a pass beside that proposed criterion. These records preserve a difference between the original test result and the subsequent disposition discussion; they do not establish one consistently approved criterion or erase the earlier failure.
 
 ## Turning findings into inspectable parts
 
 The exterior finish also needed concrete feedback. In my April 26 review of the dimmer-key steel polish, I documented uneven polish, stress marks and dents by mold cavity. The purpose was to turn a general cosmetic concern into defects a supplier could locate and correct in the tool.
 
+An earlier March polishing record makes the appearance target visible. Its photograph calls out tooling marks on the dimmer's appearance surface, while a separate area note marks the surfaces to polish and calls for a preliminary SPI-B2 starting condition with a comparative gloss target subject to Locoroll approval. The later cavity-by-cavity review builds on that need for an inspectable surface definition; neither record is a certificate of the final tool condition.
+
 The shared Sativa and Elvis materials work also kept alternatives open. A March proposal set out how to compare uncoated resin candidates with the existing coated material, using UV exposure, scratch testing and controlled photographic inspection before choosing a final material. It defined a selection process rather than recording a completed material change.
 
 That work also depended on usable specifications and release information. The March working notes track gaps in cosmetic criteria, gap specifications, appearance callouts and drawing formats, along with requests to the people responsible for them. This documentation work connected design review to the measurements and acceptance decisions needed during a build.
 
+The incoming-inspection entries show different ways a build issue could be dispositioned. Key and front-housing entries received deviation waivers; a cap entry combined a cosmetic-only waiver with sorting for a feature defect. Those were recorded acceptance decisions for the inspected material, without proof of a corrected later lot or final surface qualification.
+
+The later drawing-delivery checks retained another boundary: readable individual parts still left naming, assembly mapping and revision work in progress. Completing a file transfer did not, by itself, complete the engineering release.
+
 ## What the work established
 
 The result was a defined cap-bonding operation, targeted tooling feedback and clearer checks for assembly feel and appearance. My contribution connected mechanical review and reliability questions to supplier actions and inspectable requirements, tying the visible behavior of the switch to the joint, part or process that controlled it.
+
+## Proposed development timeline
+
+Plans, document revisions, sample tests and product outcomes retain their separate dates and states.
+
+- **2017-01 - Cap separation during handling.** The working history records dirt at the seam and easy cap separation around mid-January. Stronger tape and a larger bond area become proposed responses. Credit: Shared team history.
+- **2017-02-14 - Cap location changes.** The filename-dated EVT2 report narrows positioning holes and relocates cap alignment features near the dimmer. These changes are distinct from the later adhesive-pocket investigation. Credit: Shared engineering-change report.
+- **2017-03-06 - Polish target and tool marks.** The filename-dated record shows tooling marks; the separate polish-area note defines a preliminary surface target subject to approval. Credit: Unsigned March records.
+- **2017-03-22/2017-03-23 - Incoming parts receive distinct dispositions.** Key and front-housing entries receive waivers; the cap entry combines a cosmetic waiver with sorting for a feature defect. These decisions do not prove a corrected later lot. Credit: Incoming inspection record; Yvonne Lai and IQC.
+- **2017-03-28 - Revised tape fails crush test.** The revised pressure-sensitive adhesive still fails the recorded crush test. Credit: FIH.
+- **Around 2017-04-20 - Tool-correction samples received.** The working synopsis records revised samples around April 20 after a 0.1 mm adhesive-pocket mismatch and tooling correction. Credit: Shared tooling history.
+- **2017-04-26 - Cavity-specific polish feedback.** Erik identifies uneven polish, stress marks and dents by mold cavity so the supplier can locate the tooling problems. Credit: Erik Norris, Locoroll.
+- **2017-05-08 - Glued samples and remaining controls.** The action review keeps the cap issue under DVT monitoring as FIH develops the assembly process. Successful samples do not settle fixture and gap-inspection control. Credit: FIH and Locoroll.
+- **2017-05-10 - Cap bonding operation specified.** The SOP defines FC1682 dispensing, separate placement and clamping fixtures, and a hold of at least five hours. Credit: FIH.
+- **2017-07-12 - Key-life report retains overall FAIL.** Report date, test window July4-11; functional/visual PASS does not erase overall FAIL. Credit: FIH report; Laurence Liu/Sunny Yen.
+
+### Undated records
+
+These records have no established calendar position.
+
+- **Undated - Preload analysis bounds switch feel.** The analysis follows the hidden tolerance loop and warns that preload can approach actuation travel. Insert control and O-ring compression remain important assumptions. Credit: Colin Davis, Function Engineering.
+
+### Optional additional context
+
+These supporting records remain separate from the main development sequence.
+
+- **2017-07-20/2017-07-25 - Later tactile-criterion proposal.** Issue notes attribute a proposed 10% initial and greater-than-7% final tactile criterion to Erik; a later summary records a pass beside it. The records do not establish one consistently approved criterion or erase the earlier overall failure. Credit: Erik proposal; FIH record.

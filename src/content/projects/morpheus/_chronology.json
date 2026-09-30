@@ -1,0 +1,300 @@
+{
+  "schema_version": "1.0",
+  "project": "morpheus",
+  "title": "Development timeline",
+  "start": "2008-10",
+  "end": "2009-10-12",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2008-10",
+      "end": "2009-01-15"
+    },
+    {
+      "id": "optional",
+      "label": "Optional additional context",
+      "start": "2009-02-05",
+      "end": "2009-10-12"
+    }
+  ],
+  "events": [
+    {
+      "id": "morpheus-prep-01",
+      "date": "2008-10",
+      "date_label": "October 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Set reuse/envelope constraints",
+      "summary": "starting constraint/assignments Credit: Erik; hardware team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    },
+    {
+      "id": "morpheus-prep-02",
+      "date": "2008-11",
+      "date_label": "November 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Circulate mechanical brief",
+      "summary": "development brief Credit: Erik; hardware team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    },
+    {
+      "id": "morpheus-prep-03",
+      "date": "2008-11",
+      "date_label": "November 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Review populations and connector layout",
+      "summary": "layout review/correction Credit: Greg Curry; Vince DiLello; Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    },
+    {
+      "id": "morpheus-prep-04",
+      "date": "2008-11",
+      "date_label": "November 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Define direct-sale blanking need",
+      "summary": "variant proposal Credit: Richard Lane; Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    },
+    {
+      "id": "morpheus-prep-05",
+      "date": "2008-11",
+      "date_label": "November 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Explore isolated fan intake",
+      "summary": "thermal concept Credit: Nathan Forster; Erik coordination.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    },
+    {
+      "id": "morpheus-prep-06",
+      "date": "2008-12-01",
+      "date_label": "December 1, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Deliver scaled thermal-layout views",
+      "summary": "documented delivery/feedback Credit: Erik; Nathan.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    },
+    {
+      "id": "morpheus-prep-07",
+      "date": "2008-12",
+      "date_label": "December 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Review flexible-midplane limits",
+      "summary": "proposal/constraint Credit: Nathan; Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    },
+    {
+      "id": "morpheus-prep-08",
+      "date": "2008-12-03",
+      "date_label": "December 3, 2008; recorded December 11",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged. Recorded, reported, planned and follow-up qualifiers in the date label remain separate.",
+      "title": "Name Hydra and Titan",
+      "summary": "meeting naming event Credit: Hardware team; Rob Wudrick recorder.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    },
+    {
+      "id": "morpheus-prep-09",
+      "date": "2008-12-10",
+      "date_label": "December 10, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Continue Morpheus/Titan and Hydra layouts",
+      "summary": "naming/layout continuity Credit: Nathan; Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    },
+    {
+      "id": "morpheus-prep-10",
+      "date": "2009-01",
+      "date_label": "January 2009",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Continue connector and midplane work",
+      "summary": "ongoing review Credit: Vince; Greg; Erik; Nathan.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    },
+    {
+      "id": "MI01",
+      "date": "2009-01-13",
+      "date_label": "January 13, 2009",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Define connector placeholders from signal requirements",
+      "summary": "diagram exchange and proposed mechanical handoff Credit: Nathan Forster; Erik; hardware team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    },
+    {
+      "id": "MI02",
+      "date": "2009-01-15",
+      "date_label": "January 15, 2009; recorded January 16",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged. Recorded, reported, planned and follow-up qualifiers in the date label remain separate.",
+      "title": "Plan flexible interconnects and the layout handoff",
+      "summary": "design/sourcing judgment and assigned follow-up Credit: Adrian Fung recorder; Greg Curry; Nathan Forster; Vince Di Lello; Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    },
+    {
+      "id": "MI05",
+      "date": "2009-02-05",
+      "date_label": "February 5–13, 2009",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Compare cable families and share supplier contacts",
+      "summary": "connector proposals and sourcing follow-through; qualification unestablished Credit: Nathan Forster; Adrian Fung recorder; Erik; hardware team.",
+      "phase": "optional",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ],
+      "end_date": "2009-02-13"
+    },
+    {
+      "id": "MI06",
+      "date": "2009-03-10",
+      "date_label": "March 10–12, 2009",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Compare shared-board layouts and prototype timing",
+      "summary": "physical mockups, revised proposal and requested mechanical review Credit: Nathan Forster; Richard Lane; Rob Wudrick; Erik review requested.",
+      "phase": "optional",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ],
+      "end_date": "2009-03-12"
+    },
+    {
+      "id": "MW06",
+      "date": "2009-07",
+      "date_label": "July 2009",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Define Hydra connector and LED positions",
+      "summary": "layout drawings dated July16/21 by filename; sent-cover and completed fit unverified Credit: Drawing author not identified on the sheets.",
+      "phase": "optional",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    },
+    {
+      "id": "morpheus-readiness03-H1",
+      "date": "2009-08-28",
+      "date_label": "2009-08-28",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Record chassis revision for PROTO2",
+      "summary": "drawing_revision_release_to_prototype Credit: EN initials in prepared/checked and approved fields; wider team responsibility unchanged.",
+      "phase": "optional",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    },
+    {
+      "id": "MI07",
+      "date": "2009-09-03",
+      "date_label": "September 3–10, 2009",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Revise the Hydra glow-board outline and attachment",
+      "summary": "drawing revisions and touch-rib clearance requirement; built clearance unverified Credit: EN initials; hardware team.",
+      "phase": "optional",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ],
+      "end_date": "2009-09-10"
+    },
+    {
+      "id": "morpheus-readiness03-H3",
+      "date": "2009-10-08",
+      "date_label": "2009-10-08",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Record BTC bracket prototype release",
+      "summary": "drawing_revision_release_to_prototype Credit: EN initials in prepared/checked and approved fields; wider team responsibility unchanged.",
+      "phase": "optional",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    },
+    {
+      "id": "morpheus-readiness03-H2",
+      "date": "2009-10-12",
+      "date_label": "2009-10-12",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Record BD bracket revision for PROTO2",
+      "summary": "drawing_revision_release_to_prototype Credit: EN initials in prepared/checked and approved fields; wider team responsibility unchanged.",
+      "phase": "optional",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-0eb0afe10c86"
+      ]
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "scope": "Exact current reader wording, date labels, order, states and credit. Dates retain their displayed precision. Source-only material remains private; visualization is not claim approval or publication.",
+    "source_chronologies": [
+      "EV-0eb0afe10c86"
+    ]
+  }
+}

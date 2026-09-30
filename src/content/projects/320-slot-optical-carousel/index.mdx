@@ -136,53 +136,103 @@ cyberspace:
         caption: Revision 2 of the April 10, 2014 inspection procedure measures marked high points and rejects parts with either measurement above 2 mm. Rejected parts were to be quarantined; the later inventory correspondence includes an explicit scrap disposition.
     featuredIndices: []
     deck: []
+  - id: review-qc-profile
+    type: gallery
+    title: Local slot width across five inspected samples
+    caption: 'QC Group, March 2012: five named samples, 320 slots and four reported measurement positions per slot. Values are read from the raw workbook cells. The shaded band is the row specification, 1.55 ± 0.06 mm. Sample independence and rework histories are unresolved; this is not a yield or improvement comparison.'
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/320-slot-optical-carousel/curation-20260930-r2/qc-slot-width-profiles-1cd0e25cb6a0.svg
+        alt: Five sample profiles showing reported slot width in millimeters across all 320 positions.
+    featuredIndices: []
+    deck: []
+  - id: review-qc-locations
+    type: gallery
+    title: Four inspection locations
+    caption: The inspection-location drawing labels four positions, A through D, along a slot. The QC workbooks report those same four location labels for each of the 320 slots. Matching labels establish the drawing-to-workbook context; they do not independently verify the physical probing setup.
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/320-slot-optical-carousel/curation-20260930-r2/qc-locations-7fd59b40adc9.png
+        alt: Carousel inspection drawing marking positions A, B, C and D along the length of a slot.
+    featuredIndices: []
+    deck: []
 ---
 
-# 320-Slot Carousel
+## Making all 320 positions work
 
-A disc vault has to bring one disc out of a dense array, hand it to the transport, and return it without catching an edge. Kaleidescape's 320-slot carousel made that repeated interface part of one large molding. Slot shape, molded dimensions, carousel alignment and roller behavior all affected the same operation.
+The carousel in Kaleidescape's M700 and DV700 disc vaults had to do more than hold 320 discs. Each position had to present a disc consistently to a kicker, accept it from the pinch rollers, and remain readable by the inventory sensor. A large molded part connected all those interfaces. Small differences in a slot, a rib, a tooling insert or the disc itself could become a handling problem.
 
-My work at Kaleidescape included tooling-change decisions, part definition, inspection and production support. The work crossed several teams: Function Engineering developed the early mechanical breadboards; Loyd May contributed the rib and radius changes used in the molding plan; manufacturing partners ran the trials; and Nathan Forster's later system tests helped distinguish slot problems from transport behavior.
+My work moved between that functional geometry and the realities of the tooling: defining changes, investigating samples, coordinating supplier follow-through, and turning observations into drawing controls and inspection procedures. Function Engineering developed the early breadboards; Loyd May contributed tooling, rib, radius, cooling and venting work; Nathan Forster later tested changes in the complete handling system.
 
-## Establishing the geometry
+## Establish the path before committing it to steel
 
-The early program tested the mechanism before committing its geometry to a production tool. Function Engineering's August 2010 phase report records a breadboard platter with interchangeable pie wedges for four slot geometries, followed by a full SLA carousel. Its tests demonstrated repeatable disc handling at the breadboard level and explored alignment among the carousel, kicker and pinch rollers. Encoder/control confirmation and component life testing remained follow-on work.
+The early record shows several capacity alternatives being worked through together. Function's May 2010 sizing study compared disc spacing and 250-, 300-, 350- and 400-disc envelopes. A June 4 note identifies 300 discs as the plan of record entering breadboard development, and the end-of-phase report describes a 300-disc molded platter. Yet a June 16 concept still has 250 slots, and the June requirements retain older 250-disc language alongside a target of at least 300. By August, Function was evaluating a 320-disc system. These are overlapping studies, not a clean sequence of capacity increases. The exact decision fixing 320 remains unresolved.
 
-The slot's V-groove constrained the disc and aligned it with the kicker. The perimeter also acted as a large timing pulley, so belt engagement brought another tolerance problem: the long contact length accumulated pitch variation. Function's report called for slightly wider pulley grooves and considered omitting some teeth. Its selected belt and pulley combination provided an integral number of motor steps per disc slot. These were mechanical design decisions with consequences for indexing, packaging and manufacture, well before the later molding problems.
+The June architecture already connects the carousel to the rest of the machine: perimeter belt drive, paired idlers, a home flag, encoder teeth for individual slots, a central support and three support rollers. It also leaves questions about obstruction sensing, foreign objects, smaller discs and maximum disc thickness. Those are design commitments and open questions in the phase report, not a claim that the resulting product had passed them all.
 
-## Turning the geometry into a molding
+The breadboards were built to test the interfaces. Four disc-slot geometries were compared, with a full SLA carousel and separate kicker and pinch-roller mechanisms. Function found that a V-groove was necessary to constrain the disc and align it with the kicker. It also investigated alignment sensitivity and the timing of moving a disc through the mechanism. Full-system position confirmation and life testing remained further work.
 
-The January 2011 trials showed how far a working prototype was from an acceptable molded part. T1 produced extensive flash after intentional over-pressure was used to try to fill the tool, with broken ribs left in the cavity. The development report also recorded brittle material behavior, but explicitly left open whether incorrect processing contributed.
+The carousel's perimeter was another interface, functioning as a large timing pulley. The breadboard report discusses belt engagement over a long wrap and an integral number of motor steps per slot. Those choices made the shape a coordinated mechanism rather than an isolated molded tray.
 
-T3 produced 46 ABS and 46 HIPS samples after moving the tool to a trial specialist. My report described an encouraging functional check in some slots while identifying ejector deformation, knit lines and dimensions still requiring inspection. It was progress, with further work plainly visible.
+## Getting material through the geometry
 
-## Revising the tool
+Before molding trials, the archive contains several gating studies. Yudo compared 26-, 18- and 12-drop layouts, then produced a separate eight-drop study. Other Moldflow reports explored different model and resin conditions. They map potential fill, weld-line and trapped-air behavior, but their differing assumptions prevent a simple claim that one layout or material conclusively won. Commercial records likewise move from six-drop alternatives in September to an eight-drop quote in November. Those quotations establish proposed configurations; they are not a record of every drop actually installed.
 
-The pre-T4 plan brought together Loyd May's additional support rib, increased rib widths and larger blending radii. We treated those as the first incremental changes; more extensive measures, including vacuum venting, remained alternatives to evaluate. The $2,500 and one-week figures were a preliminary quote for that modification package.
+The tool-build reports add an intermediate stage between those studies and the first samples. Successive December schedule columns report 62, 75 and 90 percent actual progress. They show the mold moving through construction, with future dates and incomplete work still visible. The final January target is not a completion receipt. Packaging was being considered before the trials too: a January brief emphasizes preserving flatness and protecting the encoder teeth, distinguishing temporary sample shipping from the future production pack.
 
-By T4, the part was filling consistently, but the report still recorded undersize parts, air traps, short shots and flash. T5 showed no significant improvement; T6 still had undersize parts and air-entrapment marks. The April 19 timeline listed T7 as scheduled. Fill consistency was one useful result within an unfinished dimensional and process problem.
+The first trials exposed the difficulty of filling and releasing the part. T1 photographs show flash and ribs broken in the tool. At T2, the team could balance flow in the center, but filling the inner ring and then the ribs and outer hub remained difficult. Meeting notes describe a narrow operating window, unequal tool temperatures and plastic stuck in the cavity. Cooling distribution, vent locations, polish, ejection and resin choice were all being questioned.
 
-## Finding the variation within 320 slots
+The response was incremental. The T4 plan prioritized ribs, radii, cooling, vents, polishing and gate changes. More invasive alternatives, including additional cavity ejectors, undercuts and vacuum venting, remained available after sampling the first changes. The February update records an approved internal purchase request for the rib/radius work. By the March 17 report, Function labels a sample photograph with implemented ribs, while still documenting air traps and short shots. Getting a part to fill was progress; it did not settle dimensional or functional acceptance.
 
-A carousel could look complete while a particular arc behaved differently. The 2011 investigation combined physical measurements with optical inventory scans to locate troublesome slots. At slot 205, the report measured 1.37 mm just ahead of the V-groove, against its stated 1.50 mm intent. Local rib thickness and the disc's own edge geometry mattered to the available clearance.
+## Know what is actually in the tool
 
-The scans localized poor responses, then the tooling investigation examined differences among sections. Re-burning or replacing individual sections was proposed. A later slot-120 request compared insert replacement with repair and re-burn work. These records preserve the distinction between a measured defect, a suspected tooling cause and a proposed repair.
+In May, the issue was partly one of configuration. Loyd asked Alan Wu to identify the vent land geometry actually present in the tool and reconcile it with earlier sketches and the current drawing. His memo refers to my earlier question about land depth and vent width. He also asked for numbered hot-runner wiring so later operators could connect the correct controls to the correct drops. A proposed modification was not useful unless the team knew what had actually been cut and connected.
 
-## Defining rework and acceptance
+In June, Loyd reported that enlarging the core-side vents had not markedly improved trapped air. He recommended adding release channels to 45 ejector pins. The later drawing history records ejector-pin vent changes, but that is evidence of drawing intent; the memo and revision entry do not by themselves prove exactly when the hardware changed or what improvement followed.
 
-Temporary rework needed its own acceptance method. The October procedure described removing interfering material and cleaning the slots. The November inspection required three test discs to pass through every one of the 320 positions under their own weight. Damaged parts were rejected, and reworked slots had to be checked again. Drawing maintenance continued too: the January 2012 Rev 11 ECN corrected a minus-tolerance typo and gate numbering. The later tooling proposals also made gate identification useful to operators correlating controller output with physical gate drops.
+Photographs from June also show another problem becoming visible: the geometry was not identical around the carousel. Loyd marked changes in rib height and profile where cavity inserts met. That observation connects the tooling investigation to the local slot problems found during handling checks. It should not be stretched into a quantified causal result without reconciling the sample and measurements.
 
-## Supporting the part in production
+The later supplier trial review makes the tradeoff explicit. Better filling of the V-cut required higher clamping pressure, but the supplier reported that this also pulled or distorted slot ribs. Trapped gas, short fill and ejection whitening prompted competing suggestions about pressure and root radius. This undated report, delivered in an October-labelled folder, helps explain why a fuller-looking part was not automatically a better functional part. It does not establish the exact trial date or the outcome of the proposed later production run.
 
-Many of these changes reached production during a compressed sequence of programs, with design-for-manufacture work continuing on the fly.
+## Inspect the function at every position
 
-The production problem extended beyond the tool. The April 2014 packaging instruction enlarged the pocket around the carousel to relieve interference with the packing material. A separate warpage procedure established a flat reference, marked high points and a reject/quarantine limit. These gave receiving and production staff a repeatable way to judge parts.
+A pilot disc did not seat correctly at slot 205. The investigation compared the narrow local slot and its ribs with other positions and with a disc whose edge was thicker than its nominal body. Later inventory scans showed repeated problem regions around the carousel. The working hypothesis included differences between tooling sections and the electrode setups used to make them; the source proposed that cause rather than proving it.
 
-## Testing the disc path and deciding disposition
+The controls became more specific. Temporary instructions distinguished removable flash from physical damage that required rejection. The slot procedure called for three inspection discs in all 320 positions, letting each settle under its own weight and checking alignment. Separate instructions controlled the height of the ejector-pin pads. These were functional checks directed at the actual handling interface. The procedures describe what to do; they do not prove that every manufactured part received the checks.
 
-The adjacent disc path was also under investigation. Nathan's April 17 tests combined a modified guide and upper bearing with stronger springs. Double force passed four run-in cycles in the reported tests, including dirty-roller and known rib-hit conditions. Triple force caused the spring itself to take a permanent set. My April 21 plan called for the guide/bearing changes and double-force springs, with solid bushings and a modified gear to be tested and implemented if necessary. The April 29 release discussion still called for testing the spring prototypes before their release.
+The photographs made those local conditions traceable. A November report explicitly separated raw, unreworked samples and marked inspection locations around a part before showing the slot edges in close-up. The numbered locations were a way to return to the same geometry. They were not a count of defective parts or a measure of production yield.
 
-Part disposition remained a separate responsibility. In August, I explicitly directed failed parts to be scrapped. By January 2015, a replacement carousel tool was again under quotation review, with improved spacing consistency an objective. The reviewed records stop before that tool's final disposition.
+Metrology adds evidence at two different scales. QC Group's August 2011 laser-scan report compares the overall part with CAD. Its March 2012 native workbooks go position by position: two named samples on March 20 and three on March 30, each with all 320 slots measured at four source-labelled positions. The 6,400 raw readings show how width varies around a carousel and within a slot. Several profiles contain broad narrow regions and abrupt changes, making the local nature of the problem visible.
 
-The engineering work was the connection among these decisions: proving a slot geometry, making it repeatably, measuring where it varied, testing the disc interface and giving production a defensible acceptance rule. The carousel was one component, but its performance depended on that entire chain.
+The figure plots those readings against the limits carried on the measurement rows, 1.55 ± 0.06 mm. It deliberately preserves the sample identities and dates. We have not established whether those samples share a molding lot, treatment or rework history, so the two dates cannot be presented as a controlled before-and-after improvement. Nor do selected inspection samples provide a production-yield or capability result. The workbook matters: its March 30 PDF shows only Part 1, while the native file also holds Parts 2 and 3.
+
+By February 2012, the review called for replacement of four tool sectors, with another conditional on the slot-120 problem, and for samples to be inspected and reworked against the gauge procedure. REV 12 records the gauge thickness change from 1.2 to 1.4 mm. Tool-steel views then clarified a dimension and its polishing allowance; tool-versus-part tables and the slot-120 RFQ examined whether to replace a section or repair it. The repair request considered adding steel and reburning, and asked for alternatives, cost and lead time. The archive preserves those requests without giving every proposed repair an invented completion.
+
+A slot-by-slot comparison placed the tool measurements beside molded-part readings. All 320 values in its tool column trace to the eight gate reports. The comparison kept tooling geometry and part measurements distinct while focusing the review on particular sectors and slots.
+
+## A redesign had to preserve the interfaces
+
+The 2012 new-tool discussion was broader than correcting one slot. Yomura proposed new gate positions and a 32-section rib layout. In the May response, I worked through the implications for kicker clearance, roller-track keepouts, recessed slot numbers and the metal retaining ring. A preliminary peripheral-piece concept was considered alongside a proposed snap-in arrangement. Those pieces were not the eight sectors of the original mold.
+
+The follow-through shows why the geometry remained a negotiation. In June, Yomura warned that a curved design could improve flow while reducing stiffness, and that thicker plastic could weaken the remaining mold steel. It proposed moving ribs to the core side and kept an extra rib conditional on the actual trial. The supplier also preferred embossed IDs over the requested recesses. July comments revisited the IDs, a proposed surrounding step and the balance between root radius, strength and sink. These are unresolved design choices in the record, not a finished new tool.
+
+The June 26 revision of the new-carousel drawing was released for prototype and final tooling review. It marked keepout areas on the upper and lower roller surfaces and retained a zero-flash requirement in all 320 disc slots.
+
+By July 11, a 502-1189 SLA prototype review was correcting the direction of the home ring. That gives the redesign a concrete prototype stage in the record. It does not establish that this design, or the separately quoted 2015 replacement tool, reached production.
+
+## Continue at the system and production-support level
+
+Later work returned to the whole disc path. February 2014 bench reports documented repeated loading through slot 320, scratches and observations around the roller frame, alignment features and motor wiring restraint. Returned roller assemblies were also tested in a common carrier under stated conditions. Failure to reproduce their original complaints in that setup did not clear every returned unit or validate all 320 positions. A later RMA summary explicitly separated the customer's complaint from a theory, reproduced finding or unresolved case.
+
+Further tests preserved failures as well as non-reproductions. A rear-path run with the cone fitted reported no transfer trouble and still recorded disc scratching. In March, one donor front-roller assembly immediately rejected the attempted disc. Another assembly, left unidentified in its report, failed to accept a disc; its report records repeated startup motion and an obstruction warning on restart. These observations kept attention on the interfaces around the carousel; they did not establish the molded carousel as the cause of every handling fault.
+
+In April, Nathan reported tests of revised guides, bearing blocks and spring loads. He observed permanent set in the triple-force spring and reported four run-in cycles with double-force springs, including dirty rollers and a unit that reproduced a rib hit. My follow-up separated the near-term guide, bearing and spring changes from broader alternatives and from bushings or gears that still needed tests. These are bounded observations and implementation plans, not a fleet-reliability result.
+
+The carousel itself also needed production controls. Warpage inspection and packaging instructions were revised; rejected parts were dispositioned through a later scrap chain. The records do not prove that packaging caused the field problems or that the revised packaging eliminated them.
+
+The supported replacement-tool endpoint is still a January 2015 quotation followed by internal review. Many changes reached production, but the exact combination and final replacement-tool outcome remain unresolved.
 

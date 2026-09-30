@@ -1,0 +1,413 @@
+{
+  "schema_version": "1.0",
+  "project": "m700",
+  "title": "Development timeline",
+  "start": "2010",
+  "end": "2015-01",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2010",
+      "end": "2015-01"
+    }
+  ],
+  "events": [
+    {
+      "id": "m700-prep-01",
+      "date": "2010",
+      "date_label": "2010 schedule",
+      "date_basis": "Year-level source label; no month or day inferred.",
+      "title": "Assign internal mechanical design and release",
+      "summary": "planned responsibility Credit: Erik; Nathan; firmware/motor-control owners.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "D01",
+      "date": "2010-06-04",
+      "date_label": "June 4, 2010",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Define the concept architecture",
+      "summary": "Concept report for a 300-disc predecessor; breadboards and open requirements remained. Credit: Function Engineering.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "D27",
+      "date": "2010-06-24",
+      "date_label": "June 24, 2010",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Define assembly and service targets",
+      "summary": "Living requirements set design goals and unresolved limits. Credit: Function Engineering; Kaleidescape team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "m700-prep-02",
+      "date": "2010-08",
+      "date_label": "August 2010",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Report breadboard mechanism findings",
+      "summary": "breadboard findings Credit: Function Engineering.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "m700-prep-03",
+      "date": "2011-01",
+      "date_label": "January 2011",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Review unusable T2 molding trial",
+      "summary": "trial problem/next actions Credit: Erik; Function; Loyd May; suppliers.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "D20",
+      "date": "2011-01-28",
+      "date_label": "January 28–February 10, 2011",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Advance the T3 trial and T4 plan",
+      "summary": "Trial samples reported shipped; T4 quotation received and internal PO request approved, with order delivery still promised. Credit: Erik; Loyd May; Thomas; Alan Wu/Great Mold.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ],
+      "end_date": "2011-02-10"
+    },
+    {
+      "id": "O2",
+      "date": "2011-02-22",
+      "date_label": "February 22, 2011",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Reconcile mechanical part files",
+      "summary": "Working file-custody lists; presence in Arena is not production release. Credit: Function Engineering; Kaleidescape mechanical team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "m700-prep-04",
+      "date": "2011-04",
+      "date_label": "April 2011",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Coordinate production punch list",
+      "summary": "release instructions/open work Credit: Erik; suppliers.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "m700-prep-05",
+      "date": "2011-07",
+      "date_label": "July 2011",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Launch integrated-player vault",
+      "summary": "commercial launch Credit: Kaleidescape.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "m700-a61260db95b9",
+      "date": "2011-08-18",
+      "date_label": "August 18–19, 2011",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Review rivet choices and joint security",
+      "summary": "Loose optical-drive bracket rivets prompted a clamping instruction; substitution choices remained constrained by the joint. Credit: Kaleidescape engineering and manufacturing. Corrective-lot verification unestablished.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-7098705ceeb9"
+      ],
+      "end_date": "2011-08-19"
+    },
+    {
+      "id": "m700-prep-06",
+      "date": "2011-10",
+      "date_label": "October 2011",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Propose carousel sister-rib study",
+      "summary": "tooling proposal Credit: Engineering/tooling team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "D22",
+      "date": "2011-10",
+      "date_label": "October 2011–April 2012",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Review sheet-metal manufacturing options",
+      "summary": "Functional constraints, sample requests and redesign budgets; realized savings unestablished. Credit: DEMSA; Kaleidescape team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ],
+      "end_date": "2012-04"
+    },
+    {
+      "id": "D33",
+      "date": "2011-11-30",
+      "date_label": "November 30, 2011",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Define slot seating inspection and rework",
+      "summary": "Three-disc procedure across all 320 slots; lot completion unestablished. Credit: Kaleidescape engineering/manufacturing.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "M357-A3",
+      "date": "2011-12",
+      "date_label": "December 2011–January 2012",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Propose molding and traceability changes",
+      "summary": "The dated tooling-change compilation records proposed draft, radius, vent and gate/slot identification changes. Credit: Engineering/tooling team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-f3d1430e864c"
+      ],
+      "end_date": "2012-01"
+    },
+    {
+      "id": "D14",
+      "date": "2012-01",
+      "date_label": "January 2012",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Define roller-slot rework and drive alignment checks",
+      "summary": "Inspection examples and repair instructions; production coverage unestablished. Credit: Kaleidescape engineering; Sanmina.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "m700-518c4a7e0ebb",
+      "date": "2012-02",
+      "date_label": "February–April 2012",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Measure slot variation and request tool repairs",
+      "summary": "Section-replacement requests, tool/part comparison and two slot-120 repair options; selected repair and outcome unestablished. Credit: Kaleidescape engineering; QC Inspection/Steven DeVowe; Great Mold and tool-inspection suppliers.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-7098705ceeb9"
+      ],
+      "end_date": "2012-04"
+    },
+    {
+      "id": "D02",
+      "date": "2012-05",
+      "date_label": "May 2012",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Review a new carousel-tool concept",
+      "summary": "320-insert DFM proposal weighed molding against guidance, noise and kicker compatibility. Credit: Erik; John Lio; Richard Lane; Yomura.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "m700-prep-07",
+      "date": "2014-02",
+      "date_label": "February 2014",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Correct misleading test setup",
+      "summary": "test correction Credit: Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "m700-prep-08",
+      "date": "2014-03",
+      "date_label": "March 2014",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Relate shaft bending to disc alignment",
+      "summary": "observations/design assignments Credit: Nathan Forster; Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "m700-prep-09",
+      "date": "2014-03",
+      "date_label": "March 2014",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Review bounded field-operation data",
+      "summary": "data analysis Credit: Mark McKenzie.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "m700-prep-10",
+      "date": "2014-04-10",
+      "date_label": "April 10, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Define reject/quarantine threshold",
+      "summary": "procedure revision Credit: Engineering/manufacturing; Erik packaging assignment.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "m700-prep-11",
+      "date": "2014-04-29",
+      "date_label": "April 29, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Load guide/bearing revision; order springs",
+      "summary": "working revision/prototype order Credit: Erik; Rob Wudrick.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "m700-prep-12",
+      "date": "2014-05",
+      "date_label": "May 2014",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Specify cover assembly sequence",
+      "summary": "assembly instruction Credit: John Lio; shared vault team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "m700-r04-15",
+      "date": "2014-07-16",
+      "date_label": "July16-17,2014",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Resolve scratching in one M700 with prototype roller support",
+      "summary": "Reported unit-level result; prototype not yet released Limit: No fleet correction or production qualification Credit: Erik initial guide confirmation; Nathan diagnosis and prototype substitution; service team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ],
+      "end_date": "2014-07-17"
+    },
+    {
+      "id": "m700-prep-13",
+      "date": "2014-07",
+      "date_label": "July–August 2014",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Prepare spring/guide release",
+      "summary": "revision/release preparation Credit: Erik; hardware/manufacturing.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ],
+      "end_date": "2014-08"
+    },
+    {
+      "id": "m700-prep-14",
+      "date": "2014-08-19",
+      "date_label": "August 19, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Instruct supplier to scrap failed parts",
+      "summary": "disposition instruction Credit: Erik; John Lio; Sanmina.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ]
+    },
+    {
+      "id": "D11",
+      "date": "2014-12",
+      "date_label": "December 2014–January 2015",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Re-evaluate the new-tool option",
+      "summary": "Feasibility inquiry, supplier quotation and internal review; order and delivered outcome unestablished. Credit: Erik; Grat Wu/Yomura; Mark McKenzie.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-81b0f55de256"
+      ],
+      "end_date": "2015-01"
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "scope": "Exact current reader wording, date labels, order, states and credit. Dates retain their displayed precision. Source-only material remains private; visualization is not claim approval or publication.",
+    "source_chronologies": [
+      "EV-81b0f55de256",
+      "EV-7098705ceeb9",
+      "EV-f3d1430e864c"
+    ]
+  }
+}

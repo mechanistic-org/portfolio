@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "project": "fissler-bbq",
+  "title": "Development timeline",
+  "start": "1996",
+  "end": "1996",
+  "phases": [
+    {
+      "id": "context",
+      "label": "Additional context",
+      "start": "1996",
+      "end": "1996"
+    },
+    {
+      "id": "undated",
+      "label": "Undated records",
+      "start": "",
+      "end": ""
+    }
+  ],
+  "events": [
+    {
+      "id": "fissler-bbq-context",
+      "date": "1996",
+      "date_label": "Circa 1996",
+      "title": "Frog contract for Fissler",
+      "summary": "Erik contracted to Frog on a home barbecue concept for Fissler. Credit: Erik Norris through Mechanistic; Frog client.",
+      "phase": "context",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-cbef64ad5518"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "fissler-bbq-experiments",
+      "date": "",
+      "date_label": "Undated within project",
+      "title": "Making the heating brief testable",
+      "summary": "Erik built Calrod heater rigs and adapted appliances to explore cooking conditions. Credit: Erik Norris; client brief retained.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-cbef64ad5518"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "fissler-bbq-cage",
+      "date": "",
+      "date_label": "Undated within project",
+      "title": "Driving the cage from its edge",
+      "summary": "Two cage halves clamped food while peripheral teeth and a pinion provided rotation outside the heating space. Credit: Erik's accepted development contribution.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-cbef64ad5518"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "fissler-bbq-test-record",
+      "date": "",
+      "date_label": "Undated within project",
+      "title": "Separate heat, rotation and cooking",
+      "summary": "The report distinguishes thermal, unloaded-rotation and cooking trials, with sensor-contact notes needed to interpret traces. Credit: Erik experimental planning, controller programming, logging and analysis.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-cbef64ad5518"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "fissler-bbq-limitations",
+      "date": "",
+      "date_label": "Undated within project",
+      "title": "Cooking limitations documented",
+      "summary": "The record includes binding, uneven cooking, smoke and a mismatch between heating window and cage area. Credit: Erik development and evidence-based discussions.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-cbef64ad5518"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "fissler-bbq-contract-end",
+      "date": "",
+      "date_label": "Contract end, date unspecified",
+      "title": "Involvement ended with contract",
+      "summary": "Erik did not follow later development closely enough to claim a production outcome. Credit: Erik Norris.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-cbef64ad5518"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "source_chronology": "EV-cbef64ad5518",
+    "scope": "Exact producer reader selection; richer material findings and omitted events retained in registered chronology. No new dates or claims inferred by rendering."
+  }
+}
