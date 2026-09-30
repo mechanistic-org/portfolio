@@ -1,3 +1,4 @@
+import { projectCurationPresentations } from "./projectCurationPresentations";
 import type { ProjectPresentation } from "../utils/projectPresentation";
 
 /** #222 approved five-page trial plus #223 reviewed eight-page rollout; content stays canon-owned. */
@@ -3196,6 +3197,7 @@ export const careerIdentityAliases: Readonly<Record<string, string>> = {
 	switches: "extension-switches",
 };
 export function trialPresentation(slug: string): ProjectPresentation | undefined {
+	if (projectCurationPresentations[slug]) return projectCurationPresentations[slug];
 	return Object.hasOwn(projectArticleTrial, slug)
 		? projectArticleTrial[slug as keyof typeof projectArticleTrial]
 		: undefined;

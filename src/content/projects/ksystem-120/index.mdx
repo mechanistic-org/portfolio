@@ -74,8 +74,6 @@ cyberspace:
     deck: []
 ---
 
-# KSYSTEM-120 / Orpheus
-
 The Kaleidescape Mini System brought a movie server, playback electronics, music zones and a DVD/CD reader into one enclosure. Developed as Orpheus and sold as the KSYSTEM-120, it combined four removable disk cartridges with a front panel intended to sit beside the rest of a home's entertainment equipment.
 
 My contribution covered mechanical integration and new-product introduction: coordinating physical builds, working through enclosure and board interfaces, supporting the front-panel Glow development, and defining how first articles would be inspected and their discrepancies resolved. I worked with Kaleidescape's electrical, hardware-program, manufacturing and quality teams, Argyle Design, and the suppliers building the parts.
@@ -95,6 +93,14 @@ In June and July 2008, the team distinguished an early functional mechanical bui
 I distributed the mechanical schedule and coordinated the parts needed for build kits at Argyle and in-house. Functional boards were scarce, so rejected bare boards were to be populated with the connectors and tall components needed for mechanical evaluation. That let the mechanical team check the physical interfaces without waiting for every board to be electrically functional.
 
 The drive enclosure illustrates why those builds mattered. A hard-drive grounding requirement prompted the team to reconsider mounting and enclosure concepts, including formed metal, plastic and magnesium-alloy alternatives. The July meeting record also identified an assembly problem: riveting the inner and outer cages together could prevent installation of the drive-plane PCB. I carried the request for an assembly and service procedure into the mechanical review. A drive cage that located the parts still needed a workable order of assembly and a way to service them.
+
+I kept the mechanical changes in a part-by-part tracking record. It connected assembly problems to concrete changes: a rack-ear screw interfering with a PCB, a DVD drive that could be mounted in the wrong set of holes, and cable openings that needed more room. The proposed responses included moving the screw location, adding DVD stop lances and enlarging routing slots. The tracker also separated estimated parts availability and retest recommendations from the change description. It was a working reference; controlled drawings and CAD in PLM remained the design authority.
+
+## Cooling and noise shared the enclosure
+
+Cooling and noise were also enclosure problems. Orion Bruckman's October 1, 2008 acoustic test used an assembled prototype with metal drive cases, front plastics and mockup side panels. The report proposed reducing vibration transmitted through the fan cage's connections to the chassis, power-supply tray and DVD tray, or improving damping at the fan mounts. Argyle's Gabe Cohn developed the isolation proposal further, while John Lio questioned whether the next parts were intended for prototypes or production before their EMI and shipping behavior had been tested. The correspondence records proposed changes and disputed release assumptions, not a verified production correction.
+
+Fan speed connected that mechanical work to thermal control. On October 20, Nathan Forster circulated a proposed fan table based on thermal measurements in a confined test enclosure. It linked temperatures at an internal probe to component temperatures and stepped the fan speed as the probe reading rose, with the aim of cooling the system without unnecessary noise or abrupt speed changes. Nathan explicitly said the table still needed real testing and verification. The acoustic test and control proposal therefore document development work, without establishing that the final system met its noise target.
 
 ## Closing the base-to-cover fit
 
@@ -116,6 +122,14 @@ The manufacturing handoff included both dimensional requirements and instruction
 
 When a part fell outside its drawing limits, the procedure provided two routes: change the part or process to meet the design, or revise the design documentation through the engineering change process. It also called for the affected parts and assemblies to be checked again. That is a more useful description of the work than treating the inspection form's rejection count as a product-yield metric.
 
+In March 2009, I made the supplier discrepancies specific enough to act on. The chassis report connected low mounting dimples to connector misalignment, misplaced rack-ear holes to difficult screw installation, and punching flash to loose-metal risk inside the enclosure. A separate DVD-bracket report traced control-board flex to an uneven mounting flange. I asked Sanmina to inspect stock and return results. For a visibly distorted cover edge, I requested a change in the forming and blanking sequence; the supplier subsequently reported that its soft-tool program had been adjusted. That response records a corrective action, while verification of the resulting parts remains a separate question.
+
+The supplier process itself needed review. In May, Sanmina's chassis presentation showed why combining cutting and forming in one turret setup could deform or trap the sheet: the special forming dies stood higher than the standard cutting dies. The supplier recommended a separate hard-tool operation. I worked through alternatives with its NPI team and brought tooling specialists from Wilson and Amada into the discussion. The correspondence records that investigation and the hoped-for removal of secondary operations; it does not establish that the one-setup process was achieved.
+
+That distinction remained visible after launch. A process tracker sent by Sanmina on May 20, 2009 separated drawing review, tooling, individual-part inspection, an assembly build and customer validation. Several later steps were still planned activities. The tracker shows how the handoff was organized, without establishing that production validation was complete.
+
+The masking discussion began with the electrical contacts. In January, I circulated the supplier's comparison of painting the base and cover together versus masking and painting them separately, and requested relative cost information. Orion Bruckman preferred the tape-and-paper approach because other trials left paint on grounding features. The annotated reply made approval conditional on keeping the contact surfaces free of paint. That made the requirement more precise than a cosmetic instruction to paint the inside of the box.
+
 Paint masking raised a related issue during the March 2009 supplier discussions. I distinguished acceptable light overspray inside the chassis from the need to keep threaded electrical-contact surfaces protected. After discussing the masking requirements with the supplier, I requested a painted sample for review. The record establishes that clarification and sample-review step; it does not establish a measured recovery in masking throughput.
 
 The retained shop photographs below show a masked panel and a panel held in machining and clamping fixtures. They provide physical context for the enclosure work. The images alone do not identify a particular dimensional deviation or prove that a corrective operation was released to production.
@@ -128,6 +142,33 @@ My documented contribution was the mechanical work connecting the product packag
 
 ## Source notes
 
-The account draws on the June-July 2008 mechanical meeting records, the Orpheus BOM and assembly annotations, Sanmina's November 2008 DFM response, the retained Glow presentation and section drawing, the mechanical first-article procedure, and the preserved March 2009 supplier correspondence. The source originals, revision distinctions and unresolved discrepancies are maintained in the private project record.
+The account draws on the June-July 2008 mechanical meeting records, the Orpheus BOM and assembly annotations, Sanmina's November 2008 DFM response, the retained Glow presentation and section drawing, the mechanical first-article procedure, and the preserved March 2009 supplier correspondence. The October 2008 acoustic-test correspondence and proposed fan-control table also inform the cooling account. The source originals, revision distinctions and unresolved discrepancies are maintained in the private project record.
 
 The public product identity and availability are corroborated by Kaleidescape's [March 3, 2009 announcement](https://www.kaleidescape.com/news/introducing-kaleidescape-mini-system-complete-multi-zone-entertainment-server-compact-affordable-package/) and [KSYSTEM-120 datasheet](https://www.kaleidescape.com/pdfs/Kaleidescape-Mini-System.pdf).
+
+## Proposed development timeline
+
+This proposed selection preserves the dates and states in the source record. Plans, tests, drawing releases and delivered outcomes remain distinct; undated records are not assigned calendar coordinates.
+
+- **June–July 2008 - Distinguish functional and geometry builds.** planning/coordination Credit: Erik; Argyle; hardware team.
+- **June 28, 2008 - Draft mechanical FAI procedure.** authored draft Credit: Erik.
+- **July 2008 - Require cage assembly/service sequence.** identified issue and request Credit: Erik; mechanical team.
+- **July 9, 2008 - Peer-review release of FAI procedure.** initial peer-review release Credit: Erik; cross-functional reviewers.
+- **October 1–6, 2008 - Test prototype acoustics and review fan isolation.** measured prototype behavior and proposed enclosure changes; production verification unresolved Credit: Orion Bruckman; Gabe Cohn / Argyle; John Lio; cross-functional team.
+- **October 20, 2008 - Propose a temperature-based fan table.** control proposal based on thermal characterization; testing and verification still required Credit: Nathan Forster.
+- **November 2008 - Review base/cover tolerance scheme.** DFM calculation/disposition Credit: Jaime Arellano/Sanmina; project team.
+- **December 29, 2008 - Document Glow package section.** drawing Credit: Mechanical/electrical/ID team; Erik integration.
+- **January 10, 2009 - Consolidate mechanical changes by part.** revision D change-tracking reference; implementation and retest outcomes remain separate Credit: Erik.
+- **January 15, 2009 - Compare masking methods and protect grounding contacts.** supplier-method review and conditional annotated approval Credit: Erik; Orion Bruckman; Sanmina; cross-functional reviewers.
+- **March 2009 - Clarify masking and request sample.** criteria/sample request Credit: Erik; supplier.
+- **March 3, 2009 - Announce immediate availability.** commercial announcement Credit: Kaleidescape.
+- **March 10-24, 2009 - Make supplier discrepancies actionable.** authored mechanical reports and stock-inspection requests; supplier-reported program adjustment Credit: Erik; Cristina Soto; Sanmina engineering and quality.
+- **May 7-11, 2009 - Review chassis tooling and operation sequence.** supplier risk analysis and alternatives under investigation; implementation remains unestablished Credit: Erik; Osvaldo Hernandez; Victor Garcia; Wilson and Amada tooling specialists.
+- **May20,2009 - Supplier sends phased process tracker.** planning and staged validation; not completed qualification Credit: Cristina Soto / Sanmina process tracking; Erik requested schedule.
+
+### Undated records
+
+These records retain their own evidence and are not placed after the dated events as a claim about sequence.
+
+- **Undated Glow study - Compare illumination and tuning states.** visual study Credit: Project team.
+

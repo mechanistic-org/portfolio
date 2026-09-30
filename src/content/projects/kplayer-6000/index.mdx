@@ -72,8 +72,6 @@ cyberspace:
     deck: []
 ---
 
-# KPLAYER-6000: making the inherited platform ready for launch
-
 Kaleidescape's KPLAYER-6000, codenamed Apollo, brought 1080p output to a player that could import DVDs and CDs and play from either a disc or the server library. The product kept the familiar white front, blue glow and one-rack-unit format. Its mechanical challenge was to make that inherited package work consistently as the electronics and production supply changed.
 
 My contribution was mechanical integration and production support: coordinating revisions with Argyle Design, reviewing product specifications, supporting the door-spring change and preparing installation information. Argyle retained the underlying Apollo CAD during the launch work, and the work joined its mechanical design team with Kaleidescape's hardware and manufacturing groups.
@@ -94,6 +92,8 @@ The team tested the available responses. Adding a turn to a spring made the test
 
 By May 28, Clader recorded my agreement to order 1,000 springs from Peridot using 0.017-inch plated music wire and 4.5 turns. That decision moved the team from a useful bench experiment to a specified spring purchase, with prototype testing planned in parallel.
 
+Sticking doors appeared again in the August 21 sustaining review, with Clader following up. The September 11 minutes marked that issue resolved, without identifying the corrective change or its validation.
+
 ## The air dam was also an assembly interface
 
 The internal air dam exposed a different kind of integration problem. On May 19, Clader reported that the captive-washer screw joining the right drive bracket to the baffle stood about 1.5 mm too high. He also found a pinched power cable beneath the baffle and suggested reversing the bracket tabs to make the drive removable without first removing the air dam. Those were three distinct concerns: fastener clearance, cable relief and service sequence.
@@ -108,13 +108,25 @@ The same discipline applied to the product sheet. When Linus Wong noticed that A
 
 The published product sheet lists one rack unit, 45 W maximum consumption, 150 BTU/hr maximum heat output and 5 CFM minimum airflow, with a 5-30°C operating range. These ratings describe the operating envelope installers had to accommodate.
 
-At the June 13 readiness review, Apollo's required development and certification work was reported complete, with approximately 150 finished units and production running at 50 per day. This is the clearest documented manufacturing milestone in the launch record.
+At the June 13 readiness review, Apollo's required development and certification work was reported complete, with approximately 150 finished units and production running at 50 per day. This records launch readiness at a specific point in production.
+
+The production record continued after that milestone. The June 26 NPI meeting moved Apollo into sustaining while Michael Clader followed up on manufacturing-test coverage and a board build whose connector population differed from the BOM. By July 3, the test fixture had been updated for the mechanical and connector changes, although the team was still checking its coverage. Launch readiness, repeatable manufacture and continuing support each had their own work to finish.
 
 ## Changes continued after the first configuration
 
 The SATA version was already being prepared alongside the initial Apollo configuration. The May 19 BOM release authorized prototype purchasing and still lacked a finalized SATA cable. Wudrick argued for separate assembly identities and a controlled ECO cutover so the two versions could be built and traced independently. In June, Vincent Di Lello sent Argyle mechanical-check files for the new Ethernet PHY, SATA controller and two SATA connectors; the fan connectors had moved to make room. A change of drive interface carried consequences for board layout, cable routing and product traceability.
 
+Di Lello uploaded revision 1 of the SATA board files for an ECO on June 19 and revision 2 on June 24. The change then had to pass through a prototype build and bring-up. In August, the NPI record reported five units delivered, with drive qualification and chip-level issues still being investigated. Drive selection remained open: June notes say a candidate had already gone end of life, while August notes report failures on difficult discs during qualification.
+
+By September 11, the minutes reported initial hardware bring-up complete for the TL9 SATA configuration, including DVD qualification and qualification of the 80 W supply. EMC work and separate TL10 builds were still ahead.
+
+The later records distinguish different chip revisions and test states. An October 22 meeting reported that the TL9 SATA configuration had passed an EMI prescan while TL10 bring-up was pending. On October 29, the team reported bringing up ten TL10 PATA/SATA units: five had worked initially, while four had cracked resistors and one had solder shorts. Safety, EMI and thermal work for that configuration remained pending. The interface change continued through board, software, manufacturing and qualification work.
+
+The December 11 sustaining minutes subsequently reported Apollo SATA EMI certification complete. That entry does not specify the chip revision or establish completion of the separate safety and thermal work.
+
 Support continued after units entered service. In October, Adrian Fung's hardware meeting record reported two Apollo field failures involving Q34 and described the electrical team's change to R291, from 0 to 6.2 ohms, to move dissipation away from the transistor.
+
+By November 20, Proworks had reworked the Apollo boards it held for Q34 failures, including its failed-board inventory; the minutes reported that this fixed some of the boards.
 
 My work also extended to the information needed to install and integrate the product. I supplied updated top-view drawings for review in August, and the web ticket records their addition to the extranet. In January 2009 I requested the complete Apollo CAD package from Argyle to support an aviation installer. These are practical release deliverables: the physical product and the data that other people need to work with it.
 
@@ -123,3 +135,25 @@ My work also extended to the information needed to install and integrate the pro
 A March 2009 discussion about the next player generation illustrates the continuing value of the inherited chassis. Wudrick argued for retaining the existing hard tooling and changing the rear panel. His comparison cited a $27.92 hard-tooled KPLAYER-6000 chassis against an $84.62 soft-tooled KPLAYER-5000 chassis. The proposal treated Apollo's established tooling and internal layout as assets to weigh against the flexibility of a new enclosure.
 
 Apollo's account is one of making a mature package dependable enough to build and support while its interfaces changed. A hinge-pin correction exposed a clearance problem. A baffle complaint exposed uncertainty about which drawing had reached production. A board respin required configuration control as well as connector clearance. My contribution sat at those boundaries, working with the people who owned the CAD, electronics, manufacturing and release information.
+
+## Proposed development timeline
+
+This proposed selection preserves the dates and states in the source record. Plans, tests, drawing releases and delivered outcomes remain distinct; undated records are not assigned calendar coordinates.
+
+- **August 2007 - Requirements define Apollo.** DVD/CD import and playback with 1080p output in the established one-rack-unit product format. Limit: Product capabilities, not Erik electronic-design authorship.
+- **May 2008 - Hinge-pin purchasing/design mismatch.** The CAD specified a 0.750-inch pin while the BOM purchasing reference identified a 0.625-inch pin. Limit: Jon Cohn checked database; no claim Erik discovered it.
+- **May 19-20, 2008 - Baffle and revision investigation.** The baffle investigation identified a high captive-washer screw, cable pinching and a proposed service-sequence change. An earlier baffle relief revision and conflicting revision labels raised questions about the drawing supplied to production. Limit: Approx1.5mm is reported discrepancy, not independently remeasured. Do not assert old drawing was proven root cause or final rework completed.
+- **May 22, 2008 - Longer pin and extra-turn experiment.** The longer-pin assembly centered the door but bound consistently; an extra spring turn closed the test assembly. Limit: John Lio reports Michael Clader assembly; source does not name Erik as experimenter.
+- **May 28, 2008 - Specified spring order with testing planned.** Clader recorded Erik concurrence on ordering 1,000 springs using 0.017-inch plated music wire and 4.5 turns, with prototype testing in parallel. Limit: Order request does not prove receipt, final installation or lifetime validation.
+- **June 13, 2008 - Readiness and manufacturing report.** June 13 readiness reported required development/certifications complete, approximately 150 finished units and production at 50 per day. Limit: Not exact customer ship date, schedule adherence or total production.
+- **June 19, 2008 - SATA prototype mechanical check.** The June 19 prototype mechanical-check request moved fan connectors to accommodate SATA connectors. Limit: Attributed to Vincent DiLello/Argyle, not solely Erik.
+- **June 26–July 3, 2008 - Move Apollo into sustaining and update the test fixture.** transition decision and reported fixture changes; manufacturing-test coverage still under review. Credit: Michael Clader; hardware and manufacturing teams.
+- **August 7, 2008 - Report five SATA prototypes delivered.** delivered prototype build; bring-up and drive qualification work remain open. Credit: Sandra Twist build coordination; Adrian Fung; Andrzej Kocan; hardware team.
+- **August 2008 - Installation drawing release.** August installation drawings were released through the extranet; January 2009 customer work requested the complete Apollo CAD package from Argyle. Limit: No claim aviation hardware was qualified or shipped by Erik.
+- **September 11, 2008 - Report TL9 SATA bring-up and component qualification complete.** dated report covers DVD and 80 W supply; EMC work and separate TL10 builds still planned. Credit: Hardware team; Rob Wudrick recorder.
+- **October 2008 - Electrical-team field support report.** The October field report described two Q34 failures and a resistor change from 0 to 6.2 ohms at R291. Limit: Electrical-team action after launch; no claim of Erik PCB redesign.
+- **October 29, 2008 - Report TL10 PATA/SATA bring-up and remaining qualification.** ten-unit bring-up report includes initial defects; safety, EMI and thermal work pending. Credit: Adrian Fung recorder; hardware team.
+- **December 11, 2008 - Report Apollo SATA EMI certification complete.** certification reported; chip revision and separate safety/thermal completion unspecified. Credit: Hardware team; Rob Wudrick recorder.
+- **January 2009 - Customer CAD request.** August installation drawings were released through the extranet; January 2009 customer work requested the complete Apollo CAD package from Argyle. Limit: No claim aviation hardware was qualified or shipped by Erik.
+- **March 2009 - Retrospective tooling comparison.** A 2009 next-generation proposal compared a $27.92 hard-tooled Apollo chassis with an $84.62 soft-tooled predecessor chassis. Limit: Two configurations; not verified BOM-equivalent personal saving.
+

@@ -65,8 +65,6 @@ cyberspace:
     deck: []
 ---
 
-# KSERVER-1500 1U Server
-
 Kaleidescape's KSERVER-1500 put a networked movie library into one rack unit. By 2014, sustaining that platform meant working around aging components while preserving the physical interfaces and manufacturing knowledge already in use. The work crossed mechanical definition, power-supply qualification, storage qualification and motherboard replacement planning.
 
 My part of that record sits in mechanical sustaining support. I supplied 3D data for the server, and Rob Wudrick brought me a specific mismatch between the lid's rack-ear alignment feature and the parts being built. Electrical and disk qualification belonged to the hardware team; purchasing and supplier-transition decisions involved manufacturing.
@@ -77,7 +75,15 @@ The 1U enclosure held four front-access disk cartridges. Kaleidescape's RAID-K a
 
 That product arrangement imposed physical constraints on every replacement component. The cartridges shared a shallow enclosure with power, compute and cooling. The published installation guidance required clear space at both the front and rear. Keeping the outside form did not make a new internal component a drop-in replacement.
 
+## An earlier cartridge tooling problem
+
+An earlier cartridge problem exposed another interface in the same 1U product family. In September 2008, Michael Clader asked me to reduce the decorative rear bezel on a 3.5-inch drive cartridge. He reported that the change to stamped-metal parts had left the plastic catching on the drive cage and breaking corners. Andy Tripp had observed cracked cartridge plastic while removing a disk from a CEDIA 1U server; his report kept that problem separate from a potentially unrelated backplane incident.
+
+I asked who held the tooling, whether the 3D files were available, how much reduction was needed and whether the team was prepared to retool. Clader identified Steman as the supplier and pointed to Argyle and Arena for the CAD. He proposed a small reduction for me to verify, and suggested adding metal and retexturing the tool before replacing it. The exchange records the problem, the information needed to act and a proposed tooling approach; it does not show an implemented change or a closed field fix.
+
 ## Keeping the drawing and the built part aligned
+
+The July 2014 handoff began with a file-recovery problem. On July 10, Rob reported that the 1U chassis Pro/ENGINEER part files in Arena were corrupted and asked whether I had a dump of Burke's chassis files. I said I should have them and would look. That exchange records the requested recovery and my response, without establishing that the Arena files themselves were repaired.
 
 In July 2014, Rob asked me to update the 3D model's rack-ear alignment detail to match the lid being produced. The model showed a joined extrusion; the production detail differed. He supplied redlined drawings and planned to capture the changes in the two-dimensional documentation for Sanmina. The immediate task was to make the product definition describe the hardware accurately.
 
@@ -105,6 +111,10 @@ Storage qualification followed its own sequence. In April 2014, Andrzej reported
 
 In his October 14 report for the previous week, Andrzej recorded release of the 4TB Deskstar NAS under ECO-001442. This was a separate qualification and release from the plain Deskstar tested earlier in the year.
 
+Western Digital alternatives followed a different path. The December 22 meeting recorded WD Red 4TB qualification complete for the 1U, while approving the purchase of WD Red 6TB drives for a long-term test in a four-drive 1U server. The same minutes said WD Red Pro ran too hot in the 1U and 3U and could not be qualified.
+
+By January 5, the meeting record described WD Red 6TB upgrade-drive qualification as complete. Andrzej and Isaiah were setting up long-term reliability testing, with release planned by the end of the week for the Extranet price list. That report advanced the WD branch beyond the December plan while leaving actual release and long-term results unestablished. It was separate from the later thermal result for 6TB HGST Deskstar NAS drives.
+
 The next capacity step again met the enclosure's limits. In February 2015, Andrzej's review of Isaiah Erb's 6TB Deskstar NAS testing reported temperatures about 5–6 degrees Celsius too hot in the 1U server. The following week's report reviewed the thermal disk-stress results and again found the drive about 5 degrees Celsius too hot.
 
 ## What the record establishes
@@ -112,3 +122,23 @@ The next capacity step again met the enclosure's limits. In February 2015, Andrz
 The engineering work was a set of connected decisions about an existing product: recover the built mechanical definition, retain a supplier that understood it, evaluate replacement components in the actual enclosure, and make schedule commitments while qualification continued. My documented mechanical involvement sits within that cross-functional effort.
 
 By the latest reports, the 4TB NAS drive was released and the team had agreed to keep legacy metalwork at Prompt. The replacement power supply and motherboard were still under evaluation. The final 1U refresh configuration and shipment outcome remain unresolved in the reviewed records.
+
+## Proposed development timeline
+
+This proposed selection preserves the dates and states in the source record. Plans, tests, drawing releases and delivered outcomes remain distinct; undated records are not assigned calendar coordinates.
+
+- **September 2008 - Earlier redlines establish inherited history.** The 501-1007 Rev-D and 520-1033 Rev-B redlines were already attached in September 2008. Limit: Not new 2014/15 bracket work; Jan 2015 says changes predate Erik.
+- **September 16–17, 2008 - Scope a cartridge rear-bezel tooling change.** Reported interference after the stamped-metal change prompts CAD, tooling and clearance questions. Credit: Andy Tripp observation; Michael Clader manufacturing direction; Erik mechanical scoping. Limit: Proposed reduction and tool repair are unverified; no completed redesign, tool purchase or closed field fix, and no merged backplane root cause.
+- **April 2014 - Plain Deskstar testing reported.** April 25 report describes successful cumulative 327-hour 4TB Deskstar testing in 1U/3U while reserving product suitability judgment. Limit: Plain Deskstar 0F14681 is distinct from later Deskstar NAS; no broader reliability guarantee.
+- **July 10, 2014 - Look for inherited chassis CAD after Arena file corruption.** Rob asks for Burke's 1U chassis files; Erik agrees to look. Limit: Requested retrieval is distinct from the later sent-model state and from repaired Arena files or completed redline incorporation.
+- **July 16, 2014 - Lid/rack-ear model correction requested.** On 2014-07-16 Rob asked Erik to reconcile the lid/rack-ear alignment detail in a 3D model with as-built hardware. Limit: Request and existing model supply are evidenced; completion and original feature authorship are not.
+- **October 14, 2014 - NAS drive release reported for prior week.** October 14 report says HGST 4TB DeskstarNAS 371-1041-00 was released under ECO-001442. Limit: Report for week ending October 10; not September release proof, not Erik test ownership.
+- **December 22, 2014 - Separate the WD drive alternatives.** Meeting minutes record WD Red 4TB qualification complete for the 1U, approve buying WD Red 6TB drives for a four-drive 1U long-term test, and report Red Pro too hot for qualification. Limit: The 6TB WD Red test is planned; do not transfer the separate 3U no-shipment plan or long-term-test requirement to the 1U 4TB result, or merge WD with later HGST 6TB testing.
+- **January 2015 - Legacy supplier retained.** January 2015 team kept legacy server sheet metal at Prompt while the documentation and future redesign remained open. Limit: Kevin agreed; Rob recommended; Elton communicated; no sole-Erik supplier strategy.
+- **January 2015 - Compute alternatives under evaluation.** January 2015 notes weigh SATA count, power, eCos/UEFI compatibility; Nathan searches while Andrzej qualifies PSUs. Limit: No executed Celeron pivot or final selected board; Greg favors Baytrail for low power while notes prefer Celeron for compatibility. The metal adapter bracket belongs to the replacement PSU, not the motherboard. Compute section describes compatibility, connectivity and power consumption; no demonstrated motherboard physical-fit problem is asserted.
+- **January 5, 2015 - Report WD Red 6TB qualification and prepare long-term testing.** The meeting record says upgrade-drive qualification is complete, Andrzej and Isaiah are setting up reliability testing, and release is planned by the end of the week for the Extranet price list. Limit: Reported qualification is distinct from completed long-term testing, actual release or shipment; this is WD Red, not the later HGST 6TB thermal result.
+- **February 2, 2015 - Additional chipset commitment.** February 2 notes record commitment to 300 additional 1U chipsets; PSU replacement and reuse of old chassis remain conditional. Limit: Not receipt, completed build, shipment, revenue protection, or Erik purchasing execution.
+- **February 2015 - PSU fit and connector candidates screened.** Andrzej reported FSP150-50LM touch-fit, FSP150-5G01 EOL, Skynet connector mismatch and differing Aras/Sparkle fan noise. Limit: Quiet Sparkle fan is not completed system qualification. FSP150-5G01 was candidate EOL, not established incumbent.
+- **February 17 and 23, 2015 - 6TB NAS thermal excess reported.** February 17/23 reports identify 6TB Deskstar NAS thermal excess in 1U under Andrzej and Isaiah. Limit: Reported 5-6 C too hot; not formal final cancellation or fleet failure prevented. February 23 reports the later disk-stress result at about 5 C too hot; the article advances beyond the earlier planned test.
+- **February 23, 2015 - PSU electrical questions remain open.** February 23 records Skynet cross-regulation issue and possibly insufficient 12 V rating while qualification remains incomplete. Limit: Retain possibly; no final rejection or successor release inferred.
+
