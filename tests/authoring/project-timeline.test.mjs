@@ -154,9 +154,23 @@ test("C24 retains all records, prominent selection, phases, cluster membership a
 	);
 	const original = JSON.stringify(input);
 	const phases = timelineOverview(input);
-	assert.equal(input.events.length, 25);
+	assert.equal(input.events.length, 30);
 	assert.equal(phases.length, 6);
-	assert.equal(phases.flatMap((phase) => phase.events).length, 8);
+	assert.equal(phases.flatMap((phase) => phase.events).length, 13);
+	const addedContext = [
+  "layout-mockup-signature-request",
+  "cnc-prototype-order-confirmed",
+  "cnc-prototype-dispatch-reported",
+  "unpainted-top-samples-reported",
+  "top-panel-relief-slot-direction"
+];
+	assert.equal(input.events.filter((event) => !addedContext.includes(event.id)).length, 25);
+	for (const id of addedContext) {
+		const event = input.events.find((entry) => entry.id === id);
+		assert.ok(event?.source_ids.length);
+		assert.ok(event?.date_basis);
+		assert.ok(event?.anchor);
+	}
 	assert.equal(input.clusters[0].event_ids.length, 7);
 	assert.equal(input.clusters[0].verified_identifier_count, 18);
 	assert.equal(input.events.find((event) => event.id === "first-customer-ship").date, "2007-11-07");

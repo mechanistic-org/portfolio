@@ -79,8 +79,6 @@ cyberspace:
     deck: []
 ---
 
-# DV700 Disc Vault
-
 The DV700 Disc Vault made a physical disc collection accessible through a Kaleidescape system. It stored up to 320 discs and handled loading, identification and retrieval through a single front slot. Unlike the M700, it did not include an integrated M-Class player. The DV700 had its own installation guide by January 2012; the work described here concerns its later sustaining investigation in 2014.
 
 I worked with the hardware and service teams to investigate returned vaults, test suspect roller assemblies, and develop changes to the common disc-handling mechanism. The DV700 and M700 shared this mechanical work, but their return histories remained separate. My part of the effort connected observed failures to controlled tests, component definitions, inspection criteria and assembly instructions.
@@ -89,7 +87,9 @@ I worked with the hardware and service teams to investigate returned vaults, tes
 
 A report that a disc was stuck did not identify which interface had failed. In one DV700 return, three Blu-ray test discs were recognized while three DVDs and three CDs were not. The inspection notes record replacement of the optical drive, recognition of all nine test discs, roller cleaning and a passed run-in. Other DV700 returns did not reproduce their original complaint at all. These were different investigation states, even when the customer symptoms sounded similar.
 
-Reproduction also depended on the condition in which the unit was tested. When a new DV700 failed run-in twice at the same point in March, I recorded the repeatable error and separate assembly observations. Richard Lane and Nathan Forster joined the investigation; after the carousel was moved by hand, Richard called for another run because that intervention might have changed the evidence. A mechanism that turned freely during inspection could still have failed in the assembled, powered system.
+Another DV700 return contained a cardboard disc with no center hole trapped inside the optical drive. The service worksheet records that I removed it, the optical drive was replaced, and the unit subsequently passed its run-in. Keeping that case separate from roller slippage mattered: similar symptoms could lead to different repairs.
+
+Reproduction also depended on the condition in which the unit was tested. When a new DV700 repeatedly failed run-in in March, I recorded the reported error and separate assembly observations. Richard Lane and Nathan Forster joined the investigation; after the carousel was moved by hand, Richard called for another run because that intervention might have changed the evidence. A mechanism that turned freely during inspection could still have failed in the assembled, powered system.
 
 ## Make the test earn its conclusion
 
@@ -103,11 +103,17 @@ Contamination exposed a mechanical tradeoff. The April roller study recorded sli
 
 My corrective design work included solid motor-plate mounts, an extended-neck gear, alternative inner guides, and a bearing-block extension to support the roller shaft farther down. The team also considered stiffer shafts, different roller materials and surface treatments. Those alternatives addressed grip and stiffness together; a coating that felt grippier initially was not enough if its performance deteriorated with use.
 
+By the end of May, my status report recorded that coated-roller testing had ended. The coating did not provide a significant improvement and tended to migrate onto the disc surface. New springs, disc guides and bearings had arrived for assembly and further tests. That was a decision about a tested alternative, not a declaration that the remaining mechanism changes were qualified.
+
 The guide geometry had a second job: resisting double-disc grabs caused by discs clinging together. Nathan experimented with moving the guide closer to the disc. I questioned the remaining clearance, and the team assigned me to make prototype variants for testing. Spring load, guide clearance and shaft support had to be evaluated as an assembly.
 
 ## Keep assembly from moving the disc path
 
 The disc-retention cover could affect alignment without being visibly damaged. May service instructions for both vault models specified larger mounting holes and washers to avoid interference and distortion. They directed assembly staff to leave the roller brackets in place, align the cover without loading the outer screws, then tighten the center and perimeter fasteners in sequence. This turned a geometric concern into a repeatable assembly procedure.
+
+A separate assembly investigation traced a poorly seated roller-assembly tab and excess grease to a specific DV700 through its sensor-board number. Sanmina returned the unit’s manufacturing history and reported that it had passed production tests. The supplier also said the assembly instructions did not specify how much grease to apply. That left the assembly-process question open despite the recorded test passes.
+
+Sanmina sent a work-instruction sheet in April that specified grease application through pneumatic pressure and time. I proposed detailed photographs of each surface showing the intended amount, and asked for the needle-tip applicator used at the factory. John Lio supported the photographs and followed up with Sanmina; the supplier later promised to send an applicator. The record establishes the process clarification and those requests, but does not confirm delivery of the applicator or completion of a new photographic standard.
 
 The carousel required its own inspection boundary. The April 10 procedure called for locating high points on a flat surface, measuring vertical deflection, and rejecting and quarantining parts above two millimeters. John Lio sent the updated criteria to Sanmina for immediate use. The team treated warpage as a possible contributor to failures, not as a proven explanation for every returned unit.
 
@@ -124,3 +130,24 @@ The spring and guide changes progressed in stages. In April, I loaded the guide 
 The DV700 service cases and shared mechanism work joined service evidence with mechanical definition. Together, they produced documented unit-level repairs and test dispositions, repeatable inspection and assembly guidance, corrective component revisions, and supplier decisions. Somboun Thavy and John Lio carried the service and manufacturing work; Nathan Forster, Richard Lane, Rob Wudrick and the wider hardware team contributed testing, investigation and release coordination alongside my mechanical work.
 
 The account ends with those supported engineering results. The selected records do not establish a final DV700 fleet failure rate or a completed fleet-wide retrofit. They do show why reliable disc handling required attention to the whole transfer path: the disc surface, spring force, shaft support, guide, optical drive, cover, carousel and the procedure used to assemble and test them.
+
+## Proposed development timeline
+
+This proposed selection preserves the dates and states in the source record. Plans, tests, drawing releases and delivered outcomes remain distinct; undated records are not assigned calendar coordinates.
+
+- **January 2012 - Document DV700 guide identity.** published guide context Credit: Kaleidescape.
+- **2014; case date not selected - Repair one recognition case.** unit repair/passed run-in Credit: Service team.
+- **March 2014 - Distinguish an optical-drive obstruction from roller slippage.** A DV700 case records a cardboard disc, optical-drive replacement and passed run-in. Unit-level repair; completion-day annotations differ. Credit: Erik; service team.
+- **March 2014 - Preserve conditions around repeat failure.** repeatable failure/rerun request Credit: Erik; Richard Lane; Nathan Forster.
+- **March 20, 2014 - Trace a roller assembly to its unit history.** A sensor-board identifier joins the observed tab/grease condition to DV700 SN867 and the supplier’s factory test record. Assembly investigation and supplier trace. Credit: John Lio; Julio Briseno; Sanmina.
+- **2014 shared investigation - Swap rollers into known-good unit.** controlled test Credit: Erik; hardware/service team.
+- **2014 shared test - Withdraw the cover diagnosis.** test correction Credit: Erik.
+- **April 2014 - Study traction and shaft deflection.** mechanism study Credit: Hardware team; Erik corrective mechanics.
+- **April 10, 2014 - Specify carousel inspection criterion.** inspection instruction Credit: Engineering; John Lio to Sanmina.
+- **May 2014 - Prescribe cover alignment sequence.** assembly instruction Credit: John Lio; shared vault manufacturing.
+- **April 30–May 13, 2014 - Make grease application more specific.** Erik proposes surface photographs and requests the factory applicator; John follows up and Sanmina promises an applicator. Process clarification and requested tools; receipt is not established. Credit: Erik; John Lio; Sanmina.
+- **Week ending May30,2014; reported June2 - End coated-roller testing and prepare component trials.** Reported alternative-test conclusion; new parts still staged for test Limit: No DV700 fleet efficacy or qualified configuration Credit: Erik status report; shared M700/DV700 sustaining work.
+- **June 2014 - Propose rack-ear packaging protection.** packaging proposal Credit: Erik; John Lio; supplier.
+- **April–August 2014 - Progress guide and spring definitions.** staged revision/release preparation Credit: Erik; Rob; hardware/manufacturing.
+- **August 19–20, 2014 - Issue and acknowledge scrap instruction.** instruction then acknowledgement Credit: Erik; Sanmina; John Lio assignment.
+

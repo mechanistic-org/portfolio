@@ -64,8 +64,6 @@ cyberspace:
     deck: []
 ---
 
-# Morpheus
-
 Morpheus was a late-2008 mechanical study for an integrated Blu-ray system in Kaleidescape's Megalon program. The design brief called for maximum reuse of KS-100 mechanics while adding new optical-drive and connector requirements. It was an exercise in deciding where an existing product architecture could carry forward and where new hardware would force a change.
 
 I developed the mechanical layouts and briefs with the hardware team. Adrian Fung coordinated the electronics architecture, Greg Curry developed connector and board requirements, Vince Di Lello handled PCB layout, and Nathan Forster developed thermal concepts. The November project-update agenda assigned mechanical architecture to me, thermals to Nathan, and the hardware architecture and schedule to Adrian.
@@ -92,6 +90,8 @@ Nathan's thermal work affected where boards, fans and baffles could go. A Novemb
 
 On December 1, I sent Nathan one-to-one top views of Morpheus and Pinata so he could arrange alternative baffles and fan configurations at the correct relative scale. His reply requested updated power-supply and board blocks, showing why a layout exchange needed to preserve the current component definitions as well as their outlines.
 
+Nathan's December presentation made the airflow proposal more specific. One fan would draw from the top and bottom of the drive cage, while the other would draw through its central channels and beneath the optical drive. An isolator would separate the paths. Nathan also proposed moving underside intake openings to the lower front edge, behind the door, to reduce recirculation when the enclosure sat in a rack or on a shelf. Those intended paths still depended on the space in my mechanical model and Vince's board layout. They were proposals, not measured cooling results.
+
 The December midplane discussion exposed a limit to commonality. Different distances between the main board and front illumination made a single rigid board difficult to reuse. Nathan proposed a flexible connection. I was working on the midplane outlines and agreed that a flexible interconnect could make a shared arrangement possible, while flagging the low current capacity of the proposed ZIF connections. Mechanical flexibility did not remove the electrical power constraint.
 
 ## What the study established
@@ -100,6 +100,61 @@ The documented deliverables were a mechanical brief, review drawings, connector-
 
 The work continued as the Megalon product definitions became more specific. The December 3 hardware meeting, recorded by Rob Wudrick in a December 11 message, named Hydra as the integrated Ksystem and Titan as its direct-sale variant. On December 10, Nathan described his preliminary thermal layout as being for "Morpheus or Titan or whatever" and then circulated a Hydra layout. The Morpheus study was carrying into those system definitions.
 
+The next recovered brief was titled Hydra/Titan. Its revision table records a third revision on December 16, 2008, incorporating feedback from the November review. It retained maximum KS-100 reuse and the distinction between required Blu-ray capability and a stretch slot-loading option. Its exploded view named the main board, auxiliary board, midplane and drive backplane, while several outlines were still marked to be determined. The brief gave the team a definite arrangement to review without treating every interface as settled.
+
 That continuity still required changes to the physical arrangement. Nathan proposed reusing the entire drive cage, modifying the optical-drive bracket to let air flow underneath it, and adding an airflow-isolator baffle for the hard drives. The midplane and internal baffles depended on the actual spacing inside the enclosure, so he needed my 3D models to reach a final layout.
 
-The interface work continued into January. Vince checked Greg's connector recommendations against the Mars and Titan/Hydra platforms from a PCB perspective, while asking me to review mechanical fit and specify the Ethernet/USB connector's remaining position. Nathan's January 23 cabling update set aside the broad midplane approach for the moment and considered a more limited connection between the optical drive, power supply and main board. The contribution was a mechanical definition that the team could inspect and revise as the next designs took shape. The selected record does not establish the final qualification or shipment state of the November Morpheus arrangement.
+The January work made the electrical-to-mechanical handoff more explicit. Nathan's system diagram, sent on January 13, distinguished a common main board from product-specific daughterboards, the Hydra/Titan drive backplane and the front glow-and-button board. I asked the hardware team to estimate the required signal lines, round up to an available connector pin count, and provide the manufacturer and series so I could assemble mechanical placeholders. Nathan was still gathering those definitions while considering a rigid-flex connection between the drive plane and main board. The exchange let us develop the packaging while the connections were still being defined.
+
+At the January 15 hardware meeting, the team judged flexible cables more economical after discussions with Samtec. Nathan was to develop the system cabling diagram, while Greg would revise the connector diagram for Vince's layout work and then my mechanical modeling. A later January message rejected the general midplane approach and required standard cables with two potential vendors. These were design and sourcing decisions; the cost advantage was a contemporary judgment, not a measured production saving.
+
+The interface work continued into January. Vince checked Greg's connector recommendations against the Mars and Titan/Hydra platforms from a PCB perspective, while asking me to review mechanical fit and specify the Ethernet/USB connector's remaining position. Nathan's January 23 cabling update set aside the broad midplane approach for the moment and considered a more limited connection between the optical drive, power supply and main board. Nathan's attached comparison put the smaller-midplane tradeoff plainly: a board joining the optical drive, power supply and main board could remove cables and permit more preassembly, but its placement would differ between Morpheus and Apollo. Three cables offered a common arrangement. His note asked for both configurations to be modeled and discussed. The comparison's assembly-step counts were assumptions, not a measured production improvement.
+
+The contribution was a mechanical definition that the team could inspect and revise as the next designs took shape. The selected record does not establish the final qualification or shipment state of the November Morpheus arrangement.
+
+## Later interconnect and layout comparisons
+
+The interconnect work continued in February. Nathan's February 5 presentation separated the front-control and daughterboard links from the higher-speed connection to the drive backplane. The hardware meeting favored different cable and connector arrangements for those jobs and retained a second-source requirement. I supplied flexible-circuit manufacturer contacts as Nathan developed the options. The team was comparing cost, packaging and electrical requirements; these proposals did not yet establish a qualified production cable.
+
+By March, Nathan was using physical layout mockups to compare reuse of the existing Apollo chassis with a new chassis made using soft tooling. His revised shared-board proposal added an unpopulated support section that could meet the existing mounting holes, then be removed for Titan and Mars. The Titan layouts showed the consequences for daughterboard space, power-supply position, fan inlet obstructions and the route of the front USB and power-button cable. Richard asked me to weigh in on the mechanical choice and pressed the team to compare the time needed for prototype chassis. The mockups supported that decision; they did not demonstrate which arrangement was ultimately built or its cooling performance.
+
+## A later prototype-definition record
+
+The later Hydra interface drawings made those connections explicit in the mechanical layout. The July connector-placement sheet located the control/glow-board, drive-plane and button-board connections in plan and section; a companion sheet located the drive-plane LEDs. These were records of geometry being defined, without establishing a completed fit or reliability test.
+
+The September Hydra glow-board drawing shows the interface work at a smaller scale. Its revision table records changes to the board outline and the addition of a VHB adhesive specification. A detail view marks two touch ribs in the front plastic that the board needed to clear. Board shape, attachment and neighboring plastic were being developed together, without the drawing establishing that the clearance had been verified in built hardware.
+
+Later Hydra drawings show a further stage of mechanical definition. The chassis revision table records a change to its grounding stud and board standoffs as a release to PROTO2. A Blu-ray bracket revision is dated October 12, 2009 and also marked for PROTO2; a separate BTC drive bracket is marked for prototype release on October 8. These are defined drawing states, with EN approval initials. They do not establish when units were built or whether the thermal changes achieved their intended performance.
+
+The selected record supports the design work and its continued development. It does not identify the November Morpheus arrangement with an unchanged later Hydra configuration, or establish final qualification, shipment or cancellation.
+
+## Proposed development timeline
+
+This proposed selection preserves the dates and states in the source record. Plans, tests, drawing releases and delivered outcomes remain distinct; undated records are not assigned calendar coordinates.
+
+- **October 2008 - Set reuse/envelope constraints.** starting constraint/assignments Credit: Erik; hardware team.
+- **November 2008 - Circulate mechanical brief.** development brief Credit: Erik; hardware team.
+- **November 2008 - Review populations and connector layout.** layout review/correction Credit: Greg Curry; Vince DiLello; Erik.
+- **November 2008 - Define direct-sale blanking need.** variant proposal Credit: Richard Lane; Erik.
+- **November 2008 - Explore isolated fan intake.** thermal concept Credit: Nathan Forster; Erik coordination.
+- **December 1, 2008 - Deliver scaled thermal-layout views.** documented delivery/feedback Credit: Erik; Nathan.
+- **December 2008 - Review flexible-midplane limits.** proposal/constraint Credit: Nathan; Erik.
+- **December 3, 2008; recorded December 11 - Name Hydra and Titan.** meeting naming event Credit: Hardware team; Rob Wudrick recorder.
+- **December 10, 2008 - Continue Morpheus/Titan and Hydra layouts.** naming/layout continuity Credit: Nathan; Erik.
+- **January 2009 - Continue connector and midplane work.** ongoing review Credit: Vince; Greg; Erik; Nathan.
+
+- **January 13, 2009 - Define connector placeholders from signal requirements.** diagram exchange and proposed mechanical handoff Credit: Nathan Forster; Erik; hardware team.
+- **January 15, 2009; recorded January 16 - Plan flexible interconnects and the layout handoff.** design/sourcing judgment and assigned follow-up Credit: Adrian Fung recorder; Greg Curry; Nathan Forster; Vince Di Lello; Erik.
+
+### Optional additional context
+
+These records are separate from the retained event selection and need a specific editorial choice.
+
+- **February 5–13, 2009 - Compare cable families and share supplier contacts.** connector proposals and sourcing follow-through; qualification unestablished Credit: Nathan Forster; Adrian Fung recorder; Erik; hardware team.
+- **March 10–12, 2009 - Compare shared-board layouts and prototype timing.** physical mockups, revised proposal and requested mechanical review Credit: Nathan Forster; Richard Lane; Rob Wudrick; Erik review requested.
+- **July 2009 - Define Hydra connector and LED positions.** layout drawings dated July16/21 by filename; sent-cover and completed fit unverified Credit: Drawing author not identified on the sheets.
+- **2009-08-28 - Record chassis revision for PROTO2.** drawing_revision_release_to_prototype Credit: EN initials in prepared/checked and approved fields; wider team responsibility unchanged.
+- **September 3–10, 2009 - Revise the Hydra glow-board outline and attachment.** drawing revisions and touch-rib clearance requirement; built clearance unverified Credit: EN initials; hardware team.
+- **2009-10-08 - Record BTC bracket prototype release.** drawing_revision_release_to_prototype Credit: EN initials in prepared/checked and approved fields; wider team responsibility unchanged.
+- **2009-10-12 - Record BD bracket revision for PROTO2.** drawing_revision_release_to_prototype Credit: EN initials in prepared/checked and approved fields; wider team responsibility unchanged.
+

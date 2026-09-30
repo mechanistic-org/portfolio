@@ -70,6 +70,21 @@
       ]
     },
     {
+      "id": "layout-mockup-signature-request",
+      "date": "2006-03-03",
+      "date_basis": "March 3 native message; earlier February 24 meeting and March 1 circulation are distinct",
+      "title": "Layout brought to the physical mock-up",
+      "summary": "After the February 24 layout review, Erik put RC2, also called Revision 1.0, on the foamcore mock-up and requested signatures. The record establishes the mock-up and request, not completed signoff.",
+      "phase": "strategy",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-2dc6badb77c0"
+      ],
+      "anchor": "ii-the-product-that-shipped",
+      "link_label": "Read the project section"
+    },
+    {
       "id": "dcd-system-priority",
       "date": "2006-03-15",
       "date_basis": "message-sent",
@@ -208,6 +223,52 @@
       ]
     },
     {
+      "id": "cnc-prototype-order-confirmed",
+      "date": "2006-12-22",
+      "date_basis": "December 22 native order message; preceding decision and quotation dated December 20-21",
+      "title": "CNC prototype order confirmed",
+      "summary": "Solid Concepts confirmed the order for seven painted ABS parts and four clear-stock parts after the SLA-versus-CNC discussion and conditional January 20 deadline. The December 21 quotation and December 22 order are separate states.",
+      "phase": "design-control",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-db33a2ba75a7"
+      ],
+      "anchor": "7-controls-and-molded-part-geometry",
+      "link_label": "Read the project section"
+    },
+    {
+      "id": "cnc-prototype-dispatch-reported",
+      "date": "2007-01-12",
+      "date_basis": "January 12 native supplier shipment message",
+      "title": "CNC supplier reported dispatch",
+      "summary": "Solid Concepts reported shipping the same order, PO and eleven part names. The selected record does not establish customer receipt or accepted fit.",
+      "phase": "design-control",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-db33a2ba75a7"
+      ],
+      "anchor": "7-controls-and-molded-part-geometry",
+      "link_label": "Read the project section"
+    },
+    {
+      "id": "unpainted-top-samples-reported",
+      "date": "2007-01-23",
+      "date_basis": "January 23 is the previous day explicitly reported in the January 24 native message",
+      "title": "Unpainted top-panel samples delivered",
+      "summary": "Ed Stegall reported that unpainted Mass Precision fit-check top surfaces had reached Menlo Park. He separately described missing countersinks on the units then due and in the paint shop. The unpainted delivery is separate from the CNC plastic order.",
+      "phase": "design-control",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c6555d85cc82",
+        "EV-96a1e25a2895"
+      ],
+      "anchor": "2-recovering-top-panel-fabrication",
+      "link_label": "Read the project section"
+    },
+    {
       "id": "top-panel-no-bid",
       "date": "2007-03-07",
       "date_basis": "document-date",
@@ -223,6 +284,22 @@
         "EV-8386ad005ae9"
       ],
       "verification_note": "March 7 is the earliest located primary report that states the no-bid; it is a reporting checkpoint, not a claimed occurrence date."
+    },
+    {
+      "id": "top-panel-relief-slot-direction",
+      "date": "2007-03-13",
+      "date_basis": "March 13 native reply chain and attached definition; drawing-history dates separately retained",
+      "title": "Relief and slot-clearance direction agreed",
+      "summary": "Erik permitted reliefs and asked to shorten the slot to increase bend-edge clearance from 0.118 to 0.174 inch; Fidel Saucedo acknowledged the marked direction. The Revision 5 definition is evidence of drawing/fabrication direction, not finished-lot acceptance.",
+      "phase": "design-control",
+      "category": "development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c6555d85cc82",
+        "EV-96a1e25a2895"
+      ],
+      "anchor": "2-recovering-top-panel-fabrication",
+      "link_label": "Read the project section"
     },
     {
       "id": "headphone-jack-redesign",

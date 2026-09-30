@@ -97,71 +97,161 @@ cyberspace:
         aspectRatio: 1.5449438202247192
     featuredIndices: []
     deck: []
+  - id: review-pcjr-fader
+    type: gallery
+    title: The companion fader-module layout
+    caption: Annotated PC2 Jr fader-pack layout, Rev 6, dated October 3, 2003. The sixteen faders and provisional Danko assembly labels complement the main-unit layout. Placeholder part numbers document the layout study; they are not released part identities.
+    data:
+      columns: 1
+      layout: masonry
+      images:
+      - src: /assets/d-command/curation-20260930/pc2-jr-fader-rev6.png
+        alt: Early sixteen-fader expansion-module layout labelled PC2 Jr, with provisional Danko meter, knob and fader-panel assemblies.
+        caption: Annotated PC2 Jr fader-pack layout, Rev 6, dated October 3, 2003. The sixteen faders and provisional Danko assembly labels complement the main-unit layout. Placeholder part numbers document the layout study; they are not released part identities.
+    featuredIndices: []
+    deck: []
 teamSize: Cross-functional
 endDate: 2005-05-13 00:00:00+00:00
 ---
 
-# D-Command: adapting a console architecture
-
-D-Command, known internally as Danko, brought D-Control's control-surface architecture into a smaller console. My responsibility was lead mechanical engineering, including the part and assembly drawings, more than 24 unique sheet-metal parts and nine PCB dimensional-control drawings. Reuse reduced the amount of new hardware, but it left a substantial integration problem: inherited controls and boards had to meet new panels, a compact structure and a different manufacturing process. Electrical design, software, industrial design, sourcing, regulatory execution and production remained shared responsibilities. {/* ^[evidence:LK-7af43865] ^[evidence:EV-b70eaf0a39b2] */}
+D-Command, known internally as Danko, PCJr or ProControl Jr, brought D-Control's control-surface architecture into a smaller console. My responsibility was lead mechanical engineering, including the part and assembly drawings, more than 24 unique sheet-metal parts and nine PCB dimensional-control drawings. Reuse reduced the amount of new hardware, but it left a substantial integration problem: inherited controls and boards had to meet new panels, a compact structure and a different manufacturing process. Electrical design, software, industrial design, sourcing, regulatory execution and production remained shared responsibilities. 
 
 ## A compact main unit with room to expand
 
-The main unit combined eight channel strips with transport, monitoring and dedicated processing controls. A separate 16-channel fader module made a 24-fader system. External analog monitoring connections went through XMON, a separate shared interface controlled from the console. That distinction matters to the mechanical account: packaging the D-Command controls and integrating their interfaces did not make the whole monitoring system my design. {/* ^[evidence:EV-914b078a3ebb] ^[evidence:EV-ac69fd5a210e] */}
+The main unit combined eight channel strips with transport, monitoring and dedicated processing controls. A separate 16-channel fader module made a 24-fader system. External analog monitoring connections went through XMON, a separate shared interface controlled from the console. That distinction matters to the mechanical account: packaging the D-Command controls and integrating their interfaces did not make the whole monitoring system my design. 
 
-The assembly drawings show the structure beneath the surface. Extruded rails and sheet-metal parts support the panel assemblies above a perforated pan. The main unit packages channel-strip hardware beside the larger control sections, with power supplies below. The boards, switches, knobs, panel openings and structural supports have to agree on where each interface sits. A PCB dimensional-control drawing defines that mechanical agreement; circuit and PCB-layout work remained with the electrical team. {/* ^[evidence:EV-914b078a3ebb] ^[evidence:EV-b70eaf0a39b2] */}
+The modular form also required an architectural choice. In August 2003, Marc Schuman proposed giving the expansion unit its own communications board, citing interconnect, ground-return and manufacturing-test concerns. Stan Cotey objected to the cost and expansion implications. Robin Parnaby later disputed several technical assumptions and saw firmware development time as the stronger reason for a second board. By the September team review, two boards were the working assumption for revised costing and sign-off. This was a contested team tradeoff, with the external monitor unit remaining a separate common subsystem.
+
+The assembly drawings show the structure beneath the surface. Extruded rails and sheet-metal parts support the panel assemblies above a perforated pan. The main unit packages channel-strip hardware beside the larger control sections, with power supplies below. The boards, switches, knobs, panel openings and structural supports have to agree on where each interface sits. A PCB dimensional-control drawing defines that mechanical agreement; circuit and PCB-layout work remained with the electrical team. 
 
 ## Reuse changed the machining and the interfaces
 
-In June 2004, I sent extrusion prototype definitions that retained existing D-Control rails unchanged and reused other extrusion blanks with different secondary machining. The November parts list and December assembly trees show the same approach at another level: new D-Command structure and electronics alongside selected inherited board assemblies. Reuse was a part-by-part decision, not a uniform reduction of the larger console. {/* ^[evidence:EV-b70eaf0a39b2] ^[evidence:EV-914b078a3ebb] */}
+The early record calls this project PC Jr, also written PC2 Jr, before the D-Command name. By August 2003, I was working through which features of PC II, the larger D-Control, could carry over: fastening, panel divisions, side covers and the console profile. Its Pro/ENGINEER models were useful references, but did not transfer directly into the smaller design. I began recreating the PCB geometry and sent dimensional-control definitions for the meter and fader-encoder boards. Those were mechanical interface definitions, with circuit and PCB-layout work still belonging to the electrical team.
 
-One useful tradeoff concerned the transport-switch board. In May, Marc Schuman recorded the team's decision to mount it from below instead of proceeding with the earlier arrangement and its additional molded cover. I participated with Neal Breitbarth, Gannon Kashiwa, Bob Gardyne and Marc. The change required a new dimensional-control drawing and PCB layout, but no electrical changes. Avoiding extra tooling was a reason for the decision; the correspondence does not turn the estimate into a measured program saving. {/* ^[evidence:EV-b70eaf0a39b2] */}
+In June 2004, I sent extrusion prototype definitions that retained existing D-Control rails unchanged and reused other extrusion blanks with different secondary machining. The November parts list and December assembly trees show the same approach at another level: new D-Command structure and electronics alongside selected inherited board assemblies. Reuse was a part-by-part decision, not a uniform reduction of the larger console. 
 
-The inherited main-meter board offered a smaller example. Marc asked whether its unused lower extension could be removed for Danko without moving the mounting holes. I confirmed that there was no mechanical reason to keep it, and the team proceeded with the simpler outline. The mounting interface stayed stable while unneeded board area could be removed. {/* ^[evidence:EV-b70eaf0a39b2] */}
+One useful tradeoff concerned the transport-switch board. In May, Marc Schuman recorded the team's decision to mount it from below instead of proceeding with the earlier arrangement and its additional molded cover. I participated with Neal Breitbarth, Gannon Kashiwa, Bob Gardyne and Marc. The change required a new dimensional-control drawing and PCB layout, but no electrical changes. Avoiding extra tooling was a reason for the decision; the correspondence does not turn the estimate into a measured program saving. 
 
-The visible shape also received its own review. A September discussion preferred a smooth side-plastic treatment over a scaled version of Buckley's gills. Eli Manjarrez recorded the shared decision after meeting with Stan and me. The choice was one part of the team's industrial-design work. {/* ^[evidence:EV-b70eaf0a39b2] */}
+The inherited main-meter board offered a smaller example. Marc asked whether its unused lower extension could be removed for Danko without moving the mounting holes. I confirmed that there was no mechanical reason to keep it, and the team proceeded with the simpler outline. The mounting interface stayed stable while unneeded board area could be removed. 
+
+The visible shape also received its own review. A September discussion preferred a smooth side-plastic treatment over a scaled version of Buckley's gills. Eli Manjarrez recorded the shared decision after meeting with Stan and me. The choice was one part of the team's industrial-design work. 
 
 ## A conductive skin that still let the buttons move
 
-D-Command's molded ABS control panels replaced steel top covers used on D-Control. The plastic needed conductive coating to participate in the enclosure's shielding, while its many openings still had to clear switches and other controls. The panel drawings connect those concerns: material requirements, openings, bosses, masking and appearance surfaces all belong to the same part. {/* ^[evidence:LK-7af43865] ^[evidence:EV-914b078a3ebb] */}
+D-Command's molded ABS control panels replaced steel top covers used on D-Control. The plastic needed conductive coating to participate in the enclosure's shielding, while its many openings still had to clear switches and other controls. The panel drawings connect those concerns: material requirements, openings, bosses, masking and appearance surfaces all belong to the same part. 
 
-Early coating buildup interfered with button movement. In December 2004, I reported receiving the three panel types with a revised EMI-coating formula, measuring less than 4 ohms corner-to-corner and finding no sticky buttons. I approved those samples for texturing. This was a specific sample disposition, not a claim that every production panel was defect-free. {/* ^[evidence:EV-b70eaf0a39b2] */}
+Early coating buildup interfered with button movement. In December 2004, I reported receiving the three panel types with a revised EMI-coating formula, measuring less than 4 ohms corner-to-corner and finding no sticky buttons. I approved those samples for texturing. This was a specific sample disposition, not a claim that every production panel was defect-free. 
 
-The coating was only one part of enclosure closure. ECO 6531 added copper foil to bridge the coated plastic to chassis ground; ECO 8114 addressed the missing EMI gasket. Routing and sealing also mattered near the RJ45 opening. The final system passed FCC Class A, CE and Canadian emissions. These were connected mechanical and electrical efforts, with the later gasket work still appearing in the post-ship cleanup list. {/* ^[evidence:LK-7af43865] ^[evidence:EV-b70eaf0a39b2] */}
+The printed overlays also had to agree with the mechanical panels. Neal Breitbarth coordinated artwork changes while I prepared the overlay drawings and change package. The fader overlay’s Rev C artwork moves the display windows and updates the silver layer to match, with a separate instruction to match the color to a supplied plastic sample. The package was still awaiting artwork in March; Neal’s April 13 approval names all six overlays at Rev C. This records the reviewed design states and team responsibilities, without establishing the result for every production part.
+
+Reusing a cable also meant checking the grounding path in the correct product. In January 2005, Marc Schuman proposed adding chassis-ground leads to two D-Command power harnesses. I supplied the drawing location and part numbers. He then withdrew the change after finding that the required ground path already ran through the mounting holes; the comparison that prompted the request had been a D-Control pilot unit. The exchange records a corrected cross-product assumption, not a completed harness redesign.
+
+Cable reuse still required checking the exact wiring definition. After a February 2005 preproduction headphone-channel report, Marc Schuman clarified that D-Command should use the connections already shipping in D-Control. I checked that understanding with Javier Villa, who confirmed the pinout and called for testing with clearly marked left and right headphones. In March I sent Terri Merrell the D-Command headphone-cable drawing and resolved a part-number typo in her request. That delivered drawing specifies 52 inches, while the February exchange describes 35 inches. The surviving record establishes the pinout clarification and drawing delivery; it leaves the exact installed length and the extent of any preproduction retrofit unresolved.
+
+The coating was only one part of enclosure closure. ECO 6531 recorded copper foil in the plastic-cover assemblies. After its November 2004 approval, the ECO was backed out of the change-control system and revised files were submitted in December. The initial approval alone does not establish the final released definition. ECO 8114 addressed the missing EMI gasket. Routing and sealing also mattered near the RJ45 opening. The final system passed FCC Class A, CE and Canadian emissions. These were connected mechanical and electrical efforts, with the later gasket work still appearing in the post-ship cleanup list. 
 
 ## Testing the fanless arrangement
 
-Marc Schuman and Gannon Kashiwa ran the August 2004 thermal trial on the fader unit, which combined a smaller enclosure with greater dissipation than the main unit. The unit sat flat on a table, restricting the underside air entry. Marc estimated room temperature at 20-22°C. The record separates two operating conditions: {/* ^[evidence:EV-b70eaf0a39b2] */}
+Marc Schuman and Gannon Kashiwa ran the August 2004 thermal trial on the fader unit, which combined a smaller enclosure with greater dissipation than the main unit. The unit sat flat on a table, restricting the underside air entry. Marc estimated room temperature at 20-22°C. The record separates two operating conditions: 
 
 | Test condition | Internal “attic” | LED-supply heatsink |
 | --- | --- | --- |
 | Continuous fader motion in Vegas Mode, after roughly 30-40 minutes | 31°C | 56°C |
 | Pro Tools operation with nearly all LEDs lit and the faders moving | 41°C | 61°C |
 
-Marc and Eli explicitly called the results preliminary. They were useful evidence about the arrangement, not a substitute for complete qualification. A heatsink reading also cannot be subtracted from the supply's ambient rating to produce a temperature margin. {/* ^[evidence:EV-b70eaf0a39b2] ^[evidence:LK-7af43865] */}
+Marc and Eli explicitly called the results preliminary. They were useful evidence about the arrangement, not a substitute for complete qualification. A heatsink reading also cannot be subtracted from the supply's ambient rating to produce a temperature margin. 
 
-The mechanical response preserved the natural-convection path. Manufacturing instructions kept the internal cable bundle away from the supplies, and the user guidance carried the airflow warning. The production method had to preserve the air space on which the fanless design depended. {/* ^[evidence:LK-7af43865] */}
+The mechanical response preserved the natural-convection path. Manufacturing instructions kept the internal cable bundle away from the supplies, and the user guidance carried the airflow warning. The production method had to preserve the air space on which the fanless design depended. The installation guide makes the airflow requirement concrete: the back panel and the front half of the bottom panel have to remain exposed to ambient air. 
 
 ## Drawings were an integration responsibility
 
-By January 2005, the main and fader assembly drawings were circulating for review. In February, Neal described me as working solo on the part and assembly drawings while other team members helped with BOM and SAP work. Reviewers still needed time for redlines and access to the correct revisions. Concentrated drawing ownership existed inside a cross-functional release process. {/* ^[evidence:EV-b70eaf0a39b2] */}
+That coordination began before the production drawings. In September 2003 I built a prototype browser for the PC Jr main assembly, pairing a parts tree with static views and optional 3D models so teammates without Pro/ENGINEER could inspect the layout. Eli Manjarrez reported that 3D viewing stalled his computer; I suggested inspecting individual parts and explained the navigation controls. The following month, a connector-placement discussion linked PCB outlines and mounting references to plastic ribs and bosses. I made room for a possible connector move while the electrical team worked through which board and reference geometry to use. In November, I said the dimensional-control drawing was correct, while Marc identified the industrial-design print he was comparing as version 6. That exchange does not establish the final connector position or completed implementation.
 
-That responsibility linked the physical design to the build. The main-unit drawing carries the panel and board assemblies, rails, pan and supplies into one assembly definition. The plastic drawing carries changes through tooling, transport-switch webs and conductive treatment. A design change could require a corresponding drawing, BOM, board-interface or manufacturing update before the intended hardware reached the line. {/* ^[evidence:EV-914b078a3ebb] */}
+By January 2005, the main and fader assembly drawings were circulating for review. In February, Neal described me as working solo on the part and assembly drawings while other team members helped with BOM and SAP work. Reviewers still needed time for redlines and access to the correct revisions. Concentrated drawing ownership existed inside a cross-functional release process. 
+
+The stand’s top brackets also went through a prototype simplification. On January 10, 2005, I initially allowed the supplier’s proposed two-piece construction, provided the emboss depth was preserved; my follow-up stressed that the bracket still had to sit flush on the extrusion. Later that day I sent Revision 2 drawings with the embosses removed and a wider tab, eliminating the need for that deviation. I also asked that two small U-brackets be stopped if they had not yet been made. The surviving drawings and mail establish the revised definition and its transmission, not which version was manufactured or whether the stop request was carried out.
+
+One February review exposed why a revision letter alone was not enough. A main-meter panel drawing at Rev B cited the wrong ECO, while purchasing and quality staff worked out which definition the suppliers held. The later correspondence reported that the production supplier had received Rev B. Surviving copies carry different correction histories even at the same revision, so the drawing, change order and supplier copy have to be read together.
+
+The next main-meter correction moved four LED-holder mounting holes 0.035 inch to the right. ECO 7969 was held in early May because the change was not clearly identified; I resubmitted the deliverables after that review. The later form records approvals and a May 19 incorporation update, while retaining both D and E as shippable assembly revisions under an exhaust-stock disposition. On May 23, I supplied the revised assembly drawing. That record establishes the document-control progression, without proving which revision was installed in a particular console.
+
+A reused cable could still arrive with contradictory instructions. In November 2004, Terri Merrell asked me to reconcile the 16-position ribbon-cable drawing with the part used on another product. I sent a drawing covering the five- and eleven-inch versions, then removed a strain-relief description that contradicted its assembly note. The retained attachments preserve both versions of that correction. Document control needed a separate follow-through: in March, Terri distinguished the supplier's drawing in Current Masters from Digidesign's own definition, and Mary Carnero reported adding the Digidesign drawing alongside it. These exchanges establish the drawing correction and later filing of Digidesign's five-inch definition, without establishing a hardware retrofit or supplier-production outcome.
+
+That responsibility linked the physical design to the build. The main-unit drawing carries the panel and board assemblies, rails, pan and supplies into one assembly definition. The plastic drawing carries changes through tooling, transport-switch webs and conductive treatment. A design change could require a corresponding drawing, BOM, board-interface or manufacturing update before the intended hardware reached the line. 
 
 ## Compliance and the production handoff
 
-The pre-production AC-withdrawal test found that unplugged mains-pin voltage did not fall below 60 Vdc within two seconds. Phong Do and Ken Lee worked with UL on the failure. The line-to-neutral bleeder changed from 1 MΩ to 750 kΩ; production later moved to a filter with an integral bleeder, removing the manual harness crimp. This was a regulatory and electrical correction that also affected the assembly process. {/* ^[evidence:EV-b70eaf0a39b2] ^[evidence:LK-7af43865] */}
+The pre-production AC-withdrawal test found that unplugged mains-pin voltage did not fall below 60 Vdc within two seconds. Phong Do and Ken Lee worked with UL on the failure. The line-to-neutral bleeder changed from 1 MΩ to 750 kΩ; production later moved to a filter with an integral bleeder, removing the manual harness crimp. This was a regulatory and electrical correction that also affected the assembly process. 
 
-UL issued its Notice of Approval on April 19, 2005. First customer ship followed on April 28, nine days later. That launch did not end mechanical work. The May cleanup list still tracked gasket, label, rear-bracket, side-plate and fit changes, and distinguished identified ECOs from changes that had completed approval. {/* ^[evidence:EV-b70eaf0a39b2] ^[evidence:LK-7af43865] */}
+UL issued its Notice of Approval on April 19, 2005. First customer ship followed on April 28, nine days later. That launch did not end mechanical work. The May cleanup list still tracked gasket, label, rear-bracket, side-plate and fit changes, and distinguished identified ECOs from changes that had completed approval. 
 
-The same handoff separated remaining mechanical deliverables from further assembly improvements. Manufacturing would decide which of those improvements to pursue and implement, with me available as a consultant. The record establishes a transfer of responsibility, not that every suggestion was implemented or that May 13 was the exact end of my involvement. {/* ^[evidence:EV-b70eaf0a39b2] */}
+The same handoff separated remaining mechanical deliverables from further assembly improvements. Manufacturing would decide which of those improvements to pursue and implement, with me available as a consultant. The record establishes a transfer of responsibility, not that every suggestion was implemented or that May 13 was the exact end of my involvement. 
 
 D-Command's mechanical work extended from adapting existing parts to defining new interfaces and carrying them into production. The useful result is visible in the assembled product, but also in the decisions beneath it: preserve a mounting pattern, change a secondary machining operation, control a coating boundary, protect an airflow path, and make the released drawings agree with the build.
 
+A screw drawing I prepared on May 26, 2005 records a further step in that cleanup: an undercut flat-head screw defined for quotation and review. It supports the existence of the proposed part definition after the May handoff discussion; it does not establish that the change was manufactured or that the cleanup was complete.
+
+The sidecaps illustrate how a drawing note could create a tooling problem. Their earlier definition called for molded part and revision markings. I prepared a change to use ink for the part number, revision and date code instead. The May draft and June 2 approval record show that progression, retaining both revisions as shippable under an exhaust-stock disposition. Purchasing still needed an updated supplier schedule; the approved definition does not establish when the revised parts arrived.
+
+Document support continued after the handoff. In June I clarified that the rake-extrusion change altered an overall-length tolerance, while purchasing and the supplier were still assembling the complete file package. A July exchange over the main pan made a similar distinction: the change was artwork only, and I sent the revised artwork to the supplier. These exchanges establish clarification and file transmission; they leave the supplier’s build outcome unresolved.
+
+There was also a separate round of proposed improvements. On July 6, 2005, I sent an engineering-test package covering rake parts, back panels, side plates, a center rib and supports. The drawings included separate side-plate pieces for the meter area. The plan was to evaluate the changes before deciding which should enter production through ECOs. Neal explicitly identified these as engineering parts, and Mass Precision said the quotation process had begun. The retained record does not establish that the test parts were built, evaluated or adopted.
+
+A later sustaining exchange shows one interface returning after launch. In June 2006, Ping Zhang reported that larger-diameter standoffs on the main-meter panel interfered with the plastic meter shrouds. The retained correspondence quotes my response that I saw no problem using normal-wall 4-40 standoffs. It records advice on a proposed change, not completed rework or uninterrupted involvement after the original production handoff.
+
 ## Source trail
 
-- Dated 2004-2005 correspondence: prototype definitions, shared interface decisions, thermal reports, drawing review, compliance and manufacturing handoff.
+- Post-handoff sidecap marking, extrusion tolerance, pan-artwork and engineering-test records: draft, approval, quotation and transmission states remain separate from manufacture, receipt and adoption.
+- D-Command Fader Module installation guide, Rev A, May 2005, for the stated ventilation requirement.
+
+The stand top-bracket REV1/REV2 drawings, January 10 native messages and their exact attachments distinguish temporary prototype permission, revised definitions and a conditional stop request; manufacture and receipt remain unestablished.
+
+Remaining ribbon/fader definitions and the two cable/artwork compilations, joined to the November 2004 strain-relief drawing correction, March 2005 Current Masters filing, and unresolved supplier length/approval states.
+
+February-March 2005 headphone pinout clarification and exact drawing delivery, reconciled with the power/mic/headphone definition family and the unresolved 35/52-inch length discrepancy.
+
+January 2005 power-harness review and withdrawn grounding-change request, checked against the exact cable drawings and held correspondence captures.
+
+- Main-meter drawing and ECO 7969 approval/incorporation record, read with the later assembly-drawing submission.
+- Overlay geometry, B/C artwork and exact approval correspondence, with artwork and mechanical responsibilities kept distinct.
+
+- Dated 2003-2005 correspondence: early reuse and interface work, prototype definitions, shared interface decisions, thermal reports, drawing review, compliance and manufacturing handoff.
+- June 2006 sustaining correspondence, including Ping Zhang's report and the quoted reply attributed to me; implementation remains unestablished.
 - Original main and fader assembly drawings, November parts list and December-January assembly trees.
 - Plastic-panel drawing 9440-12920-00 and its retained masking sheet, read with the revision history.
 - Retained operator corrections for role boundaries, enclosure closure, thermal interpretation and the compliance-to-ship dates.
 - [Avid D-Command Guide, October 2011](https://resources.avid.com/SupportFiles/attach/Pro_Tools/10.0/ENGLISH/D-Command_Guide.pdf), for product configuration and the external XMON interface.
+
+## Proposed development timeline
+
+This proposed selection preserves the dates and states in the source record. Plans, tests, drawing releases and delivered outcomes remain distinct; undated records are not assigned calendar coordinates.
+
+- **August 6, 2003 - Define the boundary of PC Jr reuse.** Design questions and model work in progress. Credit: Erik Norris; Neal Breitbarth.
+- **August 18-21, 2003 - Send meter and fader-encoder dimensional definitions.** Mechanical interface transmission, not circuit design. Credit: Erik Norris; Doug Tornio.
+- **August-September 2003 - Debate expansion-unit interconnects.** Competing technical, cost and expansion arguments; two communications boards became a costing assumption pending sign-off. Credit: Marc Schuman; Stan Cotey; Robin Parnaby; Eli Manjarrez; hardware team.
+- **September 4-5, 2003 - Prototype a mechanical assembly browser.** Static/3D review tool with reported 3D performance limits and an individual-part workaround; no adoption measure. Credit: Erik Norris; feedback from Eli Manjarrez.
+- **October 3, 2003 - Record PC2 Jr main and fader layouts.** Rev 6 provisional assemblies; placeholder part identities. The drawings carry unexpanded N/B initials.
+- **October 24-27, 2003 - Coordinate connector clearance.** Plastic redesign and open board/reference decisions; final connector implementation unestablished. Credit: Erik Norris and the electrical team.
+
+- **May 2004 - Choose bottom-mounted transport board.** team decision Credit: Marc; Neal; Gannon; Bob; Erik.
+- **June 2004 - Reuse rails and extrusion blanks.** prototype definitions Credit: Erik.
+- **June 2004 - Remove unused meter-board extension.** clearance response Credit: Marc Schuman; Erik.
+- **August 2004 - Run preliminary thermal trial.** preliminary test Credit: Marc Schuman; Gannon Kashiwa.
+- **September 2004 - Select smooth side treatment.** shared design choice Credit: Eli Manjarrez; Stan; Erik.
+- **December 2004 - Accept coated samples for texturing.** sample test/scoped approval Credit: Erik; supplier.
+- **January–February 2005 - Review part/assembly drawings.** drawing review Credit: Erik; team BOM/SAP/redlines.
+- **Pre-production, March 2005 - Address AC-withdrawal failure.** test failure/corrective path Credit: Phong Do; Ken Lee; UL.
+- **April 19, 2005 - UL Notice of Approval.** approval Credit: UL; compliance team.
+- **April 28, 2005 - First customer ship.** product shipment milestone Credit: Cross-functional team.
+- **May 2005 - Hand off continuing improvements.** handoff with open work Credit: Manufacturing; Erik consulting support.
+
+### Optional additional context
+
+These records are retained as additional context in this private candidate. Their documentary dates and states do not extend the accepted employment metadata.
+
+- **2005-05-26 - Recorded context.** quotation/review drawing date, not manufacture or closure Credit: Erik Norris prepared; EN revision approval initials.
+- **May 26-June 2, 2005 - Change sidecap marking instructions.** Draft followed by recorded ECO approvals and supplier transmission; exhaust-stock disposition, with actual receipt unestablished. Credit: Erik Norris; Terri Merrell; approval functions; supplier.
+- **July 6, 2005 - Submit engineering-test parts for quotation.** Proposed evaluation before possible production ECOs; supplier quoting begun, with build, test and adoption outcomes unestablished. Credit: Erik Norris; Neal Breitbarth; Terri Merrell; Mass Precision.
+- **July 8, 2005 - Clarify main-pan artwork and send the revised definition.** Artwork-only clarification and exact transmission; supplier build outcome unestablished. Credit: Erik Norris; Fidel Saucedo; purchasing and document-control contributors.
+- **2006-06-12 - Advise on a later meter-panel interference question.** Ping Zhang reported larger standoffs contacting plastic shrouds; the retained message quotes my reply that I saw no problem using normal-wall 4-40 standoffs. Advice on a proposed change; implementation and continuous involvement remain unestablished.
+

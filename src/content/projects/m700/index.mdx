@@ -105,8 +105,6 @@ cyberspace:
     deck: []
 ---
 
-# M700 Disc Vault
-
 The M700 made a large physical disc collection behave like a digital library. Its carousel stored up to 320 Blu-ray discs, DVDs and CDs, imported them automatically, and retrieved a selected disc through the front slot. Launched in July 2011, the five-rack-unit product also contained an M-Class player. That integrated player distinguishes M700 from the separate DV700 vault.
 
 My work crossed the internal mechanical design, supplier and tooling reviews, product integration, and later reliability investigations. Function Engineering developed the early carousel, kicker and pinch-roller breadboards. Inside Kaleidescape, mechanical work had to meet the electronics, sensing and control work of the wider hardware team. The later sustaining effort included mechanisms shared with DV700, while the two products retained separate identities and return histories.
@@ -114,6 +112,8 @@ My work crossed the internal mechanical design, supplier and tooling reviews, pr
 ## Moving a disc through the machine
 
 A disc entered between a pair of pinch rollers, moved into a carousel slot, and later transferred to the optical drive. The carousel, kicker and rollers formed one transport system. The disc changed height as it left its slot, so the rollers needed controlled vertical travel as well as grip. Constraining a disc too early would make the rollers skid; leaving its path poorly guided would let it miss the next opening.
+
+The architecture began with a smaller capacity target. Function Engineering's June 2010 concept report described a 300-disc carousel above a plate separating the disc chamber from the electronics and airflow below. A perimeter belt drove the carousel on support rollers, while separate roller and kicker assemblies moved discs through the front slot and into the drive. Obstruction sensing, disc tolerances and smaller-disc handling were still open questions to resolve through breadboards and testing.
 
 Function Engineering's August 2010 report records the alternatives tested on the breadboard. Four slot geometries were evaluated; a V-groove was needed to constrain and align the disc with the kicker. The team compared timing-belt arrangements and selected an off-the-shelf MXL combination that gave an integral number of motor steps per slot. The pinch-roller assembly demonstrated six millimeters of vertical travel, refined ingress and egress guides, and a gearmotor isolation scheme to reduce transmitted noise.
 
@@ -123,9 +123,17 @@ Those results established feasibility in the breadboard. The report still called
 
 The project schedule assigned me internal mechanical design and release, prototype evaluation, production-tooling release and first-article review. The work included the enclosure and mounting parts around Function Engineering's mechanisms, plus the physical interfaces to Kaleidescape's boards and sensors. Nathan Forster's assignments included the front illumination and interface electronics; the schedule kept firmware and motor-control electronics under their respective engineering owners.
 
+The June 2010 requirements made assembly and service access part of the design problem. Building from Function Engineering's draft, the specification called for subassemblies that could be installed with ordinary hand tools, keyed parts and cables, and quick access to components for repair. It also specified separating cooling airflow from the stored discs and drive openings to limit dust exposure. These were design targets; the document still left reliability and noise limits to be defined.
+
 The details were coupled. My running design notes track removable inner guides for service access, operating clearance around the carousel, optical-drive brackets, common fasteners, wire routing and the position of the front sensor boards. They also record smaller assembly lessons. A 2011 inspection found fibers in the grease and changed the proposed applicator from cotton swabs to an acid brush. A seemingly minor process detail could put contamination beside a moving disc.
 
 Production preparation involved reviewing real parts, identifying revisions and coordinating release. The April 2011 punch list records my release instructions alongside supplier lead times, samples awaiting approval, and tooling questions. It was a working boundary between design intent, the parts available for a build, and what still needed correction.
+
+Assembly checks also exposed problems at the joints. An August 2011 review found play in rivets securing the optical-drive support bracket and called for the pieces to be clamped tightly during clinching. A companion review considered substitute rivets joint by joint and required the original fasteners at joints where substitution was prohibited. These records document the inspection findings and joining requirements; they do not verify a completed corrective production lot.
+
+The release work had several distinct steps. In February, the 501 and 502 part lists recorded whether Function's files were already in Arena; one carousel mounting plate still needed its files. By April, the punch list distinguished received samples, samples approved for the next build, instructions to order at a particular revision, and open tooling questions. Having a drawing in the system, approving a sample and receiving production parts were separate milestones.
+
+Supplier proposals exposed the connection between sheet-metal features and mechanism alignment. In an October 2011 design review, the review retained countersinks, locating features, hems and masking where removing them would change assembly or function, and requested samples before accepting a different joining method. The 2012 redesign study then considered broader ways to improve rigidity, positioning and mounting while simplifying the structure. Its cost worksheet compared current parts with budget estimates; it did not establish realized savings.
 
 ## A carousel that had to fill, release and stay flat
 
@@ -133,11 +141,23 @@ The large molded carousel combined hundreds of narrow disc slots with the belt a
 
 The January 2011 T2 review recorded a molding trial that produced no usable parts. Material stuck on both sides of the tool, and the operating window was too narrow. I recorded the review with Function Engineering and molding specialist Loyd May, including the next actions for the suppliers. The team considered feeder ribs, gate balance, cooling, venting and material behavior. Loyd recommended understanding venting and equalizing mold temperature before expecting a material change to solve the problem.
 
+The next trial improved the available samples without closing the molding problem. My January 28 T3 report recorded 46 ABS and 46 HIPS carousels, but parts still showed ejector-pin deformation and knit lines. Thomas reported that the parts had been packed and shipped, with arrival still scheduled. The following T4 plan proposed incremental fillet, rib and cooling changes. By February 10, Great Mold's quotation had been received and the internal purchase-order request approved; sending the order and completing the tooling work remained separate steps.
+
+The changes had to balance filling and release. Loyd's January cooling and vent sketches separated the mold into controlled circuits and identified new vent locations. Later trials showed why a local improvement could create another problem: more pressure helped fill a narrow feature but could pull a rib out of position, while a larger root radius could reduce whitening during ejection and introduce a sink mark. A later tooling proposal also called for numbering gate regions and disc slots so a defect could be traced to its position in the molding process.
+
 A later recommendation specified additional vents on 45 ejector pins. The October 2011 modification study also explored adding 320 sister ribs. These records show a sequence of proposed tooling interventions. They do not, by themselves, establish that every proposal was implemented or that one change resolved all later failures.
+
+A 2012 proposal considered rebuilding the carousel tool around 320 separate inserts. I reviewed the proposed geometry with John Lio and Richard Lane: changes that eased molding also had to preserve disc guidance, clearance to the kicker and a smooth rolling surface. Parting lines could add noise where discs crossed them, and a larger lead-in radius could reduce guidance. The supplier's drawings and our questions document that design review, without establishing that the proposed tool was built.
+
+The slot checks made the molding problem visible at the disc interface. Pilot observations recorded a disc that would not seat in a locally narrow slot, with both rib variation and the disc's thicker adhesive edge contributing to the fit. A November 2011 procedure called for three inspection discs to be moved through every carousel slot under their own weight. Misaligned seating required removing flash or another obstruction and repeating the check until all 320 slots had been validated. The procedure defined the work to perform; it was not a completed inspection record for a production lot.
+
+The slot investigation continued in 2012. A February review requested replacement of several tool sections, while March inspection reports measured four positions in each of the 320 slots. A comparison worksheet placed those part measurements beside the tool measurements and marked sections for replacement. In April, the repair request focused on two thick ribs near slot 120 and asked Great Mold to price two alternatives: replace the affected section with an existing spare, or repair the existing insert. The records establish the inspection and repair choices under review; they do not establish which option was completed or whether it improved the parts.
 
 Flatness remained a practical inspection issue in 2014. An April review of a box of ten carousels found the bottom three more warped and questioned whether tight packaging trays were loading the parts. I was assigned to relax the packaging fit. The April 10 revision of the inspection procedure made the disposition explicit: locate the high points on a flat surface, measure their deflection, and reject and quarantine parts exceeding two millimeters.
 
 The shared M700/DV700 carousel correspondence carried that inspection into supplier decisions. John Lio identified me as the engineer responsible for the carousel part and its disposition. On August 19, I instructed Sanmina to scrap the failed parts. The correspondence records that instruction and the supplier's acknowledgment; it does not record completion of the scrap work.
+
+The new-tool option was revisited after the 2014 inspection and disposition work. In December, I asked Yomura to re-quote the 320-insert concept so the team could evaluate its feasibility. Yomura sent a quotation in January 2015, requested the latest drawings for mold-flow review, and kept implementation dependent on that review. Mark McKenzie replied that the quotation was under internal review. These were evaluation and quotation steps; the exchange does not establish an order, a received tool or a validated improvement.
 
 ## More grip changed the alignment problem
 
@@ -151,9 +171,13 @@ By April 29, I had loaded revised inner-guide and bearing files into the working
 
 The disc-retention cover was another alignment interface. In May, John Lio circulated assembly instructions for both M700 and DV700: use the enlarged mounting holes with washers, leave the roller brackets in place, align the cover without loading the outer screws, and tighten the center and perimeter fasteners in sequence. The instruction addressed distortion introduced during assembly.
 
+A July case showed the value of that added support at the scale of one machine. I had confirmed that a returned M700 scratched discs at the front guide and recommended further investigation. Nathan then reported that small alignment shifts within the roller assembly compounded into a leftward disc bias. Replacing the assembly with the prototype that supported the driven roller eliminated the scratching in that unit. He still described the improved guide as a prototype awaiting drawings and assembly instructions; the result did not establish a production-wide correction.
+
 Those shared M700/DV700 changes progressed beyond the April prototypes. In July, I loaded the spring file into Arena and said it could be released with the revised guide and bearing. My August 4 status report recorded preparation for engineering-change release and approval to purchase spring tooling. Assembly-instruction updates and further evaluation remained on the work list.
 
 ## Testing what the complaint actually meant
+
+Earlier inspection and rework instructions had already treated the roller supports and optical drive as alignment interfaces. The January 2012 roller-slot review showed excess coating and fibers in the sliding-bearing slots. The instructions called for removing the contamination without creating gouges or burrs, cleaning the area and inspecting the result. A companion procedure checked alignment between the optical-drive bezel and the adjacent sheet-metal cutout. These records document specific inspection and rework methods; they do not establish how many production units received them.
 
 The investigation depended on separating a reported symptom from a reproduced mechanism. The roller test record documents returned assemblies installed in a known-good unit, followed by repeated front and rear transfers. Some long runs failed to reproduce the original complaint while still revealing disc scratching, alignment details or contamination. Passing one transfer test did not clear every physical issue.
 
@@ -168,3 +192,35 @@ In March 2014, Mark McKenzie's field-data review gave the team a wider view: abo
 M700 reached the market as a 320-disc vault with an integrated player. The later engineering record shows a sustained effort to make that transport more tolerant of real discs, contamination, variation and assembly. My contribution connected mechanical definition, suppliers, inspection and corrective designs to the wider team's continuing investigation.
 
 The work produced defined inspection rules, revised guide and bearing files, preparation for spring-change release, tooling purchase approval and a disposition instruction for failed carousels. Testing and assembly updates remained part of the continuing work. The selected records do not establish a completed fleet retrofit or a measured reduction in field failures.
+
+## Proposed development timeline
+
+This proposed selection preserves the dates and states in the source record. Plans, tests, drawing releases and delivered outcomes remain distinct; undated records are not assigned calendar coordinates.
+
+- **2010 schedule - Assign internal mechanical design and release.** planned responsibility Credit: Erik; Nathan; firmware/motor-control owners.
+- **June 4, 2010 - Define the concept architecture.** Concept report for a 300-disc predecessor; breadboards and open requirements remained. Credit: Function Engineering.
+- **June 24, 2010 - Define assembly and service targets.** Living requirements set design goals and unresolved limits. Credit: Function Engineering; Kaleidescape team.
+- **August 2010 - Report breadboard mechanism findings.** breadboard findings Credit: Function Engineering.
+- **January 2011 - Review unusable T2 molding trial.** trial problem/next actions Credit: Erik; Function; Loyd May; suppliers.
+- **January 28–February 10, 2011 - Advance the T3 trial and T4 plan.** Trial samples reported shipped; T4 quotation received and internal PO request approved, with order delivery still promised. Credit: Erik; Loyd May; Thomas; Alan Wu/Great Mold.
+- **February 22, 2011 - Reconcile mechanical part files.** Working file-custody lists; presence in Arena is not production release. Credit: Function Engineering; Kaleidescape mechanical team.
+- **April 2011 - Coordinate production punch list.** release instructions/open work Credit: Erik; suppliers.
+- **July 2011 - Launch integrated-player vault.** commercial launch Credit: Kaleidescape.
+- **August 18–19, 2011 - Review rivet choices and joint security.** Loose optical-drive bracket rivets prompted a clamping instruction; substitution choices remained constrained by the joint. Credit: Kaleidescape engineering and manufacturing. Corrective-lot verification unestablished.
+- **October 2011 - Propose carousel sister-rib study.** tooling proposal Credit: Engineering/tooling team.
+- **October 2011–April 2012 - Review sheet-metal manufacturing options.** Functional constraints, sample requests and redesign budgets; realized savings unestablished. Credit: DEMSA; Kaleidescape team.
+- **November 30, 2011 - Define slot seating inspection and rework.** Three-disc procedure across all 320 slots; lot completion unestablished. Credit: Kaleidescape engineering/manufacturing.
+- **December 2011–January 2012 - Propose molding and traceability changes.** The dated tooling-change compilation records proposed draft, radius, vent and gate/slot identification changes. Credit: Engineering/tooling team.
+- **January 2012 - Define roller-slot rework and drive alignment checks.** Inspection examples and repair instructions; production coverage unestablished. Credit: Kaleidescape engineering; Sanmina.
+- **February–April 2012 - Measure slot variation and request tool repairs.** Section-replacement requests, tool/part comparison and two slot-120 repair options; selected repair and outcome unestablished. Credit: Kaleidescape engineering; QC Inspection/Steven DeVowe; Great Mold and tool-inspection suppliers.
+- **May 2012 - Review a new carousel-tool concept.** 320-insert DFM proposal weighed molding against guidance, noise and kicker compatibility. Credit: Erik; John Lio; Richard Lane; Yomura.
+- **February 2014 - Correct misleading test setup.** test correction Credit: Erik.
+- **March 2014 - Relate shaft bending to disc alignment.** observations/design assignments Credit: Nathan Forster; Erik.
+- **March 2014 - Review bounded field-operation data.** data analysis Credit: Mark McKenzie.
+- **April 10, 2014 - Define reject/quarantine threshold.** procedure revision Credit: Engineering/manufacturing; Erik packaging assignment.
+- **April 29, 2014 - Load guide/bearing revision; order springs.** working revision/prototype order Credit: Erik; Rob Wudrick.
+- **May 2014 - Specify cover assembly sequence.** assembly instruction Credit: John Lio; shared vault team.
+- **July16-17,2014 - Resolve scratching in one M700 with prototype roller support.** Reported unit-level result; prototype not yet released Limit: No fleet correction or production qualification Credit: Erik initial guide confirmation; Nathan diagnosis and prototype substitution; service team.
+- **July–August 2014 - Prepare spring/guide release.** revision/release preparation Credit: Erik; hardware/manufacturing.
+- **August 19, 2014 - Instruct supplier to scrap failed parts.** disposition instruction Credit: Erik; John Lio; Sanmina.
+- **December 2014–January 2015 - Re-evaluate the new-tool option.** Feasibility inquiry, supplier quotation and internal review; order and delivered outcome unestablished. Credit: Erik; Grat Wu/Yomura; Mark McKenzie.

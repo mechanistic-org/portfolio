@@ -85,8 +85,6 @@ cyberspace:
 heroImage: /assets/sundance/full-pass-245/encore-product-family.webp
 ---
 
-# Sundance
-
 Sundance was our internal code name for the shared program behind Kaleidescape's Strato and Alto products. The commercial names were settled late, close to release. In Kaleidescape's [October 2015 Encore announcement](https://www.kaleidescape.com/news/EncoreLineAnnouncementPage/), Strato and Alto were the movie players and Terra was the movie server. This case study follows my mechanical work on the program's four-drive, two-rack-unit server and its front-drive mechanism.
 
 The server brought four front-access hard drives into a shallow enclosure. The user needed to remove a drive while the server stayed in the rack. Inside, that same drive had to remain isolated from the enclosure, locate against its connector and latch securely behind a removable cosmetic front.
@@ -97,9 +95,13 @@ My contribution was senior mechanical design engineering for the enclosure and f
 
 The requirements proposal called for four 3.5-inch drives in two stacked rows, accessible without rack removal or enclosure disassembly. The proposed package was 17 inches wide, 3.438 inches high and 10 inches deep. It also needed room for a custom main board and two 60 mm fans. The 15 CFM airflow figure was a design target.
 
-The June system concept put the drive connectors on a mounting plate and considered both internal and external power supplies. By the July industrial-design review, the team had narrowed several front-access ideas, including hinged doors, to two preferred treatments with a detachable face. Finger scoops also served as air vents. The front was therefore part of the cooling path as well as the user's route to a failed drive.
+The June system concept put the drive connectors on a mounting plate and considered both internal and external power supplies. A June 18 packaging study also tested the shallower Cinema One height. It exposed crowded drive spacing and interference around the button assembly, while comparing formed-metal guides, plastic guides and a complete sled as different ways to locate the drives. By the July industrial-design review, the team had narrowed several front-access ideas, including hinged doors, to two preferred treatments with a detachable face. Finger scoops also served as air vents. The front was therefore part of the cooling path as well as the user's route to a failed drive.
 
 Those relationships persisted into the detailed work. January tasks assigned me changes to the bezel's drive openings and perimeter air inlets, along with matching changes to the blanking plate and HDD frame. Function Engineering carried lead-in and retention-feature tasks. A useful front opening required the cosmetic surface, internal frame and drive mechanism to agree on where the drive could move.
+
+## Fitting the board to the enclosure
+
+The main-board review made the electrical components part of the enclosure problem. In August, the review compared supplied connector models with their drawings and checked connector overhang, reset-switch reach, SATA orientation and mounting-hole clearance. Some reference models represented a different connector variant, so their geometry could not simply be accepted as the mechanical definition. The review also considered moving the board mounts to preserve usable space in front of the board. These were coordination questions for the hardware team, not a record that every proposed adjustment was adopted.
 
 ## Isolation changed the drive constraint
 
@@ -129,7 +131,11 @@ The subsequent snap/SATA correction was taken through tolerance analysis and val
 
 ## Toolability and assembled fit
 
+The removable front also changed how the cosmetic face was supported. October reviews with Nissha distinguished Sundance's threaded-insert bosses and metal backing plate from the heat-staked construction of an earlier front. The supplier's proposed boss and parting-line details had to preserve the visible surface as well as the fastening arrangement. Nissha's response warned that the current boss geometry would leave visible sink marks and proposed thinner sections; the exchange records that manufacturing tradeoff, not a verified final cosmetic result.
+
 The rail also had to survive the molding process. The October plastics quote gave its tool a 45-day lead, compared with 30 or 35 days for the other listed tools. November supplier DFM comments addressed thin walls, ribs, draft and the junction between the two shots. February comments continued to address fill, deformation and warping. Those were consequential geometry and process decisions inside the functional part.
+
+The February supplier reviews connected those concerns to the geometry of the whole removable front. Yomura proposed wider openings around the carrier faceplate's four end features so the mold would not depend on thin, fragile steel. Its bezel proposal used angled tooling to release eight hooks. On the two-shot drive rail, the supplier flagged a thin first-shot wall that could deform during overmolding, a notch vulnerable to warping, and a hook whose molded shape had to preserve a functional tolerance. The review tied mold filling, tool release and local stiffness to the same interfaces that made the front serviceable. These were supplier proposals for review, not a record that every proposed change reached production.
 
 The sheet-metal prototypes exposed a different part of the same interface problem. The February AFT inspection record described an inward-bent front flange preventing bezel hooks from engaging. It also reported drive insertion binding where formed shelves scraped the rail, even though the rail's checked width was within tolerance. Our observations did not agree on every sample condition, which made the actual mating features more useful than a blanket judgment that the chassis was good or bad.
 
@@ -138,6 +144,8 @@ The follow-up sent to AFT separated specific forming, alignment and flange-relie
 The flange/rail-fit correction, like the snap/SATA correction, was carried through tolerance analysis and validation into production. That result does not turn every supplier proposal in the review packet into an adopted change.
 
 ## Making the prototype build assemble
+
+The February 6 change notice, ECO-001466, released mechanical files and updated the related BOMs. It distinguished prototype rack ears and other prototype metal assemblies from the broader set of hardware and board changes. MASS Precision then asked which parts it should quote and build. The release organized the next build; it did not, by itself, certify an assembled server.
 
 Cosmetic finish added another assembly variable. In February, Nathan Forster reported that assembling painted cast-plastic prototypes required more filing and scraping than Hunter could reasonably perform. He proposed proceeding with unpainted parts for the engineering build.
 
@@ -158,3 +166,29 @@ The architecture and mechanical assignments come from the requirements proposal,
 My September 2026 recollection also identifies Sundance as the shared program code name and places the commercial naming late in development. The October 2015 product announcement establishes the public family names and roles.
 
 The hero is the product-family photograph I selected from the project archive. The gallery schematic explains the front-service requirements. The two original workbook diagrams show the earlier analysis configuration, with their authorship and limits preserved.
+
+## Proposed development timeline
+
+This proposed selection preserves the dates and states in the source record. Plans, tests, drawing releases and delivered outcomes remain distinct; undated records are not assigned calendar coordinates.
+
+- **June–July 2014 - Develop front-access concept.** concept/ID review Credit: Kaleidescape; Function/ID partners.
+- **August 30, 2014 - Review board-to-enclosure interfaces.** Connector-model checks, overhang and mounting-clearance questions for hardware coordination. Credit: Erik; Kaleidescape hardware team.
+- **October 8-22, 2014 - Review the removable-front construction with Nissha.** Supplier DFM, engineering explanation and supplier response on threaded inserts, visible surfaces and parting lines. Credit: Erik; Nissha; Rob Wudrick for artwork.
+- **October–November 2014; February 2015 follow-up - Review rail toolability.** quote/DFM Credit: Supplier; engineering.
+- **January 2015 - Coordinate bezel/frame and retention work.** assigned work Credit: Erik; Function.
+- **January 2015 - Define elastomer contact and shoulder screws.** design assignments/assembly definition Credit: Erik; team.
+- **January 15, 2015 - Review snap/connector tolerance loop.** earlier analysis configuration Credit: T.DeArk analysis; C.Davis check.
+- **February 6, 2015 - Mechanical files and BOM changes released.** Effective ECO; prototype build quoting still requested Credit: Arena change notice; MASS supplier correspondence; cross-functional BOM.
+- **February 9-16, 2015 - Review how the front and rail would mold.** Supplier DFM proposals for hook release, thin tool steel, filling and local deformation; adoption remains separate. Credit: Yomura tool engineering; engineering review.
+- **February 2015 - Investigate formed-part interference.** sample inspection Credit: AFT; engineering.
+- **February 26, 2015 - Acknowledge unpainted-parts instruction.** supplier acknowledgement Credit: Erik instruction; Jason Prior; Nathan concern; Mark support.
+- **March 5, 2015; March 9 planned - Arrange CAD-data handoff.** arrangement for future handoff Credit: Erik; handoff participants.
+- **October 2015 - Announce public Encore family roles.** company announcement Credit: Kaleidescape.
+
+### Undated records
+
+These records retain their own evidence and are not placed after the dated events as a claim about sequence.
+
+- **Date not established - Take snap/SATA correction into production.** accepted qualitative outcome Credit: Erik; cross-functional team.
+- **Date not established - Take flange/rail-fit correction into production.** accepted qualitative outcome Credit: Erik; cross-functional team.
+
