@@ -1,0 +1,260 @@
+{
+  "schema_version": "1.0",
+  "project": "ksystem-120",
+  "title": "Development timeline",
+  "start": "2008-06",
+  "end": "2009-05-20",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2008-06",
+      "end": "2009-05-20"
+    },
+    {
+      "id": "undated",
+      "label": "Undated records",
+      "start": "",
+      "end": ""
+    }
+  ],
+  "events": [
+    {
+      "id": "ksystem-120-3b7fa673c115",
+      "date": "2008-06",
+      "date_label": "June–July 2008",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Distinguish functional and geometry builds",
+      "summary": "planning/coordination Credit: Erik; Argyle; hardware team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84d26b1132f0"
+      ],
+      "end_date": "2008-07"
+    },
+    {
+      "id": "ksystem-120-2358db519426",
+      "date": "2008-06-28",
+      "date_label": "June 28, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Draft mechanical FAI procedure",
+      "summary": "authored draft Credit: Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84d26b1132f0"
+      ]
+    },
+    {
+      "id": "ksystem-120-ca0a04fdb7b0",
+      "date": "2008-07",
+      "date_label": "July 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Require cage assembly/service sequence",
+      "summary": "identified issue and request Credit: Erik; mechanical team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84d26b1132f0"
+      ]
+    },
+    {
+      "id": "ksystem-120-72f3bc1bafd8",
+      "date": "2008-07-09",
+      "date_label": "July 9, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Peer-review release of FAI procedure",
+      "summary": "initial peer-review release Credit: Erik; cross-functional reviewers.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84d26b1132f0"
+      ]
+    },
+    {
+      "id": "AC01",
+      "date": "2008-10-01",
+      "date_label": "October 1–6, 2008",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Test prototype acoustics and review fan isolation",
+      "summary": "measured prototype behavior and proposed enclosure changes; production verification unresolved Credit: Orion Bruckman; Gabe Cohn / Argyle; John Lio; cross-functional team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e5f147950699"
+      ],
+      "end_date": "2008-10-06"
+    },
+    {
+      "id": "AC03",
+      "date": "2008-10-20",
+      "date_label": "October 20, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Propose a temperature-based fan table",
+      "summary": "control proposal based on thermal characterization; testing and verification still required Credit: Nathan Forster.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e5f147950699"
+      ]
+    },
+    {
+      "id": "ksystem-120-cb4b160adece",
+      "date": "2008-11",
+      "date_label": "November 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Review base/cover tolerance scheme",
+      "summary": "DFM calculation/disposition Credit: Jaime Arellano/Sanmina; project team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84d26b1132f0"
+      ]
+    },
+    {
+      "id": "ksystem-120-0fe4f48f9005",
+      "date": "2008-12-29",
+      "date_label": "December 29, 2008",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Document Glow package section",
+      "summary": "drawing Credit: Mechanical/electrical/ID team; Erik integration.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84d26b1132f0"
+      ]
+    },
+    {
+      "id": "ksystem-120-fa14b32faef1",
+      "date": "2009-01-10",
+      "date_label": "January 10, 2009",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Consolidate mechanical changes by part",
+      "summary": "revision D change-tracking reference; implementation and retest outcomes remain separate Credit: Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84d26b1132f0"
+      ]
+    },
+    {
+      "id": "ksystem-120-2ec7373cb50e",
+      "date": "2009-01-15",
+      "date_label": "January 15, 2009",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Compare masking methods and protect grounding contacts",
+      "summary": "supplier-method review and conditional annotated approval Credit: Erik; Orion Bruckman; Sanmina; cross-functional reviewers.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84d26b1132f0"
+      ]
+    },
+    {
+      "id": "ksystem-120-0177d7d66a65",
+      "date": "2009-03",
+      "date_label": "March 2009",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Clarify masking and request sample",
+      "summary": "criteria/sample request Credit: Erik; supplier.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84d26b1132f0"
+      ]
+    },
+    {
+      "id": "ksystem-120-dc173d11d9fa",
+      "date": "2009-03-03",
+      "date_label": "March 3, 2009",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Announce immediate availability",
+      "summary": "commercial announcement Credit: Kaleidescape.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84d26b1132f0"
+      ]
+    },
+    {
+      "id": "ksystem-120-23712e313cd8",
+      "date": "2009-03-10",
+      "date_label": "March 10-24, 2009",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Make supplier discrepancies actionable",
+      "summary": "authored mechanical reports and stock-inspection requests; supplier-reported program adjustment Credit: Erik; Cristina Soto; Sanmina engineering and quality.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84d26b1132f0"
+      ],
+      "end_date": "2009-03-24"
+    },
+    {
+      "id": "ksystem-120-78145dc926e6",
+      "date": "2009-05-07",
+      "date_label": "May 7-11, 2009",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Review chassis tooling and operation sequence",
+      "summary": "supplier risk analysis and alternatives under investigation; implementation remains unestablished Credit: Erik; Osvaldo Hernandez; Victor Garcia; Wilson and Amada tooling specialists.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84d26b1132f0"
+      ],
+      "end_date": "2009-05-11"
+    },
+    {
+      "id": "ksystem-120-d70903066f43",
+      "date": "2009-05-20",
+      "date_label": "May20,2009",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Supplier sends phased process tracker",
+      "summary": "planning and staged validation; not completed qualification Credit: Cristina Soto / Sanmina process tracking; Erik requested schedule.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84d26b1132f0"
+      ]
+    },
+    {
+      "id": "ksystem-120-f527823ef8ba",
+      "date": "",
+      "date_label": "Undated Glow study",
+      "date_basis": "Date not established; no calendar coordinate assigned.",
+      "title": "Compare illumination and tuning states",
+      "summary": "visual study Credit: Project team.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84d26b1132f0"
+      ]
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "scope": "Exact current reader wording, date labels, order, states and credit. Dates retain their displayed precision. Source-only material remains private; visualization is not claim approval or publication.",
+    "source_chronologies": [
+      "EV-84d26b1132f0",
+      "EV-e5f147950699"
+    ]
+  }
+}

@@ -60,29 +60,43 @@ export function timelineOverview(chronology) {
  */
 export function bindTimelineReference(html, chronology) {
 	timelineOverview(chronology);
+	// Astro's text renderer can turn an apostrophe into its typographic form.
+	// Normalize only that display substitution; retain the original HTML bytes.
 	const key = (dateTitle, summary, href, label) =>
-		JSON.stringify([dateTitle, summary, href, label]);
+		JSON.stringify([dateTitle, summary, href, label].map((value) =>
+			typeof value === "string" ? value.replaceAll("’", "'") : value,
+		));
 	const byContent = new Map();
 	for (const event of chronology.events) {
-		const identity = key(
-			`${chronologyDate(event)} - ${event.title}.`,
-			event.summary,
-			event.anchor,
-			event.link_label,
-		);
-		if (byContent.has(identity)) fail("ambiguous narrative event identity");
-		byContent.set(identity, event);
+		// Both authored separators are exact display forms of the same fields.
+		// A date, title, summary or destination change still fails closed.
+		for (const separator of [" - ", ": "]) {
+			const identity = key(
+				`${chronologyDate(event)}${separator}${event.title}.`,
+				event.summary,
+				event.anchor,
+				event.link_label,
+			);
+			if (byContent.has(identity)) fail("ambiguous narrative event identity");
+			byContent.set(identity, event);
+		}
 	}
 	const rows = [...html.matchAll(/<li>([\s\S]*?)<\/li>/g)];
 	if (rows.length !== chronology.events.length) fail("narrative/event coverage differs");
 	const used = new Set();
 	let rendered = html;
 	for (const row of rows) {
-		const fields = row[1].match(
-			/^\s*<p><strong>([\s\S]*?)<\/strong> ([\s\S]*?) <a href="#([^"]+)">([^<]*)<\/a>\.<\/p>\s*$/,
-		);
+		// Markdown emits compact or paragraph list rows. Both must still match
+		// the complete reviewed date/title, summary and optional article link.
+		const body = row[1].trim().replace(/^<p>([\s\S]*)<\/p>$/, "$1");
+		const fields = body.match(/^<strong>([\s\S]*?)<\/strong>\s+([\s\S]*)$/);
 		if (!fields) fail("unsupported narrative row markup");
-		const event = byContent.get(key(...fields.slice(1).map(decode)));
+		const link = fields[2].match(/^([\s\S]*?) <a href="#([^"]+)">([^<]*)<\/a>\.$/);
+		const event = byContent.get(
+			link
+				? key(...[fields[1], ...link.slice(1)].map(decode))
+				: key(decode(fields[1]), decode(fields[2]), undefined, undefined),
+		);
 		if (!event || used.has(event.id)) fail("missing or repeated exact narrative identity");
 		used.add(event.id);
 		rendered = rendered.replace(
@@ -99,15 +113,17 @@ export function bindTimelineReference(html, chronology) {
  */
 export function selectAuthoredTimeline(pieces, chronology) {
 	if (!chronology?.events?.length) return { pieces, referenceHtml: null, referenceId: null };
-	const heading = /<h2\b[^>]*\bid="development-timeline"[^>]*>[\s\S]*?<\/h2>/g;
+	const heading = /<h2\b[^>]*\bid="((?:proposed-)?development-timeline)"[^>]*>[\s\S]*?<\/h2>/g;
 	const matches = pieces.flatMap((piece, index) =>
 		[...(piece.html ?? "").matchAll(heading)].map((match) => ({ index, match })),
 	);
 	if (matches.length > 1) fail("duplicate narrative timeline heading");
 	let remaining = [...pieces];
 	let referenceHtml = null;
+	let referenceId = "chronology-heading";
 	if (matches.length) {
 		const { index, match } = matches[0];
+		referenceId = match[1];
 		const html = pieces[index].html;
 		const next = html.slice(match.index + match[0].length).search(/<h2\b/);
 		const end = next < 0 ? html.length : match.index + match[0].length + next;
@@ -149,6 +165,6 @@ export function selectAuthoredTimeline(pieces, chronology) {
 	return {
 		pieces: remaining,
 		referenceHtml,
-		referenceId: referenceHtml ? "development-timeline" : "chronology-heading",
+		referenceId,
 	};
 }

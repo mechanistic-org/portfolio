@@ -1,0 +1,267 @@
+{
+  "schema_version": "1.0",
+  "project": "kserver-5000",
+  "title": "Development timeline",
+  "start": "2006",
+  "end": "2015-02-11",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2006",
+      "end": "2015-02-11"
+    }
+  ],
+  "events": [
+    {
+      "id": "R01",
+      "date": "2006",
+      "date_label": "2006",
+      "date_basis": "Year-level source label; no month or day inferred.",
+      "title": "Earlier platform architecture",
+      "summary": "Inherited base/drive/hinge/fan/front-panel architecture predates Erik and retains Wudrick/Argyle credit. Limit: BOM owner fields identify historical records; not an exhaustive design credit list.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ]
+    },
+    {
+      "id": "R05",
+      "date": "2008-07",
+      "date_label": "July 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Passive-cooler request and schedule decision",
+      "summary": "July 2008 Forster asked Erik for an extrusion drawing and attachment method for a passive heatsink sample resting on the CPU. Lane directed an off-the-shelf focus because August selection/September implementation left insufficient custom-extrusion time. Limit: Request and reply establish engagement, not completed custom cooler. No claim that Erik made this program decision.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ]
+    },
+    {
+      "id": "R10",
+      "date": "2008-08",
+      "date_label": "August 2008",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Separate active-fan observations",
+      "summary": "August active CPU-fan testing compared fan on/off and included Wudrick/Kocan listening observations. Limit: Separate from July passive proposal. No numeric performance table or Erick-run test claim.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ]
+    },
+    {
+      "id": "R16",
+      "date": "2014-03-06",
+      "date_label": "March 6, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "3D adapter and reformatted print",
+      "summary": "501-1211-00 revision 2 records EN creating 3D and reformatting the print on March 6, 2014, after RW initial rough 2D. Limit: Use exact rev2 scope; not a claim of first inventing the adapter or product.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ]
+    },
+    {
+      "id": "R24",
+      "date": "2014-05-02",
+      "date_label": "May 2, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "PSU EMC pre-scan reported",
+      "summary": "Kocan reported FSP650EGN-KS radiated and conducted EMC pre-scan success on May2. Limit: Pre-scan, not final certification; independent of later mechanical fit.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ]
+    },
+    {
+      "id": "kserver-5000-906bc9799f89",
+      "date": "2014-05-19",
+      "date_label": "May 19, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Adapter discrepancy and fabrication explanation",
+      "summary": "May19 incoming inspection rejected 100 adapter parts for apparent missing holes and manufacturing escalated production risk. Erik explained half-shears, conditioned disposition on physical dimensions and PEM locations and requested installation. Limit: 100 parts is a discrepant batch, not server volume or verified scrap/savings. Photo assessment is not completed dimensional/fit verification.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ]
+    },
+    {
+      "id": "kserver-5000-250da3fee1e4",
+      "date": "2014-05",
+      "date_label": "May-June 2014",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Fit and document follow-up remain open",
+      "summary": "PSU absence prevented a same-day sample; supplier requested ECO/DCO and later reports still carried documentation questions. Limit: No verified final fit, accepted batch, rescued shipment, closed ECO or yield result.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ],
+      "end_date": "2014-06"
+    },
+    {
+      "id": "R33",
+      "date": "2014-06-06",
+      "date_label": "June 6–13, 2014",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Separate drive-test results from SMART interpretation",
+      "summary": "Frazer reports clean stress logs and changed third-party counters; Forster questions their meaning, Kocan offers to seek clarification, and the team adds HGST HiTest. Limit: HiTest passes coexist with an earlier Landscape warning; no verified physical-health percentage, universal reliability or completed vendor response.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ],
+      "end_date": "2014-06-13"
+    },
+    {
+      "id": "R38",
+      "date": "2014-06-25",
+      "date_label": "June 25–26, 2014",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Authorize the Deskstar/3U change and advance ECO-001427",
+      "summary": "McKenzie says release can proceed with an early-July rollout plan; Wudrick reports the ECO moving through the system. Limit: Authorization and in-process ECO are not completed release, delivered rollout or Erik test ownership.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ],
+      "end_date": "2014-06-26"
+    },
+    {
+      "id": "R29",
+      "date": "2014-06-27",
+      "date_label": "June 27, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Report release of indicator substitutes",
+      "summary": "Kocan reports OSRAM and LiteOn LEDs released under ECO-1428 after Frazer's brightness/current comparisons. Limit: Reported component release; no Erik electrical-test ownership or claim that every sample and operating condition was approved.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ]
+    },
+    {
+      "id": "kserver-5000-9f657f8d06e4",
+      "date": "2014-09-29",
+      "date_label": "September 29, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Separate the assembly transfer from established part sources",
+      "summary": "Hardware minutes plan the server move to the new contract manufacturer while retaining Prompt metalwork and existing SATA-board fabricators. Limit: A transition plan, not proof of a completed move or Erik manufacturing ownership.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ]
+    },
+    {
+      "id": "R44",
+      "date": "2014-10-10",
+      "date_label": "Week ending October 10, 2014",
+      "date_basis": "Week-ending reporting period; not an exact release or completion day.",
+      "title": "Report Deskstar NAS component release",
+      "summary": "Kocan's October 14 report records HGST 4TB Deskstar NAS released under ECO-001442, following September voltage-ripple testing and staged ECO work. Limit: Component release does not establish shipment in a particular server configuration or close long-term reliability testing.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ]
+    },
+    {
+      "id": "kserver-5000-9f101530276f",
+      "date": "2014-10-15",
+      "date_label": "October 15, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Include Deskstar NAS in the continuing 3U test program",
+      "summary": "Patel reports a fourth server testing NAS drives alongside the existing Deskstar/Ultrastar systems. Limit: Distinct drive populations and dated reports; later Landscape discrepancies remain unresolved.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ]
+    },
+    {
+      "id": "R23",
+      "date": "2014-12",
+      "date_label": "December 2014",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Long-term drive observations are mixed",
+      "summary": "December long-term test summary distinguished clean read/write logs from SMART errors seen in Landscape. Limit: No fleet reliability or zero-data-loss conclusion.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ]
+    },
+    {
+      "id": "R52",
+      "date": "2014-12-22",
+      "date_label": "December 22, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Distinguish qualification from the shipment plan",
+      "summary": "Meeting minutes record WD Red 4TB qualification for the 3U, no plan to ship 3U servers with it, and long-term testing still needed. WD Red Pro runs too hot for qualification. Limit: Keep these alternatives separate from the Deskstar/NAS populations and their mixed monitoring results.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ]
+    },
+    {
+      "id": "R55",
+      "date": "2015-01",
+      "date_label": "January 2015",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Legacy supplier/redline decision",
+      "summary": "January2015 redlines predated Erik; source 3D did not incorporate them; decision retained Prompt metal supplier. Limit: Erik said no queued changes; do not claim he closed legacy drawing debt.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ]
+    },
+    {
+      "id": "R56",
+      "date": "2015-02-10",
+      "date_label": "February 10–11, 2015",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Place later cosmetic findings in their batch context",
+      "summary": "Forster reports eight flawed bezels among 32 on hand with uncertain age/history; Wang reports none in 120 parts checked and adds the issue to inspection. Limit: Later team context, not a production-yield figure, verified molding cause, Erik remedial design or completed delivery.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-b207a2357d4c"
+      ],
+      "end_date": "2015-02-11"
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "scope": "Exact current reader wording, date labels, order, states and credit. Dates retain their displayed precision. Source-only material remains private; visualization is not claim approval or publication.",
+    "source_chronologies": [
+      "EV-b207a2357d4c"
+    ]
+  }
+}

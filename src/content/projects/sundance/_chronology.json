@@ -1,0 +1,245 @@
+{
+  "schema_version": "1.0",
+  "project": "sundance",
+  "title": "Development timeline",
+  "start": "2014-06",
+  "end": "2015-10",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2014-06",
+      "end": "2015-10"
+    },
+    {
+      "id": "undated",
+      "label": "Undated records",
+      "start": "",
+      "end": ""
+    }
+  ],
+  "events": [
+    {
+      "id": "sundance-7ab129000e52",
+      "date": "2014-06",
+      "date_label": "June–July 2014",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Develop front-access concept",
+      "summary": "concept/ID review Credit: Kaleidescape; Function/ID partners.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a6f632e42109"
+      ],
+      "end_date": "2014-07"
+    },
+    {
+      "id": "sundance-911d218c4d9c",
+      "date": "2014-08-30",
+      "date_label": "August 30, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Review board-to-enclosure interfaces",
+      "summary": "Connector-model checks, overhang and mounting-clearance questions for hardware coordination. Credit: Erik; Kaleidescape hardware team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a6f632e42109"
+      ]
+    },
+    {
+      "id": "sundance-e16d3771253d",
+      "date": "2014-10-08",
+      "date_label": "October 8-22, 2014",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Review the removable-front construction with Nissha",
+      "summary": "Supplier DFM, engineering explanation and supplier response on threaded inserts, visible surfaces and parting lines. Credit: Erik; Nissha; Rob Wudrick for artwork.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a6f632e42109"
+      ],
+      "end_date": "2014-10-22"
+    },
+    {
+      "id": "sundance-3463335f14a3",
+      "date": "2014-10",
+      "date_label": "October–November 2014; February 2015 follow-up",
+      "date_basis": "Month-range source label; no exact endpoint days inferred. Recorded, reported, planned and follow-up qualifiers in the date label remain separate.",
+      "title": "Review rail toolability",
+      "summary": "quote/DFM Credit: Supplier; engineering.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a6f632e42109"
+      ],
+      "end_date": "2014-11"
+    },
+    {
+      "id": "sundance-49f09958448b",
+      "date": "2015-01",
+      "date_label": "January 2015",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Coordinate bezel/frame and retention work",
+      "summary": "assigned work Credit: Erik; Function.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a6f632e42109"
+      ]
+    },
+    {
+      "id": "sundance-ab494d4ced02",
+      "date": "2015-01",
+      "date_label": "January 2015",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Define elastomer contact and shoulder screws",
+      "summary": "design assignments/assembly definition Credit: Erik; team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a6f632e42109"
+      ]
+    },
+    {
+      "id": "sundance-bad81c5ab2ff",
+      "date": "2015-01-15",
+      "date_label": "January 15, 2015",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Review snap/connector tolerance loop",
+      "summary": "earlier analysis configuration Credit: T.DeArk analysis; C.Davis check.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a6f632e42109"
+      ]
+    },
+    {
+      "id": "sundance-7fea7e4bbc7c",
+      "date": "2015-02-06",
+      "date_label": "February 6, 2015",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Mechanical files and BOM changes released",
+      "summary": "Effective ECO; prototype build quoting still requested Credit: Arena change notice; MASS supplier correspondence; cross-functional BOM.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a6f632e42109"
+      ]
+    },
+    {
+      "id": "sundance-ee230f3ea16b",
+      "date": "2015-02-09",
+      "date_label": "February 9-16, 2015",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Review how the front and rail would mold",
+      "summary": "Supplier DFM proposals for hook release, thin tool steel, filling and local deformation; adoption remains separate. Credit: Yomura tool engineering; engineering review.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a6f632e42109"
+      ],
+      "end_date": "2015-02-16"
+    },
+    {
+      "id": "sundance-5242cadee32b",
+      "date": "2015-02",
+      "date_label": "February 2015",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Investigate formed-part interference",
+      "summary": "sample inspection Credit: AFT; engineering.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a6f632e42109"
+      ]
+    },
+    {
+      "id": "sundance-a496edca0d50",
+      "date": "2015-02-26",
+      "date_label": "February 26, 2015",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Acknowledge unpainted-parts instruction",
+      "summary": "supplier acknowledgement Credit: Erik instruction; Jason Prior; Nathan concern; Mark support.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a6f632e42109"
+      ]
+    },
+    {
+      "id": "sundance-3b059dfae22f",
+      "date": "2015-03-05",
+      "date_label": "March 5, 2015; March 9 planned",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged. Recorded, reported, planned and follow-up qualifiers in the date label remain separate.",
+      "title": "Arrange CAD-data handoff",
+      "summary": "arrangement for future handoff Credit: Erik; handoff participants.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a6f632e42109"
+      ]
+    },
+    {
+      "id": "sundance-f4f08ff06551",
+      "date": "2015-10",
+      "date_label": "October 2015",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Announce public Encore family roles",
+      "summary": "company announcement Credit: Kaleidescape.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a6f632e42109"
+      ]
+    },
+    {
+      "id": "sundance-d58bb6ee2f15",
+      "date": "",
+      "date_label": "Date not established",
+      "date_basis": "Date not established; no calendar coordinate assigned.",
+      "title": "Take snap/SATA correction into production",
+      "summary": "accepted qualitative outcome Credit: Erik; cross-functional team.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a6f632e42109"
+      ]
+    },
+    {
+      "id": "sundance-da8ac7e356c5",
+      "date": "",
+      "date_label": "Date not established",
+      "date_basis": "Date not established; no calendar coordinate assigned.",
+      "title": "Take flange/rail-fit correction into production",
+      "summary": "accepted qualitative outcome Credit: Erik; cross-functional team.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-a6f632e42109"
+      ]
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "scope": "Exact current reader wording, date labels, order, states and credit. Dates retain their displayed precision. Source-only material remains private; visualization is not claim approval or publication.",
+    "source_chronologies": [
+      "EV-a6f632e42109"
+    ]
+  }
+}

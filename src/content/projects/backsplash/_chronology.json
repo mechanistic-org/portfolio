@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "project": "backsplash",
+  "title": "Development timeline",
+  "start": "2021-07-21",
+  "end": "2021-11-02",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2021-07-21",
+      "end": "2021-11-02"
+    },
+    {
+      "id": "undated",
+      "label": "Undated records",
+      "start": "",
+      "end": ""
+    }
+  ],
+  "events": [
+    {
+      "id": "backsplash-light-ring",
+      "date": "2021-07-21",
+      "date_label": "July 21, 2021",
+      "title": "LIGHT_RING geometry defined",
+      "summary": "The drawing specifies a 4 mm band and separate thickness dimensions; the tentative ID width belongs to a different record. Credit: Erik Norris.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84c8f414b132"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "backsplash-display-pcb",
+      "date": "2021-08-25",
+      "date_label": "August 25, 2021",
+      "title": "DISPLAY_PCB requirements",
+      "summary": "The mechanical sheet records edge, cleanliness, hole-control and model-based definition requirements; formal release is unestablished. Credit: Erik Norris.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84c8f414b132"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "backsplash-assembled-record",
+      "date": "2021-11-02",
+      "date_label": "November 2, 2021",
+      "title": "Display hardware photographed",
+      "summary": "The bench board, repeated rear mounting grid and illuminated front array are recorded in photographs; they do not establish qualification. Credit: Hyphen project photographs; builder unassigned.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84c8f414b132"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "backsplash-ownership",
+      "date": "",
+      "date_label": "Undated",
+      "title": "Cabinet-electronics integration",
+      "summary": "Erik owned the subsystem integrating cabinet power supplies, controllers, communications and the display interface. Credit: Erik Norris; EE and ID contributions remain distinct.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84c8f414b132"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "backsplash-common-assembly",
+      "date": "",
+      "date_label": "Undated",
+      "title": "Common display assembly planned",
+      "summary": "The estimate calls for one display assembly across six module configurations and a grid-deflection check. The work is planned, without a recorded pass. Credit: Team interface inputs within Erik’s subsystem scope.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84c8f414b132"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "backsplash-optical-mask-alternatives",
+      "date": "",
+      "date_label": "Undated",
+      "title": "Optical part-count alternatives",
+      "summary": "A discussion proposes a separate dead-front mask and asks whether printing on the glass could remove it. No final construction is selected in the record. Credit: Design discussion; author and supplier decision unassigned.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-84c8f414b132"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "source_chronology": "EV-84c8f414b132",
+    "scope": "Exact producer reader selection; richer material findings and omitted events retained in registered chronology. No new dates or claims inferred by rendering."
+  }
+}

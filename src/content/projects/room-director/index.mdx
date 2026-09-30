@@ -117,23 +117,23 @@ cyberspace:
 job_title: mechanical_engineer
 ---
 
-# Room Director: making the glass interface buildable
-
 ## A glass surface with a mechanical job
 
 Room Director, known internally as Sativa, put a touch display behind a curved glass face on NOON's wall-mounted lighting controller. The apparent simplicity depended on a compact stack: cover glass and touch sensor, AMOLED display and flex circuits, molded front housing, and the rear enclosure and contacts. The front had to look continuous while leaving room for the display, sensors, bonding and mechanical retention.
 
 My role was Locoroll-side mechanical design and reliability leadership for the enclosure and its interfaces. I worked across the product, industrial-design, electrical, firmware, test and manufacturing teams. FIH's assembly instructions, supplier drawings and test reports show the factory's part of that work; the engineering drawings identify individual authors where the record permits. Sativa shared development records with the Elvis extension switch, but its glass-and-display stack was a distinct mechanical problem.
 
-The [May assembly instructions](/assets/room-director/full-pass-250/touch-assembly.webp) make that architecture visible. A Sativa-specific fixture places the touch module onto the front housing. Separate steps manage the OLED flex, gasket and internal connections. The glass could not be designed independently of the features and operations behind it. {/* ^[evidence:LK-069e42bb] ^[evidence:LK-fe9c8ace] */}
+The [May assembly instructions](/assets/room-director/full-pass-250/touch-assembly.webp) make that architecture visible. A Sativa-specific fixture places the touch module onto the front housing. Separate steps manage the OLED flex, gasket and internal connections. The glass could not be designed independently of the features and operations behind it. 
 
 ## Retaining the housing while clearing the display
+
+The interface work also reached the optical details behind the glass. An undated EVT2 issue map identifies sensor windows that were too visible, misalignment between the viewing and active areas, and a gap at the lower glass-to-plastic junction. It records proposed responses including IR film at the sensor openings and shifting the viewing area. These are development issues and proposed changes; the map does not establish the final released optical stack.
 
 The [February EVT2 hinge comparison](/assets/room-director/full-pass-250/hinge-change.webp) shows how small housing details carried different jobs. SAT-146 changes the snap hinge toward a full circular engagement, removes a chamfer and adds a strengthening rib. Another view adds paired features for restraint along the y-axis. These are changes to engagement and location, rather than a generic instruction to make the housing stronger.
 
 The same report calls out a separate [0.50 mm front-housing change](/assets/room-director/full-pass-250/display-clearance.webp) to avoid interference with the AMOLED. That detail is specific to packaging the display. Increasing engagement at a hinge and providing clearance around a fragile module have to coexist in the same compact enclosure. A feature that improves one interface can consume space needed by another.
 
-The figures document the proposed EVT2 changes and their stated purposes. They do not, on their own, establish which change caused a later test outcome. The report also includes Elvis-only dimmer-key work, which is separate from the Sativa geometry shown here. {/* ^[evidence:LK-b792e126] */}
+The figures document the proposed EVT2 changes and their stated purposes. They do not, on their own, establish which change caused a later test outcome. The report also includes Elvis-only dimmer-key work, which is separate from the Sativa geometry shown here. 
 
 ## Bonding required a controlled assembly process
 
@@ -141,7 +141,11 @@ Touch-panel lift was tracked as SAT-114. By the May 8 action review, the team re
 
 The assembly instructions turn the bond into an operation: [dispense FC1682b along a defined path](/assets/room-director/full-pass-250/glue-process.webp), pre-fix the OLED flex, place the touch module with its fixture, then hold the front housing and module [in a screw clamping jig for at least five hours](/assets/room-director/full-pass-250/clamp-process.webp). The glue path, placement and clamped hold are all part of the assembly definition. Merely naming an adhesive would leave the process incomplete.
 
-This is also why the targeted SAT-114 checks need to remain distinct from the complete-device drop campaigns. A bonded subassembly can pass its local check while another interface still rattles, cracks or loses function under a later test. {/* ^[evidence:LK-17e30be8] ^[evidence:LK-fe9c8ace] */}
+This is also why the targeted SAT-114 checks need to remain distinct from the complete-device drop campaigns. A bonded subassembly can pass its local check while another interface still rattles, cracks or loses function under a later test. 
+
+The retained instruction files also preserve different stages of that process. The earlier Sativa instruction pages specify a 0.4 MPa, 20-second press under a December 2016 preparation date. The later deck contains separately dated pages for clamping, OLED-flex pre-fixing and glue dispensing. Those are instruction states, not a single factory introduction date or evidence of my involvement in 2016.
+
+The DVT bill of materials preserves another view of this evolving interface. Its history records a Mylar addition for Sativa LCM assembly on April 20, then cancellation of the older cap-front adhesive entry on May 8 and addition of a front-housing adhesive entry on May 9. Those are documented BOM changes. They do not identify the Mylar used in the separate undated hinge-noise investigation or establish the final configuration of the July drop-test samples.
 
 ## Defining the surface and how to inspect it
 
@@ -149,15 +153,19 @@ The glass needed an appearance reference as well as geometry. I am identified as
 
 The drawing separates free-state flatness from dimensions controlled in the constrained condition after surface treatment. It also distinguishes first-article inspection, incoming inspection and marked capability dimensions, with video measurement as the default unless a feature requires another method. These instructions describe how a supplier should establish conformance, not just the nominal shape it should reproduce.
 
-A May supplier-drawing redline makes a related distinction: split the glass part drawing from the touch-panel assembly drawing, and avoid duplicating the part dimensions on the assembly. The working drawing-review notes similarly call for functional inspection and correspondence between first-article reports and tolerance stacks. The handoff needed usable part identities, revisions and measurement instructions alongside CAD. {/* ^[evidence:LK-fe072066] ^[evidence:LK-e0ef484c] ^[evidence:LK-cf742d12] */}
+A May supplier-drawing redline makes a related distinction: split the glass part drawing from the touch-panel assembly drawing, and avoid duplicating the part dimensions on the assembly. The working drawing-review notes similarly call for functional inspection and correspondence between first-article reports and tolerance stacks. The handoff needed usable part identities, revisions and measurement instructions alongside CAD. 
 
-The bronze finish also had its own reference. Drawing 041-00008, which likewise carries my authorship and approval, specifies metallic paint over the Sativa bronze PC/ABS reference and a VDI-15 texture. This is a different material-and-finish definition from the Elvis cap's matte-UV discussions in the shared tracker. {/* ^[evidence:LK-d0761c2f] */}
+The bronze finish also had its own reference. Drawing 041-00008, which likewise carries my authorship and approval, specifies metallic paint over the Sativa bronze PC/ABS reference and a VDI-15 texture. This is a different material-and-finish definition from the Elvis cap's matte-UV discussions in the shared tracker. 
+
+A retained bronze color comparison shows why a reference still mattered when considering a material change. Four measurements of textured and untextured SABIC 117314 chips are marked FAIL against the original samples, with each recorded as darker. The comparison documents an evaluated alternative, not a completed color match or a decision to eliminate the painted finish.
+
+The earlier incoming-inspection record keeps acceptance decisions separate from correction. A bronze-front-housing entry records burr and dimensional concerns, a deviation waiver and a new tool planned before DVT. Closing that entry documented its disposition; it did not establish that a later lot had been corrected or passed the device reliability tests.
 
 ## A shared label problem with several possible fixes
 
 The Sativa/Elvis rear-label review shows another interface that was easy to underestimate. Corners around the serial-number notch lifted, concentrating the problem at a small geometric interruption in the label.
 
-The February discussion compares a stronger adhesive with changes to the notch, serial-number printing and label construction. FIH also discusses clamping and the practical constraints of producing the proposed labels. The report records one passed adhesive sample while two others were still under test. It is useful evidence of alternatives and supplier negotiation; the retained file does not establish a final validated label solution. {/* ^[evidence:LK-5349f8b4] ^[evidence:LK-958d2d0f] */}
+The February discussion compares a stronger adhesive with changes to the notch, serial-number printing and label construction. FIH also discusses clamping and the practical constraints of producing the proposed labels. The report records one passed adhesive sample while two others were still under test. It is useful evidence of alternatives and supplier negotiation; the retained file does not establish a final validated label solution. 
 
 ## What the complete-device tests demonstrated
 
@@ -165,15 +173,19 @@ The main drop method used a 1.3 m height, six faces and four corners, over hardw
 
 The later DVT records extend that history. In the July 4 report, all six listed Sativa samples have rattle observations, and Sativa #27 also has an LCM-crack observation. Their function-test rows pass, while the report's overall result is FAIL. The [July 10 fixture photographs](/assets/room-director/full-pass-250/drop-fixture.webp) show the physical setup. On that date, a smaller set of two Sativa and two Elvis samples returns PASS: both Sativa units record OK for the ten drop directions and pass the function check. The DVT cover sheets state safety-focused acceptance criteria.
 
-That smaller pass is a real result for the recorded samples. The available reports do not tie it to a complete as-built revision history or establish final qualification of every released unit. The record supports showing the progression, including its change in sample size, without assigning a causal victory to one housing or adhesive change. {/* ^[evidence:LK-06f48f7f] ^[evidence:LK-6e6a5752] ^[evidence:LK-f644dabb] ^[evidence:LK-542e0313] ^[evidence:LK-7625cbc3] */}
+That smaller pass is a real result for the recorded samples. The available reports do not tie it to a complete as-built revision history or establish final qualification of every released unit. The record supports showing the progression, including its change in sample size, without assigning a causal victory to one housing or adhesive change. 
 
-A separate household-chemical campaign passed across fourteen Sativa and fourteen Elvis samples, using four hours at 25 C followed by 72 hours at 45 C and periodic appearance and function checks. That result establishes performance under its own exposure method. It neither resolves nor inherits the drop campaign's failures. {/* ^[evidence:LK-07947e21] */}
+An undated micro-drop investigation provides a narrower example of how a symptom was examined. The report names a dropped Sativa sample, compares its right-hinge position with an untested sample and attributes the shaking noise to movement at that interface. It records no sound after adding 0.1 mm Mylar in the investigated assembly. This is a local diagnostic check recorded by the report, without identified individual authorship, a released part change or a demonstrated connection to the July 10 drop pass.
+
+A separate household-chemical campaign passed across fourteen Sativa and fourteen Elvis samples, using four hours at 25 C followed by 72 hours at 45 C and periodic appearance and function checks. That result establishes performance under its own exposure method. It neither resolves nor inherits the drop campaign's failures. 
 
 ## Engineering the interfaces through the handoff
 
 The work connected a premium glass surface to the details needed to build it: housing engagement, display clearance, adhesive placement, fixtures, appearance references and inspection definitions. The test record then made it possible to discuss those interfaces against observed hardware behavior.
 
-My involvement continued from my initial hiring through the company's dissolution and purchase by Savant. I was there with the team on launch day, ringing the gong. The contribution was mechanical design and reliability leadership within that shared effort, continuing beyond the individual test packets shown here. {/* ^[evidence:EV-1839de0e490c] */}
+Document delivery was part of that work too. The naming and delivery procedure, drawing reviews and returned-file checks tied part identities to the supplier package. July checks still found mapping, naming and revision work in progress, so a readable package was not equivalent to a completed engineering release.
+
+My involvement continued from my initial hiring through the company's dissolution and purchase by Savant. I was there with the team on launch day, ringing the gong. The contribution was mechanical design and reliability leadership within that shared effort, continuing beyond the individual test packets shown here. 
 
 NOON publicly launched the system on October 26, 2017, with Room Director available separately and in the starter kit. The system received a 2018 Red Dot Product Design award, credited to NOON's in-house design team. Those are product and team outcomes; the test samples above do not establish shipment quantities or a complete final-build qualification. [NOON launch announcement](https://www.globenewswire.com/news-release/2017/10/26/1154179/0/en/Noon-Home-Inc-Brings-Professional-Quality-Layered-Lighting-Directly-to-Consumers.html), [Red Dot project record](https://www.red-dot.org/project/noon-23465/).
 
@@ -184,3 +196,34 @@ The later service history matters for a connected product. Savant's notice disco
 The selected figures come from the original Sativa product render, the February EVT2 engineering-change report, the May assembly instructions, the June glass appearance specification and the July DVT test binder. Captions identify drawings, instructions and physical test photographs separately. The account also uses the dated action review, label alternatives, supplier redlines and original reliability worksheets.
 
 NOON/Locoroll, FIH and the supplier engineering teams produced this shared record. Drawing authorship supports the specific contribution described above; it does not assign sole ownership of the product or independent test execution.
+
+## Proposed development timeline
+
+Plans, document revisions, sample tests and product outcomes retain their separate dates and states.
+
+- **2017-02-14 - Hinge and display-clearance changes.** The EVT2 report proposes fuller hinge engagement and a separate front-housing change for AMOLED clearance. Credit: Shared engineering report.
+- **2017-03-23 - Incoming housing disposition.** The bronze-front-housing entry records inspection concerns, a deviation waiver and a new tool planned before DVT. Closure of the entry does not establish corrected later hardware. Credit: Incoming inspection record; Yvonne Lai waiver.
+- **2017-04-20 - LCM assembly revision.** The BOM history records a Mylar addition; it does not identify the material in the undated hinge-noise check. Credit: Shared BOM record.
+- **2017-05-08 - Touch-panel lift action.** The action review reports three glued samples passing a wood-floor drop check and three passing thermal shock. The review date does not supply the individual test dates. Credit: FIH Kelvin, SAT-114.
+- **2017-05-08/2017-05-09 - Front adhesive entries change.** The BOM history cancels an older cap-front adhesive entry and adds a front-housing adhesive entry. These are document revisions, without a final test-configuration join. Credit: Shared BOM record.
+- **2017-05-10 - Bonding operation documented.** The assembly instructions define glue dispensing, fixture placement and at least five hours of clamping. Separately dated pages retain their own instruction states. Credit: FIH.
+- **2017-05-31 - Bronze alternative compared.** The filename-dated comparison marks four textured and untextured chip measurements FAIL and darker than the original samples. It does not establish a final color match. Credit: Unsigned comparison.
+- **2017-06-21 - Glass appearance and inspection reference.** Revision 3 defines the glass finish and inspection conditions, distinguishing appearance specification 041-00004 from physical part 431-00004. Credit: Erik Norris, author and approver.
+- **2017-07-04 - DVT drop report fails.** All six listed Sativa have rattle; Sativa #27 has an LCM crack; function PASS, overall FAIL. No final-build inference. Credit: FIH, Sativa subset.
+- **2017-07-10 - Smaller drop set passes.** Two Sativa/two Elvis PASS under safety criteria; different set, no universal qualification. Credit: FIH.
+- **2017-10-26 - NOON public launch.** NOON announced the lighting system, with Room Director available separately and in the starter kit. Erik recalls joining the launch-day celebration. Credit: NOON team.
+- **2018 - Team design award.** The NOON lighting system receives a Red Dot Product Design award, credited to the in-house design team. Credit: NOON in-house design team.
+- **2023-02-28 - Standalone service sunset.** Savant discontinues the standalone app and cloud service, while local load control and support for Savant Pro integrations remain. Credit: Savant notice.
+
+### Undated records
+
+These records have no established calendar position.
+
+- **Undated - Personal involvement through transition.** Erik recalls involvement from initial hiring through dissolution and the Savant purchase. The recollection supplies no exact personal end date. Credit: Erik Norris.
+
+### Optional additional context
+
+These supporting records remain separate from the main development sequence.
+
+- **2016-12-15 - Earlier press instruction.** The earlier instruction specifies a 0.4 MPa, 20-second press under a December 2016 preparation date. That is a document state, not an employment start or confirmed factory introduction. Credit: FIH.
+- **Undated - Local hinge-noise check.** The undated report compares a dropped Sativa with an untested sample and records no sound after adding 0.1 mm Mylar. It does not join that local check to the July 10 pass. Credit: Unidentified report author.

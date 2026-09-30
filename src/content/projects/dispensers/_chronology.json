@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "project": "dispensers",
+  "title": "Development timeline",
+  "start": "2021",
+  "end": "2024-05-23",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2021-11-16",
+      "end": "2022-07-11"
+    },
+    {
+      "id": "context",
+      "label": "Additional context",
+      "start": "2021",
+      "end": "2024-05-23"
+    }
+  ],
+  "events": [
+    {
+      "id": "dispensers-drive-options",
+      "date": "2021-11-16",
+      "date_label": "November 16, 2021",
+      "title": "Drive alternatives photographed",
+      "summary": "The whiteboard compares separate auger and door motors with coupled outlet options; identified concerns remain questions. Credit: Study author unassigned.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-9ed6a1f78395"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "dispensers-concepts",
+      "date": "2021-11-17",
+      "date_label": "November 17, 2021",
+      "title": "Concept studies photographed",
+      "summary": "Erik-labelled sheets explore augers, cone augers, lead screws and paddles. The date records the photographs. Credit: Erik Norris, as labelled on the concept sheets.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-9ed6a1f78395"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "dispensers-six-chute",
+      "date": "2022-07-08",
+      "date_label": "July 8, 2022",
+      "title": "Six-outlet tabletop photographed",
+      "summary": "The physical build shows tapered chutes and separate curved doors beneath the outlets. Credit: Hyphen project photograph; build ownership unassigned.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-9ed6a1f78395"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "dispensers-ingredient-setups",
+      "date": "2022-07-11",
+      "date_label": "July 11, 2022",
+      "title": "Ingredient setups photographed",
+      "summary": "Beans and shredded cheese appear in transparent clamped chute setups. The local capture date is July 11; measured accuracy and endurance are not established. Credit: Hyphen project photographs; testing ownership unassigned.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-9ed6a1f78395"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "dispensers-cleaning",
+      "date": "2021",
+      "date_label": "2021",
+      "title": "Removal and cleaning described",
+      "summary": "Hyphen’s product sheet describes tool-free removal and commercial washing; separate wash-rack photographs have no established event date. Credit: Hyphen company description and project photographs.",
+      "phase": "context",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-9ed6a1f78395"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "dispensers-patent",
+      "date": "2024-05-23",
+      "date_label": "May 23, 2024",
+      "title": "Joint patent application published",
+      "summary": "The disclosure explains the curved outlet door and a six-chute example; publication does not qualify the photographed prototypes. Credit: Daniel Fukuba, Erik Norris, Maneesh Jain, Mark Manfrey, John Vassa and Keegan Schoch.",
+      "phase": "context",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-9ed6a1f78395"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "source_chronology": "EV-9ed6a1f78395",
+    "scope": "Exact producer reader selection; richer material findings and omitted events retained in registered chronology. No new dates or claims inferred by rendering."
+  }
+}

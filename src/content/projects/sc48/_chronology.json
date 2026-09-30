@@ -1,0 +1,693 @@
+{
+  "schema_version": "1.0",
+  "project": "sc48",
+  "title": "Development chronology - working selection",
+  "start": "2007-02-28",
+  "end": "2008-04-10",
+  "phases": [
+    {
+      "id": "brief",
+      "label": "Integration and architecture",
+      "start": "2007-02-28",
+      "end": "2007-10-22"
+    },
+    {
+      "id": "interfaces",
+      "label": "Controls, boards and enclosure interfaces",
+      "start": "2007-10-02",
+      "end": "2008-04-10"
+    },
+    {
+      "id": "thermal",
+      "label": "Thermal, acoustic and EM trials",
+      "start": "2007-11-14",
+      "end": "2007-12-07"
+    },
+    {
+      "id": "fabrication",
+      "label": "Fabrication definition",
+      "start": "2008-02-08",
+      "end": "2008-02-08"
+    }
+  ],
+  "events": [
+    {
+      "id": "sc48-integrated-brief",
+      "date": "2007-02-28",
+      "date_label": "2007-02-28",
+      "date_basis": "Printed date in the reviewed requirements record.",
+      "title": "The integrated-console requirement",
+      "summary": "Requirements preferred processing and I/O in the console, with a rack alternative if needed. Cost, size and reliability values are targets, not measured outcomes.",
+      "phase": "brief",
+      "category": "required",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Product requirements; not an Erik start-date or sole-author record.",
+      "anchor": "reuse-set-the-packaging-problem",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-high-reuse",
+      "date": "2007-06-21",
+      "date_label": "2007-06-21",
+      "date_basis": "Date printed on block diagram and companion breakout.",
+      "title": "High reuse made packaging the integration problem",
+      "summary": "The preliminary plan couples a Mini-ITX host and PCI extender to reused mix engines, Hub48 and I/O. Top-surface boards were still poorly defined.",
+      "phase": "brief",
+      "category": "proposed",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Architecture team; reused electronics not attributed to Erik.",
+      "anchor": "reuse-set-the-packaging-problem",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-delta-mainio-review",
+      "date": "2007-10-02",
+      "date_label": "2007-10-02",
+      "date_basis": "Date printed in revision table, visually verified in the heldPDF.",
+      "title": "Main-I/O interface prepared for review",
+      "summary": "The main-I/O assembly drawing DCD-9150-58340-00 carries a FOR REVIEW revision. It records an early connector/board interface state before the selected thermal-trial sequence.",
+      "phase": "interfaces",
+      "category": "drawing_for_review",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-4bbef5fe4051"
+      ],
+      "verification_note": "EN recorded in prepared/checked or revision approval fields; bounded mechanical/electrical interface documentation, with electronic design shared. Drawing record only; no manufactured board, product release, circuit-design ownership or personal handoff inferred.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-prototype-metal",
+      "date": "2007-10-22",
+      "date_label": "2007-10-22",
+      "date_basis": "Prototype drawing title block date.",
+      "title": "Prototype folded structure",
+      "summary": "The prototype 4U rake-back I-beam drawing defines a folded and perforated section; its prototype state and prepared pd / checked en credit remain explicit.",
+      "phase": "brief",
+      "category": "prototype_defined",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Prepared pd; checked en; names not expanded from initials.",
+      "anchor": "reuse-set-the-packaging-problem",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-plenum-trials",
+      "date": "2007-11-14",
+      "date_label": "2007-11-14 to 2007-11-16 (source filename)",
+      "date_basis": "Calendar labels from original filenames; acquisition tables supply elapsed seconds, not calendar dates.",
+      "title": "Plenum geometry, cabling, vents and fan voltage",
+      "summary": "Run notes change plenum tilt, taped openings, cable position and ADC venting. These are interdependent interventions, not isolated fan-voltage trials.",
+      "phase": "thermal",
+      "category": "tested",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "end_date": "2007-11-16",
+      "verification_note": "SC48 engineering test record; workbook operator not established.",
+      "anchor": "lower-profiles-and-different-airflow-paths",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-4u-weekly-qualified",
+      "date": "2007-11-16",
+      "date_label": "2007-11-16 (source filename)",
+      "date_basis": "Weekly report filename supplies report date; described completed/planned activity may precede/follow it.",
+      "title": "4U work continued while 3U was still planned",
+      "summary": "Weekly wording calls the 4U rake configuration fully qualified with problems identified and mostly solved, while planning 3U qualification. Later reports qualify what this statement can mean.",
+      "phase": "thermal",
+      "category": "reported_qualification_scoped",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Shared thermal engineering; reporting is not complete product qualification.",
+      "anchor": "lower-profiles-and-different-airflow-paths",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-side-inlet-large-fan",
+      "date": "2007-11-19",
+      "date_label": "2007-11-19 to 2007-11-28 (source filename)",
+      "date_basis": "Calendar labels from original filenames; acquisition tables supply elapsed seconds, not calendar dates.",
+      "title": "Inlet changes and larger-fan trials",
+      "summary": "Side-inlet changes and 120 mm fan trials followed at several voltages. Hardware monitoring was named in later files.",
+      "phase": "thermal",
+      "category": "tested",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "end_date": "2007-11-28",
+      "verification_note": "SC48 engineering test record; workbook operator not established.",
+      "anchor": "lower-profiles-and-different-airflow-paths",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-4u-em-tradeoff",
+      "date": "2007-11-30",
+      "date_label": "2007-11-30 (source filename)",
+      "date_basis": "Weekly report filename supplies report date; described completed/planned activity may precede/follow it.",
+      "title": "Thermal and acoustic success did not close EM",
+      "summary": "One 80 mm plus one 120 mm 4U arrangement was reported thermally and acoustically OK. Preliminary EM testing found significant noise with PS under ADCs and required more sheet metal for continued testing.",
+      "phase": "thermal",
+      "category": "tested_with_unresolved_issue",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Erik Norris with Digidesign engineering, validation and sourcing.",
+      "anchor": "lower-profiles-and-different-airflow-paths",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-3u-crossflow",
+      "date": "2007-12-04",
+      "date_label": "2007-12-04 to 2007-12-05 (source filename)",
+      "date_basis": "Calendar labels from original filenames; acquisition tables supply elapsed seconds, not calendar dates.",
+      "title": "3U crossflow, filters and side covers",
+      "summary": "Two-in/two-out fan trials included filters and side covers. The 12-5c header records voltage change at 4500 s and vents at 6500 s but contradicts itself on side-cover presence.",
+      "phase": "thermal",
+      "category": "tested",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "end_date": "2007-12-05",
+      "verification_note": "SC48 engineering test record; workbook operator not established.",
+      "anchor": "lower-profiles-and-different-airflow-paths",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-3u-frontback",
+      "date": "2007-12-06",
+      "date_label": "2007-12-06 (source filename)",
+      "date_basis": "Calendar labels from original filenames; acquisition tables supply elapsed seconds, not calendar dates.",
+      "title": "Three-fan front-to-back trials",
+      "summary": "Three internal fans were evaluated front-to-back at 12 V and 8.5 V; one header records changing to 8.5 V at 3800 s.",
+      "phase": "thermal",
+      "category": "tested",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "SC48 engineering test record; workbook operator not established.",
+      "anchor": "lower-profiles-and-different-airflow-paths",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-hybrid-run",
+      "date": "2007-12-07",
+      "date_label": "2007-12-07 (source filename)",
+      "date_basis": "Calendar labels from original filenames; acquisition tables supply elapsed seconds, not calendar dates.",
+      "title": "Hybrid trials retain within-run changes",
+      "summary": "The hybrid run records 8.5 V then 12 V at 3000 s. Other large channel transitions remain unattributed; summary rows sample different moments in the same run.",
+      "phase": "thermal",
+      "category": "tested",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "SC48 engineering test record; workbook operator not established.",
+      "anchor": "lower-profiles-and-different-airflow-paths",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-3u-hybrid-report",
+      "date": "2007-12-07",
+      "date_label": "2007-12-07 (source filename)",
+      "date_basis": "Weekly report filename supplies report date; described completed/planned activity may precede/follow it.",
+      "title": "3U and hybrid reopened the packaging choice",
+      "summary": "Crossflow worked without filter/sidecap and failed with them. Three-fan front-to-back worked at 12 V and 8.5 V; EM looked better and acoustic verification remained due. A 3U-back/4U-front hybrid was built and looked promising.",
+      "phase": "thermal",
+      "category": "tested_acoustics_pending",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Erik Norris with Digidesign engineering, validation and sourcing.",
+      "anchor": "lower-profiles-and-different-airflow-paths",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-portwell-prelim",
+      "date": "2007-12-14",
+      "date_label": "2007-12-14 (source filename)",
+      "date_basis": "Weekly report filename supplies report date; described completed/planned activity may precede/follow it.",
+      "title": "PCI extension required a physical interface",
+      "summary": "Meeting with Portwell led to preliminary PCI-extender PCB drawings, with delivery still planned.",
+      "phase": "interfaces",
+      "category": "in_development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Erik Norris with Digidesign engineering, validation and sourcing.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-delta-pci-preliminary",
+      "date": "2007-12-18",
+      "date_label": "2007-12-18",
+      "date_basis": "Date printed in revision table, visually verified in the heldPDF.",
+      "title": "PCI-extender preliminary drawing",
+      "summary": "The PCI-extender drawing 9150-58330-00 records PRELIMINARY RELEASE on December 18. The existing December 21 weekly report separately records issue to Portwell.",
+      "phase": "interfaces",
+      "category": "preliminary_drawing_release",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-4bbef5fe4051"
+      ],
+      "verification_note": "EN recorded in prepared/checked or revision approval fields; bounded mechanical/electrical interface documentation, with electronic design shared. Drawing record only; no manufactured board, product release, circuit-design ownership or personal handoff inferred.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-extender-release",
+      "date": "2007-12-21",
+      "date_label": "2007-12-21 (source filename)",
+      "date_basis": "Weekly report filename supplies report date; described completed/planned activity may precede/follow it.",
+      "title": "The PCI-extender DCD was issued",
+      "summary": "Initial PCI-extender DCD was released to Portwell; three plastic scenarios were beginning and test data was presented to a strategy committee.",
+      "phase": "interfaces",
+      "category": "released_to_partner",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Erik Norris with Digidesign engineering, validation and sourcing.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-keepout",
+      "date": "2008-01-10",
+      "date_label": "2008-01-10 (source filename)",
+      "date_basis": "Source filename, consistent with accepted caption; no fabricated hour/day of implementation.",
+      "title": "A keepout constrained control-surface placement",
+      "summary": "The overlay prohibits through-hole components in a marked region. It demonstrates an interface constraint, not an observed assembled collision.",
+      "phase": "interfaces",
+      "category": "constraint_documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Mechanical/electrical interface coordination.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-plastic-scenarios",
+      "date": "2008-01-11",
+      "date_label": "2008-01-11 (source filename)",
+      "date_basis": "Weekly report filename supplies report date; described completed/planned activity may precede/follow it.",
+      "title": "Three plastic directions narrowed to one",
+      "summary": "Three plastic scenarios were presented to Sheldon; the direction derived from Capaldi used left/right sidecaps and a bolster without rear trim. ACS encoder and DCD development continued.",
+      "phase": "interfaces",
+      "category": "direction_selected",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Erik Norris with Digidesign engineering, validation and sourcing.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-dcd-layout-dependency",
+      "date": "2008-01-25",
+      "date_label": "2008-01-25 (source filename)",
+      "date_basis": "Weekly report filename supplies report date; described completed/planned activity may precede/follow it.",
+      "title": "Board outlines waited on the surface layout",
+      "summary": "DCD work reached a dependency on final control-surface layout. Plastic detailing continued while interface definition waited.",
+      "phase": "interfaces",
+      "category": "blocked_by_design_input",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Erik Norris with Digidesign engineering, validation and sourcing.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-delta-pci-outline",
+      "date": "2008-01-31",
+      "date_label": "2008-01-31",
+      "date_basis": "Date printed in revision table, visually verified in the heldPDF.",
+      "title": "PCI-extender outline change proposed",
+      "summary": "Revision 2 of 9150-58330-00 explicitly proposes a PCB outline change. The different outline is visible in the paired drawings; the proposal is not proof that a manufactured board adopted it.",
+      "phase": "interfaces",
+      "category": "drawing_proposal",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-4bbef5fe4051"
+      ],
+      "verification_note": "EN recorded in prepared/checked or revision approval fields; bounded mechanical/electrical interface documentation, with electronic design shared. Drawing record only; no manufactured board, product release, circuit-design ownership or personal handoff inferred.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-filter-mount-detail",
+      "date": "2008-02-01",
+      "date_label": "2008-02-01 (source filename)",
+      "date_basis": "Weekly report filename supplies report date; described completed/planned activity may precede/follow it.",
+      "title": "Air inlet and accessory interfaces developed together",
+      "summary": "Filter, TFT mount and accessory tray were further defined; encoder lightpipe and mouse-tray inputs remained open.",
+      "phase": "interfaces",
+      "category": "in_development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Erik Norris with Digidesign engineering, validation and sourcing.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-duct-quote-package",
+      "date": "2008-02-08",
+      "date_label": "2008-02-08 (source filename)",
+      "date_basis": "Weekly report filename supplies report date; described completed/planned activity may precede/follow it.",
+      "title": "Ducts and filters moved to quotation",
+      "summary": "Fan-duct/filter documentation went out for quote, sheet-metal documentation began, CoGs advanced through Rev 3 and the 9100-level assembly was checked into Intralink.",
+      "phase": "fabrication",
+      "category": "issued_for_quotation",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Erik Norris with Digidesign engineering, validation and sourcing.",
+      "anchor": "airflow-became-a-set-of-parts",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-feb-layout-delta",
+      "date": "2008-02-15",
+      "date_label": "2008-02-15 (source filename)",
+      "date_basis": "Weekly report filename supplies report date; described completed/planned activity may precede/follow it.",
+      "title": "Near release still contained major interface questions",
+      "summary": "Revised artwork was incorporated. Board outlines, motherboard/CPU duct, lightpipe, mouse tray, CD and other interfaces remained active; metal package was delivered to Terri for quotes.",
+      "phase": "interfaces",
+      "category": "in_development_not_released",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Erik Norris with Digidesign engineering, validation and sourcing.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-fullscale-review",
+      "date": "2008-02-22",
+      "date_label": "2008-02-22 (source filename)",
+      "date_basis": "Weekly report filename supplies report date; described completed/planned activity may precede/follow it.",
+      "title": "A full-scale layout connected CAD to product review",
+      "summary": "Top-panel margins were equalized, a 1:1 layout was printed for Product Marketing, and DCD issue awaited layout approval. A duct/filter kit quote and corrected metal package were recorded.",
+      "phase": "interfaces",
+      "category": "reviewed_layout_pending_approval",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Erik Norris with Digidesign engineering, validation and sourcing.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-dcd-r1",
+      "date": "2008-02-25",
+      "date_label": "2008-02-25",
+      "date_basis": "Date printed in drawing revision table.",
+      "title": "Main-left DCD initial release",
+      "summary": "Main-left interface drawing records initial release. Later revisions show why this was the start of controlled iteration.",
+      "phase": "interfaces",
+      "category": "drawing_released",
+      "prominence": "detail",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Prepared/check EN in drawing; electronics design remains shared.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-encoder-demo",
+      "date": "2008-02-29",
+      "date_label": "2008-02-29 (source filename)",
+      "date_basis": "Weekly report filename supplies report date; described completed/planned activity may precede/follow it.",
+      "title": "Encoder approval remained preliminary",
+      "summary": "Main-left and main-right Rev 1 DCDs were reported released. ACS encoder had preliminary approval, with a working demo with David A. planned and an alternate sketch from Sheldon.",
+      "phase": "interfaces",
+      "category": "preliminary_approval_prototype_planned",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Erik Norris with Digidesign engineering, validation and sourcing.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-delta-mainright-controls",
+      "date": "2008-03-03",
+      "date_label": "2008-03-03",
+      "date_basis": "Date printed in revision table, visually verified in the heldPDF.",
+      "title": "Main-right controls and mounting revised",
+      "summary": "The main-right revision 2 entry relocates two mounting holes and adds LEDs and an encoder. Later artwork/layout updates remain separately dated in the same table.",
+      "phase": "interfaces",
+      "category": "drawing_revised",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-4bbef5fe4051"
+      ],
+      "verification_note": "EN recorded in prepared/checked or revision approval fields; bounded mechanical/electrical interface documentation, with electronic design shared. Drawing record only; no manufactured board, product release, circuit-design ownership or personal handoff inferred.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-dcd-r2",
+      "date": "2008-03-05",
+      "date_label": "2008-03-05",
+      "date_basis": "Date printed in drawing revision table.",
+      "title": "Crosshairs added to interface drawing",
+      "summary": "Main-left Rev 2 added crosshairs; this is a drawing update, not a circuit redesign.",
+      "phase": "interfaces",
+      "category": "drawing_revised",
+      "prominence": "detail",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Prepared/check EN; bounded mechanical interface role.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-two-bolsters",
+      "date": "2008-03-07",
+      "date_label": "2008-03-07 (source filename)",
+      "date_basis": "Weekly report filename supplies report date; described completed/planned activity may precede/follow it.",
+      "title": "Two bolster concepts supported the CD decision",
+      "summary": "Full-size and slimline-CD bolsters were prepared for SLA evaluation. Second encoder design and sidecap mouse-tray slot progressed; three of seven metal quotes were reported received.",
+      "phase": "interfaces",
+      "category": "alternatives_in_development",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Erik Norris with Digidesign engineering, validation and sourcing.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-third-encoder",
+      "date": "2008-03-13",
+      "date_label": "2008-03-13 (source filename)",
+      "date_basis": "Weekly report filename supplies report date; described completed/planned activity may precede/follow it.",
+      "title": "A third encoder design followed",
+      "summary": "The second encoder version was finished and a third begun; both CD/bolster alternatives and mouse-tray slot still progressed. Six of seven metal quotes were reported received.",
+      "phase": "interfaces",
+      "category": "iterated",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Erik Norris with Digidesign engineering, validation and sourcing.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-dcd-r3",
+      "date": "2008-03-20",
+      "date_label": "2008-03-20",
+      "date_basis": "Date printed in drawing revision table.",
+      "title": "Board drawing followed artwork placement",
+      "summary": "Main-left Rev 3 updated to match artwork placement.",
+      "phase": "interfaces",
+      "category": "drawing_revised",
+      "prominence": "detail",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Prepared/check EN; no attribution of electronic circuit design.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-dcd-r4",
+      "date": "2008-03-27",
+      "date_label": "2008-03-27",
+      "date_basis": "Date printed in drawing revision table.",
+      "title": "Board drawing followed layout placement",
+      "summary": "Main-left Rev 4 updated to match layout placement.",
+      "phase": "interfaces",
+      "category": "drawing_revised",
+      "prominence": "detail",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Prepared/check EN; no attribution of electronic circuit design.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-encoder-cd-selection",
+      "date": "2008-03-28",
+      "date_label": "2008-03-28 (source filename)",
+      "date_basis": "Weekly report filename supplies report date; described completed/planned activity may precede/follow it.",
+      "title": "Encoder quotation and slimline-CD selection",
+      "summary": "Third encoder version went to quote/prototype; slimline CD was selected for further design. Main-I/O layout Rev 2 and Ping feedback into metal were recorded.",
+      "phase": "interfaces",
+      "category": "selected_and_issued_for_prototype",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Erik Norris with Digidesign engineering, validation and sourcing.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-dcd-r5",
+      "date": "2008-03-31",
+      "date_label": "2008-03-31",
+      "date_basis": "Date printed in drawing revision table.",
+      "title": "Mounting and connector interfaces changed",
+      "summary": "Main-left Rev 5 deletes a mounting hole and moves the 10-pin connector. The table does not establish a field failure or production recall.",
+      "phase": "interfaces",
+      "category": "drawing_revised",
+      "prominence": "detail",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Prepared/check EN; mechanical/electrical interface coordination.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-delta-mainio-connector",
+      "date": "2008-04-01",
+      "date_label": "2008-04-01",
+      "date_basis": "Date printed in revision table, visually verified in the heldPDF.",
+      "title": "Main-I/O connector placement updated",
+      "summary": "DCD-9150-58418-00 revision 4 records updated connector placement. Its earlier history rows are blank; no renumbering relationship to the October 58340 drawing is assumed.",
+      "phase": "interfaces",
+      "category": "drawing_revised",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-4bbef5fe4051"
+      ],
+      "verification_note": "EN recorded in prepared/checked or revision approval fields; bounded mechanical/electrical interface documentation, with electronic design shared. Drawing record only; no manufactured board, product release, circuit-design ownership or personal handoff inferred.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-delta-powerreset",
+      "date": "2008-04-03",
+      "date_label": "2008-04-03",
+      "date_basis": "Date printed in revision table, visually verified in the heldPDF.",
+      "title": "Power/reset buttons and header revised",
+      "summary": "The power/reset drawing DCD-9150-58334-00 records an April 1 initial revision and an April 3 revision relocating buttons and adding a 26-pin header. This is distinct from the video drawing identifier with the _B suffix.",
+      "phase": "interfaces",
+      "category": "drawing_revised",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-4bbef5fe4051"
+      ],
+      "verification_note": "EN recorded in prepared/checked or revision approval fields; bounded mechanical/electrical interface documentation, with electronic design shared. Drawing record only; no manufactured board, product release, circuit-design ownership or personal handoff inferred.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-dcd-r6",
+      "date": "2008-04-07",
+      "date_label": "2008-04-07",
+      "date_basis": "Date printed in drawing revision table.",
+      "title": "Three mounting holes moved",
+      "summary": "Main-left Rev 6 moves three mounting holes by the literal table note .070. No unit interpretation is added from the revision note alone.",
+      "phase": "interfaces",
+      "category": "drawing_revised",
+      "prominence": "detail",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Prepared/check EN; mechanical interface definition.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-video-r5",
+      "date": "2008-04-08",
+      "date_label": "2008-04-08",
+      "date_basis": "Primary drawing revision table visually verified after a NotebookLM discovery lead.",
+      "title": "Video-board connectors continued to move",
+      "summary": "Video-board DCD-9150-58334-00_B Rev 5 updated connector placement after April 7. Earlier April 7 table entries modified the PCB outline and added stacking VGA/DVI, then updated placement. This extends the documented interface work beyond the previously selected main-left record.",
+      "phase": "interfaces",
+      "category": "drawing_revised",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65",
+        "EV-4bbef5fe4051"
+      ],
+      "verification_note": "Prepared/check EN; mechanical/electrical connector interface, not circuit-design attribution. The drawing and model identifiers conflict; no part-number crosswalk is inferred.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "sc48-mainright-r4",
+      "date": "2008-04-10",
+      "date_label": "2008-04-10",
+      "date_basis": "Primary drawing revision table visually verified after a NotebookLM discovery lead.",
+      "title": "Main-right interface followed the layout",
+      "summary": "Main-right DCD-9150-58333-00 Rev 4 updated to match layout. Earlier revisions moved mounting holes and added LEDs/encoder, then followed artwork. The documented design sequence therefore continues at least through April 10, not just the main-left April 7 entry.",
+      "phase": "interfaces",
+      "category": "drawing_revised",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-6932cdc2dc65"
+      ],
+      "verification_note": "Prepared/check EN; bounded interface definition role.",
+      "anchor": "surface-decisions-reached-the-boards",
+      "link_label": "Read this phase"
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "status": "private proposal; exact chronology and page acceptance pending",
+    "research_chronology_evidence": "EV-6932cdc2dc65",
+    "selected_events": 38,
+    "research_events": 38,
+    "note": "The fuller private chronology retains source locators, context and undated material. Geometry for a month-only event uses its first day; the visible label preserves month precision."
+  }
+}

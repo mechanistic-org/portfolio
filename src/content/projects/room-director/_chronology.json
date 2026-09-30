@@ -1,0 +1,260 @@
+{
+  "schema_version": "1.0",
+  "project": "room-director",
+  "title": "Development timeline",
+  "start": "2016-12-15",
+  "end": "2023-02-28",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2017-02-14",
+      "end": "2023-02-28"
+    },
+    {
+      "id": "undated",
+      "label": "Undated records",
+      "start": "",
+      "end": ""
+    },
+    {
+      "id": "context",
+      "label": "Additional context",
+      "start": "2016-12-15",
+      "end": "2016-12-15"
+    }
+  ],
+  "events": [
+    {
+      "id": "SAT-01",
+      "date": "2017-02-14",
+      "date_label": "2017-02-14",
+      "title": "Hinge and display-clearance changes",
+      "summary": "The EVT2 report proposes fuller hinge engagement and a separate front-housing change for AMOLED clearance. Credit: Shared engineering report.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "sativa-2017-03-23-iqc",
+      "date": "2017-03-23",
+      "date_label": "2017-03-23",
+      "title": "Incoming housing disposition",
+      "summary": "The bronze-front-housing entry records inspection concerns, a deviation waiver and a new tool planned before DVT. Closure of the entry does not establish corrected later hardware. Credit: Incoming inspection record; Yvonne Lai waiver.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "date_basis": "Date precision and source state retained from the reviewed research chronology."
+    },
+    {
+      "id": "SAT-R04",
+      "date": "2017-04-20",
+      "date_label": "2017-04-20",
+      "title": "LCM assembly revision",
+      "summary": "The BOM history records a Mylar addition; it does not identify the material in the undated hinge-noise check. Credit: Shared BOM record.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "date_basis": "day in BOM history"
+    },
+    {
+      "id": "SAT-02",
+      "date": "2017-05-08",
+      "date_label": "2017-05-08",
+      "title": "Touch-panel lift action",
+      "summary": "The action review reports three glued samples passing a wood-floor drop check and three passing thermal shock. The review date does not supply the individual test dates. Credit: FIH Kelvin, SAT-114.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "SAT-R05",
+      "date": "2017-05-08",
+      "date_label": "2017-05-08/2017-05-09",
+      "title": "Front adhesive entries change",
+      "summary": "The BOM history cancels an older cap-front adhesive entry and adds a front-housing adhesive entry. These are document revisions, without a final test-configuration join. Credit: Shared BOM record.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "end_date": "2017-05-09",
+      "date_basis": "day in BOM history"
+    },
+    {
+      "id": "SAT-03",
+      "date": "2017-05-10",
+      "date_label": "2017-05-10",
+      "title": "Bonding operation documented",
+      "summary": "The assembly instructions define glue dispensing, fixture placement and at least five hours of clamping. Separately dated pages retain their own instruction states. Credit: FIH.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "SAT-R08",
+      "date": "2017-05-31",
+      "date_label": "2017-05-31",
+      "title": "Bronze alternative compared",
+      "summary": "The filename-dated comparison marks four textured and untextured chip measurements FAIL and darker than the original samples. It does not establish a final color match. Credit: Unsigned comparison.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "date_basis": "filename day"
+    },
+    {
+      "id": "SAT-04",
+      "date": "2017-06-21",
+      "date_label": "2017-06-21",
+      "title": "Glass appearance and inspection reference",
+      "summary": "Revision 3 defines the glass finish and inspection conditions, distinguishing appearance specification 041-00004 from physical part 431-00004. Credit: Erik Norris, author and approver.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "SAT-05",
+      "date": "2017-07-04",
+      "date_label": "2017-07-04",
+      "title": "DVT drop report fails",
+      "summary": "All six listed Sativa have rattle; Sativa #27 has an LCM crack; function PASS, overall FAIL. No final-build inference. Credit: FIH, Sativa subset.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "SAT-06",
+      "date": "2017-07-10",
+      "date_label": "2017-07-10",
+      "title": "Smaller drop set passes",
+      "summary": "Two Sativa/two Elvis PASS under safety criteria; different set, no universal qualification. Credit: FIH.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "SAT-07",
+      "date": "2017-10-26",
+      "date_label": "2017-10-26",
+      "title": "NOON public launch",
+      "summary": "NOON announced the lighting system, with Room Director available separately and in the starter kit. Erik recalls joining the launch-day celebration. Credit: NOON team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "SAT-08",
+      "date": "2018",
+      "date_label": "2018",
+      "title": "Team design award",
+      "summary": "The NOON lighting system receives a Red Dot Product Design award, credited to the in-house design team. Credit: NOON in-house design team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "SAT-09",
+      "date": "2023-02-28",
+      "date_label": "2023-02-28",
+      "title": "Standalone service sunset",
+      "summary": "Savant discontinues the standalone app and cloud service, while local load control and support for Savant Pro integrations remain. Credit: Savant notice.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "SAT-10",
+      "date": "",
+      "date_label": "Undated",
+      "title": "Personal involvement through transition",
+      "summary": "Erik recalls involvement from initial hiring through dissolution and the Savant purchase. The recollection supplies no exact personal end date. Credit: Erik Norris.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "room-director-prior-context-2",
+      "date": "2016-12-15",
+      "date_label": "2016-12-15",
+      "title": "Earlier press instruction",
+      "summary": "The earlier instruction specifies a 0.4 MPa, 20-second press under a December 2016 preparation date. That is a document state, not an employment start or confirmed factory introduction. Credit: FIH.",
+      "phase": "context",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "date_basis": "day on instruction page"
+    },
+    {
+      "id": "room-director-prior-context-1",
+      "date": "",
+      "date_label": "Undated",
+      "title": "Local hinge-noise check",
+      "summary": "The undated report compares a dropped Sativa with an untested sample and records no sound after adding 0.1 mm Mylar. It does not join that local check to the July 10 pass. Credit: Unidentified report author.",
+      "phase": "context",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c2a8f9e1ac32"
+      ],
+      "date_basis": "undated"
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "source_chronology": "EV-c2a8f9e1ac32",
+    "scope": "Exact existing reader event wording, order, date precision and credit; visualization adds no factual claim. Unknown dates remain unknown."
+  }
+}

@@ -93,8 +93,6 @@ cyberspace:
     deck: []
 ---
 
-# Backsplash: integrating the cabinet electronics
-
 I owned the entire Backsplash subsystem and its component integration into Hyphen's Makeline. Each cabinet's power supplies, controllers and communications were housed in its Backsplash modules, alongside the display interface.
 
 ## Power and controls in the cabinet
@@ -111,6 +109,8 @@ The Backsplash task estimate identifies six module configurations and calls for 
 
 The mounting grid located the displays and their board interfaces within that repeated geometry. The task plan called for checking whether the conductive-spring interface between the displays and PCB assemblies would deflect the grid, using spring and FR4 data and samples. Stiffness was an explicit development requirement.
 
+An annotated comparison of the display-array face places 2D dimensions beside dimensions taken from 3D data and asks which should control. It records an interface disagreement, but not its resolution.
+
 ## Defining the optical and board geometry
 
 The industrial-design packet specifies a number 4 brushed stainless-steel body and a dark tinted polycarbonate front. Thickness depended on the electronics package, while corner-radius and material-variant notes remained tentative. The optical intent combined a compact display with a polycarbonate diffuser and an LED grid behind its illuminated surround.
@@ -121,16 +121,36 @@ My LIGHT_RING drawing, dated July 21, 2021, defines the surround with a 4 mm ban
 
 My DISPLAY_PCB drawing, dated August 25, records edge, cleanliness, hole-control and model-based definition requirements. The drawings document mechanical work within my broader subsystem responsibility. The DISPLAY_PCB drawing's unfilled approval fields leave its formal release unestablished.
 
+The optical stack also had a part-count question. A supplier discussion proposed a separate mask printed with dead-front black ink so the surrounds would disappear when the LEDs were off and show through when lit. It then asked whether the same printing could go directly on the back of the glass, eliminating the mask parts. The presentation records options and design intent, not a selected or qualified construction.
+
 ## Sealing and access around the package
 
 The task plan also addresses sealing between tray and chassis, a narrower front-frame RTV seal with a bezel or overlay, buttons on the end modules, rear power switches and a fastening mechanism. The rows apply to different module combinations. They connect the internal equipment package to the surrounding cabinet and its accessible surfaces.
 
 ## The hardware record
 
-The photographs document a row of Backsplash modules in the Makeline assembly, an open internal package, a repeated rear mounting grid with ribbon connections, and a front array with illuminated surrounds. The bench photograph adds a closer view of the display-board package.
+Photographs taken on November 2, 2021 document the display-board bench package, a repeated rear mounting grid with ribbon connections, and a front array with illuminated surrounds. Separate photographs record Backsplash modules in the Makeline assembly and an open internal package.
 
 The physical record shows assembled hardware. It leaves final front construction, completed stiffness and sealing checks, quantified thermal performance and a Backsplash-specific production outcome unresolved. The task estimate records planned work rather than confirming each row's implementation, and the subsystem-ownership account does not assign every circuit or firmware to me.
 
 ## Source trail
 
 The account combines my direct subsystem-ownership testimony with the Backsplash task estimate, industrial-design packet, named display datasheet, LIGHT_RING and DISPLAY_PCB mechanical drawings, and the two preserved assembly-photo packets.
+
+## Proposed development timeline
+
+Dates describe the selected records; plans, photographed states, tests and outcomes retain their separate meanings.
+
+- **July 21, 2021 - LIGHT_RING geometry defined.** The drawing specifies a 4 mm band and separate thickness dimensions; the tentative ID width belongs to a different record. Credit: Erik Norris.
+
+- **August 25, 2021 - DISPLAY_PCB requirements.** The mechanical sheet records edge, cleanliness, hole-control and model-based definition requirements; formal release is unestablished. Credit: Erik Norris.
+
+- **November 2, 2021 - Display hardware photographed.** The bench board, repeated rear mounting grid and illuminated front array are recorded in photographs; they do not establish qualification. Credit: Hyphen project photographs; builder unassigned.
+
+### Undated records
+
+- **Undated - Cabinet-electronics integration.** Erik owned the subsystem integrating cabinet power supplies, controllers, communications and the display interface. Credit: Erik Norris; EE and ID contributions remain distinct.
+
+- **Undated - Common display assembly planned.** The estimate calls for one display assembly across six module configurations and a grid-deflection check. The work is planned, without a recorded pass. Credit: Team interface inputs within Erik’s subsystem scope.
+
+- **Undated - Optical part-count alternatives.** A discussion proposes a separate dead-front mask and asks whether printing on the glass could remove it. No final construction is selected in the record. Credit: Design discussion; author and supplier decision unassigned.

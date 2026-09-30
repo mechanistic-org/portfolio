@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "project": "webtv-cortez",
+  "title": "Development timeline",
+  "start": "2000-05",
+  "end": "2001-01-04",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2000-05",
+      "end": "2001-01-04"
+    }
+  ],
+  "events": [
+    {
+      "id": "COR-E01",
+      "date": "2000-05",
+      "date_label": "2000-05",
+      "title": "Key-system alternatives",
+      "summary": "WebTV compared key-system and packaging alternatives while pursuing the smaller envelope with full-travel keys. Credit: Leslie and suppliers.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-d6403cd306ff"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "COR-R30-02",
+      "date": "2000-05-12",
+      "date_label": "2000-05-12",
+      "title": "Compare a supplier construction alternative",
+      "summary": "Panasonic proposed a larger envelope and shifted battery-cover and rotary-switch positions. Leslie forwarded it as a critique and explicitly said Erik need not change the CAD at that point. Credit: Steve Nakayama / Panasonic; Leslie Leland.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-d6403cd306ff"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "COR-E02",
+      "date": "2000-05-18",
+      "date_label": "2000-05-18",
+      "title": "Supplier key envelope",
+      "summary": "Silitek proposed a key-field envelope and two new key tools. The estimate does not establish expenditure or production tooling. Credit: Silitek; Leslie layout request.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-d6403cd306ff"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "COR-E03",
+      "date": "2000-05-18",
+      "date_label": "2000-05-18",
+      "title": "Hard-model purpose",
+      "summary": "The primer hard model was intended to let people try the key matrix, typing position and grip areas against the foam model. Credit: Leslie request; Val/Sputnik model; Erik surfaces.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-d6403cd306ff"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "COR-E04",
+      "date": "2000-06-19",
+      "date_label": "2000-06-19",
+      "title": "First-cut model review",
+      "summary": "The first model review identified tabletop, underside, grip and outline changes, divided between the surface work and model making. Credit: Leslie/Jeff review; Erik surfaces; Val model.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-d6403cd306ff"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "COR-E05",
+      "date": "2000-06-21",
+      "date_label": "2000-06-21/2000-06-22",
+      "title": "Slope basis remains open",
+      "summary": "Leslie requested a numerical slope basis and offered example adjustment ranges. Final feet, slope and IR performance remained unconfirmed. Credit: WebTV correspondence.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-d6403cd306ff"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology.",
+      "end_date": "2000-06-22"
+    },
+    {
+      "id": "COR-E06",
+      "date": "2000-06-27",
+      "date_label": "2000-06-27",
+      "title": "Surface-development work reported",
+      "summary": "Erik reported 51 hours across slope, grip curvature, outline and release preparation. The invoice corroborates effort, not a performance result. Credit: Erik Norris.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-d6403cd306ff"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "COR-E07",
+      "date": "2000-07-05",
+      "date_label": "2000-07-05",
+      "title": "Model receipt",
+      "summary": "Leslie reported a model at WebTV, without identifying its exact revision or closing every earlier review item. Credit: Leslie Leland.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-d6403cd306ff"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "COR-R30-04",
+      "date": "2000-09-15",
+      "date_label": "2000-09-15",
+      "title": "Acknowledge the model maker's Cortez fix",
+      "summary": "Leslie told Val that the Cortez fix looked good and that invoices would be processed. The message identifies neither the changed geometry nor a completed Panasonic CAD reconstruction. Credit: Val Kasvin / Sputnik Models; Leslie Leland.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-d6403cd306ff"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "COR-E08",
+      "date": "2000-10-17",
+      "date_label": "2000-10-17/2000-10-18",
+      "title": "Panasonic database exchange",
+      "summary": "The sparse Panasonic wireframe prompted a compatibility discussion and a conditional offer to revise the original Pro/ENGINEER model. A completed reconstruction is unestablished. Credit: Leslie/Erik; Panasonic source.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-d6403cd306ff"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology.",
+      "end_date": "2000-10-18"
+    },
+    {
+      "id": "COR-E09",
+      "date": "2001-01-04",
+      "date_label": "2001-01-04",
+      "title": "Unspecified working receipt",
+      "summary": "Leslie reported receiving Cortez and said it worked. The revision, test conditions and production status were unspecified. Credit: Leslie Leland.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-d6403cd306ff"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "source_chronology": "EV-d6403cd306ff",
+    "scope": "Exact producer reader selection; richer material findings and omitted events retained in registered chronology. No new dates or claims inferred by rendering."
+  }
+}

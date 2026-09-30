@@ -1,0 +1,205 @@
+{
+  "schema_version": "1.0",
+  "project": "extension-switches",
+  "title": "Development timeline",
+  "start": "2017-01",
+  "end": "2017-07-25",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2017-01",
+      "end": "2017-07-12"
+    },
+    {
+      "id": "undated",
+      "label": "Undated records",
+      "start": "",
+      "end": ""
+    },
+    {
+      "id": "context",
+      "label": "Additional context",
+      "start": "2017-07-20",
+      "end": "2017-07-25"
+    }
+  ],
+  "events": [
+    {
+      "id": "ELV-01",
+      "date": "2017-01",
+      "date_label": "2017-01",
+      "title": "Cap separation during handling",
+      "summary": "The working history records dirt at the seam and easy cap separation around mid-January. Stronger tape and a larger bond area become proposed responses. Credit: Shared team history.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-80a34bbad976"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "ELV-R01",
+      "date": "2017-02-14",
+      "date_label": "2017-02-14",
+      "title": "Cap location changes",
+      "summary": "The filename-dated EVT2 report narrows positioning holes and relocates cap alignment features near the dimmer. These changes are distinct from the later adhesive-pocket investigation. Credit: Shared engineering-change report.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-80a34bbad976"
+      ],
+      "date_basis": "filename day"
+    },
+    {
+      "id": "ELV-R03",
+      "date": "2017-03-06",
+      "date_label": "2017-03-06",
+      "title": "Polish target and tool marks",
+      "summary": "The filename-dated record shows tooling marks; the separate polish-area note defines a preliminary surface target subject to approval. Credit: Unsigned March records.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-80a34bbad976"
+      ],
+      "date_basis": "filename day"
+    },
+    {
+      "id": "elvis-2017-03-22-23-iqc",
+      "date": "2017-03-22",
+      "date_label": "2017-03-22/2017-03-23",
+      "title": "Incoming parts receive distinct dispositions",
+      "summary": "Key and front-housing entries receive waivers; the cap entry combines a cosmetic waiver with sorting for a feature defect. These decisions do not prove a corrected later lot. Credit: Incoming inspection record; Yvonne Lai and IQC.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-80a34bbad976"
+      ],
+      "end_date": "2017-03-23",
+      "date_basis": "Date precision and source state retained from the reviewed research chronology."
+    },
+    {
+      "id": "ELV-02",
+      "date": "2017-03-28",
+      "date_label": "2017-03-28",
+      "title": "Revised tape fails crush test",
+      "summary": "The revised pressure-sensitive adhesive still fails the recorded crush test. Credit: FIH.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-80a34bbad976"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "ELV-03",
+      "date": "2017-04-20",
+      "date_label": "Around 2017-04-20",
+      "title": "Tool-correction samples received",
+      "summary": "The working synopsis records revised samples around April 20 after a 0.1 mm adhesive-pocket mismatch and tooling correction. Credit: Shared tooling history.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-80a34bbad976"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "ELV-04",
+      "date": "2017-04-26",
+      "date_label": "2017-04-26",
+      "title": "Cavity-specific polish feedback",
+      "summary": "Erik identifies uneven polish, stress marks and dents by mold cavity so the supplier can locate the tooling problems. Credit: Erik Norris, Locoroll.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-80a34bbad976"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "ELV-05",
+      "date": "2017-05-08",
+      "date_label": "2017-05-08",
+      "title": "Glued samples and remaining controls",
+      "summary": "The action review keeps the cap issue under DVT monitoring as FIH develops the assembly process. Successful samples do not settle fixture and gap-inspection control. Credit: FIH and Locoroll.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-80a34bbad976"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "ELV-06",
+      "date": "2017-05-10",
+      "date_label": "2017-05-10",
+      "title": "Cap bonding operation specified",
+      "summary": "The SOP defines FC1682 dispensing, separate placement and clamping fixtures, and a hold of at least five hours. Credit: FIH.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-80a34bbad976"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "ELV-08",
+      "date": "2017-07-12",
+      "date_label": "2017-07-12",
+      "title": "Key-life report retains overall FAIL",
+      "summary": "Report date, test window July4-11; functional/visual PASS does not erase overall FAIL. Credit: FIH report; Laurence Liu/Sunny Yen.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-80a34bbad976"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "ELV-07",
+      "date": "",
+      "date_label": "Undated",
+      "title": "Preload analysis bounds switch feel",
+      "summary": "The analysis follows the hidden tolerance loop and warns that preload can approach actuation travel. Insert control and O-ring compression remain important assumptions. Credit: Colin Davis, Function Engineering.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-80a34bbad976"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "extension-switches-prior-context-1",
+      "date": "2017-07-20",
+      "date_label": "2017-07-20/2017-07-25",
+      "title": "Later tactile-criterion proposal",
+      "summary": "Issue notes attribute a proposed 10% initial and greater-than-7% final tactile criterion to Erik; a later summary records a pass beside it. The records do not establish one consistently approved criterion or erase the earlier overall failure. Credit: Erik proposal; FIH record.",
+      "phase": "context",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-80a34bbad976"
+      ],
+      "end_date": "2017-07-25",
+      "date_basis": "filename versions, not approval dates"
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "source_chronology": "EV-80a34bbad976",
+    "scope": "Exact existing reader event wording, order, date precision and credit; visualization adds no factual claim. Unknown dates remain unknown."
+  }
+}

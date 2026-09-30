@@ -1,0 +1,196 @@
+{
+  "schema_version": "1.0",
+  "project": "webtv-elmer",
+  "title": "Development timeline",
+  "start": "2000-09-14",
+  "end": "2000-12-05",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2000-09-14",
+      "end": "2000-12-05"
+    }
+  ],
+  "events": [
+    {
+      "id": "ELM-R30-01",
+      "date": "2000-09-14",
+      "date_label": "2000-09-14/2000-09-26",
+      "title": "Recover Mercury reference geometry",
+      "summary": "Frank sought current Mercury enclosure files. Ron Draeger explained the parts were out of revision, then reported recreating a base and preparing a reference assembly. Erik sought usable geometry for quick-turn quotation. Credit: Frank Salinas; Ron Draeger / Bermo; Erik quotation preparation.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-41afcefc3029"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology.",
+      "end_date": "2000-09-26"
+    },
+    {
+      "id": "ELM-E01",
+      "date": "2000-09-19",
+      "date_label": "2000-09-19",
+      "title": "Interface import and ID handoff",
+      "summary": "Erik reported a clean import of Leonard's outline and passed dimensions to PSDA. Usable interface data preceded hardware validation. Credit: Leonard DXF; Erik integration; PSDA ID.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-41afcefc3029"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "ELM-E02",
+      "date": "2000-10-25",
+      "date_label": "2000-10-25",
+      "title": "Double-height option dropped",
+      "summary": "The team dropped the double-height Elmer/Mercury alternative in favor of the existing Elmer box; the reason was not recorded. Credit: Leslie correspondence.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-41afcefc3029"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "ELM-E03",
+      "date": "2000-10-31",
+      "date_label": "2000-10-31",
+      "title": "Five enclosures in review",
+      "summary": "Five Elmer enclosures were in review while PCI, reset-switch and IR-lens changes were being organized. Credit: Leslie report; Erik mechanical changes.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-41afcefc3029"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "ELM-E04",
+      "date": "2000-11-05",
+      "date_label": "2000-11-05",
+      "title": "Zeus adaptation scoped",
+      "summary": "The Zeus proposal aimed to retain useful Elmer work while adapting the base, I/O and internal mounting. Its 100 hours were planned effort. Credit: Mechanistic mechanical scope; WebTV program.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-41afcefc3029"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "ELM-E05",
+      "date": "2000-11-08",
+      "date_label": "2000-11-08",
+      "title": "Stacked connector corrected",
+      "summary": "Keva corrected the connector reference to the stacked D-sub, defining the actual envelope needed at the rear panel. Credit: Keva correction; Erik request.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-41afcefc3029"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "ELM-E06",
+      "date": "2000-11-15",
+      "date_label": "2000-11-15/2000-11-17",
+      "title": "Perforation review episode",
+      "summary": "The drawing and correspondence balanced heat-spreader contact with perforation placement. They record review instructions, not a thermal test pass. Credit: Leslie markup/transmission; Erik recipient; Roy/Mark thermal discussion.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-41afcefc3029"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology.",
+      "end_date": "2000-11-17"
+    },
+    {
+      "id": "ELM-E07",
+      "date": "2000-11-19",
+      "date_label": "2000-11-19/2000-11-20",
+      "title": "Geometry export and supplier receipt",
+      "summary": "Erik exported the top, base and fan bracket; the supplier acknowledged receipt. The files preserve the Elmer-to-Zeus part lineage. Credit: Erik export; supplier acknowledgement.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-41afcefc3029"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology.",
+      "end_date": "2000-11-20"
+    },
+    {
+      "id": "ELM-R30-02",
+      "date": "2000-11-21",
+      "date_label": "2000-11-21/2000-11-22",
+      "title": "Separate board and mechanical BOM responsibilities",
+      "summary": "The ECO addressed a board-BOM import error. Leslie planned a mechanical BOM session with Erik and Erturk; Keva required quantities, approved-vendor information and descriptions before standardizing and releasing that separate BOM. Credit: Keva Nelson; Leslie Leland; Erturk Kocalar; Erik mechanical inputs.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-41afcefc3029"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology.",
+      "end_date": "2000-11-22"
+    },
+    {
+      "id": "ELM-E08",
+      "date": "2000-11-22",
+      "date_label": "2000-11-22",
+      "title": "Top change clarified",
+      "summary": "The supplier correspondence distinguished the changed top, revised base and new bracket. A zinc-plating callout does not verify delivered finish. Credit: Engineering/supplier correspondence.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-41afcefc3029"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "ELM-E09",
+      "date": "2000-12-01",
+      "date_label": "2000-12-01/2000-12-04",
+      "title": "Enclosure delivery acknowledged",
+      "summary": "The supplier confirmed delivery and Erturk acknowledged five enclosure sets. That receipt does not establish five operating systems. Credit: Supplier/Leslie coordination; Erturk receipt.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-41afcefc3029"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology.",
+      "end_date": "2000-12-04"
+    },
+    {
+      "id": "ELM-E10",
+      "date": "2000-12-05",
+      "date_label": "2000-12-05",
+      "title": "Fastener standard and open fit",
+      "summary": "Erik confirmed 4-40 hardware while Erturk still needed shorter standoffs. Final fit and system qualification remain unknown. Credit: Erik confirmation; Erturk fit issue.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-41afcefc3029"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "source_chronology": "EV-41afcefc3029",
+    "scope": "Exact producer reader selection; richer material findings and omitted events retained in registered chronology. No new dates or claims inferred by rendering."
+  }
+}

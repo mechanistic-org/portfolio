@@ -1,0 +1,238 @@
+{
+  "schema_version": "1.0",
+  "project": "dv700",
+  "title": "Development timeline",
+  "start": "2012-01",
+  "end": "2014-08-20",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2012-01",
+      "end": "2014-08-20"
+    }
+  ],
+  "events": [
+    {
+      "id": "dv700-prep-01",
+      "date": "2012-01",
+      "date_label": "January 2012",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Document DV700 guide identity",
+      "summary": "published guide context Credit: Kaleidescape.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-73529866909a"
+      ]
+    },
+    {
+      "id": "dv700-prep-02",
+      "date": "2014",
+      "date_label": "2014; case date not selected",
+      "date_basis": "Year-level source label; no month or day inferred. Recorded, reported, planned and follow-up qualifiers in the date label remain separate.",
+      "title": "Repair one recognition case",
+      "summary": "unit repair/passed run-in Credit: Service team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-73529866909a"
+      ]
+    },
+    {
+      "id": "DV358-E01",
+      "date": "2014-03",
+      "date_label": "March 2014",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Distinguish an optical-drive obstruction from roller slippage",
+      "summary": "A DV700 case records a cardboard disc, optical-drive replacement and passed run-in. Unit-level repair; completion-day annotations differ. Credit: Erik; service team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-73529866909a"
+      ]
+    },
+    {
+      "id": "dv700-prep-03",
+      "date": "2014-03",
+      "date_label": "March 2014",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Preserve conditions around repeat failure",
+      "summary": "repeatable failure/rerun request Credit: Erik; Richard Lane; Nathan Forster.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-73529866909a"
+      ]
+    },
+    {
+      "id": "DV358-E02",
+      "date": "2014-03-20",
+      "date_label": "March 20, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Trace a roller assembly to its unit history",
+      "summary": "A sensor-board identifier joins the observed tab/grease condition to DV700 SN867 and the supplier’s factory test record. Assembly investigation and supplier trace. Credit: John Lio; Julio Briseno; Sanmina.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-73529866909a"
+      ]
+    },
+    {
+      "id": "dv700-prep-04",
+      "date": "2014",
+      "date_label": "2014 shared investigation",
+      "date_basis": "Year-level source label; no month or day inferred.",
+      "title": "Swap rollers into known-good unit",
+      "summary": "controlled test Credit: Erik; hardware/service team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-73529866909a"
+      ]
+    },
+    {
+      "id": "dv700-prep-05",
+      "date": "2014",
+      "date_label": "2014 shared test",
+      "date_basis": "Year-level source label; no month or day inferred.",
+      "title": "Withdraw the cover diagnosis",
+      "summary": "test correction Credit: Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-73529866909a"
+      ]
+    },
+    {
+      "id": "dv700-prep-06",
+      "date": "2014-04",
+      "date_label": "April 2014",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Study traction and shaft deflection",
+      "summary": "mechanism study Credit: Hardware team; Erik corrective mechanics.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-73529866909a"
+      ]
+    },
+    {
+      "id": "dv700-prep-07",
+      "date": "2014-04-10",
+      "date_label": "April 10, 2014",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Specify carousel inspection criterion",
+      "summary": "inspection instruction Credit: Engineering; John Lio to Sanmina.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-73529866909a"
+      ]
+    },
+    {
+      "id": "dv700-prep-08",
+      "date": "2014-05",
+      "date_label": "May 2014",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Prescribe cover alignment sequence",
+      "summary": "assembly instruction Credit: John Lio; shared vault manufacturing.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-73529866909a"
+      ]
+    },
+    {
+      "id": "DV358-E03",
+      "date": "2014-04-30",
+      "date_label": "April 30–May 13, 2014",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Make grease application more specific",
+      "summary": "Erik proposes surface photographs and requests the factory applicator; John follows up and Sanmina promises an applicator. Process clarification and requested tools; receipt is not established. Credit: Erik; John Lio; Sanmina.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-73529866909a"
+      ],
+      "end_date": "2014-05-13"
+    },
+    {
+      "id": "dv700-r04-12",
+      "date": "2014-05-30",
+      "date_label": "Week ending May30,2014; reported June2",
+      "date_basis": "Week-ending reporting period; not an exact release or completion day. Recorded, reported, planned and follow-up qualifiers in the date label remain separate.",
+      "title": "End coated-roller testing and prepare component trials",
+      "summary": "Reported alternative-test conclusion; new parts still staged for test Limit: No DV700 fleet efficacy or qualified configuration Credit: Erik status report; shared M700/DV700 sustaining work.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-73529866909a"
+      ]
+    },
+    {
+      "id": "dv700-prep-09",
+      "date": "2014-06",
+      "date_label": "June 2014",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Propose rack-ear packaging protection",
+      "summary": "packaging proposal Credit: Erik; John Lio; supplier.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-73529866909a"
+      ]
+    },
+    {
+      "id": "dv700-prep-10",
+      "date": "2014-04",
+      "date_label": "April–August 2014",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Progress guide and spring definitions",
+      "summary": "staged revision/release preparation Credit: Erik; Rob; hardware/manufacturing.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-73529866909a"
+      ],
+      "end_date": "2014-08"
+    },
+    {
+      "id": "dv700-prep-11",
+      "date": "2014-08-19",
+      "date_label": "August 19–20, 2014",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Issue and acknowledge scrap instruction",
+      "summary": "instruction then acknowledgement Credit: Erik; Sanmina; John Lio assignment.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-73529866909a"
+      ],
+      "end_date": "2014-08-20"
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "scope": "Exact current reader wording, date labels, order, states and credit. Dates retain their displayed precision. Source-only material remains private; visualization is not claim approval or publication.",
+    "source_chronologies": [
+      "EV-73529866909a"
+    ]
+  }
+}

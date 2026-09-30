@@ -1,0 +1,272 @@
+{
+  "schema_version": "1.0",
+  "project": "d-control",
+  "title": "Development timeline",
+  "start": "2003-04",
+  "end": "2005-08",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2003-04",
+      "end": "2005-08"
+    },
+    {
+      "id": "undated",
+      "label": "Undated records",
+      "start": "",
+      "end": ""
+    }
+  ],
+  "events": [
+    {
+      "id": "DC-R02",
+      "date": "2003-04",
+      "date_label": "April–June 2003",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Develop stand features",
+      "summary": "alternatives and cost review Credit: Erik; ID/program team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ],
+      "end_date": "2003-06"
+    },
+    {
+      "id": "DC-R09",
+      "date": "2003-07-28",
+      "date_label": "July 28, 2003",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Record Configuration A Rev1A",
+      "summary": "Worksheet for one main and one fader, listing three A crossbars and six crossbar brackets; not a build milestone.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ]
+    },
+    {
+      "id": "DC-R12",
+      "date": "2004-01-28",
+      "date_label": "January 28, 2004",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Record Configuration A Rev1C",
+      "summary": "Revised worksheet lists two A crossbars and two brackets, expanded supports and pending quotes; not a verified cost reduction.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ]
+    },
+    {
+      "id": "DC-R19",
+      "date": "2004-06",
+      "date_label": "June 2004",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Recover fader-pan manufacturing",
+      "summary": "accepted retained account Credit: Erik and manufacturing/supplier team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ]
+    },
+    {
+      "id": "DC-R21",
+      "date": "2004-07-07",
+      "date_label": "July 7, 2004",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Recap stand changes",
+      "summary": "Foot reinforcement and cable-opening changes, with expected availability and a remaining cable-protection limitation. Credit: Erik mechanical work; Gannon Kashiwa recap.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ]
+    },
+    {
+      "id": "DC-R22",
+      "date": "2004-07",
+      "date_label": "July 2004",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Measure neighboring module gaps",
+      "summary": "inspection and discussion Credit: Tom Oiwa; team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ]
+    },
+    {
+      "id": "DC-R27",
+      "date": "2004-08",
+      "date_label": "August 2004",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Review crossbar lengths",
+      "summary": "dimension review Credit: Tom Oiwa; Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ]
+    },
+    {
+      "id": "DC-R33",
+      "date": "2004-12-09",
+      "date_label": "December 9–13, 2004",
+      "date_basis": "Displayed dated interval retained; individual source actions and states remain separate.",
+      "title": "Define corrected B-Mid rails",
+      "summary": "ECO 6581 includes revised drawings and a kit-revision request; full approval and delivery remain unresolved. Credit: Tom Oiwa preparation; Erik drawing check and approval.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ],
+      "end_date": "2004-12-13"
+    },
+    {
+      "id": "d-control-f1e8ac16cdd8",
+      "date": "2005-01-05",
+      "date_label": "January 5, 2005",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Release side-plate prototypes",
+      "summary": "Separate left and right parts at Rev 1. Credit: Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ]
+    },
+    {
+      "id": "DC-R37",
+      "date": "2005-02-15",
+      "date_label": "February 15, 2005",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Test replacement side plates",
+      "summary": "manual test then approval Credit: Brandon Cammack test; Erik approval.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ]
+    },
+    {
+      "id": "DC-R38",
+      "date": "2005-02-22",
+      "date_label": "February 22, 2005",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Review side-plate rework feasibility",
+      "summary": "Proposed conversion process and compatibility question. Credit: Ed Stegall; Mary; engineering and manufacturing team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ]
+    },
+    {
+      "id": "DC-R39",
+      "date": "2005-02-24",
+      "date_label": "February 24, 2005",
+      "date_basis": "Dated source action or document record; its stated status remains unchanged.",
+      "title": "Compare supplier revision states",
+      "summary": "Tracker separates drawing and ordered revisions from production balances; transmitted in March. Credit: m.cho and Ed Stegall tracker entries; Erik follow-up.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ]
+    },
+    {
+      "id": "d-control-19e586d2b5fc",
+      "date": "2005-02",
+      "date_label": "February–April 2005",
+      "date_basis": "Month-range source label; no exact endpoint days inferred.",
+      "title": "Carry side-plate change into manufacturing",
+      "summary": "rework/documentation progression Credit: Supplier; QA; Tom Oiwa; Erik.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ],
+      "end_date": "2005-04"
+    },
+    {
+      "id": "DC-R42",
+      "date": "2005-04",
+      "date_label": "April 2005",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Diagnose SVT stand flange",
+      "summary": "field diagnosis Credit: Erik; installation team.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ]
+    },
+    {
+      "id": "DC-R45",
+      "date": "2005-08",
+      "date_label": "August 2005",
+      "date_basis": "Month-level source label; no exact day inferred.",
+      "title": "Approve ECO6310 T1 samples",
+      "summary": "scoped sample approval Credit: Erik; supplier.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ]
+    },
+    {
+      "id": "DC-R48",
+      "date": "",
+      "date_label": "Undated production episode",
+      "date_basis": "Date not established; no calendar coordinate assigned.",
+      "title": "Contain bowed steel fader pans",
+      "summary": "problem and recovery Credit: Erik; manufacturing/supplier team.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ]
+    },
+    {
+      "id": "DC-R49",
+      "date": "",
+      "date_label": "Undated prototype episode",
+      "date_basis": "Date not established; no calendar coordinate assigned.",
+      "title": "Quarantine nonconforming boards",
+      "summary": "containment Credit: Erik; team; unnamed vendor.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-c84321781b75"
+      ]
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "scope": "Exact current reader wording, date labels, order, states and credit. Dates retain their displayed precision. Source-only material remains private; visualization is not claim approval or publication.",
+    "source_chronologies": [
+      "EV-c84321781b75"
+    ]
+  }
+}

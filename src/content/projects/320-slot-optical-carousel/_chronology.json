@@ -1,0 +1,622 @@
+{
+  "schema_version": "1.0",
+  "project": "320-slot-optical-carousel",
+  "title": "Development chronology - working selection",
+  "start": "2010-05-20",
+  "end": "2015-01-30",
+  "phases": [
+    {
+      "id": "concept",
+      "label": "Mechanism and capacity",
+      "start": "2010-05-20",
+      "end": "2010-08-23"
+    },
+    {
+      "id": "tooling",
+      "label": "Tooling studies",
+      "start": "2010-10-18",
+      "end": "2010-12-27"
+    },
+    {
+      "id": "trials",
+      "label": "Molding trials",
+      "start": "2011-01-20",
+      "end": "2011-03-17"
+    },
+    {
+      "id": "control",
+      "label": "Tool configuration",
+      "start": "2011-05-10",
+      "end": "2011-06-16"
+    },
+    {
+      "id": "metrology",
+      "label": "Functional inspection",
+      "start": "2011-08-12",
+      "end": "2012-03-30"
+    },
+    {
+      "id": "redesign",
+      "label": "Redesign and prototypes",
+      "start": "2012-04-20",
+      "end": "2012-07-11"
+    },
+    {
+      "id": "support",
+      "label": "System and production support",
+      "start": "2014-02-13",
+      "end": "2015-01-30"
+    }
+  ],
+  "events": [
+    {
+      "id": "carousel-research-061",
+      "date": "2010-05-20",
+      "date_label": "2010-05-20",
+      "date_basis": "Printed title May 20, 2010. Conversion footer September 28, 2026 is excluded as historical date evidence.",
+      "title": "Capacity alternatives fitted to the enclosure",
+      "summary": "Function compares disc-spacing assumptions and 250/300/350/400-disc envelopes. The assumed 1.4 mm spacing is a sizing input, not a measured Vesta slot result.",
+      "phase": "concept",
+      "category": "sizing_study",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Function Engineering.",
+      "anchor": "establish-the-path-before-committing-it-to-steel",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-062",
+      "date": "2010-06-04",
+      "date_label": "2010-06-04",
+      "date_basis": "Explicit June 4 note and printed June 4 report date; proposed architecture, not as-built proof.",
+      "title": "300-disc plan enters breadboard development",
+      "summary": "D. Northway notes 300 discs as the plan of record in the sizing deck. The end-of-phase report proposes a 300-disc molded platter with belt drive, idlers, home flag, per-slot encoder teeth, central support and three support rollers. Foreign objects, 80 mm discs, obstruction sensing and thickness assumptions remain open. The later June 16 250-disc concept shows overlapping alternatives, not a simple linear capacity increase.",
+      "phase": "concept",
+      "category": "plan_and_architecture",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Function Engineering; D. Northway.",
+      "anchor": "establish-the-path-before-committing-it-to-steel",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-002",
+      "date": "2010-06-16",
+      "date_label": "2010-06-16",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "A 250-slot concept",
+      "summary": "Function records a 250-slot HIPS concept after the June 4 report described a 300-disc plan. This demonstrates overlapping alternatives, not an unambiguous linear 250-to-300-to-320 sequence. The final 320-capacity decision remains unresolved.",
+      "phase": "concept",
+      "category": "concept_documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Function Engineering.",
+      "anchor": "establish-the-path-before-committing-it-to-steel",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-003",
+      "date": "2010-06-24",
+      "date_label": "2010-06-24",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "Capacity and handling requirements",
+      "summary": "Requirements Rev 4 targets at least 300 discs while retaining 250-or-more background wording. Pinch rollers, kickers and carousel are one coordinated handling system; reliability, serviceability and content protection are requirements, not demonstrated results.",
+      "phase": "concept",
+      "category": "requirements",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Kaleidescape; Function Engineering.",
+      "anchor": "establish-the-path-before-committing-it-to-steel",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-004",
+      "date": "2010-08-23",
+      "date_label": "2010-08-23",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "Breadboards establish the handling approach",
+      "summary": "Function reports four slot-geometry breadboards and a full SLA carousel. V-grooves constrain discs and align them with the kicker; alignment sensitivity and transport timing were investigated. Complete-system control/position confirmation and life testing remain next steps.",
+      "phase": "concept",
+      "category": "prototype_test_report",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Function Engineering.",
+      "anchor": "establish-the-path-before-committing-it-to-steel",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-006",
+      "date": "2010-10-18",
+      "date_label": "2010-10-18",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "Multiple hot-runner layouts simulated",
+      "summary": "Yudo compares 26-, 18- and 12-drop layouts for PH-879 PS. Predictions concern filling, weld lines, injection pressure and clamp force; they are not measured trial performance.",
+      "phase": "tooling",
+      "category": "simulation",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Yudo.",
+      "anchor": "getting-material-through-the-geometry",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-007",
+      "date": "2010-10-23",
+      "date_label": "2010-10-23",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "Eight-drop molding study",
+      "summary": "Yudo models an eight-drop layout in a separately dated PH-879 report. The report shows localized short-shot and weld-line predictions; no controlled solver-to-solver performance conclusion is proposed.",
+      "phase": "tooling",
+      "category": "simulation",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Yudo.",
+      "anchor": "getting-material-through-the-geometry",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-067",
+      "date": "2010-12-27",
+      "date_label": "2010-12-27",
+      "date_basis": "Date of populated schedule column; folder receipt Dec 29 is separate.",
+      "title": "Tool progress reported at 90 percent",
+      "summary": "The seventh report shows 90 percent actual progress at December 27. January 6, 2011 appears as a future schedule column with no actual total; do not turn it into a tool-completion date.",
+      "phase": "tooling",
+      "category": "reported_progress",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Function Engineering.",
+      "anchor": "getting-material-through-the-geometry",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-014",
+      "date": "2011-01-20",
+      "date_label": "2011-01-20",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "T1 fills at the cost of flash and broken ribs",
+      "summary": "Function photographs overshot parts and broken fins; later summary reports intentional over-pressure to fill the tool. Brittle appearance does not settle resin-versus-processing causality.",
+      "phase": "trials",
+      "category": "observed_trial",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Function Engineering; ChunKing.",
+      "anchor": "getting-material-through-the-geometry",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-015",
+      "date": "2011-01-25",
+      "date_label": "2011-01-25",
+      "date_basis": "Meeting spans Jan 24 8 PM PST and Jan 25; date coordinate is Jan 25 report, not every shot timestamp",
+      "title": "T2 exposes the fill-path problem",
+      "summary": "Meeting notes and trial reports describe balancing the center before filling the inner-ring/rib/outer-hub region, a narrow process window, unequal tool temperatures and material trapped in the cavity. The team explores ejection, flow leaders, venting and alternative resins.",
+      "phase": "trials",
+      "category": "observed_trial_and_proposals",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Loyd May; Joel Jensen; Thomas Chen; Ze Shen Wong; Erik Norris; Zao Tech.",
+      "anchor": "getting-material-through-the-geometry",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-017",
+      "date": "2011-01-27",
+      "date_label": "2011-01-27",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "Ribs and radii revised; T3 samples produced",
+      "summary": "Loyd diagrams additional ribs and larger blending radii. Separately, T3 at Sheng Ming yields 46 ABS and 46 HIPS samples; pin-punch/knit-line defects remain and further dimensional inspection is requested. Neither event alone proves approved production.",
+      "phase": "trials",
+      "category": "proposal_and_observed_trial",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Loyd May; Sheng Ming; Alan Wu; Erik Norris.",
+      "anchor": "getting-material-through-the-geometry",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-019",
+      "date": "2011-02-10",
+      "date_label": "2011-02-10",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "Tooling quote advances to internal PO approval",
+      "summary": "Updated T4 plan reports the Jan 29 quote and an approved internal PO request for the rib/radius changes. It also documents undersize diameter, dish, flash, incomplete V-grooves and voids.",
+      "phase": "trials",
+      "category": "procurement_authorization",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Erik Norris; Alan Wu.",
+      "anchor": "getting-material-through-the-geometry",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-020",
+      "date": "2011-03-17",
+      "date_label": "2011-03-17",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "T4 includes implemented ribs but persistent local defects",
+      "summary": "Function labels one photograph Implemented Ribs. Short shots and air-trap marks remain; the later summary reports consistent fill but undersize diameter. A proposal to widen vents to 20 mm follows.",
+      "phase": "trials",
+      "category": "observed_trial",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Function Engineering; Sheng Ming.",
+      "anchor": "getting-material-through-the-geometry",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-027",
+      "date": "2011-05-10",
+      "date_label": "2011-05-10",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "Actual tool configuration challenged",
+      "summary": "Loyd asks Alan to identify vent-land geometry at all 16 locations and reconcile it with earlier sketches and the latest drawing. He also asks for numbered hot-runner wiring to prevent connection errors.",
+      "phase": "control",
+      "category": "configuration_question",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Loyd May; Alan Wu; Erik Norris.",
+      "anchor": "know-what-is-actually-in-the-tool",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-031",
+      "date": "2011-06-01",
+      "date_label": "2011-06",
+      "date_basis": "Month explicitly stated by November report; pilot report itself undated",
+      "title": "A disc does not seat at slot 205",
+      "summary": "Later November report dates this observation to June. Local slot/rib geometry and a thick disc edge explain why overall diameter alone is insufficient. Preserve observed dimensions and avoid treating 0.86 mm comparison as a universal nominal spec.",
+      "phase": "control",
+      "category": "retrospective_observation",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "",
+      "anchor": "know-what-is-actually-in-the-tool",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-028",
+      "date": "2011-06-09",
+      "date_label": "2011-06-09",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "Venting the ejector pins proposed",
+      "summary": "After larger core vents failed to markedly improve trapped air, Loyd recommends added release channels on 45 ejector pins. Diagram divides them into 21 10 mm and 24 6 mm pins. This establishes the proposal and mechanism, not its success.",
+      "phase": "control",
+      "category": "proposal",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Loyd May.",
+      "anchor": "know-what-is-actually-in-the-tool",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-030",
+      "date": "2011-06-16",
+      "date_label": "2011-06-16",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "Physical samples reveal sector transitions",
+      "summary": "Loyd annotates local sample readings and differences in rib height/profile where cavity inserts meet. The same date appears in REV 9 drawing history for drawing updates, venting ejector pins and ramp-wall thickening. The two records establish observation and drawing intent separately.",
+      "phase": "control",
+      "category": "observation_and_drawing_revision",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Loyd May; Erik Norris.",
+      "anchor": "know-what-is-actually-in-the-tool",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-069",
+      "date": "2011-08-12",
+      "date_label": "2011-08-12",
+      "date_basis": "Printed report-generation date August 12, 2011; not inferred manufacture date.",
+      "title": "Laser-scan comparison documented",
+      "summary": "QC Group issues a precision laser scan and 2D report for 502-1164-00. Whole-part color comparison and hub/sector views establish a metrology strand before the later all-slot CMM tables. The scan and slot-width measurements are different measurement products.",
+      "phase": "metrology",
+      "category": "measurement_report",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "QC Group; Steve Traynor.",
+      "anchor": "inspect-the-function-at-every-position",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-038",
+      "date": "2011-11-16",
+      "date_label": "2011-11-16 (source filename)",
+      "date_basis": "Filename date for report; June observation explicitly earlier",
+      "title": "Slot scan exposes regional variation",
+      "summary": "Five-carousel inventory scans and local measurements focus investigation on repeated narrow-slot regions. Different EDM electrode setups are a proposed cause; section replacement or reburning are suggested fixes.",
+      "phase": "metrology",
+      "category": "test_and_hypothesis",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "",
+      "anchor": "inspect-the-function-at-every-position",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-040",
+      "date": "2011-11-30",
+      "date_label": "2011-11-30",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "All-slot inspection procedure defined",
+      "summary": "Procedure calls for cycling three inspection discs through all 320 slots, letting each settle under its own weight, and reworking obstructions until alignment meets the illustrated condition. This establishes the procedure, not its execution on every manufactured part.",
+      "phase": "metrology",
+      "category": "inspection_procedure",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Erik Norris.",
+      "anchor": "inspect-the-function-at-every-position",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-043",
+      "date": "2012-02-16",
+      "date_label": "2012-02-16 (source filename)",
+      "date_basis": "Filename date; original converted slides retain 2026 footer",
+      "title": "Replacement sectors and stronger inspection requested",
+      "summary": "Great Mold is asked for replacement of four sectors, with another conditional on slot 120. Yomura is asked to inspect/rework samples against the revised gauge procedure.",
+      "phase": "metrology",
+      "category": "instruction",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Erik Norris; Great Mold; Yomura.",
+      "anchor": "inspect-the-function-at-every-position",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-071",
+      "date": "2012-03-20",
+      "date_label": "2012-03-20",
+      "date_basis": "Printed workbook inspection date, not receipt-folder inference or manufacturing date.",
+      "title": "Two full slot-width profiles measured",
+      "summary": "QC Group work order 20120563 records samples S2 #1 and S2 #3, each with 320 slots measured at source positions A-D. Raw G14:J333 contains 2,560 values. Regional narrow-slot patterns can be plotted with the source limits; this is neither production yield nor a cause diagnosis.",
+      "phase": "metrology",
+      "category": "measurement_report",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "QC Group; Steven DeVowe.",
+      "anchor": "inspect-the-function-at-every-position",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-072",
+      "date": "2012-03-30",
+      "date_label": "2012-03-30",
+      "date_basis": "Printed workbook inspection date. Repeated template labels do not establish lot or treatment identity.",
+      "title": "Three additional sample profiles preserved in workbook",
+      "summary": "QC Group work order 20120818 contains Part 1, Part 2 and Part 3, each with 320 slots at A-D. Its PDF exports only Part 1. Together with March 20, the native sheets provide 6,400 raw values. Sample lineage and rework history are not established, so dates are not a before/after improvement experiment.",
+      "phase": "metrology",
+      "category": "measurement_report",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "QC Group; Steven DeVowe.",
+      "anchor": "inspect-the-function-at-every-position",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-049",
+      "date": "2012-04-20",
+      "date_label": "2012-04-20",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "Slot 120 repair alternatives requested",
+      "summary": "RFQ contrasts replacement using an existing spare with repair of the existing insert, including adding steel and reburning. It asks for cost/lead time and other options.",
+      "phase": "redesign",
+      "category": "quotation_request",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Erik Norris; Great Mold.",
+      "anchor": "a-redesign-had-to-preserve-the-interfaces",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-050",
+      "date": "2012-05-18",
+      "date_label": "2012-05-18",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "New-tool architecture proposed",
+      "summary": "Yomura schema describes new gate positions and 32 even rib sections with modified ribs and roller-track geometry. These are proposed changes, not a released replacement tool.",
+      "phase": "redesign",
+      "category": "proposal",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Yomura.",
+      "anchor": "a-redesign-had-to-preserve-the-interfaces",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-051",
+      "date": "2012-05-24",
+      "date_label": "2012-05-24",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "Redesign reconciled with mechanism interfaces",
+      "summary": "Erik responds to new gate/rib recommendations while protecting kicker clearance and roller tracks, requests recessed numbers, and explores eliminating the metal ring with a snap-in concept.",
+      "phase": "redesign",
+      "category": "design_review",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Erik Norris; Yomura.",
+      "anchor": "a-redesign-had-to-preserve-the-interfaces",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-073",
+      "date": "2012-06-08",
+      "date_label": "2012-06-08",
+      "date_basis": "Printed 101/06/08 interpreted as ROC year 101, June 8, 2012; matching 2012 folder supports the interpretation.",
+      "title": "New-tool DFM exposes a flow and strength tradeoff",
+      "summary": "Yomura warns that curved geometry can improve flow while weakening the part and tool. It compares old and proposed rib widths while retaining the requested 1.55 mm slot, proposes core-side ribs and makes an extra rib conditional on actual trials. Embossed IDs conflict with the earlier recessed-ID preference.",
+      "phase": "redesign",
+      "category": "supplier_design_review",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Yomura.",
+      "anchor": "a-redesign-had-to-preserve-the-interfaces",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-052",
+      "date": "2012-07-11",
+      "date_label": "2012-07-11",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "SLA home-ring orientation corrected",
+      "summary": "A 502-1189 proto1 review contrasts incorrect and corrected home-ring direction on an SLA prototype. This advances the redesign record to prototype review, without proving later production.",
+      "phase": "redesign",
+      "category": "prototype_review",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Erik Norris.",
+      "anchor": "a-redesign-had-to-preserve-the-interfaces",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-075",
+      "date": "2014-02-13",
+      "date_label": "2014-02-13",
+      "date_basis": "Printed February 13 report; individual test stages are grouped by report, not assigned invented timestamps.",
+      "title": "Disc-path baseline records scratch and alignment observations",
+      "summary": "A known-good carrier receives repeated scripted loading through slot 320. The report documents disc scratching and observations at the roller frame, alignment features and motor cable restraint. One position and one carrier do not qualify all carousel slots or the product fleet.",
+      "phase": "support",
+      "category": "bounded_test",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "",
+      "anchor": "continue-at-the-system-and-production-support-level",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-054",
+      "date": "2014-04-10",
+      "date_label": "2014-04-10",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "Packaging and inspection revised",
+      "summary": "Reviewed records describe protective packaging and revised warpage checks. Neither proves packaging qualification or elimination of field failures.",
+      "phase": "support",
+      "category": "instructions",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "",
+      "anchor": "continue-at-the-system-and-production-support-level",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-055",
+      "date": "2014-04-17",
+      "date_label": "2014-04-17",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "Guides, bearings and spring loads tested",
+      "summary": "Nathan reports four run-in cycles, including dirty rollers and a reproducible rib-hit unit. Triple-force springs take permanent set; double-force springs pass the reported runs. This is bounded system testing, not fleet qualification.",
+      "phase": "support",
+      "category": "reported_test",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Nathan Forster; Erik Norris.",
+      "anchor": "continue-at-the-system-and-production-support-level",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-059",
+      "date": "2015-01-19",
+      "date_label": "2015-01-19",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "Replacement tool quoted",
+      "summary": "Reviewed native attachment identifies 502-1164-00 and Vesta 320 slots. Quotation establishes a commercial proposal, not completed replacement tooling.",
+      "phase": "support",
+      "category": "quotation",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Yomura.",
+      "anchor": "continue-at-the-system-and-production-support-level",
+      "link_label": "Read this phase"
+    },
+    {
+      "id": "carousel-research-060",
+      "date": "2015-01-30",
+      "date_label": "2015-01-30",
+      "date_basis": "Printed source date or date explicitly described in source",
+      "title": "Quotation remains under internal review",
+      "summary": "Mark McKenzie replies that the quotation will be discussed internally. No later manufacturing/fleet endpoint is established.",
+      "phase": "support",
+      "category": "internal_review",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e2a2a896aeb2"
+      ],
+      "verification_note": "Mark McKenzie.",
+      "anchor": "continue-at-the-system-and-production-support-level",
+      "link_label": "Read this phase"
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "status": "private proposal; exact chronology and page acceptance pending",
+    "research_chronology_evidence": "EV-e2a2a896aeb2",
+    "selected_events": 33,
+    "research_events": 77,
+    "note": "The fuller private chronology retains source locators, context and undated material. Geometry for a month-only event uses its first day; the visible label preserves month precision."
+  }
+}

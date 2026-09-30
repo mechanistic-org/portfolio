@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "project": "motorola-mp3",
+  "title": "Development timeline",
+  "start": "2000-03-13",
+  "end": "2002-01",
+  "phases": [
+    {
+      "id": "context",
+      "label": "Additional context",
+      "start": "2000-03-13",
+      "end": "2000-03-13"
+    },
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2000-07-27",
+      "end": "2002-01"
+    },
+    {
+      "id": "undated",
+      "label": "Undated records",
+      "start": "",
+      "end": ""
+    }
+  ],
+  "events": [
+    {
+      "id": "motorola-mp3-concept-brief",
+      "date": "2000-03-13",
+      "date_label": "March 13, 2000",
+      "title": "Phone-powered accessory brief",
+      "summary": "Motorola's concept sheet described a small phone-powered MP3 accessory with removable memory and USB transfer. Its ship and production dates were targets. Credit: Chris Swambar / Motorola concept sheet.",
+      "phase": "context",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-593b311be887"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "motorola-mp3-assembly-drawing",
+      "date": "2000-07-27",
+      "date_label": "July 27, 2000",
+      "title": "Dated assembly record",
+      "summary": "A July 27 drawing places the mechanical record in 2000. Credit: Project drawing; no new author attribution.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-593b311be887"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "motorola-mp3-pcb-records",
+      "date": "2000-09",
+      "date_label": "September 2000",
+      "title": "PCB records use Typan name",
+      "summary": "September main- and switch-PCB documents use the Typan name. Credit: Electrical context; not Erik EE ownership.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-593b311be887"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "motorola-mp3-sections-requested",
+      "date": "2000-10-19",
+      "date_label": "October 19, 2000",
+      "title": "Support and clearance sections requested",
+      "summary": "The review requested minijack sections and explanations of rib, switch and local geometry changes. Credit: Review exchange; sender not newly assigned.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-593b311be887"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "motorola-mp3-phase-two",
+      "date": "2000-10-30",
+      "date_label": "October 30, 2000",
+      "title": "CAD delivery with open interfaces",
+      "summary": "Erik delivered the revised assembly, recorded Phase 2 completion and proposed Shinwoo ownership for manufacturing refinement. Cord and button sections still carried specification and tooling questions. Credit: Erik Norris; Julie Ma recipient; Shinwoo proposed manufacturing owner.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-593b311be887"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "motorola-mp3-supplier-concern",
+      "date": "2000-10-31",
+      "date_label": "October 31, 2000",
+      "title": "Wall-thickness concern relayed",
+      "summary": "A supplier comment raised a temperature-shock deformation concern and requested as much thickness as possible. Credit: Supplier concern relayed through project.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-593b311be887"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "motorola-mp3-further-review",
+      "date": "2000-11-03",
+      "date_label": "November 3, 2000",
+      "title": "Motorola review continues",
+      "summary": "Venki Sampath sent Julie Ma and Erik further concerns after CAD delivery. Credit: Venki Sampath, Julie Ma, Erik Norris.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-593b311be887"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "motorola-mp3-forecast",
+      "date": "2002-01",
+      "date_label": "January 2002",
+      "title": "Production inquiry receives forecast",
+      "summary": "Julie Ma anticipated shipment acceptance soon and production the following month. Credit: Erik inquiry; Julie Ma forecast.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-593b311be887"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "motorola-mp3-model-review",
+      "date": "",
+      "date_label": "Undated model-review note",
+      "title": "Housing and part-model review",
+      "summary": "An archived checklist records regeneration failures in the two housings, clip and cap, plus uneven parting-line margins near the headphone jack; closure is undocumented. Credit: Checklist author unassigned.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-593b311be887"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "source_chronology": "EV-593b311be887",
+    "scope": "Exact producer reader selection; richer material findings and omitted events retained in registered chronology. No new dates or claims inferred by rendering."
+  }
+}

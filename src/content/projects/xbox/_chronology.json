@@ -1,0 +1,113 @@
+{
+  "schema_version": "1.0",
+  "project": "xbox",
+  "title": "Development timeline",
+  "start": "2002-04-12",
+  "end": "2002-06",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2002-04-12",
+      "end": "2002-06"
+    },
+    {
+      "id": "undated",
+      "label": "Undated records",
+      "start": "",
+      "end": ""
+    }
+  ],
+  "events": [
+    {
+      "id": "xbox-interference",
+      "date": "",
+      "date_label": "April 9-10, 2002",
+      "title": "Assembly interference exchange",
+      "summary": "Faxes identified frame and cover interferences; Erik offered dimensioned vendor markups. Credit: Erik Norris; Microsoft/vendor exchange.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-f3a935f38786"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "xbox-supplier-files",
+      "date": "2002-04-12",
+      "date_label": "By April 12, 2002",
+      "title": "Modified files sent to supplier",
+      "summary": "By April 12 Erik had sent modified files and reference illustrations to Microsoft's sheet-metal supplier. Credit: Erik Norris.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-f3a935f38786"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "xbox-psu-request",
+      "date": "2002-05-22",
+      "date_label": "May 22, 2002",
+      "title": "Case and bracket proposal",
+      "summary": "Microsoft requested case ribs and bracket flanges forming a plastic box around the power supply. Credit: Microsoft request; Erik mechanical contribution.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-f3a935f38786"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "xbox-review-hold",
+      "date": "2002-06",
+      "date_label": "June 2002",
+      "title": "Provisional views and pause",
+      "summary": "Erik sent provisional views; Microsoft paused for tooling, safety and power-supply review and deferred EMI changes pending plastics signoff. Credit: Erik Norris; Microsoft review decision.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-f3a935f38786"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "xbox-bracket-production",
+      "date": "",
+      "date_label": "Later, date unspecified",
+      "title": "Bracket changes entered production",
+      "summary": "Erik's drive-support modifications improved airflow and removed a thermal dead spot; they subsequently went into production. Credit: Erik design contribution; not ECO owner.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-f3a935f38786"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "xbox-gpu",
+      "date": "",
+      "date_label": "Roughly two months later (relative)",
+      "title": "GPU active cooling reported implemented",
+      "summary": "Erik proposed a GPU-directed fan; Microsoft implemented it and Leslie told Erik roughly two months later. Credit: Erik proposal; Microsoft implementation; Leslie report.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-f3a935f38786"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "source_chronology": "EV-f3a935f38786",
+    "scope": "Exact producer reader selection; richer material findings and omitted events retained in registered chronology. No new dates or claims inferred by rendering."
+  }
+}

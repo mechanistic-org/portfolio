@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0",
+  "project": "bazooka",
+  "title": "Development timeline",
+  "start": "2016-06",
+  "end": "2017-09-28",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2016-06",
+      "end": "2017-09-28"
+    },
+    {
+      "id": "undated",
+      "label": "Undated recollection",
+      "start": "",
+      "end": ""
+    }
+  ],
+  "events": [
+    {
+      "id": "BAZ-01-reader-b91650d0",
+      "date": "2016-06",
+      "date_label": "June 2016",
+      "title": "The base-station requirement baseline",
+      "summary": "The earlier PRD defines the base station's electrical and mechanical requirements, including operating-test conditions that recur in the later test-definition work. Credit: NOON / Locoroll.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-2392d2b15fc6"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "BAZ-02",
+      "date": "2017-02-26",
+      "date_label": "February 26, 2017",
+      "title": "Air-gap contact and button-return problems recorded",
+      "summary": "The issue tracker records inconsistent air-gap contact, sticking TEST buttons and a request to restore the square button shape. Credit: Shared engineering issue tracker.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-2392d2b15fc6"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "BAZ-03",
+      "date": "2017-04-06",
+      "date_label": "April 6, 2017",
+      "title": "A guide proposed for the air-gap mechanism",
+      "summary": "The redesign proposal groups the contacts, shorting bar and return spring around a guide fastened to the PCB, giving the moving parts a common reference. Credit: Locoroll proposal; Bel detail engineering separate.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-2392d2b15fc6"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "BAZ-04",
+      "date": "2017-04-18",
+      "date_label": "April 18, 2017",
+      "title": "Retention and locating features separated",
+      "summary": "Function Engineering's four-hook analysis identifies competing locating surfaces and proposes controlled bearing features with clearance elsewhere. Credit: Function Engineering.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-2392d2b15fc6"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "BAZ-01-reader-6a947c5c",
+      "date": "2017-05-31",
+      "date_label": "May 31, 2017",
+      "title": "Operating-test conditions restored to the PRD",
+      "summary": "Erik's edit makes methods, limits and durations explicit in tables left blank in the May version. The same operating conditions were already present in the earlier requirement baseline; some fields remained open. Credit: Erik Norris.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-2392d2b15fc6"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "BAZ-06",
+      "date": "2017-06-26",
+      "date_label": "June 26, 2017",
+      "title": "Supplier file identities tied to the assembly structure",
+      "summary": "The naming guide connects CAD filenames and drawing titles to Arena item identities and requires assemblies to follow the BOM structure. The June assembly tree supplies the part relationships for that handoff. Credit: Locoroll supplier coordination. Later package checks still retained naming, mapping and revision work.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-2392d2b15fc6"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "BZW-10",
+      "date": "2017-07-27",
+      "date_label": "July 27, 2017",
+      "title": "Foam alternatives studied for the return spring",
+      "summary": "The study compares extra-soft slow-rebound PORON with soft and firm alternatives using supplier stock sizes and stress-strain curves. Credit: Locoroll study; Rogers material data.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-2392d2b15fc6"
+      ],
+      "date_basis": "Deck title date and same-day catalog annotation metadata, not catalog effective date"
+    },
+    {
+      "id": "BAZ-08",
+      "date": "2017-08-31",
+      "date_label": "August 31, 2017",
+      "title": "A staged plan for the front housing",
+      "summary": "Erik's proposed factory schedule follows the housing from casting through machining and finishing to inspection, comparing batch timing and the capacity of successive operations. Credit: Erik Norris; Best factory execution separate.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-2392d2b15fc6"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date.; August29/August31 delivery and version labels. Printed July and September columns are schedule dates."
+    },
+    {
+      "id": "BAZ-09",
+      "date": "2017-09-28",
+      "date_label": "September 28, 2017",
+      "title": "Later return-spring arrangements photographed",
+      "summary": "The retained photograph shows later physical spring arrangements alongside the continuing base-station work. Credit: NOON project archive; design authorship not assigned by the image.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-2392d2b15fc6"
+      ],
+      "date_basis": "Document/report/message or stated event date, distinguished in limits; never filesystem/capture date."
+    },
+    {
+      "id": "BAZ-operator-fault-investigation-20260930",
+      "date": "",
+      "date_label": "Undated recollection",
+      "title": "Reversed-polarity fault investigation",
+      "summary": "Erik recalls a fuse failing violently in reversed-polarity installation tests, repeating in every trial of that series. He investigated effects and mitigations but reached no verified explanation or fix before the work stopped around the company's closure. Credit: Erik Norris, direct recollection.",
+      "phase": "undated",
+      "category": "recollection",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-8d6a508c3618",
+        "EV-c3c4ac40117e"
+      ],
+      "date_basis": "Direct operator recollection; calendar position unknown. No final explanation or fix verified."
+    },
+    {
+      "id": "BAZ-operator-adjacent-pin-failure-20260930",
+      "date": "",
+      "date_label": "Undated recollection",
+      "title": "Adjacent-pin short destroys a unit",
+      "summary": "Erik identifies a separate failure in the retained C0002 video still: two adjacent pins shorted under certain conditions and killed the unit. The triggering conditions and any mitigation remain unspecified. Credit: Erik Norris, direct recollection.",
+      "phase": "undated",
+      "category": "recollection",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-8421b1d3f004",
+        "EV-ed317f588cc6"
+      ],
+      "date_basis": "Operator recollection. Exact conditions and date not established; separate failure mode."
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "source_chronology": "EV-ed317f588cc6",
+    "scope": "Nine unchanged v4 events plus two separately identified, explicitly undated recollections. No conflated cause, final fix, exact per-clip configuration or date inferred."
+  }
+}

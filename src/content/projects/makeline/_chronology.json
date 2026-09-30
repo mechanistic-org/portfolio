@@ -1,0 +1,148 @@
+{
+  "schema_version": "1.0",
+  "project": "makeline",
+  "title": "Development timeline",
+  "start": "2021-01",
+  "end": "2024-05-23",
+  "phases": [
+    {
+      "id": "main",
+      "label": "Development sequence",
+      "start": "2021-01",
+      "end": "2021-10-28"
+    },
+    {
+      "id": "context",
+      "label": "Additional context",
+      "start": "2022-05",
+      "end": "2024-05-23"
+    },
+    {
+      "id": "undated",
+      "label": "Undated records",
+      "start": "",
+      "end": ""
+    }
+  ],
+  "events": [
+    {
+      "id": "makeline-electrical-layouts",
+      "date": "2021-01",
+      "date_label": "January 2021",
+      "title": "Electrical layouts",
+      "summary": "Cold-cabinet and denester-backsplash layouts document electrical interfaces. Credit: Robert, as named on the drawings.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e4d302247464"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "makeline-motor-outline-1",
+      "date": "2021-05-24",
+      "date_label": "May 24 and June 26, 2021",
+      "title": "Motor-board interfaces",
+      "summary": "Mechanical drawings define board envelopes, holes and mounting interfaces. Credit: Erik Norris.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e4d302247464"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology.",
+      "end_date": "2021-06-26"
+    },
+    {
+      "id": "makeline-worm-gear",
+      "date": "2021-07-18",
+      "date_label": "July 18, 2021",
+      "title": "Drive packaging drawings",
+      "summary": "Worm-gear housing and motor-mount drawings record a separate mechanical contribution. Credit: Andrew Mulia.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e4d302247464"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "makeline-display-outline",
+      "date": "2021-08-25",
+      "date_label": "August 25, 2021",
+      "title": "Display-board interface",
+      "summary": "A mechanical drawing defines the board packaging requirements; approval fields do not establish formal release. Credit: Erik Norris.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e4d302247464"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "makeline-assembled-line-photographed-20211028",
+      "date": "2021-10-28",
+      "date_label": "October 28, 2021",
+      "title": "Assembled line photographed",
+      "summary": "The photograph records installed modules and the shared preparation surface, without establishing when the build was completed. Credit: Hyphen project photograph; builder unassigned.",
+      "phase": "main",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e4d302247464"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "makeline-controls-account",
+      "date": "2022-05",
+      "date_label": "May 2022",
+      "title": "Controls integration account",
+      "summary": "Beckhoff describes custom signal-distribution boards, EtherCAT and TwinCAT integration. This is the publication date. Credit: Bradley Hwang and Daniel Fukuba in the company account.",
+      "phase": "context",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e4d302247464"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "makeline-patent",
+      "date": "2024-05-23",
+      "date_label": "May 23, 2024",
+      "title": "Joint patent application published",
+      "summary": "The modular food-assembly disclosure records joint inventorship; it does not allocate each subsystem. Credit: Daniel Fukuba, Erik Norris, Maneesh Jain, Mark Manfrey, John Vassa and Keegan Schoch.",
+      "phase": "context",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e4d302247464"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    },
+    {
+      "id": "makeline-integration-plan",
+      "date": "",
+      "date_label": "Undated",
+      "title": "Integration and validation plans",
+      "summary": "Whiteboards connect subsystem interfaces to prototype assembly and outline checks across the line; they do not report completed qualification. Credit: Hyphen team planning record.",
+      "phase": "undated",
+      "category": "documented",
+      "prominence": "prominent",
+      "source_ids": [
+        "EV-e4d302247464"
+      ],
+      "date_basis": "Exact reader date label; source-specific date precision, state and actors retained in the registered research chronology."
+    }
+  ],
+  "clusters": [],
+  "verification": {
+    "method": "229-curation-baseline-v1+timeline-visualization-v1",
+    "source_chronology": "EV-e4d302247464",
+    "scope": "Exact producer reader selection; richer material findings and omitted events retained in registered chronology. No new dates or claims inferred by rendering."
+  }
+}
