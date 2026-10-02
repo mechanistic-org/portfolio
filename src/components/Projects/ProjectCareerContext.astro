@@ -1,0 +1,23 @@
+---
+import ContextRibbon from "../primitives/ContextRibbon.astro";
+import type { CareerNode } from "../../utils/contextRibbon";
+interface Props {
+	nodes: CareerNode[];
+	currentId: string;
+}
+const { nodes, currentId } = Astro.props;
+---
+
+{
+	nodes.length > 0 && (
+		<section class="project-career-context" aria-label="Career context">
+			<ContextRibbon nodes={nodes} currentId={currentId} />
+		</section>
+	)
+}
+<style>
+	.project-career-context {
+		margin-block: 1.5rem 2rem;
+		padding-block: 1rem;
+	}
+</style>

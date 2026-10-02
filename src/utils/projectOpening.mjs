@@ -42,8 +42,8 @@ export function selectProjectOpening(pieces, selection) {
 	const group = media[0].group;
 	if (group.items.length !== 1 || group.items[0].kind !== "image")
 		fail("opening requires one image");
-	if (!Array.isArray(selection.splitBefore) || selection.splitBefore.length !== 2) {
-		fail("opening requires two paragraph breaks");
+	if (!Array.isArray(selection.splitBefore) || ![1, 2].includes(selection.splitBefore.length)) {
+		fail("opening requires one or two paragraph breaks");
 	}
 	const { index, paragraph } = matches[0];
 	const html = paragraph[1];
