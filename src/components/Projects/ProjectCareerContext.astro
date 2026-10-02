@@ -11,7 +11,6 @@ const { nodes, currentId } = Astro.props;
 {
 	nodes.length > 0 && (
 		<section class="project-career-context" aria-label="Career context">
-			<h2>Career context</h2>
 			<ContextRibbon nodes={nodes} currentId={currentId} />
 		</section>
 	)
@@ -20,11 +19,5 @@ const { nodes, currentId } = Astro.props;
 	.project-career-context {
 		margin-block: 1.5rem 2rem;
 		padding-block: 1rem;
-		border-block: 1px solid var(--border);
-	}
-	.project-career-context > h2 {
-		margin: 0 0 0.5rem;
-		font: 0.7rem var(--font-mono);
-		color: var(--muted-foreground);
 	}
 </style>

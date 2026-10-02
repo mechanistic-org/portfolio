@@ -81,8 +81,9 @@ const firstImageGroup = page.pieces.find(
 				{
 					opening && (
 						<div class="opening-context">
-							<p class="opening-inherited" set:html={opening.blocks[1]} />
-							<p set:html={opening.blocks[2]} />
+							{opening.blocks.slice(1).map((block, index) => (
+								<p class:list={{ "opening-inherited": opening.blocks.length === 3 && index === 0 }} set:html={block} />
+							))}
 						</div>
 					)
 				}
@@ -113,7 +114,7 @@ const firstImageGroup = page.pieces.find(
 				{
 					page.imageCount > 0 && firstImageGroup && (
 						<a class="browse-project-media" href={`#media-${firstImageGroup.id}`} data-browse-media>
-							Browse {page.imageCount} images â†—
+							Browse {page.imageCount} images
 						</a>
 					)
 				}

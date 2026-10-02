@@ -121,7 +121,6 @@
 
 .article-masthead {
 	padding: clamp(2rem, 4vw, 3.5rem) 0 1.5rem;
-	border-bottom: 1px solid var(--authoring-line);
 }
 
 /* The public article has no private working strip above its masthead. */

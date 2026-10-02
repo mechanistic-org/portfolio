@@ -47,7 +47,7 @@ test("accepted public account moves the original paragraph and image once, retai
 	assert.equal(`<p>${result.opening.blocks.join(" ")}</p>`, paragraph);
 	assert.deepEqual(
 		result.opening.blocks.map((block) => (block.match(/\.(?: |$)/g) || []).length),
-		[2, 1, 2],
+		[2, 2],
 	);
 	assert.equal(prose(result.pieces), prose(page.pieces).replace(paragraph, ""));
 	assert.equal(
@@ -58,15 +58,15 @@ test("accepted public account moves the original paragraph and image once, retai
 		result.pieces.filter((piece) => piece.group),
 		page.pieces.filter((piece) => piece.group && piece.group.id !== "figure-1"),
 	);
-	assert.equal(page.imageCount, 74);
-	assert.equal(page.videoCount, 2);
+	assert.equal(page.imageCount, 75);
+	assert.equal(page.videoCount, 5);
 	assert.equal(
 		page.headings.filter(
 			(heading) => heading.depth === 2 && heading.slug !== "development-timeline",
 		).length,
 		8,
 	);
-	assert.equal(result.pieces.filter((piece) => piece.group).length + 1, 26);
+	assert.equal(result.pieces.filter((piece) => piece.group).length + 1, 28);
 });
 
 test("private weight source-note markup moves intact with sentence one", () => {
@@ -134,7 +134,7 @@ test("incorrect breaks and splits crossing inline markup fail closed", () => {
 		() =>
 			selectProjectOpening(page.pieces, {
 				...selection,
-				splitBefore: [...selection.splitBefore].reverse(),
+				splitBefore: [selection.splitBefore[0], "Lower the band"],
 			}),
 		/out of order/,
 	);
