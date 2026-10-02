@@ -912,6 +912,29 @@ cyberspace:
         caption: Assembled Glyph units in a divided handling tray.
     title: ''
     deck: []
+  - id: qualification-fixtures
+    type: gallery
+    data:
+      mode: sequence
+      summary: ''
+      compare:
+      - 0
+      - 1
+      items:
+      - kind: video
+        src: https://assets.eriknorris.com/avegant-glyph/curation-2026-10-01/d4a764ccaafe9aa8f75e.mp4
+        alt: An oblique view of a lifecycle fixture supporting Glyph while the earcup interfaces move.
+        caption: 'Lifecycle fixture, oblique view: the supports and moving earcup interfaces can be seen together.'
+      - kind: video
+        src: https://assets.eriknorris.com/avegant-glyph/curation-2026-10-01/ab5bf5b64336f3e11f08.mp4
+        alt: Front view of a fixture repeatedly opening and releasing the Glyph headset.
+        caption: 'Front view: the fixture repeatedly opens and releases the headset.'
+      - kind: video
+        src: https://assets.eriknorris.com/avegant-glyph/curation-2026-10-01/e343a90ae2a29700ade9.mp4
+        alt: Close view of the headband-to-earcup interface moving during fixture cycling.
+        caption: 'Close-up: relative motion at the headband-to-earcup interface during cycling.'
+    title: ''
+    deck: []
 ---
 
 ## Joining Avegant
@@ -1056,19 +1079,29 @@ The outer-headband fixture followed the long arch and located it at labeled posi
 
 I worked with Intretech on how we would qualify the product and validate changes. The work covered the assembled headset's moving interfaces, environmental exposure, drops, buttons and connectors, as well as the durability of coatings, printing and packaging. It involved test samples and fixtures, operating conditions, inspections during testing and functional checks afterward.
 
-For the headband, we specified 3,000 cycles, checking every 500 and measuring the opening force before and after. The telescoping arms also had a 3,000-cycle procedure. Button testing called for 6,000 cycles, with functional checks every 500 and force and feel assessed before and after. The bare-unit drop procedure called for a 1.2 m drop onto steel, followed by functional and physical inspection. Temperature and humidity exposure, thermal shock, and packaged-product vibration and drop tests covered other parts of the qualification program.{/* ^[evidence:EV-de52939d1964] */}
+### Exercising the assembly
 
-The details of the fixtures and checks mattered. How far should a moving part travel, how fast, and what should happen at the stop? What force was the fixture applying? Which functions needed checking after the test? We had to define acceptable damage as well as continued operation. For a product with this many moving interfaces, the way a fixture exercised the assembly was part of the engineering.
+The fixtures had to reproduce the movement we cared about: opening the headband, extending and returning the arms, and moving the earcup interfaces. Travel, speed, applied force and the position of the stops all mattered. In September 2015, I requested an adjustment to the headband-life fixture so it could exercise the assembly at full extension.{/* ^[evidence:EV-945341604818] */}
+
+These three short clips show a few of the fixtures exercising Glyph. They make the motion visible; the measurements, inspections and functional checks tell us what happened to the product.
+
+<div data-authoring-group="qualification-fixtures"></div>
+
+For the headband, we specified 3,000 cycles, checking every 500 and measuring the opening force before and after. The telescoping arms also had a 3,000-cycle procedure. Environmental exposure, drops and finish tests addressed other ways the assembly could change or stop working.{/* ^[evidence:EV-de52939d1964] */}
+
+### Checking function while the interface moved
+
+The micro-HDMI investigation shows why a functional check at rest was only part of the test. In August 2015, the connector was repeatedly inserted, removed and loaded in four directions, with dimensional and free-play measurements before and after. The display could look normal at a checkpoint, then briefly turn green or black during the separate wiggle check before recovering. Those observations made the behavior under movement visible alongside the changes in the physical interface.{/* ^[evidence:EV-945341604818] */}
+
+### Following what the tests exposed
+
+The March production-test records contain passing life and finish tests alongside failures that needed investigation. Vibration exposed a lock spring coming loose. Eyepiece cycling exposed a failure to lock, which the report attributed to an overly tight screw. Environmental testing also recorded display and audio problems. These were specific observations on tested assemblies; they did not all point to the same cause or correction.{/* ^[evidence:EV-945341604818] */}
 
 <span id="shared-glyph-changes" class="block scroll-mt-24"></span>
 
 We planned the September reliability allocation around a pool of 20 units, assigning samples across the different tests. As the design and process changed, specific fixes needed their own validation. In April 2016, after initial shipping had begun, I had cable-abrasion fixes in validation on 20 units for headband lifecycle testing and another 10 for drop testing. Short-term chassis machining, cable rework and a revised routing scheme were being evaluated alongside longer-term tooling and harness changes.
 
-
-
 <div data-authoring-group="figure-8"></div>
-
-
 
 Qualification continued through the ramp. I had to coordinate the parts and sample configurations, the supplier changes and the testing needed to put a change into production, while backer deliveries were still underway. Comfort brought us back to people wearing the assemblies we were making.
 
@@ -1148,7 +1181,9 @@ We also worked on a trimming fixture for the inner liners. The technique was dif
 
 ### Cable routing through a moving assembly
 
-The cable could work initially, then develop a kink after repeated cycling and bind soon afterward. I spent a great deal of time working through those combinations: splints, different jackets and wires, changes to the looming specifications. Careful design of experiments, lots of changes and lots of cycles.
+The cable could work initially, then develop a kink after repeated cycling and bind soon afterward. Adding stiffness could help it resist buckling, but the bundle still had to fit and move through a confined path. Protective tape could curl at its edges and increase the effort needed to telescope the arm. Local stiffness, bundle size, friction and routing had to work together.{/* ^[evidence:EV-945341604818] */}
+
+I spent a great deal of time working through those combinations: splints, different jackets and wires, changes to the looming specifications. Careful design of experiments, lots of changes and lots of cycles.
 
 The slack for telescoping extension lived inside the earcan, wound around the center as a service loop. Adjacent features guided and housed it as it expanded and contracted. The pass-throughs at each end of the telescoping sections mattered too. The pivot arm could bind the cable against the housing in several positions, and long, curved surfaces sliding past one another offered more places to snag. Fixing points, routing and variation in the cable and its covering all affected how it behaved.
 
@@ -1160,6 +1195,10 @@ The slack for telescoping extension lived inside the earcan, wound around the ce
 
 Cycle testing exposed kinking and abrasion across multiple harness variants. The photographs record the different ways the cables were damaged as the earcans were extended and retracted.{/* ^[evidence:EV-de52939d1964] */}
 
+The comparative cable builds used identified assemblies and staged inspections. The protocol called for opening the units, photographing the cable in its collapsed position and reassembling them between checkpoints. That let us examine how a construction changed as it accumulated cycles, as well as whether the arm still returned.{/* ^[evidence:EV-945341604818] */}
+
+An idea also had to survive fabrication and assembly. Fujikura withdrew one PET-film stiffening proposal because the film peeled open before or during the spiral-wrapping operation. Other discussions compared sidewalls, splints, wrap widths and wrap direction. A promising cross-section was only one part of making a workable harness.{/* ^[evidence:EV-945341604818] */}
+
 
 
 <span id="shared-glyph-cohorts" class="block scroll-mt-24"></span>
@@ -1167,6 +1206,12 @@ Cycle testing exposed kinking and abrasion across multiple harness variants. The
 Two five-unit groups tested in March 2016 give a sense of the range of behavior. In T6, two units could not return at 250 cycles. The separate T5 group recorded OK wear and kink checks through 3,000 cycles.{/* ^[evidence:EV-de52939d1964] */}
 
 The work carried into production through careful harness assembly, inspection and system assembly. During the short production run, I instituted a mid-build "break-in" cycling station to test and validate the process and support ongoing improvement. I specified cycling 20% of units; in practice, we only did one in ten. No kink meant pass and continue through assembly.
+
+#### Electrical checks and physical condition
+
+Electrical continuity did not tell the whole story. In a supplier analysis of cables returned from the production line, some cables passed the electrical retest despite visible jacket or connector damage. Other samples had open or short circuits, and one connector was too damaged to test. Inspecting the physical condition answered a different question from checking whether the wires still conducted.{/* ^[evidence:EV-945341604818] */}
+
+The work extended into retention, strain relief, adhesive placement and assembly instructions. The supplier analysis still had root-cause investigation and proposed changes open, while later rework discussions addressed routing and damage at several locations. A passing electrical check could not stand in for validation of those mechanical changes.{/* ^[evidence:EV-945341604818] */}
 
 #### Pinching at the optical chassis
 
