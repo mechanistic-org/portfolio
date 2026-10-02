@@ -270,3 +270,8 @@ project-timeline dialog .timeline-reference {
 		scroll-margin-top: 11rem;
 	}
 }
+
+/* The complete chronology is reached from Full timeline; no inline explorer. */
+project-timeline[data-ready] {
+	display: contents;
+}

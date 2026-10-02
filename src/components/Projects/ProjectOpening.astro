@@ -6,14 +6,18 @@ interface Props {
 	withMedia?: boolean;
 }
 const { title, subtitle, meta = [], withMedia = false } = Astro.props;
+// Career context owns the visible period across every project opening.
+const openingMeta = meta.filter(
+	(label) => !/^\d{4}(?:\s*[–—-]\s*(?:\d{4}|present))?$/i.test(label.trim()),
+);
 ---
 
 <header class:list={["article-masthead", { "project-opening-with-media": withMedia }]}>
 	<div class="opening-heading">
 		{
-			meta.length > 0 && (
+			openingMeta.length > 0 && (
 				<div class="masthead-meta">
-					{meta.map((label) => (
+					{openingMeta.map((label) => (
 						<span>{label}</span>
 					))}
 				</div>

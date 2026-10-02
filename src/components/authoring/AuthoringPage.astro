@@ -10,10 +10,8 @@ import ProjectTimeline from "../Projects/ProjectTimeline.astro";
 import ProjectModelEvidence from "../Projects/ProjectModelEvidence.astro";
 import "@/styles/authoring-page.css";
 import "@/styles/project-reading.css";
-import DevelopmentTimeline from "../Projects/DevelopmentTimeline.astro";
 import ProjectRecords from "../Projects/ProjectRecords.astro";
-import ProjectRecord from "../Projects/ProjectRecord.astro";
-import ContextRibbon from "../primitives/ContextRibbon.astro";
+import ProjectCareerContext from "../Projects/ProjectCareerContext.astro";
 const {
 	page,
 	chronology = null,
@@ -25,7 +23,6 @@ const {
 const narrativeTimeline = page.headings.find((h: any) =>
 	["development-timeline", "proposed-development-timeline"].includes(h.slug),
 );
-const hasAuthoredOverview = page.headings.some((h: any) => h.slug === "development-at-a-glance");
 const isPublic = page.public === true;
 const isGlyph = page.project === "avegant-glyph";
 const presentation = projectOpenings[page.project as keyof typeof projectOpenings];
@@ -100,15 +97,7 @@ const firstImageGroup = page.pieces.find(
 				}
 			</Fragment>
 		</ProjectOpening>
-		{
-			!hasAuthoredOverview && (chronology || narrativeTimeline) && (
-				<DevelopmentTimeline
-					chronology={chronology}
-					narrativeHref={narrativeTimeline ? `#${narrativeTimeline.slug}` : undefined}
-					detailHref={timeline.referenceId ? `#${timeline.referenceId}` : "#chronology-heading"}
-				/>
-			)
-		}
+		<ProjectCareerContext nodes={contextNodes} currentId={page.project} />
 		<div class="authoring-layout">
 			<aside class="article-contents">
 				<nav aria-label="On this page">
@@ -124,7 +113,7 @@ const firstImageGroup = page.pieces.find(
 				{
 					page.imageCount > 0 && firstImageGroup && (
 						<a class="browse-project-media" href={`#media-${firstImageGroup.id}`} data-browse-media>
-							Browse {page.imageCount} images ↗
+							Browse {page.imageCount} images â†—
 						</a>
 					)
 				}
@@ -139,21 +128,12 @@ const firstImageGroup = page.pieces.find(
 					entropy={entropy}
 				/>
 				<slot name="records" />
-				{
-					contextNodes.length > 0 && (
-						<ProjectRecord title="Career context">
-							<ContextRibbon nodes={contextNodes} currentId={page.project} />
-						</ProjectRecord>
-					)
-				}
 			</aside>
 			<div class="article-composition">
 				<slot name="lead" />
 				{
 					timeline.pieces.map((piece: any) =>
-						piece.timeline ? (
-							<ProjectTimeline chronology={chronology} referenceHtml={timeline.referenceHtml} />
-						) : piece.group ? (
+						piece.timeline ? null : piece.group ? (
 							<MediaGroup group={piece.group} />
 						) : piece.model ? (
 							<ProjectModelEvidence models={[piece.model]} />
@@ -162,6 +142,12 @@ const firstImageGroup = page.pieces.find(
 						),
 					)
 				}
+				{
+					chronology?.events?.length > 0 && (
+						<ProjectTimeline chronology={chronology} referenceHtml={timeline.referenceHtml} />
+					)
+				}
+
 				{
 					!isPublic && (
 						<details class="source-notes" id="source-notes">

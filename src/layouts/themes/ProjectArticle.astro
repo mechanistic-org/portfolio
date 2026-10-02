@@ -1,19 +1,18 @@
 ---
 /**
- * ProjectArticle v2 — the IMDb-title-page + Wikipedia-MoS flagship reader.
+ * ProjectArticle v2 â€” the IMDb-title-page + Wikipedia-MoS flagship reader.
  *
- *   MediaHeader (poster · title · meta · chips · media strip)
- *   ── 3-column body ──────────────────────────────────────────
- *   LEFT  = forensic HUD (key facts · metrics · scars · BOM)   [hybrid: collapsible
+ *   MediaHeader (poster Â· title Â· meta Â· chips Â· media strip)
+ *   â”€â”€ 3-column body â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+ *   LEFT  = forensic HUD (key facts Â· metrics Â· scars Â· BOM)   [hybrid: collapsible
  *           widget cards, tabs inside the large ones; scars live here]
  *   CENTER= the article (lead + sections) + cast
- *   RIGHT = contents · media · references
+ *   RIGHT = contents Â· media Â· references
  *
  * Assembled entirely from the primitive library so 100+ pages share one taxonomy.
  * Fed by entry.data (today hand-authored mdx; tomorrow the canon generator).
  */
 import "@/styles/project-reading.css";
-import DevelopmentTimeline from "@components/Projects/DevelopmentTimeline.astro";
 import ProjectTimeline from "@components/Projects/ProjectTimeline.astro";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import MediaHeader from "@components/primitives/MediaHeader.astro";
@@ -37,7 +36,7 @@ import ProjectModelEvidence from "@components/Projects/ProjectModelEvidence.astr
 import ProjectArticleBody from "@components/Projects/ProjectArticleBody.astro";
 import ProjectRailCoordinator from "@components/Projects/ProjectRailCoordinator.astro";
 import ProjectRecords from "@components/Projects/ProjectRecords.astro";
-import ContextRibbon from "@components/primitives/ContextRibbon.astro";
+import ProjectCareerContext from "@components/Projects/ProjectCareerContext.astro";
 import type { CareerNode } from "@utils/contextRibbon";
 import { resolveProjectPresentation, type ProjectPresentation } from "@utils/projectPresentation";
 
@@ -96,7 +95,7 @@ const period =
 		"extension-switches",
 	].includes(d.slug) && d.duration
 		? d.duration
-		: [yr(d.date), yr(d.endDate)].filter(Boolean).join("–") || d.duration;
+		: [yr(d.date), yr(d.endDate)].filter(Boolean).join("â€“") || d.duration;
 
 // Recursively collect any { src, alt } images stashed in the legacy cyberspace data.
 function collectImages(node: any, out: { src: string; alt?: string }[] = []) {
@@ -122,7 +121,7 @@ const galleries = (d.cyberspace?.stickies || []).filter(
 	(s: any) => s?.type === "gallery" && s?.data?.images?.length,
 );
 
-// Two-tier rendering — `tier` is the sole classification field.
+// Two-tier rendering â€” `tier` is the sole classification field.
 // deep_dive = everything expanded + full galleries; lite = collapsed HUD, no gallery wall.
 const isDeepDive = d.tier === "deep_dive";
 const lite = !isDeepDive;
@@ -146,7 +145,6 @@ if (new Set(inlineModels.map((model) => model.beforeId)).size > 1)
 
 const meta = [
 	pretty(d.employer),
-	period,
 	pretty(d.industry),
 	d.teamSize ? `${d.teamSize} stakeholders` : undefined,
 ];
@@ -162,7 +160,7 @@ const facts: [string, unknown][] = (
 		["Period", period],
 		["Team", d.teamSize],
 		["Industry", pretty(d.industry)],
-		["Production", [pretty(d.production), pretty(d.productionScale)].filter(Boolean).join(" · ")],
+		["Production", [pretty(d.production), pretty(d.productionScale)].filter(Boolean).join(" Â· ")],
 		["Tools", (d.tools || []).map(pretty).join(", ")],
 	] as [string, unknown][]
 ).filter(([, v]) => v);
@@ -244,8 +242,7 @@ const navNext =
 				: undefined}
 		/>
 
-		{contextNodes.length > 0 && <ContextRibbon nodes={contextNodes} currentId={entry.id} />}
-		<DevelopmentTimeline chronology={chronology} />
+		<ProjectCareerContext nodes={contextNodes} currentId={entry.id} />
 
 		<ProjectRailCoordinator enabled={useContinuityRails} anchors={resolved?.anchors}>
 			<div
@@ -266,14 +263,14 @@ const navNext =
 										href={`#media-${galleries[0]?.id}`}
 										data-browse-media
 									>
-										Browse {new Set(images.map((image) => image.src)).size} images ↗
+										Browse {new Set(images.map((image) => image.src)).size} images â†—
 									</a>
 								</>
 							</div>
 						)
 					}
 					<ProjectRecords chronology={chronology} entropy={entropy} revisions={revisions} />
-					{/* LEFT — forensic HUD */}
+					{/* LEFT â€” forensic HUD */}
 					{
 						useInlineMedia ? null : useContinuityRails ? (
 							<ProjectContinuityRail
@@ -347,7 +344,7 @@ const navNext =
 						)
 					}
 				</div>
-				{/* CENTER — the article */}
+				{/* CENTER â€” the article */}
 				<main class="min-w-0">
 					{chronology?.events?.length > 0 && <ProjectTimeline chronology={chronology} />}
 					{d.hatnote && <Hatnote>{d.hatnote}</Hatnote>}
@@ -375,7 +372,7 @@ const navNext =
 					</div>
 
 					{
-						/* LITE RECORD NOTE — rendered by the template, not typed into 53 files.
+						/* LITE RECORD NOTE â€” rendered by the template, not typed into 53 files.
 				    A lite page is a complete small thing, not a truncated large one, and
 				    saying so converts thinness from "unfinished" into stated editorial
 				    policy. It is also true: the archive holds far more than the page. */
@@ -384,8 +381,8 @@ const navNext =
 						lite && (
 							<p class="text-muted-foreground mt-12 max-w-3xl border-t border-white/10 pt-5 font-mono text-xs leading-relaxed">
 								<span class="text-primary">Lite record.</span> This page carries what can be stated
-								and sourced briefly. The program archive holds more — drawings, test data, and the
-								decisions behind them — and is available on request.
+								and sourced briefly. The program archive holds more â€” drawings, test data, and the
+								decisions behind them â€” and is available on request.
 							</p>
 						)
 					}
@@ -418,7 +415,7 @@ const navNext =
 					}
 				</main>
 
-				{/* RIGHT — contents · media · references */}
+				{/* RIGHT â€” contents Â· media Â· references */}
 				{
 					useInlineMedia ? null : useContinuityRails &&
 					  !["kplayer-300", "motorola-mp3", "avegant-glyph", "cinema-one"].includes(d.slug) ? (
@@ -443,7 +440,7 @@ const navNext =
 								{images.length > 0 && (
 									<div>
 										<div class="text-muted-foreground mb-3 font-mono text-[10px] font-bold tracking-widest uppercase">
-											Media · {images.length}
+											Media Â· {images.length}
 										</div>
 										<div class="grid grid-cols-2 gap-2">
 											{railImages.map((im) => (

@@ -60,7 +60,12 @@ test("accepted public account moves the original paragraph and image once, retai
 	);
 	assert.equal(page.imageCount, 74);
 	assert.equal(page.videoCount, 2);
-	assert.equal(page.headings.filter((heading) => heading.depth === 2).length, 8);
+	assert.equal(
+		page.headings.filter(
+			(heading) => heading.depth === 2 && heading.slug !== "development-timeline",
+		).length,
+		8,
+	);
 	assert.equal(result.pieces.filter((piece) => piece.group).length + 1, 26);
 });
 

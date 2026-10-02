@@ -155,7 +155,7 @@ test("Back leaves Reference, restores article focus/overflow, and Forward keeps 
 	assert.equal(view.dialog.open, false);
 	assert.deepEqual(view.overflow(), ["clip", "important"]);
 	assert.equal(view.article.focused?.preventScroll, true);
-	assert.equal(view.host.dataset.view, "visualization");
+	assert.equal(view.host.dataset.view, "article");
 	assert.equal(view.host.dataset.selectedEvent, "pilot");
 	view.navigate("#project-event-pilot");
 	view.flushCloses();
