@@ -21,6 +21,52 @@ forensic_summary:
   trigger: Fit and stable adjustment depended on the interaction of the headband, liner, earcups and moving cable.
   intervention: Developed spring/liner comparisons and earpad prototypes; coordinated cable routing, abrasion changes and supplier validation.
   result: Prototype activity and mechanical ECO releases are documented alongside specific test results and validation still underway.
+cast:
+- name: Chris Westra
+  role: Mechanical engineering; tooling and supplier reviews
+  org: Avegant
+  roster: key
+  consent: unset
+- name: Misha Young
+  role: Mechanical engineering; tooling and supplier reviews
+  org: Avegant
+  roster: key
+  consent: unset
+- name: Jill
+  role: Spring-and-liner assembly and testing
+  org: Avegant
+  roster: key
+  consent: unset
+- name: Leonard Pang
+  role: Drawing and document revisions delegated by Erik Norris
+  org: Avegant
+  roster: key
+  consent: unset
+- name: Intretech
+  role: Contract manufacturing; product qualification and production validation
+  org: Intretech
+  roster: key
+  consent: unset
+- name: Hi-P
+  role: Tooling-sample inspection and dimensional review
+  org: Hi-P
+  roster: key
+  consent: unset
+- name: Radius
+  role: Headstrap support concepts and mockups
+  org: Radius Product Development
+  roster: key
+  consent: unset
+- name: Fujikura
+  role: Main-cable development and fabrication
+  org: Fujikura
+  roster: key
+  consent: unset
+- name: Amphenol
+  role: Alternative cable samples and validation development
+  org: Amphenol
+  roster: key
+  consent: unset
 cyberspace:
   enable: true
   layout: authored
@@ -1066,6 +1112,8 @@ The outer headband continued to change after shipping began. Its drawing package
 
 ### Keeping the wider build moving
 
+I delegated as much of the drawing and documentation work as I could. Leonard Pang and others updated drawings and revisions at my request. That let me protect time for troubleshooting, supplier work and the decisions needed across the mechanical BOM. The drawings carried other people's work as well as the changes I was directing.{/* ^[evidence:EV-793368ad06ec] */}
+
 That work extended across the BOM: spring indexing, gimbal holes and pins, sliding and bearing surfaces, snaps, screw features, texture and finish. We had to distinguish a drawing or measurement problem from a tooling or processing problem, agree on the correction and check the next parts. Chris, Misha, the supplier engineers and I worked through those reviews together.
 
 The first question with a fix was how much validation it would take. Then came what the supply chain and fabrication could support. I coordinated on the fly, trying to make the best use of time and money. I worked for Chris Westra and Allan Evans, who approved major expenditures. Those practical limits shaped how much we could change, and when.
@@ -1077,6 +1125,12 @@ I've always been an avid photographer, and I use photography to communicate tech
 <div data-authoring-group="initial-assembly"></div>
 
 
+
+### Checking the parts behind the force curves
+
+The springs needed their own dimensional checks. In May 2016, an inspection compared ten 1.4 mm headband springs from each of two supplier lots. On one 148.30 ± 2.00 mm feature, the recorded means were 145.605 mm and 145.766 mm; five of ten parts in the first lot and eight of ten in the second were outside the drawing limits. The second lot had less scatter, but its tighter grouping was still offset from the required dimension. Consistency and conformance were different questions.{/* ^[evidence:EV-945341604818] */}
+
+Those part measurements complemented the assembled-headset tests. A spring drawing, an inspection result and a force curve each described a different part of the problem: the shape we requested, the parts we received and what the complete assembly did.
 
 ### Designing the assembly and inspection fixtures
 
@@ -1166,6 +1220,17 @@ The earpads were a development effort in their own right, balancing contact pres
 
 I tore down numerous headphones, obtained vendor samples and bought replacement earpads for a wide range of models. These gave me a broad set of constructions to examine while designing and prototyping Glyph's pads. My favorite Bose earpads were a reference for the foam type and combination.
 
+We also compared how pad surfaces gripped an adjustable acrylic fixture. At a 132 mm span, we added weight to a hanging bag until the headset slipped. The seven variants behaved very differently; four examples show the range:
+
+| Pad surface | Recorded hanging mass at slip |
+| --- | ---: |
+| Normal Vulcan dots | 656.9 g |
+| Silicone netting | 1,081.74 g |
+| Gel dots | 1,000.04 g |
+| Suede | 35.98 g |
+
+The suede result included the impact of the first bearing landing in the bag. At a wider 155 mm setting, the normal dotted pads held beyond 1,637.3 g before we ran out of weights. The fixture gave us a comparison under a common setup, but acrylic could produce more contact and suction than a person's head. These were bench retention measurements; acoustic seal and comfort still depended on people wearing the product.{/* ^[evidence:EV-945341604818] */}
+
 I built up a group of Glyphs with the different earpad variants and had colleagues try them and provide comments. Nearly everyone liked the dots and the low-pressure foam, and I used that feedback to make the selection.
 
 
@@ -1234,6 +1299,17 @@ Two five-unit groups tested in March 2016 give a sense of the range of behavior.
 
 The April weekly updates record the six-variant comparison as complete and the splint approach as rejected. Short-term cable rework and chassis machining were moving alongside longer-term tooling changes and samples from a second supplier. Decisions were being made and changes released while other investigations continued.{/* ^[evidence:EV-caf0e7c1af31] */}
 
+The near-term and longer-term work ran together:
+
+| Workstream | What we were changing |
+| --- | --- |
+| Existing production assemblies | Chassis machining, cable rework, protective tape and routing |
+| Production tooling and harness design | Changes intended to replace repeated secondary operations and rework |
+| Alternative cable construction | Amphenol tube/sleeve concepts and samples, while Fujikura sustaining work continued |
+
+By the April updates, the splint concept had been discarded and mechanical ECOs for the surrounding parts had been released. The alternative cable samples were a separate development effort. The practical task was to keep improving the assembly in production while evaluating what should replace it.{/* ^[evidence:EV-caf0e7c1af31] */}
+
+
 The work carried into production through careful harness assembly, inspection and system assembly. During the short production run, I instituted a mid-build "break-in" cycling station to test and validate the process and support ongoing improvement. I specified cycling 20% of units; in practice, we only did one in ten. No kink meant pass and continue through assembly.
 
 #### Electrical checks and physical condition
@@ -1267,6 +1343,39 @@ I changed the test order as well. Final optical checks moved into the final clea
 <div data-authoring-group="figure-11"></div>
 
 
+
+## Diagnosing returned units
+
+Diagnosing and mitigating field failures took a substantial amount of my time. A dead headset, a dark display or missing audio was a starting symptom. The investigation could take us through the mechanical assembly, cables, electronics and optics before we understood what needed to change.{/* ^[evidence:EV-bfcb8c6e79d0] */}
+
+### Reproducing the reported problem
+
+One returned unit was reported to have no left-channel audio and static. The March 2016 bench report found audio working in both analog and HDMI modes, but reproduced the static. Its recommendation was to check the twist and wrapping of the cable bundles entering the input board. The reproduced problem was narrower than the original complaint, and it led back to a physical detail of the assembly.{/* ^[evidence:EV-b167a367f5e3] */}
+
+Production board analysis showed why similar display symptoms could require different fixes. In November 2015, the team restored a striped-display board by cleaning an oxidized DMD connector pad. Other boards worked after shorted components were replaced. In one repair, a 33-ohm resistor had been replaced with 180 kilohms; correcting it brought the board back. These were specific diagnoses and repairs, rather than one explanation for every nonworking display.{/* ^[evidence:EV-45a665a2ad1f] */}
+
+My mechanical work overlapped those electrical investigations. In April, cable wear at the chassis was suspected in two MCU shorts, and I was responsible for the mechanical response. That work fed into the clearance, protection and routing changes described above. Cycling, electrical checks and teardown each told us something different about the resulting assembly.{/* ^[evidence:EV-caf0e7c1af31] */}
+
+### What the return records captured
+
+A later return-analysis log, covering December 19, 2016 through January 12, 2017, gives a useful snapshot of the range of findings. It contains 292 observations across 290 recorded serial numbers: 220 observations marked failed and 72 marked passed. Two serials occur in both groups. The failed observations break down by their recorded primary code:
+
+| Recorded finding | Observations |
+| --- | ---: |
+| Particles | 131 |
+| Detached eyecan | 19 |
+| Collapsed lens | 18 |
+| Power | 13 |
+| Boot | 7 |
+| Other primary codes | 32 |
+
+These are observations in one return-analysis log, not a failure rate for all shipped Glyphs. A unit could have more than one symptom, so its primary code was only part of the diagnostic picture. The mix shows why the work extended beyond whether a unit switched on: optical contamination, physical retention and electrical behavior all needed attention.{/* ^[evidence:EV-a7ae90028350] */}
+
+### Feeding the findings back into production
+
+The factory feedback included incoming parts, assembly processes and the inspection sequence. Weekly reports record a revised mirror carrier entering production and a requirement to hold products in the QC room for seven days before first-article inspection and shipment. They also record supplier corrective-action follow-up for PCB via deviations, and confirmation that a new shutter mold could meet its 90–93 degree bend-angle requirement. Those were local, practical corrections while other investigations continued.{/* ^[evidence:EV-760c604347f8] */}
+
+For my dust work, moving the final optical check after the physical tests was part of that feedback loop. We needed to inspect the condition left by assembly and exercising the product, then use what we found to change the parts, protection or process.{/* ^[evidence:EV-de52939d1964] */}
 
 ## Appearance and personal details
 

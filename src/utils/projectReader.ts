@@ -85,7 +85,7 @@ export function buildProjectReader(
 		title: d.title,
 		description: d.description,
 		image: d.heroImage,
-		frontmatter: { title: d.title, description: d.description, tags: d.tags },
+		frontmatter: { title: d.title, description: d.description, tags: d.tags, cast: d.cast },
 		pieces,
 		headings,
 		groups,

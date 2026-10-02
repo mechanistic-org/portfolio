@@ -12,6 +12,9 @@ import "@/styles/authoring-page.css";
 import "@/styles/project-reading.css";
 import ProjectRecords from "../Projects/ProjectRecords.astro";
 import ProjectCareerContext from "../Projects/ProjectCareerContext.astro";
+import ProjectRecord from "../Projects/ProjectRecord.astro";
+import Cast from "../primitives/Cast.astro";
+import { normalizeCast } from "../../utils/cast.mjs";
 const {
 	page,
 	chronology = null,
@@ -20,6 +23,7 @@ const {
 	contextNodes = [],
 	projectNavigation,
 } = Astro.props;
+const cast = normalizeCast(page.frontmatter?.cast);
 const narrativeTimeline = page.headings.find((h: any) =>
 	["development-timeline", "proposed-development-timeline"].includes(h.slug),
 );
@@ -128,6 +132,11 @@ const firstImageGroup = page.pieces.find(
 					revisions={revisions}
 					entropy={entropy}
 				/>
+				{cast.length > 0 && (
+					<ProjectRecord title="Cast & crew">
+						<div id="cast-credits"><Cast cast={cast} /></div>
+					</ProjectRecord>
+				)}
 				<slot name="records" />
 			</aside>
 			<div class="article-composition">

@@ -64,7 +64,7 @@ test("accepted public account moves the original paragraph and image once, retai
 		page.headings.filter(
 			(heading) => heading.depth === 2 && heading.slug !== "development-timeline",
 		).length,
-		8,
+		9,
 	);
 	assert.equal(result.pieces.filter((piece) => piece.group).length + 1, 28);
 });

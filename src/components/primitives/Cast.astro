@@ -1,178 +1,43 @@
 ---
-/**
- * Cast — the team-acknowledgment credits (Wikipedia "Cast"/credits; IMDb-styled).
- * v2: excludes the portfolio owner (it's his site), groups INTERNAL staff by
- * DISCIPLINE (inferred from org/role — a first pass to review), and lists EXTERNAL
- * vendors/partners separately. A LinkedIn link renders ONLY for a member whose
- * canon record carries `consent: approved` AND an explicit `linkedin` URL; the
- * old name+company people-search fallback was removed 2026-07-29 because it
- * fabricated a link for every un-consented person on the roster.
- * Minimum shown is name + role. Clean roster, not the old card array.
- */
-interface Member {
-	name: string;
-	role: string;
-	org: string;
-	linkedin?: string;
-	/** Consent gate — see the cast schema in src/content.config.ts. */
-	consent?: "unset" | "approved" | "declined";
-}
-interface Props {
-	cast: Member[];
-	/** owner name to omit (own portfolio) */
-	omit?: string;
-}
-const { cast: rawCast = [], omit = "Erik Norris" } = Astro.props;
-
-// CONSENT GATE (operator ruling 2026-07-29).
-// Previously every un-linked member was rendered as a link to a LinkedIn
-// people-search for their name + company. That silently associated ~57 real
-// people with this site's claims without any of them being asked. Linking now
-// requires an explicit `approved`, and `declined` removes the entry outright.
-const cast = rawCast.filter((m) => m.consent !== "declined");
-const mayLink = (m: Member) => m.consent === "approved";
-
-const clean = (n: string) =>
-	(n || "")
-		.replace(/\s*\(.*?\)\s*/g, " ")
-		.replace(/\s+/g, " ")
-		.trim();
-const company = (org: string) => (org || "").split(/[\/,]/)[0].trim();
-// Only an explicit, operator-curated URL. The old name+company people-search
-// fallback fabricated a link for anyone without one.
-const linkedinHref = (m: Member) => m.linkedin;
-
-const EXTERNAL = /vtech|kenny|jetcrown|mass precision/i;
-// org/role → discipline (most specific first). First pass; Erik to review/edit into canon.
-const DISC: [RegExp, string][] = [
-	[/industrial design|mechanical|\bid\b/i, "Mechanical & Industrial Design"],
-	[/pcb/i, "PCB Design"],
-	[/hardware/i, "Hardware Engineering"],
-	[/firmware|software/i, "Firmware & Software"],
-	[/manufactur/i, "Manufacturing Operations"],
-	[/test|quality|\bqa\b/i, "Test & Quality Assurance"],
-	[/buyer|planner|purchas/i, "Purchasing"],
-	[/program|product manager|product management/i, "Program & Product Management"],
-	[/marketing/i, "Product Marketing"],
-	[/technical pub|documentation|tech pub/i, "Technical Publications"],
-	[/customer service|support/i, "Customer Service"],
-];
-const ORDER = [
-	"Mechanical & Industrial Design",
-	"Hardware Engineering",
-	"PCB Design",
-	"Firmware & Software",
-	"Manufacturing Operations",
-	"Test & Quality Assurance",
-	"Purchasing",
-	"Program & Product Management",
-	"Product Marketing",
-	"Technical Publications",
-	"Customer Service",
-	"Other",
-];
-const disciplineOf = (m: Member) => {
-	const hay = `${m.org} ${m.role}`;
-	for (const [re, label] of DISC) if (re.test(hay)) return label;
-	return "Other";
-};
-
-// dedupe, drop owner, partition internal/external, group
-const seen = new Set<string>();
-const internal = new Map<string, Member[]>();
-const external = new Map<string, Member[]>();
-for (const m of cast) {
-	if (!m?.name) continue;
-	if (clean(m.name).toLowerCase() === omit.toLowerCase()) continue;
-	const key = `${m.name}|${m.role}|${m.org}`;
-	if (seen.has(key)) continue;
-	seen.add(key);
-	if (EXTERNAL.test(m.org || "")) {
-		const g = company(m.org) || "Vendors";
-		(external.get(g) || external.set(g, []).get(g)!).push(m);
-	} else {
-		const d = disciplineOf(m);
-		(internal.get(d) || internal.set(d, []).get(d)!).push(m);
-	}
-}
-const internalGroups = ORDER.filter((d) => internal.has(d)).map((d) => [d, internal.get(d)!] as const);
-const externalGroups = [...external.entries()];
-const total = [...seen].length;
+import { normalizeCast, groupCast } from "../../utils/cast.mjs";
+import type { CastMember } from "../../utils/cast.mjs";
+interface Props { cast: CastMember[]; omit?: string; }
+const { cast = [], omit = "Erik Norris" } = Astro.props;
+const groups = groupCast(normalizeCast(cast, omit));
 ---
 
-<div class="space-y-7">
-	{
-		internalGroups.map(([label, members]) => (
-			<div>
-				<h3 class="text-primary mb-2.5 font-mono text-[11px] font-bold tracking-widest uppercase">
-					{label} <span class="text-muted-foreground/50">· {members.length}</span>
-				</h3>
-				<div class="grid gap-x-8 sm:grid-cols-2 xl:grid-cols-3">
-					{members.map((m) => (
-						<div class="group/m border-border/40 flex items-baseline justify-between gap-3 border-b py-1.5">
-							<div class="min-w-0">
-								<span class="text-foreground text-sm font-medium">{clean(m.name)}</span>
-								<span class="text-muted-foreground ml-2 text-xs">{m.role}</span>
-							</div>
-							{mayLink(m) && linkedinHref(m) && (
-							<a
-								href={linkedinHref(m)}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="text-muted-foreground/30 hover:text-primary shrink-0 transition-colors"
-								aria-label={`${clean(m.name)} on LinkedIn`}
-							>
-								<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-									<path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17V9.99H6V17h2.34zM7.17 8.96a1.36 1.36 0 1 0 0-2.72 1.36 1.36 0 0 0 0 2.72zM18 17v-3.84c0-2.05-1.1-3-2.55-3-1.17 0-1.7.64-1.99 1.09V9.99h-2.34V17h2.34v-3.91c0-.21.02-.41.08-.56.16-.41.54-.84 1.17-.84.82 0 1.15.63 1.15 1.55V17H18z" />
-								</svg>
-							</a>
-							)}
-						</div>
-					))}
+<div class="cast-roster">
+	{groups.map((group) => (
+		<section class="cast-roster__section">
+			{group.roster === "stakeholder" && <h3 class="cast-roster__label">Wider program</h3>}
+			{group.organizations.map(({ org, members }) => (
+				<div class:list={["cast-roster__organization", { "cast-roster__organization--team": members.length > 1 }]}>
+					<h4>{org}</h4>
+					<ul>
+						{members.map((member: CastMember) => (
+							<li>
+								{member.consent === "approved" && member.linkedin ? (
+									<a href={member.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${member.name} on LinkedIn`}>{member.name} ↗</a>
+								) : member.name !== org && <span class="cast-roster__name">{member.name}</span>}
+								<span class="cast-roster__role">{member.role}</span>
+							</li>
+						))}
+					</ul>
 				</div>
-			</div>
-		))
-	}
-
-	{
-		externalGroups.length > 0 && (
-			<div class="border-border/60 border-t pt-6">
-				<div class="text-muted-foreground mb-4 font-mono text-[10px] font-bold tracking-widest uppercase">
-					External · Vendors & Partners
-				</div>
-				<div class="space-y-5">
-					{externalGroups.map(([label, members]) => (
-						<div>
-							<h3 class="text-foreground mb-2 font-mono text-[11px] font-bold tracking-wider uppercase">
-								{label} <span class="text-muted-foreground/50">· {members.length}</span>
-							</h3>
-							<div class="grid gap-x-8 sm:grid-cols-2 xl:grid-cols-3">
-								{members.map((m) => (
-									<div class="group/m border-border/40 flex items-baseline justify-between gap-3 border-b py-1.5">
-										<div class="min-w-0">
-											<span class="text-foreground text-sm font-medium">{clean(m.name)}</span>
-											<span class="text-muted-foreground ml-2 text-xs">{m.role}</span>
-										</div>
-										{mayLink(m) && linkedinHref(m) && (
-										<a
-											href={linkedinHref(m)}
-											target="_blank"
-											rel="noopener noreferrer"
-											class="text-muted-foreground/30 hover:text-primary shrink-0 transition-colors"
-											aria-label={`${clean(m.name)} on LinkedIn`}
-										>
-											<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-												<path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 17V9.99H6V17h2.34zM7.17 8.96a1.36 1.36 0 1 0 0-2.72 1.36 1.36 0 0 0 0 2.72zM18 17v-3.84c0-2.05-1.1-3-2.55-3-1.17 0-1.7.64-1.99 1.09V9.99h-2.34V17h2.34v-3.91c0-.21.02-.41.08-.56.16-.41.54-.84 1.17-.84.82 0 1.15.63 1.15 1.55V17H18z" />
-											</svg>
-										</a>
-										)}
-									</div>
-								))}
-							</div>
-						</div>
-					))}
-				</div>
-			</div>
-		)
-	}
+			))}
+		</section>
+	))}
 </div>
+
+<style>
+	.cast-roster { display: grid; gap: 2rem; }
+	.cast-roster__section { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: 1.5rem 2rem; }
+	.cast-roster__organization--team, .cast-roster__label { grid-column: 1 / -1; }
+	.cast-roster__label { font-size: 1.15rem; }
+	.cast-roster__organization h4 { margin: 0 0 .6rem; font-size: .85rem; font-family: var(--font-mono); }
+	.cast-roster ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: .75rem 2rem; }
+	.cast-roster li { min-width: 0; padding-bottom: .65rem; border-bottom: 1px solid var(--border); }
+	.cast-roster__name, .cast-roster a { display: block; font-size: .95rem; font-weight: 600; }
+	.cast-roster a { color: var(--authoring-link); }
+	.cast-roster__role { display: block; font-size: .85rem; line-height: 1.5; color: var(--muted-foreground); overflow-wrap: anywhere; }
+</style>
