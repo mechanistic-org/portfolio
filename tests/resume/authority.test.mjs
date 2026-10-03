@@ -2,6 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { resumeMaster } from "../../src/config/resume_master.ts";
 import { claimFor } from "../../src/config/claim-presentations.ts";
+import { synopsisForRole } from "../../src/lib/project-synopsis.mjs";
+import projectSynopses from "../../src/data/project-synopses.json" with { type: "json" };
 import {
 	resumeExperience,
 	jsonResume,
@@ -107,11 +109,18 @@ test("accepted #152 identity and LinkedIn survive; scoped achievements resolve t
 		const old = oldResume.experience[index];
 		for (const key of ["company", "title", "location", "dates"])
 			assert.deepEqual(entry[key], old[key]);
+		const sharedBlurbs = entry.roleIds
+			.map((roleId) => synopsisForRole(projectSynopses.projects, roleId, "resume"))
+			.filter(Boolean);
+		if (sharedBlurbs.length) assert.equal(entry.blurb, sharedBlurbs.join("\n\n"));
 		if (!["avegant-2015", "digidesign-2003"].includes(entry.id)) {
-			assert.deepEqual(entry.blurb, old.blurb);
+			if (!sharedBlurbs.length) assert.deepEqual(entry.blurb, old.blurb);
 			assert.deepEqual(entry.bullets, old.bullets);
 		} else {
-			assert.deepEqual(entry.bullets, [0, 1, 2].map((slot) => claimFor(`resume:${entry.id}:${slot}`).text));
+			assert.deepEqual(
+				entry.bullets,
+				[0, 1, 2].map((slot) => claimFor(`resume:${entry.id}:${slot}`).text),
+			);
 			assert.doesNotMatch(entry.bullets.join(" "), /100% mechanical fit|40% seizure|35\.4%/);
 		}
 	});

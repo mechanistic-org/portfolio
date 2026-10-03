@@ -340,7 +340,7 @@ console.log(`[ROUTER] Project: ${finalEntry.id} -> Theme: ${theme}`);
 					: null,
 			}}
 		/>
-	) : entry && currentSite === "main" && entry.data.tier === "deep_dive" ? (
+	) : entry && currentSite === "main" && (entry.data.tier === "deep_dive" || entry.data.synopsis) ? (
 		<ProjectReader
 			entry={finalEntry}
 			headings={headings}

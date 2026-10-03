@@ -1,6 +1,8 @@
 import { resumeMaster } from "./resume_master.ts";
 import type { CareerPeriod, CareerRole } from "./resume_master.ts";
 import { claimFor } from "./claim-presentations.ts";
+import { synopsisForRole, validateSynopsis } from "../lib/project-synopsis.mjs";
+import projectSynopses from "../data/project-synopses.json" with { type: "json" };
 export type ResumeAuthority = typeof resumeMaster;
 export const httpsUrl = (value: string) => (/^https:\/\//.test(value) ? value : `https://${value}`);
 export const plainText = (value: string) => value.replace(/\*\*(.*?)\*\*/g, "$1");
@@ -14,7 +16,13 @@ export function roleById(authority: ResumeAuthority, id: string): CareerRole {
 	if (roles.length !== 1) throw new Error(`Missing or duplicate canonical role ID: ${id}`);
 	return roles[0];
 }
-export function resumeExperience(authority = resumeMaster) {
+export function resumeExperience(authority = resumeMaster, records = projectSynopses.projects) {
+	for (const record of records) {
+		validateSynopsis(record.synopsis);
+		if (record.synopsis.roleId && record.synopsis.roleId !== record.roleId)
+			throw new Error("Synopsis role differs from canonical project association");
+		if (record.roleId) roleById(authority, record.roleId);
+	}
 	return authority.experience.map((entry) => {
 		const roles = entry.roleIds.map((id) => roleById(authority, id));
 		if (!roles.length || (!entry.group && roles.length !== 1))
@@ -26,16 +34,26 @@ export function resumeExperience(authority = resumeMaster) {
 			period: roles[0].period,
 		};
 		const claims = entry.id === "digidesign-2003" || entry.id === "avegant-2015";
-		const bullets = claims ? [0, 1, 2].map((index) => claimFor(`resume:${entry.id}:${index}`).text) : entry.bullets;
-		const blurb = entry.id === "avegant-2015"
-			? "Mechanical engineering for the first-generation Glyph personal theater headset."
-			: entry.blurb;
+		const bullets = claims
+			? [0, 1, 2].map((index) => claimFor(`resume:${entry.id}:${index}`).text)
+			: entry.bullets;
+		const sharedBlurbs = entry.roleIds
+			.map((roleId) => synopsisForRole(records, roleId, "resume"))
+			.filter((text): text is string => Boolean(text));
+		const blurb = sharedBlurbs.length
+			? sharedBlurbs.join("\n\n")
+			: entry.id === "avegant-2015"
+				? "Mechanical engineering for the first-generation Glyph personal theater headset."
+				: entry.blurb;
 		return { ...entry, ...display, blurb, bullets, dates: formatPeriod(display.period) };
 	});
 }
 export function resumeSummary(authority = resumeMaster) {
 	if (authority.summary.executive !== resumeMaster.summary.executive) return authority.summary;
-	return { executive: "I lead hands-on mechanical and systems engineering for complex physical products, from ambiguous architecture through DVT, manufacturing transfer, and field recovery. I set the technical method, lead cross-functional decisions, and stay close to the hardware as it moves from prototype to production.\n\nMy work connects mechanism design, tolerance control, validation, supplier processes, and serviceability. The program accounts below show the decisions and measured results in their original scope. I now apply that same discipline to local-first AI-agent infrastructure for research and engineering operations." };
+	return {
+		executive:
+			"I lead hands-on mechanical and systems engineering for complex physical products, from ambiguous architecture through DVT, manufacturing transfer, and field recovery. I set the technical method, lead cross-functional decisions, and stay close to the hardware as it moves from prototype to production.\n\nMy work connects mechanism design, tolerance control, validation, supplier processes, and serviceability. The program accounts below show the decisions and measured results in their original scope. I now apply that same discipline to local-first AI-agent infrastructure for research and engineering operations.",
+	};
 }
 export function identityMetadata(authority = resumeMaster) {
 	const { header, competencies, career } = authority;

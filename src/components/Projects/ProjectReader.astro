@@ -20,6 +20,7 @@ const {
 } = Astro.props;
 const d = entry.data;
 const page = buildProjectReader(entry, await Astro.slots.render("default"), headings, presentation);
+const hasRecords = !d.synopsis || page.pieces.some((p) => p.group || p.model || p.html?.trim());
 const pretty = (value: string) =>
 	value.replaceAll("_", " ").replace(/\b\w/g, (c) => c.toUpperCase());
 const recordedYears = [d.date, d.endDate]
@@ -55,95 +56,88 @@ const projectNavigation = {
 
 <AuthoringPage
 	page={page}
+	hasRecords={hasRecords}
 	chronology={chronology}
 	revisions={revisions}
 	entropy={entropy}
 	contextNodes={contextNodes}
 	projectNavigation={projectNavigation}
 >
-	<Fragment slot="records">
-		{
-			(facts.length > 0 || d.description || d.heroImage) && (
-				<ProjectRecord title="Project details">
-					{d.description && <p class="reader-description">{d.description}</p>}
-					{d.heroImage && (
-						<a href={d.heroImage} class="reader-cover">
-							<img src={d.heroImage} alt={d.title} loading="lazy" />
-						</a>
-					)}
-					<Infobox facts={facts} />
-				</ProjectRecord>
-			)
-		}
-		{
-			d.forensic_summary && (
-				<ProjectRecord title="Project summary">
-					<ForensicSummary summary={d.forensic_summary} />
-				</ProjectRecord>
-			)
-		}
-		{
-			Object.keys(d.forensic_metrics ?? {}).length > 0 && (
-				<ProjectRecord title="Recorded metrics">
-					<HudMetrics metrics={d.forensic_metrics} open={true} />
-				</ProjectRecord>
-			)
-		}
-		{
-			d.scars?.length > 0 && (
-				<ProjectRecord title="Engineering decisions">
-					{d.scars.map((scar: any) => (
-						<section class="reader-decision">
-							<h3>{scar.label}</h3>
-							{[scar.phase, scar.severity, scar.value].filter(Boolean).length > 0 && (
-								<p>{[scar.phase, scar.severity, scar.value].filter(Boolean).join(" · ")}</p>
-							)}
-							<dl>
-								{[
-									["Trigger", scar.trigger],
-									["Intervention", scar.intervention],
-									["Result", scar.result],
-									["Description", scar.description],
-								]
-									.filter(([, value]) => value)
-									.map(([label, value]) => (
-										<>
-											<dt>{label}</dt>
-											<dd>{value}</dd>
-										</>
-									))}
-							</dl>
-							{scar.anchor && headings.some((h: any) => h.slug === scar.anchor) && (
-								<a href={`#${scar.anchor}`}>Read in the account ↗</a>
-							)}
-						</section>
-					))}
-				</ProjectRecord>
-			)
-		}
-		{
-			d.bom?.length > 0 && (
-				<ProjectRecord title="Bill of materials">
-					<dl>
-						{d.bom.map((item: any) => (
-							<>
-								<dt>{item.label}</dt>
-								<dd>{item.value}</dd>
-							</>
+	{
+		hasRecords && (
+			<Fragment slot="records">
+				{(facts.length > 0 || d.description || d.heroImage) && (
+					<ProjectRecord title="Project details">
+						{d.description && <p class="reader-description">{d.description}</p>}
+						{d.heroImage && (
+							<a href={d.heroImage} class="reader-cover">
+								<img src={d.heroImage} alt={d.title} loading="lazy" />
+							</a>
+						)}
+						<Infobox facts={facts} />
+					</ProjectRecord>
+				)}
+				{d.forensic_summary && (
+					<ProjectRecord title="Project summary">
+						<ForensicSummary summary={d.forensic_summary} />
+					</ProjectRecord>
+				)}
+				{Object.keys(d.forensic_metrics ?? {}).length > 0 && (
+					<ProjectRecord title="Recorded metrics">
+						<HudMetrics metrics={d.forensic_metrics} open={true} />
+					</ProjectRecord>
+				)}
+				{d.scars?.length > 0 && (
+					<ProjectRecord title="Engineering decisions">
+						{d.scars.map((scar: any) => (
+							<section class="reader-decision">
+								<h3>{scar.label}</h3>
+								{[scar.phase, scar.severity, scar.value].filter(Boolean).length > 0 && (
+									<p>{[scar.phase, scar.severity, scar.value].filter(Boolean).join(" · ")}</p>
+								)}
+								<dl>
+									{[
+										["Trigger", scar.trigger],
+										["Intervention", scar.intervention],
+										["Result", scar.result],
+										["Description", scar.description],
+									]
+										.filter(([, value]) => value)
+										.map(([label, value]) => (
+											<>
+												<dt>{label}</dt>
+												<dd>{value}</dd>
+											</>
+										))}
+								</dl>
+								{scar.anchor && headings.some((h: any) => h.slug === scar.anchor) && (
+									<a href={`#${scar.anchor}`}>Read in the account ↗</a>
+								)}
+							</section>
 						))}
-					</dl>
-				</ProjectRecord>
-			)
-		}
+					</ProjectRecord>
+				)}
+				{d.bom?.length > 0 && (
+					<ProjectRecord title="Bill of materials">
+						<dl>
+							{d.bom.map((item: any) => (
+								<>
+									<dt>{item.label}</dt>
+									<dd>{item.value}</dd>
+								</>
+							))}
+						</dl>
+					</ProjectRecord>
+				)}
 
-		{
-			references.length > 0 && (
-				<ProjectRecord title="References">
-					<References references={references} />
-				</ProjectRecord>
-			)
-		}
-	</Fragment>
+				{references.length > 0 && (
+					<ProjectRecord title="References">
+						<References references={references} />
+					</ProjectRecord>
+				)}
+			</Fragment>
+		)
+	}
 	<Fragment slot="lead">
 		{d.hatnote && <p class="article-prose">{d.hatnote}</p>}
 	</Fragment>

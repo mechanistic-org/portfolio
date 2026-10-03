@@ -5,6 +5,7 @@ import MediaExperience from "./MediaExperience.astro";
 import ProjectOpening from "../Projects/ProjectOpening.astro";
 import projectOpenings from "../../config/project-openings.json";
 import { selectProjectOpening } from "../../utils/projectOpening.mjs";
+import { synopsisOpening } from "../../lib/project-synopsis.mjs";
 import { selectAuthoredTimeline } from "../../utils/projectTimeline.mjs";
 import ProjectTimeline from "../Projects/ProjectTimeline.astro";
 import ProjectModelEvidence from "../Projects/ProjectModelEvidence.astro";
@@ -22,6 +23,7 @@ const {
 	entropy = [],
 	contextNodes = [],
 	projectNavigation,
+	hasRecords = false,
 } = Astro.props;
 const cast = normalizeCast(page.frontmatter?.cast);
 const narrativeTimeline = page.headings.find((h: any) =>
@@ -30,16 +32,23 @@ const narrativeTimeline = page.headings.find((h: any) =>
 const isPublic = page.public === true;
 const isGlyph = page.project === "avegant-glyph";
 const presentation = projectOpenings[page.project as keyof typeof projectOpenings];
-const { opening, pieces } = selectProjectOpening(page.pieces, presentation?.selection);
+const canonicalOpening = synopsisOpening(page);
+const legacy = canonicalOpening ? null : selectProjectOpening(page.pieces, presentation?.selection);
+const opening = canonicalOpening ?? legacy?.opening;
+const pieces = canonicalOpening ? page.pieces : legacy!.pieces;
+const openingImage =
+	canonicalOpening?.image ??
+	legacy?.opening?.group.items[0].displaySrc ??
+	legacy?.opening?.group.items[0].src;
 const timeline = selectAuthoredTimeline(pieces, chronology);
 const chapters = page.headings.filter(
 	(h: any) => h.depth === 2 && !(timeline.referenceHtml && h.slug === timeline.referenceId),
 );
 const projectLabel = isGlyph ? "Avegant Glyph" : page.title;
-const firstImageGroup = pieces.find(
-	(piece: any) => piece.group?.items[0]?.kind === "image",
-)?.group;
-const browseImageCount = page.imageCount - (opening?.group.items.length ?? 0);
+const firstImageGroup = pieces.find((piece: any) => piece.group?.items[0]?.kind === "image")?.group;
+const browseImageCount = page.imageCount - (legacy?.opening?.group.items.length ?? 0);
+const hasArticle = pieces.some((piece: any) => piece.group || piece.model || piece.html?.trim());
+const hasRail = chapters.length > 0 || browseImageCount > 0 || cast.length > 0 || hasRecords;
 ---
 
 <BaseLayout
@@ -74,10 +83,10 @@ const browseImageCount = page.imageCount - (opening?.group.items.length ?? 0);
 		data-pagefind-meta="title[data-project-title], project[data-authoring-project], intro[data-project-intro]"
 	>
 		<ProjectOpening
-			title={presentation?.title ?? page.title}
-			subtitle={presentation?.subtitle}
+			title={canonicalOpening?.title ?? presentation?.title ?? page.title}
+			subtitle={canonicalOpening?.subtitle ?? presentation?.subtitle}
 			meta={presentation?.meta}
-			withMedia={Boolean(opening)}
+			withMedia={Boolean(openingImage)}
 		>
 			<Fragment slot="product">
 				{opening && <p class="opening-product" set:html={opening.blocks[0]} />}
@@ -87,7 +96,7 @@ const browseImageCount = page.imageCount - (opening?.group.items.length ?? 0);
 					opening && (
 						<div class="opening-context">
 							{opening.blocks.slice(1).map((block, index) => (
-								<p class:list={{ "opening-inherited": opening.blocks.length === 3 && index === 0 }} set:html={block} />
+								<p set:html={block} />
 							))}
 						</div>
 					)
@@ -95,51 +104,67 @@ const browseImageCount = page.imageCount - (opening?.group.items.length ?? 0);
 			</Fragment>
 			<Fragment slot="media">
 				{
-					opening && (
+					openingImage && (
 						<div class="opening-visual">
-							<img src={opening.group.items[0].displaySrc ?? opening.group.items[0].src} alt="" aria-hidden="true" fetchpriority="high" decoding="async" />
+							<img
+								src={openingImage}
+								alt=""
+								aria-hidden="true"
+								fetchpriority="high"
+								decoding="async"
+							/>
 						</div>
 					)
 				}
 			</Fragment>
 		</ProjectOpening>
 		<ProjectCareerContext nodes={contextNodes} currentId={page.project} />
-		<div class="authoring-layout">
-			<aside class="article-contents">
-				<nav aria-label="On this page">
-					{
-						chapters.map((h: any, i: number) => (
-							<a href={`#${h.slug}`}>
-								<span>{String(i + 1).padStart(2, "0")}</span>
-								{h.text}
+		<div class:list={["authoring-layout", { "synopsis-only": !hasRail && !hasArticle }]}>
+			{
+				hasRail && (
+					<aside class="article-contents">
+						{chapters.length > 0 && (
+							<nav aria-label="On this page">
+								{chapters.map((h: any, i: number) => (
+									<a href={`#${h.slug}`}>
+										<span>{String(i + 1).padStart(2, "0")}</span>
+										{h.text}
+									</a>
+								))}
+							</nav>
+						)}
+						{page.imageCount > 0 && firstImageGroup && (
+							<a
+								class="browse-project-media"
+								href={`#media-${firstImageGroup.id}`}
+								data-browse-media
+							>
+								Browse {browseImageCount} images
 							</a>
-						))
-					}
-				</nav>
-				{
-					page.imageCount > 0 && firstImageGroup && (
-						<a class="browse-project-media" href={`#media-${firstImageGroup.id}`} data-browse-media>
-							Browse {browseImageCount} images
-						</a>
-					)
-				}
-				<ProjectRecords
-					chronology={chronology}
-					timelineHref={timeline.referenceId
-						? `#${timeline.referenceId}`
-						: narrativeTimeline
-							? `#${narrativeTimeline.slug}`
-							: null}
-					revisions={revisions}
-					entropy={entropy}
-				/>
-				{cast.length > 0 && (
-					<ProjectRecord title="Cast & crew">
-						<div id="cast-credits"><Cast cast={cast} /></div>
-					</ProjectRecord>
-				)}
-				<slot name="records" />
-			</aside>
+						)}
+						<ProjectRecords
+							chronology={chronology}
+							timelineHref={
+								timeline.referenceId
+									? `#${timeline.referenceId}`
+									: narrativeTimeline
+										? `#${narrativeTimeline.slug}`
+										: null
+							}
+							revisions={revisions}
+							entropy={entropy}
+						/>
+						{cast.length > 0 && (
+							<ProjectRecord title="Cast & crew">
+								<div id="cast-credits">
+									<Cast cast={cast} />
+								</div>
+							</ProjectRecord>
+						)}
+						<slot name="records" />
+					</aside>
+				)
+			}
 			<div class="article-composition">
 				<slot name="lead" />
 				{
@@ -183,5 +208,5 @@ const browseImageCount = page.imageCount - (opening?.group.items.length ?? 0);
 			</div>
 		</div>
 	</article>
-	<MediaExperience projectLabel={projectLabel} isPublic={isPublic} />
+	{page.groups?.length > 0 && <MediaExperience projectLabel={projectLabel} isPublic={isPublic} />}
 </BaseLayout>

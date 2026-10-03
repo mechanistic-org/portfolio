@@ -8,6 +8,8 @@ export const SOURCE_INPUTS = [
 	"src/config/resume_master.ts",
 	"src/data/careerChronology.json",
 	"src/config/resume_projection.ts",
+	"src/lib/project-synopsis.mjs",
+	"src/data/project-synopses.json",
 	"src/config/claim-presentations.ts",
 	"src/lib/project-claims.mjs",
 	"src/data/project-claims.json",

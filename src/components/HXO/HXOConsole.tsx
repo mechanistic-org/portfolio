@@ -17,6 +17,7 @@ interface ConsoleProject {
 		date?: string | Date;
 		client?: string[];
 		audio_url?: string;
+		synopsis?: { paragraphs: { id: string; text: string }[] };
 		forensic_summary?: {
 			trigger?: string;
 			intervention?: string;
@@ -205,8 +206,17 @@ export default function HXOConsole({ projects, careerNodes, projectAliases }: HX
 function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 	if (!project || !project.data) return <div className="p-4 text-red-500">CORRUPT DATA</div>;
 
-	const { title, client, forensic_summary, audio_url, toolchain, heroImage, description } =
-		project.data;
+	const {
+		title,
+		client,
+		forensic_summary: legacySummary,
+		synopsis,
+		audio_url,
+		toolchain,
+		heroImage,
+		description,
+	} = project.data;
+	const forensic_summary = synopsis ? undefined : legacySummary;
 	const chronology = projectPeriod(project.id, project.data);
 
 	return (
@@ -247,10 +257,15 @@ function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 					/>
 				</a>
 			)}
-			{description && !forensic_summary?.result && !forensic_summary?.objective && (
+			{description && !synopsis && !forensic_summary?.result && !forensic_summary?.objective && (
 				<p className="mb-5 text-sm leading-relaxed text-zinc-300">{description}</p>
 			)}
 			<div className="space-y-6">
+				{synopsis?.paragraphs.map((p) => (
+					<p key={p.id} className="text-sm leading-relaxed text-zinc-300">
+						{p.text}
+					</p>
+				))}
 				{forensic_summary?.result && (
 					<div className="objective">
 						<h3 className="mb-2 font-mono text-xs tracking-widest text-zinc-500 uppercase">

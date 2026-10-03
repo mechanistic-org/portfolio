@@ -7,7 +7,9 @@ import { resumeMaster } from "../src/config/resume_master.ts";
 import { linkedinMaster } from "../src/config/linkedin_master.ts";
 import { linkedinReview } from "../src/config/linkedin_review.ts";
 import { formatPeriod, roleById } from "../src/config/resume_projection.ts";
-export const EXPORTER_VERSION = "1.0.0";
+import { synopsisForRole, validateSynopsis } from "../src/lib/project-synopsis.mjs";
+import projectSynopses from "../src/data/project-synopses.json" with { type: "json" };
+export const EXPORTER_VERSION = "1.1.0";
 export const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 export const normalize = (text) => text.replace(/\r\n?/g, "\n").normalize("NFC").trim();
 export const factsDigest = (authority) => sha256(JSON.stringify(authority));
@@ -80,12 +82,97 @@ export function validateProjection(authority, prose, review = linkedinReview) {
 	if (proseDigest(prose) !== review.proseSha256)
 		throw new Error("Unapproved prose drift; lexical checks are not factual review");
 }
+/** Canon project wording is a local draft layered over the unchanged #152 baseline. */
+export function resolveCanonicalContent(authority, prose, data = projectSynopses) {
+	if (data.version !== 1 || !Array.isArray(data.projects))
+		throw new Error("Invalid canonical synopsis projection");
+	const projectIds = new Set();
+	const slugs = new Set();
+	const projects = [];
+	const origin = new URL(
+		/^https:\/\//.test(authority.header.contact.portfolio)
+			? authority.header.contact.portfolio
+			: `https://${authority.header.contact.portfolio}`,
+	).origin;
+	for (const record of data.projects) {
+		validateSynopsis(record.synopsis);
+		if (record.synopsis.roleId && record.synopsis.roleId !== record.roleId)
+			throw new Error("Synopsis role differs from canonical project association");
+		if (typeof record.title !== "string" || !record.title.trim())
+			throw new Error("Missing canonical project title");
+		if (!record.slug || slugs.has(record.slug) || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(record.slug))
+			throw new Error("Missing or duplicate canonical project slug");
+		slugs.add(record.slug);
+		if (!/^[0-9a-f]{64}$/.test(record.sourceSha256 ?? ""))
+			throw new Error(`Missing canonical source digest: ${record.slug}`);
+		if (record.roleId) roleById(authority, record.roleId);
+		if (!Array.isArray(record.linkedinProjects ?? []))
+			throw new Error("Invalid LinkedIn project selection");
+		for (const project of record.linkedinProjects ?? []) {
+			if (!project.roleId || !record.roleId)
+				throw new Error("Missing LinkedIn project role association");
+			const role = roleById(authority, project.roleId);
+			if (project.roleId !== record.roleId)
+				throw new Error("LinkedIn project association differs from canonical project role");
+			if (
+				!project.id ||
+				projectIds.has(project.id) ||
+				typeof project.title !== "string" ||
+				!project.title.trim()
+			)
+				throw new Error("Missing or duplicate LinkedIn project identity");
+			projectIds.add(project.id);
+			let url;
+			try {
+				url = new URL(project.url);
+			} catch {
+				throw new Error("Invalid LinkedIn project source URL");
+			}
+			if (
+				url.protocol !== "https:" ||
+				url.origin !== origin ||
+				url.pathname.replace(/\/$/, "") !== `/projects/${record.slug}` ||
+				url.search
+			)
+				throw new Error("LinkedIn project URL must resolve to its canonical project");
+			if (!Array.isArray(project.sections) || !project.sections.length)
+				throw new Error("LinkedIn project requires selected sections");
+			const anchors = new Set();
+			for (const section of project.sections) {
+				if (
+					typeof section.heading !== "string" ||
+					!section.heading.trim() ||
+					typeof section.text !== "string" ||
+					!section.text.trim() ||
+					!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(section.anchor ?? "") ||
+					anchors.has(section.anchor)
+				)
+					throw new Error("Invalid or duplicate LinkedIn project section");
+				anchors.add(section.anchor);
+			}
+			projects.push({
+				...project,
+				slug: record.slug,
+				company: role.channels.linkedinCompany,
+				position: role.channels.linkedinTitle,
+				sourceSha256: record.sourceSha256,
+			});
+		}
+	}
+	const experience = prose.experience.map((entry) => ({
+		...entry,
+		blurb: synopsisForRole(data.projects, entry.roleId, "linkedinExperience") ?? entry.blurb,
+	}));
+	return { experience, projects };
+}
 export function buildPacket(
 	authority = resumeMaster,
 	prose = linkedinMaster,
 	review = linkedinReview,
+	data = projectSynopses,
 ) {
 	validateProjection(authority, prose, review);
+	const resolved = resolveCanonicalContent(authority, prose, data);
 	const sections = [
 		"HEADLINE",
 		normalize(prose.tagline),
@@ -93,21 +180,38 @@ export function buildPacket(
 		normalize(prose.about),
 		"EXPERIENCE",
 	];
-	for (const entry of prose.experience) {
+	for (const entry of resolved.experience) {
 		const role = roleById(authority, entry.roleId);
 		sections.push(
 			`${normalize(role.channels.linkedinCompany)} | ${normalize(role.channels.linkedinTitle)}\n${formatPeriod(role.period)}\n\n${normalize(entry.blurb)}`,
 		);
 	}
+	if (resolved.projects.length) sections.push("PROJECTS");
+	for (const project of resolved.projects) {
+		const selectedSections = project.sections
+			.map((section) => {
+				const source = new URL(project.url);
+				source.hash = section.anchor;
+				return `${normalize(section.heading)}\n\n${normalize(section.text)}\n\nSource: ${source.href}`;
+			})
+			.join("\n\n");
+		sections.push(
+			`${normalize(project.title)}\nAssociated with: ${normalize(project.company)} | ${normalize(project.position)}\n\n${selectedSections}`,
+		);
+	}
 	const packet = sections.join("\n\n") + "\n";
 	if (packet.includes("\u2014")) throw new Error("Outbound packet contains an em dash");
+	if (forbidden.test(packet)) throw new Error("Forbidden framing or claim in resolved packet");
 	return Buffer.from(packet, "utf8");
 }
 export const INPUT_PATHS = [
 	"src/config/resume_master.ts",
+	"src/data/careerChronology.json",
 	"src/config/linkedin_master.ts",
 	"src/config/linkedin_review.ts",
 	"src/config/resume_projection.ts",
+	"src/lib/project-synopsis.mjs",
+	"src/data/project-synopses.json",
 	"scripts/export_linkedin.mjs",
 	"package.json",
 ];
@@ -134,12 +238,14 @@ export function exportPacket({
 	if (JSON.stringify(inputs) !== JSON.stringify(loadedInputs))
 		throw new Error("Exporter inputs changed since module load; start a fresh export process");
 	const packet = buildPacket();
+	const resolved = resolveCanonicalContent(resumeMaster, linkedinMaster);
 	const revision = execFileSync("git", ["rev-parse", "HEAD"], {
 		cwd: root,
 		encoding: "utf8",
 	}).trim();
 	const receipt = {
-		schemaVersion: 1,
+		schemaVersion: 2,
+		status: "local-draft",
 		exporterVersion: EXPORTER_VERSION,
 		sourceRevision: revision,
 		dirty: !!execFileSync("git", ["status", "--porcelain", "--", ...INPUT_PATHS], {
@@ -149,8 +255,23 @@ export function exportPacket({
 		inputs,
 		packetSha256: sha256(packet),
 		bytes: packet.length,
-		entries: linkedinMaster.experience.length,
+		entries: resolved.experience.length,
+		projectEntries: resolved.projects.length,
+		resolvedContentSha256: sha256(JSON.stringify(resolved)),
+		canonicalProjects: projectSynopses.projects.map(
+			({ slug, roleId, sourceSha256, linkedinProjects }) => ({
+				slug,
+				roleId,
+				sourceSha256,
+				projectIds: (linkedinProjects ?? []).map(({ id }) => id),
+			}),
+		),
 		review: linkedinReview.source,
+		baselineReview: {
+			source: linkedinReview.source,
+			factsSha256: linkedinReview.factsSha256,
+			proseSha256: linkedinReview.proseSha256,
+		},
 	};
 	fs.mkdirSync(output, { recursive: true });
 	fs.writeFileSync(path.join(output, "linkedin.txt"), packet);

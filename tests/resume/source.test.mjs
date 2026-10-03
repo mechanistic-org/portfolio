@@ -5,6 +5,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import {
 	sourceIdentity,
 	assertPortAvailable,
@@ -19,6 +20,14 @@ test("source identity records the exact checkout/revision/input hashes and rejec
 	assert.equal(identity.root, fs.realpathSync(root));
 	assert.equal(identity.revision, revision);
 	assert.ok(identity.inputs["src/pages/resume/index.astro"]);
+	for (const name of ["src/lib/project-synopsis.mjs", "src/data/project-synopses.json"]) {
+		assert.equal(
+			identity.inputs[name],
+			createHash("sha256")
+				.update(fs.readFileSync(path.join(root, name)))
+				.digest("hex"),
+		);
+	}
 	assert.throws(() => sourceIdentity(root, "0".repeat(40), true), /revision mismatch/);
 });
 test("occupied or mismatched local endpoint fails and writes no PDF candidate", async () => {

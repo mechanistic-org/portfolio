@@ -202,3 +202,11 @@ live rollback rehearsal, resource mutation, or a destructive transition.
 ---
 
 _Built with [Cosmic Themes](https://github.com/Cosmic-Themes) & Custom Engineering._
+
+### Shared project synopsis
+
+Author a `synopsis` in the project canon frontmatter (contract in canon `SCHEMA.md`). It contains plain-text paragraphs with stable IDs; site pages render all of them beside `heroImage`. An empty article is valid for a synopsis-only lite. Projects without a synopsis retain their existing presentation.
+
+Set `roleId` to a career chronology identity before selecting paragraphs for `outputs.resume` or `outputs.linkedinExperience`. `outputs.linkedinProjects` selects one or more narrative section anchors for each project draft. Employer/contract details come from that role, and section text is extracted from the same project account with source links. Missing or overlapping sections fail instead of exporting stale copy.
+
+After editing canon, run `project_pipeline.py <slug> --write-live` and `npm run project:synopses` with the same `CANON_ROOT`. `npm run check:synopses` checks canonical byte parity when that root is supplied, or generated site/index parity in CI. Then `npm run export:linkedin` creates a local draft and receipt, including Experience and Projects. It never posts to LinkedIn. Résumé HTML, JSON and PDF preparation use the selected synopsis paragraphs; replacing a published PDF is separate from preparing it. Source receipts include the shared module and generated index.

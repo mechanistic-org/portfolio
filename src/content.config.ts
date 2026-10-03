@@ -10,6 +10,7 @@ import {
 	PRODUCTION_SCALE_VALUES,
 } from "./config/taxonomy";
 import { glob } from "astro/loaders";
+import { validateSynopsis } from "./lib/project-synopsis.mjs";
 
 // 3. OTHER PAGES
 const otherPagesCollection = defineCollection({
@@ -88,6 +89,17 @@ const projectsCollection = defineCollection({
 
 			// V2.0 SCHEMA (Feb 2026) - STRICT OBJECT
 			// We rejected the Component Union. It must be an object.
+			// Canon-authored paragraphs and explicit cross-output selections (SCHEMA.md).
+			synopsis: z
+				.unknown()
+				.superRefine((value, context) => {
+					try {
+						validateSynopsis(value);
+					} catch (error) {
+						context.addIssue({ code: z.ZodIssueCode.custom, message: String(error) });
+					}
+				})
+				.optional(),
 			forensic_summary: z
 				.object({
 					trigger: z.string(),
@@ -132,11 +144,13 @@ const projectsCollection = defineCollection({
 						// key = direct contacts; stakeholder = the wider program roster
 						roster: z.enum(["key", "stakeholder"]).optional(),
 						// Profile-link disposition, curated by Erik (October 2, 2026).
-                        // editorial-approved: Erik selected this public professional link.
-                        // approved: legacy record of the colleague's consent; retained as history.
-                        // unset: name/role only. declined: entry withheld, including duplicates.
-                        // Editorial selection never asserts that the colleague was contacted.
-                        consent: z.enum(["unset", "approved", "editorial-approved", "declined"]).default("unset"),
+						// editorial-approved: Erik selected this public professional link.
+						// approved: legacy record of the colleague's consent; retained as history.
+						// unset: name/role only. declined: entry withheld, including duplicates.
+						// Editorial selection never asserts that the colleague was contacted.
+						consent: z
+							.enum(["unset", "approved", "editorial-approved", "declined"])
+							.default("unset"),
 					}),
 				)
 				.optional(),

@@ -178,6 +178,8 @@
 	padding-top: 1rem;
 }
 
+.authoring-layout.synopsis-only { grid-template-columns: minmax(0, 1fr); }
+
 .article-contents {
 	position: sticky;
 	top: 7rem;

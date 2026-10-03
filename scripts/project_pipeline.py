@@ -63,6 +63,9 @@ SITE_REVISIONS = os.path.join(SITE_DIR, "_revisions.json")
 OUT_DIR    = os.path.join(REPO_ROOT, "scripts", "_roundtrip_out", SLUG)
 
 # --- Field ownership ---
+# synopsis is a shared canon/site field: paragraphs plus explicit channel/section
+# selections round-trip unchanged. scripts/project_synopses.mjs validates and
+# projects its cross-output index; the generator never synthesizes a synopsis.
 # Dossier fields -> prose-first markdown tables (the DossierCast/Scars/Bom/Timeline consumers).
 DOSSIER = [  # (frontmatter field, ## heading, ordered columns)
     # Contract v2 (2026-07-02, WP4): `scars` removed from the dossier tables — the V8
