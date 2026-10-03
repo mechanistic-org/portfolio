@@ -131,16 +131,12 @@ const projectsCollection = defineCollection({
 						// merged-roster discriminator (operator ruling 2026-07-02):
 						// key = direct contacts; stakeholder = the wider program roster
 						roster: z.enum(["key", "stakeholder"]).optional(),
-						// CONSENT GATE (operator ruling 2026-07-29). Crediting a colleague
-						// by name and role in a factual work history is normal. Linking to
-						// their profile associates a real person with claims on this site,
-						// and much of this roster has not been contacted in years.
-						//   unset    — default. Name, role and org render. No link, ever.
-						//   approved — they said yes. Profile link renders.
-						//   declined — they said no. The entry is not rendered at all.
-						// Consent lives in canon and is curated by the operator; nothing
-						// here may be inferred, and there is deliberately no "probably fine".
-						consent: z.enum(["unset", "approved", "declined"]).default("unset"),
+						// Profile-link disposition, curated by Erik (October 2, 2026).
+                        // editorial-approved: Erik selected this public professional link.
+                        // approved: legacy record of the colleague's consent; retained as history.
+                        // unset: name/role only. declined: entry withheld, including duplicates.
+                        // Editorial selection never asserts that the colleague was contacted.
+                        consent: z.enum(["unset", "approved", "editorial-approved", "declined"]).default("unset"),
 					}),
 				)
 				.optional(),

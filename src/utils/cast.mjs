@@ -1,6 +1,6 @@
 /**
  * @typedef {{name: string, role: string, org: string, roster?: "key" | "stakeholder",
- * linkedin?: string, consent?: "unset" | "approved" | "declined"}} CastMember
+ * linkedin?: string, consent?: "unset" | "approved" | "editorial-approved" | "declined"}} CastMember
  */
 const clean = (value) => String(value ?? "").replace(/\s+/g, " ").trim();
 const key = (member) => [member.name, member.role, member.org].map((v) => clean(v).toLowerCase()).join("|");
@@ -36,4 +36,10 @@ export function groupCast(cast) {
 		}
 		return { roster, organizations: [...organizations].map(([org, members]) => ({ org, members })) };
 	}).filter((group) => group.organizations.length);
+}
+
+/** Link approval can be editorial; it never rewrites historical colleague consent. */
+export function canLinkCast(member) {
+ return ["approved", "editorial-approved"].includes(member.consent) &&
+  typeof member.linkedin === "string" && /^https:\/\/(www\.)?linkedin\.com\/in\/[^/?#]+\/?$/.test(member.linkedin);
 }

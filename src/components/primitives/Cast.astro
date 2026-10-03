@@ -1,5 +1,5 @@
 ---
-import { normalizeCast, groupCast } from "../../utils/cast.mjs";
+import { normalizeCast, groupCast, canLinkCast } from "../../utils/cast.mjs";
 import type { CastMember } from "../../utils/cast.mjs";
 interface Props { cast: CastMember[]; omit?: string; }
 const { cast = [], omit = "Erik Norris" } = Astro.props;
@@ -16,7 +16,7 @@ const groups = groupCast(normalizeCast(cast, omit));
 					<ul>
 						{members.map((member: CastMember) => (
 							<li>
-								{member.consent === "approved" && member.linkedin ? (
+								{canLinkCast(member) ? (
 									<a href={member.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${member.name} on LinkedIn`}>{member.name} ↗</a>
 								) : member.name !== org && <span class="cast-roster__name">{member.name}</span>}
 								<span class="cast-roster__role">{member.role}</span>

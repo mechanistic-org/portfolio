@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { normalizeCast, groupCast } from "../../src/utils/cast.mjs";
+import { normalizeCast, groupCast, canLinkCast } from "../../src/utils/cast.mjs";
 
 test("visibility excludes owner, blank and declined, including conflicting duplicate", () => {
  const raw = [
@@ -25,4 +25,15 @@ test("organization and curated stakeholder grouping do not guess disciplines or 
  ]));
  assert.deepEqual(groups.map(g=>g.roster), ["key", "stakeholder"]);
  assert.deepEqual(groups[0].organizations.map(g=>g.org), ["Fujikura", "Avegant"]);
+});
+
+test("selective editorial profile links preserve legacy consent and withheld entries", () => {
+ const row = {name:"Colleague",role:"Engineering",org:"Company",linkedin:"https://www.linkedin.com/in/example",consent:"editorial-approved"};
+ assert.equal(canLinkCast(row), true);
+ assert.equal(canLinkCast({...row,consent:"approved"}), true);
+ assert.equal(canLinkCast({...row,consent:"unset"}), false);
+ assert.equal(canLinkCast({...row,consent:"declined"}), false);
+ assert.equal(canLinkCast({...row,linkedin:"https://example.com/in/example"}), false);
+ assert.deepEqual(normalizeCast([row,{...row,consent:"declined"}]), []);
+ assert.equal(normalizeCast([row])[0].consent, "editorial-approved");
 });
