@@ -1,4 +1,4 @@
-import { useMemo, type CSSProperties, type MouseEvent } from "react";
+import { useMemo, useState, type CSSProperties, type MouseEvent } from "react";
 import {
 	buildContextRibbon,
 	careerTimelineRecords,
@@ -18,7 +18,7 @@ interface Props {
 /** The same career projection and renderer serve the map, deep dives and lites.
  * Selection belongs to the caller. Native links remain usable without hydration. */
 export default function CareerTimeline({ nodes, currentId, onSelect, compact = false }: Props) {
-	const Neighborhood = compact ? "details" : "div";
+	const [periodExpanded, setPeriodExpanded] = useState(!compact);
 	const model = useMemo(() => buildContextRibbon(nodes, currentId ?? ""), [nodes, currentId]);
 	const dated = useMemo(
 		() =>
@@ -44,6 +44,9 @@ export default function CareerTimeline({ nodes, currentId, onSelect, compact = f
 	const first = Date.UTC(startYear, 0, 1);
 	const last = Date.UTC(endYear + 1, 0, 1);
 	const x = (date: number) => 16 + ((date - first) / (last - first || 1)) * 928;
+	const windowStart = model ? Math.max(0, x(Date.UTC(model.startYear, 0, 1))) : 0;
+	const windowEnd = model ? Math.min(960, x(Date.UTC(model.endYear + 1, 0, 1))) : 960;
+	const windowCenter = (windowStart + windowEnd) / 2;
 	const current = dated.find((record) => record.id === currentId);
 	const currentIndex = dated.findIndex((record) => record.id === currentId);
 	const adjacent = currentIndex >= 0 ? [dated[currentIndex - 1], dated[currentIndex + 1]] : [];
@@ -73,11 +76,13 @@ export default function CareerTimeline({ nodes, currentId, onSelect, compact = f
 			data-context-ribbon
 			data-current={currentId ?? ""}
 			data-source="routeEligibleProjects"
+			style={{ "--window-center": `${windowCenter / 9.6}%` } as CSSProperties}
 		>
-			<div className="career-timeline-heading">
-				{!compact && <h2>Career timeline</h2>}
-				<a href="/projects/">All work ↗</a>
-			</div>
+			{!compact && (
+				<div className="career-timeline-heading">
+					<h2>Career timeline</h2>
+				</div>
+			)}
 			{dated.length > 0 && (
 				<div className="career-overview">
 					{compact && current && (
@@ -93,7 +98,7 @@ export default function CareerTimeline({ nodes, currentId, onSelect, compact = f
 						<span>{ongoingRoles.length > 0 && endYear === currentYear ? "Present" : endYear}</span>
 					</div>
 					<svg
-						preserveAspectRatio={compact ? "none" : "xMidYMid meet"}
+						preserveAspectRatio="none"
 						viewBox="0 0 960 64"
 						aria-label="Projects across the career"
 						data-career-overview
@@ -101,12 +106,9 @@ export default function CareerTimeline({ nodes, currentId, onSelect, compact = f
 						{model && (
 							<rect
 								className="career-window"
-								x={Math.max(0, x(Date.UTC(model.startYear, 0, 1)))}
+								x={windowStart}
 								y="1"
-								width={
-									Math.min(960, x(Date.UTC(model.endYear + 1, 0, 1))) -
-									Math.max(0, x(Date.UTC(model.startYear, 0, 1)))
-								}
+								width={windowEnd - windowStart}
 								height="62"
 								rx="3"
 							/>
@@ -147,15 +149,22 @@ export default function CareerTimeline({ nodes, currentId, onSelect, compact = f
 				</div>
 			)}
 			{model ? (
-				<Neighborhood className={compact ? "career-neighborhood" : undefined}>
-					{compact && (
-						<summary>
-							Work from this period{" "}
-							<span>
-								{model.startYear}–{model.endYear}
-							</span>
-						</summary>
-					)}
+				<details className="career-neighborhood" open={compact ? undefined : periodExpanded}>
+					<summary
+						onClick={
+							compact
+								? undefined
+								: (event) => {
+										event.preventDefault();
+										setPeriodExpanded((expanded) => !expanded);
+									}
+						}
+					>
+						Work from this period{" "}
+						<span>
+							{model.startYear}–{model.endYear}
+						</span>
+					</summary>
 					<div className="career-axis">
 						<span>
 							{model.startYear}–{model.endYear}
@@ -205,7 +214,7 @@ export default function CareerTimeline({ nodes, currentId, onSelect, compact = f
 						{model.neighborCount} of {model.availableNeighbors} nearby projects · Dated work; dashed
 						bars show employer periods.
 					</p>
-				</Neighborhood>
+				</details>
 			) : (
 				<p className="career-empty">
 					{current
@@ -215,24 +224,29 @@ export default function CareerTimeline({ nodes, currentId, onSelect, compact = f
 							: "Choose a project to see its place in the timeline."}
 				</p>
 			)}
-			{currentIndex >= 0 && (
-				<div className="career-adjacent">
-					{adjacent.map((record, i) =>
-						record ? (
-							<a
-								key={record.id}
-								href={`/projects/${record.id}/`}
-								onClick={(event) => activate(event, record.id)}
-								aria-label={`${i === 0 ? "Previous" : "Next"} project: ${record.title}`}
-							>
-								{i === 0 ? "← Previous" : "Next →"}
-							</a>
-						) : (
-							<span key={i} />
-						),
-					)}
-				</div>
-			)}
+			<div className="career-utility">
+				{currentIndex >= 0 && (
+					<div className="career-adjacent">
+						{adjacent.map((record, i) =>
+							record ? (
+								<a
+									key={record.id}
+									href={`/projects/${record.id}/`}
+									onClick={(event) => activate(event, record.id)}
+									aria-label={`${i === 0 ? "Previous" : "Next"} project: ${record.title}`}
+								>
+									{i === 0 ? "← Previous" : "Next →"}
+								</a>
+							) : (
+								<span key={i} />
+							),
+						)}
+					</div>
+				)}
+				<a className="career-all-work" href="/projects/">
+					All work ↗
+				</a>
+			</div>
 			{undated.length > 0 && (
 				<details className="career-undated">
 					<summary>Undated projects ({undated.length})</summary>

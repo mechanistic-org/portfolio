@@ -5,24 +5,11 @@ interface Props {
 	meta?: string[];
 	withMedia?: boolean;
 }
-const { title, subtitle, meta = [], withMedia = false } = Astro.props;
-// Keep the employer in the opening; career context owns the visible period.
-const openingMeta = meta.filter(
-	(label) => !/^\d{4}(?:\s*[–—-]\s*(?:\d{4}|present))?$/i.test(label.trim()),
-).slice(0, 1);
+const { title, subtitle, withMedia = false } = Astro.props;
 ---
 
 <header class:list={["article-masthead", { "project-opening-with-media": withMedia }]}>
 	<div class="opening-heading">
-		{
-			openingMeta.length > 0 && (
-				<div class="masthead-meta">
-					{openingMeta.map((label) => (
-						<span>{label}</span>
-					))}
-				</div>
-			)
-		}
 		<h1>{title}</h1>
 		{subtitle && <p class="masthead-subtitle">{subtitle}</p>}
 	</div>

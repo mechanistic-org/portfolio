@@ -12,6 +12,9 @@ import "@/styles/authoring-page.css";
 import "@/styles/project-reading.css";
 import ProjectRecords from "../Projects/ProjectRecords.astro";
 import ProjectCareerContext from "../Projects/ProjectCareerContext.astro";
+import ProjectRecord from "../Projects/ProjectRecord.astro";
+import Cast from "../primitives/Cast.astro";
+import { normalizeCast } from "../../utils/cast.mjs";
 const {
 	page,
 	chronology = null,
@@ -20,6 +23,7 @@ const {
 	contextNodes = [],
 	projectNavigation,
 } = Astro.props;
+const cast = normalizeCast(page.frontmatter?.cast);
 const narrativeTimeline = page.headings.find((h: any) =>
 	["development-timeline", "proposed-development-timeline"].includes(h.slug),
 );
@@ -32,9 +36,10 @@ const chapters = page.headings.filter(
 	(h: any) => h.depth === 2 && !(timeline.referenceHtml && h.slug === timeline.referenceId),
 );
 const projectLabel = isGlyph ? "Avegant Glyph" : page.title;
-const firstImageGroup = page.pieces.find(
+const firstImageGroup = pieces.find(
 	(piece: any) => piece.group?.items[0]?.kind === "image",
 )?.group;
+const browseImageCount = page.imageCount - (opening?.group.items.length ?? 0);
 ---
 
 <BaseLayout
@@ -92,7 +97,7 @@ const firstImageGroup = page.pieces.find(
 				{
 					opening && (
 						<div class="opening-visual">
-							<MediaGroup group={opening.group} />
+							<img src={opening.group.items[0].displaySrc ?? opening.group.items[0].src} alt="" aria-hidden="true" fetchpriority="high" decoding="async" />
 						</div>
 					)
 				}
@@ -102,7 +107,7 @@ const firstImageGroup = page.pieces.find(
 		<div class="authoring-layout">
 			<aside class="article-contents">
 				<nav aria-label="On this page">
-					<span class="contents-label">In this account</span>{
+					{
 						chapters.map((h: any, i: number) => (
 							<a href={`#${h.slug}`}>
 								<span>{String(i + 1).padStart(2, "0")}</span>
@@ -114,7 +119,7 @@ const firstImageGroup = page.pieces.find(
 				{
 					page.imageCount > 0 && firstImageGroup && (
 						<a class="browse-project-media" href={`#media-${firstImageGroup.id}`} data-browse-media>
-							Browse {page.imageCount} images
+							Browse {browseImageCount} images
 						</a>
 					)
 				}
@@ -128,6 +133,11 @@ const firstImageGroup = page.pieces.find(
 					revisions={revisions}
 					entropy={entropy}
 				/>
+				{cast.length > 0 && (
+					<ProjectRecord title="Cast & crew">
+						<div id="cast-credits"><Cast cast={cast} /></div>
+					</ProjectRecord>
+				)}
 				<slot name="records" />
 			</aside>
 			<div class="article-composition">

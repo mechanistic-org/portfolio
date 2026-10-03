@@ -1,7 +1,6 @@
 ---
 import AuthoringPage from "../authoring/AuthoringPage.astro";
 import ProjectRecord from "./ProjectRecord.astro";
-import Cast from "../primitives/Cast.astro";
 import Infobox from "../primitives/Infobox.astro";
 import HudMetrics from "../primitives/HudMetrics.astro";
 import References from "../primitives/References.astro";
@@ -136,15 +135,7 @@ const projectNavigation = {
 				</ProjectRecord>
 			)
 		}
-		{
-			d.cast?.length > 0 && (
-				<ProjectRecord title="Cast & credits">
-					<div id="cast-credits">
-						<Cast cast={d.cast} />
-					</div>
-				</ProjectRecord>
-			)
-		}
+
 		{
 			references.length > 0 && (
 				<ProjectRecord title="References">
