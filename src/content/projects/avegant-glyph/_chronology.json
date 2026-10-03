@@ -3,7 +3,7 @@
   "project": "avegant-glyph",
   "title": "Development timeline",
   "start": "2014-01-22",
-  "end": "2016-08-17",
+  "end": "2017-01-27",
   "phases": [
     {
       "id": "context",
@@ -22,6 +22,12 @@
       "label": "Undated records",
       "start": "",
       "end": ""
+    },
+    {
+      "id": "employment",
+      "label": "Avegant tenure",
+      "start": "2015-07-20",
+      "end": "2017-01-27"
     }
   ],
   "events": [
@@ -377,17 +383,18 @@
     },
     {
       "id": "glyph-farewell",
-      "date": "",
-      "date_label": "Date not established",
+      "date": "2017-01-27",
+      "date_label": "January 27, 2017",
       "title": "Leaving Avegant",
-      "summary": "I remember Chris Westra’s farewell as personal recognition of the work; the departure date is not established here.",
-      "phase": "undated",
+      "summary": "I left after eighteen months at Avegant. I remember Chris Westra’s farewell as personal recognition of the work.",
+      "phase": "employment",
       "category": "documented",
       "prominence": "detail",
       "source_ids": [
-        "EV-6245cd4ec9a2"
+        "EV-6245cd4ec9a2",
+        "EV-51df7190f9f8"
       ],
-      "date_basis": "The recollection has no established date in this record."
+      "date_basis": "Exact employment end date supplied by Erik on October3,2026; personal recollection, not inferred from the final technical record."
     }
   ],
   "clusters": [],
