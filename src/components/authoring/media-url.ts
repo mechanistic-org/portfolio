@@ -6,6 +6,8 @@ export interface AuthoringMediaItem {
 	zoomSrc?: string;
 	originalSrc?: string;
 	alt: string;
+	poster?: string;
+	loop?: boolean;
 }
 
 /** Published variants are explicit. Only the private preview needs width queries. */

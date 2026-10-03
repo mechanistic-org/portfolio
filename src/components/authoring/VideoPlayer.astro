@@ -1,0 +1,19 @@
+---
+import type { AuthoringMediaItem } from "./media-url";
+interface Props {
+	item: AuthoringMediaItem;
+}
+const { item } = Astro.props;
+---
+
+<video
+	controls
+	playsinline
+	preload="metadata"
+	poster={item.poster}
+	loop={item.loop === true}
+	aria-label={item.alt}
+>
+	<source src={item.src} type="video/mp4" />
+	<a href={item.src}>Open video</a>
+</video>

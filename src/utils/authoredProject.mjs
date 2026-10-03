@@ -96,8 +96,7 @@ export async function buildAuthoredProject(entry) {
 			fail(`Invalid gallery mode: ${id}`);
 		if (definition.summary !== undefined && typeof definition.summary !== "string")
 			fail(`Invalid gallery summary: ${id}`);
-		const items = definition.items.map((item, itemIndex) => {
-			const label = `${id}[${itemIndex}]`;
+		const normalizeMedia = (item, label) => {
 			if (!item || !["image", "video"].includes(item.kind)) fail(`Invalid media kind: ${label}`);
 			if (typeof item.alt !== "string" || !item.alt.trim())
 				fail(`Missing media alt text: ${label}`);
@@ -112,12 +111,32 @@ export async function buildAuthoredProject(entry) {
 				for (const field of IMAGE_FIELDS.slice(1))
 					result[field] = publicAsset(item[field], `${label}.${field}`);
 			}
+			if (item.kind === "video") {
+				if (item.poster !== undefined) result.poster = publicAsset(item.poster, `${label}.poster`);
+				if (item.loop !== undefined) {
+					if (typeof item.loop !== "boolean") fail(`Video loop must be boolean: ${label}`);
+					result.loop = item.loop;
+				}
+			} else if (item.poster !== undefined || item.loop !== undefined) {
+				fail(`Poster and loop are video-only options: ${label}`);
+			}
 			if (uniqueMedia.has(result.src) && uniqueMedia.get(result.src) !== result.kind) {
 				fail(`Conflicting media kinds for ${result.src}`);
 			}
 			uniqueMedia.set(result.src, result.kind);
 			return result;
-		});
+		};
+		const items = definition.items.map((item, index) => normalizeMedia(item, `${id}[${index}]`));
+		let sequenceVideo;
+		if (definition.sequenceVideo !== undefined) {
+			if (
+				definition.mode !== "sequence" ||
+				items.some((item) => item.kind !== "image") ||
+				definition.sequenceVideo?.kind !== "video"
+			)
+				fail(`Sequence video requires an image sequence and a video: ${id}`);
+			sequenceVideo = normalizeMedia(definition.sequenceVideo, `${id}.sequenceVideo`);
+		}
 		if (items.some((item) => item.kind !== items[0].kind))
 			fail(`Gallery mixes image and video media: ${id}`);
 		const compare = definition.compare ?? [0, items.length > 1 ? 1 : 0];
@@ -134,6 +153,7 @@ export async function buildAuthoredProject(entry) {
 			mode: definition.mode || "gallery",
 			summary: definition.summary || "",
 			compare: [...compare],
+			...(sequenceVideo ? { sequenceVideo } : {}),
 			items,
 		};
 	});

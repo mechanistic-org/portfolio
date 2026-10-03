@@ -261,3 +261,70 @@ test("every public image variant rejects local paths, private endpoints and non-
 		candidate.data.cyberspace.stickies[1].data.items[0].src = "/_authoring-media/private.mp4";
 	});
 });
+
+test("video poster and loop survive projection; legacy videos keep their defaults", async () => {
+	const candidate = entry();
+	const video = candidate.data.cyberspace.stickies[1].data.items[0];
+	const legacy = groups(await buildAuthoredProject(candidate)).find(
+		(g) => g.id === "ejection-trial",
+	).items[0];
+	assert.equal(legacy.poster, undefined);
+	assert.equal(legacy.loop, undefined);
+	video.poster = asset("cover.jpg");
+	video.loop = true;
+	const result = groups(await buildAuthoredProject(candidate)).find(
+		(g) => g.id === "ejection-trial",
+	).items[0];
+	assert.equal(result.poster, video.poster);
+	assert.equal(result.loop, true);
+	video.loop = false;
+	assert.equal(
+		groups(await buildAuthoredProject(candidate)).find((g) => g.id === "ejection-trial").items[0]
+			.loop,
+		false,
+	);
+});
+
+test("sequence video retains inspectable photographs and counts the derivative once", async () => {
+	const candidate = entry();
+	const sequence = candidate.data.cyberspace.stickies[2].data;
+	sequence.sequenceVideo = {
+		kind: "video",
+		src: asset("assembly.mp4"),
+		poster: asset("cover.jpg"),
+		loop: true,
+		alt: "Assembly photo sequence",
+		caption: "Ten photographs, two seconds each.",
+	};
+	const before = structuredClone(candidate);
+	const page = await buildAuthoredProject(candidate);
+	assert.equal(page.imageCount, 3);
+	assert.equal(page.videoCount, 2);
+	assert.deepEqual(groups(page)[0].sequenceVideo, sequence.sequenceVideo);
+	assert.equal(groups(page)[0].items.length, 2);
+	assert.deepEqual(candidate, before);
+});
+
+test("video metadata rejects unsafe posters, string booleans and malformed sequence media", async () => {
+	for (const poster of ["http://localhost/private.jpg", "file:///private.jpg", asset("cover.mp4")])
+		await rejectsAfter((c) => {
+			c.data.cyberspace.stickies[1].data.items[0].poster = poster;
+		});
+	await rejectsAfter((c) => {
+		c.data.cyberspace.stickies[1].data.items[0].loop = "false";
+	});
+	await rejectsAfter((c) => {
+		imageItem(c).loop = true;
+	});
+	await rejectsAfter((c) => {
+		c.data.cyberspace.stickies[2].data.sequenceVideo = image("oops", "Oops");
+	});
+	await rejectsAfter((c) => {
+		c.data.cyberspace.stickies[0].data.sequenceVideo = {
+			kind: "video",
+			src: asset("a.mp4"),
+			alt: "a",
+			caption: "a",
+		};
+	});
+});
