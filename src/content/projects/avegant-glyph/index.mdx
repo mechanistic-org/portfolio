@@ -554,11 +554,11 @@ cyberspace:
   - id: figure-10
     type: gallery
     data:
-      mode: figure
-      summary: ''
+      mode: gallery
+      summary: The selected pad, sample photographs and contemporary surface renders.
       compare:
       - 0
-      - 0
+      - 1
       items:
       - kind: image
         src: https://assets.eriknorris.com/avegant-glyph/release-2026-10-02/earpad-1600.webp
@@ -568,6 +568,38 @@ cyberspace:
         originalSrc: https://assets.eriknorris.com/avegant-glyph/release-2026-10-02/earpad-3000.webp
         alt: The selected black earpad with normal dots and a fabric-lined center opening.
         caption: 'The selected earpad: normal dots over the low-pressure foam.'
+      - kind: image
+        src: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/mesh-sample-1600.webp
+        thumbnailSrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/mesh-sample-240.webp
+        displaySrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/mesh-sample-1600.webp
+        zoomSrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/mesh-sample-3000.webp
+        originalSrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/mesh-sample-3000.webp
+        alt: Photograph of a black earpad sample with a raised mesh-patterned surface and a fabric center.
+        caption: 'Sample photograph: a mesh-patterned contact surface.'
+      - kind: image
+        src: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/mesh-section-1600.webp
+        thumbnailSrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/mesh-section-240.webp
+        displaySrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/mesh-section-1600.webp
+        zoomSrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/mesh-section-3000.webp
+        originalSrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/mesh-section-3000.webp
+        alt: Contemporary rendering of a mesh-patterned ring around an earpad opening, with a section drawing.
+        caption: Contemporary render and section drawing of the mesh surface concept.
+      - kind: image
+        src: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/dot-section-1600.webp
+        thumbnailSrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/dot-section-240.webp
+        displaySrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/dot-section-1600.webp
+        zoomSrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/dot-section-3000.webp
+        originalSrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/dot-section-3000.webp
+        alt: Contemporary rendering of two rings of raised dots around an earpad opening, with a section drawing.
+        caption: Contemporary render and section drawing of the raised-dot surface concept.
+      - kind: image
+        src: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/fabric-sample-1600.webp
+        thumbnailSrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/fabric-sample-240.webp
+        displaySrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/fabric-sample-1600.webp
+        zoomSrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/fabric-sample-3000.webp
+        originalSrc: https://assets.eriknorris.com/avegant-glyph/pad-studies-2026-10-03/fabric-sample-3000.webp
+        alt: Photograph of a dark earpad sample with a soft fabric contact surface and a woven center.
+        caption: 'Sample photograph: a soft fabric contact surface.'
     title: ''
     deck: []
   - id: liner-pucker
@@ -1190,11 +1222,13 @@ In one failure mode, ejection pressure against the sticking part broke it. Getti
 
 
 
-We tried various post-molding cooling fixtures, but they weren't a viable route to higher-volume production. I had to define and control the molding process so the part could leave the tool in a controlled condition and cool into the shape and dimensions we needed.
+Hi-P pushed for post-molding cooling fixtures. I pushed back hard: holding individual parts in fixtures while they cooled was not a viable production route. I had to define and control the molding process so the part could leave the tool in a controlled condition and cool into the shape and dimensions we needed.{/* ^[evidence:EV-4e3017025cc6] */}
 
 Moving to a hot-runner setup was a big part of getting the outer-headband molding to work.{/* ^[evidence:EV-51df7190f9f8] */} I ended up tuning the process parameters to produce the right as-molded part weight. That gave us parts that could eject and then cool into the right shape and size, repeatably. This kind of process tuning is familiar work in plastic molding. What made the headband difficult was how sensitive the whole part and tooling system was.{/* ^[evidence:EV-de52939d1964] */}
 
-How we held the part for inspection mattered, as did what happened when it met the surrounding parts. Hi-P, a supplier reviewing tooling samples, flagged distortion, difficulty establishing a measurement datum and flash at local features. Working through those findings meant deciding what needed a better measurement, what needed an assembly check and what needed a change to the part or tool.
+Getting complete process records was a recurring struggle. I sent the molder a template for the relevant parameters and a trial progression log so we could run a design of experiments. They kept running trials without that visibility, then bringing back parts and pushing for approval. I made several trips and spent time at the molder to get the process information we needed.{/* ^[evidence:EV-4e3017025cc6] */}
+
+How we held the part for inspection mattered, as did what happened when it met the surrounding parts. Hi-P, the molder, flagged distortion, difficulty establishing a measurement datum and flash at local features. Working through those findings meant deciding what needed a better measurement, what needed an assembly check and what needed a change to the part or tool.
 
 Our August 26, 2015 engineering review listed 16 discrepancies. The overall span measured 197.06 mm against a nominal 196.31 mm. The inspection sheet flagged it against the drawing tolerance; the engineering review accepted it as a reference dimension. That disposition applied to that dimension, while the other findings still needed their own decisions.
 

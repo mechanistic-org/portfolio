@@ -58,7 +58,7 @@ test("accepted public account moves the original paragraph and image once, retai
 		result.pieces.filter((piece) => piece.group),
 		page.pieces.filter((piece) => piece.group && piece.group.id !== "figure-1"),
 	);
-	assert.equal(page.imageCount, 80);
+	assert.equal(page.imageCount, 84);
 	assert.equal(page.videoCount, 8);
 	assert.equal(
 		page.headings.filter(
