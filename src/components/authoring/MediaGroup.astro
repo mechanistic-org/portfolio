@@ -6,6 +6,7 @@ const { group } = Astro.props;
 const { items, id, title, summary, sequenceVideo } = group;
 const GalleryContainer = sequenceVideo ? "details" : "div";
 const single = items.length === 1;
+const isVideo = items[0].kind === "video";
 const data = items.map((item: any) => ({
 	...item,
 	captionHtml: marked.parseInline(item.caption || item.alt || ""),
@@ -26,7 +27,7 @@ const data = items.map((item: any) => ({
 				<div>
 					<>
 						<span class="group-kicker">
-							{group.mode === "sequence"
+							{isVideo ? "In motion" : group.mode === "sequence"
 								? "Assembly sequence"
 								: single
 									? "In detail"
@@ -35,7 +36,7 @@ const data = items.map((item: any) => ({
 						<p class="group-title">{title}</p>
 					</>
 				</div>
-				{!single && <span class="group-total">{items.length} photographs</span>}
+				{!single && <span class="group-total">{items.length} {isVideo ? "clips" : "photographs"}</span>}
 			</header>
 		)
 	}

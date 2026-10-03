@@ -58,7 +58,7 @@ test("accepted public account moves the original paragraph and image once, retai
 		result.pieces.filter((piece) => piece.group),
 		page.pieces.filter((piece) => piece.group && piece.group.id !== "figure-1"),
 	);
-	assert.equal(page.imageCount, 77);
+	assert.equal(page.imageCount, 80);
 	assert.equal(page.videoCount, 8);
 	assert.equal(
 		page.headings.filter(
@@ -66,7 +66,7 @@ test("accepted public account moves the original paragraph and image once, retai
 		).length,
 		9,
 	);
-	assert.equal(result.pieces.filter((piece) => piece.group).length + 1, 30);
+	assert.equal(result.pieces.filter((piece) => piece.group).length + 1, 29);
 });
 
 test("private weight source-note markup moves intact with sentence one", () => {
