@@ -79,24 +79,24 @@ export function initializeAuthoringPage() {
 		renderViewer();
 		viewer.showModal();
 	}
+	function stepImage(direction: number) {
+  if (!active) return;
+  const indices = active.items.flatMap((item, index) => item.kind === "image" ? [index] : []);
+  activeIndex = indices[(indices.indexOf(activeIndex) + direction + indices.length) % indices.length];
+  renderViewer();
+ }
 	viewer.querySelector("[data-close-viewer]")!.addEventListener("click", () => viewer.close());
 	viewer.addEventListener("close", () => opener?.focus({ preventScroll: true }));
 	viewer.querySelectorAll<HTMLButtonElement>("[data-viewer-step]").forEach((button) =>
 		button.addEventListener("click", () => {
 			if (!active) return;
-			activeIndex =
-				(activeIndex + Number(button.dataset.viewerStep) + active.items.length) %
-				active.items.length;
-			renderViewer();
+			stepImage(Number(button.dataset.viewerStep));
 		}),
 	);
 	viewer.addEventListener("keydown", (event) => {
 		if (!active || !["ArrowLeft", "ArrowRight"].includes(event.key)) return;
 		event.preventDefault();
-		activeIndex =
-			(activeIndex + (event.key === "ArrowRight" ? 1 : -1) + active.items.length) %
-			active.items.length;
-		renderViewer();
+		stepImage(event.key === "ArrowRight" ? 1 : -1);
 	});
 	zoomButton.addEventListener("click", () => {
 		const zoom = viewer.classList.toggle("is-zoomed");
@@ -118,7 +118,7 @@ export function initializeAuthoringPage() {
 			index: 0,
 		};
 		groups.push(group);
-		if (group.items[0].kind === "video") return;
+		if (group.items.every(item => item.kind === "video")) return;
 		const grid = element.querySelector<HTMLElement>(".gallery-grid")!;
 		const stage = element.querySelector<HTMLElement>(".gallery-stage")!;
 		const stageButton = stage.querySelector<HTMLButtonElement>("[data-open-image]")!;
@@ -127,6 +127,7 @@ export function initializeAuthoringPage() {
 		const comparison = element.querySelector<HTMLElement>(".comparison")!;
 		const choices: number[] = JSON.parse(element.dataset.compare!);
 		const multiple = group.items.length > 1;
+		const video = stage.querySelector<HTMLVideoElement>(".stage-video");
 		stage.hidden = false;
 		grid.hidden = true;
 		controls.hidden = !multiple;
@@ -136,12 +137,22 @@ export function initializeAuthoringPage() {
 			group.index = (index + group.items.length) % group.items.length;
 			const item = group.items[group.index];
 			const img = stage.querySelector("img")!;
-			setImage(img, mediaUrl(item, "display"), item.alt);
+			video?.pause();
+   stageButton.hidden = item.kind === "video";
+   if (video) video.hidden = item.kind !== "video";
+   if (item.kind === "video" && video) {
+    video.src = item.src;
+    video.poster = item.poster || "";
+    video.loop = item.loop === true;
+    video.setAttribute("aria-label", item.alt);
+   } else {
+    setImage(img, mediaUrl(item, "display"), item.alt);
+   }
 			stage.querySelector("[data-image-counter]")!.textContent =
 				`${String(group.index + 1).padStart(2, "0")} / ${String(group.items.length).padStart(2, "0")}`;
 			stage.querySelector("[data-image-caption]")!.innerHTML = item.captionHtml;
 			controls.querySelector(".current-label")!.textContent =
-				`Image ${group.index + 1} of ${group.items.length}`;
+				`View ${group.index + 1} of ${group.items.length}`;
 			stageButton.setAttribute("aria-label", "Enlarge: " + item.alt);
 			thumbs
 				.querySelectorAll<HTMLButtonElement>("button")
@@ -185,6 +196,7 @@ export function initializeAuthoringPage() {
 		controls
 			.querySelector<HTMLButtonElement>('[data-mode="compare"]')!
 			.addEventListener("click", (event) => {
+				video?.pause();
 				comparison.hidden = !comparison.hidden;
 				stage.hidden = !comparison.hidden;
 				thumbs.hidden = !comparison.hidden;
@@ -212,7 +224,7 @@ export function initializeAuthoringPage() {
 	const browserGroups = browser.querySelector(".media-browser-groups")!;
 	const chapterGrids = new Map<string, HTMLElement>();
 	groups
-		.filter((group) => group.items[0].kind !== "video")
+		.filter((group) => group.items.some(item => item.kind === "image"))
 		.forEach((group) => {
 			let grid = chapterGrids.get(group.chapter);
 			if (!grid) {
@@ -227,6 +239,7 @@ export function initializeAuthoringPage() {
 				chapterGrids.set(group.chapter, grid);
 			}
 			group.items.forEach((item, index) => {
+    if (item.kind !== "image") return;
 				const button = document.createElement("button");
 				button.type = "button";
 				button.setAttribute("aria-label", item.alt);

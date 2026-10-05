@@ -139,8 +139,9 @@ export async function buildAuthoredProject(entry) {
 				fail(`Sequence video requires an image sequence and a video: ${id}`);
 			sequenceVideo = normalizeMedia(definition.sequenceVideo, `${id}.sequenceVideo`);
 		}
-		if (items.some((item) => item.kind !== items[0].kind))
-			fail(`Gallery mixes image and video media: ${id}`);
+
+		if (items.some(item => item.kind === "image") && items.some(item => item.kind === "video" && !item.poster))
+			fail(`Mixed gallery videos require a poster: ${id}`);
 		const compare = definition.compare ?? [0, items.length > 1 ? 1 : 0];
 		if (
 			!Array.isArray(compare) ||

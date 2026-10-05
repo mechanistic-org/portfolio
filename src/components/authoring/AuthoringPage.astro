@@ -123,6 +123,7 @@ const hasRail = chapters.length > 0 || browseImageCount > 0 || cast.length > 0 |
 			{
 				hasRail && (
 					<aside class="article-contents">
+						{isGlyph && <a class="article-all-work" href="/projects/">← All work</a>}
 						{chapters.length > 0 && (
 							<nav aria-label="On this page">
 								{chapters.map((h: any, i: number) => (

@@ -288,6 +288,58 @@
           "title": "Design the fixtures and define the requirements"
         }
       }
+    },
+    {
+      "href": "/projects/avegant-glyph/#shared-glyph-resume-scope",
+      "id": "glyph-resume-scope",
+      "project": "avegant-glyph",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "resume": {
+          "text": "Glyph personal-display headset. I took responsibility for the whole mechanical bill of materials through tooling, validation and production ramp, including roughly 40 tools.",
+          "title": "Mechanical production scope"
+        }
+      }
+    },
+    {
+      "href": "/projects/avegant-glyph/#shared-glyph-resume-recovery",
+      "id": "glyph-resume-recovery",
+      "project": "avegant-glyph",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "resume": {
+          "text": "I recovered the difficult outer-headband molding process through a hot-runner conversion and process tuning around as-molded part weight. I worked through cable binding and abrasion, dust contamination, fit and field failures.",
+          "title": "Production recovery"
+        }
+      }
+    },
+    {
+      "href": "/projects/avegant-glyph/#shared-glyph-resume-standards",
+      "id": "glyph-resume-standards",
+      "project": "avegant-glyph",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "resume": {
+          "text": "I designed assembly and inspection fixtures, created the master color, gap and graphics plans, wrote critical-part inspection and acceptance criteria, and designed and managed the product’s reliability testing program.",
+          "title": "Fixtures, acceptance and reliability"
+        }
+      }
+    },
+    {
+      "href": "/projects/avegant-glyph/#shared-glyph-resume-comfort",
+      "id": "glyph-resume-comfort",
+      "project": "avegant-glyph",
+      "revision": 1,
+      "status": "active",
+      "variants": {
+        "resume": {
+          "text": "I proposed, tested and brought Glyph’s optional headstrap into production, with Radius developing concepts and mockups. It shifted most of the load from the nosepiece to the top of the head. I developed the earpads to improve comfort.",
+          "title": "Headstrap and earpads"
+        }
+      }
     }
   ],
   "schema": 1

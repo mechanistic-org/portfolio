@@ -13,24 +13,31 @@
         "paragraphs": [
           {
             "id": "product",
-            "text": "Glyph put a personal display inside a pair of headphones. Lower the headband across your eyes to watch; raise it to listen. I joined with Kickstarter deliveries already overdue and took responsibility for getting the mechanical hardware into production."
+            "text": "Glyph put a personal display inside a pair of headphones. Lower the headband to watch; raise it to listen."
           },
           {
-            "id": "work",
-            "text": "I created the master color, gap and graphics plans, wrote inspection and acceptance criteria for critical parts, and designed and managed the reliability testing program across the product. These defined how the parts should look and fit together, and how the headset would be tested. I worked through the hardware problems too: recovering the headband molding process, resolving assembly issues, and developing the headstrap and earpads to improve comfort."
+            "id": "scope",
+            "text": "I joined with Kickstarter deliveries already overdue and took responsibility for the whole mechanical bill of materials through tooling, validation and production ramp, including roughly 40 tools."
+          },
+          {
+            "id": "recovery",
+            "text": "Across the assembly, I worked through cable binding and abrasion, dust contamination, fit and field failures. I recovered the difficult outer-headband molding process through a hot-runner conversion and process tuning around as-molded part weight."
+          },
+          {
+            "id": "standards",
+            "text": "I developed the headstrap and earpads to improve comfort. I designed the assembly fixtures, created the master color, gap and graphics plans, wrote critical-part inspection and acceptance criteria, and designed and managed the product’s reliability testing program."
           },
           {
             "id": "outcome",
-            "text": "Glyph shipped, and Avegant reported Kickstarter fulfillment complete in June 2016. I continued working through the ramp, using production builds, testing and customer returns to find and resolve the next problems."
+            "text": "Glyph shipped, and Avegant reported Kickstarter fulfillment complete in June 2016. My work continued through the ramp as testing, production builds and customer returns exposed the next problems to solve."
           }
         ],
         "outputs": {
-          "resume": [
-            "work"
-          ],
           "linkedinExperience": [
             "product",
-            "work",
+            "scope",
+            "recovery",
+            "standards",
             "outcome"
           ],
           "linkedinProjects": [
@@ -85,7 +92,7 @@
           ]
         }
       ],
-      "sourceSha256": "fa22a37dbce38cd529dc6857cdaaaa1a638da7a2a611c6d45fe097fdb1d3c50f"
+      "sourceSha256": "b754b6e19ff27bdfcba40ba06eb7b0e6397fb7647be761fdade4b0e3e3cac464"
     }
   ]
 }

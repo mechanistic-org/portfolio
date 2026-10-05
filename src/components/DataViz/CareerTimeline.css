@@ -293,3 +293,38 @@
 		font-size: 0.6rem;
 	}
 }
+
+/* Reviewed project overview: a bounded portion of the career, not the full map. */
+.career-timeline[data-focused-overview] {
+ --overview-gutter: 2.75rem;
+ background: color-mix(in srgb, var(--card, #000) 70%, transparent);
+ padding-block: 0.4rem;
+}
+.career-timeline[data-focused-overview] .career-overview {
+ margin-block: 0;
+}
+.career-timeline[data-focused-overview] .career-overview svg {
+ height: 64px;
+ overflow: hidden;
+}
+.career-timeline[data-focused-overview] .career-overview-years {
+ bottom: 32px;
+}
+.career-timeline[data-focused-overview] .career-current {
+ left: var(--current-x);
+ width: max-content;
+ max-width: min(20rem, calc(2 * min(var(--current-x), 100% - var(--current-x))));
+ transform: translateX(-50%);
+ margin-bottom: 1rem;
+}
+.career-timeline[data-focused-overview] .career-current::after {
+ content: "";
+ position: absolute;
+ left: 50%;
+ bottom: -1rem;
+ height: 1rem;
+ border-left: 1px solid #d4d4d8;
+}
+@media (max-width: 650px) {
+ .career-timeline[data-focused-overview] { --overview-gutter: 2rem; }
+}

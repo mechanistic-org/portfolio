@@ -8,4 +8,4 @@ interface Props {
 const { nodes, currentId } = Astro.props;
 ---
 
-<CareerTimeline nodes={nodes} currentId={currentId} compact />
+<CareerTimeline nodes={nodes} currentId={currentId} showNeighborhood={currentId !== "avegant-glyph"} focusOverview={currentId === "avegant-glyph"} compact />

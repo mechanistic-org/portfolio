@@ -119,10 +119,10 @@
     "surface": "method"
   },
   {
-    "id": "glyph-production",
+    "id": "glyph-resume-recovery",
     "path": "resume:avegant-2015:0",
     "project": "avegant-glyph",
-    "revision": 2,
+    "revision": 1,
     "surface": "resume"
   },
   {
@@ -140,7 +140,7 @@
     "surface": "method"
   },
   {
-    "id": "glyph-manufacturing",
+    "id": "glyph-resume-standards",
     "path": "resume:avegant-2015:1",
     "project": "avegant-glyph",
     "revision": 1,
@@ -161,10 +161,10 @@
     "surface": "method"
   },
   {
-    "id": "glyph-headstrap",
+    "id": "glyph-resume-comfort",
     "path": "resume:avegant-2015:2",
     "project": "avegant-glyph",
-    "revision": 2,
+    "revision": 1,
     "surface": "resume"
   },
   {
@@ -194,5 +194,12 @@
     "project": "sc48",
     "revision": 1,
     "surface": "method"
+  },
+  {
+    "id": "glyph-resume-scope",
+    "path": "resume:avegant-2015:blurb",
+    "project": "avegant-glyph",
+    "revision": 1,
+    "surface": "resume"
   }
 ]

@@ -18,7 +18,7 @@ export function mediaUrl(
 ): string {
 	const explicit = item[`${variant}Src`];
 	if (explicit) return explicit;
-	if (item.kind === "video") return item.src;
+	if (item.kind === "video") return variant === "thumbnail" && item.poster ? item.poster : item.src;
 	const separator = item.src.includes("?") ? "&" : "?";
 	if (variant === "original") return `${item.src}${separator}original=1`;
 	const defaultWidth = { thumbnail: 240, display: 1600, zoom: 3000 }[variant];

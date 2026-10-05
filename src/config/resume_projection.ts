@@ -43,7 +43,7 @@ export function resumeExperience(authority = resumeMaster, records = projectSyno
 		const blurb = sharedBlurbs.length
 			? sharedBlurbs.join("\n\n")
 			: entry.id === "avegant-2015"
-				? "Mechanical engineering for the first-generation Glyph personal theater headset."
+				? claimFor("resume:avegant-2015:blurb").text
 				: entry.blurb;
 		return { ...entry, ...display, blurb, bullets, dates: formatPeriod(display.period) };
 	});
