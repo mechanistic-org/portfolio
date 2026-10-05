@@ -13,15 +13,15 @@
         "paragraphs": [
           {
             "id": "product",
-            "text": "Glyph combined headphones and a personal display in one headset. Lower the headband across your eyes and it became a display; raise it and it returned to headphone use."
+            "text": "Glyph put a personal display inside a pair of headphones. Lower the headband across your eyes to watch; raise it to listen. I joined with Kickstarter deliveries already overdue and took responsibility for getting the mechanical hardware into production."
           },
           {
             "id": "work",
-            "text": "I joined with Kickstarter deliveries already overdue and took responsibility for getting the mechanical hardware through tooling, validation and production ramp. The work ranged from recovering a difficult headband molding process to resolving assembly problems and improving fit and comfort."
+            "text": "I created the master color, gap and graphics plans, wrote inspection and acceptance criteria for critical parts, and designed and managed the reliability testing program across the product. These defined how the parts should look and fit together, and how the headset would be tested. I worked through the hardware problems too: recovering the headband molding process, resolving assembly issues, and developing the headstrap and earpads to improve comfort."
           },
           {
             "id": "outcome",
-            "text": "Glyph shipped, and Avegant reported Kickstarter fulfillment complete in June 2016. My work continued through the ramp as testing, production builds and customer returns exposed the next problems to solve."
+            "text": "Glyph shipped, and Avegant reported Kickstarter fulfillment complete in June 2016. I continued working through the ramp, using production builds, testing and customer returns to find and resolve the next problems."
           }
         ],
         "outputs": {
@@ -85,7 +85,7 @@
           ]
         }
       ],
-      "sourceSha256": "61403e3e9fdb378d277e62bcadae0676f520f9b672fb8ecdab336af2a59625f2"
+      "sourceSha256": "fa22a37dbce38cd529dc6857cdaaaa1a638da7a2a611c6d45fe097fdb1d3c50f"
     }
   ]
 }
