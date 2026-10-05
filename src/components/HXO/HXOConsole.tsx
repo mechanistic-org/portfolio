@@ -196,7 +196,7 @@ export default function HXOConsole({ projects, careerNodes, projectAliases }: HX
 					className="custom-scrollbar min-h-0 flex-[1_1_45%] overflow-y-auto"
 					data-timeline-panel
 				>
-					<CareerTimeline nodes={careerNodes} currentId={currentViewerId} onSelect={acquire} />
+					<CareerTimeline nodes={careerNodes} currentId={currentViewerId} onSelect={acquire} scrubbable />
 				</div>
 			</div>
 		</ErrorBoundary>

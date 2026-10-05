@@ -328,3 +328,63 @@
 @media (max-width: 650px) {
  .career-timeline[data-focused-overview] { --overview-gutter: 2rem; }
 }
+
+/* The label may clamp at the edge; the independent leader stays on the pip. */
+.career-cursor {
+ position: relative;
+ height: 1.2rem;
+ margin-bottom: 1rem;
+}
+.career-timeline .career-cursor .career-current {
+ position: absolute;
+ left: clamp(0px, calc(var(--current-x) - 10rem), max(0px, calc(100% - 20rem)));
+ top: 0;
+ width: min(100%, 20rem);
+ max-width: none;
+ transform: none;
+ margin: 0;
+ padding: 0;
+ border: 0;
+ background: transparent;
+ color: inherit;
+ line-height: 1.2rem;
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+}
+.career-cursor::after {
+ content: "";
+ position: absolute;
+ left: var(--current-x);
+ top: 100%;
+ height: 1rem;
+ border-left: 1px solid #d4d4d8;
+ pointer-events: none;
+}
+.career-timeline .career-cursor .career-current::after { content: none; }
+.career-scrubber {
+ touch-action: pan-y;
+ user-select: none;
+ cursor: ew-resize;
+}
+/* Enlarge the touch target into the existing leader gap, without growing the panel. */
+.career-timeline .career-cursor .career-scrubber { padding-bottom: 1rem; }
+.career-scrubber:disabled { cursor: default; opacity: 1; }
+.career-scrubber:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+.career-overview a[data-scrub-preview] rect { stroke: var(--foreground, white); stroke-width: 3; }
+[data-scrub-phase="returning"] .career-cursor::after,
+[data-scrub-phase="returning"] .career-cursor .career-current { transition: left 200ms ease-out; }
+[data-scrub-phase="returning"] .career-project-leader { transition: transform 200ms ease-out; }
+/* On the homepage, put the year endpoints beside the plot, below the cursor. */
+.career-timeline:not(.career-timeline--compact)[data-scrubber] .career-overview { position: relative; }
+.career-timeline:not(.career-timeline--compact)[data-scrubber] .career-overview-years {
+ position: absolute;
+ width: 100%;
+ bottom: 42px;
+ pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+ [data-scrub-phase="returning"] .career-cursor::after,
+ [data-scrub-phase="returning"] .career-cursor .career-current,
+ [data-scrub-phase="returning"] .career-project-leader { transition: none; }
+}

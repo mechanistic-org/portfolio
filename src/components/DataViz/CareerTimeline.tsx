@@ -7,6 +7,7 @@ import {
 import { getEntityColor } from "../../config/color_registry";
 import { careerViewport } from "../../utils/careerViewport.mjs";
 import chronology from "../../data/careerChronology.json";
+import { useCareerScrubber } from "./useCareerScrubber";
 import "./CareerTimeline.css";
 
 interface Props {
@@ -16,18 +17,19 @@ interface Props {
 	compact?: boolean;
 	showNeighborhood?: boolean;
 	focusOverview?: boolean;
+	scrubbable?: boolean;
 }
 
 /** The same career projection and renderer serve the map, deep dives and lites.
  * Selection belongs to the caller. Native links remain usable without hydration. */
-export default function CareerTimeline({ nodes, currentId, onSelect, compact = false, showNeighborhood = true, focusOverview = false }: Props) {
+export default function CareerTimeline({ nodes, currentId, onSelect, compact = false, showNeighborhood = true, focusOverview = false, scrubbable = false }: Props) {
 	const [periodExpanded, setPeriodExpanded] = useState(!compact);
 	const model = useMemo(() => buildContextRibbon(nodes, currentId ?? ""), [nodes, currentId]);
 	const dated = useMemo(
 		() =>
 			careerTimelineRecords(nodes)
 				.map((record) => ({ ...record, id: record.slug }))
-				.sort((a, b) => a.start - b.start || a.id.localeCompare(b.id)),
+				.sort((a, b) => a.start - b.start || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)),
 		[nodes],
 	);
 	const undated = nodes
@@ -53,6 +55,14 @@ export default function CareerTimeline({ nodes, currentId, onSelect, compact = f
 	const windowEnd = model ? Math.min(960, x(Date.UTC(model.endYear + 1, 0, 1))) : 960;
 	const windowCenter = (windowStart + windowEnd) / 2;
 	const current = dated.find((record) => record.id === currentId);
+	const visible = dated.flatMap((record, index) =>
+		!focused || (record.start >= first && record.start < last)
+			? [{ ...record, x: x(record.start), y: 6 + (index % 3) * 18 }]
+			: [],
+	);
+	const scrub = useCareerScrubber(visible, scrubbable ? current?.id : undefined);
+	const indicated = visible.find((record) => record.id === (scrub.previewId ?? currentId));
+	const scrubIndex = visible.findIndex((record) => record.id === indicated?.id);
 	const currentIndex = dated.findIndex((record) => record.id === currentId);
 	const adjacent = currentIndex >= 0 ? [dated[currentIndex - 1], dated[currentIndex + 1]] : [];
 	const undatedCurrent = undated.find((record) => record.id === currentId);
@@ -82,6 +92,9 @@ export default function CareerTimeline({ nodes, currentId, onSelect, compact = f
 			data-focused-overview={focused ? "true" : undefined}
 			data-current={currentId ?? ""}
 			data-source="routeEligibleProjects"
+			data-scrubber={scrubbable && current ? "true" : undefined}
+			data-scrub-phase={scrubbable ? scrub.phase : undefined}
+			data-preview={scrubbable ? indicated?.id : undefined}
 			style={{ "--window-center": `${windowCenter / 9.6}%` } as CSSProperties}
 		>
 			{!compact && (
@@ -91,7 +104,26 @@ export default function CareerTimeline({ nodes, currentId, onSelect, compact = f
 			)}
 			{dated.length > 0 && (
 				<div className="career-overview">
-					{compact && current && (
+					{scrubbable && indicated ? (
+						<div className="career-cursor" style={{ "--current-x": `${indicated.x / 9.6}%` } as CSSProperties}>
+							<button
+								type="button"
+								className="career-current career-scrubber"
+								role={scrub.ready ? "slider" : undefined}
+								disabled={!scrub.ready}
+								aria-label="Preview projects in timeline"
+								aria-orientation="horizontal"
+								aria-valuemin={1}
+								aria-valuemax={visible.length}
+								aria-valuenow={scrubIndex + 1}
+								aria-valuetext={`${indicated.title} · ${indicated.period}`}
+								title={`${indicated.title} · ${indicated.period}. Drag or use arrow keys to preview; Home or Escape returns to the held project.`}
+								{...scrub.control}
+							>
+								{indicated.title} <span>{indicated.period}</span>
+							</button>
+						</div>
+					) : compact && current && (
 						<p
 							className="career-current"
 							style={{ "--current-x": `${x(current.start) / 9.6}%` } as CSSProperties}
@@ -104,6 +136,7 @@ export default function CareerTimeline({ nodes, currentId, onSelect, compact = f
 						<span>{ongoingRoles.length > 0 && endYear === currentYear ? "Present" : endYear}</span>
 					</div>
 					<svg
+						ref={scrub.plotRef}
 						preserveAspectRatio="none"
 						viewBox="0 0 960 64"
 						aria-label={focused ? `Projects from ${startYear} to ${endYear}` : "Projects across the career"}
@@ -119,13 +152,14 @@ export default function CareerTimeline({ nodes, currentId, onSelect, compact = f
 								rx="3"
 							/>
 						)}
-						{focused && current && (
+						{(focused || scrubbable) && indicated && (
 							<line
 								className="career-project-leader"
-								x1={x(current.start)}
-								x2={x(current.start)}
+								x1="0"
+								x2="0"
+								style={{ transform: `translateX(${indicated.x}px)` }}
 								y1="0"
-								y2={6 + (currentIndex % 3) * 18}
+								y2={indicated.y}
 								stroke="#d4d4d8"
 								strokeWidth="1"
 								vectorEffect="non-scaling-stroke"
@@ -141,6 +175,7 @@ export default function CareerTimeline({ nodes, currentId, onSelect, compact = f
 								aria-label={`${record.title} · ${record.period}${record.context ? ` · ${record.context}` : ""}`}
 								aria-current={record.id === currentId ? "true" : undefined}
 								data-project={record.id}
+								data-scrub-preview={scrubbable && record.id === indicated?.id ? "true" : undefined}
 							>
 								<title>{`${record.title} · ${record.period}${record.context ? ` · ${record.context}` : ""}`}</title>
 								<rect
