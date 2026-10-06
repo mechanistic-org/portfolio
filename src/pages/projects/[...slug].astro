@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import { getMultiverseData } from "@/utils/getMultiverseData";
 import { currentSite } from "@config/site_config";
 import { routeEligibleProjects, careerRecords } from "@utils/projectRoster";
+import { careerTimelineRecords } from "@utils/contextRibbon";
 import { trialPresentation, careerIdentityAliases } from "@config/projectArticleTrial";
 
 export const prerender = true;
@@ -123,29 +124,16 @@ if (entry) {
 // prev/next never points at a page that was not built)
 const allProjects = await getCollection("projects");
 
-// Sort by date descending (newest first)
-// These projects have no established project date; omit them from chronological navigation.
-const sortedProjects = routeEligibleProjects(allProjects, currentSite, import.meta.env.DEV)
-	.filter(
-		(project) =>
-			!["dispensers", "makeline", "portion-cup", "xbox", "fissler-bbq", "kplayer-300"].includes(
-				project.id,
-			) || Boolean(project.data.date),
-	)
-	.sort(
-		(a, b) =>
-			new Date(b.data.date || new Date()).getTime() - new Date(a.data.date || new Date()).getTime(),
-	);
-
-// Navigation (Only works for real projects, placeholders get no nav for now)
-const currentIndex = sortedProjects.findIndex((p) => p.id === entry?.id);
-const nextProject = currentIndex > 0 ? sortedProjects[currentIndex - 1] : null;
-
-// FIX: Avoid using '<' operator here to prevent Astro parser ambiguity errors
-const prevProject =
-	currentIndex > -1 && currentIndex !== sortedProjects.length - 1
-		? sortedProjects[currentIndex + 1]
-		: null;
+// Use the same dated career records and ordering as the timeline strip.
+// Undated projects have no chronological neighbors; never treat them as today.
+const navigationRecords = careerTimelineRecords(careerNodes)
+ .sort((a, b) => a.start - b.start || a.slug.localeCompare(b.slug));
+const projectById = new Map(allProjects.map((project) => [project.id, project]));
+const currentIndex = navigationRecords.findIndex((project) => project.slug === entry?.id);
+const prevRecord = currentIndex >= 0 ? navigationRecords[currentIndex - 1] : null;
+const nextRecord = currentIndex >= 0 ? navigationRecords[currentIndex + 1] : null;
+const prevProject = prevRecord ? projectById.get(prevRecord.slug) ?? null : null;
+const nextProject = nextRecord ? projectById.get(nextRecord.slug) ?? null : null;
 
 // === ROUTER LOGIC ===
 let theme = "hyperspace"; // Default fallback (Was DataSheet)
@@ -352,7 +340,7 @@ console.log(`[ROUTER] Project: ${finalEntry.id} -> Theme: ${theme}`);
 					: null,
 			}}
 		/>
-	) : entry && currentSite === "main" && entry.data.tier === "deep_dive" ? (
+	) : entry && currentSite === "main" && (entry.data.tier === "deep_dive" || entry.data.synopsis) ? (
 		<ProjectReader
 			entry={finalEntry}
 			headings={headings}

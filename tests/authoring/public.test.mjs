@@ -328,3 +328,13 @@ test("video metadata rejects unsafe posters, string booleans and malformed seque
 		};
 	});
 });
+
+test("related still images and a video can share a gallery", async () => {
+ const candidate = entry();
+ const clip = structuredClone(candidate.data.cyberspace.stickies[1].data.items[0]);
+ clip.poster = asset("clip-poster.jpg");
+ candidate.data.cyberspace.stickies[0].data.items.push(clip);
+ const page = await buildAuthoredProject(candidate);
+ assert.deepEqual(page.groups.find(g => g.id === "chassis-contact").items.map(item => item.kind), ["image", "video"]);
+ assert.equal(page.groups.find(g => g.id === "chassis-contact").items[1].poster, clip.poster);
+});

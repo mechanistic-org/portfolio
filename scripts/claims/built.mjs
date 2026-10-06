@@ -31,7 +31,7 @@ for(const use of uses) {
 }
 const resume=JSON.parse(fs.readFileSync(path.join(root,"dist/resume.json"),"utf8"));
 for(const use of uses.filter((use)=>use.surface==="resume")) {
-	if(!resume.work.some((entry)=>entry.highlights.includes(resolveClaim(bundle,use).text))) throw new Error(`JSON resume drift: ${use.path}`);
+	if(!resume.work.some((entry)=>(use.path.endsWith(":blurb") ? entry.summary === resolveClaim(bundle,use).text : entry.highlights.includes(resolveClaim(bundle,use).text)))) throw new Error(`JSON resume drift: ${use.path}`);
 }
 const colophon=visible(page("colophon"));
 if(/The Collaboration Log|MOMA IS CALLING|THAT IS THE SOUND OF COMPETENCE/.test(colophon)) throw new Error("Retired satire wall still renders");

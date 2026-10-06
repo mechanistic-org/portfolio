@@ -40,13 +40,15 @@ export async function buildAuthoredProject(entry) {
 	};
 	if (typeof project !== "string" || !project.trim()) fail("Missing project ID");
 	if (entry?.data?.cyberspace?.layout !== "authored") fail("Expected cyberspace.layout authored");
-	if (typeof entry.body !== "string" || !entry.body.trim()) fail("Missing authored Markdown body");
+	if (typeof entry.body !== "string" || (!entry.body.trim() && !entry.data.synopsis))
+		fail("Missing authored Markdown body");
 	const data = entry.data;
 	if (typeof data.title !== "string" || !data.title.trim()) fail("Missing project title");
 	if (typeof data.description !== "string" || !data.description.trim())
 		fail("Missing project description");
-	const stickies = data.cyberspace.stickies;
-	if (!Array.isArray(stickies) || !stickies.length) fail("Expected nonempty gallery stickies");
+	const stickies = data.cyberspace.stickies ?? [];
+	if (!Array.isArray(stickies) || (!stickies.length && !data.synopsis))
+		fail("Expected nonempty gallery stickies");
 
 	function publicAsset(value, label, kind = "image") {
 		if (typeof value !== "string" || !value || value !== value.trim() || /[\\\s]/.test(value)) {
@@ -137,8 +139,9 @@ export async function buildAuthoredProject(entry) {
 				fail(`Sequence video requires an image sequence and a video: ${id}`);
 			sequenceVideo = normalizeMedia(definition.sequenceVideo, `${id}.sequenceVideo`);
 		}
-		if (items.some((item) => item.kind !== items[0].kind))
-			fail(`Gallery mixes image and video media: ${id}`);
+
+		if (items.some(item => item.kind === "image") && items.some(item => item.kind === "video" && !item.poster))
+			fail(`Mixed gallery videos require a poster: ${id}`);
 		const compare = definition.compare ?? [0, items.length > 1 ? 1 : 0];
 		if (
 			!Array.isArray(compare) ||

@@ -178,6 +178,8 @@
 	padding-top: 1rem;
 }
 
+.authoring-layout.synopsis-only { grid-template-columns: minmax(0, 1fr); }
+
 .article-contents {
 	position: sticky;
 	top: 7rem;
@@ -231,6 +233,16 @@
 
 .article-contents nav a.is-current > span {
 	color: var(--authoring-link);
+}
+
+.article-contents > .article-all-work {
+	display: inline-flex;
+	align-items: center;
+	min-height: 2.75rem;
+	margin-bottom: 0.5rem;
+	color: var(--authoring-link);
+	font-size: 0.8125rem;
+	text-decoration: none;
 }
 
 .article-contents > .browse-project-media {
@@ -397,7 +409,8 @@
 	cursor: zoom-in !important;
 }
 
-.stage-open img {
+.stage-open img,
+.stage-video {
 	display: block;
 	width: 100%;
 	height: clamp(22rem, 47vw, 43rem);
@@ -936,7 +949,8 @@ body:has(.media-browser[open], .image-viewer[open]) {
 		margin-top: 0.75rem;
 	}
 
-	.stage-open img {
+	.stage-open img,
+.stage-video {
 		height: clamp(21rem, 65vw, 40rem);
 	}
 }
@@ -998,7 +1012,8 @@ body:has(.media-browser[open], .image-viewer[open]) {
 		font-size: 0.6875rem;
 	}
 
-	.stage-open img {
+	.stage-open img,
+.stage-video {
 		height: clamp(17rem, 82vw, 30rem);
 		max-height: 62dvh;
 	}
@@ -1172,4 +1187,9 @@ body:has(.media-browser[open], .image-viewer[open]) {
 .sequence-photographs > summary:focus-visible {
 	outline: 2px solid currentColor;
 	outline-offset: 3px;
+}
+
+/* Glyph curation override; preserve across the separate scrubber integration. */
+[data-authoring-project="avegant-glyph"] .career-timeline[data-focused-overview] {
+	background: color-mix(in srgb, var(--card, #000) 20%, transparent);
 }

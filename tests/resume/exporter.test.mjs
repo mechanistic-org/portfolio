@@ -5,7 +5,14 @@ import os from "node:os";
 import path from "node:path";
 import { resumeMaster } from "../../src/config/resume_master.ts";
 import { linkedinMaster } from "../../src/config/linkedin_master.ts";
-import { buildPacket, exportPacket, normalize, sha256 } from "../../scripts/export_linkedin.mjs";
+import {
+	buildPacket,
+	exportPacket,
+	normalize,
+	sha256,
+	resolveCanonicalContent,
+} from "../../scripts/export_linkedin.mjs";
+import projectSynopses from "../../src/data/project-synopses.json" with { type: "json" };
 test("exact packet repeats across writes and newline forms; receipt hashes bytes", () => {
 	const dir = fs.mkdtempSync(path.join(os.tmpdir(), "resume-export-test-"));
 	const originalFetch = globalThis.fetch;
@@ -27,7 +34,18 @@ test("exact packet repeats across writes and newline forms; receipt hashes bytes
 		assert.ok(!text.includes("\u2014"));
 		assert.ok(text.endsWith("\n") && !text.endsWith("\n\n"));
 		assert.equal(text.normalize("NFC"), text);
-		for (const entry of linkedinMaster.experience) assert.ok(text.includes(normalize(entry.blurb)));
+		const resolved = resolveCanonicalContent(resumeMaster, linkedinMaster);
+		for (const entry of resolved.experience) assert.ok(text.includes(normalize(entry.blurb)));
+		assert.equal(first.status, "local-draft");
+		assert.equal(first.resolvedContentSha256, sha256(JSON.stringify(resolved)));
+		assert.equal(first.projectEntries, resolved.projects.length);
+		assert.ok(first.inputs["src/data/careerChronology.json"]);
+		assert.ok(first.inputs["src/data/project-synopses.json"]);
+		assert.ok(first.inputs["src/lib/project-synopsis.mjs"]);
+		assert.deepEqual(
+			first.canonicalProjects.map(({ sourceSha256 }) => sourceSha256),
+			projectSynopses.projects.map(({ sourceSha256 }) => sourceSha256),
+		);
 		const windows = structuredClone(linkedinMaster);
 		windows.about = windows.about.replace(/\n/g, "\r\n");
 		windows.experience.forEach((e) => (e.blurb = e.blurb.replace(/\n/g, "\r\n")));

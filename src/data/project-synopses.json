@@ -1,0 +1,98 @@
+{
+  "version": 1,
+  "projects": [
+    {
+      "slug": "avegant-glyph",
+      "title": "Avegant Glyph",
+      "roleId": "avegant-2015",
+      "synopsis": {
+        "version": 1,
+        "title": "Glyph",
+        "subtitle": "Getting it into production",
+        "roleId": "avegant-2015",
+        "paragraphs": [
+          {
+            "id": "product",
+            "text": "Glyph put a personal display inside a pair of headphones. Lower the headband to watch; raise it to listen."
+          },
+          {
+            "id": "scope",
+            "text": "I joined with Kickstarter deliveries already overdue and took responsibility for the whole mechanical bill of materials through tooling, validation and production ramp, including roughly 40 tools."
+          },
+          {
+            "id": "recovery",
+            "text": "Across the assembly, I worked through cable binding and abrasion, dust contamination, fit and field failures. I recovered the difficult outer-headband molding process through a hot-runner conversion and process tuning around as-molded part weight."
+          },
+          {
+            "id": "standards",
+            "text": "I developed the headstrap and earpads to improve comfort. I designed the assembly fixtures, created the master color, gap and graphics plans, wrote critical-part inspection and acceptance criteria, and designed and managed the product’s reliability testing program."
+          },
+          {
+            "id": "outcome",
+            "text": "Glyph shipped, and Avegant reported Kickstarter fulfillment complete in June 2016. My work continued through the ramp as testing, production builds and customer returns exposed the next problems to solve."
+          }
+        ],
+        "outputs": {
+          "linkedinExperience": [
+            "product",
+            "scope",
+            "recovery",
+            "standards",
+            "outcome"
+          ],
+          "linkedinProjects": [
+            {
+              "id": "glyph-build",
+              "title": "Avegant Glyph: keeping the mechanical build moving",
+              "sections": [
+                "keeping-the-wider-build-moving"
+              ]
+            },
+            {
+              "id": "glyph-wearability",
+              "title": "Avegant Glyph: headstrap and earpad development",
+              "sections": [
+                "taking-the-load-off-the-nose",
+                "developing-the-earpads"
+              ]
+            }
+          ]
+        }
+      },
+      "linkedinProjects": [
+        {
+          "id": "glyph-build",
+          "title": "Avegant Glyph: keeping the mechanical build moving",
+          "roleId": "avegant-2015",
+          "url": "https://eriknorris.com/projects/avegant-glyph/",
+          "sections": [
+            {
+              "heading": "Keeping the wider build moving",
+              "anchor": "keeping-the-wider-build-moving",
+              "text": "I delegated as much of the drawing and documentation work as I could. Leonard Pang (https://www.linkedin.com/in/leonard-pang-bb888b127) and others helped with drawings and revisions. That let me protect time for troubleshooting, supplier work and the decisions needed across the mechanical BOM.\n\nThat work extended across the BOM: spring indexing, gimbal holes and pins, sliding and bearing surfaces, snaps, screw features, texture and finish. We had to distinguish a drawing or measurement problem from a tooling or processing problem, agree on the correction and check the next parts. Chris, Misha, the supplier engineers and I worked through those reviews together.\n\nThe first question with a fix was how much validation it would take. Then came what the supply chain and fabrication could support. I coordinated on the fly, trying to make the best use of time and money. I worked for Chris Westra and Allan Evans (https://www.linkedin.com/in/allan-evans-phd/), who approved major expenditures. Those practical limits shaped how much we could change, and when.\n\nI've always been an avid photographer, and I use photography to communicate technical work. At Avegant, photographing parts, assemblies and the work around them was part of pursuing good parts at volume and acceptable yield."
+            }
+          ]
+        },
+        {
+          "id": "glyph-wearability",
+          "title": "Avegant Glyph: headstrap and earpad development",
+          "roleId": "avegant-2015",
+          "url": "https://eriknorris.com/projects/avegant-glyph/",
+          "sections": [
+            {
+              "heading": "Taking the load off the nose",
+              "anchor": "taking-the-load-off-the-nose",
+              "text": "I couldn't wear Glyph for more than a few minutes without pain. We kept hearing that people's ears hurt, and the silicone nosepads left deep, angry marks on many test subjects that took a long time to disappear.\n\nRadius Product Development supported the headstrap work.\n\nThe headstrap was a late addition. I proposed it, got it approved, tested it and brought it into production relatively quickly. Radius developed support concepts and mockups during that work. I added receiver features to the earcans for quick-release buckles, so the strap could be removed and Glyph could still be used without it.\n\nWith the strap attached to both earcans and adjusted over the crown, it took almost all the load off the nosepiece. The nosepiece then mainly located the unit, while the top of the head carried the weight. The strap also added another contact that helped keep the display in place.\n\nIt was a hold-your-nose solution. The strap was big and bulky, caught in people's hair and was tricky to adjust correctly the first time. It basically turned the headphones into a hat. We accepted it reluctantly, late in a long and frustrating engineering effort under pressure to deliver the overdue Kickstarter product. Once people got the hang of it, though, it became essential for longer use. It was the comfort fix I felt had the most impact.\n\nKeeping it optional left another constraint in place: the earcups still had to grip hard enough to hold Glyph without the strap. I reduced the clamp as far as I could while preserving that use. Even then, it was too much for me to wear comfortably for long, with or without the strap. Taking weight off the nose made a substantial difference; the ear pressure remained.\n\nTuning the pivot feel\n\nI also specified a damping grease for the headstrap pivot to get the feel and resistance right. I wanted something like the controlled movement of an expensive volume knob. Pivot torque testing was part of that work."
+            },
+            {
+              "heading": "Developing the earpads",
+              "anchor": "developing-the-earpads",
+              "text": "The earpads were a development effort in their own right, balancing contact pressure, comfort, traction and appearance.\n\nI tore down numerous headphones, obtained vendor samples and bought replacement earpads for a wide range of models. These gave me a broad set of constructions to examine while designing and prototyping Glyph's pads. My favorite Bose earpads were a reference for the foam type and combination.\n\nWe also compared how pad surfaces gripped an adjustable acrylic fixture. At a 132 mm span, we added weight to a hanging bag until the headset slipped. The seven variants behaved very differently; four examples show the range:\n\n| Pad surface | Recorded hanging mass at slip |\n| --- | ---: |\n| Normal Vulcan dots | 656.9 g |\n| Silicone netting | 1,081.74 g |\n| Gel dots | 1,000.04 g |\n| Suede | 35.98 g |\n\nThe suede result included the impact of the first bearing landing in the bag. At a wider 155 mm setting, the normal dotted pads held beyond 1,637.3 g before we ran out of weights. The fixture gave us a comparison under a common setup, but acrylic could produce more contact and suction than a person's head. These were bench retention measurements; acoustic seal and comfort still depended on people wearing the product.\n\nI built up a group of Glyphs with the different earpad variants and had colleagues try them and provide comments. Nearly everyone liked the dots and the low-pressure foam, and I used that feedback to make the selection. We chose the normal dotted surface, shown in the finished earpad photograph, rather than the gel dots or silicone netting."
+            }
+          ]
+        }
+      ],
+      "sourceSha256": "b754b6e19ff27bdfcba40ba06eb7b0e6397fb7647be761fdade4b0e3e3cac464"
+    }
+  ]
+}
