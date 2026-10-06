@@ -3,7 +3,7 @@ import path from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import matter from "gray-matter";
-import { Lexer } from "marked";
+import { Lexer, Tokenizer, walkTokens } from "marked";
 import { validateSynopsis } from "../src/lib/project-synopsis.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
@@ -17,13 +17,72 @@ const anchor = (text) =>
 		.trim()
 		.replace(/\s+/g, "-") || "section";
 
-export function selectSections(body, selected) {
+function sectionTokens(text, references, onDefinition = () => {}) {
+	const tokenizer = new Tokenizer();
+	const definition = tokenizer.def.bind(tokenizer);
+	tokenizer.def = (source) => {
+		const token = definition(source);
+		if (token) onDefinition(token.raw);
+		return token;
+	};
+	const lexer = new Lexer({ tokenizer });
+	lexer.tokens.links = { ...references };
+	return lexer.lex(text);
+}
+
+/** Keep literal Markdown out of every prose cleanup, including link conversion. */
+function protectCode(text, references) {
+	const literals = new Map();
+	const prefix = "\uE000section-code-";
+	if (text.includes(prefix)) throw new Error("Reserved section code marker");
+	walkTokens(sectionTokens(text, references), (token) => {
+		if (!["code", "codespan"].includes(token.type)) return;
+		// Leave block-ending newlines in place so subsequent prose still tokenizes
+		// as a separate block. Restore the literal before the final safety check.
+		const raw = token.raw.replace(/\n+$/, "");
+		if (!literals.has(raw)) literals.set(raw, `${prefix}${literals.size}\uE001`);
+	});
+	for (const [raw, marker] of literals) text = text.replaceAll(raw, () => marker);
+	return {
+		text,
+		restore(value) {
+			for (const [raw, marker] of literals) value = value.replaceAll(marker, () => raw);
+			return value;
+		},
+	};
+}
+
+function exportLinks(text, sourceUrl, references) {
+	const replacements = new Map();
+	const tokens = sectionTokens(text, references, (raw) => replacements.set(raw, ""));
+	walkTokens(tokens, (token) => {
+		if (token.type !== "link") return;
+		let url;
+		try {
+			url = new URL(token.href, sourceUrl);
+		} catch {
+			throw new Error("Selected section link requires a valid canonical source URL");
+		}
+		if (!["https:", "http:", "mailto:"].includes(url.protocol) || url.username || url.password)
+			throw new Error("Unsafe selected section link");
+		if (token.raw === token.href) return; // Bare public URLs already work in plain text.
+		replacements.set(
+			token.raw,
+			token.text === token.href ? url.href : `${token.text} (${url.href})`,
+		);
+	});
+	for (const [raw, replacement] of replacements) text = text.replaceAll(raw, () => replacement);
+	return text;
+}
+
+export function selectSections(body, selected, sourceUrl) {
 	body = body.replace(/\r\n?/g, "\n");
 	// Only narrative headings before canon's appended dossier can be reused.
 	body = body.split(/^## (?:Cast|Galleries|BOM|Timeline)\s*$/m)[0];
 	const used = new Set();
 	let cursor = 0;
-	const headings = Lexer.lex(body).flatMap((token) => {
+	const narrative = Lexer.lex(body);
+	const headings = narrative.flatMap((token) => {
 		const start = body.indexOf(token.raw, cursor);
 		cursor = start + token.raw.length;
 		if (token.type !== "heading") return [];
@@ -45,18 +104,20 @@ export function selectSections(body, selected) {
 			if (a !== b && a.start <= b.start && a.end > b.start)
 				throw new Error("Overlapping section selections");
 	return ranges.map((h) => {
-		const text = body
-			.slice(h.bodyStart, h.end)
+		const code = protectCode(body.slice(h.bodyStart, h.end), narrative.links);
+		const selectedText = code.text
+			.replace(/\{\/\*\s*(?:workbench\s+\{[^\n]*\}|\/workbench)\s*\*\/\}/g, "")
 			.replace(/\{\/\*\s*\^\[evidence:[^\]]+\]\s*\*\/\}/g, "")
 			.replace(/<div\s+data-authoring-group=[^>]+>\s*<\/div>/g, "")
 			.replace(/<span\s+id=[^>]*>\s*<\/span>/g, "")
 			.replace(/<!--[^]*?-->/g, "")
-			.replace(/!\[[^\]]*\]\([^)]*\)/g, "")
-			.replace(/\[([^\]]+)\]\((https:\/\/[^)]+)\)/g, "$1 ($2)")
+			.replace(/!\[[^\]]*\]\([^)]*\)/g, "");
+		const prose = exportLinks(selectedText, sourceUrl, narrative.links)
 			.replace(/^#{1,6}\s+/gm, "")
 			.replace(/\*\*([^*]+)\*\*/g, "$1")
 			.replace(/\n{3,}/g, "\n\n")
 			.trim();
+		const text = code.restore(prose);
 		if (
 			!text ||
 			/<[^>]+>|\{\/\*|evidence:|data-authoring-group|\b(?:file|project-file|library-file|visualize):|\\\\|\b[A-Z]:[\\/]/i.test(
@@ -94,7 +155,7 @@ export function buildSynopses(canonRoot) {
 				title: p.title,
 				roleId: synopsis.roleId,
 				url,
-				sections: selectSections(record.content, p.sections),
+				sections: selectSections(record.content, p.sections, url),
 			})),
 			sourceSha256: hash(bytes),
 		});
@@ -139,7 +200,11 @@ export function verifySiteIndex(generated, directory, roles) {
 			title: p.title,
 			roleId: project.roleId,
 			url: `https://eriknorris.com/projects/${project.slug}/`,
-			sections: selectSections(entry.content, p.sections),
+			sections: selectSections(
+				entry.content,
+				p.sections,
+				`https://eriknorris.com/projects/${project.slug}/`,
+			),
 		}));
 		if (JSON.stringify(expected) !== JSON.stringify(project.linkedinProjects))
 			throw new Error(`Selected sections differ from index: ${project.slug}`);

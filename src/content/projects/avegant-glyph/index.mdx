@@ -1539,6 +1539,8 @@ I wrote individual inspection procedures and acceptance/rejection criteria for c
 
 
 
+{/* workbench {"id":"workbench-fixtures","title":"Locating, assembling and inspecting the parts","summary":"Inspection nests and ultrasonic-insertion setups connect the part geometry to the work on the line.","poster":"https://assets.eriknorris.com/avegant-glyph/authoring-2026-09-23-r1/b865a92baf91fba46df7-1600.webp","alt":"Most of the assembly fixtures I designed, grouped together. Additional fixtures and later versions held the subassemblies in similar ways during production."} */}
+
 <div data-authoring-group="fixtures"></div>
 
 
@@ -1547,9 +1549,34 @@ I wrote individual inspection procedures and acceptance/rejection criteria for c
 
 
 
+{/* /workbench */}
+
 ## Defining and running qualification
 
 I designed and managed the reliability testing program across Glyph.{/* ^[evidence:EV-ca5b5e79c758] */} I worked with Intretech on how we would qualify the product and validate changes. The work covered the assembled headset's moving interfaces, environmental exposure, drops, buttons and connectors, as well as the durability of coatings, printing and packaging. It involved test samples and fixtures, operating conditions, inspections during testing and functional checks afterward.
+
+### The testing program at a glance
+
+Testing ran across parts, subassemblies and finished Glyphs. A fixture result could send us back to the cable construction, a molded surface or the inspection sequence. I coordinated reuse of test units across those investigations: clear housings made cable routing visible, and units could go on to salt spray, humidity and UV testing.
+
+<div class="test-program-scale" aria-label="Examples of the testing program's scale">
+<div><strong>950</strong><span>recorded clamp-force measurements</span><small>19 assemblies × 10 widths × 5 extension settings</small></div>
+<div><strong>3,000</strong><span>cycles in each specified headband and telescope life procedure</span><small>Headband checks every 500 cycles</small></div>
+<div><strong>20 + 10</strong><span>units allocated to April cable-fix validation</span><small>20 lifecycle units and 10 drop-test units</small></div>
+</div>
+
+The April spring compilation alone covered three spring groups, ten head widths from 100 to 190 mm, and telescope extensions from 0 to 40 mm. The interactive chart later in the story opens one of those five settings: 190 measurements at 20 mm extension.{/* ^[evidence:EV-20dbb80a184b] */}
+
+| Part of the program | What the work covered |
+| --- | --- |
+| Repeated motion | Headband opening, telescoping arms, eyepiece adjustment, pivot feel, cable return and abrasion |
+| Environmental and physical exposure | Temperature and humidity, UV, salt spray, vibration and drops, followed by inspection and functional checks |
+| Fit and retention | Spring and liner comparisons, seven earpad surface variants and people trying the assembled headsets |
+| Parts and interfaces | Spring metrology across two ten-part supplier lots; buttons, connectors, clearances and retention |
+| Appearance and delivery | Coating and printing durability, cosmetic acceptance and packaging |
+| Production changes | Targeted validation of revised parts, cable rework and process changes while the line kept moving |
+
+The September reliability allocation used a shared pool of 20 units. Reusing assemblies across test methods made sample configuration and test order part of the engineering work. The examples above show the scale of the measurements, test methods and sample coordination involved.{/* ^[evidence:EV-945341604818] */}
 
 ### Exercising the assembly
 
@@ -1613,19 +1640,27 @@ I also specified a damping grease for the headstrap pivot to get the feel and re
 
 Clamp force changed with both head width and telescope position. We measured the assembled headset across those settings while comparing spring and liner configurations. Jill helped with assembly and testing during the spring-and-liner work.{/* ^[evidence:EV-945341604818] */} At 150 mm width and 20 mm extension, the recorded 1.6, 1.4 and 1.2 mm spring groups averaged 11.7, 11.0 and 9.6 N. The curves show why a single force number could not describe the fit.{/* ^[evidence:EV-17ab19c5ec5f] */}
 
+{/* workbench {"id":"workbench-fit","title":"Spring response, test coverage and part variation","summary":"Explore the assembly force curves and measurement coverage, then compare them with spring dimensional checks.","poster":"https://assets.eriknorris.com/avegant-glyph/authoring-2026-09-23-r1/7b52e95509e6bb3c4ddf-1600.webp","alt":"The pucker at the liner edge: adjoining parts separate along the curve."} */}
+
 <div data-authoring-group="clamp-response"></div>
 
-### Checking the parts behind the force curves
+#### Checking the parts behind the force curves
 
 The springs needed their own dimensional checks. In May 2016, an inspection compared ten 1.4 mm headband springs from each of two supplier lots. On one 148.30 ± 2.00 mm feature, the recorded means were 145.605 mm and 145.766 mm; five of ten parts in the first lot and eight of ten in the second were outside the drawing limits. The second lot had less scatter, but its tighter grouping was still offset from the required dimension. Consistency and conformance were different questions.{/* ^[evidence:EV-945341604818] */}
 
 Those part measurements complemented the assembled-headset tests. A spring drawing, an inspection result and a force curve each described a different part of the problem: the shape we requested, the parts we received and what the complete assembly did.
+
+{/* /workbench */}
 
 ### Developing the earpads
 
 The earpads were a development effort in their own right, balancing contact pressure, comfort, traction and appearance.
 
 I tore down numerous headphones, obtained vendor samples and bought replacement earpads for a wide range of models. These gave me a broad set of constructions to examine while designing and prototyping Glyph's pads. My favorite Bose earpads were a reference for the foam type and combination.
+
+I built up a group of Glyphs with the different earpad variants and had colleagues try them and provide comments. Nearly everyone liked the dots and the low-pressure foam, and I used that feedback to make the selection. We chose the normal dotted surface, shown in the finished earpad photograph, rather than the gel dots or silicone netting.{/* ^[evidence:EV-51df7190f9f8] */}
+
+{/* workbench {"id":"workbench-earpads","title":"Earpad materials, grip and prototypes","summary":"Compare seven surface variants, the bench retention results and the samples behind the selected dotted pad.","poster":"https://assets.eriknorris.com/avegant-glyph/release-2026-10-02/earpad-1600.webp","alt":"The selected black earpad with normal dots and a fabric-lined center opening."} */}
 
 We also compared how pad surfaces gripped an adjustable acrylic fixture. At a 132 mm span, we added weight to a hanging bag until the headset slipped. The seven variants behaved very differently; four examples show the range:
 
@@ -1638,13 +1673,15 @@ We also compared how pad surfaces gripped an adjustable acrylic fixture. At a 13
 
 The suede result included the impact of the first bearing landing in the bag. At a wider 155 mm setting, the normal dotted pads held beyond 1,637.3 g before we ran out of weights. The fixture gave us a comparison under a common setup, but acrylic could produce more contact and suction than a person's head. These were bench retention measurements; acoustic seal and comfort still depended on people wearing the product.{/* ^[evidence:EV-945341604818] */}
 
-I built up a group of Glyphs with the different earpad variants and had colleagues try them and provide comments. Nearly everyone liked the dots and the low-pressure foam, and I used that feedback to make the selection. We chose the normal dotted surface, shown in the finished earpad photograph, rather than the gel dots or silicone netting.{/* ^[evidence:EV-51df7190f9f8] */}
+
 
 
 
 <div data-authoring-group="figure-10"></div>
 
 
+
+{/* /workbench */}
 
 ### The inner liner and its fixed constraints
 
@@ -1684,6 +1721,8 @@ The cable could work initially, then develop a kink after repeated cycling and b
 
 I spent a great deal of time working through those combinations: splints, different jackets and wires, changes to the looming specifications. Careful design of experiments, lots of changes and lots of cycles.
 
+{/* workbench {"id":"workbench-cables","title":"Following the cable through repeated motion","summary":"Trace the service loop and inspect cable variants as kinks, abrasion and return problems emerge.","poster":"https://assets.eriknorris.com/avegant-glyph/page-annotations-2026-10-05/cable-cycling-poster.jpg","alt":"Nine photographs of cable routing, kinking and abrasion across the inspected variants."} */}
+
 The slack for telescoping extension lived inside the earcan, wound around the center as a service loop. Adjacent features guided and housed it as it expanded and contracted. The pass-throughs at each end of the telescoping sections mattered too. The pivot arm could bind the cable against the housing in several positions, and long, curved surfaces sliding past one another offered more places to snag. Fixing points, routing and variation in the cable and its covering all affected how it behaved.
 
 
@@ -1703,6 +1742,8 @@ An idea also had to survive fabrication and assembly. Fujikura withdrew one PET-
 <span id="shared-glyph-cohorts" class="block scroll-mt-24"></span>
 
 Two five-unit groups tested in March 2016 give a sense of the range of behavior. In T6, two units could not return at 250 cycles. The separate T5 group recorded OK wear and kink checks through 3,000 cycles.{/* ^[evidence:EV-de52939d1964] */}
+
+{/* /workbench */}
 
 The April weekly updates record the six-variant comparison as complete and the splint approach as rejected. Short-term cable rework and chassis machining were moving alongside longer-term tooling changes and samples from a second supplier. Decisions were being made and changes released while other investigations continued.{/* ^[evidence:EV-caf0e7c1af31] */}
 
@@ -1839,6 +1880,8 @@ On January 28, 2016, Avegant announced that shipping was beginning. By February 
 Through that spring, I kept working on the mechanical problems that came with the ramp. In April, cable-abrasion changes were still in validation, and I was working on clamp force, liner tooling and another cable supplier. The Amphenol work included defining the validation needed for its samples and coordinating that work with Intretech.{/* ^[evidence:EV-de52939d1964] */}
 
 Delivery depended on work across the company too. CE certification held up international orders, and engraving added another step to fulfilling customized orders. On June 2, Avegant reported the Kickstarter units fully deployed.{/* ^[evidence:EV-de52939d1964] */}
+
+Kickstarter fulfillment was a shipping milestone, not the end of the engineering work. The August clamp-force comparison still separated liner material, paint state and spring diameter. By December and January, the return-analysis work described above was feeding another set of findings back into the product. Testing, production support and field diagnosis continued through my final months at Avegant.{/* ^[evidence:EV-945341604818] */}
 
 ### Leaving Avegant
 

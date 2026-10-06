@@ -117,6 +117,32 @@ test("channel opt-in leaves legacy text alone and site-only records need no empl
 	assert.ok(!packet(data(value)).includes("\n\nPROJECTS\n"));
 });
 
+test("partial group opt-in cannot silently remove the other employers from a compact resume entry", () => {
+	const group = resumeMaster.experience.find((entry) => entry.id === "earlier-work");
+	const first = record("first-project", group.roleIds[0]);
+	assert.throws(
+		() => resumeExperience(resumeMaster, [first]),
+		/Partial synopsis coverage.*earlier-work.*frogdesign-1997/,
+	);
+	// A LinkedIn-only selection does not override the grouped resume baseline.
+	delete first.synopsis.outputs.resume;
+	assert.equal(
+		resumeExperience(resumeMaster, [first]).find((entry) => entry.id === group.id).blurb,
+		group.blurb,
+	);
+	const records = group.roleIds.map((roleId, i) => record(`project-${i}`, roleId));
+	const blurb = resumeExperience(resumeMaster, records).find(
+		(entry) => entry.id === group.id,
+	).blurb;
+	for (const r of records) {
+		const role = resumeMaster.career.find((role) => role.id === r.roleId);
+		assert.ok(
+			blurb.includes(`${role.company} | ${role.channels.resumeTitle ?? role.canonicalTitle}`),
+		);
+		assert.ok(blurb.includes(r.synopsis.paragraphs[0].text));
+	}
+});
+
 for (const [name, mutate, pattern] of [
 	[
 		"missing selected role",

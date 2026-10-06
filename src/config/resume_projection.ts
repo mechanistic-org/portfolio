@@ -37,9 +37,25 @@ export function resumeExperience(authority = resumeMaster, records = projectSyno
 		const bullets = claims
 			? [0, 1, 2].map((index) => claimFor(`resume:${entry.id}:${index}`).text)
 			: entry.bullets;
-		const sharedBlurbs = entry.roleIds
-			.map((roleId) => synopsisForRole(records, roleId, "resume"))
-			.filter((text): text is string => Boolean(text));
+		const roleBlurbs = roles.map((role) => ({
+			role,
+			text: synopsisForRole(records, role.id, "resume"),
+		}));
+		const selected = roleBlurbs.filter((item) => Boolean(item.text));
+		// A grouped baseline describes every engagement. Replacing it with one
+		// project's selection silently deletes the other employers and their work.
+		if (entry.group && selected.length && selected.length !== roles.length)
+			throw new Error(
+				`Partial synopsis coverage for grouped resume entry ${entry.id}; reconcile the group before opting in. Missing roles: ${roleBlurbs
+					.filter((item) => !item.text)
+					.map((item) => item.role.id)
+					.join(", ")}`,
+			);
+		const sharedBlurbs = selected.map(({ role, text }) =>
+			entry.group
+				? `${role.company} | ${role.channels.resumeTitle ?? role.canonicalTitle}\n\n${text}`
+				: text,
+		);
 		const blurb = sharedBlurbs.length
 			? sharedBlurbs.join("\n\n")
 			: entry.id === "avegant-2015"

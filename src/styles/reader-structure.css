@@ -492,3 +492,48 @@
 .reader-outline::-webkit-scrollbar {
 	display: none;
 }
+
+/* Counts retain their own units; these are complementary views of the program. */
+.test-program-scale {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1.25rem;
+	margin: 2rem 0;
+}
+.test-program-scale > div {
+	border-top: 2px solid #94bbff;
+	padding-top: 1rem;
+}
+.test-program-scale > div:nth-child(2) {
+	border-color: #f3bc68;
+}
+.test-program-scale > div:nth-child(3) {
+	border-color: #c3acf8;
+}
+.test-program-scale strong {
+	display: block;
+	font-size: clamp(2rem, 4vw, 3rem);
+	line-height: 1.2;
+	font-weight: 500;
+}
+.test-program-scale span {
+	display: block;
+	margin: 0.5rem 0;
+	font-size: 0.9rem;
+	line-height: 1.5;
+}
+.test-program-scale small {
+	display: block;
+	color: var(--authoring-muted);
+	font-size: 0.75rem;
+	line-height: 1.5;
+}
+@media (max-width: 560px) {
+	.test-program-scale {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+	.test-program-scale strong {
+		font-size: 2rem;
+	}
+}
