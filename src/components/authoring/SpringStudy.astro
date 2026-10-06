@@ -1,0 +1,257 @@
+---
+import {
+	springColors,
+	springDashes,
+	chartX,
+	chartY,
+	springPath,
+} from "../../utils/springStudy.mjs";
+const { study, id, depth = 4 } = Astro.props;
+const Heading = `h${Math.min(6, depth)}`;
+const groups = study.groups;
+---
+
+<div class="spring-study" data-spring-study data-study={JSON.stringify(study)}>
+	<p class="study-context">
+		20 mm telescope extension · 75A liners · {study.assemblies} assemblies
+	</p>
+	<div class="study-switch" hidden>
+		<button
+			type="button"
+			data-study-view="response"
+			aria-pressed="true"
+			aria-controls={`${id}-response`}>Assembly response</button
+		>
+		<button
+			type="button"
+			data-study-view="coverage"
+			aria-pressed="false"
+			aria-controls={`${id}-coverage`}>Test coverage</button
+		>
+	</div>
+	<section data-study-panel="response" id={`${id}-response`}>
+		<Heading>Assembly response</Heading>
+		<p>
+			Heavy lines show group means; fine lines show each assembly. Move across the measured widths
+			to compare the responses.
+		</p>
+		<div class="spring-controls" hidden>
+			<label
+				>Head width <output data-width-output>150 mm</output><input
+					type="range"
+					min="100"
+					max="190"
+					step="10"
+					value="150"
+					aria-label="Head width in millimeters"
+				/></label
+			>
+			<label><input type="checkbox" data-specimens checked /> Show individual assemblies</label>
+		</div>
+		<svg
+			class="spring-chart"
+			viewBox="0 0 710 395"
+			role="img"
+			aria-labelledby={`${id}-chart-title ${id}-chart-desc`}
+		>
+			<title id={`${id}-chart-title`}>Clamp force across head widths</title>
+			<desc id={`${id}-chart-desc`}
+				>Measured clamp force in newtons at widths from 100 to 190 millimeters. Individual assembly
+				curves and means for 1.6, 1.4 and 1.2 millimeter springs. Exact measurements are in the
+				table below.</desc
+			>
+			{
+				[0, 5, 10, 15, 20, 25].map((v) => (
+					<g>
+						<>
+							<line x1="65" x2="660" y1={chartY(v)} y2={chartY(v)} class="chart-grid" />
+							<text x="53" y={chartY(v) + 4} text-anchor="end">
+								{v}
+							</text>
+						</>
+					</g>
+				))
+			}
+			{
+				groups[0].rows.map((r: any) => (
+					<text x={chartX(r.width)} y="352" text-anchor="middle">
+						{r.width}
+					</text>
+				))
+			}
+			<text x="360" y="383" text-anchor="middle">Head width (mm)</text>
+			<text transform="translate(18 192) rotate(-90)" text-anchor="middle">Clamp force (N)</text>
+			{
+				groups.map((g: any, i: number) => (
+					<g stroke={springColors[i]} fill="none" data-curve-group={i}>
+						<g data-specimen-curves opacity="0.28">
+							{Array.from({ length: g.n }, (_, sample) => (
+								<path d={springPath(g.rows, sample)} stroke-width="1" />
+							))}
+						</g>
+						<path d={springPath(g.rows)} stroke-width="3" stroke-dasharray={springDashes[i]} />
+						{g.rows.map((r: any) => (
+							<circle cx={chartX(r.width)} cy={chartY(r.mean)} r="2.8" fill={springColors[i]} />
+						))}
+					</g>
+				))
+			}
+			<line
+				data-width-marker
+				x1={chartX(150)}
+				x2={chartX(150)}
+				y1="45"
+				y2="330"
+				stroke="white"
+				stroke-opacity="0.7"
+				stroke-dasharray="2 4"></line>
+		</svg>
+		<div class="spring-legend">
+			{
+				groups.map((g: any, i: number) => (
+					<div style={`--spring-color:${springColors[i]}`}>
+						<>
+							<span class="spring-swatch">{["━", "┅", "┈"][i]}</span>
+							<strong>{g.spring.toFixed(1)} mm</strong>
+							<span>{g.n} assemblies</span>
+							<output data-mean={i}>{g.rows[5].mean.toFixed(2)} N at 150 mm</output>
+						</>
+					</div>
+				))
+			}
+		</div>
+		<p class="study-note">
+			Separate groups of assembled headsets. These curves show assembly response, not wearer comfort
+			or an isolated causal effect of spring diameter.
+		</p>
+	</section>
+	<section data-study-panel="coverage" id={`${id}-coverage`}>
+		<Heading>Test coverage</Heading>
+		<p class="coverage-stats">
+			<strong>{study.assemblies}</strong> assemblies × <strong>10</strong> widths = <strong
+				>{study.measurements}</strong
+			> measurements
+		</p>
+		<p>
+			Each filled cell is one recorded force measurement. Rows follow individual assemblies across
+			the same ten widths.
+		</p>
+		<div class="coverage-scroll">
+			<table class="coverage-matrix">
+				<caption>Coverage of this verified slice: 20 mm extension, 75A liners</caption><thead
+					><tr
+						><th scope="col">Assembly</th>{
+							groups[0].rows.map((r: any) => <th scope="col">{r.width}</th>)
+						}</tr
+					></thead
+				><tbody>
+					{
+						groups.flatMap((g: any, gi: number) =>
+							Array.from({ length: g.n }, (_, sample) => (
+								<tr>
+									<th scope="row">
+										{g.spring.toFixed(1)} mm · {String(sample + 1).padStart(2, "0")}
+									</th>
+									{g.rows.map((r: any) => (
+										<td style={`--spring-color:${springColors[gi]}`}>
+											<span class="coverage-cell" title={`${r.width} mm: ${r.samples[sample]} N`}>
+												<span class="sr-only">{r.samples[sample]} N</span>●
+											</span>
+										</td>
+									))}
+								</tr>
+							)),
+						)
+					}
+				</tbody>
+			</table>
+		</div>
+		<p class="study-note">
+			Widths in millimeters. Assembly numbers identify rows within this view. This is one documented
+			test condition from the April 2016 compilation, not a count of the entire test program.
+		</p>
+	</section>
+	<details class="study-values">
+		<summary>Inspect all 190 measurements and group means</summary><div class="coverage-scroll">
+			<table>
+				<caption>{study.sourceLabel}: measured force in newtons</caption><thead
+					><tr
+						><th scope="col">Spring / assembly</th>{
+							groups[0].rows.map((r: any) => <th scope="col">{r.width} mm</th>)
+						}</tr
+					></thead
+				><tbody>
+					{
+						groups.flatMap((g: any) => [
+							...Array.from({ length: g.n }, (_, sample) => (
+								<tr>
+									<th scope="row">
+										{g.spring.toFixed(1)} mm · {sample + 1}
+									</th>
+									{g.rows.map((r: any) => (
+										<td>{r.samples[sample].toFixed(2)}</td>
+									))}
+								</tr>
+							)),
+							<tr class="mean-row">
+								<th scope="row">{g.spring.toFixed(1)} mm mean</th>
+								{g.rows.map((r: any) => (
+									<td>{r.mean.toFixed(2)}</td>
+								))}
+							</tr>,
+						])
+					}
+				</tbody>
+			</table>
+		</div>
+	</details>
+</div>
+<script>
+	function initializeStudies() {
+		document.querySelectorAll<HTMLElement>("[data-spring-study]").forEach((root) => {
+			if (root.dataset.ready) return;
+			root.dataset.ready = "true";
+			const study = JSON.parse(root.dataset.study!);
+			root
+				.querySelectorAll<HTMLElement>(".study-switch,.spring-controls")
+				.forEach((el) => (el.hidden = false));
+			const buttons = [...root.querySelectorAll<HTMLButtonElement>("[data-study-view]")];
+			const select = (view: string) => {
+				buttons.forEach((b) =>
+					b.setAttribute("aria-pressed", String(b.dataset.studyView === view)),
+				);
+				root
+					.querySelectorAll<HTMLElement>("[data-study-panel]")
+					.forEach((p) => (p.hidden = p.dataset.studyPanel !== view));
+			};
+			buttons.forEach((b) => b.addEventListener("click", () => select(b.dataset.studyView!)));
+			select("response");
+			const slider = root.querySelector<HTMLInputElement>('input[type="range"]')!;
+			slider.addEventListener("input", () => {
+				const width = Number(slider.value),
+					x = 65 + ((width - 100) / 90) * 595;
+				root.querySelector("[data-width-output]")!.textContent = `${width} mm`;
+				const marker = root.querySelector("[data-width-marker]")!;
+				marker.setAttribute("x1", String(x));
+				marker.setAttribute("x2", String(x));
+				root
+					.querySelectorAll<HTMLOutputElement>("[data-mean]")
+					.forEach(
+						(o, i) =>
+							(o.textContent = `${study.groups[i].rows[(width - 100) / 10].mean.toFixed(2)} N at ${width} mm`),
+					);
+			});
+			root
+				.querySelector<HTMLInputElement>("[data-specimens]")!
+				.addEventListener("change", (event) => {
+					root
+						.querySelectorAll<SVGElement>("[data-specimen-curves]")
+						.forEach(
+							(g) => (g.style.display = (event.target as HTMLInputElement).checked ? "" : "none"),
+						);
+				});
+		});
+	}
+	initializeStudies();
+	document.addEventListener("astro:page-load", initializeStudies);
+</script>

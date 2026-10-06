@@ -1,0 +1,42 @@
+---
+import MediaGroup from "./MediaGroup.astro";
+const { entry } = Astro.props;
+const Heading = `h${entry.headingDepth || 3}`;
+---
+
+<details class="workbench-entry" id={entry.id} data-workbench>
+	<summary>
+		<img
+			class="workbench-poster"
+			src={entry.poster}
+			alt={entry.alt}
+			loading="lazy"
+			width="320"
+			height="220"
+		/>
+		<div class="workbench-intro">
+			<span class="group-kicker">From the workbench</span>
+			<Heading>{entry.title}</Heading>
+			<p>{entry.summary}</p>
+			<span class="workbench-cue"
+				><span class="when-closed">Explore investigation +</span><span class="when-open"
+					>Close investigation −</span
+				></span
+			>
+		</div>
+	</summary>
+	<div class="workbench-body">
+		{
+			entry.pieces.map((piece: any) =>
+				piece.group ? (
+					<MediaGroup group={piece.group} />
+				) : (
+					<div class="article-prose" set:html={piece.html} />
+				),
+			)
+		}
+		<button type="button" class="workbench-return" data-workbench-close hidden
+			>Close investigation and return to the story ↑</button
+		>
+	</div>
+</details>

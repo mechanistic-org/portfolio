@@ -1,3 +1,4 @@
+import { initializeReaderNavigation } from "./reader-navigation";
 import { mediaUrl, type AuthoringMediaItem } from "./media-url";
 
 type Item = AuthoringMediaItem & { captionHtml: string };
@@ -275,8 +276,9 @@ export function initializeAuthoringPage() {
 			if (notes) notes.open = true;
 		}),
 	);
+    initializeReaderNavigation(article);
 	const toc = article.querySelectorAll<HTMLAnchorElement>(
-		'.article-contents nav a[href^="#"], .project-contents nav a[href^="#"]',
+		article.hasAttribute('data-reader-structure') ? '.legacy-outline-not-present' : '.article-contents nav a[href^="#"], .project-contents nav a[href^="#"]',
 	);
 	const sections = [...toc]
 		.map((link) => document.getElementById(decodeURIComponent(link.hash.slice(1))))
