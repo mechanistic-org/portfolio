@@ -24,7 +24,7 @@ test("Glyph opening uses canon synopsis and independent hero; all article eviden
 	assert.equal(opening.blocks.length, 5);
 	assert.equal(opening.image, page.image);
 	assert.equal(opening.pieces, page.pieces);
-	assert.equal(page.imageCount, 81);
+	assert.equal(page.imageCount, 77);
 	assert.equal(page.videoCount, 11);
 	assert.equal(
 		page.groups.some((g) => g.id === "figure-1"),

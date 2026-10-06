@@ -1,0 +1,51 @@
+---
+const { chapters } = Astro.props;
+---
+
+<div class="reader-index" data-reader-index>
+	<button
+		type="button"
+		class="reader-location"
+		aria-expanded="false"
+		aria-controls="reader-outline"
+		hidden
+		>On this page <span data-reader-location>{chapters[0]?.text}</span><span aria-hidden="true"
+			>⌄</span
+		></button
+	>
+	<div id="reader-outline" class="reader-panel">
+		<div class="reader-outline">
+			<nav aria-label="On this page">
+				{
+					chapters.map((chapter: any) => (
+						<div class="index-chapter" data-index-chapter={chapter.id}>
+							<div class="index-chapter-row">
+								<a href={`#${chapter.id}`} data-chapter-link>
+									{chapter.text}
+								</a>
+							</div>
+							{chapter.children.length > 0 && (
+								<div class="index-children" id={`index-${chapter.id}`}>
+									{chapter.children.map((child: any) => (
+										<a
+											href={`#${child.id}`}
+											data-outline-workbench={child.workbench || undefined}
+											data-outline-depth={child.depth}
+										>
+											{child.workbench === child.id && (
+												<span class="index-workbench-mark" aria-label="Workbench">
+													↳
+												</span>
+											)}
+											{child.text}
+										</a>
+									))}
+								</div>
+							)}
+						</div>
+					))
+				}
+			</nav>
+		</div>
+	</div>
+</div>

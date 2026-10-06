@@ -1,6 +1,10 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import MediaGroup from "./MediaGroup.astro";
+import Workbench from "./Workbench.astro";
+import ReaderIndex from "./ReaderIndex.astro";
+import { readerOutline } from "../../utils/readerStructure.mjs";
+import "../../styles/reader-structure.css";
 import MediaExperience from "./MediaExperience.astro";
 import ProjectOpening from "../Projects/ProjectOpening.astro";
 import projectOpenings from "../../config/project-openings.json";
@@ -44,8 +48,11 @@ const timeline = selectAuthoredTimeline(pieces, chronology);
 const chapters = page.headings.filter(
 	(h: any) => h.depth === 2 && !(timeline.referenceHtml && h.slug === timeline.referenceId),
 );
+const outline = isGlyph ? readerOutline(timeline.pieces) : [];
 const projectLabel = isGlyph ? "Avegant Glyph" : page.title;
-const firstImageGroup = pieces.find((piece: any) => piece.group?.items[0]?.kind === "image")?.group;
+const firstImageGroup = isGlyph
+    ? page.groups?.find((group: any) => group.items.some((item:any) => item.kind === "image"))
+    : pieces.find((piece: any) => piece.group?.items[0]?.kind === "image")?.group;
 const browseImageCount = page.imageCount - (legacy?.opening?.group.items.length ?? 0);
 const hasArticle = pieces.some((piece: any) => piece.group || piece.model || piece.html?.trim());
 const hasRail = chapters.length > 0 || browseImageCount > 0 || cast.length > 0 || hasRecords;
@@ -77,6 +84,7 @@ const hasRail = chapters.length > 0 || browseImageCount > 0 || cast.length > 0 |
 		class:list={["authoring-page", { "public-authored-page": isPublic }]}
 		data-authoring-project={page.project}
 		data-project-reader="shared"
+        data-reader-structure={isGlyph ? "nested" : undefined}
 		data-revision={page.revision}
 		data-project-title={projectLabel}
 		data-project-intro={page.description}
@@ -124,7 +132,7 @@ const hasRail = chapters.length > 0 || browseImageCount > 0 || cast.length > 0 |
 				hasRail && (
 					<aside class="article-contents">
 						{isGlyph && <a class="article-all-work" href="/projects/">← All work</a>}
-						{chapters.length > 0 && (
+						{isGlyph ? <ReaderIndex chapters={outline} /> : chapters.length > 0 && (
 							<nav aria-label="On this page">
 								{chapters.map((h: any, i: number) => (
 									<a href={`#${h.slug}`}>
@@ -170,7 +178,7 @@ const hasRail = chapters.length > 0 || browseImageCount > 0 || cast.length > 0 |
 				<slot name="lead" />
 				{
 					timeline.pieces.map((piece: any) =>
-						piece.timeline ? null : piece.group ? (
+						piece.timeline ? null : piece.workbench ? (<Workbench entry={piece.workbench} />) : piece.group ? (
 							<MediaGroup group={piece.group} />
 						) : piece.model ? (
 							<ProjectModelEvidence models={[piece.model]} />

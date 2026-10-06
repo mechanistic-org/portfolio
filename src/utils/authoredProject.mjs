@@ -1,4 +1,6 @@
 import { Marked } from "marked";
+import { collectWorkbenchPieces } from "./readerStructure.mjs";
+import { normalizeSpringStudy } from "./springStudy.mjs";
 
 const GROUP_ID = /^[a-zA-Z][a-zA-Z0-9_-]*$/;
 const GROUP_MARKER = /<div\s+data-authoring-group=(["'])([a-zA-Z][a-zA-Z0-9_-]*)\1\s*>\s*<\/div>/g;
@@ -91,13 +93,15 @@ export async function buildAuthoredProject(entry) {
 		if (type !== "gallery") fail(`Expected gallery type: ${id}`);
 		if (typeof title !== "string") fail(`Invalid gallery title: ${id}`);
 		const definition = sticky.data;
-		if (!definition || !Array.isArray(definition.items) || !definition.items.length) {
+		if (!definition || !Array.isArray(definition.items) || (!definition.items.length && !definition.study)) {
 			fail(`Gallery must contain media: ${id}`);
 		}
 		if (definition.mode !== undefined && typeof definition.mode !== "string")
 			fail(`Invalid gallery mode: ${id}`);
 		if (definition.summary !== undefined && typeof definition.summary !== "string")
 			fail(`Invalid gallery summary: ${id}`);
+		if (definition.kicker !== undefined && (typeof definition.kicker !== "string" || !definition.kicker.trim()))
+			fail(`Invalid gallery kicker: ${id}`);
 		const normalizeMedia = (item, label) => {
 			if (!item || !["image", "video"].includes(item.kind)) fail(`Invalid media kind: ${label}`);
 			if (typeof item.alt !== "string" || !item.alt.trim())
@@ -142,10 +146,10 @@ export async function buildAuthoredProject(entry) {
 
 		if (items.some(item => item.kind === "image") && items.some(item => item.kind === "video" && !item.poster))
 			fail(`Mixed gallery videos require a poster: ${id}`);
-		const compare = definition.compare ?? [0, items.length > 1 ? 1 : 0];
+		const compare = definition.compare ?? (items.length ? [0, items.length > 1 ? 1 : 0] : []);
 		if (
 			!Array.isArray(compare) ||
-			compare.length !== 2 ||
+			compare.length !== (items.length ? 2 : 0) ||
 			compare.some((index) => !Number.isInteger(index) || index < 0 || index >= items.length)
 		) {
 			fail(`Invalid comparison indices: ${id}`);
@@ -155,13 +159,15 @@ export async function buildAuthoredProject(entry) {
 			title,
 			mode: definition.mode || "gallery",
 			summary: definition.summary || "",
+			...(definition.kicker ? { kicker: definition.kicker } : {}),
+            ...(definition.study ? { study: normalizeSpringStudy(definition.study) } : {}),
 			compare: [...compare],
 			...(sequenceVideo ? { sequenceVideo } : {}),
 			items,
 		};
 	});
 	const image = publicAsset(data.heroImage, "heroImage");
-	const body = entry.body.replace(EVIDENCE_COMMENT, "");
+	const body = entry.body.replace(EVIDENCE_COMMENT, "").replace(/\{\/\*\s*(workbench\s+\{[^\n]*\}|\/workbench)\s*\*\/\}/g, "<!-- $1 -->");
 	const markerCounts = new Map();
 	for (const match of body.matchAll(GROUP_MARKER)) {
 		const id = match[2];
@@ -223,7 +229,7 @@ export async function buildAuthoredProject(entry) {
 		description: data.description,
 		image,
 		frontmatter: data,
-		pieces,
+		pieces: collectWorkbenchPieces(pieces, { fail, publicAsset }),
 		headings,
 		groups,
 		footnotes: [],
