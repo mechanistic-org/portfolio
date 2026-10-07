@@ -24,7 +24,17 @@ const { mode = "standard", class: className, hideLogo = false } = Astro.props;
 			href="/"
 			class={`group flex items-center gap-2 transition-opacity hover:opacity-80 ${hideLogo ? "pointer-events-none" : ""}`}
 		>
-			{!hideLogo && <img src="/assets/branding/logo.png" alt="EN Logo" class="h-8 w-auto" />}
+			{
+				!hideLogo && (
+					<img
+						src="https://assets.eriknorris.com/branding/reader-2026-10-06/logo-nav-96.webp"
+						width="94"
+						height="96"
+						alt="EN Logo"
+						class="h-8 w-auto"
+					/>
+				)
+			}
 			{
 				mode === "projects" && (
 					<span class="font-mono text-xs font-bold tracking-widest text-white/50">PROJECTS</span>

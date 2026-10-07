@@ -1,0 +1,29 @@
+---
+import MediaGroup from "./MediaGroup.astro";
+import { evidenceSteps } from "../../utils/evidenceSequence.mjs";
+const { pieces } = Astro.props;
+const steps = evidenceSteps(pieces);
+---
+
+<div class="evidence-sequence" data-evidence-sequence>
+	<button type="button" class="sequence-layout" data-sequence-layout hidden aria-pressed="false"
+		>Show all evidence inline</button
+	>
+	<div class="evidence-steps" style={`--steps: ${steps.length}`}>
+		{
+			steps.map((step, i) => (
+				<div class="evidence-step" style={`--step: ${i + 1}`}>
+					<div class="evidence-account" data-evidence-account>
+						{step.prose.map((piece) => (
+							<div class="article-prose" set:html={piece.html} />
+						))}
+					</div>
+					<div class="evidence-panel" data-evidence-panel>
+						<MediaGroup group={step.group} />
+					</div>
+				</div>
+			))
+		}
+	</div>
+	{steps.at(-1)?.after.map((piece) => <div class="article-prose" set:html={piece.html} />)}
+</div>

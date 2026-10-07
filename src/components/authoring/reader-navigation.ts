@@ -1,3 +1,5 @@
+import { initializeEvidenceSequences } from "./evidence-sequence";
+
 export function initializeReaderNavigation(article: HTMLElement) {
 	const index = article.querySelector<HTMLElement>("[data-reader-index]");
 	if (!index || index.dataset.ready) return;
@@ -54,15 +56,6 @@ export function initializeReaderNavigation(article: HTMLElement) {
 		}
 	};
 	reveal(fragment());
-	// Ignore expanded investigation height when calculating progress along the story.
-	const storyY = (y: number) =>
-		y -
-		workbenches.reduce((n, w) => {
-			if (!w.open) return n;
-			const body = w.querySelector<HTMLElement>(".workbench-body")!;
-			const top = body.getBoundingClientRect().top + scrollY;
-			return n + Math.min(Math.max(0, y - top), body.getBoundingClientRect().height);
-		}, 0);
 	const update = () => {
 		frame = 0;
 		const readingLine = Math.max(155, mobile.getBoundingClientRect().bottom + 16);
@@ -77,14 +70,13 @@ export function initializeReaderNavigation(article: HTMLElement) {
 			targets.filter((x) => x.target!.getBoundingClientRect().top <= readingLine).at(-1) ||
 			targets[0];
 		const currentRow = current?.link.closest<HTMLElement>("[data-index-chapter]") || rows[0];
-		links.forEach((link) => {
-			const selected = link === current?.link;
-			link.classList.toggle("is-current", selected);
-			if (selected) link.setAttribute("aria-current", "location");
-			else link.removeAttribute("aria-current");
-		});
-		rows.forEach((row, i) => {
-			row.classList.toggle("is-active", row === currentRow);
+		const applyEvidence = prepareEvidence(readingLine);
+		const bodies = workbenches
+			.filter((w) => w.open)
+			.map((w) => w.querySelector<HTMLElement>(".workbench-body")!.getBoundingClientRect());
+		const storyY = (y: number) =>
+			y - bodies.reduce((n, r) => n + Math.min(Math.max(0, y - r.top - scrollY), r.height), 0);
+		const rowProgress = rows.map((row, i) => {
 			const start = document.getElementById(row.dataset.indexChapter!)!;
 			const end = rows[i + 1]
 				? document.getElementById(rows[i + 1].dataset.indexChapter!)
@@ -93,10 +85,21 @@ export function initializeReaderNavigation(article: HTMLElement) {
 			const bottom = end
 				? storyY(end.getBoundingClientRect()[rows[i + 1] ? "top" : "bottom"] + scrollY)
 				: top + 1;
-			const progress = Math.max(
+			return Math.max(
 				0,
 				Math.min(1, (storyY(scrollY + readingLine) - top) / Math.max(1, bottom - top)),
 			);
+		});
+		applyEvidence();
+		links.forEach((link) => {
+			const selected = link === current?.link;
+			link.classList.toggle("is-current", selected);
+			if (selected) link.setAttribute("aria-current", "location");
+			else link.removeAttribute("aria-current");
+		});
+		rows.forEach((row, i) => {
+			row.classList.toggle("is-active", row === currentRow);
+			const progress = rowProgress[i];
 			row.style.setProperty("--chapter-progress", `${progress * 100}%`);
 			if (!hovering && !focused()) setExpanded(row, row === currentRow);
 		});
@@ -116,6 +119,7 @@ export function initializeReaderNavigation(article: HTMLElement) {
 	const schedule = () => {
 		if (!frame) frame = requestAnimationFrame(update);
 	};
+	const prepareEvidence = initializeEvidenceSequences(article, schedule, signal);
 	index.addEventListener(
 		"pointerenter",
 		() => {

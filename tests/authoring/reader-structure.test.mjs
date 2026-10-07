@@ -95,3 +95,19 @@ test("spring response and coverage agree on specimens, widths, observations and 
 	input.rows[0].samples.pop();
 	assert.throws(() => normalizeSpringStudy(input), /Invalid/);
 });
+
+test("headband sequence keeps every source piece once in order and retains all evidence groups", async () => {
+	const { evidenceSteps } = await import("../../src/utils/evidenceSequence.mjs");
+	const page = await build();
+	const pieces = page.pieces.find((p) => p.workbench?.id === "workbench-headband").workbench.pieces;
+	const steps = evidenceSteps(pieces);
+	assert.equal(steps.length, 5);
+	assert.deepEqual(
+		steps.flatMap((s) => [...s.prose, { group: s.group }, ...(s.after || [])]),
+		pieces,
+	);
+	assert.deepEqual(
+		steps.map((s) => s.group.id),
+		["headband-mold-flow", "knit-line-cracks", "figure-4", "figure-5", "figure-7"],
+	);
+});

@@ -12,7 +12,7 @@ interface BaseProps {
 	title: string;
 	description: string;
 	noindex?: boolean;
-	socialImage?: { type: string; alt: string; width?: number; height?: number };
+	socialImage?: { src?: string; type: string; alt: string; width?: number; height?: number };
 }
 
 interface GeneralProps extends BaseProps {
@@ -87,6 +87,7 @@ else {
 
 // Explicit public URLs stay absolute; local and optimized paths use the site origin.
 const imageSource =
+	socialImage?.src ||
 	optimizedImage?.src ||
 	(typeof image === "string" ? image : image?.src) ||
 	siteData.defaultImage.src;
@@ -109,12 +110,19 @@ const imageUrl = new URL(imageSource, Astro.site || canonicalBase).toString();
 			siteName: siteData.title,
 		},
 		// Explicit metadata is opt-in; other pages retain their existing output.
-		image: socialImage || {
-			type: "image/webp",
-			width: optimizedImage?.attributes.width || "1200",
-			height: optimizedImage?.attributes.height || "800",
-			alt: title,
-		},
+		image: socialImage
+			? {
+					type: socialImage.type,
+					alt: socialImage.alt,
+					width: socialImage.width,
+					height: socialImage.height,
+				}
+			: {
+					type: "image/webp",
+					width: optimizedImage?.attributes.width || "1200",
+					height: optimizedImage?.attributes.height || "800",
+					alt: title,
+				},
 	}}
 	twitter={{
 		site: siteData.author.twitter ? "@" + siteData.author.twitter : "",
