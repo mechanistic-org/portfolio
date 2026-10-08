@@ -90,7 +90,7 @@ const data = items.map((item: any) => ({
 							/>
 							<span class="enlarge-cue">Enlarge ↗</span>
 						</button>
-						{mixed && <video class="stage-video" controls playsinline preload="metadata" hidden />}
+						{mixed && <video class="stage-video" controls playsinline preload="none" hidden />}
 						<div class="stage-caption">
 							<>
 								<span data-image-counter>01 / {String(items.length).padStart(2, "0")}</span>

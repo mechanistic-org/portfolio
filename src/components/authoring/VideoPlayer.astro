@@ -9,8 +9,8 @@ const { item } = Astro.props;
 <video
 	controls
 	playsinline
-	preload="metadata"
-	poster={item.poster}
+	preload="none"
+	data-video-poster={item.poster}
 	loop={item.loop === true}
 	aria-label={item.alt}
 >

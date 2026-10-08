@@ -18,7 +18,14 @@ test("investigations retain all selected media once and preserve narrative resul
 	const investigations = page.pieces.filter((p) => p.workbench).map((p) => p.workbench);
 	assert.deepEqual(
 		investigations.map((w) => w.id),
-		["workbench-optics", "workbench-headband"],
+		[
+			"workbench-optics",
+			"workbench-headband",
+			"workbench-fixtures",
+			"workbench-fit",
+			"workbench-earpads",
+			"workbench-cables",
+		],
 	);
 	const flatten = (pieces) =>
 		pieces.flatMap((p) =>
@@ -30,6 +37,19 @@ test("investigations retain all selected media once and preserve narrative resul
 	assert.equal(page.imageCount, 77);
 	assert.equal(page.videoCount, 11);
 	assert.ok(page.pieces.some((p) => p.html?.includes("Moving to a hot-runner setup")));
+	const narrative = page.pieces
+		.filter((p) => p.html)
+		.map((p) => p.html)
+		.join(" ");
+	assert.match(narrative, /We chose the normal dotted surface/);
+	assert.match(narrative, /mid-build/);
+	assert.match(narrative, /950/);
+	assert.match(narrative, /nineteen|19 assemblies/);
+	assert.ok(
+		investigations
+			.find((w) => w.id === "workbench-fit")
+			.pieces.some((p) => p.group?.id === "clamp-response"),
+	);
 	assert.ok(page.groups.every((g) => g.title.trim()));
 	const optics = investigations[0].pieces.find((p) => p.group)?.group;
 	assert.equal(optics.id, "optical-work");
@@ -74,4 +94,20 @@ test("spring response and coverage agree on specimens, widths, observations and 
 	);
 	input.rows[0].samples.pop();
 	assert.throws(() => normalizeSpringStudy(input), /Invalid/);
+});
+
+test("headband sequence keeps every source piece once in order and retains all evidence groups", async () => {
+	const { evidenceSteps } = await import("../../src/utils/evidenceSequence.mjs");
+	const page = await build();
+	const pieces = page.pieces.find((p) => p.workbench?.id === "workbench-headband").workbench.pieces;
+	const steps = evidenceSteps(pieces);
+	assert.equal(steps.length, 5);
+	assert.deepEqual(
+		steps.flatMap((s) => [...s.prose, { group: s.group }, ...(s.after || [])]),
+		pieces,
+	);
+	assert.deepEqual(
+		steps.map((s) => s.group.id),
+		["headband-mold-flow", "knit-line-cracks", "figure-4", "figure-5", "figure-7"],
+	);
 });

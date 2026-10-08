@@ -492,3 +492,132 @@
 .reader-outline::-webkit-scrollbar {
 	display: none;
 }
+
+/* Counts retain their own units; these are complementary views of the program. */
+.test-program-scale {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1.25rem;
+	margin: 2rem 0;
+}
+.test-program-scale > div {
+	border-top: 2px solid #94bbff;
+	padding-top: 1rem;
+}
+.test-program-scale > div:nth-child(2) {
+	border-color: #f3bc68;
+}
+.test-program-scale > div:nth-child(3) {
+	border-color: #c3acf8;
+}
+.test-program-scale strong {
+	display: block;
+	font-size: clamp(2rem, 4vw, 3rem);
+	line-height: 1.2;
+	font-weight: 500;
+}
+.test-program-scale span {
+	display: block;
+	margin: 0.5rem 0;
+	font-size: 0.9rem;
+	line-height: 1.5;
+}
+.test-program-scale small {
+	display: block;
+	color: var(--authoring-muted);
+	font-size: 0.75rem;
+	line-height: 1.5;
+}
+@media (max-width: 560px) {
+	.test-program-scale {
+		grid-template-columns: 1fr;
+		gap: 1rem;
+	}
+	.test-program-scale strong {
+		font-size: 2rem;
+	}
+}
+
+/* One opt-in investigation. Ordered, complete inline evidence is the default. */
+.sequence-layout {
+	margin: 1.5rem 0;
+	color: #a8c8ff;
+	text-decoration: underline;
+}
+.evidence-account .article-prose:empty {
+	display: none;
+}
+@media (min-width: 1200px) and (min-height: 800px) and (prefers-reduced-motion: no-preference) {
+	.is-sticky-sequence .evidence-steps {
+		display: grid;
+		grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+		gap: 0 2rem;
+		align-items: start;
+	}
+	.is-sticky-sequence .evidence-step {
+		display: contents;
+	}
+	.is-sticky-sequence .evidence-account {
+		grid-column: 2;
+		grid-row: var(--step);
+		min-height: 35vh;
+		padding: 2rem 0;
+	}
+	.is-sticky-sequence .evidence-account .article-prose {
+		margin: 0 0 1.5rem;
+		font-size: 1rem;
+	}
+	.is-sticky-sequence .evidence-panel {
+		grid-column: 1;
+		grid-row: 1 / span var(--steps);
+		position: sticky;
+		top: 5rem;
+		visibility: hidden;
+	}
+	.is-sticky-sequence .evidence-panel.is-evidence-current {
+		visibility: visible;
+	}
+	.is-sticky-sequence .media-group {
+		margin: 1rem 0;
+	}
+	.is-sticky-sequence .gallery-stage .stage-open {
+		min-height: 0;
+	}
+	.is-sticky-sequence .gallery-stage img,
+	.is-sticky-sequence video {
+		max-height: 38vh;
+		width: 100%;
+		object-fit: contain;
+	}
+	.is-sticky-sequence .gallery-grid {
+		grid-template-columns: 1fr;
+	}
+	.is-sticky-sequence .gallery-grid video {
+		max-height: 22vh;
+	}
+	.is-sticky-sequence .gallery-thumbs {
+		max-height: none;
+	}
+	.is-sticky-sequence .group-title {
+		font-size: 1.25rem;
+	}
+	.is-sticky-sequence .group-summary,
+	.is-sticky-sequence figcaption,
+	.is-sticky-sequence .stage-caption {
+		font-size: 0.8rem;
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	.is-sticky-sequence .is-evidence-current {
+		animation: evidence-arrive 0.18s ease-out;
+	}
+	@keyframes evidence-arrive {
+		from {
+			opacity: 0.4;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+}

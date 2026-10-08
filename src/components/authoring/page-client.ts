@@ -1,3 +1,4 @@
+import { initializeDeferredVideos } from "./deferred-video";
 import { initializeReaderNavigation } from "./reader-navigation";
 import { mediaUrl, type AuthoringMediaItem } from "./media-url";
 
@@ -16,6 +17,7 @@ export function initializeAuthoringPage() {
 	);
 	if (!article || article.dataset.initialized) return;
 	article.dataset.initialized = "true";
+	const deferVideoPoster = initializeDeferredVideos(article);
 	const viewer = document.querySelector<HTMLDialogElement>(".image-viewer")!;
 	const browser = document.querySelector<HTMLDialogElement>(".media-browser")!;
 	const groups: Group[] = [];
@@ -81,11 +83,12 @@ export function initializeAuthoringPage() {
 		viewer.showModal();
 	}
 	function stepImage(direction: number) {
-  if (!active) return;
-  const indices = active.items.flatMap((item, index) => item.kind === "image" ? [index] : []);
-  activeIndex = indices[(indices.indexOf(activeIndex) + direction + indices.length) % indices.length];
-  renderViewer();
- }
+		if (!active) return;
+		const indices = active.items.flatMap((item, index) => (item.kind === "image" ? [index] : []));
+		activeIndex =
+			indices[(indices.indexOf(activeIndex) + direction + indices.length) % indices.length];
+		renderViewer();
+	}
 	viewer.querySelector("[data-close-viewer]")!.addEventListener("click", () => viewer.close());
 	viewer.addEventListener("close", () => opener?.focus({ preventScroll: true }));
 	viewer.querySelectorAll<HTMLButtonElement>("[data-viewer-step]").forEach((button) =>
@@ -119,7 +122,7 @@ export function initializeAuthoringPage() {
 			index: 0,
 		};
 		groups.push(group);
-		if (group.items.every(item => item.kind === "video")) return;
+		if (group.items.every((item) => item.kind === "video")) return;
 		const grid = element.querySelector<HTMLElement>(".gallery-grid")!;
 		const stage = element.querySelector<HTMLElement>(".gallery-stage")!;
 		const stageButton = stage.querySelector<HTMLButtonElement>("[data-open-image]")!;
@@ -139,16 +142,16 @@ export function initializeAuthoringPage() {
 			const item = group.items[group.index];
 			const img = stage.querySelector("img")!;
 			video?.pause();
-   stageButton.hidden = item.kind === "video";
-   if (video) video.hidden = item.kind !== "video";
-   if (item.kind === "video" && video) {
-    video.src = item.src;
-    video.poster = item.poster || "";
-    video.loop = item.loop === true;
-    video.setAttribute("aria-label", item.alt);
-   } else {
-    setImage(img, mediaUrl(item, "display"), item.alt);
-   }
+			stageButton.hidden = item.kind === "video";
+			if (video) video.hidden = item.kind !== "video";
+			if (item.kind === "video" && video) {
+				video.src = item.src;
+				deferVideoPoster(video, item.poster);
+				video.loop = item.loop === true;
+				video.setAttribute("aria-label", item.alt);
+			} else {
+				setImage(img, mediaUrl(item, "display"), item.alt);
+			}
 			stage.querySelector("[data-image-counter]")!.textContent =
 				`${String(group.index + 1).padStart(2, "0")} / ${String(group.items.length).padStart(2, "0")}`;
 			stage.querySelector("[data-image-caption]")!.innerHTML = item.captionHtml;
@@ -225,7 +228,7 @@ export function initializeAuthoringPage() {
 	const browserGroups = browser.querySelector(".media-browser-groups")!;
 	const chapterGrids = new Map<string, HTMLElement>();
 	groups
-		.filter((group) => group.items.some(item => item.kind === "image"))
+		.filter((group) => group.items.some((item) => item.kind === "image"))
 		.forEach((group) => {
 			let grid = chapterGrids.get(group.chapter);
 			if (!grid) {
@@ -240,7 +243,7 @@ export function initializeAuthoringPage() {
 				chapterGrids.set(group.chapter, grid);
 			}
 			group.items.forEach((item, index) => {
-    if (item.kind !== "image") return;
+				if (item.kind !== "image") return;
 				const button = document.createElement("button");
 				button.type = "button";
 				button.setAttribute("aria-label", item.alt);
@@ -276,9 +279,11 @@ export function initializeAuthoringPage() {
 			if (notes) notes.open = true;
 		}),
 	);
-    initializeReaderNavigation(article);
+	initializeReaderNavigation(article);
 	const toc = article.querySelectorAll<HTMLAnchorElement>(
-		article.hasAttribute('data-reader-structure') ? '.legacy-outline-not-present' : '.article-contents nav a[href^="#"], .project-contents nav a[href^="#"]',
+		article.hasAttribute("data-reader-structure")
+			? ".legacy-outline-not-present"
+			: '.article-contents nav a[href^="#"], .project-contents nav a[href^="#"]',
 	);
 	const sections = [...toc]
 		.map((link) => document.getElementById(decodeURIComponent(link.hash.slice(1))))

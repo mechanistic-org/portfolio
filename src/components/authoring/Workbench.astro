@@ -1,5 +1,6 @@
 ---
 import MediaGroup from "./MediaGroup.astro";
+import EvidenceSequence from "./EvidenceSequence.astro";
 const { entry } = Astro.props;
 const Heading = `h${entry.headingDepth || 3}`;
 ---
@@ -27,12 +28,16 @@ const Heading = `h${entry.headingDepth || 3}`;
 	</summary>
 	<div class="workbench-body">
 		{
-			entry.pieces.map((piece: any) =>
-				piece.group ? (
-					<MediaGroup group={piece.group} />
-				) : (
-					<div class="article-prose" set:html={piece.html} />
-				),
+			entry.id === "workbench-headband" ? (
+				<EvidenceSequence pieces={entry.pieces} />
+			) : (
+				entry.pieces.map((piece: any) =>
+					piece.group ? (
+						<MediaGroup group={piece.group} />
+					) : (
+						<div class="article-prose" set:html={piece.html} />
+					),
+				)
 			)
 		}
 		<button type="button" class="workbench-return" data-workbench-close hidden

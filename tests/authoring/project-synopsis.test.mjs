@@ -158,3 +158,100 @@ test("canon projection validates career identity and binds exact changed source 
 		fs.rmSync(root, { recursive: true, force: true });
 	}
 });
+
+test("section exports keep working links outside the site, including anchors and relative projects", () => {
+	const body =
+		'## Work\n\nSee [test conditions](#conditions), [related project](../other/), and [reference](https://example.com/test_(detail) "Reference").\n';
+	assert.equal(
+		selectSections(body, ["work"], "https://eriknorris.com/projects/example/")[0].text,
+		"See test conditions (https://eriknorris.com/projects/example/#conditions), related project (https://eriknorris.com/projects/other/), and reference (https://example.com/test_(detail)).",
+	);
+	assert.throws(() => selectSections(body, ["work"]), /source URL/);
+	assert.equal(
+		selectSections(
+			"## Work\n\n[Cost $& scope](#scope)",
+			["work"],
+			"https://eriknorris.com/projects/example/",
+		)[0].text,
+		"Cost $& scope (https://eriknorris.com/projects/example/#scope)",
+	);
+	assert.equal(
+		selectSections("## Work\n\nSee https://example.com/ and <https://example.org/>.", ["work"])[0]
+			.text,
+		"See https://example.com/ and https://example.org/.",
+	);
+	for (const target of [
+		"file:///D:/private.pdf",
+		"javascript:alert",
+		"https://user:password@example.com/",
+	])
+		assert.throws(
+			() =>
+				selectSections(
+					`## Work\n\n[Reference](${target})`,
+					["work"],
+					"https://eriknorris.com/projects/example/",
+				),
+			/Unsafe.*link/,
+		);
+});
+
+test("section exports resolve whole-narrative reference links and omit their definitions", () => {
+	const base = "https://eriknorris.com/projects/example/";
+	for (const definition of [
+		"[r]: #conditions\n\n## Other\n\nOther text.",
+		"## Other\n\nOther text.\n\n[r]: #conditions",
+	]) {
+		const body = `## Work\n\nRead [test conditions][r].\n\n${definition}\n`;
+		assert.equal(
+			selectSections(body, ["work"], base)[0].text,
+			"Read test conditions (https://eriknorris.com/projects/example/#conditions).",
+		);
+	}
+});
+
+test("section link conversion preserves inline and fenced code, including literal definitions", () => {
+	const body = [
+		"## Work",
+		"",
+		"Read [test](#test); literal `[test](#test)` and `[test][r]`.",
+		"",
+		"```md",
+		"[test](#test)",
+		"[r]: https://example.com/",
+		"## Literal heading",
+		"**literal emphasis**",
+		"```",
+		"",
+		"Use [test][r].",
+		"",
+		"## Other",
+		"",
+		"[r]: #test",
+		"",
+	].join("\n");
+	assert.equal(
+		selectSections(body, ["work"], "https://eriknorris.com/projects/example/")[0].text,
+		[
+			"Read test (https://eriknorris.com/projects/example/#test); literal `[test](#test)` and `[test][r]`.",
+			"",
+			"```md",
+			"[test](#test)",
+			"[r]: https://example.com/",
+			"## Literal heading",
+			"**literal emphasis**",
+			"```",
+			"",
+			"Use test (https://eriknorris.com/projects/example/#test).",
+		].join("\n"),
+	);
+});
+
+test("selected sections keep investigation prose without exporting UI markers", () => {
+	const body =
+		'## Pads\nChosen pads.\n\n{/* workbench {"id":"pads","title":"Pad tests","summary":"Tests","poster":"https://example.com/pad.jpg","alt":"Pad"} */}\nComparison results.\n{/* /workbench */}';
+	const sections = selectSections(body, ["pads"], "https://eriknorris.com/projects/avegant-glyph/");
+	assert.match(sections[0].text, /Chosen pads/);
+	assert.match(sections[0].text, /Comparison results/);
+	assert.doesNotMatch(sections[0].text, /workbench|poster/);
+});
