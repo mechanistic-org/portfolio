@@ -57,6 +57,12 @@ and follow its linked current execution contract and exact review gates.
 Resolve the selected project's `research_record` in the canon roster before
 asking about prior decisions; it links effective rulings, current source state,
 accepted candidates and carryovers. Follow exact references if search misses.
+For research (including fan-outs and scheduled runs), editorial proposals,
+recollections, page annotations or curation handoff, follow
+`D:\GitHub\portfolio-canon\CURATION_WORKFLOW.md`. Include its coordinator intake
+step in the research scope and completion criteria by default. Maintain current
+items in the primary canon project records and refresh their generated view before
+handoff; candidate worktrees keep their page ownership.
 The SOPs own research and receipt semantics; historical prompt/sidecar guides
 are provenance, not alternate operating instructions.
 
