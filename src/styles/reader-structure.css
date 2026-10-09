@@ -621,3 +621,41 @@
 		}
 	}
 }
+/* Glyph's program map keeps each method beside its finding on narrow screens. */
+@media (max-width: 600px) {
+	#workbench-testing table,
+	#workbench-testing tbody,
+	#workbench-testing tr,
+	#workbench-testing td {
+		display: block;
+		width: 100%;
+	}
+	#workbench-testing thead {
+		display: none;
+	}
+	#workbench-testing tr {
+		padding-block: 1rem;
+		border-top: 1px solid var(--authoring-line);
+	}
+	#workbench-testing td {
+		padding: 0.4rem 0;
+		border: 0;
+	}
+	#workbench-testing td:first-child {
+		color: var(--authoring-text);
+		font-size: 1.05em;
+	}
+	#workbench-testing td:nth-child(2)::before,
+	#workbench-testing td:nth-child(3)::before {
+		display: block;
+		margin-bottom: 0.2rem;
+		font-weight: 600;
+		color: var(--authoring-muted);
+	}
+	#workbench-testing td:nth-child(2)::before {
+		content: "Configuration and method";
+	}
+	#workbench-testing td:nth-child(3)::before {
+		content: "What we checked or learned";
+	}
+}

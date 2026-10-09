@@ -199,8 +199,8 @@ cyberspace:
         src: https://assets.eriknorris.com/avegant-glyph/page-annotations-2026-10-05/triplet-lens.mp4
         poster: https://assets.eriknorris.com/avegant-glyph/page-annotations-2026-10-05/triplet-lens-poster.jpg
         loop: true
-        alt: Four views of the debonded triplet lens. I spent weeks chasing the triplet-lens bonding process early in the program. This silent sequence holds each photograph for two seconds.
-        caption: Four views of the debonded triplet lens. I spent weeks chasing the triplet-lens bonding process early in the program. This silent sequence holds each photograph for two seconds.
+        alt: Four views of the debonded triplet lens. I supported the triplet-lens bonding process early in the program. This silent sequence holds each photograph for two seconds.
+        caption: Four views of the debonded triplet lens. I supported the triplet-lens bonding process early in the program. This silent sequence holds each photograph for two seconds.
       - kind: image
         src: https://assets.eriknorris.com/avegant-glyph/page-annotations-2026-10-05/img_1874-1600.webp
         thumbnailSrc: https://assets.eriknorris.com/avegant-glyph/page-annotations-2026-10-05/img_1874-240.webp
@@ -1408,7 +1408,7 @@ It was pandemonium. Testing, supplier questions, tooling changes and production 
 
 For my mechanical work, the challenge extended from the optical assemblies to the person wearing them. Within each engine, the DMD, illumination optics and eyepiece had to maintain their geometry. The two engines also had to stay aligned with each other as the wearer adjusted their spacing, or interpupillary distance (IPD). The chassis supported those relationships inside a headset that flexed, telescoped and moved between headphone and display positions.
 
-I spent weeks chasing the triplet-lens bonding process early in the program. The assembly stations and their gluing fixtures were a central part of that work.
+I supported the triplet-lens bonding process early in the program. Chris Westra was taking point on the optical work. I came in to fix problems in both bonding and optical inspection and alignment.{/* ^[evidence:EV-47e04ed784b3] */}
 
 {/* workbench {"id":"workbench-optics","title":"Lens assembly and bonding","summary":"Follow the production stations, lens work and fixtures, then look inside the optical engine.","poster":"https://assets.eriknorris.com/avegant-glyph/page-annotations-2026-10-05/img_2473-1600.webp","alt":"An operator works on optical subassemblies at a production station."} */}
 
@@ -1417,6 +1417,12 @@ I spent weeks chasing the triplet-lens bonding process early in the program. The
 #### Keeping the optical geometry
 
 Even measuring the assembly required care. The alignment-fixture specification called for three mounting locations that would not force the chassis flat, and checks at both minimum and maximum IPD. Clamping a chassis into a different shape could conceal the geometry we needed to measure.{/* ^[evidence:EV-de52939d1964] */} Nose height, headband position and the separate focus controls then let the wearer bring both images into view. Mechanical fit and optical performance met at those interfaces.
+
+#### Checking alignment, calibration and cleanliness
+
+Alignment, calibration and cleanliness needed different checks. The optical test requirements covered the position of the eyepiece and folding mirror, focus and illumination, color balance, and contamination in the optical path. Some stations combined several of those checks; passing one did not answer all the others.{/* ^[evidence:EV-06e259b5666b] */}
+
+Inspection coverage mattered, too. A Week 35 factory report recorded scratches, blue dots and folding-mirror dust that the O7 test missed. Its corrective action called for the program to be improved and confirmed before removing eye inspection at O7 and O4.{/* ^[evidence:EV-06e259b5666b] */}
 
 #### Inside the optical engine
 
@@ -1557,8 +1563,6 @@ I designed and managed the reliability testing program across Glyph.{/* ^[eviden
 
 ### The testing program at a glance
 
-I designed experiments and managed testing across parts, subassemblies and finished Glyphs, including reliability, environmental exposure, durability, HALT/HASS and cosmetics.{/* ^[evidence:EV-604bb39f021c] */} A fixture result could send us back to the cable construction, a molded surface or the inspection sequence. I coordinated reuse of test units across those investigations: clear housings made cable routing visible, and units could go on to salt spray, humidity and UV testing.
-
 <div class="test-program-scale" aria-label="Examples of the testing program's scale">
 <div><strong>96 hours</strong><span>in the March environmental exposure tests</span><small>Operating and non-operating temperature/humidity, plus high-temperature/high-humidity exposure</small></div>
 <div><strong>3,000</strong><span>cycles in each specified headband and telescope life procedure</span><small>Headband checks every 500 cycles</small></div>
@@ -1567,19 +1571,34 @@ I designed experiments and managed testing across parts, subassemblies and finis
 
 The spring study was one part of this larger effort: its April compilation records 950 measurements across 19 assemblies. It covered three spring groups, ten head widths from 100 to 190 mm, and telescope extensions from 0 to 40 mm. The interactive chart later in the story opens one of those five settings: 190 measurements at 20 mm extension.{/* ^[evidence:EV-20dbb80a184b] */}
 
-| Part of the program | What the work covered |
-| --- | --- |
-| Repeated motion | Headband opening, telescoping arms, eyepiece adjustment, pivot feel, cable return and abrasion |
-| Environmental and physical exposure | Temperature and humidity, UV, salt spray, vibration and drops, followed by inspection and functional checks |
-| Accelerated stress and screening | HALT/HASS programs alongside the subsystem and system reliability work |
-| Fit and retention | Spring and liner comparisons, seven earpad surface variants and people trying the assembled headsets |
-| Parts and interfaces | Spring metrology across two ten-part supplier lots; buttons, connectors, clearances and retention |
-| Appearance and delivery | Coating and printing durability, cosmetic acceptance and packaging |
-| Production changes | Targeted validation of revised parts, cable rework and process changes while the line kept moving |
+<span id="shared-glyph-changes" class="block scroll-mt-24"></span>
 
-The September reliability allocation used a shared pool of 20 units. April cable-fix validation allocated 20 lifecycle units and 10 drop-test units. Reusing assemblies across test methods made sample configuration and test order part of the engineering work. The examples above show the scale of the measurements, test methods and sample coordination involved.{/* ^[evidence:EV-945341604818] */}
+We planned the September reliability allocation around a pool of 20 units, assigning samples across the different tests. As the design and process changed, specific fixes needed their own validation. In April 2016, after initial shipping had begun, I had cable-abrasion fixes in validation on 20 units for headband lifecycle testing and another 10 for drop testing. Short-term chassis machining, cable rework and a revised routing scheme were being evaluated alongside longer-term tooling and harness changes.
 
-### Exercising the assembly
+By April, the six-variant cable comparison was complete and we had rejected the splint approach. Testing was helping us decide what to change in the product already being built.{/* ^[evidence:EV-caf0e7c1af31] */}
+
+<div data-authoring-group="figure-8"></div>
+
+{/* workbench {"id":"workbench-testing","title":"Testing the parts, the assembly and the process","summary":"Map the test programs, watch the lifecycle fixtures and follow a cable failure into a validation plan.","poster":"https://assets.eriknorris.com/avegant-glyph/page-annotations-2026-10-05/qualification-1-poster.jpg","alt":"A lifecycle fixture supports Glyph while its earcup interfaces move."} */}
+
+#### A map of the testing program
+
+The test configuration mattered as much as the method. A bare spring, a cable installed in the headset and a powered finished unit answered different questions. I had to connect the result to the parts, assembly condition and change we were evaluating.
+
+| Program and level | Configuration and method | What we checked or learned |
+| --- | --- | --- |
+| **Mechanism life · assembled headset** | Repeated headband opening, telescoping, eyepiece release/lock, gimbal and switch operation | Force, return, retention, cable wear and function at intervals; the March report attributed one eyepiece-lock failure to an overly tight screw. |
+| **Environmental · finished units** | Operating and non-operating temperature/humidity, including 96-hour exposures in the March program | Appearance and operation after exposure; the results included display and audio problems requiring diagnosis. |
+| **Vibration and drops · assembled product** | Vibration testing and separate drop-test allocations; revised cable assemblies needed their own validation | Retention and function; vibration exposed a loose lock spring. A planned drop allocation remained distinct from a completed result. |
+| **Interfaces · parts and assemblies** | Connector insertion and directional loading; button force/travel; gap measurements before and after temperature/humidity shipment | Free play, intermittent display, actuation feel and changes at mating surfaces. |
+| **Fit · springs, liners and complete headsets** | Spring metrology, clamp-force comparisons at different widths/extensions, earpad variants and wearer trials | Part variation, assembled force, retention and comfort; Jill helped with the spring-and-liner assembly and testing. |
+| **Cosmetics · materials and finishes** | A 16-method specification system with material-specific applicability; solvent, stain, UV, hardness, adhesion and abrasion testing | Coating and printing condition, finish durability and appearance. The specification methods and populated result sheets served different purposes. |
+| **Accelerated stress and screening** | HALT/HASS alongside subsystem and system reliability work | Part of the wider set of experiments and testing programs I designed and managed. |
+| **Production changes · revised assemblies** | Targeted cycling, drops, functional checks and teardown after rework | Whether a proposed change addressed the failure in the assembled product; the cable example below shows how we set up that validation. |
+
+The map brings together the reliability plans, March production-test results, interface studies and cosmetic specifications.{/* ^[evidence:EV-945341604818] */} HALT/HASS was also part of the program I designed and managed.{/* ^[evidence:EV-604bb39f021c] */}
+
+#### Exercising the assembly
 
 The fixtures had to reproduce the movement we cared about: opening the headband, extending and returning the arms, and moving the earcup interfaces. Travel, speed, applied force and the position of the stops all mattered. In September 2015, I requested an adjustment to the headband-life fixture so it could exercise the assembly at full extension.{/* ^[evidence:EV-945341604818] */}
 
@@ -1587,21 +1606,35 @@ These three short clips show a few of the fixtures exercising Glyph. They make t
 
 <div data-authoring-group="qualification-fixtures"></div>
 
-For the headband, we specified 3,000 cycles, checking every 500 and measuring the opening force before and after. The telescoping arms also had a 3,000-cycle procedure. Environmental exposure, drops and finish tests addressed other ways the assembly could change or stop working.{/* ^[evidence:EV-de52939d1964] */}
+For the headband, we specified 3,000 cycles, checking every 500 and measuring the opening force before and after. The telescoping arms also had a 3,000-cycle procedure.{/* ^[evidence:EV-de52939d1964] */} I was revising Frank Jiang's earlier reliability plan and seeking input from Jansen and Geoff on the methods and missing conditions.
 
-### Checking function while the interface moved
+#### Checking function while the interface moved
 
 The micro-HDMI investigation shows why a functional check at rest was only part of the test. In August 2015, the connector was repeatedly inserted, removed and loaded in four directions, with dimensional and free-play measurements before and after. The display could look normal at a checkpoint, then briefly turn green or black during the separate wiggle check before recovering. Those observations made the behavior under movement visible alongside the changes in the physical interface.{/* ^[evidence:EV-945341604818] */}
 
-### Following what the tests exposed
+A September button reference study paired a position map with repeated force and travel measurements, recorded curves and photographs of the tester. It mapped seven button positions on four labeled samples, with ten repeats of each measurement. The report also recorded a hand-feel complaint: the measured response and the feel of the interface were separate parts of the evaluation.{/* ^[evidence:EV-61799ec643cb] */}
 
-The March production-test records contain passing life and finish tests alongside failures that needed investigation. Vibration exposed a lock spring coming loose. Eyepiece cycling exposed a failure to lock, which the report attributed to an overly tight screw. Environmental testing also recorded display and audio problems. These were specific observations on tested assemblies; they did not all point to the same cause or correction.{/* ^[evidence:EV-945341604818] */}
+#### Reading the test response
 
-<span id="shared-glyph-changes" class="block scroll-mt-24"></span>
+A September test-command workbook put Intretech's replies beside Avegant's feedback. The status-command definition allowed an `OK` response while still reporting a nonzero error code. The audio feedback clarified another apparent fault: without video, audio was supposed to be muted. Interpreting the result meant checking what the command reported and the operating state it assumed. An `OK` response alone did not mean the product had passed its tests.{/* ^[evidence:EV-49b5ae1229ae] */}
 
-We planned the September reliability allocation around a pool of 20 units, assigning samples across the different tests. As the design and process changed, specific fixes needed their own validation. In April 2016, after initial shipping had begun, I had cable-abrasion fixes in validation on 20 units for headband lifecycle testing and another 10 for drop testing. Short-term chassis machining, cable rework and a revised routing scheme were being evaluated alongside longer-term tooling and harness changes.
+#### From cable failure to a validation plan
 
-<div data-authoring-group="figure-8"></div>
+The cable work joined a symptom, a physical investigation and a test of the proposed changes:
+
+1. **Expose the failure.** Repeated movement could kink the cable inward or outward. Protective tape could also curl at its edges and make the arm harder to telescope. A change that resisted buckling still had to fit and move through the confined route.
+2. **Change the assembly.** The January cable study records removing damaged wrap and replacing it with new tape. We also compared stiffness and wrap concepts, then evaluated cable changes alongside chassis machining, protective tape, PSA placement and routing. The surrounding parts were part of the fix.
+3. **Exercise and inspect the revised units.** The March validation plan allocated 20 production-level assemblies to headband life and another 10 to drops. The life procedure called for 3,000 cycles, with audio/video checks every 500. The cable study also called for functional evaluation before teardown and internal inspection.{/* ^[evidence:EV-945341604818] */}
+
+The April updates still had cable-abrasion changes in validation. They recorded the splint approach as rejected while alternative harness work continued. That was the decision reached at this stage, with further work still underway.{/* ^[evidence:EV-caf0e7c1af31] */} The [cable investigation](#workbench-cables) follows the routing, photographs and separate cycle-test groups in detail.
+
+#### Keeping track of the test units
+
+The September reliability allocation used a shared pool of 20 units. That was a separate allocation from the later cable-fix validation. Reusing assemblies across methods made sample configuration and test order part of the engineering work.{/* ^[evidence:EV-945341604818] */}
+
+I coordinated reuse of test units across those investigations: clear housings made cable routing visible, and units could go on to salt spray, humidity and UV testing. A unit could contribute to several investigations, with each test answering a different question.
+
+{/* /workbench */}
 
 Qualification continued through the ramp. I had to coordinate the parts and sample configurations, the supplier changes and the testing needed to put a change into production, while backer deliveries were still underway. Comfort brought us back to people wearing the assemblies we were making.
 
@@ -1686,33 +1719,33 @@ The suede result included the impact of the first bearing landing in the bag. At
 
 ### The inner liner and its fixed constraints
 
-The inner liners were among the most difficult parts I worked on. They were two-shot molded parts, but the tooling itself was straightforward enough. The harder problem was getting the part to satisfy its functions and interfaces throughout the assembly’s movement.
+The inner liners were among the most difficult parts I worked on. These two-shot molded parts had to move within largely fixed interfaces: the surrounding parts, travel and extension distance left little room to change the design.
 
-During flex or twist, the liner and its mating flange did not deform together. A small gap would open at the edge, like a coin purse: the dreaded pucker.
+During flex or twist, the liner and its mating flange did not deform together. A small gap would open at the edge, like a coin purse: the dreaded pucker. I tried incremental changes, but we had to live with some puckering and deformation. The product shipped with those compromises still in place.
 
-The surrounding parts were largely off-limits, apart from subtle, steel-safe changes. Travel and extension distance were fixed. The liner had to work within those interfaces and motions.
+Trimming presented a separate production problem. The fixture technique was difficult to reproduce, so we ended up trimming the liners by hand. One operator had mastered the job, and she was the only person who did it.{/* ^[evidence:EV-de52939d1964] */}
 
-I was trying to connect the failures I saw during cycle testing and use with how the materials deformed together in the assembly. I tried incremental changes during tool fabrication and trials, but that region never worked correctly through every aspect and axis of its travel.
+{/* workbench {"id":"workbench-liners","title":"Working within the liner's limits","summary":"Inspect the moving interface, then follow the trimming trials to the operator and physical workmanship standards.","poster":"https://assets.eriknorris.com/avegant-glyph/authoring-2026-09-23-r1/7b52e95509e6bb3c4ddf-1600.webp","alt":"The liner edge separates from its mating flange along the curve."} */}
 
-In practice, we had to live with some puckering and deformation. A longer production run at higher volume might have supported further development. I wasn’t prepared to call the problem impossible, but I didn’t believe that liner, as it stood, could satisfy every constraint.
+#### Two parts moving differently
 
-The product had to ship with those compromises still in place.
+The tooling itself was straightforward enough. The harder problem was getting the part to satisfy its functions and interfaces throughout the assembly's movement. Apart from subtle, steel-safe changes, the surrounding parts were off-limits.
 
-
+I was trying to connect the failures I saw during cycle testing and use with how the materials deformed together. I made incremental changes during tool fabrication and trials, but that region never worked correctly through every aspect and axis of its travel.
 
 <div data-authoring-group="liner-pucker"></div>
 
-
+A longer production run at higher volume might have supported further development. I wasn't prepared to call the problem impossible, but I didn't believe that liner, as it stood, could satisfy every constraint.
 
 #### Trimming the liners
 
-We also worked on a trimming fixture for the inner liners. The technique was difficult to reproduce, so we ended up trimming them by hand. One operator had mastered the job, and she was the only person who did it.{/* ^[evidence:EV-de52939d1964] */}
+We worked on a trimming fixture in parallel. The first two photographs show the attempted setup; the following views show the operator who ultimately did the work by hand, her physical reference samples, tool and workstation.{/* ^[evidence:EV-de52939d1964] */}
 
-
+I chose and documented the physical defect samples for the trim technician, describing and quantifying the defects in specifications and technical communications. Those master samples put the workmanship standard beside the person doing the job.{/* ^[evidence:EV-de52939d1964] */}
 
 <div data-authoring-group="liner-trimming"></div>
 
-
+{/* /workbench */}
 
 ## Movement, reliability and dust
 
@@ -1746,9 +1779,7 @@ Two five-unit groups tested in March 2016 give a sense of the range of behavior.
 
 {/* /workbench */}
 
-The April weekly updates record the six-variant comparison as complete and the splint approach as rejected. Short-term cable rework and chassis machining were moving alongside longer-term tooling changes and samples from a second supplier. Decisions were being made and changes released while other investigations continued.{/* ^[evidence:EV-caf0e7c1af31] */}
-
-The near-term and longer-term work ran together:
+With the splint approach rejected, we were working on three fronts:{/* ^[evidence:EV-caf0e7c1af31] */}
 
 | Workstream | What we were changing |
 | --- | --- |
@@ -1820,11 +1851,9 @@ A return-analysis log covering December 19, 2016 through January 12, 2017, durin
 
 These are observations in one return-analysis log, not a failure rate for all shipped Glyphs. A unit could have more than one symptom, so its primary code was only part of the diagnostic picture. The mix shows why the work extended beyond whether a unit switched on: optical contamination, physical retention and electrical behavior all needed attention.{/* ^[evidence:EV-a7ae90028350] */}
 
-### Feeding the findings back into production
+### Factory corrective actions
 
-The factory feedback included incoming parts, assembly processes and the inspection sequence. Weekly reports record a revised mirror carrier entering production and a requirement to hold products in the QC room for seven days before first-article inspection and shipment. They also record supplier corrective-action follow-up for PCB via deviations, and confirmation that a new shutter mold could meet its 90–93 degree bend-angle requirement. Those were local, practical corrections while other investigations continued.{/* ^[evidence:EV-760c604347f8] */}
-
-For my dust work, moving the final optical check after the physical tests was part of that feedback loop. We needed to inspect the condition left by assembly and exercising the product, then use what we found to change the parts, protection or process.{/* ^[evidence:EV-de52939d1964] */}
+A separate factory report records a revised mirror carrier entering production and a requirement to hold products in the QC room for seven days before first-article inspection and shipment. It also records supplier corrective-action follow-up for PCB via deviations and confirmation that a new shutter mold could meet its 90–93 degree bend-angle requirement.{/* ^[evidence:EV-760c604347f8] */}
 
 ## Finish, graphics and personalization
 
@@ -1832,23 +1861,37 @@ For my dust work, moving the final optical check after the physical tests was pa
 
 I created Glyph's master color plan (795-0001) and graphic plan (795-1000). These defined the color, material, finish and graphics requirements across the mechanical BOM, linking the parts to material and coating specifications, color-chip references and inspection procedures. Glyph's look was already established; carrying it across different parts, materials and coatings took judgment.{/* ^[evidence:EV-ca5b5e79c758] */}
 
-I designed the paint and coating masking tooling too, including reusable and disposable injection-molded masks. These parts interdigitated with the production parts: their geometry covered the sections that needed protection while leaving the specified finish regions exposed.{/* ^[evidence:EV-de52939d1964] */}
-
-
-
-<div data-authoring-group="paint-masks"></div>
-
-
+The specifications I created were a necessary line of defense across the vendors in our distributed supply chain. CMF, graphics, gap and individual-part specifications worked together, and the part drawings referenced the cosmetic specification. They gave me a defined requirement to return to when discussing a part, an interface or a finish with its supplier.{/* ^[evidence:EV-72ea475ef285] */}
 
 I used measurements wherever possible, and always my own eye. Perfect color matching across all those adjacent surfaces wasn't realistic. The CMF and graphics plan helped me navigate the compromises and define acceptable bands for production cosmetics.
 
+{/* workbench {"id":"workbench-finish","title":"Carrying the finish across suppliers","summary":"Follow the specification links, molded masks and finishing line, then inspect a difficult color match.","poster":"https://assets.eriknorris.com/avegant-glyph/authoring-2026-09-23-r1/5f02a93590a2ec06130e-1600.webp","alt":"Production parts and paint fixtures on the finishing rack."} */}
 
+#### Connecting the specifications
 
+The documents addressed different parts of the same product:
 
+- **CMF:** material, coating and finish requirements, with color-chip references for the parts.
+- **Graphics:** artwork and its application, linked to the part, process, material, color and inspection procedure.
+- **Gap:** target and allowable gaps at assembled interfaces.
+- **Individual-part specifications:** inspection procedures and acceptance/rejection criteria for critical parts, including the headband, liners, ear covers, shutters and faceplate.
+- **Cosmetic specification:** the common requirements referenced by part drawings. Individual part-level specifications could supersede the general requirements.{/* ^[evidence:EV-ca5b5e79c758] */}{/* ^[evidence:EV-945341604818] */}{/* ^[evidence:EV-72ea475ef285] */}
 
+That connected appearance to the part and the assembly. The [inspection fixtures and gap plan](#designing-the-assembly-and-inspection-fixtures) described earlier supported the same work: defining what we were asking suppliers to make and how we would judge what arrived.
 
+#### Making the masks fit the parts
+
+I designed the paint and coating masking tooling too, including reusable and disposable injection-molded masks. These parts interdigitated with the production parts: their geometry covered the sections that needed protection while leaving the specified finish regions exposed.{/* ^[evidence:EV-de52939d1964] */}
+
+<div data-authoring-group="paint-masks"></div>
+
+#### Judging the color match
+
+The two blues below were intended to match. Holding the suppliers to that match took rigorous CMF documentation. The photograph shows why an individual part's color had to be considered alongside the neighboring parts and finishes.{/* ^[evidence:EV-de52939d1964] */}
 
 <div data-authoring-group="cmf-match"></div>
+
+{/* /workbench */}
 
 ### Customer artwork and employee units
 

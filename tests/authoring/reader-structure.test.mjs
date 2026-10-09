@@ -22,9 +22,12 @@ test("investigations retain all selected media once and preserve narrative resul
 			"workbench-optics",
 			"workbench-headband",
 			"workbench-fixtures",
+			"workbench-testing",
 			"workbench-fit",
 			"workbench-earpads",
+			"workbench-liners",
 			"workbench-cables",
+			"workbench-finish",
 		],
 	);
 	const flatten = (pieces) =>
