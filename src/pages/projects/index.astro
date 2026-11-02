@@ -39,14 +39,18 @@ const projects = rawProjects
 	})
 	.map((p) => {
 		const node = multiverseMap.get((p.data.slug || p.id).toLowerCase());
-		if (node) {
-			// if (node.client) p.data.client = node.client; // Not in MultiverseNode
-			if (node.group) p.data.employer = node.group;
-			if (node.industry) p.data.industry = node.industry;
-			if (node.category) p.data.category = node.category;
-			if (node.skills) p.data.tools = node.skills;
-		}
-		return p;
+		if (!node) return p;
+		// Directory filters combine skills and tags. Keep the collection entry intact for other pages.
+		return {
+			...p,
+			data: {
+				...p.data,
+				employer: node.group || p.data.employer,
+				industry: node.industry || p.data.industry,
+				category: node.category || p.data.category,
+				tools: node.skills || p.data.tools,
+			},
+		};
 	})
 	.sort((a, b) => compareArchive(archivePresentation(a).sort, archivePresentation(b).sort));
 

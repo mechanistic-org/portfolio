@@ -1,4 +1,4 @@
-import astroWorker from "../dist/_worker.js/index.js";
+import astroWorker from "@astrojs/cloudflare/entrypoints/server";
 import { fetchLocalPassthroughImage } from "./worker-image-passthrough.mjs";
 
 export default {
