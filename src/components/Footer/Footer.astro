@@ -92,8 +92,7 @@ const SECTIONS = [
 			class="mt-10 flex flex-col-reverse items-start justify-between gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center"
 		>
 			<p class="font-mono text-[10px] tracking-wider text-neutral-600 uppercase">
-				&copy; {resumeMaster.header.name}
-				{today.getFullYear()}
+				&copy; {`${resumeMaster.header.name} ${today.getFullYear()}`}
 			</p>
 			<div class="flex items-center gap-4 text-neutral-500">
 				<a

@@ -1,96 +1,73 @@
+import assert from "node:assert/strict";
 import { access, readdir, readFile } from "node:fs/promises";
+import path from "node:path";
 
-const requiredFiles = [
-	"dist/_worker.js/index.js",
-	"dist/_routes.json",
-	"dist/.assetsignore",
-	"dist/_headers",
-	"dist/_redirects",
-	"dist/index.html",
-	"dist/404.html",
-];
-
-await Promise.all(requiredFiles.map((file) => access(file)));
-
-const routes = JSON.parse(await readFile("dist/_routes.json", "utf8"));
-const entrypoint = await readFile("dist/_worker.js/index.js", "utf8");
-const workerChunkNames = (await readdir("dist/_worker.js/chunks", { withFileTypes: true }))
-	.filter((entry) => entry.isFile())
-	.map((entry) => entry.name);
-const workerChunks = await Promise.all(
-	workerChunkNames.map((name) => readFile(`dist/_worker.js/chunks/${name}`, "utf8")),
-);
-const headers = await readFile("dist/_headers", "utf8");
-const redirects = await readFile("dist/_redirects", "utf8");
-const routeFreeConfig = JSON.parse(await readFile("wrangler.jsonc", "utf8"));
-const productionConfig = JSON.parse(await readFile("wrangler.production.jsonc", "utf8"));
-
+const text = (file) => readFile(file, "utf8");
+const json = async (file) => JSON.parse(await text(file));
+const workerDir = ".astro/worker";
+const generated = await json(workerDir + "/wrangler.json");
+const routeFreeConfig = await json("wrangler.jsonc");
+const productionConfig = await json("wrangler.production.jsonc");
+const entrypoint = await text(path.join(workerDir, generated.main));
+const headers = await text("dist/_headers");
+const redirects = await text("dist/_redirects");
 const expectedRuntimeRoutes = ["/_server-islands/*", "/_image", "/assets/*"];
-const expectedStaticExclusions = [
-	"/",
-	"/_astro/*",
-	"/#",
-	"/projects/*",
-	"/.assetsignore",
-	"/apple-touch-icon.png",
-	"/favicon-96x96.png",
-	"/favicon.ico",
-	"/favicon.svg",
-	"/llms.txt",
-	"/robots.txt",
-	"/site.webmanifest",
-	"/web-app-manifest-192x192.png",
-	"/web-app-manifest-512x512.png",
-	"/diligence/index.html",
-	"/yes-shape/index.html",
-	"/manual/index.html",
-	"/api/*",
-	"/resume.json",
-	"/404",
-	"/about",
-	"/assembly",
-	"/colophon/*",
-	"/contact",
-	"/design-system",
-	"/docs/*",
-	"/how-i-work",
-	"/kitchen-sink",
-	"/meta/*",
-	"/resume/*",
-];
 
-if (
-	JSON.stringify(routes.include) !== JSON.stringify(expectedRuntimeRoutes) ||
-	JSON.stringify([...routes.exclude].sort()) !== JSON.stringify([...expectedStaticExclusions].sort())
-) {
-	throw new Error(`Generated Astro route precedence changed: ${JSON.stringify(routes)}`);
+assert.equal(routeFreeConfig.main, "./scripts/worker-entry.mjs");
+assert.equal(path.resolve(productionConfig.main), path.resolve(workerDir, generated.main));
+assert.equal(path.resolve(workerDir, generated.assets.directory), path.resolve("dist"));
+assert.equal(path.resolve(productionConfig.assets.directory), path.resolve("dist"));
+for (const field of [
+	"name",
+	"compatibility_date",
+	"compatibility_flags",
+	"workers_dev",
+	"preview_urls",
+	"r2_buckets",
+]) {
+	assert.deepEqual(generated[field], routeFreeConfig[field], field);
+	assert.deepEqual(productionConfig[field], routeFreeConfig[field], field);
+}
+assert.equal(generated.kv_namespaces?.length ?? 0, 0);
+assert.ok(!generated.images && !generated.routes?.length);
+assert.ok(entrypoint.includes("fetchLocalPassthroughImage"), "Worker wrapper missing from bundle");
+
+// Astro 7 embeds the resolved route manifest in the Worker bundle.
+const serialized = entrypoint.match(/deserializeManifest\((\{[^\n]+\})\);/);
+assert.ok(serialized, "Cannot verify the generated Astro route manifest");
+const manifest = JSON.parse(serialized[1]);
+const dynamic = manifest.routes
+	.map(({ routeData }) => routeData)
+	.filter((route) => !route.prerender);
+assert.deepEqual(dynamic.map(({ route }) => route).sort(), [
+	"/_image",
+	"/_server-islands/[name]",
+	"/assets/[...path]",
+]);
+const islandChunk = manifest.entryModules["\0virtual:astro:server-island-manifest"];
+assert.match(await text(path.join(workerDir, islandChunk)), /serverIslandMap\s*=.*new Map\(\[\]\)/);
+const workerFiles = await readdir(workerDir, { recursive: true });
+for (const file of workerFiles.filter((file) => file.endsWith(".mjs"))) {
+	const code = await text(path.join(workerDir, file));
+	assert.doesNotMatch(code, /requireReactDomServer_browser_production|MessageChannel/);
 }
 
-for (const generatedModule of ["pages/_image.astro.mjs", "pages/assets/_---path_.astro.mjs"]) {
-	if (!entrypoint.includes(generatedModule)) {
-		throw new Error(`Generated Astro entrypoint is missing: ${generatedModule}`);
-	}
-}
-
-if (!entrypoint.includes("serverIslandMap = new Map()")) {
-	throw new Error("Generated server-island disposition changed; inspect before deployment.");
-}
-
-if (entrypoint.includes("debug/health") || entrypoint.includes("functions/")) {
-	throw new Error("A stale root Pages Function entered the generated Worker.");
-}
-
-if (
-	workerChunks.some(
-		(chunk) =>
-			chunk.includes("requireReactDomServer_browser_production") ||
-			chunk.includes("MessageChannel"),
-	)
-) {
-	throw new Error(
-		"The Worker contains the browser React server bundle rejected by Cloudflare; rebuild with CF_PAGES=1.",
-	);
-}
+await Promise.all(
+	[
+		"index.html",
+		"404.html",
+		"projects/index.html",
+		"about/index.html",
+		"resume/index.html",
+		"resume.json",
+		"api/projects.json",
+		"sitemap-index.xml",
+		"colophon/chasing-en/index.html",
+		"diligence/index.html",
+		"yes-shape/index.html",
+		"manual/index.html",
+	].map((file) => access(path.join("dist", file))),
+);
 
 if (!headers.includes("X-Robots-Tag: noindex, nofollow")) {
 	throw new Error("The Pages-equivalent X-Robots-Tag rules are missing.");
@@ -104,10 +81,8 @@ if ("routes" in routeFreeConfig) {
 	throw new Error("The direct-verification Worker config must not declare production routes.");
 }
 
-for (const config of [routeFreeConfig, productionConfig]) {
-	if (config.main !== "./scripts/worker-entry.mjs") {
-		throw new Error("Wrangler must enter through the generated Astro runtime parity wrapper.");
-	}
+for (const config of [routeFreeConfig, generated, productionConfig]) {
+	assert.equal(config.assets.binding, "ASSETS");
 	if (JSON.stringify(config.assets.run_worker_first) !== JSON.stringify(expectedRuntimeRoutes)) {
 		throw new Error("Wrangler run_worker_first must match the complete generated runtime surface.");
 	}

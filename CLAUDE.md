@@ -19,16 +19,6 @@ static output.
 > defines the site's projection schema. Generated project MDX is a render target
 > (see **Content model**). Keystatic was removed under #104.
 
-**Security tripwire, not law (2026-08-06; expires at Astro >= 6):** the Dependabot
-triage dismissed 26 alerts (8 astro XSS/SSRF advisories patched only in Astro 6/7,
-the miniflare/undici dev-tooling nest, the adapter's /_image SSRF, esbuild's dev
-server) on the rationale "affected code paths never execute in static output." That
-rationale is conditional on this section staying true, not an argument against ever
-changing it. If a future change enables SSR, server islands, or any request-time
-rendering: re-evaluate the dismissed alerts first and take the Astro 6 + Cloudflare
-adapter major as part of the same move, because on Astro 5 those paths go live
-unpatched. Once the stack is on Astro >= 6, delete this note.
-
 ## Commands
 
 | Task | Command |
@@ -113,8 +103,8 @@ Assets (images, 3D models) live in **Cloudflare R2** (`assets.eriknorris.com`) â
 (`D:\GitHub\portfolio-evidence\assets\<slug>\` â€” the human zone); the darkroom
 derives the local machine-only bucket mirror at `D:/GitHub/portfolio-assets/R2_MIRROR`
 (renamed from `R2_STAGING` 2026-07-02; no human edits, regenerable), which `sync_r2.py`
-uploads. There is no symlink: dev serves assets via `src/pages/assets/[...path].ts`;
-`public/assets/**` is watch-ignored.
+uploads. Development serves the mirror via `scripts/local-asset-bridge.mjs`. The
+Worker serves R2 via `src/pages/assets/[...path].ts`. The watcher ignores `public/assets/**`.
 
 ## Deploy
 

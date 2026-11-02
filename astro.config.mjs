@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import { localAssetBridge } from "./scripts/local-asset-bridge.mjs";
 import { authoringPreview } from "./scripts/authoring/preview.mjs";
 
 import tailwindcss from "@tailwindcss/vite";
@@ -62,9 +63,13 @@ const __dirname = path.dirname(__filename);
 export default defineConfig({
 	cacheDir: "./.astro/cache",
 	output: "static",
+	session: false,
+	build: { client: "./", server: "../.astro/worker" },
 	// Cloudflare Adapter handles the edge image service / Worker generation.
 	adapter: cloudflare({
 		imageService: "compile",
+		prerenderEnvironment: "node",
+		remoteBindings: false,
 	}),
 	site: "https://eriknorris.com",
 
@@ -78,6 +83,7 @@ export default defineConfig({
 
 	integrations: [
 		authoringPreview(),
+		localAssetBridge(),
 		AutoImport({
 			imports: [
 				"@components/Cta/Newsletter.astro",

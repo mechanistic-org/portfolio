@@ -85,8 +85,7 @@ const stagger = (index: number, count: number) => (count > 5 ? [-9, 0, 9][index 
 			>
 				<title id="revision-matrix-svg-title">Part revision dates on one shared time axis</title>
 				<desc id="revision-matrix-svg-desc">
-					{revisions.parts.length} part rows with {marks.length} marks from {labelDate(startDate)} to
-					{labelDate(endDate)}. Drawing-table dates use cyan squares; ECO-document dates use amber
+					{revisions.parts.length} part rows with {marks.length} marks from {`${labelDate(startDate)} to ${labelDate(endDate)}`}. Drawing-table dates use cyan squares; ECO-document dates use amber
 					diamonds.
 				</desc>
 				<g class="axis" aria-hidden="true">

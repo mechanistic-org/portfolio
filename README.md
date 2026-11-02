@@ -52,8 +52,11 @@ npm run dev
 Production uses Worker `eriknorris` with Workers Static Assets. The authoritative
 deployment configuration is `wrangler.production.jsonc`: the apex and `www`
 routes, `ASSETS` from `dist`, and `PROJECTS` bound to `assets-eriknorris-com`.
-The Worker entrypoint imports the generated Astro runtime. Root Pages Functions
-and the retired `wrangler.toml` are not deployment authority.
+Astro 7 builds `scripts/worker-entry.mjs` with the Cloudflare adapter. The static
+site and Pagefind index are in `dist/`. The Worker bundle and generated route-free
+Wrangler config are in `.astro/worker/`, outside the public asset directory.
+Development reads `/assets/` and `/assets/r2/` from the local mirror. The built
+Worker resolves those paths through its `PROJECTS` R2 binding.
 
 #### Observed mechanism and selected contract
 
@@ -113,8 +116,9 @@ This contract adds no credential, token, runner, Access, DNS, or R2-object
 authority.
 
 `wrangler.jsonc` and `wrangler.production.jsonc` both name `eriknorris`.
-The first omits production route declarations for direct verification; it
-does not name an isolated Worker. Deploying it can replace the code serving
+Astro takes `wrangler.jsonc` as build input and writes the route-free
+configuration used by `check:worker` and `deploy:worker`. The production config
+points at the same compiled entry and adds the apex and www routes. Deploying it can replace the code serving
 existing production traffic. Use the dry-run checks for non-deploying bundle
 verification. A separately named staging Worker or version-preview workflow
 would require its own approved setup.
