@@ -8,13 +8,6 @@
   },
   {
     "id": "c24-interfaces",
-    "path": "resume:digidesign-2003:0",
-    "project": "c24",
-    "revision": 1,
-    "surface": "resume"
-  },
-  {
-    "id": "c24-interfaces",
     "path": "colophon:c24-interfaces",
     "project": "c24",
     "revision": 1,
@@ -78,13 +71,6 @@
   },
   {
     "id": "c24-service",
-    "path": "resume:digidesign-2003:2",
-    "project": "c24",
-    "revision": 1,
-    "surface": "resume"
-  },
-  {
-    "id": "c24-service",
     "path": "colophon:c24-service",
     "project": "c24",
     "revision": 1,
@@ -119,13 +105,6 @@
     "surface": "method"
   },
   {
-    "id": "glyph-resume-recovery",
-    "path": "resume:avegant-2015:0",
-    "project": "avegant-glyph",
-    "revision": 1,
-    "surface": "resume"
-  },
-  {
     "id": "glyph-headstrap",
     "path": "colophon:glyph-headstrap",
     "project": "avegant-glyph",
@@ -140,13 +119,6 @@
     "surface": "method"
   },
   {
-    "id": "glyph-resume-standards",
-    "path": "resume:avegant-2015:1",
-    "project": "avegant-glyph",
-    "revision": 1,
-    "surface": "resume"
-  },
-  {
     "id": "glyph-production",
     "path": "colophon:glyph-production",
     "project": "avegant-glyph",
@@ -159,20 +131,6 @@
     "project": "avegant-glyph",
     "revision": 2,
     "surface": "method"
-  },
-  {
-    "id": "glyph-resume-comfort",
-    "path": "resume:avegant-2015:2",
-    "project": "avegant-glyph",
-    "revision": 1,
-    "surface": "resume"
-  },
-  {
-    "id": "sc48-thermal",
-    "path": "resume:digidesign-2003:1",
-    "project": "sc48",
-    "revision": 1,
-    "surface": "resume"
   },
   {
     "id": "sc48-thermal",
@@ -194,12 +152,5 @@
     "project": "sc48",
     "revision": 1,
     "surface": "method"
-  },
-  {
-    "id": "glyph-resume-scope",
-    "path": "resume:avegant-2015:blurb",
-    "project": "avegant-glyph",
-    "revision": 1,
-    "surface": "resume"
   }
 ]

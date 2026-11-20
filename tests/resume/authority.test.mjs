@@ -80,52 +80,46 @@ test("missing and duplicate canonical IDs fail instead of silently selecting an 
 	}
 });
 
-// Compare data through Node's TypeScript module loader, not regular-expression extraction.
-test("accepted #152 identity and LinkedIn survive; scoped achievements resolve through the shared claim projection", async () => {
-	const { execFileSync } = await import("node:child_process");
-	const { stripTypeScriptTypes } = await import("node:module");
-	const baseline = "1b2cd2f6eaba20544cef087d5e031f1e2dba8bac";
-	const read = async (file) =>
-		import(
-			"data:text/javascript;base64," +
-				Buffer.from(
-					stripTypeScriptTypes(
-						execFileSync("git", ["show", `${baseline}:${file}`], { encoding: "utf8" }),
-					),
-				).toString("base64")
-		);
-	const oldResume = (await read("src/config/resume_master.ts")).resumeMaster;
-	const oldLinkedIn = (await read("src/config/linkedin_master.ts")).linkedinMaster;
+test("approved hiring edition retains exact copy and prior chronology", async () => {
+	const { default: approved } = await import("./fixtures/approved-2026-11-20.json", {
+		with: { type: "json" },
+	});
 	const { linkedinMaster } = await import("../../src/config/linkedin_master.ts");
-	assert.equal(linkedinMaster.tagline, oldLinkedIn.tagline);
-	assert.equal(linkedinMaster.about, oldLinkedIn.about);
-	linkedinMaster.experience.forEach((entry, index) => {
-		const role = resumeMaster.career.find((role) => role.id === entry.roleId);
-		assert.equal(entry.blurb, oldLinkedIn.experience[index].blurb);
-		assert.equal(role.channels.linkedinTitle, oldLinkedIn.experience[index].role);
-		assert.equal(role.channels.linkedinCompany, oldLinkedIn.experience[index].company);
-	});
-	resumeExperience().forEach((entry, index) => {
-		const old = oldResume.experience[index];
-		for (const key of ["company", "title", "location", "dates"])
-			assert.deepEqual(entry[key], old[key]);
-		const sharedBlurbs = entry.roleIds
-			.map((roleId) => synopsisForRole(projectSynopses.projects, roleId, "resume"))
-			.filter(Boolean);
-		if (sharedBlurbs.length) assert.equal(entry.blurb, sharedBlurbs.join("\n\n"));
-		if (!["avegant-2015", "digidesign-2003"].includes(entry.id)) {
-			if (!sharedBlurbs.length) assert.deepEqual(entry.blurb, old.blurb);
-			assert.deepEqual(entry.bullets, old.bullets);
-		} else {
-			assert.deepEqual(
-				entry.bullets,
-				[0, 1, 2].map((slot) => claimFor(`resume:${entry.id}:${slot}`).text),
-			);
-			assert.doesNotMatch(entry.bullets.join(" "), /100% mechanical fit|40% seizure|35\.4%/);
-		}
-	});
-	assert.deepEqual(resumeMaster.summary, oldResume.summary);
-	assert.deepEqual(resumeMaster.competencies, oldResume.competencies);
-	assert.deepEqual(resumeMaster.education, oldResume.education);
-	assert.deepEqual(resumeMaster.recognition, oldResume.recognition);
+	assert.equal(linkedinMaster.tagline, approved.headline);
+	assert.equal(linkedinMaster.about, approved.about);
+	assert.deepEqual(
+		resumeMaster.career.map(({ id, period }) => ({ id, period })),
+		approved.periods,
+	);
+	for (const r of approved.roles) {
+		const role = resumeMaster.career.find((e) => e.id === r.id);
+		assert.equal(role.channels.linkedinTitle, r.title);
+		assert.equal(role.channels.linkedinCompany, r.company);
+		assert.equal(linkedinMaster.experience.find((e) => e.roleId === r.id).blurb, r.description);
+	}
+	const resume = jsonResume();
+	for (const text of [
+		resume.basics.summary,
+		...resume.work.flatMap((r) => [r.summary, ...r.highlights]),
+		...Object.values(resumeMaster.competencies).flat(),
+	]) {
+		if (text) assert.ok(approved.resume.includes(text), text);
+	}
+	const paragraphs = approved.resume
+		.split("## Experience\n\n")[1]
+		.split("\n## Technical capabilities")[0]
+		.replace("<!-- page-break -->", "")
+		.split("\n")
+		.filter((x) => x.startsWith("- "))
+		.map((x) => x.slice(2));
+	assert.deepEqual(
+		resume.work.flatMap((r) => r.highlights),
+		paragraphs,
+	);
+	assert.equal(resume.work.length, 8);
+	assert.equal(resumeMaster.header.title, approved.headline);
+	assert.equal(
+		resume.work[4].highlights[0],
+		"Owned Glyph's whole mechanical bill of materials through tooling, validation and production ramp, including roughly 40 tools.",
+	);
 });

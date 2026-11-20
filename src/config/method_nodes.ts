@@ -179,6 +179,10 @@ export const METHOD_NODES: readonly MethodNode[] = [
  * fails the build on it (scripts/audits/validate_publication_integrity.mjs).
  */
 export const COMPETENCY_COVERAGE: Record<string, string | null> = {
+	// Approved 2026-11-20 composite resume capability paragraphs span several method
+	// nodes. No single node represents the full paragraph; keep the detailed mappings below.
+	"Mechanical architecture and system integration; mechanisms; tolerance analysis and GD&T; electronics packaging; thermal analysis; experimental planning and failure analysis; DFM/DFA; tooling, supplier coordination and NPI; injection-molded plastics, castings and sheet metal.": null,
+	"Creo / Pro/ENGINEER, Onshape, SolidWorks; Agile, Arena and Windchill; software architecture and testing; retrieval and agent-tool integration; source records and revision management.": null,
 	// engineering
 	"Robotic Mechanism & Actuator Design": "mechanism-actuation",
 	"Tolerance / Alignment / Load Paths": "tolerance-integration",

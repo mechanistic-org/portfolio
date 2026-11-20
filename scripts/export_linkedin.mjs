@@ -7,7 +7,7 @@ import { resumeMaster } from "../src/config/resume_master.ts";
 import { linkedinMaster } from "../src/config/linkedin_master.ts";
 import { linkedinReview } from "../src/config/linkedin_review.ts";
 import { formatPeriod, roleById } from "../src/config/resume_projection.ts";
-import { synopsisForRole, validateSynopsis } from "../src/lib/project-synopsis.mjs";
+import { validateSynopsis } from "../src/lib/project-synopsis.mjs";
 import projectSynopses from "../src/data/project-synopses.json" with { type: "json" };
 export const EXPORTER_VERSION = "1.1.0";
 export const sha256 = (value) => createHash("sha256").update(value).digest("hex");
@@ -82,7 +82,7 @@ export function validateProjection(authority, prose, review = linkedinReview) {
 	if (proseDigest(prose) !== review.proseSha256)
 		throw new Error("Unapproved prose drift; lexical checks are not factual review");
 }
-/** Canon project wording is a local draft layered over the unchanged #152 baseline. */
+/** Project records supply separately selected project drafts; approved Experience copy stays fixed. */
 export function resolveCanonicalContent(authority, prose, data = projectSynopses) {
 	if (data.version !== 1 || !Array.isArray(data.projects))
 		throw new Error("Invalid canonical synopsis projection");
@@ -161,7 +161,7 @@ export function resolveCanonicalContent(authority, prose, data = projectSynopses
 	}
 	const experience = prose.experience.map((entry) => ({
 		...entry,
-		blurb: synopsisForRole(data.projects, entry.roleId, "linkedinExperience") ?? entry.blurb,
+		blurb: entry.blurb,
 	}));
 	return { experience, projects };
 }

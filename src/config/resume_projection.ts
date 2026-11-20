@@ -1,7 +1,6 @@
 import { resumeMaster } from "./resume_master.ts";
 import type { CareerPeriod, CareerRole } from "./resume_master.ts";
-import { claimFor } from "./claim-presentations.ts";
-import { synopsisForRole, validateSynopsis } from "../lib/project-synopsis.mjs";
+import { validateSynopsis } from "../lib/project-synopsis.mjs";
 import projectSynopses from "../data/project-synopses.json" with { type: "json" };
 export type ResumeAuthority = typeof resumeMaster;
 export const httpsUrl = (value: string) => (/^https:\/\//.test(value) ? value : `https://${value}`);
@@ -33,50 +32,25 @@ export function resumeExperience(authority = resumeMaster, records = projectSyno
 			location: roles[0].location ?? "",
 			period: roles[0].period,
 		};
-		const claims = entry.id === "digidesign-2003" || entry.id === "avegant-2015";
-		const bullets = claims
-			? [0, 1, 2].map((index) => claimFor(`resume:${entry.id}:${index}`).text)
-			: entry.bullets;
-		const roleBlurbs = roles.map((role) => ({
-			role,
-			text: synopsisForRole(records, role.id, "resume"),
-		}));
-		const selected = roleBlurbs.filter((item) => Boolean(item.text));
-		// A grouped baseline describes every engagement. Replacing it with one
-		// project's selection silently deletes the other employers and their work.
-		if (entry.group && selected.length && selected.length !== roles.length)
-			throw new Error(
-				`Partial synopsis coverage for grouped resume entry ${entry.id}; reconcile the group before opting in. Missing roles: ${roleBlurbs
-					.filter((item) => !item.text)
-					.map((item) => item.role.id)
-					.join(", ")}`,
-			);
-		const sharedBlurbs = selected.map(({ role, text }) =>
-			entry.group
-				? `${role.company} | ${role.channels.resumeTitle ?? role.canonicalTitle}\n\n${text}`
-				: text,
-		);
-		const blurb = sharedBlurbs.length
-			? sharedBlurbs.join("\n\n")
-			: entry.id === "avegant-2015"
-				? claimFor("resume:avegant-2015:blurb").text
-				: entry.blurb;
-		return { ...entry, ...display, blurb, bullets, dates: formatPeriod(display.period) };
+		return {
+			...entry,
+			...display,
+			company: entry.displayCompany ?? display.company,
+			blurb: entry.blurb,
+			bullets: entry.bullets,
+			dates: formatPeriod(display.period),
+		};
 	});
 }
 export function resumeSummary(authority = resumeMaster) {
-	if (authority.summary.executive !== resumeMaster.summary.executive) return authority.summary;
-	return {
-		executive:
-			"I lead hands-on mechanical and systems engineering for complex physical products, from ambiguous architecture through DVT, manufacturing transfer, and field recovery. I set the technical method, lead cross-functional decisions, and stay close to the hardware as it moves from prototype to production.\n\nMy work connects mechanism design, tolerance control, validation, supplier processes, and serviceability. The program accounts below show the decisions and measured results in their original scope. I now apply that same discipline to local-first AI-agent infrastructure for research and engineering operations.",
-	};
+	return authority.summary;
 }
 export function identityMetadata(authority = resumeMaster) {
 	const { header, competencies, career } = authority;
 	return {
 		name: `${header.name}'s Portfolio`,
 		title: `${header.name} | ${header.title}`,
-		description: `${header.title}. ${header.tagline}.`,
+		description: header.tagline ? `${header.title}. ${header.tagline}.` : header.title,
 		author: { name: header.name, email: header.contact.email },
 		skills: Object.values(competencies).flat(),
 		sameAs: [header.contact.linkedin, header.contact.github, header.contact.resume].map(httpsUrl),
