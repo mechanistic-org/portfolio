@@ -12,6 +12,7 @@ export interface CareerRole {
 	evidence: { source: string; review: string; note: string };
 }
 export interface ResumePresentation {
+	displayCompany?: string;
 	id: string;
 	roleIds: string[];
 	group?: { company: string; title: string; location: string; period: CareerPeriod };
@@ -19,13 +20,12 @@ export interface ResumePresentation {
 	bullets: string[];
 }
 
-// Career identity authority and preserved #152 channel baseline. Current project
-// achievements resolve in resume_projection.ts; see docs/agents/resume-authority.md.
+// Approved hiring edition, 2026-11-20, Moreplay #19. Source copy remains in the private biography package.
 export const resumeMaster = {
 	header: {
 		name: "Erik Norris",
-		title: "Mechanical Engineering Lead | Complex Physical Systems · Prototype → Production",
-		tagline: "Structure the chaos · Index the decisions · Ship the hardware",
+		title: "Principal Mechanical Architect | Product Architecture & Technical Direction",
+		tagline: "",
 		contact: {
 			location: "Redwood City, CA",
 			email: "erik@eriknorris.com",
@@ -38,33 +38,14 @@ export const resumeMaster = {
 	},
 	summary: {
 		executive:
-			"I lead hands-on mechanical and systems engineering for complex physical products, from ambiguous architecture through DVT, manufacturing transfer, and field recovery. The difference between a rescued program and a failed one is rarely the capability of the engineer - it is usually the fidelity of the record.\n\nThe proof is in the programs: a cobotic food-assembly platform coordinating 70+ actuators at ±2% portion precision and 350 meals per hour; an M700 disc-vault recovery grounded in 3,000,000+ field-cycle events; and the Avegant Glyph carried through headband validation, optical-yield recovery, and mass production. I set the technical method, lead cross-functional decisions, and stay close enough to the hardware to see where the plan diverges from reality.\n\nMore than 40 commercial products, no git reset. I now apply the same forensic method to intelligent systems by building and operating local-first AI-agent infrastructure with explicit evidence, permissions, and human approval boundaries.",
+			"I'm an engineer. I like doing good work on hard problems: understanding the physics, testing what matters and making compromises without losing the intent. I bring practical engineering judgment to product architecture and systems integration, carrying work from concept through manufacturing.",
 	},
 	competencies: {
 		engineering: [
-			"Tolerance / Alignment / Load Paths",
-			"Wear & Failure-Mode Analysis (RCA)",
-			"GD&T · Stack-Ups (WC / RSS)",
-			"DOE Test-Method Design",
-			"FEA-Correlated Validation (ANSYS)",
-			"Haptic & Kinematic Tuning",
-		],
-		manufacturing: [
-			"DFM / DFA for Automated Assembly",
-			"High-Volume NPI (Tool Start → MP)",
-			"Injection Molding · Die Casting · Sheet Metal",
-			"Accelerated Life / Destruction Testing",
-			"Yield Recovery & CAPA",
-			"CM Management (Suzhou · Guadalajara · Taipei)",
+			"Mechanical architecture and system integration; mechanisms; tolerance analysis and GD&T; electronics packaging; thermal analysis; experimental planning and failure analysis; DFM/DFA; tooling, supplier coordination and NPI; injection-molded plastics, castings and sheet metal.",
 		],
 		tools: [
-			"Onshape, Creo, Solidworks",
-			"PLM Architecture (Agile / Arena / Windchill)",
-			"Thermal Simulation (CFD)",
-			"UL 1472 / UL 20 / FCC",
-			"MIL-STD-1472G",
-			"Class III Medical Standards",
-			"Class-A Surfacing",
+			"Creo / Pro/ENGINEER, Onshape, SolidWorks; Agile, Arena and Windchill; software architecture and testing; retrieval and agent-tool integration; source records and revision management.",
 		],
 	},
 	experience: [
@@ -72,74 +53,77 @@ export const resumeMaster = {
 			id: "mechanistic-2022",
 			roleIds: ["mechanistic-2022"],
 			blurb:
-				"Consultancy: systems architecture, crisis recovery, and AI-augmented engineering operations.",
+				"Independent engineering practice focused on product architecture, mechanical design and preparation for manufacturing.",
 			bullets: [
-				"Conduct pre-production forensic audits for hardware startups - stress-testing thermal management, tolerance stack-up, and supply-chain fragility before tooling commitment.",
-				"Built and operate **EN-OS**, a locally-hosted AI-agent infrastructure for research, root-cause synthesis, and decision documentation - the constraint methodology is identical to physical-systems engineering: fence the failure modes before assembly.",
+				"Developed a dispenser lid for Hyphen around pan fit, handling, stacking and cleanability. Handed off CAD, materials research and molding requirements, with remaining tooling decisions identified.",
+				"Design, build and operate EN-OS, a local system that keeps engineering sources, decisions and project context usable across AI assistants. Own its architecture, software development, testing and operation.",
+				"Provided thermal and mechanical design consulting to Whipsaw on a compact cooling product, developing an alternative airflow proposal and handing off CAD and technical recommendations.",
 			],
+			displayCompany: "Mechanistic",
 		},
 		{
 			id: "hyphen-2021",
 			roleIds: ["hyphen-2021"],
-			blurb:
-				"Lead mechanical architect, Augmented Makeline - cobotic food-assembly robotics developed for enterprise restaurant deployment. Co-inventor, US20240164588A1.",
+			blurb: "",
 			bullets: [
-				"Architected the gravimetric dispenser library (**Types A-F**) with de-agglomeration logic for adversarial ingredients (shredded proteins, sticky rice) - portion variance cut from ±15% to **±2%**, food waste down **98%**, at **350 meals/hour** sustained and **99%+ order accuracy**.",
-				"Integrated **70+ actuators** with the controls stack (Beckhoff C6030 IPC, TwinCAT 3 / EtherCAT) at millisecond precision; TwinSAFE zone passivation cut safety wiring by ~50%.",
-				"Engineered a **15-minute tool-less sanitation breakdown** with push-to-unlock food-contact components sized for commercial dishwashing.",
+				"Led mechanical design and systems architecture for the Augmented Makeline, integrating food-handling mechanisms, bowl movement, refrigeration, controls and cabinet packaging into a modular food-assembly system.",
+				"Defined layouts and interfaces with electrical, controls and manufacturing colleagues, making cleaning, service access and assembly part of the architecture. Created motor- and display-board drawings specifying board envelopes, mounting locations and clearances.",
+				"Co-inventor of Modular System for Food Assembly, US patent 12,213,629, granted February 2025.",
 			],
+			displayCompany: "Hyphen",
 		},
 		{
 			id: "mechanistic-2018",
 			roleIds: ["mechanistic-2018"],
-			blurb: "Product-development consultancy: micromobility, connected devices, lighting.",
+			blurb: "",
 			bullets: [
-				"Engineered a ruggedized IoT module for **Lyft's Bay Wheels eBike** fleet - system architecture through detailed part design for outdoor deployment - plus an eCargo-bike platform, concept through detail design.",
+				"Engineered a ruggedized IoT module for Lyft's Bay Wheels eBike program, from system architecture through electronics packaging and detailed mechanical design for outdoor use.",
+				"Developed an electric cargo-bike platform from concept and vehicle architecture into detailed parts and assemblies for prototype development.",
 			],
+			displayCompany: "Mechanistic",
 		},
 		{
 			id: "noon-2017",
 			roleIds: ["noon-2017"],
-			blurb:
-				"Multi-SKU smart-home lighting ecosystem - four hardware platforms, concept through EVT/DVT. UL 1472 / UL 20 / MIL-STD-1472G. Acquired by Savant Systems.",
+			blurb: "",
 			bullets: [
-				"Led hands-on mechanical architecture and reliability across the four-platform lighting ecosystem while preserving cross-functional ownership boundaries.",
-				"Recovered the Elvis extension switch from seven-of-seven floating-cap failures to **100% EVT2 yield** by isolating a **0.1 mm** molded-versus-CAD offset, correcting the geometry, and replacing fixed-thickness PSA with structural adhesive.",
-				"Ran staged Room Director reliability campaigns that kept unresolved 1.3 m drop failures separate from a passed household-chemical exposure campaign.",
+				"Led mechanical architecture and reliability work across four connected-lighting hardware platforms through EVT and DVT, working with industrial design, electronics, suppliers and manufacturing.",
+				"Used prototype tests and sample-level results on the Room Director to distinguish glass damage, coating problems, retention, rattle and functional failures, then set mechanical design priorities.",
 			],
+			displayCompany: "Noon Home",
 		},
 		{
 			id: "avegant-2015",
 			roleIds: ["avegant-2015"],
-			blurb:
-				"Avegant Glyph - award-winning VRD head-mounted display, late-EVT through mass production. Best of CES 2016.",
+			blurb: "",
 			bullets: [
-				"Carried the headband through measured spring-rate characterization across **wire-diameter and liner-durometer variants**, qualified a second spring vendor, and validated the structure through **headband lifecycle testing** into mass production.",
-				"Reversed optical-engine yield collapse from **35.4% to 77.9% RTY** in a 10-week sprint - cleanroom protocol plus O4/O7 DMD inspection stations.",
-				"Drove **T1-T6 tooling and cable-routing revisions** after the telescoping mechanism regressed to a 40% seizure rate at 250 cycles.",
-				"Carried magnesium castings, injection-molded plastics, soft goods, packaging, FAI, and tooling recovery through the extended production ramp.",
+				"Owned Glyph's whole mechanical bill of materials through tooling, validation and production ramp, including roughly 40 tools.",
+				"Owned Glyph headband test planning. Compared spring and liner variants, then tested assemblies with selected components removed to understand their contribution to fit and force.",
+				"Owned cable-kinking and chassis-abrasion investigations in Glyph's telescoping arms. Evaluated cable variants, routing and support changes; released mechanical corrections and carried abrasion fixes into lifecycle and drop validation.",
 			],
+			displayCompany: "Avegant",
 		},
 		{
 			id: "kaleidescape-2008",
 			roleIds: ["kaleidescape-2008"],
-			blurb:
-				"Mechanical design, NPI, supplier coordination, and sustaining across a family of premium home-cinema hardware.",
+			blurb: "",
 			bullets: [
-				"Analyzed **3,000,000+ M700 field-cycle events** to isolate dirty-roller friction loss compounded by carousel warp; redesigned the drive around force-dominant balance bars and eliminated dirty-roller slippage in validation.",
-				"Recovered **100% of questioned M700 carousel inventory** through measured inspection limits and a sister-rib tooling correction instead of scrapping it.",
-				"On KSYSTEM-120, coordinated mechanical integration, authored the mechanical FAI procedure, and originated bounded part-level inspection records toward pilot and ramp readiness.",
+				"Owned Cinema One's mechanical design and BOM through production bring-up. Used plastic skins over sheet metal to achieve the intended aluminum-like appearance within cost, manufacturing, grounding and surface-temperature constraints.",
+				"Wrote the KSYSTEM-120 mechanical first-article inspection procedure, defining when to correct tooling or process, change the design, and recheck parts and assemblies.",
+				"Investigated M700 disc-handling problems through field records, returned hardware and dimensional inspection, connecting mechanism behavior to part geometry, molding and assembly.",
 			],
+			displayCompany: "Kaleidescape",
 		},
 		{
 			id: "digidesign-2003",
 			roleIds: ["digidesign-2003"],
-			blurb:
-				"Flagship audio control surfaces - C|24, D-Command, SC48, ICON, 003; 12+ products shipped.",
+			blurb: "",
 			bullets: [
-				"Authored Data Control Drawings governing outlines, keep-outs, and connector placement across **19 C|24 PCB assemblies**, producing **100% mechanical fit on the first physical build**; the SC48 record preserves a separate 17-document PCB design-control packet.",
-				"Resolved an SC48 thermal shutdown through **17 logged chassis-and-fan configurations**; in comparable 4U test rows, moving three 80 mm fans from 8.5V to 12V reduced the left R69 rise by **9.9°C** and the absolute reading by **11.6°C**.",
+				"Owned C|24 mechanical engineering and industrial design, defining interfaces around 19 distinct PCB assembly designs and designing the field-replaceable headphone-jack assembly that shipped.",
+				"Used supplier inspection data to determine which C|24 dimensions and tolerances mattered to fit and function. Wrote an acceptance deviation allowing specified molded parts to be used without rework.",
+				"Led SC48 enclosure and thermal architecture. A 17-configuration study guided the move from 3U to 4U; a folded-steel I-beam met the no-extrusion cost constraint.",
 			],
+			displayCompany: "Digidesign Avid",
 		},
 		{
 			id: "earlier-work",
@@ -151,8 +135,8 @@ export const resumeMaster = {
 				"ep-technologies-1986",
 			],
 			group: {
-				company: "EARLIER WORK",
-				title: "Consumer · Medical · Workstation Hardware",
+				company: "Earlier engineering and repair work",
+				title: "",
 				location: "Bay Area, CA",
 				period: {
 					precision: "year",
@@ -161,24 +145,19 @@ export const resumeMaster = {
 				},
 			},
 			blurb:
-				"WebTV / Microsoft (Xbox, UltimateTV; Galaxy set-top: 150W in consumer plastics via a 28.3 CFM wind-tunnel chassis) · frogdesign (KaVo dental systems, Newscorp satellite, Vadem Clio convertible PDA) · SGI (workstation thermal-acoustic analysis) · EP Technologies (Class III cardiac-ablation catheter production - where the forensic methodology started).",
+				"Worked through Mechanistic and frogdesign on complex surfaces, mechanical packaging and manufacturing support. At Silicon Graphics, worked on workstation mechanical and thermal development and managed the Product Design lab. At EP Technologies, progressed from electronics assembly and troubleshooting into production supervision.\n\nRan an automotive repair shop alongside design work, bringing practical diagnosis and service experience to product engineering.",
 			bullets: [],
+			displayCompany: "Earlier engineering and repair work",
 		},
 	] as ResumePresentation[],
 	education: [
 		{
 			school: "De Anza College",
-			degree: "Associate’s Degree, Automotive Engine Performance",
-			details: "Focus on Mechanical Systems & Diagnostics.",
+			degree: "Associate's Degree, Automotive Engine Performance",
+			details: "",
 		},
 	],
-	recognition: [
-		"Patent US20240164588A1: Modular System for Food Assembly (co-inventor)",
-		"Avegant Glyph: Best of CES 2016 (Senior Mechanical Engineer, NPI → MP)",
-		"SC48 Venue Mix Rack: TEC Award, Sound Reinforcement Console Technology",
-		"Kaleidescape Cinema One: CEPro Product of the Year",
-		"Motorola MP3 Player: CES 2002 Design Honoree",
-	],
+	recognition: [],
 	pdf: {
 		url: "https://assets.eriknorris.com/resume/Erik_Norris_Resume_Current.pdf",
 		filename: "Erik_Norris_Resume_Current.pdf",

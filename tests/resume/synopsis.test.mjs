@@ -44,27 +44,15 @@ const resolve = (value) => resolveCanonicalContent(resumeMaster, linkedinMaster,
 const packet = (value) =>
 	buildPacket(resumeMaster, linkedinMaster, linkedinReview, value).toString("utf8");
 
-test("selected canonical text replaces only its role blurb and preserves detailed résumé claims", () => {
+test("project selections cannot replace the approved resume or LinkedIn Experience", () => {
 	const value = record();
-	const original = resumeExperience(resumeMaster, []);
-	const projected = resumeExperience(resumeMaster, [value]);
-	const glyph = projected.find((entry) => entry.id === "avegant-2015");
-	assert.equal(glyph.blurb, value.synopsis.paragraphs[0].text);
-	for (let i = 0; i < original.length; i++) {
-		assert.deepEqual(projected[i].bullets, original[i].bullets);
-		assert.deepEqual(projected[i].roleIds, original[i].roleIds);
-		assert.equal(projected[i].company, original[i].company);
-		assert.equal(projected[i].title, original[i].title);
-		assert.equal(projected[i].dates, original[i].dates);
-		if (projected[i].id !== "avegant-2015") assert.equal(projected[i].blurb, original[i].blurb);
-	}
-	const projectedLI = resolve(data(value));
-	const oldGlyph = linkedinMaster.experience.find((entry) => entry.roleId === "avegant-2015");
-	assert.equal(
-		projectedLI.experience.find((entry) => entry.roleId === "avegant-2015").blurb,
-		value.synopsis.paragraphs.map((p) => p.text).join("\n\n"),
+	assert.deepEqual(resumeExperience(resumeMaster, [value]), resumeExperience(resumeMaster, []));
+	assert.deepEqual(resolve(data(value)).experience, linkedinMaster.experience);
+	assert.ok(
+		packet(data(value)).includes(
+			linkedinMaster.experience.find((e) => e.roleId === "avegant-2015").blurb,
+		),
 	);
-	assert.ok(!packet(data(value)).includes(oldGlyph.blurb));
 	assert.deepEqual(pdfConfiguration(), {
 		url: resumeMaster.pdf.url,
 		filename: resumeMaster.pdf.filename,
@@ -72,36 +60,19 @@ test("selected canonical text replaces only its role blurb and preserves detaile
 	});
 });
 
-test("multiple projects under one role retain both descriptions and separate employer-linked Projects", () => {
-	const first = record(),
-		second = record("second-project");
-	const blurb =
-		"First project\n\nCanonical work for first-project.\n\nSecond project\n\nCanonical work for second-project.";
-	assert.equal(
-		resumeExperience(resumeMaster, [first, second]).find((entry) => entry.id === "avegant-2015")
-			.blurb,
-		blurb,
-	);
-	const resolved = resolve(data(first, second));
+test("multiple selected Projects retain employer links without rewriting approved Experience", () => {
+	const value = data(record(), record("second-project"));
+	const resolved = resolve(value);
 	assert.equal(resolved.projects.length, 2);
-	const role = resumeMaster.career.find((role) => role.id === "avegant-2015");
-	for (const project of resolved.projects) {
-		assert.equal(project.company, role.channels.linkedinCompany);
-		assert.equal(project.position, role.channels.linkedinTitle);
+	assert.deepEqual(resolved.experience, linkedinMaster.experience);
+	const role = resumeMaster.career.find((r) => r.id === "avegant-2015");
+	for (const p of resolved.projects) {
+		assert.equal(p.company, role.channels.linkedinCompany);
+		assert.equal(p.position, role.channels.linkedinTitle);
 	}
-	const text = packet(data(first, second));
-	assert.ok(text.includes("PROJECTS\n\nSelected work: first-project"));
 	assert.ok(
-		text.includes(
-			"Associated with: " + role.channels.linkedinCompany + " | " + role.channels.linkedinTitle,
-		),
-	);
-	assert.ok(
-		text.includes("Source: https://eriknorris.com/projects/second-project/#engineering-decisions"),
-	);
-	assert.ok(
-		text.includes(
-			"First project\n\nCanonical work for first-project.\n\nCanonical outcome for first-project.",
+		packet(value).includes(
+			"Source: https://eriknorris.com/projects/second-project/#engineering-decisions",
 		),
 	);
 });
@@ -117,29 +88,15 @@ test("channel opt-in leaves legacy text alone and site-only records need no empl
 	assert.ok(!packet(data(value)).includes("\n\nPROJECTS\n"));
 });
 
-test("partial group opt-in cannot silently remove the other employers from a compact resume entry", () => {
-	const group = resumeMaster.experience.find((entry) => entry.id === "earlier-work");
-	const first = record("first-project", group.roleIds[0]);
-	assert.throws(
-		() => resumeExperience(resumeMaster, [first]),
-		/Partial synopsis coverage.*earlier-work.*frogdesign-1997/,
-	);
-	// A LinkedIn-only selection does not override the grouped resume baseline.
-	delete first.synopsis.outputs.resume;
-	assert.equal(
-		resumeExperience(resumeMaster, [first]).find((entry) => entry.id === group.id).blurb,
-		group.blurb,
-	);
-	const records = group.roleIds.map((roleId, i) => record(`project-${i}`, roleId));
-	const blurb = resumeExperience(resumeMaster, records).find(
-		(entry) => entry.id === group.id,
-	).blurb;
-	for (const r of records) {
-		const role = resumeMaster.career.find((role) => role.id === r.roleId);
-		assert.ok(
-			blurb.includes(`${role.company} | ${role.channels.resumeTitle ?? role.canonicalTitle}`),
-		);
-		assert.ok(blurb.includes(r.synopsis.paragraphs[0].text));
+test("partial or complete project selections preserve all grouped early engagements", () => {
+	const group = resumeMaster.experience.find((e) => e.id === "earlier-work");
+	for (const records of [
+		[record("first-project", group.roleIds[0])],
+		group.roleIds.map((id, i) => record("project-" + i, id)),
+	]) {
+		const projected = resumeExperience(resumeMaster, records).find((e) => e.id === group.id);
+		assert.equal(projected.blurb, group.blurb);
+		assert.deepEqual(projected.roleIds, group.roleIds);
 	}
 });
 

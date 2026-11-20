@@ -1,12 +1,12 @@
-// Explicit acceptance lock. Never update automatically; evidence and recorded review are required.
+// Explicit approval lock for the 2026-11-20 edition. Never refresh without review.
 export const linkedinReview = {
-	source: "https://github.com/mechanistic-org/global_agent/issues/152#issuecomment-5546214741",
+	source: "https://github.com/mechanistic-org/moreplay/issues/19",
 	migration: "https://github.com/mechanistic-org/portfolio/issues/219",
 	roleIds: [
 		"mechanistic-2022",
 		"hyphen-2021",
-		"noon-2017",
 		"mechanistic-2018",
+		"noon-2017",
 		"avegant-2015",
 		"kaleidescape-2008",
 		"digidesign-2003",
@@ -16,6 +16,6 @@ export const linkedinReview = {
 		"sgi",
 		"ep-technologies-1986",
 	],
-	factsSha256: "f05bc7dfcad96e10b488d22777ea1c7fcac3e0cfcb76d1ed94bac21a8c9f5541",
-	proseSha256: "6a414033d57c44d22c804e34298f4f18317fb07c76a273ba17949dcca77770fd",
+	factsSha256: "c270cfd4efdc735ee4df7784b2f757f88c908998e4279c8c7f00089324a5060f",
+	proseSha256: "3908e9e61c36dc0c473e8c247f11af35dd77da4e6924b4dd9e276482ed04ba3d",
 };
