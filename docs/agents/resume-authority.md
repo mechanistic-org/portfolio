@@ -16,7 +16,7 @@ The immutable public-only fixture in `tests/resume/fixtures/approved-2026-11-20.
 records the approved edition and previous canonical periods for regression checks.
 
 `portfolio-canon/career/chronology.json` owns role identity, canonical periods and
-channel title mappings. Its existing source was recovered from be6419f after confirming
+channel title mappings. Its existing source was cross-checked against be6419f, confirming
 that all twelve roles matched the published projection exactly. Only approved channel
 labels and their review provenance changed; all periods and project placements remain.
 `scripts/project_career.mjs` checks full canon parity for twelve roles and 87 projects.
