@@ -33,7 +33,14 @@
 		"test:resume-browser": "node tests/resume/browser.mjs",
 		"check:career": "node scripts/project_career.mjs --check",
 		"check:synopses": "node scripts/project_synopses.mjs --check",
-		"project:synopses": "node scripts/project_synopses.mjs --write"
+		"project:synopses": "node scripts/project_synopses.mjs --write",
+		"bio:check": "node scripts/bio-content.mjs check",
+		"bio:status": "node scripts/bio-content.mjs status",
+		"bio:export": "node scripts/bio-content.mjs export",
+		"bio:preview": "node scripts/bio-content.mjs preview",
+		"bio:serve": "node scripts/bio-content.mjs serve",
+		"export:linkedin:candidate": "node scripts/bio-content.mjs linkedin",
+		"prepare:resume:candidate": "node scripts/bio-content.mjs resume"
 	},
 	"dependencies": {
 		"@astro-community/astro-embed-youtube": "^0.5.10",

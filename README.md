@@ -1,3 +1,5 @@
+Current biography, hiring copy and shared visual reference: [workflow and commands](docs/biography-workflow.md).
+
 # Erik Norris
 
 ### Principal Mechanical Architect | Forensic Engineering | Digital Systems
