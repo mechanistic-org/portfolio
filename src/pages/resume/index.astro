@@ -5,6 +5,13 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 export const prerender = true;
 const { header, competencies, education } = resumeMaster;
 const experience = resumeExperience();
+const engineeringTerms = competencies.engineering.join("; ").replace(/\.$/, "").split("; ");
+const toolTerms = competencies.tools.join("; ").replace(/\.$/, "").split("; ");
+const competencyGroups = [
+	{ title: "Engineering", items: engineeringTerms.slice(0, 6) },
+	{ title: "Manufacturing", items: engineeringTerms.slice(6) },
+	{ title: "Tools & systems", items: toolTerms },
+];
 ---
 
 <BaseLayout title={`Resume | ${header.name}`} description={header.title} starfield={false}>
@@ -13,35 +20,59 @@ const experience = resumeExperience();
 			<a href={resumeMaster.pdf.url} download={resumeMaster.pdf.filename}>Download PDF</a>
 		</div>
 		<article class="resume-document" data-resume-document>
-			<h1>{header.name}</h1>
-			<p>{header.title}</p>
-			<p>
-				{header.contact.location} | <a href={`mailto:${header.contact.email}`}
-					>{header.contact.email}</a
-				> | {header.contact.phone}
-			</p>
-			<p>
-				<a href={httpsUrl(header.contact.portfolio)}>{header.contact.portfolio}</a> | <a
-					href={httpsUrl(header.contact.linkedin)}>{header.contact.linkedin}</a
-				> | <a href={httpsUrl(header.contact.github)}>{header.contact.github}</a>
-			</p>
-			<h2>Profile</h2><p>{resumeSummary().executive}</p>
-			<h2>Experience</h2>
-			{
-				experience.map((entry, index) => (
-					<>
-						{index === 4 && <div class="page-break" />}
-						<section aria-labelledby={`resume-${entry.id}`}>
-							<h3 id={`resume-${entry.id}`}>{entry.company}</h3>
-							<p class="rolemeta">
-								{entry.title && `${entry.title} | `}
-								{entry.dates}
-							</p>
+			<div class="resume-heading">
+				<div><h1>{header.name}</h1><p class="headline">{header.title}</p></div>
+				<address>
+					<a href={httpsUrl(header.contact.portfolio)}>{header.contact.portfolio}</a>
+					<a href={`mailto:${header.contact.email}`}>{header.contact.email}</a>
+					<a href={httpsUrl(header.contact.resume)}>{header.contact.resume}</a>
+					<a href={httpsUrl(header.contact.linkedin)}>{header.contact.linkedin}</a>
+					<a href={httpsUrl(header.contact.github)}>{header.contact.github}</a>
+					<span>{header.contact.phone}</span><span>{header.contact.location}</span>
+				</address>
+			</div>
+			<section class="profile"><h2>Profile</h2><p>{resumeSummary().executive}</p></section>
+			<section class="capabilities">
+				<h2>Core competencies</h2>
+				<div class="competency-grid">
+					{
+						competencyGroups.map((group) => (
+							<div>
+								<>
+									<h3>{group.title}</h3>
+									<ul>
+										{group.items.map((item) => (
+											<li>{item}</li>
+										))}
+									</ul>
+								</>
+							</div>
+						))
+					}
+				</div>
+			</section>
+			<section class="experience">
+				<h2>Experience</h2>
+				{
+					experience.map((entry) => (
+						<section class="position" aria-labelledby={`resume-${entry.id}`}>
+							<div class="position-heading">
+								<h3 id={`resume-${entry.id}`}>
+									{entry.company}
+									{entry.title && (
+										<>
+											<span class="separator"> | </span>
+											<span class="role-title">{entry.title}</span>
+										</>
+									)}
+								</h3>
+								<span class="dates">{entry.dates}</span>
+							</div>
 							{entry.blurb
 								.split("\n\n")
 								.filter(Boolean)
 								.map((text) => (
-									<p>{text}</p>
+									<p class:list={["context", { earlier: !entry.bullets.length }]}>{text}</p>
 								))}
 							{entry.bullets.length > 0 && (
 								<ul>
@@ -51,177 +82,332 @@ const experience = resumeExperience();
 								</ul>
 							)}
 						</section>
-					</>
-				))
-			}
-			<h2>Technical capabilities</h2>
-			{
-				Object.values(competencies)
-					.flat()
-					.map((text) => <p>{text}</p>)
-			}
-			<h2>Education</h2>
-			{
-				education.map((edu) => (
-					<p>
-						{edu.school} | {edu.degree}
-					</p>
-				))
-			}
+					))
+				}
+			</section>
+			<section class="education">
+				<h2>Education</h2>{
+					education.map((edu) => (
+						<p>
+							<strong>{edu.school}</strong> | {edu.degree}
+						</p>
+					))
+				}
+			</section>
 		</article>
 	</main>
 </BaseLayout>
 <style>
 	.resume-wrap {
-		padding: 90px 20px 40px;
-	}
-	.resume-document {
-		background: #fff;
-		color: #141c24;
-		max-width: 860px;
-		padding: 50px 56px;
-		margin: 30px auto;
-		box-shadow: 0 15px 60px #0005;
-		font:
-			16px/1.42 Barlow,
-			Arial,
-			sans-serif;
-	}
-	.resume-document h1 {
-		font-family: "Barlow Condensed", Arial, sans-serif;
-		font-size: 46px;
-		line-height: 1.1;
-		margin: 0 0 6px;
-	}
-	.resume-document h1 + p {
-		font-size: 18px;
-		font-weight: 600;
-		margin: 0 0 14px;
-		color: #284764;
-	}
-	.resume-document h2 {
-		font-family: Barlow, Arial, sans-serif;
-		font-size: 13px;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		border-bottom: 1px solid #b5bec7;
-		padding-bottom: 6px;
-		margin: 26px 0 12px;
-		color: #344d65;
-	}
-	.resume-document h3 {
-		font-family: "Barlow Condensed", Arial, sans-serif;
-		font-size: 25px;
-		text-transform: none;
-		letter-spacing: 0;
-		margin: 24px 0 3px;
-		color: #172c3e;
-	}
-	.resume-document p {
-		margin: 7px 0 10px;
-	}
-	.resume-document .rolemeta {
-		font-size: 14px;
-		color: #4b5f70;
-		margin: 0 0 11px;
-	}
-	.resume-document ul {
-		list-style: disc;
-		padding-left: 16px;
-		margin: 0;
-	}
-	.resume-document li {
-		padding-left: 0;
-		margin: 7px 0 10px;
-	}
-	.resume-document .page-break {
-		border-top: 1px dashed #bfc8d1;
-		margin: 32px 0;
-		padding-top: 8px;
-	}
-	.resume-document a {
-		color: inherit;
-		text-decoration: underline;
-		text-decoration-color: #9aaabd;
+		padding: 90px 20px 50px;
 	}
 	.resume-actions {
 		max-width: 860px;
-		margin: 20px auto;
-		display: flex;
-		gap: 20px;
-		flex-wrap: wrap;
+		margin: 0 auto 20px;
 	}
-	@media (max-width: 760px) {
+	.resume-actions a {
+		text-decoration: underline;
+	}
+	.resume-document {
+		background: #fff;
+		color: #111;
+		max-width: 860px;
+		padding: 48px;
+		margin: auto;
+		box-shadow: 0 15px 60px #0005;
+		font:
+			15px/1.46 Barlow,
+			Arial,
+			sans-serif;
+	}
+	.resume-document * {
+		box-sizing: border-box;
+	}
+	.resume-heading {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 210px;
+		gap: 26px;
+		border-bottom: 2px solid #333;
+		padding-bottom: 20px;
+		margin-bottom: 22px;
+	}
+	.resume-document h1 {
+		font:
+			800 40px/1.04 Barlow,
+			Arial,
+			sans-serif;
+		text-transform: uppercase;
+		letter-spacing: -0.8px;
+		margin: 0 0 9px;
+		color: #111;
+	}
+	.headline {
+		font:
+			600 17px/1.4 "Barlow Condensed",
+			Arial,
+			sans-serif;
+		margin: 0;
+		max-width: 450px;
+	}
+	address {
+		font:
+			normal 12px/1.4 Barlow,
+			Arial,
+			sans-serif;
+		text-align: right;
+		display: flex;
+		flex-direction: column;
+		padding-top: 1px;
+	}
+	address a {
+		color: inherit;
+		text-decoration: none;
+	}
+	address a:first-child,
+	address a:nth-child(3) {
+		font-weight: 600;
+	}
+	.resume-document h2 {
+		font:
+			700 14px/1.2 Barlow,
+			Arial,
+			sans-serif;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: #111;
+		margin: 24px 0 14px;
+		break-after: avoid;
+	}
+	.profile p {
+		font-size: 15px;
+		line-height: 1.55;
+		margin: 0 0 22px;
+	}
+	.position {
+		margin: 0 0 23px;
+		break-inside: avoid;
+	}
+	.position-heading {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 16px;
+		margin-bottom: 7px;
+		break-after: avoid;
+	}
+	.resume-document h3 {
+		font:
+			700 17px/1.3 Barlow,
+			Arial,
+			sans-serif;
+		text-transform: uppercase;
+		color: #111;
+		margin: 0;
+	}
+	.role-title {
+		font-weight: 500;
+		font-size: 14px;
+		text-transform: none;
+	}
+	.separator {
+		font-weight: 400;
+		color: #555;
+		margin: 0 6px;
+	}
+	.dates {
+		font:
+			12px/1.3 "Share Tech Mono",
+			monospace;
+		white-space: nowrap;
+	}
+	.context {
+		font-size: 13px;
+		line-height: 1.45;
+		border-left: 2px solid #555;
+		padding-left: 9px;
+		margin: 4px 0 10px;
+		font-style: italic;
+	}
+	.context.earlier {
+		font-size: 14px;
+		font-style: normal;
+		border: 0;
+		padding: 0;
+		margin: 7px 0;
+	}
+	.resume-document ul {
+		padding-left: 17px;
+		margin: 0;
+		list-style: disc;
+	}
+	.resume-document li {
+		margin: 5px 0;
+		orphans: 2;
+		widows: 2;
+	}
+	.capabilities {
+		margin: 20px 0 26px;
+		break-inside: avoid;
+	}
+	.competency-grid {
+		display: grid;
+		grid-template-columns: 1.15fr 1fr 1.2fr;
+		gap: 24px;
+	}
+	.competency-grid h3 {
+		font-size: 12px;
+		letter-spacing: 0.03em;
+		margin: 0 0 7px;
+	}
+	.competency-grid ul {
+		list-style: none;
+		padding: 0;
+	}
+	.competency-grid li {
+		font-size: 12px;
+		line-height: 1.4;
+		margin: 0 0 5px;
+	}
+	.education {
+		break-inside: avoid;
+	}
+	.resume-document .education h2 {
+		margin: 0 12px 0 0;
+	}
+	.education h2 {
+		display: inline;
+		margin: 0 12px 0 0;
+	}
+	.education p {
+		display: inline;
+		font-size: 13px;
+		margin: 0;
+	}
+	.competency-grid li::first-letter {
+		text-transform: uppercase;
+	}
+	@media (max-width: 650px) {
+		.competency-grid {
+			grid-template-columns: 1fr;
+			gap: 16px;
+		}
 		.resume-wrap {
-			padding: 80px 8px 20px;
+			padding: 85px 8px 30px;
 		}
 		.resume-document {
-			padding: 27px 22px;
-			font-size: 15px;
+			padding: 25px 20px;
+		}
+		.resume-heading {
+			grid-template-columns: 1fr;
+			gap: 16px;
+		}
+		address {
+			text-align: left;
+		}
+		.position-heading {
+			display: block;
+		}
+		.dates {
+			display: block;
+			margin-top: 5px;
 		}
 		.resume-document h1 {
-			font-size: 38px;
-		}
-		.resume-document h1 + p {
-			font-size: 17px;
+			font-size: 35px;
 		}
 	}
 	@media print {
 		.resume-wrap {
-			margin: 0;
 			padding: 0;
+			margin: 0;
 		}
 		.resume-actions {
 			display: none;
 		}
 		.resume-document {
 			box-shadow: none;
-			padding: 0;
 			margin: 0;
+			padding: 8px 10px;
 			max-width: none;
-			font-size: 10.8pt;
-			line-height: 1.3;
+			font-size: 10.5pt;
+			line-height: 1.42;
+		}
+		.resume-heading {
+			grid-template-columns: minmax(0, 1fr) 190px;
+			gap: 24px;
+			margin-bottom: 18px;
+			padding-bottom: 18px;
 		}
 		.resume-document h1 {
-			font-size: 28pt;
+			font-size: 30pt;
+		}
+		.headline {
+			font-size: 13pt;
 		}
 		.resume-document h2 {
-			font-size: 10pt;
-			margin: 15pt 0 6pt;
+			font-size: 10.5pt;
+			margin: 19px 0 12px;
+		}
+		.profile p {
+			font-size: 10.5pt;
+			line-height: 1.5;
+		}
+		.position {
+			margin-bottom: 16px;
 		}
 		.resume-document h3 {
-			font-size: 14pt;
-			margin-top: 12pt;
+			font-size: 12pt;
 		}
-		.resume-document h1 + p {
-			font-size: 11.5pt;
+		.role-title {
+			font-size: 10.3pt;
 		}
-		.resume-document .rolemeta {
+		.dates {
+			font-size: 9pt;
+		}
+		.context {
 			font-size: 9.5pt;
 		}
-		.resume-document .page-break {
-			break-before: page;
-			border: 0;
-			margin: 0;
-			padding: 0;
+		.context.earlier {
+			font-size: 10.5pt;
+		}
+		.capabilities {
+			margin: 16px 0 22px;
+		}
+		.competency-grid {
+			grid-template-columns: 1.15fr 1fr 1.2fr;
+			gap: 20px;
+		}
+		.competency-grid h3 {
+			font-size: 9pt;
+		}
+		.competency-grid li {
+			font-size: 9pt;
+			line-height: 1.35;
+			margin-bottom: 4px;
+		}
+		.education p {
+			font-size: 9.5pt;
+		}
+		address {
+			font-size: 9pt;
 		}
 		.resume-document p,
 		.resume-document li {
-			margin: 4pt 0 6pt;
+			orphans: 2;
+			widows: 2;
 		}
-		h2,
-		h3 {
-			break-after: avoid;
+		:global(body) {
+			background: #fff !important;
 		}
-		:global(header),
+		:global(#nav-bar),
 		:global(nav),
 		:global(footer),
-		:global(.site-footer) {
+		:global(.site-footer),
+		:global(body > header) {
 			display: none !important;
 		}
 		@page {
 			size: letter;
-			margin: 0.5in;
+			margin: 0.4in;
 		}
 	}
 </style>

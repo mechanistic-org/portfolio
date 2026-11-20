@@ -41,10 +41,15 @@ from the installed authority. Date precision is retained and unknown dates are o
 from machine schemas. `/resume/pdf/` redirects to the canonical R2 object:
 https://assets.eriknorris.com/resume/Erik_Norris_Resume_Current.pdf
 
-The 2026-11-20 release uses the exact reviewed two-page PDF, SHA-256
-193b7d164d190af2645045409d62f9670109590a2db0362662fee146fd3c2913.
-Do not regenerate and publish a different file under the original approval. The private
-release receipt binds those PDF bytes to this installation after HTML/text parity checks.
+The restored layout and grouped Core competencies were approved for publication on
+2026-11-20. The current PDF is SHA-256
+7bda652c987e11ed3e6a5c86b645a6e72abd39fd9b0b0d3d1547df69b81a9cc3.
+It uses the existing HTML print renderer and retains all approved hiring copy.
+Core competencies groups the existing terms under Engineering, Manufacturing,
+and Tools & systems. Two pages is a target, not a rule: preserve readable type,
+white space, hierarchy and sensible pagination when the copy changes. The private
+publication receipt binds these PDF bytes to the source and live readback.
+The earlier ReportLab edition remains historical in its original release receipt.
 
 ## Workflow
 
