@@ -111,7 +111,7 @@
 		"md-to-pdf": "^5.2.5",
 		"prettier-plugin-astro": "^0.14.1",
 		"prettier-plugin-tailwindcss": "^0.7.1",
-		"puppeteer": "^24.35.0",
+		"puppeteer": "^25.18.1",
 		"react-is": "^19.2.7",
 		"tailwindcss": "^4.3.3",
 		"typescript": "^5.9.3",
