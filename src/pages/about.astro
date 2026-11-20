@@ -1,20 +1,5 @@
 ---
-/**
- * /about - the biographical front door.
- *
- * global_agent#90 (Biographical Synthesis & Venn Diagram Asset Generation),
- * rendering the four-domain constraint model ruled in global_agent#91 as a
- * navigable field rather than a static asset.
- *
- * Placement ruled 2026-07-28: this page, not the homepage. The homepage
- * ResVizSwarm clusters the same projects by TIME and is left untouched - same
- * collection, different question.
- *
- * Biography prose below is the PUBLIC projection of
- * registry/global_agent/intelligence/2026-03-28_biography_master.md. Engineering
- * content only: family names, addresses, dates of birth, relationships, and
- * medical history stay in the private registry.
- */
+/** Reviewed biography projection; source and hashes in the private biography inventory. */
 import { getCollection } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import ConstraintField, { type FieldNode } from "@components/DataViz/ConstraintField";
@@ -119,24 +104,13 @@ const bioNodes: FieldNode[] = BIO_NODES.map((b) => ({
 }));
 
 const fieldNodes: FieldNode[] = [...projectNodes, ...bioNodes];
+
+import "@/styles/biography-reading.css";
+import AboutReading from "@components/biography/AboutReading.astro";
 ---
-
-<BaseLayout
-	title="About"
-	description="Four decades of constraint work, mapped as four overlapping domains and the intersections where they meet."
->
-	<article class="about-page">
-		<header class="about-hero">
-			<p class="about-eyebrow">Engineer</p>
-			<h1>I build systems that have to work.</h1>
-			<p class="about-lede">
-				Physical products, manufacturing, software, AI, and field delivery are different materials
-				around the same work: find the constraint, acquire what the problem needs, build the system,
-				and stay with it until the result is real. Below, the record is arranged by the physics it
-				governs rather than the year it happened.
-			</p>
-		</header>
-
+<BaseLayout title="About Erik Norris" description="Engineering, family, the repair shop and the work of making things.">
+<AboutReading />
+<section class="about-page" aria-labelledby="explore-work"><h2 id="explore-work">Explore the work</h2>
 		<section class="about-field" aria-labelledby="field-heading">
 			<h2 id="field-heading" class="sr-only">The constraint field</h2>
 			{
@@ -148,146 +122,8 @@ const fieldNodes: FieldNode[] = [...projectNodes, ...bioNodes];
 			}
 			<ConstraintField client:load nodes={fieldNodes} />
 		</section>
-
-		<section class="about-intersections" aria-labelledby="intersections-heading">
-			<h2 id="intersections-heading">The Intersections</h2>
-			<p class="about-section-lede">
-				The domains are not adjacent specialisms. They overlap, and the overlaps are where the
-				argument lives.
-			</p>
-			<dl>
-				{
-					INTERSECTIONS.map((node) => (
-						<div class="about-intersection">
-							<dt>
-								<span class="about-intersection-key">{node.id}</span>
-								{node.label}
-							</dt>
-							<dd>
-								<p>{node.blurb}</p>
-								<p class="about-intersection-members">
-									{node.domains.map((id) => DOMAINS.find((d) => d.id === id)?.label).join("  ∩  ")}
-								</p>
-							</dd>
-						</div>
-					))
-				}
-			</dl>
-		</section>
-
-		<section class="about-bio" aria-labelledby="bio-heading">
-			<h2 id="bio-heading">The Long Version</h2>
-
-			<p>
-				The formal education arrived by correspondence, at the end of Highway 101 on the British
-				Columbia coast, in service of a shellfish cooperative. He burned through it as fast as he
-				could. The real curriculum was outboard motors and tugboat engines and bilge pumps and cable
-				suspension winches, and the particular patience required by living systems that do not care
-				about your schedule. The ocean is an unforgiving, consistent, and honest teacher about
-				consequences, in a way that classrooms rarely are.
-			</p>
-
-			<p>
-				At twelve he wanted a motorcycle. He was told he could have one when he could pay for it.
-				Three months later he had felled, bucked, split, and loaded nineteen cords of wood at a
-				hundred dollars a cord, which covered the ferry, the bike, tires, tune-up parts, and a
-				filter. It was never a story about a motorcycle. It was the operating system establishing
-				its core parameters.
-			</p>
-
-			<p>
-				When the cooperative failed he moved south with nowhere particular to go, worked a service
-				station, and enrolled at De Anza College - twenty-two units a quarter, an Associate's Degree
-				in Automotive Engine Performance, the Outstanding Academic Achievement Certificate, an Elks
-				National Foundation Vocational Grant. When the schedule required it, he slept in the
-				library. The library was warm and had books.
-			</p>
-
-			<p>
-				The first job in technology came in 1985, building a cardiac ablation system - treating
-				irregular heartbeat through minimally invasive catheters. He started as an electronics
-				technician doing assembly, rework, and component-level troubleshooting, and was promoted to
-				Electronics Production Supervisor at nineteen. The work was small enough to hold in your
-				hands and precise enough to kill a patient if you got it wrong. Simultaneously he managed an
-				automotive shop doing computer-engine feedback diagnostics. The same epistemology applied to
-				combustion that was being applied to catheters. He was not building a career. He was
-				developing a method.
-			</p>
-
-			<p>
-				In 1989 he joined Silicon Graphics, moving from technician to junior mechanical designer
-				inside a year, learning Pro/ENGINEER and Flotherm and building thermal and mechanical
-				solutions for workstations that consumed power the way race engines consume fuel. Five
-				products from concept to production - the Personal Iris, the Indigo, the Indigo II, the Indy
-				- machines a generation of engineers and scientists and artists used to do their best work.
-			</p>
-
-			<p>
-				He founded Mechanistic in 1993. The name was deliberate: the world as systems, as
-				mechanisms, as structures with knowable properties operating according to discoverable
-				rules. Over the following decade he took twenty-two commercial products from start to finish
-				- inline speed skates, a logic-window toaster, a telephone, the Microsoft Xbox, a handheld,
-				an MP3 player, a security appliance, a dental x-ray system. Products people held and used
-				and sometimes loved without knowing his name. That is the nature of the work. The maker
-				disappears into the made thing.
-			</p>
-
-			<p>
-				He also owned and operated a repair shop specialising in late-model driveability and racing
-				setups, and raced SCCA SoloII competitively. A consultancy, a shop, a race season, and a
-				product schedule, all running at once. The parallel processing was never a strategy. It was
-				constitutional.
-			</p>
-
-			<p>
-				In 2003 he moved to professional audio - the physical architecture of the tools that make
-				the tools: control surfaces and interfaces used to record a great deal of the music of the
-				last thirty years. He was also administrator of the CAD dataservers, already wrestling with
-				persistent, auditable, durable professional data two decades before he had language for the
-				problem.
-			</p>
-
-			<p>
-				From 2008 he was the sole mechanical engineer for six generations of high-end audiovisual
-				servers and players, for people who care about the difference between experiencing something
-				and merely consuming it. Around 2010 he discovered photography - landscape, macro, portrait,
-				studio, and a portable photobooth he engineered himself. The same eye that tracked tolerance
-				stacks and thermal budgets, turned toward light and time. He was riding roughly ten thousand
-				miles a year.
-			</p>
-
-			<p>
-				Then a wearable video headset projecting images directly onto the retina through
-				beam-splitting optics - engineering the precise boundary between the physical world and
-				human perception. Then a connected light switch and its regulatory compliance program. Then
-				automated foodservice makelines: robots making burritos to the tolerance precision of
-				aerospace assembly, because a burrito is a constraint problem if you care about consistency
-				at scale, and the physical world does not forgive.
-			</p>
-
-			<p>
-				He returned to Mechanistic in 2022, four decades of constraint environments having
-				accumulated into something past technical expertise - a forensic epistemology applied across
-				engines, catheters, workstations, optics, food robots, musical instruments, bicycles,
-				photographs, and bodies. He had also noticed that the automated systems now ranking people
-				like him had been built by software people who had never held a thermal resistance budget or
-				managed an injection molding tolerance stack. Their ontologies had no vocabulary for the
-				work. Not failing a screen. Never screened at all. He called it Round Zero, and built an
-				open standard for agentic professional identity to end it.
-			</p>
-
-			<p>
-				Around the same time he answered a different question: how do you give an AI agent durable
-				memory that survives sessions, restarts, and complete environment teardowns? The answer was
-				git - not as a workaround but as the natural substrate, because every property required was
-				already there. Agents boot cold, read an issue, execute one task, post a comment, and die.
-			</p>
-
-			<p class="about-closer">The container burns. The commit survives.</p>
-		</section>
-	</article>
+</section>
 </BaseLayout>
-
 <style is:global>
 	/* ---- page shell ---- */
 	.about-page {
