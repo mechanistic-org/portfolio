@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "source": "private biography inventory",
+  "blocks": {
+    "erik-descriptor": "105f49933197856c80ace7ecbfb11fb86bb3b9e110426939354d8ba4e63151e8",
+    "erik-home-intro": "0491e8cdb9219396d4f71a8607492dbf83c5938916db7bb69a2ee6fa35678364",
+    "erik-reading-intro": "bb63f377649093264afe41b24108ebb63e5fc7182e93b746d71d18899a3f307c",
+    "erik-contact-intro": "a8e2cb91ae3e25f48d92a176d29b1fa4bb79c2391e5dc1fcfdb786ee79b4c24f",
+    "bio-one-third": "ea18926c4ace349ebd5c9a0f1bff2529122bdd5a92f2b94410d3f054625bd457"
+  },
+  "styles": {
+    "src/styles/biography-intros.css": "238bebd232238ac99b292c39f479b5e49597d129018355aa9de418e50c13a551"
+  }
+}

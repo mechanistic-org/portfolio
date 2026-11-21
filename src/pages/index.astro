@@ -10,6 +10,8 @@ import { routeEligibleProjects, careerRecords } from "../utils/projectRoster";
 import { careerIdentityAliases } from "../config/projectArticleTrial";
 import { currentSite } from "@config/site_config";
 import siteData from "@config/siteData.json";
+import bio from "../data/biography-intros.json";
+import "../styles/biography-intros.css";
 import UnderConstruction from "../components/UnderConstruction.astro";
 
 const isUnderConstruction = currentSite !== "main";
@@ -110,6 +112,15 @@ if (!isUnderConstruction) {
 						/>
 					</div>
 				</main>
+                <section class="bio-connections site-container" aria-label="The connected account">
+                    <p class="bio-kicker">Follow a connection</p>
+                    <p data-bio-id="erik-reading-intro">{bio["erik-reading-intro"]}</p>
+                    <div class="bio-link-grid">
+                        <a href="/about/"><span>eriknorris.com</span><strong>About Erik Norris</strong><small>The work and the longer account</small></a>
+                        <a href="https://moreplay.com/"><span>Moreplay</span><strong>Family, photographs and the longer story</strong><small>Family and coast · The repair shop</small></a>
+                        <a href="https://mechanistic.com/"><span>Mechanistic</span><strong>Development methods and tools</strong><small>The practice and its working records</small></a>
+                    </div>
+                </section>
 			</div>
 		</Layout>
 	)
@@ -156,13 +167,16 @@ if (!isUnderConstruction) {
 	/* The swarm remains client-only. The console is prerendered so its native
 	   project anchors remain available without JavaScript. */
 	@media (max-width: 1023px) {
+		.hxo-console-stage { grid-row: 1; margin-top: 4rem; }
+		.hxo-swarm-stage { grid-row: 2; }
+		.hxo-console-stage [data-viewer-id], .hxo-console-stage [data-timeline-panel] { flex: none; overflow-y: visible; }
 		.hxo-swarm-stage > astro-island:has(> div) {
 			display: block;
 			width: 100%;
 		}
 
 		.hxo-console-stage > astro-island {
-			height: max(48rem, calc(100svh - 4rem));
+			height: auto;
 		}
 	}
 </style>

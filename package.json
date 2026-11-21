@@ -5,8 +5,8 @@
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
-		"build": "node scripts/ci-prebuild.js && npm run check:ci && npm run audit:integrity && npm run audit:readiness && astro build && node scripts/claims/built.mjs && npx -y pagefind --site dist",
-		"build:worker": "node ./scripts/build-worker.mjs",
+		"build": "node scripts/check-biography-projection.mjs && node scripts/ci-prebuild.js && npm run check:ci && npm run audit:integrity && npm run audit:readiness && astro build && node scripts/claims/built.mjs && npx -y pagefind --site dist",
+		"build:worker": "node scripts/check-biography-projection.mjs && node ./scripts/build-worker.mjs",
 		"check:worker": "node ./scripts/check-worker-build.mjs && wrangler deploy --dry-run --config .astro/worker/wrangler.json && wrangler deploy --dry-run --config wrangler.production.jsonc",
 		"deploy:worker": "node scripts/claims/check.mjs --release && wrangler deploy --config .astro/worker/wrangler.json",
 		"deploy:production": "node scripts/claims/check.mjs --release && wrangler deploy --config wrangler.production.jsonc",
@@ -41,7 +41,8 @@
 		"bio:serve": "node scripts/bio-content.mjs serve",
 		"export:linkedin:candidate": "node scripts/bio-content.mjs linkedin",
 		"prepare:resume:candidate": "node scripts/bio-content.mjs resume",
-		"bio:project": "node scripts/bio-content.mjs project"
+		"bio:project": "node scripts/bio-content.mjs project",
+		"bio:check:projection": "node scripts/check-biography-projection.mjs"
 	},
 	"dependencies": {
 		"@astro-community/astro-embed-youtube": "^0.5.10",

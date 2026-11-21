@@ -1,3 +1,4 @@
+import bio from "../../data/biography-intros.json";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import CareerTimeline from "../DataViz/CareerTimeline";
 import type { CareerNode } from "../../utils/contextRibbon";
@@ -181,7 +182,7 @@ export default function HXOConsole({ projects, careerNodes, projectAliases }: HX
 					onClick={() => document.getElementById("career-map")?.scrollIntoView({ block: "start" })}
 					className="border-b border-zinc-800 px-5 py-3 text-left font-mono text-xs text-zinc-400 lg:hidden"
 				>
-					← Back to map
+					Explore the project map
 				</button>
 
 				<div
@@ -351,32 +352,16 @@ function ActiveSovereignView({ project }: { project: ConsoleProject }) {
 }
 
 function DefaultSummary() {
-	return (
-		<article className="hxo-node animate-in fade-in flex h-full flex-col justify-center duration-500">
-			<div className="space-y-6">
-				<p className="text-sm leading-relaxed font-light text-zinc-300">
-					Principal Mechanical Architect specializing in high-fidelity hardware and program rescue.
-					I stabilize the entropy of product development: structure the chaos, index the decisions,
-					ship the hardware.
-				</p>
-				<p className="font-mono text-xs text-zinc-500">
-					Pause over a project to explore. Its details stay open as you move across to read.
-				</p>
-				<nav
-					aria-label="Portfolio orientation"
-					className="flex flex-wrap gap-x-5 gap-y-3 font-mono text-xs tracking-wider uppercase"
-				>
-					<a href="/projects/c24/" className="text-lime-400 transition-colors hover:text-white">
-						C|24 dossier →
-					</a>
-					<a href="/resume/" className="text-zinc-400 transition-colors hover:text-white">
-						Résumé →
-					</a>
-					<a href="/projects/" className="text-zinc-400 transition-colors hover:text-white">
-						All Work →
-					</a>
-				</nav>
-			</div>
-		</article>
-	);
+ return (
+  <article className="hxo-node animate-in fade-in flex min-h-full flex-col justify-center duration-500">
+   <div className="space-y-4 py-2">
+    <p className="font-mono text-sm leading-relaxed text-blue-300">{bio["erik-descriptor"]}</p>
+    <p className="text-base leading-relaxed text-zinc-200" data-bio-id="erik-home-intro">{bio["erik-home-intro"]}</p>
+    <nav aria-label="Portfolio orientation" className="flex flex-wrap gap-x-6 gap-y-3 text-base text-blue-200 underline underline-offset-4">
+     <a href="/projects/">Explore the work</a><a href="/resume/">Resume</a><a href="/about/">About Erik</a>
+    </nav>
+    <p className="text-sm leading-relaxed text-zinc-400">Pause over a project to explore. Its details stay open as you move across to read.</p>
+   </div>
+  </article>
+ );
 }
