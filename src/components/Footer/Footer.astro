@@ -8,6 +8,7 @@
  * positioning was fighting the layout rather than serving it — it is now static
  * and carries real navigation.
  */
+import bio from "../../data/biography-intros.json";
 import Navbox from "../primitives/Navbox.astro";
 import { Icon } from "astro-icon/components";
 import { resumeMaster } from "@config/resume_master";
@@ -39,7 +40,7 @@ const SECTIONS = [
 ];
 ---
 
-<footer class="border-t border-white/10 bg-black/40">
+<footer id="site-author" class="border-t border-white/10 bg-black/40">
 	{
 		projectNavigation && (
 			<div class="site-container">
@@ -54,11 +55,8 @@ const SECTIONS = [
 				<p class="font-mono text-xs tracking-[0.2em] text-neutral-500 uppercase">
 					{resumeMaster.header.name}
 				</p>
-				<p class="mt-2 max-w-xs text-sm leading-relaxed text-neutral-400">
-					{resumeMaster.header.title}{
-						resumeMaster.header.tagline && `. ${resumeMaster.header.tagline}`
-					}.
-				</p>
+                <p class="mt-2 max-w-md text-base leading-relaxed text-neutral-300" data-bio-id="bio-one-third">{bio["bio-one-third"]}</p>
+                <a href="/about/" class="mt-3 mr-6 inline-block text-sm text-blue-200 underline underline-offset-4">About Erik Norris</a>
 				<a
 					href="/contact/"
 					class="text-primary mt-4 inline-flex items-center gap-2 font-mono text-xs tracking-widest uppercase transition-opacity hover:opacity-70"

@@ -10,6 +10,7 @@
  * and a "thanks, we'll be in touch" lie. A visible address is more honest and
  * converts better with the audience this site is for.
  */
+import bio from "../data/biography-intros.json";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
 import { resumeMaster } from "@config/resume_master";
@@ -19,22 +20,8 @@ export const prerender = true;
 const { email, linkedin, github, location } = resumeMaster.header.contact;
 
 const TRACKS = [
-	{
-		key: "employment",
-		label: "Hiring",
-		heading: "For a role",
-		body: "Principal / Staff mechanical engineering — mechanism and actuated-system design, enclosure and thermal architecture, NPI through high-volume production. I take subsystems from whiteboard through DVT into mass production, and I go to the factory floor when the yield data demands it.",
-		cta: "Start with the résumé",
-		href: "/resume/",
-	},
-	{
-		key: "engagement",
-		label: "Engagement",
-		heading: "For a program",
-		body: "Pre-production forensic audits and program rescue: tolerance stack-up, thermal margin, supply-chain fragility and yield recovery, stress-tested before tooling commitment. Independent, scoped, and documented well enough that your team owns the result after I leave.",
-		cta: "See a teardown",
-		href: "/projects/c24/",
-	},
+ { key:"employment", label:"Hiring", heading:"For a role", cta:"Resume and experience", href:"/resume/" },
+ { key:"engagement", label:"Consulting", heading:"For a product or program", cta:"Mechanistic engineering practice", href:"https://mechanistic.com/" },
 ];
 
 const CHANNELS = [
@@ -46,17 +33,13 @@ const CHANNELS = [
 
 <BaseLayout
 	title="Contact"
-	description="Erik Norris — Principal Mechanical Architect. Available for principal-level mechanical engineering roles and for forensic audit and program-rescue engagements."
+	description={bio["erik-contact-intro"]}
 >
 	<article class="contact-page site-container">
 		<header class="contact-hero">
 			<p class="contact-eyebrow">/// Contact</p>
-			<h1>Tell me what's breaking.</h1>
-			<p class="contact-lede">
-				Thirty years of shipped hardware across SGI, Frog Design, WebTV/Microsoft,
-				Digidesign/Avid, Kaleidescape, Avegant, Noon and Hyphen. I read every message
-				myself and answer within two business days.
-			</p>
+            <h1>Let's talk about the work.</h1>
+            <p class="contact-lede" data-bio-id="erik-contact-intro">{bio["erik-contact-intro"]}</p>
 		</header>
 
 		<section class="contact-primary" aria-label="Direct contact">
@@ -65,7 +48,7 @@ const CHANNELS = [
 				<span>{email}</span>
 			</a>
 			<p class="contact-meta">
-				{location} · open to remote, hybrid and on-site · will travel to the factory
+				{location}
 			</p>
 		</section>
 
@@ -75,9 +58,8 @@ const CHANNELS = [
 					<div class="contact-track">
 						<p class="contact-track-label">{track.label}</p>
 						<h2>{track.heading}</h2>
-						<p>{track.body}</p>
 						<a class="contact-track-cta" href={track.href}>
-							{track.cta} <span aria-hidden="true">→</span>
+							{track.cta}
 						</a>
 					</div>
 				))
@@ -293,4 +275,8 @@ const CHANNELS = [
 			transition: none;
 		}
 	}
+</style>
+
+<style>
+.contact-lede{color:#c4ccd8}.contact-meta{color:#9bacc5;font-size:14px}.contact-eyebrow,.contact-track-label{font-size:14px;color:#9bacc5}.contact-track-cta{color:#a9bfff;font-size:14px}
 </style>
