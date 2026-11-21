@@ -6,13 +6,19 @@ older #152 LinkedIn wording and the #278 resume projection wording. The private
 biography package is the editable source, inventory and design reference; the
 site's existing bio-content workflow locates that package without committing it here.
 
+Erik approved the SC48-aligned resume bullet and Digidesign LinkedIn Experience
+on 2026-11-21 under Moreplay #22. All other hiring prose, dates and company
+associations retain their prior accepted values. The print job-entry gap is
+12px; typography and margins retain the restored layout. Earlier fixtures and
+private review/publication receipts remain historical.
+
 ## Installed edition
 
 `resume_master.ts` owns the approved resume copy, identity/contact, capabilities,
 education and canonical PDF URL. `linkedin_master.ts` owns the approved headline,
 About and twelve Experience descriptions. `linkedin_review.ts` locks the approved
 prose and role authority by hash. Changing that lock requires a new review.
-The immutable public-only fixture in `tests/resume/fixtures/approved-2026-11-20.json`
+The immutable public-only fixture in `tests/resume/fixtures/approved-2026-11-21.json`
 records the approved edition and previous canonical periods for regression checks.
 
 `portfolio-canon/career/chronology.json` owns role identity, canonical periods and
@@ -43,7 +49,7 @@ https://assets.eriknorris.com/resume/Erik_Norris_Resume_Current.pdf
 
 The restored layout and grouped Core competencies were approved for publication on
 2026-11-20. The current PDF is SHA-256
-7bda652c987e11ed3e6a5c86b645a6e72abd39fd9b0b0d3d1547df69b81a9cc3.
+aec653b217f75321dd71fa100e436ba40d034da3c55cfcd430bce72f37e915da.
 It uses the existing HTML print renderer and retains all approved hiring copy.
 Core competencies groups the existing terms under Engineering, Manufacturing,
 and Tools & systems. Two pages is a target, not a rule: preserve readable type,

@@ -1,6 +1,6 @@
-// Explicit approval lock for the 2026-11-20 edition. Never refresh without review.
+// Explicit approval lock for the 2026-11-21 SC48-aligned edition. Never refresh without review.
 export const linkedinReview = {
-	source: "https://github.com/mechanistic-org/moreplay/issues/19",
+	source: "https://github.com/mechanistic-org/moreplay/issues/22",
 	migration: "https://github.com/mechanistic-org/portfolio/issues/219",
 	roleIds: [
 		"mechanistic-2022",
@@ -16,6 +16,6 @@ export const linkedinReview = {
 		"sgi",
 		"ep-technologies-1986",
 	],
-	factsSha256: "c270cfd4efdc735ee4df7784b2f757f88c908998e4279c8c7f00089324a5060f",
-	proseSha256: "3908e9e61c36dc0c473e8c247f11af35dd77da4e6924b4dd9e276482ed04ba3d",
+	factsSha256: "ab9db1ecab204814a29a74ec649da930d471c0e3eeca01f83ce02c162f1d248d",
+	proseSha256: "750be9083f65678c209c1a573aa8fc28866310c13825d406f4f21cdb235a4082",
 };
