@@ -12,13 +12,20 @@ associations retain their prior accepted values. The print job-entry gap is
 12px; typography and margins retain the restored layout. Earlier fixtures and
 private review/publication receipts remain historical.
 
+Erik approved the De Anza education correction on 2026-11-21 under Moreplay #23:
+completed two-year Automotive Technology program, with engine-controls and
+drivability specialization; no AA/AS award is asserted. All other resume wording
+and employment facts remain. The print job-entry gap is now 8px to retain
+the expanded education line on page two; type, line heights, margins and
+screen layout remain unchanged.
+
 ## Installed edition
 
 `resume_master.ts` owns the approved resume copy, identity/contact, capabilities,
 education and canonical PDF URL. `linkedin_master.ts` owns the approved headline,
 About and twelve Experience descriptions. `linkedin_review.ts` locks the approved
 prose and role authority by hash. Changing that lock requires a new review.
-The immutable public-only fixture in `tests/resume/fixtures/approved-2026-11-21.json`
+The immutable public-only fixture in `tests/resume/fixtures/approved-2026-11-21-education.json`
 records the approved edition and previous canonical periods for regression checks.
 
 `portfolio-canon/career/chronology.json` owns role identity, canonical periods and
@@ -49,7 +56,7 @@ https://assets.eriknorris.com/resume/Erik_Norris_Resume_Current.pdf
 
 The restored layout and grouped Core competencies were approved for publication on
 2026-11-20. The current PDF is SHA-256
-aec653b217f75321dd71fa100e436ba40d034da3c55cfcd430bce72f37e915da.
+2f2a87263dec5a13c0f2549ceb0e9fd5197f534e6410b66fcc6753028b6a7852.
 It uses the existing HTML print renderer and retains all approved hiring copy.
 Core competencies groups the existing terms under Engineering, Manufacturing,
 and Tools & systems. Two pages is a target, not a rule: preserve readable type,

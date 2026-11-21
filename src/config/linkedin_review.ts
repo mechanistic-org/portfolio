@@ -1,6 +1,6 @@
-// Explicit approval lock for the 2026-11-21 SC48-aligned edition. Never refresh without review.
+// Approved SC48 edition with 2026-11-21 education correction; LinkedIn prose unchanged.
 export const linkedinReview = {
-	source: "https://github.com/mechanistic-org/moreplay/issues/22",
+	source: "https://github.com/mechanistic-org/moreplay/issues/23",
 	migration: "https://github.com/mechanistic-org/portfolio/issues/219",
 	roleIds: [
 		"mechanistic-2022",
@@ -16,6 +16,6 @@ export const linkedinReview = {
 		"sgi",
 		"ep-technologies-1986",
 	],
-	factsSha256: "ab9db1ecab204814a29a74ec649da930d471c0e3eeca01f83ce02c162f1d248d",
+	factsSha256: "76322ec0c4004cefa67d7cd4ee473703477cb143a3db7e46b3979e5fd135bb13",
 	proseSha256: "750be9083f65678c209c1a573aa8fc28866310c13825d406f4f21cdb235a4082",
 };

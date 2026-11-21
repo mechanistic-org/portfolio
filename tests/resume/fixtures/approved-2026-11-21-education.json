@@ -1,0 +1,178 @@
+{
+  "source": "https://github.com/mechanistic-org/moreplay/issues/23",
+  "resume": "# Erik Norris\nPrincipal Mechanical Architect | Product Architecture & Technical Direction\n\nRedwood City, CA | erik@eriknorris.com | 650.302.5029\neriknorris.com | linkedin.com/in/eriknorris | github.com/eriknorris\n\n## Profile\n\nI'm an engineer. I like doing good work on hard problems: understanding the physics, testing what matters and making compromises without losing the intent. I bring practical engineering judgment to product architecture and systems integration, carrying work from concept through manufacturing.\n\n## Experience\n\n### Mechanistic\nPrincipal Mechanical Architect | 2022 - Present\n\nIndependent engineering practice focused on product architecture, mechanical design and preparation for manufacturing.\n\n- Developed a dispenser lid for Hyphen around pan fit, handling, stacking and cleanability. Handed off CAD, materials research and molding requirements, with remaining tooling decisions identified.\n- Design, build and operate EN-OS, a local system that keeps engineering sources, decisions and project context usable across AI assistants. Own its architecture, software development, testing and operation.\n- Provided thermal and mechanical design consulting to Whipsaw on a compact cooling product, developing an alternative airflow proposal and handing off CAD and technical recommendations.\n\n### Hyphen\nStaff Mechanical Engineer → Principal Systems Architect | 2021 - 2022\n\n- Led mechanical design and systems architecture for the Augmented Makeline, integrating food-handling mechanisms, bowl movement, refrigeration, controls and cabinet packaging into a modular food-assembly system.\n- Defined layouts and interfaces with electrical, controls and manufacturing colleagues, making cleaning, service access and assembly part of the architecture. Created motor- and display-board drawings specifying board envelopes, mounting locations and clearances.\n- Co-inventor of Modular System for Food Assembly, US patent 12,213,629, granted February 2025.\n\n### Mechanistic\nSenior Mechanical Designer | 2018 - 2021\n\n- Engineered a ruggedized IoT module for Lyft's Bay Wheels eBike program, from system architecture through electronics packaging and detailed mechanical design for outdoor use.\n- Developed an electric cargo-bike platform from concept and vehicle architecture into detailed parts and assemblies for prototype development.\n\n### Noon Home\nHead of Mechanical Engineering | 2017 - 2018\n\n- Led mechanical architecture and reliability work across four connected-lighting hardware platforms through EVT and DVT, working with industrial design, electronics, suppliers and manufacturing.\n- Used prototype tests and sample-level results on the Room Director to distinguish glass damage, coating problems, retention, rattle and functional failures, then set mechanical design priorities.\n\n<!-- page-break -->\n\n### Avegant\nSenior Mechanical Engineer - NPI / DFM / MP | 2015 - 2017\n\n- Owned Glyph's whole mechanical bill of materials through tooling, validation and production ramp, including roughly 40 tools.\n- Owned Glyph headband test planning. Compared spring and liner variants, then tested assemblies with selected components removed to understand their contribution to fit and force.\n- Owned cable-kinking and chassis-abrasion investigations in Glyph's telescoping arms. Evaluated cable variants, routing and support changes; released mechanical corrections and carried abrasion fixes into lifecycle and drop validation.\n\n### Kaleidescape\nSenior Mechanical Design Engineer | 2008 - 2015\n\n- Owned Cinema One's mechanical design and BOM through production bring-up. Used plastic skins over sheet metal to achieve the intended aluminum-like appearance within cost, manufacturing, grounding and surface-temperature constraints.\n- Wrote the KSYSTEM-120 mechanical first-article inspection procedure, defining when to correct tooling or process, change the design, and recheck parts and assemblies.\n- Investigated M700 disc-handling problems through field records, returned hardware and dimensional inspection, connecting mechanism behavior to part geometry, molding and assembly.\n\n### Digidesign Avid\nLead Mechanical Engineer | 2003 - 2008\n\n- Owned C|24 mechanical engineering and industrial design, defining interfaces around 19 distinct PCB assembly designs and designing the field-replaceable headphone-jack assembly that shipped.\n- Used supplier inspection data to determine which C|24 dimensions and tolerances mattered to fit and function. Wrote an acceptance deviation allowing specified molded parts to be used without rework.\n- Led SC48 enclosure and thermal architecture, evaluating 4U, 3U and hybrid layouts against cooling, electromagnetic behavior, packaging and cost. The team selected 4U; structural work included a folded-sheet-metal I-beam under the no-extrusion constraint.\n\n### Earlier engineering and repair work\n1986 - 2003\n\nWorked through Mechanistic and frogdesign on complex surfaces, mechanical packaging and manufacturing support. At Silicon Graphics, worked on workstation mechanical and thermal development and managed the Product Design lab. At EP Technologies, progressed from electronics assembly and troubleshooting into production supervision.\n\nRan an automotive repair shop alongside design work, bringing practical diagnosis and service experience to product engineering.\n\n## Technical capabilities\n\nMechanical architecture and system integration; mechanisms; tolerance analysis and GD&T; electronics packaging; thermal analysis; experimental planning and failure analysis; DFM/DFA; tooling, supplier coordination and NPI; injection-molded plastics, castings and sheet metal.\n\nCreo / Pro/ENGINEER, Onshape, SolidWorks; Agile, Arena and Windchill; software architecture and testing; retrieval and agent-tool integration; source records and revision management.\n\n## Education\n\nDe Anza College | Completed the two-year Automotive Technology program, specializing in engine controls and drivability diagnostics.",
+  "headline": "Principal Mechanical Architect | Product Architecture & Technical Direction",
+  "about": "I'm an engineer. I like doing good work on hard problems, and I love the physics and figuring things out. I like starting with a concept, when we're still working out what it could be and how it might work. I want to understand the system well enough to test something meaningful, then use what we learn to make the compromises without losing the intent. Doing that work early gives us more room to get the important decisions right and carry them through to something we can build and use.\n\nAt Hyphen, I led mechanical design and systems architecture for the Augmented Makeline. Food handling, refrigeration and automation had to fit into equipment people could operate, clean and maintain in a working kitchen.\n\nEarlier work spans connected lighting at Noon, wearables at Avegant, home-cinema systems at Kaleidescape and professional audio at Digidesign.\n\nI run Mechanistic, an independent engineering practice. I also build EN-OS, a local system that helps me keep engineering sources, decisions and ongoing work usable across AI assistants. I want to return to a project, understand where it stands and keep going.\n\nI grew up around building and repair on the British Columbia coast. I paid for my first motorcycle by splitting and selling firewood, then rebuilt it when Dad and my uncles brought it home. Later, I ran an automotive repair shop alongside my design work. I built a loaner fleet so customers could get on with their day while we worked on their cars.\n\nThat background still affects what I notice: whether you can reach the part, diagnose a fault, assemble it consistently and repair it without making a small problem into a large job. I care about what happens after the product leaves the development team.\n\nI'm looking for a senior individual contributor role with responsibility for product architecture, technical strategy and development methods, and room to carry decisions through design, testing and manufacturing.\n\nSelected work, resume and the longer story: eriknorris.com",
+  "roles": [
+    {
+      "id": "mechanistic-2022",
+      "title": "Principal Mechanical Architect",
+      "company": "Mechanistic",
+      "description": "I run Mechanistic, an independent engineering practice working on product architecture, mechanical design and preparation for manufacturing.\n\nFor Hyphen, I developed a dispenser lid around pan fit, handling, stacking and cleanability. I worked through CAD, materials and molding requirements, then handed off the design and research with the remaining tooling decisions identified.\n\nI also design, build and operate EN-OS, a local system for engineering research and work across AI assistants. I own its architecture, software development, testing and operation, including the procedures for keeping sources, decisions and project context usable between sessions.\n\nI provided thermal and mechanical design consulting to Whipsaw on a compact cooling product, developing an alternative airflow proposal and handing off CAD and technical recommendations."
+    },
+    {
+      "id": "hyphen-2021",
+      "title": "Staff Mechanical Engineer → Principal Systems Architect",
+      "company": "Hyphen",
+      "description": "I led mechanical design and systems architecture for the Augmented Makeline, a modular food-assembly system beneath a conventional preparation surface. The work brought food-handling mechanisms, bowl movement, refrigeration, controls and cabinet packaging together.\n\nMuch of the architectural work was at the interfaces. I developed mechanical layouts with electrical, controls and manufacturing colleagues, working through how the mechanisms, electronics and cabinet fit together and how someone would reach them for service. I created motor- and display-board drawings that defined board envelopes, mounting locations and clearances.\n\nThe system had to handle real ingredients and leave room to move food and bowls, while allowing access for cleaning and maintenance. Those requirements shaped the mechanisms and packaging from the outset. My responsibility connected the system layout to the detailed mechanical work needed to make it function.\n\nI am a co-inventor of Modular System for Food Assembly, US patent 12,213,629, granted in February 2025. Later consulting to Hyphen is covered under my current Mechanistic role."
+    },
+    {
+      "id": "mechanistic-2018",
+      "title": "Senior Mechanical Designer",
+      "company": "Mechanistic",
+      "description": "My consulting work during this period focused on micromobility and connected hardware.\n\nFor Lyft's Bay Wheels eBike program, I engineered a ruggedized IoT module for outdoor use, from system architecture through electronics packaging and detailed mechanical design.\n\nI also developed an electric cargo-bike platform from concept and vehicle architecture into detailed parts and assemblies for prototype development."
+    },
+    {
+      "id": "noon-2017",
+      "title": "Head of Mechanical Engineering",
+      "company": "Noon Home",
+      "description": "I led mechanical architecture and reliability work across four connected-lighting hardware platforms, working with industrial design, electronics, suppliers and manufacturing as the products moved through EVT and DVT.\n\nThe work brought glass, coatings, molded housings, controls and wall-mounting interfaces together. Appearance and control feel were part of the engineering problem, along with how the hardware assembled, held together and behaved in use.\n\nOn the Room Director, I used prototype tests, sample-level results and issue tracking to separate glass damage, coating problems, retention, rattle and functional failures. A failed test could reveal several different problems. I worked through what each observation meant for the mechanical design and what needed attention next, keeping the individual failure modes visible."
+    },
+    {
+      "id": "avegant-2015",
+      "title": "Senior Mechanical Engineer - NPI / DFM / MP",
+      "company": "Avegant",
+      "description": "I took responsibility for Glyph's whole mechanical bill of materials through tooling, validation and production ramp, including roughly 40 tools. The product had to work as both headphones and a personal display, bringing fit, adjustment, comfort and moving mechanisms into the same design.\n\nI owned the headband test plan and worked with colleagues on prototypes, assembly, testing and analysis. We compared spring and liner variants, then measured complete units with selected components removed to understand how each part contributed to the forces a wearer felt. Those measurements helped guide the work on fit, geometry and supplier options.\n\nI also owned the cable-kinking, chassis-abrasion and second-source investigations. We evaluated cable variants alongside changes to routing, the chassis and local support. Six variants produced no clear selection, and a proposed splint approach was discontinued. I carried mechanical corrections through engineering-change release, with abrasion fixes moving into lifecycle and drop validation."
+    },
+    {
+      "id": "kaleidescape-2008",
+      "title": "Senior Mechanical Design Engineer",
+      "company": "Kaleidescape",
+      "description": "I developed home-cinema hardware from mechanical architecture through detailed design, testing and production, and stayed involved in investigating problems in equipment already in use. The work included enclosure design, electronics packaging, mechanisms, suppliers and manufacturing.\n\nFor Cinema One, I was responsible for the mechanical design and BOM through part and production bring-up. The intended aluminum-like form had to work within the product's cost, manufacturing, grounding and surface-temperature constraints. I developed plastic skins over a sheet-metal base, preserving the rectangular mass and floating front bezel. I also evaluated coating approaches and created the workmanship guide the supplier used to make acceptable product.\n\nOn the KSYSTEM-120 Mini System, I worked through the interfaces between the enclosure, electronics, removable drives and front panel. I wrote the mechanical first-article inspection procedure, setting out when to correct tooling or process, when to change the design through an ECO, and how to recheck parts and trial assemblies.\n\nOn M700, I investigated disc-handling problems using field records, returned hardware and dimensional inspection. Comparing the mechanism's behavior with the actual parts helped connect molding, geometry and assembly decisions to problems encountered in use."
+    },
+    {
+      "id": "digidesign-2003",
+      "title": "Lead Mechanical Engineer",
+      "company": "Digidesign",
+      "description": "I led mechanical engineering and industrial design for professional audio equipment, including C|24 and SC48. My work covered the enclosure, structure, electronics packaging, cooling, tooling and the details needed to manufacture and service the product.\n\nOn C|24, I owned the mechanical and industrial design through tooling, drawing releases, supplier work and production acceptance. Data Control Drawings defined the interfaces around 19 distinct PCB assembly designs while the electronics and mechanical package developed together.\n\nI used supplier inspection data to decide which dimensions and tolerances mattered to fit and function. For a group of molded parts, I wrote an acceptance deviation setting out which inspection requirements could be relaxed and allowing specified parts to be used without rework. That was part of the engineering work: deciding whether to change the part, the process or the requirement.\n\nI also designed the field-replaceable headphone-jack assembly that shipped. The design had to protect a plugged-in cable, accommodate different headphone plugs and make a damaged jack practical to replace. I worked through that with Arndt Hufenbach and Manufacturing.\n\nOn SC48, I led the enclosure and thermal architecture, working through cooling, electromagnetic behavior, packaging and manufacturing cost together. We evaluated 4U, 3U and hybrid layouts before ultimately choosing 4U. With aluminum extrusions ruled out on cost, the structural work included a folded-sheet-metal I-beam."
+    },
+    {
+      "id": "mechanistic-1998",
+      "title": "Senior Mechanical Designer",
+      "company": "Mechanistic",
+      "description": "I worked with industrial-design teams and clients including Microsoft, WebTV, Motorola, Netscreen and Hewlett Packard, taking product concepts into mechanical design, prototypes, tooling and manufacturing support.\n\nI developed complex surfaces in Pro/ENGINEER, preserving the intended shape, gaps and finish while working through part construction, materials and assembly. I compared manufacturing approaches against cost, lead time and tooling requirements.\n\nI supported tooling trials and supplier work, and managed CAD revisions and deliverables within each client's development process so the people designing and building the product could work from the same information."
+    },
+    {
+      "id": "frogdesign-1997",
+      "title": "Mechanical Designer",
+      "company": "frog",
+      "description": "I developed mechanical designs and complex surfaces for medical devices and consumer products, working closely with industrial designers from early concepts through prototypes, testing and manufacturing support.\n\nMy responsibility was to work out how the intended product could be made. I evaluated concepts, developed materials and process choices, and carried the design into detailed parts and documentation. That meant working through competing requirements for appearance, function, assembly, manufacturing and distribution, then making those choices clear enough for tooling and production.\n\nPrograms included dental equipment, the Vadem Clio convertible device and a satellite receiver. I worked with the designers, prototype suppliers and manufacturing teams as the geometry became physical hardware, including troubleshooting and support during the transfer to manufacturing."
+    },
+    {
+      "id": "mechanistic-1993",
+      "title": "Mechanical Designer",
+      "company": "Mechanistic",
+      "description": "I started Mechanistic as an independent product-design practice, working from concept development through detailed design and manufacturing support. Clients included frogdesign, Acer and Sunbeam.\n\nI specialized in complex organic surfaces in Pro/ENGINEER and mechanical design for high-volume production. Projects included consumer products, mechanisms and electronics packaging.\n\nI was responsible for several concurrent projects, including their designs, schedules and deliverables, and worked directly with client teams and suppliers on design changes, manufacturing cost and assembly."
+    },
+    {
+      "id": "sgi",
+      "title": "Mechanical Designer / Technician IV",
+      "company": "SGI",
+      "description": "I worked with workstation hardware groups on prototypes, mechanical development and thermal problems. My work grew from model-making, product research and environmental testing into mechanical design and analysis using Pro/ENGINEER and Flotherm.\n\nI configured and maintained airflow and thermal data-acquisition systems, and worked with the Agency and Reliability groups on test setups. I also managed the Product Design lab, including the equipment and supplies needed for prototype and pre-production builds.\n\nThe work extended into manufacturing. I coordinated outside vendors supplying prototype parts, models and rework, and worked with design, tooling and supplier engineers on enclosure subassemblies, fixtures and manufacturing plans.\n\nI helped develop product color and surface-finish standards and participated in specifying and installing the photometric equipment used to assess them. Physical models, test results, supplier capabilities and production requirements all fed into the design work."
+    },
+    {
+      "id": "ep-technologies-1986",
+      "title": "Production Supervisor",
+      "company": "EP Technologies",
+      "description": "I worked on the EPT-1000 cardiac-ablation system, starting with electronics assembly and rework. The work gave me hands-on experience with component-level troubleshooting: finding a fault in the circuit and working through the repair.\n\nI progressed into electronics production supervision. In a small startup, I had the opportunity to work across bench-level electronics and the day-to-day requirements of getting the hardware built."
+    }
+  ],
+  "periods": [
+    {
+      "id": "mechanistic-2022",
+      "period": {
+        "precision": "year",
+        "start": "2022",
+        "end": null
+      }
+    },
+    {
+      "id": "hyphen-2021",
+      "period": {
+        "precision": "year",
+        "start": "2021",
+        "end": "2022"
+      }
+    },
+    {
+      "id": "mechanistic-2018",
+      "period": {
+        "precision": "year",
+        "start": "2018",
+        "end": "2021"
+      }
+    },
+    {
+      "id": "noon-2017",
+      "period": {
+        "precision": "year",
+        "start": "2017",
+        "end": "2018"
+      }
+    },
+    {
+      "id": "avegant-2015",
+      "period": {
+        "precision": "year",
+        "start": "2015",
+        "end": "2017"
+      }
+    },
+    {
+      "id": "kaleidescape-2008",
+      "period": {
+        "precision": "year",
+        "start": "2008",
+        "end": "2015"
+      }
+    },
+    {
+      "id": "digidesign-2003",
+      "period": {
+        "precision": "year",
+        "start": "2003",
+        "end": "2008"
+      }
+    },
+    {
+      "id": "mechanistic-1998",
+      "period": {
+        "precision": "year",
+        "start": "1998",
+        "end": "2003"
+      }
+    },
+    {
+      "id": "frogdesign-1997",
+      "period": {
+        "precision": "year",
+        "start": "1997",
+        "end": "1999"
+      }
+    },
+    {
+      "id": "mechanistic-1993",
+      "period": {
+        "precision": "year",
+        "start": "1993",
+        "end": "1997"
+      }
+    },
+    {
+      "id": "sgi",
+      "period": {
+        "precision": "unknown",
+        "start": null,
+        "end": null
+      }
+    },
+    {
+      "id": "ep-technologies-1986",
+      "period": {
+        "precision": "year",
+        "start": "1986",
+        "end": "1989"
+      }
+    }
+  ]
+}
