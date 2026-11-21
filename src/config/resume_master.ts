@@ -121,7 +121,7 @@ export const resumeMaster = {
 			bullets: [
 				"Owned C|24 mechanical engineering and industrial design, defining interfaces around 19 distinct PCB assembly designs and designing the field-replaceable headphone-jack assembly that shipped.",
 				"Used supplier inspection data to determine which C|24 dimensions and tolerances mattered to fit and function. Wrote an acceptance deviation allowing specified molded parts to be used without rework.",
-				"Led SC48 enclosure and thermal architecture. A 17-configuration study guided the move from 3U to 4U; a folded-steel I-beam met the no-extrusion cost constraint.",
+				"Led SC48 enclosure and thermal architecture, evaluating 4U, 3U and hybrid layouts against cooling, electromagnetic behavior, packaging and cost. The team selected 4U; structural work included a folded-sheet-metal I-beam under the no-extrusion constraint.",
 			],
 			displayCompany: "Digidesign Avid",
 		},
