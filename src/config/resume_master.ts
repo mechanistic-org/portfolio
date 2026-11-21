@@ -153,7 +153,7 @@ export const resumeMaster = {
 	education: [
 		{
 			school: "De Anza College",
-			degree: "Associate's Degree, Automotive Engine Performance",
+			degree: "Completed the two-year Automotive Technology program, specializing in engine controls and drivability diagnostics.",
 			details: "",
 		},
 	],

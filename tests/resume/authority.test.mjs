@@ -81,7 +81,7 @@ test("missing and duplicate canonical IDs fail instead of silently selecting an 
 });
 
 test("approved hiring edition retains exact copy and prior chronology", async () => {
-	const { default: approved } = await import("./fixtures/approved-2026-11-21.json", {
+	const { default: approved } = await import("./fixtures/approved-2026-11-21-education.json", {
 		with: { type: "json" },
 	});
 	const { linkedinMaster } = await import("../../src/config/linkedin_master.ts");
