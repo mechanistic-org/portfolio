@@ -158,3 +158,7 @@ The published engineering skills use their default five-label vocabulary. See
 
 This is a single-context repository: domain language lives in root `CONTEXT.md`,
 with consequential decisions under `docs/adr/`. See `docs/agents/domain.md`.
+
+## Biography and hiring-copy refresh
+
+For biography, resume, LinkedIn or homepage/contact/author copy, read [docs/biography-workflow.md](docs/biography-workflow.md) first. It locates the existing private source, inventory, refresh history and design reference on Moreplay main. Refresh when Erik requests a useful batch of deep dives/lites; preserve and extend the current versions rather than creating replacements from scratch.
