@@ -1,0 +1,10 @@
+/* Shared approved portrait framing; projected from the private image selection. */
+.bio-portrait{display:block;width:72px;height:72px;aspect-ratio:1;object-fit:contain;border-radius:4px;flex:none;max-width:100%}
+.bio-author-identity{display:flex;gap:22px;align-items:flex-start}
+.bio-portrait-about{float:right;width:180px;margin:0 0 24px 36px}
+.bio-portrait-about .bio-portrait{width:180px;height:180px}
+.bio-portrait-about figcaption{font-size:14px;line-height:1.45;color:#aab9cb;margin-top:10px}
+.bio-contact-intro{display:flex;gap:24px;align-items:flex-start}
+.bio-contact-intro p{margin-top:0}
+.biography-reading .article-top:after{content:"";display:block;clear:both}
+@media(max-width:600px){.bio-portrait-about{float:none;margin:0 0 24px;display:flex;gap:16px;align-items:center;width:auto}.bio-portrait-about .bio-portrait{width:100px;height:100px}.bio-author-identity{gap:16px}.bio-contact-intro{gap:16px}.bio-contact-intro .bio-portrait{width:56px;height:56px}}

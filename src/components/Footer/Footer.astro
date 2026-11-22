@@ -8,6 +8,8 @@
  * positioning was fighting the layout rather than serving it — it is now static
  * and carries real navigation.
  */
+import metadata from "../../data/biography-metadata.json";
+import "../../styles/biography-images.css";
 import bio from "../../data/biography-intros.json";
 import Navbox from "../primitives/Navbox.astro";
 import { Icon } from "astro-icon/components";
@@ -51,7 +53,7 @@ const SECTIONS = [
 	<div class="site-container py-12">
 		<div class="grid gap-10 md:grid-cols-[2fr_1fr]">
 			{/* Identity + the ask */}
-			<div>
+			<div class="bio-author-identity"><img class="bio-portrait" src={metadata.portrait.src} alt={metadata.portrait.alt} width="750" height="750" loading="lazy"/><div>
 				<p class="font-mono text-xs tracking-[0.2em] text-neutral-500 uppercase">
 					{resumeMaster.header.name}
 				</p>
@@ -63,7 +65,7 @@ const SECTIONS = [
 				>
 					Get in touch <span aria-hidden="true">→</span>
 				</a>
-			</div>
+			</div></div>
 
 			{
 				SECTIONS.map((section) => (

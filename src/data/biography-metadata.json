@@ -8,20 +8,45 @@
     "@id": "https://eriknorris.com/#identity",
     "name": "Erik Norris",
     "url": "https://eriknorris.com/about/",
-    "description": "Erik Norris is an engineer working on product architecture, systems integration and the tools used to develop products."
+    "description": "Erik Norris is an engineer working on product architecture, systems integration and the tools used to develop products.",
+    "image": "https://assets.eriknorris.com/identity/2026-11-22/e815cad1ec12/erik-norris-portrait-750.jpg"
   },
   "pages": {
     "/": {
       "title": "Erik Norris | Product architecture and technical direction",
-      "description": "Erik Norris is an engineer working on product architecture, systems integration and the tools used to develop products."
+      "description": "Erik Norris is an engineer working on product architecture, systems integration and the tools used to develop products.",
+      "image": {
+        "src": "https://assets.eriknorris.com/identity/2026-11-22/920629f6385a/portfolio-social.jpg",
+        "type": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "alt": "Erik Norris - Product architecture and technical direction",
+        "card": "summary_large_image"
+      }
     },
     "/about/": {
       "title": "About Erik Norris",
-      "description": "Engineering, family, the repair shop and the work of making things."
+      "description": "Engineering, family, the repair shop and the work of making things.",
+      "image": {
+        "src": "https://assets.eriknorris.com/identity/2026-11-22/920629f6385a/portfolio-social.jpg",
+        "type": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "alt": "Erik Norris - Product architecture and technical direction",
+        "card": "summary_large_image"
+      }
     },
     "/contact/": {
       "title": "Contact Erik Norris",
-      "description": "I'm interested in senior individual contributor work with responsibility for product architecture, technical strategy and development methods."
+      "description": "I'm interested in senior individual contributor work with responsibility for product architecture, technical strategy and development methods.",
+      "image": {
+        "src": "https://assets.eriknorris.com/identity/2026-11-22/920629f6385a/portfolio-social.jpg",
+        "type": "image/jpeg",
+        "width": 1200,
+        "height": 630,
+        "alt": "Erik Norris - Product architecture and technical direction",
+        "card": "summary_large_image"
+      }
     },
     "/resume/": {
       "title": "Resume | Erik Norris",
@@ -59,6 +84,14 @@
     "height": 969,
     "alt": "Erik Norris logo",
     "card": "summary"
+  },
+  "portrait": {
+    "src": "https://assets.eriknorris.com/identity/2026-11-22/e815cad1ec12/erik-norris-portrait-750.jpg",
+    "type": "image/jpeg",
+    "width": 750,
+    "height": 750,
+    "alt": "Erik Norris, self-portrait from October 2014.",
+    "card": "summary_large_image"
   },
   "bioNodes": {
     "bio/lund-marine": {
