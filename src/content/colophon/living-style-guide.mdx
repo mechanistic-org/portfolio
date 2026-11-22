@@ -7,26 +7,13 @@ order: 4
 ---
 
 ## The Challenge
-> **Context:** Design drift is the enemy of long-term maintenance.
 
-In many projects, the "Style Guide" is a static PDF that gets ignored as soon as it's written. Developers add "one-off" CSS classes, and soon the site looks inconsistent. We needed a system that forced compliance.
+When a page needs a familiar pattern, starting from an existing component helps keep the site consistent.
 
 ## Engineering Approach
-We built the documentation *into* the codebase. The [Elements Page](/about/elements) is not a static mockup—it is a live rendering of the production component library.
 
-*   **Live Import:** The style guide imports the *actual* components (`<Button>`, `<Chip>`, `<Admonition>`) used in production.
-*   **MDX Integration:** We use MDX to mix documentation (Markdown) with live code (React/Astro components).
-*   **Visual Regression:** If a developer breaks a component style, it breaks on the Style Guide page immediately.
-
-```astro
-<!-- The Style Guide IS the code -->
-<div class="grid grid-cols-3 gap-4">
-  <Button variant="primary">Launch</Button>
-  <Button variant="outline">Abort</Button>
-  <Button variant="ghost">Retry</Button>
-</div>
-```
+The [Design System](/design-system/) renders selected Astro components used on the site. Examples such as media headers, figures, and galleries show how those components look alongside the site's type and color tokens.
 
 ## Impact
-*   **Consistency:** Every button, font, and color on the site is traceable to the tokens defined in this guide.
-*   **Velocity:** New features are built faster because we can copy-paste pre-validated patterns from the "Kit".
+
+The examples give us a place to inspect how a component change renders before reusing it elsewhere. Changes still need review on the pages that use the component.
