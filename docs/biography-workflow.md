@@ -27,3 +27,11 @@ Use Node 24 and Python 3.12+. `BIO_PYTHON` can select an interpreter. `bio:check
 ## Existing authorities remain in use
 
 Canon owns career facts and project/client claims; raw evidence remains private. For resume/LinkedIn installation, preserve role identities, supported dates and company links and follow the portfolio's `docs/agents/resume-authority.md`. The existing published web/PDF layout is the starting point; two pages is a target, not a rule. Moreplay selections still use `publishing/` and its revision/asset checks. Mechanistic keeps its existing build/release workflow. Private review commands do not deploy or edit LinkedIn.
+
+## Reconcile and verify the existing review system
+
+Run the new `bio:reconcile` and `test:bio` commands from the private Moreplay source checkout. Consumer repositories keep their existing `bio:check`, `bio:serve` and export commands. After an operator-selected batch, update the existing source records and selected publication pointers, run `npm run bio:reconcile`, `npm run bio:check`, and `npm run test:bio`, then review the diff. The generated checklist and status page must not be hand-edited. Their catalog reads the existing Projects, Featured and supporting-field inventories as well as the copy blocks.
+
+Publication receipts retain their original dates and bytes. Record new live observations with their own timestamp; never carry an old PDF hash forward as a current parity claim. A normal offline check does not fetch LinkedIn or the public sites. During an authorized release, verify the changed destinations and the current public PDF through the existing publication workflow.
+
+For recovery, clone private Moreplay main into a fresh directory. With Node 24 and Python 3.12+, run `npm run bio:check`, `npm run test:bio`, and `npm run bio:serve` without site dependency installation. Check the generated live/source/review links. Preserve any existing working overlay before changing a registered source checkout. The normal editor remains at ports 8842/8863-8865; stop the prior owner before starting another instance.

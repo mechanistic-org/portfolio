@@ -7,6 +7,7 @@ import { SEO } from "astro-seo";
 import siteData from "@config/siteData.json";
 import jsonLDGenerator from "@js/jsonLD";
 import { currentSite, SITE_CONFIG } from "@config/site_config";
+import { publishedProjectHome } from "@utils/projectDestination";
 
 interface BaseProps {
 	title: string;
@@ -43,10 +44,9 @@ let canonicalBase = SITE_CONFIG[currentSite].domain;
 
 if (type === "project") {
 	const { projectFrontmatter } = Astro.props as ProjectProps;
-	// If the project specifies a primary_home, points canonical to that domain ("The Owner")
-	if (projectFrontmatter?.primary_home && SITE_CONFIG[projectFrontmatter.primary_home]) {
-		canonicalBase = SITE_CONFIG[projectFrontmatter.primary_home].domain;
-	}
+	const slug = projectFrontmatter?.slug || Astro.url.pathname.split("/").filter(Boolean).at(-1) || "";
+	const home = publishedProjectHome(slug, projectFrontmatter?.primary_home ?? currentSite);
+	canonicalBase = SITE_CONFIG[home].domain;
 }
 // Ensure protocol
 if (!canonicalBase.startsWith("http")) {

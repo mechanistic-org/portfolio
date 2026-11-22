@@ -7,8 +7,8 @@ import { execFileSync, spawnSync } from 'node:child_process';
 // Review/export and explicit local supporting-copy projection. No deploy or network calls.
 const repo = fs.realpathSync(fileURLToPath(new URL('../', import.meta.url)));
 const command = process.argv[2] || 'status';
-if (!['check','status','export','preview','serve','linkedin','resume','project'].includes(command))
-  throw new Error('Use check, status, export, preview, serve, linkedin or resume.');
+if (!['check','status','export','preview','serve','linkedin','resume','project','reconcile','test'].includes(command))
+  throw new Error('Use check, status, reconcile, test, export, preview, serve, linkedin, resume or project.');
 let configured = process.env.BIO_CONTENT_ROOT;
 if (!configured) {
   try { configured = execFileSync('git',['-C',repo,'config','--get','bio.contentSource'],{encoding:'utf8'}).trim(); }
@@ -31,7 +31,7 @@ const supportingCopy=fs.existsSync(supportingFile) ? JSON.parse(fs.readFileSync(
 const stylePath=path.join(repo,'src/styles/biography-intros.css');
 const supportingStyle=fs.existsSync(stylePath)?crypto.createHash('sha256').update(fs.readFileSync(stylePath)).digest('hex'):null;
 const python=process.env.BIO_PYTHON || 'python';
-const result=spawnSync(python,[path.join(source,'cli.py'),command,'--repo',repo],{
+const result=spawnSync(python,['-B',path.join(source,'cli.py'),command,'--repo',repo],{
   stdio:['pipe','inherit','inherit'],input:JSON.stringify({roles,supportingCopy,supportingStyle}),shell:false,
 });
 if(result.error) throw result.error;
