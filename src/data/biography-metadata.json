@@ -27,12 +27,12 @@
       "title": "Resume | Erik Norris",
       "description": "Erik Norris's resume: product architecture, systems integration and practical engineering judgment, with work at Hyphen, Kaleidescape, Digidesign, Avegant and Noon.",
       "image": {
-        "src": "https://assets.eriknorris.com/resume/Erik_Norris_Resume_First_Page_2026-11-21.png",
+        "src": "https://assets.eriknorris.com/resume/Erik_Norris_Resume_Social_2026-11-21.png",
         "type": "image/png",
-        "width": 827,
-        "height": 1070,
+        "width": 1200,
+        "height": 630,
         "alt": "First page of Erik Norris's current resume",
-        "card": "summary"
+        "card": "summary_large_image"
       }
     },
     "/colophon/missing-evidence/": {
