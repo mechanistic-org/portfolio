@@ -11,3 +11,9 @@ src/data/projectRelationships.json text eol=lf
 # Shared claim projections have the same deterministic byte contract.
 src/data/project-claims.json text eol=lf
 src/data/claim-consumers.json text eol=lf
+
+# This selected style is verified by byte hash across site consumers.
+/src/styles/biography-intros.css text eol=lf
+
+# Preserve the accepted structured resume source bytes used by the PDF receipt.
+/src/config/resume_master.ts text eol=lf

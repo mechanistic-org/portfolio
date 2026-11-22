@@ -6,6 +6,7 @@ import ConstraintField, { type FieldNode } from "@components/DataViz/ConstraintF
 import { deriveDomains, blendDomainColors, DOMAINS, INTERSECTIONS } from "@config/domains";
 import { BIO_NODES } from "@config/bio_nodes";
 import { currentSite, SITE_CONFIG } from "@config/site_config";
+import { publishedProjectHome } from "@utils/projectDestination";
 
 export const prerender = true;
 
@@ -55,11 +56,8 @@ const projectNodes: FieldNode[] = projects.flatMap((p) => {
 			? Math.max(0.5, (end.getTime() - start.getTime()) / (1000 * 3600 * 24 * 365))
 			: 1;
 
-	// primary_home is the canonical owner of a project (already load-bearing for
-	// SEO canonicals in Seo.astro). When it names a property other than the one
-	// being built, the node routes off-site. Today that is 4 of 120 entries - the
-	// mechanism is here so it lights up as the field gets authored, not faked.
-	const home = p.data.primary_home ?? "main";
+	// Ownership and delivery differ for retained cases; share the SEO decision.
+	const home = publishedProjectHome(slug, p.data.primary_home ?? "main");
 	const external = home !== currentSite;
 	const href = external
 		? `https://${SITE_CONFIG[home].domain}/projects/${slug}`
