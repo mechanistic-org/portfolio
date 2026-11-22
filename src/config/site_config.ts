@@ -11,23 +11,22 @@ export interface SiteConfig {
 export const SITE_CONFIG: Record<SiteVariant, SiteConfig> = {
 	main: {
 		domain: "eriknorris.com",
-		title: "Erik Norris | Principal Mechanical Architect",
-		description:
-			"Principal Mechanical Architect specializing in high-fidelity hardware and program rescue. I stabilize the entropy of product development: structure the chaos, index the decisions, ship the hardware.",
+		title: "Erik Norris | Product architecture and technical direction",
+		description: "Erik Norris is an engineer working on product architecture, systems integration and the tools used to develop products.",
 		theme: "theme-suit",
 		r2_bucket: "https://assets.eriknorris.com",
 	},
 	mech: {
 		domain: "mechanistic.com",
-		title: "Mechanistic | The Lab Coat",
-		description: "Deep Dives, Technical Forensics, & Physics.",
+		title: "Mechanistic | Product architecture, development methods and tools",
+		description: "Erik Norris's independent engineering practice: product architecture, systems integration and development methods, from concept through testing and manufacturing.",
 		theme: "theme-lab",
 		r2_bucket: "https://assets.mechanistic.com",
 	},
 	play: {
 		domain: "moreplay.com",
-		title: "MorePlay | The Leather Jacket",
-		description: "Chaos, Experiments, and Ouroboros.",
+		title: "Moreplay | Family, photographs and the longer story",
+		description: "Family stories, photographs and memories from Erik Norris: the British Columbia coast, the repair shop, cars and tools.",
 		theme: "theme-play",
 		r2_bucket: "https://assets.moreplay.com",
 	},

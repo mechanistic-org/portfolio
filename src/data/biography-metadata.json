@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "sourceSelection": "metadata-legacy-2026-11-22",
+  "site": "eriknorris.com",
+  "name": "Erik Norris",
+  "person": {
+    "@type": "Person",
+    "@id": "https://eriknorris.com/#identity",
+    "name": "Erik Norris",
+    "url": "https://eriknorris.com/about/",
+    "description": "Erik Norris is an engineer working on product architecture, systems integration and the tools used to develop products."
+  },
+  "pages": {
+    "/": {
+      "title": "Erik Norris | Product architecture and technical direction",
+      "description": "Erik Norris is an engineer working on product architecture, systems integration and the tools used to develop products."
+    },
+    "/about/": {
+      "title": "About Erik Norris",
+      "description": "Engineering, family, the repair shop and the work of making things."
+    },
+    "/contact/": {
+      "title": "Contact Erik Norris",
+      "description": "I'm interested in senior individual contributor work with responsibility for product architecture, technical strategy and development methods."
+    },
+    "/resume/": {
+      "title": "Resume | Erik Norris",
+      "description": "Erik Norris's resume: product architecture, systems integration and practical engineering judgment, with work at Hyphen, Kaleidescape, Digidesign, Avegant and Noon.",
+      "image": {
+        "src": "https://assets.eriknorris.com/resume/Erik_Norris_Resume_First_Page_2026-11-21.png",
+        "type": "image/png",
+        "width": 827,
+        "height": 1070,
+        "alt": "First page of Erik Norris's current resume",
+        "card": "summary"
+      }
+    },
+    "/colophon/missing-evidence/": {
+      "title": "Missing evidence should stay missing",
+      "description": "The portfolio remediation removed fabricated fallback content and added checks against regression. Unsupported details were omitted instead of replaced with plausible prose. The record became more credible by showing the limits of its evidence."
+    },
+    "/colophon/reversible-editorial-queue/": {
+      "title": "A reversible queue earns an editorial decision",
+      "description": "An automated curation system can reduce a pile without pretending to make the editorial judgment. On August 12, 2026, it moved 1,820 records into a traceable archive, drafted nine merges, and reduced the queue from 1,885 to 65. The remaining act was human: decide which evidence deserved a public story."
+    },
+    "/colophon/shipped-means-reachable/": {
+      "title": "Shipped means reachable from origin/main",
+      "description": "Accepted mutable work must be reachable from origin/main; read-only work needs no commit ceremony. Advisory lane warnings, isolated worktrees, and reachability and push-parity checks each cover a different failure mode, making completion observable."
+    },
+    "/colophon/work-survives-a-session/": {
+      "title": "Work survives a change of session",
+      "description": "In a bounded Kandev Desktop v0.90.0 pilot, a real task resumed with its scope, worktree, and reviewed artifact intact, then the accepted work merged. Adoption remained conditional on a governed adapter and explicit human approval. Autonomous second-agent review was not demonstrated."
+    }
+  },
+  "defaultImage": {
+    "src": "https://eriknorris.com/assets/branding/logo.png",
+    "type": "image/png",
+    "width": 949,
+    "height": 969,
+    "alt": "Erik Norris logo",
+    "card": "summary"
+  },
+  "bioNodes": {
+    "bio/lund-marine": {
+      "name": "Lund and the oyster farm",
+      "blurb": "Growing up on the British Columbia coast meant boats, tools and work around the family oyster farm. School sometimes came by correspondence; much of what Erik learned came from helping with the work around him.",
+      "href": "https://moreplay.com/entries/family-and-the-coast/"
+    },
+    "bio/first-motorcycle": {
+      "name": "The first motorcycle",
+      "blurb": "Erik split wood and sold it by the cord to buy his first motorcycle, a Honda XL175. His dad and uncles collected it in Vancouver. Back at the farm, he rebuilt it and rode it.",
+      "href": "https://moreplay.com/entries/family-and-the-coast/"
+    },
+    "bio/menlo-park-exxon": {
+      "name": "Menlo Park Exxon",
+      "blurb": "Early automotive service work in Menlo Park was part of the practical background Erik carried into diagnostics, electronics and product engineering.",
+      "href": null
+    },
+    "bio/de-anza-automotive": {
+      "name": "De Anza - Automotive Technology",
+      "blurb": "Completed the two-year Automotive Technology program, specializing in engine controls and drivability diagnostics.",
+      "href": null
+    },
+    "bio/alices-garage": {
+      "name": "Alice's Garage",
+      "blurb": "Worked on computer-controlled engine systems, fuel injection and drivability diagnostics alongside electronics work at EP Technologies.",
+      "href": "https://moreplay.com/entries/the-repair-shop/"
+    },
+    "bio/red-automotive": {
+      "name": "Red Automotive Repair",
+      "blurb": "Owned and operated an automotive repair shop alongside design consulting. The work included engine controls, fuel injection, drivability diagnostics and racing preparation.",
+      "href": "https://moreplay.com/entries/the-repair-shop/"
+    },
+    "bio/scca-solo": {
+      "name": "SCCA Solo II - OSP",
+      "blurb": "Competitive autocross in the OSP class, alongside automotive repair and racing preparation.",
+      "href": "https://moreplay.com/entries/the-repair-shop/"
+    },
+    "bio/cycling": {
+      "name": "Cycling",
+      "blurb": "Cycling has been a large part of everyday life, including a customized electric Xtracycle EdgeRunner cargo bike.",
+      "href": null
+    },
+    "bio/intralink-windchill": {
+      "name": "Pro/INTRALINK & Windchill",
+      "blurb": "Administered Pro/INTRALINK and Windchill CAD data systems at Digidesign, supporting the design records and revision history used by the engineering team.",
+      "href": "https://mechanistic.com/tools-and-working-records/"
+    },
+    "bio/mootmoat": {
+      "name": "MootMoat",
+      "blurb": "Work on making professional experience and its supporting evidence easier to represent, connect and retrieve.",
+      "href": "https://mootmoat.com/"
+    },
+    "bio/git-agent-memory": {
+      "name": "Engineering records across sessions",
+      "blurb": "Builds software tools that keep sources, decisions and ongoing engineering work usable across sessions. Versioned files and explicit records help preserve what has been learned and what still needs doing.",
+      "href": "https://mechanistic.com/tools-and-working-records/"
+    },
+    "bio/photography": {
+      "name": "Photography",
+      "blurb": "Landscape, macro, portrait, studio and wedding photography, including a portable photobooth built from scratch.",
+      "href": "https://moreplay.com/"
+    }
+  }
+}

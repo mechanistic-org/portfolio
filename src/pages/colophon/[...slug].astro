@@ -10,7 +10,7 @@ export async function getStaticPaths() {
 		const data = file.frontmatter || {};
 		const filename = file.file.split("/").pop().replace(".mdx", "");
 		const slug = data.slug || filename;
-		const description = data.description || data.subtitle || "";
+		const description = data.description || data.subtitle || data.summary || "";
 
 		return {
 			params: { slug },

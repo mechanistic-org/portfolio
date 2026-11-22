@@ -1,3 +1,4 @@
+import metadata from "../data/biography-metadata.json";
 import siteData from "@config/siteData.json.ts";
 import { personSchema } from "../config/resume_projection.ts";
 
@@ -18,6 +19,7 @@ export type JsonLDProps = GeneralProps | ProjectProps;
 export default function jsonLDGenerator(props: JsonLDProps) {
 	const { type } = props;
 	const schemaPayload: any[] = [];
+	const identityId = personSchema()["@id"];
 
 	// 1. Global WebSite Schema (The Domain)
 	// Wraps the entire domain in a unified logical property
@@ -28,7 +30,7 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 		url: import.meta.env.SITE,
 		name: siteData.name,
 		publisher: {
-			"@id": `${import.meta.env.SITE}#identity`,
+			"@id": identityId,
 		},
 	});
 
@@ -62,10 +64,10 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 				dateCreated: projectFrontmatter.date,
 				keywords: keywords,
 				author: {
-					"@id": `${import.meta.env.SITE}#identity`,
+					"@id": identityId,
 				},
 				creator: {
-					"@id": `${import.meta.env.SITE}#identity`,
+					"@id": identityId,
 				},
 				about: about,
 			});
@@ -74,13 +76,12 @@ export default function jsonLDGenerator(props: JsonLDProps) {
 		const { url } = props as GeneralProps;
 		// 3. The Entity (ProfilePage/Person)
 		// Only on Homepage to avoid duplication, or could be on all pages if we want strong identity signal everywhere
-		if (url.pathname === "/" || url.pathname === "") {
+		if (url.pathname === "/" || url.pathname === "" || url.pathname === "/about/") {
 			schemaPayload.push({
 				"@context": "https://schema.org",
 				"@type": "ProfilePage",
-				dateCreated: new Date().toISOString(),
-				dateModified: new Date().toISOString(),
-				mainEntity: personSchema(),
+				url: url.href,
+				mainEntity: { ...personSchema(), description: metadata.person.description },
 			});
 		}
 	}
