@@ -10,8 +10,7 @@ import { routeEligibleProjects, careerRecords } from "../utils/projectRoster";
 import { careerIdentityAliases } from "../config/projectArticleTrial";
 import { currentSite } from "@config/site_config";
 import siteData from "@config/siteData.json";
-import bio from "../data/biography-intros.json";
-import "../styles/biography-intros.css";
+import BiographyConnections from "../components/biography/BiographyConnections.astro";
 import UnderConstruction from "../components/UnderConstruction.astro";
 
 const isUnderConstruction = currentSite !== "main";
@@ -112,15 +111,7 @@ if (!isUnderConstruction) {
 						/>
 					</div>
 				</main>
-                <section class="bio-connections site-container" aria-label="The connected account">
-                    <p class="bio-kicker">Follow a connection</p>
-                    <p data-bio-id="erik-reading-intro">{bio["erik-reading-intro"]}</p>
-                    <div class="bio-link-grid">
-                        <a href="/about/"><span>eriknorris.com</span><strong>About Erik Norris</strong><small>The work and the longer account</small></a>
-                        <a href="https://moreplay.com/"><span>Moreplay</span><strong>Family, photographs and the longer story</strong><small>Family and coast · The repair shop</small></a>
-                        <a href="https://mechanistic.com/"><span>Mechanistic</span><strong>Development methods and tools</strong><small>The practice and its working records</small></a>
-                    </div>
-                </section>
+				<BiographyConnections class="site-container" />
 			</div>
 		</Layout>
 	)

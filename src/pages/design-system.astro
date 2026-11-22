@@ -1,13 +1,12 @@
 ---
 /**
  * Design System — the kitchen-sink reference exemplar (#109 / #101).
- * The canonical reference standard for every primitive + token: a verification
- * surface, a living style-guide, and a colophon asset. Modeled on the archived
- * component-lab (verification suite) + about/elements (token sheet). Organized by
- * the Brick / Chip / Wire vernacular: Foundations → Bricks → Instruments → Wires.
+ * Selected production components and actual-page specimens. The catalogue is
+ * an inspection surface, not a claim of complete token or accessibility coverage.
  */
 import BaseLayout from "@layouts/BaseLayout.astro";
-import ThemeControl from "@components/primitives/ThemeControl.astro";
+import BiographyConnections from "../components/biography/BiographyConnections.astro";
+import { resumeMaster } from "../config/resume_master";
 import MediaHeader from "@components/primitives/MediaHeader.astro";
 import Hatnote from "@components/primitives/Hatnote.astro";
 import Collapse from "@components/primitives/Collapse.astro";
@@ -29,42 +28,95 @@ import Navbox from "@components/primitives/Navbox.astro";
 export const prerender = true;
 
 const hero = "/assets/c24/c24-hero-01-xl.webp";
-const img = (n: number) => `/assets/r2/c24/bubbles/01_origin_story/c24-prototype-0${n}-xl.webp`;
-const sampleImages = [1, 2, 3, 4, 5, 6].map((n) => ({ src: img(n), alt: `c24-prototype-0${n}` }));
+const sampleImages = [
+	{
+		number: 1,
+		alt: "Prototype console with the control-panel structure exposed before final exterior assembly.",
+	},
+	{
+		number: 2,
+		alt: "Front corner of the prototype, showing the bolster interface and sheet-metal side structure.",
+	},
+	{ number: 3, alt: "Interior view of the metal enclosure and board mounting geometry." },
+	{ number: 5, alt: "Side structure before the molded side cap is fitted." },
+	{
+		number: 6,
+		alt: "Prototype side cap fitted over the metal structure, showing the long side profile.",
+	},
+	{ number: 11, alt: "Meter-board and lens interfaces above the prototype control surface." },
+].map(({ number, alt }) => ({
+	src: `/assets/r2/c24/bubbles/01_origin_story/c24-prototype-${String(number).padStart(2, "0")}-xl.webp`,
+	alt,
+}));
 
+// Illustrative component data, deliberately separate from real project claims.
 const facts: [string, unknown][] = [
-	["Role", "Mechanical / ID Lead"],
-	["Employer", "Digidesign"],
-	["Period", "2005–2007"],
-	["Team", "58"],
+	["Specimen", "Illustrative assembly"],
+	["Purpose", "Inspect wrapping and hierarchy"],
+	["Date", "Not assigned"],
 ];
 const metrics = {
-	financial: "~$200/unit royalty eliminated; 51.8% gross margin held vs 20% steel inflation.",
-	process: "Pilot cosmetic yield 100% salvaged (2.50 mm → <0.50 mm).",
-	governance: "13 major ECOs in 6 months; 50+ Data Control Drawings.",
+	financial: "Illustrative estimate: supplier quote pending.",
+	process: "Illustrative inspection: one sample examined; repeat testing remains open.",
+	governance: "Illustrative revision: keep the drawing, change reason and test record together.",
 };
 const scars = [
-	{ label: 'Thermal — the "banana" defect', severity: "critical", phase: "pilot", value: "2.50 → <0.50 mm", trigger: "Side caps warped 2.50 mm in the paint cure.", intervention: "Vertical-hang cure fixture (ECO 12740).", result: "<0.50 mm; 100% pilot yield." },
-	{ label: "Architecture — EMI / thermal rake", severity: "critical", phase: "design", value: "fanless ship", trigger: "PSU under the A/D = EMI vs a fanless mandate.", intervention: "Removed the heat source; external PSU.", result: "Silent fanless console." },
-	{ label: "Serviceability — headphone jack", severity: "major", phase: "fcs", value: "2 h → <10 min", trigger: "4.8% field failure, 2-hour teardown.", intervention: "Recessed trap-door geometry.", result: "MTTR under 10 minutes." },
+	{
+		label: "Illustrative fit check",
+		severity: "major",
+		phase: "prototype",
+		value: "Retest pending",
+		trigger: "The example assembly has an interference.",
+		intervention: "Adjust the clearance and make another sample.",
+		result: "The result has not been established.",
+	},
+	{
+		label: "Illustrative service access",
+		severity: "minor",
+		phase: "review",
+		value: "Review open",
+		trigger: "A fastener is difficult to reach in the example layout.",
+		intervention: "Compare access paths before detailing the bracket.",
+		result: "No production outcome is implied.",
+	},
 ];
 const summary = {
-	trigger: "Pilot-build collapse on multiple fronts against a hard Q4 2007 revenue date.",
-	intervention: "Cure fixture, dual-source weld bridge, a 50+ DCD geometric firewall, and a hand-pack bypass.",
-	result: "100% pilot yield, 100% first-build fit, 500 units shipped at a 51.8% gross margin.",
+	trigger: "An illustrative assembly needs a clearer service path.",
+	intervention: "Compare the proposed access route with a physical mock-up.",
+	result: "This example demonstrates the component layout; it does not report project results.",
 };
 const cast = [
-	{ name: "Neal Breitbarth", role: "Mechanical/ID Lead", org: "Digidesign / Avid" },
-	{ name: "Robin Parnaby", role: "Hardware Engineering Lead", org: "Digidesign / Avid" },
-	{ name: "Franco Piccininni", role: "PCB Design", org: "Digidesign / Avid" },
-	{ name: "Henry Lee", role: "Vendor Contact", org: "VTech / Kenny" },
+	{ name: "Example mechanical owner", role: "Mechanical design", org: "Illustrative team" },
+	{ name: "Example manufacturing owner", role: "Assembly review", org: "Illustrative team" },
 ];
 const refs = [
-	{ text: "Audio briefing (NotebookLM overview)", href: "#" },
-	{ text: "Comparative Economic report", href: "#" },
+	{ text: "Current C|24 project account", href: "/projects/c24/" },
+	{ text: "How this portfolio is constructed", href: "/colophon/" },
+];
+const contexts = [
+	{
+		id: "contact-specimen",
+		title: "Contact",
+		href: "/contact/",
+		note: "The actual contact route owns its introduction, contact channels and hiring/consulting paths.",
+	},
+	{
+		id: "article-specimen",
+		title: "Article reader",
+		href: "/about/",
+		note: "The actual About route shows the shared opening, reading measure, section links and connected essays.",
+	},
+	{
+		id: "print-specimen",
+		title: "Resume and print",
+		href: "/resume/",
+		note: "The actual resume route owns its screen and print layout. Open it separately to inspect print pagination; an embedded screen view does not reproduce print output.",
+	},
 ];
 const tocHeadings = [
 	{ depth: 2, slug: "foundations", text: "Foundations" },
+	{ depth: 2, slug: "connected-reading", text: "Connected reading" },
+	{ depth: 2, slug: "page-contexts", text: "Actual page contexts" },
 	{ depth: 2, slug: "bricks", text: "Bricks" },
 	{ depth: 2, slug: "instruments", text: "Instruments" },
 	{ depth: 2, slug: "wires", text: "Wires" },
@@ -83,18 +135,21 @@ const colorTokens: [string, string][] = [
 ];
 ---
 
-<BaseLayout type="general" title="Design System" description="The primitive reference standard for eriknorris.com.">
-	<article class="mx-auto mt-24 mb-24 w-full max-w-[1100px] px-4 sm:px-6 lg:px-8">
+<BaseLayout
+	type="general"
+	title="Design System"
+	description="Selected components, connected reading and actual-page design specimens for eriknorris.com."
+>
+	<article class="ds-page mx-auto mt-24 mb-24 w-full max-w-[1100px] px-4 sm:px-6 lg:px-8">
 		<header class="border-border mb-10 flex items-end justify-between gap-6 border-b pb-6">
 			<div>
 				<h1 class="h1 mb-2">Design System</h1>
 				<p class="text-muted-foreground max-w-2xl">
-					The reference standard for every primitive and token — a verification surface, a living
-					style-guide, and a colophon asset. Pages are assembled from these <em>Bricks</em>,
-					<em>Chips</em>, and <em>Wires</em>; nothing is a snowflake.
+					A working reference for selected components and the pages built from them. The examples
+					use the current type, colors and shared reading styles. Each page keeps the composition
+					that suits its purpose.
 				</p>
 			</div>
-			<ThemeControl />
 		</header>
 
 		{/* ───────────── Foundations ───────────── */}
@@ -108,8 +163,8 @@ const colorTokens: [string, string][] = [
 					<div class="h2">Barlow Condensed — h2</div>
 					<div class="h3">Barlow Condensed — h3</div>
 					<p class="text-foreground max-w-2xl">
-						Body copy is Barlow at a capped measure for readability. The forensic register stays
-						active-voice and data-first.
+						Body copy uses Barlow. Reading width, line spacing and heading scale work together; the
+						longer article examples below show these choices in context.
 					</p>
 					<p class="text-muted-foreground font-mono text-xs tracking-widest uppercase">
 						Share Tech Mono — labels · metrics · eyebrows
@@ -123,7 +178,7 @@ const colorTokens: [string, string][] = [
 					{
 						colorTokens.map(([name, v]) => (
 							<div class="border-border overflow-hidden rounded-lg border">
-								<div class="h-12 w-full" style={`background: var(${v})`} />
+								<div class="ds-swatch h-12 w-full" style={`--ds-swatch: var(${v})`} />
 								<div class="p-2">
 									<div class="text-foreground text-xs font-medium">{name}</div>
 									<div class="text-muted-foreground font-mono text-[10px]">{v}</div>
@@ -135,6 +190,76 @@ const colorTokens: [string, string][] = [
 			</section>
 		</div>
 
+		<section id="connected-reading" class="ds-current" aria-labelledby="connected-heading">
+			<h2 id="connected-heading" class="h2">Connected reading and attribution</h2>
+			<p class="ds-note">
+				The portfolio home page uses these same cards. Follow them to see how each site presents its
+				own account.
+			</p>
+			<BiographyConnections />
+			<div class="ds-note">
+				<h3 class="h3">Author attribution</h3>
+				<p>
+					The <a href="#site-author">portfolio footer</a> pairs the approved portrait with a short biography
+					and contact links. The <a
+						href="https://moreplay.com/entries/family-and-the-coast/#about-the-author"
+						>Moreplay article footer</a
+					> uses a longer placement for readers who have reached the end of a story.
+				</p>
+			</div>
+		</section>
+
+		<section id="page-contexts" class="ds-current" aria-labelledby="contexts-heading">
+			<h2 id="contexts-heading" class="h2">Actual page contexts</h2>
+			<p class="ds-note">
+				Open a page at full width or expand its embedded screen view. These are the actual routes,
+				so their copy and layout have one source.
+			</p>
+			{
+				contexts.map((context) => (
+					<section id={context.id} class="ds-context" aria-labelledby={`${context.id}-heading`}>
+						<h3 id={`${context.id}-heading`} class="h3">
+							{context.title}
+						</h3>
+						<p>{context.note}</p>
+						<p>
+							<a href={context.href}>Open {context.title.toLowerCase()} page</a>
+						</p>
+						<details class="ds-embedded">
+							<>
+								<summary>Show embedded {context.title.toLowerCase()} screen view</summary>
+								<iframe
+									src={context.href}
+									title={`${context.title} - actual page specimen`}
+									loading="lazy"
+								/>
+							</>
+						</details>
+					</section>
+				))
+			}
+			<p class="ds-note">
+				The <a href={resumeMaster.pdf.url}>current published resume PDF</a> is the print reference. Two
+				pages is a target; readable type, white space and sensible page breaks take priority.
+			</p>
+		</section>
+
+		<section id="inspection" class="ds-current" aria-labelledby="inspection-heading">
+			<h2 id="inspection-heading" class="h2">What to inspect</h2>
+			<p class="ds-note">
+				Check the affected page on desktop and phone, follow its links, and use the keyboard to
+				reach its actions. Inspect focus, text contrast, image descriptions, reduced motion and
+				print output where they apply. This catalogue is a review surface; its presence does not
+				establish full accessibility conformance or automatic visual-regression coverage.
+			</p>
+		</section>
+
+		<p class="ds-note ds-example-note">
+			The component exercises below use explicitly illustrative data. C|24 photographs demonstrate
+			media layouts; the <a href="/projects/c24/">project account</a> carries the engineering claims and
+			attribution.
+		</p>
+
 		{/* ───────────── Page chrome ───────────── */}
 		<h2 class="h2 mb-6">Page chrome</h2>
 		<div class="mb-12 space-y-8">
@@ -142,32 +267,31 @@ const colorTokens: [string, string][] = [
 				<div class="ds-label">MediaHeader · IMDb title block</div>
 				<div class="border-border rounded-lg border p-5">
 					<MediaHeader
-						title="C|24"
-						meta={["Digidesign", "2005–2007", "Pro Audio", "58 stakeholders"]}
-						tags={["Thermal", "Crisis", "Cost-down"]}
+						title="Component layout example"
+						meta={["Illustrative specimen", "No project outcome asserted"]}
+						tags={["Layout", "Hierarchy", "Wrapping"]}
 						heroImage={hero}
-						description="A ground-up RoHS re-architecture that killed a ~$200/unit royalty and shipped under fire."
-						audioUrl="#"
-						photoCount={58}
-						videoCount={1}
+						description="A title, metadata and image assembled with the existing MediaHeader component. The photograph comes from the linked C|24 account."
 					/>
 				</div>
 			</section>
 			<section>
 				<div class="ds-label">Hatnote · scope / disambiguation</div>
 				<Hatnote>
-					Forensic case study of the Digidesign C|24 ("Curtis") — the RoHS-era successor to the
-					Control|24.
+					An example scope note identifies what a section covers and points to the full account when
+					the reader needs more context.
 				</Hatnote>
 			</section>
 		</div>
 
 		{/* ───────────── Bricks ───────────── */}
-		<h2 id="bricks" class="h2 mb-6">Bricks <span class="text-muted-foreground text-base">— containers &amp; blocks</span></h2>
+		<h2 id="bricks" class="h2 mb-6">
+			Bricks <span class="text-muted-foreground text-base">— containers &amp; blocks</span>
+		</h2>
 		<div class="mb-12 grid gap-8 md:grid-cols-2">
 			<section>
 				<div class="ds-label">Collapse · NavFrame</div>
-				<Collapse title="Forensic Metrics" open={true}>
+				<Collapse title="Illustrative supporting detail" open={true}>
 					<p class="text-foreground text-sm">A collapsible widget card — the HUD frame.</p>
 				</Collapse>
 			</section>
@@ -175,9 +299,13 @@ const colorTokens: [string, string][] = [
 				<div class="ds-label">Tabs · switcher (inside a Collapse = the hybrid HUD)</div>
 				<Collapse title="Metrics" open={true}>
 					<Tabs>
-						<div data-tab="Financial"><p class="text-foreground text-sm">{metrics.financial}</p></div>
+						<div data-tab="Financial">
+							<p class="text-foreground text-sm">{metrics.financial}</p>
+						</div>
 						<div data-tab="Process"><p class="text-foreground text-sm">{metrics.process}</p></div>
-						<div data-tab="Governance"><p class="text-foreground text-sm">{metrics.governance}</p></div>
+						<div data-tab="Governance">
+							<p class="text-foreground text-sm">{metrics.governance}</p>
+						</div>
 					</Tabs>
 				</Collapse>
 			</section>
@@ -192,7 +320,9 @@ const colorTokens: [string, string][] = [
 		</div>
 
 		{/* ───────────── Instruments ───────────── */}
-		<h2 id="instruments" class="h2 mb-6">Instruments <span class="text-muted-foreground text-base">— the HUD</span></h2>
+		<h2 id="instruments" class="h2 mb-6">
+			Instruments <span class="text-muted-foreground text-base">— the HUD</span>
+		</h2>
 		<div class="mb-12 grid gap-8 md:grid-cols-2">
 			<section>
 				<div class="ds-label">HudMetrics · hybrid collapse + tabs</div>
@@ -202,7 +332,8 @@ const colorTokens: [string, string][] = [
 				<div class="ds-label">ScarTimeline · severity heat-timeline (#78)</div>
 				<ScarTimeline scars={scars as any} open={true} />
 				<p class="text-muted-foreground mt-2 text-xs">
-					No matching article anchors here, so a click expands in place — the lite/no-prose fallback.
+					No matching article anchors here, so a click expands in place — the lite/no-prose
+					fallback.
 				</p>
 			</section>
 		</div>
@@ -215,33 +346,44 @@ const colorTokens: [string, string][] = [
 		</section>
 
 		{/* ───────────── Media ───────────── */}
-		<h2 class="h2 mb-6">Media <span class="text-muted-foreground text-base">— photos are the evidence</span></h2>
+		<h2 class="h2 mb-6">
+			Media <span class="text-muted-foreground text-base">— images and captions</span>
+		</h2>
 		<div class="mb-12 space-y-8">
 			<section>
 				<div class="ds-label">Figure · single captioned image</div>
-				<Figure src={hero} alt="C|24 console" caption="The shipped C|24 control surface." credit="Digidesign" />
+				<Figure
+					src={hero}
+					alt="C|24 console"
+					caption="C|24 image used to inspect the figure and caption layout. See the linked project account for context."
+				/>
 			</section>
 			<section>
 				<div class="ds-label">MultiImage · side-by-side under one caption</div>
-				<MultiImage images={sampleImages.slice(0, 2)} caption="Two early prototype studies." />
+				<MultiImage
+					images={sampleImages.slice(0, 2)}
+					caption="Two C|24 archive images shown with one caption."
+				/>
 			</section>
 			<section>
 				<div class="ds-label">Montage · framed mosaic</div>
-				<Montage images={sampleImages} caption="Prototype contact sheet." />
+				<Montage images={sampleImages} caption="C|24 archive images arranged as a contact sheet." />
 			</section>
 			<section>
 				<div class="ds-label">Gallery · sectioned captioned masonry</div>
-				<Gallery title="Origin Story" images={sampleImages} columns={3} />
+				<Gallery title="Media layout example" images={sampleImages} columns={3} />
 			</section>
 		</div>
 
 		{/* ───────────── Wires ───────────── */}
-		<h2 id="wires" class="h2 mb-6">Wires <span class="text-muted-foreground text-base">— connective apparatus</span></h2>
+		<h2 id="wires" class="h2 mb-6">
+			Wires <span class="text-muted-foreground text-base">— connective apparatus</span>
+		</h2>
 		<div class="mb-12 grid gap-8 md:grid-cols-2">
 			<section>
 				<div class="ds-label">Pullquote · editorial blockquote</div>
-				<Pullquote cite="Forensic Report, §I">
-					Mechanical engineering is not just CAD; it is the physical consensus of 58 stakeholders.
+				<Pullquote cite="Illustrative layout text">
+					A short passage can be set apart when it helps the reader follow the account.
 				</Pullquote>
 			</section>
 			<section>
@@ -253,22 +395,152 @@ const colorTokens: [string, string][] = [
 				<Toc headings={tocHeadings} />
 			</section>
 			<section>
-				<div class="ds-label">ThemeControl · light / dark / system</div>
-				<ThemeControl />
+				<div class="ds-label">Theme</div>
+				<p class="text-muted-foreground text-sm">
+					The public portfolio uses its dark presentation. Print has its own layout and color
+					treatment; this catalogue does not switch the site theme.
+				</p>
 			</section>
 		</div>
 
-		<section>
+		<section class="ds-nav-example">
 			<div class="ds-label">Navbox · prev / next</div>
 			<Navbox
-				prev={{ href: "#", title: "Previous Project" }}
-				next={{ href: "#", title: "Next Project" }}
+				prev={{ href: "/projects/c24/", title: "C|24 project account" }}
+				next={{ href: "/colophon/", title: "How the portfolio is built" }}
 			/>
 		</section>
 	</article>
 </BaseLayout>
 
+<script>
+	function prepareSpecimenImages() {
+		// Galleries normally load near the viewport. The catalogue can print from any section.
+		for (const image of document.querySelectorAll<HTMLImageElement>(
+			".ds-page img[loading='lazy']",
+		)) {
+			image.fetchPriority = "low";
+			image.loading = "eager";
+		}
+	}
+
+	prepareSpecimenImages();
+	document.addEventListener("astro:page-load", prepareSpecimenImages);
+</script>
+
 <style>
+	.ds-page,
+	.ds-page :global(img) {
+		min-width: 0;
+	}
+	.ds-page :global([id]) {
+		scroll-margin-top: 6rem;
+	}
+	.ds-current {
+		margin-block: 3.5rem;
+	}
+	.ds-note {
+		max-width: 76ch;
+		color: var(--muted-foreground);
+		line-height: 1.65;
+		margin-block: 1rem;
+	}
+	.ds-note a,
+	.ds-context a {
+		color: var(--color-blue-200);
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+	.ds-page :global(a:focus-visible),
+	.ds-page :global(button:focus-visible),
+	.ds-page summary:focus-visible {
+		outline: 2px solid var(--color-blue-200);
+		outline-offset: 5px;
+	}
+	.ds-swatch {
+		background-color: var(--ds-swatch);
+	}
+	.ds-context {
+		padding-block: 1.6rem;
+		border-bottom: 1px solid var(--border);
+	}
+	.ds-context p {
+		max-width: 76ch;
+		line-height: 1.65;
+		margin-block: 0.8rem;
+	}
+	.ds-embedded summary {
+		cursor: pointer;
+		padding: 0.75rem 0;
+		color: var(--color-blue-200);
+	}
+	.ds-embedded iframe {
+		width: 100%;
+		height: 680px;
+		border: 1px solid var(--border);
+		background: var(--background);
+	}
+	.ds-example-note {
+		border-top: 1px solid var(--border);
+		padding-top: 2rem;
+	}
+	@media (max-width: 640px) {
+		.ds-embedded iframe {
+			height: 600px;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.ds-page :global(*) {
+			scroll-behavior: auto;
+		}
+	}
+	@media print {
+		@page {
+			size: letter;
+			margin: 0.5in;
+			background: white;
+		}
+		:global(html:has(.ds-page)),
+		:global(body:has(.ds-page)) {
+			--background: white;
+			background: white !important;
+			color: #111 !important;
+			color-scheme: light !important;
+		}
+		:global(body:has(.ds-page) :is(#universal-hud, .noise-overlay, #site-author)) {
+			display: none;
+		}
+		.ds-page {
+			margin: 0;
+			max-width: none;
+			padding: 0;
+		}
+		.ds-page :global(*) {
+			color: #111 !important;
+			background: transparent !important;
+			box-shadow: none !important;
+		}
+		.ds-page .ds-swatch {
+			background-color: var(--ds-swatch) !important;
+			print-color-adjust: exact;
+		}
+		.ds-embedded,
+		.ds-nav-example {
+			display: none;
+		}
+		.ds-page :global(:is(h2, h3)),
+		.ds-label {
+			break-after: avoid;
+		}
+		.ds-page :global(figure),
+		.ds-page section:not(.ds-current) {
+			break-inside: avoid;
+		}
+		.ds-page :global(a) {
+			text-decoration: underline;
+		}
+	}
+
 	.ds-label {
 		font-family: var(--font-mono);
 		font-size: 11px;
