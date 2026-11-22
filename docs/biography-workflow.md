@@ -35,3 +35,9 @@ Run the new `bio:reconcile` and `test:bio` commands from the private Moreplay so
 Publication receipts retain their original dates and bytes. Record new live observations with their own timestamp; never carry an old PDF hash forward as a current parity claim. A normal offline check does not fetch LinkedIn or the public sites. During an authorized release, verify the changed destinations and the current public PDF through the existing publication workflow.
 
 For recovery, clone private Moreplay main into a fresh directory. With Node 24 and Python 3.12+, run `npm run bio:check`, `npm run test:bio`, and `npm run bio:serve` without site dependency installation. Check the generated live/source/review links. Preserve any existing working overlay before changing a registered source checkout. The normal editor remains at ports 8842/8863-8865; stop the prior owner before starting another instance.
+
+## Selected metadata and legacy copy
+
+The private source now includes `metadata-selection.json`, linked to the reviewed metadata/legacy packet. `bio:project` regenerates installed `src/data/biography-metadata.json` and the portfolio machine biography from that selection and existing copy IDs; `bio:check` detects stale installed projections. About-map wording reads that JSON by its existing node IDs. Map dates remain in the layout source and are not rewritten by the metadata projection.
+
+Intentional short descriptions and legacy hiring/manual passages are reviewed adaptations. Their exact source IDs and target paths are recorded in the selected packet and release receipt. Update those existing fields during an operator-selected batch, then verify the affected page, preview image and links. Do not overwrite a PDF because unrelated head metadata changed; retain the accepted PDF and verify the resume document and current PDF hash.

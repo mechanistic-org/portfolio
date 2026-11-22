@@ -19,6 +19,7 @@
  * text called for by global_agent#90 DoD item 4.
  */
 
+import metadata from "../data/biography-metadata.json";
 import type { DomainId } from "./domains";
 
 export interface BioNode {
@@ -39,7 +40,7 @@ export interface BioNode {
 	href?: string;
 }
 
-export const BIO_NODES: readonly BioNode[] = [
+const BIO_NODE_LAYOUT: readonly BioNode[] = [
 	// --- Domain 2: Motion & Fault -------------------------------------------
 	{
 		id: "bio/lund-marine",
@@ -48,8 +49,7 @@ export const BIO_NODES: readonly BioNode[] = [
 		startYear: 1975,
 		endYear: 1982,
 		value: 34,
-		blurb:
-			"Outboard motors, tugboat engines, bilge pumps, and cable suspension winches at the end of Highway 101, in service of a shellfish cooperative. Formal schooling arrived by correspondence. The real curriculum was physical, immediate, and graded by the ocean — unforgiving, consistent, honest about consequences.",
+		blurb: "",
 	},
 	{
 		id: "bio/first-motorcycle",
@@ -58,8 +58,7 @@ export const BIO_NODES: readonly BioNode[] = [
 		startYear: 1980,
 		endYear: 1980,
 		value: 20,
-		blurb:
-			"Told he could buy a motorcycle when he could pay for it, he felled, bucked, split, and loaded nineteen cords of wood at a hundred dollars a cord. Enough for the ferry, the bike, tires, tune-up parts, and a filter. Constraint identified, resources inventoried, solution designed, work executed — the operating system establishing its core parameters at twelve.",
+		blurb: "",
 	},
 	{
 		id: "bio/menlo-park-exxon",
@@ -68,8 +67,7 @@ export const BIO_NODES: readonly BioNode[] = [
 		startYear: 1982,
 		endYear: 1984,
 		value: 18,
-		blurb:
-			"The service station learned the way everything else was learned: by touching the thing, understanding the system, and being present when it broke and staying until it worked again.",
+		blurb: "",
 	},
 	{
 		id: "bio/de-anza-automotive",
@@ -78,8 +76,7 @@ export const BIO_NODES: readonly BioNode[] = [
 		startYear: 1984,
 		endYear: 1986,
 		value: 22,
-		blurb:
-			"Associate's Degree in Automotive Engine Performance at twenty-two units a quarter, with the Outstanding Academic Achievement Certificate and an Elks National Foundation Vocational Grant. When the schedule required it, he slept in the library. The library was warm and had books.",
+		blurb: "",
 	},
 	{
 		id: "bio/alices-garage",
@@ -88,8 +85,7 @@ export const BIO_NODES: readonly BioNode[] = [
 		startYear: 1986,
 		endYear: 1989,
 		value: 26,
-		blurb:
-			"Computer-engine feedback systems and late-model driveability diagnostics, run concurrently with cardiac ablation hardware at EP Technologies. The same epistemology applied to combustion that was being applied to catheters. Not a career — a method under development.",
+		blurb: "",
 	},
 	{
 		id: "bio/red-automotive",
@@ -98,8 +94,7 @@ export const BIO_NODES: readonly BioNode[] = [
 		startYear: 1993,
 		endYear: 1996,
 		value: 30,
-		blurb:
-			"Owned and operated: general repair plus racing specialty — late-model driveability, fuel injection, electronic engine controls, forced induction, and class-legal setups for SCCA SOLO and the NASA Camaro/Mustang Challenge. Run simultaneously with the Mechanistic consultancy.",
+		blurb: "",
 	},
 	{
 		id: "bio/scca-solo",
@@ -108,8 +103,7 @@ export const BIO_NODES: readonly BioNode[] = [
 		startYear: 1993,
 		endYear: 2000,
 		value: 16,
-		blurb:
-			"Competitive autocross in OSP class. Racing is the diagnostic method under a stopwatch: the car tells you what is wrong, and the only question is whether you can read it fast enough.",
+		blurb: "",
 	},
 	{
 		id: "bio/cycling",
@@ -117,8 +111,7 @@ export const BIO_NODES: readonly BioNode[] = [
 		domains: ["motion_fault"],
 		startYear: 2010,
 		value: 24,
-		blurb:
-			"Roughly ten thousand miles a year on the bike before the pandemic, including a heavily customised electric Xtracycle EdgeRunner 10E cargo setup. Both Achilles tendons snapped at different times, one while travelling for work. Repaired. Kept riding.",
+		blurb: "",
 	},
 
 	// --- Domain 3: Data & AI --------------------------------------------------
@@ -129,8 +122,7 @@ export const BIO_NODES: readonly BioNode[] = [
 		startYear: 2003,
 		endYear: 2008,
 		value: 22,
-		blurb:
-			"System administrator for the CAD dataservers holding a hardware company's revision history — already wrestling with persistent, auditable, durable professional data two decades before there was language for it. The origin of the Persistent Commit.",
+		blurb: "",
 	},
 	{
 		id: "bio/mootmoat",
@@ -139,8 +131,7 @@ export const BIO_NODES: readonly BioNode[] = [
 		domains: ["data_ai"],
 		startYear: 2022,
 		value: 30,
-		blurb:
-			"An open standard for agentic professional identity, built because automated hiring systems were designed by people who had never held a thermal resistance budget. Their ontologies had no vocabulary for forty years of constraint work. Not failing a screen — never screened at all. He called it Round Zero, and built the protocol to end it.",
+		blurb: "",
 	},
 	{
 		id: "bio/git-agent-memory",
@@ -148,8 +139,7 @@ export const BIO_NODES: readonly BioNode[] = [
 		domains: ["data_ai"],
 		startYear: 2023,
 		value: 28,
-		blurb:
-			"Durable memory for AI agents across sessions, restarts, and complete environment teardowns — solved by recognising that git already has every property required: durability, auditability, diffing, branching, multi-party write. Agents boot cold, read an issue, execute, comment, and die. The container burns. The commit survives.",
+		blurb: "",
 	},
 
 	// --- Domain 4: Light, Sound & Perception ---------------------------------
@@ -159,7 +149,13 @@ export const BIO_NODES: readonly BioNode[] = [
 		domains: ["sensory"],
 		startYear: 2010,
 		value: 22,
-		blurb:
-			"Landscape, macro, portrait, studio, weddings, and a portable photobooth engineered from scratch. The same eye that tracked tolerance stacks and thermal budgets, turned toward light and time and the way a face holds its history.",
+		blurb: "",
 	},
 ] as const;
+
+// Wording follows the selected biography projection; dates stay with this existing layout.
+export const BIO_NODES: readonly BioNode[] = BIO_NODE_LAYOUT.map((node) => {
+	const copy = metadata.bioNodes[node.id as keyof typeof metadata.bioNodes];
+	if (!copy) throw new Error(`Missing selected biography node: ${node.id}`);
+	return { ...node, name: copy.name, blurb: copy.blurb, href: copy.href || undefined };
+});

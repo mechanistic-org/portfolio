@@ -1,3 +1,4 @@
+import metadata from "../data/biography-metadata.json";
 import { resumeMaster } from "./resume_master.ts";
 import { identityMetadata, httpsUrl } from "./resume_projection.ts";
 export interface SocialLinkProps {
@@ -60,6 +61,9 @@ const identity = identityMetadata(resumeMaster);
 const { contact } = resumeMaster.header;
 const siteData: SiteDataProps = {
 	...identity,
+	name: metadata.name,
+	title: metadata.pages["/"].title,
+	description: metadata.pages["/"].description,
 	useViewTransitions: true,
 	useAnimations: true,
 	socialLinks: [
@@ -68,7 +72,7 @@ const siteData: SiteDataProps = {
 		{ platform: "github", link: httpsUrl(contact.github) },
 		{ platform: "email", link: `mailto:${contact.email}` },
 	],
-	defaultImage: { src: "/assets/branding/logo.png", alt: identity.title },
+	defaultImage: { src: "/assets/branding/logo.png", alt: "Erik Norris logo" },
 	status: { type: "under-construction", text: "UNDER CONSTRUCTION" },
 };
 export default siteData;

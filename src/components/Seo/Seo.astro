@@ -1,4 +1,5 @@
 ---
+import metadata from "../../data/biography-metadata.json";
 import { getImage } from "astro:assets";
 
 import { SEO } from "astro-seo";
@@ -29,13 +30,16 @@ interface ProjectProps extends BaseProps {
 
 const {
 	type,
-	title,
-	description,
+	title: suppliedTitle,
+	description: suppliedDescription,
 	image,
 	socialImage,
 	noindex = false,
 } = Astro.props as GeneralProps | ProjectProps;
 
+const pageMetadata = (metadata.pages as Record<string, any>)[Astro.url.pathname] || {};
+const title = pageMetadata.title || suppliedTitle;
+const description = pageMetadata.description || suppliedDescription;
 let optimizedImage;
 let jsonLD;
 
@@ -85,9 +89,10 @@ else {
 	});
 }
 
+const selectedImage = socialImage || pageMetadata.image || (!image ? metadata.defaultImage : undefined);
 // Explicit public URLs stay absolute; local and optimized paths use the site origin.
 const imageSource =
-	socialImage?.src ||
+	selectedImage?.src ||
 	optimizedImage?.src ||
 	(typeof image === "string" ? image : image?.src) ||
 	siteData.defaultImage.src;
@@ -107,15 +112,15 @@ const imageUrl = new URL(imageSource, Astro.site || canonicalBase).toString();
 		},
 		optional: {
 			description: description,
-			siteName: siteData.title,
+			siteName: siteData.name,
 		},
 		// Explicit metadata is opt-in; other pages retain their existing output.
-		image: socialImage
+		image: selectedImage
 			? {
-					type: socialImage.type,
-					alt: socialImage.alt,
-					width: socialImage.width,
-					height: socialImage.height,
+					type: selectedImage.type,
+					alt: selectedImage.alt,
+					width: selectedImage.width,
+					height: selectedImage.height,
 				}
 			: {
 					type: "image/webp",
@@ -127,7 +132,7 @@ const imageUrl = new URL(imageSource, Astro.site || canonicalBase).toString();
 	twitter={{
 		site: siteData.author.twitter ? "@" + siteData.author.twitter : "",
 		creator: siteData.author.twitter ? "@" + siteData.author.twitter : "",
-		card: "summary_large_image",
+		card: selectedImage?.card === "summary" ? "summary" : "summary_large_image",
 		title: title,
 		description: description,
 		image: imageUrl,
