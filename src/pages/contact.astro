@@ -10,6 +10,8 @@
  * and a "thanks, we'll be in touch" lie. A visible address is more honest and
  * converts better with the audience this site is for.
  */
+import metadata from "../data/biography-metadata.json";
+import "../styles/biography-images.css";
 import bio from "../data/biography-intros.json";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Icon } from "astro-icon/components";
@@ -39,7 +41,7 @@ const CHANNELS = [
 		<header class="contact-hero">
 			<p class="contact-eyebrow">/// Contact</p>
             <h1>Let's talk about the work.</h1>
-            <p class="contact-lede" data-bio-id="erik-contact-intro">{bio["erik-contact-intro"]}</p>
+            <div class="bio-contact-intro"><img class="bio-portrait" src={metadata.portrait.src} alt={metadata.portrait.alt} width="750" height="750"/><p class="contact-lede" data-bio-id="erik-contact-intro">{bio["erik-contact-intro"]}</p></div>
 		</header>
 
 		<section class="contact-primary" aria-label="Direct contact">
